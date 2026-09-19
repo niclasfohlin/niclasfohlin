@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 742
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/semestern-far-vanta-nagon-maste-borja-forbereda-for-augusti.md"
 tidningens_ingress: "”någonstans mellan reformviljan och schemaläggningsprogrammet, finns skolans verklighet”, skriver specialläraren Niclas Fohlin."
 ---
 Sista skoldagen luktar nyklippt gräs och smältglass. En förstaklassare gråter för att hon tappat sin fina blomma i gruset. En lärare håller fortfarande i sladden till högtalaren, beredd att dra i gång ”Idas sommarvisa” ännu en gång, om någon ber om det. Rektorn försöker se pigg ut efter tre veckors slit. Barnen sjunger för full hals, lite falskt och alldeles underbart. Precis som det ska vara. Det blir kramar i trappan. Någon skrattar, någon gråter, många gör bådadera. Lärarna står där trötta men stolta, röda kinder och blanka ögon. Bakom dem ligger en hel vår av intensiva möten. Nu drar vi streck över årets systematiska kvalitetsarbete. Klart. Pärmen kan stängas.
