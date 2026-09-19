@@ -7,7 +7,7 @@ publikation: "vi-larare"
 etikett: "Debatt"
 typ: "debatt"
 forfattarskap: "medförfattare"
-medforfattare: ["[\"Charlotte Friberg\"", "\"Lotta Ljungberg\"", "\"Katarina Malmström\"", "\"Malena Wengberg\"", "\"Rebecca Jernström\"", "\"Jenny Nordfors\"", "\"Karin Benchimol\"", "\"Karl Annerberg\"]"]
+medforfattare: ["Charlotte Friberg", "Lotta Ljungberg", "Katarina Malmström", "Malena Wengberg", "Rebecca Jernström", "Jenny Nordfors", "Karin Benchimol", "Karl Annerberg"]
 byline: "Charlotte Friberg, Lotta Ljungberg, Katarina Malmström, Malena Wengberg, Niclas Fohlin, Rebecca Jernström, Jenny Nordfors, Karin Benchimol, Karl Annerberg (signaturrad i texten)"
 hamtad: 2026-09-19
 ord: 911
