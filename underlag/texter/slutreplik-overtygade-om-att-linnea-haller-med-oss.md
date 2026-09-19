@@ -12,7 +12,7 @@ byline: "Niclas Fohlin, Jennie Wilson (signatur i texten)"
 hamtad: 2026-09-19
 ord: 496
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/slutreplik-overtygade-om-att-linnea-haller-med-oss.md"
 tidningens_ingress: "”Vi håller med Linnea Lindquist om att det är viktigt att lära barn att skilja på rätt och fel, men vi menar också att det spelar stor roll hur”, skriver lärarna Jennie Wilson och Niclas Fohlin i en slutreplik i ”skamdebatten”."
 ---
 Vi välkomnar Linnea Lindquists svar som vi anser är mycket mer sansat än den ledartext hon skrev på Expressens ledarsida. Vi har själva arbetat i socioekonomiskt utsatta områden och förstår den komplexitet som präglar detta arbete. Det finns inga enkla sanningar eller svar när det gäller hur vi bäst stödjer och lär våra elever. Vi håller med om att det är viktigt att lära barn att skilja på rätt och fel, men vi menar också att det spelar stor roll hur vi gör detta, då det får konsekvenser inte bara för stunden utan även för vår framtid och det samhälle vi skapar.
