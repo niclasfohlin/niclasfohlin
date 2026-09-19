@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1245
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/reformerna-satter-systemets-behov-framfor-elevernas.md"
 tidningens_ingress: "Utredningarna är fulla av fraser alla kan skriva under på, men det är något som saknas, menar specialläraren Niclas Fohlin: klassrummets och elevernas verklighet."
 ---
 Betygsutredningen. Läroplansutredningen. En reformerad elevhälsa. Tre omfattande skolutredningar rullas ut i hopp om att ”förbättra” skolan. Ändå riskerar vi i vår iver att finjustera skolsystemet att glömma bort det viktigaste: eleven. För vem är skolan annars till för, om inte de barn och ungdomar som varje dag kliver in i klassrummen?
