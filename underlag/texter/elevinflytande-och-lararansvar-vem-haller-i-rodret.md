@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1497
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/elevinflytande-och-lararansvar-vem-haller-i-rodret.md"
 tidningens_ingress: "Elevinflytande och demokrati är inget nytt, flummigt och konstigt, utan fanns med redan i 1946 års skolkommissionen. Specialläraren Niclas Fohlin ber alla parter att sätta sig in i ämnet."
 ---
 En sen kväll vid middagsbordet utbröt en het diskussion mellan hustrun och mig om kryddstark mat. En sådan där som har en tendens att växa och växa till ett bråk, ni vet.
