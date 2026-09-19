@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1444
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/no-excuses-sverige-ar-en-propagandakampanj.md"
 tidningens_ingress: "Varför dyker plötsligt den extrema och osvenska skolformen No Excuses upp i debatten, från till synes koordinerade aktörer? Specialläraren Niclas Fohlin manar till besinning."
 ---
 Som pedagogiknörd har jag alltid fascinerats av skolmodeller – hur de uppstår, vad de lovar och vad som faktiskt händer i klassrummet när teorin möter verkligheten. Så när jag via en lärarkollega i USA runt 2012 för första gången hörde talas om ”No Excuses” spetsade jag öronen.
