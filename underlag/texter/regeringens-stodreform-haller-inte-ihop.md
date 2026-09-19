@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1005
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/regeringens-stodreform-haller-inte-ihop.md"
 tidningens_ingress: "Att extra anpassningar ersätts med stödundervisning är bra – men reformen riskerar att undergrävas av en annan reform, den om studiero. Det hänger inte ihop, varnar specialläraren Niclas Fohlin."
 ---
 Extra anpassningar har länge varit skolans allt-i-allo, ett begrepp som rymt både det lilla och det stora, det rimliga och det rena önsketänkandet. I praktiken har det ofta blivit en administrativ “mellanlandning” där elever får “något” som låter bra på papper, som bildstöd och tydliga instruktioner, men där det sällan preciseras vad det faktiskt innebär eller hur det ska hjälpa eleven. När stödet inte blir konkret och uppföljningsbart går det heller inte att säga om det hjälpte.
