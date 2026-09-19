@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1015
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/lotta-edholm-far-mig-att-kanna-bade-hopp-och-fortvivlan.md"
 tidningens_ingress: "Niclas Fohlin om regeringens utredning om förbättrad elevhälsa: ”Vi behöver mer fokus på tidiga insatser och god undervisning – mindre fokus på dokumentation”."
 ---
 När regeringen på en presskonferens under tisdagen tillkännagav sin nya utredning för att förbättra elevhälsan vägde jag fram och tillbaka mellan hopp och förtvivlan.
