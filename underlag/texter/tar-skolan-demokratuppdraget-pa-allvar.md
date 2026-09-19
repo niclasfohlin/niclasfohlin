@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 799
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/tar-skolan-demokratuppdraget-pa-allvar.md"
 tidningens_ingress: "”Min dröm är att skolan får vara en plats där teori och praktik, forskning och konst, kognitionsvetenskap och relationellt lärande får mötas och berika varandra”, skriver specialläraren Niclas Fohlin."
 ---
 Häromveckan slog jag på tv:n och såg Donald Trumps installationstal. Plakatpolitik basunerades ut på bästa sändningstid. Han pratade om att invadera Panama, gå ur Parisavtalet och lägga ner WHO. Och orden ”drill, baby, drill”, om att pumpa ut mer svart råolja, etsade sig fast i mitt huvud som en symbol för en samhällsutveckling på väg baklänges. Runtom hördes rungande applåder, och jag kom att tänka på en scen ur ”Star Wars” där Prinsessan Padme säger: ”So this is how liberty dies – with thunderous applause.”
