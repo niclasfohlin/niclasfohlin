@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1136
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/det-auktoritara-smyger-sig-in-i-skolan.md"
 tidningens_ingress: "Vikten av relationsbyggande i skolan har länge intygats av både forskningen och skollagen. Så varför ifrågasätta den nu? För att vi lever i en tid av auktoritära strömningar, konstaterar specialläraren Niclas Fohlin."
 ---
 En debatt har nyligen blåst upp i Vi Lärare om relationernas betydelse i skolan. Rektorn Linnea Lindquist gick ut med att det är ”dags att avliva myten om att relationer är en förutsättning för lärande”, med argumentet att elever visst lär sig av skickliga lärare oavsett om de tycker om dem eller inte. På liknande vis skrev läraren HP Tran att goda relationer inte är nödvändiga för undervisning. Kontentan i deras inlägg är att kunskapsförmedling och ordning ska stå i fokus – relationen ses högst som ett verktyg, inte ett mål eller krav. De beskriver också hur lärare beskylls för att inte göra tillräckligt och hur strukturella brister i skolans styrning i stället läggs på oss, med krav om att vi ska arbeta mer relationsskapande.
