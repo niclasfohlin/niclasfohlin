@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 912
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/detta-ar-min-drom-om-skolan.md"
 tidningens_ingress: "”Utan en vision om en bättre skola blir varje reform bara en reaktion. Rör vi oss framåt? Eller begår vi samma misstag igen?” Här är specialläraren Niclas Fohlins egen skolvision, i tio punkter."
 ---
 Jag står mitt i dimman av ännu en skolutredning och ser konturerna av något som skrämmer mig. En skola som krymper och medvetet syr en allt trängre kostym där färre och färre barn får plats. Nio procent av alla pojkar i skolåldern medicineras för att klara sin skolvardag. Nio procent. Låt den siffran sjunka in. Vad säger det om våra klassrum? Om våra pressade scheman? Om vad vi kallar normalitet?
