@@ -12,7 +12,7 @@ byline: "Charlotte Friberg, Niclas Fohlin (enligt tidningens ingress)"
 hamtad: 2026-09-19
 ord: 496
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/okat-fokus-pa-vard-frontalangrepp-pa-skolans-karnuppdrag.md"
 tidningens_ingress: "Vi inom skolan förväntas ständigt lösa allt som är fel i samhället, men vårt fokus borde vara på vårt huvuduppdrag: att forma morgondagens samhällsmedborgare. Det skriver Charlotte Friberg och Niclas Fohlin, Academedia grundskolor och integrerade förskolor."
 ---
 I våras beslutades om en utredning som kan leda till förändringar av skolans kärnuppdrag, påverka elevhälsans roll och öka fokus på vård inom skolan. I en tid då stress och psykisk ohälsa bland unga ökar, är det vår skyldighet att skapa en skolmiljö som aktivt främjar hälsa och välbefinnande.
