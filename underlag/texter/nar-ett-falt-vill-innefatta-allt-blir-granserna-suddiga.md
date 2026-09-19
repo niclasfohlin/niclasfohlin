@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 846
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/nar-ett-falt-vill-innefatta-allt-blir-granserna-suddiga.md"
 tidningens_ingress: "Specialläraren Niclas Fohlin svarar Agneta Gulz och Magnus Haake: ”I ert svar approprierar ni allt som är bra och beprövat i skolan som kognitionsvetenskap, som om läraryrket och pedagogiken inte redan inrymmer dessa insikter.”"
 ---
 Tack för er replik. Jag är förvånad över att ni läser min diskuterande och reflekterande krönika som ett frontalangrepp mot kognitionsvetenskap. Mitt syfte var att nyansera, inte avfärda, de bidrag som detta forskningsområde kan ge skolans praktik. I min text poängterar jag särskilt att det inte handlar om att välja sida mellan vetenskap och mänsklighet, hjärna eller hjärta, eller mellan olika forskningsfält. Jag är optimistisk till kognitionsvetenskapens bidrag och menar att dess insikter om minnesfunktioner och tankemodeller absolut kan berika vår förståelse för hur vi minns och lär oss. Samtidigt framhåller jag behovet av balans, kontext och ett pedagogiskt kompass. Därför förstår jag inte varför ni beskriver att min förståelse för kognitionsvetenskapen är en samling ”halmgubbar”.
