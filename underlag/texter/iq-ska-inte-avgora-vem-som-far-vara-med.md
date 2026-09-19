@@ -12,7 +12,7 @@ byline: "Niclas Fohlin (signatur i texten)"
 hamtad: 2026-09-19
 ord: 743
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/iq-ska-inte-avgora-vem-som-far-vara-med.md"
 tidningens_ingress: "Debatten om ”gråzons-barnen” fortsätter. Men det finns stora risker, varnar specialläraren Niclas Fohlin: ”Steget från berättelser om skolmisslyckanden till förslag om nya skolformer är farligt”."
 ---
 Debatten om ”gråzonsbarnen” växer. Psykologer och lärare beskriver elever som kämpar sig igenom tio år av skola utan att få uppleva att de lyckas. När Love Grahn och Anna-Maria Nord efterlyser vägledning och en skola som värderar praktisk kunskap högre, sätter de fingret på något viktigt.
