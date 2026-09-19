@@ -12,7 +12,7 @@ byline: "Niclas Fohlin (signatur i texten)"
 hamtad: 2026-09-19
 ord: 269
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/vi-laser-samma-text-och-ser-olika-saker.md"
 tidningens_ingress: "Niclas Fohlins text om ”nånannanismen” har fått flera lärare att reagera.\n”Varför anamma motståndarens argument” frågade sig Andreas Williamsson.\nNu får han svar från Niclas Fohlin."
 ---
 Andreas, tack för att du reagerar och engagerar dig. Men jag tror vi läser samma text och ser helt olika saker. Du kan även läsa min replik till HP Tran.
