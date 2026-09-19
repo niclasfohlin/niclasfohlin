@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/skolpolitik/befria-skolan-fran-floskler--det-ar-tillit-skolan-behover/"
 typ: "kronika"
 medforfattare: []
-taggar: ["skolutveckling", "skoldebatt"]
+taggar: ["skolutveckling", "skolpolitik"]
 utvald: false
 # Fulltexten ligger i underlag/texter/befria-skolan-fran-floskler-det-ar-tillit-skolan-behover.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

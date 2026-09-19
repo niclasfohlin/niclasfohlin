@@ -11,7 +11,7 @@ originalUrl: "https://www.vilarare.se/..."
 typ: "kronika"
 medforfattare: []
 # id från src/data/taggar.json. Återanvänd före att lägga till.
-taggar: ["skoldebatt"]
+taggar: ["skolpolitik"]
 utvald: false
 # Sant bara när rättigheterna uttryckligen medger hela texten här.
 heltext: false

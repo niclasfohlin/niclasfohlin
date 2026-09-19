@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/nyheter/kronika2/fohlin-hotet-med-hjalpklasser-riskerar-skapa-fler-murar/"
 typ: "kronika"
 medforfattare: []
-taggar: ["skoldebatt", "sarskilt-stod", "tillganglig-undervisning"]
+taggar: ["sarskilt-stod", "tillganglig-undervisning", "skolpolitik"]
 utvald: false
 # Fulltexten ligger i underlag/texter/hotet-med-hjalpklasser-riskerar-skapa-fler-murar.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

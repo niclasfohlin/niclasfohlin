@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/niclas-fohlin-regeringens-akutskolehaveri-rojer-en-populistisk-skolpolitik/"
 typ: "kronika"
 medforfattare: []
-taggar: ["skoldebatt", "sarskilt-stod"]
+taggar: ["studiero", "skolpolitik", "sarskilt-stod"]
 utvald: false
 # Fulltexten ligger i underlag/texter/akutskolehaveriet.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

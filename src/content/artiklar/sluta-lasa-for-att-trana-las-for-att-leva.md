@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/lasinlarning/sluta-lasa-for-att-trana--las-for-att-leva/"
 typ: "kronika"
 medforfattare: []
-taggar: ["lasinlarning", "lasflyt", "skoldebatt"]
+taggar: ["lasframjande", "lasinlarning", "lasflyt"]
 utvald: false
 # Fulltexten ligger i underlag/texter/sluta-lasa-for-att-trana-las-for-att-leva.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

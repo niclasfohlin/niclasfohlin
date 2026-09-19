@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/niclas-fohlin-vilka-blir-forlorarna-i-en-alltmer-auktoritar-skola/"
 typ: "kronika"
 medforfattare: []
-taggar: ["skoldebatt", "tillganglig-undervisning"]
+taggar: ["studiero", "tillganglig-undervisning"]
 utvald: false
 # Fulltexten ligger i underlag/texter/forlorarna-i-en-auktoritar-skola.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

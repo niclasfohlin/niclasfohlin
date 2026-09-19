@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/lararutbildning/lararutbildningen-missar-konsten-att-lara-ut/"
 typ: "kronika"
 medforfattare: []
-taggar: ["skoldebatt", "undervisningskvalitet"]
+taggar: ["lararutbildning", "undervisningskvalitet"]
 utvald: false
 # Fulltexten ligger i underlag/texter/lararutbildningen-missar-konsten-att-lara-ut.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

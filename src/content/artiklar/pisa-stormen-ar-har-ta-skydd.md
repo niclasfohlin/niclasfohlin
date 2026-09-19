@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/pisa-stormen-ar-har--ta-skydd/"
 typ: "kronika"
 medforfattare: []
-taggar: ["skoldebatt"]
+taggar: ["pisa", "skolpolitik"]
 utvald: false
 # Fulltexten ligger i underlag/texter/pisa-stormen-ar-har-ta-skydd.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

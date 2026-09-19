@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/nyheter/sarskilt-stod/niclas-fohlin-lotta-edholm-far-mig-att-kanna-bade-hopp-och-fortvivlan/"
 typ: "debatt"
 medforfattare: []
-taggar: ["elevhalsa", "sarskilt-stod", "skoldebatt"]
+taggar: ["elevhalsa", "sarskilt-stod", "skolpolitik", "betyg"]
 utvald: false
 # Fulltexten ligger i underlag/texter/lotta-edholm-far-mig-att-kanna-bade-hopp-och-fortvivlan.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/skolpolitik/fohlin-nu-maste-gralet-om-skolan-fa-ett-slut/"
 typ: "kronika"
 medforfattare: []
-taggar: ["skoldebatt"]
+taggar: ["skolpolitik", "evidens"]
 utvald: false
 # Fulltexten ligger i underlag/texter/nu-maste-gralet-om-skolan-fa-ett-slut.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

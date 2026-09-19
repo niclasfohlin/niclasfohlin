@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/slutreplik-svensk-skola-behover-svensk-debatt/"
 typ: "debatt"
 medforfattare: []
-taggar: ["skoldebatt", "lasinlarning"]
+taggar: ["lasinlarning", "evidens", "skolpolitik"]
 utvald: false
 # Fulltexten ligger i underlag/texter/svensk-skola-behover-svensk-debatt.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

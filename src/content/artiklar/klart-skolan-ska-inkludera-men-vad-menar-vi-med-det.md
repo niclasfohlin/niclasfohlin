@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/niclas-fohlin-klart-skolan-ska-inkludera--men-vad-menar-vi-med-det/"
 typ: "debatt"
 medforfattare: []
-taggar: ["tillganglig-undervisning", "undervisningskvalitet", "skoldebatt"]
+taggar: ["tillganglig-undervisning", "undervisningskvalitet"]
 utvald: false
 # Fulltexten ligger i underlag/texter/klart-skolan-ska-inkludera-men-vad-menar-vi-med-det.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

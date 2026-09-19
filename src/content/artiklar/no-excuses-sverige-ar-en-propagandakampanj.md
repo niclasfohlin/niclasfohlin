@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/ny-kategori/no-excuses-sverige-ar-en-propagandakampanj/"
 typ: "debatt"
 medforfattare: []
-taggar: ["skoldebatt", "tillganglig-undervisning"]
+taggar: ["studiero", "skolpolitik"]
 utvald: false
 # Fulltexten ligger i underlag/texter/no-excuses-sverige-ar-en-propagandakampanj.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

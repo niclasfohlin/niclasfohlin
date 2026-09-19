@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/fohlin-den-manskliga-berattelsen-gor-all-skillnad/"
 typ: "kronika"
 medforfattare: []
-taggar: ["undervisningskvalitet", "skoldebatt", "formativ-bedomning"]
+taggar: ["undervisningskvalitet", "betyg", "lasframjande"]
 utvald: false
 # Fulltexten ligger i underlag/texter/den-manskliga-berattelsen.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

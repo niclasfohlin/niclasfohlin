@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/ny-kategori/fohlin-kognitionsvetenskap-kan-aldrig-bli-mer-an-ett-komplement/"
 typ: "kronika"
 medforfattare: []
-taggar: ["skoldebatt", "undervisningskvalitet"]
+taggar: ["evidens", "undervisningskvalitet", "lararutbildning"]
 utvald: false
 # Fulltexten ligger i underlag/texter/kognitionsvetenskap-kan-aldrig-bli-mer-an-ett-komplement.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/ogranskade-chatgpt-lankar-bakom-regeringens-spec-utbildningsforslag/"
 typ: "kronika"
 medforfattare: []
-taggar: ["specialpedagogik", "skoldebatt"]
+taggar: ["lararutbildning", "specialpedagogik", "evidens", "skolpolitik"]
 utvald: false
 # Fulltexten ligger i underlag/texter/ogranskade-chatgpt-lankar.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

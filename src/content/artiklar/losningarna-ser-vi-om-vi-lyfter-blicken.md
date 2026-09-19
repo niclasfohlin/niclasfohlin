@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/specialpedagogik/speciallararen-losningarna-ser-vi-om-vi-lyfter-blicken/"
 typ: "artikel"
 medforfattare: []
-taggar: ["rti", "elevhalsa", "sarskilt-stod"]
+taggar: ["rti", "elevhalsa", "sarskilt-stod", "betyg"]
 utvald: false
 # Fulltexten ligger i underlag/texter/losningarna-ser-vi-om-vi-lyfter-blicken.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

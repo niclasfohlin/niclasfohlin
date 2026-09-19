@@ -6,7 +6,7 @@ publikation: "altinget"
 originalUrl: "https://www.altinget.se/vard/artikel/academedia-ett-okat-fokus-paa-vaard-ar-ett-frontalangrepp-paa-skolans-karnuppdrag"
 typ: "debatt"
 medforfattare: ["Charlotte Friberg"]
-taggar: ["elevhalsa", "skoldebatt", "specialpedagogik"]
+taggar: ["elevhalsa", "specialpedagogik", "skolpolitik"]
 utvald: false
 # Fulltexten ligger i underlag/texter/okat-fokus-pa-vard-frontalangrepp-pa-skolans-karnuppdrag.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

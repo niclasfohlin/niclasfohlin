@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/nyheter/vi-larare-debatt/niclas-fohlin-evidens-ska-informera--inte-ersatta-lararens-omdome/"
 typ: "debatt"
 medforfattare: []
-taggar: ["skoldebatt", "undervisningskvalitet"]
+taggar: ["evidens", "undervisningskvalitet"]
 utvald: false
 # Fulltexten ligger i underlag/texter/evidens-ska-informera-inte-ersatta-lararens-omdome.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

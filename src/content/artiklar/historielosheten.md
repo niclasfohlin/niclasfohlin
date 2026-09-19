@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/historielosheten-ar-skolans-fiende/"
 typ: "kronika"
 medforfattare: []
-taggar: ["skoldebatt"]
+taggar: ["studiero", "demokratiuppdraget"]
 utvald: false
 # Fulltexten ligger i underlag/texter/historielosheten.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

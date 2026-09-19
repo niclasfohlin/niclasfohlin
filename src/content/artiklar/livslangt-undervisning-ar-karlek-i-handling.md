@@ -6,7 +6,7 @@ publikation: "livslangt"
 originalUrl: "https://livslangt.se/2025/11/25/niclas-fohlin-undervisning-ar-karlek-i-handling/"
 typ: "intervju"
 medforfattare: []
-taggar: ["skoldebatt", "undervisningskvalitet"]
+taggar: ["studiero", "undervisningskvalitet"]
 utvald: false
 # Poddavsnitt utan text. Posten är länk och egen beskrivning, se underlag/texter/livslangt-undervisning-ar-karlek-i-handling.md.
 heltext: false

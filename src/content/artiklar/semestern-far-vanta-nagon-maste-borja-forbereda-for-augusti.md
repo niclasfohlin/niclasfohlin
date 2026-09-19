@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/semestern-far-vanta--nagon-maste-borja-forbereda-for-augusti/"
 typ: "kronika"
 medforfattare: []
-taggar: ["skoldebatt", "sarskilt-stod"]
+taggar: ["skolpolitik", "sarskilt-stod", "betyg"]
 utvald: false
 # Fulltexten ligger i underlag/texter/semestern-far-vanta-nagon-maste-borja-forbereda-for-augusti.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

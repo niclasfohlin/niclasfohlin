@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/fohlin-vad-ar-fakta-utan-forstaelse/"
 typ: "kronika"
 medforfattare: []
-taggar: ["ordforrad", "undervisningskvalitet", "skoldebatt"]
+taggar: ["ordforrad", "undervisningskvalitet"]
 utvald: false
 # Fulltexten ligger i underlag/texter/vad-ar-fakta-utan-forstaelse.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

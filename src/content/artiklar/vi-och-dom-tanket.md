@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/niclas-fohlin-vi-maste-stoppa-vi-och-dem-tanket-i-skolan/"
 typ: "kronika"
 medforfattare: []
-taggar: ["elevhalsa", "undervisningskvalitet", "tillganglig-undervisning", "skoldebatt"]
+taggar: ["elevhalsa", "undervisningskvalitet", "tillganglig-undervisning"]
 utvald: false
 # Fulltexten ligger i underlag/texter/vi-och-dom-tanket.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

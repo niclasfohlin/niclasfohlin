@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/diagnossjukan-ar-elefanten-i-klassrummet-/"
 typ: "kronika"
 medforfattare: []
-taggar: ["skoldebatt", "sarskilt-stod", "tillganglig-undervisning"]
+taggar: ["tillganglig-undervisning", "sarskilt-stod", "elevhalsa"]
 utvald: false
 # Fulltexten ligger i underlag/texter/diagnossjukan.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/fohlin-gor-skolan-lite-mindre-skit-for-nagon-redan-i-morgon-120024/"
 typ: "kronika"
 medforfattare: []
-taggar: ["skoldebatt", "tillganglig-undervisning"]
+taggar: ["studiero", "tillganglig-undervisning"]
 utvald: false
 # Fulltexten ligger i underlag/texter/mindre-skit-redan-i-morgon.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

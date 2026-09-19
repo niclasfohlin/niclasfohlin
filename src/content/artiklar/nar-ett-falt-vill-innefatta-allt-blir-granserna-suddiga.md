@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/neuropedagogik/nar-ett-falt-vill-innefatta-allt-blir-granserna-suddiga/"
 typ: "debatt"
 medforfattare: []
-taggar: ["skoldebatt", "undervisningskvalitet"]
+taggar: ["evidens", "lararutbildning"]
 utvald: false
 # Fulltexten ligger i underlag/texter/nar-ett-falt-vill-innefatta-allt-blir-granserna-suddiga.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

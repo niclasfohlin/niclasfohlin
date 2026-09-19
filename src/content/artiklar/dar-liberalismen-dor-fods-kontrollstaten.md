@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/fohlin-dar-liberalismen-dor-fods-kontrollstaten/"
 typ: "debatt"
 medforfattare: []
-taggar: ["skoldebatt", "undervisningskvalitet"]
+taggar: ["studiero", "skolpolitik"]
 utvald: false
 # Fulltexten ligger i underlag/texter/dar-liberalismen-dor-fods-kontrollstaten.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

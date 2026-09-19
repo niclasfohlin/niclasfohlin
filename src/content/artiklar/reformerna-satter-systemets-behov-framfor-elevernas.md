@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/reformerna-satter-systemets-behov-framfor-elevernas/"
 typ: "kronika"
 medforfattare: []
-taggar: ["skoldebatt", "elevhalsa"]
+taggar: ["skolpolitik", "betyg", "elevhalsa"]
 utvald: false
 # Fulltexten ligger i underlag/texter/reformerna-satter-systemets-behov-framfor-elevernas.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

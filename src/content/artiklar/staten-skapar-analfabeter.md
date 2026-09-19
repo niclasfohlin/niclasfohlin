@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/lasinlarning/niclas-fohlin-staten-skapar-analfabeter/"
 typ: "debatt"
 medforfattare: []
-taggar: ["lasinlarning", "skoldebatt", "specialpedagogik"]
+taggar: ["lasinlarning", "specialpedagogik", "skolpolitik"]
 utvald: false
 # Fulltexten ligger i underlag/texter/staten-skapar-analfabeter.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

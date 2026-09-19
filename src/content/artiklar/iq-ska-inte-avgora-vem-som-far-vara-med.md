@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/nyheter/vi-larare-debatt/fohlin-iq-ska-inte-avgora-vem-som-far-vara-med/"
 typ: "debatt"
 medforfattare: []
-taggar: ["skoldebatt", "tillganglig-undervisning"]
+taggar: ["tillganglig-undervisning", "sarskilt-stod"]
 utvald: false
 # Fulltexten ligger i underlag/texter/iq-ska-inte-avgora-vem-som-far-vara-med.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

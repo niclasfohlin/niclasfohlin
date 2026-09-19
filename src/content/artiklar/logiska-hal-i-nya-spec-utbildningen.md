@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/specialpedagogik/stora-logiska-hal-i-den-nya-spec-utbildningen/"
 typ: "debatt"
 medforfattare: []
-taggar: ["specialpedagogik", "skoldebatt"]
+taggar: ["lararutbildning", "specialpedagogik", "skolpolitik"]
 utvald: false
 # Fulltexten ligger i underlag/texter/logiska-hal-i-nya-spec-utbildningen.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/lararnas-slutreplik-overtygade-om-att-linnea-haller-med-oss/"
 typ: "debatt"
 medforfattare: ["Jennie Wilson"]
-taggar: ["skoldebatt"]
+taggar: ["studiero"]
 utvald: false
 # Fulltexten ligger i underlag/texter/slutreplik-overtygade-om-att-linnea-haller-med-oss.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

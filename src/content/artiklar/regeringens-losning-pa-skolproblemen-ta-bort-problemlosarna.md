@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/regeringens-losning-pa-skolproblemen-ta-bort-problemlosarna/"
 typ: "debatt"
 medforfattare: []
-taggar: ["specialpedagogik", "skoldebatt", "sarskilt-stod"]
+taggar: ["specialpedagogik", "lararutbildning", "sarskilt-stod", "skolpolitik"]
 utvald: false
 # Fulltexten ligger i underlag/texter/regeringens-losning-pa-skolproblemen-ta-bort-problemlosarna.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

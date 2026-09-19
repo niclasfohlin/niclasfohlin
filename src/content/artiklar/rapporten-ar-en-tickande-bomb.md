@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/arbetsmiljo/fohlin-rapporten-ar-en-tickande-bomb/"
 typ: "kronika"
 medforfattare: []
-taggar: ["specialpedagogik", "skoldebatt"]
+taggar: ["specialpedagogik", "sarskilt-stod"]
 utvald: false
 # Fulltexten ligger i underlag/texter/rapporten-ar-en-tickande-bomb.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

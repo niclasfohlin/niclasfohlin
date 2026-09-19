@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/regeringens-stodreform-haller-inte-ihop/"
 typ: "kronika"
 medforfattare: []
-taggar: ["sarskilt-stod", "rti", "skoldebatt"]
+taggar: ["sarskilt-stod", "rti", "studiero", "skolpolitik"]
 utvald: false
 # Fulltexten ligger i underlag/texter/regeringens-stodreform-haller-inte-ihop.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

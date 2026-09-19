@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/niclas-fohlin-nar-konservativa-vindar-blaser-i-skolan--hall-hart-i-det-du-haller-kart/"
 typ: "kronika"
 medforfattare: []
-taggar: ["skoldebatt", "elevhalsa"]
+taggar: ["studiero", "pisa", "elevhalsa"]
 utvald: false
 # Fulltexten ligger i underlag/texter/konservativa-vindar.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

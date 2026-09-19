@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/lararnas-svar-till-linnea-vi-vill-inte-ha-en-skola-som-hotar-och-skrammer/"
 typ: "debatt"
 medforfattare: ["Jennie Wilson"]
-taggar: ["skoldebatt", "undervisningskvalitet"]
+taggar: ["studiero", "undervisningskvalitet"]
 utvald: false
 # Fulltexten ligger i underlag/texter/svar-till-linnea-vi-vill-inte-ha-en-skola-som-hotar-och-skrammer.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

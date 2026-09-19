@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/fohlin-detta-ar-min-drom-om-skolan/"
 typ: "debatt"
 medforfattare: []
-taggar: ["skoldebatt", "skolutveckling"]
+taggar: ["skolutveckling", "demokratiuppdraget"]
 utvald: false
 # Fulltexten ligger i underlag/texter/detta-ar-min-drom-om-skolan.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

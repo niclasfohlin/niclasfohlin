@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/nyheter/vi-larare-debatt/niclas-fohlin-det-auktoritara-smyger-sig-in-i-skolan/"
 typ: "debatt"
 medforfattare: []
-taggar: ["skoldebatt", "undervisningskvalitet"]
+taggar: ["studiero", "demokratiuppdraget", "undervisningskvalitet"]
 utvald: false
 # Fulltexten ligger i underlag/texter/det-auktoritara-smyger-sig-in-i-skolan.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

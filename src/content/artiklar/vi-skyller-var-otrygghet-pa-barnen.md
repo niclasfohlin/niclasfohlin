@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/skolpolitik/fohlin-vi-skyller-var-otrygghet-pa-barnen/"
 typ: "kronika"
 medforfattare: []
-taggar: ["skoldebatt"]
+taggar: ["studiero"]
 utvald: false
 # Fulltexten ligger i underlag/texter/vi-skyller-var-otrygghet-pa-barnen.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

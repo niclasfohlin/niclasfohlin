@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/nyheter/vi-larare-debatt/larare-ska-inte-bara-undervisa/"
 typ: "debatt"
 medforfattare: ["Charlotte Friberg", "Lotta Ljungberg", "Katarina Malmström", "Malena Wengberg", "Rebecca Jernström", "Jenny Nordfors", "Karin Benchimol", "Karl Annerberg"]
-taggar: ["elevhalsa", "skoldebatt"]
+taggar: ["elevhalsa"]
 utvald: false
 # Fulltexten ligger i underlag/texter/larare-ska-inte-bara-undervisa.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

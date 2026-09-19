@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/slutreplik-vi-maste-dela-bade-ilskan-och-handlingskraften/"
 typ: "debatt"
 medforfattare: []
-taggar: ["skoldebatt", "skolutveckling"]
+taggar: ["skolutveckling", "skolpolitik"]
 utvald: false
 # Fulltexten ligger i underlag/texter/vi-maste-dela-bade-ilskan-och-handlingskraften.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

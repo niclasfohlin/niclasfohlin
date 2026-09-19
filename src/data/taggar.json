@@ -8,6 +8,7 @@
     { "id": "lasforstaelse", "label": "Läsförståelse", "omrade": "Läsning", "beskrivning": "Att förstå, tolka och dra slutsatser av text.", "alias": ["läsförståelse", "förståelse", "lässtrategier"] },
     { "id": "ordforrad", "label": "Ordförråd", "omrade": "Läsning", "beskrivning": "Att bygga och befästa ord och begrepp.", "alias": ["ordförråd", "ord", "begrepp", "ordkunskap"] },
     { "id": "lasinlarning", "label": "Läsinlärning", "omrade": "Läsning", "beskrivning": "Den tidiga läsundervisningen som helhet.", "alias": ["läsinlärning", "tidig läsning", "läsundervisning"] },
+    { "id": "lasframjande", "label": "Läsfrämjande", "omrade": "Läsning", "beskrivning": "Läslust, högläsning, boksamtal och en läsande kultur i skolan.", "alias": ["läsfrämjande", "läslust", "högläsning", "boksamtal", "läsengagemang", "skolbibliotek"] },
     { "id": "stavning", "label": "Stavning", "omrade": "Skrivning", "beskrivning": "Att stava ljudenligt och ljudstridigt.", "alias": ["rättstavning", "stava"] },
     { "id": "meningsbyggnad", "label": "Meningsbyggnad", "omrade": "Skrivning", "beskrivning": "Att bygga fullständiga och varierade meningar.", "alias": ["meningar", "syntax", "satsbyggnad"] },
     { "id": "textstruktur", "label": "Textstruktur", "omrade": "Skrivning", "beskrivning": "Hur en text hänger ihop i stycken och delar.", "alias": ["struktur", "disposition", "texttyper", "genre"] },
@@ -29,7 +30,13 @@
     { "id": "undervisningskvalitet", "label": "Undervisningskvalitet", "omrade": "Allmänt", "beskrivning": "Vad som kännetecknar god undervisning i klassrummet.", "alias": ["god undervisning", "lektionsdesign", "undervisning", "lektionsstart"] },
     { "id": "kooperativt-larande", "label": "Kooperativt lärande", "omrade": "Allmänt", "beskrivning": "Strukturerat samarbete mellan elever.", "alias": ["kooperativt lärande", "kl", "samarbetslärande"] },
     { "id": "formativ-bedomning", "label": "Formativ bedömning", "omrade": "Allmänt", "beskrivning": "Bedömning som styr undervisningen framåt.", "alias": ["formativ bedömning", "formativa metoder", "återkoppling", "bedömning"] },
-    { "id": "skoldebatt", "label": "Skoldebatt", "omrade": "Allmänt", "beskrivning": "Debattinlägg och krönikor om skolpolitik och skolans uppdrag.", "alias": ["debatt", "krönika", "skolpolitik", "opinion"] },
+    { "id": "skolpolitik", "label": "Skolpolitik", "omrade": "Allmänt", "beskrivning": "Reformer, utredningar och politiska beslut om skolan.", "alias": ["skoldebatt", "skolreformer", "reformer", "utredningar", "skolpolitisk"] },
+    { "id": "studiero", "label": "Studiero och trygghet", "omrade": "Allmänt", "beskrivning": "Ordning, trygghet och relationer i klassrummet, och debatten om straff, disciplin och No Excuses.", "alias": ["ordning", "ordning och reda", "disciplin", "no excuses", "trygghet", "straff", "konsekvenser", "arbetsro"] },
+    { "id": "evidens", "label": "Forskning och evidens", "omrade": "Allmänt", "beskrivning": "Hur forskning och beprövad erfarenhet vägleder undervisningen, och hur forskningen används i skoldebatten.", "alias": ["forskning", "evidensbaserad", "evidensinformerad", "beprövad erfarenhet", "kognitionsvetenskap", "metaanalys", "vetenskaplig grund"] },
+    { "id": "demokratiuppdraget", "label": "Demokratiuppdraget", "omrade": "Allmänt", "beskrivning": "Skolans uppdrag att fostra demokratiska medborgare, med elevinflytande och delaktighet.", "alias": ["demokrati", "demokratisk fostran", "elevinflytande", "delaktighet", "värdegrund"] },
+    { "id": "lararutbildning", "label": "Lärarutbildning", "omrade": "Allmänt", "beskrivning": "Lärar-, speciallärar- och specialpedagogutbildningarnas innehåll och villkor.", "alias": ["lärarutbildning", "lärarutbildningen", "speciallärarutbildning", "specialpedagogutbildning", "vfu"] },
+    { "id": "betyg", "label": "Betyg", "omrade": "Allmänt", "beskrivning": "Betygssystemet, betygsskalan och vad betygen gör med elevernas lärande.", "alias": ["betygssystem", "betygsskala", "betyget f", "betygssättning", "nationella prov"] },
+    { "id": "pisa", "label": "Pisa och kunskapsmätningar", "omrade": "Allmänt", "beskrivning": "Pisa, TIMSS och andra kunskapsmätningar, och hur resultaten tolkas.", "alias": ["timss", "piaac", "kunskapsmätningar", "internationella mätningar"] },
     { "id": "tillganglig-undervisning", "label": "Tillgänglig undervisning", "omrade": "Allmänt", "beskrivning": "Undervisning som fungerar för fler elever utan särlösningar.", "alias": ["tillgänglig undervisning", "tillgänglighet", "tillgänglig lärmiljö", "inkludering"] }
   ]
 }

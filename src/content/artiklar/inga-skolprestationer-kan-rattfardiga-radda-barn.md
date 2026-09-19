@@ -6,7 +6,7 @@ publikation: "goteborgs-posten"
 originalUrl: "https://www.gp.se/debatt/inga-skolprestationer-i-varlden-kan-rattfardiga-barn-som-ar-radda-i-skolan.c28f5a99-6d08-42c3-80b8-5c32c19ed4da"
 typ: "debatt"
 medforfattare: []
-taggar: ["skoldebatt", "tillganglig-undervisning"]
+taggar: ["studiero", "demokratiuppdraget", "skolpolitik"]
 utvald: false
 # Fulltexten ligger i underlag/texter/inga-skolprestationer-kan-rattfardiga-radda-barn.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.

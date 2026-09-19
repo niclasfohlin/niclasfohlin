@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/att-kunna-lasa-ar-nyckeln-till-allt-larande/"
 typ: "kronika"
 medforfattare: []
-taggar: ["lasinlarning", "avkodning", "specialpedagogik"]
+taggar: ["lasinlarning", "avkodning", "specialpedagogik", "lasframjande"]
 utvald: false
 # Fulltexten ligger i underlag/texter/att-kunna-lasa-ar-nyckeln-till-allt-larande.md. Sätt heltext: true och klistra in
 # brödtexten här först när Niclas sagt att rättigheterna medger det.
