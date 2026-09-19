@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 496
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/en-epidemi-i-skolan-nanannanismen-sprider-sig.md"
 tidningens_ingress: "”När vi tappar den gemensamma tron på att vi kan påverka våra elever i en positiv riktning slutar vi att försöka”, skriver Niclas Fohlin."
 ---
 Jag är inte det som hänt mig – jag är det jag väljer att bli”, skrev Carl Jung. Det är ett obekvämt påstående. Inte för att livet är enkelt utan för att det lämnar så lite utrymme för den bekväma flykten: att någon annan än vi själva bär ansvaret.
