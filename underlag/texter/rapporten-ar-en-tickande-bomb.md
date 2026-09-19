@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1078
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/rapporten-ar-en-tickande-bomb.md"
 tidningens_ingress: "”Det är en daglig kamp mellan professionella ideal och verklighetens begränsningar som river och sliter i vårt inre”, skriver specialläraren och specialpedagogen Niclas Fohlin."
 ---
 Varje dag kliver vi speciallärare och specialpedagoger in genom skolans dörrar med en önskan om att göra skillnad. Vi rör oss mellan klassrummen, lärarrummet och elevhälsans korridorer. I klassrummen möter vi eleverna som kämpar och behöver mer tid, mer stöd, mer förståelse. I fikarummet ser vi våra kollegor som med darrande händer håller kaffekoppen, överväldigade av att inte räcka till. Vi ser. Vi känner. Och alltför ofta står vi handfallna när vi inte förmår mer. Detta är en verklighet som kan knäcka även den starkaste.
