@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1245
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/vi-har-alla-skuld-i-pisa-raset.md"
 tidningens_ingress: "När halva klassen kör fast slutar en speciallärare titta på eleverna. När 56 av 74 länder faller i läsförståelse är det dags att göra likadant med Pisa, skriver Niclas Fohlin."
 ---
 Jag höll en yrkesträff för specialpedagoger och speciallärare från tio olika skolor. Vi gjorde det vi brukar. Hur ser rutinerna ut? Vad fungerar hos dig? Vad ger effekt? Vi vred och vände och försökte höja kvaliteten på det vi gör.
