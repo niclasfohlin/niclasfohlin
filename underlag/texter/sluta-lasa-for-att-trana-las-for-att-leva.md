@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1091
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/sluta-lasa-for-att-trana-las-for-att-leva.md"
 tidningens_ingress: "Specialläraren Niclas Fohlin besöker skolor som satsar på lästräning, och får en orolig känsla – håller vi på och ersätter läsfrämjande insatser med billiga läslistor?"
 ---
 ”Vad gör du för att träna elever på att läsa?” frågar en kollega mig på en utvecklingsträff. På ett APT utbrister en rektor: ”Se på PISA, vi måste träna mer på att läsa i skolan!” En kollega viskar lite trött till bordskamraten: ”Mina elever läser för lite utanför klassrummet … trots att vi tränar läsning varje dag.”
