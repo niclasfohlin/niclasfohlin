@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 885
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/nu-maste-gralet-om-skolan-fa-ett-slut.md"
 tidningens_ingress: "”Något har gått snett när vi i skolan börjar se på varandra som motståndare i stället för samarbetspartners.” Specialläraren Niclas Fohlin varnar för en valrörelse som kommer att föra skolan allt längre ifrån verkliga lösningar."
 ---
 Valrörelsen är i gång. Vi ser det på alla reformförslag och skolutredningar som haglar över oss. Vad bra, så vi är mitt uppe i en öppen dialog om vilken skola vi vill ha? Nehejdu, tvärtom. Samtalet om skolan har förvandlats till ett slagfält för hårda ord, hård populism, hård polarisering.
