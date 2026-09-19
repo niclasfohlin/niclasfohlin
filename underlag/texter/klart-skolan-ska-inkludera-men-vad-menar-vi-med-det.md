@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 798
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/klart-skolan-ska-inkludera-men-vad-menar-vi-med-det.md"
 tidningens_ingress: "En skola för alla borde vara en självklarhet. Men har inkludering som skolbegrepp i Sverige blivit för abstrakt – vad menar vi egentligen? Specialläraren Niclas Fohlin föreslår en konkret kursändring."
 ---
 Under de senaste tre decennierna har begreppet inkludering varit centralt inom skolvärlden. Ursprungligen ett demokratiprojekt, som syftade till att främja allas delaktighet i samhället men som i skolans kontext ofta misslyckats med att omvandlas till praktiska pedagogiska strategier. I stället har det blivit en etikett, en stämpel som skolor antingen har eller inte har, likt en miljöcertifiering. Jag undrar vad som egentligen hände med den ursprungliga visionen om en skola för alla?
