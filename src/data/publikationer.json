@@ -41,16 +41,9 @@
         "livslångt",
         "podden livslångt"
       ] },
-    { "id": "forskoleforum", "namn": "Förskoleforum", "url": "https://forskoleforum.se", "alias": [
-        "förskoleforum"
-      ] },
     { "id": "ne", "namn": "NE", "url": "https://www.ne.se", "alias": [
         "nationalencyklopedin",
         "ne.se"
-      ] },
-    { "id": "kooperativt", "namn": "Kooperativt lärande (kooperativt.com)", "url": "https://kooperativt.com", "alias": [
-        "kooperativt.com",
-        "bloggen kooperativt lärande"
       ] }
   ]
 }

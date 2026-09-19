@@ -1,6 +1,6 @@
 # Texterna
 
-Ett blad per text som Niclas Fohlin skrivit eller medverkat i, 66 stycken, hämtade ur sidornas egen HTML fram till 2026-09-10. Registret är `register.json`; `npm run texter` läser det.
+Ett blad per text som Niclas Fohlin skrivit eller medverkat i, 60 stycken, hämtade ur sidornas egen HTML fram till 2026-09-10. Registret är `register.json`; `npm run texter` läser det.
 
 | Fält i bladet | Betyder |
 |---|---|
@@ -23,17 +23,17 @@ Fulltexten under frontmattern är textens brödtext. Tidningens utdragscitat, fa
 
 ## Per publikation
 
+| Publikation | Texter |
+|---|---|
 | vi-larare | 56 |
 | goteborgs-posten | 1 |
 | livslangt | 1 |
 | altinget | 1 |
 | ne | 1 |
-| kooperativt | 2 |
-| forskoleforum | 4 |
 
 ## Inte medtaget
 
-Repliker och porträtt som andra skrivit om Niclas, samt en nyhetstext där han citeras (Hundra mil för en dyslexiutredning?, Vi Lärare 2025-05-09). Blogginlägg på kooperativt.com under kontot kooperativt, utan personlig byline. Böckerna står i `../bocker/register.json`, liksom en Aftonbladet-replik från tolv lärare (2025-11) där undertecknarna inte gick att läsa.
+Repliker och porträtt som andra skrivit om Niclas, samt en nyhetstext där han citeras (Hundra mil för en dyslexiutredning?, Vi Lärare 2025-05-09). Bloggen kooperativt.com och Förskoleforum: Niclas bestämde 2026-09-19 att de inte ska med på sajten, så även de två blogginläggen under hans eget författarkonto och artikelserien Samarbete i par med lärkompisar (2020) är strukna. Bladen finns kvar i git-historiken. Böckerna står i `../bocker/register.json`, liksom en Aftonbladet-replik från tolv lärare (2025-11) där undertecknarna inte gick att läsa.
 
 ## Sökningen
 
