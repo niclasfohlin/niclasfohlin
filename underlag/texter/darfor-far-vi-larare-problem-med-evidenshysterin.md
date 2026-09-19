@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 775
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/darfor-far-vi-larare-problem-med-evidenshysterin.md"
 tidningens_ingress: "\"Undervisning är inte som en apparat där du stoppar in rätt metod och får ut samma resultat”, skriver specialläraren Niclas Fohlin efter Riksrevisionens kritik mot skolmyndigheterna."
 ---
 Riksrevisionen lyfter fram brittiska EEF som förebild. Så då är det väl bara för Skolverket att lägga upp kamratlärande, kooperativt lärande och metakognitiv träning på startsidan och så var det klart, eller hur?
