@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 667
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/vad-ar-fakta-utan-forstaelse.md"
 tidningens_ingress: "Vi kan inte förminska skolan och debatten till att enbart handla om att kunna rabbla utantill, skriver Niclas Fohlin, speciallärare i läs- språk och skrivutveckling."
 ---
 Flera artiklar och regeringsbeslut beskriver att skolan ska arbeta med mer faktakunskaper. I artiklarna låter det som att eleverna ska kunna rabbla ord utantill. Men är det verkligen det vi vill? En lärardiskussion i veckan om vad ”språkutvecklande arbetssätt” egentligen handlar om fick mig att fundera över vad det innebär att förstå ett begrepp.
