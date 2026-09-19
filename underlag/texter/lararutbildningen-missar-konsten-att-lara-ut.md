@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1247
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/lararutbildningen-missar-konsten-att-lara-ut.md"
 tidningens_ingress: "Efter många år som VFU-handledare och mentor åt nyutexade frågar sig specialläraren Niclas Fohlin – hur kunde lärarutbildningen tappa så mycket, så snabbt?"
 ---
 Att vara lärare handlar om att förena konst med vetenskap. Men som flera debattartiklar från lärarstudenter på sistone visar (se här, och här) är detta något som universiteten låtit falla i glömska.
