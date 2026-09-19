@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 977
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/det-som-fattas-dagens-skola-ar-det-besjalade.md"
 tidningens_ingress: "För 20 år sedan fanns det tid för biologilärande i skogen. I dag tittar man på film. Mål- och resultatstyrningen är skolans största problem, skriver specialläraren Niclas Fohlin."
 ---
 I tider då ord som effektivitet, resultatstyrning och nyttomaximering blivit vardagsmat inom många sektorer har även skolan drabbats. Införandet av New Public Management (NPM) har format en era av mål- och resultatstyrning, där undervisningen alltmer börjat likna en produktionslinje snarare än en arena för lärande och personlig utveckling. Detta synsätt har successivt transformerat skolan till en institution där elever ses som en pengapåse snarare än unga människor med en törst efter kunskap och förståelse.
