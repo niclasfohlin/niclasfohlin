@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 516
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/pisa-stormen-ar-har-ta-skydd.md"
 tidningens_ingress: "Pisa-chocken är här igen – dags att stänga av notisplinget i mobilen. Det skriver specialläraren Niclas Fohlin, som dock aldrig slutar hoppas på en verklig, bred skoldiskussion när krutröken lagt sig."
 ---
 Och så var det dags igen. Tiden då Pisa-rapporterna haglar utanför fönstret. Mitt tips? Svep in dig i en varm filt och ta dig en kopp te. För nu kommer det storma ett tag. Överallt åsikter och tankar.
