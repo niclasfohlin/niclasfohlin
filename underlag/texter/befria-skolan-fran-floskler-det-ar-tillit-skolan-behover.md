@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 802
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/befria-skolan-fran-floskler-det-ar-tillit-skolan-behover.md"
 tidningens_ingress: "Sveriges Lärare har kommit ett steg närmare en ny förbundsordförande. Nu måste skolan våga ta ett steg bort från tyckonomin. Specialläraren Niclas Fohlin vill vara med och bygga upp en tillit till professionen och en skola i världsklass."
 ---
 När vi träffar någon på gatan, åker i trafiken tillsammans eller lämnar våra barn i förskolan finns det en osynlig kraft vi lutar oss emot. En osynlig kraft som får vårt demokratiska samhälle att fungera.
