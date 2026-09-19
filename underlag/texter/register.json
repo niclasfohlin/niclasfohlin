@@ -741,8 +741,10 @@
       "publikation": "vi-larare",
       "typ": "debatt",
       "etikett": "Debatt",
-      "forfattarskap": "författare",
-      "medforfattare": [],
+      "forfattarskap": "medförfattare",
+      "medforfattare": [
+        "Jennie Wilson"
+      ],
       "originalUrl": "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/lararnas-slutreplik-overtygade-om-att-linnea-haller-med-oss/",
       "ord": 496,
       "fulltext": "underlag/texter/slutreplik-overtygade-om-att-linnea-haller-med-oss.md",
@@ -757,8 +759,10 @@
       "publikation": "vi-larare",
       "typ": "debatt",
       "etikett": "Debatt",
-      "forfattarskap": "författare",
-      "medforfattare": [],
+      "forfattarskap": "medförfattare",
+      "medforfattare": [
+        "Jennie Wilson"
+      ],
       "originalUrl": "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/lararnas-svar-till-linnea-vi-vill-inte-ha-en-skola-som-hotar-och-skrammer/",
       "ord": 668,
       "fulltext": "underlag/texter/svar-till-linnea-vi-vill-inte-ha-en-skola-som-hotar-och-skrammer.md",

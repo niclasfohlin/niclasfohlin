@@ -6,8 +6,8 @@ datum: 2024-06-04
 publikation: "vi-larare"
 etikett: "Debatt"
 typ: "debatt"
-forfattarskap: "författare"
-medforfattare: []
+forfattarskap: "medförfattare"
+medforfattare: ["Jennie Wilson"]
 byline: "Niclas Fohlin, Jennie Wilson"
 hamtad: 2026-09-19
 ord: 668
