@@ -1,6 +1,6 @@
 ---
 titel: "Elevhälsan inte ett parallellt system"
-ingress: "Nio företrädare för elevhälsan inom Academedia svarar Filippa Mannerheim. Sedan skollagen 2010 är elevhälsan en samlad, tvärprofessionell del av skolan, med uppdraget att arbeta hälsofrämjande och förebyggande nära undervisningen. Den ska vara en bro till vården, aldrig en vårdcentral i miniatyr."
+ingress: "Nio företrädare för elevhälsan inom Academedia svarar Filippa Mannerheim. Sedan skollagen 2010 är elevhälsan en tvärprofessionell del av skolan som arbetar hälsofrämjande och förebyggande nära undervisningen. Elevhälsan ger eleverna verktyg för sömn, rörelse och gemenskap, och behandling hör hemma i primärvården."
 datum: 2025-06-03
 publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/nyheter/vi-larare-debatt/larare-ska-inte-bara-undervisa/"
