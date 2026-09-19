@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 694
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/losningarna-ser-vi-om-vi-lyfter-blicken.md"
 tidningens_ingress: "I bristen på främjande och förebyggande arbete har den svenska skolan blivit reaktiv. Specialläraren och skolutvecklaren Niclas Fohlin skriver själv om både problemen och lösningen han ser i sina kontakter med elevhälsoteam."
 ---
 Ett stort elevhälsoteam jag arbetade i hade en träff varje vecka. Ofta hade vi att hantera 20–30 orosanmälningar som beskrev elever som behövde stöd. Varje anmälan fick ett diarienummer och därefter ett svar från elevhälsan med någon form av åtgärd. En rektor brukade inleda mötet med: “Var brinner det nu någonstans?”
