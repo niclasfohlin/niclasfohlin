@@ -1,6 +1,6 @@
 ---
 titel: "Ett ökat fokus på vård är ett frontalangrepp på skolans kärnuppdrag"
-ingress: "En utredning kan flytta elevhälsan från hälsofrämjande arbete mot vård och behandling. Debattartikeln vill i stället ha en garanti för elevhälsans utformning, ett starkare förebyggande arbete och specialpedagogerna kvar. Kuratorer ska inte bli terapeuter och rektorer inte vårdsamordnare."
+ingress: "En utredning kan flytta elevhälsan från hälsofrämjande arbete mot vård och behandling. Debattartikeln vill i stället ha en garanti för elevhälsans utformning, ett starkare förebyggande arbete och specialpedagogerna kvar. Vård och behandling hör hemma i primärvården och hos BUP."
 datum: 2024-10-29
 publikation: "altinget"
 originalUrl: "https://www.altinget.se/vard/artikel/academedia-ett-okat-fokus-paa-vaard-ar-ett-frontalangrepp-paa-skolans-karnuppdrag"
