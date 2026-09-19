@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 542
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/vi-maste-dela-bade-ilskan-och-handlingskraften.md"
 tidningens_ingress: "Den hårda systemkritiken är berättigad och viktig, men ”vi får inte låta kritiken mot systemet glida över i uppgivenhet inför vår egen professionella kraft”, skriver specialläraren Niclas Fohlin."
 ---
 Svensk skola bärs i dag av lärare som alltför ofta arbetar på gränsen till vad som är hållbart: planerar på kvällar, löser konflikter utan stöd, täcker upp för brister i organisationen, går till jobbet när de egentligen borde stannat hemma. Det är ingen hemlighet, och det är heller inget jag föraktar. Tvärtom. Jag hyser en djup respekt för att min yrkeskår varje dag får verksamheten att fungera trots att förutsättningarna ofta inte finns där.
