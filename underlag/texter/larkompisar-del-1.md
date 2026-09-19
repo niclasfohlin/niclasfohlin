@@ -12,7 +12,7 @@ byline: "Lisa Fohlin, Niclas Fohlin, Jennie Wilson"
 hamtad: 2026-09-19
 ord: 869
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/larkompisar-del-1.md"
 tidningens_ingress: "I den här artikelserien får du läsa om hur du genom kooperativt lärande kan utveckla barnens kunskaper och sociala kompetens. Med hjälp av långvariga par – ”lärkompisar” kan pedagogen skapa möten och lek mellan barn som annars inte hade mötts. (Del 1 av 4.)"
 ---
 ## Superkompis, arbetskompis, axelkompis, veckokompis
