@@ -12,7 +12,7 @@ byline: "Charlotte Friberg, Lotta Ljungberg, Katarina Malmström, Malena Wengber
 hamtad: 2026-09-19
 ord: 911
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/larare-ska-inte-bara-undervisa.md"
 tidningens_ingress: "”Elevhälsan är inte ett vårdalternativ. Den är en integrerad del av skolan, med ett tydligt hälsofrämjande uppdrag – tillsammans med skolans övriga professioner. Att skilja ut elevhälsan riskerar att underminera det stöd eleverna har rätt till”, skriver representanter för elevhälsan inom Academedia, som ett svar till Filippa Mannerheim."
 ---
 Debatten om elevhälsans roll i skolan är just nu både livlig och viktig. För oss som har arbetat under både den gamla och den nuvarande skollagen är det tydligt att förutsättningarna har förändrats.
