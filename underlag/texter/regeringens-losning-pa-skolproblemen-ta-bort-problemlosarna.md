@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1143
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/regeringens-losning-pa-skolproblemen-ta-bort-problemlosarna.md"
 tidningens_ingress: "”I stället för gedigen analys av skolans behov verkar regeringen basera sin politik på vad som trendar på X”, skriver specialläraren Niclas Fohlin."
 ---
 Pressträff på Rosenbad. Regeringens femtonde skolutredning – minst – rullas ut i det halvtomma rummet. Specialpedagogutbildningen ska bort. Jahapp.
