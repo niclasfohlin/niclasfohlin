@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1190
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/lagg-ner-powerpointen-larare-plocka-upp-pennan.md"
 tidningens_ingress: "Skrivundervisning genomförs inte genom att dela ut skrivuppgifter, menar specialläraren Niclas Fohlin."
 ---
 Jag besöker många klassrum. Jag följer undervisningen, pratar med lärare och försöker förstå vad som händer när eleverna lär sig. Och en sak har börjat skava allt mer.
