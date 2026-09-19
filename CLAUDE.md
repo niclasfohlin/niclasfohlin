@@ -1,0 +1,72 @@
+# niclasfohlin.se
+
+Du förvaltar Niclas Fohlins författar- och kunskapssajt. Sajten ska vara snabb, sober och redaktionellt trovärdig. Läsbarhet före effekter. Ingen generisk AI-design.
+
+Det viktigaste först: allt arbete sker på grenar, `npm run validera` går igenom före varje commit, taggar och publikationer tas från registren i `src/data/`, och du pushar, deployar, sätter hemligheter eller skickar utskick bara när Niclas säger till.
+
+Arbete som inte är ett direkt svar på Niclas går genom kön: `node scripts/ko.mjs lista`, `starta`, `klar`. Ett fel du hittar i förbifarten läggs i kön med `lagg`, det lagas inte i samma commit. Hur kön fungerar står i ARBETSSATT.md.
+
+@ARBETSSATT.md
+@STIL.md
+
+## Läs vid behov
+
+| Fil | Vad den svarar på |
+|---|---|
+| KONCEPT.md | Vad sajten ska bli och varför |
+| UPPSTART.md | Hur drift, konton och behörigheter sätts upp och vem som gör vad |
+| KO.md | Kön. `node scripts/ko.mjs lista` visar den, `/natt` arbetar igenom den |
+| underlag/texter/ | Alla kända texter av Niclas i fulltext med register. `npm run texter` visar vilka som saknar post |
+| src/data/taggar.json | Alla tillåtna taggar med alias |
+| src/data/publikationer.json | Alla kända publikationer |
+| .claude/commands/ | Färdiga arbetsflöden som `/ny-artikel`, `/ny-metod`, `/uppstart` |
+
+## Stack
+
+Astro 7 med TypeScript och Content Collections (glob-loader, Zod 4 via `astro/zod`). Statiskt bygge. GitHub versionshanterar, Netlify bygger och deployar från `main`. Netlify Functions i `netlify/functions/` för prenumeration. Ingen databas, inget CMS.
+
+Astro 7 använder en strikt kompilator: alla taggar måste stängas, ogiltig HTML-nästling rättas inte, och mellanrum mellan inline-element skrivs som `{" "}`. Markdown renderas av Sätteri. Node 22.12 eller senare.
+
+## Tre innehållstyper
+
+| Typ | Mapp | URL | Mall | Kommando |
+|---|---|---|---|---|
+| Artiklar | src/content/artiklar/ | /artiklar/<id> | _mall.md | /ny-artikel |
+| Böcker | src/content/bocker/ | /bocker/<id> | _mall.md | /ny-bok |
+| Stödundervisning | src/content/stodundervisning/ | /stodundervisning/<id> | _mall.md | /ny-metod |
+
+Filer som börjar med `_` läses inte in. `utkast: true` visas lokalt men aldrig i produktion. Scheman ligger i `src/content.config.ts` och är strikta med avsikt.
+
+Artiklar är oftast publicerade i Vi Lärare, Göteborgs-Posten eller en annan tidning först. Posten ska alltid visa var, med länk till originalet. Ingressen är egen text. Hela originaltexten läggs bara in när Niclas uttryckligen säger att rättigheterna medger det, och då sätts `heltext: true`.
+
+Stödundervisning är en metodbank, inte en blogg. Varje metod har exakt ett område (Matematik, Läsning, Skrivning), minst en nivå (F-3, 4-6, 7-9) och taggar för vad den tränar. Rubrikerna i mallen behålls. Genomförandet ska en lärare kunna följa i morgon.
+
+## Registren styr taggar och publikationer
+
+Bygget stoppar om en post använder en tagg eller publikation som inte finns i registret. Det är avsiktligt. Innan du taggar: kör `npm run taggar` och välj bland det som finns. Alias i registret fångar varianter som läsflyt, läs-flyt och träna läsflyt och pekar på en enda tagg. En ny tagg läggs till bara när ingen befintlig täcker samma sak, och då i samma commit som posten, med label, omrade, beskrivning och alias.
+
+Tagg-id skrivs med a-z, 0-9 och bindestreck. Läsaren ser label.
+
+## Prenumeration och utskick
+
+Formuläret på /prenumerera anropar `netlify/functions/prenumerera.mjs`, som lägger till kontakten i Brevo med dubbel opt-in. Utan miljövariabler svarar funktionen 503 och hänvisar till RSS. Miljövariablerna sätter Niclas själv i Netlify. Du läser aldrig `.env` och ber aldrig om nyckelvärden.
+
+`/utskick` skriver ett utkast till `utskick/`. Ingenting skickas av dig. Massutskick gör Niclas i Brevo efter genomläsning.
+
+## Kvalitet
+
+1. `npm run validera` går igenom före varje commit. Den kontrollerar register, typer och bygge.
+2. Små commits med tydliga meddelanden på svenska: "Artikel: ...", "Metod: ...", "Sajt: ...".
+3. Inga nya beroenden utan skäl. Inga UI-ramverk för det som CSS och lite vanilla JS löser.
+4. Semantisk HTML, tangentbordsnavigering, kontrast och alt-texter. Mobil först.
+5. Varje sida har unik title och description. Canonical, Open Graph, sitemap och RSS finns i Base.astro och ska vara kvar.
+6. Designsystemet ligger i `src/styles/global.css` som variabler. Bygg vidare där i stället för att sprida färger och mått i komponenter.
+
+## Det här gör bara Niclas
+
+1. Pushar till GitHub och slår ihop till main. Det är deployen.
+2. Kör `netlify deploy`.
+3. Sätter och ändrar hemligheter (`netlify env:set`).
+4. Skickar utskick.
+5. Skriver fakta om sig själv på /om. Du frågar efter underlag, du hittar inte på.
+6. Bestämmer när en ny publikation eller en ny tagg får läggas till om du är osäker.

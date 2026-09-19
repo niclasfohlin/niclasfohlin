@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import Taggar from '../../components/Taggar.astro';
+import { site } from '../../data/site';
+import { metoderSorterade } from '../../lib/innehall';
+const metoder = await metoderSorterade();
+---
+
+<Base title="Stödundervisning" description="Metodbank för stödundervisning i matematik, läsning och skrivning, F-3 till 7-9.">
+  <h1>Stödundervisning</h1>
+  <p class="text">Konkreta metoder att använda direkt. Varje metod har ett område, minst en årskursnivå och taggar för vad den tränar. Filtrering byggs ut när biblioteket växer.</p>
+  {site.omraden.map((omrade) => {
+    const lista = metoder.filter((m) => m.data.omrade === omrade);
+    return (
+      <section>
+        <h2>{omrade}</h2>
+        {lista.length === 0 && <p class="meta">Inga metoder ännu.</p>}
+        <div class="rutnat">
+          {lista.map((m) => (
+            <a class="kort" href={`/stodundervisning/${m.id}`}>
+              <h3>{m.data.titel}</h3>
+              <p>{m.data.ingress}</p>
+              <Taggar taggar={m.data.taggar} nivaer={m.data.arskurs} />
+            </a>
+          ))}
+        </div>
+      </section>
+    );
+  })}
+</Base>

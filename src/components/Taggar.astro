@@ -1,0 +1,11 @@
+---
+import Tagg from './Tagg.astro';
+interface Props { taggar: string[]; nivaer?: string[]; }
+const { taggar, nivaer = [] } = Astro.props;
+---
+{(taggar.length > 0 || nivaer.length > 0) && (
+  <ul class="taggar" aria-label="Taggar">
+    {nivaer.map((n) => <li><Tagg id={n} niva /></li>)}
+    {taggar.map((t) => <li><Tagg id={t} /></li>)}
+  </ul>
+)}

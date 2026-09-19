@@ -1,0 +1,43 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Taggar from '../../components/Taggar.astro';
+import { publicerade, formateraDatum } from '../../lib/innehall';
+
+export async function getStaticPaths() {
+  const metoder = await publicerade('stodundervisning');
+  return metoder.map((m) => ({ params: { id: m.id }, props: { m, alla: metoder } }));
+}
+
+const { m, alla } = Astro.props;
+const { Content } = await render(m);
+const relaterade = alla.filter((x) => m.data.relaterade.includes(x.id));
+---
+
+<Base title={m.data.titel} description={m.data.ingress} typ="article">
+  <article class="text">
+    <p class="meta">{m.data.omrade} · {m.data.arskurs.join(', ')}</p>
+    <h1>{m.data.titel}</h1>
+    <p><strong>{m.data.ingress}</strong></p>
+    <div class="faktaruta">
+      <dl>
+        <dt>Område</dt><dd>{m.data.omrade}</dd>
+        <dt>Årskurs</dt><dd>{m.data.arskurs.join(', ')}</dd>
+        {m.data.format.length > 0 && <><dt>Format</dt><dd>{m.data.format.join(', ')}</dd></>}
+        {m.data.tid && <><dt>Tid</dt><dd>{m.data.tid}</dd></>}
+        {m.data.material.length > 0 && <><dt>Material</dt><dd>{m.data.material.join(', ')}</dd></>}
+        {m.data.uppdaterad && <><dt>Uppdaterad</dt><dd>{formateraDatum(m.data.uppdaterad)}</dd></>}
+      </dl>
+    </div>
+    <Content />
+    <Taggar taggar={m.data.taggar} nivaer={m.data.arskurs} />
+    {relaterade.length > 0 && (
+      <section>
+        <h2>Hör ihop med</h2>
+        <ul>
+          {relaterade.map((r) => <li><a href={`/stodundervisning/${r.id}`}>{r.data.titel}</a></li>)}
+        </ul>
+      </section>
+    )}
+  </article>
+</Base>

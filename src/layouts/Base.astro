@@ -1,0 +1,63 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Sätt till 'article' för artiklar och metoder. */
+  typ?: 'website' | 'article';
+  /** Absolut eller rotrelativ sökväg till delningsbild. */
+  bild?: string;
+}
+
+const { title, description = site.beskrivning, typ = 'website', bild } = Astro.props;
+const fullTitel = title ? `${title} · ${site.namn}` : `${site.namn}: ${site.rad.toLowerCase()}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const bildUrl = bild ? new URL(bild, Astro.site).href : undefined;
+const nuvarande = Astro.url.pathname;
+function aktiv(href: string) {
+  return nuvarande === href || nuvarande.startsWith(href + '/') ? 'page' : undefined;
+}
+---
+
+<!doctype html>
+<html lang={site.sprak}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitel}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.href} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${site.namn}: allt nytt`} href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${site.namn}: artiklar`} href="/artiklar/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${site.namn}: stödundervisning`} href="/stodundervisning/rss.xml" />
+    <meta property="og:type" content={typ} />
+    <meta property="og:title" content={title ?? site.namn} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:site_name" content={site.namn} />
+    <meta property="og:locale" content="sv_SE" />
+    {bildUrl && <meta property="og:image" content={bildUrl} />}
+    <meta name="twitter:card" content={bildUrl ? 'summary_large_image' : 'summary'} />
+  </head>
+  <body>
+    <a class="hopp-lank" href="#innehall">Hoppa till innehållet</a>
+    <header class="sidhuvud">
+      <a class="namn" href="/">{site.namn}</a>
+      <nav aria-label="Huvudmeny">
+        {site.navigation.map((post) => (
+          <a href={post.href} aria-current={aktiv(post.href)}>{post.text}</a>
+        ))}
+      </nav>
+    </header>
+    <main id="innehall" class="innehall">
+      <slot />
+    </main>
+    <footer class="sidfot">
+      <p>© {new Date().getFullYear()} {site.namn}. <a href="/prenumerera">Prenumerera</a> på nya texter eller följ <a href="/rss.xml">RSS</a>.</p>
+    </footer>
+  </body>
+</html>

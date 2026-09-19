@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import Taggar from '../components/Taggar.astro';
+import { site } from '../data/site';
+import { artiklarSorterade, metoderSorterade, bockerSorterade, formateraDatum, publikationNamn } from '../lib/innehall';
+
+const artiklar = await artiklarSorterade();
+const utvalda = artiklar.filter((a) => a.data.utvald).slice(0, 3);
+const senaste = (utvalda.length > 0 ? utvalda : artiklar).slice(0, 3);
+const metoder = (await metoderSorterade()).slice(0, 3);
+const bocker = (await bockerSorterade()).slice(0, 3);
+---
+
+<Base>
+  <section class="text">
+    <p class="meta">{site.rad}</p>
+    <h1>Texter och verktyg för en skola som fungerar bättre.</h1>
+    <p>Här samlar jag publicerade artiklar, mina böcker och färdiga metoder för stödundervisning i matematik, läsning och skrivning.</p>
+  </section>
+
+  <section>
+    <h2>Senaste texter</h2>
+    <div class="rutnat">
+      {senaste.map((a) => (
+        <a class="kort" href={`/artiklar/${a.id}`}>
+          <p class="meta">{formateraDatum(a.data.datum)} · {publikationNamn(a.data.publikation)}</p>
+          <h3>{a.data.titel}</h3>
+          <p>{a.data.ingress}</p>
+        </a>
+      ))}
+    </div>
+    <p><a href="/artiklar">Alla artiklar</a></p>
+  </section>
+
+  <section>
+    <h2>Stödundervisning</h2>
+    <p class="text">Konkreta metoder att använda direkt, sorterade på område, årskurs och vad de tränar.</p>
+    <div class="rutnat">
+      {metoder.map((m) => (
+        <a class="kort" href={`/stodundervisning/${m.id}`}>
+          <p class="meta">{m.data.omrade} · {m.data.arskurs.join(', ')}</p>
+          <h3>{m.data.titel}</h3>
+          <p>{m.data.ingress}</p>
+          <Taggar taggar={m.data.taggar} />
+        </a>
+      ))}
+    </div>
+    <p><a href="/stodundervisning">Hela metodbanken</a></p>
+  </section>
+
+  <section>
+    <h2>Böcker</h2>
+    <div class="rutnat">
+      {bocker.map((b) => (
+        <a class="kort" href={`/bocker/${b.id}`}>
+          <p class="meta">{b.data.utgivningsar}{b.data.forlag && ` · ${b.data.forlag}`}</p>
+          <h3>{b.data.titel}</h3>
+          <p>{b.data.beskrivning}</p>
+        </a>
+      ))}
+    </div>
+    <p><a href="/bocker">Alla böcker</a></p>
+  </section>
+</Base>

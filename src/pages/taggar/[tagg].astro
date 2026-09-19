@@ -1,0 +1,45 @@
+---
+import Base from '../../layouts/Base.astro';
+import { allaTaggar, artiklarSorterade, metoderSorterade, bockerSorterade, formateraDatum } from '../../lib/innehall';
+
+export async function getStaticPaths() {
+  const [artiklar, metoder, bocker] = await Promise.all([artiklarSorterade(), metoderSorterade(), bockerSorterade()]);
+  return allaTaggar().map((t) => ({
+    params: { tagg: t.id },
+    props: {
+      tagg: t,
+      artiklar: artiklar.filter((a) => a.data.taggar.includes(t.id)),
+      metoder: metoder.filter((m) => m.data.taggar.includes(t.id)),
+      bocker: bocker.filter((b) => b.data.taggar.includes(t.id)),
+    },
+  }));
+}
+
+const { tagg, artiklar, metoder, bocker } = Astro.props;
+const tomt = artiklar.length + metoder.length + bocker.length === 0;
+---
+
+<Base title={tagg.label} description={tagg.beskrivning}>
+  <p class="meta">Tagg · {tagg.omrade}</p>
+  <h1>{tagg.label}</h1>
+  <p class="text">{tagg.beskrivning}</p>
+  {tomt && <p>Inget innehåll med den här taggen ännu.</p>}
+  {metoder.length > 0 && (
+    <section>
+      <h2>Metoder</h2>
+      <ul>{metoder.map((m) => <li><a href={`/stodundervisning/${m.id}`}>{m.data.titel}</a> <span class="meta">{m.data.omrade}, {m.data.arskurs.join(', ')}</span></li>)}</ul>
+    </section>
+  )}
+  {artiklar.length > 0 && (
+    <section>
+      <h2>Artiklar</h2>
+      <ul>{artiklar.map((a) => <li><a href={`/artiklar/${a.id}`}>{a.data.titel}</a> <span class="meta">{formateraDatum(a.data.datum)}</span></li>)}</ul>
+    </section>
+  )}
+  {bocker.length > 0 && (
+    <section>
+      <h2>Böcker</h2>
+      <ul>{bocker.map((b) => <li><a href={`/bocker/${b.id}`}>{b.data.titel}</a> <span class="meta">{b.data.utgivningsar}</span></li>)}</ul>
+    </section>
+  )}
+</Base>

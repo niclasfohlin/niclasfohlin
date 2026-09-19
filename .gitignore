@@ -1,0 +1,25 @@
+# Beroenden och byggresultat
+node_modules/
+dist/
+.astro/
+
+# Hemligheter. Committa aldrig.
+.env
+.env.local
+.env.*.local
+
+# Netlify CLI lokalt tillstånd
+.netlify/
+
+# Claude Code: personliga inställningar och lokala filer
+.claude/settings.local.json
+.claude/*.local.*
+
+# Loggar och operativsystem
+npm-debug.log*
+*.log
+.DS_Store
+Thumbs.db
+
+# Kön är arbetsläge, inte innehåll: den byter aldrig utseende med grenen och krockar aldrig vid sammanslagning.
+KO.md

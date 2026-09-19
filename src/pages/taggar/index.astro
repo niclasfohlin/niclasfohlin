@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import { allaTaggar, artiklarSorterade, metoderSorterade, bockerSorterade } from '../../lib/innehall';
+
+const [artiklar, metoder, bocker] = await Promise.all([artiklarSorterade(), metoderSorterade(), bockerSorterade()]);
+const antal = new Map<string, number>();
+for (const post of [...artiklar, ...metoder, ...bocker]) {
+  for (const t of post.data.taggar) antal.set(t, (antal.get(t) ?? 0) + 1);
+}
+const omraden = ['Läsning', 'Skrivning', 'Matematik', 'Allmänt'];
+const taggar = allaTaggar().filter((t) => (antal.get(t.id) ?? 0) > 0);
+---
+
+<Base title="Taggar" description="Alla ämnen som texterna och metoderna är taggade med.">
+  <h1>Taggar</h1>
+  {omraden.map((o) => {
+    const lista = taggar.filter((t) => t.omrade === o);
+    if (lista.length === 0) return null;
+    return (
+      <section>
+        <h2>{o}</h2>
+        <ul class="taggar">
+          {lista.map((t) => <li><a class="tagg" href={`/taggar/${t.id}`}>{t.label} ({antal.get(t.id)})</a></li>)}
+        </ul>
+      </section>
+    );
+  })}
+</Base>

@@ -1,0 +1,29 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Taggar from '../../components/Taggar.astro';
+import Kalla from '../../components/Kalla.astro';
+import { publicerade, formateraDatum } from '../../lib/innehall';
+
+export async function getStaticPaths() {
+  const artiklar = await publicerade('artiklar');
+  return artiklar.map((a) => ({ params: { id: a.id }, props: { a } }));
+}
+
+const { a } = Astro.props;
+const { Content } = await render(a);
+---
+
+<Base title={a.data.titel} description={a.data.ingress} typ="article">
+  <article class="text">
+    <p class="meta">
+      {formateraDatum(a.data.datum)}
+      {a.data.medforfattare.length > 0 && ` · Tillsammans med ${a.data.medforfattare.join(' och ')}`}
+    </p>
+    <h1>{a.data.titel}</h1>
+    <p><strong>{a.data.ingress}</strong></p>
+    <Kalla publikation={a.data.publikation} originalUrl={a.data.originalUrl} datum={a.data.datum} />
+    <Content />
+    <Taggar taggar={a.data.taggar} />
+  </article>
+</Base>

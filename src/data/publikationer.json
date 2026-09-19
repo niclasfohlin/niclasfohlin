@@ -1,0 +1,56 @@
+{
+  "_kommentar": "Registret över publikationer där artiklar ursprungligen publicerats. Fältet publikation i en artikel måste matcha ett id här. Lägg till en rad när en ny publikation dyker upp. namn visas för läsaren. alias är andra sätt att skriva samma publikation.",
+  "publikationer": [
+    { "id": "vi-larare", "namn": "Vi Lärare", "url": "https://www.vilarare.se", "alias": [
+        "vilärare",
+        "vi larare",
+        "lärarnas tidning",
+        "läraren"
+      ] },
+    { "id": "goteborgs-posten", "namn": "Göteborgs-Posten", "url": "https://www.gp.se", "alias": [
+        "gp",
+        "göteborgsposten",
+        "göteborgs posten"
+      ] },
+    { "id": "skolvarlden", "namn": "Skolvärlden", "url": "https://skolvarlden.se", "alias": [
+        "skolvärlden"
+      ] },
+    { "id": "pedagogiska-magasinet", "namn": "Pedagogiska magasinet", "url": "https://pedagogiskamagasinet.se", "alias": [
+        "pedmag",
+        "pedagogiska magasinet"
+      ] },
+    { "id": "specialpedagogik", "namn": "Specialpedagogik", "url": "https://specialpedagogik.se", "alias": [
+        "tidningen specialpedagogik"
+      ] },
+    { "id": "skolporten", "namn": "Skolporten", "url": "https://www.skolporten.se", "alias": [] },
+    { "id": "dagens-nyheter", "namn": "Dagens Nyheter", "url": "https://www.dn.se", "alias": [
+        "dn"
+      ] },
+    { "id": "svenska-dagbladet", "namn": "Svenska Dagbladet", "url": "https://www.svd.se", "alias": [
+        "svd"
+      ] },
+    { "id": "egen", "namn": "Publicerad här", "url": "https://niclasfohlin.se", "alias": [
+        "niclasfohlin.se",
+        "egen text",
+        "opublicerad"
+      ] },
+    { "id": "altinget", "namn": "Altinget", "url": "https://www.altinget.se", "alias": [
+        "altinget vård och hälsa"
+      ] },
+    { "id": "livslangt", "namn": "Livslångt", "url": "https://livslangt.se", "alias": [
+        "livslångt",
+        "podden livslångt"
+      ] },
+    { "id": "forskoleforum", "namn": "Förskoleforum", "url": "https://forskoleforum.se", "alias": [
+        "förskoleforum"
+      ] },
+    { "id": "ne", "namn": "NE", "url": "https://www.ne.se", "alias": [
+        "nationalencyklopedin",
+        "ne.se"
+      ] },
+    { "id": "kooperativt", "namn": "Kooperativt lärande (kooperativt.com)", "url": "https://kooperativt.com", "alias": [
+        "kooperativt.com",
+        "bloggen kooperativt lärande"
+      ] }
+  ]
+}

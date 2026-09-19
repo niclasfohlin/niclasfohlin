@@ -1,0 +1,8 @@
+---
+import { taggLabel } from '../lib/innehall';
+interface Props { id: string; niva?: boolean; }
+const { id, niva = false } = Astro.props;
+---
+{niva
+  ? <span class="tagg niva">{id}</span>
+  : <a class="tagg" href={`/taggar/${id}`}>{taggLabel(id)}</a>}

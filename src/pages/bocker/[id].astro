@@ -1,0 +1,38 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Taggar from '../../components/Taggar.astro';
+import { publicerade } from '../../lib/innehall';
+
+export async function getStaticPaths() {
+  const bocker = await publicerade('bocker');
+  return bocker.map((b) => ({ params: { id: b.id }, props: { b } }));
+}
+
+const { b } = Astro.props;
+const { Content } = await render(b);
+---
+
+<Base title={b.data.titel} description={b.data.beskrivning} bild={b.data.omslag}>
+  <article class="text">
+    {b.data.omslag && <img class="omslag" src={b.data.omslag} alt={`Omslag: ${b.data.titel}`} />}
+    <h1>{b.data.titel}</h1>
+    <div class="faktaruta">
+      <dl>
+        <dt>Utgiven</dt><dd>{b.data.utgivningsar}</dd>
+        {b.data.forlag && <><dt>Förlag</dt><dd>{b.data.forlag}</dd></>}
+        {b.data.medforfattare.length > 0 && <><dt>Medförfattare</dt><dd>{b.data.medforfattare.join(', ')}</dd></>}
+        {b.data.serie && <><dt>Serie</dt><dd>{b.data.serie}</dd></>}
+        {b.data.isbn && <><dt>ISBN</dt><dd>{b.data.isbn}</dd></>}
+      </dl>
+    </div>
+    <p><strong>{b.data.beskrivning}</strong></p>
+    <Content />
+    {b.data.lankar.length > 0 && (
+      <ul>
+        {b.data.lankar.map((l) => <li><a href={l.url} rel="noopener">{l.text}</a></li>)}
+      </ul>
+    )}
+    <Taggar taggar={b.data.taggar} />
+  </article>
+</Base>

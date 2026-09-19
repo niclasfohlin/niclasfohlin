@@ -1,0 +1,20 @@
+---
+import Base from '../../layouts/Base.astro';
+import { bockerSorterade } from '../../lib/innehall';
+const bocker = await bockerSorterade();
+---
+
+<Base title="Böcker" description="Böcker om undervisning, läsinlärning och specialpedagogik.">
+  <h1>Böcker</h1>
+  {bocker.length === 0 && <p>Inga böcker ännu.</p>}
+  <div class="rutnat">
+    {bocker.map((b) => (
+      <a class="kort" href={`/bocker/${b.id}`}>
+        {b.data.omslag && <img class="omslag" src={b.data.omslag} alt={`Omslag: ${b.data.titel}`} loading="lazy" />}
+        <p class="meta">{b.data.utgivningsar}{b.data.forlag && ` · ${b.data.forlag}`}</p>
+        <h2>{b.data.titel}</h2>
+        <p>{b.data.beskrivning}</p>
+      </a>
+    ))}
+  </div>
+</Base>

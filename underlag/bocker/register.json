@@ -1,0 +1,134 @@
+{
+  "_kommentar": "Böcker där Niclas Fohlin står som författare enligt förlagets och bokhandelns sidor, lästa av tre sökagenter 2026-09-19. Årtal och ISBN är förlagets uppgifter via agenterna, inte kontrollerade av mig mot sidorna. Beskrivning och omslag kommer från Niclas innan de blir poster i src/content/bocker (kön K-005).",
+  "kalla": "https://www.studentlitteratur.se/person/kursledare/niclas-fohlin/ samt förlagets produktsidor, Bokus och Campusbokhandeln",
+  "bocker": [
+    {
+      "titel": "Grundbok i kooperativt lärande: vägen till det samarbetande klassrummet",
+      "forlag": "Studentlitteratur",
+      "isbn": "9789144116723",
+      "utgivningsar": 2017,
+      "sidor": 312,
+      "medforfattare": [
+        "Jennie Wilson",
+        "Anneke Moerkerken",
+        "Lisa Westman"
+      ],
+      "kalla": "https://www.studentlitteratur.se/kompetensutveckling/skola-f-6/specialpedagogik/grundbok-i-kooperativt-larande/"
+    },
+    {
+      "titel": "Kooperativt lärande i praktiken: handbok för lärare i grundskolan",
+      "forlag": "Studentlitteratur",
+      "isbn": "9789144128078",
+      "utgivningsar": 2019,
+      "medforfattare": [
+        "Jennie Wilson"
+      ],
+      "kalla": "https://www.studentlitteratur.se/kooperativtlarande"
+    },
+    {
+      "titel": "Kooperativt lärande i förskolan och skolans första år: lärande och utveckling genom samarbete",
+      "forlag": "Studentlitteratur",
+      "serie": "Lärarpraxis",
+      "isbn": "9789144133942",
+      "utgivningsar": 2020,
+      "medforfattare": [
+        "Lisa Fohlin",
+        "Jennie Wilson"
+      ],
+      "kalla": "https://campusbokhandeln.se/b/9789144133942/"
+    },
+    {
+      "titel": "Kooperativt lärande i praktiken: grupputveckling och ledarskap",
+      "forlag": "Studentlitteratur",
+      "isbn": "9789144151854",
+      "utgivningsar": 2021,
+      "medforfattare": [
+        "Jennie Wilson"
+      ],
+      "kalla": "https://www.bokus.com/bok/9789144151854/kooperativt-larande-i-praktiken-grupputveckling-och-ledarskap/"
+    },
+    {
+      "titel": "Meningsfullt lärande: demokrati och samtal i skolan",
+      "forlag": "Studentlitteratur",
+      "isbn": "9789144139692",
+      "utgivningsar": 2021,
+      "sidor": 312,
+      "medforfattare": [
+        "Jennie Wilson"
+      ],
+      "kalla": "https://www.studentlitteratur.se/kurslitteratur/lararutbildning-och-pedagogik/sociala-relationer-och-konflikthantering/meningsfullt-larande-43143-01/"
+    },
+    {
+      "titel": "Gruppstärkande ledarskap",
+      "forlag": "Studentlitteratur",
+      "serie": "Bygga en undervisningsgemenskap",
+      "isbn": "9789144165998",
+      "utgivningsar": 2023,
+      "sidor": 120,
+      "medforfattare": [
+        "Jennie Wilson"
+      ],
+      "kalla": "https://www.studentlitteratur.se/kompetensutveckling/skola-f-6/undervisning-och-metod/gruppstarkande-ledarskap"
+    },
+    {
+      "titel": "Starta skolan starkt",
+      "forlag": "Studentlitteratur",
+      "serie": "Bygga en undervisningsgemenskap",
+      "isbn": "9789144175621",
+      "utgivningsar": 2023,
+      "sidor": 144,
+      "medforfattare": [
+        "Jennie Wilson"
+      ],
+      "kalla": "https://www.studentlitteratur.se/kompetensutveckling/skola-f-6/sociala-relationer-och-konflikthantering/starta-skolan-starkt/"
+    },
+    {
+      "titel": "Meningsfull undervisning",
+      "forlag": "Studentlitteratur",
+      "serie": "Bygga en undervisningsgemenskap",
+      "isbn": "9789144175928",
+      "utgivningsar": 2023,
+      "medforfattare": [
+        "Jennie Wilson"
+      ],
+      "kalla": "https://www.studentlitteratur.se/kompetensutveckling/skola-f-6/sociala-relationer-och-konflikthantering/meningsfull-undervisning/"
+    },
+    {
+      "titel": "LÄS! Nycklar till en god läsundervisning",
+      "forlag": "Studentlitteratur",
+      "serie": "Lärarpraxis",
+      "isbn": "9789144190457",
+      "utgivningsar": 2025,
+      "sidor": 382,
+      "medforfattare": [
+        "Jennie Wilson"
+      ],
+      "kalla": "https://www.studentlitteratur.se/kompetensutveckling/skola-f-6/undervisning-och-metod/las/"
+    },
+    {
+      "titel": "Krumelurkul 1, 3 och F: lärarpaket",
+      "forlag": "Studentlitteratur",
+      "isbn": "9789144168050",
+      "utgivningsar": null,
+      "medforfattare": [
+        "Jennie Wilson",
+        "Camilla Hyrefelt",
+        "med flera"
+      ],
+      "anm": "Läromedel (läslära med lärarhandledning), serien 2022 till 2025. Hans andel per del framgår inte av förlagets sidor.",
+      "kalla": "https://www.studentlitteratur.se/laromedel/f-6/svenska/baslaromedel/krumelurkul-1-lararpaket---tryckt-bok--digital-lararlicens-36-man/"
+    }
+  ],
+  "ovrigt": [
+    {
+      "vad": "Bloggen kooperativt.com",
+      "kalla": "https://kooperativt.com/author/niclasfohlin/",
+      "anm": "Drivs med Jennie Wilson och Lisa Westman, hundratals inlägg sedan 2016. Två inlägg bär hans eget författarkonto och ligger i underlag/texter; övriga står under kontot kooperativt utan personlig byline. Kön K-006 frågar Niclas vilka av dem som är hans."
+    },
+    {
+      "vad": "Aftonbladet Debatt, \"Replik från 12 lärare: Vi står bakom regeringens förslag om specialpedagogiken\", omkring 2025-11-28",
+      "kalla": "https://www.aftonbladet.se/debatt/a/QJRWGJ/replik-fran-12-larare-vi-star-bakom-regeringens-forslag-om-specialpedagogiken",
+      "anm": "Niclas 2026-09-19: han skrev inte under. Ingen text av honom; står kvar här bara så att ingen letar igen."
+    }
+  ]
+}

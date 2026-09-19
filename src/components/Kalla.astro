@@ -1,0 +1,16 @@
+---
+import { publikationInfo, formateraDatum } from '../lib/innehall';
+interface Props { publikation: string; originalUrl?: string; datum: Date; }
+const { publikation, originalUrl, datum } = Astro.props;
+const info = publikationInfo(publikation);
+const namn = info?.namn ?? publikation;
+---
+<aside class="kalla" aria-label="Ursprunglig publicering">
+  {publikation === 'egen'
+    ? <span>Publicerad här {formateraDatum(datum)}.</span>
+    : <span>Ursprungligen publicerad i <strong>{namn}</strong> {formateraDatum(datum)}.{" "}
+        {originalUrl
+          ? <a href={originalUrl} rel="noopener">Läs originalet hos {namn}</a>
+          : info?.url && <a href={info.url} rel="noopener">{namn}</a>}
+      </span>}
+</aside>

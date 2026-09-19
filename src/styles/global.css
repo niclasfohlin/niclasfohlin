@@ -1,0 +1,127 @@
+/* Grundläggande designsystem. Byggs ut av Claude Code enligt KONCEPT.md.
+   Håll färger, typsnitt och mått som variabler så att designen kan
+   ändras på ett ställe. */
+
+:root {
+  --farg-text: #18221d;
+  --farg-text-svag: #5a635e;
+  --farg-bakgrund: #f7f6f1;
+  --farg-yta: #ffffff;
+  --farg-kant: #deddd7;
+  --farg-accent: #2f5d50;
+  --farg-accent-ljus: #e8eee9;
+
+  --typsnitt-brod: Georgia, 'Times New Roman', serif;
+  --typsnitt-rubrik: Georgia, 'Times New Roman', serif;
+  --typsnitt-ui: system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --matt-bredd: 68rem;
+  --matt-text: 42rem;
+  --radie: 12px;
+}
+
+* { box-sizing: border-box; }
+
+html { color-scheme: light; }
+
+body {
+  margin: 0;
+  font-family: var(--typsnitt-brod);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--farg-text);
+  background: var(--farg-bakgrund);
+}
+
+a { color: inherit; text-decoration-color: var(--farg-accent); text-underline-offset: 0.15em; }
+a:hover { color: var(--farg-accent); }
+
+h1, h2, h3 { font-family: var(--typsnitt-rubrik); line-height: 1.15; margin: 0 0 0.5em; }
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); }
+h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); }
+h3 { font-size: 1.2rem; }
+
+.hopp-lank {
+  position: absolute; left: -999px; top: 0;
+  background: var(--farg-accent); color: white; padding: 0.5rem 1rem;
+}
+.hopp-lank:focus { left: 1rem; z-index: 10; }
+
+.sidhuvud, .innehall, .sidfot {
+  max-width: var(--matt-bredd);
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem;
+}
+
+.sidhuvud { display: flex; flex-wrap: wrap; align-items: baseline; gap: 1rem 2rem; font-family: var(--typsnitt-ui); }
+.sidhuvud .namn { font-weight: 700; text-decoration: none; font-size: 1.1rem; }
+.sidhuvud nav { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+.sidhuvud nav a { text-decoration: none; }
+.sidhuvud nav a[aria-current="page"] { text-decoration: underline; }
+
+.sidfot { color: var(--farg-text-svag); font-family: var(--typsnitt-ui); font-size: 0.9rem; border-top: 1px solid var(--farg-kant); margin-top: 3rem; }
+
+.text { max-width: var(--matt-text); }
+.text p, .text ul, .text ol { margin: 0 0 1em; }
+
+.rutnat { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1rem; }
+
+.kort {
+  display: block;
+  background: var(--farg-yta);
+  border: 1px solid var(--farg-kant);
+  border-radius: var(--radie);
+  padding: 1.25rem;
+  text-decoration: none;
+}
+.kort:hover { border-color: var(--farg-accent); }
+.kort h2, .kort h3 { margin-bottom: 0.35em; }
+.kort p { margin: 0 0 0.75em; }
+
+.meta { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
+
+.taggar { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.5rem 0; padding: 0; list-style: none; }
+.tagg {
+  display: inline-block;
+  font-family: var(--typsnitt-ui);
+  font-size: 0.8rem;
+  background: var(--farg-accent-ljus);
+  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+  text-decoration: none;
+}
+.tagg.niva { background: var(--farg-yta); border: 1px solid var(--farg-kant); }
+
+.faktaruta {
+  font-family: var(--typsnitt-ui);
+  font-size: 0.95rem;
+  background: var(--farg-yta);
+  border: 1px solid var(--farg-kant);
+  border-radius: var(--radie);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.faktaruta dl { display: grid; grid-template-columns: max-content 1fr; gap: 0.35rem 1rem; margin: 0; }
+.faktaruta dt { font-weight: 600; }
+.faktaruta dd { margin: 0; }
+
+.kalla {
+  border-left: 3px solid var(--farg-accent);
+  padding: 0.75rem 1rem;
+  margin: 1.5rem 0;
+  font-family: var(--typsnitt-ui);
+  font-size: 0.95rem;
+  background: var(--farg-yta);
+}
+
+.omslag { max-width: 12rem; height: auto; border: 1px solid var(--farg-kant); }
+
+form.prenumerera { display: grid; gap: 0.75rem; max-width: 28rem; font-family: var(--typsnitt-ui); }
+form.prenumerera input[type="email"] { font: inherit; padding: 0.6rem 0.8rem; border: 1px solid var(--farg-kant); border-radius: 8px; }
+form.prenumerera button { font: inherit; padding: 0.6rem 1rem; border: 0; border-radius: 8px; background: var(--farg-accent); color: white; cursor: pointer; }
+.honung { position: absolute; left: -9999px; }
+
+@media (max-width: 40rem) {
+  body { font-size: 1rem; }
+  .faktaruta dl { grid-template-columns: 1fr; }
+}
