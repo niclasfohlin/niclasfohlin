@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 808
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/att-kunna-lasa-ar-nyckeln-till-allt-larande.md"
 tidningens_ingress: "När eleven knäcker läskoden öppnar sig skolans och livets alla möjligheter. Niclas Fohlin, speciallärare i läs- språk och skrivutveckling, berättar om en milstolpe i karriären."
 ---
 Våra liv brukar ha några milstolpar som förändrar allt. Det kan vara att lära sig cykla, börja skolan eller flytta hemifrån. Men inte mycket kan jämföras med att lära sig läsa. Med läsningen kommer tillgången till en helt ny värld av information som likt en katapult kickar i gång vår kunskapsresa.
