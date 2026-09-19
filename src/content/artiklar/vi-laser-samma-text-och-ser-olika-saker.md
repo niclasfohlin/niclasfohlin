@@ -1,6 +1,6 @@
 ---
 titel: "Vi läser samma text och ser olika saker"
-ingress: "Andreas Williamsson frågade varför krönikan om nånannanismen anammar motståndarens argument. Repliken svarar att den aldrig var riktad mot lärare eller mot kampen för bättre villkor. Den försvarar yrkets kärna, tron på att undervisningen gör skillnad, och räknar den tron till solidariteten."
+ingress: "Andreas Williamsson frågade varför krönikan om nånannanismen anammar motståndarens argument. Repliken förklarar att krönikan är riktad till alla som arbetar i skolan, lärare som rektorer och kuratorer. Den försvarar yrkets kärna, tron på att undervisningen gör skillnad, och räknar den tron till solidariteten."
 datum: 2026-04-02
 publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/nyheter/vi-larare-debatt/fohlin-vi-laser-samma-text-och-ser-olika-saker/"
