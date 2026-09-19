@@ -12,7 +12,7 @@ byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 599
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/svensk-skola-behover-svensk-debatt.md"
 tidningens_ingress: "”Arbetet ligger i klassrummen, tillsammans med lärarna, för eleverna vi möter varje dag. Inte i skyttegravar som andra har grävt åt oss”, skriver specialläraren Niclas Fohlin i diskussionen med journalisten Jenny Maria Nilsson."
 ---
 Jag skrev en krönika om hur svensk skoldebatt alltmer formas av amerikanska konfliktlinjer.Som ett exempel tog jag bland annat en Substack-text av Jenny Maria Nilsson, som nu i en replik till mig undrar om jag vill ”bevara status quo”. Nej. Svensk skola har stora och verkliga problem. Men de blir inte lättare att lösa genom att importera kulturkrig från USA.
