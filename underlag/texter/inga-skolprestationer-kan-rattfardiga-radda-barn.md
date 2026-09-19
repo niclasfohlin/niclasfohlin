@@ -12,7 +12,7 @@ byline: "Niclas Fohlin (signatur i texten)"
 hamtad: 2026-09-19
 ord: 861
 rattigheter: "ej bekräftade av Niclas"
-post: ""
+post: "src/content/artiklar/inga-skolprestationer-kan-rattfardiga-radda-barn.md"
 tidningens_ingress: "Skolforskningen har om och om igen visat att trygghet är en grundförutsättning för lärande, skriver Niclas Fohlin."
 ---
 I GP:s reportage om Michaela Community School ser vi en skola byggd på disciplin, högt tempo, repetition och artiga elever. Vi ser också prislappen: poängavdrag för att tappa fokus, kvarsittning för småsaker som att av misstag titta ut genom fönstret en sekund, isolering som påföljd, en vardag där barn inte får kasta en blick åt besökare. Tron att vi kan straffa eleverna till att prestera i skolan är både felaktig och farlig, skriver specialläraren Niclas Fohlin.
