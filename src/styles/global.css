@@ -36,7 +36,7 @@ body {
 a { color: inherit; text-decoration-color: var(--farg-accent); text-underline-offset: 0.15em; }
 a:hover { color: var(--farg-accent); }
 
-h1, h2, h3 { font-family: var(--typsnitt-rubrik); line-height: 1.15; margin: 0 0 0.5em; }
+h1, h2, h3 { font-family: var(--typsnitt-rubrik); line-height: 1.15; margin: 0 0 0.5em; overflow-wrap: anywhere; }
 h1 { font-size: clamp(2rem, 5vw, 3.2rem); }
 h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); }
 h3 { font-size: 1.2rem; }
@@ -133,9 +133,14 @@ h3 { font-size: 1.2rem; }
 
 /* Böcker: kort med omslag i listan, och boksidan med omslaget bredvid texten när det får plats. */
 .bokgrupp { margin-top: 2rem; }
-.bok-kort { display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: start; }
+.bok-kort { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1rem; align-items: start; }
 .bok-kort .bok-omslag img { display: block; width: 6.5rem; height: auto; border: 1px solid var(--farg-kant); border-radius: 4px; }
-.bok-kort h3 { font-size: 1.15rem; }
+.bok-kort h3 { font-size: 1.15rem; overflow-wrap: anywhere; hyphens: auto; }
+.bok-kort .meta { margin-bottom: 0.35rem; }
+@media (max-width: 40rem) {
+  .bok-kort { grid-template-columns: 1fr; }
+  .bok-kort .bok-omslag img { width: 5.5rem; }
+}
 .bok { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem 2.5rem; align-items: start; max-width: var(--matt-bredd); }
 .bok-omslag-stor { max-width: 15rem; width: 100%; border-radius: 4px; }
 .bok-text { max-width: var(--matt-text); }
