@@ -1,0 +1,240 @@
+# Metod i stödundervisning. Modellen står i src/content.config.ts och mallen i _mall.yaml.
+# Texten är Niclas egen, ur kompendiet för läsförståelse åk 4–9 (2026).
+titel: Chambers boksamtal i grupp
+undertitel: Lärarlett samtal om skönlitteratur som utvecklar elevens tänkande, för åk 4–9
+ingress: Ett körschema för 30-minuterspass i liten grupp där eleverna samtalar om en kort skönlitterär text enligt Aidan Chambers ”Jag undrar”. Fyra grundfrågor samlar allas först-tankar, sedan fördjupar ni med ”Hur vet du det?”. Ingen sitter på rätt svar, inte ens läraren.
+omrade: Läsning
+arskurs:
+  - 4-6
+  - 7-9
+taggar:
+  - lasforstaelse
+  - textsamtal
+  - lasframjande
+format:
+  - liten grupp
+tid: Cirka 30 minuter per pass, två till tre pass i veckan
+period: Sex till åtta veckor
+grupp: Två till sex elever
+material:
+  - En kort skönlitterär text per pass, eller ett avsnitt ur en gemensam bok
+  - Tavla eller papper för de fyra spalterna
+  - Två till tre förberedda specialfrågor
+uppdaterad: 2026-09-20
+relaterade:
+  - faktatextsamtal-i-grupp
+utkast: false
+inledning:
+  - Det här är ett körschema för en lärarledd insats i liten grupp där eleverna samtalar om skönlitteratur. Insatsen är tidsbegränsad, riktad och har tät uppföljning. Varje pass är cirka 30 minuter och följer samma rutin. Metoden bygger på Aidan Chambers boksamtal, på svenska kallad ”Jag undrar”. Syftet är inte att kontrollera att eleverna läst rätt, utan att utveckla deras tänkande om texter. Eleverna läser en kort skönlitterär text, delar sina först-tankar med fyra enkla frågor och fördjupar sedan samtalet tillsammans. Läraren leder, men ingen sitter på de rätta svaren, inte ens läraren.
+  - Faktatextsamtal i grupp täcker ämnestexterna. Det här är samtalet om skönlitteratur. Börja med rutinen och tidsschemat nedan. Forskningsgrunden finns kort sammanfattad sist.
+upplagg:
+  rubrik: Så fungerar insatsen
+  text: Insatsen genomförs två till tre gånger i veckan under sex till åtta veckor. Varje pass är cirka 30 minuter. Gruppen består av två till sex elever. Ni arbetar med en kort skönlitterär text per pass, eller med ett överenskommet avsnitt ur en gemensam bok. Efter varje pass gör du en kort notering om hur eleverna deltog och tänkte. Efter perioden utvärderar du om eleven kan dela tankar om en text, motivera dem och bygga vidare på andras.
+principer:
+  rubrik: Tre saker att hålla fast vid
+  text: Säg ”Jag undrar” i stället för ”Varför”. Varför kan låta som ett förhör. Det finns inget facit, alla svar är värda att höra, även det som ingen annan tänkte. Och fråga ofta ”Hur vet du det?” så att eleverna går tillbaka till texten.
+passrutin:
+  text: Varje pass följer samma rutin. Det gör insatsen lätt att leda och tryggt för eleverna att veta vad som ska hända.
+  steg:
+    - Läraren läser texten högt.
+    - Eleverna läser den själva, i par eller tyst, och markerar något de fastnade för.
+    - Gruppen samlar först-tankar med de fyra frågorna.
+    - Läraren drar trådar och fördjupar med fler frågor.
+    - Var och en säger till sist en sak de tar med sig.
+tidsschema:
+  rubrik: 30 minuter, steg för steg
+  text: Förbered dig genom att läsa texten själv och förbereda två till tre specialfrågor. Sedan följer du tidsschemat.
+  rader:
+    - tid: Före passet
+      fas: Förberedelse
+      vad: Välj en kort text. Läs den själv. Förbered två till tre specialfrågor. Bestäm hur texten ska läsas.
+    - tid: 0–10 min
+      fas: Läs
+      vad: Läraren läser högt och tänker högt på ett par ställen. Eleverna läser sedan i par eller tyst och markerar något de fastnade för.
+    - tid: 10–15 min
+      fas: Samla först-tankar
+      vad: Ställ de fyra grundfrågorna, en i taget, laget runt. Skriv upp svaren i fyra spalter. Ännu ingen lång diskussion.
+    - tid: 15–27 min
+      fas: Fördjupa
+      vad: Dra trådar ur spalterna. Använd allmänna frågor och specialfrågor. Fråga ofta ”Hur vet du det?”.
+    - tid: 27–30 min
+      fas: Avsluta
+      vad: Var och en säger en sak de tar med sig. Eventuellt en rad i loggen eller ett betyg på texten.
+  efter: "En kort text per pass. Blir gruppen klar tidigt: be dem hitta ett textställe som stöder en tanke, jämföra med en annan bok eller skriva en fråga till författaren."
+steg:
+  rubrik: "Passets fyra steg: vad du gör och säger"
+  text: De fyra stegen är ryggraden i passet. I steg tre växer elevernas tänkande. Använd fraserna för att bjuda in, inte för att förhöra.
+  fraserRubrik: Vad du säger
+  rader:
+    - namn: Läs
+      fraga: Möt texten
+      gor: Läs högt och modellera ett par tankar. Låt eleverna läsa själva och markera.
+      fraser:
+        - Här undrar jag vad som händer sen.
+        - Markera en mening du fastnade för.
+        - Sätt ett frågetecken där något var svårt.
+    - namn: Samla först-tankar
+      fraga: Vad bär du med dig?
+      gor: Ställ de fyra grundfrågorna laget runt. Skriv i fyra spalter. Håll det kort.
+      fraser:
+        - Var det något du gillade?
+        - Var det något du inte gillade?
+        - Var det något du undrade över?
+        - Märkte du något mönster eller någon koppling?
+    - namn: Fördjupa
+      fraga: Hur tänker du?
+      gor: Dra trådar ur spalterna. Lägg till allmänna frågor och specialfrågor. Be om textstöd.
+      fraser:
+        - Berätta mer.
+        - Hur vet du det?
+        - Vad i texten får dig att tänka så?
+        - Är det någon som tänker annorlunda?
+    - namn: Avsluta
+      fraga: Vad tar du med dig?
+      gor: Låt var och en säga en sak. Knyt ihop några trådar.
+      fraser:
+        - Säg en tanke, en fråga eller en favoritmening.
+        - Vad vill du läsa vidare om?
+tabeller:
+  - rubrik: "Frågorna: vilka och när"
+    text: Chambers delar in frågorna i tre slag. Du börjar alltid med grundfrågorna. Sedan väljer du bland de allmänna och de särskilda frågorna för att fördjupa. Du behöver inte ställa alla. Välj de som passar texten och gruppen.
+    plats: efter-steg
+    kolumner:
+      - Frågetyp
+      - Vad de gör och när
+      - Exempel
+    rader:
+      - - |-
+          Grundfrågor
+          Steg 2, alltid
+        - Fyra enkla frågor som samlar elevernas först-tankar. Börja med det självklara så att ingen kan misslyckas.
+        - |-
+          ”Var det något du gillade?”
+          ”Var det något du inte gillade?”
+          ”Var det något du inte förstod eller undrade över?”
+          ”Lade du märke till några mönster eller kopplingar?”
+      - - |-
+          Allmänna frågor
+          Steg 3, för att vidga
+        - Öppna frågor som passar vilken text som helst och knyter an till annat ni läst.
+        - |-
+          ”Vad lade du märke till först?”
+          ”Om en kompis frågade vad texten handlar om, vad skulle du säga?”
+          ”Påminner den om något du läst förut?”
+          ”Skulle du vilja läsa mer av det här?”
+      - - |-
+          Specialfrågor
+          Steg 3, för att fördjupa
+        - Frågor du förberett om just den här texten. De hjälper eleverna att se sådant de inte når själva.
+        - |-
+          ”Vems berättelse är det här?”
+          ”Var och när utspelar det sig?”
+          ”Vilken person blev du mest nyfiken på?”
+          ”Vad tyckte du om slutet?”
+    not: Den viktigaste frågan i steg tre är ”Hur vet du det?”. Den skickar eleven tillbaka till texten för att hitta stöd för sin tanke, och det är där tänkandet växer.
+arbetsform:
+  rubrik: "Arbetsform: gemensamt, enskilt, gemensamt"
+  text: Passet rör sig i tre steg. Först gemensamt, där läraren läser och modellerar. Sedan läser eleverna själva, i par eller tyst, och markerar. Till sist gemensamt igen, där ni samlar tankar och fördjupar. Med två till sex elever kommer alla till tals. Just därför passar liten grupp den här metoden, eftersom även den som är tyst i helklass vågar dela en tanke här.
+  delar:
+    - rubrik: 1. Gemensamt
+      text: Läraren läser och modellerar
+    - rubrik: 2. Enskilt eller i par
+      text: Eleverna läser och markerar
+    - rubrik: 3. Gemensamt igen
+      text: Samla först-tankar och fördjupa
+exempel:
+  valt:
+    rubrik: Texten läraren valt
+    text: En kort novell, cirka fyra sidor, om en pojke som inte vågar säga ifrån.
+  text:
+    - "Läraren har läst novellen i förväg och förberett tre specialfrågor om huvudpersonen, miljön och slutet. Passet börjar med att läraren läser de första sidorna högt och stannar en gång: ”Här undrar jag vad han känner när han tittar bort. Markera gärna ett ställe ni fastnar på.” Eleverna läser resten i par och sätter frågetecken där något skaver."
+    - Sedan samlar läraren först-tankar. ”Var det något ni gillade?” Laget runt. ”Var det något ni inte gillade? Var det något ni undrade över? Märkte ni något mönster?” Svaren skrivs i fyra spalter på tavlan, kort och utan diskussion än.
+    - "Nu drar läraren i trådarna. En elev har skrivit att slutet var konstigt. ”Berätta mer. Hur vet du att det var konstigt?” Eleven bläddrar tillbaka och pekar på en mening. Läraren följer upp med en specialfråga: ”Vems berättelse är det egentligen?” Gruppen märker att vi bara hör pojkens tankar, aldrig de andras. En annan elev kopplar till en tidigare bok om mod. Läraren håller samtalet öppet och ber ofta om textstöd, men talar inte om vad novellen betyder."
+    - "Passet avslutas med att var och en säger en sak de tar med sig: en tanke, en fråga eller en favoritmening. Efteråt skriver läraren en kort notering: alla deltog, två elever kunde motivera med textexempel, och nästa gång övar vi mer på att gå tillbaka till texten."
+fastnar:
+  rubrik: När samtalet stannar
+  text: Ibland tystnar gruppen. Det är inte ett misslyckande. Ge eleverna tanketid och ett litet stöd, inte ett svar.
+  fragaForst:
+    - Vad fastnade du för?
+    - Vad i texten får dig att tänka så?
+  trappa:
+    - Gå tillbaka till en spalt och välj en tanke att bygga vidare på.
+    - Be eleven läsa upp meningen den fastnade för.
+    - Ställ en av dina förberedda specialfrågor.
+    - Be eleverna jämföra två olika tankar i gruppen.
+    - Låt dem skriva en rad innan de pratar, om det är lättare.
+  motto: Börja alltid med det självklaraste. Då kan ingen elev känna att den svarat fel.
+roll:
+  rubrik: "Lärarens roll: leda utan att förhöra"
+  text: Du leder samtalet, men du äger inte tolkningen. Säg ”Jag undrar” i stället för ”Varför”. Lyssna mer än du talar. Visa att du själv undrar, tvekar och ändrar dig. Då vågar eleverna göra detsamma.
+  gor:
+    - Börja med det självklara.
+    - Samla allas tankar innan ni fördjupar.
+    - Be ofta om textstöd.
+    - Låt flera tolkningar finnas samtidigt.
+  undvik:
+    - Att fråga ”Varför?”.
+    - Att leta efter ett rätt svar.
+    - Att läraren tolkar åt eleverna.
+    - Att fråga ”Vad tyckte du om boken?” som första fråga.
+urval:
+  rubrik: Var hittar du texterna?
+  text:
+    - Välj korta texter med något att prata om. En text som rymmer en lucka, ett svårt val eller en stark känsla väcker fler tankar än en text där allt redan är utskrivet. Bra källor är noveller och korta kapitel, bilderböcker som bär dubbla budskap även för äldre, och lättlästa serier. Material med flera svårighetsnivåer som Mellan raderna gör det lätt att möta gruppen rätt, eftersom samma berättelse finns i olika nivåer. För en grupp som läser en gemensam bänkbok kan du i stället välja ut ett laddat avsnitt och samtala om det.
+  kravText: "Välj en text per pass som uppfyller tre krav:"
+  krav:
+    - rubrik: Något att prata om
+      text: En lucka, ett val eller en känsla att tolka
+    - rubrik: Lagom längd
+      text: Går att läsa och hinna samtala om på 30 minuter
+    - rubrik: Möjlig att läsa med stöd
+      text: Möjlig att förstå med stöd, men med något att fundera på
+progression:
+  text: Ansvaret flyttas gradvis till eleverna. Med tiden kan en elev själv ställa grundfrågorna och leda delar av samtalet.
+  rader:
+    - vecka: 1–2
+      fokus: Lära sig de fyra grundfrågorna och våga dela.
+      roll: Läraren ställer alla frågor och modellerar ”Hur vet du det?”.
+    - vecka: 3–4
+      fokus: Motivera tankar med textstöd.
+      roll: Läraren fördjupar med special- och allmänna frågor.
+    - vecka: 5–6
+      fokus: Bygga vidare på varandras tankar.
+      roll: Läraren håller sig mer i bakgrunden och lyssnar.
+    - vecka: 7–8 vid behov
+      fokus: En elev leder grundfrågorna.
+      roll: Läraren stöttar samtalsledaren och följer upp.
+uppfoljning:
+  text: Du behöver veta om passen ger effekt, inte bara att de har genomförts. Gör en enkel före- och efterkoll.
+  rader:
+    - nar: Före insatsen
+      vad: Eleven samtalar kort om en text. Notera om eleven kan dela en tanke, motivera den och lyssna på andra.
+    - nar: Efter sex till åtta veckor
+      vad: Samtala om en liknande text och jämför med startläget.
+mal:
+  punkter:
+    - Dela en tanke om en text
+    - Motivera den med något i texten
+    - Ställa en egen fråga till texten
+    - Bygga vidare på en kamrats tanke
+    - Se ett mönster eller en koppling
+    - Sätta ord på sin läsupplevelse
+snabbmall:
+  text: En halv sida att fylla i före och efter varje pass, särskilt de första två veckorna. Håll det enkelt. Det är regelbundenheten och att komma tillbaka igen nästa dag som gör skillnad.
+  fore:
+    - Text
+    - Specialfrågor (två till tre)
+    - Hur texten ska läsas
+  efter:
+    - Deltog alla?
+    - Vad ska övas nästa gång?
+checklista:
+  punkter:
+    - Valt en kort text med något att prata om och läst den själv.
+    - Förberett två till tre specialfrågor.
+    - Bestämt hur texten ska läsas.
+    - Påmint mig själv om de fyra grundfrågorna.
+    - Bestämt hur jag ska avsluta passet.
+grund:
+  text: "Metoden bygger på Aidan Chambers boksamtal, på svenska ”Jag undrar” (Chambers, 1993). Kärnan är de fyra grundfrågorna om vad eleven gillade, ogillade, undrade över och vilka mönster den såg, samt de allmänna och särskilda frågor som fördjupar samtalet. Två principer bär metoden: att fråga ”Jag undrar” i stället för ”Varför”, och att ofta fråga ”Hur vet du det?” så att eleverna går tillbaka till texten. Att samtala om texter i liten grupp gynnar särskilt de elever som har svårt att komma till tals i helklass (Reichenberg och Lundberg, 2011). Att läraren modellerar och gradvis lämnar över ansvaret kommer från reciprok undervisning (Palincsar och Brown, 1984) och GRR-modellen."
+  kallor: Bygger på Chambers (1993), Palincsar och Brown (1984), Reichenberg och Lundberg (2011), samt Skolverkets material om läsförståelse och boksamtal på Lärportalen.
