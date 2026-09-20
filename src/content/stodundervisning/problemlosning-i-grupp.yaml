@@ -1,0 +1,212 @@
+# Metod i stödundervisning. Modellen står i src/content.config.ts och mallen i _mall.yaml.
+# Texten är Niclas egen, ur kompendiet för läsförståelse åk 4–9 (2026).
+titel: Problemlösning i grupp
+undertitel: Lärarledd problemlösning och läsförståelse i liten grupp för åk 4–9
+ingress: Ett körschema för 20-minuterspass i liten grupp där eleverna läser, tolkar och löser matematiska problem i text. Läraren leder, modellerar och frågar i stället för att visa lösningen. Samma rutin varje gång, två till tre pass i veckan under sex till åtta veckor.
+omrade: Matematik
+arskurs:
+  - 4-6
+  - 7-9
+taggar:
+  - problemlosning
+  - lasforstaelse
+format:
+  - liten grupp
+  - par
+tid: 20 minuter per pass, två till tre pass i veckan
+period: Sex till åtta veckor
+grupp: Tre till åtta elever
+material:
+  - Ett rikt problem per pass, löst av läraren i förväg
+  - Miniwhiteboards eller papper
+  - Konkret material för att visa problemet
+uppdaterad: 2026-09-20
+relaterade:
+  - faktatextsamtal-i-grupp
+utkast: false
+inledning:
+  - Det här är ett körschema för en lärarledd insats i liten grupp för elever som behöver stöd i att läsa, tolka och lösa matematiska problem i text. Insatsen är tidsbegränsad, riktad och har tät uppföljning. Varje pass är 20 minuter och följer samma rutin. Det är ett samtal, inte ett formulär att fylla i, och skillnaden mot vanligt grupparbete är att läraren leder, modellerar och stöttar. Börja med rutinen och tidsschemat nedan. Forskningsgrunden finns kort sammanfattad sist.
+upplagg:
+  rubrik: Så fungerar insatsen
+  text: Insatsen genomförs två till tre gånger i veckan under sex till åtta veckor. Varje pass är 20 minuter. Gruppen består av tre till åtta elever som behöver stöd i matematisk problemlösning och läsförståelse. Ni arbetar med ett problem per pass. Efter varje pass gör du en kort notering om vad eleverna klarade med stöd. Efter perioden utvärderar du om eleven kan använda strategierna med mindre stöd i den ordinarie undervisningen.
+passrutin:
+  text: Varje pass följer samma rutin. Det gör insatsen lätt att leda och tryggt för eleverna att veta vad som ska hända.
+  steg:
+    - Läraren läser problemet högt.
+    - En elev återberättar med egna ord.
+    - Gruppen markerar frågan.
+    - "Gruppen skriver: Vad vet vi? Vad ska vi ta reda på?"
+    - "Gruppen väljer hur problemet ska visas: med bild, tabell, tallinje eller konkret material."
+    - Eleverna prövar i par.
+    - Gruppen jämför och sätter ord på strategin.
+  efter: Passrutinen är kortversionen av passet. Tidsschemat visar när varje del görs, och tabellen efteråt visar vad du som lärare kan säga och göra i varje steg.
+tidsschema:
+  rubrik: 20 minuter, steg för steg
+  text: Förbered dig genom att lösa problemet själv och fundera på var eleverna kan fastna. Sedan följer du tidsschemat.
+  rader:
+    - tid: Före passet
+      fas: Förberedelse
+      vad: Välj ett problem. Lös det själv. Förutse elevernas lösningar. Ta fram material för en representation.
+    - tid: 0–3 min
+      fas: Läs och förstå
+      vad: Läs högt, en elev återberättar, markera frågan, skriv vad vi vet och vad vi ska ta reda på.
+    - tid: 3–6 min
+      fas: Planera
+      vad: Välj representation och strategi tillsammans. Ingen räknar än.
+    - tid: 6–13 min
+      fas: Lös
+      vad: Eleverna prövar i par, trio vid ojämnt antal. Du cirkulerar, frågar och noterar lösningar.
+    - tid: 13–18 min
+      fas: Jämför
+      vad: Två lösningar eller två sätt att tänka visas och jämförs. Är svaret rimligt? Vilken väg var tydligast, och varför fungerade den eller blev det en missuppfattning?
+    - tid: 18–20 min
+      fas: Avsluta
+      vad: Sätt ord på strategin som fungerade. Gör den korta noteringen.
+  efter: "Ett problem per pass. Blir gruppen klar tidigt: be dem visa lösningen på ett annat sätt, hitta en annan strategi eller skriva en egen liknande uppgift."
+steg:
+  text: De fyra stegen är den didaktiska modellen bakom rutinen. Använd exempelfraserna för att tänka högt och för att fråga i stället för att tala om.
+  rader:
+    - namn: Förstå
+      fraga: Vad frågar problemet?
+      gor: Läs högt, låt en elev återberätta, red ut ord och samband, ringa in frågan.
+      fraser:
+        - Vad är det vi ska ta reda på?
+        - Kan du berätta problemet med egna ord?
+        - Vilket ord är vi osäkra på?
+        - Vad betyder talen i texten?
+    - namn: Planera
+      fraga: Hur kan vi tänka?
+      gor: Välj representation och strategi tillsammans. Ingen räknar än. Välj inte åt eleverna.
+      fraser:
+        - Vilken representation hjälper oss att se problemet?
+        - Tänk om vi provar med mindre tal först.
+        - Jag vill rita det här för att se det framför mig.
+        - Vilken strategi tror ni passar, och varför?
+    - namn: Lösa
+      fraga: Vi prövar
+      gor: Eleverna prövar i par. Du cirkulerar, frågar och noterar olika lösningar.
+      fraser:
+        - Visa hur du tänkte.
+        - Vad händer om du fortsätter så?
+        - Hur vet du att det stämmer?
+        - Fastnar du? Vad har du provat?
+    - namn: Kolla och jämföra
+      fraga: Är svaret rimligt?
+      gor: Visa två lösningar eller två sätt att tänka, jämför dem och kontrollera att svaret är rimligt mot frågan.
+      fraser:
+        - Är svaret rimligt?
+        - Vem tänkte annorlunda?
+        - Vad är lika och vad är olika i lösningarna?
+        - Vilken metod skulle du välja nästa gång?
+arbetsform:
+  rubrik: "Arbetsform: gemensamt, par, gemensamt"
+  text: Passet rör sig i tre steg. Först gemensamt, där läraren leder och modellerar. Sedan prövar eleverna i par medan läraren cirkulerar. Till sist gemensamt igen, där ni jämför lösningar och sätter ord på strategin. Vid ojämnt antal bildar ni en trio eller låter en elev arbeta i par med läraren. Upplägget fungerar oavsett om gruppen är tre eller åtta elever, eftersom tänkandet sker i paren.
+  delar:
+    - rubrik: 1. Gemensamt
+      text: Läraren leder, läser och modellerar
+    - rubrik: 2. I par
+      text: Eleverna prövar, läraren cirkulerar
+    - rubrik: 3. Gemensamt igen
+      text: Jämför och sätt ord på strategin
+exempel:
+  valt:
+    rubrik: Problemet läraren valt
+    text: På ett slott finns 29 ljusstakar. Några ljusstakar har plats för fem ljus och några har plats för sju ljus. Sammanlagt behövs 187 ljus. Hur många ljusstakar finns det av varje sort?
+  text:
+    - "Läraren har löst problemet själv i förväg och vet att eleverna kan fastna i vad de två okända sakerna är. Passet börjar med att läraren läser problemet högt. En elev återberättar med egna ord: ”Det finns olika ljusstakar och vi ska ta reda på hur många det finns av varje sort.” Läraren säger: ”Bra. Då markerar vi frågan. Vad är det vi ska ta reda på?” Gruppen tänker och antecknar tillsammans: vi vet att det finns 29 ljusstakar, vi vet att det behövs 187 ljus, och vi ska ta reda på hur många som har fem ljus och hur många som har sju ljus."
+    - "Sedan stannar läraren gruppen innan någon börjar räkna. ”Hur kan vi visa problemet så att vi ser det framför oss?” Eleverna föreslår att rita, göra en tabell eller prova med mindre tal. Läraren väljer inte åt dem, men hjälper dem i gång: ”En tabell kan vara bra när vi behöver pröva olika antal. Vad kan rubrikerna vara?”"
+    - "Eleverna arbetar sedan i par, och vid ojämnt antal arbetar tre tillsammans i en trio. Läraren går runt och lyssnar. När ett par fastnar frågar läraren: ”Vad har ni gjort hittills?” och sedan ”Varför gjorde ni så?” Om de fortfarande inte kommer vidare ber läraren dem visa i tabellen vad de vet, eller prova med ett enklare antal först. Läraren ger inte lösningen, utan hjälper eleverna att ta nästa steg själva."
+    - "Efter några minuter samlar läraren gruppen igen. Två par får visa hur de tänkte. Det ena paret har gjort en tabell. Det andra har börjat med att tänka: ”Om alla vore femarmade skulle det bli för få ljus.” Läraren låter gruppen jämföra: ”Vad är lika i de här sätten? Vad hjälper oss att se skillnaden mellan fem ljus och sju ljus? Hur kan vi kontrollera att svaret passar frågan?”"
+    - "Passet avslutas med att läraren sätter ord på strategin: ”I dag använde vi tabell och prövade systematiskt. Vi började också med att förstå frågan innan vi räknade.” Efteråt skriver läraren en kort notering: flera elever kunde återberätta problemet, gruppen behövde stöd att välja representation, och nästa gång repeteras tabell som strategi."
+fastnar:
+  rubrik: När gruppen fastnar
+  text: När eleverna kör fast är det lätt att lotsa dem direkt till svaret. Gör tvärtom. Fråga, lyssna och ge minsta möjliga stöd som tar dem ett steg längre fram.
+  fragaForst:
+    - Vad har ni gjort hittills?
+    - Varför gjorde ni så?
+  trappa:
+    - "Fråga: Vad vet ni?"
+    - "Fråga: Vad ska ni ta reda på?"
+    - Be dem visa med bild, tabell eller material.
+    - Be dem prova med mindre tal.
+    - Be dem kontrollera mot frågan.
+  efter: Hör efter var det brister, i tolkningen, utforskningen, lösningsidén eller omsättningen, och stötta på just den nivån (Lithner).
+  motto: Läraren leder processen, men äger inte lösningen.
+roll:
+  rubrik: "Lärarens roll: leda utan att ta över"
+  text: Stötta tänkandet i stället för att ta över det. I samma stund som du visar lösningen slutar uppgiften att vara ett problem. Visa gärna ditt eget produktiva brott, att även du kan fastna och hitta vidare. Eleverna behöver se processen, inte en perfekt räknare.
+  gor:
+    - Ställ frågor och vänta ut tystnaden.
+    - Låt eleverna förklara för varandra.
+    - Lyft fram flera olika lösningar.
+    - Koppla det som fungerade till en strategi med ett namn.
+  undvik:
+    - Att visa lösningen direkt.
+    - Att jaga rätt svar i stället för att tänka.
+    - Att läraren pratar mest hela tiden.
+    - Att godta vaga förklaringar eller ge för kort tid.
+urval:
+  rubrik: Var hittar du problemen?
+  text:
+    - Problemen behöver du inte hitta på själv. De finns i läromedlets problemlösningsavsnitt för åk 4 till 9, i NCM:s Problembank och i Skolverkets problembank på Lärportalen. Ett problem är en uppgift där gruppen inte direkt vet hur den ska lösas (Skolverket). Ett lästal som bara kan lösas på ett sätt är en rutinuppgift, inte ett problem.
+  kravText: "Välj ett problem per pass som är rikt men kontrollerat och uppfyller tre krav:"
+  krav:
+    - rubrik: Matematiskt fokus
+      text: Tydligt innehåll, inte en spretig kluring
+    - rubrik: Textspråklig utmaning
+      text: En läsförståelsedel som går att stötta
+    - rubrik: Representation
+      text: Går att lösa med bild, tabell, tallinje eller material
+progression:
+  text: Ansvaret flyttas gradvis till eleverna. Då blir passen en sammanhängande insats, inte fristående lektioner.
+  rader:
+    - vecka: 1–2
+      fokus: Förstå frågan, reda ut ord och samband, välja representation.
+      roll: Läraren modellerar mycket och tänker högt.
+    - vecka: 3–4
+      fokus: Eleverna föreslår strategier och prövar.
+      roll: Läraren använder diagnosfrågorna och ger kortare stöd.
+    - vecka: 5–6
+      fokus: Eleverna leder delar av processen.
+      roll: Läraren följer upp strategi, lösning och rimlighet.
+    - vecka: 7–8 vid behov
+      fokus: Eleverna använder rutinen i mer ordinarie uppgifter.
+      roll: Läraren följer upp om strategierna överförs till klassens matematikarbete.
+uppfoljning:
+  text: Du behöver veta om passen ger effekt, inte bara att de har genomförts. Gör en enkel före- och efterkoll.
+  rader:
+    - nar: Före insatsen
+      vad: Eleverna löser ett kort lästal enskilt eller i par. Notera om de kan återberätta problemet, välja representation och kontrollera svaret.
+    - nar: Efter fem till åtta veckor
+      vad: Ge ett liknande problem och jämför med startläget.
+mal:
+  punkter:
+    - Återberätta ett lästal med egna ord
+    - Peka ut vad som efterfrågas
+    - Förklara vad talen betyder
+    - Välja en representation
+    - Pröva en strategi
+    - Kontrollera om svaret är rimligt
+snabbmall:
+  text: En halv sida att fylla i före och efter varje pass, särskilt de första två veckorna. Håll det enkelt. Det är regelbundenheten och att komma tillbaka igen nästa dag som gör skillnad.
+  fore:
+    - Problem
+    - Ord och samband att reda ut
+    - Representation
+    - Strategi att lyfta
+  efter:
+    - Kunde eleverna återberätta?
+    - Vad ska repeteras nästa gång?
+checklista:
+  punkter:
+    - Valt ett rikt problem och löst det själv.
+    - Tänkt igenom vilka ord och samband som kan behöva redas ut.
+    - Förutsett elevernas lösningar och var de kan fastna.
+    - Bestämt hur eleverna delas in i par (trio vid ojämnt antal).
+    - Förberett material för representation, till exempel miniwhiteboards eller konkret material.
+    - Förberett någon fråga och vilket stöd jag ska ge.
+    - Tänkt igenom vilka lösningar eller tankesätt jag vill jämföra.
+    - Tänkt igenom hur jag ska avsluta passet.
+grund:
+  text: "Metoden vilar på George Pólyas fyra faser (förstå, planera, genomföra, se tillbaka) och på ett gradvis överlämnande av ansvar enligt GRR-modellen (jag gör, vi gör, ni gör, du gör). Att tänka högt och modellera är hämtat från reciprok undervisning. I steg 4 leder du diskussionen utifrån Smith och Steins fem undervisningspraktiker: förutse, överblicka, välja ut, ordna och koppla ihop elevernas lösningar. När någon fastnar använder du Lithners faser som diagnos. Och eftersom svårigheter i lästal ofta handlar om läsförståelse snarare än räkning (IES/WWC), stannar du genomgående vid ord, samband och vad talen betyder."
+  kallor: Bygger på Pólya (1945), Lithner, Hagland, Hedrén och Taflin (2005), Smith och Stein (2014), Skolverkets modul Problemlösning på Lärportalen samt IES/WWC:s practice guides Improving Mathematical Problem Solving in Grades 4–8 och Assisting Students Struggling with Mathematics.
