@@ -2,22 +2,52 @@
 import Base from '../../layouts/Base.astro';
 import Taggar from '../../components/Taggar.astro';
 import { site } from '../../data/site';
-import { metoderSorterade } from '../../lib/innehall';
+import { metoderSorterade, taggLabel } from '../../lib/innehall';
 const metoder = await metoderSorterade();
+// Bara taggar som någon metod använder, i bokstavsordning efter etiketten läsaren ser.
+const taggarIBruk = [...new Set(metoder.flatMap((m) => m.data.taggar))].sort((a, b) => taggLabel(a).localeCompare(taggLabel(b), 'sv'));
 ---
 
 <Base title="Stödundervisning" description="Metodbank för stödundervisning i matematik, läsning och skrivning, F-3 till 7-9.">
   <h1>Stödundervisning</h1>
-  <p class="text">Konkreta metoder att använda direkt. Varje metod har ett område, minst en årskursnivå och taggar för vad den tränar. Filtrering byggs ut när biblioteket växer.</p>
+  <p class="text">Konkreta metoder att använda direkt. Varje metod har ett område, minst en årskursnivå och taggar för vad den tränar.</p>
+
+  {metoder.length > 0 && (
+    <form class="filter" id="filter" aria-label="Filtrera metoder" hidden>
+      <fieldset>
+        <legend>Område</legend>
+        <div class="val">
+          <label><input type="radio" name="omrade" value="" checked /> Alla</label>
+          {site.omraden.map((o) => <label><input type="radio" name="omrade" value={o} /> {o}</label>)}
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Årskurs</legend>
+        <div class="val">
+          <label><input type="radio" name="arskurs" value="" checked /> Alla</label>
+          {site.arskurser.map((a) => <label><input type="radio" name="arskurs" value={a} /> {a}</label>)}
+        </div>
+      </fieldset>
+      <div class="tagg-val">
+        <label for="filter-tagg">Tränar</label>
+        <select id="filter-tagg" name="tagg">
+          <option value="">Allt</option>
+          {taggarIBruk.map((t) => <option value={t}>{taggLabel(t)}</option>)}
+        </select>
+      </div>
+      <p class="meta" aria-live="polite" data-antal>{metoder.length === 1 ? '1 metod' : `${metoder.length} metoder`}</p>
+    </form>
+  )}
+
   {site.omraden.map((omrade) => {
     const lista = metoder.filter((m) => m.data.omrade === omrade);
     return (
-      <section>
+      <section data-omrade-sektion={omrade}>
         <h2>{omrade}</h2>
         {lista.length === 0 && <p class="meta">Inga metoder ännu.</p>}
         <div class="rutnat">
           {lista.map((m) => (
-            <a class="kort" href={`/stodundervisning/${m.id}`}>
+            <a class="kort" href={`/stodundervisning/${m.id}`} data-metod data-omrade={m.data.omrade} data-arskurs={m.data.arskurs.join(' ')} data-taggar={m.data.taggar.join(' ')}>
               <h3>{m.data.titel}</h3>
               <p>{m.data.ingress}</p>
               <Taggar taggar={m.data.taggar} nivaer={m.data.arskurs} />
@@ -28,3 +58,49 @@ const metoder = await metoderSorterade();
     );
   })}
 </Base>
+
+<script>
+  // Filtrering utan ramverk. Utan JavaScript visas alla metoder och formuläret förblir dolt.
+  // Valet speglas i adressen (?omrade=Läsning&arskurs=F-3&tagg=lasflyt) så att en filtrerad vy går att länka.
+  const form = document.getElementById('filter') as HTMLFormElement | null;
+  if (form) {
+    form.hidden = false;
+    const kort = Array.from(document.querySelectorAll<HTMLElement>('[data-metod]'));
+    const sektioner = Array.from(document.querySelectorAll<HTMLElement>('[data-omrade-sektion]'));
+    const antal = form.querySelector('[data-antal]') as HTMLElement;
+    const namn = ['omrade', 'arskurs', 'tagg'] as const;
+
+    const parametrar = new URLSearchParams(location.search);
+    for (const n of namn) {
+      const v = parametrar.get(n);
+      const falt = form.elements.namedItem(n) as RadioNodeList | HTMLSelectElement | null;
+      if (v && falt) falt.value = v;
+    }
+
+    function filtrera() {
+      const data = new FormData(form!);
+      const val = Object.fromEntries(namn.map((n) => [n, String(data.get(n) ?? '')]));
+      const aktiv = namn.some((n) => val[n]);
+      let synliga = 0;
+      for (const k of kort) {
+        const passar =
+          (!val.omrade || k.dataset.omrade === val.omrade) &&
+          (!val.arskurs || (k.dataset.arskurs ?? '').split(' ').includes(val.arskurs)) &&
+          (!val.tagg || (k.dataset.taggar ?? '').split(' ').includes(val.tagg));
+        k.hidden = !passar;
+        if (passar) synliga++;
+      }
+      for (const s of sektioner) {
+        s.hidden = aktiv && !Array.from(s.querySelectorAll<HTMLElement>('[data-metod]')).some((k) => !k.hidden);
+      }
+      antal.textContent = synliga === 1 ? '1 metod' : `${synliga} metoder`;
+      const q = new URLSearchParams();
+      for (const n of namn) if (val[n]) q.set(n, val[n]);
+      const frageDel = q.toString();
+      history.replaceState(null, '', frageDel ? `?${frageDel}` : location.pathname);
+    }
+
+    form.addEventListener('change', filtrera);
+    filtrera();
+  }
+</script>
