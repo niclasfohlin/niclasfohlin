@@ -36,7 +36,9 @@ Astro 7 är strikt med HTML. Stäng alla taggar. Lägg inte block-element i `<p>
 
 ## Drift
 
-Claude Code sköter driften direkt från riggen. Verktygen ligger i `%APPDATA%\npm`: `netlify` (Netlify CLI) och `gh` (GitHub CLI, installerad utan administratörsrättigheter i `%LOCALAPPDATA%\Programs\gh` och kopierad dit). Netlify nås med `netlify`, GitHub med `gh`, Brevo med API-nyckeln i Netlifys miljövariabler, och domänens DNS enligt det som står i UPPSTART.md.
+Claude Code sköter driften direkt från riggen. Verktygen ligger i `%APPDATA%\npm`: `netlify` (Netlify CLI) och `gh` (GitHub CLI, installerad utan administratörsrättigheter i `%LOCALAPPDATA%\Programs\gh` och kopierad dit). Netlify nås med `netlify`, GitHub med `gh`, Brevo med API-nyckeln i Netlifys miljövariabler, och domänens DNS hos Loopia med `python scripts/loopia.py` (LoopiaAPI; API-användaren ligger som `LOOPIA_USER` och `LOOPIA_PASSWORD` i `.claude/settings.local.json`).
+
+Sajten heter niclasfohlin på Netlify (id 8af49398-3862-4b58-84a6-88f68d0064c1, team niclas-fohlin) och bygger main i repot github.com/niclasfohlin/niclasfohlin via deploy key och webhook. Domänen niclasfohlin.se pekar med A-post på Netlifys lastbalanserare och www med CNAME på niclasfohlin.netlify.app, båda satta i Loopias DNS. Miljövariabeln `NETLIFY_AUTH_TOKEN` ska inte vara satt i skalet: den skuggar CLI:ts sparade inloggning.
 
 Inloggningarna ligger utanför repot: Netlify CLI i `%APPDATA%\netlify\Config\config.json` (efter `netlify login`) eller som miljövariabeln `NETLIFY_AUTH_TOKEN` på användarens konto, GitHub CLI i `%APPDATA%\GitHub CLI\hosts.yml` (efter `gh auth login`). Hemligheter ligger aldrig i git: `.env`, `.claude/settings.local.json` och `.netlify/` ignoreras, och produktionens värden sätts med `netlify env:set` och läses av `netlify dev`.
 
