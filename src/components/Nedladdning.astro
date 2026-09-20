@@ -1,19 +1,23 @@
 ---
-// Nedladdningsrutan på metodsidan: hela metoden och mallarna som Word-filer, och sidan som utskrift.
-// Filerna byggs vid bygget av src/pages/stodundervisning/[id].docx.ts och [id]-mallar.docx.ts.
+// Nedladdningsrutan på metodsidan. Orden ska stämma med innehållet: "Allt om metoden" är
+// beskrivningen, planeringsmallarna och lathunden i en Word-fil; de andra två filerna är delar av den.
+// Filerna byggs vid bygget av src/pages/stodundervisning/[id].docx.ts, [id]-mallar.docx.ts och [id]-lathund.docx.ts.
 interface Props { id: string; harMallar: boolean; harLathund: boolean }
 const { id, harMallar, harLathund } = Astro.props;
+const delar = ['metodbeskrivningen', harMallar && 'planeringsmallarna', harLathund && 'lathunden'].filter(Boolean) as string[];
+const delarText = delar.length > 1 ? `${delar.slice(0, -1).join(', ')} och ${delar[delar.length - 1]}` : delar[0];
 ---
 <aside class="nedladdning" aria-labelledby={`nedladdning-${id}`}>
   <h2 id={`nedladdning-${id}`}>Ladda ner och skriv ut</h2>
-  <p>{harLathund && 'Lathunden på fyra sidor, '}metodbeskrivningen som Word-fil{harMallar && ', mallarna för sig'}, eller sidan som utskrift. Alla filer bär © Niclas Fohlin och niclasfohlin.se.</p>
+  {harLathund && <p>Lathunden är fyra sidor att ha bredvid sig under passet, med egen utskrift i liggande A4.</p>}
   <ul class="nedladdning-lista">
-    {harLathund && <li><a class="knapp" href={`/stodundervisning/${id}/lathund`}>Lathund: fyra sidor inför passet</a></li>}
-    <li><a class={harLathund ? 'knapp sekundar' : 'knapp'} href={`/stodundervisning/${id}.docx`} download={`${id}.docx`}>Hela metoden (docx)</a></li>
-    {harMallar && <li><a class="knapp sekundar" href={`/stodundervisning/${id}-mallar.docx`} download={`${id}-mallar.docx`}>Mallar för planering (docx)</a></li>}
-    <li class="skriv-ut"><button type="button" class="knapp sekundar" data-skriv-ut>Skriv ut hela metodbeskrivningen</button></li>
+    {harLathund && <li><a class="knapp" href={`/stodundervisning/${id}/lathund`}>Öppna lathunden</a></li>}
+    <li><a class={harLathund ? 'knapp sekundar' : 'knapp'} href={`/stodundervisning/${id}.docx`} download={`${id}.docx`}>Allt om metoden (docx)</a></li>
+    {harLathund && <li><a class="knapp sekundar" href={`/stodundervisning/${id}-lathund.docx`} download={`${id}-lathund.docx`}>Bara lathunden (docx)</a></li>}
+    {harMallar && <li><a class="knapp sekundar" href={`/stodundervisning/${id}-mallar.docx`} download={`${id}-mallar.docx`}>Bara planeringsmallarna (docx)</a></li>}
+    <li class="skriv-ut"><button type="button" class="knapp sekundar" data-skriv-ut>Skriv ut den här sidan</button></li>
   </ul>
-  <p class="meta">{harLathund && 'Lathunden: metoden i korthet, ett pass steg för steg, mallen och vad du behöver, för skärm och liggande A4. '}{harMallar && 'Mallarna för planering: snabbmall för passet, checklista inför passet och målkoll före och efter. '}Vill du ha flera metoder i en fil: välj dem i <a href="/stodundervisning">metodbanken</a>.</p>
+  <p class="meta">Word-filen Allt om metoden innehåller {delarText}.{harMallar && ' Planeringsmallarna är snabbmallen för passet, checklistan inför passet och målkollen före och efter.'} Alla filer bär © Niclas Fohlin och niclasfohlin.se. Vill du ha flera metoder i en fil: välj dem i <a href="/stodundervisning">metodbanken</a>.</p>
 </aside>
 
 <script>

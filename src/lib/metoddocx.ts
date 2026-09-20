@@ -1,4 +1,4 @@
-// Bygger Word-filer ur metodernas data: hela metoden, mallarna, och flera metoder i en fil.
+// Bygger Word-filer ur metodernas data: allt om metoden (beskrivning, planeringsmallar, lathund), delarna för sig, och flera metoder i en fil.
 // Körs både i bygget (src/pages/stodundervisning/*.docx.ts) och i webbläsaren när läsaren
 // laddar ner valda metoder från /stodundervisning. Därför inga Node-beroenden här.
 // Designelementen är samma som på sidan (src/components/Metod.astro): rutor, tabeller med
@@ -635,7 +635,7 @@ function dokument(titel: string, sektioner: ISectionOptions[]): Document {
   });
 }
 
-// En eller flera metoder i en fil, med mallarna efter varje metod om medMallar är satt.
+// En eller flera metoder i en fil, med planeringsmallarna och lathunden efter varje metod om medMallar är satt.
 export function metodDokument(poster: MetodPost[], o: { bas: string; medMallar?: boolean }): Document {
   instans = 0;
   const sektioner: ISectionOptions[] = [];
@@ -646,7 +646,7 @@ export function metodDokument(poster: MetodPost[], o: { bas: string; medMallar?:
     const bredder = [4600, 2000, BREDD - 6600];
     sektioner.push(sektion([
       new Paragraph({ children: [run('Metoder för stödundervisning')], heading: HeadingLevel.HEADING_1, spacing: { before: 0, after: 60 } }),
-      stycke(`${poster.length} metoder från ${SAJT}, hämtade ${datumText(new Date())}. Varje metod börjar på en ny sida.`, { farg: FARG.svag, efter: 240 }),
+      stycke(`${poster.length} metoder från ${SAJT}, hämtade ${datumText(new Date())}. Varje metod börjar på en ny sida${o.medMallar ? ', och efter varje metod följer planeringsmallarna och lathunden' : ''}.`, { farg: FARG.svag, efter: 240 }),
       ...rubrikTabell(['Metod', 'Område', 'Årskurs'], poster.map((p) => [p.data.titel, p.data.omrade, arskursSpann(p.data.arskurs)]), bredder),
       stycke(`${UPPHOV}. Metoderna får användas i undervisning. Ange ${SAJT} som källa när de sprids vidare.`, { farg: FARG.svag, storlek: 18, fore: 200 }),
     ], `Stödundervisning · ${SAJT}`, `${SAJT}/stodundervisning`));

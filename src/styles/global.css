@@ -496,7 +496,14 @@ html.js .bara-js { display: inline-block; }
   .m-band { grid-template-columns: 1fr; }
   .m-band > div { border-left: 0; border-top: 1px solid var(--farg-kant); }
   .m-band > div:first-child { border-top: 0; }
-  html.js .samla { grid-template-columns: 1fr; gap: 0.6rem; }
+  /* Urvalsraden på mobil: låg och utan hjälptext. Antalet på en rad, kryssrutan bredvid knappen på nästa. */
+  html.js .samla { grid-template-columns: 1fr auto; gap: 0.35rem 0.75rem; align-items: center; padding: 0.55rem 0.9rem 0.6rem; font-size: 0.85rem; bottom: 0.5rem; }
+  .samla-antal { grid-column: 1 / -1; font-size: 0.85rem; }
+  .samla-mallar { font-size: 0.85rem; }
+  .samla-knappar { justify-self: end; }
+  .samla button.knapp { font-size: 0.85rem; padding: 0.45rem 0.8rem; }
+  .samla .samla-hjalp { display: none; }
+  .samla [data-status] { font-size: 0.85rem; }
   .metod-modell { font-size: 1rem; }
   .m-tabell, .m-snabbmall { font-size: 0.9rem; }
   .m-tabell th, .m-tabell td { padding: 0.45rem 0.5rem; }

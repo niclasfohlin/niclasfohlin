@@ -4,7 +4,7 @@ import { metoderSorterade } from '../../lib/innehall';
 import { metodDokument, DOCX_TYP } from '../../lib/metoddocx';
 import { site } from '../../data/site';
 
-// /stodundervisning/alla-metoder.docx: alla publicerade metoder med mallar i en fil.
+// /stodundervisning/alla-metoder.docx: allt om alla publicerade metoder i en fil.
 // Reservväg för den som inte kan välja metoder med JavaScript på /stodundervisning.
 export const GET: APIRoute = async () => {
   const metoder = await metoderSorterade();

@@ -73,7 +73,7 @@ async function provaDocx(fil, namn) {
   dubbla.length === 0 ? ok(`${namn}: en definition per rubrikstil`) : nej(`${namn}: dubbla stilar ${dubbla.join(', ')}`);
   console.log(`       ${(statSync(fil).size / 1024).toFixed(1)} kB`);
 }
-await provaDocx(join(dist, `${id}.docx`), 'hela metoden (docx)');
+await provaDocx(join(dist, `${id}.docx`), 'allt om metoden (docx)');
 await provaDocx(join(dist, `${id}-mallar.docx`), 'mallarna (docx)');
 if (metod.lathund) {
   const lathund = join(dist, id, 'lathund', 'index.html');
