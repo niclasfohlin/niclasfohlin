@@ -8,7 +8,7 @@ Main är det som ligger ute. Allt arbete sker på en gren: `innehall/<slug>` fö
 
 Före varje commit: `npm run validera`. Det kör registerkontrollen, `astro check` och `astro build`. Går det inte igenom committas inget.
 
-Push, sammanslagning till main och deploy är Niclas beslut. När arbetet är klart: beskriv vad som gjorts, vilken gren det ligger på och exakt vilka kommandon han kör för att granska och slå ihop.
+När arbetet är klart och `npm run validera` är grönt slår du själv ihop grenen till main och pushar. Netlify bygger och deployar varje push till main. Kontrollera att bygget blev grönt (`netlify api listSiteDeploys --data '{"site_id":"<id>"}'` visar det senaste) och beskriv sedan för Niclas vad som gjorts och var det syns. Blev bygget rött: laga eller backa, och skriv vad som hände.
 
 ## Innan du börjar en uppgift
 
@@ -34,13 +34,17 @@ KONCEPT.md beskriver målet. Utveckla iterativt: en sak i taget, testa i `npm ru
 
 Astro 7 är strikt med HTML. Stäng alla taggar. Lägg inte block-element i `<p>`. Skriv `{" "}` där mellanrum mellan inline-element behövs.
 
-## Drift och hemligheter
+## Drift
 
-Läs aldrig `.env`. Be aldrig om värdet på en nyckel. Niclas sätter hemligheter med `netlify env:set` i sin egen terminal; du verifierar med `netlify env:list` att namnet finns. Kör aldrig interaktiva inloggningar (`gh auth login`, `netlify login`, `netlify init`); de hänger i din terminal. Skriv i stället exakt vad Niclas ska köra och verifiera efteråt.
+Claude Code sköter driften direkt från riggen. Verktygen ligger i `%APPDATA%\npm`: `netlify` (Netlify CLI) och `gh` (GitHub CLI, installerad utan administratörsrättigheter i `%LOCALAPPDATA%\Programs\gh` och kopierad dit). Netlify nås med `netlify`, GitHub med `gh`, Brevo med API-nyckeln i Netlifys miljövariabler, och domänens DNS enligt det som står i UPPSTART.md.
+
+Inloggningarna ligger utanför repot: Netlify CLI i `%APPDATA%\netlify\Config\config.json` (efter `netlify login`) eller som miljövariabeln `NETLIFY_AUTH_TOKEN` på användarens konto, GitHub CLI i `%APPDATA%\GitHub CLI\hosts.yml` (efter `gh auth login`). Hemligheter ligger aldrig i git: `.env`, `.claude/settings.local.json` och `.netlify/` ignoreras, och produktionens värden sätts med `netlify env:set` och läses av `netlify dev`.
+
+En inloggning som kräver webbläsaren (`gh auth login`, `netlify login`) startas i bakgrunden så att koden som ska klistras in syns i utdatan, och Niclas gör klickandet enligt INSTRUKTIONER.docx. Fastnar ett steg på att en människa måste göra det: skriv steget i INSTRUKTIONER.docx och NATTEN.md och gå vidare med nästa sak.
 
 ## Nattkörning
 
-`/natt` arbetar igenom den körbara kön på en egen gren, en post i taget genom `starta` och `klar`, och skriver rapporten till `../niclasfohlin-nattlogg.md` utanför repot. Filen skrivs över varje gång. Under natten tar Claude Code egna beslut i allt utom det som kräver Niclas: push, deploy, hemligheter, utskick, personfakta och rättigheter. Sådant blockeras i kön med en rad om vad som behövs.
+`/natt` arbetar igenom den körbara kön på en egen gren, en post i taget genom `starta` och `klar`, slår ihop grenen till main och pushar när valideringen är grön, och skriver rapporten till `NATTEN.md` i repots rot. Git ignorerar filen, och den skrivs över varje gång. Under natten tar Claude Code egna beslut i allt utom det som kräver Niclas: utskick, personfakta, rättigheter och inloggningar som kräver webbläsaren. Sådant blockeras i kön med en rad om vad som behövs, och steget skrivs in i INSTRUKTIONER.docx.
 
 ## Texterna
 

@@ -2,7 +2,7 @@
 
 Du förvaltar Niclas Fohlins författar- och kunskapssajt. Sajten ska vara snabb, sober och redaktionellt trovärdig. Läsbarhet före effekter. Ingen generisk AI-design.
 
-Det viktigaste först: allt arbete sker på grenar, `npm run validera` går igenom före varje commit, taggar och publikationer tas från registren i `src/data/`, och du pushar, deployar, sätter hemligheter eller skickar utskick bara när Niclas säger till.
+Det viktigaste först: allt arbete sker på grenar, `npm run validera` går igenom före varje commit, taggar och publikationer tas från registren i `src/data/`, och du slår ihop, pushar och deployar själv när valideringen är grön. Utskick skickas bara när Niclas säger skicka.
 
 Arbete som inte är ett direkt svar på Niclas går genom kön: `node scripts/ko.mjs lista`, `starta`, `klar`. Ett fel du hittar i förbifarten läggs i kön med `lagg`, det lagas inte i samma commit. Hur kön fungerar står i ARBETSSATT.md.
 
@@ -49,9 +49,9 @@ Tagg-id skrivs med a-z, 0-9 och bindestreck. Läsaren ser label.
 
 ## Prenumeration och utskick
 
-Formuläret på /prenumerera anropar `netlify/functions/prenumerera.mjs`, som lägger till kontakten i Brevo med dubbel opt-in. Utan miljövariabler svarar funktionen 503 och hänvisar till RSS. Miljövariablerna sätter Niclas själv i Netlify. Du läser aldrig `.env` och ber aldrig om nyckelvärden.
+Formuläret på /prenumerera anropar `netlify/functions/prenumerera.mjs`, som lägger till kontakten i Brevo med dubbel opt-in. Utan miljövariabler svarar funktionen 503 och hänvisar till RSS. Miljövariablerna sätter du i Netlify med `netlify env:set`. Hemligheter ligger aldrig i git; var de förvaras står i ARBETSSATT.md.
 
-`/utskick` skriver ett utkast till `utskick/`. Ingenting skickas av dig. Massutskick gör Niclas i Brevo efter genomläsning.
+`/utskick` skriver ett utkast till `utskick/` och kan lägga upp det som kampanj i Brevo. Det skickas först när Niclas läst utkastet och sagt skicka.
 
 ## Kvalitet
 
@@ -62,11 +62,13 @@ Formuläret på /prenumerera anropar `netlify/functions/prenumerera.mjs`, som l�
 5. Varje sida har unik title och description. Canonical, Open Graph, sitemap och RSS finns i Base.astro och ska vara kvar.
 6. Designsystemet ligger i `src/styles/global.css` som variabler. Bygg vidare där i stället för att sprida färger och mått i komponenter.
 
+## Mandat
+
+Niclas gav 2026-09-19 Claude Code fullt mandat att sköta sajten och tjänsterna runt den: GitHub, Netlify, Brevo, domänen och koden. Du slår ihop till main, pushar, deployar, sätter miljövariabler, lägger till taggar och publikationer och löser driftproblem utan att fråga, så länge `npm run validera` är grönt. Beslut Niclas ska känna till skrivs i NATTEN.md eller i svaret, efteråt. Verktygen och var inloggningarna ligger står i ARBETSSATT.md under Drift.
+
 ## Det här gör bara Niclas
 
-1. Pushar till GitHub och slår ihop till main. Det är deployen.
-2. Kör `netlify deploy`.
-3. Sätter och ändrar hemligheter (`netlify env:set`).
-4. Skickar utskick.
-5. Skriver fakta om sig själv på /om. Du frågar efter underlag, du hittar inte på.
-6. Bestämmer när en ny publikation eller en ny tagg får läggas till om du är osäker.
+1. Skapar konton och loggar in där en människa måste klicka i webbläsaren. Vad han ska göra, steg för steg, står i INSTRUKTIONER.docx.
+2. Säger skicka innan ett massutskick går ut.
+3. Lämnar fakta om sig själv och sina böcker. Du frågar efter underlag, du hittar inte på.
+4. Säger per publikation om hela texten får ligga på sajten.

@@ -6,15 +6,15 @@ Målet: koden ligger på GitHub, Netlify bygger varje push till main, niclasfohl
 
 | Steg | Niclas | Claude Code |
 |---|---|---|
-| Installera Node, Git, GitHub CLI, Netlify CLI | Kör installationerna | Kontrollerar versioner, säger vad som saknas |
-| Logga in i GitHub och Netlify | Kör `gh auth login` och `netlify login` i egen terminal | Verifierar med `gh auth status` och `netlify status` |
-| Skapa repo och första push | Godkänner | Skapar repot med `gh repo create` och pushar |
-| Koppla Netlify till repot | Kör `netlify init` och svarar på frågorna | Verifierar med `netlify status`, kontrollerar netlify.toml |
-| Domän | Lägger till domänen i Netlify och pekar DNS | Kontrollerar att sajten svarar på domänen |
-| Brevo | Skapar konto, lista, mall och API-nyckel; sätter miljövariabler | Verifierar att namnen finns, testar formuläret med `netlify dev` |
-| Löpande innehåll och utveckling | Granskar, slår ihop till main | Allt annat |
+| Installera Node, Git, GitHub CLI, Netlify CLI | Ingenting | Installerar och kontrollerar versioner |
+| Logga in i GitHub och Netlify | Klickar i webbläsaren när inloggningen startats | Startar `gh auth login` och `netlify login` i bakgrunden, verifierar med `gh auth status` och `netlify status` |
+| Skapa repo och första push | Ingenting | `gh repo create` och push |
+| Koppla Netlify till repot | Ingenting | Skapar sajten, länkar repot och kontrollerar bygget |
+| Domän | Säger om domänen har e-post hos Loopia, och byter namnservrar eller lägger DNS-poster om Claude Code saknar API-åtkomst | Lägger till domänen i Netlify och kontrollerar HTTPS |
+| Brevo | Skapar kontot och API-nyckeln | Skapar lista och mall, sätter miljövariabler, testar formuläret |
+| Löpande innehåll och utveckling | Läser NATTEN.md och säger till när något ska ändras | Allt annat, inklusive sammanslagning, push och deploy |
 
-Hemligheter passerar aldrig chatten. Claude Code läser inte `.env`, kör inte `netlify env:set` och ber inte om nyckelvärden.
+Niclas gav 2026-09-19 Claude Code fullt mandat att sköta tjänsterna. Det som ändå kräver Niclas är konton och inloggningar där en människa måste klicka, och de stegen står i INSTRUKTIONER.docx. Lösenord lämnas aldrig till Claude Code; nycklar och token som Niclas skapar för riggen får däremot ligga i lokala, git-ignorerade filer.
 
 ## Steg 1: verktyg
 
@@ -29,15 +29,17 @@ Node 22.12 eller senare krävs. Kontrollera med `node -v`.
 
 Starta om terminalen efter installation så att sökvägarna hittas. Claude Code på Windows behöver Git for Windows för att hooks ska fungera.
 
+På Niclas dator (2026-09-20): Node 24.19, Git 2.55, Netlify CLI 27.8 i `%APPDATA%\npm`, och GitHub CLI 2.101 installerad utan administratörsrättigheter i `%LOCALAPPDATA%\Programs\gh\bin` och kopierad till `%APPDATA%\npm\gh.exe` så att `gh` hittas på samma sökväg som `netlify`.
+
 ## Steg 2: lokalt
 
 I projektmappen: `npm install` och sedan `npm run dev`. Sajten svarar på adressen Astro visar, oftast http://localhost:4321. `npm run validera` ska gå igenom utan fel innan något annat görs.
 
 ## Steg 3: GitHub
 
-Niclas kör `gh auth login` i sin terminal och väljer GitHub.com, HTTPS och inloggning via webbläsare. Claude Code verifierar med `gh auth status`.
+Claude Code startar `gh auth login -h github.com -p https -w` i bakgrunden. Utdatan visar en engångskod. Niclas öppnar https://github.com/login/device, klistrar in koden och godkänner. Inloggningen sparas i `%APPDATA%\GitHub CLI\hosts.yml`. Claude Code verifierar med `gh auth status` och kör `gh auth setup-git` så att git pushar med samma inloggning.
 
-Sedan skapar Claude Code repot och pushar (Niclas godkänner varje kommando):
+Sedan skapar Claude Code repot och pushar:
 
 ```
 git init -b main
@@ -50,11 +52,11 @@ Repot är privat. Innehållet är publikt på sajten ändå, men repot behöver 
 
 ## Steg 4: Netlify
 
-Niclas kör `netlify login` och sedan `netlify init` i projektmappen. Välj "Create & configure a new site", välj team, ge sajten namnet niclasfohlin. Netlify läser byggkommando och publiceringsmapp från netlify.toml. Netlify ber om att få koppla GitHub-kontot; godkänn åtkomst till repot niclasfohlin-site.
+Inloggning på ett av två sätt. Antingen startar Claude Code `netlify login` i bakgrunden och Niclas godkänner i webbläsaren, så sparas inloggningen i `%APPDATA%\netlify\Config\config.json`. Eller så skapar Niclas en personal access token under User settings, Applications i Netlify, och Claude Code lägger den som miljövariabeln `NETLIFY_AUTH_TOKEN` i `.claude/settings.local.json` (git-ignorerad) och på användarkontot med `setx`.
 
-Efter det bygger Netlify automatiskt varje push till main. Grenar som pushas får en förhandsvisning på egen adress. Claude Code verifierar med `netlify status` och `netlify open:site`.
+Sedan skapar Claude Code sajten (`netlify sites:create --name niclasfohlin`), länkar mappen (`netlify link`) och kopplar repot så att Netlify bygger varje push till main. Kopplingen till GitHub kräver att Netlifys GitHub-app får åtkomst till repot; det klicket gör Niclas i Netlify under Site configuration, Build & deploy, Continuous deployment, om Claude Code inte kan sätta upp deploy key och webhook via API. Tills kopplingen finns deployar Claude Code med `netlify deploy --prod --build`.
 
-Claude Code deployar aldrig med `netlify deploy`. Deploy är en push till main, och den gör Niclas.
+Grenar som pushas får en förhandsvisning på egen adress. Claude Code verifierar med `netlify status` och kontrollerar det senaste bygget med `netlify api listSiteDeploys`.
 
 ## Steg 5: domän
 
@@ -71,36 +73,30 @@ HTTPS-certifikat utfärdas automatiskt när DNS pekar rätt, vanligtvis inom en 
 
 Formuläret på /prenumerera fungerar utan Brevo men svarar då att prenumerationen inte är påslagen och hänvisar till RSS. För att slå på:
 
-1. Skapa konto på brevo.com.
-2. Contacts, Lists: skapa listan "Prenumeranter". Notera list-id (ett tal).
-3. Campaigns, Templates: skapa en mall för dubbel opt-in med en bekräftelselänk. Notera mall-id. Brevo har färdiga DOI-mallar att utgå från.
-4. SMTP & API, API keys: skapa en nyckel för sajten.
-5. I projektmappen, i egen terminal:
+1. Niclas skapar konto på brevo.com med niclas.fohlin@gmail.com och bekräftar e-postadressen.
+2. Niclas skapar en API-nyckel under SMTP & API, API keys, och lägger den i filen `.env` i projektmappen som `BREVO_API_KEY=...` (git ignorerar filen).
+3. Claude Code skapar listan Prenumeranter och mallen för dubbel opt-in via Brevos API, sätter `BREVO_API_KEY`, `BREVO_LIST_ID`, `BREVO_DOI_TEMPLATE_ID` och `SITE_URL` i Netlify med `netlify env:set`, och testar formuläret med `netlify dev`.
+4. Avsändaren måste vara verifierad i Brevo. Enklast är att verifiera niclas.fohlin@gmail.com (Brevo mejlar en länk som Niclas klickar). Domänen niclasfohlin.se kan verifieras senare med DNS-poster.
 
-```
-netlify env:set BREVO_API_KEY "nyckeln"
-netlify env:set BREVO_LIST_ID "3"
-netlify env:set BREVO_DOI_TEMPLATE_ID "7"
-netlify env:set SITE_URL "https://niclasfohlin.se"
-```
+Funktionens anrop mot Brevo verifieras mot Brevos aktuella API-dokumentation första gången den testas skarpt.
 
-Claude Code verifierar med `netlify env:list` att namnen finns och testar formuläret lokalt med `netlify dev`, som hämtar variablerna från Netlify. Funktionens anrop mot Brevo ska verifieras mot Brevos aktuella API-dokumentation första gången den testas skarpt.
-
-Utskick sker som kampanj i Brevo. `/utskick` skriver utkastet, Niclas skickar.
+Utskick sker som kampanj i Brevo. `/utskick` skriver utkastet och kan lägga upp kampanjen; den skickas när Niclas läst och sagt skicka.
 
 ## Steg 7: Claude Codes behörigheter
 
-`.claude/settings.json` ligger i repot och gäller alla som öppnar mappen i Claude Code.
+`.claude/settings.json` ligger i repot och gäller alla som öppnar mappen i Claude Code. Claude Code får inte ändra sina egna behörigheter (appen stoppar det som självmodifiering), så den filen redigerar Niclas. Målet är:
 
 | Nivå | Vad | Varför |
 |---|---|---|
-| Tillåtet utan fråga | npm, node, astro, git utom push, gh för läsning, netlify för läsning och lokal körning, filläsning och redigering, webbhämtning | Vardagsarbetet ska flyta |
-| Frågar först | git push, git reset, git rebase, gh repo create, netlify deploy, netlify env:set, rm | Sådant som ändrar det som ligger ute eller inte går att ångra |
-| Stoppat | Läsa .env, rm -rf, git push --force | Hemligheter och oåterkalleliga kommandon |
+| Tillåtet utan fråga | node, npm, npx, git, gh, netlify, curl, powershell, setx, winget, filkommandon, filläsning och redigering, webbhämtning | Riggen ska kunna sköta tjänsterna själv |
+| Frågar först | gh repo delete, netlify sites:delete | Går inte att ångra |
+| Stoppat | rm -rf, git push --force | Oåterkalleliga kommandon |
+
+Appens permission-läge avgör också vad som går. I läget Auto bedömer en klassificerare varje kommando och stoppar allt som liknar hantering av hemligheter, deploy eller ändring av egna behörigheter, oavsett vad settings.json säger. Ska Claude Code sköta driften behöver sessionen köras i läget som inte frågar (bypassPermissions). Claude Code kan begära bytet själv; Niclas godkänner det på kortet som visas.
 
 Tre hooks körs automatiskt: efter kompaktering läses ARBETSSATT.md, STIL.md och KO.md in igen; commit på main stoppas; när en innehållsfil sparas kontrolleras taggar och publikation direkt.
 
-Personliga avvikelser läggs i `.claude/settings.local.json`, som git ignorerar.
+Personliga avvikelser och lokala token läggs i `.claude/settings.local.json`, som git ignorerar.
 
 ## Checklista
 

@@ -24,7 +24,8 @@
 //   betyder att bara arbetssättet är drabbat: det blir prio 3. Så växer inte kön av småfynd.
 //   Medan en post pågår kräver lagg antingen --ur <den posten> eller --utanfor. klar vägrar när
 //   fler än två nya poster bär [UR <id>]: så många betyder att roten inte hittades.
-//   klar kör npm run validera och kräver att allt är committat på postens gren. Niclas slår ihop.
+//   klar kör npm run validera och kräver att allt är committat på postens gren. Sedan slås grenen
+//   ihop till main och pushas; Netlify bygger.
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, mkdtempSync, rmSync, copyFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
@@ -302,7 +303,7 @@ if (kmd === 'klar') {
     valideraUt = ((r.stdout || '') + (r.stderr || '')).trim();
     prova('validera', r.status === 0, 'npm run validera är rött:\n' + valideraUt.split('\n').slice(-12).join('\n'));
   }
-  if (/\b(push|deploy|env:set|utskick|skicka)/i.test(String(atgard))) console.log('Obs: åtgärden nämner push, deploy, hemligheter eller utskick. Det gör bara Niclas; klar ändrar inte det.');
+  if (/\b(utskick|skicka)/i.test(String(atgard))) console.log('Obs: åtgärden nämner utskick. Ett massutskick går ut först när Niclas sagt skicka.');
 
   if (stopp.length) {
     console.error(`${id} är INTE klar. ${stopp.length} grind(ar) stänger:\n  ${stopp.join('\n  ')}\nGrindarna finns för att en ändring som bryter sajten annars går in tyst. Forcera bara med --anda <grind> --skal "<varför>".`);
@@ -314,7 +315,7 @@ if (kmd === 'klar') {
   bokfor(ko);
   const gren = inneIGit ? grenNu() : '';
   console.log(`${id} är klar.${forcerat.length ? ' FORCERAT förbi ' + forcerat.map((f) => f.split(':')[0]).join(', ') + '; det står kvar i åtgärden.' : ''}`);
-  if (gren) console.log(`Niclas granskar och slår ihop:\n  git log main..${gren} --oneline\n  git diff main..${gren} --stat\n  git switch main && git merge ${gren} && git push`);
+  if (gren) console.log(`Slå ihop och pusha, så bygger Netlify:\n  git log main..${gren} --oneline\n  git switch main && git merge ${gren} && git push`);
   process.exit(0);
 }
 

@@ -12,13 +12,15 @@ export async function getStaticPaths() {
 
 const { a } = Astro.props;
 const { Content } = await render(a);
+// "A, B och C" i stället för "A och B och C" när flera medförfattare står på texten.
+const medforfattare = new Intl.ListFormat('sv', { type: 'conjunction' }).format(a.data.medforfattare);
 ---
 
 <Base title={a.data.titel} description={a.data.ingress} typ="article">
   <article class="text">
     <p class="meta">
       {formateraDatum(a.data.datum)}
-      {a.data.medforfattare.length > 0 && ` · Tillsammans med ${a.data.medforfattare.join(' och ')}`}
+      {a.data.medforfattare.length > 0 && ` · Tillsammans med ${medforfattare}`}
     </p>
     <h1>{a.data.titel}</h1>
     <p><strong>{a.data.ingress}</strong></p>
