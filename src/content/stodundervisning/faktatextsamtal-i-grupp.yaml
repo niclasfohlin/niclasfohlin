@@ -1,0 +1,236 @@
+# Metod i stödundervisning. Modellen står i src/content.config.ts och mallen i _mall.yaml.
+# Texten är Niclas egen, ur kompendiet för läsförståelse åk 4–9 (2026).
+titel: Faktatextsamtal i grupp
+undertitel: Lärarlett läsförståelsearbete med SO- och NO-texter för åk 4–9
+ingress: Ett körschema för 30-minuterspass i liten grupp där eleverna läser en kort faktatext stycke för stycke, reder ut det som skaver, fångar kärnan med få ord och samtalar om vad författaren vill säga. Läraren ramar in, modellerar och håller samtalet igång med öppna frågor.
+omrade: Läsning
+arskurs:
+  - 4-6
+  - 7-9
+taggar:
+  - lasforstaelse
+  - textsamtal
+  - ordforrad
+  - textstruktur
+format:
+  - liten grupp
+  - par
+tid: Cirka 30 minuter per pass, två till tre pass i veckan
+period: Sex till åtta veckor
+grupp: Två till sex elever
+material:
+  - En kort faktatext per pass, ur SO- eller NO-boken
+  - Tavla för nyckelbegrepp
+  - Papper för en grafisk modell
+uppdaterad: 2026-09-20
+relaterade:
+  - boksamtal-i-grupp
+  - problemlosning-i-grupp
+utkast: false
+inledning:
+  - Det här är ett körschema för en lärarledd insats i liten grupp för elever som behöver stöd i att läsa och förstå faktatext. Insatsen är tidsbegränsad, riktad och har tät uppföljning. Varje pass är cirka 30 minuter och följer samma rutin. Det är ett samtal, inte ett formulär att fylla i, och skillnaden mot vanlig läsning är att läraren leder, modellerar och håller samtalet igång med öppna frågor. Eleverna läser en kort ämnestext i avsnitt, stannar för att reda ut det som skaver, fångar kärnan i varje stycke och samtalar sedan om vad författaren vill att de ska förstå.
+  - Börja med rutinen och tidsschemat nedan. Forskningsgrunden finns kort sammanfattad sist.
+upplagg:
+  rubrik: Så fungerar insatsen
+  text: Insatsen genomförs två till tre gånger i veckan under sex till åtta veckor. Varje pass är cirka 30 minuter. Gruppen består av två till sex elever som behöver stöd i att läsa och förstå faktatext. Ni arbetar med en kort text per pass. Efter varje pass gör du en kort notering om vad eleverna klarade med stöd. Efter perioden utvärderar du om eleven kan använda strategierna med mindre stöd i den ordinarie undervisningen.
+passrutin:
+  text: Varje pass följer samma rutin. Det gör insatsen lätt att leda och tryggt för eleverna att veta vad som ska hända.
+  steg:
+    - Läraren ramar in texten och aktiverar förkunskap.
+    - Gruppen reder ut två till tre nyckelbegrepp.
+    - Läraren läser första stycket högt och tänker högt.
+    - Eleverna läser nästa stycke i par och markerar det som skaver.
+    - Gruppen reder tillsammans ut det som skaver.
+    - Gruppen fångar kärnan i stycket med få ord.
+    - Upprepa stycke för stycke.
+    - Samtala till sist om vad författaren vill säga.
+tidsschema:
+  rubrik: 30 minuter, steg för steg
+  text: Förbered dig genom att läsa texten själv och fundera på var eleverna kan fastna. Sedan följer du tidsschemat.
+  rader:
+    - tid: Före passet
+      fas: Förberedelse
+      vad: Välj en kort text. Läs den själv. Markera nyckelbegrepp och svåra ställen. Bestäm var ni stannar.
+    - tid: 0–5 min
+      fas: Förbered
+      vad: Ögna rubrik, bilder och fetstil. Aktivera förkunskap. Förutspå. Red ut två till tre nyckelbegrepp.
+    - tid: 5–8 min
+      fas: Modellera
+      vad: Läraren läser första stycket högt och tänker högt om vad som skaver och vad stycket handlar om.
+    - tid: 8–22 min
+      fas: Läs och fånga
+      vad: Eleverna läser nästa stycke i par, markerar det som skaver, reder ut det och fångar kärnan. Upprepa per stycke.
+    - tid: 22–28 min
+      fas: Samtala
+      vad: Öppna frågor om vad författaren vill säga. Eleverna ställer egna frågor och kopplar till ämnet.
+    - tid: 28–30 min
+      fas: Avsluta
+      vad: Var och en säger en sak de tar med sig. Gör den korta noteringen.
+  efter: "En kort text per pass. Blir gruppen klar tidigt: be dem rita en grafisk modell över texten, jämföra med något de redan vet eller skriva en egen fråga till författaren."
+steg:
+  rubrik: "De fyra stegen: vad du gör och säger"
+  text: De fyra stegen är den didaktiska modellen bakom rutinen. Använd exempelfraserna för att tänka högt och för att fråga i stället för att tala om.
+  rader:
+    - namn: Förbered
+      fraga: Vad ska vi läsa om?
+      gor: Ögna texten tillsammans, aktivera förkunskap, förutspå utifrån rubrik och bild, red ut nyckelbegrepp.
+      fraser:
+        - Vad ser vi på rubriken och bilderna?
+        - Vad vet vi redan om det här?
+        - Vad tror ni texten ska lära oss?
+        - Vilka ord behöver vi reda ut först?
+    - namn: Red ut
+      fraga: Vad skaver?
+      gor: Eleverna läser ett stycke och märker vad som klickar och vad som skaver, alltså ord, begrepp eller meningar de inte förstår. Red ut det som skaver.
+      fraser:
+        - Var skavde det?
+        - Läs om meningen. Finns det en ledtråd?
+        - Kan vi dela upp ordet i delar?
+        - Vad betyder det i det här sammanhanget?
+    - namn: Fånga kärnan
+      fraga: Vad handlade stycket om?
+      gor: "Eleverna säger det viktigaste i stycket med få ord: vem eller vad, och det viktigaste om det."
+      fraser:
+        - Vem eller vad handlade stycket om?
+        - Vad var det viktigaste?
+        - Säg det med tio ord.
+        - Vad kan vi stryka och ändå förstå?
+    - namn: Samtala
+      fraga: Vad vill författaren säga?
+      gor: Öppna, författarinriktade frågor efter hela texten. Eleverna bygger vidare på varandra.
+      fraser:
+        - Vad vill författaren att vi förstår?
+        - Varför berättar författaren det här just nu?
+        - Hur hänger det ihop med det vi läste innan?
+        - Skrev författaren tydligt, eller saknas något?
+arbetsform:
+  rubrik: "Arbetsform: gemensamt, par, gemensamt"
+  text: Passet rör sig i tre steg. Först gemensamt, där läraren ramar in texten och modellerar. Sedan läser och reder eleverna ut i par medan läraren cirkulerar. Till sist gemensamt igen, där ni fångar kärnan och samtalar om texten. Vid ojämnt antal bildar ni en trio eller låter en elev arbeta i par med läraren. Upplägget fungerar oavsett om gruppen är två eller sex elever, eftersom läsningen och tänkandet sker i paren.
+  delar:
+    - rubrik: 1. Gemensamt
+      text: Läraren ramar in och modellerar
+    - rubrik: 2. I par
+      text: Eleverna läser, reder ut och fångar kärnan
+    - rubrik: 3. Gemensamt igen
+      text: Samtala om vad författaren vill säga
+tabeller:
+  - rubrik: Faktatextens strukturer och grafiska modeller
+    text: Faktatext är uppbyggd på andra sätt än berättelser. När eleverna känner igen strukturen blir texten lättare att förstå och minnas. Visa strukturen och låt eleverna fylla i en grafisk modell som passar.
+    plats: efter-arbetsform
+    kolumner:
+      - Struktur
+      - Känns igen på
+      - Grafisk modell
+    rader:
+      - - Beskrivning
+        - räknar upp egenskaper, delar och exempel
+        - tankekarta eller sexfältare
+      - - Tidsordning
+        - först, sedan, därefter, till slut
+        - tidslinje eller flödesschema
+      - - Jämförelse
+        - likheter och skillnader, å ena sidan
+        - venndiagram eller jämförelsetabell
+      - - Orsak och verkan
+        - därför att, leder till, en följd av
+        - orsak-verkan-kedja
+      - - Problem och lösning
+        - ett problem, en lösning, ett resultat
+        - problem-lösning-ruta
+exempel:
+  valt:
+    rubrik: Texten läraren valt
+    text: Ett kort avsnitt ur NO-boken om hur vattnet rör sig i naturen, cirka 150 ord.
+  text:
+    - "Läraren har läst texten själv i förväg och vet att eleverna brukar fastna på ordet avdunstar och på att stegen hänger ihop i en kedja. Passet börjar med att gruppen ögnar rubriken och bilden. Läraren frågar: ”Vad tror ni texten ska lära oss?” En elev säger att det handlar om regn. Läraren skriver upp tre ord på tavlan, avdunstar, vattenånga och kretslopp, och de reder ut dem tillsammans innan de läser."
+    - "Sedan läser läraren första stycket högt och tänker högt: ”Här står att solen värmer vattnet. Jag undrar vad som händer sen. Författaren skriver avdunstar, och det redde vi nyss ut, så jag tror att vattnet stiger uppåt.” Eleverna läser nästa stycke i par. Ett par markerar ordet vattenånga, och läraren ber dem läsa om meningen och leta ledtråd i sammanhanget. När de fångar kärnan säger paret: ”Vattnet blir ånga och stiger upp.” Läraren nickar: ”Säg det med färre ord.” Paret landar i: ”Vattnet stiger som ånga.”"
+    - "När hela texten är läst håller läraren samtalet. ”Vad vill författaren att vi förstår om vattnet?” En elev säger att det går runt i en cirkel. Läraren följer upp: ”Varför tror ni att författaren kallar det ett kretslopp?” Gruppen ritar tillsammans en orsak-verkan-kedja från sol till regn. Passet avslutas med att var och en säger en sak de tar med sig. Efteråt skriver läraren en kort notering: gruppen kunde fånga kärnan med stöd, men behövde hjälp att se hur stegen hängde ihop, och nästa gång repeteras orsak-verkan-kedjan."
+fastnar:
+  rubrik: När samtalet stannar
+  text: När eleverna kör fast är det lätt att ge svaret direkt. Gör tvärtom. Fråga, lyssna och ge minsta möjliga stöd som tar dem ett steg längre fram.
+  fragaForst:
+    - Var skavde det?
+    - Vad har ni provat?
+  trappa:
+    - Peka tillbaka på rubrik, bild eller fetstilt ord.
+    - Be dem läsa om meningen och leta ledtråd i sammanhanget.
+    - Dela upp det svåra ordet i delar.
+    - Koppla till något eleverna redan vet.
+    - Fråga vad stycket handlar om i stort innan ni går in i detaljen.
+  motto: Det är författarens jobb att skriva begripligt, inte elevens fel att texten är svår.
+roll:
+  rubrik: "Lärarens roll: leda utan att ge svaret"
+  text: Stötta tänkandet i stället för att ta över det. I samma stund som du ger den färdiga tolkningen slutar eleverna att bygga den själva. Visa gärna hur du själv stannar, undrar och läser om. Eleverna behöver se processen, inte en perfekt läsare.
+  gor:
+    - Ställ frågor och vänta ut tystnaden.
+    - Låt eleverna förklara för varandra.
+    - Lyft fram flera tolkningar.
+    - Koppla det de förstår till textens struktur.
+  undvik:
+    - Att ge tolkningen direkt.
+    - Att jaga ett rätt svar i stället för att tänka.
+    - Att läraren pratar mest hela tiden.
+    - Att godta vaga svar eller ge för kort tid.
+urval:
+  rubrik: Var hittar du texterna?
+  text:
+    - Texterna behöver du inte skriva själv. De finns i SO- och NO-böckernas faktaavsnitt, i lättlästa nyheter som 8 Sidor och i material med flera svårighetsnivåer som Mellan raderna. Mellan raderna lutar mer åt skönlitteratur, men nivåerna gör det lätt att möta gruppen rätt. Välj korta texter och gör dem ordentligt hellre än långa texter som stressas igenom.
+  kravText: "Välj en text per pass som uppfyller tre krav:"
+  krav:
+    - rubrik: Ämnesinnehåll
+      text: Tydligt innehåll, inte för spretigt
+    - rubrik: Språklig utmaning
+      text: Något att reda ut, men möjligt med stöd
+    - rubrik: Struktur
+      text: En tydlig struktur som går att rita
+progression:
+  text: Ansvaret flyttas gradvis till eleverna. Då blir passen en sammanhängande insats, inte fristående lektioner.
+  rader:
+    - vecka: 1–2
+      fokus: Förbereda, reda ut begrepp och fånga kärnan.
+      roll: Läraren modellerar mycket och tänker högt.
+    - vecka: 3–4
+      fokus: Eleverna reder ut och fångar kärnan i par.
+      roll: Läraren använder frågorna och ger kortare stöd.
+    - vecka: 5–6
+      fokus: Eleverna leder delar av samtalet.
+      roll: Läraren följer upp begrepp, kärna och budskap.
+    - vecka: 7–8 vid behov
+      fokus: Eleverna använder rutinen på text i ordinarie undervisning.
+      roll: Läraren följer upp om strategierna överförs till SO och NO.
+uppfoljning:
+  text: Du behöver veta om passen ger effekt, inte bara att de har genomförts. Gör en enkel före- och efterkoll.
+  rader:
+    - nar: Före insatsen
+      vad: Eleven läser en kort faktatext enskilt. Notera om eleven kan förutspå, reda ut ett svårt ord, fånga kärnan och ställa en fråga till texten.
+    - nar: Efter sex till åtta veckor
+      vad: Ge en liknande text och jämför med startläget.
+mal:
+  punkter:
+    - Aktivera förkunskap före läsningen
+    - Reda ut ett svårt ord med en strategi
+    - Fånga kärnan i ett stycke
+    - Känna igen en faktatextstruktur
+    - Ställa en fråga till texten eller författaren
+    - Sätta ord på vad texten vill lära ut
+snabbmall:
+  text: En halv sida att fylla i före och efter varje pass, särskilt de första två veckorna. Håll det enkelt. Det är regelbundenheten och att komma tillbaka igen nästa dag som gör skillnad.
+  fore:
+    - Text
+    - Nyckelbegrepp att reda ut
+    - Textens struktur
+    - Var vi stannar
+  efter:
+    - Kunde eleverna fånga kärnan?
+    - Vad ska repeteras nästa gång?
+checklista:
+  punkter:
+    - Valt en kort text och läst den själv.
+    - Markerat två till tre nyckelbegrepp att reda ut.
+    - Sett textens struktur och valt en grafisk modell.
+    - Bestämt var ni stannar i texten.
+    - Förberett några öppna frågor till samtalet.
+    - Tänkt igenom hur jag ska avsluta passet.
+grund:
+  text: Metoden vilar på Collaborative Strategic Reading, som är utvecklad för faktatext i SO och NO och för elever som behöver stöd (Klingner och Vaughn). Därifrån kommer de fyra stegen att förbereda, reda ut det som skaver, fånga kärnan och samtala. Gruppformen och de återkommande, strukturerade textsamtalen bygger på Reichenberg och Lundberg, som visat att samtal i liten grupp om faktatext lyfter förståelsen hos elever i behov av stöd. De författarinriktade frågorna är hämtade från Questioning the Author (Beck och McKeown), som flyttar skuldbördan från eleven till texten. Att tänka högt och överlämna ansvaret gradvis kommer från reciprok undervisning (Palincsar och Brown) och GRR-modellen. Och eftersom faktatext är uppbyggd på särskilda sätt arbetar ni genomgående med textens struktur (Meyer).
+  kallor: Bygger på Palincsar och Brown (1984), Meyer (1985), Beck och McKeown (1997), Klingner och Vaughn (1998), Reichenberg och Lundberg (2011), samt Skolverkets moduler om läsförståelse och faktatexter på Lärportalen.
