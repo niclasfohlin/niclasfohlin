@@ -6,6 +6,7 @@
 //   node scripts/skarmbild.mjs <url> <ut.png>               Dator, 1280 px bred, hela sidan
 //   node scripts/skarmbild.mjs <url> <ut.png> --mobil       Mobil, 390 px, mobilläge, hela sidan
 //   node scripts/skarmbild.mjs <url> <ut.png> --bredd 768   Egen bredd
+//   node scripts/skarmbild.mjs <url> <ut.png> --hojd 2000   Bara sidans övre del
 //
 // Kräver Chrome (Windows-sökvägen nedan eller CHROME i miljön) och Node 22 eller senare.
 
@@ -20,6 +21,8 @@ if (!url || !ut) {
 }
 const mobil = args.includes('--mobil');
 const bredd = args.includes('--bredd') ? Number(args[args.indexOf('--bredd') + 1]) : mobil ? 390 : 1280;
+// --hojd <px> tar bara sidans övre del, för mycket långa sidor.
+const maxHojd = args.includes('--hojd') ? Number(args[args.indexOf('--hojd') + 1]) : Infinity;
 const chrome = process.env.CHROME ?? ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', '/usr/bin/google-chrome'].find((p) => existsSync(p));
 if (!chrome) { console.error('Hittar inte Chrome. Sätt CHROME=<sökväg>.'); process.exit(1); }
 
@@ -59,7 +62,7 @@ try {
   for (let i = 0; i < 80 && !handelser.includes('Page.loadEventFired'); i++) await vanta(100);
   await vanta(400);
   const utvardera = async (expression) => (await skicka('Runtime.evaluate', { expression, returnByValue: true })).result.result.value;
-  const hojd = await utvardera('Math.ceil(Math.max(document.documentElement.scrollHeight, document.body.scrollHeight))');
+  const hojd = Math.min(maxHojd, await utvardera('Math.ceil(Math.max(document.documentElement.scrollHeight, document.body.scrollHeight))'));
   const bredast = await utvardera('Math.ceil(document.documentElement.scrollWidth)');
   await skicka('Emulation.setDeviceMetricsOverride', { width: bredd, height: hojd, deviceScaleFactor: mobil ? 2 : 1, mobile: mobil });
   await vanta(200);
