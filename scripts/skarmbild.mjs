@@ -66,7 +66,8 @@ try {
   const bredast = await utvardera('Math.ceil(document.documentElement.scrollWidth)');
   await skicka('Emulation.setDeviceMetricsOverride', { width: bredd, height: hojd, deviceScaleFactor: mobil ? 2 : 1, mobile: mobil });
   await vanta(200);
-  const svar = await skicka('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true });
+  const klipp = Number.isFinite(maxHojd) ? { clip: { x: 0, y: 0, width: bredd, height: hojd, scale: 1 } } : {};
+  const svar = await skicka('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true, ...klipp });
   writeFileSync(ut, Buffer.from(svar.result.data, 'base64'));
   console.log(`${ut}: ${bredd}x${hojd} css-px${bredast > bredd ? `, OBS sidan är ${bredast} px bred och rullar i sidled` : ''}`);
   ws.close();
