@@ -1,6 +1,7 @@
 ---
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import { bildHojd } from '../../lib/bildmatt';
 import Taggar from '../../components/Taggar.astro';
 import { publicerade } from '../../lib/innehall';
 
@@ -16,7 +17,7 @@ const antologi = b.data.kategori === 'Kapitel i andra böcker';
 
 <Base title={b.data.titel} description={b.data.beskrivning} bild={b.data.omslag}>
   <article class="bok">
-    {b.data.omslag && <img class="omslag bok-omslag-stor" src={b.data.omslag} alt={`Omslag: ${b.data.titel}`} width="240" />}
+    {b.data.omslag && <img class="omslag bok-omslag-stor" src={b.data.omslag} alt={`Omslag: ${b.data.titel}`} width="240" height={bildHojd(b.data.omslag, 240)} />}
     <div class="bok-text">
       <p class="meta">{b.data.kategori} · {b.data.utgivningsar}{b.data.forlag && ` · ${b.data.forlag}`}</p>
       <h1>{b.data.titel}</h1>

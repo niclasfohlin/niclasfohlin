@@ -151,6 +151,13 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
     const medMallar = samla.elements.namedItem('mallar') as HTMLInputElement;
     const bas = samla.dataset.bas ?? location.origin;
     let bygger = false;
+    // Ett lyckat-meddelande försvinner efter en stund; timern stoppas om något nytt händer, så att den inte raderar ett senare fel.
+    let statusTimer: number | undefined;
+    const visaStatus = (html: string, tillfalligt = false) => {
+      window.clearTimeout(statusTimer);
+      status.innerHTML = html;
+      if (tillfalligt) statusTimer = window.setTimeout(() => { status.textContent = ''; }, 8000);
+    };
 
     function uppdatera() {
       const markerade = boxar.filter((b) => b.checked);
@@ -168,7 +175,7 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
       for (const b of boxar) if (sparade.includes(b.value)) b.checked = true;
     } catch { /* utan lagring */ }
     for (const b of boxar) b.addEventListener('change', () => { uppdatera(); spara(); });
-    rensa.addEventListener('click', () => { for (const b of boxar) b.checked = false; status.textContent = ''; uppdatera(); spara(); });
+    rensa.addEventListener('click', () => { for (const b of boxar) b.checked = false; visaStatus(''); uppdatera(); spara(); });
     uppdatera();
 
     samla.addEventListener('submit', async (h) => {
@@ -178,7 +185,7 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
       if (ids.length === 0 || bygger) return;
       bygger = true;
       knapp.disabled = true;
-      status.textContent = 'Bygger filen.';
+      visaStatus('Bygger filen.');
       try {
         const svar = await fetch('/stodundervisning/metoder.json');
         if (!svar.ok) throw new Error(`metoder.json svarade ${svar.status}`);
@@ -195,11 +202,10 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
         lank.click();
         lank.remove();
         setTimeout(() => URL.revokeObjectURL(lank.href), 60000);
-        status.textContent = poster.length === 1 ? 'Filen är nedladdad.' : `Filen med ${poster.length} metoder är nedladdad.`;
-        setTimeout(() => { status.textContent = ''; }, 8000);
+        visaStatus(poster.length === 1 ? 'Filen är nedladdad.' : `Filen med ${poster.length} metoder är nedladdad.`, true);
       } catch (fel) {
         // Felet ligger kvar tills läsaren rensar urvalet eller lyckas.
-        status.innerHTML = `Det gick inte att bygga filen. Ladda om sidan och försök igen, eller ladda ner <a href="/stodundervisning/alla-metoder.docx" download="alla-metoder.docx">alla metoder som en fil</a>.`;
+        visaStatus(`Det gick inte att bygga filen. Ladda om sidan och försök igen, eller ladda ner <a href="/stodundervisning/alla-metoder.docx" download="alla-metoder.docx">alla metoder som en fil</a>.`);
         console.error(fel);
       } finally {
         bygger = false;

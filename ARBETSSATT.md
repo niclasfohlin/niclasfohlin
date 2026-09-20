@@ -24,7 +24,7 @@ Prio 1 görs nu, prio 2 i tur och ordning, prio 3 vilar tills ett annat jobb än
 
 ## Innehåll
 
-Poster skapas från `_mall.md` i respektive mapp. Taggar och publikationer tas från registren i `src/data/`. Kör `npm run taggar` för att se vad som finns innan du väljer. Exempelposterna `exempel-*.md` är utkast som visar hur det ska se ut. Ta bort dem när riktigt innehåll finns.
+Poster skapas från mallen i respektive mapp: `_mall.md` för artiklar och böcker, `_mall.yaml` för metoder. Taggar och publikationer tas från registren i `src/data/`. Kör `npm run taggar` för att se vad som finns innan du väljer. En tagg får en egen sida först när något innehåll använder den.
 
 Ingresser och beskrivningar skrivs enligt STIL.md. De är Niclas röst utåt. Är du osäker på ton eller fakta: fråga, eller skriv ett förslag och markera det tydligt som förslag.
 

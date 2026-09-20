@@ -105,18 +105,20 @@ if (bilder) {
     const server = spawn('npx', ['astro', 'preview', '--port', String(port)], { cwd: rot, shell: true, stdio: 'ignore' });
     await new Promise((r) => setTimeout(r, 5000));
     const url = `http://localhost:${port}/stodundervisning/${id}`;
-    const kor = (extra) => execFileSync(chrome, ['--headless=new', '--disable-gpu', '--hide-scrollbars', ...extra, url], { stdio: 'ignore', timeout: 60000 });
+    // Skärmbilderna tas med scripts/skarmbild.mjs, som emulerar en riktig mobil; headless Chrome
+    // har en minsta fönsterbredd och ger annars en beskuren bredare sida. Utskriften tas direkt.
+    const bild = (adress, fil, extra = []) => execFileSync(process.execPath, [join(rot, 'scripts/skarmbild.mjs'), adress, join(mapp, fil), ...extra], { stdio: 'ignore', timeout: 90000 });
+    const tryck = (adress, fil) => execFileSync(chrome, ['--headless=new', '--disable-gpu', '--no-pdf-header-footer', `--print-to-pdf=${join(mapp, fil)}`, adress], { stdio: 'ignore', timeout: 60000 });
     try {
-      kor(['--window-size=1280,7000', `--screenshot=${join(mapp, 'desktop.png')}`]);
-      kor(['--window-size=390,10000', `--screenshot=${join(mapp, 'mobil.png')}`]);
-      kor(['--no-pdf-header-footer', `--print-to-pdf=${join(mapp, 'utskrift.pdf')}`]);
+      bild(url, 'desktop.png');
+      bild(url, 'mobil.png', ['--mobil']);
+      tryck(url, 'utskrift.pdf');
       ok(`skärmbilder i ${mapp}: desktop.png, mobil.png, utskrift.pdf`);
       if (metod.lathund) {
         const lurl = `${url}/lathund`;
-        const korL = (extra) => execFileSync(chrome, ['--headless=new', '--disable-gpu', '--hide-scrollbars', ...extra, lurl], { stdio: 'ignore', timeout: 60000 });
-        korL(['--window-size=1280,5000', `--screenshot=${join(mapp, 'lathund-desktop.png')}`]);
-        korL(['--window-size=390,9000', `--screenshot=${join(mapp, 'lathund-mobil.png')}`]);
-        korL(['--no-pdf-header-footer', `--print-to-pdf=${join(mapp, 'lathund-utskrift.pdf')}`]);
+        bild(lurl, 'lathund-desktop.png');
+        bild(lurl, 'lathund-mobil.png', ['--mobil']);
+        tryck(lurl, 'lathund-utskrift.pdf');
         try {
           const info = execFileSync('pdfinfo', [join(mapp, 'lathund-utskrift.pdf')], { encoding: 'utf8' });
           const sidor = Number((info.match(/Pages:\s+(\d+)/) || [])[1]);

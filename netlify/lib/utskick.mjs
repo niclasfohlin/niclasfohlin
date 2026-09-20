@@ -71,21 +71,35 @@ export async function mejlaNytt({ poster, sajt, lager, brevoNyckel, listId }) {
   if (nya.length === 0) return { steg: 'inget nytt', antal: poster.length };
   if (!brevoNyckel || !listId) return { steg: 'nytt finns men Brevo saknas', nya: nya.map((p) => p.url) };
 
-  const amne = nya.length === 1 ? `Nytt på niclasfohlin.se: ${nya[0].titel}` : `Nytt på niclasfohlin.se: ${nya.length} nya inlägg`;
-  const kampanj = await brevo('/emailCampaigns', {
-    name: `Nytt ${new Date().toISOString().slice(0, 16)}: ${nya.map((p) => p.titel).join(' | ').slice(0, 120)}`,
-    subject: amne,
-    sender: AVSANDARE,
-    replyTo: AVSANDARE.email,
-    htmlContent: brev(nya, sajt),
-    recipients: { listIds: [Number(listId)] },
-  }, brevoNyckel);
-  await brevo(`/emailCampaigns/${kampanj.id}/sendNow`, {}, brevoNyckel);
+  // Registrera först, skicka sedan. Misslyckas registreringen skickas inget och nästa körning
+  // försöker igen. Misslyckas sändningen skickar nästa körning inte samma innehåll en gång till:
+  // kampanjen står i lagret med status avbruten och får i så fall skickas för hand i Brevo.
+  const urler = [...skickat.urler, ...nya.map((p) => p.url)];
+  const senast = { datum: new Date().toISOString(), poster: nya.map((p) => p.url), status: 'skapar', kampanj: undefined, fel: undefined };
+  const spara = () => lager.setJSON('skickat', { urler, initierad: skickat.initierad, senast });
+  await spara();
 
-  await lager.setJSON('skickat', {
-    urler: [...skickat.urler, ...nya.map((p) => p.url)],
-    initierad: skickat.initierad,
-    senast: { datum: new Date().toISOString(), kampanj: kampanj.id, poster: nya.map((p) => p.url) },
-  });
-  return { steg: 'kampanj skickad', kampanj: kampanj.id, nya: nya.map((p) => p.url) };
+  const amne = nya.length === 1 ? `Nytt på niclasfohlin.se: ${nya[0].titel}` : `Nytt på niclasfohlin.se: ${nya.length} nya inlägg`;
+  try {
+    const kampanj = await brevo('/emailCampaigns', {
+      name: `Nytt ${new Date().toISOString().slice(0, 16)}: ${nya.map((p) => p.titel).join(' | ').slice(0, 120)}`,
+      subject: amne,
+      sender: AVSANDARE,
+      replyTo: AVSANDARE.email,
+      htmlContent: brev(nya, sajt),
+      recipients: { listIds: [Number(listId)] },
+    }, brevoNyckel);
+    senast.kampanj = kampanj.id;
+    senast.status = 'skapad';
+    await spara();
+    await brevo(`/emailCampaigns/${kampanj.id}/sendNow`, {}, brevoNyckel);
+    senast.status = 'skickad';
+    await spara();
+    return { steg: 'kampanj skickad', kampanj: kampanj.id, nya: senast.poster };
+  } catch (fel) {
+    senast.status = 'avbruten';
+    senast.fel = String(fel?.message ?? fel).slice(0, 300);
+    await spara().catch(() => {});
+    throw fel;
+  }
 }

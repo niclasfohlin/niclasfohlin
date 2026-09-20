@@ -2,9 +2,11 @@
 import Base from '../../layouts/Base.astro';
 import { allaTaggar, artiklarSorterade, metoderSorterade, bockerSorterade, formateraDatum } from '../../lib/innehall';
 
+// Bara taggar som något innehåll använder får en sida; övriga finns i registret men skulle bli tomma sidor.
 export async function getStaticPaths() {
   const [artiklar, metoder, bocker] = await Promise.all([artiklarSorterade(), metoderSorterade(), bockerSorterade()]);
-  return allaTaggar().map((t) => ({
+  const iBruk = new Set([...artiklar, ...metoder, ...bocker].flatMap((p) => p.data.taggar));
+  return allaTaggar().filter((t) => iBruk.has(t.id)).map((t) => ({
     params: { tagg: t.id },
     props: {
       tagg: t,

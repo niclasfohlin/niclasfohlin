@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { bildHojd } from '../../lib/bildmatt';
 import { bockerSorterade } from '../../lib/innehall';
 import { bokKategorier } from '../../content.config';
 const bocker = await bockerSorterade();
@@ -17,7 +18,7 @@ const grupper = bokKategorier.map((k) => ({ kategori: k, lista: bocker.filter((b
       <div class="rutnat">
         {g.lista.map((b) => (
           <article class="kort bok-kort">
-            {b.data.omslag && <a href={`/bocker/${b.id}`} class="bok-omslag" tabindex="-1" aria-hidden="true"><img src={b.data.omslag} alt="" loading="lazy" width="120" /></a>}
+            {b.data.omslag && <a href={`/bocker/${b.id}`} class="bok-omslag" tabindex="-1" aria-hidden="true"><img src={b.data.omslag} alt="" loading="lazy" width="120" height={bildHojd(b.data.omslag, 120)} /></a>}
             <div>
               <p class="meta">{b.data.utgivningsar}{b.data.forlag && ` · ${b.data.forlag}`}</p>
               <h3><a href={`/bocker/${b.id}`}>{b.data.titel}</a></h3>

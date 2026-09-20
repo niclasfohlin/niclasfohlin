@@ -22,7 +22,7 @@ if (!modul) {
 }
 const idArg = args.indexOf('--id');
 const id = idArg >= 0 ? args[idArg + 1] : basename(modul).replace(/\.m?js$/, '');
-if (!/^[a-z0-9-]+$/.test(id)) {
+if (typeof id !== 'string' || !/^[a-z0-9-]+$/.test(id)) {
   console.error(`Ogiltigt id "${id}": bara a-z, 0-9 och bindestreck.`);
   process.exit(1);
 }
