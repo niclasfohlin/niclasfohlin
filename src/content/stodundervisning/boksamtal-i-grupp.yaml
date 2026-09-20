@@ -15,7 +15,7 @@ format:
   - liten grupp
 tid: Cirka 30 minuter per pass, två till tre pass i veckan
 period: Sex till åtta veckor
-grupp: Två till sex elever
+grupp: Fyra till tio elever
 material:
   - En kort skönlitterär text per pass, eller ett avsnitt ur en gemensam bok
   - Tavla eller papper för de fyra spalterna
@@ -29,7 +29,7 @@ inledning:
   - Faktatextsamtal i grupp täcker ämnestexterna. Det här är samtalet om skönlitteratur. Börja med rutinen och tidsschemat nedan. Forskningsgrunden finns kort sammanfattad sist.
 upplagg:
   rubrik: Så fungerar insatsen
-  text: Insatsen genomförs två till tre gånger i veckan under sex till åtta veckor. Varje pass är cirka 30 minuter. Gruppen består av två till sex elever. Ni arbetar med en kort skönlitterär text per pass, eller med ett överenskommet avsnitt ur en gemensam bok. Efter varje pass gör du en kort notering om hur eleverna deltog och tänkte. Efter perioden utvärderar du om eleven kan dela tankar om en text, motivera dem och bygga vidare på andras.
+  text: Insatsen genomförs två till tre gånger i veckan under sex till åtta veckor. Varje pass är cirka 30 minuter. Gruppen består av fyra till tio elever. Ni arbetar med en kort skönlitterär text per pass, eller med ett överenskommet avsnitt ur en gemensam bok. Efter varje pass gör du en kort notering om hur eleverna deltog och tänkte. Efter perioden utvärderar du om eleven kan dela tankar om en text, motivera dem och bygga vidare på andras.
 principer:
   rubrik: Tre saker att hålla fast vid
   text: Säg ”Jag undrar” i stället för ”Varför”. Varför kan låta som ett förhör. Det finns inget facit, alla svar är värda att höra, även det som ingen annan tänkte. Och fråga ofta ”Hur vet du det?” så att eleverna går tillbaka till texten.
@@ -134,7 +134,7 @@ tabeller:
     not: Den viktigaste frågan i steg tre är ”Hur vet du det?”. Den skickar eleven tillbaka till texten för att hitta stöd för sin tanke, och det är där tänkandet växer.
 arbetsform:
   rubrik: "Arbetsform: gemensamt, enskilt, gemensamt"
-  text: Passet rör sig i tre steg. Först gemensamt, där läraren läser och modellerar. Sedan läser eleverna själva, i par eller tyst, och markerar. Till sist gemensamt igen, där ni samlar tankar och fördjupar. Med två till sex elever kommer alla till tals. Just därför passar liten grupp den här metoden, eftersom även den som är tyst i helklass vågar dela en tanke här.
+  text: Passet rör sig i tre steg. Först gemensamt, där läraren läser och modellerar. Sedan läser eleverna själva, i par eller tyst, och markerar. Till sist gemensamt igen, där ni samlar tankar och fördjupar. Med fyra till tio elever kommer alla till tals. Just därför passar liten grupp den här metoden, eftersom även den som är tyst i helklass vågar dela en tanke här.
   delar:
     - rubrik: 1. Gemensamt
       text: Läraren läser och modellerar
@@ -238,3 +238,128 @@ checklista:
 grund:
   text: "Metoden bygger på Aidan Chambers boksamtal, på svenska ”Jag undrar” (Chambers, 1993). Kärnan är de fyra grundfrågorna om vad eleven gillade, ogillade, undrade över och vilka mönster den såg, samt de allmänna och särskilda frågor som fördjupar samtalet. Två principer bär metoden: att fråga ”Jag undrar” i stället för ”Varför”, och att ofta fråga ”Hur vet du det?” så att eleverna går tillbaka till texten. Att samtala om texter i liten grupp gynnar särskilt de elever som har svårt att komma till tals i helklass (Reichenberg och Lundberg, 2011). Att läraren modellerar och gradvis lämnar över ansvaret kommer från reciprok undervisning (Palincsar och Brown, 1984) och GRR-modellen."
   kallor: Bygger på Chambers (1993), Palincsar och Brown (1984), Reichenberg och Lundberg (2011), samt Skolverkets material om läsförståelse och boksamtal på Lärportalen.
+lathund:
+  innehall: En kort skönlitterär text
+  metoden:
+    text:
+      - Lärarlett samtal om skönlitteratur som utvecklar elevens tänkande. Eleverna läser en kort text, delar sina först-tankar med fyra enkla frågor och fördjupar sedan samtalet tillsammans.
+      - Syftet är inte att kontrollera att eleverna läst rätt. Läraren leder, men ingen sitter på de rätta svaren, inte ens läraren.
+    ruta:
+      rubrik: Tre saker att hålla fast vid
+      punkter:
+        - fet: Säg ”jag undrar” i stället för ”varför”.
+          text: Varför kan låta som ett förhör.
+        - fet: Det finns inget facit.
+          text: Alla svar är värda att höra, även det som ingen annan tänkte.
+        - fet: Fråga ofta ”hur vet du det?”
+          text: Då går eleverna tillbaka till texten.
+    tabell:
+      rubrik: "Frågorna: vilka och när"
+      kolumner:
+        - Frågetyp
+        - Exempel
+      rader:
+        - - |-
+            Grundfrågor
+            Steg 2, alltid. Laget runt, en i taget.
+          - |-
+            ”Var det något du gillade?”
+            ”Var det något du inte gillade?”
+            ”Var det något du inte förstod eller undrade över?”
+            ”Lade du märke till några mönster eller kopplingar?”
+        - - |-
+            Allmänna frågor
+            Steg 3, för att vidga.
+          - |-
+            ”Vad lade du märke till först?”
+            ”Påminner den om något du läst förut?”
+        - - |-
+            Specialfrågor
+            Steg 3, förberedda om just den texten.
+          - |-
+            ”Vems berättelse är det här?”
+            ”Vad tyckte du om slutet?”
+    not: Den viktigaste frågan i steg 3 är ”hur vet du det?” Den skickar eleven tillbaka till texten för att hitta stöd. Det är där tänkandet växer.
+  pass:
+    rubrik: "Vi kör ett pass: texten ”Nyckeln”"
+    textRubrik: Texten · cirka en sida, åk 4
+    titel: Nyckeln
+    text:
+      - Det låg en nyckel på asfalten utanför kiosken. Alva såg den först, men det var Milo som tog upp den.
+      - – Den är min nu, sa han.
+      - – Den är inte din. Den är någons, sa Alva.
+      - "Milo vände nyckeln i handen. På den satt en bricka av trä med tre bokstäver: E V A."
+      - – Vi kan sätta upp en lapp, sa Alva.
+      - Milo stoppade nyckeln i fickan. – Eller så väntar vi. Letar någon så kommer de tillbaka hit.
+      - De satte sig på trappan. Alva räknade sjutton personer som gick förbi. Ingen letade efter någonting.
+      - När klockan blev fem reste Milo sig upp och gav nyckeln till Alva. – Du såg den först, sa han.
+    forberett:
+      rubrik: Mina tre specialfrågor
+      text:
+        - Vems berättelse är det här? · Vad tyckte du om slutet? · Vilken person blev du mest nyfiken på?
+    schema:
+      rubrik: 30 minuter, steg för steg
+      rader:
+        - tid: Före
+          fas: Förberedelse
+          vad: Välj en kort text. Läs den själv. Förbered två till tre specialfrågor. Bestäm hur texten ska läsas.
+        - tid: 0–10
+          fas: "1 · Läs: möt texten"
+          vad: Läraren läser högt och tänker högt på ett par ställen. Eleverna läser sedan i par eller tyst och markerar något de fastnade för.
+          fraser:
+            - Här undrar jag vad som händer sen.
+            - Markera en mening du fastnade för.
+        - tid: 10–15
+          fas: 2 · Samla först-tankar
+          vad: De fyra grundfrågorna, en i taget, laget runt. Skriv upp svaren i fyra spalter. Ännu ingen lång diskussion.
+        - tid: 15–27
+          fas: "3 · Fördjupa: hur tänker du?"
+          vad: Dra trådar ur spalterna. Lägg till allmänna frågor och specialfrågor. Be om textstöd.
+          fraser:
+            - Berätta mer.
+            - Hur vet du det?
+            - Är det någon som tänker annorlunda?
+        - tid: 27–30
+          fas: 4 · Avsluta
+          vad: "Var och en säger en sak de tar med sig. Knyt ihop några trådar. Efteråt: kort notering i loggen."
+  mall:
+    rubrik: Mallen jag skriver i under samtalet
+    underrad: Steg 2 · först-tankar, laget runt · elevens egna ord
+    block:
+      - typ: spalter
+        kolumner:
+          - namn: Gillade
+            fraga: Var det något du gillade?
+          - namn: Ogillade
+            fraga: Var det något du inte gillade?
+          - namn: Frågetecken
+            fraga: Var det något du undrade över?
+          - namn: Mönster
+            fraga: Mönster eller kopplingar?
+        rader: 5
+      - typ: skrivruta
+        rubrik: Steg 3 · Fördjupningsfråga
+        text: "Dra en tråd ur en spalt, och fråga alltid: ”hur vet du det?”"
+        rader: 3
+  material:
+    rubrik: Vad du behöver för ett boksamtal
+    kravEtikett: Textkrav
+    var:
+      rubrik: Var texterna finns
+      punkter:
+        - fet: Noveller och korta kapitel.
+          text: Ett laddat avsnitt ur gruppens gemensamma bänkbok fungerar lika bra.
+        - fet: Bilderböcker med dubbla budskap.
+          text: Bär även för äldre elever.
+        - fet: Lättlästa serier.
+          text: Låg tröskel, fullt tolkningsutrymme.
+        - fet: Material i flera nivåer, t.ex. Mellan raderna.
+          text: Samma berättelse i olika svårighetsgrad gör det lätt att möta gruppen rätt.
+    bordet:
+      - Egen kopia av texten till varje elev
+      - Penna att markera och sätta frågetecken med
+      - Tavla eller blädderblock med fyra spalter
+      - Dina två till tre specialfrågor nedskrivna
+      - Snabbmallen för noteringen efteråt
+      - Bord där alla ser varandra
+    varjePass: "En rad i loggen: deltog alla, vad ska övas nästa gång?"

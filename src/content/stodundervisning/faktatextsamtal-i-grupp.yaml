@@ -17,7 +17,7 @@ format:
   - par
 tid: Cirka 30 minuter per pass, två till tre pass i veckan
 period: Sex till åtta veckor
-grupp: Två till sex elever
+grupp: Två till åtta elever
 material:
   - En kort faktatext per pass, ur SO- eller NO-boken
   - Tavla för nyckelbegrepp
@@ -32,7 +32,7 @@ inledning:
   - Börja med rutinen och tidsschemat nedan. Forskningsgrunden finns kort sammanfattad sist.
 upplagg:
   rubrik: Så fungerar insatsen
-  text: Insatsen genomförs två till tre gånger i veckan under sex till åtta veckor. Varje pass är cirka 30 minuter. Gruppen består av två till sex elever som behöver stöd i att läsa och förstå faktatext. Ni arbetar med en kort text per pass. Efter varje pass gör du en kort notering om vad eleverna klarade med stöd. Efter perioden utvärderar du om eleven kan använda strategierna med mindre stöd i den ordinarie undervisningen.
+  text: Insatsen genomförs två till tre gånger i veckan under sex till åtta veckor. Varje pass är cirka 30 minuter. Gruppen består av två till åtta elever som behöver stöd i att läsa och förstå faktatext. Ni arbetar med en kort text per pass. Efter varje pass gör du en kort notering om vad eleverna klarade med stöd. Efter perioden utvärderar du om eleven kan använda strategierna med mindre stöd i den ordinarie undervisningen.
 passrutin:
   text: Varje pass följer samma rutin. Det gör insatsen lätt att leda och tryggt för eleverna att veta vad som ska hända.
   steg:
@@ -105,7 +105,7 @@ steg:
         - Skrev författaren tydligt, eller saknas något?
 arbetsform:
   rubrik: "Arbetsform: gemensamt, par, gemensamt"
-  text: Passet rör sig i tre steg. Först gemensamt, där läraren ramar in texten och modellerar. Sedan läser och reder eleverna ut i par medan läraren cirkulerar. Till sist gemensamt igen, där ni fångar kärnan och samtalar om texten. Vid ojämnt antal bildar ni en trio eller låter en elev arbeta i par med läraren. Upplägget fungerar oavsett om gruppen är två eller sex elever, eftersom läsningen och tänkandet sker i paren.
+  text: Passet rör sig i tre steg. Först gemensamt, där läraren ramar in texten och modellerar. Sedan läser och reder eleverna ut i par medan läraren cirkulerar. Till sist gemensamt igen, där ni fångar kärnan och samtalar om texten. Vid ojämnt antal bildar ni en trio eller låter en elev arbeta i par med läraren. Upplägget fungerar oavsett om gruppen är två eller åtta elever, eftersom läsningen och tänkandet sker i paren.
   delar:
     - rubrik: 1. Gemensamt
       text: Läraren ramar in och modellerar
@@ -234,3 +234,149 @@ checklista:
 grund:
   text: Metoden vilar på Collaborative Strategic Reading, som är utvecklad för faktatext i SO och NO och för elever som behöver stöd (Klingner och Vaughn). Därifrån kommer de fyra stegen att förbereda, reda ut det som skaver, fånga kärnan och samtala. Gruppformen och de återkommande, strukturerade textsamtalen bygger på Reichenberg och Lundberg, som visat att samtal i liten grupp om faktatext lyfter förståelsen hos elever i behov av stöd. De författarinriktade frågorna är hämtade från Questioning the Author (Beck och McKeown), som flyttar skuldbördan från eleven till texten. Att tänka högt och överlämna ansvaret gradvis kommer från reciprok undervisning (Palincsar och Brown) och GRR-modellen. Och eftersom faktatext är uppbyggd på särskilda sätt arbetar ni genomgående med textens struktur (Meyer).
   kallor: Bygger på Palincsar och Brown (1984), Meyer (1985), Beck och McKeown (1997), Klingner och Vaughn (1998), Reichenberg och Lundberg (2011), samt Skolverkets moduler om läsförståelse och faktatexter på Lärportalen.
+lathund:
+  innehall: En kort ämnestext
+  metoden:
+    text:
+      - Lärarlett läsförståelsearbete med SO- och NO-texter. Eleverna läser en kort ämnestext i avsnitt, stannar för att reda ut det som skaver, fångar kärnan i varje stycke och samtalar sedan om vad författaren vill att de ska förstå.
+      - Det är ett samtal, inte ett formulär att fylla i. Skillnaden mot vanlig läsning är att läraren leder, modellerar och håller samtalet igång med öppna frågor.
+    ruta:
+      rubrik: "När samtalet stannar: stödtrappan"
+      inledning: "Fråga alltid först: var skavde det, och vad har ni provat?"
+      punkter:
+        - text: 1 · Peka tillbaka på rubrik, bild eller fetstilt ord.
+        - text: 2 · Läs om meningen och leta ledtråd i sammanhanget.
+        - text: 3 · Dela upp ordet i delar. 4 · Koppla till något ni vet.
+        - text: 5 · Vad handlar stycket om i stort, före detaljen?
+      efter: Ge inte nästa steg förrän de prövat det föregående.
+    tabell:
+      rubrik: De fyra stegen · CSR
+      kolumner:
+        - Steg
+        - Exempelfraser
+      rader:
+        - - |-
+            1 · Förbered
+            Ögna texten, aktivera förkunskap, förutspå.
+          - |-
+            ”Vad ser vi på rubriken och bilderna?”
+            ”Vad vet vi redan?” · ”Vilka ord behöver vi reda ut först?”
+        - - |-
+            2 · Red ut
+            Eleverna läser och märker vad som skaver.
+          - |-
+            ”Var skavde det?” · ”Finns det en ledtråd?”
+            ”Kan vi dela upp ordet i delar?”
+        - - |-
+            3 · Fånga kärnan
+            Det viktigaste i stycket med få ord.
+          - |-
+            ”Vad var det viktigaste?” · ”Säg det med tio ord.”
+            ”Vad kan vi stryka och ändå förstå?”
+        - - |-
+            4 · Samtala
+            Öppna, författarinriktade frågor efter hela texten.
+          - |-
+            ”Vad vill författaren att vi förstår?”
+            ”Varför berättar författaren det här just nu?”
+    not: Det är författarens jobb att skriva begripligt, inte elevens fel att texten är svår.
+  pass:
+    rubrik: "Vi kör ett pass: vattnets kretslopp"
+    textRubrik: Texten · cirka 150 ord, NO åk 4
+    titel: Vattnet rör sig i naturen
+    text:
+      - Solen värmer vattnet i havet, i sjöar och i marken. När vattnet blir varmt avdunstar det. Då blir vattnet vattenånga och stiger uppåt i luften.
+      - Högt upp är luften kallare. Vattenångan kyls ner och blir små droppar. Många droppar tillsammans blir ett moln.
+      - När dropparna i molnet blir tillräckligt tunga faller de ner som regn eller snö. Vattnet hamnar på marken igen.
+      - En del av vattnet rinner ner i marken och en del rinner tillbaka till sjöar och hav. Sedan börjar allt om från början. Därför säger vi att vattnet går runt i ett kretslopp.
+    forberett:
+      rubrik: Det jag förberett
+      text:
+        - "Läst texten själv. Nyckelbegrepp att reda ut: avdunstar, vattenånga, kretslopp."
+        - Strukturen är orsak och verkan, så vi ritar en orsak-verkan-kedja. Vi stannar efter varje stycke.
+    klarTidigt: Rita en grafisk modell över texten, jämför med något ni redan vet eller skriv en egen fråga till författaren.
+    schema:
+      rubrik: 30 minuter, steg för steg
+      rader:
+        - tid: Före
+          fas: Förberedelse
+          vad: Välj en kort text. Läs den själv. Markera nyckelbegrepp och bestäm var ni stannar.
+        - tid: 0–5
+          fas: 1 · Förbered
+          vad: Ögna rubrik, bilder och fetstil. Aktivera förkunskap. Förutspå. Red ut två till tre nyckelbegrepp.
+        - tid: 5–8
+          fas: 2 · Modellera
+          vad: Läraren läser första stycket högt och tänker högt.
+          fraser:
+            - Här står att solen värmer vattnet. Jag undrar vad som händer sen.
+        - tid: 8–22
+          fas: 3 · Läs och fånga
+          vad: Eleverna läser nästa stycke i par, reder ut det som skaver och fångar kärnan. Upprepa per stycke.
+          fraser:
+            - Var skavde det?
+            - Säg det med färre ord.
+        - tid: 22–28
+          fas: 4 · Samtala
+          vad: Öppna frågor om vad författaren vill säga. Eleverna ställer egna frågor och kopplar till ämnet.
+        - tid: 28–30
+          fas: Avsluta
+          vad: Var och en säger en sak de tar med sig. Gör den korta noteringen.
+  mall:
+    rubrik: Snabbmallen och textens struktur
+    underrad: Fylls i före och efter passet · särskilt de första två veckorna
+    block:
+      - typ: snabbmall
+      - typ: not
+        text: Håll det enkelt. Det är regelbundenheten, och att komma tillbaka igen nästa dag, som gör skillnad.
+      - typ: tabell
+        rubrik: Faktatextens strukturer · välj grafisk modell
+        kolumner:
+          - Struktur
+          - Känns igen på
+          - Grafisk modell
+        rader:
+          - - Beskrivning
+            - räknar upp egenskaper, delar och exempel
+            - tankekarta eller sexfältare
+          - - Tidsordning
+            - först, sedan, därefter, till slut
+            - tidslinje eller flödesschema
+          - - Jämförelse
+            - likheter och skillnader, å ena sidan
+            - venndiagram eller jämförelsetabell
+          - - Orsak och verkan
+            - därför att, leder till, en följd av
+            - orsak-verkan-kedja
+          - - Problem och lösning
+            - ett problem, en lösning, ett resultat
+            - problem-lösning-ruta
+      - typ: kedja
+        rubrik: Så såg vår modell ut · vattnets kretslopp
+        steg:
+          - solen värmer
+          - vattnet avdunstar
+          - moln
+          - regn
+          - tillbaka till havet
+        citat: Varför kallar författaren det ett kretslopp?
+  material:
+    rubrik: Vad du behöver för ett faktatextsamtal
+    kravEtikett: Textkrav
+    var:
+      rubrik: Var texterna finns
+      punkter:
+        - fet: SO- och NO-böckernas faktaavsnitt.
+          text: Välj ett kort avsnitt, inte ett helt kapitel.
+        - fet: Lättlästa nyheter, t.ex. 8 Sidor.
+          text: Aktuellt innehåll och tydlig struktur.
+        - fet: Material i flera nivåer, t.ex. Mellan raderna.
+          text: Nivåerna gör det lätt att möta gruppen rätt.
+      efter: Välj korta texter och gör dem ordentligt hellre än långa texter som stressas igenom.
+    bordet:
+      - Egen kopia av texten till varje elev
+      - Penna att markera det som skaver med
+      - Tavla för nyckelbegrepp och kärnan
+      - Mall för den grafiska modellen
+      - Snabbmallen för noteringen efteråt
+      - Bord där alla ser varandra
+    varjePass: Kunde eleverna fånga kärnan, vad ska repeteras nästa gång?

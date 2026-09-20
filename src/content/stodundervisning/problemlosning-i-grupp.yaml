@@ -15,7 +15,7 @@ format:
   - par
 tid: 20 minuter per pass, två till tre pass i veckan
 period: Sex till åtta veckor
-grupp: Tre till åtta elever
+grupp: Två till åtta elever
 material:
   - Ett rikt problem per pass, löst av läraren i förväg
   - Miniwhiteboards eller papper
@@ -28,7 +28,7 @@ inledning:
   - Det här är ett körschema för en lärarledd insats i liten grupp för elever som behöver stöd i att läsa, tolka och lösa matematiska problem i text. Insatsen är tidsbegränsad, riktad och har tät uppföljning. Varje pass är 20 minuter och följer samma rutin. Det är ett samtal, inte ett formulär att fylla i, och skillnaden mot vanligt grupparbete är att läraren leder, modellerar och stöttar. Börja med rutinen och tidsschemat nedan. Forskningsgrunden finns kort sammanfattad sist.
 upplagg:
   rubrik: Så fungerar insatsen
-  text: Insatsen genomförs två till tre gånger i veckan under sex till åtta veckor. Varje pass är 20 minuter. Gruppen består av tre till åtta elever som behöver stöd i matematisk problemlösning och läsförståelse. Ni arbetar med ett problem per pass. Efter varje pass gör du en kort notering om vad eleverna klarade med stöd. Efter perioden utvärderar du om eleven kan använda strategierna med mindre stöd i den ordinarie undervisningen.
+  text: Insatsen genomförs två till tre gånger i veckan under sex till åtta veckor. Varje pass är 20 minuter. Gruppen består av två till åtta elever som behöver stöd i matematisk problemlösning och läsförståelse. Ni arbetar med ett problem per pass. Efter varje pass gör du en kort notering om vad eleverna klarade med stöd. Efter perioden utvärderar du om eleven kan använda strategierna med mindre stöd i den ordinarie undervisningen.
 passrutin:
   text: Varje pass följer samma rutin. Det gör insatsen lätt att leda och tryggt för eleverna att veta vad som ska hända.
   steg:
@@ -100,7 +100,7 @@ steg:
         - Vilken metod skulle du välja nästa gång?
 arbetsform:
   rubrik: "Arbetsform: gemensamt, par, gemensamt"
-  text: Passet rör sig i tre steg. Först gemensamt, där läraren leder och modellerar. Sedan prövar eleverna i par medan läraren cirkulerar. Till sist gemensamt igen, där ni jämför lösningar och sätter ord på strategin. Vid ojämnt antal bildar ni en trio eller låter en elev arbeta i par med läraren. Upplägget fungerar oavsett om gruppen är tre eller åtta elever, eftersom tänkandet sker i paren.
+  text: Passet rör sig i tre steg. Först gemensamt, där läraren leder och modellerar. Sedan prövar eleverna i par medan läraren cirkulerar. Till sist gemensamt igen, där ni jämför lösningar och sätter ord på strategin. Vid ojämnt antal bildar ni en trio eller låter en elev arbeta i par med läraren. Upplägget fungerar oavsett om gruppen är två eller åtta elever, eftersom tänkandet sker i paren.
   delar:
     - rubrik: 1. Gemensamt
       text: Läraren leder, läser och modellerar
@@ -210,3 +210,148 @@ checklista:
 grund:
   text: "Metoden vilar på George Pólyas fyra faser (förstå, planera, genomföra, se tillbaka) och på ett gradvis överlämnande av ansvar enligt GRR-modellen (jag gör, vi gör, ni gör, du gör). Att tänka högt och modellera är hämtat från reciprok undervisning. I steg 4 leder du diskussionen utifrån Smith och Steins fem undervisningspraktiker: förutse, överblicka, välja ut, ordna och koppla ihop elevernas lösningar. När någon fastnar använder du Lithners faser som diagnos. Och eftersom svårigheter i lästal ofta handlar om läsförståelse snarare än räkning (IES/WWC), stannar du genomgående vid ord, samband och vad talen betyder."
   kallor: Bygger på Pólya (1945), Lithner, Hagland, Hedrén och Taflin (2005), Smith och Stein (2014), Skolverkets modul Problemlösning på Lärportalen samt IES/WWC:s practice guides Improving Mathematical Problem Solving in Grades 4–8 och Assisting Students Struggling with Mathematics.
+lathund:
+  innehall: Ett problem per pass
+  metoden:
+    text:
+      - Lärarledd matematisk läsförståelse för elever som behöver stöd i att läsa, tolka och lösa problem i text. Det är ett samtal, inte ett formulär att fylla i.
+      - Skillnaden mot vanligt grupparbete är att läraren leder, modellerar och stöttar. Läraren äger processen, men inte lösningen.
+    ruta:
+      rubrik: "När gruppen fastnar: stödtrappan"
+      inledning: "Fråga alltid först: vad har ni gjort hittills, och varför gjorde ni så?"
+      punkter:
+        - text: 1 · Vad vet ni? 2 · Vad ska ni ta reda på?
+        - text: 3 · Visa med bild, tabell eller material.
+        - text: 4 · Prova med mindre tal. 5 · Kontrollera mot frågan.
+      efter: Ge inte nästa steg förrän de prövat det föregående.
+    tabell:
+      rubrik: De fyra stegen · Pólya
+      kolumner:
+        - Steg
+        - Exempelfraser
+      rader:
+        - - |-
+            1 · Förstå
+            Läs högt, låt en elev återberätta, ringa in frågan.
+          - |-
+            ”Kan du berätta problemet med egna ord?”
+            ”Vilket ord är vi osäkra på?” · ”Vad betyder talen i texten?”
+        - - |-
+            2 · Planera
+            Välj representation och strategi. Ingen räknar än.
+          - |-
+            ”Vilken representation hjälper oss att se problemet?”
+            ”Tänk om vi provar med mindre tal först.”
+        - - |-
+            3 · Lösa
+            Eleverna prövar i par. Du cirkulerar och noterar.
+          - |-
+            ”Visa hur du tänkte.” · ”Hur vet du att det stämmer?”
+            ”Fastnar du? Vad har du provat?”
+        - - |-
+            4 · Kolla och jämföra
+            Visa två lösningar. Är svaret rimligt mot frågan?
+          - |-
+            ”Vem tänkte annorlunda?” · ”Är svaret rimligt?”
+            ”Vad är lika och vad är olika i lösningarna?”
+  pass:
+    rubrik: "Vi kör ett pass: ljusstakarna på slottet"
+    textRubrik: Problemet · åk 4
+    text:
+      - På ett slott finns 29 ljusstakar. Några ljusstakar har plats för fem ljus och några har plats för sju ljus. Sammanlagt behövs 187 ljus.
+      - Hur många ljusstakar finns det av varje sort?
+    forberett:
+      rubrik: Det jag förberett
+      text:
+        - "Löst problemet själv. Vet var de kan fastna: att hålla isär de två okända sakerna. Material framme för en representation."
+        - "Två lösningar jag hoppas få se: en tabell, och ”om alla vore femarmade skulle det bli för få ljus”."
+    klarTidigt: Visa lösningen på ett annat sätt, hitta en annan strategi eller skriv en egen liknande uppgift.
+    schema:
+      rubrik: 20 minuter, steg för steg
+      rader:
+        - tid: Före
+          fas: Förberedelse
+          vad: Välj ett problem. Lös det själv. Förutse elevernas lösningar. Ta fram material för en representation.
+        - tid: 0–3
+          fas: Läs och förstå
+          vad: Läs högt, en elev återberättar, markera frågan, skriv vad vi vet och vad vi ska ta reda på.
+        - tid: 3–6
+          fas: Planera
+          vad: Välj representation och strategi tillsammans. Ingen räknar än. Välj inte åt eleverna.
+        - tid: 6–13
+          fas: Lös
+          vad: Eleverna prövar i par, trio vid ojämnt antal. Du cirkulerar, frågar och noterar lösningar.
+        - tid: 13–18
+          fas: Jämför
+          vad: Två lösningar eller två sätt att tänka visas och jämförs. Är svaret rimligt? Vilken väg var tydligast?
+        - tid: 18–20
+          fas: Avsluta
+          vad: Sätt ord på strategin som fungerade. Gör den korta noteringen.
+  mall:
+    rubrik: Så läste jag problemet med gruppen
+    underrad: Tavlan under passet
+    block:
+      - typ: tavla
+        text: 29 ljusstakar. Några tar 5 ljus, några tar 7 ljus. Totalt 187 ljus.
+        fraga: Hur många av varje sort?
+        listor:
+          - rubrik: Vad vet vi?
+            punkter:
+              - 29 stakar totalt
+              - 5-armad + 7-armad
+              - 187 ljus ihop
+          - rubrik: Vad ska vi ta reda på?
+            punkter:
+              - antal 5-armade
+              - antal 7-armade
+              - = två okända!
+        tabell:
+          rubrik: Vi provar i en tabell
+          kolumner:
+            - 5-armade
+            - 7-armade
+            - ljus ihop
+          rader:
+            - - "29"
+              - "0"
+              - 145, för få
+            - - "19"
+              - "10"
+              - "165"
+            - - "9"
+              - "20"
+              - 185, nästan!
+            - - "8"
+              - "21"
+              - 187 ✓
+        annat:
+          rubrik: Ett annat par tänkte så här
+          rader:
+            - "Om alla vore 5-armade: 29 × 5 = 145"
+            - "Saknas: 187 − 145 = 42"
+            - Varje 7-armad ger 2 ljus till → 42 ÷ 2 = 21
+        svar: 8 femarmade och 21 sjuarmade
+        citat:
+          - Kan du berätta problemet med egna ord?
+          - Vad betyder talen i texten?
+          - Vad är lika i de här sätten? Är svaret rimligt?
+  material:
+    rubrik: Vad du behöver för ett problemlösningspass
+    kravEtikett: Problemkrav
+    var:
+      rubrik: Var problemen finns
+      punkter:
+        - fet: Läromedlets problemlösningsavsnitt
+          text: för åk 4 till 9.
+        - fet: NCM:s Problembank.
+        - fet: Skolverkets problembank
+          text: på Lärportalen.
+      efter: Ett problem är en uppgift där gruppen inte direkt vet hur den ska lösas. Ett lästal som bara kan lösas på ett sätt är en rutinuppgift.
+    bordet:
+      - Miniwhiteboards och pennor
+      - Plockmaterial och klossar
+      - Rutat papper och tallinjer
+      - Tabellmall att fylla i
+      - Problemet utskrivet till varje par
+      - Snabbmallen för noteringen efteråt
+    varjePass: Kunde eleverna återberätta, vad ska repeteras nästa gång?
