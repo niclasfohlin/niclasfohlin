@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Taggar from '../../components/Taggar.astro';
 import { site } from '../../data/site';
 import { metoderSorterade, taggLabel } from '../../lib/innehall';
-import { arskursSpann, harMallar } from '../../lib/metod';
+import { arskursSpann, harLathund, harMallar } from '../../lib/metod';
 const metoder = await metoderSorterade();
 // Bara taggar som någon metod använder, i bokstavsordning efter etiketten läsaren ser.
 const taggarIBruk = [...new Set(metoder.flatMap((m) => m.data.taggar))].sort((a, b) => taggLabel(a).localeCompare(taggLabel(b), 'sv'));
@@ -13,7 +13,7 @@ const arskurserIBruk = site.arskurser.filter((a) => metoder.some((m) => m.data.a
 
 <Base title="Stödundervisning" description="Metodbank för stödundervisning i matematik, läsning och skrivning. Varje metod har körschema, exempelfraser och mallar, och går att skriva ut och ladda ner som Word-fil.">
   <h1>Stödundervisning</h1>
-  <p class="text">Konkreta metoder att använda i morgon. Varje metod har ett körschema, exempelfraser, snabbmall och checklista, och går att ladda ner som Word-fil eller skriva ut. Markera flera metoder för att få dem i en fil.</p>
+  <p class="text">Konkreta metoder att använda i morgon. Varje metod har ett körschema, exempelfraser, snabbmall och checklista, en lathund på fyra sidor, och går att ladda ner som Word-fil eller skriva ut. Markera flera metoder för att få dem i en fil.</p>
 
   {metoder.length > 0 && (
     <form class="filter" id="filter" aria-label="Filtrera metoder">
@@ -58,6 +58,7 @@ const arskurserIBruk = site.arskurser.filter((a) => metoder.some((m) => m.data.a
               <p>{m.data.ingress}</p>
               <Taggar taggar={m.data.taggar} nivaer={m.data.arskurs} />
               <p class="kort-rad">
+                {harLathund(m.data) && <><a class="lathund-lank" href={`/stodundervisning/${m.id}/lathund`}>Lathund<span class="visually-hidden">: {m.data.titel}</span></a>{' · '}</>}
                 <a href={`/stodundervisning/${m.id}.docx`} download={`${m.id}.docx`}>Word-fil<span class="visually-hidden">: {m.data.titel}</span></a>
                 {harMallar(m.data) && <>{' · '}<a href={`/stodundervisning/${m.id}-mallar.docx`} download={`${m.id}-mallar.docx`}>Mallar<span class="visually-hidden"> till {m.data.titel}</span></a></>}
                 <label class="valj"><input type="checkbox" name="valda" value={m.id} /> Välj<span class="visually-hidden"> {m.data.titel}</span></label>
@@ -72,7 +73,7 @@ const arskurserIBruk = site.arskurser.filter((a) => metoder.some((m) => m.data.a
   {metoder.length > 0 && (
     <form class="samla" id="samla" aria-label="Ladda ner valda metoder" data-bas={site.url}>
       <p class="samla-antal" aria-live="polite" data-valda>Inga metoder valda</p>
-      <label class="samla-mallar"><input type="checkbox" name="mallar" checked /> Ta med mallarna</label>
+      <label class="samla-mallar"><input type="checkbox" name="mallar" checked /> Ta med mallar och lathundar</label>
       <span class="samla-knappar">
         <button type="submit" class="knapp" disabled>Ladda ner valda (docx)</button>
         <button type="button" class="knapp sekundar" data-rensa hidden>Rensa</button>

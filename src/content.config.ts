@@ -97,6 +97,8 @@ const bocker = defineCollection({
 const text = z.string().trim().min(1, 'Tomt fält.');
 const stycken = z.array(text).min(1);
 const ruta = z.strictObject({ rubrik: text, text });
+// En punkt med valfri fet inledning: "Det finns inget facit." följt av förklaringen.
+const punkt = z.strictObject({ fet: z.string().optional(), text: z.string().optional() }).refine((p) => p.fet || p.text, 'En punkt behöver fet eller text.');
 const stodundervisning = defineCollection({
   loader: glob({ pattern: '**/[^_]*.yaml', base: './src/content/stodundervisning' }),
   schema: z.strictObject({
@@ -221,6 +223,61 @@ const stodundervisning = defineCollection({
       rubrik: z.string().default('Kort om grunden'),
       text: z.string(),
       kallor: z.string().optional(),
+    }).optional(),
+
+    // Lathunden: fyra sidor ur Niclas snabbguide (Metoden, Ett pass, Mallen, Material). Egen sida
+    // /stodundervisning/<id>/lathund, utskrift i liggande A4 och Word-fil. Faktarutorna passlängd,
+    // grupp och period hämtas från tid, grupp och period ovan; kraven från urval, checklistan och
+    // snabbmallen från metoden, så att lathunden aldrig säger emot metoden.
+    lathund: z.strictObject({
+      innehall: text,
+      metoden: z.strictObject({
+        text: stycken,
+        ruta: z.strictObject({ rubrik: text, inledning: z.string().optional(), punkter: z.array(punkt).min(1), efter: z.string().optional() }),
+        tabell: z.strictObject({ rubrik: text, kolumner: z.array(text).min(2), rader: z.array(z.array(z.string())).min(1) }),
+        not: z.string().optional(),
+      }),
+      pass: z.strictObject({
+        rubrik: text,
+        textRubrik: text,
+        titel: z.string().optional(),
+        text: stycken,
+        forberett: z.strictObject({ rubrik: text, text: stycken }),
+        klarTidigt: z.string().optional(),
+        schema: z.strictObject({
+          rubrik: text,
+          rader: z.array(z.strictObject({ tid: text, fas: text, vad: text, fraser: z.array(z.string()).default([]) })).min(1),
+        }),
+      }),
+      mall: z.strictObject({
+        rubrik: text,
+        underrad: z.string().optional(),
+        block: z.array(z.discriminatedUnion('typ', [
+          z.strictObject({ typ: z.literal('spalter'), kolumner: z.array(z.strictObject({ namn: text, fraga: text })).min(2), rader: z.number().int().min(1).default(5) }),
+          z.strictObject({ typ: z.literal('skrivruta'), rubrik: text, text: z.string().optional(), rader: z.number().int().min(1).default(3) }),
+          z.strictObject({
+            typ: z.literal('tavla'),
+            text,
+            fraga: text,
+            listor: z.array(z.strictObject({ rubrik: text, punkter: z.array(text).min(1) })).min(1),
+            tabell: z.strictObject({ rubrik: text, kolumner: z.array(text).min(2), rader: z.array(z.array(z.string())).min(1) }),
+            annat: z.strictObject({ rubrik: text, rader: z.array(text).min(1) }).optional(),
+            svar: z.string().optional(),
+            citat: z.array(z.string()).default([]),
+          }),
+          z.strictObject({ typ: z.literal('snabbmall') }),
+          z.strictObject({ typ: z.literal('tabell'), rubrik: text, kolumner: z.array(text).min(2), rader: z.array(z.array(z.string())).min(1) }),
+          z.strictObject({ typ: z.literal('kedja'), rubrik: text, steg: z.array(text).min(2), citat: z.string().optional() }),
+          z.strictObject({ typ: z.literal('not'), text }),
+        ])).min(1),
+      }),
+      material: z.strictObject({
+        rubrik: text,
+        kravEtikett: z.string().default('Textkrav'),
+        var: z.strictObject({ rubrik: text, punkter: z.array(punkt).min(1), efter: z.string().optional() }),
+        bordet: z.array(text).min(1),
+        varjePass: z.string().optional(),
+      }),
     }).optional(),
   }),
 });

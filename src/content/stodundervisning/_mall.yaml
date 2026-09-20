@@ -115,3 +115,65 @@ checklista:
 grund:
   text: Forskningen bakom, med parentescitat (Författare, årtal). Bara källor som går att verifiera.
   kallor: Bygger på Författare (årtal), Författare (årtal).
+
+# Lathunden: fyra sidor ur snabbguiden (Metoden, Ett pass, Mallen, Material). Egen sida
+# /stodundervisning/<id>/lathund, utskrift i liggande A4 och Word-fil. Passlängd, grupp och
+# frekvens tas ur tid, grupp och period; kraven ur urval; checklistan, snabbmallen och
+# uppföljningen ur metoden. Utelämna hela blocket om metoden saknar lathund.
+lathund:
+  innehall: Vad ni arbetar med per pass, t.ex. En kort skönlitterär text
+  metoden:
+    text:
+      - Två stycken om hur insatsen fungerar.
+    ruta:
+      rubrik: Tre saker att hålla fast vid
+      # inledning: en fet rad först, t.ex. "Fråga alltid först: ..."
+      punkter:
+        - { fet: Fet inledning., text: Förklaringen. }
+      # efter: en grå rad sist
+    tabell:
+      rubrik: Frågorna eller stegen
+      kolumner: [Steg, Exempelfraser]
+      rader:
+        - ["1 · Förstå\nVad läraren gör.", "”Fras ett.”\n”Fras två.”"]
+    # not: cremefärgad not under tabellen
+  pass:
+    rubrik: "Vi kör ett pass: texten ”Titeln”"
+    textRubrik: Texten · cirka en sida, åk 4
+    titel: Titeln
+    text:
+      - Exempeltexten eller problemet, ett stycke per rad.
+    forberett:
+      rubrik: Det jag förberett
+      text:
+        - Vad läraren gjort innan.
+    klarTidigt: Vad gruppen gör om den blir klar tidigt.
+    schema:
+      rubrik: 30 minuter, steg för steg
+      rader:
+        - { tid: Före, fas: Förberedelse, vad: Vad läraren gör. }
+        - { tid: 0–10, fas: 1 · Läs, vad: Vad som händer., fraser: [En fras utan citattecken.] }
+  mall:
+    rubrik: Mallen jag skriver i under samtalet
+    underrad: Kort rad under rubriken
+    # block: spalter (kolumner med namn och fråga, rader), skrivruta (rubrik, text, rader),
+    # tavla (text, fraga, listor, tabell, annat, svar, citat), snabbmall (ur metoden),
+    # tabell (rubrik, kolumner, rader), kedja (rubrik, steg, citat), not (text)
+    block:
+      - typ: spalter
+        kolumner:
+          - { namn: Gillade, fraga: Var det något du gillade? }
+          - { namn: Ogillade, fraga: Var det något du inte gillade? }
+        rader: 5
+      - { typ: not, text: Håll det enkelt. }
+  material:
+    rubrik: Vad du behöver för ett pass
+    kravEtikett: Textkrav
+    var:
+      rubrik: Var texterna finns
+      punkter:
+        - { fet: Var., text: Kort förklaring. }
+      efter: En grå rad sist.
+    bordet:
+      - Vad som ska ligga på bordet när passet börjar
+    varjePass: Vad som noteras efter varje pass.

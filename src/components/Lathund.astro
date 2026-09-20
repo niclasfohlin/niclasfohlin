@@ -1,0 +1,193 @@
+---
+// Lathunden: fyra sidor ur Niclas snabbguide, med dess designelement i sajtens palett: färgat
+// huvudband med mono-kicker, faktarutor, rutor med mörk rubrikrad, cremefärgade noter, tabeller.
+// Faktarutorna, kraven, checklistan, snabbmallen och uppföljningen hämtas ur metoden så att
+// lathunden aldrig säger emot den. Samma fyra sidor finns i Word-filen (src/lib/metoddocx.ts).
+import MetodTabell from './MetodTabell.astro';
+import type { MetodData } from '../lib/metod';
+import { lathundFakta, arbetsformRad } from '../lib/metod';
+interface Props { d: MetodData }
+const { d } = Astro.props;
+const l = d.lathund;
+const fakta = lathundFakta(d);
+const arbetsform = arbetsformRad(d);
+const citat = (f: string) => `”${f}”`;
+---
+{l && (
+  <div class="lh">
+    <section class="lh-sida" id="lathund-metoden" aria-labelledby="lh-1">
+      <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-1">{d.titel}</h2><span class="lh-etikett">Metoden · 1/4</span></header>
+      <div class="lh-fakta">
+        {fakta.map((f) => <div><span class="lh-kicker">{f.rubrik}</span><strong>{f.text}</strong></div>)}
+      </div>
+      <div class="lh-kolumner">
+        <div class="lh-kol">
+          <h3 class="lh-kicker">Så fungerar insatsen</h3>
+          {l.metoden.text.map((p) => <p>{p}</p>)}
+          <div class="lh-ruta">
+            <h4>{l.metoden.ruta.rubrik}</h4>
+            <div class="lh-ruta-kropp">
+              {l.metoden.ruta.inledning && <p><strong>{l.metoden.ruta.inledning}</strong></p>}
+              {l.metoden.ruta.punkter.map((p) => <p>{p.fet && <strong>{p.fet}</strong>}{p.fet && p.text ? ' ' : ''}{p.text}</p>)}
+              {l.metoden.ruta.efter && <p class="lh-svag">{l.metoden.ruta.efter}</p>}
+            </div>
+          </div>
+          {arbetsform && <><h3 class="lh-kicker">Arbetsform</h3><p>{arbetsform}</p></>}
+        </div>
+        <div class="lh-kol">
+          <h3 class="lh-kicker">{l.metoden.tabell.rubrik}</h3>
+          <MetodTabell kolumner={l.metoden.tabell.kolumner} rader={l.metoden.tabell.rader} klass="lh-tabell" />
+          {l.metoden.not && <p class="lh-not">{l.metoden.not}</p>}
+        </div>
+      </div>
+    </section>
+
+    <section class="lh-sida" id="lathund-pass" aria-labelledby="lh-2">
+      <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-2">{l.pass.rubrik}</h2><span class="lh-etikett">Ett pass · 2/4</span></header>
+      <div class="lh-kolumner">
+        <div class="lh-kol">
+          <div class="lh-ruta">
+            <h4>{l.pass.textRubrik}</h4>
+            <div class="lh-ruta-kropp">
+              {l.pass.titel && <p class="lh-titel">{l.pass.titel}</p>}
+              {l.pass.text.map((p) => <p>{p}</p>)}
+            </div>
+          </div>
+          <div class="lh-not">
+            <h4 class="lh-kicker">{l.pass.forberett.rubrik}</h4>
+            {l.pass.forberett.text.map((p) => <p>{p}</p>)}
+          </div>
+          {l.pass.klarTidigt && <div class="lh-gra"><h4 class="lh-kicker">Klar tidigt</h4><p>{l.pass.klarTidigt}</p></div>}
+        </div>
+        <div class="lh-kol">
+          <h3 class="lh-kicker">{l.pass.schema.rubrik}</h3>
+          <table class="m-tabell lh-tabell lh-schema">
+            <colgroup><col style="width:5.5rem" /><col /></colgroup>
+            <thead><tr><th scope="col">Tid</th><th scope="col">Vad händer</th></tr></thead>
+            <tbody>
+              {l.pass.schema.rader.map((r) => (
+                <tr>
+                  <th scope="row">{r.tid}</th>
+                  <td><strong>{r.fas}</strong><br />{r.vad}{r.fraser.length > 0 && <span class="lh-fraser">{r.fraser.map(citat).join(' · ')}</span>}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="lh-sida" id="lathund-mall" aria-labelledby="lh-3">
+      <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-3">{l.mall.rubrik}</h2><span class="lh-etikett">Mallen · 3/4</span></header>
+      {l.mall.underrad && <p class="lh-underrad">{l.mall.underrad}</p>}
+      <div class="lh-block">
+        {l.mall.block.map((b) => {
+          if (b.typ === 'spalter') return (
+            <div class="lh-spalter">
+              {b.kolumner.map((k, i) => (
+                <div class="lh-spalt">
+                  <h4><span class="nr">{i + 1}</span> {k.namn} <span class="lh-fraga">{citat(k.fraga)}</span></h4>
+                  <div class="lh-linjer">{Array.from({ length: b.rader }).map(() => <div class="lh-linje"></div>)}</div>
+                </div>
+              ))}
+            </div>
+          );
+          if (b.typ === 'skrivruta') return (
+            <div class="lh-skrivruta">
+              <h4>{b.rubrik}{b.text && <>{' '}<span class="lh-fraga">{b.text}</span></>}</h4>
+              <div class="lh-linjer">{Array.from({ length: b.rader }).map(() => <div class="lh-linje"></div>)}</div>
+            </div>
+          );
+          if (b.typ === 'tavla') return (
+            <div class="lh-tavla">
+              <div>
+                <p>{b.text}</p>
+                <p><span class="lh-ram">{b.fraga}</span></p>
+                <div class="lh-listor">
+                  {b.listor.map((x) => <div><p class="lh-listrubrik">{x.rubrik}</p><ul>{x.punkter.map((p) => <li>{p}</li>)}</ul></div>)}
+                </div>
+                {b.citat.length > 0 && <p class="lh-citat">{b.citat.slice(0, -1).map(citat).join(' ')}</p>}
+              </div>
+              <div>
+                <p class="lh-listrubrik">{b.tabell.rubrik}</p>
+                <table class="lh-tavla-tabell">
+                  <thead><tr>{b.tabell.kolumner.map((k) => <th scope="col">{k}</th>)}</tr></thead>
+                  <tbody>{b.tabell.rader.map((r) => <tr>{r.map((c) => <td>{c}</td>)}</tr>)}</tbody>
+                </table>
+                {b.annat && <><p class="lh-listrubrik">{b.annat.rubrik}</p>{b.annat.rader.map((r) => <p>{r}</p>)}</>}
+                {b.svar && <p><span class="lh-ram lh-svar">{b.svar}</span></p>}
+                {b.citat.length > 0 && <p class="lh-citat">{citat(b.citat[b.citat.length - 1])}</p>}
+              </div>
+            </div>
+          );
+          if (b.typ === 'snabbmall' && d.snabbmall) return (
+            <table class="m-snabbmall lh-snabbmall">
+              <caption>Snabbmall · {d.titel}</caption>
+              <colgroup><col style="width:38%" /><col style="width:62%" /></colgroup>
+              <tbody>
+                <tr class="avsnitt"><th scope="col">Före passet</th><th scope="col"><span class="visually-hidden">Att fylla i</span></th></tr>
+                {d.snabbmall.fore.map((f) => <tr><th scope="row">{f}</th><td></td></tr>)}
+              </tbody>
+              <tbody>
+                <tr class="avsnitt"><th scope="col">Efter passet: kort notering</th><th scope="col"><span class="visually-hidden">Att fylla i</span></th></tr>
+                {d.snabbmall.efter.map((f) => <tr><th scope="row">{f}</th><td></td></tr>)}
+              </tbody>
+            </table>
+          );
+          if (b.typ === 'tabell') return (
+            <div class="lh-avsnitt">
+              <h3 class="lh-kicker">{b.rubrik}</h3>
+              <MetodTabell kolumner={b.kolumner} rader={b.rader} klass="lh-tabell" />
+            </div>
+          );
+          if (b.typ === 'kedja') return (
+            <div class="lh-avsnitt">
+              <h3 class="lh-kicker">{b.rubrik}</h3>
+              <p class="lh-kedja">{b.steg.map((s, i) => <>{i > 0 && <span class="lh-pil" aria-hidden="true">→</span>}<span class="lh-steg">{s}</span></>)}</p>
+              {b.citat && <p class="lh-citat">{citat(b.citat)}</p>}
+            </div>
+          );
+          if (b.typ === 'not') return <p class="lh-not">{b.text}</p>;
+          return null;
+        })}
+      </div>
+    </section>
+
+    <section class="lh-sida" id="lathund-material" aria-labelledby="lh-4">
+      <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-4">{l.material.rubrik}</h2><span class="lh-etikett">Material · 4/4</span></header>
+      {d.urval && (
+        <div class="lh-krav">
+          {d.urval.krav.map((k, i) => <div><span class="lh-kicker">{l.material.kravEtikett} {i + 1}</span><strong>{k.rubrik}</strong><span>{k.text}</span></div>)}
+        </div>
+      )}
+      <div class="lh-kolumner">
+        <div class="lh-kol">
+          <h3 class="lh-kicker">{l.material.var.rubrik}</h3>
+          {l.material.var.punkter.map((p) => <p>{p.fet && <strong>{p.fet}</strong>}{p.fet && p.text ? ' ' : ''}{p.text}</p>)}
+          {l.material.var.efter && <p class="lh-svag">{l.material.var.efter}</p>}
+          <div class="lh-ruta">
+            <h4>På bordet när passet börjar</h4>
+            <ul class="lh-lista lh-tva">{l.material.bordet.map((p) => <li>{p}</li>)}</ul>
+          </div>
+        </div>
+        <div class="lh-kol">
+          {d.checklista && (
+            <div class="lh-ruta">
+              <h4>{d.checklista.rubrik}</h4>
+              <ul class="lh-lista lh-bockar">{d.checklista.punkter.map((p) => <li>{p}</li>)}</ul>
+            </div>
+          )}
+          {d.uppfoljning && (
+            <div class="lh-ruta">
+              <h4>Uppföljning</h4>
+              <div class="lh-ruta-kropp">
+                {d.uppfoljning.rader.map((r) => <p><strong>{r.nar}:</strong> {r.vad}</p>)}
+                {l.material.varjePass && <p><strong>Varje pass:</strong> {l.material.varjePass}</p>}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  </div>
+)}

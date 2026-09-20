@@ -334,13 +334,132 @@ html.js .nedladdning .skriv-ut { display: block; }
 .m-grund { border: 1.5px solid var(--farg-accent); border-radius: 8px; padding: 0.85rem 1.1rem; margin: 1rem 0 0.5rem; }
 .m-grund p { margin: 0; }
 .m-kallor { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
+.bara-js { display: none; }
+html.js .bara-js { display: inline-block; }
+
+/* Lathunden: fyra sidor ur snabbguiden. Färgat huvudband med mono-kicker, faktarutor, rutor med
+   mörk rubrikrad, cremefärgade noter. Utskrift i liggande A4, en sida per avsnitt. */
+.lathund { max-width: var(--matt-bredd); }
+.lathund-huvud h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 0.3em; }
+.lathund-huvud .ingress { font-size: 1.1rem; max-width: var(--matt-text); margin: 0 0 1rem; }
+.lathund-knappar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 1.5rem; }
+.lathund-knappar .knapp { font-size: 0.95rem; padding: 0.5rem 0.9rem; }
+.lathund .upphov { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
+.lathund-lank { font-weight: 600; }
+.lh-kicker { font-family: ui-monospace, 'Cascadia Mono', Consolas, 'Liberation Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--farg-text-svag); font-weight: 500; }
+.lh-sida { background: var(--farg-yta); border: 1px solid var(--farg-kant); border-radius: var(--radie); margin: 0 0 2rem; overflow: hidden; font-family: var(--typsnitt-ui); font-size: 0.95rem; line-height: 1.5; }
+.lh-huvud { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 1rem; background: var(--farg-accent); color: #fff; padding: 0.7rem 1.25rem; }
+.lh-huvud h2 { margin: 0; font-family: var(--typsnitt-ui); font-size: 1.25rem; color: #fff; flex: 1; }
+.lh-huvud .lh-kicker, .lh-huvud .lh-etikett { color: rgba(255, 255, 255, 0.85); font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.lh-fakta, .lh-krav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: var(--farg-bakgrund); border-bottom: 1px solid var(--farg-kant); }
+.lh-krav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.lh-fakta > div, .lh-krav > div { padding: 0.7rem 1.25rem; border-left: 1px solid var(--farg-kant); display: flex; flex-direction: column; gap: 0.1rem; }
+.lh-fakta > div:first-child, .lh-krav > div:first-child { border-left: 0; }
+.lh-fakta strong { font-size: 1.1rem; }
+.lh-krav strong { font-size: 1rem; }
+.lh-krav span:last-child { font-size: 0.9rem; }
+.lh-kolumner { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1.75rem; padding: 0.75rem 1.25rem 1.25rem; }
+.lh-kol > h3.lh-kicker, .lh-avsnitt > h3.lh-kicker { margin: 0.9rem 0 0.4rem; color: var(--farg-accent); font-size: 0.75rem; }
+.lh-kol p, .lh-block p { margin: 0 0 0.6em; }
+.lh-ruta { border: 1.5px solid var(--farg-text); margin: 0.75rem 0 1rem; }
+.lh-ruta h4 { margin: 0; background: var(--farg-text); color: #fff; font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.4rem 0.8rem; font-weight: 500; }
+.lh-ruta-kropp { padding: 0.6rem 0.8rem 0.2rem; }
+.lh-ruta .lh-titel { font-weight: 700; font-size: 1.05rem; }
+.lh-ruta > ul { margin: 0.5rem 0.8rem 0.7rem; padding: 0; list-style: none; }
+.lh-lista li { padding: 0.15rem 0; }
+.lh-tva { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1rem; }
+.lh-bockar li { padding-left: 1.4rem; position: relative; }
+.lh-bockar li::before { content: ""; position: absolute; left: 0; top: 0.4rem; width: 0.8rem; height: 0.8rem; border: 1.5px solid var(--farg-accent); border-radius: 2px; }
+.lh-not { background: #fbf3e4; border-left: 4px solid #8a5a1e; padding: 0.6rem 0.9rem; margin: 0.75rem 0; }
+.lh-not h4 { margin: 0 0 0.25rem; color: #8a5a1e; }
+.lh-not p:last-child { margin-bottom: 0; }
+.lh-gra { background: var(--farg-kant); padding: 0.6rem 0.9rem; margin: 0.75rem 0; }
+.lh-gra h4 { margin: 0 0 0.25rem; }
+.lh-gra p:last-child { margin-bottom: 0; }
+.lh-svag { color: var(--farg-text-svag); }
+.lh-tabell.m-tabell { font-size: 0.9rem; margin: 0.25rem 0 0.75rem; }
+.lh-tabell.m-tabell thead th { background: var(--farg-text); border-color: var(--farg-text); font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; }
+.lh-tabell.m-tabell tbody th { color: var(--farg-text); }
+.lh-schema th[scope="row"] { color: var(--farg-text-svag); font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace; font-size: 0.85rem; }
+.lh-fraser { display: block; color: #8a5a1e; font-style: italic; margin-top: 0.2rem; }
+.lh-underrad { margin: 0; padding: 0.5rem 1.25rem; background: var(--farg-bakgrund); border-bottom: 1px solid var(--farg-kant); font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--farg-text-svag); }
+/* Mallsidans block flödar i två spalter som i snabbguiden; spalterna och tavlan tar hela bredden. */
+.lh-block { padding: 0.75rem 1.25rem 1.25rem; column-count: 2; column-gap: 1.75rem; }
+.lh-block > * { break-inside: avoid; }
+.lh-block > .lh-spalter, .lh-block > .lh-tavla { column-span: all; }
+.lh-spalter { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.5rem; margin: 0.5rem 0 1rem; }
+.lh-spalt h4 { margin: 0 0 0.35rem; font-size: 1rem; padding-bottom: 0.3rem; border-bottom: 2px solid var(--farg-text); }
+.lh-spalt .nr, .lh-skrivruta .nr { font-family: ui-monospace, monospace; color: var(--farg-accent); font-size: 0.85rem; margin-right: 0.2rem; }
+.lh-fraga { font-weight: 400; color: var(--farg-text-svag); font-size: 0.9rem; }
+.lh-linje { height: 1.9rem; border-bottom: 1px solid var(--farg-kant); }
+.lh-skrivruta { background: #fbf3e4; padding: 0.75rem 0.9rem 0.5rem; margin: 0.5rem 0 1rem; }
+.lh-skrivruta h4 { margin: 0 0 0.4rem; font-size: 1rem; }
+.lh-skrivruta .lh-linje { border-bottom-color: #e6d6b5; }
+.lh-tavla { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem 2rem; border: 1px solid var(--farg-kant); background: #fff; padding: 1rem 1.25rem; margin: 0.5rem 0 1rem; font-family: var(--typsnitt-brod); font-style: italic; font-size: 1.05rem; color: #1f3a5f; }
+.lh-tavla ul { margin: 0 0 0.6em; padding-left: 1.2em; }
+.lh-tavla .lh-listor { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1rem; }
+.lh-tavla .lh-listrubrik { margin-bottom: 0.2em; color: var(--farg-text-svag); }
+.lh-ram { display: inline-block; border: 1.5px solid #b3261e; color: #b3261e; padding: 0.15rem 0.6rem; }
+.lh-svar { font-weight: 700; }
+.lh-tavla-tabell { border-collapse: collapse; margin: 0 0 0.75rem; width: 100%; }
+.lh-tavla-tabell th, .lh-tavla-tabell td { border: 1px solid var(--farg-kant); padding: 0.25rem 0.6rem; text-align: left; font-weight: 400; }
+.lh-tavla-tabell th { border-bottom: 2px solid var(--farg-text); }
+.lh-tavla-tabell tbody tr:last-child td { color: #2e7d32; font-weight: 700; }
+.lh-citat { color: #8a5a1e; margin-top: 1rem; }
+.lh-kedja { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 0.25rem 0 0.5rem; font-family: var(--typsnitt-brod); font-style: italic; }
+.lh-steg { border: 1.5px solid var(--farg-text); padding: 0.25rem 0.7rem; }
+.lh-steg:last-child { border-color: #2e7d32; color: #2e7d32; }
+.lh-pil { color: var(--farg-text-svag); }
+.lh-snabbmall { margin: 0.5rem 0 1rem; }
+@media screen and (max-width: 48rem) {
+  .lh-kolumner, .lh-krav, .lh-spalter, .lh-tavla, .lh-tavla .lh-listor, .lh-tva { grid-template-columns: 1fr; }
+  .lh-block { column-count: 1; }
+  .lh-fakta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lh-fakta > div:nth-child(3) { border-left: 0; }
+  .lh-fakta > div:nth-child(n+3) { border-top: 1px solid var(--farg-kant); }
+  .lh-krav > div, .lh-tavla > div + div { border-left: 0; border-top: 1px solid var(--farg-kant); }
+  .lh-krav > div:first-child { border-top: 0; }
+  .lh-tavla > div + div { padding-top: 0.75rem; }
+}
+@media print {
+  /* En liggande A4-sida per avsnitt: tät typografi, inga sidbrytningar inuti rutor och rader. */
+  .lathund-huvud, .lathund .upphov { display: none; }
+  .lh-sida { break-after: page; break-inside: auto; border: 0; border-radius: 0; margin: 0; font-size: 9.5pt; line-height: 1.38; }
+  .lh-sida:last-child { break-after: auto; }
+  .lh-huvud, .lh-ruta h4, .lh-tabell.m-tabell thead th, .lh-not, .lh-gra, .lh-fakta, .lh-krav, .lh-underrad, .lh-skrivruta { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .lh-ruta, .lh-not, .lh-gra, .lh-spalt, .lh-skrivruta, .lh-tavla, .lh-tabell.m-tabell tr, .lh-snabbmall tr, .lh-fakta, .lh-krav { break-inside: avoid; }
+  .lh-huvud { padding: 0.4rem 0.9rem; }
+  .lh-huvud h2 { font-size: 12pt; }
+  .lh-fakta > div, .lh-krav > div { padding: 0.35rem 0.9rem; }
+  .lh-fakta strong { font-size: 10pt; }
+  .lh-krav strong { font-size: 9pt; }
+  .lh-kolumner { gap: 0 1.25rem; padding: 0.25rem 0.9rem 0.5rem; }
+  .lh-kol > h3.lh-kicker, .lh-avsnitt > h3.lh-kicker { margin: 0.5rem 0 0.25rem; font-size: 7pt; }
+  .lh-kicker { font-size: 7pt; }
+  .lh-kol p, .lh-block p { margin: 0 0 0.4em; }
+  .lh-ruta { margin: 0.4rem 0 0.6rem; }
+  .lh-ruta h4 { padding: 0.25rem 0.6rem; font-size: 7pt; }
+  .lh-ruta-kropp { padding: 0.4rem 0.6rem 0.1rem; }
+  .lh-ruta > ul { margin: 0.35rem 0.6rem 0.5rem; }
+  .lh-not, .lh-gra { padding: 0.4rem 0.7rem; margin: 0.5rem 0; }
+  .lh-tabell.m-tabell { font-size: 8.5pt; margin: 0.15rem 0 0.5rem; }
+  .lh-tabell.m-tabell th, .lh-tabell.m-tabell td { padding: 0.3rem 0.45rem; }
+  .lh-block { padding: 0.5rem 0.9rem 0.75rem; }
+  .lh-spalter { gap: 0.6rem 1.25rem; margin: 0.25rem 0 0.6rem; }
+  .lh-spalt h4 { font-size: 9.5pt; }
+  .lh-linje { height: 1.45rem; }
+  .lh-skrivruta { padding: 0.5rem 0.7rem 0.35rem; margin: 0.25rem 0 0.5rem; }
+  .lh-tavla { font-size: 9pt; padding: 0.6rem 0.9rem; margin: 0.25rem 0 0.5rem; }
+  .lh-snabbmall td { height: 1.6rem; }
+}
+
 .metod-fot { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--farg-kant); }
 .metod-fot .relaterade h2 { font-size: 1.15rem; margin: 1.25rem 0 0.4em; }
 .metod-fot .relaterade ul { padding-left: 1.2em; margin: 0 0 1em; }
 .metod-fot .upphov { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
 .tryck-fot { display: none; }
 
-@media (max-width: 40rem) {
+@media screen and (max-width: 40rem) {
   /* Stegtabellen staplas. Rubrikraden döljs bara visuellt och tabellrollerna står i markupen, så att skärmläsare behåller relationerna. */
   .m-tabell.steg colgroup { display: none; }
   .m-tabell.steg thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -387,7 +506,7 @@ html.js .nedladdning .skriv-ut { display: block; }
   a { text-decoration: none; color: inherit; }
 }
 
-@media (max-width: 40rem) {
+@media screen and (max-width: 40rem) {
   body { font-size: 1rem; }
   .faktaruta dl { grid-template-columns: 1fr; }
   .artikel .ingress { font-size: 1.15rem; }

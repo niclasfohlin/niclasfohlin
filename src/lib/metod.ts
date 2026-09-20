@@ -38,3 +38,34 @@ export function datumText(d?: Date | string): string {
 export function harMallar(d: MetodData): boolean {
   return Boolean(d.snabbmall || d.checklista || d.mal);
 }
+
+export function harLathund(d: MetodData): boolean {
+  return Boolean(d.lathund);
+}
+
+const versal = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
+const gemen = (s: string) => (s ? s.charAt(0).toLowerCase() + s.slice(1) : s);
+
+// Lathundens fyra faktarutor. Passlängd och frekvens ur tid ("20 minuter per pass, två till tre pass
+// i veckan"), perioden ur period, gruppen ur grupp, innehållet ur lathunden.
+export function lathundFakta(d: MetodData): { rubrik: string; text: string }[] {
+  const [passlangd, ...rest] = (d.tid ?? '').split(/ per pass,?\s*/);
+  const frekvens = [rest.join(' ').trim(), d.period ? gemen(d.period) : ''].filter(Boolean).join(' i ');
+  return [
+    { rubrik: 'Passlängd', text: versal(passlangd.trim()) || '' },
+    { rubrik: 'Grupp', text: d.grupp ?? '' },
+    { rubrik: 'Frekvens', text: versal(frekvens) },
+    { rubrik: 'Innehåll', text: d.lathund?.innehall ?? '' },
+  ].filter((f) => f.text);
+}
+
+// Arbetsformen som en rad: "Gemensamt (läraren leder) → i par (eleverna prövar) → gemensamt igen (…)".
+export function arbetsformRad(d: MetodData): string {
+  if (!d.arbetsform) return '';
+  return d.arbetsform.delar
+    .map((x, i) => {
+      const namn = x.rubrik.replace(/^\d+\.\s*/, '');
+      return `${i === 0 ? versal(namn) : gemen(namn)} (${gemen(x.text)})`;
+    })
+    .join(' → ');
+}

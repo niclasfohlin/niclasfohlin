@@ -75,6 +75,12 @@ async function provaDocx(fil, namn) {
 }
 await provaDocx(join(dist, `${id}.docx`), 'hela metoden (docx)');
 await provaDocx(join(dist, `${id}-mallar.docx`), 'mallarna (docx)');
+if (metod.lathund) {
+  const lathund = join(dist, id, 'lathund', 'index.html');
+  existsSync(lathund) && readFileSync(lathund, 'utf8').includes('© Niclas Fohlin') ? ok('lathundssidan finns med upphov') : nej('lathundssidan saknas eller saknar upphov');
+  html.includes(`/stodundervisning/${id}/lathund`) ? ok('metodsidan länkar till lathunden') : nej('metodsidan länkar inte till lathunden');
+  await provaDocx(join(dist, `${id}-lathund.docx`), 'lathunden (docx)');
+} else console.log('  obs  ingen lathund i metoden');
 
 // 3. Underlaget: meningar som ska finnas kvar i YAML-filen.
 if (underlag) {

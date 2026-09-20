@@ -4,7 +4,7 @@ import Taggar from '../../components/Taggar.astro';
 import Metod from '../../components/Metod.astro';
 import Nedladdning from '../../components/Nedladdning.astro';
 import { publicerade, formateraDatum } from '../../lib/innehall';
-import { arskursSpann, harMallar, metodAdress, SAJT, UPPHOV } from '../../lib/metod';
+import { arskursSpann, harLathund, harMallar, metodAdress, SAJT, UPPHOV } from '../../lib/metod';
 import { site } from '../../data/site';
 
 export async function getStaticPaths() {
@@ -40,10 +40,10 @@ const adress = metodAdress(site.url, m.id).replace(/^https?:\/\//, '');
           {d.uppdaterad && <><dt>Uppdaterad</dt><dd>{formateraDatum(d.uppdaterad)}</dd></>}
         </dl>
       </div>
-      <Nedladdning id={m.id} harMallar={harMallar(d)} />
+      <Nedladdning id={m.id} harMallar={harMallar(d)} harLathund={harLathund(d)} />
     </div>
 
-    <Metod d={d} />
+    <Metod d={d} id={m.id} />
 
     <footer class="metod-fot">
       <Taggar taggar={d.taggar} nivaer={d.arskurs} />
