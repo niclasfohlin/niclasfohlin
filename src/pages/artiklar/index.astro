@@ -1,20 +1,29 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Taggar from '../../components/Taggar.astro';
-import { artiklarSorterade, formateraDatum, publikationNamn } from '../../lib/innehall';
+import { artiklarSorterade, formateraDatum, publikationNamn, typLabel } from '../../lib/innehall';
 const artiklar = await artiklarSorterade();
+// Ett avsnitt per år, nyaste först.
+const ar = [...new Set(artiklar.map((a) => a.data.datum.getFullYear()))];
 ---
 
-<Base title="Artiklar" description="Publicerade artiklar, krönikor och debattinlägg om skola, undervisning och särskilt stöd.">
+<Base title="Artiklar" description="Krönikor, debattartiklar och andra texter om skolan, publicerade i Vi Lärare, Göteborgs-Posten och andra tidningar.">
   <h1>Artiklar</h1>
-  <p class="text">Texter jag publicerat i Vi Lärare, Göteborgs-Posten och andra tidningar. Varje post länkar till originalet.</p>
+  <p class="text">{artiklar.length} texter om skolan: krönikor och debattartiklar i Vi Lärare, Göteborgs-Posten och andra tidningar, samlade här i sin helhet. Varje text länkar också till originalet.</p>
   {artiklar.length === 0 && <p>Inga artiklar ännu.</p>}
-  {artiklar.map((a) => (
-    <article class="kort">
-      <p class="meta">{formateraDatum(a.data.datum)} · {publikationNamn(a.data.publikation)}</p>
-      <h2><a href={`/artiklar/${a.id}`}>{a.data.titel}</a></h2>
-      <p>{a.data.ingress}</p>
-      <Taggar taggar={a.data.taggar} />
-    </article>
+  {ar.map((aret) => (
+    <section class="arsavsnitt">
+      <h2>{aret}</h2>
+      <div class="rutnat">
+        {artiklar.filter((a) => a.data.datum.getFullYear() === aret).map((a) => (
+          <article class="kort">
+            <p class="meta">{typLabel(a.data.typ)} · {publikationNamn(a.data.publikation)} · {formateraDatum(a.data.datum)}</p>
+            <h3><a href={`/artiklar/${a.id}`}>{a.data.titel}</a></h3>
+            <p>{a.data.ingress}</p>
+            <Taggar taggar={a.data.taggar} />
+          </article>
+        ))}
+      </div>
+    </section>
   ))}
 </Base>

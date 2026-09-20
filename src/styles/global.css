@@ -53,13 +53,47 @@ h3 { font-size: 1.2rem; }
   padding: 1.25rem 1.25rem;
 }
 
-.sidhuvud { display: flex; flex-wrap: wrap; align-items: baseline; gap: 1rem 2rem; font-family: var(--typsnitt-ui); }
-.sidhuvud .namn { font-weight: 700; text-decoration: none; font-size: 1.1rem; }
+.sidhuvud { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.75rem 2rem; font-family: var(--typsnitt-ui); border-bottom: 1px solid var(--farg-kant); }
+.sidhuvud .namn { font-weight: 700; text-decoration: none; font-size: 1.15rem; letter-spacing: 0.01em; }
 .sidhuvud nav { display: flex; flex-wrap: wrap; gap: 1.25rem; }
-.sidhuvud nav a { text-decoration: none; }
-.sidhuvud nav a[aria-current="page"] { text-decoration: underline; }
+.sidhuvud nav a { text-decoration: none; padding: 0.15rem 0; border-bottom: 2px solid transparent; }
+.sidhuvud nav a:hover { border-bottom-color: var(--farg-kant); }
+.sidhuvud nav a[aria-current="page"] { border-bottom-color: var(--farg-accent); color: var(--farg-accent); }
 
-.sidfot { color: var(--farg-text-svag); font-family: var(--typsnitt-ui); font-size: 0.9rem; border-top: 1px solid var(--farg-kant); margin-top: 3rem; }
+.innehall > section + section, .innehall > section + aside { margin-top: 3rem; }
+.innehall > h1 { margin-top: 0.5rem; }
+.lankrad { font-family: var(--typsnitt-ui); margin: 1rem 0 0; }
+
+/* Startsidans huvud: porträtt, rad, rubrik och ingång. */
+.hero { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.5rem 2rem; align-items: center; margin: 1rem 0 0; max-width: 52rem; }
+.hero .portratt-rund { width: 8rem; height: 8rem; border-radius: 50%; object-fit: cover; object-position: top; border: 3px solid var(--farg-yta); box-shadow: 0 0 0 1px var(--farg-kant); }
+.hero h1 { font-size: clamp(1.9rem, 4.5vw, 2.9rem); margin-bottom: 0.4em; }
+.hero p { margin: 0 0 0.75em; }
+
+/* Uppmaningen att prenumerera, längst ner på startsidan. */
+.rop { background: var(--farg-accent-ljus); border-radius: var(--radie); padding: 1.5rem 1.5rem 1.25rem; max-width: 42rem; }
+.rop h2 { font-size: 1.4rem; margin-bottom: 0.4em; }
+.rop p { margin: 0 0 0.75em; }
+.knapp { display: inline-block; background: var(--farg-accent); color: #fff; font-family: var(--typsnitt-ui); text-decoration: none; padding: 0.6rem 1.1rem; border-radius: 8px; }
+.knapp:hover { color: #fff; background: #244a40; }
+
+/* Om-sidan: porträtt bredvid ingressen, sedan tabeller för bakgrund och utbildning. */
+.om-huvud { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem 2.5rem; align-items: end; margin-bottom: 2rem; max-width: var(--matt-bredd); }
+.om-huvud .portratt { width: 100%; max-width: 14rem; height: auto; border-radius: var(--radie); }
+.om-huvud h1 { font-size: clamp(2rem, 5vw, 3rem); }
+.om-huvud .ingress { font-size: 1.2rem; line-height: 1.5; margin: 0; max-width: var(--matt-text); }
+.cv { width: 100%; border-collapse: collapse; margin: 0 0 1.5rem; font-size: 1rem; }
+.cv th, .cv td { text-align: left; vertical-align: top; padding: 0.6rem 0.75rem 0.6rem 0; border-top: 1px solid var(--farg-kant); }
+.cv th { width: 6.5rem; font-family: var(--typsnitt-ui); font-weight: 600; white-space: nowrap; color: var(--farg-text-svag); }
+@media (min-width: 52rem) {
+  .om-huvud { grid-template-columns: 14rem minmax(0, 1fr); }
+}
+
+.arsavsnitt h2 { font-family: var(--typsnitt-ui); font-size: 1rem; color: var(--farg-text-svag); letter-spacing: 0.05em; text-transform: uppercase; margin: 0 0 1rem; }
+
+.sidfot { color: var(--farg-text-svag); font-family: var(--typsnitt-ui); font-size: 0.9rem; border-top: 1px solid var(--farg-kant); margin-top: 4rem; }
+.sidfot-rad { margin: 0 0 0.5em; }
+.sidfot strong { color: var(--farg-text); }
 
 .text { max-width: var(--matt-text); }
 .text p, .text ul, .text ol { margin: 0 0 1em; }
@@ -185,4 +219,8 @@ form.prenumerera button { font: inherit; padding: 0.6rem 1rem; border: 0; border
   .faktaruta dl { grid-template-columns: 1fr; }
   .artikel .ingress { font-size: 1.15rem; }
   .brod { font-size: 1.0625rem; line-height: 1.7; }
+  .hero { grid-template-columns: 1fr; gap: 1rem; }
+  .hero .portratt-rund { width: 6rem; height: 6rem; }
+  .om-huvud .portratt { max-width: 10rem; }
+  .cv th { width: 5rem; white-space: normal; }
 }

@@ -7,14 +7,14 @@ interface Props {
   description?: string;
   /** Sätt till 'article' för artiklar och metoder. */
   typ?: 'website' | 'article';
-  /** Absolut eller rotrelativ sökväg till delningsbild. */
+  /** Absolut eller rotrelativ sökväg till delningsbild. Utan egen bild används porträttet. */
   bild?: string;
 }
 
-const { title, description = site.beskrivning, typ = 'website', bild } = Astro.props;
+const { title, description = site.beskrivning, typ = 'website', bild = site.delningsbild } = Astro.props;
 const fullTitel = title ? `${title} · ${site.namn}` : `${site.namn}: ${site.rad.toLowerCase()}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const bildUrl = bild ? new URL(bild, Astro.site).href : undefined;
+const bildUrl = new URL(bild, Astro.site).href;
 const nuvarande = Astro.url.pathname;
 function aktiv(href: string) {
   return nuvarande === href || nuvarande.startsWith(href + '/') ? 'page' : undefined;
@@ -26,6 +26,7 @@ function aktiv(href: string) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f6f1" />
     <title>{fullTitel}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical.href} />
@@ -40,8 +41,8 @@ function aktiv(href: string) {
     <meta property="og:url" content={canonical.href} />
     <meta property="og:site_name" content={site.namn} />
     <meta property="og:locale" content="sv_SE" />
-    {bildUrl && <meta property="og:image" content={bildUrl} />}
-    <meta name="twitter:card" content={bildUrl ? 'summary_large_image' : 'summary'} />
+    <meta property="og:image" content={bildUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <a class="hopp-lank" href="#innehall">Hoppa till innehållet</a>
@@ -57,7 +58,9 @@ function aktiv(href: string) {
       <slot />
     </main>
     <footer class="sidfot">
-      <p>© {new Date().getFullYear()} {site.namn}. <a href="/prenumerera">Prenumerera</a> på nya texter eller följ <a href="/rss.xml">RSS</a>.</p>
+      <p class="sidfot-rad"><strong>{site.namn}</strong>, {site.rad.toLowerCase()}. <a href={`mailto:${site.epost}`}>{site.epost}</a></p>
+      <p class="sidfot-rad"><a href="/prenumerera">Prenumerera</a> · <a href="/rss.xml">RSS</a> · <a href="/taggar">Taggar</a> · <a href="/om">Om</a></p>
+      <p class="sidfot-rad">© {new Date().getFullYear()} {site.namn}. Texterna är publicerade i Vi Lärare och andra tidningar först; varje text länkar till originalet.</p>
     </footer>
   </body>
 </html>

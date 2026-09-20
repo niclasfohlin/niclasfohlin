@@ -2,35 +2,58 @@
 import Base from '../layouts/Base.astro';
 import Taggar from '../components/Taggar.astro';
 import { site } from '../data/site';
-import { artiklarSorterade, metoderSorterade, bockerSorterade, formateraDatum, publikationNamn } from '../lib/innehall';
+import { artiklarSorterade, metoderSorterade, bockerSorterade, formateraDatum, publikationNamn, typLabel } from '../lib/innehall';
 
 const artiklar = await artiklarSorterade();
 const utvalda = artiklar.filter((a) => a.data.utvald).slice(0, 3);
 const senaste = (utvalda.length > 0 ? utvalda : artiklar).slice(0, 3);
 const metoder = (await metoderSorterade()).slice(0, 3);
-const bocker = (await bockerSorterade()).slice(0, 3);
+const bocker = (await bockerSorterade()).slice(0, 4);
 ---
 
 <Base>
-  <section class="text">
-    <p class="meta">{site.rad}</p>
-    <h1>Texter och verktyg för en skola som fungerar bättre.</h1>
-    <p>Här samlar jag publicerade artiklar, mina böcker och färdiga metoder för stödundervisning i matematik, läsning och skrivning.</p>
+  <section class="hero">
+    <img class="portratt-rund" src="/images/niclas-fohlin.jpg" alt="" width="516" height="600" />
+    <div>
+      <p class="meta">{site.rad}</p>
+      <h1>Texter och verktyg för en skola som fungerar bättre.</h1>
+      <p>Jag är speciallärare och specialpedagog. Här samlar jag mina krönikor och debattartiklar om skolan, böckerna om undervisning och metoder för stödundervisning i läsning, skrivning och matematik.</p>
+      <p class="lankrad"><a href="/om">Om mig</a> · <a href="/prenumerera">Prenumerera på nytt</a></p>
+    </div>
   </section>
 
   <section>
-    <h2>Senaste texter</h2>
+    <h2>{utvalda.length > 0 ? 'Utvalda texter' : 'Senaste texter'}</h2>
     <div class="rutnat">
       {senaste.map((a) => (
-        <a class="kort" href={`/artiklar/${a.id}`}>
-          <p class="meta">{formateraDatum(a.data.datum)} · {publikationNamn(a.data.publikation)}</p>
-          <h3>{a.data.titel}</h3>
+        <article class="kort">
+          <p class="meta">{typLabel(a.data.typ)} · {publikationNamn(a.data.publikation)} · {formateraDatum(a.data.datum)}</p>
+          <h3><a href={`/artiklar/${a.id}`}>{a.data.titel}</a></h3>
           <p>{a.data.ingress}</p>
-        </a>
+        </article>
       ))}
     </div>
-    <p><a href="/artiklar">Alla artiklar</a></p>
+    <p class="lankrad"><a href="/artiklar">Alla {artiklar.length} texter</a></p>
   </section>
+
+  {bocker.length > 0 && (
+    <section>
+      <h2>Böcker</h2>
+      <p class="text">Böcker om kooperativt lärande, undervisning och läsinlärning, de flesta skrivna tillsammans med Jennie Wilson.</p>
+      <div class="rutnat bokrad">
+        {bocker.map((b) => (
+          <article class="kort bok-kort">
+            {b.data.omslag && <a href={`/bocker/${b.id}`} class="bok-omslag" tabindex="-1" aria-hidden="true"><img src={b.data.omslag} alt="" loading="lazy" width="120" /></a>}
+            <div>
+              <p class="meta">{b.data.utgivningsar}{b.data.forlag && ` · ${b.data.forlag}`}</p>
+              <h3><a href={`/bocker/${b.id}`}>{b.data.titel}</a></h3>
+            </div>
+          </article>
+        ))}
+      </div>
+      <p class="lankrad"><a href="/bocker">Alla böcker</a></p>
+    </section>
+  )}
 
   {metoder.length > 0 && (
     <section>
@@ -46,23 +69,13 @@ const bocker = (await bockerSorterade()).slice(0, 3);
           </article>
         ))}
       </div>
-      <p><a href="/stodundervisning">Hela metodbanken</a></p>
+      <p class="lankrad"><a href="/stodundervisning">Hela metodbanken</a></p>
     </section>
   )}
 
-  {bocker.length > 0 && (
-    <section>
-      <h2>Böcker</h2>
-      <div class="rutnat">
-        {bocker.map((b) => (
-          <a class="kort" href={`/bocker/${b.id}`}>
-            <p class="meta">{b.data.utgivningsar}{b.data.forlag && ` · ${b.data.forlag}`}</p>
-            <h3>{b.data.titel}</h3>
-            <p>{b.data.beskrivning}</p>
-          </a>
-        ))}
-      </div>
-      <p><a href="/bocker">Alla böcker</a></p>
-    </section>
-  )}
+  <aside class="rop">
+    <h2>Ett mejl när det kommer nytt</h2>
+    <p>Nya texter, böcker och metoder skickas till dem som prenumererar. Inget annat, och du kan avsluta när som helst.</p>
+    <p><a class="knapp" href="/prenumerera">Prenumerera</a></p>
+  </aside>
 </Base>

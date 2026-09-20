@@ -1,11 +1,52 @@
 ---
 import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
 ---
 
-<Base title="Om Niclas Fohlin" description="Om Niclas Fohlin: specialpedagog, författare och föreläsare.">
-  <article class="text">
-    <h1>Om mig</h1>
-    <p>Den här sidan skrivs av Niclas. Claude Code frågar efter underlag i stället för att hitta på fakta om person, tjänst och bakgrund.</p>
-    <p>Kontakt och sociala länkar läggs till här.</p>
+<Base title="Om Niclas Fohlin" description="Niclas Fohlin är samordnande specialpedagog på AcadeMedias grundskolor, speciallärare, författare och föreläsare." bild={site.delningsbild}>
+  <article class="om">
+    <header class="om-huvud">
+      <img class="portratt" src="/images/niclas-fohlin.jpg" alt="Niclas Fohlin" width="516" height="600" />
+      <div>
+        <p class="meta">{site.rad}</p>
+        <h1>Niclas Fohlin</h1>
+        <p class="ingress">Jag har arbetat i skolan sedan 2006: i klassrum, i särskilda undervisningsgrupper, i elevhälsoteam och med skolutveckling. I dag är jag samordnande specialpedagog på AcadeMedias grundskolor. Jag skriver böcker om undervisning tillsammans med Jennie Wilson, och krönikor och debattartiklar i Vi Lärare.</p>
+      </div>
+    </header>
+
+    <div class="text">
+      <h2>Det här gör jag nu</h2>
+      <p>På AcadeMedia ansvarar jag för att utveckla rutiner och riktlinjer för särskilt stöd på alla koncernens grundskolor: Vittra, Innovitaskolan, Noblaskolan, Montessori Mondial och Pops. Arbetet handlar om hur en skola ser behoven tidigt, sätter in rätt stöd och följer upp att det hjälper, så att stödet fungerar lika bra oavsett vilken skola eleven går på.</p>
+      <p>Vid sidan av det skriver jag. Böckerna handlar om kooperativt lärande, om undervisning som håller ihop en klass och om läsinlärning. Krönikorna i Vi Lärare handlar om skolpolitiken och om vad den gör med de elever som behöver skolan mest. Jag föreläser och handleder också skolor och kommuner.</p>
+
+      <h2>Bakgrund</h2>
+      <table class="cv">
+        <tbody>
+          <tr><th scope="row">I dag</th><td>Samordnande specialpedagog, AcadeMedia grundskolor. Rutiner och riktlinjer för särskilt stöd på Vittra, Innovitaskolan, Noblaskolan, Montessori Mondial och Pops.</td></tr>
+          <tr><th scope="row">2018–</th><td>Pedagogisk utvecklingsledare och författare. Skolutvecklingsprojekt med kommuner, Skolverket och universitet, böcker på Studentlitteratur och forskningssamarbete med Uppsala universitet.</td></tr>
+          <tr><th scope="row">2018</th><td>Speciallärare F–6, Tjärnaskolan i Borlänge. Handledning och kompetensutveckling av personalen.</td></tr>
+          <tr><th scope="row">2011–2017</th><td>Speciallärare F–9, Västerholms friskola i Stockholm. Ordförande i elevhälsoteamet, ansvarig för kartläggningar, åtgärdsprogram och handledning, kontakt med BUP och habiliteringen.</td></tr>
+          <tr><th scope="row">2009–2011</th><td>Lärare F–3 på Västerholms friskola och speciallärare på Fryshuset i Stockholm. Särskilt stöd för de yngsta eleverna, sociala projekt och handledning av personal.</td></tr>
+          <tr><th scope="row">2006–2009</th><td>Förskollärare, speciallärare och idrottslärare i Järfälla kommun.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Utbildning</h2>
+      <table class="cv">
+        <tbody>
+          <tr><th scope="row">2017–2019</th><td>Speciallärarprogrammet med inriktning läs-, språk- och skrivutveckling, Stockholms universitet. Speciallärarexamen.</td></tr>
+          <tr><th scope="row">2014–2015</th><td>Lärarprofessionskurser och utökad behörighet, Högskolan Dalarna.</td></tr>
+          <tr><th scope="row">2007–2009</th><td>Lärare i idrott och hälsa F–9, Gymnastik- och idrottshögskolan.</td></tr>
+          <tr><th scope="row">2003–2007</th><td>Lärare för förskola, förskoleklass och skolans tidigare år, Lärarhögskolan i Stockholm. Lärarexamen, förskollärarexamen och fritidspedagogexamen.</td></tr>
+        </tbody>
+      </table>
+      <p>Därtill fortbildning för pedagoger hos ADHD-center, habiliteringen (språkstörning), Autismcenter och Specialpedagogiska skolmyndigheten (syn- och hörselnedsättning).</p>
+
+      <h2>Böcker och forskning</h2>
+      <p>Böckerna finns på <a href="/bocker">sidan om böckerna</a>, med omslag och länk till förlaget. Tillsammans med forskare vid Uppsala universitet har jag medverkat i en studie av kooperativt lärande som insats för social inkludering i heterogena klassrum: Klang, Olsson, Wilder, Lindqvist, Fohlin och Nilholm (2020), A Cooperative Learning Intervention to Promote Social Inclusion in Heterogeneous Classrooms.</p>
+
+      <h2>Kontakt</h2>
+      <p>Skriv till <a href={`mailto:${site.epost}`}>{site.epost}</a>. Vill du ha ett mejl när det kommer nya texter, böcker eller metoder: <a href="/prenumerera">prenumerera</a>.</p>
+    </div>
   </article>
 </Base>
