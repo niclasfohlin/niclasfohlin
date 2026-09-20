@@ -38,12 +38,12 @@ const bocker = (await bockerSorterade()).slice(0, 3);
       <p class="text">Konkreta metoder att använda direkt, sorterade på område, årskurs och vad de tränar.</p>
       <div class="rutnat">
         {metoder.map((m) => (
-          <a class="kort" href={`/stodundervisning/${m.id}`}>
+          <article class="kort">
             <p class="meta">{m.data.omrade} · {m.data.arskurs.join(', ')}</p>
-            <h3>{m.data.titel}</h3>
+            <h3><a href={`/stodundervisning/${m.id}`}>{m.data.titel}</a></h3>
             <p>{m.data.ingress}</p>
             <Taggar taggar={m.data.taggar} />
-          </a>
+          </article>
         ))}
       </div>
       <p><a href="/stodundervisning">Hela metodbanken</a></p>

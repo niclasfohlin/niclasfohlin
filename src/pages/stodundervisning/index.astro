@@ -47,11 +47,11 @@ const taggarIBruk = [...new Set(metoder.flatMap((m) => m.data.taggar))].sort((a,
         {lista.length === 0 && <p class="meta">Inga metoder ännu.</p>}
         <div class="rutnat">
           {lista.map((m) => (
-            <a class="kort" href={`/stodundervisning/${m.id}`} data-metod data-omrade={m.data.omrade} data-arskurs={m.data.arskurs.join(' ')} data-taggar={m.data.taggar.join(' ')}>
-              <h3>{m.data.titel}</h3>
+            <article class="kort" data-metod data-omrade={m.data.omrade} data-arskurs={m.data.arskurs.join(' ')} data-taggar={m.data.taggar.join(' ')}>
+              <h3><a href={`/stodundervisning/${m.id}`}>{m.data.titel}</a></h3>
               <p>{m.data.ingress}</p>
               <Taggar taggar={m.data.taggar} nivaer={m.data.arskurs} />
-            </a>
+            </article>
           ))}
         </div>
       </section>
