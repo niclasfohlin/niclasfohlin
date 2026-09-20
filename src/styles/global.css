@@ -114,6 +114,21 @@ h3 { font-size: 1.2rem; }
   background: var(--farg-yta);
 }
 
+/* Artikelsidan: rubrik, ingress och källa i huvudet, sedan hela texten med läsvänlig radlängd och luft. */
+.artikel { max-width: var(--matt-text); }
+.artikel-huvud h1 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); letter-spacing: -0.01em; margin-bottom: 0.5em; }
+.artikel .ingress { font-size: 1.25rem; line-height: 1.5; font-weight: 700; margin: 0 0 1rem; }
+.brod { font-size: 1.125rem; line-height: 1.75; }
+.brod > p, .brod > ul, .brod > ol { margin: 0 0 1.25em; }
+.brod > ul, .brod > ol { padding-left: 1.4em; }
+.brod li { margin-bottom: 0.4em; }
+.brod h2 { font-size: 1.4rem; margin: 2.2em 0 0.6em; }
+.brod h3 { font-size: 1.15rem; margin: 1.8em 0 0.5em; }
+.brod blockquote { margin: 1.5em 0; padding: 0 0 0 1rem; border-left: 3px solid var(--farg-accent); color: var(--farg-text-svag); }
+.brod .signatur { font-family: var(--typsnitt-ui); font-size: 0.95rem; color: var(--farg-text-svag); margin-top: 2em; }
+.artikel-fot { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--farg-kant); }
+.artikel-fot .taggar { margin-bottom: 1rem; }
+
 .omslag { max-width: 12rem; height: auto; border: 1px solid var(--farg-kant); }
 
 /* Filtret i metodbanken. Visas bara när JavaScript finns; utan det syns alla metoder. */
@@ -147,4 +162,6 @@ form.prenumerera button { font: inherit; padding: 0.6rem 1rem; border: 0; border
 @media (max-width: 40rem) {
   body { font-size: 1rem; }
   .faktaruta dl { grid-template-columns: 1fr; }
+  .artikel .ingress { font-size: 1.15rem; }
+  .brod { font-size: 1.0625rem; line-height: 1.7; }
 }

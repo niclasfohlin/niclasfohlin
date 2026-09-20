@@ -46,6 +46,12 @@ export function publikationInfo(id: string) {
   return publikationMap.get(id);
 }
 
+// Etiketten läsaren ser för en artikels typ.
+const typEtiketter: Record<string, string> = { kronika: 'Krönika', debatt: 'Debatt', artikel: 'Artikel', intervju: 'Intervju', annat: 'Text' };
+export function typLabel(typ: string): string {
+  return typEtiketter[typ] ?? typ;
+}
+
 export function formateraDatum(d: Date): string {
   return new Intl.DateTimeFormat('sv-SE', { year: 'numeric', month: 'long', day: 'numeric' }).format(d);
 }

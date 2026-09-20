@@ -3,7 +3,7 @@ import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Taggar from '../../components/Taggar.astro';
 import Kalla from '../../components/Kalla.astro';
-import { publicerade, formateraDatum } from '../../lib/innehall';
+import { publicerade, formateraDatum, publikationNamn, typLabel } from '../../lib/innehall';
 
 export async function getStaticPaths() {
   const artiklar = await publicerade('artiklar');
@@ -14,18 +14,26 @@ const { a } = Astro.props;
 const { Content } = await render(a);
 // "A, B och C" i stället för "A och B och C" när flera medförfattare står på texten.
 const medforfattare = new Intl.ListFormat('sv', { type: 'conjunction' }).format(a.data.medforfattare);
+const namn = publikationNamn(a.data.publikation);
 ---
 
 <Base title={a.data.titel} description={a.data.ingress} typ="article">
-  <article class="text">
-    <p class="meta">
-      {formateraDatum(a.data.datum)}
-      {a.data.medforfattare.length > 0 && ` · Tillsammans med ${medforfattare}`}
-    </p>
-    <h1>{a.data.titel}</h1>
-    <p><strong>{a.data.ingress}</strong></p>
-    <Kalla publikation={a.data.publikation} originalUrl={a.data.originalUrl} datum={a.data.datum} />
-    <Content />
-    <Taggar taggar={a.data.taggar} />
+  <article class="artikel">
+    <header class="artikel-huvud">
+      <p class="meta">{typLabel(a.data.typ)} · {namn} · {formateraDatum(a.data.datum)}</p>
+      <h1>{a.data.titel}</h1>
+      <p class="ingress">{a.data.ingress}</p>
+      {a.data.medforfattare.length > 0 && <p class="meta">Tillsammans med {medforfattare}</p>}
+      <Kalla publikation={a.data.publikation} originalUrl={a.data.originalUrl} datum={a.data.datum} />
+    </header>
+    <div class="brod">
+      <Content />
+    </div>
+    <footer class="artikel-fot">
+      <Taggar taggar={a.data.taggar} />
+      {a.data.heltext && a.data.originalUrl && (
+        <p class="meta">Texten publicerades först i {namn}. <a href={a.data.originalUrl} rel="noopener">Läs originalet där</a>.</p>
+      )}
+    </footer>
   </article>
 </Base>
