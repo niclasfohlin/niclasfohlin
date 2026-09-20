@@ -36,6 +36,20 @@ async function brevo(sokvag, body, nyckel) {
   return text ? JSON.parse(text) : {};
 }
 
+// Läser nytt.json från en adress, helst deployens egen (permalänken) så att det är den nya
+// versionen. Några omförsök om svaret ännu inte är JSON.
+export async function lasNytt(bas) {
+  let senast = '';
+  for (let forsok = 1; forsok <= 5; forsok++) {
+    const res = await fetch(`${bas}/nytt.json`, { cache: 'no-store', headers: { Accept: 'application/json' } });
+    const typ = res.headers.get('content-type') ?? '';
+    if (res.ok && typ.includes('json')) return res.json();
+    senast = `${res.status} ${typ}`;
+    await new Promise((r) => setTimeout(r, 1500 * forsok));
+  }
+  throw new Error(`nytt.json gick inte att läsa från ${bas}: ${senast}`);
+}
+
 /**
  * @param {object} arg
  * @param {Array<{url: string, titel: string, ingress: string, etikett: string}>} arg.poster allt som är publicerat
