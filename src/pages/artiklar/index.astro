@@ -43,7 +43,10 @@ const typer = [...new Set(artiklar.map((a) => a.data.typ))].map((t) => ({ id: t,
   )}
 
   {ar.length > 1 && (
-    <p class="meta arkiv-ar">Hoppa till år: {ar.map((aret, i) => <>{i > 0 && ' · '}<a href={`#ar-${aret}`}>{aret}</a></>)}</p>
+    <nav class="metod-nav arkiv-ar" aria-label="Hoppa till år">
+      <span class="nav-etikett" aria-hidden="true">Hoppa till år</span>
+      <ul>{ar.map((aret) => <li><a href={`#ar-${aret}`}>{aret}</a></li>)}</ul>
+    </nav>
   )}
 
   {ar.map((aret) => (

@@ -26,8 +26,14 @@ const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathu
         <span class="bara-js"><button type="button" class="knapp" data-skriv-ut>Skriv ut</button></span>
         {' '}<a class="knapp sekundar" href={`/stodundervisning/${m.id}-lathund.docx`} download={`${m.id}-lathund.docx`}>Word-fil</a>
       </p>
-      <nav class="lathund-nav meta" aria-label="Lathundens sidor">
-        <a href="#lathund-metoden">1 Metoden</a> · <a href="#lathund-pass">2 Ett pass</a> · <a href="#lathund-mall">3 Mallen</a> · <a href="#lathund-material">4 Material</a>
+      <nav class="metod-nav lathund-nav" aria-label="Lathundens sidor">
+        <span class="nav-etikett" aria-hidden="true">Lathundens sidor</span>
+        <ul>
+          <li><a href="#lathund-metoden">1 Metoden</a></li>
+          <li><a href="#lathund-pass">2 Ett pass</a></li>
+          <li><a href="#lathund-mall">3 Mallen</a></li>
+          <li><a href="#lathund-material">4 Material</a></li>
+        </ul>
       </nav>
     </header>
     <Lathund d={d} />

@@ -59,7 +59,7 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
               <p>{m.data.ingress}</p>
               <Taggar taggar={m.data.taggar} nivaer={m.data.arskurs} />
               <p class="kort-rad">
-                {harLathund(m.data) && <><a class="lathund-lank" href={`/stodundervisning/${m.id}/lathund`}>Lathund<span class="visually-hidden">: {m.data.titel}</span></a>{' · '}</>}
+                {harLathund(m.data) && <a class="lathund-lank" href={`/stodundervisning/${m.id}/lathund`}>Lathund<span class="visually-hidden">: {m.data.titel}</span></a>}
                 <a href={`/stodundervisning/${m.id}.docx`} download={`${m.id}.docx`}>Allt som Word-fil<span class="visually-hidden">: {m.data.titel}</span></a>
                 <label class="valj"><input type="checkbox" name="valda" value={m.id} /> Välj<span class="visually-hidden"> {m.data.titel}</span></label>
               </p>

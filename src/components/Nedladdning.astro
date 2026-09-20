@@ -14,12 +14,12 @@ const delarText = delar.length > 1 ? `${delar.slice(0, -1).join(', ')} och ${del
     {harLathund && <li><a class="knapp" href={`/stodundervisning/${id}/lathund`}>Öppna lathunden</a></li>}
     <li><a class={harLathund ? 'knapp sekundar' : 'knapp'} href={`/stodundervisning/${id}.docx`} download={`${id}.docx`}>Allt om metoden (docx)</a></li>
   </ul>
-  <p class="nedladdning-rad">
-    {harLathund && <><a href={`/stodundervisning/${id}-lathund.docx`} download={`${id}-lathund.docx`}>Bara lathunden (docx)</a>{' · '}</>}
-    {harMallar && <><a href={`/stodundervisning/${id}-mallar.docx`} download={`${id}-mallar.docx`}>Bara planeringsmallarna (docx)</a>{' · '}</>}
-    <span class="bara-js"><button type="button" class="lank" data-skriv-ut>Skriv ut den här sidan</button></span>
-  </p>
-  <p class="meta">Word-filen Allt om metoden innehåller {delarText}.{harMallar && ' Planeringsmallarna är snabbmallen för passet, checklistan inför passet och målkollen före och efter.'} Alla filer bär © Niclas Fohlin och niclasfohlin.se. Vill du ha flera metoder i en fil: välj dem i <a href="/stodundervisning">metodbanken</a>.</p>
+  <ul class="lankrad-lista nedladdning-rad">
+    {harLathund && <li><a href={`/stodundervisning/${id}-lathund.docx`} download={`${id}-lathund.docx`}>Bara lathunden (docx)</a></li>}
+    {harMallar && <li><a href={`/stodundervisning/${id}-mallar.docx`} download={`${id}-mallar.docx`}>Bara planeringsmallarna (docx)</a></li>}
+    <li class="bara-js"><button type="button" class="lank" data-skriv-ut>Skriv ut den här sidan</button></li>
+  </ul>
+  <p class="meta">Allt om metoden: {delarText}. Alla filer bär © Niclas Fohlin.</p>
 </aside>
 
 <script>

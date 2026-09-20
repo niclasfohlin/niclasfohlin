@@ -215,7 +215,7 @@ html.js .filter {
 /* Artikelarkivets sökfält och årslänkar. */
 .filter .sok-val > label { font-weight: 600; display: block; margin: 0 0 0.35rem; }
 .filter .sok-val input[type="search"] { font: inherit; width: 100%; min-width: 16rem; padding: 0.4rem 0.6rem; border: 1px solid var(--farg-kant); border-radius: 8px; background: var(--farg-yta); color: inherit; }
-.arkiv-ar { margin: 0 0 1.5rem; }
+.arkiv-ar { margin: 0 0 1.5rem; font-family: var(--typsnitt-ui); font-size: 0.9rem; }
 .arsavsnitt { scroll-margin-top: 1rem; }
 [hidden] { display: none !important; }
 
@@ -231,7 +231,7 @@ form.prenumerera button { font: inherit; padding: 0.6rem 1rem; border: 0; border
 
 /* Metodbanken: korten och raden för att ladda ner flera metoder i en fil. */
 .metodkort .undertitel { font-family: var(--typsnitt-ui); color: var(--farg-accent); font-size: 0.95rem; margin: 0 0 0.6em; }
-.metodkort .kort-rad { font-family: var(--typsnitt-ui); font-size: 0.9rem; margin: 0.5rem 0 0; display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
+.metodkort .kort-rad { font-family: var(--typsnitt-ui); font-size: 0.9rem; margin: 0.5rem 0 0; display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; align-items: center; }
 .metodkort .valj { display: none; }
 html.js .metodkort .valj { margin-left: auto; display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 600; cursor: pointer; }
 .metodkort .valj input { accent-color: var(--farg-accent); width: 1.1rem; height: 1.1rem; margin: 0; }
@@ -273,6 +273,9 @@ html.js .samla {
 html.js .nedladdning .skriv-ut { display: block; }
 .nedladdning .knapp { font-size: 0.95rem; padding: 0.5rem 0.9rem; }
 .nedladdning-rad { font-size: 0.9rem; margin: 0 0 0.75rem; }
+/* Länkrad: länkar med luft emellan, inga skiljetecken som kan hamna först på en rad. */
+.lankrad-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; }
+.sidfot .lankrad-lista { margin: 0 0 0.5em; }
 button.lank { font: inherit; background: none; border: 0; padding: 0; color: inherit; text-decoration: underline; text-decoration-color: var(--farg-accent); text-underline-offset: 0.15em; cursor: pointer; }
 button.lank:hover { color: var(--farg-accent); }
 @media (min-width: 52rem) {
@@ -280,9 +283,9 @@ button.lank:hover { color: var(--farg-accent); }
 }
 
 .metod-nav { font-family: var(--typsnitt-ui); font-size: 0.9rem; margin: 0 0 1.5rem; }
-/* Sidnavigationen är länkar i en rad, inte knappar: knappar är för handlingar. */
-.metod-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.2rem 0; color: var(--farg-text-svag); }
-.metod-nav li + li::before { content: "·"; margin: 0 0.5rem; }
+/* Sidnavigationen är länkar med luft emellan, inte knappar och inga skiljetecken som hamnar först på raden. */
+.metod-nav .nav-etikett { display: block; font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--farg-text-svag); margin: 0 0 0.35rem; }
+.metod-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; }
 .metod-nav a { color: var(--farg-text); }
 .metod-nav a.lathund-lank { font-weight: 600; }
 .metod-modell section { scroll-margin-top: 1rem; }

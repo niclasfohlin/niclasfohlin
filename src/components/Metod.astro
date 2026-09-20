@@ -29,6 +29,7 @@ const avsnitt = [
 <div class="metod-modell">
   {avsnitt.length > 2 && (
     <nav class="metod-nav" aria-label="På den här sidan">
+      <span class="nav-etikett" aria-hidden="true">På den här sidan</span>
       <ul>{d.lathund && <li><a class="lathund-lank" href={`/stodundervisning/${id}/lathund`}>Lathund</a></li>}{avsnitt.map((a) => <li><a href={`#${a.id}`}>{a.namn}</a></li>)}</ul>
     </nav>
   )}

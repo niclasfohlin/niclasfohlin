@@ -60,7 +60,12 @@ function aktiv(href: string) {
     </main>
     <footer class="sidfot">
       <p class="sidfot-rad"><strong>{site.namn}</strong>, {site.rad.toLowerCase()}. <a href={`mailto:${site.epost}`}>{site.epost}</a></p>
-      <p class="sidfot-rad"><a href="/prenumerera">Få mejl när något nytt publiceras</a> · <a href="/rss.xml">Följ med RSS</a> · <a href="/taggar">Ämnen</a> · <a href="/om">Om Niclas</a></p>
+      <ul class="lankrad-lista sidfot-rad">
+        <li><a href="/prenumerera">Få mejl när något nytt publiceras</a></li>
+        <li><a href="/rss.xml">Följ med RSS</a></li>
+        <li><a href="/taggar">Ämnen</a></li>
+        <li><a href="/om">Om Niclas</a></li>
+      </ul>
       <p class="sidfot-rad">© {new Date().getFullYear()} {site.namn}. Texterna är publicerade i Vi Lärare och andra tidningar först; varje text länkar till originalet.</p>
     </footer>
   </body>
