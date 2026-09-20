@@ -11,7 +11,7 @@ medforfattare: ["Jennie Wilson"]
 byline: "Niclas Fohlin, Jennie Wilson (signatur i texten)"
 hamtad: 2026-09-19
 ord: 496
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/slutreplik-overtygade-om-att-linnea-haller-med-oss.md"
 tidningens_ingress: "”Vi håller med Linnea Lindquist om att det är viktigt att lära barn att skilja på rätt och fel, men vi menar också att det spelar stor roll hur”, skriver lärarna Jennie Wilson och Niclas Fohlin i en slutreplik i ”skamdebatten”."
 ---

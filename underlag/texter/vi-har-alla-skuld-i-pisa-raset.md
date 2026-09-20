@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1245
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/vi-har-alla-skuld-i-pisa-raset.md"
 tidningens_ingress: "När halva klassen kör fast slutar en speciallärare titta på eleverna. När 56 av 74 länder faller i läsförståelse är det dags att göra likadant med Pisa, skriver Niclas Fohlin."
 ---

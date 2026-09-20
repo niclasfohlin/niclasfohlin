@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1128
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/mindre-skit-redan-i-morgon.md"
 tidningens_ingress: "Varför pratar vi så lite om elevsyn, trots att den dominerar hela skoldebatten? Specialläraren Niclas Fohlin varnar för att låta oron vinna över hoppet."
 ---

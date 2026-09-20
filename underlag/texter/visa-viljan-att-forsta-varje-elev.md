@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 559
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/visa-viljan-att-forsta-varje-elev.md"
 tidningens_ingress: "Höstterminen är på väg att sätta sig. Har du grundat väl med elevrelationerna?"
 ---

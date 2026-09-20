@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 516
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/pisa-stormen-ar-har-ta-skydd.md"
 tidningens_ingress: "Pisa-chocken är här igen – dags att stänga av notisplinget i mobilen. Det skriver specialläraren Niclas Fohlin, som dock aldrig slutar hoppas på en verklig, bred skoldiskussion när krutröken lagt sig."
 ---

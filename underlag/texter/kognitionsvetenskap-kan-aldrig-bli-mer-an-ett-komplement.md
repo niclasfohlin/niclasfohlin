@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 839
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/kognitionsvetenskap-kan-aldrig-bli-mer-an-ett-komplement.md"
 tidningens_ingress: "Kognitionsvetenskap ska absolut tas in för att bidra till insikter. Men inte konkurrera med pedagogiken, som är skolans vetenskapliga fundament. Det skriver specialläraren Niclas Fohlin i en ny krönika."
 ---

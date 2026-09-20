@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 885
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/nu-maste-gralet-om-skolan-fa-ett-slut.md"
 tidningens_ingress: "”Något har gått snett när vi i skolan börjar se på varandra som motståndare i stället för samarbetspartners.” Specialläraren Niclas Fohlin varnar för en valrörelse som kommer att föra skolan allt längre ifrån verkliga lösningar."
 ---

@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 853
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/professionella-samtalen.md"
 tidningens_ingress: "”Vi lärare förväntas klara oss själva, som om utbildning bara handlade om att förmedla fakta och inte om att möta hela människor i deras mest formbara år”, skriver Niclas Fohlin, och visar en annan väg."
 ---

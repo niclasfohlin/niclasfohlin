@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin (signatur i texten)"
 hamtad: 2026-09-19
 ord: 944
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/forlorarna-i-en-auktoritar-skola.md"
 tidningens_ingress: "Specialläraren Niclas Fohlin var själv inte den lättaste eleven. Här berättar han om vändningen för honom själv – och om sin djupa oro över auktoritära strömningar i skolan."
 ---

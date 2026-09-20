@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1005
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/regeringens-stodreform-haller-inte-ihop.md"
 tidningens_ingress: "Att extra anpassningar ersätts med stödundervisning är bra – men reformen riskerar att undergrävas av en annan reform, den om studiero. Det hänger inte ihop, varnar specialläraren Niclas Fohlin."
 ---

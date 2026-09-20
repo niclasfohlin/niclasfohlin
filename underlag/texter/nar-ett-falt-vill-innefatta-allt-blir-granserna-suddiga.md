@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 846
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/nar-ett-falt-vill-innefatta-allt-blir-granserna-suddiga.md"
 tidningens_ingress: "Specialläraren Niclas Fohlin svarar Agneta Gulz och Magnus Haake: ”I ert svar approprierar ni allt som är bra och beprövat i skolan som kognitionsvetenskap, som om läraryrket och pedagogiken inte redan inrymmer dessa insikter.”"
 ---

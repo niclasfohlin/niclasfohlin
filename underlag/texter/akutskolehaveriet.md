@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 629
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/akutskolehaveriet.md"
 tidningens_ingress: "Avslöjandena om regeringens satsning på akutskolor kommer inte som någon överraskning, anser specialläraren Niclas Fohlin, utan är en typisk konsekvens av populistisk skolpolitik."
 ---

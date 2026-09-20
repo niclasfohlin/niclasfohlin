@@ -11,7 +11,7 @@ medforfattare: ["Charlotte Friberg"]
 byline: "Charlotte Friberg, Niclas Fohlin (enligt tidningens ingress)"
 hamtad: 2026-09-19
 ord: 496
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/okat-fokus-pa-vard-frontalangrepp-pa-skolans-karnuppdrag.md"
 tidningens_ingress: "Vi inom skolan förväntas ständigt lösa allt som är fel i samhället, men vårt fokus borde vara på vårt huvuduppdrag: att forma morgondagens samhällsmedborgare. Det skriver Charlotte Friberg och Niclas Fohlin, Academedia grundskolor och integrerade förskolor."
 ---

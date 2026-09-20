@@ -11,7 +11,7 @@ medforfattare: ["Charlotte Friberg", "Lotta Ljungberg", "Katarina Malmström", "
 byline: "Charlotte Friberg, Lotta Ljungberg, Katarina Malmström, Malena Wengberg, Niclas Fohlin, Rebecca Jernström, Jenny Nordfors, Karin Benchimol, Karl Annerberg (signaturrad i texten)"
 hamtad: 2026-09-19
 ord: 911
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/larare-ska-inte-bara-undervisa.md"
 tidningens_ingress: "”Elevhälsan är inte ett vårdalternativ. Den är en integrerad del av skolan, med ett tydligt hälsofrämjande uppdrag – tillsammans med skolans övriga professioner. Att skilja ut elevhälsan riskerar att underminera det stöd eleverna har rätt till”, skriver representanter för elevhälsan inom Academedia, som ett svar till Filippa Mannerheim."
 ---

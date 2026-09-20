@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1118
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/historielosheten.md"
 tidningens_ingress: "Verksamheten i samhället som kräver blind lydnad är inte skolan, inte försvaret, inte ens våra fängelser – utan de kriminella gängen. Just därför måste skolan gå åt motsatt håll, skriver specialläraren Niclas Fohlin."
 ---

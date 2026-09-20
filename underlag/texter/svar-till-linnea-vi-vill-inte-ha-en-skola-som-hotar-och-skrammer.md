@@ -11,7 +11,7 @@ medforfattare: ["Jennie Wilson"]
 byline: "Niclas Fohlin, Jennie Wilson"
 hamtad: 2026-09-19
 ord: 668
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/svar-till-linnea-vi-vill-inte-ha-en-skola-som-hotar-och-skrammer.md"
 tidningens_ingress: "”Våra elever förtjänar att vara i en skola som präglas av lärande och utveckling, inte av rädsla och skam”, svarar lärarna Jennie Wilson och Niclas Fohlin Expressens Linnea Lindquist."
 ---

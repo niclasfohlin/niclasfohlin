@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 775
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/darfor-far-vi-larare-problem-med-evidenshysterin.md"
 tidningens_ingress: "\"Undervisning är inte som en apparat där du stoppar in rätt metod och får ut samma resultat”, skriver specialläraren Niclas Fohlin efter Riksrevisionens kritik mot skolmyndigheterna."
 ---

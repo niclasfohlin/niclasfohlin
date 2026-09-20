@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1239
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/hotet-med-hjalpklasser-riskerar-skapa-fler-murar.md"
 tidningens_ingress: "”Återinförda obs-klasser i ny skepnad riskerar att systematiskt skapa en skola som delar upp barn i ”önskvärda” och ”icke önskvärda”. Vi behöver skolreformer som stärker gemenskapen, inte skapar fler murar”, skriver specialläraren Niclas Fohlin som svar på Filippa Mannerheims krönika i samma ämne."
 ---

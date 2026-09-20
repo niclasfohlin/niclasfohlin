@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin (signatur i texten)"
 hamtad: 2026-09-19
 ord: 743
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/iq-ska-inte-avgora-vem-som-far-vara-med.md"
 tidningens_ingress: "Debatten om ”gråzons-barnen” fortsätter. Men det finns stora risker, varnar specialläraren Niclas Fohlin: ”Steget från berättelser om skolmisslyckanden till förslag om nya skolformer är farligt”."
 ---

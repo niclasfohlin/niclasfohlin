@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1091
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/sluta-lasa-for-att-trana-las-for-att-leva.md"
 tidningens_ingress: "Specialläraren Niclas Fohlin besöker skolor som satsar på lästräning, och får en orolig känsla – håller vi på och ersätter läsfrämjande insatser med billiga läslistor?"
 ---

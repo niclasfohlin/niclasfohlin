@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 860
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/logiska-hal-i-nya-spec-utbildningen.md"
 tidningens_ingress: "Att bredda specialläraruppdraget och kalla det flexibilitet höjer kraven på en yrkeskår som redan gör allt den kan och lite till – och det ska ske utan att det kostar något. Specialläraren Niclas Fohlin hittar stora logiska hål i utredningens förslag."
 ---

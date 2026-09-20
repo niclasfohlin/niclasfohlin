@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 977
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/det-som-fattas-dagens-skola-ar-det-besjalade.md"
 tidningens_ingress: "För 20 år sedan fanns det tid för biologilärande i skogen. I dag tittar man på film. Mål- och resultatstyrningen är skolans största problem, skriver specialläraren Niclas Fohlin."
 ---

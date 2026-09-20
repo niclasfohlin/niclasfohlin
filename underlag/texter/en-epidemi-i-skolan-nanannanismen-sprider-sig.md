@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 496
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/en-epidemi-i-skolan-nanannanismen-sprider-sig.md"
 tidningens_ingress: "”När vi tappar den gemensamma tron på att vi kan påverka våra elever i en positiv riktning slutar vi att försöka”, skriver Niclas Fohlin."
 ---

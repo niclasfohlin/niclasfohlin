@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 802
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/befria-skolan-fran-floskler-det-ar-tillit-skolan-behover.md"
 tidningens_ingress: "Sveriges Lärare har kommit ett steg närmare en ny förbundsordförande. Nu måste skolan våga ta ett steg bort från tyckonomin. Specialläraren Niclas Fohlin vill vara med och bygga upp en tillit till professionen och en skola i världsklass."
 ---

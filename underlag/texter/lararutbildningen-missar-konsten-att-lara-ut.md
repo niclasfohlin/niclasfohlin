@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1247
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/lararutbildningen-missar-konsten-att-lara-ut.md"
 tidningens_ingress: "Efter många år som VFU-handledare och mentor åt nyutexade frågar sig specialläraren Niclas Fohlin – hur kunde lärarutbildningen tappa så mycket, så snabbt?"
 ---

@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 923
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/vi-skyller-var-otrygghet-pa-barnen.md"
 tidningens_ingress: "”När vi romantiserar det förflutna riskerar vi att upprepa det som inte fungerade.” Dagens skoldebatt låter som South Parks små lila ”nostalgibär”, tycker specialläraren Niclas Fohlin."
 ---

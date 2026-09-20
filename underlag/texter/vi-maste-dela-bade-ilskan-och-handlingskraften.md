@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 542
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/vi-maste-dela-bade-ilskan-och-handlingskraften.md"
 tidningens_ingress: "Den hårda systemkritiken är berättigad och viktig, men ”vi får inte låta kritiken mot systemet glida över i uppgivenhet inför vår egen professionella kraft”, skriver specialläraren Niclas Fohlin."
 ---

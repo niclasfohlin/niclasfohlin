@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 599
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/svensk-skola-behover-svensk-debatt.md"
 tidningens_ingress: "”Arbetet ligger i klassrummen, tillsammans med lärarna, för eleverna vi möter varje dag. Inte i skyttegravar som andra har grävt åt oss”, skriver specialläraren Niclas Fohlin i diskussionen med journalisten Jenny Maria Nilsson."
 ---

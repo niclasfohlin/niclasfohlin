@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin (signatur i texten)"
 hamtad: 2026-09-19
 ord: 861
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/inga-skolprestationer-kan-rattfardiga-radda-barn.md"
 tidningens_ingress: "Skolforskningen har om och om igen visat att trygghet är en grundförutsättning för lärande, skriver Niclas Fohlin."
 ---

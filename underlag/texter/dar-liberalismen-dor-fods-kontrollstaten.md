@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 757
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/dar-liberalismen-dor-fods-kontrollstaten.md"
 tidningens_ingress: "”Liberalerna som en gång kämpade för individens frihet mot statens förmynderi vill nu tvinga våra barn att lyda och följa utan att bli lyssnade på, det är så ironiskt att det gör ont”, skriver specialläraren Niclas Fohlin."
 ---

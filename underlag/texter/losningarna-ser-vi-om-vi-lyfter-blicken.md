@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 694
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/losningarna-ser-vi-om-vi-lyfter-blicken.md"
 tidningens_ingress: "I bristen på främjande och förebyggande arbete har den svenska skolan blivit reaktiv. Specialläraren och skolutvecklaren Niclas Fohlin skriver själv om både problemen och lösningen han ser i sina kontakter med elevhälsoteam."
 ---

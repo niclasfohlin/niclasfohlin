@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1115
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/ogranskade-chatgpt-lankar.md"
 tidningens_ingress: "”Utbildningsdepartementets grundläggande brist på vetenskaplighet är faktiskt skrämmande.” Det anser specialläraren Niclas Fohlin efter att ha granskat underlaget till förslaget om ny speciallärarutbildning."
 ---

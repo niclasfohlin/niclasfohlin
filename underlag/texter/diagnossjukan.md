@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1272
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/diagnossjukan.md"
 tidningens_ingress: "”Problemet är inte diagnoserna i sig, problemet är när diagnosen får ta över som förklaring även när det handlar om lärmiljö, relationer, tempo, stress och höga krav”, skriver specialläraren Niclas Fohlin."
 ---

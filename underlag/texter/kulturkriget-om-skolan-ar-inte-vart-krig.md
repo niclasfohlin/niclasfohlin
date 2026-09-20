@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 989
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/kulturkriget-om-skolan-ar-inte-vart-krig.md"
 tidningens_ingress: "Svensk skoldebatt har importerat ett amerikanskt kulturkrig så till den grad att vi tror att energin vi lägger på det hjälper eleverna i klassrummet, skriver specialläraren Niclas Fohlin."
 ---

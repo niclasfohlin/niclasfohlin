@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1143
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/regeringens-losning-pa-skolproblemen-ta-bort-problemlosarna.md"
 tidningens_ingress: "”I stället för gedigen analys av skolans behov verkar regeringen basera sin politik på vad som trendar på X”, skriver specialläraren Niclas Fohlin."
 ---

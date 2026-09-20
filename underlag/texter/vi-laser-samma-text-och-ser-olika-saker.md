@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin (signatur i texten)"
 hamtad: 2026-09-19
 ord: 269
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/vi-laser-samma-text-och-ser-olika-saker.md"
 tidningens_ingress: "Niclas Fohlins text om ”nånannanismen” har fått flera lärare att reagera.\n”Varför anamma motståndarens argument” frågade sig Andreas Williamsson.\nNu får han svar från Niclas Fohlin."
 ---

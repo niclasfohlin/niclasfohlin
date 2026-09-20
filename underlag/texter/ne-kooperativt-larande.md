@@ -11,7 +11,7 @@ medforfattare: ["Jennie Wilson"]
 byline: "Niclas Fohlin och Jennie Wilson (enligt ingressen)"
 hamtad: 2026-09-19
 ord: 1828
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/ne-kooperativt-larande.md"
 tidningens_ingress: "Hur kan kooperativt lärande vara en grund för en mer demokratisk undervisning? Niclas Fohlin och Jennie Wilson, som båda har arbetat med kooperativt lärande i flera år och tillsammans skrivit fyra böcker om ämnet, ger i den här texten svaren."
 ---

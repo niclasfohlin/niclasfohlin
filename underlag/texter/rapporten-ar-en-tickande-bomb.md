@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1078
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/rapporten-ar-en-tickande-bomb.md"
 tidningens_ingress: "”Det är en daglig kamp mellan professionella ideal och verklighetens begränsningar som river och sliter i vårt inre”, skriver specialläraren och specialpedagogen Niclas Fohlin."
 ---

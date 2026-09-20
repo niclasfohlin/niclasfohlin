@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 912
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/detta-ar-min-drom-om-skolan.md"
 tidningens_ingress: "”Utan en vision om en bättre skola blir varje reform bara en reaktion. Rör vi oss framåt? Eller begår vi samma misstag igen?” Här är specialläraren Niclas Fohlins egen skolvision, i tio punkter."
 ---

@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1190
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/lagg-ner-powerpointen-larare-plocka-upp-pennan.md"
 tidningens_ingress: "Skrivundervisning genomförs inte genom att dela ut skrivuppgifter, menar specialläraren Niclas Fohlin."
 ---

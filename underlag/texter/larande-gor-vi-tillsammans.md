@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 904
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/larande-gor-vi-tillsammans.md"
 tidningens_ingress: "Individuellt lärande kan lösa problem i vissa situationer, men skapa större problem i andra, skriver specialläraren Niclas Fohlin."
 ---

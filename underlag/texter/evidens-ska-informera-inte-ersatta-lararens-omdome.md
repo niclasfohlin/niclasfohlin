@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 329
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/evidens-ska-informera-inte-ersatta-lararens-omdome.md"
 tidningens_ingress: "”Forskning visar tendenser och mönster – inte absoluta sanningar för varje enskild situation. Detta gör den inte mindre värdefull, bara att lärarens professionella omdöme alltid måste väga in”, skriver Niclas Fohlin i slutreplik till läraren Susan Hall."
 ---

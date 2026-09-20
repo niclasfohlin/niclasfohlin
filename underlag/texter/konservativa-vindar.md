@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 986
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/konservativa-vindar.md"
 tidningens_ingress: "”Vem tjänar på att ropa varg hela tiden? Jo, de som vill driva igenom stora systemförändringar på kort tid, innan man hinner analysera följderna för elever, lärare och samhället i stort”, skriver specialläraren Niclas Fohlin."
 ---

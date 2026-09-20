@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1370
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/sarskilt-stod-utredningen.md"
 tidningens_ingress: "”Vad som föreslås är att byta en byråkrati mot en annan”, skriver specialläraren Niclas Fohlin om den nya utredningen om stödinsatser i skolan."
 ---

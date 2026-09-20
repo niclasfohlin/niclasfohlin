@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1016
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/vi-och-dom-tanket.md"
 tidningens_ingress: "Polariseringen mellan elevhälsa och lärarkår är mest ett sociala medier-fenomen. Men för att den inte ska slå rot i verksamheten krävs starkare samarbete och öppnare samtal, skriver specialläraren Niclas Fohlin."
 ---

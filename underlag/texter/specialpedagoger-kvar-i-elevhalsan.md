@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 557
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/specialpedagoger-kvar-i-elevhalsan.md"
 tidningens_ingress: "Regeringens elevhälsoutredning har många bra delar men riskerar att bli en ren pappersprodukt när konsekvensanalyser saknas och allt ändå hamnar på rektorns bord, skriver specialläraren Niclas Fohlin."
 ---

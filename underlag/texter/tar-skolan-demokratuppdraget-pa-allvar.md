@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 799
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/tar-skolan-demokratuppdraget-pa-allvar.md"
 tidningens_ingress: "”Min dröm är att skolan får vara en plats där teori och praktik, forskning och konst, kognitionsvetenskap och relationellt lärande får mötas och berika varandra”, skriver specialläraren Niclas Fohlin."
 ---

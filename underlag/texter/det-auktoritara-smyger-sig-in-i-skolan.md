@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 1136
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/det-auktoritara-smyger-sig-in-i-skolan.md"
 tidningens_ingress: "Vikten av relationsbyggande i skolan har länge intygats av både forskningen och skollagen. Så varför ifrågasätta den nu? För att vi lever i en tid av auktoritära strömningar, konstaterar specialläraren Niclas Fohlin."
 ---

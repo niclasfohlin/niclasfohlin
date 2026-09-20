@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 667
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/vad-ar-fakta-utan-forstaelse.md"
 tidningens_ingress: "Vi kan inte förminska skolan och debatten till att enbart handla om att kunna rabbla utantill, skriver Niclas Fohlin, speciallärare i läs- språk och skrivutveckling."
 ---

@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 808
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/att-kunna-lasa-ar-nyckeln-till-allt-larande.md"
 tidningens_ingress: "När eleven knäcker läskoden öppnar sig skolans och livets alla möjligheter. Niclas Fohlin, speciallärare i läs- språk och skrivutveckling, berättar om en milstolpe i karriären."
 ---

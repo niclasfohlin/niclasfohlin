@@ -11,7 +11,7 @@ medforfattare: []
 byline: "Niclas Fohlin"
 hamtad: 2026-09-19
 ord: 798
-rattigheter: "ej bekräftade av Niclas"
+rattigheter: "Niclas 2026-09-20: hela texten får ligga på sajten"
 post: "src/content/artiklar/klart-skolan-ska-inkludera-men-vad-menar-vi-med-det.md"
 tidningens_ingress: "En skola för alla borde vara en självklarhet. Men har inkludering som skolbegrepp i Sverige blivit för abstrakt – vad menar vi egentligen? Specialläraren Niclas Fohlin föreslår en konkret kursändring."
 ---
