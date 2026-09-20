@@ -47,7 +47,7 @@ const citat = (f: string) => `”${f}”`;
       <div class="lh-kolumner">
         <div class="lh-kol">
           <div class="lh-ruta lh-elevtext" id="lathund-text">
-            <h3>{l.pass.textRubrik}</h3>
+            <h3>{l.pass.textRubrik}<span class="bara-js lh-lank"><button type="button" data-skriv-ut-text>Skriv ut till eleverna</button></span></h3>
             <div class="lh-ruta-kropp">
               {l.pass.titel && <p class="lh-titel">{l.pass.titel}</p>}
               {l.pass.text.map((p) => <p>{p}</p>)}
@@ -78,7 +78,7 @@ const citat = (f: string) => `”${f}”`;
     </section>
 
     <section class="lh-sida" id="lathund-mall" aria-labelledby="lh-3">
-      <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-3">{l.mall.rubrik}</h2><span class="lh-etikett">Mallen · 3/4</span></header>
+      <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-3">{l.mall.rubrik}</h2><span class="lh-etikett">Mallen · 3/4</span><span class="bara-js lh-lank"><button type="button" data-skriv-ut-mall>Skriv ut den här sidan</button></span></header>
       {l.mall.underrad && <p class="lh-underrad">{l.mall.underrad}</p>}
       <div class="lh-block">
         {l.mall.block.map((b) => {

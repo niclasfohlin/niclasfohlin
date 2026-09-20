@@ -23,19 +23,11 @@ const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathu
       <h1>Lathund: {d.titel}</h1>
       <p class="ingress">Fyra sidor att ha bredvid sig: metoden i korthet, ett pass steg för steg, mallen och vad du behöver. Skriv ut i liggande A4 eller ladda ner som Word-fil.</p>
       <p class="lathund-knappar">
-        <span class="bara-js"><button type="button" class="knapp" data-skriv-ut>Skriv ut alla fyra sidor</button></span>
-        {' '}<span class="bara-js"><button type="button" class="knapp sekundar" data-skriv-ut-mall>Skriv ut bara mallen</button></span>
-        {' '}<span class="bara-js"><button type="button" class="knapp sekundar" data-skriv-ut-text>Skriv ut elevtexten</button></span>
-        {' '}<a class="knapp sekundar" href={`/stodundervisning/${m.id}-lathund.docx`} download={`${m.id}-lathund.docx`}>Bara lathunden (docx)</a>
-        {' '}<a class="knapp sekundar" href={`/stodundervisning/${m.id}`}>Till metodbeskrivningen</a>
+        <span class="bara-js"><button type="button" class="knapp" data-skriv-ut>Skriv ut</button></span>
+        {' '}<a class="knapp sekundar" href={`/stodundervisning/${m.id}-lathund.docx`} download={`${m.id}-lathund.docx`}>Word-fil</a>
       </p>
-      <nav class="metod-nav lathund-nav" aria-label="Lathundens sidor">
-        <ul>
-          <li><a href="#lathund-metoden">1 Metoden</a></li>
-          <li><a href="#lathund-pass">2 Ett pass</a></li>
-          <li><a href="#lathund-mall">3 Mallen</a></li>
-          <li><a href="#lathund-material">4 Material</a></li>
-        </ul>
+      <nav class="lathund-nav meta" aria-label="Lathundens sidor">
+        <a href="#lathund-metoden">1 Metoden</a> · <a href="#lathund-pass">2 Ett pass</a> · <a href="#lathund-mall">3 Mallen</a> · <a href="#lathund-material">4 Material</a>
       </nav>
     </header>
     <Lathund d={d} />

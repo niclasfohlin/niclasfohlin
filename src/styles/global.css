@@ -272,14 +272,19 @@ html.js .samla {
 .nedladdning .skriv-ut { display: none; }
 html.js .nedladdning .skriv-ut { display: block; }
 .nedladdning .knapp { font-size: 0.95rem; padding: 0.5rem 0.9rem; }
+.nedladdning-rad { font-size: 0.9rem; margin: 0 0 0.75rem; }
+button.lank { font: inherit; background: none; border: 0; padding: 0; color: inherit; text-decoration: underline; text-decoration-color: var(--farg-accent); text-underline-offset: 0.15em; cursor: pointer; }
+button.lank:hover { color: var(--farg-accent); }
 @media (min-width: 52rem) {
   .metod-sida { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
 }
 
 .metod-nav { font-family: var(--typsnitt-ui); font-size: 0.9rem; margin: 0 0 1.5rem; }
-.metod-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem 0.5rem; }
-.metod-nav a { display: inline-block; text-decoration: none; background: var(--farg-yta); border: 1px solid var(--farg-kant); border-radius: 999px; padding: 0.25rem 0.7rem; }
-.metod-nav a:hover { border-color: var(--farg-accent); }
+/* Sidnavigationen är länkar i en rad, inte knappar: knappar är för handlingar. */
+.metod-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.2rem 0; color: var(--farg-text-svag); }
+.metod-nav li + li::before { content: "·"; margin: 0 0.5rem; }
+.metod-nav a { color: var(--farg-text); }
+.metod-nav a.lathund-lank { font-weight: 600; }
 .metod-modell section { scroll-margin-top: 1rem; }
 .metod-modell { font-size: 1.0625rem; line-height: 1.65; }
 .metod-modell > p, .metod-modell section > p { margin: 0 0 1em; }
@@ -352,8 +357,15 @@ html.js .bara-js { display: inline-block; }
 .lathund { max-width: var(--matt-bredd); }
 .lathund-huvud h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 0.3em; }
 .lathund-huvud .ingress { font-size: 1.1rem; max-width: var(--matt-text); margin: 0 0 1rem; }
-.lathund-knappar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 1.5rem; }
+.lathund-knappar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 0.75rem; }
 .lathund-knappar .knapp { font-size: 0.95rem; padding: 0.5rem 0.9rem; }
+.lathund-nav { margin: 0 0 1.5rem; }
+/* Utskrift av en del av lathunden: liten länk i bandet eller i rutan, bara med JavaScript. */
+.lh-lank { margin-left: auto; }
+.lh-lank button { font: inherit; font-family: var(--typsnitt-ui); font-size: 0.8rem; background: none; border: 0; padding: 0; color: inherit; text-decoration: underline; text-underline-offset: 0.15em; cursor: pointer; text-transform: none; letter-spacing: 0; }
+.lh-huvud .lh-lank button { color: rgba(255, 255, 255, 0.9); }
+.lh-ruta > h3 .lh-lank { float: right; }
+.lh-ruta > h3 .lh-lank button { color: rgba(255, 255, 255, 0.9); font-size: 0.75rem; }
 .lathund .upphov { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
 .lathund-lank { font-weight: 600; }
 .lh-kicker { font-family: ui-monospace, 'Cascadia Mono', Consolas, 'Liberation Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--farg-text-svag); font-weight: 500; }
@@ -423,6 +435,11 @@ html.js .bara-js { display: inline-block; }
 .lh-pil { color: var(--farg-text-svag); }
 .lh-snabbmall { margin: 0.5rem 0 1rem; }
 @media screen and (max-width: 48rem) {
+  /* Bandet på smal skärm: kicker och etikett på en rad, titeln på en egen rad med hela bredden. */
+  .lh-huvud { gap: 0.15rem 0.75rem; }
+  .lh-huvud h2 { flex: 1 1 100%; order: 3; overflow-wrap: normal; font-size: 1.15rem; }
+  .lh-huvud .lh-etikett { margin-left: auto; }
+  .lh-huvud .lh-lank { order: 4; margin-left: 0; }
   .lh-kolumner, .lh-krav, .lh-spalter, .lh-tavla, .lh-tavla .lh-listor, .lh-tva { grid-template-columns: 1fr; }
   .lh-block { column-count: 1; }
   .lh-fakta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -434,7 +451,7 @@ html.js .bara-js { display: inline-block; }
 }
 @media print {
   /* En liggande A4-sida per avsnitt: tät typografi, inga sidbrytningar inuti rutor och rader. */
-  .lathund-huvud, .lathund .upphov, .lathund-nav { display: none; }
+  .lathund-huvud, .lathund .upphov, .lathund-nav, .lh-lank { display: none; }
   body.tryck-bara-mall .lh-sida:not(#lathund-mall) { display: none; }
   body.tryck-bara-mall #lathund-mall { break-after: auto; }
   /* Bara elevtexten: en ren sida i stående format med större grad, för kopior till gruppen. */
