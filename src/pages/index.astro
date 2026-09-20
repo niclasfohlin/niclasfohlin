@@ -32,33 +32,37 @@ const bocker = (await bockerSorterade()).slice(0, 3);
     <p><a href="/artiklar">Alla artiklar</a></p>
   </section>
 
-  <section>
-    <h2>Stödundervisning</h2>
-    <p class="text">Konkreta metoder att använda direkt, sorterade på område, årskurs och vad de tränar.</p>
-    <div class="rutnat">
-      {metoder.map((m) => (
-        <a class="kort" href={`/stodundervisning/${m.id}`}>
-          <p class="meta">{m.data.omrade} · {m.data.arskurs.join(', ')}</p>
-          <h3>{m.data.titel}</h3>
-          <p>{m.data.ingress}</p>
-          <Taggar taggar={m.data.taggar} />
-        </a>
-      ))}
-    </div>
-    <p><a href="/stodundervisning">Hela metodbanken</a></p>
-  </section>
+  {metoder.length > 0 && (
+    <section>
+      <h2>Stödundervisning</h2>
+      <p class="text">Konkreta metoder att använda direkt, sorterade på område, årskurs och vad de tränar.</p>
+      <div class="rutnat">
+        {metoder.map((m) => (
+          <a class="kort" href={`/stodundervisning/${m.id}`}>
+            <p class="meta">{m.data.omrade} · {m.data.arskurs.join(', ')}</p>
+            <h3>{m.data.titel}</h3>
+            <p>{m.data.ingress}</p>
+            <Taggar taggar={m.data.taggar} />
+          </a>
+        ))}
+      </div>
+      <p><a href="/stodundervisning">Hela metodbanken</a></p>
+    </section>
+  )}
 
-  <section>
-    <h2>Böcker</h2>
-    <div class="rutnat">
-      {bocker.map((b) => (
-        <a class="kort" href={`/bocker/${b.id}`}>
-          <p class="meta">{b.data.utgivningsar}{b.data.forlag && ` · ${b.data.forlag}`}</p>
-          <h3>{b.data.titel}</h3>
-          <p>{b.data.beskrivning}</p>
-        </a>
-      ))}
-    </div>
-    <p><a href="/bocker">Alla böcker</a></p>
-  </section>
+  {bocker.length > 0 && (
+    <section>
+      <h2>Böcker</h2>
+      <div class="rutnat">
+        {bocker.map((b) => (
+          <a class="kort" href={`/bocker/${b.id}`}>
+            <p class="meta">{b.data.utgivningsar}{b.data.forlag && ` · ${b.data.forlag}`}</p>
+            <h3>{b.data.titel}</h3>
+            <p>{b.data.beskrivning}</p>
+          </a>
+        ))}
+      </div>
+      <p><a href="/bocker">Alla böcker</a></p>
+    </section>
+  )}
 </Base>
