@@ -51,7 +51,7 @@ Tagg-id skrivs med a-z, 0-9 och bindestreck. Läsaren ser label.
 
 Formuläret på /prenumerera anropar `netlify/functions/prenumerera.mjs`, som lägger till kontakten i Brevo med dubbel opt-in. Utan miljövariabler svarar funktionen 503 och hänvisar till RSS. Miljövariablerna sätter du i Netlify med `netlify env:set`. Hemligheter ligger aldrig i git; var de förvaras står i ARBETSSATT.md.
 
-Varje ny artikel, metod och bok mejlas prenumeranterna automatiskt: `netlify/functions/deploy-succeeded.mjs` körs efter varje lyckad deploy, läser `/nytt.json`, jämför med det som redan mejlats (Netlify Blobs, lagret `utskick`) och skickar en Brevo-kampanj om det nya. Publicera därför bara det som är klart att mejlas; `utkast: true` hålls utanför.
+Varje ny artikel, metod och bok mejlas prenumeranterna automatiskt: byggpluginen `netlify/plugins/utskick` körs efter varje lyckad produktionsdeploy, läser `nytt.json` ur bygget, jämför med det som redan mejlats (Netlify Blobs, lagret `utskick`) och skickar en Brevo-kampanj om det nya. Publicera därför bara det som är klart att mejlas; `utkast: true` hålls utanför.
 
 `/utskick` skriver ett längre nyhetsbrev som utkast till `utskick/` och kan lägga upp det som kampanj i Brevo. Det skickas först när Niclas läst utkastet och sagt skicka.
 

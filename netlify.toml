@@ -33,3 +33,7 @@
   to = "https://niclasfohlin.se/:splat"
   status = 301
   force = true
+
+# Mejlar prenumeranterna om nytt innehåll efter varje lyckad produktionsdeploy. Se utskick/README.md.
+[[plugins]]
+  package = "./netlify/plugins/utskick"
