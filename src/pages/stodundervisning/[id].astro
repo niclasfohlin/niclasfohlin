@@ -1,8 +1,11 @@
 ---
-import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Taggar from '../../components/Taggar.astro';
+import Metod from '../../components/Metod.astro';
+import Nedladdning from '../../components/Nedladdning.astro';
 import { publicerade, formateraDatum } from '../../lib/innehall';
+import { arskursSpann, harMallar, metodAdress, SAJT, UPPHOV } from '../../lib/metod';
+import { site } from '../../data/site';
 
 export async function getStaticPaths() {
   const metoder = await publicerade('stodundervisning');
@@ -10,34 +13,50 @@ export async function getStaticPaths() {
 }
 
 const { m, alla } = Astro.props;
-const { Content } = await render(m);
-const relaterade = alla.filter((x) => m.data.relaterade.includes(x.id));
+const d = m.data;
+const relaterade = alla.filter((x) => d.relaterade.includes(x.id));
+const adress = metodAdress(site.url, m.id).replace(/^https?:\/\//, '');
 ---
 
-<Base title={m.data.titel} description={m.data.ingress} typ="article">
-  <article class="text">
-    <p class="meta">{m.data.omrade} · {m.data.arskurs.join(', ')}</p>
-    <h1>{m.data.titel}</h1>
-    <p><strong>{m.data.ingress}</strong></p>
-    <div class="faktaruta">
-      <dl>
-        <dt>Område</dt><dd>{m.data.omrade}</dd>
-        <dt>Årskurs</dt><dd>{m.data.arskurs.join(', ')}</dd>
-        {m.data.format.length > 0 && <><dt>Format</dt><dd>{m.data.format.join(', ')}</dd></>}
-        {m.data.tid && <><dt>Tid</dt><dd>{m.data.tid}</dd></>}
-        {m.data.material.length > 0 && <><dt>Material</dt><dd>{m.data.material.join(', ')}</dd></>}
-        {m.data.uppdaterad && <><dt>Uppdaterad</dt><dd>{formateraDatum(m.data.uppdaterad)}</dd></>}
-      </dl>
+<Base title={d.titel} description={d.ingress} typ="article">
+  <article class="metod">
+    <header class="metod-huvud">
+      <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · {d.omrade} · {arskursSpann(d.arskurs)}</p>
+      <h1>{d.titel}</h1>
+      {d.undertitel && <p class="undertitel">{d.undertitel}</p>}
+      <p class="ingress">{d.ingress}</p>
+    </header>
+
+    <div class="metod-sida">
+      <div class="faktaruta">
+        <dl>
+          <dt>Område</dt><dd>{d.omrade}</dd>
+          <dt>Årskurs</dt><dd>{arskursSpann(d.arskurs)}</dd>
+          {d.format.length > 0 && <><dt>Format</dt><dd>{d.format.join(', ')}</dd></>}
+          {d.tid && <><dt>Tid</dt><dd>{d.tid}</dd></>}
+          {d.period && <><dt>Period</dt><dd>{d.period}</dd></>}
+          {d.grupp && <><dt>Grupp</dt><dd>{d.grupp}</dd></>}
+          {d.material.length > 0 && <><dt>Material</dt><dd>{d.material.join('. ')}.</dd></>}
+          {d.uppdaterad && <><dt>Uppdaterad</dt><dd>{formateraDatum(d.uppdaterad)}</dd></>}
+        </dl>
+      </div>
+      <Nedladdning id={m.id} harMallar={harMallar(d)} />
     </div>
-    <Content />
-    <Taggar taggar={m.data.taggar} nivaer={m.data.arskurs} />
-    {relaterade.length > 0 && (
-      <section>
-        <h2>Hör ihop med</h2>
-        <ul>
-          {relaterade.map((r) => <li><a href={`/stodundervisning/${r.id}`}>{r.data.titel}</a></li>)}
-        </ul>
-      </section>
-    )}
+
+    <Metod d={d} />
+
+    <footer class="metod-fot">
+      <Taggar taggar={d.taggar} nivaer={d.arskurs} />
+      {relaterade.length > 0 && (
+        <section class="relaterade">
+          <h2>Hör ihop med</h2>
+          <ul>
+            {relaterade.map((r) => <li><a href={`/stodundervisning/${r.id}`}>{r.data.titel}</a>{' '}<span class="meta">{r.data.omrade} · {arskursSpann(r.data.arskurs)}</span></li>)}
+          </ul>
+        </section>
+      )}
+      <p class="upphov">{UPPHOV}. Metoden får användas i undervisning. Ange {SAJT} som källa när den sprids vidare. {adress}</p>
+    </footer>
   </article>
+  <div class="tryck-fot" aria-hidden="true">{UPPHOV} · {adress}</div>
 </Base>

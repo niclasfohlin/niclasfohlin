@@ -3,17 +3,20 @@ import Base from '../../layouts/Base.astro';
 import Taggar from '../../components/Taggar.astro';
 import { site } from '../../data/site';
 import { metoderSorterade, taggLabel } from '../../lib/innehall';
+import { arskursSpann, harMallar } from '../../lib/metod';
 const metoder = await metoderSorterade();
 // Bara taggar som någon metod använder, i bokstavsordning efter etiketten läsaren ser.
 const taggarIBruk = [...new Set(metoder.flatMap((m) => m.data.taggar))].sort((a, b) => taggLabel(a).localeCompare(taggLabel(b), 'sv'));
+// Bara årskursnivåer som någon metod har, så att filtret inte erbjuder tomma val.
+const arskurserIBruk = site.arskurser.filter((a) => metoder.some((m) => m.data.arskurs.includes(a)));
 ---
 
-<Base title="Stödundervisning" description="Metodbank för stödundervisning i matematik, läsning och skrivning, F-3 till 7-9.">
+<Base title="Stödundervisning" description="Metodbank för stödundervisning i matematik, läsning och skrivning. Varje metod har körschema, exempelfraser och mallar, och går att skriva ut och ladda ner som Word-fil.">
   <h1>Stödundervisning</h1>
-  <p class="text">Konkreta metoder att använda direkt. Varje metod har ett område, minst en årskursnivå och taggar för vad den tränar.</p>
+  <p class="text">Konkreta metoder att använda i morgon. Varje metod har ett körschema, exempelfraser, snabbmall och checklista, och går att ladda ner som Word-fil eller skriva ut. Markera flera metoder för att få dem i en fil.</p>
 
   {metoder.length > 0 && (
-    <form class="filter" id="filter" aria-label="Filtrera metoder" hidden>
+    <form class="filter" id="filter" aria-label="Filtrera metoder">
       <fieldset>
         <legend>Område</legend>
         <div class="val">
@@ -25,7 +28,7 @@ const taggarIBruk = [...new Set(metoder.flatMap((m) => m.data.taggar))].sort((a,
         <legend>Årskurs</legend>
         <div class="val">
           <label><input type="radio" name="arskurs" value="" checked /> Alla</label>
-          {site.arskurser.map((a) => <label><input type="radio" name="arskurs" value={a} /> {a}</label>)}
+          {arskurserIBruk.map((a) => <label><input type="radio" name="arskurs" value={a} /> {a}</label>)}
         </div>
       </fieldset>
       <div class="tagg-val">
@@ -36,6 +39,7 @@ const taggarIBruk = [...new Set(metoder.flatMap((m) => m.data.taggar))].sort((a,
         </select>
       </div>
       <p class="meta" aria-live="polite" data-antal>{metoder.length === 1 ? '1 metod' : `${metoder.length} metoder`}</p>
+      <p class="meta tom" data-tom hidden>Ingen metod matchar dina val. <button type="button" data-rensa-filter>Visa alla metoder</button></p>
     </form>
   )}
 
@@ -47,24 +51,48 @@ const taggarIBruk = [...new Set(metoder.flatMap((m) => m.data.taggar))].sort((a,
         {lista.length === 0 && <p class="meta">Inga metoder ännu.</p>}
         <div class="rutnat">
           {lista.map((m) => (
-            <article class="kort" data-metod data-omrade={m.data.omrade} data-arskurs={m.data.arskurs.join(' ')} data-taggar={m.data.taggar.join(' ')}>
+            <article class="kort metodkort" data-metod data-omrade={m.data.omrade} data-arskurs={m.data.arskurs.join(' ')} data-taggar={m.data.taggar.join(' ')}>
+              <p class="meta">{arskursSpann(m.data.arskurs)}{m.data.tid && ` · ${m.data.tid}`}{m.data.grupp && ` · ${m.data.grupp.toLowerCase()}`}</p>
               <h3><a href={`/stodundervisning/${m.id}`}>{m.data.titel}</a></h3>
+              {m.data.undertitel && <p class="undertitel">{m.data.undertitel}</p>}
               <p>{m.data.ingress}</p>
               <Taggar taggar={m.data.taggar} nivaer={m.data.arskurs} />
+              <p class="kort-rad">
+                <a href={`/stodundervisning/${m.id}.docx`} download={`${m.id}.docx`}>Word-fil<span class="visually-hidden">: {m.data.titel}</span></a>
+                {harMallar(m.data) && <>{' · '}<a href={`/stodundervisning/${m.id}-mallar.docx`} download={`${m.id}-mallar.docx`}>Mallar<span class="visually-hidden"> till {m.data.titel}</span></a></>}
+                <label class="valj"><input type="checkbox" name="valda" value={m.id} /> Välj<span class="visually-hidden"> {m.data.titel}</span></label>
+              </p>
             </article>
           ))}
         </div>
       </section>
     );
   })}
+
+  {metoder.length > 0 && (
+    <form class="samla" id="samla" aria-label="Ladda ner valda metoder" data-bas={site.url}>
+      <p class="samla-antal" aria-live="polite" data-valda>Inga metoder valda</p>
+      <label class="samla-mallar"><input type="checkbox" name="mallar" checked /> Ta med mallarna</label>
+      <span class="samla-knappar">
+        <button type="submit" class="knapp" disabled>Ladda ner valda (docx)</button>
+        <button type="button" class="knapp sekundar" data-rensa hidden>Rensa</button>
+      </span>
+      <p class="meta" data-status role="status" aria-live="polite"></p>
+      <p class="meta samla-hjalp">Markera metoder i listan med Välj, så får du dem i en Word-fil.</p>
+    </form>
+  )}
+  {metoder.length > 0 && (
+    <p class="meta samla-alla"><a href="/stodundervisning/alla-metoder.docx" download="alla-metoder.docx">Ladda ner alla metoder med mallar (docx)</a></p>
+  )}
 </Base>
 
 <script>
-  // Filtrering utan ramverk. Utan JavaScript visas alla metoder och formuläret förblir dolt.
+  // Filtrering utan ramverk. Utan JavaScript visas alla metoder; formuläret, urvalsrutorna och
+  // raden för samlad nedladdning visas bara när html har klassen js (sätts i Base.astro före
+  // första målningen, så att inget hoppar när sidan laddas).
   // Valet speglas i adressen (?omrade=Läsning&arskurs=F-3&tagg=lasflyt) så att en filtrerad vy går att länka.
   const form = document.getElementById('filter') as HTMLFormElement | null;
   if (form) {
-    form.hidden = false;
     const kort = Array.from(document.querySelectorAll<HTMLElement>('[data-metod]'));
     const sektioner = Array.from(document.querySelectorAll<HTMLElement>('[data-omrade-sektion]'));
     const antal = form.querySelector('[data-antal]') as HTMLElement;
@@ -94,13 +122,78 @@ const taggarIBruk = [...new Set(metoder.flatMap((m) => m.data.taggar))].sort((a,
         s.hidden = aktiv && !Array.from(s.querySelectorAll<HTMLElement>('[data-metod]')).some((k) => !k.hidden);
       }
       antal.textContent = synliga === 1 ? '1 metod' : `${synliga} metoder`;
+      tom.hidden = synliga > 0;
       const q = new URLSearchParams();
       for (const n of namn) if (val[n]) q.set(n, val[n]);
       const frageDel = q.toString();
       history.replaceState(null, '', frageDel ? `?${frageDel}` : location.pathname);
     }
 
+    const tom = form.querySelector('[data-tom]') as HTMLElement;
+    form.querySelector('[data-rensa-filter]')?.addEventListener('click', () => { form!.reset(); filtrera(); });
     form.addEventListener('change', filtrera);
     filtrera();
+  }
+
+  // Flera metoder i en Word-fil. Data hämtas från metoder.json och filen byggs i webbläsaren
+  // med samma generator som bygget använder (src/lib/metoddocx.ts), så innehållet är identiskt.
+  const samla = document.getElementById('samla') as HTMLFormElement | null;
+  if (samla) {
+    const boxar = Array.from(document.querySelectorAll<HTMLInputElement>('input[name="valda"]'));
+    const knapp = samla.querySelector('button') as HTMLButtonElement;
+    const valda = samla.querySelector('[data-valda]') as HTMLElement;
+    const status = samla.querySelector('[data-status]') as HTMLElement;
+    const rensa = samla.querySelector('[data-rensa]') as HTMLButtonElement;
+    const medMallar = samla.elements.namedItem('mallar') as HTMLInputElement;
+    const bas = samla.dataset.bas ?? location.origin;
+    let bygger = false;
+
+    function uppdatera() {
+      const markerade = boxar.filter((b) => b.checked);
+      const n = markerade.length;
+      knapp.disabled = bygger || n === 0;
+      rensa.hidden = n === 0;
+      const namn = markerade.map((b) => b.closest('[data-metod]')?.querySelector('h3')?.textContent?.trim()).filter(Boolean);
+      valda.textContent = n === 0 ? 'Inga metoder valda' : `${n === 1 ? '1 metod vald' : `${n} metoder valda`}: ${namn.join(', ')}`;
+      for (const b of boxar) b.closest('[data-metod]')?.classList.toggle('vald', b.checked);
+    }
+    for (const b of boxar) b.addEventListener('change', uppdatera);
+    rensa.addEventListener('click', () => { for (const b of boxar) b.checked = false; status.textContent = ''; uppdatera(); });
+    uppdatera();
+
+    samla.addEventListener('submit', async (h) => {
+      h.preventDefault();
+      const ids = boxar.filter((b) => b.checked).map((b) => b.value);
+      if (ids.length === 0 || bygger) return;
+      bygger = true;
+      knapp.disabled = true;
+      status.textContent = 'Bygger filen.';
+      try {
+        const svar = await fetch('/stodundervisning/metoder.json');
+        if (!svar.ok) throw new Error(`metoder.json svarade ${svar.status}`);
+        const { metoder } = (await svar.json()) as { metoder: { id: string; data: unknown }[] };
+        const poster = ids.map((id) => metoder.find((m) => m.id === id)).filter((m): m is { id: string; data: unknown } => Boolean(m));
+        if (poster.length !== ids.length) throw new Error('En vald metod saknas i metoder.json. Sidan och datan kommer från olika byggen.');
+        const [{ metodDokument }, { Packer }] = await Promise.all([import('../../lib/metoddocx'), import('docx')]);
+        const dokument = metodDokument(poster as Parameters<typeof metodDokument>[0], { bas, medMallar: medMallar.checked });
+        const blob = await Packer.toBlob(dokument);
+        const lank = document.createElement('a');
+        lank.href = URL.createObjectURL(blob);
+        lank.download = poster.length === 1 ? `${poster[0].id}${medMallar.checked ? '-med-mallar' : ''}.docx` : 'metoder-niclasfohlin-se.docx';
+        document.body.appendChild(lank);
+        lank.click();
+        lank.remove();
+        setTimeout(() => URL.revokeObjectURL(lank.href), 60000);
+        status.textContent = poster.length === 1 ? 'Filen är nedladdad.' : `Filen med ${poster.length} metoder är nedladdad.`;
+        setTimeout(() => { status.textContent = ''; }, 8000);
+      } catch (fel) {
+        // Felet ligger kvar tills läsaren rensar urvalet eller lyckas.
+        status.innerHTML = `Det gick inte att bygga filen. Ladda om sidan och försök igen, eller ladda ner <a href="/stodundervisning/alla-metoder.docx" download="alla-metoder.docx">alla metoder som en fil</a>.`;
+        console.error(fel);
+      } finally {
+        bygger = false;
+        uppdatera();
+      }
+    });
   }
 </script>

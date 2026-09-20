@@ -33,13 +33,13 @@ Astro 7 använder en strikt kompilator: alla taggar måste stängas, ogiltig HTM
 |---|---|---|---|---|
 | Artiklar | src/content/artiklar/ | /artiklar/<id> | _mall.md | /ny-artikel |
 | Böcker | src/content/bocker/ | /bocker/<id> | _mall.md | /ny-bok |
-| Stödundervisning | src/content/stodundervisning/ | /stodundervisning/<id> | _mall.md | /ny-metod |
+| Stödundervisning | src/content/stodundervisning/ | /stodundervisning/<id> | _mall.yaml | /ny-metod |
 
 Filer som börjar med `_` läses inte in. `utkast: true` visas lokalt men aldrig i produktion. Scheman ligger i `src/content.config.ts` och är strikta med avsikt.
 
 Artiklar är oftast publicerade i Vi Lärare, Göteborgs-Posten eller en annan tidning först. Posten ska alltid visa var, med länk till originalet. Ingressen är egen text. Hela originaltexten läggs bara in när Niclas uttryckligen säger att rättigheterna medger det, och då sätts `heltext: true`.
 
-Stödundervisning är en metodbank, inte en blogg. Varje metod har exakt ett område (Matematik, Läsning, Skrivning), minst en nivå (F-3, 4-6, 7-9) och taggar för vad den tränar. Rubrikerna i mallen behålls. Genomförandet ska en lärare kunna följa i morgon.
+Stödundervisning är en metodbank, inte en blogg. Varje metod är en YAML-fil efter modellen i `_mall.yaml` och `src/content.config.ts`: inledning, upplägg, passrutin, tidsschema, steg med exempelfraser, arbetsform, exempel, när gruppen fastnar, lärarens roll, urval, progression, uppföljning, mål, snabbmall, checklista och grund. Sidan, utskriften och docx-filerna (`/stodundervisning/<id>.docx`, `<id>-mallar.docx`, flera valda metoder i en fil) byggs ur samma data av `src/components/Metod.astro` och `src/lib/metoddocx.ts`, och allt som laddas ner bär © Niclas Fohlin och niclasfohlin.se. Exakt ett område (Matematik, Läsning, Skrivning), minst en nivå (F-3, 4-6, 7-9) och taggar för vad den tränar. Delar som saknas i underlaget utelämnas. Genomförandet ska en lärare kunna följa i morgon.
 
 ## Registren styr taggar och publikationer
 

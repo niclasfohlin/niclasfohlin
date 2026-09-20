@@ -37,7 +37,7 @@ function innehallsfiler() {
     let namn = [];
     try { namn = readdirSync(dir); } catch { continue; }
     for (const f of namn) {
-      if (!f.endsWith('.md') || f.startsWith('_')) continue;
+      if (!(f.endsWith('.md') || f.endsWith('.yaml')) || f.startsWith('_')) continue;
       const p = join(dir, f);
       if (statSync(p).isFile()) filer.push(p);
     }
@@ -45,8 +45,12 @@ function innehallsfiler() {
   return filer;
 }
 
+// Markdown har frontmatter mellan ---; en metod i stödundervisning är en hel YAML-fil.
 function frontmatter(fil) {
   const text = readFileSync(fil, 'utf8');
+  if (fil.endsWith('.yaml')) {
+    try { return parseYaml(text) ?? {}; } catch (e) { return { _fel: e.message }; }
+  }
   const m = text.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (!m) return null;
   try { return parseYaml(m[1]) ?? {}; } catch (e) { return { _fel: e.message }; }

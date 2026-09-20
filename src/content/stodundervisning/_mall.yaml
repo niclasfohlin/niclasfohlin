@@ -1,0 +1,117 @@
+# Mall för en metod i stödundervisning. Filer som börjar med _ läses inte in.
+# Filnamn: kort slug som beskriver metoden, t.ex. problemlosning-i-grupp.yaml
+# Modellen står i src/content.config.ts. Sidan, utskriften och docx-filerna byggs ur samma data,
+# så det som skrivs här hamnar i alla tre. Delarna under "Modellen" är valfria: skriv bara det som finns.
+# En text med flera stycken skrivs som en lista med ett stycke per rad.
+# Ett värde som innehåller kolon följt av mellanrum skrivs inom citattecken.
+
+titel: Metodens namn
+# Raden under rubriken: vad metoden är och för vem.
+undertitel: Lärarledd insats i liten grupp för åk 4–9
+ingress: Två till fyra meningar om vad metoden tränar och hur den används. Egen text som fungerar ensam i ett kort och i ett nyhetsbrev.
+# Exakt ett av: Matematik, Läsning, Skrivning
+omrade: Läsning
+# Minst ett av: F-3, 4-6, 7-9
+arskurs: ["4-6", "7-9"]
+# id från src/data/taggar.json. Återanvänd före att lägga till.
+taggar: ["lasforstaelse"]
+# Valfritt antal av: enskilt, par, liten grupp, helklass
+format: ["liten grupp", "par"]
+# Faktarutan, fritext.
+tid: 20 minuter per pass, två till tre pass i veckan
+period: Sex till åtta veckor
+grupp: Tre till åtta elever
+material:
+  - Vad som behövs, en rad per sak
+uppdaterad: 2026-01-01
+# id på andra metoder som hör ihop med denna
+relaterade: []
+utkast: true
+
+# Modellen. Rubrikerna har standardvärden där de inte anges (se src/content.config.ts).
+inledning:
+  - Vad metoden är, för vem och hur ett pass ser ut. Ett stycke per rad.
+upplagg:
+  rubrik: Så fungerar insatsen
+  text: Hur ofta, hur länge, hur stor grupp, vad ni arbetar med per pass, vad som noteras och hur perioden utvärderas.
+# principer: valfri ruta med det viktigaste att hålla fast vid.
+passrutin:
+  text: Varje pass följer samma rutin.
+  steg:
+    - Steg ett.
+    - Steg två.
+tidsschema:
+  rubrik: 20 minuter, steg för steg
+  text: Hur du förbereder dig.
+  rader:
+    - { tid: Före passet, fas: Förberedelse, vad: Vad du gör innan. }
+    - { tid: 0–5 min, fas: Fasens namn, vad: Vad som händer. }
+  efter: Vad ni gör om gruppen blir klar tidigt.
+steg:
+  text: De fyra stegen är den didaktiska modellen bakom rutinen.
+  rader:
+    - namn: Förstå
+      fraga: Vad frågar texten?
+      gor: Vad läraren gör i steget.
+      fraser:
+        - En fras att säga, utan citattecken.
+arbetsform:
+  rubrik: "Arbetsform: gemensamt, par, gemensamt"
+  text: Hur passet rör sig mellan gemensamt och par.
+  delar:
+    - { rubrik: 1. Gemensamt, text: Läraren leder och modellerar }
+    - { rubrik: 2. I par, text: Eleverna prövar }
+    - { rubrik: 3. Gemensamt igen, text: Jämför och sätt ord på strategin }
+# tabeller: fria tabeller med rubrikrad. plats är efter-steg eller efter-arbetsform.
+exempel:
+  valt: { rubrik: Texten läraren valt, text: Vad läraren valde till exempelpasset. }
+  text:
+    - Så gick passet till, ett stycke per rad.
+fastnar:
+  rubrik: När gruppen fastnar
+  text: Vad du gör i stället för att ge svaret.
+  fragaForst:
+    - Vad har ni gjort hittills?
+  trappa:
+    - Minsta stöd först.
+    - Nästa steg.
+  motto: En mening att hålla fast vid.
+roll:
+  rubrik: "Lärarens roll: leda utan att ta över"
+  text: Vad läraren gör och inte gör.
+  gor:
+    - Gör så här.
+  undvik:
+    - Undvik det här.
+urval:
+  rubrik: Var hittar du texterna?
+  text:
+    - Var materialet finns.
+  kravText: "Välj en text per pass som uppfyller tre krav:"
+  krav:
+    - { rubrik: Krav ett, text: Vad det betyder }
+progression:
+  text: Hur ansvaret flyttas till eleverna.
+  # enhet: första kolumnens rubrik, Vecka som standard. Skriv Pass för en insats som räknas i pass.
+  rader:
+    - { vecka: 1–2, fokus: Vad ni tränar, roll: Vad läraren gör }
+uppfoljning:
+  text: Hur du ser om det fungerar.
+  rader:
+    - { nar: Före insatsen, vad: Vad som mäts. }
+    - { nar: Efter sex till åtta veckor, vad: Vad som jämförs. }
+mal:
+  punkter:
+    - Vad eleven ska kunna göra efter insatsen.
+snabbmall:
+  text: En halv sida att fylla i före och efter varje pass.
+  fore:
+    - Fält att fylla i före passet
+  efter:
+    - Fält att fylla i efter passet
+checklista:
+  punkter:
+    - Vad som ska vara gjort inför passet.
+grund:
+  text: Forskningen bakom, med parentescitat (Författare, årtal). Bara källor som går att verifiera.
+  kallor: Bygger på Författare (årtal), Författare (årtal).

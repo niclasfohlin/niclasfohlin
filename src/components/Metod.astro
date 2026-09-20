@@ -1,0 +1,211 @@
+---
+// Hela metoden i modellens ordning, med kompendiets designelement: rutor, tabeller med rubrikrad,
+// band, gör/undvik och bockar. Samma element och ordning som i docx-filen (src/lib/metoddocx.ts).
+import MetodTabell from './MetodTabell.astro';
+import type { MetodData } from '../lib/metod';
+interface Props { d: MetodData }
+const { d } = Astro.props;
+const efterSteg = d.tabeller.filter((t) => t.plats === 'efter-steg');
+const efterArbetsform = d.tabeller.filter((t) => t.plats === 'efter-arbetsform');
+const fraserRubrik = d.steg?.fraserRubrik ?? '';
+// Sidnavigationen: de avsnitt som finns, i modellens ordning, med korta namn.
+const avsnitt = [
+  d.passrutin && { id: 'passrutin', namn: 'Passrutin' },
+  d.tidsschema && { id: 'tidsschema', namn: 'Tidsschema' },
+  d.steg && { id: 'steg', namn: 'Stegen' },
+  d.arbetsform && { id: 'arbetsform', namn: 'Arbetsform' },
+  d.exempel && { id: 'exempel', namn: 'Exempel' },
+  d.fastnar && { id: 'fastnar', namn: 'När det fastnar' },
+  d.roll && { id: 'roll', namn: 'Lärarens roll' },
+  d.urval && { id: 'urval', namn: 'Urval' },
+  d.progression && { id: 'progression', namn: 'Progression' },
+  d.uppfoljning && { id: 'uppfoljning', namn: 'Uppföljning' },
+  d.mal && { id: 'mal', namn: 'Mål' },
+  d.snabbmall && { id: 'snabbmall', namn: 'Snabbmall' },
+  d.checklista && { id: 'checklista', namn: 'Checklista' },
+  d.grund && { id: 'grund', namn: 'Grunden' },
+].filter((a): a is { id: string; namn: string } => Boolean(a));
+---
+<div class="metod-modell">
+  {avsnitt.length > 2 && (
+    <nav class="metod-nav" aria-label="På den här sidan">
+      <ul>{avsnitt.map((a) => <li><a href={`#${a.id}`}>{a.namn}</a></li>)}</ul>
+    </nav>
+  )}
+  {d.inledning.map((s) => <p>{s}</p>)}
+
+  {d.upplagg && <div class="m-ruta"><p><strong class="kicker">{d.upplagg.rubrik}</strong>{' '}{d.upplagg.text}</p></div>}
+  {d.principer && <div class="m-ruta"><p><strong class="kicker">{d.principer.rubrik}</strong>{' '}{d.principer.text}</p></div>}
+
+  {d.passrutin && (
+    <section id="passrutin">
+      <h2>{d.passrutin.rubrik}</h2>
+      {d.passrutin.text && <p>{d.passrutin.text}</p>}
+      <ol class="m-rutin">{d.passrutin.steg.map((s) => <li>{s}</li>)}</ol>
+      {d.passrutin.efter && <p class="m-efter">{d.passrutin.efter}</p>}
+    </section>
+  )}
+
+  {d.tidsschema && (
+    <section id="tidsschema">
+      <h2>{d.tidsschema.rubrik}</h2>
+      {d.tidsschema.text && <p>{d.tidsschema.text}</p>}
+      <MetodTabell kolumner={['Tid', 'Fas', 'Vad händer']} rader={d.tidsschema.rader.map((r) => [r.tid, r.fas, r.vad])} bredder={['18%', '22%', '60%']} klass="tidsschema" />
+      {d.tidsschema.efter && <p class="m-efter">{d.tidsschema.efter}</p>}
+    </section>
+  )}
+
+  {d.steg && (
+    <section id="steg">
+      <h2>{d.steg.rubrik}</h2>
+      {d.steg.text && <p>{d.steg.text}</p>}
+      <table class="m-tabell steg" role="table">
+        <colgroup><col style="width:22%" /><col style="width:36%" /><col style="width:42%" /></colgroup>
+        <thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">Steg</th><th scope="col" role="columnheader">Vad du gör</th><th scope="col" role="columnheader">{fraserRubrik}</th></tr></thead>
+        <tbody role="rowgroup">
+          {d.steg.rader.map((r, i) => (
+            <tr role="row">
+              <th scope="row" role="rowheader" data-rubrik="Steg"><span class="forsta stegnamn">{i + 1} {r.namn}</span>{r.fraga && <span class="under">{r.fraga}</span>}</th>
+              <td role="cell" data-rubrik="Vad du gör">{r.gor}</td>
+              <td role="cell" data-rubrik={fraserRubrik}>{r.fraser.length > 0 && <ul class="fraser">{r.fraser.map((f) => <li>”{f}”</li>)}</ul>}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  )}
+
+  {efterSteg.map((t) => (
+    <section>
+      <h2>{t.rubrik}</h2>
+      {t.text && <p>{t.text}</p>}
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} />
+      {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
+    </section>
+  ))}
+
+  {d.arbetsform && (
+    <section id="arbetsform">
+      <h2>{d.arbetsform.rubrik}</h2>
+      <p>{d.arbetsform.text}</p>
+      <div class="m-band" style={`--delar:${d.arbetsform.delar.length}`}>
+        {d.arbetsform.delar.map((x) => <div><strong>{x.rubrik}</strong><span>{x.text}</span></div>)}
+      </div>
+    </section>
+  )}
+
+  {efterArbetsform.map((t) => (
+    <section>
+      <h2>{t.rubrik}</h2>
+      {t.text && <p>{t.text}</p>}
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} />
+      {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
+    </section>
+  ))}
+
+  {d.exempel && (
+    <section id="exempel" class="m-exempel">
+      <h2>{d.exempel.rubrik}</h2>
+      <div class="m-ruta"><p><strong class="kicker">{d.exempel.valt.rubrik}:</strong>{' '}<em>{d.exempel.valt.text}</em></p></div>
+      {d.exempel.text.map((s) => <p><em>{s}</em></p>)}
+    </section>
+  )}
+
+  {d.fastnar && (
+    <section id="fastnar">
+      <h2>{d.fastnar.rubrik}</h2>
+      <p>{d.fastnar.text}</p>
+      <div class="m-ruta m-fraga">
+        <p class="kicker">Fråga alltid först:</p>
+        {d.fastnar.fragaForst.map((f) => <p class="stor">{f}</p>)}
+      </div>
+      <p>{d.fastnar.trappaText}</p>
+      <ol class="m-trappa">{d.fastnar.trappa.map((t) => <li>{t}</li>)}</ol>
+      {d.fastnar.efter && <p class="m-efter">{d.fastnar.efter}</p>}
+      {d.fastnar.motto && <p class="m-motto">{d.fastnar.motto}</p>}
+    </section>
+  )}
+
+  {d.roll && (
+    <section id="roll">
+      <h2>{d.roll.rubrik}</h2>
+      <p>{d.roll.text}</p>
+      <div class="m-gor-undvik">
+        <div class="gor"><h3>Gör så här</h3><ul>{d.roll.gor.map((x) => <li>{x}</li>)}</ul></div>
+        <div class="undvik"><h3>Undvik</h3><ul>{d.roll.undvik.map((x) => <li>{x}</li>)}</ul></div>
+      </div>
+    </section>
+  )}
+
+  {d.urval && (
+    <section id="urval">
+      <h2>{d.urval.rubrik}</h2>
+      {d.urval.text.map((s) => <p>{s}</p>)}
+      {d.urval.kravText && <p>{d.urval.kravText}</p>}
+      <div class="m-band" style={`--delar:${d.urval.krav.length}`}>
+        {d.urval.krav.map((x) => <div><strong>{x.rubrik}</strong><span>{x.text}</span></div>)}
+      </div>
+    </section>
+  )}
+
+  {d.progression && (
+    <section id="progression">
+      <h2>{d.progression.rubrik}</h2>
+      {d.progression.text && <p>{d.progression.text}</p>}
+      <MetodTabell kolumner={[d.progression.enhet, 'Fokus', 'Lärarens roll']} rader={d.progression.rader.map((r) => [r.vecka, r.fokus, r.roll])} bredder={['18%', '42%', '40%']} />
+    </section>
+  )}
+
+  {d.uppfoljning && (
+    <section id="uppfoljning">
+      <h2>{d.uppfoljning.rubrik}</h2>
+      {d.uppfoljning.text && <p>{d.uppfoljning.text}</p>}
+      <table class="m-tabell tva">
+        <colgroup><col style="width:28%" /><col style="width:72%" /></colgroup>
+        <tbody>{d.uppfoljning.rader.map((r) => <tr><th scope="row">{r.nar}</th><td>{r.vad}</td></tr>)}</tbody>
+      </table>
+    </section>
+  )}
+
+  {d.mal && (
+    <section id="mal">
+      <h2>{d.mal.rubrik}</h2>
+      <p>{d.mal.text}</p>
+      <ul class="m-bockar tva">{d.mal.punkter.map((p) => <li>{p}</li>)}</ul>
+    </section>
+  )}
+
+  {d.snabbmall && (
+    <section id="snabbmall">
+      <h2>{d.snabbmall.rubrik}</h2>
+      {d.snabbmall.text && <p>{d.snabbmall.text}</p>}
+      <table class="m-snabbmall">
+        <caption>SNABBMALL · {d.titel}</caption>
+        <colgroup><col style="width:38%" /><col style="width:62%" /></colgroup>
+        <tbody>
+          <tr class="avsnitt"><th scope="col">Före passet</th><th scope="col"><span class="visually-hidden">Att fylla i</span></th></tr>
+          {d.snabbmall.fore.map((f) => <tr><th scope="row">{f}</th><td></td></tr>)}
+        </tbody>
+        <tbody>
+          <tr class="avsnitt"><th scope="col">Efter passet: kort notering</th><th scope="col"><span class="visually-hidden">Att fylla i</span></th></tr>
+          {d.snabbmall.efter.map((f) => <tr><th scope="row">{f}</th><td></td></tr>)}
+        </tbody>
+      </table>
+    </section>
+  )}
+
+  {d.checklista && (
+    <section id="checklista">
+      <h2>{d.checklista.rubrik}</h2>
+      <ul class="m-bockar">{d.checklista.punkter.map((p) => <li>{p}</li>)}</ul>
+    </section>
+  )}
+
+  {d.grund && (
+    <section id="grund">
+      <h2>{d.grund.rubrik}</h2>
+      <div class="m-grund"><p>{d.grund.text}</p></div>
+      {d.grund.kallor && <p class="m-kallor">{d.grund.kallor}</p>}
+    </section>
+  )}
+</div>

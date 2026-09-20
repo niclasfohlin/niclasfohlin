@@ -52,6 +52,20 @@ En inloggning som kräver webbläsaren (`gh auth login`, `netlify login`) starta
 
 Alla kända texter av Niclas ligger i `underlag/texter/`, ett blad per text med fulltext och metadata, och `underlag/texter/register.json` är listan. `npm run texter` visar vilka som saknar post på sajten. En post skapas ur bladet med `/ny-artikel <slug>`: egen ingress, taggar ur registret, länk till originalet. Fulltexten läggs in i posten bara när Niclas sagt att rättigheterna medger det, och då sätts `heltext: true`.
 
+## Metoder ur underlag
+
+Niclas lämnar metoder till stödundervisning som kompendier (docx och pdf) med en fast modell, och kommandot `/ny-metod` gör en post av dem. Så här går det fortast:
+
+| Steg | Gör | Verktyg |
+|---|---|---|
+| Läs | Docx till markdown, pdf-sidorna för designen, en metod i taget | `pandoc`, Read |
+| Skriv | Metoden som JavaScript-objekt i `underlag/metoder/<slug>.mjs`, sedan YAML | `node scripts/metod-yaml.mjs underlag/metoder/<slug>.mjs` |
+| Validera | Strikt schema: felstavade fält, fel cellantal och okända taggar stoppar bygget | `npm run validera` |
+| Prova | Sidan, Word-filerna, upphovet, underlagets meningar, skärmbilder på desktop, mobil och utskrift | `node scripts/metodprov.mjs <slug> --underlag <md> --bilder` |
+| Granska | Bilderna i `underlag/prov/<slug>/`, docx-filen i Word, Lighthouse på sidan om koden ändrats | Chrome headless, `npx lighthouse` |
+
+Modellen ändras i `src/content.config.ts`, sidan i `src/components/Metod.astro`, Word-filen i `src/lib/metoddocx.ts`, utskriften under `@media print` i `src/styles/global.css`. En ny del i modellen läggs till på alla tre ställen och i `_mall.yaml`. Texten i posterna är Niclas egen; de enda avsiktliga ändringarna är lagernivå bort, årskurs 4–9, kolon i stället för tankstreck i rubriker och "jag" i checklistorna.
+
 ## När du fastnar
 
 Tre försök på samma sak räcker. Beskriv sedan vad du provat, vad du tror är fel och vad du behöver. Gissa inte fram fakta om Niclas, hans böcker eller hans artiklar. Gissa inte API-detaljer; leta upp dokumentationen eller fråga.

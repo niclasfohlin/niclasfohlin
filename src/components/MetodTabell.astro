@@ -1,0 +1,26 @@
+---
+// Tabell med rubrikrad i metodmodellen. En radbrytning i en cell blir en ny rad; i första
+// kolumnen är första raden fet och resten kursiv, som i kompendiet. På smala skärmar
+// staplas cellerna med kolumnrubriken framför (data-rubrik).
+interface Props { kolumner: string[]; rader: string[][]; bredder?: string[]; klass?: string }
+const { kolumner, rader, bredder = [], klass = '' } = Astro.props;
+const linjer = (t: string) => t.split('\n');
+---
+<table class={`m-tabell ${klass}`.trim()}>
+  {bredder.length > 0 && <colgroup>{bredder.map((b) => <col style={`width:${b}`} />)}</colgroup>}
+  <thead>
+    <tr>{kolumner.map((k) => <th scope="col">{k}</th>)}</tr>
+  </thead>
+  <tbody>
+    {rader.map((rad) => (
+      <tr>
+        {rad.map((cell, i) => {
+          const l = linjer(cell);
+          return i === 0
+            ? <th scope="row" data-rubrik={kolumner[i]}><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</th>
+            : <td data-rubrik={kolumner[i]}>{l.map((x, j) => <>{j > 0 && <br />}{x}</>)}</td>;
+        })}
+      </tr>
+    ))}
+  </tbody>
+</table>

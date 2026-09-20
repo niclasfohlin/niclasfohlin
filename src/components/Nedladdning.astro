@@ -1,0 +1,23 @@
+---
+// Nedladdningsrutan på metodsidan: hela metoden och mallarna som Word-filer, och sidan som utskrift.
+// Filerna byggs vid bygget av src/pages/stodundervisning/[id].docx.ts och [id]-mallar.docx.ts.
+interface Props { id: string; harMallar: boolean }
+const { id, harMallar } = Astro.props;
+---
+<aside class="nedladdning" aria-labelledby={`nedladdning-${id}`}>
+  <h2 id={`nedladdning-${id}`}>Ladda ner och skriv ut</h2>
+  <p>Metodbeskrivningen som Word-fil{harMallar && ', mallarna för sig'}, eller sidan som utskrift. Alla filer bär © Niclas Fohlin och niclasfohlin.se.</p>
+  <ul class="nedladdning-lista">
+    <li><a class="knapp" href={`/stodundervisning/${id}.docx`} download={`${id}.docx`}>Hela metoden (docx)</a></li>
+    {harMallar && <li><a class="knapp sekundar" href={`/stodundervisning/${id}-mallar.docx`} download={`${id}-mallar.docx`}>Mallarna (docx)</a></li>}
+    <li class="skriv-ut"><button type="button" class="knapp sekundar" data-skriv-ut>Skriv ut</button></li>
+  </ul>
+  <p class="meta">{harMallar && 'Mallarna: snabbmall för passet, checklista inför passet och målkoll före och efter. '}Vill du ha flera metoder i en fil: välj dem i <a href="/stodundervisning">metodbanken</a>.</p>
+</aside>
+
+<script>
+  // Utskriftsknappen visas bara när html har klassen js; utan JavaScript skriver läsaren ut som vanligt.
+  for (const knapp of document.querySelectorAll<HTMLButtonElement>('[data-skriv-ut]')) {
+    knapp.addEventListener('click', () => window.print());
+  }
+</script>

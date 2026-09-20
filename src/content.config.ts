@@ -90,24 +90,138 @@ const bocker = defineCollection({
   }),
 });
 
-// Stödundervisning: metodbanken. Exakt ett område, minst en årskursnivå.
+// Stödundervisning: metodbanken. Varje metod är en YAML-fil som följer samma modell,
+// och sidan, utskriften och docx-filerna byggs ur samma data (src/lib/metoddocx.ts,
+// src/components/Metod.astro). Exakt ett område, minst en årskursnivå. Delarna under
+// "Modellen" är valfria: det som finns visas, i den ordning de står här.
+const text = z.string().trim().min(1, 'Tomt fält.');
+const stycken = z.array(text).min(1);
+const ruta = z.strictObject({ rubrik: text, text });
 const stodundervisning = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.md', base: './src/content/stodundervisning' }),
-  schema: z.object({
-    titel: z.string(),
+  loader: glob({ pattern: '**/[^_]*.yaml', base: './src/content/stodundervisning' }),
+  schema: z.strictObject({
+    titel: text,
+    // Raden under rubriken, t.ex. "Lärarledd problemlösning i liten grupp för åk 4–9".
+    undertitel: z.string().optional(),
     ingress,
     omrade: z.enum(['Matematik', 'Läsning', 'Skrivning']),
     arskurs: z.array(z.enum(['F-3', '4-6', '7-9'])).min(1, 'Ange minst en årskursnivå.'),
     taggar,
     // Hur metoden används. Flera värden går bra.
     format: z.array(z.enum(['enskilt', 'par', 'liten grupp', 'helklass'])).default([]),
-    // Fritext, t.ex. "10 minuter per pass, fyra pass i veckan".
+    // Faktarutan, fritext: "20 minuter per pass, två till tre pass i veckan", "Sex till åtta veckor", "Tre till åtta elever".
     tid: z.string().optional(),
+    period: z.string().optional(),
+    grupp: z.string().optional(),
     material: z.array(z.string()).default([]),
     uppdaterad: z.coerce.date().optional(),
     // id på andra metoder som hör ihop med denna.
     relaterade: z.array(z.string()).default([]),
     utkast: z.boolean().default(false),
+
+    // Modellen. Ett stycke per rad i listorna; en rad inuti en cell blir en ny rad i cellen.
+    inledning: stycken,
+    upplagg: ruta.optional(),
+    principer: ruta.optional(),
+    passrutin: z.strictObject({
+      rubrik: z.string().default('Passrutin: samma ordning varje gång'),
+      text: z.string().optional(),
+      steg: z.array(z.string()).min(1),
+      efter: z.string().optional(),
+    }).optional(),
+    tidsschema: z.strictObject({
+      rubrik: z.string(),
+      text: z.string().optional(),
+      rader: z.array(z.strictObject({ tid: z.string(), fas: z.string(), vad: z.string() })).min(1),
+      efter: z.string().optional(),
+    }).optional(),
+    steg: z.strictObject({
+      rubrik: z.string().default('Vad du gör och säger i varje steg'),
+      text: z.string().optional(),
+      fraserRubrik: z.string().default('Exempelfraser: tänk högt och fråga'),
+      rader: z.array(z.strictObject({
+        namn: z.string(),
+        fraga: z.string().optional(),
+        gor: z.string(),
+        fraser: z.array(z.string()).default([]),
+      })).min(1),
+    }).optional(),
+    arbetsform: z.strictObject({
+      rubrik: z.string(),
+      text: z.string(),
+      delar: z.array(ruta).min(1),
+    }).optional(),
+    // Fria tabeller med rubrikrad, t.ex. Chambers frågetyper eller faktatextens strukturer.
+    tabeller: z.array(z.strictObject({
+      rubrik: z.string(),
+      text: z.string().optional(),
+      plats: z.enum(['efter-steg', 'efter-arbetsform']).default('efter-arbetsform'),
+      kolumner: z.array(text).min(2),
+      rader: z.array(z.array(z.string())).min(1),
+      not: z.string().optional(),
+    }).superRefine((tabell, ctx) => {
+      tabell.rader.forEach((rad, i) => {
+        if (rad.length !== tabell.kolumner.length) ctx.addIssue({ code: 'custom', path: ['rader', i], message: `Raden ska ha ${tabell.kolumner.length} celler, lika många som rubrikerna.` });
+      });
+    })).default([]),
+    exempel: z.strictObject({
+      rubrik: z.string().default('Exempel: så går ett pass till'),
+      valt: ruta,
+      text: stycken,
+    }).optional(),
+    fastnar: z.strictObject({
+      rubrik: z.string(),
+      text: z.string(),
+      fragaForst: z.array(z.string()).min(1),
+      trappaText: z.string().default('En stödtrappa att gå uppför i stunden. Ge inte nästa steg förrän de har prövat det föregående:'),
+      trappa: z.array(z.string()).min(1),
+      efter: z.string().optional(),
+      motto: z.string().optional(),
+    }).optional(),
+    roll: z.strictObject({
+      rubrik: z.string(),
+      text: z.string(),
+      gor: z.array(z.string()).min(1),
+      undvik: z.array(z.string()).min(1),
+    }).optional(),
+    urval: z.strictObject({
+      rubrik: z.string(),
+      text: stycken,
+      kravText: z.string().optional(),
+      krav: z.array(ruta).min(1),
+    }).optional(),
+    progression: z.strictObject({
+      rubrik: z.string().default('Progression över insatsperioden'),
+      text: z.string().optional(),
+      // Första kolumnens rubrik: Vecka för en insats över veckor, Pass för en som räknas i pass.
+      enhet: z.string().default('Vecka'),
+      rader: z.array(z.strictObject({ vecka: z.string(), fokus: z.string(), roll: z.string() })).min(1),
+    }).optional(),
+    uppfoljning: z.strictObject({
+      rubrik: z.string().default('Följ upp effekten'),
+      text: z.string().optional(),
+      rader: z.array(z.strictObject({ nar: z.string(), vad: z.string() })).min(1),
+    }).optional(),
+    mal: z.strictObject({
+      rubrik: z.string().default('Mål: vad eleven ska kunna göra efter insatsen'),
+      text: z.string().default('Efter perioden ska eleven oftare kunna:'),
+      punkter: z.array(z.string()).min(1),
+    }).optional(),
+    snabbmall: z.strictObject({
+      rubrik: z.string().default('Snabbmall'),
+      text: z.string().optional(),
+      fore: z.array(z.string()).min(1),
+      efter: z.array(z.string()).min(1),
+    }).optional(),
+    checklista: z.strictObject({
+      rubrik: z.string().default('Checklista inför passet'),
+      punkter: z.array(z.string()).min(1),
+    }).optional(),
+    grund: z.strictObject({
+      rubrik: z.string().default('Kort om grunden'),
+      text: z.string(),
+      kallor: z.string().optional(),
+    }).optional(),
   }),
 });
 

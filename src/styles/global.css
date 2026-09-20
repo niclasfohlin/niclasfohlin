@@ -186,8 +186,10 @@ h3 { font-size: 1.2rem; }
   .bok-omslag-stor { position: sticky; top: 1.25rem; }
 }
 
-/* Filtret i metodbanken. Visas bara när JavaScript finns; utan det syns alla metoder. */
-.filter {
+/* Filtret i metodbanken. Visas bara när JavaScript finns (html.js sätts i Base.astro före första
+   målningen, så att sidan inte hoppar); utan det syns alla metoder. */
+.filter { display: none; }
+html.js .filter {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(14rem, max-content));
   gap: 0.75rem 2rem;
@@ -213,6 +215,177 @@ form.prenumerera { display: grid; gap: 0.75rem; max-width: 28rem; font-family: v
 form.prenumerera input[type="email"] { font: inherit; padding: 0.6rem 0.8rem; border: 1px solid var(--farg-kant); border-radius: 8px; }
 form.prenumerera button { font: inherit; padding: 0.6rem 1rem; border: 0; border-radius: 8px; background: var(--farg-accent); color: white; cursor: pointer; }
 .honung { position: absolute; left: -9999px; }
+
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.knapp.sekundar { background: var(--farg-yta); color: var(--farg-accent); border: 1px solid var(--farg-accent); cursor: pointer; font-size: 1rem; line-height: inherit; }
+.knapp.sekundar:hover { background: var(--farg-accent-ljus); color: var(--farg-accent); }
+.knapp[disabled] { opacity: 0.5; cursor: default; }
+
+/* Metodbanken: korten och raden för att ladda ner flera metoder i en fil. */
+.metodkort .undertitel { font-family: var(--typsnitt-ui); color: var(--farg-accent); font-size: 0.95rem; margin: 0 0 0.6em; }
+.metodkort .kort-rad { font-family: var(--typsnitt-ui); font-size: 0.9rem; margin: 0.5rem 0 0; display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
+.metodkort .valj { display: none; }
+html.js .metodkort .valj { margin-left: auto; display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 600; cursor: pointer; }
+.metodkort .valj input { accent-color: var(--farg-accent); width: 1.1rem; height: 1.1rem; margin: 0; }
+.metodkort.vald { border-color: var(--farg-accent); box-shadow: 0 0 0 2px var(--farg-accent-ljus); }
+.samla { display: none; }
+html.js .samla {
+  position: sticky; bottom: 0.75rem; z-index: 5;
+  display: grid; grid-template-columns: 1fr auto auto; gap: 0.5rem 1.25rem; align-items: center;
+  font-family: var(--typsnitt-ui); font-size: 0.95rem;
+  background: var(--farg-yta); border: 1px solid var(--farg-kant); border-radius: var(--radie);
+  padding: 0.9rem 1.25rem; margin: 2.5rem 0 0; box-shadow: 0 6px 24px rgba(24, 34, 29, 0.12);
+}
+.samla p { margin: 0; }
+.samla-antal { font-weight: 600; }
+.samla-mallar { display: inline-flex; align-items: center; gap: 0.4rem; }
+.samla-mallar input { accent-color: var(--farg-accent); margin: 0; }
+.samla button.knapp { font-size: 0.95rem; cursor: pointer; }
+.samla button.knapp:not(.sekundar) { border: 0; }
+.samla-knappar { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.samla [data-status], .samla .samla-hjalp { grid-column: 1 / -1; }
+.samla [data-status]:empty { display: none; }
+.samla-alla { font-family: var(--typsnitt-ui); font-size: 0.9rem; margin: 1rem 0 0; }
+.filter .tom { grid-column: 1 / -1; margin: 0; }
+.filter .tom button { font: inherit; background: none; border: 0; padding: 0; color: var(--farg-accent); text-decoration: underline; cursor: pointer; }
+
+/* Metodsidan: huvud, faktaruta och nedladdning, sedan modellen med kompendiets designelement.
+   Samma element finns i docx-filen (src/lib/metoddocx.ts). */
+.metod { max-width: 50rem; }
+.metod-huvud h1 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); letter-spacing: -0.01em; margin-bottom: 0.3em; }
+.metod-huvud .undertitel { font-family: var(--typsnitt-ui); color: var(--farg-accent); font-size: 1.15rem; margin: 0 0 1rem; }
+.metod-huvud .ingress { font-size: 1.2rem; line-height: 1.5; font-weight: 700; margin: 0 0 1rem; }
+.metod-sida { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25rem; align-items: start; margin: 1.5rem 0 2rem; }
+.metod-sida .faktaruta { margin: 0; }
+.nedladdning { background: var(--farg-accent-ljus); border-radius: var(--radie); padding: 1.1rem 1.25rem 1rem; font-family: var(--typsnitt-ui); font-size: 0.95rem; }
+.nedladdning h2 { font-size: 1.15rem; margin: 0 0 0.4em; }
+.nedladdning p { margin: 0 0 0.75em; }
+.nedladdning-lista { list-style: none; padding: 0; margin: 0 0 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.nedladdning .skriv-ut { display: none; }
+html.js .nedladdning .skriv-ut { display: block; }
+.nedladdning .knapp { font-size: 0.95rem; padding: 0.5rem 0.9rem; }
+@media (min-width: 52rem) {
+  .metod-sida { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+}
+
+.metod-nav { font-family: var(--typsnitt-ui); font-size: 0.9rem; margin: 0 0 1.5rem; }
+.metod-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem 0.5rem; }
+.metod-nav a { display: inline-block; text-decoration: none; background: var(--farg-yta); border: 1px solid var(--farg-kant); border-radius: 999px; padding: 0.25rem 0.7rem; }
+.metod-nav a:hover { border-color: var(--farg-accent); }
+.metod-modell section { scroll-margin-top: 1rem; }
+.metod-modell { font-size: 1.0625rem; line-height: 1.65; }
+.metod-modell > p, .metod-modell section > p { margin: 0 0 1em; }
+.metod-modell h2 { font-family: var(--typsnitt-ui); font-size: 1.3rem; color: var(--farg-accent); margin: 2.2em 0 0.5em; }
+.metod-modell section + section { margin-top: 0; }
+.metod-modell .m-efter { color: var(--farg-text-svag); font-size: 0.98rem; }
+.m-ruta { background: var(--farg-accent-ljus); border-left: 4px solid var(--farg-accent); border-radius: 0 8px 8px 0; padding: 0.85rem 1.1rem; margin: 1.25rem 0; }
+.m-ruta p { margin: 0; }
+.m-ruta p + p { margin-top: 0.35em; }
+.m-ruta .kicker { font-family: var(--typsnitt-ui); color: var(--farg-accent); }
+.m-fraga .kicker { margin-bottom: 0.25em; }
+.m-fraga .stor { font-family: var(--typsnitt-ui); font-weight: 700; font-size: 1.15rem; }
+.m-rutin, .m-trappa { margin: 1rem 0 1.25rem; padding: 0.9rem 1.1rem 0.9rem 2.6rem; counter-reset: steg; list-style: none; }
+.m-rutin { background: var(--farg-accent-ljus); border-left: 4px solid var(--farg-accent); border-radius: 0 8px 8px 0; }
+.m-trappa { padding-left: 2.6rem; padding-top: 0; padding-bottom: 0; }
+.m-rutin li, .m-trappa li { counter-increment: steg; position: relative; margin: 0 0 0.4em; }
+.m-rutin li::before, .m-trappa li::before { content: counter(steg) "."; position: absolute; left: -1.7rem; width: 1.4rem; text-align: right; font-family: var(--typsnitt-ui); font-weight: 700; color: var(--farg-accent); }
+.m-tabell, .m-snabbmall { width: 100%; border-collapse: collapse; font-family: var(--typsnitt-ui); font-size: 0.95rem; line-height: 1.5; margin: 1rem 0 1.25rem; }
+.m-tabell th, .m-tabell td, .m-snabbmall th, .m-snabbmall td { border: 1px solid var(--farg-kant); padding: 0.55rem 0.7rem; vertical-align: top; text-align: left; }
+.m-tabell thead th { background: var(--farg-accent); color: #fff; border-color: var(--farg-accent); font-weight: 600; }
+.m-tabell tbody tr:nth-child(even) { background: var(--farg-yta); }
+.m-tabell tbody th { font-weight: 700; color: var(--farg-accent); }
+.m-tabell tbody th .forsta { display: block; }
+.m-tabell tbody th .under { display: block; font-weight: 400; font-style: italic; color: var(--farg-text-svag); margin-top: 0.15em; }
+.m-tabell .stegnamn { text-transform: uppercase; letter-spacing: 0.02em; }
+.m-tabell.tidsschema td:nth-child(2) { font-weight: 600; }
+.m-tabell .fraser { list-style: none; margin: 0; padding: 0; font-style: italic; }
+.m-tabell .fraser li { margin: 0 0 0.25em; }
+.m-tabell.tva tbody th { background: var(--farg-accent); color: #fff; border-color: var(--farg-accent); width: 28%; }
+.m-band { display: grid; grid-template-columns: repeat(var(--delar, 3), minmax(0, 1fr)); gap: 0; margin: 1rem 0 1.25rem; font-family: var(--typsnitt-ui); text-align: center; border: 1px solid var(--farg-kant); border-radius: 8px; overflow: hidden; }
+.m-band > div { display: flex; flex-direction: column; border-left: 1px solid var(--farg-kant); }
+.m-band > div:first-child { border-left: 0; }
+.m-band strong { background: var(--farg-accent); color: #fff; padding: 0.55rem 0.5rem; }
+.m-band span { padding: 0.6rem 0.6rem; font-size: 0.95rem; }
+.m-motto { background: var(--farg-accent); color: #fff; font-family: var(--typsnitt-ui); font-weight: 700; text-align: center; padding: 0.75rem 1rem; border-radius: 8px; margin: 1.25rem 0; }
+.m-gor-undvik { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin: 1rem 0 1.25rem; font-family: var(--typsnitt-ui); font-size: 0.95rem; }
+.m-gor-undvik > div { border-radius: 8px; overflow: hidden; }
+.m-gor-undvik h3 { margin: 0; padding: 0.5rem 0.9rem; color: #fff; font-family: var(--typsnitt-ui); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.m-gor-undvik ul { margin: 0; padding: 0.75rem 0.9rem 0.75rem 2rem; }
+.m-gor-undvik li { margin: 0 0 0.3em; }
+.m-gor-undvik .gor h3 { background: #2e7d32; }
+.m-gor-undvik .gor ul { background: #e8f5e9; color: #1b5e20; }
+.m-gor-undvik .undvik h3 { background: #a8511b; }
+.m-gor-undvik .undvik ul { background: #fff4e5; color: #8a3a0e; }
+.m-bockar { list-style: none; margin: 1rem 0 1.25rem; padding: 0; border: 1px solid var(--farg-kant); border-radius: 8px; overflow: hidden; font-family: var(--typsnitt-ui); font-size: 0.95rem; }
+.m-bockar li { padding: 0.5rem 0.8rem 0.5rem 2.4rem; position: relative; border-top: 1px solid var(--farg-kant); }
+.m-bockar li:first-child { border-top: 0; }
+.m-bockar li:nth-child(even) { background: var(--farg-yta); }
+.m-bockar li::before { content: ""; position: absolute; left: 0.8rem; top: 0.72rem; width: 0.9rem; height: 0.9rem; border: 1.5px solid var(--farg-accent); border-radius: 3px; }
+.m-bockar.tva { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.m-bockar.tva li:nth-child(even) { background: none; border-left: 1px solid var(--farg-kant); }
+.m-bockar.tva li:nth-child(2) { border-top: 0; }
+.m-bockar.tva li:nth-child(4n+3), .m-bockar.tva li:nth-child(4n+4) { background: var(--farg-yta); }
+.m-snabbmall th { font-weight: 700; }
+.m-snabbmall caption { caption-side: top; text-align: left; background: var(--farg-accent); color: #fff; font-weight: 700; padding: 0.55rem 0.7rem; border: 1px solid var(--farg-accent); }
+.m-snabbmall .avsnitt th { background: var(--farg-accent-ljus); color: var(--farg-accent); }
+.m-snabbmall .avsnitt th + th { border-left: 0; }
+.m-snabbmall .avsnitt th:first-child { border-right: 0; }
+.m-snabbmall td { height: 2.4rem; background: var(--farg-yta); }
+.m-grund { border: 1.5px solid var(--farg-accent); border-radius: 8px; padding: 0.85rem 1.1rem; margin: 1rem 0 0.5rem; }
+.m-grund p { margin: 0; }
+.m-kallor { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
+.metod-fot { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--farg-kant); }
+.metod-fot .relaterade h2 { font-size: 1.15rem; margin: 1.25rem 0 0.4em; }
+.metod-fot .relaterade ul { padding-left: 1.2em; margin: 0 0 1em; }
+.metod-fot .upphov { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
+.tryck-fot { display: none; }
+
+@media (max-width: 40rem) {
+  /* Stegtabellen staplas. Rubrikraden döljs bara visuellt och tabellrollerna står i markupen, så att skärmläsare behåller relationerna. */
+  .m-tabell.steg colgroup { display: none; }
+  .m-tabell.steg thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .m-tabell.steg, .m-tabell.steg tbody, .m-tabell.steg tr, .m-tabell.steg th, .m-tabell.steg td { display: block; width: auto; }
+  .m-tabell.steg tr { border: 1px solid var(--farg-kant); margin-bottom: 0.75rem; }
+  .m-tabell.steg th, .m-tabell.steg td { border: 0; border-top: 1px solid var(--farg-kant); }
+  .m-tabell.steg th[scope="row"] { background: var(--farg-accent-ljus); border-top: 0; }
+  .m-tabell.steg td::before { content: attr(data-rubrik); display: block; font-weight: 600; color: var(--farg-text-svag); font-size: 0.8rem; margin-bottom: 0.2em; }
+  .m-gor-undvik, .m-bockar.tva { grid-template-columns: 1fr; }
+  .m-bockar.tva li:nth-child(even) { border-left: 0; background: var(--farg-yta); }
+  .m-bockar.tva li:nth-child(2) { border-top: 1px solid var(--farg-kant); }
+  .m-bockar.tva li:nth-child(4n+3), .m-bockar.tva li:nth-child(4n+4) { background: none; }
+  .m-bockar.tva li:nth-child(4n) { background: var(--farg-yta); }
+  .m-band { grid-template-columns: 1fr; }
+  .m-band > div { border-left: 0; border-top: 1px solid var(--farg-kant); }
+  .m-band > div:first-child { border-top: 0; }
+  .samla { grid-template-columns: 1fr; gap: 0.6rem; }
+  .metod-modell { font-size: 1rem; }
+  .m-tabell, .m-snabbmall { font-size: 0.9rem; }
+  .m-tabell th, .m-tabell td { padding: 0.45rem 0.5rem; }
+}
+
+/* Utskrift av en metod: bara metoden, med © Niclas Fohlin och adressen längst ner på varje sida. */
+@media print {
+  @page { size: A4; margin: 16mm 14mm 20mm; }
+  body { background: #fff; color: #000; font-size: 10.5pt; line-height: 1.45; }
+  .sidhuvud, .sidfot, .hopp-lank, .nedladdning, .filter, .samla, .metod-fot .relaterade, .metod-fot .taggar, .valj { display: none !important; }
+  .innehall { max-width: none; padding: 0; }
+  .metod { max-width: none; }
+  .metod-sida { grid-template-columns: 1fr; margin: 0.75rem 0 1rem; }
+  .faktaruta { border-color: #bbb; font-size: 9.5pt; }
+  .metod-huvud h1 { font-size: 22pt; }
+  .metod-modell { font-size: 10.5pt; }
+  .metod-modell h2 { font-size: 13pt; margin-top: 1.4em; break-after: avoid; }
+  .m-tabell, .m-snabbmall, .m-bockar, .m-gor-undvik, .m-band, .m-ruta, .m-rutin, .m-grund, .m-motto { font-size: 9.5pt; }
+  .m-tabell tr, .m-snabbmall tr, .m-bockar li, .m-gor-undvik, .m-band, .m-ruta, .m-rutin, .m-grund, .m-motto, .m-fraga { break-inside: avoid; }
+  .m-tabell thead { display: table-header-group; }
+  .metod-nav, .brodsmula { display: none; }
+  .m-tabell thead th, .m-tabell.tva tbody th, .m-snabbmall .titel th, .m-band strong, .m-motto, .m-gor-undvik h3 { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .m-ruta, .m-rutin, .m-snabbmall .avsnitt th, .m-gor-undvik ul, .m-bockar li:nth-child(even), .m-tabell tbody tr:nth-child(even) { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .m-snabbmall td { height: 2rem; }
+  .metod-fot { border-top: 0; padding-top: 0; margin-top: 1.5rem; }
+  .tryck-fot { display: block; position: fixed; bottom: 0; left: 0; right: 0; font-family: var(--typsnitt-ui); font-size: 8.5pt; color: #555; text-align: center; border-top: 1px solid #bbb; padding-top: 3pt; background: #fff; }
+  a { text-decoration: none; color: inherit; }
+}
 
 @media (max-width: 40rem) {
   body { font-size: 1rem; }
