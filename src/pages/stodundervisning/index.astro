@@ -9,6 +9,7 @@ const metoder = await metoderSorterade();
 const taggarIBruk = [...new Set(metoder.flatMap((m) => m.data.taggar))].sort((a, b) => taggLabel(a).localeCompare(taggLabel(b), 'sv'));
 // Bara årskursnivåer som någon metod har, så att filtret inte erbjuder tomma val.
 const arskurserIBruk = site.arskurser.filter((a) => metoder.some((m) => m.data.arskurs.includes(a)));
+const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.filter((m) => m.data.omrade === o).length]));
 ---
 
 <Base title="Stödundervisning" description="Metodbank för stödundervisning i matematik, läsning och skrivning. Varje metod har körschema, exempelfraser och mallar, och går att skriva ut och ladda ner som Word-fil.">
@@ -21,7 +22,7 @@ const arskurserIBruk = site.arskurser.filter((a) => metoder.some((m) => m.data.a
         <legend>Område</legend>
         <div class="val">
           <label><input type="radio" name="omrade" value="" checked /> Alla</label>
-          {site.omraden.map((o) => <label><input type="radio" name="omrade" value={o} /> {o}</label>)}
+          {site.omraden.map((o) => <label class={antalPerOmrade[o] === 0 ? 'tomt' : undefined}><input type="radio" name="omrade" value={o} disabled={antalPerOmrade[o] === 0} /> {o} <span class="meta">{antalPerOmrade[o] === 0 ? '(kommer)' : `(${antalPerOmrade[o]})`}</span></label>)}
         </div>
       </fieldset>
       <fieldset>
@@ -48,7 +49,7 @@ const arskurserIBruk = site.arskurser.filter((a) => metoder.some((m) => m.data.a
     return (
       <section data-omrade-sektion={omrade}>
         <h2>{omrade}</h2>
-        {lista.length === 0 && <p class="meta">Inga metoder ännu.</p>}
+        {lista.length === 0 && <p class="meta">Inga metoder ännu. Området fylls på.</p>}
         <div class="rutnat">
           {lista.map((m) => (
             <article class="kort metodkort" data-metod data-omrade={m.data.omrade} data-arskurs={m.data.arskurs.join(' ')} data-taggar={m.data.taggar.join(' ')}>
@@ -129,6 +130,7 @@ const arskurserIBruk = site.arskurser.filter((a) => metoder.some((m) => m.data.a
       for (const n of namn) if (val[n]) q.set(n, val[n]);
       const frageDel = q.toString();
       history.replaceState(null, '', frageDel ? `?${frageDel}` : location.pathname);
+      try { sessionStorage.setItem('metodfilter', frageDel ? `?${frageDel}` : ''); } catch { /* utan lagring */ }
     }
 
     const tom = form.querySelector('[data-tom]') as HTMLElement;
@@ -159,8 +161,14 @@ const arskurserIBruk = site.arskurser.filter((a) => metoder.some((m) => m.data.a
       valda.textContent = n === 0 ? 'Inga metoder valda' : `${n === 1 ? '1 metod vald' : `${n} metoder valda`}: ${namn.join(', ')}`;
       for (const b of boxar) b.closest('[data-metod]')?.classList.toggle('vald', b.checked);
     }
-    for (const b of boxar) b.addEventListener('change', uppdatera);
-    rensa.addEventListener('click', () => { for (const b of boxar) b.checked = false; status.textContent = ''; uppdatera(); });
+    // Urvalet minns under besöket, så att läraren kan läsa en metod och komma tillbaka.
+    const spara = () => { try { sessionStorage.setItem('metodurval', JSON.stringify(boxar.filter((b) => b.checked).map((b) => b.value))); } catch { /* utan lagring */ } };
+    try {
+      const sparade = JSON.parse(sessionStorage.getItem('metodurval') ?? '[]') as string[];
+      for (const b of boxar) if (sparade.includes(b.value)) b.checked = true;
+    } catch { /* utan lagring */ }
+    for (const b of boxar) b.addEventListener('change', () => { uppdatera(); spara(); });
+    rensa.addEventListener('click', () => { for (const b of boxar) b.checked = false; status.textContent = ''; uppdatera(); spara(); });
     uppdatera();
 
     samla.addEventListener('submit', async (h) => {

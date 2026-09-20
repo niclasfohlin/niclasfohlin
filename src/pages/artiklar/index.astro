@@ -1,22 +1,57 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Taggar from '../../components/Taggar.astro';
-import { artiklarSorterade, formateraDatum, publikationNamn, typLabel } from '../../lib/innehall';
+import { artiklarSorterade, formateraDatum, publikationNamn, taggLabel, typLabel } from '../../lib/innehall';
 const artiklar = await artiklarSorterade();
 // Ett avsnitt per år, nyaste först.
 const ar = [...new Set(artiklar.map((a) => a.data.datum.getFullYear()))];
+// Filtrets val: bara tidningar och typer som någon text har, tidningarna efter antal.
+const publikationer = [...new Set(artiklar.map((a) => a.data.publikation))]
+  .map((id) => ({ id, namn: publikationNamn(id), antal: artiklar.filter((a) => a.data.publikation === id).length }))
+  .sort((x, y) => y.antal - x.antal || x.namn.localeCompare(y.namn, 'sv'));
+const typer = [...new Set(artiklar.map((a) => a.data.typ))].map((t) => ({ id: t, namn: typLabel(t) })).sort((x, y) => x.namn.localeCompare(y.namn, 'sv'));
 ---
 
-<Base title="Artiklar" description="Krönikor, debattartiklar och andra texter om skolan, publicerade i Vi Lärare, Göteborgs-Posten och andra tidningar.">
+<Base title="Artiklar" description="Krönikor, debattartiklar och intervjuer om skolan, publicerade i Vi Lärare, Göteborgs-Posten och andra tidningar. Sök bland texterna eller bläddra per år.">
   <h1>Artiklar</h1>
-  <p class="text">{artiklar.length} texter om skolan: krönikor och debattartiklar i Vi Lärare, Göteborgs-Posten och andra tidningar, samlade här i sin helhet. Varje text länkar också till originalet.</p>
+  <p class="text">{artiklar.length} texter om skolan: krönikor, debattartiklar och intervjuer i Vi Lärare, Göteborgs-Posten och andra tidningar. De flesta finns här i sin helhet, och varje text länkar till originalet.</p>
   {artiklar.length === 0 && <p>Inga artiklar ännu.</p>}
+
+  {artiklar.length > 0 && (
+    <form class="filter arkivfilter" id="arkivfilter" aria-label="Sök och filtrera texter">
+      <div class="sok-val">
+        <label for="arkiv-sok">Sök i rubriker, ingresser och ämnen</label>
+        <input type="search" id="arkiv-sok" name="q" placeholder="Till exempel läsning, betyg eller Pisa" autocomplete="off" />
+      </div>
+      <div class="tagg-val">
+        <label for="arkiv-publikation">Tidning</label>
+        <select id="arkiv-publikation" name="publikation">
+          <option value="">Alla</option>
+          {publikationer.map((p) => <option value={p.id}>{p.namn} ({p.antal})</option>)}
+        </select>
+      </div>
+      <div class="tagg-val">
+        <label for="arkiv-typ">Typ</label>
+        <select id="arkiv-typ" name="typ">
+          <option value="">Alla</option>
+          {typer.map((t) => <option value={t.id}>{t.namn}</option>)}
+        </select>
+      </div>
+      <p class="meta" aria-live="polite" data-antal>{artiklar.length} texter</p>
+      <p class="meta tom" data-tom hidden>Ingen text matchar. <button type="button" data-rensa-filter>Visa alla texter</button></p>
+    </form>
+  )}
+
+  {ar.length > 1 && (
+    <p class="meta arkiv-ar">Hoppa till år: {ar.map((aret, i) => <>{i > 0 && ' · '}<a href={`#ar-${aret}`}>{aret}</a></>)}</p>
+  )}
+
   {ar.map((aret) => (
-    <section class="arsavsnitt">
+    <section class="arsavsnitt" id={`ar-${aret}`} data-ar>
       <h2>{aret}</h2>
       <div class="rutnat">
         {artiklar.filter((a) => a.data.datum.getFullYear() === aret).map((a) => (
-          <article class="kort">
+          <article class="kort" data-text data-publikation={a.data.publikation} data-typ={a.data.typ} data-sok={`${a.data.titel} ${a.data.ingress} ${a.data.taggar.map(taggLabel).join(' ')} ${publikationNamn(a.data.publikation)}`.toLowerCase()}>
             <p class="meta">{typLabel(a.data.typ)} · {publikationNamn(a.data.publikation)} · {formateraDatum(a.data.datum)}</p>
             <h3><a href={`/artiklar/${a.id}`}>{a.data.titel}</a></h3>
             <p>{a.data.ingress}</p>
@@ -27,3 +62,56 @@ const ar = [...new Set(artiklar.map((a) => a.data.datum.getFullYear()))];
     </section>
   ))}
 </Base>
+
+<script>
+  // Sökning och filter utan ramverk. Utan JavaScript visas alla texter per år; formuläret visas
+  // bara med html.js. Valet speglas i adressen (?q=pisa&publikation=vi-larare&typ=kronika).
+  const form = document.getElementById('arkivfilter') as HTMLFormElement | null;
+  if (form) {
+    const kort = Array.from(document.querySelectorAll<HTMLElement>('[data-text]'));
+    const ar = Array.from(document.querySelectorAll<HTMLElement>('[data-ar]'));
+    const antal = form.querySelector('[data-antal]') as HTMLElement;
+    const tom = form.querySelector('[data-tom]') as HTMLElement;
+    const namn = ['q', 'publikation', 'typ'] as const;
+
+    const parametrar = new URLSearchParams(location.search);
+    for (const n of namn) {
+      const v = parametrar.get(n);
+      const falt = form.elements.namedItem(n) as HTMLInputElement | HTMLSelectElement | null;
+      if (v && falt) falt.value = v;
+    }
+
+    function filtrera() {
+      const data = new FormData(form!);
+      const val = Object.fromEntries(namn.map((n) => [n, String(data.get(n) ?? '').trim()]));
+      const ord = val.q.toLowerCase().split(/\s+/).filter(Boolean);
+      const aktiv = namn.some((n) => val[n]);
+      let synliga = 0;
+      for (const k of kort) {
+        const sok = k.dataset.sok ?? '';
+        const passar =
+          ord.every((o) => sok.includes(o)) &&
+          (!val.publikation || k.dataset.publikation === val.publikation) &&
+          (!val.typ || k.dataset.typ === val.typ);
+        k.hidden = !passar;
+        if (passar) synliga++;
+      }
+      for (const s of ar) {
+        s.hidden = aktiv && !Array.from(s.querySelectorAll<HTMLElement>('[data-text]')).some((k) => !k.hidden);
+      }
+      antal.textContent = synliga === 1 ? '1 text' : `${synliga} texter`;
+      tom.hidden = synliga > 0;
+      const q = new URLSearchParams();
+      for (const n of namn) if (val[n]) q.set(n, val[n]);
+      const frageDel = q.toString();
+      history.replaceState(null, '', frageDel ? `?${frageDel}` : location.pathname);
+    }
+
+    let timer: number | undefined;
+    form.addEventListener('input', () => { window.clearTimeout(timer); timer = window.setTimeout(filtrera, 120); });
+    form.addEventListener('change', filtrera);
+    form.addEventListener('submit', (h) => { h.preventDefault(); filtrera(); });
+    form.querySelector('[data-rensa-filter]')?.addEventListener('click', () => { form!.reset(); filtrera(); });
+    filtrera();
+  }
+</script>

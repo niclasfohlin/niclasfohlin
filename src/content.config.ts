@@ -55,7 +55,7 @@ const artiklar = defineCollection({
     datum: z.coerce.date(),
     publikation,
     originalUrl: z.url().optional(),
-    typ: z.enum(['artikel', 'kronika', 'debatt', 'intervju', 'annat']).default('artikel'),
+    typ: z.enum(['artikel', 'kronika', 'debatt', 'intervju', 'podd', 'annat']).default('artikel'),
     medforfattare: z.array(z.string()).default([]),
     taggar,
     utvald: z.boolean().default(false),

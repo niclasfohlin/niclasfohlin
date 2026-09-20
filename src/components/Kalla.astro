@@ -1,16 +1,18 @@
 ---
 import { publikationInfo, formateraDatum } from '../lib/innehall';
-interface Props { publikation: string; originalUrl?: string; datum: Date; }
-const { publikation, originalUrl, datum } = Astro.props;
+interface Props { publikation: string; originalUrl?: string; datum: Date; typ?: string; }
+const { publikation, originalUrl, datum, typ } = Astro.props;
 const info = publikationInfo(publikation);
 const namn = info?.namn ?? publikation;
+// Ett poddavsnitt lyssnar man på; en text läser man.
+const podd = typ === 'podd';
 ---
 <aside class="kalla" aria-label="Ursprunglig publicering">
   {publikation === 'egen'
     ? <span>Publicerad här {formateraDatum(datum)}.</span>
-    : <span>Ursprungligen publicerad i <strong>{namn}</strong> {formateraDatum(datum)}.{" "}
+    : <span>{podd ? 'Poddavsnitt hos' : 'Ursprungligen publicerad i'} <strong>{namn}</strong> {formateraDatum(datum)}.{" "}
         {originalUrl
-          ? <a href={originalUrl} rel="noopener">Läs originalet hos {namn}</a>
+          ? <a href={originalUrl} rel="noopener">{podd ? `Lyssna på avsnittet hos ${namn}` : `Läs originalet hos ${namn}`}</a>
           : info?.url && <a href={info.url} rel="noopener">{namn}</a>}
       </span>}
 </aside>

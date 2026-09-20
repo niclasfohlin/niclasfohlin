@@ -46,7 +46,7 @@ const citat = (f: string) => `”${f}”`;
       <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-2">{l.pass.rubrik}</h2><span class="lh-etikett">Ett pass · 2/4</span></header>
       <div class="lh-kolumner">
         <div class="lh-kol">
-          <div class="lh-ruta">
+          <div class="lh-ruta lh-elevtext" id="lathund-text">
             <h3>{l.pass.textRubrik}</h3>
             <div class="lh-ruta-kropp">
               {l.pass.titel && <p class="lh-titel">{l.pass.titel}</p>}
@@ -174,7 +174,7 @@ const citat = (f: string) => `”${f}”`;
           {d.checklista && (
             <div class="lh-ruta">
               <h3>{d.checklista.rubrik}</h3>
-              <ul class="lh-lista lh-bockar">{d.checklista.punkter.map((p) => <li>{p}</li>)}</ul>
+              <ul class="lh-lista lh-bockar">{d.checklista.punkter.map((p) => <li><label><input type="checkbox" /> {p}</label></li>)}</ul>
             </div>
           )}
           {(d.uppfoljning || l.material.varjePass) && (

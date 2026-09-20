@@ -58,8 +58,9 @@ try {
   await skicka('Page.navigate', { url });
   for (let i = 0; i < 80 && !handelser.includes('Page.loadEventFired'); i++) await vanta(100);
   await vanta(400);
-  const { result: { value: hojd } } = (await skicka('Runtime.evaluate', { expression: 'Math.ceil(Math.max(document.documentElement.scrollHeight, document.body.scrollHeight))', returnByValue: true }));
-  const { result: { value: bredast } } = (await skicka('Runtime.evaluate', { expression: 'Math.ceil(document.documentElement.scrollWidth)', returnByValue: true }));
+  const utvardera = async (expression) => (await skicka('Runtime.evaluate', { expression, returnByValue: true })).result.result.value;
+  const hojd = await utvardera('Math.ceil(Math.max(document.documentElement.scrollHeight, document.body.scrollHeight))');
+  const bredast = await utvardera('Math.ceil(document.documentElement.scrollWidth)');
   await skicka('Emulation.setDeviceMetricsOverride', { width: bredd, height: hojd, deviceScaleFactor: mobil ? 2 : 1, mobile: mobil });
   await vanta(200);
   const svar = await skicka('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true });

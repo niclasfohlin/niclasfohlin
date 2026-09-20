@@ -167,6 +167,7 @@ h3 { font-size: 1.2rem; }
 
 /* Böcker: kort med omslag i listan, och boksidan med omslaget bredvid texten när det får plats. */
 .bokgrupp { margin-top: 2rem; }
+.bokgrupp .rutnat { grid-template-columns: repeat(auto-fit, minmax(21rem, 1fr)); }
 .bok-kort { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1rem; align-items: start; }
 .bok-kort .bok-omslag img { display: block; width: 6.5rem; height: auto; border: 1px solid var(--farg-kant); border-radius: 4px; }
 .bok-kort h3 { font-size: 1.15rem; overflow-wrap: anywhere; hyphens: auto; }
@@ -206,9 +207,16 @@ html.js .filter {
 .filter legend, .filter .tagg-val > label { font-weight: 600; padding: 0; margin: 0 0 0.35rem; display: block; }
 .filter .val { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; }
 .filter .val label { display: inline-flex; align-items: center; gap: 0.35rem; }
+.filter .val label.tomt { color: var(--farg-text-svag); }
+.filter .val label .meta { font-size: 0.8rem; }
 .filter input[type="radio"] { accent-color: var(--farg-accent); margin: 0; }
 .filter select { font: inherit; max-width: 100%; padding: 0.35rem 0.5rem; border: 1px solid var(--farg-kant); border-radius: 8px; background: var(--farg-yta); color: inherit; }
 .filter [data-antal] { grid-column: 1 / -1; margin: 0; }
+/* Artikelarkivets sökfält och årslänkar. */
+.filter .sok-val > label { font-weight: 600; display: block; margin: 0 0 0.35rem; }
+.filter .sok-val input[type="search"] { font: inherit; width: 100%; min-width: 16rem; padding: 0.4rem 0.6rem; border: 1px solid var(--farg-kant); border-radius: 8px; background: var(--farg-yta); color: inherit; }
+.arkiv-ar { margin: 0 0 1.5rem; }
+.arsavsnitt { scroll-margin-top: 1rem; }
 [hidden] { display: none !important; }
 
 form.prenumerera { display: grid; gap: 0.75rem; max-width: 28rem; font-family: var(--typsnitt-ui); }
@@ -317,10 +325,12 @@ html.js .nedladdning .skriv-ut { display: block; }
 .m-gor-undvik .undvik h3 { background: #a8511b; }
 .m-gor-undvik .undvik ul { background: #fff4e5; color: #8a3a0e; }
 .m-bockar { list-style: none; margin: 1rem 0 1.25rem; padding: 0; border: 1px solid var(--farg-kant); border-radius: 8px; overflow: hidden; font-family: var(--typsnitt-ui); font-size: 0.95rem; }
-.m-bockar li { padding: 0.5rem 0.8rem 0.5rem 2.4rem; position: relative; border-top: 1px solid var(--farg-kant); }
+.m-bockar li { padding: 0.5rem 0.8rem; border-top: 1px solid var(--farg-kant); }
+.m-bockar label { display: flex; gap: 0.6rem; align-items: flex-start; cursor: pointer; }
+.m-bockar input, .lh-bockar input { accent-color: var(--farg-accent); width: 1rem; height: 1rem; margin: 0.2rem 0 0; flex: none; }
+.m-bockar input:checked + span, .m-bockar label:has(input:checked) { color: var(--farg-text-svag); }
 .m-bockar li:first-child { border-top: 0; }
 .m-bockar li:nth-child(even) { background: var(--farg-yta); }
-.m-bockar li::before { content: ""; position: absolute; left: 0.8rem; top: 0.72rem; width: 0.9rem; height: 0.9rem; border: 1.5px solid var(--farg-accent); border-radius: 3px; }
 .m-bockar.tva { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .m-bockar.tva li:nth-child(even) { background: none; border-left: 1px solid var(--farg-kant); }
 .m-bockar.tva li:nth-child(2) { border-top: 0; }
@@ -370,8 +380,7 @@ html.js .bara-js { display: inline-block; }
 .lh-ruta > ul { margin: 0.5rem 0.8rem 0.7rem; padding: 0; list-style: none; }
 .lh-lista li { padding: 0.15rem 0; }
 .lh-tva { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1rem; }
-.lh-bockar li { padding-left: 1.4rem; position: relative; }
-.lh-bockar li::before { content: ""; position: absolute; left: 0; top: 0.4rem; width: 0.8rem; height: 0.8rem; border: 1.5px solid var(--farg-accent); border-radius: 2px; }
+.lh-bockar label { display: flex; gap: 0.5rem; align-items: flex-start; cursor: pointer; }
 .lh-not { background: #fbf3e4; border-left: 4px solid #8a5a1e; padding: 0.6rem 0.9rem; margin: 0.75rem 0; }
 .lh-not > h3 { margin: 0 0 0.25rem; color: #8a5a1e; }
 .lh-not p:last-child { margin-bottom: 0; }
@@ -428,6 +437,13 @@ html.js .bara-js { display: inline-block; }
   .lathund-huvud, .lathund .upphov, .lathund-nav { display: none; }
   body.tryck-bara-mall .lh-sida:not(#lathund-mall) { display: none; }
   body.tryck-bara-mall #lathund-mall { break-after: auto; }
+  /* Bara elevtexten: en ren sida i stående format med större grad, för kopior till gruppen. */
+  body.tryck-bara-text .lh-sida:not(#lathund-pass), body.tryck-bara-text #lathund-pass .lh-huvud, body.tryck-bara-text #lathund-pass .lh-kol > :not(.lh-elevtext), body.tryck-bara-text #lathund-pass .lh-kol:last-child { display: none; }
+  body.tryck-bara-text #lathund-pass { break-after: auto; font-size: 13pt; line-height: 1.6; }
+  body.tryck-bara-text #lathund-pass .lh-kolumner { grid-template-columns: 1fr; padding: 0; }
+  body.tryck-bara-text .lh-elevtext { border: 0; }
+  body.tryck-bara-text .lh-elevtext > h3 { background: none; color: var(--farg-text-svag); padding: 0 0 0.5rem; }
+  body.tryck-bara-text .lh-elevtext .lh-titel { font-size: 18pt; }
   .lh-sida { break-after: page; break-inside: auto; border: 0; border-radius: 0; margin: 0; font-size: 9.5pt; line-height: 1.38; }
   .lh-sida:last-child { break-after: auto; }
   .lh-huvud, .lh-ruta > h3, .lh-tabell.m-tabell thead th, .lh-not, .lh-gra, .lh-fakta, .lh-krav, .lh-underrad, .lh-skrivruta { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
@@ -518,5 +534,7 @@ html.js .bara-js { display: inline-block; }
   .hero { grid-template-columns: 1fr; gap: 1rem; }
   .hero .portratt-rund { width: 6rem; height: 6rem; }
   .om-huvud .portratt { max-width: 10rem; }
+  .bok-omslag-stor { max-width: 9rem; }
+  .metod-sida .faktaruta dl { grid-template-columns: max-content 1fr; gap: 0.3rem 0.8rem; font-size: 0.9rem; }
   .cv th { width: 5rem; white-space: normal; }
 }

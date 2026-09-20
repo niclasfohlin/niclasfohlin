@@ -47,7 +47,7 @@ export function publikationInfo(id: string) {
 }
 
 // Etiketten läsaren ser för en artikels typ.
-const typEtiketter: Record<string, string> = { kronika: 'Krönika', debatt: 'Debatt', artikel: 'Artikel', intervju: 'Intervju', annat: 'Text' };
+const typEtiketter: Record<string, string> = { kronika: 'Krönika', debatt: 'Debatt', artikel: 'Artikel', intervju: 'Intervju', podd: 'Poddavsnitt', annat: 'Text' };
 export function typLabel(typ: string): string {
   return typEtiketter[typ] ?? typ;
 }

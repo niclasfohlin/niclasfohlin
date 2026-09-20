@@ -60,3 +60,11 @@ const adress = metodAdress(site.url, m.id).replace(/^https?:\/\//, '');
   </article>
   <div class="tryck-fot" aria-hidden="true">{UPPHOV} · {adress}</div>
 </Base>
+
+<script>
+  // Tillbaka till metodbanken med samma filter som läsaren hade (sparas av listan i sessionStorage).
+  try {
+    const filter = sessionStorage.getItem('metodfilter');
+    if (filter) for (const a of document.querySelectorAll<HTMLAnchorElement>('a[href="/stodundervisning"]')) a.href = `/stodundervisning${filter}`;
+  } catch { /* utan lagring */ }
+</script>

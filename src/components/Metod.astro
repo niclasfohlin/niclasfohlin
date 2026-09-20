@@ -171,7 +171,7 @@ const avsnitt = [
     <section id="mal">
       <h2>{d.mal.rubrik}</h2>
       <p>{d.mal.text}</p>
-      <ul class="m-bockar tva">{d.mal.punkter.map((p) => <li>{p}</li>)}</ul>
+      <ul class="m-bockar tva">{d.mal.punkter.map((p) => <li><label><input type="checkbox" /> {p}</label></li>)}</ul>
     </section>
   )}
 
@@ -197,7 +197,7 @@ const avsnitt = [
   {d.checklista && (
     <section id="checklista">
       <h2>{d.checklista.rubrik}</h2>
-      <ul class="m-bockar">{d.checklista.punkter.map((p) => <li>{p}</li>)}</ul>
+      <ul class="m-bockar">{d.checklista.punkter.map((p) => <li><label><input type="checkbox" /> {p}</label></li>)}</ul>
     </section>
   )}
 

@@ -4,7 +4,7 @@ ingress: "I avsnitt 248 av podden Livslångt intervjuas Niclas av Katarina Pietr
 datum: 2025-11-25
 publikation: "livslangt"
 originalUrl: "https://livslangt.se/2025/11/25/niclas-fohlin-undervisning-ar-karlek-i-handling/"
-typ: "intervju"
+typ: "podd"
 medforfattare: []
 taggar: ["studiero", "undervisningskvalitet"]
 utvald: false

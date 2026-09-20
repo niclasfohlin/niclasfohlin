@@ -25,6 +25,7 @@ const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathu
       <p class="lathund-knappar">
         <span class="bara-js"><button type="button" class="knapp" data-skriv-ut>Skriv ut alla fyra sidor</button></span>
         {' '}<span class="bara-js"><button type="button" class="knapp sekundar" data-skriv-ut-mall>Skriv ut bara mallen</button></span>
+        {' '}<span class="bara-js"><button type="button" class="knapp sekundar" data-skriv-ut-text>Skriv ut elevtexten</button></span>
         {' '}<a class="knapp sekundar" href={`/stodundervisning/${m.id}-lathund.docx`} download={`${m.id}-lathund.docx`}>Lathund (docx)</a>
         {' '}<a class="knapp sekundar" href={`/stodundervisning/${m.id}`}>Hela metoden</a>
       </p>
@@ -46,6 +47,8 @@ const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathu
 <style is:global>
   @media print {
     @page { size: A4 landscape; margin: 9mm 11mm 13mm; }
+    @page staende { size: A4 portrait; margin: 20mm 22mm 22mm; }
+    body.tryck-bara-text { page: staende; }
   }
 </style>
 
@@ -53,14 +56,14 @@ const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathu
   for (const knapp of document.querySelectorAll<HTMLButtonElement>('[data-skriv-ut]')) {
     knapp.addEventListener('click', () => window.print());
   }
-  // Bara mallen: de andra sidorna döljs under utskriften (body.tryck-bara-mall i global.css).
-  for (const knapp of document.querySelectorAll<HTMLButtonElement>('[data-skriv-ut-mall]')) {
-    knapp.addEventListener('click', () => {
-      document.body.classList.add('tryck-bara-mall');
-      const stad = () => { document.body.classList.remove('tryck-bara-mall'); window.removeEventListener('afterprint', stad); };
-      window.addEventListener('afterprint', stad);
-      window.print();
-      setTimeout(stad, 2000);
-    });
-  }
+  // Bara mallen eller bara elevtexten: de andra delarna döljs under utskriften (body.tryck-bara-* i global.css).
+  const skrivUtDel = (klass: string) => {
+    document.body.classList.add(klass);
+    const stad = () => { document.body.classList.remove(klass); window.removeEventListener('afterprint', stad); };
+    window.addEventListener('afterprint', stad);
+    window.print();
+    setTimeout(stad, 2000);
+  };
+  for (const knapp of document.querySelectorAll<HTMLButtonElement>('[data-skriv-ut-mall]')) knapp.addEventListener('click', () => skrivUtDel('tryck-bara-mall'));
+  for (const knapp of document.querySelectorAll<HTMLButtonElement>('[data-skriv-ut-text]')) knapp.addEventListener('click', () => skrivUtDel('tryck-bara-text'));
 </script>

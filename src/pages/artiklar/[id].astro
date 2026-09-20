@@ -24,7 +24,7 @@ const namn = publikationNamn(a.data.publikation);
       <h1>{a.data.titel}</h1>
       <p class="ingress">{a.data.ingress}</p>
       {a.data.medforfattare.length > 0 && <p class="meta">Tillsammans med {medforfattare}</p>}
-      <Kalla publikation={a.data.publikation} originalUrl={a.data.originalUrl} datum={a.data.datum} />
+      <Kalla publikation={a.data.publikation} originalUrl={a.data.originalUrl} datum={a.data.datum} typ={a.data.typ} />
     </header>
     <div class="brod">
       <Content />
