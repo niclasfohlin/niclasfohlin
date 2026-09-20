@@ -1,4 +1,4 @@
-// Körs av Netlify efter varje lyckad deploy (funktionsnamnet deploy-succeeded är händelsen).
+// Körs av Netlify efter varje lyckad deploy (händelsen deploySucceeded).
 //
 // Läser /nytt.json på sajten, jämför med det som redan mejlats (Netlify Blobs, lagret "utskick",
 // nyckeln "skickat") och skickar en Brevo-kampanj till prenumeranterna om det som tillkommit:
@@ -12,10 +12,8 @@ import { getStore } from '@netlify/blobs';
 
 const AVSANDARE = { name: 'Niclas Fohlin', email: 'niclas.fohlin@gmail.com' };
 
-const svar = (text, status = 200) => {
-  console.log(`deploy-succeeded: ${text}`);
-  return new Response(text, { status, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
-};
+// Varje logg är en rad JSON så att den går att läsa i Netlifys funktionslogg.
+const logg = (steg, extra = {}) => console.log(JSON.stringify({ funktion: 'deploy-succeeded', steg, ...extra }));
 
 const html = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 
@@ -46,30 +44,50 @@ async function brevo(sokvag, body, nyckel) {
   return text ? JSON.parse(text) : {};
 }
 
-export default async (request) => {
-  let handelse = {};
-  try { handelse = await request.json(); } catch { /* händelsen har ingen kropp lokalt */ }
-  const kontext = handelse?.payload?.context;
-  if (kontext && kontext !== 'production') return svar(`ingen åtgärd för ${kontext}`);
+// Lagret för det som redan mejlats. Netlify sätter siteID och token åt funktionen; finns
+// NETLIFY_BLOBS_TOKEN i miljön används den i stället, som reserv.
+function lagret() {
+  const { NETLIFY_BLOBS_TOKEN, SITE_ID } = process.env;
+  if (NETLIFY_BLOBS_TOKEN && SITE_ID) return getStore({ name: 'utskick', consistency: 'strong', siteID: SITE_ID, token: NETLIFY_BLOBS_TOKEN });
+  return getStore({ name: 'utskick', consistency: 'strong' });
+}
+
+// Läser nytt.json från deployens egen adress (permalänken), så att det är den nya versionen
+// och inte det CDN:et råkar ha kvar av den gamla. Några omförsök om svaret ännu inte är JSON.
+async function lasNytt(bas) {
+  let senast = '';
+  for (let forsok = 1; forsok <= 5; forsok++) {
+    const res = await fetch(`${bas}/nytt.json`, { cache: 'no-store', headers: { Accept: 'application/json' } });
+    const typ = res.headers.get('content-type') ?? '';
+    if (res.ok && typ.includes('json')) return res.json();
+    senast = `${res.status} ${typ}`;
+    await new Promise((r) => setTimeout(r, 2000 * forsok));
+  }
+  throw new Error(`nytt.json gick inte att läsa från ${bas}: ${senast}`);
+}
+
+async function mejlaNytt(deploy) {
+  const kontext = deploy?.context;
+  if (kontext && kontext !== 'production') return logg('hoppar över', { kontext });
 
   const { BREVO_API_KEY, BREVO_LIST_ID, SITE_URL } = process.env;
   const sajt = (SITE_URL ?? 'https://niclasfohlin.se').replace(/\/$/, '');
+  // Deployens egen adress i händelsens payload (Netlifys deploy-objekt).
+  const bas = (deploy?.deploy_ssl_url || deploy?.links?.permalink || deploy?.ssl_url || sajt).replace(/\/$/, '');
 
-  const res = await fetch(`${sajt}/nytt.json`, { cache: 'no-store' });
-  if (!res.ok) return svar(`kunde inte läsa ${sajt}/nytt.json (${res.status})`, 502);
-  const { poster } = await res.json();
+  const { poster } = await lasNytt(bas);
 
-  const lager = getStore({ name: 'utskick', consistency: 'strong' });
+  const lager = lagret();
   const skickat = await lager.get('skickat', { type: 'json' });
   if (!skickat) {
     await lager.setJSON('skickat', { urler: poster.map((p) => p.url), initierad: new Date().toISOString() });
-    return svar(`första körningen: ${poster.length} poster registrerade utan utskick`);
+    return logg('första körningen: registrerade utan utskick', { antal: poster.length });
   }
 
   const kanda = new Set(skickat.urler);
   const nya = poster.filter((p) => !kanda.has(p.url));
-  if (nya.length === 0) return svar('inget nytt att mejla');
-  if (!BREVO_API_KEY || !BREVO_LIST_ID) return svar(`${nya.length} nya poster men Brevo är inte konfigurerat`, 200);
+  if (nya.length === 0) return logg('inget nytt', { antal: poster.length });
+  if (!BREVO_API_KEY || !BREVO_LIST_ID) return logg('nytt finns men Brevo saknas', { nya: nya.map((p) => p.url) });
 
   const amne = nya.length === 1 ? `Nytt på niclasfohlin.se: ${nya[0].titel}` : `Nytt på niclasfohlin.se: ${nya.length} nya inlägg`;
   const kampanj = await brevo('/emailCampaigns', {
@@ -87,5 +105,23 @@ export default async (request) => {
     initierad: skickat.initierad,
     senast: { datum: new Date().toISOString(), kampanj: kampanj.id, poster: nya.map((p) => p.url) },
   });
-  return svar(`kampanj ${kampanj.id} skickad om ${nya.length} nya: ${nya.map((p) => p.url).join(', ')}`);
+  return logg('kampanj skickad', { kampanj: kampanj.id, nya: nya.map((p) => p.url) });
+}
+
+async function kor(deploy) {
+  try {
+    await mejlaNytt(deploy);
+  } catch (fel) {
+    logg('FEL', { fel: String(fel && fel.stack ? fel.stack : fel).replace(/\s+/g, ' ').slice(0, 800) });
+  }
+}
+
+// Netlify anropar funktionen med { payload: <deploy> } där deploy har id, context (production,
+// deploy-preview, branch-deploy), branch och deploy_ssl_url, deployens egen adress.
+export default async (request) => {
+  let deploy = {};
+  try { deploy = (await request.json())?.payload ?? {}; } catch { /* tom kropp vid lokal körning */ }
+  logg('start', { deploy: deploy.id, kontext: deploy.context, gren: deploy.branch, adress: deploy.deploy_ssl_url });
+  await kor(deploy);
+  return new Response('ok', { status: 200 });
 };
