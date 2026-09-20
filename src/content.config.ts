@@ -65,17 +65,23 @@ const artiklar = defineCollection({
   }),
 });
 
-// Böcker: presentation, omslag och länkar.
+// Böcker: presentation, omslag och länkar. Kategorin styr rubrikerna på /bocker.
+export const bokKategorier = ['Kooperativt lärande', 'Pedagogik', 'Läromedel', 'Kapitel i andra böcker'] as const;
 const bocker = defineCollection({
   loader: glob({ pattern: '**/[^_]*.md', base: './src/content/bocker' }),
   schema: z.object({
     titel: z.string(),
     beskrivning: ingress,
+    kategori: z.enum(bokKategorier),
     utgivningsar: z.number().int().min(1990).max(2100),
     forlag: z.string().optional(),
     medforfattare: z.array(z.string()).default([]),
+    // För antologier: redaktören och titeln på Niclas kapitel.
+    redaktor: z.string().optional(),
+    kapitel: z.string().optional(),
     serie: z.string().optional(),
     isbn: z.string().optional(),
+    sidor: z.number().int().positive().optional(),
     // Sökväg under public/, t.ex. /images/bocker/nycklar.jpg
     omslag: z.string().startsWith('/').optional(),
     lankar: z.array(z.object({ text: z.string(), url: z.url() })).default([]),

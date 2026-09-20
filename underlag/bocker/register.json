@@ -1,122 +1,241 @@
 {
-  "_kommentar": "Böcker där Niclas Fohlin står som författare enligt förlagets och bokhandelns sidor, lästa av tre sökagenter 2026-09-19. Årtal och ISBN är förlagets uppgifter via agenterna, inte kontrollerade av mig mot sidorna. Beskrivning och omslag kommer från Niclas innan de blir poster i src/content/bocker (kön K-005).",
-  "kalla": "https://www.studentlitteratur.se/person/kursledare/niclas-fohlin/ samt förlagets produktsidor, Bokus och Campusbokhandeln",
+  "_kommentar": "Böcker där Niclas Fohlin står som författare eller kapitelförfattare. Uppgifterna är kontrollerade mot förlagens produktsidor 2026-09-20 (Studentlitteratur, Lärarförlaget) och ligger som poster i src/content/bocker med omslag i public/images/bocker. Niclas 2026-09-20: alla böcker läggs upp, i grupperna Kooperativt lärande, Pedagogik, Läromedel och Kapitel i andra böcker.",
+  "kalla": "Förlagens produktsidor 2026-09-20, Studentlitteraturs författarsida https://www.studentlitteratur.se/person/kursledare/niclas-fohlin/ och Lärarförlaget.",
   "bocker": [
     {
       "titel": "Grundbok i kooperativt lärande: vägen till det samarbetande klassrummet",
+      "kategori": "Kooperativt lärande",
       "forlag": "Studentlitteratur",
-      "isbn": "9789144116723",
       "utgivningsar": 2017,
-      "sidor": 312,
+      "isbn": "9789144116723",
       "medforfattare": [
-        "Jennie Wilson",
         "Anneke Moerkerken",
-        "Lisa Westman"
+        "Lisa Westman",
+        "Jennie Wilson"
       ],
-      "kalla": "https://www.studentlitteratur.se/kompetensutveckling/skola-f-6/specialpedagogik/grundbok-i-kooperativt-larande/"
+      "sidor": 312,
+      "kalla": "https://www.studentlitteratur.se/kompetensutveckling/skola-f-6/specialpedagogik/grundbok-i-kooperativt-larande/",
+      "post": "src/content/bocker/grundbok-i-kooperativt-larande.md",
+      "omslag": "/images/bocker/grundbok-i-kooperativt-larande.jpg"
     },
     {
       "titel": "Kooperativt lärande i praktiken: handbok för lärare i grundskolan",
+      "kategori": "Kooperativt lärande",
       "forlag": "Studentlitteratur",
+      "utgivningsar": 2018,
       "isbn": "9789144128078",
-      "utgivningsar": 2019,
       "medforfattare": [
         "Jennie Wilson"
       ],
-      "kalla": "https://www.studentlitteratur.se/kooperativtlarande"
+      "sidor": 84,
+      "kalla": "https://www.studentlitteratur.se/kompetensutveckling/skola-f-6/undervisning-och-metod/kooperativt-larande-i-praktiken-resurspkt---tryckt--digital-lararlicens-36-man/",
+      "post": "src/content/bocker/kooperativt-larande-i-praktiken-handbok.md",
+      "omslag": "/images/bocker/kooperativt-larande-i-praktiken-handbok.jpg"
     },
     {
       "titel": "Kooperativt lärande i förskolan och skolans första år: lärande och utveckling genom samarbete",
+      "kategori": "Kooperativt lärande",
       "forlag": "Studentlitteratur",
-      "serie": "Lärarpraxis",
-      "isbn": "9789144133942",
       "utgivningsar": 2020,
+      "isbn": "9789144133942",
       "medforfattare": [
         "Lisa Fohlin",
         "Jennie Wilson"
       ],
-      "kalla": "https://campusbokhandeln.se/b/9789144133942/"
+      "sidor": 168,
+      "kalla": "https://www.studentlitteratur.se/kurslitteratur/lararutbildning-och-pedagogik/pedagogik---allmant/kooperativt-larande-i-forskolan-och-skolans-forsta-ar/",
+      "post": "src/content/bocker/kooperativt-larande-i-forskolan-och-skolans-forsta-ar.md",
+      "omslag": "/images/bocker/kooperativt-larande-i-forskolan-och-skolans-forsta-ar.jpg"
     },
     {
       "titel": "Kooperativt lärande i praktiken: grupputveckling och ledarskap",
+      "kategori": "Kooperativt lärande",
       "forlag": "Studentlitteratur",
-      "isbn": "9789144151854",
       "utgivningsar": 2021,
+      "isbn": "9789144151854",
       "medforfattare": [
         "Jennie Wilson"
       ],
-      "kalla": "https://www.bokus.com/bok/9789144151854/kooperativt-larande-i-praktiken-grupputveckling-och-ledarskap/"
+      "sidor": 88,
+      "kalla": "https://www.studentlitteratur.se/kompetensutveckling/skola-f-6/undervisning-och-metod/kooperativt-larande-i-praktiken-2/",
+      "post": "src/content/bocker/kooperativt-larande-i-praktiken-grupputveckling-och-ledarskap.md",
+      "omslag": "/images/bocker/kooperativt-larande-i-praktiken-grupputveckling-och-ledarskap.jpg"
     },
     {
       "titel": "Meningsfullt lärande: demokrati och samtal i skolan",
+      "kategori": "Pedagogik",
       "forlag": "Studentlitteratur",
-      "isbn": "9789144139692",
       "utgivningsar": 2021,
-      "sidor": 312,
+      "isbn": "9789144139692",
       "medforfattare": [
         "Jennie Wilson"
       ],
-      "kalla": "https://www.studentlitteratur.se/kurslitteratur/lararutbildning-och-pedagogik/sociala-relationer-och-konflikthantering/meningsfullt-larande-43143-01/"
+      "sidor": 312,
+      "kalla": "https://www.studentlitteratur.se/kurslitteratur/lararutbildning-och-pedagogik/sociala-relationer-och-konflikthantering/meningsfullt-larande-43143-01/",
+      "post": "src/content/bocker/meningsfullt-larande.md",
+      "omslag": "/images/bocker/meningsfullt-larande.jpg"
     },
     {
       "titel": "Gruppstärkande ledarskap",
+      "kategori": "Pedagogik",
       "forlag": "Studentlitteratur",
-      "serie": "Bygga en undervisningsgemenskap",
-      "isbn": "9789144165998",
       "utgivningsar": 2023,
-      "sidor": 120,
+      "isbn": "9789144165998",
       "medforfattare": [
         "Jennie Wilson"
       ],
-      "kalla": "https://www.studentlitteratur.se/kompetensutveckling/skola-f-6/undervisning-och-metod/gruppstarkande-ledarskap"
+      "serie": "Bygga en undervisningsgemenskap",
+      "sidor": 120,
+      "kalla": "https://www.studentlitteratur.se/kompetensutveckling/skola-f-6/undervisning-och-metod/gruppstarkande-ledarskap/",
+      "post": "src/content/bocker/gruppstarkande-ledarskap.md",
+      "omslag": "/images/bocker/gruppstarkande-ledarskap.jpg"
     },
     {
-      "titel": "Starta skolan starkt",
+      "titel": "Krumelurkul 1: lärarhandledning",
+      "kategori": "Läromedel",
       "forlag": "Studentlitteratur",
-      "serie": "Bygga en undervisningsgemenskap",
-      "isbn": "9789144175621",
       "utgivningsar": 2023,
-      "sidor": 144,
+      "isbn": "9789144168050",
       "medforfattare": [
-        "Jennie Wilson"
+        "Tove Berggren",
+        "Anna Ekerstedt",
+        "Marie Klangeryd",
+        "Solveig-Alma Halaas Lyster",
+        "Jennie Wilson",
+        "Camilla Hyrefelt"
       ],
-      "kalla": "https://www.studentlitteratur.se/kompetensutveckling/skola-f-6/sociala-relationer-och-konflikthantering/starta-skolan-starkt/"
+      "serie": "Krumelurkul",
+      "kalla": "https://www.studentlitteratur.se/laromedel/f-3/svenska/baslaromedel/krumelurkul-1-lararpaket---tryckt-bok--digital-lararlicens-36-man/",
+      "post": "src/content/bocker/krumelurkul-1-lararhandledning.md",
+      "omslag": "/images/bocker/krumelurkul-1-lararhandledning.jpg"
+    },
+    {
+      "titel": "Krumelurkul 2: lärarhandledning",
+      "kategori": "Läromedel",
+      "forlag": "Studentlitteratur",
+      "utgivningsar": 2023,
+      "isbn": "9789144161457",
+      "medforfattare": [
+        "Jennie Wilson",
+        "Solveig-Alma Halaas Lyster",
+        "Tove Berggren",
+        "Anna Ekerstedt",
+        "Marie Klangeryd",
+        "Camilla Hyrefelt"
+      ],
+      "serie": "Krumelurkul",
+      "kalla": "https://www.studentlitteratur.se/laromedel/f-3/svenska/baslaromedel/krumelurkul-2-lararpaket---tryckt-bok--digital-lararlicens-36-man/",
+      "post": "src/content/bocker/krumelurkul-2-lararhandledning.md",
+      "omslag": "/images/bocker/krumelurkul-2-lararhandledning.jpg"
     },
     {
       "titel": "Meningsfull undervisning",
+      "kategori": "Pedagogik",
       "forlag": "Studentlitteratur",
-      "serie": "Bygga en undervisningsgemenskap",
-      "isbn": "9789144175928",
       "utgivningsar": 2023,
+      "isbn": "9789144175928",
       "medforfattare": [
         "Jennie Wilson"
       ],
-      "kalla": "https://www.studentlitteratur.se/kompetensutveckling/skola-f-6/sociala-relationer-och-konflikthantering/meningsfull-undervisning/"
+      "serie": "Bygga en undervisningsgemenskap",
+      "sidor": 192,
+      "kalla": "https://www.studentlitteratur.se/kompetensutveckling/skola-f-6/sociala-relationer-och-konflikthantering/meningsfull-undervisning/",
+      "post": "src/content/bocker/meningsfull-undervisning.md",
+      "omslag": "/images/bocker/meningsfull-undervisning.jpg"
+    },
+    {
+      "titel": "Starta skolan starkt",
+      "kategori": "Pedagogik",
+      "forlag": "Studentlitteratur",
+      "utgivningsar": 2023,
+      "isbn": "9789144175621",
+      "medforfattare": [
+        "Jennie Wilson"
+      ],
+      "serie": "Bygga en undervisningsgemenskap",
+      "sidor": 144,
+      "kalla": "https://www.studentlitteratur.se/kompetensutveckling/skola-f-6/sociala-relationer-och-konflikthantering/starta-skolan-starkt/",
+      "post": "src/content/bocker/starta-skolan-starkt.md",
+      "omslag": "/images/bocker/starta-skolan-starkt.jpg"
+    },
+    {
+      "titel": "Krumelurkul 3: lärarhandledning",
+      "kategori": "Läromedel",
+      "forlag": "Studentlitteratur",
+      "utgivningsar": 2024,
+      "isbn": "9789144179728",
+      "medforfattare": [
+        "Jennie Wilson",
+        "Tove Berggren",
+        "Anna Ekerstedt",
+        "Marie Klangeryd",
+        "Camilla Hyrefelt"
+      ],
+      "serie": "Krumelurkul",
+      "kalla": "https://www.studentlitteratur.se/laromedel/f-3/svenska/baslaromedel/krumelurkul-3-lararpaket---tryckt--digital-lararlicens-36-man/",
+      "post": "src/content/bocker/krumelurkul-3-lararhandledning.md",
+      "omslag": "/images/bocker/krumelurkul-3-lararhandledning.jpg"
     },
     {
       "titel": "LÄS! Nycklar till en god läsundervisning",
+      "kategori": "Pedagogik",
       "forlag": "Studentlitteratur",
-      "serie": "Lärarpraxis",
-      "isbn": "9789144190457",
       "utgivningsar": 2025,
-      "sidor": 382,
+      "isbn": "9789144190457",
       "medforfattare": [
         "Jennie Wilson"
       ],
-      "kalla": "https://www.studentlitteratur.se/kompetensutveckling/skola-f-6/undervisning-och-metod/las/"
+      "serie": "Lärarpraxis",
+      "sidor": 382,
+      "kalla": "https://www.studentlitteratur.se/kompetensutveckling/skola-f-6/undervisning-och-metod/las/",
+      "post": "src/content/bocker/las-nycklar-till-en-god-lasundervisning.md",
+      "omslag": "/images/bocker/las-nycklar-till-en-god-lasundervisning.jpg"
     },
     {
-      "titel": "Krumelurkul 1, 3 och F: lärarpaket",
+      "titel": "Krumelurkul F: lärarhandledning",
+      "kategori": "Läromedel",
       "forlag": "Studentlitteratur",
-      "isbn": "9789144168050",
-      "utgivningsar": null,
+      "utgivningsar": 2026,
+      "isbn": "9789144201146",
       "medforfattare": [
-        "Jennie Wilson",
         "Camilla Hyrefelt",
-        "med flera"
+        "Eva-Maria Ternblad",
+        "Eva Wennås Brante",
+        "Maria Heimer",
+        "Stina Hyltmark",
+        "Jennie Wilson",
+        "Tove Berggren",
+        "Nathalie Lindgren",
+        "Margaretha Due",
+        "Anna Häggblom"
       ],
-      "anm": "Läromedel (läslära med lärarhandledning), serien 2022 till 2025. Hans andel per del framgår inte av förlagets sidor.",
-      "kalla": "https://www.studentlitteratur.se/laromedel/f-6/svenska/baslaromedel/krumelurkul-1-lararpaket---tryckt-bok--digital-lararlicens-36-man/"
+      "serie": "Krumelurkul",
+      "kalla": "https://www.studentlitteratur.se/laromedel/f-3/svenska/baslaromedel/krumelurkul-f-lararpaket---tryckt--digital-lararlicens-36-man/",
+      "post": "src/content/bocker/krumelurkul-f-lararhandledning.md",
+      "omslag": "/images/bocker/krumelurkul-f-lararhandledning.jpg"
+    },
+    {
+      "titel": "Särskilda undervisningsgrupper: perspektiv på lärande, stöd och inkludering",
+      "kategori": "Kapitel i andra böcker",
+      "forlag": "Lärarförlaget",
+      "utgivningsar": 2026,
+      "isbn": "9789198857849",
+      "medforfattare": [
+        "Sabina Durakovic",
+        "Cajsa Jahn",
+        "Malin Reuterswärd",
+        "Elinor Kennerö Tonner",
+        "Emma Leifler",
+        "Gunnlaugur Magnússon",
+        "Petri Partanen",
+        "Denice Sverla",
+        "Maria Wiman"
+      ],
+      "redaktor": "Max Hjorton",
+      "kapitel": "Demokrati och särskilda undervisningsgrupper",
+      "kalla": "https://lararforlaget.se/grundskola/bocker/sarskilda-undervisningsgrupper-perspektiv-pa-larande-stod-och-inkludering",
+      "post": "src/content/bocker/sarskilda-undervisningsgrupper.md",
+      "omslag": "/images/bocker/sarskilda-undervisningsgrupper.png"
     }
   ],
   "ovrigt": [

@@ -1,20 +1,31 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { bockerSorterade } from '../../lib/innehall';
+import { bokKategorier } from '../../content.config';
 const bocker = await bockerSorterade();
+// En rubrik per kategori, i registrets ordning; tomma kategorier visas inte.
+const grupper = bokKategorier.map((k) => ({ kategori: k, lista: bocker.filter((b) => b.data.kategori === k) })).filter((g) => g.lista.length > 0);
 ---
 
-<Base title="Böcker" description="Böcker om undervisning, läsinlärning och specialpedagogik.">
+<Base title="Böcker" description="Niclas Fohlins böcker om kooperativt lärande, undervisning och läsinlärning, samt läromedel och kapitel i andra böcker.">
   <h1>Böcker</h1>
+  <p class="text">Böckerna är skrivna för lärare som vill ha något att använda i klassrummet, de flesta tillsammans med Jennie Wilson. Varje bok länkar till förlaget.</p>
   {bocker.length === 0 && <p>Inga böcker ännu.</p>}
-  <div class="rutnat">
-    {bocker.map((b) => (
-      <a class="kort" href={`/bocker/${b.id}`}>
-        {b.data.omslag && <img class="omslag" src={b.data.omslag} alt={`Omslag: ${b.data.titel}`} loading="lazy" />}
-        <p class="meta">{b.data.utgivningsar}{b.data.forlag && ` · ${b.data.forlag}`}</p>
-        <h2>{b.data.titel}</h2>
-        <p>{b.data.beskrivning}</p>
-      </a>
-    ))}
-  </div>
+  {grupper.map((g) => (
+    <section class="bokgrupp">
+      <h2>{g.kategori}</h2>
+      <div class="rutnat">
+        {g.lista.map((b) => (
+          <article class="kort bok-kort">
+            {b.data.omslag && <a href={`/bocker/${b.id}`} class="bok-omslag" tabindex="-1" aria-hidden="true"><img src={b.data.omslag} alt="" loading="lazy" width="120" /></a>}
+            <div>
+              <p class="meta">{b.data.utgivningsar}{b.data.forlag && ` · ${b.data.forlag}`}</p>
+              <h3><a href={`/bocker/${b.id}`}>{b.data.titel}</a></h3>
+              <p>{b.data.beskrivning}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  ))}
 </Base>

@@ -11,28 +11,36 @@ export async function getStaticPaths() {
 
 const { b } = Astro.props;
 const { Content } = await render(b);
+const antologi = b.data.kategori === 'Kapitel i andra böcker';
 ---
 
 <Base title={b.data.titel} description={b.data.beskrivning} bild={b.data.omslag}>
-  <article class="text">
-    {b.data.omslag && <img class="omslag" src={b.data.omslag} alt={`Omslag: ${b.data.titel}`} />}
-    <h1>{b.data.titel}</h1>
-    <div class="faktaruta">
-      <dl>
-        <dt>Utgiven</dt><dd>{b.data.utgivningsar}</dd>
-        {b.data.forlag && <><dt>Förlag</dt><dd>{b.data.forlag}</dd></>}
-        {b.data.medforfattare.length > 0 && <><dt>Medförfattare</dt><dd>{b.data.medforfattare.join(', ')}</dd></>}
-        {b.data.serie && <><dt>Serie</dt><dd>{b.data.serie}</dd></>}
-        {b.data.isbn && <><dt>ISBN</dt><dd>{b.data.isbn}</dd></>}
-      </dl>
+  <article class="bok">
+    {b.data.omslag && <img class="omslag bok-omslag-stor" src={b.data.omslag} alt={`Omslag: ${b.data.titel}`} width="240" />}
+    <div class="bok-text">
+      <p class="meta">{b.data.kategori} · {b.data.utgivningsar}{b.data.forlag && ` · ${b.data.forlag}`}</p>
+      <h1>{b.data.titel}</h1>
+      <p class="ingress">{b.data.beskrivning}</p>
+      <div class="faktaruta">
+        <dl>
+          {antologi && b.data.kapitel && <><dt>Niclas kapitel</dt><dd>{b.data.kapitel}</dd></>}
+          {b.data.redaktor && <><dt>Redaktör</dt><dd>{b.data.redaktor}</dd></>}
+          {b.data.medforfattare.length > 0 && <><dt>{antologi ? 'Övriga författare' : 'Tillsammans med'}</dt><dd>{b.data.medforfattare.join(', ')}</dd></>}
+          {b.data.serie && <><dt>Serie</dt><dd>{b.data.serie}</dd></>}
+          <dt>Utgiven</dt><dd>{b.data.utgivningsar}{b.data.forlag && `, ${b.data.forlag}`}</dd>
+          {b.data.sidor && <><dt>Sidor</dt><dd>{b.data.sidor}</dd></>}
+          {b.data.isbn && <><dt>ISBN</dt><dd>{b.data.isbn}</dd></>}
+        </dl>
+      </div>
+      <div class="brod">
+        <Content />
+      </div>
+      {b.data.lankar.length > 0 && (
+        <p class="bok-lankar">
+          {b.data.lankar.map((l, i) => <>{i > 0 && ' · '}<a href={l.url} rel="noopener">{l.text}</a></>)}
+        </p>
+      )}
+      <Taggar taggar={b.data.taggar} />
     </div>
-    <p><strong>{b.data.beskrivning}</strong></p>
-    <Content />
-    {b.data.lankar.length > 0 && (
-      <ul>
-        {b.data.lankar.map((l) => <li><a href={l.url} rel="noopener">{l.text}</a></li>)}
-      </ul>
-    )}
-    <Taggar taggar={b.data.taggar} />
   </article>
 </Base>

@@ -131,6 +131,22 @@ h3 { font-size: 1.2rem; }
 
 .omslag { max-width: 12rem; height: auto; border: 1px solid var(--farg-kant); }
 
+/* Böcker: kort med omslag i listan, och boksidan med omslaget bredvid texten när det får plats. */
+.bokgrupp { margin-top: 2rem; }
+.bok-kort { display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: start; }
+.bok-kort .bok-omslag img { display: block; width: 6.5rem; height: auto; border: 1px solid var(--farg-kant); border-radius: 4px; }
+.bok-kort h3 { font-size: 1.15rem; }
+.bok { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem 2.5rem; align-items: start; max-width: var(--matt-bredd); }
+.bok-omslag-stor { max-width: 15rem; width: 100%; border-radius: 4px; }
+.bok-text { max-width: var(--matt-text); }
+.bok-text h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); }
+.bok-text .ingress { font-size: 1.2rem; line-height: 1.5; margin: 0 0 1rem; }
+.bok-lankar { font-family: var(--typsnitt-ui); margin: 1.5rem 0; }
+@media (min-width: 52rem) {
+  .bok { grid-template-columns: 15rem minmax(0, 1fr); }
+  .bok-omslag-stor { position: sticky; top: 1.25rem; }
+}
+
 /* Filtret i metodbanken. Visas bara när JavaScript finns; utan det syns alla metoder. */
 .filter {
   display: grid;
