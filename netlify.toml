@@ -20,3 +20,16 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# www och Netlifys egen underdomän skickas till huvuddomänen, så att varje sida bara har en adress.
+[[redirects]]
+  from = "https://www.niclasfohlin.se/*"
+  to = "https://niclasfohlin.se/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://niclasfohlin.netlify.app/*"
+  to = "https://niclasfohlin.se/:splat"
+  status = 301
+  force = true
