@@ -99,6 +99,12 @@ const stycken = z.array(text).min(1);
 const ruta = z.strictObject({ rubrik: text, text });
 // En punkt med valfri fet inledning: "Det finns inget facit." följt av förklaringen.
 const punkt = z.strictObject({ fet: z.string().optional(), text: z.string().optional() }).refine((p) => p.fet || p.text, 'En punkt behöver fet eller text.');
+// Tabell med rubrikrad där varje rad har lika många celler som rubriker.
+const rubrikTabell = z.strictObject({ rubrik: text, kolumner: z.array(text).min(2), rader: z.array(z.array(z.string())).min(1) }).superRefine((tabell, ctx) => {
+  tabell.rader.forEach((rad, i) => {
+    if (rad.length !== tabell.kolumner.length) ctx.addIssue({ code: 'custom', path: ['rader', i], message: `Raden ska ha ${tabell.kolumner.length} celler, lika många som rubrikerna.` });
+  });
+});
 const stodundervisning = defineCollection({
   loader: glob({ pattern: '**/[^_]*.yaml', base: './src/content/stodundervisning' }),
   schema: z.strictObject({
@@ -234,7 +240,7 @@ const stodundervisning = defineCollection({
       metoden: z.strictObject({
         text: stycken,
         ruta: z.strictObject({ rubrik: text, inledning: z.string().optional(), punkter: z.array(punkt).min(1), efter: z.string().optional() }),
-        tabell: z.strictObject({ rubrik: text, kolumner: z.array(text).min(2), rader: z.array(z.array(z.string())).min(1) }),
+        tabell: rubrikTabell,
         not: z.string().optional(),
       }),
       pass: z.strictObject({
@@ -260,13 +266,13 @@ const stodundervisning = defineCollection({
             text,
             fraga: text,
             listor: z.array(z.strictObject({ rubrik: text, punkter: z.array(text).min(1) })).min(1),
-            tabell: z.strictObject({ rubrik: text, kolumner: z.array(text).min(2), rader: z.array(z.array(z.string())).min(1) }),
+            tabell: rubrikTabell,
             annat: z.strictObject({ rubrik: text, rader: z.array(text).min(1) }).optional(),
             svar: z.string().optional(),
             citat: z.array(z.string()).default([]),
           }),
           z.strictObject({ typ: z.literal('snabbmall') }),
-          z.strictObject({ typ: z.literal('tabell'), rubrik: text, kolumner: z.array(text).min(2), rader: z.array(z.array(z.string())).min(1) }),
+          rubrikTabell.extend({ typ: z.literal('tabell') }),
           z.strictObject({ typ: z.literal('kedja'), rubrik: text, steg: z.array(text).min(2), citat: z.string().optional() }),
           z.strictObject({ typ: z.literal('not'), text }),
         ])).min(1),
@@ -279,6 +285,11 @@ const stodundervisning = defineCollection({
         varjePass: z.string().optional(),
       }),
     }).optional(),
+  }).superRefine((d, ctx) => {
+    // Lathundens block snabbmall hämtar metodens snabbmall; utan den skulle blocket tyst försvinna.
+    if (d.lathund?.mall.block.some((b) => b.typ === 'snabbmall') && !d.snabbmall) {
+      ctx.addIssue({ code: 'custom', path: ['lathund', 'mall', 'block'], message: 'Blocket snabbmall kräver att metoden har en snabbmall.' });
+    }
   }),
 });
 

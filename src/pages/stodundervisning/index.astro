@@ -60,7 +60,7 @@ const arskurserIBruk = site.arskurser.filter((a) => metoder.some((m) => m.data.a
               <p class="kort-rad">
                 {harLathund(m.data) && <><a class="lathund-lank" href={`/stodundervisning/${m.id}/lathund`}>Lathund<span class="visually-hidden">: {m.data.titel}</span></a>{' · '}</>}
                 <a href={`/stodundervisning/${m.id}.docx`} download={`${m.id}.docx`}>Word-fil<span class="visually-hidden">: {m.data.titel}</span></a>
-                {harMallar(m.data) && <>{' · '}<a href={`/stodundervisning/${m.id}-mallar.docx`} download={`${m.id}-mallar.docx`}>Mallar<span class="visually-hidden"> till {m.data.titel}</span></a></>}
+                {harMallar(m.data) && <>{' · '}<a href={`/stodundervisning/${m.id}-mallar.docx`} download={`${m.id}-mallar.docx`}>Planeringsmallar<span class="visually-hidden"> till {m.data.titel}</span></a></>}
                 <label class="valj"><input type="checkbox" name="valda" value={m.id} /> Välj<span class="visually-hidden"> {m.data.titel}</span></label>
               </p>
             </article>
@@ -82,6 +82,7 @@ const arskurserIBruk = site.arskurser.filter((a) => metoder.some((m) => m.data.a
       <p class="meta samla-hjalp">Markera metoder i listan med Välj, så får du dem i en Word-fil.</p>
     </form>
   )}
+  <div class="tryck-fot" aria-hidden="true">© Niclas Fohlin · niclasfohlin.se/stodundervisning</div>
   {metoder.length > 0 && (
     <p class="meta samla-alla"><a href="/stodundervisning/alla-metoder.docx" download="alla-metoder.docx">Ladda ner alla metoder med mallar (docx)</a></p>
   )}
@@ -165,6 +166,7 @@ const arskurserIBruk = site.arskurser.filter((a) => metoder.some((m) => m.data.a
     samla.addEventListener('submit', async (h) => {
       h.preventDefault();
       const ids = boxar.filter((b) => b.checked).map((b) => b.value);
+      const medMallarVal = medMallar.checked;
       if (ids.length === 0 || bygger) return;
       bygger = true;
       knapp.disabled = true;
@@ -176,11 +178,11 @@ const arskurserIBruk = site.arskurser.filter((a) => metoder.some((m) => m.data.a
         const poster = ids.map((id) => metoder.find((m) => m.id === id)).filter((m): m is { id: string; data: unknown } => Boolean(m));
         if (poster.length !== ids.length) throw new Error('En vald metod saknas i metoder.json. Sidan och datan kommer från olika byggen.');
         const [{ metodDokument }, { Packer }] = await Promise.all([import('../../lib/metoddocx'), import('docx')]);
-        const dokument = metodDokument(poster as Parameters<typeof metodDokument>[0], { bas, medMallar: medMallar.checked });
+        const dokument = metodDokument(poster as Parameters<typeof metodDokument>[0], { bas, medMallar: medMallarVal });
         const blob = await Packer.toBlob(dokument);
         const lank = document.createElement('a');
         lank.href = URL.createObjectURL(blob);
-        lank.download = poster.length === 1 ? `${poster[0].id}${medMallar.checked ? '-med-mallar' : ''}.docx` : 'metoder-niclasfohlin-se.docx';
+        lank.download = poster.length === 1 ? `${poster[0].id}${medMallarVal ? '-med-mallar' : ''}.docx` : 'metoder-niclasfohlin-se.docx';
         document.body.appendChild(lank);
         lank.click();
         lank.remove();

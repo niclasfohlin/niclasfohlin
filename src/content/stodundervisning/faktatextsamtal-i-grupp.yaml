@@ -282,7 +282,7 @@ lathund:
     not: Det är författarens jobb att skriva begripligt, inte elevens fel att texten är svår.
   pass:
     rubrik: "Vi kör ett pass: vattnets kretslopp"
-    textRubrik: Texten · cirka 150 ord, NO åk 4
+    textRubrik: Texten · cirka 100 ord, NO åk 4
     titel: Vattnet rör sig i naturen
     text:
       - Solen värmer vattnet i havet, i sjöar och i marken. När vattnet blir varmt avdunstar det. Då blir vattnet vattenånga och stiger uppåt i luften.

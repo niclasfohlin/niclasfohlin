@@ -10,10 +10,10 @@ const { id, harMallar, harLathund } = Astro.props;
   <ul class="nedladdning-lista">
     {harLathund && <li><a class="knapp" href={`/stodundervisning/${id}/lathund`}>Lathund</a></li>}
     <li><a class={harLathund ? 'knapp sekundar' : 'knapp'} href={`/stodundervisning/${id}.docx`} download={`${id}.docx`}>Hela metoden (docx)</a></li>
-    {harMallar && <li><a class="knapp sekundar" href={`/stodundervisning/${id}-mallar.docx`} download={`${id}-mallar.docx`}>Mallarna (docx)</a></li>}
+    {harMallar && <li><a class="knapp sekundar" href={`/stodundervisning/${id}-mallar.docx`} download={`${id}-mallar.docx`}>Mallar för planering (docx)</a></li>}
     <li class="skriv-ut"><button type="button" class="knapp sekundar" data-skriv-ut>Skriv ut</button></li>
   </ul>
-  <p class="meta">{harLathund && 'Lathunden: metoden i korthet, ett pass steg för steg, mallen och vad du behöver, för skärm och liggande A4. '}{harMallar && 'Mallarna: snabbmall för passet, checklista inför passet och målkoll före och efter. '}Vill du ha flera metoder i en fil: välj dem i <a href="/stodundervisning">metodbanken</a>.</p>
+  <p class="meta">{harLathund && 'Lathunden: metoden i korthet, ett pass steg för steg, mallen och vad du behöver, för skärm och liggande A4. '}{harMallar && 'Mallarna för planering: snabbmall för passet, checklista inför passet och målkoll före och efter. '}Vill du ha flera metoder i en fil: välj dem i <a href="/stodundervisning">metodbanken</a>.</p>
 </aside>
 
 <script>

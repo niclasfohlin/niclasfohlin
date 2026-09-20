@@ -175,9 +175,9 @@ function tvaKolumner(rader: { nar: string; vad: string }[]): Barn[] {
   ])), bredder), avstand()];
 }
 // Snabbmallen: en halv sida att fylla i. Med skrivrum blir raderna högre, för mallfilen och utskriften.
-function snabbmallTabell(titel: string, fore: string[], efter: string[], o: { skrivrum?: boolean } = {}): Barn[] {
-  const bredder = [3600, BREDD - 3600];
-  const hojd = o.skrivrum ? 900 : 420;
+function snabbmallTabell(titel: string, fore: string[], efter: string[], o: { skrivrum?: boolean; hojd?: number } = {}): Barn[] {
+  const bredder = [Math.min(3600, Math.floor(BREDD * 0.4)), BREDD - Math.min(3600, Math.floor(BREDD * 0.4))];
+  const hojd = o.hojd ?? (o.skrivrum ? 900 : 420);
   const avsnitt = (text: string, fyll: string, farg: string) => rad([cell([stycke(text, { fet: true, farg, storlek: 20, efter: 0 })], { bredd: BREDD, span: 2, fyll, kanter: runt(kant(fyll === FARG.huvud ? FARG.huvud : FARG.kant)) })]);
   const falt = (text: string) => rad([
     cell([stycke(text, { fet: true, storlek: 20, efter: 0 })], { bredd: bredder[0], fyll: FARG.rand, mitt: true }),
@@ -354,7 +354,7 @@ function mallBarn(post: MetodPost, bas: string): Barn[][] {
     const notering = tabell([rad([cell([stycke('Notering', { fet: true, storlek: 20, efter: 0 })], { bredd: BREDD, kanter: runt(kant()) })], { hojd: 2400 })], [BREDD]);
     sidor.push([
       ...under('Målkoll före och efter'),
-      stycke('Fyll i före insatsen och igen efter perioden. Ett kryss betyder att eleven klarar det med litet eller inget stöd.'),
+      stycke('Fyll i före insatsen och igen efter perioden. Kryssa i det eleven klarar, och skriv under Notering vilket stöd som behövdes.'),
       skrivrad(['Elev', 'Datum före', 'Datum efter']),
       tabell([huvud, ...kropp], bredder),
       avstand(),
@@ -366,24 +366,33 @@ function mallBarn(post: MetodPost, bas: string): Barn[][] {
   return sidor;
 }
 
+// Kolumnbredder som fyller innehållsbredden; första kolumnen kan få en egen andel.
+function kolumnBredder(antal: number, forstaAndel?: number): number[] {
+  const forsta = forstaAndel ? Math.floor(BREDD * forstaAndel) : Math.floor(BREDD / antal);
+  const rest = Math.floor((BREDD - forsta) / (antal - 1));
+  return Array.from({ length: antal }, (_, i) => (i === 0 ? forsta : i === antal - 1 ? BREDD - forsta - rest * (antal - 2) : rest));
+}
+
 // Lathunden: fyra liggande sidor med snabbguidens designelement. Mörk rubrikrad på rutorna,
 // cremefärgade noter, faktarutor och kickers i versaler.
 const CREME = 'FBF3E4';
 const BRUN = '8A5A1E';
 const MONO = 'Consolas';
+// Kickers är riktiga rubriker (nivå 3) så att dokumentet går att navigera, med eget utseende.
 function kicker(text: string, o: { farg?: string; efter?: number; fore?: number } = {}): Paragraph {
-  return new Paragraph({ children: [new TextRun({ text, font: MONO, size: 15, allCaps: true, characterSpacing: 20, color: o.farg ?? FARG.svag })], spacing: { before: o.fore ?? 160, after: o.efter ?? 60 }, keepNext: true });
+  return new Paragraph({ heading: HeadingLevel.HEADING_3, children: [new TextRun({ text, font: MONO, size: 15, bold: false, allCaps: true, characterSpacing: 20, color: o.farg ?? FARG.svag })], spacing: { before: o.fore ?? 160, after: o.efter ?? 60 }, keepNext: true });
 }
 function lhHuvud(titel: string, etikett: string): Barn[] {
   const barn = [new Paragraph({
+    heading: HeadingLevel.HEADING_2,
     tabStops: [{ type: TabStopType.RIGHT, position: BREDD - 240 }],
     children: [
-      new TextRun({ text: 'LATHUND  ', font: MONO, size: 15, color: 'DDE6E1', characterSpacing: 20 }),
-      new TextRun({ text: titel, bold: true, size: 28, color: FARG.vit }),
+      new TextRun({ text: 'LATHUND  ', font: MONO, size: 15, bold: false, color: 'DDE6E1', characterSpacing: 20 }),
+      new TextRun({ text: titel, bold: true, size: 28, color: FARG.vit, font: 'Calibri' }),
       new TextRun({ children: [new Tab()] }),
-      new TextRun({ text: etikett, font: MONO, size: 15, allCaps: true, color: 'DDE6E1', characterSpacing: 20 }),
+      new TextRun({ text: etikett, font: MONO, size: 15, bold: false, allCaps: true, color: 'DDE6E1', characterSpacing: 20 }),
     ],
-    spacing: { after: 0 },
+    spacing: { before: 0, after: 0 },
   })];
   return [tabell([rad([cell(barn, { bredd: BREDD, fyll: FARG.huvud, kanter: runt(kant(FARG.huvud)), mitt: true })])], [BREDD]), avstand(120)];
 }
@@ -465,7 +474,7 @@ function lathundBarn(post: MetodPost): Barn[][] {
       ],
       () => [
         kicker(l.metoden.tabell.rubrik, { farg: FARG.huvud, fore: 60 }),
-        ...rubrikTabell(l.metoden.tabell.kolumner, l.metoden.tabell.rader, [Math.floor(BREDD * 0.3), BREDD - Math.floor(BREDD * 0.3)], { huvudFyll: FARG.text }),
+        ...rubrikTabell(l.metoden.tabell.kolumner, l.metoden.tabell.rader, kolumnBredder(l.metoden.tabell.kolumner.length, 0.3), { huvudFyll: FARG.text }),
         ...(l.metoden.not ? lhNot([stycke(l.metoden.not, { storlek: 20, efter: 0 })]) : []),
       ],
     ),
@@ -477,11 +486,11 @@ function lathundBarn(post: MetodPost): Barn[][] {
     ...lhSpalter(
       () => [
         ...lhRuta(l.pass.textRubrik, [
-          ...(l.pass.titel ? [stycke(l.pass.titel, { fet: true, storlek: 22, efter: 60 })] : []),
-          ...l.pass.text.map((p, i, alla) => stycke(p, { storlek: 20, efter: i === alla.length - 1 ? 0 : 60 })),
+          ...(l.pass.titel ? [stycke(l.pass.titel, { fet: true, storlek: 21, efter: 40 })] : []),
+          ...l.pass.text.map((p, i, alla) => stycke(p, { storlek: 18, efter: i === alla.length - 1 ? 0 : 40 })),
         ]),
-        ...lhNot([kicker(l.pass.forberett.rubrik, { farg: BRUN, fore: 0 }), ...l.pass.forberett.text.map((p, i, alla) => stycke(p, { storlek: 20, efter: i === alla.length - 1 ? 0 : 60 }))]),
-        ...(l.pass.klarTidigt ? lhGra([kicker('Klar tidigt', { fore: 0 }), stycke(l.pass.klarTidigt, { storlek: 20, efter: 0 })]) : []),
+        ...lhNot([kicker(l.pass.forberett.rubrik, { farg: BRUN, fore: 0 }), ...l.pass.forberett.text.map((p, i, alla) => stycke(p, { storlek: 18, efter: i === alla.length - 1 ? 0 : 40 }))]),
+        ...(l.pass.klarTidigt ? lhGra([kicker('Klar tidigt', { fore: 0 }), stycke(l.pass.klarTidigt, { storlek: 18, efter: 0 })]) : []),
       ],
       () => {
         const bredder = [1300, BREDD - 1300];
@@ -489,9 +498,9 @@ function lathundBarn(post: MetodPost): Barn[][] {
         const kropp = l.pass.schema.rader.map((r, i) => rad([
           cell([new Paragraph({ children: [new TextRun({ text: r.tid, font: MONO, size: 18, bold: true, color: FARG.svag })], spacing: { after: 0 } })], { bredd: bredder[0], fyll: i % 2 === 1 ? FARG.rand : undefined }),
           cell([
-            stycke(r.fas, { fet: true, storlek: 20, efter: 20 }),
-            stycke(r.vad, { storlek: 19, efter: r.fraser.length ? 20 : 0 }),
-            ...(r.fraser.length ? [stycke(r.fraser.map(citat).join(' · '), { kursiv: true, farg: BRUN, storlek: 19, efter: 0 })] : []),
+            stycke(r.fas, { fet: true, storlek: 19, efter: 10 }),
+            stycke(r.vad, { storlek: 18, efter: r.fraser.length ? 10 : 0 }),
+            ...(r.fraser.length ? [stycke(r.fraser.map(citat).join(' · '), { kursiv: true, farg: BRUN, storlek: 18, efter: 0 })] : []),
           ], { bredd: bredder[1], fyll: i % 2 === 1 ? FARG.rand : undefined }),
         ]));
         return [kicker(l.pass.schema.rubrik, { farg: FARG.huvud, fore: 60 }), tabell([huvud, ...kropp], bredder)];
@@ -499,27 +508,38 @@ function lathundBarn(post: MetodPost): Barn[][] {
     ),
   ]);
 
-  // 3. Mallen.
+  // 3. Mallen. Spalterna och tavlan tar hela bredden; övriga block flödar i två spalter, som på sidan.
   const mall: Barn[] = [...lhHuvud(l.mall.rubrik, 'Mallen · 3/4')];
   if (l.mall.underrad) mall.push(kicker(l.mall.underrad, { fore: 0, efter: 120 }));
+  const smala: (() => Barn[])[] = [];
+  const tomSmala = () => {
+    if (!smala.length) return;
+    const halva = Math.ceil(smala.length / 2);
+    const vanster = smala.slice(0, halva);
+    const hoger = smala.slice(halva);
+    mall.push(...lhSpalter(() => vanster.flatMap((f) => f()), () => hoger.flatMap((f) => f())));
+    smala.length = 0;
+  };
   for (const b of l.mall.block) {
     if (b.typ === 'spalter') {
+      tomSmala();
       const par: typeof b.kolumner[] = [];
       for (let i = 0; i < b.kolumner.length; i += 2) par.push(b.kolumner.slice(i, i + 2));
       for (const p of par) {
         const spalt = (k: { namn: string; fraga: string } | undefined, nr: number) => () => (k ? [
           new Paragraph({ children: [new TextRun({ text: `${nr}  `, font: MONO, color: FARG.huvud, size: 18 }), new TextRun({ text: k.namn, bold: true, size: 24 }), new TextRun({ text: `  ${citat(k.fraga)}`, size: 19, color: FARG.svag })], border: { bottom: { style: BorderStyle.SINGLE, size: 12, color: FARG.text, space: 2 } }, spacing: { after: 60 } }),
-          ...lhRader(b.rader),
+          ...lhRader(b.rader, 330),
         ] : []);
         const nr = b.kolumner.indexOf(p[0]) + 1;
         mall.push(...lhSpalter(spalt(p[0], nr), spalt(p[1], nr + 1)));
       }
     } else if (b.typ === 'skrivruta') {
-      mall.push(...lhNot([
+      smala.push(() => lhNot([
         new Paragraph({ children: [new TextRun({ text: b.rubrik, bold: true, size: 22 }), ...(b.text ? [new TextRun({ text: `  ${b.text}`, size: 19, color: FARG.svag })] : [])], spacing: { after: 60 } }),
-        ...lhRader(b.rader, 380),
+        ...lhRader(b.rader, 320),
       ]));
     } else if (b.typ === 'tavla') {
+      tomSmala();
       mall.push(...lhSpalter(
         () => [
           stycke(b.text, { kursiv: true, storlek: 22 }),
@@ -529,25 +549,30 @@ function lathundBarn(post: MetodPost): Barn[][] {
         ],
         () => [
           stycke(b.tabell.rubrik, { kursiv: true, storlek: 20, farg: FARG.svag, efter: 40 }),
-          ...rubrikTabell(b.tabell.kolumner, b.tabell.rader, b.tabell.kolumner.map((_, i, alla) => (i === alla.length - 1 ? BREDD - Math.floor(BREDD / alla.length) * (alla.length - 1) : Math.floor(BREDD / alla.length))), { huvudFyll: FARG.svag }),
+          ...rubrikTabell(b.tabell.kolumner, b.tabell.rader, kolumnBredder(b.tabell.kolumner.length), { huvudFyll: FARG.svag }),
           ...(b.annat ? [stycke(b.annat.rubrik, { kursiv: true, storlek: 20, farg: FARG.svag, efter: 20 }), ...b.annat.rader.map((r) => stycke(r, { kursiv: true, storlek: 20, efter: 20 }))] : []),
           ...(b.svar ? [stycke(b.svar, { kursiv: true, fet: true, storlek: 22, farg: 'B3261E', fore: 80 })] : []),
           ...(b.citat.length ? [stycke(citat(b.citat[b.citat.length - 1]), { kursiv: true, storlek: 19, farg: BRUN, fore: 120 })] : []),
         ],
       ));
     } else if (b.typ === 'snabbmall' && d.snabbmall) {
-      mall.push(...snabbmallTabell(d.titel, d.snabbmall.fore, d.snabbmall.efter, { skrivrum: true }));
+      const sm = d.snabbmall;
+      smala.push(() => snabbmallTabell(d.titel, sm.fore, sm.efter, { skrivrum: true, hojd: 640 }));
     } else if (b.typ === 'tabell') {
-      const forsta = Math.floor(BREDD * 0.28);
-      const rest = Math.floor((BREDD - forsta) / (b.kolumner.length - 1));
-      mall.push(kicker(b.rubrik, { farg: FARG.huvud }), ...rubrikTabell(b.kolumner, b.rader, b.kolumner.map((_, i, alla) => (i === 0 ? forsta : i === alla.length - 1 ? BREDD - forsta - rest * (alla.length - 2) : rest)), { huvudFyll: FARG.text }));
+      smala.push(() => {
+        return [kicker(b.rubrik, { farg: FARG.huvud, fore: 0 }), ...rubrikTabell(b.kolumner, b.rader, kolumnBredder(b.kolumner.length, 0.3), { huvudFyll: FARG.text })];
+      });
     } else if (b.typ === 'kedja') {
-      mall.push(kicker(b.rubrik, { farg: FARG.huvud }), new Paragraph({ children: b.steg.flatMap((s, i) => [...(i > 0 ? [new TextRun({ text: '  →  ', color: FARG.svag })] : []), new TextRun({ text: s, italics: true, bold: true, size: 22, color: i === b.steg.length - 1 ? '2E7D32' : FARG.text })]), spacing: { after: 120 } }));
-      if (b.citat) mall.push(stycke(citat(b.citat), { kursiv: true, farg: BRUN, storlek: 20 }));
+      smala.push(() => [
+        kicker(b.rubrik, { farg: FARG.huvud, fore: 0 }),
+        new Paragraph({ children: b.steg.flatMap((s, i) => [...(i > 0 ? [new TextRun({ text: '  →  ', color: FARG.svag })] : []), new TextRun({ text: s, italics: true, bold: true, size: 21, color: i === b.steg.length - 1 ? '2E7D32' : FARG.text })]), spacing: { after: 120 } }),
+        ...(b.citat ? [stycke(citat(b.citat), { kursiv: true, farg: BRUN, storlek: 20 })] : []),
+      ]);
     } else if (b.typ === 'not') {
-      mall.push(...lhNot([stycke(b.text, { storlek: 20, efter: 0 })]));
+      smala.push(() => lhNot([stycke(b.text, { storlek: 20, efter: 0 })]));
     }
   }
+  tomSmala();
   sidor.push(mall);
 
   // 4. Material.
@@ -562,8 +587,8 @@ function lathundBarn(post: MetodPost): Barn[][] {
     ],
     () => [
       ...(d.checklista ? lhRuta(d.checklista.rubrik, d.checklista.punkter.map((p, i, alla) => new Paragraph({ children: [run(`${BOCK} `, { font: 'Segoe UI Symbol', farg: FARG.huvud, storlek: 20 }), run(p, { storlek: 20 })], spacing: { after: i === alla.length - 1 ? 0 : 40 } }))) : []),
-      ...(d.uppfoljning ? lhRuta('Uppföljning', [
-        ...d.uppfoljning.rader.map((r) => new Paragraph({ children: [new TextRun({ text: `${r.nar}: `, bold: true, size: 20 }), new TextRun({ text: r.vad, size: 20 })], spacing: { after: 60 } })),
+      ...(d.uppfoljning || l.material.varjePass ? lhRuta('Uppföljning', [
+        ...(d.uppfoljning?.rader ?? []).map((r) => new Paragraph({ children: [new TextRun({ text: `${r.nar}: `, bold: true, size: 20 }), new TextRun({ text: r.vad, size: 20 })], spacing: { after: 60 } })),
         ...(l.material.varjePass ? [new Paragraph({ children: [new TextRun({ text: 'Varje pass: ', bold: true, size: 20 }), new TextRun({ text: l.material.varjePass, size: 20 })], spacing: { after: 0 } })] : []),
       ]) : []),
     ],

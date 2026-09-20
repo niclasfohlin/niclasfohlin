@@ -25,7 +25,7 @@ const citat = (f: string) => `”${f}”`;
           <h3 class="lh-kicker">Så fungerar insatsen</h3>
           {l.metoden.text.map((p) => <p>{p}</p>)}
           <div class="lh-ruta">
-            <h4>{l.metoden.ruta.rubrik}</h4>
+            <h3>{l.metoden.ruta.rubrik}</h3>
             <div class="lh-ruta-kropp">
               {l.metoden.ruta.inledning && <p><strong>{l.metoden.ruta.inledning}</strong></p>}
               {l.metoden.ruta.punkter.map((p) => <p>{p.fet && <strong>{p.fet}</strong>}{p.fet && p.text ? ' ' : ''}{p.text}</p>)}
@@ -47,17 +47,17 @@ const citat = (f: string) => `”${f}”`;
       <div class="lh-kolumner">
         <div class="lh-kol">
           <div class="lh-ruta">
-            <h4>{l.pass.textRubrik}</h4>
+            <h3>{l.pass.textRubrik}</h3>
             <div class="lh-ruta-kropp">
               {l.pass.titel && <p class="lh-titel">{l.pass.titel}</p>}
               {l.pass.text.map((p) => <p>{p}</p>)}
             </div>
           </div>
           <div class="lh-not">
-            <h4 class="lh-kicker">{l.pass.forberett.rubrik}</h4>
+            <h3 class="lh-kicker">{l.pass.forberett.rubrik}</h3>
             {l.pass.forberett.text.map((p) => <p>{p}</p>)}
           </div>
-          {l.pass.klarTidigt && <div class="lh-gra"><h4 class="lh-kicker">Klar tidigt</h4><p>{l.pass.klarTidigt}</p></div>}
+          {l.pass.klarTidigt && <div class="lh-gra"><h3 class="lh-kicker">Klar tidigt</h3><p>{l.pass.klarTidigt}</p></div>}
         </div>
         <div class="lh-kol">
           <h3 class="lh-kicker">{l.pass.schema.rubrik}</h3>
@@ -86,7 +86,7 @@ const citat = (f: string) => `”${f}”`;
             <div class="lh-spalter">
               {b.kolumner.map((k, i) => (
                 <div class="lh-spalt">
-                  <h4><span class="nr">{i + 1}</span> {k.namn} <span class="lh-fraga">{citat(k.fraga)}</span></h4>
+                  <h3><span class="nr">{i + 1}</span> {k.namn} <span class="lh-fraga">{citat(k.fraga)}</span></h3>
                   <div class="lh-linjer">{Array.from({ length: b.rader }).map(() => <div class="lh-linje"></div>)}</div>
                 </div>
               ))}
@@ -94,7 +94,7 @@ const citat = (f: string) => `”${f}”`;
           );
           if (b.typ === 'skrivruta') return (
             <div class="lh-skrivruta">
-              <h4>{b.rubrik}{b.text && <>{' '}<span class="lh-fraga">{b.text}</span></>}</h4>
+              <h3>{b.rubrik}{b.text && <>{' '}<span class="lh-fraga">{b.text}</span></>}</h3>
               <div class="lh-linjer">{Array.from({ length: b.rader }).map(() => <div class="lh-linje"></div>)}</div>
             </div>
           );
@@ -166,22 +166,22 @@ const citat = (f: string) => `”${f}”`;
           {l.material.var.punkter.map((p) => <p>{p.fet && <strong>{p.fet}</strong>}{p.fet && p.text ? ' ' : ''}{p.text}</p>)}
           {l.material.var.efter && <p class="lh-svag">{l.material.var.efter}</p>}
           <div class="lh-ruta">
-            <h4>På bordet när passet börjar</h4>
+            <h3>På bordet när passet börjar</h3>
             <ul class="lh-lista lh-tva">{l.material.bordet.map((p) => <li>{p}</li>)}</ul>
           </div>
         </div>
         <div class="lh-kol">
           {d.checklista && (
             <div class="lh-ruta">
-              <h4>{d.checklista.rubrik}</h4>
+              <h3>{d.checklista.rubrik}</h3>
               <ul class="lh-lista lh-bockar">{d.checklista.punkter.map((p) => <li>{p}</li>)}</ul>
             </div>
           )}
-          {d.uppfoljning && (
+          {(d.uppfoljning || l.material.varjePass) && (
             <div class="lh-ruta">
-              <h4>Uppföljning</h4>
+              <h3>Uppföljning</h3>
               <div class="lh-ruta-kropp">
-                {d.uppfoljning.rader.map((r) => <p><strong>{r.nar}:</strong> {r.vad}</p>)}
+                {d.uppfoljning?.rader.map((r) => <p><strong>{r.nar}:</strong> {r.vad}</p>)}
                 {l.material.varjePass && <p><strong>Varje pass:</strong> {l.material.varjePass}</p>}
               </div>
             </div>

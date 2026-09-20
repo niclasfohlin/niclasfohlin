@@ -111,6 +111,18 @@ if (bilder) {
       kor(['--window-size=390,10000', `--screenshot=${join(mapp, 'mobil.png')}`]);
       kor(['--no-pdf-header-footer', `--print-to-pdf=${join(mapp, 'utskrift.pdf')}`]);
       ok(`skärmbilder i ${mapp}: desktop.png, mobil.png, utskrift.pdf`);
+      if (metod.lathund) {
+        const lurl = `${url}/lathund`;
+        const korL = (extra) => execFileSync(chrome, ['--headless=new', '--disable-gpu', '--hide-scrollbars', ...extra, lurl], { stdio: 'ignore', timeout: 60000 });
+        korL(['--window-size=1280,5000', `--screenshot=${join(mapp, 'lathund-desktop.png')}`]);
+        korL(['--window-size=390,9000', `--screenshot=${join(mapp, 'lathund-mobil.png')}`]);
+        korL(['--no-pdf-header-footer', `--print-to-pdf=${join(mapp, 'lathund-utskrift.pdf')}`]);
+        try {
+          const info = execFileSync('pdfinfo', [join(mapp, 'lathund-utskrift.pdf')], { encoding: 'utf8' });
+          const sidor = Number((info.match(/Pages:\s+(\d+)/) || [])[1]);
+          sidor === 4 ? ok('lathundens utskrift är fyra sidor') : nej(`lathundens utskrift är ${sidor} sidor, ska vara fyra`);
+        } catch { console.log('  obs  pdfinfo saknas, sidantalet i lathund-utskrift.pdf är inte räknat'); }
+      }
     } catch (e) {
       nej(`skärmbilderna misslyckades: ${e.message}`);
     } finally {
