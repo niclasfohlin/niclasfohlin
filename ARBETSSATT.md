@@ -46,7 +46,7 @@ En inloggning som kräver webbläsaren (`gh auth login`, `netlify login`) starta
 
 ## Nattkörning
 
-`/natt` arbetar igenom den körbara kön på en egen gren, en post i taget genom `starta` och `klar`, slår ihop grenen till main och pushar när valideringen är grön, och skriver rapporten till `NATTEN.md` i repots rot. Git ignorerar filen, och den skrivs över varje gång. Under natten tar Claude Code egna beslut i allt utom det som kräver Niclas: utskick, personfakta, rättigheter och inloggningar som kräver webbläsaren. Sådant blockeras i kön med en rad om vad som behövs, och steget skrivs in i INSTRUKTIONER.docx.
+`/natt` arbetar igenom den körbara kön på en egen gren, en post i taget genom `starta` och `klar`, slår ihop grenen till main och pushar när valideringen är grön, och skriver rapporten till `NATTEN.md` i repots rot. Git ignorerar filen, och den skrivs över varje gång. Under natten tar Claude Code egna beslut i allt utom det som kräver Niclas: längre nyhetsbrev, personfakta och inloggningar som kräver webbläsaren. Allt som pushas till main mejlas prenumeranterna automatiskt, så bara färdigt innehåll lämnar utkastläget. Sådant blockeras i kön med en rad om vad som behövs, och steget skrivs in i INSTRUKTIONER.docx.
 
 ## Texterna
 

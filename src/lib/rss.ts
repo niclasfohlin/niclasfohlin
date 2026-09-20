@@ -1,6 +1,6 @@
 import rss, { type RSSFeedItem } from '@astrojs/rss';
 import { site } from '../data/site';
-import { artiklarSorterade, metoderSorterade, publikationNamn } from './innehall';
+import { artiklarSorterade, metoderSorterade, bockerSorterade, publikationNamn } from './innehall';
 
 export async function artikelPoster(): Promise<RSSFeedItem[]> {
   const artiklar = await artiklarSorterade();
@@ -21,6 +21,17 @@ export async function metodPoster(): Promise<RSSFeedItem[]> {
     pubDate: m.data.uppdaterad ?? new Date(0),
     link: `/stodundervisning/${m.id}`,
     categories: [m.data.omrade, ...m.data.taggar],
+  }));
+}
+
+export async function bokPoster(): Promise<RSSFeedItem[]> {
+  const bocker = await bockerSorterade();
+  return bocker.map((b) => ({
+    title: `${b.data.titel} (bok)`,
+    description: b.data.beskrivning,
+    pubDate: new Date(`${b.data.utgivningsar}-01-01`),
+    link: `/bocker/${b.id}`,
+    categories: [b.data.kategori, ...b.data.taggar],
   }));
 }
 

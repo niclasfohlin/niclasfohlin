@@ -2,7 +2,7 @@
 
 Du förvaltar Niclas Fohlins författar- och kunskapssajt. Sajten ska vara snabb, sober och redaktionellt trovärdig. Läsbarhet före effekter. Ingen generisk AI-design.
 
-Det viktigaste först: allt arbete sker på grenar, `npm run validera` går igenom före varje commit, taggar och publikationer tas från registren i `src/data/`, och du slår ihop, pushar och deployar själv när valideringen är grön. Utskick skickas bara när Niclas säger skicka.
+Det viktigaste först: allt arbete sker på grenar, `npm run validera` går igenom före varje commit, taggar och publikationer tas från registren i `src/data/`, och du slår ihop, pushar och deployar själv när valideringen är grön. Nytt innehåll mejlas prenumeranterna automatiskt efter deploy; längre nyhetsbrev skickas bara när Niclas säger skicka.
 
 Arbete som inte är ett direkt svar på Niclas går genom kön: `node scripts/ko.mjs lista`, `starta`, `klar`. Ett fel du hittar i förbifarten läggs i kön med `lagg`, det lagas inte i samma commit. Hur kön fungerar står i ARBETSSATT.md.
 
@@ -51,7 +51,9 @@ Tagg-id skrivs med a-z, 0-9 och bindestreck. Läsaren ser label.
 
 Formuläret på /prenumerera anropar `netlify/functions/prenumerera.mjs`, som lägger till kontakten i Brevo med dubbel opt-in. Utan miljövariabler svarar funktionen 503 och hänvisar till RSS. Miljövariablerna sätter du i Netlify med `netlify env:set`. Hemligheter ligger aldrig i git; var de förvaras står i ARBETSSATT.md.
 
-`/utskick` skriver ett utkast till `utskick/` och kan lägga upp det som kampanj i Brevo. Det skickas först när Niclas läst utkastet och sagt skicka.
+Varje ny artikel, metod och bok mejlas prenumeranterna automatiskt: `netlify/functions/deploy-succeeded.mjs` körs efter varje lyckad deploy, läser `/nytt.json`, jämför med det som redan mejlats (Netlify Blobs, lagret `utskick`) och skickar en Brevo-kampanj om det nya. Publicera därför bara det som är klart att mejlas; `utkast: true` hålls utanför.
+
+`/utskick` skriver ett längre nyhetsbrev som utkast till `utskick/` och kan lägga upp det som kampanj i Brevo. Det skickas först när Niclas läst utkastet och sagt skicka.
 
 ## Kvalitet
 
@@ -69,6 +71,6 @@ Niclas gav 2026-09-19 Claude Code fullt mandat att sköta sajten och tjänsterna
 ## Det här gör bara Niclas
 
 1. Skapar konton och loggar in där en människa måste klicka i webbläsaren. Vad han ska göra, steg för steg, står i INSTRUKTIONER.docx.
-2. Säger skicka innan ett massutskick går ut.
+2. Säger skicka innan ett längre nyhetsbrev går ut. Mejlen om nytt innehåll går automatiskt.
 3. Lämnar fakta om sig själv och sina böcker. Du frågar efter underlag, du hittar inte på.
 4. Säger per publikation om hela texten får ligga på sajten.
