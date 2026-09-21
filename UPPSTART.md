@@ -76,7 +76,7 @@ Formuläret på /prenumerera fungerar utan Brevo men svarar då att prenumeratio
 1. Niclas skapar konto på brevo.com med niclas.fohlin@gmail.com och bekräftar e-postadressen.
 2. Niclas skapar en API-nyckel under SMTP & API, API keys, och lägger den i filen `.env` i projektmappen som `BREVO_API_KEY=...` (git ignorerar filen).
 3. Claude Code skapar listan Prenumeranter och mallen för dubbel opt-in via Brevos API, sätter `BREVO_API_KEY`, `BREVO_LIST_ID`, `BREVO_DOI_TEMPLATE_ID` och `SITE_URL` i Netlify med `netlify env:set`, och testar formuläret med `netlify dev`.
-4. Avsändaren måste vara verifierad i Brevo. Enklast är att verifiera niclas.fohlin@gmail.com (Brevo mejlar en länk som Niclas klickar). Domänen niclasfohlin.se kan verifieras senare med DNS-poster.
+4. Avsändaren måste vara verifierad i Brevo. Först verifierades niclas.fohlin@gmail.com (Brevo mejlar en länk som Niclas klickar). Sedan 2026-09-21 är domänen niclasfohlin.se autentiserad i Brevo med fyra DNS-poster hos Loopia (två CNAME för DKIM, en TXT med brevo-code på roten och en TXT för DMARC på _dmarc), och avsändaren är Niclas Fohlin <nyhetsbrev@niclasfohlin.se> med svar till niclas.fohlin@gmail.com. Adressen har ingen brevlåda; reply-to gör att svar ändå landar hos Niclas. Avsändaren står i `netlify/lib/utskick.mjs` och i mallen för dubbel opt-in i Brevo.
 
 Funktionens anrop mot Brevo verifieras mot Brevos aktuella API-dokumentation första gången den testas skarpt.
 

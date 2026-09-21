@@ -5,7 +5,10 @@
 // det som tillkommit. Första körningen registrerar allt som redan ligger ute utan att skicka,
 // så att en ny rigg aldrig mejlar hela arkivet.
 
-const AVSANDARE = { name: 'Niclas Fohlin', email: 'niclas.fohlin@gmail.com' };
+// Avsändaren ligger på den egna domänen, som är autentiserad i Brevo (DKIM och DMARC via Loopias DNS).
+// Adressen har ingen brevlåda: svar går till Niclas vanliga adress via reply-to.
+const AVSANDARE = { name: 'Niclas Fohlin', email: 'nyhetsbrev@niclasfohlin.se' };
+const SVAR_TILL = 'niclas.fohlin@gmail.com';
 
 const html = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 
@@ -85,7 +88,7 @@ export async function mejlaNytt({ poster, sajt, lager, brevoNyckel, listId }) {
       name: `Nytt ${new Date().toISOString().slice(0, 16)}: ${nya.map((p) => p.titel).join(' | ').slice(0, 120)}`,
       subject: amne,
       sender: AVSANDARE,
-      replyTo: AVSANDARE.email,
+      replyTo: SVAR_TILL,
       htmlContent: brev(nya, sajt),
       recipients: { listIds: [Number(listId)] },
     }, brevoNyckel);
