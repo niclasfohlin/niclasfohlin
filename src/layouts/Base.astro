@@ -9,9 +9,13 @@ interface Props {
   typ?: 'website' | 'article';
   /** Absolut eller rotrelativ sökväg till delningsbild. Utan egen bild används porträttet. */
   bild?: string;
+  /** Sidfot på varje utskriven sida (upphov och adress). Sätts som --tryck-text på html och
+   *  läses av @page @bottom-center i global.css; sidan lägger också en .tryck-fot för webbläsare utan marginalrutor. */
+  tryckText?: string;
 }
 
-const { title, description = site.beskrivning, typ = 'website', bild = site.delningsbild } = Astro.props;
+const { title, description = site.beskrivning, typ = 'website', bild = site.delningsbild, tryckText } = Astro.props;
+const htmlStil = tryckText ? `--tryck-text: '${tryckText.replace(/['\\]/g, '')}'` : undefined;
 const fullTitel = title ? `${title} · ${site.namn}` : `${site.namn}: ${site.rad.toLowerCase()}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const bildUrl = new URL(bild, Astro.site).href;
@@ -22,12 +26,16 @@ function aktiv(href: string) {
 ---
 
 <!doctype html>
-<html lang={site.sprak}>
+<html lang={site.sprak} style={htmlStil}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f7f6f1" />
-    <script is:inline>document.documentElement.classList.add('js');</script>
+    <script is:inline>
+      document.documentElement.classList.add('js');
+      // Chromium (Chrome, Edge) ritar utskriftens sidfot som marginalruta; andra får .tryck-fot.
+      if (navigator.userAgentData) document.documentElement.classList.add('marginalrutor');
+    </script>
     <title>{fullTitel}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical.href} />

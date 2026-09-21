@@ -16,7 +16,7 @@ const d = m.data;
 const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathund`;
 ---
 
-<Base title={`Lathund: ${d.titel}`} description={`Snabbguide till ${d.titel}: metoden i korthet, ett pass steg för steg, mallen och vad du behöver. Skriv ut i liggande A4 eller ladda ner som Word-fil.`} typ="article">
+<Base title={`Lathund: ${d.titel}`} description={`Snabbguide till ${d.titel}: metoden i korthet, ett pass steg för steg, mallen och vad du behöver. Skriv ut i liggande A4 eller ladda ner som Word-fil.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
   <article class="lathund">
     <header class="lathund-huvud">
       <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${m.id}`}>{d.titel}</a> · Lathund</p>
@@ -44,8 +44,16 @@ const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathu
 
 <style is:global>
   @media print {
-    @page { size: A4 landscape; margin: 9mm 11mm 13mm; }
-    @page staende { size: A4 portrait; margin: 20mm 22mm 22mm; }
+    @page {
+      size: A4 landscape;
+      margin: 9mm 11mm 13mm;
+      @bottom-center { content: var(--tryck-text, ''); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 8pt; color: #555; }
+    }
+    @page staende {
+      size: A4 portrait;
+      margin: 20mm 22mm 22mm;
+      @bottom-center { content: var(--tryck-text, ''); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 8pt; color: #555; }
+    }
     body.tryck-bara-text { page: staende; }
   }
 </style>

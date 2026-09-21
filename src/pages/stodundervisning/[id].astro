@@ -18,7 +18,7 @@ const relaterade = alla.filter((x) => d.relaterade.includes(x.id));
 const adress = metodAdress(site.url, m.id).replace(/^https?:\/\//, '');
 ---
 
-<Base title={d.titel} description={d.ingress} typ="article">
+<Base title={d.titel} description={d.ingress} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
   <article class="metod">
     <header class="metod-huvud">
       <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · {d.omrade} · {arskursSpann(d.arskurs)}</p>

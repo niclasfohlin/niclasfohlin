@@ -1,6 +1,6 @@
 # Metoder: från underlag till sida
 
-Så tas en metod till stödundervisning emot och görs om till en post. Modellen är de tre som redan finns: öppna `src/content/stodundervisning/problemlosning-i-grupp.yaml` bredvid det nya underlaget och följ formen. `boksamtal-i-grupp.yaml` visar fria tabeller efter stegtabellen, `faktatextsamtal-i-grupp.yaml` en lathund med spalter och kedja. Det körbara arbetsflödet är `/ny-metod`; den här filen förklarar varför det ser ut som det gör.
+Så tas en metod till stödundervisning emot och görs om till en post. Modellen är de tre som redan finns: öppna `src/content/stodundervisning/problemlosning-i-grupp.yaml` bredvid det nya underlaget och följ formen. `problemlosning-i-grupp.yaml` har den rikaste modellen och en lathund med blocket tavla; `boksamtal-i-grupp.yaml` visar en fri tabell efter stegtabellen och en lathund med spalter och skrivruta; `faktatextsamtal-i-grupp.yaml` en fri tabell efter arbetsformen och en lathund med kedja, tabell, snabbmall och not. Det körbara arbetsflödet är `/ny-metod`; den här filen förklarar varför det ser ut som det gör.
 
 ## Det som kommer från Niclas
 

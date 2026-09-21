@@ -531,7 +531,11 @@ html.js .bara-js { display: inline-block; }
 
 /* Utskrift av en metod: bara metoden, med © Niclas Fohlin och adressen längst ner på varje sida. */
 @media print {
-  @page { size: A4; margin: 16mm 14mm 20mm; }
+  @page {
+    size: A4;
+    margin: 16mm 14mm 20mm;
+    @bottom-center { content: var(--tryck-text, ''); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 8.5pt; color: #555; }
+  }
   body { background: #fff; color: #000; font-size: 10.5pt; line-height: 1.45; }
   .sidhuvud, .sidfot, .hopp-lank, .nedladdning, .filter, .samla, .metod-fot .relaterade, .metod-fot .taggar, .valj { display: none !important; }
   .innehall { max-width: none; padding: 0; }
@@ -541,6 +545,9 @@ html.js .bara-js { display: inline-block; }
   .metod-huvud h1 { font-size: 22pt; }
   .metod-modell { font-size: 10.5pt; }
   .metod-modell h2 { font-size: 13pt; margin-top: 1.4em; break-after: avoid; }
+  /* Rubrik och inledande stycke följer med det som kommer efter; snabbmallen hålls ihop. */
+  .metod-modell h2 + p { break-after: avoid; }
+  .m-snabbmall { break-inside: avoid; }
   .m-tabell, .m-snabbmall, .m-bockar, .m-gor-undvik, .m-band, .m-ruta, .m-rutin, .m-grund, .m-motto { font-size: 9.5pt; }
   .m-tabell tr, .m-snabbmall tr, .m-bockar li, .m-gor-undvik, .m-band, .m-ruta, .m-rutin, .m-grund, .m-motto, .m-fraga { break-inside: avoid; }
   .m-tabell thead { display: table-header-group; }
@@ -549,7 +556,12 @@ html.js .bara-js { display: inline-block; }
   .m-ruta, .m-rutin, .m-snabbmall .avsnitt th, .m-gor-undvik ul, .m-bockar li:nth-child(even), .m-tabell tbody tr:nth-child(even) { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .m-snabbmall td { height: 2rem; }
   .metod-fot { border-top: 0; padding-top: 0; margin-top: 1.5rem; }
+  /* Sidfoten med upphov och adress: i Chromium som marginalruta under texten (@bottom-center ovan,
+     texten kommer från --tryck-text på html), i andra webbläsare som fast element längst ner på
+     sidytan. Base.astro sätter html.marginalrutor där marginalrutor finns. */
   .tryck-fot { display: block; position: fixed; bottom: 0; left: 0; right: 0; font-family: var(--typsnitt-ui); font-size: 8.5pt; color: #555; text-align: center; border-top: 1px solid #bbb; padding-top: 3pt; background: #fff; }
+  html.marginalrutor .tryck-fot { display: none; }
+  .bara-js, button.lank, .lh-lank { display: none !important; }
   a { text-decoration: none; color: inherit; }
 }
 
