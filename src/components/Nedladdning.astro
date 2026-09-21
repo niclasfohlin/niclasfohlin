@@ -25,7 +25,7 @@ const bas = `/stodundervisning/${id}`;
     {harLathund && <li><span class="filrubrik">Bara lathunden</span> <Filval fil={`${bas}-lathund`} namn={`${id}-lathund`} rubrik="Lathunden" pdf /></li>}
     {harMallar && <li><span class="filrubrik">Bara planeringsmallarna</span> <Filval fil={`${bas}-mallar`} namn={`${id}-mallar`} rubrik="Planeringsmallarna" /></li>}
   </ul>
-  <p class="meta">Allt om metoden: {delarText}. Alla filer bär © Niclas Fohlin.{drive && ' Drive sparar en Word-kopia i din egen Google Drive.'}</p>
+  <p class="meta">Allt om metoden: {delarText}. Alla filer bär © Niclas Fohlin.{drive && ' Drive sparar en Word-kopia i din egen Google Drive.'}{harLathund && ' Word visar lathundens sidor liggande; Google Dokument kan bara visa en sidriktning per fil, så där blir lathunden liggande bara i filen Bara lathunden eller som pdf.'}</p>
 </aside>
 
 <script>
