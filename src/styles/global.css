@@ -265,9 +265,9 @@ html.js .samla {
 .samla-antal { font-weight: 600; }
 .samla-mallar { display: inline-flex; align-items: center; gap: 0.4rem; }
 .samla-mallar input { accent-color: var(--farg-accent); margin: 0; }
-.samla button.knapp { font-size: 0.95rem; cursor: pointer; }
-.samla button.knapp:not(.sekundar) { border: 0; }
-.samla-knappar { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.samla-mallar .samla-kort { display: none; }
+.samla-knappar { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap; }
+.samla-knappar button.lank { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
 .samla [data-status], .samla .samla-hjalp { grid-column: 1 / -1; }
 .samla [data-status]:empty { display: none; }
 .samla-alla { font-family: var(--typsnitt-ui); font-size: 0.9rem; margin: 1rem 0 0; }
@@ -570,11 +570,13 @@ html.js .bara-js { display: inline-block; }
   .m-band > div { border-left: 0; border-top: 1px solid var(--farg-kant); }
   .m-band > div:first-child { border-top: 0; }
   /* Urvalsraden på mobil: låg och utan hjälptext. Antalet på en rad, kryssrutan bredvid knappen på nästa. */
-  html.js .samla { grid-template-columns: 1fr auto; gap: 0.35rem 0.75rem; align-items: center; padding: 0.55rem 0.9rem 0.6rem; font-size: 0.85rem; bottom: 0.5rem; }
-  .samla-antal { grid-column: 1 / -1; font-size: 0.85rem; }
+  /* Urvalsraden på mobil, tunn: antalet på en rad, kryssrutan med kort text och knappgruppen Word och Drive på nästa. */
+  html.js .samla { grid-template-columns: auto 1fr; gap: 0.3rem 0.75rem; align-items: center; padding: 0.45rem 0.8rem 0.5rem; font-size: 0.85rem; bottom: 0.5rem; }
+  .samla-antal { grid-column: 1 / -1; font-size: 0.85rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .samla-mallar { font-size: 0.85rem; }
-  .samla-knappar { justify-self: end; }
-  .samla button.knapp { font-size: 0.85rem; padding: 0.45rem 0.8rem; }
+  .samla-mallar .samla-lang { display: none; }
+  .samla-mallar .samla-kort { display: inline; }
+  .samla-knappar { justify-self: end; gap: 0.6rem; }
   .samla .samla-hjalp { display: none; }
   .samla [data-status] { font-size: 0.85rem; }
   .metod-modell { font-size: 1rem; }
