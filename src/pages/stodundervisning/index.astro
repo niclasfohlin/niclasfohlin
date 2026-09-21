@@ -195,6 +195,20 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
       bygger = true;
       knapp.disabled = true;
       uppdateraDrive();
+      // Drive: be om behörighet direkt på trycket, innan filen byggs, annars kan inloggningsrutan blockeras.
+      let drive: typeof import('../../scripts/drive') | undefined;
+      if (mal === 'drive') {
+        try {
+          drive = await import('../../scripts/drive');
+          await drive.forberedDrive();
+        } catch (fel) {
+          visaStatus(`Det gick inte: ${(fel as Error).message}`);
+          bygger = false;
+          uppdatera();
+          uppdateraDrive();
+          return;
+        }
+      }
       visaStatus('Bygger filen.');
       try {
         const svar = await fetch('/stodundervisning/metoder.json');
@@ -206,10 +220,9 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
         const dokument = metodDokument(poster as Parameters<typeof metodDokument>[0], { bas, medMallar: medMallarVal });
         const blob = await Packer.toBlob(dokument);
         const filnamn = poster.length === 1 ? `${poster[0].id}${medMallarVal ? '' : '-beskrivning'}.docx` : `metoder-niclasfohlin-se${medMallarVal ? '' : '-beskrivningar'}.docx`;
-        if (mal === 'drive') {
-          const { sparaIDrive } = await import('../../scripts/drive');
+        if (mal === 'drive' && drive) {
           window.clearTimeout(statusTimer);
-          await sparaIDrive(blob, filnamn, status);
+          await drive.sparaIDrive(blob, filnamn, status);
         } else {
           const lank = document.createElement('a');
           lank.href = URL.createObjectURL(blob);

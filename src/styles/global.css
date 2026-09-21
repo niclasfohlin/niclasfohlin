@@ -300,6 +300,9 @@ html.js .nedladdning .skriv-ut { display: block; }
 .filval > :first-child { border-left: 0; }
 .filval > a:hover, .filval > button:hover { background: var(--farg-accent-ljus); color: var(--farg-accent-mork); }
 .filval > button[disabled] { color: var(--farg-text-svag); cursor: default; }
+/* Drive kräver JavaScript: knappen finns bara när html har klassen js. */
+.drive-knapp { display: none; }
+html.js .filval > .drive-knapp { display: inline-flex; }
 .filval svg { flex: none; }
 .filval.liten { font-size: 0.8rem; }
 .filval.liten > a, .filval.liten > button { min-height: 2rem; padding: 0 0.55rem; }
@@ -628,6 +631,8 @@ html.js .bara-js { display: inline-block; }
   .sidhuvud nav::-webkit-scrollbar { display: none; }
   .sidhuvud nav a { flex: none; white-space: nowrap; padding: 0.5em 0.35em; min-height: 2.75rem; display: inline-flex; align-items: center; }
   .faktaruta dl { grid-template-columns: 1fr; }
+  /* Filvalets knappar får full träffyta på pekskärm. */
+  .filval > a, .filval > button, .filval.liten > a, .filval.liten > button { min-height: 2.75rem; padding: 0 0.8rem; }
   .artikel .ingress { font-size: 1.15rem; }
   .brod { font-size: 1.0625rem; line-height: 1.7; }
   .hero { grid-template-columns: 1fr; gap: 1rem; }

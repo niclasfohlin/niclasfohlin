@@ -5,8 +5,10 @@
 // [id]-lathund.docx.ts; lathundens pdf ligger i public/stodundervisning/ (scripts/lathund-pdf.mjs).
 // Varje fil erbjuds med samma val (Word, Drive, pdf) genom Filval.astro.
 import Filval from './Filval.astro';
+import { site } from '../data/site';
 interface Props { id: string; harMallar: boolean; harLathund: boolean }
 const { id, harMallar, harLathund } = Astro.props;
+const drive = Boolean(site.driveKlientId);
 const delar = ['metodbeskrivningen', harMallar && 'planeringsmallarna', harLathund && 'lathunden'].filter(Boolean) as string[];
 const delarText = delar.length > 1 ? `${delar.slice(0, -1).join(', ')} och ${delar[delar.length - 1]}` : delar[0];
 const bas = `/stodundervisning/${id}`;
@@ -23,7 +25,7 @@ const bas = `/stodundervisning/${id}`;
     {harLathund && <li><span class="filrubrik">Bara lathunden</span> <Filval fil={`${bas}-lathund`} namn={`${id}-lathund`} rubrik="Lathunden" pdf /></li>}
     {harMallar && <li><span class="filrubrik">Bara planeringsmallarna</span> <Filval fil={`${bas}-mallar`} namn={`${id}-mallar`} rubrik="Planeringsmallarna" /></li>}
   </ul>
-  <p class="meta">Allt om metoden: {delarText}. Alla filer bär © Niclas Fohlin. Drive sparar i din egen Google Drive, där filen öppnas i Google Dokument.</p>
+  <p class="meta">Allt om metoden: {delarText}. Alla filer bär © Niclas Fohlin.{drive && ' Drive sparar en Word-kopia i din egen Google Drive.'}</p>
 </aside>
 
 <script>
