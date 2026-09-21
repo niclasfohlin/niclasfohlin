@@ -291,8 +291,20 @@ html.js .samla {
 .nedladdning-lista { list-style: none; padding: 0; margin: 0 0 0.75rem; display: flex; flex-wrap: wrap; gap: 0.6rem; }
 .nedladdning .skriv-ut { display: none; }
 html.js .nedladdning .skriv-ut { display: block; }
-.nedladdning-rad { font-size: 0.95rem; margin: 0 0 0.75rem; }
-.nedladdning-rad a, .nedladdning-rad button.lank { color: var(--farg-accent); text-decoration-color: currentColor; }
+/* Filraderna: vad filen innehåller, sedan valet Word, Drive, pdf som en grupp små knappar. */
+.filrader { list-style: none; margin: 0 0 0.75rem; padding: 0; display: flex; flex-direction: column; gap: 0.45rem; }
+.filrader li { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.75rem; }
+.filrubrik { min-width: 11.5rem; }
+.filval { display: inline-flex; border: 1px solid var(--farg-kant); border-radius: 6px; overflow: hidden; background: var(--farg-yta); font-family: var(--typsnitt-ui); font-size: 0.85rem; line-height: 1; vertical-align: middle; }
+.filval > a, .filval > button { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.25rem; padding: 0 0.7rem; color: var(--farg-accent); font: inherit; font-weight: 600; text-decoration: none; background: none; border: 0; border-left: 1px solid var(--farg-kant); cursor: pointer; }
+.filval > :first-child { border-left: 0; }
+.filval > a:hover, .filval > button:hover { background: var(--farg-accent-ljus); color: var(--farg-accent-mork); }
+.filval > button[disabled] { color: var(--farg-text-svag); cursor: default; }
+.filval svg { flex: none; }
+.filval.liten { font-size: 0.8rem; }
+.filval.liten > a, .filval.liten > button { min-height: 2rem; padding: 0 0.55rem; }
+.drive-status { display: inline-block; font-family: var(--typsnitt-ui); font-size: 0.85rem; color: var(--farg-text-svag); margin-left: 0.5rem; }
+.drive-status a { color: var(--farg-accent); }
 /* Länkrad: länkar med luft emellan, inga skiljetecken som kan hamna först på en rad. */
 .lankrad-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; }
 .sidfot .lankrad-lista { margin: 0 0 0.5em; }

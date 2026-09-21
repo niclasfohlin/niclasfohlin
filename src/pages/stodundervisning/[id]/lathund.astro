@@ -1,6 +1,7 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import Lathund from '../../../components/Lathund.astro';
+import Filval from '../../../components/Filval.astro';
 import { publicerade } from '../../../lib/innehall';
 import { datumText, metodAdress, UPPHOV } from '../../../lib/metod';
 import { site } from '../../../data/site';
@@ -24,7 +25,7 @@ const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathu
       <p class="ingress">Fyra sidor att ha bredvid sig: metoden i korthet, ett pass steg för steg, mallen och vad du behöver. Skriv ut i liggande A4 eller ladda ner som Word-fil.</p>
       <p class="lathund-knappar">
         <span class="bara-js"><button type="button" class="knapp" data-skriv-ut>Skriv ut lathunden (fyra sidor)</button></span>
-        {' '}<a class="knapp sekundar" href={`/stodundervisning/${m.id}-lathund.docx`} download={`${m.id}-lathund.docx`}>Word-fil</a>
+        {' '}<Filval fil={`/stodundervisning/${m.id}-lathund`} namn={`${m.id}-lathund`} rubrik="Lathunden" pdf />
       </p>
       <nav class="metod-nav lathund-nav" aria-label="Lathundens sidor">
         <span class="nav-etikett" aria-hidden="true">Lathundens sidor</span>

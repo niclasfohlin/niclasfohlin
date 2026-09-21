@@ -80,6 +80,10 @@ Kontot är niclas.fohlin@gmail.com på gratisplanen (300 mejl per dag). IP-begr�
 
 Kommandon: `node scripts/brevo.mjs status`, `doman`, `autentisera`, `kampanjer [antal]`, `anrop <METOD> <sökväg> [json]`. API-dokumentationen: https://developers.brevo.com/reference. Ändra aldrig avsändare eller mall utan att skriva in det nya läget här.
 
+## Google Drive-knappen
+
+Vid varje Word-fil finns valet Word, Drive och för lathunden pdf (`src/components/Filval.astro`). Drive-knappen sparar filen i läsarens egen Google Drive genom Googles Drive-API med behörigheten `drive.file` (bara filer sajten själv skapar), helt i webbläsaren (`src/scripts/drive.ts`); Googles skript laddas först när någon trycker. Den kräver ett OAuth-klient-id för webb från ett Google Cloud-projekt som Niclas äger: konsentskärm av typen extern med appnamnet niclasfohlin.se, behörigheten drive.file (icke känslig, ingen granskning av Google), publicerad, och en klient med tillåtna JavaScript-ursprung `https://niclasfohlin.se` och `http://localhost:4321` till `4326`. Klient-id:t är ingen hemlighet och står i `src/data/site.ts` som `driveKlientId`; tomt betyder att knapparna inte visas. Steget för Niclas står i INSTRUKTIONER.docx.
+
 ## Loopia och domänen
 
 niclasfohlin.se är registrerad hos Loopia till 2027-09-19, DNS hos Loopia (ns1 och ns2.loopia.se, zonen är DNSSEC-signerad). LoopiaAPI hanterar bara domäner och DNS; e-postalias skapas av Niclas i Loopia Kundzon (steget står i INSTRUKTIONER.docx när det behövs).

@@ -15,6 +15,9 @@ export const site = {
     { text: 'Stödundervisning', href: '/stodundervisning' },
     { text: 'Om', href: '/om' },
   ],
+  // OAuth-klient-id (webb) från Niclas Google Cloud-projekt, för knappen "Spara i Drive" vid
+  // Word-filerna. Ingen hemlighet: det står i sidans kod. Tomt: knapparna visas inte. Se DRIFT.md.
+  driveKlientId: '',
   omraden: ['Matematik', 'Läsning', 'Skrivning'] as const,
   arskurser: ['F-3', '4-6', '7-9'] as const,
 };

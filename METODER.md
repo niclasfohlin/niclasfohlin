@@ -60,9 +60,10 @@ Texten i posten är Niclas egen ur underlaget, ordagrant. De enda avsiktliga än
 3. Taggar ur registret: `npm run taggar`. Ny tagg bara när ingen täcker, i samma commit.
 4. `npm run validera` tills bygget går igenom.
 5. `node scripts/metodprov.mjs <slug> --underlag <mapp>/kompendium.md --bilder`: sidan, Word-filerna, upphovet i varje sidfot, underlagets meningar, lathundens fyra sidor, och skärmbilder till `underlag/prov/<slug>/`. Titta på bilderna och öppna docx-filen i Word.
-6. `node scripts/metodgranskning.mjs <slug> --underlag <mapp>/kompendium.md`: Codex granskar paritet och design (nedan) och skriver till `underlag/prov/<slug>/granskning-<datum>.md`. Adjudicera svaret: P1 lagas nu, P2 lagas eller läggs i kön, P3 och innehållsförslag skrivs som beslut till Niclas.
-7. Commit "Metod: <titel>" på `innehall/<slug>` eller passets gren. Push när passet är klart, en gång; pushen mejlar prenumeranterna.
-8. Visa Niclas metadata, passrutinen och ändringarna i hans text.
+6. `node scripts/lathund-pdf.mjs <slug>`: lathunden som pdf, liggande fyra sidor, till `public/stodundervisning/<slug>-lathund.pdf`. Filen committas med metoden; `npm run validera` stannar om den saknas eller är äldre än YAML-filen. Word, Drive och pdf erbjuds automatiskt vid varje fil genom `src/components/Filval.astro`.
+7. `node scripts/metodgranskning.mjs <slug> --underlag <mapp>/kompendium.md`: Codex granskar paritet och design (nedan) och skriver till `underlag/prov/<slug>/granskning-<datum>.md`. Adjudicera svaret: P1 lagas nu, P2 lagas eller läggs i kön, P3 och innehållsförslag skrivs som beslut till Niclas.
+8. Commit "Metod: <titel>" på `innehall/<slug>` eller passets gren, med pdf-filen. Push när passet är klart, en gång; pushen mejlar prenumeranterna.
+9. Visa Niclas metadata, passrutinen och ändringarna i hans text.
 
 ## Codex-granskningen
 

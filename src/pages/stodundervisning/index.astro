@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Taggar from '../../components/Taggar.astro';
+import Filval from '../../components/Filval.astro';
 import { site } from '../../data/site';
 import { metoderSorterade, taggLabel } from '../../lib/innehall';
 import { arskursSpann, harLathund, harMallar } from '../../lib/metod';
@@ -60,7 +61,7 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
               <Taggar taggar={m.data.taggar} nivaer={m.data.arskurs} />
               <p class="kort-rad">
                 {harLathund(m.data) && <a class="lathund-lank" href={`/stodundervisning/${m.id}/lathund`}>Lathund<span class="visually-hidden">: {m.data.titel}</span></a>}
-                <a href={`/stodundervisning/${m.id}.docx`} download={`${m.id}.docx`}>Allt som Word-fil<span class="visually-hidden">: {m.data.titel}</span></a>
+                <Filval fil={`/stodundervisning/${m.id}`} namn={m.id} rubrik={`Allt om ${m.data.titel}`} liten />
                 <label class="valj"><input type="checkbox" name="valda" value={m.id} /> Välj<span class="visually-hidden"> {m.data.titel}</span></label>
               </p>
             </article>
@@ -76,6 +77,7 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
       <label class="samla-mallar"><input type="checkbox" name="mallar" checked /> Med mallar och lathundar</label>
       <span class="samla-knappar">
         <button type="submit" class="knapp" disabled>Ladda ner valda (docx)</button>
+        {site.driveKlientId && <button type="button" class="knapp sekundar" data-drive-valda disabled>Spara valda i Drive</button>}
         <button type="button" class="knapp sekundar" data-rensa hidden>Rensa</button>
       </span>
       <p class="meta" data-status role="status" aria-live="polite"></p>
@@ -84,7 +86,7 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
   )}
   <div class="tryck-fot" aria-hidden="true">© Niclas Fohlin · niclasfohlin.se/stodundervisning</div>
   {metoder.length > 0 && (
-    <p class="meta samla-alla"><a href="/stodundervisning/alla-metoder.docx" download="alla-metoder.docx">Ladda ner allt om alla metoder i en Word-fil</a></p>
+    <p class="meta samla-alla">Allt om alla metoder i en fil: <Filval fil="/stodundervisning/alla-metoder" namn="alla-metoder" rubrik="Alla metoder" liten /></p>
   )}
 </Base>
 
@@ -177,13 +179,22 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
     rensa.addEventListener('click', () => { for (const b of boxar) b.checked = false; visaStatus(''); uppdatera(); spara(); });
     uppdatera();
 
-    samla.addEventListener('submit', async (h) => {
-      h.preventDefault();
+    // Samma fil kan laddas ner eller sparas i läsarens Google Drive (knappen finns bara med klient-id).
+    const driveKnapp = samla.querySelector<HTMLButtonElement>('[data-drive-valda]');
+    const uppdateraDrive = () => { if (driveKnapp) driveKnapp.disabled = knapp.disabled; };
+    samla.addEventListener('submit', (h) => { h.preventDefault(); void bygg('ladda'); });
+    driveKnapp?.addEventListener('click', () => void bygg('drive'));
+    boxar.forEach((b) => b.addEventListener('change', uppdateraDrive));
+    rensa.addEventListener('click', uppdateraDrive);
+    uppdateraDrive();
+
+    async function bygg(mal: 'ladda' | 'drive') {
       const ids = boxar.filter((b) => b.checked).map((b) => b.value);
       const medMallarVal = medMallar.checked;
       if (ids.length === 0 || bygger) return;
       bygger = true;
       knapp.disabled = true;
+      uppdateraDrive();
       visaStatus('Bygger filen.');
       try {
         const svar = await fetch('/stodundervisning/metoder.json');
@@ -194,14 +205,21 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
         const [{ metodDokument }, { Packer }] = await Promise.all([import('../../lib/metoddocx'), import('docx')]);
         const dokument = metodDokument(poster as Parameters<typeof metodDokument>[0], { bas, medMallar: medMallarVal });
         const blob = await Packer.toBlob(dokument);
-        const lank = document.createElement('a');
-        lank.href = URL.createObjectURL(blob);
-        lank.download = poster.length === 1 ? `${poster[0].id}${medMallarVal ? '' : '-beskrivning'}.docx` : `metoder-niclasfohlin-se${medMallarVal ? '' : '-beskrivningar'}.docx`;
-        document.body.appendChild(lank);
-        lank.click();
-        lank.remove();
-        setTimeout(() => URL.revokeObjectURL(lank.href), 60000);
-        visaStatus(poster.length === 1 ? 'Filen är nedladdad.' : `Filen med ${poster.length} metoder är nedladdad.`, true);
+        const filnamn = poster.length === 1 ? `${poster[0].id}${medMallarVal ? '' : '-beskrivning'}.docx` : `metoder-niclasfohlin-se${medMallarVal ? '' : '-beskrivningar'}.docx`;
+        if (mal === 'drive') {
+          const { sparaIDrive } = await import('../../scripts/drive');
+          window.clearTimeout(statusTimer);
+          await sparaIDrive(blob, filnamn, status);
+        } else {
+          const lank = document.createElement('a');
+          lank.href = URL.createObjectURL(blob);
+          lank.download = filnamn;
+          document.body.appendChild(lank);
+          lank.click();
+          lank.remove();
+          setTimeout(() => URL.revokeObjectURL(lank.href), 60000);
+          visaStatus(poster.length === 1 ? 'Filen är nedladdad.' : `Filen med ${poster.length} metoder är nedladdad.`, true);
+        }
       } catch (fel) {
         // Felet ligger kvar tills läsaren rensar urvalet eller lyckas.
         visaStatus(`Det gick inte att bygga filen. Ladda om sidan och försök igen, eller ladda ner <a href="/stodundervisning/alla-metoder.docx" download="alla-metoder.docx">alla metoder som en fil</a>.`);
@@ -209,7 +227,8 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
       } finally {
         bygger = false;
         uppdatera();
+        uppdateraDrive();
       }
-    });
+    }
   }
 </script>
