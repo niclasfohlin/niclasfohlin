@@ -103,8 +103,19 @@ if (bilder) {
     mkdirSync(mapp, { recursive: true });
     const port = 4323;
     const server = spawn('npx', ['astro', 'preview', '--port', String(port)], { cwd: rot, shell: true, stdio: 'ignore' });
-    await new Promise((r) => setTimeout(r, 5000));
     const url = `http://localhost:${port}/stodundervisning/${id}`;
+    // Vänta tills servern svarar på riktigt; en fast väntetid gav felsidor som skärmbilder.
+    let svarar = false;
+    for (let i = 0; i < 60 && !svarar; i++) {
+      await new Promise((r) => setTimeout(r, 1000));
+      svarar = await fetch(url, { redirect: 'manual' }).then((r) => r.ok).catch(() => false);
+    }
+    if (!svarar) {
+      nej(`förhandsservern svarade inte på ${url} inom 60 sekunder, inga skärmbilder`);
+      try { execFileSync('taskkill', ['/F', '/T', '/PID', String(server.pid)], { stdio: 'ignore' }); } catch { server.kill(); }
+      console.log(fel.length ? `\n${fel.length} fel.` : '\nAllt ok.');
+      process.exit(1);
+    }
     // Skärmbilderna tas med scripts/skarmbild.mjs, som emulerar en riktig mobil; headless Chrome
     // har en minsta fönsterbredd och ger annars en beskuren bredare sida. Utskriften tas direkt.
     const bild = (adress, fil, extra = []) => execFileSync(process.execPath, [join(rot, 'scripts/skarmbild.mjs'), adress, join(mapp, fil), ...extra], { stdio: 'ignore', timeout: 90000 });

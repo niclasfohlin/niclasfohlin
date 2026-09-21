@@ -14,7 +14,9 @@ Arbete som inte är ett direkt svar på Niclas går genom kön: `node scripts/ko
 | Fil | Vad den svarar på |
 |---|---|
 | KONCEPT.md | Vad sajten ska bli och varför |
-| UPPSTART.md | Hur drift, konton och behörigheter sätts upp och vem som gör vad |
+| DRIFT.md | Plattformarna: vad som finns hos GitHub, Netlify, Brevo och Loopia, var inloggningarna ligger, kommandon som fungerar, vad man gör när något är rött |
+| METODER.md | Hur en metod tas emot och görs om: modellen, mappningen från kompendium till YAML, lathunden, textreglerna, kontrollerna, Codex-granskningen |
+| UPPSTART.md | Hur drift, konton och behörigheter sattes upp från början |
 | KO.md | Kön. `node scripts/ko.mjs lista` visar den, `/natt` arbetar igenom den |
 | underlag/texter/ | Alla kända texter av Niclas i fulltext med register. `npm run texter` visar vilka som saknar post |
 | src/data/taggar.json | Alla tillåtna taggar med alias |
@@ -49,7 +51,7 @@ Tagg-id skrivs med a-z, 0-9 och bindestreck. Läsaren ser label.
 
 ## Prenumeration och utskick
 
-Formuläret på /prenumerera anropar `netlify/functions/prenumerera.mjs`, som lägger till kontakten i Brevo med dubbel opt-in. Utan miljövariabler svarar funktionen 503 och hänvisar till RSS. Miljövariablerna sätter du i Netlify med `netlify env:set`. Hemligheter ligger aldrig i git; var de förvaras står i ARBETSSATT.md.
+Formuläret på /prenumerera anropar `netlify/functions/prenumerera.mjs`, som lägger till kontakten i Brevo med dubbel opt-in. Utan miljövariabler svarar funktionen 503 och hänvisar till RSS. Miljövariablerna sätter du i Netlify med `netlify env:set`. Hemligheter ligger aldrig i git; var de förvaras står i DRIFT.md, liksom läget i Brevo (avsändaren är nyhetsbrev@niclasfohlin.se med svar till Niclas Gmail).
 
 Varje ny artikel, metod och bok mejlas prenumeranterna automatiskt: byggpluginen `netlify/plugins/utskick` körs efter varje lyckad produktionsdeploy, läser `nytt.json` ur bygget, jämför med det som redan mejlats (Netlify Blobs, lagret `utskick`) och skickar en Brevo-kampanj om det nya. Publicera därför bara det som är klart att mejlas; `utkast: true` hålls utanför.
 
@@ -66,7 +68,7 @@ Varje ny artikel, metod och bok mejlas prenumeranterna automatiskt: byggpluginen
 
 ## Mandat
 
-Niclas gav 2026-09-19 Claude Code fullt mandat att sköta sajten och tjänsterna runt den: GitHub, Netlify, Brevo, domänen och koden. Du slår ihop till main, pushar, deployar, sätter miljövariabler, lägger till taggar och publikationer och löser driftproblem utan att fråga, så länge `npm run validera` är grönt. Beslut Niclas ska känna till skrivs i NATTEN.md eller i svaret, efteråt. Verktygen och var inloggningarna ligger står i ARBETSSATT.md under Drift.
+Niclas gav 2026-09-19 Claude Code fullt mandat att sköta sajten och tjänsterna runt den: GitHub, Netlify, Brevo, domänen och koden. Du slår ihop till main, pushar, deployar, sätter miljövariabler, lägger till taggar och publikationer och löser driftproblem utan att fråga, så länge `npm run validera` är grönt. Beslut Niclas ska känna till skrivs i NATTEN.md eller i svaret, efteråt. Verktygen, var inloggningarna ligger och anropen som fungerar står i DRIFT.md.
 
 ## Det här gör bara Niclas
 

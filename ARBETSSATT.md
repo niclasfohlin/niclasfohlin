@@ -8,7 +8,7 @@ Main är det som ligger ute. Allt arbete sker på en gren: `innehall/<slug>` fö
 
 Före varje commit: `npm run validera`. Det kör registerkontrollen, `astro check` och `astro build`. Går det inte igenom committas inget.
 
-När arbetet är klart och `npm run validera` är grönt slår du själv ihop grenen till main och pushar. Netlify bygger och deployar varje push till main, och varje bygge drar krediter från gratisplanens månadspott (300 krediter; 75 procent var förbrukade 2026-09-20 efter kvällens många byggen). Därför: samla arbetet och pusha main högst en gång per arbetspass eller nattkörning, aldrig ett bygge per post. Testa lokalt med `npm run validera`, `npm run dev` och `netlify functions:serve`; starta aldrig byggen på Netlify för att testa. Kontrollera att bygget blev grönt (`netlify api listSiteDeploys --data '{"site_id":"<id>"}'` visar det senaste) och beskriv sedan för Niclas vad som gjorts och var det syns. Blev bygget rött: laga eller backa, och skriv vad som hände.
+När arbetet är klart och `npm run validera` är grönt slår du själv ihop grenen till main och pushar. Netlify bygger och deployar varje push till main, och varje bygge drar krediter från månadspotten (1000 sedan 2026-09-20, omkring 15 per bygge). Därför: samla arbetet och pusha main högst en gång per arbetspass eller nattkörning, aldrig ett bygge per post. Rör pushen bara skript, dokumentation eller kön: skriv `[skip netlify]` sist i commit-meddelandet, så byggs inget. Testa lokalt med `npm run validera`, `npm run dev` och `netlify functions:serve`; starta aldrig byggen på Netlify för att testa. Kontrollera att bygget blev grönt (`netlify api listSiteDeploys --data '{"site_id":"<id>"}'` visar det senaste) och beskriv sedan för Niclas vad som gjorts och var det syns. Blev bygget rött: laga eller backa, och skriv vad som hände.
 
 ## Innan du börjar en uppgift
 
@@ -36,11 +36,7 @@ Astro 7 är strikt med HTML. Stäng alla taggar. Lägg inte block-element i `<p>
 
 ## Drift
 
-Claude Code sköter driften direkt från riggen. Verktygen ligger i `%APPDATA%\npm`: `netlify` (Netlify CLI) och `gh` (GitHub CLI, installerad utan administratörsrättigheter i `%LOCALAPPDATA%\Programs\gh` och kopierad dit). Netlify nås med `netlify`, GitHub med `gh`, Brevo med API-nyckeln i Netlifys miljövariabler, och domänens DNS hos Loopia med `python scripts/loopia.py` (LoopiaAPI; API-användaren ligger som `LOOPIA_USER` och `LOOPIA_PASSWORD` i `.claude/settings.local.json`).
-
-Sajten heter niclasfohlin på Netlify (id 8af49398-3862-4b58-84a6-88f68d0064c1, team niclas-fohlin) och bygger main i repot github.com/niclasfohlin/niclasfohlin via deploy key och webhook. Domänen niclasfohlin.se pekar med A-post på Netlifys lastbalanserare och www med CNAME på niclasfohlin.netlify.app, båda satta i Loopias DNS. Miljövariabeln `NETLIFY_AUTH_TOKEN` ska inte vara satt i skalet: den skuggar CLI:ts sparade inloggning.
-
-Inloggningarna ligger utanför repot: Netlify CLI i `%APPDATA%\netlify\Config\config.json` (efter `netlify login`) eller som miljövariabeln `NETLIFY_AUTH_TOKEN` på användarens konto, GitHub CLI i `%APPDATA%\GitHub CLI\hosts.yml` (efter `gh auth login`). Hemligheter ligger aldrig i git: `.env`, `.claude/settings.local.json` och `.netlify/` ignoreras, och produktionens värden sätts med `netlify env:set` och läses av `netlify dev`.
+Claude Code sköter driften direkt från riggen: GitHub med `gh`, Netlify med `netlify`, Brevo med `node scripts/brevo.mjs`, DNS hos Loopia med `python scripts/loopia.py`. Vad som finns hos varje tjänst, var inloggningarna ligger, vilka kommandon som fungerar och vad man gör när något är rött står i DRIFT.md. Hemligheter ligger aldrig i git och skrivs aldrig ut; `NETLIFY_AUTH_TOKEN` ska inte vara satt i skalet.
 
 En inloggning som kräver webbläsaren (`gh auth login`, `netlify login`) startas i bakgrunden så att koden som ska klistras in syns i utdatan, och Niclas gör klickandet enligt INSTRUKTIONER.docx. Fastnar ett steg på att en människa måste göra det: skriv steget i INSTRUKTIONER.docx och NATTEN.md och gå vidare med nästa sak.
 
@@ -54,17 +50,7 @@ Alla kända texter av Niclas ligger i `underlag/texter/`, ett blad per text med 
 
 ## Metoder ur underlag
 
-Niclas lämnar metoder till stödundervisning som kompendier (docx och pdf) med en fast modell, och kommandot `/ny-metod` gör en post av dem. Så här går det fortast:
-
-| Steg | Gör | Verktyg |
-|---|---|---|
-| Läs | Docx till markdown, pdf-sidorna för designen, en metod i taget | `pandoc`, Read |
-| Skriv | Metoden som JavaScript-objekt i `underlag/metoder/<slug>.mjs`, sedan YAML | `node scripts/metod-yaml.mjs underlag/metoder/<slug>.mjs` |
-| Validera | Strikt schema: felstavade fält, fel cellantal och okända taggar stoppar bygget | `npm run validera` |
-| Prova | Sidan, Word-filerna, upphovet, underlagets meningar, skärmbilder på desktop, mobil och utskrift | `node scripts/metodprov.mjs <slug> --underlag <md> --bilder` |
-| Granska | Bilderna i `underlag/prov/<slug>/`, docx-filen i Word, Lighthouse på sidan om koden ändrats | Chrome headless, `npx lighthouse` |
-
-Modellen ändras i `src/content.config.ts`, sidan i `src/components/Metod.astro`, Word-filen i `src/lib/metoddocx.ts`, utskriften under `@media print` i `src/styles/global.css`. En ny del i modellen läggs till på alla tre ställen och i `_mall.yaml`. Texten i posterna är Niclas egen; de enda avsiktliga ändringarna är lagernivå bort, årskurs 4–9, kolon i stället för tankstreck i rubriker och "jag" i checklistorna.
+Niclas lämnar metoder till stödundervisning som kompendier (docx och pdf) med en fast modell och lathundar (pptx, pdf). Hur en metod tas emot, görs om till YAML, provas, granskas av Codex och läggs in står i METODER.md, med de tre befintliga metoderna som förebild; det körbara flödet är `/ny-metod`. Underlagen ligger i `underlag/metoder/`, som git ignorerar eftersom repot är publikt.
 
 ## När du fastnar
 

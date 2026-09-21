@@ -2,6 +2,8 @@
 
 Målet: koden ligger på GitHub, Netlify bygger varje push till main, niclasfohlin.se pekar på Netlify, och Claude Code har rätt behörigheter för att sköta resten. Kommandot `/uppstart` i Claude Code går igenom det här dokumentet steg för steg, kontrollerar nuläget och säger vad Niclas ska göra när ett steg kräver inloggning eller ett klick i webbläsaren.
 
+Det här dokumentet beskriver hur uppsättningen gjordes. Dagens läge hos varje tjänst, kommandon som fungerar och var inloggningarna ligger står i DRIFT.md.
+
 ## Vem gör vad
 
 | Steg | Niclas | Claude Code |
