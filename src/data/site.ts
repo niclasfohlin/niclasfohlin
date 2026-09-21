@@ -17,7 +17,7 @@ export const site = {
   ],
   // OAuth-klient-id (webb) från Niclas Google Cloud-projekt, för knappen "Spara i Drive" vid
   // Word-filerna. Ingen hemlighet: det står i sidans kod. Tomt: knapparna visas inte. Se DRIFT.md.
-  driveKlientId: '',
+  driveKlientId: '656779914599-bf50fg8iddnhqcb8gaa0co2dd3h8ou1k.apps.googleusercontent.com',
   omraden: ['Matematik', 'Läsning', 'Skrivning'] as const,
   arskurser: ['F-3', '4-6', '7-9'] as const,
 };
