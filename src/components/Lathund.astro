@@ -174,7 +174,8 @@ const citat = (f: string) => `”${f}”`;
           {d.checklista && (
             <div class="lh-ruta">
               <h3>{d.checklista.rubrik}</h3>
-              <ul class="lh-lista lh-bockar">{d.checklista.punkter.map((p) => <li><label><input type="checkbox" /> {p}</label></li>)}</ul>
+              <ul class="lh-lista lh-bockar" data-bockar>{d.checklista.punkter.map((p) => <li><label><input type="checkbox" /> {p}</label></li>)}</ul>
+              <p class="bara-js m-rensa"><button type="button" class="lank" data-rensa-bockar>Rensa kryssen</button></p>
             </div>
           )}
           {(d.uppfoljning || l.material.varjePass) && (
@@ -191,3 +192,8 @@ const citat = (f: string) => `”${f}”`;
     </section>
   </div>
 )}
+
+<script>
+  // Checklistans kryss minns sitt läge i webbläsaren (src/scripts/bockar.ts).
+  import '../scripts/bockar';
+</script>

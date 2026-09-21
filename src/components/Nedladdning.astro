@@ -17,7 +17,7 @@ const delarText = delar.length > 1 ? `${delar.slice(0, -1).join(', ')} och ${del
   <ul class="lankrad-lista nedladdning-rad">
     {harLathund && <li><a href={`/stodundervisning/${id}-lathund.docx`} download={`${id}-lathund.docx`}>Bara lathunden (docx)</a></li>}
     {harMallar && <li><a href={`/stodundervisning/${id}-mallar.docx`} download={`${id}-mallar.docx`}>Bara planeringsmallarna (docx)</a></li>}
-    <li class="bara-js"><button type="button" class="lank" data-skriv-ut>Skriv ut den här sidan</button></li>
+    <li class="bara-js"><button type="button" class="lank" data-skriv-ut>Skriv ut hela beskrivningen</button></li>
   </ul>
   <p class="meta">Allt om metoden: {delarText}. Alla filer bär © Niclas Fohlin.</p>
 </aside>

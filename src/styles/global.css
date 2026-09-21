@@ -183,7 +183,7 @@ h3 { font-size: 1.15rem; }
 
 /* Böcker: kort med omslag i listan, och boksidan med omslaget bredvid texten när det får plats. */
 .bokgrupp { margin-top: 2rem; }
-.bokgrupp .rutnat { grid-template-columns: repeat(auto-fit, minmax(21rem, 1fr)); }
+.bokgrupp .rutnat { grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr)); }
 .bok-kort { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1rem; align-items: start; }
 .bok-kort .bok-omslag img { display: block; width: 6.5rem; height: auto; border: 1px solid var(--farg-kant); border-radius: 4px; }
 .bok-kort h3 { font-size: 1.15rem; overflow-wrap: anywhere; hyphens: auto; }
@@ -244,7 +244,7 @@ form.prenumerera button:hover { background: var(--farg-accent-mork); }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .knapp.sekundar { background: var(--farg-yta); color: var(--farg-accent); border: 1.5px solid var(--farg-accent); cursor: pointer; font-size: 1rem; line-height: inherit; }
 .knapp.sekundar:hover { background: var(--farg-accent-ljus); color: var(--farg-accent-mork); }
-.knapp[disabled] { opacity: 0.5; cursor: default; }
+.knapp[disabled] { background: var(--farg-ton); color: var(--farg-text-svag); border: 1px solid var(--farg-kant); cursor: default; }
 
 /* Metodbanken: korten och raden för att ladda ner flera metoder i en fil. */
 .metodkort .undertitel { font-family: var(--typsnitt-ui); color: var(--farg-accent); font-size: 0.95rem; margin: 0 0 0.6em; }
@@ -309,18 +309,21 @@ button.lank:hover { color: var(--farg-accent); }
 .metod-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; }
 .metod-nav a { color: var(--farg-text); text-decoration: none; }
 .metod-nav a:hover { color: var(--farg-accent); }
-.metod-nav a.lathund-lank { font-weight: 700; color: var(--farg-accent); }
+.metod-nav a[aria-current="true"] { color: var(--farg-accent); font-weight: 600; }
+/* Länken till lathunden står för sig, före avsnittslistan: den lämnar sidan. */
+.metod-nav .lathund-lank { display: inline-block; font-weight: 700; color: var(--farg-accent); text-decoration: underline; text-underline-offset: 0.15em; margin: 0 0 0.75rem; }
 .metod-modell section { scroll-margin-top: 1.5rem; }
 .metod-modell { font-size: 1.0625rem; line-height: 1.65; }
 .metod-text { max-width: 46rem; min-width: 0; }
 @media (min-width: 64rem) {
   .metod-modell:has(> .metod-nav) { display: grid; grid-template-columns: 13rem minmax(0, 1fr); gap: 0 3rem; align-items: start; }
-  .metod-modell > .metod-nav { position: sticky; top: 1.25rem; margin: 0; }
+  /* Spalten följer med vid rullning men får aldrig bli högre än fönstret: då rullar den själv. */
+  .metod-modell > .metod-nav { position: sticky; top: 1.25rem; margin: 0; max-height: calc(100vh - 2.5rem); overflow-y: auto; }
   .metod-modell > .metod-nav ul { flex-direction: column; gap: 2px; }
-  .metod-modell > .metod-nav a { display: block; padding: 0.4rem 0.75rem; border-left: 3px solid transparent; color: var(--farg-text-svag); }
-  .metod-modell > .metod-nav a:hover { color: var(--farg-accent); background: var(--farg-ton-svag); }
-  .metod-modell > .metod-nav a[aria-current="true"] { border-left-color: var(--farg-accent); color: var(--farg-accent); font-weight: 600; background: var(--farg-ton); }
-  .metod-modell > .metod-nav a.lathund-lank { margin-bottom: 0.4rem; }
+  .metod-modell > .metod-nav ul a { display: block; padding: 0.4rem 0.75rem; border-left: 3px solid transparent; color: var(--farg-text-svag); }
+  .metod-modell > .metod-nav ul a:hover { color: var(--farg-accent); background: var(--farg-ton-svag); }
+  .metod-modell > .metod-nav ul a[aria-current="true"] { border-left-color: var(--farg-accent); color: var(--farg-accent); font-weight: 600; background: var(--farg-ton); }
+  .metod-modell > .metod-nav .lathund-lank { margin: 0 0 0.75rem 0.75rem; }
 }
 .metod-modell > p, .metod-modell section > p, .metod-text > p { margin: 0 0 1em; }
 .metod-modell h2 { font-family: var(--typsnitt-ui); font-size: 1.5rem; color: var(--farg-text); margin: 2em 0 0.5em; }
@@ -377,6 +380,7 @@ button.lank:hover { color: var(--farg-accent); }
 .m-bockar.tva li:nth-child(even) { background: none; border-left: 1px solid var(--farg-kant); }
 .m-bockar.tva li:nth-child(2) { border-top: 0; }
 .m-bockar.tva li:nth-child(4n+3), .m-bockar.tva li:nth-child(4n+4) { background: var(--farg-ton-svag); }
+.m-rensa { font-family: var(--typsnitt-ui); font-size: 0.85rem; color: var(--farg-text-svag); margin: -0.75rem 0 1.25rem; }
 .m-snabbmall th { font-weight: 700; }
 .m-snabbmall caption { caption-side: top; text-align: left; background: var(--farg-accent); color: #fff; font-weight: 700; padding: 0.55rem 0.7rem; border: 1px solid var(--farg-accent); }
 .m-snabbmall .avsnitt th { background: var(--farg-accent-ljus); color: var(--farg-accent); }
@@ -584,7 +588,7 @@ html.js .bara-js { display: inline-block; }
   .metod-modell h2 { font-size: 13pt; margin-top: 1.4em; break-after: avoid; }
   /* Rubrik och inledande stycke följer med det som kommer efter; snabbmallen hålls ihop. */
   .metod-modell h2 + p { break-after: avoid; }
-  .m-snabbmall { break-inside: avoid; }
+  .m-snabbmall, .m-trappa, .m-trappa li, #snabbmall, #grund { break-inside: avoid; }
   .m-tabell, .m-snabbmall, .m-bockar, .m-gor-undvik, .m-band, .m-ruta, .m-rutin, .m-grund, .m-motto { font-size: 9.5pt; }
   .m-tabell tr, .m-snabbmall tr, .m-bockar li, .m-gor-undvik, .m-band, .m-ruta, .m-rutin, .m-grund, .m-motto, .m-fraga { break-inside: avoid; }
   .m-tabell thead { display: table-header-group; }

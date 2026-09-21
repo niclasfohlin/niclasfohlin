@@ -23,7 +23,7 @@ const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathu
       <h1>Lathund: {d.titel}</h1>
       <p class="ingress">Fyra sidor att ha bredvid sig: metoden i korthet, ett pass steg för steg, mallen och vad du behöver. Skriv ut i liggande A4 eller ladda ner som Word-fil.</p>
       <p class="lathund-knappar">
-        <span class="bara-js"><button type="button" class="knapp" data-skriv-ut>Skriv ut</button></span>
+        <span class="bara-js"><button type="button" class="knapp" data-skriv-ut>Skriv ut lathunden (fyra sidor)</button></span>
         {' '}<a class="knapp sekundar" href={`/stodundervisning/${m.id}-lathund.docx`} download={`${m.id}-lathund.docx`}>Word-fil</a>
       </p>
       <nav class="metod-nav lathund-nav" aria-label="Lathundens sidor">
@@ -62,6 +62,11 @@ const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathu
   for (const knapp of document.querySelectorAll<HTMLButtonElement>('[data-skriv-ut]')) {
     knapp.addEventListener('click', () => window.print());
   }
+  // Tillbaka till metodbanken med samma filter som läsaren hade (sparas av listan i sessionStorage).
+  try {
+    const filter = sessionStorage.getItem('metodfilter');
+    if (filter) for (const a of document.querySelectorAll<HTMLAnchorElement>('a[href="/stodundervisning"]')) a.href = `/stodundervisning${filter}`;
+  } catch { /* utan lagring */ }
   // Bara mallen eller bara elevtexten: de andra delarna döljs under utskriften (body.tryck-bara-* i global.css).
   const skrivUtDel = (klass: string) => {
     document.body.classList.add(klass);

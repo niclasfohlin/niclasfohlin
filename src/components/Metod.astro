@@ -29,8 +29,9 @@ const avsnitt = [
 <div class="metod-modell">
   {avsnitt.length > 2 && (
     <nav class="metod-nav" aria-label="På den här sidan">
+      {d.lathund && <a class="lathund-lank" href={`/stodundervisning/${id}/lathund`}>Öppna lathunden</a>}
       <span class="nav-etikett" aria-hidden="true">På den här sidan</span>
-      <ul>{d.lathund && <li><a class="lathund-lank" href={`/stodundervisning/${id}/lathund`}>Lathund</a></li>}{avsnitt.map((a) => <li><a href={`#${a.id}`} data-avsnitt={a.id}>{a.namn}</a></li>)}</ul>
+      <ul>{avsnitt.map((a) => <li><a href={`#${a.id}`} data-avsnitt={a.id}>{a.namn}</a></li>)}</ul>
     </nav>
   )}
   <div class="metod-text">
@@ -173,7 +174,8 @@ const avsnitt = [
     <section id="mal">
       <h2>{d.mal.rubrik}</h2>
       <p>{d.mal.text}</p>
-      <ul class="m-bockar tva">{d.mal.punkter.map((p) => <li><label><input type="checkbox" /> {p}</label></li>)}</ul>
+      <ul class="m-bockar tva" data-bockar>{d.mal.punkter.map((p) => <li><label><input type="checkbox" /> {p}</label></li>)}</ul>
+      <p class="bara-js m-rensa"><button type="button" class="lank" data-rensa-bockar>Rensa kryssen</button></p>
     </section>
   )}
 
@@ -199,7 +201,8 @@ const avsnitt = [
   {d.checklista && (
     <section id="checklista">
       <h2>{d.checklista.rubrik}</h2>
-      <ul class="m-bockar">{d.checklista.punkter.map((p) => <li><label><input type="checkbox" /> {p}</label></li>)}</ul>
+      <ul class="m-bockar" data-bockar>{d.checklista.punkter.map((p) => <li><label><input type="checkbox" /> {p}</label></li>)}</ul>
+      <p class="bara-js m-rensa"><button type="button" class="lank" data-rensa-bockar>Rensa kryssen</button></p>
     </section>
   )}
 
@@ -214,6 +217,7 @@ const avsnitt = [
 </div>
 
 <script>
+  import '../scripts/bockar';
   // Sidnavigationen markerar det avsnitt som är i bild, så att läsaren ser var på sidan hen är.
   const lankar = [...document.querySelectorAll<HTMLAnchorElement>('.metod-nav a[data-avsnitt]')];
   if (lankar.length > 0 && 'IntersectionObserver' in window) {
