@@ -36,8 +36,10 @@ const pdfFor = (id) => join(pdfMapp, `${id}-lathund.pdf`);
 // Allt som påverkar hur lathunden ser ut: metodens text, komponenterna, stilen, typsnitten.
 const gemensamma = ['src/components/Lathund.astro', 'src/components/MetodTabell.astro', 'src/pages/stodundervisning/[id]/lathund.astro', 'src/lib/metod.ts', 'src/styles/global.css', 'src/layouts/Base.astro', 'public/fonts/public-sans-normal.woff2', 'public/fonts/public-sans-italic.woff2'];
 const hashAv = (delar) => { const h = createHash('sha256'); for (const d of delar) h.update(d); return h.digest('hex').slice(0, 16); };
-const gemensamHash = hashAv(gemensamma.map((f) => (existsSync(join(rot, f)) ? readFileSync(join(rot, f)) : Buffer.from(`saknas:${f}`))));
-const kallHash = (m) => hashAv([gemensamHash, readFileSync(m.fil)]);
+// Textfiler hashas med LF oavsett radslut: arbetskopian på Windows har CRLF, Netlifys utcheckning LF.
+const lasKalla = (f) => (/\.(woff2|pdf)$/.test(f) ? readFileSync(f) : Buffer.from(readFileSync(f, 'utf8').replace(/\r\n/g, '\n')));
+const gemensamHash = hashAv(gemensamma.map((f) => (existsSync(join(rot, f)) ? lasKalla(join(rot, f)) : Buffer.from(`saknas:${f}`))));
+const kallHash = (m) => hashAv([gemensamHash, lasKalla(m.fil)]);
 const filHash = (p) => hashAv([readFileSync(p)]);
 const lasManifest = () => { try { return JSON.parse(readFileSync(manifestFil, 'utf8')); } catch { return {}; } };
 
