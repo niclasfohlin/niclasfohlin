@@ -608,10 +608,13 @@ html.js .bara-js { display: inline-block; }
 
 @media screen and (max-width: 40rem) {
   body { font-size: 1rem; }
-  /* Sidhuvudet på smal skärm: namnet på en rad, de fyra länkarna på nästa utan att bryta. */
+  /* Sidhuvudet på smal skärm: namnet på en rad, de fyra länkarna på nästa, alltid på en enda rad.
+     Storleken följer skärmbredden (inte bara textstorleken i telefonen), och skulle raden ändå
+     inte rymmas rullar den i sidled i stället för att bryta. */
   .sidhuvud { gap: 0.35rem 1rem; padding-top: 0.7rem; padding-bottom: 0.7rem; }
-  .sidhuvud nav { width: 100%; gap: 0.15rem; font-size: 0.95rem; }
-  .sidhuvud nav a { padding: 0.4rem 0.55rem; }
+  .sidhuvud nav { width: 100%; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 0.1rem; margin: 0 -0.35rem; font-size: max(0.75rem, min(0.95rem, 3.7vw)); }
+  .sidhuvud nav::-webkit-scrollbar { display: none; }
+  .sidhuvud nav a { flex: none; white-space: nowrap; padding: 0.45em 0.6em; }
   .faktaruta dl { grid-template-columns: 1fr; }
   .artikel .ingress { font-size: 1.15rem; }
   .brod { font-size: 1.0625rem; line-height: 1.7; }
