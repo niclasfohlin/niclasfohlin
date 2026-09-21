@@ -612,9 +612,9 @@ html.js .bara-js { display: inline-block; }
      Storleken följer skärmbredden (inte bara textstorleken i telefonen), och skulle raden ändå
      inte rymmas rullar den i sidled i stället för att bryta. */
   .sidhuvud { gap: 0.35rem 1rem; padding-top: 0.7rem; padding-bottom: 0.7rem; }
-  .sidhuvud nav { width: 100%; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 0.1rem; margin: 0 -0.35rem; font-size: max(0.75rem, min(0.95rem, 3.7vw)); }
+  .sidhuvud nav { width: 100%; flex-wrap: nowrap; justify-content: space-between; overflow-x: auto; scrollbar-width: none; gap: 0; margin: 0 -0.35rem; font-size: max(0.85rem, min(1.1rem, 4.2vw)); }
   .sidhuvud nav::-webkit-scrollbar { display: none; }
-  .sidhuvud nav a { flex: none; white-space: nowrap; padding: 0.45em 0.6em; }
+  .sidhuvud nav a { flex: none; white-space: nowrap; padding: 0.5em 0.35em; min-height: 2.75rem; display: inline-flex; align-items: center; }
   .faktaruta dl { grid-template-columns: 1fr; }
   .artikel .ingress { font-size: 1.15rem; }
   .brod { font-size: 1.0625rem; line-height: 1.7; }
