@@ -102,7 +102,9 @@ if (bilder) {
     const mapp = join(rot, 'underlag/prov', id);
     mkdirSync(mapp, { recursive: true });
     const port = 4323;
-    const server = spawn('npx', ['astro', 'preview', '--port', String(port)], { cwd: rot, shell: true, stdio: 'ignore' });
+    // --ignore-lock: Astro 7 kör annars förhandsservern som en bakgrundsprocess med låsfil, och en
+    // kvarglömd sådan skulle stoppa vår från att starta.
+    const server = spawn('npx', ['astro', 'preview', '--port', String(port), '--ignore-lock'], { cwd: rot, shell: true, stdio: 'ignore' });
     const url = `http://localhost:${port}/stodundervisning/${id}`;
     // Vänta tills servern svarar på riktigt; en fast väntetid gav felsidor som skärmbilder.
     let svarar = false;

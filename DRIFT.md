@@ -14,12 +14,15 @@ Windows 11, Node 22.12, Git Bash som skal i Claude Code. Verktygen och var de li
 | `node scripts/brevo.mjs` | repot | Brevo: status, domän, kampanjer, valfritt anrop |
 | `pandoc` | sökvägen | docx och pptx till text |
 | Chrome headless | `C:\Program Files\Google\Chrome\Application\chrome.exe` | utskrift till pdf, Lighthouse |
-| `node scripts/skarmbild.mjs` | repot | skärmbilder via CDP med riktig mobilemulering |
+| `node scripts/skarmbild.mjs` | repot | en skärmbild via CDP med riktig mobilemulering |
+| `node scripts/skarmbilder.mjs` | repot | sajtens viktigaste sidor på desktop och mobil ur dist, till underlag/prov/sajt/ |
 | Word via COM (PowerShell) | Office | visuell kontroll av docx; ExportAsFixedFormat hänger på den här datorn |
 | `codex.exe` | `%LOCALAPPDATA%\Programs\OpenAI\Codex\bin` | second opinion, se Codex nedan |
 | `npx lighthouse` | npm | mätning mot `astro preview --port 4322` |
 
 npm-skripten: `dev`, `build`, `preview`, `check`, `validera` (register, astro check, build), `taggar`, `texter`, `ko`, `ko:prov`.
+
+Astro 7 kör `astro preview` som en bakgrundsprocess med låsfil: en andra `astro preview` startar inte utan avslutar tyst med hänvisning till den första, och `taskkill` på skalet dödar den inte. Skripten startar därför med `--ignore-lock` och stänger sin egen; en kvarglömd server syns med `npx astro preview status` och stoppas med `npx astro preview stop`.
 
 ## Hemligheter
 

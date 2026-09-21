@@ -79,6 +79,7 @@ En ny del läggs till på fem ställen i samma commit: schemat i `src/content.co
 | Bygget | `npm run validera` |
 | Sidan, Word-filerna, underlaget, lathundens sidantal | `node scripts/metodprov.mjs <slug> --underlag <md> --bilder` |
 | Mobil på riktigt | `node scripts/skarmbild.mjs <url> --mobil` (headless Chrome har en minsta fönsterbredd, `--window-size=390` ljuger) |
+| Hela sajten efter en stiländring | `node scripts/skarmbilder.mjs --hojd 2200`: åtta sidor på desktop och mobil till `underlag/prov/sajt/`, sedan Codex med prompten `scripts/codex/stilbyte-granskning.md` och bilderna bifogade |
 | Word-filen | `validate.py` i docx-skillen (kräver `pip install defusedxml lxml`), och Word via COM: öppna, PageFit, bläddra, skärmdump |
 | Mätning | `npx lighthouse http://localhost:4322/stodundervisning/<slug>` mot `astro preview --port 4322`; målet är 100 på alla fyra och CLS 0 |
 | Second opinion | `node scripts/metodgranskning.mjs <slug>` |

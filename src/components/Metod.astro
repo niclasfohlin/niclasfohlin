@@ -30,9 +30,10 @@ const avsnitt = [
   {avsnitt.length > 2 && (
     <nav class="metod-nav" aria-label="På den här sidan">
       <span class="nav-etikett" aria-hidden="true">På den här sidan</span>
-      <ul>{d.lathund && <li><a class="lathund-lank" href={`/stodundervisning/${id}/lathund`}>Lathund</a></li>}{avsnitt.map((a) => <li><a href={`#${a.id}`}>{a.namn}</a></li>)}</ul>
+      <ul>{d.lathund && <li><a class="lathund-lank" href={`/stodundervisning/${id}/lathund`}>Lathund</a></li>}{avsnitt.map((a) => <li><a href={`#${a.id}`} data-avsnitt={a.id}>{a.namn}</a></li>)}</ul>
     </nav>
   )}
+  <div class="metod-text">
   {d.inledning.map((s) => <p>{s}</p>)}
 
   {d.upplagg && <div class="m-ruta"><p><strong class="kicker">{d.upplagg.rubrik}</strong>{' '}{d.upplagg.text}</p></div>}
@@ -209,4 +210,31 @@ const avsnitt = [
       {d.grund.kallor && <p class="m-kallor">{d.grund.kallor}</p>}
     </section>
   )}
+  </div>
 </div>
+
+<script>
+  // Sidnavigationen markerar det avsnitt som är i bild, så att läsaren ser var på sidan hen är.
+  const lankar = [...document.querySelectorAll<HTMLAnchorElement>('.metod-nav a[data-avsnitt]')];
+  if (lankar.length > 0 && 'IntersectionObserver' in window) {
+    const synliga = new Set<string>();
+    const markera = () => {
+      const forst = lankar.find((a) => synliga.has(a.dataset.avsnitt ?? ''));
+      for (const a of lankar) {
+        if (a === forst) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      }
+    };
+    const obs = new IntersectionObserver((poster) => {
+      for (const p of poster) {
+        if (p.isIntersecting) synliga.add(p.target.id);
+        else synliga.delete(p.target.id);
+      }
+      markera();
+    }, { rootMargin: '-10% 0px -60% 0px' });
+    for (const a of lankar) {
+      const del = document.getElementById(a.dataset.avsnitt ?? '');
+      if (del) obs.observe(del);
+    }
+  }
+</script>

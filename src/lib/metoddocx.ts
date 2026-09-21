@@ -12,7 +12,7 @@ import { arbetsformRad, arskursSpann, datumText, lathundFakta, metaRad, metodAdr
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
 const FARG = {
-  huvud: '2F5D50', ljus: 'E8EEE9', rand: 'F3F6F4', kant: 'DEDDD7', text: '18221D', svag: '5A635E', vit: 'FFFFFF',
+  huvud: '1D4F91', ljus: 'E6EEF8', rand: 'F8FAFC', kant: 'E1E6EB', text: '14202B', svag: '4B5866', vit: 'FFFFFF',
   gron: '2E7D32', gronLjus: 'E8F5E9', varm: 'A8511B', varmLjus: 'FFF4E5',
 };
 const A4 = { width: 11906, height: 16838 };

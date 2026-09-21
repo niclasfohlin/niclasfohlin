@@ -20,15 +20,15 @@ const adress = metodAdress(site.url, m.id).replace(/^https?:\/\//, '');
 
 <Base title={d.titel} description={d.ingress} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
   <article class="metod">
-    <header class="metod-huvud">
-      <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · {d.omrade} · {arskursSpann(d.arskurs)}</p>
-      <h1>{d.titel}</h1>
-      {d.undertitel && <p class="undertitel">{d.undertitel}</p>}
-      <p class="ingress">{d.ingress}</p>
-    </header>
-
-    <div class="metod-sida">
+    <div class="metod-topp">
+      <header class="metod-huvud">
+        <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · {d.omrade} · {arskursSpann(d.arskurs)}</p>
+        <h1>{d.titel}</h1>
+        {d.undertitel && <p class="undertitel">{d.undertitel}</p>}
+        <p class="ingress">{d.ingress}</p>
+      </header>
       <div class="faktaruta">
+        <p class="faktaruta-etikett">I korthet</p>
         <dl>
           <dt>Område</dt><dd>{d.omrade}</dd>
           <dt>Årskurs</dt><dd>{arskursSpann(d.arskurs)}</dd>
