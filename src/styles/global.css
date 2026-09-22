@@ -22,6 +22,11 @@
   --farg-accent-ljus: #e6eef8;
   --farg-mork: #14202b;
   --farg-mork-text: #d5deea;
+  /* Ämnena i metodbanken: matematik i accenten, läsning grön, skrivning plommon. */
+  --farg-lasning: #1e6b45;
+  --farg-lasning-ljus: #e3f1e8;
+  --farg-skrivning: #6b2f6b;
+  --farg-skrivning-ljus: #f1e6f1;
 
   --typsnitt-brod: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --typsnitt-rubrik: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -246,8 +251,18 @@ form.prenumerera button:hover { background: var(--farg-accent-mork); }
 .knapp.sekundar:hover { background: var(--farg-accent-ljus); color: var(--farg-accent-mork); }
 .knapp[disabled] { background: var(--farg-ton); color: var(--farg-text-svag); border: 1px solid var(--farg-kant); cursor: default; }
 
-/* Metodbanken: korten och raden för att ladda ner flera metoder i en fil. */
-.metodkort .undertitel { font-family: var(--typsnitt-ui); color: var(--farg-accent); font-size: 0.95rem; margin: 0 0 0.6em; }
+/* Metodbanken: korten och raden för att ladda ner flera metoder i en fil.
+   Kortet: titel med ämnesmärke, faktaremsa (årskurs, grupp, pass, hur ofta), ingress, taggar, handlingar. */
+.metodkort .kort-topp { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; }
+.metodkort .kort-topp h3 { margin: 0; }
+.amne { flex: none; font-family: var(--typsnitt-ui); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.3rem 0.55rem; border-radius: 6px; margin-top: 0.15rem; background: var(--farg-accent-ljus); color: var(--farg-accent); }
+.amne[data-amne="Läsning"] { background: var(--farg-lasning-ljus); color: var(--farg-lasning); }
+.amne[data-amne="Skrivning"] { background: var(--farg-skrivning-ljus); color: var(--farg-skrivning); }
+.kort-fakta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem 1rem; margin: 0.75rem 0 0.9rem; padding: 0.7rem 0.9rem; background: var(--farg-ton); border-radius: 8px; font-family: var(--typsnitt-ui); font-size: 0.9rem; }
+.kort-fakta div { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; }
+.kort-fakta dt { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); }
+.kort-fakta dd { margin: 0; font-weight: 600; }
+.metodkort .ingress { margin: 0 0 0.75rem; }
 .metodkort .kort-rad { font-family: var(--typsnitt-ui); font-size: 0.9rem; margin: 0.5rem 0 0; display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; align-items: center; }
 .metodkort .valj { display: none; }
 html.js .metodkort .valj { margin-left: auto; display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 600; cursor: pointer; }

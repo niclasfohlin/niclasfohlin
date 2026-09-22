@@ -59,6 +59,18 @@ export function lathundFakta(d: MetodData): { rubrik: string; text: string }[] {
   ].filter((f) => f.text);
 }
 
+// Faktaremsan på metodkortet i metodbanken: årskurs, grupp, passlängd och hur ofta, ur samma
+// fält som lathundens faktarutor, så att kortet aldrig säger emot metoden.
+export function kortFakta(d: MetodData): { rubrik: string; text: string }[] {
+  const [passlangd, ...rest] = (d.tid ?? '').split(/ per pass,?\s*/);
+  return [
+    { rubrik: 'Årskurs', text: arskursSpann(d.arskurs).replace(/^åk\s*/, '') },
+    { rubrik: 'Grupp', text: d.grupp ?? '' },
+    { rubrik: 'Pass', text: versal(passlangd.trim()) },
+    { rubrik: 'Hur ofta', text: versal(rest.join(' ').trim()) },
+  ].filter((f) => f.text);
+}
+
 // Arbetsformen som en rad: "Gemensamt (läraren leder) → i par (eleverna prövar) → gemensamt igen (…)".
 export function arbetsformRad(d: MetodData): string {
   if (!d.arbetsform) return '';

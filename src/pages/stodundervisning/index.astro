@@ -4,7 +4,7 @@ import Taggar from '../../components/Taggar.astro';
 import Filval from '../../components/Filval.astro';
 import { site } from '../../data/site';
 import { metoderSorterade, taggLabel } from '../../lib/innehall';
-import { arskursSpann, harLathund, harMallar } from '../../lib/metod';
+import { harLathund, harMallar, kortFakta } from '../../lib/metod';
 const metoder = await metoderSorterade();
 // Bara taggar som någon metod använder, i bokstavsordning efter etiketten läsaren ser.
 const taggarIBruk = [...new Set(metoder.flatMap((m) => m.data.taggar))].sort((a, b) => taggLabel(a).localeCompare(taggLabel(b), 'sv'));
@@ -54,11 +54,15 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
         <div class="rutnat">
           {lista.map((m) => (
             <article class="kort metodkort" data-metod data-omrade={m.data.omrade} data-arskurs={m.data.arskurs.join(' ')} data-taggar={m.data.taggar.join(' ')}>
-              <p class="meta">{arskursSpann(m.data.arskurs)}{m.data.tid && ` · ${m.data.tid}`}{m.data.grupp && ` · ${m.data.grupp.toLowerCase()}`}</p>
-              <h3><a href={`/stodundervisning/${m.id}`}>{m.data.titel}</a></h3>
-              {m.data.undertitel && <p class="undertitel">{m.data.undertitel}</p>}
-              <p>{m.data.ingress}</p>
-              <Taggar taggar={m.data.taggar} nivaer={m.data.arskurs} />
+              <div class="kort-topp">
+                <h3><a href={`/stodundervisning/${m.id}`}>{m.data.titel}</a></h3>
+                <span class="amne" data-amne={m.data.omrade}>{m.data.omrade}</span>
+              </div>
+              <dl class="kort-fakta">
+                {kortFakta(m.data).map((f) => <div><dt>{f.rubrik}</dt><dd>{f.text}</dd></div>)}
+              </dl>
+              <p class="ingress">{m.data.ingress}</p>
+              <Taggar taggar={m.data.taggar} />
               <p class="kort-rad">
                 {harLathund(m.data) && <a class="lathund-lank" href={`/stodundervisning/${m.id}/lathund`}>Lathund<span class="visually-hidden">: {m.data.titel}</span></a>}
                 <Filval fil={`/stodundervisning/${m.id}`} namn={m.id} rubrik={`Allt om ${m.data.titel}`} liten />
