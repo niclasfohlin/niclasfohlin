@@ -589,7 +589,8 @@ html.js .bara-js { display: inline-block; }
   html.js .samla { grid-template-columns: auto 1fr; gap: 0.3rem 0.75rem; align-items: center; padding: 0.45rem 0.8rem 0.5rem; font-size: 0.85rem; bottom: 0.5rem; }
   .samla-antal { grid-column: 1 / -1; font-size: 0.85rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .samla-mallar { font-size: 0.85rem; }
-  .samla-mallar .samla-lang { display: none; }
+  /* Den långa etiketten döljs bara visuellt, så att kryssrutan behåller sitt namn för skärmläsare. */
+  .samla-mallar .samla-lang { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .samla-mallar .samla-kort { display: inline; }
   .samla-knappar { justify-self: end; gap: 0.6rem; }
   .samla .samla-hjalp { display: none; }
