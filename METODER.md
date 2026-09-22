@@ -22,11 +22,12 @@ Schemat i `src/content.config.ts` är strikt: ett okänt fält, en tabellrad med
 | Tidsschema | `tidsschema` (rader: tid, fas, vad) | tabell, `#tidsschema` |
 | "Vad du gör och säger", exempelfraser | `steg` (rader: namn, fraga, gor, fraser) | stegtabell med fraskolumn, `#steg`; fraserna skrivs utan citattecken |
 | Arbetsformens delar | `arbetsform` (delar: rubrik, text) | rutor i två spalter, `#arbetsform` |
-| Fria tabeller (frågetyper, textstrukturer) | `tabeller` (plats efter-steg eller efter-arbetsform) | rubriktabeller där de hör hemma |
+| Fria tabeller (frågetyper, textstrukturer, mappens innehåll) | `tabeller` (plats efter-inledning, efter-steg, efter-arbetsform eller efter-urval) | rubriktabeller där de hör hemma |
 | Exempel på ett pass | `exempel` (valt, text) | `#exempel` |
 | När gruppen fastnar | `fastnar` (fragaForst, trappa, efter, motto) | frågeruta, stödtrappa, motto, `#fastnar` |
 | Lärarens roll: gör och undvik | `roll` (gor, undvik) | två kolumner, `#roll` |
 | Var man hittar texter eller uppgifter, krav | `urval` (text, krav) | `#urval` |
+| Hem och skola: möte med vårdnadshavare, kontrakt, schema att fylla i | `hem` (text, kontrakt med inledning och ansvar, schema med kolumner och antal rader) | `#hem`; kontraktet och schemat som egna sidor i planeringsmallarna |
 | Progression | `progression` (enhet Vecka eller Pass; rader: vecka, fokus, roll) | tabell, `#progression` |
 | Uppföljning | `uppfoljning` (rader: nar, vad) | tabell, `#uppfoljning` |
 | Mål | `mal` (punkter) | kryssbar lista, `#mal`, målkollen i mallarna |

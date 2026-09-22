@@ -1,0 +1,404 @@
+# Metod i stödundervisning. Modellen står i src/content.config.ts och mallen i _mall.yaml.
+# Skriven av scripts/metod-yaml.mjs ur til-i-grupp.mjs. Ändra i YAML-filen eller kör om skriptet.
+titel: "TIL i grupp: tidig intensiv läsning"
+undertitel: Lärarledd intensiv lästräning i liten grupp med läsning hemma, för F–6
+ingress: Ett körschema för 20-minuterspass i liten grupp för elever som behöver stöd i avkodning och läsflyt. Varje elev läser en bok på sin nivå medan läraren lyssnar på en i taget, och samma dag läses boken en gång till hemma med en vuxen. Det är den dubbla läsningen som gör insatsen intensiv.
+omrade: Läsning
+arskurs:
+  - F-3
+  - 4-6
+taggar:
+  - avkodning
+  - lasflyt
+format:
+  - liten grupp
+  - enskilt
+tid: 20 minuter i skolan och 20 hemma per pass, fyra dagar i veckan
+period: Sex till tio veckor
+grupp: En till fyra elever
+material:
+  - En plastmapp per elev med skrivbok, lässchema och dagens text
+  - "Böcker på rätt nivå: nivåindelade serier för F–3, lättläst eller en kapitelbok för åk 3–6"
+  - Snabbmallen, och kontraktet påskrivet av hem och skola
+uppdaterad: 2026-09-22
+relaterade: []
+utkast: false
+inledning:
+  - Det här är ett körschema för en lärarledd insats i liten grupp för elever som behöver stöd i avkodning och läsflyt. Insatsen är tidsbegränsad, riktad och har tät uppföljning. Varje pass är 20 minuter i skolan och följer samma rutin. Samma dag läser eleven boken en gång till hemma tillsammans med en vuxen och skriver tre favoritmeningar. Det är den dubbla läsningen, i skolan och hemma, som gör metoden intensiv. Börja med rutinen och tidsschemat nedan. Forskningsgrunden finns kort sammanfattad sist.
+upplagg:
+  rubrik: Så fungerar insatsen
+  text: "Insatsen genomförs fyra dagar i veckan under sex till tio veckor. Varje pass är 20 minuter i skolan, och samma dag läser och skriver eleven cirka 20 minuter hemma. Gruppen består av en till fyra elever som behöver stöd i avkodning och läsflyt. Varje elev har en egen text på sin nivå: en bok per dag för de yngre, eller ett kapitel om dagen ur en gemensam kapitelbok för elever i årskurs 3 till 6. Efter varje pass gör du en kort notering om hur läsningen gick och vem som behöver byta nivå. Efter perioden utvärderar du om eleven läser texter på sin nivå med bättre flyt och klarar mer i den ordinarie undervisningen."
+principer:
+  rubrik: Tre saker att hålla fast vid
+  text: Samma text läses två gånger samma dag, först i skolan med dig och sedan hemma med en vuxen. Boken ska vara lätt nog för att eleven ska lyckas, det är omläsningen som bygger flytet. Och varje pass börjar med gårdagens favoritmeningar, så att eleven märker att läsningen hemma räknas.
+tabeller:
+  - rubrik: Elevens plastmapp följer med hem varje dag
+    plats: efter-inledning
+    kolumner:
+      - 1. Skrivbok
+      - 2. Lässchema
+      - 3. Dagens text
+    rader:
+      - - Här skriver eleven tre favoritmeningar ur dagens text. Läses upp för läraren nästa dag.
+        - Läraren skriver in dagens text och signerar. Vårdnadshavaren bekräftar läsningen hemma med initialer.
+        - Boken, eller kapitelboken med dagens kapitel markerat. Läses i skolan och en gång till hemma.
+  - rubrik: Kapitelbok för årskurs 3 till 6
+    plats: efter-urval
+    text: För elever från ungefär årskurs 3 fungerar en och samma kapitelbok bättre än en ny liten bok varje dag. Boken ska fortfarande vara lätt att avkoda, men innehållet får bära i flera dagar. Dagens text är då ett kapitel eller ett antal utvalda sidor som går att läsa på cirka tio minuter. Markera dagens sidor med ett bokmärke eller en lapp och skriv kapitlet i lässchemat i stället för en boktitel. Ni återkommer till samma bok varje dag tills den är utläst, och sedan väljer ni en ny.
+    kolumner:
+      - "F–2: en bok per dag"
+      - "Åk 3–6: ett kapitel per dag"
+    rader:
+      - - Ny liten bok varje pass, ur en nivåindelad serie. Bild- och rubrikvandring i förberedelsen. Hela boken läses om hemma.
+        - Samma kapitelbok tills den är utläst. Återblick på gårdagens kapitel i förberedelsen. Dagens kapitel läses om hemma. Sedan ny bok.
+    not: "Rutinen är densamma. Bildvandringen ersätts av en kort återblick: eleven återberättar gårdagens kapitel med några meningar innan ni tittar på dagens rubrik och bilder. Hemma läses dagens kapitel en gång till, och de tre favoritmeningarna väljs ur det kapitlet. Kapitelboken följer med hem i mappen precis som en liten bok, så eleven behöver inte ha en egen kopia hemma."
+passrutin:
+  text: Varje pass följer samma rutin. Det gör insatsen lätt att leda och tryggt för eleverna att veta vad som ska hända.
+  steg:
+    - Eleverna läser upp gårdagens favoritmeningar. Läraren berömmer och signerar lässchemat.
+    - Läraren och eleverna gör en bild- och rubrikvandring i dagens bok.
+    - Eleverna läser sin bok. Läraren lyssnar på en elev i taget och ger stöd.
+    - "Läraren avslutar: hemuppdraget upprepas, mappen läggs i ryggsäcken, kort notering."
+    - "Hemma: eleven läser boken en gång till med en vuxen och skriver tre favoritmeningar. Den vuxne signerar."
+  efter: Passrutinen är kortversionen av passet. Tidsschemat visar när varje del görs, och tabellen efteråt visar vad du som lärare kan säga och göra i varje steg.
+tidsschema:
+  rubrik: 20 minuter, steg för steg
+  text: Förbered dig genom att välja bok till varje elev och bläddra igenom den själv. Sedan följer du tidsschemat.
+  rader:
+    - tid: Före passet
+      fas: Förberedelse
+      vad: Välj en bok på rätt nivå till varje elev. Bläddra igenom den och se vilka ord som kan bli svåra. Skriv bokens titel i lässchemat.
+    - tid: 0–4 min
+      fas: Återkoppla
+      vad: Varje elev läser upp sina tre favoritmeningar från gårdagens bok. Du berömmer något konkret och signerar lässchemat.
+    - tid: 4–8 min
+      fas: Förbered
+      vad: "Bild- och rubrikvandring i dagens bok. Prata om bilderna, gissa vad som händer och red ut två eller tre ord som kommer i texten. Med kapitelbok: återberätta gårdagens kapitel kort och titta på dagens."
+    - tid: 8–18 min
+      fas: Läs
+      vad: Eleverna läser sin bok. Du sätter dig hos en elev i taget, två till tre minuter var, lyssnar och ger stöd vid orden som fastnar. Övriga läser tyst eller viskande.
+    - tid: 18–20 min
+      fas: Avsluta
+      vad: "Upprepa hemuppdraget: läs boken en gång till med en vuxen och skriv tre favoritmeningar. Mappen i ryggsäcken. Gör den korta noteringen."
+    - tid: Hemma, cirka 20 min
+      fas: Läs och skriv
+      vad: Eleven läser boken en gång till för en vuxen, cirka tio minuter. Sedan väljer eleven tre favoritmeningar och skriver av dem i skrivboken. Den vuxne signerar lässchemat.
+  efter: "En text per pass: en bok, eller ett kapitel ur kapitelboken. Blir en elev klar tidigt: läs boken en gång till, läs den för en kamrat eller välj redan nu de tre favoritmeningarna."
+steg:
+  text: De fyra stegen är den didaktiska modellen bakom rutinen. Använd exempelfraserna för att ge specifik återkoppling och för att fråga i stället för att rätta.
+  fraserRubrik: Exempelfraser
+  rader:
+    - namn: Återkoppla
+      fraga: Vad läste du hemma?
+      gor: Lyssna på favoritmeningarna. Beröm något eleven faktiskt gjorde. Signera lässchemat. Fråga varför eleven valde just de meningarna.
+      fraser:
+        - Läs din första mening för oss.
+        - Varför valde du den?
+        - Jag hörde att du läste ordet direkt, utan att ljuda.
+    - namn: Förbered
+      fraga: Vad handlar boken om?
+      gor: Gå igenom bilder och rubriker. Låt eleverna gissa. Säg och visa de ord du tror blir svåra, innan de kommer i texten.
+      fraser:
+        - Vad ser du på bilden?
+        - Vad tror du händer sen?
+        - "Här kommer ett långt ord. Vi delar det: fot-boll."
+    - namn: Läs
+      fraga: Läs för mig
+      gor: Sitt hos en elev i taget. Låt eleven läsa högt. Vänta vid svåra ord. Ge minsta möjliga stöd och låt eleven läsa om meningen från början när ordet är löst.
+      fraser:
+        - Prova. Vad står det?
+        - Ljuda, och läs sedan ordet igen som ett helt ord.
+        - Läs meningen från början nu.
+    - namn: Avsluta
+      fraga: Vad händer hemma?
+      gor: Upprepa hemuppdraget med samma ord varje gång. Kontrollera att bok, skrivbok och lässchema ligger i mappen.
+      fraser:
+        - Ikväll läser du boken en gång till för någon hemma.
+        - Välj tre meningar du gillar och skriv dem i skrivboken.
+arbetsform:
+  rubrik: "Arbetsform: gemensamt, enskilt, hemma"
+  text: Passet rör sig i tre steg. Först gemensamt, där ni återkopplar och förbereder dagens bok. Sedan enskilt, där varje elev läser sin egen bok medan du lyssnar på en i taget. Till sist hemma, där boken läses en gång till med en vuxen. Upplägget fungerar med en elev lika väl som med fyra. Med en elev blir hela passet ett samtal på tu man hand. Med fyra elever lyssnar du två till tre minuter per elev och de andra läser tyst eller viskande under tiden.
+  delar:
+    - rubrik: 1. Gemensamt
+      text: Favoritmeningar, beröm och bild- och rubrikvandring
+    - rubrik: 2. Enskilt
+      text: Varje elev läser sin bok, läraren lyssnar på en i taget
+    - rubrik: 3. Hemma
+      text: Omläsning med en vuxen och tre favoritmeningar
+exempel:
+  valt:
+    rubrik: Gruppen
+    text: tre elever i årskurs 2 som ljudar sig igenom de flesta ord och sällan läser om en mening. Varje elev har en bok på sin nivå ur en nivåindelad serie.
+  text:
+    - "Läraren har lagt en ny bok i varje mapp och skrivit titeln i lässchemat. Passet börjar med att Amir läser upp sina tre meningar från gårdagens bok. Läraren säger: ”Du läste hela första meningen utan att stanna. Varför valde du den?” Amir svarar att den var rolig. Läraren signerar lässchemat och går vidare till Selma och Noor."
+    - "Sedan tar alla fram dagens bok. Läraren bläddrar igenom Selmas bok tillsammans med henne: ”Vad ser du på bilden? Vad tror du att hunden gör?” Läraren visar ordet ”trädgården” innan de börjar: ”Det här ordet är långt. Vi delar det: träd-går-den.” Samma sak med de andra två böckerna, en i taget, kort."
+    - "Nu läser eleverna. Amir och Noor viskläser sina böcker medan läraren sitter hos Selma. Selma fastnar på ”sprang”. Läraren väntar. Selma ljudar s-p-r-a-n-g. ”Bra. Läs ordet igen som ett helt ord.” Selma säger ”sprang”. ”Läs meningen från början nu.” När Selma är igenom sidan flyttar läraren till Amir, som läser flytande men gissar ordändelser. Läraren pekar: ”Titta på slutet av ordet. Vad står det?” Sist Noor, som behöver ljuda det mesta. Boken är för svår. Läraren noterar det och byter till en lättare bok till nästa dag."
+    - "Passet avslutas med att läraren säger samma sak som varje dag: ”Ikväll läser ni boken en gång till för någon hemma. Välj tre meningar ni gillar och skriv dem i skrivboken.” Mapparna läggs i ryggsäckarna. Efteråt skriver läraren en kort notering: alla tre hade läst hemma, Selma läser om meningen själv nu, Noor byter nivå."
+fastnar:
+  rubrik: När eleven fastnar
+  text: När en elev fastnar på ett ord är det lätt att säga ordet direkt. Gör tvärtom. Vänta, fråga och ge minsta möjliga stöd som tar eleven ett steg vidare.
+  fragaForst:
+    - Prova. Vad står det?
+  trappaText: "En stödtrappa att gå uppför i stunden. Ge inte nästa steg förrän eleven har prövat det föregående:"
+  trappa:
+    - Vänta tre sekunder. Många elever löser ordet själva.
+    - "Peka på första bokstaven: ”Vilket ljud börjar ordet med?”"
+    - Ljuda tillsammans, eller dela ordet i delar.
+    - Säg ordet och låt eleven läsa meningen om från början.
+    - "Om eleven fastnar på fler än ett ord av tio: boken är för svår. Byt nivå till nästa pass."
+  motto: Läraren leder läsningen, men läser inte åt eleven.
+roll:
+  rubrik: "Lärarens roll: stötta utan att ta över"
+  text: "Din uppgift är att lyssna, vänta och ge specifik återkoppling. Säg exakt vad eleven gjorde som fungerade: att ljuda tydligt, att läsa ordet igen som helhet, att läsa om meningen. Det är den återkopplingen som gör att eleven vet vad den ska göra nästa gång, och det är den som bygger självförtroendet."
+  gor:
+    - Vänta ut eleven vid svåra ord.
+    - Beröm en strategi, inte en egenskap.
+    - Låt eleven läsa om meningen när ordet är löst.
+    - Byt till en lättare bok när det blir många fel.
+  undvik:
+    - Att säga ordet direkt.
+    - Att säga ”duktig” utan att säga vad som var bra.
+    - Att rätta varje fel medan eleven läser.
+    - Att välja en svårare bok för att eleven ”ska utmanas”.
+urval:
+  rubrik: Var hittar du böckerna?
+  text:
+    - Böckerna behöver du inte leta länge efter. Nivåindelade serier som Kiwi, Stjärnsvenska och Beta Pedagog finns på de flesta skolor för F–3. För elever i årskurs 4–6 behöver innehållet passa åldern även när texten är lätt, och där fungerar lättlästa böcker från förlag som Nypon och Hegas samt material med flera nivåer som Mellan raderna. Boken ska vara lätt nog att eleven läser de allra flesta orden rätt. Det är omläsningen som ger flyt, och en elev som fastnar på vart femte ord läser inte om, den kämpar.
+  kravText: "Välj en text per pass som uppfyller tre krav:"
+  krav:
+    - rubrik: Rätt nivå
+      text: Eleven klarar minst nio ord av tio själv
+    - rubrik: Lagom längd
+      text: Går att läsa på cirka tio minuter, hemma en gång till
+    - rubrik: Något att välja ur
+      text: Meningar som eleven kan vilja skriva av och läsa upp
+hem:
+  text:
+    - "Insatsen bygger på att boken läses en gång till hemma. Boka därför ett kort möte med vårdnadshavarna innan ni börjar. Visa mappen, lässchemat och skrivboken, förklara varför boken ska läsas två gånger och visa hur den vuxne bekräftar läsningen med sina initialer. Säg också hur den vuxne kan hjälpa till vid svåra ord: vänta, ljuda tillsammans, läs meningen om. Kontraktet nedan sammanfattar vad var och en ansvarar för, och lässchemat följer med i mappen. Båda finns i planeringsmallarna och kopieras till varje elev. Om läsningen hemma uteblir flera dagar i rad: ring hem tidigt, innan rutinen hunnit brytas."
+  kontrakt:
+    rubrik: Kontrakt för TIL (Tidig Intensiv Läsning)
+    inledning: "TIL är en insats som stärker elevens läsning genom att samma bok läses två gånger samma dag: i skolan med läraren och hemma med en vuxen. Insatsen pågår fyra dagar i veckan i sex till tio veckor. I elevens plastmapp finns skrivbok, lässchema och dagens text, och mappen följer med hem varje dag."
+    ansvar:
+      - rubrik: Skolans ansvar
+        text: Välja bok på rätt nivå och skriva in den i lässchemat. Göra bild- och rubrikvandring och lyssna på eleven när den läser. Ta emot favoritmeningarna varje dag och ge återkoppling.
+      - rubrik: Vårdnadshavarnas ansvar
+        text: Lyssna när eleven läser boken en gång till hemma, cirka tio minuter. Hjälpa eleven att välja och skriva tre favoritmeningar. Bekräfta läsningen med initialer i lässchemat.
+      - rubrik: Elevens ansvar
+        text: Läsa boken i skolan och hemma. Skriva tre favoritmeningar i skrivboken. Ta med mappen till skolan varje dag.
+    efter: Genom att skolan, hemmet och eleven gör sin del varje dag får eleven två lästillfällen om dagen under hela perioden. Det är regelbundenheten som ger resultat.
+  schema:
+    rubrik: Lässchema TIL
+    text: Läraren skriver dagens bok, eller kapitel och sidor i kapitelboken, och signerar när favoritmeningarna lästs upp. Vårdnadshavaren bekräftar läsningen hemma med sina initialer.
+    kolumner:
+      - Datum
+      - Bok, eller kapitel och sidor
+      - Lärare
+      - Vårdnadshavare
+    rader: 16
+progression:
+  text: Ansvaret flyttas gradvis till eleven. Då blir passen en sammanhängande insats och rutinen hemma blir en vana.
+  rader:
+    - vecka: 1–2
+      fokus: Rutinen sätter sig i skolan och hemma. Möte med vårdnadshavare, kontraktet skrivs på.
+      roll: Läraren leder bildvandringen, modellerar ljudning och omläsning och kontrollerar lässchemat varje dag.
+    - vecka: 3–5
+      fokus: Eleven börjar läsa om meningar själv. Böckerna byts uppåt när flytet kommer.
+      roll: Läraren väntar längre, frågar i stället för att säga och ger kortare stöd.
+    - vecka: 6–8
+      fokus: Eleven gör bildvandringen med kortare stöd och väljer favoritmeningar utan hjälp hemma.
+      roll: Läraren lyssnar, ger återkoppling på flyt och läsmelodi och följer upp nivån.
+    - vecka: 9–10 vid behov
+      fokus: Eleven läser längre texter och böcker ur klassens ordinarie läsning.
+      roll: Läraren följer upp om läsningen överförs till klassrummet och planerar avslutet med hemmet.
+uppfoljning:
+  text: Du behöver veta om passen ger effekt, inte bara att de har genomförts. Gör en enkel före- och efterkoll.
+  rader:
+    - nar: Före insatsen
+      vad: Eleven läser en kort text på sin nivå högt i en minut. Notera antal rätt lästa ord, vilka ord som fastnar och om eleven läser om när det blir fel. Spara texten.
+    - nar: Efter 6–10 veckor
+      vad: "Låt eleven läsa en liknande text och jämför med startläget. Räkna också böckerna i lässchemat: hur många har lästs två gånger?"
+mal:
+  punkter:
+    - Läsa en bok på sin nivå med flyt
+    - Ljuda ett okänt ord och läsa det som helhet
+    - Läsa om en mening när något blev fel
+    - Berätta vad boken handlade om
+    - Välja och skriva tre meningar ur en bok
+    - Ta ansvar för mappen och läsningen hemma
+snabbmall:
+  text: En halv sida att fylla i före och efter varje pass, särskilt de första två veckorna. Håll det enkelt. Det är regelbundenheten, och att komma tillbaka igen nästa dag, som gör skillnad.
+  fore:
+    - Elev och bok (nivå)
+    - Ord att visa i bildvandringen
+    - Vem lyssnar jag på först?
+  efter:
+    - Hade alla läst och skrivit hemma?
+    - Vem behöver byta nivå?
+    - Vad ska övas nästa gång?
+checklista:
+  punkter:
+    - Valt en bok på rätt nivå till varje elev och bläddrat igenom den.
+    - Skrivit bokens titel i varje elevs lässchema.
+    - Tänkt igenom vilka ord jag visar i bildvandringen.
+    - Bestämt i vilken ordning jag lyssnar på eleverna.
+    - Kontrollerat att bok, skrivbok och lässchema ligger i varje mapp.
+    - Påmint mig om att vänta vid svåra ord i stället för att säga dem.
+grund:
+  text: "TIL bygger på fyra saker som var för sig har stöd i läsforskningen och som här sätts ihop till en daglig rutin. Att läsa samma text flera gånger ger flyt (Samuels, 1979). Att läsa högt för en vuxen som lyssnar och ger återkoppling stärker avkodning och flyt mer än tyst läsning på egen hand (National Reading Panel, 2000). Att en vuxen hemma läser tillsammans med barnet och bekräftar läsningen ger många fler lästillfällen och stärker samarbetet mellan hem och skola (Topping, 2017). Och att eleven skriver av meningar ur boken gör att läsning och skrivning stöttar varandra. Det som gör insatsen intensiv är regelbundenheten: fyra dagar i veckan, två läsningar om dagen, samma rutin varje gång."
+  kallor: Bygger på Samuels (1979), National Reading Panel (2000), Topping (2017) samt Skolverkets material om läsflyt och tidiga insatser på Lärportalen.
+lathund:
+  innehall: Text, skrivbok och lässchema i mappen hem varje dag
+  metoden:
+    text:
+      - "Lärarledd intensiv lästräning i liten grupp för elever som behöver stöd i avkodning och läsflyt. Varje elev läser en egen text på sin nivå medan läraren lyssnar på en i taget: en bok per dag för de yngre, ett kapitel om dagen ur en kapitelbok för åk 3–6. Samma dag läses texten en gång till hemma med en vuxen, och eleven skriver tre favoritmeningar."
+      - Det är den dubbla läsningen, i skolan och hemma, som gör metoden intensiv. Texten ska vara lätt nog för att eleven ska lyckas.
+    ruta:
+      rubrik: Tre saker att hålla fast vid
+      punkter:
+        - fet: Samma bok två gånger samma dag.
+          text: Först i skolan med dig, sedan hemma med en vuxen.
+        - fet: Rätt nivå.
+          text: Eleven klarar nio ord av tio själv. Omläsningen bygger flytet, kampen gör det inte.
+        - fet: Börja alltid med gårdagens favoritmeningar.
+          text: Då märker eleven att läsningen hemma räknas.
+    tabell:
+      rubrik: De fyra stegen · vad du gör och säger
+      kolumner:
+        - Steg
+        - Exempelfraser
+      rader:
+        - - |-
+            1 · Återkoppla
+            0–4 min. Lyssna, beröm något konkret, signera.
+          - |-
+            ”Läs din första mening för oss.”
+            ”Varför valde du den?”
+            ”Du läste ordet direkt, utan att ljuda.”
+        - - |-
+            2 · Förbered
+            4–8 min. Bild- och rubrikvandring i dagens bok.
+          - |-
+            ”Vad ser du på bilden? Vad tror du händer?”
+            ”Här kommer ett långt ord. Vi delar det: träd-går-den.”
+        - - |-
+            3 · Läs
+            8–18 min. En elev i taget, två till tre minuter var.
+          - |-
+            ”Prova. Vad står det?”
+            ”Ljuda, och läs ordet igen som ett helt ord.”
+            ”Läs meningen från början nu.”
+        - - |-
+            4 · Avsluta
+            18–20 min. Samma ord varje dag.
+          - |-
+            ”Ikväll läser du boken en gång till för någon hemma.”
+            ”Välj tre meningar du gillar och skriv dem i skrivboken.”
+    not: "När eleven fastnar: vänta, peka på första ljudet, ljuda tillsammans, säg ordet och läs om meningen. Ett steg i taget. Fler än ett fel av tio ord: byt nivå."
+  pass:
+    rubrik: "Vi kör ett pass: tre elever i årskurs 2"
+    textRubrik: Gruppen · tre elever, åk 2, egen bok var
+    utskrift: Skriv ut passexemplet
+    text:
+      - Amir läser upp sina tre meningar från gårdagens bok. ”Du läste hela första meningen utan att stanna. Varför valde du den?” Läraren signerar lässchemat. Sedan Selma och Noor.
+      - "Alla tar fram dagens bok. Läraren bläddrar med Selma: ”Vad tror du att hunden gör?” Ordet trädgården visas innan de börjar: ”Vi delar det: träd-går-den.” Kort, en elev i taget."
+      - "Amir och Noor viskläser. Läraren sitter hos Selma, som fastnar på sprang. Läraren väntar. Selma ljudar. ”Läs ordet igen som ett helt ord. Läs meningen från början nu.” Sedan Amir, som gissar ändelser: ”Titta på slutet av ordet.” Sist Noor, som ljudar det mesta. Boken är för svår."
+      - "”Ikväll läser ni boken en gång till för någon hemma. Välj tre meningar ni gillar.” Mapparna i ryggsäckarna. Notering: alla hade läst hemma, Selma läser om själv nu, Noor byter nivå."
+    forberett:
+      rubrik: Det jag förberedde
+      text:
+        - Tre böcker på tre nivåer i tre mappar. Titeln inskriven i lässchemat. Bläddrat igenom böckerna och sett orden som kan bli svåra. Bestämt att lyssna på Selma först.
+    klarTidigt: Läs boken en gång till, läs den för en kamrat eller välj redan nu de tre favoritmeningarna.
+    schema:
+      rubrik: 20 minuter, steg för steg
+      rader:
+        - tid: Före
+          fas: Förberedelse
+          vad: Välj bok på rätt nivå till varje elev. Bläddra igenom den. Skriv titeln i lässchemat.
+        - tid: 0–4
+          fas: Återkoppla
+          vad: Varje elev läser upp tre favoritmeningar från gårdagens bok. Beröm något konkret. Signera lässchemat.
+        - tid: 4–8
+          fas: Förbered
+          vad: Bild- och rubrikvandring i dagens bok. Gissa vad som händer. Visa två eller tre ord som kommer i texten.
+        - tid: 8–18
+          fas: Läs
+          vad: Eleverna läser sin bok. Du sitter hos en i taget, två till tre minuter var. Övriga läser tyst eller viskande.
+        - tid: 18–20
+          fas: Avsluta
+          vad: Upprepa hemuppdraget. Mappen i ryggsäcken. Kort notering.
+        - tid: Hemma
+          fas: Cirka 20 min
+          vad: Eleven läser boken en gång till för en vuxen, cirka tio minuter. Skriver tre favoritmeningar. Den vuxne signerar.
+  mall:
+    rubrik: Lässchemat och snabbmallen
+    underrad: "Lässchema TIL · följer med i mappen · en rad per dag · Elev: ______________ · Period: ______________"
+    block:
+      - typ: tabell
+        rubrik: Lässchema
+        kolumner:
+          - Datum
+          - Bok / kapitel
+          - Lärare
+          - Vårdnadsh.
+        rader:
+          - - ""
+            - ""
+            - ""
+            - ""
+          - - ""
+            - ""
+            - ""
+            - ""
+          - - ""
+            - ""
+            - ""
+            - ""
+          - - ""
+            - ""
+            - ""
+            - ""
+          - - ""
+            - ""
+            - ""
+            - ""
+          - - ""
+            - ""
+            - ""
+            - ""
+          - - ""
+            - ""
+            - ""
+            - ""
+          - - ""
+            - ""
+            - ""
+            - ""
+      - typ: not
+        text: Läraren signerar när favoritmeningarna lästs upp. Vårdnadshavaren skriver initialer efter läsningen hemma.
+      - typ: snabbmall
+      - typ: not
+        text: "Steg 4, hemuppdraget, samma ord varje dag: ”Ikväll läser du boken en gång till för någon hemma. Välj tre meningar du gillar och skriv dem i skrivboken. Den vuxne skriver sina initialer i lässchemat.” I mappen: dagens bok, skrivboken och lässchemat. Till vårdnadshavaren: vänta vid svåra ord, ljuda tillsammans, läs meningen om. Beröm det som gick bra."
+  material:
+    rubrik: Vad du behöver för TIL i grupp
+    kravEtikett: Bokkrav
+    var:
+      rubrik: Var böckerna finns
+      punkter:
+        - fet: Nivåindelade serier för F–3.
+          text: Kiwi, Stjärnsvenska och Beta Pedagog finns på de flesta skolor.
+        - fet: Lättläst för åk 4–6.
+          text: "Innehållet ska passa åldern även när texten är lätt: Nypon, Hegas och liknande förlag."
+        - fet: Material i flera nivåer, till exempel Mellan raderna.
+          text: Samma berättelse i olika svårighetsgrad gör det lätt att byta nivå.
+        - fet: Kapitelbok för åk 3–6.
+          text: Samma bok varje dag, ett kapitel eller utvalda sidor per pass, tills den är utläst. Sedan ny bok.
+        - fet: Hellre för lätt än för svår.
+          text: Det är omläsningen som ger flyt. En elev som fastnar på vart femte ord läser inte om.
+    bordet:
+      - Plastmapp per elev som följer med hem
+      - "Dagens text: bok eller kapitel, på rätt nivå"
+      - Skrivbok till varje elev
+      - Lässchema med dagens text inskriven
+      - Snabbmallen för noteringen efteråt
+      - Kontraktet, påskrivet av hem och skola
+    varjePass: Hade alla läst hemma, vem byter nivå, vad övas nästa gång?

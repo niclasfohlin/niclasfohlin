@@ -163,7 +163,7 @@ const stodundervisning = defineCollection({
     tabeller: z.array(z.strictObject({
       rubrik: z.string(),
       text: z.string().optional(),
-      plats: z.enum(['efter-steg', 'efter-arbetsform']).default('efter-arbetsform'),
+      plats: z.enum(['efter-inledning', 'efter-steg', 'efter-arbetsform', 'efter-urval']).default('efter-arbetsform'),
       kolumner: z.array(text).min(2),
       rader: z.array(z.array(z.string())).min(1),
       not: z.string().optional(),
@@ -197,6 +197,24 @@ const stodundervisning = defineCollection({
       text: stycken,
       kravText: z.string().optional(),
       krav: z.array(ruta).min(1),
+    }).optional(),
+    // Hem och skola: för insatser där hemmet gör en del av arbetet. Text, ett kontrakt med var och
+    // ens ansvar, och ett schema att fylla i (en sida i planeringsmallarna).
+    hem: z.strictObject({
+      rubrik: z.string().default('Hem och skola'),
+      text: stycken,
+      kontrakt: z.strictObject({
+        rubrik: z.string().default('Kontrakt'),
+        inledning: text,
+        ansvar: z.array(ruta).min(1),
+        efter: z.string().optional(),
+      }).optional(),
+      schema: z.strictObject({
+        rubrik: text,
+        text: z.string().optional(),
+        kolumner: z.array(text).min(2),
+        rader: z.number().int().min(1).default(15),
+      }).optional(),
     }).optional(),
     progression: z.strictObject({
       rubrik: z.string().default('Progression över insatsperioden'),
@@ -246,6 +264,9 @@ const stodundervisning = defineCollection({
       pass: z.strictObject({
         rubrik: text,
         textRubrik: text,
+        // Knappen som skriver ut bara textrutan: "Skriv ut till eleverna" när rutan är en elevtext,
+        // något annat när den är ett exempel för läraren.
+        utskrift: z.string().default('Skriv ut till eleverna'),
         titel: z.string().optional(),
         text: stycken,
         forberett: z.strictObject({ rubrik: text, text: stycken }),

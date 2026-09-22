@@ -93,6 +93,36 @@ urval:
   kravText: "Välj en text per pass som uppfyller tre krav:"
   krav:
     - { rubrik: Krav ett, text: Vad det betyder }
+# Fria tabeller med rubrikrad, där de hör hemma: plats efter-inledning, efter-steg, efter-arbetsform eller efter-urval.
+tabeller:
+  - rubrik: Elevens mapp
+    plats: efter-inledning
+    kolumner: [Del, Vad den är till för]
+    rader:
+      - [Skrivbok, Här skriver eleven tre favoritmeningar]
+    # Valfri not under tabellen.
+    not: En mening som förklarar tabellen.
+
+# Hem och skola, för insatser där hemmet gör en del av arbetet. Kontraktet och schemat blir egna sidor i planeringsmallarna.
+hem:
+  rubrik: Hem och skola
+  text:
+    - Ett stycke om mötet med vårdnadshavarna och vad hemmet gör.
+  kontrakt:
+    rubrik: Kontrakt
+    inledning: Vad insatsen är och hur länge den pågår.
+    ansvar:
+      - rubrik: Skolans ansvar
+        text: Vad skolan gör varje dag.
+      - rubrik: Vårdnadshavarnas ansvar
+        text: Vad hemmet gör varje dag.
+    efter: En avslutande mening.
+  schema:
+    rubrik: Lässchema
+    text: Vem som skriver vad i schemat.
+    kolumner: [Datum, Bok, Lärare, Vårdnadshavare]
+    rader: 16
+
 progression:
   text: Hur ansvaret flyttas till eleverna.
   # enhet: första kolumnens rubrik, Vecka som standard. Skriv Pass för en insats som räknas i pass.

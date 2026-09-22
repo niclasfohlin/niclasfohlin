@@ -418,6 +418,11 @@ button.lank:hover { color: var(--farg-accent); }
 .m-snabbmall .avsnitt th:first-child { border-right: 0; }
 .m-snabbmall td { height: 2.4rem; background: var(--farg-yta); }
 .m-grund { border: 1px solid var(--farg-kant); border-left: 4px solid var(--farg-accent); border-radius: 8px; padding: 0.85rem 1.1rem; margin: 1rem 0 0.5rem; background: var(--farg-yta); }
+/* Kontraktet mellan skola, hem och elev: en inramad ruta med kicker, som mallen i planeringsmallarna. */
+.m-kontrakt { border: 1.5px solid var(--farg-text); border-radius: 8px; padding: 0.9rem 1.1rem; margin: 1rem 0 1.25rem; background: var(--farg-yta); }
+.m-kontrakt .kicker { font-family: var(--typsnitt-ui); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-accent); margin: 0 0 0.5em; }
+.m-kontrakt p { margin: 0 0 0.6em; }
+.m-kontrakt p:last-child { margin-bottom: 0; }
 .m-grund p { margin: 0; }
 .m-kallor { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
 .bara-js { display: none; }
@@ -474,6 +479,8 @@ html.js .bara-js { display: inline-block; }
 .lh-tabell.m-tabell { font-size: 0.9rem; margin: 0.25rem 0 0.75rem; }
 .lh-tabell.m-tabell thead th { background: var(--farg-text); border-color: var(--farg-text); font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; }
 .lh-tabell.m-tabell tbody th { color: var(--farg-text); }
+/* Tomma celler är skrivrader: höjd för handskrift, på skärm och i utskrift. */
+.lh-tabell.m-tabell td:empty { height: 1.9rem; }
 .lh-schema th[scope="row"] { color: var(--farg-text-svag); font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace; font-size: 0.85rem; }
 .lh-fraser { display: block; color: #8a5a1e; font-style: italic; margin-top: 0.2rem; }
 .lh-underrad { margin: 0; padding: 0.5rem 1.25rem; background: var(--farg-ton); border-bottom: 1px solid var(--farg-kant); font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--farg-text-svag); }
@@ -552,6 +559,7 @@ html.js .bara-js { display: inline-block; }
   .lh-not, .lh-gra { padding: 0.4rem 0.7rem; margin: 0.5rem 0; }
   .lh-tabell.m-tabell { font-size: 8.5pt; margin: 0.15rem 0 0.5rem; }
   .lh-tabell.m-tabell th, .lh-tabell.m-tabell td { padding: 0.3rem 0.45rem; }
+  .lh-tabell.m-tabell td:empty { height: 20pt; }
   .lh-block { padding: 0.5rem 0.9rem 0.75rem; }
   .lh-spalter { gap: 0.6rem 1.25rem; margin: 0.25rem 0 0.6rem; }
   .lh-spalt > h3 { font-size: 9.5pt; }
@@ -621,7 +629,7 @@ html.js .bara-js { display: inline-block; }
   .metod-modell h2 { font-size: 13pt; margin-top: 1.4em; break-after: avoid; }
   /* Rubrik och inledande stycke följer med det som kommer efter; snabbmallen hålls ihop. */
   .metod-modell h2 + p { break-after: avoid; }
-  .m-snabbmall, .m-trappa, .m-trappa li, #snabbmall, #grund { break-inside: avoid; }
+  .m-snabbmall, .m-trappa, .m-trappa li, .m-kontrakt, #snabbmall, #grund { break-inside: avoid; }
   .m-tabell, .m-snabbmall, .m-bockar, .m-gor-undvik, .m-band, .m-ruta, .m-rutin, .m-grund, .m-motto { font-size: 9.5pt; }
   .m-tabell tr, .m-snabbmall tr, .m-bockar li, .m-gor-undvik, .m-band, .m-ruta, .m-rutin, .m-grund, .m-motto, .m-fraga { break-inside: avoid; }
   .m-tabell thead { display: table-header-group; }

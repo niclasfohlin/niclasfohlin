@@ -34,7 +34,7 @@ const yamlFil = join(rot, 'src/content/stodundervisning', `${id}.yaml`);
 if (!existsSync(yamlFil)) { console.error(`Hittar inte ${yamlFil}`); process.exit(1); }
 const metod = parseYaml(readFileSync(yamlFil, 'utf8'));
 console.log(`\n${metod.titel} (${id})`);
-const delar = ['inledning', 'upplagg', 'principer', 'passrutin', 'tidsschema', 'steg', 'arbetsform', 'tabeller', 'exempel', 'fastnar', 'roll', 'urval', 'progression', 'uppfoljning', 'mal', 'snabbmall', 'checklista', 'grund'];
+const delar = ['inledning', 'upplagg', 'principer', 'passrutin', 'tidsschema', 'steg', 'arbetsform', 'tabeller', 'exempel', 'fastnar', 'roll', 'urval', 'hem', 'progression', 'uppfoljning', 'mal', 'snabbmall', 'checklista', 'grund'];
 const finns = delar.filter((d) => metod[d] && (!Array.isArray(metod[d]) || metod[d].length));
 console.log(`  delar i modellen: ${finns.join(', ')}`);
 if (metod.utkast) console.log('  obs  utkast: true, metoden byggs inte i produktion');

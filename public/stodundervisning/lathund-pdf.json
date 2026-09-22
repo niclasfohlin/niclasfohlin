@@ -1,17 +1,22 @@
 {
   "boksamtal-i-grupp": {
-    "kalla": "f97528e99fa83f4a",
-    "pdf": "aa561eb8082be9ff",
+    "kalla": "b132b68639b02987",
+    "pdf": "3b2d67db8fa7fb54",
     "datum": "2026-09-22"
   },
   "faktatextsamtal-i-grupp": {
-    "kalla": "4d071201371b9954",
-    "pdf": "93be7025bdc935ae",
+    "kalla": "c70c834cde264dc4",
+    "pdf": "b959b2a71dce2e06",
     "datum": "2026-09-22"
   },
   "problemlosning-i-grupp": {
-    "kalla": "53ee37c09fa40ef2",
-    "pdf": "d546bb8c1ac09292",
+    "kalla": "63fd878ebf15cbc8",
+    "pdf": "a91c82546626c3b0",
+    "datum": "2026-09-22"
+  },
+  "til-i-grupp": {
+    "kalla": "584710ec06a440ce",
+    "pdf": "1b5fe39d8fc9493c",
     "datum": "2026-09-22"
   }
 }

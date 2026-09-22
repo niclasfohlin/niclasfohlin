@@ -47,7 +47,7 @@ const citat = (f: string) => `”${f}”`;
       <div class="lh-kolumner">
         <div class="lh-kol">
           <div class="lh-ruta lh-elevtext" id="lathund-text">
-            <h3>{l.pass.textRubrik}<span class="bara-js lh-lank"><button type="button" data-skriv-ut-text>Skriv ut till eleverna</button></span></h3>
+            <h3>{l.pass.textRubrik}<span class="bara-js lh-lank"><button type="button" data-skriv-ut-text>{l.pass.utskrift}</button></span></h3>
             <div class="lh-ruta-kropp">
               {l.pass.titel && <p class="lh-titel">{l.pass.titel}</p>}
               {l.pass.text.map((p) => <p>{p}</p>)}

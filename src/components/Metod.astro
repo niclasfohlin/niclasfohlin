@@ -5,8 +5,10 @@ import MetodTabell from './MetodTabell.astro';
 import type { MetodData } from '../lib/metod';
 interface Props { d: MetodData; id: string }
 const { d, id } = Astro.props;
+const efterInledning = d.tabeller.filter((t) => t.plats === 'efter-inledning');
 const efterSteg = d.tabeller.filter((t) => t.plats === 'efter-steg');
 const efterArbetsform = d.tabeller.filter((t) => t.plats === 'efter-arbetsform');
+const efterUrval = d.tabeller.filter((t) => t.plats === 'efter-urval');
 const fraserRubrik = d.steg?.fraserRubrik ?? '';
 // Sidnavigationen: de avsnitt som finns, i modellens ordning, med korta namn.
 const avsnitt = [
@@ -18,6 +20,7 @@ const avsnitt = [
   d.fastnar && { id: 'fastnar', namn: 'När det fastnar' },
   d.roll && { id: 'roll', namn: 'Lärarens roll' },
   d.urval && { id: 'urval', namn: 'Urval' },
+  d.hem && { id: 'hem', namn: 'Hem och skola' },
   d.progression && { id: 'progression', namn: 'Progression' },
   d.uppfoljning && { id: 'uppfoljning', namn: 'Uppföljning' },
   d.mal && { id: 'mal', namn: 'Mål' },
@@ -39,6 +42,15 @@ const avsnitt = [
 
   {d.upplagg && <div class="m-ruta"><p><strong class="kicker">{d.upplagg.rubrik}</strong>{' '}{d.upplagg.text}</p></div>}
   {d.principer && <div class="m-ruta"><p><strong class="kicker">{d.principer.rubrik}</strong>{' '}{d.principer.text}</p></div>}
+
+  {efterInledning.map((t) => (
+    <section>
+      <h2>{t.rubrik}</h2>
+      {t.text && <p>{t.text}</p>}
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} />
+      {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
+    </section>
+  ))}
 
   {d.passrutin && (
     <section id="passrutin">
@@ -148,6 +160,31 @@ const avsnitt = [
       <div class="m-band" style={`--delar:${d.urval.krav.length}`}>
         {d.urval.krav.map((x) => <div><strong>{x.rubrik}</strong><span>{x.text}</span></div>)}
       </div>
+    </section>
+  )}
+
+  {efterUrval.map((t) => (
+    <section>
+      <h2>{t.rubrik}</h2>
+      {t.text && <p>{t.text}</p>}
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} />
+      {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
+    </section>
+  ))}
+
+  {d.hem && (
+    <section id="hem">
+      <h2>{d.hem.rubrik}</h2>
+      {d.hem.text.map((s) => <p>{s}</p>)}
+      {d.hem.kontrakt && (
+        <div class="m-kontrakt">
+          <p class="kicker">{d.hem.kontrakt.rubrik}</p>
+          <p><em>{d.hem.kontrakt.inledning}</em></p>
+          {d.hem.kontrakt.ansvar.map((a) => <p><strong>{a.rubrik}.</strong>{' '}{a.text}</p>)}
+          {d.hem.kontrakt.efter && <p class="m-efter">{d.hem.kontrakt.efter}</p>}
+        </div>
+      )}
+      {d.hem.schema && <p class="m-efter">{d.hem.schema.rubrik}: {d.hem.schema.text}{d.hem.schema.text && ' '}Schemat med {d.hem.schema.rader} rader att fylla i finns i planeringsmallarna.</p>}
     </section>
   )}
 
