@@ -73,8 +73,13 @@ if (kommando === 'status') {
   visa({ avsandare: (avs.data.senders ?? []).map((s) => ({ id: s.id, namn: s.name, epost: s.email, aktiv: s.active })) });
   const dom = await brevo('GET', '/senders/domains');
   visa({ domaner: (dom.data.domains ?? []).map((d) => ({ doman: d.domain_name, verifierad: d.verified, autentiserad: d.authenticated })) });
+  // Listornas räknare (totalSubscribers) släpar efter i Brevo och kan visa 0 fast listan är full:
+  // antalet räknas i stället ur kontakterna.
   const listor = await brevo('GET', '/contacts/lists?limit=10');
-  visa({ listor: (listor.data.lists ?? []).map((l) => ({ id: l.id, namn: l.name, kontakter: l.totalSubscribers })) });
+  const kontakter = await brevo('GET', '/contacts?limit=500&sort=desc');
+  const per = {};
+  for (const c of kontakter.data.contacts ?? []) for (const id of c.listIds ?? []) per[id] = (per[id] ?? 0) + 1;
+  visa({ kontakterTotalt: kontakter.data.count, listor: (listor.data.lists ?? []).map((l) => ({ id: l.id, namn: l.name, kontakter: per[l.id] ?? 0 })) });
   const mallar = await brevo('GET', '/smtp/templates?limit=10');
   visa({ mallar: (mallar.data.templates ?? []).map((t) => ({ id: t.id, namn: t.name, avsandare: t.sender?.email, svarTill: t.replyTo, aktiv: t.isActive })) });
 } else if (kommando === 'doman') {
@@ -83,9 +88,17 @@ if (kommando === 'status') {
   const svar = await brevo('PUT', `/senders/domains/${DOMAN}/authenticate`);
   visa({ svar: svar.status, ...(svar.ok ? {} : { fel: svar.data }), ...(await domanStatus()) });
 } else if (kommando === 'kampanjer') {
+  // Listan över kampanjer saknar statistik; den hämtas per kampanj. Listornas räknare i Brevo släpar
+  // efter, så antalet mottagare läses här, inte i status.
   const antal = Number(rest[0] ?? 5);
   const k = await brevo('GET', `/emailCampaigns?limit=${antal}&sort=desc`);
-  visa((k.data.campaigns ?? []).map((c) => ({ id: c.id, namn: c.name, status: c.status, skickad: c.sentDate ?? c.scheduledAt ?? '', mottagare: c.statistics?.globalStats?.sent ?? '' })));
+  const ut = [];
+  for (const c of k.data.campaigns ?? []) {
+    const d = await brevo('GET', `/emailCampaigns/${c.id}?statistics=globalStats`);
+    const s = d.data.statistics?.globalStats ?? {};
+    ut.push({ id: c.id, namn: c.name, status: c.status, skickad: d.data.sentDate ?? c.scheduledAt ?? '', skickade: s.sent ?? '', levererade: s.delivered ?? '', oppnade: s.uniqueViews ?? '', klick: s.uniqueClicks ?? '', avregistrerade: s.unsubscriptions ?? '' });
+  }
+  visa(ut);
 } else if (kommando === 'anrop') {
   const [metod, sokvag, kropp] = rest;
   if (!metod || !sokvag) { console.error('anrop <METOD> <sökväg> [json]'); process.exit(1); }
