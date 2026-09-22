@@ -12,7 +12,9 @@ Windows 11, Node 22.12, Git Bash som skal i Claude Code. Verktygen och var de li
 | `gh` (GitHub CLI) | `%APPDATA%\npm`, installerad i `%LOCALAPPDATA%\Programs\gh` | repo, PR, API |
 | `python scripts/loopia.py` | repot | DNS hos Loopia via LoopiaAPI |
 | `node scripts/brevo.mjs` | repot | Brevo: status, domän, kampanjer, valfritt anrop |
-| `pandoc` | sökvägen | docx och pptx till text |
+| `pandoc` | sökvägen | docx till markdown |
+| `pdfinfo`, `pdftotext`, `pdftoppm` (Poppler, via winget) | sökvägen | sidantal och text ur pdf, sidbilder ur pdf |
+| `scripts/pptx-till-pdf.ps1` | repot, kräver PowerPoint | pptx eller odp till pdf via COM |
 | Chrome headless | `C:\Program Files\Google\Chrome\Application\chrome.exe` | utskrift till pdf, Lighthouse |
 | `node scripts/skarmbild.mjs` | repot | en skärmbild via CDP med riktig mobilemulering |
 | `node scripts/skarmbilder.mjs` | repot | sajtens viktigaste sidor på desktop och mobil ur dist, till underlag/prov/sajt/ |

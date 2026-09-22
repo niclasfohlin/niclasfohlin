@@ -4,9 +4,9 @@ Så tas en metod till stödundervisning emot och görs om till en post. Modellen
 
 ## Det som kommer från Niclas
 
-Ett kompendium i docx (och samma i pdf, för designen) med en eller flera metoder efter en fast modell, och en lathund i pptx, pdf eller odp med fyra sidor per metod. Lägg leveransen i `underlag/metoder/<leverans>/` (git ignorerar mappen: repot är publikt, underlagen är opublicerade). Den första leveransen ligger i `underlag/metoder/kungsholmen-2026-09/` med `kompendium.docx`, `kompendium.md` (pandoc), `lathund.pdf`, `lathund.pptx` och sidbilderna i `lathund-sidor/`.
+Ett kompendium i docx (och samma i pdf, för designen) med en eller flera metoder efter en fast modell, och en lathund i pptx, pdf eller odp med fyra sidor per metod. Filerna kommer som uppladdningar i chatten, med sökväg. Kopiera dem till `underlag/metoder/<leverans>/`, där `<leverans>` är avsändare och månad, som `kungsholmen-2026-09` (git ignorerar mappen: repot är publikt, underlagen är opublicerade). Namnge dem `kompendium.docx`, `kompendium.pdf`, `lathund.pptx` och `lathund.pdf`; `kompendium.md` och `lathund-sidor/` görs av dig. Den första leveransen ligger i `underlag/metoder/kungsholmen-2026-09/`.
 
-Läs så här: docx med `pandoc <fil> -t markdown -o <mapp>/kompendium.md`, pdf-sidorna med Read (designen: band, rutor, tabeller, bockar), pptx genom att packa upp filen och läsa `ppt/slides/slide*.xml`, eller pdf-versionen. Flera metoder i samma kompendium delas per rubriknivå 2.
+Läs så här: docx med `pandoc <fil> -t markdown -o <mapp>/kompendium.md`; pdf-sidorna med Read (designen: band, rutor, tabeller, bockar). Kommer lathunden bara som pptx eller odp: `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/pptx-till-pdf.ps1 <mapp>/lathund.pptx` gör pdf:en med PowerPoint, och `pdftoppm -r 80 -png <mapp>/lathund.pdf <mapp>/lathund-sidor/sida` ger en bild per sida att läsa med Read. Texten går också att läsa ur `ppt/slides/slide*.xml` efter uppackning. Flera metoder i samma kompendium delas per rubriknivå 2.
 
 ## Modellen
 
@@ -34,6 +34,8 @@ Schemat i `src/content.config.ts` är strikt: ett okänt fält, en tabellrad med
 | Checklista | `checklista` (punkter) | kryssbar lista, `#checklista`, mallen i docx |
 | Grund och källor | `grund` (text, kallor) | `#grund`; källor som (Författare, årtal) |
 
+Delarna `arbetsform`, `fastnar`, `roll` och `urval` kräver också `rubrik` och `text` (kompendiets rubrik och inledande stycke), och `urval` kan ha `kravText` före kraven; `_mall.yaml` visar alla fält. Exakt ett `omrade`: det metoden i första hand tränar; tränar den två lika mycket, fråga Niclas. `relaterade` pekar åt båda håll: lägg den nya metoden i de metoder den hör ihop med, i samma commit. `uppdaterad` är dagens datum när posten publiceras eller ändras. `utkast: true` håller metoden utanför produktionen, pdf-kontrollen och mejlet till prenumeranterna, men visar den i `npm run dev`; sätt `utkast: false` när metoden är klar att mejlas, före pushen.
+
 Sidan byggs av `src/components/Metod.astro` (tabeller via `MetodTabell.astro`, nedladdningsrutan via `Nedladdning.astro`), Word-filerna av `src/lib/metoddocx.ts`, faktatexter och hjälpfunktioner i `src/lib/metod.ts`. Stilarna heter `.m-*` för metodens delar (band, ruta, rutin, tabell, trappa, gor-undvik, bockar, snabbmall, grund) och ligger i `src/styles/global.css`, utskriften under `@media print`.
 
 ## Lathunden
@@ -51,16 +53,18 @@ Blocktyperna på mallsidan: `spalter` (kolumner med fråga och skrivrader), `skr
 
 ## Texten
 
-Texten i posten är Niclas egen ur underlaget, ordagrant. De enda avsiktliga ändringarna: lagernivåer (lager 1 till 3, RTI, insatsspår) bort, årskurs 4 till 9 om Niclas inte säger annat, kolon i stället för tankstreck i rubriker, "jag" i stället för "du" i checklistan. Elevantalet tas ur lathunden om kompendiet och lathunden säger olika (boksamtal fyra till tio, problemlösning och faktatextsamtal två till åtta). Ingress och undertitel är vår egen text enligt STIL.md. Saknas något som en publicerad metod behöver (område, årskurs, passrutin eller genomförande, uppföljning): fråga Niclas, hitta inte på.
+Texten i posten är Niclas egen ur underlaget, ordagrant. De enda avsiktliga ändringarna: lagernivåer (lager 1 till 3, RTI, insatsspår) bort, årskurs 4 till 9 om Niclas inte säger annat, kolon i stället för tankstreck i rubriker, "jag" i stället för "du" i checklistan. Elevantalet tas ur lathunden om kompendiet och lathunden säger olika (boksamtal fyra till tio, problemlösning och faktatextsamtal två till åtta). Säger de olika om passlängd, frekvens eller period: sajten följer kompendiet, och avvikelsen skrivs som ett beslut till Niclas. Ingress och undertitel är vår egen text enligt STIL.md. Saknas något som en publicerad metod behöver (område, årskurs, passrutin eller genomförande, uppföljning): fråga Niclas, hitta inte på.
+
+Pushen mejlar prenumeranterna, så metoden pushas när den är klar. Behöver Niclas se den först: visa skärmbilderna och Word-filen från metodprov i chatten, eller håll den som utkast tills han sagt ja. Beslut och avvikelser skrivs i NATTEN.md, rapporten till Niclas (den används även dagtid och skrivs över per pass), och sammanfattas i svaret.
 
 ## Arbetsgången
 
 1. Lägg leveransen i `underlag/metoder/<leverans>/` och läs allt.
 2. Skriv metoden som JavaScript-objekt i `underlag/metoder/<leverans>/<slug>.mjs` med samma fält som `_mall.yaml`, och kör `node scripts/metod-yaml.mjs <fil>`. Då blir citattecken, kolon och radbrytningar aldrig YAML-fel. Filen hamnar i `src/content/stodundervisning/<slug>.yaml`.
 3. Taggar ur registret: `npm run taggar`. Ny tagg bara när ingen täcker, i samma commit.
-4. `npm run validera` tills bygget går igenom.
-5. `node scripts/metodprov.mjs <slug> --underlag <mapp>/kompendium.md --bilder`: sidan, Word-filerna, upphovet i varje sidfot, underlagets meningar, lathundens fyra sidor, och skärmbilder till `underlag/prov/<slug>/`. Titta på bilderna och öppna docx-filen i Word.
-6. `node scripts/lathund-pdf.mjs <slug>`: lathunden som pdf, liggande fyra sidor, till `public/stodundervisning/<slug>-lathund.pdf`. Filen committas med metoden; `npm run validera` stannar om den saknas eller är äldre än YAML-filen. Word, Drive och pdf erbjuds automatiskt vid varje fil genom `src/components/Filval.astro`.
+4. Har metoden en lathund: `node scripts/lathund-pdf.mjs <slug>`. Skriptet bygger sajten (ett fel i schemat stoppar här med besked), skriver ut lathunden som pdf, liggande fyra sidor, till `public/stodundervisning/<slug>-lathund.pdf`, kontrollerar sidantal och upphov och skriver manifestet `lathund-pdf.json`. Båda committas med metoden. Word, Drive och pdf erbjuds sedan automatiskt vid varje fil genom `src/components/Filval.astro`.
+5. `npm run validera` tills allt går igenom. Kontrollen stannar om pdf:en saknas eller är gjord av en äldre version av metoden eller av koden som ritar lathunden: kör då steg 4 igen.
+6. `node scripts/metodprov.mjs <slug> --underlag <mapp>/kompendium.md --bilder`: sidan, Word-filerna, upphovet i varje sidfot, underlagets meningar, lathundens fyra sidor, och skärmbilder till `underlag/prov/<slug>/`. Titta på bilderna och öppna docx-filen i Word.
 7. `node scripts/metodgranskning.mjs <slug> --underlag <mapp>/kompendium.md`: Codex granskar paritet och design (nedan) och skriver till `underlag/prov/<slug>/granskning-<datum>.md`. Adjudicera svaret: P1 lagas nu, P2 lagas eller läggs i kön, P3 och innehållsförslag skrivs som beslut till Niclas.
 8. Commit "Metod: <titel>" på `innehall/<slug>` eller passets gren, med pdf-filen. Push när passet är klart, en gång; pushen mejlar prenumeranterna.
 9. Visa Niclas metadata, passrutinen och ändringarna i hans text.

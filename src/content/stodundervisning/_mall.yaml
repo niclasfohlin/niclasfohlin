@@ -17,15 +17,18 @@ arskurs: ["4-6", "7-9"]
 taggar: ["lasforstaelse"]
 # Valfritt antal av: enskilt, par, liten grupp, helklass
 format: ["liten grupp", "par"]
-# Faktarutan, fritext.
+# Faktarutan, fritext. Skriv tid som "<passlängd> per pass, <hur ofta>": metodkortet och lathundens
+# faktarutor delar texten vid " per pass" och visar passlängd och frekvens var för sig.
 tid: 20 minuter per pass, två till tre pass i veckan
 period: Sex till åtta veckor
 grupp: Tre till åtta elever
 material:
   - Vad som behövs, en rad per sak
+# Dagens datum när posten publiceras eller ändras.
 uppdaterad: 2026-01-01
-# id på andra metoder som hör ihop med denna
+# id på andra metoder som hör ihop med denna. Lägg också in den här metoden hos dem.
 relaterade: []
+# true: syns bara i npm run dev, ingen pdf-kontroll, inget mejl. Sätt false när metoden är klar att mejlas.
 utkast: true
 
 # Modellen. Rubrikerna har standardvärden där de inte anges (se src/content.config.ts).
