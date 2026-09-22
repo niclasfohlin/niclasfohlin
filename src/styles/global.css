@@ -604,6 +604,14 @@ html.js .bara-js { display: inline-block; }
   .m-tabell.steg th, .m-tabell.steg td { border: 0; border-top: 1px solid var(--farg-kant); }
   .m-tabell.steg th[scope="row"] { background: var(--farg-accent-ljus); border-top: 0; }
   .m-tabell.steg td::before { content: attr(data-rubrik); display: block; font-weight: 600; color: var(--farg-text-svag); font-size: 0.8rem; margin-bottom: 0.2em; }
+  /* Tabeller med fyra eller fler kolumner (klassen stapla, t.ex. ramarnas översikt) staplas på samma sätt. */
+  .m-tabell.stapla colgroup { display: none; }
+  .m-tabell.stapla thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .m-tabell.stapla, .m-tabell.stapla tbody, .m-tabell.stapla tr, .m-tabell.stapla th, .m-tabell.stapla td { display: block; width: auto; }
+  .m-tabell.stapla tr { border: 1px solid var(--farg-kant); margin-bottom: 0.75rem; }
+  .m-tabell.stapla th, .m-tabell.stapla td { border: 0; border-top: 1px solid var(--farg-kant); }
+  .m-tabell.stapla th[scope="row"] { background: var(--farg-accent-ljus); border-top: 0; }
+  .m-tabell.stapla td::before { content: attr(data-rubrik); display: block; font-weight: 600; color: var(--farg-text-svag); font-size: 0.8rem; margin-bottom: 0.2em; }
   .m-gor-undvik, .m-bockar.tva { grid-template-columns: 1fr; }
   .m-bockar.tva li:nth-child(even) { border-left: 0; background: var(--farg-ton-svag); }
   .m-bockar.tva li:nth-child(2) { border-top: 1px solid var(--farg-kant); }
@@ -650,6 +658,7 @@ html.js .bara-js { display: inline-block; }
   /* Rubrik och inledande stycke följer med det som kommer efter; snabbmallen hålls ihop. */
   .metod-modell h2 + p { break-after: avoid; }
   .m-snabbmall, .m-trappa, .m-trappa li, .m-kontrakt, .m-ramdel, .m-ramhuvud, .m-diplom, #snabbmall, #grund { break-inside: avoid; }
+  .m-ram > h3, .m-ram > h3 + p, .m-ramdel h4 { break-after: avoid; }
   .m-ramdel h4, .m-ramfalt dt, .m-diplom { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .m-tabell, .m-snabbmall, .m-bockar, .m-gor-undvik, .m-band, .m-ruta, .m-rutin, .m-grund, .m-motto { font-size: 9.5pt; }
   .m-tabell tr, .m-snabbmall tr, .m-bockar li, .m-gor-undvik, .m-band, .m-ruta, .m-rutin, .m-grund, .m-motto, .m-fraga { break-inside: avoid; }

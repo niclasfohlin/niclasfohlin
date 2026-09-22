@@ -179,17 +179,18 @@ function tvaKolumner(rader: { nar: string; vad: string }[]): Barn[] {
 function snabbmallTabell(titel: string, fore: string[], efter: string[], o: { skrivrum?: boolean; hojd?: number } = {}): Barn[] {
   const bredder = [Math.min(3600, Math.floor(BREDD * 0.4)), BREDD - Math.min(3600, Math.floor(BREDD * 0.4))];
   const hojd = o.hojd ?? (o.skrivrum ? 900 : 420);
-  const avsnitt = (text: string, fyll: string, farg: string) => rad([cell([stycke(text, { fet: true, farg, storlek: 20, efter: 0 })], { bredd: BREDD, span: 2, fyll, kanter: runt(kant(fyll === FARG.huvud ? FARG.huvud : FARG.kant)) })]);
-  const falt = (text: string) => rad([
-    cell([stycke(text, { fet: true, storlek: 20, efter: 0 })], { bredd: bredder[0], fyll: FARG.rand, mitt: true }),
-    cell([], { bredd: bredder[1] }),
+  // Alla stycken utom den sista radens håller ihop med nästa, så att Word inte delar mallen över två sidor.
+  const avsnitt = (text: string, fyll: string, farg: string) => rad([cell([stycke(text, { fet: true, farg, storlek: 20, efter: 0, hallIhop: true })], { bredd: BREDD, span: 2, fyll, kanter: runt(kant(fyll === FARG.huvud ? FARG.huvud : FARG.kant)) })]);
+  const falt = (text: string, sist = false) => rad([
+    cell([stycke(text, { fet: true, storlek: 20, efter: 0, hallIhop: !sist })], { bredd: bredder[0], fyll: FARG.rand, mitt: true }),
+    cell([stycke('', { efter: 0, hallIhop: !sist })], { bredd: bredder[1] }),
   ], { hojd });
   return [tabell([
     avsnitt(`SNABBMALL · ${titel}`, FARG.huvud, FARG.vit),
     avsnitt('Före passet', FARG.ljus, FARG.huvud),
-    ...fore.map(falt),
+    ...fore.map((f) => falt(f)),
     avsnitt('Efter passet: kort notering', FARG.ljus, FARG.huvud),
-    ...efter.map(falt),
+    ...efter.map((f, i) => falt(f, i === efter.length - 1)),
   ], bredder), avstand()];
 }
 function grundRuta(text: string): Barn[] {

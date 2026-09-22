@@ -54,7 +54,7 @@ const avsnitt = [
     <section>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={t.kolumner.length > 3 ? 'stapla' : ''} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
     </section>
   ))}
@@ -81,7 +81,7 @@ const avsnitt = [
     <section>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={t.kolumner.length > 3 ? 'stapla' : ''} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
     </section>
   ))}
@@ -110,7 +110,7 @@ const avsnitt = [
     <section>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={t.kolumner.length > 3 ? 'stapla' : ''} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
     </section>
   ))}
@@ -129,7 +129,7 @@ const avsnitt = [
     <section>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={t.kolumner.length > 3 ? 'stapla' : ''} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
     </section>
   ))}
@@ -183,7 +183,7 @@ const avsnitt = [
     <section>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={t.kolumner.length > 3 ? 'stapla' : ''} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
     </section>
   ))}
@@ -275,9 +275,9 @@ const avsnitt = [
         <section class="m-ram">
           <h3>{ram.rubrik}</h3>
           {ram.text.map((s) => <p>{s}</p>)}
-          {ram.oversikt && <MetodTabell kolumner={ram.oversikt.kolumner} rader={ram.oversikt.rader} />}
+          {ram.oversikt && <MetodTabell kolumner={ram.oversikt.kolumner} rader={ram.oversikt.rader} klass={ram.oversikt.kolumner.length > 3 ? 'stapla' : ''} />}
           {ramArTom(ram)
-            ? <p class="m-efter">Ramen att fylla i, med {ram.delar.length} delar, finns i planeringsmallarna.</p>
+            ? <p class="m-efter">Ramen att fylla i, med {ram.delar.length} delar, finns i <a href={`/stodundervisning/${id}-mallar.docx`}>planeringsmallarna</a>.</p>
             : (
               <div class="m-ramdelar">
                 {ram.huvud && (
@@ -312,7 +312,7 @@ const avsnitt = [
         {d.diplom.text.map((t) => (/^_{3,}$/.test(t) ? <p class="m-linje" aria-hidden="true"></p> : <p>{t}</p>))}
         {d.diplom.underskrifter.length > 0 && <p class="m-underskrifter">{d.diplom.underskrifter.map((u) => <span>{u} <span class="m-linje-kort" aria-hidden="true"></span></span>)}</p>}
       </div>
-      <p class="m-efter">Diplomet finns som egen sida i planeringsmallarna.</p>
+      <p class="m-efter">Diplomet finns som egen sida i <a href={`/stodundervisning/${id}-mallar.docx`}>planeringsmallarna</a>.</p>
     </section>
   )}
   </div>

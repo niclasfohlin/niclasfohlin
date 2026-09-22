@@ -21,13 +21,13 @@ grupp: Fyra till tio elever
 material:
   - Berättelseramen synlig på tavlan eller väggen
   - Skrivbok eller mapp per elev
-  - Dagens mentortext, utskriven
+  - 'Dagens mentortext utskriven: ramens "så här kan det låta", en elevtext eller din egen'
   - Skylten för skrivkursen, diplomet och häftapparaten
 uppdaterad: 2026-09-22
 relaterade: []
 utkast: false
 inledning:
-  - Det här är ett körschema för en skrivkurs i liten grupp. Den är tidsbegränsad, riktad och med tät uppföljning, men den presenteras för eleverna som en kurs man får vara med i, inte som ett stöd för de med svårigheter. Gruppen skriver en berättelse i sex delar utifrån en färdig berättelseram. Alla följer samma rörelse i handlingen, men varje elev skriver sin egen bok med egna personer, platser och händelser. Varje pass är 60 minuter och följer samma rutin. Skillnaden mot vanligt skrivande i klassen är att ramen redan finns, att läraren undervisar om ett skrivfokus i varje pass och att alla berättar muntligt innan de skriver. Börja med rutinen och tidsschemat nedan. Två färdiga berättelseramar och en tom finns sist på sidan och i planeringsmallarna. Forskningsgrunden finns kort sammanfattad före ramarna.
+  - Det här är ett körschema för en skrivkurs i liten grupp. Den är tidsbegränsad, riktad och med tät uppföljning, men den presenteras för eleverna som en kurs man får vara med i, inte som ett stöd för de med svårigheter. Gruppen skriver en berättelse i sex delar utifrån en färdig berättelseram. Alla följer samma rörelse i handlingen, men varje elev skriver sin egen bok med egna personer, platser och händelser. Varje pass är 60 minuter och följer samma rutin. Skillnaden mot vanligt skrivande i klassen är att ramen redan finns, att läraren undervisar om ett skrivfokus i varje pass och att alla berättar muntligt innan de skriver. Börja med rutinen och tidsschemat nedan. Två färdiga berättelseramar finns sist på sidan. De och en tom ram att fylla i finns i planeringsmallarna. Forskningsgrunden finns kort sammanfattad före ramarna.
 upplagg:
   rubrik: Så fungerar insatsen
   text: "Kursen genomförs två till tre gånger i veckan under fem till åtta veckor. Varje pass är 60 minuter. Gruppen består av fyra till tio elever. Ni arbetar med en berättelseram i sex delar, och varje del tar två pass: ett introduktionspass där delen skrivs och ett fortsättningspass där den skrivs klart och bearbetas. Första passet presenterar kursen och ramen, sista passet häftar ihop texterna till en bok per elev som läses för en inbjuden läsare. Efter varje pass gör du en kort notering om vem som kom igång, vem som behövde berätta två gånger innan skrivandet lossnade och vad som ska modelleras nästa gång. Efter perioden utvärderar du om eleven kan bygga en berättelse del för del med mindre stöd."
@@ -179,7 +179,7 @@ roll:
 urval:
   rubrik: Var ramarna och texterna finns
   text:
-    - 'Den magiska skogen: sex delar bakom klippan, med mentortext i varje del. Hunden som försvann: en hund kommer bort på en resa och tar sig hem. Egen ram: tom mall med samma sex fält, som fylls i med gruppen efter en högläst text eller en bild. Alla tre finns sist på sidan och i planeringsmallarna. Mentortexterna är ramens "så här kan det låta", elevtexter från förra passet och din egen text på tavlan.'
+    - 'Den magiska skogen: sex delar bakom klippan, med mentortext i varje del. Hunden som försvann: en hund kommer bort på en resa och tar sig hem. Egen ram: tom mall med samma sex fält, som fylls i med gruppen efter en högläst text eller en bild. De färdiga ramarna finns sist på sidan, och alla tre i planeringsmallarna. Mentortexterna är ramens "så här kan det låta", elevtexter från förra passet och din egen text på tavlan.'
   kravText: "En ram som fungerar uppfyller tre krav:"
   krav:
     - rubrik: Rörelse, inte meningar
@@ -562,7 +562,7 @@ lathund:
   innehall: En bok var, sex delar
   metoden:
     text:
-      - Lärarledd skrivkurs i liten grupp. Gruppen skriver en berättelse i sex delar utifrån en färdig berättelseram. Alla följer samma rörelse i handlingen, men varje elev skriver sin egen bok med egna personer, platser och händelser. Varje del tar två pass. Sista passet häftas texterna till böcker som läses för en inbjuden läsare.
+      - "Lärarledd skrivkurs i liten grupp. Gruppen skriver en berättelse i sex delar utifrån en färdig berättelseram. Alla följer samma rörelse i handlingen, men varje elev skriver sin egen bok med egna personer, platser och händelser. Kursen är cirka fjorton pass: ett startpass, två pass per del och ett sista pass där texterna häftas till böcker som läses för en inbjuden läsare."
       - "Skillnaden mot vanligt skrivande: ramen finns redan, läraren undervisar om ett skrivfokus per del, och alla berättar muntligt innan de skriver."
     ruta:
       rubrik: Tre saker att hålla fast vid
@@ -700,7 +700,7 @@ lathund:
           text: Tom mall med samma sex fält. Fyll i med gruppen efter en högläst text eller en bild.
         - fet: Mentortexter.
           text: Ramens ”så här kan det låta”, elevtexter från förra passet och din egen text på tavlan.
-      efter: Alla tre ramarna finns i planeringsmallarna och sist i metodbeskrivningen.
+      efter: Alla tre ramarna finns i planeringsmallarna, Word-filen på metodsidan, och de färdiga sist i metodbeskrivningen.
     bordet:
       - Ramen synlig på tavlan eller väggen
       - Dagens mentortext, utskriven
