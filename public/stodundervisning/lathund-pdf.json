@@ -1,22 +1,27 @@
 {
   "boksamtal-i-grupp": {
-    "kalla": "b132b68639b02987",
-    "pdf": "3b2d67db8fa7fb54",
+    "kalla": "e6951b7fc0fcc086",
+    "pdf": "e1e396e3d40bb597",
     "datum": "2026-09-22"
   },
   "faktatextsamtal-i-grupp": {
-    "kalla": "c70c834cde264dc4",
-    "pdf": "b959b2a71dce2e06",
+    "kalla": "6d937099572c44ee",
+    "pdf": "b3f9c927b29838ae",
     "datum": "2026-09-22"
   },
   "problemlosning-i-grupp": {
-    "kalla": "63fd878ebf15cbc8",
-    "pdf": "a91c82546626c3b0",
+    "kalla": "0a51deca4d207899",
+    "pdf": "ad3699c50420246d",
     "datum": "2026-09-22"
   },
   "til-i-grupp": {
-    "kalla": "584710ec06a440ce",
-    "pdf": "1b5fe39d8fc9493c",
+    "kalla": "7abe131728e6e3ac",
+    "pdf": "65100b793a3f9544",
+    "datum": "2026-09-22"
+  },
+  "skrivkurs-berattelseram": {
+    "kalla": "e79816df54c4a127",
+    "pdf": "6370885fd4a1d3bb",
     "datum": "2026-09-22"
   }
 }

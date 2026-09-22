@@ -1,0 +1,710 @@
+# Metod i stödundervisning. Modellen står i src/content.config.ts och mallen i _mall.yaml.
+# Skriven av scripts/metod-yaml.mjs ur skrivkurs-berattelseram.mjs. Ändra i YAML-filen eller kör om skriptet.
+titel: "Skrivkurs: gemensam berättelseram"
+undertitel: Lärarledd skrivkurs i liten grupp där varje elev skriver sin egen bok inom en gemensam ram, för åk 3–6
+ingress: "Ett körschema för en skrivkurs i liten grupp: alla skriver en berättelse i sex delar efter samma ram, men var och en sin egen bok. Elever som behöver stöd i att bygga en berättelse blandas med elever som skriver med flyt, och kursen är något man får vara med i. Varje pass: ramen, ett skrivfokus, berätta, skriva, dela."
+omrade: Skrivning
+arskurs:
+  - F-3
+  - 4-6
+arskursText: åk 3–6
+taggar:
+  - textstruktur
+  - skrivstrategier
+format:
+  - liten grupp
+  - par
+  - enskilt
+tid: 60 minuter per pass, två till tre gånger i veckan
+period: Fem till åtta veckor
+grupp: Fyra till tio elever
+material:
+  - Berättelseramen synlig på tavlan eller väggen
+  - Skrivbok eller mapp per elev
+  - Dagens mentortext, utskriven
+  - Skylten för skrivkursen, diplomet och häftapparaten
+uppdaterad: 2026-09-22
+relaterade: []
+utkast: false
+inledning:
+  - Det här är ett körschema för en skrivkurs i liten grupp. Den är tidsbegränsad, riktad och med tät uppföljning, men den presenteras för eleverna som en kurs man får vara med i, inte som ett stöd för de med svårigheter. Gruppen skriver en berättelse i sex delar utifrån en färdig berättelseram. Alla följer samma rörelse i handlingen, men varje elev skriver sin egen bok med egna personer, platser och händelser. Varje pass är 60 minuter och följer samma rutin. Skillnaden mot vanligt skrivande i klassen är att ramen redan finns, att läraren undervisar om ett skrivfokus i varje pass och att alla berättar muntligt innan de skriver. Börja med rutinen och tidsschemat nedan. Två färdiga berättelseramar och en tom finns sist på sidan och i planeringsmallarna. Forskningsgrunden finns kort sammanfattad före ramarna.
+upplagg:
+  rubrik: Så fungerar insatsen
+  text: "Kursen genomförs två till tre gånger i veckan under fem till åtta veckor. Varje pass är 60 minuter. Gruppen består av fyra till tio elever. Ni arbetar med en berättelseram i sex delar, och varje del tar två pass: ett introduktionspass där delen skrivs och ett fortsättningspass där den skrivs klart och bearbetas. Första passet presenterar kursen och ramen, sista passet häftar ihop texterna till en bok per elev som läses för en inbjuden läsare. Efter varje pass gör du en kort notering om vem som kom igång, vem som behövde berätta två gånger innan skrivandet lossnade och vad som ska modelleras nästa gång. Efter perioden utvärderar du om eleven kan bygga en berättelse del för del med mindre stöd."
+gruppen:
+  rubrik: Så sätter du ihop gruppen
+  text: 'Presentera kursen i klasserna som just en kurs: "En skrivkurs där vi skriver en hel bok var." Sätt upp en skylt och visa diplomet. Fråga sedan vilka som vill vara med. Två till fyra elever som behöver stöd i att bygga en berättelse är valda i förväg. Två eller fler elever som redan skriver med flyt bjuds in genom den öppna anmälan. Ingen i gruppen vet vem som är vald av vilket skäl. De som skriver med flyt ger gruppen kamrattexter att låna grepp från och visar hur man berättar innan man skriver. Gruppen är en skrivkurs, och alla i den är utvalda.'
+principer:
+  rubrik: Tre saker att hålla fast vid
+  text: "Ramen styr rörelsen, inte meningarna. Om uppgiften styr varje mening blir alla texter lika och elevens röst försvinner. Alla berättar muntligt för en kamrat innan de skriver, det ger idén en första form och gör att ingen sitter fast med tom sida. Och grepp lånas, innehåll är eget: en spännande inledning eller ett sätt att visa en känsla får fler pröva, men kamratens huvudperson och händelser förblir kamratens."
+tabeller:
+  - rubrik: Vad ramen bestämmer och vad eleven bestämmer
+    plats: efter-inledning
+    kolumner:
+      - Det gemensamma
+      - Det varje elev gör till sitt
+    rader:
+      - - Tema och genre
+        - Huvudperson och andra karaktärer
+      - - Berättelsens rörelse i sex delar
+        - Plats och miljö
+      - - Ett skrivfokus per del
+        - Det konkreta problemet
+      - - "Mottagare: boken läses för någon"
+        - Händelser, vändning och slut
+      - - Gemensamma ord, exempel och samtal
+        - Berättelsens röst och ton
+  - rubrik: Två slags pass
+    plats: efter-tidsschema
+    text: Varje del tar två pass. Rutinen är densamma i båda, men vikten ligger olika. I introduktionspasset är skrivfokuset nytt och skrivtiden går åt till att komma igång. I fortsättningspasset är skrivfokuset repetition, och skrivtiden går åt till att skriva klart och bearbeta.
+    kolumner:
+      - Steg
+      - Introduktionspass
+      - Fortsättningspass
+    rader:
+      - - Ramen
+        - Ny del presenteras.
+        - Var och en läser tyst sin påbörjade del.
+      - - Skrivfokus
+        - Mentortext och modellering, 15 minuter.
+        - Kort repetition med en elevtext från förra passet som mentortext, 5 minuter.
+      - - Berätta
+        - Hela delen för en kamrat.
+        - Vad som ska hända i resten av delen.
+      - - Skriv
+        - Börja delen.
+        - Skriv klart.
+      - - Dela och bearbeta
+        - En mening var.
+        - Läs tillbaka, ändra två saker, läs delen för en kamrat.
+passrutin:
+  text: Varje pass följer samma rutin. Det gör kursen lätt att leda och tryggt för eleverna att veta vad som ska hända.
+  steg:
+    - "Ramen: gruppen ser var berättelserna befinner sig. Någon läser upp något från förra passet."
+    - "Skrivfokus: läraren läser en mentortext, modellerar och samlar idéer på tavlan."
+    - "Berätta: varje elev berättar sin del för en kamrat innan den skrivs."
+    - "Skriv: eleverna skriver sin egen del. Läraren cirkulerar."
+    - "Dela och bearbeta: några formuleringar delas, var och en läser tillbaka och ändrar något."
+  efter: Passrutinen är kortversionen av passet. Tidsschemat visar när varje del görs, och tabellen efteråt visar vad du som lärare kan säga och göra i varje steg.
+tidsschema:
+  rubrik: 60 minuter, steg för steg
+  text: Förbered dig genom att läsa dagens del i ramen, välja mentortexten och skriva din egen modellering i förväg. Sedan följer du tidsschemat.
+  rader:
+    - tid: Före passet
+      fas: Förberedelse
+      vad: Läs dagens del i berättelseramen. Välj mentortext, den som finns i ramen eller en egen. Skriv ner de två eller tre meningar du själv ska modellera. Ta fram tavlan eller blädderblocket.
+    - tid: 0–10 min
+      fas: Ramen
+      vad: Visa ramen och peka på dagens del. Två elever läser upp en mening ur förra passets text. Berätta med ett par meningar vad som händer i dagens del och vad som fortfarande är elevens att bestämma.
+    - tid: 10–25 min
+      fas: Skrivfokus
+      vad: "Läs mentortexten högt. Tänk högt om vad författaren gör. Skriv dina egna meningar på tavlan medan du tänker högt. Samla gruppens förslag i en spalt: ord, sätt att börja, sätt att visa."
+    - tid: 25–30 min
+      fas: Berätta
+      vad: "Eleverna berättar i par vad som händer i deras del. Kamraten ställer en fråga: vad vill huvudpersonen, vad går fel, hur slutar delen?"
+    - tid: 30–50 min
+      fas: Skriv
+      vad: Alla skriver sin egen del. Du cirkulerar, läser över axeln och pekar på skrivfokuset i det eleven redan skrivit. Elever som fastnar får berätta sin idé för dig en gång till.
+    - tid: 50–60 min
+      fas: Dela och bearbeta
+      vad: Tre elever läser upp en mening där de använt dagens skrivfokus. Alla läser sin text tyst och ändrar en sak. Gör den korta noteringen.
+  efter: "En del per två pass. Blir en elev klar tidigt: läs delen för en kamrat, lägg till en mening med dagens skrivfokus eller rita en bild till delen som blir bokens illustration."
+steg:
+  text: De fyra stegen är den didaktiska modellen bakom rutinen. Använd exempelfraserna för att tänka högt och för att fråga i stället för att tala om.
+  rader:
+    - namn: Ramen
+      fraga: Var är vi i berättelsen?
+      gor: Visa ramen, peka på dagens del. Låt någon läsa upp ur förra passet. Säg vad ramen bestämmer och vad eleven bestämmer.
+      fraser:
+        - I dag är vi i del tre. Huvudpersonen går in i skogen.
+        - Läs meningen där din huvudperson hittar tecknet.
+        - Ramen säger att något är annorlunda. Vad som är annorlunda bestämmer du.
+    - namn: Skrivfokus
+      fraga: Hur gör en författare?
+      gor: Läs mentortexten högt. Tänk högt om greppet. Skriv egna meningar på tavlan och visa hur du tvekar och ändrar. Samla gruppens förslag.
+      fraser:
+        - Hör ni att författaren aldrig skriver ordet läskigt? Vad gör hon i stället?
+        - "Jag provar: Det första jag märkte var tystnaden. Nej, jag vill ha ett ljud. Jag ändrar."
+        - Ge mig tre saker man kan höra i en skog.
+    - namn: Berätta
+      fraga: Vad händer i din del?
+      gor: Sätt eleverna i par. Den ena berättar sin del från början till slut, den andra frågar. Byt. Lyssna själv på den som brukar fastna.
+      fraser:
+        - Berätta för din kompis vad som händer. Börja med var din huvudperson är.
+        - "Fråga din kompis: vad går fel?"
+        - Bra. Nu vet du vad du ska skriva. Skriv det du just sa.
+    - namn: Skriv och dela
+      fraga: Hur låter det?
+      gor: Cirkulera. Peka på skrivfokuset där eleven redan gjort det. Lyft tre meningar i slutet. Låt alla ändra en sak.
+      fraser:
+        - Här visar du att han är rädd utan att skriva rädd. Läs den meningen för oss sen.
+        - Läs din text tyst. Hitta ett ställe där läsaren behöver se mer.
+        - Vilket grepp lånar du av Nora till din text?
+arbetsform:
+  rubrik: "Arbetsform: gemensamt, i par, enskilt, gemensamt igen"
+  text: Passet rör sig i fyra steg. Först gemensamt, där ni ser var berättelsen är och läraren undervisar om skrivfokuset. Sedan i par, där alla berättar innan de skriver. Sedan enskilt, där varje elev skriver sin egen del. Till sist gemensamt igen, där formuleringar delas och alla bearbetar. Med fyra till tio elever hinner alla läsa upp något under kursen, och de som skriver med flyt blir gruppens levande mentortexter.
+  delar:
+    - rubrik: 1. Gemensamt
+      text: Ramen och skrivfokus, läraren modellerar
+    - rubrik: 2. I par
+      text: Eleverna berättar sin del för varandra
+    - rubrik: 3. Enskilt
+      text: Varje elev skriver sin egen del
+    - rubrik: 4. Gemensamt igen
+      text: Dela formuleringar och bearbeta
+exempel:
+  valt:
+    rubrik: Gruppen
+    text: 'sex elever i årskurs 4, introduktionspass för del 3 i Den magiska skogen, "In i skogen". Skrivfokus: miljö med alla sinnen.'
+  text:
+    - Läraren har ramen på tavlan och pekar på del 3. "I dag går era huvudpersoner in i skogen. Ramen säger att skogen är annorlunda. Hur den är annorlunda bestämmer ni." Leo läser upp meningen där hans huvudperson hittar dörren i berget. Yasmin läser sin, där tecknet är en stig som inte fanns igår.
+    - 'Läraren läser mentortexten ur ramen högt: "Det första jag märkte var tystnaden." Hon stannar. "Hör ni att hon börjar med ett öra, inte med ögonen? Vad märker vi mer?" Gruppen hittar löven som klingar och marken som är mjuk. Läraren skriver på tavlan: se, höra, känna, lukta. Sedan skriver hon egna meningar och tänker högt: "Jag vill att det ska lukta något. Blött? Nej, det luktade sött, som pannkakor. Det är konstigt i en skog, bra." Gruppen fyller spalten: silverlöv, ljus utan sol, fåglar som inte låter som fåglar.'
+    - 'Eleverna berättar i par. Elias sitter tyst tills Nora frågar: "Vad hör din huvudperson först?" Då kommer det: ett tickande, som en klocka. Läraren hör det och säger: "Skriv den meningen först." Alla skriver i tjugo minuter. Läraren läser över Adams axel och pekar: "Här skriver du att marken var konstig. Vad kände fötterna?" Adam ändrar till "marken gungade som en säng". Sofia, som skriver med flyt, är klar tidigt och lägger till ett stycke om lukten.'
+    - 'Passet avslutas med att tre elever läser upp en mening där skogen beskrivs med ett sinne. Alla läser sin text tyst och ändrar en sak. Efteråt skriver läraren en kort notering: Elias behöver berätta för läraren innan han skriver, Adams "gungade som en säng" blir mentortext nästa pass, Sofias stycke om lukten läses upp i fortsättningspasset.'
+roll:
+  rubrik: "Lärarens roll: hålla ramen, inte pennan"
+  text: Du håller i strukturen så att delarna hänger ihop och alla hinner bli klara. Du undervisar om ett skrivfokus i taget och visar med egen text att skrivande är att pröva och ändra. Men innehållet är elevens. I samma stund som du bestämmer huvudpersonens val slutar berättelsen att vara elevens bok.
+  gor:
+    - Skriv själv på tavlan och visa att du tvekar och ändrar.
+    - Låt alla berätta muntligt innan de skriver.
+    - Lyft kamraters formuleringar som mentortexter.
+    - Håll delarna korta så att alla blir klara och nöjda.
+    - Fråga "vad går fel?" när en elev fastnar.
+  undvik:
+    - Att skriva en mall som styr varje mening.
+    - Att låta eleverna skriva tyst en hel lektion utan gemensamt steg.
+    - Att rätta stavning under skrivtiden.
+    - Att låta delarna bli så långa att ingen blir klar.
+    - Att kalla gruppen något annat än skrivkursen.
+urval:
+  rubrik: Var ramarna och texterna finns
+  text:
+    - 'Den magiska skogen: sex delar bakom klippan, med mentortext i varje del. Hunden som försvann: en hund kommer bort på en resa och tar sig hem. Egen ram: tom mall med samma sex fält, som fylls i med gruppen efter en högläst text eller en bild. Alla tre finns sist på sidan och i planeringsmallarna. Mentortexterna är ramens "så här kan det låta", elevtexter från förra passet och din egen text på tavlan.'
+  kravText: "En ram som fungerar uppfyller tre krav:"
+  krav:
+    - rubrik: Rörelse, inte meningar
+      text: Ramen säger vad delen handlar om, innehållet är elevens
+    - rubrik: Ett skrivfokus per del
+      text: "Det berättelsen behöver just där: miljö, dialog, spänning"
+    - rubrik: Korta delar som blir klara
+      text: Hellre en halv sida färdig än två sidor som rinner ut
+progression:
+  rubrik: "Kursplan: pass för pass"
+  text: "Kursen är cirka fjorton pass. Vid två pass i veckan tar den sju veckor, vid tre pass i veckan cirka fem. Ansvaret flyttas gradvis: i början modellerar du mycket, mot slutet lånar eleverna grepp av varandra och du lyssnar mer än du visar."
+  enhet: Pass
+  rader:
+    - vecka: "1"
+      fokus: Start. Skylten, diplomet och boken vi ska skriva. Ramen presenteras del för del. Alla väljer huvudperson och berättar om hen för en kamrat.
+      roll: Läraren visar hela ramen och sin egen huvudperson. Ingen skriver mer än namn och tre saker om huvudpersonen.
+    - vecka: 2–3
+      fokus: "Del 1. Skrivfokus: personbeskrivning."
+      roll: Läraren modellerar mycket och tänker högt.
+    - vecka: 4–5
+      fokus: "Del 2. Skrivfokus: spänning och tecknet."
+      roll: Läraren modellerar och börjar lyfta elevtexter som mentortexter.
+    - vecka: 6–7
+      fokus: "Del 3. Skrivfokus: miljö med sinnena."
+      roll: Elevtexter från förra delen är mentortexter i fortsättningspasset.
+    - vecka: 8–9
+      fokus: "Del 4. Skrivfokus: dialog och en ny karaktär."
+      roll: Läraren modellerar dialogens form, eleverna föreslår repliker.
+    - vecka: 10–11
+      fokus: "Del 5. Skrivfokus: faran och valet."
+      roll: Läraren frågar mer än visar. Paren hjälper varandra att hitta valet.
+    - vecka: 12–13
+      fokus: "Del 6. Skrivfokus: slutet. Pass 13: hela boken läses tyst och bearbetas, framsida ritas."
+      roll: "Läraren håller i bearbetningen: en sak per del att ändra."
+    - vecka: "14"
+      fokus: Boken och läsaren. Texterna häftas, uppläsning för inbjuden läsare, diplom.
+      roll: "Läraren bjuder in parallellklass, vårdnadshavare eller rektor. Efteråt: uppföljning med klasslärare och hem."
+uppfoljning:
+  text: Du behöver veta om kursen ger effekt, inte bara att den har genomförts. Gör en enkel före- och efterkoll, och följ upp med klasslärare och hem så att skrivandet fortsätter efter kursen.
+  rader:
+    - nar: Före kursen
+      vad: Eleven skriver en kort berättelse på 20 minuter utifrån en bild. Notera om texten har en början, ett problem och ett slut, om miljön syns, om det finns dialog, och hur många ord eleven skriver. Spara texten.
+    - nar: Efter 5–8 veckor
+      vad: "Samma uppgift med en ny bild. Jämför med startläget. Lägg elevens bok bredvid: vad gör eleven nu som hen inte gjorde före kursen?"
+    - nar: Efter kursen
+      vad: Berätta för klassläraren vilka grepp eleven lärt sig så att de efterfrågas i klassens skrivande. Skicka hem boken med diplomet.
+mal:
+  rubrik: "Mål: vad eleven ska kunna göra efter kursen"
+  punkter:
+    - Bygga en berättelse del för del inom en ram
+    - Berätta sin idé muntligt innan hen skriver
+    - Beskriva en plats med mer än ett sinne
+    - Skriva en dialog som för handlingen framåt
+    - Visa en känsla utan att nämna den
+    - Låna ett grepp av en kamrat utan att låna innehållet
+snabbmall:
+  text: "En halv sida att fylla i före och efter varje pass. Håll det enkelt. Noteringen efteråt är det som styr nästa pass: vad som ska modelleras och vem som behöver berätta för dig innan skrivandet."
+  fore:
+    - Dagens del i ramen och skrivfokus
+    - Mentortext, och mina egna meningar att modellera
+    - Vilka två läser upp i steg 1, och paren i steg 3
+  efter:
+    - Vem kom igång, vem behövde berätta två gånger?
+    - Vilken elevmening blir mentortext nästa pass?
+    - Vad ska modelleras nästa gång?
+checklista:
+  punkter:
+    - Läst dagens del i ramen.
+    - Valt mentortext och skrivit mina egna meningar.
+    - Bestämt vilka två som läser upp i steg 1.
+    - Bestämt paren för berätta-steget.
+    - Tänkt igenom vem jag lyssnar på under skrivtiden.
+    - "Bestämt hur jag avslutar: vilka tre meningar lyfts."
+grund:
+  text: "Metoden bygger på tanken om den skrivande gemenskapen: eleverna utvecklas som skribenter när de skriver i ett sammanhang där de ser hur andra gör, prövar sina ord inför varandra och tar stöd av varandra (Lave & Wenger, 1991; Wenger, 1998). Att undervisa om ett skrivgrepp i taget med modelltexter och lärarens egen modellering, och att låta elever samarbeta kring sitt skrivande, hör till det som har starkast stöd för att utveckla elevers skrivande (Graham & Perin, 2007). Berättelseramen gör det möjligt: när formen redan finns kan eleven lägga sin kraft på innehållet. Att blanda elever som behöver stöd med elever som skriver med flyt, och att kalla det en kurs man får vara med i, ger gruppen både förebilder och stolthet. Upplägget för Den magiska skogen bygger på Josef Sahlins romanprojekt Den magiska dörren."
+  kallor: Bygger på Lave och Wenger (1991), Wenger (1998), Graham och Perin (2007) samt Sahlins lärarhandledning till Den magiska dörren.
+ramar:
+  rubrik: Berättelseramarna
+  text:
+    - Två färdiga ramar och en tom. Varje ram är i sex delar, och varje del har en rubrik, det som händer, ett skrivfokus, frågor att samla på tavlan, en kort mentortext att läsa högt och det som eleven bestämmer själv. Ramarna finns också som egna sidor i planeringsmallarna, att skriva ut och sätta upp på väggen eller kopiera till varje elev.
+  ramar:
+    - rubrik: "Berättelseram 1: Den magiska skogen"
+      text:
+        - Bakom huvudpersonens skola eller by ligger en klippa. Alla vet att man inte går dit, men ingen vet varför. Bakom klippan finns en skog där magiska saker händer. Huvudpersonen är i elevens egen ålder och berättar i jag-form, om eleven vill. Ramen är i sex delar. Varje del har en rubrik, det som händer, ett skrivfokus, frågor att samla på tavlan, en kort mentortext att läsa högt och det som eleven bestämmer själv.
+      oversikt:
+        kolumner:
+          - Del
+          - Rubrik
+          - Vad händer
+          - Skrivfokus
+        rader:
+          - - "1"
+            - Hej
+            - Huvudpersonen presenterar sig, sin plats och en vän. Klippan nämns.
+            - Personbeskrivning i jag-form
+          - - "2"
+            - Klippan
+            - Huvudpersonen går ändå till klippan och hittar ett tecken.
+            - "Spänning: säg inte allt"
+          - - "3"
+            - In i skogen
+            - Huvudpersonen går in. Skogen är annorlunda.
+            - Miljö med alla sinnen
+          - - "4"
+            - En annorlunda vän
+            - Huvudpersonen möter någon som bor i skogen och behöver hjälp.
+            - Dialog och ny karaktär
+          - - "5"
+            - Faran
+            - Något står i vägen. Huvudpersonen måste välja.
+            - Bygg upp mot ett val
+          - - "6"
+            - Tillbaka
+            - Huvudpersonen kommer hem. Något har förändrats. Hemligheten.
+            - Knyt ihop och sista meningen
+      delar:
+        - rubrik: Del 1 · Hej
+          falt:
+            - rubrik: Vad händer
+              text: "Huvudpersonen presenterar sig själv, sin plats och en vän. Vi får veta något hen är bra på och något hen är rädd för. Klippan nämns: alla vet att man inte går dit."
+            - rubrik: Skrivfokus
+              text: Personbeskrivning i jag-form. Visa vem jag är genom vad jag gör och gillar, inte genom en lista.
+            - rubrik: Samla på tavlan
+              text: Vad kan en huvudperson vara bra på? Vad kan hen vara rädd för? Vad säger andra om hen? Vad kan vara förbjudet med klippan?
+            - rubrik: Så här kan det låta
+              text: Jag heter Vilda och jag är den enda i klassen som vågar klättra högst upp i kastanjen. Mamma säger att jag har för mycket spring i benen. Min bästa vän Milo säger att jag inte kan sitta still i fem minuter. Han har rätt. Bakom vår skola finns en klippa. Alla vet att man inte går dit. Ingen vet varför.
+              kursiv: true
+            - rubrik: Eleven bestämmer
+              text: Namn, ålder och plats. Vem vännen är. Vad huvudpersonen är bra på och rädd för. Vad man säger om klippan.
+        - rubrik: Del 2 · Klippan
+          falt:
+            - rubrik: Vad händer
+              text: "Något gör att huvudpersonen ändå går till klippan: en boll, ett vad, en katt som springer dit. Vid klippan finns ett tecken som inte fanns förut: en dörr i berget, en stig, ett brev under en sten."
+            - rubrik: Skrivfokus
+              text: Skapa spänning. Korta meningar. Ett sinne i taget. Säg inte allt, låt läsaren undra.
+            - rubrik: Samla på tavlan
+              text: Vad kan få huvudpersonen att gå dit? Vad kan tecknet vara? Hur märker läsaren att något inte stämmer, utan att vi skriver "läskigt"?
+            - rubrik: Så här kan det låta
+              text: Bollen rullade mot klippan. Jag sprang efter. Vid berget stannade jag. Där, i stenen, satt ett handtag av rost. Jag hade gått förbi hundra gånger. Det hade aldrig funnits där.
+              kursiv: true
+            - rubrik: Eleven bestämmer
+              text: Varför huvudpersonen går dit. Vad tecknet är. Om hen berättar för vännen eller inte.
+        - rubrik: Del 3 · In i skogen
+          falt:
+            - rubrik: Vad händer
+              text: "Huvudpersonen går in. Skogen är annorlunda: ljuset, ljuden, lukterna, marken. Något rör sig långt inne mellan träden."
+            - rubrik: Skrivfokus
+              text: Miljöbeskrivning med alla sinnen. Börja med ett annat sinne än synen. Gör skogen magisk utan att använda ordet magisk.
+            - rubrik: Samla på tavlan
+              text: Vad ser, hör, känner och luktar man i en vanlig skog? Vad kan vara annorlunda i den här? Vilka ord gör att läsaren ser det?
+            - rubrik: Så här kan det låta
+              text: Det första jag märkte var tystnaden. Inga bilar, inga fåglar. Sedan såg jag att löven inte var gröna. De var silver, och när jag rörde ett klingade det som en liten klocka. Marken var mjuk som en madrass. Långt inne mellan träden rörde sig något som var för stort för att vara ett rådjur.
+              kursiv: true
+            - rubrik: Eleven bestämmer
+              text: Hur skogen ser ut. Vad som är annorlunda. Vad det är som rör sig.
+        - rubrik: Del 4 · En annorlunda vän
+          falt:
+            - rubrik: Vad händer
+              text: Huvudpersonen möter någon som bor i skogen. Den är inte som huvudpersonen väntat sig. Den behöver hjälp med något, och bara huvudpersonen kan hjälpa.
+            - rubrik: Skrivfokus
+              text: Dialog och en ny karaktär. Replikstreck, säga-verb, och vad personerna gör medan de pratar. Låt dialogen föra handlingen framåt.
+            - rubrik: Samla på tavlan
+              text: Vem kan bo i skogen? Hur ser den ut och hur låter den när den pratar? Vad kan den behöva hjälp med? Vilka ord kan vi använda i stället för "sa"?
+            - rubrik: Så här kan det låta
+              text: |-
+                – Du är sen, sa rösten.
+                Jag vände mig om. Den som pratade var inte högre än en hund och hade ögon som lyste gult.
+                – Sen till vad? frågade jag.
+                – Till att hjälpa mig, förstås. Dörren öppnas bara för den som kan hjälpa.
+              kursiv: true
+            - rubrik: Eleven bestämmer
+              text: Vem vännen är. Vad den behöver hjälp med. Hur den pratar. Om huvudpersonen litar på den.
+        - rubrik: Del 5 · Faran
+          falt:
+            - rubrik: Vad händer
+              text: "För att hjälpa vännen måste huvudpersonen göra något svårt. Någon eller något vill hindra det. Det går fel två gånger. Till slut måste huvudpersonen välja: ge upp och gå hem, eller våga det hen är mest rädd för."
+            - rubrik: Skrivfokus
+              text: Bygg upp mot ett val. Problemet växer, flera försök, det värsta ögonblicket, och sedan valet. Visa rädslan i kroppen.
+            - rubrik: Samla på tavlan
+              text: Vad kan stå i vägen? Vad är huvudpersonen mest rädd för, från del 1? Vilket val måste hen göra? Hur känns rädsla i kroppen?
+            - rubrik: Så här kan det låta
+              text: Bron var borta. På andra sidan stod Skuggan och väntade, och den visste att jag inte vågade hoppa. Mina ben skakade. Jag tänkte på Milo som satt fast där borta. Jag tänkte på mamma som skulle undra var jag var. Sedan tog jag tre steg bakåt.
+              kursiv: true
+            - rubrik: Eleven bestämmer
+              text: Vad faran är. Vilket valet är. Om det lyckas direkt eller inte.
+        - rubrik: Del 6 · Tillbaka
+          falt:
+            - rubrik: Vad händer
+              text: Huvudpersonen kommer tillbaka till sin vanliga värld. Något har förändrats, i huvudpersonen eller runt omkring. Hemligheten om skogen bevaras, eller delas med en enda person.
+            - rubrik: Skrivfokus
+              text: Knyt ihop. Återkom till något från del 1. Visa vad som förändrats utan att förklara det. Skriv en sista mening som läsaren minns.
+            - rubrik: Samla på tavlan
+              text: Vad från början kan komma tillbaka i slutet? Vad är annorlunda med huvudpersonen nu? Hur vet läsaren att berättelsen är slut?
+            - rubrik: Så här kan det låta
+              text: När jag kom hem stod middagen på bordet, som om ingenting hade hänt. Mamma frågade var jag varit. Jag sa att jag klättrat i kastanjen. I fickan låg ett silverlöv. Det klingade när jag rörde det.
+              kursiv: true
+            - rubrik: Eleven bestämmer
+              text: Vad som förändrats. Om vännen eller familjen får veta. Om dörren finns kvar.
+    - rubrik: "Berättelseram 2: Hunden som försvann"
+      text:
+        - En hund kommer bort från sin familj under en resa. Hunden är huvudperson och tar sig hem genom nya platser, möten och faror. Eleven väljer om hunden berättar i jag-form eller om berättelsen skrivs i tredje person. Ramen är i sex delar med samma uppbyggnad som Den magiska skogen.
+      oversikt:
+        kolumner:
+          - Del
+          - Rubrik
+          - Vad händer
+          - Skrivfokus
+        rader:
+          - - "1"
+            - Hunden och familjen
+            - Hunden presenterar sig, sin familj och sin plats.
+            - Karaktär genom vanor
+          - - "2"
+            - Försvinnandet
+            - Familjen är på resa. Hunden lämnar bilen och bilen är borta.
+            - En händelse steg för steg
+          - - "3"
+            - Första platsen
+            - Hunden hamnar på en ny plats och måste klara natten.
+            - Miljö genom hundens sinnen
+          - - "4"
+            - Ett nytt möte
+            - Hunden möter någon som hjälper eller lurar.
+            - Dialog och ny karaktär
+          - - "5"
+            - Faran
+            - Hunden hamnar i fara och måste välja.
+            - Spänning i kropp och tid
+          - - "6"
+            - Hemma igen
+            - Hunden och familjen hittar varandra. Något är annorlunda.
+            - Slutet och sista meningen
+      delar:
+        - rubrik: Del 1 · Hunden och familjen
+          falt:
+            - rubrik: Vad händer
+              text: Hunden presenterar sig, sin familj och sin plats. Vi får veta vad hunden gör varje dag, vem i familjen som är favoriten och vad hunden är rädd för.
+            - rubrik: Skrivfokus
+              text: Karaktär genom vanor. Visa vem hunden är genom vad den gör varje dag, inte genom att räkna upp egenskaper.
+            - rubrik: Samla på tavlan
+              text: Vad gör en hund varje morgon? Vad kan en hund vara bra på? Rädd för? Vem i familjen är favorit och varför?
+            - rubrik: Så här kan det låta
+              text: "Jag heter Bus och jag är den som väcker familjen. Först Lova, hon är sju och har alltid smulor i sängen. Sedan pappa. Mamma väcker jag inte, det har jag lärt mig. Jag är rädd för två saker: åska och dammsugaren."
+              kursiv: true
+            - rubrik: Eleven bestämmer
+              text: Hundens namn och hur den ser ut. Familjen och platsen. Favoritpersonen. Vad hunden är rädd för.
+        - rubrik: Del 2 · Försvinnandet
+          falt:
+            - rubrik: Vad händer
+              text: "Familjen är på resa. Vid ett stopp lämnar hunden bilen: den följer ett spår, blir skrämd eller bara nyfiken. När den vänder tillbaka är bilen borta."
+            - rubrik: Skrivfokus
+              text: Berätta en händelse steg för steg. Sakta ner i det viktiga ögonblicket, när hunden förstår att bilen är borta.
+            - rubrik: Samla på tavlan
+              text: Var kan familjen stanna på en resa? Vad kan locka en hund bort från bilen? Hur märker hunden att något är fel? Vad känner den då?
+            - rubrik: Så här kan det låta
+              text: Vid bensinmacken öppnade Lova dörren för att kasta en påse. Jag såg en hare. Bara en liten bit, tänkte jag. När jag kom tillbaka var det fullt av bilar. Jag nosade på varenda en. Ingen av dem var vår.
+              kursiv: true
+            - rubrik: Eleven bestämmer
+              text: Var det händer. Varför hunden lämnar bilen. Hur långt bort den hamnar.
+        - rubrik: Del 3 · Första platsen
+          falt:
+            - rubrik: Vad händer
+              text: "Hunden hamnar på en ny plats: en stad, en skog, en bondgård, en hamn. Den måste hitta mat och en plats att sova på. Första natten ensam."
+            - rubrik: Skrivfokus
+              text: Miljö genom hundens sinnen. Nosen först, sedan öronen, sedan tassarna. Vad är gott och vad är farligt?
+            - rubrik: Samla på tavlan
+              text: Hur luktar en stad för en hund? En skog? En bondgård? Vad är farligt för en hund där? Var kan den sova?
+            - rubrik: Så här kan det låta
+              text: "Staden luktade hundra saker på en gång: korv, avgaser, andra hundar, regn. Mina tassar gjorde ont av asfalten. Under en bänk hittade jag en halv smörgås och en torr plats. Där sov jag, med ena örat uppe."
+              kursiv: true
+            - rubrik: Eleven bestämmer
+              text: Vilken platsen är. Vad hunden hittar att äta. Hur första natten blir.
+        - rubrik: Del 4 · Ett nytt möte
+          falt:
+            - rubrik: Vad händer
+              text: "Hunden möter någon: ett djur eller en människa. Den nya karaktären hjälper hunden på vägen, eller lurar den åt fel håll. Djur förstår varandra. Människor förstår hunden på sitt sätt."
+            - rubrik: Skrivfokus
+              text: Dialog och en ny karaktär. Hur den ser ut, hur den låter och vad den vill. Replikstreck och säga-verb.
+            - rubrik: Samla på tavlan
+              text: Vem kan hunden möta? Går den att lita på? Hur pratar en katt, en kråka, en gammal man på en bänk? Vad kan de vilja ha i utbyte?
+            - rubrik: Så här kan det låta
+              text: |-
+                – Du går åt fel håll, sa katten uppe på staketet.
+                – Hur vet du det? sa jag.
+                – Jag vet allt. Bilarna som ska söderut kör där borta.
+                Katten pekade med svansen. Jag litade inte på henne. Men jag hade ingen annan att lita på.
+              kursiv: true
+            - rubrik: Eleven bestämmer
+              text: Vem hunden möter. Om den går att lita på. Om hunden får sällskap en bit på vägen.
+        - rubrik: Del 5 · Faran
+          falt:
+            - rubrik: Vad händer
+              text: "Hunden hamnar i fara: en stor väg, en älv, en hundfångare, ett djur som jagar. Den måste välja: gömma sig och vänta, eller fortsätta mot hemmet trots faran."
+            - rubrik: Skrivfokus
+              text: Spänning i kropp och tid. Hjärtat, andningen, benen. Korta meningar när det går fort. Sakta ner precis innan det avgörs.
+            - rubrik: Samla på tavlan
+              text: Vad kan vara farligt för en hund på väg hem? Hur känns rädsla i kroppen? Vad kan få hunden att våga?
+            - rubrik: Så här kan det låta
+              text: "Lastbilen kom fort. Jag stod mitt på vägen och benen ville inte lyda. Ljuset blev större. Sedan hörde jag Lovas röst i huvudet: Spring, Bus! Och jag sprang."
+              kursiv: true
+            - rubrik: Eleven bestämmer
+              text: Vad faran är. Om någon hjälper till. Vad hunden förlorar eller vinner.
+        - rubrik: Del 6 · Hemma igen
+          falt:
+            - rubrik: Vad händer
+              text: Hunden hittar hem, eller familjen hittar hunden. Återseendet. Något är annorlunda med hunden nu, den har varit med om något ingen annan vet.
+            - rubrik: Skrivfokus
+              text: Slutet. Sakta ner i återseendet. Återkom till något från del 1. Skriv en sista mening som läsaren minns.
+            - rubrik: Samla på tavlan
+              text: Hur hittar de varandra? Vad från början kan komma tillbaka i slutet? Vad är annorlunda med hunden nu?
+            - rubrik: Så här kan det låta
+              text: Jag kände lukten av vårt hus innan jag såg det. Lova satt på trappan. Hon hade smulor på tröjan. Jag skällde en gång, och hon vände sig om. Sedan minns jag inte så mycket mer, för hon höll så hårt. Jag är fortfarande rädd för åska. Men inte för något annat.
+              kursiv: true
+            - rubrik: Eleven bestämmer
+              text: Hur de hittar varandra. Vad som förändrats. Sista meningen.
+    - rubrik: "Berättelseram 3: egen ram"
+      text:
+        - "En ram som fungerar för många slags berättelser har samma rörelse: något oväntat händer, huvudpersonen försöker förstå, det blir svårare, huvudpersonen måste välja, och valet får en konsekvens. Bestäm tema och genre med gruppen, ge dem något att tänka utifrån (en högläst text, en bild, ett föremål) och fyll sedan i delarna tillsammans. Skrivfokus väljs efter vad berättelsen behöver i varje del: personbeskrivning när vi möter huvudpersonen, miljö när hen kommer till en ny plats, dialog när personer möts, spänning när problemet växer, och slutet när trådarna ska knytas ihop."
+      huvud:
+        - rubrik: Tema och genre
+        - rubrik: Huvudpersonen
+        - rubrik: Berättelsens rörelse
+      delar:
+        - rubrik: "Del 1 · Rubrik:"
+          falt:
+            - rubrik: Vad händer
+            - rubrik: Skrivfokus
+            - rubrik: Samla på tavlan
+            - rubrik: Så här kan det låta
+            - rubrik: Eleven bestämmer
+        - rubrik: "Del 2 · Rubrik:"
+          falt:
+            - rubrik: Vad händer
+            - rubrik: Skrivfokus
+            - rubrik: Samla på tavlan
+            - rubrik: Så här kan det låta
+            - rubrik: Eleven bestämmer
+        - rubrik: "Del 3 · Rubrik:"
+          falt:
+            - rubrik: Vad händer
+            - rubrik: Skrivfokus
+            - rubrik: Samla på tavlan
+            - rubrik: Så här kan det låta
+            - rubrik: Eleven bestämmer
+        - rubrik: "Del 4 · Rubrik:"
+          falt:
+            - rubrik: Vad händer
+            - rubrik: Skrivfokus
+            - rubrik: Samla på tavlan
+            - rubrik: Så här kan det låta
+            - rubrik: Eleven bestämmer
+        - rubrik: "Del 5 · Rubrik:"
+          falt:
+            - rubrik: Vad händer
+            - rubrik: Skrivfokus
+            - rubrik: Samla på tavlan
+            - rubrik: Så här kan det låta
+            - rubrik: Eleven bestämmer
+        - rubrik: "Del 6 · Rubrik:"
+          falt:
+            - rubrik: Vad händer
+            - rubrik: Skrivfokus
+            - rubrik: Samla på tavlan
+            - rubrik: Så här kan det låta
+            - rubrik: Eleven bestämmer
+diplom:
+  kicker: Skrivkursen
+  rubrik: Diplom
+  text:
+    - tilldelas
+    - ___
+    - som har genomfört en skrivkurs och skrivit boken
+    - ___
+    - Innehavaren av detta diplom har tagit sina första steg till att bli en författare.
+    - Grattis!
+  underskrifter:
+    - Datum
+    - Lärare
+lathund:
+  innehall: En bok var, sex delar
+  metoden:
+    text:
+      - Lärarledd skrivkurs i liten grupp. Gruppen skriver en berättelse i sex delar utifrån en färdig berättelseram. Alla följer samma rörelse i handlingen, men varje elev skriver sin egen bok med egna personer, platser och händelser. Varje del tar två pass. Sista passet häftas texterna till böcker som läses för en inbjuden läsare.
+      - "Skillnaden mot vanligt skrivande: ramen finns redan, läraren undervisar om ett skrivfokus per del, och alla berättar muntligt innan de skriver."
+    ruta:
+      rubrik: Tre saker att hålla fast vid
+      punkter:
+        - fet: Ramen styr rörelsen, inte meningarna.
+          text: Styr uppgiften varje mening blir alla texter lika.
+        - fet: Alla berättar innan de skriver.
+          text: Idén får en första form och ingen sitter med tom sida.
+        - fet: Grepp lånas, innehåll är eget.
+          text: En inledning får fler pröva. Kamratens huvudperson är kamratens.
+    tabell:
+      rubrik: De fyra stegen · vad du gör och säger
+      kolumner:
+        - Steg
+        - Exempelfraser
+      rader:
+        - - |-
+            1 · Ramen
+            0–10 min. Var är vi? Någon läser upp.
+          - |-
+            ”I dag är vi i del tre. Huvudpersonen går in i skogen.”
+            ”Ramen säger att något är annorlunda. Vad, bestämmer du.”
+        - - |-
+            2 · Skrivfokus
+            10–25 min. Mentortext, modellera, samla.
+          - |-
+            ”Hör ni att författaren aldrig skriver läskigt? Vad gör hon i stället?”
+            ”Jag provar en mening. Nej, jag ändrar.”
+        - - |-
+            3 · Berätta
+            25–30 min. I par, innan någon skriver.
+          - |-
+            ”Berätta för din kompis vad som händer i din del.”
+            ”Fråga din kompis: vad går fel?”
+        - - |-
+            4 · Skriv
+            30–60 min. Skriv, dela tre meningar, ändra en sak.
+          - |-
+            ”Här visar du att han är rädd utan ordet rädd. Läs den sen.”
+            ”Vilket grepp lånar du av Nora?”
+    not: "Så sätter du ihop gruppen: presentera kursen i klasserna med skylt och diplom och fråga vilka som vill vara med. Två till fyra elever som behöver stöd är valda i förväg, två eller fler som skriver med flyt bjuds in. Alla i gruppen är utvalda."
+  pass:
+    rubrik: "Vi kör ett pass: In i skogen, del 3"
+    textRubrik: Gruppen · sex elever, åk 4, skrivfokus miljö med sinnena
+    utskrift: Skriv ut passexemplet
+    text:
+      - Läraren pekar på del 3 i ramen. ”I dag går era huvudpersoner in i skogen. Hur den är annorlunda bestämmer ni.” Leo läser meningen där hans huvudperson hittar dörren i berget.
+      - "Mentortexten läses högt: ”Det första jag märkte var tystnaden.” Läraren stannar: ”Hon börjar med ett öra, inte med ögonen.” På tavlan: se, höra, känna, lukta. Läraren skriver egna meningar och ändrar sig högt. Gruppen fyller spalten: silverlöv, ljus utan sol."
+      - "Eleverna berättar i par. Elias sitter tyst tills Nora frågar: ”Vad hör din huvudperson först?” Ett tickande, som en klocka. ”Skriv den meningen först.” Adam ändrar ”konstig mark” till ”marken gungade som en säng”."
+      - "Tre elever läser upp en mening med ett sinne. Alla ändrar en sak. Notering: Elias berättar för läraren innan han skriver, Adams mening blir mentortext nästa pass."
+    forberett:
+      rubrik: Det jag förberedde
+      text:
+        - "Läst del 3 i ramen. Valt mentortexten ur ramen. Skrivit mina två egna meningar i förväg. Tavlan med fyra spalter: se, höra, känna, lukta."
+    klarTidigt: Läs delen för en kamrat, lägg till en mening med dagens skrivfokus eller rita bokens bild till delen.
+    schema:
+      rubrik: 60 minuter, steg för steg
+      rader:
+        - tid: Före
+          fas: Förberedelse
+          vad: Läs dagens del i ramen. Välj mentortext. Skriv dina egna meningar i förväg.
+        - tid: 0–10
+          fas: 1 · Ramen
+          vad: Visa ramen, peka på dagens del. Två elever läser upp en mening från förra passet.
+        - tid: 10–25
+          fas: 2 · Skrivfokus
+          vad: Mentortext högt. Tänk högt om greppet. Skriv egna meningar på tavlan. Samla gruppens förslag.
+        - tid: 25–30
+          fas: 3 · Berätta
+          vad: "I par: berätta din del från början till slut. Kamraten frågar vad som går fel."
+        - tid: 30–50
+          fas: 4 · Skriv
+          vad: Alla skriver. Du cirkulerar och pekar på skrivfokuset där eleven redan gjort det.
+        - tid: 50–60
+          fas: Dela och bearbeta
+          vad: Tre meningar läses upp. Alla ändrar en sak. Kort notering.
+  mall:
+    rubrik: Berättelseramen på tavlan
+    underrad: "Ramen i sex delar · fyll i med gruppen eller använd en färdig ram · Tema: ______________ · Huvudperson: ______________"
+    block:
+      - typ: tabell
+        rubrik: Sex delar, rubrikerna är förslag
+        kolumner:
+          - Del
+          - Skrivfokus
+          - Vad händer
+          - Eleven bestämmer
+        rader:
+          - - 1 · Hej
+            - Personbeskrivning
+            - ""
+            - ""
+          - - 2 · Tecknet
+            - Spänning
+            - ""
+            - ""
+          - - 3 · Ny plats
+            - Miljö med sinnena
+            - ""
+            - ""
+          - - 4 · Ett möte
+            - Dialog
+            - ""
+            - ""
+          - - 5 · Faran
+            - Valet
+            - ""
+            - ""
+          - - 6 · Slutet
+            - Knyt ihop
+            - ""
+            - ""
+      - typ: kedja
+        rubrik: Rörelsen
+        steg:
+          - Något oväntat händer
+          - huvudpersonen försöker förstå
+          - det blir svårare
+          - huvudpersonen måste välja
+          - valet får en konsekvens
+      - typ: snabbmall
+      - typ: not
+        text: "Skrivfokus väljs efter vad berättelsen behöver: personbeskrivning när vi möter huvudpersonen, miljö vid en ny plats, dialog när personer möts, spänning när problemet växer, slutet när trådarna knyts. Färdiga ramar: Den magiska skogen och Hunden som försvann."
+  material:
+    rubrik: Vad du behöver för skrivkursen
+    kravEtikett: Ramkrav
+    var:
+      rubrik: Var ramarna och texterna finns
+      punkter:
+        - fet: Den magiska skogen.
+          text: Sex delar bakom klippan, med mentortext i varje del.
+        - fet: Hunden som försvann.
+          text: En hund kommer bort på en resa och tar sig hem.
+        - fet: Egen ram.
+          text: Tom mall med samma sex fält. Fyll i med gruppen efter en högläst text eller en bild.
+        - fet: Mentortexter.
+          text: Ramens ”så här kan det låta”, elevtexter från förra passet och din egen text på tavlan.
+      efter: Alla tre ramarna finns i planeringsmallarna och sist i metodbeskrivningen.
+    bordet:
+      - Ramen synlig på tavlan eller väggen
+      - Dagens mentortext, utskriven
+      - Skrivbok eller mapp per elev
+      - Tavla med plats för en spalt
+      - Skylten för skrivkursen
+      - Diplomen och häftapparaten, sista passet
