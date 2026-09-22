@@ -11,8 +11,10 @@ undertitel: Lärarledd insats i liten grupp för åk 4–9
 ingress: Två till fyra meningar om vad metoden tränar och hur den används. Egen text som fungerar ensam i ett kort och i ett nyhetsbrev.
 # Exakt ett av: Matematik, Läsning, Skrivning
 omrade: Läsning
-# Minst ett av: F-3, 4-6, 7-9
+# Minst ett av: F-3, 4-6, 7-9. Filtret i metodbanken använder nivåerna.
 arskurs: ["4-6", "7-9"]
+# Valfritt: årskursen som läsaren ser när nivåerna inte säger det exakt, t.ex. åk 3–6.
+# arskursText: åk 3–6
 # id från src/data/taggar.json. Återanvänd före att lägga till.
 taggar: ["lasforstaelse"]
 # Valfritt antal av: enskilt, par, liten grupp, helklass
@@ -37,6 +39,7 @@ inledning:
 upplagg:
   rubrik: Så fungerar insatsen
   text: Hur ofta, hur länge, hur stor grupp, vad ni arbetar med per pass, vad som noteras och hur perioden utvärderas.
+# gruppen: valfri ruta om hur gruppen sätts ihop (rubrik, text), efter upplägget.
 # principer: valfri ruta med det viktigaste att hålla fast vid.
 passrutin:
   text: Varje pass följer samma rutin.
@@ -93,7 +96,7 @@ urval:
   kravText: "Välj en text per pass som uppfyller tre krav:"
   krav:
     - { rubrik: Krav ett, text: Vad det betyder }
-# Fria tabeller med rubrikrad, där de hör hemma: plats efter-inledning, efter-steg, efter-arbetsform eller efter-urval.
+# Fria tabeller med rubrikrad, där de hör hemma: plats efter-inledning, efter-tidsschema, efter-steg, efter-arbetsform eller efter-urval.
 tabeller:
   - rubrik: Elevens mapp
     plats: efter-inledning
@@ -148,6 +151,49 @@ checklista:
 grund:
   text: Forskningen bakom, med parentescitat (Författare, årtal). Bara källor som går att verifiera.
   kallor: Bygger på Författare (årtal), Författare (årtal).
+
+# Ramar: färdiga berättelseramar, textramar eller liknande som metoden arbetar i. Sist på sidan, efter
+# grunden, och som egna sidor i planeringsmallarna. En ram där alla fält är tomma är en mall att fylla i.
+ramar:
+  rubrik: Berättelseramarna
+  text:
+    - Vad ramarna är och hur de används.
+  ramar:
+    - rubrik: "Berättelseram 1: Titeln"
+      text:
+        - Ramens inledning.
+      # Valfri översikt, en rad per del.
+      oversikt:
+        kolumner: [Del, Rubrik, Vad händer, Skrivfokus]
+        rader:
+          - ["1", "Hej", "Vad som händer i delen.", "Skrivfokus i delen."]
+      delar:
+        - rubrik: Del 1 · Hej
+          falt:
+            - { rubrik: Vad händer, text: Vad som händer i delen. }
+            # kursiv: true för en mentortext eller ett exempel.
+            - { rubrik: Så här kan det låta, text: En exempeltext., kursiv: true }
+    - rubrik: "Berättelseram 2: egen ram"
+      text:
+        - Hur läraren fyller i ramen med gruppen.
+      # huvud: fält att fylla i före delarna, tomma i en mall.
+      huvud:
+        - { rubrik: Tema och genre }
+      delar:
+        - rubrik: "Del 1 · Rubrik:"
+          falt:
+            - { rubrik: Vad händer }
+            - { rubrik: Skrivfokus }
+# Diplom eller intyg efter perioden: en sida i planeringsmallarna. En rad med bara understreck blir en skrivlinje.
+diplom:
+  kicker: Skrivkursen
+  rubrik: Diplom
+  text:
+    - tilldelas
+    - ___
+    - som har genomfört kursen.
+    - Grattis!
+  underskrifter: [Datum, Lärare]
 
 # Lathunden: fyra sidor ur snabbguiden (Metoden, Ett pass, Mallen, Material). Egen sida
 # /stodundervisning/<id>/lathund, utskrift i liggande A4 och Word-fil. Passlängd, grupp och

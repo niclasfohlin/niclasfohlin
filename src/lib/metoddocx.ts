@@ -8,7 +8,7 @@ import {
   Paragraph, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, VerticalAlign, WidthType,
   type IBorderOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
-import { arbetsformRad, arskursSpann, datumText, lathundFakta, metaRad, metodAdress, SAJT, UPPHOV, type MetodData, type MetodPost } from './metod';
+import { arbetsformRad, arskursText, datumText, lathundFakta, metaRad, metodAdress, ramArTom, SAJT, UPPHOV, type MetodData, type MetodPost } from './metod';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
 const FARG = {
@@ -224,9 +224,61 @@ function schemaTabell(s: Schema): Table {
   return tabell([huvud, ...kropp], bredder);
 }
 
+// En ram (berättelseram eller liknande): inledning, översikt och delarna som tabeller med ett fält
+// per rad. Tomma fält får skrivrum, så att en tom ram blir en mall att fylla i. Raderna i en del
+// hålls ihop på samma sida.
+type Ram = NonNullable<MetodData['ramar']>['ramar'][number];
+function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[], o: { rubrik?: string; skrivrum?: boolean } = {}): Barn[] {
+  const bredder = [2300, BREDD - 2300];
+  const rader: TableRow[] = [];
+  if (o.rubrik) rader.push(rad([cell([stycke(o.rubrik, { fet: true, farg: FARG.huvud, storlek: 22, efter: 0, hallIhop: true })], { bredd: BREDD, span: 2, fyll: FARG.ljus, kanter: runt(kant(FARG.huvud)) })], { huvud: true }));
+  falt.forEach((f, i) => {
+    const sist = i === falt.length - 1;
+    const linjer = f.text.split('\n');
+    const tom = !f.text.trim();
+    rader.push(rad([
+      cell([stycke(f.rubrik, { fet: true, storlek: 20, efter: 0, hallIhop: !sist })], { bredd: bredder[0], fyll: FARG.rand }),
+      cell(tom ? [stycke('', { efter: 0, hallIhop: !sist })] : linjer.map((l, j) => stycke(l, { kursiv: f.kursiv, storlek: 20, efter: j === linjer.length - 1 ? 0 : 20, hallIhop: !sist })), { bredd: bredder[1] }),
+    ], { hojd: tom ? (o.skrivrum ? 900 : 420) : undefined }));
+  });
+  return [tabell(rader, bredder), avstand()];
+}
+function ramBarn(ram: Ram, o: { skrivrum?: boolean } = {}): Barn[] {
+  const ut: Barn[] = [];
+  for (const s of ram.text) ut.push(stycke(s));
+  if (ram.oversikt) {
+    const n = ram.oversikt.kolumner.length;
+    const forsta = 1100;
+    const rest = Math.floor((BREDD - forsta) / (n - 1));
+    ut.push(...rubrikTabell(ram.oversikt.kolumner, ram.oversikt.rader, ram.oversikt.kolumner.map((_, i) => (i === 0 ? forsta : i === n - 1 ? BREDD - forsta - rest * (n - 2) : rest))));
+  }
+  if (ram.huvud) ut.push(...ramFaltTabell(ram.huvud, { skrivrum: o.skrivrum }));
+  for (const del of ram.delar) ut.push(...ramFaltTabell(del.falt, { rubrik: del.rubrik, skrivrum: o.skrivrum }));
+  return ut;
+}
+// Diplomet: en inramad sida, centrerad, med skrivlinjer där texten är understreck.
+function diplomBarn(dip: NonNullable<MetodData['diplom']>): Barn[] {
+  const linje = '________________________________________';
+  const barn: Paragraph[] = [];
+  if (dip.kicker) barn.push(new Paragraph({ children: [new TextRun({ text: dip.kicker, font: 'Consolas', size: 20, allCaps: true, characterSpacing: 40, color: FARG.svag })], alignment: AlignmentType.CENTER, spacing: { before: 600, after: 240 } }));
+  barn.push(new Paragraph({ children: [run(dip.rubrik, { fet: true, farg: FARG.huvud, storlek: 72 })], alignment: AlignmentType.CENTER, spacing: { after: 480 } }));
+  for (const t of dip.text) {
+    barn.push(/^_{3,}$/.test(t)
+      ? new Paragraph({ children: [run(linje, { farg: FARG.svag, storlek: 28 })], alignment: AlignmentType.CENTER, spacing: { before: 120, after: 360 } })
+      : new Paragraph({ children: [run(t, { storlek: 26, kursiv: /[.!]$/.test(t) })], alignment: AlignmentType.CENTER, spacing: { after: 240 } }));
+  }
+  if (dip.underskrifter.length) barn.push(new Paragraph({ children: dip.underskrifter.map((u, i) => run(`${i > 0 ? '        ' : ''}${u} ____________________`, { storlek: 22, farg: FARG.svag })), alignment: AlignmentType.CENTER, spacing: { before: 600, after: 600 } }));
+  return [new Table({ width: { size: BREDD, type: WidthType.DXA }, columnWidths: [BREDD], layout: TableLayoutType.FIXED, rows: [new TableRow({ children: [new TableCell({
+    width: { size: BREDD, type: WidthType.DXA },
+    borders: runt({ style: BorderStyle.DOUBLE, size: 12, color: FARG.huvud }),
+    margins: { top: 400, bottom: 400, left: 600, right: 600 },
+    children: barn,
+  })] })] }), avstand()];
+}
+
 // Faktarutan: samma uppgifter som på sidan, så att Word-filen står för sig själv.
 function faktaTabell(d: MetodData): Barn[] {
-  const rader: [string, string][] = [['Område', d.omrade], ['Årskurs', arskursSpann(d.arskurs)]];
+  const rader: [string, string][] = [['Område', d.omrade], ['Årskurs', arskursText(d)]];
   if (d.format.length) rader.push(['Format', d.format.join(', ')]);
   if (d.tid) rader.push(['Tid', d.tid]);
   if (d.period) rader.push(['Period', d.period]);
@@ -251,6 +303,7 @@ function metodBarn(post: MetodPost, bas: string): Barn[] {
   ut.push(...faktaTabell(d));
   for (const s of d.inledning) ut.push(stycke(s));
   if (d.upplagg) ut.push(...ruta(d.upplagg.rubrik, d.upplagg.text));
+  if (d.gruppen) ut.push(...ruta(d.gruppen.rubrik, d.gruppen.text));
   if (d.principer) ut.push(...ruta(d.principer.rubrik, d.principer.text));
   const friTabell = (t: MetodData['tabeller'][number]) => {
     ut.push(h2(t.rubrik));
@@ -274,6 +327,7 @@ function metodBarn(post: MetodPost, bas: string): Barn[] {
     ut.push(...rubrikTabell(['Tid', 'Fas', 'Vad händer'], d.tidsschema.rader.map((r) => [r.tid, r.fas, r.vad]), [1700, 2200, BREDD - 3900], { fetAndra: true }));
     if (d.tidsschema.efter) ut.push(stycke(d.tidsschema.efter, { farg: FARG.svag }));
   }
+  for (const t of d.tabeller.filter((x) => x.plats === 'efter-tidsschema')) friTabell(t);
   if (d.steg) {
     ut.push(h2(d.steg.rubrik));
     if (d.steg.text) ut.push(stycke(d.steg.text, { hallIhop: true }));
@@ -349,17 +403,35 @@ function metodBarn(post: MetodPost, bas: string): Barn[] {
     ut.push(...grundRuta(d.grund.text));
     if (d.grund.kallor) ut.push(stycke(d.grund.kallor, { farg: FARG.svag, storlek: 18 }));
   }
+  if (d.ramar) {
+    ut.push(h2(d.ramar.rubrik));
+    for (const s of d.ramar.text) ut.push(stycke(s));
+    for (const ram of d.ramar.ramar) {
+      ut.push(new Paragraph({ children: [run(ram.rubrik)], heading: HeadingLevel.HEADING_3, keepNext: true, spacing: { before: 240, after: 80 } }));
+      if (ramArTom(ram)) {
+        for (const s of ram.text) ut.push(stycke(s));
+        ut.push(stycke(`Ramen att fylla i, med ${ram.delar.length} delar, finns i planeringsmallarna.`, { farg: FARG.svag }));
+      } else ut.push(...ramBarn(ram));
+    }
+    if (d.ramar.efter) ut.push(stycke(d.ramar.efter, { farg: FARG.svag }));
+  }
+  if (d.diplom) {
+    ut.push(h2(d.diplom.rubrik));
+    ut.push(stycke('Diplomet finns som egen sida i planeringsmallarna.', { farg: FARG.svag }));
+  }
   ut.push(stycke(`${UPPHOV}. Hämtad från ${metodAdress(bas, post.id)}${d.uppdaterad ? `, uppdaterad ${datumText(d.uppdaterad)}` : ''}.`, { farg: FARG.svag, storlek: 18, fore: 240 }));
   return ut;
 }
 
-// Mallarna: snabbmallen, checklistan och målkollen, en per sida, med plats att skriva.
-function mallBarn(post: MetodPost, bas: string): Barn[][] {
+// Mallarna: snabbmallen, checklistan, målkollen, kontraktet, schemat, ramarna och diplomet, en per
+// sida, med plats att skriva. I filen med allt står de färdiga ramarna redan i beskrivningen och
+// hoppas då över här (baraTommaRamar); i mallfilen för sig finns alla ramar.
+function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } = {}): Barn[][] {
   const d = post.data;
   const sidor: Barn[][] = [];
   const under = (namn: string) => [
     new Paragraph({ children: [run(namn)], heading: HeadingLevel.HEADING_1, spacing: { before: 0, after: 40 } }),
-    stycke(`${d.titel} · ${arskursSpann(d.arskurs)}`, { kursiv: true, farg: FARG.huvud, storlek: 24, efter: 160 }),
+    stycke(`${d.titel} · ${arskursText(d)}`, { kursiv: true, farg: FARG.huvud, storlek: 24, efter: 160 }),
   ];
   if (d.snabbmall) {
     sidor.push([
@@ -421,6 +493,14 @@ function mallBarn(post: MetodPost, bas: string): Barn[][] {
       avstand(),
     ]);
   }
+  if (d.ramar) {
+    for (const ram of d.ramar.ramar) {
+      const tom = ramArTom(ram);
+      if (o.baraTommaRamar && !tom) continue;
+      sidor.push([...under(ram.rubrik), ...ramBarn(ram, { skrivrum: tom })]);
+    }
+  }
+  if (d.diplom) sidor.push([...under(d.diplom.rubrik), ...diplomBarn(d.diplom)]);
   for (const sida of sidor) sida.push(stycke(`${UPPHOV}. Mall till ${d.titel}, ${metodAdress(bas, post.id)}.`, { farg: FARG.svag, storlek: 18, fore: 160 }));
   return sidor;
 }
@@ -714,7 +794,7 @@ export function metodDokument(poster: MetodPost[], o: { bas: string; medMallar?:
     sektioner.push(sektion([
       new Paragraph({ children: [run('Metoder för stödundervisning')], heading: HeadingLevel.HEADING_1, spacing: { before: 0, after: 60 } }),
       stycke(`${poster.length} metoder från ${SAJT}, hämtade ${datumText(new Date())}. Varje metod börjar på en ny sida${o.medMallar ? ', och efter varje metod följer planeringsmallarna och lathunden' : ''}.`, { farg: FARG.svag, efter: 240 }),
-      ...rubrikTabell(['Metod', 'Område', 'Årskurs'], poster.map((p) => [p.data.titel, p.data.omrade, arskursSpann(p.data.arskurs)]), bredder),
+      ...rubrikTabell(['Metod', 'Område', 'Årskurs'], poster.map((p) => [p.data.titel, p.data.omrade, arskursText(p.data)]), bredder),
       stycke(`${UPPHOV}. Metoderna får användas i undervisning. Ange ${SAJT} som källa när de sprids vidare.`, { farg: FARG.svag, storlek: 18, fore: 200 }),
     ], `Stödundervisning · ${SAJT}`, `${SAJT}/stodundervisning`));
   }
@@ -722,7 +802,7 @@ export function metodDokument(poster: MetodPost[], o: { bas: string; medMallar?:
     const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
     sektioner.push(sektion(metodBarn(post, o.bas), `${post.data.titel} · ${SAJT}`, adress));
     if (o.medMallar) {
-      for (const sida of mallBarn(post, o.bas)) sektioner.push(sektion(sida, `Mall · ${post.data.titel} · ${SAJT}`, adress));
+      for (const sida of mallBarn(post, o.bas, { baraTommaRamar: true })) sektioner.push(sektion(sida, `Mall · ${post.data.titel} · ${SAJT}`, adress));
       for (const sida of medBredd(BREDD_LIGGANDE, () => lathundBarn(post))) sektioner.push(sektion(sida, `Lathund · ${post.data.titel} · ${SAJT}`, `${adress}/lathund`, { liggande: true }));
     }
   }

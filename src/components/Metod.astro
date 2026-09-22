@@ -3,13 +3,17 @@
 // band, gör/undvik och bockar. Samma element och ordning som i docx-filen (src/lib/metoddocx.ts).
 import MetodTabell from './MetodTabell.astro';
 import type { MetodData } from '../lib/metod';
+import { ramArTom } from '../lib/metod';
 interface Props { d: MetodData; id: string }
 const { d, id } = Astro.props;
 const efterInledning = d.tabeller.filter((t) => t.plats === 'efter-inledning');
+const efterTidsschema = d.tabeller.filter((t) => t.plats === 'efter-tidsschema');
 const efterSteg = d.tabeller.filter((t) => t.plats === 'efter-steg');
 const efterArbetsform = d.tabeller.filter((t) => t.plats === 'efter-arbetsform');
 const efterUrval = d.tabeller.filter((t) => t.plats === 'efter-urval');
 const fraserRubrik = d.steg?.fraserRubrik ?? '';
+// En radbrytning i ett ramfält blir en ny rad, som i tabellcellerna.
+const linjer = (t: string) => t.split('\n');
 // Sidnavigationen: de avsnitt som finns, i modellens ordning, med korta namn.
 const avsnitt = [
   d.passrutin && { id: 'passrutin', namn: 'Passrutin' },
@@ -27,6 +31,8 @@ const avsnitt = [
   d.snabbmall && { id: 'snabbmall', namn: 'Snabbmall' },
   d.checklista && { id: 'checklista', namn: 'Checklista' },
   d.grund && { id: 'grund', namn: 'Grunden' },
+  d.ramar && { id: 'ramar', namn: d.ramar.rubrik },
+  d.diplom && { id: 'diplom', namn: d.diplom.rubrik },
 ].filter((a): a is { id: string; namn: string } => Boolean(a));
 ---
 <div class="metod-modell">
@@ -41,6 +47,7 @@ const avsnitt = [
   {d.inledning.map((s) => <p>{s}</p>)}
 
   {d.upplagg && <div class="m-ruta"><p><strong class="kicker">{d.upplagg.rubrik}</strong>{' '}{d.upplagg.text}</p></div>}
+  {d.gruppen && <div class="m-ruta"><p><strong class="kicker">{d.gruppen.rubrik}</strong>{' '}{d.gruppen.text}</p></div>}
   {d.principer && <div class="m-ruta"><p><strong class="kicker">{d.principer.rubrik}</strong>{' '}{d.principer.text}</p></div>}
 
   {efterInledning.map((t) => (
@@ -69,6 +76,15 @@ const avsnitt = [
       {d.tidsschema.efter && <p class="m-efter">{d.tidsschema.efter}</p>}
     </section>
   )}
+
+  {efterTidsschema.map((t) => (
+    <section>
+      <h2>{t.rubrik}</h2>
+      {t.text && <p>{t.text}</p>}
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} />
+      {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
+    </section>
+  ))}
 
   {d.steg && (
     <section id="steg">
@@ -248,6 +264,55 @@ const avsnitt = [
       <h2>{d.grund.rubrik}</h2>
       <div class="m-grund"><p>{d.grund.text}</p></div>
       {d.grund.kallor && <p class="m-kallor">{d.grund.kallor}</p>}
+    </section>
+  )}
+
+  {d.ramar && (
+    <section id="ramar">
+      <h2>{d.ramar.rubrik}</h2>
+      {d.ramar.text.map((s) => <p>{s}</p>)}
+      {d.ramar.ramar.map((ram) => (
+        <section class="m-ram">
+          <h3>{ram.rubrik}</h3>
+          {ram.text.map((s) => <p>{s}</p>)}
+          {ram.oversikt && <MetodTabell kolumner={ram.oversikt.kolumner} rader={ram.oversikt.rader} />}
+          {ramArTom(ram)
+            ? <p class="m-efter">Ramen att fylla i, med {ram.delar.length} delar, finns i planeringsmallarna.</p>
+            : (
+              <div class="m-ramdelar">
+                {ram.huvud && (
+                  <dl class="m-ramfalt m-ramhuvud">
+                    {ram.huvud.map((f) => <div><dt>{f.rubrik}</dt><dd>{f.text}</dd></div>)}
+                  </dl>
+                )}
+                {ram.delar.map((del) => (
+                  <div class="m-ramdel">
+                    <h4>{del.rubrik}</h4>
+                    <dl class="m-ramfalt">
+                      {del.falt.map((f) => (
+                        <div><dt>{f.rubrik}</dt><dd>{f.kursiv ? <em>{linjer(f.text).map((x, j) => <>{j > 0 && <br />}{x}</>)}</em> : linjer(f.text).map((x, j) => <>{j > 0 && <br />}{x}</>)}</dd></div>
+                      ))}
+                    </dl>
+                  </div>
+                ))}
+              </div>
+            )}
+        </section>
+      ))}
+      {d.ramar.efter && <p class="m-efter">{d.ramar.efter}</p>}
+    </section>
+  )}
+
+  {d.diplom && (
+    <section id="diplom">
+      <h2>{d.diplom.rubrik}</h2>
+      <div class="m-diplom">
+        {d.diplom.kicker && <p class="kicker">{d.diplom.kicker}</p>}
+        <p class="m-diplom-rubrik">{d.diplom.rubrik}</p>
+        {d.diplom.text.map((t) => (/^_{3,}$/.test(t) ? <p class="m-linje" aria-hidden="true"></p> : <p>{t}</p>))}
+        {d.diplom.underskrifter.length > 0 && <p class="m-underskrifter">{d.diplom.underskrifter.map((u) => <span>{u} <span class="m-linje-kort" aria-hidden="true"></span></span>)}</p>}
+      </div>
+      <p class="m-efter">Diplomet finns som egen sida i planeringsmallarna.</p>
     </section>
   )}
   </div>

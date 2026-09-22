@@ -4,7 +4,7 @@ import Taggar from '../../components/Taggar.astro';
 import Metod from '../../components/Metod.astro';
 import Nedladdning from '../../components/Nedladdning.astro';
 import { publicerade, formateraDatum } from '../../lib/innehall';
-import { arskursSpann, harLathund, harMallar, metodAdress, SAJT, UPPHOV } from '../../lib/metod';
+import { arskursText, harLathund, harMallar, metodAdress, SAJT, UPPHOV } from '../../lib/metod';
 import { site } from '../../data/site';
 
 export async function getStaticPaths() {
@@ -22,7 +22,7 @@ const adress = metodAdress(site.url, m.id).replace(/^https?:\/\//, '');
   <article class="metod">
     <div class="metod-topp">
       <header class="metod-huvud">
-        <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · {d.omrade} · {arskursSpann(d.arskurs)}</p>
+        <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · {d.omrade} · {arskursText(d)}</p>
         <h1>{d.titel}</h1>
         {d.undertitel && <p class="undertitel">{d.undertitel}</p>}
         <p class="ingress">{d.ingress}</p>
@@ -31,7 +31,7 @@ const adress = metodAdress(site.url, m.id).replace(/^https?:\/\//, '');
         <p class="faktaruta-etikett">I korthet</p>
         <dl>
           <dt>Område</dt><dd>{d.omrade}</dd>
-          <dt>Årskurs</dt><dd>{arskursSpann(d.arskurs)}</dd>
+          <dt>Årskurs</dt><dd>{arskursText(d)}</dd>
           {d.format.length > 0 && <><dt>Format</dt><dd>{d.format.join(', ')}</dd></>}
           {d.tid && <><dt>Tid</dt><dd>{d.tid}</dd></>}
           {d.period && <><dt>Period</dt><dd>{d.period}</dd></>}
@@ -51,7 +51,7 @@ const adress = metodAdress(site.url, m.id).replace(/^https?:\/\//, '');
         <section class="relaterade">
           <h2>Hör ihop med</h2>
           <ul>
-            {relaterade.map((r) => <li><a href={`/stodundervisning/${r.id}`}>{r.data.titel}</a>{' '}<span class="meta">{r.data.omrade} · {arskursSpann(r.data.arskurs)}</span></li>)}
+            {relaterade.map((r) => <li><a href={`/stodundervisning/${r.id}`}>{r.data.titel}</a>{' '}<span class="meta">{r.data.omrade} · {arskursText(r.data)}</span></li>)}
           </ul>
         </section>
       )}

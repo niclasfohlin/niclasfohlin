@@ -100,6 +100,8 @@ const ruta = z.strictObject({ rubrik: text, text });
 // En punkt med valfri fet inledning: "Det finns inget facit." följt av förklaringen.
 const punkt = z.strictObject({ fet: z.string().optional(), text: z.string().optional() }).refine((p) => p.fet || p.text, 'En punkt behöver fet eller text.');
 // Tabell med rubrikrad där varje rad har lika många celler som rubriker.
+// Ett fält i en ram: rubrik och text. Tom text är ett fält att fylla i; kursiv för mentortexter.
+const ramFalt = z.strictObject({ rubrik: text, text: z.string().default(''), kursiv: z.boolean().default(false) });
 const rubrikTabell = z.strictObject({ rubrik: text, kolumner: z.array(text).min(2), rader: z.array(z.array(z.string())).min(1) }).superRefine((tabell, ctx) => {
   tabell.rader.forEach((rad, i) => {
     if (rad.length !== tabell.kolumner.length) ctx.addIssue({ code: 'custom', path: ['rader', i], message: `Raden ska ha ${tabell.kolumner.length} celler, lika många som rubrikerna.` });
@@ -114,6 +116,9 @@ const stodundervisning = defineCollection({
     ingress,
     omrade: z.enum(['Matematik', 'Läsning', 'Skrivning']),
     arskurs: z.array(z.enum(['F-3', '4-6', '7-9'])).min(1, 'Ange minst en årskursnivå.'),
+    // Årskursen som läsaren ser när nivåerna inte säger det exakt, t.ex. "åk 3–6" för en metod
+    // som ligger under F-3 och 4-6. Filtreringen i metodbanken använder alltid arskurs.
+    arskursText: z.string().optional(),
     taggar,
     // Hur metoden används. Flera värden går bra.
     format: z.array(z.enum(['enskilt', 'par', 'liten grupp', 'helklass'])).default([]),
@@ -130,6 +135,8 @@ const stodundervisning = defineCollection({
     // Modellen. Ett stycke per rad i listorna; en rad inuti en cell blir en ny rad i cellen.
     inledning: stycken,
     upplagg: ruta.optional(),
+    // Så sätter du ihop gruppen: vilka elever som väljs och hur insatsen presenteras för dem.
+    gruppen: ruta.optional(),
     principer: ruta.optional(),
     passrutin: z.strictObject({
       rubrik: z.string().default('Passrutin: samma ordning varje gång'),
@@ -163,7 +170,7 @@ const stodundervisning = defineCollection({
     tabeller: z.array(z.strictObject({
       rubrik: z.string(),
       text: z.string().optional(),
-      plats: z.enum(['efter-inledning', 'efter-steg', 'efter-arbetsform', 'efter-urval']).default('efter-arbetsform'),
+      plats: z.enum(['efter-inledning', 'efter-tidsschema', 'efter-steg', 'efter-arbetsform', 'efter-urval']).default('efter-arbetsform'),
       kolumner: z.array(text).min(2),
       rader: z.array(z.array(z.string())).min(1),
       not: z.string().optional(),
@@ -247,6 +254,30 @@ const stodundervisning = defineCollection({
       rubrik: z.string().default('Kort om grunden'),
       text: z.string(),
       kallor: z.string().optional(),
+    }).optional(),
+    // Ramar: färdiga berättelseramar, textramar eller liknande som metoden arbetar i, sist på sidan
+    // efter grunden. Varje ram har en inledning, en valfri översikt (tabell) och delar med fält.
+    // En ram där alla fält är tomma är en mall att fylla i: på sidan visas bara inledningen, i
+    // planeringsmallarna blir den sidor med skrivrum. huvud är fält att fylla i före delarna.
+    ramar: z.strictObject({
+      rubrik: z.string().default('Ramarna'),
+      text: stycken,
+      ramar: z.array(z.strictObject({
+        rubrik: text,
+        text: stycken,
+        oversikt: z.strictObject({ kolumner: z.array(text).min(2), rader: z.array(z.array(z.string())).min(1) }).optional(),
+        huvud: z.array(ramFalt).optional(),
+        delar: z.array(z.strictObject({ rubrik: text, falt: z.array(ramFalt).min(1) })).min(1),
+      })).min(1),
+      efter: z.string().optional(),
+    }).optional(),
+    // Diplom eller intyg att dela ut efter perioden: en sida i planeringsmallarna. En rad som bara
+    // består av understreck blir en skrivlinje.
+    diplom: z.strictObject({
+      kicker: z.string().optional(),
+      rubrik: z.string().default('Diplom'),
+      text: z.array(text).min(1),
+      underskrifter: z.array(text).default([]),
     }).optional(),
 
     // Lathunden: fyra sidor ur Niclas snabbguide (Metoden, Ett pass, Mallen, Material). Egen sida

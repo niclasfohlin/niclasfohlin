@@ -17,12 +17,12 @@ Schemat i `src/content.config.ts` är strikt: ett okänt fält, en tabellrad med
 | Rubrik, underrubrik, faktaruta (tid, period, grupp, material) | `titel`, `undertitel`, `tid`, `period`, `grupp`, `material`, `omrade`, `arskurs`, `taggar`, `format` | sidhuvud och faktaruta, kortet i metodbanken, lathundens faktarutor, docx-framsidan |
 | Egen ingress (skrivs av oss) | `ingress` | kortet, startsidan, nyhetsbrevet, description |
 | Inledande stycken | `inledning` | första stycket på sidan |
-| "Så fungerar insatsen", principer | `upplagg`, `principer` (rubrik, text) | rutor |
+| "Så fungerar insatsen", "Så sätter du ihop gruppen", principer | `upplagg`, `gruppen`, `principer` (rubrik, text) | rutor |
 | Passrutin | `passrutin` (steg, efter) | numrerad rutinruta, `#passrutin` |
 | Tidsschema | `tidsschema` (rader: tid, fas, vad) | tabell, `#tidsschema` |
 | "Vad du gör och säger", exempelfraser | `steg` (rader: namn, fraga, gor, fraser) | stegtabell med fraskolumn, `#steg`; fraserna skrivs utan citattecken |
 | Arbetsformens delar | `arbetsform` (delar: rubrik, text) | rutor i två spalter, `#arbetsform` |
-| Fria tabeller (frågetyper, textstrukturer, mappens innehåll) | `tabeller` (plats efter-inledning, efter-steg, efter-arbetsform eller efter-urval) | rubriktabeller där de hör hemma |
+| Fria tabeller (frågetyper, textstrukturer, mappens innehåll, två slags pass) | `tabeller` (plats efter-inledning, efter-tidsschema, efter-steg, efter-arbetsform eller efter-urval) | rubriktabeller där de hör hemma |
 | Exempel på ett pass | `exempel` (valt, text) | `#exempel` |
 | När gruppen fastnar | `fastnar` (fragaForst, trappa, efter, motto) | frågeruta, stödtrappa, motto, `#fastnar` |
 | Lärarens roll: gör och undvik | `roll` (gor, undvik) | två kolumner, `#roll` |
@@ -34,8 +34,10 @@ Schemat i `src/content.config.ts` är strikt: ett okänt fält, en tabellrad med
 | Snabbmall | `snabbmall` (fore, efter) | `#snabbmall`, mallen i docx och lathundens block snabbmall |
 | Checklista | `checklista` (punkter) | kryssbar lista, `#checklista`, mallen i docx |
 | Grund och källor | `grund` (text, kallor) | `#grund`; källor som (Författare, årtal) |
+| Berättelseramar, textramar eller andra ramar metoden arbetar i, sist i kompendiet | `ramar` (rubrik, text; per ram rubrik, text, oversikt som tabell, huvud, delar med falt: rubrik, text, kursiv) | `#ramar` efter grunden med varje färdig ram i sin helhet; en ram där alla fält är tomma är en mall att fylla i och visas på sidan bara med sin inledning; i planeringsmallarna blir varje ram egna sidor (i filen med allt bara de tomma, de färdiga står redan i beskrivningen) |
+| Diplom eller intyg | `diplom` (kicker, rubrik, text med `___` som skrivlinje, underskrifter) | `#diplom` som inramad ruta på sidan; en egen sida i planeringsmallarna |
 
-Delarna `arbetsform`, `fastnar`, `roll` och `urval` kräver också `rubrik` och `text` (kompendiets rubrik och inledande stycke), och `urval` kan ha `kravText` före kraven; `_mall.yaml` visar alla fält. Exakt ett `omrade`: det metoden i första hand tränar; tränar den två lika mycket, fråga Niclas. `relaterade` pekar åt båda håll: lägg den nya metoden i de metoder den hör ihop med, i samma commit. `uppdaterad` är dagens datum när posten publiceras eller ändras. `utkast: true` håller metoden utanför produktionen, pdf-kontrollen och mejlet till prenumeranterna, men visar den i `npm run dev`; sätt `utkast: false` när metoden är klar att mejlas, före pushen.
+`arskurs` är nivåerna som filtret använder; säger kompendiet något exaktare, som åk 3–6, skrivs det i `arskursText` och visas i stället för nivåerna på kortet, sidan och i Word-filerna. Delarna `arbetsform`, `fastnar`, `roll` och `urval` kräver också `rubrik` och `text` (kompendiets rubrik och inledande stycke), och `urval` kan ha `kravText` före kraven; `_mall.yaml` visar alla fält. Exakt ett `omrade`: det metoden i första hand tränar; tränar den två lika mycket, fråga Niclas. `relaterade` pekar åt båda håll: lägg den nya metoden i de metoder den hör ihop med, i samma commit. `uppdaterad` är dagens datum när posten publiceras eller ändras. `utkast: true` håller metoden utanför produktionen, pdf-kontrollen och mejlet till prenumeranterna, men visar den i `npm run dev`; sätt `utkast: false` när metoden är klar att mejlas, före pushen.
 
 Sidan byggs av `src/components/Metod.astro` (tabeller via `MetodTabell.astro`, nedladdningsrutan via `Nedladdning.astro`), Word-filerna av `src/lib/metoddocx.ts`, faktatexter och hjälpfunktioner i `src/lib/metod.ts`. Stilarna heter `.m-*` för metodens delar (band, ruta, rutin, tabell, trappa, gor-undvik, bockar, snabbmall, grund) och ligger i `src/styles/global.css`, utskriften under `@media print`.
 
@@ -86,6 +88,6 @@ En ny del läggs till på fem ställen i samma commit: schemat i `src/content.co
 | Sidan, Word-filerna, underlaget, lathundens sidantal | `node scripts/metodprov.mjs <slug> --underlag <md> --bilder` |
 | Mobil på riktigt | `node scripts/skarmbild.mjs <url> --mobil` (headless Chrome har en minsta fönsterbredd, `--window-size=390` ljuger) |
 | Hela sajten efter en stiländring | `node scripts/skarmbilder.mjs --hojd 2200`: åtta sidor på desktop och mobil till `underlag/prov/sajt/`, sedan Codex med prompten `scripts/codex/stilbyte-granskning.md` och bilderna bifogade |
-| Word-filen | `validate.py` i docx-skillen (kräver `pip install defusedxml lxml`), och Word via COM: öppna, PageFit, bläddra, skärmdump |
+| Word-filen | `validate.py` i docx-skillen (kräver `pip install defusedxml lxml`); `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/word-pdf.ps1 dist/stodundervisning/<slug>-mallar.docx <ut.pdf>` exporterar filen med Word och skriver sidantalet, `pdftoppm -r 40 -png` gör en bild per sida att läsa; `scripts/word-sidor.ps1` räknar bara sidor |
 | Mätning | `npx lighthouse http://localhost:4322/stodundervisning/<slug>` mot `astro preview --port 4322`; målet är 100 på alla fyra och CLS 0 |
 | Second opinion | `node scripts/metodgranskning.mjs <slug>` |

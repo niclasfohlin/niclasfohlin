@@ -424,6 +424,25 @@ button.lank:hover { color: var(--farg-accent); }
 .m-kontrakt p { margin: 0 0 0.6em; }
 .m-kontrakt p:last-child { margin-bottom: 0; }
 .m-grund p { margin: 0; }
+/* Ramarna: varje ram har rubrik, inledning, översikt och delar med ett fält per rad. */
+.m-ram { margin: 1.5rem 0 0; }
+.m-ram > h3 { margin: 0 0 0.5em; }
+.m-ramdel { border: 1px solid var(--farg-kant); border-radius: 8px; overflow: hidden; margin: 0 0 1rem; font-family: var(--typsnitt-ui); font-size: 0.95rem; }
+.m-ramdel h4 { margin: 0; padding: 0.5rem 0.9rem; background: var(--farg-accent-ljus); color: var(--farg-accent); font-family: var(--typsnitt-ui); font-size: 1rem; border-bottom: 1px solid var(--farg-kant); }
+.m-ramfalt { margin: 0; }
+.m-ramfalt > div { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); border-top: 1px solid var(--farg-kant); }
+.m-ramfalt > div:first-child { border-top: 0; }
+.m-ramfalt dt { font-weight: 700; padding: 0.55rem 0.9rem; background: var(--farg-ton-svag); }
+.m-ramfalt dd { margin: 0; padding: 0.55rem 0.9rem; }
+.m-ramhuvud { border: 1px solid var(--farg-kant); border-radius: 8px; overflow: hidden; margin: 0 0 1rem; font-family: var(--typsnitt-ui); font-size: 0.95rem; }
+/* Diplomet: en inramad, centrerad ruta som visar mallens sida. */
+.m-diplom { border: 4px double var(--farg-accent); border-radius: 8px; padding: 1.5rem 1.25rem; margin: 1rem 0; text-align: center; background: var(--farg-yta); font-family: var(--typsnitt-ui); }
+.m-diplom p { margin: 0 0 0.6em; }
+.m-diplom .kicker { font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--farg-text-svag); }
+.m-diplom .m-diplom-rubrik { font-size: 2rem; font-weight: 800; color: var(--farg-accent); margin: 0 0 0.5em; }
+.m-diplom .m-linje { display: block; width: min(100%, 22rem); height: 1.6rem; margin: 0.2rem auto 0.9rem; border-bottom: 1px solid var(--farg-text-svag); }
+.m-diplom .m-linje-kort { display: inline-block; width: 9rem; height: 1rem; margin: 0 0.5rem 0 0.25rem; vertical-align: baseline; border-bottom: 1px solid var(--farg-text-svag); }
+.m-diplom .m-underskrifter { margin-top: 1.5rem; color: var(--farg-text-svag); display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.5rem; }
 .m-kallor { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
 .bara-js { display: none; }
 html.js .bara-js { display: inline-block; }
@@ -440,7 +459,8 @@ html.js .bara-js { display: inline-block; }
 .lh-lank { margin-left: auto; }
 .lh-lank button { font: inherit; font-family: var(--typsnitt-ui); font-size: 0.8rem; background: none; border: 0; padding: 0; color: inherit; text-decoration: underline; text-underline-offset: 0.15em; cursor: pointer; text-transform: none; letter-spacing: 0; }
 .lh-huvud .lh-lank button { color: rgba(255, 255, 255, 0.9); }
-.lh-ruta > h3 .lh-lank { float: right; }
+.lh-ruta > h3 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.15rem 0.75rem; }
+.lh-ruta > h3 .lh-lank { margin-left: auto; }
 .lh-ruta > h3 .lh-lank button { color: rgba(255, 255, 255, 0.9); font-size: 0.75rem; }
 .lathund .upphov { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
 .lathund-lank { font-weight: 600; }
@@ -629,7 +649,8 @@ html.js .bara-js { display: inline-block; }
   .metod-modell h2 { font-size: 13pt; margin-top: 1.4em; break-after: avoid; }
   /* Rubrik och inledande stycke följer med det som kommer efter; snabbmallen hålls ihop. */
   .metod-modell h2 + p { break-after: avoid; }
-  .m-snabbmall, .m-trappa, .m-trappa li, .m-kontrakt, #snabbmall, #grund { break-inside: avoid; }
+  .m-snabbmall, .m-trappa, .m-trappa li, .m-kontrakt, .m-ramdel, .m-ramhuvud, .m-diplom, #snabbmall, #grund { break-inside: avoid; }
+  .m-ramdel h4, .m-ramfalt dt, .m-diplom { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .m-tabell, .m-snabbmall, .m-bockar, .m-gor-undvik, .m-band, .m-ruta, .m-rutin, .m-grund, .m-motto { font-size: 9.5pt; }
   .m-tabell tr, .m-snabbmall tr, .m-bockar li, .m-gor-undvik, .m-band, .m-ruta, .m-rutin, .m-grund, .m-motto, .m-fraga { break-inside: avoid; }
   .m-tabell thead { display: table-header-group; }
@@ -657,6 +678,9 @@ html.js .bara-js { display: inline-block; }
   .sidhuvud nav::-webkit-scrollbar { display: none; }
   .sidhuvud nav a { flex: none; white-space: nowrap; padding: 0.5em 0.35em; min-height: 2.75rem; display: inline-flex; align-items: center; }
   .faktaruta dl { grid-template-columns: 1fr; }
+  .m-ramfalt > div { grid-template-columns: 1fr; }
+  .m-ramfalt dt { padding-bottom: 0.2rem; }
+  .m-ramfalt dd { padding-top: 0.2rem; }
   /* Filvalets knappar får full träffyta på pekskärm. */
   .filval > a, .filval > button, .filval.liten > a, .filval.liten > button { min-height: 2.75rem; padding: 0 0.8rem; }
   .artikel .ingress { font-size: 1.15rem; }

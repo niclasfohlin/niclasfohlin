@@ -34,7 +34,7 @@ const yamlFil = join(rot, 'src/content/stodundervisning', `${id}.yaml`);
 if (!existsSync(yamlFil)) { console.error(`Hittar inte ${yamlFil}`); process.exit(1); }
 const metod = parseYaml(readFileSync(yamlFil, 'utf8'));
 console.log(`\n${metod.titel} (${id})`);
-const delar = ['inledning', 'upplagg', 'principer', 'passrutin', 'tidsschema', 'steg', 'arbetsform', 'tabeller', 'exempel', 'fastnar', 'roll', 'urval', 'hem', 'progression', 'uppfoljning', 'mal', 'snabbmall', 'checklista', 'grund'];
+const delar = ['inledning', 'upplagg', 'gruppen', 'principer', 'passrutin', 'tidsschema', 'steg', 'arbetsform', 'tabeller', 'exempel', 'fastnar', 'roll', 'urval', 'hem', 'progression', 'uppfoljning', 'mal', 'snabbmall', 'checklista', 'grund', 'ramar', 'diplom'];
 const finns = delar.filter((d) => metod[d] && (!Array.isArray(metod[d]) || metod[d].length));
 console.log(`  delar i modellen: ${finns.join(', ')}`);
 if (metod.utkast) console.log('  obs  utkast: true, metoden byggs inte i produktion');
@@ -45,7 +45,7 @@ const sida = join(dist, id, 'index.html');
 const html = existsSync(sida) ? readFileSync(sida, 'utf8') : '';
 html ? ok(`sidan finns (${(statSync(sida).size / 1024).toFixed(1)} kB)`) : nej('sidan saknas i dist; kör npm run validera');
 if (html) {
-  for (const d of finns.filter((x) => !['inledning', 'upplagg', 'principer', 'tabeller'].includes(x))) {
+  for (const d of finns.filter((x) => !['inledning', 'upplagg', 'gruppen', 'principer', 'tabeller'].includes(x))) {
     html.includes(`id="${d}"`) ? ok(`avsnittet ${d} finns på sidan`) : nej(`avsnittet ${d} saknas på sidan`);
   }
   html.includes('© Niclas Fohlin') ? ok('upphovet står på sidan') : nej('upphovet saknas på sidan');

@@ -24,9 +24,14 @@ export function arskursSpann(arskurs: readonly string[]): string {
   return start === 'F' ? `F–${slut}` : `åk ${start}–${slut}`;
 }
 
+// Årskursen som läsaren ser: arskursText när metoden anger en ("åk 3–6"), annars nivåerna.
+export function arskursText(d: Pick<MetodData, 'arskurs' | 'arskursText'>): string {
+  return d.arskursText ?? arskursSpann(d.arskurs);
+}
+
 // Raden under rubriken i kort, dokument och sökresultat.
 export function metaRad(d: MetodData): string {
-  return [d.omrade, arskursSpann(d.arskurs), d.tid, d.grupp].filter(Boolean).join(' · ');
+  return [d.omrade, arskursText(d), d.tid, d.grupp].filter(Boolean).join(' · ');
 }
 
 export function datumText(d?: Date | string): string {
@@ -34,9 +39,14 @@ export function datumText(d?: Date | string): string {
   return new Intl.DateTimeFormat('sv-SE', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(d));
 }
 
-// Sant när metoden har minst en mall att ladda ner: snabbmall, checklista eller mål.
+// Sant när metoden har minst en mall att ladda ner: snabbmall, checklista, mål, kontrakt, schema, ramar eller diplom.
 export function harMallar(d: MetodData): boolean {
-  return Boolean(d.snabbmall || d.checklista || d.mal);
+  return Boolean(d.snabbmall || d.checklista || d.mal || d.hem?.kontrakt || d.hem?.schema || d.ramar || d.diplom);
+}
+
+// En ram där alla fält är tomma är en mall att fylla i.
+export function ramArTom(ram: { huvud?: { text: string }[]; delar: { falt: { text: string }[] }[] }): boolean {
+  return ram.delar.every((del) => del.falt.every((f) => !f.text.trim())) && (ram.huvud ?? []).every((f) => !f.text.trim());
 }
 
 export function harLathund(d: MetodData): boolean {
@@ -69,7 +79,7 @@ export function kortFakta(d: MetodData): { rubrik: string; text: string }[] {
     ? [{ rubrik: 'Pass', text: versal(passlangd.trim()) }, { rubrik: 'Hur ofta', text: versal(rest.join(' ').trim()) }]
     : [{ rubrik: 'Tid', text: d.tid ?? '' }];
   return [
-    { rubrik: 'Årskurs', text: arskursSpann(d.arskurs).replace(/^åk\s*/, '') },
+    { rubrik: 'Årskurs', text: arskursText(d).replace(/^åk\s*/, '') },
     { rubrik: 'Grupp', text: d.grupp ?? '' },
     ...tid,
   ].filter((f) => f.text);
