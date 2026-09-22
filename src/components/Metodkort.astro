@@ -1,0 +1,27 @@
+---
+// Metodkortet, samma på startsidan och i metodbanken: titel med ämnesmärke, faktaremsa (årskurs,
+// grupp, pass, hur ofta), ingress, taggar och raden med lathund och filval. I metodbanken
+// också kryssrutan Välj för samlad nedladdning.
+import Taggar from './Taggar.astro';
+import Filval from './Filval.astro';
+import { harLathund, kortFakta } from '../lib/metod';
+import type { MetodPost } from '../lib/metod';
+interface Props { m: MetodPost; valj?: boolean }
+const { m, valj = false } = Astro.props;
+---
+<article class="kort metodkort" data-metod data-omrade={m.data.omrade} data-arskurs={m.data.arskurs.join(' ')} data-taggar={m.data.taggar.join(' ')}>
+  <div class="kort-topp">
+    <h3><a href={`/stodundervisning/${m.id}`}>{m.data.titel}</a></h3>
+    <span class="amne" data-amne={m.data.omrade}>{m.data.omrade}</span>
+  </div>
+  <dl class="kort-fakta">
+    {kortFakta(m.data).map((f) => <div><dt>{f.rubrik}</dt><dd>{f.text}</dd></div>)}
+  </dl>
+  <p class="ingress">{m.data.ingress}</p>
+  <Taggar taggar={m.data.taggar} />
+  <p class="kort-rad">
+    {harLathund(m.data) && <a class="lathund-lank" href={`/stodundervisning/${m.id}/lathund`}>Lathund<span class="visually-hidden">: {m.data.titel}</span></a>}
+    <Filval fil={`/stodundervisning/${m.id}`} namn={m.id} rubrik={`Allt om ${m.data.titel}`} liten />
+    {valj && <label class="valj"><input type="checkbox" name="valda" value={m.id} /> Välj<span class="visually-hidden"> {m.data.titel}</span></label>}
+  </p>
+</article>

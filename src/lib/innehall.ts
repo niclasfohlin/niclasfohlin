@@ -18,6 +18,13 @@ export async function metoderSorterade() {
   return poster.sort((a, b) => a.data.titel.localeCompare(b.data.titel, 'sv'));
 }
 
+// De senast tillagda eller ändrade metoderna först (fältet uppdaterad), för startsidan.
+export async function metoderSenaste() {
+  const poster = await publicerade('stodundervisning');
+  const tid = (m: (typeof poster)[number]) => m.data.uppdaterad?.getTime() ?? 0;
+  return poster.sort((a, b) => tid(b) - tid(a) || a.data.titel.localeCompare(b.data.titel, 'sv'));
+}
+
 export async function bockerSorterade() {
   const poster = await publicerade('bocker');
   return poster.sort((a, b) => b.data.utgivningsar - a.data.utgivningsar);

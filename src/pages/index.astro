@@ -1,14 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
+import Metodkort from '../components/Metodkort.astro';
 import { bildHojd } from '../lib/bildmatt';
 import Taggar from '../components/Taggar.astro';
 import { site } from '../data/site';
-import { artiklarSorterade, metoderSorterade, bockerSorterade, formateraDatum, publikationNamn, typLabel } from '../lib/innehall';
+import { artiklarSorterade, metoderSenaste, bockerSorterade, formateraDatum, publikationNamn, typLabel } from '../lib/innehall';
 
 const artiklar = await artiklarSorterade();
 const utvalda = artiklar.filter((a) => a.data.utvald).slice(0, 3);
 const senaste = (utvalda.length > 0 ? utvalda : artiklar).slice(0, 3);
-const metoder = (await metoderSorterade()).slice(0, 3);
+const metoder = (await metoderSenaste()).slice(0, 3);
 const bocker = (await bockerSorterade()).slice(0, 4);
 ---
 
@@ -59,16 +60,9 @@ const bocker = (await bockerSorterade()).slice(0, 4);
   {metoder.length > 0 && (
     <section>
       <h2>Stödundervisning</h2>
-      <p class="text">Konkreta metoder att använda direkt, sorterade på område, årskurs och vad de tränar.</p>
+      <p class="text">De senaste metoderna. Hela metodbanken är sorterad på område, årskurs och vad metoderna tränar.</p>
       <div class="rutnat">
-        {metoder.map((m) => (
-          <article class="kort">
-            <p class="meta">{m.data.omrade} · {m.data.arskurs.join(', ')}</p>
-            <h3><a href={`/stodundervisning/${m.id}`}>{m.data.titel}</a></h3>
-            <p>{m.data.ingress}</p>
-            <Taggar taggar={m.data.taggar} />
-          </article>
-        ))}
+        {metoder.map((m) => <Metodkort m={m} />)}
       </div>
       <p class="lankrad"><a href="/stodundervisning">Hela metodbanken</a></p>
     </section>
