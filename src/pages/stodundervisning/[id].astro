@@ -4,7 +4,7 @@ import Taggar from '../../components/Taggar.astro';
 import Metod from '../../components/Metod.astro';
 import Nedladdning from '../../components/Nedladdning.astro';
 import { publicerade, formateraDatum } from '../../lib/innehall';
-import { arskursText, harLathund, harMallar, metodAdress, SAJT, UPPHOV } from '../../lib/metod';
+import { arskursText, ejBryt, harLathund, harMallar, metodAdress, SAJT, UPPHOV } from '../../lib/metod';
 import { site } from '../../data/site';
 
 export async function getStaticPaths() {
@@ -24,8 +24,8 @@ const adress = metodAdress(site.url, m.id).replace(/^https?:\/\//, '');
       <header class="metod-huvud">
         <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · {d.omrade} · {arskursText(d)}</p>
         <h1>{d.titel}</h1>
-        {d.undertitel && <p class="undertitel">{d.undertitel}</p>}
-        <p class="ingress">{d.ingress}</p>
+        {d.undertitel && <p class="undertitel">{ejBryt(d.undertitel)}</p>}
+        <p class="ingress">{ejBryt(d.ingress)}</p>
       </header>
       <div class="faktaruta">
         <p class="faktaruta-etikett">I korthet</p>

@@ -17,7 +17,7 @@ Filer:
 - Koden som bygger allt: src/content.config.ts (schemat), src/components/Metod.astro, src/components/MetodTabell.astro, src/components/Lathund.astro, src/components/Nedladdning.astro, src/lib/metoddocx.ts, src/lib/metod.ts, src/styles/global.css (skärm under .m-* och .lh-*, utskrift under @media print).
 - Förebilderna: src/content/stodundervisning/problemlosning-i-grupp.yaml (passöversikt, tavla, tabeller efter fastnar och grund), boksamtal-i-grupp.yaml, faktatextsamtal-i-grupp.yaml, til-i-grupp.yaml (hem, kontrakt, schema), skrivkurs-berattelseram.yaml (ramar, diplom, arskursText), och deras byggda sidor i dist/stodundervisning/.
 
-Granska fyra saker.
+Granska fem saker.
 
 1. Paritet i innehåll. Finns varje del i underlaget med i YAML-filen (rubriker, stycken, tabellrader, exempelfraser, listor, siffror)? Finns varje del i YAML-filen på sidan, i Word-filen med allt, i mallarna och i lathunden? Är tabellerna kompletta, cell för cell? Stämmer elevantal, passlängd, frekvens och period överallt: faktarutan, texten, lathundens faktarutor, Word-filens framsida? Har något ändrats i Niclas text utöver de avsiktliga ändringarna? Citera det som saknas eller avviker, med fil och plats.
 
@@ -26,6 +26,8 @@ Granska fyra saker.
 3. Kvalitet. Följer egen text (ingress, undertitel) STIL.md: korta meningar, inget bristspråk om elever, inga tankstreck, inga punktlistor i löptext? Kan en lärare följa genomförandet i morgon utan att fråga: tid, material, gruppstorlek, steg, uppföljning? Tillgänglighet: rubrikordning, tabellrubriker, kontrast, tangentbord. Något som saknas jämfört med förebilderna och som lärare skulle behöva?
 
 4. Läsningen uppifrån och ned. Läs den byggda sidan som mottagare: en lärare som inte sett kompendiet och läser metoden första gången från rubriken till slutet, i den ordning den står. Anteckna varje ställe där du inte förstår vad som menas, där en term eller ett material används innan det förklarats, där texten hänvisar till något som kommer senare eller inte finns på sidan (en ram, en mall, en text, ett schema), där ett steg förutsätter något som inte står, och där du inte vet vad du ska göra härnäst. Citera meningen och säg vad som fattas. Gör samma läsning av lathunden för sig, eftersom den ofta läses utan metoden.
+
+5. Skärmen och utskriften som mottagaren ser dem. Titta på varje bifogad bild (desktop, mobil, lathund, utskrift, Word-sidor) som en lärare som ska genomföra passet i morgon, inte som en granskare av kod. Fråga vid varje element: vad signalerar formen, och stämmer det med vad texten är till för? Fet stil betyder rubrik: är något fett som inte är en rubrik (en första kolumn i en tabell där rubrikerna står i rad 1 eller ovanför), eller något magert som är en rubrik (en mellanrubrik som ser ut som en vanlig rad)? Bryts något så att det läses fel: "F–3" delat över två rader, ett ensamt skiljetecken eller ord på egen rad, en tabell delad mellan sidor, en kolumn så smal att orden staplas bokstav för bokstav, en cell tom där man väntar innehåll? Sticker något ut utan skäl: olika storlek, färg eller stil på likvärdiga saker, en ruta med annan ton än sina syskon, ett avsnitt som saknar det de andra har? Läses ordningen rätt: kommer det läraren behöver först (vad, när, hur länge, med vem) före det som förklarar? Hittar läraren det som passet kräver på lathunden utan att gå till sidan? Räkna varje sådant ställe som ett fynd med bilden och platsen angiven, P1 om en lärare läser fel eller missar något, P2 om det bara ser slarvigt ut.
 
 Lämna fynden så här. Var konkret: fil, rad eller rubrik, vad som står, vad som borde stå. Inga allmänna råd utan belägg.
 
@@ -40,6 +42,8 @@ En tabell med kolumnerna Prio, Fynd, Var, Åtgärd. P1 är fel som en läsare el
 ## Kvalitet
 
 ## Läsningen uppifrån och ned
+
+## Skärmen och utskriften
 
 ## Frågor till Niclas
 

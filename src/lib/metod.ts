@@ -24,9 +24,15 @@ export function arskursSpann(arskurs: readonly string[]): string {
   return start === 'F' ? `F–${slut}` : `åk ${start}–${slut}`;
 }
 
+// Ett spann som "F–3" eller "åk 4–9" får aldrig brytas så att siffran hamnar på nästa rad
+// ("F–" / "2" läses fel). Ett osynligt ordfogtecken (U+2060) efter tankstrecket hindrar brytningen.
+export function ejBryt(text: string): string {
+  return text.replace(/(\S)–(?=\d)/g, '$1–⁠');
+}
+
 // Årskursen som läsaren ser: arskursText när metoden anger en ("åk 3–6"), annars nivåerna.
 export function arskursText(d: Pick<MetodData, 'arskurs' | 'arskursText'>): string {
-  return d.arskursText ?? arskursSpann(d.arskurs);
+  return ejBryt(d.arskursText ?? arskursSpann(d.arskurs));
 }
 
 // Raden under rubriken i kort, dokument och sökresultat.

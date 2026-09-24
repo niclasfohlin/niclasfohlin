@@ -50,6 +50,19 @@ if (html) {
   }
   html.includes('© Niclas Fohlin') ? ok('upphovet står på sidan') : nej('upphovet saknas på sidan');
   html.includes(`/stodundervisning/${id}.docx`) ? ok('nedladdningslänken finns') : nej('nedladdningslänken saknas');
+
+  // 2b. Mottagarläsning som går att pröva maskinellt. Fet stil betyder rubrik: i en fri tabell
+  // eller en ordlista (klassen fri) står rubrikerna i rad 1, så första kolumnen får inte vara radrubrik.
+  const friaTabeller = [...html.matchAll(/<table class="m-tabell fri[^"]*">[\s\S]*?<\/table>/g)].map((m) => m[0]);
+  const fetForsta = friaTabeller.filter((t) => /<th scope="row"/.test(t)).length;
+  fetForsta ? nej(`${fetForsta} fria tabeller har fet första kolumn fast rubrikerna står i rad 1 (MetodTabell radrubrik)`) : ok(`${friaTabeller.length} fria tabeller och listor har vanlig text i första kolumnen`);
+  // Ett spann som "F–3" får inte kunna brytas så att siffran hamnar på nästa rad: metod.ts ejBryt lägger ett ordfogtecken.
+  const huvud = html.match(/<header class="metod-huvud">[\s\S]*?<\/header>/)?.[0] ?? '';
+  const brytbara = [...huvud.matchAll(/\S–(?!⁠)\d/g)].map((m) => m[0]);
+  brytbara.length ? nej(`spann som kan brytas över rad i sidhuvudet: ${brytbara.join(', ')} (ejBryt saknas)`) : ok('spannen i sidhuvudet kan inte brytas över rad');
+  // En tabellrad skriven med versaler är en mellanrubrik och ska ritas som rubrikrad, inte som vanlig rad.
+  const versalRader = [...html.matchAll(/<tr>(?:<td[^>]*>(?:<span class="forsta">)?[^<]*<\/span>?<\/td>){2,}<\/tr>/g)].map((m) => m[0]).filter((r) => { const celler = [...r.matchAll(/>([^<]+)</g)].map((x) => x[1].trim()).filter(Boolean); return celler.length > 1 && celler.every((c) => c === c.toUpperCase() && /\p{L}/u.test(c)); });
+  versalRader.length ? nej(`${versalRader.length} rader med bara versaler ritas som vanliga rader i stället för mellanrubrik`) : ok('inga versalrader ritas som vanliga rader');
 }
 const json = join(dist, 'metoder.json');
 if (existsSync(json)) {
@@ -127,6 +140,8 @@ if (bilder) {
       bild(url, 'mobil.png', ['--mobil']);
       tryck(url, 'utskrift.pdf');
       ok(`skärmbilder i ${mapp}: desktop.png, mobil.png, utskrift.pdf`);
+  console.log('       Läs bilderna som en lärare som ska köra passet i morgon: fet stil betyder rubrik, inget bryts så att det läses fel,');
+  console.log('       likvärdiga saker ser likadana ut, det läraren behöver kommer först. Dela höga bilder i bitar innan du läser dem.');
       if (metod.lathund) {
         const lurl = `${url}/lathund`;
         bild(lurl, 'lathund-desktop.png');

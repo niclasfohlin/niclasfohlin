@@ -63,7 +63,7 @@ const avsnitt = [
     <section>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={t.kolumner.length > 3 ? 'stapla' : ''} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={t.kolumner.length > 3 ? 'fri stapla' : 'fri'} radrubrik={false} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
     </section>
   ))}
@@ -73,9 +73,9 @@ const avsnitt = [
       <h2>{pass.rubrik}</h2>
       {d.passrutin.text && <p>{d.passrutin.text}</p>}
       {pass.text && <p>{pass.text}</p>}
-      <div class="m-remsa" style={`--kolumner:${pass.faser.map((f) => `${f.minuter}fr`).join(' ')}`} role="img" aria-label={`Passets faser: ${pass.faser.map((f) => `${f.fas} ${f.tid}`).join(', ')}${pass.delar.length ? `. Arbetsform: ${pass.delar.map((x) => `${x.rubrik} ${x.tid}`).join(', ')}` : ''}`}>
+      <div class="m-remsa" style={`--kolumner:${pass.faser.map((f) => `minmax(7rem, ${f.minuter}fr)`).join(' ')}`} role="img" aria-label={`Passets faser: ${pass.faser.map((f) => `${f.fas} ${f.tid}`).join(', ')}${pass.delar.length ? `. Arbetsform: ${pass.delar.map((x) => `${x.rubrik} ${x.tid}`).join(', ')}` : ''}`}>
         {pass.faser.map((f) => <div class="m-remsa-fas"><strong>{f.fas}</strong><span>{f.tid}</span></div>)}
-        {pass.delar.map((x) => <div class="m-remsa-del" style={`grid-column:${x.fran + 1} / span ${x.antal}`}><strong>{x.rubrik}</strong>{x.tid && <span class="m-remsa-tid"> {x.tid}</span>} · {x.text}</div>)}
+        {pass.delar.map((x) => <div class="m-remsa-del" style={`grid-column:${x.fran + 1} / span ${x.antal}`}><strong>{x.rubrik}</strong>{x.tid && <>{' '}<span class="m-remsa-tid">{x.tid}</span></>}{' '}· {x.text}</div>)}
       </div>
       <table class="m-tabell m-pass stapla" id="tidsschema">
         <colgroup><col style="width:18%" /><col style="width:40%" /><col style="width:42%" /></colgroup>
@@ -118,7 +118,7 @@ const avsnitt = [
     <section>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={t.kolumner.length > 3 ? 'stapla' : ''} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={t.kolumner.length > 3 ? 'fri stapla' : 'fri'} radrubrik={false} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
     </section>
   ))}
@@ -147,7 +147,7 @@ const avsnitt = [
     <section>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={t.kolumner.length > 3 ? 'stapla' : ''} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={t.kolumner.length > 3 ? 'fri stapla' : 'fri'} radrubrik={false} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
     </section>
   ))}
@@ -168,7 +168,7 @@ const avsnitt = [
     <section>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={t.kolumner.length > 3 ? 'stapla' : ''} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={t.kolumner.length > 3 ? 'fri stapla' : 'fri'} radrubrik={false} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
     </section>
   ))}
@@ -207,7 +207,7 @@ const avsnitt = [
     <section>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={t.kolumner.length > 3 ? 'stapla' : ''} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={t.kolumner.length > 3 ? 'fri stapla' : 'fri'} radrubrik={false} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
     </section>
   ))}
@@ -238,7 +238,7 @@ const avsnitt = [
     <section>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={t.kolumner.length > 3 ? 'stapla' : ''} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={t.kolumner.length > 3 ? 'fri stapla' : 'fri'} radrubrik={false} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
     </section>
   ))}
@@ -326,7 +326,7 @@ const avsnitt = [
     <section>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={t.kolumner.length > 3 ? 'stapla' : ''} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={t.kolumner.length > 3 ? 'fri stapla' : 'fri'} radrubrik={false} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
     </section>
   ))}
@@ -339,7 +339,7 @@ const avsnitt = [
         <section class="m-ram">
           <h3>{ram.rubrik}</h3>
           {ram.text.map((s) => <p>{s}</p>)}
-          {ram.oversikt && <MetodTabell kolumner={ram.oversikt.kolumner} rader={ram.oversikt.rader} klass={kortaCeller(ram.oversikt.rader) ? 'tat' : ram.oversikt.kolumner.length > 3 ? 'stapla' : ''} />}
+          {ram.oversikt && <MetodTabell kolumner={ram.oversikt.kolumner} rader={ram.oversikt.rader} klass={kortaCeller(ram.oversikt.rader) ? 'fri tat' : ram.oversikt.kolumner.length > 3 ? 'fri stapla' : 'fri'} radrubrik={false} />}
           {ramArTom(ram)
             ? <p class="m-efter">Ramen att fylla i, med {ram.delar.length} delar, finns i <a href={`/stodundervisning/${id}-mallar.docx`}>planeringsmallarna</a>.</p>
             : (

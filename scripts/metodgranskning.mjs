@@ -25,6 +25,10 @@ if (!id) { console.error('Ange metodens id: node scripts/metodgranskning.mjs <id
 const flagga = (namn) => { const i = args.indexOf(namn); return i >= 0 ? args[i + 1] : undefined; };
 const underlag = flagga('--underlag');
 const lathundMapp = flagga('--lathundbilder');
+// --mall <fil>: en annan promptmall än scripts/codex/metod-granskning.md, t.ex. metod-lasbarhet.md.
+// --extrabilder <mapp>: alla png i mappen bifogas som skärmbilder (delade sidbilder, Word-sidor).
+const mallFil = flagga('--mall');
+const extraMapp = flagga('--extrabilder');
 const baraPrompt = args.includes('--bara-prompt');
 const vanta = args.includes('--vanta');
 
@@ -71,9 +75,13 @@ const original = lathundMapp && existsSync(resolve(lathundMapp))
   ? readdirSync(resolve(lathundMapp)).filter((f) => /\.png$/i.test(f)).sort().map((f) => join(resolve(lathundMapp), f))
   : [];
 if (lathundMapp && !original.length) console.warn(`Inga png-bilder i ${lathundMapp}: lathundens original bifogas inte.`);
+const extra = extraMapp && existsSync(resolve(extraMapp))
+  ? readdirSync(resolve(extraMapp)).filter((f) => /\.png$/i.test(f)).sort().map((f) => join(resolve(extraMapp), f))
+  : [];
+if (extraMapp && !extra.length) console.warn(`Inga png-bilder i ${extraMapp}.`);
 
 const datum = new Date().toISOString().slice(0, 10);
-const mall = readFileSync(join(rot, 'scripts', 'codex', 'metod-granskning.md'), 'utf8');
+const mall = readFileSync(mallFil ? resolve(mallFil) : join(rot, 'scripts', 'codex', 'metod-granskning.md'), 'utf8');
 const prompt = mall
   .replaceAll('{{id}}', id)
   .replaceAll('{{datum}}', datum)
@@ -82,17 +90,17 @@ const prompt = mall
   .replaceAll('{{sida}}', rel(sida))
   .replaceAll('{{lathund}}', existsSync(lathund) ? rel(lathund) : '(metoden har ingen lathund)')
   .replaceAll('{{docx}}', docxTexter.join('\n') || '- (inga Word-filer i dist)')
-  .replaceAll('{{bilder}}', [...bilder.map((b) => `- ${rel(b)} (bifogad som bild)`), ...original.map((b, i) => `- ${rel(b)} (lathundens original ur Niclas pptx, sida ${i + 1}, bifogad som bild: jämför lathunden på sajten mot den)`), ...pdfer.map((p) => `- ${rel(p)} (utskriften som pdf, läs med pdftotext om det finns)`)].join('\n') || '- (inga skärmbilder: kör node scripts/metodprov.mjs ' + id + ' --bilder först)');
+  .replaceAll('{{bilder}}', [...bilder.map((b) => `- ${rel(b)} (bifogad som bild)`), ...original.map((b, i) => `- ${rel(b)} (lathundens original ur Niclas pptx, sida ${i + 1}, bifogad som bild: jämför lathunden på sajten mot den)`), ...extra.map((b) => `- ${rel(b)} (bifogad som bild)`), ...pdfer.map((p) => `- ${rel(p)} (utskriften som pdf, läs med pdftotext om det finns)`)].join('\n') || '- (inga skärmbilder: kör node scripts/metodprov.mjs ' + id + ' --bilder först)');
 const promptFil = join(mapp, 'prompt.md');
 writeFileSync(promptFil, prompt);
-console.log(`Prompten ligger i ${rel(promptFil)}${bilder.length + original.length ? `, ${bilder.length + original.length} bilder bifogas` : ''}.`);
+console.log(`Prompten ligger i ${rel(promptFil)}${bilder.length + original.length + extra.length ? `, ${bilder.length + original.length + extra.length} bilder bifogas` : ''}.`);
 if (baraPrompt) process.exit(0);
 if (!codexExe) { console.error('Hittar inte Codex CLI (codex.exe i %LOCALAPPDATA%\\Programs\\OpenAI\\Codex\\bin eller codex i PATH).'); process.exit(1); }
 
 const svar = join(prov, `granskning-${datum}.md`);
 const logg = join(prov, 'codex.log');
 const codexArgs = ['exec', '-m', MODELL, '-c', `model_reasoning_effort=${ANSTRANGNING}`, '--sandbox', 'read-only', '--skip-git-repo-check', '-o', svar];
-for (const b of [...bilder, ...original]) codexArgs.push('-i', b);
+for (const b of [...bilder, ...original, ...extra]) codexArgs.push('-i', b);
 codexArgs.push('-');
 
 const loggFd = openSync(logg, 'w');

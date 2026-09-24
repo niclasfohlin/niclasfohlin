@@ -117,7 +117,7 @@ const citat = (f: string) => `”${f}”`;
           if (b.typ === 'tabell') return (
             <div class="lh-avsnitt">
               <h3 class="lh-kicker">{b.rubrik}</h3>
-              <MetodTabell kolumner={b.kolumner} rader={b.rader} klass="lh-tabell" />
+              <MetodTabell kolumner={b.kolumner} rader={b.rader} klass="lh-tabell" radrubrik={false} />
             </div>
           );
           if (b.typ === 'kedja') return (

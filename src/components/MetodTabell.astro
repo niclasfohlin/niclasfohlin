@@ -1,10 +1,16 @@
 ---
-// Tabell med rubrikrad i metodmodellen. En radbrytning i en cell blir en ny rad; i första
-// kolumnen är första raden fet och resten kursiv, som i kompendiet. På smala skärmar
-// staplas cellerna med kolumnrubriken framför (data-rubrik).
-interface Props { kolumner: string[]; rader: string[][]; bredder?: string[]; klass?: string }
-const { kolumner, rader, bredder = [], klass = '' } = Astro.props;
+// Tabell med rubrikrad i metodmodellen. En radbrytning i en cell blir en ny rad. På smala
+// skärmar staplas cellerna med kolumnrubriken framför (data-rubrik).
+//
+// Fet stil betyder rubrik, inget annat. Rubrikraden är alltid fet. Första kolumnen är fet bara
+// när den är radrubriker (radrubrik: true, som Fas, Vecka, Före insatsen, Steg); står rubrikerna
+// i rad 1 eller ovanför tabellen (fria tabeller, ordlistor, lathundens mallar) är första kolumnen
+// vanlig text. En rad där varje cell är skriven med versaler är en mellanrubrik i tabellen och
+// ritas som en rubrikrad (verbdelen i en läslista).
+interface Props { kolumner: string[]; rader: string[][]; bredder?: string[]; klass?: string; radrubrik?: boolean }
+const { kolumner, rader, bredder = [], klass = '', radrubrik = true } = Astro.props;
 const linjer = (t: string) => t.split('\n');
+const arMellanrubrik = (r: string[]) => r.every((c) => c.trim() && c === c.toUpperCase() && /\p{L}/u.test(c));
 ---
 <table class={`m-tabell ${klass}`.trim()}>
   {bredder.length > 0 && <colgroup>{bredder.map((b) => <col style={`width:${b}`} />)}</colgroup>}
@@ -12,15 +18,17 @@ const linjer = (t: string) => t.split('\n');
     <tr>{kolumner.map((k) => <th scope="col">{k}</th>)}</tr>
   </thead>
   <tbody>
-    {rader.map((rad) => (
+    {rader.map((rad) => arMellanrubrik(rad)
+      ? <tr class="m-mellanrubrik">{rad.map((cell) => <th scope="col">{cell}</th>)}</tr>
+      : (
       <tr>
         {rad.map((cell, i) => {
           const l = linjer(cell);
-          return i === 0
-            ? <th scope="row" data-rubrik={kolumner[i]}><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</th>
-            : <td data-rubrik={kolumner[i]}>{l.map((x, j) => <>{j > 0 && <br />}{x}</>)}</td>;
+          if (i === 0 && radrubrik) return <th scope="row" data-rubrik={kolumner[i]}><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</th>;
+          if (i === 0) return <td data-rubrik={kolumner[i]}><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</td>;
+          return <td data-rubrik={kolumner[i]}>{l.map((x, j) => <>{j > 0 && <br />}{x}</>)}</td>;
         })}
       </tr>
-    ))}
+      ))}
   </tbody>
 </table>

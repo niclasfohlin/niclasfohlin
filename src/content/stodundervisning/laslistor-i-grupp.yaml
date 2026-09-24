@@ -173,7 +173,7 @@ exempel:
 urval:
   rubrik: Var hittar du listorna och böckerna?
   text:
-    - Listorna behöver du inte göra själv. Sju färdiga läslistor, en per vecka, finns i avsnittet Läslistorna och bland planeringsmallarna. Alla ord i listorna är riktiga, vanliga och ljudenligt stavade svenska ord. Listorna innehåller inga mjuka k och g, inga sj- och tj-ljud, inget ng och ingen dubbelteckning. De ljudstridiga mönstren tränas i nästa insatsperiod, när den ljudenliga avkodningen sitter.
+    - Listorna behöver du inte göra själv. Sju färdiga läslistor, en per vecka, finns i avsnittet Läslistorna och i planeringsmallarna, en lista per sida att kopiera. Alla ord i listorna är riktiga, vanliga och ljudenligt stavade svenska ord. Listorna innehåller inga mjuka k och g, inga sj- och tj-ljud, inget ng och ingen dubbelteckning. De ljudstridiga mönstren tränas i nästa insatsperiod, när den ljudenliga avkodningen sitter.
     - "Böckerna till avslutningen från vecka 4 hittar du bland skolans lättlästa böcker: nivåindelade serier som Kiwi, Stjärnsvenska och Beta Pedagog finns på de flesta skolor för F–3. Välj en bok som eleverna kan läsa det mesta av och som har något att prata om."
   kravText: "Gör du egna listor, följ tre krav:"
   krav:
@@ -693,7 +693,7 @@ lathund:
     not: "Bekräfta, korrigera och ge stöd direkt när det händer. Korrigera kort: säg rätt ljud och låt eleven läsa om hela ordet från början. Vid många fel: modellera ordet igen och körläs det på nytt."
   pass:
     rubrik: "Vi kör ett pass: vecka 5, konsonantmöten"
-    textRubrik: Gruppen · fyra elever, åk 1, Läslista 4
+    textRubrik: Gruppen · fyra elever, åk 1, Läslista 4
     utskrift: Skriv ut passexemplet
     text:
       - "Läraren modellerar fem ord ur första kolumnen: ”sss-t-eee-nnn. Sten. Här är det lätt att tappa ett ljud. Hör ni vilket?” Eleverna lyssnar."
@@ -780,7 +780,7 @@ lathund:
       rubrik: Var listorna och böckerna finns
       punkter:
         - fet: Sju läslistor, en per vecka.
-          text: Bland metodens mallar, från bokstäver och ljud till meningar och text.
+          text: I planeringsmallarna (Word), en lista per sida att kopiera till paren, och i avsnittet Läslistorna på metodsidan. Från bokstäver och ljud till meningar och text.
         - fet: Lättlästa böcker för F–3.
           text: Nivåindelade serier som Kiwi, Stjärnsvenska och Beta Pedagog, till avslutningen från vecka 4.
         - fet: Egna listor.
