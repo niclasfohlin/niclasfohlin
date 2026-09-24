@@ -1,0 +1,795 @@
+# Metod i stödundervisning. Modellen står i src/content.config.ts och mallen i _mall.yaml.
+# Skriven av scripts/metod-yaml.mjs ur laslistor-i-grupp.mjs. Ändra i YAML-filen eller kör om skriptet.
+titel: Läslistor i grupp
+undertitel: Lärarledd avkodningsträning med läslistor i liten grupp, för F–3 och främst F–2
+ingress: Ett körschema för 15-minuterspass i liten grupp där läraren modellerar, gruppen körläser och eleverna läser i par, samma rörelse varje gång. För elever i F–3 som behöver stöd i avkodningen. En läslista i veckan under sex till åtta veckor, med sju färdiga listor från bokstäver och ljud till meningar.
+omrade: Läsning
+arskurs:
+  - F-3
+arskursText: F–3, främst F–2
+taggar:
+  - avkodning
+  - bokstavskunskap
+  - lasflyt
+format:
+  - liten grupp
+  - par
+tid: 15 minuter per pass, fyra till fem dagar i veckan
+period: Sex till åtta veckor
+grupp: En till tio elever
+material:
+  - Veckans läslista, en kopia per par och en stor att visa
+  - Bokstavskort för att bygga ord
+  - En lättläst bok till avslutningen från vecka 4
+  - Snabbmallen för noteringen efter passet
+uppdaterad: 2026-09-24
+relaterade:
+  - til-i-grupp
+utkast: false
+inledning:
+  - "Läslistor utvecklar elevernas avkodningsförmåga genom strukturerad och upprepad läsning. Arbetet med en lista följer alltid samma rörelse: läraren modellerar, gruppen körläser och eleverna läser i par. Rörelsen går från mest till minst stöd, och det är rörelsen som är metoden. Listan i sig utvecklar ingen avkodning."
+  - "Ni arbetar med en läslista i veckan, enligt de sju listorna i avsnittet Läslistorna. Rörelsen kan rymmas i ett enda arbetspass på 15 minuter och göras varje dag, eller fördelas över veckan: läraren modellerar och gruppen körläser i början av veckan, paren läser och läser om under resten. Ordningen är alltid densamma, oavsett om rörelsen tar 15 minuter eller en hel vecka."
+  - Arbetet med listorna ska gå över i läsning av riktiga böcker. Från vecka 4, när eleverna läser hela ord med flyt, avslutas passen med några minuter i en bok som ni läser och pratar om, och den stunden växer fram till vecka 7. Börja med rörelsen och tidsschemat nedan.
+upplagg:
+  rubrik: Så fungerar insatsen
+  text: Insatsen genomförs fyra till fem gånger i veckan under sex till åtta veckor. Varje pass är 15 minuter, och ni arbetar med en läslista i veckan. Gruppen består av en till tio elever i F–3, främst F–2, som behöver stöd i avkodningen. Läslistor läses alltid tillsammans med läraren eller i par, aldrig som eget material där eleven sitter ensam. Efter passet noterar du kort vilka ord och orddelar som behöver repeteras. Byt lista först när flytet sitter, och läs parallellt i riktiga böcker varje vecka så att avkodningen förs över till verklig läsning. Efter perioden läser eleven listorna för dig igen, och ni jämför med starten.
+gruppen:
+  rubrik: Så väljer du eleverna
+  text: Läslistor är för elever som gissar sig fram när de läser, som har tydliga svårigheter med avkodningen eller som har svårt att binda ihop ljuden till orddelar och ord. Andra elever behöver dem inte. Före perioden läser varje elev Läslista start till Läslista 4 för dig, en minut per lista. Då hör du vem som gissar, vem som ljudar utan att binda ihop och var flytet tar slut. Sätt ihop gruppen av elever som tappar flytet på ungefär samma lista, och börja på den listan.
+principer:
+  rubrik: Fyra saker att hålla fast vid
+  text: "Rörelsen är metoden: modellering, körläsning och parläsning i den ordningen, varje gång. Läslistor är ett komplement, inte en ersättning för läsning i böcker och texter. Det är den snabba feedbacken, inte läslistorna i sig, som utvecklar elevens förmåga att avkoda. Genom omläsning och stöd från läraren kan elever automatisera avkodningen och överföra den till verkliga texter."
+tabeller:
+  - rubrik: "Rörelsen: från mest till minst stöd"
+    plats: efter-inledning
+    kolumner:
+      - 1. Modellering
+      - 2. Körläsning
+      - 3. Parläsning
+    rader:
+      - - Läraren ljudar, pekar i listan och läser långsamt högt.
+        - Alla läser samma ord tillsammans, i lärarens tempo.
+        - En elev pekar, en läser. Efter en genomläsning byter de roller.
+    not: "Varför den ordningen? Modelleringen visar hur avkodningen görs innan eleven ska göra den själv. Körläsningen sänker tröskeln: alla läser samtidigt, ingen står ensam och varje ord hörs rätt flera gånger. Parläsningen ger många lästillfällen och snabb återkoppling på varje ord. Att hoppa direkt till paren gör att felläsningar befästs i stället för att rättas."
+  - rubrik: En lista i veckan
+    plats: efter-tidsschema
+    kolumner:
+      - Dag
+      - Så arbetar ni med listan
+    rader:
+      - - Måndag
+        - Läraren modellerar och gruppen körläser hela listan. Förklara nya ord.
+      - - Tisdag till torsdag
+        - Kort modellering, körläsning av dagens kolumn och parläsning med omläsning.
+      - - Fredag
+        - Eleven läser listan för läraren eller för sin kompis, och ni sätter ord på vad som blivit lättare.
+    not: Med fyra pass i veckan stryker du en av dagarna tisdag till torsdag. Från vecka 4 avslutas varje pass, också måndag och fredag, med några minuter i boken.
+  - rubrik: Bekräfta, korrigera, ge stöd
+    plats: efter-steg
+    text: Läraren cirkulerar mellan paren under hela parläsningen. Din uppgift är att bekräfta, korrigera och ge stöd, direkt när det händer. Det är den snabba återkopplingen som utvecklar avkodningen, inte listan.
+    kolumner:
+      - Bekräfta
+      - Korrigera
+      - Ge stöd
+    rader:
+      - - "Säg vad eleven gjorde: du ljudade hela vägen fram till sista ljudet."
+        - "Direkt och kort: säg rätt ljud och låt eleven läsa om hela ordet från början."
+        - Ljuda tillsammans, täck andra stavelsen med fingret eller jämför med ett känt ord i samma familj.
+passrutin:
+  text: Varje pass följer samma rörelse, vilken lista ni än läser.
+  steg:
+    - text: Läraren modellerar fyra till sex ord ur veckans lista.
+      fas: Modellering
+    - text: Gruppen körläser dagens kolumn i lärarens tempo.
+      fas: Körläsning
+    - text: "Eleverna läser listan i par: en pekar, en läser, och efter en genomläsning byter de roller."
+      fas: Parläsning
+    - text: Läraren cirkulerar och bekräftar, korrigerar och ger stöd.
+      fas: Parläsning
+    - text: Läraren modellerar det viktigaste. Från vecka 4 läser gruppen sedan en stund i en riktig bok.
+      fas: Avslutning
+  efterPasset: Efter passet noterar du kort vilka ord och orddelar som behöver repeteras. Noteringen i snabbmallen styr nästa pass och när ni byter lista.
+tidsschema:
+  rubrik: Ett pass på 15 minuter
+  text: "Förbered dig genom att välja orden du ska modellera. Remsan visar passet från vecka 4, när boken har vuxit in i avslutningen. Vecka 1–3 är passet bara listan: modelleringen tar 0–3 minuter, körläsningen 3–6, parläsningen 6–14 och avslutningen den sista minuten."
+  rader:
+    - tid: Före passet
+      fas: Förberedelse
+      vad: Välj fyra till sex ord ur veckans lista att modellera, inte hela listan, och dagens kolumn. Kopiera listan till varje par och ta fram dagens bok.
+    - tid: 0–2 min
+      fas: Modellering
+      vad: "Sitt så att alla ser listan. Peka och ljuda långsamt, ljud för ljud, från vänster till höger, och dra ut hållkonsonanterna: sss-ooo-lll. Bind ihop ljuden till ordet och läs det i normal takt. Tänk högt om det som är svårt i ordet: den långa vokalen, konsonantmötet, ändelsen. Eleverna lyssnar och följer med, de läser inte än."
+    - tid: 2–4 min
+      fas: Körläsning
+      vad: "Börja långsamt så att alla hinner ljuda, och öka tempot när orden känns säkra. Läs kolumnen uppifrån och ned och läs om den en gång till. Håll ihop kören: vänta in eleverna vid svåra ord i stället för att läsa förbi dem. Vid många fel: modellera ordet igen och körläs det sedan på nytt."
+    - tid: 4–10 min
+      fas: Parläsning
+      vad: "Paren sitter med listan mellan sig. Den som pekar följer ordet med fingret i läsriktningen, håller tempot och hjälper vid svårighet: ljuda tillsammans, dela ordet i delar och läs det sedan från början igen. Läs listan flera gånger. Det är omläsningen av samma ord som ger flytet."
+    - tid: 10–15 min
+      fas: Avslutning
+      vad: "Välj det som flera behövde stöd i: ett ljud, en lång vokal som blev kort, en ändelse. Visa det en gång, låt gruppen körläsa ordet efter dig och säg vad de ska tänka på nästa gång. Läs sedan i boken tillsammans: eleverna läser det de kan, du läser resten, och ni pratar om vad som händer."
+  efter: "En lista i veckan. Blir ett par klart tidigt: läs listan en gång till och byt roller."
+steg:
+  text: Passet har fyra delar, rörelsens tre steg och avslutningen. Använd exempelfraserna för att visa, leda kören och ge kort återkoppling.
+  fraserRubrik: Exempelfraser
+  rader:
+    - namn: Modellering
+      fraga: Hur låter ordet?
+      gor: Visa hur avkodningen görs innan eleverna ska göra den själva. Upprepa samma ord minst två gånger.
+      fraser:
+        - "Lyssna när jag ljudar: sss-t-eee-nnn. Sten."
+        - Här är det lätt att tappa ett ljud. Hör ni vilket?
+        - Nu läser jag ordet en gång till, i vanlig takt.
+    - namn: Körläsning
+      fraga: Kan alla läsa det tillsammans?
+      gor: Peka i listan och läs i ditt tempo. Håll ihop kören och vänta in eleverna vid svåra ord.
+      fraser:
+        - Alla tillsammans, i min takt.
+        - Vi läser kolumnen en gång till.
+        - Vänta, det ordet tar vi igen.
+    - namn: Parläsning
+      fraga: Läser du hela vägen till slutet?
+      gor: Cirkulera mellan paren under hela parläsningen. Bekräfta, korrigera och ge stöd direkt när det händer.
+      fraser:
+        - Du ljudade hela vägen fram till sista ljudet.
+        - Läs om hela ordet från början.
+        - Vilket ord i samma familj känner du igen?
+    - namn: Avslutning
+      fraga: Vad tar vi med oss?
+      gor: Modellera en sak som flera behövde stöd i och säg vad eleverna ska tänka på nästa gång. Från vecka 4 läser ni sedan i en riktig bok och pratar om innehållet.
+      fraser:
+        - Nu läser vi ordet tillsammans.
+        - Nästa gång tänker vi på den korta vokalen.
+        - Vad tror ni händer sen?
+arbetsform:
+  rubrik: "Arbetsform: från mest till minst stöd"
+  text: Först visar du, sedan läser alla samma ord tillsammans i ditt tempo, och sist läser eleverna i par medan du cirkulerar. Passet avslutas med hela gruppen. Upplägget fungerar med en elev lika väl som med tio. Med en elev är du elevens par. Du pekar och eleven läser, och efter en genomläsning byter ni. Vid udda antal läser tre tillsammans, en pekar och två turas om att läsa. Med tio elever blir det fem par, och du hinner lyssna på varje par en eller två gånger under parläsningen.
+  delar:
+    - rubrik: 1. Läraren visar
+      text: modellering, eleverna lyssnar
+      faser:
+        - Modellering
+    - rubrik: 2. Alla tillsammans
+      text: körläsning i lärarens tempo
+      faser:
+        - Körläsning
+    - rubrik: 3. I par
+      text: en pekar, en läser, läraren cirkulerar
+      faser:
+        - Parläsning
+    - rubrik: 4. Alla tillsammans igen
+      text: det viktigaste, och från vecka 4 boken
+      faser:
+        - Avslutning
+exempel:
+  valt:
+    rubrik: Gruppen
+    text: fyra elever i årskurs 1 som gissade på orden utifrån första bokstaven när de läste listorna för läraren i starten. Det är onsdag i vecka 5, och veckans lista är Läslista 4 om konsonantmöten.
+  text:
+    - "Läraren har valt fem ord ur första kolumnen: sten, stol, spik, snö och slut. Gruppen sitter så att alla ser listan. Läraren pekar på sten och ljudar långsamt: ”sss-t-eee-nnn. Sten.” Sedan tänker läraren högt: ”Här är det lätt att tappa ett ljud. Hör ni vilket? Utan t blir det sen.” Varje ord modelleras två gånger. Eleverna lyssnar, de läser inte än."
+    - "Nu pekar läraren och alla läser kolumnen tillsammans, långsamt först. Vid spik stannar kören, och Leon säger ”pik”. Läraren modellerar ordet igen: ”sss-p-iii-k. Spik.” Sedan läser alla kolumnen en gång till, lite fortare."
+    - "Paren tar fram sina kopior. Alva pekar och Omar läser. Hiba pekar och Leon läser. Leon läser ”sen” där det står sten. Hiba ljudar tillsammans med Leon, och läraren kommer fram och säger kort: ”Läs om hela ordet från början.” Leon läser ”sten”. Hos Alva och Omar bekräftar läraren: ”Du ljudade hela vägen fram till sista ljudet.” Efter en genomläsning byter paren roller och läser listan igen."
+    - "Läraren samlar gruppen och modellerar det som flera behövde: mötet i början av sten och spik. Alla körläser orden efter läraren. Sedan tar läraren fram en lättläst bok om en hund som gräver i sanden. Eleverna läser det de kan, och läraren läser resten. ”Vad tror ni att hunden letar efter?” frågar läraren. Omar hittar ordet sand på sidan och läser det direkt. Efteråt noterar läraren kort: Leon tappar t i st-orden, repetera i morgon. Alva och Omar läser de två första kolumnerna med flyt."
+urval:
+  rubrik: Var hittar du listorna och böckerna?
+  text:
+    - Listorna behöver du inte göra själv. Sju färdiga läslistor, en per vecka, finns i avsnittet Läslistorna och bland planeringsmallarna. Alla ord i listorna är riktiga, vanliga och ljudenligt stavade svenska ord. Listorna innehåller inga mjuka k och g, inga sj- och tj-ljud, inget ng och ingen dubbelteckning. De ljudstridiga mönstren tränas i nästa insatsperiod, när den ljudenliga avkodningen sitter.
+    - "Böckerna till avslutningen från vecka 4 hittar du bland skolans lättlästa böcker: nivåindelade serier som Kiwi, Stjärnsvenska och Beta Pedagog finns på de flesta skolor för F–3. Välj en bok som eleverna kan läsa det mesta av och som har något att prata om."
+  kravText: "Gör du egna listor, följ tre krav:"
+  krav:
+    - rubrik: Riktiga ord
+      text: Vanliga svenska ord som eleverna känner igen
+    - rubrik: Ljudenligt
+      text: Inga mjuka k och g, sj- och tj-ljud, ng eller dubbelteckning
+    - rubrik: En svårighet i taget
+      text: Varje lista bygger vidare på den förra
+progression:
+  rubrik: Sju listor på sju veckor
+  text: "Listorna följer avkodningens naturliga utveckling, från säker koppling mellan bokstav och ljud, via allt längre ordstrukturer, till ord som växer med morfem och till sist hela meningar. Vägen går från alfabetisk-fonemisk läsning mot ortografisk-morfemisk läsning, där eleven börjar känna igen orddelar och stavningsmönster i stället för att ljuda varje bokstav (Høien och Lundberg, 2013). En lista kan ta mer än en vecka, eftersom ni byter lista först när flytet sitter. Från lista 5 behövs ett litet antal ordbilder för meningarna: och, är, i, på, en, ett, har, jag, vi, det, de. Öva dem som helheter, till exempel med ordkort."
+  enhet: Vecka
+  rader:
+    - vecka: "1"
+      fokus: "Läslista start: bokstäver och ljud, först i inlärningsordning och sedan blandade."
+      roll: Lyssna efter att eleven säger ljudet och inte bokstavsnamnet. Ge artikulationsstöd.
+    - vecka: "2"
+      fokus: "Läslista 1: två ljud, KV och VK, som se, os och ål."
+      roll: "Lyssna efter att ljuden binds ihop till ett ord. Vid fel: backa och ljuda långsamt tillsammans."
+    - vecka: "3"
+      fokus: "Läslista 2: KVK i ordfamiljer, som sol, sal och sil."
+      roll: Lyssna efter att vokalen blir lång och att eleven läser hela vägen till slutet.
+    - vecka: "4"
+      fokus: "Läslista 3: KVKV, två stavelser, som sola, laga och resa. Boken växer in i avslutningen."
+      roll: Lyssna efter att eleven tar en stavelse i taget. Läs cirka tre minuter i boken.
+    - vecka: "5"
+      fokus: "Läslista 4: konsonantmöten, som sten, gris och häst."
+      roll: Lyssna efter att inget ljud tappas eller läggs till i mötet. Cirka fyra minuter i boken.
+    - vecka: "6"
+      fokus: "Läslista 5: ordet växer, med ändelser och sammansatta ord, som sol, solen och solar."
+      roll: Lyssna efter att eleven läser ändelsen som en helhet. Cirka fem minuter i boken.
+    - vecka: "7"
+      fokus: "Läslista 6: meningar och en kort text."
+      roll: Lyssna efter läsmelodin och prata om vad meningarna betyder. Cirka fem minuter i boken.
+    - vecka: Efter vecka 7
+      fokus: "Nästa period: dubbelteckning med kort vokal, ng-ljudet, mjuka k och g samt sj- och tj-ljuden."
+      roll: Fortsätt med upprepad läsning i riktiga böcker, till exempel med TIL i grupp, så att flytet förs över till texter som betyder något.
+uppfoljning:
+  text: Du behöver veta om passen ger effekt, inte bara att de har genomförts. Gör samma läsning av listorna före och efter perioden.
+  rader:
+    - nar: Före insatsen
+      vad: Eleven läser Läslista start till Läslista 4 för dig, en minut per lista. Skriv upp rätt lästa ord och om eleven gissar, ljudar utan att binda ihop eller läser direkt.
+    - nar: Efter sex till åtta veckor
+      vad: "Samma listor igen, en minut per lista. Jämför med starten. Läs också en kort text och fråga om innehållet: bär avkodningen fram till det texten handlar om?"
+mal:
+  punkter:
+    - Säga ljudet direkt när eleven ser bokstaven
+    - Ljuda ihop två och tre ljud till ett ord
+    - Läsa ord med två stavelser, en stavelse i taget
+    - Läsa ord med konsonantmöten utan att tappa ljud
+    - Känna igen ändelser och läsa dem som en helhet
+    - Läsa korta meningar med flyt och berätta vad de handlar om
+snabbmall:
+  fore:
+    - Veckans lista och dagens kolumn
+    - Ord att modellera
+    - Paren, och dagens bok
+  efter:
+    - Ord och orddelar att repetera
+    - Vem läser listan med flyt? Byter vi lista?
+    - Vad modellerar jag i nästa avslutning?
+checklista:
+  punkter:
+    - Valt veckans lista och läst den högt själv.
+    - Valt fyra till sex ord att modellera och dagens kolumn.
+    - Kopierat listan till varje par.
+    - Bestämt paren, och en trio vid udda antal.
+    - Läst vad jag ska lyssna efter i veckans lista.
+    - Tagit fram en lättläst bok till avslutningen, från vecka 4.
+    - Lagt fram snabbmallen för noteringen efteråt.
+grund:
+  text: "Läslistor bygger på fyra saker som var för sig har stöd i läsforskningen. Avkodningen utvecklas i en ordning, från säker koppling mellan bokstav och ljud till att känna igen orddelar och stavningsmönster, och listorna följer den ordningen (Høien och Lundberg, 2013). Att läsa samma ord flera gånger ger flyt (Samuels, 1979). Systematisk undervisning om bokstäver och ljud, och att eleven läser högt och får återkoppling, stärker avkodningen hos elever som behöver stöd (National Reading Panel, 2000). Rörelsen från modellering via körläsning till parläsning är ett gradvis överlämnande av ansvar: jag gör, vi gör, du gör (Fisher och Frey, 2008)."
+  kallor: Bygger på Høien och Lundberg (2013), Samuels (1979), National Reading Panel (2000) och Fisher och Frey (2008).
+ramar:
+  rubrik: Läslistorna
+  text:
+    - "Sju läslistor som tillsammans bildar en insats på sju veckor, en lista per vecka. Varje lista har orden att läsa och en ruta om hur ni arbetar med den: vad listan tränar, så gör ni och vad du lyssnar efter. Listorna finns också som egna sidor bland planeringsmallarna, att kopiera till varje par och visa stort för gruppen."
+  ramar:
+    - rubrik: Läslista start
+      text:
+        - "Vecka 1 · bokstäver och ljud. Först bokstäverna i inlärningsordning, sedan blandade bokstäver: säg ljudet snabbt."
+      oversikt:
+        kolumner:
+          - I ordning
+          - I ordning
+          - I ordning
+          - Blandade
+          - Blandade
+          - Blandade
+        rader:
+          - - s
+            - i
+            - u
+            - m
+            - t
+            - S
+          - - o
+            - v
+            - b
+            - a
+            - n
+            - A
+          - - l
+            - t
+            - g
+            - s
+            - å
+            - L
+          - - a
+            - f
+            - h
+            - i
+            - r
+            - O
+          - - r
+            - å
+            - y
+            - o
+            - p
+            - R
+          - - m
+            - p
+            - ä
+            - l
+            - f
+            - M
+          - - e
+            - k
+            - ö
+            - e
+            - d
+            - E
+          - - n
+            - d
+            - j
+            - v
+            - k
+            - N
+      delar:
+        - rubrik: Så arbetar ni med listan
+          falt:
+            - rubrik: Fokus
+              text: "Säker grafem-fonemkoppling. Eleven ser bokstaven och säger ljudet direkt, inte bokstavsnamnet. Bokstäverna kommer i inlärningsordning: först hållkonsonanter och tydliga vokaler, sedan klusiler och övriga vokaler."
+            - rubrik: Så gör ni
+              text: "Peka och läs uppifrån och ned, kolumn för kolumn. Modellera först, läs sedan i kör och till sist i par. Dra ut hållkonsonanterna: sss, lll, mmm."
+            - rubrik: Lyssna efter
+              text: "Att eleven säger ljudet /m/ och inte namnet äm. Ge artikulationsstöd: känn läpparna vid /m/, tungan bakom tänderna vid /l/."
+    - rubrik: "Läslista 1: KV och VK"
+      text:
+        - Vecka 2 · två ljud. Läs orden kolumn för kolumn.
+      oversikt:
+        kolumner:
+          - Konsonant + vokal
+          - Konsonant + vokal
+          - Vokal + konsonant
+        rader:
+          - - se
+            - by
+            - is
+          - - så
+            - du
+            - os
+          - - sy
+            - ha
+            - ur
+          - - le
+            - vi
+            - ål
+          - - la
+            - gå
+            - ås
+          - - lo
+            - ta
+            - ek
+          - - ro
+            - tå
+            - el
+          - - ny
+            - te
+            - al
+          - - nu
+            - ko
+            - il
+          - - ni
+            - må
+            - ut
+          - - bo
+            - få
+            - in
+          - - bi
+            - ju
+            - av
+      delar:
+        - rubrik: Så arbetar ni med listan
+          falt:
+            - rubrik: Fokus
+              text: "Sammanljudning av två ljud. Alla ord är riktiga ord. I KV-orden är vokalen lång: se, så, bo. I VK-orden börjar vokalen: is, os, ål."
+            - rubrik: Så gör ni
+              text: "För fingret från vänster till höger, ljuda och bind ihop: /s/ /e/ blir se. Jämför gärna spegelparen så och ås, la och al, så att eleven hör att ordningen avgör ordet."
+            - rubrik: Lyssna efter
+              text: "Att ljuden binds ihop till ett ord och inte stannar som två separata ljud. Vid fel: backa, ljuda långsamt tillsammans och låt eleven pröva igen."
+    - rubrik: "Läslista 2: KVK i ordfamiljer"
+      text:
+        - Vecka 3 · KVK-ord. Läs orden familj för familj.
+      oversikt:
+        kolumner:
+          - -ol · -al · -il
+          - -at · -os · -us
+          - -en · -ur · -ål
+        rader:
+          - - sol
+            - mat
+            - ren
+          - - kol
+            - fat
+            - sen
+          - - sal
+            - lat
+            - ben
+          - - dal
+            - sat
+            - len
+          - - mal
+            - ros
+            - mur
+          - - tal
+            - nos
+            - sur
+          - - val
+            - mos
+            - tur
+          - - hal
+            - dos
+            - bur
+          - - bil
+            - mus
+            - mål
+          - - fil
+            - hus
+            - hål
+          - - mil
+            - lus
+            - nål
+          - - sil
+            - sus
+            - tål
+      delar:
+        - rubrik: Så arbetar ni med listan
+          falt:
+            - rubrik: Fokus
+              text: "Tre ljud i följd. Orden står i ordfamiljer med samma rim: sol och kol, sal och dal, bil och sil. Eleven upptäcker att bara första ljudet byts och läser resten som en känd del."
+            - rubrik: Så gör ni
+              text: "Läs en familj i taget. Ljuda första ordet helt, läs sedan de följande genom att byta ansatsen: /s/ plus al, /d/ plus al, /m/ plus al. Det är ansats och rim i praktiken."
+            - rubrik: Lyssna efter
+              text: "Att vokalen blir lång: sool, saal, biil. Att eleven inte gissar på sista ljudet utan läser hela vägen till slutet."
+    - rubrik: "Läslista 3: KVKV, två stavelser"
+      text:
+        - Vecka 4 · KVKV-ord. Läs orden kolumn för kolumn.
+      oversikt:
+        kolumner:
+          - Från KVK till KVKV
+          - Nya ord med a
+          - Ord med e, o och y
+        rader:
+          - - sola
+            - laga
+            - resa
+          - - tala
+            - baka
+            - leka
+          - - mala
+            - kaka
+            - leta
+          - - sila
+            - saga
+            - dela
+          - - mata
+            - våga
+            - meta
+          - - måla
+            - gata
+            - sopa
+          - - nosa
+            - lada
+            - ropa
+          - - mosa
+            - bada
+            - koka
+          - - mura
+            - rita
+            - sota
+          - - sura
+            - sida
+            - byta
+          - - håla
+            - lina
+            - dyka
+          - - tåla
+            - vila
+            - myra
+      delar:
+        - rubrik: Så arbetar ni med listan
+          falt:
+            - rubrik: Fokus
+              text: "Tvåstaviga ord med öppna stavelser. Första kolumnen bygger vidare på förra veckans KVK-ord: sol blir sola, tal blir tala, mur blir mura. Eleven ser att kända ord kan växa."
+            - rubrik: Så gör ni
+              text: "Dela ordet i stavelser och klappa: so-la, la-ga, re-sa. Ljuda första stavelsen, ljuda andra stavelsen, läs ihop hela ordet. Vokalen i den öppna stavelsen är lång."
+            - rubrik: Lyssna efter
+              text: "Att eleven tar en stavelse i taget i stället för att ljuda bokstav för bokstav genom hela ordet. Vid fel: täck andra stavelsen med fingret och läs delarna var för sig."
+    - rubrik: "Läslista 4: konsonantmöten"
+      text:
+        - Vecka 5 · konsonantmöten. Läs orden kolumn för kolumn.
+      oversikt:
+        kolumner:
+          - Möte först
+          - Möte först
+          - Möte sist, kort vokal
+        rader:
+          - - sten
+            - klar
+            - ost
+          - - stol
+            - klok
+            - häst
+          - - spik
+            - kniv
+            - rast
+          - - snö
+            - knä
+            - fisk
+          - - slut
+            - trä
+            - mask
+          - - fri
+            - tre
+            - salt
+          - - frö
+            - plan
+            - hals
+          - - gris
+            - prat
+            - hand
+          - - gran
+            - brev
+            - land
+          - - blå
+            - bror
+            - sand
+          - - blad
+            - glad
+            - hund
+          - - tro
+            - grön
+            - vind
+      delar:
+        - rubrik: Så arbetar ni med listan
+          falt:
+            - rubrik: Fokus
+              text: "Två konsonanter i följd, först i början av ordet och sedan i slutet. Konsonantmöten är nästa svårighetsnivå efter de enkla ljudenliga orden. Lägg märke till att vokalen blir kort i orden med möte på slutet: fisk, hand, häst."
+            - rubrik: Så gör ni
+              text: "Ljuda mötet som ett par: /s/ /t/ blir st, lägg sedan på resten: st-en, st-ol. I slutmötena: läs början, håll vokalen kort och landa i mötet: fi-sk, ha-nd."
+            - rubrik: Lyssna efter
+              text: "Att inget ljud tappas eller läggs till i mötet, som sen i stället för sten. Vid fel: bygg ordet med bokstavskort och ta bort första konsonanten, jämför sten och ten, gris och ris."
+    - rubrik: "Läslista 5: ordet växer"
+      text:
+        - Vecka 6 · morfem. Läs radvis, från vänster till höger.
+      oversikt:
+        kolumner:
+          - Grundord
+          - Med -en eller -an
+          - Med -ar eller -or
+        rader:
+          - - sol
+            - solen
+            - solar
+          - - bil
+            - bilen
+            - bilar
+          - - häst
+            - hästen
+            - hästar
+          - - fisk
+            - fisken
+            - fiskar
+          - - hund
+            - hunden
+            - hundar
+          - - båt
+            - båten
+            - båtar
+          - - kaka
+            - kakan
+            - kakor
+          - - saga
+            - sagan
+            - sagor
+          - - GRUNDFORM
+            - "NU: -AR ELLER -ER"
+            - "DÅ: -ADE ELLER -DE"
+          - - laga
+            - lagar
+            - lagade
+          - - bada
+            - badar
+            - badade
+          - - måla
+            - målar
+            - målade
+          - - leka
+            - leker
+            - lekte
+          - - läsa
+            - läser
+            - läste
+          - - resa
+            - reser
+            - reste
+      delar:
+        - rubrik: Sammansatta ord och första meningarna
+          falt:
+            - rubrik: Sammansatta ord
+              text: |-
+                solros · husbil · matsal
+                solstol · badhus · sagobok
+            - rubrik: Meningar
+              text: |-
+                Vi badar och solar. Jag läser en saga.
+                Musen bor i huset. Solen lyser på huset.
+        - rubrik: Så arbetar ni med listan
+          falt:
+            - rubrik: Fokus
+              text: "Morfem: de minsta betydelsebärande delarna. Eleven läser samma grundord med olika ändelser och upptäcker mönstret: solen, solar, lagade. Att känna igen orddelar i stället för enskilda bokstäver är steget in i ortografisk läsning."
+            - rubrik: Så gör ni
+              text: "Läs radvis, från vänster till höger. Ringa in ändelsen och fråga vad som hände med ordet: en sol, solen, flera solar. I de sammansatta orden: dela ordet i två kända ord, sol och ros blir solros."
+            - rubrik: Lyssna efter
+              text: "Att eleven läser ändelsen som en helhet och inte ljudar om hela ordet från början. Beröm strategin: du såg ordet sol inuti solen."
+    - rubrik: "Läslista 6: meningar"
+      text:
+        - Vecka 7 · meningar och text. Läs meningarna en i taget, kolumn för kolumn, och sist texten.
+      oversikt:
+        kolumner:
+          - Meningar 1–6
+          - Meningar 7–12
+        rader:
+          - - Mus i bur.
+            - Hästen står i hagen.
+          - - Solen lyser.
+            - Vi leker i sanden.
+          - - Hunden är glad.
+            - I skogen står en gran.
+          - - Vi har en båt.
+            - Vi ser en gris och en ko.
+          - - Jag målar ett hus.
+            - Solen och månen lyser.
+          - - Musen bor i muren.
+            - Mamma och pappa lagar mat.
+      delar:
+        - rubrik: Läs texten
+          falt:
+            - rubrik: Texten
+              text: Sara har en hund. Hunden är stor och glad. Sara och hunden leker i sanden. Sen vilar de i solen. Det är en fin dag.
+        - rubrik: Så arbetar ni med listan
+          falt:
+            - rubrik: Fokus
+              text: "Hela meningar av tränade ord och ordbilder, från två ord till fem. Sist en kort text. Nu ska avkodningen bära ända fram till innehållet: prata om vad meningarna betyder."
+            - rubrik: Så gör ni
+              text: "Läs varje mening två gånger: först med fokus på att alla ord blir rätt, sedan en gång till med flyt och läsmelodi. Stanna vid punkten. Ordbilderna och, är, i, på, en, ett, har, jag, vi, det och de läses som helheter."
+            - rubrik: Lyssna efter
+              text: "Att eleven läser om meningen med flyt efter första genomläsningen och att rösten går ner vid punkt. Ställ en fråga per mening: var bor musen?"
+lathund:
+  innehall: En läslista i veckan
+  metoden:
+    text:
+      - "Läslistor utvecklar avkodningen genom strukturerad och upprepad läsning, för elever i F–3 som gissar sig fram eller har svårt att ljuda ihop ord. Arbetet följer alltid samma rörelse: läraren modellerar, gruppen körläser och eleverna läser i par. Det är rörelsen som är metoden."
+      - "En lista i veckan, 15 minuter per pass. Tiderna i tabellen gäller från vecka 4, när passet avslutas med några minuter i en riktig bok som ni läser och pratar om. Vecka 1–3 är passet bara listan: modellering 0–3 minuter, körläsning 3–6, parläsning 6–14 och avslutning den sista minuten."
+      - "Upplägget fungerar med en elev lika väl som med tio. Med en elev är du elevens par. Vid udda antal läser tre tillsammans: en pekar och två turas om att läsa."
+    ruta:
+      rubrik: Tre saker att hålla fast vid
+      punkter:
+        - fet: Rörelsen är metoden.
+          text: Modellering, körläsning och parläsning, i den ordningen, varje gång.
+        - fet: Återkoppla direkt.
+          text: Det är den snabba feedbacken, inte listan, som utvecklar avkodningen.
+        - fet: Listan är ett komplement.
+          text: Riktiga böcker varje vecka, från vecka 4 i slutet av passet.
+    tabell:
+      rubrik: De fyra stegen · vad du gör och säger
+      kolumner:
+        - Steg
+        - Exempelfraser
+      rader:
+        - - |-
+            1 · Modellering
+            0–2 min. Ljuda, bind ihop och läs ordet i normal takt.
+          - |-
+            ”Lyssna när jag ljudar: sss-t-eee-nnn. Sten.”
+            ”Här är det lätt att tappa ett ljud. Hör ni vilket?”
+        - - |-
+            2 · Körläsning
+            2–4 min. Alla läser samma ord i ditt tempo.
+          - |-
+            ”Alla tillsammans, i min takt.”
+            ”Vi läser kolumnen en gång till.”
+        - - |-
+            3 · Parläsning
+            4–10 min. En pekar, en läser, byt roller. Du cirkulerar.
+          - |-
+            ”Du ljudade hela vägen fram till sista ljudet.”
+            ”Läs om hela ordet från början.”
+        - - |-
+            4 · Avslutning
+            10–15 min. Det viktigaste, sedan boken från vecka 4.
+          - |-
+            ”Nu läser vi ordet tillsammans.”
+            ”Vad tror ni händer sen?”
+    not: "Bekräfta, korrigera och ge stöd direkt när det händer. Korrigera kort: säg rätt ljud och låt eleven läsa om hela ordet från början. Vid många fel: modellera ordet igen och körläs det på nytt."
+  pass:
+    rubrik: "Vi kör ett pass: vecka 5, konsonantmöten"
+    textRubrik: Gruppen · fyra elever, åk 1, Läslista 4
+    utskrift: Skriv ut passexemplet
+    text:
+      - "Läraren modellerar fem ord ur första kolumnen: ”sss-t-eee-nnn. Sten. Här är det lätt att tappa ett ljud. Hör ni vilket?” Eleverna lyssnar."
+      - Alla körläser kolumnen i lärarens tempo. Vid spik stannar kören. Läraren modellerar ordet igen, och de läser om kolumnen.
+      - "Alva pekar för Omar, Hiba pekar för Leon. Leon läser ”sen”. Hiba ljudar med Leon, och läraren säger: ”Läs om hela ordet från början.” Till Omar: ”Du ljudade hela vägen fram till sista ljudet.” Paren byter roller."
+      - "Läraren modellerar mötet i sten och spik. Sedan en lättläst bok om en hund som gräver i sanden: ”Vad tror ni att hunden letar efter?” Notering efteråt: Leon tappar t i st-orden, repetera i morgon."
+    forberett:
+      rubrik: Det jag förberedde
+      text:
+        - "Fem ord ur första kolumnen att modellera. Listan kopierad till två par: Alva och Omar, Hiba och Leon. En lättläst bok framme till avslutningen."
+    klarTidigt: Läs listan en gång till och byt roller. Det är omläsningen av samma ord som ger flytet.
+    schema:
+      rubrik: 15 minuter, steg för steg
+      rader:
+        - tid: Före
+          fas: Förberedelse
+          vad: Välj fyra till sex ord att modellera. Kopiera listan till varje par. Ta fram dagens bok.
+        - tid: 0–2
+          fas: Modellering
+          vad: Peka, ljuda och bind ihop. Tänk högt om det svåra. Eleverna lyssnar.
+        - tid: 2–4
+          fas: Körläsning
+          vad: Alla läser samma ord i ditt tempo. Läs om kolumnen.
+        - tid: 4–10
+          fas: Parläsning
+          vad: En pekar, en läser, byt roller. Du bekräftar, korrigerar och ger stöd.
+        - tid: 10–15
+          fas: Avslutning
+          vad: Modellera det viktigaste. Läs i boken och prata om vad som händer.
+  mall:
+    rubrik: Läslistan vi läser i veckan
+    underrad: Läslista 4 · Vecka 5 · Konsonantmöten · Läs kolumn för kolumn
+    block:
+      - typ: tabell
+        rubrik: Läs orden, kolumn för kolumn
+        kolumner:
+          - Möte först
+          - Möte först
+          - Möte sist, kort vokal
+        rader:
+          - - sten
+            - klar
+            - ost
+          - - stol
+            - klok
+            - häst
+          - - spik
+            - kniv
+            - rast
+          - - snö
+            - knä
+            - fisk
+          - - slut
+            - trä
+            - mask
+          - - fri
+            - tre
+            - salt
+          - - frö
+            - plan
+            - hals
+          - - gris
+            - prat
+            - hand
+          - - gran
+            - brev
+            - land
+          - - blå
+            - bror
+            - sand
+          - - blad
+            - glad
+            - hund
+          - - tro
+            - grön
+            - vind
+      - typ: not
+        text: "Fokus: två konsonanter i följd, först i början av ordet och sedan i slutet. Vokalen blir kort i orden med möte på slutet: fisk, hand, häst. Lyssna efter att inget ljud tappas eller läggs till i mötet, som sen i stället för sten."
+      - typ: snabbmall
+  material:
+    rubrik: Vad du behöver för ett pass med läslistor
+    kravEtikett: Listkrav
+    var:
+      rubrik: Var listorna och böckerna finns
+      punkter:
+        - fet: Sju läslistor, en per vecka.
+          text: Bland metodens mallar, från bokstäver och ljud till meningar och text.
+        - fet: Lättlästa böcker för F–3.
+          text: Nivåindelade serier som Kiwi, Stjärnsvenska och Beta Pedagog, till avslutningen från vecka 4.
+        - fet: Egna listor.
+          text: Riktiga, vanliga och ljudenligt stavade ord, en ny svårighet per lista.
+      efter: Byt lista först när flytet sitter.
+    bordet:
+      - Veckans läslista, en kopia per par
+      - Listan stor, så att alla ser den
+      - Bokstavskort för att bygga ord
+      - En lättläst bok, från vecka 4
+      - Snabbmallen för noteringen efteråt
+    varjePass: Vilka ord och orddelar behöver repeteras, och vem läser listan med flyt?
