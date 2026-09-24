@@ -4,6 +4,7 @@
 // Faktarutorna, kraven, checklistan, snabbmallen och uppföljningen hämtas ur metoden så att
 // lathunden aldrig säger emot den. Samma fyra sidor finns i Word-filen (src/lib/metoddocx.ts).
 import MetodTabell from './MetodTabell.astro';
+import Tavla from './Tavla.astro';
 import type { MetodData } from '../lib/metod';
 import { lathundFakta, arbetsformRad } from '../lib/metod';
 interface Props { d: MetodData }
@@ -98,28 +99,7 @@ const citat = (f: string) => `”${f}”`;
               <div class="lh-linjer">{Array.from({ length: b.rader }).map(() => <div class="lh-linje"></div>)}</div>
             </div>
           );
-          if (b.typ === 'tavla') return (
-            <div class="lh-tavla">
-              <div>
-                <p>{b.text}</p>
-                <p><span class="lh-ram">{b.fraga}</span></p>
-                <div class="lh-listor">
-                  {b.listor.map((x) => <div><p class="lh-listrubrik">{x.rubrik}</p><ul>{x.punkter.map((p) => <li>{p}</li>)}</ul></div>)}
-                </div>
-                {b.citat.length > 0 && <p class="lh-citat">{b.citat.slice(0, -1).map(citat).join(' ')}</p>}
-              </div>
-              <div>
-                <p class="lh-listrubrik">{b.tabell.rubrik}</p>
-                <table class="lh-tavla-tabell">
-                  <thead><tr>{b.tabell.kolumner.map((k) => <th scope="col">{k}</th>)}</tr></thead>
-                  <tbody>{b.tabell.rader.map((r) => <tr>{r.map((c) => <td>{c}</td>)}</tr>)}</tbody>
-                </table>
-                {b.annat && <><p class="lh-listrubrik">{b.annat.rubrik}</p>{b.annat.rader.map((r) => <p>{r}</p>)}</>}
-                {b.svar && <p><span class="lh-ram lh-svar">{b.svar}</span></p>}
-                {b.citat.length > 0 && <p class="lh-citat">{citat(b.citat[b.citat.length - 1])}</p>}
-              </div>
-            </div>
-          );
+          if (b.typ === 'tavla') return <Tavla b={b} />;
           if (b.typ === 'snabbmall' && d.snabbmall) return (
             <table class="m-snabbmall lh-snabbmall">
               <caption>Snabbmall · {d.titel}</caption>

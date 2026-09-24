@@ -1,0 +1,30 @@
+---
+// Tavlan under passet: problemet med frågan inringad, vad vi vet och vad vi ska ta reda på till vänster,
+// elevernas lösningar (tabell, ett annat sätt, svaret) till höger. Samma block i lathunden (blocket tavla i
+// lathund.mall) och i metodens exempel (exempel.tavla). Stilar .lh-tavla i global.css.
+import type { MetodData } from '../lib/metod';
+type Block = NonNullable<MetodData['lathund']>['mall']['block'][number];
+interface Props { b: Extract<Block, { typ: 'tavla' }> }
+const { b } = Astro.props;
+const citat = (f: string) => `”${f}”`;
+---
+<div class="lh-tavla">
+  <div>
+    <p>{b.text}</p>
+    <p><span class="lh-ram">{b.fraga}</span></p>
+    <div class="lh-listor">
+      {b.listor.map((x) => <div><p class="lh-listrubrik">{x.rubrik}</p><ul>{x.punkter.map((p) => <li>{p}</li>)}</ul></div>)}
+    </div>
+    {b.citat.length > 0 && <p class="lh-citat">{b.citat.slice(0, -1).map(citat).join(' ')}</p>}
+  </div>
+  <div>
+    <p class="lh-listrubrik">{b.tabell.rubrik}</p>
+    <table class="lh-tavla-tabell">
+      <thead><tr>{b.tabell.kolumner.map((k) => <th scope="col">{k}</th>)}</tr></thead>
+      <tbody>{b.tabell.rader.map((r) => <tr>{r.map((c) => <td>{c}</td>)}</tr>)}</tbody>
+    </table>
+    {b.annat && <><p class="lh-listrubrik">{b.annat.rubrik}</p>{b.annat.rader.map((r) => <p>{r}</p>)}</>}
+    {b.svar && <p><span class="lh-ram lh-svar">{b.svar}</span></p>}
+    {b.citat.length > 0 && <p class="lh-citat">{citat(b.citat[b.citat.length - 1])}</p>}
+  </div>
+</div>

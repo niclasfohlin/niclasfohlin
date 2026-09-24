@@ -8,7 +8,7 @@ import {
   Paragraph, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, VerticalAlign, WidthType,
   type IBorderOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
-import { arbetsformRad, arskursText, datumText, lathundFakta, metaRad, metodAdress, ramArTom, SAJT, UPPHOV, type MetodData, type MetodPost } from './metod';
+import { arbetsformRad, arskursText, datumText, lathundFakta, metaRad, metodAdress, passOversikt, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost } from './metod';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
 const FARG = {
@@ -277,6 +277,68 @@ function diplomBarn(dip: NonNullable<MetodData['diplom']>): Barn[] {
   })] })] }), avstand()];
 }
 
+// Passöversikten (src/lib/metod.ts passOversikt): fasremsan med minuter och arbetsformens delar under, och
+// tabellen med en rad per fas: fas och tid, rutinens numrerade steg, vad som händer, med raderna Före och Efter passet.
+function passRemsa(p: NonNullable<ReturnType<typeof passOversikt>>): Barn[] {
+  const bredder = p.faser.map((f) => Math.floor(BREDD * f.minuter / p.total));
+  bredder[bredder.length - 1] += BREDD - bredder.reduce((a, b) => a + b, 0);
+  const rader: TableRow[] = [rad(p.faser.map((f, i) => cell([
+    stycke(f.fas, { fet: true, farg: FARG.vit, storlek: 20, mitt: true, efter: 0, hallIhop: true }),
+    stycke(f.tid, { farg: FARG.vit, storlek: 16, mitt: true, efter: 0, hallIhop: true }),
+  ], { bredd: bredder[i], fyll: FARG.huvud, kanter: runt(kant(FARG.huvud)), mitt: true })), { huvud: true })];
+  if (p.delar.length) {
+    const celler: TableCell[] = [];
+    for (let i = 0; i < p.faser.length; i++) {
+      const del = p.delar.find((x) => x.fran === i);
+      if (del) {
+        const b = bredder.slice(i, i + del.antal).reduce((a, x) => a + x, 0);
+        celler.push(cell([new Paragraph({ children: [run(del.rubrik, { fet: true, storlek: 18 }), ...(del.tid ? [run(` ${del.tid}`, { storlek: 16, farg: FARG.svag })] : []), run(` · ${del.text}`, { storlek: 18, farg: FARG.svag })], alignment: AlignmentType.CENTER, spacing: { after: 0 }, keepNext: true })], { bredd: b, span: del.antal, fyll: FARG.ljus, mitt: true }));
+        i += del.antal - 1;
+      } else if (!p.delar.some((x) => i > x.fran && i < x.fran + x.antal)) celler.push(cell([stycke('', { efter: 0 })], { bredd: bredder[i], fyll: FARG.ljus }));
+    }
+    rader.push(rad(celler));
+  }
+  return [tabell(rader, bredder), avstand()];
+}
+function passTabell(p: NonNullable<ReturnType<typeof passOversikt>>, antalSteg: number): Barn[] {
+  const bredder = [1900, 3900, BREDD - 5800];
+  const huvud = rad(['Fas', `Rutinen i ${antalSteg} steg`, 'Så leder du det'].map((k, i) => cell([stycke(k, { fet: true, farg: FARG.vit, storlek: 20, efter: 0 })], { bredd: bredder[i], fyll: FARG.huvud, kanter: runt(kant(FARG.huvud)) })), { huvud: true });
+  const kantRad = (etikett: string, text: string) => rad([
+    cell([stycke(etikett, { fet: true, farg: FARG.huvud, storlek: 20, efter: 0 })], { bredd: bredder[0], fyll: FARG.ljus }),
+    cell([stycke(text, { storlek: 20, efter: 0 })], { bredd: bredder[1] + bredder[2], span: 2, fyll: FARG.ljus }),
+  ]);
+  const rader: TableRow[] = [huvud];
+  if (p.fore) rader.push(kantRad('Före passet', p.fore));
+  p.faser.forEach((f, ri) => rader.push(rad([
+    cell([stycke(f.fas, { fet: true, farg: FARG.huvud, storlek: 20, efter: 20 }), stycke(f.tid, { kursiv: true, farg: FARG.svag, storlek: 20, efter: 0 })], { bredd: bredder[0], fyll: ri % 2 === 1 ? FARG.rand : undefined }),
+    cell(f.steg.length ? f.steg.map((st, j) => stycke(`${st.nr}. ${st.text}`, { storlek: 20, efter: j === f.steg.length - 1 ? 0 : 20 })) : [stycke('', { efter: 0 })], { bredd: bredder[1], fyll: ri % 2 === 1 ? FARG.rand : undefined }),
+    cell([stycke(f.vad, { storlek: 20, efter: 0 })], { bredd: bredder[2], fyll: ri % 2 === 1 ? FARG.rand : undefined }),
+  ])));
+  if (p.efter) rader.push(kantRad('Efter passet', p.efter));
+  return [tabell(rader, bredder), avstand()];
+}
+
+// Tavlan under passet (blocket tavla i lathunden): problemet till vänster, lösningarna till höger.
+type Tavla = Extract<NonNullable<MetodData['lathund']>['mall']['block'][number], { typ: 'tavla' }>;
+function tavlaBarn(b: Tavla): Barn[] {
+  const citat = (f: string) => `”${f}”`;
+  return lhSpalter(
+    () => [
+      stycke(b.text, { kursiv: true, storlek: 22 }),
+      stycke(b.fraga, { kursiv: true, fet: true, storlek: 22, farg: 'B3261E' }),
+      ...b.listor.flatMap((x) => [stycke(x.rubrik, { kursiv: true, storlek: 20, farg: FARG.svag, fore: 80, efter: 20 }), ...x.punkter.map((p) => stycke(p, { kursiv: true, storlek: 20, efter: 20 }))]),
+      ...(b.citat.length > 1 ? [stycke(b.citat.slice(0, -1).map(citat).join(' '), { kursiv: true, storlek: 19, farg: BRUN, fore: 120 })] : []),
+    ],
+    () => [
+      stycke(b.tabell.rubrik, { kursiv: true, storlek: 20, farg: FARG.svag, efter: 40 }),
+      ...rubrikTabell(b.tabell.kolumner, b.tabell.rader, kolumnBredder(b.tabell.kolumner.length), { huvudFyll: FARG.svag }),
+      ...(b.annat ? [stycke(b.annat.rubrik, { kursiv: true, storlek: 20, farg: FARG.svag, efter: 20 }), ...b.annat.rader.map((r) => stycke(r, { kursiv: true, storlek: 20, efter: 20 }))] : []),
+      ...(b.svar ? [stycke(b.svar, { kursiv: true, fet: true, storlek: 22, farg: 'B3261E', fore: 80 })] : []),
+      ...(b.citat.length ? [stycke(citat(b.citat[b.citat.length - 1]), { kursiv: true, storlek: 19, farg: BRUN, fore: 120 })] : []),
+    ],
+  );
+}
+
 // Faktarutan: samma uppgifter som på sidan, så att Word-filen står för sig själv.
 function faktaTabell(d: MetodData): Barn[] {
   const rader: [string, string][] = [['Område', d.omrade], ['Årskurs', arskursText(d)]];
@@ -316,13 +378,21 @@ function metodBarn(post: MetodPost, bas: string): Barn[] {
     if (t.not) ut.push(...ruta('', t.not));
   };
   for (const t of d.tabeller.filter((x) => x.plats === 'efter-inledning')) friTabell(t);
-  if (d.passrutin) {
+  const pass = passOversikt(d);
+  if (pass && d.passrutin) {
+    ut.push(h2(pass.rubrik));
+    if (d.passrutin.text) ut.push(stycke(d.passrutin.text, { hallIhop: true }));
+    if (pass.text) ut.push(stycke(pass.text, { hallIhop: true }));
+    ut.push(...passRemsa(pass));
+    ut.push(...passTabell(pass, stegTexter(d).length));
+    if (pass.efterTabell) ut.push(stycke(pass.efterTabell, { farg: FARG.svag }));
+  } else if (d.passrutin) {
     ut.push(h2(d.passrutin.rubrik));
     if (d.passrutin.text) ut.push(stycke(d.passrutin.text, { hallIhop: true }));
-    ut.push(...rutinRuta(d.passrutin.steg));
+    ut.push(...rutinRuta(stegTexter(d)));
     if (d.passrutin.efter) ut.push(stycke(d.passrutin.efter, { farg: FARG.svag }));
   }
-  if (d.tidsschema) {
+  if (d.tidsschema && !pass) {
     ut.push(h2(d.tidsschema.rubrik));
     if (d.tidsschema.text) ut.push(stycke(d.tidsschema.text, { hallIhop: true }));
     ut.push(...rubrikTabell(['Tid', 'Fas', 'Vad händer'], d.tidsschema.rader.map((r) => [r.tid, r.fas, r.vad]), [1700, 2200, BREDD - 3900], { fetAndra: true }));
@@ -337,14 +407,21 @@ function metodBarn(post: MetodPost, bas: string): Barn[] {
   for (const t of d.tabeller.filter((x) => x.plats === 'efter-steg')) friTabell(t);
   if (d.arbetsform) {
     ut.push(h2(d.arbetsform.rubrik));
-    ut.push(stycke(d.arbetsform.text, { hallIhop: true }));
-    ut.push(...band(d.arbetsform.delar));
+    ut.push(stycke(d.arbetsform.text, { hallIhop: pass ? false : true }));
+    if (!(pass && pass.delar.length)) ut.push(...band(d.arbetsform.delar));
   }
   for (const t of d.tabeller.filter((x) => x.plats === 'efter-arbetsform')) friTabell(t);
   if (d.exempel) {
     ut.push(h2(d.exempel.rubrik));
     ut.push(...ruta(`${d.exempel.valt.rubrik}:`, d.exempel.valt.text, { kursivText: true }));
     for (const s of d.exempel.text) ut.push(stycke(s, { kursiv: true }));
+    const tavla = d.exempel.tavla ? d.lathund?.mall.block.find((b): b is Tavla => b.typ === 'tavla') : undefined;
+    if (tavla) {
+      ut.push(stycke('Tavlan under passet', { fet: true, farg: FARG.huvud, storlek: 20, fore: 120, efter: 60, hallIhop: true }));
+      ut.push(...tavlaBarn(tavla));
+      if (d.exempel.tavlaText) ut.push(stycke(d.exempel.tavlaText, { farg: FARG.svag, fore: 80 }));
+      else ut.push(avstand(80));
+    }
   }
   if (d.fastnar) {
     ut.push(h2(d.fastnar.rubrik));
@@ -357,6 +434,7 @@ function metodBarn(post: MetodPost, bas: string): Barn[] {
     else ut.push(avstand(80));
     if (d.fastnar.motto) ut.push(...motto(d.fastnar.motto));
   }
+  for (const t of d.tabeller.filter((x) => x.plats === 'efter-fastnar')) friTabell(t);
   if (d.roll) {
     ut.push(h2(d.roll.rubrik));
     ut.push(stycke(d.roll.text, { hallIhop: true }));
@@ -378,7 +456,7 @@ function metodBarn(post: MetodPost, bas: string): Barn[] {
   if (d.progression) {
     ut.push(h2(d.progression.rubrik));
     if (d.progression.text) ut.push(stycke(d.progression.text, { hallIhop: true }));
-    ut.push(...rubrikTabell([d.progression.enhet, 'Fokus', 'Lärarens roll'], d.progression.rader.map((r) => [r.vecka, r.fokus, r.roll]), [1700, 4000, BREDD - 5700]));
+    ut.push(...rubrikTabell([d.progression.enhet, 'Fokus', 'Lärarens roll'], d.progression.rader.map((r) => [r.led ? `${r.vecka}\n${r.led}` : r.vecka, r.fokus, r.roll]), [1700, 4000, BREDD - 5700]));
   }
   if (d.uppfoljning) {
     ut.push(h2(d.uppfoljning.rubrik));
@@ -404,6 +482,7 @@ function metodBarn(post: MetodPost, bas: string): Barn[] {
     ut.push(...grundRuta(d.grund.text));
     if (d.grund.kallor) ut.push(stycke(d.grund.kallor, { farg: FARG.svag, storlek: 18 }));
   }
+  for (const t of d.tabeller.filter((x) => x.plats === 'efter-grund')) friTabell(t);
   if (d.ramar) {
     ut.push(h2(d.ramar.rubrik));
     for (const s of d.ramar.text) ut.push(stycke(s));
@@ -420,7 +499,6 @@ function metodBarn(post: MetodPost, bas: string): Barn[] {
     ut.push(h2(d.diplom.rubrik));
     ut.push(stycke('Diplomet finns som egen sida i planeringsmallarna.', { farg: FARG.svag }));
   }
-  ut.push(stycke(`${UPPHOV}. Hämtad från ${metodAdress(bas, post.id)}${d.uppdaterad ? `, uppdaterad ${datumText(d.uppdaterad)}` : ''}.`, { farg: FARG.svag, storlek: 18, fore: 240 }));
   return ut;
 }
 
@@ -690,21 +768,7 @@ function lathundBarn(post: MetodPost): Barn[][] {
       ]) });
     } else if (b.typ === 'tavla') {
       tomSmala();
-      mall.push(...lhSpalter(
-        () => [
-          stycke(b.text, { kursiv: true, storlek: 22 }),
-          stycke(b.fraga, { kursiv: true, fet: true, storlek: 22, farg: 'B3261E' }),
-          ...b.listor.flatMap((x) => [stycke(x.rubrik, { kursiv: true, storlek: 20, farg: FARG.svag, fore: 80, efter: 20 }), ...x.punkter.map((p) => stycke(p, { kursiv: true, storlek: 20, efter: 20 }))]),
-          ...(b.citat.length > 1 ? [stycke(b.citat.slice(0, -1).map(citat).join(' '), { kursiv: true, storlek: 19, farg: BRUN, fore: 120 })] : []),
-        ],
-        () => [
-          stycke(b.tabell.rubrik, { kursiv: true, storlek: 20, farg: FARG.svag, efter: 40 }),
-          ...rubrikTabell(b.tabell.kolumner, b.tabell.rader, kolumnBredder(b.tabell.kolumner.length), { huvudFyll: FARG.svag }),
-          ...(b.annat ? [stycke(b.annat.rubrik, { kursiv: true, storlek: 20, farg: FARG.svag, efter: 20 }), ...b.annat.rader.map((r) => stycke(r, { kursiv: true, storlek: 20, efter: 20 }))] : []),
-          ...(b.svar ? [stycke(b.svar, { kursiv: true, fet: true, storlek: 22, farg: 'B3261E', fore: 80 })] : []),
-          ...(b.citat.length ? [stycke(citat(b.citat[b.citat.length - 1]), { kursiv: true, storlek: 19, farg: BRUN, fore: 120 })] : []),
-        ],
-      ));
+      mall.push(...tavlaBarn(b));
     } else if (b.typ === 'snabbmall' && d.snabbmall) {
       const sm = d.snabbmall;
       smala.push({ vikt: sm.fore.length + sm.efter.length + 3, f: () => snabbmallTabell(d.titel, sm.fore, sm.efter, { skrivrum: true, hojd: 640 }) });

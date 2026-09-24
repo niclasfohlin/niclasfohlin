@@ -2,8 +2,9 @@
 // Hela metoden i modellens ordning, med kompendiets designelement: rutor, tabeller med rubrikrad,
 // band, gör/undvik och bockar. Samma element och ordning som i docx-filen (src/lib/metoddocx.ts).
 import MetodTabell from './MetodTabell.astro';
+import Tavla from './Tavla.astro';
 import type { MetodData } from '../lib/metod';
-import { ramArTom } from '../lib/metod';
+import { ramArTom, passOversikt, stegTexter } from '../lib/metod';
 interface Props { d: MetodData; id: string }
 const { d, id } = Astro.props;
 const efterInledning = d.tabeller.filter((t) => t.plats === 'efter-inledning');
@@ -11,13 +12,18 @@ const efterTidsschema = d.tabeller.filter((t) => t.plats === 'efter-tidsschema')
 const efterSteg = d.tabeller.filter((t) => t.plats === 'efter-steg');
 const efterArbetsform = d.tabeller.filter((t) => t.plats === 'efter-arbetsform');
 const efterUrval = d.tabeller.filter((t) => t.plats === 'efter-urval');
+const efterFastnar = d.tabeller.filter((t) => t.plats === 'efter-fastnar');
+const efterGrund = d.tabeller.filter((t) => t.plats === 'efter-grund');
+// Passöversikten: rutin, tidsschema och arbetsform i en bild när stegen har faser.
+const pass = passOversikt(d);
+const tavla = d.exempel?.tavla ? d.lathund?.mall.block.find((b) => b.typ === 'tavla') : undefined;
 const fraserRubrik = d.steg?.fraserRubrik ?? '';
 // En radbrytning i ett ramfält blir en ny rad, som i tabellcellerna.
 const linjer = (t: string) => t.split('\n');
 // Sidnavigationen: de avsnitt som finns, i modellens ordning, med korta namn.
 const avsnitt = [
-  d.passrutin && { id: 'passrutin', namn: 'Passrutin' },
-  d.tidsschema && { id: 'tidsschema', namn: 'Tidsschema' },
+  d.passrutin && { id: 'passrutin', namn: pass ? 'Passet' : 'Passrutin' },
+  d.tidsschema && !pass && { id: 'tidsschema', namn: 'Tidsschema' },
   d.steg && { id: 'steg', namn: 'Stegen' },
   d.arbetsform && { id: 'arbetsform', namn: 'Arbetsform' },
   d.exempel && { id: 'exempel', namn: 'Exempel' },
@@ -59,16 +65,44 @@ const avsnitt = [
     </section>
   ))}
 
-  {d.passrutin && (
+  {pass && d.passrutin && (
+    <section id="passrutin" class="m-pass-avsnitt">
+      <h2>{pass.rubrik}</h2>
+      {d.passrutin.text && <p>{d.passrutin.text}</p>}
+      {pass.text && <p>{pass.text}</p>}
+      <div class="m-remsa" style={`--kolumner:${pass.faser.map((f) => `${f.minuter}fr`).join(' ')}`} role="img" aria-label={`Passets faser: ${pass.faser.map((f) => `${f.fas} ${f.tid}`).join(', ')}${pass.delar.length ? `. Arbetsform: ${pass.delar.map((x) => `${x.rubrik} ${x.tid}`).join(', ')}` : ''}`}>
+        {pass.faser.map((f) => <div class="m-remsa-fas"><strong>{f.fas}</strong><span>{f.tid}</span></div>)}
+        {pass.delar.map((x) => <div class="m-remsa-del" style={`grid-column:${x.fran + 1} / span ${x.antal}`}><strong>{x.rubrik}</strong>{x.tid && <span class="m-remsa-tid"> {x.tid}</span>} · {x.text}</div>)}
+      </div>
+      <table class="m-tabell m-pass stapla" id="tidsschema">
+        <colgroup><col style="width:18%" /><col style="width:40%" /><col style="width:42%" /></colgroup>
+        <thead><tr><th scope="col">Fas</th><th scope="col">Rutinen i {stegTexter(d).length} steg</th><th scope="col">Så leder du det</th></tr></thead>
+        <tbody>
+          {pass.fore && <tr class="m-pass-kant"><th scope="row" data-rubrik="Fas">Före passet</th><td colspan="2" data-rubrik="Förberedelse">{pass.fore}</td></tr>}
+          {pass.faser.map((f) => (
+            <tr>
+              <th scope="row" data-rubrik="Fas"><span class="forsta">{f.fas}</span><span class="under">{f.tid}</span></th>
+              {f.steg.length > 0 ? <td data-rubrik="Rutinen"><ol class="m-pass-steg" start={f.steg[0].nr}>{f.steg.map((s) => <li>{s.text}</li>)}</ol></td> : <td class="tom"></td>}
+              <td data-rubrik="Så leder du det">{f.vad}</td>
+            </tr>
+          ))}
+          {pass.efter && <tr class="m-pass-kant"><th scope="row" data-rubrik="Fas">Efter passet</th><td colspan="2" data-rubrik="Notering">{pass.efter}</td></tr>}
+        </tbody>
+      </table>
+      {pass.efterTabell && <p class="m-efter">{pass.efterTabell}</p>}
+    </section>
+  )}
+
+  {!pass && d.passrutin && (
     <section id="passrutin">
       <h2>{d.passrutin.rubrik}</h2>
       {d.passrutin.text && <p>{d.passrutin.text}</p>}
-      <ol class="m-rutin">{d.passrutin.steg.map((s) => <li>{s}</li>)}</ol>
+      <ol class="m-rutin">{stegTexter(d).map((s) => <li>{s}</li>)}</ol>
       {d.passrutin.efter && <p class="m-efter">{d.passrutin.efter}</p>}
     </section>
   )}
 
-  {d.tidsschema && (
+  {!pass && d.tidsschema && (
     <section id="tidsschema">
       <h2>{d.tidsschema.rubrik}</h2>
       {d.tidsschema.text && <p>{d.tidsschema.text}</p>}
@@ -119,9 +153,11 @@ const avsnitt = [
     <section id="arbetsform">
       <h2>{d.arbetsform.rubrik}</h2>
       <p>{d.arbetsform.text}</p>
-      <div class="m-band" style={`--delar:${d.arbetsform.delar.length}`}>
-        {d.arbetsform.delar.map((x) => <div><strong>{x.rubrik}</strong><span>{x.text}</span></div>)}
-      </div>
+      {!(pass && pass.delar.length) && (
+        <div class="m-band" style={`--delar:${d.arbetsform.delar.length}`}>
+          {d.arbetsform.delar.map((x) => <div><strong>{x.rubrik}</strong><span>{x.text}</span></div>)}
+        </div>
+      )}
     </section>
   )}
 
@@ -139,6 +175,13 @@ const avsnitt = [
       <h2>{d.exempel.rubrik}</h2>
       <div class="m-ruta"><p><strong class="kicker">{d.exempel.valt.rubrik}:</strong>{' '}<em>{d.exempel.valt.text}</em></p></div>
       {d.exempel.text.map((s) => <p><em>{s}</em></p>)}
+      {tavla && (
+        <div class="m-tavla">
+          <p class="kicker">Tavlan under passet</p>
+          <Tavla b={tavla} />
+          {d.exempel.tavlaText && <p class="m-efter">{d.exempel.tavlaText}</p>}
+        </div>
+      )}
     </section>
   )}
 
@@ -156,6 +199,15 @@ const avsnitt = [
       {d.fastnar.motto && <p class="m-motto">{d.fastnar.motto}</p>}
     </section>
   )}
+
+  {efterFastnar.map((t) => (
+    <section>
+      <h2>{t.rubrik}</h2>
+      {t.text && <p>{t.text}</p>}
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={t.kolumner.length > 3 ? 'stapla' : ''} />
+      {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
+    </section>
+  ))}
 
   {d.roll && (
     <section id="roll">
@@ -208,7 +260,7 @@ const avsnitt = [
     <section id="progression">
       <h2>{d.progression.rubrik}</h2>
       {d.progression.text && <p>{d.progression.text}</p>}
-      <MetodTabell kolumner={[d.progression.enhet, 'Fokus', 'Lärarens roll']} rader={d.progression.rader.map((r) => [r.vecka, r.fokus, r.roll])} bredder={['18%', '42%', '40%']} />
+      <MetodTabell kolumner={[d.progression.enhet, 'Fokus', 'Lärarens roll']} rader={d.progression.rader.map((r) => [r.led ? `${r.vecka}\n${r.led}` : r.vecka, r.fokus, r.roll])} bredder={['18%', '42%', '40%']} />
     </section>
   )}
 
@@ -266,6 +318,15 @@ const avsnitt = [
       {d.grund.kallor && <p class="m-kallor">{d.grund.kallor}</p>}
     </section>
   )}
+
+  {efterGrund.map((t) => (
+    <section>
+      <h2>{t.rubrik}</h2>
+      {t.text && <p>{t.text}</p>}
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={t.kolumner.length > 3 ? 'stapla' : ''} />
+      {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
+    </section>
+  ))}
 
   {d.ramar && (
     <section id="ramar">

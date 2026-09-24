@@ -444,6 +444,23 @@ button.lank:hover { color: var(--farg-accent); }
 .m-diplom .m-linje-kort { display: inline-block; width: 9rem; height: 1rem; margin: 0 0.5rem 0 0.25rem; vertical-align: baseline; border-bottom: 1px solid var(--farg-text-svag); }
 .m-diplom .m-underskrifter { margin-top: 1.5rem; color: var(--farg-text-svag); display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.5rem; }
 .m-kallor { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
+/* Passöversikten: fasremsan (kolumnernas bredd följer minuterna) med arbetsformens delar under, och
+   tabellen med en rad per fas. */
+.m-remsa { display: grid; grid-template-columns: var(--kolumner, 1fr); gap: 3px; margin: 1rem 0 1.25rem; font-family: var(--typsnitt-ui); }
+.m-remsa-fas { grid-row: 1; background: var(--farg-accent); color: #fff; border-radius: 6px; padding: 0.45rem 0.4rem; text-align: center; display: flex; flex-direction: column; min-width: 0; }
+.m-remsa-fas strong { font-size: 0.95rem; }
+.m-remsa-fas span { font-size: 0.78rem; opacity: 0.92; }
+.m-remsa-del { grid-row: 2; background: var(--farg-ton); border-radius: 6px; padding: 0.4rem 0.5rem; text-align: center; font-size: 0.85rem; color: var(--farg-text-svag); min-width: 0; }
+.m-remsa-del strong { color: var(--farg-text); }
+.m-remsa-tid { color: var(--farg-text-svag); font-size: 0.8rem; }
+.m-pass .m-pass-steg { margin: 0; padding-left: 1.3em; }
+.m-pass .m-pass-steg li { margin: 0 0 0.25em; }
+.m-pass .m-pass-steg li::marker { font-weight: 700; color: var(--farg-accent); }
+.m-pass .m-pass-kant th, .m-pass .m-pass-kant td { background: var(--farg-accent-ljus); }
+.m-pass .m-pass-kant th { color: var(--farg-accent); }
+.m-tavla { margin: 1.25rem 0 0; }
+.m-tavla .kicker { font-family: var(--typsnitt-ui); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-accent); margin: 0 0 0.4em; }
+.m-tavla .lh-tavla { margin-top: 0; }
 .bara-js { display: none; }
 html.js .bara-js { display: inline-block; }
 
@@ -618,6 +635,10 @@ html.js .bara-js { display: inline-block; }
   .m-bockar.tva li:nth-child(4n+3), .m-bockar.tva li:nth-child(4n+4) { background: none; }
   .m-bockar.tva li:nth-child(4n) { background: var(--farg-ton-svag); }
   .m-band { grid-template-columns: 1fr; }
+  .m-remsa { grid-template-columns: 1fr; }
+  .m-remsa-fas { grid-row: auto; flex-direction: row; justify-content: space-between; align-items: baseline; text-align: left; padding: 0.4rem 0.7rem; }
+  .m-remsa-del { grid-row: auto; grid-column: 1 !important; text-align: left; }
+  .m-tabell.stapla td.tom { display: none; }
   .m-band > div { border-left: 0; border-top: 1px solid var(--farg-kant); }
   .m-band > div:first-child { border-top: 0; }
   /* Urvalsraden på mobil: låg och utan hjälptext. Antalet på en rad, kryssrutan bredvid knappen på nästa. */
@@ -657,7 +678,8 @@ html.js .bara-js { display: inline-block; }
   .metod-modell h2 { font-size: 13pt; margin-top: 1.4em; break-after: avoid; }
   /* Rubrik och inledande stycke följer med det som kommer efter; snabbmallen hålls ihop. */
   .metod-modell h2 + p { break-after: avoid; }
-  .m-snabbmall, .m-trappa, .m-trappa li, .m-kontrakt, .m-ramdel, .m-ramhuvud, .m-diplom, #snabbmall, #grund { break-inside: avoid; }
+  .m-snabbmall, .m-trappa, .m-trappa li, .m-kontrakt, .m-ramdel, .m-ramhuvud, .m-diplom, .m-remsa, .m-tavla, #snabbmall, #grund { break-inside: avoid; }
+  .m-remsa-fas, .m-remsa-del, .m-pass .m-pass-kant th, .m-pass .m-pass-kant td { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .m-ram > h3, .m-ram > h3 + p, .m-ramdel h4 { break-after: avoid; }
   .m-ramdel h4, .m-ramfalt dt, .m-diplom { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .m-tabell, .m-snabbmall, .m-bockar, .m-gor-undvik, .m-band, .m-ruta, .m-rutin, .m-grund, .m-motto { font-size: 9.5pt; }

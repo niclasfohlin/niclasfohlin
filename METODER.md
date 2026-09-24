@@ -18,17 +18,17 @@ Schemat i `src/content.config.ts` är strikt: ett okänt fält, en tabellrad med
 | Egen ingress (skrivs av oss) | `ingress` | kortet, startsidan, nyhetsbrevet, description |
 | Inledande stycken | `inledning` | första stycket på sidan |
 | "Så fungerar insatsen", "Så sätter du ihop gruppen", principer | `upplagg`, `gruppen`, `principer` (rubrik, text) | rutor |
-| Passrutin | `passrutin` (steg, efter) | numrerad rutinruta, `#passrutin` |
-| Tidsschema | `tidsschema` (rader: tid, fas, vad) | tabell, `#tidsschema` |
+| Passrutin | `passrutin` (steg, efter; steg kan ha `fas` som matchar en rad i tidsschemat, och då `efterPasset`) | numrerad rutinruta, `#passrutin`. Har stegen faser: passöversikten i stället för rutinruta, tidsschema och arbetsformsband, som problemlösningen: fasremsan med minuter och arbetsformens delar, och en tabell med en rad per fas (fas och tid, rutinens steg, vad händer) med raderna Före och Efter passet |
+| Tidsschema | `tidsschema` (rubrik, text, rader: tid, fas, vad, efter) | tabell, `#tidsschema`; i passöversikten ger den fasernas namn, tider och "vad händer", rubriken ("Ett pass på 20 minuter") och raden Före passet (raden vars tid inte börjar med en siffra) |
 | "Vad du gör och säger", exempelfraser | `steg` (rader: namn, fraga, gor, fraser) | stegtabell med fraskolumn, `#steg`; fraserna skrivs utan citattecken |
-| Arbetsformens delar | `arbetsform` (delar: rubrik, text) | rutor i två spalter, `#arbetsform` |
-| Fria tabeller (frågetyper, textstrukturer, mappens innehåll, två slags pass) | `tabeller` (plats efter-inledning, efter-tidsschema, efter-steg, efter-arbetsform eller efter-urval) | rubriktabeller där de hör hemma |
-| Exempel på ett pass | `exempel` (valt, text) | `#exempel` |
+| Arbetsformens delar | `arbetsform` (delar: rubrik, text, `faser` för passöversiktens remsa) | band, `#arbetsform`; med passöversikt bara texten, delarna står i remsan |
+| Fria tabeller (frågetyper, textstrukturer, mappens innehåll, två slags pass) | `tabeller` (plats efter-inledning, efter-tidsschema, efter-steg, efter-arbetsform, efter-fastnar, efter-urval eller efter-grund) | rubriktabeller där de hör hemma |
+| Exempel på ett pass | `exempel` (valt, text; `tavla: true` visar lathundens tavla efter berättelsen, `tavlaText` under den) | `#exempel` |
 | När gruppen fastnar | `fastnar` (fragaForst, trappa, efter, motto) | frågeruta, stödtrappa, motto, `#fastnar` |
 | Lärarens roll: gör och undvik | `roll` (gor, undvik) | två kolumner, `#roll` |
 | Var man hittar texter eller uppgifter, krav | `urval` (text, krav) | `#urval` |
 | Hem och skola: möte med vårdnadshavare, kontrakt, schema att fylla i | `hem` (text, kontrakt med inledning och ansvar, schema med kolumner och antal rader) | `#hem`; kontraktet och schemat som egna sidor i planeringsmallarna |
-| Progression | `progression` (enhet Vecka eller Pass; rader: vecka, fokus, roll) | tabell, `#progression` |
+| Progression | `progression` (enhet Vecka eller Pass; rader: vecka, `led` som Jag gör och Vi gör, fokus, roll) | tabell, `#progression` |
 | Uppföljning | `uppfoljning` (rader: nar, vad) | tabell, `#uppfoljning` |
 | Mål | `mal` (punkter) | kryssbar lista, `#mal`, målkollen i mallarna |
 | Snabbmall | `snabbmall` (fore, efter) | `#snabbmall`, mallen i docx och lathundens block snabbmall |

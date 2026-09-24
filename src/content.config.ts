@@ -138,11 +138,16 @@ const stodundervisning = defineCollection({
     // Så sätter du ihop gruppen: vilka elever som väljs och hur insatsen presenteras för dem.
     gruppen: ruta.optional(),
     principer: ruta.optional(),
+    // Passrutinen. Ett steg är en text, eller text med fas (namnet på en rad i tidsschemat). Har stegen
+    // faser ritas rutinen, tidsschemat och arbetsformen som en enda passöversikt: fasremsan med minuter
+    // och arbetsform, och en tabell med en rad per fas (fas och tid, rutinens steg, vad som händer),
+    // med raderna Före passet (ur tidsschemat) och Efter passet (efterPasset).
     passrutin: z.strictObject({
       rubrik: z.string().default('Passrutin: samma ordning varje gång'),
       text: z.string().optional(),
-      steg: z.array(z.string()).min(1),
+      steg: z.array(z.union([z.string(), z.strictObject({ text, fas: text })])).min(1),
       efter: z.string().optional(),
+      efterPasset: z.string().optional(),
     }).optional(),
     tidsschema: z.strictObject({
       rubrik: z.string(),
@@ -161,16 +166,17 @@ const stodundervisning = defineCollection({
         fraser: z.array(z.string()).default([]),
       })).min(1),
     }).optional(),
+    // Arbetsformens delar. faser: vilka faser i tidsschemat delen spänner över, för passöversiktens remsa.
     arbetsform: z.strictObject({
       rubrik: z.string(),
       text: z.string(),
-      delar: z.array(ruta).min(1),
+      delar: z.array(ruta.extend({ faser: z.array(text).optional() })).min(1),
     }).optional(),
     // Fria tabeller med rubrikrad, t.ex. Chambers frågetyper eller faktatextens strukturer.
     tabeller: z.array(z.strictObject({
       rubrik: z.string(),
       text: z.string().optional(),
-      plats: z.enum(['efter-inledning', 'efter-tidsschema', 'efter-steg', 'efter-arbetsform', 'efter-urval']).default('efter-arbetsform'),
+      plats: z.enum(['efter-inledning', 'efter-tidsschema', 'efter-steg', 'efter-arbetsform', 'efter-fastnar', 'efter-urval', 'efter-grund']).default('efter-arbetsform'),
       kolumner: z.array(text).min(2),
       rader: z.array(z.array(z.string())).min(1),
       not: z.string().optional(),
@@ -183,6 +189,9 @@ const stodundervisning = defineCollection({
       rubrik: z.string().default('Exempel: så går ett pass till'),
       valt: ruta,
       text: stycken,
+      // Visar lathundens tavla (blocket tavla i lathund.mall) efter exemplet, med en valfri text under.
+      tavla: z.boolean().default(false),
+      tavlaText: z.string().optional(),
     }).optional(),
     fastnar: z.strictObject({
       rubrik: z.string(),
@@ -228,7 +237,8 @@ const stodundervisning = defineCollection({
       text: z.string().optional(),
       // Första kolumnens rubrik: Vecka för en insats över veckor, Pass för en som räknas i pass.
       enhet: z.string().default('Vecka'),
-      rader: z.array(z.strictObject({ vecka: z.string(), fokus: z.string(), roll: z.string() })).min(1),
+      // led: överlämnandets led under veckan, t.ex. Jag gör, Vi gör, Ni gör tillsammans, Du gör själv.
+      rader: z.array(z.strictObject({ vecka: z.string(), led: z.string().optional(), fokus: z.string(), roll: z.string() })).min(1),
     }).optional(),
     uppfoljning: z.strictObject({
       rubrik: z.string().default('Följ upp effekten'),
@@ -342,6 +352,17 @@ const stodundervisning = defineCollection({
     if (d.lathund?.mall.block.some((b) => b.typ === 'snabbmall') && !d.snabbmall) {
       ctx.addIssue({ code: 'custom', path: ['lathund', 'mall', 'block'], message: 'Blocket snabbmall kräver att metoden har en snabbmall.' });
     }
+    // Tavlan i exemplet hämtas ur lathunden.
+    if (d.exempel?.tavla && !d.lathund?.mall.block.some((b) => b.typ === 'tavla')) {
+      ctx.addIssue({ code: 'custom', path: ['exempel', 'tavla'], message: 'exempel.tavla kräver ett block av typen tavla i lathund.mall.' });
+    }
+    // Passöversikten: stegens faser och arbetsformens faser måste finnas som rader i tidsschemat.
+    const faser = new Set((d.tidsschema?.rader ?? []).map((r) => r.fas.toLowerCase()));
+    const medFas = (d.passrutin?.steg ?? []).filter((s): s is { text: string; fas: string } => typeof s !== 'string');
+    if (medFas.length && !d.tidsschema) ctx.addIssue({ code: 'custom', path: ['passrutin', 'steg'], message: 'Steg med fas kräver ett tidsschema med samma faser.' });
+    for (const s of medFas) if (!faser.has(s.fas.toLowerCase())) ctx.addIssue({ code: 'custom', path: ['passrutin', 'steg'], message: `Fasen "${s.fas}" finns inte som rad i tidsschemat.` });
+    if (medFas.length && medFas.length !== d.passrutin!.steg.length) ctx.addIssue({ code: 'custom', path: ['passrutin', 'steg'], message: 'Antingen har alla steg en fas eller inget.' });
+    for (const del of d.arbetsform?.delar ?? []) for (const f of del.faser ?? []) if (!faser.has(f.toLowerCase())) ctx.addIssue({ code: 'custom', path: ['arbetsform', 'delar'], message: `Fasen "${f}" finns inte som rad i tidsschemat.` });
   }),
 });
 

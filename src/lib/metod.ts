@@ -95,3 +95,37 @@ export function arbetsformRad(d: MetodData): string {
     })
     .join(' → ');
 }
+
+// Passöversikten: när passrutinens steg har faser slås rutinen, tidsschemat och arbetsformen ihop till
+// en remsa (faserna med minuter och arbetsformens delar under) och en tabell med en rad per fas. Raden
+// "Före passet" hämtas ur tidsschemat (tiden börjar inte med en siffra), "Efter passet" ur passrutin.efterPasset.
+export interface PassFas { fas: string; tid: string; vad: string; minuter: number; steg: { nr: number; text: string }[] }
+export interface PassOversikt { rubrik: string; text?: string; fore?: string; efter?: string; efterTabell?: string; faser: PassFas[]; total: number; delar: { rubrik: string; text: string; fran: number; antal: number; tid: string }[] }
+export function passOversikt(d: MetodData): PassOversikt | null {
+  const steg = d.passrutin?.steg ?? [];
+  if (!d.passrutin || !d.tidsschema || !steg.length || steg.some((s) => typeof s === 'string')) return null;
+  const objekt = steg as { text: string; fas: string }[];
+  const rader = d.tidsschema.rader;
+  const arFore = (r: { tid: string }) => !/^\d/.test(r.tid.trim());
+  const fore = rader.find(arFore);
+  let nr = 0;
+  const faser: PassFas[] = rader.filter((r) => !arFore(r)).map((r) => {
+    const m = r.tid.match(/(\d+)\s*[–-]\s*(\d+)/);
+    const minuter = m ? Math.max(1, Number(m[2]) - Number(m[1])) : 1;
+    const egna = objekt.filter((s) => s.fas.toLowerCase() === r.fas.toLowerCase()).map((s) => ({ nr: ++nr, text: s.text }));
+    return { fas: r.fas, tid: r.tid, vad: r.vad, minuter, steg: egna };
+  });
+  const total = faser.reduce((a, f) => a + f.minuter, 0);
+  const index = (fas: string) => faser.findIndex((f) => f.fas.toLowerCase() === fas.toLowerCase());
+  const delar = (d.arbetsform?.delar ?? []).filter((x) => x.faser?.length).map((x) => {
+    const platser = x.faser!.map(index).filter((i) => i >= 0).sort((a, b) => a - b);
+    const forsta = faser[platser[0]].tid.match(/\d+/)?.[0] ?? '';
+    const sista = faser[platser[platser.length - 1]].tid.match(/(\d+)\s*[–-]\s*(\d+)/)?.[2] ?? '';
+    return { rubrik: x.rubrik.replace(/^\d+\.\s*/, ''), text: x.text, fran: platser[0], antal: platser[platser.length - 1] - platser[0] + 1, tid: forsta && sista ? `${forsta}–${sista} min` : '' };
+  });
+  return { rubrik: d.tidsschema.rubrik, text: d.tidsschema.text, fore: fore?.vad, efter: d.passrutin.efterPasset, efterTabell: d.tidsschema.efter, faser, total, delar };
+}
+// Rutinens steg som texter, oavsett om de har fas.
+export function stegTexter(d: MetodData): string[] {
+  return (d.passrutin?.steg ?? []).map((s) => (typeof s === 'string' ? s : s.text));
+}

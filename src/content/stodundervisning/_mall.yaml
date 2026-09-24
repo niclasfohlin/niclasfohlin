@@ -41,11 +41,15 @@ upplagg:
   text: Hur ofta, hur länge, hur stor grupp, vad ni arbetar med per pass, vad som noteras och hur perioden utvärderas.
 # gruppen: valfri ruta om hur gruppen sätts ihop (rubrik, text), efter upplägget.
 # principer: valfri ruta med det viktigaste att hålla fast vid.
+# passrutin: stegen som texter, eller med fas (en rad i tidsschemat). Har alla steg en fas ritas rutinen,
+# tidsschemat och arbetsformen som en passöversikt (se problemlosning-i-grupp.yaml), och efterPasset blir raden Efter passet.
 passrutin:
   text: Varje pass följer samma rutin.
   steg:
     - Steg ett.
     - Steg två.
+    # - { text: Steg med fas., fas: Förstå }
+  # efterPasset: Läraren skriver en kort notering.
 tidsschema:
   rubrik: 20 minuter, steg för steg
   text: Hur du förbereder dig.
@@ -68,11 +72,12 @@ arbetsform:
     - { rubrik: 1. Gemensamt, text: Läraren leder och modellerar }
     - { rubrik: 2. I par, text: Eleverna prövar }
     - { rubrik: 3. Gemensamt igen, text: Jämför och sätt ord på strategin }
-# tabeller: fria tabeller med rubrikrad. plats är efter-steg eller efter-arbetsform.
+    # faser: [Jämföra, Avsluta] på varje del ger passöversiktens remsa var delen ligger.
 exempel:
   valt: { rubrik: Texten läraren valt, text: Vad läraren valde till exempelpasset. }
   text:
     - Så gick passet till, ett stycke per rad.
+  # tavla: true visar lathundens tavla (blocket tavla i lathund.mall) efter berättelsen, tavlaText under den.
 fastnar:
   rubrik: När gruppen fastnar
   text: Vad du gör i stället för att ge svaret.
@@ -96,7 +101,7 @@ urval:
   kravText: "Välj en text per pass som uppfyller tre krav:"
   krav:
     - { rubrik: Krav ett, text: Vad det betyder }
-# Fria tabeller med rubrikrad, där de hör hemma: plats efter-inledning, efter-tidsschema, efter-steg, efter-arbetsform eller efter-urval.
+# Fria tabeller med rubrikrad, där de hör hemma: plats efter-inledning, efter-tidsschema, efter-steg, efter-arbetsform, efter-fastnar, efter-urval eller efter-grund.
 tabeller:
   - rubrik: Elevens mapp
     plats: efter-inledning
@@ -130,7 +135,7 @@ progression:
   text: Hur ansvaret flyttas till eleverna.
   # enhet: första kolumnens rubrik, Vecka som standard. Skriv Pass för en insats som räknas i pass.
   rader:
-    - { vecka: 1–2, fokus: Vad ni tränar, roll: Vad läraren gör }
+    - { vecka: 1–2, led: Jag gör, fokus: Vad ni tränar, roll: Vad läraren gör }
 uppfoljning:
   text: Hur du ser om det fungerar.
   rader:
