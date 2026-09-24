@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/kulturkriget-om-skolan-ar-inte-vart-krig/"
 typ: "kronika"
 medforfattare: []
-taggar: ["lasinlarning", "evidens", "skolpolitik"]
+taggar: ["lasinlarning", "evidens", "skolpolitik", "avkodning", "lararutbildning"]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

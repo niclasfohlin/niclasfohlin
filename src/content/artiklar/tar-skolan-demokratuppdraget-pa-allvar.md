@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/fohlin-tar-skolan-demokratuppdraget-pa-allvar/"
 typ: "kronika"
 medforfattare: []
-taggar: ["demokratiuppdraget", "undervisningskvalitet"]
+taggar: ["demokratiuppdraget", "undervisningskvalitet", "evidens"]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

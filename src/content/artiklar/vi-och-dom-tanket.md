@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/niclas-fohlin-vi-maste-stoppa-vi-och-dem-tanket-i-skolan/"
 typ: "kronika"
 medforfattare: []
-taggar: ["elevhalsa", "undervisningskvalitet", "tillganglig-undervisning"]
+taggar: ["elevhalsa", "undervisningskvalitet", "tillganglig-undervisning", "specialpedagogik"]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

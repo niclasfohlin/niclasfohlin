@@ -11,7 +11,7 @@ omslag: "/images/bocker/krumelurkul-f-lararhandledning.jpg"
 lankar:
   - text: "Lärarpaketet hos Studentlitteratur"
     url: "https://www.studentlitteratur.se/laromedel/f-3/svenska/baslaromedel/krumelurkul-f-lararpaket---tryckt--digital-lararlicens-36-man/"
-taggar: ["lasinlarning", "kooperativt-larande"]
+taggar: ["lasinlarning", "kooperativt-larande", "bokstavskunskap"]
 utkast: false
 ---
 

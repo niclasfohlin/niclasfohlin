@@ -14,7 +14,7 @@ lankar:
     url: "https://www.studentlitteratur.se/kompetensutveckling/skola-f-6/undervisning-och-metod/las/"
   - text: "Hos Bokus"
     url: "https://www.bokus.com/bok/9789144190457/"
-taggar: ["lasinlarning", "lasframjande", "lasflyt"]
+taggar: ["lasinlarning", "lasframjande", "lasflyt", "avkodning", "lasforstaelse", "ordforrad"]
 utkast: false
 ---
 

@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/inlarning/fohlin-larande-och-undervisning-ar-nagot-elever-och-larare-gor-tillsammans/"
 typ: "artikel"
 medforfattare: []
-taggar: ["undervisningskvalitet", "kooperativt-larande", "tillganglig-undervisning", "elevhalsa"]
+taggar: ["undervisningskvalitet", "kooperativt-larande", "tillganglig-undervisning", "elevhalsa", "specialpedagogik"]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

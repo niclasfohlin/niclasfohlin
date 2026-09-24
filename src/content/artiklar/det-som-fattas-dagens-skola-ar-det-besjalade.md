@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/inlarning/fohlin-det-som-fattas-dagens-skola-ar-det-besjalade/"
 typ: "kronika"
 medforfattare: []
-taggar: ["undervisningskvalitet", "skolpolitik"]
+taggar: ["undervisningskvalitet", "skolpolitik", "demokratiuppdraget"]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

@@ -11,7 +11,7 @@ omslag: "/images/bocker/krumelurkul-1-lararhandledning.jpg"
 lankar:
   - text: "Lärarpaketet hos Studentlitteratur"
     url: "https://www.studentlitteratur.se/laromedel/f-3/svenska/baslaromedel/krumelurkul-1-lararpaket---tryckt-bok--digital-lararlicens-36-man/"
-taggar: ["lasinlarning", "avkodning", "kooperativt-larande"]
+taggar: ["lasinlarning", "avkodning", "kooperativt-larande", "bokstavskunskap"]
 utkast: false
 ---
 

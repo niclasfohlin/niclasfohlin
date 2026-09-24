@@ -6,7 +6,7 @@ publikation: "ne"
 originalUrl: "https://www.ne.se/info/i-skolans-varld/kooperativt-larande/"
 typ: "artikel"
 medforfattare: ["Jennie Wilson"]
-taggar: ["kooperativt-larande", "demokratiuppdraget", "undervisningskvalitet"]
+taggar: ["kooperativt-larande", "demokratiuppdraget", "undervisningskvalitet", "formativ-bedomning"]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

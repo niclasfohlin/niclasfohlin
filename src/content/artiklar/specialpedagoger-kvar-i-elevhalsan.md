@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/elevhalsa/fohlin-specialpedagoger-kvar-i-elevhalsan--men-var-tas-pengarna/"
 typ: "debatt"
 medforfattare: []
-taggar: ["elevhalsa", "specialpedagogik", "skolpolitik"]
+taggar: ["elevhalsa", "specialpedagogik", "skolpolitik", "sarskilt-stod"]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true
