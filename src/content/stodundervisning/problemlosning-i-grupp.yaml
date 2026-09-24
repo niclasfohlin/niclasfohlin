@@ -20,7 +20,7 @@ material:
   - Ett rikt problem per pass, löst av läraren i förväg
   - Miniwhiteboards eller papper
   - Konkret material för att visa problemet
-uppdaterad: 2026-09-20
+uppdaterad: 2026-09-24
 relaterade:
   - faktatextsamtal-i-grupp
 utkast: false
@@ -53,10 +53,10 @@ tidsschema:
     - tid: 3–6 min
       fas: Planera
       vad: Välj representation och strategi tillsammans. Ingen räknar än.
-    - tid: 6–13 min
+    - tid: 6–15 min
       fas: Lös
       vad: Eleverna prövar i par, trio vid ojämnt antal. Du cirkulerar, frågar och noterar lösningar.
-    - tid: 13–18 min
+    - tid: 15–18 min
       fas: Jämför
       vad: Två lösningar eller två sätt att tänka visas och jämförs. Är svaret rimligt? Vilken väg var tydligast, och varför fungerade den eller blev det en missuppfattning?
     - tid: 18–20 min
@@ -90,7 +90,7 @@ steg:
         - Vad händer om du fortsätter så?
         - Hur vet du att det stämmer?
         - Fastnar du? Vad har du provat?
-    - namn: Kolla och jämföra
+    - namn: Jämföra
       fraga: Är svaret rimligt?
       gor: Visa två lösningar eller två sätt att tänka, jämför dem och kontrollera att svaret är rimligt mot frågan.
       fraser:
@@ -249,7 +249,7 @@ lathund:
             ”Visa hur du tänkte.” · ”Hur vet du att det stämmer?”
             ”Fastnar du? Vad har du provat?”
         - - |-
-            4 · Kolla och jämföra
+            4 · Jämföra
             Visa två lösningar. Är svaret rimligt mot frågan?
           - |-
             ”Vem tänkte annorlunda?” · ”Är svaret rimligt?”
@@ -278,10 +278,10 @@ lathund:
         - tid: 3–6
           fas: Planera
           vad: Välj representation och strategi tillsammans. Ingen räknar än. Välj inte åt eleverna.
-        - tid: 6–13
+        - tid: 6–15
           fas: Lös
           vad: Eleverna prövar i par, trio vid ojämnt antal. Du cirkulerar, frågar och noterar lösningar.
-        - tid: 13–18
+        - tid: 15–18
           fas: Jämför
           vad: Två lösningar eller två sätt att tänka visas och jämförs. Är svaret rimligt? Vilken väg var tydligast?
         - tid: 18–20
