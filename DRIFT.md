@@ -103,7 +103,7 @@ niclasfohlin.se är registrerad hos Loopia till 2027-09-19, DNS hos Loopia (ns1 
 | Lägg till | `python scripts/loopia.py lagg <subdomän> <TYP> <värde> [ttl] [prio]` |
 | Ändra, ta bort | `andra <subdomän> <record_id> <TYP> <värde> [ttl] [prio]` (prio måste anges igen för MX, annars blir den 0), `tabort <subdomän> <record_id>` |
 
-Zonen 2026-09-21:
+Zonen 2026-09-24:
 
 | Post | Värde | För |
 |---|---|---|
@@ -111,6 +111,7 @@ Zonen 2026-09-21:
 | www CNAME | niclasfohlin.netlify.app | Netlify |
 | @ MX 10, 20 | mailcluster.loopia.se, mail2.loopia.se | Loopias vidarebefordran av mejl till nyhetsbrev@ |
 | @ TXT | brevo-code:… | Brevos ägarkontroll |
+| @ TXT | v=spf1 include:spf.brevo.com include:spf.loopia.se ~all | SPF, tillagd 2026-09-24 sedan Gmail höll kvar hela utskick 6 (alla 25 Gmail-adresser olevererade, övriga domäner levererade); DKIM och DMARC fanns, SPF saknades |
 | _dmarc TXT | v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com | DMARC |
 | brevo1._domainkey, brevo2._domainkey CNAME | b1 och b2.niclasfohlin-se.dkim.brevo.com | DKIM |
 
