@@ -15,7 +15,7 @@ Filer:
 - Skärmbilder och utskrifter:
 {{bilder}}
 - Koden som bygger allt: src/content.config.ts (schemat), src/components/Metod.astro, src/components/MetodTabell.astro, src/components/Lathund.astro, src/components/Nedladdning.astro, src/lib/metoddocx.ts, src/lib/metod.ts, src/styles/global.css (skärm under .m-* och .lh-*, utskrift under @media print).
-- Förebilderna: src/content/stodundervisning/problemlosning-i-grupp.yaml, boksamtal-i-grupp.yaml, faktatextsamtal-i-grupp.yaml, och deras byggda sidor i dist/stodundervisning/.
+- Förebilderna: src/content/stodundervisning/problemlosning-i-grupp.yaml (passöversikt, tavla, tabeller efter fastnar och grund), boksamtal-i-grupp.yaml, faktatextsamtal-i-grupp.yaml, til-i-grupp.yaml (hem, kontrakt, schema), skrivkurs-berattelseram.yaml (ramar, diplom, arskursText), och deras byggda sidor i dist/stodundervisning/.
 
 Granska fyra saker.
 

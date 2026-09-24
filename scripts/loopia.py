@@ -4,7 +4,7 @@
   python scripts/loopia.py domaner                          alla domäner på kontot
   python scripts/loopia.py poster [subdomän]                zonposter för @ (eller www, _dmarc ...)
   python scripts/loopia.py lagg <subdomän> <TYP> <värde> [ttl]
-  python scripts/loopia.py andra <subdomän> <record_id> <TYP> <värde> [ttl]
+  python scripts/loopia.py andra <subdomän> <record_id> <TYP> <värde> [ttl] [prio]
   python scripts/loopia.py tabort <subdomän> <record_id>
 
 Inloggningen läses ur miljövariablerna LOOPIA_USER och LOOPIA_PASSWORD (Claude Code sätter dem
@@ -66,7 +66,8 @@ def main(argv):
     if kmd == "andra":
         sub, rid, typ, varde = rest[0], rest[1], rest[2].upper(), rest[3]
         ttl = rest[4] if len(rest) > 4 else 3600
-        print(c.updateZoneRecord(USER, PASSWORD, DOMAN, sub, post(typ, varde, ttl, 0, rid)))
+        prio = rest[5] if len(rest) > 5 else 0
+        print(c.updateZoneRecord(USER, PASSWORD, DOMAN, sub, post(typ, varde, ttl, prio, rid)))
         return 0
     if kmd == "tabort":
         sub, rid = rest[0], rest[1]

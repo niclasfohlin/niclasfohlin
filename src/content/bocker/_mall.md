@@ -12,12 +12,13 @@ redaktor: ""
 kapitel: ""
 serie: ""
 isbn: ""
-sidor: 0
+# sidor: 200
 # Lägg omslaget i public/images/bocker/ och ange sökvägen.
 omslag: "/images/bocker/slug.jpg"
-lankar:
-  - text: "Boken hos förlaget"
-    url: "https://..."
+# Bara riktiga adresser; ta bort blocket om ingen finns. En platshållare går igenom bygget och hamnar på sajten.
+# lankar:
+#   - text: "Boken hos förlaget"
+#     url: "https://www.forlaget.se/boken"
 taggar: []
 utkast: true
 ---

@@ -57,7 +57,7 @@ tabellen för hand. Det du vill ha gjort skriver du under **Inkorg**, en uppgift
 
 Statusar: **öppen**, **pågår**, **blockerad**, **klar**, **stängd**. Prio 1 görs nu, prio 2 i tur
 och ordning, **prio 3 vilar** tills ett annat jobb ändå ska ändra samma fil. **Behövs** säger vad
-Niclas måste göra: push, deploy, hemligheter, utskick, rättigheter och fakta om honom själv.
+Niclas måste göra: inloggningar i webbläsaren, längre nyhetsbrev, rättigheter och fakta om honom själv.
 `;
 
 // ---------- argument ----------

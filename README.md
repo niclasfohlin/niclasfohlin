@@ -36,7 +36,7 @@ Första riktiga uppdraget till Claude Code kan vara:
 | Kommando | Gör |
 |---|---|
 | `npm run dev` | Utvecklingsserver |
-| `npm run validera` | Registerkontroll, typkontroll och bygge. Körs före varje commit |
+| `npm run validera` | Registerkontroll, kontroll av lathundarnas pdf, typkontroll och bygge. Körs före varje commit |
 | `npm run taggar` | Listar alla taggar med antal användningar |
 | `node scripts/taggar.mjs --sok läsflyt` | Slår upp om ett ord är en tagg eller ett alias |
 | `npm run ko` | Kön: `lista`, `lagg`, `starta`, `klar`, `stang`, `blockera`. Utan argument visas hjälpen |

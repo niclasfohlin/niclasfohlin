@@ -15,7 +15,7 @@ Arbete som inte är ett direkt svar på Niclas går genom kön: `node scripts/ko
 |---|---|
 | KONCEPT.md | Vad sajten ska bli och varför |
 | DRIFT.md | Plattformarna: vad som finns hos GitHub, Netlify, Brevo och Loopia, var inloggningarna ligger, kommandon som fungerar, vad man gör när något är rött |
-| METODER.md | Hur en metod tas emot och görs om: modellen, mappningen från kompendium till YAML, lathunden, textreglerna, kontrollerna, Codex-granskningen |
+| METODER.md | Hur en metod tas emot och görs om: modellen, mappningen från kompendium till YAML, lathunden, textreglerna, kontrollerna, Codex-granskningen, metodriggen utanför repot |
 | UPPSTART.md | Hur drift, konton och behörigheter sattes upp från början |
 | KO.md | Kön. `node scripts/ko.mjs lista` visar den, `/natt` arbetar igenom den |
 | underlag/texter/ | Alla kända texter av Niclas i fulltext med register. `npm run texter` visar vilka som saknar post |
@@ -59,7 +59,7 @@ Varje ny artikel, metod och bok mejlas prenumeranterna automatiskt: byggpluginen
 
 ## Kvalitet
 
-1. `npm run validera` går igenom före varje commit. Den kontrollerar register, typer och bygge.
+1. `npm run validera` går igenom före varje commit. Den kontrollerar register, lathundarnas pdf, typer och bygge.
 2. Små commits med tydliga meddelanden på svenska: "Artikel: ...", "Metod: ...", "Sajt: ...".
 3. Inga nya beroenden utan skäl. Inga UI-ramverk för det som CSS och lite vanilla JS löser.
 4. Semantisk HTML, tangentbordsnavigering, kontrast och alt-texter. Mobil först.
@@ -75,4 +75,4 @@ Niclas gav 2026-09-19 Claude Code fullt mandat att sköta sajten och tjänsterna
 1. Skapar konton och loggar in där en människa måste klicka i webbläsaren. Vad han ska göra, steg för steg, står i INSTRUKTIONER.docx.
 2. Säger skicka innan ett längre nyhetsbrev går ut. Mejlen om nytt innehåll går automatiskt.
 3. Lämnar fakta om sig själv och sina böcker. Du frågar efter underlag, du hittar inte på.
-4. Säger per publikation om hela texten får ligga på sajten.
+4. Säger per publikation om hela texten får ligga på sajten. Beskedet 2026-09-20 gällde de texter som fanns då; registret i `underlag/texter/` säger det per text. För en ny text frågar du, tills han sagt att det gäller allt framöver.

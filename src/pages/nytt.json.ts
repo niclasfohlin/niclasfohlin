@@ -2,7 +2,8 @@ import type { APIRoute } from 'astro';
 import { artiklarSorterade, metoderSorterade, bockerSorterade, publikationNamn } from '../lib/innehall';
 
 // Maskinläsbar lista över allt som är publicerat: artiklar, metoder och böcker.
-// netlify/functions/deploy-succeeded.mjs läser den efter varje deploy och mejlar
+// Byggpluginen netlify/plugins/utskick läser den efter varje lyckad deploy (via
+// netlify/functions/utskick.mjs och netlify/lib/utskick.mjs) och mejlar
 // prenumeranterna om det som tillkommit. Utkast är redan bortfiltrerade i produktion.
 export const GET: APIRoute = async () => {
   const [artiklar, metoder, bocker] = await Promise.all([artiklarSorterade(), metoderSorterade(), bockerSorterade()]);

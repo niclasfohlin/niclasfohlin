@@ -7,7 +7,7 @@ datum: 2026-01-01
 # id från src/data/publikationer.json, t.ex. vi-larare, goteborgs-posten, egen
 publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/..."
-# artikel, kronika, debatt, intervju eller annat
+# artikel, kronika, debatt, intervju, podd eller annat
 typ: "kronika"
 medforfattare: []
 # id från src/data/taggar.json. Återanvänd före att lägga till.

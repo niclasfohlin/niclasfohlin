@@ -6,7 +6,7 @@ Så här jobbar Claude Code i det här repot. Filen läses vid start och igen ef
 
 Main är det som ligger ute. Allt arbete sker på en gren: `innehall/<slug>` för poster, `sajt/<beskrivning>` för kod och design, `natt/<datum>` för nattkörningar. En hook stoppar commits direkt på main. Varje commit gör en sak och har ett meddelande som säger vad: "Artikel: Nej till no excuses", "Sajt: filtrering i metodbanken".
 
-Före varje commit: `npm run validera`. Det kör registerkontrollen, `astro check` och `astro build`. Går det inte igenom committas inget.
+Före varje commit: `npm run validera`. Det kör registerkontrollen, kontrollen att lathundarnas pdf är byggda ur dagens YAML och stil, `astro check` och `astro build`. Går det inte igenom committas inget.
 
 När arbetet är klart och `npm run validera` är grönt slår du själv ihop grenen till main och pushar. Netlify bygger och deployar varje push till main, och varje bygge drar krediter från månadspotten (1000 sedan 2026-09-20, omkring 15 per bygge). Därför: samla arbetet och pusha main högst en gång per arbetspass eller nattkörning, aldrig ett bygge per post. Rör pushen bara skript, dokumentation eller kön: skriv `[skip netlify]` sist i commit-meddelandet, så byggs inget. Testa lokalt med `npm run validera`, `npm run dev` och `netlify functions:serve`; starta aldrig byggen på Netlify för att testa. Kontrollera att bygget blev grönt (`netlify api listSiteDeploys --data '{"site_id":"<id>"}'` visar det senaste) och beskriv sedan för Niclas vad som gjorts och var det syns. Blev bygget rött: laga eller backa, och skriv vad som hände.
 
@@ -50,7 +50,7 @@ Alla kända texter av Niclas ligger i `underlag/texter/`, ett blad per text med 
 
 ## Metoder ur underlag
 
-Niclas lämnar metoder till stödundervisning som kompendier (docx och pdf) med en fast modell och lathundar (pptx, pdf). Hur en metod tas emot, görs om till YAML, provas, granskas av Codex och läggs in står i METODER.md, med de tre befintliga metoderna som förebild; det körbara flödet är `/ny-metod`. Underlagen ligger i `underlag/metoder/`, som git ignorerar eftersom repot är publikt.
+Niclas lämnar metoder till stödundervisning som kompendier (docx och pdf) med en fast modell och lathundar (pptx, pdf). Hur en metod tas emot, görs om till YAML, provas, granskas av Codex och läggs in står i METODER.md, med de publicerade metoderna som förebild; det körbara flödet är `/ny-metod`. Underlagen ligger i `underlag/metoder/`, som git ignorerar eftersom repot är publikt.
 
 ## När du fastnar
 

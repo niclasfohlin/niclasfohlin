@@ -83,10 +83,12 @@ fastnar:
   text: Vad du gör i stället för att ge svaret.
   fragaForst:
     - Vad har ni gjort hittills?
+  # trappaText: egen rad före trappan (standard: En stödtrappa att gå uppför i stunden ...).
   trappa:
     - Minsta stöd först.
     - Nästa steg.
   motto: En mening att hålla fast vid.
+  # efter: en mening efter trappan och mottot.
 roll:
   rubrik: "Lärarens roll: leda utan att ta över"
   text: Vad läraren gör och inte gör.
@@ -189,6 +191,7 @@ ramar:
           falt:
             - { rubrik: Vad händer }
             - { rubrik: Skrivfokus }
+  # efter: en mening efter ramarna.
 # Diplom eller intyg efter perioden: en sida i planeringsmallarna. En rad med bara understreck blir en skrivlinje.
 diplom:
   kicker: Skrivkursen
@@ -232,6 +235,7 @@ lathund:
       text:
         - Vad läraren gjort innan.
     klarTidigt: Vad gruppen gör om den blir klar tidigt.
+    # utskrift: knappens text vid texten (standard: Skriv ut till eleverna).
     schema:
       rubrik: 30 minuter, steg för steg
       rader:

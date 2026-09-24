@@ -17,6 +17,6 @@ process.stdin.on('end', () => {
 
   try { execSync('git rev-parse --verify HEAD', { stdio: 'ignore' }); } catch { process.exit(0); }
 
-  process.stderr.write('Du står på main. Skapa en gren först (git switch -c innehall/<slug> eller sajt/<beskrivning>) och committa där. main ändras bara genom sammanslagning som Niclas godkänt.\n');
+  process.stderr.write('Du står på main. Skapa en gren först (git switch -c innehall/<slug> eller sajt/<beskrivning>) och committa där. main ändras bara genom sammanslagning av en gren när npm run validera är grönt.\n');
   process.exit(2);
 });

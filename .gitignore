@@ -33,3 +33,7 @@ underlag/prov/
 
 # Niclas opublicerade underlag (kompendier, lathundar) och mellansteg till YAML. Repot är publikt.
 underlag/metoder/
+
+# Codex lokala inställningar med inloggningar
+.codex/config.toml
+underlag/texter/_hamtning.json

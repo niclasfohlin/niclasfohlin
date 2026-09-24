@@ -7,12 +7,13 @@
 //   node scripts/metodgranskning.mjs <id> --underlag <fil.md>     Ta med underlaget i jämförelsen
 //   node scripts/metodgranskning.mjs <id> --bara-prompt           Skriv bara prompten, kör inte Codex
 //   node scripts/metodgranskning.mjs <id> --vanta                 Kör i förgrunden och vänta (fem till tio minuter)
+//   node scripts/metodgranskning.mjs <id> --lathundbilder <mapp>  Bifoga lathundens original som sidbilder (png ur lathund.pdf)
 //
 // Prompten byggs ur scripts/codex/metod-granskning.md. Word-filernas text tas fram med pandoc, och
 // skärmbilderna från scripts/metodprov.mjs --bilder bifogas om de finns. Svaret hamnar i
 // underlag/prov/<id>/granskning-<datum>.md, loggen i underlag/prov/<id>/codex.log.
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync, openSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync, openSync, readdirSync } from 'node:fs';
 import { execFileSync, spawn } from 'node:child_process';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -20,9 +21,10 @@ import { fileURLToPath } from 'node:url';
 const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 const id = args.find((a) => !a.startsWith('--'));
-if (!id) { console.error('Ange metodens id: node scripts/metodgranskning.mjs <id> [--underlag <fil>] [--bara-prompt] [--vanta]'); process.exit(1); }
+if (!id) { console.error('Ange metodens id: node scripts/metodgranskning.mjs <id> [--underlag <fil>] [--lathundbilder <mapp>] [--bara-prompt] [--vanta]'); process.exit(1); }
 const flagga = (namn) => { const i = args.indexOf(namn); return i >= 0 ? args[i + 1] : undefined; };
 const underlag = flagga('--underlag');
+const lathundMapp = flagga('--lathundbilder');
 const baraPrompt = args.includes('--bara-prompt');
 const vanta = args.includes('--vanta');
 
@@ -64,6 +66,11 @@ for (const [fil, namn] of [[`${id}.docx`, 'allt'], [`${id}-mallar.docx`, 'mallar
 const bilder = ['desktop.png', 'mobil.png', 'lathund-desktop.png', 'lathund-mobil.png']
   .map((b) => join(prov, b)).filter((b) => existsSync(b));
 const pdfer = ['utskrift.pdf', 'lathund-utskrift.pdf'].map((b) => join(prov, b)).filter((b) => existsSync(b));
+// Lathundens original som sidbilder (pdftoppm ur lathund.pdf), när --lathundbilder pekar på mappen.
+const original = lathundMapp && existsSync(resolve(lathundMapp))
+  ? readdirSync(resolve(lathundMapp)).filter((f) => /\.png$/i.test(f)).sort().map((f) => join(resolve(lathundMapp), f))
+  : [];
+if (lathundMapp && !original.length) console.warn(`Inga png-bilder i ${lathundMapp}: lathundens original bifogas inte.`);
 
 const datum = new Date().toISOString().slice(0, 10);
 const mall = readFileSync(join(rot, 'scripts', 'codex', 'metod-granskning.md'), 'utf8');
@@ -75,17 +82,17 @@ const prompt = mall
   .replaceAll('{{sida}}', rel(sida))
   .replaceAll('{{lathund}}', existsSync(lathund) ? rel(lathund) : '(metoden har ingen lathund)')
   .replaceAll('{{docx}}', docxTexter.join('\n') || '- (inga Word-filer i dist)')
-  .replaceAll('{{bilder}}', [...bilder.map((b) => `- ${rel(b)} (bifogad som bild)`), ...pdfer.map((p) => `- ${rel(p)} (utskriften som pdf, läs med pdftotext om det finns)`)].join('\n') || '- (inga skärmbilder: kör node scripts/metodprov.mjs ' + id + ' --bilder först)');
+  .replaceAll('{{bilder}}', [...bilder.map((b) => `- ${rel(b)} (bifogad som bild)`), ...original.map((b, i) => `- ${rel(b)} (lathundens original ur Niclas pptx, sida ${i + 1}, bifogad som bild: jämför lathunden på sajten mot den)`), ...pdfer.map((p) => `- ${rel(p)} (utskriften som pdf, läs med pdftotext om det finns)`)].join('\n') || '- (inga skärmbilder: kör node scripts/metodprov.mjs ' + id + ' --bilder först)');
 const promptFil = join(mapp, 'prompt.md');
 writeFileSync(promptFil, prompt);
-console.log(`Prompten ligger i ${rel(promptFil)}${bilder.length ? `, ${bilder.length} bilder bifogas` : ''}.`);
+console.log(`Prompten ligger i ${rel(promptFil)}${bilder.length + original.length ? `, ${bilder.length + original.length} bilder bifogas` : ''}.`);
 if (baraPrompt) process.exit(0);
 if (!codexExe) { console.error('Hittar inte Codex CLI (codex.exe i %LOCALAPPDATA%\\Programs\\OpenAI\\Codex\\bin eller codex i PATH).'); process.exit(1); }
 
 const svar = join(prov, `granskning-${datum}.md`);
 const logg = join(prov, 'codex.log');
 const codexArgs = ['exec', '-m', MODELL, '-c', `model_reasoning_effort=${ANSTRANGNING}`, '--sandbox', 'read-only', '--skip-git-repo-check', '-o', svar];
-for (const b of bilder) codexArgs.push('-i', b);
+for (const b of [...bilder, ...original]) codexArgs.push('-i', b);
 codexArgs.push('-');
 
 const loggFd = openSync(logg, 'w');
