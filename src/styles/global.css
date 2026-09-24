@@ -384,6 +384,14 @@ button.lank:hover { color: var(--farg-accent); }
 .m-tabell .fraser { list-style: none; margin: 0; padding: 0; font-style: italic; }
 .m-tabell .fraser li { margin: 0 0 0.25em; }
 .m-tabell.tva tbody th { background: var(--farg-accent); color: #fff; border-color: var(--farg-accent); width: 28%; }
+/* En ordlista eller bokstavslista (klassen tat, ramarnas översikt med korta celler): lika breda kolumner som aldrig växer ur sidan. */
+.m-tabell.tat { table-layout: fixed; }
+.m-tabell.tat td { overflow-wrap: anywhere; }
+.m-tabell.tat thead th { hyphens: auto; }
+@media (max-width: 40rem) {
+  .m-tabell.tat th, .m-tabell.tat td { padding: 0.45rem 0.4rem; font-size: 0.9rem; }
+  .m-tabell.tat thead th { font-size: 0.78rem; }
+}
 .m-band { display: grid; grid-template-columns: repeat(var(--delar, 3), minmax(0, 1fr)); gap: 0; margin: 1rem 0 1.25rem; font-family: var(--typsnitt-ui); text-align: center; border: 1px solid var(--farg-kant); border-radius: 8px; overflow: hidden; }
 .m-band > div { display: flex; flex-direction: column; border-left: 1px solid var(--farg-kant); }
 .m-band > div:first-child { border-left: 0; }
@@ -678,7 +686,7 @@ html.js .bara-js { display: inline-block; }
   .metod-modell h2 { font-size: 13pt; margin-top: 1.4em; break-after: avoid; }
   /* Rubrik och inledande stycke följer med det som kommer efter; snabbmallen hålls ihop. */
   .metod-modell h2 + p { break-after: avoid; }
-  .m-snabbmall, .m-trappa, .m-trappa li, .m-kontrakt, .m-ramdel, .m-ramhuvud, .m-diplom, .m-remsa, .m-tavla, #snabbmall, #grund { break-inside: avoid; }
+  .m-snabbmall, .m-trappa, .m-trappa li, .m-kontrakt, .m-ramdel, .m-ramhuvud, .m-diplom, .m-remsa, .m-tavla, .m-tabell.tat, #snabbmall, #grund { break-inside: avoid; }
   .m-remsa-fas, .m-remsa-del, .m-pass .m-pass-kant th, .m-pass .m-pass-kant td { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .m-ram > h3, .m-ram > h3 + p, .m-ramdel h4 { break-after: avoid; }
   .m-ramdel h4, .m-ramfalt dt, .m-diplom { print-color-adjust: exact; -webkit-print-color-adjust: exact; }

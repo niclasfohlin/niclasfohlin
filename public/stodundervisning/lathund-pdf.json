@@ -1,27 +1,32 @@
 {
   "boksamtal-i-grupp": {
-    "kalla": "3219876ef4bded3a",
-    "pdf": "b24c800acf0a84ef",
+    "kalla": "4e57dc11a5626957",
+    "pdf": "863cd6e0f6139c02",
     "datum": "2026-09-24"
   },
   "faktatextsamtal-i-grupp": {
-    "kalla": "3dfdfd47a601f7a3",
-    "pdf": "64563a11641b8421",
+    "kalla": "e23e4049dfbfc6f5",
+    "pdf": "765c25cb6dae0658",
     "datum": "2026-09-24"
   },
   "problemlosning-i-grupp": {
-    "kalla": "08b7c80f750ecc87",
-    "pdf": "172af9c599328095",
+    "kalla": "d1662c9f4fc7e89f",
+    "pdf": "a97ad7a24f858346",
     "datum": "2026-09-24"
   },
   "til-i-grupp": {
-    "kalla": "cc422021e182d924",
-    "pdf": "cb988cc8f0ff3ca0",
+    "kalla": "cce81b1af6f5a62e",
+    "pdf": "287e87afe6c924a1",
     "datum": "2026-09-24"
   },
   "skrivkurs-berattelseram": {
-    "kalla": "a4295bda814a88b6",
-    "pdf": "7dfd527429609831",
+    "kalla": "ab40b16530417151",
+    "pdf": "0bed27a7605a5064",
+    "datum": "2026-09-24"
+  },
+  "laslistor-i-grupp": {
+    "kalla": "2c4ae082e43814f8",
+    "pdf": "8de48de7fb863c49",
     "datum": "2026-09-24"
   }
 }

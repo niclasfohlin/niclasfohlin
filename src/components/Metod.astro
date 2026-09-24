@@ -14,6 +14,9 @@ const efterArbetsform = d.tabeller.filter((t) => t.plats === 'efter-arbetsform')
 const efterUrval = d.tabeller.filter((t) => t.plats === 'efter-urval');
 const efterFastnar = d.tabeller.filter((t) => t.plats === 'efter-fastnar');
 const efterGrund = d.tabeller.filter((t) => t.plats === 'efter-grund');
+// En översikt med bara korta celler (en ordlista, en bokstavslista) får lika breda kolumner (klassen tat)
+// och plats även på mobil; bara översikter med längre text och fler än tre kolumner staplas.
+const kortaCeller = (rader: string[][]) => rader.every((r) => r.every((c) => c.length <= 12));
 // Passöversikten: rutin, tidsschema och arbetsform i en bild när stegen har faser.
 const pass = passOversikt(d);
 const tavla = d.exempel?.tavla ? d.lathund?.mall.block.find((b) => b.typ === 'tavla') : undefined;
@@ -336,7 +339,7 @@ const avsnitt = [
         <section class="m-ram">
           <h3>{ram.rubrik}</h3>
           {ram.text.map((s) => <p>{s}</p>)}
-          {ram.oversikt && <MetodTabell kolumner={ram.oversikt.kolumner} rader={ram.oversikt.rader} klass={ram.oversikt.kolumner.length > 3 ? 'stapla' : ''} />}
+          {ram.oversikt && <MetodTabell kolumner={ram.oversikt.kolumner} rader={ram.oversikt.rader} klass={kortaCeller(ram.oversikt.rader) ? 'tat' : ram.oversikt.kolumner.length > 3 ? 'stapla' : ''} />}
           {ramArTom(ram)
             ? <p class="m-efter">Ramen att fylla i, med {ram.delar.length} delar, finns i <a href={`/stodundervisning/${id}-mallar.docx`}>planeringsmallarna</a>.</p>
             : (

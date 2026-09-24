@@ -90,14 +90,16 @@ function rutinRuta(steg: string[]): Barn[] {
 }
 // Tabell med rubrikrad. Första kolumnen fet; en radbrytning i en cell blir en ny rad i cellen,
 // och i första kolumnen är raderna efter den första kursiva, som i kompendiet.
-function rubrikTabell(kolumner: string[], rader: string[][], bredder: number[], o: { fetAndra?: boolean; huvudFyll?: string } = {}): Barn[] {
+function rubrikTabell(kolumner: string[], rader: string[][], bredder: number[], o: { fetAndra?: boolean; huvudFyll?: string; hallIhop?: boolean } = {}): Barn[] {
   const huvudFyll = o.huvudFyll ?? FARG.huvud;
-  const huvud = rad(kolumner.map((k, i) => cell([stycke(k, { fet: true, farg: FARG.vit, storlek: 20, efter: 0 })], { bredd: bredder[i], fyll: huvudFyll, kanter: runt(kant(huvudFyll)) })), { huvud: true });
+  // hallIhop: en kort tabell (en ordlista) hålls på en sida genom att varje stycke utom sista radens hänger ihop med nästa.
+  const huvud = rad(kolumner.map((k, i) => cell([stycke(k, { fet: true, farg: FARG.vit, storlek: 20, efter: 0, hallIhop: o.hallIhop })], { bredd: bredder[i], fyll: huvudFyll, kanter: runt(kant(huvudFyll)) })), { huvud: true });
   const kropp = rader.map((r, ri) => rad(r.map((text, i) => {
     const linjer = text.split('\n');
+    const ihop = o.hallIhop && ri < rader.length - 1;
     const barn = i === 0
-      ? linjer.map((l, j) => stycke(l, { fet: j === 0, kursiv: j > 0, farg: j === 0 ? FARG.huvud : FARG.svag, storlek: 20, efter: j === linjer.length - 1 ? 0 : 20 }))
-      : linjer.map((l, j) => stycke(l, { fet: o.fetAndra && i === 1, storlek: 20, efter: j === linjer.length - 1 ? 0 : 20 }));
+      ? linjer.map((l, j) => stycke(l, { fet: j === 0, kursiv: j > 0, farg: j === 0 ? FARG.huvud : FARG.svag, storlek: 20, efter: j === linjer.length - 1 ? 0 : 20, hallIhop: ihop }))
+      : linjer.map((l, j) => stycke(l, { fet: o.fetAndra && i === 1, storlek: 20, efter: j === linjer.length - 1 ? 0 : 20, hallIhop: ihop }));
     return cell(barn, { bredd: bredder[i], fyll: ri % 2 === 1 ? FARG.rand : undefined });
     // En rad utan text är en skrivrad: ge den höjd för handskrift.
   }), { hojd: r.every((t) => !t.trim()) ? 420 : undefined }));
@@ -249,9 +251,12 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean } = {}): Barn[] {
   for (const s of ram.text) ut.push(stycke(s));
   if (ram.oversikt) {
     const n = ram.oversikt.kolumner.length;
-    const forsta = 1100;
+    // En ordlista eller bokstavslista (bara korta celler) får lika breda kolumner; en översikt med
+    // längre text får en smal etikettkolumn först.
+    const korta = ram.oversikt.rader.every((r) => r.every((c) => c.length <= 30));
+    const forsta = korta ? Math.floor(BREDD / n) : 1100;
     const rest = Math.floor((BREDD - forsta) / (n - 1));
-    ut.push(...rubrikTabell(ram.oversikt.kolumner, ram.oversikt.rader, ram.oversikt.kolumner.map((_, i) => (i === 0 ? forsta : i === n - 1 ? BREDD - forsta - rest * (n - 2) : rest))));
+    ut.push(...rubrikTabell(ram.oversikt.kolumner, ram.oversikt.rader, ram.oversikt.kolumner.map((_, i) => (i === 0 ? forsta : i === n - 1 ? BREDD - forsta - rest * (n - 2) : rest)), { hallIhop: korta }));
   }
   if (ram.huvud) ut.push(...ramFaltTabell(ram.huvud, { skrivrum: o.skrivrum }));
   for (const del of ram.delar) ut.push(...ramFaltTabell(del.falt, { rubrik: del.rubrik, skrivrum: o.skrivrum }));
