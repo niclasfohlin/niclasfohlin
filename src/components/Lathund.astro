@@ -13,6 +13,8 @@ const l = d.lathund;
 const fakta = lathundFakta(d);
 const arbetsform = arbetsformRad(d);
 const citat = (f: string) => `”${f}”`;
+// Passexemplet berättas rakt; replikerna (”…”) sätts kursiva, som på metodsidan och i stegtabellen.
+const repliker = (s: string) => s.split(/(”[^”]*”)/).filter(Boolean).map((text) => ({ text, replik: text.startsWith('”') }));
 ---
 {l && (
   <div class="lh">
@@ -51,7 +53,7 @@ const citat = (f: string) => `”${f}”`;
             <h3>{l.pass.textRubrik}<span class="bara-js lh-lank"><button type="button" data-skriv-ut-text>{l.pass.utskrift}</button></span></h3>
             <div class="lh-ruta-kropp">
               {l.pass.titel && <p class="lh-titel">{l.pass.titel}</p>}
-              {l.pass.text.map((p) => <p>{p}</p>)}
+              {l.pass.text.map((p) => <p>{repliker(p).map((x) => (x.replik ? <em>{x.text}</em> : x.text))}</p>)}
             </div>
           </div>
           <div class="lh-not">

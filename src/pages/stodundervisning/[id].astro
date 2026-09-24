@@ -40,7 +40,7 @@ const adress = metodAdress(site.url, m.id).replace(/^https?:\/\//, '');
           {d.uppdaterad && <><dt>Uppdaterad</dt><dd>{formateraDatum(d.uppdaterad)}</dd></>}
         </dl>
       </div>
-      <Nedladdning id={m.id} harMallar={harMallar(d)} harLathund={harLathund(d)} />
+      <Nedladdning id={m.id} harMallar={harMallar(d)} harLathund={harLathund(d)} ramar={d.ramar?.rubrik.toLowerCase()} />
     </div>
 
     <Metod d={d} id={m.id} />

@@ -21,6 +21,10 @@ Titta på varje bild, i ordning, och skriv ner varje ställe där ditt öga fast
 4. Läser du något fel? En rubrik som lovar något annat än det som följer, ett ord som används i två betydelser, en siffra eller tid som inte stämmer med en annan på samma sida, ett namn på en fas eller ett steg som skiljer sig mellan sidan, lathunden och Word.
 5. Vad är onödigt svårt? Något du måste läsa två gånger, något som kräver att du redan kan metoden, något som gör att du hellre hade skrivit ut kompendiet.
 
+Särskilda frågor att svara på först, som lärare, med belägg i bilderna:
+
+{{fragor}}
+
 Lämna fynden så här. Var konkret: bild, plats på bilden, vad du ser, vad du väntade dig. Inga allmänna råd utan belägg i en bild. Ändra ingen fil.
 
 ## Sammanfattning

@@ -41,6 +41,11 @@ function run(text: string, o: StyckeVal = {}): TextRun {
   const val: IRunOptions = { text, italics: o.kursiv, bold: o.fet, color: o.farg, size: o.storlek, allCaps: o.versaler, font: o.font };
   return new TextRun(val);
 }
+// Exemplet berättas rakt; replikerna (”…”) sätts kursiva, som exempelfraserna, så att en lärare hittar det som sägs.
+export function exempelStycke(text: string, o: { hallIhop?: boolean; storlek?: number; efter?: number } = {}): Paragraph {
+  const delar = text.split(/(”[^”]*”)/).filter(Boolean);
+  return new Paragraph({ children: delar.map((t) => run(t, { kursiv: t.startsWith('”'), storlek: o.storlek })), spacing: { before: 0, after: o.efter ?? 120 }, keepNext: o.hallIhop });
+}
 function stycke(text: string, o: StyckeVal = {}): Paragraph {
   return new Paragraph({
     children: [run(text, o)],
@@ -78,8 +83,11 @@ function rad(celler: TableCell[], o: { huvud?: boolean; hojd?: number } = {}): T
 function avstand(efter = 160): Paragraph { return new Paragraph({ spacing: { before: 0, after: efter } }); }
 
 // Ruta med fet inledning: "Så fungerar insatsen" och "Tre saker att hålla fast vid".
+// Rutans rubrik står på egen rad, som på sidan och i kompendiet; utan rubrik bara texten.
 function ruta(rubrik: string, text: string, o: { kursivText?: boolean } = {}): Barn[] {
-  const barn = [new Paragraph({ children: [run(rubrik, { fet: true, farg: FARG.huvud }), run('  '), run(text, { kursiv: o.kursivText })], spacing: { after: 0 } })];
+  const barn = rubrik
+    ? [new Paragraph({ children: [run(rubrik, { fet: true, farg: FARG.huvud })], spacing: { after: 40 }, keepNext: true }), new Paragraph({ children: [run(text, { kursiv: o.kursivText })], spacing: { after: 0 } })]
+    : [new Paragraph({ children: [run(text, { kursiv: o.kursivText })], spacing: { after: 0 } })];
   return [tabell([rad([cell(barn, { bredd: BREDD, fyll: FARG.ljus, kanter: { left: kant(FARG.huvud, 24) } })])], [BREDD]), avstand()];
 }
 // Passrutinen: numrerade steg i en ruta.
@@ -260,17 +268,18 @@ function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[
 function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean } = {}): Barn[] {
   const ut: Barn[] = [];
   for (const s of ram.text) ut.push(stycke(s, { hallIhop: true }));
+  // En ordlista eller bokstavslista (bara korta celler) får lika breda kolumner; en översikt med
+  // längre text får en smal etikettkolumn först.
+  const korta = !!ram.oversikt && ram.oversikt.rader.every((r) => r.every((c) => c.length <= 30));
   if (ram.oversikt) {
     const n = ram.oversikt.kolumner.length;
-    // En ordlista eller bokstavslista (bara korta celler) får lika breda kolumner; en översikt med
-    // längre text får en smal etikettkolumn först.
-    const korta = ram.oversikt.rader.every((r) => r.every((c) => c.length <= 30));
     const forsta = korta ? Math.floor(BREDD / n) : 1100;
     const rest = Math.floor((BREDD - forsta) / (n - 1));
     ut.push(...rubrikTabell(ram.oversikt.kolumner, ram.oversikt.rader, ram.oversikt.kolumner.map((_, i) => (i === 0 ? forsta : i === n - 1 ? BREDD - forsta - rest * (n - 2) : rest)), { hallIhop: korta, hallIhopEfter: korta, radrubrik: false, storlek: korta && o.stor ? 30 : undefined }));
   }
   if (ram.huvud) ut.push(...ramFaltTabell(ram.huvud, { skrivrum: o.skrivrum }));
-  for (const del of ram.delar) ut.push(...ramFaltTabell(del.falt, { rubrik: del.rubrik, skrivrum: o.skrivrum }));
+  // En ordlistas ruta bär listans namn, så att en sida eller ett blad som börjar med rutan går att koppla rätt.
+  for (const del of ram.delar) ut.push(...ramFaltTabell(del.falt, { rubrik: korta ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum }));
   return ut;
 }
 // Diplomet: en inramad sida, centrerad, med skrivlinjer där texten är understreck.
@@ -378,7 +387,7 @@ function metodBarn(post: MetodPost, bas: string): Barn[] {
   ut.push(new Paragraph({ children: [run(d.titel)], heading: HeadingLevel.HEADING_1, spacing: { before: 0, after: 60 } }));
   if (d.undertitel) ut.push(stycke(d.undertitel, { kursiv: true, farg: FARG.huvud, storlek: 24, efter: 80 }));
   ut.push(stycke(metaRad(d), { farg: FARG.svag, storlek: 20, efter: 200 }));
-  ut.push(stycke(d.ingress, { fet: true, efter: 160 }));
+  ut.push(stycke(d.ingress, { storlek: 24, efter: 160 }));
   ut.push(...faktaTabell(d));
   for (const s of d.inledning) ut.push(stycke(s));
   if (d.upplagg) ut.push(...ruta(d.upplagg.rubrik, d.upplagg.text));
@@ -430,7 +439,7 @@ function metodBarn(post: MetodPost, bas: string): Barn[] {
   if (d.exempel) {
     ut.push(h2(d.exempel.rubrik));
     ut.push(...ruta(`${d.exempel.valt.rubrik}:`, d.exempel.valt.text, { kursivText: true }));
-    for (const s of d.exempel.text) ut.push(stycke(s, { kursiv: true }));
+    for (const s of d.exempel.text) ut.push(exempelStycke(s));
     const tavla = d.exempel.tavla ? d.lathund?.mall.block.find((b): b is Tavla => b.typ === 'tavla') : undefined;
     if (tavla) {
       ut.push(stycke('Tavlan under passet', { fet: true, farg: FARG.huvud, storlek: 20, fore: 120, efter: 60, hallIhop: true }));
@@ -721,7 +730,7 @@ function lathundBarn(post: MetodPost): Barn[][] {
       () => [
         ...lhRuta(l.pass.textRubrik, [
           ...(l.pass.titel ? [stycke(l.pass.titel, { fet: true, storlek: 21, efter: 40 })] : []),
-          ...l.pass.text.map((p, i, alla) => stycke(p, { storlek: 18, efter: i === alla.length - 1 ? 0 : 40 })),
+          ...l.pass.text.map((p, i, alla) => exempelStycke(p, { storlek: 18, efter: i === alla.length - 1 ? 0 : 40 })),
         ]),
         ...lhNot([kicker(l.pass.forberett.rubrik, { farg: BRUN, fore: 0 }), ...l.pass.forberett.text.map((p, i, alla) => stycke(p, { storlek: 18, efter: i === alla.length - 1 ? 0 : 40 }))]),
         ...(l.pass.klarTidigt ? lhGra([kicker('Klar tidigt', { fore: 0 }), stycke(l.pass.klarTidigt, { storlek: 18, efter: 0 })]) : []),

@@ -6,8 +6,9 @@
 // Varje fil erbjuds med samma val (Word, Drive, pdf) genom Filval.astro.
 import Filval from './Filval.astro';
 import { site } from '../data/site';
-interface Props { id: string; harMallar: boolean; harLathund: boolean }
-const { id, harMallar, harLathund } = Astro.props;
+// ramar: namnet på metodens ramar (läslistorna, berättelseramarna) när de ligger i planeringsmallarna, så att knappen säger det.
+interface Props { id: string; harMallar: boolean; harLathund: boolean; ramar?: string }
+const { id, harMallar, harLathund, ramar } = Astro.props;
 const drive = Boolean(site.driveKlientId);
 const delar = ['metodbeskrivningen', harMallar && 'planeringsmallarna', harLathund && 'lathunden'].filter(Boolean) as string[];
 const delarText = delar.length > 1 ? `${delar.slice(0, -1).join(', ')} och ${delar[delar.length - 1]}` : delar[0];
@@ -23,7 +24,7 @@ const bas = `/stodundervisning/${id}`;
   <ul class="filrader">
     <li><span class="filrubrik">Allt om metoden</span> <Filval fil={bas} namn={id} rubrik="Allt om metoden" /></li>
     {harLathund && <li><span class="filrubrik">Bara lathunden</span> <Filval fil={`${bas}-lathund`} namn={`${id}-lathund`} rubrik="Lathunden" pdf /></li>}
-    {harMallar && <li><span class="filrubrik">Bara planeringsmallarna</span> <Filval fil={`${bas}-mallar`} namn={`${id}-mallar`} rubrik="Planeringsmallarna" /></li>}
+    {harMallar && <li><span class="filrubrik">Bara planeringsmallarna{ramar && ` och ${ramar}`}</span> <Filval fil={`${bas}-mallar`} namn={`${id}-mallar`} rubrik="Planeringsmallarna" /></li>}
   </ul>
   <p class="meta">Allt om metoden: {delarText}. Alla filer bär © Niclas Fohlin.{drive && ' Drive sparar en Word-kopia i din egen Google Drive.'}{harLathund && ' Word visar lathundens sidor liggande; Google Dokument kan bara visa en sidriktning per fil, så där blir lathunden liggande bara i filen Bara lathunden eller som pdf.'}</p>
 </aside>

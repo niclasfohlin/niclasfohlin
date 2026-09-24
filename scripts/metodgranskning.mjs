@@ -29,6 +29,8 @@ const lathundMapp = flagga('--lathundbilder');
 // --extrabilder <mapp>: alla png i mappen bifogas som skärmbilder (delade sidbilder, Word-sidor).
 const mallFil = flagga('--mall');
 const extraMapp = flagga('--extrabilder');
+// --fragor <fil>: särskilda frågor som sätts in där mallen har {{fragor}}.
+const fragorFil = flagga('--fragor');
 const baraPrompt = args.includes('--bara-prompt');
 const vanta = args.includes('--vanta');
 
@@ -85,6 +87,7 @@ const mall = readFileSync(mallFil ? resolve(mallFil) : join(rot, 'scripts', 'cod
 const prompt = mall
   .replaceAll('{{id}}', id)
   .replaceAll('{{datum}}', datum)
+  .replaceAll('{{fragor}}', fragorFil ? readFileSync(resolve(fragorFil), 'utf8').trim() : '(inga särskilda frågor)')
   .replaceAll('{{yaml}}', rel(yaml))
   .replaceAll('{{underlag}}', underlag ? rel(resolve(underlag)) : '(inget underlag angivet: hoppa över jämförelsen med underlaget)')
   .replaceAll('{{sida}}', rel(sida))

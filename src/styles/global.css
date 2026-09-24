@@ -294,7 +294,7 @@ html.js .samla {
 .metod { max-width: none; }
 /* Toppen på metodsidan: ett ljust band över hela bredden med rubrik, ingress och nedladdningarna till
    vänster och faktarutan till höger. Under det modellen med sidnavigationen i en egen spalt. */
-.metod-topp { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "huvud" "ladda" "fakta"; gap: 1.25rem 3rem; align-items: start; padding: 1.5rem 0 2rem; margin: 0 0 2.5rem; background: var(--farg-ton); box-shadow: 0 0 0 100vmax var(--farg-ton); clip-path: inset(0 -100vmax); border-bottom: 1px solid var(--farg-kant); }
+.metod-topp { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "huvud" "fakta" "ladda"; gap: 1.25rem 3rem; align-items: start; padding: 1.5rem 0 2rem; margin: 0 0 2.5rem; background: var(--farg-ton); box-shadow: 0 0 0 100vmax var(--farg-ton); clip-path: inset(0 -100vmax); border-bottom: 1px solid var(--farg-kant); }
 .metod-huvud { grid-area: huvud; max-width: 46rem; }
 .metod-huvud h1 { font-size: clamp(1.9rem, 4.5vw, 2.75rem); margin-bottom: 0.3em; }
 .metod-huvud .undertitel { font-family: var(--typsnitt-ui); color: var(--farg-text-svag); font-size: 1.2rem; font-weight: 500; margin: 0 0 1rem; text-wrap: balance; }
@@ -362,7 +362,12 @@ button.lank:hover { color: var(--farg-accent); }
 .m-ruta { background: var(--farg-ton); border-left: 4px solid var(--farg-accent); border-radius: 0 8px 8px 0; padding: 0.85rem 1.1rem; margin: 1.25rem 0; }
 .m-ruta p { margin: 0; }
 .m-ruta p + p { margin-top: 0.35em; }
-.m-ruta .kicker { font-family: var(--typsnitt-ui); color: var(--farg-accent); }
+/* Rutans rubrik står på egen rad, som i kompendiet, så att den läses som rubrik och inte som en fet meningsstart. */
+.m-ruta .kicker { display: block; font-family: var(--typsnitt-ui); color: var(--farg-accent); margin-bottom: 0.2em; }
+/* Remsan: vilka faser en arbetsform spänner över sägs bara på mobil, där delen inte längre ligger under sina faser. */
+.m-remsa-faser { display: none; }
+/* Ramens namn i rutan "Så arbetar ni med listan" syns bara i utskriften, där rutan kan hamna på en annan sida än listan. */
+.m-ramnamn { display: none; font-weight: 500; }
 .m-fraga .kicker { margin-bottom: 0.25em; }
 .m-fraga .stor { font-family: var(--typsnitt-ui); font-weight: 700; font-size: 1.15rem; }
 /* Passrutinen: numrerade steg med blå nummerrutor i ett vitt kort. Stödtrappan samma nummer utan kort. */
@@ -650,6 +655,11 @@ html.js .bara-js { display: inline-block; }
   .m-remsa { grid-template-columns: 1fr; }
   .m-remsa-fas { grid-row: auto; flex-direction: row; justify-content: space-between; align-items: baseline; text-align: left; padding: 0.4rem 0.7rem; }
   .m-remsa-del { grid-row: auto; grid-column: 1 !important; text-align: left; }
+  /* På mobil följer arbetsformen direkt på sin fas (--n sätts i Metod.astro), så att fas, tid och arbetsform läses ihop. */
+  .m-remsa-fas { order: calc(var(--n, 0) * 2); }
+  .m-remsa-del { order: calc(var(--n, 0) * 2 + 1); }
+  .m-remsa-faser { display: inline; }
+  .m-tabell.tat thead th { font-size: 0.7rem; padding: 0.4rem 0.25rem; letter-spacing: 0; }
   .m-tabell.stapla td.tom { display: none; }
   .m-band > div { border-left: 0; border-top: 1px solid var(--farg-kant); }
   .m-band > div:first-child { border-top: 0; }
@@ -695,6 +705,7 @@ html.js .bara-js { display: inline-block; }
   .m-ram > h3, .m-ram > h3 + p, .m-ramdel h4 { break-after: avoid; }
   /* En läslista (ram med ordlista) hålls på en sida tillsammans med sin ruta, så att en kopia bär sitt namn och sin anvisning. */
   .m-ram:has(.m-tabell.tat) { break-inside: avoid; }
+  .m-ramnamn { display: inline; }
   .m-ramdel h4, .m-ramfalt dt, .m-diplom { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .m-tabell, .m-snabbmall, .m-bockar, .m-gor-undvik, .m-band, .m-ruta, .m-rutin, .m-grund, .m-motto { font-size: 9.5pt; }
   .m-tabell tr, .m-snabbmall tr, .m-bockar li, .m-gor-undvik, .m-band, .m-ruta, .m-rutin, .m-grund, .m-motto, .m-fraga { break-inside: avoid; }
