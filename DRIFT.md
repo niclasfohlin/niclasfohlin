@@ -62,7 +62,7 @@ Sajten heter niclasfohlin (id `8af49398-3862-4b58-84a6-88f68d0064c1`, team nicla
 
 | Uppgift | Kommando |
 |---|---|
-| Senaste deployerna | `netlify api listSiteDeploys --data '{"site_id":"8af49398-3862-4b58-84a6-88f68d0064c1","per_page":3}'` (fälten `state`, `commit_ref`, `error_message`) |
+| Senaste deployerna | `netlify api listSiteDeploys --data '{"site_id":"8af49398-3862-4b58-84a6-88f68d0064c1","per_page":3}'` (fälten `state`, `commit_ref`, `error_message`). Efter en push: `node scripts/deploykoll.mjs [<commit>]` väntar in bygget för commiten (omkring en minut), matchar på `commit_ref`, avslutar 0 grönt, 1 rött, 2 inget bygge, och visar utskickslagret |
 | Miljövariabler | `netlify env:get NAMN` (hemliga variabler syns inte i `netlify env:list`; `env:get` visar att de finns, maskat), `netlify env:set NAMN varde --secret` |
 | Utskickets minne | `netlify blobs:get utskick skickat` (lagret utskick, nyckeln skickat) |
 | Funktionsloggar | `netlify logs --source functions --function utskick --json --since 30m` |

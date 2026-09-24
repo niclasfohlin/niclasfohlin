@@ -9,4 +9,4 @@ Underlag: $ARGUMENTS
 3. Skriv beskrivning och längre presentation enligt STIL.md.
 4. Skapa eller uppdatera src/content/bocker/<slug>.md med _mall.md som förlaga. Taggar från registret. Fält du saknar uppgift om tas bort, inte lämnas med mallens exempelvärden. `utkast: false` när boken ska ut. Lägg också en rad i `underlag/bocker/register.json`.
 5. Kör npm run validera.
-6. Gren innehall/bok-<slug>, commit "Bok: <titel>". Visa posten för Niclas; efter hans ok, eller om han redan sagt "lägg upp", slå ihop till main och pusha, en push per pass. Pushen mejlar prenumeranterna om den nya boken. Kontrollera att bygget blev grönt.
+6. Gren innehall/bok-<slug>, commit "Bok: <titel>". Visa posten för Niclas; efter hans ok, eller om han redan sagt "lägg upp", slå ihop till main och pusha, en push per pass. Pushen mejlar prenumeranterna om den nya boken. Efter pushen: `node scripts/deploykoll.mjs` väntar in bygget och visar om mejlet gick.

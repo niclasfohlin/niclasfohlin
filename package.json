@@ -13,6 +13,7 @@
     "preview": "astro preview",
     "taggar": "node scripts/taggar.mjs",
     "validera": "node scripts/taggar.mjs --kontrollera && node scripts/lathund-pdf.mjs --kontrollera && astro check && astro build",
+    "deploykoll": "node scripts/deploykoll.mjs",
     "ko": "node scripts/ko.mjs",
     "ko:prov": "node scripts/ko.mjs prov",
     "texter": "node scripts/texter.mjs"
