@@ -1,0 +1,18 @@
+---
+// En elevlista i en ram: orden stora och lätta att peka i, kolumnrubrikerna små och dämpade och
+// bara när de betyder något, ingen fet första kolumn. Bokstäver centreras; en enda kolumn (meningar,
+// en text) sätts något mindre. Samma lista finns i Word (elevlista i src/lib/metoddocx.ts).
+interface Props { rubrik?: string; kolumner?: string[]; rader: string[][]; klass?: string }
+const { rubrik, kolumner, rader, klass = '' } = Astro.props;
+const bokstaver = rader.every((r) => r.every((c) => c.trim().length <= 2));
+const enKolumn = rader.every((r) => r.length === 1);
+---
+<div class={`m-lista ${bokstaver ? 'bokstaver' : ''} ${enKolumn ? 'en-kolumn' : ''} ${klass}`.replace(/\s+/g, ' ').trim()}>
+  {rubrik && <p class="m-lista-rubrik">{rubrik}</p>}
+  <table>
+    {kolumner && <thead><tr>{kolumner.map((k) => <th scope="col">{k}</th>)}</tr></thead>}
+    <tbody>
+      {rader.map((r) => <tr>{r.map((c) => <td>{c}</td>)}</tr>)}
+    </tbody>
+  </table>
+</div>

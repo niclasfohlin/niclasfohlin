@@ -4,6 +4,7 @@
 // Faktarutorna, kraven, checklistan, snabbmallen och uppföljningen hämtas ur metoden så att
 // lathunden aldrig säger emot den. Samma fyra sidor finns i Word-filen (src/lib/metoddocx.ts).
 import MetodTabell from './MetodTabell.astro';
+import Elevlista from './Elevlista.astro';
 import Tavla from './Tavla.astro';
 import type { MetodData } from '../lib/metod';
 import { lathundFakta, arbetsformRad } from '../lib/metod';
@@ -119,7 +120,9 @@ const repliker = (s: string) => s.split(/(”[^”]*”)/).filter(Boolean).map((
           if (b.typ === 'tabell') return (
             <div class="lh-avsnitt">
               <h3 class="lh-kicker">{b.rubrik}</h3>
-              <MetodTabell kolumner={b.kolumner} rader={b.rader} klass="lh-tabell" radrubrik={false} />
+              {b.rader.every((r) => r.every((c) => c.length <= 12))
+                ? <Elevlista kolumner={b.kolumner} rader={b.rader} klass="lh-lista" />
+                : <MetodTabell kolumner={b.kolumner} rader={b.rader} klass="lh-tabell" radrubrik={false} />}
             </div>
           );
           if (b.typ === 'kedja') return (

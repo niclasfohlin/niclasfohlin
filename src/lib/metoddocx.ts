@@ -264,7 +264,26 @@ function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[
   });
   return [tabell(rader, bredder), avstand()];
 }
-// stor: en elevkopia (planeringsmallarna), där en ordlista sätts stort nog att läsas av ett par eller visas för gruppen.
+// En elevlista i en ram: orden stora, kolumnrubrikerna små och dämpade, ingen fet första kolumn.
+// Bokstäver centreras. Listan hålls ihop, och med hallIhopEfter också med det som följer.
+function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][] }, o: { storlek: number; hallIhopEfter?: boolean }): Barn[] {
+  const ut: Barn[] = [];
+  const n = Math.max(...l.rader.map((r) => r.length), l.kolumner?.length ?? 1);
+  const bredd = Math.floor(BREDD / n);
+  const bredder = Array.from({ length: n }, (_, i) => (i === n - 1 ? BREDD - bredd * (n - 1) : bredd));
+  const bokstaver = l.rader.every((r) => r.every((c) => c.trim().length <= 2));
+  if (l.rubrik) ut.push(stycke(l.rubrik, { fet: true, farg: FARG.huvud, storlek: 16, versaler: true, fore: 120, efter: 60, hallIhop: true }));
+  const rader: TableRow[] = [];
+  if (l.kolumner) rader.push(rad(l.kolumner.map((k, i) => cell([stycke(k, { storlek: 15, versaler: true, farg: FARG.svag, efter: 0, hallIhop: true })], { bredd: bredder[i], fyll: FARG.rand })), { huvud: true }));
+  l.rader.forEach((r, ri) => {
+    const ihop = ri < l.rader.length - 1 || !!o.hallIhopEfter;
+    rader.push(rad(Array.from({ length: n }, (_, i) => cell([stycke(r[i] ?? '', { storlek: o.storlek, efter: 0, hallIhop: ihop, mitt: bokstaver })], { bredd: bredder[i] }))));
+  });
+  ut.push(tabell(rader, bredder), avstand());
+  return ut;
+}
+// stor: en elevkopia (planeringsmallarna), där listorna kommer först och sätts stort nog att läsas av ett par
+// eller visas för gruppen; annars (beskrivningen) står lärarnoten först och listorna efter.
 function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean } = {}): Barn[] {
   const ut: Barn[] = [];
   for (const s of ram.text) ut.push(stycke(s, { hallIhop: true }));
@@ -279,7 +298,11 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean } = {}): Barn
   }
   if (ram.huvud) ut.push(...ramFaltTabell(ram.huvud, { skrivrum: o.skrivrum }));
   // En ordlistas ruta bär listans namn, så att en sida eller ett blad som börjar med rutan går att koppla rätt.
-  for (const del of ram.delar) ut.push(...ramFaltTabell(del.falt, { rubrik: korta ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum }));
+  const noter = () => ram.delar.flatMap((del) => ramFaltTabell(del.falt, { rubrik: korta || ram.listor ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum }));
+  // I beskrivningen bär listans rubrik ramens namn, så att en lista som hamnar på en ny sida går att koppla rätt.
+  const listor = () => (ram.listor ?? []).flatMap((l, i, alla) => elevlista({ ...l, rubrik: !o.stor && l.rubrik ? `${l.rubrik} · ${ram.rubrik}` : l.rubrik }, { storlek: o.stor ? 32 : 26, hallIhopEfter: i < alla.length - 1 }));
+  if (ram.listor) ut.push(...(o.stor ? [...listor(), ...noter()] : [...noter(), ...listor()]));
+  else ut.push(...noter());
   return ut;
 }
 // Diplomet: en inramad sida, centrerad, med skrivlinjer där texten är understreck.
@@ -798,7 +821,8 @@ function lathundBarn(post: MetodPost): Barn[][] {
       const sm = d.snabbmall;
       smala.push({ vikt: sm.fore.length + sm.efter.length + 3, f: () => snabbmallTabell(d.titel, sm.fore, sm.efter, { skrivrum: true, hojd: 640 }) });
     } else if (b.typ === 'tabell') {
-      smala.push({ vikt: b.rader.length + 2, f: () => [kicker(b.rubrik, { farg: FARG.huvud, fore: 0 }), ...rubrikTabell(b.kolumner, b.rader, kolumnBredder(b.kolumner.length, 0.3), { huvudFyll: FARG.text, radrubrik: false })] });
+      const korta = b.rader.every((r) => r.every((c) => c.length <= 12));
+      smala.push({ vikt: b.rader.length + 2, f: () => [kicker(b.rubrik, { farg: FARG.huvud, fore: 0 }), ...(korta ? elevlista({ kolumner: b.kolumner, rader: b.rader }, { storlek: 22 }) : rubrikTabell(b.kolumner, b.rader, kolumnBredder(b.kolumner.length, 0.3), { huvudFyll: FARG.text, radrubrik: false }))] });
     } else if (b.typ === 'kedja') {
       smala.push({ vikt: 3, f: () => [
         kicker(b.rubrik, { farg: FARG.huvud, fore: 0 }),

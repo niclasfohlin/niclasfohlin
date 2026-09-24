@@ -3,6 +3,7 @@
 // band, gör/undvik och bockar. Samma element och ordning som i docx-filen (src/lib/metoddocx.ts).
 import MetodTabell from './MetodTabell.astro';
 import Tavla from './Tavla.astro';
+import Elevlista from './Elevlista.astro';
 import type { MetodData } from '../lib/metod';
 import { ramArTom, passOversikt, stegTexter } from '../lib/metod';
 interface Props { d: MetodData; id: string }
@@ -345,7 +346,16 @@ const avsnitt = [
           <h3>{ram.rubrik}</h3>
           {ram.text.map((s) => <p>{s}</p>)}
           {ram.oversikt && <MetodTabell kolumner={ram.oversikt.kolumner} rader={ram.oversikt.rader} klass={kortaCeller(ram.oversikt.rader) ? 'fri tat' : ram.oversikt.kolumner.length > 3 ? 'fri stapla' : 'fri'} radrubrik={false} />}
-          {ramArTom(ram)
+          {ram.listor ? (
+            <>
+              {ram.delar.map((del) => (
+                <div class="m-listnot">
+                  {del.falt.map((f) => <p><b>{f.rubrik}</b>{linjer(f.text).map((x, j) => <>{j > 0 && <br />}{x}</>)}</p>)}
+                </div>
+              ))}
+              {ram.listor.map((l) => <Elevlista rubrik={l.rubrik} kolumner={l.kolumner} rader={l.rader} />)}
+            </>
+          ) : ramArTom(ram)
             ? <p class="m-efter">Ramen att fylla i, med {ram.delar.length} delar, finns i <a href={`/stodundervisning/${id}-mallar.docx`}>planeringsmallarna</a>.</p>
             : (
               <div class="m-ramdelar">

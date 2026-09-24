@@ -276,6 +276,18 @@ const stodundervisning = defineCollection({
         rubrik: text,
         text: stycken,
         oversikt: z.strictObject({ kolumner: z.array(text).min(2), rader: z.array(z.array(z.string())).min(1) }).optional(),
+        // Listor: elevmaterial i ramen (ordlistor, bokstäver, meningar, en kort text), flera per ram.
+        // Kolumnrubriker bara när de betyder något; utan dem ritas listan utan rubrikrad. Ritas stort,
+        // för att läggas på bordet och pekas i. Lärarnoten (delar) står före listorna på sidan och i
+        // Word-filen med allt, efter dem i elevkopiorna.
+        listor: z.array(z.strictObject({
+          rubrik: z.string().optional(),
+          kolumner: z.array(text).min(1).optional(),
+          rader: z.array(z.array(z.string()).min(1)).min(1),
+        }).superRefine((l, ctx) => {
+          const n = l.kolumner?.length ?? l.rader[0].length;
+          l.rader.forEach((r, i) => { if (r.length !== n) ctx.addIssue({ code: 'custom', path: ['rader', i], message: `Raden ska ha ${n} celler, som ${l.kolumner ? 'rubrikerna' : 'första raden'}.` }); });
+        })).optional(),
         huvud: z.array(ramFalt).optional(),
         delar: z.array(z.strictObject({ rubrik: text, falt: z.array(ramFalt).min(1) })).min(1),
       })).min(1),
