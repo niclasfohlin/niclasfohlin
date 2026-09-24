@@ -1,5 +1,5 @@
 # Metod i stödundervisning. Modellen står i src/content.config.ts och mallen i _mall.yaml.
-# Texten är Niclas egen, ur kompendiet för läsförståelse åk 4–9 (2026).
+# Omarbetad 2026-09-24 efter Nämnaren-artikeln (underlag/metoder/namnaren-2026-09), besluten i NATTEN.md.
 titel: Problemlösning i grupp
 undertitel: Lärarledd problemlösning och läsförståelse i liten grupp för åk 4–9
 ingress: Ett körschema för 20-minuterspass i liten grupp där eleverna läser, tolkar och löser matematiska problem i text. Läraren leder, modellerar och frågar i stället för att visa lösningen. Samma rutin varje gång, två till tre pass i veckan under sex till åtta veckor.
@@ -25,46 +25,100 @@ relaterade:
   - faktatextsamtal-i-grupp
 utkast: false
 inledning:
-  - Det här är ett körschema för en lärarledd insats i liten grupp för elever som behöver stöd i att läsa, tolka och lösa matematiska problem i text. Insatsen är tidsbegränsad, riktad och har tät uppföljning. Varje pass är 20 minuter och följer samma rutin. Det är ett samtal, inte ett formulär att fylla i, och skillnaden mot vanligt grupparbete är att läraren leder, modellerar och stöttar. Börja med rutinen och tidsschemat nedan. Forskningsgrunden finns kort sammanfattad sist.
+  - Det här är ett körschema för en lärarledd insats i liten grupp för elever som behöver stöd i att läsa, tolka och lösa matematiska problem i text. Insatsen är tidsbegränsad, riktad och har tät uppföljning. Varje pass är 20 minuter och följer samma rutin. Det är ett samtal, inte ett formulär att fylla i, och skillnaden mot vanligt grupparbete är att läraren leder, modellerar och stöttar. Att modellera är att tänka högt om hur man tar sig an problemet, som ”Jag vill rita det här för att se det framför mig”. Börja med rutinen och tidsschemat nedan. Forskningsgrunden finns kort sammanfattad sist.
 upplagg:
   rubrik: Så fungerar insatsen
   text: Insatsen genomförs två till tre gånger i veckan under sex till åtta veckor. Varje pass är 20 minuter. Gruppen består av två till åtta elever som behöver stöd i matematisk problemlösning och läsförståelse. Ni arbetar med ett problem per pass. Efter varje pass gör du en kort notering om vad eleverna klarade med stöd. Efter perioden utvärderar du om eleven kan använda strategierna med mindre stöd i den ordinarie undervisningen.
+tabeller:
+  - rubrik: Var behöver eleven stöd?
+    plats: efter-fastnar
+    text: "Lyssna också efter var i processen det brister. Elever kan fastna i fyra faser av problemlösningen: att tolka problemet, att utforska det, att skapa en lösningsidé och att omsätta den (Säfström m.fl., 2024; Lithner m.fl., 2025). Pólyas faser ordnar passet; de här fyra hjälper dig att se var en elev har fastnat. Stöd på just den nivån, inte på den nivå där du själv skulle ha börjat."
+    kolumner:
+      - Fas där det kan brista
+      - Så kan det se ut i ljusstakeproblemet
+    rader:
+      - - 1. Tolka problemet
+        - Eleven ser inte att 29 räknar stakar och 187 räknar ljus.
+      - - 2. Utforska problemet
+        - Eleven vet inte hur man prövar sig fram.
+      - - 3. Skapa en lösningsidé
+        - Eleven prövar, men ser inte hur de två villkoren hänger ihop.
+      - - 4. Omsätta idén
+        - Idén finns, men räkningen spårar ur.
+  - rubrik: Metodens byggstenar
+    plats: efter-grund
+    text: Var varje grepp kommer ifrån och var det syns i passet.
+    kolumner:
+      - Byggsten och källa
+      - Så används den i metoden
+    rader:
+      - - |-
+          Pólyas fyra faser
+          (Pólya, 1945)
+        - "Förstå problemet, planera, lösa och jämföra: passets fyra första faser."
+      - - |-
+          Fem undervisningspraktiker
+          (Smith och Stein, 2014)
+        - Förutse lösningarna före passet, överblicka dem under pararbetet, och välj ut, ordna och koppla ihop dem i jämförelsen.
+      - - |-
+          Gradvis överlämnande av ansvar
+          (Fisher och Frey, 2008)
+        - "Jag gör, vi gör, ni gör tillsammans, du gör själv: läraren modellerar först, eleverna leder efter hand fler delar och använder rutinen i ordinarie uppgifter."
+      - - |-
+          Reciprok undervisning
+          (Palincsar och Brown, 1984)
+        - Återberättandet, att reda ut ord, att läraren tänker högt som modell och att rollen lämnas över till eleverna.
+      - - |-
+          Var eleverna fastnar
+          (Säfström m.fl., 2024; Lithner m.fl., 2025)
+        - Lyssna efter var eleven fastnar, i tolkningen, utforskningen, lösningsidén eller omsättningen, och rikta stödet dit.
+      - - |-
+          Vägledning om problemlösning i åk 4–8
+          (Woodward m.fl., 2012)
+        - Starkt forskningsstöd för att undervisa om visuella representationer och för att låta eleverna övervaka och reflektera över sin problemlösning. Syns i jämförelsen, i att sätta ord på strategin och i valet av bild, tabell, tallinje eller material.
 passrutin:
-  text: Varje pass följer samma rutin. Det gör insatsen lätt att leda och tryggt för eleverna att veta vad som ska hända.
+  text: Varje pass följer samma rutin i sju steg. Det gör insatsen lätt att leda och tryggt för eleverna att veta vad som ska hända.
   steg:
-    - Läraren läser problemet högt.
-    - En elev återberättar med egna ord.
-    - Gruppen markerar frågan.
-    - "Gruppen skriver: Vad vet vi? Vad ska vi ta reda på?"
-    - "Gruppen väljer hur problemet ska visas: med bild, tabell, tallinje eller konkret material."
-    - Eleverna prövar i par.
-    - Gruppen jämför och sätter ord på strategin.
-  efter: Passrutinen är kortversionen av passet. Tidsschemat visar när varje del görs, och tabellen efteråt visar vad du som lärare kan säga och göra i varje steg.
+    - text: Läraren läser problemet högt.
+      fas: Förstå
+    - text: En elev återberättar med egna ord.
+      fas: Förstå
+    - text: Gruppen markerar frågan.
+      fas: Förstå
+    - text: "Gruppen skriver: Vad vet vi? Vad ska vi ta reda på?"
+      fas: Förstå
+    - text: "Gruppen väljer hur problemet ska visas: med bild, tabell, tallinje eller konkret material."
+      fas: Planera
+    - text: Eleverna prövar i par.
+      fas: Lösa
+    - text: Gruppen jämför och sätter ord på strategin.
+      fas: Jämföra
+  efterPasset: Läraren skriver en kort notering om vad eleverna klarade med stöd.
 tidsschema:
-  rubrik: 20 minuter, steg för steg
-  text: Förbered dig genom att lösa problemet själv och fundera på var eleverna kan fastna. Sedan följer du tidsschemat.
+  rubrik: Ett pass på 20 minuter
+  text: Förbered dig genom att lösa problemet själv och fundera på var eleverna kan fastna. Remsan visar hur de 20 minuterna fördelas mellan passets faser och när gruppen arbetar gemensamt och i par. Längst tid får eleverna för att pröva själva.
   rader:
     - tid: Före passet
       fas: Förberedelse
-      vad: Välj ett problem. Lös det själv. Förutse elevernas lösningar. Ta fram material för en representation.
+      vad: "Välj ett problem (se Var hittar du problemen?). Lös det själv, förutse elevernas lösningar och tänk igenom var de kan fastna. Ta fram material för en representation: bild, tabell, tallinje eller konkret material."
     - tid: 0–3 min
-      fas: Läs och förstå
-      vad: Läs högt, en elev återberättar, markera frågan, skriv vad vi vet och vad vi ska ta reda på.
+      fas: Förstå
+      vad: Red ut ord, samband och vad talen betyder innan någon räknar. Skriv upp vad ni vet och vad ni ska ta reda på.
     - tid: 3–6 min
       fas: Planera
-      vad: Välj representation och strategi tillsammans. Ingen räknar än.
+      vad: "Ingen räknar än. Välj inte åt eleverna, men hjälp dem i gång: ”En tabell kan vara bra när vi behöver pröva olika antal. Vad kan rubrikerna vara?”"
     - tid: 6–15 min
-      fas: Lös
-      vad: Eleverna prövar i par, trio vid ojämnt antal. Du cirkulerar, frågar och noterar lösningar.
+      fas: Lösa
+      vad: Trio vid ojämnt antal. Du cirkulerar, frågar och noterar vilka lösningar som finns i gruppen, för det är dem ni ska jämföra.
     - tid: 15–18 min
-      fas: Jämför
-      vad: Två lösningar eller två sätt att tänka visas och jämförs. Är svaret rimligt? Vilken väg var tydligast, och varför fungerade den eller blev det en missuppfattning?
+      fas: Jämföra
+      vad: Två lösningar eller två sätt att tänka visas, ordnas och kopplas ihop. Har gruppen bara ett sätt, be dem visa lösningen på ett annat. Är svaret rimligt? Vilken väg var tydligast, och varför fungerade den eller blev det en missuppfattning?
     - tid: 18–20 min
       fas: Avsluta
-      vad: Sätt ord på strategin som fungerade. Gör den korta noteringen.
+      vad: Sätt ord på strategin som fungerade och på det ni tar med er till nästa problem.
   efter: "Ett problem per pass. Blir gruppen klar tidigt: be dem visa lösningen på ett annat sätt, hitta en annan strategi eller skriva en egen liknande uppgift."
 steg:
-  text: De fyra stegen är den didaktiska modellen bakom rutinen. Använd exempelfraserna för att tänka högt och för att fråga i stället för att tala om.
+  text: Passet har fem delar. De fyra första bygger på Pólyas faser, och i avslutningen sätter ni ord på det ni tar med er. Använd exempelfraserna för att tänka högt och för att fråga i stället för att tala om.
   rader:
     - namn: Förstå
       fraga: Vad frågar problemet?
@@ -78,7 +132,7 @@ steg:
       fraga: Hur kan vi tänka?
       gor: Välj representation och strategi tillsammans. Ingen räknar än. Välj inte åt eleverna.
       fraser:
-        - Vilken representation hjälper oss att se problemet?
+        - Hur kan vi visa problemet så att vi ser det framför oss?
         - Tänk om vi provar med mindre tal först.
         - Jag vill rita det här för att se det framför mig.
         - Vilken strategi tror ni passar, och varför?
@@ -87,27 +141,42 @@ steg:
       gor: Eleverna prövar i par. Du cirkulerar, frågar och noterar olika lösningar.
       fraser:
         - Visa hur du tänkte.
-        - Vad händer om du fortsätter så?
         - Hur vet du att det stämmer?
-        - Fastnar du? Vad har du provat?
+        - Vad händer om du fortsätter så?
+        - Vad har ni gjort hittills? Varför gjorde ni så?
     - namn: Jämföra
       fraga: Är svaret rimligt?
-      gor: Visa två lösningar eller två sätt att tänka, jämför dem och kontrollera att svaret är rimligt mot frågan.
+      gor: Välj ut två lösningar eller två sätt att tänka, ordna dem och koppla ihop dem. Har gruppen bara ett sätt, be dem visa lösningen på ett annat. Kontrollera att svaret är rimligt mot frågan.
       fraser:
+        - Vad är lika i de här sätten?
+        - Vad är olika?
+        - Hur kan vi kontrollera att svaret passar frågan?
         - Är svaret rimligt?
-        - Vem tänkte annorlunda?
-        - Vad är lika och vad är olika i lösningarna?
         - Vilken metod skulle du välja nästa gång?
+    - namn: Avsluta
+      fraga: Vad tar vi med oss?
+      gor: Sätt ord på strategin som fungerade. Gör den korta noteringen efter passet.
+      fraser:
+        - I dag använde vi tabell och prövade systematiskt.
+        - Vi började med att förstå frågan innan vi räknade.
 arbetsform:
-  rubrik: "Arbetsform: gemensamt, par, gemensamt"
+  rubrik: "Arbetsform: gemensamt, i par, gemensamt igen"
   text: Passet rör sig i tre steg. Först gemensamt, där läraren leder och modellerar. Sedan prövar eleverna i par medan läraren cirkulerar. Till sist gemensamt igen, där ni jämför lösningar och sätter ord på strategin. Vid ojämnt antal bildar ni en trio eller låter en elev arbeta i par med läraren. Upplägget fungerar oavsett om gruppen är två eller åtta elever, eftersom tänkandet sker i paren.
   delar:
     - rubrik: 1. Gemensamt
-      text: Läraren leder, läser och modellerar
+      text: läraren leder och modellerar
+      faser:
+        - Förstå
+        - Planera
     - rubrik: 2. I par
-      text: Eleverna prövar, läraren cirkulerar
+      text: eleverna prövar, läraren cirkulerar
+      faser:
+        - Lösa
     - rubrik: 3. Gemensamt igen
-      text: Jämför och sätt ord på strategin
+      text: gruppen jämför tillsammans
+      faser:
+        - Jämföra
+        - Avsluta
 exempel:
   valt:
     rubrik: Problemet läraren valt
@@ -118,6 +187,8 @@ exempel:
     - "Eleverna arbetar sedan i par, och vid ojämnt antal arbetar tre tillsammans i en trio. Läraren går runt och lyssnar. När ett par fastnar frågar läraren: ”Vad har ni gjort hittills?” och sedan ”Varför gjorde ni så?” Om de fortfarande inte kommer vidare ber läraren dem visa i tabellen vad de vet, eller prova med ett enklare antal först. Läraren ger inte lösningen, utan hjälper eleverna att ta nästa steg själva."
     - "Efter några minuter samlar läraren gruppen igen. Två par får visa hur de tänkte. Det ena paret har gjort en tabell. Det andra har börjat med att tänka: ”Om alla vore femarmade skulle det bli för få ljus.” Läraren låter gruppen jämföra: ”Vad är lika i de här sätten? Vad hjälper oss att se skillnaden mellan fem ljus och sju ljus? Hur kan vi kontrollera att svaret passar frågan?”"
     - "Passet avslutas med att läraren sätter ord på strategin: ”I dag använde vi tabell och prövade systematiskt. Vi började också med att förstå frågan innan vi räknade.” Efteråt skriver läraren en kort notering: flera elever kunde återberätta problemet, gruppen behövde stöd att välja representation, och nästa gång repeteras tabell som strategi."
+  tavla: true
+  tavlaText: "Visa tabellen först och resonemanget om alla vore femarmade sedan. I båda lösningarna ger varje byte från en femarmad till en sjuarmad stake två ljus till: tio byten ger tjugo ljus, och 42 / 2 = 21. Att översätta mellan två sätt att visa något är passets matematiska kärna."
 fastnar:
   rubrik: När gruppen fastnar
   text: När eleverna kör fast är det lätt att lotsa dem direkt till svaret. Gör tvärtom. Fråga, lyssna och ge minsta möjliga stöd som tar dem ett steg längre fram.
@@ -130,16 +201,16 @@ fastnar:
     - Be dem visa med bild, tabell eller material.
     - Be dem prova med mindre tal.
     - Be dem kontrollera mot frågan.
-  efter: Hör efter var det brister, i tolkningen, utforskningen, lösningsidén eller omsättningen, och stötta på just den nivån (Lithner).
   motto: Läraren leder processen, men äger inte lösningen.
 roll:
   rubrik: "Lärarens roll: leda utan att ta över"
-  text: Stötta tänkandet i stället för att ta över det. I samma stund som du visar lösningen slutar uppgiften att vara ett problem. Visa gärna ditt eget produktiva brott, att även du kan fastna och hitta vidare. Eleverna behöver se processen, inte en perfekt räknare.
+  text: Läraren leder processen, men äger inte lösningen. I samma stund som du visar lösningen slutar uppgiften att vara ett problem. Eleverna behöver se processen, inte en perfekt räknare.
   gor:
-    - Ställ frågor och vänta ut tystnaden.
+    - Fråga innan du visar, och vänta ut tystnaden.
     - Låt eleverna förklara för varandra.
     - Lyft fram flera olika lösningar.
-    - Koppla det som fungerade till en strategi med ett namn.
+    - "Ge strategierna namn: en strategi med ett namn går att använda igen."
+    - Visa hur även du kan fastna och hitta vidare.
   undvik:
     - Att visa lösningen direkt.
     - Att jaga rätt svar i stället för att tänka.
@@ -148,7 +219,7 @@ roll:
 urval:
   rubrik: Var hittar du problemen?
   text:
-    - Problemen behöver du inte hitta på själv. De finns i läromedlets problemlösningsavsnitt för åk 4 till 9, i NCM:s Problembank och i Skolverkets problembank på Lärportalen. Ett problem är en uppgift där gruppen inte direkt vet hur den ska lösas (Skolverket). Ett lästal som bara kan lösas på ett sätt är en rutinuppgift, inte ett problem.
+    - Problemen behöver du inte hitta på själv. De finns i läromedlets problemlösningsavsnitt, i Skolverkets Problembank åk 4–6 på Lärportalen, i Nämnarens Problemavdelning och bland Kängurutävlingens tidigare problem med lösningar på NCM:s webbplats. Ett problem är en uppgift där eleven inte direkt vet hur den ska lösas (Skolverket, 2022).
   kravText: "Välj ett problem per pass som är rikt men kontrollerat och uppfyller tre krav:"
   krav:
     - rubrik: Matematiskt fokus
@@ -158,18 +229,22 @@ urval:
     - rubrik: Representation
       text: Går att lösa med bild, tabell, tallinje eller material
 progression:
-  text: Ansvaret flyttas gradvis till eleverna. Då blir passen en sammanhängande insats, inte fristående lektioner.
+  text: Ansvaret flyttas gradvis till eleverna, i de fyra leden jag gör, vi gör, ni gör tillsammans och du gör själv. Då blir passen en sammanhängande insats, inte fristående lektioner. Låt insatsen gå sida vid sida med färdighetsträning, och berätta för klassläraren vilka strategier gruppen arbetar med, så att eleverna får använda dem i klassens matematik.
   rader:
     - vecka: 1–2
-      fokus: Förstå frågan, reda ut ord och samband, välja representation.
+      led: Jag gör
+      fokus: "Eleverna lär sig rutinen: förstå frågan, reda ut ord och samband, välja representation."
       roll: Läraren modellerar mycket och tänker högt.
     - vecka: 3–4
+      led: Vi gör
       fokus: Eleverna föreslår strategier och prövar.
-      roll: Läraren använder diagnosfrågorna och ger kortare stöd.
+      roll: Läraren ger kortare stöd.
     - vecka: 5–6
+      led: Ni gör tillsammans
       fokus: Eleverna leder delar av processen.
       roll: Läraren följer upp strategi, lösning och rimlighet.
     - vecka: 7–8 vid behov
+      led: Du gör själv
       fokus: Eleverna använder rutinen i mer ordinarie uppgifter.
       roll: Läraren följer upp om strategierna överförs till klassens matematikarbete.
 uppfoljning:
@@ -177,7 +252,7 @@ uppfoljning:
   rader:
     - nar: Före insatsen
       vad: Eleverna löser ett kort lästal enskilt eller i par. Notera om de kan återberätta problemet, välja representation och kontrollera svaret.
-    - nar: Efter fem till åtta veckor
+    - nar: Efter sex till åtta veckor
       vad: Ge ett liknande problem och jämför med startläget.
 mal:
   punkter:
@@ -188,14 +263,14 @@ mal:
     - Pröva en strategi
     - Kontrollera om svaret är rimligt
 snabbmall:
-  text: En halv sida att fylla i före och efter varje pass, särskilt de första två veckorna. Håll det enkelt. Det är regelbundenheten och att komma tillbaka igen nästa dag som gör skillnad.
+  text: En halv sida att fylla i före och efter varje pass, särskilt de första två veckorna. Håll det enkelt. Det är regelbundenheten och att komma tillbaka igen nästa pass som gör skillnad.
   fore:
     - Problem
     - Ord och samband att reda ut
     - Representation
     - Strategi att lyfta
   efter:
-    - Kunde eleverna återberätta?
+    - Vad kunde varje elev återberätta, visa och kontrollera, och med vilket stöd?
     - Vad ska repeteras nästa gång?
 checklista:
   punkter:
@@ -208,8 +283,8 @@ checklista:
     - Tänkt igenom vilka lösningar eller tankesätt jag vill jämföra.
     - Tänkt igenom hur jag ska avsluta passet.
 grund:
-  text: "Metoden vilar på George Pólyas fyra faser (förstå, planera, genomföra, se tillbaka) och på ett gradvis överlämnande av ansvar enligt GRR-modellen (jag gör, vi gör, ni gör, du gör). Att tänka högt och modellera är hämtat från reciprok undervisning. I steg 4 leder du diskussionen utifrån Smith och Steins fem undervisningspraktiker: förutse, överblicka, välja ut, ordna och koppla ihop elevernas lösningar. När någon fastnar använder du Lithners faser som diagnos. Och eftersom svårigheter i lästal ofta handlar om läsförståelse snarare än räkning (IES/WWC), stannar du genomgående vid ord, samband och vad talen betyder."
-  kallor: Bygger på Pólya (1945), Lithner, Hagland, Hedrén och Taflin (2005), Smith och Stein (2014), Skolverkets modul Problemlösning på Lärportalen samt IES/WWC:s practice guides Improving Mathematical Problem Solving in Grades 4–8 och Assisting Students Struggling with Mathematics.
+  text: "Problemlösning i grupp är inte uppfunnen från grunden. Jag har fogat ihop beprövade grepp till ett körschema: Pólyas faser ordnar passet, Smith och Steins fem praktiker leder jämförelsen, ansvaret lämnas över gradvis, och från reciprok undervisning kommer återberättandet, att reda ut ord och att läraren tänker högt. Eftersom svårigheter i lästal ofta hänger ihop med läsförståelse stannar du genomgående vid ord, samband och vad talen betyder."
+  kallor: Bygger på Pólya (1945), Smith och Stein (2014), Fisher och Frey (2008), Palincsar och Brown (1984), Säfström m.fl. (2024), Lithner m.fl. (2025), Woodward m.fl. (2012) samt Skolverkets kommentarmaterial till kursplanen i matematik (2022).
 lathund:
   innehall: Ett problem per pass
   metoden:
@@ -234,26 +309,26 @@ lathund:
             1 · Förstå
             Läs högt, låt en elev återberätta, ringa in frågan.
           - |-
-            ”Kan du berätta problemet med egna ord?”
+            ”Vad är det vi ska ta reda på?” · ”Kan du berätta problemet med egna ord?”
             ”Vilket ord är vi osäkra på?” · ”Vad betyder talen i texten?”
         - - |-
             2 · Planera
-            Välj representation och strategi. Ingen räknar än.
+            Välj hur problemet ska visas: bild, tabell, tallinje eller material. Ingen räknar än.
           - |-
-            ”Vilken representation hjälper oss att se problemet?”
+            ”Hur kan vi visa problemet så att vi ser det framför oss?”
             ”Tänk om vi provar med mindre tal först.”
         - - |-
             3 · Lösa
-            Eleverna prövar i par. Du cirkulerar och noterar.
+            Eleverna prövar i par. Du cirkulerar och noterar lösningar.
           - |-
             ”Visa hur du tänkte.” · ”Hur vet du att det stämmer?”
-            ”Fastnar du? Vad har du provat?”
+            ”Vad har ni gjort hittills? Varför gjorde ni så?”
         - - |-
             4 · Jämföra
-            Visa två lösningar. Är svaret rimligt mot frågan?
+            Två lösningar visas, ordnas och kopplas ihop. Bara ett sätt: visa det på ett annat.
           - |-
-            ”Vem tänkte annorlunda?” · ”Är svaret rimligt?”
-            ”Vad är lika och vad är olika i lösningarna?”
+            ”Vad är lika i de här sätten?” · ”Vad är olika?”
+            ”Hur kan vi kontrollera att svaret passar frågan?”
   pass:
     rubrik: "Vi kör ett pass: ljusstakarna på slottet"
     textRubrik: Problemet · åk 4
@@ -273,20 +348,20 @@ lathund:
           fas: Förberedelse
           vad: Välj ett problem. Lös det själv. Förutse elevernas lösningar. Ta fram material för en representation.
         - tid: 0–3
-          fas: Läs och förstå
+          fas: 1 · Förstå
           vad: Läs högt, en elev återberättar, markera frågan, skriv vad vi vet och vad vi ska ta reda på.
         - tid: 3–6
-          fas: Planera
+          fas: 2 · Planera
           vad: Välj representation och strategi tillsammans. Ingen räknar än. Välj inte åt eleverna.
         - tid: 6–15
-          fas: Lös
+          fas: 3 · Lösa
           vad: Eleverna prövar i par, trio vid ojämnt antal. Du cirkulerar, frågar och noterar lösningar.
         - tid: 15–18
-          fas: Jämför
-          vad: Två lösningar eller två sätt att tänka visas och jämförs. Är svaret rimligt? Vilken väg var tydligast?
+          fas: 4 · Jämföra
+          vad: "Två lösningar eller två sätt att tänka visas, ordnas och kopplas ihop. Bara ett sätt: visa det på ett annat. Är svaret rimligt?"
         - tid: 18–20
           fas: Avsluta
-          vad: Sätt ord på strategin som fungerade. Gör den korta noteringen.
+          vad: Sätt ord på strategin som fungerade. Den korta noteringen skrivs efter passet.
   mall:
     rubrik: Så läste jag problemet med gruppen
     underrad: Tavlan under passet
@@ -330,6 +405,8 @@ lathund:
             - "Om alla vore 5-armade: 29 × 5 = 145"
             - "Saknas: 187 − 145 = 42"
             - Varje 7-armad ger 2 ljus till → 42 ÷ 2 = 21
+            - 29 − 21 = 8 femarmade
+            - "Kontroll: 8 + 21 = 29 stakar, 8 · 5 + 21 · 7 = 187 ljus"
         svar: 8 femarmade och 21 sjuarmade
         citat:
           - Kan du berätta problemet med egna ord?
@@ -343,15 +420,16 @@ lathund:
       punkter:
         - fet: Läromedlets problemlösningsavsnitt
           text: för åk 4 till 9.
-        - fet: NCM:s Problembank.
-        - fet: Skolverkets problembank
+        - fet: Skolverkets Problembank åk 4–6
           text: på Lärportalen.
-      efter: Ett problem är en uppgift där gruppen inte direkt vet hur den ska lösas. Ett lästal som bara kan lösas på ett sätt är en rutinuppgift.
+        - fet: Nämnarens Problemavdelning
+          text: och Kängurutävlingens tidigare problem med lösningar på NCM:s webbplats.
+      efter: Ett problem är en uppgift där eleven inte direkt vet hur den ska lösas.
     bordet:
       - Miniwhiteboards och pennor
       - Plockmaterial och klossar
       - Rutat papper och tallinjer
       - Tabellmall att fylla i
       - Problemet utskrivet till varje par
-      - Snabbmallen för noteringen efteråt
-    varjePass: Kunde eleverna återberätta, vad ska repeteras nästa gång?
+      - Snabbmallen för noteringen efteråt, ur planeringsmallarna
+    varjePass: Vad kunde varje elev återberätta, visa och kontrollera, och med vilket stöd? Vad ska repeteras nästa gång?
