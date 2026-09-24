@@ -11,7 +11,7 @@ Ett blad per text som Niclas Fohlin skrivit eller medverkat i, 60 stycken, hämt
 | typ | kronika, debatt, artikel eller intervju, alltså sajtens typ |
 | forfattarskap, medforfattare, byline | författare, medförfattare eller intervjuad; bylinen som sidan visade den |
 | ord | fulltextens längd. 0 betyder att bladet bara bär metadata |
-| rattigheter | vad Niclas sagt om att lägga hela texten på sajten. Tills han sagt något: ej bekräftade |
+| rattigheter | vad Niclas sagt om att lägga hela texten på sajten. Sedan 2026-09-24 gäller ett stående besked: alla hans texter i fulltext |
 | post | sajtens post när den finns |
 | tidningens_ingress | tidningens egen ingress. Den används aldrig som sajtens ingress |
 
@@ -19,7 +19,7 @@ Fulltexten under frontmattern är textens brödtext. Tidningens utdragscitat, fa
 
 ## Så blir ett blad en post
 
-`/ny-artikel <slug>` läser bladet, skriver en egen ingress enligt STIL.md, väljer taggar ur registret och skapar `src/content/artiklar/<slug>.md` med `heltext: false`. `npm run texter --saknar-post` visar vilka som återstår. Hela texten kopieras in i posten först när Niclas sagt att rättigheterna medger det, och då sätts `heltext: true` och fältet rattigheter i bladet uppdateras.
+`/ny-artikel <slug>` läser bladet, skriver en egen ingress enligt STIL.md, väljer taggar ur registret och skapar `src/content/artiklar/<slug>.md` med `heltext: true` och hela brödtexten ur bladet. `npm run texter -- --saknar-post` visar vilka som återstår. Niclas besked 2026-09-24 gäller alla hans texter; bara ett poddavsnitt eller en intervju där texten är någon annans får `heltext: false` med länk och egen beskrivning.
 
 ## Per publikation
 

@@ -39,7 +39,7 @@ Astro 7 använder en strikt kompilator: alla taggar måste stängas, ogiltig HTM
 
 Filer som börjar med `_` läses inte in. `utkast: true` visas lokalt men aldrig i produktion. Scheman ligger i `src/content.config.ts` och är strikta med avsikt.
 
-Artiklar är oftast publicerade i Vi Lärare, Göteborgs-Posten eller en annan tidning först. Posten ska alltid visa var, med länk till originalet. Ingressen är egen text. Hela originaltexten läggs bara in när Niclas uttryckligen säger att rättigheterna medger det, och då sätts `heltext: true`.
+Artiklar är oftast publicerade i Vi Lärare, Göteborgs-Posten eller en annan tidning först. Posten ska alltid visa var, med länk till originalet. Ingressen är egen text. Hela originaltexten ligger alltid på sajten, med `heltext: true`: Niclas sa 2026-09-24 att alla hans texter i Vi Lärare och andra tidningar ska finnas i fulltext här. Undantaget är poddavsnitt och intervjuer där texten inte är hans; de får länk och egen beskrivning.
 
 Stödundervisning är en metodbank, inte en blogg. Varje metod är en YAML-fil efter modellen i `_mall.yaml` och `src/content.config.ts`: inledning, upplägg, passrutin, tidsschema, steg med exempelfraser, arbetsform, exempel, när gruppen fastnar, lärarens roll, urval, progression, uppföljning, mål, snabbmall, checklista och grund. Sidan, lathunden (`/stodundervisning/<id>/lathund`, fyra sidor ur snabbguiden), utskriften och docx-filerna (`/stodundervisning/<id>.docx` med allt: beskrivning, planeringsmallar och lathund; `<id>-mallar.docx` och `<id>-lathund.docx` för delarna; flera valda metoder i en fil) byggs ur samma data av `src/components/Metod.astro` och `src/lib/metoddocx.ts`, och allt som laddas ner bär © Niclas Fohlin och niclasfohlin.se. Exakt ett område (Matematik, Läsning, Skrivning), minst en nivå (F-3, 4-6, 7-9) och taggar för vad den tränar. Delar som saknas i underlaget utelämnas. Genomförandet ska en lärare kunna följa i morgon.
 
@@ -75,4 +75,4 @@ Niclas gav 2026-09-19 Claude Code fullt mandat att sköta sajten och tjänsterna
 1. Skapar konton och loggar in där en människa måste klicka i webbläsaren. Vad han ska göra, steg för steg, står i INSTRUKTIONER.docx.
 2. Säger skicka innan ett längre nyhetsbrev går ut. Mejlen om nytt innehåll går automatiskt.
 3. Lämnar fakta om sig själv och sina böcker. Du frågar efter underlag, du hittar inte på.
-4. Säger per publikation om hela texten får ligga på sajten. Beskedet 2026-09-20 gällde de texter som fanns då; registret i `underlag/texter/` säger det per text. För en ny text frågar du, tills han sagt att det gäller allt framöver.
+4. Avgör rättigheterna. Hans stående besked 2026-09-24: alla hans artiklar ligger alltid i fulltext på sajten, utan att du frågar per text.

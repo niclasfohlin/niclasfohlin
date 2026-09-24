@@ -46,7 +46,7 @@ En inloggning som kräver webbläsaren (`gh auth login`, `netlify login`) starta
 
 ## Texterna
 
-Alla kända texter av Niclas ligger i `underlag/texter/`, ett blad per text med fulltext och metadata, och `underlag/texter/register.json` är listan. `npm run texter` visar vilka som saknar post på sajten. En post skapas ur bladet med `/ny-artikel <slug>`: egen ingress, taggar ur registret, länk till originalet. Fulltexten läggs in i posten bara när Niclas sagt att rättigheterna medger det, och då sätts `heltext: true`.
+Alla kända texter av Niclas ligger i `underlag/texter/`, ett blad per text med fulltext och metadata, och `underlag/texter/register.json` är listan. `npm run texter` visar vilka som saknar post på sajten. En post skapas ur bladet med `/ny-artikel <slug>`: egen ingress, taggar ur registret, länk till originalet. Fulltexten kopieras alltid in i posten ur bladet och `heltext: true` sätts; Niclas besked 2026-09-24 gäller alla hans texter. Ett poddavsnitt eller en intervju där texten är någon annans får länk och egen beskrivning.
 
 ## Metoder ur underlag
 

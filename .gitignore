@@ -37,3 +37,4 @@ underlag/metoder/
 # Codex lokala inställningar med inloggningar
 .codex/config.toml
 underlag/texter/_hamtning.json
+__pycache__/

@@ -13,10 +13,11 @@ medforfattare: []
 # id från src/data/taggar.json. Återanvänd före att lägga till.
 taggar: ["skolpolitik"]
 utvald: false
-# Sant bara när rättigheterna uttryckligen medger hela texten här.
-heltext: false
+# Alltid sant för Niclas egna texter (hans besked 2026-09-24). Falskt bara för poddavsnitt
+# och intervjuer där texten är någon annans.
+heltext: true
 utkast: true
 ---
 
-Brödtexten är valfri. Här kan en egen kommentar, en bakgrund eller ett urval
-citat ligga. Hela originaltexten läggs bara in om heltext är sant.
+Hela originaltexten ur bladet i underlag/texter, ordagrant. Är heltext falskt (podd,
+intervju) kan här i stället ligga en egen kommentar eller en bakgrund.
