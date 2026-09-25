@@ -96,7 +96,7 @@ Vid varje Word-fil finns valet Word, Drive och för lathunden pdf (`src/componen
 
 ## Loopia och domänen
 
-niclasfohlin.se är registrerad hos Loopia till 2027-09-19, DNS hos Loopia (ns1 och ns2.loopia.se, zonen är DNSSEC-signerad). LoopiaAPI hanterar bara domäner och DNS; e-postalias skapas av Niclas i Loopia Kundzon (steget står i INSTRUKTIONER.docx när det behövs). Om aliaset nyhetsbrev@ fungerar går inte att se härifrån: API:t ser ingen e-post, och port 25 utåt är stängd från den här datorn, så ett RCPT-prov mot mailcluster.loopia.se når aldrig fram (provat 2026-09-25). Provet görs med ett mejl från Brevo till adressen, som Niclas först säger ja till; Brevos logg visar då om Loopia tog emot det eller varför det stoppades. Niclas egen provning ska komma från en annan adress än niclas.fohlin@gmail.com, eftersom Gmail inte visar ett mejl som kommer tillbaka till kontot som skickade det.
+niclasfohlin.se är registrerad hos Loopia till 2027-09-19, DNS hos Loopia (ns1 och ns2.loopia.se, zonen är DNSSEC-signerad). LoopiaAPI hanterar bara domäner och DNS; e-postalias skapas av Niclas i Loopia Kundzon (steget står i INSTRUKTIONER.docx när det behövs). Aliaset nyhetsbrev@niclasfohlin.se till niclas.fohlin@gmail.com skapades 2026-09-25. Loopia varnar då att "existerande e-postkonfiguration (extern MX) kommer tas bort". I praktiken bytte Loopia ut de två MX-posterna mot likadana och lade till autoconfig och _autodiscover._tcp; de elva andra posterna låg kvar med samma id. MX styr bara mejl som kommer in till domänen, så Brevos utskick berörs inte av MX. Om aliaset nyhetsbrev@ fungerar går inte att se härifrån: API:t ser ingen e-post, och port 25 utåt är stängd från den här datorn, så ett RCPT-prov mot mailcluster.loopia.se når aldrig fram (provat 2026-09-25). Provet görs med ett mejl från Brevo till adressen, som Niclas först säger ja till; Brevos logg visar då om Loopia tog emot det eller varför det stoppades. Niclas egen provning ska komma från en annan adress än niclas.fohlin@gmail.com, eftersom Gmail inte visar ett mejl som kommer tillbaka till kontot som skickade det.
 
 | Uppgift | Kommando |
 |---|---|
@@ -104,17 +104,20 @@ niclasfohlin.se är registrerad hos Loopia till 2027-09-19, DNS hos Loopia (ns1 
 | Lägg till | `python scripts/loopia.py lagg <subdomän> <TYP> <värde> [ttl] [prio]` |
 | Ändra, ta bort | `andra <subdomän> <record_id> <TYP> <värde> [ttl] [prio]` (prio måste anges igen för MX, annars blir den 0), `tabort <subdomän> <record_id>` |
 
-Zonen 2026-09-24:
+Zonen 2026-09-25, efter aliaset:
 
 | Post | Värde | För |
 |---|---|---|
 | @ A | 75.2.60.5 | Netlifys lastbalanserare |
 | www CNAME | niclasfohlin.netlify.app | Netlify |
-| @ MX 10, 20 | mailcluster.loopia.se, mail2.loopia.se | Loopias vidarebefordran av mejl till nyhetsbrev@ |
+| @ MX 10, 20 | mailcluster.loopia.se, mail2.loopia.se | Loopias e-post: aliaset nyhetsbrev@ vidarebefordrar till niclas.fohlin@gmail.com |
 | @ TXT | brevo-code:… | Brevos ägarkontroll |
 | @ TXT | v=spf1 include:spf.brevo.com include:spf.loopia.se ~all | SPF, tillagd 2026-09-24 sedan Gmail höll kvar hela utskick 6 (alla 25 Gmail-adresser olevererade, övriga domäner levererade); DKIM och DMARC fanns, SPF saknades |
 | _dmarc TXT | v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com | DMARC |
 | brevo1._domainkey, brevo2._domainkey CNAME | b1 och b2.niclasfohlin-se.dkim.brevo.com | DKIM |
+| autoconfig CNAME | autoconfig.loopia.com | inställningar för e-postprogram, lagd av Loopia när aliaset skapades |
+| _autodiscover._tcp SRV | 100 1 443 autodiscover.loopia.com | samma sak för Outlook, lagd av Loopia med aliaset |
+| * A | 194.9.94.85, 194.9.94.86 | Loopias standard för underdomäner som inte står här, sedan registreringen |
 
 Lärdom om DNS: ett uppslag som görs innan posten finns cachas som "finns inte" i upp till en timme (zonens negativa TTL). Lägg till posten, kontrollera mot ns1.loopia.se (`Resolve-DnsName <namn> -Type TXT -Server 93.188.0.20`), och be först därefter tjänsten kontrollera.
 
