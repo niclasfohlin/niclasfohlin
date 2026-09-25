@@ -106,7 +106,10 @@ export function arbetsformRad(d: MetodData): string {
 // en remsa (faserna med minuter och arbetsformens delar under) och en tabell med en rad per fas. Raden
 // "Före passet" hämtas ur tidsschemat (tiden börjar inte med en siffra), "Efter passet" ur passrutin.efterPasset.
 export interface PassFas { fas: string; tid: string; vad: string; minuter: number; steg: { nr: number; text: string }[] }
-export interface PassOversikt { rubrik: string; text?: string; fore?: string; efter?: string; efterTabell?: string; faser: PassFas[]; total: number; delar: { rubrik: string; text: string; fran: number; antal: number; tid: string }[] }
+// En del av arbetsformen i remsan. tid är delens spann och används bara i beskrivningen för skärmläsare; synligt
+// står tiden bara i faserna. visaRubrik är falsk när delen gäller en enda fas och heter som den ("I par" under I par).
+export interface PassDel { rubrik: string; text: string; fran: number; antal: number; tid: string; visaRubrik: boolean }
+export interface PassOversikt { rubrik: string; text?: string; fore?: string; efter?: string; efterTabell?: string; faser: PassFas[]; total: number; delar: PassDel[] }
 export function passOversikt(d: MetodData): PassOversikt | null {
   const steg = d.passrutin?.steg ?? [];
   if (!d.passrutin || !d.tidsschema || !steg.length || steg.some((s) => typeof s === 'string')) return null;
@@ -129,7 +132,26 @@ export function passOversikt(d: MetodData): PassOversikt | null {
     const sista = faser[platser[platser.length - 1]].tid.match(/(\d+)\s*[–-]\s*(\d+)/)?.[2] ?? '';
     return { rubrik: x.rubrik.replace(/^\d+\.\s*/, ''), text: x.text, fran: platser[0], antal: platser[platser.length - 1] - platser[0] + 1, tid: forsta && sista ? `${forsta}–${sista} min` : '' };
   });
-  return { rubrik: d.tidsschema.rubrik, text: d.tidsschema.text, fore: fore?.vad, efter: d.passrutin.efterPasset, efterTabell: d.tidsschema.efter, faser, total, delar };
+  const somFasen = (x: { rubrik: string; fran: number; antal: number }) => x.antal === 1 && x.rubrik.toLowerCase() === faser[x.fran].fas.toLowerCase();
+  return { rubrik: d.tidsschema.rubrik, text: d.tidsschema.text, fore: fore?.vad, efter: d.passrutin.efterPasset, efterTabell: d.tidsschema.efter, faser, total, delar: delar.map((x) => ({ ...x, visaRubrik: !somFasen(x) })) };
+}
+// Remsans grupper i fasernas ordning: en arbetsform med de faser den gäller, eller en fas utan arbetsform.
+// På mobil ramar gruppen in sina faser med arbetsformens text under den sista, så att en del som gäller
+// två faser inte hamnar mellan dem. På bredare skärm syns inte gruppen, och delen ligger under sina kolumner.
+export type PassGrupp = { faser: { fas: PassFas; nr: number }[]; del?: PassDel };
+export function passGrupper(p: PassOversikt): PassGrupp[] {
+  const ut: PassGrupp[] = [];
+  for (let i = 0; i < p.faser.length; i++) {
+    const del = p.delar.find((x) => x.fran === i);
+    const antal = del ? Math.max(1, del.antal) : 1;
+    ut.push({ faser: p.faser.slice(i, i + antal).map((fas, j) => ({ fas, nr: i + j })), del });
+    i += antal - 1;
+  }
+  return ut;
+}
+// Delens text i remsan: namnet och vad som händer, eller bara vad som händer med stor bokstav när delen heter som sin fas.
+export function remsDel(x: PassDel): { rubrik?: string; text: string } {
+  return x.visaRubrik ? { rubrik: x.rubrik, text: x.text } : { text: versal(x.text) };
 }
 // Rutinens steg som texter, oavsett om de har fas.
 export function stegTexter(d: MetodData): string[] {

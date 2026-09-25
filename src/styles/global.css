@@ -364,8 +364,6 @@ button.lank:hover { color: var(--farg-accent); }
 .m-ruta p + p { margin-top: 0.35em; }
 /* Rutans rubrik står på egen rad, som i kompendiet, så att den läses som rubrik och inte som en fet meningsstart. */
 .m-ruta .kicker { display: block; font-family: var(--typsnitt-ui); color: var(--farg-accent); margin-bottom: 0.2em; }
-/* Remsan: vilka faser en arbetsform spänner över sägs bara på mobil, där delen inte längre ligger under sina faser. */
-.m-remsa-faser { display: none; }
 /* Ramens namn i rutan "Så arbetar ni med listan" syns bara i utskriften, där rutan kan hamna på en annan sida än listan. */
 .m-ramnamn { display: none; font-weight: 500; }
 .m-fraga .kicker { margin-bottom: 0.25em; }
@@ -490,8 +488,9 @@ button.lank:hover { color: var(--farg-accent); }
 .m-remsa-fas span { font-size: 0.78rem; opacity: 0.92; }
 .m-remsa-del { grid-row: 2; background: var(--farg-ton); border-radius: 6px; padding: 0.4rem 0.5rem; text-align: center; font-size: 0.85rem; color: var(--farg-text-svag); min-width: 0; }
 .m-remsa-del strong { color: var(--farg-text); }
-.m-remsa-tid, .m-remsa-fas span { white-space: nowrap; }
-.m-remsa-tid { color: var(--farg-text-svag); font-size: 0.8rem; }
+.m-remsa-fas span { white-space: nowrap; }
+/* Gruppen (en arbetsform med sina faser) finns för mobilen. Här ligger faserna och delen direkt i rutnätet. */
+.m-remsa-grupp { display: contents; }
 .m-pass .m-pass-steg { margin: 0; padding-left: 1.3em; }
 .m-pass .m-pass-steg li { margin: 0 0 0.25em; }
 .m-pass .m-pass-steg li::marker { font-weight: 700; color: var(--farg-accent); }
@@ -688,13 +687,12 @@ html.js .bara-js { display: inline-block; }
   .m-bockar.tva li:nth-child(4n+3), .m-bockar.tva li:nth-child(4n+4) { background: none; }
   .m-bockar.tva li:nth-child(4n) { background: var(--farg-ton-svag); }
   .m-band { grid-template-columns: 1fr; }
-  .m-remsa { grid-template-columns: 1fr; }
-  .m-remsa-fas { grid-row: auto; flex-direction: row; justify-content: space-between; align-items: baseline; text-align: left; padding: 0.4rem 0.7rem; }
-  .m-remsa-del { grid-row: auto; grid-column: 1 !important; text-align: left; }
-  /* På mobil följer arbetsformen direkt på sin fas (--n sätts i Metod.astro), så att fas, tid och arbetsform läses ihop. */
-  .m-remsa-fas { order: calc(var(--n, 0) * 2); }
-  .m-remsa-del { order: calc(var(--n, 0) * 2 + 1); }
-  .m-remsa-faser { display: inline; }
+  /* På mobil blir remsan en lista. En arbetsform ramar in sina faser och har sin text under den sista,
+     så att en del som gäller två faser inte hamnar mellan dem. Tiden står bara i faserna. */
+  .m-remsa { display: flex; flex-direction: column; gap: 6px; }
+  .m-remsa-grupp { display: flex; flex-direction: column; gap: 3px; background: var(--farg-ton); border-radius: 8px; padding: 3px; }
+  .m-remsa-fas { flex-direction: row; justify-content: space-between; align-items: baseline; text-align: left; padding: 0.4rem 0.7rem; }
+  .m-remsa-del { background: none; text-align: left; padding: 0.3rem 0.65rem 0.4rem; }
   .m-tabell.tat thead th { font-size: 0.7rem; padding: 0.4rem 0.25rem; letter-spacing: 0; }
   .m-lista td { font-size: 1.25rem; padding: 0.45rem 0.6rem; }
   .m-lista thead th { padding: 0.35rem 0.5rem; letter-spacing: 0.02em; }

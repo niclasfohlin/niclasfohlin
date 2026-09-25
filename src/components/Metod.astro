@@ -5,7 +5,7 @@ import MetodTabell from './MetodTabell.astro';
 import Tavla from './Tavla.astro';
 import Elevlista from './Elevlista.astro';
 import type { MetodData } from '../lib/metod';
-import { ejBryt, ramArTom, passOversikt, stegTexter } from '../lib/metod';
+import { ejBryt, ramArTom, passGrupper, passOversikt, remsDel, stegTexter } from '../lib/metod';
 // "Åk 4–5" hålls ihop i ramarnas rubriker och länkar: hårt mellanslag efter Åk, ordfog efter tankstrecket.
 const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 '));
 interface Props { d: MetodData; id: string }
@@ -83,8 +83,12 @@ const avsnitt = [
       {d.passrutin.text && <p>{d.passrutin.text}</p>}
       {pass.text && <p>{pass.text}</p>}
       <div class="m-remsa" style={`--kolumner:${pass.faser.map((f) => `minmax(7rem, ${f.minuter}fr)`).join(' ')}`} role="img" aria-label={`Passets faser: ${pass.faser.map((f) => `${f.fas} ${f.tid}`).join(', ')}${pass.delar.length ? `. Arbetsform: ${pass.delar.map((x) => `${x.rubrik} ${x.tid}`).join(', ')}` : ''}`}>
-        {pass.faser.map((f, i) => <div class="m-remsa-fas" style={`--n:${i}`}><strong>{f.fas}</strong><span>{f.tid}</span></div>)}
-        {pass.delar.map((x) => <div class="m-remsa-del" style={`grid-column:${x.fran + 1} / span ${x.antal};--n:${x.fran}`}><strong>{x.rubrik}</strong>{x.tid && <>{' '}<span class="m-remsa-tid">{x.tid}</span></>}{x.antal > 1 && <span class="m-remsa-faser">{' '}under {radaUpp(pass.faser.slice(x.fran, x.fran + x.antal).map((f) => f.fas))}</span>}{' '}· {x.text}</div>)}
+        {passGrupper(pass).map((g) => {
+          const faser = g.faser.map(({ fas, nr }) => <div class="m-remsa-fas" style={`grid-column:${nr + 1}`}><strong>{fas.fas}</strong><span>{fas.tid}</span></div>);
+          if (!g.del) return faser;
+          const v = remsDel(g.del);
+          return <div class="m-remsa-grupp">{faser}<div class="m-remsa-del" style={`grid-column:${g.del.fran + 1} / span ${g.del.antal}`}>{v.rubrik ? <><strong>{v.rubrik}</strong>{' '}· {v.text}</> : v.text}</div></div>;
+        })}
       </div>
       <table class="m-tabell m-pass stapla" id="tidsschema">
         <colgroup><col style="width:18%" /><col style="width:40%" /><col style="width:42%" /></colgroup>
