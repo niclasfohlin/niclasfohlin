@@ -2,6 +2,7 @@
 name: granskare
 description: Andra ögat på en metod eller en sajtändring när Codex inte kan användas (Codex slut 2026-09-25, Niclas valde Opus 5.5 med högsta ansträngning som vikarie). Läser prompten i underlag/prov/<id>/granskning/prompt.md, koden, dist och bilderna, och skriver svaret till den fil prompten anger. Ändrar inget annat.
 model: opus
+effort: max
 tools: Read, Grep, Glob, Bash, Write
 ---
 

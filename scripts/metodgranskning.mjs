@@ -35,7 +35,7 @@ const fragorFil = flagga('--fragor');
 const baraPrompt = args.includes('--bara-prompt');
 const vanta = args.includes('--vanta');
 // --vikarie: Codex kan inte användas (kvoten slut 2026-09-25). Prompten skrivs för en Claude-subagent i stället,
-// agenten granskare i .claude/agents/ (Opus 5.5; ansträngningen sätts på sessionen), som läser bilderna med Read.
+// agenten granskare i .claude/agents/ (Opus 5.5, effort: max i frontmatter), som läser bilderna med Read.
 const vikarie = args.includes('--vikarie');
 
 const MODELL = process.env.CODEX_MODELL ?? 'gpt-6-astra';
@@ -110,7 +110,7 @@ if (vikarie) {
   console.log(`Vikarie: kör agenten granskare (Opus 5.5) med Agent, subagent_type "granskare", och prompten:`);
   console.log(`  Läs ${rel(promptFil)} och gör exakt det. Skriv svaret till ${rel(svar)}.`);
   console.log('Finns inte agenttypen granskare (sessionen startade innan .claude/agents/granskare.md fanns): general-purpose med model opus och samma prompt, med tillägget "Läs .claude/agents/granskare.md först."');
-  console.log('Ansträngningen ärvs från sessionen: sätt den till max i appens modellmeny innan. Adjudicera sedan som efter Codex.');
+  console.log('Ansträngningen står i agentdefinitionen (effort: max). Adjudicera sedan som efter Codex.');
   process.exit(0);
 }
 if (!codexExe) { console.error('Hittar inte Codex CLI (codex.exe i %LOCALAPPDATA%\\Programs\\OpenAI\\Codex\\bin eller codex i PATH).'); process.exit(1); }
