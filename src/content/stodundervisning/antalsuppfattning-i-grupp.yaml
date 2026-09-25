@@ -3,13 +3,13 @@
 # sökningar online. Omskriven samma dag efter författarens återkoppling: passets fem faser (gör först, gör
 # tillsammans, i par, själv, gemensamt igen) och ett paket per årskurs. Besluten står i analys.md.
 titel: "Antalsuppfattning i grupp: bygga tal"
-undertitel: Intensivt stöd och extra träning i fem veckor, där eleverna bygger tal med tiobas, talbrickor och pengar, för åk 1–5
-ingress: Ett körschema för fem veckors intensivt stöd och extra träning i antalsuppfattning, i liten grupp i åk 1–5. Läraren bygger först och sätter ord på varje handgrepp. Sedan bygger eleverna tillsammans med läraren, i par och själv, och växlar med händerna. Ett fokus i veckan, med tal och kort för gruppens årskurs.
+undertitel: Fem veckors intensivt stöd i liten grupp, där eleverna bygger tal med tiobas, talbrickor och pengar, för åk 1–5
+ingress: Ett körschema för fem veckors intensivt stöd i antalsuppfattning för en liten grupp i åk 1–5. Läraren bygger talet först och säger vad hen gör. Sedan bygger eleverna tillsammans med läraren, i par och var för sig, och gör växlingarna själva. Varje vecka har ett fokus, och talen och korten följer gruppens årskurs.
 omrade: Matematik
 arskurs:
   - F-3
   - 4-6
-arskursText: åk 1–5
+arskursText: åk 1–5
 taggar:
   - taluppfattning
   - positionssystemet
@@ -33,15 +33,15 @@ relaterade:
   - problemlosning-i-grupp
 utkast: false
 inledning:
-  - "Metoden är för elever i åk 1–5 som behöver stöd i antalsuppfattning. Eleverna bygger talen framför sig med tiobas, talbrickor, som är runda brickor med ett talvärde, och pengar. De lägger till och tar bort, och växlar med händerna när en talsort blir full eller inte räcker. Metoden handlar om att se tal och bygga tal, inte bara räkna dem. Det viktigaste händer vid bordet: läraren gör först, bygger, lyfter och pekar, och sätter ord på varje handgrepp. Sedan gör gruppen det tillsammans, sedan i par och sist var och en själv, och passet slutar gemensamt igen. Efter fem veckor ska eleven kunna bygga tal själv och förstå hur växlingen sker i skriftlig huvudräkning."
-  - "Två ord bär metoden. En talsort är ental, tiotal, hundratal, tusental och, för decimaltal, tiondelar och hundradelar. Att växla är att byta tio av en talsort mot en av nästa större, eller en mot tio av nästa mindre: tio ental blir ett tiotal, och ett tiotal blir tio ental. Värdet är detsamma, bara talsorten byts. Talsortsmattan har en ruta för varje talsort, och allt som byggs ligger på den."
-  - Exemplen i passets delar är från en grupp i åk 2. Materialet för varje årskurs finns under Material per årskurs, efter Kort om grunden.
+  - "Metoden är för elever i åk 1–5 som behöver stöd i antalsuppfattning. Eleverna bygger talen framför sig med tiobas, talbrickor och pengar. Talbrickor är runda brickor med ett talvärde. Eleverna lägger till och tar bort, och när en talsort blir full eller inte räcker växlar de själva med materialet. Metoden handlar om att se tal och bygga tal, inte bara räkna dem. Det viktigaste händer vid bordet. Läraren gör först: bygger, lyfter, pekar och säger vad hen gör. Sedan gör gruppen samma sak tillsammans, sedan i par och sist var och en för sig, och passet slutar med att alla gör det gemensamt igen. Efter fem veckor ska eleven kunna bygga tal på egen hand och förstå hur växlingen går till i skriftlig huvudräkning."
+  - "Två ord är centrala i metoden: talsort och växla. Talsorterna är ental, tiotal, hundratal och tusental, och i decimaltal även tiondelar och hundradelar. Att växla är att byta tio av en talsort mot en av nästa större, eller en mot tio av nästa mindre. Tio ental blir ett tiotal, och ett tiotal blir tio ental. Värdet är detsamma, det är bara talsorten som byts. Talsortsmattan har en ruta för varje talsort, och allt eleverna bygger ligger på den."
+  - Exemplen i beskrivningen av passet kommer från en grupp i åk 2. Materialet för varje årskurs finns under Material per årskurs, efter Kort om grunden.
 upplagg:
   rubrik: Så fungerar insatsen
-  text: "Insatsen genomförs tre gånger i veckan under fem veckor, med 30 minuter per pass och två till sex elever i samma eller närliggande årskurs. Varje vecka har ett fokus, som veckans tre pass visar i tre material: tiobas, talbrickor och pengar med skrift. Talområdet och korten följer årskursen, med ett paket för varje årskurs. Eleven får ett tiobaspaket att ha hemma och en läxa i veckan. Före och efter perioden gör du samma kartläggning."
+  text: "Insatsen pågår i fem veckor med tre pass i veckan. Varje pass är 30 minuter, och gruppen har två till sex elever i samma eller närliggande årskurs. Varje vecka har ett fokus som eleverna möter i tre material, ett per pass: tiobas, talbrickor och pengar med skrift. Talområdet och korten följer årskursen, och det finns ett paket för varje årskurs. Eleven får ett tiobaspaket att ha hemma och en läxa i veckan. Före och efter perioden gör du samma kartläggning."
 principer:
   rubrik: Tre saker att hålla fast vid
-  text: "Gör först och sätt ord på det: läraren bygger framför eleverna, visar vad de ska se, lyfter och pekar, och säger vad som görs innan eleverna gör något själva. Bygg, peka och växla med händerna: talet ligger framför eleven innan någon räknar, och eleven gör växlingen själv och säger den, som i tio ental blir ett tiotal. Och ett fokus i veckan: samma fokus i tre pass och tre material gör att eleverna ser det som är lika i alla tre."
+  text: "Gör först och sätt ord på det: läraren bygger framför eleverna, visar vad de ska titta på, lyfter och pekar och säger vad hen gör, innan eleverna gör något själva. Bygg, peka och växla i materialet: talet ligger framför eleven innan någon räknar, och eleven gör växlingen själv och säger vad som händer, till exempel att tio ental blir ett tiotal. Och ett fokus i veckan: när samma fokus kommer tillbaka i tre pass och tre material ser eleverna det som är gemensamt."
 tabeller:
   - rubrik: Talområde och talsorter per årskurs
     plats: efter-inledning
@@ -51,26 +51,26 @@ tabeller:
       - Talsorter på mattan
       - Växlingen som ska synas
     rader:
-      - - Åk 1
+      - - Åk 1
         - 0–30
         - Tiotal och ental
         - Tio ental blir ett tiotal, och tvärtom.
-      - - Åk 2
+      - - Åk 2
         - 0–100
         - Hundratal, tiotal och ental
         - Tio ental blir ett tiotal, och tio tiotal ett hundratal.
-      - - Åk 3
+      - - Åk 3
         - 0–1 000
         - Tusental, hundratal, tiotal och ental
         - Växling i två led, som 199 + 1 och 400 − 1.
-      - - Åk 4–5
+      - - Åk 4–5
         - Upp till 10 000, decimaltal och negativa tal
         - Tusental till hundradelar
         - Tio hundratal blir ett tusental, och tio tiondelar ett ental.
-    not: "Hela gruppen arbetar i samma paket. Går gruppen över två årskurser, gör kartläggningen för den lägre. Bygger eleverna kartläggningens uppgift 1–4 säkert redan före perioden, ta nästa årskurs paket. Innehållet följer centralt innehåll i Lgr22: naturliga tal och positionssystemet i åk 1–3, och i åk 4–6 också tal i decimalform och negativa tal."
+    not: "Hela gruppen arbetar med samma paket. Har gruppen elever från två årskurser gör du kartläggningen för den lägre årskursen. Klarar eleverna kartläggningens uppgift 1–4 säkert redan före perioden tar ni paketet för nästa årskurs. Innehållet följer det centrala innehållet i Lgr22: naturliga tal och positionssystemet i åk 1–3, och i åk 4–6 också tal i decimalform och negativa tal."
   - rubrik: "Veckan: ett fokus i tre material"
     plats: efter-tidsschema
-    text: Veckans fokus är detsamma i alla tre passen, och korten läses i alla tre. Materialet byts från tiobasen, där tio kuber är lika långa som en tiostav, till talbrickor och pengar, där tio är en överenskommelse. Lägg tiobasen bredvid när talbrickor och pengar införs.
+    text: "Veckans fokus är detsamma i alla tre passen, och ni använder samma kort. Det som byts är materialet. I tiobasen syns tio: tio kuber är lika långa som en tiostav. På talbrickor och pengar syns det inte, där är tio något vi har kommit överens om. Lägg därför tiobasen bredvid när ni börjar med talbrickor och pengar."
     kolumner:
       - Vecka och fokus
       - "Pass 1: tiobas"
@@ -84,7 +84,7 @@ tabeller:
       - - 2 · Siffrans plats och nollan
         - Samma siffror på olika platser, och en tom plats.
         - Bygg med brickor och lägg talet med sifferkort. En plats utan bricka får en nolla.
-        - Så få sedlar och mynt som möjligt, och talet i talsorter.
+        - Bygg med så få sedlar och mynt som möjligt och skriv talet i talsorter.
       - - 3 · Lägga till och växla upp
         - Lägg till och byt tio mot en av nästa större talsort.
         - Byt tio brickor mot en bricka av nästa större talsort.
@@ -95,46 +95,46 @@ tabeller:
         - "Handla: betala, växla när det inte räcker och skriv det som är kvar."
       - - 5 · Från material till skrift
         - Dela upp i talsorter och skriv varje steg.
-        - Räkna stegvis via närmaste jämna tal och skriv.
+        - Räkna stegvis via närmaste jämna tiotal eller hundratal och skriv.
         - Ta bort med växling och skriv bredvid.
-    not: Använd bara enkronor, tiokronor, hundralappar och tusenlappar. Femkronan är större än tiokronan och visar inget om talsorterna. I åk 4–5 är pass 3 i vecka 5 negativa tal på tallinjen och som skuld, se paketet.
+    not: Använd bara enkronor, tiokronor, hundralappar och tusenlappar. Femkronan är större än tiokronan och säger inget om talsorterna. I åk 4–5 handlar pass 3 i vecka 5 om negativa tal, på tallinjen och som skuld. Det står i paketet för åk 4–5.
 passrutin:
-  text: "Varje pass följer samma rutin i fem steg, i alla tre materialen: läraren gör först, sedan gör ni det tillsammans, sedan i par, sedan själv och till sist gemensamt igen. Det gör passen lätta att leda och trygga för eleverna."
+  text: "Varje pass följer samma rutin i fem steg, oavsett material: läraren gör först, sedan gör ni det tillsammans, sedan i par, sedan var och en för sig och till sist alla gemensamt igen. Det gör passen lätta att leda och trygga för eleverna."
   steg:
-    - text: Läraren bygger veckans fokus framför eleverna och säger allt som görs, och eleverna tittar.
+    - text: Läraren bygger ett tal som visar veckans fokus och säger allt hen gör. Eleverna tittar.
       fas: Läraren gör först
-    - text: Läraren och eleverna bygger samma tal, ett handgrepp i taget, och säger det tillsammans.
+    - text: Läraren och eleverna bygger samma tal tillsammans, ett handgrepp i taget, och säger vad de gör.
       fas: Gör tillsammans
     - text: Läraren läser ett kort och paren avgör vad som hände. Sedan läser paren korten för varandra, och läraren går runt.
       fas: I par
-    - text: Varje elev bygger ett eget kort och säger vad som görs.
+    - text: Varje elev bygger talet på sitt eget kort och säger vad hen gör.
       fas: Själv
     - text: Alla bygger det andra talet tillsammans och säger vad som hände och varför.
       fas: Gemensamt igen
-  efterPasset: Läraren skriver en kort notering om vem som växlade med händerna och sa det, och vad läraren behöver göra först igen nästa pass.
+  efterPasset: Läraren antecknar kort vem som växlade själv och kunde säga vad som hände, och vad läraren behöver visa igen nästa pass.
 tidsschema:
   rubrik: Ett pass på 30 minuter
-  text: Förbered dig genom att bygga veckans tal med dagens material och säga orden högt. Remsan visar hur de 30 minuterna fördelas och när gruppen arbetar gemensamt, i par och själv. Längst tid får paren.
+  text: Förbered dig genom att bygga veckans tal med dagens material och säga orden högt. Remsan visar hur de 30 minuterna fördelas och när gruppen arbetar gemensamt, i par och var för sig. Paren får längst tid.
   rader:
     - tid: Före passet
       fas: Förberedelse
-      vad: Ta fram dagens material, en matta per elev och en till dig, och veckans kort ur gruppens paket. Välj två tal som tvingar fram veckans fokus, ett att göra först och sedan tillsammans och ett till Gemensamt igen. Bygg dem och säg orden högt för dig själv.
+      vad: Ta fram dagens material, en matta per elev och en till dig, och veckans kort ur gruppens paket. Välj två tal som kräver veckans fokus, ett som du visar först och sedan bygger tillsammans med eleverna, och ett till Gemensamt igen. Bygg båda och säg orden högt för dig själv.
     - tid: 0–6 min
       fas: Läraren gör först
-      vad: Bygg veckans fokus långsamt framför eleverna och tänk högt. Säg vad du tar, var du lägger det, vad du lyfter och vad du pekar på. Eleverna tittar.
+      vad: Bygg det första talet långsamt framför eleverna och tänk högt. Säg vad du tar, var du lägger det, vad du lyfter och vad du pekar på. Eleverna tittar.
     - tid: 6–12 min
       fas: Gör tillsammans
-      vad: "Alla bygger talet du gjorde först, ett handgrepp i taget. Säg varje handgrepp, och eleverna gör och säger likadant. Fråga: ”Hur vet du att det är 36 och inte 63?” Kör sedan en kedja: sex till tio korta ändringar på samma tal, och alla säger talet efter varje."
+      vad: "Alla bygger talet du just visade, ett handgrepp i taget. Säg varje handgrepp, och eleverna gör och säger likadant. Fråga: ”Hur vet du att det är 36 och inte 63?” Gör sedan en kedja med sex till tio korta ändringar på samma tal. Efter varje ändring säger alla vilket tal det blev."
     - tid: 12–21 min
       fas: I par
-      vad: Läs ett kort, till exempel ”Bygg 36. Ta bort 12.” I paret bygger den ena och säger, och den andra kontrollerar. De kommer överens om vad som blev kvar och byter efter varje kort. Sedan läser paren korten för varandra. Gå runt och lyssna efter veckans typfel, det som står under Lyssna efter i rutan Till läraren.
+      vad: Läs ett kort, till exempel ”Bygg 36. Ta bort 12.” I paret bygger den ena och berättar vad hen gör, och den andra kontrollerar. De kommer överens om vad som blev kvar och byter roller efter varje kort. Sedan läser paren korten för varandra. Gå runt och lyssna efter veckans vanliga fel, som står under Lyssna efter i rutan Till läraren.
     - tid: 21–26 min
       fas: Själv
-      vad: Varje elev får två kort. Eleven bygger det första medan du går runt, och det andra medan du lyssnar, en elev i taget. Gör handgreppet igen tillsammans när orden saknas.
+      vad: Varje elev får två kort. Eleverna bygger det första medan du går runt. När de bygger det andra lyssnar du på en elev i taget. Saknar någon orden gör ni handgreppet tillsammans igen.
     - tid: 26–30 min
       fas: Gemensamt igen
       vad: "Bygg det andra talet med hela gruppen. Eleverna visar och säger vad som hände: ”Jag hade tretton ental. Jag bytte tio ental mot ett tiotal.”"
-  efter: "Blir ett par klart tidigt: spela Närmast målet. Slå en tärning och välj varje gång vilken talsort slaget blir. Bygg summan efter varje slag, och alla slag ska användas. Närmast målet utan att gå över vinner. Målet och antalet slag står i gruppens paket, i åk 2 till exempel 100 med sju slag."
+  efter: "Blir ett par klart tidigt kan de spela Närmast målet. De slår en tärning och bestämmer varje gång vilken talsort slaget ska räknas som. De bygger summan efter varje slag, och alla slag ska användas. Den som kommer närmast målet utan att gå över vinner. Målet och antalet slag står i gruppens paket, i åk 2 till exempel 100 på sju slag."
 steg:
   rubrik: Vad du gör och säger i varje fas
   rader:
@@ -148,7 +148,7 @@ steg:
         - Jag tar bort 12, en tiostav och två ental. Kvar är två tiotal och fyra ental, 24.
     - namn: Gör tillsammans
       fraga: Kan vi göra det tillsammans?
-      gor: Bygg talet du gjorde först en gång till, nu samtidigt som eleverna och ett handgrepp i taget. Säg vad ni gör, och vänta tills alla har gjort det innan nästa handgrepp.
+      gor: Bygg talet du just visade en gång till, nu samtidigt som eleverna och ett handgrepp i taget. Säg vad ni gör, och vänta tills alla är klara innan nästa handgrepp.
       fraser:
         - Lyft tiostavarna med mig. Hur många tiotal?
         - Peka på entalen med mig. Hur många är de?
@@ -162,7 +162,7 @@ steg:
         - Säg vad du gör medan du gör det.
     - namn: Själv
       fraga: Kan du göra det själv?
-      gor: Ge varje elev ett eget kort. Eleven bygger och säger vad som görs, och vecka 5 skriver eleven samtidigt. Saknas orden, gör handgreppet igen tillsammans.
+      gor: Ge varje elev ett eget kort. Eleven bygger och säger vad hen gör, och vecka 5 skriver eleven samtidigt. Saknar eleven orden gör ni handgreppet tillsammans igen.
       fraser:
         - Bygg ditt kort och berätta vad du gör.
         - Varför fick du växla?
@@ -176,15 +176,15 @@ steg:
         - I dag såg vi att tio ental blir ett tiotal.
 arbetsform:
   rubrik: "Arbetsform: gemensamt, i par, själv, gemensamt igen"
-  text: Passet går från läraren till eleven och tillbaka. Först gemensamt, där läraren gör och sedan alla gör med. Sedan i par, sedan själv, och sist gemensamt igen, där gruppen sätter ord på det den har sett. Med tre eller fem elever blir en grupp en trio, där en läser och två bygger. Med två elever är gruppen ett par. Med två till sex elever hinner du höra varje elev säga en växling i varje pass.
+  text: "Passet går från läraren till eleven och tillbaka. Först arbetar alla gemensamt: läraren visar och sedan gör alla likadant. Sedan arbetar eleverna i par, sedan var för sig, och sist gemensamt igen, när gruppen sätter ord på det den har sett. Med tre eller fem elever blir det en trio, där en läser och två bygger. Med två elever är hela gruppen ett par. Med två till sex elever hinner du höra varje elev beskriva en växling i varje pass."
   delar:
     - rubrik: 1. Gemensamt
-      text: läraren gör, alla gör med
+      text: läraren visar, alla gör likadant
       faser:
         - Läraren gör först
         - Gör tillsammans
     - rubrik: 2. I par
-      text: paren bygger och leder
+      text: paren läser korten och bygger
       faser:
         - I par
     - rubrik: 3. Själv
@@ -192,42 +192,42 @@ arbetsform:
       faser:
         - Själv
     - rubrik: 4. Gemensamt igen
-      text: alla visar och säger
+      text: alla visar och berättar
       faser:
         - Gemensamt igen
 exempel:
   valt:
     rubrik: Gruppen
-    text: "fyra elever i åk 2, vecka 3, pass 1: lägga till och växla upp, med tiobas."
+    text: "fyra elever i åk 2, vecka 3, pass 1: lägga till och växla upp, med tiobas."
   text:
-    - "Läraren bygger 38 framför gruppen och säger vad som görs: ”Jag lägger tre tiostavar på tiotalens plats och åtta ental här.” Läraren lyfter en tiostav: ”Den här är tio ental som sitter ihop.” Sedan lägger läraren till fem ental, ett i taget: ”Nio, tio. Tio ental lägger jag bredvid en tiostav. Lika långa. Jag byter och lägger tiostaven på tiotalens plats.” Läraren lägger de tre sista entalen och pekar: ”Fyra tiotal och tre ental. 43.” Eleverna tittar."
-    - "”Nu gör vi det tillsammans.” Alla bygger 38 och lyfter en tiostav: ”Tio ental”, säger Wilma. Gruppen lägger till fem ental, ett i taget, räknar högt och byter. ”Fyra tiotal och tre ental. 43.” Sedan kör läraren en kedja på samma tal: ”Lägg till åtta ental. Ta bort tre ental. Lägg till ett tiotal.” Efter varje ändring säger alla talet: 51, 48, 58."
+    - "Läraren bygger 38 framför gruppen och berättar vad hen gör: ”Jag lägger tre tiostavar på tiotalens plats och åtta ental här.” Läraren lyfter en tiostav: ”Den här är tio ental som sitter ihop.” Sedan lägger läraren till fem ental, ett i taget: ”Nio, tio. Jag lägger de tio entalen bredvid en tiostav. Lika långa. Jag byter och lägger tiostaven på tiotalens plats.” Läraren lägger de tre sista entalen och pekar: ”Fyra tiotal och tre ental. 43.” Eleverna tittar."
+    - "”Nu gör vi det tillsammans.” Alla bygger 38 och lyfter en tiostav: ”Tio ental”, säger Wilma. Gruppen lägger till fem ental, ett i taget, räknar högt och byter. ”Fyra tiotal och tre ental. 43.” Sedan gör läraren en kedja av ändringar på samma tal: ”Lägg till åtta ental. Ta bort tre ental. Lägg till ett tiotal.” Efter varje ändring säger alla talet: 51, 48, 58."
     - "Läraren läser ett kort: ”Bygg 47. Lägg till 6.” Ibrahim och Oskar lägger till sex ental och skriver 413. ”Får det ligga tretton ental på entalens plats?” frågar läraren. Ibrahim byter tio ental mot en tiostav: ”Fem tiotal och tre ental. 53.” Sedan läser Alva ”Bygg 29. Lägg till 1.” för Wilma, som byter och säger: ”Tre tiotal. Nollan visar att entalen är tomma.”"
     - "Var och en får två kort. Alla bygger sitt första kort medan läraren går runt, och sedan lyssnar läraren på en i taget. Ibrahim bygger 68, lägger till 14 och säger samtidigt: ”Jag hade tolv ental. Jag bytte tio mot en tiostav. Åtta tiotal och två ental. 82.”"
-    - "Till sist bygger alla 56 + 7. ”Vad hände när entalen blev tio?” ”Vi bytte dem mot en tiostav”, säger Alva. Läraren säger: ”I dag såg vi att tio ental blir ett tiotal.” Efteråt noterar läraren att Ibrahim och Oskar skrev fyra tiotal och tretton ental som 413 men växlade efter frågan. Nästa pass gör läraren 47 + 6 först."
+    - "Till sist bygger alla 56 + 7. ”Vad hände när entalen blev tio?” ”Vi bytte dem mot en tiostav”, säger Alva. Läraren säger: ”I dag såg vi att tio ental blir ett tiotal.” Efteråt noterar läraren att Ibrahim och Oskar skrev fyra tiotal och tretton ental som 413 men växlade efter frågan. Nästa pass börjar läraren med att själv visa 47 + 6."
 fastnar:
   rubrik: När eleven fastnar
-  text: "Den som brukar fastna gör det oftast vid växlingen. Eleven flyttar stavar utan att säga vad som händer, eller bygger på fel plats. Gör då först igen: gör växlingen långsamt och säg den, och låt eleven göra likadant."
+  text: "Den som brukar fastna gör det oftast vid växlingen. Eleven flyttar stavar utan att säga vad som händer, eller bygger på fel plats. Visa då igen: gör växlingen långsamt, säg vad du gör och låt eleven göra likadant."
   fragaForst:
     - Vad har du byggt? Säg talet.
     - Hur många ental har du nu?
     - Räcker entalen?
   trappa:
-    - "Be eleven peka på varje talsort och säga den: tre tiotal, sex ental."
+    - "Be eleven peka på varje talsort och säga hur många det är: tre tiotal, sex ental."
     - Be eleven lägga varje sak på sin plats på mattan. Allt har en plats.
-    - "Räkna entalen högt tillsammans och stanna vid tio. Lägg dem bredvid en tiostav: lika långa, byt."
+    - "Räkna entalen högt tillsammans och stanna vid tio. Lägg dem bredvid en tiostav: de är lika långa, så ni kan byta."
     - "Räcker det inte: lyft ett tiotal, byt det mot tio ental och säg: ett tiotal blir tio ental."
-    - Gör växlingen först och säg den. Gör den sedan tillsammans med eleven, och låt eleven säga den.
-  motto: Bygg, se, lyft, peka och säg vad du gör.
+    - Gör växlingen själv först och säg vad du gör. Gör den sedan tillsammans med eleven, och låt eleven säga det.
+  motto: Bygg, visa, lyft, peka och sätt ord på det du gör.
 roll:
   rubrik: "Lärarens roll: göra först och sätta ord på allt"
-  text: "Du gör först, framför eleverna, och tänker högt: vad du tar, var du lägger det, vad du lyfter och vad du pekar på. Sedan gör ni det tillsammans, och sedan lämnar du över, först till paren och sist till varje elev. Det är eleven som byter tio ental mot en tiostav och säger det. Växlar du åt eleven blir mattan rätt, men eleven har inte gjort växlingen."
+  text: "Du gör först, framför eleverna, och tänker högt: vad du tar, var du lägger det, vad du lyfter och vad du pekar på. Sedan gör ni det tillsammans, och sedan lämnar du över, först till paren och sist till varje elev. Det är eleven som byter tio ental mot en tiostav och säger vad som händer. Växlar du åt eleven blir mattan rätt, men eleven har inte gjort växlingen."
   gor:
     - "Bygg långsamt och säg varje handgrepp: jag lägger, jag lyfter, jag pekar."
     - Fråga ”Hur vet du?” efter varje tal.
     - Säg talsortsorden, som sju tiotal, i stället för bara siffran.
     - Säg växla. Ordet låna gör växlingen till ett trick.
-    - Välj tal ur gruppens paket som tvingar fram veckans fokus.
+    - Välj tal ur gruppens paket som kräver veckans fokus.
     - Lägg tiobasen bredvid när talbrickor och pengar införs.
   undvik:
     - Att säga ”Bygg” utan att först visa hur.
@@ -238,29 +238,29 @@ roll:
 urval:
   rubrik: Var hittar du materialet och talen?
   text:
-    - Tiobas finns i de flesta skolors matematikmaterial. Talbrickor är runda lappar i kartong med 1, 10, 100 eller 1000, gärna en färg per talsort. Lekpengar finns att köpa eller kopiera. Använd bara enkronor, tiokronor, hundralappar och tusenlappar, så att varje valör är en talsort. Talsortsmattan är lathundens tredje sida, Mallen, att skriva ut i A3 för talbrickor och pengar. Med tiobas får varje talsort ett eget A4 i samma ordning, så att en hundraplatta och tio tiostavar i rad ryms.
-    - Tiobaspaketet hem är i papper. Rita tiostavar och hundraplattor på rutat papper med centimeterrutor och klipp ut dem. Vad som ska i påsen står i gruppens paket under Material per årskurs, liksom kartläggningen, veckornas kort och läxorna.
-  kravText: "Ett tal att göra först eller skriva på ett eget kort uppfyller tre krav:"
+    - Tiobas finns i de flesta skolors matematikmaterial. Talbrickor är runda lappar i kartong med 1, 10, 100 eller 1000, gärna en färg per talsort. Lekpengar finns att köpa eller kopiera. Använd bara enkronor, tiokronor, hundralappar och tusenlappar, så att varje valör är en talsort. Talsortsmattan finns på lathundens sida 3, Mallen. Skriv ut den i A3 när ni bygger med talbrickor och pengar. Med tiobas får varje talsort ett eget A4-ark i samma ordning, så att en hundraplatta eller tio tiostavar i rad får plats.
+    - Tiobaspaketet som eleven tar hem är av papper. Rita tiostavar och hundraplattor på papper med centimeterrutor och klipp ut dem. Vad påsen ska innehålla står i gruppens paket under Material per årskurs, tillsammans med kartläggningen, veckornas kort och läxorna.
+  kravText: "Ett tal som du visar först eller skriver på ett eget kort ska uppfylla tre krav:"
   krav:
     - rubrik: Inom talområdet
-      text: Gruppens talområde och inget större
-    - rubrik: Tvingar fram fokus
+      text: Gruppens talområde, inget större
+    - rubrik: Kräver veckans fokus
       text: En växling när veckan handlar om växling
     - rubrik: Går att bygga
       text: Det finns material för varje talsort i talet
 hem:
   rubrik: Hem och skola
   text:
-    - Eleven får ett tiobaspaket och en talsortsmatta att ta hem, och en läxa i veckan, Läxa 1–5 i gruppens paket under Material per årskurs. Läxan delas ut efter veckans första pass. Den är samma sak som i skolan en gång till. En vårdnadshavare läser veckans kort, och eleven bygger och säger vad som görs. Det ger repetition, en annan röst och ett annat sammanhang. Tio minuter några gånger under veckan räcker. Fråga i början av veckans första pass hur läxan gick, och låt eleven visa ett kort.
-    - "Berätta för vårdnadshavarna att barnet får intensivt stöd och extra träning under fem veckor, och visa hur ett kort går till: läs kortet, låt barnet bygga och säga vad som görs, och gör det först själv om det blir svårt. Går det inte hemma, gör eleven läxan i skolan eller på fritids med en annan vuxen."
+    - Eleven får ett tiobaspaket och en talsortsmatta att ha hemma, och en läxa i veckan. Läxorna, Läxa 1–5, finns i gruppens paket under Material per årskurs. Läxan delas ut efter veckans första pass och innehåller samma sorts uppgifter som i skolan. En vårdnadshavare läser veckans kort, och eleven bygger och berättar vad hen gör. Det blir en repetition, och eleven får höra samma sak med andra ord och i ett annat sammanhang. Tio minuter några gånger under veckan räcker. Fråga i början av veckans första pass hur läxan gick, och låt eleven visa ett kort.
+    - "Berätta för vårdnadshavarna att barnet får intensivt stöd och extra träning under fem veckor, och visa hur man gör med ett kort: läs kortet högt, låt barnet bygga och berätta vad det gör, och visa själv först om det blir svårt. Går det inte att göra läxan hemma kan eleven göra den i skolan eller på fritids tillsammans med en annan vuxen."
 progression:
   rubrik: "Kursplan: fem veckor, ett fokus i veckan"
   rader:
     - vecka: "1"
-      fokus: "Bygga och säga tal: tio av en talsort är en av nästa. Kartläggningen före första passet."
+      fokus: "Bygga och säga tal: tio av en talsort är en av nästa större. Kartläggningen görs före första passet."
       roll: Läraren gör först och säger varje talsort.
     - vecka: "2"
-      fokus: "Siffrans plats och nollan: samma siffror på olika platser, och en tom plats som nollan håller."
+      fokus: "Siffrans plats och nollan: samma siffror på olika platser, och en tom plats där nollan håller platsen."
       roll: Läraren gör först, och paren börjar läsa korten för varandra.
     - vecka: "3"
       fokus: "Lägga till och växla upp: tio i en talsort blir en i nästa större."
@@ -269,85 +269,85 @@ progression:
       fokus: "Ta bort och växla ned: en från nästa större talsort blir tio."
       roll: Läraren gör först och frågar mer.
     - vecka: "5"
-      fokus: "Från material till skrift: bygg, anteckna, tänk dig materialet. I åk 4–5 är pass 3 negativa tal. Kartläggningen efter sista passet."
-      roll: Eleven skriver det som byggs, och läraren kontrollerar med materialet.
+      fokus: "Från material till skrift: bygg, anteckna och tänk dig till sist materialet. I åk 4–5 handlar pass 3 om negativa tal. Kartläggningen görs efter sista passet."
+      roll: Eleven skriver det hen bygger, och läraren kontrollerar mot materialet.
 uppfoljning:
   rader:
     - nar: Före insatsen
-      vad: "Kartläggningen i gruppens paket, utanför passen, en elev i taget, cirka tio minuter. Läs uppgiften och ge ingen hjälp. Eleven bygger, säger och skriver. Notera på en kopia av listan, för varje uppgift: B för rätt byggt, V för växlat med händerna och S för sagt med talsortsord."
+      vad: "Gör kartläggningen i gruppens paket utanför passen, med en elev i taget, cirka tio minuter per elev. Läs uppgiften högt och hjälp inte till. Eleven bygger, berättar och skriver. Anteckna för varje uppgift på en kopia av listan: B om eleven byggde rätt, V om eleven växlade själv i materialet och S om eleven använde talsortsord."
     - nar: Varje pass
-      vad: En kort notering om vem som växlade med händerna och sa det.
+      vad: Anteckna kort vem som växlade själv och kunde säga vad som hände.
     - nar: Efter fem veckor
       vad: Samma kartläggning med samma uppgifter. Jämför uppgift för uppgift, och berätta för klassläraren vilket talområde eleven bygger säkert i och vilka växlingar som behöver mer träning.
 mal:
   rubrik: "Mål: det eleven kan efter fem veckor"
-  text: "Kryssa det eleven kan i kartläggningen före och efter:"
+  text: "Kryssa för det eleven kan, före och efter perioden:"
   punkter:
     - Bygga ett tal i sitt talområde och säga hur många av varje talsort
     - Läsa, skriva och jämföra tal med nolla och med samma siffror på olika platser
     - Lägga till och växla upp, och säga vad som händer
     - Ta bort och växla ned, och säga vad som händer
     - Räkna talsort för talsort och skriva det som skriftlig huvudräkning
-    - "Åk 4–5: bygga decimaltal och visa negativa tal på tallinjen"
+    - "Åk 4–5: bygga decimaltal och visa negativa tal på tallinjen"
 snabbmall:
   fore:
     - "Vecka, fokus och pass: tiobas, talbrickor eller pengar"
-    - Det jag gör först och säger
+    - Det jag visar först och vad jag säger
     - Korten paren och eleverna får
   efter:
-    - Vem växlade med händerna och sa det?
+    - Vem växlade själv och kunde säga vad som hände?
     - Vem byggde på fel plats eller läste fel?
-    - Vad gör jag först igen nästa pass?
+    - Vad behöver jag visa igen nästa pass?
 checklista:
   punkter:
     - "Tagit fram dagens material: tiobas, talbrickor eller pengar."
     - Lagt fram en talsortsmatta per elev och bestämt paren.
     - Kopierat veckans kort ur gruppens paket.
-    - Byggt det jag gör först, och sagt orden högt.
-    - Valt talet vi bygger gemensamt igen.
+    - Byggt det jag ska visa först och sagt orden högt.
+    - Valt talet till Gemensamt igen.
 grund:
-  text: "Metoden bygger på att eleven ser tiotalet som en enhet och som tio ental på samma gång, och på att mängd, talord och siffra kopplas ihop varje gång (Fuson m.fl., 1997). När elever bygger och växlar med tiobas och skriver varje steg samtidigt, förstår de flersiffriga tal och räknar med växling redan i åk 1 och 2 (Fuson och Briars, 1990). Tidig förståelse för positionssystemet förutsäger senare räkning med växling (Moeller m.fl., 2011). För elever i matematiksvårigheter rekommenderas systematisk undervisning där läraren först visar och tänker högt, ett tydligt matematiskt språk och konkret material som kopplas till bild och symbol (Fuchs m.fl., 2021). Vägen från material via anteckningar till skrift följer McIntosh (2008), och samtal om representationer i talkör, i par och i helgrupp har gett effekt i svensk förskoleklass (Sterner, Wolff och Helenius, 2020)."
+  text: "Metoden bygger på att eleven ser tiotalet som en enhet och som tio ental på samma gång, och på att mängd, talord och siffra kopplas ihop varje gång (Fuson m.fl., 1997). När elever bygger och växlar med tiobas och skriver varje steg samtidigt, förstår de flersiffriga tal och räknar med växling redan i åk 1 och 2 (Fuson och Briars, 1990). Den som tidigt förstår positionssystemet klarar senare räkning med växling bättre (Moeller m.fl., 2011). För elever i matematiksvårigheter rekommenderas systematisk undervisning där läraren först visar och tänker högt, använder ett tydligt matematiskt språk och kopplar konkret material till bild och symbol (Fuchs m.fl., 2021). Vägen från material via anteckningar till skrift följer McIntosh (2008), och samtal om representationer i talkör, i par och i helgrupp har gett effekt i svensk förskoleklass (Sterner, Wolff och Helenius, 2020)."
   kallor: Bygger på Fuson och Briars (1990), Fuson m.fl. (1997), Moeller m.fl. (2011), Fuchs m.fl. (2021), McIntosh (2008) och Sterner, Wolff och Helenius (2020), kursplanen i matematik i Lgr22 (Skolverket, 2022) och kompendiet Särskilt stöd, Norrtälje, avsnittet Matematik 1.
 ramar:
   rubrik: Material per årskurs
   text:
-    - Materialet är ordnat efter årskurs, med ett paket för varje talområde. Ta paketet för gruppens årskurs. Först står en ruta Till läraren med vad du gör först och vad du lyssnar efter varje vecka, sedan kartläggningen och veckornas kort, och sist Läxa 1–5 med en ruta Till vårdnadshavaren.
-    - "Rutan Till läraren visar vad du gör först med tiobas. Med brickor och pengar gör du samma sak och säger talsorten: en tiokrona är ett tiotal."
-    - Korten är elevmaterial. Kopiera veckans lista en gång per par, klipp isär korten och lägg dem i en hög per par. Den som läser ett kort läser det högt, och kamraten bygger. Kan en elev inte läsa kortet, läser kamraten eller läraren det. Har kortet två tal, bygger eleven det första på mattan och det andra ovanför, talsort över talsort, och skjuter ned det när kortet säger slå ihop. Vid subtraktion byggs bara det första talet.
-    - Talen är valda så att de tvingar fram veckans fokus i årskursens talområde. Skriv egna kort efter de tre kraven under Var hittar du materialet och talen?
+    - Materialet är ordnat efter årskurs, med ett paket för varje talområde. Använd paketet för gruppens årskurs. Först kommer en ruta Till läraren som för varje vecka beskriver vad du visar först och vad du ska lyssna efter. Sedan kommer kartläggningen och veckornas kort, och sist Läxa 1–5 med en ruta Till vårdnadshavaren.
+    - "Rutan Till läraren beskriver hur du visar med tiobas. Med brickor och pengar gör du samma sak och säger talsorten: en tiokrona är ett tiotal."
+    - Korten är elevmaterial. Kopiera veckans lista, en per par, klipp isär korten och lägg dem i en hög hos varje par. Den som läser ett kort läser det högt, och kamraten bygger. Om en elev inte kan läsa kortet läser kamraten eller läraren det. Har kortet två tal bygger eleven det första på mattan och det andra ovanför, talsort över talsort, och skjuter ned det när kortet säger ”slå ihop”. Vid subtraktion bygger eleven bara det första talet.
+    - Talen är valda så att de kräver veckans fokus inom årskursens talområde. Egna kort skriver du efter de tre kraven under Var hittar du materialet och talen?
   ramar:
-    # ---------------------------------------------------------------- Åk 1
-    - rubrik: "Åk 1: talen 0–30"
+    # ---------------------------------------------------------------- Åk 1
+    - rubrik: "Åk 1: talen 0–30"
       text:
         - "Tiotal och ental med talen till 30. Elva till nitton är ett tiotal och några ental, fast namnen inte visar det. Mattan har bara Tiotal och Ental: vik bort de andra rutorna."
       delar:
         - rubrik: Till läraren
           falt:
             - rubrik: Material
-              text: "Tiostavar och ental, talbrickor med 1 och 10, och enkronor och tiokronor. Klar tidigt: Närmast målet 30, med tre slag som blir tiotal eller ental. Ett slag på 4, 5 eller 6 blir ental. Per elev: 20 brickor och 20 mynt av varje talsort. Läser ingen i paret än, läser du korten under hela I par."
+              text: "Tiostavar och ental, talbrickor med 1 och 10, och enkronor och tiokronor. Klar tidigt: Närmast målet 30 på tre slag, där varje slag räknas som tiotal eller ental. Ett slag på 4, 5 eller 6 blir ental. Per elev: 20 brickor och 20 mynt av varje talsort. Om ingen i paret kan läsa än läser du korten under hela I par."
             - rubrik: Vecka 1 · Bygga och säga tal
-              text: "Gör först och säg: ”Jag bygger 25. Jag tar två tiostavar och lägger dem på tiotalens plats. Jag lyfter en: tio ental som sitter ihop. Jag lägger fem ental här och pekar på dem: ett, två, tre, fyra, fem. Två tiotal och fem ental. 25.”\nLyssna efter eleven som räknar tiostaven som en, så att 14 blir fem."
+              text: "Visa först och säg: ”Jag bygger 25. Jag tar två tiostavar och lägger dem på tiotalens plats. Jag lyfter en: tio ental som sitter ihop. Jag lägger fem ental här och pekar på dem: ett, två, tre, fyra, fem. Två tiotal och fem ental. 25.”\nLyssna efter eleven som räknar tiostaven som en, så att 14 blir fem."
             - rubrik: Vecka 2 · Siffrans plats och nollan
-              text: "Gör först och säg: ”Jag bygger 12 på mattan och 21 ovanför, och skriver talen. Jag pekar på tvåan i 12 och på de två entalen: två ental. Jag pekar på tvåan i 21 och på de två tiotalen: två tiotal. 21 är störst.” Bygg 20 och peka på entalens plats: ”Tom. Nollan håller platsen.”\nLyssna efter eleven som skriver tjugotre som 203."
+              text: "Visa först och säg: ”Jag bygger 12 på mattan och 21 ovanför, och skriver talen. Jag pekar på tvåan i 12 och på de två entalen: två ental. Jag pekar på tvåan i 21 och på de två tiotalen: två tiotal. 21 är störst.” Bygg 20 och peka på entalens plats: ”Tom. Nollan håller platsen.”\nLyssna efter eleven som skriver tjugotre som 203."
             - rubrik: Vecka 3 · Lägga till och växla upp
-              text: "Gör först och säg: ”Jag bygger 8 och lägger till 5, ett i taget. Nio, tio. Tio ental lägger jag bredvid en tiostav. Lika långa. Jag byter och lägger tiostaven på tiotalens plats.” Lägg de tre som är kvar och peka: ”Ett tiotal och tre ental. 13.”\nLyssna efter eleven som läser ett tiotal och elva ental som 111."
+              text: "Visa först och säg: ”Jag bygger 8 och lägger till 5, ett i taget. Nio, tio. Jag lägger de tio entalen bredvid en tiostav. Lika långa. Jag byter och lägger tiostaven på tiotalens plats.” Lägg de tre som är kvar och peka: ”Ett tiotal och tre ental. 13.”\nLyssna efter eleven som läser ett tiotal och elva ental som 111."
             - rubrik: Vecka 4 · Ta bort och växla ned
-              text: "Gör först och säg: ”Jag bygger 12 och ska ta bort 5. Jag pekar på entalen: två. Det räcker inte. Jag lyfter tiostaven och byter den mot tio ental. Tolv ental. Jag tar bort fem. Sju.”\nLyssna efter eleven som tar minsta siffran från största, så att 21 − 4 blir 23."
+              text: "Visa först och säg: ”Jag bygger 12 och ska ta bort 5. Jag pekar på entalen: två. Det räcker inte. Jag lyfter tiostaven och byter den mot tio ental. Tolv ental. Jag tar bort fem. Sju.”\nLyssna efter eleven som drar den minsta siffran från den största, så att 21 − 4 blir 23."
         - rubrik: "Till läraren: vecka 5 och kartläggningen"
           falt:
             - rubrik: Vecka 5 · Från material till skrift
-              text: "Gör först och säg, och skriv samtidigt.\nPass 1: ”Jag bygger 12 och 13. Tiotalen: två. Entalen: fem. 25.” Skriv 10 + 10 = 20, 2 + 3 = 5 och 20 + 5 = 25.\nPass 2: ”Jag bygger 18 och lägger till 7. Åtta ental och två till blir tio, och dem växlar jag mot ett tiotal. Fem är kvar. 25.” Skriv 18 + 2 + 5 = 25.\nPass 3: ”Jag bygger 22 och ska ta bort 8. Två ental räcker inte. Jag växlar ett tiotal mot tio ental och tar bort åtta. Ett tiotal och fyra ental. 14.” Skriv 22 = 10 + 12, 12 − 8 = 4 och 10 + 4 = 14.\nPeka på varje steg i materialet.\nLyssna efter eleven som skriver 18 + 7 = 115."
+              text: "Visa först och säg, och skriv samtidigt.\nPass 1: ”Jag bygger 12 och 13. Tiotalen: två. Entalen: fem. 25.” Skriv 10 + 10 = 20, 2 + 3 = 5 och 20 + 5 = 25.\nPass 2: ”Jag bygger 18 och lägger till 7. Åtta ental och två till blir tio, och dem växlar jag mot ett tiotal. Fem är kvar. 25.” Skriv 18 + 2 + 5 = 25.\nPass 3: ”Jag bygger 22 och ska ta bort 8. Två ental räcker inte. Jag växlar ett tiotal mot tio ental och tar bort åtta. Ett tiotal och fyra ental. 14.” Skriv 22 = 10 + 12, 12 − 8 = 4 och 10 + 4 = 14.\nPeka på varje steg i materialet.\nLyssna efter eleven som skriver 18 + 7 = 115."
             - rubrik: Kartläggning
               text: Före första passet och efter sista, en elev i taget, med uppgifterna i listan Kartläggning. Uppgift 1–5 följer veckorna.
       listor:
-        - rubrik: Kartläggning · Åk 1 · Läs uppgiften, eleven bygger och svarar
+        - rubrik: Kartläggning · Åk 1 · Läs uppgiften, eleven bygger och svarar
           rader:
             - - 1. Bygg 24. Hur många tiotal och ental?
             - - 2. Bygg 19 och 21. Vilket är störst?
             - - 3. Bygg 18. Lägg till 5.
             - - 4. Bygg 26. Ta bort 9.
             - - 5. Bygg 15 och 9. Skriv hur du räknar.
-        - rubrik: Vecka 1 · Åk 1 · Läs kortet, kamraten bygger
+        - rubrik: Vecka 1 · Åk 1 · Läs kortet, kamraten bygger
           rader:
             - - Bygg 14. Hur många tiotal och ental?
             - - Bygg 21. Peka på entalen.
@@ -355,7 +355,7 @@ ramar:
             - - Bygg 17. Ta bort 5.
             - - Bygg 26. Ta bort ett tiotal.
             - - Bygg 9. Lägg till 1. Byt tio ental mot ett tiotal.
-        - rubrik: Vecka 2 · Åk 1 · Läs kortet, kamraten bygger
+        - rubrik: Vecka 2 · Åk 1 · Läs kortet, kamraten bygger
           rader:
             - - Bygg 12 och 21. Vilket är störst?
             - - Bygg 20. Vilken plats är tom?
@@ -363,7 +363,7 @@ ramar:
             - - Bygg ett tiotal och nio ental. Vilket tal?
             - - Bygg ett tiotal. Skriv talet. Vad visar nollan?
             - - Bygg 25 med bara ett tiotal. Hur många ental?
-        - rubrik: Vecka 3 · Åk 1 · Läs kortet, kamraten bygger
+        - rubrik: Vecka 3 · Åk 1 · Läs kortet, kamraten bygger
           rader:
             - - Bygg 8. Lägg till 5.
             - - Bygg 17. Lägg till 4.
@@ -371,7 +371,7 @@ ramar:
             - - Bygg 19. Lägg till 1.
             - - Bygg 26. Lägg till 4.
             - - Bygg 15. Lägg till 7.
-        - rubrik: Vecka 4 · Åk 1 · Läs kortet, kamraten bygger
+        - rubrik: Vecka 4 · Åk 1 · Läs kortet, kamraten bygger
           rader:
             - - Bygg 12. Ta bort 5.
             - - Bygg 20. Ta bort 1.
@@ -379,7 +379,7 @@ ramar:
             - - Bygg 30. Ta bort 4.
             - - Bygg 15. Ta bort 8.
             - - Bygg 21. Ta bort 12.
-        - rubrik: Vecka 5 · Åk 1 · Läs kortet, kamraten bygger och skriver
+        - rubrik: Vecka 5 · Åk 1 · Läs kortet, kamraten bygger och skriver
           rader:
             - - Bygg 14 och 5. Slå ihop. Skriv 14 + 5.
             - - Bygg 12 och 13. Slå ihop tiotalen och entalen. Skriv.
@@ -387,83 +387,83 @@ ramar:
             - - Bygg 22. Ta bort 8. Skriv 22 − 8.
             - - Bygg 16 och 14. Slå ihop och skriv varje steg.
             - - Skriv först 17 + 8 utan att bygga. Bygg sedan och kontrollera.
-    - rubrik: "Åk 1: Läxa 1–5"
+    - rubrik: "Åk 1: Läxa 1–5"
       text:
-        - "Samma sak som i skolan, en gång till hemma, med barnets tiobaspaket. Paketet är i papper: tre tiostavar, 15 ental och en matta med Tiotal och Ental. Skicka hem rutan Till vårdnadshavaren med Läxa 1, och sedan veckans läxa efter veckans första pass. Klipp isär listorna, så att bara veckans läxa går hem."
+        - "Samma uppgifter som i skolan, en gång till hemma, med barnets eget tiobaspaket. Paketet är av papper: tre tiostavar, 15 ental och en matta med Tiotal och Ental. Skicka hem rutan Till vårdnadshavaren med Läxa 1, och sedan veckans läxa efter veckans första pass. Klipp isär listorna, så att bara veckans läxa går hem."
       delar:
         - rubrik: Till vårdnadshavaren
           falt:
             - rubrik: Varför
-              text: Ditt barn får intensivt stöd och extra träning i matematik under fem veckor. Hemma gör ni samma sak som i skolan en gång till, med en annan röst.
+              text: Ditt barn får intensivt stöd och extra träning i matematik under fem veckor. Hemma övar ni på samma sak som i skolan, och det hjälper barnet att höra det en gång till, från någon annan.
             - rubrik: Så gör ni
-              text: Läs ett kort högt. Barnet bygger med tiobaspaketet på mattan och säger vad som görs. Har kortet två tal, bygger barnet det andra ovanför mattan. När kortet säger Ta bort bygger barnet bara det första talet. Tio minuter några gånger i veckan räcker.
+              text: Läs ett kort högt. Barnet bygger med tiobaspaketet på mattan och berättar vad det gör. Har kortet två tal bygger barnet det andra ovanför mattan. När kortet säger ”Ta bort” bygger barnet bara det första talet. Tio minuter några gånger i veckan räcker.
             - rubrik: Säg så här
               text: "Läxa 1: Hur många tiotal? Hur många ental? Peka.\nLäxa 2: Vilken plats är tom? Vad visar nollan?\nLäxa 3: Blev det tio ental? Byt dem mot en tiostav.\nLäxa 4: Räcker entalen? Byt en tiostav mot tio ental.\nLäxa 5: Visa mig i materialet det du skrev, som 13 + 6: 3 + 6 = 9 och 10 + 9 = 19."
             - rubrik: Om det blir svårt
-              text: Gör det först själv och säg vad du gör, och låt sedan barnet göra likadant. Sluta medan det är roligt, och skriv en rad till läraren.
+              text: Visa först själv och säg vad du gör, och låt sedan barnet göra likadant. Sluta medan det fortfarande är roligt, och skriv gärna en rad till läraren.
       listor:
-        - rubrik: Läxa 1 · Åk 1 · Bygga och säga tal
+        - rubrik: Läxa 1 · Åk 1 · Bygga och säga tal
           rader:
             - - Bygg 16. Hur många tiotal och ental?
             - - Bygg 23. Peka på entalen.
             - - Bygg 28. Ta bort 8.
             - - Bygg 19. Lägg till 1. Byt tio ental mot ett tiotal.
-        - rubrik: Läxa 2 · Åk 1 · Siffrans plats och nollan
+        - rubrik: Läxa 2 · Åk 1 · Siffrans plats och nollan
           rader:
             - - Bygg 2 och 20. Vilket är störst?
             - - Bygg 20. Vilken plats är tom?
             - - Bygg ett tiotal och sju ental. Vilket tal?
             - - Bygg tre tiotal. Skriv talet.
-        - rubrik: Läxa 3 · Åk 1 · Lägga till och växla upp
+        - rubrik: Läxa 3 · Åk 1 · Lägga till och växla upp
           rader:
             - - Bygg 7. Lägg till 6.
             - - Bygg 18. Lägg till 3.
             - - Bygg 29. Lägg till 1.
             - - Bygg 16. Lägg till 8.
-        - rubrik: Läxa 4 · Åk 1 · Ta bort och växla ned
+        - rubrik: Läxa 4 · Åk 1 · Ta bort och växla ned
           rader:
             - - Bygg 13. Ta bort 4.
             - - Bygg 20. Ta bort 3.
             - - Bygg 24. Ta bort 7.
             - - Bygg 30. Ta bort 1.
-        - rubrik: Läxa 5 · Åk 1 · Från material till skrift
+        - rubrik: Läxa 5 · Åk 1 · Från material till skrift
           rader:
             - - Bygg 13 och 6. Skriv 13 + 6.
             - - Bygg 17 och 5. Växla och skriv.
             - - Bygg 20. Ta bort 6. Skriv 20 − 6.
             - - Bygg 11 och 12. Slå ihop tiotalen och entalen. Skriv.
-    # ---------------------------------------------------------------- Åk 2
-    - rubrik: "Åk 2: talen 0–100"
+    # ---------------------------------------------------------------- Åk 2
+    - rubrik: "Åk 2: talen 0–100"
       text:
         - "Tiotal och ental med talen till 100, och hundra som tio tiotal. Mattan har Hundratal, Tiotal och Ental: vik bort Tusental."
       delar:
         - rubrik: Till läraren
           falt:
             - rubrik: Material
-              text: "Tiostavar och ental och en hundraplatta, talbrickor med 1, 10 och 100, och enkronor, tiokronor och en hundralapp. Klar tidigt: Närmast målet 100, med sju slag som blir tiotal eller ental. Per elev: 20 brickor och 20 mynt eller sedlar av varje talsort."
+              text: "Tiostavar och ental och en hundraplatta, talbrickor med 1, 10 och 100, och enkronor, tiokronor och en hundralapp. Klar tidigt: Närmast målet 100 på sju slag, där varje slag räknas som tiotal eller ental. Per elev: 20 brickor och 20 mynt eller sedlar av varje talsort."
             - rubrik: Vecka 1 · Bygga och säga tal
-              text: "Gör först och säg: ”Jag bygger 36. Jag lägger tre tiostavar på tiotalens plats och sex ental på entalens. Jag lyfter tiostavarna: tre tiotal. Jag pekar på entalen och räknar: ett, två, tre, fyra, fem, sex. Nu tar jag bort 12, en tiostav och två ental. Kvar är två tiotal och fyra ental. 24.”\nLyssna efter eleven som räknar tiostaven som en, så att 36 blir nio."
+              text: "Visa först och säg: ”Jag bygger 36. Jag lägger tre tiostavar på tiotalens plats och sex ental på entalens. Jag lyfter tiostavarna: tre tiotal. Jag pekar på entalen och räknar: ett, två, tre, fyra, fem, sex. Nu tar jag bort 12, en tiostav och två ental. Kvar är två tiotal och fyra ental. 24.”\nLyssna efter eleven som räknar tiostaven som en, så att 36 blir nio."
             - rubrik: Vecka 2 · Siffrans plats och nollan
-              text: "Gör först och säg: ”Jag bygger 47 på mattan och 74 ovanför, och skriver talen. Jag pekar på sjuan i 47 och på de sju entalen: sju ental. Jag pekar på sjuan i 74 och på de sju tiotalen: sju tiotal. Sju tiotal är mer än fyra tiotal. 74 är störst.” Bygg 60 och peka på entalens plats: ”Tom. Nollan håller platsen.”\nLyssna efter eleven som skriver fyrtiosex som 406, eller tror att 19 är större än 21."
+              text: "Visa först och säg: ”Jag bygger 47 på mattan och 74 ovanför, och skriver talen. Jag pekar på sjuan i 47 och på de sju entalen: sju ental. Jag pekar på sjuan i 74 och på de sju tiotalen: sju tiotal. Sju tiotal är mer än fyra tiotal. 74 är störst.” Bygg 60 och peka på entalens plats: ”Tom. Nollan håller platsen.”\nLyssna efter eleven som skriver fyrtiosex som 406, eller tror att 19 är större än 21."
             - rubrik: Vecka 3 · Lägga till och växla upp
-              text: "Gör först och säg: ”Jag bygger 38 och lägger till 5, ett i taget. Nio, tio. Tio ental lägger jag bredvid en tiostav. Lika långa. Jag byter och lägger tiostaven på tiotalens plats.” Lägg de tre som är kvar och peka: ”Fyra tiotal och tre ental. 43.”\nLyssna efter eleven som läser fyra tiotal och tretton ental som 413."
+              text: "Visa först och säg: ”Jag bygger 38 och lägger till 5, ett i taget. Nio, tio. Jag lägger de tio entalen bredvid en tiostav. Lika långa. Jag byter och lägger tiostaven på tiotalens plats.” Lägg de tre som är kvar och peka: ”Fyra tiotal och tre ental. 43.”\nLyssna efter eleven som läser fyra tiotal och tretton ental som 413."
             - rubrik: Vecka 4 · Ta bort och växla ned
-              text: "Gör först och säg: ”Jag bygger 42 och ska ta bort 7. Jag pekar på entalen: två. Det räcker inte. Jag lyfter en tiostav och byter den mot tio ental. Tolv ental. Jag tar bort sju. Tre tiotal och fem ental. 35.”\nLyssna efter eleven som tar minsta siffran från största, så att 82 − 45 blir 43."
+              text: "Visa först och säg: ”Jag bygger 42 och ska ta bort 7. Jag pekar på entalen: två. Det räcker inte. Jag lyfter en tiostav och byter den mot tio ental. Tolv ental. Jag tar bort sju. Tre tiotal och fem ental. 35.”\nLyssna efter eleven som drar den minsta siffran från den största, så att 82 − 45 blir 43."
         - rubrik: "Till läraren: vecka 5 och kartläggningen"
           falt:
             - rubrik: Vecka 5 · Från material till skrift
-              text: "Gör först och säg, och skriv samtidigt.\nPass 1: ”Jag bygger 47 och 36. Tiotalen: sju. Entalen: tretton, och tio av dem växlar jag mot ett tiotal. Åtta tiotal och tre ental. 83.” Skriv 40 + 30 = 70, 7 + 6 = 13 och 70 + 13 = 83.\nPass 2: ”Jag bygger 38 och lägger till 25. Åtta ental och två till blir tio, och dem växlar jag mot ett tiotal: 40. Kvar av 25 är 23. Sex tiotal och tre ental. 63.” Skriv 38 + 2 + 23 = 63.\nPass 3: ”Jag bygger 52 och ska ta bort 27. Två ental räcker inte till sju. Jag växlar ett tiotal mot tio ental: fyra tiotal och tolv ental. Jag tar bort sju ental och två tiotal. Två tiotal och fem ental. 25.” Skriv 52 = 40 + 12, 12 − 7 = 5, 40 − 20 = 20 och 20 + 5 = 25.\nPeka på varje steg i materialet.\nLyssna efter eleven som skriver 47 + 36 = 713."
+              text: "Visa först och säg, och skriv samtidigt.\nPass 1: ”Jag bygger 47 och 36. Tiotalen: sju. Entalen: tretton, och tio av dem växlar jag mot ett tiotal. Åtta tiotal och tre ental. 83.” Skriv 40 + 30 = 70, 7 + 6 = 13 och 70 + 13 = 83.\nPass 2: ”Jag bygger 38 och lägger till 25. Åtta ental och två till blir tio, och dem växlar jag mot ett tiotal: 40. Kvar av 25 är 23. Sex tiotal och tre ental. 63.” Skriv 38 + 2 + 23 = 63.\nPass 3: ”Jag bygger 52 och ska ta bort 27. Två ental räcker inte till sju. Jag växlar ett tiotal mot tio ental: fyra tiotal och tolv ental. Jag tar bort sju ental och två tiotal. Två tiotal och fem ental. 25.” Skriv 52 = 40 + 12, 12 − 7 = 5, 40 − 20 = 20 och 20 + 5 = 25.\nPeka på varje steg i materialet.\nLyssna efter eleven som skriver 47 + 36 = 713."
             - rubrik: Kartläggning
               text: Före första passet och efter sista, en elev i taget, med uppgifterna i listan Kartläggning. Uppgift 1–5 följer veckorna.
       listor:
-        - rubrik: Kartläggning · Åk 2 · Läs uppgiften, eleven bygger och svarar
+        - rubrik: Kartläggning · Åk 2 · Läs uppgiften, eleven bygger och svarar
           rader:
             - - 1. Bygg 57. Hur många tiotal och ental?
             - - 2. Bygg 60 och 6. Vilket är störst? Vad visar nollan?
             - - 3. Bygg 48. Lägg till 7.
             - - 4. Bygg 52. Ta bort 18.
             - - 5. Räkna 28 + 45. Bygg och skriv hur du räknar.
-        - rubrik: Vecka 1 · Åk 2 · Läs kortet, kamraten bygger
+        - rubrik: Vecka 1 · Åk 2 · Läs kortet, kamraten bygger
           rader:
             - - Bygg 36. Peka på entalen. Håll upp tiotalen.
             - - Bygg 36. Ta bort 12.
@@ -471,7 +471,7 @@ ramar:
             - - Bygg 70. Hur många ental är det i allt?
             - - Bygg 45. Lägg till 30.
             - - Bygg 3 tiotal och 14 ental. Byt tio ental. Vilket tal?
-        - rubrik: Vecka 2 · Åk 2 · Läs kortet, kamraten bygger
+        - rubrik: Vecka 2 · Åk 2 · Läs kortet, kamraten bygger
           rader:
             - - Bygg 47 och 74. Vilket är störst? Hur vet du?
             - - Bygg 60. Vilken talsort är tom?
@@ -479,7 +479,7 @@ ramar:
             - - Bygg 82 med bara sju tiotal. Hur många ental?
             - - Bygg 5 tiotal och 0 ental. Skriv talet.
             - - Bygg 90 och 9. Vilket är störst?
-        - rubrik: Vecka 3 · Åk 2 · Läs kortet, kamraten bygger
+        - rubrik: Vecka 3 · Åk 2 · Läs kortet, kamraten bygger
           rader:
             - - Bygg 38. Lägg till 5.
             - - Bygg 47. Lägg till 6.
@@ -487,7 +487,7 @@ ramar:
             - - Bygg 56. Lägg till 27.
             - - Bygg 90. Lägg till 10.
             - - Bygg 68. Lägg till 14.
-        - rubrik: Vecka 4 · Åk 2 · Läs kortet, kamraten bygger
+        - rubrik: Vecka 4 · Åk 2 · Läs kortet, kamraten bygger
           rader:
             - - Bygg 42. Ta bort 7.
             - - Bygg 50. Ta bort 3.
@@ -495,7 +495,7 @@ ramar:
             - - Bygg 71. Ta bort 45.
             - - Bygg 36. Ta bort 17.
             - - Bygg 100. Ta bort 1.
-        - rubrik: Vecka 5 · Åk 2 · Läs kortet, kamraten bygger och skriver
+        - rubrik: Vecka 5 · Åk 2 · Läs kortet, kamraten bygger och skriver
           rader:
             - - Bygg 34 och 25. Skriv 30 + 20 och 4 + 5.
             - - Bygg 47 och 36. Räkna talsort för talsort och skriv.
@@ -503,83 +503,83 @@ ramar:
             - - Bygg 52. Ta bort 27. Skriv växlingen.
             - - Bygg 60. Ta bort 18. Skriv.
             - - Skriv först 56 + 29 utan att bygga. Bygg sedan och kontrollera.
-    - rubrik: "Åk 2: Läxa 1–5"
+    - rubrik: "Åk 2: Läxa 1–5"
       text:
-        - "Samma sak som i skolan, en gång till hemma, med barnets tiobaspaket. Paketet är i papper: en hundraplatta, tio tiostavar, 15 ental och en matta. Skicka hem rutan Till vårdnadshavaren med Läxa 1, och sedan veckans läxa efter veckans första pass. Klipp isär listorna, så att bara veckans läxa går hem."
+        - "Samma uppgifter som i skolan, en gång till hemma, med barnets eget tiobaspaket. Paketet är av papper: en hundraplatta, tio tiostavar, 15 ental och en matta. Skicka hem rutan Till vårdnadshavaren med Läxa 1, och sedan veckans läxa efter veckans första pass. Klipp isär listorna, så att bara veckans läxa går hem."
       delar:
         - rubrik: Till vårdnadshavaren
           falt:
             - rubrik: Varför
-              text: Ditt barn får intensivt stöd och extra träning i matematik under fem veckor. Hemma gör ni samma sak som i skolan en gång till, med en annan röst.
+              text: Ditt barn får intensivt stöd och extra träning i matematik under fem veckor. Hemma övar ni på samma sak som i skolan, och det hjälper barnet att höra det en gång till, från någon annan.
             - rubrik: Så gör ni
-              text: Läs ett kort högt. Barnet bygger med tiobaspaketet på mattan och säger vad som görs. Har kortet två tal, bygger barnet det andra ovanför mattan. När kortet säger Ta bort bygger barnet bara det första talet. Tio minuter några gånger i veckan räcker.
+              text: Läs ett kort högt. Barnet bygger med tiobaspaketet på mattan och berättar vad det gör. Har kortet två tal bygger barnet det andra ovanför mattan. När kortet säger ”Ta bort” bygger barnet bara det första talet. Tio minuter några gånger i veckan räcker.
             - rubrik: Säg så här
               text: "Läxa 1: Hur många tiotal? Hur många ental? Peka.\nLäxa 2: Vilken plats är tom? Vad visar nollan?\nLäxa 3: Blev det tio? Byt dem mot en av nästa större talsort.\nLäxa 4: Räcker det? Byt en av nästa större talsort mot tio.\nLäxa 5: Visa mig i materialet det du skrev, som 58 + 24: 50 + 20 = 70, 8 + 4 = 12 och 70 + 12 = 82."
             - rubrik: Om det blir svårt
-              text: Gör det först själv och säg vad du gör, och låt sedan barnet göra likadant. Sluta medan det är roligt, och skriv en rad till läraren.
+              text: Visa först själv och säg vad du gör, och låt sedan barnet göra likadant. Sluta medan det fortfarande är roligt, och skriv gärna en rad till läraren.
       listor:
-        - rubrik: Läxa 1 · Åk 2 · Bygga och säga tal
+        - rubrik: Läxa 1 · Åk 2 · Bygga och säga tal
           rader:
             - - Bygg 64. Hur många tiotal och ental?
             - - Bygg 47. Ta bort 23.
             - - Bygg 80. Hur många ental är det i allt?
             - - Bygg 2 tiotal och 15 ental. Byt tio ental. Vilket tal?
-        - rubrik: Läxa 2 · Åk 2 · Siffrans plats och nollan
+        - rubrik: Läxa 2 · Åk 2 · Siffrans plats och nollan
           rader:
             - - Bygg 35 och 53. Vilket är störst?
             - - Bygg 90 + 4. Skriv talet.
             - - Bygg 70. Vilken plats är tom?
             - - Bygg 61 med bara fem tiotal. Hur många ental?
-        - rubrik: Läxa 3 · Åk 2 · Lägga till och växla upp
+        - rubrik: Läxa 3 · Åk 2 · Lägga till och växla upp
           rader:
             - - Bygg 27. Lägg till 5.
             - - Bygg 49. Lägg till 1.
             - - Bygg 35. Lägg till 28.
             - - Bygg 95. Lägg till 5.
-        - rubrik: Läxa 4 · Åk 2 · Ta bort och växla ned
+        - rubrik: Läxa 4 · Åk 2 · Ta bort och växla ned
           rader:
             - - Bygg 34. Ta bort 8.
             - - Bygg 60. Ta bort 5.
             - - Bygg 82. Ta bort 45.
             - - Bygg 100. Ta bort 10.
-        - rubrik: Läxa 5 · Åk 2 · Från material till skrift
+        - rubrik: Läxa 5 · Åk 2 · Från material till skrift
           rader:
             - - Bygg 26 och 43. Skriv talsort för talsort.
             - - Bygg 58 och 24. Skriv talsort för talsort.
             - - "Bygg 47. Lägg till 15: först 3 till 50, sedan 12. Skriv varje steg."
             - - Bygg 71. Ta bort 36. Skriv växlingen.
-    # ---------------------------------------------------------------- Åk 3
-    - rubrik: "Åk 3: talen 0–1 000"
+    # ---------------------------------------------------------------- Åk 3
+    - rubrik: "Åk 3: talen 0–1 000"
       text:
         - Hundratal, tiotal och ental med talen till 1 000, och växlingar i två led, som 199 + 1 och 400 − 1. Mattan har alla fyra rutorna, och tusentalen behövs bara för 1 000.
       delar:
         - rubrik: Till läraren
           falt:
             - rubrik: Material
-              text: "Tiobas med hundraplattor och en tusenkub, talbrickor med 1, 10, 100 och 1000, och pengar upp till en tusenlapp. En halv sats per elev räcker till fem hundraplattor och 15 tiostavar. Behöver ett kort fler, bygger eleven med talbrickor. Klar tidigt: Närmast målet 1 000, med sju slag som blir hundratal, tiotal eller ental. Per elev: 20 brickor och 20 mynt eller sedlar av varje talsort."
+              text: "Tiobas med hundraplattor och en tusenkub, talbrickor med 1, 10, 100 och 1000, och pengar upp till en tusenlapp. En halv sats per elev räcker till fem hundraplattor och 15 tiostavar. Kräver ett kort fler bygger eleven med talbrickor. Klar tidigt: Närmast målet 1 000 på sju slag, där varje slag räknas som hundratal, tiotal eller ental. Per elev: 20 brickor och 20 mynt eller sedlar av varje talsort."
             - rubrik: Vecka 1 · Bygga och säga tal
-              text: "Gör först och säg: ”Jag bygger 236. Jag lägger två hundraplattor på hundratalens plats och lyfter dem: två hundratal. Jag lägger tre tiostavar på tiotalens plats och sex ental på entalens. Jag pekar: två hundratal, tre tiotal, sex ental. 236.” Lägg tio tiostavar på en hundraplatta: ”Lika stora. Tio tiotal är ett hundratal.”\nLyssna efter eleven som räknar plattor och stavar som ental, så att 236 blir elva."
+              text: "Visa först och säg: ”Jag bygger 236. Jag lägger två hundraplattor på hundratalens plats och lyfter dem: två hundratal. Jag lägger tre tiostavar på tiotalens plats och sex ental på entalens. Jag pekar: två hundratal, tre tiotal, sex ental. 236.” Lägg tio tiostavar på en hundraplatta: ”Lika stora. Tio tiotal är ett hundratal.”\nLyssna efter eleven som räknar plattor och stavar som ental, så att 236 blir elva."
             - rubrik: Vecka 2 · Siffrans plats och nollan
-              text: "Gör först och säg: ”Jag bygger 247 på mattan och 274 ovanför, och skriver talen. Jag pekar på sjuan i 247 och på de sju entalen: sju ental. Jag pekar på sjuan i 274 och på de sju tiotalen: sju tiotal. Samma hundratal, och sju tiotal är mer än fyra. 274 är störst.” Bygg 306 och peka på tiotalens plats: ”Tom. Nollan håller platsen.”\nLyssna efter eleven som skriver tvåhundrafyra som 2004, eller läser 306 som trettiosex."
+              text: "Visa först och säg: ”Jag bygger 247 på mattan och 274 ovanför, och skriver talen. Jag pekar på sjuan i 247 och på de sju entalen: sju ental. Jag pekar på sjuan i 274 och på de sju tiotalen: sju tiotal. Samma hundratal, och sju tiotal är mer än fyra. 274 är störst.” Bygg 306 och peka på tiotalens plats: ”Tom. Nollan håller platsen.”\nLyssna efter eleven som skriver tvåhundrafyra som 2004, eller läser 306 som trettiosex."
             - rubrik: Vecka 3 · Lägga till och växla upp
-              text: "Gör först och säg: ”Jag bygger 199 och lägger till 1. Tio ental. Jag byter dem mot en tiostav. Nu har jag tio tiotal. Jag lägger dem på en hundraplatta och byter igen.” Peka: ”Två hundratal. 200.”\nLyssna efter eleven som bara gör den första växlingen och läser ett hundratal och tio tiotal som 1 100."
+              text: "Visa först och säg: ”Jag bygger 199 och lägger till 1. Tio ental. Jag byter dem mot en tiostav. Nu har jag tio tiotal. Jag lägger dem på en hundraplatta och byter igen.” Peka: ”Två hundratal. 200.”\nLyssna efter eleven som bara gör den första växlingen och läser ett hundratal och tio tiotal som 1 100."
             - rubrik: Vecka 4 · Ta bort och växla ned
-              text: "Gör först och säg: ”Jag bygger 400 och ska ta bort 1. Entalen är tomma, och tiotalen också. Jag byter en hundraplatta mot tio tiostavar och en tiostav mot tio ental. Jag tar bort ett ental.” Peka: ”Tre hundratal, nio tiotal och nio ental. 399.”\nLyssna efter eleven som glömmer det som växlats, så att 500 − 78 blir 432."
+              text: "Visa först och säg: ”Jag bygger 400 och ska ta bort 1. Entalen är tomma, och tiotalen också. Jag byter en hundraplatta mot tio tiostavar och en tiostav mot tio ental. Jag tar bort ett ental.” Peka: ”Tre hundratal, nio tiotal och nio ental. 399.”\nLyssna efter eleven som glömmer det som växlats, så att 500 − 78 blir 432."
         - rubrik: "Till läraren: vecka 5 och kartläggningen"
           falt:
             - rubrik: Vecka 5 · Från material till skrift
-              text: "Gör först och säg, och skriv samtidigt.\nPass 1: ”Jag bygger 247 och 168. Hundratalen: tre. Tiotalen: tio, och dem växlar jag mot ett hundratal: fyra hundratal. Entalen: femton, och tio av dem växlar jag mot ett tiotal. Fyra hundratal, ett tiotal och fem ental. 415.” Skriv (200 + 40 + 7) + (100 + 60 + 8) = 300 + 100 + 15 = 400 + 15 = 415.\nPass 2: ”Jag bygger 398 och lägger till 27. Två ental gör 398 till 400, med två växlingar i rad. Kvar av 27 är 25. Fyra hundratal, två tiotal och fem ental. 425.” Skriv 398 + 2 + 25 = 425.\nPass 3: ”Jag bygger 503 och ska ta bort 78. Tre ental räcker inte, och tiotalen är tomma. Jag växlar ett hundratal mot tio tiotal och ett tiotal mot tio ental: fyra hundratal, nio tiotal och tretton ental. Jag tar bort åtta ental och sju tiotal. 425.” Skriv 503 = 400 + 90 + 13, 13 − 8 = 5, 90 − 70 = 20 och 400 + 20 + 5 = 425.\nPeka på varje steg i materialet.\nLyssna efter eleven som skriver ett svar som inte syns i materialet."
+              text: "Visa först och säg, och skriv samtidigt.\nPass 1: ”Jag bygger 247 och 168. Hundratalen: tre. Tiotalen: tio, och dem växlar jag mot ett hundratal: fyra hundratal. Entalen: femton, och tio av dem växlar jag mot ett tiotal. Fyra hundratal, ett tiotal och fem ental. 415.” Skriv (200 + 40 + 7) + (100 + 60 + 8) = 300 + 100 + 15 = 400 + 15 = 415.\nPass 2: ”Jag bygger 398 och lägger till 27. Två ental gör 398 till 400, med två växlingar i rad. Kvar av 27 är 25. Fyra hundratal, två tiotal och fem ental. 425.” Skriv 398 + 2 + 25 = 425.\nPass 3: ”Jag bygger 503 och ska ta bort 78. Tre ental räcker inte, och tiotalen är tomma. Jag växlar ett hundratal mot tio tiotal och ett tiotal mot tio ental: fyra hundratal, nio tiotal och tretton ental. Jag tar bort åtta ental och sju tiotal. 425.” Skriv 503 = 400 + 90 + 13, 13 − 8 = 5, 90 − 70 = 20 och 400 + 20 + 5 = 425.\nPeka på varje steg i materialet.\nLyssna efter eleven som skriver ett svar som inte syns i materialet."
             - rubrik: Kartläggning
               text: Före första passet och efter sista, en elev i taget, med uppgifterna i listan Kartläggning. Uppgift 1–5 följer veckorna.
       listor:
-        - rubrik: Kartläggning · Åk 3 · Läs uppgiften, eleven bygger och svarar
+        - rubrik: Kartläggning · Åk 3 · Läs uppgiften, eleven bygger och svarar
           rader:
             - - 1. Skriv tvåhundrafyra. Bygg talet.
             - - 2. Bygg 438 och 483. Vilket är störst?
             - - 3. Bygg 599. Lägg till 1.
             - - 4. Bygg 600. Ta bort 45.
             - - 5. Räkna 256 + 178. Bygg och skriv hur du räknar.
-        - rubrik: Vecka 1 · Åk 3 · Läs kortet, kamraten bygger
+        - rubrik: Vecka 1 · Åk 3 · Läs kortet, kamraten bygger
           rader:
             - - Bygg 236. Hur många hundratal, tiotal och ental?
             - - Bygg 405. Vilken talsort är tom?
@@ -587,7 +587,7 @@ ramar:
             - - Bygg 512. Lägg till 3 tiotal.
             - - Bygg 150. Hur många tiotal är det i allt?
             - - Bygg 2 hundratal och 13 tiotal. Byt tio tiotal. Vilket tal?
-        - rubrik: Vecka 2 · Åk 3 · Läs kortet, kamraten bygger
+        - rubrik: Vecka 2 · Åk 3 · Läs kortet, kamraten bygger
           rader:
             - - Bygg 247 och 274. Hur vet du vilket som är 247?
             - - Bygg 306 och 360. Vilken talsort är tom i 306? Och i 360?
@@ -595,7 +595,7 @@ ramar:
             - - Bygg 3 hundratal, 0 tiotal och 8 ental. Skriv talet.
             - - Bygg 180 utan hundratal. Hur många tiotal?
             - - Bygg 310 och 301. Vilket är störst?
-        - rubrik: Vecka 3 · Åk 3 · Läs kortet, kamraten bygger
+        - rubrik: Vecka 3 · Åk 3 · Läs kortet, kamraten bygger
           rader:
             - - Bygg 247. Lägg till 6.
             - - Bygg 306. Lägg till 7.
@@ -603,7 +603,7 @@ ramar:
             - - Bygg 380. Lägg till 30.
             - - Bygg 458. Lägg till 67.
             - - Bygg 995. Lägg till 5.
-        - rubrik: Vecka 4 · Åk 3 · Läs kortet, kamraten bygger
+        - rubrik: Vecka 4 · Åk 3 · Läs kortet, kamraten bygger
           rader:
             - - Bygg 352. Ta bort 7.
             - - Bygg 620. Ta bort 50.
@@ -611,7 +611,7 @@ ramar:
             - - Bygg 503. Ta bort 78.
             - - Bygg 841. Ta bort 263.
             - - Bygg 1 000. Ta bort 10.
-        - rubrik: Vecka 5 · Åk 3 · Läs kortet, kamraten bygger och skriver
+        - rubrik: Vecka 5 · Åk 3 · Läs kortet, kamraten bygger och skriver
           rader:
             - - Bygg 247 och 168. Räkna talsort för talsort och skriv varje steg.
             - - Bygg 398. Lägg till 27 via 400. Skriv varje steg.
@@ -619,76 +619,76 @@ ramar:
             - - Bygg 356 och 275. Räkna talsort för talsort och skriv.
             - - Bygg 612. Ta bort 245. Skriv växlingarna.
             - - Skriv först 347 + 185 utan att bygga. Bygg sedan och kontrollera.
-    - rubrik: "Åk 3: Läxa 1–5"
+    - rubrik: "Åk 3: Läxa 1–5"
       text:
-        - "Samma sak som i skolan, en gång till hemma, med barnets tiobaspaket. Paketet är i papper: sju hundraplattor, 15 tiostavar, 15 ental och en matta. Skicka hem rutan Till vårdnadshavaren med Läxa 1, och sedan veckans läxa efter veckans första pass. Klipp isär listorna, så att bara veckans läxa går hem."
+        - "Samma uppgifter som i skolan, en gång till hemma, med barnets eget tiobaspaket. Paketet är av papper: sju hundraplattor, 15 tiostavar, 15 ental och en matta. Skicka hem rutan Till vårdnadshavaren med Läxa 1, och sedan veckans läxa efter veckans första pass. Klipp isär listorna, så att bara veckans läxa går hem."
       delar:
         - rubrik: Till vårdnadshavaren
           falt:
             - rubrik: Varför
-              text: Ditt barn får intensivt stöd och extra träning i matematik under fem veckor. Hemma gör ni samma sak som i skolan en gång till, med en annan röst.
+              text: Ditt barn får intensivt stöd och extra träning i matematik under fem veckor. Hemma övar ni på samma sak som i skolan, och det hjälper barnet att höra det en gång till, från någon annan.
             - rubrik: Så gör ni
-              text: Läs ett kort högt. Barnet bygger med tiobaspaketet på mattan och säger vad som görs. En talsort är ental, tiotal, hundratal eller tusental. Har kortet två tal, bygger barnet det andra ovanför mattan. När kortet säger Ta bort bygger barnet bara det första talet. Tio minuter några gånger i veckan räcker.
+              text: Läs ett kort högt. Barnet bygger med tiobaspaketet på mattan och berättar vad det gör. En talsort är ental, tiotal, hundratal eller tusental. Har kortet två tal bygger barnet det andra ovanför mattan. När kortet säger ”Ta bort” bygger barnet bara det första talet. Tio minuter några gånger i veckan räcker.
             - rubrik: Säg så här
               text: "Läxa 1: Hur många hundratal, tiotal och ental? Peka.\nLäxa 2: Vilken plats är tom? Vad visar nollan?\nLäxa 3: Blev det tio? Byt dem mot en av nästa större talsort.\nLäxa 4: Räcker det? Byt en av nästa större talsort mot tio.\nLäxa 5: Visa mig i materialet det du skrev, som 325 + 248: 500 + 60 + 13 = 573."
             - rubrik: Om det blir svårt
-              text: Gör det först själv och säg vad du gör, och låt sedan barnet göra likadant. Sluta medan det är roligt, och skriv en rad till läraren.
+              text: Visa först själv och säg vad du gör, och låt sedan barnet göra likadant. Sluta medan det fortfarande är roligt, och skriv gärna en rad till läraren.
       listor:
-        - rubrik: Läxa 1 · Åk 3 · Bygga och säga tal
+        - rubrik: Läxa 1 · Åk 3 · Bygga och säga tal
           rader:
             - - Bygg 318. Hur många hundratal, tiotal och ental?
             - - Bygg 507. Vilken talsort är tom?
             - - Bygg 460. Ta bort 2 tiotal.
             - - Bygg 240. Hur många tiotal är det i allt?
-        - rubrik: Läxa 2 · Åk 3 · Siffrans plats och nollan
+        - rubrik: Läxa 2 · Åk 3 · Siffrans plats och nollan
           rader:
             - - Bygg 309 och 390. Vilket är störst?
             - - Bygg 700 + 5. Skriv talet.
             - - Bygg 150 utan hundratal. Hur många tiotal?
             - - Skriv trehundrasex. Bygg talet.
-        - rubrik: Läxa 3 · Åk 3 · Lägga till och växla upp
+        - rubrik: Läxa 3 · Åk 3 · Lägga till och växla upp
           rader:
             - - Bygg 128. Lägg till 5.
             - - Bygg 290. Lägg till 20.
             - - Bygg 499. Lägg till 1.
             - - Bygg 365. Lägg till 47.
-        - rubrik: Läxa 4 · Åk 3 · Ta bort och växla ned
+        - rubrik: Läxa 4 · Åk 3 · Ta bort och växla ned
           rader:
             - - Bygg 243. Ta bort 8.
             - - Bygg 500. Ta bort 1.
             - - Bygg 710. Ta bort 40.
             - - Bygg 604. Ta bort 27.
-        - rubrik: Läxa 5 · Åk 3 · Från material till skrift
+        - rubrik: Läxa 5 · Åk 3 · Från material till skrift
           rader:
             - - Bygg 325 och 248. Skriv talsort för talsort.
             - - Bygg 297. Lägg till 18 via 300. Skriv varje steg.
             - - Bygg 402. Ta bort 65. Skriv växlingarna.
             - - Bygg 150 och 350. Skriv.
-    # ---------------------------------------------------------------- Åk 4–5
-    - rubrik: "Åk 4–5: tal till 10 000, decimaltal och negativa tal"
+    # ---------------------------------------------------------------- Åk 4–5
+    - rubrik: "Åk 4–5: tal till 10 000, decimaltal och negativa tal"
       text:
         - Hela tal till 10 000 första veckan. Från vecka 2 också decimaltal med tiondelar, och från vecka 3 med hundradelar. Hundraplattan är då en hel, tiostaven en tiondel och kuben en hundradel. Sista passet vecka 5 handlar om negativa tal, på tallinjen och som skuld.
       delar:
         - rubrik: Till läraren
           falt:
             - rubrik: Material
-              text: "Tiobas med en tusenkub, talbrickor från 0,01 till 1000, och pengar upp till tusenlappar. Saknas tusenkuber, bygg tusentalen med talbrickor eller tusenlappar. En halv sats per elev räcker till fem hundraplattor och 15 tiostavar. Behöver ett kort fler, bygger eleven med talbrickor. Från vecka 2 är kort 1–3 hela tal och kort 4–6 decimaltal. Lägg dem i två högar och bygg de hela talen först. Byt sedan matta och säg: nu är hundraplattan en hel. Decimaltalen byggs med tiobas eller talbrickor, även i pass 3. Varje elev behöver en lodrät tallinje från −10 till 10 vecka 5 och till kartläggningen. Klar tidigt: Närmast målet 5 000 med talbrickor, med sju slag som blir tusental, hundratal, tiotal eller ental. Per elev: 20 brickor och 20 mynt eller sedlar av varje talsort."
+              text: "Tiobas med en tusenkub, talbrickor från 0,01 till 1000, och pengar upp till tusenlappar. Saknas tusenkuber, bygg tusentalen med talbrickor eller tusenlappar. En halv sats per elev räcker till fem hundraplattor och 15 tiostavar. Kräver ett kort fler bygger eleven med talbrickor. Från vecka 2 är kort 1–3 hela tal och kort 4–6 decimaltal. Lägg dem i två högar och bygg de hela talen först. Byt sedan matta och säg: nu är hundraplattan en hel. Decimaltalen byggs med tiobas eller talbrickor, även i pass 3. Varje elev behöver en lodrät tallinje från −10 till 10 i vecka 5 och vid kartläggningen. Klar tidigt: Närmast målet 5 000 med talbrickor på sju slag, där varje slag räknas som tusental, hundratal, tiotal eller ental. Per elev: 20 brickor och 20 mynt eller sedlar av varje talsort."
             - rubrik: Vecka 1 · Bygga och säga tal till 10 000
-              text: "Gör först och säg: ”Jag bygger 2 345. Jag lägger två brickor med 1000 på tusentalens plats, tre hundraplattor, fyra tiostavar och fem ental. Jag pekar: två tusental, tre hundratal, fyra tiotal, fem ental. 2 345.” Ta plattorna från mattan och stapla tio hundraplattor bredvid tusenkuben: ”Lika höga. Tio hundratal är ett tusental.”\nLyssna efter eleven som läser 4 050 som fyrahundrafemtio."
+              text: "Visa först och säg: ”Jag bygger 2 345. Jag lägger två brickor med 1000 på tusentalens plats, tre hundraplattor, fyra tiostavar och fem ental. Jag pekar: två tusental, tre hundratal, fyra tiotal, fem ental. 2 345.” Ta plattorna från mattan och stapla tio hundraplattor bredvid tusenkuben: ”Lika höga. Tio hundratal är ett tusental.”\nLyssna efter eleven som läser 4 050 som fyrahundrafemtio."
             - rubrik: Vecka 2 · Siffrans plats och nollan, också i decimaltal
-              text: "Gör först och säg: ”Jag bygger 3 045 på mattan och 3 450 ovanför, och skriver talen. Jag pekar på fyran i 3 045: fyra tiotal. I 3 450: fyra hundratal. Nollan i 3 045 säger att det inte finns några hundratal. 3 450 är störst.” Byt sedan till decimalmattan och lyft hundraplattan: ”Nu är den här en hel, och tiostaven är en tiondel.” Bygg 0,9 och 1 och peka: ”Nio tiondelar. En hel är tio tiondelar. 1 är störst.”\nLyssna efter eleven som tror att 0,9 är större än 1, för att nio är mer än ett."
+              text: "Visa först och säg: ”Jag bygger 3 045 på mattan och 3 450 ovanför, och skriver talen. Jag pekar på fyran i 3 045: fyra tiotal. I 3 450: fyra hundratal. Nollan i 3 045 säger att det inte finns några hundratal. 3 450 är störst.” Byt sedan till decimalmattan och lyft hundraplattan: ”Nu är den här en hel, och tiostaven är en tiondel.” Bygg 0,9 och 1 och peka: ”Nio tiondelar. En hel är tio tiondelar. 1 är störst.”\nLyssna efter eleven som tror att 0,9 är större än 1, för att nio är mer än ett."
             - rubrik: Vecka 3 · Lägga till och växla upp
-              text: "Gör först och säg: ”Jag bygger 3 480 och lägger till 50. Tretton tiotal. Tio av dem byter jag mot ett hundratal. 3 530.” Bygg sedan 0,7 och lägg till 0,5: ”Tolv tiondelar. Tio tiondelar byter jag mot en hel. 1,2.” Visa sedan hundradelarna och lägg tio kuber bredvid en tiostav: ”Tio hundradelar är en tiondel.”\nLyssna efter eleven som skriver 0,7 + 0,5 = 0,12."
+              text: "Visa först och säg: ”Jag bygger 3 480 och lägger till 50. Tretton tiotal. Tio av dem byter jag mot ett hundratal. 3 530.” Bygg sedan 0,7 och lägg till 0,5: ”Tolv tiondelar. Tio tiondelar byter jag mot en hel. 1,2.” Visa sedan hundradelarna och lägg tio kuber bredvid en tiostav: ”Tio hundradelar är en tiondel.”\nLyssna efter eleven som skriver 0,7 + 0,5 = 0,12."
             - rubrik: Vecka 4 · Ta bort och växla ned
-              text: "Gör först och säg: ”Jag bygger 3 000 och ska ta bort 1. Jag pekar på entalen: tomma. Tiotalen och hundratalen också. Det räcker inte. Jag byter ett tusental mot tio hundratal, ett hundratal mot tio tiotal och ett tiotal mot tio ental. Jag tar bort ett ental. Två tusental, nio hundratal, nio tiotal, nio ental. 2 999.” Bygg sedan 1,2 och ta bort 0,5: ”Två tiondelar räcker inte. Jag byter en hel mot tio tiondelar. Tolv tiondelar, jag tar bort fem. 0,7.”\nLyssna efter eleven som tar minsta siffran från största, så att 1,2 − 0,5 blir 1,3."
+              text: "Visa först och säg: ”Jag bygger 3 000 och ska ta bort 1. Jag pekar på entalen: tomma. Tiotalen och hundratalen också. Det räcker inte. Jag byter ett tusental mot tio hundratal, ett hundratal mot tio tiotal och ett tiotal mot tio ental. Jag tar bort ett ental. Två tusental, nio hundratal, nio tiotal, nio ental. 2 999.” Bygg sedan 1,2 och ta bort 0,5: ”Två tiondelar räcker inte. Jag byter en hel mot tio tiondelar. Tolv tiondelar, jag tar bort fem. 0,7.”\nLyssna efter eleven som drar den minsta siffran från den största, så att 1,2 − 0,5 blir 1,3."
         - rubrik: "Till läraren: vecka 5 och kartläggningen"
           falt:
             - rubrik: Vecka 5 · Från material till skrift, och negativa tal
-              text: "Gör först och säg, och skriv samtidigt.\nPass 1: ”Jag bygger 2 470 och 1 385. Tusentalen: tre. Hundratalen: sju. Tiotalen: femton, och tio av dem växlar jag mot ett hundratal. Åtta hundratal, fem tiotal, fem ental. 3 855.” Skriv 3 000 + 700 + 150 + 5 = 3 000 + 800 + 50 + 5 = 3 855.\nPass 2: ”Jag bygger 4 998 och lägger till 36. Två ental gör 4 998 till 5 000, med tre växlingar i rad. Kvar av 36 är 34. 5 034.” Skriv 4 998 + 2 + 34 = 5 034. Ta bort på samma sätt: ”6 003 ta bort 45. Jag växlar ett tusental, ett hundratal och ett tiotal. 5 958.”\nPass 3, negativa tal: ”Här är noll. Det är fyra grader och blir nio grader kallare. Jag går fyra steg ned till noll och fem steg till: minus fem.” Sedan skuld: ”Jag har 200 kronor och ska betala 350. Jag betalar 200 och skriver en lapp: skyldig 150. Det är minus 150.”\nLyssna efter eleven som tror att −5 är större än −2, och visa båda på tallinjen."
+              text: "Visa först och säg, och skriv samtidigt.\nPass 1: ”Jag bygger 2 470 och 1 385. Tusentalen: tre. Hundratalen: sju. Tiotalen: femton, och tio av dem växlar jag mot ett hundratal. Åtta hundratal, fem tiotal, fem ental. 3 855.” Skriv 3 000 + 700 + 150 + 5 = 3 000 + 800 + 50 + 5 = 3 855.\nPass 2: ”Jag bygger 4 998 och lägger till 36. Två ental gör 4 998 till 5 000, med tre växlingar i rad. Kvar av 36 är 34. 5 034.” Skriv 4 998 + 2 + 34 = 5 034. Ta bort på samma sätt: ”6 003 ta bort 45. Jag växlar ett tusental, ett hundratal och ett tiotal. 5 958.”\nPass 3, negativa tal: ”Här är noll. Det är fyra grader och blir nio grader kallare. Jag går fyra steg ned till noll och fem steg till: minus fem.” Sedan skuld: ”Jag har 200 kronor och ska betala 350. Jag betalar 200 och skriver en lapp: skyldig 150. Det är minus 150.”\nLyssna efter eleven som tror att −5 är större än −2, och visa båda på tallinjen."
             - rubrik: Kartläggning
               text: "Före första passet och efter sista, en elev i taget, med uppgifterna i listan Kartläggning. Uppgift 1–5 följer veckorna, och uppgift 6 gäller negativa tal. Säg före uppgift 2 och 5: här är hundraplattan en hel."
       listor:
-        - rubrik: Kartläggning · Åk 4–5 · Läs uppgiften, eleven bygger och svarar
+        - rubrik: Kartläggning · Åk 4–5 · Läs uppgiften, eleven bygger och svarar
           rader:
             - - 1. Skriv tretusenfyrtiosju. Bygg talet.
             - - 2. Bygg 0,4 och 0,35. Vilket är störst?
@@ -696,7 +696,7 @@ ramar:
             - - 4. Bygg 5 002. Ta bort 7.
             - - 5. Räkna 1,75 + 0,48. Bygg och skriv hur du räknar.
             - - 6. Visa −4 på tallinjen. Det är 3 grader och blir 9 grader kallare. Vad visar termometern?
-        - rubrik: Vecka 1 · Åk 4–5 · Läs kortet, kamraten bygger
+        - rubrik: Vecka 1 · Åk 4–5 · Läs kortet, kamraten bygger
           rader:
             - - Bygg 2 345. Hur många av varje talsort?
             - - Bygg 4 050. Vilka talsorter är tomma?
@@ -704,7 +704,7 @@ ramar:
             - - Bygg 1 000 med bara hundratal. Hur många behövs?
             - - Bygg 2 400. Hur många hundratal är det i allt?
             - - Bygg 1 tusental och 13 tiotal. Byt tio tiotal. Vilket tal?
-        - rubrik: Vecka 2 · Åk 4–5 · Läs kortet, kamraten bygger
+        - rubrik: Vecka 2 · Åk 4–5 · Läs kortet, kamraten bygger
           rader:
             - - Bygg 3 045 och 3 450. Vilket är störst?
             - - Bygg 7 008. Vilka talsorter är tomma?
@@ -712,7 +712,7 @@ ramar:
             - - Bygg 0,9 och 1. Vilket är störst?
             - - Bygg 1,2 och 0,8. Vilket är störst?
             - - Bygg 1,2 med bara tiondelar. Hur många tiondelar?
-        - rubrik: Vecka 3 · Åk 4–5 · Läs kortet, kamraten bygger
+        - rubrik: Vecka 3 · Åk 4–5 · Läs kortet, kamraten bygger
           rader:
             - - Bygg 2 950. Lägg till 60.
             - - Bygg 4 870. Lägg till 150.
@@ -720,7 +720,7 @@ ramar:
             - - Bygg 0,7. Lägg till 0,5.
             - - Bygg 2,95. Lägg till 0,05.
             - - Bygg 1,86. Lägg till 0,34.
-        - rubrik: Vecka 4 · Åk 4–5 · Läs kortet, kamraten bygger
+        - rubrik: Vecka 4 · Åk 4–5 · Läs kortet, kamraten bygger
           rader:
             - - Bygg 3 000. Ta bort 1.
             - - Bygg 5 204. Ta bort 36.
@@ -728,7 +728,7 @@ ramar:
             - - Bygg 1,2. Ta bort 0,5.
             - - Bygg 2. Ta bort 0,01.
             - - Bygg 4,3. Ta bort 1,45.
-        - rubrik: Vecka 5 · Åk 4–5 · Läs kortet, kamraten bygger och skriver
+        - rubrik: Vecka 5 · Åk 4–5 · Läs kortet, kamraten bygger och skriver
           rader:
             - - Bygg 2 470 och 1 385. Räkna talsort för talsort och skriv.
             - - Bygg 4 998. Lägg till 36 via 5 000. Skriv varje steg.
@@ -736,7 +736,7 @@ ramar:
             - - Bygg 3,6 och 2,7. Skriv 3 + 2 och 0,6 + 0,7.
             - - Bygg 5,2. Ta bort 1,8. Skriv växlingen.
             - - Skriv först 1,45 + 0,75 utan att bygga. Bygg sedan och kontrollera.
-        - rubrik: Vecka 5, pass 3 · Åk 4–5 · Läs kortet, kamraten visar på tallinjen
+        - rubrik: Vecka 5, pass 3 · Åk 4–5 · Läs kortet, kamraten visar på tallinjen
           rader:
             - - Visa 3 och −3 på tallinjen. Hur långt är det mellan dem?
             - - Det är 4 grader. Det blir 9 grader kallare. Visa det på tallinjen.
@@ -744,46 +744,46 @@ ramar:
             - - Vilket är störst, −5 eller −2? Visa på tallinjen.
             - - Du har 200 kr och ska betala 350 kr. Hur mycket är du skyldig?
             - - Du är skyldig 40 kr och får 100 kr. Hur mycket har du nu?
-    - rubrik: "Åk 4–5: Läxa 1–5"
+    - rubrik: "Åk 4–5: Läxa 1–5"
       text:
-        - "Samma sak som i skolan, en gång till hemma, med barnets tiobaspaket. Paketet är i papper: sju brickor med 1000, tio hundraplattor, 15 tiostavar, 15 ental och båda mattorna. Skicka hem rutan Till vårdnadshavaren med Läxa 1, och sedan veckans läxa efter veckans första pass. Klipp isär listorna, så att bara veckans läxa går hem."
+        - "Samma uppgifter som i skolan, en gång till hemma, med barnets eget tiobaspaket. Paketet är av papper: sju brickor med 1000, tio hundraplattor, 15 tiostavar, 15 ental och båda mattorna. Skicka hem rutan Till vårdnadshavaren med Läxa 1, och sedan veckans läxa efter veckans första pass. Klipp isär listorna, så att bara veckans läxa går hem."
       delar:
         - rubrik: Till vårdnadshavaren
           falt:
             - rubrik: Varför
-              text: Ditt barn får intensivt stöd och extra träning i matematik under fem veckor. Hemma gör ni samma sak som i skolan en gång till, med en annan röst.
+              text: Ditt barn får intensivt stöd och extra träning i matematik under fem veckor. Hemma övar ni på samma sak som i skolan, och det hjälper barnet att höra det en gång till, från någon annan.
             - rubrik: Så gör ni
-              text: Läs ett kort högt. Barnet bygger med tiobaspaketet på mattan och säger vad som görs. En talsort är ental, tiotal, hundratal eller tusental, och i decimaltal tiondelar och hundradelar. Har kortet två tal, bygger barnet det andra ovanför mattan. När kortet säger Ta bort bygger barnet bara det första talet. Tio minuter några gånger i veckan räcker.
+              text: Läs ett kort högt. Barnet bygger med tiobaspaketet på mattan och berättar vad det gör. En talsort är ental, tiotal, hundratal eller tusental, och i decimaltal tiondelar och hundradelar. Har kortet två tal bygger barnet det andra ovanför mattan. När kortet säger ”Ta bort” bygger barnet bara det första talet. Tio minuter några gånger i veckan räcker.
             - rubrik: Säg så här
               text: "Läxa 1: Hur många tusental, hundratal, tiotal och ental? Peka.\nLäxa 2: Vilken plats är tom? Decimaltalen byggs på den andra mattan, där hundraplattan är en hel.\nLäxa 3: Blev det tio? Byt dem mot en av nästa större talsort.\nLäxa 4: Räcker det? Byt en av nästa större talsort mot tio.\nLäxa 5: Visa mig i materialet det du skrev, som 1 250 + 2 785: 3 000 + 900 + 130 + 5 = 4 035."
             - rubrik: Om det blir svårt
-              text: Gör det först själv och säg vad du gör, och låt sedan barnet göra likadant. Sluta medan det är roligt, och skriv en rad till läraren.
+              text: Visa först själv och säg vad du gör, och låt sedan barnet göra likadant. Sluta medan det fortfarande är roligt, och skriv gärna en rad till läraren.
       listor:
-        - rubrik: Läxa 1 · Åk 4–5 · Bygga och säga tal
+        - rubrik: Läxa 1 · Åk 4–5 · Bygga och säga tal
           rader:
             - - Bygg 1 604. Vilken talsort är tom?
             - - Bygg 5 280. Lägg till 2 tusental.
             - - Bygg 3 400. Hur många hundratal är det i allt?
             - - Bygg 1 tusental och 12 tiotal. Byt tio tiotal. Vilket tal?
-        - rubrik: Läxa 2 · Åk 4–5 · Siffrans plats och nollan
+        - rubrik: Läxa 2 · Åk 4–5 · Siffrans plats och nollan
           rader:
             - - Bygg 2 070 och 2 700. Vilket är störst?
             - - Bygg 5 000 + 40 + 3. Skriv talet.
             - - Bygg 0,8 och 1. Vilket är störst?
             - - Bygg 0,4 och 4. Vilket är störst?
-        - rubrik: Läxa 3 · Åk 4–5 · Lägga till och växla upp
+        - rubrik: Läxa 3 · Åk 4–5 · Lägga till och växla upp
           rader:
             - - Bygg 1 990. Lägg till 10.
             - - Bygg 3 760. Lägg till 250.
             - - Bygg 0,6. Lägg till 0,7.
             - - Bygg 1,99. Lägg till 0,01.
-        - rubrik: Läxa 4 · Åk 4–5 · Ta bort och växla ned
+        - rubrik: Läxa 4 · Åk 4–5 · Ta bort och växla ned
           rader:
             - - Bygg 2 000. Ta bort 1.
             - - Bygg 4 105. Ta bort 17.
             - - Bygg 1,4. Ta bort 0,6.
             - - Bygg 3. Ta bort 0,25.
-        - rubrik: Läxa 5 · Åk 4–5 · Från material till skrift
+        - rubrik: Läxa 5 · Åk 4–5 · Från material till skrift
           rader:
             - - Bygg 1 250 och 2 785. Skriv talsort för talsort.
             - - Bygg 3 004. Ta bort 8. Skriv växlingarna.
@@ -793,17 +793,17 @@ lathund:
   innehall: Ett fokus i veckan
   metoden:
     text:
-      - "Intensivt stöd och extra träning i fem veckor, i liten grupp, för åk 1–5. Läraren gör först och sätter ord på varje handgrepp: bygger, lyfter och pekar. Sedan gör gruppen tillsammans, i par, själv och gemensamt igen."
-      - "Veckorna: bygga och säga tal, siffrans plats och nollan, lägga till och växla upp, ta bort och växla ned, från material till skrift. Pass 1 tiobas, pass 2 talbrickor, pass 3 pengar och skrift. Talområdet följer årskursen: åk 1 0–30, åk 2 0–100, åk 3 0–1 000 och åk 4–5 upp till 10 000. Före första passet: kartläggningen i gruppens paket."
+      - "Intensivt stöd i fem veckor för en liten grupp i åk 1–5. Läraren gör först och sätter ord på varje handgrepp: bygger, lyfter och pekar. Sedan gör gruppen samma sak tillsammans, i par, var för sig och till sist gemensamt igen."
+      - "Veckorna: bygga och säga tal, siffrans plats och nollan, lägga till och växla upp, ta bort och växla ned, från material till skrift. Pass 1 tiobas, pass 2 talbrickor, pass 3 pengar och skrift. Talområdet följer årskursen: 0–30 i åk 1, 0–100 i åk 2, 0–1 000 i åk 3 och upp till 10 000 i åk 4–5. Före första passet gör du kartläggningen i gruppens paket."
     ruta:
       rubrik: Tre saker att hålla fast vid
       punkter:
         - fet: Gör först och sätt ord på det.
           text: Bygg, visa, lyft och peka framför eleverna, och säg vad du gör.
-        - fet: Växla med händerna och säg det.
+        - fet: Växla i materialet och säg det.
           text: Tio ental blir ett tiotal, varje gång.
         - fet: Ett fokus i veckan.
-          text: Samma fokus i tre material, så att eleven ser det som är lika.
+          text: Samma fokus i tre material, så att eleverna ser det som är gemensamt.
     tabell:
       rubrik: Passets fem faser · tider och fraser
       kolumner:
@@ -822,36 +822,36 @@ lathund:
           - "”Vad hände när entalen blev tio?”\n”Visa oss och säg det.”"
   pass:
     rubrik: "Vi kör ett pass: lägga till och växla upp"
-    textRubrik: Gruppen · fyra elever, åk 2, vecka 3, pass 1
+    textRubrik: Gruppen · fyra elever, åk 2, vecka 3, pass 1
     utskrift: Skriv ut passexemplet
     text:
-      - "Läraren bygger 38 och säger vad som görs: ”Tre tiostavar på tiotalens plats, åtta ental här.” Läraren lyfter en stav: ”Tio ental som sitter ihop.” Sedan fem ental, ett i taget: ”Nio, tio. Tio ental bredvid en tiostav. Lika långa. Jag byter. Fyra tiotal och tre ental. 43.”"
+      - "Läraren bygger 38 och berättar vad hen gör: ”Tre tiostavar på tiotalens plats, åtta ental här.” Läraren lyfter en stav: ”Tio ental som sitter ihop.” Sedan fem ental, ett i taget: ”Nio, tio. Tio ental bredvid en tiostav. Lika långa. Jag byter. Fyra tiotal och tre ental. 43.”"
       - "Alla bygger 38 + 5 tillsammans, ett handgrepp i taget: ”Lyft en tiostav med mig. Hur många ental är den?”"
-      - "Kortet ”Bygg 47. Lägg till 6.” Ibrahim och Oskar skriver 413. Läraren frågar: ”Får det ligga tretton ental på en plats?” Ibrahim byter och säger: ”Fem tiotal och tre ental. 53.”"
+      - "Läraren läser kortet ”Bygg 47. Lägg till 6.” Ibrahim och Oskar skriver 413. ”Får det ligga tretton ental på en plats?” frågar läraren. Ibrahim byter och säger: ”Fem tiotal och tre ental. 53.”"
       - "Ibrahim bygger 68 + 14 själv och säger: ”Jag bytte tio ental mot en tiostav. 82.” Till sist bygger alla 56 + 7: ”Vad hände när entalen blev tio?” Läraren noterar att Ibrahim och Oskar växlade efter frågan."
     forberett:
       rubrik: Det jag förberedde
       text:
-        - Byggt 38 + 5 och 56 + 7 och sagt orden högt. Tiobas och en talsortsmatta per elev. Veckans kort för åk 2, klippta.
-    klarTidigt: "Spela Närmast målet: varje slag blir tiotal eller ental, i åk 2 närmast 100 på sju slag, utan att gå över. Gruppens mål står i paketet."
+        - Byggt 38 + 5 och 56 + 7 och sagt orden högt. Tiobas och en talsortsmatta per elev. Veckans kort för åk 2, klippta.
+    klarTidigt: "Spela Närmast målet. Varje slag räknas som tiotal eller ental, och i åk 2 gäller det att komma närmast 100 på sju slag utan att gå över. Målet för andra årskurser står i paketet."
     schema:
       rubrik: 30 minuter, steg för steg
       rader:
         - tid: Före
           fas: Förberedelse
-          vad: Dagens material, en matta per elev och en till dig, och veckans kort. Välj två tal ur veckans kort, ett att göra först och ett till Gemensamt igen. Bygg dem och säg orden högt.
+          vad: Ta fram dagens material, en matta per elev och en till dig, och veckans kort. Välj två tal ur korten, ett som du visar först och ett till Gemensamt igen. Bygg båda och säg orden högt.
         - tid: 0–6
           fas: 1 · Läraren gör först
-          vad: Bygg veckans fokus framför eleverna. Säg vad du tar, lyfter och pekar på.
+          vad: Bygg det första talet framför eleverna och säg vad du tar, lyfter och pekar på.
         - tid: 6–12
           fas: 2 · Gör tillsammans
-          vad: Alla bygger talet en gång till, ett handgrepp i taget, och säger det.
+          vad: Alla bygger talet en gång till, ett handgrepp i taget, och säger vad de gör.
         - tid: 12–21
           fas: 3 · I par
           vad: Läs ett kort. Paren bygger och avgör, sedan läser de för varandra.
         - tid: 21–26
           fas: 4 · Själv
-          vad: Var och en bygger ett eget kort och säger vad som görs.
+          vad: Var och en bygger talet på sitt kort och säger vad hen gör.
         - tid: 26–30
           fas: 5 · Gemensamt igen
           vad: Bygg det andra talet tillsammans. Vad hände, och varför?
@@ -887,7 +887,7 @@ lathund:
           text: Enkronor, tiokronor, hundralappar och tusenlappar, inga femkronor.
         - fet: Kort och läxor.
           text: "Ett paket per årskurs, sist på metodsidan och i planeringsmallarna: kartläggningen, veckornas kort och Läxa 1–5."
-      efter: "Talsortsmattan är lathundens tredje sida, Mallen: i A3 för brickor och pengar, ett A4 per talsort med tiobas. Åk 1 viker bort Tusental och Hundratal, åk 2 Tusental. Decimalmattan i åk 4–5 har tre rutor, Ental, Tiondelar och Hundradelar, med ett decimaltecken efter Ental."
+      efter: "Talsortsmattan finns på lathundens sida 3. Skriv ut den i A3 för brickor och pengar, eller ett A4 per talsort för tiobas. Åk 1 viker bort Tusental och Hundratal, åk 2 Tusental. Decimalmattan i åk 4–5 har tre rutor: Ental, Tiondelar och Hundradelar, med ett decimaltecken efter Ental."
     bordet:
       - Talsortsmatta, en per elev
       - Dagens material, en låda per par
