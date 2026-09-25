@@ -85,6 +85,7 @@ Kontot är niclas.fohlin@gmail.com på gratisplanen (300 mejl per dag). IP-begr�
 | Avsändare id 1 | Niclas Fohlin <niclas.fohlin@gmail.com>, verifierad via mejl, används inte längre |
 | Avsändare id 2 | Niclas Fohlin <nyhetsbrev@niclasfohlin.se>, aktiv på autentiserad domän; det är den utskicken använder (`AVSANDARE` i `netlify/lib/utskick.mjs`, svar till `SVAR_TILL`) |
 | Domänen niclasfohlin.se | autentiserad 2026-09-21: DKIM via två CNAME, brevo-code som TXT på roten, DMARC p=none på _dmarc |
+| Avsändarbild i Gmail | Gmail visar bilden från ett Google-konto på avsändaradressen. Niclas skapar kontot på nyhetsbrev@niclasfohlin.se med profilbilden (punkt 6 under Brevo i INSTRUKTIONER.docx; bilden är `C:\niclasfohlin.se\profilbild-nyhetsbrev.jpg`, samma kvadrat som den runda på startsidan). BIMI, som Outlook och Apple Mail använder, kräver DMARC p=quarantine och ett betalt certifikat (VMC eller CMC): avstått 2026-09-25 |
 | Kampanjer | "Nytt <datum>: <titlar>" skapas av utskicket; längre nyhetsbrev skrivs med `/utskick` och skickas bara på Niclas ord |
 
 Kommandon: `node scripts/brevo.mjs status`, `doman`, `autentisera`, `kampanjer [antal]`, `anrop <METOD> <sökväg> [json]`. API-dokumentationen: https://developers.brevo.com/reference. Ändra aldrig avsändare eller mall utan att skriva in det nya läget här.
