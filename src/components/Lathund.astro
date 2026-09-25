@@ -61,7 +61,7 @@ const repliker = (s: string) => s.split(/(”[^”]*”)/).filter(Boolean).map((
             <h3 class="lh-kicker">{l.pass.forberett.rubrik}</h3>
             {l.pass.forberett.text.map((p) => <p>{p}</p>)}
           </div>
-          {l.pass.klarTidigt && <div class="lh-gra"><h3 class="lh-kicker">Klar tidigt</h3><p>{l.pass.klarTidigt}</p></div>}
+          {l.pass.klarTidigt && <div class="lh-not"><h3 class="lh-kicker">Klar tidigt</h3><p>{l.pass.klarTidigt}</p></div>}
         </div>
         <div class="lh-kol">
           <h3 class="lh-kicker">{l.pass.schema.rubrik}</h3>

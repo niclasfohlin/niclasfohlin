@@ -8,7 +8,7 @@ import {
   Paragraph, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, VerticalAlign, WidthType,
   type IBorderOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
-import { arbetsformRad, arskursText, datumText, lathundFakta, metaRad, metodAdress, passOversikt, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost } from './metod';
+import { arbetsformRad, arskursText, datumText, ejBryt, lathundFakta, metaRad, metodAdress, passOversikt, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost } from './metod';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
 const FARG = {
@@ -45,6 +45,17 @@ function run(text: string, o: StyckeVal = {}): TextRun {
 export function exempelStycke(text: string, o: { hallIhop?: boolean; storlek?: number; efter?: number } = {}): Paragraph {
   const delar = text.split(/(”[^”]*”)/).filter(Boolean);
   return new Paragraph({ children: delar.map((t) => run(t, { kursiv: t.startsWith('”'), storlek: o.storlek })), spacing: { before: 0, after: o.efter ?? 120 }, keepNext: o.hallIhop });
+}
+// En tabellcell med repliker (”…”) sätter dem kursiva, som exempelfraserna i stegtabellen (lathundens
+// stegtabell, en fri tabell med ett citat), så att en lärare ser vad som sägs.
+function replikStycke(text: string, o: StyckeVal = {}): Paragraph {
+  const delar = text.split(/(”[^”]*”)/).filter(Boolean);
+  return new Paragraph({
+    children: delar.map((t) => run(t, { ...o, kursiv: o.kursiv || t.startsWith('”') })),
+    spacing: { before: o.fore ?? 0, after: o.efter ?? 120 },
+    keepNext: o.hallIhop,
+    alignment: o.mitt ? AlignmentType.CENTER : undefined,
+  });
 }
 function stycke(text: string, o: StyckeVal = {}): Paragraph {
   return new Paragraph({
@@ -110,14 +121,15 @@ function rubrikTabell(kolumner: string[], rader: string[][], bredder: number[], 
   // radrubrik: false ger första kolumnen vanlig text (fria tabeller, ordlistor); bara rubrikraden är fet, som i kompendiet.
   const huvud = rad(kolumner.map((k, i) => cell([stycke(k, { fet: true, farg: FARG.vit, storlek: 20, efter: 0, hallIhop: o.hallIhop })], { bredd: bredder[i], fyll: huvudFyll, kanter: runt(kant(huvudFyll)) })), { huvud: true });
   const kropp = rader.map((r, ri) => rad(r.map((text, i) => {
-    const linjer = text.split('\n');
+    // Raden under radrubriken (tider som "8–18 min · dag 2: 5–8") får inte brytas mitt i ett spann.
+    const linjer = text.split('\n').map((l, j) => (j > 0 ? ejBryt(l) : l));
     const ihop = o.hallIhop && (ri < rader.length - 1 || !!o.hallIhopEfter);
     const mellan = arMellanrubrik(r);
     const barn = mellan
       ? linjer.map((l, j) => stycke(l, { fet: true, farg: FARG.huvud, storlek: Math.min(storlek, 18), efter: j === linjer.length - 1 ? 0 : 20, hallIhop: ihop }))
       : i === 0 && radrubrik
         ? linjer.map((l, j) => stycke(l, { fet: j === 0, kursiv: j > 0, farg: j === 0 ? FARG.huvud : FARG.svag, storlek, efter: j === linjer.length - 1 ? 0 : 20, hallIhop: ihop }))
-        : linjer.map((l, j) => stycke(l, { fet: o.fetAndra && i === 1, kursiv: i === 0 && j > 0, farg: i === 0 && j > 0 ? FARG.svag : undefined, storlek, efter: j === linjer.length - 1 ? 0 : 20, hallIhop: ihop }));
+        : linjer.map((l, j) => replikStycke(l, { fet: o.fetAndra && i === 1, kursiv: i === 0 && j > 0, farg: i === 0 && j > 0 ? FARG.svag : undefined, storlek, efter: j === linjer.length - 1 ? 0 : 20, hallIhop: ihop }));
     return cell(barn, { bredd: bredder[i], fyll: mellan ? FARG.ljus : ri % 2 === 1 ? FARG.rand : undefined });
     // En rad utan text är en skrivrad: ge den höjd för handskrift.
   }), { hojd: r.every((t) => !t.trim()) ? 420 : undefined }));
@@ -288,19 +300,34 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean } = {}): Barn
   const ut: Barn[] = [];
   for (const s of ram.text) ut.push(stycke(s, { hallIhop: true }));
   // En ordlista eller bokstavslista (bara korta celler) får lika breda kolumner; en översikt med
-  // längre text får en smal etikettkolumn först.
+  // längre text får en smal etikettkolumn först, men bara när första kolumnen är etiketter. Bär den
+  // längre text (som projektplanens "Vecka 1 · Inbjudan till laget" med mentortexten under) blir
+  // kolumnerna lika breda, annars staplas orden och bryts mitt i.
   const korta = !!ram.oversikt && ram.oversikt.rader.every((r) => r.every((c) => c.length <= 30));
+  const etiketter = !!ram.oversikt && ram.oversikt.rader.every((r) => (r[0] ?? '').length <= 30 && !(r[0] ?? '').includes('\n'));
   if (ram.oversikt) {
     const n = ram.oversikt.kolumner.length;
-    const forsta = korta ? Math.floor(BREDD / n) : 1100;
+    const forsta = korta || !etiketter ? Math.floor(BREDD / n) : 1100;
     const rest = Math.floor((BREDD - forsta) / (n - 1));
     ut.push(...rubrikTabell(ram.oversikt.kolumner, ram.oversikt.rader, ram.oversikt.kolumner.map((_, i) => (i === 0 ? forsta : i === n - 1 ? BREDD - forsta - rest * (n - 2) : rest)), { hallIhop: korta, hallIhopEfter: korta, radrubrik: false, storlek: korta && o.stor ? 30 : undefined }));
   }
   if (ram.huvud) ut.push(...ramFaltTabell(ram.huvud, { skrivrum: o.skrivrum }));
   // En ordlistas ruta bär listans namn, så att en sida eller ett blad som börjar med rutan går att koppla rätt.
   const noter = () => ram.delar.flatMap((del) => ramFaltTabell(del.falt, { rubrik: korta || ram.listor ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum }));
-  // I beskrivningen bär listans rubrik ramens namn, så att en lista som hamnar på en ny sida går att koppla rätt.
-  const listor = () => (ram.listor ?? []).flatMap((l, i, alla) => elevlista({ ...l, rubrik: !o.stor && l.rubrik ? `${l.rubrik} · ${ram.rubrik}` : l.rubrik }, { storlek: o.stor ? 32 : 26, hallIhopEfter: i < alla.length - 1 }));
+  // I beskrivningen bär listans rubrik ramens namn, så att en lista som hamnar på en ny sida går att
+  // koppla rätt ("Läs orden, kolumn för kolumn · Läslista 4"). Säger listans rubrik redan vilken ram
+  // den hör till ("Skattjakten, vecka 1 · Läs inbjudan två gånger" under "Mentortexterna till
+  // skattjakten, att kopiera") läggs inget till.
+  const ord = (s: string) => s.toLowerCase().split(/[^a-zåäöé0-9]+/).filter((w) => w.length > 3);
+  const namngerRamen = (rubrik: string) => ord(rubrik).some((w) => ord(ram.rubrik).includes(w));
+  // I elevkopian är orden stora, men en ram med många rader (skattjaktens fyra mentortexter, sexton
+  // rader) sätts ett steg mindre så att listorna, noten och upphovet ryms på en sida och ingen
+  // ensam rad hamnar på en sida för sig.
+  const radantal = (ram.listor ?? []).reduce((a, l) => a + l.rader.length, 0);
+  const storlek = o.stor ? (radantal > 12 ? 28 : 32) : 26;
+  // I elevkopian får listorna bryta sida mellan sig, men den sista håller ihop med lärarnoten efter,
+  // så att noten och upphovet aldrig står ensamma på en sida. I beskrivningen hålls listorna ihop.
+  const listor = () => (ram.listor ?? []).flatMap((l, i, alla) => elevlista({ ...l, rubrik: !o.stor && l.rubrik && !namngerRamen(l.rubrik) ? `${l.rubrik} · ${ram.rubrik}` : l.rubrik }, { storlek, hallIhopEfter: o.stor ? i === alla.length - 1 : i < alla.length - 1 }));
   if (ram.listor) ut.push(...(o.stor ? [...listor(), ...noter()] : [...noter(), ...listor()]));
   else ut.push(...noter());
   return ut;
@@ -328,7 +355,15 @@ function diplomBarn(dip: NonNullable<MetodData['diplom']>): Barn[] {
 // Passöversikten (src/lib/metod.ts passOversikt): fasremsan med minuter och arbetsformens delar under, och
 // tabellen med en rad per fas: fas och tid, rutinens numrerade steg, vad som händer, med raderna Före och Efter passet.
 function passRemsa(p: NonNullable<ReturnType<typeof passOversikt>>): Barn[] {
-  const bredder = p.faser.map((f) => Math.floor(BREDD * f.minuter / p.total));
+  // Kolumnerna följer minuterna, men en kort fas (fem minuter av sextio) får inte bli så smal att
+  // "Vår text" och "18–23 min" staplas ord för ord: minst 1300 DXA, och de längre faserna lämnar ifrån sig resten.
+  const MINST = 1300;
+  let bredder = p.faser.map((f) => Math.floor(BREDD * f.minuter / p.total));
+  const lyft = bredder.reduce((a, b) => a + Math.max(0, MINST - b), 0);
+  if (lyft > 0) {
+    const stora = bredder.filter((b) => b > MINST).reduce((a, b) => a + b, 0);
+    bredder = bredder.map((b) => (b < MINST ? MINST : Math.floor(b - lyft * b / stora)));
+  }
   bredder[bredder.length - 1] += BREDD - bredder.reduce((a, b) => a + b, 0);
   const rader: TableRow[] = [rad(p.faser.map((f, i) => cell([
     stycke(f.fas, { fet: true, farg: FARG.vit, storlek: 20, mitt: true, efter: 0, hallIhop: true }),
@@ -504,7 +539,8 @@ function metodBarn(post: MetodPost, bas: string): Barn[] {
   if (d.progression) {
     ut.push(h2(d.progression.rubrik));
     if (d.progression.text) ut.push(stycke(d.progression.text, { hallIhop: true }));
-    ut.push(...rubrikTabell([d.progression.enhet, 'Fokus', 'Lärarens roll'], d.progression.rader.map((r) => [r.led ? `${r.vecka}\n${r.led}` : r.vecka, r.fokus, r.roll]), [1700, 4000, BREDD - 5700]));
+    // En kort kursplan hålls på en sida; en lång får bryta, rubrikraden upprepas.
+    ut.push(...rubrikTabell([d.progression.enhet, 'Fokus', 'Lärarens roll'], d.progression.rader.map((r) => [r.led ? `${r.vecka}\n${r.led}` : r.vecka, r.fokus, r.roll]), [1700, 4000, BREDD - 5700], { hallIhop: d.progression.rader.length <= 6 }));
   }
   if (d.uppfoljning) {
     ut.push(h2(d.uppfoljning.rubrik));
@@ -682,12 +718,15 @@ function lhRuta(rubrik: string, barn: Barn[]): Barn[] {
 function lhNot(barn: Barn[]): Barn[] {
   return [tabell([rad([cell(barn, { bredd: BREDD, fyll: CREME, kanter: { ...runt(kant(CREME)), left: kant(BRUN, 24) } })])], [BREDD]), avstand(120)];
 }
-function lhGra(barn: Paragraph[]): Barn[] {
-  return [tabell([rad([cell(barn, { bredd: BREDD, fyll: FARG.kant, kanter: runt(kant(FARG.kant)) })])], [BREDD]), avstand(120)];
-}
+// Ingen kant. I Word betyder "none" på en cell att tabellens kant gäller i stället, och docx sätter en
+// svart standardkant på varje tabell; "nil" tar bort kanten på riktigt. Skrivraderna sätter därför nil
+// på cellerna och på tabellen, så att bara den tunna linjen under varje rad blir kvar.
+const INGEN_KANT = { style: BorderStyle.NIL, size: 0, color: 'auto' } as const;
+const UTAN_KANTER = { top: INGEN_KANT, bottom: INGEN_KANT, left: INGEN_KANT, right: INGEN_KANT, insideHorizontal: INGEN_KANT, insideVertical: INGEN_KANT } as const;
 // Tomma skrivrader.
 function lhRader(antal: number, hojd = 420): Barn[] {
-  return [tabell(Array.from({ length: antal }, () => rad([cell([], { bredd: BREDD, kanter: { top: { style: BorderStyle.NONE, size: 0, color: 'auto' }, left: { style: BorderStyle.NONE, size: 0, color: 'auto' }, right: { style: BorderStyle.NONE, size: 0, color: 'auto' }, bottom: kant(FARG.kant) } })], { hojd })), [BREDD]), avstand(80)];
+  const rader = Array.from({ length: antal }, () => rad([cell([], { bredd: BREDD, kanter: { top: INGEN_KANT, left: INGEN_KANT, right: INGEN_KANT, bottom: kant(FARG.kant) } })], { hojd }));
+  return [new Table({ width: { size: BREDD, type: WidthType.DXA }, columnWidths: [BREDD], layout: TableLayoutType.FIXED, borders: UTAN_KANTER, rows: rader }), avstand(80)];
 }
 // Två spalter utan kanter. Innehållet i spalterna byggs med spaltens bredd.
 function lhSpalter(vanster: () => Barn[], hoger: () => Barn[]): Barn[] {
@@ -696,7 +735,7 @@ function lhSpalter(vanster: () => Barn[], hoger: () => Barn[]): Barn[] {
   const inre = halv - 240;
   const v = medBredd(inre, vanster);
   const h = medBredd(inre, hoger);
-  const ingen = { style: BorderStyle.NONE, size: 0, color: 'auto' } as const;
+  const ingen = INGEN_KANT;
   const fyll = (b: Barn[]) => (b.length ? b : [new Paragraph({ spacing: { after: 0 } })]);
   return [new Table({
     width: { size: BREDD, type: WidthType.DXA },
@@ -740,7 +779,7 @@ function lathundBarn(post: MetodPost): Barn[][] {
       ],
       () => [
         kicker(l.metoden.tabell.rubrik, { farg: FARG.huvud, fore: 60 }),
-        ...rubrikTabell(l.metoden.tabell.kolumner, l.metoden.tabell.rader, kolumnBredder(l.metoden.tabell.kolumner.length, 0.3), { huvudFyll: FARG.text }),
+        ...rubrikTabell(l.metoden.tabell.kolumner, l.metoden.tabell.rader, kolumnBredder(l.metoden.tabell.kolumner.length, 0.36), { huvudFyll: FARG.text }),
         ...(l.metoden.not ? lhNot([stycke(l.metoden.not, { storlek: 20, efter: 0 })]) : []),
       ],
     ),
@@ -756,7 +795,7 @@ function lathundBarn(post: MetodPost): Barn[][] {
           ...l.pass.text.map((p, i, alla) => exempelStycke(p, { storlek: 18, efter: i === alla.length - 1 ? 0 : 40 })),
         ]),
         ...lhNot([kicker(l.pass.forberett.rubrik, { farg: BRUN, fore: 0 }), ...l.pass.forberett.text.map((p, i, alla) => stycke(p, { storlek: 18, efter: i === alla.length - 1 ? 0 : 40 }))]),
-        ...(l.pass.klarTidigt ? lhGra([kicker('Klar tidigt', { fore: 0 }), stycke(l.pass.klarTidigt, { storlek: 18, efter: 0 })]) : []),
+        ...(l.pass.klarTidigt ? lhNot([kicker('Klar tidigt', { fore: 0 }), stycke(l.pass.klarTidigt, { storlek: 18, efter: 0 })]) : []),
       ],
       () => {
         const bredder = [1300, BREDD - 1300];

@@ -9,7 +9,11 @@
 // ritas som en rubrikrad (verbdelen i en läslista).
 interface Props { kolumner: string[]; rader: string[][]; bredder?: string[]; klass?: string; radrubrik?: boolean }
 const { kolumner, rader, bredder = [], klass = '', radrubrik = true } = Astro.props;
-const linjer = (t: string) => t.split('\n');
+import { ejBryt } from '../lib/metod';
+// Raden under radrubriken (tider som "8–18 min · dag 2: 5–8") får inte brytas mitt i ett spann.
+const linjer = (t: string) => t.split('\n').map((x, j) => (j > 0 ? ejBryt(x) : x));
+// Repliker (”…”) i en cell sätts kursiva, som exempelfraserna i stegtabellen och replikerna i exemplet.
+const repliker = (s: string) => s.split(/(”[^”]*”)/).filter(Boolean).map((text) => ({ text, replik: text.startsWith('”') }));
 const arMellanrubrik = (r: string[]) => r.every((c) => c.trim() && c === c.toUpperCase() && /\p{L}/u.test(c));
 ---
 <table class={`m-tabell ${klass}`.trim()}>
@@ -26,7 +30,7 @@ const arMellanrubrik = (r: string[]) => r.every((c) => c.trim() && c === c.toUpp
           const l = linjer(cell);
           if (i === 0 && radrubrik) return <th scope="row" data-rubrik={kolumner[i]}><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</th>;
           if (i === 0) return <td data-rubrik={kolumner[i]}><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</td>;
-          return <td data-rubrik={kolumner[i]}>{l.map((x, j) => <>{j > 0 && <br />}{x}</>)}</td>;
+          return <td data-rubrik={kolumner[i]}>{l.map((x, j) => <>{j > 0 && <br />}{repliker(x).map((r) => (r.replik ? <em>{r.text}</em> : r.text))}</>)}</td>;
         })}
       </tr>
       ))}

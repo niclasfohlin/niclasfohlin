@@ -18,6 +18,8 @@ const efterGrund = d.tabeller.filter((t) => t.plats === 'efter-grund');
 // En översikt med bara korta celler (en ordlista, en bokstavslista) får lika breda kolumner (klassen tat)
 // och plats även på mobil; bara översikter med längre text och fler än tre kolumner staplas.
 const kortaCeller = (rader: string[][]) => rader.every((r) => r.every((c) => c.length <= 12));
+// Faserna en arbetsform spänner över, som en uppräkning: "Läs, Hitta draget, Vår text och Läraren skriver".
+const radaUpp = (xs: string[]) => (xs.length > 1 ? `${xs.slice(0, -1).join(', ')} och ${xs[xs.length - 1]}` : xs[0] ?? '');
 // Exemplet berättas rakt; replikerna (”…”) sätts kursiva, som exempelfraserna i stegtabellen, så att en lärare hittar det som sägs.
 const repliker = (s: string) => s.split(/(”[^”]*”)/).filter(Boolean).map((text) => ({ text, replik: text.startsWith('”') }));
 // En fri tabell med tre kolumner och längre text staplas på mobil, som de med fler kolumner; tre korta kolumner får plats.
@@ -80,7 +82,7 @@ const avsnitt = [
       {pass.text && <p>{pass.text}</p>}
       <div class="m-remsa" style={`--kolumner:${pass.faser.map((f) => `minmax(7rem, ${f.minuter}fr)`).join(' ')}`} role="img" aria-label={`Passets faser: ${pass.faser.map((f) => `${f.fas} ${f.tid}`).join(', ')}${pass.delar.length ? `. Arbetsform: ${pass.delar.map((x) => `${x.rubrik} ${x.tid}`).join(', ')}` : ''}`}>
         {pass.faser.map((f, i) => <div class="m-remsa-fas" style={`--n:${i}`}><strong>{f.fas}</strong><span>{f.tid}</span></div>)}
-        {pass.delar.map((x) => <div class="m-remsa-del" style={`grid-column:${x.fran + 1} / span ${x.antal};--n:${x.fran}`}><strong>{x.rubrik}</strong>{x.tid && <>{' '}<span class="m-remsa-tid">{x.tid}</span></>}{x.antal > 1 && <span class="m-remsa-faser">{' '}under {pass.faser.slice(x.fran, x.fran + x.antal).map((f) => f.fas).join(' och ')}</span>}{' '}· {x.text}</div>)}
+        {pass.delar.map((x) => <div class="m-remsa-del" style={`grid-column:${x.fran + 1} / span ${x.antal};--n:${x.fran}`}><strong>{x.rubrik}</strong>{x.tid && <>{' '}<span class="m-remsa-tid">{x.tid}</span></>}{x.antal > 1 && <span class="m-remsa-faser">{' '}under {radaUpp(pass.faser.slice(x.fran, x.fran + x.antal).map((f) => f.fas))}</span>}{' '}· {x.text}</div>)}
       </div>
       <table class="m-tabell m-pass stapla" id="tidsschema">
         <colgroup><col style="width:18%" /><col style="width:40%" /><col style="width:42%" /></colgroup>
@@ -269,7 +271,7 @@ const avsnitt = [
     <section id="progression">
       <h2>{d.progression.rubrik}</h2>
       {d.progression.text && <p>{d.progression.text}</p>}
-      <MetodTabell kolumner={[d.progression.enhet, 'Fokus', 'Lärarens roll']} rader={d.progression.rader.map((r) => [r.led ? `${r.vecka}\n${r.led}` : r.vecka, r.fokus, r.roll])} bredder={['18%', '42%', '40%']} />
+      <MetodTabell kolumner={[d.progression.enhet, 'Fokus', 'Lärarens roll']} rader={d.progression.rader.map((r) => [r.led ? `${r.vecka}\n${r.led}` : r.vecka, r.fokus, r.roll])} bredder={['18%', '42%', '40%']} klass="stapla" />
     </section>
   )}
 
@@ -345,7 +347,7 @@ const avsnitt = [
         <section class="m-ram">
           <h3>{ram.rubrik}</h3>
           {ram.text.map((s) => <p>{s}</p>)}
-          {ram.oversikt && <MetodTabell kolumner={ram.oversikt.kolumner} rader={ram.oversikt.rader} klass={kortaCeller(ram.oversikt.rader) ? 'fri tat' : ram.oversikt.kolumner.length > 3 ? 'fri stapla' : 'fri'} radrubrik={false} />}
+          {ram.oversikt && <MetodTabell kolumner={ram.oversikt.kolumner} rader={ram.oversikt.rader} klass={kortaCeller(ram.oversikt.rader) ? 'fri tat' : friKlass(ram.oversikt)} radrubrik={false} />}
           {ram.listor ? (
             <>
               {ram.delar.map((del) => (

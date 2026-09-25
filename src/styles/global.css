@@ -543,9 +543,6 @@ html.js .bara-js { display: inline-block; }
 .lh-not { background: #fbf3e4; border-left: 4px solid #8a5a1e; padding: 0.6rem 0.9rem; margin: 0.75rem 0; }
 .lh-not > h3 { margin: 0 0 0.25rem; color: #8a5a1e; }
 .lh-not p:last-child { margin-bottom: 0; }
-.lh-gra { background: var(--farg-ton); border: 1px solid var(--farg-kant); padding: 0.6rem 0.9rem; margin: 0.75rem 0; }
-.lh-gra > h3 { margin: 0 0 0.25rem; }
-.lh-gra p:last-child { margin-bottom: 0; }
 .lh-svag { color: var(--farg-text-svag); }
 .lh-tabell.m-tabell { font-size: 0.9rem; margin: 0.25rem 0 0.75rem; }
 .lh-tabell.m-tabell thead th { background: var(--farg-text); border-color: var(--farg-text); font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; }
@@ -612,8 +609,8 @@ html.js .bara-js { display: inline-block; }
   body.tryck-bara-text .lh-elevtext .lh-titel { font-size: 18pt; }
   .lh-sida { break-after: page; break-inside: auto; border: 0; border-radius: 0; margin: 0; font-size: 9.5pt; line-height: 1.38; }
   .lh-sida:last-child { break-after: auto; }
-  .lh-huvud, .lh-ruta > h3, .lh-tabell.m-tabell thead th, .lh-not, .lh-gra, .lh-fakta, .lh-krav, .lh-underrad, .lh-skrivruta { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-  .lh-ruta, .lh-not, .lh-gra, .lh-spalt, .lh-skrivruta, .lh-tavla, .lh-tabell.m-tabell tr, .lh-snabbmall tr, .lh-fakta, .lh-krav { break-inside: avoid; }
+  .lh-huvud, .lh-ruta > h3, .lh-tabell.m-tabell thead th, .lh-not, .lh-fakta, .lh-krav, .lh-underrad, .lh-skrivruta { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .lh-ruta, .lh-not, .lh-spalt, .lh-skrivruta, .lh-tavla, .lh-tabell.m-tabell tr, .lh-snabbmall tr, .lh-fakta, .lh-krav { break-inside: avoid; }
   .lh-huvud { padding: 0.4rem 0.9rem; }
   .lh-huvud h2 { font-size: 12pt; }
   .lh-fakta > div, .lh-krav > div { padding: 0.35rem 0.9rem; }
@@ -627,7 +624,7 @@ html.js .bara-js { display: inline-block; }
   .lh-ruta > h3 { padding: 0.25rem 0.6rem; font-size: 7pt; }
   .lh-ruta-kropp { padding: 0.4rem 0.6rem 0.1rem; }
   .lh-ruta > ul { margin: 0.35rem 0.6rem 0.5rem; }
-  .lh-not, .lh-gra { padding: 0.4rem 0.7rem; margin: 0.5rem 0; }
+  .lh-not { padding: 0.4rem 0.7rem; margin: 0.5rem 0; }
   .lh-tabell.m-tabell { font-size: 8.5pt; margin: 0.15rem 0 0.5rem; }
   .lh-tabell.m-tabell th, .lh-tabell.m-tabell td { padding: 0.3rem 0.45rem; }
   .lh-tabell.m-tabell td:empty { height: 20pt; }
@@ -663,6 +660,8 @@ html.js .bara-js { display: inline-block; }
   .m-tabell.stapla th, .m-tabell.stapla td { border: 0; border-top: 1px solid var(--farg-kant); }
   .m-tabell.stapla th[scope="row"] { background: var(--farg-accent-ljus); border-top: 0; }
   .m-tabell.stapla td::before { content: attr(data-rubrik); display: block; font-weight: 600; color: var(--farg-text-svag); font-size: 0.8rem; margin-bottom: 0.2em; }
+  /* Staplad är första cellen kortets rubrik (Läs, Skrivhandling, Vecka 1 · Inbjudan till laget) och sätts fet, som en radrubrik. */
+  .m-tabell.stapla td:first-child .forsta { font-weight: 600; }
   .m-gor-undvik, .m-bockar.tva { grid-template-columns: 1fr; }
   .m-bockar.tva li:nth-child(even) { border-left: 0; background: var(--farg-ton-svag); }
   .m-bockar.tva li:nth-child(2) { border-top: 1px solid var(--farg-kant); }
@@ -719,7 +718,7 @@ html.js .bara-js { display: inline-block; }
   .metod-modell h2 { font-size: 13pt; margin-top: 1.4em; break-after: avoid; }
   /* Rubrik och inledande stycke följer med det som kommer efter; snabbmallen hålls ihop. */
   .metod-modell h2 + p { break-after: avoid; }
-  .m-snabbmall, .m-trappa, .m-trappa li, .m-kontrakt, .m-ramdel, .m-ramhuvud, .m-diplom, .m-remsa, .m-tavla, .m-tabell.tat, #snabbmall, #grund { break-inside: avoid; }
+  .m-snabbmall, .m-bockar, .m-trappa, .m-trappa li, .m-kontrakt, .m-ramdel, .m-ramhuvud, .m-diplom, .m-remsa, .m-tavla, .m-tabell.tat, #snabbmall, #grund { break-inside: avoid; }
   .m-remsa-fas, .m-remsa-del, .m-pass .m-pass-kant th, .m-pass .m-pass-kant td { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .m-ram > h3, .m-ram > h3 + p, .m-ramdel h4 { break-after: avoid; }
   /* En läslista (ram med ordlista) hålls på en sida tillsammans med sin ruta, så att en kopia bär sitt namn och sin anvisning. */

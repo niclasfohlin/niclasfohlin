@@ -298,7 +298,9 @@ export async function lathundPptx(m: CollectionEntry<'stodundervisning'>, o: { b
     frame(s, 0.46, top2, 5.27, storyH, LINE, 0.75, CELL);
     const need = b.exempel.reduce((a, p) => a + estH(p, 4.97, 11.5, 0.07), 0);
     if (need > storyH + 0.1) varna(`exemplet på bild 2 är långt (${need.toFixed(2)} > ${(storyH - 0.2).toFixed(2)} tum): korta lathund.pass.text till cirka 130 ord`);
-    txt(s, b.exempel.map((t, i) => ({ text: t, options: { breakLine: i < b.exempel.length - 1, italic: true } })), 0.61, top2 + 0.1, 4.97, storyH - 0.2, { size: 11.5, psa: 5 });
+    // Exemplet berättas rakt och replikerna (”…”) kursiva, som på sidan, i lathunden och i Word.
+    const repliker = (t: string, sist: boolean) => t.split(/(”[^”]*”)/).filter(Boolean).map((x, j, alla) => ({ text: x, options: { italic: x.startsWith('”'), breakLine: !sist && j === alla.length - 1 } }));
+    txt(s, b.exempel.flatMap((t, i) => repliker(t, i === b.exempel.length - 1)), 0.61, top2 + 0.1, 4.97, storyH - 0.2, { size: 11.5, psa: 5 });
     let y = top2 + storyH + 0.15;
     if (b.forberett) { cream(s, 0.46, y, 5.27, c1H, b.forberett, 12, 'DET JAG FÖRBEREDDE'); y += c1H + 0.15; }
     if (b.klarTidigt) cream(s, 0.46, y, 5.27, c2H, b.klarTidigt, 12, 'KLAR TIDIGT');
