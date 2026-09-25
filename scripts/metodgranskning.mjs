@@ -8,6 +8,7 @@
 //   node scripts/metodgranskning.mjs <id> --bara-prompt           Skriv bara prompten, kör inte Codex
 //   node scripts/metodgranskning.mjs <id> --vanta                 Kör i förgrunden och vänta (fem till tio minuter)
 //   node scripts/metodgranskning.mjs <id> --lathundbilder <mapp>  Bifoga lathundens original som sidbilder (png ur lathund.pdf)
+//   node scripts/metodgranskning.mjs <id> --vikarie              Codex slut: skriv prompten för agenten granskare (Opus 5.5) i stället, och kör den med Agent
 //
 // Prompten byggs ur scripts/codex/metod-granskning.md. Word-filernas text tas fram med pandoc, och
 // skärmbilderna från scripts/metodprov.mjs --bilder bifogas om de finns. Svaret hamnar i
@@ -33,6 +34,9 @@ const extraMapp = flagga('--extrabilder');
 const fragorFil = flagga('--fragor');
 const baraPrompt = args.includes('--bara-prompt');
 const vanta = args.includes('--vanta');
+// --vikarie: Codex kan inte användas (kvoten slut 2026-09-25). Prompten skrivs för en Claude-subagent i stället,
+// agenten granskare i .claude/agents/ (Opus 5.5; ansträngningen sätts på sessionen), som läser bilderna med Read.
+const vikarie = args.includes('--vikarie');
 
 const MODELL = process.env.CODEX_MODELL ?? 'gpt-6-astra';
 const ANSTRANGNING = process.env.CODEX_ANSTRANGNING ?? 'xhigh';
@@ -84,7 +88,7 @@ if (extraMapp && !extra.length) console.warn(`Inga png-bilder i ${extraMapp}.`);
 
 const datum = new Date().toISOString().slice(0, 10);
 const mall = readFileSync(mallFil ? resolve(mallFil) : join(rot, 'scripts', 'codex', 'metod-granskning.md'), 'utf8');
-const prompt = mall
+let prompt = mall
   .replaceAll('{{id}}', id)
   .replaceAll('{{datum}}', datum)
   .replaceAll('{{fragor}}', fragorFil ? readFileSync(resolve(fragorFil), 'utf8').trim() : '(inga särskilda frågor)')
@@ -95,12 +99,22 @@ const prompt = mall
   .replaceAll('{{docx}}', docxTexter.join('\n') || '- (inga Word-filer i dist)')
   .replaceAll('{{bilder}}', [...bilder.map((b) => `- ${rel(b)} (bifogad som bild)`), ...original.map((b, i) => `- ${rel(b)} (lathundens original ur Niclas pptx, sida ${i + 1}, bifogad som bild: jämför lathunden på sajten mot den)`), ...extra.map((b) => `- ${rel(b)} (bifogad som bild)`), ...pdfer.map((p) => `- ${rel(p)} (utskriften som pdf, läs med pdftotext om det finns)`)].join('\n') || '- (inga skärmbilder: kör node scripts/metodprov.mjs ' + id + ' --bilder först)');
 const promptFil = join(mapp, 'prompt.md');
+const svar = join(prov, `granskning-${datum}.md`);
+if (vikarie) {
+  prompt = `Du är vikarie för Codex som second opinion (Codex slut 2026-09-25; Niclas valde Opus 5.5 med högsta ansträngning). Bilderna nedan är inte bifogade: öppna var och en med Read, i ordning, och hoppa inte över någon. Skriv svaret till ${rel(svar)} med Write, i den form som anges längst ner. Ändra ingen annan fil.\n\n` + prompt.replaceAll('(bifogad som bild)', '(öppna med Read)').replaceAll('bifogad som bild:', 'öppna med Read:');
+}
 writeFileSync(promptFil, prompt);
 console.log(`Prompten ligger i ${rel(promptFil)}${bilder.length + original.length + extra.length ? `, ${bilder.length + original.length + extra.length} bilder bifogas` : ''}.`);
 if (baraPrompt) process.exit(0);
+if (vikarie) {
+  console.log(`Vikarie: kör agenten granskare (Opus 5.5) med Agent, subagent_type "granskare", och prompten:`);
+  console.log(`  Läs ${rel(promptFil)} och gör exakt det. Skriv svaret till ${rel(svar)}.`);
+  console.log('Finns inte agenttypen granskare (sessionen startade innan .claude/agents/granskare.md fanns): general-purpose med model opus och samma prompt, med tillägget "Läs .claude/agents/granskare.md först."');
+  console.log('Ansträngningen ärvs från sessionen: sätt den till max i appens modellmeny innan. Adjudicera sedan som efter Codex.');
+  process.exit(0);
+}
 if (!codexExe) { console.error('Hittar inte Codex CLI (codex.exe i %LOCALAPPDATA%\\Programs\\OpenAI\\Codex\\bin eller codex i PATH).'); process.exit(1); }
 
-const svar = join(prov, `granskning-${datum}.md`);
 const logg = join(prov, 'codex.log');
 const codexArgs = ['exec', '-m', MODELL, '-c', `model_reasoning_effort=${ANSTRANGNING}`, '--sandbox', 'read-only', '--skip-git-repo-check', '-o', svar];
 for (const b of [...bilder, ...original, ...extra]) codexArgs.push('-i', b);
