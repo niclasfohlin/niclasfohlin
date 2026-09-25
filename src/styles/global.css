@@ -309,7 +309,7 @@ html.js .nedladdning .skriv-ut { display: block; }
 /* Filraderna: vad filen innehåller, sedan valet Word, Drive, pdf som en grupp små knappar. */
 .filrader { list-style: none; margin: 0 0 0.75rem; padding: 0; display: flex; flex-direction: column; gap: 0.45rem; }
 .filrader li { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.75rem; }
-.filrubrik { min-width: 11.5rem; }
+.filrubrik { flex: 0 0 11.5rem; }
 .filval { display: inline-flex; flex-wrap: wrap; max-width: 100%; border: 1px solid var(--farg-kant); border-radius: 6px; overflow: hidden; background: var(--farg-yta); font-family: var(--typsnitt-ui); font-size: 0.85rem; line-height: 1; vertical-align: middle; }
 .filval > a, .filval > button { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.25rem; padding: 0 0.7rem; color: var(--farg-accent); font: inherit; font-weight: 600; text-decoration: none; background: none; border: 0; border-left: 1px solid var(--farg-kant); cursor: pointer; }
 .filval > :first-child { border-left: 0; }
@@ -391,6 +391,7 @@ button.lank:hover { color: var(--farg-accent); }
 .m-tabell .fraser { list-style: none; margin: 0; padding: 0; font-style: italic; }
 .m-tabell .fraser li { margin: 0 0 0.25em; }
 .m-tabell.tva tbody th { background: var(--farg-accent); color: #fff; border-color: var(--farg-accent); width: 28%; }
+.m-tabell.tva tbody tr + tr th { border-top-color: rgba(255, 255, 255, 0.35); }
 /* En ordlista eller bokstavslista (klassen tat, ramarnas översikt med korta celler): lika breda kolumner som aldrig växer ur sidan. */
 .m-tabell.tat { table-layout: fixed; }
 .m-tabell.tat td { overflow-wrap: anywhere; }
@@ -454,10 +455,14 @@ button.lank:hover { color: var(--farg-accent); }
 .lh .m-lista td { font-size: 1.05rem; padding: 0.3rem 0.6rem; }
 .lh .m-lista.bokstaver td { font-size: 1.3rem; }
 /* Lärarens not till en lista: kompakt, med etiketterna inbyggda, före listan. */
-.m-listnot { background: var(--farg-ton); border-left: 4px solid var(--farg-accent); border-radius: 0 8px 8px 0; padding: 0.7rem 1rem; margin: 0.75rem 0 1rem; font-family: var(--typsnitt-ui); font-size: 0.92rem; line-height: 1.5; }
+.m-listnot { background: var(--farg-ton); border-left: 4px solid var(--farg-accent); border-radius: 0 8px 8px 0; padding: 0.7rem 1rem; margin: 0.75rem 0 1rem; font-family: var(--typsnitt-ui); font-size: 1rem; line-height: 1.5; }
 .m-listnot p { margin: 0 0 0.35em; }
 .m-listnot p:last-child { margin-bottom: 0; }
 .m-listnot b { font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-accent); margin-right: 0.4em; }
+.m-ramlankar { font-family: var(--typsnitt-ui); font-size: 0.95rem; line-height: 1.9; margin: 0 0 1.5rem; padding: 0.6rem 0.9rem; background: var(--farg-ton-svag); border-radius: 8px; }
+.m-ramlankar span { color: var(--farg-text-svag); }
+/* Rutans namn (Till läraren, Till vårdnadshavaren) står överst, så att texten kan hänvisa till rutan med namn. */
+.m-listnot .kicker { display: block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-accent); margin: 0 0 0.45em; }
 .m-ram > h3 { margin: 0 0 0.5em; }
 .m-ramdel { border: 1px solid var(--farg-kant); border-radius: 8px; overflow: hidden; margin: 0 0 1rem; font-family: var(--typsnitt-ui); font-size: 0.95rem; }
 .m-ramdel h4 { margin: 0; padding: 0.5rem 0.9rem; background: var(--farg-accent-ljus); color: var(--farg-accent); font-family: var(--typsnitt-ui); font-size: 1rem; border-bottom: 1px solid var(--farg-kant); }
@@ -556,6 +561,14 @@ html.js .bara-js { display: inline-block; }
 .lh-block { padding: 0.75rem 1.25rem 1.25rem; column-count: 2; column-gap: 1.75rem; }
 .lh-block > * { break-inside: avoid; }
 .lh-block > .lh-spalter, .lh-block > .lh-tavla { column-span: all; }
+/* Bladet på bordet (talsortsmattan): en spalt, kolumnnamnen stora och läsbara från andra sidan bordet, rutorna höga nog att bygga i. */
+.lh-block-matta { column-count: 1; }
+.lh-mattatabell.m-tabell { table-layout: fixed; width: 100%; }
+.lh-mattatabell.m-tabell thead th { font-family: inherit; font-size: 1rem; letter-spacing: 0; text-transform: none; background: var(--farg-ton-svag); color: var(--farg-text); border: 1px solid var(--farg-text); }
+.lh-mattatabell.m-tabell td:empty { height: 9rem; border: 1px solid var(--farg-text); background: #fff; }
+/* Mattans fot är regeln för eleven: större, inte fet (fet stil betyder rubrik). */
+.lh-not.lh-regel { font-size: 1.15rem; }
+.lh-mattatabell.m-tabell tbody:has(tr:only-child) td:empty { height: 17rem; }
 .lh-spalter { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.5rem; margin: 0.5rem 0 1rem; }
 .lh-spalt > h3 { margin: 0 0 0.35rem; font-size: 1rem; padding-bottom: 0.3rem; border-bottom: 2px solid var(--farg-text); }
 .lh-spalt .nr, .lh-skrivruta .nr { font-family: ui-monospace, monospace; color: var(--farg-accent); font-size: 0.85rem; margin-right: 0.2rem; }
@@ -628,6 +641,11 @@ html.js .bara-js { display: inline-block; }
   .lh-tabell.m-tabell { font-size: 8.5pt; margin: 0.15rem 0 0.5rem; }
   .lh-tabell.m-tabell th, .lh-tabell.m-tabell td { padding: 0.3rem 0.45rem; }
   .lh-tabell.m-tabell td:empty { height: 20pt; }
+  /* Bladet på bordet fyller den liggande sidan: två rader om 56 mm ryms med band, rubrik och not. */
+  .lh-mattatabell.m-tabell td:empty { height: 56mm; }
+  .lh-mattatabell.m-tabell tbody:has(tr:only-child) td:empty { height: 112mm; }
+  .lh-mattatabell.m-tabell thead th { font-size: 12pt; }
+  .lh-not.lh-regel { font-size: 13pt; }
   .lh-block { padding: 0.5rem 0.9rem 0.75rem; }
   .lh-spalter { gap: 0.6rem 1.25rem; margin: 0.25rem 0 0.6rem; }
   .lh-spalt > h3 { font-size: 9.5pt; }
@@ -662,6 +680,8 @@ html.js .bara-js { display: inline-block; }
   .m-tabell.stapla td::before { content: attr(data-rubrik); display: block; font-weight: 600; color: var(--farg-text-svag); font-size: 0.8rem; margin-bottom: 0.2em; }
   /* Staplad är första cellen kortets rubrik (Läs, Skrivhandling, Vecka 1 · Inbjudan till laget) och sätts fet, som en radrubrik. */
   .m-tabell.stapla td:first-child .forsta { font-weight: 600; }
+  /* Kursplanens radrubrik är bara en siffra: staplad får den enheten framför sig, "Vecka 1". */
+  .m-tabell.stapla.m-progression th[scope="row"]::before { content: attr(data-rubrik) " "; font-weight: 400; color: var(--farg-text-svag); }
   .m-gor-undvik, .m-bockar.tva { grid-template-columns: 1fr; }
   .m-bockar.tva li:nth-child(even) { border-left: 0; background: var(--farg-ton-svag); }
   .m-bockar.tva li:nth-child(2) { border-top: 1px solid var(--farg-kant); }
@@ -718,16 +738,25 @@ html.js .bara-js { display: inline-block; }
   .metod-modell h2 { font-size: 13pt; margin-top: 1.4em; break-after: avoid; }
   /* Rubrik och inledande stycke följer med det som kommer efter; snabbmallen hålls ihop. */
   .metod-modell h2 + p { break-after: avoid; }
-  .m-snabbmall, .m-bockar, .m-trappa, .m-trappa li, .m-kontrakt, .m-ramdel, .m-ramhuvud, .m-diplom, .m-remsa, .m-tavla, .m-tabell.tat, #snabbmall, #grund { break-inside: avoid; }
+  .m-snabbmall, .m-bockar, #uppfoljning table, .m-trappa, .m-trappa li, .m-kontrakt, .m-ramdel, .m-ramhuvud, .m-diplom, .m-remsa, .m-tavla, .m-tabell.tat, #snabbmall, #grund { break-inside: avoid; }
   .m-remsa-fas, .m-remsa-del, .m-pass .m-pass-kant th, .m-pass .m-pass-kant td { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .m-ram > h3, .m-ram > h3 + p, .m-ramdel h4 { break-after: avoid; }
   /* En läslista (ram med ordlista) hålls på en sida tillsammans med sin ruta, så att en kopia bär sitt namn och sin anvisning. */
   .m-ram:has(.m-tabell.tat) { break-inside: avoid; }
   .m-ramnamn { display: inline; }
-  .m-lista, .m-listnot { break-inside: avoid; }
-  /* En läslista hålls ihop med sin rubrik, sin not och sina listor så långt sidan räcker. */
-  .m-ram:has(.m-lista) { break-inside: avoid; }
-  .m-listnot { break-after: avoid; }
+  /* Varje lista och not hålls ihop och rubriken följer med sin lista. Hela ramen hålls inte ihop: en ram
+     med ett paket per årskurs är flera sidor, och då delade Chrome listorna i stället. */
+  .m-lista, .m-listnot, .m-lista tr { break-inside: avoid; }
+  .m-lista-rubrik { break-after: avoid; }
+  /* En kort ram (högst tre listor, som en läslista) hålls på en sida med sin not. I en lång ram (ett paket per
+     årskurs) binds noten inte till listan efter: då väger en bruten not och en bruten lista lika, och Chrome
+     bröt inne i listan. Utan bindningen bryter Chrome mellan noten och listan. */
+  .m-ram:has(.m-lista):not(:has(.m-lista ~ .m-lista ~ .m-lista ~ .m-lista)) { break-inside: avoid; }
+  .m-ram:not(:has(.m-lista ~ .m-lista ~ .m-lista ~ .m-lista)) .m-listnot { break-after: avoid; }
+  /* En lång ram (ett paket, en läxram, en sida mentortexter) börjar på ny sida, så att rubriken, texten och
+     första noten står ihop och paketet går att kopiera för sig. */
+  .m-ram:has(.m-lista ~ .m-lista ~ .m-lista ~ .m-lista) { break-before: page; }
+  .m-ramlankar { display: none; }
   .m-lista td { font-size: 13pt; padding: 0.3rem 0.6rem; }
   .m-lista.bokstaver td { font-size: 16pt; }
   .lh .m-lista td { font-size: 10pt; padding: 0.12rem 0.4rem; }

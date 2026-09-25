@@ -16,6 +16,9 @@ const arbetsform = arbetsformRad(d);
 const citat = (f: string) => `”${f}”`;
 // Passexemplet berättas rakt; replikerna (”…”) sätts kursiva, som på metodsidan och i stegtabellen.
 const repliker = (s: string) => s.split(/(”[^”]*”)/).filter(Boolean).map((text) => ({ text, replik: text.startsWith('”') }));
+// En enda tom tabell utan snabbmall på mallsidan är ett blad att lägga på bordet (talsortsmattan): kolumnerna
+// blir höga rutor som fyller sidan, och noten står under. Samma regel i metoddocx.ts och metodpptx.ts.
+const matta = !!l && l.mall.block.filter((b) => b.typ !== 'not').length === 1 && l.mall.block.some((b) => b.typ === 'tabell' && b.rader.every((r) => r.every((c) => !c.trim())));
 ---
 {l && (
   <div class="lh">
@@ -84,7 +87,7 @@ const repliker = (s: string) => s.split(/(”[^”]*”)/).filter(Boolean).map((
     <section class="lh-sida" id="lathund-mall" aria-labelledby="lh-3">
       <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-3">{l.mall.rubrik}</h2><span class="lh-etikett">Mallen · 3/4</span><span class="bara-js lh-lank"><button type="button" data-skriv-ut-mall>Skriv ut den här sidan</button></span></header>
       {l.mall.underrad && <p class="lh-underrad">{l.mall.underrad}</p>}
-      <div class="lh-block">
+      <div class:list={['lh-block', { 'lh-block-matta': matta }]}>
         {l.mall.block.map((b) => {
           if (b.typ === 'spalter') return (
             <div class="lh-spalter">
@@ -117,6 +120,12 @@ const repliker = (s: string) => s.split(/(”[^”]*”)/).filter(Boolean).map((
               </tbody>
             </table>
           );
+          if (b.typ === 'tabell' && matta) return (
+            <div class="lh-avsnitt lh-matta">
+              <h3 class="lh-kicker">{b.rubrik}</h3>
+              <MetodTabell kolumner={b.kolumner} rader={b.rader} klass="lh-tabell lh-mattatabell" radrubrik={false} />
+            </div>
+          );
           if (b.typ === 'tabell') return (
             <div class="lh-avsnitt">
               <h3 class="lh-kicker">{b.rubrik}</h3>
@@ -132,7 +141,7 @@ const repliker = (s: string) => s.split(/(”[^”]*”)/).filter(Boolean).map((
               {b.citat && <p class="lh-citat">{citat(b.citat)}</p>}
             </div>
           );
-          if (b.typ === 'not') return <p class="lh-not">{b.text}</p>;
+          if (b.typ === 'not') return <p class:list={['lh-not', { 'lh-regel': matta }]}>{b.text}</p>;
           return null;
         })}
       </div>

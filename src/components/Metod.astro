@@ -5,7 +5,9 @@ import MetodTabell from './MetodTabell.astro';
 import Tavla from './Tavla.astro';
 import Elevlista from './Elevlista.astro';
 import type { MetodData } from '../lib/metod';
-import { ramArTom, passOversikt, stegTexter } from '../lib/metod';
+import { ejBryt, ramArTom, passOversikt, stegTexter } from '../lib/metod';
+// "Åk 4–5" hålls ihop i ramarnas rubriker och länkar: hårt mellanslag efter Åk, ordfog efter tankstrecket.
+const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 '));
 interface Props { d: MetodData; id: string }
 const { d, id } = Astro.props;
 const efterInledning = d.tabeller.filter((t) => t.plats === 'efter-inledning');
@@ -93,7 +95,7 @@ const avsnitt = [
             <tr>
               <th scope="row" data-rubrik="Fas"><span class="forsta">{f.fas}</span><span class="under">{f.tid}</span></th>
               {f.steg.length > 0 ? <td data-rubrik="Rutinen"><ol class="m-pass-steg" start={f.steg[0].nr}>{f.steg.map((s) => <li>{s.text}</li>)}</ol></td> : <td class="tom"></td>}
-              <td data-rubrik="Så leder du det">{f.vad}</td>
+              <td data-rubrik="Så leder du det">{repliker(f.vad).map((r) => (r.replik ? <em>{r.text}</em> : r.text))}</td>
             </tr>
           ))}
           {pass.efter && <tr class="m-pass-kant"><th scope="row" data-rubrik="Fas">Efter passet</th><td colspan="2" data-rubrik="Notering">{pass.efter}</td></tr>}
@@ -271,7 +273,7 @@ const avsnitt = [
     <section id="progression">
       <h2>{d.progression.rubrik}</h2>
       {d.progression.text && <p>{d.progression.text}</p>}
-      <MetodTabell kolumner={[d.progression.enhet, 'Fokus', 'Lärarens roll']} rader={d.progression.rader.map((r) => [r.led ? `${r.vecka}\n${r.led}` : r.vecka, r.fokus, r.roll])} bredder={['18%', '42%', '40%']} klass="stapla" />
+      <MetodTabell kolumner={[d.progression.enhet, 'Fokus', 'Lärarens roll']} rader={d.progression.rader.map((r) => [r.led ? `${r.vecka}\n${r.led}` : r.vecka, r.fokus, r.roll])} bredder={['18%', '42%', '40%']} klass="stapla m-progression" />
     </section>
   )}
 
@@ -343,16 +345,23 @@ const avsnitt = [
     <section id="ramar">
       <h2>{d.ramar.rubrik}</h2>
       {d.ramar.text.map((s) => <p>{s}</p>)}
-      {d.ramar.ramar.map((ram) => (
-        <section class="m-ram">
-          <h3>{ram.rubrik}</h3>
+      {/* Med fyra ramar eller fler (ett paket per årskurs, läslistorna, projekten) blir sidan lång: en rad med länkar till varje ram. */}
+      {d.ramar.ramar.length >= 4 && (
+        <nav class="m-ramlankar" aria-label={`Hoppa till: ${d.ramar.rubrik}`}>
+          {d.ramar.ramar.map((r, i) => <>{i > 0 && <span aria-hidden="true"> · </span>}<a href={`#ram-${i + 1}`}>{hel(r.rubrik)}</a></>)}
+        </nav>
+      )}
+      {d.ramar.ramar.map((ram, ri) => (
+        <section class="m-ram" id={`ram-${ri + 1}`}>
+          <h3>{hel(ram.rubrik)}</h3>
           {ram.text.map((s) => <p>{s}</p>)}
           {ram.oversikt && <MetodTabell kolumner={ram.oversikt.kolumner} rader={ram.oversikt.rader} klass={kortaCeller(ram.oversikt.rader) ? 'fri tat' : friKlass(ram.oversikt)} radrubrik={false} />}
           {ram.listor ? (
             <>
               {ram.delar.map((del) => (
                 <div class="m-listnot">
-                  {del.falt.map((f) => <p><b>{f.rubrik}</b>{linjer(f.text).map((x, j) => <>{j > 0 && <br />}{x}</>)}</p>)}
+                  <p class="kicker">{del.rubrik}</p>
+                  {del.falt.map((f) => <p><b>{f.rubrik}</b>{linjer(f.text).map((x, j) => <>{j > 0 && <br />}{repliker(x).map((r) => (r.replik ? <em>{r.text}</em> : r.text))}</>)}</p>)}
                 </div>
               ))}
               {ram.listor.map((l) => <Elevlista rubrik={l.rubrik} kolumner={l.kolumner} rader={l.rader} />)}

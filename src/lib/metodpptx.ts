@@ -76,6 +76,12 @@ function bilder(d: MetodData) {
       formular: { rubrik: versaler(snabb.rubrik), sektioner: [{ rubrik: 'FÖRE PASSET', falt: snabb.fore }, { rubrik: 'EFTER PASSET · KORT NOTERING', falt: snabb.efter }] },
       fot: sista.typ === 'not' && sista.text !== not ? { text: sista.text } : undefined,
     };
+  } else if (tomTabell && block.filter((x) => x.typ !== 'not').length === 1) {
+    // En enda tom tabell utan snabbmall är ett blad att lägga på bordet (talsortsmattan): varje kolumn
+    // blir en hög ruta som fyller bilden, så att materialet ryms när bladet skrivs ut i A3, och noten blir foten.
+    const i = block.indexOf(tomTabell);
+    const not = block[i + 1]?.typ === 'not' ? block[i + 1].text : undefined;
+    bild3 = { ...bild3, typ: 'matta', rubrik: tomTabell.rubrik, kolumner: tomTabell.kolumner, rader: Math.max(1, tomTabell.rader.length), fot: not ? { text: not } : undefined };
   } else {
     bild3 = { ...bild3, typ: 'block', block };
   }
@@ -317,7 +323,9 @@ export async function lathundPptx(m: CollectionEntry<'stodundervisning'>, o: { b
     rect(s, 0, 0.66, W, 0.44, BAND); rect(s, 0, 1.08, W, 0.02, INK);
     txt(s, b.bandVanster ?? '', 0.21, 0.76, 7.2, 0.25, { mono: true, size: 12, color: GREY });
     txt(s, b.bandHoger ?? '', 6.6, 0.76, 6.5, 0.25, { mono: true, size: 12, color: GREY, align: 'right' });
-    const fotH = b.fot ? 1.45 : 0, fotY = BOTTEN - fotH;
+    // Mattans fot är regeln för eleven: en rad, större text, inte fet.
+    const regel = b.typ === 'matta';
+    const fotH = b.fot ? (regel ? 0.9 : 1.45) : 0, fotY = BOTTEN - fotH;
     const areaTop = 1.25, areaBottom = fotY - 0.15;
 
     if (b.typ === 'schema') {
@@ -333,12 +341,30 @@ export async function lathundPptx(m: CollectionEntry<'stodundervisning'>, o: { b
       if (t.not) txt(s, t.not, lx, ly + 0.35 + nrows * rh + 0.1, lw, 0.45, { size: 11, color: GREY });
       rect(s, 6.65, 1.1, 0.02, areaBottom - 1.1, INK);
       formular(s, 6.88, ly, 6.24, b.formular, areaBottom - ly);
+    } else if (b.typ === 'matta') {
+      // Bladet på bordet: etiketten, sedan en hög ruta per kolumn och rad som fyller bilden, kolumnnamnet
+      // stort i ett band överst i varje ruta så att det går att läsa från andra sidan bordet.
+      const x0 = 0.21, fullW = W - 0.42, mellan = 0.18, radMellan = 0.12;
+      let y = areaTop;
+      if (b.rubrik) { label(s, versaler(b.rubrik), x0, y, fullW, NAVY); y += 0.32; }
+      const n = b.kolumner.length, cw = (fullW - mellan * (n - 1)) / n;
+      const rh = (areaBottom - y - radMellan * (b.rader - 1)) / b.rader;
+      for (let r = 0; r < b.rader; r++) {
+        for (let i = 0; i < n; i++) {
+          const cx = x0 + i * (cw + mellan), cy = y + r * (rh + radMellan);
+          frame(s, cx, cy, cw, rh, INK, 1.25, WHITE);
+          if (r === 0) {
+            rect(s, cx + 0.02, cy + 0.02, cw - 0.04, 0.42, BAND);
+            txt(s, b.kolumner[i], cx + 0.14, cy + 0.09, cw - 0.28, 0.3, { size: 14, bold: true });
+          }
+        }
+      }
     } else {
       ritaBlock(s, b.block, areaTop, areaBottom);
     }
     if (b.fot) {
       rect(s, 0, fotY, W, fotH, CREAM); rect(s, 0, fotY, W, 0.02, INK);
-      txt(s, rich(b.fot.text ?? ''), 0.46, fotY + 0.18, W - 0.92, fotH - 0.3, { size: 12.5 });
+      txt(s, rich(b.fot.text ?? ''), 0.46, fotY + (regel ? 0.1 : 0.18), W - 0.92, fotH - (regel ? 0.2 : 0.3), { size: regel ? 17 : 12.5, valign: regel ? 'middle' : 'top' });
     }
     fot(s);
     s.addNotes(`${b.anteckning} ${upphov}`);
