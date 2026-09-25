@@ -96,7 +96,7 @@ Vid varje Word-fil finns valet Word, Drive och för lathunden pdf (`src/componen
 
 ## Loopia och domänen
 
-niclasfohlin.se är registrerad hos Loopia till 2027-09-19, DNS hos Loopia (ns1 och ns2.loopia.se, zonen är DNSSEC-signerad). LoopiaAPI hanterar bara domäner och DNS; e-postalias skapas av Niclas i Loopia Kundzon (steget står i INSTRUKTIONER.docx när det behövs).
+niclasfohlin.se är registrerad hos Loopia till 2027-09-19, DNS hos Loopia (ns1 och ns2.loopia.se, zonen är DNSSEC-signerad). LoopiaAPI hanterar bara domäner och DNS; e-postalias skapas av Niclas i Loopia Kundzon (steget står i INSTRUKTIONER.docx när det behövs). Om aliaset nyhetsbrev@ fungerar går inte att se härifrån: API:t ser ingen e-post, och port 25 utåt är stängd från den här datorn, så ett RCPT-prov mot mailcluster.loopia.se når aldrig fram (provat 2026-09-25). Provet görs med ett mejl från Brevo till adressen, som Niclas först säger ja till; Brevos logg visar då om Loopia tog emot det eller varför det stoppades. Niclas egen provning ska komma från en annan adress än niclas.fohlin@gmail.com, eftersom Gmail inte visar ett mejl som kommer tillbaka till kontot som skickade det.
 
 | Uppgift | Kommando |
 |---|---|
