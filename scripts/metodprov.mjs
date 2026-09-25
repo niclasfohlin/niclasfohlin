@@ -93,6 +93,19 @@ if (metod.lathund) {
   existsSync(lathund) && readFileSync(lathund, 'utf8').includes('© Niclas Fohlin') ? ok('lathundssidan finns med upphov') : nej('lathundssidan saknas eller saknar upphov');
   html.includes(`/stodundervisning/${id}/lathund`) ? ok('metodsidan länkar till lathunden') : nej('metodsidan länkar inte till lathunden');
   await provaDocx(join(dist, `${id}-lathund.docx`), 'lathunden (docx)');
+  // Lathunden som PowerPoint: exakt fyra bilder, upphovet i varje bilds anteckning.
+  const pptx = join(dist, `${id}-lathund.pptx`);
+  if (existsSync(pptx)) {
+    const zip = await JSZip.loadAsync(readFileSync(pptx));
+    const bilder = Object.keys(zip.files).filter((f) => /^ppt\/slides\/slide\d+\.xml$/.test(f));
+    const noter = Object.keys(zip.files).filter((f) => /^ppt\/notesSlides\/notesSlide\d+\.xml$/.test(f));
+    let upphov = 0;
+    for (const f of noter) if ((await zip.file(f).async('string')).includes('© Niclas Fohlin')) upphov++;
+    bilder.length === 4 ? ok('lathunden (pptx): fyra bilder') : nej(`lathunden (pptx): ${bilder.length} bilder, ska vara fyra`);
+    upphov === 4 ? ok('lathunden (pptx): upphov i alla fyra anteckningar') : nej(`lathunden (pptx): upphov i ${upphov} av 4 anteckningar`);
+    html.includes(`/stodundervisning/${id}-lathund.pptx`) ? ok('metodsidan länkar till lathundens pptx') : nej('metodsidan länkar inte till lathundens pptx');
+    console.log(`       ${(statSync(pptx).size / 1024).toFixed(1)} kB`);
+  } else nej('lathunden (pptx) saknas i dist');
 } else console.log('  obs  ingen lathund i metoden');
 
 // 3. Underlaget: meningar som ska finnas kvar i YAML-filen.

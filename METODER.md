@@ -49,7 +49,7 @@ Sidan byggs av `src/components/Metod.astro` (tabeller via `MetodTabell.astro`, n
 
 ## Lathunden
 
-Fyra sidor ur Niclas snabbguide, i samma fil under `lathund`. Sidan `/stodundervisning/<id>/lathund` (`src/components/Lathund.astro`, stilar `.lh-*`), utskrift i liggande A4 på exakt fyra sidor, och Word-filen `<id>-lathund.docx`. Rubriker som "Insatsspår 1" stryks: lathunden heter det metoden heter.
+Fyra sidor ur Niclas snabbguide, i samma fil under `lathund`. Sidan `/stodundervisning/<id>/lathund` (`src/components/Lathund.astro`, stilar `.lh-*`), utskrift i liggande A4 på exakt fyra sidor, Word-filen `<id>-lathund.docx` och PowerPoint-filen `<id>-lathund.pptx`: fyra bilder i 16:9, kant till kant, i snabbguidens layout och sajtens palett (`src/lib/metodpptx.ts`, byggd ur samma data vid bygget, så inget kan glida isär). Drive-knappen sparar lathunden som presentation, allt annat som Word. Bygget varnar med `!` när lathundens text inte ryms på en bild: korta texten i metoden (`lathund.metoden.text` omkring 90 ord, `lathund.pass.text` omkring 130, mallsidans block så att de ryms i två spalter), ändra inte renderaren. Rubriker som "Insatsspår 1" stryks: lathunden heter det metoden heter.
 
 | Sida | Fält | Innehåll |
 |---|---|---|
@@ -88,14 +88,15 @@ Varje ny metod granskas av Codex innan den pushas. `scripts/metodgranskning.mjs`
 
 ## När modellen växer
 
-En ny del läggs till på fem ställen i samma commit: schemat i `src/content.config.ts`, sidan i `Metod.astro`, Word-filen i `metoddocx.ts`, utskriften i `global.css`, och `_mall.yaml` samt tabellen ovan. Lathundens blocktyper på motsvarande sätt i `Lathund.astro`, `lathundBarn` i `metoddocx.ts` och `.lh-*`.
+En ny del läggs till på fem ställen i samma commit: schemat i `src/content.config.ts`, sidan i `Metod.astro`, Word-filen i `metoddocx.ts`, utskriften i `global.css`, och `_mall.yaml` samt tabellen ovan. Lathundens blocktyper på motsvarande sätt i `Lathund.astro`, `lathundBarn` i `metoddocx.ts`, `ritaBlock` i `metodpptx.ts` och `.lh-*`.
 
 ## Kontroller som gäller
 
 | Vad | Hur |
 |---|---|
 | Bygget | `npm run validera` |
-| Sidan, Word-filerna, underlaget, lathundens sidantal, det maskinella i mottagarläsningen | `node scripts/metodprov.mjs <slug> --underlag <md> --bilder` |
+| Sidan, Word-filerna, lathundens pptx (fyra bilder, upphov), underlaget, lathundens sidantal, det maskinella i mottagarläsningen | `node scripts/metodprov.mjs <slug> --underlag <md> --bilder` |
+| Lathundens pptx som bilder | `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/pptx-till-pdf.ps1 dist/stodundervisning/<slug>-lathund.pptx` och `pdftoppm -r 60 -png`; titta på alla fyra |
 | Mottagarläsning av bilderna | Dela skärmbilderna i bitar, exportera Word-sidorna, läs varje bild som en lärare som ska köra passet i morgon. Regeln: fet stil betyder rubrik, inget annat; inget bryts så att det läses fel; likvärdiga saker ser likadana ut; det läraren behöver kommer först. Se steg 8 i `/ny-metod` |
 | Läsbarhet och användbarhet, second opinion | `node scripts/metodgranskning.mjs <slug> --mall scripts/codex/metod-lasbarhet.md --extrabilder underlag/prov/<slug>/granskningsbilder`: Codex läser bara bilderna som lärare, efter att sidan redan är rättad |
 | Mobil på riktigt | `node scripts/skarmbild.mjs <url> --mobil` (headless Chrome har en minsta fönsterbredd, `--window-size=390` ljuger) |

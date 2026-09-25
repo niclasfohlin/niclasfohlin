@@ -1,9 +1,9 @@
 ---
 // Nedladdningsrutan på metodsidan. Orden ska stämma med innehållet: "Allt om metoden" är
 // beskrivningen, planeringsmallarna och lathunden i en Word-fil; de andra två filerna är delar av den.
-// Filerna byggs vid bygget av src/pages/stodundervisning/[id].docx.ts, [id]-mallar.docx.ts och
-// [id]-lathund.docx.ts; lathundens pdf ligger i public/stodundervisning/ (scripts/lathund-pdf.mjs).
-// Varje fil erbjuds med samma val (Word, Drive, pdf) genom Filval.astro.
+// Filerna byggs vid bygget av src/pages/stodundervisning/[id].docx.ts, [id]-mallar.docx.ts,
+// [id]-lathund.docx.ts och [id]-lathund.pptx.ts; lathundens pdf ligger i public/stodundervisning/
+// (scripts/lathund-pdf.mjs). Varje fil erbjuds med samma val (Word, PowerPoint, Drive, pdf) genom Filval.astro.
 import Filval from './Filval.astro';
 import { site } from '../data/site';
 // ramar: namnet på metodens ramar (läslistorna, berättelseramarna) när de ligger i planeringsmallarna, så att knappen säger det.
@@ -23,10 +23,10 @@ const bas = `/stodundervisning/${id}`;
   </ul>
   <ul class="filrader">
     <li><span class="filrubrik">Allt om metoden</span> <Filval fil={bas} namn={id} rubrik="Allt om metoden" /></li>
-    {harLathund && <li><span class="filrubrik">Bara lathunden</span> <Filval fil={`${bas}-lathund`} namn={`${id}-lathund`} rubrik="Lathunden" pdf /></li>}
+    {harLathund && <li><span class="filrubrik">Bara lathunden</span> <Filval fil={`${bas}-lathund`} namn={`${id}-lathund`} rubrik="Lathunden" pdf pptx /></li>}
     {harMallar && <li><span class="filrubrik">Bara planeringsmallarna{ramar && ` och ${ramar}`}</span> <Filval fil={`${bas}-mallar`} namn={`${id}-mallar`} rubrik="Planeringsmallarna" /></li>}
   </ul>
-  <p class="meta">Allt om metoden: {delarText}. Alla filer bär © Niclas Fohlin.{drive && ' Drive sparar en Word-kopia i din egen Google Drive.'}{harLathund && ' Word visar lathundens sidor liggande; Google Dokument kan bara visa en sidriktning per fil, så där blir lathunden liggande bara i filen Bara lathunden eller som pdf.'}</p>
+  <p class="meta">Allt om metoden: {delarText}. Alla filer bär © Niclas Fohlin.{harLathund && ' Lathunden finns också som PowerPoint med fyra bilder, att visa på tavlan eller ha i telefonen.'}{drive && ` Drive sparar en kopia i din egen Google Drive${harLathund ? ': lathunden som presentation, det andra som Word' : ''}.`}</p>
 </aside>
 
 <script>

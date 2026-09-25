@@ -12,6 +12,9 @@ declare global {
 
 const SCOPE = 'https://www.googleapis.com/auth/drive.file';
 const DOCX = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+const PPTX = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
+// Filtypen följer filnamnet: lathunden sparas som PowerPoint, allt annat som Word.
+const mimeFor = (namn: string) => (namn.toLowerCase().endsWith('.pptx') ? PPTX : DOCX);
 let token: string | undefined;
 let gisLaddas: Promise<void> | undefined;
 
@@ -63,7 +66,8 @@ async function laddaUpp(blob: Blob, namn: string): Promise<{ id: string; webView
   const t = await hamtaToken();
   // multipart/related som Drive-API:t beskriver: metadata som JSON, sedan filen.
   const grans = `niclasfohlin-${Date.now().toString(36)}`;
-  const huvud = `--${grans}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${JSON.stringify({ name: namn, mimeType: DOCX })}\r\n--${grans}\r\nContent-Type: ${DOCX}\r\n\r\n`;
+  const mime = mimeFor(namn);
+  const huvud = `--${grans}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${JSON.stringify({ name: namn, mimeType: mime })}\r\n--${grans}\r\nContent-Type: ${mime}\r\n\r\n`;
   const kropp = new Blob([huvud, blob, `\r\n--${grans}--`]);
   const res = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,webViewLink', {
     method: 'POST',
