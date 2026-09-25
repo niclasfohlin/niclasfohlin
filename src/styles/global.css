@@ -310,7 +310,7 @@ html.js .nedladdning .skriv-ut { display: block; }
 .filrader { list-style: none; margin: 0 0 0.75rem; padding: 0; display: flex; flex-direction: column; gap: 0.45rem; }
 .filrader li { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.75rem; }
 .filrubrik { min-width: 11.5rem; }
-.filval { display: inline-flex; border: 1px solid var(--farg-kant); border-radius: 6px; overflow: hidden; background: var(--farg-yta); font-family: var(--typsnitt-ui); font-size: 0.85rem; line-height: 1; vertical-align: middle; }
+.filval { display: inline-flex; flex-wrap: wrap; max-width: 100%; border: 1px solid var(--farg-kant); border-radius: 6px; overflow: hidden; background: var(--farg-yta); font-family: var(--typsnitt-ui); font-size: 0.85rem; line-height: 1; vertical-align: middle; }
 .filval > a, .filval > button { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.25rem; padding: 0 0.7rem; color: var(--farg-accent); font: inherit; font-weight: 600; text-decoration: none; background: none; border: 0; border-left: 1px solid var(--farg-kant); cursor: pointer; }
 .filval > :first-child { border-left: 0; }
 .filval > a:hover, .filval > button:hover { background: var(--farg-accent-ljus); color: var(--farg-accent-mork); }
@@ -764,8 +764,9 @@ html.js .bara-js { display: inline-block; }
   .m-ramfalt > div { grid-template-columns: 1fr; }
   .m-ramfalt dt { padding-bottom: 0.2rem; }
   .m-ramfalt dd { padding-top: 0.2rem; }
-  /* Filvalets knappar får full träffyta på pekskärm. */
-  .filval > a, .filval > button, .filval.liten > a, .filval.liten > button { min-height: 2.75rem; padding: 0 0.8rem; }
+  /* Filvalet fyller raden på mobil och knapparna delar bredden, så att alla fyra (PPTX, Drive, Pdf, Word) syns utan att något klipps. Full träffyta på pekskärm. */
+  .filval { display: flex; width: 100%; }
+  .filval > a, .filval > button, .filval.liten > a, .filval.liten > button { flex: 1 1 auto; justify-content: center; min-height: 2.75rem; padding: 0 0.5rem; }
   .artikel .ingress { font-size: 1.15rem; }
   .brod { font-size: 1.0625rem; line-height: 1.7; }
   .hero { grid-template-columns: 1fr; gap: 1rem; }

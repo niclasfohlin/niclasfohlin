@@ -17,12 +17,12 @@ const d = m.data;
 const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathund`;
 ---
 
-<Base title={`Lathund: ${d.titel}`} description={`Snabbguide till ${d.titel}: metoden i korthet, ett pass steg för steg, mallen och vad du behöver. Skriv ut i liggande A4 eller ladda ner som Word-fil.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
+<Base title={`Lathund: ${d.titel}`} description={`Snabbguide till ${d.titel}: metoden i korthet, ett pass steg för steg, mallen och vad du behöver. Skriv ut i liggande A4 eller ladda ner som PowerPoint, pdf eller Word.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
   <article class="lathund">
     <header class="lathund-huvud">
       <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${m.id}`}>{d.titel}</a> · Lathund</p>
       <h1>Lathund: {d.titel}</h1>
-      <p class="ingress">Fyra sidor att ha bredvid sig: metoden i korthet, ett pass steg för steg, mallen och vad du behöver. Skriv ut i liggande A4 eller ladda ner som Word-fil.</p>
+      <p class="ingress">Fyra sidor att ha bredvid sig: metoden i korthet, ett pass steg för steg, mallen och vad du behöver. Skriv ut i liggande A4 eller ladda ner som PowerPoint, pdf eller Word.</p>
       <p class="lathund-knappar">
         <span class="bara-js"><button type="button" class="knapp" data-skriv-ut>Skriv ut lathunden (fyra sidor)</button></span>
         {' '}<Filval fil={`/stodundervisning/${m.id}-lathund`} namn={`${m.id}-lathund`} rubrik="Lathunden" pdf pptx />
