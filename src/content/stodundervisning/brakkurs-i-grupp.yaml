@@ -87,7 +87,7 @@ tabeller:
     rader:
       - - 1 · Lika delar
         - Vik remsor i halvor och fjärdedelar, och jämför stavarna.
-        - Skriv bråk i bråkplanket, rita staplar och dela dem, och ordna bråk med täljaren 1.
+        - Skriv bråk i Bråkplanket att fylla i, rita staplar och dela dem, och ordna bråk med täljaren 1.
         - Spelet Fyll det hela. Problemet om tre barn som delar två chokladkakor.
       - - 2 · Bråk på tallinjen
         - Lägg stavarna mot tallinjen från 0. Staven blir ett mått.
@@ -155,7 +155,7 @@ tidsschema:
       vad: Läs det första kortet högt. I paret gör den ena kortet och berättar vad hen gör, och den andra kontrollerar med materialet eller tallinjen. De byter roller efter varje kort. Gå mellan paren och lyssna efter veckans vanliga fel. De står under Lyssna efter i veckans ruta Till läraren under Kursens material.
     - tid: 38–50 min
       fas: Fyra sätt
-      vad: Ge varje elev ett kort med ett bråk, gärna ett som hen läste för kamraten men inte gjorde själv. I pass 1 gör eleven bråket på bordet och ritar det i rutan Med material. Sedan ritar eleven bråket som bild, på en egen liten tallinje och med siffror. Lyssna på en elev i taget, med fler än sex elever på halva gruppen i pass 1 och resten i pass 2. Den som är klar får ett kort till.
+      vad: Ge varje elev ett kort med ett bråk, gärna ett som hen läste för kamraten men inte gjorde själv. I pass 1 gör eleven bråket på bordet och ritar det i rutan Med material. Sedan ritar eleven bråket som bild, på en egen liten tallinje och med siffror. Lyssna på en elev i taget. Har gruppen fler än sex elever lyssnar du på halva gruppen i pass 1 och på resten i pass 2. Den som är klar får ett kort till.
     - tid: 50–60 min
       fas: Veckans mening
       vad: Gör det sista bråket på din tallinje, med bitar från flera satser. Låt eleverna visa och berätta. Första passet i veckan skriver du meningen på affischen.
@@ -188,7 +188,7 @@ steg:
         - Hur vet du?
     - namn: Fyra sätt
       fraga: Kan du visa det på flera sätt?
-      gor: Ge varje elev ett kort med ett bråk. Eleven gör bråket med materialet, ritar det i rutan Med material och visar det sedan som bild, på tallinjen och med siffror. Lyssna på en elev i taget, med fler än sex elever på halva gruppen i pass 1 och resten i pass 2. Saknar eleven orden gör ni det tillsammans igen, med materialet.
+      gor: Ge varje elev ett kort med ett bråk. Eleven gör bråket med materialet, ritar det i rutan Med material och visar det sedan som bild, på tallinjen och med siffror. Lyssna på en elev i taget. Har gruppen fler än sex elever lyssnar du på halva gruppen i pass 1 och på resten i pass 2. Saknar eleven orden gör ni det tillsammans igen, med materialet.
       fraser:
         - Visa bråket på två sätt.
         - Berätta vad nämnaren och täljaren säger.
@@ -268,11 +268,12 @@ roll:
 urval:
   rubrik: Var hittar du materialet och korten?
   text:
-    - Mallen Bråkstavar att klippa finns i planeringsmallarna. Skriv ut den på tjockt papper, en per elev, färglägg varje rad i en egen färg och klipp isär raderna och bitarna. Stavarna är 2,4 cm höga, så att eleverna kan hålla dem. Bråkstavar finns också att köpa, som bråktavla eller bråkstavar. Med en köpt sats per par gör paret bråket tillsammans. Mallen Bråkplanket visar samma stavar på en sida, som eleverna kan ha framför sig. I mallen Bråkplanket att fylla i skriver eleverna själva bråket i en bit på varje rad.
+    - Mallen Bråkstavar att klippa är två sidor i planeringsmallarna. Skriv ut båda på tjockt papper, en av varje per elev, färglägg varje rad i en egen färg och klipp isär raderna och bitarna. Stavarna är 2,4 cm höga, så att eleverna kan hålla dem. Bråkstavar finns också att köpa, som bråktavla eller bråkstavar. Med en köpt sats per par gör paret bråket tillsammans. Mallen Bråkplanket visar samma stavar på en sida, som eleverna kan ha framför sig. I mallen Bråkplanket att fylla i skriver eleverna själva bråket i en bit på varje rad.
     - Remsorna klipper du av A4-ark, fyra på längden ur varje ark. Klipp dem lika långa som den längsta staven, så att det hela är lika långt i allt material.
     - Från vecka 2 tejpar du en tallinje per elev med maskeringstejp längs bordskanten, två på varje långsida. Det är en stavlängd från 0 till 1 och en från 1 till 2, så att eleverna kan lägga stavarna mot linjen och skriva på tejpen. I pass 2 använder eleverna mallarna Tallinjer i delar och Tomma tallinjer från 0 till 1, där det hela är lika långt som i bråkplanket och bitarna går att lägga mot linjen. På A4 är det hela 26 cm.
     - Skriv ut bråkstavarna, bråkplanket och tallinjerna på samma sorts papper, A4 eller A3 liggande, så att det hela är lika långt i allt. En köpt sats har ofta en längsta stav på 20 cm. Då lägger eleverna stavarna mot tejpen och inte mot mallarna. På mallen Tomma tallinjer från 0 till 2 är det hela 13 cm, hälften så långt som staven. Där ritar och räknar eleverna, och stavarna läggs mot tejpen.
-    - Bladet Bråket på fyra sätt finns i planeringsmallarna och på lathundens tredje sida, Mallen. Stavarna är längre än rutorna, så i pass 1 gör eleven bråket på bordet och ritar det i rutan Med material. I rutan På tallinjen ritar eleven en egen liten tallinje med 0 och 1, och till 2 när bråket är större än 1. Bladet Stapelrutan, med Jag vet, Jag söker och plats för stapeln, står under Kursens material och i planeringsmallarna och används i vecka 5 och till problemen i pass 3. Kopiera en per elev.
+    - Bladet Bråket på fyra sätt finns i planeringsmallarna och på lathundens tredje sida, Mallen. Stavarna är längre än rutorna, så i pass 1 gör eleven bråket på bordet och ritar det i rutan Med material. I rutan På tallinjen ritar eleven en egen liten tallinje med 0 och 1, och till 2 när bråket är större än 1.
+    - Bladet Stapelrutan, med Jag vet, Jag söker och plats för stapeln, står under Kursens material och i planeringsmallarna och används i vecka 5 och till problemen i pass 3. Kopiera en per elev.
     - Korten, spelkorten och problemen står under Kursens material, en ram per vecka efter kartläggningen.
   kravText: "Ett bråk som du visar eller skriver på ett kort ska uppfylla tre krav:"
   krav:
@@ -303,7 +304,7 @@ progression:
 uppfoljning:
   rader:
     - nar: Före insatsen
-      vad: Gör kartläggningen med hela gruppen, cirka 30 minuter, utanför passen. Anteckna R för rätt svar och F när eleven förklarar med rätt ord, med en bild eller på tallinjen, i kolumnen Före.
+      vad: Gör kartläggningen med hela gruppen, cirka 30 minuter, utanför passen. Anteckna R för rätt svar och R+ när eleven också förklarar med rätt ord, med en bild eller på tallinjen, i kolumnen Före.
     - nar: Varje pass
       vad: Vem kunde säga vad nämnaren och täljaren betyder, och vem gjorde veckans vanliga fel?
     - nar: Efter fem veckor
@@ -351,13 +352,15 @@ ramar:
         - Eleverna gör samma tolv uppgifter före första passet och efter det sista, två för varje mål.
       huvud:
         - rubrik: Elevens namn
+        - rubrik: Tecken
+          text: R när svaret är rätt, på uppgift 8, 9 och 10 båda delarna. R+ när eleven också förklarar med rätt ord, en bild eller tallinjen. Tom ruta när svaret är fel.
       delar:
         - rubrik: Till läraren
           falt:
             - rubrik: Så gör du
               text: Gör kartläggningen med hela gruppen, cirka 30 minuter, utanför passen. Läs varje uppgift högt och hjälp inte till. Eleverna svarar på eget papper och får rita. Till uppgift 3 och 4 får varje elev mallarna Tomma tallinjer från 0 till 1 och från 0 till 2.
             - rubrik: Så antecknar du
-              text: Skriv elevens namn överst på en kopia av listan och R eller F i kolumnen Före. R betyder att svaret är rätt. F betyder att eleven förklarar med rätt ord, med en bild eller på tallinjen, och gäller uppgifterna som frågar hur eleven vet. På uppgift 10 kräver R att båda uträkningarna är rätt. Efter kursen skriver du på samma kopia, i kolumnen Efter.
+              text: Skriv elevens namn överst på en kopia av listan. I kolumnen Före skriver du R när svaret är rätt och R+ när eleven också förklarar med rätt ord, med en bild eller på tallinjen. Plustecknet gäller uppgifterna som frågar hur eleven vet. Lämna rutan tom när svaret är fel. På uppgift 8, 9 och 10 kräver R att båda delarna är rätt. Efter kursen skriver du på samma kopia, i kolumnen Efter.
             - rubrik: Uppgifterna och målen
               text: Uppgift 1–2 prövar lika delar, 3–4 tallinjen, 5–6 att jämföra, 7–8 samma tal, decimaltal och procent, 9–10 att räkna och uppskatta, och 11–12 bråk av antal.
       listor:
@@ -406,7 +409,7 @@ ramar:
     # ---------------------------------------------------------------- Vecka 1
     - rubrik: "Vecka 1: Lika delar"
       text:
-        - Eleverna delar det hela i lika stora delar och lär sig orden nämnare och täljare. I pass 1 viker de remsor och jämför stavar, och i pass 2 skriver de bråk i bråkplanket och ritar staplar. Tallinjen kommer i vecka 2, så på bladet Bråket på fyra sätt är rutan På tallinjen tom den här veckan.
+        - Eleverna delar det hela i lika stora delar och lär sig orden nämnare och täljare. I pass 1 viker de remsor och jämför stavar, och i pass 2 skriver de bråk i Bråkplanket att fylla i och ritar staplar. Tallinjen kommer i vecka 2, så på bladet Bråket på fyra sätt är rutan På tallinjen tom den här veckan.
       delar:
         - rubrik: Till läraren
           falt:
@@ -517,7 +520,7 @@ ramar:
             - rubrik: Spelet · Memory med samma tal
               text: "Lägg korten upp och ned. Vänd två kort. Är de samma tal får du behålla dem, men bara om du säger varför, till exempel: ”2/8 och 0,25 är båda en fjärdedel.” Annars vänder du tillbaka dem. Första gången spelar ni med korten uppvända och parar ihop dem tillsammans."
             - rubrik: Lösningen och frågorna
-              text: "Paren visar baguetterna med stavar eller på tallinjen. Ali och Bea har ätit lika mycket, en halv baguette var, eftersom 2/4 och 3/6 hamnar på samma punkt som 1/2. Cia har ätit mest, eftersom 5/8 är mer än 4/8. I jämförelsen frågar du: ”Hade svaret blivit detsamma om Cias baguette var kortare? Vad är det hela?” Blir ett par klart tidigt: ”Dan äter 3/4 av sin baguette. Har han ätit mer än Cia?” Svaret är ja, eftersom 6/8 är mer än 5/8."
+              text: "Paren visar baguetterna med stavar eller på tallinjen. Ali och Bea har ätit lika mycket, en halv baguette var, eftersom 2/4 och 3/6 hamnar på samma punkt som 1/2. Cia har ätit mest, eftersom 5/8 är mer än 4/8. I jämförelsen frågar du: ”Hade svaret blivit detsamma om Cias baguette var kortare? Vad är det hela?” Blir ett par klart tidigt: ”Dan har en lika lång baguette och äter 3/4 av den. Har han ätit mer än Cia?” Svaret är ja, eftersom 6/8 är mer än 5/8."
       listor:
         - rubrik: Vecka 3 · Pass 1 · Läs kortet, kamraten bygger med stavarna
           rader:
@@ -648,6 +651,8 @@ ramar:
     - rubrik: Stapelrutan
       text:
         - Skriv det du vet och det du söker. Rita stapeln och räkna.
+      huvud:
+        - rubrik: Namn
       delar:
         - rubrik: Problemet
           falt:
@@ -810,7 +815,7 @@ lathund:
       rader:
         - tid: Före
           fas: Förberedelse
-          vad: Ta fram dagens material, tejpa tallinjerna och klipp dagens kort. Gör veckans två bråk ur rutan Till läraren under Kursens material på metodens sida och säg orden högt.
+          vad: Ta fram dagens material, tejpa tallinjerna och klipp dagens kort. Gör passets första och sista bråk ur veckans ruta Till läraren, under Kursens material eller först i veckan i planeringsmallarna, och säg orden högt.
         - tid: 0–8
           fas: 1 · Första bråket
           vad: Visa bråket framför eleverna och säg vad det hela är, hur du delar och vad bråket heter.
@@ -822,7 +827,7 @@ lathund:
           vad: Läs ett kort. Paren gör och kontrollerar, sedan läser de för varandra.
         - tid: 38–50
           fas: 4 · Fyra sätt
-          vad: Var och en får ett kort, gör bråket på bordet och visar det på bladet Bråket på fyra sätt. Lyssna på en i taget, med fler än sex elever på halva gruppen.
+          vad: "Var och en får ett kort, gör bråket på bordet och visar det på bladet Bråket på fyra sätt. Lyssna på en i taget. Fler än sex elever: halva gruppen i pass 1, resten i pass 2."
         - tid: 50–60
           fas: 5 · Veckans mening
           vad: Gör det sista bråket tillsammans och säg veckans mening.
@@ -851,14 +856,14 @@ lathund:
       rubrik: Var materialet finns
       punkter:
         - fet: Bråkstavar.
-          text: Mallen Bråkstavar att klippa, en per elev på tjockt papper, eller en köpt sats per par.
+          text: Mallen Bråkstavar att klippa, två sidor, en av varje per elev på tjockt papper, eller en köpt sats per par.
         - fet: Remsor.
           text: A4-ark klippta på längden, lika långa som den längsta staven.
         - fet: Tallinjer.
           text: Tejp längs bordskanten, och mallarna Tallinjer i delar och Tomma tallinjer till pass 2.
         - fet: Kort och kartläggning.
-          text: Under Kursens material på metodens sida, en ram per vecka med kartläggningen först. I planeringsmallarna skriver du ut veckans kort med veckans ruta Till läraren, där det första bråket, veckans mening och det sista bråket står.
-      efter: Bråket på fyra sätt är lathundens tredje sida och står också sist i planeringsmallarna, före mallarna. Skriv ut det liggande, ett per elev, och laminera det gärna. Stavarna ryms inte i rutorna, så eleven gör bråket på bordet och ritar det. Skriv ut stavarna, planket och tallinjerna på samma sorts papper, A4 eller A3 liggande.
+          text: Under Kursens material på metodens sida, en ram per vecka med kartläggningen först. I planeringsmallarna skriver du ut veckans kort med veckans ruta Till läraren, där det du visar först, veckans mening och det sista bråket står.
+      efter: Bråket på fyra sätt är lathundens tredje sida och står också i planeringsmallarna, efter diplomet och före Bråkplanket. Skriv ut det liggande, ett per elev, och laminera det gärna. Stavarna ryms inte i rutorna, så eleven gör bråket på bordet och ritar det. Skriv ut stavarna, planket och tallinjerna på samma sorts papper, A4 eller A3 liggande.
     bordet:
       - Bråket på fyra sätt, ett per elev
       - Stavar eller knappar, en sats per elev
