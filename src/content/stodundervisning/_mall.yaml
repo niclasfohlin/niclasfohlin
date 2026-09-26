@@ -72,7 +72,9 @@ arbetsform:
     - { rubrik: 1. Gemensamt, text: Läraren leder och modellerar }
     - { rubrik: 2. I par, text: Eleverna prövar }
     - { rubrik: 3. Gemensamt igen, text: Jämför och sätt ord på strategin }
-    # faser: [Jämföra, Avsluta] på varje del ger passöversiktens remsa var delen ligger.
+    # Delarna är den övergripande arbetsformen, inte passets moment: Läraren visar, Gemensamt, I par, Enskilt,
+    # med "igen" när gruppen går tillbaka (METODER.md, Arbetsformen i remsan). Faser i följd med samma arbetsform
+    # blir en del. faser: [Jämföra, Avsluta] på varje del ger passöversiktens remsa var delen ligger.
 exempel:
   valt: { rubrik: Texten läraren valt, text: Vad läraren valde till exempelpasset. }
   text:

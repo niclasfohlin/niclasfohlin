@@ -166,7 +166,9 @@ const stodundervisning = defineCollection({
         fraser: z.array(z.string()).default([]),
       })).min(1),
     }).optional(),
-    // Arbetsformens delar. faser: vilka faser i tidsschemat delen spänner över, för passöversiktens remsa.
+    // Arbetsformens delar är den övergripande arbetsformen (Läraren visar, Gemensamt, I par, Enskilt, med "igen" när
+    // gruppen går tillbaka), inte passets moment; se METODER.md, Arbetsformen i remsan. faser: vilka faser i
+    // tidsschemat delen spänner över, för passöversiktens remsa; faser i följd med samma arbetsform blir en del.
     arbetsform: z.strictObject({
       rubrik: z.string(),
       text: z.string(),
