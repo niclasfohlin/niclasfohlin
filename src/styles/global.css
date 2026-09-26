@@ -449,6 +449,8 @@ button.lank:hover { color: var(--farg-accent); }
 .m-lista tbody tr:last-child td { border-bottom: 0; }
 .m-lista.bokstaver td { font-size: 1.7rem; text-align: center; }
 .m-lista.en-kolumn td { font-size: 1.25rem; }
+/* Skrivkolumner (kartläggningens Före och Efter, Elevlista.astro): smala, med en kant mot texten och rubriken i mitten. */
+.m-lista th.skriv, .m-lista td.skriv { width: 4.5rem; text-align: center; border-left: 1px solid var(--farg-kant); }
 /* Bråk i elevmaterialet står staplade, som i läroböckerna (Brak.astro): siffrorna i full storlek och i textens typsnitt. */
 math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: normal; margin: 0 0.08em; }
 .m-brak-ihop { white-space: nowrap; }
@@ -474,6 +476,8 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-mall-bild rect { fill: none; stroke: var(--farg-text); stroke-width: 0.3; }
 .m-mall-bild line { stroke: var(--farg-text); }
 .m-mall-bild text { fill: var(--farg-text); font-family: var(--typsnitt-ui); text-anchor: middle; }
+/* Namnet på en delad tallinje (fjärdedelar) står till vänster ovanför linjen, dämpat. */
+.m-mall-bild text.namn { text-anchor: start; fill: var(--farg-text-svag); }
 @page mall { size: A4 landscape; margin: 10mm; }
 .lh .m-lista { margin: 0.25rem 0 0.75rem; }
 .lh .m-lista td { font-size: 1.05rem; padding: 0.3rem 0.6rem; }
@@ -496,6 +500,8 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-ramfalt dt { font-weight: 700; padding: 0.55rem 0.9rem; background: var(--farg-ton-svag); }
 .m-ramfalt dd { margin: 0; padding: 0.55rem 0.9rem; }
 .m-ramhuvud { border: 1px solid var(--farg-kant); border-radius: 8px; overflow: hidden; margin: 0 0 1rem; font-family: var(--typsnitt-ui); font-size: 0.95rem; }
+/* Elevens blad (Stapelrutan, Metod.astro): fälten i sina höjder, en rem per cm på skärmen och riktiga cm i utskriften. */
+.m-elevblad .m-ramfalt > div { min-height: calc(var(--hojd) * 1rem); }
 /* Diplomet: en inramad, centrerad ruta som visar mallens sida. */
 .m-diplom { border: 4px double var(--farg-accent); border-radius: 8px; padding: 1.5rem 1.25rem; margin: 1rem 0; text-align: center; background: var(--farg-yta); font-family: var(--typsnitt-ui); }
 .m-diplom p { margin: 0 0 0.6em; }
@@ -728,6 +734,7 @@ html.js .bara-js { display: inline-block; }
   .m-lista thead th { padding: 0.35rem 0.5rem; letter-spacing: 0.02em; }
   .m-kortlista.meningar ul { grid-template-columns: minmax(0, 1fr); }
   .m-tabell.fri:not(.stapla) td:first-child { min-width: 6.5rem; }
+  .m-lista th.skriv, .m-lista td.skriv { width: 3.2rem; }
   .m-mall-svep { display: block; }
   .m-kortlista.korta .m-kort { font-size: 1.6rem; }
   .m-tabell.stapla td.tom { display: none; }
@@ -809,6 +816,10 @@ html.js .bara-js { display: inline-block; }
   .m-ram:has(.m-kortlista), .m-ram:has(.m-lista math) { break-inside: auto !important; }
   .m-ram:has(.m-kortlista) .m-listnot, .m-ram:has(.m-lista math) .m-listnot { break-after: auto !important; }
   .m-mall-svep { display: none; }
+  .m-lista th.skriv, .m-lista td.skriv { width: 2.2cm; }
+  /* Elevens blad på en egen sida, med fälten i sina riktiga höjder, så att utskriften går att kopiera. */
+  .m-ram:has(.m-elevblad) { break-before: page; break-inside: avoid; }
+  .m-elevblad .m-ramfalt > div { min-height: calc(var(--hojd) * 1cm); }
   /* Varje mall på en egen liggande sida, i sitt riktiga mått (det hela 26 cm). */
   .m-mall { page: mall; break-before: page; margin: 0; }
   .m-mall-ram { overflow: visible; }

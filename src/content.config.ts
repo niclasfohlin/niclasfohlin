@@ -281,7 +281,9 @@ const stodundervisning = defineCollection({
         // Listor: elevmaterial i ramen (ordlistor, bokstäver, meningar, en kort text), flera per ram.
         // Kolumnrubriker bara när de betyder något; utan dem ritas listan utan rubrikrad. Ritas stort,
         // för att läggas på bordet och pekas i. Lärarnoten (delar) står före listorna på sidan och i
-        // Word-filen med allt, efter dem i elevkopiorna.
+        // Word-filen med allt, efter dem i elevkopiorna. En kolumn där alla rader är tomma, bredvid kolumner
+        // med text, blir en smal skrivkolumn för en kort anteckning, och listan är då lärarens protokoll i
+        // vanlig textstorlek (kartläggningens Före och Efter). Ramens huvud står överst i den första listan.
         listor: z.array(z.strictObject({
           rubrik: z.string().optional(),
           kolumner: z.array(text).min(1).optional(),

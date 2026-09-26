@@ -5,17 +5,29 @@
 // staplade, som i elevens läromedel (Brak.astro).
 import Brak from './Brak.astro';
 // brak: bråken staplas (metoder i matematik); annars står texten som den är.
-interface Props { rubrik?: string; kolumner?: string[]; rader: string[][]; klass?: string; brak?: boolean }
-const { rubrik, kolumner, rader, klass = '', brak = false } = Astro.props;
+// huvud: ramens fält att fylla i före listan (elevens namn på kartläggningens kopia), i samma block som listan.
+interface Props { rubrik?: string; kolumner?: string[]; rader: string[][]; klass?: string; brak?: boolean; huvud?: { rubrik: string; text: string }[] }
+const { rubrik, kolumner, rader, klass = '', brak = false, huvud } = Astro.props;
+// En kolumn där alla rader är tomma, bredvid kolumner med text, är en skrivkolumn (kartläggningens Före och Efter):
+// smal, och räknas inte när listan avgör om den är en enda kolumn text. Är alla kolumner tomma (ett schema att fylla
+// i) är ingen smal. Samma regel som i Word (elevlista i src/lib/metoddocx.ts).
+const n = Math.max(...rader.map((r) => r.length), kolumner?.length ?? 1);
+const tomma = Array.from({ length: n }, (_, i) => rader.every((r) => !(r[i] ?? '').trim()));
+const skriv = tomma.every(Boolean) ? tomma.map(() => false) : tomma;
 const bokstaver = rader.every((r) => r.every((c) => c.trim().length <= 2));
-const enKolumn = rader.every((r) => r.length === 1);
+const enKolumn = skriv.filter((s) => !s).length === 1;
 ---
 <div class={`m-lista ${bokstaver ? 'bokstaver' : ''} ${enKolumn ? 'en-kolumn' : ''} ${klass}`.replace(/\s+/g, ' ').trim()}>
+  {huvud && (
+    <dl class="m-ramfalt m-ramhuvud">
+      {huvud.map((f) => <div><dt>{f.rubrik}</dt><dd>{f.text}</dd></div>)}
+    </dl>
+  )}
   {rubrik && <p class="m-lista-rubrik">{rubrik}</p>}
   <table>
-    {kolumner && <thead><tr>{kolumner.map((k) => <th scope="col">{k}</th>)}</tr></thead>}
+    {kolumner && <thead><tr>{kolumner.map((k, i) => <th scope="col" class={skriv[i] ? 'skriv' : undefined}>{k}</th>)}</tr></thead>}
     <tbody>
-      {rader.map((r) => <tr>{r.map((c) => <td><Brak text={c} stapla={brak} /></td>)}</tr>)}
+      {rader.map((r) => <tr>{r.map((c, i) => <td class={skriv[i] ? 'skriv' : undefined}><Brak text={c} stapla={brak} /></td>)}</tr>)}
     </tbody>
   </table>
 </div>

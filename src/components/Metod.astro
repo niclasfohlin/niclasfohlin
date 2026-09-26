@@ -379,14 +379,32 @@ const avsnitt = [
               {ram.listor.map((l, li) => {
                 const info = kortInfo(d, l);
                 const forra = li > 0 ? kortInfo(d, ram.listor![li - 1])?.grupp : undefined;
+                // Ramens fält att fylla i (elevens namn på kartläggningens kopia) står överst i den första listan, så att
+                // de följer med listan i utskriften.
                 return info
                   ? <Kortlista rubrik={l.rubrik} info={info} nyGrupp={info.grupp !== forra} brak={brak} />
-                  : <Elevlista rubrik={l.rubrik} kolumner={l.kolumner} rader={l.rader} brak={brak} />;
+                  : <Elevlista rubrik={l.rubrik} kolumner={l.kolumner} rader={l.rader} brak={brak} huvud={li === 0 ? ram.huvud : undefined} />;
               })}
             </>
           ) : ramArTom(ram)
             ? (d.elevblad[ram.rubrik]
-              ? <p class="m-efter">{ram.rubrik} finns som elevens blad i <a href={`/stodundervisning/${id}-mallar.docx`}>planeringsmallarna</a>, med rutor att skriva och rita i.</p>
+              ? (
+                <>
+                  {/* Elevens blad (Stapelrutan): fälten i sina höjder, så att läraren ser bladet där det beskrivs. I utskriften
+                      får fälten sina riktiga mått i cm, och bladet börjar på en ny sida. */}
+                  <div class="m-ramdelar m-elevblad">
+                    {ram.delar.map((del) => (
+                      <div class="m-ramdel">
+                        <h4>{del.rubrik}<span class="m-ramnamn"> · {ram.rubrik}</span></h4>
+                        <dl class="m-ramfalt">
+                          {del.falt.map((f) => <div style={`--hojd:${d.elevblad[ram.rubrik][f.rubrik] ?? 2}`}><dt>{f.rubrik}</dt><dd></dd></div>)}
+                        </dl>
+                      </div>
+                    ))}
+                  </div>
+                  <p class="m-efter">Bladet finns i full storlek i <a href={`/stodundervisning/${id}-mallar.docx`}>planeringsmallarna</a>.</p>
+                </>
+              )
               : <p class="m-efter">Ramen att fylla i, med {ram.delar.length === 1 ? 'en del' : `${ram.delar.length} delar`}, finns i <a href={`/stodundervisning/${id}-mallar.docx`}>planeringsmallarna</a>.</p>)
             : (
               <div class="m-ramdelar">

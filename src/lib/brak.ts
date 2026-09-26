@@ -93,3 +93,9 @@ export function lage(L: number, k: number, n: number, heltal = true): number {
   const v = (L * (k / g)) / (n / g);
   return heltal ? Math.round(v) : v;
 }
+// En delad tallinje bär delarnas namn till vänster ovanför linjen, så att eleven hittar "linjen i fjärdedelar" som
+// korten talar om utan att räkna strecken. Bråken vid strecken skriver eleven själv. En odelad linje har inget namn.
+const DELNAMN: Record<number, string> = { 2: 'halvor', 3: 'tredjedelar', 4: 'fjärdedelar', 5: 'femtedelar', 6: 'sjättedelar', 7: 'sjundedelar', 8: 'åttondelar', 9: 'niondelar', 10: 'tiondelar', 11: 'elftedelar', 12: 'tolftedelar' };
+export function delnamn(delar: number): string {
+  return DELNAMN[delar] ?? '';
+}

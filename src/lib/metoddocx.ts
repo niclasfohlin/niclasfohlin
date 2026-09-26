@@ -9,7 +9,7 @@ import {
   type IBorderOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
 import { arbetsformRad, arskursText, datumText, ejBryt, lathundFakta, metaRad, metodAdress, passOversikt, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost } from './metod';
-import { brakDelar, kortInfo, lage, STANDARD_NAMNARE, type KortInfo, type Mall } from './brak';
+import { brakDelar, delnamn, kortInfo, lage, STANDARD_NAMNARE, type KortInfo, type Mall } from './brak';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
 const FARG = {
@@ -311,15 +311,24 @@ function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[
 function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][] }, o: { storlek: number; hallIhopEfter?: boolean; brak?: boolean }): Barn[] {
   const ut: Barn[] = [];
   const n = Math.max(...l.rader.map((r) => r.length), l.kolumner?.length ?? 1);
-  const bredd = Math.floor(BREDD / n);
-  const bredder = Array.from({ length: n }, (_, i) => (i === n - 1 ? BREDD - bredd * (n - 1) : bredd));
+  // En kolumn där alla rader är tomma är en skrivkolumn (kartläggningens Före och Efter): smal, med rubriken i mitten,
+  // och resten av bredden går till texten.
+  const skriv = Array.from({ length: n }, (_, i) => l.rader.every((r) => !(r[i] ?? '').trim()));
+  const antalSkriv = skriv.filter(Boolean).length;
+  const smal = antalSkriv && antalSkriv < n ? 1250 : 0;
+  const bredd = Math.floor((BREDD - smal * antalSkriv) / (smal ? n - antalSkriv : n));
+  const sista = smal ? skriv.lastIndexOf(false) : n - 1;
+  const bredder = Array.from({ length: n }, (_, i) => (smal && skriv[i] ? smal : i === sista ? BREDD - smal * antalSkriv - bredd * ((smal ? n - antalSkriv : n) - 1) : bredd));
+  // En lista med skrivkolumner är lärarens protokoll, inte elevens kopia: texten i vanlig storlek, så att listan, namnet
+  // och rubriken ryms på en sida.
+  const storlek = smal ? Math.min(o.storlek, 24) : o.storlek;
   const bokstaver = l.rader.every((r) => r.every((c) => c.trim().length <= 2));
   if (l.rubrik) ut.push(stycke(l.rubrik, { fet: true, farg: FARG.huvud, storlek: 16, versaler: true, fore: 120, efter: 60, hallIhop: true }));
   const rader: TableRow[] = [];
-  if (l.kolumner) rader.push(rad(l.kolumner.map((k, i) => cell([stycke(k, { storlek: 15, versaler: true, farg: FARG.svag, efter: 0, hallIhop: true })], { bredd: bredder[i], fyll: FARG.rand })), { huvud: true }));
+  if (l.kolumner) rader.push(rad(l.kolumner.map((k, i) => cell([stycke(k, { storlek: 15, versaler: true, farg: FARG.svag, efter: 0, hallIhop: true, mitt: !!smal && skriv[i] })], { bredd: bredder[i], fyll: FARG.rand })), { huvud: true }));
   l.rader.forEach((r, ri) => {
     const ihop = ri < l.rader.length - 1 || !!o.hallIhopEfter;
-    rader.push(rad(Array.from({ length: n }, (_, i) => cell([stycke(r[i] ?? '', { storlek: o.storlek, efter: 0, hallIhop: ihop, mitt: bokstaver, brak: o.brak })], { bredd: bredder[i] }))));
+    rader.push(rad(Array.from({ length: n }, (_, i) => cell([stycke(r[i] ?? '', { storlek, efter: 0, hallIhop: ihop, mitt: bokstaver, brak: o.brak })], { bredd: bredder[i] }))));
   });
   ut.push(tabell(rader, bredder), avstand());
   return ut;
@@ -745,9 +754,33 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
   if (d.diplom) sidor.push([...under(d.diplom.rubrik), ...diplomBarn(d.diplom)]);
   for (const sida of sidor) sida.push(stycke(`${UPPHOV}. Mall till ${d.titel}, ${metodAdress(bas, post.id)}.`, { farg: FARG.svag, storlek: 18, fore: 160 }));
   // Mallarna (bråkplanket och tallinjerna) sist, var och en på en liggande sida med smal marginal. Sidfoten bär
-  // upphovet, så att planket och linjerna får hela höjden.
+  // upphovet, så att planket och linjerna får hela höjden. Är lathundens tredje sida ett blad att lägga på bordet
+  // (talsortsmattan, bladet Bråket på fyra sätt) står bladet först bland dem, så att det kopieras med resten.
+  const blad = d.lathund && arMatta(d.lathund.mall) ? medBredd(BREDD_MALL, () => [mattaSida(d.lathund!.mall)]) : [];
   const liggande = medBredd(BREDD_MALL, () => d.mallar.map((m) => mallSida(m)));
-  return [...sidor.map((barn) => ({ barn })), ...liggande.map((barn) => ({ barn, liggande: true }))];
+  return [...sidor.map((barn) => ({ barn })), ...[...blad, ...liggande].map((barn) => ({ barn, liggande: true }))];
+}
+
+// Ett blad att lägga på bordet: lathundens mall är en enda tom tabell och högst en not (talsortsmattan, bladet
+// Bråket på fyra sätt). I lathunden och i planeringsmallarna ritas det med höga ramade rutor som fyller sidan.
+type LathundMall = NonNullable<MetodData['lathund']>['mall'];
+function arMatta(mall: LathundMall): boolean {
+  return mall.block.filter((b) => b.typ !== 'not').length === 1 && mall.block.some((b) => b.typ === 'tabell' && b.rader.every((r) => r.every((c) => !c.trim())));
+}
+// Bladet i planeringsmallarna: samma form som på lathundens tredje sida, utan lathundens band, och med regeln i foten.
+// Tabellens rubrik står bara när den säger något annat än sidans (inte "Talsortsmatta" under "Talsortsmattan").
+function mattaSida(mall: LathundMall): Barn[] {
+  const barn: Barn[] = [new Paragraph({ children: [run(mall.rubrik)], heading: HeadingLevel.HEADING_1, spacing: { before: 0, after: 40 } })];
+  // Underraden (Namn och Kortet) är det eleven skriver först: i vanlig textstorlek, inte som lathundens etikett.
+  if (mall.underrad) barn.push(stycke(mall.underrad, { storlek: 22, efter: 160 }));
+  for (const b of mall.block) {
+    if (b.typ === 'tabell') {
+      const [a, c] = [(b.rubrik ?? '').toLowerCase(), mall.rubrik.toLowerCase()];
+      if (a && !a.includes(c) && !c.includes(a)) barn.push(kicker(b.rubrik, { farg: FARG.huvud, fore: 0 }));
+      barn.push(...rubrikTabell(b.kolumner, b.rader, kolumnBredder(b.kolumner.length), { huvudFyll: FARG.text, radrubrik: false, storlek: 24, tomHojd: Math.floor(7000 / b.rader.length), ramad: true }));
+    } else if (b.typ === 'not') barn.push(...lhNot([stycke(b.text, { storlek: 28, efter: 0 })]));
+  }
+  return barn;
 }
 
 // Bråkplanket och tallinjerna (d.mallar, src/lib/brak.ts): mallar att skriva ut, klippa och lägga på bordet. Det hela
@@ -819,12 +852,20 @@ function tallinjeTabell(ln: { till: number; delar: number }, L: number): Table {
 }
 function mallSida(m: Mall): Barn[] {
   const L = Math.round((m.langdCm ?? 26) * CM);
+  // En delad linje bär delarnas namn (brak.ts, delnamn) till vänster ovanför linjen, i luften före den, så att sidan
+  // blir lika hög som utan namn. Linjens 0 står 283 in från tabellens kant, och tabellen är centrerad (tallinjeTabell).
+  const namnRad = (namn: string, hojd: number, vid: number) => new Paragraph({ keepNext: true, indent: { left: vid }, spacing: { before: 0, after: 0, line: hojd, lineRule: LineRuleType.EXACT }, children: [run(namn, { storlek: 17, farg: FARG.svag })] });
   return [
     new Paragraph({ children: [run(m.rubrik)], heading: HeadingLevel.HEADING_1, spacing: { before: 0, after: 40 } }),
     ...(m.text ? [stycke(m.text, { efter: 120 })] : []),
     ...(m.typ === 'brakplank'
       ? [luft(160), brakplankTabell(m)]
-      : (m.linjer ?? []).flatMap((ln, i) => [luft(i ? m.mellanrum ?? 420 : 300, true), tallinjeTabell(ln, ln.langdCm ? Math.round(ln.langdCm * CM) : L)])),
+      : (m.linjer ?? []).flatMap((ln, i) => {
+          const Ln = ln.langdCm ? Math.round(ln.langdCm * CM) : L;
+          const fore = i ? m.mellanrum ?? 420 : 300;
+          const namn = delnamn(ln.delar);
+          return [namn ? namnRad(namn, fore, Math.round((BREDD - (Ln + 2 * 283)) / 2) + 283) : luft(fore, true), tallinjeTabell(ln, Ln)];
+        })),
   ];
 }
 
@@ -978,7 +1019,7 @@ function lathundBarn(post: MetodPost): Barn[][] {
   if (l.mall.underrad) mall.push(kicker(l.mall.underrad, { fore: 0, efter: 120 }));
   // En enda tom tabell utan snabbmall är ett blad att lägga på bordet (talsortsmattan): den tar hela
   // bredden med höga rutor som fyller sidan, och noten står under, i stället för två spalter.
-  const matta = l.mall.block.filter((b) => b.typ !== 'not').length === 1 && l.mall.block.some((b) => b.typ === 'tabell' && b.rader.every((r) => r.every((c) => !c.trim())));
+  const matta = arMatta(l.mall);
   // De smala blocken fördelas på två spalter som på sidan: där lägger webbläsaren dem i ordning och
   // delar där spalterna blir jämnast i höjd. Här uppskattas höjden i rader och delningen väljs så att
   // den högsta spalten blir så låg som möjligt.
