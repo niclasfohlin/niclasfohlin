@@ -242,7 +242,7 @@ roll:
 urval:
   rubrik: Var hittar du materialet och talen?
   text:
-    - Tiobas finns i de flesta skolors matematikmaterial. Talbrickor är runda lappar i kartong med 1, 10, 100 eller 1000, gärna en färg per talsort. Lekpengar finns att köpa eller kopiera. Använd bara enkronor, tiokronor, hundralappar och tusenlappar, så att varje valör är en talsort. Talsortsmattan finns på lathundens sida 3, Mallen. Skriv ut den i A3 när ni bygger med talbrickor och pengar. Med tiobas får varje talsort ett eget A4-ark i samma ordning, så att en hundraplatta eller tio tiostavar i rad får plats.
+    - Tiobas finns i de flesta skolors matematikmaterial. Talbrickor är runda lappar i kartong med 1, 10, 100 eller 1000, gärna en färg per talsort. Lekpengar finns att köpa eller kopiera. Använd bara enkronor, tiokronor, hundralappar och tusenlappar, så att varje valör är en talsort. Talsortsmattan finns på lathundens sida 3, Mallen. Skriv ut den i A3 när ni bygger med talbrickor och pengar. Med tiobas får varje talsort ett eget A4-ark i samma ordning, så att en hundraplatta eller tio tiostavar i rad får plats. Decimalmattan för åk 4–5 och arken per talsort står under Mallar att skriva ut och sist i planeringsmallarna.
     - Tiobaspaketet som eleven tar hem är av papper. Rita tiostavar och hundraplattor på papper med centimeterrutor och klipp ut dem. Vad påsen ska innehålla står i gruppens paket under Material per årskurs, tillsammans med kartläggningen, veckornas kort och läxorna.
   kravText: "Ett tal som du visar först eller skriver på ett eget kort ska uppfylla tre krav:"
   krav:
@@ -255,7 +255,7 @@ urval:
 hem:
   rubrik: Hem och skola
   text:
-    - Eleven får ett tiobaspaket och en talsortsmatta att ha hemma, och en läxa i veckan. Läxorna, Läxa 1–5, finns i gruppens paket under Material per årskurs. Läxan delas ut efter veckans första pass och innehåller samma sorts uppgifter som i skolan. En vårdnadshavare läser veckans kort, och eleven bygger och berättar vad hen gör. Det blir en repetition, och eleven får höra samma sak med andra ord och i ett annat sammanhang. Tio minuter några gånger under veckan räcker. Fråga i början av veckans första pass hur läxan gick, och låt eleven visa ett kort.
+    - Eleven får ett tiobaspaket och en talsortsmatta i A3 att ha hemma, och en läxa i veckan. Läxorna, Läxa 1–5, finns i gruppens paket under Material per årskurs. Läxan delas ut efter veckans första pass och innehåller samma sorts uppgifter som i skolan. En vårdnadshavare läser veckans kort, och eleven bygger och berättar vad hen gör. Det blir en repetition, och eleven får höra samma sak med andra ord och i ett annat sammanhang. Tio minuter några gånger under veckan räcker. Fråga i början av veckans första pass hur läxan gick, och låt eleven visa ett kort.
     - "Berätta för vårdnadshavarna att barnet får intensivt stöd och extra träning under fem veckor, och visa hur man gör med ett kort: läs kortet högt, låt barnet bygga och berätta vad det gör, och visa själv först om det blir svårt. Går det inte att göra läxan hemma kan eleven göra den i skolan eller på fritids tillsammans med en annan vuxen."
 progression:
   rubrik: "Kursplan: fem veckor, ett fokus i veckan"
@@ -305,7 +305,7 @@ snabbmall:
 checklista:
   punkter:
     - "Tagit fram dagens material: tiobas, talbrickor eller pengar."
-    - Lagt fram en talsortsmatta per elev och bestämt paren.
+    - Lagt fram en talsortsmatta per elev, i åk 4–5 också decimalmattan, och bestämt paren.
     - Kopierat veckans kort ur gruppens paket.
     - Byggt det jag ska visa först och sagt orden högt.
     - Valt det andra talet, som hela gruppen bygger sist.
@@ -509,7 +509,7 @@ ramar:
             - - Skriv först 56 + 29 utan att bygga. Bygg sedan och kontrollera.
     - rubrik: "Åk 2: Läxa 1–5"
       text:
-        - "Samma uppgifter som i skolan, en gång till hemma, med barnets eget tiobaspaket. Paketet är av papper: en hundraplatta, tio tiostavar, 15 ental och en matta. Skicka hem rutan Till vårdnadshavaren med Läxa 1, och sedan veckans läxa efter veckans första pass. Klipp isär listorna, så att bara veckans läxa går hem."
+        - "Samma uppgifter som i skolan, en gång till hemma, med barnets eget tiobaspaket. Paketet är av papper: en hundraplatta, tio tiostavar, 15 ental och talsortsmattan i A3. Skicka hem rutan Till vårdnadshavaren med Läxa 1, och sedan veckans läxa efter veckans första pass. Klipp isär listorna, så att bara veckans läxa går hem."
       delar:
         - rubrik: Till vårdnadshavaren
           falt:
@@ -625,7 +625,7 @@ ramar:
             - - Skriv först 347 + 185 utan att bygga. Bygg sedan och kontrollera.
     - rubrik: "Åk 3: Läxa 1–5"
       text:
-        - "Samma uppgifter som i skolan, en gång till hemma, med barnets eget tiobaspaket. Paketet är av papper: sju hundraplattor, 15 tiostavar, 15 ental och en matta. Skicka hem rutan Till vårdnadshavaren med Läxa 1, och sedan veckans läxa efter veckans första pass. Klipp isär listorna, så att bara veckans läxa går hem."
+        - "Samma uppgifter som i skolan, en gång till hemma, med barnets eget tiobaspaket. Paketet är av papper: sju hundraplattor, 15 tiostavar, 15 ental och talsortsmattan i A3. Skicka hem rutan Till vårdnadshavaren med Läxa 1, och sedan veckans läxa efter veckans första pass. Klipp isär listorna, så att bara veckans läxa går hem."
       delar:
         - rubrik: Till vårdnadshavaren
           falt:
@@ -676,7 +676,7 @@ ramar:
         - rubrik: Till läraren
           falt:
             - rubrik: Material
-              text: "Tiobas med en tusenkub, talbrickor från 0,01 till 1000, och pengar upp till tusenlappar. Saknas tusenkuber, bygg tusentalen med talbrickor eller tusenlappar. En halv sats per elev räcker till fem hundraplattor och 15 tiostavar. Kräver ett kort fler bygger eleven med talbrickor. Från vecka 2 är kort 1–3 hela tal och kort 4–6 decimaltal. Lägg dem i två högar och bygg de hela talen först. Byt sedan matta och säg: nu är hundraplattan en hel. Decimaltalen byggs med tiobas eller talbrickor, även i pass 3. Varje elev behöver en lodrät tallinje från −10 till 10 i vecka 5 och vid kartläggningen. Klar tidigt: Närmast målet 5 000 med talbrickor på sju slag, där varje slag räknas som tusental, hundratal, tiotal eller ental. Per elev: 20 brickor och 20 mynt eller sedlar av varje talsort."
+              text: "Tiobas med en tusenkub, talbrickor från 0,01 till 1000, och pengar upp till tusenlappar. Saknas tusenkuber, bygg tusentalen med talbrickor eller tusenlappar. En halv sats per elev räcker till fem hundraplattor och 15 tiostavar. Kräver ett kort fler bygger eleven med talbrickor. Från vecka 2 är kort 1–3 hela tal och kort 4–6 decimaltal. Lägg dem i två högar och bygg de hela talen först. Byt sedan till decimalmattan, sist i planeringsmallarna, och säg: nu är hundraplattan en hel. Decimaltalen byggs med tiobas eller talbrickor, även i pass 3. Varje elev behöver en lodrät tallinje från −10 till 10 i vecka 5 och vid kartläggningen. Klar tidigt: Närmast målet 5 000 med talbrickor på sju slag, där varje slag räknas som tusental, hundratal, tiotal eller ental. Per elev: 20 brickor och 20 mynt eller sedlar av varje talsort."
             - rubrik: Vecka 1 · Bygga och säga tal till 10 000
               text: "Visa först och säg: ”Jag bygger 2 345. Jag lägger två brickor med 1000 på tusentalens plats, tre hundraplattor, fyra tiostavar och fem ental. Jag pekar: två tusental, tre hundratal, fyra tiotal, fem ental. 2 345.” Ta plattorna från mattan och stapla tio hundraplattor bredvid tusenkuben: ”Lika höga. Tio hundratal är ett tusental.”\nLyssna efter eleven som läser 4 050 som fyrahundrafemtio."
             - rubrik: Vecka 2 · Siffrans plats och nollan, också i decimaltal
@@ -750,7 +750,7 @@ ramar:
             - - Du är skyldig 40 kr och får 100 kr. Hur mycket har du nu?
     - rubrik: "Åk 4–5: Läxa 1–5"
       text:
-        - "Samma uppgifter som i skolan, en gång till hemma, med barnets eget tiobaspaket. Paketet är av papper: sju brickor med 1000, tio hundraplattor, 15 tiostavar, 15 ental och båda mattorna. Skicka hem rutan Till vårdnadshavaren med Läxa 1, och sedan veckans läxa efter veckans första pass. Klipp isär listorna, så att bara veckans läxa går hem."
+        - "Samma uppgifter som i skolan, en gång till hemma, med barnets eget tiobaspaket. Paketet är av papper: sju brickor med 1000, tio hundraplattor, 15 tiostavar, 15 ental och talsortsmattan och decimalmattan i A3. Skicka hem rutan Till vårdnadshavaren med Läxa 1, och sedan veckans läxa efter veckans första pass. Klipp isär listorna, så att bara veckans läxa går hem."
       delar:
         - rubrik: Till vårdnadshavaren
           falt:
@@ -759,7 +759,7 @@ ramar:
             - rubrik: Så gör ni
               text: Läs ett kort högt. Barnet bygger med tiobaspaketet på mattan och berättar vad det gör. En talsort är ental, tiotal, hundratal eller tusental, och i decimaltal tiondelar och hundradelar. Har kortet två tal bygger barnet det andra ovanför mattan. När kortet säger ”Ta bort” bygger barnet bara det första talet. Tio minuter några gånger i veckan räcker.
             - rubrik: Säg så här
-              text: "Läxa 1: Hur många tusental, hundratal, tiotal och ental? Peka.\nLäxa 2: Vilken plats är tom? Decimaltalen byggs på den andra mattan, där hundraplattan är en hel.\nLäxa 3: Blev det tio? Byt dem mot en av nästa större talsort.\nLäxa 4: Räcker det? Byt en av nästa större talsort mot tio.\nLäxa 5: Visa mig i materialet det du skrev, som 1 250 + 2 785: 3 000 + 900 + 130 + 5 = 4 035."
+              text: "Läxa 1: Hur många tusental, hundratal, tiotal och ental? Peka.\nLäxa 2: Vilken plats är tom? Decimaltalen byggs på decimalmattan, där hundraplattan är en hel.\nLäxa 3: Blev det tio? Byt dem mot en av nästa större talsort.\nLäxa 4: Räcker det? Byt en av nästa större talsort mot tio.\nLäxa 5: Visa mig i materialet det du skrev, som 1 250 + 2 785: 3 000 + 900 + 130 + 5 = 4 035."
             - rubrik: Om det blir svårt
               text: Visa först själv och säg vad du gör, och låt sedan barnet göra likadant. Sluta medan det fortfarande är roligt, och skriv gärna en rad till läraren.
       listor:
@@ -793,6 +793,26 @@ ramar:
             - - Bygg 3 004. Ta bort 8. Skriv växlingarna.
             - - Bygg 2,4 och 1,9. Skriv 2 + 1 och 0,4 + 0,9.
             - - Bygg 2,5. Ta bort 0,7. Skriv växlingen.
+mallar:
+  - rubrik: Decimalmattan
+    text: För åk 4–5 från vecka 2, när hundraplattan är en hel. Skriv ut den i A3, en per elev, både för tiobas och för talbrickor. Då ryms en hundraplatta i Ental och tolv tiondelar i Tiondelar.
+    underrad: "En matta per elev · Namn: ______________"
+    typ: matta
+    kolumner:
+      - Ental · 1
+      - Tiondelar · 0,1
+      - Hundradelar · 0,01
+    komma: 1
+    fot: Tio hundradelar blir en tiondel. Tio tiondelar blir en hel, ett ental.
+  - rubrik: Ett ark per talsort för tiobas
+    text: Ett stående A4 per talsort. Lägg arken bredvid varandra med tusental längst till vänster och ental längst till höger, så att en hundraplatta eller tio tiostavar i rad får plats. Åk 1 använder tiotal och ental, och åk 2 hundratal, tiotal och ental. Räcker inte bordet sitter eleverna mitt emot varandra, och tusentalsarket läggs bara fram när talet har tusental.
+    typ: matta
+    kolumner:
+      - Tusental · 1 000
+      - Hundratal · 100
+      - Tiotal · 10
+      - Ental · 1
+    enPerSida: true
 lathund:
   innehall: Ett fokus i veckan
   metoden:
@@ -890,10 +910,10 @@ lathund:
         - fet: Pengar.
           text: Enkronor, tiokronor, hundralappar och tusenlappar, inga femkronor.
         - fet: Kort och läxor.
-          text: "Ett paket per årskurs, sist på metodsidan och i planeringsmallarna: kartläggningen, veckornas kort och Läxa 1–5."
-      efter: "Talsortsmattan finns på lathundens sida 3. Skriv ut den i A3 för brickor och pengar, eller ett A4 per talsort för tiobas. Åk 1 viker bort Tusental och Hundratal, åk 2 Tusental. Decimalmattan i åk 4–5 har tre rutor: Ental, Tiondelar och Hundradelar, med ett decimaltecken efter Ental."
+          text: "Ett paket per årskurs, under Material per årskurs på metodsidan och före mattorna i planeringsmallarna: kartläggningen, veckornas kort och Läxa 1–5."
+      efter: "Talsortsmattan finns på lathundens sida 3. Skriv ut den i A3 för brickor och pengar. Åk 1 viker bort Tusental och Hundratal, åk 2 Tusental. Sist i planeringsmallarna finns talsortsmattan, decimalmattan för åk 4–5 och ett stående A4 per talsort för tiobas."
     bordet:
-      - Talsortsmatta, en per elev
+      - Talsortsmatta eller arken, en per elev, i åk 4–5 också decimalmattan
       - Dagens material, en låda per par
       - Veckans kort, klippta
       - Papper, penna och sifferkort per par
