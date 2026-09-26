@@ -1,11 +1,11 @@
 # Metod i stödundervisning. Modellen står i src/content.config.ts och mallen i _mall.yaml.
 # Skriven 2026-09-26 ur Niclas kompendium Särskilt stöd (Matematik 2 med Mall 3–5, och Matematik 4, nivå 3),
 # intaget, Lgr22 och två sökningar online. Omskriven samma dag efter vikariens fyra rundor (granskning, frågerunda,
-# läsbarhet och språk). Besluten står i analys.md. Bråkplanket, bråkstavarna och tallinjerna ritas ur rigg.json,
-# eftersom modellen saknar formen, och korten ritas som kort att klippa.
+# läsbarhet och språk). Besluten står i metodriggens analys.md. Korten att klippa,
+# elevens blad och mallarna (bråkplanket och tallinjerna) står under kort, elevblad och mallar före lathunden.
 titel: "Bråkkurs i grupp: förstå, räkna och tänka i bråk"
 undertitel: Fem veckors intensiv kurs i liten grupp, från material till tallinje och räkning, för åk 4–6
-ingress: En intensiv kurs i fem veckor för två till tio elever i åk 4–6 som inte har förstått bråk. Varje vecka går från material till tallinje och räkning. Läraren visar först och säger vad hen gör, och sedan gör gruppen likadant tillsammans, i par och var för sig.
+ingress: En intensiv kurs i fem veckor för två till tio elever i åk 4–6 som behöver stöd i att förstå bråk. Varje vecka går från material till tallinje och räkning. Läraren visar först och säger vad hen gör, och sedan gör gruppen likadant tillsammans, i par och var för sig.
 omrade: Matematik
 arskurs:
   - 4-6
@@ -35,7 +35,7 @@ relaterade:
   - problemlosning-i-grupp
 utkast: false
 inledning:
-  - "Kursen är för elever i åk 4–6 som av olika anledningar inte har förstått bråk. Eleverna gör bråken med material, ritar dem och sätter ut dem på tallinjen innan de räknar med dem. Varje vecka går från det konkreta till det abstrakta. I första passet arbetar gruppen med remsor och bråkstavar, och med knappar i vecka 5. I andra passet arbetar gruppen med bild, tallinje och räkning. I ett tredje pass, när det går, repeterar gruppen veckan med ett spel och ett problem. Det viktigaste händer vid bordet. Läraren visar först och berättar vad hen gör medan hen viker, lägger och pekar, och säger bråket i ord. Sedan gör gruppen samma sak tillsammans, i par och var för sig, och passet slutar med att alla gör det gemensamt igen."
+  - "Kursen är för elever i åk 4–6 som behöver stöd i att förstå bråk. Eleverna gör bråken med material, ritar dem och sätter ut dem på tallinjen innan de räknar med dem. Varje vecka går från det konkreta till det abstrakta. I första passet arbetar gruppen med remsor och bråkstavar, och med knappar i vecka 5. I andra passet arbetar gruppen med bild, tallinje och räkning. I ett tredje pass, när det går, repeterar gruppen veckan med ett spel och ett problem. Det viktigaste händer vid bordet. Läraren visar först och berättar vad hen gör medan hen viker, lägger och pekar, och säger bråket i ord. Sedan gör gruppen samma sak tillsammans, i par och var för sig, och passet slutar med att alla gör det gemensamt igen."
   - "Kursen löser inte allt om bråk. Efter fem veckor ska eleven förstå vad ett bråk säger, kunna räkna med enkla bråk och tänka i bråk: jämföra, uppskatta och se när ett svar inte kan stämma."
   - "Tre ord är centrala i kursen: det hela, nämnare och täljare. Det hela är det som delas, till exempel en remsa, den längsta bråkstaven, sträckan från 0 till 1 på tallinjen eller ett antal knappar. Nämnaren säger hur många lika stora delar det hela är delat i, och täljaren säger hur många sådana delar vi har. Därför säger vi tre fjärdedelar om 3/4: tre delar, och varje del är en fjärdedel av det hela. 5/4 är fem fjärdedelar, alltså mer än det hela."
   - Bråkstavar är avlånga bitar. Den längsta staven är det hela, och de andra är halvor, tredjedelar, fjärdedelar och så vidare. Bladet Bråket på fyra sätt har fyra rutor, där eleven visar samma bråk med material, som bild, på tallinjen och med siffror.
@@ -45,7 +45,7 @@ upplagg:
   text: Insatsen pågår i fem veckor med två pass i veckan och ett tredje när det går. Varje pass är 60 minuter, och gruppen har två till tio elever i åk 4–6. Varje vecka har ett fokus. I pass 1 arbetar ni med material, i pass 2 med bild, tallinje och räkning, och i pass 3 med ett spel och ett problem. Hela gruppen arbetar med samma innehåll och samma kort, oavsett årskurs, och det blir ingen läxa. Före första passet och efter det sista gör du samma kartläggning, utanför passen.
 gruppen:
   rubrik: Så sätter du ihop gruppen
-  text: Välj två till tio elever som av olika anledningar inte har förstått bråk. Några har missat grunden, några räknar med regler de inte förstår, och några blandar ihop bråk och decimaltal. Det klassläraren vet om eleverna hjälper dig att välja, och kartläggningen visar var varje elev börjar. Gruppen kan blanda åk 4, 5 och 6, eftersom alla börjar med det hela och de lika stora delarna. Med fler än sex elever arbetar paren vid två bord. När du visar, och i Samma bråk och Veckans mening, samlas alla vid ett bord. I Fyra sätt lyssnar du på halva gruppen i pass 1 och resten i pass 2. Kalla gruppen bråkkursen. Den har en början och ett slut, och eleverna vet vad de ska kunna efteråt.
+  text: Välj två till tio elever som av olika anledningar behöver stöd i att förstå bråk. Några har missat grunden, några räknar med regler de inte förstår, och några blandar ihop bråk och decimaltal. Det klassläraren vet om eleverna hjälper dig att välja, och kartläggningen visar var varje elev börjar. Gruppen kan blanda åk 4, 5 och 6, eftersom alla börjar med det hela och de lika stora delarna. Med fler än sex elever arbetar paren vid två bord. När du visar, och i Samma bråk och Veckans mening, samlas alla vid ett bord. I Fyra sätt lyssnar du på halva gruppen i pass 1 och resten i pass 2. Kalla gruppen bråkkursen. Den har en början och ett slut, och eleverna vet vad de ska kunna efteråt.
 principer:
   rubrik: Tre saker att hålla fast vid
   text: "Visa först och säg bråket i ord: du viker, lägger och pekar framför eleverna och berättar vad du gör, och du säger alltid bråket med ord, som tre fjärdedelar. Fråga efter det hela: vad är det hela, och hur många lika stora delar är det delat i? Det hela är lika långt i remsan, i staven och på tallinjen. Och gå från material till siffror varje vecka: i pass 1 arbetar eleverna med material och i pass 2 med bild, tallinje och räkning, och materialet ligger kvar på bordet."
@@ -731,7 +731,7 @@ lathund:
   innehall: Ett fokus i veckan
   metoden:
     text:
-      - En intensiv kurs i fem veckor för två till tio elever i åk 4–6 som inte har förstått bråk. Före första passet gör du kartläggningen.
+      - En intensiv kurs i fem veckor för två till tio elever i åk 4–6 som behöver stöd i att förstå bråk. Före första passet gör du kartläggningen.
       - "Veckorna: lika delar, bråk på tallinjen, likvärdiga bråk, addera och subtrahera, bråk av antal. Varje vecka har en mening som gruppen säger och sätter upp på väggen."
     ruta:
       rubrik: Tre saker att hålla fast vid
