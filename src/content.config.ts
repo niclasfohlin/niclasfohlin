@@ -303,6 +303,33 @@ const stodundervisning = defineCollection({
       text: z.array(text).min(1),
       underskrifter: z.array(text).default([]),
     }).optional(),
+    // Kort att klippa och hålla i handen (bråkkursen): listor i ramarna vars rubrik innehåller någon av texterna
+    // ritas som kort med streckad kant, på sidan och i Word. Rubrikens två första led ("Vecka 1 · Pass 1") är
+    // kortens grupp: i Word börjar varje grupp på ny sida, och meningskorten får gruppen och ett nummer i hörnet.
+    // kopior: listor vars rubrik innehåller texten ritas i så många exemplar i Word, som problemet ett per par.
+    // Samma form som metodriggens rigg.json (src/lib/brak.ts har reglerna).
+    kort: z.strictObject({
+      listor: z.array(z.string()).min(1),
+      kopior: z.record(z.string(), z.number().int().min(2).max(10)).optional(),
+    }).optional(),
+    // Elevens blad: fälten i en ram får en höjd i cm, så att eleven kan skriva och rita i dem och bladet fyller
+    // sidan i planeringsmallarna. Nyckeln är ramens rubrik, och fälten heter som i ramen.
+    elevblad: z.record(z.string(), z.record(z.string(), z.number().positive().max(20))).default({}),
+    // Mallar att skriva ut, klippa och lägga på bordet: bråkplanket och tallinjerna, sist i planeringsmallarna på
+    // liggande A4 och som bilder på sidan. Det hela är langdCm långt (standard 26) i planket och på linjen från 0
+    // till 1, så att bitarna kan läggas mot linjen. En linje till 2 är lika lång som linjen till 1, så där är det
+    // hela hälften så långt. radhojd och mellanrum är i twips, som i riggen.
+    mallar: z.array(z.strictObject({
+      rubrik: text,
+      text: z.string().optional(),
+      typ: z.enum(['brakplank', 'tallinjer']),
+      namnare: z.array(z.number().int().positive()).optional(),
+      etiketter: z.boolean().optional(),
+      langdCm: z.number().positive().optional(),
+      radhojd: z.number().int().positive().optional(),
+      mellanrum: z.number().int().positive().optional(),
+      linjer: z.array(z.strictObject({ till: z.number().int().positive(), delar: z.number().int().positive(), langdCm: z.number().positive().optional() })).optional(),
+    })).default([]),
 
     // Lathunden: fyra sidor ur Niclas snabbguide (Metoden, Ett pass, Mallen, Material). Egen sida
     // /stodundervisning/<id>/lathund, utskrift i liggande A4 och Word-fil. Faktarutorna passlängd,
@@ -377,6 +404,17 @@ const stodundervisning = defineCollection({
     for (const s of medFas) if (!faser.has(s.fas.toLowerCase())) ctx.addIssue({ code: 'custom', path: ['passrutin', 'steg'], message: `Fasen "${s.fas}" finns inte som rad i tidsschemat.` });
     if (medFas.length && medFas.length !== d.passrutin!.steg.length) ctx.addIssue({ code: 'custom', path: ['passrutin', 'steg'], message: 'Antingen har alla steg en fas eller inget.' });
     for (const del of d.arbetsform?.delar ?? []) for (const f of del.faser ?? []) if (!faser.has(f.toLowerCase())) ctx.addIssue({ code: 'custom', path: ['arbetsform', 'delar'], message: `Fasen "${f}" finns inte som rad i tidsschemat.` });
+    // Elevens blad: ramen och fälten måste finnas, annars får bladet tyst ingen höjd.
+    for (const [ramnamn, falt] of Object.entries(d.elevblad)) {
+      const ram = d.ramar?.ramar.find((r) => r.rubrik === ramnamn);
+      if (!ram) { ctx.addIssue({ code: 'custom', path: ['elevblad', ramnamn], message: `Ramen "${ramnamn}" finns inte.` }); continue; }
+      const namn = new Set(ram.delar.flatMap((del) => del.falt.map((f) => f.rubrik)));
+      for (const f of Object.keys(falt)) if (!namn.has(f)) ctx.addIssue({ code: 'custom', path: ['elevblad', ramnamn, f], message: `Fältet "${f}" finns inte i ramen "${ramnamn}".` });
+    }
+    // Korten: varje text ska träffa minst en lista i ramarna, annars ritas inga kort.
+    const listrubriker = (d.ramar?.ramar ?? []).flatMap((r) => (r.listor ?? []).map((l) => l.rubrik ?? ''));
+    for (const t of d.kort?.listor ?? []) if (!listrubriker.some((r) => r.includes(t))) ctx.addIssue({ code: 'custom', path: ['kort', 'listor'], message: `Ingen lista i ramarna har "${t}" i rubriken.` });
+    d.mallar.forEach((m, i) => { if (m.typ === 'tallinjer' && !m.linjer?.length) ctx.addIssue({ code: 'custom', path: ['mallar', i, 'linjer'], message: 'Tallinjer kräver minst en linje.' }); });
   }),
 });
 

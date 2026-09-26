@@ -4,8 +4,11 @@
 import MetodTabell from './MetodTabell.astro';
 import Tavla from './Tavla.astro';
 import Elevlista from './Elevlista.astro';
+import Kortlista from './Kortlista.astro';
+import MallBild from './MallBild.astro';
 import type { MetodData } from '../lib/metod';
 import { ejBryt, ramArTom, passGrupper, passOversikt, stegTexter } from '../lib/metod';
+import { kortInfo } from '../lib/brak';
 // "Åk 4–5" hålls ihop i ramarnas rubriker och länkar: hårt mellanslag efter Åk, ordfog efter tankstrecket.
 const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 '));
 interface Props { d: MetodData; id: string }
@@ -32,6 +35,11 @@ const tavla = d.exempel?.tavla ? d.lathund?.mall.block.find((b) => b.typ === 'ta
 const fraserRubrik = d.steg?.fraserRubrik ?? '';
 // En radbrytning i ett ramfält blir en ny rad, som i tabellcellerna.
 const linjer = (t: string) => t.split('\n');
+// Mallarna: det hela är lika långt i bråkplanket och på tallinjen från 0 till 1, och det säger sidan när båda finns.
+const planketOchLinjen = d.mallar.some((m) => m.typ === 'brakplank') && d.mallar.some((m) => m.typ === 'tallinjer');
+const helaCm = d.mallar.find((m) => m.typ === 'brakplank')?.langdCm ?? 26;
+// Bråk i elevmaterialet staplas i matematik (src/lib/brak.ts); i andra ämnen står ett snedstreck kvar, som i ett datum.
+const brak = d.omrade === 'Matematik';
 // Sidnavigationen: de avsnitt som finns, i modellens ordning, med korta namn.
 const avsnitt = [
   d.passrutin && { id: 'passrutin', namn: pass ? 'Passet' : 'Passrutin' },
@@ -51,6 +59,7 @@ const avsnitt = [
   d.grund && { id: 'grund', namn: 'Grunden' },
   d.ramar && { id: 'ramar', namn: d.ramar.rubrik },
   d.diplom && { id: 'diplom', namn: d.diplom.rubrik },
+  d.mallar.length > 0 && { id: 'mallar', namn: 'Mallar' },
 ].filter((a): a is { id: string; namn: string } => Boolean(a));
 ---
 <div class="metod-modell">
@@ -243,7 +252,7 @@ const avsnitt = [
       <div class="m-band" style={`--delar:${d.urval.krav.length}`}>
         {d.urval.krav.map((x) => <div><strong>{x.rubrik}</strong><span>{x.text}</span></div>)}
       </div>
-      {d.ramar && <p class="m-efter"><a href="#ramar">{d.ramar.rubrik}</a> ligger sist på sidan, och som egna sidor att kopiera i <a href={`/stodundervisning/${id}-mallar.docx`}>planeringsmallarna</a> (Word).</p>}
+      {d.ramar && <p class="m-efter"><a href="#ramar">{d.ramar.rubrik}</a> ligger efter grunden, och som egna sidor att kopiera i <a href={`/stodundervisning/${id}-mallar.docx`}>planeringsmallarna</a> (Word).</p>}
     </section>
   )}
 
@@ -351,7 +360,7 @@ const avsnitt = [
       {/* Med fyra ramar eller fler (ett paket per årskurs, läslistorna, projekten) blir sidan lång: en rad med länkar till varje ram. */}
       {d.ramar.ramar.length >= 4 && (
         <nav class="m-ramlankar" aria-label={`Hoppa till: ${d.ramar.rubrik}`}>
-          {d.ramar.ramar.map((r, i) => <>{i > 0 && <span aria-hidden="true"> · </span>}<a href={`#ram-${i + 1}`}>{hel(r.rubrik)}</a></>)}
+          {d.ramar.ramar.map((r, i) => <>{i > 0 && <span aria-hidden="true">{'\u00a0· '}</span>}<a href={`#ram-${i + 1}`}>{hel(r.rubrik)}</a></>)}
         </nav>
       )}
       {d.ramar.ramar.map((ram, ri) => (
@@ -367,10 +376,18 @@ const avsnitt = [
                   {del.falt.map((f) => <p><b>{f.rubrik}</b>{linjer(f.text).map((x, j) => <>{j > 0 && <br />}{repliker(x).map((r) => (r.replik ? <em>{r.text}</em> : r.text))}</>)}</p>)}
                 </div>
               ))}
-              {ram.listor.map((l) => <Elevlista rubrik={l.rubrik} kolumner={l.kolumner} rader={l.rader} />)}
+              {ram.listor.map((l, li) => {
+                const info = kortInfo(d, l);
+                const forra = li > 0 ? kortInfo(d, ram.listor![li - 1])?.grupp : undefined;
+                return info
+                  ? <Kortlista rubrik={l.rubrik} info={info} nyGrupp={info.grupp !== forra} brak={brak} />
+                  : <Elevlista rubrik={l.rubrik} kolumner={l.kolumner} rader={l.rader} brak={brak} />;
+              })}
             </>
           ) : ramArTom(ram)
-            ? <p class="m-efter">Ramen att fylla i, med {ram.delar.length} delar, finns i <a href={`/stodundervisning/${id}-mallar.docx`}>planeringsmallarna</a>.</p>
+            ? (d.elevblad[ram.rubrik]
+              ? <p class="m-efter">{ram.rubrik} finns som elevens blad i <a href={`/stodundervisning/${id}-mallar.docx`}>planeringsmallarna</a>, med rutor att skriva och rita i.</p>
+              : <p class="m-efter">Ramen att fylla i, med {ram.delar.length === 1 ? 'en del' : `${ram.delar.length} delar`}, finns i <a href={`/stodundervisning/${id}-mallar.docx`}>planeringsmallarna</a>.</p>)
             : (
               <div class="m-ramdelar">
                 {ram.huvud && (
@@ -406,6 +423,23 @@ const avsnitt = [
         {d.diplom.underskrifter.length > 0 && <p class="m-underskrifter">{d.diplom.underskrifter.map((u) => <span>{u} <span class="m-linje-kort" aria-hidden="true"></span></span>)}</p>}
       </div>
       <p class="m-efter">Diplomet finns som egen sida i <a href={`/stodundervisning/${id}-mallar.docx`}>planeringsmallarna</a>.</p>
+    </section>
+  )}
+
+  {d.mallar.length > 0 && (
+    <section id="mallar">
+      <h2>Mallar att skriva ut</h2>
+      <p>Mallarna finns i rätt storlek på liggande A4 sist i <a href={`/stodundervisning/${id}-mallar.docx`}>planeringsmallarna</a>.{planketOchLinjen && ` Det hela är ${helaCm} cm i bråkplanket och på tallinjen från 0 till 1, så att bitarna kan läggas mot linjen.`} Skrivs mallarna ut på A3 blir allt lika mycket större.</p>
+      <p class="m-mall-svep">Bilderna är bredare än skärmen. Svep i sidled för att se hela mallen.</p>
+      {d.mallar.map((m) => (
+        <figure class="m-mall">
+          <figcaption>
+            <h3>{m.rubrik}</h3>
+            {m.text && <p>{m.text}</p>}
+          </figcaption>
+          <div class="m-mall-ram" tabindex="0" role="region" aria-label={`${m.rubrik}, bild`}><MallBild mall={m} /></div>
+        </figure>
+      ))}
     </section>
   )}
   </div>

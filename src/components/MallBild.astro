@@ -1,0 +1,70 @@
+---
+// En mall som bild på sidan: bråkplanket eller tallinjerna, ritade som SVG i millimeter ur samma geometri som
+// Word-filen (src/lib/brak.ts). På skärmen fyller bilden bredden, och på en smal skärm går den att svepa i sidled.
+// I utskriften får den sitt riktiga mått på en liggande sida (global.css, .m-mall). Planeringsmallarna i Word är
+// förlagan att skriva ut.
+import { lage, STANDARD_NAMNARE, TWIP_MM, type Mall } from '../lib/brak';
+interface Props { mall: Mall }
+const m = Astro.props.mall;
+const r2 = (v: number) => Math.round(v * 100) / 100;
+const L = (m.langdCm ?? 26) * 10;
+const rutor: { x: number; y: number; w: number; h: number }[] = [];
+const streck: { x1: number; y1: number; x2: number; y2: number; w: number }[] = [];
+const texter: { x: number; y: number; t: string; fs: number }[] = [];
+let bredd = L + 1;
+let hojd = 0;
+if (m.typ === 'brakplank') {
+  // En rad per nämnare, varje rad lika lång som det hela och delad i lika stora delar, med bråket staplat i varje bit.
+  const h = (m.radhojd ?? 800) * TWIP_MM;
+  const namnare = m.namnare ?? STANDARD_NAMNARE;
+  namnare.forEach((n, rad) => {
+    const y = 0.5 + rad * h;
+    for (let k = 0; k < n; k++) {
+      const x0 = 0.5 + lage(L, k, n, false);
+      const x1 = 0.5 + lage(L, k + 1, n, false);
+      rutor.push({ x: x0, y, w: x1 - x0, h });
+      if (m.etiketter === false) continue;
+      const fs = h >= 21 ? (n >= 10 ? 4.5 : 5.6) : n >= 10 ? 3.6 : 4.2;
+      const cx = (x0 + x1) / 2;
+      const cy = y + h / 2;
+      if (n === 1) texter.push({ x: cx, y: cy + fs * 0.36, t: '1', fs });
+      else {
+        const b = fs * (String(n).length * 0.62 + 0.35);
+        texter.push({ x: cx, y: cy - fs * 0.22, t: '1', fs });
+        streck.push({ x1: cx - b / 2, y1: cy, x2: cx + b / 2, y2: cy, w: fs * 0.07 });
+        texter.push({ x: cx, y: cy + fs * 0.94, t: String(n), fs });
+      }
+    }
+  });
+  hojd = namnare.length * h + 1;
+} else {
+  // Varje linje från 0 till `till`, med ett streck vid varje del och talen vid hela tal. Strecken vid hela tal är
+  // tjockare, och linjen fortsätter en bit efter sista strecket, eftersom talen fortsätter. Linjerna är centrerade.
+  const marg = 283 * TWIP_MM;
+  const halv = 150 * TWIP_MM;
+  const etikett = 380 * TWIP_MM;
+  const langst = Math.max(...(m.linjer ?? []).map((ln) => (ln.langdCm ? ln.langdCm * 10 : L)));
+  bredd = langst + 2 * marg;
+  let y = 0;
+  (m.linjer ?? []).forEach((ln, i) => {
+    y += (i ? m.mellanrum ?? 420 : 300) * TWIP_MM;
+    const Ln = ln.langdCm ? ln.langdCm * 10 : L;
+    const N = ln.delar * ln.till;
+    const ox = (bredd - Ln) / 2;
+    streck.push({ x1: ox, y1: y + halv, x2: ox + Ln + marg, y2: y + halv, w: 0.44 });
+    for (let k = 0; k <= N; k++) {
+      const x = ox + lage(Ln, k, N, false);
+      const hel = k % ln.delar === 0;
+      streck.push({ x1: x, y1: y, x2: x, y2: y + 2 * halv, w: hel ? 0.62 : 0.35 });
+      if (hel) texter.push({ x, y: y + 2 * halv + 4.1, t: String(k / ln.delar), fs: 3.9 });
+    }
+    y += 2 * halv + etikett;
+  });
+  hojd = y + 1;
+}
+---
+<svg class="m-mall-bild" xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${r2(bredd)} ${r2(hojd)}`} style={`--bredd:${r2(bredd)}`} role="img" aria-label={m.rubrik}>
+  {rutor.map((r) => <rect x={r2(r.x)} y={r2(r.y)} width={r2(r.w)} height={r2(r.h)}></rect>)}
+  {streck.map((s) => <line x1={r2(s.x1)} y1={r2(s.y1)} x2={r2(s.x2)} y2={r2(s.y2)} stroke-width={r2(s.w)}></line>)}
+  {texter.map((t) => <text x={r2(t.x)} y={r2(t.y)} font-size={t.fs}>{t.t}</text>)}
+</svg>

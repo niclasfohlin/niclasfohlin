@@ -1,0 +1,23 @@
+---
+// Kort att klippa (d.kort): elevmaterial som eleven håller i handen. På sidan står varje kort en gång, med streckad
+// kant och meningskortens märkning i hörnet. I planeringsmallarna står korten i rätt storlek och antal, och varje
+// pass börjar på en ny sida (src/lib/metoddocx.ts); nyGrupp gör detsamma i utskriften av sidan. Reglerna finns i
+// src/lib/brak.ts. brak: bråken staplas (metoder i matematik).
+import Brak from './Brak.astro';
+import type { KortInfo } from '../lib/brak';
+interface Props { rubrik?: string; info: KortInfo; nyGrupp?: boolean; brak?: boolean }
+const { rubrik, info, nyGrupp = false, brak = false } = Astro.props;
+const form = info.ett ? 'ett' : info.korta ? 'korta' : 'meningar';
+---
+<div class={`m-lista m-kortlista ${form}${nyGrupp ? ' ny-grupp' : ''}`}>
+  {rubrik && <p class="m-lista-rubrik">{rubrik}</p>}
+  <ul>
+    {info.kort.map((k, i) => (
+      <li class="m-kort">
+        {info.markning && <span class="m-kort-markning">{info.markning(i)}</span>}
+        <span class="m-kort-text"><Brak text={k} stapla={brak} /></span>
+      </li>
+    ))}
+  </ul>
+  {info.kopior > 1 && <p class="m-kort-kopior">I planeringsmallarna står kortet i {info.kopior} exemplar.</p>}
+</div>

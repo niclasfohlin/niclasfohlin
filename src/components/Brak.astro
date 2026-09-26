@@ -1,0 +1,10 @@
+---
+// Text ur elevmaterialet där varje bråk (3/4) ritas staplat med MathML: täljaren över bråkstrecket och nämnaren
+// under, som i läroböckerna. Används i elevlistorna och korten i matematik, aldrig i lärarens löptext. Med
+// stapla={false} står texten som den är, så att ett datum som 3/10 i en läslista förblir ett datum. HTML:en byggs
+// i src/lib/brak.ts (brakHtml), eftersom Astros kompilator inte tolkar uttryck inuti <math>.
+import { brakHtml } from '../lib/brak';
+interface Props { text: string; stapla?: boolean }
+const { text, stapla = true } = Astro.props;
+---
+{stapla ? <Fragment set:html={brakHtml(text)} /> : text}

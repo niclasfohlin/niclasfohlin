@@ -29,6 +29,8 @@ const arMellanrubrik = (r: string[]) => r.every((c) => c.trim() && c === c.toUpp
         {rad.map((cell, i) => {
           const l = linjer(cell);
           if (i === 0 && radrubrik) return <th scope="row" data-rubrik={kolumner[i]}><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</th>;
+          // En tom cell ritas tom, så att :empty träffar (mattan och bladet på lathundens mallsida).
+          if (i === 0 && !cell.trim()) return <td data-rubrik={kolumner[i]}></td>;
           if (i === 0) return <td data-rubrik={kolumner[i]}><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</td>;
           return <td data-rubrik={kolumner[i]}>{l.map((x, j) => <>{j > 0 && <br />}{repliker(x).map((r) => (r.replik ? <em>{r.text}</em> : r.text))}</>)}</td>;
         })}

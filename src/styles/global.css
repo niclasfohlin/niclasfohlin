@@ -449,6 +449,32 @@ button.lank:hover { color: var(--farg-accent); }
 .m-lista tbody tr:last-child td { border-bottom: 0; }
 .m-lista.bokstaver td { font-size: 1.7rem; text-align: center; }
 .m-lista.en-kolumn td { font-size: 1.25rem; }
+/* Bråk i elevmaterialet står staplade, som i läroböckerna (Brak.astro): siffrorna i full storlek och i textens typsnitt. */
+math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: normal; margin: 0 0.08em; }
+.m-brak-ihop { white-space: nowrap; }
+/* Kort att klippa (Kortlista.astro): streckad kant som visar var man klipper. Meningar två i bredd, tal och bråk fyra
+   i bredd med stor text, ett ensamt kort (problemet) över hela bredden. Märkningen i hörnet är samma som i Word. */
+.m-kortlista ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.m-kortlista.korta ul { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.m-kortlista.ett ul { grid-template-columns: minmax(0, 1fr); }
+.m-kort { position: relative; border: 1.5px dashed var(--farg-text-svag); border-radius: 4px; padding: 1.5rem 0.9rem 0.9rem; min-height: 7rem; display: flex; align-items: center; justify-content: center; text-align: center; font-family: var(--typsnitt-ui); font-size: 1.15rem; line-height: 1.45; }
+.m-kortlista.korta .m-kort { min-height: 0; aspect-ratio: 1; padding: 1.3rem 0.4rem 0.4rem; font-size: 2rem; line-height: 1.2; }
+.m-kortlista.ett .m-kort { min-height: 5rem; }
+.m-kort-markning { position: absolute; top: 0.45rem; left: 0.65rem; font-size: 0.7rem; line-height: 1; color: var(--farg-text-svag); }
+.m-kort-kopior { margin: 0.4rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.85rem; color: var(--farg-text-svag); }
+/* Mallarna som bilder (MallBild.astro): i sidans bredd på skärmen, och på en smal skärm går bilden att svepa i sidled
+   så att bitarnas bråk går att läsa. I utskriften har bilden sitt riktiga mått (se @media print). */
+.m-mall { margin: 1.5rem 0 2rem; }
+.m-mall figcaption h3 { margin-bottom: 0.25rem; }
+.m-mall figcaption p { margin: 0 0 0.75rem; }
+.m-mall-ram { overflow-x: auto; }
+.m-mall-bild { display: block; width: 100%; min-width: 36rem; height: auto; }
+/* På en smal skärm är bilderna bredare än skärmen, och en rad säger att de går att svepa. */
+.m-mall-svep { display: none; font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
+.m-mall-bild rect { fill: none; stroke: var(--farg-text); stroke-width: 0.3; }
+.m-mall-bild line { stroke: var(--farg-text); }
+.m-mall-bild text { fill: var(--farg-text); font-family: var(--typsnitt-ui); text-anchor: middle; }
+@page mall { size: A4 landscape; margin: 10mm; }
 .lh .m-lista { margin: 0.25rem 0 0.75rem; }
 .lh .m-lista td { font-size: 1.05rem; padding: 0.3rem 0.6rem; }
 .lh .m-lista.bokstaver td { font-size: 1.3rem; }
@@ -700,6 +726,10 @@ html.js .bara-js { display: inline-block; }
   .m-tabell.tat thead th { font-size: 0.7rem; padding: 0.4rem 0.25rem; letter-spacing: 0; }
   .m-lista td { font-size: 1.25rem; padding: 0.45rem 0.6rem; }
   .m-lista thead th { padding: 0.35rem 0.5rem; letter-spacing: 0.02em; }
+  .m-kortlista.meningar ul { grid-template-columns: minmax(0, 1fr); }
+  .m-tabell.fri:not(.stapla) td:first-child { min-width: 6.5rem; }
+  .m-mall-svep { display: block; }
+  .m-kortlista.korta .m-kort { font-size: 1.6rem; }
   .m-tabell.stapla td.tom { display: none; }
   .m-band > div { border-left: 0; border-top: 1px solid var(--farg-kant); }
   .m-band > div:first-child { border-top: 0; }
@@ -764,6 +794,25 @@ html.js .bara-js { display: inline-block; }
   .lh .m-lista td { font-size: 10pt; padding: 0.12rem 0.4rem; }
   .lh .m-lista.bokstaver td { font-size: 12pt; }
   .m-lista thead th, .m-listnot { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  /* Korten i sina mått, som i Word: meningar 8 × 4,5 cm, tal och bråk 4 × 4 cm. */
+  .m-kortlista ul { gap: 0; grid-template-columns: repeat(2, 8cm); }
+  .m-kortlista.korta ul { grid-template-columns: repeat(4, 4cm); }
+  .m-kortlista.ett ul { grid-template-columns: 16cm; }
+  .m-kort { min-height: 4.5cm; border-radius: 0; font-size: 13pt; break-inside: avoid; }
+  .m-kortlista.korta .m-kort { min-height: 4cm; aspect-ratio: auto; font-size: 28pt; }
+  .m-kortlista.ett .m-kort { min-height: 3.6cm; }
+  .m-kort-kopior { display: none; }
+  /* Varje pass börjar på en ny sida, som i Word. En ram med kort eller bråk ryms inte på en sida med lärarens
+     ruta: där hålls ramen inte ihop, och listan flyttar hel till nästa sida i stället för att delas. Reglerna för
+     korta ramar ovan har högre specificitet, därav !important. */
+  .m-kortlista.ny-grupp { break-before: page; }
+  .m-ram:has(.m-kortlista), .m-ram:has(.m-lista math) { break-inside: auto !important; }
+  .m-ram:has(.m-kortlista) .m-listnot, .m-ram:has(.m-lista math) .m-listnot { break-after: auto !important; }
+  .m-mall-svep { display: none; }
+  /* Varje mall på en egen liggande sida, i sitt riktiga mått (det hela 26 cm). */
+  .m-mall { page: mall; break-before: page; margin: 0; }
+  .m-mall-ram { overflow: visible; }
+  .m-mall-bild { width: calc(var(--bredd) * 1mm); min-width: 0; }
   .m-ramdel h4, .m-ramfalt dt, .m-diplom { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .m-tabell, .m-snabbmall, .m-bockar, .m-gor-undvik, .m-band, .m-ruta, .m-rutin, .m-grund, .m-motto { font-size: 9.5pt; }
   .m-tabell tr, .m-snabbmall tr, .m-bockar li, .m-gor-undvik, .m-band, .m-ruta, .m-rutin, .m-grund, .m-motto, .m-fraga { break-inside: avoid; }

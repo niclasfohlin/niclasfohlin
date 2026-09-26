@@ -66,7 +66,9 @@ const gemen = (s: string) => (s ? s.charAt(0).toLowerCase() + s.slice(1) : s);
 // i veckan"), perioden ur period, gruppen ur grupp, innehållet ur lathunden.
 export function lathundFakta(d: MetodData): { rubrik: string; text: string }[] {
   const [passlangd, ...rest] = (d.tid ?? '').split(/ per pass,?\s*/);
-  const frekvens = [rest.join(' ').trim(), d.period ? gemen(d.period) : ''].filter(Boolean).join(' i ');
+  // "Två pass i veckan och ett tredje när det går, i fem veckor": kommat hindrar läsningen "när det går i fem veckor".
+  const ofta = rest.join(' ').trim();
+  const frekvens = [ofta, d.period ? gemen(d.period) : ''].filter(Boolean).join(/ när /.test(ofta) ? ', i ' : ' i ');
   return [
     { rubrik: 'Passlängd', text: versal(passlangd.trim()) || '' },
     { rubrik: 'Grupp', text: d.grupp ?? '' },

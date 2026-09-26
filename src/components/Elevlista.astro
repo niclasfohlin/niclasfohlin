@@ -1,9 +1,12 @@
 ---
 // En elevlista i en ram: orden stora och lätta att peka i, kolumnrubrikerna små och dämpade och
 // bara när de betyder något, ingen fet första kolumn. Bokstäver centreras; en enda kolumn (meningar,
-// en text) sätts något mindre. Samma lista finns i Word (elevlista i src/lib/metoddocx.ts).
-interface Props { rubrik?: string; kolumner?: string[]; rader: string[][]; klass?: string }
-const { rubrik, kolumner, rader, klass = '' } = Astro.props;
+// en text) sätts något mindre. Samma lista finns i Word (elevlista i src/lib/metoddocx.ts). Bråken står
+// staplade, som i elevens läromedel (Brak.astro).
+import Brak from './Brak.astro';
+// brak: bråken staplas (metoder i matematik); annars står texten som den är.
+interface Props { rubrik?: string; kolumner?: string[]; rader: string[][]; klass?: string; brak?: boolean }
+const { rubrik, kolumner, rader, klass = '', brak = false } = Astro.props;
 const bokstaver = rader.every((r) => r.every((c) => c.trim().length <= 2));
 const enKolumn = rader.every((r) => r.length === 1);
 ---
@@ -12,7 +15,7 @@ const enKolumn = rader.every((r) => r.length === 1);
   <table>
     {kolumner && <thead><tr>{kolumner.map((k) => <th scope="col">{k}</th>)}</tr></thead>}
     <tbody>
-      {rader.map((r) => <tr>{r.map((c) => <td>{c}</td>)}</tr>)}
+      {rader.map((r) => <tr>{r.map((c) => <td><Brak text={c} stapla={brak} /></td>)}</tr>)}
     </tbody>
   </table>
 </div>
