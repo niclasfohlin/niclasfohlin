@@ -114,7 +114,7 @@ passrutin:
   efterPasset: Läraren antecknar kort vem som växlade själv och kunde säga vad som hände, och vad läraren behöver visa igen nästa pass.
 tidsschema:
   rubrik: Ett pass på 30 minuter
-  text: Förbered dig genom att bygga veckans tal med dagens material och säga orden högt. Remsan visar hur de 30 minuterna fördelas och när gruppen arbetar gemensamt, i par och var för sig. Paren får längst tid.
+  text: Förbered dig genom att bygga veckans tal med dagens material och säga orden högt. Remsan visar hur de 30 minuterna fördelas och när läraren visar, när alla arbetar gemensamt och när eleverna arbetar i par och enskilt. Paren får längst tid.
   rader:
     - tid: Före passet
       fas: Förberedelse
@@ -175,23 +175,26 @@ steg:
         - Visa oss och säg det.
         - I dag såg vi att tio ental blir ett tiotal.
 arbetsform:
-  rubrik: "Arbetsform: gemensamt, i par, själv, gemensamt igen"
-  text: "Passet går från läraren till eleven och tillbaka. Först arbetar alla gemensamt: läraren visar och sedan gör alla likadant. Sedan arbetar eleverna i par, sedan var för sig, och sist gemensamt igen, när gruppen sätter ord på det den har sett. Med tre eller fem elever blir det en trio, där en läser och två bygger. Med två elever är hela gruppen ett par. Med två till sex elever hinner du höra varje elev beskriva en växling i varje pass."
+  rubrik: "Arbetsform: läraren visar, gemensamt, i par, enskilt, gemensamt igen"
+  text: "Passet går från läraren till eleven och tillbaka. Först visar läraren och eleverna tittar. Sedan gör alla likadant tillsammans, sedan arbetar eleverna i par och sedan var för sig. Sist arbetar alla gemensamt igen, när gruppen sätter ord på det den har sett. Med tre eller fem elever blir det en trio, där en läser och två bygger. Med två elever är hela gruppen ett par. Med två till sex elever hinner du höra varje elev beskriva en växling i varje pass."
   delar:
-    - rubrik: 1. Gemensamt
-      text: läraren visar, alla gör likadant
+    - rubrik: 1. Läraren visar
+      text: eleverna tittar
       faser:
         - Läraren gör först
+    - rubrik: 2. Gemensamt
+      text: alla bygger samma tal, ett handgrepp i taget
+      faser:
         - Gör tillsammans
-    - rubrik: 2. I par
+    - rubrik: 3. I par
       text: paren läser korten och bygger
       faser:
         - I par
-    - rubrik: 3. Själv
+    - rubrik: 4. Enskilt
       text: var och en bygger och säger
       faser:
         - Själv
-    - rubrik: 4. Gemensamt igen
+    - rubrik: 5. Gemensamt igen
       text: alla visar och berättar
       faser:
         - Gemensamt igen

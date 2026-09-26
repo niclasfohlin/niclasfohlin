@@ -5,7 +5,7 @@ import MetodTabell from './MetodTabell.astro';
 import Tavla from './Tavla.astro';
 import Elevlista from './Elevlista.astro';
 import type { MetodData } from '../lib/metod';
-import { ejBryt, ramArTom, passGrupper, passOversikt, remsDel, stegTexter } from '../lib/metod';
+import { ejBryt, ramArTom, passGrupper, passOversikt, stegTexter } from '../lib/metod';
 // "Åk 4–5" hålls ihop i ramarnas rubriker och länkar: hårt mellanslag efter Åk, ordfog efter tankstrecket.
 const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 '));
 interface Props { d: MetodData; id: string }
@@ -86,8 +86,7 @@ const avsnitt = [
         {passGrupper(pass).flatMap((g) => {
           const faser = g.faser.map(({ fas, nr }) => <div class="m-remsa-fas" style={`--nr:${nr + 1}`}><strong>{fas.fas}</strong><span>{fas.tid}</span></div>);
           if (!g.del) return faser;
-          const v = remsDel(g.del);
-          return [...faser, <div class="m-remsa-del" style={`--fran:${g.del.fran + 1};--antal:${g.del.antal}`}>{v.rubrik && <><strong>{v.rubrik}</strong><span class="m-remsa-skiljare">{' '}·{' '}</span></>}<span class="m-remsa-text">{v.text}</span></div>];
+          return [...faser, <div class="m-remsa-del" style={`--fran:${g.del.fran + 1};--antal:${g.del.antal}`}><strong>{g.del.rubrik}</strong><span class="m-remsa-skiljare">{' '}·{' '}</span><span class="m-remsa-text">{g.del.text}</span></div>];
         })}
       </div>
       <table class="m-tabell m-pass stapla" id="tidsschema">

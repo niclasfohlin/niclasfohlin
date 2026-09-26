@@ -106,9 +106,10 @@ export function arbetsformRad(d: MetodData): string {
 // en remsa (faserna med minuter och arbetsformens delar under) och en tabell med en rad per fas. Raden
 // "Före passet" hämtas ur tidsschemat (tiden börjar inte med en siffra), "Efter passet" ur passrutin.efterPasset.
 export interface PassFas { fas: string; tid: string; vad: string; minuter: number; steg: { nr: number; text: string }[] }
-// En del av arbetsformen i remsan. tid är delens spann och används bara i beskrivningen för skärmläsare; synligt
-// står tiden bara i faserna. visaRubrik är falsk när delen gäller en enda fas och heter som den ("I par" under I par).
-export interface PassDel { rubrik: string; text: string; fran: number; antal: number; tid: string; visaRubrik: boolean }
+// En del av arbetsformen i remsan: den övergripande arbetsformen över de faser den gäller (METODER.md,
+// Arbetsformen i remsan). tid är delens spann och används bara i beskrivningen för skärmläsare; synligt står
+// tiden bara i faserna. Namnet står alltid, också när fasen heter likadant.
+export interface PassDel { rubrik: string; text: string; fran: number; antal: number; tid: string }
 export interface PassOversikt { rubrik: string; text?: string; fore?: string; efter?: string; efterTabell?: string; faser: PassFas[]; total: number; delar: PassDel[] }
 export function passOversikt(d: MetodData): PassOversikt | null {
   const steg = d.passrutin?.steg ?? [];
@@ -132,8 +133,7 @@ export function passOversikt(d: MetodData): PassOversikt | null {
     const sista = faser[platser[platser.length - 1]].tid.match(/(\d+)\s*[–-]\s*(\d+)/)?.[2] ?? '';
     return { rubrik: x.rubrik.replace(/^\d+\.\s*/, ''), text: x.text, fran: platser[0], antal: platser[platser.length - 1] - platser[0] + 1, tid: forsta && sista ? `${forsta}–${sista} min` : '' };
   });
-  const somFasen = (x: { rubrik: string; fran: number; antal: number }) => x.antal === 1 && x.rubrik.toLowerCase() === faser[x.fran].fas.toLowerCase();
-  return { rubrik: d.tidsschema.rubrik, text: d.tidsschema.text, fore: fore?.vad, efter: d.passrutin.efterPasset, efterTabell: d.tidsschema.efter, faser, total, delar: delar.map((x) => ({ ...x, visaRubrik: !somFasen(x) })) };
+  return { rubrik: d.tidsschema.rubrik, text: d.tidsschema.text, fore: fore?.vad, efter: d.passrutin.efterPasset, efterTabell: d.tidsschema.efter, faser, total, delar };
 }
 // Remsans grupper i fasernas ordning: en arbetsform med de faser den gäller, eller en fas utan arbetsform.
 // Metod.astro skriver ut faserna och sedan delen, så att ordningen i koden följer passet.
@@ -147,10 +147,6 @@ export function passGrupper(p: PassOversikt): PassGrupp[] {
     i += antal - 1;
   }
   return ut;
-}
-// Delens text i remsan: namnet och vad som händer, eller bara vad som händer med stor bokstav när delen heter som sin fas.
-export function remsDel(x: PassDel): { rubrik?: string; text: string } {
-  return x.visaRubrik ? { rubrik: x.rubrik, text: x.text } : { text: versal(x.text) };
 }
 // Rutinens steg som texter, oavsett om de har fas.
 export function stegTexter(d: MetodData): string[] {

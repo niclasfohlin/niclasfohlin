@@ -8,7 +8,7 @@ import {
   Paragraph, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, VerticalAlign, WidthType,
   type IBorderOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
-import { arbetsformRad, arskursText, datumText, ejBryt, lathundFakta, metaRad, metodAdress, passOversikt, ramArTom, remsDel, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost } from './metod';
+import { arbetsformRad, arskursText, datumText, ejBryt, lathundFakta, metaRad, metodAdress, passOversikt, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost } from './metod';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
 const FARG = {
@@ -380,8 +380,7 @@ function passRemsa(p: NonNullable<ReturnType<typeof passOversikt>>): Barn[] {
       const del = p.delar.find((x) => x.fran === i);
       if (del) {
         const b = bredder.slice(i, i + del.antal).reduce((a, x) => a + x, 0);
-        const v = remsDel(del);
-        celler.push(cell([new Paragraph({ children: v.rubrik ? [run(v.rubrik, { fet: true, storlek: 18 }), run(` · ${v.text}`, { storlek: 18, farg: FARG.svag })] : [run(v.text, { storlek: 18, farg: FARG.svag })], alignment: AlignmentType.CENTER, spacing: { after: 0 }, keepNext: true })], { bredd: b, span: del.antal, fyll: FARG.ljus, mitt: true }));
+        celler.push(cell([new Paragraph({ children: [run(del.rubrik, { fet: true, storlek: 18 }), run(` · ${del.text}`, { storlek: 18, farg: FARG.svag })], alignment: AlignmentType.CENTER, spacing: { after: 0 }, keepNext: true })], { bredd: b, span: del.antal, fyll: FARG.ljus, mitt: true }));
         i += del.antal - 1;
       } else if (!p.delar.some((x) => i > x.fran && i < x.fran + x.antal)) celler.push(cell([stycke('', { efter: 0 })], { bredd: bredder[i], fyll: FARG.ljus }));
     }

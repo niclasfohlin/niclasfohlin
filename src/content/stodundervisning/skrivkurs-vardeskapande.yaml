@@ -128,7 +128,7 @@ passrutin:
   efterPasset: Läraren skriver en kort notering om vem som använde draget, vem som behöver stöd och vilken elevtext som kan bli mentortext.
 tidsschema:
   rubrik: "Dag 1: ett pass på 60 minuter"
-  text: Förbered dig genom att läsa veckans del i projektplanen, kopiera mentortexten och skriva dina egna meningar med draget. Remsan visar hur de 60 minuterna fördelas på de sex stegen och när gruppen arbetar gemensamt, enskilt och i par. Längst tid får eleverna för att skriva själva.
+  text: Förbered dig genom att läsa veckans del i projektplanen, kopiera mentortexten och skriva dina egna meningar med draget. Remsan visar hur de 60 minuterna fördelas på de sex stegen och vilken arbetsform varje steg har. Längst tid får eleverna för att skriva själva.
   rader:
     - tid: Före passet
       fas: Förberedelse
@@ -199,8 +199,8 @@ steg:
         - Berätta för din kamrat hur du använde draget.
         - Kommer vårt budskap fram till åk 2?
 arbetsform:
-  rubrik: "Arbetsform: gemensamt, enskilt, i par och gemensamt igen"
-  text: Först arbetar gruppen gemensamt, där den läser mentortexten, paren markerar draget och läraren skriver på tavlan. Sedan enskilt, där varje elev skriver sin egen text medan läraren stödjer. Till sist i par och gemensamt, där eleverna läser sin text för en kamrat bredvid mentortexten och några läser upp. Med fyra till tio elever hinner du läsa över axeln hos alla.
+  rubrik: "Arbetsform: gemensamt, läraren visar, enskilt, i par och gemensamt"
+  text: Först arbetar gruppen gemensamt, där den läser mentortexten och paren markerar draget. Sedan skriver läraren på tavlan medan eleverna tänker. Därefter arbetar eleverna enskilt, och varje elev skriver sin egen text medan läraren stödjer. Till sist i par och gemensamt, där eleverna läser sin text för en kamrat bredvid mentortexten och några läser upp. Med fyra till tio elever hinner du läsa över axeln hos alla.
   delar:
     - rubrik: 1. Gemensamt
       text: läraren leder
@@ -208,12 +208,15 @@ arbetsform:
         - Läs
         - Hitta draget
         - Vår text
+    - rubrik: 2. Läraren visar
+      text: skriver på tavlan, eleverna tänker
+      faser:
         - Läraren skriver
-    - rubrik: 2. Enskilt
+    - rubrik: 3. Enskilt
       text: eleverna skriver, läraren stödjer
       faser:
         - Eleverna skriver
-    - rubrik: 3. I par och gemensamt
+    - rubrik: 4. I par och gemensamt
       text: läsa tillbaka och jämföra
       faser:
         - Jämför
