@@ -820,6 +820,9 @@ html.js .bara-js { display: inline-block; }
   /* Elevens blad på en egen sida, med fälten i sina riktiga höjder, så att utskriften går att kopiera. */
   .m-ram:has(.m-elevblad) { break-before: page; break-inside: avoid; }
   .m-elevblad .m-ramfalt > div { min-height: calc(var(--hojd) * 1cm); }
+  .m-elevblad + .m-efter { display: none; }
+  /* En vecka med kort att klippa börjar på en ny sida, så att den inte delar sida med kartläggningens protokoll. */
+  .m-ram:has(.m-kortlista) { break-before: page; }
   /* Varje mall på en egen liggande sida, i sitt riktiga mått (det hela 26 cm). */
   .m-mall { page: mall; break-before: page; margin: 0; }
   .m-mall-ram { overflow: visible; }
@@ -852,7 +855,8 @@ html.js .bara-js { display: inline-block; }
   .sidhuvud nav::-webkit-scrollbar { display: none; }
   .sidhuvud nav a { flex: none; white-space: nowrap; padding: 0.5em 0.35em; min-height: 2.75rem; display: inline-flex; align-items: center; }
   .faktaruta dl { grid-template-columns: 1fr; }
-  .m-ramfalt > div { grid-template-columns: 1fr; }
+  /* Etiketten över fältet: på elevens blad får fältet under etiketten höjden, inte etiketten. */
+  .m-ramfalt > div { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
   .m-ramfalt dt { padding-bottom: 0.2rem; }
   .m-ramfalt dd { padding-top: 0.2rem; }
   /* Filvalet fyller raden på mobil och knapparna delar bredden, så att alla fyra (PPTX, Drive, Pdf, Word) syns utan att något klipps. Full träffyta på pekskärm. */

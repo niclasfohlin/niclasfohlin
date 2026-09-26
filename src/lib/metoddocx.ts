@@ -381,7 +381,11 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
     const rest = Math.floor((BREDD - forsta) / (n - 1));
     ut.push(...rubrikTabell(ram.oversikt.kolumner, ram.oversikt.rader, ram.oversikt.kolumner.map((_, i) => (i === 0 ? forsta : i === n - 1 ? BREDD - forsta - rest * (n - 2) : rest)), { hallIhop: korta, hallIhopEfter: korta, radrubrik: false, storlek: korta && o.stor ? 30 : undefined }));
   }
-  if (ram.huvud) ut.push(...ramFaltTabell(ram.huvud, { skrivrum: o.skrivrum }));
+  // Ramens huvud (fält att fylla i före delarna) står först. Har ramen listor står det i stället direkt före den första
+  // listan, som på sidan, så att elevens namn och tecknen på kartläggningens protokoll hör till listan.
+  // På elevens blad är namnraden 1 cm, så att bladets fält i sina mått och upphovet ryms på sidan.
+  const huvud = () => (ram.huvud ? ramFaltTabell(ram.huvud, { skrivrum: o.skrivrum, hojder: o.blad ? ram.huvud.map(() => 1) : undefined }) : []);
+  if (!ram.listor) ut.push(...huvud());
   // En ordlistas ruta bär listans namn, så att en sida eller ett blad som börjar med rutan går att koppla rätt.
   const noter = () => ram.delar.flatMap((del) => ramFaltTabell(del.falt, { rubrik: korta || ram.listor ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum, hojder: o.blad ? del.falt.map((f) => o.blad![f.rubrik]) : undefined, elevblad: !!o.blad }));
   // I beskrivningen bär listans rubrik ramens namn, så att en lista som hamnar på en ny sida går att
@@ -414,7 +418,7 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
     }
     return ut;
   }
-  if (ram.listor) ut.push(...(o.stor ? [...listor(), ...noter()] : [...noter(), ...listor()]));
+  if (ram.listor) ut.push(...(o.stor ? [...huvud(), ...listor(), ...noter()] : [...noter(), ...huvud(), ...listor()]));
   else ut.push(...noter());
   return ut;
 }
@@ -744,15 +748,19 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
       avstand(),
     ]);
   }
+  // Elevens blad fyller sidan med fälten i sina mått, så där bär sidfoten upphovet ensam, som på mallarnas sidor.
+  const bladsidor = new Set<Barn[]>();
   if (d.ramar) {
     for (const ram of d.ramar.ramar) {
       const tom = ramArTom(ram);
       if (o.baraTommaRamar && !tom) continue;
-      sidor.push([...under(ram.rubrik), ...ramBarn(ram, { skrivrum: tom, stor: true, kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik' })]);
+      const sida = [...under(ram.rubrik), ...ramBarn(ram, { skrivrum: tom, stor: true, kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik' })];
+      if (d.elevblad[ram.rubrik]) bladsidor.add(sida);
+      sidor.push(sida);
     }
   }
   if (d.diplom) sidor.push([...under(d.diplom.rubrik), ...diplomBarn(d.diplom)]);
-  for (const sida of sidor) sida.push(stycke(`${UPPHOV}. Mall till ${d.titel}, ${metodAdress(bas, post.id)}.`, { farg: FARG.svag, storlek: 18, fore: 160 }));
+  for (const sida of sidor) if (!bladsidor.has(sida)) sida.push(stycke(`${UPPHOV}. Mall till ${d.titel}, ${metodAdress(bas, post.id)}.`, { farg: FARG.svag, storlek: 18, fore: 160 }));
   // Mallarna (bråkplanket och tallinjerna) sist, var och en på en liggande sida med smal marginal. Sidfoten bär
   // upphovet, så att planket och linjerna får hela höjden. Är lathundens tredje sida ett blad att lägga på bordet
   // (talsortsmattan, bladet Bråket på fyra sätt) står bladet först bland dem, så att det kopieras med resten.
@@ -854,7 +862,7 @@ function mallSida(m: Mall): Barn[] {
   const L = Math.round((m.langdCm ?? 26) * CM);
   // En delad linje bär delarnas namn (brak.ts, delnamn) till vänster ovanför linjen, i luften före den, så att sidan
   // blir lika hög som utan namn. Linjens 0 står 283 in från tabellens kant, och tabellen är centrerad (tallinjeTabell).
-  const namnRad = (namn: string, hojd: number, vid: number) => new Paragraph({ keepNext: true, indent: { left: vid }, spacing: { before: 0, after: 0, line: hojd, lineRule: LineRuleType.EXACT }, children: [run(namn, { storlek: 17, farg: FARG.svag })] });
+  const namnRad = (namn: string, hojd: number, vid: number) => new Paragraph({ keepNext: true, indent: { left: vid }, spacing: { before: 0, after: 0, line: hojd, lineRule: LineRuleType.EXACT }, children: [run(namn, { storlek: 20, farg: FARG.svag })] });
   return [
     new Paragraph({ children: [run(m.rubrik)], heading: HeadingLevel.HEADING_1, spacing: { before: 0, after: 40 } }),
     ...(m.text ? [stycke(m.text, { efter: 120 })] : []),

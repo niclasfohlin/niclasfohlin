@@ -393,6 +393,11 @@ const avsnitt = [
                   {/* Elevens blad (Stapelrutan): fälten i sina höjder, så att läraren ser bladet där det beskrivs. I utskriften
                       får fälten sina riktiga mått i cm, och bladet börjar på en ny sida. */}
                   <div class="m-ramdelar m-elevblad">
+                    {ram.huvud && (
+                      <dl class="m-ramfalt m-ramhuvud">
+                        {ram.huvud.map((f) => <div><dt>{f.rubrik}</dt><dd>{f.text}</dd></div>)}
+                      </dl>
+                    )}
                     {ram.delar.map((del) => (
                       <div class="m-ramdel">
                         <h4>{del.rubrik}<span class="m-ramnamn"> · {ram.rubrik}</span></h4>
