@@ -98,6 +98,11 @@ function startaWaline() {
     postUpdate,
     postDelete,
   });
+  // Waline loggar varje databasfråga med läsarens namn och e-post. De ska inte ligga i Netlifys
+  // loggar: bara varningar och fel släpps igenom.
+  if (globalThis.think?.logger) {
+    for (const niva of ['info', 'debug', 'trace']) globalThis.think.logger[niva] = () => {};
+  }
   waline = serverless(http.createServer(app));
   return waline;
 }

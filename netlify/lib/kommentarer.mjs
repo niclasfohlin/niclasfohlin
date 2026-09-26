@@ -161,13 +161,15 @@ export const TAK = {
 // ---------------------------------------------------------------------------------------------
 // Kreditmätaren. Netlify visar inte förbrukningen i sitt API, så funktionen räknar själv och
 // sparar räkningen i Netlify Blobs, lagret "kommentarer". Uppskattning, inte faktura:
-//   databasen: minst 1 beräkningsenhet så länge den är vaken, och den somnar efter 5 minuter
-//              utan anrop, 10 krediter per enhet och timme (Netlify Database, Personal)
+//   databasen: 0,25 beräkningsenheter så länge den är vaken (grenens minsta storlek, uppmätt
+//              2026-09-26; den kan växa till 1 under last), och den somnar efter 5 minuter utan
+//              anrop, 10 krediter per enhet och timme (Netlify Database, Personal)
 //   funktionen: 1 GB minne, 10 krediter per GB-timme
 //   anropen:   2 krediter per 10 000
 
 export const LAGER = 'kommentarer';
 const VILA_MIN = 5;
+const DB_ENHETER = 0.25;
 
 /** Perioden börjar den 20:e som Netlifys fakturaperiod (07.00 UTC). Nyckeln är periodens första dag. */
 export function period(nu = new Date()) {
@@ -181,7 +183,7 @@ const tom = () => ({ anrop: 0, funktionMs: 0, dbMinuter: 0, dbStart: 0, dbSenast
 
 export function uppskattning(f) {
   const oppen = f.dbStart ? (f.dbSenast - f.dbStart) / 60000 + VILA_MIN : 0;
-  const db = ((f.dbMinuter + oppen) / 60) * 10;
+  const db = ((f.dbMinuter + oppen) / 60) * DB_ENHETER * 10;
   const funktion = (f.funktionMs / 3.6e6) * 10;
   const anrop = (f.anrop / 10000) * 2;
   return { db, funktion, anrop, summa: db + funktion + anrop };
