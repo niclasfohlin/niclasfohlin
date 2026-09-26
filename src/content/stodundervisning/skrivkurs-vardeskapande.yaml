@@ -209,15 +209,15 @@ arbetsform:
         - Hitta draget
         - Vår text
     - rubrik: 2. Läraren visar
-      text: skriver på tavlan, eleverna tänker
+      text: eleverna tänker
       faser:
         - Läraren skriver
     - rubrik: 3. Enskilt
-      text: eleverna skriver, läraren stödjer
+      text: läraren stödjer
       faser:
         - Eleverna skriver
     - rubrik: 4. I par och gemensamt
-      text: läsa tillbaka och jämföra
+      text: läser för en kamrat, några läser upp
       faser:
         - Jämför
 exempel:

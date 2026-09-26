@@ -146,11 +146,11 @@ arbetsform:
   text: Först visar du, sedan läser alla samma ord tillsammans i ditt tempo, och sist läser eleverna i par medan du cirkulerar. Passet avslutas med hela gruppen. Upplägget fungerar med en elev lika väl som med tio. Med en elev är du elevens par. Du pekar och eleven läser, och efter en genomläsning byter ni. Vid udda antal läser tre tillsammans, en pekar och två turas om att läsa. Med tio elever blir det fem par, och du hinner lyssna på varje par en eller två gånger under parläsningen.
   delar:
     - rubrik: 1. Läraren visar
-      text: modellering, eleverna lyssnar
+      text: eleverna lyssnar
       faser:
         - Modellering
     - rubrik: 2. Alla tillsammans
-      text: körläsning i lärarens tempo
+      text: i lärarens tempo
       faser:
         - Körläsning
     - rubrik: 3. I par

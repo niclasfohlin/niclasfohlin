@@ -102,15 +102,15 @@ passrutin:
   text: "Varje pass följer samma rutin i fem steg, oavsett material: läraren gör först, sedan gör ni det tillsammans, sedan i par, sedan var och en för sig och till sist alla gemensamt igen. Det gör passen lätta att leda och trygga för eleverna."
   steg:
     - text: Läraren bygger ett tal som visar veckans fokus och säger allt hen gör. Eleverna tittar.
-      fas: Läraren gör först
+      fas: Första talet
     - text: Läraren och eleverna bygger samma tal tillsammans, ett handgrepp i taget, och säger vad de gör.
-      fas: Gör tillsammans
+      fas: Samma tal
     - text: Läraren läser ett kort och paren avgör vad som hände. Sedan läser paren korten för varandra, och läraren går runt.
-      fas: I par
+      fas: Korten
     - text: Varje elev bygger talet på sitt eget kort och säger vad hen gör.
-      fas: Själv
+      fas: Två kort
     - text: Alla bygger det andra talet tillsammans och säger vad som hände och varför.
-      fas: Gemensamt igen
+      fas: Andra talet
   efterPasset: Läraren antecknar kort vem som växlade själv och kunde säga vad som hände, och vad läraren behöver visa igen nästa pass.
 tidsschema:
   rubrik: Ett pass på 30 minuter
@@ -118,27 +118,27 @@ tidsschema:
   rader:
     - tid: Före passet
       fas: Förberedelse
-      vad: Ta fram dagens material, en matta per elev och en till dig, och veckans kort ur gruppens paket. Välj två tal som kräver veckans fokus, ett som du visar först och sedan bygger tillsammans med eleverna, och ett till Gemensamt igen. Bygg båda och säg orden högt för dig själv.
+      vad: Ta fram dagens material, en matta per elev och en till dig, och veckans kort ur gruppens paket. Välj två tal som kräver veckans fokus. Det första talet visar du och bygger sedan tillsammans med eleverna, och det andra talet bygger hela gruppen sist. Bygg båda och säg orden högt för dig själv.
     - tid: 0–6 min
-      fas: Läraren gör först
+      fas: Första talet
       vad: Bygg det första talet långsamt framför eleverna och tänk högt. Säg vad du tar, var du lägger det, vad du lyfter och vad du pekar på. Eleverna tittar.
     - tid: 6–12 min
-      fas: Gör tillsammans
+      fas: Samma tal
       vad: "Alla bygger talet du just visade, ett handgrepp i taget. Säg varje handgrepp, och eleverna gör och säger likadant. Fråga: ”Hur vet du att det är 36 och inte 63?” Gör sedan en kedja med sex till tio korta ändringar på samma tal. Efter varje ändring säger alla vilket tal det blev."
     - tid: 12–21 min
-      fas: I par
+      fas: Korten
       vad: Läs ett kort, till exempel ”Bygg 36. Ta bort 12.” I paret bygger den ena och berättar vad hen gör, och den andra kontrollerar. De kommer överens om vad som blev kvar och byter roller efter varje kort. Sedan läser paren korten för varandra. Gå runt och lyssna efter veckans vanliga fel, som står under Lyssna efter i rutan Till läraren.
     - tid: 21–26 min
-      fas: Själv
+      fas: Två kort
       vad: Varje elev får två kort. Eleverna bygger det första medan du går runt. När de bygger det andra lyssnar du på en elev i taget. Saknar någon orden gör ni handgreppet tillsammans igen.
     - tid: 26–30 min
-      fas: Gemensamt igen
+      fas: Andra talet
       vad: "Bygg det andra talet med hela gruppen. Eleverna visar och säger vad som hände: ”Jag hade tretton ental. Jag bytte tio ental mot ett tiotal.”"
   efter: "Blir ett par klart tidigt kan de spela Närmast målet. De slår en tärning och bestämmer varje gång vilken talsort slaget ska räknas som. De bygger summan efter varje slag, och alla slag ska användas. Den som kommer närmast målet utan att gå över vinner. Målet och antalet slag står i gruppens paket, i åk 2 till exempel 100 på sju slag."
 steg:
   rubrik: Vad du gör och säger i varje fas
   rader:
-    - namn: Läraren gör först
+    - namn: Första talet
       fraga: Vad gör jag, och vad ser ni?
       gor: "Bygg framför eleverna och tänk högt. Sätt ord på varje handgrepp: vad du tar, var du lägger det, vad eleverna ska se, vad du lyfter och vad du pekar på. Eleverna tittar. Sitt på samma sida som eleverna, så att din matta ligger som deras."
       fraser:
@@ -146,28 +146,28 @@ steg:
         - Jag lyfter en tiostav. Den är tio ental som sitter ihop.
         - "Jag pekar på entalen och räknar: ett, två, tre, fyra, fem, sex."
         - Jag tar bort 12, en tiostav och två ental. Kvar är två tiotal och fyra ental, 24.
-    - namn: Gör tillsammans
+    - namn: Samma tal
       fraga: Kan vi göra det tillsammans?
       gor: Bygg talet du just visade en gång till, nu samtidigt som eleverna och ett handgrepp i taget. Säg vad ni gör, och vänta tills alla är klara innan nästa handgrepp.
       fraser:
         - Lyft tiostavarna med mig. Hur många tiotal?
         - Peka på entalen med mig. Hur många är de?
         - Vad blir det om vi tar bort 12?
-    - namn: I par
+    - namn: Korten
       fraga: Vad hände med talet?
       gor: Läs ett kort i taget. Paren bygger, ändrar och kommer överens om vad som blev kvar. Sedan läser paren korten för varandra, och den som bygger säger vad hen gör. Vid subtraktion byggs bara det första talet.
       fraser:
         - Bygg 36. Ta bort 12. Vad har ni kvar?
         - Räcker entalen? Vad gör ni då?
         - Säg vad du gör medan du gör det.
-    - namn: Själv
+    - namn: Två kort
       fraga: Kan du göra det själv?
       gor: Ge varje elev ett eget kort. Eleven bygger och säger vad hen gör, och vecka 5 skriver eleven samtidigt. Saknar eleven orden gör ni handgreppet tillsammans igen.
       fraser:
         - Bygg ditt kort och berätta vad du gör.
         - Varför fick du växla?
         - Hur skriver du det du gjorde?
-    - namn: Gemensamt igen
+    - namn: Andra talet
       fraga: Vad såg vi i dag?
       gor: Bygg det andra talet med hela gruppen. Låt eleverna visa och säga vad som hände, och sätt ord på veckans fokus i en mening.
       fraser:
@@ -181,23 +181,23 @@ arbetsform:
     - rubrik: 1. Läraren visar
       text: eleverna tittar
       faser:
-        - Läraren gör först
+        - Första talet
     - rubrik: 2. Gemensamt
-      text: alla bygger samma tal, ett handgrepp i taget
+      text: alla gör likadant, ett handgrepp i taget
       faser:
-        - Gör tillsammans
+        - Samma tal
     - rubrik: 3. I par
-      text: paren läser korten och bygger
+      text: den ena bygger, den andra kontrollerar
       faser:
-        - I par
+        - Korten
     - rubrik: 4. Enskilt
       text: var och en bygger och säger
       faser:
-        - Själv
+        - Två kort
     - rubrik: 5. Gemensamt igen
       text: alla visar och berättar
       faser:
-        - Gemensamt igen
+        - Andra talet
 exempel:
   valt:
     rubrik: Gruppen
@@ -307,7 +307,7 @@ checklista:
     - Lagt fram en talsortsmatta per elev och bestämt paren.
     - Kopierat veckans kort ur gruppens paket.
     - Byggt det jag ska visa först och sagt orden högt.
-    - Valt talet till Gemensamt igen.
+    - Valt det andra talet, som hela gruppen bygger sist.
 grund:
   text: "Metoden bygger på att eleven ser tiotalet som en enhet och som tio ental på samma gång, och på att mängd, talord och siffra kopplas ihop varje gång (Fuson m.fl., 1997). När elever bygger och växlar med tiobas och skriver varje steg samtidigt, förstår de flersiffriga tal och räknar med växling redan i åk 1 och 2 (Fuson och Briars, 1990). Den som tidigt förstår positionssystemet klarar senare räkning med växling bättre (Moeller m.fl., 2011). För elever i matematiksvårigheter rekommenderas systematisk undervisning där läraren först visar och tänker högt, använder ett tydligt matematiskt språk och kopplar konkret material till bild och symbol (Fuchs m.fl., 2021). Vägen från material via anteckningar till skrift följer McIntosh (2008), och samtal om representationer i talkör, i par och i helgrupp har gett effekt i svensk förskoleklass (Sterner, Wolff och Helenius, 2020)."
   kallor: Bygger på Fuson och Briars (1990), Fuson m.fl. (1997), Moeller m.fl. (2011), Fuchs m.fl. (2021), McIntosh (2008) och Sterner, Wolff och Helenius (2020), kursplanen i matematik i Lgr22 (Skolverket, 2022) och kompendiet Särskilt stöd, Norrtälje, avsnittet Matematik 1.
@@ -813,15 +813,15 @@ lathund:
         - Steg
         - Exempelfraser
       rader:
-        - - "1 · Läraren gör först\n0–6 min"
+        - - "1 · Första talet\n0–6 min"
           - "”Jag lägger tre tiostavar på tiotalens plats och sex ental på entalens.”\n”Jag lyfter en tiostav. Den är tio ental som sitter ihop.”"
-        - - "2 · Gör tillsammans\n6–12 min"
+        - - "2 · Samma tal\n6–12 min"
           - "”Lyft tiostavarna med mig. Hur många tiotal?”\n”Peka på entalen med mig. Hur många är de?”"
-        - - "3 · I par\n12–21 min"
+        - - "3 · Korten\n12–21 min"
           - "”Bygg 36. Ta bort 12. Vad har ni kvar?”\n”Säg vad du gör medan du gör det.”"
-        - - "4 · Själv\n21–26 min"
+        - - "4 · Två kort\n21–26 min"
           - "”Bygg ditt kort och berätta vad du gör.”\n”Varför fick du växla?”"
-        - - "5 · Gemensamt igen\n26–30 min"
+        - - "5 · Andra talet\n26–30 min"
           - "”Vad hände när entalen blev tio?”\n”Visa oss och säg det.”"
   pass:
     rubrik: "Vi kör ett pass: lägga till och växla upp"
@@ -842,21 +842,21 @@ lathund:
       rader:
         - tid: Före
           fas: Förberedelse
-          vad: Ta fram dagens material, en matta per elev och en till dig, och veckans kort. Välj två tal ur korten, ett som du visar först och ett till Gemensamt igen. Bygg båda och säg orden högt.
+          vad: Ta fram dagens material, en matta per elev och en till dig, och veckans kort. Välj två tal ur korten, det första talet som du visar och det andra talet som hela gruppen bygger sist. Bygg båda och säg orden högt.
         - tid: 0–6
-          fas: 1 · Läraren gör först
+          fas: 1 · Första talet
           vad: Bygg det första talet framför eleverna och säg vad du tar, lyfter och pekar på.
         - tid: 6–12
-          fas: 2 · Gör tillsammans
+          fas: 2 · Samma tal
           vad: Alla bygger talet en gång till, ett handgrepp i taget, och säger vad de gör.
         - tid: 12–21
-          fas: 3 · I par
+          fas: 3 · Korten
           vad: Läs ett kort. Paren bygger och avgör, sedan läser de för varandra.
         - tid: 21–26
-          fas: 4 · Själv
+          fas: 4 · Två kort
           vad: Var och en bygger talet på sitt kort och säger vad hen gör.
         - tid: 26–30
-          fas: 5 · Gemensamt igen
+          fas: 5 · Andra talet
           vad: Bygg det andra talet tillsammans. Vad hände, och varför?
   mall:
     rubrik: Talsortsmattan
