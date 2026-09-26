@@ -1,5 +1,5 @@
 # Metod i stödundervisning. Modellen står i src/content.config.ts och mallen i _mall.yaml.
-# Skriven 2026-09-25 ur kompendiet Särskilt stöd, Norrtälje (Matematik 1 med Mall 1 och 2), intaget och
+# Skriven 2026-09-25 ur Niclas kompendium Särskilt stöd (Matematik 1 med Mall 1 och 2), intaget och
 # sökningar online. Omskriven samma dag efter författarens återkoppling: passets fem faser (gör först, gör
 # tillsammans, i par, själv, gemensamt igen) och ett paket per årskurs. Besluten står i analys.md.
 titel: "Antalsuppfattning i grupp: bygga tal"
@@ -31,6 +31,7 @@ material:
 uppdaterad: 2026-09-25
 relaterade:
   - problemlosning-i-grupp
+  - brakkurs-i-grupp
 utkast: false
 inledning:
   - "Metoden är för elever i åk 1–5 som behöver stöd i antalsuppfattning. Eleverna bygger talen framför sig med tiobas, talbrickor och pengar. Talbrickor är runda brickor med ett talvärde. Eleverna lägger till och tar bort, och när en talsort blir full eller inte räcker växlar de själva med materialet. Metoden handlar om att se tal och bygga tal, inte bara räkna dem. Det viktigaste händer vid bordet. Läraren gör först: bygger, lyfter, pekar och säger vad hen gör. Sedan gör gruppen samma sak tillsammans, sedan i par och sist var och en för sig, och passet slutar med att alla gör det gemensamt igen. Efter fem veckor ska eleven kunna bygga tal på egen hand och förstå hur växlingen går till i skriftlig huvudräkning."
@@ -310,7 +311,7 @@ checklista:
     - Valt det andra talet, som hela gruppen bygger sist.
 grund:
   text: "Metoden bygger på att eleven ser tiotalet som en enhet och som tio ental på samma gång, och på att mängd, talord och siffra kopplas ihop varje gång (Fuson m.fl., 1997). När elever bygger och växlar med tiobas och skriver varje steg samtidigt, förstår de flersiffriga tal och räknar med växling redan i åk 1 och 2 (Fuson och Briars, 1990). Den som tidigt förstår positionssystemet klarar senare räkning med växling bättre (Moeller m.fl., 2011). För elever i matematiksvårigheter rekommenderas systematisk undervisning där läraren först visar och tänker högt, använder ett tydligt matematiskt språk och kopplar konkret material till bild och symbol (Fuchs m.fl., 2021). Vägen från material via anteckningar till skrift följer McIntosh (2008), och samtal om representationer i talkör, i par och i helgrupp har gett effekt i svensk förskoleklass (Sterner, Wolff och Helenius, 2020)."
-  kallor: Bygger på Fuson och Briars (1990), Fuson m.fl. (1997), Moeller m.fl. (2011), Fuchs m.fl. (2021), McIntosh (2008) och Sterner, Wolff och Helenius (2020), kursplanen i matematik i Lgr22 (Skolverket, 2022) och kompendiet Särskilt stöd, Norrtälje, avsnittet Matematik 1.
+  kallor: Bygger på Fuson och Briars (1990), Fuson m.fl. (1997), Moeller m.fl. (2011), Fuchs m.fl. (2021), McIntosh (2008), Sterner, Wolff och Helenius (2020) och kursplanen i matematik i Lgr22 (Skolverket, 2022).
 ramar:
   rubrik: Material per årskurs
   text:
