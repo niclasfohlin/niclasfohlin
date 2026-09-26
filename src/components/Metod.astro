@@ -82,12 +82,12 @@ const avsnitt = [
       <h2>{pass.rubrik}</h2>
       {d.passrutin.text && <p>{d.passrutin.text}</p>}
       {pass.text && <p>{pass.text}</p>}
-      <div class="m-remsa" style={`--kolumner:${pass.faser.map((f) => `minmax(7rem, ${f.minuter}fr)`).join(' ')}`} role="img" aria-label={`Passets faser: ${pass.faser.map((f) => `${f.fas} ${f.tid}`).join(', ')}${pass.delar.length ? `. Arbetsform: ${pass.delar.map((x) => `${x.rubrik} ${x.tid}`).join(', ')}` : ''}`}>
-        {passGrupper(pass).map((g) => {
-          const faser = g.faser.map(({ fas, nr }) => <div class="m-remsa-fas" style={`grid-column:${nr + 1}`}><strong>{fas.fas}</strong><span>{fas.tid}</span></div>);
+      <div class={`m-remsa${pass.delar.length ? ' har-delar' : ''}`} style={`--kolumner:${pass.faser.map((f) => `minmax(7rem, ${f.minuter}fr)`).join(' ')};--rader:${pass.faser.map((f) => `minmax(auto, ${Math.sqrt(f.minuter).toFixed(2)}fr)`).join(' ')}`} role="img" aria-label={`Passets faser: ${pass.faser.map((f) => `${f.fas} ${f.tid}`).join(', ')}${pass.delar.length ? `. Arbetsform: ${pass.delar.map((x) => `${x.rubrik} ${x.tid}`).join(', ')}` : ''}`}>
+        {passGrupper(pass).flatMap((g) => {
+          const faser = g.faser.map(({ fas, nr }) => <div class="m-remsa-fas" style={`--nr:${nr + 1}`}><strong>{fas.fas}</strong><span>{fas.tid}</span></div>);
           if (!g.del) return faser;
           const v = remsDel(g.del);
-          return <div class="m-remsa-grupp">{faser}<div class="m-remsa-del" style={`grid-column:${g.del.fran + 1} / span ${g.del.antal}`}>{v.rubrik ? <><strong>{v.rubrik}</strong>{' '}· {v.text}</> : v.text}</div></div>;
+          return [...faser, <div class="m-remsa-del" style={`--fran:${g.del.fran + 1};--antal:${g.del.antal}`}>{v.rubrik && <><strong>{v.rubrik}</strong><span class="m-remsa-skiljare">{' '}·{' '}</span></>}<span class="m-remsa-text">{v.text}</span></div>];
         })}
       </div>
       <table class="m-tabell m-pass stapla" id="tidsschema">

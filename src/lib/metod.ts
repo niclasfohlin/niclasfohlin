@@ -136,8 +136,7 @@ export function passOversikt(d: MetodData): PassOversikt | null {
   return { rubrik: d.tidsschema.rubrik, text: d.tidsschema.text, fore: fore?.vad, efter: d.passrutin.efterPasset, efterTabell: d.tidsschema.efter, faser, total, delar: delar.map((x) => ({ ...x, visaRubrik: !somFasen(x) })) };
 }
 // Remsans grupper i fasernas ordning: en arbetsform med de faser den gäller, eller en fas utan arbetsform.
-// På mobil ramar gruppen in sina faser med arbetsformens text under den sista, så att en del som gäller
-// två faser inte hamnar mellan dem. På bredare skärm syns inte gruppen, och delen ligger under sina kolumner.
+// Metod.astro skriver ut faserna och sedan delen, så att ordningen i koden följer passet.
 export type PassGrupp = { faser: { fas: PassFas; nr: number }[]; del?: PassDel };
 export function passGrupper(p: PassOversikt): PassGrupp[] {
   const ut: PassGrupp[] = [];
