@@ -250,12 +250,20 @@ const listsvar = (data) => ({
 
 /** Blobs bär kreditmätaren. Går lagret inte att öppna fortsätter kommentarerna utan mätare, och
  *  felet syns i funktionsloggen. */
+// Lagret delas annars mellan alla versioner av sajten. En förhandsversion har en egen databasgren,
+// och dess listor får inte hamna i den riktiga sajtens lager: den får ett eget, kommentarer-<sammanhang>.
+let lagrets = LAGER;
+const valjLager = (context) => {
+  const sammanhang = context?.deploy?.context;
+  lagrets = !sammanhang || sammanhang === 'production' ? LAGER : `${LAGER}-${sammanhang}`;
+};
+
 function oppnaLager() {
   try {
-    return getStore(LAGER);
+    return getStore(lagrets);
   } catch (e) {
     console.error('kommentarer: lagret för kreditmätaren gick inte att öppna:', e?.message);
-    return { get: async () => null, set: async () => {}, setJSON: async () => {} };
+    return { get: async () => null, set: async () => {}, setJSON: async () => {}, list: async () => ({ blobs: [] }), delete: async () => {} };
   }
 }
 
@@ -383,6 +391,7 @@ async function behandla(event, context) {
   const sokvag = event.path || '/';
   const del = sokvag.startsWith(PREFIX) ? sokvag.slice(PREFIX.length) || '/' : sokvag;
   const q = event.queryStringParameters || {};
+  valjLager(context);
   const lager = oppnaLager();
   // Walines egen adress, som panelen ropar på. Tas ur anropet så att den stämmer lokalt (http) och
   // i en förhandsversion lika väl som på sajten.
