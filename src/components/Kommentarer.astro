@@ -1,0 +1,44 @@
+---
+// Kommentarerna under en artikel, en bok eller en metod. Sidan bär bara rubriken och en liten
+// laddare direkt i html:en; när läsaren närmar sig rutan hämtas /kommentarer/klient.js med
+// formuläret och stilen (src/lib/kommentarer-klient.js), och listan ur Netlifys mellanlager. Sidorna
+// tar bara med komponenten när kommentarerna är på, se src/lib/kommentarer.ts.
+import { turnstileNyckel } from '../lib/kommentarer';
+
+interface Props {
+  /** Sidans fasta id i kommentarerna: sökvägen utan domän, till exempel /artiklar/pisa-raset. */
+  sida: string;
+  titel: string;
+}
+
+const { sida, titel } = Astro.props;
+---
+
+<section class="kommentarer" id="kommentarer" data-sida={sida} data-titel={titel} data-turnstile={turnstileNyckel || undefined} aria-labelledby="kommentarer-rubrik">
+  <h2 id="kommentarer-rubrik">Kommentarer</h2>
+  <noscript><p class="meta">Kommentarerna behöver JavaScript.</p></noscript>
+</section>
+
+<script is:inline>
+  (() => {
+    const del = document.getElementById('kommentarer');
+    if (!del) return;
+    let startad = false;
+    const ladda = () => {
+      if (startad) return;
+      startad = true;
+      const s = document.createElement('script');
+      s.type = 'module';
+      s.src = '/kommentarer/klient.js';
+      document.head.append(s);
+    };
+    if (location.hash.startsWith('#kommentar') || !('IntersectionObserver' in window)) return ladda();
+    const vakt = new IntersectionObserver((poster) => {
+      if (poster.some((p) => p.isIntersecting)) {
+        vakt.disconnect();
+        ladda();
+      }
+    }, { rootMargin: '600px 0px' });
+    vakt.observe(del);
+  })();
+</script>

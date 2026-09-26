@@ -3,6 +3,8 @@ import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { bildHojd } from '../../lib/bildmatt';
 import Taggar from '../../components/Taggar.astro';
+import Kommentarer from '../../components/Kommentarer.astro';
+import { kommentarerPa } from '../../lib/kommentarer';
 import { publicerade } from '../../lib/innehall';
 
 export async function getStaticPaths() {
@@ -42,6 +44,7 @@ const antologi = b.data.kategori === 'Kapitel i andra böcker';
         </p>
       )}
       <Taggar taggar={b.data.taggar} />
+      {kommentarerPa && <Kommentarer sida={`/bocker/${b.id}`} titel={b.data.titel} />}
     </div>
   </article>
 </Base>

@@ -12,6 +12,24 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
+# Kommentarerna (Waline) läser sina egna filer från disken när de startar, så paketet följer med
+# funktionen som det är i stället för att packas ihop. Se DRIFT.md under Kommentarer.
+[functions.kommentarer]
+  external_node_modules = ["@waline/vercel"]
+
+# Korta adresser till kommentarernas panel och till registreringen av administratören.
+[[redirects]]
+  from = "/kommentarer/admin"
+  to = "/.netlify/functions/kommentarer/ui"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/kommentarer/registrera"
+  to = "/.netlify/functions/kommentarer/registrera"
+  status = 302
+  force = true
+
 # Grundläggande säkerhetsrubriker för alla sidor.
 [[headers]]
   for = "/*"

@@ -3,6 +3,8 @@ import Base from '../../layouts/Base.astro';
 import Taggar from '../../components/Taggar.astro';
 import Metod from '../../components/Metod.astro';
 import Nedladdning from '../../components/Nedladdning.astro';
+import Kommentarer from '../../components/Kommentarer.astro';
+import { kommentarerPa } from '../../lib/kommentarer';
 import { publicerade, formateraDatum } from '../../lib/innehall';
 import { arskursText, ejBryt, harLathund, harMallar, metodAdress, SAJT, UPPHOV } from '../../lib/metod';
 import { site } from '../../data/site';
@@ -57,6 +59,7 @@ const adress = metodAdress(site.url, m.id).replace(/^https?:\/\//, '');
       )}
       <p class="upphov">{UPPHOV}. Metoden får användas i undervisning. Ange {SAJT} som källa när den sprids vidare. {adress}</p>
     </footer>
+    {kommentarerPa && <Kommentarer sida={`/stodundervisning/${m.id}`} titel={d.titel} />}
   </article>
   <div class="tryck-fot" aria-hidden="true">{UPPHOV} · {adress}</div>
 </Base>

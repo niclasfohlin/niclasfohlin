@@ -3,6 +3,8 @@ import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Taggar from '../../components/Taggar.astro';
 import Kalla from '../../components/Kalla.astro';
+import Kommentarer from '../../components/Kommentarer.astro';
+import { kommentarerPa } from '../../lib/kommentarer';
 import { publicerade, formateraDatum, publikationNamn, typLabel } from '../../lib/innehall';
 
 export async function getStaticPaths() {
@@ -35,5 +37,6 @@ const namn = publikationNamn(a.data.publikation);
         <p class="meta">Texten publicerades först i {namn}. <a href={a.data.originalUrl} rel="noopener">Läs originalet där</a>.</p>
       )}
     </footer>
+    {kommentarerPa && <Kommentarer sida={`/artiklar/${a.id}`} titel={a.data.titel} />}
   </article>
 </Base>

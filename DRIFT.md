@@ -90,6 +90,43 @@ Kontot är niclas.fohlin@gmail.com på gratisplanen (300 mejl per dag). IP-begr�
 
 Kommandon: `node scripts/brevo.mjs status`, `doman`, `autentisera`, `kampanjer [antal]`, `anrop <METOD> <sökväg> [json]`. API-dokumentationen: https://developers.brevo.com/reference. Ändra aldrig avsändare eller mall utan att skriva in det nya läget här.
 
+## Kommentarer
+
+Under varje artikel, bok och metod finns kommentarer, byggda 2026-09-26 på Niclas beställning. De är ett lager som läggs på och tas bort med en enda inställning, och läsare som inte skriver kostar inga krediter.
+
+| Del | Var | Vad den gör |
+|---|---|---|
+| Rutan | `src/components/Kommentarer.astro`, en rad i `src/pages/artiklar/[id].astro`, `bocker/[id].astro` och `stodundervisning/[id].astro` | sidan bär bara rubriken och en laddare på några hundra byte |
+| Klienten | `src/lib/kommentarer-klient.js` och `src/styles/kommentarer.css`, byggda till `/kommentarer/klient.js` av `src/pages/kommentarer/[fil].ts` | hämtas först när läsaren närmar sig rutan; formulär, lista, svar, och Godkänn och Ta bort när Niclas är inloggad |
+| Servern | `netlify/functions/kommentarer.mjs` och `netlify/lib/kommentarer.mjs` | Waline (`@waline/vercel`) bakom en grind: vilka anrop en läsare får göra, robotprovet, taket i krediter, registreringen av administratören, mellanlagringen och mejlen |
+| Databasen | Netlify Database (Postgres), migreringen `netlify/database/migrations/0001_waline-kommentarer` | Walines tabeller `wl_comment`, `wl_users`, `wl_counter`. Skapas vid första produktionsbygget, sover efter fem minuter utan anrop |
+| Lagret | Netlify Blobs, lagret `kommentarer` | `sidor` (sidor med godkända kommentarer), `lista/` (sparade listor), `forbrukning-<period>` (kreditmätaren), `registrera-senast` |
+| Mejlen | Brevos transaktionsmejl med `BREVO_API_KEY`, avsändare id 2 (nyhetsbrev@niclasfohlin.se), svar till Gmail | ny kommentar till Niclas; svar till den som fick svar, när svaret syns; länken för att bli administratör eller byta lösenord; varning vid 80 procent av taket och när det nås |
+
+| Uppgift | Kommando eller adress |
+|---|---|
+| Läget, kreditmätaren och robotkontrollen | `npm run kommentarer` |
+| Stäng av på hela sajten | `npm run kommentarer -- av` (sätter `KOMMENTARER=av` och bygger om, omkring 15 krediter) |
+| Slå på igen | `npm run kommentarer -- på` |
+| Byt månadens tak | `npm run kommentarer -- tak 80` (förval 50 krediter) |
+| Töm mellanlagringen om listorna ser fel ut | `npm run kommentarer -- bygg-om` |
+| Panelen där kommentarer godkänns, besvaras och tas bort | https://niclasfohlin.se/kommentarer/admin |
+| Bli administratör, eller välja nytt lösenord | https://niclasfohlin.se/kommentarer/registrera |
+| Funktionens logg | `netlify logs --source functions --function kommentarer --since 30m` |
+| Databasen | `netlify database status` |
+
+**Avstängningen.** Står `KOMMENTARER` på `av` i Netlify byggs sidorna utan rutan och utan klienten, och funktionen svarar 410 på allt. Mätt 2026-09-26: ett bygge med kommentarerna av har varje html-, js- och css-fil identisk med ett bygge utan kommentarerna; bara byggtidsstämplarna i json-, docx- och pptx-filerna skiljer, som mellan två vanliga byggen. Kommentarerna ligger kvar i databasen och kommer tillbaka med `på`. Ska lagret bort för gott: stäng av, ta bort filerna i tabellen ovan, raderna i `netlify.toml`, paketen `@waline/vercel`, `serverless-http`, `@netlify/database`, `@netlify/functions`, `phpass`, `jsonwebtoken` och `overrides` i `package.json`, och avsnittet här. Databasen raderas i Netlify under Data & Storage; det går inte att ångra och är Niclas beslut.
+
+**Krediterna.** Databasen kostar 10 krediter per timme den är vaken, minst fem minuter åt gången (planen Personal). Därför når en läsare den aldrig: listan kommer ur CDN:et (en timme, töms när sidan ändras), annars ur Blobs, och sidor utan godkända kommentarer får en tom lista utan att databasen frågas. Databasen vaknar när någon skriver, när Niclas modererar och första gången en ändrad sida läses. Funktionen räknar själv och sparar räkningen i Blobs: databasens vakna minuter, funktionstiden och anropen. Når uppskattningen taket (`KOMMENTARER_BUDGET`, förval 50) tas inga nya kommentarer emot resten av perioden, som börjar den 20:e; befintliga syns som vanligt och Niclas kan fortfarande moderera. `npm run kommentarer` visar också periodens byggen, 15 krediter styck, som är sajtens största post. Hela räkningen står bara i Netlify under Usage: API:t redovisar inte krediterna.
+
+**Robotskyddet.** Utan nycklar: ett dolt fält, ett signerat prov som måste vara minst tre sekunder gammalt när kommentaren skickas, en kommentar per minut och avsändare, högst två länkar, och att varje kommentar väntar på Niclas godkännande. Med Cloudflare Turnstile därtill: Niclas skapar en osynlig widget för niclasfohlin.se i Cloudflare och sätter `TURNSTILE_KEY` (ingen hemlighet) och `TURNSTILE_SECRET` (hemlig) i Netlify; nästa bygge slår på kontrollen i rutan, i funktionen och i panelens inloggning. Båda ska sättas före samma bygge, annars stoppas varje kommentar.
+
+**Administratören.** Bara niclas.fohlin@gmail.com kan bli administratör, och bara genom länken som mejlas dit från `/kommentarer/registrera`; samma sida byter lösenord när kontot finns. Walines egen registrering och glömt lösenord är avstängda, eftersom Waline här saknar egen e-post. Inloggningen i panelen ligger i webbläsaren på samma adress som sajten, och då visar rutan på sidorna Godkänn och Ta bort, och Niclas svar syns direkt med etiketten Författaren. Panelen finns inte på svenska och öppnar på engelska.
+
+**Personuppgifter.** Namnet visas, e-postadressen visas bara för administratören, webbläsaren och hemsidan sparas inte, och IP-adressen byts mot en kontrollsumma innan Waline ser den. Ingen avatartjänst och ingen extern OAuth-tjänst anropas.
+
+**Beroendena.** `package.json` byter två av Walines beroenden med `overrides`: SQLite-drivrutinen mot en tom modul (`netlify/lib/tom-sqlite`), eftersom den kräver kompilering och kommentarerna använder Postgres, och jsdom mot version 26, eftersom Lambda stänger av require av ES-moduler och jsdom 29 kräver det. Panelen (`@waline/admin`) laddas från jsDelivr i låst version.
+
 ## Google Drive-knappen
 
 Vid varje Word-fil finns valet Word, Drive och för lathunden pdf (`src/components/Filval.astro`). Drive-knappen sparar filen i läsarens egen Google Drive genom Googles Drive-API med behörigheten `drive.file` (bara filer sajten själv skapar), helt i webbläsaren (`src/scripts/drive.ts`); Googles skript laddas först när någon trycker. Den kräver ett OAuth-klient-id för webb från ett Google Cloud-projekt som Niclas äger: konsentskärm av typen extern med appnamnet niclasfohlin.se, behörigheten drive.file (icke känslig: ingen behörighetsgranskning av Google, men visar konsentskärmen appnamn eller logga kan Google kräva en varumärkesverifiering, och tills den är klar kan Google visa en varning vid inloggningen), publicerad, och en klient med tillåtna JavaScript-ursprung `https://niclasfohlin.se` och `http://localhost:4321` till `4326`. Klient-id:t är ingen hemlighet och står i `src/data/site.ts` som `driveKlientId`; tomt betyder att knapparna inte visas. Steget för Niclas står i INSTRUKTIONER.docx. Flödet i webbläsaren: inloggningsrutan öppnas direkt på trycket, sedan hämtas eller byggs filen och laddas upp som multipart/related; skriptet från Google hämtas först när läsaren pekar på eller fokuserar en Drive-knapp.

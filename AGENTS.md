@@ -14,7 +14,7 @@ Arbete som inte är ett direkt svar på Niclas går genom kön: `node scripts/ko
 | Fil | Vad den svarar på |
 |---|---|
 | KONCEPT.md | Vad sajten ska bli och varför |
-| DRIFT.md | Plattformarna: vad som finns hos GitHub, Netlify, Brevo och Loopia, var inloggningarna ligger, kommandon som fungerar, vad man gör när något är rött |
+| DRIFT.md | Plattformarna: vad som finns hos GitHub, Netlify, Brevo och Loopia, var inloggningarna ligger, kommandon som fungerar, vad man gör när något är rött; kommentarerna och deras krediter |
 | METODER.md | Hur en metod tas emot och görs om: modellen, mappningen från kompendium till YAML, lathunden, textreglerna, kontrollerna, Codex-granskningen, metodriggen utanför repot |
 | UPPSTART.md | Hur drift, konton och behörigheter sattes upp från början |
 | KO.md | Kön. `node scripts/ko.mjs lista` visar den, `/natt` arbetar igenom den |
@@ -25,7 +25,9 @@ Arbete som inte är ett direkt svar på Niclas går genom kön: `node scripts/ko
 
 ## Stack
 
-Astro 7 med TypeScript och Content Collections (glob-loader, Zod 4 via `astro/zod`). Statiskt bygge. GitHub versionshanterar, Netlify bygger och deployar från `main`. Netlify Functions i `netlify/functions/` för prenumeration. Ingen databas, inget CMS.
+Astro 7 med TypeScript och Content Collections (glob-loader, Zod 4 via `astro/zod`). Statiskt bygge. GitHub versionshanterar, Netlify bygger och deployar från `main`. Netlify Functions i `netlify/functions/` för prenumeration och kommentarer. En databas, bara för kommentarerna (Netlify Database); inget CMS.
+
+Kommentarerna under artiklar, böcker och metoder är ett lager: `npm run kommentarer -- av` tar bort dem från hela sajten utan rester, och `npm run kommentarer` visar läget och krediterna. Läs DRIFT.md under Kommentarer innan du rör dem.
 
 Astro 7 använder en strikt kompilator: alla taggar måste stängas, ogiltig HTML-nästling rättas inte, och mellanrum mellan inline-element skrivs som `{" "}`. Markdown renderas av Sätteri. Node 22.12 eller senare.
 

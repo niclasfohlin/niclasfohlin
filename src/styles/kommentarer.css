@@ -1,0 +1,27 @@
+/* Kommentarerna. Stilen följer med skriptet src/scripts/kommentarer.ts och laddas först när läsaren
+   närmar sig rutan, så att vanliga sidvisningar inte bär den. Färger och mått är global.css variabler. */
+.kommentarer { max-width: var(--matt-text); margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--farg-kant); font-family: var(--typsnitt-ui); }
+.kommentarer h2 { font-size: 1.35rem; }
+.kommentarer-lage:empty, .kommentarer-svar:empty { display: none; }
+.kommentar { margin: 0 0 1.25rem; }
+.kommentar-huvud { margin: 0 0 0.25rem; font-size: 0.95rem; }
+.kommentar-huvud .meta { margin-left: 0.4rem; }
+.kommentar-etikett { display: inline-block; margin-left: 0.4rem; padding: 0 0.4rem; border-radius: 4px; background: var(--farg-accent-ljus); color: var(--farg-accent-mork); font-size: 0.8rem; font-weight: 600; }
+.kommentar-text { font-family: var(--typsnitt-brod); overflow-wrap: anywhere; }
+.kommentar-text p { margin: 0 0 0.6em; }
+.kommentar-knappar { display: flex; flex-wrap: wrap; gap: 1rem; margin: 0.2rem 0 0; font-size: 0.9rem; }
+.kommentar-knappar .fara { color: #9b1c1c; text-decoration-color: currentColor; }
+.kommentar-svaren { margin: 0.75rem 0 0 1rem; padding-left: 1rem; border-left: 2px solid var(--farg-kant); }
+.kommentar.vantar { opacity: 0.75; }
+.kommentarer-form { display: grid; gap: 0.8rem; margin-top: 1.5rem; }
+.kommentar .kommentarer-form { margin: 0.75rem 0 1rem; }
+.kommentarer-form label { display: grid; gap: 0.25rem; font-weight: 600; font-size: 0.95rem; }
+.kommentarer-form input, .kommentarer-form textarea { font: inherit; font-weight: 400; padding: 0.55rem 0.75rem; border: 1px solid var(--farg-kant); border-radius: 6px; background: var(--farg-yta); color: inherit; width: 100%; }
+.kommentarer-form textarea { resize: vertical; min-height: 7rem; }
+.kommentarer-form .knapp { border: 0; cursor: pointer; font-size: 1rem; }
+.kommentarer-form .knapp[disabled] { cursor: default; }
+.kommentarer-svarar, .kommentarer-knapprad, .kommentarer-svar, .kommentarer-integritet { margin: 0; }
+.kommentarer-svar { font-weight: 600; }
+.kommentarer-falla { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.kommentarer-robot:empty { display: none; }
+@media print { .kommentarer { display: none; } }

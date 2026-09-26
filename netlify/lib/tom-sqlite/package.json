@@ -1,0 +1,8 @@
+{
+  "name": "think-model-sqlite",
+  "version": "2.0.1-tom",
+  "description": "Tom ersättare. Kommentarerna använder Postgres, och den riktiga modulen drar in better-sqlite3, som måste kompileras.",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true
+}
