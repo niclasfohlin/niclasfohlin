@@ -1,42 +1,47 @@
 {
   "boksamtal-i-grupp": {
-    "kalla": "923147d69499930e",
-    "pdf": "9ef80a3a9d7bc9e9",
+    "kalla": "7f79a099dd954650",
+    "pdf": "66928da8b5114f06",
     "datum": "2026-09-26"
   },
   "faktatextsamtal-i-grupp": {
-    "kalla": "0278f479fc32fbc4",
-    "pdf": "98602d23bed5a3ce",
+    "kalla": "da8e0621c7f089d3",
+    "pdf": "5528975789c20026",
     "datum": "2026-09-26"
   },
   "problemlosning-i-grupp": {
-    "kalla": "e9220b9b50c41087",
-    "pdf": "d3a9801e967cb840",
+    "kalla": "1946e3bcc8433ac8",
+    "pdf": "51f8f440fa520a56",
     "datum": "2026-09-26"
   },
   "til-i-grupp": {
-    "kalla": "3717fb88c425b596",
-    "pdf": "5835fd0c14165b52",
+    "kalla": "624f6623c07aadc6",
+    "pdf": "0e89b844ada90518",
     "datum": "2026-09-26"
   },
   "skrivkurs-berattelseram": {
-    "kalla": "ca9640e96948d29c",
-    "pdf": "4a26bf0905051f04",
+    "kalla": "a1992cd450888c5d",
+    "pdf": "ebb253fb8a6c0c42",
     "datum": "2026-09-26"
   },
   "laslistor-i-grupp": {
-    "kalla": "161a377e4ab92ce9",
-    "pdf": "2fcf47c87dcb7ff5",
+    "kalla": "aefa3f8ed7d3409f",
+    "pdf": "f76cd9611c3040d2",
     "datum": "2026-09-26"
   },
   "skrivkurs-vardeskapande": {
-    "kalla": "b64dbe05625a88c3",
-    "pdf": "229757f3aa535fc4",
+    "kalla": "9cfd84de7b8da633",
+    "pdf": "84d746315a7d1722",
     "datum": "2026-09-26"
   },
   "antalsuppfattning-i-grupp": {
-    "kalla": "4d0c6c9e220d0438",
-    "pdf": "c74b8b1c727a0779",
+    "kalla": "ef7d020622c1ffeb",
+    "pdf": "ceb4a55c58967c9f",
+    "datum": "2026-09-26"
+  },
+  "brakkurs-i-grupp": {
+    "kalla": "453153a62c0ed5d5",
+    "pdf": "436c1d2239587a12",
     "datum": "2026-09-26"
   }
 }

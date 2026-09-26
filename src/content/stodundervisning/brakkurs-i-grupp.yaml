@@ -1,0 +1,836 @@
+# Metod i stödundervisning. Modellen står i src/content.config.ts och mallen i _mall.yaml.
+# Skriven 2026-09-26 ur Niclas kompendium Särskilt stöd (Matematik 2 med Mall 3–5, och Matematik 4, nivå 3),
+# intaget, Lgr22 och två sökningar online. Omskriven samma dag efter vikariens fyra rundor (granskning, frågerunda,
+# läsbarhet och språk). Besluten står i analys.md. Bråkplanket, bråkstavarna och tallinjerna ritas ur rigg.json,
+# eftersom modellen saknar formen, och korten ritas som kort att klippa.
+titel: "Bråkkurs i grupp: förstå, räkna och tänka i bråk"
+undertitel: Fem veckors intensiv kurs i liten grupp, från material till tallinje och räkning, för åk 4–6
+ingress: En intensiv kurs i fem veckor för två till tio elever i åk 4–6 som inte har förstått bråk. Varje vecka går från material till tallinje och räkning. Läraren visar först och säger vad hen gör, och sedan gör gruppen likadant tillsammans, i par och var för sig.
+omrade: Matematik
+arskurs:
+  - 4-6
+arskursText: åk 4–6
+taggar:
+  - brak
+  - intensivtraning
+  - taluppfattning
+format:
+  - liten grupp
+  - par
+tid: 60 minuter per pass, två pass i veckan och ett tredje när det går
+period: Fem veckor
+grupp: Två till tio elever
+material:
+  - Bråkstavar från en hel till tolftedelar, en sats per elev och en för läraren, klippta ur mallen Bråkstavar att klippa, eller en köpt sats per par
+  - Remsor av A4-ark, klippta lika långa som den längsta staven
+  - Maskeringstejp till en tallinje per elev, längs bordskanten
+  - Mallarna Tallinjer i delar, Tomma tallinjer och Stapelrutan, papper, penna och linjal
+  - Bladet Bråket på fyra sätt, ett per elev, laminerat, och whiteboardpennor
+  - Veckans kort, spelkort och problem ur Kursens material, kopierade på tjockt papper
+  - Knappar, 24 per elev, en tärning per par, färgpennor och sax
+  - Ett A3 som affisch till veckans mening
+uppdaterad: 2026-09-26
+relaterade:
+  - antalsuppfattning-i-grupp
+  - problemlosning-i-grupp
+utkast: false
+inledning:
+  - "Kursen är för elever i åk 4–6 som av olika anledningar inte har förstått bråk. Eleverna gör bråken med material, ritar dem och sätter ut dem på tallinjen innan de räknar med dem. Varje vecka går från det konkreta till det abstrakta. I första passet arbetar gruppen med remsor och bråkstavar, och med knappar i vecka 5. I andra passet arbetar gruppen med bild, tallinje och räkning. I ett tredje pass, när det går, repeterar gruppen veckan med ett spel och ett problem. Det viktigaste händer vid bordet. Läraren visar först och berättar vad hen gör medan hen viker, lägger och pekar, och säger bråket i ord. Sedan gör gruppen samma sak tillsammans, i par och var för sig, och passet slutar med att alla gör det gemensamt igen."
+  - "Kursen löser inte allt om bråk. Efter fem veckor ska eleven förstå vad ett bråk säger, kunna räkna med enkla bråk och tänka i bråk: jämföra, uppskatta och se när ett svar inte kan stämma."
+  - "Tre ord är centrala i kursen: det hela, nämnare och täljare. Det hela är det som delas, till exempel en remsa, den längsta bråkstaven, sträckan från 0 till 1 på tallinjen eller ett antal knappar. Nämnaren säger hur många lika stora delar det hela är delat i, och täljaren säger hur många sådana delar vi har. Därför säger vi tre fjärdedelar om 3/4: tre delar, och varje del är en fjärdedel av det hela. 5/4 är fem fjärdedelar, alltså mer än det hela."
+  - Bråkstavar är avlånga bitar. Den längsta staven är det hela, och de andra är halvor, tredjedelar, fjärdedelar och så vidare. Bladet Bråket på fyra sätt har fyra rutor, där eleven visar samma bråk med material, som bild, på tallinjen och med siffror.
+  - Fraserna i stegen kommer från vecka 1, och exempelpasset från en grupp i vecka 2, när eleverna börjar sätta ut bråken på tallinjen. Lärarens ord, korten, spelen och problemen för varje vecka finns under Kursens material, efter Kort om grunden.
+upplagg:
+  rubrik: Så fungerar insatsen
+  text: Insatsen pågår i fem veckor med två pass i veckan och ett tredje när det går. Varje pass är 60 minuter, och gruppen har två till tio elever i åk 4–6. Varje vecka har ett fokus. I pass 1 arbetar ni med material, i pass 2 med bild, tallinje och räkning, och i pass 3 med ett spel och ett problem. Hela gruppen arbetar med samma innehåll och samma kort, oavsett årskurs, och det blir ingen läxa. Före första passet och efter det sista gör du samma kartläggning, utanför passen.
+gruppen:
+  rubrik: Så sätter du ihop gruppen
+  text: Välj två till tio elever som av olika anledningar inte har förstått bråk. Några har missat grunden, några räknar med regler de inte förstår, och några blandar ihop bråk och decimaltal. Det klassläraren vet om eleverna hjälper dig att välja, och kartläggningen visar var varje elev börjar. Gruppen kan blanda åk 4, 5 och 6, eftersom alla börjar med det hela och de lika stora delarna. Med fler än sex elever arbetar paren vid två bord. När du visar, och i Samma bråk och Veckans mening, samlas alla vid ett bord. I Fyra sätt lyssnar du på halva gruppen i pass 1 och resten i pass 2. Kalla gruppen bråkkursen. Den har en början och ett slut, och eleverna vet vad de ska kunna efteråt.
+principer:
+  rubrik: Tre saker att hålla fast vid
+  text: "Visa först och säg bråket i ord: du viker, lägger och pekar framför eleverna och berättar vad du gör, och du säger alltid bråket med ord, som tre fjärdedelar. Fråga efter det hela: vad är det hela, och hur många lika stora delar är det delat i? Det hela är lika långt i remsan, i staven och på tallinjen. Och gå från material till siffror varje vecka: i pass 1 arbetar eleverna med material och i pass 2 med bild, tallinje och räkning, och materialet ligger kvar på bordet."
+tabeller:
+  - rubrik: Varför bråk blir svårt, och vad kursen gör
+    plats: efter-inledning
+    kolumner:
+      - Det som händer
+      - Så kan det låta
+      - Så gör kursen
+    rader:
+      - - Eleven läser bråket som två hela tal.
+        - ”1/5 är större än 1/3, för 5 är större än 3.”
+        - I varje pass använder ni orden nämnare och täljare, och i vecka 1 ser eleverna att fler delar ger mindre delar.
+      - - Eleven godtar delar som inte är lika stora.
+        - ”Tre bitar, alltså tredjedelar.”
+        - I vecka 1 viker eleverna remsor, lägger delarna mot varandra och gör själva delar som inte är lika stora.
+      - - Eleven ser inte bråket som ett tal.
+        - ”3/4 ligger mellan 3 och 4.”
+        - I vecka 2 lägger eleverna staven mot tallinjen, och bråket får en plats mellan 0 och 2.
+      - - Bråk större än 1 verkar omöjliga.
+        - ”Man kan inte ta fem av fyra.”
+        - "I vecka 2 räknar gruppen i kör förbi en hel: fyra fjärdedelar, fem fjärdedelar."
+      - - Eleven byter ut det hela.
+        - ”Jag delade hela linjen i fyra”, på en tallinje som går till 2.
+        - Du frågar efter det hela varje gång, och det hela är lika långt i materialet och på tallinjen.
+      - - Eleven räknar täljare och nämnare var för sig.
+        - ”1/4 + 2/4 är 3/8.”
+        - I vecka 4 räknar eleverna delar som är lika stora och uppskattar svaret först.
+    not: Felen kommer av att eleven använder det hen vet om hela tal. Därför räcker det sällan att säga regeln en gång till. Eleven behöver se bråket i materialet och på tallinjen och säga det med rätt ord.
+  - rubrik: "Veckan: från material till siffror"
+    plats: efter-tidsschema
+    text: Veckans fokus är detsamma i alla passen. Det som ändras är hur eleverna visar bråket. I pass 1 gör eleverna bråket med material, och i pass 2 ritar de det, sätter ut det på tallinjen och räknar. Materialet ligger kvar på bordet i pass 2, så att eleven kan gå tillbaka till det. I pass 3 repeterar gruppen veckan med ett spel och ett problem.
+    kolumner:
+      - Vecka och fokus
+      - "Pass 1: med material"
+      - "Pass 2: bild, tallinje och räkning"
+      - "Pass 3, när det går: spel och problem"
+    rader:
+      - - 1 · Lika delar
+        - Vik remsor i halvor och fjärdedelar, och jämför stavarna.
+        - Skriv bråk i bråkplanket, rita staplar och dela dem, och ordna bråk med täljaren 1.
+        - Spelet Fyll det hela. Problemet om tre barn som delar två chokladkakor.
+      - - 2 · Bråk på tallinjen
+        - Lägg stavarna mot tallinjen från 0. Staven blir ett mått.
+        - Dela tallinjen, sätt ut bråk och räkna i fjärdedelar förbi 1.
+        - Spelet Högst vinner. Problemet om snigeln som kryper en fjärdedels meter i timmen.
+      - - 3 · Likvärdiga bråk
+        - Bygg samma längd med andra stavar, och vik ett A4 i halvor, fjärdedelar och åttondelar.
+        - Jämför linjerna i Tallinjer i delar, dubbla täljaren och nämnaren, och skriv tiondelar som decimaltal och en halv som 50 %.
+        - Spelet Memory med samma tal. Problemet om tre pizzor och tre bråk.
+      - - 4 · Addera och subtrahera
+        - Lägg delar efter varandra, ta bort och byt en del mot mindre delar.
+        - Uppskatta först och räkna på tallinjen.
+        - Spelet Närmast en hel. Problemet om Majas bok.
+      - - 5 · Bråk av antal
+        - Dela knappar i lika stora högar och ta så många högar som täljaren säger.
+        - Rita stapeln, hitta en del och sedan det hela.
+        - Spelet Ta din del av 24. Problemet om klassen på utflykt.
+    not: Du gör kartläggningen före vecka 1 och efter vecka 5. Hinner gruppen inte pass 3 en vecka spelar paren veckans spel när de blir klara tidigt i pass 1 och 2.
+  - rubrik: "Pass 3, när det går: spel och problem"
+    plats: efter-tidsschema
+    text: I pass 3 repeterar gruppen veckan. Paren spelar först veckans spel, och sedan löser gruppen ett problem med samma fokus. Problemet står på ett eget kort efter veckans kort. Spelets regler och problemets lösning står i rutan Till läraren om pass 3 i veckans ram under Kursens material.
+    kolumner:
+      - Del och tid
+      - Så leder du den
+    rader:
+      - - "Spelet\n0–20 min"
+        - Paren spelar veckans spel. Den som vinner ett kort eller en poäng säger varför, och kamraten kontrollerar med materialet eller tallinjen.
+      - - "Förstå och planera\n20–30 min"
+        - Läs problemkortet högt. En elev berättar problemet med egna ord, och gruppen ringar in frågan och säger vad det hela är. Skriv upp det ni vet och det ni söker, gärna i Stapelrutan. Bestäm tillsammans hur ni visar problemet, med material, en bild eller tallinjen. Ingen räknar än.
+      - - "Lösa\n30–45 min"
+        - Paren löser problemet. Gå runt och se vilka lösningar som finns i gruppen. Blir ett par klart tidigt får det frågan som står i rutan Till läraren om pass 3 under Kursens material.
+      - - "Jämföra\n45–55 min"
+        - Två par visar sina lösningar bredvid varandra. Är svaret rimligt? Vad är det hela i problemet?
+      - - "Veckans mening\n55–60 min"
+        - Gruppen säger veckans mening igen, med problemet som exempel.
+passrutin:
+  text: "Pass 1 och pass 2 följer samma rutin i fem delar. Läraren visar först, sedan gör alla samma sak tillsammans, sedan arbetar eleverna i par och var för sig, och till sist gör alla det gemensamt igen. Det som skiljer är materialet. I pass 1 arbetar eleverna med remsor och stavar, och med knappar i vecka 5. I pass 2 arbetar de med bild, tallinje och räkning. Pass 3 har egna delar (se Pass 3, när det går: spel och problem)."
+  steg:
+    - text: Läraren visar ett bråk som hör till veckans fokus och säger allt hen gör. Eleverna tittar och lyssnar.
+      fas: Första bråket
+    - text: Alla gör samma bråk tillsammans, ett handgrepp i taget, och räknar delarna i kör.
+      fas: Samma bråk
+    - text: Läraren läser ett kort och paren gör det. Sedan läser eleverna korten för varandra i paret, och läraren lyssnar.
+      fas: Korten
+    - text: Varje elev får ett kort, visar bråket med material och på bladet Bråket på fyra sätt och berättar vad hen gör.
+      fas: Fyra sätt
+    - text: Alla gör ett sista bråk tillsammans och säger veckans mening.
+      fas: Veckans mening
+  efterPasset: Läraren antecknar i några ord vem som kunde säga vad nämnaren och täljaren betyder, vem som gjorde veckans vanliga fel och vad läraren behöver visa igen nästa pass.
+tidsschema:
+  rubrik: "Pass 1 och 2: 60 minuter"
+  text: Förbered dig genom att göra veckans bråk själv med dagens material och säga orden högt. Översikten visar hur de 60 minuterna fördelas och vem som arbetar i varje del. Paren får längst tid, och Veckans mening får tio minuter, så att gruppen hinner säga meningen med egna exempel.
+  rader:
+    - tid: Före passet
+      fas: Förberedelse
+      vad: Ta fram dagens material och ett blad Bråket på fyra sätt per elev. Från vecka 2 tejpar du en tallinje per elev längs bordskanten. Kopiera korten till dagens pass, en kopia per par, och klipp dem. Det första bråket är det du visar under Visa först och säg i veckans ruta Till läraren under Kursens material, och det sista står under Veckans mening. Gör båda och säg orden högt.
+    - tid: 0–8 min
+      fas: Första bråket
+      vad: Visa bråket långsamt och tänk högt. Säg vad det hela är, hur du delar det, vad du pekar på och vad bråket heter, och skriv bråket samtidigt som du säger det.
+    - tid: 8–18 min
+      fas: Samma bråk
+      vad: "Säg varje handgrepp, och eleverna gör och säger likadant med sin egen sats. Har ni en köpt sats per par gör paret bråket tillsammans. Räkna delarna i kör: ”En fjärdedel, två fjärdedelar, tre fjärdedelar.” Fråga: ”Vad är det hela? Hur vet du att delarna är lika stora?”"
+    - tid: 18–38 min
+      fas: Korten
+      vad: Läs det första kortet högt. I paret gör den ena kortet och berättar vad hen gör, och den andra kontrollerar med materialet eller tallinjen. De byter roller efter varje kort. Gå mellan paren och lyssna efter veckans vanliga fel. De står under Lyssna efter i veckans ruta Till läraren under Kursens material.
+    - tid: 38–50 min
+      fas: Fyra sätt
+      vad: Ge varje elev ett kort med ett bråk, gärna ett som hen läste för kamraten men inte gjorde själv. I pass 1 gör eleven bråket på bordet och ritar det i rutan Med material. Sedan ritar eleven bråket som bild, på en egen liten tallinje och med siffror. Lyssna på en elev i taget. Den som är klar får ett kort till.
+    - tid: 50–60 min
+      fas: Veckans mening
+      vad: Gör det sista bråket på din tallinje, med bitar från flera satser. Låt eleverna visa och berätta. Första passet i veckan skriver du meningen på affischen.
+  efter: Blir ett par klart tidigt spelar de veckans spel. Reglerna står i veckans ram under Kursens material, i rutan Till läraren om pass 3.
+steg:
+  rubrik: "Pass 1 och 2: vad du gör och säger i varje del"
+  rader:
+    - namn: Första bråket
+      fraga: Vad är det hela, och vad gör jag med det?
+      gor: Visa bråket framför eleverna och tänk högt. Sätt ord på varje handgrepp, alltså vad det hela är, hur du delar det, vad eleverna ska titta på och vad du pekar på. Skriv bråkstrecket, sedan nämnaren och sist täljaren, medan du säger vad de betyder. Eleverna tittar. Sitt så att eleverna ser materialet som du ser det.
+      fraser:
+        - Den här remsan är det hela. Jag viker den så att kanterna möts.
+        - Fyra lika stora delar. Jag skriver fyran under strecket.
+        - Jag färglägger tre delar och skriver trean över strecket. Tre fjärdedelar.
+        - "Jag räknar delarna: en fjärdedel, två fjärdedelar, tre fjärdedelar."
+    - namn: Samma bråk
+      fraga: Hur gör vi det tillsammans?
+      gor: Gör bråket du just visade en gång till, nu samtidigt som eleverna och ett handgrepp i taget. Säg vad ni gör och räkna delarna i kör. Vänta tills alla är klara innan nästa handgrepp.
+      fraser:
+        - Vik med mig. Möts kanterna?
+        - Räkna delarna med mig.
+        - Vad är det hela? Hur många lika stora delar är det delat i?
+    - namn: Korten
+      fraga: Vad säger bråket?
+      gor: Läs ett kort i taget i början. Paren gör kortet. Den ena visar och berättar vad hen gör, och kamraten kontrollerar. Sedan läser paren korten för varandra. Fråga efter det hela och delarna innan du frågar efter svaret.
+      fraser:
+        - Hur många lika stora delar är det hela delat i? Hur många delar tar du?
+        - Är det mer eller mindre än en halv?
+        - Var sitter talet på tallinjen? Visa med staven.
+        - Hur vet du?
+    - namn: Fyra sätt
+      fraga: Kan du visa det på flera sätt?
+      gor: Ge varje elev ett kort med ett bråk. Eleven gör bråket med materialet, ritar det i rutan Med material och visar det sedan som bild, på tallinjen och med siffror. Lyssna på en elev i taget. Saknar eleven orden gör ni det tillsammans igen, med materialet.
+      fraser:
+        - Visa bråket på två sätt.
+        - Berätta vad nämnaren och täljaren säger.
+        - Hur kan du kontrollera det?
+    - namn: Veckans mening
+      fraga: Vad tar vi med oss?
+      gor: Gör det sista bråket med hela gruppen. Låt eleverna visa och berätta, och säg veckans mening tillsammans. Skriv meningen på affischen, som sitter uppe under hela kursen.
+      fraser:
+        - Vem kan visa det på ett annat sätt?
+        - Säg det med orden nämnare och täljare.
+        - Nu säger vi veckans mening tillsammans.
+arbetsform:
+  rubrik: "Arbetsform: läraren visar, gemensamt, i par, enskilt, gemensamt igen"
+  text: Passet börjar hos läraren, går över till eleverna och slutar hos hela gruppen. Först visar läraren, och eleverna tittar och lyssnar. Därefter gör alla samma sak tillsammans, och sedan arbetar eleverna först i par och sedan var och en för sig. Sist arbetar alla gemensamt igen, när gruppen med egna ord säger det den har sett. Med ett udda antal elever blir det en trio, där en läser kortet och två gör det tillsammans. Med fler än sex elever arbetar paren vid två bord, och du går mellan dem. När du visar och i de gemensamma delarna samlas alla vid ett bord.
+  delar:
+    - rubrik: 1. Läraren visar
+      text: eleverna tittar och lyssnar
+      faser:
+        - Första bråket
+    - rubrik: 2. Gemensamt
+      text: alla gör likadant, ett handgrepp i taget
+      faser:
+        - Samma bråk
+    - rubrik: 3. I par
+      text: den ena gör och berättar, den andra kontrollerar
+      faser:
+        - Korten
+    - rubrik: 4. Enskilt
+      text: var och en visar och berättar
+      faser:
+        - Fyra sätt
+    - rubrik: 5. Gemensamt igen
+      text: alla visar och säger det tillsammans
+      faser:
+        - Veckans mening
+exempel:
+  valt:
+    rubrik: Gruppen
+    text: "fem elever i åk 4–6, vecka 2, pass 1: bråk på tallinjen, med bråkstavar."
+  text:
+    - "Läraren har tejpat en tallinje längs bordskanten, där det är lika långt från 0 till 1 som den längsta staven. ”Den här staven är det hela. Den börjar vid 0 och slutar vid 1.” Läraren lägger en fjärdedel från 0, sätter ett streck där den slutar och skriver 1/4 vid strecket: ”Här är en fjärdedel. Talet står vid strecket, där delen slutar.” Läraren lägger fjärdedelar en i taget, sätter ett streck där varje fjärdedel slutar och räknar: ”Två fjärdedelar, tre fjärdedelar, fyra fjärdedelar. Fyra fjärdedelar är 1.” Stavarna tar slut, så läraren flyttar den första fjärdedelen och lägger den efter 1: ”Fem fjärdedelar. Nu är vi förbi 1.” Eleverna tittar."
+    - "”Nu gör vi det tillsammans.” Alla lägger sina fjärdedelar på sin tallinje, flyttar den första förbi 1 och räknar i kör från en fjärdedel till fem fjärdedelar. ”Var hamnar tre fjärdedelar?” frågar läraren. Amira pekar: ”Mellan en halv och 1.”"
+    - "Läraren läser kortet ”Sätt ut 3/5. Är det mer eller mindre än en halv?” Hamza lägger tre femtedelar och skriver 3/5 på tejpen mitt under den tredje staven. ”Var slutar tre femtedelar?” frågar läraren. Hamza flyttar fingret till slutet av staven och sätter strecket där. Noah lägger halvan bredvid: ”Tre femtedelar är längre. Mer än en halv.” Sedan läser Elsa ett kort för Viggo: ”Lägg halvor från 0 och flytta dem vidare till 2. Hur många halvor går det på 2?” Viggo lägger, flyttar och räknar: ”Fyra halvor.”"
+    - "Var och en får ett kort med ett bråk. Noah lägger fjärdedelar från 0 till 1 på sin tallinje och flyttar dem en i taget förbi 1. Han säger: ”Fem fjärdedelar. Det är en och en fjärdedel.” Sedan ritar han stavarna i rutan Med material på bladet Bråket på fyra sätt och skriver 5/4 i rutan Med siffror. Läraren lyssnar på en elev i taget."
+    - "Till sist lägger gruppen 7/4 tillsammans på lärarens tallinje. ”Är 7/4 ett tal?” frågar läraren. ”Ja, det har en plats mellan 1 och 2”, säger Elsa. Gruppen säger veckans mening: ”Ett bråk är ett tal med en egen plats på tallinjen.” Efteråt noterar läraren att Hamza skrev bråket mitt under staven i stället för vid strecket, men flyttade det efter frågan. Nästa pass börjar läraren med att själv sätta ut tredjedelar på en tallinje utan stavar."
+fastnar:
+  rubrik: När eleven fastnar
+  text: Den som brukar fastna gör det oftast när det hela eller delarna inte syns, på tallinjen, i en uträkning eller i ett antal. Gå då tillbaka ett steg, från siffror till bild eller från bild till material, och låt eleven visa igen.
+  fragaForst:
+    - Vad är det hela?
+    - Hur många lika stora delar är det delat i?
+    - Är det mer eller mindre än en halv?
+  trappaText: "En stödtrappa att gå uppför i stunden. Ge inte nästa steg förrän eleven har prövat det föregående:"
+  trappa:
+    - Be eleven visa det hela och peka på en del. Vad heter den delen?
+    - "Be eleven göra bråket med material, också i pass 2: vika en remsa, lägga stavarna eller dela knapparna i högar."
+    - "Lägg staven mot tejpen, eller en halv bredvid, och jämför: är det längre eller kortare? I vecka 5 lägger ni högarna bredvid varandra."
+    - "Räkna delarna högt tillsammans: en fjärdedel, två fjärdedelar, tre fjärdedelar."
+    - Visa själv och säg vad du gör. Gör det sedan tillsammans med eleven, och låt eleven säga det.
+  motto: Vad är det hela, och hur stora är delarna?
+roll:
+  rubrik: "Lärarens roll: visa först och säga bråket rätt"
+  text: "Du visar först och säger vad du gör: vad det hela är, hur du delar det, vad du pekar på och vad bråket heter. Eleverna säger som du, så orden behöver vara desamma varje gång. Sedan lämnar du över, först till paren och sist till varje elev. Det är eleven som lägger stavarna och säger varför. Lägger du dem åt eleven blir svaret rätt, men eleven har inte gjort det."
+  gor:
+    - "Säg bråket i ord: tre fjärdedelar, fem åttondelar."
+    - Fråga ”Vad är det hela?” innan eleven svarar.
+    - "Be eleven uppskatta innan hen räknar: mer eller mindre än en halv, mer eller mindre än 1?"
+    - Låt materialet ligga kvar i pass 2, och gå tillbaka till det när eleven fastnar.
+    - Låt det hela vara lika långt i materialet och på tallinjen när stavarna läggs mot den.
+    - Låt veckans mening sitta kvar på affischen hela kursen.
+  undvik:
+    - Att säga ”tre av fyra” eller ”tre genom fyra”.
+    - Att ge regeln innan eleven har sett det i materialet.
+    - Att lägga stavarna åt eleven.
+    - Att räkna innan gruppen har uppskattat.
+    - Att använda cirklar och pizzor som material.
+urval:
+  rubrik: Var hittar du materialet och korten?
+  text:
+    - Mallen Bråkstavar att klippa finns i planeringsmallarna. Skriv ut den på tjockt papper, en per elev, färglägg varje rad i en egen färg och klipp isär raderna och bitarna. Stavarna är 2,4 cm höga, så att eleverna kan hålla dem. Bråkstavar finns också att köpa, som bråktavla eller bråkstavar. Med en köpt sats per par gör paret bråket tillsammans. Mallen Bråkplanket visar samma stavar på en sida, som eleverna kan ha framför sig. I mallen Bråkplanket att fylla i skriver eleverna själva bråket i varje bit.
+    - Remsorna klipper du av A4-ark, fyra på längden ur varje ark. Klipp dem lika långa som den längsta staven, så att det hela är lika långt i allt material.
+    - Från vecka 2 tejpar du en tallinje per elev med maskeringstejp längs bordskanten, två på varje långsida. Det är en stavlängd från 0 till 1 och en från 1 till 2, så att eleverna kan lägga stavarna mot linjen och skriva på tejpen. I pass 2 använder eleverna mallarna Tallinjer i delar och Tomma tallinjer från 0 till 1, där det hela är lika långt som i bråkplanket och bitarna går att lägga mot linjen. På A4 är det hela 26 cm.
+    - Skriv ut bråkstavarna, bråkplanket och tallinjerna på samma sorts papper, A4 eller A3 liggande, så att det hela är lika långt i allt. En köpt sats har ofta en längsta stav på 20 cm. Då lägger eleverna stavarna mot tejpen och inte mot mallarna. På mallen Tomma tallinjer från 0 till 2 är det hela 13 cm, hälften så långt som staven. Där ritar och räknar eleverna, och stavarna läggs mot tejpen.
+    - Bladet Bråket på fyra sätt finns på lathundens tredje sida, Mallen. Stavarna är längre än rutorna, så i pass 1 gör eleven bråket på bordet och ritar det i rutan Med material. I rutan På tallinjen ritar eleven en egen liten tallinje med 0 och 1. Stapelrutan, med Jag vet, Jag söker och plats för stapeln, står under Kursens material och används i vecka 5 och till problemen i pass 3. Kopiera en per elev.
+    - Korten, spelkorten och problemen står under Kursens material, en ram per vecka efter kartläggningen.
+  kravText: "Ett bråk som du visar eller skriver på ett kort ska uppfylla tre krav:"
+  krav:
+    - rubrik: Finns i materialet
+      text: Nämnaren finns bland stavarna i pass 1
+    - rubrik: Mellan 0 och 2
+      text: Bråket ryms på tallinjen
+    - rubrik: Visar veckans fokus
+      text: Det eleverna ska se den här veckan
+progression:
+  rubrik: "Kursplan: fem veckor och fem fokus"
+  rader:
+    - vecka: "1"
+      fokus: "Lika delar: eleverna delar det hela i lika stora delar och lär sig orden nämnare och täljare. Du gör kartläggningen före första passet."
+      roll: Läraren viker först och säger varje del.
+    - vecka: "2"
+      fokus: "Bråk på tallinjen: staven blir ett mått, och bråket får en plats mellan 0 och 2, också bråk större än 1."
+      roll: Läraren lägger stavarna mot tallinjen och räknar delarna högt.
+    - vecka: "3"
+      fokus: "Likvärdiga bråk: bråk som hamnar på samma punkt är samma tal. Eleverna skriver tiondelar som decimaltal, och en halv, en fjärdedel och tre fjärdedelar i procent."
+      roll: Läraren visar samma punkt och frågar hur eleverna vet.
+    - vecka: "4"
+      fokus: "Addera och subtrahera: eleverna räknar delar som är lika stora, byter till mindre delar och uppskattar först."
+      roll: Läraren uppskattar högt innan hen räknar.
+    - vecka: "5"
+      fokus: "Bråk av antal: eleverna delar i lika stora grupper och hittar det hela när en del är känd. Du gör kartläggningen efter sista passet."
+      roll: Läraren visar kort, och eleverna berättar mer själva.
+uppfoljning:
+  rader:
+    - nar: Före insatsen
+      vad: Gör kartläggningen med hela gruppen, cirka 30 minuter, utanför passen. Anteckna R för rätt svar och F när eleven förklarar med rätt ord, med en bild eller på tallinjen.
+    - nar: Varje pass
+      vad: Vem kunde säga vad nämnaren och täljaren betyder, och vem gjorde veckans vanliga fel?
+    - nar: Efter fem veckor
+      vad: Gör samma kartläggning igen. Jämför uppgift för uppgift och berätta för klassläraren vad som behöver mer träning.
+mal:
+  rubrik: "Mål: det eleven kan efter fem veckor"
+  text: "Det här ska eleven kunna efter fem veckor. Kartläggningen visar det, före och efter:"
+  punkter:
+    - Dela en hel i lika stora delar och säga vad nämnaren och täljaren betyder
+    - Sätta ut bråk på tallinjen mellan 0 och 2, också bråk större än 1
+    - Jämföra bråk med hjälp av 0, en halv och en hel, och av det som fattas till en hel
+    - Visa att två bråk är samma tal, skriva tiondelar som decimaltal och skriva en halv, en fjärdedel och tre fjärdedelar i procent
+    - Addera och subtrahera bråk med samma nämnare, eller där den ena nämnaren går jämnt upp i den andra, och uppskatta svaret först
+    - Räkna ut en del av ett antal, och hitta det hela när en del är känd
+snabbmall:
+  fore:
+    - Vecka, fokus och pass (1, 2 eller 3)
+    - Det första bråket och vad jag säger
+    - Det sista bråket till Veckans mening
+  efter:
+    - Vem kunde säga vad nämnaren och täljaren betyder?
+    - Vem gjorde veckans vanliga fel?
+    - Vad visar jag igen nästa pass?
+checklista:
+  punkter:
+    - Tagit fram dagens material och bladet Bråket på fyra sätt, som finns på lathundens tredje sida.
+    - Tejpat tallinjerna från vecka 2, en stavlängd mellan 0, 1 och 2.
+    - Kopierat korten till dagens pass, en kopia per par, och klippt dem.
+    - Gjort det första och det sista bråket och sagt orden högt.
+    - Bestämt paren.
+    - Hängt upp affischen.
+grund:
+  text: "Bråk är elevernas första möte med tal där det de vet om hela tal inte gäller, och den som läser bråket som två hela tal tror att 1/5 är större än 1/3 och att 1/3 + 1/4 är 2/7 (Siegler, Thompson och Schneider, 2011; Malone och Fuchs, 2017). Att se hur stort ett bråk är och var det står på tallinjen hänger ihop med bråkräkningen, och många elever i åk 5 kan färglägga 3/4 av en stapel men inte sätta ut 3/4 mellan 0 och 1 (Hannula, 2003). Därför går kursen från remsor och stavar till tallinjen, där likvärdiga bråk blir samma punkt och bråk större än 1 får en plats (Siegler m.fl., 2010; McIntosh, 2008; Holmberg och Kilhamn, 2016; Fuchs m.fl., 2021). Insatser som bygger på tallinjen, ett exakt matematiskt språk och en lärare som visar först har gett effekt både på elevernas förståelse av hur stora bråk är och på bråkräkning, också i åk 5 i Sverige (Fuchs m.fl., 2017; Schumacher m.fl., 2023; Björkhammer m.fl., 2023). Riktmärkena 0, en halv och en hel, och frågan om hur mycket som fattas till en hel, hjälper eleven att jämföra och uppskatta (Clarke och Roche, 2009; Kilhamn, 2021)."
+  kallor: Bygger på Siegler m.fl. (2010), Siegler, Thompson och Schneider (2011), Hannula (2003), Clarke och Roche (2009), Clarke, Roche och Mitchell (2010), Malone och Fuchs (2017), Fuchs m.fl. (2017), Fuchs m.fl. (2021), Schumacher m.fl. (2023), Björkhammer m.fl. (2023), McIntosh (2008), Kilhamn (2021), Holmberg och Kilhamn (2016) och kursplanen i matematik i Lgr22 (Skolverket, 2022).
+ramar:
+  rubrik: Kursens material
+  text:
+    - Materialet är ordnat efter vecka, med kartläggningen först och sedan en ram per vecka. Varje ram börjar med en ruta Till läraren med materialet, det du visar först och säger i pass 1 och pass 2, veckans mening och det du lyssnar efter. En andra ruta, Till läraren om pass 3, har spelets regler och problemets lösning. Sedan kommer korten till pass 1, korten till pass 2 och spelkorten och problemet till pass 3, varje pass på en egen sida. Sist finns Stapelrutan. Mallarna Bråkplanket, Bråkplanket att fylla i, Bråkstavar att klippa, Tallinjer i delar och Tomma tallinjer finns i planeringsmallarna.
+    - Korten är elevmaterial och stora nog att hålla i handen. Kopiera korten till dagens pass, en kopia per par, klipp isär dem längs de streckade linjerna och lägg dem i en hög hos varje par. Varje kort har vecka och pass i hörnet, och meningskorten har också ett nummer, det som Lyssna efter hänvisar till. Den som läser ett kort läser det högt, och kamraten gör det. Den som har svårt att läsa kortet får hjälp av kamraten eller av dig. I Fyra sätt får varje elev ett kort med ett bråk ur samma hög.
+    - Säg orden i rutan Till läraren som de står, och skriv bråket samtidigt som du säger det. På korten står bråken som du skriver dem och som i läroboken, med täljaren över bråkstrecket och nämnaren under. Läs det första kortet högt, så att eleverna hör hur bråken låter. I pass 2 ligger materialet kvar på bordet.
+  ramar:
+    # ---------------------------------------------------------------- Kartläggningen
+    - rubrik: Kartläggning före och efter kursen
+      text:
+        - Eleverna gör samma tolv uppgifter före första passet och efter det sista, två för varje mål.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så gör du
+              text: Gör kartläggningen med hela gruppen, cirka 30 minuter, utanför passen. Läs varje uppgift högt och hjälp inte till. Eleverna svarar på eget papper och får rita. Till uppgift 3 och 4 får varje elev mallarna Tomma tallinjer från 0 till 1 och från 0 till 2.
+            - rubrik: Så antecknar du
+              text: Skriv elevens namn på en kopia av listan och R eller F bredvid varje uppgift. R betyder att svaret är rätt. F betyder att eleven förklarar med rätt ord, med en bild eller på tallinjen, och gäller uppgifterna som frågar hur eleven vet. På uppgift 10 kräver R att båda uträkningarna är rätt.
+            - rubrik: Uppgifterna och målen
+              text: Uppgift 1–2 prövar lika delar, 3–4 tallinjen, 5–6 att jämföra, 7–8 samma tal, decimaltal och procent, 9–10 att räkna och uppskatta, och 11–12 bråk av antal.
+      listor:
+        - rubrik: Kartläggning · Läs uppgiften högt, eleven svarar på papper
+          rader:
+            - - 1. Rita en stapel och visa 4/5. Vad säger femman, och vad säger fyran?
+            - - 2. Vilket är störst, 1/4 eller 1/6? Hur vet du?
+            - - 3. Sätt ut 5/8 på tallinjen från 0 till 1.
+            - - 4. Sätt ut 8/5 på tallinjen från 0 till 2.
+            - - 5. Är 4/7 mer eller mindre än en halv? Hur vet du?
+            - - 6. Vilket är störst, 5/6 eller 7/8? Hur vet du?
+            - - 7. Skriv två bråk som är lika mycket som 5/6. Hur vet du?
+            - - 8. Skriv 7/10 som decimaltal och 3/4 i procent.
+            - - 9. Är 3/5 + 4/5 mer eller mindre än 1? Svara först. Räkna sedan och skriv svaret med ett helt tal och ett bråk.
+            - - 10. Räkna 1 − 2/5. Räkna sedan 1/4 + 3/8.
+            - - 11. Hur många är 2/3 av 21?
+            - - 12. 2/5 av eleverna har cykel. Det är 10 elever. Hur många elever är det i allt?
+    # ---------------------------------------------------------------- Vecka 1
+    - rubrik: "Vecka 1: Lika delar"
+      text:
+        - Eleverna delar det hela i lika stora delar och lär sig orden nämnare och täljare. I pass 1 viker de remsor och jämför stavar, och i pass 2 skriver de bråk i bråkplanket och ritar staplar. Tallinjen kommer i vecka 2, så på bladet Bråket på fyra sätt är rutan På tallinjen tom den här veckan.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Material
+              text: Remsor, två A4 per elev och pass, klippta i fyra. Bråkstavar, en sats per elev och en för dig. Bråkplanket att fylla i, en per elev till pass 2, och färgpennor. Till spelet fyra remsor per elev, sax och en tärning per par. I pass 2 ritar eleverna runt den längsta staven och delar stapeln med stavarna.
+            - rubrik: Pass 1 · Visa först och säg
+              text: "”Den här remsan är det hela. Jag viker den så att kanterna möts. De två delarna ligger precis på varandra, så de är lika stora. Varje del är en halv.” Vik igen och vik upp remsan: ”Nu är det fyra lika stora delar.” Peka på vikarna. ”Jag skriver bråkstrecket på remsan och fyran under: det hela är delat i fyra lika stora delar. Jag färglägger tre delar och skriver trean över: vi har tre sådana delar. Tre fjärdedelar.” Riv en remsa i tre olika långa bitar: ”Tre delar. Är det tredjedelar? Jag lägger bitarna under varandra, med kanterna mot samma linje. De är olika långa, så det är inga tredjedelar.”"
+            - rubrik: Pass 2 · Visa först och säg
+              text: "Rita en lång stapel på tavlan. ”Den här stapeln är det hela. Jag mäter och delar den i fem lika långa delar. Jag färglägger tre delar och skriver 3/5: det hela är delat i fem lika stora delar, och vi har tre sådana delar.” Rita en lika lång stapel under och dela den i tredjedelar. ”En tredjedel är längre än en femtedel. När det hela delas i fler delar blir varje del mindre. Därför är 1/3 större än 1/5, fast 3 är mindre än 5.”"
+            - rubrik: Veckans mening
+              text: "”Nämnaren säger hur många lika stora delar det hela är delat i, och täljaren säger hur många sådana delar vi har.”\nDet sista bråket: 5/8 med stavarna i pass 1 och 5/6 som stapel i pass 2."
+            - rubrik: Lyssna efter
+              text: "Eleven som kallar tre olika stora bitar för tredjedelar (pass 1, kort 3).\nEleven som säger att 1/5 är större än 1/3 eftersom 5 är större än 3 (pass 1, kort 4).\nEleven som säger att 1/8 är större än 1/6 (pass 2, kort 6)."
+        - rubrik: Till läraren om pass 3
+          falt:
+            - rubrik: Spelet · Fyll det hela
+              text: "Varje elev har en hel remsa och bitar klippta ur tre remsor: två halvor, fyra fjärdedelar och åtta åttondelar. Slå tärningen: 1 ger en halv, 2 eller 3 en fjärdedel, och 4, 5 eller 6 en åttondel. Lägg biten på den hela remsan och säg vilka bitar du har. Får biten inte plats står du över. Den som först har fyllt det hela utan luckor vinner."
+            - rubrik: Lösningen och frågorna
+              text: "Paren låter två remsor vara chokladkakorna. Varje barn får 2/3 av en kaka, en tredjedel av varje kaka. En annan väg: varje barn får först en halv, och halvan som blir över delas i tre, så att varje barn får 1/2 + 1/6 = 4/6 = 2/3. Säger någon 1/3, fråga vad det hela är. En tredjedel av båda kakorna är två tredjedelar av en kaka. I jämförelsen frågar du: ”Är 2/3 mer eller mindre än en halv? Vad är det hela?” Blir ett par klart tidigt: ”Fyra barn delar tre kakor. Hur mycket får varje barn?” Svaret är 3/4."
+      listor:
+        - rubrik: Vecka 1 · Pass 1 · Läs kortet, kamraten gör det med material
+          rader:
+            - - Vik en remsa i fyra lika stora delar. Färglägg tre fjärdedelar och skriv bråket.
+            - - Visa 1/2 på två sätt.
+            - - Riv en remsa i tre bitar. Är det tredjedelar? Hur vet du?
+            - - Lägg en tredjedel och en femtedel bredvid varandra. Vilken är längst? Varför?
+            - - Hur många sjättedelar behövs till det hela? Lägg dem på den längsta staven.
+            - - Visa 2/3 med stavarna. Hur mycket fattas till det hela?
+        - rubrik: Vecka 1 · Pass 2 · Läs kortet, kamraten ritar och skriver
+          rader:
+            - - Skriv bråket i en bit på varje rad i Bråkplanket att fylla i. Vilken rad har de minsta bitarna? Varför?
+            - - Rita en stapel delad i fem lika stora delar. Färglägg 2/5. Hur många femtedelar är inte färglagda?
+            - - Det hela är delat i åtta lika stora delar, och tre är färglagda. Rita och skriv bråket.
+            - - Rita två lika långa staplar. Dela den ena i tredjedelar och den andra i sjättedelar. Vilken del är störst?
+            - - "Skriv i storleksordning, minst först: 1/2, 1/10, 1/4, 1/3."
+            - - Vilket är störst, 1/8 eller 1/6? Rita och förklara.
+        - rubrik: Vecka 1 · Pass 3 · Problemet, läs högt och lös i par
+          rader:
+            - - Tre barn delar två chokladkakor lika. Hur mycket får varje barn?
+    # ---------------------------------------------------------------- Vecka 2
+    - rubrik: "Vecka 2: Bråk på tallinjen"
+      text:
+        - Bråket är ett tal med en plats på tallinjen. I pass 1 lägger eleverna stavarna mot en tallinje som är tejpad på bordet, så att staven blir ett mått. I pass 2 delar de tallinjer på papper, sätter ut bråk och räknar förbi 1. Talet står vid strecket där delen slutar.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Material
+              text: En tallinje per elev, tejpad längs bordskanten från 0 till 2, med en stavlängd mellan 0 och 1 och mellan 1 och 2. Bråkstavar, en sats per elev. Mallarna Tallinjer i delar och Tomma tallinjer från 0 till 1 och från 0 till 2 till pass 2. Spelkorten till Högst vinner, en kopia per par, klippta.
+            - rubrik: Pass 1 · Visa först och säg
+              text: "”Den här staven är det hela. Den börjar vid 0 och slutar vid 1.” Lägg en fjärdedel från 0, sätt ett streck där den slutar och skriv 1/4 vid strecket: ”Här är en fjärdedel. Talet står vid strecket, där delen slutar.” Lägg fjärdedelar en i taget, sätt ett streck där varje fjärdedel slutar och räkna: ”Två fjärdedelar, tre fjärdedelar, fyra fjärdedelar. Fyra fjärdedelar är 1.” Stavarna tar slut, så flytta den första fjärdedelen och lägg den efter 1: ”Fem fjärdedelar. Nu är vi förbi 1. Fem fjärdedelar är en och en fjärdedel.”"
+            - rubrik: Pass 2 · Visa först och säg
+              text: "Rita en tallinje från 0 till 1. ”Jag ska dela den i tredjedelar, tre lika stora delar. Då behöver jag två streck mellan 0 och 1. Jag räknar delarna och inte strecken: en, två, tre delar.” Skriv 1/3 och 2/3 vid strecken och 3/3 vid 1. Förläng linjen till 2: ”Fyra tredjedelar, fem tredjedelar, sex tredjedelar. Sex tredjedelar är 2.”"
+            - rubrik: Veckans mening
+              text: "”Ett bråk är ett tal med en egen plats på tallinjen.”\nDet sista bråket: 7/4 med stavarna på din tallinje i pass 1. I pass 2 sätter ni ut 3/2 på en tom tallinje från 0 till 2."
+            - rubrik: Lyssna efter
+              text: "Eleven som skriver bråket mitt på delen i stället för vid strecket där delen slutar (pass 1, kort 1).\nEleven som räknar strecken i stället för delarna och ritar fyra streck mellan 0 och 1 för att dela i fjärdedelar (pass 2, kort 1)."
+        - rubrik: Till läraren om pass 3
+          falt:
+            - rubrik: Spelet · Högst vinner
+              text: "Blanda spelkorten och dela dem lika. Båda vänder ett kort. Den som har det största bråket tar båda korten, men bara om hen säger varför, till exempel: ”5/4 är mer än 1, och 3/4 är mindre än 1.” Kan hen inte säga varför läggs korten åt sidan. Är ni osäkra lägger ni stavarna mot tejpen. Är bråken lika stora vänder ni ett kort till, och tar korten slut behåller var och en sitt. Den som har flest kort när korten är slut vinner."
+            - rubrik: Lösningen och frågorna
+              text: "Låt den längsta staven vara en meter. Snigeln kryper en fjärdedel i timmen, så efter sex timmar har den krupit 6/4 meter, alltså 1 2/4 eller 1 1/2 meter. Paren lägger fjärdedelar på tejpen och räknar timmarna. I jämförelsen frågar du: ”Är det mer eller mindre än en meter? Var är snigeln efter fyra timmar?” Blir ett par klart tidigt: ”Hur många timmar tar det för snigeln att krypa 2 meter?” Svaret är 8."
+      listor:
+        - rubrik: Vecka 2 · Pass 1 · Läs kortet, kamraten lägger stavarna mot tallinjen
+          rader:
+            - - Sätt ut 1/2, 1/4 och 3/4 med stavarna.
+            - - Lägg tiondelar från 0 och sätt ut 1/10. Ligger det nära 0 eller nära 1?
+            - - Lägg fjärdedelar från 0. Var slutar fyra fjärdedelar? Vilket tal står där på tejpen?
+            - - Sätt ut 3/5. Är det mer eller mindre än en halv?
+            - - Lägg halvor från 0 och flytta dem vidare till 2. Hur många halvor går det på 2?
+            - - Lägg fjärdedelar från 0 till 1. Flytta dem en i taget förbi 1. Sätt ut 5/4 och 6/4.
+        - rubrik: Vecka 2 · Pass 2 · Läs kortet, kamraten ritar och skriver
+          rader:
+            - - Rita en tallinje från 0 till 1 och dela den i fjärdedelar. Sätt ut 3/4.
+            - - Sätt ut 1/5 och 4/5 på en tallinje från 0 till 1. Vilket ligger närmast 1?
+            - - Är 3/8 mer eller mindre än en halv? Visa på tallinjen.
+            - - Räkna i fjärdedelar från 0 till 2 och skriv talen vid strecken.
+            - - Sätt ut 7/5 på tallinjen. Skriv det med ett helt tal och ett bråk.
+            - - Vilket är störst, 5/6 eller 1? Visa på tallinjen.
+        - rubrik: Vecka 2 · Pass 3 · Spelkort till Högst vinner, klipp isär
+          rader:
+            - ["1/4", "3/4", "5/4", "7/4"]
+            - ["1/2", "3/2", "1/3", "2/3"]
+            - ["4/3", "3/5", "2/5", "1/10"]
+            - ["9/10", "7/8", "3/8", "6/4"]
+        - rubrik: Vecka 2 · Pass 3 · Problemet, läs högt och lös i par
+          rader:
+            - - En snigel kryper 1/4 meter varje timme. Hur långt har den krupit efter sex timmar?
+    # ---------------------------------------------------------------- Vecka 3
+    - rubrik: "Vecka 3: Likvärdiga bråk"
+      text:
+        - Bråk som hamnar på samma punkt är samma tal, fast de har olika namn. I pass 1 bygger eleverna samma längd med olika stavar och viker ett A4. I pass 2 använder de mallen Tallinjer i delar och dubblar täljaren och nämnaren. De skriver tiondelar som decimaltal, och en halv, en fjärdedel och tre fjärdedelar i procent.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Material
+              text: Bråkstavar, en sats per elev, och tallinjen på bordet. Ett A4 per elev till kort 5 i pass 1. Mallen Tallinjer i delar och linjal till pass 2. Memorykorten, en kopia per par på tjockt papper, klippta.
+            - rubrik: Pass 1 · Visa först och säg
+              text: "Lägg en tredjedel mot tallinjen. ”Här är en tredjedel. Den slutar här.” Lägg två sjättedelar under: ”Två sjättedelar slutar på samma ställe. Lika långt, samma punkt. En tredjedel och två sjättedelar är samma tal.” Skriv 1/3 = 2/6. ”Varje tredjedel är delad i två sjättedelar. Det hela har dubbelt så många delar, och jag har dubbelt så många. Delarna är hälften så stora, så längden är densamma.” Lägg fyra tolftedelar under: ”Fyra tolftedelar slutar också där. Tre namn på samma tal.”"
+            - rubrik: Pass 2 · Visa först och säg
+              text: "Visa mallen Tallinjer i delar. Skriv 1/2, 2/4 och 4/8 vid strecken på linjerna i halvor, fjärdedelar och åttondelar. ”1/2, 2/4 och 4/8 står på samma punkt.” Skriv 1/2 och dubbla täljaren och nämnaren: ”Om du dubblar både uppe och nere händer inget med värdet, det är samma punkt.” Peka på linjen i tiondelar: ”5/10 står också där. Som decimaltal skriver jag 0,5: noll hela och fem tiondelar. Fem tiondelar är lika mycket som femtio hundradelar. Procent betyder per hundra, så en halv är 50 procent. En fjärdedel är hälften av en halv, 25 hundradelar. Det skriver jag 0,25 och 25 procent.”"
+            - rubrik: Veckans mening
+              text: "”Bråk som hamnar på samma punkt är samma tal, fast de har olika namn.”\nDet sista bråket: 2/3 och 4/6 med stavarna i pass 1, och 3/4 som 0,75 och 75 % i pass 2."
+            - rubrik: Lyssna efter
+              text: "Eleven som tror att 2/4 är större än 1/2 eftersom talen är större (pass 1, kort 1).\nEleven som dubblar bara täljaren eller bara nämnaren (pass 2, kort 2)."
+        - rubrik: Till läraren om pass 3
+          falt:
+            - rubrik: Spelet · Memory med samma tal
+              text: "Lägg korten upp och ned. Vänd två kort. Är de samma tal får du behålla dem, men bara om du säger varför, till exempel: ”2/8 och 0,25 är båda en fjärdedel.” Annars vänder du tillbaka dem. Första gången spelar ni med korten uppvända och parar ihop dem tillsammans."
+            - rubrik: Lösningen och frågorna
+              text: "Paren visar pizzorna med stavar eller på tallinjen. Ali och Bea har ätit lika mycket, en halv pizza var, eftersom 2/4 och 3/6 hamnar på samma punkt som 1/2. Cia har ätit mest, eftersom 5/8 är mer än 4/8. I jämförelsen frågar du: ”Hade svaret blivit detsamma om Cias pizza var mindre? Vad är det hela?” Blir ett par klart tidigt: ”Dan äter 3/4 av sin pizza. Har han ätit mer än Cia?” Svaret är ja, eftersom 6/8 är mer än 5/8."
+      listor:
+        - rubrik: Vecka 3 · Pass 1 · Läs kortet, kamraten bygger med stavarna
+          rader:
+            - - Lägg en halv. Bygg samma längd med fjärdedelar. Är 2/4 mer än 1/2?
+            - - Bygg samma längd som 1/2 med åttondelar och med tiondelar.
+            - - Lägg 3/4. Bygg samma längd med åttondelar.
+            - - Lägg 2/5. Bygg samma längd med tiondelar.
+            - - Vik ett A4 i halvor, sedan i fjärdedelar och sedan i åttondelar. Hur många åttondelar är en halv?
+            - - Lägg 2/3 och 3/4 bredvid varandra. Vilket är längst? Hur mycket fattas till det hela för varje bråk?
+        - rubrik: Vecka 3 · Pass 2 · Läs kortet, kamraten ritar och skriver
+          rader:
+            - - Titta på linjen i fjärdedelar och linjen i åttondelar på mallen Tallinjer i delar. Vilket bråk står på samma punkt som 3/4?
+            - - Skriv två bråk som är lika mycket som 3/5. Visa på tallinjen att de står på samma punkt.
+            - - Dubbla både täljaren och nämnaren i 1/4. Visa på tallinjen att det är samma punkt.
+            - - Sätt ut 3/10 på linjen i tiondelar och skriv det som decimaltal.
+            - - Skriv 1/4 som hundradelar och i procent. Förklara hur du vet.
+            - - Vilket är störst, 3/4 eller 4/5? Hur mycket fattas till en hel?
+        - rubrik: Vecka 3 · Pass 3 · Memorykort, klipp isär
+          rader:
+            - ["1/2", "2/4", "5/10", "0,5"]
+            - ["50 %", "4/8", "1/4", "2/8"]
+            - ["0,25", "25 %", "3/4", "6/8"]
+            - ["0,75", "75 %", "1/3", "2/6"]
+            - ["2/3", "4/6", "3/10", "0,3"]
+        - rubrik: Vecka 3 · Pass 3 · Problemet, läs högt och lös i par
+          rader:
+            - - Ali, Bea och Cia har var sin pizza, och pizzorna är lika stora. Ali äter 2/4 av sin pizza, Bea äter 3/6 av sin och Cia äter 5/8 av sin. Vem har ätit mest?
+    # ---------------------------------------------------------------- Vecka 4
+    - rubrik: "Vecka 4: Addera och subtrahera"
+      text:
+        - Eleverna räknar delar som är lika stora. I pass 1 lägger de delar efter varandra, tar bort och byter en del mot mindre delar. I pass 2 uppskattar de först och räknar sedan på tallinjen. En summa blir alltid större än båda talen man lägger ihop.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Material
+              text: Bråkstavar, en sats per elev, tallinjen på bordet och remsor och sax till kort 2 i pass 1. Mallarna Tallinjer i delar och Tomma tallinjer till pass 2. Spelkorten till Närmast en hel, en kopia per par, klippta.
+            - rubrik: Pass 1 · Visa först och säg
+              text: "”Jag lägger 3/8 mot tallinjen, tre åttondelar. Jag lägger 2/8 efter, två åttondelar till. Jag räknar delarna: fem åttondelar.” Skriv 3/8 + 2/8 = 5/8. ”Delarna är lika stora, så nämnaren är densamma. Täljaren räknar delarna.” Skriv 5/16 bredvid: ”Blir det fem sextondelar? En sextondel är hälften av en åttondel, så 5/16 är kortare än 3/8. Summan kan inte vara mindre än det jag började med.”"
+            - rubrik: Pass 2 · Visa först och säg
+              text: "”Jag ska räkna 1/2 + 1/4. Först uppskattar jag. En fjärdedel är mindre än en halv, så summan blir mindre än 1.” Använd linjen i fjärdedelar på mallen Tallinjer i delar. ”En halv är två fjärdedelar. Jag hoppar två fjärdedelar och sedan en fjärdedel till. Tre fjärdedelar.” Skriv 1/2 + 1/4 = 2/4 + 1/4 = 3/4. ”Tre fjärdedelar är mindre än 1, som jag uppskattade.”"
+            - rubrik: Kortet om 2/7
+              text: 1/3 + 1/4 är mer än 1/4 + 1/4, alltså mer än en halv. 2/7 är mindre än en halv, eftersom hälften av 7 är 3,5. Med tolftedelar blir summan 4/12 + 3/12 = 7/12.
+            - rubrik: Veckans mening
+              text: "”Vi räknar delar som är lika stora: tre åttondelar och två åttondelar är fem åttondelar.”\nDet sista bråket: 1/2 + 3/4 med stavarna i pass 1, med den längsta staven under. I pass 2 räknar ni 2 − 3/4 på en tom tallinje från 0 till 2. Båda blir 5/4."
+            - rubrik: Lyssna efter
+              text: "Eleven som lägger ihop både täljarna och nämnarna, så att 3/8 + 4/8 blir 7/16 (pass 2, kort 1).\nSamma fel gör att 3/4 + 3/4 blir 6/8 (pass 2, kort 6). Fråga: ”Blev summan större än talen du lade ihop?”"
+        - rubrik: Till läraren om pass 3
+          falt:
+            - rubrik: Spelet · Närmast en hel
+              text: "Blanda spelkorten och lägg dem i en hög. Båda tar tre kort och väljer två som tillsammans blir så nära 1 som möjligt. Säg först om summan blir mer eller mindre än 1 och räkna sedan, till exempel: ”3/4 är 6/8, och 6/8 och 3/8 är 9/8. En åttondel över.” Den som kommer närmast 1 får en poäng, och exakt 1 ger två poäng. Är ni lika nära får båda lika många poäng. Lägg korten under högen och ta tre nya. Spela åtta rundor. Den som har flest poäng vinner."
+            - rubrik: Lösningen och frågorna
+              text: "Maja har läst 5/8 av boken, eftersom 1/2 + 1/8 = 4/8 + 1/8 = 5/8. Då är 3/8 kvar. Paren lägger stavarna eller ritar en stapel för boken. I jämförelsen frågar du: ”Är det mer eller mindre än en halv som är kvar? Hur vet ni?” Blir ett par klart tidigt: ”Det som är kvar är 30 sidor. Hur många sidor har boken?” Svaret är 80."
+      listor:
+        - rubrik: Vecka 4 · Pass 1 · Läs kortet, kamraten lägger stavarna
+          rader:
+            - - Lägg 2/5 och 1/5 efter varandra. Hur mycket är det tillsammans?
+            - - Klipp två remsor i fjärdedelar. Lägg 3/4 och 2/4 efter varandra. Är det mer än det hela? Hur mycket mer?
+            - - Lägg det hela. Byt det mot åttondelar och ta bort 3/8. Hur mycket är kvar?
+            - - Lägg 1/4 och 1/8 efter varandra. Byt fjärdedelen mot åttondelar. Hur mycket är det?
+            - - Lägg 2/3 och 1/6 efter varandra. Byt tredjedelarna mot sjättedelar. Hur mycket är det?
+            - - Lägg 7/10. Hur många tiondelar är 1/5? Ta bort så många. Hur mycket är kvar?
+        - rubrik: Vecka 4 · Pass 2 · Läs kortet, kamraten ritar och räknar
+          rader:
+            - - Uppskatta först. Är 3/8 + 4/8 mer eller mindre än 1? Räkna sedan.
+            - - Räkna 5/6 − 2/6 på tallinjen.
+            - - Räkna 1 − 3/4. Skriv först 1 som fjärdedelar och visa på tallinjen.
+            - - Räkna 1/2 + 3/8 på linjen i åttondelar.
+            - - Kan 1/3 + 1/4 bli 2/7? Varför inte?
+            - - Räkna 3/4 + 3/4 på tallinjen. Skriv svaret med ett helt tal och ett bråk.
+        - rubrik: Vecka 4 · Pass 3 · Spelkort till Närmast en hel, klipp isär
+          rader:
+            - ["1/2", "1/4", "3/4", "1/8"]
+            - ["3/8", "5/8", "7/8", "2/4"]
+            - ["2/8", "4/8", "6/8", "1/8"]
+            - ["3/8", "5/8", "1/4", "3/4"]
+        - rubrik: Vecka 4 · Pass 3 · Problemet, läs högt och lös i par
+          rader:
+            - - Maja läser 1/2 av en bok på måndagen och 1/8 av boken på tisdagen. Hur stor del av boken har hon kvar att läsa?
+    # ---------------------------------------------------------------- Vecka 5
+    - rubrik: "Vecka 5: Bråk av antal"
+      text:
+        - Det hela är ett antal. Eleverna delar antalet i lika stora grupper och tar så många grupper som täljaren säger. I pass 1 arbetar de med knappar, och i pass 2 ritar de stapeln och räknar. Sist hittar de det hela när en del är känd.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Material
+              text: Knappar eller centikuber, 24 per elev. Papper, linjal och mallen Stapelrutan till pass 2. Spelkorten till Ta din del av 24, en kopia per par, klippta.
+            - rubrik: Pass 1 · Visa först och säg
+              text: "”Det hela är 12 knappar. Jag ska ta 1/3. Nämnaren säger tre lika stora delar, så jag lägger knapparna i tre högar, en i taget, tills alla är slut.” Räkna högt medan du lägger. ”Fyra i varje hög. En tredjedel av 12 är 4.” Peka på två högar: ”Två tredjedelar är två högar, 8.”"
+            - rubrik: Pass 2 · Visa först och säg
+              text: "Rita en stapel. ”Stapeln är det hela, 20 kronor. Jag delar den i fem lika stora delar. En femtedel är 20 delat med 5, alltså 4.” Skriv 4 i varje del. ”Tre femtedelar är tre delar: 4 + 4 + 4 = 12. Tre femtedelar av 20 är 12.” Rita en ny stapel i fem delar och vänd på det. Skriv det du vet och det du söker bredvid: ”Två femtedelar är 16 kronor. Jag söker det hela. En femtedel är 8, och det hela är fem femtedelar, 40.”"
+            - rubrik: Veckans mening
+              text: "”När vi tar tre fjärdedelar av ett antal delar vi antalet i fyra lika stora delar och tar tre av dem.”\nDet sista bråket: 3/4 av 16 med knappar i pass 1, som blir 12, och 5/6 av 30 med en stapel i pass 2, som blir 25."
+            - rubrik: Lyssna efter
+              text: "Eleven som tar två eller tre knappar när kortet säger 2/3 av 15 (pass 1, kort 4).\nEleven som svarar 50 kr när frågan gäller vad tröjan kostar nu (pass 2, kort 4)."
+        - rubrik: Till läraren om pass 3
+          falt:
+            - rubrik: Spelet · Ta din del av 24
+              text: "Varje par har 24 knappar och spelkorten i en bunt med baksidan upp. Vänd ett kort och ta den delen av 24, till exempel: ”Tre åttondelar. 24 delat i åtta högar är 3 i varje, och tre högar är 9.” Kamraten kontrollerar med knapparna, och du får lika många poäng som du tog knappar. Lägg tillbaka knapparna, så att det hela är 24 varje gång. Den som har flest poäng efter fem kort var vinner."
+            - rubrik: Lösningen och frågorna
+              text: "Rita stapeln för klassen och dela den i fyra lika stora delar. Tre delar är 18 elever, så en del är 6 och hela klassen är 24. I jämförelsen frågar du: ”Hur många är inte på utflykt? Var ser ni dem i stapeln?” Blir ett par klart tidigt: ”2/3 av klassen äter lunch i skolan. Hur många är det?” Svaret är 16."
+      listor:
+        - rubrik: Vecka 5 · Pass 1 · Läs kortet, kamraten tar knapparna
+          rader:
+            - - Lägg 12 knappar i fyra lika stora högar. Hur många är 1/4 av 12?
+            - - Hur många är 3/4 av 12? Lägg knapparna i högar först.
+            - - Hur många är 1/2 av 18?
+            - - Hur många är 2/3 av 15?
+            - - Lägg 18 knappar. Hur många är 1/6? Hur många är 5/6?
+            - - Fyra knappar är 1/3 av knapparna i en påse. Hur många knappar är det i påsen?
+        - rubrik: Vecka 5 · Pass 2 · Läs kortet, kamraten ritar och räknar
+          rader:
+            - - Rita en stapel för 32 elever och dela den i fyra lika stora delar. Hur många är 1/4 av 32?
+            - - Hur många är 3/4 av 32?
+            - - Rita stapeln. Hur många är 2/5 av 30?
+            - - En tröja kostar 200 kr. Priset sänks med 1/4. Hur mycket sänks priset? Vad kostar tröjan nu?
+            - - 1/3 av eleverna går hem. Det är 9 elever. Hur många elever är det i allt?
+            - - Hur mycket är 25 % av 40 kr? Tänk en fjärdedel.
+        - rubrik: Vecka 5 · Pass 3 · Spelkort till Ta din del av 24, klipp isär
+          rader:
+            - ["1/2", "1/3", "2/3", "1/4"]
+            - ["3/4", "1/6", "5/6", "1/8"]
+            - ["3/8", "5/8", "7/8", "5/12"]
+        - rubrik: Vecka 5 · Pass 3 · Problemet, läs högt och lös i par
+          rader:
+            - - 3/4 av klassen är på utflykt. Det är 18 elever. Hur många elever är i klassen?
+    # ---------------------------------------------------------------- Stapelrutan (källans Mall 4)
+    - rubrik: Stapelrutan
+      text:
+        - Skriv det du vet och det du söker. Rita stapeln och räkna.
+      delar:
+        - rubrik: Problemet
+          falt:
+            - rubrik: Jag vet
+            - rubrik: Jag söker
+            - rubrik: Stapeln
+            - rubrik: Uträkningen
+            - rubrik: Svaret
+diplom:
+  kicker: Bråkkursen
+  rubrik: Diplom
+  text:
+    - tilldelas
+    - ___
+    - som har gått bråkkursen i fem veckor.
+    - Grattis!
+  underskrifter:
+    - Datum
+    - Lärare
+kort:
+  listor:
+    - Läs kortet
+    - klipp isär
+    - Problemet
+  kopior:
+    Problemet: 5
+elevblad:
+  Stapelrutan:
+    Jag vet: 3
+    Jag söker: 2
+    Stapeln: 6.5
+    Uträkningen: 4.5
+    Svaret: 2
+mallar:
+  - rubrik: Bråkplanket
+    typ: brakplank
+  - rubrik: Bråkplanket att fylla i
+    text: Skriv bråket i varje bit.
+    typ: brakplank
+    etiketter: false
+  - rubrik: "Bråkstavar att klippa: en hel till sjättedelar"
+    typ: brakplank
+    namnare:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+    radhojd: 1380
+  - rubrik: "Bråkstavar att klippa: sjundedelar till tolftedelar"
+    typ: brakplank
+    namnare:
+      - 7
+      - 8
+      - 9
+      - 10
+      - 12
+    radhojd: 1380
+  - rubrik: Tallinjer i delar
+    text: Skriv bråket vid varje streck. Linjerna är delade i halvor, fjärdedelar, åttondelar, tredjedelar, sjättedelar, tolftedelar, femtedelar och tiondelar, uppifrån och ned.
+    typ: tallinjer
+    linjer:
+      - till: 1
+        delar: 2
+      - till: 1
+        delar: 4
+      - till: 1
+        delar: 8
+      - till: 1
+        delar: 3
+      - till: 1
+        delar: 6
+      - till: 1
+        delar: 12
+      - till: 1
+        delar: 5
+      - till: 1
+        delar: 10
+    mellanrum: 330
+  - rubrik: Tomma tallinjer från 0 till 1
+    typ: tallinjer
+    mellanrum: 1000
+    linjer:
+      - till: 1
+        delar: 1
+      - till: 1
+        delar: 1
+      - till: 1
+        delar: 1
+      - till: 1
+        delar: 1
+      - till: 1
+        delar: 1
+  - rubrik: Tomma tallinjer från 0 till 2
+    text: Här är det hela hälften så långt som den längsta staven.
+    typ: tallinjer
+    mellanrum: 1000
+    linjer:
+      - till: 2
+        delar: 1
+      - till: 2
+        delar: 1
+      - till: 2
+        delar: 1
+      - till: 2
+        delar: 1
+      - till: 2
+        delar: 1
+lathund:
+  innehall: Ett fokus i veckan
+  metoden:
+    text:
+      - En intensiv kurs i fem veckor för två till tio elever i åk 4–6 som inte har förstått bråk. Före första passet gör du kartläggningen.
+      - "Veckorna: lika delar, bråk på tallinjen, likvärdiga bråk, addera och subtrahera, bråk av antal. Varje vecka har en mening som gruppen säger och sätter upp på väggen."
+    ruta:
+      rubrik: Tre saker att hålla fast vid
+      punkter:
+        - fet: Visa först och säg bråket i ord.
+          text: Vik, lägg och peka framför eleverna, och säg bråket med ord, som tre fjärdedelar.
+        - fet: Fråga efter det hela.
+          text: "Det hela är det som delas: remsan, staven, sträckan från 0 till 1 eller knapparna."
+        - fet: Från material till siffror.
+          text: Pass 1 med material, pass 2 med bild och tallinje. Materialet ligger kvar.
+    tabell:
+      rubrik: Pass 1 och 2 · fem delar, tider och fraser
+      kolumner:
+        - Steg
+        - Exempelfraser
+      rader:
+        - - "1 · Första bråket\n0–8 min"
+          - "”Fyra lika stora delar. Jag skriver fyran under strecket.”\n”Jag räknar delarna: en fjärdedel, två fjärdedelar, tre fjärdedelar.”"
+        - - "2 · Samma bråk\n8–18 min"
+          - "”Räkna delarna med mig.”\n”Vad är det hela? Hur många lika stora delar är det delat i?”"
+        - - "3 · Korten\n18–38 min"
+          - "”Hur många lika stora delar är det hela delat i? Hur många delar tar du?”\n”Är det mer eller mindre än en halv?”"
+        - - "4 · Fyra sätt\n38–50 min"
+          - "”Visa bråket på två sätt.”\n”Berätta vad nämnaren och täljaren säger.”"
+        - - "5 · Veckans mening\n50–60 min"
+          - "”Vem kan visa det på ett annat sätt?”\n”Nu säger vi veckans mening tillsammans.”"
+    not: "Pass 3, när det går: Spelet 0–20 min i par. Problemet 20–55 min, där ni förstår och planerar gemensamt, löser i par och jämför gemensamt. Veckans mening 55–⁠60 min. Lärarens ord, meningarna och korten står under Kursens material på metodens sida, och korten att skriva ut i planeringsmallarna."
+  pass:
+    rubrik: "Vi kör ett pass: bråk på tallinjen"
+    textRubrik: Gruppen · fem elever, åk 4–6, vecka 2, pass 1
+    utskrift: Skriv ut passexemplet
+    text:
+      - "Läraren lägger fjärdedelar mot tallinjen på bordet: ”Här är en fjärdedel. Talet står vid strecket, där delen slutar.” Hen räknar till fyra fjärdedelar och säger: ”Fyra fjärdedelar är 1. Fem fjärdedelar, nu är vi förbi 1.”"
+      - "Alla lägger fjärdedelar och räknar i kör. ”Var hamnar tre fjärdedelar?” frågar läraren. Amira pekar: ”Mellan en halv och 1.”"
+      - "Läraren läser kortet ”Sätt ut 3/5. Är det mer eller mindre än en halv?” Hamza skriver 3/5 på tejpen mitt under staven. ”Var slutar tre femtedelar?” frågar läraren. Hamza sätter strecket vid slutet. Noah säger: ”Längre än halvan. Mer än en halv.”"
+      - "Noah lägger 5/4 själv och säger: ”En och en fjärdedel.” Till sist lägger gruppen 7/4, och Elsa säger: ”Det har en plats mellan 1 och 2.” Läraren noterar att Hamza skrev bråket mitt under staven i stället för vid strecket."
+    forberett:
+      rubrik: Det jag förberedde
+      text:
+        - Tejpat en tallinje per elev, med en stavlängd mellan 0, 1 och 2. En sats bråkstavar per elev, dagens kort och spelkorten till Högst vinner, klippta. Lagt 5/4 och 7/4 själv och sagt orden högt.
+    klarTidigt: Spela veckans spel, som heter Högst vinner. Båda vänder ett kort, och den som har det största bråket tar båda, men bara om hen säger varför.
+    schema:
+      rubrik: 60 minuter, steg för steg
+      rader:
+        - tid: Före
+          fas: Förberedelse
+          vad: Ta fram dagens material, tejpa tallinjerna och klipp dagens kort. Gör veckans två bråk ur rutan Till läraren under Kursens material på metodens sida och säg orden högt.
+        - tid: 0–8
+          fas: 1 · Första bråket
+          vad: Visa bråket framför eleverna och säg vad det hela är, hur du delar och vad bråket heter.
+        - tid: 8–18
+          fas: 2 · Samma bråk
+          vad: Alla gör bråket en gång till, ett handgrepp i taget, och räknar delarna i kör.
+        - tid: 18–38
+          fas: 3 · Korten
+          vad: Läs ett kort. Paren gör och kontrollerar, sedan läser de för varandra.
+        - tid: 38–50
+          fas: 4 · Fyra sätt
+          vad: Var och en får ett kort, gör bråket på bordet och visar det på bladet Bråket på fyra sätt.
+        - tid: 50–60
+          fas: 5 · Veckans mening
+          vad: Gör det sista bråket tillsammans och säg veckans mening.
+  mall:
+    rubrik: Bråket på fyra sätt
+    underrad: "Namn: ______________ · Kortet: ________"
+    block:
+      - typ: tabell
+        rubrik: Bråket på fyra sätt
+        kolumner:
+          - Med material
+          - Som bild
+          - På tallinjen
+          - Med siffror
+        rader:
+          - - ""
+            - ""
+            - ""
+            - ""
+      - typ: not
+        text: Nämnaren säger hur många lika stora delar det hela är delat i, och täljaren säger hur många sådana delar vi har.
+  material:
+    rubrik: Vad du behöver för kursen
+    kravEtikett: Bråkkrav
+    var:
+      rubrik: Var materialet finns
+      punkter:
+        - fet: Bråkstavar.
+          text: Mallen Bråkstavar att klippa, en per elev på tjockt papper, eller en köpt sats per par.
+        - fet: Remsor.
+          text: A4-ark klippta på längden, lika långa som den längsta staven.
+        - fet: Tallinjer.
+          text: Tejp längs bordskanten, och mallarna Tallinjer i delar och Tomma tallinjer till pass 2.
+        - fet: Kort och kartläggning.
+          text: Under Kursens material på metodens sida, en ram per vecka med kartläggningen först. Korten att skriva ut står i planeringsmallarna, och mallarna står sist där.
+      efter: Bråket på fyra sätt finns på lathundens tredje sida, Mallen. Skriv ut det liggande, ett per elev, och laminera det gärna. Stavarna ryms inte i rutorna, så eleven gör bråket på bordet och ritar det. Skriv ut stavarna, planket och tallinjerna på samma sorts papper, A4 eller A3 liggande.
+    bordet:
+      - Bråket på fyra sätt, ett per elev
+      - Stavar eller knappar, en sats per elev
+      - Tallinjen på bordet, en per elev
+      - Dagens kort, klippta
+      - Färgpennor, penna och papper
+      - Din egen sats och tallinje
