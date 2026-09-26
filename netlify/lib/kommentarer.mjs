@@ -67,11 +67,11 @@ export async function skickaMejl({ till, amne, text }) {
     return false;
   }
   const headers = { 'api-key': nyckel, 'Content-Type': 'application/json', Accept: 'application/json' };
-  // Lokala prov: Brevo tar emot och prövar anropet men skickar inget.
-  if (process.env.KOMMENTARER_BREVO_SANDBOX) {
-    headers['X-Sib-Sandbox'] = 'drop';
-    console.log(`kommentarer: mejl i provläge till ${till}: ${amne}`);
-  }
+  // Prov: Brevo tar emot och prövar anropet men skickar inget. Flaggan ska ligga i mejlets
+  // headers i anropets kropp, inte i HTTP-anropets huvud: där verkade den inte, och natten
+  // 2026-09-26 skickades provmejlen på riktigt.
+  const sandlada = Boolean(process.env.KOMMENTARER_BREVO_SANDBOX);
+  if (sandlada) console.log(`kommentarer: mejl i provläge till ${till}: ${amne}`);
   try {
     const res = await fetch('https://api.brevo.com/v3/smtp/email', {
       method: 'POST',
@@ -84,6 +84,7 @@ export async function skickaMejl({ till, amne, text }) {
         textContent: text,
         htmlContent: `<!doctype html><html lang="sv"><body style="font-family:system-ui,sans-serif;font-size:16px;line-height:1.5;color:#14202b;max-width:36rem">\n${stycken(text)}\n</body></html>`,
         tags: ['kommentarer'],
+        ...(sandlada ? { headers: { 'X-Sib-Sandbox': 'drop' } } : {}),
       }),
     });
     if (!res.ok) {
