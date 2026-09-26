@@ -765,8 +765,11 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
   // upphovet, så att planket och linjerna får hela höjden. Är lathundens tredje sida ett blad att lägga på bordet
   // (talsortsmattan, bladet Bråket på fyra sätt) står bladet först bland dem, så att det kopieras med resten.
   const blad = d.lathund && arMatta(d.lathund.mall) ? medBredd(BREDD_MALL, () => [mattaSida(d.lathund!.mall)]) : [];
-  const liggande = medBredd(BREDD_MALL, () => d.mallar.map((m) => mallSida(m)));
-  return [...sidor.map((barn) => ({ barn })), ...[...blad, ...liggande].map((barn) => ({ barn, liggande: true }))];
+  // Ett ark per talsort (en matta med enPerSida) står på stående A4, en sida per kolumn; övriga mallar liggande.
+  const mallsidor = d.mallar.flatMap((m) => (m.typ === 'matta' && m.enPerSida
+    ? (m.kolumner ?? []).map((k) => ({ barn: medBredd(BREDD_STAENDE, () => talsortSida(m, k)), liggande: false }))
+    : [{ barn: medBredd(BREDD_MALL, () => mallSida(m)), liggande: true }]));
+  return [...sidor.map((barn) => ({ barn })), ...blad.map((barn) => ({ barn, liggande: true })), ...mallsidor];
 }
 
 // Ett blad att lägga på bordet: lathundens mall är en enda tom tabell och högst en not (talsortsmattan, bladet
@@ -785,7 +788,7 @@ function mattaSida(mall: LathundMall): Barn[] {
     if (b.typ === 'tabell') {
       const [a, c] = [(b.rubrik ?? '').toLowerCase(), mall.rubrik.toLowerCase()];
       if (a && !a.includes(c) && !c.includes(a)) barn.push(kicker(b.rubrik, { farg: FARG.huvud, fore: 0 }));
-      barn.push(...rubrikTabell(b.kolumner, b.rader, kolumnBredder(b.kolumner.length), { huvudFyll: FARG.text, radrubrik: false, storlek: 24, tomHojd: Math.floor(7000 / b.rader.length), ramad: true }));
+      barn.push(mattaTabell(b.kolumner, { hojd: 7000, rader: b.rader.length }), avstand(160));
     } else if (b.typ === 'not') barn.push(...lhNot([stycke(b.text, { storlek: 28, efter: 0 })]));
   }
   return barn;
@@ -858,7 +861,55 @@ function tallinjeTabell(ln: { till: number; delar: number }, L: number): Table {
   return new Table({ width: { size: W, type: WidthType.DXA }, columnWidths: x.slice(1).map((v, i) => v - x[i]), layout: TableLayoutType.FIXED, alignment: AlignmentType.CENTER, borders: UTAN_KANTER,
     rows: [strecksRad(true), strecksRad(false), new TableRow({ cantSplit: true, height: { value: 380, rule: HeightRule.ATLEAST }, children: etikettRad })] });
 }
+// En matta ur d.mallar (decimalmattan): kolumnerna med namnet stort i ett ljust band och höga rutor som fyller den
+// liggande sidan, ett decimalkomma i en smal kolumn utan ram efter kolumn nummer komma, och regeln i foten.
+// Mattans text är till läraren och står bara på sidan; på bladet står underraden, som på talsortsmattan.
+function mattaMallSida(m: Mall): Barn[] {
+  return [
+    new Paragraph({ children: [run(m.rubrik)], heading: HeadingLevel.HEADING_1, spacing: { before: 0, after: 40 } }),
+    ...(m.underrad ? [stycke(m.underrad, { storlek: 22, efter: 160 })] : []),
+    mattaTabell(m.kolumner ?? [], { komma: m.komma, hojd: 7000 }),
+    ...(m.fot ? [avstand(160), ...lhNot([stycke(m.fot, { storlek: 28, efter: 0 })])] : []),
+  ];
+}
+// Mattans tabell, gemensam för bladet från lathunden och mattorna bland mallarna: kolumnnamnet 16 pt fet i ett ljust
+// band, rutor med ram i angiven höjd (fördelad på raderna), och ett decimalkomma i en smal kolumn utan ram efter
+// kolumn nummer komma, nederst, där talet skrivs.
+function mattaTabell(kolumner: string[], o: { komma?: number; hojd: number; rader?: number }): Table {
+  const kommaBredd = o.komma ? 1000 : 0;
+  const w = Math.floor((BREDD - kommaBredd) / kolumner.length);
+  const delar = kolumner.flatMap((k, i) => [
+    { k, w: i === kolumner.length - 1 ? BREDD - kommaBredd - w * (kolumner.length - 1) : w, komma: false },
+    ...(o.komma === i + 1 ? [{ k: '', w: kommaBredd, komma: true }] : []),
+  ]);
+  const ram = runt(kant(FARG.text, 8));
+  const utan = runt(INGEN_KANT);
+  const antal = o.rader ?? 1;
+  const huvud = rad(delar.map((x) => (x.komma ? cell([], { bredd: x.w, kanter: utan }) : cell([stycke(x.k, { fet: true, storlek: 32, efter: 0 })], { bredd: x.w, fyll: FARG.ljus, kanter: ram }))), { huvud: true });
+  const kropp = Array.from({ length: antal }, (_, r) => new TableRow({ cantSplit: true, height: { value: Math.floor(o.hojd / antal), rule: HeightRule.EXACT }, children: delar.map((x) => new TableCell({
+    width: { size: x.w, type: WidthType.DXA },
+    borders: x.komma ? utan : ram,
+    verticalAlign: VerticalAlign.BOTTOM,
+    children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 0 }, children: x.komma && r === antal - 1 ? [run(',', { storlek: 200, fet: true })] : [] })],
+  })) }));
+  return new Table({ width: { size: BREDD, type: WidthType.DXA }, columnWidths: delar.map((x) => x.w), layout: TableLayoutType.FIXED, borders: UTAN_KANTER, rows: [huvud, ...kropp] });
+}
+// Ett ark per talsort (en matta med enPerSida): kolumnens namn stort i bandet och en ruta som fyller det stående arket,
+// 21 cm hög, så att en hundraplatta eller tio tiostavar i rad får plats och två hundraplattor under varandra. Arken
+// läggs i ordning bredvid varandra, så alla fyra har samma huvud och linjerar; lärarens text står bara på sidan.
+function talsortSida(m: Mall, k: string): Barn[] {
+  const ram = runt(kant(FARG.text, 8));
+  return [
+    new Paragraph({ children: [run(m.rubrik)], heading: HeadingLevel.HEADING_1, spacing: { before: 0, after: 40 } }),
+    m.underrad ? stycke(m.underrad, { storlek: 22, efter: 160 }) : avstand(160),
+    tabell([
+      rad([cell([stycke(k, { fet: true, storlek: 48, efter: 0, mitt: true })], { bredd: BREDD, fyll: FARG.ljus, kanter: ram })], { huvud: true }),
+      new TableRow({ cantSplit: true, height: { value: 11900, rule: HeightRule.EXACT }, children: [cell([], { bredd: BREDD, kanter: ram })] }),
+    ], [BREDD]),
+  ];
+}
 function mallSida(m: Mall): Barn[] {
+  if (m.typ === 'matta') return mattaMallSida(m);
   const L = Math.round((m.langdCm ?? 26) * CM);
   // En delad linje bär delarnas namn (brak.ts, delnamn) till vänster ovanför linjen, i luften före den, så att sidan
   // blir lika hög som utan namn. Linjens 0 står 283 in från tabellens kant, och tabellen är centrerad (tallinjeTabell).

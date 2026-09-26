@@ -38,6 +38,8 @@ const linjer = (t: string) => t.split('\n');
 // Mallarna: det hela är lika långt i bråkplanket och på tallinjen från 0 till 1, och det säger sidan när båda finns.
 const planketOchLinjen = d.mallar.some((m) => m.typ === 'brakplank') && d.mallar.some((m) => m.typ === 'tallinjer');
 const helaCm = d.mallar.find((m) => m.typ === 'brakplank')?.langdCm ?? 26;
+// Är lathundens tredje sida ett blad (en tom tabell, som talsortsmattan) står det också sist i planeringsmallarna.
+const lathundBlad = d.lathund && d.lathund.mall.block.filter((b) => b.typ !== 'not').length === 1 && d.lathund.mall.block.some((b) => b.typ === 'tabell' && b.rader.every((r) => r.every((c) => !c.trim()))) ? d.lathund.mall.rubrik : undefined;
 // Bråk i elevmaterialet staplas i matematik (src/lib/brak.ts); i andra ämnen står ett snedstreck kvar, som i ett datum.
 const brak = d.omrade === 'Matematik';
 // Sidnavigationen: de avsnitt som finns, i modellens ordning, med korta namn.
@@ -452,7 +454,9 @@ const avsnitt = [
   {d.mallar.length > 0 && (
     <section id="mallar">
       <h2>Mallar att skriva ut</h2>
-      <p>Mallarna finns i rätt storlek på liggande A4 sist i <a href={`/stodundervisning/${id}-mallar.docx`}>planeringsmallarna</a>.{planketOchLinjen && ` Det hela är ${helaCm} cm i bråkplanket och på tallinjen från 0 till 1, så att bitarna kan läggas mot linjen.`} Skrivs mallarna ut på A3 blir allt lika mycket större.</p>
+      {planketOchLinjen
+        ? <p>Mallarna finns i rätt storlek på liggande A4 sist i <a href={`/stodundervisning/${id}-mallar.docx`}>planeringsmallarna</a>. Det hela är {helaCm} cm i bråkplanket och på tallinjen från 0 till 1, så att bitarna kan läggas mot linjen. Skrivs mallarna ut på A3 blir allt lika mycket större.{lathundBlad && ` ${lathundBlad} finns på lathundens tredje sida och står också sist i planeringsmallarna.`}</p>
+        : <p>Mallarna finns i rätt storlek sist i <a href={`/stodundervisning/${id}-mallar.docx`}>planeringsmallarna</a>.{lathundBlad && ` ${lathundBlad} finns på lathundens tredje sida och står också där.`}</p>}
       <p class="m-mall-svep">Bilderna är bredare än skärmen. Svep i sidled för att se hela mallen.</p>
       {d.mallar.map((m) => (
         <figure class="m-mall">
@@ -461,6 +465,10 @@ const avsnitt = [
             {m.text && <p>{m.text}</p>}
           </figcaption>
           <div class="m-mall-ram" tabindex="0" role="region" aria-label={`${m.rubrik}, bild`}><MallBild mall={m} /></div>
+          {/* Mattans regel står i foten, som på bladet i Word. */}
+          {m.fot && <div class="m-ruta m-mall-fot"><p>{m.fot}</p></div>}
+          {/* Arken per talsort ryms inte i rätt storlek i utskriften från sidan: där står en hänvisning i stället för bilden. */}
+          {m.typ === 'matta' && m.enPerSida && <p class="m-mall-utskrift">Arken, ett stående A4 per talsort, finns i rätt storlek sist i planeringsmallarna.</p>}
         </figure>
       ))}
     </section>

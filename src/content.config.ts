@@ -321,10 +321,19 @@ const stodundervisning = defineCollection({
     // liggande A4 och som bilder på sidan. Det hela är langdCm långt (standard 26) i planket och på linjen från 0
     // till 1, så att bitarna kan läggas mot linjen. En linje till 2 är lika lång som linjen till 1, så där är det
     // hela hälften så långt. radhojd och mellanrum är i twips, som i riggen.
+    // typ matta är ett blad att lägga material på (decimalmattan): kolumner med namnet i ett band, höga rutor som
+    // fyller en liggande sida, ett decimalkomma efter kolumn nummer komma och regeln i foten (fot). Med enPerSida
+    // får varje kolumn ett eget stående A4 (ett ark per talsort för tiobas). En mattas text är till läraren och står
+    // bara på sidan; på bladet står underraden (En matta per elev · Namn).
     mallar: z.array(z.strictObject({
       rubrik: text,
       text: z.string().optional(),
-      typ: z.enum(['brakplank', 'tallinjer']),
+      typ: z.enum(['brakplank', 'tallinjer', 'matta']),
+      kolumner: z.array(text).min(1).optional(),
+      komma: z.number().int().positive().optional(),
+      underrad: z.string().optional(),
+      fot: z.string().optional(),
+      enPerSida: z.boolean().optional(),
       namnare: z.array(z.number().int().positive()).optional(),
       etiketter: z.boolean().optional(),
       langdCm: z.number().positive().optional(),
@@ -417,6 +426,8 @@ const stodundervisning = defineCollection({
     const listrubriker = (d.ramar?.ramar ?? []).flatMap((r) => (r.listor ?? []).map((l) => l.rubrik ?? ''));
     for (const t of d.kort?.listor ?? []) if (!listrubriker.some((r) => r.includes(t))) ctx.addIssue({ code: 'custom', path: ['kort', 'listor'], message: `Ingen lista i ramarna har "${t}" i rubriken.` });
     d.mallar.forEach((m, i) => { if (m.typ === 'tallinjer' && !m.linjer?.length) ctx.addIssue({ code: 'custom', path: ['mallar', i, 'linjer'], message: 'Tallinjer kräver minst en linje.' }); });
+    d.mallar.forEach((m, i) => { if (m.typ === 'matta' && !m.kolumner?.length) ctx.addIssue({ code: 'custom', path: ['mallar', i, 'kolumner'], message: 'En matta kräver minst en kolumn.' }); });
+    d.mallar.forEach((m, i) => { if (m.komma && m.komma >= (m.kolumner?.length ?? 0)) ctx.addIssue({ code: 'custom', path: ['mallar', i, 'komma'], message: 'Kommat står efter en kolumn som har fler kolumner efter sig.' }); });
   }),
 });
 
