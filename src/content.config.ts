@@ -3,6 +3,7 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import taggarData from './data/taggar.json';
 import publikationerData from './data/publikationer.json';
+import { BAGE, ordgrupper, utanStod } from './lib/lasflyt';
 
 // Registren är den enda sanningen om vilka taggar och publikationer som finns.
 // Ett okänt värde stoppar bygget med ett tydligt besked om vad som ska göras.
@@ -148,6 +149,9 @@ const stodundervisning = defineCollection({
       steg: z.array(z.union([z.string(), z.strictObject({ text, fas: text })])).min(1),
       efter: z.string().optional(),
       efterPasset: z.string().optional(),
+      // Vad passets delar kallas i rubrikerna. delar när metoden använder ordet steg för något annat, som lästrappan i
+      // Upprepad läsning: då står Del, Passet i N delar och Delarna där det annars står Fas, Rutinen i N steg och Stegen (K-065).
+      kallas: z.enum(['steg', 'delar']).default('steg'),
     }).optional(),
     tidsschema: z.strictObject({
       rubrik: z.string(),
@@ -461,6 +465,20 @@ const stodundervisning = defineCollection({
       const namn = new Set(ram.delar.flatMap((del) => del.falt.map((f) => f.rubrik)));
       for (const f of Object.keys(falt)) if (!namn.has(f)) ctx.addIssue({ code: 'custom', path: ['elevblad', ramnamn, f], message: `Fältet "${f}" finns inte i ramen "${ramnamn}".` });
     }
+    // Läskorten (K-063): en lista med två kolumner där den ena har bågtecken är en lästräningstext. Kolumnen utan stöd
+    // ska vara samma text utan bågar, ordfog och bindestreck, ingen båge får ha fler än fyra ord, och en text har fem
+    // till åtta meningar, som i metodriggen. Annars stoppar bygget, så att korten aldrig säger emot varandra.
+    (d.ramar?.ramar ?? []).forEach((ram, ri) => (ram.listor ?? []).forEach((l, li) => {
+      if ((l.kolumner ?? []).length !== 2) return;
+      const k = [0, 1].find((ci) => l.rader.some((r) => (r[ci] ?? '').includes(BAGE)));
+      if (k === undefined) return;
+      const sti = ['ramar', 'ramar', ri, 'listor', li];
+      if (l.rader.length < 5 || l.rader.length > 8) ctx.addIssue({ code: 'custom', path: sti, message: `Lästräningstexten "${l.rubrik ?? ''}" har ${l.rader.length} meningar; den ska ha fem till åtta.` });
+      l.rader.forEach((r, i) => {
+        if (utanStod(r[k] ?? '') !== (r[1 - k] ?? '')) ctx.addIssue({ code: 'custom', path: [...sti, 'rader', i], message: `Meningen utan stöd ska vara "${utanStod(r[k] ?? '')}", men är "${r[1 - k] ?? ''}".` });
+        for (const g of ordgrupper(r[k] ?? '')) if (g.filter((ord) => /\p{L}/u.test(ord)).length > 4) ctx.addIssue({ code: 'custom', path: [...sti, 'rader', i], message: `Bågen "${g.join(' ')}" har fler än fyra ord.` });
+      });
+    }));
     // Korten: varje text ska träffa minst en lista i ramarna, annars ritas inga kort.
     const listrubriker = (d.ramar?.ramar ?? []).flatMap((r) => (r.listor ?? []).map((l) => l.rubrik ?? ''));
     for (const t of d.kort?.listor ?? []) if (!listrubriker.some((r) => r.includes(t))) ctx.addIssue({ code: 'custom', path: ['kort', 'listor'], message: `Ingen lista i ramarna har "${t}" i rubriken.` });

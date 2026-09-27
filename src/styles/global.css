@@ -465,6 +465,20 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-kort { position: relative; border: 1.5px dashed var(--farg-text-svag); border-radius: 4px; padding: 1.5rem 0.9rem 0.9rem; min-height: 7rem; display: flex; align-items: center; justify-content: center; text-align: center; font-family: var(--typsnitt-ui); font-size: 1.15rem; line-height: 1.45; }
 .m-kortlista.korta .m-kort { min-height: 0; aspect-ratio: 1; padding: 1.3rem 0.4rem 0.4rem; font-size: 2rem; line-height: 1.2; }
 .m-kortlista.ett .m-kort { min-height: 5rem; }
+/* Kortet ur en ensam kort lista i en ram (strategikortet, K-062): större text och luft mellan raderna. */
+.m-lista.kort td { font-size: 1.5rem; padding: 0.7rem 0.9rem; }
+/* Läskorten (K-063): två kort med streckad kant, bredvid varandra på skärmen och under varandra i mobilen. Bågen under
+   varje ordgrupp i kortet med stöd är en kurva i blått (#2e6db4, som i Word och riggen), ritad som bakgrund under
+   gruppen; gruppen bryts aldrig, och orden har sina vanliga mellanrum. */
+.m-laskort { margin: 0.75rem 0 1.5rem; }
+.m-laskort-par { display: grid; gap: 0.75rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.m-laskort-kort { border: 1.5px dashed var(--farg-text-svag); border-radius: 6px; padding: 0.9rem 1.1rem 1.1rem; font-family: Arial, 'Liberation Sans', Helvetica, sans-serif; color: #1f2937; }
+.m-laskort-markning { font-family: var(--typsnitt-ui); font-size: 0.72rem; color: var(--farg-text-svag); margin: 0 0 0.3rem; }
+.m-laskort-titel { font-weight: 700; font-size: 1.35rem; margin: 0 0 0.6rem; }
+.m-laskort-mening { font-size: 1.2rem; line-height: 1.6; margin: 0 0 0.35rem; }
+.m-laskort-kort.med-stod .m-laskort-mening { line-height: 2.1; }
+.m-bage { white-space: nowrap; padding-bottom: 0.32em; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath d='M2 2 Q50 38 98 2' fill='none' stroke='%232e6db4' stroke-width='2' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") no-repeat left bottom / 100% 0.42em; }
+@media (max-width: 40rem) { .m-laskort-par { grid-template-columns: minmax(0, 1fr); } }
 .m-kort-markning { position: absolute; top: 0.45rem; left: 0.65rem; font-size: 0.7rem; line-height: 1; color: var(--farg-text-svag); }
 .m-kort-kopior { margin: 0.4rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.85rem; color: var(--farg-text-svag); }
 /* Mallarna som bilder (MallBild.astro): i sidans bredd på skärmen, och på en smal skärm går bilden att svepa i sidled
@@ -610,6 +624,10 @@ html.js .bara-js { display: inline-block; }
 .lh-mattatabell.m-tabell td:empty { height: 9rem; border: 1px solid var(--farg-text); background: #fff; }
 /* Mattans fot är regeln för eleven: större, inte fet (fet stil betyder rubrik). */
 .lh-not.lh-regel { font-size: 1.15rem; }
+/* Strategikortet på lathundens tredje sida (K-061): stor text för eleven, kolumnrubrikerna små och grå, tunna linjer. */
+.lh-korttabell { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.lh-korttabell th { font-family: ui-monospace, 'Cascadia Mono', Consolas, 'Liberation Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--farg-text-svag); font-weight: 500; text-align: left; padding: 0.3rem 0.75rem; border-bottom: 1px solid var(--farg-kant); }
+.lh-korttabell td { font-size: 1.35rem; line-height: 1.3; padding: 0.7rem 0.75rem; border-bottom: 1px solid var(--farg-kant); vertical-align: middle; }
 .lh-mattatabell.m-tabell tbody:has(tr:only-child) td:empty { height: 17rem; }
 .lh-spalter { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.5rem; margin: 0.5rem 0 1rem; }
 .lh-spalt > h3 { margin: 0 0 0.35rem; font-size: 1rem; padding-bottom: 0.3rem; border-bottom: 2px solid var(--farg-text); }
@@ -688,6 +706,9 @@ html.js .bara-js { display: inline-block; }
   .lh-mattatabell.m-tabell tbody:has(tr:only-child) td:empty { height: 112mm; }
   .lh-mattatabell.m-tabell thead th { font-size: 12pt; }
   .lh-not.lh-regel { font-size: 13pt; }
+  /* Kortet fyller den liggande sidan: raderna delar omkring 140 mm, och texten har storleken ur Lathund.astro. */
+  .lh-korttabell td { height: calc(140mm / var(--rader, 7)); font-size: var(--kortstorlek, 20pt); padding: 0 3mm; }
+  .lh-korttabell th { font-size: 8pt; }
   .lh-block { padding: 0.5rem 0.9rem 0.75rem; }
   .lh-spalter { gap: 0.6rem 1.25rem; margin: 0.25rem 0 0.6rem; }
   .lh-spalt > h3 { font-size: 9.5pt; }
@@ -821,6 +842,17 @@ html.js .bara-js { display: inline-block; }
   .m-kort { min-height: 4.5cm; border-radius: 0; font-size: 13pt; break-inside: avoid; }
   .m-kortlista.korta .m-kort { min-height: 4cm; aspect-ratio: auto; font-size: 28pt; }
   .m-kortlista.ett .m-kort { min-height: 3.6cm; }
+  /* Strategikortet i 20 pt (K-062). Läskorten: ett A4 per text med korten under varandra, ett halvt A4 vardera, i
+     18 pt Arial, med streckad kant att klippa längs (K-063), som i Word. */
+  .m-lista.kort td { font-size: 20pt; padding: 3mm 4mm; }
+  .m-laskort { break-before: page; margin: 0; }
+  .m-laskort > .m-lista-rubrik { display: none; }
+  .m-laskort-par { display: block; }
+  .m-laskort-kort { min-height: 106mm; break-inside: avoid; border: 0.75pt dashed #777; border-radius: 0; padding: 6mm 7mm; margin: 0 0 4mm; }
+  .m-laskort-markning { font-size: 7.5pt; }
+  .m-laskort-titel { font-size: 20pt; }
+  .m-laskort-mening { font-size: 18pt; line-height: 1.3; }
+  .m-laskort-kort.med-stod .m-laskort-mening { line-height: 1.8; }
   .m-kort-kopior { display: none; }
   /* Varje pass börjar på en ny sida, som i Word. En ram med kort eller bråk ryms inte på en sida med lärarens
      ruta: där hålls ramen inte ihop, och listan flyttar hel till nästa sida i stället för att delas. Reglerna för

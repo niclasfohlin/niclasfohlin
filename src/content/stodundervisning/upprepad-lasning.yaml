@@ -1,0 +1,791 @@
+# Metod i stödundervisning. Modellen står i src/content.config.ts och mallen i _mall.yaml.
+titel: Upprepad läsning
+undertitel: "Samma text flera gånger med lärarens nära stöd, en till en eller i grupp, för F–⁠3"
+ingress: "I varje pass läser eleven en kort text flera gånger, på olika sätt. Läraren lyssnar och visar strategier för att läsa orden och förstå texten, och eleven sätter ord på dem. Det är en intensiv insats, en till en eller i grupp om högst sex, för elever i F–⁠3 som har knäckt läskoden men inte alltid hör vad de läser."
+omrade: Läsning
+arskurs:
+  - F-3
+taggar:
+  - avkodning
+  - lasflyt
+  - intensivtraning
+format:
+  - enskilt
+  - par
+  - liten grupp
+tid: 10–15 minuter per pass, tre till fem pass i veckan
+period: Sex till åtta veckor
+grupp: En till sex elever
+material:
+  - Veckans lästräningstext eller en annan kort text, en kopia per elev och en till dig
+  - "Två strategikort per elev, ett vid bordet och ett att ta hem"
+  - "Ett läsrör per elev om ni har, ett böjt rör från munnen till örat"
+  - "Lappen hem, första gången eleven tar med sig en text"
+  - Snabbmallen för noteringen efter passet
+uppdaterad: 2026-09-27
+relaterade:
+  - til-i-grupp
+  - laslistor-i-grupp
+utkast: false
+inledning:
+  - "Upprepad läsning betyder att eleverna läser samma text flera gånger, tills orden går lätt och läsningen får flyt. Här arbetar ni utan tidtagning och diagram. I stället följer varje pass samma ordning: eleverna läser, läraren modellerar utifrån det hen har hört, och eleverna läser igen, till exempel i kör och i par. Texten är densamma genom hela passet."
+  - "Syftet är att eleven ska läsa med flyt och förstå det hen läser. Då går orden lätt och läsningen låter som när man pratar, och när det tar stopp använder eleven en strategi på egen hand. Ditt uppdrag består av fyra saker. Eleverna läser samma text flera gånger, och du visar dem strategier i texten de läser. Eleverna sätter ord på strategierna vid bordet, och du följer läsflytet på lästrappan. Lästrappan har fem steg, från att gissa till att läsa med flyt, och målet är att eleven går upp några steg."
+  - "Metoden är en intensiv insats för elever som har knäckt läskoden men inte alltid hör vad de läser, eller tappar förståelsen när de läser. Passen är korta, tre till fem gånger i veckan, och tränar flytet i läsningen. Upprepad läsning kompletterar undervisningen i ljud och bokstäver."
+upplagg:
+  rubrik: Så fungerar insatsen
+  text: "Ett pass är tio till femton minuter och följer alltid samma fyra delar. Ni arbetar med en text per pass, eller med samma text under en hel vecka, tre till fem tillfällen i veckan. Insatsen pågår i sex till åtta veckor, och gruppen har en till sex elever. Välj en text som eleven klarar med visst stöd, gärna ur en bok ni redan läser. Byt text först när läsningen flyter. Metoden har också en färdig lästräningstext för varje vecka. Ni övar dessutom särskilt på en strategi i veckan. Den väljer du efter det du hör. Efter varje pass gör du en kort notering om vilka ord som fastnade och vilken strategi som hjälpte. När texten flyter får den gå hem, om det fungerar för eleven och familjen. Före första passet och efter perioden läser eleven en ny text för dig, och du ser på lästrappan hur långt eleven har kommit."
+gruppen:
+  rubrik: Så väljer du eleverna
+  text: "Upprepad läsning är för elever i F–⁠3 som har knäckt läskoden men har problem med avkodningen. De har lärt sig den alfabetiska principen och kan läsa, men hör inte alltid vad de själva läser, eller så läser de på ett sätt som gör att de tappar förståelsen. De gissar efter första bokstaven, gör pauser mellan ljuden eller ljudar ihop orden men läser ord för ord, och de står på steg 1–⁠3 i lästrappan. Den som ännu inte säkert kopplar ljud till bokstav och binder ihop ljuden behöver den träningen först, till exempel med Läslistor i grupp. Före perioden läser varje elev en kort, ny text för dig, och du hör vilket steg eleven står på. Sätt ihop en grupp på en till sex elever som står på samma steg eller på två steg bredvid varandra, så att samma text passar alla. Står eleverna längre ifrån varandra, får varje elev eller par en egen text. Ordna eleverna från den säkraste läsaren till den minst säkra och dela listan på mitten. Den första i övre halvan läser med den första i nedre halvan, och så vidare. Med sex elever blir paren 1 och 4, 2 och 5 och 3 och 6. I varje par läser den säkrare först."
+principer:
+  rubrik: Fyra saker att hålla fast vid
+  text: "Läs samma text hela passet, för det är omläsningen som ger flytet. Ta inte tid på läsningen. Lyssna efter om eleverna läser rätt, med flyt och med läsmelodi. Lyssna först och visa sedan, så att modelleringen bygger på det eleverna faktiskt gjorde i första läsningen. Låt alla pass gå till på samma sätt. När eleverna vet vad som ska hända kan de lägga kraften på läsningen."
+tabeller:
+  - rubrik: "Lästrappan: från att gissa till att läsa med flyt"
+    plats: efter-inledning
+    kolumner:
+      - Trappsteg
+      - Så läser eleven
+      - "Så hjälper du eleven vidare"
+    rader:
+      - - "1 · Gissar"
+        - Gissar ordet efter första bokstaven eller bilden, och känner igen några ord som ordbilder.
+        - "”Läs hela ordet till slutet, med fingret under ordet.” ”Säg ljuden, inte bokstävernas namn.”"
+      - - "2 · Ljudar med pauser"
+        - Säger ljuden ett i taget med pauser, och hör inte alltid ordet.
+        - "”Säg ljuden utan paus.” ”Låter det som ett ord du känner?”"
+      - - "3 · Ljudar ihop"
+        - Hör ordet när hen binder ihop ljuden, men läser ord för ord och ljudar också kända ord.
+        - "”Dela långa ord i stavelser och orddelar.” ”Stämde det? Läs meningen igen.”"
+      - - "4 · Läser i delar"
+        - Läser långa ord i stavelser och orddelar, känner igen vanliga ord direkt och läser i korta fraser.
+        - "”Läs som när du pratar och stanna vid punkten.” ”Rätta dig själv när det inte stämmer.”"
+      - - "5 · Läser med flyt"
+        - Läser de flesta ord direkt, i fraser med läsmelodi. Rättar sig själv och kan berätta vad texten handlar om.
+        - "Ge eleven svårare texter och mycket läsning, också utanför insatsen."
+    not: "Du hör flytet när eleven läser de flesta ord direkt och i fraser som hör ihop, när rösten går upp och ner och när eleven stannar vid punkten. Utan flyt läser eleven ord för ord, med pauser, omtag och jämn röst."
+  - rubrik: Sätt att läsa igen
+    plats: efter-tidsschema
+    text: "Välj två eller fler sätt efter vad eleverna behöver och veckans fokus, gärna först ett där de läser tillsammans med dig och sedan ett där de läser själva. Fingret under orden gör att eleverna läser och inte bara härmar."
+    kolumner:
+      - Sättet och vad det är
+      - Så går det till
+      - Välj det när
+    rader:
+      - - |-
+          Ekoläsning
+          Eleverna läser efter dig, en bit i taget.
+        - "Du läser en mening med läsmelodi, och eleverna läser den efter dig med fingret under orden. Ta längre bitar när det går, så att eleverna inte kan säga dem ur minnet."
+        - "eleverna står på steg 1–⁠3 och behöver höra hur det låter först"
+      - - |-
+          Körläsning
+          Alla läser samma text högt, samtidigt och med dig.
+        - "Gruppen läser texten, eller de meningar som var svåra, tillsammans i ditt tempo medan du pekar. Börja långsamt, öka tempot när orden sitter och vänta in eleverna vid de svåra orden. Blir det många fel, modellera ordet igen och läs meningen i kör en gång till."
+        - alla ska läsa orden rätt utan att stå ensamma, eller eleverna läser ord för ord
+      - - |-
+          Med dig eller för dig
+          Du och eleven läser tillsammans, eller eleven läser för dig.
+        - Ni läser tillsammans med texten mellan er, i elevens takt, och eleven knackar på bordet när hen vill läsa själv. Eller så läser eleven texten för dig, och du väntar, låter eleven rätta sig själv och ger återkoppling efteråt.
+        - "eleven står på steg 1–⁠2, gissar eller ljudar och behöver höra orden läsas rätt eller få återkoppling på varje ord"
+      - - |-
+          Parläsning
+          Två elever läser samma text för varandra och byter roller.
+        - "En elev läser, den andra följer med i texten, pekar och peppar. Den som pekar ger stöd vid svåra ord: ljuda tillsammans, dela ordet i delar, läs meningen om från början. Efter en genomläsning byter de roller och läser samma text igen. Byt par mellan veckorna."
+        - "eleverna står på steg 3–⁠5 och läser texten nästan själva, eller texten är bekant och kamraten kan rätta"
+      - - |-
+          Varannan mening
+          Paret turas om, en mening var.
+        - "Paret läser varannan mening, som en stafett, och den som lyssnar följer med fingret. Nästa gång börjar den andra i paret."
+        - båda i paret ska läsa och följa med hela tiden
+      - - |-
+          Läsröret
+          Eleven läser med låg röst i ett rör och hör sig själv.
+        - "Alla läser med låg röst i sina läsrör samtidigt. Du knackar på en elevs text när du vill lyssna på just den eleven."
+        - eleven behöver höra sin egen röst och sina fel, och du vill lyssna på en i taget
+      - - |-
+          Med stöd, sedan utan
+          Eleven läser lästräningstexten med stöd och sedan samma text utan.
+        - "Eleven drar fingret längs bågarna och läser orden under samma båge i ett svep. Bindestrecken visar delar som eleven känner igen i långa ord. När texten med stöd går lätt läser eleven samma text utan stöd."
+        - "eleven står på steg 2–⁠4 och läser ord för ord eller fastnar i långa ord"
+      - - |-
+          Lästeater
+          Eleverna läser en text med repliker, var och en sin roll.
+        - "Välj en text med dialog och ge varje elev en roll. Du läser hela texten först, med olika röster. Eleverna övar sin replik med fingret under orden, och sedan läser ni texten tillsammans, var och en sin roll, för någon som lyssnar. Byt roller och läs igen."
+        - "eleverna står på steg 3–⁠5 och texten har dialog och nästan flyter, till exempel sist i veckan"
+      - - |-
+          För en ny lyssnare
+          Eleven läser texten för någon som inte har hört den.
+        - Eleverna byter par på din signal och läser texten för en ny kamrat, två eller tre gånger. Eleven kan också läsa för en yngre elev eller ett gosedjur.
+        - "eleverna står på steg 3–⁠5, texten nästan flyter och de behöver fler läsningar"
+      - - |-
+          Tyst läsning
+          Eleven läser inne i huvudet, utan att säga orden.
+        - "Eleven läser tyst med fingret under orden, sist i passet. Du kan inte höra om eleven läser fel."
+        - "eleven står på steg 4–⁠5, avkodar säkert och texten flyter"
+    not: "Läser ni samma text en hel vecka kan eleverna läsa mer på egen hand för varje pass som går. Börja med eko, gå sedan över till kör och par och sluta med en ny lyssnare eller lästeater. Stafettläsning i hela gruppen, där en läser och de andra väntar, ger lite läsning för var och en och gör många oroliga. Gör stafetten i par."
+  - rubrik: Läsfelen och strategierna
+    plats: efter-steg
+    text: "Här står vanliga läsfel, från gissningar till att eleven inte hör sig själv, och den strategi som hjälper eleven vidare vid varje fel. Strategierna står med samma namn på elevens strategikort, och eleverna säger namnet när de använder strategin. Visa en strategi i taget, den som texten och eleven behöver."
+    kolumner:
+      - Läsfelet
+      - Så låter det
+      - Så lär du ut strategin
+    rader:
+      - - Gissar eller läser ur minnet
+        - ”stora” för ”stranden”, eller orden rätt men fingret på fel ord
+        - "”Läs hela ordet.” Täck bilden, för fingret under ordet och säg: ”Läs hela vägen till slutet.” Läser eleven ur minnet, peka på några ord i en annan ordning och fråga: ”Vilket ord står här?”"
+      - - Gör pauser mellan ljuden och hör inte ordet
+        - ”/t/ /a/ /k/”, sedan ”ka?”
+        - "”Säg ljuden utan paus.” Dra ut s, l, m, r och vokalerna tills nästa ljud tar vid, som i sss-⁠ooo-⁠lll, sol. T, k och p går inte att dra ut. Säg dem kort och gå direkt vidare, som i taaak, tak. Hör eleven ändå inte ordet, backa till de två sista ljuden och bind ihop dem först. A och n blir an, och m och an blir man."
+      - - Ljudar ihop till ett ord som inte finns
+        - ”huuund”
+        - "”Låter det som ett ord?” Fråga vilket ord det låter nästan som, och pröva kort eller lång vokal: hund. Känner eleven inte ordet, säg vad det betyder och låt eleven läsa om meningen."
+      - - Långa ord faller isär
+        - ”sand” och ”slott” med en paus emellan
+        - "”Dela ordet.” Täck resten med fingret och läs en stavelse eller ett ord i taget, sedan hela ordet: ba-⁠nan, sand-⁠slott, last-⁠bil."
+      - - Tappar eller byter ändelsen
+        - ”hund” för ”hundarna”
+        - "”Hitta ordet i ordet.” Ringa in ändelsen och visa grundordet: hund-⁠ar-⁠na, spring-⁠er, sol-⁠en."
+      - - Läser ord för ord och förbi punkten
+        - jämn röst, ingen paus vid punkten
+        - "”Läs som när du pratar.” Läs meningen först med läsmelodi och låt eleven läsa efter. Peka på punkten och låt eleven svepa med fingret under hela frasen. När texten är bekant kan eleven sluta peka."
+      - - Läser vidare fast det blev fel
+        - ”Vi bygger ett sandslott på stanna.”
+        - ”Stämde det?” Vänta tills meningen är slut, fråga om den stämde och låt eleven läsa om den. Beröm när eleven rättar sig själv.
+      - - Hör inte sig själv
+        - läser så tyst att felen går förbi, eller läser i kören utan att höra sin egen röst
+        - Ge eleven ett läsrör att läsa halvhögt i, eller låt eleven spela in sin läsning och lyssna. Då hör eleven sin egen röst och sina egna fel.
+    not: "”Säg ljuden utan paus” och ”Låter det som ett ord?” kan du använda redan i förskoleklass. Orddelarna tar ni upp när eleven binder ihop ljuden säkert, på steg 3 i lästrappan. Säg själv ord som inte låter som de stavas, till exempel ”jag” och ”de”, och låt eleven läsa om meningen."
+  - rubrik: "Återkopplingen: vad du säger"
+    plats: efter-fastnar
+    text: "Ge varje elev konkret återkoppling minst en gång under Läs igen. Säg vad eleven gjorde och vilken strategi som hjälpte, så att eleven kan säga det själv vid bordet. Håll återkopplingen kort, ge den direkt och låt eleven göra jobbet. När eleven fastnar på ett ord följer du stödtrappan."
+    kolumner:
+      - När eleven
+      - Säg till exempel
+    rader:
+      - - läser ett svårt ord med en strategi
+        - ”Du sa ljuden utan paus och hörde ordet.”
+      - - rättar sig själv
+        - ”Du märkte att det inte stämde och läste om. Hur visste du?”
+      - - läser för fort och gissar
+        - "”Läs så bra du kan, inte så fort du kan.”"
+      - - läser ord för ord
+        - ”Lyssna när jag läser meningen. Läs den nu som när du pratar.”
+      - - läser en mening med flyt
+        - ”Den meningen lät som när man pratar.”
+      - - läser texten igen
+        - "”Första gången stannade du vid ordet stranden. Nu läste du det direkt.”"
+      - - är klar med en omgång
+        - ”Vilken strategi hjälpte dig? Vad gör du nästa gång?”
+    not: "Bara ”Bra!” talar inte om för eleven vad hen ska göra nästa gång. Beröm det eleven gjorde och strategin hen använde."
+  - rubrik: Lästräningstexterna vecka för vecka
+    plats: efter-urval
+    text: Läskorten finns under Materialet. Peka på orden ur texten i en annan ordning, så hör du om eleverna läser orden eller minns texten.
+    kolumner:
+      - Text
+      - Veckans fokus
+      - Ord ur texten
+    rader:
+      - - "1 · Ola är ute"
+        - "Korta ord med ljud som går att dra ut, som ros, röd och ler. Ordet ”är” läser eleven som en ordbild. Varje mening har en enda båge."
+        - "solen, ros, röd, rund, ute, ler"
+      - - "2 · Katten Sam"
+        - "Kort vokal före dubbelteckning, som i katt, och ändelserna i katt-⁠en och rop-⁠ar."
+        - "katt, katten, grå, mjuk, stol, äta"
+      - - "3 · Bollen"
+        - "Ändelserna -en och -ar, som i boll-⁠en och spark-⁠ar, och konsonantmötena bl, sp och spr."
+        - "boll, bollen, blå, sparkar, buske, hunden"
+      - - "4 · Fåglarna"
+        - "Ord i plural, som fåg-⁠lar och fåg-⁠lar-⁠na, och konsonantmötena br och sm."
+        - "fåglar, fåglarna, trädet, smyger, molnen, stund"
+      - - "5 · Snögubben"
+        - "Två ord i ett, som snö-⁠gubbe och snö-⁠boll-⁠ar. Läs delarna och sedan hela ordet."
+        - "snögubbe, snöbollar, natten, morot, mössa, varandra"
+      - - "6 · Sandslottet"
+        - "Två ord i ett, som sand-⁠slott, och konsonantmötena str och spr, som i strand-⁠en och spring-⁠er."
+        - "sandslott, stranden, vågorna, närmare, vallgrav, sandhög"
+      - - "7 · Draken"
+        - "Repliker, frågetecken och utropstecken. Läs som personen i texten skulle säga det. Texten passar också som lästeater."
+        - "drake, molnet, himlen, papper, pojke, snöret"
+      - - "8 · Vanten"
+        - "Längre meningar och repliker. Läs hela bågen innan du stannar."
+        - "vante, hallen, skolväskan, skolgården, bänkarna, svansen"
+passrutin:
+  text: "Varje pass går till på samma sätt. Eleverna läser, du visar, eleverna läser igen i minst två omgångar, och sedan avslutar ni. Hur eleverna läser igen väljer du efter vad de behöver. Varför den ordningen? När eleverna läser först hör du vilka ord, ljud och ändelser som fastnar, och i modelleringen visar du just det. Läser ni igen i kör får alla läsa orden rätt flera gånger utan att stå ensamma, och i par får eleverna läsa om många gånger med en kamrat som stöd. Samma text genom hela passet är själva poängen."
+  steg:
+    - text: Eleverna läser texten halvhögt var för sig, och du lyssnar och noterar vanliga läsfel.
+      fas: Första läsningen
+    - text: Du läser texten högt och visar det som var svårt, gärna med veckans strategi.
+      fas: Modellering
+    - text: "Eleverna läser texten igen i minst två omgångar, på de sätt du väljer efter vad de behöver. Du ger varje elev konkret återkoppling."
+      fas: Läs igen
+    - text: "Ni avslutar med frågan: vad lärde vi oss av att läsa samma text flera gånger? Eleverna säger vilken strategi som hjälpte."
+      fas: Avslutning
+  efterPasset: Efter passet gör du en kort notering om vilka ord som fastnade, vilken strategi som hjälpte och om texten flyter och kan gå hem.
+  kallas: delar
+tidsschema:
+  rubrik: Ett pass på 15 minuter
+  text: "Har ni bara tio minuter blir det två minuter var för första läsningen och modelleringen, fem för Läs igen och en för avslutningen. Då hinner du lyssna på varje elev om gruppen har högst fyra elever."
+  rader:
+    - tid: Före passet
+      fas: Förberedelse
+      vad: "Läs texten högt för dig själv och tänk ut vilka ord eleverna kan fastna på. Bestäm hur eleverna ska läsa igen. Kopiera texten till varje elev och till dig, och visa den gärna stor på tavlan. Lägg ett strategikort vid varje plats, och gärna ett läsrör."
+    - tid: 0–3 min
+      fas: Första läsningen
+      vad: "Är texten ny, säg i en mening vad den handlar om. Alla läser halvhögt samtidigt, gärna i läsröret, och du lyssnar på en i taget. Du läser inte med och rättar inte här. Lyssna efter mönster: ord som gissas, ljud som tappas, ändelser som läses fel, långa ord som faller isär. Notera i din kopia det som återkommer hos flera elever, inte varje enskilt fel."
+    - tid: 3–6 min
+      fas: Modellering
+      vad: "Läs texten högt i lugnt tempo och peka så att alla följer med i raden. Stanna vid orden du noterade och visa hur de läses: ljuda utan paus, dela ordet i delar, läs det igen som helhet. Tänk högt om det som gör ordet svårt: konsonantmötet, den långa vokalen, ändelsen. Läs meningen om från början när ordet är löst. Håll modelleringen kort och välj två eller tre saker av det du hörde."
+    - tid: 6–14 min
+      fas: Läs igen
+      vad: "Välj sätten i tabellen Sätt att läsa igen. Låt eleverna gärna först läsa tillsammans med dig, till exempel i kör, och sedan själva, till exempel i par. I minst en omgång lyssnar du på varje elev för sig och ger konkret återkoppling. Är eleverna fler än fyra tar du hälften i varje omgång. Efter varje omgång säger eleverna vilken strategi som hjälpte."
+    - tid: 14–15 min
+      fas: Avslutning
+      vad: "Börja själv och beskriv en eller två iakttagelser du gjort under passet, konkret och kort. Låt sedan eleverna fylla på med vad de märkte och vilken strategi som hjälpte, och be någon berätta vad texten handlar om."
+  efter: Den som är klar före de andra läser texten en gång till, i läsröret eller för en kamrat.
+steg:
+  rubrik: Vad du gör och säger i varje del
+  text: "Strategierna du visar står under Läsfelen och strategierna, med samma namn som på strategikortet."
+  fraserRubrik: Exempelfraser
+  rader:
+    - namn: Första läsningen
+      fraga: Var tar läsningen stopp?
+      gor: "Lyssna på en i taget och notera läsfelen och när eleverna rättar sig själva. Den som är klar läser texten igen."
+      fraser:
+        - Texten handlar om barn som leker vid havet.
+        - Läs texten halvhögt för dig själv.
+        - Nu lyssnar jag på dig en stund.
+    - namn: Modellering
+      fraga: Hur läser man det svåra ordet?
+      gor: "Visa veckans strategi på två eller tre ord som var svåra, och läs meningen om från början. Förklara ett ord som eleverna inte känner."
+      fraser:
+        - "Lyssna när jag säger ljuden utan paus: sss-⁠t-⁠rrr-⁠aaa-⁠nnn-⁠d. Strand. Stranden."
+        - "Jag delar ordet: sand och slott. Sandslott."
+        - Nu läser jag hela meningen igen, som när jag pratar.
+    - namn: Läs igen
+      fraga: Stämde det?
+      gor: "Välj hur eleverna läser igen efter vad de behöver, och lyssna på varje elev för sig minst en gång. Vänta tre sekunder innan du hjälper, och säg vad eleven gjorde och vilken strategi som hjälpte."
+      fraser:
+        - Stämde det? Läs meningen igen.
+        - Du sa ljuden utan paus och hörde ordet.
+        - Vilken strategi på kortet hjälpte dig?
+        - Läs så att du vet vad som händer i texten.
+    - namn: Avslutning
+      fraga: Vad lärde vi oss av att läsa samma text flera gånger?
+      gor: Börja själv med en eller två iakttagelser, och låt eleverna fylla på och säga vilken strategi som hjälpte. Avslutningen tar en minut och hjälper eleverna att förstå varför de läser samma text flera gånger.
+      fraser:
+        - Första gången ljudade ni strand. Sista gången läste ni ordet direkt.
+        - "Nu stannar ni vid punkten och läsningen låter som när man pratar."
+        - När orden gick lätt kunde ni berätta vad texten handlade om.
+arbetsform:
+  rubrik: "Arbetsform: enskilt, läraren visar, växlande, gemensamt"
+  text: "Först läser eleverna var för sig medan du lyssnar. Sedan visar du, och eleverna läser igen i minst två omgångar, tillsammans, i par eller själva. Sist samlas hela gruppen. Har du bara en elev arbetar ni en till en, och du är elevens par. Eleven läser för dig, du visar, och sedan läser ni igen tillsammans. Blir det en elev över läser tre tillsammans och turas om att läsa och peka. Har varje elev eller par en egen text sitter du hos en elev eller ett par i taget, med texten mellan er. Eleven läser, du visar, och sedan läser eleven igen med större flyt. De andra läser om sin text under tiden. Första passet berättar du för eleverna varför ni läser samma text flera gånger. Visa också parläsningen tillsammans med en elev framför gruppen. Den som pekar håller fingret under ordet, väntar tre sekunder och pekar på strategikortet innan hen säger ordet."
+  delar:
+    - rubrik: 1. Enskilt
+      text: var och en läser, läraren lyssnar
+      faser:
+        - Första läsningen
+    - rubrik: 2. Läraren visar
+      text: eleverna lyssnar och följer med
+      faser:
+        - Modellering
+    - rubrik: 3. Växlande
+      text: i kör, i par eller själv
+      faser:
+        - Läs igen
+    - rubrik: 4. Gemensamt
+      text: läraren börjar, eleverna fyller på
+      faser:
+        - Avslutning
+exempel:
+  valt:
+    rubrik: Gruppen
+    text: "fyra elever i åk 2. De står på steg 2 och 3 i lästrappan. Texten är lästräningstext 6, Sandslottet, och det är andra passet med den. Veckans strategi är ”Säg ljuden utan paus”. Gruppen läser igen i två omgångar, först i kör med stöd och sedan i par utan stöd."
+  text:
+    - "Texten lyder: ”Vi bygger ett sandslott på stranden. Vi gräver en vallgrav runt slottet. Jag springer efter hinken och fyller den med vatten. Vågorna kommer närmare och närmare. Då kommer en stor våg. Nu är sandslottet en liten sandhög.” Alla läser texten utan stöd, halvhögt och samtidigt i sina läsrör, och läraren lyssnar på en i taget. Elias säger ljuden med pauser, ”/s/ /t/ /r/ /a/ /n/ /d/”, och stannar. Samir läser ”vågor” för ”vågorna”. Wilma läser ordet sandslott i två delar, med en paus emellan. Läraren antecknar men rättar inte."
+    - "Läraren läser högt ur texten med stöd och pekar. Vid ordet stranden stannar läraren: ”Lyssna när jag säger ljuden utan paus: sss-⁠t-⁠rrr-⁠aaa-⁠nnn-⁠d. Strand. Stranden.” Vid ordet vågorna pekar läraren på bindestrecken: ”Här finns ordet våg. Våg-⁠or-⁠na.” Sedan läser läraren meningen om från början och följer bågarna."
+    - "Första omgången körläser gruppen texten med stöd, i lärarens tempo, och väntar in varandra vid ordet närmare. Den meningen läser de en gång till, lite fortare."
+    - "Andra omgången läser de samma text utan stöd, i par. Nora läser och Elias pekar, Wilma läser och Samir pekar. Sedan byter de. Samir läser ”vågor”, stannar och läser om: ”vågorna”. ”Du märkte att det inte stämde och läste om”, säger läraren. Samir fastnar på ordet springer, och Wilma pekar på strategikortet: ”Hitta ordet i ordet.” Samir läser först ”spring” och sedan ”springer”. När Elias tvekar på ordet närmare väntar läraren tre sekunder, och Elias säger ljuden utan paus och läser ordet själv. Till Nora säger läraren: ”Den meningen lät som när man pratar.” Till Wilma: ”Du läste sandslott i ett svep.”"
+    - "I avslutningen frågar läraren vad de lärde sig av att läsa samma text flera gånger och börjar själv: ”Elias, första gången ljudade du ordet stranden med pauser. Nu läste du det direkt.” Elias säger: ”Jag sa ljuden utan paus.” Wilma säger: ”Jag stannade vid punkten.” Nora säger att vågorna förstör sandslottet. Efteråt noterar läraren: Elias hör ordet när ljuden kommer utan paus, och Samir läste ordet springer med hjälp av strategikortet. Texten flyter för Nora och Wilma, som får ta hem den. Gruppen läser den ett pass till, eftersom den ännu inte flyter för Elias och Samir."
+fastnar:
+  rubrik: När eleven fastnar på ett ord
+  text: "Ge minsta möjliga stöd först. Har eleven läst fel, vänta tills meningen är slut och fråga: ”Stämde det?” I tabellen Läsfelen och strategierna ser du vilken strategi som hjälper vid varje läsfel."
+  fragaForst:
+    - Vad kan du göra?
+  trappaText: "En stödtrappa att gå uppför i stunden. Ge inte nästa steg förrän eleven har prövat det föregående:"
+  trappa:
+    - Vänta tre sekunder, så att eleven hinner försöka själv.
+    - Be eleven läsa om meningen från början.
+    - Peka på strategikortet och fråga vilken strategi som kan hjälpa.
+    - Visa strategin på ordet och låt eleven göra efter.
+    - Säg ordet, låt eleven säga det och läsa om meningen.
+  motto: "Till sist läser eleven ordet och meningen själv."
+roll:
+  rubrik: "Lärarens roll: lyssna, vänta och visa"
+  text: "Du sitter nära eleven med texten mellan er och lutar dig fram mot texten. Eleven läser själv och följer med fingret under orden. Det är eleven som hittar ordet, med den strategi du har visat."
+  gor:
+    - Lyssna först, och välj två eller tre ord att visa.
+    - Vänta tre sekunder innan du hjälper.
+    - Ge varje elev konkret återkoppling under Läs igen.
+    - "Beröm strategin eleven använder, och beröm när eleven rättar sig själv."
+  undvik:
+    - Att läsa med eller rätta i första läsningen.
+    - Att säga ordet direkt när eleven tvekar.
+    - Att be eleven gissa utifrån bilden.
+    - Att byta text innan läsningen flyter.
+urval:
+  rubrik: Var hittar du texterna?
+  text:
+    - "Under Materialet finns en lästräningstext för varje vecka, en kort berättelse i två versioner. I texten med stöd delar bindestreck upp långa ord i delar som eleven känner igen, som våg-⁠or-⁠na och sand-⁠slott. En båge under orden visar vilka ord eleven läser i ett svep. Eleverna tränar först på texten med stöd och läser sedan samma text utan stöd. Texterna blir svårare vecka för vecka, från korta ljudenliga ord till repliker. I tabellen Lästräningstexterna vecka för vecka står veckans fokus och några ord ur varje text."
+    - "Vid lästräningstexterna under Materialet står hur du gör ett eget läskort och var bågarna och bindestrecken ska sitta."
+    - "Fler texter hittar du på samma sätt som i TIL i grupp. Välj lättlästa böcker på rätt nivå, gärna en bok ni redan läser. Nivåindelade serier som Kiwi, Stjärnsvenska och Beta Pedagog finns på många skolor för F–⁠3, och skolbiblioteket hjälper dig att hitta lättläst material. På steg 1 och 2 i lästrappan räcker fem till åtta korta meningar med ljudenliga ord, som i Hegas Lästrädet eller Bågens miniböcker. Byt text när den flyter för de flesta i gruppen och eleverna kan läsa orden också i en annan ordning."
+  kravText: "Välj en text som uppfyller tre krav:"
+  krav:
+    - rubrik: Rätt nivå
+      text: Varje elev läser minst nio ord av tio rätt första gången
+    - rubrik: Kort
+      text: "Fem till åtta korta meningar, på steg 3 högst en halv sida"
+    - rubrik: Ord att öva på
+      text: Ljudenliga ord först, sedan ord med ändelser eller två ord i ett
+hem:
+  rubrik: Hem och skola
+  text:
+    - "Läxan är frivillig. Den finns för att eleven ska läsa hemma också. När texten flyter i skolan får eleven ta hem en kopia och läsa den högt två eller tre gånger för någon hemma, med strategikortet. Första gången skickar du med lappen till vårdnadshavaren. Den finns under Materialet."
+    - "Blir läxan ett bekymmer, till exempel för att ingen hemma kan lyssna, hoppar ni över den. Eleven får ändå läsa texten flera gånger med dig i skolan."
+uppfoljning:
+  text: "Före första passet och efter perioden läser eleven en ny text på samma nivå som i insatsen, en text ni inte har övat på. Använd protokollet Lästrappan före och efter, som finns under Materialet. Under perioden följer du eleven i första läsningen. Trappsteget stannar mellan dig och eleven. Visa det inte inför gruppen."
+  rader:
+    - nar: Före insatsen
+      vad: Eleven läser en kort, ny text för dig. Fyll i protokollet Lästrappan före och efter.
+    - nar: Varje vecka
+      vad: "Skriv trappsteget i snabbmallen när eleven läser en ny text första gången. Står eleven kvar på samma steg i två veckor, byt veckans strategi eller ta en lättare text."
+    - nar: Efter sex till åtta veckor
+      vad: "Eleven läser en ny text som är lika lång och på samma nivå. Fyll i protokollet igen och jämför med starten. Berätta för eleven vad du har hört."
+mal:
+  text: "Efter perioden ska eleven ha gått upp några steg på lästrappan och oftare än förut:"
+  punkter:
+    - Säga ljuden utan paus och höra ordet
+    - Dela långa ord i stavelser och orddelar
+    - Märka när det inte stämmer och rätta sig själv
+    - Läsa en text som när man pratar och berätta vad den handlar om
+snabbmall:
+  fore:
+    - Dagens text och veckans strategi
+    - Ord som eleverna kan fastna på
+    - "Hur ni läser igen, och paren"
+  efter:
+    - Ord som fastnade, och strategin som hjälpte
+    - Flyter texten? Går den hem?
+    - Trappsteget för dem du lyssnade på
+checklista:
+  punkter:
+    - Valt texten och läst den högt själv.
+    - Kopierat texten till varje elev och till mig.
+    - Lagt ett strategikort vid varje plats, och gärna ett läsrör.
+    - "Bestämt hur eleverna ska läsa igen, och vilka som blir par."
+    - Lagt fram snabbmallen för noteringen efteråt.
+    - "Kopierat lappen hem, om eleven ska ta med sig texten."
+grund:
+  text: "Att läsa samma text flera gånger med en vuxen som lyssnar och ger återkoppling stärker ordläsningen och flytet (National Reading Panel, 2000; Therrien och Kubina, 2006). Två till fyra läsningar per pass räcker, gärna från eko och kör till par, och effekten blir störst när eleven får lyssna på texten innan hen läser den igen (Therrien, Gormley och Kubina, 2006; Kuhn, 2020; Lee och Yoon, 2017). Den amerikanska lärarguiden från IES rekommenderar att läraren väntar, ber eleven läsa om meningen och ger en strategi, och säger ordet först när det inte går att ljuda (Foorman m.fl., 2016). Att säga ljuden utan paus hjälper nybörjare att läsa nya ord (Gonzalez-Frey och Ehri, 2021), och undervisning om orddelar stärker avkodningen (Goodwin och Ahn, 2013). Upprepad läsning kompletterar strukturerad undervisning om ljud och bokstäver, och den undervisningen har starkast stöd vid dyslexi (SBU, 2014)."
+  kallor: Bygger på National Reading Panel (2000), Therrien och Kubina (2006), Therrien, Gormley och Kubina (2006), Kuhn (2020), Lee och Yoon (2017), Foorman m.fl. (2016), Gonzalez-Frey och Ehri (2021), Goodwin och Ahn (2013) och SBU (2014).
+ramar:
+  rubrik: Materialet
+  text:
+    - "Här finns strategikortet, en lästräningstext för varje vecka, lappen hem och protokollet för lästrappan. Allt går att kopiera. Varje lästräningstext är en sida med två läskort, ett med stöd och ett med samma text utan stöd."
+  ramar:
+    - rubrik: Strategikortet
+      text:
+        - Varje elev har ett kort vid bordet och ett att ta med hem. Skriv ut kortet från lathundens tredje sida, och laminera gärna det som ligger i skolan.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så använder ni kortet
+              text: "Visa en strategi i taget när du modellerar, och peka ut den på kortet. Elever på steg 1–⁠2 i lästrappan kan inte läsa kortet själva i början, så läs raden tillsammans med eleven och peka. Den som stöttar pekar på kortet innan någon säger ordet, och eleven säger vilken strategi som hjälpte."
+      huvud:
+        - rubrik: Namn
+      listor:
+        - rubrik: Mina lässtrategier
+          rader:
+            - - Läs hela ordet
+              - Peka under ordet.
+            - - Säg ljuden utan paus
+              - sss-⁠ooo-⁠lll → sol
+            - - Låter det som ett ord?
+              - huuund? → hund
+            - - Dela ordet
+              - ba-⁠nan och last-⁠bil
+            - - Hitta ordet i ordet
+              - hund-⁠ar-⁠na och sol-⁠en
+            - - Stämde det?
+              - Läs meningen igen.
+            - - Läs som när du pratar
+              - Stanna vid punkten.
+    - rubrik: Lästräningstexterna
+      text:
+        - "Det finns en sida för varje vecka, med två läskort som du klipper isär längs den streckade linjen. Eleven läser först texten med stöd och sedan samma text utan stöd."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så använder ni korten
+              text: "Skriv ut veckans två kort till varje elev och laminera dem gärna. Eleven läser först texten med stöd och drar fingret längs bågarna. När det går lätt läser eleven samma text utan stöd. Veckans fokus och orden ur texten står i tabellen Lästräningstexterna vecka för vecka."
+            - rubrik: Så gör du ett eget kort
+              text: "Skriv fem till åtta korta meningar om något eleverna tycker om, med ord som de kan läsa. Skriv sedan samma text en gång till och lägg in bågar och bindestreck."
+            - rubrik: Bågarna
+              text: "En båge går under de ord som eleven läser i ett svep. Den börjar vid första bokstaven i det första ordet och slutar vid sista bokstaven i det sista. En båge har högst fyra ord, så en kort mening får en enda båge. En längre mening delar du där man pausar när man läser högt. Oftast är det efter ett komma, före och eller före ord som säger var, när eller hur, men det kan också vara mellan den som gör något och det hen gör. Har en del fortfarande mer än fyra ord delar du den igen. I ”Sam sover på en stol” går en båge under ”Sam sover” och en under ”på en stol”. Ett verb står ihop med sitt lilla ord, som i ”ropar på” och ”tittar upp”, och små ord följer med ordet de hör till, som i ”en ros” och ”på stranden”. Skiljetecken står utanför bågen."
+            - rubrik: Bindestrecken
+              text: "Dela ett sammansatt ord mellan orden, som sand-⁠slott och bak-⁠om. Dela substantiv och verb före ändelsen, som katt-⁠en, hund-⁠ar-⁠na och rop-⁠ar, men inte adjektiv, som bruna och hela. Är delen före ändelsen svår att säga delar du mellan stavelserna i stället, som vak-⁠nar och fåg-⁠lar. Andra ord med tre stavelser eller fler delar du mellan stavelserna, som när-⁠ma-⁠re. Namn och ord med en stavelse delar du inte, som Lisa, ser och snön."
+      listor:
+        - rubrik: "1 · Ola är ute"
+          kolumner:
+            - Med stöd
+            - Utan stöd
+          rader:
+            - - "Ola ‿ är ‿ ute."
+              - "Ola är ute."
+            - - "Ola ‿ ser ‿ sol-⁠en."
+              - "Ola ser solen."
+            - - "Sol-⁠en ‿ är ‿ rund."
+              - "Solen är rund."
+            - - "Ola ‿ ser ‿ en ‿ ros."
+              - "Ola ser en ros."
+            - - "Ros-⁠en ‿ är ‿ röd."
+              - "Rosen är röd."
+            - - "Ola ‿ ler ‿ mot ‿ sol-⁠en."
+              - "Ola ler mot solen."
+        - rubrik: "2 · Katten Sam"
+          kolumner:
+            - Med stöd
+            - Utan stöd
+          rader:
+            - - "Lisa ‿ har ‿ en ‿ katt."
+              - "Lisa har en katt."
+            - - "Katt-⁠en ‿ het-⁠er ‿ Sam."
+              - "Katten heter Sam."
+            - - "Sam ‿ är ‿ grå och ‿ mjuk."
+              - "Sam är grå och mjuk."
+            - - "Sam ‿ sov-⁠er på ‿ en ‿ stol."
+              - "Sam sover på en stol."
+            - - "Lisa ‿ rop-⁠ar ‿ på ‿ Sam."
+              - "Lisa ropar på Sam."
+            - - "Sam ‿ vak-⁠nar och ‿ går ‿ till ‿ Lisa."
+              - "Sam vaknar och går till Lisa."
+            - - "Nu ‿ vill ‿ Sam ‿ äta."
+              - "Nu vill Sam äta."
+        - rubrik: "3 · Bollen"
+          kolumner:
+            - Med stöd
+            - Utan stöd
+          rader:
+            - - "Max ‿ har ‿ en ‿ boll."
+              - "Max har en boll."
+            - - "Boll-⁠en ‿ är ‿ blå."
+              - "Bollen är blå."
+            - - "Max ‿ spark-⁠ar ‿ till ‿ boll-⁠en."
+              - "Max sparkar till bollen."
+            - - "Boll-⁠en ‿ rull-⁠ar ‿ in i ‿ en ‿ buske."
+              - "Bollen rullar in i en buske."
+            - - "En ‿ hund ‿ hitt-⁠ar ‿ boll-⁠en."
+              - "En hund hittar bollen."
+            - - "Hund-⁠en ‿ spring-⁠er ‿ till ‿ Max med ‿ boll-⁠en."
+              - "Hunden springer till Max med bollen."
+            - - "Nu ‿ är ‿ boll-⁠en ‿ blöt!"
+              - "Nu är bollen blöt!"
+        - rubrik: "4 · Fåglarna"
+          kolumner:
+            - Med stöd
+            - Utan stöd
+          rader:
+            - - "Tre ‿ fåg-⁠lar ‿ sitt-⁠er i ‿ ett ‿ träd."
+              - "Tre fåglar sitter i ett träd."
+            - - "Fåg-⁠lar-⁠na ‿ är ‿ små och ‿ bruna."
+              - "Fåglarna är små och bruna."
+            - - "En ‿ katt ‿ smyg-⁠er ‿ fram under ‿ träd-⁠et."
+              - "En katt smyger fram under trädet."
+            - - "Fåg-⁠lar-⁠na ‿ ser ‿ katt-⁠en."
+              - "Fåglarna ser katten."
+            - - "De ‿ flyg-⁠er ‿ upp mot ‿ moln-⁠en."
+              - "De flyger upp mot molnen."
+            - - "Katt-⁠en ‿ titt-⁠ar ‿ efter ‿ dem en ‿ lång ‿ stund."
+              - "Katten tittar efter dem en lång stund."
+            - - "Sedan ‿ går ‿ katt-⁠en hem ‿ igen."
+              - "Sedan går katten hem igen."
+        - rubrik: "5 · Snögubben"
+          kolumner:
+            - Med stöd
+            - Utan stöd
+          rader:
+            - - "Det ‿ har ‿ snö-⁠at hela ‿ natt-⁠en."
+              - "Det har snöat hela natten."
+            - - "Emil ‿ och ‿ Nora bygg-⁠er ‿ en ‿ snö-⁠gubbe."
+              - "Emil och Nora bygger en snögubbe."
+            - - "Snö-⁠gubb-⁠en ‿ får ‿ en ‿ morot som ‿ näsa."
+              - "Snögubben får en morot som näsa."
+            - - "Nora ‿ sätt-⁠er ‿ sin ‿ mössa på ‿ snö-⁠gubb-⁠en."
+              - "Nora sätter sin mössa på snögubben."
+            - - "Sedan ‿ kast-⁠ar ‿ de ‿ snö-⁠boll-⁠ar på ‿ var-⁠andra."
+              - "Sedan kastar de snöbollar på varandra."
+            - - "Emil ‿ skratt-⁠ar så ‿ att ‿ han ‿ ram-⁠lar i ‿ snön."
+              - "Emil skrattar så att han ramlar i snön."
+        - rubrik: "6 · Sandslottet"
+          kolumner:
+            - Med stöd
+            - Utan stöd
+          rader:
+            - - "Vi ‿ bygg-⁠er ‿ ett ‿ sand-⁠slott på ‿ strand-⁠en."
+              - "Vi bygger ett sandslott på stranden."
+            - - "Vi ‿ gräv-⁠er ‿ en ‿ vall-⁠grav runt ‿ slott-⁠et."
+              - "Vi gräver en vallgrav runt slottet."
+            - - "Jag ‿ spring-⁠er ‿ efter ‿ hink-⁠en och ‿ fyll-⁠er ‿ den med ‿ vatten."
+              - "Jag springer efter hinken och fyller den med vatten."
+            - - "Våg-⁠or-⁠na ‿ komm-⁠er när-⁠ma-⁠re ‿ och ‿ när-⁠ma-⁠re."
+              - "Vågorna kommer närmare och närmare."
+            - - "Då ‿ komm-⁠er en ‿ stor ‿ våg."
+              - "Då kommer en stor våg."
+            - - "Nu ‿ är ‿ sand-⁠slott-⁠et en ‿ liten ‿ sand-⁠hög."
+              - "Nu är sandslottet en liten sandhög."
+        - rubrik: "7 · Draken"
+          kolumner:
+            - Med stöd
+            - Utan stöd
+          rader:
+            - - "”Titta, en ‿ drake!” rop-⁠ar ‿ Liv."
+              - "”Titta, en drake!” ropar Liv."
+            - - "”Var ‿ då?” fråg-⁠ar ‿ Adam."
+              - "”Var då?” frågar Adam."
+            - - "”Där ‿ uppe, bak-⁠om ‿ moln-⁠et”, säg-⁠er ‿ Liv."
+              - "”Där uppe, bakom molnet”, säger Liv."
+            - - "Adam ‿ titt-⁠ar ‿ upp mot ‿ him-⁠len."
+              - "Adam tittar upp mot himlen."
+            - - "Där ‿ flyg-⁠er en ‿ röd ‿ drake med ‿ lång ‿ svans."
+              - "Där flyger en röd drake med lång svans."
+            - - "”Den ‿ är ‿ ju av ‿ papper!” skratt-⁠ar ‿ Adam."
+              - "”Den är ju av papper!” skrattar Adam."
+            - - "En ‿ pojke håll-⁠er ‿ i ‿ snör-⁠et."
+              - "En pojke håller i snöret."
+        - rubrik: "8 · Vanten"
+          kolumner:
+            - Med stöd
+            - Utan stöd
+          rader:
+            - - "Elsas ‿ vante ‿ är ‿ borta."
+              - "Elsas vante är borta."
+            - - "Hon ‿ let-⁠ar ‿ i ‿ hall-⁠en och ‿ i ‿ skol-⁠väsk-⁠an."
+              - "Hon letar i hallen och i skolväskan."
+            - - "Vant-⁠en ‿ är ‿ inte ‿ där."
+              - "Vanten är inte där."
+            - - "”Den ‿ kan-⁠ske ‿ ligg-⁠er på ‿ skol-⁠gård-⁠en”, säg-⁠er ‿ pappa."
+              - "”Den kanske ligger på skolgården”, säger pappa."
+            - - "De ‿ går ‿ till ‿ skol-⁠an och ‿ let-⁠ar ‿ under ‿ bänk-⁠ar-⁠na."
+              - "De går till skolan och letar under bänkarna."
+            - - "Där ‿ sitt-⁠er ‿ en ‿ hund och ‿ tugg-⁠ar ‿ på ‿ något."
+              - "Där sitter en hund och tuggar på något."
+            - - "”Min ‿ vante!” rop-⁠ar ‿ Elsa."
+              - "”Min vante!” ropar Elsa."
+            - - "Hund-⁠en ‿ vift-⁠ar ‿ på ‿ svans-⁠en och ‿ släpp-⁠er ‿ vant-⁠en."
+              - "Hunden viftar på svansen och släpper vanten."
+    - rubrik: Lappen hem
+      text:
+        - "Skicka med lappen, texten och strategikortet första gången eleven tar med sig en text hem. Läxan är frivillig."
+      huvud:
+        - rubrik: Barnets namn
+        - rubrik: Texten
+      delar:
+        - rubrik: Till vårdnadshavaren
+          falt:
+            - rubrik: Varför
+              text: "Ditt barn övar på att läsa samma text flera gånger, tills orden går lätt och läsningen flyter. Barnet har redan läst texten flera gånger i skolan och får nu visa dig hur bra det går."
+            - rubrik: Så gör ni
+              text: Barnet läser texten högt för dig två eller tre gånger, gärna olika dagar. Sitt bredvid och följ med i texten. Prata gärna om vad texten handlar om.
+            - rubrik: Om barnet fastnar
+              text: "Vänta några sekunder. Peka på en strategi på strategikortet, till exempel ”Säg ljuden utan paus” eller ”Dela ordet”. Kommer ordet inte, säg det och låt barnet läsa om meningen. Säg vad barnet gjorde bra, till exempel: ”Du läste hela meningen själv.”"
+            - rubrik: Om det inte passar
+              text: Läxan är frivillig. Blir den ett bekymmer, hoppa över den och skriv gärna en rad till läraren.
+    - rubrik: Lästrappan före och efter
+      text:
+        - Det här är lärarens protokoll. Kopiera ett per elev och använd det före första passet och efter sex till åtta veckor.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så gör du
+              text: "Eleven läser en kort text på samma nivå som i insatsen, en text ni inte har övat på. Efter perioden tar du en ny text som är lika lång och på samma nivå. Kryssa det steg som stämmer bäst med hur eleven läser de flesta orden. Skriv hur många ord texten har, hur många fel eleven gör och hur ofta eleven rättar sig själv. Kryssa sedan strategierna eleven använder, och fråga vad texten handlade om."
+      huvud:
+        - rubrik: Elevens namn
+        - rubrik: Texten och datum före
+        - rubrik: Texten och datum efter
+      listor:
+        - rubrik: Lästrappan före och efter
+          kolumner:
+            - "Det du noterar"
+            - Före
+            - Efter
+          rader:
+            - - "1 · Gissar"
+              - ""
+              - ""
+            - - "2 · Ljudar med pauser"
+              - ""
+              - ""
+            - - "3 · Ljudar ihop"
+              - ""
+              - ""
+            - - "4 · Läser i delar"
+              - ""
+              - ""
+            - - "5 · Läser med flyt"
+              - ""
+              - ""
+            - - Antal ord i texten
+              - ""
+              - ""
+            - - Antal fel
+              - ""
+              - ""
+            - - Antal gånger eleven rättar sig själv
+              - ""
+              - ""
+            - - Berättar vad texten handlar om
+              - ""
+              - ""
+        - rubrik: Strategierna eleven använder
+          kolumner:
+            - Strategin
+            - Före
+            - Efter
+          rader:
+            - - Läs hela ordet
+              - ""
+              - ""
+            - - Säg ljuden utan paus
+              - ""
+              - ""
+            - - Låter det som ett ord?
+              - ""
+              - ""
+            - - Dela ordet
+              - ""
+              - ""
+            - - Hitta ordet i ordet
+              - ""
+              - ""
+            - - Stämde det?
+              - ""
+              - ""
+            - - Läs som när du pratar
+              - ""
+              - ""
+lathund:
+  innehall: En kort text, samma hela passet
+  metoden:
+    text:
+      - "Syftet är att eleven ska läsa med flyt och förstå det hen läser. Ditt uppdrag består av fyra saker. Eleverna läser samma text flera gånger, och du visar strategier i texten. Eleverna sätter ord på strategierna vid bordet, och du följer läsflytet på lästrappan."
+      - "Insatsen är för elever som har knäckt läskoden men inte alltid hör vad de läser, eller tappar förståelsen när de läser. De står på steg 1–⁠3 i lästrappan, och målet är att de går upp några steg. Före och efter perioden läser eleven en ny text, och du fyller i protokollet Lästrappan före och efter."
+    ruta:
+      rubrik: "När eleven fastnar: stödtrappan"
+      inledning: "Fråga alltid först: Vad kan du göra?"
+      punkter:
+        - text: "1 · Vänta tre sekunder. 2 · Be eleven läsa om meningen."
+        - text: "3 · Peka på strategikortet. 4 · Visa strategin på ordet."
+        - text: 5 · Säg ordet, och eleven läser om meningen.
+      efter: "Läst fel? Vänta till punkten och fråga: Stämde det?"
+    tabell:
+      rubrik: Passet i fyra delar · vad du gör och säger
+      kolumner:
+        - Del
+        - Exempelfraser
+      rader:
+        - - |-
+            1 · Första läsningen
+            0–⁠3 min. Du lyssnar.
+          - ”Läs texten halvhögt för dig själv.”
+        - - |-
+            2 · Modellering
+            3–⁠6 min. Du visar.
+          - "”Lyssna när jag säger ljuden utan paus: sss-⁠t-⁠rrr-⁠aaa-⁠nnn-⁠d. Strand. Stranden.”"
+        - - |-
+            3 · Läs igen
+            6–⁠14 min. Minst två omgångar.
+          - |-
+            ”Stämde det? Läs meningen igen.”
+            ”Du sa ljuden utan paus och hörde ordet.”
+        - - |-
+            4 · Avslutning
+            14–⁠15 min. Gemensamt.
+          - |-
+            ”Första gången ljudade ni strand. Sista gången läste ni ordet direkt.”
+    not: "Eleverna läser igen i minst två omgångar, till exempel med ekoläsning, i kör, med dig, i par, med stöd och sedan utan, i läsröret eller för en ny lyssnare. Lyssna på varje elev för sig minst en gång. Har ni tio minuter får delarna 2, 2, 5 och 1 minut."
+  pass:
+    rubrik: "Vi kör ett pass: texten ”Sandslottet”"
+    textRubrik: Gruppen · fyra elever i åk 2, andra passet med texten
+    text:
+      - "Texten är lästräningstext 6, Sandslottet. Alla läser texten utan stöd. Elias ljudar med pauser, ”/s/ /t/ /r/ /a/ /n/ /d/”, och Samir läser ”vågor”."
+      - "Läraren läser högt ur texten med stöd och visar: ”Lyssna när jag säger ljuden utan paus: sss-⁠t-⁠rrr-⁠aaa-⁠nnn-⁠d. Strand. Stranden.” Sedan pekar läraren på bindestrecken i våg-⁠or-⁠na."
+      - "Gruppen körläser texten med stöd och läser den sedan i par utan stöd. Samir läser ”vågor”, stannar och läser om. Läraren: ”Du märkte att det inte stämde och läste om.”"
+      - "I avslutningen börjar läraren: ”Elias, första gången ljudade du ordet stranden med pauser. Nu läste du det direkt.” Elias: ”Jag sa ljuden utan paus.” Texten flyter för Nora och Wilma, som får ta hem den."
+    forberett:
+      rubrik: Det jag förberett
+      text:
+        - "Läst texten högt själv och tänkt ut vilka ord eleverna kan fastna på: stranden, vågorna och springer. Valt kör med stöd och par utan stöd. Kopierat texten till varje elev och till mig, och lagt ett strategikort och ett läsrör vid varje plats. Paren: Nora och Elias, Wilma och Samir."
+    klarTidigt: Läs texten en gång till, i läsröret eller för en kamrat.
+    schema:
+      rubrik: 15 minuter, del för del
+      rader:
+        - tid: Före
+          fas: Förberedelse
+          vad: "Läs texten högt själv, bestäm hur ni läser igen och lägg fram strategikorten."
+        - tid: 0–3
+          fas: 1 · Första läsningen
+          vad: Alla läser halvhögt. Du lyssnar på en i taget och noterar.
+        - tid: 3–6
+          fas: 2 · Modellering
+          vad: Visa två eller tre svåra ord, med veckans strategi.
+        - tid: 6–14
+          fas: 3 · Läs igen
+          vad: "Minst två omgångar. Du lyssnar på varje elev och ger konkret återkoppling."
+        - tid: 14–15
+          fas: 4 · Avslutning
+          vad: Vilken strategi hjälpte? Vad handlar texten om?
+  mall:
+    rubrik: Mitt strategikort
+    underrad: "Peka på kortet när du fastnar · Namn: ______________"
+    block:
+      - typ: tabell
+        rubrik: Mina lässtrategier
+        kolumner:
+          - Strategi
+          - Så här
+        rader:
+          - - Läs hela ordet
+            - Peka under ordet.
+          - - Säg ljuden utan paus
+            - sss-⁠ooo-⁠lll → sol
+          - - Låter det som ett ord?
+            - huuund? → hund
+          - - Dela ordet
+            - ba-⁠nan och last-⁠bil
+          - - Hitta ordet i ordet
+            - hund-⁠ar-⁠na och sol-⁠en
+          - - Stämde det?
+            - Läs meningen igen.
+          - - Läs som när du pratar
+            - Stanna vid punkten.
+  material:
+    rubrik: Vad du behöver för ett pass
+    kravEtikett: Textkrav
+    var:
+      rubrik: Var texterna och korten finns
+      punkter:
+        - fet: Lästräningstexterna.
+          text: En för varje vecka, med och utan stöd, i planeringsmallarna (Word) och under Materialet på metodsidan.
+        - fet: Lättlästa böcker.
+          text: Samma slags texter som i TIL i grupp, till exempel Kiwi, Stjärnsvenska och Beta Pedagog. Skolbiblioteket hjälper dig.
+        - fet: "Ljudenliga böcker för steg 1–⁠2 i lästrappan."
+          text: "Till exempel Hegas Lästrädet eller Bågens miniböcker, eller ett eget läskort."
+        - fet: "Strategikortet, lappen och protokollet."
+          text: Strategikortet är sida 3 här. Lappen hem och protokollet finns i planeringsmallarna (Word) och under Materialet på metodsidan.
+      efter: "Byt text när den flyter för de flesta. Läsröret är ett böjt rör från munnen till örat, som gör att eleven hör sin egen röst. Du kan köpa det som hörlur eller göra det av ett rör och två rörböjar. Det är frivilligt."
+    bordet:
+      - Texten, en kopia per elev och en till dig
+      - Strategikortet vid varje plats
+      - Läsrör, om ni har
+      - Snabbmallen för noteringen efteråt, ur planeringsmallarna
+    varjePass: Vilka ord fastnade, vilken strategi hjälpte, och kan texten gå hem?

@@ -4,12 +4,13 @@
 // Designelementen är samma som på sidan (src/components/Metod.astro): rutor, tabeller med
 // rubrikrad, band, gör/undvik och bockar. Varje sida bär © Niclas Fohlin och niclasfohlin.se.
 import {
-  AlignmentType, BorderStyle, Document, Footer, Header, HeadingLevel, HeightRule, ImportedXmlComponent, LevelFormat, LineRuleType, PageNumber, PageOrientation,
+  AlignmentType, BorderStyle, Document, Footer, Header, HeadingLevel, HeightRule, ImageRun, ImportedXmlComponent, LevelFormat, LineRuleType, NoBreakHyphen, PageNumber, PageOrientation,
   Paragraph, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, VerticalAlign, WidthType,
   type IBorderOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
-import { arbetsformRad, arskursText, datumText, ejBryt, etikettOchText, lathundFakta, metaRad, metodAdress, passOversikt, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost } from './metod';
+import { arbetsformRad, arEttKort, arskursText, datumText, ejBryt, etikettOchText, laskortKolumn, laskortRubrik, lathundFakta, lathundForm, metaRad, metodAdress, passOrd, passOversikt, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost, type PassOrd } from './metod';
 import { brakDelar, delnamn, kortInfo, lage, STANDARD_NAMNARE, type KortInfo, type Mall } from './brak';
+import { bagSvg } from './lasflyt';
 import WORDSKALOR from '../data/lathund-word.json';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
@@ -63,11 +64,22 @@ interface StyckeVal { kursiv?: boolean; fet?: boolean; farg?: string; storlek?: 
 
 function run(text: string, o: StyckeVal = {}): TextRun {
   const val: IRunOptions = { text, italics: o.kursiv, bold: o.fet, color: o.farg, size: storl(o.storlek), allCaps: o.versaler, font: o.font };
-  return new TextRun(val);
+  return new TextRun(hardaStreck(val));
 }
 // Alla andra textlöpor går hit, så att skalan gäller dem också.
 function textRun(o: IRunOptions): TextRun {
-  return new TextRun({ ...o, size: storl(o.size as number | undefined) });
+  return new TextRun(hardaStreck({ ...o, size: storl(o.size as number | undefined) }));
+}
+// Ett bindestreck följt av ordfog (U+2060) håller ihop ett exempelord i metoden, som hund-ar-na och sss-ooo-lll. Word
+// bryter ändå raden efter ett bindestreck, så där blir det Words hårda bindestreck (K-066, riggen 2026-09-27).
+const HARDSTRECK = '-⁠';
+function hardaStreck(o: IRunOptions): IRunOptions {
+  const t = typeof o.text === 'string' ? o.text : '';
+  if (!t.includes(HARDSTRECK)) return o;
+  const delar: (string | NoBreakHyphen)[] = [];
+  t.split(HARDSTRECK).forEach((del, i) => { if (i) delar.push(new NoBreakHyphen()); if (del) delar.push(del); });
+  const { text: _text, ...resten } = o;
+  return { ...resten, children: delar } as IRunOptions;
 }
 // Bråk i elevmaterialet står staplade (src/lib/brak.ts). Word får en ekvation (OMML) med vanlig text i Calibri, i
 // textens färg och något större än texten, eftersom Word krymper täljare och nämnare i ett bråk i en mening.
@@ -187,9 +199,9 @@ function rubrikTabell(kolumner: string[], rader: string[][], bredder: number[], 
   return [tabell([huvud, ...kropp], bredder), avstand()];
 }
 // Stegtabellen: nummer och namn i versaler, frågan under, sedan vad du gör och fraserna med citattecken.
-function stegTabell(d: NonNullable<MetodData['steg']>): Barn[] {
+function stegTabell(d: NonNullable<MetodData['steg']>, stegOrd: string): Barn[] {
   const bredder = [2100, 3400, BREDD - 5500];
-  const huvud = rad(['Steg', 'Vad du gör', d.fraserRubrik].map((k, i) => cell([stycke(k, { fet: true, farg: FARG.vit, storlek: 20, efter: 0 })], { bredd: bredder[i], fyll: FARG.huvud, kanter: runt(kant(FARG.huvud)) })), { huvud: true });
+  const huvud = rad([stegOrd, 'Vad du gör', d.fraserRubrik].map((k, i) => cell([stycke(k, { fet: true, farg: FARG.vit, storlek: 20, efter: 0 })], { bredd: bredder[i], fyll: FARG.huvud, kanter: runt(kant(FARG.huvud)) })), { huvud: true });
   const kropp = d.rader.map((r, i) => rad([
     cell([
       stycke(`${i + 1}  ${r.namn}`, { fet: true, farg: FARG.huvud, storlek: 20, versaler: true, efter: r.fraga ? 20 : 0 }),
@@ -335,7 +347,8 @@ function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[
 // En elevlista i en ram: orden stora, kolumnrubrikerna små och dämpade, ingen fet första kolumn.
 // Bokstäver centreras. Listan hålls ihop, och med hallIhopEfter också med det som följer.
 // brak: bråken staplas (metoder i matematik); annars står ett snedstreck kvar, som i ett datum.
-function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][] }, o: { storlek: number; hallIhopEfter?: boolean; brak?: boolean }): Barn[] {
+// luft: ett kort att ha på bordet (strategikortet, K-062) får luft mellan raderna.
+function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][] }, o: { storlek: number; hallIhopEfter?: boolean; brak?: boolean; luft?: boolean }): Barn[] {
   const ut: Barn[] = [];
   const n = Math.max(...l.rader.map((r) => r.length), l.kolumner?.length ?? 1);
   // En kolumn där alla rader är tomma är en skrivkolumn (kartläggningens Före och Efter): smal, med rubriken i mitten,
@@ -355,7 +368,7 @@ function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][] 
   if (l.kolumner) rader.push(rad(l.kolumner.map((k, i) => cell([stycke(k, { storlek: 15, versaler: true, farg: FARG.svag, efter: 0, hallIhop: true, mitt: !!smal && skriv[i] })], { bredd: bredder[i], fyll: FARG.rand })), { huvud: true }));
   l.rader.forEach((r, ri) => {
     const ihop = ri < l.rader.length - 1 || !!o.hallIhopEfter;
-    rader.push(rad(Array.from({ length: n }, (_, i) => cell([stycke(r[i] ?? '', { storlek, efter: 0, hallIhop: ihop, mitt: bokstaver, brak: o.brak })], { bredd: bredder[i] }))));
+    rader.push(rad(Array.from({ length: n }, (_, i) => cell([stycke(r[i] ?? '', { storlek, fore: o.luft ? 100 : 0, efter: o.luft ? 100 : 0, hallIhop: ihop, mitt: bokstaver, brak: o.brak })], { bredd: bredder[i] }))));
   });
   ut.push(tabell(rader, bredder), avstand());
   return ut;
@@ -431,7 +444,18 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
   const storlek = o.stor ? (radantal > 12 ? 28 : 32) : 26;
   // I elevkopian får listorna bryta sida mellan sig, men den sista håller ihop med lärarnoten efter,
   // så att noten och upphovet aldrig står ensamma på en sida. I beskrivningen hålls listorna ihop.
-  const listor = () => (ram.listor ?? []).flatMap((l, i, alla) => elevlista({ ...l, rubrik: !o.stor && l.rubrik && !namngerRamen(l.rubrik) ? `${l.rubrik} · ${ram.rubrik}` : l.rubrik }, { storlek, hallIhopEfter: o.stor ? i === alla.length - 1 : i < alla.length - 1, brak: o.brak }));
+  // En lästräningstext blir två läskort på en egen sida (K-063), och en ensam kort lista ett kort i 20 pt (K-062).
+  const listor = () => (ram.listor ?? []).flatMap((l, i, alla) => {
+    const stodKolumn = laskortKolumn(l);
+    if (stodKolumn !== undefined) return laskortBarn(l, stodKolumn);
+    const ettKort = arEttKort(alla, l);
+    return elevlista({ ...l, rubrik: !o.stor && l.rubrik && !namngerRamen(l.rubrik) ? `${l.rubrik} · ${ram.rubrik}` : l.rubrik }, { storlek: ettKort ? 40 : storlek, luft: ettKort, hallIhopEfter: o.stor ? i === alla.length - 1 : i < alla.length - 1, brak: o.brak });
+  });
+  // Läskorten står var och en på en egen sida, så lärarens noter om dem står först, också i elevkopian.
+  if ((ram.listor ?? []).some((l) => laskortKolumn(l) !== undefined)) {
+    ut.push(...noter(), ...huvud(), ...listor());
+    return ut;
+  }
   // Kort att klippa: lärarens ruta först, och varje grupp av kort ("Vecka 1 · Pass 1") börjar på ny sida, så att
   // varje pass är en kopia och korten aldrig delar sida med lärarens ruta. Som i metodriggens kompendium.
   if ((ram.listor ?? []).some((l) => kortInfo({ kort: o.kort }, l))) {
@@ -457,6 +481,35 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
   else ut.push(...noter());
   return ut;
 }
+// Läskort (K-063): en lästräningstext som två kort att ha på bordet, ett halvt A4 vardera på en egen sida, med streckad
+// kant att klippa längs. Överst kortet med stöd, där varje mening är en bild med en båge under varje ordgrupp
+// (lasflyt.ts; Word ritar SVG sedan 2016, och reservbilden är en genomskinlig punkt), och underst kortet utan stöd i
+// vanlig text. Märkningen litet och grått, titeln i 20 pt och meningarna i 18 pt Arial, som i metodriggen.
+const TOM_PNG = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==';
+const bytesUr = (b64: string) => Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+function bagBild(text: string, breddTwips: number): Paragraph {
+  const { svg, bredd, hojd } = bagSvg(text, { bredd: breddTwips / 20, storlek: 18, radfaktor: 1.6 });
+  const px = (pt: number) => Math.round((pt * 4) / 3);
+  return new Paragraph({ spacing: { after: 60 }, children: [new ImageRun({ type: 'svg', data: new TextEncoder().encode(svg), transformation: { width: px(bredd), height: px(hojd) }, fallback: { type: 'png', data: bytesUr(TOM_PNG) } })] });
+}
+function laskortBarn(l: { rubrik?: string; kolumner?: string[]; rader: string[][] }, stodKolumn: number): Barn[] {
+  const { nr, titel } = laskortRubrik(l);
+  const marg = { top: 240, bottom: 200, left: 300, right: 300 };
+  const inre = BREDD - marg.left - marg.right;
+  const streckad = { style: BorderStyle.DASHED, size: 6, color: '777777' };
+  const kort = (stod: boolean): Barn[] => [
+    new Paragraph({ spacing: { after: 100 }, children: [textRun({ text: `Lästräningstext ${nr ? `${nr} · ` : ''}${stod ? 'med stöd' : 'utan stöd'}`, size: 15, color: FARG.svag })] }),
+    new Paragraph({ spacing: { after: 200 }, children: [textRun({ text: titel, bold: true, size: 40, font: 'Arial', color: '1F2937' })] }),
+    ...l.rader.map((r) => String(r[stod ? stodKolumn : 1 - stodKolumn] ?? '')).map((t) => (stod
+      ? bagBild(t, inre)
+      : new Paragraph({ spacing: { after: 80, line: 312 }, children: [textRun({ text: t, size: 36, font: 'Arial', color: '1F2937' })] }))),
+  ];
+  return [
+    new Paragraph({ pageBreakBefore: true, spacing: { before: 0, after: 0 } }),
+    new Table({ width: { size: BREDD, type: WidthType.DXA }, columnWidths: [BREDD], layout: TableLayoutType.FIXED, rows: [true, false].map((stod) => new TableRow({ cantSplit: true, height: { value: 6000, rule: HeightRule.ATLEAST }, children: [new TableCell({ width: { size: BREDD, type: WidthType.DXA }, borders: { top: streckad, bottom: streckad, left: streckad, right: streckad }, margins: marg, children: kort(stod) })] })) }),
+  ];
+}
+
 // Diplomet: en inramad sida, centrerad, med skrivlinjer där texten är understreck.
 function diplomBarn(dip: NonNullable<MetodData['diplom']>): Barn[] {
   const linje = '________________________________________';
@@ -508,10 +561,10 @@ function passRemsa(p: NonNullable<ReturnType<typeof passOversikt>>): Barn[] {
   }
   return [tabell(rader, bredder), avstand()];
 }
-function passTabell(p: NonNullable<ReturnType<typeof passOversikt>>, antalSteg: number): Barn[] {
+function passTabell(p: NonNullable<ReturnType<typeof passOversikt>>, antalSteg: number, ord: PassOrd): Barn[] {
   const bredder = [1900, 3900, BREDD - 5800];
   // Rubrikraden, Före passet och första fasen hänger ihop, så att tabellen inte börjar med två rader ensamma sist på en sida.
-  const huvud = rad(['Fas', `Rutinen i ${antalSteg} steg`, 'Så leder du det'].map((k, i) => cell([stycke(k, { fet: true, farg: FARG.vit, storlek: 20, efter: 0, hallIhop: true })], { bredd: bredder[i], fyll: FARG.huvud, kanter: runt(kant(FARG.huvud)) })),{ huvud: true });
+  const huvud = rad([ord.fas, ord.rutin(antalSteg), 'Så leder du det'].map((k, i) => cell([stycke(k, { fet: true, farg: FARG.vit, storlek: 20, efter: 0, hallIhop: true })], { bredd: bredder[i], fyll: FARG.huvud, kanter: runt(kant(FARG.huvud)) })),{ huvud: true });
   const kantRad = (etikett: string, text: string, ihop = false) => rad([
     cell([stycke(etikett, { fet: true, farg: FARG.huvud, storlek: 20, efter: 0, hallIhop: ihop })], { bredd: bredder[0], fyll: FARG.ljus }),
     cell([stycke(text, { storlek: 20, efter: 0, hallIhop: ihop })], { bredd: bredder[1] + bredder[2], span: 2, fyll: FARG.ljus }),
@@ -594,7 +647,7 @@ function metodBarn(post: MetodPost, bas: string): Barn[] {
     if (d.passrutin.text) ut.push(stycke(d.passrutin.text, { hallIhop: true }));
     if (pass.text) ut.push(stycke(pass.text, { hallIhop: true }));
     ut.push(...passRemsa(pass));
-    ut.push(...passTabell(pass, stegTexter(d).length));
+    ut.push(...passTabell(pass, stegTexter(d).length, passOrd(d)));
     if (pass.efterTabell) ut.push(stycke(pass.efterTabell, { farg: FARG.svag }));
   } else if (d.passrutin) {
     ut.push(h2(d.passrutin.rubrik));
@@ -612,7 +665,7 @@ function metodBarn(post: MetodPost, bas: string): Barn[] {
   if (d.steg) {
     ut.push(h2(d.steg.rubrik));
     if (d.steg.text) ut.push(stycke(d.steg.text, { hallIhop: true }));
-    ut.push(...stegTabell(d.steg));
+    ut.push(...stegTabell(d.steg, passOrd(d).steg));
   }
   for (const t of d.tabeller.filter((x) => x.plats === 'efter-steg')) friTabell(t);
   if (d.arbetsform) {
@@ -1062,6 +1115,28 @@ function lhRader(antal: number, hojd = 420): Barn[] {
   return [new Table({ width: { size: BREDD, type: WidthType.DXA }, columnWidths: [BREDD], layout: TableLayoutType.FIXED, borders: UTAN_KANTER, rows: rader }), avstand(80)];
 }
 // Två spalter utan kanter. Innehållet i spalterna byggs med spaltens bredd.
+// Strategikortet på lathundens tredje sida (K-061): raderna över hela bredden med lika höjd, kolumnrubrikerna små och
+// grå överst och tunna linjer mellan raderna, som i PowerPoint. Radernas höjd följer skalan, så att mätningen i Word
+// (lathund-word.mjs) kan krympa sidan: med en fast höjd på 8 400 twips föll Upprepad läsnings sjunde rad på en egen sida
+// i varje storlek. Texten är så stor som raden och den längsta cellen tillåter, högst 28 pt, och sätts i den slutliga
+// storleken (stycke skalar graden, så den delas med skalan först), så att en cell aldrig bryts.
+function kortTabell(kolumner: string[], rader: string[][]): Barn[] {
+  const bredder = kolumnBredder(kolumner.length);
+  const radHojd = Math.floor((7000 * SKALA) / Math.max(1, rader.length));
+  const langst = Math.max(...rader.flatMap((r) => r.map((c) => c.length)));
+  const pt = Math.max(14, Math.min(28, (radHojd / 20) * 0.45, (bredder[0] / 20 - 12) / (langst * 0.55))) / SKALA;
+  const linje = kant(FARG.kant, 6);
+  const kanter = { top: INGEN_KANT, left: INGEN_KANT, right: INGEN_KANT, bottom: linje };
+  const huvud = rad(kolumner.map((k, i) => cell([new Paragraph({ children: [textRun({ text: k, font: MONO, size: 16, allCaps: true, color: FARG.svag, characterSpacing: 20 })], spacing: { after: 0 } })], { bredd: bredder[i], kanter })), { huvud: true });
+  const kropp = rader.map((r) => new TableRow({ cantSplit: true, height: { value: radHojd, rule: HeightRule.ATLEAST }, children: r.map((c, i) => new TableCell({
+    width: { size: bredder[i], type: WidthType.DXA },
+    verticalAlign: VerticalAlign.CENTER,
+    borders: kanter,
+    margins: { top: 40, bottom: 40, left: 120, right: 120 },
+    children: [stycke(c, { storlek: Math.round(pt * 2), efter: 0 })],
+  })) }));
+  return [new Table({ width: { size: BREDD, type: WidthType.DXA }, columnWidths: bredder, layout: TableLayoutType.FIXED, borders: UTAN_KANTER, rows: [huvud, ...kropp] }), avstand(80)];
+}
 function lhSpalter(vanster: () => Barn[], hoger: () => Barn[]): Barn[] {
   const mellan = 360;
   const halv = Math.floor((BREDD - mellan) / 2);
@@ -1158,6 +1233,9 @@ function lathundBarn(post: MetodPost, o: { niva1?: boolean; skalor?: number[]; b
     // En enda tom tabell utan snabbmall är ett blad att lägga på bordet (talsortsmattan): den tar hela
     // bredden med höga rutor som fyller sidan, och noten står under, i stället för två spalter.
     const matta = arMatta(l.mall);
+    // En enda ifylld tabell är ett kort att ha på bordet (strategikortet, K-061): hela bredden, stor text och lika
+    // höga rader som fyller sidan, som i PowerPoint (lathundForm i metod.ts).
+    const kort = lathundForm(l.mall).form === 'kort';
     // De smala blocken fördelas på två spalter som på sidan: där lägger webbläsaren dem i ordning och
     // delar där spalterna blir jämnast i höjd. Här uppskattas höjden i rader och delningen väljs så att
     // den högsta spalten blir så låg som möjligt.
@@ -1204,6 +1282,11 @@ function lathundBarn(post: MetodPost, o: { niva1?: boolean; skalor?: number[]; b
       } else if (b.typ === 'tabell' && matta) {
         tomSmala();
         mall.push(kicker(b.rubrik, { farg: FARG.huvud, fore: 0 }), ...rubrikTabell(b.kolumner, b.rader, kolumnBredder(b.kolumner.length), { huvudFyll: FARG.text, radrubrik: false, storlek: 24, tomHojd: Math.min(6000, Math.floor(6000 / b.rader.length)), ramad: true }));
+      } else if (b.typ === 'tabell' && kort) {
+        tomSmala();
+        const [a, c] = [(b.rubrik ?? '').toLowerCase(), l.mall.rubrik.toLowerCase()];
+        if (a && !a.includes(c) && !c.includes(a)) mall.push(kicker(b.rubrik, { farg: FARG.huvud, fore: 0 }));
+        mall.push(...kortTabell(b.kolumner, b.rader));
       } else if (b.typ === 'tabell') {
         const korta = b.rader.every((r) => r.every((c) => c.length <= 12));
         smala.push({ vikt: b.rader.length + 2, f: () => [kicker(b.rubrik, { farg: FARG.huvud, fore: 0 }), ...(korta ? elevlista({ kolumner: b.kolumner, rader: b.rader }, { storlek: 22 }) : rubrikTabell(b.kolumner, b.rader, kolumnBredder(b.kolumner.length, 0.3), { huvudFyll: FARG.text, radrubrik: false }))] });
@@ -1213,8 +1296,8 @@ function lathundBarn(post: MetodPost, o: { niva1?: boolean; skalor?: number[]; b
           new Paragraph({ children: b.steg.flatMap((s, i) => [...(i > 0 ? [textRun({ text: '  →  ', color: FARG.svag })] : []), textRun({ text: s, italics: true, bold: true, size: 21, color: i === b.steg.length - 1 ? '2E7D32' : FARG.text })]), spacing: { after: 120 } }),
           ...(b.citat ? [stycke(citat(b.citat), { kursiv: true, farg: BRUN, storlek: 20 })] : []),
         ] });
-      } else if (b.typ === 'not' && matta) {
-        // Mattans fot är regeln för eleven: större, inte fet.
+      } else if (b.typ === 'not' && (matta || kort)) {
+        // Mattans och kortets fot är regeln för eleven: större, inte fet.
         tomSmala();
         mall.push(...lhNot([stycke(b.text, { storlek: 28, efter: 0 })]));
       } else if (b.typ === 'not') {

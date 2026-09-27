@@ -178,6 +178,17 @@ if (bilder) {
         if (mallar) liggande >= mallar ? ok(`utskriften: ${storlekar.length} sidor, varav ${liggande} liggande för ${mallar} mallar`) : nej(`utskriften har ${liggande} liggande sidor, men metoden har ${mallar} mallar som ska stå liggande`);
         else ok(`utskriften: ${storlekar.length} sidor`);
       } catch { console.log('  obs  pdfinfo saknas, utskriftens sidor är inte räknade'); }
+      // Läskorten (K-063): varje lästräningstext är ett A4 med båda korten, med stöd och utan stöd, som i Word. Står
+      // korten på var sin sida har texten eller utskriftens mått vuxit (Upprepad läsning 2026-09-27: en marginal på 1 em
+      // under varje mening gav 16 sidor i stället för 8).
+      const laskort = (metod.ramar?.ramar ?? []).flatMap((r) => r.listor ?? []).filter((l) => (l.rader ?? []).some((r) => r.some((c) => String(c).includes('‿'))));
+      if (laskort.length) {
+        try {
+          const sidor = execFileSync('pdftotext', ['-enc', 'UTF-8', join(mapp, 'utskrift.pdf'), '-'], { encoding: 'utf8' }).split('\f').map((s) => s.replace(/\s+/g, ' '));
+          const isar = laskort.map((l) => (l.rubrik ?? '').match(/^\d+/)?.[0]).filter((nr) => nr && !sidor.some((s) => s.includes(`Lästräningstext ${nr} · med stöd`) && s.includes(`Lästräningstext ${nr} · utan stöd`)));
+          isar.length ? nej(`läskorten för text ${isar.join(', ')} står på var sin sida i utskriften; varje text ska vara ett A4 med båda korten`) : ok(`utskriften: ${laskort.length} lästräningstexter, båda korten på samma sida`);
+        } catch { console.log('  obs  pdftotext saknas, läskortens sidor i utskriften är inte prövade'); }
+      }
   console.log('       Läs bilderna som en lärare som ska köra passet i morgon: fet stil betyder rubrik, inget bryts så att det läses fel,');
   console.log('       likvärdiga saker ser likadana ut, det läraren behöver kommer först. Dela höga bilder i bitar innan du läser dem.');
       if (metod.lathund) {

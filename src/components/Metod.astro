@@ -5,9 +5,10 @@ import MetodTabell from './MetodTabell.astro';
 import Tavla from './Tavla.astro';
 import Elevlista from './Elevlista.astro';
 import Kortlista from './Kortlista.astro';
+import Laskort from './Laskort.astro';
 import MallBild from './MallBild.astro';
 import type { MetodData } from '../lib/metod';
-import { ejBryt, ramArTom, passGrupper, passOversikt, stegTexter } from '../lib/metod';
+import { ejBryt, ramArTom, passGrupper, passOrd, passOversikt, stegTexter, laskortKolumn, arEttKort } from '../lib/metod';
 import { kortInfo } from '../lib/brak';
 // "Åk 4–5" hålls ihop i ramarnas rubriker och länkar: hårt mellanslag efter Åk, ordfog efter tankstrecket.
 const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 '));
@@ -31,6 +32,7 @@ const repliker = (s: string) => s.split(/(”[^”]*”)/).filter(Boolean).map((
 const friKlass = (t: { kolumner: string[]; rader: string[][] }) => (t.kolumner.length > 3 || (t.kolumner.length === 3 && t.rader.some((r) => r.some((c) => c.length > 40))) ? 'fri stapla' : 'fri');
 // Passöversikten: rutin, tidsschema och arbetsform i en bild när stegen har faser.
 const pass = passOversikt(d);
+const ord = passOrd(d);
 const tavla = d.exempel?.tavla ? d.lathund?.mall.block.find((b) => b.typ === 'tavla') : undefined;
 const fraserRubrik = d.steg?.fraserRubrik ?? '';
 // En radbrytning i ett ramfält blir en ny rad, som i tabellcellerna.
@@ -52,7 +54,7 @@ const urvalNamn = (rubrik: string) => {
 const avsnitt = [
   d.passrutin && { id: 'passrutin', namn: pass ? 'Passet' : 'Passrutin' },
   d.tidsschema && !pass && { id: 'tidsschema', namn: 'Tidsschema' },
-  d.steg && { id: 'steg', namn: 'Stegen' },
+  d.steg && { id: 'steg', namn: ord.stegen },
   d.arbetsform && { id: 'arbetsform', namn: 'Arbetsform' },
   d.exempel && { id: 'exempel', namn: 'Exempel' },
   d.fastnar && { id: 'fastnar', namn: 'När det fastnar' },
@@ -109,17 +111,17 @@ const avsnitt = [
       </div>
       <table class="m-tabell m-pass stapla" id="tidsschema">
         <colgroup><col style="width:18%" /><col style="width:40%" /><col style="width:42%" /></colgroup>
-        <thead><tr><th scope="col">Fas</th><th scope="col">Rutinen i {stegTexter(d).length} steg</th><th scope="col">Så leder du det</th></tr></thead>
+        <thead><tr><th scope="col">{ord.fas}</th><th scope="col">{ord.rutin(stegTexter(d).length)}</th><th scope="col">Så leder du det</th></tr></thead>
         <tbody>
-          {pass.fore && <tr class="m-pass-kant"><th scope="row" data-rubrik="Fas">Före passet</th><td colspan="2" data-rubrik="Förberedelse">{pass.fore}</td></tr>}
+          {pass.fore && <tr class="m-pass-kant"><th scope="row" data-rubrik={ord.fas}>Före passet</th><td colspan="2" data-rubrik="Förberedelse">{pass.fore}</td></tr>}
           {pass.faser.map((f) => (
             <tr>
-              <th scope="row" data-rubrik="Fas"><span class="forsta">{f.fas}</span><span class="under">{f.tid}</span></th>
+              <th scope="row" data-rubrik={ord.fas}><span class="forsta">{f.fas}</span><span class="under">{f.tid}</span></th>
               {f.steg.length > 0 ? <td data-rubrik="Rutinen"><ol class="m-pass-steg" start={f.steg[0].nr}>{f.steg.map((s) => <li>{s.text}</li>)}</ol></td> : <td class="tom"></td>}
               <td data-rubrik="Så leder du det">{repliker(f.vad).map((r) => (r.replik ? <em>{r.text}</em> : r.text))}</td>
             </tr>
           ))}
-          {pass.efter && <tr class="m-pass-kant"><th scope="row" data-rubrik="Fas">Efter passet</th><td colspan="2" data-rubrik="Notering">{pass.efter}</td></tr>}
+          {pass.efter && <tr class="m-pass-kant"><th scope="row" data-rubrik={ord.fas}>Efter passet</th><td colspan="2" data-rubrik="Notering">{pass.efter}</td></tr>}
         </tbody>
       </table>
       {pass.efterTabell && <p class="m-efter">{pass.efterTabell}</p>}
@@ -159,11 +161,11 @@ const avsnitt = [
       {d.steg.text && <p>{d.steg.text}</p>}
       <table class="m-tabell steg" role="table">
         <colgroup><col style="width:22%" /><col style="width:36%" /><col style="width:42%" /></colgroup>
-        <thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">Steg</th><th scope="col" role="columnheader">Vad du gör</th><th scope="col" role="columnheader">{fraserRubrik}</th></tr></thead>
+        <thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">{ord.steg}</th><th scope="col" role="columnheader">Vad du gör</th><th scope="col" role="columnheader">{fraserRubrik}</th></tr></thead>
         <tbody role="rowgroup">
           {d.steg.rader.map((r, i) => (
             <tr role="row">
-              <th scope="row" role="rowheader" data-rubrik="Steg"><span class="forsta stegnamn">{i + 1} {r.namn}</span>{r.fraga && <span class="under">{r.fraga}</span>}</th>
+              <th scope="row" role="rowheader" data-rubrik={ord.steg}><span class="forsta stegnamn">{i + 1} {r.namn}</span>{r.fraga && <span class="under">{r.fraga}</span>}</th>
               <td role="cell" data-rubrik="Vad du gör">{r.gor}</td>
               <td role="cell" data-rubrik={fraserRubrik}>{r.fraser.length > 0 && <ul class="fraser">{r.fraser.map((f) => <li>”{f}”</li>)}</ul>}</td>
             </tr>
@@ -390,9 +392,12 @@ const avsnitt = [
                 const forra = li > 0 ? kortInfo(d, ram.listor![li - 1])?.grupp : undefined;
                 // Ramens fält att fylla i (elevens namn på kartläggningens kopia) står överst i den första listan, så att
                 // de följer med listan i utskriften.
+                // En lästräningstext blir två läskort (K-063), och en ensam kort lista ett kort i stor stil (K-062).
+                const stodKolumn = info ? undefined : laskortKolumn(l);
+                if (stodKolumn !== undefined) return <Laskort lista={l} stodKolumn={stodKolumn} />;
                 return info
                   ? <Kortlista rubrik={l.rubrik} info={info} nyGrupp={info.grupp !== forra} brak={brak} />
-                  : <Elevlista rubrik={l.rubrik} kolumner={l.kolumner} rader={l.rader} brak={brak} huvud={li === 0 ? ram.huvud : undefined} />;
+                  : <Elevlista rubrik={l.rubrik} kolumner={l.kolumner} rader={l.rader} brak={brak} huvud={li === 0 ? ram.huvud : undefined} klass={arEttKort(ram.listor!, l) ? 'kort' : ''} />;
               })}
             </>
           ) : ramArTom(ram)

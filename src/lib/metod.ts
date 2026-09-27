@@ -2,6 +2,40 @@ import type { CollectionEntry } from 'astro:content';
 
 // Metodens data som den ser ut i bygget och i webbläsaren. I metoder.json är datumet en sträng.
 export type MetodData = Omit<CollectionEntry<'stodundervisning'>['data'], 'uppdaterad'> & { uppdaterad?: Date | string };
+
+// Lathundens tredje sida, Mallen, har tre former. En tom tabell som enda block utöver en not är ett blad att bygga på
+// (mattan). En ifylld tabell som enda block utöver en not är ett kort att ha på bordet (strategikortet i Upprepad
+// läsning, K-061): raderna stort över sidan, så att eleven kan läsa det vid bordet. Annars flödar blocken. Samma
+// regel på sidan (Lathund.astro), i Word (metoddocx.ts) och i PowerPoint och pdf (metodpptx.ts).
+export type LathundMall = NonNullable<MetodData['lathund']>['mall'];
+export type LathundTabell = Extract<LathundMall['block'][number], { typ: 'tabell' }>;
+export function lathundForm(mall: LathundMall): { form: 'matta' | 'kort' | 'block'; tabell?: LathundTabell; not?: string } {
+  const tabell = mall.block.find((b): b is LathundTabell => b.typ === 'tabell');
+  if (!tabell || mall.block.filter((b) => b.typ !== 'not').length !== 1) return { form: 'block' };
+  const nasta = mall.block[mall.block.indexOf(tabell) + 1];
+  const not = nasta?.typ === 'not' ? nasta.text : undefined;
+  return { form: tabell.rader.every((r) => r.every((c) => !c.trim())) ? 'matta' : 'kort', tabell, not };
+}
+
+// Ramarnas listor har två former för eleven ur metodriggen (Upprepad läsning, 2026-09-27). En lästräningstext är en
+// lista med två kolumner där den ena har bågtecken (‿): den blir två läskort, med stöd och utan (K-063, lasflyt.ts).
+// En kort lista ensam i sin ram, högst åtta rader och 30 tecken per cell och utan skrivkolumn, är ett kort att ha på
+// bordet och ritas stort (K-062). Samma regler på sidan (Metod.astro) och i Word (metoddocx.ts), som i riggen.
+type RamLista = { rubrik?: string; kolumner?: string[]; rader: string[][] };
+export function laskortKolumn(l: RamLista): number | undefined {
+  if ((l.kolumner ?? []).length !== 2) return undefined;
+  return [0, 1].find((ci) => l.rader.some((r) => String(r[ci] ?? '').includes('‿')));
+}
+// Numret och titeln ur listans rubrik: "6 · Sandslottet".
+export function laskortRubrik(l: RamLista): { nr: string; titel: string } {
+  const m = (l.rubrik ?? '').match(/^(\d+)\s*·\s*(.+)$/);
+  return { nr: m ? m[1] : '', titel: m ? m[2] : (l.rubrik ?? '') };
+}
+export function arEttKort(listor: RamLista[], l: RamLista): boolean {
+  const n = Math.max(...l.rader.map((r) => r.length), l.kolumner?.length ?? 1);
+  const skrivkolumn = Array.from({ length: n }, (_, i) => l.rader.every((r) => !(r[i] ?? '').trim())).some(Boolean);
+  return listor.length === 1 && laskortKolumn(l) === undefined && !skrivkolumn && l.rader.length <= 8 && l.rader.every((r) => r.every((c) => String(c).length <= 30));
+}
 export interface MetodPost { id: string; data: MetodData }
 
 export const UPPHOV = '© Niclas Fohlin';
@@ -160,4 +194,13 @@ export function passGrupper(p: PassOversikt): PassGrupp[] {
 // Rutinens steg som texter, oavsett om de har fas.
 export function stegTexter(d: MetodData): string[] {
   return (d.passrutin?.steg ?? []).map((s) => (typeof s === 'string' ? s : s.text));
+}
+// Rubrikerna för passets delar i passöversikten, stegtabellen och menyn (K-065): Fas, Rutinen i N steg, Steg och Stegen,
+// eller Del, Passet i N delar, Del och Delarna när passrutin.kallas är delar, för en metod där ordet steg hör till något
+// annat, som lästrappan i Upprepad läsning.
+export interface PassOrd { fas: string; rutin: (antal: number) => string; steg: string; stegen: string }
+export function passOrd(d: MetodData): PassOrd {
+  return d.passrutin?.kallas === 'delar'
+    ? { fas: 'Del', rutin: (antal) => `Passet i ${antal} delar`, steg: 'Del', stegen: 'Delarna' }
+    : { fas: 'Fas', rutin: (antal) => `Rutinen i ${antal} steg`, steg: 'Steg', stegen: 'Stegen' };
 }

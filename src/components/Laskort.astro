@@ -1,0 +1,34 @@
+---
+// En lästräningstext som två läskort (Upprepad läsning, K-063): överst kortet med stöd, med en båge under varje
+// ordgrupp och bindestreck i orden, och under det kortet utan stöd, samma text som vanlig text. Bågen ritas av CSS
+// (global.css, .m-bage) under ordgruppen, med citattecken och skiljetecken utanför. På skärmen står korten bredvid
+// varandra, i utskriften ett A4 per text med korten under varandra och streckad kant att klippa längs. Samma kort i
+// Word (laskortBarn i src/lib/metoddocx.ts) och i metodriggens kompendium.
+import { ordgrupper, delaTecken } from '../lib/lasflyt';
+import { laskortRubrik } from '../lib/metod';
+interface Props { lista: { rubrik?: string; kolumner?: string[]; rader: string[][] }; stodKolumn: number }
+const { lista, stodKolumn } = Astro.props;
+const { nr, titel } = laskortRubrik(lista);
+const markning = (stod: boolean) => `Lästräningstext ${nr ? `${nr} · ` : ''}${stod ? 'med stöd' : 'utan stöd'}`;
+const medStod = lista.rader.map((r) => ordgrupper(r[stodKolumn] ?? '').map(delaTecken));
+const utan = lista.rader.map((r) => r[1 - stodKolumn] ?? '');
+---
+<div class="m-laskort">
+  <h4 class="m-lista-rubrik">{lista.rubrik}</h4>
+  <div class="m-laskort-par">
+    <div class="m-laskort-kort med-stod" role="group" aria-label={markning(true)}>
+      <p class="m-laskort-markning">{markning(true)}</p>
+      <p class="m-laskort-titel">{titel}</p>
+      {medStod.map((mening) => (
+        <p class="m-laskort-mening">{mening.map((g, gi) => (
+          <>{gi > 0 && ' '}{g.fore}<span class="m-bage">{g.ord}</span>{g.efter}</>
+        ))}</p>
+      ))}
+    </div>
+    <div class="m-laskort-kort utan-stod" role="group" aria-label={markning(false)}>
+      <p class="m-laskort-markning">{markning(false)}</p>
+      <p class="m-laskort-titel">{titel}</p>
+      {utan.map((mening) => <p class="m-laskort-mening">{mening}</p>)}
+    </div>
+  </div>
+</div>

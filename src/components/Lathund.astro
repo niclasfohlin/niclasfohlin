@@ -7,7 +7,7 @@ import MetodTabell from './MetodTabell.astro';
 import Elevlista from './Elevlista.astro';
 import Tavla from './Tavla.astro';
 import type { MetodData } from '../lib/metod';
-import { lathundFakta, arbetsformRad, etikettOchText } from '../lib/metod';
+import { lathundFakta, arbetsformRad, etikettOchText, lathundForm } from '../lib/metod';
 interface Props { d: MetodData }
 const { d } = Astro.props;
 const l = d.lathund;
@@ -20,7 +20,15 @@ const citat = (f: string) => `”${f}”`;
 const repliker = (s: string) => s.split(/(”[^”]*”)/).filter(Boolean).map((text) => ({ text, replik: text.startsWith('”') }));
 // En enda tom tabell utan snabbmall på mallsidan är ett blad att lägga på bordet (talsortsmattan): kolumnerna
 // blir höga rutor som fyller sidan, och noten står under. Samma regel i metoddocx.ts och metodpptx.ts.
-const matta = !!l && l.mall.block.filter((b) => b.typ !== 'not').length === 1 && l.mall.block.some((b) => b.typ === 'tabell' && b.rader.every((r) => r.every((c) => !c.trim())));
+// En enda ifylld tabell är ett kort att ha på bordet (strategikortet, K-061): stort, med lika höga rader som fyller
+// sidan i utskriften. Regeln står i lathundForm (metod.ts).
+const form = l ? lathundForm(l.mall) : null;
+const matta = form?.form === 'matta';
+const kort = form?.form === 'kort';
+// Kortets text i utskriften: så stor som raderna och den längsta cellen tillåter, högst 28 pt, på liggande A4 med
+// omkring 140 mm för raderna och kolumnerna lika breda (275 mm), som i PowerPoint.
+const kortRader = kort && form?.tabell ? form.tabell.rader.length : 1;
+const kortPt = kort && form?.tabell ? Math.round(Math.max(14, Math.min(28, (140 / kortRader) * 0.45 * 2.835, (275 / form.tabell.kolumner.length) * 2.835 / (Math.max(...form.tabell.rader.flatMap((r) => r.map((c) => c.length))) * 0.55)))) : 0;
 ---
 {l && (
   <div class="lh">
@@ -89,7 +97,7 @@ const matta = !!l && l.mall.block.filter((b) => b.typ !== 'not').length === 1 &&
     <section class="lh-sida" id="lathund-mall" aria-labelledby="lh-3">
       <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-3">{l.mall.rubrik}</h2><span class="lh-etikett">Mallen · 3/4</span><span class="bara-js lh-lank"><button type="button" data-skriv-ut-mall>Skriv ut den här sidan</button></span></header>
       {l.mall.underrad && <p class="lh-underrad">{l.mall.underrad}</p>}
-      <div class:list={['lh-block', { 'lh-block-matta': matta }]}>
+      <div class:list={['lh-block', { 'lh-block-matta': matta || kort }]}>
         {l.mall.block.map((b) => {
           if (b.typ === 'spalter') return (
             <div class="lh-spalter">
@@ -128,6 +136,15 @@ const matta = !!l && l.mall.block.filter((b) => b.typ !== 'not').length === 1 &&
               <MetodTabell kolumner={b.kolumner} rader={b.rader} klass="lh-tabell lh-mattatabell" radrubrik={false} />
             </div>
           );
+          if (b.typ === 'tabell' && kort) return (
+            <div class="lh-avsnitt lh-kort" style={`--rader:${kortRader};--kortstorlek:${kortPt}pt`}>
+              <h3 class="lh-kicker">{b.rubrik}</h3>
+              <table class="lh-korttabell">
+                <thead><tr>{b.kolumner.map((k) => <th scope="col">{k}</th>)}</tr></thead>
+                <tbody>{b.rader.map((r) => <tr>{r.map((c) => <td>{c}</td>)}</tr>)}</tbody>
+              </table>
+            </div>
+          );
           if (b.typ === 'tabell') return (
             <div class="lh-avsnitt">
               <h3 class="lh-kicker">{b.rubrik}</h3>
@@ -143,7 +160,7 @@ const matta = !!l && l.mall.block.filter((b) => b.typ !== 'not').length === 1 &&
               {b.citat && <p class="lh-citat">{citat(b.citat)}</p>}
             </div>
           );
-          if (b.typ === 'not') return <p class:list={['lh-not', { 'lh-regel': matta }]}>{b.text}</p>;
+          if (b.typ === 'not') return <p class:list={['lh-not', { 'lh-regel': matta || kort }]}>{b.text}</p>;
           return null;
         })}
       </div>

@@ -50,6 +50,7 @@ passrutin:
     - Steg två.
     # - { text: Steg med fas., fas: Förstå }
   # efterPasset: Läraren skriver en kort notering.
+  # kallas: delar  # när ordet steg hör till något annat i metoden, som lästrappan: rubrikerna blir Del och Passet i N delar (upprepad-lasning.yaml)
 tidsschema:
   rubrik: 20 minuter, steg för steg
   text: Hur du förbereder dig.

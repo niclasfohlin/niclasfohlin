@@ -12,7 +12,7 @@
 // och rutor fördelar höjden rätt också i A4.
 import PptxGenJS from 'pptxgenjs';
 import type { CollectionEntry } from 'astro:content';
-import { lathundFakta, arbetsformRad, etikettOchText } from './metod';
+import { lathundFakta, arbetsformRad, etikettOchText, lathundForm } from './metod';
 import type { MetodData } from './metod';
 
 export const PPTX_TYP = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
@@ -49,6 +49,8 @@ function bilder(d: MetodData) {
     ],
     arbetsform: arbetsformRad(d),
     stegRubrik: versaler(l.metoden.tabell.rubrik),
+    // Kolumnrubrikerna ur metoden, som på sidan och i Word: Steg och Exempelfraser, Frågetyp och Exempel, Del (K-064).
+    stegKolumner: [versaler(l.metoden.tabell.kolumner[0] ?? ''), versaler(l.metoden.tabell.kolumner[1] ?? '')],
     steg: l.metoden.tabell.rader.map((r) => {
       const [namn, ...under] = r[0].split('\n');
       return { namn, under: under.join(' '), fraser: r.slice(1).join('\n').split('\n').filter(Boolean) };
@@ -91,6 +93,11 @@ function bilder(d: MetodData) {
     const i = block.indexOf(tomTabell);
     const not = block[i + 1]?.typ === 'not' ? block[i + 1].text : undefined;
     bild3 = { ...bild3, typ: 'matta', rubrik: tomTabell.rubrik, kolumner: tomTabell.kolumner, rader: Math.max(1, tomTabell.rader.length), fot: not ? { text: not } : undefined };
+  } else if (lathundForm(l.mall).form === 'kort') {
+    // En ifylld tabell som enda block är ett kort att ha på bordet (strategikortet): raderna stort över hela bilden,
+    // som riggens listkort (K-061).
+    const k = lathundForm(l.mall);
+    bild3 = { ...bild3, typ: 'lista', rubrik: k.tabell!.rubrik, kolumner: k.tabell!.kolumner, rader: k.tabell!.rader, fot: k.not ? { text: k.not } : undefined };
   } else {
     bild3 = { ...bild3, typ: 'block', block };
   }
@@ -327,7 +334,7 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
     label(s, b.stegRubrik, 6.22, 1.65, 6.9);
     const rutaH = b.ruta ? Math.max(0.78, estH(b.ruta, 6.2, 11.5, 0.3)) : 0;
     const tableAvail = BOTTEN - 1.96 - (b.ruta ? rutaH + 0.17 : 0);
-    shapeTable(s, 6.22, 1.96, 6.66, 1.75, ['STEG', 'EXEMPELFRASER'], b.steg.map((st) => ({ namn: st.namn, under: st.under, rader: st.fraser, kursiv: true })), tableAvail);
+    shapeTable(s, 6.22, 1.96, 6.66, 1.75, b.stegKolumner, b.steg.map((st) => ({ namn: st.namn, under: st.under, rader: st.fraser, kursiv: true })), tableAvail);
     if (b.ruta) cream(s, 6.22, BOTTEN - rutaH, 6.66, rutaH, b.ruta, 11.5);
     fot(s);
     s.addNotes(`${b.anteckning} ${upphov}`);
@@ -366,8 +373,8 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
     rect(s, 0, 0.66, W, 0.44, BAND); rect(s, 0, 1.08, W, 0.02, INK);
     txt(s, b.bandVanster ?? '', 0.21, 0.76, 7.2, 0.25, { mono: true, size: 12, color: GREY });
     txt(s, b.bandHoger ?? '', 6.6, 0.76, 6.5, 0.25, { mono: true, size: 12, color: GREY, align: 'right' });
-    // Mattans fot är regeln för eleven: en rad, större text, inte fet.
-    const regel = b.typ === 'matta';
+    // Mattans och kortets fot är regeln för eleven: en rad, större text, inte fet.
+    const regel = b.typ === 'matta' || b.typ === 'lista';
     const fotH = b.fot ? (regel ? 0.9 : 1.45) : 0, fotY = BOTTEN - fotH;
     const areaTop = 1.25, areaBottom = fotY - 0.15;
 
@@ -403,6 +410,24 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
           }
         }
       }
+    } else if (b.typ === 'lista') {
+      // Ett kort att ha på bordet (strategikortet): tabellens rader stort över hela bilden, så att eleven kan läsa det
+      // vid bordet. Kolumnrubrikerna står små och grå överst, och raderna delar höjden lika. Texten är så stor som
+      // raderna och den längsta cellen tillåter, högst 28 pt, räknat på sidan (sx, sy) och i graden (K-061, som riggen).
+      const x0 = 0.21, fullW = W - 0.42, n = b.kolumner.length, cw = fullW / n;
+      let y = areaTop;
+      const [ra_, ti_] = [String(b.rubrik ?? '').toLowerCase(), String(b.titel ?? '').toLowerCase()];
+      if (ra_ && !ra_.includes(ti_) && !ti_.includes(ra_)) { label(s, versaler(b.rubrik), x0, y, fullW, NAVY); y += 0.36; }
+      b.kolumner.forEach((k: string, i: number) => txt(s, versaler(k), x0 + i * cw + 0.15, y, cw - 0.3, 0.28, { mono: true, size: 12, color: GREY }));
+      y += 0.34;
+      const rh = (areaBottom - y) / b.rader.length;
+      const langst = Math.max(...b.rader.flatMap((r: string[]) => r.map((c) => String(c).length)));
+      const size = Math.max(14, Math.min(28, (rh * sy * 72 * 0.45) / grad, ((cw - 0.3) * sx * 72) / (langst * 0.55) / grad));
+      b.rader.forEach((r: string[], ri: number) => {
+        rect(s, x0, y + ri * rh, fullW, 0.015, LINE);
+        r.forEach((c, i) => txt(s, String(c), x0 + i * cw + 0.15, y + ri * rh, cw - 0.3, rh, { size, valign: 'middle' }));
+      });
+      rect(s, x0, y + b.rader.length * rh, fullW, 0.015, LINE);
     } else {
       ritaBlock(s, b.block, areaTop, areaBottom);
     }
