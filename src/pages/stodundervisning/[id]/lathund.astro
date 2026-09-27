@@ -24,8 +24,9 @@ const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathu
       <h1>Lathund: {d.titel}</h1>
       <p class="ingress">Fyra sidor att ha bredvid sig: metoden i korthet, ett pass steg för steg, mallen och vad du behöver. Skriv ut i liggande A4 eller ladda ner som PowerPoint, pdf eller Word.</p>
       <p class="lathund-knappar">
-        {/* Utskriften är pdf:en, som är lathundens PowerPoint: fyra fyllda sidor (2026-09-27). */}
-        <a class="knapp" href={`/stodundervisning/${m.id}-lathund.pdf`} target="_blank" rel="noopener">Skriv ut lathunden (pdf, fyra sidor)</a>
+        {/* Knappen öppnar alltid utskriftsrutan: med pdf:en (lathundens PowerPoint, fyra fyllda sidor) där
+            webbläsaren kan, annars med sidan (skriptet nedan). Utan skript öppnas pdf:en. */}
+        <a class="knapp" href={`/stodundervisning/${m.id}-lathund.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf>Skriv ut lathunden (fyra sidor)</a>
         {' '}<Filval fil={`/stodundervisning/${m.id}-lathund`} namn={`${m.id}-lathund`} rubrik="Lathunden" pdf pptx />
       </p>
       <nav class="metod-nav lathund-nav" aria-label="Lathundens sidor">
@@ -74,6 +75,37 @@ const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathu
     window.print();
     setTimeout(stad, 2000);
   };
+  // Skriv ut lathunden: en knapp som heter Skriv ut ska ge utskriftsrutan (Niclas 2026-09-27). I Chromium på
+  // datorn (Chrome, Edge, Chromebook) laddas pdf:en, lathundens PowerPoint, i en dold ram och skrivs ut därifrån.
+  // Mobilen, Safari och Firefox kan inte pålitligt skriva ut en pdf ur sidan; där skriver knappen ut sidan som
+  // förut, vilket fungerar också i mobilen, och pdf:en finns under Pdf bredvid.
+  const kanSkrivaUtPdf = () => {
+    const ua = (navigator as Navigator & { userAgentData?: { mobile: boolean } }).userAgentData;
+    return ua?.mobile === false && navigator.pdfViewerEnabled === true;
+  };
+  for (const lank of document.querySelectorAll<HTMLAnchorElement>('[data-skriv-ut-pdf]')) {
+    lank.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!kanSkrivaUtPdf()) { window.print(); return; }
+      document.querySelector('iframe.skriv-ut-pdf')?.remove();
+      const ram = document.createElement('iframe');
+      ram.className = 'skriv-ut-pdf';
+      ram.title = 'Lathunden för utskrift';
+      ram.tabIndex = -1;
+      ram.setAttribute('aria-hidden', 'true');
+      ram.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden';
+      ram.addEventListener('load', () => {
+        try {
+          ram.contentWindow!.focus();
+          ram.contentWindow!.print();
+        } catch {
+          window.print();
+        }
+      }, { once: true });
+      ram.src = lank.href;
+      document.body.append(ram);
+    });
+  }
   for (const knapp of document.querySelectorAll<HTMLButtonElement>('[data-skriv-ut-mall]')) knapp.addEventListener('click', () => skrivUtDel('tryck-bara-mall'));
   for (const knapp of document.querySelectorAll<HTMLButtonElement>('[data-skriv-ut-text]')) knapp.addEventListener('click', () => skrivUtDel('tryck-bara-text'));
 </script>
