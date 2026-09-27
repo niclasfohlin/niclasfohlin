@@ -793,6 +793,12 @@ ramar:
             - - Bygg 3 004. Ta bort 8. Skriv växlingarna.
             - - Bygg 2,4 och 1,9. Skriv 2 + 1 och 0,4 + 0,9.
             - - Bygg 2,5. Ta bort 0,7. Skriv växlingen.
+# Veckans kort ("Vecka 1 · Åk 1 · Läs kortet …") klipps isär: på sidan, i utskriften och i planeringsmallarna står
+# varje kort med streckad kant och vecka och årskurs i hörnet, och i Word börjar varje vecka på ny sida (K-032).
+kort:
+  listor:
+    - Läs kortet
+
 mallar:
   - rubrik: Decimalmattan
     text: För åk 4–5 från vecka 2, när hundraplattan är en hel. Skriv ut den i A3, en per elev, både för tiobas och för talbrickor. Då ryms en hundraplatta i Ental och tolv tiondelar i Tiondelar.
