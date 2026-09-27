@@ -61,12 +61,13 @@ Varje ny artikel, metod och bok mejlas prenumeranterna automatiskt: byggpluginen
 
 ## Kvalitet
 
-1. `npm run validera` går igenom före varje commit. Den kontrollerar register, lathundarnas pdf, typer och bygge.
+1. `npm run validera` går igenom före varje commit. Den kontrollerar register, typer och bygge.
 2. Små commits med tydliga meddelanden på svenska: "Artikel: ...", "Metod: ...", "Sajt: ...".
 3. Inga nya beroenden utan skäl. Inga UI-ramverk för det som CSS och lite vanilla JS löser.
 4. Semantisk HTML, tangentbordsnavigering, kontrast och alt-texter. Mobil först.
 5. Varje sida har unik title och description. Canonical, Open Graph, sitemap och RSS finns i Base.astro och ska vara kvar.
 6. Designsystemet ligger i `src/styles/global.css` som variabler. Bygg vidare där i stället för att sprida färger och mått i komponenter.
+7. Allt ur en källa (Niclas 2026-09-27): sidan, utskriften, lathunden, Word och PowerPoint byggs ur metodens fil vid varje bygge. Inga förbyggda filer i repot, och ingen pdf att bygga för hand: utskriftsknapparna skriver ut sidan, och en pdf får läraren genom Spara som PDF. En rättning i formen görs i den gemensamma koden (Metod.astro, Lathund.astro, metoddocx.ts, metodpptx.ts, global.css), aldrig i en enskild metod, så att alla metoder och nya metoder får den automatiskt.
 
 ## Mandat
 

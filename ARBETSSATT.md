@@ -6,7 +6,7 @@ Så här jobbar Claude Code i det här repot. Filen läses vid start och igen ef
 
 Main är det som ligger ute. Allt arbete sker på en gren: `innehall/<slug>` för poster, `sajt/<beskrivning>` för kod och design, `natt/<datum>` för nattkörningar. En hook stoppar commits direkt på main. Varje commit gör en sak och har ett meddelande som säger vad: "Artikel: Nej till no excuses", "Sajt: filtrering i metodbanken".
 
-Före varje commit: `npm run validera`. Det kör registerkontrollen, kontrollen att lathundarnas pdf är byggda ur dagens YAML och stil, `astro check` och `astro build`. Går det inte igenom committas inget.
+Före varje commit: `npm run validera`. Det kör registerkontrollen, `astro check` och `astro build`. Går det inte igenom committas inget.
 
 När arbetet är klart och `npm run validera` är grönt slår du själv ihop grenen till main och pushar. Netlify bygger och deployar varje push till main, och varje bygge drar krediter från månadspotten (1000 sedan 2026-09-20, omkring 15 per bygge). Därför: samla arbetet och pusha main högst en gång per arbetspass eller nattkörning, aldrig ett bygge per post. Rör pushen bara skript, dokumentation eller kön: skriv `[skip netlify]` sist i commit-meddelandet, så byggs inget. Testa lokalt med `npm run validera`, `npm run dev` och `netlify functions:serve`; starta aldrig byggen på Netlify för att testa. Efter pushen: `node scripts/deploykoll.mjs` väntar in bygget för HEAD (omkring en minut), säger grönt eller rött och visar om prenumeranterna mejlades. Beskriv sedan för Niclas vad som gjorts och var det syns. Blev bygget rött: laga eller backa, och skriv vad som hände.
 
@@ -31,6 +31,8 @@ Ingresser och beskrivningar skrivs enligt STIL.md. De är Niclas röst utåt. Ä
 ## Design och kod
 
 KONCEPT.md beskriver målet. Utveckla iterativt: en sak i taget, testa i `npm run dev`, gör commit. Designtokens ligger i `src/styles/global.css`. Nya komponenter i `src/components/`. Håll HTML semantisk och tillgänglig. Inga tunga beroenden.
+
+En källa, ingen drift: allt en läsare får (sidan, utskriften, lathunden, Word och PowerPoint) byggs vid bygget ur metodens fil. Lägg aldrig in en förbyggd fil som måste göras om för hand, och gör en rättning i formen i den gemensamma koden, inte i en enskild metod, så att den gäller alla metoder och nya automatiskt. Utskriften är sidans utskrift, och pdf får läraren genom Spara som PDF. `metodprov.mjs --bilder` skriver ut sidan och lathunden med Chrome och kontrollerar dem.
 
 Astro 7 är strikt med HTML. Stäng alla taggar. Lägg inte block-element i `<p>`. Skriv `{" "}` där mellanrum mellan inline-element behövs.
 

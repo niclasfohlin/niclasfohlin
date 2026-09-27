@@ -21,7 +21,6 @@ Windows 11, Node 24 lokalt (Netlify bygger med 22.12), Git Bash som skal i Claud
 | `scripts/word-pdf.ps1 <docx> [<pdf>]` | repot, kräver Word | docx till pdf via COM, sedan `pdftoppm -r 40 -png` för en bild per sida; skriver sidantalet |
 | `scripts/word-sidor.ps1 <docx…>` | repot, kräver Word | bara sidantal |
 | `node scripts/metod-yaml.mjs <fil.mjs>` | repot | skriver en metod som YAML ur ett JavaScript-objekt |
-| `node scripts/lathund-pdf.mjs [<id>…]` | repot, kräver Chrome | lathundarnas pdf och manifestet `lathund-pdf.json`; körs om efter varje stiländring |
 | `node scripts/metodprov.mjs <id> --underlag <md> --bilder` | repot | provar en byggd metod: sidan, Word-filerna, underlaget, skärmbilder |
 | `node scripts/metodgranskning.mjs <id> --underlag <md>` | repot, kräver Codex | Codex granskar en metod, se METODER.md |
 | `codex.exe` | `%LOCALAPPDATA%\Programs\OpenAI\Codex\bin` | second opinion, se Codex nedan |
