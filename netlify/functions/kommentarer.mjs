@@ -263,9 +263,11 @@ const valjLager = (context) => {
   lagrets = !sammanhang || sammanhang === 'production' ? LAGER : `${LAGER}-${sammanhang}`;
 };
 
+// Stark läsning: mätaren läser, räknar och skriver för varje anrop, och med Blobs vanliga fördröjning skrev
+// två anrop inom en minut över varandra, så att ett uppvaknande försvann ur räkningen (K-051, 2026-09-27).
 function oppnaLager() {
   try {
-    return getStore(lagrets);
+    return getStore(lagrets, { consistency: 'strong' });
   } catch (e) {
     console.error('kommentarer: lagret för kreditmätaren gick inte att öppna:', e?.message);
     return { get: async () => null, set: async () => {}, setJSON: async () => {}, list: async () => ({ blobs: [] }), delete: async () => {} };
