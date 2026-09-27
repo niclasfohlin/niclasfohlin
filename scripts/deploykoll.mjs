@@ -8,10 +8,11 @@
 // Frågar Netlify var tionde sekund i upp till fem minuter (ett bygge tar omkring en minut). Matchar på
 // commit_ref, inte på ordningen i svaret. Avslutar med 0 när deployen är ready, 1 när den är error
 // (med felet utskrivet), 2 om den inte dykt upp eller blivit klar i tid, 3 om netlify inte svarar.
-// När bygget är grönt visas också utskickslagret, så att man ser om prenumeranterna mejlades.
+// När bygget är grönt visas också utskickslagret, så att man ser om prenumeranterna mejlades, och kreditsaldot.
 // [skip netlify] i commit-meddelandet ger ingen deploy alls: då säger skriptet det och avslutar med 0.
 
 import { execSync } from 'node:child_process';
+import { hamta, lage, rad } from './krediter.mjs';
 
 const SITE = '8af49398-3862-4b58-84a6-88f68d0064c1';
 const args = process.argv.slice(2);
@@ -48,6 +49,7 @@ while (Date.now() - start < 5 * 60 * 1000) {
         const s = lager.senast ?? {};
         console.log(`utskick: ${s.status ?? 'okänt'}${s.kampanj ? `, kampanj ${s.kampanj}` : ''}${s.poster?.length ? `, ${s.poster.join(', ')}` : ''}${s.fel ? `, fel: ${s.fel}` : ''}`);
       } catch { console.log('utskick: kunde inte läsa lagret (netlify blobs:get utskick skickat).'); }
+      try { const k = await hamta({ farsk: true }); console.log(`krediter: ${rad(k, lage(k))}`); } catch (e) { console.log(`krediter: saldot gick inte att läsa (${e.message}); npm run krediter.`); }
       process.exit(0);
     }
     if (d.state === 'error') {

@@ -13,10 +13,9 @@
 
 import { execSync } from 'node:child_process';
 import { LAGER, period, uppskattning } from '../netlify/lib/kommentarer.mjs';
+import { hamta } from './krediter.mjs';
 
 const SITE = '8af49398-3862-4b58-84a6-88f68d0064c1';
-const KREDITER_PER_BYGGE = 15;
-const PLANENS_KREDITER = 1000;
 const kor = (cmd) => execSync(cmd, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], env: { ...process.env, NETLIFY_AUTH_TOKEN: undefined } });
 const varde = (namn) => {
   try {
@@ -86,12 +85,8 @@ try {
 } catch { /* inget räknat än den här perioden */ }
 const u = f ? uppskattning(f) : { db: 0, funktion: 0, anrop: 0, summa: 0 };
 
-let byggen = 0;
-try {
-  const ut = kor(`netlify api listSiteDeploys --data "{\\"site_id\\":\\"${SITE}\\",\\"per_page\\":100}"`);
-  const lista = JSON.parse(ut.slice(ut.indexOf('[')));
-  byggen = lista.filter((d) => d.context === 'production' && d.state === 'ready' && new Date(d.created_at) >= periodStart).length;
-} catch { /* netlify svarar inte */ }
+let saldo = null;
+try { saldo = await hamta({ farsk: true }); } catch { /* Netlify svarar inte; raden säger det */ }
 
 const k = (x) => x.toFixed(x < 10 ? 1 : 0).replace('.', ',');
 console.log(`Kommentarerna: ${lage}`);
@@ -99,7 +94,6 @@ console.log(`Perioden: från ${periodStart.toISOString().slice(0, 10)} (Netlifys
 console.log('');
 console.log(`Kommentarerna har använt omkring ${k(u.summa)} av taket ${tak} krediter${u.summa >= tak ? ': TAKET NÅTT, nya kommentarer tas inte emot' : ''}.`);
 console.log(`  databasen ${k(u.db)}, funktionen ${k(u.funktion)}, anropen ${k(u.anrop)}${f ? `; ${f.anrop} anrop, databasen vaken omkring ${Math.round(f.dbMinuter + (f.dbStart ? (f.dbSenast - f.dbStart) / 60000 + 5 : 0))} minuter` : ''}`);
-console.log(`Byggen i perioden: ${byggen}, omkring ${byggen * KREDITER_PER_BYGGE} krediter.`);
-console.log(`Tillsammans omkring ${k(u.summa + byggen * KREDITER_PER_BYGGE)} av planens ${PLANENS_KREDITER}. Sajtens visningar och trafik kommer till; hela räkningen står i Netlify under Usage.`);
+console.log(saldo ? `Netlify: ${Math.round(saldo.kvar)} krediter kvar av ${Math.round(saldo.totalt)}. Hela räkningen, vad som drar och kreditspärren: npm run krediter` : 'Netlify-saldot gick inte att läsa: npm run krediter');
 console.log('');
 console.log(`Robotkontrollen (Cloudflare Turnstile): ${turnstile}.`);

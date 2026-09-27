@@ -54,7 +54,14 @@
       {
         "matcher": "compact",
         "hooks": [
-          { "type": "command", "command": "node .claude/hooks/kontext.mjs", "timeout": 10 }
+          { "type": "command", "command": "node .claude/hooks/kontext.mjs", "timeout": 30 }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          { "type": "command", "command": "node scripts/krediter.mjs --rad", "timeout": 30 }
         ]
       }
     ],
@@ -62,7 +69,7 @@
       {
         "matcher": "Bash",
         "hooks": [
-          { "type": "command", "command": "node .claude/hooks/skydda-main.mjs", "timeout": 10 }
+          { "type": "command", "command": "node .claude/hooks/skydda-main.mjs", "timeout": 30 }
         ]
       }
     ],
