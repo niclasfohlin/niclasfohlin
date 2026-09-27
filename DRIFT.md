@@ -21,13 +21,16 @@ Windows 11, Node 24 lokalt (Netlify bygger med 22.12), Git Bash som skal i Claud
 | `scripts/word-pdf.ps1 <docx> [<pdf>]` | repot, kräver Word | docx till pdf via COM, sedan `pdftoppm -r 40 -png` för en bild per sida; skriver sidantalet |
 | `scripts/word-sidor.ps1 <docx…>` | repot, kräver Word | bara sidantal |
 | `node scripts/lathund-pdf.mjs [--vid-behov]` | repot, kräver Chrome | lathundarnas pdf och manifestet `lathund-pdf.json`; `npm run validera` kör den med `--vid-behov`, så pdf:en görs om automatiskt när metoden eller koden ändras |
+| `node scripts/krediter.mjs` (`npm run krediter`) | repot | Netlifys kreditsaldo, vad som drar, trafiken (`-- trafik`) och kreditspärren; se Krediter nedan |
+| `node scripts/bilder.mjs` | repot, sharp följer med Astro | krymper nya bilder under `public/images/` till sitt syfte; körs i `npm run validera` |
+| `node scripts/delningskort.mjs` | repot, kräver Chrome | ritar sidornas delningskort till `public/delning/`; körs sist i `npm run validera`, och `--kontrollera` i `npm run build` |
 | `node scripts/metod-yaml.mjs <fil.mjs>` | repot | skriver en metod som YAML ur ett JavaScript-objekt |
 | `node scripts/metodprov.mjs <id> --underlag <md> --bilder` | repot | provar en byggd metod: sidan, Word-filerna, underlaget, skärmbilder |
 | `node scripts/metodgranskning.mjs <id> --underlag <md>` | repot, kräver Codex | Codex granskar en metod, se METODER.md |
 | `codex.exe` | `%LOCALAPPDATA%\Programs\OpenAI\Codex\bin` | second opinion, se Codex nedan |
 | `npx lighthouse` | npm | mätning mot `astro preview --port 4322` |
 
-npm-skripten: `dev`, `build` (pdf-kontroll och astro build), `preview`, `check`, `validera` (register, pdf-kontroll, astro check, build), `taggar`, `texter`, `ko`, `ko:prov`.
+npm-skripten: `dev`, `build` (pdf-kontroll, astro build och kontroll av delningskorten), `preview`, `check`, `validera` (register, bilderna, lathundens pdf, astro check, build och delningskorten), `krediter`, `bilder`, `delningskort`, `taggar`, `texter`, `ko`, `ko:prov`.
 
 Word och PowerPoint via COM lämnar ibland en process kvar när ett anrop bryts: `taskkill //F //IM WINWORD.EXE` (eller POWERPNT.EXE) innan nästa försök. Bash-verktyget i appen äter omvända snedstreck i heredocs, även med citerad avgränsare: ett Python- eller Node-skript med `\n` eller `\.` i en heredoc får riktiga radbrytningar och blir fel. Skriv sådana skript till en fil med Write och kör filen, eller ändra med Edit. Kedjade kommandon med `rm -rf`, och `git commit` medan grenen är main, stoppas av appen respektive hooken: kör dem för sig, på en gren.
 
@@ -58,7 +61,7 @@ Repot är publikt: Niclas opublicerade underlag (kompendier, lathundar, CV) ligg
 
 ## Netlify
 
-Sajten heter niclasfohlin (id `8af49398-3862-4b58-84a6-88f68d0064c1`, team niclas-fohlin, https://niclasfohlin.netlify.app) och bygger main via deploy key och webhook. Planen är Personal med 1000 krediter per månad sedan 2026-09-20; ett bygge kostar omkring 15. Därför en push per arbetspass, aldrig testbyggen på Netlify. `pretty_urls` är avslaget, "Powered by"-brickan är avstängd, Netlify DNS används inte.
+Sajten heter niclasfohlin (id `8af49398-3862-4b58-84a6-88f68d0064c1`, team niclas-fohlin, https://niclasfohlin.netlify.app) och bygger main via deploy key och webhook. Planen är Personal med 1000 krediter per period, från den 20:e; ett lyckat produktionsbygge kostar 15, ett misslyckat inget. Därför en push per arbetspass, aldrig testbyggen på Netlify. Saldot, trafiken och kreditspärren står under Krediter nedan. `pretty_urls` är avslaget, "Powered by"-brickan är avstängd, Netlify DNS används inte.
 
 | Uppgift | Kommando |
 |---|---|
@@ -73,6 +76,33 @@ Miljövariablerna i Netlify: `BREVO_API_KEY` (hemlig), `UTSKICK_HEMLIGHET` (heml
 Utskicket efter deploy: byggpluginen `netlify/plugins/utskick` (onSuccess, bara produktion) anropar funktionen `netlify/functions/utskick.mjs` på den nya deployen; logiken i `netlify/lib/utskick.mjs` läser `nytt.json` ur bygget, jämför med lagret och skapar och skickar en Brevo-kampanj "Nytt <datum>: <titlar>" om det som tillkommit. Lagret uppdateras i två steg (skapar, skapad, skickad, eller avbruten med fel), så ett misslyckat utskick upprepas aldrig; en avbruten kampanj skickas för hand i Brevo. Första körningen på en ny rigg registrerar allt utan att skicka.
 
 Efter varje push: kontrollera att deployen är `ready`, läs lagret om innehåll tillkommit, och öppna sidan som ändrats.
+
+## Krediter
+
+Netlify räknar allt i krediter: ett lyckat produktionsbygge 15, bandbredd 20 per GB, anrop 2 per 10 000, funktionerna och databasen 10 per GB-timme. Förhandsversioner och misslyckade byggen kostar inget. Planen ger 1000 per period, från den 20:e, och det som blir över sparas inte. Tar krediterna slut pausar Netlify sajten, och besökarna får "Site not available" tills perioden börjar om. Att köpa krediter eller slå på automatisk påfyllning kostar pengar och är Niclas beslut.
+
+| Vad | Kommando |
+|---|---|
+| Saldot, förbrukningen per mätare, det som drar utan byggen och spärren | `npm run krediter` |
+| Vad trafiken består av: besökare, adresser, webbläsare och filtyper | `npm run krediter -- trafik [timmar]` |
+| Raden vid varje nytt uppdrag och efter en kompaktering | `node scripts/krediter.mjs --rad`, från kroken UserPromptSubmit i `.claude/settings.json` och från `.claude/hooks/kontext.mjs` |
+| Spärren före uppladdning | `.claude/hooks/skydda-main.mjs`, som kör `node scripts/krediter.mjs --grind` |
+| Prova spärren utan att röra Netlify | `KREDITER_PROV_KVAR=110 node scripts/krediter.mjs --grind` |
+| Saldot efter ett bygge | `node scripts/deploykoll.mjs` skriver det sist |
+
+Anropen är desamma som Netlifys panel använder: `/api/v1/niclas-fohlin/billing/credits` (saldot), `/billing/credit_usage` (per mätare), `/credit_usage_insights` (per dygn) och `/api/v1/sites/<id>/observability/query/topk` (trafiken, med frågorna `user_agent_categories`, `urls`, `user_agents` och `content_types`). De är odokumenterade: det öppna API:t redovisar inga krediter, och `getAccount` visar `used: 0` (2026-09-27). Nyckeln är Netlify CLI:s inloggning och skrivs aldrig ut. Slutar anropen svara står saldot i Netlify under Usage & billing, och spärren stoppar pushar tills saldot går att läsa igen eller Niclas säger till.
+
+**Kreditspärren** (Niclas 2026-09-27). Vid 100 krediter kvar laddas inget upp. Spärren stänger när nästa bygge skulle ta saldot under 100, och den gäller push till main, `netlify deploy --prod`, `createSiteBuild` och `npm run kommentarer -- av`, `på` och `tak`, som bygger om. En push där varje ny commit bär `[skip netlify]` bygger inget och släpps. När spärren är stängd: säg till Niclas och arbeta vidare lokalt med grenar, `npm run validera` och sammanslagning till main, men pusha inte main. Säkerhetskopiera med `git push origin main:vantar-pa-krediter`; Netlify bygger bara main (`allowed_branches`). När krediterna är påfyllda, den 20:e eller efter ett köp, säger raden att spärren är öppen och hur många commits som väntar, och en enda push av main laddar upp allt. Utskicket mejlar då allt nytt i ett brev. `KREDITSPARR=av` först i kommandot släpper igenom, bara när Niclas sagt det.
+
+**Trafiken 2026-09-27.** Ett dygn gav 28 700 anrop och 500 MB, omkring 16 krediter. Facebooks bildhämtare (`facebookexternalhit`) hämtade delningsbilden 6 131 gånger, 260 MB, eftersom Netlify skickade `Cache-Control: max-age=0` och Facebook då hämtar bilden på nytt. Riktiga läsare stod för omkring 2 000 sidvisningar, bland annat från Facebook och kommunernas intranät. Samma dag fick bilderna, typsnitten, delningskorten och filerna under `/_astro/` cache i `netlify.toml`, bilderna krymptes till sitt syfte och varje sida fick ett eget delningskort. Den gamla delningsbilden `/images/niclas-fohlin-delning.jpg` ligger kvar för inlägg som redan är delade.
+
+## Delning och bilder
+
+Varje sida har ett eget delningskort, 1200 × 630, som Facebook, LinkedIn, X med flera visar när sidan delas: sidans titel, en rad om vad det är (Stödundervisning · Matematik · åk 4–6, Krönika · Vi Lärare · 2024, Bok · Studentlitteratur · 2021) och Niclas porträtt, eller omslaget för en bok. Korten görs ur samma uppgifter som sidan: `src/lib/delningskort.ts` med mallen `src/pages/delning/kort/[namn].astro`, huvudsidornas titlar och beskrivningar i `src/data/site.ts` och färgerna och typsnittet ur `global.css`. `Base.astro` sätter `og:image` med mått och alt-text; en sida utan eget kort, som lathunden eller en taggsida, får närmaste överordnade sidas.
+
+Filnamnet bär en kontrollsumma av allt som syns på kortet. En ny sida eller en ändrad titel ger därför ett nytt kort nästa gång `npm run validera` körs (`scripts/delningskort.mjs` ritar det med Chrome ur mallen, omkring en kvarts sekund per kort), och ett kort som ingen sida pekar på tas bort. Korten committas i `public/delning/`, eftersom Netlify saknar Chrome, och `npm run build` stannar om ett kort saknas. De cachas i ett år; en ändring får ju en ny adress, som Facebook hämtar nästa gång sidan delas. Hur ett kort ser ut hos tjänsterna: Facebooks Sharing Debugger och LinkedIns Post Inspector kräver inloggning och är Niclas.
+
+**Bilderna.** `npm run validera` kör `scripts/bilder.mjs`, som gör om varje ny eller ändrad bild under `public/images/` en gång: högst 480 pixlar bred (omslagen och porträttet visas som mest 240 punkter breda), 1200 × 630 för en delningsbild, JPEG med kvalitet 78, och ett PNG-foto blir JPEG med ny sökväg i posten. `src/data/bilder.json` minns vilka bilder som är gjorda, så att ingen komprimeras två gånger. Mätt 2026-09-27: de 17 bilderna gick från 1 070 till 533 kB, och startsidans fyra omslag från 306 till 93 kB.
 
 ## Brevo
 
@@ -117,7 +147,7 @@ Under varje artikel, bok och metod finns kommentarer, byggda 2026-09-26 på Nicl
 
 **Avstängningen.** Står `KOMMENTARER` på `av` i Netlify byggs sidorna utan rutan och utan klienten, och funktionen svarar 410 på allt. Mätt 2026-09-26: ett bygge med kommentarerna av har varje html-, js- och css-fil identisk med ett bygge utan kommentarerna; bara byggtidsstämplarna i json-, docx- och pptx-filerna skiljer, som mellan två vanliga byggen. Kommentarerna ligger kvar i databasen och kommer tillbaka med `på`. Ska lagret bort för gott: stäng av, ta bort filerna i tabellen ovan, raderna i `netlify.toml`, paketen `@waline/vercel`, `serverless-http`, `@netlify/database`, `@netlify/functions`, `phpass`, `jsonwebtoken` och `overrides` i `package.json`, och avsnittet här. Databasen raderas i Netlify under Data & Storage; det går inte att ångra och är Niclas beslut.
 
-**Krediterna.** Databasen kostar 10 krediter per beräkningsenhet och timme den är vaken, och grenarna står på 0,25 till 1 enhet (uppmätt 2026-09-26), alltså omkring 2,5 krediter i timmen och minst fem minuter åt gången. Därför når en läsare den aldrig: listan kommer ur CDN:et (en timme, töms när sidan ändras), annars ur Blobs, och sidor utan godkända kommentarer får en tom lista utan att databasen frågas. Databasen vaknar när någon skriver, när Niclas modererar och första gången en ändrad sida läses. Funktionen räknar själv och sparar räkningen i Blobs: databasens vakna minuter, funktionstiden och anropen. Når uppskattningen taket (`KOMMENTARER_BUDGET`, förval 50) tas inga nya kommentarer emot resten av perioden, som börjar den 20:e; befintliga syns som vanligt och Niclas kan fortfarande moderera. `npm run kommentarer` visar också periodens byggen, 15 krediter styck, som är sajtens största post. Hela räkningen står bara i Netlify under Usage: API:t redovisar inte krediterna.
+**Krediterna.** Databasen kostar 10 krediter per beräkningsenhet och timme den är vaken, och grenarna står på 0,25 till 1 enhet (uppmätt 2026-09-26), alltså omkring 2,5 krediter i timmen och minst fem minuter åt gången. Därför når en läsare den aldrig: listan kommer ur CDN:et (en timme, töms när sidan ändras), annars ur Blobs, och sidor utan godkända kommentarer får en tom lista utan att databasen frågas. Databasen vaknar när någon skriver, när Niclas modererar och första gången en ändrad sida läses. Funktionen räknar själv och sparar räkningen i Blobs: databasens vakna minuter, funktionstiden och anropen. Når uppskattningen taket (`KOMMENTARER_BUDGET`, förval 50) tas inga nya kommentarer emot resten av perioden, som börjar den 20:e; befintliga syns som vanligt och Niclas kan fortfarande moderera. `npm run kommentarer` visar också Netlifys saldo; hela räkningen ger `npm run krediter`. Mätt 2026-09-27: Netlify tog betalt för 14 krediter databas sedan 2026-09-20, medan funktionens egen mätare räknade 1,5. Databasen får skala upp till 1 enhet (`max_cu: 1`, alltså 10 krediter i timmen) och sover först efter 300 sekunder, och inställningen går inte att ändra på Personal (`setSiteDatabaseComputeSettings` svarar Forbidden). Vad som väcker den utöver funktionens egna anrop är en post i kön.
 
 **Robotskyddet.** Utan nycklar: ett dolt fält, ett signerat prov som måste vara minst tre sekunder gammalt när kommentaren skickas, en kommentar per minut och avsändare, högst två länkar, och att varje kommentar väntar på Niclas godkännande. Med Cloudflare Turnstile därtill: Niclas skapar en osynlig widget för niclasfohlin.se i Cloudflare och sätter `TURNSTILE_KEY` (ingen hemlighet) och `TURNSTILE_SECRET` (hemlig) i Netlify; nästa bygge slår på kontrollen i rutan, i funktionen och i panelens inloggning. Båda ska sättas före samma bygge, annars stoppas varje kommentar.
 

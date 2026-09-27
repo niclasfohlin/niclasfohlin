@@ -2,7 +2,7 @@
 
 Du förvaltar Niclas Fohlins författar- och kunskapssajt. Sajten ska vara snabb, sober och redaktionellt trovärdig. Läsbarhet före effekter. Ingen generisk AI-design.
 
-Det viktigaste först: allt arbete sker på grenar, `npm run validera` går igenom före varje commit, taggar och publikationer tas från registren i `src/data/`, och du slår ihop, pushar och deployar själv när valideringen är grön. Nytt innehåll mejlas prenumeranterna automatiskt efter deploy; längre nyhetsbrev skickas bara när Niclas säger skicka.
+Det viktigaste först: allt arbete sker på grenar, `npm run validera` går igenom före varje commit, taggar och publikationer tas från registren i `src/data/`, och du slår ihop, pushar och deployar själv när valideringen är grön. Vid 100 Netlify-krediter kvar stänger kreditspärren uppladdningen: arbetet fortsätter lokalt och laddas upp med en enda push när krediterna är påfyllda (`npm run krediter`, DRIFT.md under Krediter). Nytt innehåll mejlas prenumeranterna automatiskt efter deploy; längre nyhetsbrev skickas bara när Niclas säger skicka.
 
 Arbete som inte är ett direkt svar på Niclas går genom kön: `node scripts/ko.mjs lista`, `starta`, `klar`. Ett fel du hittar i förbifarten läggs i kön med `lagg`, det lagas inte i samma commit. Hur kön fungerar står i ARBETSSATT.md.
 
@@ -14,7 +14,7 @@ Arbete som inte är ett direkt svar på Niclas går genom kön: `node scripts/ko
 | Fil | Vad den svarar på |
 |---|---|
 | KONCEPT.md | Vad sajten ska bli och varför |
-| DRIFT.md | Plattformarna: vad som finns hos GitHub, Netlify, Brevo och Loopia, var inloggningarna ligger, kommandon som fungerar, vad man gör när något är rött; kommentarerna och deras krediter |
+| DRIFT.md | Plattformarna: vad som finns hos GitHub, Netlify, Brevo och Loopia, var inloggningarna ligger, kommandon som fungerar, vad man gör när något är rött; krediterna, kreditspärren och trafiken; delningskorten och bilderna; kommentarerna |
 | METODER.md | Hur en metod tas emot och görs om: modellen, mappningen från kompendium till YAML, lathunden, textreglerna, kontrollerna, Codex-granskningen, metodriggen utanför repot |
 | UPPSTART.md | Hur drift, konton och behörigheter sattes upp från början |
 | KO.md | Kön. `node scripts/ko.mjs lista` visar den, `/natt` arbetar igenom den |
@@ -61,17 +61,17 @@ Varje ny artikel, metod och bok mejlas prenumeranterna automatiskt: byggpluginen
 
 ## Kvalitet
 
-1. `npm run validera` går igenom före varje commit. Den kontrollerar register, gör om lathundarnas pdf där något har ändrats och kontrollerar typer och bygge.
+1. `npm run validera` går igenom före varje commit. Den kontrollerar register, krymper nya bilder till sitt syfte, gör om lathundarnas pdf där något har ändrats, kontrollerar typer och bygge och ritar de delningskort som saknas.
 2. Små commits med tydliga meddelanden på svenska: "Artikel: ...", "Metod: ...", "Sajt: ...".
 3. Inga nya beroenden utan skäl. Inga UI-ramverk för det som CSS och lite vanilla JS löser.
 4. Semantisk HTML, tangentbordsnavigering, kontrast och alt-texter. Mobil först.
-5. Varje sida har unik title och description. Canonical, Open Graph, sitemap och RSS finns i Base.astro och ska vara kvar.
+5. Varje sida har unik title och description. Canonical, Open Graph, sitemap och RSS finns i Base.astro och ska vara kvar. Varje sida får ett eget delningskort, 1200 × 630 med sidans titel, ur `src/lib/delningskort.ts` och mallen `src/pages/delning/kort/[namn].astro`; ingen sida behöver en egen delningsbild. Bilder under `public/images/` krymps automatiskt till sitt syfte (`scripts/bilder.mjs`), och cachen står i `netlify.toml`.
 6. Designsystemet ligger i `src/styles/global.css` som variabler. Bygg vidare där i stället för att sprida färger och mått i komponenter.
-7. Allt ur en källa utan drift (Niclas 2026-09-27): sidan, utskriften, lathunden, Word och PowerPoint byggs ur metodens fil vid varje bygge. Den enda fil som görs i förväg är lathundens pdf, och `npm run validera` gör om den automatiskt ur lathundssidan när metoden eller koden har ändrats; bygget stannar om en gammal pdf ändå pushas. Inget görs om för hand. Utskriftsknapparna skriver ut sidan, och metodens pdf får läraren genom Spara som PDF. En rättning i formen görs i den gemensamma koden (Metod.astro, Lathund.astro, metoddocx.ts, metodpptx.ts, global.css), aldrig i en enskild metod, så att alla metoder och nya metoder får den automatiskt.
+7. Allt ur en källa utan drift (Niclas 2026-09-27): sidan, utskriften, lathunden, Word och PowerPoint byggs ur metodens fil vid varje bygge. Det enda som görs i förväg är lathundens pdf och delningskorten, och `npm run validera` gör om dem automatiskt när posten eller koden har ändrats; bygget stannar om en gammal pdf eller ett saknat kort ändå pushas. Inget görs om för hand. Utskriftsknapparna skriver ut sidan, och metodens pdf får läraren genom Spara som PDF. En rättning i formen görs i den gemensamma koden (Metod.astro, Lathund.astro, metoddocx.ts, metodpptx.ts, global.css), aldrig i en enskild metod, så att alla metoder och nya metoder får den automatiskt.
 
 ## Mandat
 
-Niclas gav 2026-09-19 Claude Code fullt mandat att sköta sajten och tjänsterna runt den: GitHub, Netlify, Brevo, domänen och koden. Du slår ihop till main, pushar, deployar, sätter miljövariabler, lägger till taggar och publikationer och löser driftproblem utan att fråga, så länge `npm run validera` är grönt. Beslut Niclas ska känna till skrivs i NATTEN.md eller i svaret, efteråt. Verktygen, var inloggningarna ligger och anropen som fungerar står i DRIFT.md.
+Niclas gav 2026-09-19 Claude Code fullt mandat att sköta sajten och tjänsterna runt den: GitHub, Netlify, Brevo, domänen och koden. Du slår ihop till main, pushar, deployar, sätter miljövariabler, lägger till taggar och publikationer och löser driftproblem utan att fråga, så länge `npm run validera` är grönt och kreditspärren är öppen. Beslut Niclas ska känna till skrivs i NATTEN.md eller i svaret, efteråt. Verktygen, var inloggningarna ligger och anropen som fungerar står i DRIFT.md.
 
 ## Det här gör bara Niclas
 

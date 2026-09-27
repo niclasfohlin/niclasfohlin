@@ -6,9 +6,11 @@ Så här jobbar Claude Code i det här repot. Filen läses vid start och igen ef
 
 Main är det som ligger ute. Allt arbete sker på en gren: `innehall/<slug>` för poster, `sajt/<beskrivning>` för kod och design, `natt/<datum>` för nattkörningar. En hook stoppar commits direkt på main. Varje commit gör en sak och har ett meddelande som säger vad: "Artikel: Nej till no excuses", "Sajt: filtrering i metodbanken".
 
-Före varje commit: `npm run validera`. Det kör registerkontrollen, gör om lathundarnas pdf där metoden eller koden har ändrats och kör `astro check` och `astro build`. Går det inte igenom committas inget.
+Före varje commit: `npm run validera`. Det kör registerkontrollen, krymper nya bilder, gör om lathundarnas pdf där metoden eller koden har ändrats, kör `astro check` och `astro build` och ritar de delningskort som saknas. Går det inte igenom committas inget.
 
-När arbetet är klart och `npm run validera` är grönt slår du själv ihop grenen till main och pushar. Netlify bygger och deployar varje push till main, och varje bygge drar krediter från månadspotten (1000 sedan 2026-09-20, omkring 15 per bygge). Därför: samla arbetet och pusha main högst en gång per arbetspass eller nattkörning, aldrig ett bygge per post. Rör pushen bara skript, dokumentation eller kön: skriv `[skip netlify]` sist i commit-meddelandet, så byggs inget. Testa lokalt med `npm run validera`, `npm run dev` och `netlify functions:serve`; starta aldrig byggen på Netlify för att testa. Efter pushen: `node scripts/deploykoll.mjs` väntar in bygget för HEAD (omkring en minut), säger grönt eller rött och visar om prenumeranterna mejlades. Beskriv sedan för Niclas vad som gjorts och var det syns. Blev bygget rött: laga eller backa, och skriv vad som hände.
+När arbetet är klart och `npm run validera` är grönt slår du själv ihop grenen till main och pushar. Netlify bygger och deployar varje push till main, och varje lyckat bygge drar 15 krediter från månadspotten på 1000, som fylls på den 20:e. Trafiken drar också, så saldot sjunker även utan byggen; `npm run krediter` visar det verkliga saldot och vad som drar. Därför: samla arbetet och pusha main högst en gång per arbetspass eller nattkörning, aldrig ett bygge per post. Rör pushen bara skript, dokumentation eller kön: skriv `[skip netlify]` sist i commit-meddelandet, så byggs inget. Testa lokalt med `npm run validera`, `npm run dev` och `netlify functions:serve`; starta aldrig byggen på Netlify för att testa. Efter pushen: `node scripts/deploykoll.mjs` väntar in bygget för HEAD (omkring en minut), säger grönt eller rött och visar om prenumeranterna mejlades. Beskriv sedan för Niclas vad som gjorts och var det syns. Blev bygget rött: laga eller backa, och skriv vad som hände.
+
+Kreditspärren (Niclas 2026-09-27): vid 100 krediter kvar laddas inget upp. Spärren stänger när nästa bygge skulle ta saldot under 100. Läget står i en rad vid varje nytt uppdrag och efter en kompaktering, och kroken stoppar en push till main, `netlify deploy --prod` och nya byggen när spärren är stängd. Säg då till Niclas och arbeta vidare lokalt: grenar, `npm run validera` och sammanslagning till main som vanligt, men main pushas inte. Säkerhetskopiera det som väntar med `git push origin main:vantar-pa-krediter`; Netlify bygger bara main. När krediterna är påfyllda laddas allt upp med en enda push av main, och det nya mejlas i ett utskick. `KREDITSPARR=av` först i kommandot släpper igenom en push, bara när Niclas sagt det.
 
 ## Innan du börjar en uppgift
 
@@ -26,13 +28,15 @@ Prio 1 görs nu, prio 2 i tur och ordning, prio 3 vilar tills ett annat jobb än
 
 Poster skapas från mallen i respektive mapp: `_mall.md` för artiklar och böcker, `_mall.yaml` för metoder. Taggar och publikationer tas från registren i `src/data/`. Kör `npm run taggar` för att se vad som finns innan du väljer. En tagg får en egen sida först när något innehåll använder den.
 
+Bilder läggs i `public/images/`. `npm run validera` krymper dem till sitt syfte, 480 pixlar breda och 1200 × 630 för en delningsbild, och gör ett PNG-foto till JPEG; ingen skalar för hand. Varje sida får ett eget delningskort med sin titel, som valideringen ritar; committa kortet med posten.
+
 Ingresser och beskrivningar skrivs enligt STIL.md. De är Niclas röst utåt. Är du osäker på ton eller fakta: fråga, eller skriv ett förslag och markera det tydligt som förslag.
 
 ## Design och kod
 
 KONCEPT.md beskriver målet. Utveckla iterativt: en sak i taget, testa i `npm run dev`, gör commit. Designtokens ligger i `src/styles/global.css`. Nya komponenter i `src/components/`. Håll HTML semantisk och tillgänglig. Inga tunga beroenden.
 
-En källa, ingen drift: allt en läsare får (sidan, utskriften, lathunden, Word och PowerPoint) byggs ur metodens fil. Den enda fil som görs i förväg är lathundens pdf, och `npm run validera` gör om den automatiskt ur lathundssidan; bygget stannar om en gammal pdf ändå pushas. Lägg aldrig in en fil som måste göras om för hand, och gör en rättning i formen i den gemensamma koden, inte i en enskild metod, så att den gäller alla metoder och nya automatiskt. Utskriften är sidans utskrift, och metodens pdf får läraren genom Spara som PDF. `metodprov.mjs --bilder` skriver ut sidan och lathunden med Chrome och kontrollerar dem.
+En källa, ingen drift: allt en läsare får (sidan, utskriften, lathunden, Word och PowerPoint) byggs ur metodens fil. Det enda som görs i förväg är lathundens pdf och delningskorten, och `npm run validera` gör om dem automatiskt; bygget stannar om en gammal pdf eller ett saknat kort ändå pushas. Lägg aldrig in en fil som måste göras om för hand, och gör en rättning i formen i den gemensamma koden, inte i en enskild metod, så att den gäller alla metoder och nya automatiskt. Utskriften är sidans utskrift, och metodens pdf får läraren genom Spara som PDF. `metodprov.mjs --bilder` skriver ut sidan och lathunden med Chrome och kontrollerar dem.
 
 Astro 7 är strikt med HTML. Stäng alla taggar. Lägg inte block-element i `<p>`. Skriv `{" "}` där mellanrum mellan inline-element behövs.
 

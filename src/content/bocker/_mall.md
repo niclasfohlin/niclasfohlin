@@ -13,7 +13,7 @@ kapitel: ""
 serie: ""
 isbn: ""
 # sidor: 200
-# Lägg omslaget i public/images/bocker/ och ange sökvägen.
+# Lägg omslaget i public/images/bocker/ och ange sökvägen. npm run validera krymper det till rätt storlek.
 omslag: "/images/bocker/slug.jpg"
 # Bara riktiga adresser; ta bort blocket om ingen finns. En platshållare går igenom bygget och hamnar på sajten.
 # lankar:
