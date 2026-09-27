@@ -10,7 +10,7 @@ const { rubrik, info, nyGrupp = false, brak = false } = Astro.props;
 const form = info.ett ? 'ett' : info.korta ? 'korta' : 'meningar';
 ---
 <div class={`m-lista m-kortlista ${form}${nyGrupp ? ' ny-grupp' : ''}`}>
-  {rubrik && <p class="m-lista-rubrik">{rubrik}</p>}
+  {rubrik && <h4 class="m-lista-rubrik">{rubrik}</h4>}
   <ul>
     {info.kort.map((k, i) => (
       <li class="m-kort">

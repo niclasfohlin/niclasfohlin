@@ -37,7 +37,8 @@ const kant = (color = FARG.kant, size = 4): IBorderOptions => ({ style: BorderSt
 const runt = (b: IBorderOptions) => ({ top: b, bottom: b, left: b, right: b });
 
 // brak: bråken i texten står staplade (elevmaterial); nySida: stycket börjar på en ny sida.
-interface StyckeVal { kursiv?: boolean; fet?: boolean; farg?: string; storlek?: number; fore?: number; efter?: number; hallIhop?: boolean; mitt?: boolean; versaler?: boolean; font?: string; brak?: boolean; nySida?: boolean }
+// niva4: stycket är en rubrik på nivå 4 i Word (en listas rubrik under ramens nivå 3), så att den syns i navigeringen (K-035).
+interface StyckeVal { kursiv?: boolean; fet?: boolean; farg?: string; storlek?: number; fore?: number; efter?: number; hallIhop?: boolean; mitt?: boolean; versaler?: boolean; font?: string; brak?: boolean; nySida?: boolean; niva4?: boolean }
 
 function run(text: string, o: StyckeVal = {}): TextRun {
   const val: IRunOptions = { text, italics: o.kursiv, bold: o.fet, color: o.farg, size: o.storlek, allCaps: o.versaler, font: o.font };
@@ -84,6 +85,7 @@ function stycke(text: string, o: StyckeVal = {}): Paragraph {
     keepNext: o.hallIhop,
     pageBreakBefore: o.nySida,
     alignment: o.mitt ? AlignmentType.CENTER : undefined,
+    heading: o.niva4 ? HeadingLevel.HEADING_4 : undefined,
   });
 }
 function h2(text: string): Paragraph {
@@ -323,7 +325,7 @@ function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][] 
   // och rubriken ryms på en sida.
   const storlek = smal ? Math.min(o.storlek, 24) : o.storlek;
   const bokstaver = l.rader.every((r) => r.every((c) => c.trim().length <= 2));
-  if (l.rubrik) ut.push(stycke(l.rubrik, { fet: true, farg: FARG.huvud, storlek: 16, versaler: true, fore: 120, efter: 60, hallIhop: true }));
+  if (l.rubrik) ut.push(stycke(l.rubrik, { fet: true, farg: FARG.huvud, storlek: 16, versaler: true, fore: 120, efter: 60, hallIhop: true, niva4: true }));
   const rader: TableRow[] = [];
   if (l.kolumner) rader.push(rad(l.kolumner.map((k, i) => cell([stycke(k, { storlek: 15, versaler: true, farg: FARG.svag, efter: 0, hallIhop: true, mitt: !!smal && skriv[i] })], { bredd: bredder[i], fyll: FARG.rand })), { huvud: true }));
   l.rader.forEach((r, ri) => {
@@ -413,7 +415,7 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
     for (const l of ram.listor ?? []) {
       const info = kortInfo({ kort: o.kort }, l);
       if (!info) { ut.push(...elevlista(l, { storlek, brak: o.brak })); continue; }
-      ut.push(stycke(l.rubrik ?? '', { fet: true, farg: FARG.huvud, storlek: 16, versaler: true, fore: 120, efter: 60, hallIhop: true, nySida: info.grupp !== forra }));
+      ut.push(stycke(l.rubrik ?? '', { fet: true, farg: FARG.huvud, storlek: 16, versaler: true, fore: 120, efter: 60, hallIhop: true, nySida: info.grupp !== forra, niva4: true }));
       forra = info.grupp;
       ut.push(kortlista(info, o.brak), avstand());
     }
@@ -1219,6 +1221,8 @@ function dokument(titel: string, sektioner: ISectionOptions[]): Document {
         heading1: { run: { size: 44, bold: true, color: FARG.huvud, font: 'Calibri' }, paragraph: { outlineLevel: 0, keepNext: true, spacing: { before: 0, after: 80 } } },
         heading2: { run: { size: 28, bold: true, color: FARG.huvud, font: 'Calibri' }, paragraph: { outlineLevel: 1, keepNext: true, spacing: { before: 320, after: 100 } } },
         heading3: { run: { size: 24, bold: true, color: FARG.huvud, font: 'Calibri' }, paragraph: { outlineLevel: 2, keepNext: true, spacing: { before: 200, after: 80 } } },
+        // Listornas rubriker (K-035): definierad här, så att Word inte lägger på sin inbyggda nivå 4 (kursiv, blå).
+        heading4: { run: { size: 16, bold: true, italics: false, color: FARG.huvud, font: 'Calibri', allCaps: true }, paragraph: { outlineLevel: 3, keepNext: true, spacing: { before: 120, after: 60 } } },
       },
     },
     numbering: { config: [{ reference: 'nummer', levels: [{ level: 0, format: LevelFormat.DECIMAL, text: '%1.', alignment: AlignmentType.START, style: { paragraph: { indent: { left: 540, hanging: 360 } }, run: { bold: true, color: FARG.huvud } } }] }] },

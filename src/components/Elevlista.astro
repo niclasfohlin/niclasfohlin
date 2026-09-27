@@ -23,7 +23,7 @@ const enKolumn = skriv.filter((s) => !s).length === 1;
       {huvud.map((f) => <div><dt>{f.rubrik}</dt><dd>{f.text}</dd></div>)}
     </dl>
   )}
-  {rubrik && <p class="m-lista-rubrik">{rubrik}</p>}
+  {rubrik && <h4 class="m-lista-rubrik">{rubrik}</h4>}
   <table>
     {kolumner && <thead><tr>{kolumner.map((k, i) => <th scope="col" class={skriv[i] ? 'skriv' : undefined}>{k}</th>)}</tr></thead>}
     <tbody>
