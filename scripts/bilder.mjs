@@ -6,7 +6,8 @@
 //
 // npm run validera kör skriptet, så ingen behöver komma ihåg det. Varje ny eller ändrad bild görs om en gång:
 // till högst 480 pixlar bred (1200 för delningsbilder), JPEG med kvalitet 78 (WebP likaså), och ett PNG-foto
-// utan genomskinlighet blir JPEG och får den nya sökvägen i posterna under src/. Blir bilden inte minst en
+// utan genomskinlighet blir JPEG och får den nya sökvägen i posterna under src/ och i underlag/bocker/register.json;
+// en PNG som verkligen är genomskinlig blir en mindre PNG. Bredden begränsas, höjden följer med. Blir bilden inte minst en
 // tiondel mindre och behöver den inte krympas behålls originalet. src/data/bilder.json minns vilka bilder som
 // är gjorda, med en kontrollsumma, så att ingen bild komprimeras om vid nästa körning.
 //
@@ -25,9 +26,6 @@ const DELNING = 1200;
 const KVALITET = 78;
 const FORTECKNING = join(rot, 'src', 'data', 'bilder.json');
 
-// sharp följer med Astro, som använder den för sina bilder.
-let sharp;
-try { sharp = (await import('sharp')).default; sharp.cache(false); } catch { console.error('sharp saknas (följer med Astro): kör npm install.'); process.exit(1); }
 
 const alla = (d) => readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? alla(join(d, e.name)) : [join(d, e.name)]));
 const kb = (b) => (b / 1000).toFixed(1).replace('.', ',');
@@ -43,8 +41,13 @@ if (kontrollera) {
   process.exit(nya.length ? 1 : 0);
 }
 
-// Posterna och koden som kan peka på en bild, för när ett PNG-foto byter namn till .jpg.
-const kallfiler = alla(join(rot, 'src')).filter((f) => /\.(md|mdx|ya?ml|json|ts|astro|mjs)$/.test(f));
+// sharp följer med Astro, som använder den för sina bilder. Kontrollen ovan klarar sig utan, så att den kan köras i
+// Netlify-bygget.
+let sharp;
+try { sharp = (await import('sharp')).default; sharp.cache(false); } catch { console.error('sharp saknas (följer med Astro): kör npm install.'); process.exit(1); }
+
+// Posterna, koden och bokregistret som kan peka på en bild, för när ett PNG-foto byter namn till .jpg.
+const kallfiler = [join(rot, 'src'), join(rot, 'underlag', 'bocker')].filter((d) => existsSync(d)).flatMap(alla).filter((f) => /\.(md|mdx|ya?ml|json|ts|astro|mjs)$/.test(f));
 
 for (const fil of nya) {
   // Bilden läses in i minnet först: på Windows håller sharp annars filen öppen, och den går inte att skriva över.
@@ -53,11 +56,13 @@ for (const fil of nya) {
   const byte = statSync(fil).size;
   const max = /-delning\.[a-z]+$/i.test(fil) ? DELNING : BREDD;
   const krymps = m.width > max;
-  const pngFoto = m.format === 'png' && !m.hasAlpha;
+  // En alfakanal som inte används (helt ogenomskinlig bild) räknas som foto.
+  const ogenomskinlig = !m.hasAlpha || (await sharp(indata).stats()).isOpaque;
+  const pngFoto = m.format === 'png' && ogenomskinlig;
   let bild = sharp(indata).rotate().resize({ width: Math.min(m.width, max), withoutEnlargement: true });
   let ut = fil;
   if (m.format === 'webp') bild = bild.webp({ quality: KVALITET });
-  else if (m.format === 'png' && m.hasAlpha) bild = bild.png({ compressionLevel: 9, palette: true });
+  else if (m.format === 'png' && !ogenomskinlig) bild = bild.png({ compressionLevel: 9, palette: true });
   else { bild = bild.flatten({ background: '#ffffff' }).jpeg({ quality: KVALITET, mozjpeg: true }); ut = fil.replace(/\.(png|jpeg)$/i, '.jpg'); }
   const data = await bild.toBuffer();
   if (!krymps && !pngFoto && data.length > byte * 0.9) {

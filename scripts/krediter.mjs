@@ -146,7 +146,7 @@ export const rad = (k, l = lage(k), v = vantande()) => {
   if (!l.oppen) {
     return `KREDITSPÄRREN ÄR STÄNGD: ${heltal(k.kvar)} Netlify-krediter kvar, gränsen är ${GOLV}. Ladda inte upp, och säg till Niclas. Arbeta, validera och slå ihop till main lokalt som vanligt, men pusha inte main; säkerhetskopiera med git push origin main:${VANTGREN}. Krediterna fylls på ${pafyllning}.${vantar}${slutar}${paminnelser(k)}`;
   }
-  let s = `Netlify-krediter: ${heltal(k.kvar)} kvar av ${heltal(k.totalt)} till ${pafyllning}. Kreditspärren vid ${GOLV} är öppen: rum för ${l.rum} ${l.rum === 1 ? 'bygge' : 'byggen'} i dag. Allt utom byggen drar omkring ${kred(k.perDygn)} om dygnet.`;
+  let s = `Netlify-krediter: ${heltal(k.kvar)} kvar av ${heltal(k.totalt)} till ${pafyllning}. Kreditspärren vid ${GOLV} är öppen: rum för ${l.rum} ${l.rum === 1 ? 'bygge' : 'byggen'} innan den stänger. Allt utom byggen drar omkring ${kred(k.perDygn)} om dygnet.`;
   if (l.tomForeSlut) s += ` VARNING: även utan byggen tar saldot slut omkring ${datum(l.tom)}, före påfyllningen; då pausar Netlify sajten. Säg till Niclas.`;
   else if (l.golvForeSlut) s += ` Utan byggen stänger spärren omkring ${datum(l.golv)}.`;
   if (v.bygger) s += ` ${commits(v.bygger)} på main väntar på uppladdning: en push laddar upp allt.`;
@@ -201,7 +201,8 @@ const visa = (k) => {
   console.log(`  Allt utom byggen drar omkring ${kred(k.perDygn)} om dygnet (snittet för de tre senaste dygnen).`);
   if (l.golv || l.tom) console.log(`  Utan fler byggen${l.golv ? ` stänger spärren omkring ${datum(l.golv)}` : ''}${l.golv && l.tom ? ' och' : ''}${l.tom ? ` tar saldot slut omkring ${datum(l.tom)}` : ''}.`);
   if (l.tomForeSlut) console.log('  VARNING: saldot tar slut före påfyllningen. Då pausar Netlify sajten och besökarna ser "Site not available". Se vad som drar: npm run krediter -- trafik');
-  console.log(`Kreditspärren vid ${GOLV}: ${l.oppen ? `öppen, rum för ${l.rum} ${l.rum === 1 ? 'bygge' : 'byggen'} i dag` : 'STÄNGD, ladda inte upp'}.`);
+  console.log(`Kreditspärren vid ${GOLV}: ${l.oppen ? `öppen, rum för ${l.rum} ${l.rum === 1 ? 'bygge' : 'byggen'} innan den stänger` : 'STÄNGD, ladda inte upp'}.`);
+  if (k.grenar === null) console.log('Databasens grenar gick inte att läsa just nu.');
   console.log(`Lokalt: ${v.alla ? `${commits(v.alla)} på main är inte uppladdade, ${v.bygger} av dem bygger` : 'inget väntar på uppladdning'}.`);
   for (const g of k.grenar ?? []) {
     const tid = g.senast ? `${g.senast.slice(0, 16).replace('T', ' ')} UTC` : 'aldrig';

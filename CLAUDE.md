@@ -2,7 +2,7 @@
 
 Du förvaltar Niclas Fohlins författar- och kunskapssajt. Sajten ska vara snabb, sober och redaktionellt trovärdig. Läsbarhet före effekter. Ingen generisk AI-design.
 
-Det viktigaste först: allt arbete sker på grenar, `npm run validera` går igenom före varje commit, taggar och publikationer tas från registren i `src/data/`, och du slår ihop, pushar och deployar själv när valideringen är grön. Vid 100 Netlify-krediter kvar stänger kreditspärren uppladdningen: arbetet fortsätter lokalt och laddas upp med en enda push när krediterna är påfyllda (`npm run krediter`, DRIFT.md under Krediter). Nytt innehåll mejlas prenumeranterna automatiskt efter deploy; längre nyhetsbrev skickas bara när Niclas säger skicka.
+Det viktigaste först: allt arbete sker på grenar, `npm run validera` går igenom före varje commit, taggar och publikationer tas från registren i `src/data/`, och du slår ihop, pushar och deployar själv när valideringen är grön. Kreditspärren stänger uppladdningen när nästa bygge (15 krediter) skulle ta saldot under 100 Netlify-krediter: arbetet fortsätter lokalt och laddas upp med en enda push när krediterna är påfyllda (`npm run krediter`, DRIFT.md under Krediter). Nytt innehåll mejlas prenumeranterna automatiskt efter deploy; längre nyhetsbrev skickas bara när Niclas säger skicka.
 
 Arbete som inte är ett direkt svar på Niclas går genom kön: `node scripts/ko.mjs lista`, `starta`, `klar`. Ett fel du hittar i förbifarten läggs i kön med `lagg`, det lagas inte i samma commit. Hur kön fungerar står i ARBETSSATT.md.
 
@@ -25,7 +25,7 @@ Arbete som inte är ett direkt svar på Niclas går genom kön: `node scripts/ko
 
 ## Stack
 
-Astro 7 med TypeScript och Content Collections (glob-loader, Zod 4 via `astro/zod`). Statiskt bygge. GitHub versionshanterar, Netlify bygger och deployar från `main`. Netlify Functions i `netlify/functions/` för prenumeration och kommentarer. En databas, bara för kommentarerna (Netlify Database); inget CMS. Databasen kostar omkring 1 kredit varje gång den vaknar. Läsare, byggen och inloggningar med fel adress väcker den inte, och därför ligger schemat i `netlify/database/schema/` och inte i `netlify/database/migrations/` (DRIFT.md under Kommentarer).
+Astro 7 med TypeScript och Content Collections (glob-loader, Zod 4 via `astro/zod`). Statiskt bygge. GitHub versionshanterar, Netlify bygger och deployar från `main`. Netlify Functions i `netlify/functions/` för prenumeration och kommentarer. En databas, bara för kommentarerna (Netlify Database); inget CMS. Databasen kostar omkring 1 kredit varje gång den vaknar. Byggen och inloggningar med fel adress väcker den inte, och läsare bara första gången efter att kommentarerna på en sida ändrats, och därför ligger schemat i `netlify/database/schema/` och inte i `netlify/database/migrations/` (DRIFT.md under Kommentarer).
 
 Kommentarerna under artiklar, böcker och metoder är ett lager: `npm run kommentarer -- av` tar bort dem från hela sajten utan rester, och `npm run kommentarer` visar läget och krediterna. Läs DRIFT.md under Kommentarer innan du rör dem.
 

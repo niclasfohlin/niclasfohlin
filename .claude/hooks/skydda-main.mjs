@@ -3,10 +3,10 @@
 // 1. Stoppar "git commit" på grenen main så att allt arbete sker på grenar och main bara ändras genom
 //    en medveten sammanslagning. Den allra första committen i ett tomt repo släpps igenom.
 // 2. Kreditspärren (Niclas 2026-09-27): stoppar det som bygger sajten på Netlify när nästa bygge skulle
-//    ta saldot under 100 krediter: push till main, netlify deploy --prod, createSiteBuild och
-//    npm run kommentarer av, på och tak, som bygger om. En push där varje ny commit bär [skip netlify]
-//    bygger inget och släpps. KREDITSPARR=av först i kommandot släpper igenom, och används bara när
-//    Niclas sagt det. Saldot läses färskt av scripts/krediter.mjs --grind; se DRIFT.md under Krediter.
+//    ta saldot under 100 krediter: push till main (också git -C <mapp> push), gh pr merge, netlify deploy
+//    --prod, createSiteBuild och npm run kommentarer av, på och tak, som bygger om. En push där varje ny
+//    commit bär [skip netlify] bygger inget och släpps. KREDITSPARR=av först i ett kommando (också efter
+//    && eller ;) släpper igenom, och används bara när Niclas sagt det. Kroken gäller Bash och PowerShell. Saldot läses färskt av scripts/krediter.mjs --grind; se DRIFT.md under Krediter.
 import { execFileSync, spawnSync } from 'node:child_process';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -19,9 +19,10 @@ const SKIP = /\[skip (netlify|ci)\]/i;
 function byggerSajten(cmd, gren) {
   if (/\bnetlify\s+deploy\b[^\n;&|]*\s--prod\b/.test(cmd)) return 'netlify deploy --prod';
   if (/\bcreateSiteBuild\b/.test(cmd)) return 'ett produktionsbygge (createSiteBuild)';
+  if (/\bgh\s+pr\s+merge\b/.test(cmd)) return 'en sammanslagning på GitHub (gh pr merge), som bygger main';
   if (/\bkommentarer(\.mjs)?\s+(--\s+)?(av|på|pa|tak)(?=\s|$)/.test(cmd)) return 'npm run kommentarer, som bygger om sajten';
   for (const del of cmd.split(/&&|\|\||;|\n|\|/)) {
-    const m = del.match(/\bgit\s+push\b(.*)$/);
+    const m = del.match(/\bgit\s+(?:-C\s+\S+\s+)?push\b(.*)$/);
     if (!m) continue;
     const ord = m[1].trim().split(/\s+/).filter(Boolean);
     if (ord.includes('--dry-run') || ord.includes('-n')) continue;
@@ -66,7 +67,7 @@ process.stdin.on('end', () => {
   }
 
   const bygger = byggerSajten(cmd, gren);
-  if (!bygger || /\bKREDITSPARR=av\b/.test(cmd)) process.exit(0);
+  if (!bygger || /(^|&&|;|\|\|)\s*KREDITSPARR=av\s/.test(cmd)) process.exit(0);
   const r = spawnSync(process.execPath, [join(rot, 'scripts', 'krediter.mjs'), '--grind'], { cwd: rot, encoding: 'utf8', timeout: 25000 });
   if (r.status === 0) process.exit(0);
   const rad = (r.stdout || '').trim();

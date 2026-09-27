@@ -315,7 +315,7 @@ if (kmd === 'klar') {
   bokfor(ko);
   const gren = inneIGit ? grenNu() : '';
   console.log(`${id} är klar.${forcerat.length ? ' FORCERAT förbi ' + forcerat.map((f) => f.split(':')[0]).join(', ') + '; det står kvar i åtgärden.' : ''}`);
-  if (gren) console.log(`Slå ihop och pusha, så bygger Netlify:\n  git log main..${gren} --oneline\n  git switch main && git merge ${gren} && git push`);
+  if (gren) console.log(`Slå ihop och pusha, så bygger Netlify (pushen för sig: kroken prövar kreditspärren på hela kommandot):\n  git log main..${gren} --oneline\n  git switch main && git merge ${gren}\n  git push`);
   process.exit(0);
 }
 
