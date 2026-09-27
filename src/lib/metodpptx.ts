@@ -3,6 +3,13 @@
 // 3 Mallen, 4 Material. Layouten kommer från Niclas snabbguide (Kungsholmens insatsspår) via
 // metodriggen, i sajtens palett. Innehållet är data i metoden; designen är låst här. Ryms text inte
 // krymper den ett steg och sedan varnas det i bygget: korta texten i metoden, ändra inte här.
+//
+// Två format ur samma layout (Niclas 2026-09-27: "Pptx kan vara 16:9. De andra filerna är A4"): PowerPoint-filen
+// är 16:9 och lathundens pdf A4 liggande (src/pages/utskrift/lathund/[id].pptx.ts, gjord till pdf av
+// scripts/lathund-pdf.mjs). Layouten ritas i 16:9-måtten och primitiverna för över den till sidan (x och bredd
+// gånger sx, y och höjd gånger sy) med oförändrade teckengrader, så att A4-sidan fyller arket och texten skrivs
+// ut i full storlek i stället för 85 procent. Textuppskattningen räknar med den verkliga bredden, så att tabeller
+// och rutor fördelar höjden rätt också i A4.
 import PptxGenJS from 'pptxgenjs';
 import type { CollectionEntry } from 'astro:content';
 import { lathundFakta, arbetsformRad, etikettOchText } from './metod';
@@ -18,6 +25,8 @@ const SANS = 'Calibri', MONO = 'Consolas';
 const W = 13.333, H = 7.5;
 // Sidfoten med upphovet tar de nedersta 0.22 tum på varje bild; innehållet slutar ovanför.
 const BOTTEN = H - 0.22;
+export type LathundFormat = '16:9' | 'A4';
+const SIDA: Record<LathundFormat, { w: number; h: number }> = { '16:9': { w: W, h: H }, A4: { w: 297 / 25.4, h: 210 / 25.4 } };
 
 type Punkt = { fet?: string; text?: string };
 const punktText = (p: Punkt) => (p.fet ? `**${p.fet}** ${p.text ?? ''}`.trim() : p.text ?? '');
@@ -102,14 +111,42 @@ function bilder(d: MetodData) {
   return { bild1, bild2, bild3, bild4 };
 }
 
-/** Lathunden som pptx-buffert. bas: sajtens adress för upphovsraden. */
-export async function lathundPptx(m: CollectionEntry<'stodundervisning'>, o: { bas: string }): Promise<Buffer> {
+// A4-sidan är 88 procent så bred och 110 procent så hög som 16:9-bilden och rymmer lite mindre text. Den får därför
+// den största teckengraden i stegen nedan där sidorna inte varnar för något som 16:9-bilderna inte varnar för, samma
+// grad på alla fyra sidor. Metoder med luft skrivs ut i full storlek, täta krymper ett eller två steg.
+const GRADER = [1, 0.97, 0.94, 0.91, 0.88];
+
+/** Lathunden som pptx-buffert. bas: sajtens adress för upphovsraden; format: 16:9 (standard) eller A4 liggande. */
+export async function lathundPptx(m: CollectionEntry<'stodundervisning'>, o: { bas: string; format?: LathundFormat }): Promise<Buffer> {
+  const format = o.format ?? '16:9';
+  let valt = ritaLathund(m, o.bas, '16:9', 1);
+  if (format === 'A4') {
+    const slag = (v: string) => v.replace(/\d+(?:[.,]\d+)?/g, '#');
+    const tillatna = new Set(valt.varningar.map(slag));
+    let vald = 0;
+    for (const grad of GRADER) {
+      vald = grad;
+      valt = ritaLathund(m, o.bas, 'A4', grad);
+      if (valt.varningar.every((v) => tillatna.has(slag(v)))) break;
+    }
+    console.log(`  ${m.id}: lathunden i A4 med ${Math.round(vald * 100)} procent av teckengraden`);
+  }
+  for (const v of valt.varningar) console.warn(`  ! ${m.id}${format === 'A4' ? ' (A4)' : ''}: ${v}`);
+  return (await valt.pres.write({ outputType: 'nodebuffer' })) as Buffer;
+}
+
+// Ritar de fyra bilderna i formatet med teckengraden gånger grad och samlar varningarna.
+function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format: LathundFormat, grad: number): { pres: any; varningar: string[] } {
+  const o = { bas };
   const d = m.data;
   if (!d.lathund) throw new Error(`${m.id} har ingen lathund`);
   const L = bilder(d);
   const Pptx: any = (PptxGenJS as any).default ?? PptxGenJS;
   const pres = new Pptx();
-  pres.layout = 'LAYOUT_WIDE';
+  const sida = SIDA[format];
+  const sx = sida.w / W, sy = sida.h / H;
+  if (format === '16:9') pres.layout = 'LAYOUT_WIDE';
+  else { pres.defineLayout({ name: 'A4_LIGGANDE', width: sida.w, height: sida.h }); pres.layout = 'A4_LIGGANDE'; }
   pres.lang = 'sv-SE';
   pres.author = 'Niclas Fohlin';
   pres.company = 'niclasfohlin.se';
@@ -118,12 +155,15 @@ export async function lathundPptx(m: CollectionEntry<'stodundervisning'>, o: { b
   const adress = `${o.bas.replace(/^https?:\/\//, '')}/stodundervisning/${m.id}/lathund`;
   const upphov = `© Niclas Fohlin · ${adress}`;
   const varningar: string[] = [];
-  const varna = (t: string) => { varningar.push(t); console.warn(`  ! ${m.id}: ${t}`); };
+  const varna = (t: string) => { varningar.push(t); };
 
   // ---------------------------------------------------------------- primitiver
-  const rect = (s: any, x: number, y: number, w: number, h: number, fill: string) => s.addShape(pres.ShapeType.rect, { x, y, w, h, fill: { color: fill }, line: { color: fill, width: 0 } });
-  const frame = (s: any, x: number, y: number, w: number, h: number, color = INK, width = 1, fill?: string) => s.addShape(pres.ShapeType.rect, { x, y, w, h, fill: fill ? { color: fill } : { type: 'none' }, line: { color, width } });
-  const txt = (s: any, t: any, x: number, y: number, w: number, h: number, o: any = {}) => s.addText(t, { x, y, w, h, isTextBox: true, margin: 0, fontFace: o.mono ? MONO : SANS, fontSize: o.size ?? 12.75, color: o.color ?? INK, bold: !!o.bold, italic: !!o.italic, valign: o.valign ?? 'top', align: o.align ?? 'left', paraSpaceAfter: o.psa ?? 0, fit: 'none' });
+  // Alla mått nedan är i 16:9-bildens tum; primitiverna för över dem till sidans format (sx, sy).
+  const rect = (s: any, x: number, y: number, w: number, h: number, fill: string) => s.addShape(pres.ShapeType.rect, { x: x * sx, y: y * sy, w: w * sx, h: h * sy, fill: { color: fill }, line: { color: fill, width: 0 } });
+  const frame = (s: any, x: number, y: number, w: number, h: number, color = INK, width = 1, fill?: string) => s.addShape(pres.ShapeType.rect, { x: x * sx, y: y * sy, w: w * sx, h: h * sy, fill: fill ? { color: fill } : { type: 'none' }, line: { color, width } });
+  // Teckengraden gånger grad, också i textlöpor med egen grad.
+  const skalad = (t: any) => (Array.isArray(t) ? t.map((r: any) => (r?.options?.fontSize ? { ...r, options: { ...r.options, fontSize: r.options.fontSize * grad } } : r)) : t);
+  const txt = (s: any, t: any, x: number, y: number, w: number, h: number, o: any = {}) => s.addText(skalad(t), { x: x * sx, y: y * sy, w: w * sx, h: h * sy, isTextBox: true, margin: 0, fontFace: o.mono ? MONO : SANS, fontSize: (o.size ?? 12.75) * grad, color: o.color ?? INK, bold: !!o.bold, italic: !!o.italic, valign: o.valign ?? 'top', align: o.align ?? 'left', paraSpaceAfter: o.psa ?? 0, fit: 'none' });
   const label = (s: any, t: string, x: number, y: number, w: number, color = AMBER) => txt(s, t, x, y, w, 0.25, { mono: true, size: 12, color });
   // "**fet** resten" blir textlöpor.
   const rich = (t: any, base: any = {}): any[] => {
@@ -135,9 +175,10 @@ export async function lathundPptx(m: CollectionEntry<'stodundervisning'>, o: { b
     return parts.length ? parts : [{ text: t, options: { ...base } }];
   };
   const plain = (t: any) => String(t ?? '').replace(/\*\*/g, '');
-  // Uppskattad texthöjd i tum, tilltagen.
-  const estLines = (t: any, wIn: number, size: number) => { const cpl = Math.max(8, Math.floor(wIn * 72 / (size * 0.52))); return Math.max(1, Math.ceil(plain(t).length / cpl)); };
-  const estH = (t: any, wIn: number, size: number, gap = 0) => estLines(t, wIn, size) * size * 1.25 / 72 + gap;
+  // Uppskattad texthöjd i 16:9-bildens tum, tilltagen. Raderna räknas på den verkliga bredden (wIn gånger sx) och
+  // den verkliga graden (size gånger grad), och höjden förs tillbaka till bildens tum (delat med sy).
+  const estLines = (t: any, wIn: number, size: number) => { const cpl = Math.max(8, Math.floor(wIn * sx * 72 / (size * grad * 0.52))); return Math.max(1, Math.ceil(plain(t).length / cpl)); };
+  const estH = (t: any, wIn: number, size: number, gap = 0) => estLines(t, wIn, size) * size * grad * 1.25 / 72 / sy + gap;
 
   function header(s: any, title: string, right: string, idx: number) {
     rect(s, 0, 0, W, 0.66, NAVY);
@@ -523,6 +564,5 @@ export async function lathundPptx(m: CollectionEntry<'stodundervisning'>, o: { b
     s.addNotes(`${b.anteckning} ${upphov}`);
   }
 
-  const ut = await pres.write({ outputType: 'nodebuffer' });
-  return ut as Buffer;
+  return { pres, varningar };
 }

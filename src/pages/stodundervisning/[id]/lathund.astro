@@ -24,7 +24,7 @@ const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathu
       <h1>Lathund: {d.titel}</h1>
       <p class="ingress">Fyra sidor att ha bredvid sig: metoden i korthet, ett pass steg för steg, mallen och vad du behöver. Skriv ut i liggande A4 eller ladda ner som PowerPoint, pdf eller Word.</p>
       <p class="lathund-knappar">
-        {/* Utskriften är alltid pdf:en, lathundens PowerPoint: fyra liggande sidor kant till kant. Knappen öppnar
+        {/* Utskriften är alltid pdf:en, lathunden i A4 liggande ur PowerPoint-koden: fyra sidor kant till kant. Knappen öppnar
             den; där webbläsaren kan skriva ut den direkt heter knappen Skriv ut och öppnar utskriftsrutan (skriptet nedan). */}
         <a class="knapp" href={`/stodundervisning/${m.id}-lathund.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf>Öppna pdf:en för utskrift (fyra sidor)</a>
         {' '}<Filval fil={`/stodundervisning/${m.id}-lathund`} namn={`${m.id}-lathund`} rubrik="Lathunden" pdf pptx />

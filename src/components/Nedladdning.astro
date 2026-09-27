@@ -3,7 +3,7 @@
 // beskrivningen, planeringsmallarna och lathunden i en Word-fil; de andra två filerna är delar av den.
 // Filerna byggs vid bygget av src/pages/stodundervisning/[id].docx.ts, [id]-mallar.docx.ts,
 // [id]-lathund.docx.ts och [id]-lathund.pptx.ts; lathundens pdf ligger i public/stodundervisning/ och görs om
-// automatiskt ur lathundens PowerPoint av npm run validera (scripts/lathund-pdf.mjs --vid-behov). Varje fil erbjuds med samma val (Word, PowerPoint, Drive, pdf) genom Filval.astro.
+// automatiskt ur lathundens PowerPoint-kod i A4 liggande av npm run validera (scripts/lathund-pdf.mjs --vid-behov). Varje fil erbjuds med samma val (Word, PowerPoint, Drive, pdf) genom Filval.astro.
 import Filval from './Filval.astro';
 import { site } from '../data/site';
 // ramar: namnet på metodens ramar (läslistorna, berättelseramarna) när de ligger i planeringsmallarna, så att knappen säger det.
