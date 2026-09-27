@@ -227,6 +227,8 @@ lathund:
       punkter:
         - { fet: Fet inledning., text: Förklaringen. }
       # efter: en grå rad sist
+    # En cell som börjar med "N · Fas" och tiden "A–B min" på nästa rad prövas mot tidsschemat: fasens
+    # starttid och sluttiden för fasen eller en senare fas. Bygget stannar annars (content.config.ts).
     tabell:
       rubrik: Frågorna eller stegen
       kolumner: [Steg, Exempelfraser]
@@ -245,6 +247,9 @@ lathund:
         - Vad läraren gjort innan.
     klarTidigt: Vad gruppen gör om den blir klar tidigt.
     # utskrift: knappens text vid texten (standard: Skriv ut till eleverna).
+    # schema är tidsschemat minut för minut: samma faser i samma ordning och samma tider (Före passet blir
+    # Före, "min" stryks), med "N · " framför de faser som är steg och numren i följd från 1. Bygget stannar
+    # annars (content.config.ts), så att lathunden aldrig säger emot sidan.
     schema:
       rubrik: 30 minuter, steg för steg
       rader:

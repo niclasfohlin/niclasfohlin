@@ -38,6 +38,21 @@ const delar = ['inledning', 'upplagg', 'gruppen', 'principer', 'passrutin', 'tid
 const finns = delar.filter((d) => metod[d] && (!Array.isArray(metod[d]) || metod[d].length));
 console.log(`  delar i modellen: ${finns.join(', ')}`);
 if (metod.utkast) console.log('  obs  utkast: true, metoden byggs inte i produktion');
+// 1b. Dagord där metoden räknar i pass: med färre än fyra pass i veckan är nästa pass inte nästa dag
+// (boksamtal och faktatextsamtal sa "nästa dag" till 2026-09-27). En varning, eftersom ordet kan stå i en elevtext.
+const talord = { ett: 1, en: 1, två: 2, tre: 3, fyra: 4, fem: 5, sex: 6 };
+const hurOfta = (metod.tid ?? '').split(/ per pass,?\s*/)[1] ?? '';
+const minstPass = Number(hurOfta.match(/\d+/)?.[0]) || talord[(hurOfta.match(/^[a-zåäö]+/i)?.[0] ?? '').toLowerCase()];
+if (minstPass && minstPass < 4) {
+  const dagord = [];
+  const leta = (v, sti) => {
+    if (typeof v === 'string') { if (/nästa dag|dagen efter|i morgon|imorgon/i.test(v)) dagord.push(sti); }
+    else if (v && typeof v === 'object') for (const [k, u] of Object.entries(v)) leta(u, sti ? `${sti}.${k}` : k);
+  };
+  leta(metod, '');
+  if (dagord.length) for (const s of dagord) console.log(`  obs  "nästa dag" eller liknande i ${s}, men metoden har ${minstPass} pass i veckan: menas nästa pass?`);
+  else ok(`inga dagord där metoden räknar i pass (${minstPass} pass i veckan)`);
+}
 
 // 2. Bygget: sidan, JSON och Word-filerna.
 const dist = join(rot, 'dist/stodundervisning');

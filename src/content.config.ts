@@ -415,6 +415,39 @@ const stodundervisning = defineCollection({
     for (const s of medFas) if (!faser.has(s.fas.toLowerCase())) ctx.addIssue({ code: 'custom', path: ['passrutin', 'steg'], message: `Fasen "${s.fas}" finns inte som rad i tidsschemat.` });
     if (medFas.length && medFas.length !== d.passrutin!.steg.length) ctx.addIssue({ code: 'custom', path: ['passrutin', 'steg'], message: 'Antingen har alla steg en fas eller inget.' });
     for (const del of d.arbetsform?.delar ?? []) for (const f of del.faser ?? []) if (!faser.has(f.toLowerCase())) ctx.addIssue({ code: 'custom', path: ['arbetsform', 'delar'], message: `Fasen "${f}" finns inte som rad i tidsschemat.` });
+    // Lathundens pass är tidsschemat minut för minut: samma faser i samma ordning och samma tider (utan "min",
+    // Före passet som Före), med stegnumret "N · " framför de faser som är steg och numren i följd från 1. Så säger
+    // lathunden aldrig emot sidan, och ett fel i riggens intag stoppar bygget i stället för att hittas i bilderna.
+    if (d.lathund && d.tidsschema) {
+      const lh = d.lathund.pass.schema.rader;
+      const ts = d.tidsschema.rader;
+      const sti = ['lathund', 'pass', 'schema', 'rader'];
+      const tid = (t: string) => t.replace(/-/g, '–').replace(/\s*min$/, '').replace(/^Före passet$/, 'Före');
+      if (lh.length !== ts.length) ctx.addIssue({ code: 'custom', path: sti, message: `Lathundens pass har ${lh.length} rader och tidsschemat ${ts.length}; de ska vara samma faser.` });
+      let nr = 0;
+      lh.forEach((r, i) => {
+        const m = r.fas.match(/^(\d+) · (.+)$/);
+        if (m && Number(m[1]) !== ++nr) ctx.addIssue({ code: 'custom', path: [...sti, i, 'fas'], message: `"${r.fas}" ska ha stegnumret ${nr}: numren går i följd från 1.` });
+        const t = ts[i];
+        if (!t) return;
+        const fas = m ? m[2] : r.fas;
+        if (fas !== t.fas) ctx.addIssue({ code: 'custom', path: [...sti, i, 'fas'], message: `Rad ${i + 1} i lathundens pass heter "${fas}" men "${t.fas}" i tidsschemat.` });
+        if (tid(r.tid) !== tid(t.tid)) ctx.addIssue({ code: 'custom', path: [...sti, i, 'tid'], message: `Rad ${i + 1} i lathundens pass (${fas}) har tiden "${r.tid}" men "${t.tid}" i tidsschemat.` });
+      });
+      // Tabellen på lathundens första sida: en cell som börjar med "N · Fas" och tiden "A–B min" på nästa rad ska ha
+      // fasens starttid och sluttiden för fasen eller en senare fas (ett steg kan spänna över flera faser).
+      const spann = (t: string) => t.match(/^(\d+)[–-](\d+) min/);
+      d.lathund.metoden.tabell.rader.forEach((rad, i) => {
+        const m = (rad[0] ?? '').match(/^\d+ · ([^\n]+)\n(\d+)[–-](\d+) min/);
+        if (!m) return;
+        const [, namn, fran, till] = m;
+        const cell = ['lathund', 'metoden', 'tabell', 'rader', i, 0];
+        const j = ts.findIndex((t) => t.fas === namn);
+        if (j < 0) { ctx.addIssue({ code: 'custom', path: cell, message: `"${namn}" i lathundens tabell finns inte som fas i tidsschemat.` }); return; }
+        const slut = ts.slice(j).map((t) => spann(t.tid)?.[2]);
+        if (spann(ts[j].tid)?.[1] !== fran || !slut.includes(till)) ctx.addIssue({ code: 'custom', path: cell, message: `"${namn}" har tiden ${fran}–${till} min i lathundens tabell men ${ts[j].tid} i tidsschemat.` });
+      });
+    }
     // Elevens blad: ramen och fälten måste finnas, annars får bladet tyst ingen höjd.
     for (const [ramnamn, falt] of Object.entries(d.elevblad)) {
       const ram = d.ramar?.ramar.find((r) => r.rubrik === ramnamn);
