@@ -351,12 +351,13 @@ function kortlista(info: KortInfo, brak = true): Table {
       const k = kort[j];
       return new TableCell({
         width: { size: w, type: WidthType.DXA },
-        verticalAlign: VerticalAlign.CENTER,
+        // Märkningen står överst i hörnet på varje kort i raden, och texten en bit ned (K-039).
+        verticalAlign: VerticalAlign.TOP,
         borders: k ? runt(streckad) : runt(INGEN_KANT),
         margins: { top: 140, bottom: 140, left: 240, right: 240 },
         children: [
           ...(k && info.markning ? [new Paragraph({ keepNext: vidare, spacing: { after: 120, line: 240 }, children: [run(info.markning(k.i), { storlek: 15, farg: FARG.svag })] })] : []),
-          new Paragraph({ alignment: AlignmentType.CENTER, keepNext: vidare, spacing: { after: 0, line: 300 }, children: k ? (brak ? brakBarn(k.k, { storlek: info.korta ? 64 : 28, farg: FARG.text }, info.korta ? 1.25 : 1.45) : [run(k.k, { storlek: info.korta ? 64 : 28, farg: FARG.text })]) : [] }),
+          new Paragraph({ alignment: AlignmentType.CENTER, keepNext: vidare, spacing: { before: info.korta ? 280 : 200, after: 0, line: 300 }, children: k ? (brak && /[0-9]+[/][0-9]+/.test(k.k) ? brakBarn(k.k, { storlek: info.korta ? 64 : 28, farg: FARG.text }, info.korta ? 1.25 : 1.45) : [run(k.k, { storlek: info.korta ? 80 : 28, farg: FARG.text })]) : [] }),
         ],
       });
     }) }));
@@ -729,6 +730,8 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
       schemaTabell(s),
     ]);
   }
+  // Har metoden en egen kartläggning (en ram som heter Kartläggning …) hör målkollen ihop med den (K-046).
+  const kartlaggning = (d.ramar?.ramar ?? []).some((r) => /^Kartläggning/.test(r.rubrik));
   if (d.mal) {
     const bredder = [BREDD - 2400, 1200, 1200];
     const huvud = rad(['Efter perioden ska eleven oftare kunna', 'Före', 'Efter'].map((k, i) => cell([stycke(k, { fet: true, farg: FARG.vit, storlek: 20, mitt: i > 0, efter: 0 })], { bredd: bredder[i], fyll: FARG.huvud, kanter: runt(kant(FARG.huvud)) })), { huvud: true });
@@ -740,8 +743,10 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
     const notering = tabell([rad([cell([stycke('Notering', { fet: true, storlek: 20, efter: 0 })], { bredd: BREDD, kanter: runt(kant()) })], { hojd: 2400 })], [BREDD]);
     sidor.push([
       ...under('Målkoll före och efter'),
-      stycke('Fyll i före insatsen och igen efter perioden. Kryssa i det eleven klarar, och skriv under Notering vilket stöd som behövdes.'),
-      skrivrad(['Elev', 'Datum före', 'Datum efter']),
+      stycke(kartlaggning
+        ? 'Fyll i målkollen ur kartläggningen, före och efter: kryssa i ett mål när eleven klarar uppgifterna för det. Vilka uppgifter som prövar vilket mål står i kartläggningens ruta Till läraren. Skriv under Notering vilket stöd som behövdes.'
+        : 'Fyll i före insatsen och igen efter perioden. Kryssa i det eleven klarar, och skriv under Notering vilket stöd som behövdes.'),
+      skrivrad([kartlaggning ? 'Elevens namn' : 'Elev', 'Datum före', 'Datum efter']),
       tabell([huvud, ...kropp], bredder),
       avstand(),
       notering,
@@ -759,7 +764,8 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
       sidor.push(sida);
     }
   }
-  if (d.diplom) sidor.push([...under(d.diplom.rubrik), ...diplomBarn(d.diplom)]);
+  // Diplomet bär sin egen rubrik: utan sidans rubrik och metodrad, så att eleven inte får Diplom två gånger (K-040).
+  if (d.diplom) sidor.push([...diplomBarn(d.diplom)]);
   for (const sida of sidor) if (!bladsidor.has(sida)) sida.push(stycke(`${UPPHOV}. Mall till ${d.titel}, ${metodAdress(bas, post.id)}.`, { farg: FARG.svag, storlek: 18, fore: 160 }));
   // Mallarna (bråkplanket och tallinjerna) sist, var och en på en liggande sida med smal marginal. Sidfoten bär
   // upphovet, så att planket och linjerna får hela höjden. Är lathundens tredje sida ett blad att lägga på bordet
