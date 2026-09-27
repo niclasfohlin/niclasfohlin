@@ -904,18 +904,44 @@ function tallinjeTabell(ln: { till: number; delar: number }, L: number): Table {
 // En matta ur d.mallar (decimalmattan): kolumnerna med namnet stort i ett ljust band och höga rutor som fyller den
 // liggande sidan, ett decimalkomma i en smal kolumn utan ram efter kolumn nummer komma, och regeln i foten.
 // Mattans text är till läraren och står bara på sidan; på bladet står underraden, som på talsortsmattan.
+// Ett rutnät (sexfältaren, jämförelsetabellen, tabellmallen) är samma blad med rader: rutorna delar höjden.
+// Elevbladen (rutnät och flöde) har ett band på 12 mm, som bilden på sidan, så att en tom rubrik går att skriva i,
+// och utan fot rutor som fyller sidan (8 000 twips); mattorna och blad med fot behåller 7 000.
+const ELEVBLAD_BAND = 680;
+const ELEVBLAD_HOJD = (m: Mall) => (m.typ === 'matta' || m.fot ? 7000 : 8000);
 function mattaMallSida(m: Mall): Barn[] {
   return [
     new Paragraph({ children: [run(m.rubrik)], heading: HeadingLevel.HEADING_1, spacing: { before: 0, after: 40 } }),
     ...(m.underrad ? [stycke(m.underrad, { storlek: 22, efter: 160 })] : []),
-    mattaTabell(m.kolumner ?? [], { komma: m.komma, hojd: 7000 }),
+    m.typ === 'flode' ? flodeTabell(m.kolumner ?? [], ELEVBLAD_HOJD(m), ELEVBLAD_BAND) : mattaTabell(m.kolumner ?? [], { komma: m.komma, hojd: ELEVBLAD_HOJD(m), rader: m.rader, bandHojd: m.typ === 'rutnat' ? ELEVBLAD_BAND : undefined }),
     ...(m.fot ? [avstand(160), ...lhNot([stycke(m.fot, { storlek: 28, efter: 0 })])] : []),
   ];
+}
+// Ett flöde (tidslinjen, orsak-verkan-kedjan, problem-lösning-rutan): rutor i följd med namnet i ett ljust band, som i
+// mattan, och en pil mitt för rutorna i en smal kolumn utan ram mellan dem.
+function flodeTabell(kolumner: string[], hojd: number, bandHojd?: number): Table {
+  const pil = 700;
+  const n = kolumner.length;
+  const w = Math.floor((BREDD - pil * (n - 1)) / n);
+  const delar = kolumner.flatMap((k, i) => [
+    { k, w: i === n - 1 ? BREDD - pil * (n - 1) - w * (n - 1) : w, pil: false },
+    ...(i < n - 1 ? [{ k: '', w: pil, pil: true }] : []),
+  ]);
+  const ram = runt(kant(FARG.text, 8));
+  const utan = runt(INGEN_KANT);
+  const huvud = rad(delar.map((x) => (x.pil ? cell([], { bredd: x.w, kanter: utan }) : cell([stycke(x.k, { fet: true, storlek: 32, efter: 0 })], { bredd: x.w, fyll: FARG.ljus, kanter: ram }))), { huvud: true, hojd: bandHojd });
+  const kropp = new TableRow({ cantSplit: true, height: { value: hojd, rule: HeightRule.EXACT }, children: delar.map((x) => new TableCell({
+    width: { size: x.w, type: WidthType.DXA },
+    borders: x.pil ? utan : ram,
+    verticalAlign: VerticalAlign.CENTER,
+    children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 0 }, children: x.pil ? [run('→', { storlek: 72, farg: FARG.svag })] : [] })],
+  })) });
+  return new Table({ width: { size: BREDD, type: WidthType.DXA }, columnWidths: delar.map((x) => x.w), layout: TableLayoutType.FIXED, borders: UTAN_KANTER, rows: [huvud, kropp] });
 }
 // Mattans tabell, gemensam för bladet från lathunden och mattorna bland mallarna: kolumnnamnet 16 pt fet i ett ljust
 // band, rutor med ram i angiven höjd (fördelad på raderna), och ett decimalkomma i en smal kolumn utan ram efter
 // kolumn nummer komma, nederst, där talet skrivs.
-function mattaTabell(kolumner: string[], o: { komma?: number; hojd: number; rader?: number }): Table {
+function mattaTabell(kolumner: string[], o: { komma?: number; hojd: number; rader?: number; bandHojd?: number }): Table {
   const kommaBredd = o.komma ? 1000 : 0;
   const w = Math.floor((BREDD - kommaBredd) / kolumner.length);
   const delar = kolumner.flatMap((k, i) => [
@@ -925,7 +951,7 @@ function mattaTabell(kolumner: string[], o: { komma?: number; hojd: number; rade
   const ram = runt(kant(FARG.text, 8));
   const utan = runt(INGEN_KANT);
   const antal = o.rader ?? 1;
-  const huvud = rad(delar.map((x) => (x.komma ? cell([], { bredd: x.w, kanter: utan }) : cell([stycke(x.k, { fet: true, storlek: 32, efter: 0 })], { bredd: x.w, fyll: FARG.ljus, kanter: ram }))), { huvud: true });
+  const huvud = rad(delar.map((x) => (x.komma ? cell([], { bredd: x.w, kanter: utan }) : cell([stycke(x.k, { fet: true, storlek: 32, efter: 0 })], { bredd: x.w, fyll: FARG.ljus, kanter: ram }))), { huvud: true, hojd: o.bandHojd });
   const kropp = Array.from({ length: antal }, (_, r) => new TableRow({ cantSplit: true, height: { value: Math.floor(o.hojd / antal), rule: HeightRule.EXACT }, children: delar.map((x) => new TableCell({
     width: { size: x.w, type: WidthType.DXA },
     borders: x.komma ? utan : ram,
@@ -949,7 +975,7 @@ function talsortSida(m: Mall, k: string): Barn[] {
   ];
 }
 function mallSida(m: Mall): Barn[] {
-  if (m.typ === 'matta') return mattaMallSida(m);
+  if (m.typ === 'matta' || m.typ === 'rutnat' || m.typ === 'flode') return mattaMallSida(m);
   const L = Math.round((m.langdCm ?? 26) * CM);
   // En delad linje bär delarnas namn (brak.ts, delnamn) till vänster ovanför linjen, i luften före den, så att sidan
   // blir lika hög som utan namn. Linjens 0 står 283 in från tabellens kant, och tabellen är centrerad (tallinjeTabell).

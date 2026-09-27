@@ -325,11 +325,17 @@ const stodundervisning = defineCollection({
     // fyller en liggande sida, ett decimalkomma efter kolumn nummer komma och regeln i foten (fot). Med enPerSida
     // får varje kolumn ett eget stående A4 (ett ark per talsort för tiobas). En mattas text är till läraren och står
     // bara på sidan; på bladet står underraden (En matta per elev · Namn).
+    // typ rutnat är mattans form med rader: ett band med kolumnnamnen, som får vara tomma för att eleven skriver dem
+    // ("Vad kan rubrikerna vara?"), och rader rutor som fyller sidan: sexfältaren, jämförelsetabellen, tabellmallen.
+    // typ flode är rutor i följd med en pil mellan och namnet i ett band överst: tidslinjen, orsak-verkan-kedjan,
+    // problem-lösning-rutan. Båda är elevblad på liggande A4; texten är till läraren och står bara på sidan.
     mallar: z.array(z.strictObject({
       rubrik: text,
       text: z.string().optional(),
-      typ: z.enum(['brakplank', 'tallinjer', 'matta']),
-      kolumner: z.array(text).min(1).optional(),
+      typ: z.enum(['brakplank', 'tallinjer', 'matta', 'rutnat', 'flode']),
+      rader: z.number().int().min(1).max(12).optional(),
+      // Ett tomt namn är en rubrik som eleven skriver själv; bara ett rutnät får ha det (se superRefine nedan).
+      kolumner: z.array(z.string().trim()).min(1).optional(),
       komma: z.number().int().positive().optional(),
       underrad: z.string().optional(),
       fot: z.string().optional(),
@@ -459,7 +465,9 @@ const stodundervisning = defineCollection({
     const listrubriker = (d.ramar?.ramar ?? []).flatMap((r) => (r.listor ?? []).map((l) => l.rubrik ?? ''));
     for (const t of d.kort?.listor ?? []) if (!listrubriker.some((r) => r.includes(t))) ctx.addIssue({ code: 'custom', path: ['kort', 'listor'], message: `Ingen lista i ramarna har "${t}" i rubriken.` });
     d.mallar.forEach((m, i) => { if (m.typ === 'tallinjer' && !m.linjer?.length) ctx.addIssue({ code: 'custom', path: ['mallar', i, 'linjer'], message: 'Tallinjer kräver minst en linje.' }); });
-    d.mallar.forEach((m, i) => { if (m.typ === 'matta' && !m.kolumner?.length) ctx.addIssue({ code: 'custom', path: ['mallar', i, 'kolumner'], message: 'En matta kräver minst en kolumn.' }); });
+    d.mallar.forEach((m, i) => { if ((m.typ === 'matta' || m.typ === 'rutnat' || m.typ === 'flode') && !m.kolumner?.length) ctx.addIssue({ code: 'custom', path: ['mallar', i, 'kolumner'], message: `Mallen ${m.typ} kräver minst en kolumn.` }); });
+    d.mallar.forEach((m, i) => { if (m.typ === 'flode' && (m.kolumner?.length ?? 0) < 2) ctx.addIssue({ code: 'custom', path: ['mallar', i, 'kolumner'], message: 'Ett flöde kräver minst två rutor.' }); });
+    d.mallar.forEach((m, i) => { if (m.typ !== 'rutnat' && m.kolumner?.some((k) => !k)) ctx.addIssue({ code: 'custom', path: ['mallar', i, 'kolumner'], message: `Bara ett rutnät får ha tomma kolumnnamn; mallen ${m.typ} behöver namn i varje kolumn.` }); });
     d.mallar.forEach((m, i) => { if (m.komma && m.komma >= (m.kolumner?.length ?? 0)) ctx.addIssue({ code: 'custom', path: ['mallar', i, 'komma'], message: 'Kommat står efter en kolumn som har fler kolumner efter sig.' }); });
   }),
 });

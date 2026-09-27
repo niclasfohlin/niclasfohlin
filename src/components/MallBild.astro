@@ -1,5 +1,5 @@
 ---
-// En mall som bild på sidan: bråkplanket, tallinjerna eller en matta, ritade som SVG i millimeter ur samma geometri som
+// En mall som bild på sidan: bråkplanket, tallinjerna, en matta, ett rutnät eller ett flöde, ritade som SVG i millimeter ur samma geometri som
 // Word-filen (src/lib/brak.ts). På skärmen fyller bilden bredden, och på en smal skärm går den att svepa i sidled.
 // I utskriften får den sitt riktiga mått på en liggande sida (global.css, .m-mall). Planeringsmallarna i Word är
 // förlagan att skriva ut.
@@ -18,9 +18,27 @@ let bredd = L + 1;
 let hojd = 0;
 // Ett ark per talsort visas som arken bredvid varandra: i utskriften får bilden sidans bredd, inte arkens mått.
 const oversikt = m.typ === 'matta' && !!m.enPerSida;
-if (m.typ === 'matta') {
+if (m.typ === 'flode') {
+  // Ett flöde, som i Word: rutor i följd med namnet i ett ljust band och en pil mitt för rutorna mellan dem.
+  const kolumner = m.kolumner ?? [];
+  const B = 15398 * TWIP_MM;
+  const pil = 700 * TWIP_MM;
+  const w = (B - pil * (kolumner.length - 1)) / kolumner.length;
+  // Rutornas höjd som i Word: 8 000 twips utan fot, 7 000 med (metoddocx.ts, ELEVBLAD_HOJD).
+  const h = (m.fot ? 7000 : 8000) * TWIP_MM;
+  const band = 12;
+  kolumner.forEach((k, i) => {
+    const x = 0.5 + i * (w + pil);
+    rutor.push({ x, y: 0.5, w, h: band, band: true }, { x, y: 0.5 + band, w, h });
+    etiketter.push({ x: x + 2.5, y: 0.5 + band * 0.66, t: k, fs: 5.6, mitt: false });
+    if (i < kolumner.length - 1) texter.push({ x: x + w + pil / 2, y: 0.5 + band + h / 2 + 4, t: '→', fs: 11 });
+  });
+  bredd = B + 1;
+  hojd = band + h + 1;
+} else if (m.typ === 'matta' || m.typ === 'rutnat') {
   // En matta (decimalmattan), som i Word: kolumner med namnet i ett ljust band och höga rutor som fyller den liggande
   // sidan, och ett decimalkomma i en smal kolumn utan ram. Med enPerSida ett stående ark per kolumn, bredvid varandra.
+  // Ett rutnät är samma blad med rader, som delar höjden.
   const kolumner = m.kolumner ?? [];
   if (m.enPerSida) {
     const w = 9638 * TWIP_MM;
@@ -37,11 +55,13 @@ if (m.typ === 'matta') {
     const B = 15398 * TWIP_MM;
     const kb = m.komma ? 1000 * TWIP_MM : 0;
     const w = (B - kb) / kolumner.length;
-    const h = 7000 * TWIP_MM;
+    const h = (m.typ === 'rutnat' && !m.fot ? 8000 : 7000) * TWIP_MM;
     const band = 12;
+    const rader = m.rader ?? 1;
     let x = 0.5;
     kolumner.forEach((k, i) => {
-      rutor.push({ x, y: 0.5, w, h: band, band: true }, { x, y: 0.5 + band, w, h });
+      rutor.push({ x, y: 0.5, w, h: band, band: true });
+      for (let r = 0; r < rader; r++) rutor.push({ x, y: 0.5 + band + (r * h) / rader, w, h: h / rader });
       etiketter.push({ x: x + 2.5, y: 0.5 + band * 0.66, t: k, fs: 5.6, mitt: false });
       x += w;
       if (m.komma === i + 1) {

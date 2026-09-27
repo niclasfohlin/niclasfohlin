@@ -234,6 +234,37 @@ checklista:
 grund:
   text: Metoden vilar på Collaborative Strategic Reading, som är utvecklad för faktatext i SO och NO och för elever som behöver stöd (Klingner och Vaughn). Därifrån kommer de fyra stegen att förbereda, reda ut det som skaver, fånga kärnan och samtala. Gruppformen och de återkommande, strukturerade textsamtalen bygger på Reichenberg och Lundberg, som visat att samtal i liten grupp om faktatext lyfter förståelsen hos elever i behov av stöd. De författarinriktade frågorna är hämtade från Questioning the Author (Beck och McKeown), som flyttar skuldbördan från eleven till texten. Att tänka högt och överlämna ansvaret gradvis kommer från reciprok undervisning (Palincsar och Brown) och GRR-modellen. Och eftersom faktatext är uppbyggd på särskilda sätt arbetar ni genomgående med textens struktur (Meyer).
   kallor: Bygger på Palincsar och Brown (1984), Meyer (1985), Beck och McKeown (1997), Klingner och Vaughn (1998), Reichenberg och Lundberg (2011), samt Skolverkets moduler om läsförståelse och faktatexter på Lärportalen.
+# Elevbladen till de grafiska modellerna i tabellen Faktatextens strukturer, ett per struktur, på liggande A4 i
+# planeringsmallarna (K-013). Venndiagrammet ritas inte: jämförelsetabellen gör samma sak.
+mallar:
+  - rubrik: "Beskrivning: sexfältare"
+    typ: rutnat
+    kolumner: ["", "", ""]
+    rader: 2
+    underrad: "Text: ______________________ · Namn: ______________"
+    text: För en text som räknar upp egenskaper, delar och exempel. Eleverna skriver en egenskap eller en del som rubrik i varje fält och fyller i med stöd av texten.
+  - rubrik: "Tidsordning: tidslinje"
+    typ: flode
+    kolumner: [Först, Sedan, Därefter, Till slut]
+    underrad: "Text: ______________________ · Namn: ______________"
+    text: För en text i tidsordning. Signalorden står överst, och eleverna skriver det som händer i ordning.
+  - rubrik: "Jämförelse: jämförelsetabell"
+    typ: rutnat
+    kolumner: [Egenskap, "", ""]
+    rader: 6
+    underrad: "Text: ______________________ · Namn: ______________"
+    text: För en text om likheter och skillnader. Det som jämförs skrivs överst i de två tomma kolumnerna, och en egenskap på varje rad. Tabellen gör samma sak som ett venndiagram.
+  - rubrik: "Orsak och verkan: orsak-verkan-kedja"
+    typ: flode
+    kolumner: [Orsak, Verkan, Verkan, Verkan]
+    underrad: "Text: ______________________ · Namn: ______________"
+    text: För en text om orsak och verkan, med signalord som därför att, leder till och en följd av. Som i vattnets kretslopp kan varje verkan bli orsak till nästa.
+  - rubrik: "Problem och lösning: problem-lösning-ruta"
+    typ: flode
+    kolumner: [Problem, Lösning, Resultat]
+    underrad: "Text: ______________________ · Namn: ______________"
+    text: För en text om ett problem, en lösning och ett resultat.
+
 lathund:
   innehall: En kort ämnestext
   metoden:

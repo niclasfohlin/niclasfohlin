@@ -287,6 +287,16 @@ checklista:
 grund:
   text: "Problemlösning i grupp är inte uppfunnen från grunden. Jag har fogat ihop beprövade grepp till ett körschema: Pólyas faser ordnar passet, Smith och Steins fem praktiker leder jämförelsen, ansvaret lämnas över gradvis, och från reciprok undervisning kommer återberättandet, att reda ut ord och att läraren tänker högt. Eftersom svårigheter i lästal ofta hänger ihop med läsförståelse stannar du genomgående vid ord, samband och vad talen betyder."
   kallor: Bygger på Pólya (1945), Smith och Stein (2014), Fisher och Frey (2008), Palincsar och Brown (1984), Säfström m.fl. (2024), Lithner m.fl. (2025), Woodward m.fl. (2012) samt Skolverkets kommentarmaterial till kursplanen i matematik (2022).
+# Tabellmallen som står på bordet, på liggande A4 i planeringsmallarna (K-013). Rubrikerna är tomma, eftersom
+# eleverna väljer dem själva ("Vad kan rubrikerna vara?").
+mallar:
+  - rubrik: Tabellmall att fylla i
+    typ: rutnat
+    kolumner: ["", "", ""]
+    rader: 8
+    underrad: "Problem: ______________________ · Namn: ______________"
+    text: När gruppen väljer att visa problemet i en tabell. Eleverna skriver rubrikerna själva, som 5-armade, 7-armade och ljus ihop för ljusstakarna, och prövar ett antal på varje rad.
+
 lathund:
   innehall: Ett problem per pass
   metoden:

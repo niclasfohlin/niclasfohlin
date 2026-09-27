@@ -212,6 +212,21 @@ diplom:
     - Grattis!
   underskrifter: [Datum, Lärare]
 
+# Mallar att skriva ut, sist i planeringsmallarna på liggande A4 och som bilder på sidan. Säger metoden att eleverna
+# ska ha ett blad ("Tabellmall att fylla i" på bordet), finns bladet här. typ rutnat: band med kolumnnamn, tomma när
+# eleven skriver rubriken själv, och rader rutor. typ flode: rutor med pil mellan. typ matta, brakplank och tallinjer:
+# se src/content.config.ts. text är till läraren och står bara på sidan; underrad står på bladet.
+# mallar:
+#   - rubrik: Tabellmall att fylla i
+#     typ: rutnat
+#     kolumner: ["", "", ""]
+#     rader: 8
+#     underrad: "Problem: ______________________ · Namn: ______________"
+#     text: När gruppen väljer att visa problemet i en tabell.
+#   - rubrik: "Problem och lösning: problem-lösning-ruta"
+#     typ: flode
+#     kolumner: [Problem, Lösning, Resultat]
+
 # Lathunden: fyra sidor ur snabbguiden (Metoden, Ett pass, Mallen, Material). Egen sida
 # /stodundervisning/<id>/lathund, utskrift i liggande A4 och Word-fil. Passlängd, grupp och
 # frekvens tas ur tid, grupp och period; kraven ur urval; checklistan, snabbmallen och
