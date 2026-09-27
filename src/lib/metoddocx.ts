@@ -388,7 +388,7 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
   const huvud = () => (ram.huvud ? ramFaltTabell(ram.huvud, { skrivrum: o.skrivrum, hojder: o.blad ? ram.huvud.map(() => 1) : undefined }) : []);
   if (!ram.listor) ut.push(...huvud());
   // En ordlistas ruta bär listans namn, så att en sida eller ett blad som börjar med rutan går att koppla rätt.
-  const noter = () => ram.delar.flatMap((del) => ramFaltTabell(del.falt, { rubrik: korta || ram.listor ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum, hojder: o.blad ? del.falt.map((f) => o.blad![f.rubrik]) : undefined, elevblad: !!o.blad }));
+  const noter = (delar = ram.delar) => delar.flatMap((del) => ramFaltTabell(del.falt, { rubrik: korta || ram.listor ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum, hojder: o.blad ? del.falt.map((f) => o.blad![f.rubrik]) : undefined, elevblad: !!o.blad }));
   // I beskrivningen bär listans rubrik ramens namn, så att en lista som hamnar på en ny sida går att
   // koppla rätt ("Läs orden, kolumn för kolumn · Läslista 4"). Säger listans rubrik redan vilken ram
   // den hör till ("Skattjakten, vecka 1 · Läs inbjudan två gånger" under "Mentortexterna till
@@ -417,6 +417,13 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
       forra = info.grupp;
       ut.push(kortlista(info, o.brak), avstand());
     }
+    return ut;
+  }
+  // En not till hemmet ("Till vårdnadshavaren") följer med elevkopian hem, med läxa 1, och står därför först i
+  // elevkopian; lärarens noter står sist där (K-031).
+  const tillHemmet = (del: Ram['delar'][number]) => /^Till (vårdnadshavar|hemmet|föräld)/i.test(del.rubrik);
+  if (ram.listor && o.stor && ram.delar.some(tillHemmet)) {
+    ut.push(...noter(ram.delar.filter(tillHemmet)), ...huvud(), ...listor(), ...noter(ram.delar.filter((d) => !tillHemmet(d))));
     return ut;
   }
   if (ram.listor) ut.push(...(o.stor ? [...huvud(), ...listor(), ...noter()] : [...noter(), ...huvud(), ...listor()]));
