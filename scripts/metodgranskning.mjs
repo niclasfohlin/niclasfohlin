@@ -64,7 +64,7 @@ for (const [fil, namn] of [[`${id}.docx`, 'allt'], [`${id}-mallar.docx`, 'mallar
   if (!existsSync(kalla)) continue;
   const ut = join(mapp, `docx-${namn}.md`);
   try {
-    execFileSync('pandoc', [kalla, '-t', 'markdown', '-o', ut], { stdio: 'inherit' });
+    execFileSync('pandoc', [kalla, '-t', 'markdown', '--wrap=none', '-o', ut], { stdio: 'inherit' });
     docxTexter.push(`- ${rel(ut)} (texten ur dist/stodundervisning/${fil})`);
   } catch {
     console.log(`  obs  pandoc kunde inte läsa ${fil}; Codex får läsa docx-filen själv.`);
