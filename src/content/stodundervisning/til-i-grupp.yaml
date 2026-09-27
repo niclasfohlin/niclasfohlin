@@ -328,8 +328,8 @@ lathund:
         - tid: 18–20
           fas: Avsluta
           vad: Upprepa hemuppdraget. Mappen i ryggsäcken. Kort notering.
-        - tid: Hemma
-          fas: Cirka 20 min
+        - tid: Hemma, cirka 20 min
+          fas: Läs och skriv
           vad: Eleven läser boken en gång till för en vuxen, cirka tio minuter. Skriver tre favoritmeningar. Den vuxne signerar.
   mall:
     rubrik: Lässchemat och snabbmallen

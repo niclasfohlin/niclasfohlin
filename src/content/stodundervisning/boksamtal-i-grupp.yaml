@@ -304,7 +304,7 @@ lathund:
           fas: Förberedelse
           vad: Välj en kort text. Läs den själv. Förbered två till tre specialfrågor. Bestäm hur texten ska läsas.
         - tid: 0–10
-          fas: "1 · Läs: möt texten"
+          fas: "1 · Läs"
           vad: Läraren läser högt och tänker högt på ett par ställen. Eleverna läser sedan i par eller tyst och markerar något de fastnade för.
           fraser:
             - Här undrar jag vad som händer sen.
@@ -313,7 +313,7 @@ lathund:
           fas: 2 · Samla först-tankar
           vad: De fyra grundfrågorna, en i taget, laget runt. Skriv upp svaren i fyra spalter. Ännu ingen lång diskussion.
         - tid: 15–27
-          fas: "3 · Fördjupa: hur tänker du?"
+          fas: "3 · Fördjupa"
           vad: Dra trådar ur spalterna. Lägg till allmänna frågor och specialfrågor. Be om textstöd.
           fraser:
             - Berätta mer.

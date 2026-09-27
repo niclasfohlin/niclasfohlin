@@ -134,7 +134,7 @@ steg:
         - Berätta för din kompis vad som händer. Börja med var din huvudperson är.
         - "Fråga din kompis: vad går fel?"
         - Bra. Nu vet du vad du ska skriva. Skriv det du just sa.
-    - namn: Skriv och dela
+    - namn: Skriv, dela och bearbeta
       fraga: Hur låter det?
       gor: Cirkulera. Peka på skrivfokuset där eleven redan gjort det. Lyft tre meningar i slutet. Låt alla ändra en sak.
       fraser:
