@@ -162,15 +162,18 @@ export const TAK = {
 // ---------------------------------------------------------------------------------------------
 // Kreditmätaren. Netlify visar inte förbrukningen i sitt API, så funktionen räknar själv och
 // sparar räkningen i Netlify Blobs, lagret "kommentarer". Uppskattning, inte faktura:
-//   databasen: 0,25 beräkningsenheter så länge den är vaken (grenens minsta storlek, uppmätt
-//              2026-09-26; den kan växa till 1 under last), och den somnar efter 5 minuter utan
-//              anrop, 10 krediter per enhet och timme (Netlify Database, Personal)
+//   databasen: minst 1 enhet så länge den är vaken, och den somnar efter 5 minuter utan anrop;
+//              10 krediter per enhet och timme (Netlify Database, Personal: 1 till 4 enheter, går inte
+//              att ändra). En enhet är 1 GB-timme i Netlifys räkning; grenens 0,25 i API:t är Neons mått
+//              för samma sak. Rättat 2026-09-27 efter Netlifys faktura: 0,25 här gav en fjärdedel av
+//              det verkliga, och varje uppvaknande kostar omkring 1 kredit. Uppskattningen är ett golv:
+//              databasen kan växa till 4 enheter under last, och byggena räknas inte här.
 //   funktionen: 1 GB minne, 10 krediter per GB-timme
 //   anropen:   2 krediter per 10 000
 
 export const LAGER = 'kommentarer';
 const VILA_MIN = 5;
-const DB_ENHETER = 0.25;
+const DB_ENHETER = 1;
 
 /** Perioden börjar den 20:e som Netlifys fakturaperiod (07.00 UTC). Nyckeln är periodens första dag. */
 export function period(nu = new Date()) {

@@ -1,3 +1,9 @@
+-- Ligger utanför netlify/database/migrations med avsikt (2026-09-27). Tabellerna skapades i produktionen
+-- vid bygget 2026-09-26. Så länge en migrering ligger i den mappen kontrollerar varje produktionsbygge
+-- migreringarna och tar en ögonblicksbild, och det väcker databasen: omkring 1 kredit per bygge. Netlify
+-- stöder att schemat sköts utanför mappen, och NETLIFY_DB_URL finns ändå för funktionerna. Ska schemat
+-- ändras: se DRIFT.md under Kommentarer. Allt nedan är IF NOT EXISTS och kan köras igen utan skada.
+
 -- Kommentarerna på sajten: Walines tabeller för Postgres, efter assets/waline.pgsql i
 -- walinejs/waline (version 1.41). Tabellnamnen och kolumnerna måste vara Walines, annars hittar
 -- servern dem inte. wl_counter används inte (sidvisningar och reaktioner är avslagna), men Waline

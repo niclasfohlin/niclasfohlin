@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
+# Kommentarernas funktion och panel och delningskortens mallar är inga sidor att läsa. Varje anrop mot
+# kommentarsfunktionen kan väcka databasen, som kostar krediter (DRIFT.md under Kommentarer). Korten under
+# /delning/ ska gå att hämta: LinkedIn följer den här filen.
+Disallow: /kommentarer/
+Disallow: /.netlify/
+Disallow: /delning/kort/
 
 Sitemap: https://niclasfohlin.se/sitemap-index.xml

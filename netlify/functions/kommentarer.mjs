@@ -407,8 +407,12 @@ async function behandla(event, context) {
     if (del === '/prov' && metod === 'GET') return json(200, { t: signera('prov', { s: Date.now() }) });
     if (del === '/' || del === '/admin') return { statusCode: 302, headers: { location: `${PREFIX}/ui` }, body: '' };
     if (del === '/registrera') {
-      databas = true;
-      return await registrering(event, lager);
+      const spar = { databas: false };
+      try {
+        return await registrering(event, lager, spar);
+      } finally {
+        databas = spar.databas;
+      }
     }
 
     let svar;
@@ -434,6 +438,13 @@ async function behandla(event, context) {
       if (event.multiValueHeaders) delete event.multiValueHeaders.authorization;
       slag = anonymtAnrop(metod, del, q);
       if (!slag) return fel(404, 'Finns inte.');
+    }
+
+    // Bara administratören kan logga in, och bara med sin adress: ett försök med en annan adress, eller utan
+    // adress, svarar här och når aldrig databasen, som annars vaknar för omkring en kredit.
+    if (slag === 'inloggning' && (metod === 'POST' || q.email !== undefined)) {
+      const epost = String((metod === 'POST' ? lasKropp(event).email : q.email) || '').trim().toLowerCase();
+      if (epost !== ADMIN_EPOST) return fel(401, 'Fel e-postadress eller lösenord.');
     }
 
     // Inloggningen kan inte gissas i all oändlighet: tio försök i timmen per avsändare, fyrtio för alla.
@@ -499,9 +510,16 @@ async function behandla(event, context) {
 // den som registrerar sig måste alltså kunna läsa den inkorgen. Lösenordet väljer Niclas själv på
 // sidan, och det hashas som Waline gör innan det sparas.
 
-async function finnsAdmin() {
+// Svaret ändras bara när administratören skapas, så sidan läser det ur Blobs och låter databasen sova
+// (varje uppvaknande kostar omkring en kredit, se DRIFT.md under Kommentarer). Lösenordsbytet frågar
+// databasen direkt (farsk), så att ett borttaget konto inte kan gömma sig bakom ett gammalt svar.
+async function finnsAdmin(lager, spar, farsk = false) {
+  if (!farsk && (await lager.get('admin-finns').catch(() => null)) === 'ja') return true;
+  spar.databas = true;
   const rader = await getDatabase().sql`SELECT count(*)::int AS n FROM wl_users WHERE type = 'administrator'`;
-  return (rader[0]?.n ?? 0) > 0;
+  const finns = (rader[0]?.n ?? 0) > 0;
+  await (finns ? lager.set('admin-finns', 'ja') : lager.delete('admin-finns')).catch(() => {});
+  return finns;
 }
 
 function bas(event) {
@@ -529,12 +547,12 @@ ${innehall}
   };
 }
 
-async function registrering(event, lager) {
+async function registrering(event, lager, spar) {
   const metod = event.httpMethod;
   const kropp = metod === 'POST' ? lasKropp(event) : {};
   const t = kropp.t || event.queryStringParameters?.t;
   const logga = `<p><a href="${PREFIX}/ui">Logga in i panelen</a></p>`;
-  const finns = await finnsAdmin();
+  const finns = await finnsAdmin(lager, spar, Boolean(t));
 
   if (!t) {
     if (metod !== 'POST') {
@@ -590,6 +608,7 @@ ${finns ? '' : '<label>Namnet som visas vid dina svar <input name="namn" value="
   const namn = String(kropp.namn || '').trim().slice(0, 60) || 'Niclas Fohlin';
   await getDatabase().sql`INSERT INTO wl_users (display_name, email, password, type, url)
     VALUES (${namn}, ${ADMIN_EPOST}, ${hash}, 'administrator', ${SAJT})`;
+  await lager.set('admin-finns', 'ja').catch(() => {});
   return sida('Klart', `<p>Du är administratör. Logga in med ${skydda(ADMIN_EPOST)} och lösenordet du valde.</p>${logga}
 <p>Är du inloggad i panelen kan du också svara, godkänna och ta bort direkt under varje artikel, bok och metod på sajten.</p>`);
 }
