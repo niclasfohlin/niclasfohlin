@@ -24,6 +24,8 @@ En post tas med `starta`, som ställer relevansfrågorna och byter till grenen `
 
 Prio 1 görs nu, prio 2 i tur och ordning, prio 3 vilar tills ett annat jobb ändå ska ändra samma fil och kräver därför `--var`. `--drabbar lasare` ger prio 1 (en läsare av sajten ser felet), `--drabbar rigg` ger prio 3 (bara arbetssättet är drabbat). `node scripts/ko.mjs` utan argument visar alla kommandon, `npm run ko:prov` kör köns egna prov.
 
+Kommer mycket på en gång, som en ny metod med kommentarer eller flera önskemål i ett meddelande (Niclas 2026-09-27: "Lätt att tappa bort vad du ska göra när det blir en massa nytt jobb"): lägg varje sak i kön med `lagg` innan arbetet börjar, också det som görs direkt, och stäm av mot `node scripts/ko.mjs lista` innan main pushas och innan svaret till Niclas skrivs. Det som väntar på något, som en uppladdning som ska ske med nästa metod, är en blockerad post med `--behovs`, så att den syns i listan och inte tas av en nattkörning.
+
 ## Innehåll
 
 Poster skapas från mallen i respektive mapp: `_mall.md` för artiklar och böcker, `_mall.yaml` för metoder. Taggar och publikationer tas från registren i `src/data/`. Kör `npm run taggar` för att se vad som finns innan du väljer. En tagg får en egen sida först när något innehåll använder den.
