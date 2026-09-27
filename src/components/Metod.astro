@@ -43,6 +43,12 @@ const lathundBlad = d.lathund && d.lathund.mall.block.filter((b) => b.typ !== 'n
 // Bråk i elevmaterialet staplas i matematik (src/lib/brak.ts); i andra ämnen står ett snedstreck kvar, som i ett datum.
 const brak = d.omrade === 'Matematik';
 // Sidnavigationen: de avsnitt som finns, i modellens ordning, med korta namn.
+// Urvalsavsnittets rubrik är en fråga ("Var hittar du materialet och talen?"); menyn tar dess kärna ("Materialet och
+// talen"), så att posten säger vad avsnittet gäller och inte krockar med ramarnas "Material per årskurs" (K-034).
+const urvalNamn = (rubrik: string) => {
+  const karna = (rubrik.match(/^Var hittar du (.+?)\??$/i) ?? rubrik.match(/^Var (.+?) finns\??$/i))?.[1] ?? rubrik;
+  return karna.charAt(0).toLocaleUpperCase('sv') + karna.slice(1);
+};
 const avsnitt = [
   d.passrutin && { id: 'passrutin', namn: pass ? 'Passet' : 'Passrutin' },
   d.tidsschema && !pass && { id: 'tidsschema', namn: 'Tidsschema' },
@@ -51,7 +57,7 @@ const avsnitt = [
   d.exempel && { id: 'exempel', namn: 'Exempel' },
   d.fastnar && { id: 'fastnar', namn: 'När det fastnar' },
   d.roll && { id: 'roll', namn: 'Lärarens roll' },
-  d.urval && { id: 'urval', namn: 'Material' },
+  d.urval && { id: 'urval', namn: urvalNamn(d.urval.rubrik) },
   d.hem && { id: 'hem', namn: 'Hem och skola' },
   d.progression && { id: 'progression', namn: 'Progression' },
   d.uppfoljning && { id: 'uppfoljning', namn: 'Uppföljning' },
