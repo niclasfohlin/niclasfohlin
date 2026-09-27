@@ -174,13 +174,13 @@ export async function lathundPptx(m: CollectionEntry<'stodundervisning'>, o: { b
     txt(s, parts, x + 0.21, y + 0.12, w - 0.4, h - 0.24, { size, valign: 'middle' });
   }
   // Tabell ritad som former, radhöjder räknas ut och skalas till tillgänglig höjd.
-  function shapeTable(s: any, x: number, y: number, w: number, c1: number, headers: string[], rows: { namn: string; under?: string; rader: string[]; kursiv?: boolean }[], availH: number) {
+  function shapeTable(s: any, x: number, y: number, w: number, c1: number, headers: string[], rows: { namn: string; under?: string; fet?: string; rader: string[]; kursiv?: boolean }[], availH: number) {
     const rightW = w - c1 - 0.3, leftW = c1 - 0.25;
     const avail = availH - 0.35;
     let fs = 12.75, us = 11.5, nat: number[] = [], sum = 0;
     const measure = () => { nat = rows.map((r) => {
       const left = 0.2 + Math.max(0.27, estH(r.namn, leftW, fs)) + (r.under ? estH(r.under, leftW, us) : 0) + 0.1;
-      const right = 0.2 + r.rader.reduce((a, t) => a + estH(t, rightW, fs, 0.04), 0);
+      const right = 0.2 + (r.fet ? estH(r.fet, rightW, fs, 0.04) : 0) + r.rader.reduce((a, t) => a + estH(t, rightW, fs, 0.04), 0);
       return Math.max(left, right, 0.6);
     }); sum = nat.reduce((a, b) => a + b, 0); };
     measure();
@@ -202,7 +202,9 @@ export async function lathundPptx(m: CollectionEntry<'stodundervisning'>, o: { b
       const namnH = Math.max(0.27, estH(r.namn, leftW, fs));
       txt(s, r.namn, x + 0.15, cy + 0.1, leftW, namnH, { size: fs, bold: true });
       if (r.under) txt(s, r.under, x + 0.15, cy + 0.1 + namnH + 0.02, leftW, h - namnH - 0.15, { size: us, color: GREY });
-      txt(s, r.rader.map((t, j) => ({ text: plain(t), options: { italic: !!r.kursiv, breakLine: j < r.rader.length - 1, fontSize: fs, fontFace: SANS, color: INK } })), x + c1 + 0.16, cy + 0.1, rightW, h - 0.15, { psa: 3 });
+      // En fet första rad (fasens namn i schemat på bild 2) står före texten, som i webblathunden.
+      const fetRad = r.fet ? [{ text: plain(r.fet), options: { bold: true, breakLine: true, fontSize: fs, fontFace: SANS, color: INK } }] : [];
+      txt(s, [...fetRad, ...r.rader.map((t, j) => ({ text: plain(t), options: { italic: !!r.kursiv, breakLine: j < r.rader.length - 1, fontSize: fs, fontFace: SANS, color: INK } }))], x + c1 + 0.16, cy + 0.1, rightW, h - 0.15, { psa: 3 });
       cy += h;
     });
     frame(s, x, y, w, cy - y);
@@ -311,7 +313,7 @@ export async function lathundPptx(m: CollectionEntry<'stodundervisning'>, o: { b
     if (b.forberett) { cream(s, 0.46, y, 5.27, c1H, b.forberett, 12, 'DET JAG FÖRBEREDDE'); y += c1H + 0.15; }
     if (b.klarTidigt) cream(s, 0.46, y, 5.27, c2H, b.klarTidigt, 12, 'KLAR TIDIGT');
     label(s, b.schemaRubrik, 6.22, 0.88, 6.9);
-    shapeTable(s, 6.22, 1.2, 6.66, 1.45, ['TID', 'VAD HÄNDER'], b.schema.map((r) => ({ namn: r.tid, under: r.fas, rader: [r.text] })), BOTTEN - 1.2);
+    shapeTable(s, 6.22, 1.2, 6.66, 1.45, ['TID', 'VAD HÄNDER'], b.schema.map((r) => ({ namn: r.tid, fet: r.fas, rader: [r.text] })), BOTTEN - 1.2);
     fot(s);
     s.addNotes(`${b.anteckning} ${upphov}`);
   }
@@ -346,7 +348,8 @@ export async function lathundPptx(m: CollectionEntry<'stodundervisning'>, o: { b
       // stort i ett band överst i varje ruta så att det går att läsa från andra sidan bordet.
       const x0 = 0.21, fullW = W - 0.42, mellan = 0.18, radMellan = 0.12;
       let y = areaTop;
-      if (b.rubrik) { label(s, versaler(b.rubrik), x0, y, fullW, NAVY); y += 0.32; }
+      const [ra_, ti_] = [String(b.rubrik ?? '').toLowerCase(), String(b.titel ?? '').toLowerCase()];
+      if (ra_ && !ra_.includes(ti_) && !ti_.includes(ra_)) { label(s, versaler(b.rubrik), x0, y, fullW, NAVY); y += 0.32; }
       const n = b.kolumner.length, cw = (fullW - mellan * (n - 1)) / n;
       const rh = (areaBottom - y - radMellan * (b.rader - 1)) / b.rader;
       for (let r = 0; r < b.rader; r++) {
