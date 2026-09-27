@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { site } from '../../data/site';
 import Taggar from '../../components/Taggar.astro';
 import { artiklarSorterade, formateraDatum, publikationNamn, taggLabel, typLabel } from '../../lib/innehall';
 const artiklar = await artiklarSorterade();
@@ -12,7 +13,7 @@ const publikationer = [...new Set(artiklar.map((a) => a.data.publikation))]
 const typer = [...new Set(artiklar.map((a) => a.data.typ))].map((t) => ({ id: t, namn: typLabel(t) })).sort((x, y) => x.namn.localeCompare(y.namn, 'sv'));
 ---
 
-<Base title="Artiklar" description="Krönikor, debattartiklar och intervjuer om skolan, publicerade i Vi Lärare, Göteborgs-Posten och andra tidningar. Sök bland texterna eller bläddra per år.">
+<Base title={site.sidor.artiklar.titel} description={site.sidor.artiklar.beskrivning}>
   <h1>Artiklar</h1>
   <p class="text">{artiklar.length} texter om skolan: krönikor, debattartiklar och intervjuer i Vi Lärare, Göteborgs-Posten och andra tidningar. De flesta finns här i sin helhet, och varje text länkar till originalet.</p>
   {artiklar.length === 0 && <p>Inga artiklar ännu.</p>}

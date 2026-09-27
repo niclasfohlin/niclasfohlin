@@ -39,6 +39,36 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
+# Cache i webbläsarna och hos dem som visar delade länkar (Niclas 2026-09-27). Med Netlifys förval,
+# max-age=0, hämtade Facebook delningsbilden 6 131 gånger på ett dygn, drygt hälften av sajtens bandbredd.
+# Filerna under /_astro/ och delningskorten har en kontrollsumma i namnet och ändras aldrig: ett år. Bilderna
+# och ikonen byts sällan: en vecka. Typsnitten: 30 dagar. Sidorna och nedladdningarna behåller förvalet, så att
+# en ändring syns direkt. Hur trafiken mäts står i DRIFT.md under Krediter.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/delning/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/favicon.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
 # www och Netlifys egen underdomän skickas till huvuddomänen, så att varje sida bara har en adress.
 [[redirects]]
   from = "https://www.niclasfohlin.se/*"

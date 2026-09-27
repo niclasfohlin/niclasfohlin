@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { site } from '../../data/site';
 import { bildHojd } from '../../lib/bildmatt';
 import { bockerSorterade } from '../../lib/innehall';
 import { bokKategorier } from '../../content.config';
@@ -8,7 +9,7 @@ const bocker = await bockerSorterade();
 const grupper = bokKategorier.map((k) => ({ kategori: k, lista: bocker.filter((b) => b.data.kategori === k) })).filter((g) => g.lista.length > 0);
 ---
 
-<Base title="Böcker" description="Niclas Fohlins böcker om kooperativt lärande, undervisning och läsinlärning, samt läromedel och kapitel i andra böcker.">
+<Base title={site.sidor.bocker.titel} description={site.sidor.bocker.beskrivning}>
   <h1>Böcker</h1>
   <p class="text">Böckerna är skrivna för lärare som vill ha något att använda i klassrummet, de flesta tillsammans med Jennie Wilson. Varje bok länkar till förlaget.</p>
   {bocker.length === 0 && <p>Inga böcker ännu.</p>}

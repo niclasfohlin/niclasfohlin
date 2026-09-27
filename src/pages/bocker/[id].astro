@@ -17,7 +17,7 @@ const { Content } = await render(b);
 const antologi = b.data.kategori === 'Kapitel i andra böcker';
 ---
 
-<Base title={b.data.titel} description={b.data.beskrivning} bild={b.data.omslag}>
+<Base title={b.data.titel} description={b.data.beskrivning}>
   <article class="bok">
     {b.data.omslag && <img class="omslag bok-omslag-stor" src={b.data.omslag} alt={`Omslag: ${b.data.titel}`} width="240" height={bildHojd(b.data.omslag, 240)} />}
     <div class="bok-text">

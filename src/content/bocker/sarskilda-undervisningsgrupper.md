@@ -8,7 +8,7 @@ redaktor: "Max Hjorton"
 kapitel: "Demokrati och särskilda undervisningsgrupper"
 medforfattare: ["Sabina Durakovic", "Cajsa Jahn", "Malin Reuterswärd", "Elinor Kennerö Tonner", "Emma Leifler", "Gunnlaugur Magnússon", "Petri Partanen", "Denice Sverla", "Maria Wiman"]
 isbn: "9789198857849"
-omslag: "/images/bocker/sarskilda-undervisningsgrupper.png"
+omslag: "/images/bocker/sarskilda-undervisningsgrupper.jpg"
 lankar:
   - text: "Boken hos Lärarförlaget"
     url: "https://lararforlaget.se/grundskola/bocker/sarskilda-undervisningsgrupper-perspektiv-pa-larande-stod-och-inkludering"

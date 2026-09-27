@@ -1,0 +1,69 @@
+---
+// Mallen för delningskorten, 1200 × 630. Sidan finns bara för att scripts/delningskort.mjs ska fotografera den
+// med Chrome; den länkas inte, står inte i sitemap och indexeras inte. Allt som syns kommer ur kortet
+// (src/lib/delningskort.ts), och färgerna och typsnittet ur designsystemet i global.css. Ändras mallen får
+// alla kort ny kontrollsumma och ritas om vid nästa npm run validera.
+import '../../../styles/global.css';
+import { site } from '../../../data/site';
+import { allaKort, type Kort } from '../../../lib/delningskort';
+
+export async function getStaticPaths() {
+  return (await allaKort()).map((kort) => ({ params: { namn: kort.namn }, props: { kort } }));
+}
+
+const { kort } = Astro.props as { kort: Kort };
+const omslag = kort.typ === 'bok' && kort.bild !== site.portratt;
+const stort = kort.typ === 'start' || kort.typ === 'om';
+const smal = omslag || stort;
+const n = kort.titel.length;
+const storlek = smal ? (n <= 18 ? 76 : n <= 36 ? 62 : 52) : n <= 24 ? 84 : n <= 44 ? 70 : 58;
+---
+
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>{kort.titel}</title>
+    <style>
+      html, body { margin: 0; padding: 0; background: #fff; }
+      .dk { display: flex; width: 1200px; height: 630px; overflow: hidden; background: var(--farg-yta); color: var(--farg-text); font-family: var(--typsnitt-rubrik); }
+      .dk-streck { flex: none; width: 18px; background: var(--dk-farg); }
+      .dk-text { flex: 1; min-width: 0; display: flex; flex-direction: column; padding: 56px 72px 56px 64px; }
+      .dk-etikett { margin: 0 0 26px; max-width: none; font-size: 24px; line-height: 1.25; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--dk-farg); }
+      .dk-titel { margin: 0; max-width: none; font-size: var(--dk-storlek); line-height: 1.06; font-weight: 800; letter-spacing: -0.015em; color: var(--farg-text); text-wrap: balance; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+      .dk-under { margin: 22px 0 0; max-width: none; font-size: 34px; line-height: 1.3; font-weight: 500; color: var(--farg-text-svag); text-wrap: pretty; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+      .dk-innehall { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-bottom: 16px; }
+      .dk-fot { flex: none; display: flex; align-items: center; gap: 18px; }
+      .dk-fot img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; object-position: top; border: 2px solid var(--farg-kant); }
+      .dk-namn { font-size: 27px; line-height: 1.2; font-weight: 700; }
+      .dk-adress { font-size: 23px; line-height: 1.3; color: var(--farg-text-svag); }
+      .dk-hoger { flex: none; display: flex; align-items: center; justify-content: center; background: var(--farg-ton); }
+      .dk-omslag { width: 400px; }
+      .dk-omslag img { max-width: 320px; max-height: 500px; border: 1px solid var(--farg-kant); box-shadow: 0 12px 32px rgba(20, 32, 43, 0.22); }
+      .dk-portratt { width: 470px; }
+      .dk-portratt img { width: 390px; height: 390px; border-radius: 50%; object-fit: cover; object-position: top; border: 6px solid var(--farg-yta); box-shadow: 0 0 0 1px var(--farg-kant); }
+    </style>
+  </head>
+  <body>
+    <div class="dk" style={`--dk-farg: var(${kort.farg}); --dk-storlek: ${storlek}px`}>
+      <div class="dk-streck"></div>
+      <div class="dk-text">
+        <div class="dk-innehall">
+          {kort.etikett && <p class="dk-etikett">{kort.etikett}</p>}
+          <h1 class="dk-titel">{kort.titel}</h1>
+          {kort.undertitel && <p class="dk-under">{kort.undertitel}</p>}
+        </div>
+        <div class="dk-fot">
+          {!stort && <img src={site.portratt} alt="" />}
+          <div>
+            {!stort && <div class="dk-namn">{site.namn}</div>}
+            <div class="dk-adress">niclasfohlin.se</div>
+          </div>
+        </div>
+      </div>
+      {omslag && <div class="dk-hoger dk-omslag"><img src={kort.bild} alt="" /></div>}
+      {stort && <div class="dk-hoger dk-portratt"><img src={site.portratt} alt="" /></div>}
+    </div>
+  </body>
+</html>

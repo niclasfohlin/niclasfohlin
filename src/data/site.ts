@@ -6,8 +6,18 @@ export const site = {
   // Kort rad under namnet i sidhuvud och på startsidan.
   rad: 'Speciallärare, specialpedagog, författare och föreläsare',
   epost: 'niclas.fohlin@gmail.com',
-  // Bild som visas när en sida delas och sidan saknar egen bild.
-  delningsbild: '/images/niclas-fohlin-delning.jpg',
+  // Porträttet på startsidan, om-sidan och delningskorten.
+  portratt: '/images/niclas-fohlin.jpg',
+  // Huvudsidornas titel och beskrivning, som sidorna och deras delningskort läser (src/lib/delningskort.ts).
+  // Varje artikel, bok och metod har sin egen i posten.
+  sidor: {
+    artiklar: { titel: 'Artiklar', beskrivning: 'Krönikor, debattartiklar och intervjuer om skolan, publicerade i Vi Lärare, Göteborgs-Posten och andra tidningar. Sök bland texterna eller bläddra per år.' },
+    bocker: { titel: 'Böcker', beskrivning: 'Niclas Fohlins böcker om kooperativt lärande, undervisning och läsinlärning, samt läromedel och kapitel i andra böcker.' },
+    stodundervisning: { titel: 'Stödundervisning', beskrivning: 'Metodbank för stödundervisning i matematik, läsning och skrivning. Varje metod har körschema, exempelfraser och mallar, och går att skriva ut och ladda ner som Word-fil.' },
+    om: { titel: 'Om Niclas Fohlin', beskrivning: 'Niclas Fohlin är samordnande specialpedagog på AcadeMedias grundskolor, speciallärare, författare och föreläsare.' },
+    prenumerera: { titel: 'Prenumerera', beskrivning: 'Få ett mejl när det kommer nya texter, böcker eller metoder.' },
+    taggar: { titel: 'Taggar', beskrivning: 'Alla ämnen som texterna och metoderna är taggade med.' },
+  },
   sprak: 'sv',
   navigation: [
     { text: 'Artiklar', href: '/artiklar' },

@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { site } from '../../data/site';
 import { allaTaggar, artiklarSorterade, metoderSorterade, bockerSorterade } from '../../lib/innehall';
 
 const [artiklar, metoder, bocker] = await Promise.all([artiklarSorterade(), metoderSorterade(), bockerSorterade()]);
@@ -11,7 +12,7 @@ const omraden = ['Läsning', 'Skrivning', 'Matematik', 'Allmänt'];
 const taggar = allaTaggar().filter((t) => (antal.get(t.id) ?? 0) > 0);
 ---
 
-<Base title="Taggar" description="Alla ämnen som texterna och metoderna är taggade med.">
+<Base title={site.sidor.taggar.titel} description={site.sidor.taggar.beskrivning}>
   <h1>Taggar</h1>
   {omraden.map((o) => {
     const lista = taggar.filter((t) => t.omrade === o);

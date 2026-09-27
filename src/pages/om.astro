@@ -3,10 +3,10 @@ import Base from '../layouts/Base.astro';
 import { site } from '../data/site';
 ---
 
-<Base title="Om Niclas Fohlin" description="Niclas Fohlin är samordnande specialpedagog på AcadeMedias grundskolor, speciallärare, författare och föreläsare." bild={site.delningsbild}>
+<Base title={site.sidor.om.titel} description={site.sidor.om.beskrivning}>
   <article class="om">
     <header class="om-huvud">
-      <img class="portratt" src="/images/niclas-fohlin.jpg" alt="Niclas Fohlin" width="516" height="600" />
+      <img class="portratt" src={site.portratt} alt="Niclas Fohlin" width="480" height="558" />
       <div>
         <p class="meta">{site.rad}</p>
         <h1>Niclas Fohlin</h1>
