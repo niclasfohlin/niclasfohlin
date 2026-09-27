@@ -17,7 +17,7 @@
 // Observability). De är odokumenterade: Netlifys öppna API redovisar inga krediter (2026-09-27).
 // Nyckeln är Netlify CLI:s inloggning; den skrivs aldrig ut.
 
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { homedir } from 'node:os';
 import { join, resolve, dirname } from 'node:path';
@@ -65,10 +65,11 @@ const tal = (x) => Number(x) || 0;
 // snittet för de tre senaste hela dygnen (UTC), så att en ändring av trafiken syns inom några dagar.
 export const lasKrediter = async () => {
   const token = lasToken();
-  const [saldo, matare, dagar] = await Promise.all([
+  const [saldo, matare, dagar, grenar] = await Promise.all([
     anrop(token, `/${TEAM}/billing/credits`),
     anrop(token, `/${TEAM}/billing/credit_usage`),
     anrop(token, `/${TEAM}/credit_usage_insights`),
+    anrop(token, `/sites/${SITE}/database/branches`).catch(() => null),
   ]);
   if (!saldo?.plan_credits) throw new Error('Netlify redovisade inget saldo (har planen bytts?)');
   const block = (saldo.active_credit_blocks ?? []).find((b) => b.subscription_allocation) ?? (saldo.active_credit_blocks ?? [])[0] ?? {};
@@ -83,6 +84,7 @@ export const lasKrediter = async () => {
     slut: block.expiry_date ?? null,
     perDygn: lopande.length ? lopande.reduce((a, b) => a + b, 0) / lopande.length : 0,
     matare: Object.fromEntries(Object.entries(matare ?? {}).map(([k, v]) => [k, { krediter: tal(v?.credits_used), mangd: tal(v?.usage_used) }])),
+    grenar: grenar ? tolkaGrenar(grenar) : null,
     last: new Date().toISOString(),
   };
 };
@@ -142,13 +144,13 @@ export const rad = (k, l = lage(k), v = vantande()) => {
   const vantar = v.bygger ? ` ${commits(v.bygger)} på main väntar på uppladdning.` : '';
   const slutar = l.tomForeSlut ? ` Allt utom byggen drar omkring ${kred(k.perDygn)} om dygnet, så saldot tar slut omkring ${datum(l.tom)}, före påfyllningen; då pausar Netlify sajten.` : '';
   if (!l.oppen) {
-    return `KREDITSPÄRREN ÄR STÄNGD: ${heltal(k.kvar)} Netlify-krediter kvar, gränsen är ${GOLV}. Ladda inte upp, och säg till Niclas. Arbeta, validera och slå ihop till main lokalt som vanligt, men pusha inte main; säkerhetskopiera med git push origin main:${VANTGREN}. Krediterna fylls på ${pafyllning}.${vantar}${slutar}`;
+    return `KREDITSPÄRREN ÄR STÄNGD: ${heltal(k.kvar)} Netlify-krediter kvar, gränsen är ${GOLV}. Ladda inte upp, och säg till Niclas. Arbeta, validera och slå ihop till main lokalt som vanligt, men pusha inte main; säkerhetskopiera med git push origin main:${VANTGREN}. Krediterna fylls på ${pafyllning}.${vantar}${slutar}${paminnelser(k)}`;
   }
   let s = `Netlify-krediter: ${heltal(k.kvar)} kvar av ${heltal(k.totalt)} till ${pafyllning}. Kreditspärren vid ${GOLV} är öppen: rum för ${l.rum} ${l.rum === 1 ? 'bygge' : 'byggen'} i dag. Allt utom byggen drar omkring ${kred(k.perDygn)} om dygnet.`;
   if (l.tomForeSlut) s += ` VARNING: även utan byggen tar saldot slut omkring ${datum(l.tom)}, före påfyllningen; då pausar Netlify sajten. Säg till Niclas.`;
   else if (l.golvForeSlut) s += ` Utan byggen stänger spärren omkring ${datum(l.golv)}.`;
   if (v.bygger) s += ` ${commits(v.bygger)} på main väntar på uppladdning: en push laddar upp allt.`;
-  return s;
+  return s + paminnelser(k);
 };
 
 const MATARE = {
@@ -166,13 +168,27 @@ const MATARE = {
 
 // Databasens grenar (kommentarerna): sover de, och när var de senast vakna? Varje uppvaknande kostar omkring
 // 1 kredit (DRIFT.md under Kommentarer). En gren från en förhandsversion är en testgren som bara Niclas kan ta bort.
-export const lasDatabas = async () => {
-  const svar = await anrop(lasToken(), `/sites/${SITE}/database/branches`);
+function tolkaGrenar(svar) {
   const grenar = Array.isArray(svar) ? svar : svar?.branches ?? [];
   return grenar.map((g) => ({ namn: g.name ?? g.branch_id, sammanhang: g.metadata?.deploy?.context ?? '', vaken: g.compute?.current_state === 'active', senast: g.compute?.last_active ?? null }));
+}
+
+// En migrering i netlify/database/migrations gör att varje produktionsbygge väcker databasen (omkring 1 kredit);
+// schemat ligger därför i netlify/database/schema/ (K-050, DRIFT.md under Kommentarer).
+const migreringar = () => {
+  const mapp = join(rot, 'netlify', 'database', 'migrations');
+  try { return existsSync(mapp) && readdirSync(mapp).length > 0; } catch { return false; }
 };
 
-const visa = (k, grenar) => {
+// Det som väntar och som raden ska påminna om vid varje nytt uppdrag, tills det är gjort.
+const paminnelser = (k) => {
+  const p = [];
+  for (const g of (k.grenar ?? []).filter((g) => g.namn !== 'production')) p.push(`Databasens testgren ${g.namn} finns kvar; Niclas tar bort den i Netlify under Database (INSTRUKTIONER.docx).`);
+  if (migreringar()) p.push('netlify/database/migrations har filer, så varje bygge väcker databasen för omkring 1 kredit; se DRIFT.md under Kommentarer.');
+  return p.length ? ` ${p.join(' ')}` : '';
+};
+
+const visa = (k) => {
   const l = lage(k);
   const v = vantande();
   const delar = Object.entries(k.matare)
@@ -187,7 +203,7 @@ const visa = (k, grenar) => {
   if (l.tomForeSlut) console.log('  VARNING: saldot tar slut före påfyllningen. Då pausar Netlify sajten och besökarna ser "Site not available". Se vad som drar: npm run krediter -- trafik');
   console.log(`Kreditspärren vid ${GOLV}: ${l.oppen ? `öppen, rum för ${l.rum} ${l.rum === 1 ? 'bygge' : 'byggen'} i dag` : 'STÄNGD, ladda inte upp'}.`);
   console.log(`Lokalt: ${v.alla ? `${commits(v.alla)} på main är inte uppladdade, ${v.bygger} av dem bygger` : 'inget väntar på uppladdning'}.`);
-  for (const g of grenar ?? []) {
+  for (const g of k.grenar ?? []) {
     const tid = g.senast ? `${g.senast.slice(0, 16).replace('T', ' ')} UTC` : 'aldrig';
     const lage = g.vaken ? 'är vaken' : `sover, senast vaken ${tid}`;
     console.log(g.namn === 'production'
@@ -250,8 +266,7 @@ if (arHuvud) {
       console.log(rad(k, l));
       process.exit(grind && !l.oppen ? 1 : 0);
     } else {
-      const [k, grenar] = await Promise.all([hamta({ farsk: true }), lasDatabas().catch(() => null)]);
-      visa(k, grenar);
+      visa(await hamta({ farsk: true }));
     }
   } catch (e) {
     console.log(`Netlify-krediterna gick inte att läsa (${e.message}). Läs saldot i Netlify under Usage & billing före uppladdning; se DRIFT.md under Krediter.`);

@@ -25,7 +25,7 @@ Arbete som inte är ett direkt svar på Niclas går genom kön: `node scripts/ko
 
 ## Stack
 
-Astro 7 med TypeScript och Content Collections (glob-loader, Zod 4 via `astro/zod`). Statiskt bygge. GitHub versionshanterar, Netlify bygger och deployar från `main`. Netlify Functions i `netlify/functions/` för prenumeration och kommentarer. En databas, bara för kommentarerna (Netlify Database); inget CMS.
+Astro 7 med TypeScript och Content Collections (glob-loader, Zod 4 via `astro/zod`). Statiskt bygge. GitHub versionshanterar, Netlify bygger och deployar från `main`. Netlify Functions i `netlify/functions/` för prenumeration och kommentarer. En databas, bara för kommentarerna (Netlify Database); inget CMS. Databasen kostar omkring 1 kredit varje gång den vaknar. Läsare, byggen och inloggningar med fel adress väcker den inte, och därför ligger schemat i `netlify/database/schema/` och inte i `netlify/database/migrations/` (DRIFT.md under Kommentarer).
 
 Kommentarerna under artiklar, böcker och metoder är ett lager: `npm run kommentarer -- av` tar bort dem från hela sajten utan rester, och `npm run kommentarer` visar läget och krediterna. Läs DRIFT.md under Kommentarer innan du rör dem.
 
