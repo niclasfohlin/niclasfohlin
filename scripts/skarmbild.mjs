@@ -8,6 +8,9 @@
 //   node scripts/skarmbild.mjs <url> <ut.png> --bredd 768   Egen bredd
 //   node scripts/skarmbild.mjs <url> <ut.png> --hojd 2000   Bara sidans övre del
 //
+// En sida som är högre än 6 000 punkter sparas i delar, <ut>-1.png, <ut>-2.png och så vidare, var och en högst
+// 6 000 punkter hög: Chrome ritar inte hela ytan på en gång, och nederdelen blev annars vit (K-037).
+//
 // Kräver Chrome (Windows-sökvägen nedan eller CHROME i miljön) och Node 22 eller senare.
 
 import { spawn } from 'node:child_process';
@@ -23,6 +26,10 @@ const mobil = args.includes('--mobil');
 const bredd = args.includes('--bredd') ? Number(args[args.indexOf('--bredd') + 1]) : mobil ? 390 : 1280;
 // --hojd <px> tar bara sidans övre del, för mycket långa sidor.
 const maxHojd = args.includes('--hojd') ? Number(args[args.indexOf('--hojd') + 1]) : Infinity;
+const dpr = mobil ? 2 : 1;
+// Sidor högre än DEL punkter tas i avsnitt och sparas som <ut>-1.png, <ut>-2.png … (K-037).
+const DEL = 6000;
+const AVSNITT = 1000;
 const chrome = process.env.CHROME ?? ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', '/usr/bin/google-chrome'].find((p) => existsSync(p));
 if (!chrome) { console.error('Hittar inte Chrome. Sätt CHROME=<sökväg>.'); process.exit(1); }
 
@@ -64,12 +71,36 @@ try {
   const utvardera = async (expression) => (await skicka('Runtime.evaluate', { expression, returnByValue: true })).result.result.value;
   const hojd = Math.min(maxHojd, await utvardera('Math.ceil(Math.max(document.documentElement.scrollHeight, document.body.scrollHeight))'));
   const bredast = await utvardera('Math.ceil(document.documentElement.scrollWidth)');
-  await skicka('Emulation.setDeviceMetricsOverride', { width: bredd, height: hojd, deviceScaleFactor: mobil ? 2 : 1, mobile: mobil });
-  await vanta(200);
-  const klipp = Number.isFinite(maxHojd) ? { clip: { x: 0, y: 0, width: bredd, height: hojd, scale: 1 } } : {};
-  const svar = await skicka('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true, ...klipp });
-  writeFileSync(ut, Buffer.from(svar.result.data, 'base64'));
-  console.log(`${ut}: ${bredd}x${hojd} css-px${bredast > bredd ? `, OBS sidan är ${bredast} px bred och rullar i sidled` : ''}`);
+  const sidled = bredast > bredd ? `, OBS sidan är ${bredast} px bred och rullar i sidled` : '';
+  if (hojd <= DEL) {
+    await skicka('Emulation.setDeviceMetricsOverride', { width: bredd, height: hojd, deviceScaleFactor: dpr, mobile: mobil });
+    await vanta(200);
+    const klipp = Number.isFinite(maxHojd) ? { clip: { x: 0, y: 0, width: bredd, height: hojd, scale: 1 } } : {};
+    const svar = await skicka('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true, ...klipp });
+    writeFileSync(ut, Buffer.from(svar.result.data, 'base64'));
+    console.log(`${ut}: ${bredd}x${hojd} css-px${sidled}`);
+  } else {
+    // Långa sidor (K-037): Chrome ritar inte en yta på 100 000 pixlar, och nederdelen blev vit. Sidan rullas
+    // i avsnitt om AVSNITT punkter, och avsnitten sätts ihop till delbilder på högst DEL punkter.
+    const sharp = (await import('sharp')).default;
+    await skicka('Emulation.setDeviceMetricsOverride', { width: bredd, height: AVSNITT, deviceScaleFactor: dpr, mobile: mobil });
+    const delar = [];
+    for (let start = 0, n = 1; start < hojd; start += DEL, n++) {
+      const slut = Math.min(hojd, start + DEL);
+      const bitar = [];
+      for (let y = start; y < slut; y += AVSNITT) {
+        const h = Math.min(AVSNITT, slut - y);
+        await skicka('Runtime.evaluate', { expression: `window.scrollTo(0, ${y})` });
+        await vanta(250);
+        const svar = await skicka('Page.captureScreenshot', { format: 'png', clip: { x: 0, y, width: bredd, height: h, scale: 1 } });
+        bitar.push({ input: Buffer.from(svar.result.data, 'base64'), top: Math.round((y - start) * dpr), left: 0 });
+      }
+      const fil = ut.replace(/(\.png)?$/i, `-${n}.png`);
+      await sharp({ create: { width: bredd * dpr, height: Math.round((slut - start) * dpr), channels: 4, background: '#ffffff' } }).composite(bitar).png().toFile(fil);
+      delar.push(fil);
+    }
+    console.log(`${delar.length} delar, ${bredd}x${hojd} css-px${sidled}:\n  ${delar.join('\n  ')}`);
+  }
   ws.close();
 } finally {
   proc.kill();
