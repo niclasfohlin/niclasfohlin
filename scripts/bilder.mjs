@@ -35,10 +35,20 @@ const gjorda = existsSync(FORTECKNING) ? JSON.parse(readFileSync(FORTECKNING, 'u
 const filer = alla(join(rot, 'public', 'images')).filter((f) => /\.(jpe?g|png|webp)$/i.test(f));
 const nya = filer.filter((f) => gjorda[webb(f)] !== summa(f));
 
+// Ikonerna ur favicon.svg: apple-touch-icon.png (180 × 180, hemskärmen på iPhone och iPad) och favicon.ico (32 × 32,
+// för webbläsare och robotar som frågar efter den; utan dem gav de över 400 fel om dygnet, 2026-09-27). De görs om
+// när favicon.svg ändras, och förteckningen minns svg:ens kontrollsumma.
+const svg = join(rot, 'public', 'favicon.svg');
+const apple = join(rot, 'public', 'apple-touch-icon.png');
+const ico = join(rot, 'public', 'favicon.ico');
+const ikonerAktuella = !existsSync(svg) || (gjorda['/favicon.svg'] === summa(svg) && existsSync(apple) && existsSync(ico));
+
 if (kontrollera) {
   for (const f of nya) console.log(`  inte gjord: ${webb(f)} (${kb(statSync(f).size)} kB)`);
-  console.log(nya.length ? `${nya.length} bilder är inte gjorda i rätt storlek. Kör: node scripts/bilder.mjs` : `Bilderna har rätt storlek (${filer.length} st).`);
-  process.exit(nya.length ? 1 : 0);
+  if (!ikonerAktuella) console.log('  ikonerna är inte gjorda ur /favicon.svg');
+  const fel = nya.length > 0 || !ikonerAktuella;
+  console.log(fel ? 'Bilderna eller ikonerna är inte gjorda i rätt storlek. Kör: node scripts/bilder.mjs' : `Bilderna har rätt storlek (${filer.length} st), och ikonerna är aktuella.`);
+  process.exit(fel ? 1 : 0);
 }
 
 // sharp följer med Astro, som använder den för sina bilder. Kontrollen ovan klarar sig utan, så att den kan köras i
@@ -86,8 +96,24 @@ for (const fil of nya) {
   console.log(`  krympt ${webb(ut)}: ${kb(byte)} kB blir ${kb(data.length)} kB (${m.width} × ${m.height} blir ${nyM.width} × ${nyM.height})`);
 }
 
+if (!ikonerAktuella) {
+  const kalla = readFileSync(svg);
+  // iPhone rundar hörnen själv och fyller det genomskinliga med svart, så ikonen får sin egen bakgrund ut i hörnen.
+  const bakgrund = kalla.toString('utf8').match(/fill="(#[0-9a-fA-F]{3,6})"/)?.[1] ?? '#ffffff';
+  writeFileSync(apple, await sharp(kalla, { density: 400 }).resize(180, 180).flatten({ background: bakgrund }).png().toBuffer());
+  const png = await sharp(kalla, { density: 400 }).resize(32, 32).png().toBuffer();
+  // Ett ICO-huvud med en enda bild i PNG-form, som alla webbläsare sedan Windows Vista läser.
+  const huvud = Buffer.alloc(22);
+  huvud.writeUInt16LE(0, 0); huvud.writeUInt16LE(1, 2); huvud.writeUInt16LE(1, 4);
+  huvud.writeUInt8(32, 6); huvud.writeUInt8(32, 7); huvud.writeUInt8(0, 8); huvud.writeUInt8(0, 9);
+  huvud.writeUInt16LE(1, 10); huvud.writeUInt16LE(32, 12); huvud.writeUInt32LE(png.length, 14); huvud.writeUInt32LE(22, 18);
+  writeFileSync(ico, Buffer.concat([huvud, png]));
+  gjorda['/favicon.svg'] = summa(svg);
+  console.log('  ikonerna gjorda ur /favicon.svg: /apple-touch-icon.png och /favicon.ico');
+}
+
 // Förteckningen följer filerna: bilder som tagits bort försvinner ur den.
-const finns = new Set(alla(join(rot, 'public', 'images')).map(webb));
+const finns = new Set([...alla(join(rot, 'public', 'images')).map(webb), ...(existsSync(svg) ? ['/favicon.svg'] : [])]);
 const ny = Object.fromEntries(Object.entries(gjorda).filter(([k]) => finns.has(k)).sort(([a], [b]) => a.localeCompare(b)));
 if (JSON.stringify(ny) !== JSON.stringify(existsSync(FORTECKNING) ? JSON.parse(readFileSync(FORTECKNING, 'utf8')) : null)) writeFileSync(FORTECKNING, JSON.stringify(ny, null, 2) + '\n');
 console.log(nya.length ? `${nya.length} bilder gjordes i rätt storlek. Committa dem och src/data/bilder.json med ändringen.` : `Bilderna har rätt storlek (${filer.length} st).`);
