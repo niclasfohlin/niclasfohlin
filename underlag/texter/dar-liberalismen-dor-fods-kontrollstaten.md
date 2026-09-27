@@ -1,5 +1,5 @@
 ---
-titel: "Fohlin: ”Där liberalismen dör föds kontrollstaten”"
+titel: "Där liberalismen dör föds kontrollstaten"
 publicerad_rubrik: "Fohlin: ”Där liberalismen dör föds kontrollstaten”"
 kalla: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/fohlin-dar-liberalismen-dor-fods-kontrollstaten/"
 datum: 2025-10-23

@@ -1,5 +1,5 @@
 ---
-titel: "Niclas Fohlin: ”Vi måste stoppa ’vi och dom’-tänket i skolan”"
+titel: "Vi måste stoppa ’vi och dom’-tänket i skolan"
 publicerad_rubrik: "Niclas Fohlin: ”Vi måste stoppa ’vi och dom’-tänket i skolan”"
 kalla: "https://www.vilarare.se/specialpedagogik/kronika2/niclas-fohlin-vi-maste-stoppa-vi-och-dem-tanket-i-skolan/"
 datum: 2023-12-11

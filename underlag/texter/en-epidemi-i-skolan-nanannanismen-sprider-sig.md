@@ -1,5 +1,5 @@
 ---
-titel: "”En epidemi i skolan – nånannanismen sprider sig”"
+titel: "En epidemi i skolan – nånannanismen sprider sig"
 publicerad_rubrik: "Niclas Fohlin: ”En epidemi i skolan – nånannanismen sprider sig”"
 kalla: "https://www.vilarare.se/specialpedagogik/kronika2/en-epidemi-i-skolan--nanannanismen-sprider-sig/"
 datum: 2026-03-25

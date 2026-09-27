@@ -1,5 +1,5 @@
 ---
-titel: "Niclas Fohlin: ”Visa viljan att förstå varje elev!”"
+titel: "Visa viljan att förstå varje elev!"
 publicerad_rubrik: "Niclas Fohlin: ”Visa viljan att förstå varje elev!”"
 kalla: "https://www.vilarare.se/specialpedagogik/specialpedagogik/niclas-fohlin-visa-viljan-att-forsta-varje-elev/"
 datum: 2024-09-13

@@ -1,5 +1,5 @@
 ---
-titel: "Niclas Fohlin: ”Staten skapar analfabeter”"
+titel: "Staten skapar analfabeter"
 publicerad_rubrik: "Niclas Fohlin: ”Staten skapar analfabeter”"
 kalla: "https://www.vilarare.se/specialpedagogik/lasinlarning/niclas-fohlin-staten-skapar-analfabeter/"
 datum: 2024-10-14

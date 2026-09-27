@@ -1,5 +1,5 @@
 ---
-titel: "Fohlin: ”Rapporten är en tickande bomb”"
+titel: "Rapporten är en tickande bomb"
 publicerad_rubrik: "Fohlin: ”Rapporten är en tickande bomb”"
 kalla: "https://www.vilarare.se/specialpedagogik/arbetsmiljo/fohlin-rapporten-ar-en-tickande-bomb/"
 datum: 2025-02-05

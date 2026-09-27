@@ -1,5 +1,5 @@
 ---
-titel: "Niclas Fohlin: ”Vilka blir förlorarna i en alltmer auktoritär skola?”"
+titel: "Vilka blir förlorarna i en alltmer auktoritär skola?"
 publicerad_rubrik: "Niclas Fohlin: ”Vilka blir förlorarna i en alltmer auktoritär skola?”"
 kalla: "https://www.vilarare.se/specialpedagogik/kronika2/niclas-fohlin-vilka-blir-forlorarna-i-en-alltmer-auktoritar-skola/"
 datum: 2024-01-15

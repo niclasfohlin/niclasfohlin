@@ -1,5 +1,5 @@
 ---
-titel: "”Diagnossjukan är elefanten i klassrummet”"
+titel: "Diagnossjukan är elefanten i klassrummet"
 publicerad_rubrik: "Niclas Fohlin: ”Diagnossjukan är elefanten i klassrummet”"
 kalla: "https://www.vilarare.se/specialpedagogik/kronika2/diagnossjukan-ar-elefanten-i-klassrummet-/"
 datum: 2026-03-09

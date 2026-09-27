@@ -1,5 +1,5 @@
 ---
-titel: "”Kognitionsvetenskap kan aldrig bli mer än ett komplement”"
+titel: "Kognitionsvetenskap kan aldrig bli mer än ett komplement"
 publicerad_rubrik: "”Kognitionsvetenskap kan aldrig bli mer än ett komplement”"
 kalla: "https://www.vilarare.se/specialpedagogik/ny-kategori/fohlin-kognitionsvetenskap-kan-aldrig-bli-mer-an-ett-komplement/"
 datum: 2024-12-10

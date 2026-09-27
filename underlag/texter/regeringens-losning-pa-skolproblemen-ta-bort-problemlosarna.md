@@ -1,5 +1,5 @@
 ---
-titel: "”Regeringens lösning på skolproblemen – ta bort problemlösarna”"
+titel: "Regeringens lösning på skolproblemen – ta bort problemlösarna"
 publicerad_rubrik: "”Regeringens lösning på skolproblemen – ta bort problemlösarna”"
 kalla: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/regeringens-losning-pa-skolproblemen-ta-bort-problemlosarna/"
 datum: 2025-10-27

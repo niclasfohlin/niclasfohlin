@@ -1,5 +1,5 @@
 ---
-titel: "Fohlin: ”Detta är min dröm om skolan”"
+titel: "Detta är min dröm om skolan"
 publicerad_rubrik: "Fohlin: ”Detta är min dröm om skolan”"
 kalla: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/fohlin-detta-ar-min-drom-om-skolan/"
 datum: 2025-10-19

@@ -1,5 +1,5 @@
 ---
-titel: "Slutreplik: ”Vi måste dela både ilskan och handlingskraften”"
+titel: "Vi måste dela både ilskan och handlingskraften"
 publicerad_rubrik: "Slutreplik: ”Vi måste dela både ilskan och handlingskraften”"
 kalla: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/slutreplik-vi-maste-dela-bade-ilskan-och-handlingskraften/"
 datum: 2026-03-27

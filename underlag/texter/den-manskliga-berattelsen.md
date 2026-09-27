@@ -1,5 +1,5 @@
 ---
-titel: "Fohlin: ”Den mänskliga berättelsen gör all skillnad”"
+titel: "Den mänskliga berättelsen gör all skillnad"
 publicerad_rubrik: "Fohlin: ”Den mänskliga berättelsen gör all skillnad”"
 kalla: "https://www.vilarare.se/specialpedagogik/kronika2/fohlin-den-manskliga-berattelsen-gor-all-skillnad/"
 datum: 2025-05-05

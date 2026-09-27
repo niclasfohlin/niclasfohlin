@@ -1,5 +1,5 @@
 ---
-titel: "Fohlin: ”Det som fattas dagens skola är det besjälade”"
+titel: "Det som fattas dagens skola är det besjälade"
 publicerad_rubrik: "Fohlin: ”Det som fattas dagens skola är det besjälade”"
 kalla: "https://www.vilarare.se/specialpedagogik/inlarning/fohlin-det-som-fattas-dagens-skola-ar-det-besjalade/"
 datum: 2024-03-11

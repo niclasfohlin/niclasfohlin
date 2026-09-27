@@ -1,5 +1,5 @@
 ---
-titel: "Fohlin: ”När konservativa vindar blåser i skolan – håll hårt i det du håller kärt”"
+titel: "När konservativa vindar blåser i skolan – håll hårt i det du håller kärt"
 publicerad_rubrik: "Fohlin: ”När konservativa vindar blåser i skolan – håll hårt i det du håller kärt”"
 kalla: "https://www.vilarare.se/specialpedagogik/kronika2/niclas-fohlin-nar-konservativa-vindar-blaser-i-skolan--hall-hart-i-det-du-haller-kart/"
 datum: 2025-01-13

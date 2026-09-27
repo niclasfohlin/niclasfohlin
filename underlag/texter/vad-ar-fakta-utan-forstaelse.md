@@ -1,5 +1,5 @@
 ---
-titel: "Fohlin: ”Vad är fakta utan förståelse?”"
+titel: "Vad är fakta utan förståelse?"
 publicerad_rubrik: "Fohlin: ”Vad är fakta utan förståelse?”"
 kalla: "https://www.vilarare.se/specialpedagogik/kronika2/fohlin-vad-ar-fakta-utan-forstaelse/"
 datum: 2024-05-03

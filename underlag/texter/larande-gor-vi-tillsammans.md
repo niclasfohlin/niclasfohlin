@@ -1,5 +1,5 @@
 ---
-titel: "Fohlin: ”Lärande och undervisning är något elever och lärare gör tillsammans”"
+titel: "Lärande och undervisning är något elever och lärare gör tillsammans"
 publicerad_rubrik: "Fohlin: ”Lärande och undervisning är något elever och lärare gör tillsammans”"
 kalla: "https://www.vilarare.se/specialpedagogik/inlarning/fohlin-larande-och-undervisning-ar-nagot-elever-och-larare-gor-tillsammans/"
 datum: 2024-04-05

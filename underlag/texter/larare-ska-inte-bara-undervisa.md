@@ -1,5 +1,5 @@
 ---
-titel: "Replik: ”Elevhälsan inte ett parallellt system”"
+titel: "Elevhälsan inte ett parallellt system"
 publicerad_rubrik: "Replik: ”Elevhälsan inte ett parallellt system”"
 kalla: "https://www.vilarare.se/nyheter/vi-larare-debatt/larare-ska-inte-bara-undervisa/"
 datum: 2025-06-03

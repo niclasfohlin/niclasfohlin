@@ -1,5 +1,5 @@
 ---
-titel: "Niclas Fohlin: ”Tack för allt, Anne-Marie Körling!”"
+titel: "Tack för allt, Anne-Marie Körling!"
 publicerad_rubrik: "Niclas Fohlin: ”Tack för allt, Anne-Marie Körling!”"
 kalla: "https://www.vilarare.se/specialpedagogik/kronika2/niclas-fohlin-tack-for-allt-anne-marie-korling/"
 datum: 2024-06-16

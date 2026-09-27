@@ -1,5 +1,5 @@
 ---
-titel: "”Att kunna läsa är nyckeln till allt lärande”"
+titel: "Att kunna läsa är nyckeln till allt lärande"
 publicerad_rubrik: "”Att kunna läsa är nyckeln till allt lärande”"
 kalla: "https://www.vilarare.se/specialpedagogik/kronika2/att-kunna-lasa-ar-nyckeln-till-allt-larande/"
 datum: 2024-05-13

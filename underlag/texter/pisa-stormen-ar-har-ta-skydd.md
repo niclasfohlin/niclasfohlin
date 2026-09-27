@@ -1,5 +1,5 @@
 ---
-titel: "Niclas Fohlin: ”Jag hatar första veckan när Pisa-resultaten släpps”"
+titel: "Jag hatar första veckan när Pisa-resultaten släpps"
 publicerad_rubrik: "Niclas Fohlin: ”Jag hatar första veckan när Pisa-resultaten släpps”"
 kalla: "https://www.vilarare.se/specialpedagogik/kronika2/pisa-stormen-ar-har--ta-skydd/"
 datum: 2023-12-06

@@ -1,5 +1,5 @@
 ---
-titel: "”Evidens ska informera – inte ersätta lärarens omdöme”"
+titel: "Evidens ska informera – inte ersätta lärarens omdöme"
 publicerad_rubrik: "”Evidens ska informera – inte ersätta lärarens omdöme”"
 kalla: "https://www.vilarare.se/nyheter/vi-larare-debatt/niclas-fohlin-evidens-ska-informera--inte-ersatta-lararens-omdome/"
 datum: 2025-11-21

@@ -1,5 +1,5 @@
 ---
-titel: "Fohlin: ”Vi skyller vår otrygghet på barnen”"
+titel: "Vi skyller vår otrygghet på barnen"
 publicerad_rubrik: "Fohlin: ”Vi skyller vår otrygghet på barnen”"
 kalla: "https://www.vilarare.se/specialpedagogik/skolpolitik/fohlin-vi-skyller-var-otrygghet-pa-barnen/"
 datum: 2025-09-30

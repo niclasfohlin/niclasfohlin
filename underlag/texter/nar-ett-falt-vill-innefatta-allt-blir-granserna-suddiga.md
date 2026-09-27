@@ -1,5 +1,5 @@
 ---
-titel: "”När ett fält vill innefatta ’allt’ blir gränserna suddiga”"
+titel: "När ett fält vill innefatta ’allt’ blir gränserna suddiga"
 publicerad_rubrik: "”När ett fält vill innefatta ’allt’ blir gränserna suddiga”"
 kalla: "https://www.vilarare.se/specialpedagogik/neuropedagogik/nar-ett-falt-vill-innefatta-allt-blir-granserna-suddiga/"
 datum: 2024-12-19

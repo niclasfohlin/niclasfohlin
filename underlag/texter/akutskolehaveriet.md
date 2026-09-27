@@ -1,5 +1,5 @@
 ---
-titel: "Niclas Fohlin: Regeringens akutskolehaveri röjer en populistisk skolpolitik"
+titel: "Regeringens akutskolehaveri röjer en populistisk skolpolitik"
 publicerad_rubrik: "Niclas Fohlin: Regeringens akutskolehaveri röjer en populistisk skolpolitik"
 kalla: "https://www.vilarare.se/specialpedagogik/kronika2/niclas-fohlin-regeringens-akutskolehaveri-rojer-en-populistisk-skolpolitik/"
 datum: 2024-11-28

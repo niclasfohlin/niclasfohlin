@@ -1,5 +1,5 @@
 ---
-titel: "Fohlin: Det auktoritära smyger sig in i skolan"
+titel: "Det auktoritära smyger sig in i skolan"
 publicerad_rubrik: "Fohlin: Det auktoritära smyger sig in i skolan"
 kalla: "https://www.vilarare.se/nyheter/vi-larare-debatt/niclas-fohlin-det-auktoritara-smyger-sig-in-i-skolan/"
 datum: 2025-09-02

@@ -1,5 +1,5 @@
 ---
-titel: "Fohlin: ”Alla lärare behöver de professionella samtalen”"
+titel: "Alla lärare behöver de professionella samtalen"
 publicerad_rubrik: "Fohlin: ”Alla lärare behöver de professionella samtalen”"
 kalla: "https://www.vilarare.se/specialpedagogik/specialpedagogik/fohlin-alla-larare-behover-de-professionella-samtalen/"
 datum: 2025-09-23

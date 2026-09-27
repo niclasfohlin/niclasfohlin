@@ -1,5 +1,5 @@
 ---
-titel: "Fohlin: ”Specialpedagoger kvar i elevhälsan – men var tas pengarna?”"
+titel: "Specialpedagoger kvar i elevhälsan – men var tas pengarna?"
 publicerad_rubrik: "Fohlin: ”Specialpedagoger kvar i elevhälsan – men var tas pengarna?”"
 kalla: "https://www.vilarare.se/specialpedagogik/elevhalsa/fohlin-specialpedagoger-kvar-i-elevhalsan--men-var-tas-pengarna/"
 datum: 2025-11-26

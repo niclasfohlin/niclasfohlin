@@ -1,5 +1,5 @@
 ---
-titel: "Fohlin: ”Nu måste grälet om skolan få ett slut”"
+titel: "Nu måste grälet om skolan få ett slut"
 publicerad_rubrik: "Fohlin: ”Nu måste grälet om skolan få ett slut”"
 kalla: "https://www.vilarare.se/specialpedagogik/skolpolitik/fohlin-nu-maste-gralet-om-skolan-fa-ett-slut/"
 datum: 2025-10-06

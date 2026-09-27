@@ -1,5 +1,5 @@
 ---
-titel: "Slutreplik: ”Svensk skola behöver svensk debatt”"
+titel: "Svensk skola behöver svensk debatt"
 publicerad_rubrik: "Slutreplik: ”Svensk skola behöver svensk debatt”"
 kalla: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/slutreplik-svensk-skola-behover-svensk-debatt/"
 datum: 2026-04-23

@@ -1,5 +1,5 @@
 ---
-titel: "”Stödundervisningen undergrävs av bestraffningsidéerna”"
+titel: "Stödundervisningen undergrävs av bestraffningsidéerna"
 publicerad_rubrik: "Niclas Fohlin: ”Stödundervisningen undergrävs av bestraffningsidéerna”"
 kalla: "https://www.vilarare.se/specialpedagogik/kronika2/regeringens-stodreform-haller-inte-ihop/"
 datum: 2026-02-02

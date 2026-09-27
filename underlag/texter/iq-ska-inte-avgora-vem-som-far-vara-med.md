@@ -1,5 +1,5 @@
 ---
-titel: "Fohlin: ”IQ ska inte avgöra vem som får vara med”"
+titel: "IQ ska inte avgöra vem som får vara med"
 publicerad_rubrik: "Fohlin: ”IQ ska inte avgöra vem som får vara med”"
 kalla: "https://www.vilarare.se/nyheter/vi-larare-debatt/fohlin-iq-ska-inte-avgora-vem-som-far-vara-med/"
 datum: 2025-12-18

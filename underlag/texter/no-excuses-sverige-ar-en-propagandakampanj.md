@@ -1,5 +1,5 @@
 ---
-titel: "”No Excuses Sverige är en propagandakampanj”"
+titel: "No Excuses Sverige är en propagandakampanj"
 publicerad_rubrik: "”No Excuses Sverige är en propagandakampanj”"
 kalla: "https://www.vilarare.se/specialpedagogik/ny-kategori/no-excuses-sverige-ar-en-propagandakampanj/"
 datum: 2025-09-15

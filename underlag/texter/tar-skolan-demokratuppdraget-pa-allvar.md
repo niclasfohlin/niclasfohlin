@@ -1,5 +1,5 @@
 ---
-titel: "Fohlin: ”Tar skolan demokratiuppdraget på allvar?”"
+titel: "Tar skolan demokratiuppdraget på allvar?"
 publicerad_rubrik: "Fohlin: ”Tar skolan demokratiuppdraget på allvar?”"
 kalla: "https://www.vilarare.se/specialpedagogik/kronika2/fohlin-tar-skolan-demokratuppdraget-pa-allvar/"
 datum: 2025-01-29

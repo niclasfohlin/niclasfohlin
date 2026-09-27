@@ -1,5 +1,5 @@
 ---
-titel: "Niclas Fohlin: ”Skolan måste inkludera – men ska vi sluta prata om det?”"
+titel: "Skolan måste inkludera – men ska vi sluta prata om det?"
 publicerad_rubrik: "Niclas Fohlin: ”Skolan måste inkludera – men ska vi sluta prata om det?”"
 kalla: "https://www.vilarare.se/specialpedagogik/vi-larare-debatt/niclas-fohlin-klart-skolan-ska-inkludera--men-vad-menar-vi-med-det/"
 datum: 2024-10-06

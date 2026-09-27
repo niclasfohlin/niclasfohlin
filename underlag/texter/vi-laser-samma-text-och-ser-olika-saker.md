@@ -1,5 +1,5 @@
 ---
-titel: "Fohlin: ”Vi läser samma text och ser olika saker”"
+titel: "Vi läser samma text och ser olika saker"
 publicerad_rubrik: "Fohlin: ”Vi läser samma text och ser olika saker”"
 kalla: "https://www.vilarare.se/nyheter/vi-larare-debatt/fohlin-vi-laser-samma-text-och-ser-olika-saker/"
 datum: 2026-04-02

@@ -1,5 +1,5 @@
 ---
-titel: "Fohlin: ”Gör skolan lite mindre skit för någon redan i morgon!”"
+titel: "Gör skolan lite mindre skit för någon redan i morgon!"
 publicerad_rubrik: "Fohlin: ”Gör skolan lite mindre skit för någon redan i morgon!”"
 kalla: "https://www.vilarare.se/specialpedagogik/kronika2/fohlin-gor-skolan-lite-mindre-skit-for-nagon-redan-i-morgon-120024/"
 datum: 2025-12-08

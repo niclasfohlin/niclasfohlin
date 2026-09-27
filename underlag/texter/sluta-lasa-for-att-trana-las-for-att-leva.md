@@ -1,5 +1,5 @@
 ---
-titel: "”Sluta läsa för att träna – läs för att leva!”"
+titel: "Sluta läsa för att träna – läs för att leva!"
 publicerad_rubrik: "”Sluta läsa för att träna – läs för att leva!”"
 kalla: "https://www.vilarare.se/specialpedagogik/lasinlarning/sluta-lasa-for-att-trana--las-for-att-leva/"
 datum: 2024-02-23
