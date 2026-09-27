@@ -24,9 +24,9 @@ const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathu
       <h1>Lathund: {d.titel}</h1>
       <p class="ingress">Fyra sidor att ha bredvid sig: metoden i korthet, ett pass steg för steg, mallen och vad du behöver. Skriv ut i liggande A4 eller ladda ner som PowerPoint, pdf eller Word.</p>
       <p class="lathund-knappar">
-        {/* Knappen öppnar alltid utskriftsrutan: med pdf:en (lathundens PowerPoint, fyra fyllda sidor) där
-            webbläsaren kan, annars med sidan (skriptet nedan). Utan skript öppnas pdf:en. */}
-        <a class="knapp" href={`/stodundervisning/${m.id}-lathund.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf>Skriv ut lathunden (fyra sidor)</a>
+        {/* Utskriften är alltid pdf:en, lathundens PowerPoint: fyra liggande sidor kant till kant. Knappen öppnar
+            den; där webbläsaren kan skriva ut den direkt heter knappen Skriv ut och öppnar utskriftsrutan (skriptet nedan). */}
+        <a class="knapp" href={`/stodundervisning/${m.id}-lathund.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf>Öppna pdf:en för utskrift (fyra sidor)</a>
         {' '}<Filval fil={`/stodundervisning/${m.id}-lathund`} namn={`${m.id}-lathund`} rubrik="Lathunden" pdf pptx />
       </p>
       <nav class="metod-nav lathund-nav" aria-label="Lathundens sidor">
@@ -75,18 +75,18 @@ const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathu
     window.print();
     setTimeout(stad, 2000);
   };
-  // Skriv ut lathunden: en knapp som heter Skriv ut ska ge utskriftsrutan (Niclas 2026-09-27). I Chromium på
-  // datorn (Chrome, Edge, Chromebook) laddas pdf:en, lathundens PowerPoint, i en dold ram och skrivs ut därifrån.
-  // Mobilen, Safari och Firefox kan inte pålitligt skriva ut en pdf ur sidan; där skriver knappen ut sidan som
-  // förut, vilket fungerar också i mobilen, och pdf:en finns under Pdf bredvid.
+  // Lathundens utskrift är pdf:en, fyra liggande sidor kant till kant, också i mobilen (Niclas 2026-09-27). En knapp
+  // som heter Skriv ut ska ge utskriftsrutan. I Chromium på datorn (Chrome, Edge, Chromebook) laddas pdf:en i en dold
+  // ram och skrivs ut därifrån, och knappen heter Skriv ut. Mobilen, Safari och Firefox kan inte pålitligt skriva ut
+  // en pdf ur sidan; där öppnar knappen pdf:en, som telefonen skriver ut liggande och fyllda (Dela och Skriv ut).
   const kanSkrivaUtPdf = () => {
     const ua = (navigator as Navigator & { userAgentData?: { mobile: boolean } }).userAgentData;
     return ua?.mobile === false && navigator.pdfViewerEnabled === true;
   };
-  for (const lank of document.querySelectorAll<HTMLAnchorElement>('[data-skriv-ut-pdf]')) {
+  for (const lank of kanSkrivaUtPdf() ? document.querySelectorAll<HTMLAnchorElement>('[data-skriv-ut-pdf]') : []) {
+    lank.textContent = 'Skriv ut lathunden (fyra sidor)';
     lank.addEventListener('click', (e) => {
       e.preventDefault();
-      if (!kanSkrivaUtPdf()) { window.print(); return; }
       document.querySelector('iframe.skriv-ut-pdf')?.remove();
       const ram = document.createElement('iframe');
       ram.className = 'skriv-ut-pdf';
@@ -99,7 +99,7 @@ const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathu
           ram.contentWindow!.focus();
           ram.contentWindow!.print();
         } catch {
-          window.print();
+          location.assign(lank.href);
         }
       }, { once: true });
       ram.src = lank.href;
