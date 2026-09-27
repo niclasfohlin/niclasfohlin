@@ -6,7 +6,7 @@
 //
 // Filnamnet bär en kontrollsumma av allt som syns på kortet: texten, mallen, designsystemets variabler, typsnittet
 // och bilden. En ändring ger alltså alltid en ny adress, korten kan cachas i ett år, och Facebook hämtar det nya
-// kortet när sidan delas nästa gång. scripts/delningskort.mjs ritar de kort som saknas med Chrome och lägger dem i
+// kortet när sidan delas nästa gång. Det gamla kortet ligger kvar för inlägg som redan delats (K-053). scripts/delningskort.mjs ritar de kort som saknas med Chrome och lägger dem i
 // public/delning/ (npm run validera); npm run build stannar om ett kort saknas. En sida utan eget kort, till
 // exempel lathunden eller en taggsida, får närmaste överordnade sidas kort.
 import { readFileSync } from 'node:fs';

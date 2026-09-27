@@ -2,13 +2,14 @@
 // Delningskorten: ritar de kort som saknas med Chrome ur mallen src/pages/delning/kort/[namn].astro och lägger dem
 // i public/delning/ (följer med i bygget) och i dist/delning/. Vilka kort som ska finnas och vad filerna heter står
 // i bygget, i dist/delning/kort.json, som src/lib/delningskort.ts skriver. Filnamnet bär en kontrollsumma av allt
-// som syns på kortet, så ett kort som finns är aktuellt, och ett kort som ingen sida längre pekar på tas bort.
+// som syns på kortet, så ett kort som finns är aktuellt. Ett kort som ingen sida längre pekar på ligger kvar: ett inlägg
+// som redan delats pekar på det, och Facebook eller LinkedIn kan hämta det igen (K-053).
 // Filerna committas: Netlify har ingen Chrome. Allt ur en källa utan drift, som lathundens pdf (Niclas 2026-09-27).
 //
 //   node scripts/delningskort.mjs                 ritar de kort som saknas (körs sist i npm run validera, efter bygget)
 //   node scripts/delningskort.mjs --kontrollera   stannar om ett kort saknas i bygget (körs i npm run build)
 
-import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync, unlinkSync, rmSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
 import { execFileSync, spawn } from 'node:child_process';
 import { join, resolve, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
@@ -36,14 +37,11 @@ if (kontrollera) {
 
 mkdirSync(publik, { recursive: true });
 const behovs = new Set(kort.map(fil));
-const overblivna = readdirSync(publik).filter((f) => f.endsWith('.jpg') && !behovs.has(f));
-for (const f of overblivna) {
-  unlinkSync(join(publik, f));
-  if (existsSync(join(byggd, f))) unlinkSync(join(byggd, f));
-}
+// Ersatta kort sparas för redan delade inlägg (K-053); de räknas bara, så att det syns om mappen växer.
+const gamla = readdirSync(publik).filter((f) => f.endsWith('.jpg') && !behovs.has(f));
 const saknas = kort.filter((k) => !existsSync(join(publik, fil(k))));
 if (saknas.length === 0) {
-  console.log(`Delningskorten är aktuella för ${kort.length} sidor${overblivna.length ? `; ${overblivna.length} gamla togs bort` : ''}.`);
+  console.log(`Delningskorten är aktuella för ${kort.length} sidor${gamla.length ? `; ${gamla.length} ersatta kort sparas för redan delade inlägg` : ''}.`);
   process.exit(0);
 }
 
@@ -115,5 +113,5 @@ try {
 } finally {
   stang();
 }
-console.log(fel ? `${fel} fel.` : `Klart: ${saknas.length} nya delningskort i public/delning/${overblivna.length ? `, ${overblivna.length} gamla borttagna` : ''}. Committa dem med ändringen.`);
+console.log(fel ? `${fel} fel.` : `Klart: ${saknas.length} nya delningskort i public/delning/${gamla.length ? `; ${gamla.length} ersatta sparas för redan delade inlägg` : ''}. Committa dem med ändringen.`);
 process.exit(fel ? 1 : 0);
