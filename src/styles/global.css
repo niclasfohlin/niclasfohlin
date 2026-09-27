@@ -836,7 +836,9 @@ html.js .bara-js { display: inline-block; }
   /* Varje mall på en egen liggande sida, i sitt riktiga mått (det hela 26 cm). */
   .m-mall { page: mall; break-before: page; margin: 0; }
   .m-mall-ram { overflow: visible; }
-  .m-mall-bild { width: calc(var(--bredd) * 1mm); min-width: 0; }
+  /* max-width: en webbläsare som inte kan lägga mallen på en liggande sida krymper den till sidans bredd i stället för att
+     klippa den. Chrome, Edge och Firefox lägger den liggande i riktigt mått. */
+  .m-mall-bild { width: calc(var(--bredd) * 1mm); min-width: 0; max-width: 100%; }
   /* Avsnittets rubrik och ingress blir inte ensamma sist på en sida: varje mall bär sin egen rubrik. Arken per talsort
      skrivs ut ur planeringsmallarna, så utskriften från sidan visar en hänvisning i stället för bilden. */
   #mallar > h2, #mallar > p { display: none; }

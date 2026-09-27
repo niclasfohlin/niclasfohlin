@@ -103,6 +103,7 @@ En ny del läggs till på fem ställen i samma commit: schemat i `src/content.co
 |---|---|
 | Bygget | `npm run validera` |
 | Sidan, Word-filerna, lathundens pptx (fyra bilder, upphov), underlaget, lathundens sidantal, det maskinella i mottagarläsningen | `node scripts/metodprov.mjs <slug> --underlag <md> --bilder` |
+| Utskriften | Knapparna skriver ut sidan, som byggs ur samma metodfil som Word-filerna (Niclas 2026-09-27: ingen drift, en källa). En pdf får läraren genom Spara som PDF i utskriftsrutan; metoden har inga egna pdf-filer, bara lathunden. `metodprov.mjs --bilder` skriver ut sidan med Chrome och räknar sidorna och att varje mall står på en liggande sida |
 | Lathundens pptx som bilder | `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/pptx-till-pdf.ps1 dist/stodundervisning/<slug>-lathund.pptx` och `pdftoppm -r 60 -png`; titta på alla fyra |
 | Mottagarläsning av bilderna | Dela skärmbilderna i bitar, exportera Word-sidorna, läs varje bild som en lärare som ska köra passet i morgon. Regeln: fet stil betyder rubrik, inget annat; inget bryts så att det läses fel; likvärdiga saker ser likadana ut; det läraren behöver kommer först. Se steg 8 i `/ny-metod` |
 | Läsbarhet och användbarhet, second opinion | `node scripts/metodgranskning.mjs <slug> --mall scripts/codex/metod-lasbarhet.md --extrabilder underlag/prov/<slug>/granskningsbilder`: Codex läser bara bilderna som lärare, efter att sidan redan är rättad |

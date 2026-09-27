@@ -153,6 +153,16 @@ if (bilder) {
       bild(url, 'mobil.png', ['--mobil']);
       tryck(url, 'utskrift.pdf');
       ok(`skärmbilder i ${mapp}: desktop.png, mobil.png, utskrift.pdf`);
+      // Utskriften av sidan ska likna Word-filen: varje mall på en egen liggande sida i riktigt mått (arken per talsort
+      // hänvisar till planeringsmallarna i stället). Sidantalet skrivs ut, så att en utskrift som växer syns.
+      try {
+        const info = execFileSync('pdfinfo', ['-f', '1', '-l', '9999', join(mapp, 'utskrift.pdf')], { encoding: 'utf8' });
+        const storlekar = [...info.matchAll(/Page\s+\d+ size:\s+([\d.]+) x ([\d.]+)/g)];
+        const liggande = storlekar.filter((s) => Number(s[1]) > Number(s[2])).length;
+        const mallar = (metod.mallar ?? []).filter((m) => !(m.typ === 'matta' && m.enPerSida)).length;
+        if (mallar) liggande >= mallar ? ok(`utskriften: ${storlekar.length} sidor, varav ${liggande} liggande för ${mallar} mallar`) : nej(`utskriften har ${liggande} liggande sidor, men metoden har ${mallar} mallar som ska stå liggande`);
+        else ok(`utskriften: ${storlekar.length} sidor`);
+      } catch { console.log('  obs  pdfinfo saknas, utskriftens sidor är inte räknade'); }
   console.log('       Läs bilderna som en lärare som ska köra passet i morgon: fet stil betyder rubrik, inget bryts så att det läses fel,');
   console.log('       likvärdiga saker ser likadana ut, det läraren behöver kommer först. Dela höga bilder i bitar innan du läser dem.');
       if (metod.lathund) {
