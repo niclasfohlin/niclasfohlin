@@ -4,14 +4,16 @@
 // (global.css, .m-bage) under ordgruppen, med citattecken och skiljetecken utanför. På skärmen står korten bredvid
 // varandra, i utskriften ett A4 per text med korten under varandra och streckad kant att klippa längs. Samma kort i
 // Word (laskortBarn i src/lib/metoddocx.ts) och i metodriggens kompendium.
-import { ordgrupper, delaTecken } from '../lib/lasflyt';
+import { ordgrupper, delaTecken, utanStod } from '../lib/lasflyt';
 import { laskortRubrik } from '../lib/metod';
 interface Props { lista: { rubrik?: string; kolumner?: string[]; rader: string[][] }; stodKolumn: number }
 const { lista, stodKolumn } = Astro.props;
 const { nr, titel } = laskortRubrik(lista);
 const markning = (stod: boolean) => `Lästräningstext ${nr ? `${nr} · ` : ''}${stod ? 'med stöd' : 'utan stöd'}`;
 const medStod = lista.rader.map((r) => ordgrupper(r[stodKolumn] ?? '').map(delaTecken));
-const utan = lista.rader.map((r) => r[1 - stodKolumn] ?? '');
+// Kortet utan stöd i samma ordgrupper, utan båge och bindestreck: då bryts raderna på samma ställen i båda korten.
+// Schemat prövar att texten blir tecken för tecken densamma som i kolumnen utan stöd.
+const utan = lista.rader.map((r) => ordgrupper(r[stodKolumn] ?? '').map((g) => utanStod(g.join(' '))));
 ---
 <div class="m-laskort">
   <h4 class="m-lista-rubrik">{lista.rubrik}</h4>
@@ -28,7 +30,9 @@ const utan = lista.rader.map((r) => r[1 - stodKolumn] ?? '');
     <div class="m-laskort-kort utan-stod" role="group" aria-label={markning(false)}>
       <p class="m-laskort-markning">{markning(false)}</p>
       <p class="m-laskort-titel">{titel}</p>
-      {utan.map((mening) => <p class="m-laskort-mening">{mening}</p>)}
+      {utan.map((mening) => (
+        <p class="m-laskort-mening">{mening.map((g, gi) => <>{gi > 0 && ' '}<span class="m-laskort-grupp">{g}</span></>)}</p>
+      ))}
     </div>
   </div>
 </div>

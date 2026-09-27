@@ -10,13 +10,15 @@
 interface Props { kolumner: string[]; rader: string[][]; bredder?: string[]; klass?: string; radrubrik?: boolean }
 const { kolumner, rader, bredder = [], klass = '', radrubrik = true } = Astro.props;
 import { ejBryt } from '../lib/metod';
-// Raden under radrubriken (tider som "8–18 min · dag 2: 5–8") får inte brytas mitt i ett spann.
-const linjer = (t: string) => t.split('\n').map((x, j) => (j > 0 ? ejBryt(x) : x));
+// Raden under radrubriken (tider som "8–18 min · dag 2: 5–8") får inte brytas mitt i ett spann. Ett nummer före en
+// mittpunkt ("5 · Snögubben", "2 · Modellering") står kvar med ordet efter, så att numret aldrig står ensamt på en rad.
+const linjer = (t: string) => t.split('\n').map((x, j) => (j > 0 ? ejBryt(x) : x).replace(/^(\d+) · /, '$1 · '));
 // Repliker (”…”) i en cell sätts kursiva, som exempelfraserna i stegtabellen och replikerna i exemplet.
 const repliker = (s: string) => s.split(/(”[^”]*”)/).filter(Boolean).map((text) => ({ text, replik: text.startsWith('”') }));
 const arMellanrubrik = (r: string[]) => r.every((c) => c.trim() && c === c.toUpperCase() && /\p{L}/u.test(c));
 ---
-<table class={`m-tabell ${klass}`.trim()}>
+{/* hel: en kort tabell (högst fem rader, som lästrappan) delas inte mellan sidor i utskriften, som i Word (K-076). */}
+<table class={`m-tabell ${klass} ${rader.length <= 5 ? 'hel' : ''}`.replace(/\s+/g, ' ').trim()}>
   {bredder.length > 0 && <colgroup>{bredder.map((b) => <col style={`width:${b}`} />)}</colgroup>}
   <thead>
     <tr>{kolumner.map((k) => <th scope="col">{k}</th>)}</tr>

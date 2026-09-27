@@ -12,7 +12,7 @@
 // och rutor fördelar höjden rätt också i A4.
 import PptxGenJS from 'pptxgenjs';
 import type { CollectionEntry } from 'astro:content';
-import { lathundFakta, arbetsformRad, etikettOchText, lathundForm } from './metod';
+import { lathundFakta, arbetsformRad, etikettOchText, lathundForm, passOrd } from './metod';
 import type { MetodData } from './metod';
 
 export const PPTX_TYP = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
@@ -63,10 +63,12 @@ function bilder(d: MetodData) {
     grupp: versaler(l.pass.textRubrik),
     exempel: [...(l.pass.titel ? [l.pass.titel] : []), ...l.pass.text],
     forberett: l.pass.forberett ? l.pass.forberett.text.join(' ') : undefined,
+    // Rutans rubrik ur metoden, som på lathundssidan och i Word (K-075; förut fast DET JAG FÖRBEREDDE).
+    forberettRubrik: versaler(l.pass.forberett?.rubrik ?? 'Det jag förberedde'),
     klarTidigt: l.pass.klarTidigt,
     schemaRubrik: versaler(l.pass.schema.rubrik),
     schema: l.pass.schema.rader.map((r) => ({ tid: r.tid, fas: r.fas, text: r.vad + (r.fraser.length ? ' ' + r.fraser.map(citat).join(' · ') : '') })),
-    anteckning: `${d.titel}, ett pass steg för steg med ett exempel.`,
+    anteckning: `${d.titel}, ett pass ${passOrd(d).forSteg} med ett exempel.`,
   };
   // Bild 3, mallen. Underraden delas: det med skrivlinjer (Elev: ______) till höger, resten till vänster.
   const delar = (l.mall.underrad ?? '').split(' · ');
@@ -358,7 +360,7 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
     const repliker = (t: string, sist: boolean) => t.split(/(”[^”]*”)/).filter(Boolean).map((x, j, alla) => ({ text: x, options: { italic: x.startsWith('”'), breakLine: !sist && j === alla.length - 1 } }));
     txt(s, b.exempel.flatMap((t, i) => repliker(t, i === b.exempel.length - 1)), 0.61, top2 + 0.1, 4.97, storyH - 0.2, { size: 11.5, psa: 5 });
     let y = top2 + storyH + 0.15;
-    if (b.forberett) { cream(s, 0.46, y, 5.27, c1H, b.forberett, 12, 'DET JAG FÖRBEREDDE'); y += c1H + 0.15; }
+    if (b.forberett) { cream(s, 0.46, y, 5.27, c1H, b.forberett, 12, b.forberettRubrik); y += c1H + 0.15; }
     if (b.klarTidigt) cream(s, 0.46, y, 5.27, c2H, b.klarTidigt, 12, 'KLAR TIDIGT');
     label(s, b.schemaRubrik, 6.22, 0.88, 6.9);
     shapeTable(s, 6.22, 1.2, 6.66, 1.45, ['TID', 'VAD HÄNDER'], b.schema.map((r) => ({ namn: r.tid, fet: r.fas, rader: [r.text] })), BOTTEN - 1.2);

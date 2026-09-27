@@ -7,7 +7,7 @@ import MetodTabell from './MetodTabell.astro';
 import Elevlista from './Elevlista.astro';
 import Tavla from './Tavla.astro';
 import type { MetodData } from '../lib/metod';
-import { lathundFakta, arbetsformRad, etikettOchText, lathundForm } from '../lib/metod';
+import { lathundFakta, arbetsformRad, etikettOchText, lathundForm, passUtskrift } from '../lib/metod';
 interface Props { d: MetodData }
 const { d } = Astro.props;
 const l = d.lathund;
@@ -64,7 +64,7 @@ const kortPt = kort && form?.tabell ? Math.round(Math.max(14, Math.min(28, (140 
       <div class="lh-kolumner">
         <div class="lh-kol">
           <div class="lh-ruta lh-elevtext" id="lathund-text">
-            <h3>{l.pass.textRubrik}<span class="bara-js lh-lank"><button type="button" data-skriv-ut-text>{l.pass.utskrift}</button></span></h3>
+            <h3>{l.pass.textRubrik}<span class="bara-js lh-lank"><button type="button" data-skriv-ut-text>{passUtskrift(l.pass)}</button></span></h3>
             <div class="lh-ruta-kropp">
               {l.pass.titel && <p class="lh-titel">{l.pass.titel}</p>}
               {l.pass.text.map((p) => <p>{repliker(p).map((x) => (x.replik ? <em>{x.text}</em> : x.text))}</p>)}
@@ -141,7 +141,7 @@ const kortPt = kort && form?.tabell ? Math.round(Math.max(14, Math.min(28, (140 
               <h3 class="lh-kicker">{b.rubrik}</h3>
               <table class="lh-korttabell">
                 <thead><tr>{b.kolumner.map((k) => <th scope="col">{k}</th>)}</tr></thead>
-                <tbody>{b.rader.map((r) => <tr>{r.map((c) => <td>{c}</td>)}</tr>)}</tbody>
+                <tbody>{b.rader.map((r) => <tr>{r.map((c) => <td>{c.replace(/ → /g, ' → ')}</td>)}</tr>)}</tbody>
               </table>
             </div>
           );

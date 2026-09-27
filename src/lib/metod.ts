@@ -36,6 +36,14 @@ export function arEttKort(listor: RamLista[], l: RamLista): boolean {
   const skrivkolumn = Array.from({ length: n }, (_, i) => l.rader.every((r) => !(r[i] ?? '').trim())).some(Boolean);
   return listor.length === 1 && laskortKolumn(l) === undefined && !skrivkolumn && l.rader.length <= 8 && l.rader.every((r) => r.every((c) => String(c).length <= 30));
 }
+// En lista med en skrivkolumn, en kolumn där alla rader är tomma bredvid kolumner med text (Före och Efter i
+// kartläggningen och lästrappan), är lärarens protokoll. En ram med bara protokoll fylls i av läraren, så noten om hur
+// står före listorna också i elevkopian (K-071).
+export function arProtokoll(l: RamLista): boolean {
+  const n = Math.max(...l.rader.map((r) => r.length), l.kolumner?.length ?? 1);
+  const skriv = Array.from({ length: n }, (_, i) => l.rader.every((r) => !String(r[i] ?? '').trim()));
+  return skriv.some(Boolean) && !skriv.every(Boolean);
+}
 export interface MetodPost { id: string; data: MetodData }
 
 export const UPPHOV = '© Niclas Fohlin';
@@ -195,12 +203,18 @@ export function passGrupper(p: PassOversikt): PassGrupp[] {
 export function stegTexter(d: MetodData): string[] {
   return (d.passrutin?.steg ?? []).map((s) => (typeof s === 'string' ? s : s.text));
 }
-// Rubrikerna för passets delar i passöversikten, stegtabellen och menyn (K-065): Fas, Rutinen i N steg, Steg och Stegen,
-// eller Del, Passet i N delar, Del och Delarna när passrutin.kallas är delar, för en metod där ordet steg hör till något
-// annat, som lästrappan i Upprepad läsning.
-export interface PassOrd { fas: string; rutin: (antal: number) => string; steg: string; stegen: string }
+// Rubrikerna för passets delar i passöversikten, stegtabellen, menyn och lathundens ingress (K-065): Fas, Rutinen i N
+// steg, Steg, Stegen och steg för steg, eller Del, Rutinen i N delar, Del, Delarna och del för del när passrutin.kallas
+// är delar, för en metod där ordet steg hör till något annat, som lästrappan i Upprepad läsning. Mittkolumnen heter
+// Rutinen också där, eftersom den har rutinens meningar och mobilens etikett säger Rutinen (granskningen 2026-09-27).
+export interface PassOrd { fas: string; rutin: (antal: number) => string; steg: string; stegen: string; forSteg: string }
 export function passOrd(d: MetodData): PassOrd {
   return d.passrutin?.kallas === 'delar'
-    ? { fas: 'Del', rutin: (antal) => `Passet i ${antal} delar`, steg: 'Del', stegen: 'Delarna' }
-    : { fas: 'Fas', rutin: (antal) => `Rutinen i ${antal} steg`, steg: 'Steg', stegen: 'Stegen' };
+    ? { fas: 'Del', rutin: (antal) => `Rutinen i ${antal} delar`, steg: 'Del', stegen: 'Delarna', forSteg: 'del för del' }
+    : { fas: 'Fas', rutin: (antal) => `Rutinen i ${antal} steg`, steg: 'Steg', stegen: 'Stegen', forSteg: 'steg för steg' };
+}
+// Knappen över lathundens passtext (K-074): lathund.pass.utskrift, annars "Skriv ut passexemplet" när rutan är lärarens
+// berättelse om en grupp (textRubrik Gruppen …) och "Skriv ut till eleverna" när den är elevernas text.
+export function passUtskrift(pass: { textRubrik: string; utskrift?: string }): string {
+  return pass.utskrift ?? (/^Gruppen\b/i.test(pass.textRubrik) ? 'Skriv ut passexemplet' : 'Skriv ut till eleverna');
 }

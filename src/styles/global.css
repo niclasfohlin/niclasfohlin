@@ -467,6 +467,8 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-kortlista.ett .m-kort { min-height: 5rem; }
 /* Kortet ur en ensam kort lista i en ram (strategikortet, K-062): större text och luft mellan raderna. */
 .m-lista.kort td { font-size: 1.5rem; padding: 0.7rem 0.9rem; }
+/* På mobilen ryms kortets rader, som "sss-ooo-lll → sol", på en rad i en lägre grad (granskningen 2026-09-27). */
+@media (max-width: 40rem) { .m-lista.kort td { font-size: 1.05rem; padding: 0.55rem 0.6rem; } }
 /* Läskorten (K-063): två kort med streckad kant, bredvid varandra på skärmen och under varandra i mobilen. Bågen under
    varje ordgrupp i kortet med stöd är en kurva i blått (#2e6db4, som i Word och riggen), ritad som bakgrund under
    gruppen; gruppen bryts aldrig, och orden har sina vanliga mellanrum. */
@@ -475,9 +477,12 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-laskort-kort { border: 1.5px dashed var(--farg-text-svag); border-radius: 6px; padding: 0.9rem 1.1rem 1.1rem; font-family: Arial, 'Liberation Sans', Helvetica, sans-serif; color: #1f2937; }
 .m-laskort-markning { font-family: var(--typsnitt-ui); font-size: 0.72rem; color: var(--farg-text-svag); margin: 0 0 0.3rem; }
 .m-laskort-titel { font-weight: 700; font-size: 1.35rem; margin: 0 0 0.6rem; }
-.m-laskort-mening { font-size: 1.2rem; line-height: 1.6; margin: 0 0 0.35rem; }
+/* En mening per stycke; bryts den, står fortsättningen indragen, så att den inte ser ut som en ny mening. */
+.m-laskort-mening { font-size: 1.2rem; line-height: 1.6; margin: 0 0 0.35rem; padding-left: 1.2em; text-indent: -1.2em; }
 .m-laskort-kort.med-stod .m-laskort-mening { line-height: 2.1; }
 .m-bage { white-space: nowrap; padding-bottom: 0.32em; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath d='M2 2 Q50 38 98 2' fill='none' stroke='%232e6db4' stroke-width='2' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") no-repeat left bottom / 100% 0.42em; }
+/* Kortet utan stöd bryts mellan samma ordgrupper som kortet med stöd, så att raderna känns igen när stödet tas bort. */
+.m-laskort-grupp { white-space: nowrap; }
 @media (max-width: 40rem) { .m-laskort-par { grid-template-columns: minmax(0, 1fr); } }
 .m-kort-markning { position: absolute; top: 0.45rem; left: 0.65rem; font-size: 0.7rem; line-height: 1; color: var(--farg-text-svag); }
 .m-kort-kopior { margin: 0.4rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.85rem; color: var(--farg-text-svag); }
@@ -628,6 +633,7 @@ html.js .bara-js { display: inline-block; }
 .lh-korttabell { width: 100%; border-collapse: collapse; table-layout: fixed; }
 .lh-korttabell th { font-family: ui-monospace, 'Cascadia Mono', Consolas, 'Liberation Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--farg-text-svag); font-weight: 500; text-align: left; padding: 0.3rem 0.75rem; border-bottom: 1px solid var(--farg-kant); }
 .lh-korttabell td { font-size: 1.35rem; line-height: 1.3; padding: 0.7rem 0.75rem; border-bottom: 1px solid var(--farg-kant); vertical-align: middle; }
+@media (max-width: 40rem) { .lh-korttabell td { font-size: 1.05rem; padding: 0.55rem 0.5rem; } }
 .lh-mattatabell.m-tabell tbody:has(tr:only-child) td:empty { height: 17rem; }
 .lh-spalter { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.5rem; margin: 0.5rem 0 1rem; }
 .lh-spalt > h3 { margin: 0 0 0.35rem; font-size: 1rem; padding-bottom: 0.3rem; border-bottom: 2px solid var(--farg-text); }
@@ -812,6 +818,11 @@ html.js .bara-js { display: inline-block; }
   /* Rubrik och inledande stycke följer med det som kommer efter; snabbmallen hålls ihop. */
   .metod-modell h2 + p { break-after: avoid; }
   .m-snabbmall, .m-bockar, #uppfoljning table, .m-trappa, .m-trappa li, .m-kontrakt, .m-ramdel, .m-ramhuvud, .m-diplom, .m-remsa, .m-tavla, .m-tabell.tat, #snabbmall, #grund { break-inside: avoid; }
+  /* Korta tabeller och passöversikten med sin remsa delas inte mellan sidor, och ett stycke lämnar inte en eller två
+     rader ensamma sist eller först på en sida (K-076, granskningen av Upprepad läsning). */
+  .m-tabell.hel, .m-pass { break-inside: avoid; }
+  .m-remsa { break-after: avoid; }
+  .metod-modell p { orphans: 3; widows: 3; }
   .m-remsa-fas, .m-remsa-del, .m-pass .m-pass-kant th, .m-pass .m-pass-kant td { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .m-ram > h3, .m-ram > h3 + p, .m-ramdel h4 { break-after: avoid; }
   /* En läslista (ram med ordlista) hålls på en sida tillsammans med sin ruta, så att en kopia bär sitt namn och sin anvisning. */
@@ -831,6 +842,13 @@ html.js .bara-js { display: inline-block; }
   .m-ram:has(.m-lista ~ .m-lista ~ .m-lista ~ .m-lista) { break-before: page; }
   .m-ramlankar { display: none; }
   .m-lista td { font-size: 13pt; padding: 0.3rem 0.6rem; }
+  /* Lärarens protokoll (en lista med skrivkolumn) är ett blad att kopiera per elev: täta rader, som i Word (K-071). */
+  .m-lista.protokoll td { font-size: 11pt; padding: 0.12rem 0.5rem; }
+  /* Protokollets huvud (Elevens namn, Texten och datum före och efter) på en rad per fält, så att noten, huvudet,
+     listorna och upphovet ryms på ett A4. */
+  .m-lista.protokoll .m-ramhuvud { font-size: 10pt; }
+  .m-lista.protokoll .m-ramfalt > div { grid-template-columns: 12.5rem minmax(0, 1fr); }
+  .m-lista.protokoll .m-ramfalt dt, .m-lista.protokoll .m-ramfalt dd { padding: 0.3rem 0.6rem; }
   .m-lista.bokstaver td { font-size: 16pt; }
   .lh .m-lista td { font-size: 10pt; padding: 0.12rem 0.4rem; }
   .lh .m-lista.bokstaver td { font-size: 12pt; }
@@ -853,6 +871,8 @@ html.js .bara-js { display: inline-block; }
   .m-laskort-titel { font-size: 20pt; }
   .m-laskort-mening { font-size: 18pt; line-height: 1.3; }
   .m-laskort-kort.med-stod .m-laskort-mening { line-height: 1.8; }
+  /* Bågen är en bakgrund: utan detta skriver webbläsaren inte ut den när Bakgrundsgrafik är av, som är standard. */
+  .m-bage { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .m-kort-kopior { display: none; }
   /* Varje pass börjar på en ny sida, som i Word. En ram med kort eller bråk ryms inte på en sida med lärarens
      ruta: där hålls ramen inte ihop, och listan flyttar hel till nästa sida i stället för att delas. Reglerna för

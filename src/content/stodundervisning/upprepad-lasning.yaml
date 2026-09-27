@@ -1,7 +1,7 @@
 # Metod i stödundervisning. Modellen står i src/content.config.ts och mallen i _mall.yaml.
 titel: Upprepad läsning
 undertitel: "Samma text flera gånger med lärarens nära stöd, en till en eller i grupp, för F–⁠3"
-ingress: "I varje pass läser eleven en kort text flera gånger, på olika sätt. Läraren lyssnar och visar strategier för att läsa orden och förstå texten, och eleven sätter ord på dem. Det är en intensiv insats, en till en eller i grupp om högst sex, för elever i F–⁠3 som har knäckt läskoden men inte alltid hör vad de läser."
+ingress: "I varje pass läser eleven en kort text flera gånger, på olika sätt. Läraren lyssnar och visar strategier för att läsa orden och förstå texten, och eleven sätter ord på dem. Insatsen är intensiv, en till en eller i grupp om högst sex. Den är för elever i F–⁠3 som har knäckt läskoden men inte alltid hör vad de läser."
 omrade: Läsning
 arskurs:
   - F-3
@@ -33,10 +33,10 @@ inledning:
   - "Metoden är en intensiv insats för elever som har knäckt läskoden men inte alltid hör vad de läser, eller tappar förståelsen när de läser. Passen är korta, tre till fem gånger i veckan, och tränar flytet i läsningen. Upprepad läsning kompletterar undervisningen i ljud och bokstäver."
 upplagg:
   rubrik: Så fungerar insatsen
-  text: "Ett pass är tio till femton minuter och följer alltid samma fyra delar. Ni arbetar med en text per pass, eller med samma text under en hel vecka, tre till fem tillfällen i veckan. Insatsen pågår i sex till åtta veckor, och gruppen har en till sex elever. Välj en text som eleven klarar med visst stöd, gärna ur en bok ni redan läser. Byt text först när läsningen flyter. Metoden har också en färdig lästräningstext för varje vecka. Ni övar dessutom särskilt på en strategi i veckan. Den väljer du efter det du hör. Efter varje pass gör du en kort notering om vilka ord som fastnade och vilken strategi som hjälpte. När texten flyter får den gå hem, om det fungerar för eleven och familjen. Före första passet och efter perioden läser eleven en ny text för dig, och du ser på lästrappan hur långt eleven har kommit."
+  text: "Ett pass är tio till femton minuter och följer alltid samma fyra delar. Ni arbetar med en text per pass, eller med samma text under en hel vecka, tre till fem tillfällen i veckan. Insatsen pågår i sex till åtta veckor, och gruppen har en till sex elever. Välj en text som eleven klarar med visst stöd, gärna ur en bok ni redan läser. Byt text först när läsningen flyter. Metoden har också en färdig lästräningstext för varje vecka, under Materialet. Ni övar dessutom särskilt på en strategi i veckan. Den väljer du efter det du hör. Efter varje pass gör du en kort notering om vilka ord som fastnade och vilken strategi som hjälpte. När texten flyter får den gå hem, om det fungerar för eleven och familjen. Före första passet och efter perioden läser eleven en ny text för dig, och du ser på lästrappan hur långt eleven har kommit."
 gruppen:
   rubrik: Så väljer du eleverna
-  text: "Upprepad läsning är för elever i F–⁠3 som har knäckt läskoden men har problem med avkodningen. De har lärt sig den alfabetiska principen och kan läsa, men hör inte alltid vad de själva läser, eller så läser de på ett sätt som gör att de tappar förståelsen. De gissar efter första bokstaven, gör pauser mellan ljuden eller ljudar ihop orden men läser ord för ord, och de står på steg 1–⁠3 i lästrappan. Den som ännu inte säkert kopplar ljud till bokstav och binder ihop ljuden behöver den träningen först, till exempel med Läslistor i grupp. Före perioden läser varje elev en kort, ny text för dig, och du hör vilket steg eleven står på. Sätt ihop en grupp på en till sex elever som står på samma steg eller på två steg bredvid varandra, så att samma text passar alla. Står eleverna längre ifrån varandra, får varje elev eller par en egen text. Ordna eleverna från den säkraste läsaren till den minst säkra och dela listan på mitten. Den första i övre halvan läser med den första i nedre halvan, och så vidare. Med sex elever blir paren 1 och 4, 2 och 5 och 3 och 6. I varje par läser den säkrare först."
+  text: "Upprepad läsning är för elever i F–⁠3 som har knäckt läskoden men behöver träna avkodningen. De har lärt sig den alfabetiska principen och kan läsa, men hör inte alltid vad de själva läser, eller så läser de på ett sätt som gör att de tappar förståelsen. De gissar efter första bokstaven, gör pauser mellan ljuden eller ljudar ihop orden men läser ord för ord, och de står på steg 1–⁠3 i lästrappan. Den som ännu inte säkert kopplar ljud till bokstav och binder ihop ljuden behöver den träningen först, till exempel med Läslistor i grupp. Före perioden läser varje elev en kort, ny text för dig, och du hör vilket steg eleven står på. Sätt ihop en grupp på en till sex elever som står på samma steg eller på två steg bredvid varandra, så att samma text passar alla. Står eleverna längre ifrån varandra, får varje elev eller par en egen text. Ordna eleverna från den säkraste läsaren till den minst säkra och dela listan på mitten. Den första i övre halvan läser med den första i nedre halvan, och så vidare. Med sex elever blir paren 1 och 4, 2 och 5 och 3 och 6. I varje par läser den säkrare först."
 principer:
   rubrik: Fyra saker att hålla fast vid
   text: "Läs samma text hela passet, för det är omläsningen som ger flytet. Ta inte tid på läsningen. Lyssna efter om eleverna läser rätt, med flyt och med läsmelodi. Lyssna först och visa sedan, så att modelleringen bygger på det eleverna faktiskt gjorde i första läsningen. Låt alla pass gå till på samma sätt. När eleverna vet vad som ska hända kan de lägga kraften på läsningen."
@@ -105,7 +105,7 @@ tabeller:
       - - |-
           Med stöd, sedan utan
           Eleven läser lästräningstexten med stöd och sedan samma text utan.
-        - "Eleven drar fingret längs bågarna och läser orden under samma båge i ett svep. Bindestrecken visar delar som eleven känner igen i långa ord. När texten med stöd går lätt läser eleven samma text utan stöd."
+        - "Eleven drar fingret längs bågarna och läser orden under samma båge i ett svep. Bindestrecken visar delar som eleven känner igen i långa ord. När texten med stöd går lätt läser eleven samma text utan stöd. Läskorten finns under Materialet."
         - "eleven står på steg 2–⁠4 och läser ord för ord eller fastnar i långa ord"
       - - |-
           Lästeater
@@ -125,7 +125,7 @@ tabeller:
     not: "Läser ni samma text en hel vecka kan eleverna läsa mer på egen hand för varje pass som går. Börja med eko, gå sedan över till kör och par och sluta med en ny lyssnare eller lästeater. Stafettläsning i hela gruppen, där en läser och de andra väntar, ger lite läsning för var och en och gör många oroliga. Gör stafetten i par."
   - rubrik: Läsfelen och strategierna
     plats: efter-steg
-    text: "Här står vanliga läsfel, från gissningar till att eleven inte hör sig själv, och den strategi som hjälper eleven vidare vid varje fel. Strategierna står med samma namn på elevens strategikort, och eleverna säger namnet när de använder strategin. Visa en strategi i taget, den som texten och eleven behöver."
+    text: "Här står vanliga läsfel, från gissningar till att eleven inte hör sig själv, och den strategi som hjälper eleven vidare vid varje fel. Strategierna står med samma namn på elevens strategikort under Materialet, och eleverna säger namnet när de använder strategin. Visa en strategi i taget, den som texten och eleven behöver."
     kolumner:
       - Läsfelet
       - Så låter det
@@ -431,7 +431,7 @@ ramar:
             - rubrik: Så gör du ett eget kort
               text: "Skriv fem till åtta korta meningar om något eleverna tycker om, med ord som de kan läsa. Skriv sedan samma text en gång till och lägg in bågar och bindestreck."
             - rubrik: Bågarna
-              text: "En båge går under de ord som eleven läser i ett svep. Den börjar vid första bokstaven i det första ordet och slutar vid sista bokstaven i det sista. En båge har högst fyra ord, så en kort mening får en enda båge. En längre mening delar du där man pausar när man läser högt. Oftast är det efter ett komma, före och eller före ord som säger var, när eller hur, men det kan också vara mellan den som gör något och det hen gör. Har en del fortfarande mer än fyra ord delar du den igen. I ”Sam sover på en stol” går en båge under ”Sam sover” och en under ”på en stol”. Ett verb står ihop med sitt lilla ord, som i ”ropar på” och ”tittar upp”, och små ord följer med ordet de hör till, som i ”en ros” och ”på stranden”. Skiljetecken står utanför bågen."
+              text: "En båge går under de ord som eleven läser i ett svep. Den börjar vid första bokstaven i det första ordet och slutar vid sista bokstaven i det sista. En båge har högst fyra ord, så en kort mening får en enda båge. En längre mening delar du där man pausar när man läser högt. Oftast är det efter ett komma, före ”och” eller före ord som säger var, när eller hur, men det kan också vara mellan den som gör något och det hen gör. Har en del fortfarande mer än fyra ord delar du den igen. I ”Sam sover på en stol” går en båge under ”Sam sover” och en under ”på en stol”. Ett verb står ihop med sitt lilla ord, som i ”ropar på” och ”tittar upp”, och små ord följer med ordet de hör till, som i ”en ros” och ”på stranden”. Skiljetecken står utanför bågen."
             - rubrik: Bindestrecken
               text: "Dela ett sammansatt ord mellan orden, som sand-⁠slott och bak-⁠om. Dela substantiv och verb före ändelsen, som katt-⁠en, hund-⁠ar-⁠na och rop-⁠ar, men inte adjektiv, som bruna och hela. Är delen före ändelsen svår att säga delar du mellan stavelserna i stället, som vak-⁠nar och fåg-⁠lar. Andra ord med tre stavelser eller fler delar du mellan stavelserna, som när-⁠ma-⁠re. Namn och ord med en stavelse delar du inte, som Lisa, ser och snön."
       listor:
@@ -613,7 +613,7 @@ ramar:
         - rubrik: Texten och datum före
         - rubrik: Texten och datum efter
       listor:
-        - rubrik: Lästrappan före och efter
+        - rubrik: Så läser eleven
           kolumner:
             - "Det du noterar"
             - Före
@@ -712,10 +712,10 @@ lathund:
             14–⁠15 min. Gemensamt.
           - |-
             ”Första gången ljudade ni strand. Sista gången läste ni ordet direkt.”
-    not: "Eleverna läser igen i minst två omgångar, till exempel med ekoläsning, i kör, med dig, i par, med stöd och sedan utan, i läsröret eller för en ny lyssnare. Lyssna på varje elev för sig minst en gång. Har ni tio minuter får delarna 2, 2, 5 och 1 minut."
+    not: "Eleverna läser igen i minst två omgångar, till exempel med ekoläsning, i kör, med dig, i par, med stöd och sedan utan, i läsröret eller för en ny lyssnare. Lyssna på varje elev för sig minst en gång. Är eleverna fler än fyra tar du hälften i varje omgång. Har ni tio minuter får delarna 2, 2, 5 och 1 minut."
   pass:
     rubrik: "Vi kör ett pass: texten ”Sandslottet”"
-    textRubrik: Gruppen · fyra elever i åk 2, andra passet med texten
+    textRubrik: Gruppen · fyra elever i åk 2, andra passet
     text:
       - "Texten är lästräningstext 6, Sandslottet. Alla läser texten utan stöd. Elias ljudar med pauser, ”/s/ /t/ /r/ /a/ /n/ /d/”, och Samir läser ”vågor”."
       - "Läraren läser högt ur texten med stöd och visar: ”Lyssna när jag säger ljuden utan paus: sss-⁠t-⁠rrr-⁠aaa-⁠nnn-⁠d. Strand. Stranden.” Sedan pekar läraren på bindestrecken i våg-⁠or-⁠na."
@@ -734,7 +734,7 @@ lathund:
           vad: "Läs texten högt själv, bestäm hur ni läser igen och lägg fram strategikorten."
         - tid: 0–3
           fas: 1 · Första läsningen
-          vad: Alla läser halvhögt. Du lyssnar på en i taget och noterar.
+          vad: "Alla läser halvhögt. Du lyssnar på en i taget och noterar. Är texten ny, skriv trappsteget: 1 gissar, 2 ljudar med pauser, 3 ljudar ihop, 4 läser i delar, 5 läser med flyt."
         - tid: 3–6
           fas: 2 · Modellering
           vad: Visa två eller tre svåra ord, med veckans strategi.

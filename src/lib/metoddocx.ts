@@ -8,9 +8,9 @@ import {
   Paragraph, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, VerticalAlign, WidthType,
   type IBorderOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
-import { arbetsformRad, arEttKort, arskursText, datumText, ejBryt, etikettOchText, laskortKolumn, laskortRubrik, lathundFakta, lathundForm, metaRad, metodAdress, passOrd, passOversikt, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost, type PassOrd } from './metod';
+import { arbetsformRad, arEttKort, arProtokoll, arskursText, datumText, ejBryt, etikettOchText, laskortKolumn, laskortRubrik, lathundFakta, lathundForm, metaRad, metodAdress, passOrd, passOversikt, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost, type PassOrd } from './metod';
 import { brakDelar, delnamn, kortInfo, lage, STANDARD_NAMNARE, type KortInfo, type Mall } from './brak';
-import { bagSvg } from './lasflyt';
+import { bagSvg, utanStod } from './lasflyt';
 import WORDSKALOR from '../data/lathund-word.json';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
@@ -133,14 +133,15 @@ function numrerad(text: string, o: StyckeVal = {}): Paragraph {
 }
 function nyLista(): void { instans += 1; }
 
-interface CellVal { bredd: number; fyll?: string; kanter?: { top?: IBorderOptions; bottom?: IBorderOptions; left?: IBorderOptions; right?: IBorderOptions }; span?: number; mitt?: boolean }
+// tat: 2 pt luft över och under texten i stället för 4, för lärarens protokoll (K-071).
+interface CellVal { bredd: number; fyll?: string; kanter?: { top?: IBorderOptions; bottom?: IBorderOptions; left?: IBorderOptions; right?: IBorderOptions }; span?: number; mitt?: boolean; tat?: boolean }
 function cell(barn: Barn[], o: CellVal): TableCell {
   return new TableCell({
     width: { size: o.bredd, type: WidthType.DXA },
     columnSpan: o.span,
     shading: o.fyll ? { type: ShadingType.CLEAR, fill: o.fyll, color: 'auto' } : undefined,
     borders: { ...runt(kant()), ...(o.kanter ?? {}) },
-    margins: { top: 80, bottom: 80, left: 120, right: 120 },
+    margins: { top: o.tat ? 40 : 80, bottom: o.tat ? 40 : 80, left: 120, right: 120 },
     verticalAlign: o.mitt ? VerticalAlign.CENTER : VerticalAlign.TOP,
     children: barn.length ? barn : [new Paragraph({ spacing: { after: 0 } })],
   });
@@ -327,13 +328,14 @@ type Ram = NonNullable<MetodData['ramar']>['ramar'][number];
 // Elevens blad (d.elevblad): fälten får sin höjd i cm, så att eleven kan skriva och rita i dem och bladet fyller
 // sidan, och etiketterna står i större text i en smalare kolumn.
 const CM = 567;
-function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[], o: { rubrik?: string; skrivrum?: boolean; hojder?: (number | undefined)[]; elevblad?: boolean } = {}): Barn[] {
+// hallIhopEfter: tabellen håller ihop med det som följer (ramens huvud med den första listan, K-071).
+function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[], o: { rubrik?: string; skrivrum?: boolean; hojder?: (number | undefined)[]; elevblad?: boolean; hallIhopEfter?: boolean } = {}): Barn[] {
   const forsta = o.elevblad ? 2000 : 2300;
   const bredder = [forsta, BREDD - forsta];
   const rader: TableRow[] = [];
   if (o.rubrik) rader.push(rad([cell([stycke(o.rubrik, { fet: true, farg: FARG.huvud, storlek: o.elevblad ? 26 : 22, efter: 0, hallIhop: true })], { bredd: BREDD, span: 2, fyll: FARG.ljus, kanter: runt(kant(FARG.huvud)) })], { huvud: true }));
   falt.forEach((f, i) => {
-    const sist = i === falt.length - 1;
+    const sist = i === falt.length - 1 && !o.hallIhopEfter;
     const linjer = f.text.split('\n');
     const tom = !f.text.trim();
     const hojd = o.hojder?.[i];
@@ -342,7 +344,7 @@ function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[
       cell(tom ? [stycke('', { efter: 0, hallIhop: !sist })] : linjer.map((l, j) => replikStycke(l, { kursiv: f.kursiv, storlek: 20, efter: j === linjer.length - 1 ? 0 : 20, hallIhop: !sist })), { bredd: bredder[1] }),
     ], { hojd: hojd ? Math.round(hojd * CM) : tom ? (o.skrivrum ? 900 : 420) : undefined }));
   });
-  return [tabell(rader, bredder), avstand()];
+  return [tabell(rader, bredder), o.hallIhopEfter ? new Paragraph({ spacing: { before: 0, after: 160 }, keepNext: true }) : avstand()];
 }
 // En elevlista i en ram: orden stora, kolumnrubrikerna små och dämpade, ingen fet första kolumn.
 // Bokstäver centreras. Listan hålls ihop, och med hallIhopEfter också med det som följer.
@@ -359,16 +361,17 @@ function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][] 
   const bredd = Math.floor((BREDD - smal * antalSkriv) / (smal ? n - antalSkriv : n));
   const sista = smal ? skriv.lastIndexOf(false) : n - 1;
   const bredder = Array.from({ length: n }, (_, i) => (smal && skriv[i] ? smal : i === sista ? BREDD - smal * antalSkriv - bredd * ((smal ? n - antalSkriv : n) - 1) : bredd));
-  // En lista med skrivkolumner är lärarens protokoll, inte elevens kopia: texten i vanlig storlek, så att listan, namnet
-  // och rubriken ryms på en sida.
+  // En lista med skrivkolumner är lärarens protokoll, inte elevens kopia: texten i vanlig storlek och raderna täta
+  // (6,4 mm, som smalt linjerat papper), så att noten, namnet, rubriken och listorna ryms på en sida att kopiera per elev.
+  // Lästrappan före och efter i Upprepad läsning har två listor och ryms så (K-071).
   const storlek = smal ? Math.min(o.storlek, 24) : o.storlek;
   const bokstaver = l.rader.every((r) => r.every((c) => c.trim().length <= 2));
   if (l.rubrik) ut.push(stycke(l.rubrik, { fet: true, farg: FARG.huvud, storlek: 16, versaler: true, fore: 120, efter: 60, hallIhop: true, niva4: true }));
   const rader: TableRow[] = [];
-  if (l.kolumner) rader.push(rad(l.kolumner.map((k, i) => cell([stycke(k, { storlek: 15, versaler: true, farg: FARG.svag, efter: 0, hallIhop: true, mitt: !!smal && skriv[i] })], { bredd: bredder[i], fyll: FARG.rand })), { huvud: true }));
+  if (l.kolumner) rader.push(rad(l.kolumner.map((k, i) => cell([stycke(k, { storlek: 15, versaler: true, farg: FARG.svag, efter: 0, hallIhop: true, mitt: !!smal && skriv[i] })], { bredd: bredder[i], fyll: FARG.rand, tat: !!smal })), { huvud: true }));
   l.rader.forEach((r, ri) => {
     const ihop = ri < l.rader.length - 1 || !!o.hallIhopEfter;
-    rader.push(rad(Array.from({ length: n }, (_, i) => cell([stycke(r[i] ?? '', { storlek, fore: o.luft ? 100 : 0, efter: o.luft ? 100 : 0, hallIhop: ihop, mitt: bokstaver, brak: o.brak })], { bredd: bredder[i] }))));
+    rader.push(rad(Array.from({ length: n }, (_, i) => cell([stycke(r[i] ?? '', { storlek, fore: o.luft ? 100 : 0, efter: o.luft ? 100 : 0, hallIhop: ihop, mitt: bokstaver, brak: o.brak })], { bredd: bredder[i], tat: !!smal }))));
   });
   ut.push(tabell(rader, bredder), avstand());
   return ut;
@@ -425,7 +428,8 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
   // Ramens huvud (fält att fylla i före delarna) står först. Har ramen listor står det i stället direkt före den första
   // listan, som på sidan, så att elevens namn och tecknen på kartläggningens protokoll hör till listan.
   // På elevens blad är namnraden 1 cm, så att bladets fält i sina mått och upphovet ryms på sidan.
-  const huvud = () => (ram.huvud ? ramFaltTabell(ram.huvud, { skrivrum: o.skrivrum, hojder: o.blad ? ram.huvud.map(() => 1) : undefined }) : []);
+  // Står huvudet före en lista håller det ihop med den, så att namnet står på samma sida som protokollet (K-071).
+  const huvud = () => (ram.huvud ? ramFaltTabell(ram.huvud, { skrivrum: o.skrivrum, hojder: o.blad ? ram.huvud.map(() => 1) : undefined, hallIhopEfter: !!ram.listor?.length }) : []);
   if (!ram.listor) ut.push(...huvud());
   // En ordlistas ruta bär listans namn, så att en sida eller ett blad som börjar med rutan går att koppla rätt.
   const noter = (delar = ram.delar) => delar.flatMap((del) => ramFaltTabell(del.falt, { rubrik: korta || ram.listor ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum, hojder: o.blad ? del.falt.map((f) => o.blad![f.rubrik]) : undefined, elevblad: !!o.blad }));
@@ -477,7 +481,10 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
     ut.push(...noter(ram.delar.filter(tillHemmet)), ...huvud(), ...listor(), ...noter(ram.delar.filter((d) => !tillHemmet(d))));
     return ut;
   }
-  if (ram.listor) ut.push(...(o.stor ? [...huvud(), ...listor(), ...noter()] : [...noter(), ...huvud(), ...listor()]));
+  // Lärarens protokoll (Lästrappan före och efter, bråkkursens kartläggning) fylls i av läraren: noten om hur står först
+  // också i elevkopian, som på sidan. Sist hamnade den ensam på en egen sida när protokollet fyllde sin (K-071).
+  const protokoll = !!ram.listor?.length && ram.listor.every(arProtokoll);
+  if (ram.listor) ut.push(...(o.stor && !protokoll ? [...huvud(), ...listor(), ...noter()] : [...noter(), ...huvud(), ...listor()]));
   else ut.push(...noter());
   return ut;
 }
@@ -487,10 +494,13 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
 // vanlig text. Märkningen litet och grått, titeln i 20 pt och meningarna i 18 pt Arial, som i metodriggen.
 const TOM_PNG = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==';
 const bytesUr = (b64: string) => Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+// Varje bild har meningen som alternativtext, så att den går att läsa upp, och ett eget id i dokumentet.
+let bagBildNr = 0;
 function bagBild(text: string, breddTwips: number): Paragraph {
   const { svg, bredd, hojd } = bagSvg(text, { bredd: breddTwips / 20, storlek: 18, radfaktor: 1.6 });
   const px = (pt: number) => Math.round((pt * 4) / 3);
-  return new Paragraph({ spacing: { after: 60 }, children: [new ImageRun({ type: 'svg', data: new TextEncoder().encode(svg), transformation: { width: px(bredd), height: px(hojd) }, fallback: { type: 'png', data: bytesUr(TOM_PNG) } })] });
+  const altText = { name: `Mening med bågar ${++bagBildNr}`, description: utanStod(text), id: String(1000 + bagBildNr) };
+  return new Paragraph({ spacing: { after: 60 }, children: [new ImageRun({ type: 'svg', data: new TextEncoder().encode(svg), transformation: { width: px(bredd), height: px(hojd) }, altText, fallback: { type: 'png', data: bytesUr(TOM_PNG) } })] });
 }
 function laskortBarn(l: { rubrik?: string; kolumner?: string[]; rader: string[][] }, stodKolumn: number): Barn[] {
   const { nr, titel } = laskortRubrik(l);

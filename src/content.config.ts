@@ -150,7 +150,7 @@ const stodundervisning = defineCollection({
       efter: z.string().optional(),
       efterPasset: z.string().optional(),
       // Vad passets delar kallas i rubrikerna. delar när metoden använder ordet steg för något annat, som lästrappan i
-      // Upprepad läsning: då står Del, Passet i N delar och Delarna där det annars står Fas, Rutinen i N steg och Stegen (K-065).
+      // Upprepad läsning: då står Del, Rutinen i N delar och Delarna där det annars står Fas, Rutinen i N steg och Stegen (K-065).
       kallas: z.enum(['steg', 'delar']).default('steg'),
     }).optional(),
     tidsschema: z.strictObject({
@@ -367,9 +367,9 @@ const stodundervisning = defineCollection({
       pass: z.strictObject({
         rubrik: text,
         textRubrik: text,
-        // Knappen som skriver ut bara textrutan: "Skriv ut till eleverna" när rutan är en elevtext,
-        // något annat när den är ett exempel för läraren.
-        utskrift: z.string().default('Skriv ut till eleverna'),
+        // Knappen som skriver ut bara textrutan. Utan värde: "Skriv ut passexemplet" när textRubrik börjar med Gruppen
+        // (lärarens berättelse om passet), annars "Skriv ut till eleverna" (passUtskrift i src/lib/metod.ts, K-074).
+        utskrift: z.string().optional(),
         titel: z.string().optional(),
         text: stycken,
         forberett: z.strictObject({ rubrik: text, text: stycken }),
