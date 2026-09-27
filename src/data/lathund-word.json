@@ -1,0 +1,92 @@
+{
+  "antalsuppfattning-i-grupp": {
+    "kalla": "1da0ad8769b894bf",
+    "skalor": [
+      1.2,
+      1.35,
+      1.35,
+      1.25
+    ],
+    "datum": "2026-09-27"
+  },
+  "boksamtal-i-grupp": {
+    "kalla": "516f193cde5748bd",
+    "skalor": [
+      1.35,
+      1.35,
+      1.15,
+      1.35
+    ],
+    "datum": "2026-09-27"
+  },
+  "brakkurs-i-grupp": {
+    "kalla": "a84fed31297d903d",
+    "skalor": [
+      1.1,
+      1.35,
+      1.35,
+      1.25
+    ],
+    "datum": "2026-09-27"
+  },
+  "faktatextsamtal-i-grupp": {
+    "kalla": "910d54e7c749dc5c",
+    "skalor": [
+      1.25,
+      1.35,
+      1.25,
+      1.35
+    ],
+    "datum": "2026-09-27"
+  },
+  "laslistor-i-grupp": {
+    "kalla": "868130b75c44bd3b",
+    "skalor": [
+      1.2,
+      1.35,
+      1.15,
+      1.35
+    ],
+    "datum": "2026-09-27"
+  },
+  "problemlosning-i-grupp": {
+    "kalla": "9b1e4e149dfbeb90",
+    "skalor": [
+      1.3,
+      1.35,
+      1.35,
+      1.25
+    ],
+    "datum": "2026-09-27"
+  },
+  "skrivkurs-berattelseram": {
+    "kalla": "60e870577120681e",
+    "skalor": [
+      1.2,
+      1.35,
+      1.15,
+      1.25
+    ],
+    "datum": "2026-09-27"
+  },
+  "skrivkurs-vardeskapande": {
+    "kalla": "ecb08c4ee12455e2",
+    "skalor": [
+      1.25,
+      1.35,
+      1.35,
+      1.25
+    ],
+    "datum": "2026-09-27"
+  },
+  "til-i-grupp": {
+    "kalla": "49ddf95bd9a638a1",
+    "skalor": [
+      1.2,
+      1.35,
+      1.1,
+      1.3
+    ],
+    "datum": "2026-09-27"
+  }
+}

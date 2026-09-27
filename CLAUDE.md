@@ -61,13 +61,13 @@ Varje ny artikel, metod och bok mejlas prenumeranterna automatiskt: byggpluginen
 
 ## Kvalitet
 
-1. `npm run validera` går igenom före varje commit. Den kontrollerar register, krymper nya bilder till sitt syfte, gör om lathundarnas pdf där något har ändrats, kontrollerar typer och bygge och ritar de delningskort som saknas.
+1. `npm run validera` går igenom före varje commit. Den kontrollerar register, krymper nya bilder till sitt syfte, gör om lathundarnas pdf och mäter Word-lathunden i Word där något har ändrats, kontrollerar typer och bygge och ritar de delningskort som saknas.
 2. Små commits med tydliga meddelanden på svenska: "Artikel: ...", "Metod: ...", "Sajt: ...".
 3. Inga nya beroenden utan skäl. Inga UI-ramverk för det som CSS och lite vanilla JS löser.
 4. Semantisk HTML, tangentbordsnavigering, kontrast och alt-texter. Mobil först.
 5. Varje sida har unik title och description. Canonical, Open Graph, sitemap och RSS finns i Base.astro och ska vara kvar. Varje sida får ett eget delningskort, 1200 × 630 med sidans titel, ur `src/lib/delningskort.ts` och mallen `src/pages/delning/kort/[namn].astro`; ingen sida behöver en egen delningsbild. Bilder under `public/images/` krymps automatiskt till sitt syfte (`scripts/bilder.mjs`), och cachen står i `netlify.toml`.
 6. Designsystemet ligger i `src/styles/global.css` som variabler. Bygg vidare där i stället för att sprida färger och mått i komponenter.
-7. Allt ur en källa utan drift (Niclas 2026-09-27): sidan, utskriften, lathunden, Word och PowerPoint byggs ur metodens fil vid varje bygge. Det enda som görs i förväg är delningskorten och lathundens pdf, som är lathunden i A4 liggande ur samma kod som PowerPoint-filen (som är 16:9), sparad som pdf av PowerPoint, och `npm run validera` gör om dem automatiskt när posten eller koden har ändrats; bygget stannar om en gammal pdf eller ett saknat kort ändå pushas. Inget görs om för hand. Utskriftsknapparna skriver ut sidan, och metodens pdf får läraren genom Spara som PDF. En rättning i formen görs i den gemensamma koden (Metod.astro, Lathund.astro, metoddocx.ts, metodpptx.ts, global.css), aldrig i en enskild metod, så att alla metoder och nya metoder får den automatiskt.
+7. Allt ur en källa utan drift (Niclas 2026-09-27): sidan, utskriften, lathunden, Word och PowerPoint byggs ur metodens fil vid varje bygge. Det enda som görs i förväg är delningskorten, lathundens pdf, som är lathunden i A4 liggande ur samma kod som PowerPoint-filen (som är 16:9), sparad som pdf av PowerPoint, och Word-lathundens textstorlek per sida, uppmätt i Word (`src/data/lathund-word.json`), och `npm run validera` gör om dem automatiskt när posten eller koden har ändrats; bygget stannar om en gammal pdf eller ett saknat kort ändå pushas. Inget görs om för hand. Utskriftsknapparna skriver ut sidan, och metodens pdf får läraren genom Spara som PDF. En rättning i formen görs i den gemensamma koden (Metod.astro, Lathund.astro, metoddocx.ts, metodpptx.ts, global.css), aldrig i en enskild metod, så att alla metoder och nya metoder får den automatiskt.
 
 ## Mandat
 
