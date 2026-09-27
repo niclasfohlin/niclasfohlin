@@ -76,10 +76,18 @@ if (kommando === 'status') {
   // Listornas räknare (totalSubscribers) släpar efter i Brevo och kan visa 0 fast listan är full:
   // antalet räknas i stället ur kontakterna.
   const listor = await brevo('GET', '/contacts/lists?limit=10');
-  const kontakter = await brevo('GET', '/contacts?limit=500&sort=desc');
+  // Kontakterna 500 åt gången, så att räkningen stämmer också när listan växer förbi 500.
+  const kontakter = [];
+  let totalt = 0;
+  for (let offset = 0; ; offset += 500) {
+    const sida = await brevo('GET', `/contacts?limit=500&offset=${offset}&sort=desc`);
+    totalt = sida.data.count ?? 0;
+    kontakter.push(...(sida.data.contacts ?? []));
+    if (!sida.data.contacts?.length || kontakter.length >= totalt) break;
+  }
   const per = {};
-  for (const c of kontakter.data.contacts ?? []) for (const id of c.listIds ?? []) per[id] = (per[id] ?? 0) + 1;
-  visa({ kontakterTotalt: kontakter.data.count, listor: (listor.data.lists ?? []).map((l) => ({ id: l.id, namn: l.name, kontakter: per[l.id] ?? 0 })) });
+  for (const c of kontakter) for (const id of c.listIds ?? []) per[id] = (per[id] ?? 0) + 1;
+  visa({ kontakterTotalt: totalt, listor: (listor.data.lists ?? []).map((l) => ({ id: l.id, namn: l.name, kontakter: per[l.id] ?? 0 })) });
   const mallar = await brevo('GET', '/smtp/templates?limit=10');
   visa({ mallar: (mallar.data.templates ?? []).map((t) => ({ id: t.id, namn: t.name, avsandare: t.sender?.email, svarTill: t.replyTo, aktiv: t.isActive })) });
 } else if (kommando === 'doman') {
