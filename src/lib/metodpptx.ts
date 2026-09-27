@@ -529,6 +529,10 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
     const rowsN = Math.ceil(b.bord.length / 2);
     const bordY = Math.max(y + 0.15, BOTTEN - (0.5 + rowsN * 0.55)), bordH = BOTTEN - bordY, rh = Math.min(0.55, (bordH - 0.5) / rowsN);
     if (y + 0.15 > bordY + 0.01) varna('bild 4: källorna är många eller långa, rutan "På bordet" trängs');
+    // Raderna i rutan (korta saker, en rad var) får inte stå tätare än 0,9 gånger teckengraden, bokstävernas egen
+    // höjd, annars skriver de över varandra och rutans kant. Räknat på sidan, i graden som används.
+    const radEm = (rh * sy * 72) / (12 * grad);
+    if (radEm < 0.9) varna(`bild 4: raderna i rutan "På bordet" står för tätt (${radEm.toFixed(2)} gånger teckengraden, minst 0,9): färre eller kortare källor eller rader på bordet`);
     darkBox(s, 'PÅ BORDET NÄR PASSET BÖRJAR', 0.46, bordY, 6.17, bordH);
     b.bord.forEach((t, i) => txt(s, t, 0.61 + (i % 2) * 3.03, bordY + 0.46 + Math.floor(i / 2) * rh, 2.95, rh, { size: 12 }));
 
