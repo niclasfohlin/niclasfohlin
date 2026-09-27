@@ -24,11 +24,20 @@ export function brakDelar(text: string): BrakDel[] {
   return ut.map((x, i) => ('text' in x && i > 0 && i < ut.length - 1 && x.text.length <= 7 ? { text: x.text.replace(/ /g, '\u00a0') } : x));
 }
 
-// Texten som HTML för sidan (Brak.astro): varje bråk blir MathML, och texten runt bråken skyddas. Ett skiljetecken
-// direkt efter ett bråk hålls på samma rad som bråket, så att en rad aldrig börjar med en punkt.
+// Texten som HTML för sidan (Brak.astro): varje bråk blir MathML, och texten runt bråken skyddas. Bråk i en uppräkning
+// eller ett uttryck ("1/4 eller 1/6", "1/2, 1/10, 1/4") och ett skiljetecken direkt efter hålls ihop i ett spann som
+// inte bryts, så att en rad aldrig börjar med " eller 1/6" eller en punkt. MathML binder inte till de hårda mellanslagen
+// från brakDelar, därför spannet (K-044).
 export function brakHtml(text: string): string {
   const skydda = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const mathml = (x: { taljare: string; namnare: string }) => `<math class="m-brak"><mfrac><mn>${x.taljare}</mn><mn>${x.namnare}</mn></mfrac></math>`;
   const delar = brakDelar(text);
+  // En kort text mellan två bråk har fått hårda mellanslag i brakDelar och innehåller inget vanligt mellanslag.
+  const fog = (i: number) => {
+    const x = delar[i];
+    const efter = delar[i + 1];
+    return !!x && 'text' in x && x.text.length <= 7 && !x.text.includes(' ') && !!efter && !('text' in efter);
+  };
   let html = '';
   for (let i = 0; i < delar.length; i++) {
     const x = delar[i];
@@ -36,13 +45,20 @@ export function brakHtml(text: string): string {
       html += skydda(x.text);
       continue;
     }
-    const brak = `<math class="m-brak"><mfrac><mn>${x.taljare}</mn><mn>${x.namnare}</mn></mfrac></math>`;
+    let grupp = mathml(x);
+    let flera = false;
+    while (fog(i + 1)) {
+      grupp += skydda((delar[i + 1] as { text: string }).text) + mathml(delar[i + 2] as { taljare: string; namnare: string });
+      i += 2;
+      flera = true;
+    }
     const nasta = delar[i + 1];
     const tecken = nasta && 'text' in nasta ? (nasta.text.match(/^[.,:;!?)\u201d]+/)?.[0] ?? '') : '';
     if (tecken && nasta && 'text' in nasta) {
-      html += `<span class="m-brak-ihop">${brak}${skydda(tecken)}</span>`;
+      grupp += skydda(tecken);
       delar[i + 1] = { text: nasta.text.slice(tecken.length) };
-    } else html += brak;
+    }
+    html += flera || tecken ? `<span class="m-brak-ihop">${grupp}</span>` : grupp;
   }
   return html;
 }
