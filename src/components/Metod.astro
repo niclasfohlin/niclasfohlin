@@ -75,9 +75,10 @@ const avsnitt = [
   <div class="metod-text">
   {d.inledning.map((s) => <p>{s}</p>)}
 
-  {d.upplagg && <div class="m-ruta"><p><strong class="kicker">{d.upplagg.rubrik}</strong>{' '}{d.upplagg.text}</p></div>}
-  {d.gruppen && <div class="m-ruta"><p><strong class="kicker">{d.gruppen.rubrik}</strong>{' '}{d.gruppen.text}</p></div>}
-  {d.principer && <div class="m-ruta"><p><strong class="kicker">{d.principer.rubrik}</strong>{' '}{d.principer.text}</p></div>}
+  {/* Rutornas rubriker är rubriker, så att en skärmläsare kan hoppa till dem (K-028). De står direkt under h1. */}
+  {d.upplagg && <div class="m-ruta"><h2 class="kicker">{d.upplagg.rubrik}</h2><p>{d.upplagg.text}</p></div>}
+  {d.gruppen && <div class="m-ruta"><h2 class="kicker">{d.gruppen.rubrik}</h2><p>{d.gruppen.text}</p></div>}
+  {d.principer && <div class="m-ruta"><h2 class="kicker">{d.principer.rubrik}</h2><p>{d.principer.text}</p></div>}
 
   {efterInledning.map((t) => (
     <section>

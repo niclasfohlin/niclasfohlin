@@ -364,6 +364,8 @@ button.lank:hover { color: var(--farg-accent); }
 .m-ruta p + p { margin-top: 0.35em; }
 /* Rutans rubrik står på egen rad, som i kompendiet, så att den läses som rubrik och inte som en fet meningsstart. */
 .m-ruta .kicker { display: block; font-family: var(--typsnitt-ui); color: var(--farg-accent); margin-bottom: 0.2em; }
+/* Rutans rubrik är en h2 för skärmläsare men ser ut som rubriken i stycket gjorde (K-028). */
+.m-ruta h2.kicker { font-size: inherit; line-height: inherit; letter-spacing: normal; margin: 0 0 0.2em; }
 /* Ramens namn i rutan "Så arbetar ni med listan" syns bara i utskriften, där rutan kan hamna på en annan sida än listan. */
 .m-ramnamn { display: none; font-weight: 500; }
 .m-fraga .kicker { margin-bottom: 0.25em; }
