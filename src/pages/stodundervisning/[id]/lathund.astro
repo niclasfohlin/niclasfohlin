@@ -24,7 +24,8 @@ const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathu
       <h1>Lathund: {d.titel}</h1>
       <p class="ingress">Fyra sidor att ha bredvid sig: metoden i korthet, ett pass steg för steg, mallen och vad du behöver. Skriv ut i liggande A4 eller ladda ner som PowerPoint, pdf eller Word.</p>
       <p class="lathund-knappar">
-        <span class="bara-js"><button type="button" class="knapp" data-skriv-ut>Skriv ut lathunden (fyra sidor)</button></span>
+        {/* Utskriften är pdf:en, som är lathundens PowerPoint: fyra fyllda sidor (2026-09-27). */}
+        <a class="knapp" href={`/stodundervisning/${m.id}-lathund.pdf`} target="_blank" rel="noopener">Skriv ut lathunden (pdf, fyra sidor)</a>
         {' '}<Filval fil={`/stodundervisning/${m.id}-lathund`} namn={`${m.id}-lathund`} rubrik="Lathunden" pdf pptx />
       </p>
       <nav class="metod-nav lathund-nav" aria-label="Lathundens sidor">
@@ -60,9 +61,6 @@ const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathu
 </style>
 
 <script>
-  for (const knapp of document.querySelectorAll<HTMLButtonElement>('[data-skriv-ut]')) {
-    knapp.addEventListener('click', () => window.print());
-  }
   // Tillbaka till metodbanken med samma filter som läsaren hade (sparas av listan i sessionStorage).
   try {
     const filter = sessionStorage.getItem('metodfilter');

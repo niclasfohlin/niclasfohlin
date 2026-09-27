@@ -20,7 +20,7 @@ Windows 11, Node 24 lokalt (Netlify bygger med 22.12), Git Bash som skal i Claud
 | `node scripts/skarmbilder.mjs` | repot | sajtens viktigaste sidor på desktop och mobil ur dist, till underlag/prov/sajt/ |
 | `scripts/word-pdf.ps1 <docx> [<pdf>]` | repot, kräver Word | docx till pdf via COM, sedan `pdftoppm -r 40 -png` för en bild per sida; skriver sidantalet |
 | `scripts/word-sidor.ps1 <docx…>` | repot, kräver Word | bara sidantal |
-| `node scripts/lathund-pdf.mjs [--vid-behov]` | repot, kräver Chrome | lathundarnas pdf och manifestet `lathund-pdf.json`; `npm run validera` kör den med `--vid-behov`, så pdf:en görs om automatiskt när metoden eller koden ändras |
+| `node scripts/lathund-pdf.mjs [--vid-behov]` | repot, kräver PowerPoint och Poppler | lathundarnas pdf ur lathundens PowerPoint och manifestet `lathund-pdf.json`; `npm run validera` kör den med `--vid-behov`, så pdf:en görs om automatiskt när metoden eller koden ändras |
 | `node scripts/krediter.mjs` (`npm run krediter`) | repot | Netlifys kreditsaldo, vad som drar, trafiken (`-- trafik`) och kreditspärren; se Krediter nedan |
 | `node scripts/bilder.mjs` | repot, sharp följer med Astro | krymper nya bilder under `public/images/` till sitt syfte; körs i `npm run validera`, och `--kontrollera` i `npm run build` |
 | `node scripts/delningskort.mjs` | repot, kräver Chrome | ritar sidornas delningskort till `public/delning/`; körs sist i `npm run validera`, och `--kontrollera` i `npm run build` |
