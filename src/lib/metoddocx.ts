@@ -8,7 +8,7 @@ import {
   Paragraph, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, VerticalAlign, WidthType,
   type IBorderOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
-import { arbetsformRad, arskursText, datumText, ejBryt, lathundFakta, metaRad, metodAdress, passOversikt, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost } from './metod';
+import { arbetsformRad, arskursText, datumText, ejBryt, etikettOchText, lathundFakta, metaRad, metodAdress, passOversikt, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost } from './metod';
 import { brakDelar, delnamn, kortInfo, lage, STANDARD_NAMNARE, type KortInfo, type Mall } from './brak';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
@@ -186,7 +186,7 @@ function motto(text: string): Barn[] {
   return [tabell([rad([cell([stycke(text, { fet: true, farg: FARG.vit, mitt: true, efter: 0 })], { bredd: BREDD, fyll: FARG.huvud, kanter: runt(kant(FARG.huvud)), mitt: true })])], [BREDD]), avstand()];
 }
 function fragaRuta(rubrik: string, fragor: string[]): Barn[] {
-  const barn = [stycke(rubrik, { fet: true, farg: FARG.huvud, storlek: 20, efter: 40 }), ...fragor.map((f, i) => stycke(f, { fet: true, storlek: 24, efter: i === fragor.length - 1 ? 0 : 20 }))];
+  const barn = [stycke(rubrik, { fet: true, farg: FARG.huvud, storlek: 20, efter: 40 }), ...fragor.map((f, i) => stycke(f, { storlek: 24, efter: i === fragor.length - 1 ? 0 : 20 }))];
   return [tabell([rad([cell(barn, { bredd: BREDD, fyll: FARG.ljus, kanter: { left: kant(FARG.huvud, 24) } })])], [BREDD]), avstand()];
 }
 function gorUndvik(gor: string[], undvik: string[]): Barn[] {
@@ -948,6 +948,12 @@ function kolumnBredder(antal: number, forstaAndel?: number): number[] {
   return Array.from({ length: antal }, (_, i) => (i === 0 ? forsta : i === antal - 1 ? BREDD - forsta - rest * (antal - 2) : rest));
 }
 
+// Rutans inledning i lathunden: etiketten fet och frågan mager, som på sidan (K-025).
+function inledningStycke(rad: string): Paragraph {
+  const { etikett, text } = etikettOchText(rad);
+  return new Paragraph({ children: [...(etikett ? [run(`${etikett} `, { fet: true, storlek: 20 })] : []), run(text, { storlek: 20 })], spacing: { before: 0, after: 60 } });
+}
+
 // Lathunden: fyra liggande sidor med snabbguidens designelement. Mörk rubrikrad på rutorna,
 // cremefärgade noter, faktarutor och kickers i versaler.
 const CREME = 'FBF3E4';
@@ -1044,7 +1050,7 @@ function lathundBarn(post: MetodPost): Barn[][] {
         kicker('Så fungerar insatsen', { farg: FARG.huvud, fore: 60 }),
         ...l.metoden.text.map(stor),
         ...lhRuta(l.metoden.ruta.rubrik, [
-          ...(l.metoden.ruta.inledning ? [stycke(l.metoden.ruta.inledning, { fet: true, storlek: 20, efter: 60 })] : []),
+          ...(l.metoden.ruta.inledning ? [inledningStycke(l.metoden.ruta.inledning)] : []),
           ...punktStycken(l.metoden.ruta.punkter),
           ...(l.metoden.ruta.efter ? [stycke(l.metoden.ruta.efter, { farg: FARG.svag, storlek: 19, fore: 60, efter: 0 })] : []),
         ]),

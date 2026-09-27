@@ -5,7 +5,7 @@
 // krymper den ett steg och sedan varnas det i bygget: korta texten i metoden, ändra inte här.
 import PptxGenJS from 'pptxgenjs';
 import type { CollectionEntry } from 'astro:content';
-import { lathundFakta, arbetsformRad } from './metod';
+import { lathundFakta, arbetsformRad, etikettOchText } from './metod';
 import type { MetodData } from './metod';
 
 export const PPTX_TYP = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
@@ -34,7 +34,7 @@ function bilder(d: MetodData) {
     intro: l.metoden.text,
     treRubrik: versaler(l.metoden.ruta.rubrik),
     tre: [
-      ...(l.metoden.ruta.inledning ? [`**${l.metoden.ruta.inledning}**`] : []),
+      ...(l.metoden.ruta.inledning ? [((e) => (e.etikett ? `**${e.etikett}** ${e.text}` : e.text))(etikettOchText(l.metoden.ruta.inledning))] : []),
       ...l.metoden.ruta.punkter.map(punktText),
       ...(l.metoden.ruta.efter ? [l.metoden.ruta.efter] : []),
     ],

@@ -367,7 +367,7 @@ button.lank:hover { color: var(--farg-accent); }
 /* Ramens namn i rutan "Så arbetar ni med listan" syns bara i utskriften, där rutan kan hamna på en annan sida än listan. */
 .m-ramnamn { display: none; font-weight: 500; }
 .m-fraga .kicker { margin-bottom: 0.25em; }
-.m-fraga .stor { font-family: var(--typsnitt-ui); font-weight: 700; font-size: 1.15rem; }
+.m-fraga .stor { font-family: var(--typsnitt-ui); font-weight: 400; font-size: 1.15rem; }
 /* Passrutinen: numrerade steg med blå nummerrutor i ett vitt kort. Stödtrappan samma nummer utan kort. */
 .m-rutin, .m-trappa { margin: 1rem 0 1.25rem; padding: 0; counter-reset: steg; list-style: none; }
 .m-rutin { background: var(--farg-yta); border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 1rem 1.25rem; box-shadow: var(--skugga); }

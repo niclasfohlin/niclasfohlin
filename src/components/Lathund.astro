@@ -7,10 +7,12 @@ import MetodTabell from './MetodTabell.astro';
 import Elevlista from './Elevlista.astro';
 import Tavla from './Tavla.astro';
 import type { MetodData } from '../lib/metod';
-import { lathundFakta, arbetsformRad } from '../lib/metod';
+import { lathundFakta, arbetsformRad, etikettOchText } from '../lib/metod';
 interface Props { d: MetodData }
 const { d } = Astro.props;
 const l = d.lathund;
+// Rutans inledning: en fet etikett och en mager fråga (K-025).
+const inledning = l?.metoden.ruta.inledning ? etikettOchText(l.metoden.ruta.inledning) : null;
 const fakta = lathundFakta(d);
 const arbetsform = arbetsformRad(d);
 const citat = (f: string) => `”${f}”`;
@@ -34,7 +36,7 @@ const matta = !!l && l.mall.block.filter((b) => b.typ !== 'not').length === 1 &&
           <div class="lh-ruta">
             <h3>{l.metoden.ruta.rubrik}</h3>
             <div class="lh-ruta-kropp">
-              {l.metoden.ruta.inledning && <p><strong>{l.metoden.ruta.inledning}</strong></p>}
+              {inledning && <p>{inledning.etikett && <><strong>{inledning.etikett}</strong>{' '}</>}{inledning.text}</p>}
               {l.metoden.ruta.punkter.map((p) => <p>{p.fet && <strong>{p.fet}</strong>}{p.fet && p.text ? ' ' : ''}{p.text}</p>)}
               {l.metoden.ruta.efter && <p class="lh-svag">{l.metoden.ruta.efter}</p>}
             </div>

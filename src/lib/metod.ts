@@ -26,6 +26,13 @@ export function arskursSpann(arskurs: readonly string[]): string {
 
 // Ett spann som "F–3" eller "åk 4–9" får aldrig brytas så att siffran hamnar på nästa rad
 // ("F–" / "2" läses fel). Ett osynligt ordfogtecken (U+2060) efter tankstrecket hindrar brytningen.
+// En rad som börjar med en kort etikett och kolon ("Fråga alltid först: vad har ni gjort hittills?") delas i
+// etiketten, som ritas fet, och resten, som ritas mager: fet stil betyder rubrik (K-025). Utan etikett är allt resten.
+export function etikettOchText(rad: string): { etikett: string; text: string } {
+  const m = rad.match(/^([^:]{2,30}):\s+(.+)$/s);
+  return m ? { etikett: `${m[1]}:`, text: m[2] } : { etikett: '', text: rad };
+}
+
 export function ejBryt(text: string): string {
   return text.replace(/(\S)–(?=\d)/g, '$1–⁠');
 }
