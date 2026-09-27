@@ -164,7 +164,15 @@ const MATARE = {
   agent_runner_ai_inference: ['agenternas AI', () => ''],
 };
 
-const visa = (k) => {
+// Databasens grenar (kommentarerna): sover de, och när var de senast vakna? Varje uppvaknande kostar omkring
+// 1 kredit (DRIFT.md under Kommentarer). En gren från en förhandsversion är en testgren som bara Niclas kan ta bort.
+export const lasDatabas = async () => {
+  const svar = await anrop(lasToken(), `/sites/${SITE}/database/branches`);
+  const grenar = Array.isArray(svar) ? svar : svar?.branches ?? [];
+  return grenar.map((g) => ({ namn: g.name ?? g.branch_id, sammanhang: g.metadata?.deploy?.context ?? '', vaken: g.compute?.current_state === 'active', senast: g.compute?.last_active ?? null }));
+};
+
+const visa = (k, grenar) => {
   const l = lage(k);
   const v = vantande();
   const delar = Object.entries(k.matare)
@@ -179,6 +187,13 @@ const visa = (k) => {
   if (l.tomForeSlut) console.log('  VARNING: saldot tar slut före påfyllningen. Då pausar Netlify sajten och besökarna ser "Site not available". Se vad som drar: npm run krediter -- trafik');
   console.log(`Kreditspärren vid ${GOLV}: ${l.oppen ? `öppen, rum för ${l.rum} ${l.rum === 1 ? 'bygge' : 'byggen'} i dag` : 'STÄNGD, ladda inte upp'}.`);
   console.log(`Lokalt: ${v.alla ? `${commits(v.alla)} på main är inte uppladdade, ${v.bygger} av dem bygger` : 'inget väntar på uppladdning'}.`);
+  for (const g of grenar ?? []) {
+    const tid = g.senast ? `${g.senast.slice(0, 16).replace('T', ' ')} UTC` : 'aldrig';
+    const lage = g.vaken ? 'är vaken' : `sover, senast vaken ${tid}`;
+    console.log(g.namn === 'production'
+      ? `Databasen: ${lage}.`
+      : `Databasgrenen ${g.namn} (${g.sammanhang || 'okänt sammanhang'}) ${lage}: en testgren, som Niclas tar bort i Netlify under Database.`);
+  }
 };
 
 const BESOKARE = {
@@ -235,7 +250,8 @@ if (arHuvud) {
       console.log(rad(k, l));
       process.exit(grind && !l.oppen ? 1 : 0);
     } else {
-      visa(await hamta({ farsk: true }));
+      const [k, grenar] = await Promise.all([hamta({ farsk: true }), lasDatabas().catch(() => null)]);
+      visa(k, grenar);
     }
   } catch (e) {
     console.log(`Netlify-krediterna gick inte att läsa (${e.message}). Läs saldot i Netlify under Usage & billing före uppladdning; se DRIFT.md under Krediter.`);
