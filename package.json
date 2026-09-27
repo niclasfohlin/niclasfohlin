@@ -9,10 +9,10 @@
   "scripts": {
     "dev": "astro dev",
     "check": "astro check",
-    "build": "astro build",
+    "build": "node scripts/lathund-pdf.mjs --kontrollera && astro build",
     "preview": "astro preview",
     "taggar": "node scripts/taggar.mjs",
-    "validera": "node scripts/taggar.mjs --kontrollera && astro check && astro build",
+    "validera": "node scripts/taggar.mjs --kontrollera && node scripts/lathund-pdf.mjs --vid-behov && astro check && astro build",
     "deploykoll": "node scripts/deploykoll.mjs",
     "kommentarer": "node scripts/kommentarer.mjs",
     "ko": "node scripts/ko.mjs",

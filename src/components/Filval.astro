@@ -1,7 +1,6 @@
 ---
 // Filvalet vid en nedladdning: samma fil som PowerPoint (lathunden), i Google Drive, som pdf (lathunden)
-// och som Word. Pdf:en är ingen förbyggd fil: knappen öppnar sidans utskrift, där läraren väljer Spara som PDF,
-// så att allt kommer ur samma källa och inget behöver byggas om för hand (Niclas 2026-09-27). En grupp små knappar med ikon och ord, så att valet syns utan att ta plats. Används
+// och som Word. En grupp små knappar med ikon och ord, så att valet syns utan att ta plats. Används
 // överallt där en fil erbjuds (metodsidan, lathunden, metodbankens kort), så att nya metoder får samma
 // val automatiskt. Ordningen är Niclas (2026-09-25): PPTX först, sedan Drive, Pdf och sist Word; en rad
 // utan pptx och pdf blir Drive och Word. Drive-knappen finns bara när site.driveKlientId är satt (DRIFT.md).
@@ -14,13 +13,13 @@ interface Props {
   namn: string;
   /** Vad filen innehåller, för skärmläsare: "Lathunden", "Allt om metoden" */
   rubrik: string;
-  /** Sidan vars utskrift är filens pdf (lathunden: /stodundervisning/<id>/lathund). Knappen öppnar utskriften med Spara som PDF. */
-  pdf?: string;
+  /** Finns filen också som pdf (lathunden, liggande fyra sidor)? */
+  pdf?: boolean;
   /** Finns filen också som PowerPoint (lathunden, fyra bilder)? Då sparar Drive-knappen den i stället för Word-filen. */
   pptx?: boolean;
   liten?: boolean;
 }
-const { fil, namn, rubrik, pdf, pptx = false, liten = false } = Astro.props;
+const { fil, namn, rubrik, pdf = false, pptx = false, liten = false } = Astro.props;
 const drive = Boolean(site.driveKlientId);
 // Drive sparar den fil som passar bäst i Google: lathunden som PowerPoint (fyra liggande bilder, Google
 // Presentationer visar dem som de är), allt annat som Word.
@@ -40,7 +39,7 @@ const driveAndelse = pptx ? 'pptx' : 'docx';
     </button>
   )}
   {pdf && (
-    <a href={`${pdf}#skriv-ut`} title="Pdf: utskriften öppnas, välj Spara som PDF">
+    <a href={`${fil}.pdf`} download={`${namn}.pdf`} title="Ladda ner som pdf, liggande">
       <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16"><path d="M5 2h7l4 4v12H5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 2v4h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7.5 15v-5h1.6a1.5 1.5 0 0 1 0 3H7.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Pdf<span class="visually-hidden">: {rubrik}</span>
     </a>
