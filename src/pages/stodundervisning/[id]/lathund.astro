@@ -25,7 +25,7 @@ const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathu
       <p class="ingress">Fyra sidor att ha bredvid sig: metoden i korthet, ett pass steg för steg, mallen och vad du behöver. Skriv ut i liggande A4 eller ladda ner som PowerPoint, pdf eller Word.</p>
       <p class="lathund-knappar">
         <span class="bara-js"><button type="button" class="knapp" data-skriv-ut>Skriv ut lathunden (fyra sidor)</button></span>
-        {' '}<Filval fil={`/stodundervisning/${m.id}-lathund`} namn={`${m.id}-lathund`} rubrik="Lathunden" pdf pptx />
+        {' '}<Filval fil={`/stodundervisning/${m.id}-lathund`} namn={`${m.id}-lathund`} rubrik="Lathunden" pdf={`/stodundervisning/${m.id}/lathund`} pptx />
       </p>
       <nav class="metod-nav lathund-nav" aria-label="Lathundens sidor">
         <span class="nav-etikett" aria-hidden="true">Lathundens sidor</span>
@@ -63,6 +63,15 @@ const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathu
   for (const knapp of document.querySelectorAll<HTMLButtonElement>('[data-skriv-ut]')) {
     knapp.addEventListener('click', () => window.print());
   }
+  // Pdf-knappen (Filval) leder hit med #skriv-ut: utskriften öppnas, och läraren väljer Spara som PDF. Adressen
+  // städas efteråt, så att knappen fungerar igen och en omladdning inte skriver ut.
+  const skrivUtVidAnkare = () => {
+    if (location.hash !== '#skriv-ut') return;
+    history.replaceState(null, '', location.pathname + location.search);
+    setTimeout(() => window.print(), 300);
+  };
+  window.addEventListener('hashchange', skrivUtVidAnkare);
+  if (document.readyState === 'complete') skrivUtVidAnkare(); else window.addEventListener('load', skrivUtVidAnkare);
   // Tillbaka till metodbanken med samma filter som läsaren hade (sparas av listan i sessionStorage).
   try {
     const filter = sessionStorage.getItem('metodfilter');
