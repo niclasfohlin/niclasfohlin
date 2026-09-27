@@ -368,7 +368,8 @@ button.lank:hover { color: var(--farg-accent); }
 .m-ruta h2.kicker { font-size: inherit; line-height: inherit; letter-spacing: normal; margin: 0 0 0.2em; }
 /* Ramens namn i rutan "Så arbetar ni med listan" syns bara i utskriften, där rutan kan hamna på en annan sida än listan. */
 .m-ramnamn { display: none; font-weight: 500; }
-.m-fraga .kicker { margin-bottom: 0.25em; }
+/* Etiketten är rutans rubrik och fet, frågorna under den magra, som i Word och lathunden (K-025). */
+.m-fraga .kicker { margin-bottom: 0.25em; font-weight: 700; }
 .m-fraga .stor { font-family: var(--typsnitt-ui); font-weight: 400; font-size: 1.15rem; }
 /* Passrutinen: numrerade steg med blå nummerrutor i ett vitt kort. Stödtrappan samma nummer utan kort. */
 .m-rutin, .m-trappa { margin: 1rem 0 1.25rem; padding: 0; counter-reset: steg; list-style: none; }
