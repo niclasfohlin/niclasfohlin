@@ -14,9 +14,11 @@ interface Props {
   /** Sidfot på varje utskriven sida (upphov och adress). Sätts som --tryck-text på html och
    *  läses av @page @bottom-center i global.css; sidan lägger också en .tryck-fot för webbläsare utan marginalrutor. */
   tryckText?: string;
+  /** En sida bara för Niclas (statistiken): noindex, och besöket räknas inte. Länkas inte från menyn. */
+  dold?: boolean;
 }
 
-const { title, description = site.beskrivning, typ = 'website', bild, tryckText } = Astro.props;
+const { title, description = site.beskrivning, typ = 'website', bild, tryckText, dold = false } = Astro.props;
 const htmlStil = tryckText ? `--tryck-text: '${tryckText.replace(/['\\]/g, '')}'` : undefined;
 const fullTitel = title ? `${title} · ${site.namn}` : `${site.namn}: ${site.rad.toLowerCase()}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -43,7 +45,8 @@ function aktiv(href: string) {
     </script>
     {/* Besöksstatistiken (site.statistik, DRIFT.md under Besöksstatistik): räknar inte på localhost, alltså inte i
         npm run dev, metodprovet eller delningskorten. Klick på element med data-goatcounter-click räknas som händelser. */}
-    {site.statistik && <script is:inline async data-goatcounter={site.statistik} src="https://gc.zgo.at/count.js"></script>}
+    {site.statistik && !dold && <script is:inline async data-goatcounter={site.statistik} src="https://gc.zgo.at/count.js"></script>}
+    {dold && <meta name="robots" content="noindex, nofollow" />}
     <title>{fullTitel}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical.href} />

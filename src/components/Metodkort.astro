@@ -21,7 +21,7 @@ const { m, valj = false } = Astro.props;
   <Taggar taggar={m.data.taggar} />
   <p class="kort-rad">
     {harLathund(m.data) && <a class="lathund-lank" href={`/stodundervisning/${m.id}/lathund`}>Lathund<span class="visually-hidden">: {m.data.titel}</span></a>}
-    <Filval fil={`/stodundervisning/${m.id}`} namn={m.id} rubrik={`Allt om ${m.data.titel}`} liten />
+    <Filval fil={`/stodundervisning/${m.id}`} namn={m.id} rubrik={`Allt om ${m.data.titel}`} statistik={`${m.data.titel}: allt om metoden`} liten />
     {valj && <label class="valj"><input type="checkbox" name="valda" value={m.id} /> Välj<span class="visually-hidden"> {m.data.titel}</span></label>}
   </p>
 </article>

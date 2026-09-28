@@ -263,7 +263,7 @@ const avsnitt = [
       <div class="m-band" style={`--delar:${d.urval.krav.length}`}>
         {d.urval.krav.map((x) => <div><strong>{x.rubrik}</strong><span>{x.text}</span></div>)}
       </div>
-      {d.ramar && <p class="m-efter"><a href="#ramar">{d.ramar.rubrik}</a> ligger efter grunden, och som egna sidor att kopiera i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`${id}-mallar.docx`} data-goatcounter-title="Planeringsmallarna som Word">planeringsmallarna</a> (Word).</p>}
+      {d.ramar && <p class="m-efter"><a href="#ramar">{d.ramar.rubrik}</a> ligger efter grunden, och som egna sidor att kopiera i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>}
     </section>
   )}
 
@@ -421,10 +421,10 @@ const avsnitt = [
                       </div>
                     ))}
                   </div>
-                  <p class="m-efter">Bladet finns i full storlek i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`${id}-mallar.docx`} data-goatcounter-title="Planeringsmallarna som Word">planeringsmallarna</a>.</p>
+                  <p class="m-efter">Bladet finns i full storlek i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a>.</p>
                 </>
               )
-              : <p class="m-efter">Ramen att fylla i, med {ram.delar.length === 1 ? 'en del' : `${ram.delar.length} delar`}, finns i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`${id}-mallar.docx`} data-goatcounter-title="Planeringsmallarna som Word">planeringsmallarna</a>.</p>)
+              : <p class="m-efter">Ramen att fylla i, med {ram.delar.length === 1 ? 'en del' : `${ram.delar.length} delar`}, finns i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a>.</p>)
             : (
               <div class="m-ramdelar">
                 {ram.huvud && (
@@ -459,7 +459,7 @@ const avsnitt = [
         {d.diplom.text.map((t) => (/^_{3,}$/.test(t) ? <p class="m-linje" aria-hidden="true"></p> : <p>{t}</p>))}
         {d.diplom.underskrifter.length > 0 && <p class="m-underskrifter">{d.diplom.underskrifter.map((u) => <span>{u} <span class="m-linje-kort" aria-hidden="true"></span></span>)}</p>}
       </div>
-      <p class="m-efter">Diplomet finns som egen sida i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`${id}-mallar.docx`} data-goatcounter-title="Planeringsmallarna som Word">planeringsmallarna</a>.</p>
+      <p class="m-efter">Diplomet finns som egen sida i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a>.</p>
     </section>
   )}
 
@@ -467,8 +467,8 @@ const avsnitt = [
     <section id="mallar">
       <h2>Mallar att skriva ut</h2>
       {planketOchLinjen
-        ? <p>Mallarna finns i rätt storlek på liggande A4 sist i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`${id}-mallar.docx`} data-goatcounter-title="Planeringsmallarna som Word">planeringsmallarna</a>. Det hela är {helaCm} cm i bråkplanket och på tallinjen från 0 till 1, så att bitarna kan läggas mot linjen. Skrivs mallarna ut på A3 blir allt lika mycket större.{lathundBlad && ` ${lathundBlad} finns på lathundens tredje sida och står också sist i planeringsmallarna.`}</p>
-        : <p>Mallarna finns i rätt storlek sist i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`${id}-mallar.docx`} data-goatcounter-title="Planeringsmallarna som Word">planeringsmallarna</a>.{lathundBlad && ` ${lathundBlad} finns på lathundens tredje sida och står också där.`}</p>}
+        ? <p>Mallarna finns i rätt storlek på liggande A4 sist i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a>. Det hela är {helaCm} cm i bråkplanket och på tallinjen från 0 till 1, så att bitarna kan läggas mot linjen. Skrivs mallarna ut på A3 blir allt lika mycket större.{lathundBlad && ` ${lathundBlad} finns på lathundens tredje sida och står också sist i planeringsmallarna.`}</p>
+        : <p>Mallarna finns i rätt storlek sist i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a>.{lathundBlad && ` ${lathundBlad} finns på lathundens tredje sida och står också där.`}</p>}
       <p class="m-mall-svep">Bilderna är bredare än skärmen. Svep i sidled för att se hela mallen.</p>
       {d.mallar.map((m) => (
         <figure class="m-mall">

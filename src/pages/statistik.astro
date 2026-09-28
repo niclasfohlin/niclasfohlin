@@ -1,0 +1,383 @@
+---
+// Statistiken (K-086, Niclas 2026-09-28): besök och nedladdningar i sajtens kategorier, med metodernas topp 3 och
+// filernas topp 5, för i dag, sju och trettio dagar och ett år, med besöken över tid, varifrån besökarna kommer och
+// om de har mobil eller dator (det som WordPress och GoatCounters panel visar och som Niclas har nytta av). Siffrorna hämtas i webbläsaren direkt från GoatCounters API
+// (https://www.goatcounter.com/help/api), som tillåter anrop från andra adresser. Niclas klistrar in en nyckel med
+// rätten att läsa statistik en gång; den sparas bara i hans webbläsare och skickas bara till GoatCounter. Sidan
+// har ingen egen data, länkas inte från menyn, har noindex, står utanför sitemap och räknas inte själv (Base, dold).
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+const bas = (site.statistik ?? '').replace(/\/count$/, '');
+---
+
+<Base title="Statistik" description="Besök och nedladdningar på niclasfohlin.se." dold>
+  <article class="statistik" id="statistik" data-bas={bas}>
+    <h1>Statistik</h1>
+    <p class="ingress">Besök och nedladdningar ur GoatCounter, ordnade som sajten: metoderna, filerna, artiklarna och böckerna.</p>
+
+    <noscript><p>Sidan hämtar siffrorna med JavaScript.</p></noscript>
+
+    <form class="stat-nyckel" data-nyckel hidden>
+      <label for="stat-nyckel">Nyckel till GoatCounter</label>
+      <input id="stat-nyckel" name="nyckel" type="password" autocomplete="off" spellcheck="false" required />
+      <button type="submit">Spara och visa</button>
+      <p class="meta">Skapa nyckeln i GoatCounter: klicka på din e-postadress uppe till höger, välj API och kryssa bara i Read statistics. Nyckeln sparas bara i den här webbläsaren och skickas bara till GoatCounter.</p>
+    </form>
+
+    <div data-vy hidden>
+      <div class="stat-perioder" role="group" aria-label="Period">
+        <button type="button" data-period="dag" aria-pressed="true">I dag</button>
+        <button type="button" data-period="vecka" aria-pressed="false">7 dagar</button>
+        <button type="button" data-period="manad" aria-pressed="false">30 dagar</button>
+        <button type="button" data-period="ar" aria-pressed="false">1 år</button>
+      </div>
+      <p class="stat-summa" data-summa aria-live="polite"></p>
+
+      <section class="stat-kategori">
+        <h2>Över tid</h2>
+        <div class="stat-diagram" data-diagram role="img"></div>
+        <div class="stat-axel" data-axel aria-hidden="true"></div>
+        <p class="meta stat-diagram-text" data-diagram-text></p>
+        <dl class="stat-popular" data-popular hidden></dl>
+      </section>
+
+      <section class="stat-kategori" data-kategori="metoder" data-topp="3">
+        <h2>Metoderna</h2>
+      </section>
+      <section class="stat-kategori" data-kategori="filer" data-topp="5">
+        <h2>Filerna</h2>
+      </section>
+      <section class="stat-kategori" data-kategori="artiklar" data-topp="3">
+        <h2>Artiklarna</h2>
+      </section>
+      <section class="stat-kategori" data-kategori="bocker" data-topp="3">
+        <h2>Böckerna</h2>
+      </section>
+      <section class="stat-kategori" data-kategori="utskrifter" data-topp="3">
+        <h2>Utskrifterna</h2>
+      </section>
+      <section class="stat-kategori" data-kategori="ovriga" data-topp="5">
+        <h2>Övriga sidor</h2>
+      </section>
+      <section class="stat-kategori" data-kategori="kallor" data-topp="5">
+        <h2>Varifrån besökarna kommer</h2>
+      </section>
+      <section class="stat-kategori" data-kategori="enheter" data-topp="3">
+        <h2>Mobil eller dator</h2>
+      </section>
+
+      <p class="meta stat-fot"><a href={bas}>Hela statistiken i GoatCounter</a>{' · '}<button type="button" class="stat-lank" data-glom>Byt nyckel</button></p>
+    </div>
+
+    <p class="meta" data-status role="status" aria-live="polite"></p>
+  </article>
+
+  <script>
+    type Hit = { path: string; path_id: number; title: string; event: boolean; count: number };
+    type Rad = { namn: string; under?: string; antal: number };
+
+    const rot = document.getElementById('statistik') as HTMLElement;
+    const bas = rot.dataset.bas ?? '';
+    const form = rot.querySelector('[data-nyckel]') as HTMLFormElement;
+    const vy = rot.querySelector('[data-vy]') as HTMLElement;
+    const status = rot.querySelector('[data-status]') as HTMLElement;
+    const summa = rot.querySelector('[data-summa]') as HTMLElement;
+    const NYCKEL = 'goatcounter-nyckel';
+    const PERIOD = 'statistik-period';
+
+    // Nyckeln och den senaste perioden i webbläsarens lagring; går den inte att läsa frågar sidan efter nyckeln igen.
+    const las = (k: string) => { try { return localStorage.getItem(k) ?? ''; } catch { return ''; } };
+    const skriv = (k: string, v: string) => { try { if (v) localStorage.setItem(k, v); else localStorage.removeItem(k); } catch { /* bara den här sidvisningen */ } };
+    let nyckel = las(NYCKEL);
+
+    // GoatCounter vill ha hela timmar: från periodens början till nästa hela timme.
+    const iso = (d: Date) => d.toISOString().replace(/\.\d{3}Z$/, 'Z');
+    function tider(period: string) {
+      const nu = new Date();
+      const slut = new Date(nu);
+      slut.setMinutes(0, 0, 0);
+      slut.setHours(slut.getHours() + 1);
+      const dagar = period === 'vecka' ? 7 : period === 'manad' ? 30 : 365;
+      const start = period === 'dag' ? new Date(nu.getFullYear(), nu.getMonth(), nu.getDate()) : new Date(nu.getTime() - dagar * 86400000);
+      start.setMinutes(0, 0, 0);
+      return { start: iso(start), end: iso(slut) };
+    }
+
+    class NyckelFel extends Error {}
+    async function hamta(vag: string, parametrar: Record<string, string | number | (string | number)[]>) {
+      const url = new URL(bas + vag);
+      for (const [k, v] of Object.entries(parametrar)) for (const x of Array.isArray(v) ? v : [v]) url.searchParams.append(k, String(x));
+      const svar = await fetch(url, { headers: { Authorization: `Bearer ${nyckel}` } });
+      if (svar.status === 401 || svar.status === 403) throw new NyckelFel();
+      if (!svar.ok) throw new Error(`GoatCounter svarade ${svar.status}`);
+      return svar.json();
+    }
+    async function allaHits(t: { start: string; end: string }) {
+      const ut: Hit[] = [];
+      for (let i = 0; i < 5; i++) {
+        const svar = await hamta('/api/v0/stats/hits', { ...t, limit: 200, ...(ut.length ? { exclude_paths: ut.map((h) => h.path_id) } : {}) });
+        ut.push(...(svar.hits ?? []));
+        if (!svar.more) break;
+      }
+      return ut;
+    }
+
+    // Sidans titel utan sajtens namn; händelsernas titlar är redan "Upprepad läsning: lathunden som pdf".
+    const utanSajt = (t: string) => (t || '').replace(/\s*·\s*Niclas Fohlin\s*$/, '').trim();
+    function kategorier(hits: Hit[]) {
+      const metoder = new Map<string, { namn: string; sida: number; lathund: number }>();
+      const filer = new Map<string, Rad>();
+      const k: Record<string, Rad[]> = { artiklar: [], bocker: [], utskrifter: [], ovriga: [] };
+      const metod = (id: string) => {
+        let x = metoder.get(id);
+        if (!x) { x = { namn: id, sida: 0, lathund: 0 }; metoder.set(id, x); }
+        return x;
+      };
+      for (const h of hits) {
+        const titel = utanSajt(h.title);
+        if (h.event) {
+          if (/^utskrift/.test(h.path)) { k.utskrifter.push({ namn: titel || h.path, antal: h.count }); continue; }
+          // Filerna hette först bara filnamnet (upprepad-lasning-lathund.pdf, drive-…); de slås ihop med fil:-namnen.
+          const nyckelFil = h.path.replace(/^fil:/, '').replace(/^drive-/, 'drive:');
+          if (/^fil:/.test(h.path) || /\.(pdf|docx|pptx)$/i.test(h.path)) {
+            const rad = filer.get(nyckelFil) ?? { namn: '', under: nyckelFil.replace(/^drive:/, 'Drive · '), antal: 0 };
+            rad.antal += h.count;
+            if (titel.includes(':') || !rad.namn) rad.namn = titel || nyckelFil;
+            filer.set(nyckelFil, rad);
+            continue;
+          }
+          k.ovriga.push({ namn: titel || h.path, under: h.path, antal: h.count });
+          continue;
+        }
+        let m = h.path.match(/^\/stodundervisning\/([^/]+)$/);
+        if (m) { const x = metod(m[1]); x.sida += h.count; if (titel) x.namn = titel; continue; }
+        m = h.path.match(/^\/stodundervisning\/([^/]+)\/lathund$/);
+        if (m) { const x = metod(m[1]); x.lathund += h.count; if (x.namn === m[1] && titel) x.namn = titel.replace(/^Lathund:\s*/, ''); continue; }
+        if (/^\/artiklar\/[^/]+$/.test(h.path)) { k.artiklar.push({ namn: titel || h.path, antal: h.count }); continue; }
+        if (/^\/bocker\/[^/]+$/.test(h.path)) { k.bocker.push({ namn: titel || h.path, antal: h.count }); continue; }
+        k.ovriga.push({ namn: titel || h.path, under: h.path, antal: h.count });
+      }
+      // En metod rankas efter besöken på metodsidan; lathundens besök står under namnet.
+      const metodRader: Rad[] = [...metoder.values()].map((x) => ({ namn: x.namn, under: x.lathund ? `och ${x.lathund} på lathunden` : undefined, antal: x.sida }));
+      return { metoder: metodRader, filer: [...filer.values()], ...k };
+    }
+
+    function lista(rader: Rad[], klass: string) {
+      const ol = document.createElement('ol');
+      ol.className = `stat-lista ${klass}`;
+      const storst = Math.max(1, ...rader.map((r) => r.antal));
+      for (const r of rader) {
+        const li = document.createElement('li');
+        const namn = document.createElement('span');
+        namn.className = 'stat-namn';
+        namn.textContent = r.namn;
+        const antal = document.createElement('span');
+        antal.className = 'stat-antal';
+        antal.textContent = String(r.antal);
+        li.append(namn, antal);
+        if (r.under) {
+          const under = document.createElement('span');
+          under.className = 'stat-under';
+          under.textContent = r.under;
+          li.append(under);
+        }
+        const stapel = document.createElement('span');
+        stapel.className = 'stat-stapel';
+        stapel.setAttribute('aria-hidden', 'true');
+        stapel.style.setProperty('--andel', String(r.antal / storst));
+        li.append(stapel);
+        ol.append(li);
+      }
+      return ol;
+    }
+
+    function visaKategori(namn: string, rader: Rad[]) {
+      const sektion = rot.querySelector(`[data-kategori="${namn}"]`) as HTMLElement;
+      const topp = Number(sektion.dataset.topp) || 3;
+      for (const el of [...sektion.children]) if (el.tagName !== 'H2') el.remove();
+      const sorterade = rader.filter((r) => r.antal > 0).sort((a, b) => b.antal - a.antal || a.namn.localeCompare(b.namn, 'sv'));
+      if (!sorterade.length) {
+        const p = document.createElement('p');
+        p.className = 'meta';
+        p.textContent = 'Inget i perioden.';
+        sektion.append(p);
+        return;
+      }
+      sektion.append(lista(sorterade.slice(0, topp), 'stat-topp'));
+      if (sorterade.length > topp) {
+        const detaljer = document.createElement('details');
+        const rubrik = document.createElement('summary');
+        rubrik.textContent = `Visa alla ${sorterade.length}`;
+        detaljer.append(rubrik, lista(sorterade, ''));
+        sektion.append(detaljer);
+      }
+    }
+
+    // Över tid, ur /stats/total: timmar i dag, dagar för 7 och 30 dagar och månader för året. GoatCounters besök,
+    // nedladdningarna inräknade, i sajtens tidszon i GoatCounter.
+    type Dag = { day: string; hourly?: number[]; daily?: number };
+    const VECKODAG = ['sön', 'mån', 'tis', 'ons', 'tors', 'fre', 'lör'];
+    const MANAD = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
+    const tva = (n: number) => String(n).padStart(2, '0');
+    const lokalDag = (d: Date) => `${d.getFullYear()}-${tva(d.getMonth() + 1)}-${tva(d.getDate())}`;
+    function visaDiagram(period: string, dagar: Dag[]) {
+      const diagram = rot.querySelector('[data-diagram]') as HTMLElement;
+      const axel = rot.querySelector('[data-axel]') as HTMLElement;
+      const text = rot.querySelector('[data-diagram-text]') as HTMLElement;
+      let staplar: { etikett: string; antal: number; namn: string }[] = [];
+      let enhet = 'dag';
+      if (period === 'dag') {
+        enhet = 'timme';
+        const idag = dagar.find((d) => d.day === lokalDag(new Date())) ?? dagar[dagar.length - 1];
+        const timmar = (idag?.hourly ?? []).slice(0, new Date().getHours() + 1);
+        staplar = timmar.map((n, i) => ({ etikett: i % 6 === 0 ? tva(i) : '', antal: n, namn: `klockan ${tva(i)}` }));
+      } else if (period === 'ar') {
+        enhet = 'månad';
+        const per = new Map<string, number>();
+        for (const d of dagar) per.set(d.day.slice(0, 7), (per.get(d.day.slice(0, 7)) ?? 0) + (d.daily ?? 0));
+        staplar = [...per].map(([k, n]) => {
+          const m = Number(k.slice(5, 7)) - 1;
+          return { etikett: MANAD[m], antal: n, namn: `${MANAD[m]} ${k.slice(0, 4)}` };
+        });
+      } else {
+        staplar = dagar.map((d, i) => {
+          const datum = new Date(`${d.day}T12:00:00`);
+          const etikett = period === 'vecka' ? VECKODAG[datum.getDay()] : i % 5 === 0 ? String(datum.getDate()) : '';
+          return { etikett, antal: d.daily ?? 0, namn: `${VECKODAG[datum.getDay()]} ${datum.getDate()} ${MANAD[datum.getMonth()]}` };
+        });
+      }
+      diagram.replaceChildren();
+      axel.replaceChildren();
+      const storst = Math.max(1, ...staplar.map((s) => s.antal));
+      for (const s of staplar) {
+        const stapel = document.createElement('span');
+        stapel.style.setProperty('--hojd', String(s.antal / storst));
+        stapel.title = `${s.namn}: ${s.antal}`;
+        diagram.append(stapel);
+        const etikett = document.createElement('span');
+        etikett.textContent = s.etikett;
+        axel.append(etikett);
+      }
+      const flest = staplar.reduce<(typeof staplar)[number] | undefined>((a, s) => (!a || s.antal > a.antal ? s : a), undefined);
+      const beskrivning = flest && flest.antal > 0 ? `Flest per ${enhet}: ${flest.antal}, ${flest.namn}.` : 'Inga besök i perioden.';
+      diagram.setAttribute('aria-label', `Besök och nedladdningar per ${enhet}. ${beskrivning}`);
+      text.textContent = beskrivning;
+    }
+
+    // Populäraste dagen och tiden, som i WordPress: veckodagen och timmen med flest besök i perioden och deras andel.
+    // Veckodagen visas inte för i dag.
+    const VECKODAG_LANG = ['söndag', 'måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lördag'];
+    function visaPopular(period: string, dagar: Dag[]) {
+      const ruta = rot.querySelector('[data-popular]') as HTMLElement;
+      const perDag = new Array<number>(7).fill(0);
+      const perTimme = new Array<number>(24).fill(0);
+      for (const d of dagar) {
+        perDag[new Date(`${d.day}T12:00:00`).getDay()] += d.daily ?? 0;
+        (d.hourly ?? []).forEach((n, h) => { if (h < 24) perTimme[h] += n; });
+      }
+      const summa = (a: number[]) => a.reduce((x, y) => x + y, 0);
+      const storsta = (a: number[]) => a.indexOf(Math.max(...a));
+      const rad = (rubrik: string, varde: string, andel: number, av: number) => {
+        const div = document.createElement('div');
+        const dt = document.createElement('dt');
+        dt.textContent = rubrik;
+        const dd = document.createElement('dd');
+        const del = document.createElement('span');
+        del.textContent = `${Math.round((100 * andel) / av)} % av besöken`;
+        dd.append(varde, del);
+        div.append(dt, dd);
+        return div;
+      };
+      ruta.replaceChildren();
+      if (period !== 'dag' && summa(perDag) > 0) {
+        const vd = storsta(perDag);
+        ruta.append(rad('Populäraste dagen', VECKODAG_LANG[vd], perDag[vd], summa(perDag)));
+      }
+      if (summa(perTimme) > 0) {
+        const h = storsta(perTimme);
+        ruta.append(rad('Populäraste tiden', `kl. ${tva(h)}–${tva((h + 1) % 24)}`, perTimme[h], summa(perTimme)));
+      }
+      ruta.hidden = !ruta.children.length;
+    }
+
+    // Mobil eller dator, ur GoatCounters skärmstorlekar (/stats/sizes) i tre grupper.
+    type Stat = { id?: string; name?: string; count: number };
+    const ENHET: Record<string, string> = { phone: 'Mobil', largephone: 'Mobil', tablet: 'Surfplatta', desktop: 'Dator', desktophd: 'Dator', unknown: 'Okänt' };
+    function enheter(stats: Stat[]): Rad[] {
+      const per = new Map<string, number>();
+      for (const s of stats) {
+        const n = s.name ?? '';
+        const namn = ENHET[(s.id ?? '').toLowerCase()] ?? (/phone/i.test(n) ? 'Mobil' : /tablet/i.test(n) ? 'Surfplatta' : /computer|monitor|desktop/i.test(n) ? 'Dator' : 'Okänt');
+        per.set(namn, (per.get(namn) ?? 0) + s.count);
+      }
+      return [...per].map(([namn, antal]) => ({ namn, antal }));
+    }
+
+    async function visa(period: string) {
+      for (const b of rot.querySelectorAll<HTMLButtonElement>('[data-period]')) b.setAttribute('aria-pressed', String(b.dataset.period === period));
+      skriv(PERIOD, period);
+      status.textContent = 'Hämtar …';
+      try {
+        const t = tider(period);
+        const [hits, total] = await Promise.all([allaHits(t), hamta('/api/v0/stats/total', t)]);
+        const k = kategorier(hits);
+        const handelser = total.total_events ?? 0;
+        summa.innerHTML = '';
+        const sidor = document.createElement('strong');
+        sidor.textContent = String((total.total ?? 0) - handelser);
+        const filer = document.createElement('strong');
+        filer.textContent = String(handelser);
+        summa.append(sidor, ' besök på sidorna · ', filer, ' nedladdningar och utskrifter');
+        for (const [namn, rader] of Object.entries(k)) visaKategori(namn, rader);
+        visaDiagram(period, total.stats ?? []);
+        visaPopular(period, total.stats ?? []);
+        // Varifrån besökarna kommer och vilken skärm de har: GoatCounters listor. Svarar en inte döljs dess ruta.
+        const extra = async (namn: string, vag: string, gor: (stats: Stat[]) => Rad[]) => {
+          const sektion = rot.querySelector(`[data-kategori="${namn}"]`) as HTMLElement;
+          try {
+            const svar = await hamta(vag, { ...t, limit: 20 });
+            sektion.hidden = false;
+            visaKategori(namn, gor(svar.stats ?? []));
+          } catch (e) {
+            if (e instanceof NyckelFel) throw e;
+            sektion.hidden = true;
+          }
+        };
+        await Promise.all([
+          extra('kallor', '/api/v0/stats/toprefs', (s) => s.map((x) => ({ namn: x.name || 'Direkt, utan hänvisning', antal: x.count }))),
+          extra('enheter', '/api/v0/stats/sizes', enheter),
+        ]);
+        const nu = new Date();
+        status.textContent = `Hämtat ${nu.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}.`;
+      } catch (e) {
+        if (e instanceof NyckelFel) { visaForm('Nyckeln fungerar inte. Skapa en ny med rätten Read statistics och klistra in den.'); return; }
+        status.textContent = `Det gick inte att hämta siffrorna: ${(e as Error).message}. Ladda om sidan och försök igen.`;
+      }
+    }
+
+    function visaForm(text = '') {
+      vy.hidden = true;
+      form.hidden = false;
+      status.textContent = text;
+      (form.querySelector('input') as HTMLInputElement).focus();
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const falt = form.querySelector('input') as HTMLInputElement;
+      nyckel = falt.value.trim();
+      if (!nyckel) return;
+      skriv(NYCKEL, nyckel);
+      falt.value = '';
+      form.hidden = true;
+      vy.hidden = false;
+      visa(las(PERIOD) || 'dag');
+    });
+    for (const b of rot.querySelectorAll<HTMLButtonElement>('[data-period]')) b.addEventListener('click', () => visa(b.dataset.period ?? 'dag'));
+    (rot.querySelector('[data-glom]') as HTMLButtonElement).addEventListener('click', () => { nyckel = ''; skriv(NYCKEL, ''); visaForm(); });
+
+    if (!bas) status.textContent = 'Besöksstatistiken är avstängd (site.statistik är tom).';
+    else if (nyckel) { vy.hidden = false; visa(las(PERIOD) || 'dag'); }
+    else visaForm();
+  </script>
+</Base>

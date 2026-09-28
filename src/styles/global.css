@@ -244,6 +244,47 @@ form.prenumerera { display: grid; gap: 0.75rem; max-width: 28rem; font-family: v
 form.prenumerera input[type="email"] { font: inherit; padding: 0.6rem 0.8rem; border: 1px solid var(--farg-kant); border-radius: 6px; }
 form.prenumerera button { font: inherit; font-weight: 600; min-height: 2.75rem; padding: 0.6rem 1.1rem; border: 0; border-radius: 6px; background: var(--farg-accent); color: white; cursor: pointer; }
 form.prenumerera button:hover { background: var(--farg-accent-mork); }
+
+/* Statistiken (/statistik, bara för Niclas): kategorierna som rutor med topplistor, antalet till höger och en tunn
+   stapel under varje rad i förhållande till kategorins största. */
+.statistik { max-width: 44rem; font-family: var(--typsnitt-ui); }
+.stat-nyckel { display: grid; gap: 0.75rem; max-width: 28rem; margin: 0 0 1rem; }
+.stat-nyckel input { font: inherit; padding: 0.6rem 0.8rem; border: 1px solid var(--farg-kant); border-radius: 6px; }
+.stat-nyckel button { font: inherit; font-weight: 600; min-height: 2.75rem; padding: 0.6rem 1.1rem; border: 0; border-radius: 6px; background: var(--farg-accent); color: #fff; cursor: pointer; }
+.stat-perioder { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.4rem; max-width: 30rem; margin: 0 0 1rem; }
+.stat-perioder button { font: inherit; font-weight: 600; min-height: 2.75rem; padding: 0.4rem 0.3rem; white-space: nowrap; border: 1.5px solid var(--farg-accent); border-radius: 6px; background: var(--farg-yta); color: var(--farg-accent); cursor: pointer; }
+.stat-perioder button[aria-pressed="true"] { background: var(--farg-accent); color: #fff; }
+.stat-summa { margin: 0 0 1.25rem; font-size: 1rem; }
+.stat-summa strong { font-size: 1.5rem; font-variant-numeric: tabular-nums; }
+.stat-kategori { background: var(--farg-yta); border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0.9rem 1.1rem; margin: 0 0 1rem; }
+.stat-kategori h2 { font-size: 1.1rem; margin: 0 0 0.5rem; }
+.stat-kategori .meta { margin: 0; }
+.stat-lista { list-style: none; margin: 0; padding: 0; counter-reset: plats; }
+.stat-lista li { counter-increment: plats; display: grid; grid-template-columns: 1.75rem minmax(0, 1fr) auto; column-gap: 0.6rem; align-items: baseline; padding: 0.55rem 0 0.45rem; border-top: 1px solid var(--farg-kant); }
+.stat-lista li:first-child { border-top: 0; }
+.stat-lista li::before { content: counter(plats); grid-row: 1; font-weight: 700; color: var(--farg-accent); font-variant-numeric: tabular-nums; }
+.stat-topp li::before { font-size: 1.2rem; }
+.stat-namn { grid-column: 2; font-weight: 600; overflow-wrap: anywhere; }
+.stat-antal { grid-column: 3; grid-row: 1; font-weight: 700; font-variant-numeric: tabular-nums; }
+.stat-under { grid-column: 2 / 4; font-size: 0.85rem; color: var(--farg-text-svag); overflow-wrap: anywhere; }
+.stat-stapel { grid-column: 2 / 4; height: 4px; margin-top: 0.35rem; border-radius: 2px; background: linear-gradient(to right, var(--farg-accent) calc(var(--andel, 0) * 100%), var(--farg-ton) 0); }
+.stat-kategori details { margin-top: 0.25rem; }
+.stat-kategori summary { display: flex; align-items: center; min-height: 2.75rem; color: var(--farg-accent); font-weight: 600; cursor: pointer; }
+.stat-kategori details .stat-lista li { padding: 0.4rem 0 0.35rem; font-size: 0.95rem; }
+/* Över tid: en stapel per timme, dag eller månad, i förhållande till periodens största; etiketterna under. */
+.stat-diagram { display: flex; align-items: flex-end; gap: 2px; height: 7rem; border-bottom: 1px solid var(--farg-kant); }
+.stat-diagram span { flex: 1 1 0; min-width: 2px; height: calc(var(--hojd, 0) * 100%); min-height: 1px; background: var(--farg-accent); border-radius: 2px 2px 0 0; }
+.stat-axel { display: flex; gap: 2px; margin-top: 0.3rem; font-size: 0.75rem; color: var(--farg-text-svag); }
+.stat-axel span { flex: 1 1 0; min-width: 2px; text-align: center; white-space: nowrap; overflow: visible; }
+.stat-diagram-text { margin-top: 0.5rem; }
+/* Populäraste dagen och tiden under diagrammet, två rutor bredvid varandra. */
+.stat-popular { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 0.6rem; margin: 0.75rem 0 0; }
+.stat-popular div { background: var(--farg-ton-svag); border: 1px solid var(--farg-kant); border-radius: 6px; padding: 0.55rem 0.8rem; }
+.stat-popular dt { font-size: 0.85rem; color: var(--farg-text-svag); }
+.stat-popular dd { margin: 0.15rem 0 0; font-size: 1.2rem; font-weight: 700; }
+.stat-popular dd span { display: block; font-size: 0.85rem; font-weight: 400; color: var(--farg-text-svag); }
+.stat-fot { margin-top: 1.25rem; }
+.stat-lank { font: inherit; color: var(--farg-accent); background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; }
 .honung { position: absolute; left: -9999px; }
 
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

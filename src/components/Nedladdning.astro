@@ -7,8 +7,9 @@
 import Filval from './Filval.astro';
 import { site } from '../data/site';
 // ramar: namnet på metodens ramar (läslistorna, berättelseramarna) när de ligger i planeringsmallarna, så att knappen säger det.
-interface Props { id: string; harMallar: boolean; harLathund: boolean; ramar?: string }
-const { id, harMallar, harLathund, ramar } = Astro.props;
+// titel: metodens titel, för besöksstatistiken ("Upprepad läsning: lathunden som pdf").
+interface Props { id: string; titel: string; harMallar: boolean; harLathund: boolean; ramar?: string }
+const { id, titel, harMallar, harLathund, ramar } = Astro.props;
 const drive = Boolean(site.driveKlientId);
 const delar = ['metodbeskrivningen', harMallar && 'planeringsmallarna', harLathund && 'lathunden'].filter(Boolean) as string[];
 const delarText = delar.length > 1 ? `${delar.slice(0, -1).join(', ')} och ${delar[delar.length - 1]}` : delar[0];
@@ -19,12 +20,12 @@ const bas = `/stodundervisning/${id}`;
   {harLathund && <p>Lathunden är fyra sidor att ha bredvid sig under passet, med egen utskrift i liggande A4.</p>}
   <ul class="nedladdning-lista">
     {harLathund && <li><a class="knapp" href={`${bas}/lathund`}>Öppna lathunden</a></li>}
-    <li class="bara-js"><button type="button" class={harLathund ? 'knapp sekundar' : 'knapp'} data-skriv-ut data-goatcounter-click={`utskrift-${id}`} data-goatcounter-title="Skriv ut hela beskrivningen">Skriv ut hela beskrivningen</button></li>
+    <li class="bara-js"><button type="button" class={harLathund ? 'knapp sekundar' : 'knapp'} data-skriv-ut data-goatcounter-click={`utskrift:${id}`} data-goatcounter-title={`${titel}: utskrift av hela beskrivningen`}>Skriv ut hela beskrivningen</button></li>
   </ul>
   <ul class="filrader">
-    <li><span class="filrubrik">Allt om metoden</span> <Filval fil={bas} namn={id} rubrik="Allt om metoden" /></li>
-    {harLathund && <li><span class="filrubrik">Bara lathunden</span> <Filval fil={`${bas}-lathund`} namn={`${id}-lathund`} rubrik="Lathunden" pdf pptx /></li>}
-    {harMallar && <li><span class="filrubrik">Bara planeringsmallarna{ramar && ` och ${ramar}`}</span> <Filval fil={`${bas}-mallar`} namn={`${id}-mallar`} rubrik="Planeringsmallarna" /></li>}
+    <li><span class="filrubrik">Allt om metoden</span> <Filval fil={bas} namn={id} rubrik="Allt om metoden" statistik={`${titel}: allt om metoden`} /></li>
+    {harLathund && <li><span class="filrubrik">Bara lathunden</span> <Filval fil={`${bas}-lathund`} namn={`${id}-lathund`} rubrik="Lathunden" statistik={`${titel}: lathunden`} pdf pptx /></li>}
+    {harMallar && <li><span class="filrubrik">Bara planeringsmallarna{ramar && ` och ${ramar}`}</span> <Filval fil={`${bas}-mallar`} namn={`${id}-mallar`} rubrik="Planeringsmallarna" statistik={`${titel}: planeringsmallarna`} /></li>}
   </ul>
   <p class="meta">Utskriften kan också sparas som pdf: välj Spara som PDF i utskriftsrutan. Allt om metoden: {delarText}. Alla filer bär © Niclas Fohlin.{harLathund && ' Lathunden finns också som PowerPoint med fyra bilder, att visa på tavlan eller ha i telefonen.'}{drive && ` Drive sparar en kopia i din egen Google Drive${harLathund ? ': lathunden som presentation, det andra som Word' : ''}.`}</p>
 </aside>
