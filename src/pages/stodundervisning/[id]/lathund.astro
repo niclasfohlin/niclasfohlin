@@ -27,7 +27,7 @@ const forSteg = passOrd(d).forSteg;
       <p class="lathund-knappar">
         {/* Utskriften är alltid pdf:en, lathunden i A4 liggande ur PowerPoint-koden: fyra sidor kant till kant. Knappen öppnar
             den; där webbläsaren kan skriva ut den direkt heter knappen Skriv ut och öppnar utskriftsrutan (skriptet nedan). */}
-        <a class="knapp" href={`/stodundervisning/${m.id}-lathund.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf>Öppna pdf:en för utskrift (fyra sidor)</a>
+        <a class="knapp" href={`/stodundervisning/${m.id}-lathund.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-goatcounter-click={`utskrift-${m.id}-lathund`} data-goatcounter-title="Skriv ut lathunden">Öppna pdf:en för utskrift (fyra sidor)</a>
         {' '}<Filval fil={`/stodundervisning/${m.id}-lathund`} namn={`${m.id}-lathund`} rubrik="Lathunden" pdf pptx />
       </p>
       <nav class="metod-nav lathund-nav" aria-label="Lathundens sidor">

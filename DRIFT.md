@@ -97,6 +97,23 @@ Anropen är desamma som Netlifys panel använder: `/api/v1/niclas-fohlin/billing
 
 **Trafiken 2026-09-27.** Ett dygn gav 28 700 anrop och 500 MB, omkring 16 krediter. Facebooks bildhämtare (`facebookexternalhit`) hämtade delningsbilden 6 131 gånger, 260 MB, eftersom Netlify skickade `Cache-Control: max-age=0` och Facebook då hämtar bilden på nytt. Riktiga läsare stod för omkring 2 000 sidvisningar, bland annat från Facebook och kommunernas intranät. Samma dag fick bilderna, typsnitten, delningskorten och filerna under `/_astro/` cache i `netlify.toml`, bilderna krymptes till sitt syfte och varje sida fick ett eget delningskort. Den gamla delningsbilden `/images/niclas-fohlin-delning.jpg` ligger kvar för inlägg som redan är delade.
 
+**Planen och påfyllningen** (Netlifys prissida 2026-09-28). Sajten ligger på Personal, 9 dollar i månaden med 1 000 krediter, och Observability sparar trafiken ett dygn: en fråga om en vecka ger samma siffror som dygnet, och äldre fönster svarar `requested window out of bounds`. Automatisk påfyllning på Personal är 500 krediter för 5 dollar, köpta först när saldot tar slut. Pro, 20 dollar i månaden, ger 3 000 krediter och 30 dagars statistik. Valet är Niclas.
+
+**Trafiken 2026-09-28**, dygnet efter att Upprepad läsning delades på Facebook: 19 000 anrop och 347 MB, omkring 11 krediter. Metodsidan hade omkring 1 150 visningar, lathundens pdf 252 och Word-filen 156 nedladdningar, och de flesta besökarna kom från Facebook (länkar med `fbclid` och omkring 730 sidladdningar från facebook.com). Nästan allt är riktiga läsare.
+
+## Besöksstatistik
+
+Besök och nedladdningar räknas i GoatCounter (Niclas 2026-09-28: statistik som i WordPress, med dag, vecka och månad), utan kakor och utan personuppgifter. Kontot är Niclas, skapat med niclas.fohlin@gmail.com, och statistiken står på https://niclasfohlin.goatcounter.com, där han loggar in. Räkningen går till GoatCounter och drar inga Netlify-krediter; skriptet (`count.js`, 9 kB) hämtas också därifrån.
+
+| Vad | Var |
+|---|---|
+| Adressen som tar emot räkningen; tom stänger av allt | `statistik` i `src/data/site.ts` |
+| Skriptet och raden om räkningen i sidfoten | `src/layouts/Base.astro` |
+| Nedladdningar som händelser, med filens namn (`upprepad-lasning-lathund.pdf`, `drive-…` för Drive) | `data-goatcounter-click` i `src/components/Filval.astro` och på textlänkarna till planeringsmallarna i `Metod.astro` |
+| Utskrifter (`utskrift-<id>`, `utskrift-<id>-lathund`) och valda metoder i metodbanken (`valda-metoder.docx`) | `Nedladdning.astro`, `src/pages/stodundervisning/[id]/lathund.astro`, `src/pages/stodundervisning/index.astro` |
+
+Det som inte räknas: robotar och Facebooks förhandsvisningar (det vill vi), besökare vars annonsblockerare stoppar GoatCounter, och filer som öppnas direkt från en delad länk utan att gå via en knapp. Serverns siffror, med robotarna och det senaste dygnet, står kvar i `npm run krediter -- trafik`. `count.js` räknar inte på localhost, så `npm run dev`, metodprovet och delningskorten syns inte i statistiken. En ny knapp eller länk till en fil räknas när den får `data-goatcounter-click` med filens namn; händelsens namn får inte börja med `/`.
+
 ## Delning och bilder
 
 Varje sida har ett eget delningskort, 1200 × 630, som Facebook, LinkedIn, X med flera visar när sidan delas: sidans titel, en rad om vad det är (Stödundervisning · Matematik · åk 4–6, Krönika · Vi Lärare · 2024, Bok · Studentlitteratur · 2021) och Niclas porträtt, eller omslaget för en bok. Korten görs ur samma uppgifter som sidan: `src/lib/delningskort.ts` med mallen `src/pages/delning/kort/[namn].astro`, huvudsidornas titlar och beskrivningar i `src/data/site.ts` och färgerna och typsnittet ur `global.css`. `Base.astro` sätter `og:image` med mått och alt-text; en sida utan eget kort, som lathunden eller en taggsida, får närmaste överordnade sidas.

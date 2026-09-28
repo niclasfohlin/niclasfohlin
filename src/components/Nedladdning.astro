@@ -19,7 +19,7 @@ const bas = `/stodundervisning/${id}`;
   {harLathund && <p>Lathunden är fyra sidor att ha bredvid sig under passet, med egen utskrift i liggande A4.</p>}
   <ul class="nedladdning-lista">
     {harLathund && <li><a class="knapp" href={`${bas}/lathund`}>Öppna lathunden</a></li>}
-    <li class="bara-js"><button type="button" class={harLathund ? 'knapp sekundar' : 'knapp'} data-skriv-ut>Skriv ut hela beskrivningen</button></li>
+    <li class="bara-js"><button type="button" class={harLathund ? 'knapp sekundar' : 'knapp'} data-skriv-ut data-goatcounter-click={`utskrift-${id}`} data-goatcounter-title="Skriv ut hela beskrivningen">Skriv ut hela beskrivningen</button></li>
   </ul>
   <ul class="filrader">
     <li><span class="filrubrik">Allt om metoden</span> <Filval fil={bas} namn={id} rubrik="Allt om metoden" /></li>

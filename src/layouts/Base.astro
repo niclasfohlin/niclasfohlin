@@ -41,6 +41,9 @@ function aktiv(href: string) {
       // Chromium (Chrome, Edge) ritar utskriftens sidfot som marginalruta; andra får .tryck-fot.
       if (navigator.userAgentData) document.documentElement.classList.add('marginalrutor');
     </script>
+    {/* Besöksstatistiken (site.statistik, DRIFT.md under Besöksstatistik): räknar inte på localhost, alltså inte i
+        npm run dev, metodprovet eller delningskorten. Klick på element med data-goatcounter-click räknas som händelser. */}
+    {site.statistik && <script is:inline async data-goatcounter={site.statistik} src="https://gc.zgo.at/count.js"></script>}
     <title>{fullTitel}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical.href} />
@@ -86,6 +89,7 @@ function aktiv(href: string) {
         <li><a href="/om">Om Niclas</a></li>
       </ul>
       <p class="sidfot-rad">© {new Date().getFullYear()} {site.namn}. Texterna är publicerade i Vi Lärare och andra tidningar först; varje text länkar till originalet.</p>
+      {site.statistik && <p class="sidfot-rad">Besöken räknas med <a href="https://www.goatcounter.com">GoatCounter</a>, utan kakor och utan personuppgifter.</p>}
     </footer>
   </body>
 </html>
