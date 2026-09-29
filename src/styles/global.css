@@ -382,19 +382,35 @@ button.lank:hover { color: var(--farg-accent); }
 .delning a:hover, .delning button:hover { background: var(--farg-accent-ljus); color: var(--farg-accent-mork); }
 .delning svg { flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .delning-besked { margin: 0.5rem 0 0; color: var(--farg-text-svag); overflow-wrap: anywhere; }
-.delning-besked:empty { display: none; }
+/* Tom statusrad tar ingen plats men finns kvar, så att skärmläsaren läser beskedet när det kommer. */
+.delning-besked:empty { margin: 0; }
 .delning.fot { margin-top: 2rem; }
 .metod-topp:has(> .delning) { grid-template-areas: "huvud" "fakta" "dela" "ladda"; }
 .metod-topp > .delning { grid-area: dela; }
+/* Pekskärm: knappar som är minst 44 punkter höga. */
+@media (pointer: coarse) {
+  .delning a, .delning button { min-height: 2.75rem; }
+}
 /* Telefonen på högkant: högst två rader. Tre knappar i bredd med ikonen över ordet, så att också Kopiera länk
-   ryms på en smal skärm. Fyra knappar (en app utan telefonens delningsmeny) blir två och två med ikonen bredvid. */
+   ryms på en smal skärm, och raderna lika höga när ett ord bryts. Fyra knappar (en app utan telefonens
+   delningsmeny) blir två och två med ikonen bredvid. */
 @media (max-width: 40rem) {
-  .delning ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .delning ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 1fr; }
+  .delning span { overflow-wrap: anywhere; }
   .delning li { display: flex; }
   .delning a, .delning button { flex: 1; flex-direction: column; justify-content: center; gap: 0.2rem; min-height: 3.5rem; padding: 0.4rem 0.25rem; font-size: 0.8rem; line-height: 1.15; text-align: center; }
   .delning svg { width: 18px; height: 18px; }
   .delning[data-antal="4"] ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .delning[data-antal="4"] a, .delning[data-antal="4"] button { flex-direction: row; gap: 0.4rem; min-height: 2.75rem; }
+}
+/* Förstorad sida (zoom 150 procent och mer på en telefon): två knappar i bredd, och under 12rem en, hellre fler
+   rader än knappar som går in i varandra (granskningen 2026-09-29). */
+@media (max-width: 17rem) {
+  .delning ul, .delning[data-antal="4"] ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 12rem) {
+  .delning ul, .delning[data-antal="4"] ul { grid-template-columns: minmax(0, 1fr); }
+  .delning a, .delning button { flex-direction: row; gap: 0.4rem; min-height: 2.75rem; }
 }
 @media (min-width: 56rem) {
   .metod-topp:has(> .delning) { grid-template-areas: "huvud fakta" "dela fakta" "ladda fakta"; }

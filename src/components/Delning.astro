@@ -5,8 +5,8 @@
 // skriptet läser sidans adress, titel, ingress och delningskort ur sidhuvudet (canonical, og:title,
 // description, og:image), så att nya sidor får raden automatiskt utan egna uppgifter.
 // Facebook, LinkedIn och Mejl är vanliga länkar som fungerar utan JavaScript och utan skript från Facebook.
-// Facebook och LinkedIn tar bara emot länken och visar sidans delningskort; egen text går inte att fylla i där
-// (så gäller det i september 2026, DRIFT.md under Delningsraden). På telefonen kan LinkedIns länk öppna mobilsidan
+// Facebooks länk tar bara u och LinkedIns share-offsite bara url, och båda visar sidans delningskort (så gäller
+// det i september 2026, DRIFT.md under Delningsraden). På telefonen kan LinkedIns länk öppna mobilsidan
 // i stället för appen; appen nås genom Fler appar, där titeln följer med. Knappen gick en stund till telefonens
 // meny, men då blev den samma sak som Fler appar (Niclas 2026-09-29, K-091). Kopiera länk, Instagram
 // (delningskortet som bild, på telefon) och Fler appar (telefonens egen meny) visas bara där webbläsaren klarar dem.
@@ -33,7 +33,7 @@ const knappar = [
   { kanal: 'fler', ord: 'Fler appar' },
 ];
 ---
-<section class:list={['delning', plats]} aria-labelledby={rubrik} data-delning>
+<section class:list={['delning', plats]} data-delning>
   <h2 id={rubrik}>Dela</h2>
   <ul>
     {knappar.map(({ kanal, ord, href }) => href ? (
@@ -62,9 +62,20 @@ const knappar = [
     instagram: pekskarm && Boolean(navigator.canShare?.({ files: [new File([''], 'prov.jpg', { type: 'image/jpeg' })] })),
   };
   // Instagram tar inte emot länkar från webben: knappen delar delningskortet som bild och lägger länken i
-  // urklipp, så att den kan läggas in med klistermärket Länk. Bilden hämtas först när någon trycker.
+  // urklipp, så att den kan läggas in med klistermärket Länk i en berättelse. Bilden hämtas först när någon
+  // trycker, och en hämtning som misslyckas kan göras om vid nästa tryck.
   let fil: Promise<File> | undefined;
-  const hamta = () => (fil ??= fetch(bild).then((svar) => svar.blob()).then((blob) => new File([blob], 'niclasfohlin.jpg', { type: 'image/jpeg' })));
+  let lankKopierad = false;
+  const hamta = () => (fil ??= fetch(bild)
+    .then((svar) => {
+      if (!svar.ok) throw new Error(`bilden svarade ${svar.status}`);
+      return svar.blob();
+    })
+    .then((blob) => new File([blob], blob.type === 'image/png' ? 'niclasfohlin.png' : 'niclasfohlin.jpg', { type: blob.type || 'image/jpeg' }))
+    .catch((fel) => {
+      fil = undefined;
+      throw fel;
+    }));
   // Urklippet: webbläsarens vanliga väg, annars den äldre för appar som stänger den för skript (webbläsaren inne i
   // Facebooks app på Android och liknande). Går ingen av dem visar raden länken, så att den går att markera.
   const kopiera = async (text: string) => {
@@ -72,15 +83,19 @@ const knappar = [
       await navigator.clipboard.writeText(text);
       return true;
     } catch {
+      // Fokus går tillbaka till knappen efteråt, så att den som använder tangentbordet inte tappar platsen.
+      const fokus = document.activeElement as HTMLElement | null;
       const falt = document.createElement('textarea');
       falt.value = text;
       falt.setAttribute('readonly', '');
       falt.style.cssText = 'position:fixed;top:0;opacity:0';
       document.body.append(falt);
       falt.select();
+      falt.setSelectionRange(0, text.length);
       let ok = false;
       try { ok = document.execCommand('copy'); } catch { ok = false; }
       falt.remove();
+      fokus?.focus();
       return ok;
     }
   };
@@ -104,11 +119,14 @@ const knappar = [
         if (kanal === 'kopiera') visa((await kopiera(url)) ? 'Länken är kopierad.' : `Markera och kopiera länken: ${url}`);
         if (kanal === 'fler') navigator.share({ title: titel, text: titel, url }).catch(() => {});
         if (kanal === 'instagram') {
-          visa((await kopiera(url)) ? 'Länken är kopierad. Lägg in den med klistermärket Länk.' : `Lägg in länken med klistermärket Länk: ${url}`);
+          // Andra trycket väntar inte på urklippet igen, så att delningen hinner starta medan trycket gäller.
+          if (!lankKopierad) lankKopierad = await kopiera(url);
+          visa(lankKopierad ? 'Länken är kopierad. Välj berättelse i Instagram och lägg in länken med klistermärket Länk.' : `Välj berättelse i Instagram och lägg in länken med klistermärket Länk: ${url}`);
           try {
             await navigator.share({ files: [await hamta()] });
           } catch (fel) {
             if (fel instanceof DOMException && fel.name === 'NotAllowedError') visa('Tryck på Instagram en gång till.');
+            else if (!(fel instanceof DOMException && fel.name === 'AbortError')) visa('Bilden gick inte att hämta. Tryck på Instagram igen.');
           }
         }
       });

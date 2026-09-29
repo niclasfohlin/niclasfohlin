@@ -10,10 +10,10 @@ import { site } from '../data/site';
 const bas = (site.statistik ?? '').replace(/\/count$/, '');
 ---
 
-<Base title="Statistik" description="Besök och nedladdningar på niclasfohlin.se." dold>
+<Base title="Statistik" description="Besök, nedladdningar och delningar på niclasfohlin.se." dold>
   <article class="statistik" id="statistik" data-bas={bas}>
     <h1>Statistik</h1>
-    <p class="ingress">Besök och nedladdningar ur GoatCounter, ordnade som sajten: metoderna, filerna, artiklarna och böckerna.</p>
+    <p class="ingress">Besök, nedladdningar och delningar ur GoatCounter, ordnade som sajten: metoderna, filerna, delningarna, artiklarna och böckerna. En delning räknas när någon trycker på en knapp i raden Dela, också om hen sedan avbryter.</p>
 
     <noscript><p>Sidan hämtar siffrorna med JavaScript.</p></noscript>
 
@@ -245,7 +245,7 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
     }
 
     // Över tid, ur /stats/total: timmar i dag, dagar för 7 och 30 dagar och månader för året. GoatCounters besök,
-    // nedladdningarna inräknade, i sajtens tidszon i GoatCounter.
+    // nedladdningarna och trycken på Dela inräknade, i sajtens tidszon i GoatCounter.
     type Dag = { day: string; hourly?: number[]; daily?: number };
     const VECKODAG = ['sön', 'mån', 'tis', 'ons', 'tors', 'fre', 'lör'];
     const MANAD = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
@@ -291,7 +291,7 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
       }
       const flest = staplar.reduce<(typeof staplar)[number] | undefined>((a, s) => (!a || s.antal > a.antal ? s : a), undefined);
       const beskrivning = flest && flest.antal > 0 ? `Flest per ${enhet}: ${flest.antal}, ${flest.namn}.` : 'Inga besök i perioden.';
-      diagram.setAttribute('aria-label', `Besök och nedladdningar per ${enhet}. ${beskrivning}`);
+      diagram.setAttribute('aria-label', `Besök, nedladdningar och delningar per ${enhet}. ${beskrivning}`);
       text.textContent = beskrivning;
     }
 
@@ -360,7 +360,7 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
         filer.textContent = String(Math.max(0, handelser - delade));
         const delat = document.createElement('strong');
         delat.textContent = String(delade);
-        summa.append(sidor, ' besök på sidorna · ', filer, ' nedladdningar och utskrifter · ', delat, ' delningar');
+        summa.append(sidor, ' besök på sidorna · ', filer, ' nedladdningar och utskrifter · ', delat, ' tryck på Dela');
         for (const [namn, rader] of Object.entries(k)) visaKategori(namn, rader);
         visaDiagram(period, total.stats ?? []);
         visaPopular(period, total.stats ?? []);
