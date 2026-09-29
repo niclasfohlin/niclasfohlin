@@ -110,18 +110,61 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
     }
 
     class NyckelFel extends Error {}
-    async function hamta(vag: string, parametrar: Record<string, string | number | (string | number)[]>) {
+    // GoatCounter tar emot 4 anrop per sekund, och före varje anrop med nyckeln gör webbläsaren en förfrågan
+    // (preflight) som också räknas. Stoppas förfrågan svarar GoatCounter 429, och då säger webbläsaren bara
+    // Failed to fetch (7 dagar, 30 dagar och år 2026-09-29, K-094). Anropen går därför ett i taget med
+    // MELLANRUM mellan sig, så att högst två anrop och deras förfrågningar hamnar i samma sekund, ett anrop som
+    // stoppas görs om efter en dryg sekund, och svaren sparas i fem minuter, så att bytet mellan perioderna inte
+    // kostar nya anrop.
+    const MELLANRUM = 650;
+    const sov = (ms: number) => new Promise((klar) => setTimeout(klar, ms));
+    let tur: Promise<void> = Promise.resolve();
+    let senast = 0;
+    const sparade = new Map<string, { tid: number; json: unknown }>();
+    // Ett anrop för en period som läsaren redan lämnat görs inte och tar ingen plats i kön (korning i visa), så att
+    // den period som läsaren valde sist kommer fram fort.
+    class Avbruten extends Error {}
+    function iTur(aktuell: () => boolean) {
+      const min = tur.then(async () => {
+        if (!aktuell()) return false;
+        const vanta = senast + MELLANRUM - Date.now();
+        if (vanta > 0) await sov(vanta);
+        if (!aktuell()) return false;
+        senast = Date.now();
+        return true;
+      });
+      tur = min.then(() => undefined);
+      return min;
+    }
+    // Svaret har olika form per anrop (hits, total, toprefs, sizes) och läses fält för fält där det används.
+    async function hamta(vag: string, parametrar: Record<string, string | number | (string | number)[]>, aktuell = () => true): Promise<any> {
       const url = new URL(bas + vag);
       for (const [k, v] of Object.entries(parametrar)) for (const x of Array.isArray(v) ? v : [v]) url.searchParams.append(k, String(x));
-      const svar = await fetch(url, { headers: { Authorization: `Bearer ${nyckel}` } });
-      if (svar.status === 401 || svar.status === 403) throw new NyckelFel();
-      if (!svar.ok) throw new Error(`GoatCounter svarade ${svar.status}`);
-      return svar.json();
+      const sparat = sparade.get(url.href);
+      if (sparat && Date.now() - sparat.tid < 5 * 60 * 1000) return sparat.json;
+      for (let forsok = 1; ; forsok++) {
+        if (!(await iTur(aktuell))) throw new Avbruten();
+        let svar: Response;
+        try {
+          svar = await fetch(url, { headers: { Authorization: `Bearer ${nyckel}` } });
+        } catch (fel) {
+          // Förfrågan stoppades av gränsen, eller nätet svarade inte: försök igen, högst fyra gånger.
+          if (forsok < 4) { await sov(1100); continue; }
+          throw fel;
+        }
+        if (svar.status === 429 && forsok < 4) { await sov(1100); continue; }
+        if (svar.status === 401 || svar.status === 403) throw new NyckelFel();
+        if (!svar.ok) throw new Error(`GoatCounter svarade ${svar.status}`);
+        const json = await svar.json();
+        sparade.set(url.href, { tid: Date.now(), json });
+        return json;
+      }
     }
-    async function allaHits(t: { start: string; end: string }) {
+    // Sidorna och händelserna i perioden, 100 i taget (GoatCounters största limit, api.json), högst 500.
+    async function allaHits(t: { start: string; end: string }, aktuell: () => boolean) {
       const ut: Hit[] = [];
       for (let i = 0; i < 5; i++) {
-        const svar = await hamta('/api/v0/stats/hits', { ...t, limit: 200, ...(ut.length ? { exclude_paths: ut.map((h) => h.path_id) } : {}) });
+        const svar = await hamta('/api/v0/stats/hits', { ...t, limit: 100, ...(ut.length ? { exclude_paths: ut.map((h) => h.path_id) } : {}) }, aktuell);
         ut.push(...(svar.hits ?? []));
         if (!svar.more) break;
       }
@@ -344,13 +387,18 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
       return [...per].map(([namn, antal]) => ({ namn, antal }));
     }
 
+    // Byter läsaren period medan siffrorna hämtas visas bara den senast valda (korning).
+    let korning = 0;
     async function visa(period: string) {
+      const denna = ++korning;
+      const aktuell = () => denna === korning;
       for (const b of rot.querySelectorAll<HTMLButtonElement>('[data-period]')) b.setAttribute('aria-pressed', String(b.dataset.period === period));
       skriv(PERIOD, period);
       status.textContent = 'Hämtar …';
       try {
         const t = tider(period);
-        const [hits, total] = await Promise.all([allaHits(t), hamta('/api/v0/stats/total', t)]);
+        const [hits, total] = await Promise.all([allaHits(t, aktuell), hamta('/api/v0/stats/total', t, aktuell)]);
+        if (denna !== korning) return;
         const { rader: k, delade } = kategorier(hits);
         const handelser = total.total_events ?? 0;
         summa.innerHTML = '';
@@ -368,11 +416,13 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
         const extra = async (namn: string, vag: string, gor: (stats: Stat[]) => Rad[]) => {
           const sektion = rot.querySelector(`[data-kategori="${namn}"]`) as HTMLElement;
           try {
-            const svar = await hamta(vag, { ...t, limit: 20 });
+            const svar = await hamta(vag, { ...t, limit: 20 }, aktuell);
+            if (denna !== korning) return;
             sektion.hidden = false;
             visaKategori(namn, gor(svar.stats ?? []));
           } catch (e) {
             if (e instanceof NyckelFel) throw e;
+            if (denna !== korning) return;
             sektion.hidden = true;
           }
         };
@@ -380,9 +430,11 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
           extra('kallor', '/api/v0/stats/toprefs', (s) => s.map((x) => ({ namn: x.name || 'Direkt, utan hänvisning', antal: x.count }))),
           extra('enheter', '/api/v0/stats/sizes', enheter),
         ]);
+        if (denna !== korning) return;
         const nu = new Date();
         status.textContent = `Hämtat ${nu.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}.`;
       } catch (e) {
+        if (denna !== korning) return;
         if (e instanceof NyckelFel) { visaForm('Nyckeln fungerar inte. Skapa en ny med rätten Read statistics och klistra in den.'); return; }
         status.textContent = `Det gick inte att hämta siffrorna: ${(e as Error).message}. Ladda om sidan och försök igen.`;
       }
