@@ -641,6 +641,12 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-bage { white-space: nowrap; padding-bottom: 0.32em; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath d='M2 2 Q50 38 98 2' fill='none' stroke='%232e6db4' stroke-width='2' stroke-linecap='round' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") no-repeat left bottom / 100% 0.42em; }
 /* Kortet utan stöd bryts mellan samma ordgrupper som kortet med stöd, så att raderna känns igen när stödet tas bort. */
 .m-laskort-grupp { white-space: nowrap; }
+/* Förstorad sida (150 procent på en telefon, under 17rem): en ordgrupp får brytas, med en båge under varje radbit, hellre
+   än att sidan blir bredare än skärmen (K-093, granskningen av delningsraden 2026-09-29). */
+@media (max-width: 17rem) {
+  .m-bage { white-space: normal; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .m-laskort-grupp { white-space: normal; }
+}
 @media (max-width: 40rem) { .m-laskort-par { grid-template-columns: minmax(0, 1fr); } }
 .m-kort-markning { position: absolute; top: 0.45rem; left: 0.65rem; font-size: 0.7rem; line-height: 1; color: var(--farg-text-svag); }
 .m-kort-kopior { margin: 0.4rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.85rem; color: var(--farg-text-svag); }
