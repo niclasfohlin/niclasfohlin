@@ -28,7 +28,7 @@ uppdaterad: 2026-09-29
 relaterade:
   - laslistor-i-grupp
   - til-i-grupp
-utkast: true
+utkast: false
 lektionsbank:
   rubrik: "Lektionsbanken: förmågorna och lektionerna"
   text: "Varje lektion tränar en förmåga, och förmågorna har samma nummer som uppgifterna i ljudkollen. Ordningen mellan förmågorna är ett förslag. Gruppen börjar i den första förmågan där fler än hälften av eleverna har en ring på uppgiften i gruppens översikt och hoppar över det som den redan kan, och du väljer en lektion för förmågan. Nya lektioner läggs in under den förmåga de tränar."

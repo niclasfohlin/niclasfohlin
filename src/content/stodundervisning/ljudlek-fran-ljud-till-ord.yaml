@@ -26,7 +26,7 @@ material:
   - "En whiteboard, en penna och en trasa per elev"
   - "Snabbmallen före och efter passet"
 uppdaterad: "2026-09-29"
-utkast: true
+utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 8
 tranar: "sätta ihop ljud till ord, och ta bort, lägga till och byta ljud"

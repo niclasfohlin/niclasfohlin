@@ -26,7 +26,7 @@ material:
   - "En liten whiteboardtavla, en penna och en trasa per elev"
   - "Fyra magneter till dina kort på tavlan, bokstavskartan i Ljudlek i grupp och snabbmallen"
 uppdaterad: "2026-09-29"
-utkast: true
+utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 7
 tranar: "bygga, läsa och skriva ord med bokstavskort, och byta en bokstav i taget"

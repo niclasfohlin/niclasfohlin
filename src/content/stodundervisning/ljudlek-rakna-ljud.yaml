@@ -24,7 +24,7 @@ material:
   - "Fem magneter till tavlan"
   - "Bokstavskorten under Materialet och en spegel per par"
 uppdaterad: "2026-09-29"
-utkast: true
+utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 6
 tranar: "dela upp ord i ljud, med en markör för varje ljud"

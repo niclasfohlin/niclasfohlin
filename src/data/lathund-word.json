@@ -49,6 +49,16 @@
     ],
     "datum": "2026-09-29"
   },
+  "ljudlek-i-grupp": {
+    "kalla": "1c5c6a133d5b1f7d",
+    "skalor": [
+      1.25,
+      1.35,
+      1.15,
+      1.2
+    ],
+    "datum": "2026-09-29"
+  },
   "problemlosning-i-grupp": {
     "kalla": "edb2f715a2e13697",
     "skalor": [
