@@ -1,0 +1,32 @@
+---
+// Vikkort (bildkort, Ljudlek i grupp): bilden till vänster och ordet till höger, med en prick under varje ljud, eller en
+// båge under varje del när orden står i delar. Eleven klipper längs den streckade kanten och viker ordet bakåt längs den
+// blå prickade linjen, så att bilden är framsidan och facit baksidan. På sidan står arket en gång; i utskriften står
+// det två gånger, tre kort i bredd och åtta rader på ett A4, som i Word (metoddocx.ts) och riggens kompendium.
+// Reglerna finns i src/lib/ljudkort.ts.
+import { arDelark, bildFor, kortCeller, ljudenheter, VIK_TEXT } from '../lib/ljudkort';
+interface Props { rubrik?: string; rader: string[][] }
+const { rubrik, rader } = Astro.props;
+const kort = kortCeller({ rader });
+const delar = arDelark(kort);
+const hela = (k: string) => k.replace(/[-⁠]/g, '');
+---
+<div class={`m-lista m-vikkort${delar ? ' delar' : ''}`}>
+  {rubrik && <h4 class="m-lista-rubrik">{rubrik}</h4>}
+  <p class="m-vikkort-vik">{VIK_TEXT}</p>
+  {[false, true].map((kopia) => (
+    <ul class={`m-vikkort-ark${kopia ? ' kopia' : ''}`} aria-hidden={kopia ? 'true' : undefined}>
+      {kort.map((k) => (
+        <li class="m-vikkort-kort">
+          <span class="m-vikkort-bild"><img src={bildFor(k)} alt="" width="96" height="96" loading="lazy" decoding="async" /></span>
+          <span class="m-vikkort-ord">
+            <span class="visually-hidden">{hela(k)}</span>
+            <span class="m-vikkort-enheter" aria-hidden="true" style={`--tecken:${[...hela(k)].length + (delar ? ljudenheter(k, true).length - 1 : 0)}`}>
+              {ljudenheter(k, delar).map((e) => <span class="m-vikkort-enhet"><span>{e}</span><span class={delar ? 'm-vikkort-bage' : 'm-vikkort-prick'}></span></span>)}
+            </span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  ))}
+</div>

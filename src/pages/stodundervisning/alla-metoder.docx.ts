@@ -3,6 +3,7 @@ import { Packer } from 'docx';
 import { metoderSorterade } from '../../lib/innehall';
 import { metodDokument, DOCX_TYP } from '../../lib/metoddocx';
 import { byggSerier, iSerieordning, serieKoppling } from '../../lib/serie';
+import { lasResurser } from '../../lib/metodresurser';
 import { site } from '../../data/site';
 
 // /stodundervisning/alla-metoder.docx: allt om alla publicerade metoder i en fil.
@@ -12,6 +13,6 @@ export const GET: APIRoute = async () => {
   const metoder = await metoderSorterade();
   const serier = byggSerier(metoder);
   const poster = iSerieordning(metoder, serier).map((m) => ({ ...m, serie: serieKoppling(m.id, m.data, serier) }));
-  const buffert = await Packer.toBuffer(metodDokument(poster, { bas: site.url, medMallar: true }));
+  const buffert = await Packer.toBuffer(metodDokument(poster, { bas: site.url, medMallar: true, resurser: lasResurser(poster) }));
   return new Response(new Uint8Array(buffert), { headers: { 'Content-Type': DOCX_TYP } });
 };

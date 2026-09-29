@@ -59,6 +59,12 @@
   [headers.values]
     Cache-Control = "public, max-age=604800"
 
+# Bildkortens bilder (Fluent Emoji, public/bildbank/) byts sällan: en vecka, som bilderna.
+[[headers]]
+  for = "/bildbank/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
 [[headers]]
   for = "/favicon.svg"
   [headers.values]

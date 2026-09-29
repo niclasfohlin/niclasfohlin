@@ -1,0 +1,17 @@
+---
+// Golvbokstäver (Ljudlek: Bokstavsgympa): en bokstav per A4 i elevens typsnitt, så stor att eleven kan kliva på den och
+// läsa ett ord som ligger på golvet. Arken finns i Word (metoddocx.ts), med en liten grå pil som visar vad som är upp,
+// så att n inte blir u. På sidan och i sidans utskrift står bokstäverna i en rad med en hänvisning, som arken per
+// talsort i antalsuppfattningen: ett A4 per bokstav ryms inte i en utskrift av sidan.
+import { kortCeller } from '../lib/ljudkort';
+interface Props { rubrik?: string; rader: string[][]; id: string; titel: string }
+const { rubrik, rader, id, titel } = Astro.props;
+const kort = kortCeller({ rader });
+---
+<div class="m-lista m-golvbokstaver">
+  {rubrik && <h4 class="m-lista-rubrik">{rubrik}</h4>}
+  <ul class="m-golv-rad">
+    {kort.map((k) => <li>{k}</li>)}
+  </ul>
+  <p class="m-efter">Arken, en bokstav per A4, finns i rätt storlek i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${titel}: planeringsmallarna som Word`}>planeringsmallarna</a>.</p>
+</div>

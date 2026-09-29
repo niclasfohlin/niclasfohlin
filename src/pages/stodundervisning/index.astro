@@ -220,8 +220,15 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
         const { metoder } = (await svar.json()) as { metoder: { id: string; data: unknown }[] };
         const poster = ids.map((id) => metoder.find((m) => m.id === id)).filter((m): m is { id: string; data: unknown } => Boolean(m));
         if (poster.length !== ids.length) throw new Error('En vald metod saknas i metoder.json. Sidan och datan kommer från olika byggen.');
-        const [{ metodDokument }, { Packer }] = await Promise.all([import('../../lib/metoddocx'), import('docx')]);
-        const dokument = metodDokument(poster as Parameters<typeof metodDokument>[0], { bas, medMallar: medMallarVal });
+        const [{ metodDokument }, { Packer }, ljud] = await Promise.all([import('../../lib/metoddocx'), import('docx'), import('../../lib/ljudkort')]);
+        // Ljudlekens kort har bilder och elevens typsnitt (src/lib/ljudkort.ts): de hämtas innan filen byggs, som bygget
+        // läser dem från disken.
+        const valda = poster as Parameters<typeof metodDokument>[0];
+        const hamta = async (adress: string) => { const svar = await fetch(adress); if (!svar.ok) throw new Error(`${adress} svarade ${svar.status}`); return new Uint8Array(await svar.arrayBuffer()); };
+        const bildvagar = [...new Set(valda.flatMap((p) => ljud.metodensBilder(p.data)))];
+        const bilder = new Map(await Promise.all(bildvagar.map(async (b) => [b, await hamta(b)] as const)));
+        const elevtypsnitt = valda.some((p) => ljud.harElevtypsnitt(p.data)) ? await hamta(ljud.ELEVTYPSNITT_TTF) : undefined;
+        const dokument = metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt } });
         const blob = await Packer.toBlob(dokument);
         const filnamn = poster.length === 1 ? `${poster[0].id}${medMallarVal ? '' : '-beskrivning'}.docx` : `metoder-niclasfohlin-se${medMallarVal ? '' : '-beskrivningar'}.docx`;
         if (mal === 'drive' && drive) {

@@ -1,0 +1,23 @@
+---
+// Bokstavskartan (Ljudlek i grupp): alfabetet med stor och liten bokstav i elevens typsnitt, en bild vars ord börjar
+// på bokstavens ljud och ordet under. En bokstav utan bild har sin förklaring i bildens ställe ("som k"). Tunna
+// heldragna linjer: kartan är ett blad att ha framför sig, inte kort att klippa. Fem i bredd och sex rader, i
+// utskriften på ett A4, som i Word (metoddocx.ts). Reglerna finns i src/lib/ljudkort.ts.
+import { kartCeller } from '../lib/ljudkort';
+interface Props { rubrik?: string; rader: string[][] }
+const { rubrik, rader } = Astro.props;
+const celler = kartCeller({ rader });
+---
+<div class="m-lista m-bokstavskarta">
+  {rubrik && <h4 class="m-lista-rubrik">{rubrik}</h4>}
+  <ul class="m-karta">
+    {celler.map((c) => (
+      <li class={`m-karta-cell${c.bild ? '' : ' utan-bild'}`}>
+        <span class="m-karta-bokstav">{c.bokstav.toLocaleUpperCase('sv')}{c.bokstav}</span>
+        {c.bild
+          ? <><img src={c.bild} alt="" width="72" height="72" loading="lazy" decoding="async" /><span class="m-karta-ord">{c.ord}</span></>
+          : <span class="m-karta-som">{c.ord}</span>}
+      </li>
+    ))}
+  </ul>
+</div>

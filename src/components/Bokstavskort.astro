@@ -1,0 +1,17 @@
+---
+// Bokstavskort (Ljudlek i grupp): en till tre bokstäver per kort i elevens typsnitt, så stora att gruppen ser dem när
+// läraren håller upp kortet, med streckad kant att klippa längs och ingen skrivlinje: korten lär eleven bokstavens ljud,
+// och skrivlinjen hör till det material som tränar att forma bokstäver (Niclas 2026-09-29). Restkort och stavelsekort
+// (us, so) har samma form, mindre. I utskriften fyra kort i bredd och sex rader på ett A4, som i Word (metoddocx.ts).
+import { kortCeller } from '../lib/ljudkort';
+interface Props { rubrik?: string; rader: string[][] }
+const { rubrik, rader } = Astro.props;
+const kort = kortCeller({ rader });
+const langst = Math.min(3, Math.max(...kort.map((k) => [...k].length)));
+---
+<div class={`m-lista m-bokstavskort langd-${langst}`}>
+  {rubrik && <h4 class="m-lista-rubrik">{rubrik}</h4>}
+  <ul class="m-bokstavskort-ark">
+    {kort.map((k) => <li class="m-bokstavskort-kort">{k}</li>)}
+  </ul>
+</div>

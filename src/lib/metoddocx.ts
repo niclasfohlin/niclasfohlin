@@ -12,6 +12,7 @@ import { arbetsformRad, arEttKort, arProtokoll, arskursText, datumText, ejBryt, 
 import { brakDelar, delnamn, kortInfo, lage, STANDARD_NAMNARE, type KortInfo, type Mall } from './brak';
 import { bagSvg, utanStod } from './lasflyt';
 import type { MetodPostISerie, SerieKoppling } from './serie';
+import { ANDIKA_ADRESS, ELEVTYPSNITT, VIK_TEXT, bildFor as bildForOrd, harElevtypsnitt, kartCeller, kortCeller, ljudenheter, ljudform, arDelark, upphovBilder, type KartCell } from './ljudkort';
 import WORDSKALOR from '../data/lathund-word.json';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
@@ -54,6 +55,16 @@ const DOCX_TYP = 'application/vnd.openxmlformats-officedocument.wordprocessingml
 export { DOCX_TYP };
 
 type Barn = Paragraph | Table;
+// Ett kortark (vikkort, bokstavskort, bokstavskartan, golvbokstäverna) står i en egen sektion med 1 cm marginal, så att så
+// många kort som möjligt ryms på ett A4 (Niclas 2026-09-29), som i metodriggen. Sektionsbytet står i flödet av stycken
+// och tabeller, och delaSektioner gör sektionerna av det. Efter ett kortark börjar en vanlig sektion igen.
+class Sektionsbyte { constructor(readonly kortark: boolean) {} }
+type Flod = (Barn | Sektionsbyte)[];
+const arBarn = (x: Barn | Sektionsbyte): x is Barn => !(x instanceof Sektionsbyte);
+// Bilderna och elevens typsnitt till Word-filen (src/lib/ljudkort.ts): vid bygget lästa från public/, i webbläsaren
+// hämtade, och givna till metodDokument och mallDokument. RESURSER gäller medan en fil byggs.
+export interface MetodResurser { bilder: Map<string, Uint8Array>; elevtypsnitt?: Uint8Array }
+let RESURSER: MetodResurser = { bilder: new Map() };
 let instans = 0; // numrerade listor: varje lista börjar om på 1
 
 const kant = (color = FARG.kant, size = 4): IBorderOptions => ({ style: BorderStyle.SINGLE, size, color });
@@ -351,7 +362,8 @@ function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[
 // Bokstäver centreras. Listan hålls ihop, och med hallIhopEfter också med det som följer.
 // brak: bråken staplas (metoder i matematik); annars står ett snedstreck kvar, som i ett datum.
 // luft: ett kort att ha på bordet (strategikortet, K-062) får luft mellan raderna.
-function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][] }, o: { storlek: number; hallIhopEfter?: boolean; brak?: boolean; luft?: boolean }): Barn[] {
+// elev: metoden har kort i elevens typsnitt, så bladet eleven läser står i det också; lärarens protokoll i husets.
+function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][] }, o: { storlek: number; hallIhopEfter?: boolean; brak?: boolean; luft?: boolean; elev?: boolean }): Barn[] {
   const ut: Barn[] = [];
   const n = Math.max(...l.rader.map((r) => r.length), l.kolumner?.length ?? 1);
   // En kolumn där alla rader är tomma är en skrivkolumn (kartläggningens Före och Efter): smal, med rubriken i mitten,
@@ -374,7 +386,7 @@ function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][] 
   if (l.kolumner) rader.push(rad(l.kolumner.map((k, i) => cell([stycke(k, { storlek: 15, versaler: true, farg: FARG.svag, efter: 0, hallIhop: true, mitt: !!smal && skriv[i] })], { bredd: bredder[i], fyll: FARG.rand, tat: !!smal })), { huvud: true }));
   l.rader.forEach((r, ri) => {
     const ihop = ri < l.rader.length - 1 || !!o.hallIhopEfter;
-    rader.push(rad(Array.from({ length: n }, (_, i) => cell([stycke(r[i] ?? '', { storlek, fore: o.luft ? 100 : 0, efter: o.luft ? 100 : 0, hallIhop: ihop, mitt: bokstaver, brak: o.brak })], { bredd: bredder[i], tat: !!smal }))));
+    rader.push(rad(Array.from({ length: n }, (_, i) => cell([stycke(r[i] ?? '', { storlek, fore: o.luft ? 100 : 0, efter: o.luft ? 100 : 0, hallIhop: ihop, mitt: bokstaver, brak: o.brak, font: o.elev && !smal ? ELEVTYPSNITT : undefined })], { bredd: bredder[i], tat: !!smal }))));
   });
   ut.push(tabell(rader, bredder), avstand());
   return ut;
@@ -413,8 +425,9 @@ function kortlista(info: KortInfo, brak = true): Table {
 // stor: en elevkopia (planeringsmallarna), där listorna kommer först och sätts stort nog att läsas av ett par
 // eller visas för gruppen; annars (beskrivningen) står lärarnoten först och listorna efter.
 // kort: metodens kort att klippa (d.kort); blad: fältens höjd i cm när ramen är elevens blad (d.elevblad).
-function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: MetodData['kort']; blad?: Record<string, number>; brak?: boolean } = {}): Barn[] {
-  const ut: Barn[] = [];
+// elev: metoden har Ljudlekens kort (src/lib/ljudkort.ts), så elevens blad står i elevens typsnitt.
+function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: MetodData['kort']; blad?: Record<string, number>; brak?: boolean; elev?: boolean } = {}): Flod {
+  const ut: Flod = [];
   for (const s of ram.text) ut.push(stycke(s, { hallIhop: true }));
   // En ordlista eller bokstavslista (bara korta celler) får lika breda kolumner; en översikt med
   // längre text får en smal etikettkolumn först, men bara när första kolumnen är etiketter. Bär den
@@ -456,8 +469,19 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
     const stodKolumn = laskortKolumn(l);
     if (stodKolumn !== undefined) return laskortBarn(l, stodKolumn);
     const ettKort = arEttKort(alla, l);
-    return elevlista({ ...l, rubrik: !o.stor && l.rubrik && !namngerRamen(l.rubrik) ? `${l.rubrik} · ${ram.rubrik}` : l.rubrik }, { storlek: ettKort ? 40 : storlek, luft: ettKort, hallIhopEfter: o.stor ? i === alla.length - 1 : i < alla.length - 1, brak: o.brak });
+    return elevlista({ ...l, rubrik: !o.stor && l.rubrik && !namngerRamen(l.rubrik) ? `${l.rubrik} · ${ram.rubrik}` : l.rubrik }, { storlek: ettKort ? 40 : storlek, luft: ettKort, hallIhopEfter: o.stor ? i === alla.length - 1 : i < alla.length - 1, brak: o.brak, elev: o.elev });
   });
+  // Ljudlekens kort och kartan (src/lib/ljudkort.ts): lärarens ruta först, sedan varje ark i en egen sektion med smal
+  // marginal, som i riggens kompendium, både i beskrivningen och i planeringsmallarna.
+  if ((ram.listor ?? []).some((l) => ljudform({ kort: o.kort }, l))) {
+    ut.push(...noter());
+    for (const l of ram.listor ?? []) {
+      const form = ljudform({ kort: o.kort }, l);
+      if (!form) { ut.push(...elevlista(l, { storlek, brak: o.brak, elev: o.elev })); continue; }
+      ut.push(new Sektionsbyte(true), ...ljudBarn(l, form), new Sektionsbyte(false));
+    }
+    return ut;
+  }
   // Läskorten står var och en på en egen sida, så lärarens noter om dem står först, också i elevkopian.
   if ((ram.listor ?? []).some((l) => laskortKolumn(l) !== undefined)) {
     ut.push(...noter(), ...huvud(), ...listor());
@@ -521,6 +545,158 @@ function laskortBarn(l: { rubrik?: string; kolumner?: string[]; rader: string[][
     new Paragraph({ pageBreakBefore: true, spacing: { before: 0, after: 0 } }),
     new Table({ width: { size: BREDD, type: WidthType.DXA }, columnWidths: [BREDD], layout: TableLayoutType.FIXED, rows: [true, false].map((stod) => new TableRow({ cantSplit: true, height: { value: 6000, rule: HeightRule.ATLEAST }, children: [new TableCell({ width: { size: BREDD, type: WidthType.DXA }, borders: { top: streckad, bottom: streckad, left: streckad, right: streckad }, margins: marg, children: kort(stod) })] })) }),
   ];
+}
+
+// Ljudlekens kort i Word (Ljudlek i grupp, 2026-09-29), portade från metodriggens build/build-docx.js så att sajten
+// och riggens kompendium ritar likadant. Reglerna för när en lista blir vilken form står i src/lib/ljudkort.ts.
+const KORTMARGINAL = 567; // 1 cm
+const BREDD_KORTARK = A4.width - 2 * KORTMARGINAL;
+const STRECKAD: IBorderOptions = { style: BorderStyle.DASHED, size: 6, color: '777777' };
+// Viklinjen ska synas olik klipplinjen också på armslängds håll och i svartvitt: större prickar, i blått.
+const VIKLINJE: IBorderOptions = { style: BorderStyle.DOTTED, size: 14, color: FARG.huvud };
+const INGEN: IBorderOptions = { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' };
+const px = (cm: number) => Math.round((cm / 2.54) * 96);
+let ljudBildNr = 0;
+function bildRun(sokvag: string, storlek: number, namn: string): ImageRun {
+  const data = RESURSER.bilder.get(sokvag);
+  if (!data) throw new Error(`Bilden ${sokvag} saknas i Word-filens resurser (src/lib/ljudkort.ts, metodensBilder).`);
+  return new ImageRun({ type: 'svg', data, transformation: { width: storlek, height: storlek }, altText: { name: `Bild ${++ljudBildNr}`, description: namn, id: String(3000 + ljudBildNr) }, fallback: { type: 'png', data: bytesUr(TOM_PNG) } });
+}
+const elevRun = (text: string, size: number, farg = FARG.text) => new TextRun({ text, size, color: farg, font: ELEVTYPSNITT });
+// Arkets rubrik och, för vikkorten, raden om klipp och vik: små, så att arket får plats på sidan.
+function arkRubrik(text: string | undefined, vik: boolean): Paragraph[] {
+  const ut: Paragraph[] = [];
+  if (text) ut.push(new Paragraph({ keepNext: true, spacing: { before: 0, after: 40 }, heading: HeadingLevel.HEADING_4, children: [textRun({ text, bold: true, size: 15, color: FARG.huvud, allCaps: true })] }));
+  if (vik) ut.push(new Paragraph({ keepNext: true, spacing: { before: 0, after: 80 }, children: [textRun({ text: VIK_TEXT, size: 16, color: FARG.svag })] }));
+  return ut;
+}
+function ljudBarn(l: { rubrik?: string; rader: string[][] }, form: NonNullable<ReturnType<typeof ljudform>>): Barn[] {
+  const kort = kortCeller(l);
+  if (form === 'bildkort') return [...arkRubrik(l.rubrik, true), vikkortTabell(kort)];
+  if (form === 'bokstavskort') return [...arkRubrik(l.rubrik, false), bokstavskortTabell(kort)];
+  if (form === 'bokstavskarta') return [...arkRubrik(l.rubrik, false), bokstavskartaTabell(kartCeller(l))];
+  return golvbokstaverBarn(kort);
+}
+// Ordet på vikkortet med en prick under varje ljud, eller en båge under varje del. Varje enhet står i en egen cell, så
+// att pricken hamnar under sin bokstav; smala bokstäver har en minsta bredd, så att prickarna under i, l och j inte
+// klumpar ihop sig, och texten krymper med ordets bredd (28 pt när ordet ryms).
+const BOKSTAVSBREDD = (c: string): number => (c.length > 1 ? [...c].reduce((a, x) => a + BOKSTAVSBREDD(x), 0) + 0.3 : /[mw]/.test(c) ? 1.45 : /[ilj]/.test(c) ? 0.78 : /[tfr]/.test(c) ? 0.82 : 1);
+function ordMedPrickar(ord: string, maxW: number, delar: boolean): Table {
+  const enheter = ljudenheter(ord, delar);
+  // Dubbelteckning och ck står i sin naturliga bredd med en prick; r, t och f behöver 0,8 (ekorre, riggen).
+  const naturlig = (x: string) => (/[mw]/.test(x) ? 1.45 : /[ilj]/.test(x) ? 0.55 : /[tfr]/.test(x) ? 0.8 : 1);
+  const bredd = (c: string) => (delar ? BOKSTAVSBREDD(c) : c.length > 1 ? [...c].reduce((a, x) => a + naturlig(x), 0) : BOKSTAVSBREDD(c));
+  const enhet = Math.min(300, Math.floor(maxW / enheter.reduce((a, c) => a + bredd(c), 0)));
+  const ordSize = Math.max(delar ? 20 : 28, Math.round(((56 * enhet) / 300) * (delar && enheter.some((x) => x.length > 1) ? 0.82 : 0.92)));
+  const prickSize = Math.max(24, Math.round((40 * enhet) / 300));
+  const bredder = enheter.map((c) => Math.round(bredd(c) * enhet));
+  const ingen = runt(INGEN);
+  const text = (t: string, w: number, size: number) => new TableCell({
+    width: { size: w, type: WidthType.DXA }, borders: ingen, margins: { top: 0, bottom: 0, left: 0, right: 0 },
+    children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 240 }, children: [elevRun(t, size)] })],
+  });
+  // Bågen under en del: en liten svg-bild, 80 procent av delens bredd.
+  const bage = (w: number) => {
+    const bw = Math.max(12, Math.round((w * 0.8) / 15));
+    const bh = Math.max(6, Math.round(bw * 0.28));
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${bw}" height="${bh}" viewBox="0 0 100 28"><path d="M6 5 Q50 30 94 5" stroke="#${FARG.text}" stroke-width="7" fill="none" stroke-linecap="round"/></svg>`;
+    return new TableCell({
+      width: { size: w, type: WidthType.DXA }, borders: ingen, margins: { top: 40, bottom: 0, left: 0, right: 0 },
+      children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0 }, children: [new ImageRun({ type: 'svg', data: new TextEncoder().encode(svg), transformation: { width: bw, height: bh }, altText: { name: `Båge ${++ljudBildNr}`, description: 'en del', id: String(3000 + ljudBildNr) }, fallback: { type: 'png', data: bytesUr(TOM_PNG) } })] })],
+    });
+  };
+  return new Table({
+    alignment: AlignmentType.CENTER, layout: TableLayoutType.FIXED, width: { size: bredder.reduce((a, x) => a + x, 0), type: WidthType.DXA }, columnWidths: bredder, borders: UTAN_KANTER,
+    rows: [
+      new TableRow({ children: enheter.map((c, i) => text(c, bredder[i], ordSize)) }),
+      new TableRow({ children: enheter.map((_, i) => (delar ? bage(bredder[i]) : text('•', bredder[i], prickSize))) }),
+    ],
+  });
+}
+// Vikkort: bilden till vänster och ordet till höger, streckad kant att klippa och en blå prickad viklinje. Arket står två
+// gånger på sidan, så att en utskrift räcker till två par: tre kort i bredd och åtta rader, varje halva 3,2 × 3,2 cm.
+function vikkortTabell(kort: string[]): Table {
+  const perRad = 3;
+  const halva = Math.floor(BREDD_KORTARK / (perRad * 2));
+  const hojd = Math.round(3.2 * CM);
+  const alla = [...kort, ...kort];
+  const delar = arDelark(kort);
+  const mar = { top: 60, bottom: 60, left: 80, right: 80 };
+  const rader: TableRow[] = [];
+  for (let i = 0; i < alla.length; i += perRad) {
+    const rad = alla.slice(i, i + perRad);
+    rader.push(new TableRow({ cantSplit: true, height: { value: hojd, rule: HeightRule.EXACT }, children: Array.from({ length: perRad }, (_, j) => rad[j]).flatMap((k) => (k === undefined
+      ? [0, 1].map(() => new TableCell({ width: { size: halva, type: WidthType.DXA }, borders: runt(INGEN), children: [new Paragraph({})] }))
+      : [
+        new TableCell({
+          width: { size: halva, type: WidthType.DXA }, verticalAlign: VerticalAlign.CENTER, borders: { top: STRECKAD, bottom: STRECKAD, left: STRECKAD, right: VIKLINJE }, margins: mar,
+          children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0 }, children: [bildRun(bildForKort(k), px(2.4), k.replace(/[-\u2060]/g, ''))] })],
+        }),
+        new TableCell({
+          width: { size: halva, type: WidthType.DXA }, verticalAlign: VerticalAlign.CENTER, borders: { top: STRECKAD, bottom: STRECKAD, left: VIKLINJE, right: STRECKAD }, margins: mar,
+          // Word kräver ett stycke efter en tabell i en cell.
+          children: [ordMedPrickar(k, halva - 240, delar), new Paragraph({ spacing: { before: 0, after: 0, line: 20, lineRule: LineRuleType.EXACT }, children: [new TextRun({ text: '', size: 2 })] })],
+        }),
+      ])) }));
+  }
+  return new Table({ width: { size: halva * perRad * 2, type: WidthType.DXA }, columnWidths: Array(perRad * 2).fill(halva), layout: TableLayoutType.FIXED, borders: UTAN_KANTER, rows: rader });
+}
+// Bokstavskort: en bokstav i 96 pt i elevens typsnitt, ett restkort eller stavelsekort med två eller tre bokstäver mindre.
+// Fyra kort i bredd och sex rader, alla 24 på ett A4, cirka 4,7 × 4,4 cm med streckad kant och ingen skrivlinje.
+function bokstavskortTabell(kort: string[]): Table {
+  const langst = Math.max(...kort.map((k) => [...k].length));
+  const storlek = langst <= 1 ? 192 : langst === 2 ? 144 : 104;
+  const perRad = 4;
+  const w = Math.floor(BREDD_KORTARK / perRad);
+  const hojd = Math.round(4.4 * CM);
+  const rader: TableRow[] = [];
+  for (let i = 0; i < kort.length; i += perRad) {
+    const rad = kort.slice(i, i + perRad);
+    rader.push(new TableRow({ cantSplit: true, height: { value: hojd, rule: HeightRule.EXACT }, children: Array.from({ length: perRad }, (_, j) => rad[j]).map((k) => new TableCell({
+      width: { size: w, type: WidthType.DXA }, verticalAlign: VerticalAlign.CENTER, borders: runt(k === undefined ? INGEN : STRECKAD), margins: { top: 0, bottom: 0, left: 80, right: 80 },
+      children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 2200, lineRule: LineRuleType.EXACT }, children: k === undefined ? [] : [elevRun(k, storlek)] })],
+    })) }));
+  }
+  return new Table({ width: { size: w * perRad, type: WidthType.DXA }, columnWidths: Array(perRad).fill(w), layout: TableLayoutType.FIXED, borders: UTAN_KANTER, rows: rader });
+}
+// Golvbokstäver: en bokstav per sida i 560 pt, så att en gemen är cirka 10–15 cm hög och eleven kan kliva på den. Ingen
+// linje. En liten grå pil nederst visar vad som är upp, så att n inte blir u och d inte blir p när arket läggs på golvet.
+// Inget avstånd före: alla bokstäver står på samma höjd på sidan (riggen).
+function golvbokstaverBarn(kort: string[]): Barn[] {
+  return kort.flatMap((k, i) => [
+    new Paragraph({ pageBreakBefore: i > 0, alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 12900, lineRule: LineRuleType.EXACT }, children: [elevRun(k, 1120)] }),
+    new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 1100, after: 0, line: 700, lineRule: LineRuleType.EXACT }, children: [new TextRun({ text: '↑', size: 56, color: FARG.svag, font: 'Calibri' })] }),
+  ]);
+}
+// Bokstavskartan: alfabetet på ett A4, fem i bredd, med stor och liten bokstav, bilden och ordet under. En bokstav utan
+// bild har sin förklaring i bildens ställe. Tunna heldragna linjer: kartan är ett blad, inte kort att klippa.
+function bokstavskartaTabell(celler: KartCell[]): Table {
+  const perRad = 5;
+  const w = Math.floor(BREDD_KORTARK / perRad);
+  const hojd = Math.round(4.3 * CM);
+  const linje: IBorderOptions = { style: BorderStyle.SINGLE, size: 4, color: '777777' };
+  const rader: TableRow[] = [];
+  for (let i = 0; i < celler.length; i += perRad) {
+    const rad = celler.slice(i, i + perRad);
+    rader.push(new TableRow({ cantSplit: true, height: { value: hojd, rule: HeightRule.EXACT }, children: Array.from({ length: perRad }, (_, j) => rad[j]).map((c) => new TableCell({
+      width: { size: w, type: WidthType.DXA }, verticalAlign: VerticalAlign.CENTER, borders: runt(c ? linje : INGEN), margins: { top: 40, bottom: 40, left: 60, right: 60 },
+      children: !c ? [new Paragraph({})] : [
+        new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 40, line: 760, lineRule: LineRuleType.EXACT }, children: [elevRun(`${c.bokstav.toLocaleUpperCase('sv')}${c.bokstav}`, 64)] }),
+        ...(c.bild
+          ? [
+            new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 20 }, children: [bildRun(c.bild, px(1.9), c.ord)] }),
+            new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 340, lineRule: LineRuleType.EXACT }, children: [elevRun(c.ord, 26)] }),
+          ]
+          : [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 200, after: 200 }, children: [elevRun(c.ord, 26, FARG.svag)] })]),
+      ],
+    })) }));
+  }
+  return new Table({ width: { size: w * perRad, type: WidthType.DXA }, columnWidths: Array(perRad).fill(w), layout: TableLayoutType.FIXED, borders: UTAN_KANTER, rows: rader });
+}
+function bildForKort(k: string): string {
+  const b = bildForOrd(k);
+  if (!b) throw new Error(`Ordet "${k}" har ingen bild i bildbanken.`);
+  return b;
 }
 
 // Diplomet: en inramad sida, centrerad, med skrivlinjer där texten är understreck.
@@ -634,6 +810,20 @@ function faktaTabell(d: MetodData, serie?: SerieKoppling): Barn[] {
   ])), bredder), avstand()];
 }
 
+// Under materialet i en metod med Ljudlekens kort: en rad om elevens typsnitt, Andika, som läraren kan använda till egna kort,
+// och upphovet för bildbankens bilder, en gång, som på sidan (Metod.astro).
+function ljudRader(d: MetodData): Paragraph[] {
+  const ut: Paragraph[] = [];
+  if (harElevtypsnitt(d)) {
+    const namnt = (d.ramar?.text ?? []).some((s) => s.includes('Andika'));
+    const adress = ANDIKA_ADRESS.replace(/^https:\/\//, '').replace(/\/$/, '');
+    ut.push(stycke(`${namnt ? 'Ladda ner Andika' : 'Korten står i Andika, ett gratis typsnitt från SIL gjort för dem som lär sig läsa. Ladda ner det'} på ${adress} och använd det när du gör egna kort och blad.`, { farg: FARG.svag }));
+  }
+  const upphov = upphovBilder(d);
+  if (upphov) ut.push(stycke(upphov, { farg: FARG.svag, storlek: 18 }));
+  return ut;
+}
+
 // Lektionsbanken i den generella metoden (Ljudlek i grupp): förmågorna i ordning med lektionerna och vad eleven tränar,
 // byggd ur lektionerna, som på sidan (Lektionsbank.astro). En förmåga utan lektion står kvar.
 function lektionsbankBarn(serie: SerieKoppling['serie']): Barn[] {
@@ -647,9 +837,9 @@ function lektionsbankBarn(serie: SerieKoppling['serie']): Barn[] {
 }
 
 // Hela metoden i den ordning modellen har.
-function metodBarn(post: MetodPostISerie, bas: string): Barn[] {
+function metodBarn(post: MetodPostISerie, bas: string): Flod {
   const d = post.data;
-  const ut: Barn[] = [];
+  const ut: Flod = [];
   ut.push(new Paragraph({ children: [run(d.titel)], heading: HeadingLevel.HEADING_1, spacing: { before: 0, after: 60 } }));
   if (d.undertitel) ut.push(stycke(d.undertitel, { kursiv: true, farg: FARG.huvud, storlek: 24, efter: 80 }));
   ut.push(stycke(metaRad(d), { farg: FARG.svag, storlek: 20, efter: 200 }));
@@ -780,12 +970,13 @@ function metodBarn(post: MetodPostISerie, bas: string): Barn[] {
   if (d.ramar) {
     ut.push(h2(d.ramar.rubrik));
     for (const s of d.ramar.text) ut.push(stycke(s));
+    ut.push(...ljudRader(d));
     for (const ram of d.ramar.ramar) {
       ut.push(new Paragraph({ children: [run(ram.rubrik)], heading: HeadingLevel.HEADING_3, keepNext: true, spacing: { before: 240, after: 80 } }));
       if (ramArTom(ram)) {
         for (const s of ram.text) ut.push(stycke(s));
         ut.push(stycke(d.elevblad[ram.rubrik] ? `${ram.rubrik} finns som elevens blad i planeringsmallarna, med rutor att skriva och rita i.` : `Ramen att fylla i, med ${ram.delar.length === 1 ? 'en del' : `${ram.delar.length} delar`}, finns i planeringsmallarna.`, { farg: FARG.svag }));
-      } else ut.push(...ramBarn(ram, { kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik' }));
+      } else ut.push(...ramBarn(ram, { kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d) }));
     }
     if (d.ramar.efter) ut.push(stycke(d.ramar.efter, { farg: FARG.svag }));
   }
@@ -799,9 +990,9 @@ function metodBarn(post: MetodPostISerie, bas: string): Barn[] {
 // Mallarna: snabbmallen, checklistan, målkollen, kontraktet, schemat, ramarna och diplomet, en per
 // sida, med plats att skriva. I filen med allt står de färdiga ramarna redan i beskrivningen och
 // hoppas då över här (baraTommaRamar); i mallfilen för sig finns alla ramar.
-function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } = {}): { barn: Barn[]; liggande?: boolean }[] {
+function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } = {}): { barn: Flod; liggande?: boolean }[] {
   const d = post.data;
-  const sidor: Barn[][] = [];
+  const sidor: Flod[] = [];
   const under = (namn: string) => [
     new Paragraph({ children: [run(namn)], heading: HeadingLevel.HEADING_1, spacing: { before: 0, after: 40 } }),
     stycke(`${d.titel} · ${arskursText(d)}`, { kursiv: true, farg: FARG.huvud, storlek: 24, efter: 160 }),
@@ -871,13 +1062,14 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
     ]);
   }
   // Elevens blad fyller sidan med fälten i sina mått, så där bär sidfoten upphovet ensam, som på mallarnas sidor.
-  const bladsidor = new Set<Barn[]>();
+  const bladsidor = new Set<Flod>();
   if (d.ramar) {
     for (const ram of d.ramar.ramar) {
       const tom = ramArTom(ram);
       if (o.baraTommaRamar && !tom) continue;
-      const sida = [...under(ram.rubrik), ...ramBarn(ram, { skrivrum: tom, stor: true, kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik' })];
-      if (d.elevblad[ram.rubrik]) bladsidor.add(sida);
+      const sida: Flod = [...under(ram.rubrik), ...ramBarn(ram, { skrivrum: tom, stor: true, kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d) })];
+      // Ett kortark fyller sin sida och foten bär upphovet, så sidan får ingen upphovsrad (den hamnade ensam på en sida).
+      if (d.elevblad[ram.rubrik] || sida.some((x) => x instanceof Sektionsbyte)) bladsidor.add(sida);
       sidor.push(sida);
     }
   }
@@ -1378,7 +1570,16 @@ function sidfot(adress: string, bredd: number, liten = false): Footer {
 // smal: en liggande mallsida med smal marginal, så att det hela i bråkplanket och på tallinjen (26 cm) ryms.
 // lathund: lathundens sida med smala marginaler och utan rubrikrad, eftersom bandet bär titeln; sidhuvudet är ändå
 // satt (tomt), så att en lathund efter mallarna i Word-filen med allt inte ärver mallarnas rubrikrad.
-function sektion(barn: Barn[], huvudtext: string, adress: string, o: { liggande?: boolean; smal?: boolean; lathund?: boolean } = {}): ISectionOptions {
+// kortark: Ljudlekens kort med 1 cm marginal, utan rubrikrad och med lathundens lilla fot, så att arket ryms på sidan.
+function sektion(barn: Barn[], huvudtext: string, adress: string, o: { liggande?: boolean; smal?: boolean; lathund?: boolean; kortark?: boolean } = {}): ISectionOptions {
+  if (o.kortark) {
+    return {
+      properties: { page: { size: { ...A4, orientation: PageOrientation.PORTRAIT }, margin: { top: KORTMARGINAL, right: KORTMARGINAL, bottom: KORTMARGINAL, left: KORTMARGINAL, header: 280, footer: 280 } } },
+      headers: { default: new Header({ children: [new Paragraph({ spacing: { after: 0 } })] }) },
+      footers: { default: sidfot(adress, BREDD_KORTARK, true) },
+      children: barn,
+    };
+  }
   const marginal = o.lathund ? LH_MARGINAL : o.smal ? { top: 720, right: 720, bottom: 900, left: 720, header: 450, footer: 450 } : { top: MARGINAL, right: MARGINAL, bottom: MARGINAL, left: MARGINAL, header: 567, footer: 567 };
   return {
     properties: { page: { size: { ...A4, orientation: o.liggande || o.lathund ? PageOrientation.LANDSCAPE : PageOrientation.PORTRAIT }, margin: marginal } },
@@ -1387,8 +1588,31 @@ function sektion(barn: Barn[], huvudtext: string, adress: string, o: { liggande?
     children: barn,
   };
 }
-function dokument(titel: string, sektioner: ISectionOptions[]): Document {
+// Ett flöde med sektionsbyten blir sektioner: ett kortark i en egen sektion med smal marginal, det andra i sidans vanliga.
+// En tom sektion hoppas över, så att två ark i följd inte lämnar en tom sida mellan sig.
+function delaSektioner(flod: Flod, huvudtext: string, adress: string, o: { liggande?: boolean; smal?: boolean } = {}): ISectionOptions[] {
+  const ut: ISectionOptions[] = [];
+  let barn: Barn[] = [];
+  let kortark = false;
+  const klar = () => { if (barn.length) ut.push(sektion(barn, huvudtext, adress, kortark ? { kortark: true } : o)); barn = []; };
+  for (const x of flod) {
+    if (arBarn(x)) { barn.push(x); continue; }
+    klar();
+    kortark = x.kortark;
+  }
+  klar();
+  if (!ut.length) ut.push(sektion([new Paragraph({})], huvudtext, adress, o));
+  return ut;
+}
+// Word-filen bär elevens typsnitt inbäddat när någon av metoderna har Ljudlekens kort och typsnittet finns i resurserna,
+// så att korten ser likadana ut där typsnittet inte är installerat.
+function typsnittFor(poster: MetodPost[]): { fonts?: { name: string; data: Buffer }[] } {
+  const data = RESURSER.elevtypsnitt;
+  return data && poster.some((p) => harElevtypsnitt(p.data)) ? { fonts: [{ name: ELEVTYPSNITT, data: data as Buffer }] } : {};
+}
+function dokument(titel: string, sektioner: ISectionOptions[], typsnitt: { fonts?: { name: string; data: Buffer }[] } = {}): Document {
   return new Document({
+    ...typsnitt,
     creator: 'Niclas Fohlin',
     title: titel,
     description: `${UPPHOV} · ${SAJT}`,
@@ -1409,8 +1633,9 @@ function dokument(titel: string, sektioner: ISectionOptions[]): Document {
 }
 
 // En eller flera metoder i en fil, med planeringsmallarna och lathunden efter varje metod om medMallar är satt.
-export function metodDokument(poster: MetodPostISerie[], o: { bas: string; medMallar?: boolean }): Document {
+export function metodDokument(poster: MetodPostISerie[], o: { bas: string; medMallar?: boolean; resurser?: MetodResurser }): Document {
   instans = 0;
+  RESURSER = o.resurser ?? { bilder: new Map() };
   const sektioner: ISectionOptions[] = [];
   if (poster.length === 0) {
     sektioner.push(sektion([stycke('Inga metoder är publicerade ännu.')], `Stödundervisning · ${SAJT}`, `${SAJT}/stodundervisning`));
@@ -1426,13 +1651,13 @@ export function metodDokument(poster: MetodPostISerie[], o: { bas: string; medMa
   }
   for (const post of poster) {
     const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
-    sektioner.push(sektion(metodBarn(post, o.bas), `${post.data.titel} · ${SAJT}`, adress));
+    sektioner.push(...delaSektioner(metodBarn(post, o.bas), `${post.data.titel} · ${SAJT}`, adress));
     if (o.medMallar) {
-      for (const sida of mallBarn(post, o.bas, { baraTommaRamar: true })) sektioner.push(sektion(sida.barn, `Mall · ${post.data.titel} · ${SAJT}`, adress, { liggande: sida.liggande, smal: sida.liggande }));
+      for (const sida of mallBarn(post, o.bas, { baraTommaRamar: true })) sektioner.push(...delaSektioner(sida.barn, `Mall · ${post.data.titel} · ${SAJT}`, adress, { liggande: sida.liggande, smal: sida.liggande }));
       for (const sida of medBredd(BREDD_LATHUND, () => lathundBarn(post))) sektioner.push(sektion(sida, `Lathund · ${post.data.titel} · ${SAJT}`, `${adress}/lathund`, { lathund: true }));
     }
   }
-  return dokument(poster.length === 1 ? poster[0].data.titel : 'Metoder för stödundervisning', sektioner);
+  return dokument(poster.length === 1 ? poster[0].data.titel : 'Metoder för stödundervisning', sektioner, typsnittFor(poster));
 }
 
 // Lathunden till en metod: fyra liggande sidor.
@@ -1454,11 +1679,12 @@ export function lathundProvDokument(post: MetodPost, nr: number, skala: number, 
 }
 
 // Bara mallarna till en metod.
-export function mallDokument(post: MetodPost, o: { bas: string }): Document {
+export function mallDokument(post: MetodPost, o: { bas: string; resurser?: MetodResurser }): Document {
   instans = 0;
+  RESURSER = o.resurser ?? { bilder: new Map() };
   const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
   const sidor = mallBarn(post, o.bas);
   if (sidor.length === 0) sidor.push({ barn: [stycke(`${post.data.titel} har inga mallar.`)] });
-  const sektioner = sidor.map((sida) => sektion(sida.barn, `Mall · ${post.data.titel} · ${SAJT}`, adress, { liggande: sida.liggande, smal: sida.liggande }));
-  return dokument(`Mallar: ${post.data.titel}`, sektioner);
+  const sektioner = sidor.flatMap((sida) => delaSektioner(sida.barn, `Mall · ${post.data.titel} · ${SAJT}`, adress, { liggande: sida.liggande, smal: sida.liggande }));
+  return dokument(`Mallar: ${post.data.titel}`, sektioner, typsnittFor([post]));
 }

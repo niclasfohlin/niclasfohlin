@@ -109,18 +109,20 @@ Bygget stannar med besked när en lektion pekar på en serie eller förmåga som
 | En ny förmåga | Det enda som ändrar den generella metoden: en ny rad i `lektionsbank.formagor`, en ny uppgift i ljudkollen, en ny kolumn i protokollet och gruppens översikt, och den generella metoden publiceras på nytt |
 | Byta ordning inom en förmåga | Lektionerna under samma förmåga står i bokstavsordning |
 
-Formerna som riggen föreslog och var de byggs:
+Ljudlekens former är byggda i den gemensamma koden 2026-09-29, med riggens regler (`src/lib/ljudkort.ts` avgör formen ur listan, som riggens `build/modell.mjs`), så att varje metod och varje ny lektion får dem:
 
-| Del | Riggens förslag | Var på sajten |
-|---|---|---|
-| Lektioner utan lathund | Den generella metoden har lathunden; lektionens första sidor är passet | lathunden är redan valfri i schemat (`harLathund`); prova `Nedladdning.astro` och filvalen utan lathund |
-| Vikkort | Bildkort: bilden till vänster, ordet till höger med en prick under varje ljud, vikbara med facit på baksidan, tre i bredd och åtta rader, arket två gånger på sidan, Andika 28 pt | kortformen i `Metod.astro` och `metoddocx.ts` och utskriften i `global.css`, i den gemensamma koden |
-| Bokstavskort | Kort med en till tre bokstäver, Andika 96 pt, fyra i bredd och sex rader på ett A4, ingen skrivlinje | samma |
-| Kortark | Egen sektion med 1 cm marginal i Word, så att så många kort som möjligt ryms | `metoddocx.ts` |
-| Bokstavskartan | Alfabetet på ett A4, fem i bredd och sex rader, stor och liten bokstav, bild och ord | ny form |
-| Golvbokstäver | En bokstav per A4 i Andika 560 pt, att kliva på | ny form |
-| Elevens typsnitt | Andika (SIL, Open Font License), inbäddat i docx-filen; filerna i riggens `design/typsnitt/andika/` | typsnittet och licensen i repot, `@font-face` för korten på sidan, inbäddning i `metoddocx.ts` |
-| Bilderna | Fluent Emoji (MIT) i riggens `design/bilder/fluent/<ord>.svg`, listan i `design/bilder/bildbank.md`; upphovsraden en gång i inledningen till Materialet | bilderna och licensen i repot, med bildvägen ur metodfilen |
+| Form | När en lista blir den | Sidan och utskriften | Word |
+|---|---|---|---|
+| Vikkort (bildkort) | en kortlista där varje ord har en bild i bildbanken | `Vikkort.astro`: bilden och ordet med en prick under varje ljud (dubbelteckning och ck en prick), en båge under varje del när orden står i delar; i utskriften arket två gånger, tre i bredd och åtta rader | `vikkortTabell` och `ordMedPrickar` i `metoddocx.ts`, samma mått som riggen |
+| Bokstavskort | en kortlista där varje kort är en till tre bokstäver (också rest- och stavelsekort) | `Bokstavskort.astro`, fyra i bredd och sex rader i utskriften, ingen skrivlinje | `bokstavskortTabell`, 96 pt |
+| Bokstavskartan | en lista, inte kort, med minst tio celler "a apa" där de flesta orden har en bild | `Bokstavskarta.astro`, fem i bredd | `bokstavskartaTabell` |
+| Golvbokstäver | en kortlista vars rubrik börjar med Golvbokstäver, en bokstav per kort | `Golvbokstaver.astro`: bokstäverna i en rad och en länk till planeringsmallarna, som arken per talsort | `golvbokstaverBarn`, en bokstav per A4 i 560 pt med en grå pil för upp |
+| Kortark | vikkort, bokstavskort och kartan | `@page kortark` med 10 mm marginal i utskriften | en egen sektion med 1 cm marginal (`Sektionsbyte` och `delaSektioner`), foten med upphovet |
+| Elevens typsnitt | metoden har någon av formerna: då står också elevens blad (elevlistor som inte är protokoll) i det | Ljudlek Elev, Andikas delmängd (31 KB, SIL OFL), i `public/fonts/ljudlek-elev/` med licensen; hämtas först när något står i typsnittet | `LjudlekElev-Regular.ttf` (78 KB) inbäddad när metoden har formerna; en rad under Materialet om Andika med länk till SIL |
+| Bilderna | Fluent Emoji (MIT) i `public/bildbank/` med ASCII-namn (båt blir baat.svg), förteckningen `src/data/bildbank.json` ur `scripts/bildbank.mjs` i validera | laddas först när läsaren kommer till materialet (`loading="lazy"`) | läses från disken vid bygget (`src/lib/metodresurser.ts`) och hämtas i webbläsaren för den samlade filen; upphovsraden en gång under Materialet |
+| Lektioner utan lathund | lathunden är valfri i schemat | nedladdningsrutan och filvalen utan lathund | Word-filen utan lathundens sidor |
+
+En ny bild från riggen läggs i `public/bildbank/` med ordet som namn; `npm run validera` byter namnet och för in ordet i förteckningen.
 
 Serien går upp i en enda push när allt är prövat (Kontroll före uppladdning i ARBETSSATT.md), och utskicket presenterar den som en helhet (K-107). Ett bygge kostar 15 krediter.
 

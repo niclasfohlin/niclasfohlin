@@ -8,6 +8,11 @@ import Kortlista from './Kortlista.astro';
 import Laskort from './Laskort.astro';
 import MallBild from './MallBild.astro';
 import Lektionsbank from './Lektionsbank.astro';
+import Vikkort from './Vikkort.astro';
+import Bokstavskort from './Bokstavskort.astro';
+import Bokstavskarta from './Bokstavskarta.astro';
+import Golvbokstaver from './Golvbokstaver.astro';
+import { ANDIKA_ADRESS, harElevtypsnitt, ljudform, upphovBilder } from '../lib/ljudkort';
 import type { SerieKoppling } from '../lib/serie';
 import type { MetodData } from '../lib/metod';
 import { ejBryt, ramArTom, passGrupper, passOrd, passOversikt, stegTexter, laskortKolumn, arEttKort } from '../lib/metod';
@@ -19,6 +24,11 @@ interface Props { d: MetodData; id: string; koppling?: SerieKoppling }
 const { d, id, koppling } = Astro.props;
 // Lektionsbanken står på den generella metodens sida efter urvalet, där texten säger var lektionerna finns.
 const bank = koppling && !koppling.lektion ? koppling.serie : undefined;
+// Ljudlekens kort (src/lib/ljudkort.ts): elevens typsnitt på korten och bladen, upphovet för bilderna en gång under
+// materialet, och en rad till läraren om typsnittet, som hen kan använda till egna kort.
+const elevtypsnitt = harElevtypsnitt(d);
+const bildUpphov = upphovBilder(d);
+const andikaNamnt = (d.ramar?.text ?? []).some((s) => s.includes('Andika'));
 const efterInledning = d.tabeller.filter((t) => t.plats === 'efter-inledning');
 const efterTidsschema = d.tabeller.filter((t) => t.plats === 'efter-tidsschema');
 const efterSteg = d.tabeller.filter((t) => t.plats === 'efter-steg');
@@ -376,6 +386,10 @@ const avsnitt = [
     <section id="ramar">
       <h2>{d.ramar.rubrik}</h2>
       {d.ramar.text.map((s) => <p>{s}</p>)}
+      {elevtypsnitt && (
+        <p class="m-efter">{andikaNamnt ? 'Ladda ner Andika' : 'Korten står i Andika, ett gratis typsnitt från SIL gjort för dem som lär sig läsa. Ladda ner det'} på <a href={ANDIKA_ADRESS}>software.sil.org/andika</a> och använd det när du gör egna kort och blad.</p>
+      )}
+      {bildUpphov && <p class="m-efter">{bildUpphov}</p>}
       {/* Med fyra ramar eller fler (ett paket per årskurs, läslistorna, projekten) blir sidan lång: en rad med länkar till varje ram. */}
       {d.ramar.ramar.length >= 4 && (
         <nav class="m-ramlankar" aria-label={`Hoppa till: ${d.ramar.rubrik}`}>
@@ -396,6 +410,12 @@ const avsnitt = [
                 </div>
               ))}
               {ram.listor.map((l, li) => {
+                // Ljudlekens former går före de andra korten (src/lib/ljudkort.ts).
+                const ljud = ljudform(d, l);
+                if (ljud === 'bildkort') return <Vikkort rubrik={l.rubrik} rader={l.rader} />;
+                if (ljud === 'bokstavskort') return <Bokstavskort rubrik={l.rubrik} rader={l.rader} />;
+                if (ljud === 'golvbokstaver') return <Golvbokstaver rubrik={l.rubrik} rader={l.rader} id={id} titel={d.titel} />;
+                if (ljud === 'bokstavskarta') return <Bokstavskarta rubrik={l.rubrik} rader={l.rader} />;
                 const info = kortInfo(d, l);
                 const forra = li > 0 ? kortInfo(d, ram.listor![li - 1])?.grupp : undefined;
                 // Ramens fält att fylla i (elevens namn på kartläggningens kopia) står överst i den första listan, så att
@@ -405,7 +425,7 @@ const avsnitt = [
                 if (stodKolumn !== undefined) return <Laskort lista={l} stodKolumn={stodKolumn} />;
                 return info
                   ? <Kortlista rubrik={l.rubrik} info={info} nyGrupp={info.grupp !== forra} brak={brak} />
-                  : <Elevlista rubrik={l.rubrik} kolumner={l.kolumner} rader={l.rader} brak={brak} huvud={li === 0 ? ram.huvud : undefined} klass={arEttKort(ram.listor!, l) ? 'kort' : ''} />;
+                  : <Elevlista rubrik={l.rubrik} kolumner={l.kolumner} rader={l.rader} brak={brak} huvud={li === 0 ? ram.huvud : undefined} klass={arEttKort(ram.listor!, l) ? 'kort' : ''} elev={elevtypsnitt} />;
               })}
             </>
           ) : ramArTom(ram)

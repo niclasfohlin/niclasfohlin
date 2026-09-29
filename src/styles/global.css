@@ -37,6 +37,14 @@
   --radie: 10px;
   --skugga: 0 1px 2px rgba(20, 32, 43, 0.06);
 }
+/* Elevens typsnitt på korten och elevens blad (Ljudlek i grupp, 2026-09-29): Andika från SIL, där a och g har en båge som
+   när eleven skriver dem och l inte liknar I, som delmängden Ljudlek Elev (31 KB, SIL Open Font License, licensen i
+   public/fonts/ljudlek-elev/). Webbläsaren hämtar filen först när något på sidan står i typsnittet (src/lib/ljudkort.ts).
+   Reglerna står efter :root, eftersom delningskortens kontrollsumma omfattar början av filen till och med :root
+   (src/lib/delningskort.ts): typsnittet syns inte på korten och ska inte rita om dem. */
+@font-face { font-family: 'Ljudlek Elev'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/ljudlek-elev/LjudlekElev-Regular.woff2') format('woff2'); }
+:root { --typsnitt-elev: 'Ljudlek Elev', 'Andika', 'Public Sans', sans-serif; }
+
 
 * { box-sizing: border-box; }
 
@@ -637,6 +645,45 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 @media (max-width: 40rem) { .m-laskort-par { grid-template-columns: minmax(0, 1fr); } }
 .m-kort-markning { position: absolute; top: 0.45rem; left: 0.65rem; font-size: 0.7rem; line-height: 1; color: var(--farg-text-svag); }
 .m-kort-kopior { margin: 0.4rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.85rem; color: var(--farg-text-svag); }
+/* Ljudlekens kort och blad (src/lib/ljudkort.ts): elevens typsnitt, vikkort, bokstavskort, bokstavskartan och
+   golvbokstäverna. Elevens blad står i elevens typsnitt när metoden har sådana kort; protokollen i husets. */
+.m-lista.elev td { font-family: var(--typsnitt-elev); }
+.m-lista.manga td { font-size: 1rem; overflow-wrap: anywhere; }
+.m-lista.manga th { padding-left: 0.2rem; padding-right: 0.2rem; text-align: center; overflow-wrap: anywhere; }
+.m-lista.manga th.skriv, .m-lista.manga td.skriv { width: auto; padding-left: 0.2rem; padding-right: 0.2rem; }
+.m-lista.manga th:first-child, .m-lista.manga td:first-child { width: 34%; text-align: left; padding-left: 0.6rem; }
+.m-vikkort-vik { font-family: var(--typsnitt-ui); font-size: 0.85rem; color: var(--farg-text-svag); margin: 0 0 0.5rem; }
+.m-vikkort-ark { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.m-vikkort-ark.kopia { display: none; }
+.m-vikkort-kort { display: grid; grid-template-columns: 1fr 1fr; min-height: 6.25rem; border: 1px dashed var(--farg-text-svag); margin: 0 -1px -1px 0; }
+.m-vikkort-bild { display: flex; align-items: center; justify-content: center; padding: 0.45rem; border-right: 2px dotted var(--farg-accent); }
+.m-vikkort-bild img { width: 100%; max-width: 4.25rem; height: auto; }
+.m-vikkort-ord { display: flex; align-items: center; justify-content: center; padding: 0.3rem; min-width: 0; container-type: inline-size; }
+/* Ordet krymper med sin längd (--tecken), så att ett långt ord ryms i sin halva av kortet, som i riggen. */
+.m-vikkort-enheter { display: inline-flex; align-items: flex-start; font-family: var(--typsnitt-elev); font-size: min(1.55rem, calc(100cqw / (var(--tecken, 4) * 0.62))); line-height: 1.15; color: var(--farg-text); }
+.m-vikkort-enhet { display: inline-flex; flex-direction: column; align-items: center; min-width: 0.5em; }
+.m-vikkort-prick { width: 0.2em; height: 0.2em; margin-top: 0.15em; border-radius: 50%; background: currentColor; }
+.m-vikkort-bage { width: 80%; height: 0.3em; margin-top: 0.1em; border: 0.09em solid currentColor; border-top: 0; border-radius: 0 0 50% 50% / 0 0 100% 100%; }
+.m-vikkort.delar .m-vikkort-enheter { font-size: min(1.3rem, calc(100cqw / (var(--tecken, 4) * 0.62 + 0.3))); gap: 0.15em; }
+.m-bokstavskort-ark { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.m-bokstavskort-kort { display: flex; align-items: center; justify-content: center; aspect-ratio: 47 / 44; border: 1px dashed var(--farg-text-svag); margin: 0 -1px -1px 0; font-family: var(--typsnitt-elev); font-size: 2.6rem; line-height: 1; color: var(--farg-text); }
+.m-bokstavskort.langd-2 .m-bokstavskort-kort { font-size: 2rem; }
+.m-bokstavskort.langd-3 .m-bokstavskort-kort { font-size: 1.5rem; }
+.m-karta { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid var(--farg-kant); border-left: 1px solid var(--farg-kant); }
+.m-karta-cell { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; padding: 0.5rem 0.25rem; border-right: 1px solid var(--farg-kant); border-bottom: 1px solid var(--farg-kant); text-align: center; min-width: 0; }
+.m-karta-bokstav { font-family: var(--typsnitt-elev); font-size: 1.9rem; line-height: 1.1; color: var(--farg-text); }
+.m-karta-cell img { width: 62%; max-width: 3.4rem; height: auto; }
+.m-karta-ord { font-family: var(--typsnitt-elev); font-size: 0.95rem; line-height: 1.2; overflow-wrap: anywhere; }
+.m-karta-som { flex: 1; display: flex; align-items: center; font-family: var(--typsnitt-elev); font-size: 0.95rem; color: var(--farg-text-svag); }
+.m-golv-rad { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.m-golv-rad li { display: flex; align-items: center; justify-content: center; width: 2.4rem; height: 3rem; border: 1px solid var(--farg-kant); border-radius: 4px; font-family: var(--typsnitt-elev); font-size: 1.7rem; line-height: 1; }
+.m-golvbokstaver .m-efter { margin: 0.5rem 0 0; }
+@media (max-width: 40rem) {
+  .m-vikkort-ark { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .m-bokstavskort-ark { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .m-karta-bokstav { font-size: 1.35rem; }
+  .m-karta-ord, .m-karta-som { font-size: 0.72rem; }
+}
 /* Mallarna som bilder (MallBild.astro): i sidans bredd på skärmen, och på en smal skärm går bilden att svepa i sidled
    så att bitarnas bråk går att läsa. I utskriften har bilden sitt riktiga mått (se @media print). */
 .m-mall { margin: 1.5rem 0 2rem; }
@@ -662,6 +709,9 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-mall-fot { margin-top: 0.75rem; }
 .m-mall-utskrift { display: none; }
 @page mall { size: A4 landscape; margin: 10mm; }
+/* Kortarken (vikkort, bokstavskort, bokstavskartan) med smal marginal, så att så många kort som möjligt ryms på ett A4
+   (Niclas 2026-09-29), som i Word. Upphovet står i foten också här. */
+@page kortark { size: A4; margin: 10mm 10mm 14mm; @bottom-center { content: var(--tryck-text, ''); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 8pt; color: #555; } }
 .lh .m-lista { margin: 0.25rem 0 0.75rem; }
 .lh .m-lista td { font-size: 1.05rem; padding: 0.3rem 0.6rem; }
 .lh .m-lista.bokstaver td { font-size: 1.3rem; }
@@ -1068,6 +1118,28 @@ html.js .bara-js { display: inline-block; }
      sidytan. Base.astro sätter html.marginalrutor där marginalrutor finns. */
   .tryck-fot { display: block; position: fixed; bottom: 0; left: 0; right: 0; font-family: var(--typsnitt-ui); font-size: 8.5pt; color: #555; text-align: center; border-top: 1px solid #bbb; padding-top: 3pt; background: #fff; }
   html.marginalrutor .tryck-fot { display: none; }
+  /* Kortarken: varje ark på en egen sida med smal marginal, i samma mått som i Word. Vikkorten står två gånger, tre i
+     bredd och åtta rader; bokstavskorten fyra i bredd och sex rader; kartan fem i bredd och sex rader. */
+  .m-vikkort, .m-bokstavskort, .m-bokstavskarta { page: kortark; break-before: page; break-inside: avoid; margin: 0; }
+  .m-ram:has(.m-vikkort), .m-ram:has(.m-bokstavskort), .m-ram:has(.m-bokstavskarta) { break-before: auto; break-inside: auto !important; }
+  .m-vikkort .m-lista-rubrik, .m-bokstavskort .m-lista-rubrik, .m-bokstavskarta .m-lista-rubrik { font-size: 8pt; margin: 0 0 1mm; }
+  .m-vikkort-vik { font-size: 8pt; margin: 0 0 2mm; }
+  .m-vikkort-ark, .m-vikkort-ark.kopia { display: grid; grid-template-columns: repeat(3, 63mm); }
+  .m-vikkort-kort { height: 31.5mm; min-height: 0; border: 0.75pt dashed #777; break-inside: avoid; }
+  .m-vikkort-bild { border-right: 1.5pt dotted #1d4f91; padding: 3mm; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .m-vikkort-bild img { width: 23mm; max-width: none; }
+  .m-vikkort-enheter { font-size: min(26pt, calc(100cqw / (var(--tecken, 4) * 0.62))); }
+  .m-vikkort.delar .m-vikkort-enheter { font-size: min(22pt, calc(100cqw / (var(--tecken, 4) * 0.62 + 0.3))); }
+  .m-bokstavskort-ark { grid-template-columns: repeat(4, 47mm); }
+  .m-bokstavskort-kort { height: 44mm; aspect-ratio: auto; border: 0.75pt dashed #777; font-size: 96pt; }
+  .m-bokstavskort.langd-2 .m-bokstavskort-kort { font-size: 70pt; }
+  .m-bokstavskort.langd-3 .m-bokstavskort-kort { font-size: 50pt; }
+  .m-karta { grid-template-columns: repeat(5, 37mm); border-color: #999; }
+  .m-karta-cell { height: 43mm; justify-content: center; border-color: #999; padding: 1mm; }
+  .m-karta-bokstav { font-size: 32pt; }
+  .m-karta-cell img { width: 19mm; max-width: none; }
+  .m-karta-ord, .m-karta-som { font-size: 13pt; }
+  .m-golvbokstaver { break-inside: avoid; }
   .bara-js, button.lank, .lh-lank { display: none !important; }
   a { text-decoration: none; color: inherit; }
 }

@@ -6,8 +6,10 @@
 import Brak from './Brak.astro';
 // brak: bråken staplas (metoder i matematik); annars står texten som den är.
 // huvud: ramens fält att fylla i före listan (elevens namn på kartläggningens kopia), i samma block som listan.
-interface Props { rubrik?: string; kolumner?: string[]; rader: string[][]; klass?: string; brak?: boolean; huvud?: { rubrik: string; text: string }[] }
-const { rubrik, kolumner, rader, klass = '', brak = false, huvud } = Astro.props;
+// elev: metoden har kort i elevens typsnitt (src/lib/ljudkort.ts), så bladet eleven läser står i det också; lärarens
+// protokoll behåller husets typsnitt.
+interface Props { rubrik?: string; kolumner?: string[]; rader: string[][]; klass?: string; brak?: boolean; huvud?: { rubrik: string; text: string }[]; elev?: boolean }
+const { rubrik, kolumner, rader, klass = '', brak = false, huvud, elev = false } = Astro.props;
 // En kolumn där alla rader är tomma, bredvid kolumner med text, är en skrivkolumn (kartläggningens Före och Efter):
 // smal, och räknas inte när listan avgör om den är en enda kolumn text. Är alla kolumner tomma (ett schema att fylla
 // i) är ingen smal. Samma regel som i Word (elevlista i src/lib/metoddocx.ts).
@@ -16,10 +18,14 @@ const tomma = Array.from({ length: n }, (_, i) => rader.every((r) => !(r[i] ?? '
 const skriv = tomma.every(Boolean) ? tomma.map(() => false) : tomma;
 const bokstaver = rader.every((r) => r.every((c) => c.trim().length <= 2));
 const enKolumn = skriv.filter((s) => !s).length === 1;
+// Många skrivkolumner (gruppens översikt i Ljudlek i grupp har nio) delar på bredden i stället för att vara 4,5 rem var,
+// så att protokollet ryms på telefonen och i utskriften.
+const manga = skriv.filter(Boolean).length > 4;
+const protokoll = skriv.some(Boolean);
 // En pil står kvar med orden på båda sidor ("sss-ooo-lll → sol" på strategikortet), också när raden bryts på mobilen.
 const pil = (c: string) => c.replace(/ → /g, ' → ');
 ---
-<div class={`m-lista ${bokstaver ? 'bokstaver' : ''} ${enKolumn ? 'en-kolumn' : ''} ${skriv.some(Boolean) ? 'protokoll' : ''} ${klass}`.replace(/\s+/g, ' ').trim()}>
+<div class={`m-lista ${bokstaver ? 'bokstaver' : ''} ${enKolumn ? 'en-kolumn' : ''} ${protokoll ? 'protokoll' : ''} ${manga ? 'manga' : ''} ${elev && !protokoll ? 'elev' : ''} ${klass}`.replace(/\s+/g, ' ').trim()}>
   {huvud && (
     <dl class="m-ramfalt m-ramhuvud">
       {huvud.map((f) => <div><dt>{f.rubrik}</dt><dd>{f.text}</dd></div>)}

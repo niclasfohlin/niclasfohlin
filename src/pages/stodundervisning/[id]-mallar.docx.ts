@@ -2,6 +2,7 @@ import type { APIRoute, GetStaticPaths } from 'astro';
 import { Packer } from 'docx';
 import { publicerade } from '../../lib/innehall';
 import { mallDokument, DOCX_TYP } from '../../lib/metoddocx';
+import { lasResurser } from '../../lib/metodresurser';
 import { site } from '../../data/site';
 
 // /stodundervisning/<id>-mallar.docx: snabbmall, checklista och målkoll, en per sida.
@@ -11,6 +12,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const GET: APIRoute = async ({ props }) => {
-  const buffert = await Packer.toBuffer(mallDokument(props.m, { bas: site.url }));
+  const buffert = await Packer.toBuffer(mallDokument(props.m, { bas: site.url, resurser: lasResurser([props.m]) }));
   return new Response(new Uint8Array(buffert), { headers: { 'Content-Type': DOCX_TYP } });
 };
