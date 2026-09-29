@@ -13,7 +13,7 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
 <Base title="Statistik" description="Besök, nedladdningar och delningar på niclasfohlin.se." dold>
   <article class="statistik" id="statistik" data-bas={bas}>
     <h1>Statistik</h1>
-    <p class="ingress">Besök, nedladdningar och delningar ur GoatCounter, ordnade som sajten: metoderna, filerna, delningarna, artiklarna och böckerna. En delning räknas när någon trycker på en knapp i raden Dela, också om hen sedan avbryter.</p>
+    <p class="ingress">Besökare, nedladdningar och delningar ur GoatCounter, ordnade som sajten: metoderna, filerna, delningarna, artiklarna och böckerna. Nedladdningarna räknar också utskrifterna, och en delning räknas när någon trycker på en knapp i raden Dela, också om hen sedan avbryter.</p>
 
     <noscript><p>Sidan hämtar siffrorna med JavaScript.</p></noscript>
 
@@ -31,7 +31,7 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
         <button type="button" data-period="manad" aria-pressed="false">30 dagar</button>
         <button type="button" data-period="ar" aria-pressed="false">1 år</button>
       </div>
-      <p class="stat-summa" data-summa aria-live="polite"></p>
+      <div class="stat-summa" data-summa aria-live="polite"></div>
 
       <section class="stat-kategori">
         <h2>Över tid</h2>
@@ -96,16 +96,24 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
     const skriv = (k: string, v: string) => { try { if (v) localStorage.setItem(k, v); else localStorage.removeItem(k); } catch { /* bara den här sidvisningen */ } };
     let nyckel = las(NYCKEL);
 
-    // GoatCounter vill ha hela timmar: från periodens början till nästa hela timme.
+    // GoatCounter vill ha hela timmar: från periodens början till nästa hela timme. En period börjar tidigast när
+    // räkningen började, 28 september 2026: GoatCounter fyller annars i varje timme för varje sida för hela perioden,
+    // och ett år var 16,7 MB per 100 sidor mot 120 kB från 28 september (uppmätt 2026-09-29, K-095).
+    const RAKNINGEN_BORJADE = new Date(2026, 8, 28);
     const iso = (d: Date) => d.toISOString().replace(/\.\d{3}Z$/, 'Z');
-    function tider(period: string) {
+    function periodStart(period: string) {
       const nu = new Date();
-      const slut = new Date(nu);
-      slut.setMinutes(0, 0, 0);
-      slut.setHours(slut.getHours() + 1);
       const dagar = period === 'vecka' ? 7 : period === 'manad' ? 30 : 365;
       const start = period === 'dag' ? new Date(nu.getFullYear(), nu.getMonth(), nu.getDate()) : new Date(nu.getTime() - dagar * 86400000);
       start.setMinutes(0, 0, 0);
+      return start;
+    }
+    const borjarForeRakningen = (period: string) => periodStart(period) < RAKNINGEN_BORJADE;
+    function tider(period: string) {
+      const slut = new Date();
+      slut.setMinutes(0, 0, 0);
+      slut.setHours(slut.getHours() + 1);
+      const start = borjarForeRakningen(period) ? new Date(RAKNINGEN_BORJADE) : periodStart(period);
       return { start: iso(start), end: iso(slut) };
     }
 
@@ -124,6 +132,10 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
     // Ett anrop för en period som läsaren redan lämnat görs inte och tar ingen plats i kön (korning i visa), så att
     // den period som läsaren valde sist kommer fram fort.
     class Avbruten extends Error {}
+    // GoatCounter tar emot högst 500 anrop i timmen från samma internetanslutning, förfrågningarna inräknade
+    // (handlers.go i GoatCounters källkod). När gränsen är nådd svarar den inte förrän timmen gått, och då säger
+    // sidan det i stället för webbläsarens Failed to fetch.
+    class Grans extends Error {}
     function iTur(aktuell: () => boolean) {
       const min = tur.then(async () => {
         if (!aktuell()) return false;
@@ -147,26 +159,47 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
         let svar: Response;
         try {
           svar = await fetch(url, { headers: { Authorization: `Bearer ${nyckel}` } });
-        } catch (fel) {
-          // Förfrågan stoppades av gränsen, eller nätet svarade inte: försök igen, högst fyra gånger.
-          if (forsok < 4) { await sov(1100); continue; }
-          throw fel;
+        } catch {
+          // Förfrågan stoppades av gränsen, eller nätet svarade inte: försök igen, högst tre gånger i allt, så att
+          // sidan inte själv äter upp timmens anrop.
+          if (forsok < 3) { await sov(1100); continue; }
+          throw new Grans();
         }
-        if (svar.status === 429 && forsok < 4) { await sov(1100); continue; }
+        if (svar.status === 429) {
+          if (forsok < 3) { await sov(1100); continue; }
+          throw new Grans();
+        }
         if (svar.status === 401 || svar.status === 403) throw new NyckelFel();
-        if (!svar.ok) throw new Error(`GoatCounter svarade ${svar.status}`);
+        if (!svar.ok) {
+          // GoatCounters egen förklaring följer med i beskedet, så att felet syns utan att någon behöver gissa.
+          let orsak = '';
+          try {
+            const text = await svar.text();
+            const fel = JSON.parse(text);
+            orsak = String(fel.error ?? JSON.stringify(fel.errors ?? fel)).slice(0, 160);
+          } catch { /* inget läsbart svar */ }
+          throw new Error(`GoatCounter svarade ${svar.status}${orsak ? `: ${orsak}` : ''}`);
+        }
         const json = await svar.json();
         sparade.set(url.href, { tid: Date.now(), json });
         return json;
       }
     }
-    // Sidorna och händelserna i perioden, 100 i taget (GoatCounters största limit, api.json), högst 500.
+    // Sidorna och händelserna i perioden, 100 i taget (GoatCounters största limit, api.json), högst 500. De som redan
+    // hämtats skickas som en kommaseparerad exclude_paths: GoatCounter läser bara det första värdet om parametern
+    // upprepas, och då kom samma 100 tillbaka fem gånger och räknades dubbelt (K-095). En sida som redan finns
+    // räknas aldrig igen, och hämtningen slutar när en omgång inte ger något nytt.
     async function allaHits(t: { start: string; end: string }, aktuell: () => boolean) {
       const ut: Hit[] = [];
+      const sedda = new Set<number>();
       for (let i = 0; i < 5; i++) {
-        const svar = await hamta('/api/v0/stats/hits', { ...t, limit: 100, ...(ut.length ? { exclude_paths: ut.map((h) => h.path_id) } : {}) }, aktuell);
-        ut.push(...(svar.hits ?? []));
-        if (!svar.more) break;
+        const svar = await hamta('/api/v0/stats/hits', { ...t, limit: 100, ...(sedda.size ? { exclude_paths: [...sedda].join(',') } : {}) }, aktuell);
+        const nya = ((svar.hits ?? []) as Hit[]).filter((h) => !sedda.has(h.path_id));
+        for (const h of nya) {
+          sedda.add(h.path_id);
+          ut.push(h);
+        }
+        if (!svar.more || nya.length === 0) break;
       }
       return ut;
     }
@@ -401,17 +434,29 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
         if (denna !== korning) return;
         const { rader: k, delade } = kategorier(hits);
         const handelser = total.total_events ?? 0;
-        summa.innerHTML = '';
-        const sidor = document.createElement('strong');
-        sidor.textContent = String((total.total ?? 0) - handelser);
-        const filer = document.createElement('strong');
-        filer.textContent = String(Math.max(0, handelser - delade));
-        const delat = document.createElement('strong');
-        delat.textContent = String(delade);
-        summa.append(sidor, ' besök på sidorna · ', filer, ' nedladdningar och utskrifter · ', delat, ' tryck på Dela');
+        // Överst tre rutor, som i WordPress: talet stort och ordet under (Niclas 2026-09-29).
+        const ruta = (tal: number, ord: string) => {
+          const div = document.createElement('div');
+          div.className = 'stat-tal';
+          const siffra = document.createElement('strong');
+          siffra.textContent = tal.toLocaleString('sv-SE');
+          const text = document.createElement('span');
+          text.textContent = ord;
+          div.append(siffra, text);
+          return div;
+        };
+        summa.replaceChildren(
+          ruta((total.total ?? 0) - handelser, 'besökare'),
+          ruta(Math.max(0, handelser - delade), 'nedladdningar'),
+          ruta(delade, 'delningar'),
+        );
         for (const [namn, rader] of Object.entries(k)) visaKategori(namn, rader);
         visaDiagram(period, total.stats ?? []);
         visaPopular(period, total.stats ?? []);
+        if (borjarForeRakningen(period)) {
+          const diagramText = rot.querySelector('[data-diagram-text]') as HTMLElement;
+          diagramText.textContent = `${diagramText.textContent} GoatCounter räknar sedan 28 september 2026, så perioden börjar där.`;
+        }
         // Varifrån besökarna kommer och vilken skärm de har: GoatCounters listor. Svarar en inte döljs dess ruta.
         const extra = async (namn: string, vag: string, gor: (stats: Stat[]) => Rad[]) => {
           const sektion = rot.querySelector(`[data-kategori="${namn}"]`) as HTMLElement;
@@ -436,6 +481,12 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
       } catch (e) {
         if (denna !== korning) return;
         if (e instanceof NyckelFel) { visaForm('Nyckeln fungerar inte. Skapa en ny med rätten Read statistics och klistra in den.'); return; }
+        if (e instanceof Grans) {
+          status.textContent = navigator.onLine === false
+            ? 'Telefonen eller datorn är inte uppkopplad. Försök igen när nätet fungerar.'
+            : 'GoatCounter tar inte emot fler anrop från den här internetanslutningen just nu. Gränsen är 500 i timmen, så försök igen om en stund.';
+          return;
+        }
         status.textContent = `Det gick inte att hämta siffrorna: ${(e as Error).message}. Ladda om sidan och försök igen.`;
       }
     }

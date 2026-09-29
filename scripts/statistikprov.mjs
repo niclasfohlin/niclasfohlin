@@ -1,67 +1,117 @@
-// Prov av statistiksidan mot GoatCounters riktiga server (K-094). Sidan körs i Chrome med en påhittad nyckel, så
-// varje anrop går på riktigt, med webbläsarens förfrågan (preflight) och GoatCounters gräns på 4 per sekund. Svaret
-// 401 byts mot provsiffror efter att det kommit, så att sidan går vidare genom alla anrop som med en riktig nyckel.
-// Påhittad nyckel räknas per adress i stället för per nyckel, alltså strängare än hos Niclas.
-//   node scripts/statistikprov.mjs https://niclasfohlin.se/statistik     sajten som ligger ute
-//   node scripts/statistikprov.mjs http://localhost:4321/statistik       npm run dev
-// Godkänt: varje period slutar med Hämtat, stoppade och status429 är 0. Kräver Chrome. Se DRIFT.md under Besöksstatistik.
+// Prov av statistiksidan (K-094, K-095). Sidan körs i Chrome, och varje anrop går till GoatCounters riktiga server,
+// med webbläsarens förfrågan (preflight) och GoatCounters gränser (4 anrop per sekund och 500 i timmen per
+// internetanslutning, handlers/mw.go och handlers.go i GoatCounters källkod).
+//
+//   node scripts/statistikprov.mjs http://localhost:4321/statistik
+//     Påhittad nyckel. GoatCounter svarar 401, och svaret byts mot provsiffror som härmar GoatCounter: 125 sidor och
+//     händelser, högst 100 per omgång, och exclude_paths läst som GoatCounter läser den (bara första värdet, delat vid
+//     komma). Så syntes felet med 7 dagar, 30 dagar och år (K-095): samma 100 kom tillbaka fem gånger.
+//   GC_NYCKEL=<nyckeln> node scripts/statistikprov.mjs https://niclasfohlin.se/statistik
+//     Riktiga siffror. Sifferrutorna jämförs med det GoatCounter själv räknar. Nyckeln är Niclas och finns inte i repot;
+//     den läses bara ur miljön, skrivs aldrig ut, och Chrome körs inkognito så att den inte sparas.
+//
+// Godkänt: varje period slutar med Hämtat, inget anrop stoppas, inget 429, och sifferrutorna stämmer. Skriptet slutar
+// med felkod 1 annars. Varje körning gör omkring 20 anrop mot timmens 500. Kräver Chrome. Se DRIFT.md under
+// Besöksstatistik.
 import { spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
 
 const url = process.argv[2];
-const chrome = ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe'].find((p) => existsSync(p));
-const port = 9300 + Math.floor(Math.random() * 500);
-const proc = spawn(chrome, [`--remote-debugging-port=${port}`, '--headless=new', '--disable-gpu', '--no-first-run', `--user-data-dir=${process.env.TEMP ?? '/tmp'}/statprov-${port}`, 'about:blank'], { stdio: 'ignore' });
+if (!url) { console.error('Ange adressen till /statistik.'); process.exit(1); }
+const nyckel = process.env.GC_NYCKEL ?? '';
+const riktig = Boolean(nyckel);
 const vanta = (ms) => new Promise((r) => setTimeout(r, ms));
+const iso = (d) => d.toISOString().replace(/\.\d{3}Z$/, 'Z');
+const RAKNINGEN_BORJADE = new Date(2026, 8, 28);
+
+// Provsiffrorna: 125 sidor och händelser, som veckan hade 2026-09-29.
+const PROV = Array.from({ length: 125 }, (_, i) => {
+  const id = i + 1;
+  if (id <= 6) return { path: `dela:facebook:stodundervisning/metod-${id}`, path_id: id, title: `Metod ${id}: delad på Facebook`, event: true, count: 1 };
+  if (id <= 60) return { path: `fil:metod-${id}.docx`, path_id: id, title: `Metod ${id}: allt om metoden som Word`, event: true, count: 2 };
+  return { path: `/stodundervisning/metod-${id}`, path_id: id, title: `Metod ${id} · Niclas Fohlin`, event: false, count: 5 };
+});
+const summa = (lista) => {
+  const handelser = lista.filter((h) => h.event).reduce((a, h) => a + h.count, 0);
+  const alla = lista.reduce((a, h) => a + h.count, 0);
+  const dela = lista.filter((h) => h.path.startsWith('dela:')).reduce((a, h) => a + h.count, 0);
+  return [alla - handelser, handelser - dela, dela];
+};
+
+// Det GoatCounter själv räknar, för i dag och för perioden från 28 september (7 dagar, 30 dagar och år).
+async function forvantat() {
+  if (!riktig) return { dag: summa(PROV), lang: summa(PROV) };
+  const api = async (vag, par) => {
+    const u = new URL('https://niclasfohlin.goatcounter.com/api/v0' + vag);
+    for (const [k, v] of par) u.searchParams.append(k, String(v));
+    await vanta(800);
+    return (await fetch(u, { headers: { Authorization: `Bearer ${nyckel}` } })).json();
+  };
+  const slut = new Date(); slut.setMinutes(0, 0, 0); slut.setHours(slut.getHours() + 1);
+  const nu = new Date();
+  const ut = {};
+  for (const [namn, start] of [['dag', new Date(nu.getFullYear(), nu.getMonth(), nu.getDate())], ['lang', RAKNINGEN_BORJADE]]) {
+    const tot = await api('/stats/total', [['start', iso(start)], ['end', iso(slut)]]);
+    const hits = [];
+    const sedda = new Set();
+    for (let i = 0; i < 5; i++) {
+      const s = await api('/stats/hits', [['start', iso(start)], ['end', iso(slut)], ['limit', 100], ...(sedda.size ? [['exclude_paths', [...sedda].join(',')]] : [])]);
+      const nya = (s.hits ?? []).filter((h) => !sedda.has(h.path_id));
+      nya.forEach((h) => { sedda.add(h.path_id); hits.push(h); });
+      if (!s.more || !nya.length) break;
+    }
+    const dela = hits.filter((h) => h.path.startsWith('dela:')).reduce((a, h) => a + h.count, 0);
+    ut[namn] = [tot.total - tot.total_events, tot.total_events - dela, dela];
+  }
+  return ut;
+}
 
 const forberedelse = `
 (() => {
   if (!location.pathname.startsWith('/statistik')) return;
-  try { localStorage.setItem('goatcounter-nyckel', 'prov-inte-riktig'); localStorage.removeItem('statistik-period'); } catch {}
+  try { localStorage.setItem('goatcounter-nyckel', ${JSON.stringify(riktig ? nyckel : 'prov-inte-riktig')}); localStorage.removeItem('statistik-period'); } catch {}
   const logg = [];
   window.__prov = logg;
-  const riktig = window.fetch.bind(window);
-  const prov = (adress) => {
-    const sokvag = adress.pathname;
-    if (sokvag.endsWith('/stats/hits')) {
-      const dagar = (Date.now() - new Date(adress.searchParams.get('start')).getTime()) / 86400000;
-      const uteslutna = adress.searchParams.getAll('exclude_paths').length;
-      logg.limit = adress.searchParams.get('limit');
-      if (dagar > 200 && uteslutna === 0) return { more: true, hits: Array.from({ length: 100 }, (_, i) => ({ path: '/artiklar/sida-' + i, path_id: 1000 + i, title: 'Sida ' + i, event: false, count: 1 })) };
-      if (dagar > 200) { logg.uteslutna = uteslutna; return { more: false, hits: [{ path: 'dela:facebook:stodundervisning/upprepad-lasning', path_id: 2, title: 'Upprepad läsning: delad på Facebook', event: true, count: 7 }] }; }
-      return { more: false, hits: [
-        { path: '/stodundervisning/upprepad-lasning', path_id: 1, title: 'Upprepad läsning · Niclas Fohlin', event: false, count: 40 },
-        { path: 'dela:facebook:stodundervisning/upprepad-lasning', path_id: 2, title: 'Upprepad läsning: delad på Facebook', event: true, count: 7 },
-        { path: 'fil:upprepad-lasning-lathund.pdf', path_id: 3, title: 'Upprepad läsning: lathunden som pdf', event: true, count: 5 },
-      ] };
+  const PROV = ${JSON.stringify(PROV)};
+  const svaraSom = (adress) => {
+    if (adress.pathname.endsWith('/stats/hits')) {
+      // Som GoatCounter: limit högst 100, och exclude_paths är bara det första värdet, delat vid komma och mellanslag.
+      const limit = Math.min(Number(adress.searchParams.get('limit')) || 20, 100);
+      const uteslutna = new Set((adress.searchParams.get('exclude_paths') || '').split(/[, ]/).filter(Boolean).map(Number));
+      const kvar = PROV.filter((h) => !uteslutna.has(h.path_id)).sort((a, b) => b.count - a.count);
+      return { hits: kvar.slice(0, limit), more: kvar.length > limit };
     }
-    if (sokvag.endsWith('/stats/total')) return { total: 52, total_events: 12, stats: [] };
+    if (adress.pathname.endsWith('/stats/total')) {
+      const handelser = PROV.filter((h) => h.event).reduce((a, h) => a + h.count, 0);
+      return { total: PROV.reduce((a, h) => a + h.count, 0), total_events: handelser, stats: [] };
+    }
     return { stats: [] };
   };
+  const hamta = window.fetch.bind(window);
   window.fetch = async (u, o) => {
     const adress = new URL(String(u), location.href);
-    if (!adress.pathname.startsWith('/api/v0/')) return riktig(u, o);
-    const rad = { vag: adress.pathname.replace('/api/v0', ''), start: Math.round(performance.now()) };
+    if (!adress.pathname.startsWith('/api/v0/')) return hamta(u, o);
+    const rad = { vag: adress.pathname.replace('/api/v0/stats/', '') };
     logg.push(rad);
     try {
-      const svar = await riktig(u, o);
+      const svar = await hamta(u, o);
       rad.status = svar.status;
-      if (svar.status === 401) return new Response(JSON.stringify(prov(adress)), { status: 200, headers: { 'Content-Type': 'application/json' } });
+      if (${riktig ? 'false' : 'true'} && svar.status === 401) return new Response(JSON.stringify(svaraSom(adress)), { status: 200, headers: { 'Content-Type': 'application/json' } });
       return svar;
-    } catch (fel) {
-      rad.status = 'Failed to fetch';
-      throw fel;
-    }
+    } catch (fel) { rad.status = 'Failed to fetch'; throw fel; }
   };
-})();
-`;
+})();`;
 
+const chrome = process.env.CHROME ?? ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', '/usr/bin/google-chrome'].find((p) => existsSync(p));
+if (!chrome) { console.error('Hittar inte Chrome. Sätt CHROME=<sökväg>.'); process.exit(1); }
+const mal0 = await forvantat();
+const port = 9300 + Math.floor(Math.random() * 500);
+const proc = spawn(chrome, [`--remote-debugging-port=${port}`, '--headless=new', '--incognito', '--disable-gpu', '--no-first-run', `--user-data-dir=${process.env.TEMP ?? '/tmp'}/statistikprov-${port}`, 'about:blank'], { stdio: 'ignore' });
+let fel = 0;
 try {
   let mal;
-  for (let i = 0; i < 40 && !mal; i++) {
-    await vanta(250);
-    try { mal = (await (await fetch(`http://127.0.0.1:${port}/json/list`)).json()).find((t) => t.type === 'page'); } catch {}
-  }
+  for (let i = 0; i < 40 && !mal; i++) { await vanta(250); try { mal = (await (await fetch(`http://127.0.0.1:${port}/json/list`)).json()).find((t) => t.type === 'page'); } catch {} }
+  if (!mal) throw new Error('Chrome svarade inte.');
   const ws = new WebSocket(mal.webSocketDebuggerUrl);
   await new Promise((r, x) => { ws.onopen = r; ws.onerror = x; });
   let nr = 0;
@@ -73,53 +123,50 @@ try {
   await skicka('Page.addScriptToEvaluateOnNewDocument', { source: forberedelse });
   await skicka('Page.navigate', { url });
 
-  const status = () => utvardera(`document.querySelector('[data-status]')?.textContent || document.querySelector('.stat-status, [role=status]')?.textContent || ''`);
-  const vantaKlar = async (maxMs = 30000) => {
+  const vantaKlar = async () => {
     const t0 = Date.now();
-    let s = '';
-    while (Date.now() - t0 < maxMs) {
+    while (Date.now() - t0 < 60000) {
       await vanta(250);
-      s = await status();
-      if (/Hämtat|Det gick inte|Nyckeln/.test(s)) return { s, ms: Date.now() - t0 };
+      const s = await utvardera(`document.querySelector('[data-status]')?.textContent || ''`);
+      if (/Hämtat|Det gick inte|Nyckeln|tar inte emot|inte uppkopplad/.test(s)) return { s, ms: Date.now() - t0 };
     }
-    return { s: `ingen färdig status efter ${maxMs} ms: ${s}`, ms: Date.now() - t0 };
+    return { s: 'ingen färdig status efter 60 s', ms: 60000 };
   };
-  const logglangd = () => utvardera('window.__prov.length');
-  const sammanfatta = async (fran) => utvardera(`(() => { const l = window.__prov.slice(${fran}); return { anrop: l.length, stoppade: l.filter((r) => r.status === 'Failed to fetch').length, status429: l.filter((r) => r.status === 429).length, vagar: l.map((r) => r.vag.replace('/stats/', '') + ':' + r.status).join(' ') }; })()`);
-
-  const resultat = [];
-  let fran = 0;
-  let r = await vantaKlar();
-  resultat.push({ period: 'dag (vid start)', ...r, ...(await sammanfatta(fran)) });
-  for (const period of ['vecka', 'manad', 'ar', 'dag']) {
-    fran = await logglangd();
-    await utvardera(`document.querySelector('[data-period="${period}"]').click()`);
-    await vanta(100);
-    r = await vantaKlar();
-    resultat.push({ period, ...r, ...(await sammanfatta(fran)) });
-  }
-  // Snabba byten: 7 dagar och direkt 1 år. Bara det senast valda ska visas.
-  fran = await logglangd();
-  await utvardera(`document.querySelector('[data-period="vecka"]').click(); document.querySelector('[data-period="ar"]').click()`);
-  await vanta(100);
-  r = await vantaKlar();
-  const vald = await utvardera(`document.querySelector('[data-period][aria-pressed="true"]')?.dataset.period`);
-  resultat.push({ period: 'vecka och direkt ar', vald, ...r, ...(await sammanfatta(fran)) });
-  resultat.push({ period: 'limit och uteslutna på andra sidan i ar', limit: await utvardera('window.__prov.limit'), uteslutna: await utvardera('window.__prov.uteslutna') });
+  const tal = () => utvardera(`[...document.querySelectorAll('.stat-tal strong')].map((e) => Number(e.textContent.replace(/[^0-9]/g, '')))`);
+  const langd = () => utvardera('window.__prov.length');
+  const anrop = (fran) => utvardera(`window.__prov.slice(${fran})`);
+  const prova = async (namn, gor, forvantade) => {
+    const fran = await langd();
+    await gor();
+    const r = await vantaKlar();
+    const l = await anrop(fran);
+    const stoppade = l.filter((x) => x.status === 'Failed to fetch').length;
+    const status429 = l.filter((x) => x.status === 429).length;
+    const visade = await tal();
+    const ratt = JSON.stringify(visade) === JSON.stringify(forvantade);
+    const ok = /Hämtat/.test(r.s) && !stoppade && !status429 && ratt;
+    if (!ok) fel++;
+    console.log(`${ok ? 'GRÖNT' : 'RÖTT '}  ${namn.padEnd(34)} ${r.s.padEnd(16)} ${String(r.ms).padStart(5)} ms  ${String(l.length).padStart(2)} anrop  stoppade ${stoppade}  429 ${status429}  rutor ${visade.join('/')}${ratt ? '' : ` (GoatCounter: ${forvantade.join('/')})`}`);
+  };
+  const klick = (period) => () => utvardera(`document.querySelector('[data-period="${period}"]').click()`);
+  console.log(riktig ? 'Riktiga siffror med Niclas nyckel.' : 'Påhittad nyckel och provsiffror som härmar GoatCounter.');
+  await prova('i dag, när sidan laddas', async () => {}, mal0.dag);
+  await prova('7 dagar', klick('vecka'), mal0.lang);
+  await prova('30 dagar', klick('manad'), mal0.lang);
+  await prova('1 år', klick('ar'), mal0.lang);
+  await prova('i dag igen, sparat', klick('dag'), mal0.dag);
   await skicka('Page.navigate', { url });
   await vanta(700);
-  fran = 0;
-  await utvardera(`document.querySelector('[data-period="vecka"]').click()`);
-  await vanta(150);
-  await utvardera(`document.querySelector('[data-period="manad"]').click()`);
-  await vanta(150);
-  await utvardera(`document.querySelector('[data-period="ar"]').click()`);
-  r = await vantaKlar(45000);
-  const vald2 = await utvardera(`document.querySelector('[data-period][aria-pressed="true"]')?.dataset.period`);
-  const summa2 = await utvardera(`document.querySelector('[data-summa]')?.textContent`);
-  resultat.push({ period: 'ny laddning, dag, vecka, manad och ar i snabb följd', vald: vald2, summa: summa2, ...r, ...(await sammanfatta(0)) });
-  console.log(JSON.stringify(resultat, null, 1));
+  await prova('ny laddning, byten i snabb följd', async () => {
+    await klick('vecka')();
+    await vanta(150);
+    await klick('manad')();
+    await vanta(150);
+    await klick('ar')();
+  }, mal0.lang);
   ws.close();
 } finally {
   proc.kill();
 }
+if (fel) { console.log(`${fel} prov röda.`); process.exit(1); }
+console.log('Alla prov gröna.');

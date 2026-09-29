@@ -254,8 +254,23 @@ form.prenumerera button:hover { background: var(--farg-accent-mork); }
 .stat-perioder { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.4rem; max-width: 30rem; margin: 0 0 1rem; }
 .stat-perioder button { font: inherit; font-weight: 600; min-height: 2.75rem; padding: 0.4rem 0.3rem; white-space: nowrap; border: 1.5px solid var(--farg-accent); border-radius: 6px; background: var(--farg-yta); color: var(--farg-accent); cursor: pointer; }
 .stat-perioder button[aria-pressed="true"] { background: var(--farg-accent); color: #fff; }
-.stat-summa { margin: 0 0 1.25rem; font-size: 1rem; }
-.stat-summa strong { font-size: 1.5rem; font-variant-numeric: tabular-nums; }
+/* Överst tre rutor med talet stort och ordet under (Niclas 2026-09-29). Formen följer sidans egen bredd räknad
+   i rem, så att den också ändras när texten i telefonen är förstorad: ryms inte fyra knappar och tre rutor bredvid
+   varandra blir knapparna två och två och rutorna rader med talet och ordet bredvid varandra. Ett ord bryts aldrig. */
+.statistik { container: statistik / inline-size; }
+.stat-perioder button { font-size: 0.9rem; }
+.stat-summa { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.4rem; max-width: 30rem; margin: 0 0 1.25rem; }
+.stat-summa:empty { display: none; }
+.stat-tal { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; padding: 0.55rem 0.4rem 0.5rem; border: 1px solid var(--farg-kant); border-radius: var(--radie); background: var(--farg-yta); }
+.stat-tal strong { font-size: 1.5rem; line-height: 1.1; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.stat-tal span { font-size: 0.74rem; line-height: 1.25; color: var(--farg-text-svag); white-space: nowrap; }
+@container statistik (max-width: 19.5rem) {
+  .stat-perioder { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stat-summa { grid-template-columns: minmax(0, 1fr); gap: 0.3rem; }
+  .stat-tal { flex-direction: row; align-items: baseline; gap: 0.5rem; padding: 0.45rem 0.7rem; }
+  .stat-tal strong { font-size: 1.3rem; }
+  .stat-tal span { font-size: 0.85rem; }
+}
 .stat-kategori { background: var(--farg-yta); border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0.9rem 1.1rem; margin: 0 0 1rem; }
 .stat-kategori h2 { font-size: 1.1rem; margin: 0 0 0.5rem; }
 .stat-kategori .meta { margin: 0; }
