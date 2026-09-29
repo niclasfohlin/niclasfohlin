@@ -25,6 +25,13 @@ const SANS = 'Calibri', MONO = 'Consolas';
 const W = 13.333, H = 7.5;
 // Sidfoten med upphovet tar de nedersta 0.22 tum på varje bild; innehållet slutar ovanför.
 const BOTTEN = H - 0.22;
+// Strecket mellan spalterna står mitt på sidan på bild 1 och 2, som mallsidans två lika spalter, lathunden på sajten och
+// Word-lathunden (Niclas 2026-09-29: på bild 1 var vänsterspalten smalare än den högra, och texten trängdes mot rutan).
+// Texten står 0,16 tum från strecket och rutorna 0,31 tum från det, på båda sidor. Bild 4 har kvar sin delning vid 52
+// procent, eftersom vänsterspaltens text och rutan På bordet behöver bredden (i mitten trängdes rutan i Bråkkursen).
+const MITT = W / 2;
+const V_X = 0.46, V_BREDD = MITT - 0.01 - 0.16 - V_X, V_RUTA = MITT - 0.01 - 0.31 - V_X;
+const H_X = MITT + 0.01 + 0.31, H_BREDD = W - 0.46 - H_X;
 export type LathundFormat = '16:9' | 'A4';
 const SIDA: Record<LathundFormat, { w: number; h: number }> = { '16:9': { w: W, h: H }, A4: { w: 297 / 25.4, h: 210 / 25.4 } };
 
@@ -307,37 +314,37 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
     const b = L.bild1, s = pres.addSlide();
     header(s, b.titel, 'METODEN', 1);
     band(s, b.band);
-    rect(s, 5.89, 1.48, 0.02, BOTTEN - 1.48, INK);
-    label(s, b.introRubrik, 0.46, 1.65, 5.3);
+    rect(s, MITT - 0.01, 1.48, 0.02, BOTTEN - 1.48, INK);
+    label(s, b.introRubrik, V_X, 1.65, V_BREDD);
     // Rutan under intron är ritad för tre punkter. Fler punkter får mindre grad, och intron krymper ett steg innan det varnas.
     const treSize = b.tre.length > 4 ? 11.5 : 12.5;
-    const treH = b.tre.map((t) => Math.max(b.tre.length > 4 ? 0.26 : 0.32, estH(t, 4.85, treSize, b.tre.length > 4 ? 0.06 : 0.1)));
+    const treH = b.tre.map((t) => Math.max(b.tre.length > 4 ? 0.26 : 0.32, estH(t, V_RUTA - 0.26, treSize, b.tre.length > 4 ? 0.06 : 0.1)));
     const boxH = 0.45 + treH.reduce((a, x) => a + x, 0) + 0.05;
-    const afH = b.arbetsform ? Math.max(0.6, estH(b.arbetsform, 5.27, 12, 0.1)) : 0;
+    const afH = b.arbetsform ? Math.max(0.6, estH(b.arbetsform, V_BREDD, 12, 0.1)) : 0;
     let introSize = 12.75;
-    let introH = b.intro.reduce((a, p) => a + estH(p, 5.27, introSize, 0.12), 0);
+    let introH = b.intro.reduce((a, p) => a + estH(p, V_BREDD, introSize, 0.12), 0);
     const nedre = BOTTEN - 0.05;
     let boxY = Math.min(Math.max(1.96 + introH + 0.15, 4.05), nedre - (b.arbetsform ? afH + 0.28 + 0.15 : 0) - boxH);
     if (1.96 + introH > boxY - 0.05) {
       introSize = 12;
-      introH = b.intro.reduce((a, p) => a + estH(p, 5.27, introSize, 0.1), 0);
+      introH = b.intro.reduce((a, p) => a + estH(p, V_BREDD, introSize, 0.1), 0);
       boxY = Math.min(Math.max(1.96 + introH + 0.15, 4.05), nedre - (b.arbetsform ? afH + 0.28 + 0.15 : 0) - boxH);
     }
     if (1.96 + introH > boxY + 0.6) varna(`introtexten på bild 1 är lång (${b.intro.join(' ').split(' ').length} ord): korta lathund.metoden.text`);
-    txt(s, b.intro.map((p, i) => ({ text: p, options: { breakLine: i < b.intro.length - 1 } })), 0.46, 1.96, 5.27, boxY - 1.96 - 0.1, { size: introSize, psa: 8 });
-    darkBox(s, b.treRubrik, 0.46, boxY, 5.11, boxH);
+    txt(s, b.intro.map((p, i) => ({ text: p, options: { breakLine: i < b.intro.length - 1 } })), V_X, 1.96, V_BREDD, boxY - 1.96 - 0.1, { size: introSize, psa: 8 });
+    darkBox(s, b.treRubrik, V_X, boxY, V_RUTA, boxH);
     let ty = boxY + 0.42;
-    b.tre.forEach((t, i) => { txt(s, rich(t), 0.61, ty, 4.85, treH[i], { size: treSize }); ty += treH[i]; });
+    b.tre.forEach((t, i) => { txt(s, rich(t), V_X + 0.15, ty, V_RUTA - 0.26, treH[i], { size: treSize }); ty += treH[i]; });
     if (b.arbetsform) {
       const afY = boxY + boxH + 0.15;
-      label(s, 'ARBETSFORM', 0.46, afY, 5.3);
-      txt(s, b.arbetsform, 0.46, afY + 0.28, 5.27, Math.max(0.3, nedre - afY - 0.28), { size: 12 });
+      label(s, 'ARBETSFORM', V_X, afY, V_BREDD);
+      txt(s, b.arbetsform, V_X, afY + 0.28, V_BREDD, Math.max(0.3, nedre - afY - 0.28), { size: 12 });
     }
-    label(s, b.stegRubrik, 6.22, 1.65, 6.9);
-    const rutaH = b.ruta ? Math.max(0.78, estH(b.ruta, 6.2, 11.5, 0.3)) : 0;
+    label(s, b.stegRubrik, H_X, 1.65, H_BREDD);
+    const rutaH = b.ruta ? Math.max(0.78, estH(b.ruta, H_BREDD - 0.46, 11.5, 0.3)) : 0;
     const tableAvail = BOTTEN - 1.96 - (b.ruta ? rutaH + 0.17 : 0);
-    shapeTable(s, 6.22, 1.96, 6.66, 1.75, b.stegKolumner, b.steg.map((st) => ({ namn: st.namn, under: st.under, rader: st.fraser, kursiv: true })), tableAvail);
-    if (b.ruta) cream(s, 6.22, BOTTEN - rutaH, 6.66, rutaH, b.ruta, 11.5);
+    shapeTable(s, H_X, 1.96, H_BREDD, 1.75, b.stegKolumner, b.steg.map((st) => ({ namn: st.namn, under: st.under, rader: st.fraser, kursiv: true })), tableAvail);
+    if (b.ruta) cream(s, H_X, BOTTEN - rutaH, H_BREDD, rutaH, b.ruta, 11.5);
     fot(s);
     s.addNotes(`${b.anteckning} ${upphov}`);
   }
@@ -346,24 +353,24 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
   {
     const b = L.bild2, s = pres.addSlide();
     header(s, b.titel, 'ETT PASS', 2);
-    rect(s, 0, 0.66, W, 0.02, INK); rect(s, 5.89, 0.68, 0.02, BOTTEN - 0.68, INK);
+    rect(s, 0, 0.66, W, 0.02, INK); rect(s, MITT - 0.01, 0.68, 0.02, BOTTEN - 0.68, INK);
     const gruppLang = plain(b.grupp).length > 52;
     const gruppH = gruppLang ? 0.45 : 0.25;
-    txt(s, b.grupp, 0.46, 0.88, 5.4, gruppH, { mono: true, size: gruppLang ? 10.5 : 12, color: AMBER });
+    txt(s, b.grupp, V_X, 0.88, V_BREDD + 0.13, gruppH, { mono: true, size: gruppLang ? 10.5 : 12, color: AMBER });
     const top2 = 1.2 + (gruppLang ? 0.2 : 0);
-    const c1H = b.forberett ? Math.max(1.0, estH(b.forberett, 4.7, 12, 0.35)) : 0, c2H = b.klarTidigt ? Math.max(0.8, estH(b.klarTidigt, 4.7, 12, 0.35)) : 0;
+    const c1H = b.forberett ? Math.max(1.0, estH(b.forberett, V_BREDD - 0.57, 12, 0.35)) : 0, c2H = b.klarTidigt ? Math.max(0.8, estH(b.klarTidigt, V_BREDD - 0.57, 12, 0.35)) : 0;
     const storyH = BOTTEN - top2 - (c1H ? c1H + 0.15 : 0) - (c2H ? c2H + 0.15 : 0);
-    frame(s, 0.46, top2, 5.27, storyH, LINE, 0.75, CELL);
-    const need = b.exempel.reduce((a, p) => a + estH(p, 4.97, 11.5, 0.07), 0);
+    frame(s, V_X, top2, V_BREDD, storyH, LINE, 0.75, CELL);
+    const need = b.exempel.reduce((a, p) => a + estH(p, V_BREDD - 0.3, 11.5, 0.07), 0);
     if (need > storyH + 0.1) varna(`exemplet på bild 2 är långt (${need.toFixed(2)} > ${(storyH - 0.2).toFixed(2)} tum): korta lathund.pass.text till cirka 130 ord`);
     // Exemplet berättas rakt och replikerna (”…”) kursiva, som på sidan, i lathunden och i Word.
     const repliker = (t: string, sist: boolean) => t.split(/(”[^”]*”)/).filter(Boolean).map((x, j, alla) => ({ text: x, options: { italic: x.startsWith('”'), breakLine: !sist && j === alla.length - 1 } }));
-    txt(s, b.exempel.flatMap((t, i) => repliker(t, i === b.exempel.length - 1)), 0.61, top2 + 0.1, 4.97, storyH - 0.2, { size: 11.5, psa: 5 });
+    txt(s, b.exempel.flatMap((t, i) => repliker(t, i === b.exempel.length - 1)), V_X + 0.15, top2 + 0.1, V_BREDD - 0.3, storyH - 0.2, { size: 11.5, psa: 5 });
     let y = top2 + storyH + 0.15;
-    if (b.forberett) { cream(s, 0.46, y, 5.27, c1H, b.forberett, 12, b.forberettRubrik); y += c1H + 0.15; }
-    if (b.klarTidigt) cream(s, 0.46, y, 5.27, c2H, b.klarTidigt, 12, 'KLAR TIDIGT');
-    label(s, b.schemaRubrik, 6.22, 0.88, 6.9);
-    shapeTable(s, 6.22, 1.2, 6.66, 1.45, ['TID', 'VAD HÄNDER'], b.schema.map((r) => ({ namn: r.tid, fet: r.fas, rader: [r.text] })), BOTTEN - 1.2);
+    if (b.forberett) { cream(s, V_X, y, V_BREDD, c1H, b.forberett, 12, b.forberettRubrik); y += c1H + 0.15; }
+    if (b.klarTidigt) cream(s, V_X, y, V_BREDD, c2H, b.klarTidigt, 12, 'KLAR TIDIGT');
+    label(s, b.schemaRubrik, H_X, 0.88, H_BREDD);
+    shapeTable(s, H_X, 1.2, H_BREDD, 1.45, ['TID', 'VAD HÄNDER'], b.schema.map((r) => ({ namn: r.tid, fet: r.fas, rader: [r.text] })), BOTTEN - 1.2);
     fot(s);
     s.addNotes(`${b.anteckning} ${upphov}`);
   }
