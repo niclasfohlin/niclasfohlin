@@ -12,6 +12,20 @@ När arbetet är klart och `npm run validera` är grönt slår du själv ihop gr
 
 Kreditspärren (Niclas 2026-09-27): vid 100 krediter kvar laddas inget upp. Spärren stänger när nästa bygge skulle ta saldot under 100. Läget står i en rad vid varje nytt uppdrag och efter en kompaktering, och kroken stoppar en push till main, `netlify deploy --prod` och nya byggen när spärren är stängd. Säg då till Niclas och arbeta vidare lokalt: grenar, `npm run validera` och sammanslagning till main som vanligt, men main pushas inte. Säkerhetskopiera det som väntar med `git push origin main:vantar-pa-krediter`; Netlify bygger bara main. Medan spärren är stängd släpper kroken bara en push där varje ny commit bär `[skip netlify]`, så väntar sajtändringar på main går inte heller en ren dokumentationsändring upp; lägg den i reservgrenen. Kör pushen som ett eget kommando: kroken prövar hela kommandot, och en kedja med `git merge … && git push` stoppas helt. När krediterna är påfyllda laddas allt upp med en enda push av main, och det nya mejlas i ett utskick; ta sedan bort reservgrenen med `git push origin --delete vantar-pa-krediter` (allt i den finns då på main). `KREDITSPARR=av` först i kommandot släpper igenom en push, bara när Niclas sagt det.
 
+## Kontroll före uppladdning
+
+Niclas ska inte behöva provköra sajten (2026-09-29, efter att delningsraden laddades upp tre gånger på en timme och han hittade felen på sin telefon). Innan main pushas med något som en läsare ser går allt i tabellen igenom. Det som inte går igenom väntar till nästa arbetspass.
+
+| Kontroll | Hur |
+|---|---|
+| Bygget | `npm run validera` är grönt |
+| Sidorna | Varje ändrad sida är läst som bilder i telefonbredd (320 till 430) och på dator, i förhandsvisningen eller med `scripts/skarmbild.mjs` |
+| Flödena | Varje knapp och länk är genomgången som läsare på telefon och dator: vad som händer, i vilken app, vilken text som följer med, och att två knappar inte gör samma sak |
+| Andra tjänster | Uppgifter om Facebook, LinkedIn, Google och andra kommer ur tjänstens egen dokumentation. Det osäkra skrivs som osäkert och byggs inte på |
+| Det som bara går att pröva på en riktig telefon | Appar, telefonens delningsmeny och inloggningar sägs som oprövat till Niclas före pushen, med exakt vad han kan pröva, en gång |
+| Det andra ögat | En större ändring granskas (agenten granskare eller Codex) före pushen, och P1 lagas före pushen |
+| Rättelser | Samlas till en push per arbetspass, också när Niclas hittar ett fel, om felet inte hindrar läsarna |
+
 ## Innan du börjar en uppgift
 
 Kör `git status` och `git branch --show-current`. Läs de filer uppgiften rör innan du ändrar dem. Rör bara det uppgiften gäller. Hittar du något annat som borde fixas: lägg det i kön med `node scripts/ko.mjs lagg "<vad>" --var <fil>`, gör det inte i samma commit.
