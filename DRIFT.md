@@ -130,14 +130,14 @@ Filnamnet bär en kontrollsumma av kortets text, mallen, designsystemets variabl
 
 | Knapp | Vad som delas | Visas |
 |---|---|---|
-| Facebook | `facebook.com/sharer/sharer.php?u=`: bara länken; Facebook visar delningskortet, och den som delar skriver själv | alltid, också utan JavaScript |
-| LinkedIn | `linkedin.com/sharing/share-offsite/?url=`: bara länken med kortet; på telefonen öppnas LinkedIns app | alltid |
+| Facebook | `facebook.com/sharer/sharer.php?u=`: bara länken; Facebook visar delningskortet, och den som delar skriver själv. På Niclas Android-telefon fungerade länken (2026-09-29) | alltid, också utan JavaScript |
+| LinkedIn | `linkedin.com/sharing/share-offsite/?url=`: bara länken med kortet. På telefonen öppnar länken LinkedIns mobilsida och inte appen (Niclas 2026-09-29), så där öppnar knappen telefonens delningsmeny, där man väljer LinkedIn-appen och redan är inloggad | alltid; menyn på pekskärm med delningsmeny |
 | Mejl | ämnet är titeln, texten ingressen och länken (utan JavaScript bara länken) | alltid |
 | Kopiera länk | länken; webbläsarens urklipp, annars den äldre vägen för appar som stänger det (Facebooks webbläsare på Android), och går ingen visas länken att markera | med JavaScript |
-| Instagram | delningskortet som bild genom telefonens delningsmeny, och länken i urklipp för klistermärket Länk i en berättelse | på pekskärm där bilder kan delas |
+| Instagram | delningskortet som bild genom telefonens delningsmeny ("Dela 1 bild" på Android), där man väljer Instagram, och länken i urklipp för klistermärket Länk i en berättelse | på pekskärm där bilder kan delas |
 | Fler appar | telefonens egen meny (Messenger, sms, WhatsApp, Teams) med titeln och länken | på pekskärm med delningsmeny |
 
-Så gäller det i september 2026: Meta stängde gilla- och kommentarsknapparna för andra webbplatser den 10 februari 2026, men delningsknappen och delningslänken finns kvar, och Facebook har sedan länge bara tagit emot länken (text och bild kommer ur sidans `og:`-taggar). LinkedIns länk tar bara `url`; de gamla `shareArticle`-fälten för titel och sammanfattning är borttagna. Instagram har ingen delningslänk för webben; bilden genom telefonens meny är den väg som finns. Raden laddar inget skript från Facebook, LinkedIn eller någon annan, så inga kakor sätts förrän läsaren själv trycker.
+Så gäller det i september 2026: Meta stängde gilla- och kommentarsknapparna för andra webbplatser den 10 februari 2026, men delningsknappen och delningslänken finns kvar, och Facebook har sedan länge bara tagit emot länken (text och bild kommer ur sidans `og:`-taggar). LinkedIns länk tar bara `url`; de gamla `shareArticle`-fälten för titel och sammanfattning är borttagna. Instagram har ingen delningslänk för webben; bilden genom telefonens meny är den väg som finns. Ingen webbsida kan öppna en apps delningsvy direkt: en länk till facebook.com eller linkedin.com öppnas i webbläsaren eller appen beroende på telefonen, och bara telefonens delningsmeny lämnar säkert över till en app. Raden laddar inget skript från Facebook, LinkedIn eller någon annan, så inga kakor sätts förrän läsaren själv trycker.
 
 På telefon på högkant är raden högst två rader: tre knappar i bredd med ikonen över ordet, och fyra knappar (en app utan telefonens delningsmeny) två och två; prövat i bredderna 320 till 430. På datorn står fyra knappar på en rad. Raden syns inte i utskriften. Vikten: omkring en halv kB i varje sida; skriptet, ikonfilen (`src/components/delning-ikoner.svg`, som bygget ger ett namn med kontrollsumma under `/_astro/` och som därför cachas i ett år) och stilen i `global.css` hämtas en gång. Instagrams bild hämtas först när någon trycker. Trycken räknas som händelser, se Besöksstatistik.
 
