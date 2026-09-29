@@ -50,9 +50,9 @@
     "datum": "2026-09-29"
   },
   "ljudlek-i-grupp": {
-    "kalla": "7d8ec0dc99162032",
+    "kalla": "ee212630ed849d7c",
     "skalor": [
-      1.25,
+      1.2,
       1.35,
       1.1,
       1.2
@@ -80,7 +80,7 @@
     "datum": "2026-09-29"
   },
   "skrivkurs-vardeskapande": {
-    "kalla": "26f1418b5619c112",
+    "kalla": "f42434d092b0708c",
     "skalor": [
       1.25,
       1.35,
@@ -90,7 +90,7 @@
     "datum": "2026-09-29"
   },
   "til-i-grupp": {
-    "kalla": "e5536d34c2fa4fce",
+    "kalla": "a3f8eaa3741c8102",
     "skalor": [
       1.2,
       1.35,

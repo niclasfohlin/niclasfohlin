@@ -31,8 +31,8 @@ formaga: 2
 tranar: "dela meningar i ord och ord i stavelser"
 inledning:
   - "I Ord och stavelser upptäcker eleverna att en mening består av ord och att ett ord består av delar som går att klappa: ”Jag ser en ko” är fyra ord, och ananas är tre delar. Lektionen hjälper eleven med det som gör delarna svåra att höra: i talet flyter orden ihop, eleven tycker att tåg är ett längre ord än nyckelpiga eftersom tåget är långt, och småord och svaga delar, som to i tomat, faller bort."
-  - "Syftet är att eleverna ska höra orden och delarna, så att de kan skriva med mellanrum mellan orden och läsa längre ord i delar. Ditt uppdrag är att visa hur man lägger en kloss för varje ord och klappar delarna, att säga orden i vanlig takt och att sluta med skrivna delar som gruppen läser."
-  - "Välj Ord och stavelser när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 2, ord och stavelser. Ljudkollen står i Ljudlek i grupp, och lektionen hör till förmåga 2 i lektionsbanken där."
+  - "Syftet är att eleverna ska höra orden och delarna, så att de kan skriva med mellanrum mellan orden och läsa längre ord i delar. Du visar hur man lägger en kloss för varje ord och klappar delarna, säger orden i vanlig takt och slutar med skrivna delar som gruppen läser."
+  - "Välj Ord och stavelser när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 2, ord och stavelser. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och lektionen hör till förmåga 2 i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
   text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Ord och stavelser går igenom de tre raderna i Så blir lektionen svårare och tar högst en vecka, eftersom lekar med bara stavelser ger liten effekt på läsningen. Har ni tre pass i veckan, ta en rad per pass. Har ni fler, ta nästa rad när nästan alla gör rätt i andra halvan av steg 2. Efter sista raden går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen."
@@ -96,7 +96,7 @@ tabeller:
         - "”Sol är en del, ett klapp. Ljuden räknar vi i ljudstarten.”"
   - rubrik: "Varianter"
     plats: "efter-urval"
-    text: "Byt till en variant när gruppen behöver något nytt, i samma steg."
+    text: "Byt till en variant i samma steg när gruppen behöver något nytt."
     kolumner:
       - "Variant"
       - "Så gör ni"
@@ -144,7 +144,7 @@ tabeller:
         - "snö, blå, sko, bro, tre, grå, klo, stå, sten, stol, glas, svan, stor, smör"
       - - "Konsonantmöte sist"
         - "fisk, mask, hand, sand, hund, vind, land, hals, rund, tält"
-    not: "Orden står i ordning, lättast först. Hur du säger orden och vilka ord som väntar står under Ordbanken i Ljudlek i grupp."
+    not: "Orden står i ordning, lättast först. Hur du säger orden och vilka ord som får vänta står under Ordbanken i Ljudlek i grupp."
 principer:
   rubrik: "Tre saker att hålla fast vid"
   text: "Lägg en kloss för varje ord och klappa varje del, samtidigt som du säger ordet eller delen. Säg orden i vanlig takt och klappa också den svaga delen. Blanda ord med en till fyra delar, som på arket Stavelser, så att eleverna räknar i stället för att gissa. Sluta med skrivna delar när gruppen har haft bokstäverna."
@@ -252,12 +252,12 @@ exempel:
     - "Efteråt noterar läraren: Omar klappar nu den svaga delen, och Mira räknar ljud i stället för delar. Veckan är slut, och gruppen går till nästa förmåga. Mira blir dagens elev oftare och sitter med en säker kamrat."
 fastnar:
   rubrik: "När eleven fastnar"
-  text: "Vänta tre sekunder och ge minsta möjliga stöd först. Blir det många fel i gruppen, säg det i kör, låt sedan några elever säga det ensamma och ta samma ord minst tre gånger."
+  text: "Vänta tre sekunder och ge minsta möjliga stöd först. Blir det många fel i gruppen, säg ordet i kör, låt sedan några elever säga det ensamma och ta samma ord minst tre gånger."
   fragaForst:
     - "Vad hör du?"
   trappaText: "Gå uppför stödtrappan i stunden. Ge inte nästa stöd förrän eleven har prövat det förra:"
   trappa:
-    - "Säg det igen, långsamt, och klappa med: ka-⁠ka. Ett ord som tomat säger du i vanlig takt."
+    - "Säg ordet igen, långsamt, och klappa med: ka-⁠ka. Ett ord som tomat säger du i vanlig takt."
     - "Visa hur munnen gör. Eleven tittar i spegeln och känner efter med handen under hakan: den går ned en gång för varje del."
     - "Gör uppgiften mindre: ett ord med två delar i stället för tre, eller en mening med tre ord."
     - "Visa med handen eller med något att flytta: lägg en kloss för varje del från vänster, sett från eleven, och låt hen peka medan ni säger delarna."
@@ -284,7 +284,7 @@ uppfoljning:
     - nar: "Efter varje pass"
       vad: "I snabbmallen noterar du dagens elever och det som fastnade."
     - nar: "Var tredje vecka"
-      vad: "Du gör ljudkollens uppgift 2 om stavelser, uppgift 3 om första ljudet och uppgift 4 om bokstävernas ljud."
+      vad: "Du gör ljudkollens uppgift 2 om ord och stavelser, uppgift 3 om första ljudet och uppgift 4 om bokstävernas ljud."
 mal:
   rubrik: "Mål: vad eleven ska kunna efter lektionen"
   text: "Efter lektionen ska eleven kunna:"

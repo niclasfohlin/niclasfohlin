@@ -25,10 +25,11 @@ const SANS = 'Calibri', MONO = 'Consolas';
 const W = 13.333, H = 7.5;
 // Sidfoten med upphovet tar de nedersta 0.22 tum på varje bild; innehållet slutar ovanför.
 const BOTTEN = H - 0.22;
-// Strecket mellan spalterna står mitt på sidan på bild 1 och 2, som mallsidans två lika spalter, lathunden på sajten och
+// Strecket mellan spalterna står mitt på sidan på bild 1, som mallsidans två lika spalter, lathunden på sajten och
 // Word-lathunden (Niclas 2026-09-29: på bild 1 var vänsterspalten smalare än den högra, och texten trängdes mot rutan).
-// Texten står 0,16 tum från strecket och rutorna 0,31 tum från det, på båda sidor. Bild 4 har kvar sin delning vid 52
-// procent, eftersom vänsterspaltens text och rutan På bordet behöver bredden (i mitten trängdes rutan i Bråkkursen).
+// Texten står 0,16 tum från strecket och rutorna 0,31 tum från det, på båda sidor. Bild 2 och 4 har kvar sina gamla
+// delningar, eftersom den bredare spalten där behöver bredden: tidsschemat på bild 2, som läraren läser under passet, och
+// vänsterspaltens text och rutan På bordet på bild 4 (i mitten krympte tidsschemat och trängdes rutan).
 const MITT = W / 2;
 const V_X = 0.46, V_BREDD = MITT - 0.01 - 0.16 - V_X, V_RUTA = MITT - 0.01 - 0.31 - V_X;
 const H_X = MITT + 0.01 + 0.31, H_BREDD = W - 0.46 - H_X;
@@ -177,8 +178,10 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
   // Alla mått nedan är i 16:9-bildens tum; primitiverna för över dem till sidans format (sx, sy).
   const rect = (s: any, x: number, y: number, w: number, h: number, fill: string) => s.addShape(pres.ShapeType.rect, { x: x * sx, y: y * sy, w: w * sx, h: h * sy, fill: { color: fill }, line: { color: fill, width: 0 } });
   const frame = (s: any, x: number, y: number, w: number, h: number, color = INK, width = 1, fill?: string) => s.addShape(pres.ShapeType.rect, { x: x * sx, y: y * sy, w: w * sx, h: h * sy, fill: fill ? { color: fill } : { type: 'none' }, line: { color, width } });
-  // Teckengraden gånger grad, också i textlöpor med egen grad.
-  const skalad = (t: any) => (Array.isArray(t) ? t.map((r: any) => (r?.options?.fontSize ? { ...r, options: { ...r.options, fontSize: r.options.fontSize * grad } } : r)) : t);
+  // Teckengraden gånger grad, också i textlöpor med egen grad. Ett bindestreck med ordfog (sss-⁠ooo-⁠lll) blir ett hårt
+  // bindestreck, eftersom PowerPoint bryter raden efter bindestrecket också när ordfogen står där (hardaStreck i metoddocx.ts).
+  const hart = (t: any) => (typeof t === 'string' ? t.replace(/-\u2060/g, '\u2011') : t);
+  const skalad = (t: any) => (Array.isArray(t) ? t.map((r: any) => ({ ...r, text: hart(r?.text), ...(r?.options?.fontSize ? { options: { ...r.options, fontSize: r.options.fontSize * grad } } : {}) })) : hart(t));
   const txt = (s: any, t: any, x: number, y: number, w: number, h: number, o: any = {}) => s.addText(skalad(t), { x: x * sx, y: y * sy, w: w * sx, h: h * sy, isTextBox: true, margin: 0, fontFace: o.mono ? MONO : SANS, fontSize: (o.size ?? 12.75) * grad, color: o.color ?? INK, bold: !!o.bold, italic: !!o.italic, valign: o.valign ?? 'top', align: o.align ?? 'left', paraSpaceAfter: o.psa ?? 0, fit: 'none' });
   const label = (s: any, t: string, x: number, y: number, w: number, color = AMBER) => txt(s, t, x, y, w, 0.25, { mono: true, size: 12, color });
   // "**fet** resten" blir textlöpor.
@@ -353,24 +356,24 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
   {
     const b = L.bild2, s = pres.addSlide();
     header(s, b.titel, 'ETT PASS', 2);
-    rect(s, 0, 0.66, W, 0.02, INK); rect(s, MITT - 0.01, 0.68, 0.02, BOTTEN - 0.68, INK);
+    rect(s, 0, 0.66, W, 0.02, INK); rect(s, 5.89, 0.68, 0.02, BOTTEN - 0.68, INK);
     const gruppLang = plain(b.grupp).length > 52;
     const gruppH = gruppLang ? 0.45 : 0.25;
-    txt(s, b.grupp, V_X, 0.88, V_BREDD + 0.13, gruppH, { mono: true, size: gruppLang ? 10.5 : 12, color: AMBER });
+    txt(s, b.grupp, 0.46, 0.88, 5.4, gruppH, { mono: true, size: gruppLang ? 10.5 : 12, color: AMBER });
     const top2 = 1.2 + (gruppLang ? 0.2 : 0);
-    const c1H = b.forberett ? Math.max(1.0, estH(b.forberett, V_BREDD - 0.57, 12, 0.35)) : 0, c2H = b.klarTidigt ? Math.max(0.8, estH(b.klarTidigt, V_BREDD - 0.57, 12, 0.35)) : 0;
+    const c1H = b.forberett ? Math.max(1.0, estH(b.forberett, 4.7, 12, 0.35)) : 0, c2H = b.klarTidigt ? Math.max(0.8, estH(b.klarTidigt, 4.7, 12, 0.35)) : 0;
     const storyH = BOTTEN - top2 - (c1H ? c1H + 0.15 : 0) - (c2H ? c2H + 0.15 : 0);
-    frame(s, V_X, top2, V_BREDD, storyH, LINE, 0.75, CELL);
-    const need = b.exempel.reduce((a, p) => a + estH(p, V_BREDD - 0.3, 11.5, 0.07), 0);
+    frame(s, 0.46, top2, 5.27, storyH, LINE, 0.75, CELL);
+    const need = b.exempel.reduce((a, p) => a + estH(p, 4.97, 11.5, 0.07), 0);
     if (need > storyH + 0.1) varna(`exemplet på bild 2 är långt (${need.toFixed(2)} > ${(storyH - 0.2).toFixed(2)} tum): korta lathund.pass.text till cirka 130 ord`);
     // Exemplet berättas rakt och replikerna (”…”) kursiva, som på sidan, i lathunden och i Word.
     const repliker = (t: string, sist: boolean) => t.split(/(”[^”]*”)/).filter(Boolean).map((x, j, alla) => ({ text: x, options: { italic: x.startsWith('”'), breakLine: !sist && j === alla.length - 1 } }));
-    txt(s, b.exempel.flatMap((t, i) => repliker(t, i === b.exempel.length - 1)), V_X + 0.15, top2 + 0.1, V_BREDD - 0.3, storyH - 0.2, { size: 11.5, psa: 5 });
+    txt(s, b.exempel.flatMap((t, i) => repliker(t, i === b.exempel.length - 1)), 0.61, top2 + 0.1, 4.97, storyH - 0.2, { size: 11.5, psa: 5 });
     let y = top2 + storyH + 0.15;
-    if (b.forberett) { cream(s, V_X, y, V_BREDD, c1H, b.forberett, 12, b.forberettRubrik); y += c1H + 0.15; }
-    if (b.klarTidigt) cream(s, V_X, y, V_BREDD, c2H, b.klarTidigt, 12, 'KLAR TIDIGT');
-    label(s, b.schemaRubrik, H_X, 0.88, H_BREDD);
-    shapeTable(s, H_X, 1.2, H_BREDD, 1.45, ['TID', 'VAD HÄNDER'], b.schema.map((r) => ({ namn: r.tid, fet: r.fas, rader: [r.text] })), BOTTEN - 1.2);
+    if (b.forberett) { cream(s, 0.46, y, 5.27, c1H, b.forberett, 12, b.forberettRubrik); y += c1H + 0.15; }
+    if (b.klarTidigt) cream(s, 0.46, y, 5.27, c2H, b.klarTidigt, 12, 'KLAR TIDIGT');
+    label(s, b.schemaRubrik, 6.22, 0.88, 6.9);
+    shapeTable(s, 6.22, 1.2, 6.66, 1.45, ['TID', 'VAD HÄNDER'], b.schema.map((r) => ({ namn: r.tid, fet: r.fas, rader: [r.text] })), BOTTEN - 1.2);
     fot(s);
     s.addNotes(`${b.anteckning} ${upphov}`);
   }

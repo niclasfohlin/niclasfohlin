@@ -1,7 +1,7 @@
 # Metod i stödundervisning. Modellen står i methods/_mall.yaml och docs/modell.md.
 # En lektion i Ljudlek i grupp, skriven i lektionsskelettet: methods/ljudlek-i-grupp/_lektion.yaml.
 titel: "Ljudlek: Smaka på ljud"
-undertitel: "En lektion i Ljudlek i grupp: hitta först, sist och mitten-⁠ljud, och skriva bokstaven där ljudet hörs, för F–⁠2"
+undertitel: "En lektion i Ljudlek i grupp: höra ljudet sist och i mitten av ordet och skriva bokstaven där det hörs, för F–⁠2"
 ingress: "Eleverna säger ord långsamt, stannar på det sista ljudet eller ljudet i mitten och lägger en markör i rutan där ljudet hörs. Sedan skriver de bokstaven i rutan och jämför med kortets baksida. Lektionen hör till Ljudlek i grupp och har samma ljudstart och avslut som de andra lektionerna."
 omrade: "Läsning"
 arskurs:
@@ -31,11 +31,11 @@ formaga: 5
 tranar: "höra det sista ljudet och ljudet i mitten, och var ett ljud hörs"
 inledning:
   - "I Smaka på ljud säger eleverna ord långsamt, lyssnar efter det sista ljudet och ljudet i mitten och säger var ljudet hörs. Lektionen hjälper eleven med det som gör ljuden svåra: det sista ljudet sitter ihop med vokalen, så att eleven säger ol för sol, och vokalen i mitten flyter ihop med ljuden runt den och faller bort."
-  - "Syftet är att eleverna hör det sista ljudet och ljudet i mitten i ett kort ord, så att de kan skriva ordet och läsa det. Ditt uppdrag är att säga ordet långsamt och stanna på ljudet, att säga bara ljudet, aldrig bokstavens namn, och att se till att eleverna skriver bokstaven i rätt ruta."
-  - "Välj Smaka på ljud när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 5, sist och i mitten. Ljudkollen står i Ljudlek i grupp, och Smaka på ljud hör till förmåga 5, Sist och i mitten, i lektionsbanken där."
+  - "Syftet är att eleverna hör det sista ljudet och ljudet i mitten i ett kort ord, så att de kan skriva ordet och läsa det. Du säger ordet långsamt och stannar på ljudet, säger bara ljudet och aldrig bokstavens namn, och ser till att eleverna skriver bokstaven i rätt ruta."
+  - "Välj Smaka på ljud när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 5, sist och i mitten. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och Smaka på ljud hör till förmåga 5, Sist och i mitten, i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Smaka på ljud går igenom raderna i Så blir lektionen svårare, oftast i fyra till tolv pass. Ta nästa rad efter två pass i följd där dagens elever säger rätt ljud och skriver eller visar rätt bokstav i rätt ruta på nästan alla kort i steg 4. Efter sista raden tar gruppen nästa lektion."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Smaka på ljud går igenom raderna i Så blir lektionen svårare, oftast i fyra till tolv pass. Ta nästa rad efter två pass i följd där dagens elever säger rätt ljud och skriver eller visar rätt bokstav i rätt ruta på nästan alla kort i steg 4. Efter sista raden går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"
@@ -56,7 +56,7 @@ tabeller:
       - - "Var ljudet hörs"
         - "/s/ i hus: sist. /s/ i sol: först."
         - "Säg ett ljud och ett ord. Eleven lägger markören där ljudet hörs och skriver bokstaven."
-    not: "Raderna har var sitt ark bildkort under Materialet, utom raden Var ljudet hörs, som tar arket I mitten. Gruppen börjar i den första rad där ljudkollens fel ligger. Fel på lås leder till första raden, på får till andra raden och på mur och löv till tredje raden. Den som frågar i raden Var ljudet hörs tittar på baksidan och säger ljudet för en bokstav som gruppen har haft. Har kortet ingen sådan bokstav, tar ni nästa kort. I steg 4 säger du ljudet för dagens elever, och de andra frågar varandra två och två, i nya par när det behövs."
+    not: "Raderna har var sitt ark bildkort under Materialet, utom raden Var ljudet hörs, som tar arket I mitten. Vilken rad gruppen börjar i beror på felen i ljudkollen: fel på lås leder till första raden, på får till andra raden och på mur och löv till tredje raden. Den som frågar i raden Var ljudet hörs tittar på baksidan och säger ljudet för en bokstav som gruppen har haft. Har kortet ingen sådan bokstav, tar ni nästa kort. I steg 4 säger du ljudet för dagens elever, och de andra frågar varandra två och två, i nya par när det behövs."
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
     plats: "efter-tidsschema"
     text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun."
@@ -96,7 +96,7 @@ tabeller:
         - "”Dra ut vokalen och titta i spegeln: säääl.” Säg ordet med eee och med äää."
   - rubrik: "Varianter"
     plats: "efter-urval"
-    text: "Byt till en variant när gruppen behöver något nytt, i samma steg."
+    text: "Byt till en variant i samma steg när gruppen behöver något nytt."
     kolumner:
       - "Variant"
       - "Så gör ni"
@@ -147,7 +147,7 @@ tabeller:
         - "snö, blå, sko, bro, tre, grå, klo, stå, sten, stol, glas, svan, stor, smör"
       - - "Konsonantmöte sist"
         - "fisk, mask, hand, sand, hund, vind, land, hals, rund, tält"
-    not: "Orden står i ordning, lättast först. Hur du säger orden och vilka ord som väntar står under Ordbanken i Ljudlek i grupp."
+    not: "Orden står i ordning, lättast först. Hur du säger orden och vilka ord som får vänta står under Ordbanken i Ljudlek i grupp."
 principer:
   rubrik: "Tre saker att hålla fast vid"
   text: "Säg ordet långsamt och stanna på ljudet ni letar efter: sooolll. Säg sedan bara det ljudet, lll, och aldrig bokstavens namn. Blanda korten, så att eleverna lyssnar i stället för att gissa. Skriv bokstaven i rutan där ljudet hörs."
@@ -255,12 +255,12 @@ exempel:
     - "Efteråt noterar läraren: Mira säger det sista ljudet rätt och skriver bokstaven. Noah säger hela ordet, eller vokalen ihop med det sista ljudet. Nästa pass tar gruppen samma rad, och dagens elever blir Leo och Elin."
 fastnar:
   rubrik: "När eleven fastnar"
-  text: "Vänta tre sekunder och ge minsta möjliga stöd först. Blir det många fel i gruppen, säg det i kör, låt sedan några elever säga det ensamma och ta samma ord minst tre gånger."
+  text: "Vänta tre sekunder och ge minsta möjliga stöd först. Blir det många fel i gruppen, säg ordet i kör, låt sedan några elever säga det ensamma och ta samma ord minst tre gånger."
   fragaForst:
     - "Vad hör du?"
   trappaText: "Gå uppför stödtrappan i stunden. Ge inte nästa stöd förrän eleven har prövat det förra:"
   trappa:
-    - "Säg det igen, långsamt: sooolll, och stanna på det sista."
+    - "Säg ordet igen, långsamt: sooolll, och stanna på det sista."
     - "Visa hur munnen gör. Eleven tittar i spegeln och känner efter: ”Känn på läpparna. Var är tungan? Öppna munnen lite till för å.”"
     - "Gör uppgiften mindre: två ljud att välja mellan, hör du lll eller ooo sist i sol?"
     - "Visa med handen eller med något att flytta: för handen från vänster till höger sett från eleven och stanna där ljudet hörs."

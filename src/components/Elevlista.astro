@@ -39,7 +39,7 @@ const fragor = harFragor({ kolumner, rader }) ? rader.map((r) => (r[1] ?? '').tr
   {fragor ? (
     <div class="m-fragetext">
       <div class="m-texten">{rader.map((r) => <p>{r[0]}</p>)}</div>
-      <div class="m-fragorna">{fragor.map((f) => <p>{f}</p>)}</div>
+      <div class="m-fragorna"><p class="visually-hidden">Frågorna, som läraren läser upp:</p>{fragor.map((f) => <p>{f}</p>)}</div>
     </div>
   ) : (
     <table>

@@ -1,7 +1,7 @@
 # Metod i stödundervisning. Modellen står i methods/_mall.yaml och docs/modell.md.
 # En lektion i Ljudlek i grupp, skriven i lektionsskelettet: methods/ljudlek-i-grupp/_lektion.yaml.
 titel: "Ljudlek: Skriv ord tillsammans"
-undertitel: "En lektion i Ljudlek i grupp: bygg, läs och skriv ord och byt en bokstav i taget, för F–⁠2"
+undertitel: "En lektion i Ljudlek i grupp: bygga, läsa och skriva ord och byta en bokstav i taget, för F–⁠2"
 ingress: "Eleverna bygger ord med bokstavskort, läser dem med fingret under och skriver dem. Sedan byter de en bokstav i taget och läser det nya ordet: mos, mor, mer. Lektionen hör till Ljudlek i grupp och har samma ljudstart och avslut som de andra lektionerna."
 omrade: "Läsning"
 arskurs:
@@ -32,11 +32,11 @@ formaga: 7
 tranar: "bygga, läsa och skriva ord med bokstavskort, och byta en bokstav i taget"
 inledning:
   - "I Skriv ord tillsammans bygger eleverna ord med bokstavskort, läser och skriver dem, och byter en bokstav i taget. Lektionen hjälper eleven med det som gör ett ord svårt att skriva: vokalen faller bort, så att mer blir mr, och eleven läser det ord hen tänkte på i stället för det som står."
-  - "Syftet är att eleverna ger varje ljud en bokstav, i rätt ordning, och läser tillbaka det de har skrivit, så att de kan skriva och läsa korta ord själva. Ditt uppdrag är att visa en bokstav för varje ljud och läsa tillbaka, att säga var i ordet ni byter och att bara ta bokstäver som gruppen har haft."
-  - "Välj Skriv ord tillsammans när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 7, skriva ord. Ljudkollen står i Ljudlek i grupp, och Skriv ord tillsammans hör till förmåga 7, Skriva ord, i lektionsbanken där."
+  - "Syftet är att eleverna ger varje ljud en bokstav, i rätt ordning, och läser tillbaka det de har skrivit, så att de kan skriva och läsa korta ord själva. Du visar en bokstav för varje ljud och läser tillbaka, säger var i ordet ni byter och tar bara bokstäver som gruppen har haft."
+  - "Välj Skriv ord tillsammans när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 7, skriva ord. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och Skriv ord tillsammans hör till förmåga 7, Skriva ord, i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Skriv ord tillsammans går igenom raderna i Så blir lektionen svårare, oftast i tio till femton pass. Ta nästa rad när dagens elever skriver ordet efter bytet och minst ett av de två andra orden rätt i steg 4, två pass i följd. Efter sista raden går gruppen till nästa lektion."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Skriv ord tillsammans går igenom raderna i Så blir lektionen svårare, oftast i tio till femton pass. Ta nästa rad när dagens elever skriver ordet efter bytet och minst ett av de två andra orden rätt i steg 4, två pass i följd. Efter sista raden går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"
@@ -103,7 +103,7 @@ tabeller:
         - "”Llleeerrr eller llliiirrr? Titta i spegeln: munnen är lite mer öppen vid eee.”"
   - rubrik: "Varianter"
     plats: "efter-urval"
-    text: "Byt till en variant när gruppen behöver något nytt, i samma steg."
+    text: "Byt till en variant i samma steg när gruppen behöver något nytt."
     kolumner:
       - "Variant"
       - "Så gör ni"
@@ -166,7 +166,7 @@ tabeller:
         - "snö, blå, sko, bro, tre, grå, klo, stå, sten, stol, glas, svan, stor, smör"
       - - "Konsonantmöte sist"
         - "fisk, mask, hand, sand, hund, vind, land, hals, rund, tält"
-    not: "Orden står i ordning, lättast först. Hur du säger orden och vilka ord som väntar står under Ordbanken i Ljudlek i grupp."
+    not: "Orden står i ordning, lättast först. Hur du säger orden och vilka ord som får vänta står under Ordbanken i Ljudlek i grupp."
 principer:
   rubrik: "Tre saker att hålla fast vid"
   text: "Lägg eller skriv en bokstav för varje ljud, från vänster, medan ni säger ljudet, och läs tillbaka med fingret under det som står. Byt en bokstav i taget och säg var i ordet ni byter. Den som skriver ser inte orden förrän efteråt, och orden har bara bokstäver som gruppen har haft."
@@ -274,12 +274,12 @@ exempel:
     - "Efteråt noterar läraren: Elin skriver, byter och läser tillbaka. Leo tappar vokalen men byter rätt. Nästa pass tar gruppen samma rad, och dagens elever blir Alva och Noah."
 fastnar:
   rubrik: "När eleven fastnar"
-  text: "Vänta tre sekunder och ge minsta möjliga stöd först. Blir det många fel i gruppen, säg det i kör, låt sedan några elever säga det ensamma och ta samma ord minst tre gånger."
+  text: "Vänta tre sekunder och ge minsta möjliga stöd först. Blir det många fel i gruppen, säg ordet i kör, låt sedan några elever säga det ensamma och ta samma ord minst tre gånger."
   fragaForst:
     - "Vad hör du?"
   trappaText: "Gå uppför stödtrappan i stunden. Ge inte nästa stöd förrän eleven har prövat det förra:"
   trappa:
-    - "Säg det igen, långsamt: mmmeeerrr. Dra fingret under medan ni säger det."
+    - "Säg ordet igen, långsamt: mmmeeerrr. Dra fingret under medan ni säger det."
     - "Visa hur munnen gör. Eleven tittar i spegeln och känner efter: läpparna är ihop vid /m/, breda vid /e/ och runda vid /o/."
     - "Gör uppgiften mindre: eleven väljer mellan två kort, e och o. Den som inte minns bokstaven letar på bokstavskartan."
     - "Visa med handen eller med något att flytta: lägg en markör för varje ljud först, och sedan bokstäverna."

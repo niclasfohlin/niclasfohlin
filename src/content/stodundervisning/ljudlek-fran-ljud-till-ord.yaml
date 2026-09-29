@@ -32,8 +32,8 @@ formaga: 8
 tranar: "sätta ihop ljud till ord, och ta bort, lägga till och byta ljud"
 inledning:
   - "I Från ljud till ord sätter eleverna ihop ljud till ord med bokstavskorten och ändrar ordet ett ljud i taget. Lektionen hjälper eleven med det som gör ljuden svåra: eleven säger ljuden men får inte ihop ordet, glömmer de första ljuden när det blir en paus, och tar bort eller byter fel ljud."
-  - "Syftet är att eleverna läser ord genom att sätta ihop ljuden och kan ändra ett ord ett ljud i taget. Ditt uppdrag är att dra ut ljuden utan paus och skjuta ihop korten när ni läser, att säga vilket ljud som går och vilket som kommer, och att göra varje ändring med bokstäverna."
-  - "Välj Från ljud till ord när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 8, sätta ihop och byta. Ljudkollen står i Ljudlek i grupp, och Från ljud till ord hör till förmåga 8, Sätta ihop och byta, i lektionsbanken där."
+  - "Syftet är att eleverna läser ord genom att sätta ihop ljuden och kan ändra ett ord ett ljud i taget. Du drar ut ljuden utan paus och skjuter ihop korten när ni läser, säger vilket ljud som går och vilket som kommer och gör varje ändring med bokstäverna."
+  - "Välj Från ljud till ord när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 8, sätta ihop och byta. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och Från ljud till ord hör till förmåga 8, Sätta ihop och byta, i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
   text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Från ljud till ord går igenom raderna i Så blir lektionen svårare, oftast i sex till femton pass. Ta nästa rad när dagens elever klarar nästan alla ord i steg 4, två pass i följd. Efter sista raden gör ni hela ljudkollen, som visar vad gruppen gör sedan."
@@ -60,7 +60,7 @@ tabeller:
       - - "Byt ett ljud"
         - "mat blir fat. mål blir mås."
         - "Byt det första ljudet, sedan det sista och till sist vokalen, och säg vilket ljud som går och vilket som kommer."
-    not: "Gruppen börjar i den första rad där ljudkollens fel ligger. Orden vår och röra hör till raden Sätt ihop, utdraget. Ordet lek hör till raden Ta bort ett ljud och ordet sal till raden Byt ett ljud. I raderna Sätt ihop ändrar ni inget, och i steg 3 läser båda i paret ordet."
+    not: "Vilken rad gruppen börjar i beror på felen i ljudkollen: vår och röra hör till raden Sätt ihop, utdraget, lek till raden Ta bort ett ljud och sal till raden Byt ett ljud. I raderna Sätt ihop ändrar ni inget, och i steg 3 läser båda i paret ordet."
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
     plats: "efter-tidsschema"
     text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun."
@@ -103,7 +103,7 @@ tabeller:
         - "”Säg mål och ål. Vilket ljud tog vi bort? /m/.” Ta bort kortet medan ni säger ljudet."
   - rubrik: "Varianter"
     plats: "efter-urval"
-    text: "Byt till en variant när gruppen behöver något nytt, i samma steg."
+    text: "Byt till en variant i samma steg när gruppen behöver något nytt."
     kolumner:
       - "Variant"
       - "Så gör ni"
@@ -161,7 +161,7 @@ tabeller:
         - "snö, blå, sko, bro, tre, grå, klo, stå, sten, stol, glas, svan, stor, smör"
       - - "Konsonantmöte sist"
         - "fisk, mask, hand, sand, hund, vind, land, hals, rund, tält"
-    not: "Orden står i ordning, lättast först. Hur du säger orden och vilka ord som väntar står under Ordbanken i Ljudlek i grupp."
+    not: "Orden står i ordning, lättast först. Hur du säger orden och vilka ord som får vänta står under Ordbanken i Ljudlek i grupp."
 principer:
   rubrik: "Tre saker att hålla fast vid"
   text: "Läs utan paus, också när du har sagt ljuden med paus: dra ut dem från vänster till höger sett från eleverna, säg klusilerna b, d, g, k, p och t korta och skjut ihop korten till ett ord. Ändra ett ljud i taget och säg vilket som går och vilket som kommer. Eleverna läser varje nytt ord med fingret under, så att de inte gissar."
@@ -269,12 +269,12 @@ exempel:
     - "Efteråt noterar läraren: Alva sätter ihop och ändrar säkert. Mira tappar det första ljudet men får ihop ordet ljud för ljud. Nästa pass tar gruppen samma rad, och dagens elever blir Leo och Omar."
 fastnar:
   rubrik: "När eleven fastnar"
-  text: "Vänta tre sekunder och ge minsta möjliga stöd först. Blir det många fel i gruppen, säg det i kör, låt sedan några elever säga det ensamma och ta samma ord minst tre gånger."
+  text: "Vänta tre sekunder och ge minsta möjliga stöd först. Blir det många fel i gruppen, säg ordet i kör, låt sedan några elever säga det ensamma och ta samma ord minst tre gånger."
   fragaForst:
     - "Vad hör du?"
   trappaText: "Gå uppför stödtrappan i stunden. Ge inte nästa stöd förrän eleven har prövat det förra:"
   trappa:
-    - "Säg det igen, långsamt: sssooolll."
+    - "Säg ordet igen, långsamt: sssooolll."
     - "Visa hur munnen gör. Eleven tittar i spegeln och känner efter: läpparna ihop vid /m/."
     - "Gör uppgiften mindre: ljud för ljud, /s/, so, sol."
     - "Visa med handen eller med något att flytta: ta bort eller lägg kortet medan ni säger ljudet."
@@ -290,7 +290,7 @@ urval:
     - rubrik: "Kända ord"
       text: "Eleven vet vad ordet betyder"
     - rubrik: "Ett ljud"
-      text: "Du ändrar ett ljud, och det nya ordet är känt och står inte i ljudkollen eller version B"
+      text: "Du ändrar ett ljud, och det nya ordet är känt och står inte i ljudkollen eller i screeningens version B"
     - rubrik: "Gruppens bokstäver"
       text: "Ljudenliga ord med bokstäver som gruppen har haft eller redan kan, och ingen bokstav två gånger"
 uppfoljning:

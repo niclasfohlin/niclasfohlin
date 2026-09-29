@@ -30,11 +30,11 @@ formaga: 1
 tranar: "höra och hitta rim, och byta början av ordet"
 inledning:
   - "I Rim delar eleverna ordet i början och resten: hus är /h/ och us, och stol är /st/ och ol. Ord med samma rest rimmar, och med en ny början blir det ett nytt ord: mus, lus. Lektionen hjälper eleven med det som gör rim svårt: betydelsen tar över, så att råtta blir ett rim på mus, eller första ljudet tar över, så att sko blir ett rim på sol."
-  - "Syftet är att eleverna lyssnar på hur orden låter och hör att ett ord har en början som går att byta. Ditt uppdrag är att visa hur du delar ordet, att blanda par som rimmar med par som inte gör det, och att låta påhittade ord räknas."
-  - "Välj Rim när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 1, rim. Ljudkollen står i Ljudlek i grupp, och lektionen hör till förmåga 1 i lektionsbanken där."
+  - "Syftet är att eleverna lyssnar på hur orden låter och hör att ett ord har en början som går att byta. Du visar hur du delar ordet, blandar par som rimmar med par som inte gör det och låter påhittade ord räknas."
+  - "Välj Rim när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 1, rim. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och lektionen hör till förmåga 1 i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Rim tar högst en vecka och går igenom de tre raderna i Så blir lektionen svårare. Med tre pass byter gruppen rad varje pass, och med fler pass när dagens elever klarar steg 4 själva. Sedan går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Rim tar högst en vecka och går igenom de tre raderna i Så blir lektionen svårare. Med tre pass i veckan byter gruppen rad varje pass. Med fler pass byter den rad när dagens elever klarar steg 4 själva. Sedan går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"
@@ -95,7 +95,7 @@ tabeller:
         - "”Hus, us. Sås, ås. Låter resten likadant?”"
   - rubrik: "Varianter"
     plats: "efter-urval"
-    text: "Byt till en variant när gruppen behöver något nytt, i samma steg."
+    text: "Byt till en variant i samma steg när gruppen behöver något nytt."
     kolumner:
       - "Variant"
       - "Så gör ni"
@@ -147,7 +147,7 @@ tabeller:
         - "snö, blå, sko, bro, tre, grå, klo, stå, sten, stol, glas, svan, stor, smör"
       - - "Konsonantmöte sist"
         - "fisk, mask, hand, sand, hund, vind, land, hals, rund, tält"
-    not: "Orden står i ordning, lättast först. Hur du säger orden och vilka ord som väntar står under Ordbanken i Ljudlek i grupp."
+    not: "Orden står i ordning, lättast först. Hur du säger orden och vilka ord som får vänta står under Ordbanken i Ljudlek i grupp."
 principer:
   rubrik: "Tre saker att hålla fast vid"
   text: "Dela ordet i början och resten, där resten börjar vid vokalen: /h/ och us, /st/ och ol. Ord med samma rest rimmar. Blanda par som rimmar med par som inte gör det, bland dem par som börjar med samma ljud, så att eleverna inte kan gissa. Byt början, och läs sist ord med restkorten när gruppen har haft bokstäverna."
@@ -248,19 +248,19 @@ exempel:
   text:
     - "Ljudstarten. Läraren visar o, och gruppen sätter ihop och delar upp ord med två och tre ljud att dra ut."
     - "Dela ordet. Läraren visar huset och musen: ”Hus. /h/ och us. Mus. /m/ och us. Samma rest: de rimmar.” Sedan visar hen huset och handen, som börjar likadant men inte rimmar, och stolen: ”Stol. /st/ och ol.” Sist byter läraren /h/ mot /l/ i hus: ”Lus.”"
-    - "Tummen upp. Vid båt och bad visar Leo tummen upp, och läraren säger: ”Båt och bad börjar likadant. Lyssna på resten: åt, ad.” Leo vänder tummen. Sedan byter gruppen början i kör. Gruppen har bara haft s och o, så restkorten väntar."
+    - "Tummen upp. Vid båt och bad visar Leo tummen upp, och läraren säger: ”Båt och bad börjar likadant. Lyssna på resten: åt, ad.” Leo vänder tummen. Sedan byter gruppen början i kör. Gruppen har bara haft s och o, så restkorten får vänta."
     - "Rimpar. Paren är Alva och Elin, Omar och Noah, Leo och Mira. Elin säger ”sko”, och Alva tar kon: ”Ko, sko. Samma rest: o.” De vänder korten: resten ser likadan ut."
     - "Ordfamiljer. Läraren lyssnar på Alva och Leo. Alva tar kortet hand: ”Hand. /h/ och and. Sand, land, rand.” Leo tar huset och säger ”mos”. Läraren visar /h/ och us i var sin hand: ”Behåll us.” Leo säger ”mus”."
     - "Avslutet. Mira säger: ”Hus, mus, lus.” Läraren säger: ”Ni bytte början, och resten blev kvar.”"
     - "Efteråt noterar läraren: Alva byter början säkert, och Leo byter mer än början och får ett rimpar i ljudstarten. Veckan är slut, och gruppen går till nästa förmåga."
 fastnar:
   rubrik: "När eleven fastnar"
-  text: "Vänta tre sekunder och ge minsta möjliga stöd först. Blir det många fel i gruppen, säg det i kör, låt sedan några elever säga det ensamma och ta samma ord minst tre gånger."
+  text: "Vänta tre sekunder och ge minsta möjliga stöd först. Blir det många fel i gruppen, säg ordet i kör, låt sedan några elever säga det ensamma och ta samma ord minst tre gånger."
   fragaForst:
     - "Vad hör du?"
   trappaText: "Gå uppför stödtrappan i stunden. Ge inte nästa stöd förrän eleven har prövat det förra:"
   trappa:
-    - "Säg det igen, långsamt, och dra ut början: mmm-⁠us."
+    - "Säg ordet igen, långsamt, och dra ut början: mmm-⁠us."
     - "Visa hur munnen gör. Eleven tittar i spegeln och känner efter: munnen ser likadan ut vid us i hus och us i mus."
     - "Gör uppgiften mindre: två ord att välja mellan, ”Rimmar mus på hus eller på hund?”"
     - "Visa med handen eller med något att flytta: början i ena handen och resten i den andra, och byt bara början."
@@ -287,7 +287,7 @@ uppfoljning:
     - nar: "Efter varje pass"
       vad: "I snabbmallen noterar du dagens elever och det som fastnade."
     - nar: "Var tredje vecka"
-      vad: "Du gör ljudkollens uppgift 1 om rim, uppgift 2 om stavelser och uppgift 4 om bokstävernas ljud."
+      vad: "Du gör ljudkollens uppgift 1 om rim, uppgift 2 om ord och stavelser och uppgift 4 om bokstävernas ljud."
 mal:
   rubrik: "Mål: vad eleven ska kunna efter lektionen"
   text: "Efter lektionen ska eleven kunna:"
@@ -344,7 +344,7 @@ ramar:
         - rubrik: "Till läraren"
           falt:
             - rubrik: "Så gör du"
-              text: "Skriv ut korten på tjockt papper och klipp isär dem. Ta bara fram restkort och bokstavskort med bokstäver som gruppen har haft som dagens ljud. Framför restkortet lägger du bara s, l, r, m, n eller v. Andra bokstäver ger ord ur ljudkollen eller ord som inte låter som de stavas. Lägg bokstaven och restkortet rättvända för eleverna, i den ordningen från vänster sett från dem, och läs tillsammans: sss-⁠ol, sol. Byt bokstaven och läs igen. Påhittade ord räknas."
+              text: "Skriv ut korten på tjockt papper och klipp isär dem. Ta bara fram restkort och bokstavskort med bokstäver som gruppen har haft som dagens ljud. Framför restkortet lägger du bara s, l, r, m, n eller v. Andra bokstäver ger ord ur ljudkollen eller ord som inte låter som de stavas. Lägg bokstaven och restkortet rättvända för eleverna, bokstaven till vänster sett från dem, och läs tillsammans: sss-⁠ol, sol. Byt bokstaven och läs igen. Påhittade ord räknas."
       listor:
         - rubrik: "Restkort"
           rader:

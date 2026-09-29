@@ -18,7 +18,9 @@ ROT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 UT = os.path.join(ROT, 'public', 'fonts', 'ljudlek-elev', 'LjudlekElev-Regular.woff2')
 # Grundlatin, hårt mellanslag, å ä ö é ü i båda storlekarna, tankstreck, citattecken, tre punkter och ordfog.
 TECKEN = list(range(0x20, 0x7F)) + [0xA0, 0xC4, 0xC5, 0xD6, 0xE4, 0xE5, 0xF6, 0xC9, 0xE9, 0xDC, 0xFC, 0x2013, 0x2014, 0x2018, 0x2019, 0x201C, 0x201D, 0x2026, 0x2060]
-FUNKTIONER = ['kern', 'liga', 'ccmp', 'locl', 'mark', 'mkmk']
+# Utan ligaturer (liga): Andika slår annars ihop f och i, och f och l, till ett tecken där i:et saknar prick, och den som
+# lär sig läsa känner igen i:et på pricken (fin, flicka, fisk; granskningen 2026-09-29). Word slår inte på dem.
+FUNKTIONER = ['kern', 'ccmp', 'locl', 'mark', 'mkmk']
 
 kalla = sys.argv[1] if len(sys.argv) > 1 else 'C:/metodrigg/design/typsnitt/andika/Andika-Regular.ttf'
 opt = subset.Options()

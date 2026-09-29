@@ -135,7 +135,7 @@ exempel:
     text: tre elever i årskurs 2 som ljudar sig igenom de flesta ord och sällan läser om en mening. Varje elev har en bok på sin nivå ur en nivåindelad serie.
   text:
     - "Läraren har lagt en ny bok i varje mapp och skrivit titeln i lässchemat. Passet börjar med att Amir läser upp sina tre meningar från gårdagens bok. Läraren säger: ”Du läste hela första meningen utan att stanna. Varför valde du den?” Amir svarar att den var rolig. Läraren signerar lässchemat och går vidare till Selma och Noor."
-    - "Sedan tar alla fram dagens bok. Läraren bläddrar igenom Selmas bok tillsammans med henne: ”Vad ser du på bilden? Vad tror du att hunden gör?” Läraren visar ordet ”trädgården” innan de börjar: ”Det här ordet är långt. Vi delar det: träd-går-den.” Samma sak med de andra två böckerna, en i taget, kort."
+    - "Sedan tar alla fram dagens bok. Läraren bläddrar igenom Selmas bok tillsammans med henne: ”Vad ser du på bilden? Vad tror du att hunden gör?” Läraren visar ordet ”trädgården” innan de börjar: ”Det här ordet är långt. Vi delar det: träd-⁠går-⁠den.” Samma sak med de andra två böckerna, en i taget, kort."
     - "Nu läser eleverna. Amir och Noor viskläser sina böcker medan läraren sitter hos Selma. Selma fastnar på ”sprang”. Läraren väntar. Selma ljudar s-p-r-a-n-g. ”Bra. Läs ordet igen som ett helt ord.” Selma säger ”sprang”. ”Läs meningen från början nu.” När Selma är igenom sidan flyttar läraren till Amir, som läser flytande men gissar ordändelser. Läraren pekar: ”Titta på slutet av ordet. Vad står det?” Sist Noor, som behöver ljuda det mesta. Boken är för svår. Läraren noterar det och byter till en lättare bok till nästa dag."
     - "Passet avslutas med att läraren säger samma sak som varje dag: ”Ikväll läser ni boken en gång till för någon hemma. Välj tre meningar ni gillar och skriv dem i skrivboken.” Mapparna läggs i ryggsäckarna. Efteråt skriver läraren en kort notering: alla tre hade läst hemma, Selma läser om meningen själv nu, Noor byter nivå."
 fastnar:
@@ -283,7 +283,7 @@ lathund:
             4–8 min. Bild- och rubrikvandring i dagens bok.
           - |-
             ”Vad ser du på bilden? Vad tror du händer?”
-            ”Här kommer ett långt ord. Vi delar det: träd-går-den.”
+            ”Här kommer ett långt ord. Vi delar det: träd-⁠går-⁠den.”
         - - |-
             3 · Läs
             8–18 min. En elev i taget, två till tre minuter var.
@@ -304,7 +304,7 @@ lathund:
     utskrift: Skriv ut passexemplet
     text:
       - Amir läser upp sina tre meningar från gårdagens bok. ”Du läste hela första meningen utan att stanna. Varför valde du den?” Läraren signerar lässchemat. Sedan Selma och Noor.
-      - "Alla tar fram dagens bok. Läraren bläddrar med Selma: ”Vad tror du att hunden gör?” Ordet trädgården visas innan de börjar: ”Vi delar det: träd-går-den.” Kort, en elev i taget."
+      - "Alla tar fram dagens bok. Läraren bläddrar med Selma: ”Vad tror du att hunden gör?” Ordet trädgården visas innan de börjar: ”Vi delar det: träd-⁠går-⁠den.” Kort, en elev i taget."
       - "Amir och Noor viskläser. Läraren sitter hos Selma, som fastnar på sprang. Läraren väntar. Selma ljudar. ”Läs ordet igen som ett helt ord. Läs meningen från början nu.” Sedan Amir, som gissar ändelser: ”Titta på slutet av ordet.” Sist Noor, som ljudar det mesta. Boken är för svår."
       - "”Ikväll läser ni boken en gång till för någon hemma. Välj tre meningar ni gillar.” Mapparna i ryggsäckarna. Notering: alla hade läst hemma, Selma läser om själv nu, Noor byter nivå."
     forberett:

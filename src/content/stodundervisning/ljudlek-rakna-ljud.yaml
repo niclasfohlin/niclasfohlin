@@ -30,11 +30,11 @@ formaga: 6
 tranar: "dela upp ord i ljud, med en markör för varje ljud"
 inledning:
   - "I Räkna ljud delar eleverna upp ord i sina ljud och flyttar en markör in i en ruta för varje ljud. Lektionen hjälper eleven med det som gör ljuden svåra att räkna: barn hör stavelser före ljuden, och ljudet i mitten och en konsonant i ett konsonantmöte faller lätt bort."
-  - "Syftet är att eleverna hör varje ljud i ordet, i ordning, och vet hur många de är, så att de kan skriva ordet och läsa det. Ditt uppdrag är att visa hur du flyttar en markör för varje ljud medan du säger ljudet, att låta eleverna ta över steg för steg och att lyssna på var och en."
-  - "Välj Räkna ljud när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 6, dela upp. Ljudkollen står i Ljudlek i grupp, och Räkna ljud hör till förmåga 6, Dela upp, i lektionsbanken där."
+  - "Syftet är att eleverna hör varje ljud i ordet, i ordning, och vet hur många de är, så att de kan skriva ordet och läsa det. Du visar hur du flyttar en markör för varje ljud medan du säger ljudet, låter eleverna ta över steg för steg och lyssnar på var och en."
+  - "Välj Räkna ljud när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 6, dela upp. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och Räkna ljud hör till förmåga 6, Dela upp, i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Räkna ljud går igenom raderna i Så blir lektionen svårare, oftast i sex till femton pass. Har dagens elever två pass i följd lagt rätt antal markörer och sagt ljuden i minst två av sina ord i steg 4, tar ni nästa rad. Efter sista raden tar ni nästa lektion."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Räkna ljud går igenom raderna i Så blir lektionen svårare, oftast i sex till femton pass. Har dagens elever två pass i följd lagt rätt antal markörer och sagt ljuden i minst två av sina ord i steg 4, tar ni nästa rad. Efter sista raden går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"
@@ -58,7 +58,7 @@ tabeller:
       - - "Konsonantmöte sist"
         - "hund: /h/ /u/ /n/ /d/, fyra ljud"
         - "Vokalen är kort. Dra ut n:et: hu-⁠nnn-⁠d."
-    not: "Varje rad har ett ark vikkort under Materialet, med bilden på framsidan och ordet med en prick för varje ljud på baksidan. Gruppen börjar i den första rad som ljudkollens fel leder till. Missar eleverna få eller hål börjar ni i Tre ljud att dra ut, missar de näsa i Två stavelser och missar de häst i Konsonantmöte först, den första raden med konsonantmöten."
+    not: "Varje rad har ett ark vikkort under Materialet, med bilden på framsidan och ordet med en prick för varje ljud på baksidan. Vilken rad gruppen börjar i beror på vad eleverna missar i ljudkollen. Missar de få eller hål börjar ni i Tre ljud att dra ut, missar de näsa i Två stavelser och missar de häst i Konsonantmöte först, den första raden med konsonantmöten."
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
     plats: "efter-tidsschema"
     text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun."
@@ -101,7 +101,7 @@ tabeller:
         - "Ett ljud i taget: säg ljudet och flytta markören samtidigt."
   - rubrik: "Varianter"
     plats: "efter-urval"
-    text: "Byt till en variant när gruppen behöver något nytt, i samma steg."
+    text: "Byt till en variant i samma steg när gruppen behöver något nytt."
     kolumner:
       - "Variant"
       - "Så gör ni"
@@ -135,7 +135,7 @@ tabeller:
         - "snö, blå, sko, bro, tre, grå, klo, stå, sten, stol, glas, svan, stor, smör"
       - - "Konsonantmöte sist"
         - "fisk, mask, hand, sand, hund, vind, land, hals, rund, tält"
-    not: "Orden står i ordning, lättast först. Hur du säger orden och vilka ord som väntar står under Ordbanken i Ljudlek i grupp."
+    not: "Orden står i ordning, lättast först. Hur du säger orden och vilka ord som får vänta står under Ordbanken i Ljudlek i grupp."
 principer:
   rubrik: "Tre saker att hålla fast vid"
   text: "Flytta en markör för varje ljud medan ni säger det, och dra sedan fingret under rutorna och säg ordet. Arbeta från vänster till höger sett från eleverna, också när du står vid tavlan eller sitter mitt emot dem. Varje ark har ord med två, tre och fyra ljud, så att eleverna räknar ljuden i stället för att gissa samma antal."
@@ -198,7 +198,7 @@ steg:
         - "Fyra fingrar, fyra ljud. Myra."
     - namn: "Säg och lägg"
       fraga: "Hur många ljud hör du?"
-      gor: "Den ena lägger kortet i den andras bildruta och säger ordet långsamt tills paret är säkert. Den andra säger ljuden, flyttar en markör för varje och säger ordet. Sedan vänder de kortet och räknar prickarna. Stämmer det inte, säger de ordet långsamt igen eller lägger undan kortet åt dig. De byter efter varje ord."
+      gor: "Den ena lägger kortet i den andras bildruta och säger ordet, långsamt så länge paret behöver det. Den andra säger ljuden, flyttar en markör för varje och säger ordet. Sedan vänder de kortet och räknar prickarna. Stämmer det inte, säger de ordet långsamt igen eller lägger undan kortet åt dig. De byter efter varje ord."
       fraser:
         - "Säg ljudet och flytta markören samtidigt."
         - "Dra fingret under rutorna och säg ordet."
@@ -243,12 +243,12 @@ exempel:
     - "Efteråt noterar läraren: Mira och Omar lade rätt antal markörer och sa ljuden i två av tre ord. Mira lägger ett ö efter b, och Omar blandar ihop p och b. Passet räknas som det första av två i följd, och nästa pass blir Leo och Noah dagens elever."
 fastnar:
   rubrik: "När eleven fastnar"
-  text: "Vänta tre sekunder och ge minsta möjliga stöd först. Blir det många fel i gruppen, säg det i kör, låt sedan några elever säga det ensamma och ta samma ord minst tre gånger."
+  text: "Vänta tre sekunder och ge minsta möjliga stöd först. Blir det många fel i gruppen, säg ordet i kör, låt sedan några elever säga det ensamma och ta samma ord minst tre gånger."
   fragaForst:
     - "Vad hör du?"
   trappaText: "Gå uppför stödtrappan i stunden. Ge inte nästa stöd förrän eleven har prövat det förra:"
   trappa:
-    - "Säg det igen, långsamt, och dra ut ljuden: sssooolll."
+    - "Säg ordet igen, långsamt, och dra ut ljuden: sssooolll."
     - "Visa hur munnen gör. Eleven tittar i spegeln och känner efter, till exempel luften mot handen vid /p/."
     - "Gör uppgiften mindre: täck de rutor som ordet inte behöver, eller ta bara första ljudet medan ni säger resten tillsammans."
     - "Visa med handen eller med något att flytta, en för varje ljud: du säger ljudet, och eleven flyttar markören."

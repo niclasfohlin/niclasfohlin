@@ -1,7 +1,7 @@
 # Metod i stödundervisning. Modellen står i methods/_mall.yaml och docs/modell.md.
 # En lektion i Ljudlek i grupp, skriven i lektionsskelettet: methods/ljudlek-i-grupp/_lektion.yaml.
 titel: "Ljudlek: Bokstavsgympa"
-undertitel: "En lektion i Ljudlek i grupp: hör, gå och säg bokstävernas ljud, för F–⁠2"
+undertitel: "En lektion i Ljudlek i grupp: höra, gå och säga bokstävernas ljud, för F–⁠2"
 ingress: "Eleverna kliver på bokstäverna i ett ord på golvet, säger ljudet för varje bokstav från vänster till höger och läser ordet på slutet. I par pekar de på bokstavskartan och säger ljuden. Lektionen hör till Ljudlek i grupp och har samma ljudstart och avslut som de andra lektionerna."
 omrade: "Läsning"
 arskurs:
@@ -31,11 +31,11 @@ formaga: 4
 tranar: "koppla ljud till bokstav med kroppen, och gå ordet från vänster till höger"
 inledning:
   - "I Bokstavsgympa kliver eleverna på bokstäver på golvet, säger ljudet för varje bokstav från vänster till höger och säger ordet på slutet. Lektionen hjälper eleven med det som gör bokstävernas ljud svåra: eleven säger bokstavens namn, ess för s, och gör en paus mellan ljuden, så att början faller bort och ordet inte kommer."
-  - "Syftet är att eleverna ska kunna ljuden för de bokstäver de har haft och hålla ihop ljuden till ett ord, så att de kan läsa. Ditt uppdrag är att säga ljudet och inte namnet, att hålla ljudet tills foten landar på nästa bokstav, och att bara lägga ord med gruppens bokstäver."
-  - "Välj Bokstavsgympa när fler än hälften av eleverna kan färre än åtta av de tio första bokstäverna på ljudkollens uppgift 4, bokstävernas ljud. Ljudkollen står i Ljudlek i grupp, och Bokstavsgympa hör till förmåga 4, Bokstävernas ljud, i lektionsbanken där."
+  - "Syftet är att eleverna ska kunna ljuden för de bokstäver de har haft och hålla ihop ljuden till ett ord, så att de kan läsa. Du säger ljudet och inte namnet, håller ljudet tills foten landar på nästa bokstav och lägger bara ord med gruppens bokstäver."
+  - "Välj Bokstavsgympa när fler än hälften av eleverna kan färre än åtta av de tio första bokstäverna på ljudkollens uppgift 4, bokstävernas ljud. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och Bokstavsgympa hör till förmåga 4, Bokstävernas ljud, i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Bokstavsgympa går igenom raderna i Så blir lektionen svårare. Raderna följer bokstäverna, som kommer ungefär två i veckan, så lektionen tar oftast fyra till sex veckor, tills gruppen har haft t. Ta nästa rad när dagens elever läser orden utan paus två pass i följd och nästa rad har fyra ord med gruppens bokstäver. Gå till nästa lektion efter raden Med klusil, eller när minst hälften av eleverna kan åtta av de tio första bokstäverna på ljudkollens uppgift 4."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Bokstavsgympa går igenom raderna i Så blir lektionen svårare. Raderna följer bokstäverna, som kommer ungefär två i veckan, så lektionen tar oftast fyra till sex veckor, tills gruppen har haft t. Ta nästa rad när dagens elever läser orden utan paus två pass i följd och nästa rad har fyra ord med gruppens bokstäver. Efter raden Med klusil, eller när minst hälften av eleverna kan minst åtta av de tio första bokstäverna på ljudkollens uppgift 4, går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"
@@ -59,7 +59,7 @@ tabeller:
       - - "Med klusil"
         - "mat: mmmaaat, mat"
         - "Klusilen går inte att dra ut. Säg den kort och utan ö. Står den först, gå direkt till nästa bokstav."
-    not: "I lektionen börjar gruppen i raden Två ljud att dra ut. Orden att gå följer bokstäverna: med s och o finns bara so och os, och med l och a också lo, sa och la. De första veckorna går ni också bokstäverna en och en i ormen och säger ljuden. Räcker orden inte, ta ord ur raden före. Raden Med klusil väntar på t."
+    not: "I lektionen börjar gruppen i raden Två ljud att dra ut. Orden att gå följer bokstäverna: med s och o finns bara so och os, och med l och a också lo, sa och la. De första veckorna går ni också bokstäverna en och en i ormen och säger ljuden. Räcker orden inte, ta ord ur raden före. Raden Med klusil tar ni när gruppen har haft t."
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
     plats: "efter-tidsschema"
     text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun."
@@ -102,7 +102,7 @@ tabeller:
         - "”Titta i spegeln: munnen är lite mer öppen vid eee.” I elefant är e:et kort och låter som ä."
   - rubrik: "Varianter"
     plats: "efter-urval"
-    text: "Byt till en variant när gruppen behöver något nytt, i samma steg."
+    text: "Byt till en variant i samma steg när gruppen behöver något nytt."
     kolumner:
       - "Variant"
       - "Så gör ni"
@@ -154,7 +154,7 @@ tabeller:
         - "snö, blå, sko, bro, tre, grå, klo, stå, sten, stol, glas, svan, stor, smör"
       - - "Konsonantmöte sist"
         - "fisk, mask, hand, sand, hund, vind, land, hals, rund, tält"
-    not: "Orden står i ordning, lättast först. Hur du säger orden och vilka ord som väntar står under Ordbanken i Ljudlek i grupp."
+    not: "Orden står i ordning, lättast först. Hur du säger orden och vilka ord som får vänta står under Ordbanken i Ljudlek i grupp."
 principer:
   rubrik: "Tre saker att hålla fast vid"
   text: "Säg ljudet och inte namnet: bokstaven s låter sss. Håll ljudet tills foten landar på nästa bokstav, så att ljuden blir ett ord. Lägg ord som börjar likadant efter varandra, som mos, mor och mal, och säg inte ordet i förväg, så att eleven läser i stället för att gissa."
@@ -262,12 +262,12 @@ exempel:
     - "Efteråt noterar läraren: Omar gör en paus mellan ljuden men läser ordet när han håller dem. Alva säger namnet för m och r. Nästa pass tar gruppen samma rad, och dagens elever blir Leo och Elin."
 fastnar:
   rubrik: "När eleven fastnar"
-  text: "Vänta tre sekunder och ge minsta möjliga stöd först. Blir det många fel i gruppen, säg det i kör, låt sedan några elever säga det ensamma och ta samma ord minst tre gånger."
+  text: "Vänta tre sekunder och ge minsta möjliga stöd först. Blir det många fel i gruppen, säg ordet i kör, låt sedan några elever säga det ensamma och ta samma ord minst tre gånger."
   fragaForst:
     - "Hur låter den?"
   trappaText: "Gå uppför stödtrappan i stunden. Ge inte nästa stöd förrän eleven har prövat det förra:"
   trappa:
-    - "Säg det igen, långsamt: ta bara ljudet där eleven stannade, som lll i sol."
+    - "Säg ordet igen, långsamt: ta bara ljudet där eleven stannade, som lll i sol."
     - "Visa hur munnen gör. Eleven tittar i spegeln och känner efter: läpparna ihop vid /m/, tungan bakom tänderna vid /l/."
     - "Gör uppgiften mindre: ta de två första bokstäverna först, so, och sedan sol."
     - "Visa med handen eller med något att flytta: för handen utan paus över bokstäverna medan eleven kliver."
