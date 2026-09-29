@@ -131,7 +131,7 @@ Filnamnet bär en kontrollsumma av kortets text, mallen, designsystemets variabl
 | Knapp | Vad som delas | Visas |
 |---|---|---|
 | Facebook | `facebook.com/sharer/sharer.php?u=`: bara länken; Facebook visar delningskortet, och den som delar skriver själv. På Niclas Android-telefon fungerade länken (2026-09-29) | alltid, också utan JavaScript |
-| LinkedIn | `linkedin.com/sharing/share-offsite/?url=`: bara länken med kortet. På telefonen öppnar länken LinkedIns mobilsida och inte appen (Niclas 2026-09-29), så där öppnar knappen telefonens delningsmeny, där man väljer LinkedIn-appen och redan är inloggad | alltid; menyn på pekskärm med delningsmeny |
+| LinkedIn | `linkedin.com/sharing/share-offsite/?url=`: bara länken med kortet. På telefonen kan länken öppna LinkedIns mobilsida i stället för appen (Niclas Android-telefon 2026-09-29); appen nås genom Fler appar, där man väljer LinkedIn och titeln följer med. Att låta knappen öppna telefonens meny prövades och togs bort samma dag: då blev den samma sak som Fler appar, utan titeln (K-091) | alltid, också utan JavaScript |
 | Mejl | ämnet är titeln, texten ingressen och länken (utan JavaScript bara länken) | alltid |
 | Kopiera länk | länken; webbläsarens urklipp, annars den äldre vägen för appar som stänger det (Facebooks webbläsare på Android), och går ingen visas länken att markera | med JavaScript |
 | Instagram | delningskortet som bild genom telefonens delningsmeny ("Dela 1 bild" på Android), där man väljer Instagram, och länken i urklipp för klistermärket Länk i en berättelse | på pekskärm där bilder kan delas |

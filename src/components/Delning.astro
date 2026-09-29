@@ -6,10 +6,10 @@
 // description, og:image), så att nya sidor får raden automatiskt utan egna uppgifter.
 // Facebook, LinkedIn och Mejl är vanliga länkar som fungerar utan JavaScript och utan skript från Facebook.
 // Facebook och LinkedIn tar bara emot länken och visar sidans delningskort; egen text går inte att fylla i där
-// (så gäller det i september 2026, DRIFT.md under Delningsraden). På telefon med delningsmeny öppnar LinkedIn
-// menyn i stället, eftersom LinkedIns länk öppnar mobilsidan och inte appen (Facebooks länk fungerade på Niclas
-// telefon 2026-09-29 och får vara kvar). Kopiera länk, Instagram (delningskortet som bild, på telefon) och Fler
-// appar (telefonens egen meny) visas bara där webbläsaren klarar dem.
+// (så gäller det i september 2026, DRIFT.md under Delningsraden). På telefonen kan LinkedIns länk öppna mobilsidan
+// i stället för appen; appen nås genom Fler appar, där titeln följer med. Knappen gick en stund till telefonens
+// meny, men då blev den samma sak som Fler appar (Niclas 2026-09-29, K-091). Kopiera länk, Instagram
+// (delningskortet som bild, på telefon) och Fler appar (telefonens egen meny) visas bara där webbläsaren klarar dem.
 // Trycken räknas i besöksstatistiken som dela:<kanal>:<sida> och visas under Mest delade och Delat via på /statistik.
 import { site } from '../data/site';
 import ikoner from './delning-ikoner.svg?no-inline';
@@ -99,15 +99,8 @@ const knappar = [
       }
       if (kanal === 'mejl') el.setAttribute('href', `mailto:?subject=${encodeURIComponent(titel)}&body=${encodeURIComponent(ingress)}%0D%0A%0D%0A${encodeURIComponent(url)}`);
       if (kanal === 'instagram') el.addEventListener('pointerdown', () => void hamta());
-      el.addEventListener('click', async (handelse) => {
+      el.addEventListener('click', async () => {
         rakna(kanal);
-        // På telefonen öppnar LinkedIns länk mobilsidan, där många inte är inloggade, och ingen webbsida kan öppna
-        // appens delningsvy. Telefonens delningsmeny lämnar i stället länken till LinkedIn-appen.
-        if (kanal === 'linkedin' && kan.fler) {
-          handelse.preventDefault();
-          navigator.share({ url }).catch(() => {});
-          return;
-        }
         if (kanal === 'kopiera') visa((await kopiera(url)) ? 'Länken är kopierad.' : `Markera och kopiera länken: ${url}`);
         if (kanal === 'fler') navigator.share({ title: titel, text: titel, url }).catch(() => {});
         if (kanal === 'instagram') {
