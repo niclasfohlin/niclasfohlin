@@ -1,0 +1,117 @@
+---
+// Delningsraden (Niclas 2026-09-29): på metodsidan mellan rutan I korthet och Ladda ner, och ovanför kommentarerna
+// på artiklar, metoder och böcker. Ett lager som kommentarerna: delningPa i src/lib/delning.ts tar bort raderna och skriptet.
+// Låg vikt: raden bär bara länkarna. Ikonerna ligger i en egen fil som cachas (delning-ikoner.svg), och
+// skriptet läser sidans adress, titel, ingress och delningskort ur sidhuvudet (canonical, og:title,
+// description, og:image), så att nya sidor får raden automatiskt utan egna uppgifter.
+// Facebook, LinkedIn och Mejl är vanliga länkar som fungerar utan JavaScript och utan skript från Facebook.
+// Facebook och LinkedIn tar bara emot länken och visar sidans delningskort; egen text går inte att fylla i där
+// (så gäller det i september 2026, DRIFT.md under Delningsraden). Kopiera länk, Instagram (delningskortet som
+// bild, på telefon) och Fler appar (telefonens egen meny) visas bara där webbläsaren klarar dem.
+// Trycken räknas i besöksstatistiken som dela:<kanal>:<sida> och visas under Mest delade och Delat via på /statistik.
+import { site } from '../data/site';
+import ikoner from './delning-ikoner.svg?no-inline';
+
+interface Props {
+  /** Sidans sökväg, till exempel /stodundervisning/upprepad-lasning */
+  sida: string;
+  titel: string;
+  /** Var raden står: topp (under metodens ruta) eller fot (ovanför kommentarerna). Ger unika id. */
+  plats?: 'topp' | 'fot';
+}
+const { sida, titel, plats = 'fot' } = Astro.props;
+const u = encodeURIComponent(new URL(sida, site.url).href);
+const rubrik = `delning-${plats}`;
+const knappar = [
+  { kanal: 'facebook', ord: 'Facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${u}` },
+  { kanal: 'linkedin', ord: 'LinkedIn', href: `https://www.linkedin.com/sharing/share-offsite/?url=${u}` },
+  { kanal: 'instagram', ord: 'Instagram' },
+  { kanal: 'mejl', ord: 'Mejl', href: `mailto:?subject=${encodeURIComponent(titel)}&body=${u}` },
+  { kanal: 'kopiera', ord: 'Kopiera länk' },
+  { kanal: 'fler', ord: 'Fler appar' },
+];
+---
+<section class:list={['delning', plats]} aria-labelledby={rubrik} data-delning>
+  <h2 id={rubrik}>Dela</h2>
+  <ul>
+    {knappar.map(({ kanal, ord, href }) => href ? (
+      <li><a href={href} target={kanal === 'mejl' ? undefined : '_blank'} rel="noopener" data-kanal={kanal}><svg aria-hidden="true" width="16" height="16"><use href={`${ikoner}#${kanal}`} /></svg><span>{ord}</span></a></li>
+    ) : (
+      <li hidden><button type="button" data-kanal={kanal}><svg aria-hidden="true" width="16" height="16"><use href={`${ikoner}#${kanal}`} /></svg><span>{ord}</span></button></li>
+    ))}
+  </ul>
+  <p class="delning-besked" role="status"></p>
+</section>
+
+<script>
+  // Sidans uppgifter ur sidhuvudet, som Base.astro skriver för varje sida.
+  const las = (sel: string, attr: string) => document.querySelector(sel)?.getAttribute(attr) ?? '';
+  const url = las('link[rel="canonical"]', 'href') || location.href;
+  const titel = las('meta[property="og:title"]', 'content') || document.title;
+  const ingress = las('meta[name="description"]', 'content');
+  const bild = new URL(las('meta[property="og:image"]', 'content') || '/', location.href).pathname;
+  const sida = new URL(url).pathname.slice(1);
+  const handling: Record<string, string> = { facebook: 'delad på Facebook', linkedin: 'delad på LinkedIn', instagram: 'delad på Instagram', mejl: 'skickad med mejl', kopiera: 'länken kopierad', fler: 'delad i en annan app' };
+  // Knapparna som behöver webbläsarens hjälp. Pekskärm betyder telefon eller surfplatta.
+  const pekskarm = matchMedia('(pointer: coarse)').matches;
+  const kan: Record<string, boolean> = {
+    kopiera: true,
+    fler: pekskarm && 'share' in navigator,
+    instagram: pekskarm && Boolean(navigator.canShare?.({ files: [new File([''], 'prov.jpg', { type: 'image/jpeg' })] })),
+  };
+  // Instagram tar inte emot länkar från webben: knappen delar delningskortet som bild och lägger länken i
+  // urklipp, så att den kan läggas in med klistermärket Länk. Bilden hämtas först när någon trycker.
+  let fil: Promise<File> | undefined;
+  const hamta = () => (fil ??= fetch(bild).then((svar) => svar.blob()).then((blob) => new File([blob], 'niclasfohlin.jpg', { type: 'image/jpeg' })));
+  // Urklippet: webbläsarens vanliga väg, annars den äldre för appar som stänger den för skript (webbläsaren inne i
+  // Facebooks app på Android och liknande). Går ingen av dem visar raden länken, så att den går att markera.
+  const kopiera = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      const falt = document.createElement('textarea');
+      falt.value = text;
+      falt.setAttribute('readonly', '');
+      falt.style.cssText = 'position:fixed;top:0;opacity:0';
+      document.body.append(falt);
+      falt.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch { ok = false; }
+      falt.remove();
+      return ok;
+    }
+  };
+  const rakna = (kanal: string) => (window as { goatcounter?: { count: (v: object) => void } }).goatcounter?.count({ path: `dela:${kanal}:${sida}`, title: `${titel}: ${handling[kanal]}`, event: true });
+
+  for (const rad of document.querySelectorAll<HTMLElement>('[data-delning]')) {
+    const visa = (text: string) => {
+      const p = rad.querySelector('.delning-besked');
+      if (p) p.textContent = text;
+    };
+    for (const el of rad.querySelectorAll<HTMLElement>('[data-kanal]')) {
+      const kanal = el.dataset.kanal ?? '';
+      if (kanal in kan) {
+        if (!kan[kanal]) continue;
+        el.closest('li')?.removeAttribute('hidden');
+      }
+      if (kanal === 'mejl') el.setAttribute('href', `mailto:?subject=${encodeURIComponent(titel)}&body=${encodeURIComponent(ingress)}%0D%0A%0D%0A${encodeURIComponent(url)}`);
+      if (kanal === 'instagram') el.addEventListener('pointerdown', () => void hamta());
+      el.addEventListener('click', async () => {
+        rakna(kanal);
+        if (kanal === 'kopiera') visa((await kopiera(url)) ? 'Länken är kopierad.' : `Markera och kopiera länken: ${url}`);
+        if (kanal === 'fler') navigator.share({ title: titel, text: titel, url }).catch(() => {});
+        if (kanal === 'instagram') {
+          visa((await kopiera(url)) ? 'Länken är kopierad. Lägg in den med klistermärket Länk.' : `Lägg in länken med klistermärket Länk: ${url}`);
+          try {
+            await navigator.share({ files: [await hamta()] });
+          } catch (fel) {
+            if (fel instanceof DOMException && fel.name === 'NotAllowedError') visa('Tryck på Instagram en gång till.');
+          }
+        }
+      });
+    }
+    // Antalet synliga knappar styr rutnätet på telefonen (global.css): fyra blir två och två.
+    rad.dataset.antal = String(rad.querySelectorAll('li:not([hidden])').length);
+  }
+</script>

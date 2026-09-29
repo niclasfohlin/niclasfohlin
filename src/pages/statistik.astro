@@ -1,7 +1,7 @@
 ---
 // Statistiken (K-086, Niclas 2026-09-28): besök och nedladdningar i sajtens kategorier, med metodernas topp 3 och
-// filernas topp 5, för i dag, sju och trettio dagar och ett år, med besöken över tid, varifrån besökarna kommer och
-// om de har mobil eller dator (det som WordPress och GoatCounters panel visar och som Niclas har nytta av). Siffrorna hämtas i webbläsaren direkt från GoatCounters API
+// filernas topp 5 och delningarna från delningsraden (K-088), för i dag, sju och trettio dagar och ett år, med
+// besöken över tid, varifrån besökarna kommer och om de har mobil eller dator (det som WordPress och GoatCounters panel visar och som Niclas har nytta av). Siffrorna hämtas i webbläsaren direkt från GoatCounters API
 // (https://www.goatcounter.com/help/api), som tillåter anrop från andra adresser. Niclas klistrar in en nyckel med
 // rätten att läsa statistik en gång; den sparas bara i hans webbläsare och skickas bara till GoatCounter. Sidan
 // har ingen egen data, länkas inte från menyn, har noindex, står utanför sitemap och räknas inte själv (Base, dold).
@@ -46,6 +46,12 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
       </section>
       <section class="stat-kategori" data-kategori="filer" data-topp="5">
         <h2>Filerna</h2>
+      </section>
+      <section class="stat-kategori" data-kategori="delningar" data-topp="5">
+        <h2>Mest delade</h2>
+      </section>
+      <section class="stat-kategori" data-kategori="kanaler" data-topp="6">
+        <h2>Delat via</h2>
       </section>
       <section class="stat-kategori" data-kategori="artiklar" data-topp="3">
         <h2>Artiklarna</h2>
@@ -124,9 +130,14 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
 
     // Sidans titel utan sajtens namn; händelsernas titlar är redan "Upprepad läsning: lathunden som pdf".
     const utanSajt = (t: string) => (t || '').replace(/\s*·\s*Niclas Fohlin\s*$/, '').trim();
+    // Delningsraden (Delning.astro) räknar dela:<kanal>:<sida> med titeln "<sidans titel>: delad på Facebook".
+    const KANAL: Record<string, string> = { facebook: 'Facebook', linkedin: 'LinkedIn', instagram: 'Instagram', mejl: 'Mejl', kopiera: 'Kopiera länk', fler: 'Fler appar' };
+    const DELAD = /: (delad på .+|skickad med mejl|länken kopierad|delad i en annan app)$/;
     function kategorier(hits: Hit[]) {
       const metoder = new Map<string, { namn: string; sida: number; lathund: number }>();
       const filer = new Map<string, Rad>();
+      const delningar = new Map<string, { namn: string; antal: number; kanaler: Map<string, number> }>();
+      let delade = 0;
       const k: Record<string, Rad[]> = { artiklar: [], bocker: [], utskrifter: [], ovriga: [] };
       const metod = (id: string) => {
         let x = metoder.get(id);
@@ -136,6 +147,17 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
       for (const h of hits) {
         const titel = utanSajt(h.title);
         if (h.event) {
+          const d = h.path.match(/^dela:([^:]+):(.+)$/);
+          if (d) {
+            // En sida rankas efter alla sina delningar; kanalerna står under namnet.
+            const x = delningar.get(d[2]) ?? { namn: d[2], antal: 0, kanaler: new Map<string, number>() };
+            x.antal += h.count;
+            x.kanaler.set(d[1], (x.kanaler.get(d[1]) ?? 0) + h.count);
+            if (DELAD.test(titel)) x.namn = titel.replace(DELAD, '');
+            delningar.set(d[2], x);
+            delade += h.count;
+            continue;
+          }
           if (/^utskrift/.test(h.path)) { k.utskrifter.push({ namn: titel || h.path, antal: h.count }); continue; }
           // Filerna hette först bara filnamnet (upprepad-lasning-lathund.pdf, drive-…); de slås ihop med fil:-namnen.
           const nyckelFil = h.path.replace(/^fil:/, '').replace(/^drive-/, 'drive:');
@@ -159,7 +181,16 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
       }
       // En metod rankas efter besöken på metodsidan; lathundens besök står under namnet.
       const metodRader: Rad[] = [...metoder.values()].map((x) => ({ namn: x.namn, under: x.lathund ? `och ${x.lathund} på lathunden` : undefined, antal: x.sida }));
-      return { metoder: metodRader, filer: [...filer.values()], ...k };
+      const delRader: Rad[] = [...delningar.values()].map((x) => ({
+        namn: x.namn,
+        under: [...x.kanaler].sort((a, b) => b[1] - a[1]).map(([kanal, n]) => `${KANAL[kanal] ?? kanal} ${n}`).join(' · '),
+        antal: x.antal,
+      }));
+      // Kanalerna över alla sidor: vilken knapp i delningsraden som används mest.
+      const perKanal = new Map<string, number>();
+      for (const x of delningar.values()) for (const [kanal, n] of x.kanaler) perKanal.set(kanal, (perKanal.get(kanal) ?? 0) + n);
+      const kanalRader: Rad[] = [...perKanal].map(([kanal, n]) => ({ namn: KANAL[kanal] ?? kanal, antal: n }));
+      return { rader: { metoder: metodRader, filer: [...filer.values()], delningar: delRader, kanaler: kanalRader, ...k }, delade };
     }
 
     function lista(rader: Rad[], klass: string) {
@@ -320,14 +351,16 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
       try {
         const t = tider(period);
         const [hits, total] = await Promise.all([allaHits(t), hamta('/api/v0/stats/total', t)]);
-        const k = kategorier(hits);
+        const { rader: k, delade } = kategorier(hits);
         const handelser = total.total_events ?? 0;
         summa.innerHTML = '';
         const sidor = document.createElement('strong');
         sidor.textContent = String((total.total ?? 0) - handelser);
         const filer = document.createElement('strong');
-        filer.textContent = String(handelser);
-        summa.append(sidor, ' besök på sidorna · ', filer, ' nedladdningar och utskrifter');
+        filer.textContent = String(Math.max(0, handelser - delade));
+        const delat = document.createElement('strong');
+        delat.textContent = String(delade);
+        summa.append(sidor, ' besök på sidorna · ', filer, ' nedladdningar och utskrifter · ', delat, ' delningar');
         for (const [namn, rader] of Object.entries(k)) visaKategori(namn, rader);
         visaDiagram(period, total.stats ?? []);
         visaPopular(period, total.stats ?? []);

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+<!-- Ikonerna i delningsraden (Delning.astro), tecknade som filvalets. Färg och linje sätts av global.css (.delning svg). -->
+<symbol id="facebook" viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.75"/><path d="M11 17.75V9.6c0-1.2.7-1.85 1.9-1.85h1.1M8.4 11.1h5.1"/></symbol>
+<symbol id="linkedin" viewBox="0 0 20 20"><rect x="2.75" y="2.75" width="14.5" height="14.5" rx="2.5"/><path d="M6.75 9v5.25M10 14.25V9M10 11.4c0-1.5 1-2.4 2.2-2.4s2.05.8 2.05 2.3v2.95"/><circle cx="6.75" cy="6.4" r=".9" fill="currentColor" stroke="none"/></symbol>
+<symbol id="instagram" viewBox="0 0 20 20"><rect x="3" y="3" width="14" height="14" rx="4"/><circle cx="10" cy="10" r="3.1"/><circle cx="13.9" cy="6.1" r=".8" fill="currentColor" stroke="none"/></symbol>
+<symbol id="mejl" viewBox="0 0 20 20"><rect x="2.75" y="4.75" width="14.5" height="10.5" rx="1.5"/><path d="M3.25 5.5 10 10.75l6.75-5.25"/></symbol>
+<symbol id="kopiera" viewBox="0 0 20 20"><path d="M8.6 11.4a3 3 0 0 0 4.25 0l2.5-2.5a3 3 0 0 0-4.25-4.25l-.9.9"/><path d="M11.4 8.6a3 3 0 0 0-4.25 0l-2.5 2.5a3 3 0 0 0 4.25 4.25l.9-.9"/></symbol>
+<symbol id="fler" viewBox="0 0 20 20"><path d="M10 12.5V2.75M6.75 6 10 2.75 13.25 6"/><path d="M7 8.75H5.25v8.5h9.5v-8.5H13"/></symbol>
+</svg>

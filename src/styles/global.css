@@ -373,6 +373,33 @@ button.lank:hover { color: var(--farg-accent); }
   .metod-topp { grid-template-columns: minmax(0, 1fr) 21rem; grid-template-areas: "huvud fakta" "ladda fakta"; }
 }
 
+/* Delningsraden (Delning.astro): på metodsidan mellan rutan och Ladda ner och skriv ut, och ovanför
+   kommentarerna. Låg profil: samma etikett som Ladda ner och skriv ut och små knappar med ikon och ord. */
+.delning { font-family: var(--typsnitt-ui); font-size: 0.85rem; max-width: var(--matt-text); }
+.delning h2 { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); margin: 0 0 0.6em; }
+.delning ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.delning a, .delning button { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.25rem; padding: 0 0.7rem; border: 1px solid var(--farg-kant); border-radius: 6px; background: var(--farg-yta); color: var(--farg-accent); font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; }
+.delning a:hover, .delning button:hover { background: var(--farg-accent-ljus); color: var(--farg-accent-mork); }
+.delning svg { flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.delning-besked { margin: 0.5rem 0 0; color: var(--farg-text-svag); overflow-wrap: anywhere; }
+.delning-besked:empty { display: none; }
+.delning.fot { margin-top: 2rem; }
+.metod-topp:has(> .delning) { grid-template-areas: "huvud" "fakta" "dela" "ladda"; }
+.metod-topp > .delning { grid-area: dela; }
+/* Telefonen på högkant: högst två rader. Tre knappar i bredd med ikonen över ordet, så att också Kopiera länk
+   ryms på en smal skärm. Fyra knappar (en app utan telefonens delningsmeny) blir två och två med ikonen bredvid. */
+@media (max-width: 40rem) {
+  .delning ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .delning li { display: flex; }
+  .delning a, .delning button { flex: 1; flex-direction: column; justify-content: center; gap: 0.2rem; min-height: 3.5rem; padding: 0.4rem 0.25rem; font-size: 0.8rem; line-height: 1.15; text-align: center; }
+  .delning svg { width: 18px; height: 18px; }
+  .delning[data-antal="4"] ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .delning[data-antal="4"] a, .delning[data-antal="4"] button { flex-direction: row; gap: 0.4rem; min-height: 2.75rem; }
+}
+@media (min-width: 56rem) {
+  .metod-topp:has(> .delning) { grid-template-areas: "huvud fakta" "dela fakta" "ladda fakta"; }
+}
+
 /* Sidnavigationen: på bred skärm en egen spalt till vänster som följer med vid rullning, med det
    avsnitt som är i bild markerat (Metod.astro); på smal skärm en rad länkar överst. */
 .metod-nav { font-family: var(--typsnitt-ui); font-size: 0.95rem; margin: 0 0 1.5rem; }
@@ -845,7 +872,7 @@ html.js .bara-js { display: inline-block; }
     @bottom-center { content: var(--tryck-text, ''); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 8.5pt; color: #555; }
   }
   body { background: #fff; color: #000; font-size: 10.5pt; line-height: 1.45; }
-  .sidhuvud, .sidfot, .hopp-lank, .nedladdning, .filter, .samla, .metod-fot .relaterade, .metod-fot .taggar, .valj, .kommentarer { display: none !important; }
+  .sidhuvud, .sidfot, .hopp-lank, .nedladdning, .filter, .samla, .metod-fot .relaterade, .metod-fot .taggar, .valj, .kommentarer, .delning { display: none !important; }
   .innehall { max-width: none; padding: 0; }
   .metod { max-width: none; }
   .metod-topp { grid-template-columns: 1fr; grid-template-areas: "huvud" "fakta"; margin: 0 0 1rem; padding: 0; background: none; box-shadow: none; clip-path: none; border-bottom: 0; }
