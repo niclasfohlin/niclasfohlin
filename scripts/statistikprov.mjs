@@ -7,8 +7,9 @@
 //     händelser, högst 100 per omgång, och exclude_paths läst som GoatCounter läser den (bara första värdet, delat vid
 //     komma). Så syntes felet med 7 dagar, 30 dagar och år (K-095): samma 100 kom tillbaka fem gånger.
 //   GC_NYCKEL=<nyckeln> node scripts/statistikprov.mjs https://niclasfohlin.se/statistik
-//     Riktiga siffror. Sifferrutorna jämförs med det GoatCounter själv räknar. Nyckeln är Niclas och finns inte i repot;
-//     den läses bara ur miljön, skrivs aldrig ut, och Chrome körs inkognito så att den inte sparas.
+//     Riktiga siffror. Sifferrutorna jämförs med det GoatCounter själv räknar. Nyckeln är Niclas och finns inte i repot
+//     (Claude Code sätter GC_NYCKEL ur .claude/settings.local.json); den läses bara ur miljön, skrivs aldrig ut, och
+//     Chrome körs inkognito så att den inte sparas.
 //
 // Godkänt: varje period slutar med Hämtat, inget anrop stoppas, inget 429, och sifferrutorna stämmer. Skriptet slutar
 // med felkod 1 annars. Varje körning gör omkring 20 anrop mot timmens 500. Kräver Chrome. Se DRIFT.md under
