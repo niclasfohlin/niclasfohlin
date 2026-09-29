@@ -38,9 +38,9 @@
   --skugga: 0 1px 2px rgba(20, 32, 43, 0.06);
 }
 /* Elevens typsnitt på korten och elevens blad (Ljudlek i grupp, 2026-09-29): Andika från SIL, där a och g har en båge som
-   när eleven skriver dem och l inte liknar I, som delmängden Ljudlek Elev (31 KB, SIL Open Font License, licensen i
-   public/fonts/ljudlek-elev/). Webbläsaren hämtar filen först när något på sidan står i typsnittet (src/lib/ljudkort.ts).
-   Reglerna står efter :root, eftersom delningskortens kontrollsumma omfattar början av filen till och med :root
+   när eleven skriver dem och l inte liknar I, som delmängden Ljudlek Elev med svenska tecken (14 KB, SIL Open Font License,
+   licensen i public/fonts/ljudlek-elev/, gjord av scripts/elevtypsnitt.py). Webbläsaren hämtar filen bara på sidor där
+   något står i typsnittet (src/lib/ljudkort.ts). Reglerna står efter :root, eftersom delningskortens kontrollsumma omfattar början av filen till och med :root
    (src/lib/delningskort.ts): typsnittet syns inte på korten och ska inte rita om dem. */
 @font-face { font-family: 'Ljudlek Elev'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/ljudlek-elev/LjudlekElev-Regular.woff2') format('woff2'); }
 :root { --typsnitt-elev: 'Ljudlek Elev', 'Andika', 'Public Sans', sans-serif; }

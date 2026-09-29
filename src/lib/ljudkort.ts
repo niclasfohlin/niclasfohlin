@@ -12,10 +12,11 @@
 import BILDBANK from '../data/bildbank.json';
 import type { MetodData } from './metod';
 
-// Elevens typsnitt: Andika från SIL (Open Font License 1.1), här som delmängden Ljudlek Elev med latinska tecken, i
-// public/fonts/ljudlek-elev/ med licensen. En ändrad fil som används för sig får inte heta Andika (OFL-FAQ 2.6), därför
-// namnet, som metodriggen valde. Webbläsaren hämtar woff2-filen först när något på sidan står i typsnittet, och Word-
-// filerna bär ttf-filen inbäddad, så att korten ser likadana ut där typsnittet inte är installerat.
+// Elevens typsnitt: Andika från SIL (Open Font License 1.1), här som delmängden Ljudlek Elev i public/fonts/ljudlek-elev/
+// med licensen. En ändrad fil som används för sig får inte heta Andika (OFL-FAQ 2.6), därför namnet, som metodriggen
+// valde. Webbläsaren hämtar woff2-filen (svenska tecken, 14 KB, scripts/elevtypsnitt.py) bara på sidor där något står i
+// typsnittet, och Word-filerna bär riggens bredare ttf-fil inbäddad, så att korten ser likadana ut där typsnittet inte
+// är installerat.
 export const ELEVTYPSNITT = 'Ljudlek Elev';
 export const ELEVTYPSNITT_TTF = '/fonts/ljudlek-elev/LjudlekElev-Regular.ttf';
 export const ANDIKA_ADRESS = 'https://software.sil.org/andika/';
