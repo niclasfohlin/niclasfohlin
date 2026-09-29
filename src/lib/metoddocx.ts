@@ -12,7 +12,8 @@ import { arbetsformRad, arEttKort, arProtokoll, arskursText, datumText, ejBryt, 
 import { brakDelar, delnamn, kortInfo, lage, STANDARD_NAMNARE, type KortInfo, type Mall } from './brak';
 import { bagSvg, utanStod } from './lasflyt';
 import type { MetodPostISerie, SerieKoppling } from './serie';
-import { ANDIKA_ADRESS, ELEVTYPSNITT, VIK_TEXT, bildFor as bildForOrd, harElevtypsnitt, kartCeller, kortCeller, ljudenheter, ljudform, arDelark, upphovBilder, type KartCell } from './ljudkort';
+import { ANDIKA_ADRESS, ELEVTYPSNITT, VIK_TEXT, bildFor as bildForOrd, harElevtypsnitt, kartCeller, kortCeller, ljudenheter, ljudform, arDelark, type KartCell } from './ljudkort';
+import { protokollDelas } from './ramform';
 import WORDSKALOR from '../data/lathund-word.json';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
@@ -363,8 +364,7 @@ function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[
 // brak: bråken staplas (metoder i matematik); annars står ett snedstreck kvar, som i ett datum.
 // luft: ett kort att ha på bordet (strategikortet, K-062) får luft mellan raderna.
 // elev: metoden har kort i elevens typsnitt, så bladet eleven läser står i det också; lärarens protokoll i husets.
-// centrera: korta ord står mitt i sina rutor, som bokstäverna (elevens blad att peka på).
-function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][] }, o: { storlek: number; hallIhopEfter?: boolean; brak?: boolean; luft?: boolean; elev?: boolean; centrera?: boolean }): Barn[] {
+function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][] }, o: { storlek: number; hallIhopEfter?: boolean; brak?: boolean; luft?: boolean; elev?: boolean }): Barn[] {
   const ut: Barn[] = [];
   const n = Math.max(...l.rader.map((r) => r.length), l.kolumner?.length ?? 1);
   // En kolumn där alla rader är tomma är en skrivkolumn (kartläggningens Före och Efter): smal, med rubriken i mitten,
@@ -387,7 +387,7 @@ function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][] 
   if (l.kolumner) rader.push(rad(l.kolumner.map((k, i) => cell([stycke(k, { storlek: 15, versaler: true, farg: FARG.svag, efter: 0, hallIhop: true, mitt: !!smal && skriv[i] })], { bredd: bredder[i], fyll: FARG.rand, tat: !!smal })), { huvud: true }));
   l.rader.forEach((r, ri) => {
     const ihop = ri < l.rader.length - 1 || !!o.hallIhopEfter;
-    rader.push(rad(Array.from({ length: n }, (_, i) => cell([stycke(r[i] ?? '', { storlek, fore: o.luft ? 100 : 0, efter: o.luft ? 100 : 0, hallIhop: ihop, mitt: bokstaver || !!o.centrera, brak: o.brak, font: o.elev && !smal ? ELEVTYPSNITT : undefined })], { bredd: bredder[i], tat: !!smal }))));
+    rader.push(rad(Array.from({ length: n }, (_, i) => cell([stycke(r[i] ?? '', { storlek, fore: o.luft ? 100 : 0, efter: o.luft ? 100 : 0, hallIhop: ihop, mitt: bokstaver, brak: o.brak, font: o.elev && !smal ? ELEVTYPSNITT : undefined })], { bredd: bredder[i], tat: !!smal }))));
   });
   ut.push(tabell(rader, bredder), avstand());
   return ut;
@@ -476,6 +476,11 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
   // marginal, som i riggens kompendium, både i beskrivningen och i planeringsmallarna.
   if ((ram.listor ?? []).some((l) => ljudform({ kort: o.kort }, l))) {
     ut.push(...noter());
+    // Upphovet för bildbankens bilder står en gång i ramen med bilderna, före arken, så att det följer med både filen med
+    // allt och planeringsmallarna (MIT-licensen kräver det i kopiorna).
+    const former = new Set((ram.listor ?? []).map((l) => ljudform({ kort: o.kort }, l)));
+    const med = [former.has('bildkort') && 'bildkorten', former.has('bokstavskarta') && 'bokstavskartan'].filter(Boolean);
+    if (med.length) ut.push(stycke(`Bilderna på ${med.join(' och ')}: Fluent Emoji, © Microsoft Corporation, MIT-licens.`, { farg: FARG.svag, storlek: 18 }));
     for (const l of ram.listor ?? []) {
       const form = ljudform({ kort: o.kort }, l);
       if (!form) { ut.push(...elevlista(l, { storlek, brak: o.brak, elev: o.elev })); continue; }
@@ -512,7 +517,10 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
   // Lärarens protokoll (Lästrappan före och efter, bråkkursens kartläggning) fylls i av läraren: noten om hur står först
   // också i elevkopian, som på sidan. Sist hamnade den ensam på en egen sida när protokollet fyllde sin (K-071).
   const protokoll = !!ram.listor?.length && ram.listor.every(arProtokoll);
-  if (ram.listor) ut.push(...(o.stor && !protokoll ? [...huvud(), ...listor(), ...noter()] : [...noter(), ...huvud(), ...listor()]));
+  // Ryms inte noten och listorna på ett A4 står noten (frågorna) på en sida och huvudet med listorna på nästa, så att
+  // sidan med tabellerna går att kopiera per elev (src/lib/ramform.ts).
+  const delas = protokoll && protokollDelas(ram) ? [new Paragraph({ pageBreakBefore: true, spacing: { before: 0, after: 0 } })] : [];
+  if (ram.listor) ut.push(...(o.stor && !protokoll ? [...huvud(), ...listor(), ...noter()] : [...noter(), ...delas, ...huvud(), ...listor()]));
   else ut.push(...noter());
   return ut;
 }
@@ -812,7 +820,7 @@ function faktaTabell(d: MetodData, serie?: SerieKoppling): Barn[] {
 }
 
 // Under materialet i en metod med Ljudlekens kort: en rad om elevens typsnitt, Andika, som läraren kan använda till egna kort,
-// och upphovet för bildbankens bilder, en gång, som på sidan (Metod.astro).
+// som på sidan (Metod.astro). Bildernas upphov står i ramen med bilderna (ramBarn).
 function ljudRader(d: MetodData): Paragraph[] {
   const ut: Paragraph[] = [];
   if (harElevtypsnitt(d)) {
@@ -820,8 +828,6 @@ function ljudRader(d: MetodData): Paragraph[] {
     const adress = ANDIKA_ADRESS.replace(/^https:\/\//, '').replace(/\/$/, '');
     ut.push(stycke(`${namnt ? 'Ladda ner Andika' : 'Korten står i Andika, ett gratis typsnitt från SIL gjort för dem som lär sig läsa. Ladda ner det'} på ${adress} och använd det när du gör egna kort och blad.`, { farg: FARG.svag }));
   }
-  const upphov = upphovBilder(d);
-  if (upphov) ut.push(stycke(upphov, { farg: FARG.svag, storlek: 18 }));
   return ut;
 }
 
@@ -832,7 +838,7 @@ function lektionsbankBarn(serie: SerieKoppling['serie']): Barn[] {
   const ut: Barn[] = [h2(serie.rubrik)];
   if (serie.text) ut.push(stycke(serie.text, { hallIhop: true }));
   const rader = serie.formagor.map((f) => [`${f.nr} · ${f.namn}`, f.lektioner.map((l) => `${l.namn}: ${l.tranar}`).join('\n') || 'Ingen lektion ännu', f.skal ?? '']);
-  ut.push(...rubrikTabell(['Förmåga', 'Lektionen och vad eleven tränar', 'Skälet till platsen'], rader, bredder));
+  ut.push(...rubrikTabell(['Förmåga', 'Lektionerna och vad eleven tränar', 'Skälet till platsen'], rader, bredder, { radrubrik: false }));
   if (serie.not) ut.push(...ruta('', serie.not));
   return ut;
 }
@@ -1075,7 +1081,9 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
         const blad = elevensBladSida(ram, d);
         bladsidor.add(blad);
         sidor.push(blad);
-        if (!o.baraTommaRamar) sidor.push([...under(`${ram.rubrik}: till läraren`), ...ram.text.map((t) => stycke(t)), ...ramBarn({ ...ram, listor: undefined, huvud: undefined, text: [] }, { stor: true, elev: false })]);
+        const paBladet = (rubrik: string) => /^(Nivå|Uppgift)\s+\d+/i.test(rubrik);
+        const lararDelar = ram.delar.map((del) => ({ ...del, falt: del.falt.filter((f) => !paBladet(f.rubrik)) })).filter((del) => del.falt.length);
+        if (!o.baraTommaRamar) sidor.push([...under(`${ram.rubrik}: till läraren`), ...ram.text.map((t) => stycke(t)), ...ramBarn({ ...ram, delar: lararDelar, listor: undefined, huvud: undefined, text: [] }, { stor: true, elev: false })]);
         continue;
       }
       if (o.baraTommaRamar && !tom) continue;
@@ -1105,18 +1113,67 @@ function arElevensBlad(ram: Ram): boolean {
   const sager = /elevens blad/i.test(ram.rubrik) || /^Det här är elevens blad/i.test(ram.text[0] ?? '');
   return sager && (ram.listor ?? []).some((l) => !arProtokoll(l));
 }
-// Elevens blad på ett A4, att lägga på bordet och peka på under screeningen (Niclas 2026-09-29): en liten rad överst som
-// säger vilket blad det är, ramens fält att fylla i (elevens namn) och listorna stort med luft runt varje bokstav och ord,
-// i elevens typsnitt när metoden har Ljudlekens kort. Bokstäver i 36 pt, ord i 28 pt och meningar i 24 pt.
+// Elevens blad på ett A4, att lägga på bordet och peka på under screeningen (Niclas 2026-09-29, med hans original Screening
+// i läsning fsk/åk 1 som förebild): bladets namn överst och versionen stort i hörnet, sedan varje nivå med en tunn linje
+// över, nivån fet och vad som görs kursivt ("Nivå 3" och "Säg hur bokstaven låter"), och det eleven läser stort, i elevens
+// typsnitt när metoden har Ljudlekens kort, utan rutnät: bokstäver i 36 pt, ord i 28 pt och meningar i 24 pt, var och en
+// med luft runt att peka på. Ramens fält att fylla i (elevens namn) står under rubriken.
 function elevensBladSida(ram: Ram, d: MetodData): Flod {
-  const ut: Flod = [stycke(`${ram.rubrik} · ${d.titel}`, { farg: FARG.svag, storlek: 18, efter: 240 })];
+  const ut: Flod = [];
+  const version = ram.rubrik.match(/version\s+([A-ZÅÄÖ])$/i)?.[1];
+  const namn = ram.rubrik.replace(/,\s*(version\s+[A-ZÅÄÖ]|elevens blad)$/i, '');
+  const hoger = 1400;
+  ut.push(new Table({
+    width: { size: BREDD, type: WidthType.DXA }, columnWidths: [BREDD - hoger, hoger], layout: TableLayoutType.FIXED, borders: UTAN_KANTER,
+    rows: [new TableRow({ children: [
+      new TableCell({ width: { size: BREDD - hoger, type: WidthType.DXA }, borders: runt(INGEN_KANT), verticalAlign: VerticalAlign.BOTTOM, children: [
+        new Paragraph({ spacing: { before: 0, after: 40 }, children: [run(namn, { fet: true, storlek: 36 })] }),
+        new Paragraph({ spacing: { before: 0, after: 0 }, children: [run(d.titel, { farg: FARG.svag, storlek: 18 })] }),
+      ] }),
+      new TableCell({ width: { size: hoger, type: WidthType.DXA }, borders: runt(INGEN_KANT), verticalAlign: VerticalAlign.BOTTOM, children: [
+        new Paragraph({ alignment: AlignmentType.RIGHT, spacing: { before: 0, after: 0 }, children: version ? [run(version, { fet: true, storlek: 80 })] : [] }),
+      ] }),
+    ] })],
+  }));
+  ut.push(avstand(200));
   if (ram.huvud) ut.push(...ramFaltTabell(ram.huvud, { skrivrum: true, hojder: ram.huvud.map(() => 1.2), hallIhopEfter: true }));
-  const elev = harElevtypsnitt(d);
-  (ram.listor ?? []).forEach((l, i, alla) => {
+  const font = harElevtypsnitt(d) ? ELEVTYPSNITT : undefined;
+  const linje: IBorderOptions = { style: BorderStyle.SINGLE, size: 6, color: '999999', space: 8 };
+  let forraNiva = '';
+  // Nivåerna som du säger och eleven svarar på (fälten Nivå 1 och Nivå 2 i rutan Till läraren) står först, som i originalet:
+  // nivån fet och det du säger kursivt. Sedan listorna som eleven läser, i nivåernas ordning.
+  const nummer = (t: string) => Number(t.match(/^(?:Nivå|Uppgift)\s+(\d+)/i)?.[1] ?? NaN);
+  const muntliga = ram.delar.flatMap((del) => del.falt).filter((f) => Number.isFinite(nummer(f.rubrik)) && f.text.trim());
+  const forstaLista = Math.min(...(ram.listor ?? []).map((l) => nummer(l.rubrik ?? '')).filter(Number.isFinite));
+  for (const f of muntliga.filter((x) => !(nummer(x.rubrik) >= forstaLista))) {
+    ut.push(new Paragraph({ keepNext: true, border: { top: linje }, spacing: { before: 160, after: 0 }, children: [run(f.rubrik, { fet: true, storlek: 20 })] }));
+    ut.push(new Paragraph({ spacing: { before: 0, after: 160 }, children: f.text.split(/(”[^”]*”)/).filter(Boolean).map((t) => run(t, { kursiv: true, storlek: 22, farg: t.startsWith('”') ? FARG.text : FARG.svag })) }));
+  }
+  for (const l of ram.listor ?? []) {
+    const m = (l.rubrik ?? '').match(/^([^:]{1,24}):\s*(.+)$/);
+    const niva = m ? m[1] : (l.rubrik ?? '');
+    // Två listor i följd med samma nivå (små och stora bokstäver i nivå 3) står under en rubrik, som i originalet.
+    if (niva !== forraNiva) ut.push(new Paragraph({ keepNext: true, border: { top: linje }, spacing: { before: 160, after: 0 }, children: [run(niva, { fet: true, storlek: 20 })] }));
+    forraNiva = niva;
+    if (m) ut.push(new Paragraph({ keepNext: true, spacing: { before: 0, after: 120 }, children: [run(m[2], { kursiv: true, storlek: 20, farg: FARG.svag })] }));
+    const n = Math.max(...l.rader.map((r) => r.length));
     const bokstaver = l.rader.every((r) => r.every((c) => c.trim().length <= 2));
-    const meningar = Math.max(...l.rader.map((r) => r.length)) === 1 && l.rader.some((r) => (r[0] ?? '').includes(' '));
-    ut.push(...elevlista(l, { storlek: bokstaver ? 72 : meningar ? 48 : 56, luft: true, hallIhopEfter: i < alla.length - 1, brak: d.omrade === 'Matematik', elev, centrera: !meningar }));
-  });
+    if (n === 1) {
+      // Meningar: en per rad, vänsterställda, med luft emellan.
+      l.rader.forEach((r, i) => ut.push(new Paragraph({ keepNext: i < l.rader.length - 1, spacing: { before: 0, after: 180 }, children: [run(r[0] ?? '', { storlek: 48, font })] })));
+      continue;
+    }
+    // Bokstäver och ord: lika breda platser utan rutnät, mitt i sin plats, så att läraren och eleven kan peka på var och en.
+    const bredd = Math.floor(BREDD / n);
+    ut.push(new Table({
+      width: { size: bredd * n, type: WidthType.DXA }, columnWidths: Array.from({ length: n }, () => bredd), layout: TableLayoutType.FIXED, borders: UTAN_KANTER,
+      rows: l.rader.map((r, ri) => new TableRow({ cantSplit: true, children: Array.from({ length: n }, (_, i) => new TableCell({
+        width: { size: bredd, type: WidthType.DXA }, borders: runt(INGEN_KANT), margins: { top: 60, bottom: 60, left: 40, right: 40 },
+        children: [new Paragraph({ alignment: AlignmentType.CENTER, keepNext: ri < l.rader.length - 1, spacing: { before: 0, after: 0 }, children: [run(r[i] ?? '', { storlek: bokstaver ? 72 : 56, font })] })],
+      })) })),
+    }));
+    ut.push(avstand(120));
+  }
   return ut;
 }
 

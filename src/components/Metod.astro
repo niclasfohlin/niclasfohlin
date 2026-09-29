@@ -13,6 +13,7 @@ import Bokstavskort from './Bokstavskort.astro';
 import Bokstavskarta from './Bokstavskarta.astro';
 import Golvbokstaver from './Golvbokstaver.astro';
 import { ANDIKA_ADRESS, harElevtypsnitt, ljudform, upphovBilder } from '../lib/ljudkort';
+import { protokollDelas } from '../lib/ramform';
 import type { SerieKoppling } from '../lib/serie';
 import type { MetodData } from '../lib/metod';
 import { ejBryt, ramArTom, passGrupper, passOrd, passOversikt, stegTexter, laskortKolumn, arEttKort } from '../lib/metod';
@@ -405,7 +406,7 @@ const ramAnkare = (d.ramar?.ramar ?? []).map((r) => ankare(r.rubrik));
         </nav>
       )}
       {d.ramar.ramar.map((ram, ri) => (
-        <section class="m-ram" id={`ram-${ri + 1}`}>
+        <section class={`m-ram${protokollDelas(ram) ? ' delad' : ''}`} id={`ram-${ri + 1}`}>
           <h3 id={ramAnkare[ri]}>{hel(ram.rubrik)}</h3>
           {ram.text.map((s) => <p>{s}</p>)}
           {ram.oversikt && <MetodTabell kolumner={ram.oversikt.kolumner} rader={ram.oversikt.rader} klass={kortaCeller(ram.oversikt.rader) ? 'fri tat' : friKlass(ram.oversikt)} radrubrik={false} />}

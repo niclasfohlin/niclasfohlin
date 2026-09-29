@@ -1,6 +1,6 @@
 {
   "antalsuppfattning-i-grupp": {
-    "kalla": "f5a02a0e93c8c7da",
+    "kalla": "09c965242c1d0c4b",
     "skalor": [
       1.2,
       1.35,
@@ -10,7 +10,7 @@
     "datum": "2026-09-29"
   },
   "boksamtal-i-grupp": {
-    "kalla": "091b5804c99fc19d",
+    "kalla": "ae562163c6e124a8",
     "skalor": [
       1.35,
       1.35,
@@ -20,7 +20,7 @@
     "datum": "2026-09-29"
   },
   "brakkurs-i-grupp": {
-    "kalla": "ef6e9ab10354c99c",
+    "kalla": "7906d33321e6a8b5",
     "skalor": [
       1.1,
       1.35,
@@ -30,7 +30,7 @@
     "datum": "2026-09-29"
   },
   "faktatextsamtal-i-grupp": {
-    "kalla": "fe4d8a8e0ffded3a",
+    "kalla": "f6fdccc9f84f87d9",
     "skalor": [
       1.25,
       1.35,
@@ -40,7 +40,7 @@
     "datum": "2026-09-29"
   },
   "laslistor-i-grupp": {
-    "kalla": "75cedba2426760eb",
+    "kalla": "e767619a47c8d7f1",
     "skalor": [
       1.2,
       1.35,
@@ -50,7 +50,7 @@
     "datum": "2026-09-29"
   },
   "ljudlek-i-grupp": {
-    "kalla": "773995a79527cb1e",
+    "kalla": "5ad6bf1b8eb0fbc8",
     "skalor": [
       1.25,
       1.35,
@@ -60,7 +60,7 @@
     "datum": "2026-09-29"
   },
   "problemlosning-i-grupp": {
-    "kalla": "fc7cbf7a11c98e2b",
+    "kalla": "fa165ba0df505189",
     "skalor": [
       1.3,
       1.35,
@@ -70,7 +70,7 @@
     "datum": "2026-09-29"
   },
   "skrivkurs-berattelseram": {
-    "kalla": "ce162b5dbbe6ae76",
+    "kalla": "3acec6d0e0e38e42",
     "skalor": [
       1.2,
       1.35,
@@ -80,7 +80,7 @@
     "datum": "2026-09-29"
   },
   "skrivkurs-vardeskapande": {
-    "kalla": "1668323b75d7d00a",
+    "kalla": "d9dc272e25232b5d",
     "skalor": [
       1.25,
       1.35,
@@ -90,7 +90,7 @@
     "datum": "2026-09-29"
   },
   "til-i-grupp": {
-    "kalla": "7e37cac7a92d5a6c",
+    "kalla": "501c827f54c607df",
     "skalor": [
       1.2,
       1.35,
@@ -100,7 +100,7 @@
     "datum": "2026-09-29"
   },
   "upprepad-lasning": {
-    "kalla": "96f7f3bedaa0789a",
+    "kalla": "adb796309ceac227",
     "skalor": [
       1.25,
       1.35,

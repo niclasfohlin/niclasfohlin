@@ -657,6 +657,12 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-lista.manga th { padding-left: 0.2rem; padding-right: 0.2rem; text-align: center; overflow-wrap: anywhere; }
 .m-lista.manga th.skriv, .m-lista.manga td.skriv { width: auto; padding-left: 0.2rem; padding-right: 0.2rem; }
 .m-lista.manga th:first-child, .m-lista.manga td:first-child { width: 34%; text-align: left; padding-left: 0.6rem; }
+/* I ett smalt fönster (320 till 350 punkter) bryts rubrikerna bara mellan ord: mindre rubriker och en bredare första kolumn. */
+@media (max-width: 22rem) {
+  .m-lista.manga th { font-size: 0.6rem; letter-spacing: 0; overflow-wrap: normal; }
+  .m-lista.manga td { font-size: 0.9rem; overflow-wrap: break-word; }
+  .m-lista.manga th:first-child, .m-lista.manga td:first-child { width: 40%; padding-left: 0.45rem; }
+}
 .m-vikkort-vik { font-family: var(--typsnitt-ui); font-size: 0.85rem; color: var(--farg-text-svag); margin: 0 0 0.5rem; }
 .m-vikkort-ark { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .m-vikkort-ark.kopia { display: none; }
@@ -1145,6 +1151,11 @@ html.js .bara-js { display: inline-block; }
   .m-karta-cell img { width: 19mm; max-width: none; }
   .m-karta-ord, .m-karta-som { font-size: 13pt; }
   .m-golvbokstaver { break-inside: avoid; }
+  /* Ett protokoll som inte ryms på ett A4 delas: noten på en sida, namnet och tabellerna på nästa (src/lib/ramform.ts). */
+  .m-ram.delad .m-lista:has(> .m-ramhuvud) { break-before: page; }
+  /* Lektionsbankens kort delas inte mellan sidor, och kartans ram är lika bred som kartan. */
+  .m-lektionskort-kort { break-inside: avoid; }
+  .m-karta { width: max-content; }
   .bara-js, button.lank, .lh-lank { display: none !important; }
   a { text-decoration: none; color: inherit; }
 }
