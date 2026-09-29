@@ -32,10 +32,10 @@ tranar: "koppla ljud till bokstav med kroppen, och gå ordet från vänster till
 inledning:
   - "I Bokstavsgympa kliver eleverna på bokstäver på golvet, säger ljudet för varje bokstav från vänster till höger och säger ordet på slutet. Lektionen hjälper eleven med det som gör bokstävernas ljud svåra: eleven säger bokstavens namn, ess för s, och gör en paus mellan ljuden, så att början faller bort och ordet inte kommer."
   - "Syftet är att eleverna ska kunna ljuden för de bokstäver de har haft och hålla ihop ljuden till ett ord, så att de kan läsa. Ditt uppdrag är att säga ljudet och inte namnet, att hålla ljudet tills foten landar på nästa bokstav, och att bara lägga ord med gruppens bokstäver."
-  - "Välj Bokstavsgympa när fler än hälften av eleverna har en ring på ljudkollens uppgift 4, bokstävernas ljud, alltså färre än åtta rätt av de tio första bokstäverna. Ljudkollen står i Ljudlek i grupp, och Bokstavsgympa hör till förmåga 4, Bokstävernas ljud, i lektionsbanken där."
+  - "Välj Bokstavsgympa när fler än hälften av eleverna kan färre än åtta av de tio första bokstäverna på ljudkollens uppgift 4, bokstävernas ljud. Ljudkollen står i Ljudlek i grupp, och Bokstavsgympa hör till förmåga 4, Bokstävernas ljud, i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Bokstavsgympa går igenom raderna i Så blir lektionen svårare. Raderna följer bokstäverna, som kommer ungefär två i veckan, så lektionen tar oftast fyra till sex veckor, tills gruppen har haft t. Ta nästa rad när dagens elever läser orden utan paus två pass i följd och nästa rad har fyra ord med gruppens bokstäver. Gå till nästa lektion efter raden Med klusil, eller när färre än hälften har en ring på ljudkollens uppgift 4."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Bokstavsgympa går igenom raderna i Så blir lektionen svårare. Raderna följer bokstäverna, som kommer ungefär två i veckan, så lektionen tar oftast fyra till sex veckor, tills gruppen har haft t. Ta nästa rad när dagens elever läser orden utan paus två pass i följd och nästa rad har fyra ord med gruppens bokstäver. Gå till nästa lektion efter raden Med klusil, eller när minst hälften av eleverna kan åtta av de tio första bokstäverna på ljudkollens uppgift 4."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"
@@ -72,7 +72,7 @@ tabeller:
       - - "Sätt ihop"
         - "Dra ut fem ord utan paus, med handen från vänster till höger sett från eleverna. Räkna tyst till tre och knyt handen, så säger alla ordet. Sist säger en av dagens elever ett ord ensam."
       - - "Dela upp"
-        - "Säg fyra ord med olika många ljud. Alla säger ordet och sedan ljuden, med ett finger för varje, och räknar fingrarna sist."
+        - "Säg fyra ord med olika många ljud. Alla säger ordet och sedan ljuden, med ett finger för varje, och räknar fingrarna sist. I lektionerna före Räkna ljud i banken säger du ljuden först och gruppen efter."
     not: "Säg ljudet och inte bokstavens namn, och b, d, g, k, p och t korta och utan ö. Orden tar du ur Ordbanken, och i Dela upp blandar du in ord ur de lättare ordgrupperna, så att orden har olika många ljud. Dagens ljud, dina fraser och ordgrupperna står i Ljudlek i grupp. Gruppen behåller sin ordgrupp från lektion till lektion."
   - rubrik: "Lyssna efter"
     plats: "efter-steg"

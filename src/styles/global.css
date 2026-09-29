@@ -511,12 +511,13 @@ button.lank:hover { color: var(--farg-accent); }
 .serie-meny-fall li a[aria-current="page"] { font-weight: 700; color: var(--farg-accent); background: var(--farg-ton-svag); }
 @media (min-width: 52rem) {
   .serie-meny-fall { display: none; }
-  .serie-meny-flikar { display: flex; flex-wrap: wrap; gap: 0.25rem; list-style: none; margin: 0; padding: 0 0 0.9rem; border-bottom: 1px solid var(--farg-kant); }
-  .serie-meny-flikar a { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.65rem; border-radius: 6px; text-decoration: none; color: var(--farg-text); font-size: 0.92rem; font-weight: 500; }
+  .serie-meny-flikar { display: grid; grid-template-columns: repeat(var(--kol-smal, 3), minmax(0, 1fr)); gap: 0.25rem; list-style: none; margin: 0; padding: 0 0 0.9rem; border-bottom: 1px solid var(--farg-kant); }
+  .serie-meny-flikar a { display: flex; align-items: center; gap: 0.4rem; height: 100%; padding: 0.4rem 0.65rem; border-radius: 6px; text-decoration: none; color: var(--farg-text); font-size: 0.92rem; font-weight: 500; }
   .serie-meny-flikar a:hover { background: var(--farg-yta); color: var(--farg-accent); }
   .serie-meny-flikar a[aria-current="page"] { background: var(--farg-accent); color: #fff; font-weight: 600; }
   .serie-meny-flikar a[aria-current="page"] .serie-nr { background: rgba(255, 255, 255, 0.22); color: #fff; }
 }
+@media (min-width: 72rem) { .serie-meny-flikar { grid-template-columns: repeat(var(--kol-bred, 5), minmax(0, 1fr)); } }
 .m-ruta { background: var(--farg-ton); border-left: 4px solid var(--farg-accent); border-radius: 0 8px 8px 0; padding: 0.85rem 1.1rem; margin: 1.25rem 0; }
 .m-ruta p { margin: 0; }
 .m-ruta p + p { margin-top: 0.35em; }
@@ -653,6 +654,19 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 /* Ljudlekens kort och blad (src/lib/ljudkort.ts): elevens typsnitt, vikkort, bokstavskort, bokstavskartan och
    golvbokstäverna. Elevens blad står i elevens typsnitt när metoden har sådana kort; protokollen i husets. */
 .m-lista.elev td { font-family: var(--typsnitt-elev); }
+/* En text med frågor (screeningens nivå 6–8, Elevlista.astro): texten som eleven läser till vänster, de längre texterna
+   mindre, som i Niclas original, och frågorna som läraren läser upp kursivt till höger. På telefonen står frågorna under. */
+.m-fragetext { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 3fr); gap: 0.5rem 1.25rem; border: 1px solid var(--farg-kant); border-radius: 8px; padding: 0.7rem 0.8rem; }
+.m-texten p { font-family: var(--typsnitt-ui); font-size: 1.35rem; line-height: 1.35; margin: 0 0 0.45rem; }
+.m-lista.elev .m-texten p { font-family: var(--typsnitt-elev); }
+.m-lista.text-mellan .m-texten p { font-size: 1.15rem; }
+.m-lista.text-lang .m-texten p { font-size: 1.05rem; }
+.m-texten p:last-child, .m-fragorna p:last-child { margin-bottom: 0; }
+.m-fragorna p { font-family: var(--typsnitt-ui); font-size: 0.95rem; font-style: italic; line-height: 1.4; color: var(--farg-text-svag); margin: 0 0 0.6rem; }
+@media (max-width: 36rem) {
+  .m-fragetext { grid-template-columns: minmax(0, 1fr); }
+  .m-fragorna { border-top: 1px solid var(--farg-kant); padding-top: 0.5rem; }
+}
 .m-lista.manga td { font-size: 1rem; overflow-wrap: anywhere; }
 .m-lista.manga th { padding-left: 0.2rem; padding-right: 0.2rem; text-align: center; overflow-wrap: anywhere; }
 .m-lista.manga th.skriv, .m-lista.manga td.skriv { width: auto; padding-left: 0.2rem; padding-right: 0.2rem; }
@@ -672,7 +686,7 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-vikkort-ord { display: flex; align-items: center; justify-content: center; padding: 0.3rem; min-width: 0; container-type: inline-size; }
 /* Ordet krymper med sin längd (--tecken), så att ett långt ord ryms i sin halva av kortet, som i riggen. */
 .m-vikkort-enheter { display: inline-flex; align-items: flex-start; font-family: var(--typsnitt-elev); font-size: min(1.55rem, calc(100cqw / (var(--tecken, 4) * 0.62))); line-height: 1.15; color: var(--farg-text); }
-.m-vikkort-enhet { display: inline-flex; flex-direction: column; align-items: center; min-width: 0.5em; }
+.m-vikkort-enhet { display: inline-flex; flex-direction: column; align-items: center; }
 .m-vikkort-prick { width: 0.2em; height: 0.2em; margin-top: 0.15em; border-radius: 50%; background: currentColor; }
 .m-vikkort-bage { width: 80%; height: 0.3em; margin-top: 0.1em; border: 0.09em solid currentColor; border-top: 0; border-radius: 0 0 50% 50% / 0 0 100% 100%; }
 .m-vikkort.delar .m-vikkort-enheter { font-size: min(1.3rem, calc(100cqw / (var(--tecken, 4) * 0.62 + 0.3))); gap: 0.15em; }
@@ -1062,6 +1076,12 @@ html.js .bara-js { display: inline-block; }
   .m-lista.protokoll .m-ramfalt > div { grid-template-columns: 12.5rem minmax(0, 1fr); }
   .m-lista.protokoll .m-ramfalt dt, .m-lista.protokoll .m-ramfalt dd { padding: 0.3rem 0.6rem; }
   .m-lista.bokstaver td { font-size: 16pt; }
+  .m-fragetext { grid-template-columns: minmax(0, 7fr) minmax(0, 3fr); break-inside: avoid; }
+  .m-fragorna { border-top: 0; padding-top: 0; }
+  .m-texten p { font-size: 15pt; }
+  .m-lista.text-mellan .m-texten p { font-size: 13pt; }
+  .m-lista.text-lang .m-texten p { font-size: 12pt; }
+  .m-fragorna p { font-size: 10.5pt; }
   .lh .m-lista td { font-size: 10pt; padding: 0.12rem 0.4rem; }
   .lh .m-lista.bokstaver td { font-size: 12pt; }
   .m-lista thead th, .m-listnot { print-color-adjust: exact; -webkit-print-color-adjust: exact; }

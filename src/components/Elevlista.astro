@@ -4,6 +4,7 @@
 // en text) sätts något mindre. Samma lista finns i Word (elevlista i src/lib/metoddocx.ts). Bråken står
 // staplade, som i elevens läromedel (Brak.astro).
 import Brak from './Brak.astro';
+import { harFragor, textlangd } from '../lib/ramform';
 // brak: bråken staplas (metoder i matematik); annars står texten som den är.
 // huvud: ramens fält att fylla i före listan (elevens namn på kartläggningens kopia), i samma block som listan.
 // elev: metoden har kort i elevens typsnitt (src/lib/ljudkort.ts), så bladet eleven läser står i det också; lärarens
@@ -24,18 +25,28 @@ const manga = skriv.filter(Boolean).length > 4;
 const protokoll = skriv.some(Boolean);
 // En pil står kvar med orden på båda sidor ("sss-ooo-lll → sol" på strategikortet), också när raden bryts på mobilen.
 const pil = (c: string) => c.replace(/ → /g, ' → ');
+// En text med frågor (screeningens nivå 6–8, src/lib/ramform.ts): texten som eleven läser och frågorna som läraren läser
+// upp står för sig, bredvid varandra på datorn och efter varandra på telefonen. Samma form i Word (fragelista).
+const fragor = harFragor({ kolumner, rader }) ? rader.map((r) => (r[1] ?? '').trim()).filter(Boolean) : undefined;
 ---
-<div class={`m-lista ${bokstaver ? 'bokstaver' : ''} ${enKolumn ? 'en-kolumn' : ''} ${protokoll ? 'protokoll' : ''} ${manga ? 'manga' : ''} ${elev && !protokoll ? 'elev' : ''} ${klass}`.replace(/\s+/g, ' ').trim()}>
+<div class={`m-lista ${bokstaver ? 'bokstaver' : ''} ${enKolumn ? 'en-kolumn' : ''} ${protokoll ? 'protokoll' : ''} ${manga ? 'manga' : ''} ${elev && !protokoll ? 'elev' : ''} ${fragor ? `fragor text-${textlangd({ rader })}` : ''} ${klass}`.replace(/\s+/g, ' ').trim()}>
   {huvud && (
     <dl class="m-ramfalt m-ramhuvud">
       {huvud.map((f) => <div><dt>{f.rubrik}</dt><dd>{f.text}</dd></div>)}
     </dl>
   )}
   {rubrik && <h4 class="m-lista-rubrik">{rubrik}</h4>}
-  <table>
-    {kolumner && <thead><tr>{kolumner.map((k, i) => <th scope="col" class={skriv[i] ? 'skriv' : undefined}>{k}</th>)}</tr></thead>}
-    <tbody>
-      {rader.map((r) => <tr>{r.map((c, i) => <td class={skriv[i] ? 'skriv' : undefined}><Brak text={pil(c)} stapla={brak} /></td>)}</tr>)}
-    </tbody>
-  </table>
+  {fragor ? (
+    <div class="m-fragetext">
+      <div class="m-texten">{rader.map((r) => <p>{r[0]}</p>)}</div>
+      <div class="m-fragorna">{fragor.map((f) => <p>{f}</p>)}</div>
+    </div>
+  ) : (
+    <table>
+      {kolumner && <thead><tr>{kolumner.map((k, i) => <th scope="col" class={skriv[i] ? 'skriv' : undefined}>{k}</th>)}</tr></thead>}
+      <tbody>
+        {rader.map((r) => <tr>{r.map((c, i) => <td class={skriv[i] ? 'skriv' : undefined}><Brak text={pil(c)} stapla={brak} /></td>)}</tr>)}
+      </tbody>
+    </table>
+  )}
 </div>

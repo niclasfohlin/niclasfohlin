@@ -31,10 +31,10 @@ tranar: "höra och hitta rim, och byta början av ordet"
 inledning:
   - "I Rim delar eleverna ordet i början och resten: hus är /h/ och us, och stol är /st/ och ol. Ord med samma rest rimmar, och med en ny början blir det ett nytt ord: mus, lus. Lektionen hjälper eleven med det som gör rim svårt: betydelsen tar över, så att råtta blir ett rim på mus, eller första ljudet tar över, så att sko blir ett rim på sol."
   - "Syftet är att eleverna lyssnar på hur orden låter och hör att ett ord har en början som går att byta. Ditt uppdrag är att visa hur du delar ordet, att blanda par som rimmar med par som inte gör det, och att låta påhittade ord räknas."
-  - "Välj Rim när fler än hälften av eleverna har en ring på ljudkollens uppgift 1, rim, alltså färre än tre rätt av fyra. Ljudkollen står i Ljudlek i grupp, och lektionen hör till förmåga 1 i lektionsbanken där."
+  - "Välj Rim när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 1, rim. Ljudkollen står i Ljudlek i grupp, och lektionen hör till förmåga 1 i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Rim tar högst en vecka och går igenom de tre raderna i Så blir lektionen svårare. Med tre pass byter gruppen rad varje pass, och med fler pass när dagens elever klarar steg 4 själva. Sedan går gruppen till nästa förmåga där fler än hälften har en ring."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Rim tar högst en vecka och går igenom de tre raderna i Så blir lektionen svårare. Med tre pass byter gruppen rad varje pass, och med fler pass när dagens elever klarar steg 4 själva. Sedan går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"
@@ -65,7 +65,7 @@ tabeller:
       - - "Sätt ihop"
         - "Dra ut fem ord utan paus, med handen från vänster till höger sett från eleverna. Räkna tyst till tre och knyt handen, så säger alla ordet. Sist säger en av dagens elever ett ord ensam."
       - - "Dela upp"
-        - "Säg fyra ord med olika många ljud. Alla säger ordet och sedan ljuden, med ett finger för varje, och räknar fingrarna sist."
+        - "Säg fyra ord med olika många ljud. Alla säger ordet och sedan ljuden, med ett finger för varje, och räknar fingrarna sist. I lektionerna före Räkna ljud i banken säger du ljuden först och gruppen efter."
     not: "Säg ljudet och inte bokstavens namn, och b, d, g, k, p och t korta och utan ö. Orden tar du ur Ordbanken, och i Dela upp blandar du in ord ur de lättare ordgrupperna, så att orden har olika många ljud. Dagens ljud, dina fraser och ordgrupperna står i Ljudlek i grupp. Gruppen behåller sin ordgrupp från lektion till lektion. I Rim-⁠veckan säger ingen ett ord på dagens ljud."
   - rubrik: "Lyssna efter"
     plats: "efter-steg"

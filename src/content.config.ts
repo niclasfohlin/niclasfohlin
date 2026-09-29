@@ -198,6 +198,9 @@ const stodundervisning = defineCollection({
       rubrik: z.string(),
       text: z.string().optional(),
       plats: z.enum(['efter-inledning', 'efter-tidsschema', 'efter-steg', 'efter-arbetsform', 'efter-fastnar', 'efter-urval', 'efter-grund']).default('efter-arbetsform'),
+      // meny: tabellen står i sidans meny, efter avsnittet den ligger efter, med rubrikens första led som namn. För det läraren
+      // letar efter varje pass, som Ljudstarten, Dagens ljud och Ordbanken i Ljudlek i grupp (läsbarheten 2026-09-29).
+      meny: z.boolean().optional(),
       kolumner: z.array(text).min(2),
       rader: z.array(z.array(z.string())).min(1),
       not: z.string().optional(),

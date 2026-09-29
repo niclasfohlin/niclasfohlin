@@ -32,10 +32,10 @@ tranar: "dela meningar i ord och ord i stavelser"
 inledning:
   - "I Ord och stavelser upptäcker eleverna att en mening består av ord och att ett ord består av delar som går att klappa: ”Jag ser en ko” är fyra ord, och ananas är tre delar. Lektionen hjälper eleven med det som gör delarna svåra att höra: i talet flyter orden ihop, eleven tycker att tåg är ett längre ord än nyckelpiga eftersom tåget är långt, och småord och svaga delar, som to i tomat, faller bort."
   - "Syftet är att eleverna ska höra orden och delarna, så att de kan skriva med mellanrum mellan orden och läsa längre ord i delar. Ditt uppdrag är att visa hur man lägger en kloss för varje ord och klappar delarna, att säga orden i vanlig takt och att sluta med skrivna delar som gruppen läser."
-  - "Välj Ord och stavelser när fler än hälften av eleverna har en ring på ljudkollens uppgift 2, stavelser, alltså färre än tre rätt av fyra. Ljudkollen står i Ljudlek i grupp, och lektionen hör till förmåga 2 i lektionsbanken där."
+  - "Välj Ord och stavelser när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 2, ord och stavelser. Ljudkollen står i Ljudlek i grupp, och lektionen hör till förmåga 2 i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Ord och stavelser går igenom de tre raderna i Så blir lektionen svårare och tar högst en vecka, eftersom lekar med bara stavelser ger liten effekt på läsningen. Har ni tre pass i veckan, ta en rad per pass. Har ni fler, ta nästa rad när nästan alla gör rätt i andra halvan av steg 2. Efter sista raden går gruppen till nästa förmåga där fler än hälften har en ring."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Ord och stavelser går igenom de tre raderna i Så blir lektionen svårare och tar högst en vecka, eftersom lekar med bara stavelser ger liten effekt på läsningen. Har ni tre pass i veckan, ta en rad per pass. Har ni fler, ta nästa rad när nästan alla gör rätt i andra halvan av steg 2. Efter sista raden går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"
@@ -66,7 +66,7 @@ tabeller:
       - - "Sätt ihop"
         - "Dra ut fem ord utan paus, med handen från vänster till höger sett från eleverna. Räkna tyst till tre och knyt handen, så säger alla ordet. Sist säger en av dagens elever ett ord ensam."
       - - "Dela upp"
-        - "Säg fyra ord med olika många ljud. Alla säger ordet och sedan ljuden, med ett finger för varje, och räknar fingrarna sist."
+        - "Säg fyra ord med olika många ljud. Alla säger ordet och sedan ljuden, med ett finger för varje, och räknar fingrarna sist. I lektionerna före Räkna ljud i banken säger du ljuden först och gruppen efter."
     not: "Säg ljudet och inte bokstavens namn, och b, d, g, k, p och t korta och utan ö. Orden tar du ur Ordbanken, och i Dela upp blandar du in ord ur de lättare ordgrupperna, så att orden har olika många ljud. Dagens ljud, dina fraser och ordgrupperna står i Ljudlek i grupp. Gruppen behåller sin ordgrupp från lektion till lektion."
   - rubrik: "Lyssna efter"
     plats: "efter-steg"

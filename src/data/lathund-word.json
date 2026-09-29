@@ -1,6 +1,6 @@
 {
   "antalsuppfattning-i-grupp": {
-    "kalla": "09c965242c1d0c4b",
+    "kalla": "065510ddbc0f97a4",
     "skalor": [
       1.2,
       1.35,
@@ -10,7 +10,7 @@
     "datum": "2026-09-29"
   },
   "boksamtal-i-grupp": {
-    "kalla": "ae562163c6e124a8",
+    "kalla": "1a3d9dc7f8248c47",
     "skalor": [
       1.35,
       1.35,
@@ -20,7 +20,7 @@
     "datum": "2026-09-29"
   },
   "brakkurs-i-grupp": {
-    "kalla": "7906d33321e6a8b5",
+    "kalla": "1cc8fb5947b3f606",
     "skalor": [
       1.1,
       1.35,
@@ -30,7 +30,7 @@
     "datum": "2026-09-29"
   },
   "faktatextsamtal-i-grupp": {
-    "kalla": "f6fdccc9f84f87d9",
+    "kalla": "e95e6d2e34d2b19f",
     "skalor": [
       1.25,
       1.35,
@@ -40,7 +40,7 @@
     "datum": "2026-09-29"
   },
   "laslistor-i-grupp": {
-    "kalla": "e767619a47c8d7f1",
+    "kalla": "47d24efa4196f040",
     "skalor": [
       1.2,
       1.35,
@@ -50,17 +50,17 @@
     "datum": "2026-09-29"
   },
   "ljudlek-i-grupp": {
-    "kalla": "5ad6bf1b8eb0fbc8",
+    "kalla": "7d8ec0dc99162032",
     "skalor": [
       1.25,
       1.35,
-      1.15,
+      1.1,
       1.2
     ],
     "datum": "2026-09-29"
   },
   "problemlosning-i-grupp": {
-    "kalla": "fa165ba0df505189",
+    "kalla": "bbfe2ebd75406633",
     "skalor": [
       1.3,
       1.35,
@@ -70,7 +70,7 @@
     "datum": "2026-09-29"
   },
   "skrivkurs-berattelseram": {
-    "kalla": "3acec6d0e0e38e42",
+    "kalla": "43755fcd0c082244",
     "skalor": [
       1.2,
       1.35,
@@ -80,7 +80,7 @@
     "datum": "2026-09-29"
   },
   "skrivkurs-vardeskapande": {
-    "kalla": "d9dc272e25232b5d",
+    "kalla": "26f1418b5619c112",
     "skalor": [
       1.25,
       1.35,
@@ -90,7 +90,7 @@
     "datum": "2026-09-29"
   },
   "til-i-grupp": {
-    "kalla": "501c827f54c607df",
+    "kalla": "e5536d34c2fa4fce",
     "skalor": [
       1.2,
       1.35,
@@ -100,7 +100,7 @@
     "datum": "2026-09-29"
   },
   "upprepad-lasning": {
-    "kalla": "adb796309ceac227",
+    "kalla": "c1051716def2086f",
     "skalor": [
       1.25,
       1.35,

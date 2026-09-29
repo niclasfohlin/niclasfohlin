@@ -127,6 +127,8 @@ urval:
 tabeller:
   - rubrik: Elevens mapp
     plats: efter-inledning
+    # Valfritt: meny: true sätter tabellen i sidans meny, efter avsnittet den ligger efter, med rubrikens första led som namn.
+    # För det läraren letar efter varje pass, som Ljudstarten, Dagens ljud och Ordbanken i Ljudlek i grupp.
     kolumner: [Del, Vad den är till för]
     rader:
       - [Skrivbok, Här skriver eleven tre favoritmeningar]

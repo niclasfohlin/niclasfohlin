@@ -16,7 +16,7 @@ const antal = serie.lektioner.length;
   <ol class="m-lektionskort" aria-label={`${antal === 1 ? 'En lektion' : `${antal} lektioner`}, ordnade efter förmåga`}>
     {serie.formagor.flatMap((f) => (f.lektioner.length ? f.lektioner : [undefined]).map((l) => (
       <li class={`m-lektionskort-kort${l ? '' : ' tom'}`}>
-        <p class="m-lektionskort-formaga"><span class="m-lektionskort-nr" aria-hidden="true">{f.nr}</span><span class="visually-hidden">Förmåga {f.nr}: </span>{f.namn}</p>
+        <p class="m-lektionskort-formaga"><span class="m-lektionskort-nr" aria-hidden="true">{f.nr}</span><span>Förmåga<span class="visually-hidden"> {f.nr}</span>: {f.namn}</span></p>
         {l ? (
           <>
             <h3><a href={`/stodundervisning/${l.id}`}>{l.namn}</a></h3>

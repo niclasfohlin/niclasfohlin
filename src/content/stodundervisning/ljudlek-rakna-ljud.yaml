@@ -31,7 +31,7 @@ tranar: "dela upp ord i ljud, med en markör för varje ljud"
 inledning:
   - "I Räkna ljud delar eleverna upp ord i sina ljud och flyttar en markör in i en ruta för varje ljud. Lektionen hjälper eleven med det som gör ljuden svåra att räkna: barn hör stavelser före ljuden, och ljudet i mitten och en konsonant i ett konsonantmöte faller lätt bort."
   - "Syftet är att eleverna hör varje ljud i ordet, i ordning, och vet hur många de är, så att de kan skriva ordet och läsa det. Ditt uppdrag är att visa hur du flyttar en markör för varje ljud medan du säger ljudet, att låta eleverna ta över steg för steg och att lyssna på var och en."
-  - "Välj Räkna ljud när fler än hälften av eleverna har en ring på ljudkollens uppgift 6, dela upp, alltså färre än tre rätt av fyra. Ljudkollen står i Ljudlek i grupp, och Räkna ljud hör till förmåga 6, Dela upp, i lektionsbanken där."
+  - "Välj Räkna ljud när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 6, dela upp. Ljudkollen står i Ljudlek i grupp, och Räkna ljud hör till förmåga 6, Dela upp, i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
   text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Räkna ljud går igenom raderna i Så blir lektionen svårare, oftast i sex till femton pass. Har dagens elever två pass i följd lagt rätt antal markörer och sagt ljuden i minst två av sina ord i steg 4, tar ni nästa rad. Efter sista raden tar ni nästa lektion."
@@ -71,7 +71,7 @@ tabeller:
       - - "Sätt ihop"
         - "Dra ut fem ord utan paus, med handen från vänster till höger sett från eleverna. Räkna tyst till tre och knyt handen, så säger alla ordet. Sist säger en av dagens elever ett ord ensam."
       - - "Dela upp"
-        - "Säg fyra ord med olika många ljud. Alla säger ordet och sedan ljuden, med ett finger för varje, och räknar fingrarna sist."
+        - "Säg fyra ord med olika många ljud. Alla säger ordet och sedan ljuden, med ett finger för varje, och räknar fingrarna sist. I lektionerna före Räkna ljud i banken säger du ljuden först och gruppen efter."
     not: "Säg ljudet och inte bokstavens namn, och b, d, g, k, p och t korta och utan ö. Orden tar du ur Ordbanken, och i Dela upp blandar du in ord ur de lättare ordgrupperna, så att orden har olika många ljud. Dagens ljud, dina fraser och ordgrupperna står i Ljudlek i grupp. Ordgruppen är densamma som gruppens rad."
   - rubrik: "Lyssna efter"
     plats: "efter-steg"

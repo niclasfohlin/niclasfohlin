@@ -9,10 +9,15 @@ const { koppling } = Astro.props;
 const { serie, lektion } = koppling;
 const bas = '/stodundervisning';
 const har = lektion ? `${lektion.formaga} · ${lektion.namn}` : 'Översikt och lektionsbank';
+// Flikarna på datorn står i jämna rader, lika breda: högst tre i bredd på en smalare skärm och fem på en bred, och så få
+// rader som möjligt med lika många i varje, så att ingen flik står ensam (nio flikar blir tre gånger tre, eller fem och
+// fyra; läsbarheten 2026-09-29).
+const flikar = serie.lektioner.length + 1;
+const kolumner = (hogst: number) => Math.ceil(flikar / Math.ceil(flikar / hogst));
 ---
 <nav class="serie-meny" aria-label={`${serie.titel}: översikt och lektioner`}>
   <p class="serie-meny-namn">{serie.titel}</p>
-  <ol class="serie-meny-flikar">
+  <ol class="serie-meny-flikar" style={`--kol-smal:${kolumner(3)};--kol-bred:${kolumner(5)}`}>
     <li><a href={`${bas}/${serie.id}`} aria-current={lektion ? undefined : 'page'}>Översikt</a></li>
     {serie.lektioner.map((l) => (
       <li><a href={`${bas}/${l.id}`} aria-current={lektion?.id === l.id ? 'page' : undefined}><span class="serie-nr" aria-hidden="true">{l.formaga}</span>{l.namn}</a></li>

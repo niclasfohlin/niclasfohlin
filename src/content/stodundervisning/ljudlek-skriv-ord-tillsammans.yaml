@@ -33,7 +33,7 @@ tranar: "bygga, läsa och skriva ord med bokstavskort, och byta en bokstav i tag
 inledning:
   - "I Skriv ord tillsammans bygger eleverna ord med bokstavskort, läser och skriver dem, och byter en bokstav i taget. Lektionen hjälper eleven med det som gör ett ord svårt att skriva: vokalen faller bort, så att mer blir mr, och eleven läser det ord hen tänkte på i stället för det som står."
   - "Syftet är att eleverna ger varje ljud en bokstav, i rätt ordning, och läser tillbaka det de har skrivit, så att de kan skriva och läsa korta ord själva. Ditt uppdrag är att visa en bokstav för varje ljud och läsa tillbaka, att säga var i ordet ni byter och att bara ta bokstäver som gruppen har haft."
-  - "Välj Skriv ord tillsammans när fler än hälften av eleverna har en ring på ljudkollens uppgift 7, skriva ord, alltså färre än tre rätt av fyra. Ljudkollen står i Ljudlek i grupp, och Skriv ord tillsammans hör till förmåga 7, Skriva ord, i lektionsbanken där."
+  - "Välj Skriv ord tillsammans när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 7, skriva ord. Ljudkollen står i Ljudlek i grupp, och Skriv ord tillsammans hör till förmåga 7, Skriva ord, i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
   text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Skriv ord tillsammans går igenom raderna i Så blir lektionen svårare, oftast i tio till femton pass. Ta nästa rad när dagens elever skriver ordet efter bytet och minst ett av de två andra orden rätt i steg 4, två pass i följd. Efter sista raden går gruppen till nästa lektion."
@@ -73,7 +73,7 @@ tabeller:
       - - "Sätt ihop"
         - "Dra ut fem ord utan paus, med handen från vänster till höger sett från eleverna. Räkna tyst till tre och knyt handen, så säger alla ordet. Sist säger en av dagens elever ett ord ensam."
       - - "Dela upp"
-        - "Säg fyra ord med olika många ljud. Alla säger ordet och sedan ljuden, med ett finger för varje, och räknar fingrarna sist."
+        - "Säg fyra ord med olika många ljud. Alla säger ordet och sedan ljuden, med ett finger för varje, och räknar fingrarna sist. I lektionerna före Räkna ljud i banken säger du ljuden först och gruppen efter."
     not: "Säg ljudet och inte bokstavens namn, och b, d, g, k, p och t korta och utan ö. Orden tar du ur Ordbanken, och i Dela upp blandar du in ord ur de lättare ordgrupperna, så att orden har olika många ljud. Dagens ljud, dina fraser och ordgrupperna står i Ljudlek i grupp. Gruppen behåller sin ordgrupp från lektion till lektion."
   - rubrik: "Lyssna efter"
     plats: "efter-steg"
