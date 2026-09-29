@@ -446,8 +446,12 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
   function ritaBlock(s: any, block: any[], top: number, bottom: number) {
     const x0 = 0.21, fullW = W - 0.42, mellan = 0.3, colW = (fullW - mellan) / 2;
     const korta = (bl: any) => bl.rader.every((r: string[]) => r.every((c) => String(c).trim().length <= 12));
+    // En tabell med två kolumner och korta etiketter i den första (högst 24 tecken) får en första kolumn på en tredjedel av
+    // bredden, så att den långa texten får plats på färre rader (metodriggen 2026-09-29, Ljudstarten i Ljudlek i grupp).
+    const etikettBredder = (bl: any): number[] | undefined => (bl.kolumner.length === 2 && !korta(bl) && bl.rader.every((r: string[]) => String(r[0] ?? '').trim().length <= 24) ? [1, 2] : undefined);
+    const kolumnBredd = (bl: any, w: number, i: number) => { const b = etikettBredder(bl); return b ? (b[i] / (b[0] + b[1])) * w : w / bl.kolumner.length; };
     const est = (bl: any, w: number): number => {
-      if (bl.typ === 'tabell') { const elev = korta(bl); return 0.3 + 0.32 + bl.rader.reduce((a: number, r: string[]) => a + (r.every((c) => !c.trim()) ? 0.34 : Math.max(elev ? 0.34 : 0.3, ...r.map((c) => estH(c, w / bl.kolumner.length - 0.16, elev ? 14 : 11, 0.12)))), 0) + 0.15; }
+      if (bl.typ === 'tabell') { const elev = korta(bl); return 0.3 + 0.32 + bl.rader.reduce((a: number, r: string[]) => a + (r.every((c) => !c.trim()) ? 0.34 : Math.max(elev ? 0.34 : 0.3, ...r.map((c, i) => estH(c, kolumnBredd(bl, w, i) - 0.16, elev ? 14 : 11, 0.12)))), 0) + 0.15; }
       if (bl.typ === 'skrivruta') return 0.5 + (bl.text ? 0.25 : 0) + bl.rader * 0.32 + 0.2;
       if (bl.typ === 'snabbmall') return 0.32 + 0.33 * 2 + (bl.fore.length + bl.efter.length) * 0.42 + 0.15;
       if (bl.typ === 'kedja') return 0.3 + estH(bl.steg.join('  →  '), w, 12, 0.15) + (bl.citat ? estH(bl.citat, w, 11.5, 0.1) : 0) + 0.15;
@@ -460,7 +464,7 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
       if (bl.typ === 'tabell') {
         label(s, versaler(bl.rubrik), x, y, w, NAVY);
         const elev = korta(bl);
-        return 0.3 + gridTable(s, x, y + 0.3, w, bl.kolumner, bl.rader, elev ? { elev: true, size: 14 } : {}) + 0.15;
+        return 0.3 + gridTable(s, x, y + 0.3, w, bl.kolumner, bl.rader, elev ? { elev: true, size: 14 } : { bredder: etikettBredder(bl) }) + 0.15;
       }
       if (bl.typ === 'skrivruta') {
         const h = 0.5 + (bl.text ? 0.25 : 0) + bl.rader * 0.32 + 0.15;

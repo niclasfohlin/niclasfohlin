@@ -1,52 +1,57 @@
 {
   "antalsuppfattning-i-grupp": {
-    "kalla": "0ec660bb0f84952c",
-    "pdf": "d46b5d1baedb20af",
-    "datum": "2026-09-28"
+    "kalla": "69d389978f7120f6",
+    "pdf": "6ea46eafd57c3cb9",
+    "datum": "2026-09-29"
   },
   "boksamtal-i-grupp": {
-    "kalla": "96911964fb890132",
-    "pdf": "3a3ea0eca05dee93",
-    "datum": "2026-09-28"
+    "kalla": "f5fe82887f3ffc51",
+    "pdf": "74f41c0f8366c58c",
+    "datum": "2026-09-29"
   },
   "brakkurs-i-grupp": {
-    "kalla": "6be7f3c043353ada",
-    "pdf": "df4a540418232a8b",
-    "datum": "2026-09-28"
+    "kalla": "65021232aed86f3a",
+    "pdf": "1a701f74c2c17ed2",
+    "datum": "2026-09-29"
   },
   "faktatextsamtal-i-grupp": {
-    "kalla": "50cd5fbd17f8f924",
-    "pdf": "6ca51360baf43e15",
-    "datum": "2026-09-28"
+    "kalla": "52e35fe43bb6180f",
+    "pdf": "55a67c3f73bb7df1",
+    "datum": "2026-09-29"
   },
   "laslistor-i-grupp": {
-    "kalla": "fa9830ebb6813023",
-    "pdf": "45eca3c392f501e0",
+    "kalla": "c447c10d20f5a624",
+    "pdf": "af2bff86b77dea07",
     "datum": "2026-09-29"
   },
   "problemlosning-i-grupp": {
-    "kalla": "45034d4f5579e0b8",
-    "pdf": "c5745f46adfd1e9e",
-    "datum": "2026-09-28"
+    "kalla": "eb5e2b3b17117693",
+    "pdf": "86b4c94f3b6a43db",
+    "datum": "2026-09-29"
   },
   "skrivkurs-berattelseram": {
-    "kalla": "8f33a7c20da98989",
-    "pdf": "e709a29aae593683",
-    "datum": "2026-09-28"
+    "kalla": "dce4a403b401d646",
+    "pdf": "9fae586dd29163c9",
+    "datum": "2026-09-29"
   },
   "skrivkurs-vardeskapande": {
-    "kalla": "cd56946ea1d66a2f",
-    "pdf": "6dcffd7a4b9582b7",
-    "datum": "2026-09-28"
+    "kalla": "545de998427d1213",
+    "pdf": "57db53f0e9a15167",
+    "datum": "2026-09-29"
   },
   "til-i-grupp": {
-    "kalla": "faf40521a6647498",
-    "pdf": "49fc4f81f80efc41",
+    "kalla": "3733b83ef086f087",
+    "pdf": "bce4269c23e1dd32",
     "datum": "2026-09-29"
   },
   "upprepad-lasning": {
-    "kalla": "6fc692ba543e58e6",
-    "pdf": "586e0dba1e405e0b",
-    "datum": "2026-09-28"
+    "kalla": "e5e54b1f636aa65b",
+    "pdf": "d07275ff9cb30458",
+    "datum": "2026-09-29"
+  },
+  "ljudlek-i-grupp": {
+    "kalla": "827b96db0574b6e1",
+    "pdf": "b4d94e9daf421f7b",
+    "datum": "2026-09-29"
   }
 }
