@@ -449,7 +449,7 @@ button.lank:hover { color: var(--farg-accent); }
 .metod-nav a[aria-current="true"] { color: var(--farg-accent); font-weight: 600; }
 /* Länken till lathunden står för sig, före avsnittslistan: den lämnar sidan. */
 .metod-nav .lathund-lank { display: inline-block; font-weight: 700; color: var(--farg-accent); text-decoration: underline; text-underline-offset: 0.15em; margin: 0 0 0.75rem; }
-.metod-modell section { scroll-margin-top: 1.5rem; }
+.metod-modell section, .metod-modell .m-ruta[id], .metod-modell .m-ram h3[id] { scroll-margin-top: 1.5rem; }
 .metod-modell { font-size: 1.0625rem; line-height: 1.65; }
 .metod-text { max-width: 46rem; min-width: 0; }
 @media (min-width: 64rem) {

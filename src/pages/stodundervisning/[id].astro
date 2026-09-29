@@ -32,7 +32,7 @@ const antalLektioner = serie?.lektioner.length ?? 0;
 ---
 
 <Base title={d.titel} description={d.ingress} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
-  <article class="metod">
+  <article class="metod" data-serie-adress={lektion && serie ? `/stodundervisning/${serie.id}` : undefined} data-serie-titel={lektion && serie ? serie.titel : undefined}>
     {koppling && <Seriemeny koppling={koppling} />}
     <div class="metod-topp">
       <header class="metod-huvud">
@@ -85,6 +85,49 @@ const antalLektioner = serie?.lektioner.length ?? 0;
 </Base>
 
 <script>
+  // En lektions hänvisningar till den generella metoden blir länkar till avsnittet där (Ljudlek i grupp, riggens
+  // TILL-SAJTEN): "Ordbanken i Ljudlek i grupp" går till #ordbanken, "bokstavskartan i Ljudlek i grupp" till
+  // #bokstavskartan, och en mening utan känt avsnitt till sidans början. Ankarna sätter Metod.astro ur rubrikerna. Utan
+  // JavaScript står texten som den är, och seriens meny och vägen tillbaka länkar ändå till den generella metoden.
+  const artikel = document.querySelector<HTMLElement>('article[data-serie-adress]');
+  if (artikel) {
+    const adress = artikel.dataset.serieAdress!;
+    const titel = artikel.dataset.serieTitel!;
+    const avsnitt: [RegExp, string][] = [
+      [/Ordbanken|ordgrupperna/, 'ordbanken'], [/bokstavskartan/i, 'bokstavskartan'], [/ljudkollen/i, 'ljudkollen-elevens-blad'],
+      [/Dagens ljud/, 'dagens-ljud'], [/Paren och trion|gruppen|dagens elever/, 'gruppen'], [/ljudstart/i, 'ljudstarten'],
+      [/felsökning/i, 'felsokning'], [/Observation av ett pass/, 'observation-av-ett-pass'],
+    ];
+    const mal = (mening: string) => { const t = avsnitt.map(([re, id]) => ({ i: mening.search(re), id })).filter((x) => x.i >= 0).sort((a, b) => a.i - b.i)[0]; return t ? `${adress}#${t.id}` : adress; };
+    const falt = artikel.querySelectorAll('.metod-text, .faktaruta dd');
+    for (const del of falt) {
+      const noder: Text[] = [];
+      const gang = document.createTreeWalker(del, NodeFilter.SHOW_TEXT, { acceptNode: (n) => (n.nodeValue?.includes(titel) && !n.parentElement?.closest('a, h1, h2, h3, h4, .serie-meny') ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT) });
+      while (gang.nextNode()) noder.push(gang.currentNode as Text);
+      for (const nod of noder) {
+        const text = nod.nodeValue!;
+        const helhet = nod.parentElement?.textContent ?? text;
+        const bitar = text.split(titel);
+        const frag = document.createDocumentFragment();
+        let pos = 0;
+        bitar.forEach((bit, i) => {
+          frag.append(bit);
+          pos += bit.length;
+          if (i === bitar.length - 1) return;
+          // Meningen runt hänvisningen avgör avsnittet.
+          const start = Math.max(0, helhet.lastIndexOf('.', helhet.indexOf(text) + pos) + 1);
+          const slut = helhet.indexOf('.', helhet.indexOf(text) + pos);
+          const a = document.createElement('a');
+          a.href = mal(helhet.slice(start, slut < 0 ? undefined : slut));
+          a.textContent = titel;
+          frag.append(a);
+          pos += titel.length;
+        });
+        nod.replaceWith(frag);
+      }
+    }
+  }
+
   // Tillbaka till metodbanken med samma filter som läsaren hade (sparas av listan i sessionStorage).
   try {
     const filter = sessionStorage.getItem('metodfilter');

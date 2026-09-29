@@ -87,6 +87,14 @@ const avsnitt = [
   d.diplom && { id: 'diplom', namn: d.diplom.rubrik },
   d.mallar.length > 0 && { id: 'mallar', namn: 'Mallar' },
 ].filter((a): a is { id: string; namn: string } => Boolean(a));
+// Stabila ankare för rutorna, de fria tabellerna och ramarna, så att en lektion kan länka till avsnittet i den generella
+// metoden (Ljudlek i grupp, Seriefot och skriptet i [id].astro): rubrikens första led i gemener, som "Ordbanken" #ordbanken
+// och "Dagens ljud: bokstävernas ordning" #dagens-ljud. Ett ankare som redan finns får en siffra efter sig.
+const ankarnamn = (s: string) => s.split(':')[0].toLowerCase().replace(/[åä]/g, 'a').replace(/ö/g, 'o').replace(/é/g, 'e').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const upptagna = new Set([...avsnitt.map((a) => a.id), 'upplagg', 'gruppen', 'principer', 'lektionsbank', 'ramar', ...(d.ramar?.ramar ?? []).map((_, i) => `ram-${i + 1}`)]);
+const ankare = (s: string) => { let id = ankarnamn(s) || 'avsnitt'; for (let n = 2; upptagna.has(id); n++) id = `${ankarnamn(s)}-${n}`; upptagna.add(id); return id; };
+const tabellAnkare = new Map(d.tabeller.map((t) => [t, ankare(t.rubrik)]));
+const ramAnkare = (d.ramar?.ramar ?? []).map((r) => ankare(r.rubrik));
 ---
 <div class="metod-modell">
   {avsnitt.length > 2 && (
@@ -100,12 +108,12 @@ const avsnitt = [
   {d.inledning.map((s) => <p>{s}</p>)}
 
   {/* Rutornas rubriker är rubriker, så att en skärmläsare kan hoppa till dem (K-028). De står direkt under h1. */}
-  {d.upplagg && <div class="m-ruta"><h2 class="kicker">{d.upplagg.rubrik}</h2><p>{d.upplagg.text}</p></div>}
-  {d.gruppen && <div class="m-ruta"><h2 class="kicker">{d.gruppen.rubrik}</h2><p>{d.gruppen.text}</p></div>}
-  {d.principer && <div class="m-ruta"><h2 class="kicker">{d.principer.rubrik}</h2><p>{d.principer.text}</p></div>}
+  {d.upplagg && <div class="m-ruta" id="upplagg"><h2 class="kicker">{d.upplagg.rubrik}</h2><p>{d.upplagg.text}</p></div>}
+  {d.gruppen && <div class="m-ruta" id="gruppen"><h2 class="kicker">{d.gruppen.rubrik}</h2><p>{d.gruppen.text}</p></div>}
+  {d.principer && <div class="m-ruta" id="principer"><h2 class="kicker">{d.principer.rubrik}</h2><p>{d.principer.text}</p></div>}
 
   {efterInledning.map((t) => (
-    <section>
+    <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} />
@@ -163,7 +171,7 @@ const avsnitt = [
   )}
 
   {efterTidsschema.map((t) => (
-    <section>
+    <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} />
@@ -192,7 +200,7 @@ const avsnitt = [
   )}
 
   {efterSteg.map((t) => (
-    <section>
+    <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} />
@@ -213,7 +221,7 @@ const avsnitt = [
   )}
 
   {efterArbetsform.map((t) => (
-    <section>
+    <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} />
@@ -252,7 +260,7 @@ const avsnitt = [
   )}
 
   {efterFastnar.map((t) => (
-    <section>
+    <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} />
@@ -286,7 +294,7 @@ const avsnitt = [
   {bank && <Lektionsbank serie={bank} />}
 
   {efterUrval.map((t) => (
-    <section>
+    <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} />
@@ -374,7 +382,7 @@ const avsnitt = [
   )}
 
   {efterGrund.map((t) => (
-    <section>
+    <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} />
@@ -398,7 +406,7 @@ const avsnitt = [
       )}
       {d.ramar.ramar.map((ram, ri) => (
         <section class="m-ram" id={`ram-${ri + 1}`}>
-          <h3>{hel(ram.rubrik)}</h3>
+          <h3 id={ramAnkare[ri]}>{hel(ram.rubrik)}</h3>
           {ram.text.map((s) => <p>{s}</p>)}
           {ram.oversikt && <MetodTabell kolumner={ram.oversikt.kolumner} rader={ram.oversikt.rader} klass={kortaCeller(ram.oversikt.rader) ? 'fri tat' : friKlass(ram.oversikt)} radrubrik={false} />}
           {ram.listor ? (
