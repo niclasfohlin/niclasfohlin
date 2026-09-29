@@ -12,12 +12,26 @@ const SVAR_TILL = 'niclas.fohlin@gmail.com';
 
 const html = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 
+// En serie (Ljudlek i grupp) är en generell metod med lektioner som egna poster. Är den generella metoden ny står
+// lektionerna under den, som en rad med länkar, och räknas inte som egna inlägg; en lektion som kommer senare står för
+// sig som en nyhet i serien (etiketten Ny lektion i … kommer från nytt.json).
+export function grupperaNya(nya) {
+  const urler = new Set(nya.map((p) => p.url));
+  const lektioner = new Map();
+  for (const p of nya) if (p.serie && urler.has(p.serie.url)) lektioner.set(p.serie.url, [...(lektioner.get(p.serie.url) ?? []), p]);
+  // Lektionerna i bankens ordning (ordning ur nytt.json).
+  for (const lista of lektioner.values()) lista.sort((a, b) => (a.ordning ?? 0) - (b.ordning ?? 0));
+  return nya.filter((p) => !(p.serie && urler.has(p.serie.url))).map((p) => (lektioner.has(p.url) ? { ...p, lektioner: lektioner.get(p.url) } : p));
+}
+
 export function brev(nya, sajt) {
-  const delar = nya.map((p) => `
+  const lank = (p, text) => `<a href="${sajt}${p.url}" style="color:#2f5d50;">${html(text)}</a>`;
+  const delar = grupperaNya(nya).map((p) => `
     <p style="margin:0 0 4px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;font-size:14px;color:#5a635e;">${html(p.etikett)}</p>
     <h2 style="margin:0 0 8px;font-size:22px;line-height:1.25;"><a href="${sajt}${p.url}" style="color:#18221d;text-decoration:none;">${html(p.titel)}</a></h2>
-    <p style="margin:0 0 12px;">${html(p.ingress)}</p>
-    <p style="margin:0 0 28px;"><a href="${sajt}${p.url}" style="color:#2f5d50;">Läs på niclasfohlin.se</a></p>`).join('');
+    <p style="margin:0 0 12px;">${html(p.ingress)}</p>${p.lektioner?.length ? `
+    <p style="margin:0 0 12px;">${p.lektioner.length === 1 ? 'Med lektionen' : `Med ${p.lektioner.length} lektioner`}: ${p.lektioner.map((l) => lank(l, l.namn ?? l.titel)).join(', ')}.</p>` : ''}
+    <p style="margin:0 0 28px;">${lank(p, 'Läs på niclasfohlin.se')}</p>`).join('');
   return `<!doctype html>
 <html lang="sv"><body style="margin:0;padding:0;background:#f7f6f1;font-family:Georgia,'Times New Roman',serif;color:#18221d;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f7f6f1;"><tr><td align="center" style="padding:32px 16px;">
@@ -82,10 +96,12 @@ export async function mejlaNytt({ poster, sajt, lager, brevoNyckel, listId }) {
   const spara = () => lager.setJSON('skickat', { urler, initierad: skickat.initierad, senast });
   await spara();
 
-  const amne = nya.length === 1 ? `Nytt på niclasfohlin.se: ${nya[0].titel}` : `Nytt på niclasfohlin.se: ${nya.length} nya inlägg`;
+  // En serie med sina lektioner är ett inlägg i ämnesraden: Nytt på niclasfohlin.se: Ljudlek i grupp.
+  const grupper = grupperaNya(nya);
+  const amne = grupper.length === 1 ? `Nytt på niclasfohlin.se: ${grupper[0].titel}` : `Nytt på niclasfohlin.se: ${grupper.length} nya inlägg`;
   try {
     const kampanj = await brevo('/emailCampaigns', {
-      name: `Nytt ${new Date().toISOString().slice(0, 16)}: ${nya.map((p) => p.titel).join(' | ').slice(0, 120)}`,
+      name: `Nytt ${new Date().toISOString().slice(0, 16)}: ${grupper.map((p) => p.titel).join(' | ').slice(0, 120)}`,
       subject: amne,
       sender: AVSANDARE,
       replyTo: SVAR_TILL,
