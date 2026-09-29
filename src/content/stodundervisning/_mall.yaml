@@ -33,6 +33,23 @@ relaterade: []
 # true: syns bara i npm run dev, ingen pdf-kontroll, inget mejl. Sätt false när metoden är klar att mejlas.
 utkast: true
 
+# Serier (Ljudlek i grupp): en generell metod med en lektionsbank och lektioner som är egna metoder. En ny lektion är en
+# ny fil med de tre fälten nedan: den syns i banken, i metodbanken och i seriens meny utan att den generella metoden
+# ändras. En lektion tas bort genom att filen tas bort; bygget säger till om en text i serien fortfarande nämner den.
+# En lektion har alla tre, och ingen relaterade: serien visar vägen mellan lektionerna.
+# serie: ljudlek-i-grupp        # den generella metodens id
+# formaga: 6                    # förmågans nummer i lektionsbanken, samma som uppgiften i ljudkollen
+# tranar: "dela upp ord i ljud, med en markör för varje ljud"   # vad eleven tränar, som det står i banken
+# Den generella metoden har lektionsbanken: förmågorna i ordning, numrerade från 1, med skälet till platsen.
+# lektionsbank:
+#   rubrik: "Lektionsbanken: förmågorna och lektionerna"
+#   text: Hur gruppen väljer lektion.
+#   formagor:
+#     - nr: 1
+#       namn: Rim
+#       skal: Varför förmågan står här i ordningen.
+#   not: Vad som gäller när gruppen går vidare.
+
 # Modellen. Rubrikerna har standardvärden där de inte anges (se src/content.config.ts).
 inledning:
   - Vad metoden är, för vem och hur ett pass ser ut. Ett stycke per rad.

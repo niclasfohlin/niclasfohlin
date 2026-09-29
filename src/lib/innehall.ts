@@ -1,6 +1,7 @@
 import { getCollection, type CollectionEntry, type CollectionKey } from 'astro:content';
 import taggarData from '../data/taggar.json';
 import publikationerData from '../data/publikationer.json';
+import { arLektion, byggSerier, serieUppdaterad } from './serie';
 
 // Utkast visas i utvecklingsläge men aldrig i produktionsbygget.
 export async function publicerade<K extends CollectionKey>(samling: K): Promise<CollectionEntry<K>[]> {
@@ -18,11 +19,18 @@ export async function metoderSorterade() {
   return poster.sort((a, b) => a.data.titel.localeCompare(b.data.titel, 'sv'));
 }
 
-// De senast tillagda eller ändrade metoderna först (fältet uppdaterad), för startsidan.
+// De senast tillagda eller ändrade metoderna först (fältet uppdaterad), för startsidan. En lektion står i sin serie och
+// inte som eget kort, och seriens datum är det senaste i serien, så att en ny lektion lyfter serien (src/lib/serie.ts).
 export async function metoderSenaste() {
   const poster = await publicerade('stodundervisning');
-  const tid = (m: (typeof poster)[number]) => m.data.uppdaterad?.getTime() ?? 0;
-  return poster.sort((a, b) => tid(b) - tid(a) || a.data.titel.localeCompare(b.data.titel, 'sv'));
+  const serier = byggSerier(poster);
+  const tid = (m: (typeof poster)[number]) => (serier.has(m.id) ? serieUppdaterad(serier.get(m.id)!, poster) : m.data.uppdaterad?.getTime() ?? 0);
+  return poster.filter((m) => !arLektion(m.data)).sort((a, b) => tid(b) - tid(a) || a.data.titel.localeCompare(b.data.titel, 'sv'));
+}
+
+// Serierna bland de publicerade metoderna. Stoppar bygget när en lektion pekar på en serie eller förmåga som inte finns.
+export async function metodSerier() {
+  return byggSerier(await publicerade('stodundervisning'));
 }
 
 export async function bockerSorterade() {

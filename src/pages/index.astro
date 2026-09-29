@@ -4,12 +4,15 @@ import Metodkort from '../components/Metodkort.astro';
 import { bildHojd } from '../lib/bildmatt';
 import Taggar from '../components/Taggar.astro';
 import { site } from '../data/site';
-import { artiklarSorterade, metoderSenaste, bockerSorterade, formateraDatum, publikationNamn, typLabel } from '../lib/innehall';
+import { artiklarSorterade, metoderSenaste, metodSerier, bockerSorterade, formateraDatum, publikationNamn, typLabel, publicerade } from '../lib/innehall';
+import { serieTaggar } from '../lib/serie';
 
 const artiklar = await artiklarSorterade();
 const utvalda = artiklar.filter((a) => a.data.utvald).slice(0, 3);
 const senaste = (utvalda.length > 0 ? utvalda : artiklar).slice(0, 3);
 const metoder = (await metoderSenaste()).slice(0, 3);
+const serier = await metodSerier();
+const allaMetoder = await publicerade('stodundervisning');
 const bocker = (await bockerSorterade()).slice(0, 4);
 ---
 
@@ -62,7 +65,7 @@ const bocker = (await bockerSorterade()).slice(0, 4);
       <h2>Stödundervisning</h2>
       <p class="text">De senaste metoderna. Hela metodbanken är sorterad på område, årskurs och vad metoderna tränar.</p>
       <div class="rutnat">
-        {metoder.map((m) => <Metodkort m={m} />)}
+        {metoder.map((m) => { const serie = serier.get(m.id); return <Metodkort m={m} serie={serie} taggar={serie && serieTaggar(serie, allaMetoder)} />; })}
       </div>
       <p class="lankrad"><a href="/stodundervisning">Hela metodbanken</a></p>
     </section>

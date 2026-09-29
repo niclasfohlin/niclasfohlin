@@ -1,0 +1,31 @@
+---
+// Lektionsbanken på den generella metodens sida (Ljudlek i grupp): en ruta per lektion med förmågan överst, i
+// förmågornas ordning, byggd ur lektionerna (src/lib/serie.ts), så att en ny lektion syns här när den publiceras. En
+// förmåga utan lektion står kvar, eftersom ljudkollen har uppgiften: läraren ser att lektionen saknas i stället för att
+// förmågan försvinner. Niclas valde formen 2026-09-29 (förslag B: menyn och korten).
+import type { Serie } from '../lib/serie';
+interface Props { serie: Serie }
+const { serie } = Astro.props;
+const versal = (s: string) => (s ? s.charAt(0).toLocaleUpperCase('sv') + s.slice(1) : s);
+const punkt = (s: string) => (/[.!?]$/.test(s) ? s : `${s}.`);
+const antal = serie.lektioner.length;
+---
+<section id="lektionsbank" class="m-bank">
+  <h2>{serie.rubrik}</h2>
+  {serie.text && <p>{serie.text}</p>}
+  <ol class="m-lektionskort" aria-label={`${antal === 1 ? 'En lektion' : `${antal} lektioner`}, ordnade efter förmåga`}>
+    {serie.formagor.flatMap((f) => (f.lektioner.length ? f.lektioner : [undefined]).map((l) => (
+      <li class={`m-lektionskort-kort${l ? '' : ' tom'}`}>
+        <p class="m-lektionskort-formaga"><span class="m-lektionskort-nr" aria-hidden="true">{f.nr}</span><span class="visually-hidden">Förmåga {f.nr}: </span>{f.namn}</p>
+        {l ? (
+          <>
+            <h3><a href={`/stodundervisning/${l.id}`}>{l.namn}</a></h3>
+            <p>{punkt(versal(l.tranar))}</p>
+          </>
+        ) : <p class="meta">Ingen lektion ännu.</p>}
+        {f.skal && <p class="m-lektionskort-skal">{f.skal}</p>}
+      </li>
+    )))}
+  </ol>
+  {serie.not && <div class="m-ruta"><p>{serie.not}</p></div>}
+</section>

@@ -133,6 +133,21 @@ const stodundervisning = defineCollection({
     relaterade: z.array(z.string()).default([]),
     utkast: z.boolean().default(false),
 
+    // Serier (Ljudlek i grupp, 2026-09-29): en generell metod med en lektionsbank, och lektioner som är egna metoder.
+    // En lektion har serie (den generella metodens id), formaga (numret på förmågan i banken) och tranar (vad eleven
+    // tränar, som det står i banken). Den generella metoden har lektionsbanken: förmågorna i ordning med nummer, namn
+    // och skälet till platsen. Banken byggs ur lektionerna (src/lib/serie.ts), så att en ny lektion bara är en ny fil
+    // och en borttagen lektion försvinner ur banken, metodbanken och menyerna utan att den generella metoden ändras.
+    serie: z.string().optional(),
+    formaga: z.number().int().positive().optional(),
+    tranar: z.string().optional(),
+    lektionsbank: z.strictObject({
+      rubrik: z.string().default('Lektionsbanken'),
+      text: z.string().optional(),
+      formagor: z.array(z.strictObject({ nr: z.number().int().positive(), namn: text, skal: z.string().optional() })).min(1),
+      not: z.string().optional(),
+    }).optional(),
+
     // Modellen. Ett stycke per rad i listorna; en rad inuti en cell blir en ny rad i cellen.
     inledning: stycken,
     upplagg: ruta.optional(),
@@ -410,6 +425,13 @@ const stodundervisning = defineCollection({
       }),
     }).optional(),
   }).superRefine((d, ctx) => {
+    // En lektion har serie, formaga och tranar tillsammans, och ingen egen lektionsbank. Att serien och förmågan finns
+    // prövas i src/lib/serie.ts, där alla metoder är kända.
+    const lektionsfalt = [d.serie, d.formaga, d.tranar].filter((x) => x !== undefined).length;
+    if (lektionsfalt > 0 && lektionsfalt < 3) ctx.addIssue({ code: 'custom', path: ['serie'], message: 'En lektion i en serie har serie, formaga och tranar, alla tre.' });
+    if (d.serie && d.lektionsbank) ctx.addIssue({ code: 'custom', path: ['lektionsbank'], message: 'En lektion kan inte ha en egen lektionsbank.' });
+    // Förmågorna numreras i följd från 1, så att en lektions formaga aldrig pekar på en annan förmåga än den skrevs för.
+    d.lektionsbank?.formagor.forEach((f, i) => { if (f.nr !== i + 1) ctx.addIssue({ code: 'custom', path: ['lektionsbank', 'formagor', i, 'nr'], message: `Förmågan "${f.namn}" ska ha nummer ${i + 1}: förmågorna numreras i följd från 1.` }); });
     // Lathundens block snabbmall hämtar metodens snabbmall; utan den skulle blocket tyst försvinna.
     if (d.lathund?.mall.block.some((b) => b.typ === 'snabbmall') && !d.snabbmall) {
       ctx.addIssue({ code: 'custom', path: ['lathund', 'mall', 'block'], message: 'Blocket snabbmall kräver att metoden har en snabbmall.' });

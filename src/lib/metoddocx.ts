@@ -11,6 +11,7 @@ import {
 import { arbetsformRad, arEttKort, arProtokoll, arskursText, datumText, ejBryt, etikettOchText, laskortKolumn, laskortRubrik, lathundFakta, lathundForm, metaRad, metodAdress, passOrd, passOversikt, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost, type PassOrd } from './metod';
 import { brakDelar, delnamn, kortInfo, lage, STANDARD_NAMNARE, type KortInfo, type Mall } from './brak';
 import { bagSvg, utanStod } from './lasflyt';
+import type { MetodPostISerie, SerieKoppling } from './serie';
 import WORDSKALOR from '../data/lathund-word.json';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
@@ -357,7 +358,9 @@ function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][] 
   // och resten av bredden går till texten.
   const skriv = Array.from({ length: n }, (_, i) => l.rader.every((r) => !(r[i] ?? '').trim()));
   const antalSkriv = skriv.filter(Boolean).length;
-  const smal = antalSkriv && antalSkriv < n ? 1250 : 0;
+  // Många skrivkolumner (gruppens översikt i Ljudlek i grupp har nio) delar på drygt 60 procent av bredden, så att
+  // textkolumnen alltid får plats, som i metodriggen. Med två eller tre är de 1 250 twips, som förut.
+  const smal = antalSkriv && antalSkriv < n ? Math.min(1250, Math.floor((BREDD * 0.62) / antalSkriv)) : 0;
   const bredd = Math.floor((BREDD - smal * antalSkriv) / (smal ? n - antalSkriv : n));
   const sista = smal ? skriv.lastIndexOf(false) : n - 1;
   const bredder = Array.from({ length: n }, (_, i) => (smal && skriv[i] ? smal : i === sista ? BREDD - smal * antalSkriv - bredd * ((smal ? n - antalSkriv : n) - 1) : bredd));
@@ -611,13 +614,17 @@ function tavlaBarn(b: Tavla): Barn[] {
   );
 }
 
-// Faktarutan: samma uppgifter som på sidan, så att Word-filen står för sig själv.
-function faktaTabell(d: MetodData): Barn[] {
-  const rader: [string, string][] = [['Område', d.omrade], ['Årskurs', arskursText(d)]];
+// Faktarutan: samma uppgifter som på sidan, så att Word-filen står för sig själv. En lektion i en serie säger vilken
+// serie och förmåga den hör till, och den generella metoden hur många lektioner banken har (src/lib/serie.ts).
+function faktaTabell(d: MetodData, serie?: SerieKoppling): Barn[] {
+  const rader: [string, string][] = [];
+  if (serie?.lektion) rader.push(['Hör till', `${serie.serie.titel}, förmåga ${serie.lektion.formaga} av ${serie.serie.formagor.length}: ${serie.formaga?.namn ?? ''}`]);
+  rader.push(['Område', d.omrade], ['Årskurs', arskursText(d)]);
   if (d.format.length) rader.push(['Format', d.format.join(', ')]);
   if (d.tid) rader.push(['Tid', d.tid]);
   if (d.period) rader.push(['Period', d.period]);
   if (d.grupp) rader.push(['Grupp', d.grupp]);
+  if (serie && !serie.lektion && serie.serie.lektioner.length) rader.push(['Lektioner', `${serie.serie.lektioner.length === 1 ? 'En' : serie.serie.lektioner.length} i lektionsbanken`]);
   if (d.material.length) rader.push(['Material', `${d.material.join('. ')}.`]);
   if (d.uppdaterad) rader.push(['Uppdaterad', datumText(d.uppdaterad)]);
   const bredder = [2000, BREDD - 2000];
@@ -627,15 +634,27 @@ function faktaTabell(d: MetodData): Barn[] {
   ])), bredder), avstand()];
 }
 
+// Lektionsbanken i den generella metoden (Ljudlek i grupp): förmågorna i ordning med lektionerna och vad eleven tränar,
+// byggd ur lektionerna, som på sidan (Lektionsbank.astro). En förmåga utan lektion står kvar.
+function lektionsbankBarn(serie: SerieKoppling['serie']): Barn[] {
+  const bredder = [2300, 4200, BREDD - 6500];
+  const ut: Barn[] = [h2(serie.rubrik)];
+  if (serie.text) ut.push(stycke(serie.text, { hallIhop: true }));
+  const rader = serie.formagor.map((f) => [`${f.nr} · ${f.namn}`, f.lektioner.map((l) => `${l.namn}: ${l.tranar}`).join('\n') || 'Ingen lektion ännu', f.skal ?? '']);
+  ut.push(...rubrikTabell(['Förmåga', 'Lektionen och vad eleven tränar', 'Skälet till platsen'], rader, bredder));
+  if (serie.not) ut.push(...ruta('', serie.not));
+  return ut;
+}
+
 // Hela metoden i den ordning modellen har.
-function metodBarn(post: MetodPost, bas: string): Barn[] {
+function metodBarn(post: MetodPostISerie, bas: string): Barn[] {
   const d = post.data;
   const ut: Barn[] = [];
   ut.push(new Paragraph({ children: [run(d.titel)], heading: HeadingLevel.HEADING_1, spacing: { before: 0, after: 60 } }));
   if (d.undertitel) ut.push(stycke(d.undertitel, { kursiv: true, farg: FARG.huvud, storlek: 24, efter: 80 }));
   ut.push(stycke(metaRad(d), { farg: FARG.svag, storlek: 20, efter: 200 }));
   ut.push(stycke(d.ingress, { storlek: 24, efter: 160 }));
-  ut.push(...faktaTabell(d));
+  ut.push(...faktaTabell(d, post.serie));
   for (const s of d.inledning) ut.push(stycke(s));
   if (d.upplagg) ut.push(...ruta(d.upplagg.rubrik, d.upplagg.text));
   if (d.gruppen) ut.push(...ruta(d.gruppen.rubrik, d.gruppen.text));
@@ -719,6 +738,7 @@ function metodBarn(post: MetodPost, bas: string): Barn[] {
     if (d.urval.kravText) ut.push(stycke(d.urval.kravText, { hallIhop: true }));
     ut.push(...band(d.urval.krav));
   }
+  if (post.serie && !post.serie.lektion) ut.push(...lektionsbankBarn(post.serie.serie));
   for (const t of d.tabeller.filter((x) => x.plats === 'efter-urval')) friTabell(t);
   if (d.hem) {
     ut.push(h2(d.hem.rubrik));
@@ -1389,7 +1409,7 @@ function dokument(titel: string, sektioner: ISectionOptions[]): Document {
 }
 
 // En eller flera metoder i en fil, med planeringsmallarna och lathunden efter varje metod om medMallar är satt.
-export function metodDokument(poster: MetodPost[], o: { bas: string; medMallar?: boolean }): Document {
+export function metodDokument(poster: MetodPostISerie[], o: { bas: string; medMallar?: boolean }): Document {
   instans = 0;
   const sektioner: ISectionOptions[] = [];
   if (poster.length === 0) {

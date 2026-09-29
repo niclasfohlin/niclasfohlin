@@ -1,15 +1,20 @@
 ---
 // Metodkortet, samma på startsidan och i metodbanken: titel med ämnesmärke, faktaremsa (årskurs,
 // grupp, pass, hur ofta), ingress, taggar och raden med lathund och filval. I metodbanken
-// också kryssrutan Välj för samlad nedladdning.
+// också kryssrutan Välj för samlad nedladdning. En serie (Ljudlek i grupp) är ett kort som de andra, med
+// lektionerna bakom en rad som fälls ut, så att kortet inte växer med banken och lektionerna inte står som egna
+// kort; kortet filtreras på allt serien tränar (Niclas valde formen 2026-09-29).
 import Taggar from './Taggar.astro';
 import Filval from './Filval.astro';
 import { harLathund, kortFakta } from '../lib/metod';
 import type { MetodPost } from '../lib/metod';
-interface Props { m: MetodPost; valj?: boolean }
-const { m, valj = false } = Astro.props;
+import type { Serie } from '../lib/serie';
+interface Props { m: MetodPost; valj?: boolean; serie?: Serie; taggar?: string[] }
+const { m, valj = false, serie, taggar = m.data.taggar } = Astro.props;
+const lektioner = serie?.lektioner ?? [];
+const antal = lektioner.length === 1 ? 'En lektion' : `${lektioner.length} lektioner`;
 ---
-<article class="kort metodkort" data-metod data-omrade={m.data.omrade} data-arskurs={m.data.arskurs.join(' ')} data-taggar={m.data.taggar.join(' ')}>
+<article class={`kort metodkort${serie ? ' seriekort' : ''}`} data-metod data-omrade={m.data.omrade} data-arskurs={m.data.arskurs.join(' ')} data-taggar={taggar.join(' ')}>
   <div class="kort-topp">
     <h3><a href={`/stodundervisning/${m.id}`}>{m.data.titel}</a></h3>
     <span class="amne" data-amne={m.data.omrade}>{m.data.omrade}</span>
@@ -18,7 +23,15 @@ const { m, valj = false } = Astro.props;
     {kortFakta(m.data).map((f) => <div><dt>{f.rubrik}</dt><dd>{f.text}</dd></div>)}
   </dl>
   <p class="ingress">{m.data.ingress}</p>
-  <Taggar taggar={m.data.taggar} />
+  {lektioner.length > 0 && (
+    <details class="kort-serie">
+      <summary>{antal} i lektionsbanken</summary>
+      <ol class="kort-lektioner">
+        {lektioner.map((l) => <li><a href={`/stodundervisning/${l.id}`}><span class="serie-nr" aria-hidden="true">{l.formaga}</span>{l.namn}</a></li>)}
+      </ol>
+    </details>
+  )}
+  <Taggar taggar={taggar} />
   <p class="kort-rad">
     {harLathund(m.data) && <a class="lathund-lank" href={`/stodundervisning/${m.id}/lathund`}>Lathund<span class="visually-hidden">: {m.data.titel}</span></a>}
     <Filval fil={`/stodundervisning/${m.id}`} namn={m.id} rubrik={`Allt om ${m.data.titel}`} statistik={`${m.data.titel}: allt om metoden`} liten />

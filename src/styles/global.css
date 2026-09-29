@@ -458,6 +458,58 @@ button.lank:hover { color: var(--farg-accent); }
 .metod-modell h2 { font-family: var(--typsnitt-ui); font-size: 1.5rem; color: var(--farg-text); margin: 2em 0 0.5em; }
 .metod-modell section + section { margin-top: 0; }
 .metod-modell .m-efter { color: var(--farg-text-svag); font-size: 0.98rem; }
+
+/* Serier (Ljudlek i grupp): seriens meny överst, lektionsbanken på den generella metodens sida, seriens kort i
+   metodbanken och vägen till nästa lektion, byggda ur lektionerna (src/lib/serie.ts). Numret är förmågans, samma som i
+   ljudkollen. Niclas valde formen 2026-09-29: som de andra metoderna, och lektionerna i en rad som fälls ut. */
+.serie-nr { display: inline-flex; align-items: center; justify-content: center; flex: none; min-width: 1.45rem; height: 1.45rem; padding: 0 0.3rem; border-radius: 5px; background: var(--farg-accent-ljus); color: var(--farg-accent); font-family: var(--typsnitt-ui); font-size: 0.78rem; font-weight: 700; line-height: 1; }
+/* Lektionsbanken: en ruta per lektion med förmågan överst. */
+.m-lektionskort { list-style: none; margin: 1.25rem 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 0.75rem; }
+.m-lektionskort-kort { display: flex; flex-direction: column; gap: 0.35rem; background: var(--farg-yta); border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0.9rem 1rem 1rem; box-shadow: var(--skugga); }
+.m-lektionskort-kort:hover { border-color: var(--farg-accent); }
+.metod-modell .m-lektionskort-kort p { margin: 0; }
+.metod-modell .m-lektionskort-kort h3 { margin: 0; font-size: 1.15rem; }
+.m-lektionskort-kort h3 a { color: var(--farg-accent); }
+.m-lektionskort-formaga { display: flex; align-items: center; gap: 0.5rem; font-family: var(--typsnitt-ui); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); }
+.m-lektionskort-nr { display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 5px; background: var(--farg-accent); color: #fff; font-size: 0.85rem; letter-spacing: 0; }
+.metod-modell .m-lektionskort-skal { color: var(--farg-text-svag); font-size: 0.9rem; margin-top: auto; padding-top: 0.25rem; }
+.m-lektionskort-kort.tom { background: var(--farg-ton-svag); box-shadow: none; }
+/* Seriens kort i metodbanken: lektionerna i bankens ordning bakom en rad som fälls ut. */
+.kort-serie { margin: 0 0 0.9rem; padding: 0.55rem 0.85rem; border: 1px solid var(--farg-kant); border-radius: 8px; font-family: var(--typsnitt-ui); }
+.kort-serie summary { cursor: pointer; font-size: 0.9rem; font-weight: 600; color: var(--farg-accent); }
+.kort-serie[open] summary { margin-bottom: 0.35rem; }
+.kort-lektioner { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr)); gap: 0 1rem; font-size: 0.9rem; }
+.kort-lektioner a { display: flex; align-items: center; gap: 0.5rem; padding: 0.22rem 0; text-decoration: none; color: var(--farg-text); line-height: 1.3; }
+.kort-lektioner a:hover { color: var(--farg-accent); }
+/* Sist på en lektion: föregående och nästa lektion. */
+.serie-fot { margin: 3rem 0 0; font-family: var(--typsnitt-ui); max-width: 46rem; }
+.serie-bladdra { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0; }
+.serie-bladdra a { display: flex; flex-direction: column; gap: 0.1rem; flex: 1 1 12rem; min-height: 2.75rem; padding: 0.55rem 0.85rem; background: var(--farg-yta); border: 1px solid var(--farg-kant); border-radius: 8px; text-decoration: none; font-weight: 700; color: var(--farg-accent); line-height: 1.3; }
+.serie-bladdra a:hover { border-color: var(--farg-accent); }
+.serie-bladdra a.nasta { text-align: right; }
+.serie-bladdra-etikett { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--farg-text-svag); }
+/* Seriens meny överst, i samma ljusa band som sidans topp. På datorn en rad flikar, på telefonen en rad som fälls ut. */
+.serie-meny { font-family: var(--typsnitt-ui); padding: 1rem 0 0; background: var(--farg-ton); box-shadow: 0 0 0 100vmax var(--farg-ton); clip-path: inset(0 -100vmax); }
+.serie-meny + .metod-topp { padding-top: 1rem; }
+.serie-meny-namn { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); margin: 0 0 0.4rem; }
+.serie-meny-flikar { display: none; }
+.serie-meny-fall { border: 1px solid var(--farg-kant); border-radius: 8px; background: var(--farg-yta); }
+.serie-meny-fall summary { display: flex; align-items: center; gap: 0.5rem; min-height: 2.75rem; padding: 0.4rem 0.85rem; cursor: pointer; font-weight: 600; list-style: none; }
+.serie-meny-fall summary::-webkit-details-marker { display: none; }
+.serie-meny-fall summary::after { content: ''; margin-left: auto; flex: none; width: 0.5rem; height: 0.5rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-0.15rem) rotate(45deg); }
+.serie-meny-fall[open] summary::after { transform: translateY(0.1rem) rotate(-135deg); }
+.serie-meny-etikett { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--farg-text-svag); }
+.serie-meny-fall ol { list-style: none; margin: 0; padding: 0.25rem 0; border-top: 1px solid var(--farg-kant); }
+.serie-meny-fall li a { display: flex; align-items: center; gap: 0.6rem; min-height: 2.5rem; padding: 0.3rem 0.85rem; text-decoration: none; }
+.serie-meny-fall li a[aria-current="page"] { font-weight: 700; color: var(--farg-accent); background: var(--farg-ton-svag); }
+@media (min-width: 52rem) {
+  .serie-meny-fall { display: none; }
+  .serie-meny-flikar { display: flex; flex-wrap: wrap; gap: 0.25rem; list-style: none; margin: 0; padding: 0 0 0.9rem; border-bottom: 1px solid var(--farg-kant); }
+  .serie-meny-flikar a { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.65rem; border-radius: 6px; text-decoration: none; color: var(--farg-text); font-size: 0.92rem; font-weight: 500; }
+  .serie-meny-flikar a:hover { background: var(--farg-yta); color: var(--farg-accent); }
+  .serie-meny-flikar a[aria-current="page"] { background: var(--farg-accent); color: #fff; font-weight: 600; }
+  .serie-meny-flikar a[aria-current="page"] .serie-nr { background: rgba(255, 255, 255, 0.22); color: #fff; }
+}
 .m-ruta { background: var(--farg-ton); border-left: 4px solid var(--farg-accent); border-radius: 0 8px 8px 0; padding: 0.85rem 1.1rem; margin: 1.25rem 0; }
 .m-ruta p { margin: 0; }
 .m-ruta p + p { margin-top: 0.35em; }
@@ -903,7 +955,7 @@ html.js .bara-js { display: inline-block; }
     @bottom-center { content: var(--tryck-text, ''); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 8.5pt; color: #555; }
   }
   body { background: #fff; color: #000; font-size: 10.5pt; line-height: 1.45; }
-  .sidhuvud, .sidfot, .hopp-lank, .nedladdning, .filter, .samla, .metod-fot .relaterade, .metod-fot .taggar, .valj, .kommentarer, .delning { display: none !important; }
+  .sidhuvud, .sidfot, .hopp-lank, .nedladdning, .filter, .samla, .metod-fot .relaterade, .metod-fot .taggar, .valj, .kommentarer, .delning, .serie-meny, .serie-fot { display: none !important; }
   .innehall { max-width: none; padding: 0; }
   .metod { max-width: none; }
   .metod-topp { grid-template-columns: 1fr; grid-template-areas: "huvud" "fakta"; margin: 0 0 1rem; padding: 0; background: none; box-shadow: none; clip-path: none; border-bottom: 0; }

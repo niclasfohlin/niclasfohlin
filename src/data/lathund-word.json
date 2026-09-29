@@ -1,102 +1,102 @@
 {
   "antalsuppfattning-i-grupp": {
-    "kalla": "d48d4a48ad502a6e",
+    "kalla": "b9b2e103495ff4e1",
     "skalor": [
       1.2,
       1.35,
       1.35,
       1.25
     ],
-    "datum": "2026-09-27"
+    "datum": "2026-09-29"
   },
   "boksamtal-i-grupp": {
-    "kalla": "aa6b0e2a93cb8078",
+    "kalla": "ac49829e59442892",
     "skalor": [
       1.35,
       1.35,
       1.15,
       1.35
     ],
-    "datum": "2026-09-27"
+    "datum": "2026-09-29"
   },
   "brakkurs-i-grupp": {
-    "kalla": "6ca1bec4c52c3678",
+    "kalla": "5d9f3e8556b5932a",
     "skalor": [
       1.1,
       1.35,
       1.35,
       1.25
     ],
-    "datum": "2026-09-27"
+    "datum": "2026-09-29"
   },
   "faktatextsamtal-i-grupp": {
-    "kalla": "f280643d982d6246",
+    "kalla": "75508ecb627d8aa8",
     "skalor": [
       1.25,
       1.35,
       1.25,
       1.35
     ],
-    "datum": "2026-09-27"
+    "datum": "2026-09-29"
   },
   "laslistor-i-grupp": {
-    "kalla": "f87839fdac4a388e",
+    "kalla": "48b2ef9148b2b4bb",
     "skalor": [
       1.2,
       1.35,
       1.15,
       1.35
     ],
-    "datum": "2026-09-27"
+    "datum": "2026-09-29"
   },
   "problemlosning-i-grupp": {
-    "kalla": "aacd9deaec1e8c6a",
+    "kalla": "f23d64eaca7e8d23",
     "skalor": [
       1.3,
       1.35,
       1.35,
       1.25
     ],
-    "datum": "2026-09-27"
+    "datum": "2026-09-29"
   },
   "skrivkurs-berattelseram": {
-    "kalla": "dcd0f4206984e3cb",
+    "kalla": "2a9278bcb58a4b3a",
     "skalor": [
       1.2,
       1.35,
       1.15,
       1.25
     ],
-    "datum": "2026-09-27"
+    "datum": "2026-09-29"
   },
   "skrivkurs-vardeskapande": {
-    "kalla": "166677734dd2ab33",
+    "kalla": "1809db109bd955a9",
     "skalor": [
       1.25,
       1.35,
       1.35,
       1.25
     ],
-    "datum": "2026-09-27"
+    "datum": "2026-09-29"
   },
   "til-i-grupp": {
-    "kalla": "841a7a1a5cf63722",
+    "kalla": "dd0c794ad7d78d6f",
     "skalor": [
       1.2,
       1.35,
       1.1,
       1.3
     ],
-    "datum": "2026-09-27"
+    "datum": "2026-09-29"
   },
   "upprepad-lasning": {
-    "kalla": "aa23df75a6bcaaf3",
+    "kalla": "014a8299fddbf511",
     "skalor": [
       1.25,
       1.35,
       1.05,
       1.25
     ],
-    "datum": "2026-09-27"
+    "datum": "2026-09-29"
   }
 }

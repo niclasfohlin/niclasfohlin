@@ -6,9 +6,15 @@ import Metodkort from '../../components/Metodkort.astro';
 import { site } from '../../data/site';
 import { metoderSorterade, taggLabel } from '../../lib/innehall';
 import { harMallar } from '../../lib/metod';
-const metoder = await metoderSorterade();
+import { byggSerier, arLektion, serieTaggar } from '../../lib/serie';
+// En lektion står i sin serie och inte som eget kort (src/lib/serie.ts): seriens kort visar lektionerna och filtreras
+// på allt serien tränar.
+const allaMetoder = await metoderSorterade();
+const serier = byggSerier(allaMetoder);
+const metoder = allaMetoder.filter((m) => !arLektion(m.data));
+
 // Bara taggar som någon metod använder, i bokstavsordning efter etiketten läsaren ser.
-const taggarIBruk = [...new Set(metoder.flatMap((m) => m.data.taggar))].sort((a, b) => taggLabel(a).localeCompare(taggLabel(b), 'sv'));
+const taggarIBruk = [...new Set(allaMetoder.flatMap((m) => m.data.taggar))].sort((a, b) => taggLabel(a).localeCompare(taggLabel(b), 'sv'));
 // Bara årskursnivåer som någon metod har, så att filtret inte erbjuder tomma val.
 const arskurserIBruk = site.arskurser.filter((a) => metoder.some((m) => m.data.arskurs.includes(a)));
 const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.filter((m) => m.data.omrade === o).length]));
@@ -53,7 +59,7 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
         <h2>{omrade}</h2>
         {lista.length === 0 && <p class="meta">Inga metoder ännu. Området fylls på.</p>}
         <div class="rutnat">
-          {lista.map((m) => <Metodkort m={m} valj />)}
+          {lista.map((m) => { const serie = serier.get(m.id); return <Metodkort m={m} valj serie={serie} taggar={serie && serieTaggar(serie, allaMetoder)} />; })}
         </div>
       </section>
     );

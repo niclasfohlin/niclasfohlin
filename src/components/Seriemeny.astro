@@ -1,0 +1,29 @@
+---
+// Seriens meny överst på den generella metoden och på varje lektion (Ljudlek i grupp): översikten och lektionerna i
+// bankens ordning, med numret på förmågan. På datorn en rad flikar, på telefonen en rad som fälls ut. Den sida läsaren
+// är på är markerad. Byggs ur lektionerna (src/lib/serie.ts), så att en ny lektion kommer med utan att något skrivs om.
+import type { SerieKoppling } from '../lib/serie';
+interface Props { koppling: SerieKoppling }
+const { koppling } = Astro.props;
+const { serie, lektion } = koppling;
+const bas = '/stodundervisning';
+const har = lektion ? `${lektion.formaga} · ${lektion.namn}` : 'Översikt och lektionsbank';
+---
+<nav class="serie-meny" aria-label={`${serie.titel}: översikt och lektioner`}>
+  <p class="serie-meny-namn">{serie.titel}</p>
+  <ol class="serie-meny-flikar">
+    <li><a href={`${bas}/${serie.id}`} aria-current={lektion ? undefined : 'page'}>Översikt</a></li>
+    {serie.lektioner.map((l) => (
+      <li><a href={`${bas}/${l.id}`} aria-current={lektion?.id === l.id ? 'page' : undefined}><span class="serie-nr" aria-hidden="true">{l.formaga}</span>{l.namn}</a></li>
+    ))}
+  </ol>
+  <details class="serie-meny-fall">
+    <summary><span class="serie-meny-etikett">{lektion ? 'Lektion' : 'Du är på'}</span> {har}</summary>
+    <ol>
+      <li><a href={`${bas}/${serie.id}`} aria-current={lektion ? undefined : 'page'}>Översikt och lektionsbank</a></li>
+      {serie.lektioner.map((l) => (
+        <li><a href={`${bas}/${l.id}`} aria-current={lektion?.id === l.id ? 'page' : undefined}><span class="serie-nr" aria-hidden="true">{l.formaga}</span>{l.namn}</a></li>
+      ))}
+    </ol>
+  </details>
+</nav>

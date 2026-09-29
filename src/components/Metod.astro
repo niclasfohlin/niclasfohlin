@@ -7,13 +7,18 @@ import Elevlista from './Elevlista.astro';
 import Kortlista from './Kortlista.astro';
 import Laskort from './Laskort.astro';
 import MallBild from './MallBild.astro';
+import Lektionsbank from './Lektionsbank.astro';
+import type { SerieKoppling } from '../lib/serie';
 import type { MetodData } from '../lib/metod';
 import { ejBryt, ramArTom, passGrupper, passOrd, passOversikt, stegTexter, laskortKolumn, arEttKort } from '../lib/metod';
 import { kortInfo } from '../lib/brak';
 // "Åk 4–5" hålls ihop i ramarnas rubriker och länkar: hårt mellanslag efter Åk, ordfog efter tankstrecket.
 const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 '));
-interface Props { d: MetodData; id: string }
-const { d, id } = Astro.props;
+// koppling: den generella metodens serie med lektionsbanken, eller lektionens plats i den (src/lib/serie.ts).
+interface Props { d: MetodData; id: string; koppling?: SerieKoppling }
+const { d, id, koppling } = Astro.props;
+// Lektionsbanken står på den generella metodens sida efter urvalet, där texten säger var lektionerna finns.
+const bank = koppling && !koppling.lektion ? koppling.serie : undefined;
 const efterInledning = d.tabeller.filter((t) => t.plats === 'efter-inledning');
 const efterTidsschema = d.tabeller.filter((t) => t.plats === 'efter-tidsschema');
 const efterSteg = d.tabeller.filter((t) => t.plats === 'efter-steg');
@@ -60,6 +65,7 @@ const avsnitt = [
   d.fastnar && { id: 'fastnar', namn: 'När det fastnar' },
   d.roll && { id: 'roll', namn: 'Lärarens roll' },
   d.urval && { id: 'urval', namn: urvalNamn(d.urval.rubrik) },
+  bank && { id: 'lektionsbank', namn: 'Lektionsbanken' },
   d.hem && { id: 'hem', namn: 'Hem och skola' },
   d.progression && { id: 'progression', namn: 'Progression' },
   d.uppfoljning && { id: 'uppfoljning', namn: 'Uppföljning' },
@@ -266,6 +272,8 @@ const avsnitt = [
       {d.ramar && <p class="m-efter"><a href="#ramar">{d.ramar.rubrik}</a> ligger efter grunden, och som egna sidor att kopiera i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>}
     </section>
   )}
+
+  {bank && <Lektionsbank serie={bank} />}
 
   {efterUrval.map((t) => (
     <section>

@@ -3,30 +3,42 @@ import Base from '../../layouts/Base.astro';
 import Taggar from '../../components/Taggar.astro';
 import Metod from '../../components/Metod.astro';
 import Nedladdning from '../../components/Nedladdning.astro';
+import Seriemeny from '../../components/Seriemeny.astro';
+import Seriefot from '../../components/Seriefot.astro';
 import Delning from '../../components/Delning.astro';
 import { delningPa } from '../../lib/delning';
 import Kommentarer from '../../components/Kommentarer.astro';
 import { kommentarerPa } from '../../lib/kommentarer';
 import { publicerade, formateraDatum } from '../../lib/innehall';
 import { arskursText, ejBryt, harLathund, harMallar, metodAdress, SAJT, UPPHOV } from '../../lib/metod';
+import { byggSerier, serieKoppling } from '../../lib/serie';
 import { site } from '../../data/site';
 
 export async function getStaticPaths() {
   const metoder = await publicerade('stodundervisning');
-  return metoder.map((m) => ({ params: { id: m.id }, props: { m, alla: metoder } }));
+  const serier = byggSerier(metoder);
+  return metoder.map((m) => ({ params: { id: m.id }, props: { m, alla: metoder, koppling: serieKoppling(m.id, m.data, serier) } }));
 }
 
-const { m, alla } = Astro.props;
+const { m, alla, koppling } = Astro.props;
 const d = m.data;
-const relaterade = alla.filter((x) => d.relaterade.includes(x.id));
+// En lektion har sin serie i menyn och sist på sidan, så att Hör ihop med bara visar metoder utanför serien.
+const iSerien = (x: (typeof alla)[number]) => Boolean(koppling) && (x.id === koppling!.serie.id || x.data.serie === koppling!.serie.id);
+const relaterade = alla.filter((x) => d.relaterade.includes(x.id) && !iSerien(x));
 const adress = metodAdress(site.url, m.id).replace(/^https?:\/\//, '');
+const serie = koppling?.serie;
+const lektion = koppling?.lektion;
+const antalLektioner = serie?.lektioner.length ?? 0;
 ---
 
 <Base title={d.titel} description={d.ingress} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
   <article class="metod">
+    {koppling && <Seriemeny koppling={koppling} />}
     <div class="metod-topp">
       <header class="metod-huvud">
-        <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · {d.omrade} · {arskursText(d)}</p>
+        {lektion && serie
+          ? <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${serie.id}`}>{serie.titel}</a></p>
+          : <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · {d.omrade} · {arskursText(d)}</p>}
         <h1>{d.titel}</h1>
         {d.undertitel && <p class="undertitel">{ejBryt(d.undertitel)}</p>}
         <p class="ingress">{ejBryt(d.ingress)}</p>
@@ -34,12 +46,14 @@ const adress = metodAdress(site.url, m.id).replace(/^https?:\/\//, '');
       <div class="faktaruta">
         <p class="faktaruta-etikett">I korthet</p>
         <dl>
+          {lektion && serie && <><dt>Hör till</dt><dd><a href={`/stodundervisning/${serie.id}`}>{serie.titel}</a>, förmåga {lektion.formaga} av {serie.formagor.length}: {koppling?.formaga?.namn}</dd></>}
           <dt>Område</dt><dd>{d.omrade}</dd>
           <dt>Årskurs</dt><dd>{arskursText(d)}</dd>
           {d.format.length > 0 && <><dt>Format</dt><dd>{d.format.join(', ')}</dd></>}
           {d.tid && <><dt>Tid</dt><dd>{d.tid}</dd></>}
           {d.period && <><dt>Period</dt><dd>{d.period}</dd></>}
           {d.grupp && <><dt>Grupp</dt><dd>{d.grupp}</dd></>}
+          {serie && !lektion && antalLektioner > 0 && <><dt>Lektioner</dt><dd><a href="#lektionsbank">{antalLektioner === 1 ? 'En' : antalLektioner} i lektionsbanken</a></dd></>}
           {d.material.length > 0 && <><dt>Material</dt><dd>{d.material.join('. ')}.</dd></>}
           {d.uppdaterad && <><dt>Uppdaterad</dt><dd>{formateraDatum(d.uppdaterad)}</dd></>}
         </dl>
@@ -48,7 +62,9 @@ const adress = metodAdress(site.url, m.id).replace(/^https?:\/\//, '');
       <Nedladdning id={m.id} titel={d.titel} harMallar={harMallar(d)} harLathund={harLathund(d)} ramar={d.ramar?.rubrik.toLowerCase()} />
     </div>
 
-    <Metod d={d} id={m.id} />
+    <Metod d={d} id={m.id} koppling={koppling} />
+
+    {koppling && lektion && <Seriefot koppling={koppling} />}
 
     <footer class="metod-fot">
       <Taggar taggar={d.taggar} nivaer={d.arskurs} />
