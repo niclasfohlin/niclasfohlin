@@ -26,6 +26,7 @@ uppdaterad: 2026-09-24
 relaterade:
   - til-i-grupp
   - upprepad-lasning
+  - ljudlek-i-grupp
 utkast: false
 inledning:
   - "Läslistor utvecklar elevernas avkodningsförmåga genom strukturerad och upprepad läsning. Arbetet med en lista följer alltid samma rörelse: läraren modellerar, gruppen körläser och eleverna läser i par. Rörelsen går från mest till minst stöd, och det är rörelsen som är metoden. Listan i sig utvecklar ingen avkodning."
@@ -381,7 +382,7 @@ ramar:
         - rubrik: Så arbetar ni med listan
           falt:
             - rubrik: Fokus
-              text: "Tre ljud i följd. Orden står i ordfamiljer med samma rim: sol och kol, sal och dal, bil och sil. Eleven upptäcker att bara första ljudet byts och läser resten som en känd del."
+              text: "Tre ljud i följd. Orden står i ordfamiljer med samma rim: sol och pol, sal och dal, bil och sil. Eleven upptäcker att bara första ljudet byts och läser resten som en känd del."
             - rubrik: Så gör ni
               text: "Läs en familj i taget. Ljuda första ordet helt, läs sedan de följande genom att byta ansatsen: /s/ plus al, /d/ plus al, /m/ plus al. Det är ansats och rim i praktiken."
             - rubrik: Lyssna efter
@@ -396,7 +397,7 @@ ramar:
             - - sol
               - mat
               - ren
-            - - kol
+            - - pol
               - fat
               - sen
             - - sal
