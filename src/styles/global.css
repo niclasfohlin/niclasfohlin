@@ -506,7 +506,6 @@ button.lank:hover { color: var(--farg-accent); }
 .serie-meny-fall summary::-webkit-details-marker { display: none; }
 .serie-meny-fall summary::after { content: ''; margin-left: auto; flex: none; width: 0.5rem; height: 0.5rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-0.15rem) rotate(45deg); }
 .serie-meny-fall[open] summary::after { transform: translateY(0.1rem) rotate(-135deg); }
-.serie-meny-etikett { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--farg-text-svag); }
 .serie-meny-fall ol { list-style: none; margin: 0; padding: 0.25rem 0; border-top: 1px solid var(--farg-kant); }
 .serie-meny-fall li a { display: flex; align-items: center; gap: 0.6rem; min-height: 2.5rem; padding: 0.3rem 0.85rem; text-decoration: none; }
 .serie-meny-fall li a[aria-current="page"] { font-weight: 700; color: var(--farg-accent); background: var(--farg-ton-svag); }

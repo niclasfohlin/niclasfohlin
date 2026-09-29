@@ -1,7 +1,8 @@
 ---
 // Seriens meny överst på den generella metoden och på varje lektion (Ljudlek i grupp): översikten och lektionerna i
 // bankens ordning, med numret på förmågan. På datorn en rad flikar, på telefonen en rad som fälls ut. Den sida läsaren
-// är på är markerad. Byggs ur lektionerna (src/lib/serie.ts), så att en ny lektion kommer med utan att något skrivs om.
+// är på är markerad; på telefonen står den i raden utan synlig etikett, så att raden ryms också i 320 punkter. Byggs ur
+// lektionerna (src/lib/serie.ts), så att en ny lektion kommer med utan att något skrivs om.
 import type { SerieKoppling } from '../lib/serie';
 interface Props { koppling: SerieKoppling }
 const { koppling } = Astro.props;
@@ -18,7 +19,7 @@ const har = lektion ? `${lektion.formaga} · ${lektion.namn}` : 'Översikt och l
     ))}
   </ol>
   <details class="serie-meny-fall">
-    <summary><span class="serie-meny-etikett">{lektion ? 'Lektion' : 'Du är på'}</span> {har}</summary>
+    <summary><span class="visually-hidden">{lektion ? 'Lektion' : 'Du är på'}</span> {har}</summary>
     <ol>
       <li><a href={`${bas}/${serie.id}`} aria-current={lektion ? undefined : 'page'}>Översikt och lektionsbank</a></li>
       {serie.lektioner.map((l) => (
