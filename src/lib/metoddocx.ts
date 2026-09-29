@@ -363,7 +363,8 @@ function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[
 // brak: bråken staplas (metoder i matematik); annars står ett snedstreck kvar, som i ett datum.
 // luft: ett kort att ha på bordet (strategikortet, K-062) får luft mellan raderna.
 // elev: metoden har kort i elevens typsnitt, så bladet eleven läser står i det också; lärarens protokoll i husets.
-function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][] }, o: { storlek: number; hallIhopEfter?: boolean; brak?: boolean; luft?: boolean; elev?: boolean }): Barn[] {
+// centrera: korta ord står mitt i sina rutor, som bokstäverna (elevens blad att peka på).
+function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][] }, o: { storlek: number; hallIhopEfter?: boolean; brak?: boolean; luft?: boolean; elev?: boolean; centrera?: boolean }): Barn[] {
   const ut: Barn[] = [];
   const n = Math.max(...l.rader.map((r) => r.length), l.kolumner?.length ?? 1);
   // En kolumn där alla rader är tomma är en skrivkolumn (kartläggningens Före och Efter): smal, med rubriken i mitten,
@@ -386,7 +387,7 @@ function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][] 
   if (l.kolumner) rader.push(rad(l.kolumner.map((k, i) => cell([stycke(k, { storlek: 15, versaler: true, farg: FARG.svag, efter: 0, hallIhop: true, mitt: !!smal && skriv[i] })], { bredd: bredder[i], fyll: FARG.rand, tat: !!smal })), { huvud: true }));
   l.rader.forEach((r, ri) => {
     const ihop = ri < l.rader.length - 1 || !!o.hallIhopEfter;
-    rader.push(rad(Array.from({ length: n }, (_, i) => cell([stycke(r[i] ?? '', { storlek, fore: o.luft ? 100 : 0, efter: o.luft ? 100 : 0, hallIhop: ihop, mitt: bokstaver, brak: o.brak, font: o.elev && !smal ? ELEVTYPSNITT : undefined })], { bredd: bredder[i], tat: !!smal }))));
+    rader.push(rad(Array.from({ length: n }, (_, i) => cell([stycke(r[i] ?? '', { storlek, fore: o.luft ? 100 : 0, efter: o.luft ? 100 : 0, hallIhop: ihop, mitt: bokstaver || !!o.centrera, brak: o.brak, font: o.elev && !smal ? ELEVTYPSNITT : undefined })], { bredd: bredder[i], tat: !!smal }))));
   });
   ut.push(tabell(rader, bredder), avstand());
   return ut;
@@ -1066,6 +1067,17 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
   if (d.ramar) {
     for (const ram of d.ramar.ramar) {
       const tom = ramArTom(ram);
+      // Elevens blad (screeningen och ljudkollen i Ljudlek i grupp): bladet eleven har framför sig står för sig, med bara
+      // det eleven läser, och lärarens text på ett eget blad efter i planeringsmallarna. I filen med allt står lärarens
+      // text redan i beskrivningen, så där kommer bara bladet (Niclas 2026-09-29: screeningen på exakt två A4, med bara
+      // elevarbetet framför eleven).
+      if (arElevensBlad(ram)) {
+        const blad = elevensBladSida(ram, d);
+        bladsidor.add(blad);
+        sidor.push(blad);
+        if (!o.baraTommaRamar) sidor.push([...under(`${ram.rubrik}: till läraren`), ...ram.text.map((t) => stycke(t)), ...ramBarn({ ...ram, listor: undefined, huvud: undefined, text: [] }, { stor: true, elev: false })]);
+        continue;
+      }
       if (o.baraTommaRamar && !tom) continue;
       const sida: Flod = [...under(ram.rubrik), ...ramBarn(ram, { skrivrum: tom, stor: true, kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d) })];
       // Ett kortark fyller sin sida och foten bär upphovet, så sidan får ingen upphovsrad (den hamnade ensam på en sida).
@@ -1085,6 +1097,27 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
     ? (m.kolumner ?? []).map((k) => ({ barn: medBredd(BREDD_STAENDE, () => talsortSida(m, k)), liggande: false }))
     : [{ barn: medBredd(BREDD_MALL, () => mallSida(m)), liggande: true }]));
   return [...sidor.map((barn) => ({ barn })), ...blad.map((barn) => ({ barn, liggande: true })), ...mallsidor];
+}
+
+// En ram är elevens blad när rubriken eller första stycket säger det ("Ljudkollen, elevens blad", "Det här är elevens blad till
+// screeningen") och den har listor som eleven läser, inte bara lärarens protokoll.
+function arElevensBlad(ram: Ram): boolean {
+  const sager = /elevens blad/i.test(ram.rubrik) || /^Det här är elevens blad/i.test(ram.text[0] ?? '');
+  return sager && (ram.listor ?? []).some((l) => !arProtokoll(l));
+}
+// Elevens blad på ett A4, att lägga på bordet och peka på under screeningen (Niclas 2026-09-29): en liten rad överst som
+// säger vilket blad det är, ramens fält att fylla i (elevens namn) och listorna stort med luft runt varje bokstav och ord,
+// i elevens typsnitt när metoden har Ljudlekens kort. Bokstäver i 36 pt, ord i 28 pt och meningar i 24 pt.
+function elevensBladSida(ram: Ram, d: MetodData): Flod {
+  const ut: Flod = [stycke(`${ram.rubrik} · ${d.titel}`, { farg: FARG.svag, storlek: 18, efter: 240 })];
+  if (ram.huvud) ut.push(...ramFaltTabell(ram.huvud, { skrivrum: true, hojder: ram.huvud.map(() => 1.2), hallIhopEfter: true }));
+  const elev = harElevtypsnitt(d);
+  (ram.listor ?? []).forEach((l, i, alla) => {
+    const bokstaver = l.rader.every((r) => r.every((c) => c.trim().length <= 2));
+    const meningar = Math.max(...l.rader.map((r) => r.length)) === 1 && l.rader.some((r) => (r[0] ?? '').includes(' '));
+    ut.push(...elevlista(l, { storlek: bokstaver ? 72 : meningar ? 48 : 56, luft: true, hallIhopEfter: i < alla.length - 1, brak: d.omrade === 'Matematik', elev, centrera: !meningar }));
+  });
+  return ut;
 }
 
 // Ett blad att lägga på bordet: lathundens mall är en enda tom tabell och högst en not (talsortsmattan, bladet
