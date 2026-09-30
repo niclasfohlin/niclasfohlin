@@ -199,4 +199,5 @@ console.log(`\nNästa steg, i ordning, innan något laddas upp (METODER.md under
   2. node scripts/filmplats.mjs --utan-bygge ${ids.join(' ')}
   3. för varje metod: node scripts/metodprov.mjs <id> --bilder   (${ids.join(', ')})
   4. titta på varje film där den står, på sidan, i utskriften och i Word, och läs filmernas texter som svenska
-  5. granskning, sedan en commit och en push med allt`);
+  5. granskning, sedan en commit och en push med allt
+  6. när deployen är grön och alla metoder har film: nyhetsbrevet utskick/2026-09-30-filmer.html som kampanj i Brevo, skickat först när Niclas sagt skicka`);
