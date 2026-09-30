@@ -61,7 +61,7 @@ Varje ny artikel, metod och bok mejlas prenumeranterna automatiskt: byggpluginen
 
 ## Kvalitet
 
-1. `npm run validera` går igenom före varje commit. Den kontrollerar register, krymper nya bilder till sitt syfte, gör om lathundarnas pdf och mäter Word-lathunden i Word där något har ändrats, kontrollerar typer och bygge och ritar de delningskort som saknas.
+1. `npm run validera` går igenom före varje commit. Den kontrollerar register, krymper nya bilder till sitt syfte, gör om lathundarnas pdf och mäter Word-lathunden i Word där något har ändrats, kontrollerar typer och bygge, prövar att varje text i en metod står både i Word-filen och i sidans utskrift (`scripts/paritet.mjs`) och ritar de delningskort som saknas.
 2. Små commits med tydliga meddelanden på svenska: "Artikel: ...", "Metod: ...", "Sajt: ...".
 3. Inga nya beroenden utan skäl. Inga UI-ramverk för det som CSS och lite vanilla JS löser.
 4. Semantisk HTML, tangentbordsnavigering, kontrast och alt-texter. Mobil först.

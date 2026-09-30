@@ -178,6 +178,15 @@ if (bilder) {
         if (mallar) liggande >= mallar ? ok(`utskriften: ${storlekar.length} sidor, varav ${liggande} liggande för ${mallar} mallar`) : nej(`utskriften har ${liggande} liggande sidor, men metoden har ${mallar} mallar som ska stå liggande`);
         else ok(`utskriften: ${storlekar.length} sidor`);
       } catch { console.log('  obs  pdfinfo saknas, utskriftens sidor är inte räknade'); }
+      // Filmens stillbilder (fältet film): rutan står på utskriftens första sida, direkt efter faktarutan, som i Word
+      // (Niclas 2026-09-30). Att rutan alls finns i utskriften prövar scripts/paritet.mjs i varje validering.
+      if (metod.film) {
+        try {
+          const sida1 = execFileSync('pdftotext', ['-enc', 'UTF-8', '-f', '1', '-l', '1', join(mapp, 'utskrift.pdf'), '-'], { encoding: 'utf8' }).replace(/\s+/g, ' ');
+          const sista = metod.film.stillbilder[3].text;
+          sida1.includes(sista) ? ok('utskriften: filmens fyra stillbilder står på första sidan') : nej(`utskriften: filmens stillbilder ryms inte på första sidan (”${sista}” står inte där); korta faktarutans Material eller ingressen`);
+        } catch { console.log('  obs  pdftotext saknas, filmens stillbilder i utskriften är inte prövade'); }
+      }
       // Läskorten (K-063): varje lästräningstext är ett A4 med båda korten, med stöd och utan stöd, som i Word. Står
       // korten på var sin sida har texten eller utskriftens mått vuxit (Upprepad läsning 2026-09-27: en marginal på 1 em
       // under varje mening gav 16 sidor i stället för 8).

@@ -422,6 +422,8 @@ button.lank:hover { color: var(--farg-accent); }
 .delning.fot { margin-top: 2rem; }
 .metod-topp:has(> .delning) { grid-template-areas: "huvud" "fakta" "dela" "ladda"; }
 .metod-topp > .delning { grid-area: dela; }
+/* Filmens stillbilder (Filmbilder.astro) står bara i utskriften. */
+.film-bilder { display: none; }
 /* Lektionens film (Film.astro) direkt efter faktarutan (Niclas 2026-09-30): på telefonen under rutan, på datorn i
    vänsterspalten under ingressen, bredvid rutan, eftersom rutans smala spalt gör filmen för liten. */
 .metod-topp > .film { grid-area: film; margin: 0; }
@@ -1052,14 +1054,34 @@ html.js .bara-js { display: inline-block; }
   .sidhuvud, .sidfot, .hopp-lank, .nedladdning, .filter, .samla, .metod-fot .relaterade, .metod-fot .taggar, .valj, .kommentarer, .delning, .serie-meny, .serie-fot { display: none !important; }
   .innehall { max-width: none; padding: 0; }
   .metod { max-width: none; }
-  .metod-topp { grid-template-columns: 1fr; grid-template-areas: "huvud" "fakta"; margin: 0 0 1rem; padding: 0; background: none; box-shadow: none; clip-path: none; border-bottom: 0; }
+  /* Bara rubriken och faktarutan (och filmens stillbilder, nedan) har en rad i utskriften: delningen och nedladdningen är
+     gömda, och deras tomma rader gav annars ett glapp före texten. */
+  .metod-topp { grid-template-columns: 1fr; grid-template-areas: "huvud" "fakta" !important; row-gap: 0.7rem; margin: 0 0 1rem; padding: 0; background: none; box-shadow: none; clip-path: none; border-bottom: 0; }
   .metod-modell:has(> .metod-nav) { display: block; }
   .metod-text { max-width: none; }
   .m-rutin { box-shadow: none; }
   .faktaruta { border-color: #bbb; font-size: 9.5pt; }
+  /* Faktarutan i utskriften: två uppgifter per rad, och den långa raden (Material, klassen bred) sist över hela bredden.
+     Så blir rutan hälften så hög, och det som följer, som filmens stillbilder, ryms på första sidan (Niclas 2026-09-30). */
+  .metod-topp .faktaruta { padding: 0.6rem 0.9rem; }
+  .metod-topp .faktaruta-etikett { margin-bottom: 0.4rem; }
+  .metod-topp .faktaruta dl { grid-template-columns: max-content minmax(0, 1fr) max-content minmax(0, 1fr); gap: 0.3rem 0.9rem; }
+  .metod-topp .faktaruta dt.bred { grid-column: 1; order: 1; }
+  .metod-topp .faktaruta dd.bred { grid-column: 2 / -1; order: 1; }
   .metod-huvud h1 { font-size: 22pt; }
-  /* Filmen står inte i utskriften: Word-filen har dess fyra stillbilder på första sidan. */
+  /* Filmen står inte i utskriften. Där står rutan med dess fyra stillbilder direkt efter faktarutan, som på Word-filens
+     första sida: rubriken, ingressen och bilderna två och två i Words storlek, 7,75 cm breda, med numret och texten under
+     (Niclas 2026-09-30: full storlek, mindre ser konstigt ut). Rutan hålls ihop och ryms på första sidan tack vare den
+     lägre faktarutan ovan. */
   .film { display: none; }
+  .metod-topp:has(> .film-bilder) { grid-template-areas: "huvud" "fakta" "bilder" !important; }
+  .film-bilder { display: block; grid-area: bilder; break-inside: avoid; margin: 0; }
+  .film-bilder h2 { font-family: var(--typsnitt-ui); font-size: 12pt; color: var(--farg-accent); margin: 0 0 0.15rem; }
+  .film-bilder-ingress { font-family: var(--typsnitt-ui); font-size: 9pt; line-height: 1.3; color: #555; margin: 0 0 0.3rem; }
+  .film-bilder ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 7.75cm); gap: 0.25cm 0.9cm; }
+  .film-bilder img { display: block; width: 100%; height: auto; }
+  .film-bilder li p { font-family: var(--typsnitt-ui); font-size: 9pt; line-height: 1.3; margin: 0.06cm 0 0; }
+  .film-bilder li b { color: var(--farg-accent); }
   .metod-modell { font-size: 10.5pt; }
   .metod-modell h2 { font-size: 13pt; margin-top: 1.4em; break-after: avoid; }
   /* Rubrik och inledande stycke följer med det som kommer efter; snabbmallen hålls ihop. */

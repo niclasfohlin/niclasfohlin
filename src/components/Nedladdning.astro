@@ -32,7 +32,18 @@ const bas = `/stodundervisning/${id}`;
 
 <script>
   // Utskriftsknappen visas bara när html har klassen js; utan JavaScript skriver läsaren ut som vanligt.
+  // Bilder som bara står i utskriften (filmens stillbilder, Filmbilder.astro) hämtas först nu: knappen väntar in dem,
+  // högst tre sekunder, och den som skriver ut med webbläsarens meny får dem hämtade när utskriften börjar.
+  const utskriftsbilder = () => [...document.querySelectorAll<HTMLImageElement>('img[data-utskriftsbild]')];
+  const hamta = () => Promise.all(utskriftsbilder().map((b) => {
+    b.loading = 'eager';
+    return b.naturalWidth > 0 ? undefined : new Promise((klar) => { b.addEventListener('load', klar, { once: true }); b.addEventListener('error', klar, { once: true }); });
+  }));
+  window.addEventListener('beforeprint', () => { hamta(); });
   for (const knapp of document.querySelectorAll<HTMLButtonElement>('[data-skriv-ut]')) {
-    knapp.addEventListener('click', () => window.print());
+    knapp.addEventListener('click', async () => {
+      await Promise.race([hamta(), new Promise((klar) => setTimeout(klar, 3000))]);
+      window.print();
+    });
   }
 </script>

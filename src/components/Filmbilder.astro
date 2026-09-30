@@ -1,0 +1,22 @@
+---
+// Filmens fyra stillbilder i sidans utskrift (fältet film, src/lib/film.ts): rutan Så gör eleven direkt efter faktarutan,
+// som på Word-filens första sida (filmBarn i metoddocx.ts), med rubriken, ingressen och en text under varje bild. På
+// skärmen står filmen (Film.astro), och rutan syns inte; bilderna hämtas först när sidan skrivs ut, så att den som bara
+// öppnar sidan inte laddar dem (Niclas 2026-09-30: rutan kom inte med i Skriv ut hela beskrivningen).
+import { STILLBILD_MATT, stillbilder, type Film } from '../lib/film';
+interface Props { id: string; film: Film }
+const { id, film } = Astro.props;
+const bilder = stillbilder(id);
+---
+<section class="film-bilder" aria-hidden="true">
+  <h2>{film.rubrik}</h2>
+  <p class="film-bilder-ingress">{film.ingress}</p>
+  <ol>
+    {film.stillbilder.map((b, i) => (
+      <li>
+        <img data-utskriftsbild src={bilder[i]} alt="" width={STILLBILD_MATT.bredd} height={STILLBILD_MATT.hojd} loading="lazy" decoding="async" />
+        <p><b>{i + 1} · </b>{b.text}</p>
+      </li>
+    ))}
+  </ol>
+</section>

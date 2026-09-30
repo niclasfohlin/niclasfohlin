@@ -6,6 +6,7 @@ import Nedladdning from '../../components/Nedladdning.astro';
 import Seriemeny from '../../components/Seriemeny.astro';
 import Seriefot from '../../components/Seriefot.astro';
 import Film from '../../components/Film.astro';
+import Filmbilder from '../../components/Filmbilder.astro';
 import { arLektionsfilm } from '../../lib/film';
 import Delning from '../../components/Delning.astro';
 import { delningPa } from '../../lib/delning';
@@ -56,13 +57,15 @@ const antalLektioner = serie?.lektioner.length ?? 0;
           {d.period && <><dt>Period</dt><dd>{d.period}</dd></>}
           {d.grupp && <><dt>Grupp</dt><dd>{d.grupp}</dd></>}
           {serie && !lektion && antalLektioner > 0 && <><dt>Lektioner</dt><dd><a href="#lektionsbank">{antalLektioner === 1 ? 'En' : antalLektioner} i lektionsbanken</a></dd></>}
-          {d.material.length > 0 && <><dt>Material</dt><dd>{d.material.join('. ')}.</dd></>}
+          {d.material.length > 0 && <><dt class="bred">Material</dt><dd class="bred">{d.material.join('. ')}.</dd></>}
           {d.uppdaterad && <><dt>Uppdaterad</dt><dd>{formateraDatum(d.uppdaterad)}</dd></>}
         </dl>
       </div>
       {/* Lektionens film är dess lathund: faktarutan först och sedan det eleven gör, innan texten börjar (Niclas 2026-09-30).
           På datorn står den under ingressen, med faktarutan till höger. */}
       {d.film && arLektionsfilm(d.film) && <Film id={m.id} film={d.film} titel={d.titel} />}
+      {/* I utskriften står filmens fyra stillbilder här, direkt efter faktarutan, som på Word-filens första sida. */}
+      {d.film && <Filmbilder id={m.id} film={d.film} />}
       {delningPa && <Delning sida={`/stodundervisning/${m.id}`} titel={d.titel} plats="topp" />}
       <Nedladdning id={m.id} titel={d.titel} harMallar={harMallar(d)} harLathund={harLathund(d)} ramar={d.ramar?.rubrik.toLowerCase()} />
     </div>
