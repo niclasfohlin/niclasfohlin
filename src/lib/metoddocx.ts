@@ -196,7 +196,9 @@ function numrerad(text: string, o: StyckeVal = {}): Paragraph {
 }
 function nyLista(): void { instans += 1; }
 
-// tat: 2 pt luft över och under texten i stället för 4, för lärarens protokoll (K-071).
+// tat: 1,5 pt luft över och under texten i stället för 4, för lärarens protokoll (K-071). Google ritar marginalen i hela
+// bildpunkter (googleTabeller): 2 pt blev 2,25 i Google, och protokollets fulla mallsida spillde en rad där (K-141). Med
+// 1,5 pt är raden omkring 6 mm i både Word och Google.
 interface CellVal { bredd: number; fyll?: string; kanter?: { top?: IBorderOptions; bottom?: IBorderOptions; left?: IBorderOptions; right?: IBorderOptions }; span?: number; mitt?: boolean; tat?: boolean }
 function cell(barn: Barn[], o: CellVal): TableCell {
   return new TableCell({
@@ -204,7 +206,7 @@ function cell(barn: Barn[], o: CellVal): TableCell {
     columnSpan: o.span,
     shading: o.fyll ? { type: ShadingType.CLEAR, fill: o.fyll, color: 'auto' } : undefined,
     borders: { ...runt(kant()), ...(o.kanter ?? {}) },
-    margins: { top: o.tat ? 40 : 80, bottom: o.tat ? 40 : 80, left: 120, right: 120 },
+    margins: { top: o.tat ? 30 : 80, bottom: o.tat ? 30 : 80, left: 120, right: 120 },
     verticalAlign: o.mitt ? VerticalAlign.CENTER : VerticalAlign.TOP,
     children: barn.length ? barn : [new Paragraph({ spacing: { after: 0 } })],
   });
@@ -1938,7 +1940,7 @@ if (typeof (Body.prototype as unknown as { createSectionParagraph?: unknown }).c
 // twips med 80 upptill och nedtill blev 53,5 pt i Word och 45,8 pt i Google. Höjden får därför marginalerna som Word
 // lägger till, cellernas marginaler upptill och nedtill blir 0,
 // och luften ligger som ett stycke av samma höjd först och sist i cellen. Då ritar Word raden som förut och Google
-// likadant (53,5 och 54,0 pt; vikkortet 93,7 och 94,5 pt).
+// nästan likadant (53,5 och 54,0 pt; vikkortet 93,7 och 94,5 pt), och resten är Googles bildpunkter nedan.
 //
 // En tabell i en cell har ett stycke på en punkt före och efter sig. Google tillåter ingen tabell först eller sist i en
 // cell och lägger där ett tomt stycke i normal storlek; docx lägger ett sådant efter. En ruta i lathundens spalter blev
@@ -1974,6 +1976,31 @@ function kringTabeller(barn: readonly (Paragraph | Table)[]): (Paragraph | Table
   else if (ut.at(-2) instanceof Table && tomtStycke(ut.at(-1))) ut[ut.length - 1] = avsnittsStycke();
   return ut;
 }
+// Google Dokument ritar tabellens lodräta mått i hela bildpunkter, 0,75 pt eller 15 twips, och Word exakt (mätbänken,
+// scripts/matbank/tabellrader.mjs och radhojd.mjs, 2026-09-30, K-141). Cellmarginalen och en satt radhöjd avrundas till
+// närmaste bildpunkt, och kanten mellan två rader tar en bildpunkt i Google (0,25 till 1 pt) där Word räknar kantens
+// tjocklek; styckeavstånden ritar båda exakt. Protokollets rad med 2 pt marginal och kant på 0,5 pt blev 17,9 pt i Word
+// och 18,7 i Google, och en full mallsida spillde en rad i Google. Marginalerna och höjderna står därför i hela
+// bildpunkter, och det kanten skiljer ligger i den nedre marginalen, så att raden blir lika hög i båda och Google ritar
+// den som förut. En exakt höjd räknar kanten i Word men inte i Google; där står kantens bildpunkt som nedre marginal,
+// som Word lägger utanför en exakt höjd.
+const BILDPUNKT = 15;
+const bildpunkt = (twips: number) => Math.round(twips / BILDPUNKT) * BILDPUNKT;
+// Kanten mellan raderna i punkter, i Word och i Google: den tjockaste över eller under en cell i raden. En dubbel linje
+// är inte mätt och räknas lika i båda.
+function radKant(celler: TableCell[]): { word: number; google: number } {
+  let word = 0;
+  let dubbel = false;
+  for (const c of celler) {
+    const k = cellInst(c).borders;
+    for (const s of [k?.top, k?.bottom]) {
+      if (!s || s.style === BorderStyle.NIL || s.style === BorderStyle.NONE || !s.size) continue;
+      if (s.style === BorderStyle.DOUBLE) dubbel = true;
+      word = Math.max(word, s.size / 8);
+    }
+  }
+  return { word, google: !word || dubbel ? word : Math.max(0.75, Math.round(word / 0.75) * 0.75) };
+}
 function googleTabeller(barn: readonly unknown[]): void {
   for (const b of barn) {
     if (!(b instanceof Table)) continue;
@@ -1990,16 +2017,24 @@ function googleTabeller(barn: readonly unknown[]): void {
       const upp = rad.height ? Math.max(0, ...marg.map((m) => m.top ?? 0)) : 0;
       const ned = rad.height ? Math.max(0, ...marg.map((m) => m.bottom ?? 0)) : 0;
       const inre = celler.some((c) => cellInst(c).children.some((x) => x instanceof Table));
-      if (!upp && !ned && !inre) return;
+      const exakt = rad.height?.rule === HeightRule.EXACT;
+      const kant = radKant(celler);
+      // Det kanten skiljer, i twips. Mer än en halv bildpunkt delas mellan marginalen upptill och nedtill, så att Google
+      // avrundar bort det i båda.
+      const skillnad = Math.round((kant.google - kant.word) * 20);
+      const [overTill, underTill] = Math.abs(skillnad) * 2 > BILDPUNKT ? [Math.ceil(skillnad / 2), Math.floor(skillnad / 2)] : [0, skillnad];
       const nya = celler.map((c, j) => {
         const o = cellInst(c);
         const hall = o.children.some(haller);
         const t = upp || ned ? marg[j].top ?? 0 : 0;
         const n = upp || ned ? marg[j].bottom ?? 0 : 0;
-        const barnet = kringTabeller([...(t ? [luft(t, hall)] : []), ...o.children, ...(n ? [luft(n, hall)] : [])]);
-        return new TableCell({ ...o, ...(upp || ned ? { margins: { ...marg[j], top: 0, bottom: 0 } } : {}), children: barnet });
+        const barnet = upp || ned || inre ? kringTabeller([...(t ? [luft(t, hall)] : []), ...o.children, ...(n ? [luft(n, hall)] : [])]) : o.children;
+        const margins = rad.height
+          ? { ...marg[j], top: 0, bottom: exakt ? Math.round(kant.google * 20) : Math.max(0, skillnad) }
+          : { ...marg[j], top: Math.max(0, bildpunkt(marg[j].top ?? 0) + overTill), bottom: Math.max(0, bildpunkt(marg[j].bottom ?? 0) + underTill) };
+        return new TableCell({ ...o, margins, children: barnet });
       });
-      const hojd = rad.height ? Number(rad.height.value) + (rad.height.rule === HeightRule.EXACT ? ned : upp + ned) : 0;
+      const hojd = rad.height ? bildpunkt(Number(rad.height.value) + (exakt ? ned : upp + ned)) + (!exakt && skillnad < 0 ? skillnad : 0) : 0;
       rot[i] = new TableRow({ ...rad, ...(rad.height ? { height: { value: hojd, rule: rad.height.rule } } : {}), children: nya });
     });
   }

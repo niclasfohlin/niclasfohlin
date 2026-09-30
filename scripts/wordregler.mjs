@@ -48,22 +48,31 @@ const FORBJUDNA_TECKEN = {
 };
 const UNDANTAG = [];
 
-// Tabellraderna, nivå för nivå: varje rads egen höjd, den största cellmarginalen upptill eller nedtill i radens egna
-// celler och om någon av dess celler har en tabell i sig.
+// Tabellraderna, nivå för nivå: varje rads egen höjd, den största cellmarginalen upptill och nedtill i radens egna
+// celler, den tjockaste kanten över eller under en cell i punkter och om någon av dess celler har en tabell i sig.
 function tabellrader(xml) {
   const rader = [];
   const oppna = [];
-  for (const m of xml.matchAll(/<w:tbl>|<w:tr>|<\/w:tr>|<w:trHeight\b[^>]*\/>|<w:tcMar>(?:(?!<\/w:tcMar>).)*<\/w:tcMar>/gs)) {
+  for (const m of xml.matchAll(/<w:tbl>|<w:tr>|<\/w:tr>|<w:trHeight\b[^>]*\/>|<w:tcMar>(?:(?!<\/w:tcMar>).)*<\/w:tcMar>|<w:tcBorders>(?:(?!<\/w:tcBorders>).)*<\/w:tcBorders>/gs)) {
     const t = m[0];
     const rad = oppna[oppna.length - 1];
     if (t === '<w:tbl>') { if (rad) rad.inre = true; }
-    else if (t === '<w:tr>') oppna.push({ index: m.index, hojd: null, marginal: 0, inre: false });
+    else if (t === '<w:tr>') oppna.push({ index: m.index, hojd: null, upp: 0, ned: 0, kant: 0, inre: false });
     else if (t === '</w:tr>') rader.push(oppna.pop());
     else if (t.startsWith('<w:trHeight') && rad) rad.hojd = t.match(/w:hRule="(\w+)"/)?.[1] ?? 'atLeast';
-    else if (rad) for (const v of t.matchAll(/<w:(?:top|bottom) w:type="dxa" w:w="(\d+)"/g)) rad.marginal = Math.max(rad.marginal, Number(v[1]));
+    else if (t.startsWith('<w:tcBorders') && rad) for (const v of t.matchAll(/<w:(?:top|bottom)\b([^>]*)\/>/g)) {
+      const stil = v[1].match(/w:val="(\w+)"/)?.[1];
+      if (stil && stil !== 'nil' && stil !== 'none') rad.kant = Math.max(rad.kant, Number(v[1].match(/w:sz="(\d+)"/)?.[1] ?? 0) / 8);
+    }
+    else if (rad) for (const v of t.matchAll(/<w:(top|bottom) w:type="dxa" w:w="(\d+)"/g)) {
+      if (v[1] === 'top') rad.upp = Math.max(rad.upp, Number(v[2]));
+      else rad.ned = Math.max(rad.ned, Number(v[2]));
+    }
   }
   return rader;
 }
+// Kantens bildpunkter i Google, i twips: närmaste antal hela bildpunkter (0,75 pt), minst en (mätbänken 2026-09-30).
+const kantensBildpunkter = (pt) => (pt > 0 ? Math.max(15, Math.round(pt / 0.75) * 15) : 0);
 // Texten närmast efter träffen, så att stället går att känna igen i filen.
 const utdrag = (xml, i) => (xml.slice(i, i + 6000).match(/<w:t(?:\s[^>]*)?>[^<]*<\/w:t>/g) ?? []).map((t) => t.replace(/<[^>]+>/g, '')).join(' ').replace(/\s+/g, ' ').trim().slice(0, 70) || 'utan text';
 const REGLER = [
@@ -73,9 +82,9 @@ const REGLER = [
     prova: (xml) => [...xml.matchAll(/<w:spacing\b[^>]*w:lineRule="(exact|atLeast)"/g)].map((m) => m.index),
   },
   {
-    namn: 'rad med satt höjd och cellmarginal upptill eller nedtill',
-    skal: 'Word lägger marginalen ovanpå radens höjd, Google räknar in den; googleTabeller() i dokument() ska ha tagit bort den',
-    prova: (xml) => tabellrader(xml).filter((r) => r.hojd && r.marginal > 0).map((r) => r.index),
+    namn: 'rad med satt höjd och cellmarginal upptill, eller nedtill mer än kantens bildpunkter',
+    skal: 'Word lägger marginalen ovanpå radens höjd, Google räknar in den; googleTabeller() i dokument() flyttar den till höjden och lämnar nedtill bara kantens bildpunkter',
+    prova: (xml) => tabellrader(xml).filter((r) => r.hojd && (r.upp > 0 || r.ned > kantensBildpunkter(r.kant))).map((r) => r.index),
   },
   {
     namn: 'tabell i en cell i en rad med satt höjd',

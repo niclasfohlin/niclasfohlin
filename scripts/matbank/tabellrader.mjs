@@ -7,7 +7,7 @@ export const namn = 'tabellrader';
 
 const rader = (o = {}) => (e) => {
   const v = { kant: 4, marginal: 40, storlek: 22, celler: 3, line: undefined, ...o };
-  const k = v.kant ? { style: BorderStyle.SINGLE, size: v.kant, color: '999999' } : { style: BorderStyle.NIL, size: 0, color: 'auto' };
+  const k = v.kant ? { style: v.stil ?? BorderStyle.SINGLE, size: v.kant, color: '999999' } : { style: BorderStyle.NIL, size: 0, color: 'auto' };
   const bredder = v.celler === 1 ? [9600] : [3200, 3200, 3200];
   return [new Table({
     width: { size: 9600, type: WidthType.DXA }, columnWidths: bredder, layout: TableLayoutType.FIXED,
@@ -42,4 +42,8 @@ export const varianter = {
   T: { text: 'marginal 80, kant 6 (0,75 pt)', barn: rader({ marginal: 80, kant: 6 }) },
   U: { text: 'marginal 35 (1,75 pt)', barn: rader({ marginal: 35 }) },
   V: { text: 'marginal 25 (1,25 pt)', barn: rader({ marginal: 25 }) },
+  W: { text: 'kant 12 (1,5 pt)', barn: rader({ kant: 12 }) },
+  X: { text: 'kant 24 (3 pt)', barn: rader({ kant: 24 }) },
+  Y: { text: 'prickad kant 14 (1,75 pt)', barn: rader({ kant: 14, stil: BorderStyle.DOTTED }) },
+  Z: { text: 'streckad kant 6 (0,75 pt)', barn: rader({ kant: 6, stil: BorderStyle.DASHED }) },
 };
