@@ -30,11 +30,12 @@
   status = 302
   force = true
 
-# Grundläggande säkerhetsrubriker för alla sidor.
+# Grundläggande säkerhetsrubriker för alla sidor. SAMEORIGIN i stället för DENY (2026-09-30): metodsidan bäddar in
+# sina filmer som <object> (Film.astro), som räknas som en ram, och andra webbplatser stoppas ändå.
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "DENY"
+    X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"

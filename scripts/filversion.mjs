@@ -11,8 +11,8 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-// Länkar, bilder och knapparnas adresser (Drive, filmens paus) till filer under /stodundervisning/.
-export const FILLANK = /\b(href|src|data-drive-src|data-film|data-stillbild)="(\/stodundervisning\/[^"?#\s]+\.(?:docx|pptx|pdf|svg))"/g;
+// Länkar, bilder, filmernas <object data> och knapparnas adresser (Drive, filmen) till filer under /stodundervisning/.
+export const FILLANK = /\b(href|src|data-drive-src|data-film|data-stillbild|data)="(\/stodundervisning\/[^"?#\s]+\.(?:docx|pptx|pdf|svg))"/g;
 
 export function htmlFiler(mapp) {
   const ut = [];

@@ -1,9 +1,15 @@
 ---
 // En film ur metodriggen (src/lib/film.ts) på metodens sida: huvudfilmen efter faktarutan eller en extrafilm vid sitt
-// moment, alltid genom Filmruta.astro, som också ritar utskriftens stillbilder på samma plats. Filmen visas som <img>,
-// loopar och har inget ljud. Knappen pausar den genom att byta filmen mot stillbild 1 och startar den igen (WCAG
-// 2.2.2); med minskad rörelse står filmen still av sig själv, och knappen visas inte. Texten till filmen är
-// beskrivningen, samma text som filmens textrad.
+// moment, alltid genom Filmruta.astro, som också ritar utskriftens stillbilder på samma plats. Filmen loopar och har inget
+// ljud.
+//
+// Filmen står i en <object>, inte en <img> (Niclas 2026-09-30: på datorn stod filmen still utan knapp, och Pausa började
+// om filmen i stället för att frysa den). Som <object> är svg-filen ett eget dokument, så dess globala CSS (g, korta id
+// och @keyframes) stannar i filmen, men sidan når in i den: Pausa sätter --spel: paused och fryser filmen där den är,
+// Spela fortsätter därifrån (WCAG 2.2.2), och skriptet tar bort filmens regel för minskad rörelse, så att filmen spelar
+// också på en dator där Windows animeringar är avstängda ("Den måste ju spela alldeles oavsett"). Netlify skickar
+// X-Frame-Options: SAMEORIGIN, så att sidan får bädda in sin egen fil (netlify.toml). Går filmen inte att bädda in
+// byter skriptet till en <img> med samma fil. En extrafilm hämtas först när läsaren närmar sig den.
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { FILM_MATT, filmAdress, filmNamn, stillbilder, type MetodFilm } from '../lib/film';
@@ -14,9 +20,12 @@ for (const fil of [filmAdress(f), ...stillbilder(f)]) {
   if (!existsSync(join(process.cwd(), 'public', fil))) throw new Error(`${titel}: filmens fil ${fil} saknas i public/. Filerna kommer i metodriggens filmpaket (out/filmpaket/).`);
 }
 const sekunder = Math.round(f.film.sekunder);
+const alt = `${filmNamn(f)}, filmen: ${f.film.beskrivning}`;
 ---
-<figure class="film" data-film data-namn={filmNamn(f)}>
-  <img src={filmAdress(f)} data-film={filmAdress(f)} data-stillbild={stillbilder(f)[0]} alt={`${filmNamn(f)}, filmen: ${f.film.beskrivning}`} width={FILM_MATT.bredd} height={FILM_MATT.hojd} loading={f.huvud ? undefined : 'lazy'} decoding="async" />
+<figure class="film" data-film={filmAdress(f)} data-namn={filmNamn(f)}>
+  <object class="film-bild" type="image/svg+xml" data={f.huvud ? filmAdress(f) : undefined} role="img" aria-label={alt} width={FILM_MATT.bredd} height={FILM_MATT.hojd}>
+    <img src={stillbilder(f)[0]} alt={alt} width={FILM_MATT.bredd} height={FILM_MATT.hojd} loading="lazy" decoding="async" />
+  </object>
   <figcaption>
     <button type="button" class="film-knapp" hidden>Pausa</button>
     <span><strong>{filmNamn(f)}</strong> · {sekunder} sekunder, som börjar om</span>
@@ -24,20 +33,61 @@ const sekunder = Math.round(f.film.sekunder);
 </figure>
 
 <script>
-  // Pausa byter filmen mot stillbild 1, Spela sätter tillbaka filmen, som börjar om. Med minskad rörelse står filmen
-  // still av sig själv, och knappen behövs inte.
-  const stilla = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  for (const figur of document.querySelectorAll<HTMLElement>('[data-film]')) {
-    const bild = figur.querySelector('img');
+  // Filmen i <object>: skriptet tar bort filmens regel för minskad rörelse, så att den spelar, och ger knappen Pausa och
+  // Spela, som fryser och fortsätter filmen genom CSS-variabeln --spel i svg-filen.
+  const figurer = [...document.querySelectorAll<HTMLElement>('figure.film[data-film]')];
+  const somBild = (figur: HTMLElement, obj: HTMLObjectElement) => {
+    // Skyddsnätet: går filmen inte att bädda in visas den som bild, som förut.
+    const bild = document.createElement('img');
+    bild.src = figur.dataset.film!;
+    bild.alt = obj.getAttribute('aria-label') ?? '';
+    bild.width = 960;
+    bild.height = 540;
+    bild.className = 'film-bild';
+    obj.replaceWith(bild);
+  };
+  const starta = (figur: HTMLElement, obj: HTMLObjectElement) => {
+    const svg = obj.contentDocument?.documentElement;
+    if (!svg || svg.nodeName.toLowerCase() !== 'svg') return false;
+    // Filmen spelar också med minskad rörelse: regeln som stänger av den tas bort ur filmens egna stilar.
+    for (const blad of [...(obj.contentDocument?.styleSheets ?? [])]) {
+      const regler = blad.cssRules;
+      for (let i = regler.length - 1; i >= 0; i--) {
+        const r = regler[i] as CSSMediaRule;
+        if (r.media && r.media.mediaText.includes('prefers-reduced-motion')) blad.deleteRule(i);
+      }
+    }
     const knapp = figur.querySelector<HTMLButtonElement>('.film-knapp');
-    if (!bild || !knapp || stilla) continue;
+    if (!knapp) return true;
+    const namn = figur.dataset.namn ?? '';
+    const satt = (spelar: boolean) => {
+      svg.style.setProperty('--spel', spelar ? 'running' : 'paused');
+      knapp.textContent = spelar ? 'Pausa' : 'Spela';
+      knapp.setAttribute('aria-label', `${spelar ? 'Pausa' : 'Spela'} filmen ${namn}`.trim());
+    };
     knapp.hidden = false;
-    knapp.addEventListener('click', () => {
-      const pausa = knapp.textContent === 'Pausa';
-      bild.src = pausa ? bild.dataset.stillbild! : bild.dataset.film!;
-      knapp.textContent = pausa ? 'Spela' : 'Pausa';
-      knapp.setAttribute('aria-label', `${pausa ? 'Spela' : 'Pausa'} filmen ${figur.dataset.namn ?? ''}`.trim());
-    });
-    knapp.setAttribute('aria-label', `Pausa filmen ${figur.dataset.namn ?? ''}`.trim());
+    knapp.onclick = () => satt(knapp.textContent !== 'Pausa');
+    satt(true);
+    return true;
+  };
+  const ladda = (figur: HTMLElement) => {
+    const obj = figur.querySelector<HTMLObjectElement>('object.film-bild');
+    if (!obj) return;
+    let klar = false;
+    const forsok = () => { if (!klar && starta(figur, obj)) klar = true; };
+    obj.addEventListener('load', () => { forsok(); if (!klar) somBild(figur, obj); }, { once: true });
+    if (!obj.getAttribute('data')) obj.setAttribute('data', figur.dataset.film!);
+    forsok();
+    // Laddar filmen inte alls inom tio sekunder visas den som bild.
+    setTimeout(() => { forsok(); if (!klar && obj.isConnected) somBild(figur, obj); }, 10000);
+  };
+  // Huvudfilmen laddas direkt, en extrafilm när läsaren närmar sig den.
+  const nara = 'IntersectionObserver' in window
+    ? new IntersectionObserver((poster, iakttagare) => { for (const p of poster) if (p.isIntersecting) { iakttagare.unobserve(p.target); ladda(p.target as HTMLElement); } }, { rootMargin: '600px 0px' })
+    : undefined;
+  for (const figur of figurer) {
+    const obj = figur.querySelector('object.film-bild');
+    if (obj?.getAttribute('data') || !nara) ladda(figur);
+    else nara.observe(figur);
   }
 </script>

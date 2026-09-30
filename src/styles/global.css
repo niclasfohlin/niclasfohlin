@@ -369,7 +369,9 @@ html.js .samla {
 .metod-text .film { margin: 1.5rem 0; }
 /* Stillbilden (paus) är 960 × 500, filmen 960 × 540: stillbilden står överst i filmens ruta, och raden under har filmens
    bakgrund, där filmens textrad annars står. */
-.film img { display: block; width: 100%; height: auto; aspect-ratio: 960 / 540; object-fit: contain; object-position: top; background: #f5f3ee; border: 1px solid var(--farg-kant); border-radius: var(--radie); }
+/* Filmen är en <object> (Film.astro), eller en <img> när den inte går att bädda in. */
+.film .film-bild { display: block; width: 100%; height: auto; aspect-ratio: 960 / 540; object-fit: contain; object-position: top; background: #f5f3ee; border: 1px solid var(--farg-kant); border-radius: var(--radie); }
+.film .film-bild img { display: block; width: 100%; height: auto; }
 .film figcaption { display: flex; align-items: center; gap: 0.75rem; margin: 0.5rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
 .film figcaption strong { color: var(--farg-text); font-weight: 600; }
 .film-knapp { flex: none; min-height: 2.25rem; padding: 0.3rem 0.9rem; border: 1px solid var(--farg-kant); border-radius: 999px; background: var(--farg-yta); color: var(--farg-accent); font: inherit; font-weight: 600; cursor: pointer; }
