@@ -230,4 +230,57 @@ if (utan.length) {
   for (const rad of utan.slice(0, 10)) console.error(`  ${rad}`);
   process.exit(1);
 }
-console.log(`Paritet: ${provade} texter i ${filer.length} metoder står både i Word-filen och i sidans utskrift, filmerna står på samma plats i båda, och länkarna till filerna bär version.`);
+// Elevens typsnitt (K-130): varje tecken som Word-filerna skriver i Ljudlek Elev finns i typsnittsfilen, annars ritar
+// Word det i ett annat typsnitt mitt i elevens material. Webbfilen görs ur samma teckenlista (scripts/elevtypsnitt.py).
+// Teckentabellen (cmap, format 4 och 12) läses direkt ur ttf-filen.
+function cmapTecken(buf) {
+  const dv = new DataView(buf.buffer, buf.byteOffset, buf.byteLength);
+  let cmap = -1;
+  for (let i = 0; i < dv.getUint16(4); i++) if (buf.toString('latin1', 12 + 16 * i, 16 + 16 * i) === 'cmap') cmap = dv.getUint32(12 + 16 * i + 8);
+  const ut = new Set();
+  if (cmap < 0) return ut;
+  for (let i = 0; i < dv.getUint16(cmap + 2); i++) {
+    const off = cmap + dv.getUint32(cmap + 4 + 8 * i + 4);
+    const format = dv.getUint16(off);
+    if (format === 4) {
+      const segX2 = dv.getUint16(off + 6);
+      const [slut, start, delta, spann] = [off + 14, off + 16 + segX2, off + 16 + 2 * segX2, off + 16 + 3 * segX2];
+      for (let k = 0; k < segX2 / 2; k++) {
+        const [e, st, d, r] = [dv.getUint16(slut + 2 * k), dv.getUint16(start + 2 * k), dv.getInt16(delta + 2 * k), dv.getUint16(spann + 2 * k)];
+        for (let c = st; c <= e && c !== 0xffff; c++) {
+          let glyf = r === 0 ? (c + d) & 0xffff : dv.getUint16(spann + 2 * k + r + 2 * (c - st));
+          if (r !== 0 && glyf) glyf = (glyf + d) & 0xffff;
+          if (glyf) ut.add(c);
+        }
+      }
+    } else if (format === 12) {
+      for (let j = 0; j < dv.getUint32(off + 12); j++) {
+        const b = off + 16 + 12 * j;
+        for (let c = dv.getUint32(b); c <= dv.getUint32(b + 4); c++) ut.add(c);
+      }
+    }
+  }
+  return ut;
+}
+const typsnitt = cmapTecken(readFileSync(join(rot, 'public/fonts/ljudlek-elev/LjudlekElev-Regular.ttf')));
+const saknasTecken = new Map();
+for (const namn of readdirSync(join(rot, 'dist/stodundervisning')).filter((f) => f.endsWith('.docx'))) {
+  const zip = await JSZip.loadAsync(readFileSync(join(rot, 'dist/stodundervisning', namn)));
+  const xml = await zip.file('word/document.xml').async('string');
+  for (const m of xml.matchAll(/<(w|m):r(?:\s[^>]*)?>([\s\S]*?)<\/\1:r>/g)) {
+    if (!m[2].includes('w:ascii="Ljudlek Elev"')) continue;
+    for (const t of m[2].matchAll(/<[wm]:t(?:\s[^>]*)?>([^<]*)<\/[wm]:t>/g)) {
+      for (const tecken of avkoda(t[1])) {
+        const c = tecken.codePointAt(0);
+        if (c > 0x20 && !typsnitt.has(c)) saknasTecken.set(tecken, new Set([...(saknasTecken.get(tecken) ?? []), namn]));
+      }
+    }
+  }
+}
+if (!typsnitt.size || saknasTecken.size) {
+  console.error(typsnitt.size
+    ? `paritet: elevens typsnitt saknar ${saknasTecken.size} tecken som Word-filernas elevmaterial använder:\n${[...saknasTecken].map(([t, f]) => `  ${t} (U+${t.codePointAt(0).toString(16).toUpperCase().padStart(4, '0')}) i ${[...f].slice(0, 4).join(', ')}${f.size > 4 ? ` och ${f.size - 4} till` : ''}`).join('\n')}\nLägg tecknen i TECKEN i scripts/elevtypsnitt.py och kör skriptet, eller skriv texten utan dem.`
+    : 'paritet: hittar ingen teckentabell i public/fonts/ljudlek-elev/LjudlekElev-Regular.ttf.');
+  process.exit(1);
+}
+console.log(`Paritet: ${provade} texter i ${filer.length} metoder står både i Word-filen och i sidans utskrift, filmerna står på samma plats i båda, länkarna till filerna bär version, och elevens typsnitt har varje tecken i elevmaterialet.`);

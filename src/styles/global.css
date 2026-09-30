@@ -645,7 +645,8 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-kortlista ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .m-kortlista.korta ul { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .m-kortlista.ett ul { grid-template-columns: minmax(0, 1fr); }
-.m-kort { position: relative; border: 1.5px dashed var(--farg-text-svag); border-radius: 4px; padding: 1.5rem 0.9rem 0.9rem; min-height: 7rem; display: flex; align-items: center; justify-content: center; text-align: center; font-family: var(--typsnitt-ui); font-size: 1.15rem; line-height: 1.45; }
+/* Korten att klippa ligger framför eleven: i elevens typsnitt (K-130), som i Word. */
+.m-kort { position: relative; border: 1.5px dashed var(--farg-text-svag); border-radius: 4px; padding: 1.5rem 0.9rem 0.9rem; min-height: 7rem; display: flex; align-items: center; justify-content: center; text-align: center; font-family: var(--typsnitt-elev); font-size: 1.15rem; line-height: 1.45; }
 .m-kortlista.korta .m-kort { min-height: 0; aspect-ratio: 1; padding: 1.3rem 0.4rem 0.4rem; font-size: 2rem; line-height: 1.2; }
 .m-kortlista.ett .m-kort { min-height: 5rem; }
 /* Kortet ur en ensam kort lista i en ram (strategikortet, K-062): större text och luft mellan raderna. */
@@ -657,6 +658,8 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
    gruppen; gruppen bryts aldrig, och orden har sina vanliga mellanrum. */
 .m-laskort { margin: 0.75rem 0 1.5rem; }
 .m-laskort-par { display: grid; gap: 0.75rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+/* Läskorten står i Arial, också när metodens övriga elevmaterial står i elevens typsnitt (K-130): bågarna i Word-filens kort
+   med stöd ligger efter Arials teckenbredder (src/lib/lasflyt.ts), och paret ska se likadant ut överallt. */
 .m-laskort-kort { border: 1.5px dashed var(--farg-text-svag); border-radius: 6px; padding: 0.9rem 1.1rem 1.1rem; font-family: Arial, 'Liberation Sans', Helvetica, sans-serif; color: #1f2937; }
 .m-laskort-markning { font-family: var(--typsnitt-ui); font-size: 0.72rem; color: var(--farg-text-svag); margin: 0 0 0.3rem; }
 .m-laskort-titel { font-weight: 700; font-size: 1.35rem; margin: 0 0 0.6rem; }
@@ -744,7 +747,8 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-mall-svep { display: none; font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
 .m-mall-bild rect { fill: none; stroke: var(--farg-text); stroke-width: 0.3; }
 .m-mall-bild line { stroke: var(--farg-text); }
-.m-mall-bild text { fill: var(--farg-text); font-family: var(--typsnitt-ui); text-anchor: middle; }
+/* Mallen ligger framför eleven: texten i den står i elevens typsnitt (K-130), som i planeringsmallarna. */
+.m-mall-bild text { fill: var(--farg-text); font-family: var(--typsnitt-elev); text-anchor: middle; }
 /* Namnet på en delad tallinje (fjärdedelar) står till vänster ovanför linjen, dämpat. */
 .m-mall-bild text.namn { text-anchor: start; fill: var(--farg-text-svag); }
 /* En matta (decimalmattan, ett ark per talsort): kolumnnamnet fet i ett ljust band, som i Word. */
@@ -784,6 +788,8 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-ramhuvud { border: 1px solid var(--farg-kant); border-radius: 8px; overflow: hidden; margin: 0 0 1rem; font-family: var(--typsnitt-ui); font-size: 0.95rem; }
 /* Elevens blad (Stapelrutan, Metod.astro): fälten i sina höjder, en rem per cm på skärmen och riktiga cm i utskriften. */
 .m-elevblad .m-ramfalt > div { min-height: calc(var(--hojd) * 1rem); }
+/* Elevens blad i elevens typsnitt (K-130), som i planeringsmallarna. */
+.m-elevblad .m-ramfalt dt, .m-elevblad h4 { font-family: var(--typsnitt-elev); }
 /* Diplomet: en inramad, centrerad ruta som visar mallens sida. */
 .m-diplom { border: 4px double var(--farg-accent); border-radius: 8px; padding: 1.5rem 1.25rem; margin: 1rem 0; text-align: center; background: var(--farg-yta); font-family: var(--typsnitt-ui); }
 .m-diplom p { margin: 0 0 0.6em; }

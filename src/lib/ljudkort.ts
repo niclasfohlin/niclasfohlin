@@ -7,17 +7,17 @@
 //   golvbokstäver  en kortlista vars rubrik börjar med Golvbokstäver och där varje kort är en bokstav: en per A4
 //   bokstavskartan en lista (inte kort) med minst tio celler, var och en en bokstav och ett ord ("a apa"), där de
 //                  flesta orden har en bild: alfabetet på ett A4
-// Har metoden någon av dem står också elevens blad (elevlistor som inte är protokoll) i elevens typsnitt, så att eleven
-// möter samma a och l på bladet som på korten. Inga Node-beroenden: metoddocx.ts körs också i webbläsaren.
+// Elevens typsnitt gäller sedan 2026-09-30 allt elevmaterial i alla metoder (K-130, harElevtypsnitt nedan). Inga
+// Node-beroenden: metoddocx.ts körs också i webbläsaren.
 import BILDBANK from '../data/bildbank.json';
 import type { MetodData } from './metod';
 import { metodensFilmer, stillbilder } from './film';
 
 // Elevens typsnitt: Andika från SIL (Open Font License 1.1), här som delmängden Ljudlek Elev i public/fonts/ljudlek-elev/
 // med licensen. En ändrad fil som används för sig får inte heta Andika (OFL-FAQ 2.6), därför namnet, som metodriggen
-// valde. Webbläsaren hämtar woff2-filen (svenska tecken, 14 KB, scripts/elevtypsnitt.py) bara på sidor där något står i
-// typsnittet, och Word-filerna bär riggens bredare ttf-fil inbäddad, så att korten ser likadana ut där typsnittet inte
-// är installerat.
+// valde. scripts/elevtypsnitt.py gör båda filerna ur Andika med samma tecken: webbläsaren hämtar woff2-filen (14 KB) bara
+// på sidor där något står i typsnittet, och Word-filerna bär ttf-filen (33 KB) inbäddad, så att elevmaterialet ser
+// likadant ut där typsnittet inte är installerat. scripts/paritet.mjs prövar att varje tecken finns i filen.
 export const ELEVTYPSNITT = 'Ljudlek Elev';
 export const ELEVTYPSNITT_TTF = '/fonts/ljudlek-elev/LjudlekElev-Regular.ttf';
 export const ANDIKA_ADRESS = 'https://software.sil.org/andika/';
@@ -62,7 +62,13 @@ function allaFormer(d: MetodData): Set<Ljudform> {
   for (const ram of d.ramar?.ramar ?? []) for (const l of ram.listor ?? []) { const f = ljudform(d, l); if (f) ut.add(f); }
   return ut;
 }
-export const harElevtypsnitt = (d: MetodData): boolean => allaFormer(d).size > 0;
+// Elevens typsnitt i allt elevmaterial (Niclas 2026-09-29, K-130: "allt som ligger på bordet och är elevmaterial"):
+// listor och kort som eleven läser, läskort, elevens blad och mallar som eleven har framför sig, i alla metoder, så att
+// eleven möter samma a, g och l överallt. Lärarens protokoll, lathunden och diplomet står i husets typsnitt. En metod
+// utan elevmaterial behöver inte typsnittet, och då laddas och bäddas det inte in.
+export const harElevmaterial = (d: MetodData): boolean =>
+  (d.ramar?.ramar ?? []).some((r) => (r.listor?.length ?? 0) > 0) || Object.keys(d.elevblad ?? {}).length > 0 || d.mallar.length > 0;
+export const harElevtypsnitt = (d: MetodData): boolean => allaFormer(d).size > 0 || harElevmaterial(d);
 
 // Bokstavskartans celler: bokstaven, ordet och bilden. En bokstav utan bild har sin förklaring i ordets ställe ("som k").
 export interface KartCell { bokstav: string; ord: string; bild: string | null }

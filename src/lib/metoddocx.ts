@@ -76,13 +76,21 @@ const runt = (b: IBorderOptions) => ({ top: b, bottom: b, left: b, right: b });
 // niva4: stycket är en rubrik på nivå 4 i Word (en listas rubrik under ramens nivå 3), så att den syns i navigeringen (K-035).
 interface StyckeVal { kursiv?: boolean; fet?: boolean; farg?: string; storlek?: number; fore?: number; efter?: number; hallIhop?: boolean; mitt?: boolean; versaler?: boolean; font?: string; brak?: boolean; nySida?: boolean; niva4?: boolean }
 
+// Elevens typsnitt i elevmaterialet (K-130, src/lib/ljudkort.ts): medan medElevtypsnitt gäller får varje textlöpa utan
+// eget typsnitt elevens, så att korten att klippa och mallarna står i det, som på sidan. Utanför gäller husets.
+let ELEVFONT: string | undefined;
+function medElevtypsnitt<T>(pa: boolean, fn: () => T): T {
+  const gammal = ELEVFONT;
+  ELEVFONT = pa ? ELEVTYPSNITT : gammal;
+  try { return fn(); } finally { ELEVFONT = gammal; }
+}
 function run(text: string, o: StyckeVal = {}): TextRun {
-  const val: IRunOptions = { text, italics: o.kursiv, bold: o.fet, color: o.farg, size: storl(o.storlek), allCaps: o.versaler, font: o.font };
+  const val: IRunOptions = { text, italics: o.kursiv, bold: o.fet, color: o.farg, size: storl(o.storlek), allCaps: o.versaler, font: o.font ?? ELEVFONT };
   return new TextRun(hardaStreck(val));
 }
-// Alla andra textlöpor går hit, så att skalan gäller dem också.
+// Alla andra textlöpor går hit, så att skalan och elevens typsnitt gäller dem också.
 function textRun(o: IRunOptions): TextRun {
-  return new TextRun(hardaStreck({ ...o, size: storl(o.size as number | undefined) }));
+  return new TextRun(hardaStreck({ ...o, font: o.font ?? ELEVFONT, size: storl(o.size as number | undefined) }));
 }
 // Ett bindestreck följt av ordfog (U+2060) håller ihop ett exempelord i metoden, som hund-ar-na och sss-ooo-lll. Word
 // bryter ändå raden efter ett bindestreck, så där blir det Words hårda bindestreck (K-066, riggen 2026-09-27).
@@ -95,13 +103,15 @@ function hardaStreck(o: IRunOptions): IRunOptions {
   const { text: _text, ...resten } = o;
   return { ...resten, children: delar } as IRunOptions;
 }
-// Bråk i elevmaterialet står staplade (src/lib/brak.ts). Word får en ekvation (OMML) med vanlig text i Calibri, i
-// textens färg och något större än texten, eftersom Word krymper täljare och nämnare i ett bråk i en mening.
+// Bråk i elevmaterialet står staplade (src/lib/brak.ts). Word får en ekvation (OMML) med vanlig text i Calibri, eller
+// elevens typsnitt i elevmaterialet, i textens färg och något större än texten, eftersom Word krymper täljare och nämnare
+// i ett bråk i en mening.
 // Samma lösning som i metodriggens kompendium.
 const OMML = 'http://schemas.openxmlformats.org/officeDocument/2006/math';
 const WML = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main';
 function staplatBrak(taljare: string, namnare: string, storlek: number, farg: string): TextRun {
-  const rpr = `<w:rPr><w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" w:cs="Calibri"/><w:color w:val="${farg}"/><w:sz w:val="${storlek}"/><w:szCs w:val="${storlek}"/></w:rPr>`;
+  const f = ELEVFONT ?? 'Calibri';
+  const rpr = `<w:rPr><w:rFonts w:ascii="${f}" w:hAnsi="${f}" w:cs="${f}"/><w:color w:val="${farg}"/><w:sz w:val="${storlek}"/><w:szCs w:val="${storlek}"/></w:rPr>`;
   const r = (t: string) => `<m:r><m:rPr><m:nor/></m:rPr>${rpr}<m:t>${t}</m:t></m:r>`;
   const xml = `<m:oMath xmlns:m="${OMML}" xmlns:w="${WML}"><m:f><m:fPr><m:ctrlPr>${rpr}</m:ctrlPr></m:fPr><m:num>${r(taljare)}</m:num><m:den>${r(namnare)}</m:den></m:f></m:oMath>`;
   // fromXmlString lägger en namnlös rot runt elementet; ekvationen är rotens första barn. Den står i stycket
@@ -365,7 +375,8 @@ function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[
 // Bokstäver centreras. Listan hålls ihop, och med hallIhopEfter också med det som följer.
 // brak: bråken staplas (metoder i matematik); annars står ett snedstreck kvar, som i ett datum.
 // luft: ett kort att ha på bordet (strategikortet, K-062) får luft mellan raderna.
-// elev: metoden har kort i elevens typsnitt, så bladet eleven läser står i det också; lärarens protokoll i husets.
+// elev: metoden har elevmaterial (K-130, src/lib/ljudkort.ts), så bladet eleven läser står i elevens typsnitt; lärarens
+// protokoll i husets.
 function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][] }, o: { storlek: number; hallIhopEfter?: boolean; brak?: boolean; luft?: boolean; elev?: boolean }): Barn[] {
   if (harFragor(l)) return fragelista(l, o);
   const ut: Barn[] = [];
@@ -446,7 +457,8 @@ function kortlista(info: KortInfo, brak = true): Table {
 // stor: en elevkopia (planeringsmallarna), där listorna kommer först och sätts stort nog att läsas av ett par
 // eller visas för gruppen; annars (beskrivningen) står lärarnoten först och listorna efter.
 // kort: metodens kort att klippa (d.kort); blad: fältens höjd i cm när ramen är elevens blad (d.elevblad).
-// elev: metoden har Ljudlekens kort (src/lib/ljudkort.ts), så elevens blad står i elevens typsnitt.
+// elev: metoden har elevmaterial (K-130, src/lib/ljudkort.ts), så elevens blad och korten att klippa står i elevens
+// typsnitt.
 function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: MetodData['kort']; blad?: Record<string, number>; brak?: boolean; elev?: boolean } = {}): Flod {
   const ut: Flod = [];
   for (const s of ram.text) ut.push(stycke(s, { hallIhop: true }));
@@ -523,7 +535,7 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
       if (!info) { ut.push(...elevlista(l, { storlek, brak: o.brak })); continue; }
       ut.push(stycke(l.rubrik ?? '', { fet: true, farg: FARG.huvud, storlek: 16, versaler: true, fore: 120, efter: 60, hallIhop: true, nySida: info.grupp !== forra, niva4: true }));
       forra = info.grupp;
-      ut.push(kortlista(info, o.brak), avstand());
+      ut.push(medElevtypsnitt(!!o.elev, () => kortlista(info, o.brak)), avstand());
     }
     return ut;
   }
@@ -558,6 +570,9 @@ function bagBild(text: string, breddTwips: number): Paragraph {
   const altText = { name: `Mening med bågar ${++bagBildNr}`, description: utanStod(text), id: String(1000 + bagBildNr) };
   return new Paragraph({ spacing: { after: 60 }, children: [new ImageRun({ type: 'svg', data: new TextEncoder().encode(svg), transformation: { width: px(bredd), height: px(hojd) }, altText, fallback: { type: 'png', data: bytesUr(TOM_PNG) } })] });
 }
+// Läskorten står i Arial, också i metoder med elevens typsnitt (K-130): kortet med stöd är en bild där bågarna ligger efter
+// Arials uppmätta teckenbredder (src/lib/lasflyt.ts), och Word ritar bildens text med datorns typsnitt, inte med det
+// inbäddade. Kortet utan stöd står i samma typsnitt, så att paret är likadant, som på sidan (Laskort.astro).
 function laskortBarn(l: { rubrik?: string; kolumner?: string[]; rader: string[][] }, stodKolumn: number): Barn[] {
   const { nr, titel } = laskortRubrik(l);
   const marg = { top: 240, bottom: 200, left: 300, right: 300 };
@@ -620,11 +635,9 @@ function ordMedPrickar(ord: string, maxW: number, delar: boolean): Table {
   const prickSize = Math.max(24, Math.round((40 * enhet) / 300));
   const bredder = enheter.map((c) => Math.round(bredd(c) * enhet));
   const ingen = runt(INGEN);
-  // Pricken under ett ljud skrivs i Arial: den är ett tecken att räkna, ingen bokstav, och elevens typsnitt har inte •
-  // (riggens delmängd utan ligaturer, 2026-09-30). På sidan är pricken en cirkel i CSS (Vikkort.astro).
-  const text = (t: string, w: number, size: number, font?: string) => new TableCell({
+  const text = (t: string, w: number, size: number) => new TableCell({
     width: { size: w, type: WidthType.DXA }, borders: ingen, margins: { top: 0, bottom: 0, left: 0, right: 0 },
-    children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 240 }, children: [font ? new TextRun({ text: t, size, color: FARG.text, font }) : elevRun(t, size)] })],
+    children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 240 }, children: [elevRun(t, size)] })],
   });
   // Bågen under en del: en liten svg-bild, 80 procent av delens bredd.
   const bage = (w: number) => {
@@ -640,7 +653,7 @@ function ordMedPrickar(ord: string, maxW: number, delar: boolean): Table {
     alignment: AlignmentType.CENTER, layout: TableLayoutType.FIXED, width: { size: bredder.reduce((a, x) => a + x, 0), type: WidthType.DXA }, columnWidths: bredder, borders: UTAN_KANTER,
     rows: [
       new TableRow({ children: enheter.map((c, i) => text(c, bredder[i], ordSize)) }),
-      new TableRow({ children: enheter.map((_, i) => (delar ? bage(bredder[i]) : text('•', bredder[i], prickSize, 'Arial'))) }),
+      new TableRow({ children: enheter.map((_, i) => (delar ? bage(bredder[i]) : text('•', bredder[i], prickSize))) }),
     ],
   });
 }
@@ -853,7 +866,7 @@ function ljudRader(d: MetodData): Paragraph[] {
   if (harElevtypsnitt(d)) {
     const namnt = (d.ramar?.text ?? []).some((s) => s.includes('Andika'));
     const adress = ANDIKA_ADRESS.replace(/^https:\/\//, '').replace(/\/$/, '');
-    ut.push(stycke(`${namnt ? 'Ladda ner Andika' : 'Korten står i Andika, ett gratis typsnitt från SIL gjort för dem som lär sig läsa. Ladda ner det'} på ${adress} och använd det när du gör egna kort och blad.`, { farg: FARG.svag }));
+    ut.push(stycke(`${namnt ? 'Ladda ner Andika' : 'Elevens material står i Andika, ett gratis typsnitt från SIL som är gjort för att vara lätt att läsa. Ladda ner det'} på ${adress} och använd det när du gör egna kort och blad.`, { farg: FARG.svag }));
   }
   return ut;
 }
@@ -1185,11 +1198,13 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
   // Mallarna (bråkplanket och tallinjerna) sist, var och en på en liggande sida med smal marginal. Sidfoten bär
   // upphovet, så att planket och linjerna får hela höjden. Är lathundens tredje sida ett blad att lägga på bordet
   // (talsortsmattan, bladet Bråket på fyra sätt) står bladet först bland dem, så att det kopieras med resten.
-  const blad = d.lathund && arMatta(d.lathund.mall) ? medBredd(BREDD_MALL, () => [mattaSida(d.lathund!.mall)]) : [];
+  // Mallarna och bladet ligger framför eleven: i elevens typsnitt, när metoden har elevmaterial (K-130), som på sidan.
+  const elev = harElevtypsnitt(d);
+  const blad = d.lathund && arMatta(d.lathund.mall) ? medBredd(BREDD_MALL, () => [medElevtypsnitt(elev, () => mattaSida(d.lathund!.mall))]) : [];
   // Ett ark per talsort (en matta med enPerSida) står på stående A4, en sida per kolumn; övriga mallar liggande.
   const mallsidor = d.mallar.flatMap((m) => (m.typ === 'matta' && m.enPerSida
-    ? (m.kolumner ?? []).map((k) => ({ barn: medBredd(BREDD_STAENDE, () => talsortSida(m, k)), liggande: false }))
-    : [{ barn: medBredd(BREDD_MALL, () => mallSida(m)), liggande: true }]));
+    ? (m.kolumner ?? []).map((k) => ({ barn: medBredd(BREDD_STAENDE, () => medElevtypsnitt(elev, () => talsortSida(m, k))), liggande: false }))
+    : [{ barn: medBredd(BREDD_MALL, () => medElevtypsnitt(elev, () => mallSida(m))), liggande: true }]));
   return [...sidor.map((barn) => ({ barn })), ...blad.map((barn) => ({ barn, liggande: true })), ...mallsidor];
 }
 
