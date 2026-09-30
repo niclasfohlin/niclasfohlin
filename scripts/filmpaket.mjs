@@ -10,15 +10,16 @@
 // En huvudfilm med riggens äldre efterStycke eller efter får fältet borttaget, med ett besked, eftersom huvudfilmen alltid
 // står efter faktarutan. En metod som redan har film på sajten lämnas orörd om paketets block är detsamma, och skrivs
 // bara över med --ersatt, så att sajtens rättningar i en film inte försvinner av misstag; med --ersatt visas vad
-// som ändras, fält för fält. Varje svg-fil prövas: den ska stå för sig själv (en film som <img> hämtar inga typsnitt,
-// bilder eller stilar utifrån), ha filmens eller stillbildens mått och inget skript. Filer i paketet som inte är filmer
+// som ändras, fält för fält. Varje svg-fil prövas: den ska stå för sig själv (en bild hämtar inga typsnitt, bilder
+// eller stilar utifrån), ha filmens eller stillbildens mått och inget skript, och en film ska gå att pausa. Filer i paketet som inte är filmer
 // (ett typsnitt, metodtexter) räknas upp: skriptet tar inte in dem, och LAS-MIG.md säger vad de är till för.
 //
 //   node scripts/filmpaket.mjs <paketets mapp> [<id> …]   ta in hela paketet, eller bara de angivna metoderna
 //   node scripts/filmpaket.mjs <paketets mapp> --prova    pröva paketet utan att ändra något
 //   node scripts/filmpaket.mjs <paketets mapp> --ersatt   ersätt också filmer som redan finns och skiljer sig
 //
-// Sedan det skriptet skriver ut: npm run validera, filmplats.mjs, metodprov med --bilder och en titt på varje film.
+// Sedan det skriptet skriver ut: npm run validera, filmplats.mjs, filmprov.mjs, metodprov med --bilder och en titt på
+// varje film.
 import { copyFileSync, existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -77,7 +78,9 @@ function utanPlats(blocktext) {
   }
   return ut.join('\n');
 }
-// En svg som visas som <img> laddar inga externa resurser: allt ska finnas i filen (data:-adresser eller #id).
+// En svg-fil står för sig själv: filmen visas som <img> när den inte går att bädda in, och utskriften och Word visar
+// stillbilderna som bilder, och en bild laddar inga externa resurser. Allt ska finnas i filen (data:-adresser eller #id).
+// En film styr sina animeringar med var(--spel), så att Pausa i Film.astro fryser den där den är.
 const FILMMATT = { film: '0 0 960 540', stillbild: '0 0 960 500' };
 function svgFel(fil, slag) {
   const svg = readFileSync(fil, 'utf8');
@@ -87,12 +90,13 @@ function svgFel(fil, slag) {
   const viewBox = svg.match(/<svg[^>]*\sviewBox="([^"]+)"/)?.[1]?.trim().replace(/\s+/g, ' ');
   if (viewBox !== FILMMATT[slag]) ut.push(`${namn} har viewBox "${viewBox ?? 'saknas'}", ${slag}en ska ha "${FILMMATT[slag]}"`);
   if (/<script[\s>]/i.test(svg)) ut.push(`${namn} har ett skript`);
+  if (slag === 'film' && svg.includes('@keyframes') && !svg.includes('var(--spel')) ut.push(`${namn} styr inte sina animeringar med animation-play-state: var(--spel,running), så Pausa fryser den inte`);
   const externa = [
     ...[...svg.matchAll(/url\(\s*['"]?([^'")\s]+)/g)].map((m) => m[1]),
     ...[...svg.matchAll(/(?:xlink:)?href="([^"]+)"/g)].map((m) => m[1]),
     ...[...svg.matchAll(/@import\s+(?:url\()?['"]?([^'");\s]+)/g)].map((m) => m[1]),
   ].filter((a) => !a.startsWith('data:') && !a.startsWith('#'));
-  if (externa.length) ut.push(`${namn} hämtar ${[...new Set(externa)].slice(0, 3).join(', ')} utifrån, vilket en film som <img> inte kan: bädda in det i filen`);
+  if (externa.length) ut.push(`${namn} hämtar ${[...new Set(externa)].slice(0, 3).join(', ')} utifrån, vilket en bild inte kan: bädda in det i filen`);
   return ut;
 }
 // Vad som skiljer två filmblock, fält för fält, för den som ska läsa riggens ändringar innan de tas in.
@@ -197,7 +201,8 @@ const ids = klara.map((k) => k.id);
 console.log(`\nNästa steg, i ordning, innan något laddas upp (METODER.md under Filmerna):
   1. npm run validera
   2. node scripts/filmplats.mjs --utan-bygge ${ids.join(' ')}
-  3. för varje metod: node scripts/metodprov.mjs <id> --bilder   (${ids.join(', ')})
-  4. titta på varje film där den står, på sidan, i utskriften och i Word, och läs filmernas texter som svenska
-  5. granskning, sedan en commit och en push med allt
-  6. när deployen är grön och alla metoder har film: nyhetsbrevet utskick/2026-09-30-filmer.html som kampanj i Brevo, skickat först när Niclas sagt skicka`);
+  3. node scripts/filmprov.mjs ${ids.join(' ')}   (filmerna spelar med minskad rörelse, och Pausa fryser dem)
+  4. för varje metod: node scripts/metodprov.mjs <id> --bilder   (${ids.join(', ')})
+  5. titta på varje film där den står, på sidan, i utskriften och i Word, och läs filmernas texter som svenska
+  6. granskning, sedan en commit och en push med allt, och efter deployen node scripts/filmprov.mjs --adress https://niclasfohlin.se ${ids.join(' ')}
+  7. ett nyhetsbrev om filmerna skickas bara när Niclas sagt skicka (utskick/)`);
