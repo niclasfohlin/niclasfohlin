@@ -8,7 +8,7 @@ import sharp from 'sharp';
 import { ELEVTYPSNITT_TTF, harElevtypsnitt, metodensBilder } from './ljudkort';
 import type { MetodPost } from './metod';
 import type { MetodResurser } from './metoddocx';
-import { reservBredd, reservNyckel, samlaReservbilder } from './reservbild';
+import { reservMatt, reservNyckel, samlaReservbilder } from './reservbild';
 
 const PUBLIC = join(process.cwd(), 'public');
 const las = (sokvag: string) => new Uint8Array(readFileSync(join(PUBLIC, sokvag.replace(/^\//, ''))));
@@ -29,16 +29,23 @@ const FAMILJ = 'Reservbild';
 // behöver dem. Alla 276 bilder blev 897 KB mot 2 952 KB som vanlig PNG, och ingen skillnad syntes mot originalet
 // (prövat 2026-09-30 på de tyngsta stillbilderna, bildkort och läskort; 16 färger var 831 KB men kan slå ihop färger i
 // ett färgrikt bildkort).
+// Reservbilden får exakt rutans mått (reservMatt): SVG-bilden ritas så stor den ryms i rutan och läggs i mitten, med
+// genomskinlig kant där proportionerna skiljer sig (ett bildkort som är 3 procent smalare än högt i en kvadratisk ruta,
+// en läskortsrad där rutan avrundats till hela punkter). Ingen bild skalas om i efterhand, så inget blir suddigt.
+const FONT = { fontFiles: [TYPSNITT], loadSystemFonts: false, defaultFontFamily: FAMILJ, sansSerifFamily: FAMILJ, serifFamily: FAMILJ, monospaceFamily: FAMILJ };
 const ritade = new Map<string, Promise<Uint8Array>>();
-export function ritaReservbild(svg: Uint8Array, bredd: number): Promise<Uint8Array> {
-  const nyckel = reservNyckel(svg, bredd);
+export function ritaReservbild(svg: Uint8Array, bredd: number, hojd: number): Promise<Uint8Array> {
+  const nyckel = reservNyckel(svg, bredd, hojd);
   let png = ritade.get(nyckel);
   if (!png) {
-    const bild = new Resvg(Buffer.from(svg), {
-      fitTo: { mode: 'width', value: reservBredd(bredd) },
-      font: { fontFiles: [TYPSNITT], loadSystemFonts: false, defaultFontFamily: FAMILJ, sansSerifFamily: FAMILJ, serifFamily: FAMILJ, monospaceFamily: FAMILJ },
-    }).render();
+    const ruta = reservMatt(bredd, hojd);
+    const egen = new Resvg(Buffer.from(svg), { font: FONT });
+    const smalare = egen.width / egen.height < ruta.bredd / ruta.hojd;
+    let bild = new Resvg(Buffer.from(svg), { fitTo: smalare ? { mode: 'height', value: ruta.hojd } : { mode: 'width', value: ruta.bredd }, font: FONT }).render();
+    if (bild.width > ruta.bredd || bild.height > ruta.hojd) bild = new Resvg(Buffer.from(svg), { fitTo: smalare ? { mode: 'width', value: ruta.bredd } : { mode: 'height', value: ruta.hojd }, font: FONT }).render();
+    const [vanster, ovan] = [Math.floor((ruta.bredd - bild.width) / 2), Math.floor((ruta.hojd - bild.height) / 2)];
     png = sharp(bild.pixels, { raw: { width: bild.width, height: bild.height, channels: 4 } })
+      .extend({ left: vanster, right: ruta.bredd - bild.width - vanster, top: ovan, bottom: ruta.hojd - bild.height - ovan, background: { r: 0, g: 0, b: 0, alpha: 0 } })
       .png({ palette: true, quality: 70, dither: 0, effort: 10, compressionLevel: 9 })
       .toBuffer()
       .then((b) => new Uint8Array(b));
@@ -52,6 +59,6 @@ export function ritaReservbild(svg: Uint8Array, bredd: number): Promise<Uint8Arr
 export async function medReservbilder<T>(bygg: (png: NonNullable<MetodResurser['png']>) => T): Promise<T> {
   const { behov, png } = samlaReservbilder();
   bygg(png);
-  const klara = new Map(await Promise.all([...behov].map(async ([nyckel, b]) => [nyckel, await ritaReservbild(b.svg, b.bredd)] as const)));
-  return bygg((svg, bredd) => klara.get(reservNyckel(svg, bredd)));
+  const klara = new Map(await Promise.all([...behov].map(async ([nyckel, b]) => [nyckel, await ritaReservbild(b.svg, b.bredd, b.hojd)] as const)));
+  return bygg((svg, bredd, hojd) => klara.get(reservNyckel(svg, bredd, hojd)));
 }

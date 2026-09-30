@@ -68,13 +68,13 @@ const arBarn = (x: Barn | Sektionsbyte): x is Barn => !(x instanceof Sektionsbyt
 // hämtade, och givna till metodDokument och mallDokument. RESURSER gäller medan en fil byggs. png ger varje bilds
 // reservbild, ritad ur samma SVG (src/lib/reservbild.ts): vid bygget ritar src/lib/metodresurser.ts den, i
 // webbläsaren hämtas den som samma bygge ritade.
-export interface MetodResurser { bilder: Map<string, Uint8Array>; elevtypsnitt?: Uint8Array; png?: (svg: Uint8Array, bredd: number) => Uint8Array | undefined }
+export interface MetodResurser { bilder: Map<string, Uint8Array>; elevtypsnitt?: Uint8Array; png?: (svg: Uint8Array, bredd: number, hojd: number) => Uint8Array | undefined }
 let RESURSER: MetodResurser = { bilder: new Map() };
 // Varje bild i Word-filen är en SVG med sin reservbild (Niclas 2026-09-30: i Google Dokument blev bilderna blå rutor).
 // Saknas reservbilden stannar bygget, så att en fil med en tom reservbild aldrig kan laddas upp eller hämtas.
 function svgRun(svg: Uint8Array, bredd: number, hojd: number, altText: { name: string; description: string; id: string }): ImageRun {
-  const png = RESURSER.png?.(svg, bredd);
-  if (!png) throw new Error(`Word-filen saknar reservbilden ${reservNyckel(svg, bredd)} (${altText.description}). Den ritas ur bildens SVG av src/lib/metodresurser.ts vid bygget och hämtas i webbläsaren från /stodundervisning/reservbild/.`);
+  const png = RESURSER.png?.(svg, bredd, hojd);
+  if (!png) throw new Error(`Word-filen saknar reservbilden ${reservNyckel(svg, bredd, hojd)} (${altText.description}). Den ritas ur bildens SVG av src/lib/metodresurser.ts vid bygget och hämtas i webbläsaren från /stodundervisning/reservbild/.`);
   return new ImageRun({ type: 'svg', data: svg, transformation: { width: bredd, height: hojd }, altText, fallback: { type: 'png', data: png } });
 }
 let instans = 0; // numrerade listor: varje lista börjar om på 1

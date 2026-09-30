@@ -13,7 +13,7 @@ import { site } from '../../../data/site';
 export const getStaticPaths: GetStaticPaths = async () => {
   const metoder = await metoderSorterade();
   const serier = byggSerier(metoder);
-  const alla = new Map<string, { svg: Uint8Array; bredd: number }>();
+  const alla = new Map<string, { svg: Uint8Array; bredd: number; hojd: number }>();
   for (const m of metoder) {
     const post = { ...m, serie: serieKoppling(m.id, m.data, serier) };
     const { behov, png } = samlaReservbilder();
@@ -24,4 +24,4 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const GET: APIRoute = async ({ props }) =>
-  new Response(new Uint8Array(await ritaReservbild(props.svg as Uint8Array, props.bredd as number)), { headers: { 'Content-Type': 'image/png' } });
+  new Response(new Uint8Array(await ritaReservbild(props.svg as Uint8Array, props.bredd as number, props.hojd as number)), { headers: { 'Content-Type': 'image/png' } });

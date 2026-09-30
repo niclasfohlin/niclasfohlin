@@ -234,7 +234,7 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
         const samla = reserv.samlaReservbilder();
         metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt, png: samla.png } });
         const png = new Map(await Promise.all([...samla.behov.keys()].map(async (n) => [n, await hamta(reserv.reservAdress(n))] as const)));
-        const dokument = metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt, png: (svg, bredd) => png.get(reserv.reservNyckel(svg, bredd)) } });
+        const dokument = metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt, png: (svg, bredd, hojd) => png.get(reserv.reservNyckel(svg, bredd, hojd)) } });
         const blob = await Packer.toBlob(dokument);
         const filnamn = poster.length === 1 ? `${poster[0].id}${medMallarVal ? '' : '-beskrivning'}.docx` : `metoder-niclasfohlin-se${medMallarVal ? '' : '-beskrivningar'}.docx`;
         if (mal === 'drive' && drive) {

@@ -297,6 +297,20 @@ const reservFel = new Set();
 let reservAntal = 0;
 for (const namn of readdirSync(join(rot, 'dist/stodundervisning')).filter((f) => f.endsWith('.docx'))) {
   const zip = await JSZip.loadAsync(readFileSync(join(rot, 'dist/stodundervisning', namn)));
+  // Samma mått (Niclas 2026-09-30: "Viktigt är samma storlek i mått"): reservbilden har rutans proportioner i Word-filen,
+  // så att Google Dokument inte drar ut den.
+  const dokument = await zip.file('word/document.xml').async('string');
+  const mal = new Map([...(await zip.file('word/_rels/document.xml.rels').async('string')).matchAll(/<Relationship\b([^>]*)\/>/g)]
+    .map((m) => [m[1].match(/Id="([^"]+)"/)?.[1], m[1].match(/Target="([^"]+)"/)?.[1]]));
+  for (const ritning of dokument.matchAll(/<w:drawing>[\s\S]*?<\/w:drawing>/g)) {
+    const ruta = ritning[0].match(/<wp:extent cx="(\d+)" cy="(\d+)"/);
+    const blip = ritning[0].match(/<a:blip r:embed="([^"]+)"/);
+    if (!ruta || !blip || !ritning[0].includes('svgBlip')) continue;
+    const png = await zip.file(`word/${mal.get(blip[1])}`)?.async('nodebuffer');
+    if (!png) continue;
+    const [pw, ph] = [png.readUInt32BE(16), png.readUInt32BE(20)];
+    if (Math.abs(pw / ph / (Number(ruta[1]) / Number(ruta[2])) - 1) > Math.max(0.005, 1.5 / ph)) reservFel.add(`${namn}: en reservbild är ${pw} × ${ph} pixlar men står i en ruta med andra proportioner (reservMatt i src/lib/reservbild.ts)`);
+  }
   for (const media of Object.keys(zip.files).filter((n) => n.startsWith('word/media/'))) {
     if (media.endsWith('.png')) {
       const png = await zip.file(media).async('nodebuffer');
