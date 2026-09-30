@@ -1,0 +1,11 @@
+---
+// En film på metodens sida och dess stillbilder i utskriften, på samma plats (src/lib/film.ts): filmen syns på
+// skärmen, stillbilderna i utskriften. Huvudfilmen står direkt efter faktarutan ([id].astro), en extrafilm vid sitt
+// moment (Metod.astro), och Word-filen har stillbilderna på samma platser (metoddocx.ts).
+import Film from './Film.astro';
+import Filmbilder from './Filmbilder.astro';
+import type { MetodFilm } from '../lib/film';
+interface Props { filmer: MetodFilm[]; titel: string }
+const { filmer, titel } = Astro.props;
+---
+{filmer.map((f) => <><Film f={f} titel={titel} /><Filmbilder f={f} /></>)}

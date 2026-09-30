@@ -314,18 +314,36 @@ lathund:
     bordet:
       - Vad som ska ligga på bordet när passet börjar
     varjePass: Vad som noteras efter varje pass.
-# Valfritt: filmen ur metodriggens filmpaket (METODER.md under Filmerna). Filerna <id>-film.svg och <id>-film-1.svg … -4.svg
-# ligger i public/stodundervisning/. Utan titel är filmen lektionens lathund och står under ingressen; med titel visar den en
-# del av metoden och står efter inledningens stycke efterStycke. I Word står stillbilderna direkt efter ingressen.
+# Filmerna ur metodriggens filmpaket (METODER.md under Filmerna, src/lib/film.ts). Varje metod får en huvudfilm, film,
+# som står direkt efter faktarutan; stillbilderna står på sidan 1 i Word och i utskriften. Filerna <id>-film.svg och
+# <id>-film-1.svg … -4.svg ligger i public/stodundervisning/. titel bara när filmen ska heta något annat än rubriken.
 # film:
 #   titel: "Ljudstarten i Ljudlek i grupp"
 #   sekunder: 18.9
 #   beskrivning: "Filmens steg i ord och i ordning, samma text som filmens textrad."
 #   rubrik: "Så gör eleven"
 #   ingress: "Fyra bilder ur lektionens film om vad eleven gör. Filmen på metodens sida visar samma sak i rörelse."
-#   efterStycke: 3
 #   stillbilder:
 #     - text: "Högst 55 tecken under varje stillbild."
 #     - text: "…"
 #     - text: "…"
 #     - text: "…"
+# Högst två extrafilmer (fältet filmer, riggens format), nr 2 och 3, var och en vid momentet den förklarar, på samma
+# plats i sidan, utskriften och Word. Filerna heter <id>-film2.svg och <id>-film2-1.svg … -4.svg. efter är ett avsnitt
+# (passrutin, tidsschema, steg, arbetsform, exempel, fastnar, roll, urval, hem, progression, uppfoljning, mal, snabbmall,
+# checklista, grund eller ramar: filmen står sist i avsnittet), "tabell: <rubrik>" (efter den fria tabellen),
+# "ram: <rubrik>" (efter ramen), "steg <N>" (efter steg N; tabellen delas där) eller "stycke <N>" (efter stycke N i
+# inledningen), med N från 1. En rubrik räcker med ledet före kolon. Rubrik och ingress är olika för varje film i metoden.
+# filmer:
+#   - nr: 2
+#     titel: "Bråket på fyra sätt"
+#     sekunder: 13.3
+#     beskrivning: "…"
+#     rubrik: "Fyra sätt: samma bråk fyra gånger"
+#     ingress: "…"
+#     efter: "steg"
+#     stillbilder:
+#       - text: "…"
+#       - text: "…"
+#       - text: "…"
+#       - text: "…"

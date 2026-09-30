@@ -363,7 +363,7 @@ html.js .samla {
 .metod-huvud h1 { font-size: clamp(1.9rem, 4.5vw, 2.75rem); margin-bottom: 0.3em; }
 .metod-huvud .undertitel { font-family: var(--typsnitt-ui); color: var(--farg-text-svag); font-size: 1.2rem; font-weight: 500; margin: 0 0 1rem; text-wrap: balance; }
 .metod-huvud .ingress { font-size: 1.1rem; line-height: 1.6; margin: 0; }
-/* Filmen ur metodriggen (Film.astro): lektionens lathund under ingressen, eller en film om en del av metoden i texten.
+/* Filmerna ur metodriggen (Film.astro, src/lib/film.ts): huvudfilmen efter faktarutan och extrafilmerna i texten, vid sina moment.
    Hela bredden i spalten, med en tunn ram som bordet i filmen står i, och en rad under med knappen och filmens namn. */
 .film { margin: 1.25rem 0 0; max-width: 40rem; }
 .metod-text .film { margin: 1.5rem 0; }
@@ -424,7 +424,7 @@ button.lank:hover { color: var(--farg-accent); }
 .metod-topp > .delning { grid-area: dela; }
 /* Filmens stillbilder (Filmbilder.astro) står bara i utskriften. */
 .film-bilder { display: none; }
-/* Lektionens film (Film.astro) direkt efter faktarutan (Niclas 2026-09-30): på telefonen under rutan, på datorn i
+/* Huvudfilmen (Film.astro) direkt efter faktarutan (Niclas 2026-09-30): på telefonen under rutan, på datorn i
    vänsterspalten under ingressen, bredvid rutan, eftersom rutans smala spalt gör filmen för liten. */
 .metod-topp > .film { grid-area: film; margin: 0; }
 .metod-topp:has(> .film) { grid-template-areas: "huvud" "fakta" "film" "ladda"; }
@@ -562,6 +562,9 @@ button.lank:hover { color: var(--farg-accent); }
 .m-tabell th, .m-tabell td, .m-snabbmall th, .m-snabbmall td { border: 1px solid var(--farg-kant); padding: 0.6rem 0.8rem; vertical-align: top; text-align: left; }
 .m-tabell thead th { background: var(--farg-accent); color: #fff; border-color: var(--farg-accent); font-weight: 600; text-wrap: balance; }
 .m-tabell tbody tr:nth-child(even) { background: var(--farg-ton-svag); }
+/* Stegtabellen randas efter stegets nummer, som i Word, så att randningen håller när tabellen delas av en extrafilm. */
+.m-tabell.steg tbody tr:nth-child(even) { background: none; }
+.m-tabell.steg tbody tr.jamn { background: var(--farg-ton-svag); }
 .m-tabell tbody th { font-weight: 700; color: var(--farg-text); background: var(--farg-ton); }
 .m-tabell tbody .forsta { display: block; }
 .m-tabell tbody .under { display: block; font-weight: 400; font-style: italic; color: var(--farg-text-svag); margin-top: 0.15em; }
@@ -1082,6 +1085,10 @@ html.js .bara-js { display: inline-block; }
   .film-bilder img { display: block; width: 100%; height: auto; }
   .film-bilder li p { font-family: var(--typsnitt-ui); font-size: 9pt; line-height: 1.3; margin: 0.06cm 0 0; }
   .film-bilder li b { color: var(--farg-accent); }
+  /* En extrafilms stillbilder i texten, vid momentet den förklarar (Metod.astro): luft före och efter, och rutan hålls ihop. */
+  .metod-text .film-bilder { margin: 0.8rem 0 1rem; }
+  /* Filmens rubrik är ingen avsnittsrubrik: samma storlek som huvudfilmens, också inne i metoden, där .metod-modell h2 gäller. */
+  .metod-modell .film-bilder h2 { font-size: 12pt; margin: 0 0 0.15rem; }
   .metod-modell { font-size: 10.5pt; }
   .metod-modell h2 { font-size: 13pt; margin-top: 1.4em; break-after: avoid; }
   /* Rubrik och inledande stycke följer med det som kommer efter; snabbmallen hålls ihop. */

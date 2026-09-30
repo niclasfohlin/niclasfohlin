@@ -4,6 +4,7 @@ import { z } from 'astro/zod';
 import taggarData from './data/taggar.json';
 import publikationerData from './data/publikationer.json';
 import { BAGE, ordgrupper, utanStod } from './lib/lasflyt';
+import { EFTER_FORMER, HOGST_EXTRAFILMER, platsFel, tolkaEfter } from './lib/film';
 
 // Registren är den enda sanningen om vilka taggar och publikationer som finns.
 // Ett okänt värde stoppar bygget med ett tydligt besked om vad som ska göras.
@@ -98,6 +99,19 @@ const bocker = defineCollection({
 const text = z.string().trim().min(1, 'Tomt fält.');
 const stycken = z.array(text).min(1);
 const ruta = z.strictObject({ rubrik: text, text });
+// En film ur metodriggen (src/lib/film.ts): titel bara när filmen ska heta något annat än rubriken, längden, filmens
+// steg i ord (textalternativet), rubriken och ingressen över stillbilderna och texten under var och en.
+const filmFalt = z.strictObject({
+  titel: text.optional(),
+  sekunder: z.number().positive(),
+  beskrivning: text,
+  rubrik: text,
+  ingress: text,
+  stillbilder: z.array(z.strictObject({ text: text.max(55, 'Högst 55 tecken under en stillbild.') })).length(4, 'Filmen har fyra stillbilder.'),
+  // Huvudfilmen står alltid direkt efter faktarutan; riggens äldre fält för platsen ger ett besked i stället för okänt fält.
+  efterStycke: z.never({ error: 'Huvudfilmen står alltid efter faktarutan; ta bort efterStycke.' }).optional(),
+  efter: z.never({ error: 'Huvudfilmen står alltid efter faktarutan; efter hör bara till extrafilmerna i filmer.' }).optional(),
+});
 // En punkt med valfri fet inledning: "Det finns inget facit." följt av förklaringen.
 const punkt = z.strictObject({ fet: z.string().optional(), text: z.string().optional() }).refine((p) => p.fet || p.text, 'En punkt behöver fet eller text.');
 // Tabell med rubrikrad där varje rad har lika många celler som rubriker.
@@ -141,20 +155,16 @@ const stodundervisning = defineCollection({
     serie: z.string().optional(),
     formaga: z.number().int().positive().optional(),
     tranar: z.string().optional(),
-    // Filmen ur metodriggen (Niclas 2026-09-30): <id>-film.svg och fyra stillbilder <id>-film-1.svg … -4.svg i
-    // public/stodundervisning/, som hittas genom metodens id. Utan titel visar filmen hela lektionen och är lektionens
-    // lathund, överst på sidan; med titel visar den en del av metoden (Ljudstarten i Ljudlek i grupp) och står på sidan
-    // efter inledningens stycke efterStycke. Stillbilderna står i Word direkt efter ingressen, på första sidan, med
-    // rubrik, ingress och en text under varje bild (src/lib/film.ts).
-    film: z.strictObject({
-      titel: text.optional(),
-      sekunder: z.number().positive(),
-      beskrivning: text,
-      rubrik: text,
-      ingress: text,
-      efterStycke: z.number().int().positive().optional(),
-      stillbilder: z.array(z.strictObject({ text: text.max(55, 'Högst 55 tecken under en stillbild.') })).length(4, 'Filmen har fyra stillbilder.'),
-    }).optional(),
+    // Filmerna ur metodriggen (Niclas 2026-09-30, src/lib/film.ts), i riggens format. film är huvudfilmen: den står
+    // direkt efter faktarutan, och dess fyra stillbilder på sidan 1 i Word och i utskriften. filmer är högst två
+    // extrafilmer, nr 2 och 3, var och en vid momentet den förklarar (efter): sist i ett avsnitt, efter en fri tabell
+    // eller ram, efter ett steg eller efter ett stycke i inledningen. En extrafilm kräver en huvudfilm. Filerna hittas
+    // genom metodens id och filmens nummer: <id>-film.svg och <id>-film-1.svg … -4.svg, <id>-film2.svg och -1.svg … -4.svg.
+    film: filmFalt.optional(),
+    filmer: z.array(filmFalt.extend({
+      nr: z.union([z.literal(2), z.literal(3)], { error: 'nr är 2 eller 3: filerna heter <id>-film2.svg och <id>-film3.svg.' }),
+      efter: text.refine((v) => tolkaEfter(v) !== undefined, { error: `efter är ${EFTER_FORMER}.` }),
+    })).max(HOGST_EXTRAFILMER, `Högst ${HOGST_EXTRAFILMER} extrafilmer utöver huvudfilmen.`).default([]),
     lektionsbank: z.strictObject({
       rubrik: z.string().default('Lektionsbanken'),
       text: z.string().optional(),
@@ -447,7 +457,19 @@ const stodundervisning = defineCollection({
     const lektionsfalt = [d.serie, d.formaga, d.tranar].filter((x) => x !== undefined).length;
     if (lektionsfalt > 0 && lektionsfalt < 3) ctx.addIssue({ code: 'custom', path: ['serie'], message: 'En lektion i en serie har serie, formaga och tranar, alla tre.' });
     if (d.serie && d.lektionsbank) ctx.addIssue({ code: 'custom', path: ['lektionsbank'], message: 'En lektion kan inte ha en egen lektionsbank.' });
-    if (d.film?.efterStycke && d.film.efterStycke > d.inledning.length) ctx.addIssue({ code: 'custom', path: ['film', 'efterStycke'], message: `Inledningen har ${d.inledning.length} stycken; filmen kan inte stå efter stycke ${d.film.efterStycke}.` });
+    // Extrafilmerna: en huvudfilm först, egna nummer och en plats som finns, så att filmen står där den förklarar i
+    // sidan, utskriften och Word-filen (src/lib/film.ts).
+    if (d.filmer.length && !d.film) ctx.addIssue({ code: 'custom', path: ['filmer'], message: 'En extrafilm kräver en huvudfilm (fältet film), som står efter faktarutan.' });
+    // Varje film hittas i Word och i utskriften genom rubriken och ingressen (scripts/paritet.mjs), så de är filmens egna.
+    const nycklar = [d.film, ...d.filmer].filter((f) => f !== undefined).map((f) => `${f.rubrik}\n${f.ingress}`);
+    nycklar.forEach((n, i) => { if (nycklar.indexOf(n) !== i) ctx.addIssue({ code: 'custom', path: ['filmer', i - 1, 'rubrik'], message: 'Två filmer har samma rubrik och ingress; ge filmen en egen rubrik.' }); });
+    d.filmer.forEach((f, i) => {
+      const sti = ['filmer', i, 'efter'];
+      if (d.filmer.findIndex((x) => x.nr === f.nr) !== i) ctx.addIssue({ code: 'custom', path: ['filmer', i, 'nr'], message: `Två extrafilmer har nr ${f.nr}; filerna skulle krocka.` });
+      const v = tolkaEfter(f.efter);
+      const fel = v && platsFel(d, v);
+      if (fel) ctx.addIssue({ code: 'custom', path: sti, message: `${fel}.` });
+    });
     // Förmågorna numreras i följd från 1, så att en lektions formaga aldrig pekar på en annan förmåga än den skrevs för.
     d.lektionsbank?.formagor.forEach((f, i) => { if (f.nr !== i + 1) ctx.addIssue({ code: 'custom', path: ['lektionsbank', 'formagor', i, 'nr'], message: `Förmågan "${f.namn}" ska ha nummer ${i + 1}: förmågorna numreras i följd från 1.` }); });
     // Lathundens block snabbmall hämtar metodens snabbmall; utan den skulle blocket tyst försvinna.

@@ -20,6 +20,7 @@ Titta på varje bild, i ordning, och skriv ner varje ställe där ditt öga fast
 3. Hittar du det du behöver i rätt ordning? Vad, när, hur länge, med vem, och sedan hur. Vet du efter första skärmen vad ett pass är? Hittar du på lathunden allt som passet kräver, utan att gå till sidan? Hänvisar texten till något som ligger någon annanstans utan att säga var?
 4. Läser du något fel? En rubrik som lovar något annat än det som följer, ett ord som används i två betydelser, en siffra eller tid som inte stämmer med en annan på samma sida, ett namn på en fas eller ett steg som skiljer sig mellan sidan, lathunden och Word.
 5. Vad är onödigt svårt? Något du måste läsa två gånger, något som kräver att du redan kan metoden, något som gör att du hellre hade skrivit ut kompendiet.
+6. Hjälper filmerna? Huvudfilmen efter faktarutan och en extrafilm vid sitt moment ska visa det texten beskriver. Förstår du passet bättre efter bilderna, eller säger de något annat än texten? Står en extrafilm där du behöver den?
 
 Särskilda frågor att svara på först, som lärare, med belägg i bilderna:
 

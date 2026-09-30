@@ -14,8 +14,8 @@ import Bokstavskarta from './Bokstavskarta.astro';
 import Golvbokstaver from './Golvbokstaver.astro';
 import { ANDIKA_ADRESS, harElevtypsnitt, ljudform, upphovBilder } from '../lib/ljudkort';
 import { arElevensBlad, protokollDelas } from '../lib/ramform';
-import Film from './Film.astro';
-import { arLektionsfilm, filmEfterStycke } from '../lib/film';
+import Filmruta from './Filmruta.astro';
+import { filmerVid, metodensFilmer, stegDelar, type FilmPlats } from '../lib/film';
 import type { SerieKoppling } from '../lib/serie';
 import type { MetodData } from '../lib/metod';
 import { ejBryt, ramArTom, passGrupper, passOrd, passOversikt, stegTexter, laskortKolumn, arEttKort } from '../lib/metod';
@@ -50,7 +50,10 @@ const repliker = (s: string) => s.split(/(”[^”]*”)/).filter(Boolean).map((
 const friKlass = (t: { kolumner: string[]; rader: string[][] }) => (t.kolumner.length > 3 || (t.kolumner.length === 3 && t.rader.some((r) => r.some((c) => c.length > 40))) ? 'fri stapla' : 'fri');
 // Passöversikten: rutin, tidsschema och arbetsform i en bild när stegen har faser.
 const pass = passOversikt(d);
-const delfilm = d.film && !arLektionsfilm(d.film) ? d.film : undefined;
+// Extrafilmerna (src/lib/film.ts, fältet filmer) står vid momentet de förklarar: sist i ett avsnitt, efter en fri tabell
+// eller en ram, efter ett steg eller efter ett stycke. Word-filen frågar på samma platser (metoddocx.ts, metodBarn). Huvudfilmen står i [id].astro.
+const filmer = metodensFilmer(d, id);
+const vid = (p: FilmPlats) => filmerVid(filmer, p);
 const ord = passOrd(d);
 const tavla = d.exempel?.tavla ? d.lathund?.mall.block.find((b) => b.typ === 'tavla') : undefined;
 const fraserRubrik = d.steg?.fraserRubrik ?? '';
@@ -120,9 +123,7 @@ const meny = [
     </nav>
   )}
   <div class="metod-text">
-  {/* En film om en del av metoden (Ljudstarten i Ljudlek i grupp) står efter inledningens stycke efterStycke, som
-      stillbilderna i Word-filen; en lektions film står överst på sidan ([id].astro). */}
-  {d.inledning.map((s, i) => <><p>{s}</p>{delfilm && i + 1 === filmEfterStycke(delfilm, d.inledning.length) && <Film id={id} film={delfilm} titel={d.titel} />}</>)}
+  {d.inledning.map((s, i) => <><p>{s}</p><Filmruta filmer={vid({ stycke: i + 1 })} titel={d.titel} /></>)}
 
   {/* Rutornas rubriker är rubriker, så att en skärmläsare kan hoppa till dem (K-028). De står direkt under h1. */}
   {d.upplagg && <div class="m-ruta" id="upplagg"><h2 class="kicker">{d.upplagg.rubrik}</h2><p>{d.upplagg.text}</p></div>}
@@ -135,6 +136,7 @@ const meny = [
       {t.text && <p>{t.text}</p>}
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
+      <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
   ))}
 
@@ -166,6 +168,7 @@ const meny = [
         </tbody>
       </table>
       {pass.efterTabell && <p class="m-efter">{pass.efterTabell}</p>}
+      <Filmruta filmer={[...vid({ avsnitt: 'passrutin' }), ...vid({ avsnitt: 'tidsschema' })]} titel={d.titel} />
     </section>
   )}
 
@@ -175,6 +178,7 @@ const meny = [
       {d.passrutin.text && <p>{d.passrutin.text}</p>}
       <ol class="m-rutin">{stegTexter(d).map((s) => <li>{s}</li>)}</ol>
       {d.passrutin.efter && <p class="m-efter">{d.passrutin.efter}</p>}
+      <Filmruta filmer={vid({ avsnitt: 'passrutin' })} titel={d.titel} />
     </section>
   )}
 
@@ -184,6 +188,7 @@ const meny = [
       {d.tidsschema.text && <p>{d.tidsschema.text}</p>}
       <MetodTabell kolumner={['Tid', 'Fas', 'Vad händer']} rader={d.tidsschema.rader.map((r) => [r.tid, r.fas, r.vad])} bredder={['18%', '22%', '60%']} klass="tidsschema" />
       {d.tidsschema.efter && <p class="m-efter">{d.tidsschema.efter}</p>}
+      <Filmruta filmer={vid({ avsnitt: 'tidsschema' })} titel={d.titel} />
     </section>
   )}
 
@@ -193,6 +198,7 @@ const meny = [
       {t.text && <p>{t.text}</p>}
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
+      <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
   ))}
 
@@ -200,19 +206,26 @@ const meny = [
     <section id="steg">
       <h2>{d.steg.rubrik}</h2>
       {d.steg.text && <p>{d.steg.text}</p>}
-      <table class="m-tabell steg" role="table">
-        <colgroup><col style="width:22%" /><col style="width:36%" /><col style="width:42%" /></colgroup>
-        <thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">{ord.steg}</th><th scope="col" role="columnheader">Vad du gör</th><th scope="col" role="columnheader">{fraserRubrik}</th></tr></thead>
-        <tbody role="rowgroup">
-          {d.steg.rader.map((r, i) => (
-            <tr role="row">
-              <th scope="row" role="rowheader" data-rubrik={ord.steg}><span class="forsta stegnamn">{i + 1} {r.namn}</span>{r.fraga && <span class="under">{r.fraga}</span>}</th>
-              <td role="cell" data-rubrik="Vad du gör">{r.gor}</td>
-              <td role="cell" data-rubrik={fraserRubrik}>{r.fraser.length > 0 && <ul class="fraser">{r.fraser.map((f) => <li>”{f}”</li>)}</ul>}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {/* Tabellen delas efter ett steg som har en extrafilm, och filmen står mellan delarna, som i Word-filen. */}
+      {stegDelar(d.steg.rader.length, filmer).map(([fran, till]) => (
+        <>
+          <table class="m-tabell steg" role="table">
+            <colgroup><col style="width:22%" /><col style="width:36%" /><col style="width:42%" /></colgroup>
+            <thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">{ord.steg}</th><th scope="col" role="columnheader">Vad du gör</th><th scope="col" role="columnheader">{fraserRubrik}</th></tr></thead>
+            <tbody role="rowgroup">
+              {d.steg!.rader.slice(fran - 1, till).map((r, j) => (
+                <tr role="row" class:list={[{ jamn: (fran + j) % 2 === 0 }]}>
+                  <th scope="row" role="rowheader" data-rubrik={ord.steg}><span class="forsta stegnamn">{fran + j} {r.namn}</span>{r.fraga && <span class="under">{r.fraga}</span>}</th>
+                  <td role="cell" data-rubrik="Vad du gör">{r.gor}</td>
+                  <td role="cell" data-rubrik={fraserRubrik}>{r.fraser.length > 0 && <ul class="fraser">{r.fraser.map((f) => <li>”{f}”</li>)}</ul>}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <Filmruta filmer={vid({ steg: till })} titel={d.titel} />
+        </>
+      ))}
+      <Filmruta filmer={vid({ avsnitt: 'steg' })} titel={d.titel} />
     </section>
   )}
 
@@ -222,6 +235,7 @@ const meny = [
       {t.text && <p>{t.text}</p>}
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
+      <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
   ))}
 
@@ -234,6 +248,7 @@ const meny = [
           {d.arbetsform.delar.map((x) => <div><strong>{x.rubrik}</strong><span>{x.text}</span></div>)}
         </div>
       )}
+      <Filmruta filmer={vid({ avsnitt: 'arbetsform' })} titel={d.titel} />
     </section>
   )}
 
@@ -243,6 +258,7 @@ const meny = [
       {t.text && <p>{t.text}</p>}
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
+      <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
   ))}
 
@@ -258,6 +274,7 @@ const meny = [
           {d.exempel.tavlaText && <p class="m-efter">{d.exempel.tavlaText}</p>}
         </div>
       )}
+      <Filmruta filmer={vid({ avsnitt: 'exempel' })} titel={d.titel} />
     </section>
   )}
 
@@ -273,6 +290,7 @@ const meny = [
       <ol class="m-trappa">{d.fastnar.trappa.map((t) => <li>{t}</li>)}</ol>
       {d.fastnar.efter && <p class="m-efter">{d.fastnar.efter}</p>}
       {d.fastnar.motto && <p class="m-motto">{d.fastnar.motto}</p>}
+      <Filmruta filmer={vid({ avsnitt: 'fastnar' })} titel={d.titel} />
     </section>
   )}
 
@@ -282,6 +300,7 @@ const meny = [
       {t.text && <p>{t.text}</p>}
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
+      <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
   ))}
 
@@ -293,6 +312,7 @@ const meny = [
         <div class="gor"><h3>Gör så här</h3><ul>{d.roll.gor.map((x) => <li>{x}</li>)}</ul></div>
         <div class="undvik"><h3>Undvik</h3><ul>{d.roll.undvik.map((x) => <li>{x}</li>)}</ul></div>
       </div>
+      <Filmruta filmer={vid({ avsnitt: 'roll' })} titel={d.titel} />
     </section>
   )}
 
@@ -305,6 +325,7 @@ const meny = [
         {d.urval.krav.map((x) => <div><strong>{x.rubrik}</strong><span>{x.text}</span></div>)}
       </div>
       {d.ramar && <p class="m-efter"><a href="#ramar">{d.ramar.rubrik}</a> ligger efter grunden, och som egna sidor att kopiera i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>}
+      <Filmruta filmer={vid({ avsnitt: 'urval' })} titel={d.titel} />
     </section>
   )}
 
@@ -316,6 +337,7 @@ const meny = [
       {t.text && <p>{t.text}</p>}
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
+      <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
   ))}
 
@@ -332,6 +354,7 @@ const meny = [
         </div>
       )}
       {d.hem.schema && <p class="m-efter">{d.hem.schema.rubrik}: {d.hem.schema.text}{d.hem.schema.text && ' '}Schemat med {d.hem.schema.rader} rader att fylla i finns i planeringsmallarna.</p>}
+      <Filmruta filmer={vid({ avsnitt: 'hem' })} titel={d.titel} />
     </section>
   )}
 
@@ -340,6 +363,7 @@ const meny = [
       <h2>{d.progression.rubrik}</h2>
       {d.progression.text && <p>{d.progression.text}</p>}
       <MetodTabell kolumner={[d.progression.enhet, 'Fokus', 'Lärarens roll']} rader={d.progression.rader.map((r) => [r.led ? `${r.vecka}\n${r.led}` : r.vecka, r.fokus, r.roll])} bredder={['18%', '42%', '40%']} klass="stapla m-progression" />
+      <Filmruta filmer={vid({ avsnitt: 'progression' })} titel={d.titel} />
     </section>
   )}
 
@@ -351,6 +375,7 @@ const meny = [
         <colgroup><col style="width:28%" /><col style="width:72%" /></colgroup>
         <tbody>{d.uppfoljning.rader.map((r) => <tr><th scope="row">{r.nar}</th><td>{r.vad}</td></tr>)}</tbody>
       </table>
+      <Filmruta filmer={vid({ avsnitt: 'uppfoljning' })} titel={d.titel} />
     </section>
   )}
 
@@ -360,6 +385,7 @@ const meny = [
       <p>{d.mal.text}</p>
       <ul class="m-bockar tva" data-bockar>{d.mal.punkter.map((p) => <li><label><input type="checkbox" /> {p}</label></li>)}</ul>
       <p class="bara-js m-rensa"><button type="button" class="lank" data-rensa-bockar>Rensa kryssen</button></p>
+      <Filmruta filmer={vid({ avsnitt: 'mal' })} titel={d.titel} />
     </section>
   )}
 
@@ -381,12 +407,15 @@ const meny = [
       </table>
     </section>
   )}
+  {/* Efter avsnittet, som i Word: avsnittet hålls ihop i utskriften, filmen för sig. */}
+  {d.snabbmall && <Filmruta filmer={vid({ avsnitt: 'snabbmall' })} titel={d.titel} />}
 
   {d.checklista && (
     <section id="checklista">
       <h2>{d.checklista.rubrik}</h2>
       <ul class="m-bockar" data-bockar>{d.checklista.punkter.map((p) => <li><label><input type="checkbox" /> {p}</label></li>)}</ul>
       <p class="bara-js m-rensa"><button type="button" class="lank" data-rensa-bockar>Rensa kryssen</button></p>
+      <Filmruta filmer={vid({ avsnitt: 'checklista' })} titel={d.titel} />
     </section>
   )}
 
@@ -397,6 +426,8 @@ const meny = [
       {d.grund.kallor && <p class="m-kallor">{d.grund.kallor}</p>}
     </section>
   )}
+  {/* Efter avsnittet, som i Word: avsnittet hålls ihop i utskriften, filmen för sig. */}
+  {d.grund && <Filmruta filmer={vid({ avsnitt: 'grund' })} titel={d.titel} />}
 
   {efterGrund.map((t) => (
     <section id={tabellAnkare.get(t)}>
@@ -404,6 +435,7 @@ const meny = [
       {t.text && <p>{t.text}</p>}
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
+      <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
   ))}
 
@@ -421,7 +453,7 @@ const meny = [
           {d.ramar.ramar.map((r, i) => <>{i > 0 && <span aria-hidden="true">{'\u00a0· '}</span>}<a href={`#ram-${i + 1}`}>{hel(r.rubrik)}</a></>)}
         </nav>
       )}
-      {d.ramar.ramar.map((ram, ri) => (
+      {d.ramar.ramar.map((ram, ri) => (<>
         <section class={`m-ram${protokollDelas(ram) ? ' delad' : ''}`} id={`ram-${ri + 1}`}>
           <h3 id={ramAnkare[ri]}>{hel(ram.rubrik)}</h3>
           {ram.text.map((s) => <p>{s}</p>)}
@@ -499,8 +531,10 @@ const meny = [
               </div>
             )}
         </section>
-      ))}
+        <Filmruta filmer={vid({ ram: ram.rubrik })} titel={d.titel} />
+      </>))}
       {d.ramar.efter && <p class="m-efter">{d.ramar.efter}</p>}
+      <Filmruta filmer={vid({ avsnitt: 'ramar' })} titel={d.titel} />
     </section>
   )}
 

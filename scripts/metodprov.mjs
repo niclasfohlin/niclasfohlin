@@ -178,14 +178,20 @@ if (bilder) {
         if (mallar) liggande >= mallar ? ok(`utskriften: ${storlekar.length} sidor, varav ${liggande} liggande för ${mallar} mallar`) : nej(`utskriften har ${liggande} liggande sidor, men metoden har ${mallar} mallar som ska stå liggande`);
         else ok(`utskriften: ${storlekar.length} sidor`);
       } catch { console.log('  obs  pdfinfo saknas, utskriftens sidor är inte räknade'); }
-      // Filmens stillbilder (fältet film): rutan står på utskriftens första sida, direkt efter faktarutan, som i Word
-      // (Niclas 2026-09-30). Att rutan alls finns i utskriften prövar scripts/paritet.mjs i varje validering.
+      // Huvudfilmens stillbilder (fältet film): rutan står på sidan 1, direkt efter faktarutan, både i utskriften och i
+      // Word-filen med allt (Niclas 2026-09-30: "på s. 1 alltid"). Att varje film står i båda, och extrafilmerna på samma
+      // plats i båda, prövar scripts/paritet.mjs i varje validering; att bygget har en huvudfilm, src/lib/film.ts.
       if (metod.film) {
+        const sista = metod.film.stillbilder[3].text;
+        const sida1 = (pdf) => execFileSync('pdftotext', ['-enc', 'UTF-8', '-f', '1', '-l', '1', pdf, '-'], { encoding: 'utf8' }).replace(/\s+/g, ' ');
         try {
-          const sida1 = execFileSync('pdftotext', ['-enc', 'UTF-8', '-f', '1', '-l', '1', join(mapp, 'utskrift.pdf'), '-'], { encoding: 'utf8' }).replace(/\s+/g, ' ');
-          const sista = metod.film.stillbilder[3].text;
-          sida1.includes(sista) ? ok('utskriften: filmens fyra stillbilder står på första sidan') : nej(`utskriften: filmens stillbilder ryms inte på första sidan (”${sista}” står inte där); korta faktarutans Material eller ingressen`);
+          sida1(join(mapp, 'utskrift.pdf')).includes(sista) ? ok('utskriften: huvudfilmens fyra stillbilder står på sidan 1') : nej(`utskriften: huvudfilmens stillbilder ryms inte på sidan 1 (”${sista}” står inte där); korta faktarutans Material eller ingressen`);
         } catch { console.log('  obs  pdftotext saknas, filmens stillbilder i utskriften är inte prövade'); }
+        try {
+          const wordPdf = join(mapp, 'word.pdf');
+          execFileSync('powershell', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', join(rot, 'scripts/word-pdf.ps1'), join(rot, 'dist/stodundervisning', `${id}.docx`), wordPdf], { stdio: 'ignore', timeout: 180000 });
+          sida1(wordPdf).includes(sista) ? ok('Word: huvudfilmens fyra stillbilder står på sidan 1') : nej(`Word: huvudfilmens stillbilder ryms inte på sidan 1 (”${sista}” står inte där); korta faktarutans Material eller ingressen`);
+        } catch { console.log('  obs  Word eller pdftotext saknas, filmens stillbilder i Word är inte prövade'); }
       }
       // Läskorten (K-063): varje lästräningstext är ett A4 med båda korten, med stöd och utan stöd, som i Word. Står
       // korten på var sin sida har texten eller utskriftens mått vuxit (Upprepad läsning 2026-09-27: en marginal på 1 em

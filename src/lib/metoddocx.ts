@@ -14,7 +14,7 @@ import { bagSvg, utanStod } from './lasflyt';
 import type { MetodPostISerie, SerieKoppling } from './serie';
 import { ANDIKA_ADRESS, ELEVTYPSNITT, VIK_TEXT, bildFor as bildForOrd, harElevtypsnitt, kartCeller, kortCeller, ljudenheter, ljudform, arDelark, type KartCell } from './ljudkort';
 import { arElevensBlad, harFragor, protokollDelas, textlangd } from './ramform';
-import { stillbilder, STILLBILD_MATT, type Film } from './film';
+import { filmerVid, huvudfilm, metodensFilmer, stegDelar, stillbilder, STILLBILD_MATT, type FilmPlats, type MetodFilm } from './film';
 import WORDSKALOR from '../data/lathund-word.json';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
@@ -213,11 +213,12 @@ function rubrikTabell(kolumner: string[], rader: string[][], bredder: number[], 
   }), { hojd: r.every((t) => !t.trim()) ? (o.tomHojd ?? 420) : undefined }));
   return [tabell([huvud, ...kropp], bredder), avstand()];
 }
-// Stegtabellen: nummer och namn i versaler, frågan under, sedan vad du gör och fraserna med citattecken.
-function stegTabell(d: NonNullable<MetodData['steg']>, stegOrd: string): Barn[] {
+// Stegtabellen: nummer och namn i versaler, frågan under, sedan vad du gör och fraserna med citattecken. fran och till
+// (räknat från 1) ger en del av tabellen, när en extrafilm står efter ett steg (src/lib/film.ts, stegDelar).
+function stegTabell(d: NonNullable<MetodData['steg']>, stegOrd: string, fran = 1, till = d.rader.length): Barn[] {
   const bredder = [2100, 3400, BREDD - 5500];
   const huvud = rad([stegOrd, 'Vad du gör', d.fraserRubrik].map((k, i) => cell([stycke(k, { fet: true, farg: FARG.vit, storlek: 20, efter: 0 })], { bredd: bredder[i], fyll: FARG.huvud, kanter: runt(kant(FARG.huvud)) })), { huvud: true });
-  const kropp = d.rader.map((r, i) => rad([
+  const kropp = d.rader.map((r, i) => [r, i] as const).slice(fran - 1, till).map(([r, i]) => rad([
     cell([
       stycke(`${i + 1}  ${r.namn}`, { fet: true, farg: FARG.huvud, storlek: 20, versaler: true, efter: r.fraga ? 20 : 0 }),
       ...(r.fraga ? [stycke(r.fraga, { kursiv: true, farg: FARG.svag, storlek: 20, efter: 0 })] : []),
@@ -867,12 +868,13 @@ function lektionsbankBarn(serie: SerieKoppling['serie']): Barn[] {
   return ut;
 }
 
-// Filmens fyra stillbilder på första sidan (src/lib/film.ts): rubriken, ingressen och bilderna två och två i en tabell
-// utan ramar, med numret och texten under varje bild, som i metodriggens Word-fil. Blocket hålls ihop, så att det står
-// helt på en sida.
+// En films fyra stillbilder (src/lib/film.ts): rubriken, ingressen och bilderna två och två i en tabell utan ramar, med
+// numret och texten under varje bild, som i metodriggens Word-fil. Blocket hålls ihop, så att det står helt på en sida.
+// Huvudfilmens står på första sidan, en extrafilms vid sitt moment, på samma platser som på sidan och i utskriften.
 const STILLBILD_CM = 7.75;
-function filmBarn(film: Film, id: string): Barn[] {
-  const bilder = stillbilder(id);
+function filmBarn(f: MetodFilm): Barn[] {
+  const film = f.film;
+  const bilder = stillbilder(f);
   const halv = Math.floor(BREDD / 2);
   const bredd = px(STILLBILD_CM);
   const hojd = Math.round((bredd * STILLBILD_MATT.hojd) / STILLBILD_MATT.bredd);
@@ -902,12 +904,17 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
   if (d.undertitel) ut.push(stycke(d.undertitel, { kursiv: true, farg: FARG.huvud, storlek: 24, efter: 80 }));
   ut.push(stycke(metaRad(d), { farg: FARG.svag, storlek: 20, efter: 200 }));
   ut.push(stycke(d.ingress, { storlek: 24, efter: 160 }));
-  // Faktatabellen först och sedan filmens stillbilder, före inledningen, som på sidan (Niclas 2026-09-30: inforutan först
-  // och sedan vad eleven gör). Så står bilderna på första sidan ("på s. 1 alltid"); efter inledningen, som i riggens
-  // Word-fil, hamnade de på sidan 2, eftersom sajtens första sida också har faktatabellen.
+  // Faktatabellen först och sedan huvudfilmens stillbilder, före inledningen, som på sidan (Niclas 2026-09-30: inforutan
+  // först och sedan vad eleven gör). Så står bilderna på första sidan ("på s. 1 alltid"); efter inledningen, som i
+  // riggens Word-fil, hamnade de på sidan 2, eftersom sajtens första sida också har faktatabellen.
   ut.push(...faktaTabell(d, post.serie));
-  if (d.film) ut.push(...filmBarn(d.film, post.id));
-  for (const s of d.inledning) ut.push(stycke(s));
+  const filmer = metodensFilmer(d, post.id);
+  const huvud = huvudfilm(filmer);
+  if (huvud) ut.push(...filmBarn(huvud));
+  // Extrafilmerna på samma platser som på sidan (Metod.astro): sist i ett avsnitt, efter en fri tabell eller en ram, efter
+  // ett steg eller efter ett stycke.
+  const filmVid = (...platser: FilmPlats[]) => { for (const p of platser) for (const f of filmerVid(filmer, p)) ut.push(...filmBarn(f)); };
+  d.inledning.forEach((s, i) => { ut.push(stycke(s)); filmVid({ stycke: i + 1 }); });
   if (d.upplagg) ut.push(...ruta(d.upplagg.rubrik, d.upplagg.text));
   if (d.gruppen) ut.push(...ruta(d.gruppen.rubrik, d.gruppen.text));
   if (d.principer) ut.push(...ruta(d.principer.rubrik, d.principer.text));
@@ -920,6 +927,7 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
     // En kort fri tabell (högst fem rader) hålls på en sida; en längre får bryta med rubrikraden upprepad.
     ut.push(...rubrikTabell(t.kolumner, t.rader, bredder, { radrubrik: false, hallIhop: t.rader.length <= 5 }));
     if (t.not) ut.push(...ruta('', t.not));
+    filmVid({ tabell: t.rubrik });
   };
   for (const t of d.tabeller.filter((x) => x.plats === 'efter-inledning')) friTabell(t);
   const pass = passOversikt(d);
@@ -930,29 +938,37 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
     ut.push(...passRemsa(pass));
     ut.push(...passTabell(pass, stegTexter(d).length, passOrd(d)));
     if (pass.efterTabell) ut.push(stycke(pass.efterTabell, { farg: FARG.svag }));
+    filmVid({ avsnitt: 'passrutin' }, { avsnitt: 'tidsschema' });
   } else if (d.passrutin) {
     ut.push(h2(d.passrutin.rubrik));
     if (d.passrutin.text) ut.push(stycke(d.passrutin.text, { hallIhop: true }));
     ut.push(...rutinRuta(stegTexter(d)));
     if (d.passrutin.efter) ut.push(stycke(d.passrutin.efter, { farg: FARG.svag }));
+    filmVid({ avsnitt: 'passrutin' });
   }
   if (d.tidsschema && !pass) {
     ut.push(h2(d.tidsschema.rubrik));
     if (d.tidsschema.text) ut.push(stycke(d.tidsschema.text, { hallIhop: true }));
     ut.push(...rubrikTabell(['Tid', 'Fas', 'Vad händer'], d.tidsschema.rader.map((r) => [r.tid, r.fas, r.vad]), [1700, 2200, BREDD - 3900], { fetAndra: true }));
     if (d.tidsschema.efter) ut.push(stycke(d.tidsschema.efter, { farg: FARG.svag }));
+    filmVid({ avsnitt: 'tidsschema' });
   }
   for (const t of d.tabeller.filter((x) => x.plats === 'efter-tidsschema')) friTabell(t);
   if (d.steg) {
     ut.push(h2(d.steg.rubrik));
     if (d.steg.text) ut.push(stycke(d.steg.text, { hallIhop: true }));
-    ut.push(...stegTabell(d.steg, passOrd(d).steg));
+    for (const [fran, till] of stegDelar(d.steg.rader.length, filmer)) {
+      ut.push(...stegTabell(d.steg, passOrd(d).steg, fran, till));
+      filmVid({ steg: till });
+    }
+    filmVid({ avsnitt: 'steg' });
   }
   for (const t of d.tabeller.filter((x) => x.plats === 'efter-steg')) friTabell(t);
   if (d.arbetsform) {
     ut.push(h2(d.arbetsform.rubrik));
     ut.push(stycke(d.arbetsform.text, { hallIhop: pass ? false : true }));
     if (!(pass && pass.delar.length)) ut.push(...band(d.arbetsform.delar));
+    filmVid({ avsnitt: 'arbetsform' });
   }
   for (const t of d.tabeller.filter((x) => x.plats === 'efter-arbetsform')) friTabell(t);
   if (d.exempel) {
@@ -966,6 +982,7 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
       if (d.exempel.tavlaText) ut.push(stycke(d.exempel.tavlaText, { farg: FARG.svag, fore: 80 }));
       else ut.push(avstand(80));
     }
+    filmVid({ avsnitt: 'exempel' });
   }
   if (d.fastnar) {
     ut.push(h2(d.fastnar.rubrik));
@@ -977,18 +994,21 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
     if (d.fastnar.efter) ut.push(stycke(d.fastnar.efter, { farg: FARG.svag, fore: 80 }));
     else ut.push(avstand(80));
     if (d.fastnar.motto) ut.push(...motto(d.fastnar.motto));
+    filmVid({ avsnitt: 'fastnar' });
   }
   for (const t of d.tabeller.filter((x) => x.plats === 'efter-fastnar')) friTabell(t);
   if (d.roll) {
     ut.push(h2(d.roll.rubrik));
     ut.push(stycke(d.roll.text, { hallIhop: true }));
     ut.push(...gorUndvik(d.roll.gor, d.roll.undvik));
+    filmVid({ avsnitt: 'roll' });
   }
   if (d.urval) {
     ut.push(h2(d.urval.rubrik));
     for (const s of d.urval.text) ut.push(stycke(s));
     if (d.urval.kravText) ut.push(stycke(d.urval.kravText, { hallIhop: true }));
     ut.push(...band(d.urval.krav));
+    filmVid({ avsnitt: 'urval' });
   }
   if (post.serie && !post.serie.lektion) ut.push(...lektionsbankBarn(post.serie.serie));
   for (const t of d.tabeller.filter((x) => x.plats === 'efter-urval')) friTabell(t);
@@ -997,36 +1017,43 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
     for (const s of d.hem.text) ut.push(stycke(s));
     if (d.hem.kontrakt) ut.push(...kontraktRuta(d.hem.kontrakt));
     if (d.hem.schema) ut.push(stycke(`${d.hem.schema.rubrik}: ${d.hem.schema.text ? `${d.hem.schema.text} ` : ''}Schemat med ${d.hem.schema.rader} rader att fylla i finns i planeringsmallarna.`, { farg: FARG.svag }));
+    filmVid({ avsnitt: 'hem' });
   }
   if (d.progression) {
     ut.push(h2(d.progression.rubrik));
     if (d.progression.text) ut.push(stycke(d.progression.text, { hallIhop: true }));
     // En kort kursplan hålls på en sida; en lång får bryta, rubrikraden upprepas.
     ut.push(...rubrikTabell([d.progression.enhet, 'Fokus', 'Lärarens roll'], d.progression.rader.map((r) => [r.led ? `${r.vecka}\n${r.led}` : r.vecka, r.fokus, r.roll]), [1700, 4000, BREDD - 5700], { hallIhop: d.progression.rader.length <= 6 }));
+    filmVid({ avsnitt: 'progression' });
   }
   if (d.uppfoljning) {
     ut.push(h2(d.uppfoljning.rubrik));
     if (d.uppfoljning.text) ut.push(stycke(d.uppfoljning.text, { hallIhop: true }));
     ut.push(...tvaKolumner(d.uppfoljning.rader));
+    filmVid({ avsnitt: 'uppfoljning' });
   }
   if (d.mal) {
     ut.push(h2(d.mal.rubrik));
     ut.push(stycke(d.mal.text, { hallIhop: true }));
     ut.push(...bockar(d.mal.punkter, 2));
+    filmVid({ avsnitt: 'mal' });
   }
   if (d.snabbmall) {
     ut.push(h2(d.snabbmall.rubrik));
     if (d.snabbmall.text) ut.push(stycke(d.snabbmall.text, { hallIhop: true }));
     ut.push(...snabbmallTabell(d.titel, d.snabbmall.fore, d.snabbmall.efter));
+    filmVid({ avsnitt: 'snabbmall' });
   }
   if (d.checklista) {
     ut.push(h2(d.checklista.rubrik));
     ut.push(...bockar(d.checklista.punkter, 1));
+    filmVid({ avsnitt: 'checklista' });
   }
   if (d.grund) {
     ut.push(h2(d.grund.rubrik));
     ut.push(...grundRuta(d.grund.text));
     if (d.grund.kallor) ut.push(stycke(d.grund.kallor, { farg: FARG.svag, storlek: 18 }));
+    filmVid({ avsnitt: 'grund' });
   }
   for (const t of d.tabeller.filter((x) => x.plats === 'efter-grund')) friTabell(t);
   if (d.ramar) {
@@ -1039,8 +1066,10 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
         for (const s of ram.text) ut.push(stycke(s));
         ut.push(stycke(d.elevblad[ram.rubrik] ? `${ram.rubrik} finns som elevens blad i planeringsmallarna, med rutor att skriva och rita i.` : `Ramen att fylla i, med ${ram.delar.length === 1 ? 'en del' : `${ram.delar.length} delar`}, finns i planeringsmallarna.`, { farg: FARG.svag }));
       } else ut.push(...ramBarn(ram, { kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d) }));
+      filmVid({ ram: ram.rubrik });
     }
     if (d.ramar.efter) ut.push(stycke(d.ramar.efter, { farg: FARG.svag }));
+    filmVid({ avsnitt: 'ramar' });
   }
   if (d.diplom) {
     ut.push(h2(d.diplom.rubrik));

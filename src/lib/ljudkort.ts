@@ -11,7 +11,7 @@
 // möter samma a och l på bladet som på korten. Inga Node-beroenden: metoddocx.ts körs också i webbläsaren.
 import BILDBANK from '../data/bildbank.json';
 import type { MetodData } from './metod';
-import { stillbilder } from './film';
+import { metodensFilmer, stillbilder } from './film';
 
 // Elevens typsnitt: Andika från SIL (Open Font License 1.1), här som delmängden Ljudlek Elev i public/fonts/ljudlek-elev/
 // med licensen. En ändrad fil som används för sig får inte heta Andika (OFL-FAQ 2.6), därför namnet, som metodriggen
@@ -90,11 +90,11 @@ export function ljudenheter(ord: string, delar = false): string[] {
   return ut;
 }
 
-// Bilderna en metod behöver, för Word-filerna: vid bygget läses de från disken, i webbläsaren hämtas de. Filmens fyra
-// stillbilder (src/lib/film.ts) hittas genom metodens id.
+// Bilderna en metod behöver, för Word-filerna: vid bygget läses de från disken, i webbläsaren hämtas de. Filmernas
+// stillbilder, huvudfilmens och extrafilmernas (src/lib/film.ts), hittas genom metodens id.
 export function metodensBilder(d: MetodData, id?: string): string[] {
   const ut = new Set<string>();
-  if (d.film && id) for (const b of stillbilder(id)) ut.add(b);
+  if (id) for (const f of metodensFilmer(d, id)) for (const b of stillbilder(f)) ut.add(b);
   for (const ram of d.ramar?.ramar ?? []) {
     for (const l of ram.listor ?? []) {
       const f = ljudform(d, l);

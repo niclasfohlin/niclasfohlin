@@ -1,25 +1,25 @@
 ---
-// Filmen ur metodriggen (fältet film, src/lib/film.ts): en lektions lathund överst på lektionens sida, eller en film om
-// en del av metoden där den står i Word-filen. Filmen visas som <img>, loopar och har inget ljud. Knappen pausar den
-// genom att byta filmen mot stillbild 1 och startar den igen (WCAG 2.2.2); med minskad rörelse står filmen still av sig
-// själv, och knappen visas inte. Texten till filmen är beskrivningen, samma text som filmens textrad.
+// En film ur metodriggen (src/lib/film.ts) på metodens sida: huvudfilmen efter faktarutan eller en extrafilm vid sitt
+// moment, alltid genom Filmruta.astro, som också ritar utskriftens stillbilder på samma plats. Filmen visas som <img>,
+// loopar och har inget ljud. Knappen pausar den genom att byta filmen mot stillbild 1 och startar den igen (WCAG
+// 2.2.2); med minskad rörelse står filmen still av sig själv, och knappen visas inte. Texten till filmen är
+// beskrivningen, samma text som filmens textrad.
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { FILM_MATT, filmAdress, stillbildAdress, stillbilder, type Film } from '../lib/film';
-interface Props { id: string; film: Film; titel: string }
-const { id, film, titel } = Astro.props;
+import { FILM_MATT, filmAdress, filmNamn, stillbilder, type MetodFilm } from '../lib/film';
+interface Props { f: MetodFilm; titel: string }
+const { f, titel } = Astro.props;
 // En film vars filer saknas stoppar bygget, så att en sida aldrig visar en trasig bild.
-for (const fil of [filmAdress(id), ...stillbilder(id)]) {
+for (const fil of [filmAdress(f), ...stillbilder(f)]) {
   if (!existsSync(join(process.cwd(), 'public', fil))) throw new Error(`${titel}: filmens fil ${fil} saknas i public/. Filerna kommer i metodriggens filmpaket (out/filmpaket/).`);
 }
-const namn = film.titel ?? 'Så gör eleven';
-const sekunder = Math.round(film.sekunder);
+const sekunder = Math.round(f.film.sekunder);
 ---
-<figure class="film" data-film>
-  <img src={filmAdress(id)} data-film={filmAdress(id)} data-stillbild={stillbildAdress(id, 1)} alt={`${film.titel ?? titel}, filmen: ${film.beskrivning}`} width={FILM_MATT.bredd} height={FILM_MATT.hojd} decoding="async" />
+<figure class="film" data-film data-namn={filmNamn(f)}>
+  <img src={filmAdress(f)} data-film={filmAdress(f)} data-stillbild={stillbilder(f)[0]} alt={`${filmNamn(f)}, filmen: ${f.film.beskrivning}`} width={FILM_MATT.bredd} height={FILM_MATT.hojd} loading={f.huvud ? undefined : 'lazy'} decoding="async" />
   <figcaption>
     <button type="button" class="film-knapp" hidden>Pausa</button>
-    <span><strong>{namn}</strong> · {sekunder} sekunder, som börjar om</span>
+    <span><strong>{filmNamn(f)}</strong> · {sekunder} sekunder, som börjar om</span>
   </figcaption>
 </figure>
 
@@ -36,8 +36,8 @@ const sekunder = Math.round(film.sekunder);
       const pausa = knapp.textContent === 'Pausa';
       bild.src = pausa ? bild.dataset.stillbild! : bild.dataset.film!;
       knapp.textContent = pausa ? 'Spela' : 'Pausa';
-      knapp.setAttribute('aria-label', pausa ? 'Spela filmen' : 'Pausa filmen');
+      knapp.setAttribute('aria-label', `${pausa ? 'Spela' : 'Pausa'} filmen ${figur.dataset.namn ?? ''}`.trim());
     });
-    knapp.setAttribute('aria-label', 'Pausa filmen');
+    knapp.setAttribute('aria-label', `Pausa filmen ${figur.dataset.namn ?? ''}`.trim());
   }
 </script>

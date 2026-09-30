@@ -5,9 +5,8 @@ import Metod from '../../components/Metod.astro';
 import Nedladdning from '../../components/Nedladdning.astro';
 import Seriemeny from '../../components/Seriemeny.astro';
 import Seriefot from '../../components/Seriefot.astro';
-import Film from '../../components/Film.astro';
-import Filmbilder from '../../components/Filmbilder.astro';
-import { arLektionsfilm } from '../../lib/film';
+import Filmruta from '../../components/Filmruta.astro';
+import { huvudfilm, metodensFilmer, provaHuvudfilmer } from '../../lib/film';
 import Delning from '../../components/Delning.astro';
 import { delningPa } from '../../lib/delning';
 import Kommentarer from '../../components/Kommentarer.astro';
@@ -19,12 +18,16 @@ import { site } from '../../data/site';
 
 export async function getStaticPaths() {
   const metoder = await publicerade('stodundervisning');
+  // Varje metod har en huvudfilm; bygget stannar annars (src/lib/film.ts).
+  provaHuvudfilmer(metoder);
   const serier = byggSerier(metoder);
   return metoder.map((m) => ({ params: { id: m.id }, props: { m, alla: metoder, koppling: serieKoppling(m.id, m.data, serier) } }));
 }
 
 const { m, alla, koppling } = Astro.props;
 const d = m.data;
+// Huvudfilmen efter faktarutan (src/lib/film.ts); extrafilmerna ritar Metod.astro vid sina moment.
+const huvud = huvudfilm(metodensFilmer(d, m.id));
 // En lektion har sin serie i menyn och sist på sidan, så att Hör ihop med bara visar metoder utanför serien.
 const iSerien = (x: (typeof alla)[number]) => Boolean(koppling) && (x.id === koppling!.serie.id || x.data.serie === koppling!.serie.id);
 const relaterade = alla.filter((x) => d.relaterade.includes(x.id) && !iSerien(x));
@@ -61,11 +64,10 @@ const antalLektioner = serie?.lektioner.length ?? 0;
           {d.uppdaterad && <><dt>Uppdaterad</dt><dd>{formateraDatum(d.uppdaterad)}</dd></>}
         </dl>
       </div>
-      {/* Lektionens film är dess lathund: faktarutan först och sedan det eleven gör, innan texten börjar (Niclas 2026-09-30).
-          På datorn står den under ingressen, med faktarutan till höger. */}
-      {d.film && arLektionsfilm(d.film) && <Film id={m.id} film={d.film} titel={d.titel} />}
-      {/* I utskriften står filmens fyra stillbilder här, direkt efter faktarutan, som på Word-filens första sida. */}
-      {d.film && <Filmbilder id={m.id} film={d.film} />}
+      {/* Huvudfilmen: faktarutan först och sedan det eleven gör, innan texten börjar (Niclas 2026-09-30). På datorn står
+          filmen under ingressen, med faktarutan till höger; i utskriften står dess fyra stillbilder här, direkt efter
+          faktarutan, som på Word-filens första sida. Extrafilmerna står i texten (Metod.astro). */}
+      {huvud && <Filmruta filmer={[huvud]} titel={d.titel} />}
       {delningPa && <Delning sida={`/stodundervisning/${m.id}`} titel={d.titel} plats="topp" />}
       <Nedladdning id={m.id} titel={d.titel} harMallar={harMallar(d)} harLathund={harLathund(d)} ramar={d.ramar?.rubrik.toLowerCase()} />
     </div>
