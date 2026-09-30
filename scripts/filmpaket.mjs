@@ -5,10 +5,17 @@
 // public/stodundervisning/, byter blocken film och filmer sist i metodens fil mot paketets, och stryker metoden ur
 // VANTAR_PA_FILM i src/lib/film.ts när den har fått sin huvudfilm. Inget annat ur riggen tas in.
 //
+// Rätt direkt, inte efter (Niclas 2026-09-30: få uppladdningar): allt prövas innan något skrivs. Fälten prövas med
+// schemats regler (src/content.config.ts), platsen mot metodens fil (platsFel i src/lib/film.ts) och filerna mot paketet.
+// En huvudfilm med riggens äldre efterStycke eller efter får fältet borttaget, med ett besked, eftersom huvudfilmen alltid
+// står efter faktarutan. En metod som redan har film på sajten lämnas orörd om paketets block är detsamma, och skrivs
+// bara över med --ersatt, så att sajtens rättningar i en film inte försvinner av misstag.
+//
 //   node scripts/filmpaket.mjs <paketets mapp> [<id> …]   ta in hela paketet, eller bara de angivna metoderna
 //   node scripts/filmpaket.mjs <paketets mapp> --prova    pröva paketet utan att ändra något
+//   node scripts/filmpaket.mjs <paketets mapp> --ersatt   ersätt också filmer som redan finns och skiljer sig
 //
-// Sedan: npm run validera, node scripts/filmplats.mjs och metodprov med --bilder för varje metod (METODER.md).
+// Sedan det skriptet skriver ut: npm run validera, filmplats.mjs, metodprov med --bilder och en titt på varje film.
 import { copyFileSync, existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -17,6 +24,7 @@ import { parse as parseYaml } from 'yaml';
 const rot = join(dirname(fileURLToPath(import.meta.url)), '..');
 const [paket, ...rest] = process.argv.slice(2);
 const prova = rest.includes('--prova');
+const ersatt = rest.includes('--ersatt');
 const valda = rest.filter((a) => !a.startsWith('--'));
 if (!paket || !existsSync(join(paket, 'film-falt.yaml'))) {
   console.error('Användning: node scripts/filmpaket.mjs <paketets mapp> [<id> …] [--prova]. Mappen ska ha film-falt.yaml och public/stodundervisning/.');
@@ -36,28 +44,79 @@ for (const rad of readFileSync(join(paket, 'film-falt.yaml'), 'utf8').replace(/\
   if (aktuell) avsnitt.get(aktuell).push(rad);
 }
 const klara = [];
-const { tolkaEfter, platsFel } = await import('../src/lib/film.ts');
+const noter = [];
+const { tolkaEfter, platsFel, HOGST_EXTRAFILMER } = await import('../src/lib/film.ts');
+// Schemats regler för en film (filmFalt i src/content.config.ts), så att --prova säger det som bygget annars säger efteråt.
+const FALT = ['titel', 'sekunder', 'beskrivning', 'rubrik', 'ingress', 'stillbilder'];
+const text = (x) => typeof x === 'string' && x.trim().length > 0;
+function filmFel(f, namn, extra) {
+  const ut = [];
+  const tillatna = extra ? [...FALT, 'nr', 'efter'] : FALT;
+  const okanda = Object.keys(f ?? {}).filter((k) => !tillatna.includes(k));
+  if (okanda.length) ut.push(`${namn} har fälten ${okanda.join(', ')}, som schemat inte tar`);
+  if (!(typeof f?.sekunder === 'number' && f.sekunder > 0)) ut.push(`${namn}: sekunder ska vara ett tal`);
+  for (const k of ['beskrivning', 'rubrik', 'ingress']) if (!text(f?.[k])) ut.push(`${namn}: ${k} saknas`);
+  if (f?.titel !== undefined && !text(f.titel)) ut.push(`${namn}: titel är tom`);
+  if (!Array.isArray(f?.stillbilder) || f.stillbilder.length !== 4) ut.push(`${namn}: fyra stillbilder`);
+  else f.stillbilder.forEach((b, i) => { if (!text(b?.text)) ut.push(`${namn}: stillbild ${i + 1} saknar text`); else if (b.text.trim().length > 55) ut.push(`${namn}: stillbild ${i + 1} har ${b.text.trim().length} tecken, högst 55`); });
+  if (extra && ![2, 3].includes(f?.nr)) ut.push(`${namn}: nr är 2 eller 3`);
+  return ut;
+}
+// Riggens äldre fält för huvudfilmens plats tas bort ur blocket: raderna direkt under film: med två blankstegs indrag.
+function utanPlats(blocktext) {
+  const ut = [];
+  let iFilm = false;
+  for (const rad of blocktext.split('\n')) {
+    if (/^film:/.test(rad)) iFilm = true;
+    else if (/^\S/.test(rad)) iFilm = false;
+    if (iFilm && /^ {2}(efterStycke|efter):/.test(rad)) continue;
+    ut.push(rad);
+  }
+  return ut.join('\n');
+}
+const sorterad = (x) => JSON.stringify(x, (_, v) => (v && typeof v === 'object' && !Array.isArray(v) ? Object.fromEntries(Object.keys(v).sort().map((k) => [k, v[k]])) : v));
 for (const [id, rader] of avsnitt) {
   if ((valda.length && !valda.includes(id)) || !kanda.has(id)) continue;
-  const text = rader.join('\n').trim();
-  const data = parseYaml(text) ?? {};
+  let blocktext = rader.join('\n').trim();
+  const forsta = parseYaml(blocktext) ?? {};
+  if (forsta.film && ('efterStycke' in forsta.film || 'efter' in forsta.film)) {
+    blocktext = utanPlats(blocktext);
+    noter.push(`${id}: huvudfilmens efterStycke eller efter är borttaget; huvudfilmen står alltid efter faktarutan.`);
+  }
+  const data = parseYaml(blocktext) ?? {};
   const okanda = Object.keys(data).filter((k) => k !== 'film' && k !== 'filmer');
   if (okanda.length) { fel.push(`${id}: paketet har fälten ${okanda.join(', ')}; bara film och filmer tas in.`); continue; }
   if (!data.film) { fel.push(`${id}: avsnittet saknar huvudfilmen (film).`); continue; }
-  if ('efterStycke' in data.film || 'efter' in data.film) { fel.push(`${id}: huvudfilmen har efterStycke eller efter; den står alltid efter faktarutan, så fältet ska bort.`); continue; }
-  // Platsen prövas med schemats regler mot metodens fil, så att --prova säger det som bygget annars säger efteråt.
+  const filmer = data.filmer ?? [];
+  const faltfel = [...filmFel(data.film, 'huvudfilmen', false), ...filmer.flatMap((f, i) => filmFel(f, `extrafilm ${f?.nr ?? i + 2}`, true))];
+  if (filmer.length > HOGST_EXTRAFILMER) faltfel.push(`${filmer.length} extrafilmer, högst ${HOGST_EXTRAFILMER}`);
+  if (new Set(filmer.map((f) => f.nr)).size !== filmer.length) faltfel.push('två extrafilmer har samma nr');
+  const nycklar = [data.film, ...filmer].map((f) => `${f?.rubrik}\n${f?.ingress}`);
+  if (new Set(nycklar).size !== nycklar.length) faltfel.push('två filmer har samma rubrik och ingress');
+  if (faltfel.length) { fel.push(`${id}: ${faltfel.join('; ')}.`); continue; }
+  // Platsen prövas med schemats regler mot metodens fil.
   const metod = parseYaml(readFileSync(join(metodMapp, `${id}.yaml`), 'utf8'));
-  const platsfel = (data.filmer ?? []).map((f) => { const v = tolkaEfter(String(f.efter ?? '')); return v ? platsFel(metod, v) : `efter "${f.efter}" är ingen plats`; }).filter(Boolean);
+  const platsfel = filmer.map((f) => { const v = tolkaEfter(String(f.efter ?? '')); return v ? platsFel(metod, v) : `efter "${f.efter}" är ingen plats`; }).filter(Boolean);
   if (platsfel.length) { fel.push(`${id}: ${platsfel.join('; ')}.`); continue; }
-  const nummer = ['', ...(data.filmer ?? []).map((f) => String(f.nr))];
+  const nummer = ['', ...filmer.map((f) => String(f.nr))];
   const filer = nummer.flatMap((n) => ['', '-1', '-2', '-3', '-4'].map((s) => `${id}-film${n}${s}.svg`));
   const saknas = filer.filter((f) => !existsSync(join(paket, 'public/stodundervisning', f)));
   if (saknas.length) { fel.push(`${id}: filerna ${saknas.join(', ')} saknas i paketet.`); continue; }
-  klara.push({ id, text, filer, antal: nummer.length });
+  // En metod som redan har film: orörd när blocket är detsamma, och ersatt bara med --ersatt.
+  if (metod.film) {
+    const lika = sorterad({ film: metod.film, filmer: metod.filmer ?? [] }) === sorterad({ film: data.film, filmer });
+    if (lika) { noter.push(`${id}: filmerna är desamma som på sajten; blocket lämnas orört (filerna kopieras ändå).`); }
+    else if (!ersatt) { fel.push(`${id}: metoden har redan film på sajten, och paketets block skiljer sig. Jämför och kör med --ersatt om paketets ska gälla; sajtens rättningar i filmen går då förlorade.`); continue; }
+    else noter.push(`${id}: filmerna ersätts med paketets (--ersatt).`);
+    klara.push({ id, text: blocktext, filer, antal: nummer.length, orord: lika });
+    continue;
+  }
+  klara.push({ id, text: blocktext, filer, antal: nummer.length, orord: false });
 }
 for (const id of valda) if (!avsnitt.has(id)) fel.push(`${id}: finns inte i paketets film-falt.yaml.`);
 if (fel.length) { console.error(`filmpaket: ${fel.length} fel, inget är ändrat:\n  ${fel.join('\n  ')}`); process.exit(1); }
-if (prova) { for (const k of klara) console.log(`ok  ${k.id}: ${k.antal} ${k.antal === 1 ? 'film' : 'filmer'}, ${k.filer.length} filer`); process.exit(0); }
+for (const n of noter) console.log(`obs  ${n}`);
+if (prova) { for (const k of klara) console.log(`ok   ${k.id}: ${k.antal} ${k.antal === 1 ? 'film' : 'filmer'}, ${k.filer.length} filer`); process.exit(0); }
 
 // Blocken film och filmer står sist i metodens fil; de gamla tas bort och paketets läggs dit.
 const utanFilmer = (yaml) => {
@@ -76,7 +135,7 @@ const utanFilmer = (yaml) => {
 for (const k of klara) {
   for (const f of k.filer) copyFileSync(join(paket, 'public/stodundervisning', f), join(rot, 'public/stodundervisning', f));
   const fil = join(metodMapp, `${k.id}.yaml`);
-  writeFileSync(fil, `${utanFilmer(readFileSync(fil, 'utf8'))}${k.text}\n`);
+  if (!k.orord) writeFileSync(fil, `${utanFilmer(readFileSync(fil, 'utf8'))}${k.text}\n`);
   console.log(`${k.id}: ${k.antal} ${k.antal === 1 ? 'film' : 'filmer'} och ${k.filer.length} filer intagna.`);
 }
 // Metoderna som nu har sin huvudfilm stryks ur VANTAR_PA_FILM, så att bygget kräver filmen av dem också.
@@ -94,4 +153,10 @@ if (lista) {
 const anvanda = new Set(klara.flatMap((k) => k.filer));
 const overblivna = readdirSync(join(rot, 'public/stodundervisning')).filter((f) => klara.some((k) => f.startsWith(`${k.id}-film`) && f.endsWith('.svg')) && !anvanda.has(f));
 if (overblivna.length) console.log(`Överblivna filmfiler, ta bort dem om de inte används: ${overblivna.join(', ')}`);
-console.log('Nästa steg: npm run validera, node scripts/filmplats.mjs och metodprov med --bilder för varje metod.');
+const ids = klara.map((k) => k.id);
+console.log(`\nNästa steg, i ordning, innan något laddas upp (METODER.md under Filmerna):
+  1. npm run validera
+  2. node scripts/filmplats.mjs --utan-bygge ${ids.join(' ')}
+  3. för varje metod: node scripts/metodprov.mjs <id> --bilder   (${ids.join(', ')})
+  4. titta på varje film där den står, på sidan, i utskriften och i Word, och läs filmernas texter som svenska
+  5. granskning, sedan en commit och en push med allt`);
