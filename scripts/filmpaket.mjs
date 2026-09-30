@@ -9,7 +9,10 @@
 // schemats regler (src/content.config.ts), platsen mot metodens fil (platsFel i src/lib/film.ts) och filerna mot paketet.
 // En huvudfilm med riggens äldre efterStycke eller efter får fältet borttaget, med ett besked, eftersom huvudfilmen alltid
 // står efter faktarutan. En metod som redan har film på sajten lämnas orörd om paketets block är detsamma, och skrivs
-// bara över med --ersatt, så att sajtens rättningar i en film inte försvinner av misstag.
+// bara över med --ersatt, så att sajtens rättningar i en film inte försvinner av misstag; med --ersatt visas vad
+// som ändras, fält för fält. Varje svg-fil prövas: den ska stå för sig själv (en film som <img> hämtar inga typsnitt,
+// bilder eller stilar utifrån), ha filmens eller stillbildens mått och inget skript. Filer i paketet som inte är filmer
+// (ett typsnitt, metodtexter) räknas upp: skriptet tar inte in dem, och LAS-MIG.md säger vad de är till för.
 //
 //   node scripts/filmpaket.mjs <paketets mapp> [<id> …]   ta in hela paketet, eller bara de angivna metoderna
 //   node scripts/filmpaket.mjs <paketets mapp> --prova    pröva paketet utan att ändra något
@@ -74,6 +77,34 @@ function utanPlats(blocktext) {
   }
   return ut.join('\n');
 }
+// En svg som visas som <img> laddar inga externa resurser: allt ska finnas i filen (data:-adresser eller #id).
+const FILMMATT = { film: '0 0 960 540', stillbild: '0 0 960 500' };
+function svgFel(fil, slag) {
+  const svg = readFileSync(fil, 'utf8');
+  const namn = fil.split(/[\\/]/).pop();
+  const ut = [];
+  if (!/<svg[\s>]/.test(svg) || !/<\/svg>\s*$/.test(svg)) ut.push(`${namn} är ingen hel svg-fil`);
+  const viewBox = svg.match(/<svg[^>]*\sviewBox="([^"]+)"/)?.[1]?.trim().replace(/\s+/g, ' ');
+  if (viewBox !== FILMMATT[slag]) ut.push(`${namn} har viewBox "${viewBox ?? 'saknas'}", ${slag}en ska ha "${FILMMATT[slag]}"`);
+  if (/<script[\s>]/i.test(svg)) ut.push(`${namn} har ett skript`);
+  const externa = [
+    ...[...svg.matchAll(/url\(\s*['"]?([^'")\s]+)/g)].map((m) => m[1]),
+    ...[...svg.matchAll(/(?:xlink:)?href="([^"]+)"/g)].map((m) => m[1]),
+    ...[...svg.matchAll(/@import\s+(?:url\()?['"]?([^'");\s]+)/g)].map((m) => m[1]),
+  ].filter((a) => !a.startsWith('data:') && !a.startsWith('#'));
+  if (externa.length) ut.push(`${namn} hämtar ${[...new Set(externa)].slice(0, 3).join(', ')} utifrån, vilket en film som <img> inte kan: bädda in det i filen`);
+  return ut;
+}
+// Vad som skiljer två filmblock, fält för fält, för den som ska läsa riggens ändringar innan de tas in.
+function skillnader(fore, efter, sti = '') {
+  if (JSON.stringify(fore) === JSON.stringify(efter)) return [];
+  if (fore && efter && typeof fore === 'object' && typeof efter === 'object') {
+    const nycklar = [...new Set([...Object.keys(fore), ...Object.keys(efter)])];
+    return nycklar.flatMap((k) => skillnader(fore[k], efter[k], sti ? `${sti}.${k}` : k));
+  }
+  const visa = (x) => (x === undefined ? '(finns inte)' : typeof x === 'string' ? `”${x}”` : JSON.stringify(x));
+  return [`${sti}: ${visa(fore)} → ${visa(efter)}`];
+}
 const sorterad = (x) => JSON.stringify(x, (_, v) => (v && typeof v === 'object' && !Array.isArray(v) ? Object.fromEntries(Object.keys(v).sort().map((k) => [k, v[k]])) : v));
 for (const [id, rader] of avsnitt) {
   if ((valda.length && !valda.includes(id)) || !kanda.has(id)) continue;
@@ -102,20 +133,29 @@ for (const [id, rader] of avsnitt) {
   const filer = nummer.flatMap((n) => ['', '-1', '-2', '-3', '-4'].map((s) => `${id}-film${n}${s}.svg`));
   const saknas = filer.filter((f) => !existsSync(join(paket, 'public/stodundervisning', f)));
   if (saknas.length) { fel.push(`${id}: filerna ${saknas.join(', ')} saknas i paketet.`); continue; }
+  const svgfel = filer.flatMap((f) => svgFel(join(paket, 'public/stodundervisning', f), /-\d\.svg$/.test(f) ? 'stillbild' : 'film'));
+  if (svgfel.length) { fel.push(`${id}: ${svgfel.join('; ')}.`); continue; }
   // En metod som redan har film: orörd när blocket är detsamma, och ersatt bara med --ersatt.
   if (metod.film) {
     const lika = sorterad({ film: metod.film, filmer: metod.filmer ?? [] }) === sorterad({ film: data.film, filmer });
     if (lika) { noter.push(`${id}: filmerna är desamma som på sajten; blocket lämnas orört (filerna kopieras ändå).`); }
     else if (!ersatt) { fel.push(`${id}: metoden har redan film på sajten, och paketets block skiljer sig. Jämför och kör med --ersatt om paketets ska gälla; sajtens rättningar i filmen går då förlorade.`); continue; }
-    else noter.push(`${id}: filmerna ersätts med paketets (--ersatt).`);
+    else noter.push(`${id}: filmerna ersätts med paketets (--ersatt):\n       ${skillnader({ film: metod.film, filmer: metod.filmer ?? [] }, { film: data.film, filmer }).join('\n       ')}`);
     klara.push({ id, text: blocktext, filer, antal: nummer.length, orord: lika });
     continue;
   }
   klara.push({ id, text: blocktext, filer, antal: nummer.length, orord: false });
 }
 for (const id of valda) if (!avsnitt.has(id)) fel.push(`${id}: finns inte i paketets film-falt.yaml.`);
-if (fel.length) { console.error(`filmpaket: ${fel.length} fel, inget är ändrat:\n  ${fel.join('\n  ')}`); process.exit(1); }
+// Allt annat i paketet räknas upp, så att inget missas: skriptet tar bara in filmerna.
+const filmfil = /^[a-z0-9-]+-film\d?(-\d)?\.svg$/;
+function allaFiler(mapp, bas = '') {
+  return readdirSync(join(mapp, bas), { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? allaFiler(mapp, join(bas, e.name)) : [join(bas, e.name).replace(/\\/g, '/')]));
+}
+const ovriga = allaFiler(paket).filter((f) => !['film-falt.yaml', 'LAS-MIG.md', 'index.html'].includes(f) && !(f.startsWith('public/stodundervisning/') && filmfil.test(f.split('/').pop())));
+if (ovriga.length) noter.push(`paketet har också ${ovriga.join(', ')}. Skriptet tar inte in dem; läs LAS-MIG.md för vad de är till för, och ta in dem för sig (en metodtext med scripts/metoddiff.mjs).`);
 for (const n of noter) console.log(`obs  ${n}`);
+if (fel.length) { console.error(`filmpaket: ${fel.length} fel, inget är ändrat:\n  ${fel.join('\n  ')}`); process.exit(1); }
 if (prova) { for (const k of klara) console.log(`ok   ${k.id}: ${k.antal} ${k.antal === 1 ? 'film' : 'filmer'}, ${k.filer.length} filer`); process.exit(0); }
 
 // Blocken film och filmer står sist i metodens fil; de gamla tas bort och paketets läggs dit.
