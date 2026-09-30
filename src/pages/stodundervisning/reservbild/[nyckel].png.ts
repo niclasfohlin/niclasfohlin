@@ -7,8 +7,8 @@ import { byggSerier, serieKoppling } from '../../../lib/serie';
 import { site } from '../../../data/site';
 
 // /stodundervisning/reservbild/<nyckel>.png: reservbilden till en bild i Word-filerna (src/lib/reservbild.ts), för filen
-// som webbläsaren bygger när läsaren väljer flera metoder. Bygget går igenom varje metod som webbläsaren kan välja, med
-// samma data som metoder.json, bygger dess Word-fil en gång för att se vilka bilder den har och ritar varje bilds
+// som webbläsaren bygger när läsaren väljer flera metoder. Bygget går igenom varje publicerad metod, lektionerna också,
+// med samma data som metoder.json, bygger dess Word-fil en gång för att se vilka bilder den har och ritar varje bilds
 // reservbild ur samma SVG, med samma ritare som Word-filerna som byggs här. Läsaren hämtar dem bara när hen bygger en fil.
 export const getStaticPaths: GetStaticPaths = async () => {
   const metoder = await metoderSorterade();

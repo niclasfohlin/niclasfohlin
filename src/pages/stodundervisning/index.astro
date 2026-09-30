@@ -231,9 +231,9 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
         const elevtypsnitt = valda.some((p) => ljud.harElevtypsnitt(p.data)) ? await hamta(ljud.ELEVTYPSNITT_TTF) : undefined;
         // Reservbilderna (src/lib/reservbild.ts): filen byggs först en gång för att se vilka bilder den har, och varje
         // bilds reservbild hämtas som bygget ritade den ur samma SVG, som när filerna byggs vid bygget.
-        const samla = reserv.samlaReservbilder();
-        metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt, png: samla.png } });
-        const png = new Map(await Promise.all([...samla.behov.keys()].map(async (n) => [n, await hamta(reserv.reservAdress(n))] as const)));
+        const behovet = reserv.samlaReservbilder();
+        metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt, png: behovet.png } });
+        const png = new Map(await Promise.all([...behovet.behov.keys()].map(async (n) => [n, await hamta(reserv.reservAdress(n))] as const)));
         const dokument = metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt, png: (svg, bredd, hojd) => png.get(reserv.reservNyckel(svg, bredd, hojd)) } });
         const blob = await Packer.toBlob(dokument);
         const filnamn = poster.length === 1 ? `${poster[0].id}${medMallarVal ? '' : '-beskrivning'}.docx` : `metoder-niclasfohlin-se${medMallarVal ? '' : '-beskrivningar'}.docx`;

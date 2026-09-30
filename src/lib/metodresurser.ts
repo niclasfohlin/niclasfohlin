@@ -26,9 +26,9 @@ const FAMILJ = 'Reservbild';
 // Filerna ska vara små (Niclas 2026-09-30: "lågt kb och fottryck", men "Får ju inte bli bara suddigt"). Bilderna är
 // teckningar med få färger, så reservbilden sparas med en färgpalett och utan brusutjämning, i dubbla
 // skärmupplösningen: med kvalitet 70 väljer libimagequant så få färger som varje bild tål, och tar fler där en bild
-// behöver dem. Alla 276 bilder blev 897 KB mot 2 952 KB som vanlig PNG, och ingen skillnad syntes mot originalet
-// (prövat 2026-09-30 på de tyngsta stillbilderna, bildkort och läskort; 16 färger var 831 KB men kan slå ihop färger i
-// ett färgrikt bildkort).
+// behöver dem. Mätt 2026-09-30: 276 bilder blev 897 KB mot 2 952 KB som vanlig PNG, och ingen skillnad syntes mot
+// originalet (de tyngsta stillbilderna, bildkort och läskort; 16 färger var 831 KB men kan slå ihop färger i ett
+// färgrikt bildkort). Bygget har 292 reservbilder, omkring 940 KB.
 // Reservbilden får exakt rutans mått (reservMatt): SVG-bilden ritas så stor den ryms i rutan och läggs i mitten, med
 // genomskinlig kant där proportionerna skiljer sig (ett bildkort som är 3 procent smalare än högt i en kvadratisk ruta,
 // en läskortsrad där rutan avrundats till hela punkter). Ingen bild skalas om i efterhand, så inget blir suddigt.

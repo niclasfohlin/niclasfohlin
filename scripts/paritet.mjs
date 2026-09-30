@@ -302,27 +302,27 @@ for (const namn of readdirSync(join(rot, 'dist/stodundervisning')).filter((f) =>
   const dokument = await zip.file('word/document.xml').async('string');
   const mal = new Map([...(await zip.file('word/_rels/document.xml.rels').async('string')).matchAll(/<Relationship\b([^>]*)\/>/g)]
     .map((m) => [m[1].match(/Id="([^"]+)"/)?.[1], m[1].match(/Target="([^"]+)"/)?.[1]]));
+  // Bara PNG-bilder som är reservbild till en SVG prövas (granskningen: en vanlig PNG i en mall är ingen reservbild).
   for (const ritning of dokument.matchAll(/<w:drawing>[\s\S]*?<\/w:drawing>/g)) {
     const ruta = ritning[0].match(/<wp:extent cx="(\d+)" cy="(\d+)"/);
     const blip = ritning[0].match(/<a:blip r:embed="([^"]+)"/);
     if (!ruta || !blip || !ritning[0].includes('svgBlip')) continue;
-    const png = await zip.file(`word/${mal.get(blip[1])}`)?.async('nodebuffer');
-    if (!png) continue;
+    const media = `word/${mal.get(blip[1])}`;
+    const png = await zip.file(media)?.async('nodebuffer');
+    if (!png) { reservFel.add(`${namn}: en bild saknar sin reservbild ${media}`); continue; }
+    reservAntal++;
     const [pw, ph] = [png.readUInt32BE(16), png.readUInt32BE(20)];
+    if (pw <= 1 && ph <= 1) reservFel.add(`${namn}: en bild har en punkt som reservbild, som Google Dokument visar som en ruta`);
+    else if (!reservbilder.has(sha(png))) reservFel.add(`${namn}: reservbilden ${media} finns inte under /stodundervisning/reservbild/, så filen som webbläsaren bygger saknar den (src/pages/stodundervisning/reservbild/[nyckel].png.ts)`);
     if (Math.abs(pw / ph / (Number(ruta[1]) / Number(ruta[2])) - 1) > Math.max(0.005, 1.5 / ph)) reservFel.add(`${namn}: en reservbild är ${pw} × ${ph} pixlar men står i en ruta med andra proportioner (reservMatt i src/lib/reservbild.ts)`);
   }
   for (const media of Object.keys(zip.files).filter((n) => n.startsWith('word/media/'))) {
-    if (media.endsWith('.png')) {
-      const png = await zip.file(media).async('nodebuffer');
-      reservAntal++;
-      if (png.readUInt32BE(16) <= 1 && png.readUInt32BE(20) <= 1) reservFel.add(`${namn}: en bild har en punkt som reservbild, som Google Dokument visar som en ruta`);
-      else if (!reservbilder.has(sha(png))) reservFel.add(`${namn}: reservbilden ${media} finns inte under /stodundervisning/reservbild/, så filen som webbläsaren bygger saknar den (src/pages/stodundervisning/reservbild/[nyckel].png.ts)`);
-    } else if (media.endsWith('.svg')) {
+    if (media.endsWith('.svg')) {
       const svg = await zip.file(media).async('string');
       for (const t of svg.matchAll(/<text\b[^>]*>([\s\S]*?)<\/text>/g)) {
         for (const tecken of avkoda(t[1].replace(/<[^>]+>/g, ''))) {
           const c = tecken.codePointAt(0);
-          if (c > 0x20 && !reservTypsnitt.has(c)) reservFel.add(`${namn}: tecknet ${tecken} (U+${c.toString(16).toUpperCase().padStart(4, '0')}) i en bild saknas i reservbildens typsnitt; lägg det i TECKEN i scripts/reservtypsnitt.py och kör skriptet`);
+          if (c > 0x20 && !reservTypsnitt.has(c)) reservFel.add(`${namn}: tecknet ${tecken} (U+${c.toString(16).toUpperCase().padStart(4, '0')}) i en bild saknas i reservbildens typsnitt; lägg det i TECKEN i scripts/reservtypsnitt.py och kör skriptet, och stannar skriptet för att Andika saknar tecknet, be riggen byta det i bilden`);
         }
       }
     }

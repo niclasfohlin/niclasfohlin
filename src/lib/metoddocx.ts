@@ -10,7 +10,7 @@ import {
 } from 'docx';
 import { arbetsformRad, arEttKort, arProtokoll, arskursText, datumText, ejBryt, etikettOchText, laskortKolumn, laskortRubrik, lathundFakta, lathundForm, metaRad, metodAdress, passOrd, passOversikt, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost, type PassOrd } from './metod';
 import { brakDelar, delnamn, kortInfo, lage, STANDARD_NAMNARE, type KortInfo, type Mall } from './brak';
-import { bagSvg, utanStod } from './lasflyt';
+import { bagSvg, brakSvg, utanStod } from './lasflyt';
 import type { MetodPostISerie, SerieKoppling } from './serie';
 import { ANDIKA_ADRESS, ELEVTYPSNITT, VIK_TEXT, bildFor as bildForOrd, harElevtypsnitt, kartCeller, kortCeller, ljudenheter, ljudform, arDelark, type KartCell } from './ljudkort';
 import { arElevensBlad, harFragor, protokollDelas, textlangd } from './ramform';
@@ -130,10 +130,25 @@ function staplatBrak(taljare: string, namnare: string, storlek: number, farg: st
   // där en TextRun annars står.
   return (ImportedXmlComponent.fromXmlString(xml) as unknown as { root: unknown[] }).root[0] as TextRun;
 }
+// Ett bråk som står ensamt i stycket (ett kort, en etikett på tallinjen) i elevens typsnitt är en bild i Andikas
+// konturer (brakSvg i lasflyt.ts; Niclas 2026-09-30: i Google Dokument blev bråken på korten små, eftersom Google tar
+// ekvationens storlek från texten bredvid och ett ensamt bråk inte har någon). Bilden har samma mått i Word och, som
+// reservbild, i Google Dokument. `storlek` är siffrornas storlek i halvpunkter, som ekvationens. Utan elevens typsnitt
+// står ekvationen kvar.
+let brakBildNr = 0;
+function ensamtBrak(taljare: string, namnare: string, storlek: number, farg: string): TextRun | ImageRun {
+  if (ELEVFONT !== ELEVTYPSNITT) return staplatBrak(taljare, namnare, storlek, farg);
+  const { svg, bredd, hojd } = brakSvg(taljare, namnare, storlek / 2, farg);
+  const px = (pt: number) => Math.round((pt * 4) / 3);
+  return svgRun(new TextEncoder().encode(svg), px(bredd), px(hojd), { name: `Bråk ${++brakBildNr}`, description: `${taljare}/${namnare}`, id: String(5000 + brakBildNr) });
+}
 // Faktorn 1,45 gör bråkets siffror lika höga som orden runt dem; Word krymper täljare och nämnare i en mening.
-function brakBarn(text: string, o: StyckeVal = {}, faktor = 1.45): TextRun[] {
+function brakBarn(text: string, o: StyckeVal = {}, faktor = 1.45): (TextRun | ImageRun)[] {
   const storlek = 2 * Math.round(((o.storlek ?? 22) * SKALA * faktor) / 2);
-  return brakDelar(text).map((x) => ('text' in x ? run(x.text, o) : staplatBrak(x.taljare, x.namnare, storlek, o.farg ?? FARG.text)));
+  const delar = brakDelar(text);
+  const farg = o.farg ?? FARG.text;
+  if (delar.every((x) => !('text' in x) || !x.text.trim())) return delar.flatMap((x) => ('text' in x ? [] : [ensamtBrak(x.taljare, x.namnare, storlek, farg)]));
+  return delar.map((x) => ('text' in x ? run(x.text, o) : staplatBrak(x.taljare, x.namnare, storlek, farg)));
 }
 // Exemplet berättas rakt; replikerna (”…”) sätts kursiva, som exempelfraserna, så att en lärare hittar det som sägs.
 export function exempelStycke(text: string, o: { hallIhop?: boolean; storlek?: number; efter?: number } = {}): Paragraph {
@@ -1385,7 +1400,7 @@ function brakplankTabell(m: Mall): Table {
   const x = [...new Set([0, L, ...namnare.flatMap((n) => Array.from({ length: n - 1 }, (_, k) => lage(L, k + 1, n)))])].sort((p, q) => p - q);
   const rader = namnare.map((n) => new TableRow({ cantSplit: true, height: { value: h, rule: HeightRule.EXACT }, children: Array.from({ length: n }, (_, k) => rutcell(x, lage(L, k, n), lage(L, k + 1, n), {
     top: linjeKant(8), bottom: linjeKant(8), left: linjeKant(8), right: linjeKant(8), mitt: true,
-    barn: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 240 }, children: m.etiketter === false ? [] : n === 1 ? [run('1', { storlek: stor ? 40 : 30 })] : [staplatBrak('1', String(n), stor ? (n >= 10 ? 32 : 40) : n >= 10 ? 26 : 30, FARG.text)] })],
+    barn: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 240 }, children: m.etiketter === false ? [] : n === 1 ? [run('1', { storlek: stor ? 40 : 30 })] : [ensamtBrak('1', String(n), stor ? (n >= 10 ? 32 : 40) : n >= 10 ? 26 : 30, FARG.text)] })],
   })) }));
   return new Table({ width: { size: L, type: WidthType.DXA }, columnWidths: x.slice(1).map((v, i) => v - x[i]), layout: TableLayoutType.FIXED, alignment: AlignmentType.CENTER, borders: UTAN_KANTER, rows: rader });
 }

@@ -66,6 +66,29 @@ function ordBana(ord: string, x: number, y: number, storlek: number, farg: strin
 }
 const xml = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+// Ett bråk som står ensamt (ett kort, en etikett på tallinjen) som bild i Andikas konturer (Niclas 2026-09-30: i Google
+// Dokument blev bråken på korten små). Google Dokument läser inte storleken inuti en ekvation utan tar den från texten
+// bredvid, och står text bredvid krymper Word bråket och gör raden högre (underlag/prov/brak-google/). En bild har samma
+// mått i Word och, som reservbild, i Google Dokument. Måtten följer Words fristående bråk: siffrorna i `storlek`
+// punkter, strecket lika brett som det bredaste talet och lite till. Svaret är i punkter.
+export function brakSvg(taljare: string, namnare: string, storlek: number, farg: string): { svg: string; bredd: number; hojd: number } {
+  const siffra = ((GLYFER as { versal: number }).versal / glyfer.enheter) * storlek;
+  const [bt, bn] = [matt(taljare, storlek, 'Andika'), matt(namnare, storlek, 'Andika')];
+  const sida = 0.12 * storlek;
+  const bredd = Math.max(bt, bn) + 2 * sida;
+  const [ovan, luft, streck] = [0.2 * storlek, 0.2 * storlek, 0.065 * storlek];
+  const yT = ovan + siffra;
+  const yS = yT + luft;
+  const yN = yS + streck + luft + siffra;
+  const hojd = yN + 0.2 * storlek;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${bredd.toFixed(2)}" height="${hojd.toFixed(2)}" viewBox="0 0 ${bredd.toFixed(2)} ${hojd.toFixed(2)}">`
+    + ordBana(taljare, (bredd - bt) / 2, yT, storlek, farg)
+    + `<rect x="${(sida * 0.6).toFixed(2)}" y="${yS.toFixed(2)}" width="${(bredd - sida * 1.2).toFixed(2)}" height="${streck.toFixed(2)}" fill="#${farg}"/>`
+    + ordBana(namnare, (bredd - bn) / 2, yN, storlek, farg)
+    + '</svg>';
+  return { svg, bredd, hojd };
+}
+
 export const harBagar = (text: string) => String(text).includes(BAGE);
 
 // Ordgrupperna i en mening: vanliga mellanslag skiljer grupperna, bågtecknet binder orden i en grupp. Ordfogen tas
