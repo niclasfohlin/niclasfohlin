@@ -136,7 +136,7 @@ exempel:
   text:
     - "Läraren har lagt en ny bok i varje mapp och skrivit titeln i lässchemat. Passet börjar med att Amir läser upp sina tre meningar från gårdagens bok. Läraren säger: ”Du läste hela första meningen utan att stanna. Varför valde du den?” Amir svarar att den var rolig. Läraren signerar lässchemat och går vidare till Selma och Noor."
     - "Sedan tar alla fram dagens bok. Läraren bläddrar igenom Selmas bok tillsammans med henne: ”Vad ser du på bilden? Vad tror du att hunden gör?” Läraren visar ordet ”trädgården” innan de börjar: ”Det här ordet är långt. Vi delar det: träd-⁠går-⁠den.” Samma sak med de andra två böckerna, en i taget, kort."
-    - "Nu läser eleverna. Amir och Noor viskläser sina böcker medan läraren sitter hos Selma. Selma fastnar på ”sprang”. Läraren väntar. Selma ljudar s-p-r-a-n-g. ”Bra. Läs ordet igen som ett helt ord.” Selma säger ”sprang”. ”Läs meningen från början nu.” När Selma är igenom sidan flyttar läraren till Amir, som läser flytande men gissar ordändelser. Läraren pekar: ”Titta på slutet av ordet. Vad står det?” Sist Noor, som behöver ljuda det mesta. Boken är för svår. Läraren noterar det och byter till en lättare bok till nästa dag."
+    - "Nu läser eleverna. Amir och Noor viskläser sina böcker medan läraren sitter hos Selma. Selma fastnar på ”sprang”. Läraren väntar. Selma ljudar s-p-r-a-ng. ”Bra. Läs ordet igen som ett helt ord.” Selma säger ”sprang”. ”Läs meningen från början nu.” När Selma är igenom sidan flyttar läraren till Amir, som läser flytande men gissar ordändelser. Läraren pekar: ”Titta på slutet av ordet. Vad står det?” Sist Noor, som behöver ljuda det mesta. Boken är för svår. Läraren noterar det och byter till en lättare bok till nästa dag."
     - "Passet avslutas med att läraren säger samma sak som varje dag: ”Ikväll läser ni boken en gång till för någon hemma. Välj tre meningar ni gillar och skriv dem i skrivboken.” Mapparna läggs i ryggsäckarna. Efteråt skriver läraren en kort notering: alla tre hade läst hemma, Selma läser om meningen själv nu, Noor byter nivå."
 fastnar:
   rubrik: När eleven fastnar
@@ -406,3 +406,26 @@ lathund:
       - Snabbmallen för noteringen efteråt
       - Kontraktet, påskrivet av hem och skola
     varjePass: Hade alla läst hemma, vem byter nivå, vad övas nästa gång?
+film:
+  sekunder: 29.75
+  beskrivning: "I skolan: eleven läser för läraren. Samma dag går boken hem i mappen. Hemma: eleven läser igen och skriver tre meningar. Den vuxne signerar. Nästa dag i skolan. Läraren berömmer och signerar."
+  rubrik: "Så gör eleven"
+  ingress: "Fyra bilder ur filmen om vad eleven gör vid bordet. Filmen på metodens sida visar samma sak i rörelse."
+  stillbilder:
+    - text: "I skolan: eleven läser boken för läraren."
+    - text: "Samma dag: boken, skrivboken och lässchemat går hem."
+    - text: "Hemma: eleven läser samma bok igen för en vuxen."
+    - text: "Nästa dag: eleven läser, läraren berömmer och signerar."
+filmer:
+  - nr: 2
+    titel: "Stöd vid ett svårt ord"
+    sekunder: 22.39
+    beskrivning: "Eleven läser för läraren och fastnar på ett ord. Vänta tre sekunder. Många elever löser ordet själva. Eleven ljudar ordet själv. Sedan läser eleven ordet som ett helt ord. Sist läser eleven om meningen från början."
+    rubrik: "Stöd vid ett svårt ord: vänta och låt eleven ljuda"
+    ingress: "Fyra bilder ur filmen om stödet när eleven fastnar på ett ord: läraren väntar, eleven ljudar själv, läser ordet som ett helt ord och läser meningen från början. Här löser eleven ordet på stödtrappans första steg, och läraren säger det inte. Filmen på metodens sida visar samma sak i rörelse."
+    efter: "fastnar"
+    stillbilder:
+      - text: "Eleven fastnar. Läraren väntar tre sekunder."
+      - text: "Eleven ljudar ordet själv."
+      - text: "Eleven läser ordet igen som ett helt ord."
+      - text: "Meningen från början. Läraren sa aldrig ordet."

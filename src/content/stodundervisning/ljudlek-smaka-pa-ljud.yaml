@@ -414,12 +414,12 @@ mallar:
       - "Sist"
     fot: "Lägg bildkortet i rutan Bild, med bilden uppåt. Säg ordet långsamt och lägg markören i rutan där ljudet hörs: först, i mitten eller sist. Skriv bokstaven i samma ruta, och torka bort den efter varje kort."
 film:
-  sekunder: 22.2
+  sekunder: 26.81
   beskrivning: "Kamraten frågar efter ljudet. Säg ordet långsamt och stanna på ljudet. Lägg markören där ljudet hörs. Skriv bokstaven i rutan. Vänd kortet. Stämmer bokstaven? Nästa kort: ljudet i mitten. Vänd kortet. Stämmer bokstaven?"
   rubrik: "Så gör eleven"
   ingress: "Fyra bilder ur lektionens film om vad eleven gör. Filmen på metodens sida visar samma sak i rörelse."
   stillbilder:
-    - text: "Kamraten frågar, och eleven säger ordet långsamt."
-    - text: "Stanna på ljudet och lägg markören där det hörs."
-    - text: "Skriv bokstaven i rutan."
-    - text: "Vänd kortet: stämmer bokstaven?"
+    - text: "Kamraten frågar efter ljudet sist i ordet."
+    - text: "Säg ordet långsamt och lägg markören där ljudet hörs."
+    - text: "Skriv bokstaven och vänd kortet: stämmer den?"
+    - text: "Nästa kort, sol: o hörs i mitten, och baksidan stämmer."

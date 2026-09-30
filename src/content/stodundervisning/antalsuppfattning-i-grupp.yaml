@@ -925,3 +925,26 @@ lathund:
       - Papper, penna och sifferkort per par
       - Tärning för Klar tidigt
       - Din egen matta och sats
+film:
+  sekunder: 25.12
+  beskrivning: "Bygg 38: tre tiostavar och åtta ental. Lägg till 5, ett ental i taget. Tio ental: lägg dem bredvid en tiostav. Växla: byt de tio entalen mot tiostaven. Lägg de tre ental som är kvar. Säg vad du har: fyra tiotal och tre ental."
+  rubrik: "Så gör eleven"
+  ingress: "Fyra bilder ur filmen om vad eleven gör vid bordet. Filmen på metodens sida visar samma sak i rörelse."
+  stillbilder:
+    - text: "Bygg 38 på mattan: tre tiotal och åtta ental."
+    - text: "Lägg till 5, ett ental i taget: nio, tio."
+    - text: "Tio ental är lika långa som en tiostav."
+    - text: "Växla: tio ental mot en tiostav. 4 tiotal, 3 ental: 43."
+filmer:
+  - nr: 2
+    titel: "Från material till skrift"
+    sekunder: 22.97
+    beskrivning: "Bygg 18: en tiostav och åtta ental. Skriv talet. Lägg till 7: först två, så att det blir tio. Skriv det du lade till: + 2. Tio ental är lika långa som en tiostav: växla. Lägg de fem som är kvar av 7. Skriv + 5. Skriv svaret och säg talet."
+    rubrik: "Vecka 5: från material till skrift"
+    ingress: "Fyra bilder ur filmen om vecka 5, pass 2: eleven räknar via närmaste jämna tiotal och skriver varje steg medan hen bygger, här med tiobasen. I pass 1 och 3 skriver eleven på andra sätt, som tabellen säger. Filmen på metodens sida visar samma sak i rörelse."
+    efter: "tabell: Veckan: ett fokus i tre material"
+    stillbilder:
+      - text: "Bygg 18, lägg till 7. Skriv först 18."
+      - text: "Tio ental blir en tiostav: skriv + 2 och växla."
+      - text: "Lägg de fem som är kvar av 7 och skriv + 5."
+      - text: "Skriv svaret: 18 + 2 + 5 = 25."

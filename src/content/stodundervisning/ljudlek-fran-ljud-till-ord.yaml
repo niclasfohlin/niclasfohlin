@@ -378,12 +378,12 @@ mallar:
       - "4"
     fot: "Lägg ett bokstavskort för varje ljud, ett i varje ruta från ruta 1. Peka under det första kortet och dra fingret vidare utan att stanna: sssooolll, t-⁠aaa-⁠k. Skjut ihop korten och läs ordet. Ändra ett kort och läs igen. Rutan Bild står tom i den här lektionen."
 film:
-  sekunder: 14.1
-  beskrivning: "Lägg ett kort för varje ljud. Dra fingret under utan att stanna, och skjut ihop korten. Kamraten säger ändringen. Gör ändringen. Läs det nya ordet."
+  sekunder: 18.34
+  beskrivning: "Lägg ett kort för varje ljud. Dra fingret under utan att stanna, och skjut ihop korten. Läraren säger ändringen. Gör ändringen och säg vilket ljud som kom till. Läs det nya ordet."
   rubrik: "Så gör eleven"
   ingress: "Fyra bilder ur lektionens film om vad eleven gör. Filmen på metodens sida visar samma sak i rörelse."
   stillbilder:
     - text: "Lägg ett kort för varje ljud."
     - text: "Dra fingret under och skjut ihop korten: sol."
-    - text: "Kamraten säger ändringen."
+    - text: "Läraren säger ändringen."
     - text: "Gör ändringen och läs det nya ordet."

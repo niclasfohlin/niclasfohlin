@@ -109,10 +109,7 @@ export function stegDelar(antal: number, filmer: MetodFilm[]): [number, number][
 // (METODER.md under Filmerna). En publicerad metod utan film som inte står här stoppar bygget, och en metod som har fått
 // sin film stoppar bygget tills den är borttagen här (scripts/filmpaket.mjs gör det), så att listan inte blir inaktuell.
 // Ett utkast prövas inte, så att en metod kan arbetas med lokalt innan filmen finns.
-export const VANTAR_PA_FILM: readonly string[] = [
-  'antalsuppfattning-i-grupp', 'boksamtal-i-grupp', 'brakkurs-i-grupp', 'faktatextsamtal-i-grupp', 'laslistor-i-grupp',
-  'problemlosning-i-grupp', 'skrivkurs-berattelseram', 'skrivkurs-vardeskapande', 'til-i-grupp', 'upprepad-lasning',
-];
+export const VANTAR_PA_FILM: readonly string[] = [];
 export function provaHuvudfilmer(metoder: { id: string; data: MetodData }[]): void {
   const fel = metoder.filter(({ data }) => !data.utkast).flatMap(({ id, data }) => {
     if (!data.film && !VANTAR_PA_FILM.includes(id)) return [`${id} saknar huvudfilm (fältet film). En ny metod kommer från metodriggen med sin film; se METODER.md under Filmerna.`];

@@ -21,7 +21,7 @@ tid: 60 minuter per pass, två pass i veckan och ett tredje när det går
 period: Fem veckor
 grupp: Två till tio elever
 material:
-  - Bråkstavar från en hel till tolftedelar, utan elftedelar, en sats per elev och en för läraren, klippta ur mallen Bråkstavar att klippa, eller en köpt sats per par
+  - Bråkstavar från en hel till tolftedelar, utan elftedelar, en sats per elev och en för läraren, klippta ur mallen Bråkstavar att klippa, eller en köpt sats per par. I vecka 2 också halvorna och fjärdedelarna ur en sats till
   - Remsor av A4-ark, klippta lika långa som den längsta staven
   - Maskeringstejp till en tallinje per elev, längs bordskanten
   - Mallarna Tallinjer i delar och Tomma tallinjer, bladet Stapelrutan, papper, penna och linjal
@@ -229,10 +229,10 @@ exempel:
     rubrik: Gruppen
     text: "fem elever i åk 4–6, vecka 2, pass 1: bråk på tallinjen, med bråkstavar."
   text:
-    - "Läraren har tejpat en tallinje längs bordskanten, där det är lika långt från 0 till 1 som den längsta staven. ”Den här staven är det hela. Den börjar vid 0 och slutar vid 1.” Läraren lägger en fjärdedel från 0, sätter ett streck där den slutar och skriver 1/4 vid strecket: ”Här är en fjärdedel. Talet står vid strecket, där delen slutar.” Läraren lägger fjärdedelar en i taget, sätter ett streck där varje fjärdedel slutar och räknar: ”Två fjärdedelar, tre fjärdedelar, fyra fjärdedelar. Fyra fjärdedelar är 1.” Stavarna tar slut, så läraren flyttar den första fjärdedelen och lägger den efter 1: ”Fem fjärdedelar. Nu är vi förbi 1.” Eleverna tittar."
-    - "”Nu gör vi det tillsammans.” Alla lägger sina fjärdedelar på sin tallinje, flyttar den första förbi 1 och räknar i kör från en fjärdedel till fem fjärdedelar. ”Var hamnar tre fjärdedelar?” frågar läraren. Amira pekar: ”Mellan en halv och 1.”"
-    - "Läraren läser kortet ”Sätt ut 3/5. Är det mer eller mindre än en halv?” Hamza lägger tre femtedelar och skriver 3/5 på tejpen mitt under den tredje staven. ”Var slutar tre femtedelar?” frågar läraren. Hamza flyttar fingret till slutet av staven och sätter strecket där. Noah lägger halvan bredvid: ”Tre femtedelar är längre. Mer än en halv.” Sedan läser Elsa ett kort för Viggo: ”Lägg halvor från 0 och flytta dem vidare till 2. Hur många halvor går det på 2?” Viggo lägger, flyttar och räknar: ”Fyra halvor.”"
-    - "Var och en får ett kort med ett bråk. Noah lägger fjärdedelar från 0 till 1 på sin tallinje och flyttar dem en i taget förbi 1. Han säger: ”Fem fjärdedelar. Det är en och en fjärdedel.” Sedan ritar han stavarna i rutan Med material på bladet Bråket på fyra sätt och skriver 5/4 i rutan Med siffror. Läraren lyssnar på en elev i taget."
+    - "Läraren har tejpat en tallinje längs bordskanten, där det är lika långt från 0 till 1 som den längsta staven. ”Den här staven är det hela. Den börjar vid 0 och slutar vid 1.” Läraren lägger en fjärdedel från 0, sätter ett streck där den slutar och skriver 1/4 vid strecket: ”Här är en fjärdedel. Talet står vid strecket, där delen slutar.” Läraren lägger fjärdedelar en i taget, sätter ett streck där varje fjärdedel slutar och räknar: ”Två fjärdedelar, tre fjärdedelar, fyra fjärdedelar. Fyra fjärdedelar är 1.” Läraren tar en fjärdedel till ur den andra satsen, lägger den efter 1 och sätter ett streck: ”Fem fjärdedelar. Nu är vi förbi 1.” Eleverna tittar."
+    - "”Nu gör vi det tillsammans.” Alla lägger sina fjärdedelar på sin tallinje, lägger en femte efter 1 och räknar i kör från en fjärdedel till fem fjärdedelar. ”Var hamnar tre fjärdedelar?” frågar läraren. Amira pekar: ”Mellan en halv och 1.”"
+    - "Läraren läser kortet ”Sätt ut 3/5. Är det mer eller mindre än en halv?” Hamza lägger tre femtedelar och skriver 3/5 på tejpen mitt under den tredje staven. ”Var slutar tre femtedelar?” frågar läraren. Hamza flyttar fingret till slutet av staven och sätter strecket där. Noah lägger halvan bredvid: ”Tre femtedelar är längre. Mer än en halv.” Sedan läser Elsa ett kort för Viggo: ”Lägg halvor från 0 till 2. Hur många halvor går det på 2?” Viggo lägger halvorna efter varandra, två ur varje sats, och räknar: ”Fyra halvor.”"
+    - "Var och en får ett kort med ett bråk. Noah lägger fjärdedelar från 0 till 1 på sin tallinje och sedan en till efter 1. Han säger: ”Fem fjärdedelar. Det är en och en fjärdedel.” Sedan ritar han stavarna i rutan Med material på bladet Bråket på fyra sätt och skriver 5/4 i rutan Med siffror. Läraren lyssnar på en elev i taget."
     - "Till sist lägger gruppen 7/4 tillsammans på lärarens tallinje. ”Är 7/4 ett tal?” frågar läraren. ”Ja, det har en plats mellan 1 och 2”, säger Elsa. Gruppen säger veckans mening: ”Ett bråk är ett tal med en egen plats på tallinjen.” Efteråt noterar läraren att Hamza skrev bråket mitt under staven i stället för vid strecket, men flyttade det efter frågan. Nästa pass börjar läraren med att själv sätta ut tredjedelar på en tallinje utan stavar."
 fastnar:
   rubrik: När eleven fastnar
@@ -268,7 +268,7 @@ roll:
 urval:
   rubrik: Var hittar du materialet och korten?
   text:
-    - Mallen Bråkstavar att klippa är två sidor i planeringsmallarna. Skriv ut båda på tjockt papper, en av varje per elev, färglägg varje rad i en egen färg och klipp isär raderna och bitarna. Stavarna är 2,4 cm höga, så att eleverna kan hålla dem. Bråkstavar finns också att köpa, som bråktavla eller bråkstavar. Med en köpt sats per par gör paret bråket tillsammans. Mallen Bråkplanket visar samma stavar på en sida, som eleverna kan ha framför sig. I mallen Bråkplanket att fylla i skriver eleverna själva bråket i en bit på varje rad.
+    - Mallen Bråkstavar att klippa är två sidor i planeringsmallarna. Skriv ut båda på tjockt papper, en av varje per elev, färglägg varje rad i en egen färg och klipp isär raderna och bitarna. Stavarna är 2,4 cm höga, så att eleverna kan hålla dem. Bråkstavar finns också att köpa, som bråktavla eller bråkstavar. Med en köpt sats per par gör paret bråket tillsammans. I vecka 2 går bråken förbi 1, och då behöver varje elev, eller varje par med en köpt sats, halvorna och fjärdedelarna ur en sats till. De står på mallens första sida. Mallen Bråkplanket visar samma stavar på en sida, som eleverna kan ha framför sig. I mallen Bråkplanket att fylla i skriver eleverna själva bråket i en bit på varje rad.
     - Remsorna klipper du av A4-ark, fyra på längden ur varje ark. Klipp dem lika långa som den längsta staven, så att det hela är lika långt i allt material.
     - Från vecka 2 tejpar du en tallinje per elev med maskeringstejp längs bordskanten, två på varje långsida. Det är en stavlängd från 0 till 1 och en från 1 till 2, så att eleverna kan lägga stavarna mot linjen och skriva på tejpen. I pass 2 använder eleverna mallarna Tallinjer i delar och Tomma tallinjer från 0 till 1, där det hela är lika långt som i bråkplanket och bitarna går att lägga mot linjen. På A4 är det hela 26 cm.
     - Skriv ut bråkstavarna, bråkplanket och tallinjerna på samma sorts papper, A4 eller A3 liggande, så att det hela är lika långt i allt. En köpt sats har ofta en längsta stav på 20 cm. Då lägger eleverna stavarna mot tejpen och inte mot mallarna. På mallen Tomma tallinjer från 0 till 2 är det hela 13 cm, hälften så långt som staven. Där ritar och räknar eleverna, och stavarna läggs mot tejpen.
@@ -457,9 +457,9 @@ ramar:
         - rubrik: Till läraren
           falt:
             - rubrik: Material
-              text: En tallinje per elev, tejpad längs bordskanten från 0 till 2, med en stavlängd mellan 0 och 1 och mellan 1 och 2. Bråkstavar, en sats per elev. Mallarna Tallinjer i delar och Tomma tallinjer från 0 till 1 och från 0 till 2 till pass 2. Spelkorten till Högst vinner, en kopia per par, klippta.
+              text: En tallinje per elev, tejpad längs bordskanten från 0 till 2, med en stavlängd mellan 0 och 1 och mellan 1 och 2. Bråkstavar, en sats per elev och halvorna och fjärdedelarna ur en sats till, så att de räcker förbi 1. Mallarna Tallinjer i delar och Tomma tallinjer från 0 till 1 och från 0 till 2 till pass 2. Spelkorten till Högst vinner, en kopia per par, klippta.
             - rubrik: Pass 1 · Visa först och säg
-              text: "”Den här staven är det hela. Den börjar vid 0 och slutar vid 1.” Lägg en fjärdedel från 0, sätt ett streck där den slutar och skriv 1/4 vid strecket: ”Här är en fjärdedel. Talet står vid strecket, där delen slutar.” Lägg fjärdedelar en i taget, sätt ett streck där varje fjärdedel slutar och räkna: ”Två fjärdedelar, tre fjärdedelar, fyra fjärdedelar. Fyra fjärdedelar är 1.” Stavarna tar slut, så flytta den första fjärdedelen och lägg den efter 1: ”Fem fjärdedelar. Nu är vi förbi 1. Fem fjärdedelar är en och en fjärdedel.”"
+              text: "”Den här staven är det hela. Den börjar vid 0 och slutar vid 1.” Lägg en fjärdedel från 0, sätt ett streck där den slutar och skriv 1/4 vid strecket: ”Här är en fjärdedel. Talet står vid strecket, där delen slutar.” Lägg fjärdedelar en i taget, sätt ett streck där varje fjärdedel slutar och räkna: ”Två fjärdedelar, tre fjärdedelar, fyra fjärdedelar. Fyra fjärdedelar är 1.” Ta en fjärdedel till ur den andra satsen och lägg den efter 1: ”Fem fjärdedelar. Nu är vi förbi 1. Fem fjärdedelar är en och en fjärdedel.”"
             - rubrik: Pass 2 · Visa först och säg
               text: "Rita en tallinje från 0 till 1. ”Jag ska dela den i tredjedelar, tre lika stora delar. Då behöver jag två streck mellan 0 och 1. Jag räknar delarna och inte strecken: en, två, tre delar.” Skriv 1/3 och 2/3 vid strecken och 3/3 vid 1. Förläng linjen till 2: ”Fyra tredjedelar, fem tredjedelar, sex tredjedelar. Sex tredjedelar är 2.”"
             - rubrik: Veckans mening
@@ -479,8 +479,8 @@ ramar:
             - - Lägg tiondelar från 0 och sätt ut 1/10. Ligger det nära 0 eller nära 1?
             - - Lägg fjärdedelar från 0. Var slutar fyra fjärdedelar? Vilket tal står där på tejpen?
             - - Sätt ut 3/5. Är det mer eller mindre än en halv?
-            - - Lägg halvor från 0 och flytta dem vidare till 2. Hur många halvor går det på 2?
-            - - Lägg fjärdedelar från 0 till 1. Flytta dem en i taget förbi 1. Sätt ut 5/4 och 6/4.
+            - - Lägg halvor från 0 till 2. Hur många halvor går det på 2?
+            - - Lägg fjärdedelar från 0 till 1 och fler efter 1. Sätt ut 5/4 och 6/4.
         - rubrik: Vecka 2 · Pass 2 · Läs kortet, kamraten ritar och skriver
           rader:
             - - Rita en tallinje från 0 till 1 och dela den i fjärdedelar. Sätt ut 3/4.
@@ -808,7 +808,7 @@ lathund:
     forberett:
       rubrik: Det jag förberedde
       text:
-        - Tejpat en tallinje per elev, med en stavlängd mellan 0, 1 och 2. En sats bråkstavar per elev, dagens kort och spelkorten till Högst vinner, klippta. Lagt 5/4 och 7/4 själv och sagt orden högt.
+        - Tejpat en tallinje per elev, med en stavlängd mellan 0, 1 och 2. En sats bråkstavar per elev, och halvor och fjärdedelar ur en sats till, dagens kort och spelkorten till Högst vinner, klippta. Lagt 5/4 och 7/4 själv och sagt orden högt.
     klarTidigt: Spela veckans spel, som heter Högst vinner. Båda vänder ett kort, och den som har det största bråket tar båda, men bara om hen säger varför.
     schema:
       rubrik: 60 minuter, steg för steg
@@ -856,7 +856,7 @@ lathund:
       rubrik: Var materialet finns
       punkter:
         - fet: Bråkstavar.
-          text: Mallen Bråkstavar att klippa, två sidor, en av varje per elev på tjockt papper, eller en köpt sats per par.
+          text: Mallen Bråkstavar att klippa, två sidor, en av varje per elev på tjockt papper, eller en köpt sats per par. I vecka 2 också halvorna och fjärdedelarna ur en sats till.
         - fet: Remsor.
           text: A4-ark klippta på längden, lika långa som den längsta staven.
         - fet: Tallinjer.
@@ -871,3 +871,26 @@ lathund:
       - Dagens kort, klippta
       - Färgpennor, penna och papper
       - Din egen sats och tallinje
+film:
+  sekunder: 27.79
+  beskrivning: "Den längsta staven är det hela: från 0 till 1. Lägg en fjärdedel från 0 och sätt ett streck där den slutar. Lägg fjärdedelarna en i taget och räkna. Ta en fjärdedel ur den andra satsen och lägg den efter 1."
+  rubrik: "Så gör eleven"
+  ingress: "Fyra bilder ur filmen om vad eleven gör vid bordet. Filmen på metodens sida visar samma sak i rörelse."
+  stillbilder:
+    - text: "Det hela är lika långt som från 0 till 1."
+    - text: "Lägg en fjärdedel från 0 och sätt ett streck: 1/4."
+    - text: "Fyra fjärdedelar är lika långt som det hela: 1."
+    - text: "En fjärdedel till ur den andra satsen: 5/4, förbi 1."
+filmer:
+  - nr: 2
+    titel: "Bråket på fyra sätt"
+    sekunder: 22.73
+    beskrivning: "Bråket är tre fjärdedelar. Lägg det hela på bordet. Gör bråket med stavarna: tre fjärdedelar. Rita stavarna i rutan Med material. Rita det som en stapel i fyra lika delar. Sätt ut det på en egen liten tallinje från 0 till 1. Skriv bråket med siffror: bråkstrecket, nämnaren, täljaren."
+    rubrik: "Fyra sätt: samma bråk fyra gånger"
+    ingress: "Fyra bilder ur filmen om delen Fyra sätt, där eleven gör kortets bråk på bordet och visar det på bladet med material, som bild, på tallinjen och med siffror. Rutan På tallinjen fylls från vecka 2, när tallinjen kommer. Filmen på metodens sida visar samma sak i rörelse."
+    efter: "steg 4"
+    stillbilder:
+      - text: "Gör 3/4 på bordet och rita stavarna i rutan."
+      - text: "Som bild: en stapel i fyra lika delar, tre fyllda."
+      - text: "På tallinjen: ett streck vid tre fjärdedelar."
+      - text: "Med siffror: 3/4. Säg det: tre fjärdedelar."

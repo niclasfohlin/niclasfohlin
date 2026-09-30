@@ -363,3 +363,13 @@ lathund:
       - Snabbmallen för noteringen efteråt
       - Bord där alla ser varandra
     varjePass: "En rad i loggen: deltog alla, vad ska övas nästa gång?"
+film:
+  sekunder: 27.6
+  beskrivning: "Först-tankar: fyra frågor, laget runt. Svaren skrivs kort, och ingen diskuterar än. Läraren drar en tråd ur spalterna. Eleven går tillbaka till texten och pekar."
+  rubrik: "Så gör eleven"
+  ingress: "Fyra bilder ur filmen om vad eleven gör vid bordet. Filmen på metodens sida visar samma sak i rörelse."
+  stillbilder:
+    - text: "Först-tankar laget runt: läraren frågar, alla svarar."
+    - text: "Svaren i fyra spalter, utan diskussion än."
+    - text: "Läraren drar en tråd: Berätta mer. Hur vet du det?"
+    - text: "Eleven pekar på slutet i texten: det är textstödet."

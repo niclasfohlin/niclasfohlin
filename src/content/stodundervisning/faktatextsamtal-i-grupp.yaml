@@ -142,7 +142,7 @@ exempel:
     rubrik: Texten läraren valt
     text: Ett kort avsnitt ur NO-boken om hur vattnet rör sig i naturen, cirka 150 ord.
   text:
-    - "Läraren har läst texten själv i förväg och vet att eleverna brukar fastna på ordet avdunstar och på att stegen hänger ihop i en kedja. Passet börjar med att gruppen ögnar rubriken och bilden. Läraren frågar: ”Vad tror ni texten ska lära oss?” En elev säger att det handlar om regn. Läraren skriver upp tre ord på tavlan, avdunstar, vattenånga och kretslopp, och de reder ut dem tillsammans innan de läser."
+    - "Läraren har läst texten själv i förväg och vet att eleverna brukar fastna på ordet avdunstar och på att stegen hänger ihop i en kedja. Passet börjar med att gruppen ögnar rubriken och bilden. Läraren frågar: ”Vad tror ni texten ska lära oss?” En elev säger att det handlar om regn. Läraren skriver upp två ord på tavlan, avdunstar och kretslopp, och de reder ut dem tillsammans innan de läser."
     - "Sedan läser läraren första stycket högt och tänker högt: ”Här står att solen värmer vattnet. Jag undrar vad som händer sen. Författaren skriver avdunstar, och det redde vi nyss ut, så jag tror att vattnet stiger uppåt.” Eleverna läser nästa stycke i par. Ett par markerar ordet vattenånga, och läraren ber dem läsa om meningen och leta ledtråd i sammanhanget. När de fångar kärnan säger paret: ”Vattnet blir ånga och stiger upp.” Läraren nickar: ”Säg det med färre ord.” Paret landar i: ”Vattnet stiger som ånga.”"
     - "När hela texten är läst håller läraren samtalet. ”Vad vill författaren att vi förstår om vattnet?” En elev säger att det går runt i en cirkel. Läraren följer upp: ”Varför tror ni att författaren kallar det ett kretslopp?” Gruppen ritar tillsammans en orsak-verkan-kedja från sol till regn. Passet avslutas med att var och en säger en sak de tar med sig. Efteråt skriver läraren en kort notering: gruppen kunde fånga kärnan med stöd, men behövde hjälp att se hur stegen hängde ihop, och nästa gång repeteras orsak-verkan-kedjan."
 fastnar:
@@ -323,7 +323,7 @@ lathund:
     forberett:
       rubrik: Det jag förberett
       text:
-        - "Läst texten själv. Nyckelbegrepp att reda ut: avdunstar, vattenånga, kretslopp."
+        - "Läst texten själv. Nyckelbegrepp att reda ut: avdunstar, kretslopp."
         - Strukturen är orsak och verkan, så vi ritar en orsak-verkan-kedja. Vi stannar efter varje stycke.
     klarTidigt: Rita en grafisk modell över texten, jämför med något ni redan vet eller skriv en egen fråga till författaren.
     schema:
@@ -411,3 +411,26 @@ lathund:
       - Snabbmallen för noteringen efteråt
       - Bord där alla ser varandra
     varjePass: Kunde eleverna fånga kärnan, vad ska repeteras nästa gång?
+film:
+  sekunder: 22.99
+  beskrivning: "Red ut nyckelbegreppen innan ni läser. Paret läser ett stycke och markerar det som skaver. Red ut det som skaver: läs om och leta ledtråd. Fånga kärnan: det viktigaste med få ord. Skriv kärnan, och läs nästa stycke."
+  rubrik: "Så gör eleven"
+  ingress: "Fyra bilder ur filmen om vad eleven gör vid bordet. Filmen på metodens sida visar samma sak i rörelse."
+  stillbilder:
+    - text: "Paret läser ett stycke och markerar det som skaver."
+    - text: "Red ut det som skaver: läs om och leta ledtråd."
+    - text: "Fånga kärnan: säg det med färre ord."
+    - text: "Kärnan står på tavlan: Vattnet stiger som ånga."
+filmer:
+  - nr: 2
+    titel: "Textens struktur i en grafisk modell"
+    sekunder: 26.11
+    beskrivning: "Gruppen fyller i textens struktur: orsak och verkan. Varje verkan blir orsak till nästa. Från sol till regn. Samtala om vad författaren vill säga."
+    rubrik: "Grafisk modell: orsak och verkan"
+    ingress: "Fyra bilder ur filmen om den grafiska modellen, där gruppen fyller i orsak-verkan-kedjan efter texten. Filmen på metodens sida visar samma sak i rörelse."
+    efter: "tabell: Faktatextens strukturer och grafiska modeller"
+    stillbilder:
+      - text: "Orsak: solen värmer vattnet."
+      - text: "Varje verkan blir orsak till nästa."
+      - text: "Läraren frågar efter varje länk i kedjan."
+      - text: "Regnet blir vatten igen: det går runt, ett kretslopp."

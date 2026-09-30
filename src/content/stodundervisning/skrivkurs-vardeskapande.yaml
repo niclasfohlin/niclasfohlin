@@ -837,3 +837,13 @@ lathund:
       - Mentortexten stor på tavlan
       - Projektplanen synlig i rummet
     varjePass: Notera vem som använde draget och vem som behöver stöd.
+film:
+  sekunder: 25.71
+  beskrivning: "Läs mentortexten tillsammans. Vad handlar den om? Läs igen: vilka ord avslöjar platsen? Ge draget ett namn. Säg vem ni skriver till: åk 2 ska läsa själva. Skriv din egen ledtråd till åk 2, med draget. Läs ledtråden för en kamrat, som gissar."
+  rubrik: "Så gör eleven"
+  ingress: "Fyra bilder ur filmen om vad eleven gör vid bordet. Filmen på metodens sida visar samma sak i rörelse."
+  stillbilder:
+    - text: "Paren stryker under orden som avslöjar platsen."
+    - text: "Gruppen ger draget ett namn: säg allt utom namnet."
+    - text: "Skriv din egen ledtråd till åk 2, med draget."
+    - text: "Läs för en kamrat, som gissar: matsalen!"

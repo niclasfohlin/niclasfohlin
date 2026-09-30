@@ -799,3 +799,13 @@ lathund:
       - En lättläst bok, från vecka 4
       - Snabbmallen för noteringen efteråt
     varjePass: Vilka ord och orddelar behöver repeteras, och vem läser listan med flyt?
+film:
+  sekunder: 19.57
+  beskrivning: "Läraren modellerar: ljudar ordet och läser det. Alla körläser kolumnen i lärarens takt. I par: en pekar och en läser. Läser eleven fel, rättar läraren kort. Eleven läser om hela ordet. Sedan byter paret roller."
+  rubrik: "Så gör eleven"
+  ingress: "Fyra bilder ur filmen om vad eleven gör vid bordet. Filmen på metodens sida visar samma sak i rörelse."
+  stillbilder:
+    - text: "Läraren modellerar och eleverna lyssnar: sten."
+    - text: "Alla körläser i lärarens takt: stol."
+    - text: "I par: en pekar, eleven läser ”sen” där det står sten."
+    - text: "Läs om hela ordet från början: sten."

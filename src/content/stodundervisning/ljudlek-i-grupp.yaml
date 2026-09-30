@@ -846,12 +846,25 @@ lathund:
     varjePass: "Vem klarade steg 4 själv, vad fastnade, och samma lektion eller nästa?"
 film:
   titel: "Ljudstarten i Ljudlek i grupp"
-  sekunder: 18.9
-  beskrivning: "Dagens ljud: läraren visar bokstaven. Alla säger ljudet. Någon säger ett ord på ljudet. Sätt ihop: läraren drar ut ljuden med handen. Handen knyts: alla säger ordet. Dela upp: läraren säger ordet. Alla säger ljuden och räknar på fingrarna."
+  sekunder: 27.87
+  beskrivning: "Dagens ljud: m. Alla säger ljudet. Någon säger ett ord på ljudet. Sätt ihop: läraren drar ut ljuden med handen. Knyt handen: alla säger ordet. Dela upp: läraren säger ordet. Alla säger ordet. Sedan ljuden, ett finger för varje. Sist räknar alla fingrarna."
   rubrik: "Ljudstarten i fyra bilder"
   ingress: "Varje pass börjar med ljudstarten, där alla säger dagens ljud, sätter ihop och delar upp ord. Filmen på metodens sida visar den i rörelse."
   stillbilder:
     - text: "Dagens ljud: alla säger ljudet."
     - text: "Sätt ihop: läraren drar ut ljuden med handen."
-    - text: "Handen knyts, och alla säger ordet."
-    - text: "Dela upp: ett finger för varje ljud."
+    - text: "Räkna tyst till tre, knyt handen: alla säger ordet."
+    - text: "Dela upp: ett finger för varje ljud. Sist: tre."
+filmer:
+  - nr: 2
+    titel: "Från ljudkollen till lektionen"
+    sekunder: 28.95
+    beskrivning: "Ljudkollen, en elev i taget: skriv antal rätt. Färre än tre rätt av fyra: ringa in siffran. Uppgift 4: färre än åtta av de tio första bokstäverna. Första förmågan från vänster där fler än hälften har en ring, alltså inte klarar uppgiften. Bokstavsgympa, och ljudkollen igen var tredje vecka."
+    rubrik: "Från ljudkollen till lektionen"
+    ingress: "Fyra bilder ur filmen om hur ljudkollen blir en lektion: siffran ringas in när eleven inte klarar uppgiften, och gruppen börjar i den första förmågan där fler än hälften inte klarar den. Filmen på metodens sida visar samma sak i rörelse."
+    efter: "uppfoljning"
+    stillbilder:
+      - text: "Färre än tre rätt av fyra: ringa in siffran."
+      - text: "Uppgift 4: ringa in under åtta av de tio första."
+      - text: "Förmåga 4: första där fler än hälften inte klarar den."
+      - text: "Bokstavsgympa, och ljudkollen igen var tredje vecka."

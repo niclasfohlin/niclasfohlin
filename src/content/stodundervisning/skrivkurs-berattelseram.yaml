@@ -709,3 +709,13 @@ lathund:
       - Tavla med plats för en spalt
       - Skylten för skrivkursen
       - Diplomen och häftapparaten, sista passet
+film:
+  sekunder: 20.22
+  beskrivning: "Ramen: gruppen ser var berättelserna är, del 3. Skrivfokus: läraren läser mentortexten och visar greppet. Berätta din del för en kamrat innan du skriver. Skriv din egen del. Börja med meningen du berättade."
+  rubrik: "Så gör eleven"
+  ingress: "Fyra bilder ur filmen om vad eleven gör vid bordet. Filmen på metodens sida visar samma sak i rörelse."
+  stillbilder:
+    - text: "Ramen: i dag del 3, In i skogen."
+    - text: "Skrivfokus: mentortexten och sinnena på tavlan."
+    - text: "Berätta din del för en kamrat innan du skriver."
+    - text: "Skriv din del, och börja med det du berättade."

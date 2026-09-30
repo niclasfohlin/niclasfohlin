@@ -409,12 +409,12 @@ kort:
     - "Bokstavskort"
 mallar: []
 film:
-  sekunder: 18.25
-  beskrivning: "Säg ordet i delar. En kloss för varje del. Vänd kortet. Lika många bågar? Nästa kort: tre delar. Tre bågar och tre klossar."
+  sekunder: 18.5
+  beskrivning: "Stavelser: klappa ordet i delar. En kloss för varje del. Vänd kortet. Lika många bågar? Nästa kort: tre delar. Tre bågar och tre klossar."
   rubrik: "Så gör eleven"
   ingress: "Fyra bilder ur lektionens film om vad eleven gör. Filmen på metodens sida visar samma sak i rörelse."
   stillbilder:
-    - text: "Säg ordet i delar och lägg en kloss för varje del."
+    - text: "Stavelser: klappa delarna, en kloss för varje del."
     - text: "Vänd kortet: lika många bågar som klossar?"
     - text: "Nästa ord har tre delar och får tre klossar."
     - text: "Tre bågar och tre klossar."

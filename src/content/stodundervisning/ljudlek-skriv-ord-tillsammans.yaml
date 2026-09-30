@@ -381,12 +381,12 @@ mallar:
       - "4"
     fot: "Lägg en bokstav för varje ljud, från ruta 1, och säg ljudet samtidigt. Dra sedan fingret under rutorna och läs ordet. Rutan Bild står tom."
 film:
-  sekunder: 17.25
-  beskrivning: "Bygg ordet: en bokstav för varje ljud. Läs med fingret under. Byt en bokstav. Läs det nya ordet. Skriv ordet och läs tillbaka."
+  sekunder: 28.67
+  beskrivning: "Bygg ordet: en bokstav för varje ljud. Läs med fingret under. Byt en bokstav. Läs det nya ordet. Lägg undan korten. Läraren säger ett nytt ord. Säg ordet långsamt medan du skriver. Skriv ordet du hör på whiteboardtavlan. Läs tillbaka. Jämför med korten."
   rubrik: "Så gör eleven"
   ingress: "Fyra bilder ur lektionens film om vad eleven gör. Filmen på metodens sida visar samma sak i rörelse."
   stillbilder:
     - text: "Bygg ordet: en bokstav för varje ljud."
     - text: "Läs med fingret under."
-    - text: "Byt en bokstav och läs det nya ordet."
-    - text: "Skriv ordet och läs tillbaka."
+    - text: "Byt en bokstav: s blir r, sist i ordet."
+    - text: "Korten undan: skriv på whiteboardtavlan, läs tillbaka."

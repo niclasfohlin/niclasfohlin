@@ -445,3 +445,26 @@ lathund:
       - Problemet utskrivet till varje par
       - Snabbmallen för noteringen efteråt, ur planeringsmallarna
     varjePass: Vad kunde varje elev återberätta, visa och kontrollera, och med vilket stöd? Vad ska repeteras nästa gång?
+film:
+  sekunder: 28.74
+  beskrivning: "En elev berättar problemet med egna ord. Markera frågan. Skriv vad ni vet och vad ni ska ta reda på. Ingen räknar än. Eleverna väljer. Paret prövar i tabellen. Pröva tills det stämmer: 187 ljus."
+  rubrik: "Så gör eleven"
+  ingress: "Fyra bilder ur filmen om vad eleven gör vid bordet. Filmen på metodens sida visar samma sak i rörelse."
+  stillbilder:
+    - text: "Läraren frågar, och en elev berättar med egna ord."
+    - text: "Markera frågan och skriv vad ni vet och ska ta reda på."
+    - text: "Ingen räknar än: eleverna väljer att pröva i en tabell."
+    - text: "Pröva tills det stämmer: 8 femarmade, 21 sjuarmade."
+filmer:
+  - nr: 2
+    titel: "Jämföra två lösningar"
+    sekunder: 25.64
+    beskrivning: "Paret med tabellen visar först. Sedan visar det andra paret. Läraren frågar vad som är lika. I tabellen: tio byten ger 20 ljus, ett byte ger 2. Det andra paret: varje 7-armad ger 2 ljus till. Samma tanke i båda."
+    rubrik: "Jämföra: två lösningar bredvid varandra"
+    ingress: "Fyra bilder ur filmen om Jämföra, där gruppen ser samma tanke i två lösningar. Filmen på metodens sida visar samma sak i rörelse."
+    efter: "exempel"
+    stillbilder:
+      - text: "Två par visar sina lösningar på ljusstakeproblemet."
+      - text: "Tio byten ger +20 ljus, ett byte ger +2."
+      - text: "Det andra paret: varje 7-armad ger 2 ljus till."
+      - text: "Samma tanke i båda: 42 ÷ 2 = 21 sjuarmade."

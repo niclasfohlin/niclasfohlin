@@ -789,3 +789,13 @@ lathund:
       - Läsrör, om ni har
       - Snabbmallen för noteringen efteråt, ur planeringsmallarna
     varjePass: Vilka ord fastnade, vilken strategi hjälpte, och kan texten gå hem?
+film:
+  sekunder: 23.76
+  beskrivning: "Första läsningen: eleven läser halvhögt, och läraren lyssnar. Läraren läser ur texten med stöd och visar strategin. Läs igen i kör med stöd, i lärarens tempo. I par utan stöd: kamraten pekar på strategikortet."
+  rubrik: "Så gör eleven"
+  ingress: "Fyra bilder ur filmen om vad eleven gör vid bordet. Filmen på metodens sida visar samma sak i rörelse."
+  stillbilder:
+    - text: "Första läsningen: eleven säger ljuden med pauser."
+    - text: "Läraren visar med stöd: säg ljuden utan paus."
+    - text: "I kör med stöd, i lärarens tempo: på stranden."
+    - text: "I par pekar kamraten på kortet: spring, springer."
