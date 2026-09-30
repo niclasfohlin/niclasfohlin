@@ -112,15 +112,18 @@ async function wordText(fil) {
     for (const m of xml.matchAll(/<m:oMath\b[\s\S]*?<\/m:oMath>/g)) ekvationer += ` ${[...m[0].matchAll(/<m:t(?:\s[^>]*)?>([^<]*)<\/m:t>/g)].map((t) => t[1]).join(' ')}`;
     // Det som upprepas på varje sida och därför står olika många gånger när Word och Google bryter sidorna olika:
     // cellerna i tabellernas rubrikrader (överst på varje sida där tabellen fortsätter) och styckena i sidhuvud och
-    // sidfot. Varje cell och stycke räknas för sig, eftersom pdftotext kan läsa dem i en annan ordning.
+    // sidfot. Varje cell och stycke räknas för sig, eftersom pdftotext kan läsa dem i en annan ordning, och sidhuvudets
+    // och sidfotens stycken delas vid tabben: sidfoten har adressen och, efter en tabb, Sida N av M, och på sju sidor i
+    // Upprepad läsning läste pdftotext de två delarna på olika ställen, så att Words extra sida inte drogs av (K-142).
     // Den hittas på sina bokstäver (sidfotens sidnummer är fält och står inte i filen), och dess siffror följer med.
     const texten = (x) => avkoda((x.match(/<w:t(?:\s[^>]*)?>[^<]*<\/w:t>/g) ?? []).map((t) => t.replace(/<[^>]+>/g, '')).join('')).normalize('NFC').toLowerCase();
-    const delar = /^word\/(header|footer)/.test(d) ? xml.split(/<\/w:p>/) : [...xml.matchAll(/<w:tr><w:trPr>(?:(?!<\/w:trPr>).)*<w:tblHeader\b(?:(?!<\/w:trPr>).)*<\/w:trPr>((?:(?!<\/w:tr>).)*)<\/w:tr>/gs)].flatMap((m) => m[1].split(/<\/w:tc>/));
+    const delar = /^word\/(header|footer)/.test(d) ? xml.split(/<\/w:p>|<w:tab\/>/) : [...xml.matchAll(/<w:tr><w:trPr>(?:(?!<\/w:trPr>).)*<w:tblHeader\b(?:(?!<\/w:trPr>).)*<\/w:trPr>((?:(?!<\/w:tr>).)*)<\/w:tr>/gs)].flatMap((m) => m[1].split(/<\/w:tc>/));
     for (const x of delar) {
       const t = texten(x);
       const b = (t.match(/\p{L}/gu) ?? []).join('');
       if (b.length >= 4) rubrikrader.add(`${b}|${(t.match(/\p{N}/gu) ?? []).join('')}`);
-      if (b.length >= 4 && /^word\/(header|footer)/.test(d)) sidhuvud.add((t.match(/[\p{L}\p{N}]/gu) ?? []).join(''));
+      // Sidnumrets del (Sida N av M, med fält) tar ankartexter bort som text; resten av sidhuvud och sidfot som bokstäver.
+      if (b.length >= 4 && /^word\/(header|footer)/.test(d) && !/<w:instrText|<w:fldSimple/.test(x)) sidhuvud.add((t.match(/[\p{L}\p{N}]/gu) ?? []).join(''));
     }
     text += ' ' + xml.replace(/<m:oMath\b[\s\S]*?<\/m:oMath>/g, ' ').replace(/<w:instrText\b[^>]*>[^<]*<\/w:instrText>/g, ' ')
       .replace(/<\/w:p>|<\/w:tc>|<w:tab\/>|<w:br\/>/g, ' ').replace(/<w:noBreakHyphen\/>/g, '-')
