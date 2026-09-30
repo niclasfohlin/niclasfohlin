@@ -17,6 +17,7 @@ import { arElevensBlad, harFragor, protokollDelas, textlangd } from './ramform';
 import { filmerVid, huvudfilm, metodensFilmer, stegDelar, stillbilder, STILLBILD_MATT, type FilmPlats, type MetodFilm } from './film';
 import { reservNyckel } from './reservbild';
 import WORDSKALOR from '../data/lathund-word.json';
+import TECKENBREDD from '../data/teckenbredd.json';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
 const FARG = {
@@ -233,11 +234,43 @@ function rutinRuta(steg: string[]): Barn[] {
   const barn = steg.map((s, i) => new Paragraph({ children: [run(s)], numbering: { reference: 'nummer', level: 0, instance: instans }, spacing: { after: i === steg.length - 1 ? 0 : 60 } }));
   return [tabell([rad([cell(barn, { bredd: BREDD, fyll: FARG.ljus, kanter: { left: kant(FARG.huvud, 24) } })])], [BREDD]), avstand()];
 }
+// Ett ords bredd i twips, i typsnittet och storleken (halva punkter, före lathundens skala) som gäller när texten skapas
+// (K-139). Bredderna är typsnittens egna och lika med det Word ritar (src/data/teckenbredd.json ur
+// scripts/teckenbredd.py); ett tecken som saknas räknas som 0,6 em. Andika har ingen fet stil, och Words fetning får
+// 2 procent.
+const TECKENINDEX = new Map([...TECKENBREDD.tecken].map((c, i) => [c, i]));
+function ordBredd(ord: string, halvpunkter: number, o: { fet?: boolean; kursiv?: boolean; font?: string } = {}): number {
+  const andika = (o.font ?? ELEVFONT) === ELEVTYPSNITT;
+  const stil = andika ? 'Andika' : `Calibri${o.fet ? ' fet' : ''}${o.kursiv ? ' kursiv' : ''}`;
+  const tabell = (TECKENBREDD.bredd as Record<string, (number | null)[]>)[stil];
+  const em = [...ord].reduce((s, c) => s + (c === '⁠' ? 0 : (tabell[TECKENINDEX.get(c) ?? -1] ?? 600) / 1000), 0);
+  return em * (andika && o.fet ? 1.02 : 1) * (storl(halvpunkter) ?? halvpunkter) * 10;
+}
+// En kolumn blir minst så bred som sitt längsta ord (K-139): Word och Google bryter annars ordet mitt i, utan
+// bindestreck ("Personbeskrivni/ng" i Berättelseramens lathund). Word bryter efter ett bindestreck och efter ett
+// tankstreck utan ordfog, så leden räknas för sig. Bredd flyttas bara när ett ord inte ryms, från kolumnerna med mest
+// över; ryms orden inte ens då står bredderna kvar, och googleprov.mjs visar ordet som bryts.
+type Celltext = { kolumn: number; text: string; halvpunkter: number; fet?: boolean; kursiv?: boolean; font?: string };
+function rymOrden(bredder: number[], celler: Celltext[], marginal = 240): number[] {
+  const behov = bredder.map(() => 0);
+  for (const c of celler) {
+    for (const led of c.text.split(/[ \n\t]+|(?<=[-–])(?!⁠)/)) {
+      if (led) behov[c.kolumn] = Math.max(behov[c.kolumn], Math.ceil(ordBredd(led, c.halvpunkter, c)) + marginal + 20);
+    }
+  }
+  const brist = behov.reduce((s, b, i) => s + Math.max(0, b - bredder[i]), 0);
+  const over = bredder.map((b, i) => Math.max(0, b - behov[i]));
+  const summaOver = over.reduce((s, x) => s + x, 0);
+  if (!brist || summaOver < brist) return bredder;
+  const nya = bredder.map((b, i) => (behov[i] > b ? behov[i] : b - Math.floor((brist * over[i]) / summaOver)));
+  nya[over.indexOf(Math.max(...over))] -= nya.reduce((s, b) => s + b, 0) - bredder.reduce((s, b) => s + b, 0);
+  return nya;
+}
 // Tabell med rubrikrad. Första kolumnen fet; en radbrytning i en cell blir en ny rad i cellen,
 // och i första kolumnen är raderna efter den första kursiva, som i kompendiet.
 // En rad där varje cell är skriven med versaler är en mellanrubrik i tabellen (som verbdelen i en läslista).
 export const arMellanrubrik = (r: string[]) => r.every((c) => c.trim() && c === c.toUpperCase() && /\p{L}/u.test(c));
-function rubrikTabell(kolumner: string[], rader: string[][], bredder: number[], o: { fetAndra?: boolean; huvudFyll?: string; hallIhop?: boolean; hallIhopEfter?: boolean; radrubrik?: boolean; storlek?: number; tomHojd?: number; ramad?: boolean } = {}): Barn[] {
+function rubrikTabell(kolumner: string[], rader: string[][], givna: number[], o: { fetAndra?: boolean; huvudFyll?: string; hallIhop?: boolean; hallIhopEfter?: boolean; radrubrik?: boolean; storlek?: number; tomHojd?: number; ramad?: boolean } = {}): Barn[] {
   // ramad: ett blad att bygga på (talsortsmattan), fyra ramade fält med ljust namnband, som i PowerPoint.
   const ramad = !!o.ramad;
   const huvudFyll = o.huvudFyll ?? FARG.huvud;
@@ -247,6 +280,16 @@ function rubrikTabell(kolumner: string[], rader: string[][], bredder: number[], 
   const storlek = o.storlek ?? 20;
   // hallIhop: en kort tabell (en ordlista) hålls på en sida genom att varje stycke utom sista radens hänger ihop med nästa.
   // radrubrik: false ger första kolumnen vanlig text (fria tabeller, ordlistor); bara rubrikraden är fet, som i kompendiet.
+  // Kolumnerna rymmer sina längsta ord, i samma stil som cellerna nedan (K-139).
+  const bredder = rymOrden(givna, [
+    ...kolumner.map((k, i) => ({ kolumn: i, text: k, halvpunkter: ramad ? 24 : 20, fet: true })),
+    ...rader.flatMap((r) => r.flatMap((text, i) => text.split('\n').flatMap((l, j): Celltext[] => {
+      const linje = j > 0 ? ejBryt(l) : l;
+      if (arMellanrubrik(r)) return [{ kolumn: i, text: linje, halvpunkter: Math.min(storlek, 18), fet: true }];
+      if (i === 0 && radrubrik) return [{ kolumn: i, text: linje, halvpunkter: storlek, fet: j === 0, kursiv: j > 0 }];
+      return linje.split(/(”[^”]*”)/).filter(Boolean).map((t) => ({ kolumn: i, text: t, halvpunkter: storlek, fet: !!o.fetAndra && i === 1, kursiv: (i === 0 && j > 0) || t.startsWith('”') }));
+    }))),
+  ]);
   const huvud = rad(kolumner.map((k, i) => cell([stycke(k, { fet: true, farg: ramad ? FARG.text : FARG.vit, storlek: ramad ? 24 : 20, efter: 0, hallIhop: o.hallIhop })], { bredd: bredder[i], fyll: ramad ? FARG.rand : huvudFyll, kanter: runt(ramad ? kant(FARG.text, 8) : kant(huvudFyll)) })), { huvud: true });
   const kropp = rader.map((r, ri) => rad(r.map((text, i) => {
     // Raden under radrubriken (tider som "8–18 min · dag 2: 5–8") får inte brytas mitt i ett spann.

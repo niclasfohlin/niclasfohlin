@@ -41,7 +41,7 @@ const metoder = readdirSync(katalog)
 const manifestFil = join(rot, 'src', 'data', 'lathund-word.json');
 
 // Allt som påverkar hur sidorna läggs ut i Word: metodens text, koden som bygger dem, provsidan, mätningen och docx.
-const gemensamma = ['src/lib/metoddocx.ts', 'src/lib/metod.ts', 'src/lib/brak.ts', 'src/lib/ramform.ts', 'src/pages/utskrift/word/[fil].docx.ts', 'scripts/word-provsidor.ps1', 'scripts/lathund-word.mjs', 'scripts/google.mjs'];
+const gemensamma = ['src/lib/metoddocx.ts', 'src/lib/metod.ts', 'src/lib/brak.ts', 'src/lib/ramform.ts', 'src/data/teckenbredd.json', 'src/pages/utskrift/word/[fil].docx.ts', 'scripts/word-provsidor.ps1', 'scripts/lathund-word.mjs', 'scripts/google.mjs'];
 const docxVersion = (() => { try { return JSON.parse(readFileSync(join(rot, 'node_modules', 'docx', 'package.json'), 'utf8')).version; } catch { return 'okänd'; } })();
 const hashAv = (delar) => { const h = createHash('sha256'); for (const d of delar) h.update(d); return h.digest('hex').slice(0, 16); };
 // Textfiler hashas med LF oavsett radslut: arbetskopian på Windows har CRLF, Netlifys utcheckning LF.
