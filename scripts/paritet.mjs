@@ -141,4 +141,16 @@ if (fel) {
   console.error(`\nparitet: ${fel} fel. Varje text i metodens fil ska stå både i Word-filen med allt och i sidans utskrift.\nRita delen i den gemensamma koden (Metod.astro och [id].astro för sidan och utskriften, metoddocx.ts för Word), eller\nlägg fältet bland undantagen i scripts/paritet.mjs med skälet, om det inte ska stå där.`);
   process.exit(1);
 }
-console.log(`Paritet: ${provade} texter i ${filer.length} metoder står både i Word-filen och i sidans utskrift.`);
+// Länkarna till filerna: varje länk från en byggd sida till en fil under /stodundervisning/ bär filens version
+// (scripts/filversion.mjs), så att webbläsaren inte kan ge en äldre fil än sidan.
+const { FILLANK, htmlFiler } = await import('./filversion.mjs');
+const utan = [];
+for (const sida of htmlFiler(join(rot, 'dist'))) {
+  for (const m of readFileSync(sida, 'utf8').matchAll(FILLANK)) if (existsSync(join(rot, 'dist', decodeURIComponent(m[2])))) utan.push(`${sida.slice(join(rot, 'dist').length)}: ${m[2]}`);
+}
+if (utan.length) {
+  console.error(`paritet: ${utan.length} länkar till filer saknar version (scripts/filversion.mjs ska ha satt den vid bygget):`);
+  for (const rad of utan.slice(0, 10)) console.error(`  ${rad}`);
+  process.exit(1);
+}
+console.log(`Paritet: ${provade} texter i ${filer.length} metoder står både i Word-filen och i sidans utskrift, och länkarna till filerna bär version.`);

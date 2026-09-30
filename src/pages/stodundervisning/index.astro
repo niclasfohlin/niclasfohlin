@@ -215,7 +215,7 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
       }
       visaStatus('Bygger filen.');
       try {
-        const svar = await fetch('/stodundervisning/metoder.json');
+        const svar = await fetch('/stodundervisning/metoder.json', { cache: 'no-cache' });
         if (!svar.ok) throw new Error(`metoder.json svarade ${svar.status}`);
         const { metoder } = (await svar.json()) as { metoder: { id: string; data: unknown }[] };
         const poster = ids.map((id) => metoder.find((m) => m.id === id)).filter((m): m is { id: string; data: unknown } => Boolean(m));
@@ -224,7 +224,8 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
         // Ljudlekens kort har bilder och elevens typsnitt (src/lib/ljudkort.ts): de hämtas innan filen byggs, som bygget
         // läser dem från disken.
         const valda = poster as Parameters<typeof metodDokument>[0];
-        const hamta = async (adress: string) => { const svar = await fetch(adress); if (!svar.ok) throw new Error(`${adress} svarade ${svar.status}`); return new Uint8Array(await svar.arrayBuffer()); };
+        // cache: 'no-cache' frågar alltid servern om filen har ändrats, så att den samlade filen aldrig byggs av en äldre bild.
+        const hamta = async (adress: string) => { const svar = await fetch(adress, { cache: 'no-cache' }); if (!svar.ok) throw new Error(`${adress} svarade ${svar.status}`); return new Uint8Array(await svar.arrayBuffer()); };
         const bildvagar = [...new Set(valda.flatMap((p) => ljud.metodensBilder(p.data, p.id)))];
         const bilder = new Map(await Promise.all(bildvagar.map(async (b) => [b, await hamta(b)] as const)));
         const elevtypsnitt = valda.some((p) => ljud.harElevtypsnitt(p.data)) ? await hamta(ljud.ELEVTYPSNITT_TTF) : undefined;

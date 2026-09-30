@@ -88,8 +88,9 @@
 
 # Nedladdningarna (Word, PowerPoint och pdf). Facebooks hämtare laddar ner dem när någon delar en direktlänk,
 # ungefär hälften av alla hämtningar 2026-09-27, hela filen varje gång. En dags cache gör att den inte hämtar om
-# dem hela tiden. En ändrad metod når alla direkt från Netlify; bara en fil som redan ligger i läsarens egen
-# webbläsare kan vara upp till ett dygn gammal.
+# dem hela tiden. Sidornas länkar till filerna bär filens version (?v=, scripts/filversion.mjs), så en ändrad fil får
+# en ny adress och webbläsaren ger aldrig en äldre fil än sidan (Niclas 2026-09-30). Bara en direktlänk utan version kan
+# vara upp till ett dygn gammal i läsarens egen webbläsare.
 [[headers]]
   for = "/stodundervisning/*.docx"
   [headers.values]
