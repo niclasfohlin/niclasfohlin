@@ -620,9 +620,11 @@ function ordMedPrickar(ord: string, maxW: number, delar: boolean): Table {
   const prickSize = Math.max(24, Math.round((40 * enhet) / 300));
   const bredder = enheter.map((c) => Math.round(bredd(c) * enhet));
   const ingen = runt(INGEN);
-  const text = (t: string, w: number, size: number) => new TableCell({
+  // Pricken under ett ljud skrivs i Arial: den är ett tecken att räkna, ingen bokstav, och elevens typsnitt har inte •
+  // (riggens delmängd utan ligaturer, 2026-09-30). På sidan är pricken en cirkel i CSS (Vikkort.astro).
+  const text = (t: string, w: number, size: number, font?: string) => new TableCell({
     width: { size: w, type: WidthType.DXA }, borders: ingen, margins: { top: 0, bottom: 0, left: 0, right: 0 },
-    children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 240 }, children: [elevRun(t, size)] })],
+    children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 240 }, children: [font ? new TextRun({ text: t, size, color: FARG.text, font }) : elevRun(t, size)] })],
   });
   // Bågen under en del: en liten svg-bild, 80 procent av delens bredd.
   const bage = (w: number) => {
@@ -638,7 +640,7 @@ function ordMedPrickar(ord: string, maxW: number, delar: boolean): Table {
     alignment: AlignmentType.CENTER, layout: TableLayoutType.FIXED, width: { size: bredder.reduce((a, x) => a + x, 0), type: WidthType.DXA }, columnWidths: bredder, borders: UTAN_KANTER,
     rows: [
       new TableRow({ children: enheter.map((c, i) => text(c, bredder[i], ordSize)) }),
-      new TableRow({ children: enheter.map((_, i) => (delar ? bage(bredder[i]) : text('•', bredder[i], prickSize))) }),
+      new TableRow({ children: enheter.map((_, i) => (delar ? bage(bredder[i]) : text('•', bredder[i], prickSize, 'Arial'))) }),
     ],
   });
 }

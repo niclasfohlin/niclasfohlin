@@ -5,7 +5,7 @@
 # Webbfilen har bara de tecken svenskt elevmaterial använder och de typografiska funktioner texten behöver (kerning och
 # sammansatta tecken), 14 KB i stället för riggens 32 KB, eftersom den laddas när sidan öppnas (Niclas 2026-09-29: den
 # som landar på Ljudlek i grupp från Facebook ska inte dra mer än sidan behöver). Ett tecken utanför delmängden ritas i
-# nästa typsnitt i listan. Word-filerna bär riggens bredare delmängd, LjudlekElev-Regular.ttf, som bäddas in.
+# nästa typsnitt i listan. Word-filerna bär riggens delmängd, LjudlekElev-Regular.ttf, som bäddas in (sedan 2026-09-30 utan ligaturer, samma tecken som webbfilen och minus, gånger och mittpunkt).
 #
 # Kör: python scripts/elevtypsnitt.py <Andika-Regular.ttf>   (kräver pip install fonttools brotli)
 # Källan är SIL:s Andika-Regular.ttf, version 7.000, som ligger i metodriggen: C:/metodrigg/design/typsnitt/andika/.
