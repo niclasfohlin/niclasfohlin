@@ -114,6 +114,13 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
 
+# Word-filernas reservbilder (src/lib/reservbild.ts), som webbläsaren hämtar när läsaren bygger en fil med flera metoder.
+# Namnet är bildens innehåll, så en ändrad bild får ett nytt namn, och en bild kan ligga i ett år.
+[[headers]]
+  for = "/stodundervisning/reservbild/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
 # iPhone och iPad frågar efter ikonens varianter under egna namn; de får samma ikon.
 [[redirects]]
   from = "/apple-touch-icon-precomposed.png"

@@ -3,7 +3,7 @@ import { Packer } from 'docx';
 import { publicerade } from '../../lib/innehall';
 import { metodDokument, DOCX_TYP } from '../../lib/metoddocx';
 import { byggSerier, serieKoppling } from '../../lib/serie';
-import { lasResurser } from '../../lib/metodresurser';
+import { lasResurser, medReservbilder } from '../../lib/metodresurser';
 import { site } from '../../data/site';
 
 // /stodundervisning/<id>.docx: allt om metoden i en Word-fil, byggd vid bygget ur samma data som
@@ -16,6 +16,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const GET: APIRoute = async ({ props }) => {
-  const buffert = await Packer.toBuffer(metodDokument([props.m], { bas: site.url, medMallar: true, resurser: lasResurser([props.m]) }));
+  const resurser = lasResurser([props.m]);
+  const buffert = await Packer.toBuffer(await medReservbilder((png) => metodDokument([props.m], { bas: site.url, medMallar: true, resurser: { ...resurser, png } })));
   return new Response(new Uint8Array(buffert), { headers: { 'Content-Type': DOCX_TYP } });
 };

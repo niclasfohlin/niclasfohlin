@@ -15,6 +15,7 @@ import type { MetodPostISerie, SerieKoppling } from './serie';
 import { ANDIKA_ADRESS, ELEVTYPSNITT, VIK_TEXT, bildFor as bildForOrd, harElevtypsnitt, kartCeller, kortCeller, ljudenheter, ljudform, arDelark, type KartCell } from './ljudkort';
 import { arElevensBlad, harFragor, protokollDelas, textlangd } from './ramform';
 import { filmerVid, huvudfilm, metodensFilmer, stegDelar, stillbilder, STILLBILD_MATT, type FilmPlats, type MetodFilm } from './film';
+import { reservNyckel } from './reservbild';
 import WORDSKALOR from '../data/lathund-word.json';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
@@ -64,9 +65,18 @@ class Sektionsbyte { constructor(readonly kortark: boolean) {} }
 type Flod = (Barn | Sektionsbyte)[];
 const arBarn = (x: Barn | Sektionsbyte): x is Barn => !(x instanceof Sektionsbyte);
 // Bilderna och elevens typsnitt till Word-filen (src/lib/ljudkort.ts): vid bygget lästa från public/, i webbläsaren
-// hämtade, och givna till metodDokument och mallDokument. RESURSER gäller medan en fil byggs.
-export interface MetodResurser { bilder: Map<string, Uint8Array>; elevtypsnitt?: Uint8Array }
+// hämtade, och givna till metodDokument och mallDokument. RESURSER gäller medan en fil byggs. png ger varje bilds
+// reservbild, ritad ur samma SVG (src/lib/reservbild.ts): vid bygget ritar src/lib/metodresurser.ts den, i
+// webbläsaren hämtas den som samma bygge ritade.
+export interface MetodResurser { bilder: Map<string, Uint8Array>; elevtypsnitt?: Uint8Array; png?: (svg: Uint8Array, bredd: number) => Uint8Array | undefined }
 let RESURSER: MetodResurser = { bilder: new Map() };
+// Varje bild i Word-filen är en SVG med sin reservbild (Niclas 2026-09-30: i Google Dokument blev bilderna blå rutor).
+// Saknas reservbilden stannar bygget, så att en fil med en tom reservbild aldrig kan laddas upp eller hämtas.
+function svgRun(svg: Uint8Array, bredd: number, hojd: number, altText: { name: string; description: string; id: string }): ImageRun {
+  const png = RESURSER.png?.(svg, bredd);
+  if (!png) throw new Error(`Word-filen saknar reservbilden ${reservNyckel(svg, bredd)} (${altText.description}). Den ritas ur bildens SVG av src/lib/metodresurser.ts vid bygget och hämtas i webbläsaren från /stodundervisning/reservbild/.`);
+  return new ImageRun({ type: 'svg', data: svg, transformation: { width: bredd, height: hojd }, altText, fallback: { type: 'png', data: png } });
+}
 let instans = 0; // numrerade listor: varje lista börjar om på 1
 
 const kant = (color = FARG.kant, size = 4): IBorderOptions => ({ style: BorderStyle.SINGLE, size, color });
@@ -561,17 +571,15 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
 }
 // Läskort (K-063): en lästräningstext som två kort att ha på bordet, ett halvt A4 vardera på en egen sida, med streckad
 // kant att klippa längs. Överst kortet med stöd, där varje mening är en bild med en båge under varje ordgrupp
-// (lasflyt.ts; Word ritar SVG sedan 2016, och reservbilden är en genomskinlig punkt), och underst kortet utan stöd i
+// (lasflyt.ts; Word ritar SVG sedan 2016, och reservbilden är samma bild som PNG, svgRun), och underst kortet utan stöd i
 // vanlig text. Märkningen litet och grått, titeln i 20 pt och meningarna i 18 pt Arial, som i metodriggen.
-const TOM_PNG = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==';
-const bytesUr = (b64: string) => Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
 // Varje bild har meningen som alternativtext, så att den går att läsa upp, och ett eget id i dokumentet.
 let bagBildNr = 0;
 function bagBild(text: string, breddTwips: number): Paragraph {
   const { svg, bredd, hojd } = bagSvg(text, { bredd: breddTwips / 20, storlek: 17, radfaktor: 1.6, typsnitt: 'Andika' });
   const px = (pt: number) => Math.round((pt * 4) / 3);
   const altText = { name: `Mening med bågar ${++bagBildNr}`, description: utanStod(text), id: String(1000 + bagBildNr) };
-  return new Paragraph({ spacing: { after: 60 }, children: [new ImageRun({ type: 'svg', data: new TextEncoder().encode(svg), transformation: { width: px(bredd), height: px(hojd) }, altText, fallback: { type: 'png', data: bytesUr(TOM_PNG) } })] });
+  return new Paragraph({ spacing: { after: 60 }, children: [svgRun(new TextEncoder().encode(svg), px(bredd), px(hojd), altText)] });
 }
 // Läskorten står i elevens typsnitt (K-130): kortet med stöd är en bild där orden är Andikas konturer och bågarna ligger
 // efter Andikas bredder (src/lib/lasflyt.ts, som riggen), så att det ser likadant ut var filen än öppnas, och kortet utan
@@ -608,7 +616,7 @@ let ljudBildNr = 0;
 function bildRun(sokvag: string, storlek: number, namn: string, hojd = storlek): ImageRun {
   const data = RESURSER.bilder.get(sokvag);
   if (!data) throw new Error(`Bilden ${sokvag} saknas i Word-filens resurser (src/lib/ljudkort.ts, metodensBilder).`);
-  return new ImageRun({ type: 'svg', data, transformation: { width: storlek, height: hojd }, altText: { name: `Bild ${++ljudBildNr}`, description: namn, id: String(3000 + ljudBildNr) }, fallback: { type: 'png', data: bytesUr(TOM_PNG) } });
+  return svgRun(data, storlek, hojd, { name: `Bild ${++ljudBildNr}`, description: namn, id: String(3000 + ljudBildNr) });
 }
 const elevRun = (text: string, size: number, farg = FARG.text) => new TextRun({ text, size, color: farg, font: ELEVTYPSNITT });
 // Arkets rubrik och, för vikkorten, raden om klipp och vik: små, så att arket får plats på sidan.
@@ -650,7 +658,7 @@ function ordMedPrickar(ord: string, maxW: number, delar: boolean): Table {
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${bw}" height="${bh}" viewBox="0 0 100 28"><path d="M6 5 Q50 30 94 5" stroke="#${FARG.text}" stroke-width="7" fill="none" stroke-linecap="round"/></svg>`;
     return new TableCell({
       width: { size: w, type: WidthType.DXA }, borders: ingen, margins: { top: 40, bottom: 0, left: 0, right: 0 },
-      children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0 }, children: [new ImageRun({ type: 'svg', data: new TextEncoder().encode(svg), transformation: { width: bw, height: bh }, altText: { name: `Båge ${++ljudBildNr}`, description: 'en del', id: String(3000 + ljudBildNr) }, fallback: { type: 'png', data: bytesUr(TOM_PNG) } })] })],
+      children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0 }, children: [svgRun(new TextEncoder().encode(svg), bw, bh, { name: `Båge ${++ljudBildNr}`, description: 'en del', id: String(3000 + ljudBildNr) })] })],
     });
   };
   return new Table({

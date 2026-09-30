@@ -14,6 +14,7 @@
 //
 //   node scripts/paritet.mjs            alla publicerade metoder i dist
 //   node scripts/paritet.mjs <id> …     bara de metoderna
+import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -283,6 +284,39 @@ if (!typsnitt.size || saknasTecken.size) {
     : 'paritet: hittar ingen teckentabell i public/fonts/ljudlek-elev/LjudlekElev-Regular.ttf.');
   process.exit(1);
 }
+// Reservbilderna i Word-filerna (src/lib/reservbild.ts; Niclas 2026-09-30: i Google Dokument blev filmens bilder blå
+// rutor). Varje bild har en riktig reservbild och ingen punkt, varje reservbild finns också under
+// /stodundervisning/reservbild/, så att filen som webbläsaren bygger får samma bild, och varje tecken i en bilds text finns
+// i reservbildens typsnitt, annars ritar ritaren en tom ruta i stället för tecknet (scripts/reservtypsnitt.py).
+const sha = (b) => createHash('sha1').update(b).digest('hex');
+const reservMapp = join(rot, 'dist/stodundervisning/reservbild');
+const reservbilder = new Set(existsSync(reservMapp) ? readdirSync(reservMapp).map((f) => sha(readFileSync(join(reservMapp, f)))) : []);
+const reservTypsnitt = cmapTecken(readFileSync(join(rot, 'src/data/typsnitt/Reservbild-Regular.ttf')));
+const reservFel = new Set();
+let reservAntal = 0;
+for (const namn of readdirSync(join(rot, 'dist/stodundervisning')).filter((f) => f.endsWith('.docx'))) {
+  const zip = await JSZip.loadAsync(readFileSync(join(rot, 'dist/stodundervisning', namn)));
+  for (const media of Object.keys(zip.files).filter((n) => n.startsWith('word/media/'))) {
+    if (media.endsWith('.png')) {
+      const png = await zip.file(media).async('nodebuffer');
+      reservAntal++;
+      if (png.readUInt32BE(16) <= 1 && png.readUInt32BE(20) <= 1) reservFel.add(`${namn}: en bild har en punkt som reservbild, som Google Dokument visar som en ruta`);
+      else if (!reservbilder.has(sha(png))) reservFel.add(`${namn}: reservbilden ${media} finns inte under /stodundervisning/reservbild/, så filen som webbläsaren bygger saknar den (src/pages/stodundervisning/reservbild/[nyckel].png.ts)`);
+    } else if (media.endsWith('.svg')) {
+      const svg = await zip.file(media).async('string');
+      for (const t of svg.matchAll(/<text\b[^>]*>([\s\S]*?)<\/text>/g)) {
+        for (const tecken of avkoda(t[1].replace(/<[^>]+>/g, ''))) {
+          const c = tecken.codePointAt(0);
+          if (c > 0x20 && !reservTypsnitt.has(c)) reservFel.add(`${namn}: tecknet ${tecken} (U+${c.toString(16).toUpperCase().padStart(4, '0')}) i en bild saknas i reservbildens typsnitt; lägg det i TECKEN i scripts/reservtypsnitt.py och kör skriptet`);
+        }
+      }
+    }
+  }
+}
+if (!reservbilder.size || reservFel.size) {
+  console.error(`paritet: Word-filernas reservbilder:\n${reservbilder.size ? [...reservFel].slice(0, 10).map((r) => `  ${r}`).join('\n') : '  /stodundervisning/reservbild/ är tom i dist.'}`);
+  process.exit(1);
+}
 // Filmerna spelar och går att pausa (Niclas 2026-09-30: på datorn stod filmen still utan knapp). Film.astro bäddar in
 // filmen som <object> och styr den genom --spel, vilket kräver att sajten får bädda in sina egna filer och att varje film
 // låter --spel styra sina animeringar.
@@ -298,4 +332,4 @@ if (filmerUtanPaus.length) {
   console.error(`paritet: ${filmerUtanPaus.length} filmer styr inte sina animeringar med var(--spel), så Pausa fryser dem inte: ${filmerUtanPaus.slice(0, 5).join(', ')}. Be metodriggen om animation-play-state: var(--spel,running).`);
   process.exit(1);
 }
-console.log(`Paritet: ${provade} texter i ${filer.length} metoder står både i Word-filen och i sidans utskrift, filmerna står på samma plats i båda och går att pausa, länkarna till filerna bär version, och elevens typsnitt har varje tecken i elevmaterialet.`);
+console.log(`Paritet: ${provade} texter i ${filer.length} metoder står både i Word-filen och i sidans utskrift, filmerna står på samma plats i båda och går att pausa, länkarna till filerna bär version, elevens typsnitt har varje tecken i elevmaterialet, och Word-filernas ${reservAntal} bilder har en riktig reservbild för Google Dokument.`);
