@@ -231,7 +231,8 @@ if (utan.length) {
   for (const rad of utan.slice(0, 10)) console.error(`  ${rad}`);
   process.exit(1);
 }
-// Elevens typsnitt (K-130): varje tecken som Word-filerna skriver i Ljudlek Elev finns i typsnittsfilen, annars ritar
+// Elevens typsnitt (K-130): varje tecken som Word-filerna skriver i elevens typsnitt (i Word heter det Andika, i webbens
+// fil Ljudlek Elev; src/lib/ljudkort.ts) finns i typsnittsfilen, annars ritar
 // Word det i ett annat typsnitt mitt i elevens material. Webbfilen görs ur samma teckenlista (scripts/elevtypsnitt.py).
 // Teckentabellen (cmap, format 4 och 12) läses direkt ur ttf-filen.
 function cmapTecken(buf) {
@@ -269,7 +270,7 @@ for (const namn of readdirSync(join(rot, 'dist/stodundervisning')).filter((f) =>
   const zip = await JSZip.loadAsync(readFileSync(join(rot, 'dist/stodundervisning', namn)));
   const xml = await zip.file('word/document.xml').async('string');
   for (const m of xml.matchAll(/<(w|m):r(?:\s[^>]*)?>([\s\S]*?)<\/\1:r>/g)) {
-    if (!m[2].includes('w:ascii="Ljudlek Elev"')) continue;
+    if (!m[2].includes('w:ascii="Andika"')) continue;
     for (const t of m[2].matchAll(/<[wm]:t(?:\s[^>]*)?>([^<]*)<\/[wm]:t>/g)) {
       for (const tecken of avkoda(t[1])) {
         const c = tecken.codePointAt(0);

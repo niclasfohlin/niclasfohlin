@@ -14,11 +14,17 @@ import type { MetodData } from './metod';
 import { metodensFilmer, stillbilder } from './film';
 
 // Elevens typsnitt: Andika från SIL (Open Font License 1.1), här som delmängden Ljudlek Elev i public/fonts/ljudlek-elev/
-// med licensen. En ändrad fil som används för sig får inte heta Andika (OFL-FAQ 2.6), därför namnet, som metodriggen
-// valde. scripts/elevtypsnitt.py gör båda filerna ur Andika med samma tecken: webbläsaren hämtar woff2-filen (14 KB) bara
-// på sidor där något står i typsnittet, och Word-filerna bär ttf-filen (33 KB) inbäddad, så att elevmaterialet ser
-// likadant ut där typsnittet inte är installerat. scripts/paritet.mjs prövar att varje tecken finns i filen.
-export const ELEVTYPSNITT = 'Ljudlek Elev';
+// med licensen. En ändrad fil som används för sig får inte heta Andika (OFL-FAQ 2.6), därför heter webbens fil Ljudlek
+// Elev, som metodriggen valde. scripts/elevtypsnitt.py gör båda filerna ur Andika med samma tecken: webbläsaren hämtar
+// woff2-filen (14 KB) bara på sidor där något står i typsnittet, och Word-filerna bär ttf-filen (33 KB) inbäddad, så att
+// elevmaterialet ser likadant ut där typsnittet inte är installerat. scripts/paritet.mjs prövar att varje tecken finns.
+//
+// I Word-filerna heter elevens typsnitt Andika (Niclas 2026-09-30, hans beslut om rättigheterna: "Vi får kalla vår
+// Andika som är nerbantad"). Ett typsnitt som bäddas in i ett dokument, helt eller som delmängd, omfattas inte av
+// licensens regler om ändrade versioner (OFL-FAQ 1.11 och 1.12), och Word bäddar in det förvrängt i filen. Google
+// Dokument läser inte inbäddade typsnitt men har Andika själv, så med det namnet står elevtexterna i Andika också där,
+// vare sig filen sparas med Drive-knappen eller laddas upp för hand. Word använder den inbäddade delmängden.
+export const ELEVTYPSNITT = 'Andika';
 export const ELEVTYPSNITT_TTF = '/fonts/ljudlek-elev/LjudlekElev-Regular.ttf';
 export const ANDIKA_ADRESS = 'https://software.sil.org/andika/';
 export const VIK_TEXT = 'Klipp längs strecken och vik längs den blå prickade linjen, så att bilden blir framsidan och ordet baksidan.';
