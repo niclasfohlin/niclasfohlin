@@ -22,3 +22,6 @@ export const varianter = {
   F: { text: 'Calibri 11 pt, exakt 20 pt (line 400 exact): Google läser multipel 400/240', barn: stycken('Calibri', 22, { line: 400, lineRule: LineRuleType.EXACT }) },
   G: { text: 'Calibri 11 pt, minst 20 pt (line 400 atLeast)', barn: stycken('Calibri', 22, { line: 400, lineRule: LineRuleType.AT_LEAST }) },
 };
+
+// Uppmätta radsteg i punkter, [Word, Google] (node scripts/matbank.mjs scripts/matbank/radavstand.mjs --facit).
+export const vantat = { A: [13.43, 13.43], B: [13.44, 13.43], C: [22.56, 22.56], D: [12.65, 12.65], E: [20.14, 20.14], F: [20, 22.38], G: [20.01, 13.43] };

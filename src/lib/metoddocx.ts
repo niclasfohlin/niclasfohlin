@@ -197,9 +197,11 @@ function numrerad(text: string, o: StyckeVal = {}): Paragraph {
 }
 function nyLista(): void { instans += 1; }
 
-// tat: 1,5 pt luft över och under texten i stället för 4, för lärarens protokoll (K-071). Google ritar marginalen i hela
-// bildpunkter (googleTabeller): 2 pt blev 2,25 i Google, och protokollets fulla mallsida spillde en rad där (K-141). Med
-// 1,5 pt är raden omkring 6 mm i både Word och Google.
+// tat: 1,5 pt luft över och under texten i stället för 4, för lärarens protokoll (K-071) och faktatabellen på metodens
+// första sida. Google ritar marginalen i hela bildpunkter (googleTabeller): 2 pt blev 2,25 i Google, och protokollets
+// fulla mallsida spillde en rad där (K-141). Med 1,5 pt är protokollets rad omkring 6 mm i både Word och Google, och
+// faktatabellen är 0,75 pt lägre per rad i Word och 1,5 pt i Google än förut, vilket ger huvudfilmen mer plats på
+// sidan 1 (granskningen 2026-09-30).
 interface CellVal { bredd: number; fyll?: string; kanter?: { top?: IBorderOptions; bottom?: IBorderOptions; left?: IBorderOptions; right?: IBorderOptions }; span?: number; mitt?: boolean; tat?: boolean }
 function cell(barn: Barn[], o: CellVal): TableCell {
   return new TableCell({
@@ -248,13 +250,15 @@ function ordBredd(ord: string, halvpunkter: number, o: { fet?: boolean; kursiv?:
 }
 // En kolumn blir minst så bred som sitt längsta ord (K-139): Word och Google bryter annars ordet mitt i, utan
 // bindestreck ("Personbeskrivni/ng" i Berättelseramens lathund). Word bryter efter ett bindestreck och efter ett
-// tankstreck utan ordfog, så leden räknas för sig. Bredd flyttas bara när ett ord inte ryms, från kolumnerna med mest
-// över; ryms orden inte ens då står bredderna kvar, och googleprov.mjs visar ordet som bryts.
+// tankstreck utan ordfog, så leden räknas för sig; ett mellanslag efter strecket delar dem, eftersom filen också körs i
+// webbläsaren och Safari före 16.4 (äldre iPad) inte kan tolka ett uttryck som ser bakåt. Bredd flyttas bara när ett
+// ord inte ryms, från kolumnerna med mest över; ryms orden inte ens då står bredderna kvar, och googleprov.mjs visar
+// ordet som bryts.
 type Celltext = { kolumn: number; text: string; halvpunkter: number; fet?: boolean; kursiv?: boolean; font?: string };
 function rymOrden(bredder: number[], celler: Celltext[], marginal = 240): number[] {
   const behov = bredder.map(() => 0);
   for (const c of celler) {
-    for (const led of c.text.split(/[ \n\t]+|(?<=[-–])(?!⁠)/)) {
+    for (const led of c.text.replace(/([-–])(?!⁠)/g, '$1 ').split(/[ \n\t]+/)) {
       if (led) behov[c.kolumn] = Math.max(behov[c.kolumn], Math.ceil(ordBredd(led, c.halvpunkter, c)) + marginal + 20);
     }
   }

@@ -26,7 +26,7 @@ export const varianter = {
   D: { text: 'kant 8 (1 pt)', barn: rader({ kant: 8 }) },
   E: { text: 'kant 6 (0,75 pt), marginal 45 (2,25 pt)', barn: rader({ kant: 6, marginal: 45 }) },
   F: { text: 'marginal 30', barn: rader({ marginal: 30 }) },
-  G: { text: '10 pt', barn: rader({ storlek: 20 }) },
+  G: { text: '10 pt i de ifyllda cellerna; den tomma cellens stycke är 11 pt och bestämmer raden', barn: rader({ storlek: 20 }) },
   H: { text: '12 pt', barn: rader({ storlek: 24 }) },
   I: { text: 'en cell', barn: rader({ celler: 1 }) },
   J: { text: 'radavstånd 241 (multipel)', barn: rader({ line: 241 }) },
@@ -47,3 +47,6 @@ export const varianter = {
   Y: { text: 'prickad kant 14 (1,75 pt)', barn: rader({ kant: 14, stil: BorderStyle.DOTTED }) },
   Z: { text: 'streckad kant 6 (0,75 pt)', barn: rader({ kant: 6, stil: BorderStyle.DASHED }) },
 };
+
+// Uppmätta radsteg i punkter, [Word, Google] (node scripts/matbank.mjs scripts/matbank/tabellrader.mjs --facit).
+export const vantat = { A: [17.94, 18.68], B: [17.43, 17.93], C: [13.92, 14.18], D: [18.43, 18.68], E: [18.69, 18.68], F: [16.94, 17.18], G: [17.92, 18.68], H: [19.15, 19.9], I: [17.93, 18.68], J: [17.99, 18.73], K: [17.68, 18.68], L: [18.94, 18.68], M: [19.94, 20.18], N: [20.94, 21.68], O: [21.94, 21.68], P: [23.93, 24.68], Q: [25.94, 26.18], R: [18.68, 18.68], S: [18.43, 18.68], T: [22.18, 21.68], U: [17.43, 17.18], V: [16.43, 17.18], W: [18.93, 19.43], X: [20.43, 20.93], Y: [19.18, 19.43], Z: [18.18, 18.68] };

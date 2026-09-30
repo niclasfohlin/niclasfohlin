@@ -22,3 +22,6 @@ export const varianter = {
   I: { text: 'före 40 och efter 40', barn: stycken(40, 40) },
   J: { text: 'efter 35 (1,75 pt)', barn: stycken(35) },
 };
+
+// Uppmätta radsteg i punkter, [Word, Google] (node scripts/matbank.mjs scripts/matbank/styckeavstand.mjs --facit).
+export const vantat = { A: [13.43, 13.43], B: [14.44, 14.43], C: [15.43, 15.43], D: [16.44, 16.43], E: [17.42, 17.43], F: [18.44, 18.43], G: [19.43, 19.43], H: [23.44, 23.43], I: [15.42, 15.43], J: [15.17, 15.18] };
