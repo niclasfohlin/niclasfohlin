@@ -196,7 +196,9 @@ ramar:
         kolumner: [Del, Rubrik, Vad händer, Skrivfokus]
         rader:
           - ["1", "Hej", "Vad som händer i delen.", "Skrivfokus i delen."]
-      # listor: elevmaterial i ramen (ordlistor, bokstäver, meningar, en text), flera per ram. Kolumnrubriker
+      # listor: elevmaterial i ramen (ordlistor, bokstäver, meningar, en text), flera per ram, i elevens typsnitt. En lista
+      # som är lärarens (kartläggningens uppgifter som läraren läser upp) får larare: true och står i husets typsnitt; ett
+      # protokoll med skrivkolumn känns igen av sig självt. Kolumnrubriker
       # bara när de betyder något. Ritas stort, för att pekas i. Lärarnoten (delar) står före listorna på sidan
       # och i Word-filen med allt, efter dem i elevkopiorna. Se laslistor-i-grupp.yaml.
       # listor:

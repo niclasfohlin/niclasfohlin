@@ -639,6 +639,8 @@ button.lank:hover { color: var(--farg-accent); }
 .m-lista th.skriv, .m-lista td.skriv { width: 4.5rem; text-align: center; border-left: 1px solid var(--farg-kant); }
 /* Bråk i elevmaterialet står staplade, som i läroböckerna (Brak.astro): siffrorna i full storlek och i textens typsnitt. */
 math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: normal; margin: 0 0.08em; }
+/* I elevens kort och listor står bråken i elevens typsnitt, som texten runt dem och som i Word (K-130). */
+.m-kort math.m-brak, .m-lista.elev math.m-brak { font-family: var(--typsnitt-elev); }
 .m-brak-ihop { white-space: nowrap; }
 /* Kort att klippa (Kortlista.astro): streckad kant som visar var man klipper. Meningar två i bredd, tal och bråk fyra
    i bredd med stor text, ett ensamt kort (problemet) över hela bredden. Märkningen i hörnet är samma som i Word. */
@@ -759,6 +761,8 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 /* Decimalkommat ritas i ett typsnitt där kommat ser ut som ett komma också i stor storlek. */
 .m-mall-bild text.komma { font-family: Arial, 'Liberation Sans', sans-serif; }
 .m-mall-fot { margin-top: 0.75rem; }
+/* Mattans fot står på elevens matta: i elevens typsnitt (K-130), som i Word. */
+.m-mall-fot p { font-family: var(--typsnitt-elev); }
 .m-mall-utskrift { display: none; }
 @page mall { size: A4 landscape; margin: 10mm; }
 /* Kortarken (vikkort, bokstavskort, bokstavskartan) med smal marginal, så att så många kort som möjligt ryms på ett A4

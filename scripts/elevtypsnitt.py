@@ -46,7 +46,18 @@ for flavor, andelse in (('woff2', 'woff2'), (None, 'ttf')):
         elif rec.nameID == 6: rec.string = 'LjudlekElev-Regular'
         elif rec.nameID == 3: rec.string = 'LjudlekElev-Regular; delmängd av Andika 7.000 (SIL), OFL 1.1'
         elif rec.nameID == 5: rec.string = str(rec.toUnicode()) + '; delmängd med svenska tecken för niclasfohlin.se'
+    # Radhöjden i Word (granskningen 2026-09-30): Word räknar radhöjden ur OS/2-måtten usWinAscent och usWinDescent, som i
+    # Andika är 2630 och 1620 för hela teckenuppsättningen med staplade accenter, alltså 2,08 gånger storleken mot omkring
+    # 1,2 i Calibri. Då blev elevens listor och kort glesa i Word, och ett läskortspar delades på två sidor. Delmängdens
+    # tecken ryms i sina egna ytterkanter (högst É, lägst p och j), så måtten sätts efter dem, med 60 enheters marginal så
+    # att inget klipps. Webbläsarna använder typo-måtten (USE_TYPO_METRICS), så sidan påverkas inte.
+    glyf = font['glyf']
+    hojder = [(glyf[n].yMax, glyf[n].yMin) for n in font.getBestCmap().values() if glyf[n].numberOfContours != 0]
+    font['OS/2'].usWinAscent = max(h[0] for h in hojder) + 60
+    font['OS/2'].usWinDescent = -min(h[1] for h in hojder) + 60
     font.flavor = flavor
     ut = os.path.join(MAPP, f'LjudlekElev-Regular.{andelse}')
     font.save(ut)
-    print(ut, os.path.getsize(ut), 'byte,', len(font.getGlyphOrder()), 'glyfer,', len(font.getBestCmap()), 'tecken')
+    os2 = font['OS/2']
+    print(ut, os.path.getsize(ut), 'byte,', len(font.getGlyphOrder()), 'glyfer,', len(font.getBestCmap()), 'tecken, radhöjd i Word',
+          round((os2.usWinAscent + os2.usWinDescent) / font['head'].unitsPerEm, 2), 'gånger storleken')

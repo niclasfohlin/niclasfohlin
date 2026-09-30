@@ -9,7 +9,7 @@
 //
 // Kör npm run validera först så att dist är aktuell. Avslutar med 1 vid fel.
 
-import { existsSync, readFileSync, mkdirSync, statSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, mkdirSync, statSync, unlinkSync } from 'node:fs';
 import { execFileSync, spawn } from 'node:child_process';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -163,6 +163,9 @@ if (bilder) {
     // har en minsta fönsterbredd och ger annars en beskuren bredare sida. Utskriften tas direkt.
     const bild = (adress, fil, extra = []) => execFileSync(process.execPath, [join(rot, 'scripts/skarmbild.mjs'), adress, join(mapp, fil), ...extra], { stdio: 'ignore', timeout: 90000 });
     const tryck = (adress, fil) => execFileSync(chrome, ['--headless=new', '--disable-gpu', '--no-pdf-header-footer', `--print-to-pdf=${join(mapp, fil)}`, adress], { stdio: 'ignore', timeout: 60000 });
+    // Förra körningens skärmbilder tas bort först, så att mappen bara har bilder av sidan som den är nu (granskningen
+    // 2026-09-30: mobil-8.png var tre dagar äldre än resten).
+    for (const f of readdirSync(mapp)) if (/^(lathund-)?(desktop|mobil)(-\d+)?\.png$/.test(f)) unlinkSync(join(mapp, f));
     try {
       bild(url, 'desktop.png');
       bild(url, 'mobil.png', ['--mobil']);
@@ -181,17 +184,26 @@ if (bilder) {
       // Huvudfilmens stillbilder (fältet film): rutan står på sidan 1, direkt efter faktarutan, både i utskriften och i
       // Word-filen med allt (Niclas 2026-09-30: "på s. 1 alltid"). Att varje film står i båda, och extrafilmerna på samma
       // plats i båda, prövar scripts/paritet.mjs i varje validering; att bygget har en huvudfilm, src/lib/film.ts.
+      // Word-filen med allt som pdf, gjord av Word (scripts/word-pdf.ps1), så att sidorna prövas som Word lägger dem.
+      const wordPdf = join(mapp, 'word.pdf');
+      let wordSidor;
+      try {
+        execFileSync('powershell', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', join(rot, 'scripts/word-pdf.ps1'), join(rot, 'dist/stodundervisning', `${id}.docx`), wordPdf], { stdio: 'ignore', timeout: 180000 });
+        wordSidor = execFileSync('pdftotext', ['-enc', 'UTF-8', wordPdf, '-'], { encoding: 'utf8' }).split('\f').map((t) => t.replace(/\s+/g, ' '));
+      } catch { console.log('  obs  Word eller pdftotext saknas, Word-filens sidor är inte prövade'); }
       if (metod.film) {
         const sista = metod.film.stillbilder[3].text;
         const sida1 = (pdf) => execFileSync('pdftotext', ['-enc', 'UTF-8', '-f', '1', '-l', '1', pdf, '-'], { encoding: 'utf8' }).replace(/\s+/g, ' ');
         try {
           sida1(join(mapp, 'utskrift.pdf')).includes(sista) ? ok('utskriften: huvudfilmens fyra stillbilder står på sidan 1') : nej(`utskriften: huvudfilmens stillbilder ryms inte på sidan 1 (”${sista}” står inte där); korta faktarutans Material eller ingressen`);
         } catch { console.log('  obs  pdftotext saknas, filmens stillbilder i utskriften är inte prövade'); }
-        try {
-          const wordPdf = join(mapp, 'word.pdf');
-          execFileSync('powershell', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', join(rot, 'scripts/word-pdf.ps1'), join(rot, 'dist/stodundervisning', `${id}.docx`), wordPdf], { stdio: 'ignore', timeout: 180000 });
-          sida1(wordPdf).includes(sista) ? ok('Word: huvudfilmens fyra stillbilder står på sidan 1') : nej(`Word: huvudfilmens stillbilder ryms inte på sidan 1 (”${sista}” står inte där); korta faktarutans Material eller ingressen`);
-        } catch { console.log('  obs  Word eller pdftotext saknas, filmens stillbilder i Word är inte prövade'); }
+        if (wordSidor) (wordSidor[0] ?? '').includes(sista) ? ok('Word: huvudfilmens fyra stillbilder står på sidan 1') : nej(`Word: huvudfilmens stillbilder ryms inte på sidan 1 (”${sista}” står inte där); korta faktarutans Material eller ingressen`);
+      }
+      // En sida i Word med bara sidhuvud och sidfot (granskningen 2026-09-30: tomma sidor efter mattorna, när elevens
+      // typsnitt gav raderna dubbel höjd): texten utan raderna med adressen och sidnumret är tom.
+      if (wordSidor) {
+        const tomma = wordSidor.map((t, i) => [i + 1, t.split(metod.titel).join('').replace(/niclasfohlin\.se\S*/g, '').replace(/Sida \d+ av \d+/g, '').replace(/Niclas Fohlin|Mall|Lathund/gi, '').replace(/[\s·©]/g, '')]).filter(([i, t]) => !t && i < wordSidor.length).map(([i]) => i);
+        tomma.length ? nej(`Word: sidan ${tomma.join(', ')} har bara sidhuvud och sidfot`) : ok(`Word: ${wordSidor.length - 1} sidor, ingen tom`);
       }
       // Läskorten (K-063): varje lästräningstext är ett A4 med båda korten, med stöd och utan stöd, som i Word. Står
       // korten på var sin sida har texten eller utskriftens mått vuxit (Upprepad läsning 2026-09-27: en marginal på 1 em
@@ -202,6 +214,10 @@ if (bilder) {
           const sidor = execFileSync('pdftotext', ['-enc', 'UTF-8', join(mapp, 'utskrift.pdf'), '-'], { encoding: 'utf8' }).split('\f').map((s) => s.replace(/\s+/g, ' '));
           const isar = laskort.map((l) => (l.rubrik ?? '').match(/^\d+/)?.[0]).filter((nr) => nr && !sidor.some((s) => s.includes(`Lästräningstext ${nr} · med stöd`) && s.includes(`Lästräningstext ${nr} · utan stöd`)));
           isar.length ? nej(`läskorten för text ${isar.join(', ')} står på var sin sida i utskriften; varje text ska vara ett A4 med båda korten`) : ok(`utskriften: ${laskort.length} lästräningstexter, båda korten på samma sida`);
+          if (wordSidor) {
+            const isarW = laskort.map((l) => (l.rubrik ?? '').match(/^\d+/)?.[0]).filter((nr) => nr && !wordSidor.some((s) => s.includes(`Lästräningstext ${nr} · med stöd`) && s.includes(`Lästräningstext ${nr} · utan stöd`)));
+            isarW.length ? nej(`Word: läskorten för text ${isarW.join(', ')} står på var sin sida; varje text ska vara ett A4 med båda korten`) : ok(`Word: ${laskort.length} lästräningstexter, båda korten på samma sida`);
+          }
         } catch { console.log('  obs  pdftotext saknas, läskortens sidor i utskriften är inte prövade'); }
       }
   console.log('       Läs bilderna som en lärare som ska köra passet i morgon: fet stil betyder rubrik, inget bryts så att det läses fel,');

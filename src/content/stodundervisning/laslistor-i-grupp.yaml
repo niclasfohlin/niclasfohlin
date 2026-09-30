@@ -806,6 +806,6 @@ film:
   ingress: "Fyra bilder ur filmen om vad eleven gör vid bordet. Filmen på metodens sida visar samma sak i rörelse."
   stillbilder:
     - text: "Läraren modellerar och eleverna lyssnar: sten."
-    - text: "Alla körläser i lärarens takt: stol."
+    - text: "Alla körläser i lärarens tempo: stol."
     - text: "I par: en pekar, eleven läser ”sen” där det står sten."
     - text: "Läs om hela ordet från början: sten."

@@ -410,7 +410,7 @@ film:
   sekunder: 29.75
   beskrivning: "I skolan: eleven läser för läraren. Samma dag går boken hem i mappen. Hemma: eleven läser igen och skriver tre meningar. Den vuxne signerar. Nästa dag i skolan. Läraren berömmer och signerar."
   rubrik: "Så gör eleven"
-  ingress: "Fyra bilder ur filmen om vad eleven gör vid bordet. Filmen på metodens sida visar samma sak i rörelse."
+  ingress: "Fyra bilder ur filmen om vad eleven gör i skolan och hemma. Filmen på metodens sida visar samma sak i rörelse."
   stillbilder:
     - text: "I skolan: eleven läser boken för läraren."
     - text: "Samma dag: boken, skrivboken och lässchemat går hem."

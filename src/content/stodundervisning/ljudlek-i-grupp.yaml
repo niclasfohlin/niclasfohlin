@@ -865,6 +865,6 @@ filmer:
     efter: "uppfoljning"
     stillbilder:
       - text: "Färre än tre rätt av fyra: ringa in siffran."
-      - text: "Uppgift 4: ringa in under åtta av de tio första."
+      - text: "Uppgift 4: färre än åtta av de tio första, ringa in."
       - text: "Förmåga 4: första där fler än hälften inte klarar den."
       - text: "Bokstavsgympa, och ljudkollen igen var tredje vecka."

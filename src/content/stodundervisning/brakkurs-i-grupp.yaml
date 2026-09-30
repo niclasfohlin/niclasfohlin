@@ -21,7 +21,7 @@ tid: 60 minuter per pass, två pass i veckan och ett tredje när det går
 period: Fem veckor
 grupp: Två till tio elever
 material:
-  - Bråkstavar från en hel till tolftedelar, utan elftedelar, en sats per elev och en för läraren, klippta ur mallen Bråkstavar att klippa, eller en köpt sats per par. I vecka 2 också halvorna och fjärdedelarna ur en sats till
+  - Bråkstavar från en hel till tolftedelar, utan elftedelar, en sats per elev och en för läraren, klippta ur mallen Bråkstavar att klippa, eller en köpt sats per par. I vecka 2 också halvorna och fjärdedelarna ur en extra sats till varje elev och till läraren
   - Remsor av A4-ark, klippta lika långa som den längsta staven
   - Maskeringstejp till en tallinje per elev, längs bordskanten
   - Mallarna Tallinjer i delar och Tomma tallinjer, bladet Stapelrutan, papper, penna och linjal
@@ -268,7 +268,7 @@ roll:
 urval:
   rubrik: Var hittar du materialet och korten?
   text:
-    - Mallen Bråkstavar att klippa är två sidor i planeringsmallarna. Skriv ut båda på tjockt papper, en av varje per elev, färglägg varje rad i en egen färg och klipp isär raderna och bitarna. Stavarna är 2,4 cm höga, så att eleverna kan hålla dem. Bråkstavar finns också att köpa, som bråktavla eller bråkstavar. Med en köpt sats per par gör paret bråket tillsammans. I vecka 2 går bråken förbi 1, och då behöver varje elev, eller varje par med en köpt sats, halvorna och fjärdedelarna ur en sats till. De står på mallens första sida. Mallen Bråkplanket visar samma stavar på en sida, som eleverna kan ha framför sig. I mallen Bråkplanket att fylla i skriver eleverna själva bråket i en bit på varje rad.
+    - Mallen Bråkstavar att klippa är två sidor i planeringsmallarna. Skriv ut båda på tjockt papper, en av varje per elev, färglägg varje rad i en egen färg och klipp isär raderna och bitarna. Stavarna är 2,4 cm höga, så att eleverna kan hålla dem. Bråkstavar finns också att köpa, som bråktavla eller bråkstavar. Med en köpt sats per par gör paret bråket tillsammans. I vecka 2 går bråken förbi 1, och då behöver varje elev och du halvorna och fjärdedelarna ur en extra sats. De står på mallens första sida. Ett par med en köpt sats tar dem ur en till köpt sats av samma sort, så att det hela är lika långt. Mallen Bråkplanket visar samma stavar på en sida, som eleverna kan ha framför sig. I mallen Bråkplanket att fylla i skriver eleverna själva bråket i en bit på varje rad.
     - Remsorna klipper du av A4-ark, fyra på längden ur varje ark. Klipp dem lika långa som den längsta staven, så att det hela är lika långt i allt material.
     - Från vecka 2 tejpar du en tallinje per elev med maskeringstejp längs bordskanten, två på varje långsida. Det är en stavlängd från 0 till 1 och en från 1 till 2, så att eleverna kan lägga stavarna mot linjen och skriva på tejpen. I pass 2 använder eleverna mallarna Tallinjer i delar och Tomma tallinjer från 0 till 1, där det hela är lika långt som i bråkplanket och bitarna går att lägga mot linjen. På A4 är det hela 26 cm.
     - Skriv ut bråkstavarna, bråkplanket och tallinjerna på samma sorts papper, A4 eller A3 liggande, så att det hela är lika långt i allt. En köpt sats har ofta en längsta stav på 20 cm. Då lägger eleverna stavarna mot tejpen och inte mot mallarna. På mallen Tomma tallinjer från 0 till 2 är det hela 13 cm, hälften så långt som staven. Där ritar och räknar eleverna, och stavarna läggs mot tejpen.
@@ -457,7 +457,7 @@ ramar:
         - rubrik: Till läraren
           falt:
             - rubrik: Material
-              text: En tallinje per elev, tejpad längs bordskanten från 0 till 2, med en stavlängd mellan 0 och 1 och mellan 1 och 2. Bråkstavar, en sats per elev och halvorna och fjärdedelarna ur en sats till, så att de räcker förbi 1. Mallarna Tallinjer i delar och Tomma tallinjer från 0 till 1 och från 0 till 2 till pass 2. Spelkorten till Högst vinner, en kopia per par, klippta.
+              text: En tallinje per elev, tejpad längs bordskanten från 0 till 2, med en stavlängd mellan 0 och 1 och mellan 1 och 2. Bråkstavar, en sats per elev, och halvorna och fjärdedelarna ur en extra sats till varje elev och till dig, så att de räcker förbi 1. Mallarna Tallinjer i delar och Tomma tallinjer från 0 till 1 och från 0 till 2 till pass 2. Spelkorten till Högst vinner, en kopia per par, klippta.
             - rubrik: Pass 1 · Visa först och säg
               text: "”Den här staven är det hela. Den börjar vid 0 och slutar vid 1.” Lägg en fjärdedel från 0, sätt ett streck där den slutar och skriv 1/4 vid strecket: ”Här är en fjärdedel. Talet står vid strecket, där delen slutar.” Lägg fjärdedelar en i taget, sätt ett streck där varje fjärdedel slutar och räkna: ”Två fjärdedelar, tre fjärdedelar, fyra fjärdedelar. Fyra fjärdedelar är 1.” Ta en fjärdedel till ur den andra satsen och lägg den efter 1: ”Fem fjärdedelar. Nu är vi förbi 1. Fem fjärdedelar är en och en fjärdedel.”"
             - rubrik: Pass 2 · Visa först och säg
@@ -808,7 +808,7 @@ lathund:
     forberett:
       rubrik: Det jag förberedde
       text:
-        - Tejpat en tallinje per elev, med en stavlängd mellan 0, 1 och 2. En sats bråkstavar per elev, och halvor och fjärdedelar ur en sats till, dagens kort och spelkorten till Högst vinner, klippta. Lagt 5/4 och 7/4 själv och sagt orden högt.
+        - Tejpat en tallinje per elev, med en stavlängd mellan 0, 1 och 2. En sats bråkstavar per elev, halvor och fjärdedelar ur en extra sats till varje elev och till mig, dagens kort och spelkorten till Högst vinner, klippta. Lagt 5/4 och 7/4 själv och sagt orden högt.
     klarTidigt: Spela veckans spel, som heter Högst vinner. Båda vänder ett kort, och den som har det största bråket tar båda, men bara om hen säger varför.
     schema:
       rubrik: 60 minuter, steg för steg
@@ -856,7 +856,7 @@ lathund:
       rubrik: Var materialet finns
       punkter:
         - fet: Bråkstavar.
-          text: Mallen Bråkstavar att klippa, två sidor, en av varje per elev på tjockt papper, eller en köpt sats per par. I vecka 2 också halvorna och fjärdedelarna ur en sats till.
+          text: Mallen Bråkstavar att klippa, två sidor, en av varje per elev på tjockt papper, eller en köpt sats per par. I vecka 2 också halvorna och fjärdedelarna ur en extra sats till varje elev och till dig.
         - fet: Remsor.
           text: A4-ark klippta på längden, lika långa som den längsta staven.
         - fet: Tallinjer.
@@ -875,7 +875,7 @@ film:
   sekunder: 27.79
   beskrivning: "Den längsta staven är det hela: från 0 till 1. Lägg en fjärdedel från 0 och sätt ett streck där den slutar. Lägg fjärdedelarna en i taget och räkna. Ta en fjärdedel ur den andra satsen och lägg den efter 1."
   rubrik: "Så gör eleven"
-  ingress: "Fyra bilder ur filmen om vad eleven gör vid bordet. Filmen på metodens sida visar samma sak i rörelse."
+  ingress: "Fyra bilder ur filmen om vad eleven gör vid bordet i vecka 2. Filmen på metodens sida visar samma sak i rörelse."
   stillbilder:
     - text: "Det hela är lika långt som från 0 till 1."
     - text: "Lägg en fjärdedel från 0 och sätt ett streck: 1/4."
