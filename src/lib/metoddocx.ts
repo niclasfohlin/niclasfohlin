@@ -142,11 +142,14 @@ function brakStycken(taljare: string, namnare: string, storlek: number, farg: st
   const f = ELEVFONT ?? 'Calibri';
   const streckBredd = Math.round((Math.max(andikaBredd(taljare, pt), andikaBredd(namnare, pt)) + 0.4 * pt) * 20);
   const indrag = Math.max(0, Math.floor((bredd - streckBredd) / 2));
-  const rad = Math.round(pt * 20 * 1.12);
+  // Radavståndet är en multipel, aldrig exakt: Google Dokument läser exakt radhöjd som en multipel (radhöjden delad med
+  // 240) och lade flera raders luft mellan täljaren och strecket (Niclas telefon 2026-09-30). Multipeln 160 ger i Word
+  // något lägre höjd än den exakta raden hade, utan att siffrorna klipps (mätt med underlag/prov/brak-google/multipel.mjs; 170 gav memorykorten i Bråkkursen en sida till).
+  const rad = 160;
   const text = (t: string) => new TextRun({ text: t, size: storlek, font: f, color: farg });
   return [
-    new Paragraph({ alignment: AlignmentType.CENTER, keepNext: true, keepLines: true, indent: { left: indrag, right: indrag }, spacing: { before: o.fore ?? 0, after: 0, line: rad, lineRule: LineRuleType.EXACT }, border: { bottom: { style: BorderStyle.SINGLE, size: Math.max(6, Math.round(pt * 0.45)), color: farg, space: 1 } }, children: [text(taljare)] }),
-    new Paragraph({ alignment: AlignmentType.CENTER, keepNext: o.hallIhop, indent: { left: indrag, right: indrag }, spacing: { before: Math.round(pt * 3), after: 0, line: rad, lineRule: LineRuleType.EXACT }, children: [text(namnare)] }),
+    new Paragraph({ alignment: AlignmentType.CENTER, keepNext: true, keepLines: true, indent: { left: indrag, right: indrag }, spacing: { before: o.fore ?? 0, after: 0, line: rad }, border: { bottom: { style: BorderStyle.SINGLE, size: Math.max(6, Math.round(pt * 0.45)), color: farg, space: 1 } }, children: [text(taljare)] }),
+    new Paragraph({ alignment: AlignmentType.CENTER, keepNext: o.hallIhop, indent: { left: indrag, right: indrag }, spacing: { before: Math.round(pt * 3), after: 0, line: rad }, children: [text(namnare)] }),
   ];
 }
 // Det ensamma bråket i en text, om texten bara är ett bråk.
