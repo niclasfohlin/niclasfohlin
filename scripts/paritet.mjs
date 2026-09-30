@@ -283,4 +283,19 @@ if (!typsnitt.size || saknasTecken.size) {
     : 'paritet: hittar ingen teckentabell i public/fonts/ljudlek-elev/LjudlekElev-Regular.ttf.');
   process.exit(1);
 }
-console.log(`Paritet: ${provade} texter i ${filer.length} metoder står både i Word-filen och i sidans utskrift, filmerna står på samma plats i båda, länkarna till filerna bär version, och elevens typsnitt har varje tecken i elevmaterialet.`);
+// Filmerna spelar och går att pausa (Niclas 2026-09-30: på datorn stod filmen still utan knapp). Film.astro bäddar in
+// filmen som <object> och styr den genom --spel, vilket kräver att sajten får bädda in sina egna filer och att varje film
+// låter --spel styra sina animeringar.
+const ramregel = readFileSync(join(rot, 'netlify.toml'), 'utf8').match(/X-Frame-Options\s*=\s*"([^"]*)"/)?.[1];
+if (ramregel && ramregel.toUpperCase() !== 'SAMEORIGIN') {
+  console.error(`paritet: netlify.toml sätter X-Frame-Options = "${ramregel}". Filmerna står i <object> (Film.astro) och kräver SAMEORIGIN, annars står de still.`);
+  process.exit(1);
+}
+const filmerUtanPaus = readdirSync(join(rot, 'dist/stodundervisning'))
+  .filter((f) => /-film\d?\.svg$/.test(f) && readFileSync(join(rot, 'dist/stodundervisning', f), 'utf8').includes('@keyframes'))
+  .filter((f) => !readFileSync(join(rot, 'dist/stodundervisning', f), 'utf8').includes('var(--spel'));
+if (filmerUtanPaus.length) {
+  console.error(`paritet: ${filmerUtanPaus.length} filmer styr inte sina animeringar med var(--spel), så Pausa fryser dem inte: ${filmerUtanPaus.slice(0, 5).join(', ')}. Be metodriggen om animation-play-state: var(--spel,running).`);
+  process.exit(1);
+}
+console.log(`Paritet: ${provade} texter i ${filer.length} metoder står både i Word-filen och i sidans utskrift, filmerna står på samma plats i båda och går att pausa, länkarna till filerna bär version, och elevens typsnitt har varje tecken i elevmaterialet.`);
