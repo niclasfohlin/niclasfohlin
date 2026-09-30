@@ -225,7 +225,7 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
         // läser dem från disken.
         const valda = poster as Parameters<typeof metodDokument>[0];
         const hamta = async (adress: string) => { const svar = await fetch(adress); if (!svar.ok) throw new Error(`${adress} svarade ${svar.status}`); return new Uint8Array(await svar.arrayBuffer()); };
-        const bildvagar = [...new Set(valda.flatMap((p) => ljud.metodensBilder(p.data)))];
+        const bildvagar = [...new Set(valda.flatMap((p) => ljud.metodensBilder(p.data, p.id)))];
         const bilder = new Map(await Promise.all(bildvagar.map(async (b) => [b, await hamta(b)] as const)));
         const elevtypsnitt = valda.some((p) => ljud.harElevtypsnitt(p.data)) ? await hamta(ljud.ELEVTYPSNITT_TTF) : undefined;
         const dokument = metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt } });

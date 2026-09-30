@@ -1,0 +1,43 @@
+---
+// Filmen ur metodriggen (fältet film, src/lib/film.ts): en lektions lathund överst på lektionens sida, eller en film om
+// en del av metoden där den står i Word-filen. Filmen visas som <img>, loopar och har inget ljud. Knappen pausar den
+// genom att byta filmen mot stillbild 1 och startar den igen (WCAG 2.2.2); med minskad rörelse står filmen still av sig
+// själv, och knappen visas inte. Texten till filmen är beskrivningen, samma text som filmens textrad.
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import { FILM_MATT, filmAdress, stillbildAdress, stillbilder, type Film } from '../lib/film';
+interface Props { id: string; film: Film; titel: string }
+const { id, film, titel } = Astro.props;
+// En film vars filer saknas stoppar bygget, så att en sida aldrig visar en trasig bild.
+for (const fil of [filmAdress(id), ...stillbilder(id)]) {
+  if (!existsSync(join(process.cwd(), 'public', fil))) throw new Error(`${titel}: filmens fil ${fil} saknas i public/. Filerna kommer i metodriggens filmpaket (out/filmpaket/).`);
+}
+const namn = film.titel ?? 'Så gör eleven';
+const sekunder = Math.round(film.sekunder);
+---
+<figure class="film" data-film>
+  <img src={filmAdress(id)} data-film={filmAdress(id)} data-stillbild={stillbildAdress(id, 1)} alt={`${film.titel ?? titel}, filmen: ${film.beskrivning}`} width={FILM_MATT.bredd} height={FILM_MATT.hojd} decoding="async" />
+  <figcaption>
+    <button type="button" class="film-knapp" hidden>Pausa</button>
+    <span><strong>{namn}</strong> · {sekunder} sekunder, som börjar om</span>
+  </figcaption>
+</figure>
+
+<script>
+  // Pausa byter filmen mot stillbild 1, Spela sätter tillbaka filmen, som börjar om. Med minskad rörelse står filmen
+  // still av sig själv, och knappen behövs inte.
+  const stilla = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  for (const figur of document.querySelectorAll<HTMLElement>('[data-film]')) {
+    const bild = figur.querySelector('img');
+    const knapp = figur.querySelector<HTMLButtonElement>('.film-knapp');
+    if (!bild || !knapp || stilla) continue;
+    knapp.hidden = false;
+    knapp.addEventListener('click', () => {
+      const pausa = knapp.textContent === 'Pausa';
+      bild.src = pausa ? bild.dataset.stillbild! : bild.dataset.film!;
+      knapp.textContent = pausa ? 'Spela' : 'Pausa';
+      knapp.setAttribute('aria-label', pausa ? 'Spela filmen' : 'Pausa filmen');
+    });
+    knapp.setAttribute('aria-label', 'Pausa filmen');
+  }
+</script>

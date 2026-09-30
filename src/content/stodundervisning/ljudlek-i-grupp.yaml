@@ -848,3 +848,15 @@ lathund:
       - Lektionens material
       - Snabbmallen, med paren och dagens elever
     varjePass: "Vem klarade steg 4 själv, vad fastnade, och samma lektion eller nästa?"
+film:
+  titel: "Ljudstarten i Ljudlek i grupp"
+  sekunder: 18.9
+  beskrivning: "Dagens ljud: läraren visar bokstaven. Alla säger ljudet. Någon säger ett ord på ljudet. Sätt ihop: läraren drar ut ljuden med handen. Handen knyts: alla säger ordet. Dela upp: läraren säger ordet. Alla säger ljuden och räknar på fingrarna."
+  rubrik: "Ljudstarten i fyra bilder"
+  ingress: "Varje pass börjar med ljudstarten, där alla säger dagens ljud, sätter ihop och delar upp ord. Filmen på metodens sida visar den i rörelse."
+  efterStycke: 3
+  stillbilder:
+    - text: "Dagens ljud: alla säger ljudet."
+    - text: "Sätt ihop: läraren drar ut ljuden med handen."
+    - text: "Handen knyts, och alla säger ordet."
+    - text: "Dela upp: ett finger för varje ljud."

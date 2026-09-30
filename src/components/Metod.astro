@@ -14,6 +14,8 @@ import Bokstavskarta from './Bokstavskarta.astro';
 import Golvbokstaver from './Golvbokstaver.astro';
 import { ANDIKA_ADRESS, harElevtypsnitt, ljudform, upphovBilder } from '../lib/ljudkort';
 import { arElevensBlad, protokollDelas } from '../lib/ramform';
+import Film from './Film.astro';
+import { arLektionsfilm, filmEfterStycke } from '../lib/film';
 import type { SerieKoppling } from '../lib/serie';
 import type { MetodData } from '../lib/metod';
 import { ejBryt, ramArTom, passGrupper, passOrd, passOversikt, stegTexter, laskortKolumn, arEttKort } from '../lib/metod';
@@ -48,6 +50,7 @@ const repliker = (s: string) => s.split(/(”[^”]*”)/).filter(Boolean).map((
 const friKlass = (t: { kolumner: string[]; rader: string[][] }) => (t.kolumner.length > 3 || (t.kolumner.length === 3 && t.rader.some((r) => r.some((c) => c.length > 40))) ? 'fri stapla' : 'fri');
 // Passöversikten: rutin, tidsschema och arbetsform i en bild när stegen har faser.
 const pass = passOversikt(d);
+const delfilm = d.film && !arLektionsfilm(d.film) ? d.film : undefined;
 const ord = passOrd(d);
 const tavla = d.exempel?.tavla ? d.lathund?.mall.block.find((b) => b.typ === 'tavla') : undefined;
 const fraserRubrik = d.steg?.fraserRubrik ?? '';
@@ -117,7 +120,9 @@ const meny = [
     </nav>
   )}
   <div class="metod-text">
-  {d.inledning.map((s) => <p>{s}</p>)}
+  {/* En film om en del av metoden (Ljudstarten i Ljudlek i grupp) står efter inledningens stycke efterStycke, som
+      stillbilderna i Word-filen; en lektions film står överst på sidan ([id].astro). */}
+  {d.inledning.map((s, i) => <><p>{s}</p>{delfilm && i + 1 === filmEfterStycke(delfilm, d.inledning.length) && <Film id={id} film={delfilm} titel={d.titel} />}</>)}
 
   {/* Rutornas rubriker är rubriker, så att en skärmläsare kan hoppa till dem (K-028). De står direkt under h1. */}
   {d.upplagg && <div class="m-ruta" id="upplagg"><h2 class="kicker">{d.upplagg.rubrik}</h2><p>{d.upplagg.text}</p></div>}

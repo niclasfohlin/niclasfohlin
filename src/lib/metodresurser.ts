@@ -11,6 +11,6 @@ const las = (sokvag: string) => new Uint8Array(readFileSync(join(PUBLIC, sokvag.
 
 export function lasResurser(poster: MetodPost[]): MetodResurser {
   const bilder = new Map<string, Uint8Array>();
-  for (const p of poster) for (const b of metodensBilder(p.data)) if (!bilder.has(b)) bilder.set(b, las(b));
+  for (const p of poster) for (const b of metodensBilder(p.data, p.id)) if (!bilder.has(b)) bilder.set(b, las(b));
   return { bilder, elevtypsnitt: poster.some((p) => harElevtypsnitt(p.data)) ? las(ELEVTYPSNITT_TTF) : undefined };
 }

@@ -363,6 +363,18 @@ html.js .samla {
 .metod-huvud h1 { font-size: clamp(1.9rem, 4.5vw, 2.75rem); margin-bottom: 0.3em; }
 .metod-huvud .undertitel { font-family: var(--typsnitt-ui); color: var(--farg-text-svag); font-size: 1.2rem; font-weight: 500; margin: 0 0 1rem; text-wrap: balance; }
 .metod-huvud .ingress { font-size: 1.1rem; line-height: 1.6; margin: 0; }
+/* Filmen ur metodriggen (Film.astro): lektionens lathund under ingressen, eller en film om en del av metoden i texten.
+   Hela bredden i spalten, med en tunn ram som bordet i filmen står i, och en rad under med knappen och filmens namn. */
+.film { margin: 1.25rem 0 0; max-width: 40rem; }
+.metod-text .film { margin: 1.5rem 0; }
+/* Stillbilden (paus) är 960 × 500, filmen 960 × 540: stillbilden står överst i filmens ruta, och raden under har filmens
+   bakgrund, där filmens textrad annars står. */
+.film img { display: block; width: 100%; height: auto; aspect-ratio: 960 / 540; object-fit: contain; object-position: top; background: #f5f3ee; border: 1px solid var(--farg-kant); border-radius: var(--radie); }
+.film figcaption { display: flex; align-items: center; gap: 0.75rem; margin: 0.5rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
+.film figcaption strong { color: var(--farg-text); font-weight: 600; }
+.film-knapp { flex: none; min-height: 2.25rem; padding: 0.3rem 0.9rem; border: 1px solid var(--farg-kant); border-radius: 999px; background: var(--farg-yta); color: var(--farg-accent); font: inherit; font-weight: 600; cursor: pointer; }
+.film-knapp:hover { border-color: var(--farg-accent); }
+.film-knapp:focus-visible { outline: 2px solid var(--farg-accent); outline-offset: 2px; }
 .metod-topp .faktaruta { grid-area: fakta; margin: 0; box-shadow: var(--skugga); }
 .nedladdning { grid-area: ladda; font-family: var(--typsnitt-ui); font-size: 0.95rem; max-width: 46rem; }
 .nedladdning h2 { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); margin: 0 0 0.6em; }
@@ -410,6 +422,11 @@ button.lank:hover { color: var(--farg-accent); }
 .delning.fot { margin-top: 2rem; }
 .metod-topp:has(> .delning) { grid-template-areas: "huvud" "fakta" "dela" "ladda"; }
 .metod-topp > .delning { grid-area: dela; }
+/* Lektionens film (Film.astro) direkt efter faktarutan (Niclas 2026-09-30): på telefonen under rutan, på datorn i
+   vänsterspalten under ingressen, bredvid rutan, eftersom rutans smala spalt gör filmen för liten. */
+.metod-topp > .film { grid-area: film; margin: 0; }
+.metod-topp:has(> .film) { grid-template-areas: "huvud" "fakta" "film" "ladda"; }
+.metod-topp:has(> .film):has(> .delning) { grid-template-areas: "huvud" "fakta" "film" "dela" "ladda"; }
 /* Pekskärm: knappar som är minst 44 punkter höga. */
 @media (pointer: coarse) {
   .delning a, .delning button { min-height: 2.75rem; }
@@ -437,6 +454,8 @@ button.lank:hover { color: var(--farg-accent); }
 }
 @media (min-width: 56rem) {
   .metod-topp:has(> .delning) { grid-template-areas: "huvud fakta" "dela fakta" "ladda fakta"; }
+  .metod-topp:has(> .film) { grid-template-areas: "huvud fakta" "film fakta" "ladda fakta"; }
+  .metod-topp:has(> .film):has(> .delning) { grid-template-areas: "huvud fakta" "film fakta" "dela fakta" "ladda fakta"; }
 }
 
 /* Sidnavigationen: på bred skärm en egen spalt till vänster som följer med vid rullning, med det
@@ -1039,6 +1058,8 @@ html.js .bara-js { display: inline-block; }
   .m-rutin { box-shadow: none; }
   .faktaruta { border-color: #bbb; font-size: 9.5pt; }
   .metod-huvud h1 { font-size: 22pt; }
+  /* Filmen står inte i utskriften: Word-filen har dess fyra stillbilder på första sidan. */
+  .film { display: none; }
   .metod-modell { font-size: 10.5pt; }
   .metod-modell h2 { font-size: 13pt; margin-top: 1.4em; break-after: avoid; }
   /* Rubrik och inledande stycke följer med det som kommer efter; snabbmallen hålls ihop. */

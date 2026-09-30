@@ -5,6 +5,8 @@ import Metod from '../../components/Metod.astro';
 import Nedladdning from '../../components/Nedladdning.astro';
 import Seriemeny from '../../components/Seriemeny.astro';
 import Seriefot from '../../components/Seriefot.astro';
+import Film from '../../components/Film.astro';
+import { arLektionsfilm } from '../../lib/film';
 import Delning from '../../components/Delning.astro';
 import { delningPa } from '../../lib/delning';
 import Kommentarer from '../../components/Kommentarer.astro';
@@ -58,6 +60,9 @@ const antalLektioner = serie?.lektioner.length ?? 0;
           {d.uppdaterad && <><dt>Uppdaterad</dt><dd>{formateraDatum(d.uppdaterad)}</dd></>}
         </dl>
       </div>
+      {/* Lektionens film är dess lathund: faktarutan först och sedan det eleven gör, innan texten börjar (Niclas 2026-09-30).
+          På datorn står den under ingressen, med faktarutan till höger. */}
+      {d.film && arLektionsfilm(d.film) && <Film id={m.id} film={d.film} titel={d.titel} />}
       {delningPa && <Delning sida={`/stodundervisning/${m.id}`} titel={d.titel} plats="topp" />}
       <Nedladdning id={m.id} titel={d.titel} harMallar={harMallar(d)} harLathund={harLathund(d)} ramar={d.ramar?.rubrik.toLowerCase()} />
     </div>

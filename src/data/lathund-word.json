@@ -1,112 +1,112 @@
 {
   "antalsuppfattning-i-grupp": {
-    "kalla": "065510ddbc0f97a4",
+    "kalla": "66d38c6fffbae9a3",
     "skalor": [
       1.2,
       1.35,
       1.35,
       1.25
     ],
-    "datum": "2026-09-29"
+    "datum": "2026-09-30"
   },
   "boksamtal-i-grupp": {
-    "kalla": "1a3d9dc7f8248c47",
+    "kalla": "d05691896300a14b",
     "skalor": [
       1.35,
       1.35,
       1.15,
       1.35
     ],
-    "datum": "2026-09-29"
+    "datum": "2026-09-30"
   },
   "brakkurs-i-grupp": {
-    "kalla": "1cc8fb5947b3f606",
+    "kalla": "aeb120fa71b81b89",
     "skalor": [
       1.1,
       1.35,
       1.35,
       1.25
     ],
-    "datum": "2026-09-29"
+    "datum": "2026-09-30"
   },
   "faktatextsamtal-i-grupp": {
-    "kalla": "e95e6d2e34d2b19f",
+    "kalla": "c3827d7d60f1698c",
     "skalor": [
       1.25,
       1.35,
       1.25,
       1.35
     ],
-    "datum": "2026-09-29"
+    "datum": "2026-09-30"
   },
   "laslistor-i-grupp": {
-    "kalla": "47d24efa4196f040",
+    "kalla": "4546377eac1f5ebd",
     "skalor": [
       1.2,
       1.35,
       1.15,
       1.35
     ],
-    "datum": "2026-09-29"
+    "datum": "2026-09-30"
   },
   "ljudlek-i-grupp": {
-    "kalla": "ee212630ed849d7c",
+    "kalla": "d139fd740333e5ed",
     "skalor": [
       1.2,
       1.35,
       1.1,
       1.2
     ],
-    "datum": "2026-09-29"
+    "datum": "2026-09-30"
   },
   "problemlosning-i-grupp": {
-    "kalla": "bbfe2ebd75406633",
+    "kalla": "9976743853446a75",
     "skalor": [
       1.3,
       1.35,
       1.35,
       1.25
     ],
-    "datum": "2026-09-29"
+    "datum": "2026-09-30"
   },
   "skrivkurs-berattelseram": {
-    "kalla": "43755fcd0c082244",
+    "kalla": "2e9ae46883d0bd97",
     "skalor": [
       1.2,
       1.35,
       1.15,
       1.25
     ],
-    "datum": "2026-09-29"
+    "datum": "2026-09-30"
   },
   "skrivkurs-vardeskapande": {
-    "kalla": "f42434d092b0708c",
+    "kalla": "86e9a899446d0bb5",
     "skalor": [
       1.25,
       1.35,
       1.35,
       1.25
     ],
-    "datum": "2026-09-29"
+    "datum": "2026-09-30"
   },
   "til-i-grupp": {
-    "kalla": "a3f8eaa3741c8102",
+    "kalla": "d55b1f858b34cde6",
     "skalor": [
       1.2,
       1.35,
       1.1,
       1.3
     ],
-    "datum": "2026-09-29"
+    "datum": "2026-09-30"
   },
   "upprepad-lasning": {
-    "kalla": "c1051716def2086f",
+    "kalla": "9c8a9b9c617d11cc",
     "skalor": [
       1.25,
       1.35,
       1.05,
       1.25
     ],
-    "datum": "2026-09-29"
+    "datum": "2026-09-30"
   }
 }

@@ -395,3 +395,13 @@ kort:
     - "Golvbokstäver"
     - "Bokstavskort"
 mallar: []
+film:
+  sekunder: 13.61
+  beskrivning: "Kliv på bokstaven och säg ljudet. Håll ljudet tills foten landar på nästa. Säg ordet. En gång till, lite fortare."
+  rubrik: "Så gör eleven"
+  ingress: "Fyra bilder ur lektionens film om vad eleven gör. Filmen på metodens sida visar samma sak i rörelse."
+  stillbilder:
+    - text: "Kliv på bokstaven och säg ljudet."
+    - text: "Håll ljudet tills foten landar på nästa bokstav."
+    - text: "Säg ordet."
+    - text: "En gång till, lite fortare."

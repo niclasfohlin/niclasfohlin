@@ -421,3 +421,13 @@ kort:
     - "Bildkort"
     - "Bokstavskort"
 mallar: []
+film:
+  sekunder: 21.5
+  beskrivning: "Säg ordet och första ljudet. Lägg kortet i högen för ljudet. Samma första ljud: samma hög. Vänd korten. Samma första bokstav? Säg ordet och första ljudet. Skriv bokstaven för ljudet."
+  rubrik: "Så gör eleven"
+  ingress: "Fyra bilder ur lektionens film om vad eleven gör. Filmen på metodens sida visar samma sak i rörelse."
+  stillbilder:
+    - text: "Säg ordet och första ljudet."
+    - text: "Samma första ljud, samma hög."
+    - text: "Vänd korten: har varje hög samma första bokstav?"
+    - text: "Skriv bokstaven för det första ljudet."

@@ -141,6 +141,20 @@ const stodundervisning = defineCollection({
     serie: z.string().optional(),
     formaga: z.number().int().positive().optional(),
     tranar: z.string().optional(),
+    // Filmen ur metodriggen (Niclas 2026-09-30): <id>-film.svg och fyra stillbilder <id>-film-1.svg … -4.svg i
+    // public/stodundervisning/, som hittas genom metodens id. Utan titel visar filmen hela lektionen och är lektionens
+    // lathund, överst på sidan; med titel visar den en del av metoden (Ljudstarten i Ljudlek i grupp) och står på sidan
+    // efter inledningens stycke efterStycke. Stillbilderna står i Word direkt efter ingressen, på första sidan, med
+    // rubrik, ingress och en text under varje bild (src/lib/film.ts).
+    film: z.strictObject({
+      titel: text.optional(),
+      sekunder: z.number().positive(),
+      beskrivning: text,
+      rubrik: text,
+      ingress: text,
+      efterStycke: z.number().int().positive().optional(),
+      stillbilder: z.array(z.strictObject({ text: text.max(55, 'Högst 55 tecken under en stillbild.') })).length(4, 'Filmen har fyra stillbilder.'),
+    }).optional(),
     lektionsbank: z.strictObject({
       rubrik: z.string().default('Lektionsbanken'),
       text: z.string().optional(),
@@ -433,6 +447,7 @@ const stodundervisning = defineCollection({
     const lektionsfalt = [d.serie, d.formaga, d.tranar].filter((x) => x !== undefined).length;
     if (lektionsfalt > 0 && lektionsfalt < 3) ctx.addIssue({ code: 'custom', path: ['serie'], message: 'En lektion i en serie har serie, formaga och tranar, alla tre.' });
     if (d.serie && d.lektionsbank) ctx.addIssue({ code: 'custom', path: ['lektionsbank'], message: 'En lektion kan inte ha en egen lektionsbank.' });
+    if (d.film?.efterStycke && d.film.efterStycke > d.inledning.length) ctx.addIssue({ code: 'custom', path: ['film', 'efterStycke'], message: `Inledningen har ${d.inledning.length} stycken; filmen kan inte stå efter stycke ${d.film.efterStycke}.` });
     // Förmågorna numreras i följd från 1, så att en lektions formaga aldrig pekar på en annan förmåga än den skrevs för.
     d.lektionsbank?.formagor.forEach((f, i) => { if (f.nr !== i + 1) ctx.addIssue({ code: 'custom', path: ['lektionsbank', 'formagor', i, 'nr'], message: `Förmågan "${f.namn}" ska ha nummer ${i + 1}: förmågorna numreras i följd från 1.` }); });
     // Lathundens block snabbmall hämtar metodens snabbmall; utan den skulle blocket tyst försvinna.

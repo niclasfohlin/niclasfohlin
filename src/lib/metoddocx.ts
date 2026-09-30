@@ -14,6 +14,7 @@ import { bagSvg, utanStod } from './lasflyt';
 import type { MetodPostISerie, SerieKoppling } from './serie';
 import { ANDIKA_ADRESS, ELEVTYPSNITT, VIK_TEXT, bildFor as bildForOrd, harElevtypsnitt, kartCeller, kortCeller, ljudenheter, ljudform, arDelark, type KartCell } from './ljudkort';
 import { arElevensBlad, harFragor, protokollDelas, textlangd } from './ramform';
+import { stillbilder, STILLBILD_MATT, type Film } from './film';
 import WORDSKALOR from '../data/lathund-word.json';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
@@ -584,10 +585,10 @@ const VIKLINJE: IBorderOptions = { style: BorderStyle.DOTTED, size: 14, color: F
 const INGEN: IBorderOptions = { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' };
 const px = (cm: number) => Math.round((cm / 2.54) * 96);
 let ljudBildNr = 0;
-function bildRun(sokvag: string, storlek: number, namn: string): ImageRun {
+function bildRun(sokvag: string, storlek: number, namn: string, hojd = storlek): ImageRun {
   const data = RESURSER.bilder.get(sokvag);
   if (!data) throw new Error(`Bilden ${sokvag} saknas i Word-filens resurser (src/lib/ljudkort.ts, metodensBilder).`);
-  return new ImageRun({ type: 'svg', data, transformation: { width: storlek, height: storlek }, altText: { name: `Bild ${++ljudBildNr}`, description: namn, id: String(3000 + ljudBildNr) }, fallback: { type: 'png', data: bytesUr(TOM_PNG) } });
+  return new ImageRun({ type: 'svg', data, transformation: { width: storlek, height: hojd }, altText: { name: `Bild ${++ljudBildNr}`, description: namn, id: String(3000 + ljudBildNr) }, fallback: { type: 'png', data: bytesUr(TOM_PNG) } });
 }
 const elevRun = (text: string, size: number, farg = FARG.text) => new TextRun({ text, size, color: farg, font: ELEVTYPSNITT });
 // Arkets rubrik och, för vikkorten, raden om klipp och vik: små, så att arket får plats på sidan.
@@ -866,6 +867,33 @@ function lektionsbankBarn(serie: SerieKoppling['serie']): Barn[] {
   return ut;
 }
 
+// Filmens fyra stillbilder på första sidan (src/lib/film.ts): rubriken, ingressen och bilderna två och två i en tabell
+// utan ramar, med numret och texten under varje bild, som i metodriggens Word-fil. Blocket hålls ihop, så att det står
+// helt på en sida.
+const STILLBILD_CM = 7.75;
+function filmBarn(film: Film, id: string): Barn[] {
+  const bilder = stillbilder(id);
+  const halv = Math.floor(BREDD / 2);
+  const bredd = px(STILLBILD_CM);
+  const hojd = Math.round((bredd * STILLBILD_MATT.hojd) / STILLBILD_MATT.bredd);
+  const cellFor = (i: number, sistaRaden: boolean) => new TableCell({
+    width: { size: halv, type: WidthType.DXA }, borders: runt(INGEN_KANT), margins: { top: 40, bottom: sistaRaden ? 0 : 120, left: 40, right: 40 },
+    children: [
+      new Paragraph({ keepNext: true, spacing: { before: 0, after: 40 }, children: [bildRun(bilder[i], bredd, film.stillbilder[i].text, hojd)] }),
+      new Paragraph({ keepNext: !sistaRaden, spacing: { before: 0, after: 0 }, children: [run(`${i + 1} · `, { fet: true, storlek: 19, farg: FARG.huvud }), run(film.stillbilder[i].text, { storlek: 19 })] }),
+    ],
+  });
+  return [
+    stycke(film.rubrik, { fet: true, farg: FARG.huvud, storlek: 24, fore: 120, efter: 40, hallIhop: true }),
+    stycke(film.ingress, { storlek: 19, farg: FARG.svag, efter: 100, hallIhop: true }),
+    new Table({
+      width: { size: halv * 2, type: WidthType.DXA }, columnWidths: [halv, halv], layout: TableLayoutType.FIXED, borders: UTAN_KANTER,
+      rows: [0, 2].map((i) => new TableRow({ cantSplit: true, children: [cellFor(i, i === 2), cellFor(i + 1, i === 2)] })),
+    }),
+    avstand(160),
+  ];
+}
+
 // Hela metoden i den ordning modellen har.
 function metodBarn(post: MetodPostISerie, bas: string): Flod {
   const d = post.data;
@@ -874,7 +902,11 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
   if (d.undertitel) ut.push(stycke(d.undertitel, { kursiv: true, farg: FARG.huvud, storlek: 24, efter: 80 }));
   ut.push(stycke(metaRad(d), { farg: FARG.svag, storlek: 20, efter: 200 }));
   ut.push(stycke(d.ingress, { storlek: 24, efter: 160 }));
+  // Faktatabellen först och sedan filmens stillbilder, före inledningen, som på sidan (Niclas 2026-09-30: inforutan först
+  // och sedan vad eleven gör). Så står bilderna på första sidan ("på s. 1 alltid"); efter inledningen, som i riggens
+  // Word-fil, hamnade de på sidan 2, eftersom sajtens första sida också har faktatabellen.
   ut.push(...faktaTabell(d, post.serie));
+  if (d.film) ut.push(...filmBarn(d.film, post.id));
   for (const s of d.inledning) ut.push(stycke(s));
   if (d.upplagg) ut.push(...ruta(d.upplagg.rubrik, d.upplagg.text));
   if (d.gruppen) ut.push(...ruta(d.gruppen.rubrik, d.gruppen.text));

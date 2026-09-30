@@ -105,6 +105,13 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
 
+# Filmerna och deras stillbilder ur metodriggen (<id>-film.svg, <id>-film-1.svg …): en dag, som lathundarna, eftersom en
+# film kan göras om under samma namn.
+[[headers]]
+  for = "/stodundervisning/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
 # iPhone och iPad frågar efter ikonens varianter under egna namn; de får samma ikon.
 [[redirects]]
   from = "/apple-touch-icon-precomposed.png"

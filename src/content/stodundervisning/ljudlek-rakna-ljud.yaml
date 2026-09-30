@@ -430,3 +430,13 @@ mallar:
       - "3"
       - "4"
     fot: "Lägg bildkortet i rutan Bild, den första från vänster, med bilden uppåt. Säg ett ljud i taget och flytta en markör samtidigt, från vänster till höger. Dra sedan fingret under rutorna och säg ordet."
+film:
+  sekunder: 22.85
+  beskrivning: "Säg ljuden. Flytta en markör för varje ljud. Dra fingret under och säg ordet. Vänd kortet. Lika många prickar? Nästa kort: ko. K sägs kort. Dra fingret under och säg ordet. Två markörer och två prickar."
+  rubrik: "Så gör eleven"
+  ingress: "Fyra bilder ur lektionens film om vad eleven gör. Filmen på metodens sida visar samma sak i rörelse."
+  stillbilder:
+    - text: "Säg ljuden och flytta en markör för varje ljud."
+    - text: "Dra fingret under rutorna och säg ordet."
+    - text: "Vänd kortet: lika många prickar som markörer?"
+    - text: "Nästa kort: ko har två ljud, och k sägs kort."

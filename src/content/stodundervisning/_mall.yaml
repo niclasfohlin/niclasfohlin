@@ -314,3 +314,18 @@ lathund:
     bordet:
       - Vad som ska ligga på bordet när passet börjar
     varjePass: Vad som noteras efter varje pass.
+# Valfritt: filmen ur metodriggens filmpaket (METODER.md under Filmerna). Filerna <id>-film.svg och <id>-film-1.svg … -4.svg
+# ligger i public/stodundervisning/. Utan titel är filmen lektionens lathund och står under ingressen; med titel visar den en
+# del av metoden och står efter inledningens stycke efterStycke. I Word står stillbilderna direkt efter ingressen.
+# film:
+#   titel: "Ljudstarten i Ljudlek i grupp"
+#   sekunder: 18.9
+#   beskrivning: "Filmens steg i ord och i ordning, samma text som filmens textrad."
+#   rubrik: "Så gör eleven"
+#   ingress: "Fyra bilder ur lektionens film om vad eleven gör. Filmen på metodens sida visar samma sak i rörelse."
+#   efterStycke: 3
+#   stillbilder:
+#     - text: "Högst 55 tecken under varje stillbild."
+#     - text: "…"
+#     - text: "…"
+#     - text: "…"

@@ -395,3 +395,13 @@ kort:
     - "Restkort"
     - "Bokstavskort"
 mallar: []
+film:
+  sekunder: 12.1
+  beskrivning: "Säg ordet på kortet. Hitta kortet som rimmar. Säg båda orden. Vänd korten. Samma rest? Säg ett ord som rimmar. Påhittat räknas."
+  rubrik: "Så gör eleven"
+  ingress: "Fyra bilder ur lektionens film om vad eleven gör. Filmen på metodens sida visar samma sak i rörelse."
+  stillbilder:
+    - text: "Säg ordet på kortet."
+    - text: "Hitta kortet som rimmar och säg båda orden."
+    - text: "Vänd korten: ser resten likadan ut?"
+    - text: "Säg ett eget ord som rimmar. Ett påhittat ord räknas."
