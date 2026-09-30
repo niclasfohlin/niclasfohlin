@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Word-lathundens storlek per sida, uppmätt i Word (K-055, Niclas 2026-09-27: docx-lathunden så nära PowerPoint som
 // det går). Varje sida i lathunden får den största texten som ryms på en sida i Word, ett steg under för marginal
-// mot andra program (LibreOffice, Word på Mac). Skriptet bygger sajten med LATHUND_WORDPROV=1, så att
+// mot andra program (LibreOffice, Word på Mac), och sedan så stor att den också ryms på en sida i Google Dokument
+// (K-138: scripts/google.mjs, ett steg i taget mindre tills sidan ryms). Skriptet bygger sajten med LATHUND_WORDPROV=1, så att
 // src/pages/utskrift/word/[fil].docx.ts gör varje sida i varje steg i LH_STEG (src/lib/metoddocx.ts), låter Word
 // räkna sidorna (scripts/word-provsidor.ps1), skriver skalorna till src/data/lathund-word.json och tar bort
 // provfilerna. Filen committas: Netlify har ingen Word. metoddocx.ts läser den i bygget och i webbläsaren, så att
@@ -16,9 +17,10 @@
 //   node scripts/lathund-word.mjs --vid-behov     bara de som saknas eller är inaktuella (körs i npm run validera)
 //   node scripts/lathund-word.mjs --kontrollera   stanna om en mätning saknas, är inaktuell eller överbliven
 //
-// Kräver Word när en metod ska mätas.
+// Kräver Word och Google-inloggningen (DRIFT.md under Google Drive-knappen) när en metod ska mätas.
 
 import { existsSync, readdirSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
+import { googlePdf } from './google.mjs';
 import { execFileSync, execSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { join, resolve, dirname } from 'node:path';
@@ -39,7 +41,7 @@ const metoder = readdirSync(katalog)
 const manifestFil = join(rot, 'src', 'data', 'lathund-word.json');
 
 // Allt som påverkar hur sidorna läggs ut i Word: metodens text, koden som bygger dem, provsidan, mätningen och docx.
-const gemensamma = ['src/lib/metoddocx.ts', 'src/lib/metod.ts', 'src/lib/brak.ts', 'src/pages/utskrift/word/[fil].docx.ts', 'scripts/word-provsidor.ps1'];
+const gemensamma = ['src/lib/metoddocx.ts', 'src/lib/metod.ts', 'src/lib/brak.ts', 'src/lib/ramform.ts', 'src/pages/utskrift/word/[fil].docx.ts', 'scripts/word-provsidor.ps1', 'scripts/lathund-word.mjs', 'scripts/google.mjs'];
 const docxVersion = (() => { try { return JSON.parse(readFileSync(join(rot, 'node_modules', 'docx', 'package.json'), 'utf8')).version; } catch { return 'okänd'; } })();
 const hashAv = (delar) => { const h = createHash('sha256'); for (const d of delar) h.update(d); return h.digest('hex').slice(0, 16); };
 // Textfiler hashas med LF oavsett radslut: arbetskopian på Windows har CRLF, Netlifys utcheckning LF.
@@ -115,8 +117,35 @@ try {
       console.log(`  FEL  ${m.id}: sida ${sidor} i Word-lathunden ryms inte på en sida ens i minsta storleken; korta texten på den sidan`);
       continue;
     }
+    // Samma sida ska rymmas i Google Dokument (K-138): Google ritar lathundens rutor i rutor något högre än Word, och en
+    // sida som var full i Word fick en tom sida efter sig i Google (Upprepad läsning, Läslistor, Problemlösning
+    // 2026-09-30). Varje sida prövas därför i Google i den storlek Word valde, och ett steg i taget mindre tills den
+    // ryms på en sida (scripts/google.mjs, Toishi-riggens inloggning).
+    const google = [];
+    const rymsInte = [];
+    for (const [i, nr] of [1, 2, 3, 4].entries()) {
+      const alla = (steg[`${m.id}--${nr}`] ?? []).sort((a, b) => a - b);
+      let j = alla.indexOf(Math.round(skalor[i] * 100));
+      let sidor = 0;
+      while (j >= 0) {
+        const fil = join(provMapp, `${m.id}--${nr}--${alla[j]}.docx`);
+        const pdf = join(provMapp, `${m.id}--${nr}--${alla[j]}-google.pdf`);
+        writeFileSync(pdf, (await googlePdf(readFileSync(fil), { namn: `lathundprov ${m.id} ${nr} ${alla[j]}` })).pdf);
+        sidor = execFileSync('pdftotext', ['-enc', 'UTF-8', pdf, '-'], { encoding: 'utf8', maxBuffer: 1 << 26 }).split('\f').slice(0, -1).length;
+        if (sidor <= 1 || j === 0) break;
+        j--;
+      }
+      if (sidor > 1) rymsInte.push(nr);
+      if (alla[j] / 100 !== skalor[i]) google.push(`sida ${nr} ${Math.round(skalor[i] * 100)} → ${alla[j]} %`);
+      skalor[i] = alla[j] / 100;
+    }
+    if (rymsInte.length) {
+      fel++;
+      console.log(`  FEL  ${m.id}: sida ${rymsInte.join(' och ')} i Word-lathunden ryms inte på en sida i Google Dokument ens i minsta storleken; korta texten eller rätta formen (METODER.md, Word och Google Dokument)`);
+      continue;
+    }
     manifest[m.id] = { kalla: kallHash(m), skalor, datum: new Date().toISOString().slice(0, 10) };
-    console.log(`  ok   ${m.id}: ${skalor.map((s) => `${Math.round(s * 100)} %`).join(' · ')}`);
+    console.log(`  ok   ${m.id}: ${skalor.map((s) => `${Math.round(s * 100)} %`).join(' · ')}${google.length ? ` (Google: ${google.join(', ')})` : ''}`);
   }
 } catch (e) {
   fel++;

@@ -4,7 +4,7 @@
 // Designelementen är samma som på sidan (src/components/Metod.astro): rutor, tabeller med
 // rubrikrad, band, gör/undvik och bockar. Varje sida bär © Niclas Fohlin och niclasfohlin.se.
 import {
-  AlignmentType, BorderStyle, Document, Footer, Header, HeadingLevel, HeightRule, ImageRun, ImportedXmlComponent, LevelFormat, NoBreakHyphen, PageNumber, PageOrientation,
+  AlignmentType, Body, BorderStyle, Document, Footer, Header, HeadingLevel, HeightRule, ImageRun, ImportedXmlComponent, LevelFormat, NoBreakHyphen, PageNumber, PageOrientation,
   Paragraph, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, VerticalAlign, WidthType,
   type IBorderOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
@@ -308,9 +308,16 @@ function gorUndvik(gor: string[], undvik: string[]): Barn[] {
     ]),
   ], bredder), avstand()];
 }
-const BOCK = '☐';
+// Bockrutan är □ i Arial (K-138). ☐ fanns bara i Segoe UI Symbol: Google Dokument saknar det och ritar rutan med ett
+// reservtypsnitt, och i Word gjorde det raden högre än textens, så att checklistorna blev längre i Word än i Google
+// (18,8 mot 17,4 pt per rad i Upprepad läsnings lathund). Googles Calibri saknar också □ och ritar den i Arial
+// (granskningen 2026-09-30), så rutan står i Arial i båda: samma tecken och samma mått, och Arial har lägre radhöjd än
+// Calibri, så raden blir inte högre. Rutan är två tredjedelar så stor som ☐ vid samma storlek; en ensam ruta i en cell
+// är därför en och en halv gång större, så att den är lika stor som förut.
+const BOCK = '□';
+const bockRun = (storlek: number) => run(BOCK, { font: 'Arial', farg: FARG.huvud, storlek });
 function bockRad(text: string, o: StyckeVal = {}): Paragraph {
-  return new Paragraph({ children: [run(`${BOCK} `, { font: 'Segoe UI Symbol', farg: FARG.huvud, storlek: o.storlek ?? 22 }), run(text, { storlek: 20, ...o })], spacing: { after: 0 } });
+  return new Paragraph({ children: [bockRun(o.storlek ?? 22), run(` ${text}`, { storlek: 20, ...o })], spacing: { after: 0 } });
 }
 // Bockar i en eller två kolumner: målen och checklistan.
 function bockar(punkter: string[], kolumner: 1 | 2, o: { hojd?: number } = {}): Barn[] {
@@ -662,41 +669,42 @@ function ljudBarn(l: { rubrik?: string; rader: string[][] }, form: NonNullable<R
   if (form === 'bokstavskarta') return [...arkRubrik(l.rubrik, false), bokstavskartaTabell(kartCeller(l))];
   return golvbokstaverBarn(kort);
 }
-// Ordet på vikkortet med en prick under varje ljud, eller en båge under varje del. Varje enhet står i en egen cell, så
-// att pricken hamnar under sin bokstav; smala bokstäver har en minsta bredd, så att prickarna under i, l och j inte
-// klumpar ihop sig, och texten krymper med ordets bredd (28 pt när ordet ryms).
+// Ordet på vikkortet med en prick under varje ljud, eller en båge under varje del: två stycken med ett centrerat
+// tabbstopp mitt i varje enhets bredd, enheterna i det övre och prickarna eller bågarna i det undre, så att pricken
+// hamnar under sin bokstav. Inga celler: Google Dokument gör en rad med en tabell i en cell högre än radens fasta höjd,
+// och vikkortens åttonde rad hamnade på en ny sida (K-138: inre tabell 3,42 cm i Google mot 3,2 cm, två stycken med
+// tabbstopp 3,2 cm, och prickarna under bokstäverna i både Word och Google). Smala bokstäver har en minsta bredd, så att
+// prickarna under i, l och j inte klumpar ihop sig, och texten krymper med ordets bredd (28 pt när ordet ryms). `inre`
+// är cellens bredd innanför marginalerna; ordet får 80 twips mindre, som marginal.
 const BOKSTAVSBREDD = (c: string): number => (c.length > 1 ? [...c].reduce((a, x) => a + BOKSTAVSBREDD(x), 0) + 0.3 : /[mw]/.test(c) ? 1.45 : /[ilj]/.test(c) ? 0.78 : /[tfr]/.test(c) ? 0.82 : 1);
-function ordMedPrickar(ord: string, maxW: number, delar: boolean): Table {
+function ordMedPrickar(ord: string, inre: number, delar: boolean): Paragraph[] {
   const enheter = ljudenheter(ord, delar);
   // Dubbelteckning och ck står i sin naturliga bredd med en prick; r, t och f behöver 0,8 (ekorre, riggen).
   const naturlig = (x: string) => (/[mw]/.test(x) ? 1.45 : /[ilj]/.test(x) ? 0.55 : /[tfr]/.test(x) ? 0.8 : 1);
   const bredd = (c: string) => (delar ? BOKSTAVSBREDD(c) : c.length > 1 ? [...c].reduce((a, x) => a + naturlig(x), 0) : BOKSTAVSBREDD(c));
-  const enhet = Math.min(300, Math.floor(maxW / enheter.reduce((a, c) => a + bredd(c), 0)));
+  const enhet = Math.min(300, Math.floor((inre - 80) / enheter.reduce((a, c) => a + bredd(c), 0)));
   const ordSize = Math.max(delar ? 20 : 28, Math.round(((56 * enhet) / 300) * (delar && enheter.some((x) => x.length > 1) ? 0.82 : 0.92)));
   const prickSize = Math.max(24, Math.round((40 * enhet) / 300));
   const bredder = enheter.map((c) => Math.round(bredd(c) * enhet));
-  const ingen = runt(INGEN);
-  const text = (t: string, w: number, size: number) => new TableCell({
-    width: { size: w, type: WidthType.DXA }, borders: ingen, margins: { top: 0, bottom: 0, left: 0, right: 0 },
-    children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 240 }, children: [elevRun(t, size)] })],
+  // Ordet står mitt i cellen; varje enhets tabbstopp är mitt i dess bredd, räknat från cellens vänstra innerkant.
+  const start = Math.round((inre - bredder.reduce((a, x) => a + x, 0)) / 2);
+  const stopp = bredder.map((w, i) => ({ type: TabStopType.CENTER, position: start + bredder.slice(0, i).reduce((a, x) => a + x, 0) + Math.round(w / 2) }));
+  // Tabben står i samma typsnitt och storlek som enheten, så att raden inte blir högre.
+  const rad = (delarna: { run: TextRun | ImageRun; storlek: number }[], fore = 0) => new Paragraph({
+    tabStops: stopp, spacing: { before: fore, after: 0, line: 240 },
+    children: delarna.flatMap((d) => [new TextRun({ children: [new Tab()], size: d.storlek, font: ELEVTYPSNITT }), d.run]),
   });
   // Bågen under en del: en liten svg-bild, 80 procent av delens bredd.
-  const bage = (w: number) => {
+  const bage = (w: number): ImageRun => {
     const bw = Math.max(12, Math.round((w * 0.8) / 15));
     const bh = Math.max(6, Math.round(bw * 0.28));
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${bw}" height="${bh}" viewBox="0 0 100 28"><path d="M6 5 Q50 30 94 5" stroke="#${FARG.text}" stroke-width="7" fill="none" stroke-linecap="round"/></svg>`;
-    return new TableCell({
-      width: { size: w, type: WidthType.DXA }, borders: ingen, margins: { top: 40, bottom: 0, left: 0, right: 0 },
-      children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0 }, children: [svgRun(new TextEncoder().encode(svg), bw, bh, { name: `Båge ${++ljudBildNr}`, description: 'en del', id: String(3000 + ljudBildNr) })] })],
-    });
+    return svgRun(new TextEncoder().encode(svg), bw, bh, { name: `Båge ${++ljudBildNr}`, description: 'en del', id: String(3000 + ljudBildNr) });
   };
-  return new Table({
-    alignment: AlignmentType.CENTER, layout: TableLayoutType.FIXED, width: { size: bredder.reduce((a, x) => a + x, 0), type: WidthType.DXA }, columnWidths: bredder, borders: UTAN_KANTER,
-    rows: [
-      new TableRow({ children: enheter.map((c, i) => text(c, bredder[i], ordSize)) }),
-      new TableRow({ children: enheter.map((_, i) => (delar ? bage(bredder[i]) : text('•', bredder[i], prickSize))) }),
-    ],
-  });
+  return [
+    rad(enheter.map((c) => ({ run: elevRun(c, ordSize), storlek: ordSize }))),
+    delar ? rad(bredder.map((w) => ({ run: bage(w), storlek: 2 })), 40) : rad(enheter.map(() => ({ run: elevRun('•', prickSize), storlek: prickSize }))),
+  ];
 }
 // Vikkort: bilden till vänster och ordet till höger, streckad kant att klippa och en blå prickad viklinje. Arket står två
 // gånger på sidan, så att en utskrift räcker till två par: tre kort i bredd och åtta rader, varje halva 3,2 × 3,2 cm.
@@ -719,8 +727,7 @@ function vikkortTabell(kort: string[]): Table {
         }),
         new TableCell({
           width: { size: halva, type: WidthType.DXA }, verticalAlign: VerticalAlign.CENTER, borders: { top: STRECKAD, bottom: STRECKAD, left: VIKLINJE, right: STRECKAD }, margins: mar,
-          // Word kräver ett stycke efter en tabell i en cell.
-          children: [ordMedPrickar(k, halva - 240, delar), luft(20)],
+          children: ordMedPrickar(k, halva - mar.left - mar.right, delar),
         }),
       ])) }));
   }
@@ -747,11 +754,14 @@ function bokstavskortTabell(kort: string[]): Table {
 // Golvbokstäver: en bokstav per sida i 560 pt, så att en gemen är cirka 10–15 cm hög och eleven kan kliva på den. Ingen
 // linje. En tydlig pil nederst visar vad som är upp, så att n inte blir u och d inte blir p när arket läggs på golvet; för
 // b, d, p och q avgör den bokstaven (läsbarheten 2026-09-29: den lilla grå pilen syntes knappt).
-// Inget avstånd före: alla bokstäver står på samma höjd på sidan (riggen).
+// Inget avstånd före: alla bokstäver står på samma höjd på sidan (riggen). Bokstaven är 512 pt, Google Dokuments
+// största storlek (560 pt blev 512 i Google), och pilen står i Arial, som Google annars tar när Calibri saknar ↑, så
+// att bokstaven och pilen är lika i båda (K-138).
+const GOLVSTORLEK = 1024;
 function golvbokstaverBarn(kort: string[]): Barn[] {
   return kort.flatMap((k, i) => [
-    new Paragraph({ pageBreakBefore: i > 0, alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, ...radHojd(12900, 1120, ELEVTYPSNITT) }, children: [elevRun(k, 1120)] }),
-    new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 800, after: 0, ...radHojd(1000, 88, 'Calibri') }, children: [new TextRun({ text: '↑', size: 88, bold: true, color: FARG.text, font: 'Calibri' })] }),
+    new Paragraph({ pageBreakBefore: i > 0, alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, ...radHojd(12900, GOLVSTORLEK, ELEVTYPSNITT) }, children: [elevRun(k, GOLVSTORLEK)] }),
+    new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 800, after: 0, ...radHojd(1000, 88, 'Arial') }, children: [new TextRun({ text: '↑', size: 88, bold: true, color: FARG.text, font: 'Arial' })] }),
   ]);
 }
 // Bokstavskartan: alfabetet på ett A4, fem i bredd, med stor och liten bokstav, bilden och ordet under. En bokstav utan
@@ -793,7 +803,7 @@ function bildForKort(k: string): string {
 function diplomBarn(dip: NonNullable<MetodData['diplom']>): Barn[] {
   const linje = '________________________________________';
   const barn: Paragraph[] = [];
-  if (dip.kicker) barn.push(new Paragraph({ children: [textRun({ text: dip.kicker, font: 'Consolas', size: 20, allCaps: true, characterSpacing: 40, color: FARG.svag })], alignment: AlignmentType.CENTER, spacing: { before: 600, after: 240 } }));
+  if (dip.kicker) barn.push(new Paragraph({ children: [textRun({ text: dip.kicker, font: 'Consolas', size: 20, allCaps: true, color: FARG.svag })], alignment: AlignmentType.CENTER, spacing: { before: 600, after: 240 } }));
   barn.push(new Paragraph({ children: [run(dip.rubrik, { fet: true, farg: FARG.huvud, storlek: 72 })], alignment: AlignmentType.CENTER, spacing: { after: 480 } }));
   for (const t of dip.text) {
     barn.push(/^_{3,}$/.test(t)
@@ -1205,8 +1215,8 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
     const huvud = rad(['Efter perioden ska eleven oftare kunna', 'Före', 'Efter'].map((k, i) => cell([stycke(k, { fet: true, farg: FARG.vit, storlek: 20, mitt: i > 0, efter: 0 })], { bredd: bredder[i], fyll: FARG.huvud, kanter: runt(kant(FARG.huvud)) })), { huvud: true });
     const kropp = d.mal.punkter.map((p, i) => rad([
       cell([stycke(p, { storlek: 20, efter: 0 })], { bredd: bredder[0], fyll: i % 2 === 1 ? FARG.rand : undefined, mitt: true }),
-      cell([new Paragraph({ children: [run(BOCK, { font: 'Segoe UI Symbol', farg: FARG.huvud, storlek: 28 })], alignment: AlignmentType.CENTER, spacing: { after: 0 } })], { bredd: bredder[1], fyll: i % 2 === 1 ? FARG.rand : undefined, mitt: true }),
-      cell([new Paragraph({ children: [run(BOCK, { font: 'Segoe UI Symbol', farg: FARG.huvud, storlek: 28 })], alignment: AlignmentType.CENTER, spacing: { after: 0 } })], { bredd: bredder[2], fyll: i % 2 === 1 ? FARG.rand : undefined, mitt: true }),
+      cell([new Paragraph({ children: [bockRun(42)], alignment: AlignmentType.CENTER, spacing: { after: 0 } })], { bredd: bredder[1], fyll: i % 2 === 1 ? FARG.rand : undefined, mitt: true }),
+      cell([new Paragraph({ children: [bockRun(42)], alignment: AlignmentType.CENTER, spacing: { after: 0 } })], { bredd: bredder[2], fyll: i % 2 === 1 ? FARG.rand : undefined, mitt: true }),
     ], { hojd: 520 }));
     const notering = tabell([rad([cell([stycke('Notering', { fet: true, storlek: 20, efter: 0 })], { bredd: BREDD, kanter: runt(kant()) })], { hojd: 2400 })], [BREDD]);
     sidor.push([
@@ -1394,10 +1404,10 @@ const linjeKant = (size: number): IBorderOptions => ({ style: BorderStyle.SINGLE
 // radhöjd som en multipel, höjden delad med 240, och gjorde raderna flera gånger för höga: läskortens två kort hamnade
 // på varsin sida, bråkets täljare fick ett glapp och tabeller med fast radhöjd sköt en tom sida framför sig
 // (scripts/googleprov.mjs). Därför finns ingen exakt radhöjd i Word-filerna. En textrad får en multipel av typsnittets
-// enkla rad, som Word och Google räknar ur typsnittets mått: 1,611 gånger storleken för Andika (typo-måtten, med
-// USE_TYPO_METRICS) och 1,2207 för Calibri. Då blir raden lika hög i Word som den exakta raden var
+// enkla rad, som är lika hög i Word och Google (mätt 2026-09-30): 1,611 gånger storleken för Andika (typo-måtten, med
+// USE_TYPO_METRICS), 1,2207 för Calibri och 1,150 för Arial. Då blir raden lika hög i Word som den exakta raden var
 // (scripts/wordjmf.mjs jämför sidorna med Word). Luft är avståndet före ett tomt stycke med en punkts tecken.
-const ENKEL_RAD: Record<string, number> = { Andika: 1.611, Calibri: 1.2207 };
+const ENKEL_RAD: Record<string, number> = { Andika: 1.611, Calibri: 1.2207, Arial: 1.15 };
 function radHojd(hojd: number, storlek: number, font?: string): { line: number } {
   const enkel = (ENKEL_RAD[font ?? 'Calibri'] ?? ENKEL_RAD.Calibri) * (storlek / 2) * 20;
   return { line: Math.max(1, Math.round((240 * hojd) / enkel)) };
@@ -1578,20 +1588,22 @@ function inledningStycke(rad: string): Paragraph {
 // cremefärgade noter, faktarutor och kickers i versaler.
 const CREME = 'FBF3E4';
 const BRUN = '8A5A1E';
+// Kickerns typsnitt, utan teckenavstånd (K-138): Google Dokument ignorerar teckenavståndet och ritar texten tätare än
+// Word, så att raderna bryts på andra ställen i de två.
 const MONO = 'Consolas';
 // Kickers är riktiga rubriker (nivå 3) så att dokumentet går att navigera, med eget utseende.
 function kicker(text: string, o: { farg?: string; efter?: number; fore?: number } = {}): Paragraph {
-  return new Paragraph({ heading: HeadingLevel.HEADING_3, children: [textRun({ text, font: MONO, size: 15, bold: false, allCaps: true, characterSpacing: 20, color: o.farg ?? FARG.svag })], spacing: { before: o.fore ?? 160, after: o.efter ?? 60 }, keepNext: true });
+  return new Paragraph({ heading: HeadingLevel.HEADING_3, children: [textRun({ text, font: MONO, size: 15, bold: false, allCaps: true, color: o.farg ?? FARG.svag })], spacing: { before: o.fore ?? 160, after: o.efter ?? 60 }, keepNext: true });
 }
 function lhHuvud(titel: string, etikett: string, niva1 = false): Barn[] {
   const barn = [new Paragraph({
     heading: niva1 ? HeadingLevel.HEADING_1 : HeadingLevel.HEADING_2,
     tabStops: [{ type: TabStopType.RIGHT, position: BREDD - 240 }],
     children: [
-      textRun({ text: 'LATHUND  ', font: MONO, size: 15, bold: false, color: 'DDE6E1', characterSpacing: 20 }),
+      textRun({ text: 'LATHUND  ', font: MONO, size: 15, bold: false, color: 'DDE6E1' }),
       textRun({ text: titel, bold: true, size: 28, color: FARG.vit, font: 'Calibri' }),
       textRun({ children: [new Tab()] }),
-      textRun({ text: etikett, font: MONO, size: 15, bold: false, allCaps: true, color: 'DDE6E1', characterSpacing: 20 }),
+      textRun({ text: etikett, font: MONO, size: 15, bold: false, allCaps: true, color: 'DDE6E1' }),
     ],
     spacing: { before: 0, after: 0 },
   })];
@@ -1611,7 +1623,7 @@ function lhRutor(delar: { rubrik: string; text: string }[], o: { storlek?: numbe
 // Rutans rubrik är en rubrik på nivå 3 (K-018), med rutans eget utseende.
 function lhRuta(rubrik: string, barn: Barn[]): Barn[] {
   return [tabell([
-    rad([cell([new Paragraph({ heading: HeadingLevel.HEADING_3, children: [textRun({ text: rubrik, font: MONO, size: 16, bold: false, allCaps: true, color: FARG.vit, characterSpacing: 20 })], spacing: { before: 0, after: 0 } })], { bredd: BREDD, fyll: FARG.text, kanter: runt(kant(FARG.text)) })]),
+    rad([cell([new Paragraph({ heading: HeadingLevel.HEADING_3, children: [textRun({ text: rubrik, font: MONO, size: 16, bold: false, allCaps: true, color: FARG.vit })], spacing: { before: 0, after: 0 } })], { bredd: BREDD, fyll: FARG.text, kanter: runt(kant(FARG.text)) })]),
     rad([cell(barn, { bredd: BREDD, kanter: { left: kant(FARG.text, 8), right: kant(FARG.text, 8), bottom: kant(FARG.text, 8), top: kant(FARG.text, 8) } })]),
   ], [BREDD]), avstand(120)];
 }
@@ -1641,7 +1653,7 @@ function kortTabell(kolumner: string[], rader: string[][]): Barn[] {
   const pt = Math.max(14, Math.min(28, (radHojd / 20) * 0.45, (bredder[0] / 20 - 12) / (langst * 0.55))) / SKALA;
   const linje = kant(FARG.kant, 6);
   const kanter = { top: INGEN_KANT, left: INGEN_KANT, right: INGEN_KANT, bottom: linje };
-  const huvud = rad(kolumner.map((k, i) => cell([new Paragraph({ children: [textRun({ text: k, font: MONO, size: 16, allCaps: true, color: FARG.svag, characterSpacing: 20 })], spacing: { after: 0 } })], { bredd: bredder[i], kanter })), { huvud: true });
+  const huvud = rad(kolumner.map((k, i) => cell([new Paragraph({ children: [textRun({ text: k, font: MONO, size: 16, allCaps: true, color: FARG.svag })], spacing: { after: 0 } })], { bredd: bredder[i], kanter })), { huvud: true });
   const kropp = rader.map((r) => new TableRow({ cantSplit: true, height: { value: radHojd, rule: HeightRule.ATLEAST }, children: r.map((c, i) => new TableCell({
     width: { size: bredder[i], type: WidthType.DXA },
     verticalAlign: VerticalAlign.CENTER,
@@ -1726,7 +1738,7 @@ function lathundBarn(post: MetodPost, o: { niva1?: boolean; skalor?: number[]; b
       ],
       () => {
         const bredder = [1300, BREDD - 1300];
-        const huvud = rad(['Tid', 'Vad händer'].map((k, i) => cell([new Paragraph({ children: [textRun({ text: k, font: MONO, size: 16, allCaps: true, color: FARG.vit, characterSpacing: 20 })], spacing: { after: 0 } })], { bredd: bredder[i], fyll: FARG.text, kanter: runt(kant(FARG.text)) })), { huvud: true });
+        const huvud = rad(['Tid', 'Vad händer'].map((k, i) => cell([new Paragraph({ children: [textRun({ text: k, font: MONO, size: 16, allCaps: true, color: FARG.vit })], spacing: { after: 0 } })], { bredd: bredder[i], fyll: FARG.text, kanter: runt(kant(FARG.text)) })), { huvud: true });
         const kropp = l.pass.schema.rader.map((r, i) => rad([
           cell([new Paragraph({ children: [textRun({ text: r.tid, font: MONO, size: 18, bold: true, color: FARG.svag })], spacing: { after: 0 } })], { bredd: bredder[0], fyll: i % 2 === 1 ? FARG.rand : undefined }),
           cell([
@@ -1834,7 +1846,7 @@ function lathundBarn(post: MetodPost, o: { niva1?: boolean; skalor?: number[]; b
         ...lhRuta('På bordet när passet börjar', l.material.bordet.map((p, i, alla) => stycke(p, { storlek: 20, efter: i === alla.length - 1 ? 0 : 40 }))),
       ],
       () => [
-        ...(d.checklista ? lhRuta(d.checklista.rubrik, d.checklista.punkter.map((p, i, alla) => new Paragraph({ children: [run(`${BOCK} `, { font: 'Segoe UI Symbol', farg: FARG.huvud, storlek: 20 }), run(p, { storlek: 20 })], spacing: { after: i === alla.length - 1 ? 0 : 40 } }))) : []),
+        ...(d.checklista ? lhRuta(d.checklista.rubrik, d.checklista.punkter.map((p, i, alla) => new Paragraph({ children: [bockRun(20), run(` ${p}`, { storlek: 20 })], spacing: { after: i === alla.length - 1 ? 0 : 40 } }))) : []),
         ...(d.uppfoljning || l.material.varjePass ? lhRuta('Uppföljning', [
           ...(d.uppfoljning?.rader ?? []).map((r) => new Paragraph({ children: [textRun({ text: `${r.nar}: `, bold: true, size: 20 }), textRun({ text: r.vad, size: 20 })], spacing: { after: 60 } })),
           ...(l.material.varjePass ? [new Paragraph({ children: [textRun({ text: 'Varje pass: ', bold: true, size: 20 }), textRun({ text: l.material.varjePass, size: 20 })], spacing: { after: 0 } })] : []),
@@ -1902,7 +1914,109 @@ function typsnittFor(poster: MetodPost[]): { fonts?: { name: string; data: Buffe
   const data = RESURSER.elevtypsnitt;
   return data && poster.some((p) => harElevtypsnitt(p.data)) ? { fonts: [{ name: ELEVTYPSNITT, data: data as Buffer }] } : {};
 }
+// Avsnittets sista stycke. docx lägger ett tomt stycke i dokumentets textstorlek sist i varje avsnitt, och det bär
+// avsnittets inställningar (sidans storlek, sidhuvudet). Word låter stycket hänga kvar på en full sida, men Google
+// Dokument flyttar det till en ny sida och gör en tom sida; slutar dokumentet med en tabell lägger båda till ett sådant
+// stycke själva (Boksamtals lathund och Bråkkursens mallar i Google Dokument, scripts/googleprov.mjs 2026-09-30). Det
+// stycket är därför en punkt högt i alla Word-filer, med radavståndet som multipel: docx-bibliotekets stycke byts ut
+// här, och dokument() lägger ett likadant sist när det sista avsnittet slutar med en tabell.
+const avsnittsStycke = () => new Paragraph({ spacing: { before: 0, after: 0, line: 240 }, run: { size: 2, font: 'Calibri' } });
+// Bytet gäller docx 9.7:s inre metod; finns den inte längre (en ny version av docx) stannar bygget här i stället för att
+// stycket tyst blir normalstort igen.
+if (typeof (Body.prototype as unknown as { createSectionParagraph?: unknown }).createSectionParagraph !== 'function') {
+  throw new Error('metoddocx.ts: docx saknar Body.prototype.createSectionParagraph; pröva avsnittsStycke mot den nya versionen (K-138).');
+}
+(Body.prototype as unknown as { createSectionParagraph: (sektion: unknown) => Paragraph }).createSectionParagraph = (sektion) => {
+  const stycke = avsnittsStycke();
+  (stycke as unknown as { properties: { push: (x: unknown) => void } }).properties.push(sektion);
+  return stycke;
+};
+// Tabellerna görs om här, i alla Word-filer och alla former på en gång, efter två regler (K-138, mätta 2026-09-30).
+//
+// En rad med satt höjd har ingen cellmarginal upptill eller nedtill. Word lägger marginalerna ovanpå radens höjd, båda
+// vid minsta höjd och den nedre vid exakt höjd, men Google Dokument räknar dem in i höjden: en protokollrad på minst 900
+// twips med 80 upptill och nedtill blev 53,5 pt i Word och 45,8 pt i Google. Höjden får därför marginalerna som Word
+// lägger till, cellernas marginaler upptill och nedtill blir 0,
+// och luften ligger som ett stycke av samma höjd först och sist i cellen. Då ritar Word raden som förut och Google
+// likadant (53,5 och 54,0 pt; vikkortet 93,7 och 94,5 pt).
+//
+// En tabell i en cell har ett stycke på en punkt före och efter sig. Google tillåter ingen tabell först eller sist i en
+// cell och lägger där ett tomt stycke i normal storlek; docx lägger ett sådant efter. En ruta i lathundens spalter blev
+// 17 pt högre i Google än i Word, och skrivraderna 29 pt; med styckena på en punkt skiljer det 3 pt.
+//
+// docx-biblioteket behåller radernas och cellernas inställningar (options), så raden byggs om ur dem;
+// scripts/wordregler.mjs stoppar valideringen om en fil ändå bryter en regel.
+type MedInstallningar<T> = { options: T };
+const radInst = (r: TableRow) => (r as unknown as MedInstallningar<ConstructorParameters<typeof TableRow>[0]>).options;
+const cellInst = (c: TableCell) => (c as unknown as MedInstallningar<ConstructorParameters<typeof TableCell>[0]>).options;
+// Stycket har "håll ihop med nästa" påslaget. docx skriver keepNext: false som ett eget element med värdet false, så
+// elementet räcker inte (granskningen 2026-09-30: 352 celler fick annars luftstycken som höll ihop).
+type XmlDel = { rootKey?: string; root?: XmlDel[] | Record<string, unknown> };
+const haller = (b: unknown) => b instanceof Paragraph && ((b as unknown as { properties?: XmlDel }).properties?.root as XmlDel[] ?? []).some((x) => {
+  if (x.rootKey !== 'w:keepNext') return false;
+  const attr = (Array.isArray(x.root) ? x.root : []).find((a) => a.rootKey === '_attr');
+  return !(attr && (attr.root as Record<string, unknown>)?.val === false);
+});
+// Ett stycke på en punkt före en tabell som står först i cellen eller efter en annan tabell, och efter den sista. Ett
+// tomt stycke sist i cellen direkt efter en tabell (avstand()) blir också ett på en punkt: Word räknar inte dess höjd
+// där, Google gör det (mätt 2026-09-30).
+// Tomt är ett stycke utan körningar vars egenskaper bara är avstånd (avstand()), inte ett med sidbrytning, kant eller
+// "håll ihop med nästa".
+const tomtStycke = (x: unknown) => x instanceof Paragraph && (x as unknown as { root: unknown[] }).root.length <= 1
+  && ((x as unknown as { properties?: XmlDel }).properties?.root as XmlDel[] ?? []).every((e) => e.rootKey === 'w:spacing');
+function kringTabeller(barn: readonly (Paragraph | Table)[]): (Paragraph | Table)[] {
+  const ut: (Paragraph | Table)[] = [];
+  barn.forEach((x, i) => {
+    if (x instanceof Table && (i === 0 || barn[i - 1] instanceof Table)) ut.push(new Paragraph({ keepNext: true, spacing: { before: 0, after: 0, line: 240 }, run: { size: 2, font: 'Calibri' } }));
+    ut.push(x);
+  });
+  if (ut.at(-1) instanceof Table) ut.push(avsnittsStycke());
+  else if (ut.at(-2) instanceof Table && tomtStycke(ut.at(-1))) ut[ut.length - 1] = avsnittsStycke();
+  return ut;
+}
+function googleTabeller(barn: readonly unknown[]): void {
+  for (const b of barn) {
+    if (!(b instanceof Table)) continue;
+    const rot = (b as unknown as { root: unknown[] }).root;
+    rot.forEach((r, i) => {
+      if (!(r instanceof TableRow)) return;
+      const rad = radInst(r);
+      const celler = rad.children as TableCell[];
+      // Raden byggs om ur sina celler; en cell som spänner över flera rader har fortsättningar som bara finns i
+      // radens root och skulle försvinna. Inget använder rowSpan i dag.
+      if (celler.some((c) => (cellInst(c).rowSpan ?? 1) > 1)) throw new Error('metoddocx.ts: googleTabeller kan inte bygga om en rad med rowSpan (K-138).');
+      for (const c of celler) googleTabeller(cellInst(c).children);
+      const marg = celler.map((c) => cellInst(c).margins ?? {});
+      const upp = rad.height ? Math.max(0, ...marg.map((m) => m.top ?? 0)) : 0;
+      const ned = rad.height ? Math.max(0, ...marg.map((m) => m.bottom ?? 0)) : 0;
+      const inre = celler.some((c) => cellInst(c).children.some((x) => x instanceof Table));
+      if (!upp && !ned && !inre) return;
+      const nya = celler.map((c, j) => {
+        const o = cellInst(c);
+        const hall = o.children.some(haller);
+        const t = upp || ned ? marg[j].top ?? 0 : 0;
+        const n = upp || ned ? marg[j].bottom ?? 0 : 0;
+        const barnet = kringTabeller([...(t ? [luft(t, hall)] : []), ...o.children, ...(n ? [luft(n, hall)] : [])]);
+        return new TableCell({ ...o, ...(upp || ned ? { margins: { ...marg[j], top: 0, bottom: 0 } } : {}), children: barnet });
+      });
+      const hojd = rad.height ? Number(rad.height.value) + (rad.height.rule === HeightRule.EXACT ? ned : upp + ned) : 0;
+      rot[i] = new TableRow({ ...rad, ...(rad.height ? { height: { value: hojd, rule: rad.height.rule } } : {}), children: nya });
+    });
+  }
+}
 function dokument(titel: string, sektioner: ISectionOptions[], typsnitt: { fonts?: { name: string; data: Buffer }[] } = {}): Document {
+  // Två tabeller i följd får ett stycke på en punkt emellan, som i en cell: Google lägger annars ett i normal storlek.
+  // Ett avsnitt som börjar med en tabell börjar med ett sådant stycke (Google lade lathundens sida 1 14 pt lägre), och
+  // ett tomt stycke sist i ett avsnitt tas bort, eftersom nästa avsnitt ändå börjar på en ny sida (sidan efter
+  // började 16 pt lägre i Google). Granskningen 2026-09-30.
+  sektioner = sektioner.map((s) => {
+    const barn = s.children.flatMap((x, i) => (x instanceof Table && s.children[i - 1] instanceof Table ? [avsnittsStycke(), x] : [x]));
+    while (barn.length > 1 && tomtStycke(barn.at(-1))) barn.pop();
+    return { ...s, children: barn[0] instanceof Table ? [avsnittsStycke(), ...barn] : barn };
+  });
+  const sista = sektioner.at(-1);
+  if (sista && sista.children.at(-1) instanceof Table) sektioner = [...sektioner.slice(0, -1), { ...sista, children: [...sista.children, avsnittsStycke()] }];
+  for (const s of sektioner) googleTabeller(s.children);
   return new Document({
     ...typsnitt,
     creator: 'Niclas Fohlin',
