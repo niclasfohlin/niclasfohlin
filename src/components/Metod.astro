@@ -483,7 +483,7 @@ const meny = [
                 if (stodKolumn !== undefined) return <Laskort lista={l} stodKolumn={stodKolumn} />;
                 return info
                   ? <Kortlista rubrik={l.rubrik} info={info} nyGrupp={info.grupp !== forra} brak={brak} />
-                  : <Elevlista rubrik={l.rubrik} kolumner={l.kolumner} rader={l.rader} brak={brak} huvud={li === 0 ? ram.huvud : undefined} klass={arEttKort(ram.listor!, l) ? 'kort' : ''} elev={elevtypsnitt} />;
+                  : <Elevlista rubrik={l.rubrik} kolumner={l.kolumner} rader={l.rader} brak={brak} huvud={li === 0 ? ram.huvud : undefined} klass={arEttKort(ram.listor!, l) ? 'kort' : ''} elev={elevtypsnitt && !l.larare} />;
               })}
             </>
           ) : ramArTom(ram)

@@ -334,6 +334,9 @@ const stodundervisning = defineCollection({
           rubrik: z.string().optional(),
           kolumner: z.array(text).min(1).optional(),
           rader: z.array(z.array(z.string()).min(1)).min(1),
+          // Lärarens lista bland elevens (kartläggningens uppgifter som läraren läser upp): står i husets typsnitt, inte
+          // elevens (K-130, riggens docs/elevmaterial.md). Ett protokoll med skrivkolumn känns igen av sig självt.
+          larare: z.boolean().optional(),
         }).superRefine((l, ctx) => {
           const n = l.kolumner?.length ?? l.rader[0].length;
           l.rader.forEach((r, i) => { if (r.length !== n) ctx.addIssue({ code: 'custom', path: ['rader', i], message: `Raden ska ha ${n} celler, som ${l.kolumner ? 'rubrikerna' : 'första raden'}.` }); });

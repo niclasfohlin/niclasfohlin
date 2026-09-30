@@ -62,12 +62,13 @@ function allaFormer(d: MetodData): Set<Ljudform> {
   for (const ram of d.ramar?.ramar ?? []) for (const l of ram.listor ?? []) { const f = ljudform(d, l); if (f) ut.add(f); }
   return ut;
 }
-// Elevens typsnitt i allt elevmaterial (Niclas 2026-09-29, K-130: "allt som ligger på bordet och är elevmaterial"):
-// listor och kort som eleven läser, läskort, elevens blad och mallar som eleven har framför sig, i alla metoder, så att
-// eleven möter samma a, g och l överallt. Lärarens protokoll, lathunden och diplomet står i husets typsnitt. En metod
-// utan elevmaterial behöver inte typsnittet, och då laddas och bäddas det inte in.
+// Elevens typsnitt i allt elevmaterial (Niclas 2026-09-29, K-130: "allt som ligger på bordet och är elevmaterial"), med
+// metodriggens regler (docs/elevmaterial.md): listor och kort som eleven läser, läskorten, elevens blad, mallarna och
+// diplomet, i alla metoder, så att eleven möter samma a, g och l överallt. Lärarens protokoll och listor märkta
+// larare: true, lathunden och ramarnas delar till läraren eller hemmet står i husets typsnitt. En metod utan elevmaterial
+// behöver inte typsnittet, och då laddas och bäddas det inte in.
 export const harElevmaterial = (d: MetodData): boolean =>
-  (d.ramar?.ramar ?? []).some((r) => (r.listor?.length ?? 0) > 0) || Object.keys(d.elevblad ?? {}).length > 0 || d.mallar.length > 0;
+  (d.ramar?.ramar ?? []).some((r) => (r.listor?.length ?? 0) > 0) || Object.keys(d.elevblad ?? {}).length > 0 || d.mallar.length > 0 || !!d.diplom;
 export const harElevtypsnitt = (d: MetodData): boolean => allaFormer(d).size > 0 || harElevmaterial(d);
 
 // Bokstavskartans celler: bokstaven, ordet och bilden. En bokstav utan bild har sin förklaring i ordets ställe ("som k").

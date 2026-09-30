@@ -345,6 +345,7 @@ ramar:
               text: Före första passet och efter sista, en elev i taget, med uppgifterna i listan Kartläggning. Uppgift 1–5 följer veckorna.
       listor:
         - rubrik: Kartläggning · Åk 1 · Läs uppgiften, eleven bygger och svarar
+          larare: true
           rader:
             - - 1. Bygg 24. Hur många tiotal och ental?
             - - 2. Bygg 19 och 21. Vilket är störst?
@@ -461,6 +462,7 @@ ramar:
               text: Före första passet och efter sista, en elev i taget, med uppgifterna i listan Kartläggning. Uppgift 1–5 följer veckorna.
       listor:
         - rubrik: Kartläggning · Åk 2 · Läs uppgiften, eleven bygger och svarar
+          larare: true
           rader:
             - - 1. Bygg 57. Hur många tiotal och ental?
             - - 2. Bygg 60 och 6. Vilket är störst? Vad visar nollan?
@@ -577,6 +579,7 @@ ramar:
               text: Före första passet och efter sista, en elev i taget, med uppgifterna i listan Kartläggning. Uppgift 1–5 följer veckorna.
       listor:
         - rubrik: Kartläggning · Åk 3 · Läs uppgiften, eleven bygger och svarar
+          larare: true
           rader:
             - - 1. Skriv tvåhundrafyra. Bygg talet.
             - - 2. Bygg 438 och 483. Vilket är störst?
@@ -693,6 +696,7 @@ ramar:
               text: "Före första passet och efter sista, en elev i taget, med uppgifterna i listan Kartläggning. Uppgift 1–5 följer veckorna, och uppgift 6 gäller negativa tal. Säg före uppgift 2 och 5: här är hundraplattan en hel."
       listor:
         - rubrik: Kartläggning · Åk 4–5 · Läs uppgiften, eleven bygger och svarar
+          larare: true
           rader:
             - - 1. Skriv tretusenfyrtiosju. Bygg talet.
             - - 2. Bygg 0,4 och 0,35. Vilket är störst?

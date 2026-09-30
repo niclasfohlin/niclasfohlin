@@ -377,7 +377,7 @@ function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[
 // luft: ett kort att ha på bordet (strategikortet, K-062) får luft mellan raderna.
 // elev: metoden har elevmaterial (K-130, src/lib/ljudkort.ts), så bladet eleven läser står i elevens typsnitt; lärarens
 // protokoll i husets.
-function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][] }, o: { storlek: number; hallIhopEfter?: boolean; brak?: boolean; luft?: boolean; elev?: boolean }): Barn[] {
+function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][]; larare?: boolean }, o: { storlek: number; hallIhopEfter?: boolean; brak?: boolean; luft?: boolean; elev?: boolean }): Barn[] {
   if (harFragor(l)) return fragelista(l, o);
   const ut: Barn[] = [];
   const n = Math.max(...l.rader.map((r) => r.length), l.kolumner?.length ?? 1);
@@ -502,7 +502,7 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
     const stodKolumn = laskortKolumn(l);
     if (stodKolumn !== undefined) return laskortBarn(l, stodKolumn);
     const ettKort = arEttKort(alla, l);
-    return elevlista({ ...l, rubrik: !o.stor && l.rubrik && !namngerRamen(l.rubrik) ? `${l.rubrik} · ${ram.rubrik}` : l.rubrik }, { storlek: ettKort ? 40 : storlek, luft: ettKort, hallIhopEfter: o.stor ? i === alla.length - 1 : i < alla.length - 1, brak: o.brak, elev: o.elev });
+    return elevlista({ ...l, rubrik: !o.stor && l.rubrik && !namngerRamen(l.rubrik) ? `${l.rubrik} · ${ram.rubrik}` : l.rubrik }, { storlek: ettKort ? 40 : storlek, luft: ettKort, hallIhopEfter: o.stor ? i === alla.length - 1 : i < alla.length - 1, brak: o.brak, elev: o.elev && !l.larare });
   });
   // Ljudlekens kort och kartan (src/lib/ljudkort.ts): lärarens ruta först, sedan varje ark i en egen sektion med smal
   // marginal, som i riggens kompendium, både i beskrivningen och i planeringsmallarna.
@@ -515,7 +515,7 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
     if (med.length) ut.push(stycke(`Bilderna på ${med.join(' och ')}: Fluent Emoji, © Microsoft Corporation, MIT-licens.`, { farg: FARG.svag, storlek: 18 }));
     for (const l of ram.listor ?? []) {
       const form = ljudform({ kort: o.kort }, l);
-      if (!form) { ut.push(...elevlista(l, { storlek, brak: o.brak, elev: o.elev })); continue; }
+      if (!form) { ut.push(...elevlista(l, { storlek, brak: o.brak, elev: o.elev && !l.larare })); continue; }
       ut.push(new Sektionsbyte(true), ...ljudBarn(l, form), new Sektionsbyte(false));
     }
     return ut;
@@ -565,14 +565,14 @@ const bytesUr = (b64: string) => Uint8Array.from(atob(b64), (c) => c.charCodeAt(
 // Varje bild har meningen som alternativtext, så att den går att läsa upp, och ett eget id i dokumentet.
 let bagBildNr = 0;
 function bagBild(text: string, breddTwips: number): Paragraph {
-  const { svg, bredd, hojd } = bagSvg(text, { bredd: breddTwips / 20, storlek: 18, radfaktor: 1.6 });
+  const { svg, bredd, hojd } = bagSvg(text, { bredd: breddTwips / 20, storlek: 18, radfaktor: 1.6, typsnitt: 'Andika' });
   const px = (pt: number) => Math.round((pt * 4) / 3);
   const altText = { name: `Mening med bågar ${++bagBildNr}`, description: utanStod(text), id: String(1000 + bagBildNr) };
   return new Paragraph({ spacing: { after: 60 }, children: [new ImageRun({ type: 'svg', data: new TextEncoder().encode(svg), transformation: { width: px(bredd), height: px(hojd) }, altText, fallback: { type: 'png', data: bytesUr(TOM_PNG) } })] });
 }
-// Läskorten står i Arial, också i metoder med elevens typsnitt (K-130): kortet med stöd är en bild där bågarna ligger efter
-// Arials uppmätta teckenbredder (src/lib/lasflyt.ts), och Word ritar bildens text med datorns typsnitt, inte med det
-// inbäddade. Kortet utan stöd står i samma typsnitt, så att paret är likadant, som på sidan (Laskort.astro).
+// Läskorten står i elevens typsnitt (K-130): kortet med stöd är en bild där orden är Andikas konturer och bågarna ligger
+// efter Andikas bredder (src/lib/lasflyt.ts, som riggen), så att det ser likadant ut var filen än öppnas, och kortet utan
+// stöd står i det inbäddade typsnittet. Samma på sidan (Laskort.astro).
 function laskortBarn(l: { rubrik?: string; kolumner?: string[]; rader: string[][] }, stodKolumn: number): Barn[] {
   const { nr, titel } = laskortRubrik(l);
   const marg = { top: 240, bottom: 200, left: 300, right: 300 };
@@ -580,10 +580,10 @@ function laskortBarn(l: { rubrik?: string; kolumner?: string[]; rader: string[][
   const streckad = { style: BorderStyle.DASHED, size: 6, color: '777777' };
   const kort = (stod: boolean): Barn[] => [
     new Paragraph({ spacing: { after: 100 }, children: [textRun({ text: `Lästräningstext ${nr ? `${nr} · ` : ''}${stod ? 'med stöd' : 'utan stöd'}`, size: 15, color: FARG.svag })] }),
-    new Paragraph({ spacing: { after: 200 }, children: [textRun({ text: titel, bold: true, size: 40, font: 'Arial', color: '1F2937' })] }),
+    new Paragraph({ spacing: { after: 200 }, children: [textRun({ text: titel, bold: true, size: 40, font: ELEVTYPSNITT, color: '1F2937' })] }),
     ...l.rader.map((r) => String(r[stod ? stodKolumn : 1 - stodKolumn] ?? '')).map((t) => (stod
       ? bagBild(t, inre)
-      : new Paragraph({ spacing: { after: 80, line: 312 }, children: [textRun({ text: t, size: 36, font: 'Arial', color: '1F2937' })] }))),
+      : new Paragraph({ spacing: { after: 80, line: 312 }, children: [textRun({ text: t, size: 36, font: ELEVTYPSNITT, color: '1F2937' })] }))),
   ];
   return [
     new Paragraph({ pageBreakBefore: true, spacing: { before: 0, after: 0 } }),
@@ -1193,7 +1193,8 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
     }
   }
   // Diplomet bär sin egen rubrik: utan sidans rubrik och metodrad, så att eleven inte får Diplom två gånger (K-040).
-  if (d.diplom) sidor.push([...diplomBarn(d.diplom)]);
+  // Diplomet är elevens (riggens docs/elevmaterial.md): texten i elevens typsnitt; kickern står kvar i sitt.
+  if (d.diplom) sidor.push([...medElevtypsnitt(harElevtypsnitt(d), () => diplomBarn(d.diplom!))]);
   for (const sida of sidor) if (!bladsidor.has(sida)) sida.push(stycke(`${UPPHOV}. Mall till ${d.titel}, ${metodAdress(bas, post.id)}.`, { farg: FARG.svag, storlek: 18, fore: 160 }));
   // Mallarna (bråkplanket och tallinjerna) sist, var och en på en liggande sida med smal marginal. Sidfoten bär
   // upphovet, så att planket och linjerna får hela höjden. Är lathundens tredje sida ett blad att lägga på bordet
