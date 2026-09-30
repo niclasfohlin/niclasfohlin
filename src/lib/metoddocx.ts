@@ -10,7 +10,7 @@ import {
 } from 'docx';
 import { arbetsformRad, arEttKort, arProtokoll, arskursText, datumText, ejBryt, etikettOchText, laskortKolumn, laskortRubrik, lathundFakta, lathundForm, metaRad, metodAdress, passOrd, passOversikt, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost, type PassOrd } from './metod';
 import { brakDelar, delnamn, kortInfo, lage, STANDARD_NAMNARE, type KortInfo, type Mall } from './brak';
-import { bagSvg, brakSvg, utanStod } from './lasflyt';
+import { andikaBredd, bagSvg, utanStod } from './lasflyt';
 import type { MetodPostISerie, SerieKoppling } from './serie';
 import { ANDIKA_ADRESS, ELEVTYPSNITT, VIK_TEXT, bildFor as bildForOrd, harElevtypsnitt, kartCeller, kortCeller, ljudenheter, ljudform, arDelark, type KartCell } from './ljudkort';
 import { arElevensBlad, harFragor, protokollDelas, textlangd } from './ramform';
@@ -130,25 +130,34 @@ function staplatBrak(taljare: string, namnare: string, storlek: number, farg: st
   // där en TextRun annars står.
   return (ImportedXmlComponent.fromXmlString(xml) as unknown as { root: unknown[] }).root[0] as TextRun;
 }
-// Ett bråk som står ensamt i stycket (ett kort, en etikett på tallinjen) i elevens typsnitt är en bild i Andikas
-// konturer (brakSvg i lasflyt.ts; Niclas 2026-09-30: i Google Dokument blev bråken på korten små, eftersom Google tar
-// ekvationens storlek från texten bredvid och ett ensamt bråk inte har någon). Bilden har samma mått i Word och, som
-// reservbild, i Google Dokument. `storlek` är siffrornas storlek i halvpunkter, som ekvationens. Utan elevens typsnitt
-// står ekvationen kvar.
-let brakBildNr = 0;
-function ensamtBrak(taljare: string, namnare: string, storlek: number, farg: string): TextRun | ImageRun {
-  if (ELEVFONT !== ELEVTYPSNITT) return staplatBrak(taljare, namnare, storlek, farg);
-  const { svg, bredd, hojd } = brakSvg(taljare, namnare, storlek / 2, farg);
-  const px = (pt: number) => Math.round((pt * 4) / 3);
-  return svgRun(new TextEncoder().encode(svg), px(bredd), px(hojd), { name: `Bråk ${++brakBildNr}`, description: `${taljare}/${namnare}`, id: String(5000 + brakBildNr) });
+// Ett bråk som står ensamt (ett kort, en etikett på tallinjen) är två stycken text: täljaren med ett streck under och
+// nämnaren (Niclas 2026-09-30: "De ska vara typsnitt"). Som ekvation blev det litet i Google Dokument, som tar en
+// ekvations storlek från texten bredvid, och ett ensamt bråk har ingen; och står text bredvid krymper Word bråket och
+// gör raden högre (underlag/prov/brak-google/). Två stycken med storleken på texten och strecket som styckets egen
+// kantlinje ritas likadant i Word och i Google Dokument, i elevens typsnitt. Strecket är lika brett som det bredaste
+// talet och lite till: indraget räknas ur bredden som bråket har att stå på (`bredd`, twips). `storlek` är siffrornas
+// storlek i halvpunkter, som ekvationens.
+function brakStycken(taljare: string, namnare: string, storlek: number, farg: string, bredd: number, o: { fore?: number; hallIhop?: boolean } = {}): Paragraph[] {
+  const pt = storlek / 2;
+  const f = ELEVFONT ?? 'Calibri';
+  const streckBredd = Math.round((Math.max(andikaBredd(taljare, pt), andikaBredd(namnare, pt)) + 0.4 * pt) * 20);
+  const indrag = Math.max(0, Math.floor((bredd - streckBredd) / 2));
+  const rad = Math.round(pt * 20 * 1.12);
+  const text = (t: string) => new TextRun({ text: t, size: storlek, font: f, color: farg });
+  return [
+    new Paragraph({ alignment: AlignmentType.CENTER, keepNext: true, keepLines: true, indent: { left: indrag, right: indrag }, spacing: { before: o.fore ?? 0, after: 0, line: rad, lineRule: LineRuleType.EXACT }, border: { bottom: { style: BorderStyle.SINGLE, size: Math.max(6, Math.round(pt * 0.45)), color: farg, space: 1 } }, children: [text(taljare)] }),
+    new Paragraph({ alignment: AlignmentType.CENTER, keepNext: o.hallIhop, indent: { left: indrag, right: indrag }, spacing: { before: Math.round(pt * 3), after: 0, line: rad, lineRule: LineRuleType.EXACT }, children: [text(namnare)] }),
+  ];
+}
+// Det ensamma bråket i en text, om texten bara är ett bråk.
+function ensamtBrakI(text: string): { taljare: string; namnare: string } | undefined {
+  const delar = brakDelar(text).filter((x) => !('text' in x) || x.text.trim());
+  return delar.length === 1 && !('text' in delar[0]) ? delar[0] : undefined;
 }
 // Faktorn 1,45 gör bråkets siffror lika höga som orden runt dem; Word krymper täljare och nämnare i en mening.
-function brakBarn(text: string, o: StyckeVal = {}, faktor = 1.45): (TextRun | ImageRun)[] {
+function brakBarn(text: string, o: StyckeVal = {}, faktor = 1.45): TextRun[] {
   const storlek = 2 * Math.round(((o.storlek ?? 22) * SKALA * faktor) / 2);
-  const delar = brakDelar(text);
-  const farg = o.farg ?? FARG.text;
-  if (delar.every((x) => !('text' in x) || !x.text.trim())) return delar.flatMap((x) => ('text' in x ? [] : [ensamtBrak(x.taljare, x.namnare, storlek, farg)]));
-  return delar.map((x) => ('text' in x ? run(x.text, o) : staplatBrak(x.taljare, x.namnare, storlek, farg)));
+  return brakDelar(text).map((x) => ('text' in x ? run(x.text, o) : staplatBrak(x.taljare, x.namnare, storlek, o.farg ?? FARG.text)));
 }
 // Exemplet berättas rakt; replikerna (”…”) sätts kursiva, som exempelfraserna, så att en lärare hittar det som sägs.
 export function exempelStycke(text: string, o: { hallIhop?: boolean; storlek?: number; efter?: number } = {}): Paragraph {
@@ -475,7 +484,9 @@ function kortlista(info: KortInfo, brak = true): Table {
         margins: { top: 140, bottom: 140, left: 240, right: 240 },
         children: [
           ...(k && info.markning ? [new Paragraph({ keepNext: vidare, spacing: { after: 120, line: 240 }, children: [run(info.markning(k.i), { storlek: 15, farg: FARG.svag })] })] : []),
-          new Paragraph({ alignment: AlignmentType.CENTER, keepNext: vidare, spacing: { before: info.korta ? 280 : 200, after: 0, line: 300 }, children: k ? (brak && /[0-9]+[/][0-9]+/.test(k.k) ? brakBarn(k.k, { storlek: info.korta ? 64 : 28, farg: FARG.text }, info.korta ? 1.25 : 1.45) : [run(k.k, { storlek: info.korta ? 80 : 28, farg: FARG.text })]) : [] }),
+          ...(k && brak && ensamtBrakI(k.k)
+            ? brakStycken(ensamtBrakI(k.k)!.taljare, ensamtBrakI(k.k)!.namnare, 2 * Math.round(((info.korta ? 64 : 28) * SKALA * (info.korta ? 1.25 : 1.45)) / 2), FARG.text, w - 480, { fore: info.korta ? 280 : 200, hallIhop: vidare })
+            : [new Paragraph({ alignment: AlignmentType.CENTER, keepNext: vidare, spacing: { before: info.korta ? 280 : 200, after: 0, line: 300 }, children: k ? (brak && /[0-9]+[/][0-9]+/.test(k.k) ? brakBarn(k.k, { storlek: info.korta ? 64 : 28, farg: FARG.text }, info.korta ? 1.25 : 1.45) : [run(k.k, { storlek: info.korta ? 80 : 28, farg: FARG.text })]) : [] })]),
         ],
       });
     }) }));
@@ -1400,7 +1411,9 @@ function brakplankTabell(m: Mall): Table {
   const x = [...new Set([0, L, ...namnare.flatMap((n) => Array.from({ length: n - 1 }, (_, k) => lage(L, k + 1, n)))])].sort((p, q) => p - q);
   const rader = namnare.map((n) => new TableRow({ cantSplit: true, height: { value: h, rule: HeightRule.EXACT }, children: Array.from({ length: n }, (_, k) => rutcell(x, lage(L, k, n), lage(L, k + 1, n), {
     top: linjeKant(8), bottom: linjeKant(8), left: linjeKant(8), right: linjeKant(8), mitt: true,
-    barn: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 240 }, children: m.etiketter === false ? [] : n === 1 ? [run('1', { storlek: stor ? 40 : 30 })] : [ensamtBrak('1', String(n), stor ? (n >= 10 ? 32 : 40) : n >= 10 ? 26 : 30, FARG.text)] })],
+    barn: m.etiketter === false || n === 1
+      ? [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 240 }, children: m.etiketter === false ? [] : [run('1', { storlek: stor ? 40 : 30 })] })]
+      : brakStycken('1', String(n), stor ? (n >= 10 ? 32 : 40) : n >= 10 ? 26 : 30, FARG.text, lage(L, k + 1, n) - lage(L, k, n)),
   })) }));
   return new Table({ width: { size: L, type: WidthType.DXA }, columnWidths: x.slice(1).map((v, i) => v - x[i]), layout: TableLayoutType.FIXED, alignment: AlignmentType.CENTER, borders: UTAN_KANTER, rows: rader });
 }
