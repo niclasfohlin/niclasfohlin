@@ -1,6 +1,6 @@
 {
   "antalsuppfattning-i-grupp": {
-    "kalla": "102936d2ab8d46dc",
+    "kalla": "2031318fd6c19904",
     "skalor": [
       1.2,
       1.35,
@@ -10,7 +10,7 @@
     "datum": "2026-09-30"
   },
   "boksamtal-i-grupp": {
-    "kalla": "ae837e9f97f24e63",
+    "kalla": "2fa151909ac7d145",
     "skalor": [
       1.35,
       1.35,
@@ -20,7 +20,7 @@
     "datum": "2026-09-30"
   },
   "brakkurs-i-grupp": {
-    "kalla": "b00f97125c2ee5fd",
+    "kalla": "9766b40e12fecc37",
     "skalor": [
       1.1,
       1.35,
@@ -30,7 +30,7 @@
     "datum": "2026-09-30"
   },
   "faktatextsamtal-i-grupp": {
-    "kalla": "a2388b20db5c5985",
+    "kalla": "47c7b875e205478c",
     "skalor": [
       1.25,
       1.35,
@@ -40,7 +40,7 @@
     "datum": "2026-09-30"
   },
   "laslistor-i-grupp": {
-    "kalla": "e66d146fb4fbaeb6",
+    "kalla": "07ce14b54271c307",
     "skalor": [
       1.2,
       1.35,
@@ -50,7 +50,7 @@
     "datum": "2026-09-30"
   },
   "ljudlek-i-grupp": {
-    "kalla": "c6d6839c3bb03ab0",
+    "kalla": "c5e9aea8b009d300",
     "skalor": [
       1.2,
       1.35,
@@ -60,7 +60,7 @@
     "datum": "2026-09-30"
   },
   "problemlosning-i-grupp": {
-    "kalla": "3e81b5d86bca9123",
+    "kalla": "b8985a7a65d0db1c",
     "skalor": [
       1.3,
       1.35,
@@ -70,7 +70,7 @@
     "datum": "2026-09-30"
   },
   "skrivkurs-berattelseram": {
-    "kalla": "3a6aa387f16c17ab",
+    "kalla": "01a60004c56abc15",
     "skalor": [
       1.2,
       1.35,
@@ -80,7 +80,7 @@
     "datum": "2026-09-30"
   },
   "skrivkurs-vardeskapande": {
-    "kalla": "ba364d50f8229ea8",
+    "kalla": "e566c156b6a70f23",
     "skalor": [
       1.25,
       1.35,
@@ -90,7 +90,7 @@
     "datum": "2026-09-30"
   },
   "til-i-grupp": {
-    "kalla": "10ce568c33ec76c5",
+    "kalla": "66a3aa83b478a2f0",
     "skalor": [
       1.2,
       1.35,
@@ -100,7 +100,7 @@
     "datum": "2026-09-30"
   },
   "upprepad-lasning": {
-    "kalla": "d3ea7fa0624d5acd",
+    "kalla": "80c0064e55cd10ff",
     "skalor": [
       1.25,
       1.35,

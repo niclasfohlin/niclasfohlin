@@ -23,6 +23,7 @@ Niclas ska inte behöva provköra sajten (2026-09-29, efter att delningsraden la
 | Flödena | Varje knapp och länk är genomgången som läsare på telefon och dator: vad som händer, i vilken app, vilken text som följer med, och att två knappar inte gör samma sak |
 | Andra tjänster | Uppgifter om Facebook, LinkedIn, Google och andra kommer ur tjänstens egen dokumentation. Det osäkra skrivs som osäkert och byggs inte på |
 | Det som bara går att pröva på en riktig telefon | Appar, telefonens delningsmeny och inloggningar sägs som oprövat till Niclas före pushen, med exakt vad han kan pröva, en gång |
+| Word-filerna i Google Dokument | Ändras en Word-fil: `node scripts/googleprov.mjs --andrade --mapp` gör om varje ändrad fil i Google Dokument, stoppar på tomma sidor och text som saknas, och ritar ett översiktsark per fil som läses sida för sida. Google-versionerna ligger i Drive-mappen "Prov före uppladdning · niclasfohlin.se" (Niclas 2026-09-30: "Granska dem ska du göra. Automatiskt"). Word och Google läser samma inställning olika (exakt radhöjd, ekvationens storlek), så det som är rätt i Word är inte bevisat rätt i Google |
 | Det andra ögat | En större ändring granskas (agenten granskare eller Codex) före pushen, och P1 lagas före pushen |
 | Rättelser | Samlas till en push per arbetspass, också när Niclas hittar ett fel, om felet inte hindrar läsarna |
 

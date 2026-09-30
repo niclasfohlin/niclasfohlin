@@ -4,7 +4,7 @@
 // Designelementen är samma som på sidan (src/components/Metod.astro): rutor, tabeller med
 // rubrikrad, band, gör/undvik och bockar. Varje sida bär © Niclas Fohlin och niclasfohlin.se.
 import {
-  AlignmentType, BorderStyle, Document, Footer, Header, HeadingLevel, HeightRule, ImageRun, ImportedXmlComponent, LevelFormat, LineRuleType, NoBreakHyphen, PageNumber, PageOrientation,
+  AlignmentType, BorderStyle, Document, Footer, Header, HeadingLevel, HeightRule, ImageRun, ImportedXmlComponent, LevelFormat, NoBreakHyphen, PageNumber, PageOrientation,
   Paragraph, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, VerticalAlign, WidthType,
   type IBorderOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
@@ -624,7 +624,7 @@ function laskortBarn(l: { rubrik?: string; kolumner?: string[]; rader: string[][
     new Paragraph({ spacing: { after: 200 }, children: [textRun({ text: titel, bold: true, size: 40, font: ELEVTYPSNITT, color: '1F2937' })] }),
     ...l.rader.map((r) => String(r[stod ? stodKolumn : 1 - stodKolumn] ?? '')).map((t) => (stod
       ? bagBild(t, inre)
-      : new Paragraph({ spacing: { after: 80, line: 500, lineRule: LineRuleType.EXACT }, children: [textRun({ text: t, size: 34, font: ELEVTYPSNITT, color: '1F2937' })] }))),
+      : new Paragraph({ spacing: { after: 80, ...radHojd(500, storl(34) ?? 34, ELEVTYPSNITT) }, children: [textRun({ text: t, size: 34, font: ELEVTYPSNITT, color: '1F2937' })] }))),
   ];
   return [
     new Paragraph({ pageBreakBefore: true, spacing: { before: 0, after: 0 } }),
@@ -720,7 +720,7 @@ function vikkortTabell(kort: string[]): Table {
         new TableCell({
           width: { size: halva, type: WidthType.DXA }, verticalAlign: VerticalAlign.CENTER, borders: { top: STRECKAD, bottom: STRECKAD, left: VIKLINJE, right: STRECKAD }, margins: mar,
           // Word kräver ett stycke efter en tabell i en cell.
-          children: [ordMedPrickar(k, halva - 240, delar), new Paragraph({ spacing: { before: 0, after: 0, line: 20, lineRule: LineRuleType.EXACT }, children: [new TextRun({ text: '', size: 2 })] })],
+          children: [ordMedPrickar(k, halva - 240, delar), luft(20)],
         }),
       ])) }));
   }
@@ -739,7 +739,7 @@ function bokstavskortTabell(kort: string[]): Table {
     const rad = kort.slice(i, i + perRad);
     rader.push(new TableRow({ cantSplit: true, height: { value: hojd, rule: HeightRule.EXACT }, children: Array.from({ length: perRad }, (_, j) => rad[j]).map((k) => new TableCell({
       width: { size: w, type: WidthType.DXA }, verticalAlign: VerticalAlign.CENTER, borders: runt(k === undefined ? INGEN : STRECKAD), margins: { top: 0, bottom: 0, left: 80, right: 80 },
-      children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 2200, lineRule: LineRuleType.EXACT }, children: k === undefined ? [] : [elevRun(k, storlek)] })],
+      children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, ...radHojd(2200, storlek, ELEVTYPSNITT) }, children: k === undefined ? [] : [elevRun(k, storlek)] })],
     })) }));
   }
   return new Table({ width: { size: w * perRad, type: WidthType.DXA }, columnWidths: Array(perRad).fill(w), layout: TableLayoutType.FIXED, borders: UTAN_KANTER, rows: rader });
@@ -750,8 +750,8 @@ function bokstavskortTabell(kort: string[]): Table {
 // Inget avstånd före: alla bokstäver står på samma höjd på sidan (riggen).
 function golvbokstaverBarn(kort: string[]): Barn[] {
   return kort.flatMap((k, i) => [
-    new Paragraph({ pageBreakBefore: i > 0, alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 12900, lineRule: LineRuleType.EXACT }, children: [elevRun(k, 1120)] }),
-    new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 800, after: 0, line: 1000, lineRule: LineRuleType.EXACT }, children: [new TextRun({ text: '↑', size: 88, bold: true, color: FARG.text, font: 'Calibri' })] }),
+    new Paragraph({ pageBreakBefore: i > 0, alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, ...radHojd(12900, 1120, ELEVTYPSNITT) }, children: [elevRun(k, 1120)] }),
+    new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 800, after: 0, ...radHojd(1000, 88, 'Calibri') }, children: [new TextRun({ text: '↑', size: 88, bold: true, color: FARG.text, font: 'Calibri' })] }),
   ]);
 }
 // Bokstavskartan: alfabetet på ett A4, fem i bredd, med stor och liten bokstav, bilden och ordet under. En bokstav utan
@@ -767,16 +767,16 @@ function bokstavskartaTabell(celler: KartCell[]): Table {
     rader.push(new TableRow({ cantSplit: true, height: { value: hojd, rule: HeightRule.EXACT }, children: Array.from({ length: perRad }, (_, j) => rad[j]).map((c) => new TableCell({
       width: { size: w, type: WidthType.DXA }, verticalAlign: VerticalAlign.TOP, borders: runt(c ? linje : INGEN), margins: { top: 60, bottom: 40, left: 60, right: 60 },
       children: !c ? [new Paragraph({})] : [
-        new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 40, line: 760, lineRule: LineRuleType.EXACT }, children: [elevRun(`${c.bokstav.toLocaleUpperCase('sv')}${c.bokstav}`, 64)] }),
+        new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 40, ...radHojd(760, 64, ELEVTYPSNITT) }, children: [elevRun(`${c.bokstav.toLocaleUpperCase('sv')}${c.bokstav}`, 64)] }),
         ...(c.bild
           ? [
             new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 20 }, children: [bildRun(c.bild, px(1.9), c.ord)] }),
-            new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 340, lineRule: LineRuleType.EXACT }, children: [elevRun(c.ord, 26)] }),
+            new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, ...radHojd(340, 26, ELEVTYPSNITT) }, children: [elevRun(c.ord, 26)] }),
           ]
           // Utan bild (q, w, x): lika mycket luft som bilden, så att bokstaven och ordet står i linje med grannarnas.
           : [
-            new Paragraph({ spacing: { before: 0, after: 20, line: Math.round(1.9 * CM), lineRule: LineRuleType.EXACT }, children: [textRun({ text: '', size: 2 })] }),
-            new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 340, lineRule: LineRuleType.EXACT }, children: [elevRun(c.ord, 26, FARG.svag)] }),
+            luft(Math.round(1.9 * CM), false, { efter: 20 }),
+            new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, ...radHojd(340, 26, ELEVTYPSNITT) }, children: [elevRun(c.ord, 26, FARG.svag)] }),
           ]),
       ],
     })) }));
@@ -1312,7 +1312,7 @@ function elevensBladSida(ram: Ram, d: MetodData): Flod {
     // orden och meningarna, det andra texterna. Så blir screeningen två A4 per version.
     if (harFragor(l) && li > 0 && !nyttBlad) {
       nyttBlad = true;
-      ut.push(new Paragraph({ pageBreakBefore: true, spacing: { before: 0, after: 0, line: 20, lineRule: LineRuleType.EXACT }, children: [textRun({ text: '', size: 2 })] }));
+      ut.push(luft(20, false, { nySida: true }));
       ut.push(rubrikrad(), avstand(200));
       forraNiva = '';
     }
@@ -1390,7 +1390,24 @@ const BREDD_MALL = A4.height - 2 * 720;
 // Kanter som inte ska synas är INGEN_KANT (nil, se lhRader), och tabellerna har UTAN_KANTER, annars ritar Word sin standardkant.
 const linjeKant = (size: number): IBorderOptions => ({ style: BorderStyle.SINGLE, size, color: FARG.text });
 // Ett stycke i exakt höjd: luft mellan linjerna, eller innehållet i en tom cell.
-const luft = (hojd: number, hallIhop?: boolean) => new Paragraph({ keepNext: hallIhop, spacing: { before: 0, after: 0, line: hojd, lineRule: LineRuleType.EXACT }, children: [textRun({ text: '', size: 2 })] });
+// Radhöjd och luft som Word och Google Dokument läser likadant (Niclas 2026-09-30). Google Dokument läser exakt
+// radhöjd som en multipel, höjden delad med 240, och gjorde raderna flera gånger för höga: läskortens två kort hamnade
+// på varsin sida, bråkets täljare fick ett glapp och tabeller med fast radhöjd sköt en tom sida framför sig
+// (scripts/googleprov.mjs). Därför finns ingen exakt radhöjd i Word-filerna. En textrad får en multipel av typsnittets
+// enkla rad, som Word och Google räknar ur typsnittets mått: 1,611 gånger storleken för Andika (typo-måtten, med
+// USE_TYPO_METRICS) och 1,2207 för Calibri. Då blir raden lika hög i Word som den exakta raden var
+// (scripts/wordjmf.mjs jämför sidorna med Word). Luft är avståndet före ett tomt stycke med en punkts tecken.
+const ENKEL_RAD: Record<string, number> = { Andika: 1.611, Calibri: 1.2207 };
+function radHojd(hojd: number, storlek: number, font?: string): { line: number } {
+  const enkel = (ENKEL_RAD[font ?? 'Calibri'] ?? ENKEL_RAD.Calibri) * (storlek / 2) * 20;
+  return { line: Math.max(1, Math.round((240 * hojd) / enkel)) };
+}
+const LUFT_RAD = 24; // en punkts tecken i Calibri, i twips
+const luft = (hojd: number, hallIhop?: boolean, o: { efter?: number; nySida?: boolean } = {}) => new Paragraph({
+  keepNext: hallIhop, pageBreakBefore: o.nySida, run: { size: 2, font: 'Calibri' },
+  spacing: { before: Math.max(0, hojd - LUFT_RAD), after: o.efter ?? 0, line: 240 },
+  children: [new TextRun({ text: '', size: 2, font: 'Calibri' })],
+});
 // En cell på ett gemensamt rutnät x: från läge a till läge z, med de kanter som anges.
 function rutcell(x: number[], a: number, z: number, o: { top?: IBorderOptions; bottom?: IBorderOptions; left?: IBorderOptions; right?: IBorderOptions; barn?: Paragraph[]; mitt?: boolean; hallIhop?: boolean } = {}): TableCell {
   const i0 = x.indexOf(a);
@@ -1529,7 +1546,7 @@ function mallSida(m: Mall): Barn[] {
   const L = Math.round((m.langdCm ?? 26) * CM);
   // En delad linje bär delarnas namn (brak.ts, delnamn) till vänster ovanför linjen, i luften före den, så att sidan
   // blir lika hög som utan namn. Linjens 0 står 283 in från tabellens kant, och tabellen är centrerad (tallinjeTabell).
-  const namnRad = (namn: string, hojd: number, vid: number) => new Paragraph({ keepNext: true, indent: { left: vid }, spacing: { before: 0, after: 0, line: hojd, lineRule: LineRuleType.EXACT }, children: [run(namn, { storlek: 20, farg: FARG.svag })] });
+  const namnRad = (namn: string, hojd: number, vid: number) => new Paragraph({ keepNext: true, indent: { left: vid }, spacing: { before: 0, after: 0, ...radHojd(hojd, storl(20) ?? 20, ELEVFONT) }, children: [run(namn, { storlek: 20, farg: FARG.svag })] });
   return [
     new Paragraph({ children: [run(m.rubrik, { font: HUSETS })], heading: HeadingLevel.HEADING_1, spacing: { before: 0, after: 40 } }),
     ...(m.text ? [stycke(m.text, { efter: 120 })] : []),
