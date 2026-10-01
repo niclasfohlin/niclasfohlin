@@ -456,15 +456,8 @@ const meny = [
       )}
       {bildUpphov && <p class="m-efter">{bildUpphov}</p>}
       {/* Med fyra ramar eller fler (ett paket per årskurs, läslistorna, projekten, lästexterna) blir sidan lång: en
-          ordnad lista med länkar till varje ram (Ramindex.astro, K-152). PROVET: förslag A och B står båda i sidan, och
-          ?ramindex=b visar B; det andra tas bort när Niclas valt. */}
-      {d.ramar.ramar.length >= 4 && (
-        <>
-          <Ramindex ramar={d.ramar.ramar} rubrik={d.ramar.rubrik} farger={BOKNIVA} variant="a" />
-          <Ramindex ramar={d.ramar.ramar} rubrik={d.ramar.rubrik} farger={BOKNIVA} variant="b" />
-          <script is:inline>if (new URLSearchParams(location.search).get('ramindex') === 'b') document.documentElement.classList.add('ri-visa-b');</script>
-        </>
-      )}
+          ordnad lista med länkar till varje ram, där nivåerna fälls ut (Ramindex.astro, K-152). */}
+      {d.ramar.ramar.length >= 4 && <Ramindex ramar={d.ramar.ramar} rubrik={d.ramar.rubrik} farger={BOKNIVA} />}
       {d.ramar.ramar.map((ram, ri) => boksidor.has(ram) ? (<>
         <Boksida l={boksidor.get(ram)!} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={BOKNIVA[boksidor.get(ram)!.nivaNr] ?? '#4b3a2f'} />
         <Filmruta filmer={vid({ ram: ram.rubrik })} titel={d.titel} />

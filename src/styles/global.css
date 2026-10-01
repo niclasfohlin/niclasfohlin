@@ -816,8 +816,9 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-listnot p:last-child { margin-bottom: 0; }
 .m-listnot b { font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-accent); margin-right: 0.4em; }
 /* Materialets innehåll (Ramindex.astro, K-152): en ordnad lista med en rad per ram, och lästexterna under sin nivå, med
-   textens nummer, titeln och lärarsidan på samma rad. Varje rad är minst 2,5 rem hög, så att den går att träffa på en
-   telefon, och nivåns färg är boksidornas. Klassen m-ramlankar gömmer listan i utskriften. */
+   textens nummer, titeln och lärarsidan på samma rad. En nivå, och en grupp med många rader, fälls ut (Niclas
+   2026-10-01). Varje rad är minst 2,5 rem hög, så att den går att träffa på en telefon, och nivåns färg är boksidornas.
+   Klassen m-ramlankar gömmer listan i utskriften. */
 .ri { font-family: var(--typsnitt-ui); font-size: 0.95rem; line-height: 1.35; margin: 0 0 1.5rem; }
 .ri ul, .ri ol { list-style: none; margin: 0; padding: 0; }
 .ri-lista { border: 1px solid var(--farg-kant); border-radius: 8px; background: var(--farg-yta); overflow: hidden; }
@@ -829,22 +830,22 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 /* Ett led som flera ramar delar (Åk 1: talen 0–30, Åk 1: Läxa 1–5): ledet till vänster och ramarna under varandra. */
 .ri-led { display: grid; grid-template-columns: 5.25rem minmax(0, 1fr); align-items: start; }
 .ri-ledrubrik { padding: 0.75rem 0 0.5rem 0.9rem; font-weight: 700; }
-.ri-led li + li { border-top: 1px solid var(--farg-ton); }
+.ri-led li + li, .ri-led-fall li + li { border-top: 1px solid var(--farg-ton); }
 .ri-led .ri-lank { padding-left: 0.4rem; }
-/* Nivån: en prick i nivåns färg, som knappen på boksidan, namnet och antalet texter. */
-.ri-nivanamn { display: inline-flex; align-items: center; gap: 0.55rem; font-weight: 700; color: var(--farg-text); }
-.ri-nivanamn::before { content: ''; flex: none; width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--niva); }
+.ri-led-fall .ri-lank { padding-left: 1.6rem; }
+/* Raden som fälls ut: namnet, antalet och en pil, som seriens meny. Nivån har en prick i nivåns färg, som knappen på
+   boksidan, och en kant i samma färg längs sina texter. */
+.ri summary { display: flex; align-items: center; min-height: 2.75rem; padding: 0.45rem 0.9rem; cursor: pointer; list-style: none; }
+.ri summary::-webkit-details-marker { display: none; }
+.ri summary::after { content: ''; flex: none; width: 0.5rem; height: 0.5rem; margin-left: auto; border-right: 2px solid var(--farg-accent); border-bottom: 2px solid var(--farg-accent); transform: translateY(-0.15rem) rotate(45deg); }
+.ri summary:hover { background: var(--farg-ton-svag); }
+.ri details[open] > summary { background: var(--farg-ton-svag); border-bottom: 1px solid var(--farg-kant); }
+.ri details[open] > summary::after { transform: translateY(0.1rem) rotate(-135deg); }
+.ri-nivanamn { font-weight: 700; color: var(--farg-text); }
+.ri-prick { display: inline-flex; align-items: center; gap: 0.55rem; }
+.ri-prick::before { content: ''; flex: none; width: 0.7rem; height: 0.7rem; border-radius: 50%; background: var(--niva); }
 .ri-antal { margin-left: 0.6rem; color: var(--farg-text-svag); font-size: 0.875rem; }
-/* Förslag A: nivån fälls ut, en i taget eller flera. */
-.ri-a summary { display: flex; align-items: center; min-height: 2.75rem; padding: 0.45rem 0.9rem; cursor: pointer; list-style: none; }
-.ri-a summary::-webkit-details-marker { display: none; }
-.ri-a summary::after { content: ''; flex: none; width: 0.5rem; height: 0.5rem; margin-left: auto; border-right: 2px solid var(--farg-accent); border-bottom: 2px solid var(--farg-accent); transform: translateY(-0.15rem) rotate(45deg); }
-.ri-a details[open] > summary { background: var(--farg-ton-svag); border-bottom: 1px solid var(--farg-kant); }
-.ri-a details[open] > summary::after { transform: translateY(0.1rem) rotate(-135deg); }
-.ri-a summary:hover { background: var(--farg-ton-svag); }
-/* Förslag B: allt synligt, nivåns namn som en rad över dess texter. */
-.ri-nivarubrik { margin: 0; padding: 0.6rem 0.9rem; background: var(--farg-ton-svag); border-bottom: 1px solid var(--farg-kant); }
-/* Textens rad: numret, titeln (länken till texten) och lärarsidan. Kartläggningen har sitt namn före titeln. */
+/* Textens rad: numret, titeln (länken till texten) och lärarsidan. Kartläggningen har sitt namn ovanför titeln. */
 .ri-texter { padding: 0.2rem 0; border-left: 4px solid var(--niva); }
 .ri-rad { display: grid; grid-template-columns: 2.1rem minmax(0, 1fr) auto; align-items: center; column-gap: 0.55rem; min-height: 2.5rem; padding-right: 0.9rem; }
 .ri-rad + .ri-rad { border-top: 1px solid var(--farg-ton); }
@@ -860,8 +861,6 @@ a.ri-titel, .ri-titel a { color: var(--farg-accent); font-weight: 600; text-deco
   .ri-rad { break-inside: avoid; }
   .ri-rad + .ri-rad { border-top: 0; }
 }
-/* PROVET (K-152): förslag A visas, och B med ?ramindex=b. Det som inte väljs tas bort. */
-html:not(.ri-visa-b) .ri-b, html.ri-visa-b .ri-a { display: none; }
 /* Rutans namn (Till läraren, Till vårdnadshavaren) står överst, så att texten kan hänvisa till rutan med namn. */
 .m-listnot .kicker { display: block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-accent); margin: 0 0 0.45em; }
 .m-ram > h3 { margin: 0 0 0.5em; }
