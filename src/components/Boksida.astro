@@ -1,0 +1,43 @@
+---
+// En lästext som en sida i en gammal bok (K-148; Niclas 2026-10-01: "se ut som en gamla bok", ett till ett med
+// metodriggen), som i Word (boksida() i src/lib/metoddocx.ts): en dubbel ram, titeln i Cinzel med en röd dubbel linje
+// under, ett anfang i Cinzel Decorative, texten i elevens typsnitt med en rad per rad, frågorna numrerade under en tunn
+// linje, och raden Till läraren och nivåns knapp under ramen. Ramens text står inte här, eftersom bladet är elevens. I
+// utskriften står boksidan på en egen sida (global.css). Rubriken säger nivån och texten för skärmläsare, som ramens
+// rubrik gör; på sidan syns bara titeln, som i boken.
+import type { Lastext } from '../lib/ramform';
+import { BOKRAD, boksidansMatt } from '../lib/boksida';
+interface Props {
+  l: Lastext;
+  /** Ramens ankare (ram-1 …) och rubrikens, som länkarna till ramarna pekar på. */
+  id: string;
+  ankare: string;
+  /** Nivåns färg, i den ordning nivåerna först kommer (grön, ockra, plommon). */
+  farg: string;
+}
+const { l, id, ankare, farg } = Astro.props;
+const rader = (t: string) => t.split('\n');
+// Utskriften får Word-sidans mått ur samma uträkning (src/lib/boksida.ts): textens storlek i punkter, radavståndet som
+// höjd per storlek (Andikas enkla rad gånger Words multipel) och anfangets storlek, så att texten är en sida i båda.
+// Lättläst har en mening per rad i större text, löpande text står mindre, som i Word.
+const matt = boksidansMatt(l);
+const korta = matt.kortaRader;
+const stil = `--bok-niva: ${farg}; --bok-pt: ${matt.pt}pt; --bok-rad: ${(BOKRAD.Andika * matt.line / 240).toFixed(3)}; --bok-anfang: ${matt.storPt}pt`;
+const fraga = (f: string) => f.match(/^(\d+)\.\s*([\s\S]*)$/);
+---
+<section class:list={['m-ram', 'boksida', { korta }]} id={id} style={stil}>
+  <div class="boksida-ram">
+    <h3 id={ankare} class="boksida-titel"><span class="visually-hidden">{l.niva}, {l.vad}: </span>{l.titel}</h3>
+    <div class="boksida-text">
+      {l.stycken.map((s) => <p>{rader(s).map((r, j) => <>{j > 0 && <br />}{r}</>)}</p>)}
+    </div>
+    {/* Numret är text, som i Word, där det står före frågan med en tabb, så att en fråga på flera rader står under sin början. */}
+    <ol class="boksida-fragor">
+      {l.fragor.map((f) => {
+        const n = fraga(f);
+        return <li><span class="boksida-nr">{n ? `${n[1]}.` : ''}</span><span>{rader(n ? n[2] : f).map((r, j) => <>{j > 0 && <br />}{r}</>)}</span></li>;
+      })}
+    </ol>
+  </div>
+  <p class="boksida-fot"><span>{l.not}</span> <span class="boksida-knapp">{l.niva.toUpperCase()}{!/^kartläggning/i.test(l.vad) && <>{' · '}{l.vad}</>}</span></p>
+</section>

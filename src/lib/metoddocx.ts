@@ -6,18 +6,19 @@
 import {
   AlignmentType, Body, BorderStyle, Document, Footer, Header, HeadingLevel, HeightRule, ImageRun, ImportedXmlComponent, LevelFormat, NoBreakHyphen, PageNumber, PageOrientation,
   Paragraph, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, VerticalAlign, WidthType,
-  type IBorderOptions, type IRunOptions, type ISectionOptions,
+  type IBorderOptions, type IParagraphOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
 import { arbetsformRad, arEttKort, arProtokoll, arskursText, datumText, ejBryt, etikettOchText, laskortKolumn, laskortRubrik, lathundFakta, lathundForm, metaRad, metodAdress, passOrd, passOversikt, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost, type PassOrd } from './metod';
 import { brakDelar, delnamn, kortInfo, lage, STANDARD_NAMNARE, type KortInfo, type Mall } from './brak';
 import { andikaBredd, bagSvg, utanStod } from './lasflyt';
 import type { MetodPostISerie, SerieKoppling } from './serie';
 import { ANDIKA_ADRESS, ELEVTYPSNITT, VIK_TEXT, bildFor as bildForOrd, harElevtypsnitt, kartCeller, kortCeller, ljudenheter, ljudform, arDelark, type KartCell } from './ljudkort';
-import { arElevensBlad, harFragor, protokollDelas, textlangd } from './ramform';
+import { arElevensBlad, harFragor, harLastexter, lastexter, protokollDelas, textlangd, type Lastext } from './ramform';
 import { filmerVid, huvudfilm, metodensFilmer, stegDelar, stillbilder, STILLBILD_MATT, type FilmPlats, type MetodFilm } from './film';
 import { reservNyckel } from './reservbild';
 import WORDSKALOR from '../data/lathund-word.json';
 import TECKENBREDD from '../data/teckenbredd.json';
+import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, RAMHOJD, TITEL_PT, boksidansMatt } from './boksida';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
 const FARG = {
@@ -61,15 +62,18 @@ export { DOCX_TYP };
 type Barn = Paragraph | Table;
 // Ett kortark (vikkort, bokstavskort, bokstavskartan, golvbokstäverna) står i en egen sektion med 1 cm marginal, så att så
 // många kort som möjligt ryms på ett A4 (Niclas 2026-09-29), som i metodriggen. Sektionsbytet står i flödet av stycken
-// och tabeller, och delaSektioner gör sektionerna av det. Efter ett kortark börjar en vanlig sektion igen.
-class Sektionsbyte { constructor(readonly kortark: boolean) {} }
+// och tabeller, och delaSektioner gör sektionerna av det. Efter ett kortark börjar en vanlig sektion igen. En boksida
+// (lästexten, boksida()) står i en egen sektion med 1,5 cm marginal och raden Till läraren och nivåns knapp i sidfoten.
+type Boksektion = { not: string; niva: string; vad: string; farg: string };
+class Sektionsbyte { constructor(readonly kortark: boolean, readonly bok?: Boksektion) {} }
 type Flod = (Barn | Sektionsbyte)[];
 const arBarn = (x: Barn | Sektionsbyte): x is Barn => !(x instanceof Sektionsbyte);
 // Bilderna och elevens typsnitt till Word-filen (src/lib/ljudkort.ts): vid bygget lästa från public/, i webbläsaren
 // hämtade, och givna till metodDokument och mallDokument. RESURSER gäller medan en fil byggs. png ger varje bilds
 // reservbild, ritad ur samma SVG (src/lib/reservbild.ts): vid bygget ritar src/lib/metodresurser.ts den, i
 // webbläsaren hämtas den som samma bygge ritade.
-export interface MetodResurser { bilder: Map<string, Uint8Array>; elevtypsnitt?: Uint8Array; png?: (svg: Uint8Array, bredd: number, hojd: number) => Uint8Array | undefined }
+// boktypsnitt: Cinzel och Cinzel Decorative till boksidorna (public/fonts/boksida/), när metoden har lästexter.
+export interface MetodResurser { bilder: Map<string, Uint8Array>; elevtypsnitt?: Uint8Array; boktypsnitt?: { cinzel: Uint8Array; dekor: Uint8Array }; png?: (svg: Uint8Array, bredd: number, hojd: number) => Uint8Array | undefined }
 let RESURSER: MetodResurser = { bilder: new Map() };
 // Varje bild i Word-filen är en SVG med sin reservbild (Niclas 2026-09-30: i Google Dokument blev bilderna blå rutor).
 // Saknas reservbilden stannar bygget, så att en fil med en tom reservbild aldrig kan laddas upp eller hämtas.
@@ -551,6 +555,126 @@ function kortlista(info: KortInfo, brak = true): Table {
     }) }));
   }
   return new Table({ width: { size: w * perRad, type: WidthType.DXA }, columnWidths: Array.from({ length: perRad }, () => w), layout: TableLayoutType.FIXED, borders: UTAN_KANTER, rows: rader });
+}
+
+// ---------------------------------------------------------------- boksidan
+// En lästext (Textsamtal i grupp; lastexter() i src/lib/ramform.ts känner igen den) är en sida i en gammal bok, ett till
+// ett med metodriggens build-docx.js (lastext), som Niclas godkände 2026-09-30 och 2026-10-01 ("De ska vara lika som de
+// du fick texterna. Alltså se ut som en gamla bok."): en dubbel ram runt sidan, titeln i Cinzel med en röd dubbel linje
+// under, ett anfang i Cinzel Decorative, texten i elevens typsnitt och frågorna numrerade under en tunn linje. Raden
+// Till läraren och nivån, som en liten knapp i nivåns färg, står i sidfoten, och upphovet litet i sidhuvudet, utanför
+// ramen. Formen följer reglerna för Word och Google Dokument (METODER.md): ramen är en tabell med tre rader och inga
+// linjer inne i den (titeln, anfanget med de två första raderna bredvid, och resten av texten med frågorna i en rad som
+// fyller sidan), radavstånden är multiplar av typsnittens enkla rad, höjderna står i hela bildpunkter och allt är text.
+// Måtten (textens storlek, radavståndet, anfanget) räknas i src/lib/boksida.ts, som sidans utskrift också använder.
+// Cinzel och Cinzel Decorative finns i Google Dokument, och Word-filen bär delmängder av dem under samma namn
+// (public/fonts/boksida/, OFL).
+const BOKTYPSNITT = 'Cinzel';
+const ANFANGTYPSNITT = 'Cinzel Decorative';
+const BOK = { ram: '4B3A2F', rod: '8C2A1E', text: '2B2622', titel: '3A2D24', not: '8A8177', skiljare: 'B9A894', gra: '555555', kort: ['4E7A43', 'A8742A', '6E3450'] };
+const punktStycke = (o: Omit<IParagraphOptions, 'children'> = {}) => new Paragraph({ spacing: { before: 0, after: 0, line: 240 }, run: { size: 2, font: 'Calibri' }, ...o, children: [new TextRun({ text: '', size: 2, font: 'Calibri' })] });
+// Text med **fet** och *kursiv*, som riggens runs().
+function bokRuns(text: string, bas: IRunOptions): TextRun[] {
+  const ut: TextRun[] = [];
+  const re = /(\*\*[^*]+\*\*|\*[^*]+\*)/g;
+  let sist = 0;
+  for (const m of text.matchAll(re)) {
+    if (m.index! > sist) ut.push(textRun({ ...bas, text: text.slice(sist, m.index) }));
+    ut.push(m[0].startsWith('**') ? textRun({ ...bas, text: m[0].slice(2, -2), bold: true }) : textRun({ ...bas, text: m[0].slice(1, -1), italics: true }));
+    sist = m.index! + m[0].length;
+  }
+  if (sist < text.length) ut.push(textRun({ ...bas, text: text.slice(sist) }));
+  return ut.length ? ut : [textRun({ ...bas, text: '' })];
+}
+// Knappen med nivån i sidfoten: vit text i Cinzel på nivåns färg, med luft på båda sidor. På kartläggningens blad står
+// bara nivån, och raden Till läraren säger före eller efter.
+function nivaKnapp(b: Boksektion): TextRun[] {
+  const knapp = { font: BOKTYPSNITT, color: 'FFFFFF', shading: { type: ShadingType.CLEAR, fill: b.farg, color: 'auto' } };
+  const vad = /^kartläggning/i.test(b.vad) ? [] : [new TextRun({ text: '  ·  ', size: 19, ...knapp }), new TextRun({ text: b.vad, size: b.vad.length > 8 ? 15 : 17, ...knapp })];
+  return [new TextRun({ text: '  ', size: 19, ...knapp }), new TextRun({ text: b.niva.toUpperCase(), size: 19, ...knapp }), ...vad, new TextRun({ text: '  ', size: 19, ...knapp })];
+}
+// Sidfoten på en boksida: raden Till läraren till vänster, och nivåns knapp och sidnumret till höger, som i riggen.
+function bokFot(b: Boksektion): Footer {
+  return new Footer({ children: [new Paragraph({
+    tabStops: [{ type: TabStopType.RIGHT, position: BOKBREDD }],
+    spacing: { after: 0 },
+    children: [
+      new TextRun({ text: b.not, size: b.not.length > 75 ? 13 : 15, color: BOK.not, font: 'Arial' }),
+      new TextRun({ children: [new Tab()], size: 18, font: 'Arial' }),
+      ...nivaKnapp(b),
+      new TextRun({ text: '   ', size: 18, font: 'Arial' }),
+      new TextRun({ text: 's. ', size: 18, color: BOK.gra, font: 'Arial' }),
+      new TextRun({ children: [PageNumber.CURRENT], size: 18, color: BOK.gra, font: 'Arial' }),
+    ],
+  })] });
+}
+// Sidhuvudet på en boksida: upphovet, litet och grått ovanför ramen, eftersom allt som laddas ner bär © och
+// niclasfohlin.se (riggens boksida har det inte).
+function bokHuvud(adress: string): Header {
+  return new Header({ children: [new Paragraph({ alignment: AlignmentType.RIGHT, spacing: { after: 0 }, children: [new TextRun({ text: `${UPPHOV} · ${adress}`, size: 15, color: BOK.not, font: 'Arial' })] })] });
+}
+// Lästextens sektionsbyte: boksidan står ensam i sin sektion, och sidfoten får lästextens rad och nivåns knapp.
+const bokbyte = (l: Lastext) => new Sektionsbyte(false, { not: l.not, niva: l.niva, vad: l.vad, farg: BOK.kort[l.nivaNr] ?? BOK.ram });
+// Boksidan: ett stycke på en punkt (en sektion börjar aldrig med en tabell) och ramen. Ryms texten inte på ett A4 ens med
+// det tätaste radavståndet stannar bygget (Niclas 2026-10-01: "En text per sida ska det vara").
+function boksida(l: Lastext): Barn[] {
+  const matt = boksidansMatt(l);
+  if (!matt.ryms) throw new Error(`Lästexten ”${l.titel}” (${l.niva}, ${l.vad}) ryms inte på ett A4 ens med det tätaste radavståndet. Korta texten eller frågorna; varje text ska vara en sida (src/lib/boksida.ts).`);
+  const { size, line, storPt, kolW, delat, anfangH, titelH, bokstav } = matt;
+  const elev: IRunOptions = { size, color: BOK.text, font: ELEVTYPSNITT };
+  const luft = BOKLUFT;
+  const ingen = { style: BorderStyle.NONE, size: 0, color: 'auto' } as const;
+  const ram = { style: BorderStyle.DOUBLE, size: 12, color: BOK.ram } as const;
+  const utanLinjer = { top: ingen, bottom: ingen, left: ingen, right: ingen, insideHorizontal: ingen, insideVertical: ingen };
+  const noll = { top: 0, bottom: 0, left: 0, right: 0 };
+  // En kort linje mitt på raden, som kant under ett stycke på en punkt: dubbel och röd under titeln, tunn mellan texten
+  // och frågorna.
+  const linje = (bredd: number, kant: IBorderOptions, fore: number, efter: number) => punktStycke({
+    indent: { left: Math.round((BOKBREDD - bredd) / 2), right: Math.round((BOKBREDD - bredd) / 2) },
+    spacing: { before: fore, after: efter, line: 240 }, border: { bottom: { ...kant, space: 1 } },
+  });
+  // Titeln i Cinzel, vars gemener är kapitäler: den står som i metodens fil och ser ut som titeln i en gammal bok.
+  const titel = new Paragraph({ alignment: AlignmentType.CENTER, outlineLevel: 1, indent: { left: luft, right: luft }, spacing: { before: 200, after: 60, line: 240 },
+    children: [new TextRun({ text: l.titel, font: BOKTYPSNITT, size: TITEL_PT * 2, color: BOK.titel })] });
+  // Ett stycke i texten: en rad per rad.
+  const radRuns = (text: string): TextRun[] => {
+    const barn: TextRun[] = [];
+    text.split('\n').forEach((rad, j) => { if (j) barn.push(new TextRun({ break: 1, size })); if (rad) barn.push(...bokRuns(rad, elev)); });
+    return barn;
+  };
+  const ovriga = l.stycken.slice(1);
+  const textStycke = (text: string, efter = 150, v = luft, h = luft) => new Paragraph({ indent: { left: v, right: h }, spacing: { before: 0, after: efter, line }, children: radRuns(text) });
+  // Den sista radens höjd, så att ramen fyller sidan.
+  const restH = Math.floor(Math.max(0, RAMHOJD - titelH - anfangH - 90) / 15) * 15;
+  // Frågorna: numret och texten efter en tabb, så att en fråga på två rader står under sin början.
+  const fragor = l.fragor.map((f, i) => {
+    const n = f.match(/^(\d+)\.\s*([\s\S]*)$/);
+    const barn = [new TextRun({ text: n ? `${n[1]}.` : '', ...elev }), new TextRun({ children: [new Tab()], size }), ...radRuns(n ? n[2] : f)];
+    return new Paragraph({ indent: { left: luft + 480, right: luft, hanging: 480 }, tabStops: [{ type: TabStopType.LEFT, position: luft + 480 }], keepLines: true,
+      keepNext: i < l.fragor.length - 1, spacing: { after: 110, line }, children: barn });
+  });
+  const ruta = (barn: Barn[], o: { bredd: number; span?: number; kanter: Record<'top' | 'bottom' | 'left' | 'right', IBorderOptions>; marginaler: typeof noll }) =>
+    new TableCell({ width: { size: o.bredd, type: WidthType.DXA }, columnSpan: o.span, borders: o.kanter, margins: o.marginaler, children: barn });
+  const sidan = new Table({
+    width: { size: BOKBREDD, type: WidthType.DXA }, columnWidths: [luft + kolW, BOKBREDD - luft - kolW], layout: TableLayoutType.FIXED, borders: utanLinjer,
+    rows: [
+      new TableRow({ children: [ruta([titel, linje(2000, { style: BorderStyle.DOUBLE, size: 6, color: BOK.rod }, 0, 300)],
+        { bredd: BOKBREDD, span: 2, kanter: { top: ram, left: ram, right: ram, bottom: ingen }, marginaler: noll })] }),
+      new TableRow({ height: { value: anfangH, rule: HeightRule.EXACT }, children: [
+        ruta([new Paragraph({ spacing: { before: 0, after: 0, line: Math.round(240 * ANFANG_MULTIPEL) }, children: [new TextRun({ text: bokstav, font: ANFANGTYPSNITT, size: storPt * 2, bold: true, color: BOK.rod })] })],
+          { bredd: luft + kolW, kanter: { top: ingen, left: ram, right: ingen, bottom: ingen }, marginaler: { ...noll, left: luft } }),
+        ruta([textStycke(delat.inne, delat.rest ? 0 : 150, 0, 0)],
+          { bredd: BOKBREDD - luft - kolW, kanter: { top: ingen, left: ingen, right: ram, bottom: ingen }, marginaler: { ...noll, right: luft } }),
+      ] }),
+      new TableRow({ height: { value: restH, rule: HeightRule.ATLEAST }, children: [ruta([
+        ...(delat.rest ? [textStycke(delat.rest)] : []),
+        ...ovriga.map((t) => textStycke(t)),
+        linje(900, { style: BorderStyle.SINGLE, size: 4, color: BOK.skiljare }, 100, 300),
+        ...fragor,
+      ], { bredd: BOKBREDD, span: 2, kanter: { top: ingen, left: ram, right: ram, bottom: ram }, marginaler: noll })] }),
+    ],
+  });
+  return [punktStycke(), sidan];
 }
 // stor: en elevkopia (planeringsmallarna), där listorna kommer först och sätts stort nog att läsas av ett par
 // eller visas för gruppen; annars (beskrivningen) står lärarnoten först och listorna efter.
@@ -1188,7 +1312,15 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
     ut.push(h2(d.ramar.rubrik));
     for (const s of d.ramar.text) ut.push(stycke(s));
     ut.push(...ljudRader(d));
+    const boksidor = lastexter(d.ramar.ramar);
     for (const ram of d.ramar.ramar) {
+      // En lästext är en boksida på en egen sida, med titeln i boken i stället för en rubrik (boksida()).
+      const lastext = boksidor.get(ram);
+      if (lastext) {
+        ut.push(bokbyte(lastext), ...boksida(lastext), new Sektionsbyte(false));
+        filmVid({ ram: ram.rubrik });
+        continue;
+      }
       ut.push(new Paragraph({ children: [run(ram.rubrik)], heading: HeadingLevel.HEADING_3, keepNext: true, spacing: { before: 240, after: 80 } }));
       if (ramArTom(ram)) {
         for (const s of ram.text) ut.push(stycke(s));
@@ -1283,8 +1415,19 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
   // Elevens blad fyller sidan med fälten i sina mått, så där bär sidfoten upphovet ensam, som på mallarnas sidor.
   const bladsidor = new Set<Flod>();
   if (d.ramar) {
+    const boksidor = lastexter(d.ramar.ramar);
     for (const ram of d.ramar.ramar) {
       const tom = ramArTom(ram);
+      // En lästext är en boksida, som eleven läser (boksida()). Sidfoten och sidhuvudet bär upphovet, så sidan får ingen
+      // upphovsrad. I filen med allt står den redan i beskrivningen.
+      const lastext = boksidor.get(ram);
+      if (lastext) {
+        if (o.baraTommaRamar) continue;
+        const sida: Flod = [bokbyte(lastext), ...boksida(lastext)];
+        bladsidor.add(sida);
+        sidor.push(sida);
+        continue;
+      }
       // Elevens blad (screeningen och ljudkollen i Ljudlek i grupp): bladet eleven har framför sig står för sig, med bara
       // det eleven läser, och lärarens text på ett eget blad efter i planeringsmallarna. I filen med allt står lärarens
       // text redan i beskrivningen, så där kommer bara bladet (Niclas 2026-09-29: screeningen på exakt två A4, med bara
@@ -1924,7 +2067,17 @@ function sidfot(adress: string, bredd: number, liten = false): Footer {
 // lathund: lathundens sida med smala marginaler och utan rubrikrad, eftersom bandet bär titeln; sidhuvudet är ändå
 // satt (tomt), så att en lathund efter mallarna i Word-filen med allt inte ärver mallarnas rubrikrad.
 // kortark: Ljudlekens kort med 1 cm marginal, utan rubrikrad och med lathundens lilla fot, så att arket ryms på sidan.
-function sektion(barn: Barn[], huvudtext: string, adress: string, o: { liggande?: boolean; smal?: boolean; lathund?: boolean; kortark?: boolean } = {}): ISectionOptions {
+// bok: en boksida (lästexten, boksida()) med 1,5 cm marginal, upphovet i sidhuvudet och raden Till läraren, nivåns knapp
+// och sidnumret i sidfoten, som i metodriggen.
+function sektion(barn: Barn[], huvudtext: string, adress: string, o: { liggande?: boolean; smal?: boolean; lathund?: boolean; kortark?: boolean; bok?: Boksektion } = {}): ISectionOptions {
+  if (o.bok) {
+    return {
+      properties: { page: { size: { ...A4, orientation: PageOrientation.PORTRAIT }, margin: BOKMARGINAL } },
+      headers: { default: bokHuvud(adress) },
+      footers: { default: bokFot(o.bok) },
+      children: barn,
+    };
+  }
   if (o.kortark) {
     return {
       properties: { page: { size: { ...A4, orientation: PageOrientation.PORTRAIT }, margin: { top: KORTMARGINAL, right: KORTMARGINAL, bottom: KORTMARGINAL, left: KORTMARGINAL, header: 280, footer: 280 } } },
@@ -1947,21 +2100,32 @@ function delaSektioner(flod: Flod, huvudtext: string, adress: string, o: { ligga
   const ut: ISectionOptions[] = [];
   let barn: Barn[] = [];
   let kortark = false;
-  const klar = () => { if (barn.length) ut.push(sektion(barn, huvudtext, adress, kortark ? { kortark: true } : o)); barn = []; };
+  let bok: Boksektion | undefined;
+  const klar = () => { if (barn.length) ut.push(sektion(barn, huvudtext, adress, bok ? { bok } : kortark ? { kortark: true } : o)); barn = []; };
   for (const x of flod) {
     if (arBarn(x)) { barn.push(x); continue; }
     klar();
     kortark = x.kortark;
+    bok = x.bok;
   }
   klar();
   if (!ut.length) ut.push(sektion([new Paragraph({})], huvudtext, adress, o));
   return ut;
 }
 // Word-filen bär elevens typsnitt inbäddat när någon av metoderna har Ljudlekens kort och typsnittet finns i resurserna,
-// så att korten ser likadana ut där typsnittet inte är installerat.
+// så att korten ser likadana ut där typsnittet inte är installerat, och boksidornas Cinzel och Cinzel Decorative när
+// någon har lästexter. Saknas boksidornas typsnitt i resurserna stannar bygget, så att en boksida aldrig går ut i fel
+// typsnitt.
 function typsnittFor(poster: MetodPost[]): { fonts?: { name: string; data: Buffer }[] } {
-  const data = RESURSER.elevtypsnitt;
-  return data && poster.some((p) => harElevtypsnitt(p.data)) ? { fonts: [{ name: ELEVTYPSNITT, data: data as Buffer }] } : {};
+  const fonts: { name: string; data: Buffer }[] = [];
+  const elev = RESURSER.elevtypsnitt;
+  if (elev && poster.some((p) => harElevtypsnitt(p.data))) fonts.push({ name: ELEVTYPSNITT, data: elev as Buffer });
+  if (poster.some((p) => harLastexter(p.data))) {
+    const bok = RESURSER.boktypsnitt;
+    if (!bok) throw new Error('Word-filen har boksidor men saknar Cinzel och Cinzel Decorative (public/fonts/boksida/), som src/lib/metodresurser.ts läser vid bygget och sidan hämtar i webbläsaren.');
+    fonts.push({ name: BOKTYPSNITT, data: bok.cinzel as Buffer }, { name: ANFANGTYPSNITT, data: bok.dekor as Buffer });
+  }
+  return fonts.length ? { fonts } : {};
 }
 // Avsnittets sista stycke. docx lägger ett tomt stycke i dokumentets textstorlek sist i varje avsnitt, och det bär
 // avsnittets inställningar (sidans storlek, sidhuvudet). Word låter stycket hänga kvar på en full sida, men Google

@@ -220,7 +220,7 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
         const { metoder } = (await svar.json()) as { metoder: { id: string; data: unknown }[] };
         const poster = ids.map((id) => metoder.find((m) => m.id === id)).filter((m): m is { id: string; data: unknown } => Boolean(m));
         if (poster.length !== ids.length) throw new Error('En vald metod saknas i metoder.json. Sidan och datan kommer från olika byggen.');
-        const [{ metodDokument }, { Packer }, ljud, reserv] = await Promise.all([import('../../lib/metoddocx'), import('docx'), import('../../lib/ljudkort'), import('../../lib/reservbild')]);
+        const [{ metodDokument }, { Packer }, ljud, reserv, ramform] = await Promise.all([import('../../lib/metoddocx'), import('docx'), import('../../lib/ljudkort'), import('../../lib/reservbild'), import('../../lib/ramform')]);
         // Ljudlekens kort har bilder och elevens typsnitt (src/lib/ljudkort.ts): de hämtas innan filen byggs, som bygget
         // läser dem från disken.
         const valda = poster as Parameters<typeof metodDokument>[0];
@@ -229,12 +229,14 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
         const bildvagar = [...new Set(valda.flatMap((p) => ljud.metodensBilder(p.data, p.id)))];
         const bilder = new Map(await Promise.all(bildvagar.map(async (b) => [b, await hamta(b)] as const)));
         const elevtypsnitt = valda.some((p) => ljud.harElevtypsnitt(p.data)) ? await hamta(ljud.ELEVTYPSNITT_TTF) : undefined;
+        // Boksidornas typsnitt (lästexterna, src/lib/ramform.ts), när någon vald metod har lästexter.
+        const boktypsnitt = valda.some((p) => ramform.harLastexter(p.data)) ? { cinzel: await hamta(ramform.BOKTYPSNITT_TTF.cinzel), dekor: await hamta(ramform.BOKTYPSNITT_TTF.dekor) } : undefined;
         // Reservbilderna (src/lib/reservbild.ts): filen byggs först en gång för att se vilka bilder den har, och varje
         // bilds reservbild hämtas som bygget ritade den ur samma SVG, som när filerna byggs vid bygget.
         const behovet = reserv.samlaReservbilder();
-        metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt, png: behovet.png } });
+        metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt, boktypsnitt, png: behovet.png } });
         const png = new Map(await Promise.all([...behovet.behov.keys()].map(async (n) => [n, await hamta(reserv.reservAdress(n))] as const)));
-        const dokument = metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt, png: (svg, bredd, hojd) => png.get(reserv.reservNyckel(svg, bredd, hojd)) } });
+        const dokument = metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt, boktypsnitt, png: (svg, bredd, hojd) => png.get(reserv.reservNyckel(svg, bredd, hojd)) } });
         const blob = await Packer.toBlob(dokument);
         const filnamn = poster.length === 1 ? `${poster[0].id}${medMallarVal ? '' : '-beskrivning'}.docx` : `metoder-niclasfohlin-se${medMallarVal ? '' : '-beskrivningar'}.docx`;
         if (mal === 'drive' && drive) {

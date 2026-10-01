@@ -13,8 +13,9 @@ import Bokstavskort from './Bokstavskort.astro';
 import Bokstavskarta from './Bokstavskarta.astro';
 import Golvbokstaver from './Golvbokstaver.astro';
 import { ANDIKA_ADRESS, harElevtypsnitt, ljudform, upphovBilder } from '../lib/ljudkort';
-import { arElevensBlad, protokollDelas } from '../lib/ramform';
+import { arElevensBlad, lastexter, protokollDelas } from '../lib/ramform';
 import Filmruta from './Filmruta.astro';
+import Boksida from './Boksida.astro';
 import { filmerVid, metodensFilmer, stegDelar, type FilmPlats } from '../lib/film';
 import type { SerieKoppling } from '../lib/serie';
 import type { MetodData } from '../lib/metod';
@@ -102,6 +103,9 @@ const upptagna = new Set([...avsnitt.map((a) => a.id), 'upplagg', 'gruppen', 'pr
 const ankare = (s: string) => { let id = ankarnamn(s) || 'avsnitt'; for (let n = 2; upptagna.has(id); n++) id = `${ankarnamn(s)}-${n}`; upptagna.add(id); return id; };
 const tabellAnkare = new Map(d.tabeller.map((t) => [t, ankare(t.rubrik)]));
 const ramAnkare = (d.ramar?.ramar ?? []).map((r) => ankare(r.rubrik));
+// Lästexterna blir boksidor (Boksida.astro, K-148), med nivåns färg i den ordning nivåerna först kommer, som i Word.
+const boksidor = lastexter(d.ramar?.ramar ?? []);
+const BOKNIVA = ['#4e7a43', '#a8742a', '#6e3450'];
 // En fri tabell med meny: true står i menyn efter avsnittet den ligger efter på sidan, med rubrikens första led som namn
 // (Ljudstarten, Dagens ljud och Ordbanken i Ljudlek i grupp, som läraren letar efter varje pass).
 const menyEfter: Record<string, string | undefined> = {
@@ -453,7 +457,10 @@ const meny = [
           {d.ramar.ramar.map((r, i) => <>{i > 0 && <span aria-hidden="true">{'\u00a0· '}</span>}<a href={`#ram-${i + 1}`}>{hel(r.rubrik)}</a></>)}
         </nav>
       )}
-      {d.ramar.ramar.map((ram, ri) => (<>
+      {d.ramar.ramar.map((ram, ri) => boksidor.has(ram) ? (<>
+        <Boksida l={boksidor.get(ram)!} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={BOKNIVA[boksidor.get(ram)!.nivaNr] ?? '#4b3a2f'} />
+        <Filmruta filmer={vid({ ram: ram.rubrik })} titel={d.titel} />
+      </>) : (<>
         <section class={`m-ram${protokollDelas(ram) ? ' delad' : ''}`} id={`ram-${ri + 1}`}>
           <h3 id={ramAnkare[ri]}>{hel(ram.rubrik)}</h3>
           {ram.text.map((s) => <p>{s}</p>)}

@@ -89,15 +89,21 @@ async function provaDocx(fil, namn) {
   if (!existsSync(fil)) { nej(`${namn} saknas`); return; }
   const zip = await JSZip.loadAsync(readFileSync(fil));
   const dokument = await zip.file('word/document.xml')?.async('string');
-  const fotter = Object.keys(zip.files).filter((f) => /^word\/footer\d*\.xml$/.test(f));
-  let upphov = 0;
-  for (const f of fotter) if ((await zip.file(f).async('string')).includes('© Niclas Fohlin')) upphov++;
-  const sektioner = (dokument?.match(/<w:sectPr/g) || []).length;
+  // Upphovet per sektion: i sidfoten, eller på boksidorna (lästexterna) i sidhuvudet, där sidfoten är riggens rad Till
+  // läraren och nivåns knapp. Varje sektion ska bära © Niclas Fohlin i den ena eller den andra.
+  const rels = (await zip.file('word/_rels/document.xml.rels')?.async('string')) ?? '';
+  const delar = new Map([...rels.matchAll(/<Relationship\b[^>]*Id="([^"]+)"[^>]*Target="([^"]+)"/g)].map((m) => [m[1], `word/${m[2].replace(/^\/?word\//, '')}`]));
+  const harUpphov = new Map();
+  for (const f of Object.keys(zip.files).filter((x) => /^word\/(header|footer)\d*\.xml$/.test(x))) harUpphov.set(f, (await zip.file(f).async('string')).includes('© Niclas Fohlin'));
+  const sektionsdelar = [...(dokument ?? '').matchAll(/<w:sectPr\b[\s\S]*?<\/w:sectPr>/g)].map((m) => [...m[0].matchAll(/<w:(?:header|footer)Reference\b[^>]*r:id="([^"]+)"/g)].map((r) => delar.get(r[1])));
+  const sektioner = sektionsdelar.length;
+  const upphov = sektionsdelar.filter((d) => d.some((f) => harUpphov.get(f))).length;
+  const fotter = { length: sektioner };
   const stilar = await zip.file('word/styles.xml')?.async('string');
   const dubbla = ['Heading1', 'Heading2'].filter((s) => (stilar?.match(new RegExp(`w:styleId="${s}"`, 'g')) || []).length > 1);
   const text = (dokument || '').replace(/<[^>]+>/g, ' ');
   text.includes(metod.titel) ? ok(`${namn}: titeln finns`) : nej(`${namn}: titeln saknas`);
-  upphov === fotter.length && fotter.length > 0 ? ok(`${namn}: upphov i ${upphov} sidfötter, ${sektioner} sektioner`) : nej(`${namn}: upphov i ${upphov} av ${fotter.length} sidfötter`);
+  upphov === fotter.length && fotter.length > 0 ? ok(`${namn}: upphov i alla ${sektioner} sektioner`) : nej(`${namn}: upphov i ${upphov} av ${fotter.length} sektioner (sidfoten, eller sidhuvudet på en boksida)`);
   dubbla.length === 0 ? ok(`${namn}: en definition per rubrikstil`) : nej(`${namn}: dubbla stilar ${dubbla.join(', ')}`);
   console.log(`       ${(statSync(fil).size / 1024).toFixed(1)} kB`);
 }
@@ -161,7 +167,7 @@ if (bilder) {
     }
     // Skärmbilderna tas med scripts/skarmbild.mjs, som emulerar en riktig mobil; headless Chrome
     // har en minsta fönsterbredd och ger annars en beskuren bredare sida. Utskriften tas direkt.
-    const bild = (adress, fil, extra = []) => execFileSync(process.execPath, [join(rot, 'scripts/skarmbild.mjs'), adress, join(mapp, fil), ...extra], { stdio: 'ignore', timeout: 90000 });
+    const bild = (adress, fil, extra = []) => execFileSync(process.execPath, [join(rot, 'scripts/skarmbild.mjs'), adress, join(mapp, fil), ...extra], { stdio: 'ignore', timeout: 600000 });
     const tryck = (adress, fil) => execFileSync(chrome, ['--headless=new', '--disable-gpu', '--no-pdf-header-footer', `--print-to-pdf=${join(mapp, fil)}`, adress], { stdio: 'ignore', timeout: 60000 });
     // Förra körningens skärmbilder tas bort först, så att mappen bara har bilder av sidan som den är nu (granskningen
     // 2026-09-30: mobil-8.png var tre dagar äldre än resten).
@@ -219,6 +225,33 @@ if (bilder) {
             isarW.length ? nej(`Word: läskorten för text ${isarW.join(', ')} står på var sin sida; varje text ska vara ett A4 med båda korten`) : ok(`Word: ${laskort.length} lästräningstexter, båda korten på samma sida`);
           }
         } catch { console.log('  obs  pdftotext saknas, läskortens sidor i utskriften är inte prövade'); }
+      }
+      // Boksidorna (lästexterna, K-148; Niclas 2026-10-01: "En text per sida ska det vara. Så se till att inte blir något
+      // knas. Varje text ska kunna skrivas ut så."): varje lästext står på en egen sida, med titeln, slutet av texten och
+      // den sista frågan, i utskriften och i Word. Växer en text över sidan står slutet på nästa, och provet stannar; två
+      // texter på samma sida stoppar också. Lästexten känns igen som i src/lib/ramform.ts (lastexter).
+      const lastexter = (metod.ramar?.ramar ?? []).filter((ram) => {
+        const m = String(ram.rubrik ?? '').match(/^([^,:]+), ([^:]+): (.+)$/);
+        const [text, fragor] = ram.listor ?? [];
+        return !!m && (ram.listor ?? []).length === 2 && text.rubrik === m[3] && fragor.rubrik === 'Frågorna' && !text.kolumner && !fragor.kolumner && !ram.huvud && !ram.oversikt;
+      });
+      if (lastexter.length) {
+        const norm = (s) => String(s).normalize('NFC').toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
+        const nycklar = lastexter.map((ram) => {
+          const [text, fragor] = ram.listor;
+          return { rubrik: ram.rubrik, delar: [norm(text.rubrik), norm(text.rader.at(-1)[0]).slice(-40), norm(fragor.rader.at(-1)[0]).slice(-40)] };
+        });
+        const prova = (sidor, var_) => {
+          const ns = sidor.map(norm);
+          const paSida = ns.map((s) => nycklar.filter((k) => k.delar.every((x) => s.includes(x))));
+          const inteEn = nycklar.filter((k) => paSida.filter((p) => p.includes(k)).length !== 1).map((k) => k.rubrik);
+          const delade = paSida.map((p, i) => [i + 1, p]).filter(([, p]) => p.length > 1).map(([i]) => i);
+          if (inteEn.length) nej(`${var_}: ${inteEn.length} lästexter står inte hela på en egen sida (${inteEn.slice(0, 4).join('; ')}${inteEn.length > 4 ? ' …' : ''}); varje text ska vara ett A4`);
+          else if (delade.length) nej(`${var_}: två lästexter på samma sida (sidan ${delade.join(', ')})`);
+          else ok(`${var_}: ${lastexter.length} lästexter, en hel sida var`);
+        };
+        try { prova(execFileSync('pdftotext', ['-enc', 'UTF-8', join(mapp, 'utskrift.pdf'), '-'], { encoding: 'utf8' }).split('\f'), 'utskriften'); } catch { console.log('  obs  pdftotext saknas, boksidorna i utskriften är inte prövade'); }
+        if (wordSidor) prova(wordSidor, 'Word');
       }
   console.log('       Läs bilderna som en lärare som ska köra passet i morgon: fet stil betyder rubrik, inget bryts så att det läses fel,');
   console.log('       likvärdiga saker ser likadana ut, det läraren behöver kommer först. Dela höga bilder i bitar innan du läser dem.');

@@ -22,8 +22,11 @@ const valda = process.argv.slice(2);
 const filer = valda.length ? valda : readdirSync(DIST).filter((f) => f.endsWith('.docx')).map((f) => join(DIST, f));
 
 // Typsnitt som finns både i Word och i Google Dokument (pdffonts på Googles pdf:er, K-138). Andika följer med i filen
-// och finns i Googles bibliotek. Arial bara för tecken som Googles Calibri saknar: bockrutan och golvbokstavens pil.
-const TYPSNITT = new Set(['Calibri', 'Andika', 'Consolas', 'Cambria Math', 'Arial']);
+// och finns i Googles bibliotek. Arial bara för tecken som Googles Calibri saknar: bockrutan och golvbokstavens pil, och
+// för boksidornas sidfot, som i metodriggen. Cinzel och Cinzel Decorative är boksidornas titel och anfang (K-148): de
+// följer med i filen och finns i Googles bibliotek, och mätbänken (scripts/matbank/radavstand.mjs, H och I) och
+// googleprov.mjs på Textsamtal i grupps 51 boksidor visade samma radhöjd och samma sidor i båda (2026-10-01).
+const TYPSNITT = new Set(['Calibri', 'Andika', 'Consolas', 'Cambria Math', 'Arial', 'Cinzel', 'Cinzel Decorative']);
 // Tecknen i texten utöver bokstäver, siffror och mellanrum. Vanliga skiljetecken finns i husets typsnitt i båda. De
 // särskilda står här med vad Word och Google gör med dem (pdfminer på pdf:erna 2026-09-30). Ett tecken som inte står
 // här stoppar valideringen: pröva det i Word och Google (METODER.md, Word och Google Dokument) och för in det med sitt

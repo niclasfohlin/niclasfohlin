@@ -9,6 +9,31 @@ type Ram = {
 
 type Lista = { rubrik?: string; kolumner?: string[]; rader: string[][] };
 
+// En lästext (Textsamtal i grupp; Niclas 2026-10-01: lästexterna ska se ut som en gammal bok, ett till ett med
+// metodriggen): en ram som heter "<nivå>, <vad>: <titel>", vars första lista heter som titeln och är texten, ett stycke
+// per rad, och vars andra och sista lista heter Frågorna, utan kolumner, huvud eller översikt. Samma regel som riggens
+// build/modell.mjs (somLastext), så att riggens metodfil fungerar som den är. Word (metoddocx.ts, boksida), sidan och
+// utskriften (Metod.astro) ritar den som en boksida, utan ramens text: bladet är elevens. Rutan Till läraren blir en rad
+// i sidfoten. Nivåerna numreras i den ordning de först kommer, och knappen i sidfoten får nivåns färg efter numret.
+export interface Lastext { niva: string; nivaNr: number; vad: string; titel: string; stycken: string[]; fragor: string[]; not: string }
+type RamMedRubrik = Ram & { rubrik: string; oversikt?: unknown };
+export function lastexter<R extends RamMedRubrik>(ramar: R[]): Map<R, Lastext> {
+  const nivaer: string[] = [];
+  const ut = new Map<R, Lastext>();
+  for (const ram of ramar) {
+    const m = ram.rubrik.match(/^([^,:]+), ([^:]+): (.+)$/);
+    const [text, fragor] = ram.listor ?? [];
+    if (!m || (ram.listor ?? []).length !== 2 || text.rubrik !== m[3] || fragor.rubrik !== 'Frågorna' || text.kolumner || fragor.kolumner || ram.huvud || ram.oversikt) continue;
+    if (!nivaer.includes(m[1])) nivaer.push(m[1]);
+    const not = ram.delar.map((del) => `${del.rubrik} · ${del.falt.map((f) => `${f.rubrik}: ${f.text}`).join(' ')}`).join(' ');
+    ut.set(ram, { niva: m[1], nivaNr: nivaer.indexOf(m[1]), vad: m[2], titel: m[3], stycken: text.rader.map((r) => String(r[0])), fragor: fragor.rader.map((r) => String(r[0])), not });
+  }
+  return ut;
+}
+// Har metoden lästexter, som blir boksidor? Då bär Word-filen Cinzel och Cinzel Decorative (public/fonts/boksida/).
+export const harLastexter = (d: { ramar?: { ramar: RamMedRubrik[] } }): boolean => lastexter(d.ramar?.ramar ?? []).size > 0;
+export const BOKTYPSNITT_TTF = { cinzel: '/fonts/boksida/Cinzel-dokument.ttf', dekor: '/fonts/boksida/CinzelDecorative-dokument.ttf' };
+
 // En text med frågor (screeningens nivå 6–8 i Ljudlek i grupp, som i Niclas original): två kolumner, texten som eleven
 // läser till vänster och frågorna som läraren läser upp till höger. Kolumnen till höger är frågor när varje ifylld rad
 // slutar med frågetecken. Texten står för sig och frågorna för sig, kursivt och mindre, på sidan och i Word.

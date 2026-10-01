@@ -44,6 +44,12 @@
    (src/lib/delningskort.ts): typsnittet syns inte på korten och ska inte rita om dem. */
 @font-face { font-family: 'Ljudlek Elev'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/ljudlek-elev/LjudlekElev-Regular.woff2') format('woff2'); }
 :root { --typsnitt-elev: 'Ljudlek Elev', 'Andika', 'Public Sans', sans-serif; }
+/* Boksidorna (lästexterna i Textsamtal i grupp, K-148): titeln i Cinzel och anfanget i Cinzel Decorative, samma
+   delmängder som Word-filen bär (public/fonts/boksida/, OFL), och färgerna ur metodriggen, som i Word. Typsnitten hämtas
+   först när en boksida visas. */
+@font-face { font-family: 'Cinzel'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/boksida/Cinzel-dokument.ttf') format('truetype'); }
+@font-face { font-family: 'Cinzel Decorative'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('/fonts/boksida/CinzelDecorative-dokument.ttf') format('truetype'); }
+:root { --bok-ram: #4b3a2f; --bok-rod: #8c2a1e; --bok-text: #2b2622; --bok-titel: #3a2d24; --bok-not: #8a8177; --bok-skiljare: #b9a894; }
 
 
 * { box-sizing: border-box; }
@@ -628,6 +634,24 @@ button.lank:hover { color: var(--farg-accent); }
 .m-grund p { margin: 0; }
 /* Ramarna: varje ram har rubrik, inledning, översikt och delar med ett fält per rad. */
 .m-ram { margin: 1.5rem 0 0; }
+/* Boksidan (Boksida.astro): en lästext som en sida i en gammal bok, som i Word. Lättläst (korta) har större text. */
+.boksida { max-width: 40rem; }
+.boksida-ram { border: 4px double var(--bok-ram); padding: 1.5rem 2rem 1.75rem; background: #fff; color: var(--bok-text); }
+.boksida-titel { font-family: 'Cinzel', serif; font-weight: 400; font-size: 1.9rem; line-height: 1.25; color: var(--bok-titel); text-align: center; margin: 0 0 1.1rem; }
+.boksida-titel::after { content: ''; display: block; width: 3.5rem; margin: 0.4rem auto 0; border-bottom: 3px double var(--bok-rod); }
+.boksida-text, .boksida-fragor { font-family: var(--typsnitt-elev); font-size: 1.1rem; line-height: 1.55; }
+.boksida.korta .boksida-text, .boksida.korta .boksida-fragor { font-size: 1.3rem; }
+.boksida-text p { margin: 0 0 0.6em; }
+.boksida-text p:first-child::first-letter { font-family: 'Cinzel Decorative', serif; font-weight: 700; color: var(--bok-rod); float: left; font-size: 3.15em; line-height: 0.82; margin: 0.06em 0.08em 0 0; }
+.boksida-text::after { content: ''; display: block; width: 3rem; margin: 0.9rem auto 1rem; border-bottom: 1px solid var(--bok-skiljare); }
+.boksida-fragor { margin: 0; padding: 0; list-style: none; }
+.boksida-fragor li { display: grid; grid-template-columns: 1.6em 1fr; margin: 0 0 0.45em; }
+.boksida-fot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.3rem 1rem; font-size: 0.75rem; color: var(--bok-not); margin: 0.4rem 0 0; }
+.boksida-knapp { font-family: 'Cinzel', serif; font-size: 0.78rem; background: var(--bok-niva); color: #fff; padding: 0.1em 0.7em; white-space: nowrap; }
+@media (max-width: 40rem) {
+  .boksida-ram { padding: 1rem 1.1rem 1.25rem; }
+  .boksida-titel { font-size: 1.5rem; }
+}
 /* Elevlistor i en ram (läslistor): orden stora och lätta att peka i, kolumnrubrikerna små och dämpade, ingen fet första kolumn. */
 .m-lista { margin: 0.75rem 0 1.5rem; }
 .m-lista-rubrik { font-family: var(--typsnitt-ui); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-accent); margin: 0 0 0.35rem; }
@@ -770,6 +794,9 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 /* Kortarken (vikkort, bokstavskort, bokstavskartan) med smal marginal, så att så många kort som möjligt ryms på ett A4
    (Niclas 2026-09-29), som i Word. Upphovet står i foten också här. */
 @page kortark { size: A4; margin: 10mm 10mm 14mm; @bottom-center { content: var(--tryck-text, ''); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 8pt; color: #555; } }
+/* Boksidorna (lästexterna) med 1,5 cm marginal runt ramen, som i Word, och en smalare fot för upphovet, så att ramen och
+   raden Till läraren under den ryms på sidan. */
+@page boksida { size: A4; margin: 15mm 15mm 8mm; @bottom-center { content: var(--tryck-text, ''); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 8pt; color: #555; } }
 .lh .m-lista { margin: 0.25rem 0 0.75rem; }
 .lh .m-lista td { font-size: 1.05rem; padding: 0.3rem 0.6rem; }
 .lh .m-lista.bokstaver td { font-size: 1.3rem; }
@@ -1214,6 +1241,21 @@ html.js .bara-js { display: inline-block; }
   /* Kortarken: varje ark på en egen sida med smal marginal, i samma mått som i Word. Vikkorten står två gånger, tre i
      bredd och åtta rader; bokstavskorten fyra i bredd och sex rader; kartan fem i bredd och sex rader. */
   .m-vikkort, .m-bokstavskort, .m-bokstavskarta { page: kortark; break-before: page; break-inside: avoid; margin: 0; }
+  /* Boksidan på ett eget A4 med Word-sidans mått: ramen 1,5 cm från kanten och lika hög som i Word, texten 1,77 cm
+     in från ramens kant, storleken, radavståndet och anfanget ur samma uträkning som Word (src/lib/boksida.ts, satta på
+     boksidan som --bok-pt, --bok-rad och --bok-anfang), och raden Till läraren under ramen. Ramen får aldrig klippa:
+     blir texten längre än sidan växer ramen, och metodprov.mjs stoppar på det (en text per sida, Niclas 2026-10-01). */
+  .boksida { page: boksida; break-before: page; break-after: page; break-inside: avoid; max-width: none; margin: 0; }
+  .boksida-ram { min-height: 263mm; padding: 0 16.5mm; border-width: 4.5px; }
+  .boksida-titel { font-size: 27pt; line-height: 1.348; margin: 10pt 0 0; }
+  .boksida-titel::after { width: 35mm; margin: 3pt auto 15pt; }
+  .boksida-text, .boksida-fragor, .boksida.korta .boksida-text, .boksida.korta .boksida-fragor { font-size: var(--bok-pt); line-height: var(--bok-rad); }
+  .boksida-text p { margin: 0 0 7.5pt; }
+  .boksida-text p:first-child::first-letter { font-size: var(--bok-anfang); line-height: 0.8; }
+  .boksida-text::after { width: 16mm; margin: 5pt auto 15pt; }
+  .boksida-fragor li { grid-template-columns: 24pt 1fr; margin: 0 0 5.5pt; }
+  .boksida-fot { font-size: 7.5pt; margin-top: 1.5mm; }
+  .boksida-knapp { font-size: 8pt; }
   .m-ram:has(.m-vikkort), .m-ram:has(.m-bokstavskort), .m-ram:has(.m-bokstavskarta) { break-before: auto; break-inside: auto !important; }
   .m-vikkort .m-lista-rubrik, .m-bokstavskort .m-lista-rubrik, .m-bokstavskarta .m-lista-rubrik { font-size: 8pt; margin: 0 0 1mm; }
   .m-vikkort-vik { font-size: 8pt; margin: 0 0 2mm; }

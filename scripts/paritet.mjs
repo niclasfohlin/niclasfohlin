@@ -133,6 +133,13 @@ function wordRubriker(xml) {
 // En ram där alla fält är tomma är en mall att fylla i: den står i planeringsmallarna, och sidan visar bara dess
 // inledning (METODER.md). Dess delar och huvud prövas därför inte mot utskriften.
 const tomRam = (ram) => !ram.listor?.length && (ram.delar ?? []).every((d) => (d.falt ?? []).every((f) => !String(f.text ?? '').trim()));
+// En lästext är en boksida (lastexter() i src/lib/ramform.ts, samma regel): bladet är elevens, så ramens text ("Läs
+// texten och svara på frågorna.") står varken i Word eller i utskriften, och rutan Till läraren står i boksidans sidfot.
+const arLastext = (ram) => {
+  const m = String(ram.rubrik ?? '').match(/^([^,:]+), ([^:]+): (.+)$/);
+  const [text, fragor] = ram.listor ?? [];
+  return !!m && (ram.listor ?? []).length === 2 && text.rubrik === m[3] && fragor.rubrik === 'Frågorna' && !text.kolumner && !fragor.kolumner && !ram.huvud && !ram.oversikt;
+};
 
 function texter(x, vag, ut, minst = MINST) {
   if (typeof x === 'string') { if (x.length >= minst && /\p{L}/u.test(x)) ut.push({ vag, text: x }); }
@@ -157,10 +164,14 @@ for (const fil of filer) {
   const utskrift = norm(tryckt.text);
   const zip = await JSZip.loadAsync(readFileSync(docx));
   const xml = await zip.file('word/document.xml').async('string');
-  const word = norm(avkoda(xml.replace(/<[^>]+>/g, '')));
+  // Sidhuvuden och sidfötter hör till Word-filen: boksidornas rad Till läraren står i sidfoten.
+  const huvudOchFot = await Promise.all(Object.keys(zip.files).filter((n) => /^word\/(header|footer)\d*\.xml$/.test(n)).map((n) => zip.file(n).async('string')));
+  const word = norm(avkoda([xml, ...huvudOchFot].join(' ').replace(/<[^>]+>/g, '')));
   const tommaRamar = (d.ramar?.ramar ?? []).map((r, i) => (tomRam(r) ? new RegExp(`^ramar\\.ramar\\.${i}\\.(delar|huvud)\\.`) : null)).filter(Boolean);
+  const lastextRader = (d.ramar?.ramar ?? []).map((r, i) => (arLastext(r) ? new RegExp(`^ramar\\.ramar\\.${i}\\.text\\.`) : null)).filter(Boolean);
   const saknas = [];
   for (const { vag, text } of texter(d, '', [])) {
+    if (lastextRader.some((r) => r.test(vag))) continue;
     const u = UNDANTAG.find((x) => x.vag.test(vag));
     const n = norm(text);
     const iWord = u?.word === false || word.includes(n);

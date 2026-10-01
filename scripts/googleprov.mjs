@@ -139,8 +139,10 @@ async function wordText(fil) {
 // Hur många gånger rubrikraden står i en pdf-text, räknat i bokstäver utan mellanrum.
 const forekomster = (bokst, rad) => { let n = 0; for (let i = bokst.indexOf(rad); i >= 0; i = bokst.indexOf(rad, i + rad.length)) n++; return n; };
 
-// Sidhuvud, sidfot och sidnummer räknas inte som sidans text.
-const RAM = /Sida \d+ av \d+|© Niclas Fohlin[^\n]*|[^\n]*· niclasfohlin\.se\s*$/gm;
+// Sidhuvud, sidfot och sidnummer räknas inte som sidans text. Sidnumret står som "Sida 12 av 31" och på boksidorna som
+// "s. 42" sist i sidfoten (K-148); bara numret skiljer när Word och Google bryter sidorna olika.
+const SIDNUMMER = /Sida \d+ av \d+|(?<= s\.) \d+(?=\s*$)/gm;
+const RAM = /Sida \d+ av \d+|(?<= s\.) \d+(?=\s*$)|© Niclas Fohlin[^\n]*|[^\n]*· niclasfohlin\.se\s*$/gm;
 const sidtexter = (pdf) => execFileSync('pdftotext', ['-enc', 'UTF-8', pdf, '-'], { encoding: 'utf8', maxBuffer: 1 << 26 })
   .split('\f').slice(0, -1).map((t) => t.replace(RAM, ''));
 // Andelen bokstäver som två sidor har gemensamt (1 är samma text).
@@ -191,7 +193,7 @@ const layoutsidor = (pdf) => execFileSync('pdftotext', ['-enc', 'UTF-8', '-layou
 // Sidornas bokstäver uppifrån och ned utan sidhuvud och sidfot, som tas bort som text och inte som rad: på ett kortark
 // med smal marginal står arkets rubrik och sidhuvudet på samma rad i Googles uppställning (Bråkkursen 2026-09-30).
 const ankartexter = (pdf, sidhuvud) => execFileSync('pdftotext', ['-enc', 'UTF-8', '-layout', pdf, '-'], { encoding: 'utf8', maxBuffer: 1 << 26 })
-  .split('\f').slice(0, -1).map((t) => sidhuvud.reduce((b, h) => b.split(h).join(''), (t.replace(/Sida \d+ av \d+/g, '').normalize('NFC').toLowerCase().match(/[\p{L}\p{N}]/gu) ?? []).join('')));
+  .split('\f').slice(0, -1).map((t) => sidhuvud.reduce((b, h) => b.split(h).join(''), (t.replace(SIDNUMMER, '').normalize('NFC').toLowerCase().match(/[\p{L}\p{N}]/gu) ?? []).join('')));
 // Står samma text överst på flera sidor (Skrivkursens snabbmall står både i beskrivningen och som mall) väljs i
 // Google den sida som ligger närmast där ankaret borde stå: förra ankarets sida plus Words avstånd mellan dem.
 // Ett ankare står överst på en sida när sidans första tecken innehåller det, eller nästan alla dess tecken i en annan
@@ -324,7 +326,7 @@ for (const fil of filer) {
   // ekvationerna räknas inte, eftersom Google ritar dem utan text i pdf:en.
   const hela = (pdf) => execFileSync('pdftotext', ['-enc', 'UTF-8', '-layout', pdf, '-'], { encoding: 'utf8', maxBuffer: 1 << 26 });
   const [helW, helG] = [hela(wPdf), hela(gPdf)];
-  const utanSidnummer = (t) => t.replace(/Sida \d+ av \d+/g, 'Sida av');
+  const utanSidnummer = (t) => t.replace(SIDNUMMER, (m) => (m.startsWith('Sida') ? 'Sida av' : ''));
   const iWord = tecken(utanSidnummer(helW));
   const iGoogle = tecken(utanSidnummer(helG));
   const bokstW = (helW.normalize('NFC').toLowerCase().match(/\p{L}/gu) ?? []).join('');
