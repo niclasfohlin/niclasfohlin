@@ -38,6 +38,7 @@
     "pptxgenjs": "^4.0.1",
     "serverless-http": "^4.0.0",
     "sharp": "^0.35.4",
+    "wordparitet": "https://github.com/niclasfohlin/wordparitet/archive/refs/tags/v0.1.0.tar.gz",
     "yaml": "^2.9.1"
   },
   "devDependencies": {

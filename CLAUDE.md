@@ -16,6 +16,7 @@ Arbete som inte är ett direkt svar på Niclas går genom kön: `node scripts/ko
 | KONCEPT.md | Vad sajten ska bli och varför |
 | DRIFT.md | Plattformarna: vad som finns hos GitHub, Netlify, Brevo och Loopia, var inloggningarna ligger, kommandon som fungerar, vad man gör när något är rött; krediterna, kreditspärren och trafiken; besöksstatistiken i GoatCounter; delningskorten, delningsraden och bilderna; kommentarerna |
 | METODER.md | Hur en metod tas emot och görs om: modellen, mappningen från kompendium till YAML, lathunden, textreglerna, kontrollerna, Codex-granskningen, metodriggen utanför repot, serier och lektionsbanker (Ljudlek i grupp) |
+| wordparitet (`C:/wordparitet`, `node_modules/wordparitet/REGLER.md`) | Word och Google Dokument: reglerna med skäl och mätningar, regelprovet, mätbänken och jämförelserna, i en modul som sajten och metodriggen delar och båda bygger ut (K-158). En ny regel eller ett nytt prov läggs där, med en rad i dess CHANGELOG.md och ett meddelande till riggen |
 | UPPSTART.md | Hur drift, konton och behörigheter sattes upp från början |
 | KO.md | Kön. `node scripts/ko.mjs lista` visar den, `/natt` arbetar igenom den |
 | underlag/texter/ | Alla kända texter av Niclas i fulltext med register. `npm run texter` visar vilka som saknar post |

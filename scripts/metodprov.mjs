@@ -15,6 +15,7 @@ import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse as parseYaml } from 'yaml';
 import JSZip from 'jszip';
+import { wordPdfSync } from 'wordparitet';
 
 const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
@@ -190,11 +191,11 @@ if (bilder) {
       // Huvudfilmens stillbilder (fältet film): rutan står på sidan 1, direkt efter faktarutan, både i utskriften och i
       // Word-filen med allt (Niclas 2026-09-30: "på s. 1 alltid"). Att varje film står i båda, och extrafilmerna på samma
       // plats i båda, prövar scripts/paritet.mjs i varje validering; att bygget har en huvudfilm, src/lib/film.ts.
-      // Word-filen med allt som pdf, gjord av Word (scripts/word-pdf.ps1), så att sidorna prövas som Word lägger dem.
+      // Word-filen med allt som pdf, gjord av Word (wordPdfSync i wordparitet), så att sidorna prövas som Word lägger dem.
       const wordPdf = join(mapp, 'word.pdf');
       let wordSidor;
       try {
-        execFileSync('powershell', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', join(rot, 'scripts/word-pdf.ps1'), join(rot, 'dist/stodundervisning', `${id}.docx`), wordPdf], { stdio: 'ignore', timeout: 180000 });
+        wordPdfSync(join(rot, 'dist/stodundervisning', `${id}.docx`), wordPdf, { timeout: 180000 });
         wordSidor = execFileSync('pdftotext', ['-enc', 'UTF-8', wordPdf, '-'], { encoding: 'utf8' }).split('\f').map((t) => t.replace(/\s+/g, ' '));
       } catch { console.log('  obs  Word eller pdftotext saknas, Word-filens sidor är inte prövade'); }
       if (metod.film) {

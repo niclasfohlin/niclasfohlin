@@ -17,6 +17,7 @@ import { execFileSync, execSync, spawn } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse as parseYaml } from 'yaml';
+import { wordPdfSync } from 'wordparitet';
 
 const rot = join(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
@@ -56,7 +57,7 @@ try {
     const utskrift = join(ut, `${id}-utskrift.pdf`);
     execFileSync(chrome, ['--headless=new', '--disable-gpu', '--no-pdf-header-footer', `--print-to-pdf=${utskrift}`, `http://localhost:${port}/stodundervisning/${id}`], { stdio: 'ignore', timeout: 60000 });
     const word = join(ut, `${id}-word.pdf`);
-    execFileSync('powershell', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', join(rot, 'scripts/word-pdf.ps1'), join(rot, 'dist/stodundervisning', `${id}.docx`), word], { stdio: 'ignore', timeout: 180000 });
+    wordPdfSync(join(rot, 'dist/stodundervisning', `${id}.docx`), word, { timeout: 180000 });
     const u = ryms(sida1(utskrift), d);
     const w = ryms(sida1(word), d);
     rader.push({ id, film: d.film ? 'egen' : 'prov', u, w });
