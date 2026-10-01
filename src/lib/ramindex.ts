@@ -39,6 +39,10 @@ export function ramindex<R extends Ram>(ramar: R[]): Indexpost[] {
     const s = ram.rubrik.match(/^([^:]+): ([^,]+), ([^,]+), (.+)$/);
     const rad = s && nivaer.get(s[2])?.rader.find((r) => !r.extra && r.lank.namn === s[4] && texter.get(ramar[r.lank.nr - 1])?.vad === s[3]);
     if (s && rad) { rad.extra = { nr: i + 1, namn: s[4], etikett: s[1] }; anvanda.add(i); return; }
+    // Spärren (K-155; Niclas 2026-10-01: "Görs det automatiskt rätt i framtiden?"): en ram som heter som en lärarsida på en
+    // av metodens nivåer men inte hittar sin lästext, eller vars lästext redan har en lärarsida, är en felskriven rubrik.
+    // Den skulle hamna på fel plats i listan, så bygget stannar och säger vilken rubrik som ska rättas.
+    if (s && nivaer.has(s[2])) throw new Error(`Materialets lista: ramen "${ram.rubrik}" heter som en lärarsida på nivån ${s[2]}, men ${nivaer.get(s[2])!.rader.some((r) => r.lank.namn === s[4] && texter.get(ramar[r.lank.nr - 1])?.vad === s[3]) ? 'lästexten har redan en lärarsida' : `ingen lästext heter "${s[2]}, ${s[3]}: ${s[4]}"`}. Rätta rubriken i metodfilen, så att lärarsidan har samma nivå, vad och titel som sin text (METODER.md, Elevmaterial i en ram).`);
     const o = ram.rubrik.match(/^([^:]+): (.+)$/);
     const niva = o && ram.oversikt ? nivaer.get(o[2]) : undefined;
     if (niva && !niva.oversikt) { niva.oversikt = { nr: i + 1, namn: ram.rubrik }; anvanda.add(i); }
@@ -59,5 +63,8 @@ export function ramindex<R extends Ram>(ramar: R[]): Indexpost[] {
       k = slut - 1;
     } else poster.push({ forst: ovriga[k].nr, post: { typ: 'rad', rad: { lank: { nr: ovriga[k].nr, namn: ovriga[k].ram.rubrik } } } });
   }
+  // Varje ram har exakt en länk i listan, så att ingen ram försvinner ur den eller står två gånger.
+  const lankade = poster.flatMap(({ post: p }) => (p.typ === 'rad' ? [p.rad.lank.nr] : [...(p.typ === 'niva' && p.oversikt ? [p.oversikt.nr] : []), ...p.rader.flatMap((r) => [r.lank.nr, ...(r.extra ? [r.extra.nr] : [])])]));
+  if (lankade.length !== ramar.length || new Set(lankade).size !== ramar.length) throw new Error(`Materialets lista: ${ramar.length} ramar men ${new Set(lankade).size} olika länkar av ${lankade.length} (src/lib/ramindex.ts).`);
   return poster.sort((a, b) => a.forst - b.forst).map((p) => p.post);
 }
