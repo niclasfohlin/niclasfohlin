@@ -151,6 +151,14 @@ const REGLER = [
     prova: (xml) => [...xml.matchAll(/<w:instrText[^>]*>([^<]*)<\/w:instrText>/g)].filter((m) => !/^\s*(PAGE|NUMPAGES)\b/.test(m[1])).map((m) => m.index),
   },
   {
+    // K-157 (Niclas 2026-10-01: boksidans dubbla ram och den röda dubbla linjen under titeln blev enkla i Google). Mätt i
+    // mätbänken (scripts/matbank/dubbellinje.mjs): Google ritar en dubbel kant som en enda linje på omkring 2 pt.
+    namn: 'kantstil som Google saknar',
+    skal: 'Google har bara heldragna, streckade och prickade kanter och ritar en dubbel kant som en enkel; bygg den dubbla linjen av två enkla (dubbelRam och boksidans titellinje i metoddocx.ts)',
+    // En kant har tjocklek eller färg; numreringens <w:start w:val="1"/> har det inte.
+    prova: (xml) => [...xml.matchAll(/<w:(?:top|bottom|left|right|start|end|insideH|insideV|between|bar|bdr)\b(?=[^>]*\bw:(?:sz|color)=)[^>]*\bw:val="(?!single"|dashed"|dotted"|none"|nil")[^"]*"/g)].map((m) => m.index),
+  },
+  {
     namn: 'tabbstopp som Google saknar',
     skal: 'Google har tabbstopp till vänster, i mitten och till höger, utan utfyllnad',
     prova: (xml) => [...xml.matchAll(/<w:tab w:val="(decimal|bar|num)"|<w:tab\b[^>]*w:leader="(?!none)/g)].map((m) => m.index),

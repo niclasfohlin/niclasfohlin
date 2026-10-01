@@ -86,6 +86,26 @@ let instans = 0; // numrerade listor: varje lista börjar om på 1
 
 const kant = (color = FARG.kant, size = 4): IBorderOptions => ({ style: BorderStyle.SINGLE, size, color });
 const runt = (b: IBorderOptions) => ({ top: b, bottom: b, left: b, right: b });
+// En dubbel ram av två enkla (K-157; Niclas 2026-10-01: boksidans dubbla ram blev enkel i Google Dokument). Google har
+// bara heldragna, streckade och prickade kanter och ritar en dubbel kant som en enda linje på omkring 2 pt, där Word
+// ritar två linjer. Ramen är därför en tabell med en cell och enkel kant runt en inre tabell med enkel kant, med 1,5 pt
+// (30 twips) marginal runt om och ett stycke på 0,15 pt före och efter den inre tabellen, som Google kräver runt en tabell
+// i en cell. Mätt i mätbänken (scripts/matbank/dubbellinje.mjs, variant M): dubbla linjer runt om i båda, lika hög i Word
+// som Words dubbla kant och 0,45 pt högre i Google. scripts/wordregler.mjs stoppar en dubbel kant.
+const DUBBEL_GLAPP = 30;
+const hjalpStycke = () => new Paragraph({ spacing: { before: 0, after: 0, line: 30 }, run: { size: 2, font: 'Calibri' }, children: [new TextRun({ text: '', size: 2, font: 'Calibri' })] });
+function dubbelRam(bredd: number, kant: IBorderOptions, inre: (bredd: number) => Table): Table {
+  const ingen = { style: BorderStyle.NONE, size: 0, color: 'auto' } as const;
+  return new Table({
+    width: { size: bredd, type: WidthType.DXA }, columnWidths: [bredd], layout: TableLayoutType.FIXED,
+    borders: { top: ingen, bottom: ingen, left: ingen, right: ingen, insideHorizontal: ingen, insideVertical: ingen },
+    rows: [new TableRow({ children: [new TableCell({
+      width: { size: bredd, type: WidthType.DXA }, borders: runt(kant),
+      margins: { top: DUBBEL_GLAPP, bottom: DUBBEL_GLAPP, left: DUBBEL_GLAPP, right: DUBBEL_GLAPP },
+      children: [hjalpStycke(), inre(bredd - 2 * DUBBEL_GLAPP), hjalpStycke()],
+    })] })],
+  });
+}
 
 // brak: bråken i texten står staplade (elevmaterial); nySida: stycket börjar på en ny sida.
 // niva4: stycket är en rubrik på nivå 4 i Word (en listas rubrik under ramens nivå 3), så att den syns i navigeringen (K-035).
@@ -565,7 +585,8 @@ function kortlista(info: KortInfo, brak = true): Table {
 // Till läraren och nivån, som en liten knapp i nivåns färg, står i sidfoten, och upphovet litet i sidhuvudet, utanför
 // ramen. Formen följer reglerna för Word och Google Dokument (METODER.md): ramen är en tabell med tre rader och inga
 // linjer inne i den (titeln, anfanget med de två första raderna bredvid, och resten av texten med frågorna i en rad som
-// fyller sidan), radavstånden är multiplar av typsnittens enkla rad, höjderna står i hela bildpunkter och allt är text.
+// fyller sidan), i en yttre tabell som ger den dubbla linjen (dubbelRam; Google har ingen dubbel kant, K-157),
+// radavstånden är multiplar av typsnittens enkla rad, höjderna står i hela bildpunkter och allt är text.
 // Måtten (textens storlek, radavståndet, anfanget) räknas i src/lib/boksida.ts, som sidans utskrift också använder.
 // Cinzel och Cinzel Decorative finns i Google Dokument, och Word-filen bär delmängder av dem under samma namn
 // (public/fonts/boksida/, OFL).
@@ -622,17 +643,28 @@ function boksida(l: Lastext): Barn[] {
   if (!matt.ryms) throw new Error(`Lästexten ”${l.titel}” (${l.niva}, ${l.vad}) ryms inte på ett A4 ens med det tätaste radavståndet. Korta texten eller frågorna; varje text ska vara en sida (src/lib/boksida.ts).`);
   const { size, line, storPt, kolW, delat, anfangH, titelH, bokstav } = matt;
   const elev: IRunOptions = { size, color: BOK.text, font: ELEVTYPSNITT };
-  const luft = BOKLUFT;
+  // Den dubbla ramen är två enkla (dubbelRam, K-157): boksidans tabell står i en yttre tabell, 30 twips in från dess kant.
+  // Luften in till texten minskar lika mycket, så att texten står där den stod och är lika bred (src/lib/boksida.ts räknar
+  // med BOKBREDD och BOKLUFT).
+  const inreBredd = BOKBREDD - 2 * DUBBEL_GLAPP;
+  const luft = BOKLUFT - DUBBEL_GLAPP;
   const ingen = { style: BorderStyle.NONE, size: 0, color: 'auto' } as const;
-  const ram = { style: BorderStyle.DOUBLE, size: 12, color: BOK.ram } as const;
+  const ram = { style: BorderStyle.SINGLE, size: 12, color: BOK.ram } as const;
   const utanLinjer = { top: ingen, bottom: ingen, left: ingen, right: ingen, insideHorizontal: ingen, insideVertical: ingen };
   const noll = { top: 0, bottom: 0, left: 0, right: 0 };
-  // En kort linje mitt på raden, som kant under ett stycke på en punkt: dubbel och röd under titeln, tunn mellan texten
-  // och frågorna.
+  // En kort linje mitt på raden, som kant under ett stycke på en punkt: tunn mellan texten och frågorna.
+  const mitt = (bredd: number) => ({ left: Math.round((inreBredd - bredd) / 2), right: Math.round((inreBredd - bredd) / 2) });
   const linje = (bredd: number, kant: IBorderOptions, fore: number, efter: number) => punktStycke({
-    indent: { left: Math.round((BOKBREDD - bredd) / 2), right: Math.round((BOKBREDD - bredd) / 2) },
-    spacing: { before: fore, after: efter, line: 240 }, border: { bottom: { ...kant, space: 1 } },
+    indent: mitt(bredd), spacing: { before: fore, after: efter, line: 240 }, border: { bottom: { ...kant, space: 1 } },
   });
+  // Den röda dubbla linjen under titeln, av två enkla (K-157): två stycken med var sin kant under, det andra 0,75 pt högt
+  // och 15 twips smalare på var sida, så att Word inte slår ihop dem till en. Mätt i mätbänken (dubbellinje.mjs, variant
+  // E): två linjer i både Word och Google, 1 pt lägre än Words dubbla kant i Word och 2,4 pt högre i Google.
+  const rod = { style: BorderStyle.SINGLE, size: 6, color: BOK.rod, space: 0 } as const;
+  const titellinje = [
+    punktStycke({ indent: mitt(2000), spacing: { before: 0, after: 0, line: 240 }, border: { bottom: rod } }),
+    punktStycke({ indent: mitt(1970), spacing: { before: 0, after: 300, line: 147 }, border: { bottom: rod } }),
+  ];
   // Titeln i Cinzel, vars gemener är kapitäler: den står som i metodens fil och ser ut som titeln i en gammal bok.
   const titel = new Paragraph({ alignment: AlignmentType.CENTER, outlineLevel: 1, indent: { left: luft, right: luft }, spacing: { before: 200, after: 60, line: 240 },
     children: [new TextRun({ text: l.titel, font: BOKTYPSNITT, size: TITEL_PT * 2, color: BOK.titel })] });
@@ -644,8 +676,10 @@ function boksida(l: Lastext): Barn[] {
   };
   const ovriga = l.stycken.slice(1);
   const textStycke = (text: string, efter = 150, v = luft, h = luft) => new Paragraph({ indent: { left: v, right: h }, spacing: { before: 0, after: efter, line }, children: radRuns(text) });
-  // Den sista radens höjd, så att ramen fyller sidan.
-  const restH = Math.floor(Math.max(0, RAMHOJD - titelH - anfangH - 90) / 15) * 15;
+  // Den sista radens höjd, så att ramen fyller sidan. Den är 150 twips (7,5 pt) lägre sedan den dubbla ramen och linjen
+  // under titeln är byggda av enkla linjer (K-157): de tar 2,9 pt mer i Google än i Word, och Google flyttar avsnittets
+  // sista stycke till en ny sida när sidan är full (sex texter på Avancerad fick en tom sida med 3 pt lägre rad).
+  const restH = Math.floor(Math.max(0, RAMHOJD - titelH - anfangH - 90 - 150) / 15) * 15;
   // Frågorna: numret och texten efter en tabb, så att en fråga på två rader står under sin början.
   const fragor = l.fragor.map((f, i) => {
     const n = f.match(/^(\d+)\.\s*([\s\S]*)$/);
@@ -656,25 +690,25 @@ function boksida(l: Lastext): Barn[] {
   const ruta = (barn: Barn[], o: { bredd: number; span?: number; kanter: Record<'top' | 'bottom' | 'left' | 'right', IBorderOptions>; marginaler: typeof noll }) =>
     new TableCell({ width: { size: o.bredd, type: WidthType.DXA }, columnSpan: o.span, borders: o.kanter, margins: o.marginaler, children: barn });
   const sidan = new Table({
-    width: { size: BOKBREDD, type: WidthType.DXA }, columnWidths: [luft + kolW, BOKBREDD - luft - kolW], layout: TableLayoutType.FIXED, borders: utanLinjer,
+    width: { size: inreBredd, type: WidthType.DXA }, columnWidths: [luft + kolW, inreBredd - luft - kolW], layout: TableLayoutType.FIXED, borders: utanLinjer,
     rows: [
-      new TableRow({ children: [ruta([titel, linje(2000, { style: BorderStyle.DOUBLE, size: 6, color: BOK.rod }, 0, 300)],
-        { bredd: BOKBREDD, span: 2, kanter: { top: ram, left: ram, right: ram, bottom: ingen }, marginaler: noll })] }),
+      new TableRow({ children: [ruta([titel, ...titellinje],
+        { bredd: inreBredd, span: 2, kanter: { top: ram, left: ram, right: ram, bottom: ingen }, marginaler: noll })] }),
       new TableRow({ height: { value: anfangH, rule: HeightRule.EXACT }, children: [
         ruta([new Paragraph({ spacing: { before: 0, after: 0, line: Math.round(240 * ANFANG_MULTIPEL) }, children: [new TextRun({ text: bokstav, font: ANFANGTYPSNITT, size: storPt * 2, bold: true, color: BOK.rod })] })],
           { bredd: luft + kolW, kanter: { top: ingen, left: ram, right: ingen, bottom: ingen }, marginaler: { ...noll, left: luft } }),
         ruta([textStycke(delat.inne, delat.rest ? 0 : 150, 0, 0)],
-          { bredd: BOKBREDD - luft - kolW, kanter: { top: ingen, left: ingen, right: ram, bottom: ingen }, marginaler: { ...noll, right: luft } }),
+          { bredd: inreBredd - luft - kolW, kanter: { top: ingen, left: ingen, right: ram, bottom: ingen }, marginaler: { ...noll, right: luft } }),
       ] }),
       new TableRow({ height: { value: restH, rule: HeightRule.ATLEAST }, children: [ruta([
         ...(delat.rest ? [textStycke(delat.rest)] : []),
         ...ovriga.map((t) => textStycke(t)),
         linje(900, { style: BorderStyle.SINGLE, size: 4, color: BOK.skiljare }, 100, 300),
         ...fragor,
-      ], { bredd: BOKBREDD, span: 2, kanter: { top: ingen, left: ram, right: ram, bottom: ram }, marginaler: noll })] }),
+      ], { bredd: inreBredd, span: 2, kanter: { top: ingen, left: ram, right: ram, bottom: ram }, marginaler: noll })] }),
     ],
   });
-  return [punktStycke(), sidan];
+  return [punktStycke(), dubbelRam(BOKBREDD, ram, () => sidan)];
 }
 // stor: en elevkopia (planeringsmallarna), där listorna kommer först och sätts stort nog att läsas av ett par
 // eller visas för gruppen; annars (beskrivningen) står lärarnoten först och listorna efter.
@@ -984,12 +1018,15 @@ function diplomBarn(dip: NonNullable<MetodData['diplom']>): Barn[] {
       : new Paragraph({ children: [run(t, { storlek: 26, kursiv: /[.!]$/.test(t) })], alignment: AlignmentType.CENTER, spacing: { after: 240 } }));
   }
   if (dip.underskrifter.length) barn.push(new Paragraph({ children: dip.underskrifter.map((u, i) => run(`${i > 0 ? '        ' : ''}${u} ____________________`, { storlek: 22, farg: FARG.svag })), alignment: AlignmentType.CENTER, spacing: { before: 600, after: 600 } }));
-  return [new Table({ width: { size: BREDD, type: WidthType.DXA }, columnWidths: [BREDD], layout: TableLayoutType.FIXED, rows: [new TableRow({ children: [new TableCell({
-    width: { size: BREDD, type: WidthType.DXA },
-    borders: runt({ style: BorderStyle.DOUBLE, size: 12, color: FARG.huvud }),
-    margins: { top: 400, bottom: 400, left: 600, right: 600 },
+  // Den dubbla ramen är två enkla (dubbelRam, K-157), så att Google Dokument ritar den dubbel som Word; den inre cellens
+  // marginal är 30 twips mindre åt sidorna, så att texten står där den stod, och 375 upptill och nedtill (hela bildpunkter).
+  const kant = { style: BorderStyle.SINGLE, size: 12, color: FARG.huvud } as const;
+  return [dubbelRam(BREDD, kant, (inre) => new Table({ width: { size: inre, type: WidthType.DXA }, columnWidths: [inre], layout: TableLayoutType.FIXED, rows: [new TableRow({ children: [new TableCell({
+    width: { size: inre, type: WidthType.DXA },
+    borders: runt(kant),
+    margins: { top: 375, bottom: 375, left: 600 - DUBBEL_GLAPP, right: 600 - DUBBEL_GLAPP },
     children: barn,
-  })] })] }), avstand()];
+  })] })] })), avstand()];
 }
 
 // Passöversikten (src/lib/metod.ts passOversikt): fasremsan med minuter och arbetsformens delar under, och
@@ -2197,20 +2234,18 @@ function kringTabeller(barn: readonly (Paragraph | Table)[]): (Paragraph | Table
 // som Word lägger utanför en exakt höjd.
 const BILDPUNKT = 15;
 const bildpunkt = (twips: number) => Math.round(twips / BILDPUNKT) * BILDPUNKT;
-// Kanten mellan raderna i punkter, i Word och i Google: den tjockaste över eller under en cell i raden. En dubbel linje
-// är inte mätt och räknas lika i båda.
+// Kanten mellan raderna i punkter, i Word och i Google: den tjockaste över eller under en cell i raden. En dubbel kant
+// finns inte i Word-filerna (dubbelRam, K-157; scripts/wordregler.mjs stoppar den).
 function radKant(celler: TableCell[]): { word: number; google: number } {
   let word = 0;
-  let dubbel = false;
   for (const c of celler) {
     const k = cellInst(c).borders;
     for (const s of [k?.top, k?.bottom]) {
       if (!s || s.style === BorderStyle.NIL || s.style === BorderStyle.NONE || !s.size) continue;
-      if (s.style === BorderStyle.DOUBLE) dubbel = true;
       word = Math.max(word, s.size / 8);
     }
   }
-  return { word, google: !word || dubbel ? word : Math.max(0.75, Math.round(word / 0.75) * 0.75) };
+  return { word, google: !word ? word : Math.max(0.75, Math.round(word / 0.75) * 0.75) };
 }
 function googleTabeller(barn: readonly unknown[]): void {
   for (const b of barn) {
