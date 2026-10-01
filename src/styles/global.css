@@ -2,10 +2,10 @@
    Håll färger, typsnitt och mått som variabler så att designen kan
    ändras på ett ställe. */
 
-/* Typsnittet Public Sans (SIL Open Font License), självhostat i public/fonts/ så att inga
-   anrop går till Google. Variabel vikt 400 till 800, rak och kursiv. */
-@font-face { font-family: 'Public Sans'; font-style: normal; font-weight: 400 800; font-display: swap; src: url('/fonts/public-sans-normal.woff2') format('woff2'); }
-@font-face { font-family: 'Public Sans'; font-style: italic; font-weight: 400 800; font-display: swap; src: url('/fonts/public-sans-italic.woff2') format('woff2'); }
+/* Texten står i läsarens eget typsnitt: Roboto på Android, San Francisco på iPhone och Mac, Segoe UI på Windows (Niclas
+   2026-10-01, K-137). Inget typsnitt hämtas, så sidan laddar fortare och texten hoppar aldrig när den laddas. Public
+   Sans prövades samma dag och var knappt 5 procent bredare; filerna sajten hade sedan 2026-09-21 saknade a till ö, så
+   nästan alla bokstäver har alltid stått i läsarens eget typsnitt; mellanslagen och radmåtten kom ur Public Sans. */
 
 /* Riktningen "Klar handbok" (2026-09-21): vit yta, mörkt sidhuvud, djupblå accent, ett sanstypsnitt,
    ljus blågrå ton för band och rutor, fyllda rubrikrader i tabeller. */
@@ -28,9 +28,9 @@
   --farg-skrivning: #6b2f6b;
   --farg-skrivning-ljus: #f1e6f1;
 
-  --typsnitt-brod: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --typsnitt-rubrik: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --typsnitt-ui: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --typsnitt-brod: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --typsnitt-rubrik: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --typsnitt-ui: system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   --matt-bredd: 68rem;
   --matt-text: 42rem;
@@ -40,10 +40,10 @@
 /* Elevens typsnitt på korten och elevens blad (Ljudlek i grupp, 2026-09-29): Andika från SIL, där a och g har en båge som
    när eleven skriver dem och l inte liknar I, som delmängden Ljudlek Elev med svenska tecken (14 KB, SIL Open Font License,
    licensen i public/fonts/ljudlek-elev/, gjord av scripts/elevtypsnitt.py). Webbläsaren hämtar filen bara på sidor där
-   något står i typsnittet (src/lib/ljudkort.ts). Reglerna står efter :root, eftersom delningskortens kontrollsumma omfattar början av filen till och med :root
+   något står i typsnittet (src/lib/ljudkort.ts). Reglerna står efter :root, eftersom delningskortens kontrollsumma omfattar det första :root-blocket
    (src/lib/delningskort.ts): typsnittet syns inte på korten och ska inte rita om dem. */
 @font-face { font-family: 'Ljudlek Elev'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/ljudlek-elev/LjudlekElev-Regular.woff2') format('woff2'); }
-:root { --typsnitt-elev: 'Ljudlek Elev', 'Andika', 'Public Sans', sans-serif; }
+:root { --typsnitt-elev: 'Ljudlek Elev', 'Andika', system-ui, sans-serif; }
 /* Boksidorna (lästexterna i Textsamtal i grupp, K-148): titeln i Cinzel och anfanget i Cinzel Decorative, samma
    delmängder som Word-filen bär (public/fonts/boksida/, OFL), och färgerna ur metodriggen, som i Word. Typsnitten hämtas
    först när en boksida visas. */

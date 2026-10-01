@@ -4,8 +4,10 @@
 // och raden över den (Stödundervisning · Matematik · åk 4–6, Krönika · Vi Lärare · 2024, Bok · Studentlitteratur
 // · 2021). Mallen är src/pages/delning/kort/[namn].astro, med färgerna och typsnittet ur global.css.
 //
-// Filnamnet bär en kontrollsumma av allt som syns på kortet: texten, mallen, designsystemets variabler, typsnittet
-// och bilden. En ändring ger alltså alltid en ny adress, korten kan cachas i ett år, och Facebook hämtar det nya
+// Filnamnet bär en kontrollsumma av allt som syns på kortet: texten, mallen, designsystemets variabler som mallen
+// läser (färgerna och typsnittet) och bilden. Texten står i datorns eget typsnitt (K-137), Segoe UI på Windows där
+// npm run validera ritar korten; ritas korten på en annan sorts dator, höj VERSION så att alla ritas om i samma typsnitt.
+// En ändring ger alltså alltid en ny adress, korten kan cachas i ett år, och Facebook hämtar det nya
 // kortet när sidan delas nästa gång. Det gamla kortet ligger kvar för inlägg som redan delats (K-053). scripts/delningskort.mjs ritar de kort som saknas med Chrome och lägger dem i
 // public/delning/ (npm run validera); npm run build stannar om ett kort saknas. En sida utan eget kort, till
 // exempel lathunden eller en taggsida, får närmaste överordnade sidas kort.
@@ -35,11 +37,14 @@ export interface Kort {
 const FARG: Record<string, string> = { Matematik: '--farg-accent', Läsning: '--farg-lasning', Skrivning: '--farg-skrivning' };
 const las = (sokvag: string) => readFileSync(join(process.cwd(), sokvag));
 
-// Designsystemets typsnitt och variabler: början av global.css till och med :root-blocket.
+// Designsystemets variabler som kortet läser: de som mallen nämner och strecket färgas med (FARG), med sina värden ur
+// :root-blocket i början av global.css. En ny variabel som kortet inte läser ritar alltså inte om korten (K-156).
 function designsystem(): string {
   const css = las('src/styles/global.css').toString('utf8').replace(/\r\n/g, '\n');
-  const start = css.indexOf('@font-face');
-  return css.slice(start, css.indexOf('\n}', css.indexOf(':root {')) + 2);
+  const start = css.indexOf(':root {');
+  const varden = new Map([...css.slice(start, css.indexOf('\n}', start)).matchAll(/(--[\w-]+):\s*([^;]+);/g)].map((m) => [m[1], m[2].trim()]));
+  const lasta = new Set([...las(MALL).toString('utf8').matchAll(/var\((--[\w-]+)\)/g)].map((m) => m[1]).concat(Object.values(FARG), '--farg-accent'));
+  return [...lasta].filter((v) => varden.has(v)).sort().map((v) => `${v}: ${varden.get(v)}`).join('\n');
 }
 
 // "Bråkkurs i grupp: förstå, räkna och tänka i bråk" blir titeln "Bråkkurs i grupp" och undertiteln
@@ -82,7 +87,7 @@ export function allaKort(): Promise<Kort[]> {
       lagg({ sida: `/stodundervisning/${m.id}`, typ: 'metod', etikett: `Stödundervisning · ${m.data.omrade} · ${arskursText(m.data)}`, titel, undertitel: undertitel || m.data.undertitel || '', bild: portratt, farg: FARG[m.data.omrade] ?? '--farg-accent' });
     }
 
-    const gemensamt = [String(VERSION), las(MALL).toString('utf8').replace(/\r\n/g, '\n'), designsystem(), las('public/fonts/public-sans-normal.woff2').toString('base64')];
+    const gemensamt = [String(VERSION), las(MALL).toString('utf8').replace(/\r\n/g, '\n'), designsystem()];
     const bilder = new Map<string, string>();
     const bildSumma = (b: string) => bilder.get(b) ?? bilder.set(b, createHash('sha256').update(las(join('public', b))).digest('hex')).get(b)!;
     return utan.map((k) => {

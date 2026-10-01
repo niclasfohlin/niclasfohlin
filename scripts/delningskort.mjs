@@ -94,6 +94,9 @@ try {
       // Typsnittet och bilderna ska vara inne innan kortet fotograferas.
       await skicka('Runtime.evaluate', { awaitPromise: true, expression: 'document.fonts.ready.then(() => Promise.all([...document.images].map((i) => i.complete ? 1 : new Promise((r) => { i.onload = i.onerror = r; })))).then(() => true)' });
       await vanta(80);
+      // Titeln klipps inte i mallen (K-156), så en titel på mer än tre rader skulle trycka ned resten av kortet.
+      const rader = (await skicka('Runtime.evaluate', { returnByValue: true, expression: '(() => { const t = document.querySelector(".dk-titel"); return t ? Math.round(t.getBoundingClientRect().height / parseFloat(getComputedStyle(t).lineHeight)) : 0; })()' })).result?.result?.value ?? 0;
+      if (rader > 3) throw new Error(`titeln "${k.titel}" behöver ${rader} rader på kortet; högst tre ryms. Korta titeln, eller sänk storleken för långa titlar i src/pages/delning/kort/[namn].astro`);
       const bild = await skicka('Page.captureScreenshot', { format: 'png', clip: { x: 0, y: 0, width: 1200, height: 630, scale: 1 } });
       if (!bild.result?.data) throw new Error('ingen bild');
       const jpg = await sharp(Buffer.from(bild.result.data, 'base64')).jpeg({ quality: 82, mozjpeg: true, chromaSubsampling: '4:4:4' }).toBuffer();
