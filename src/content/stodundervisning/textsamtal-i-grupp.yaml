@@ -155,7 +155,7 @@ tabeller:
         - Amina står vid staketet. Vad hade du gjort i hennes ställe? Varför?
       - - Öppna frågor
         - Ingenstans. Du har inte svaret själv, och gruppen tänker tillsammans med texten som grund
-        - Tröjan är mycket större än något Hiba har haft på sig. Vems kan den vara, och finns det fler sätt det kan vara?
+        - Tröjan är mycket större än något Hiba har haft på sig. Vems kan den vara? Kan den vara någon annans?
     not: Frågorna på bladet kommer ur texterna Den tomma plåten och Staketet på nivån Lättläst, och den öppna frågan ur Rum 4 på Mellan. Både mellan och bortom raderna kan ha flera svar som texten stöder.
   - rubrik: "Slagen: det eleven listar ut"
     plats: efter-inledning
@@ -176,7 +176,7 @@ tabeller:
         - vinter eller sen höst
       - - Känsla
         - hur någon känner sig, och hur känslan ändras
-        - Emma stod kvar vid grinden och vinkade tills bilen var liten, och sedan vinkade hon lite till.
+        - Emma stod kvar vid grinden och vinkade tills bilen bara var en liten prick, och sedan vinkade hon lite till.
         - hon saknar dem som åkte
       - - Varför
         - orsaken till något, eller vad någon vill
@@ -188,8 +188,8 @@ tabeller:
         - mycket snäll och generös
       - - Före och efter
         - det som hände innan, eller det som troligen händer sedan
-        - Bredvid en kopp choklad som fortfarande var varm låg en uppslagen tidning, och stolen stod snett ut från bordet.
-        - någon har nyss gått därifrån
+        - Bredvid en kopp choklad som fortfarande var varm låg en uppslagen tidning, och stolen stod utdragen från bordet.
+        - någon har nyss rest sig och gått därifrån
       - - Det som menas
         - vad någon egentligen menar när hen säger något annat
         - ”Jaja, den är bra”, sa Tim utan att lyfta blicken från spelet när lillasyster visade sin teckning.
@@ -2802,13 +2802,13 @@ lathund:
             - Vänta, här står inte allt.
         - tid: 13–26
           fas: 4 · Samtala om texten
-          vad: Ta en runda, mellan raderna-frågorna med veckans slag och en öppen fråga. Resten tar ni när tiden räcker.
+          vad: Ta en runda och sedan mellan raderna-frågorna av veckans slag, till exempel Känsla eller Vem. Ställ sist en öppen fråga, och ta resten när tiden räcker.
           fraser:
             - Hur vet du det?
             - Vem tänker annorlunda?
         - tid: 26–30
           fas: 5 · Avsluta
-          vad: Var och en säger en slutsats, en ledtråd och vad kamraten sa, i par när ni är fler än fyra. Efteråt skriver du noteringen, och i pass 3 fyller du i Veckans cykel.
+          vad: Var och en säger en slutsats, en ledtråd och vad kamraten sa, i par när ni är fler än fyra. Efteråt skriver du en kort notering i Veckans cykel, och efter pass 3 fyller du i resten av mallen.
   mall:
     rubrik: Korten vid bordet
     underrad: "Lärarens översikt · elevens kort står stort under Materialet"
@@ -2855,14 +2855,16 @@ lathund:
     rubrik: Vad du behöver för ett pass
     kravEtikett: Textkrav
     var:
-      rubrik: Var texterna finns
+      rubrik: Var texterna och bladen finns
       punkter:
         - fet: Metodens texter.
-          text: Femton texter på varje nivå, kartläggningens två och startmeningarna står under Materialet på metodens sida. Svaren och de öppna frågorna står under Lärarens sidor.
+          text: Femton texter på varje nivå, kartläggningens två och startmeningarna står under Materialet på metodens sida. Svaren, frågornas slag och de öppna frågorna står på lärarsidan till varje text.
         - fet: Serien Mellan raderna.
           text: Serien har fyra böcker hos Studentlitteratur, och en eller två passar efter varje nivå.
         - fet: Egna texter.
           text: Skriv dem med hjälp av tabellen Så skriver du en egen text på metodens sida.
+        - fet: Bladen.
+          text: Ledtrådsbladet, lyssningsbladet, mallen Veckans cykel och kartläggningens protokoll finns i planeringsmallarna.
     bordet:
       - Texten med frågorna till varje elev och till dig
       - Korten och samtalsreglerna vid varje plats
@@ -2870,12 +2872,12 @@ lathund:
       - Ledtrådsbladet i pass 2 och 3
       - Lyssningsbladet i pass 3
       - Tavla för startmeningen
-    varjePass: Du skriver en kort notering, och i pass 3 lyssningsbladet och Veckans cykel.
+    varjePass: Du skriver en kort notering i Veckans cykel efter varje pass.
 film:
   sekunder: 29.94
-  beskrivning: "I pass 1 stannar läraren vid stoppet. Läraren stryker under två ledtrådar. Läraren läser vidare."
+  beskrivning: "I pass 1 stannar läraren vid stoppet. Läraren säger: ”Vänta, här står inte vem som tog bullarna.” Läraren stryker under två ledtrådar. Läraren säger: ”Det står mormors stol, och hans händer är rena. Jag vet att den som äter bullar får kladdiga fingrar, och att man sätter sig där man äter. Alltså tror jag att det inte var lillebror.” Läraren läser vidare. Eleven säger: ”Jag tror att det var mormor! Hon torkar munnen.”"
   rubrik: "Så tänker du högt vid stoppet"
-  ingress: "Fyra bilder ur filmen om pass 1: du stannar, stryker under ledtrådarna, säger vad du vet och listar ut vem som tog bullarna, och sedan säger en elev vad hen tror, med en ledtråd till. Filmen på metodens sida visar samma sak i rörelse. De blå bubblorna är lärarens och den gula elevens."
+  ingress: "Fyra bilder ur filmen om pass 1: du stannar, stryker under ledtrådarna, säger vad du vet och drar slutsatsen att det inte var lillebror, och sedan säger en elev vad hen tror, med en ledtråd till. Filmen på metodens sida visar samma sak i rörelse. De blå bubblorna är lärarens och den gula elevens."
   stillbilder:
     - text: "Det står inte vem som tog bullarna, så läraren stannar."
     - text: "Läraren stryker under två ledtrådar och slår ihop dem."
@@ -2885,7 +2887,7 @@ filmer:
   - nr: 2
     titel: "Veckans cykel: från det du hör till det du visar"
     sekunder: 23.84
-    beskrivning: "Efter pass 3 läser du lyssningsbladet. Två elever gissade utan ledtråd. Steget som saknades var Det står. Du väljer tankesteget i Veckans cykel. I nästa veckas pass 1 visar du Det står extra noga. Du läser vidare, och Aron pekar själv på en ledtråd."
+    beskrivning: "Efter pass 3 läser du lyssningsbladet. Två elever gissade utan ledtråd. Steget som saknades var Det står. Du väljer tankesteget i Veckans cykel. I nästa veckas pass 1 visar du Det står extra noga. Du säger: ”Det står sågspån, och det står en blå fläck.” Du läser vidare, och Aron pekar själv på en ledtråd. Aron säger: ”Där står det ju!”"
     rubrik: "Veckans cykel: från det du hör till det du visar"
     ingress: "Fyra bilder ur filmen om det du gör efter pass 3: lyssningsbladet visar att två elever gissade utan ledtråd, och i nästa veckas pass 1 visar du därför Det står extra noga. Filmen på metodens sida visar samma sak i rörelse."
     efter: "tabell: Från det du hör till det du visar"
@@ -2897,7 +2899,7 @@ filmer:
   - nr: 3
     titel: "Pass 2: samtalet vid stoppet"
     sekunder: 29.81
-    beskrivning: "I pass 2 får eleverna tanketid vid stoppet. I gruppen ger eleverna olika svar."
+    beskrivning: "I pass 2 får eleverna tanketid vid stoppet. A säger: ”Jag tror att hon vill hem.” B frågar: ”Hur vet du det?” A säger: ”Hon frågar hur många nätter.” I gruppen ger eleverna olika svar. En kamrat säger: ”Jag tror att den luktar hemma. Jag hade mammas tröja.” En annan säger: ”Jag tänker annorlunda. Jag tror att den är pappas.” En tredje säger: ”Tänk om hon smyger hem? Hon packar tyst.” Läraren säger: ”Spännande! Den håller.” Den tredje säger: ”Hon ställer ner ryggsäcken. Hon stannar nog.”"
     rubrik: "Pass 2: samtalet vid stoppet"
     ingress: "Fyra bilder ur filmen om pass 2, med texten Rum 4. Efter tio sekunders tyst tanketid säger eleven ”Jag tror att” och visar ledtråden när kamraten frågar ”Hur vet du det?” I gruppen tar en kamrat med det hen har varit med om, en annan tänker annorlunda, och en ny idé håller tills texten säger något nytt. Bubblorna i bilderna är elevernas, och de grå staplarna är text som inte visas."
     efter: "tabell: Parsamtalet vid stoppet"
