@@ -16,6 +16,7 @@ import { ANDIKA_ADRESS, harElevtypsnitt, ljudform, upphovBilder } from '../lib/l
 import { arElevensBlad, lastexter, protokollDelas } from '../lib/ramform';
 import Filmruta from './Filmruta.astro';
 import Boksida from './Boksida.astro';
+import Ramindex from './Ramindex.astro';
 import { filmerVid, metodensFilmer, stegDelar, type FilmPlats } from '../lib/film';
 import type { SerieKoppling } from '../lib/serie';
 import type { MetodData } from '../lib/metod';
@@ -454,11 +455,15 @@ const meny = [
         <p class="m-efter">{andikaNamnt ? 'Ladda ner Andika' : 'Elevens material står i Andika, ett gratis typsnitt från SIL som är gjort för att vara lätt att läsa. Ladda ner det'} på <a href={ANDIKA_ADRESS}>software.sil.org/andika</a> och använd det när du gör egna kort och blad.</p>
       )}
       {bildUpphov && <p class="m-efter">{bildUpphov}</p>}
-      {/* Med fyra ramar eller fler (ett paket per årskurs, läslistorna, projekten) blir sidan lång: en rad med länkar till varje ram. */}
+      {/* Med fyra ramar eller fler (ett paket per årskurs, läslistorna, projekten, lästexterna) blir sidan lång: en
+          ordnad lista med länkar till varje ram (Ramindex.astro, K-152). PROVET: förslag A och B står båda i sidan, och
+          ?ramindex=b visar B; det andra tas bort när Niclas valt. */}
       {d.ramar.ramar.length >= 4 && (
-        <nav class="m-ramlankar" aria-label={`Hoppa till: ${d.ramar.rubrik}`}>
-          {d.ramar.ramar.map((r, i) => <>{i > 0 && <span aria-hidden="true">{'\u00a0· '}</span>}<a href={`#ram-${i + 1}`}>{hel(r.rubrik)}</a></>)}
-        </nav>
+        <>
+          <Ramindex ramar={d.ramar.ramar} rubrik={d.ramar.rubrik} farger={BOKNIVA} variant="a" />
+          <Ramindex ramar={d.ramar.ramar} rubrik={d.ramar.rubrik} farger={BOKNIVA} variant="b" />
+          <script is:inline>if (new URLSearchParams(location.search).get('ramindex') === 'b') document.documentElement.classList.add('ri-visa-b');</script>
+        </>
       )}
       {d.ramar.ramar.map((ram, ri) => boksidor.has(ram) ? (<>
         <Boksida l={boksidor.get(ram)!} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={BOKNIVA[boksidor.get(ram)!.nivaNr] ?? '#4b3a2f'} />

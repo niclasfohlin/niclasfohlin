@@ -1,0 +1,53 @@
+---
+// Materialets innehåll (K-152): ramarna som en ordnad lista, byggd ur rubrikerna och lästexterna (src/lib/ramindex.ts).
+// En lästext och dess lärarsida står på en rad under sin nivå, med textens nummer först. Förslag A fäller ut en nivå i
+// taget, förslag B visar allt. Listan finns bara på skärmen; utskriften gömmer den (global.css, .m-ramlankar).
+import { ramindex, type Indexrad } from '../lib/ramindex';
+import { ejBryt } from '../lib/metod';
+interface Props {
+  ramar: Parameters<typeof ramindex>[0];
+  rubrik: string;
+  /** Nivåernas färger, i den ordning nivåerna först kommer, som boksidornas knapp. */
+  farger: string[];
+  variant: 'a' | 'b';
+}
+const { ramar, rubrik, farger, variant } = Astro.props;
+const poster = ramindex(ramar);
+// "Åk 4–5" hålls ihop, som i ramarnas rubriker.
+const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 '));
+const antal = (n: number) => (n === 1 ? 'en text' : `${n} texter`);
+const arNummer = (s?: string) => !!s && /^\d+$/.test(s);
+---
+<nav class={`m-ramlankar ri ri-${variant}`} aria-label={`Hoppa till: ${rubrik}`}>
+  <ul class="ri-lista">
+    {poster.map((p) => {
+      if (p.typ === 'rad') return <li class="ri-post"><a class="ri-lank" href={`#ram-${p.rad.lank.nr}`}>{hel(p.rad.lank.namn)}</a></li>;
+      if (p.typ === 'led') return (
+        <li class="ri-post ri-led">
+          <span class="ri-ledrubrik">{hel(p.namn)}</span>
+          <ul>{p.rader.map((r) => <li><a class="ri-lank" href={`#ram-${r.lank.nr}`}>{hel(r.lank.namn)}</a></li>)}</ul>
+        </li>
+      );
+      const rader = (
+        <ol class="ri-texter">
+          {p.oversikt && <li class="ri-rad ri-oversikt"><span class="ri-nr" aria-hidden="true"></span><a class="ri-titel" href={`#ram-${p.oversikt.nr}`}>Översikt<span class="visually-hidden">: {p.oversikt.namn}</span></a></li>}
+          {p.rader.map((r: Indexrad) => (
+            <li class="ri-rad">
+              {arNummer(r.etikett)
+                ? <><span class="ri-nr">{r.etikett}</span><a class="ri-titel" href={`#ram-${r.lank.nr}`}>{r.lank.namn}</a></>
+                : <><span class="ri-nr" aria-hidden="true"></span><span class="ri-titel"><span class="ri-forled">{r.etikett}</span>{' '}<a href={`#ram-${r.lank.nr}`}>{r.lank.namn}</a></span></>}
+              {r.extra && <a class="ri-extra" href={`#ram-${r.extra.nr}`} aria-label={`${r.extra.etikett}, ${r.extra.namn}`}>{r.extra.etikett}</a>}
+            </li>
+          ))}
+        </ol>
+      );
+      return (
+        <li class="ri-post ri-niva" style={`--niva: ${farger[p.nivaNr] ?? 'var(--farg-accent)'}`}>
+          {variant === 'a'
+            ? <details><summary><span class="ri-nivanamn">{p.namn}</span><span class="ri-antal">{antal(p.rader.length)}</span></summary>{rader}</details>
+            : <><p class="ri-nivarubrik"><span class="ri-nivanamn">{p.namn}</span><span class="ri-antal">{antal(p.rader.length)}</span></p>{rader}</>}
+        </li>
+      );
+    })}
+  </ul>
+</nav>
