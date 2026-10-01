@@ -14,10 +14,14 @@ interface Props {
 }
 const { ramar, rubrik, farger } = Astro.props;
 const FALL_UT = 6;
+// Ett led som är längre än ledets spalt (omkring nio tecken, "Åk 4–5" ryms och "Kartläggning" inte) står på en egen rad
+// över sina ramar (granskningen 2026-10-01, K-156).
+const LANGT_LED = 9;
 const poster = ramindex(ramar);
-// "Åk 4–5" hålls ihop, som i ramarnas rubriker.
-const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 '));
-const texter = (n: number) => (n === 1 ? 'en text' : `${n} texter`);
+// "Åk 4–5" hålls ihop, som i ramarnas rubriker, och ett tal sist står kvar med ordet före ("Lördag klockan 14").
+const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 ')).replace(/ (\d{1,4})$/, ' $1');
+// Nivåns antal är dess numrerade texter, som metodens text räknar dem ("femton texter"), och alla rader om ingen är numrerad.
+const antal = (rader: Indexrad[]) => { const n = rader.filter((r) => /^\d+$/.test(r.etikett ?? '')).length || rader.length; return n === 1 ? 'en text' : `${n} texter`; };
 const arNummer = (s?: string) => !!s && /^\d+$/.test(s);
 ---
 <nav class="m-ramlankar ri" aria-label={`Hoppa till: ${rubrik}`}>
@@ -25,22 +29,23 @@ const arNummer = (s?: string) => !!s && /^\d+$/.test(s);
     {poster.map((p) => {
       if (p.typ === 'rad') return <li class="ri-post"><a class="ri-lank" href={`#ram-${p.rad.lank.nr}`}>{hel(p.rad.lank.namn)}</a></li>;
       if (p.typ === 'led') {
-        const lankar = <ul>{p.rader.map((r) => <li><a class="ri-lank" href={`#ram-${r.lank.nr}`}>{hel(r.lank.namn)}</a></li>)}</ul>;
-        return p.rader.length >= FALL_UT
-          ? <li class="ri-post ri-led-fall"><details><summary><span class="ri-nivanamn">{hel(p.namn)}</span></summary>{lankar}</details></li>
-          : <li class="ri-post ri-led"><span class="ri-ledrubrik">{hel(p.namn)}</span>{lankar}</li>;
+        // Länken bär ledet för den som läser länkarna för sig ("Läxa 1–5, Åk 1"), som Lärarens sida bär sin titel.
+        const lankar = <ul>{p.rader.map((r) => <li><a class="ri-lank" href={`#ram-${r.lank.nr}`}>{hel(r.lank.namn)}<span class="visually-hidden">, {p.namn}</span></a></li>)}</ul>;
+        if (p.rader.length >= FALL_UT) return <li class="ri-post ri-led-fall"><details><summary><span class="ri-nivanamn">{hel(p.namn)}</span></summary>{lankar}</details></li>;
+        return <li class={`ri-post ri-led${p.namn.length > LANGT_LED ? ' ri-led-lang' : ''}`}><span class="ri-ledrubrik">{hel(p.namn)}</span>{lankar}</li>;
       }
       return (
         <li class="ri-post ri-niva" style={`--niva: ${farger[p.nivaNr] ?? 'var(--farg-accent)'}`}>
           <details>
-            <summary><span class="ri-nivanamn ri-prick">{p.namn}</span><span class="ri-antal">{texter(p.rader.length)}</span></summary>
+            <summary><span class="ri-nivanamn ri-prick">{p.namn}</span><span class="ri-antal">{antal(p.rader)}</span></summary>
             <ol class="ri-texter">
               {p.oversikt && <li class="ri-rad"><span class="ri-nr" aria-hidden="true"></span><a class="ri-titel" href={`#ram-${p.oversikt.nr}`}>Översikt<span class="visually-hidden">: {p.oversikt.namn}</span></a></li>}
               {p.rader.map((r: Indexrad) => (
                 <li class="ri-rad">
+                  {/* Numret står för sig; kartläggningens namn står i länken, över titeln, så att länken säger vad den är och fyller raden. */}
                   {arNummer(r.etikett)
-                    ? <><span class="ri-nr">{r.etikett}</span><a class="ri-titel" href={`#ram-${r.lank.nr}`}>{r.lank.namn}</a></>
-                    : <><span class="ri-nr" aria-hidden="true"></span><span class="ri-titel"><span class="ri-forled">{r.etikett}</span>{' '}<a href={`#ram-${r.lank.nr}`}>{r.lank.namn}</a></span></>}
+                    ? <><span class="ri-nr">{r.etikett}</span><a class="ri-titel" href={`#ram-${r.lank.nr}`}>{hel(r.lank.namn)}</a></>
+                    : <><span class="ri-nr" aria-hidden="true"></span><a class="ri-titel" href={`#ram-${r.lank.nr}`}><span class="ri-forled">{r.etikett}</span>{' '}{hel(r.lank.namn)}</a></>}
                   {r.extra && <a class="ri-extra" href={`#ram-${r.extra.nr}`} aria-label={`${r.extra.etikett}, ${r.extra.namn}`}>{r.extra.etikett}</a>}
                 </li>
               ))}

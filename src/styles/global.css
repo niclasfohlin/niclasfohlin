@@ -830,8 +830,12 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 /* Ett led som flera ramar delar (Åk 1: talen 0–30, Åk 1: Läxa 1–5): ledet till vänster och ramarna under varandra. */
 .ri-led { display: grid; grid-template-columns: 5.25rem minmax(0, 1fr); align-items: start; }
 .ri-ledrubrik { padding: 0.75rem 0 0.5rem 0.9rem; font-weight: 700; }
-.ri-led li + li, .ri-led-fall li + li { border-top: 1px solid var(--farg-ton); }
+.ri-led li + li, .ri-led-fall li + li { border-top: 1px solid var(--farg-kant); }
 .ri-led .ri-lank { padding-left: 0.4rem; }
+/* Ett långt led (Kartläggning, Mentortexter) står på en egen rad över sina ramar i stället för i spalten (K-156). */
+.ri-led-lang { display: block; }
+.ri-led-lang .ri-ledrubrik { display: block; padding: 0.7rem 0.9rem 0.15rem; }
+.ri-led-lang .ri-lank { padding-left: 1.6rem; }
 .ri-led-fall .ri-lank { padding-left: 1.6rem; }
 /* Raden som fälls ut: namnet, antalet och en pil, som seriens meny. Nivån har en prick i nivåns färg, som knappen på
    boksidan, och en kant i samma färg längs sina texter. */
@@ -848,16 +852,16 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 /* Textens rad: numret, titeln (länken till texten) och lärarsidan. Kartläggningen har sitt namn ovanför titeln. */
 .ri-texter { padding: 0.2rem 0; border-left: 4px solid var(--niva); }
 .ri-rad { display: grid; grid-template-columns: 2.1rem minmax(0, 1fr) auto; align-items: center; column-gap: 0.55rem; min-height: 2.5rem; padding-right: 0.9rem; }
-.ri-rad + .ri-rad { border-top: 1px solid var(--farg-ton); }
+.ri-rad + .ri-rad { border-top: 1px solid var(--farg-kant); }
 .ri-nr { color: var(--farg-text-svag); font-size: 0.875rem; font-variant-numeric: tabular-nums; text-align: right; }
-.ri-titel { padding: 0.5rem 0; }
+.ri-titel { padding: 0.5rem 0; text-wrap: pretty; }
 a.ri-titel, .ri-titel a { color: var(--farg-accent); font-weight: 600; text-decoration: none; }
 .ri-forled { display: block; color: var(--farg-text-svag); font-size: 0.8rem; font-weight: 400; }
 .ri-extra { padding: 0.5rem 0 0.5rem 0.4rem; color: var(--farg-text-svag); font-size: 0.85rem; white-space: nowrap; text-decoration: underline; text-decoration-color: var(--farg-kant); }
 .ri-extra:hover { color: var(--farg-accent); text-decoration-color: currentColor; }
 /* På en bredare skärm står en nivås texter i två spalter, så att lärarsidan står nära sin titel. */
 @media (min-width: 48rem) {
-  .ri-texter { columns: 2; column-gap: 1.5rem; }
+  .ri-texter { columns: 2; column-gap: 2.5rem; column-rule: 1px solid var(--farg-kant); }
   .ri-rad { break-inside: avoid; }
   .ri-rad + .ri-rad { border-top: 0; }
 }
