@@ -17,19 +17,35 @@ interface Props {
 }
 const { l, id, ankare, farg } = Astro.props;
 const rader = (t: string) => t.split('\n');
-// Utskriften får Word-sidans mått ur samma uträkning (src/lib/boksida.ts): textens storlek i punkter, radavståndet som
-// höjd per storlek (Andikas enkla rad gånger Words multipel) och anfangets storlek, så att texten är en sida i båda.
-// Lättläst har en mening per rad i större text, löpande text står mindre, som i Word.
+// Måtten är Word-sidans, ur samma uträkning (src/lib/boksida.ts): textens storlek och radavstånd, anfangets storlek,
+// dess kolumn och rad, och vad som står bredvid bokstaven (två rader, som Niclas valde i riggen) och under den. Bredden
+// och höjden står i em av textens storlek, så att utskriften (texten i Words punkter) blir som Word och skärmen samma
+// form i sin storlek. Lättläst har en mening per rad i större text, löpande text står mindre, som i Word.
 const matt = boksidansMatt(l);
-const korta = matt.kortaRader;
-const stil = `--bok-niva: ${farg}; --bok-pt: ${matt.pt}pt; --bok-rad: ${(BOKRAD.Andika * matt.line / 240).toFixed(3)}; --bok-anfang: ${matt.storPt}pt`;
+const em = (twips: number) => `${(twips / 20 / matt.pt).toFixed(3)}em`;
+const stil = [
+  `--bok-niva: ${farg}`,
+  `--bok-pt: ${matt.pt}pt`,
+  `--bok-rad: ${(BOKRAD.Andika * matt.line / 240).toFixed(3)}`,
+  `--bok-kol: ${em(matt.kolW)}`,
+  `--bok-anfang-h: ${em(matt.anfangH)}`,
+  `--bok-anfang: ${(matt.storPt / matt.pt).toFixed(3)}em`,
+].join('; ');
+const ovriga = l.stycken.slice(1);
 const fraga = (f: string) => f.match(/^(\d+)\.\s*([\s\S]*)$/);
 ---
-<section class:list={['m-ram', 'boksida', { korta }]} id={id} style={stil}>
+<section class:list={['m-ram', 'boksida', { korta: matt.kortaRader }]} id={id} style={stil}>
   <div class="boksida-ram">
     <h3 id={ankare} class="boksida-titel"><span class="visually-hidden">{l.niva}, {l.vad}: </span>{l.titel}</h3>
     <div class="boksida-text">
-      {l.stycken.map((s) => <p>{rader(s).map((r, j) => <>{j > 0 && <br />}{r}</>)}</p>)}
+      {/* Anfanget som i Word: bokstaven i en egen kolumn och de två första raderna bredvid, resten i full bredd under.
+          Bokstaven är dold för skärmläsare och står kvar i ordet, så att ordet läses helt. */}
+      <div class="boksida-anfang">
+        <span class="boksida-kol" aria-hidden="true"><span class="boksida-bokstav">{matt.bokstav}</span></span>
+        <p><span class="visually-hidden">{matt.bokstav}</span>{rader(matt.delat.inne).map((r, j) => <>{j > 0 && <br />}{r}</>)}</p>
+      </div>
+      {matt.delat.rest && <p>{rader(matt.delat.rest).map((r, j) => <>{j > 0 && <br />}{r}</>)}</p>}
+      {ovriga.map((s) => <p>{rader(s).map((r, j) => <>{j > 0 && <br />}{r}</>)}</p>)}
     </div>
     {/* Numret är text, som i Word, där det står före frågan med en tabb, så att en fråga på flera rader står under sin början. */}
     <ol class="boksida-fragor">

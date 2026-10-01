@@ -48,8 +48,8 @@
    delmängder som Word-filen bär (public/fonts/boksida/, OFL), och färgerna ur metodriggen, som i Word. Typsnitten hämtas
    först när en boksida visas. */
 @font-face { font-family: 'Cinzel'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/boksida/Cinzel-dokument.ttf') format('truetype'); }
-@font-face { font-family: 'Cinzel Decorative'; font-style: normal; font-weight: 400 700; font-display: swap; src: url('/fonts/boksida/CinzelDecorative-dokument.ttf') format('truetype'); }
-:root { --bok-ram: #4b3a2f; --bok-rod: #8c2a1e; --bok-text: #2b2622; --bok-titel: #3a2d24; --bok-not: #8a8177; --bok-skiljare: #b9a894; }
+@font-face { font-family: 'Cinzel Decorative'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/boksida/CinzelDecorative-dokument.ttf') format('truetype'); }
+:root { --bok-ram: #4b3a2f; --bok-rod: #8c2a1e; --bok-text: #2b2622; --bok-titel: #3a2d24; --bok-not: #8a8177; --bok-skiljare: #b9a894; --bok-not-skarm: #645c53; }
 
 
 * { box-sizing: border-box; }
@@ -639,15 +639,25 @@ button.lank:hover { color: var(--farg-accent); }
 .boksida-ram { border: 4px double var(--bok-ram); padding: 1.5rem 2rem 1.75rem; background: #fff; color: var(--bok-text); }
 .boksida-titel { font-family: 'Cinzel', serif; font-weight: 400; font-size: 1.9rem; line-height: 1.25; color: var(--bok-titel); text-align: center; margin: 0 0 1.1rem; }
 .boksida-titel::after { content: ''; display: block; width: 3.5rem; margin: 0.4rem auto 0; border-bottom: 3px double var(--bok-rod); }
-.boksida-text, .boksida-fragor { font-family: var(--typsnitt-elev); font-size: 1.1rem; line-height: 1.55; }
+.boksida-text, .boksida-fragor { font-family: var(--typsnitt-elev); font-size: 1.1rem; line-height: var(--bok-rad, 1.55); }
 .boksida.korta .boksida-text, .boksida.korta .boksida-fragor { font-size: 1.3rem; }
 .boksida-text p { margin: 0 0 0.6em; }
-.boksida-text p:first-child::first-letter { font-family: 'Cinzel Decorative', serif; font-weight: 700; color: var(--bok-rod); float: left; font-size: 3.15em; line-height: 0.82; margin: 0.06em 0.08em 0 0; }
+/* Anfanget som i Word: bokstaven i en egen kolumn (--bok-kol), raden lika hög som i Word (--bok-anfang-h) med de två
+   första raderna bredvid, och resten i full bredd under. Typsnittet är Regular, och webbläsaren gör det fett, som Word. */
+.boksida-anfang { display: flex; align-items: flex-start; min-height: var(--bok-anfang-h); margin: 0; }
+.boksida-text .boksida-anfang p { margin: 0; }
+.boksida-kol { flex: 0 0 var(--bok-kol); }
+.boksida-bokstav { display: block; font-family: 'Cinzel Decorative', serif; font-weight: 700; color: var(--bok-rod); font-size: var(--bok-anfang); line-height: 1; margin-top: -0.06em; }
 .boksida-text::after { content: ''; display: block; width: 3rem; margin: 0.9rem auto 1rem; border-bottom: 1px solid var(--bok-skiljare); }
 .boksida-fragor { margin: 0; padding: 0; list-style: none; }
 .boksida-fragor li { display: grid; grid-template-columns: 1.6em 1fr; margin: 0 0 0.45em; }
 .boksida-fot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.3rem 1rem; font-size: 0.75rem; color: var(--bok-not); margin: 0.4rem 0 0; }
 .boksida-knapp { font-family: 'Cinzel', serif; font-size: 0.78rem; background: var(--bok-niva); color: #fff; padding: 0.1em 0.7em; white-space: nowrap; }
+/* På skärmen är raden Till läraren och knappen mörkare än i Word, så att kontrasten räcker (minst 4,5:1). */
+@media screen {
+  .boksida-fot { color: var(--bok-not-skarm); }
+  .boksida-knapp { background: color-mix(in srgb, var(--bok-niva) 80%, #000); }
+}
 @media (max-width: 40rem) {
   .boksida-ram { padding: 1rem 1.1rem 1.25rem; }
   .boksida-titel { font-size: 1.5rem; }
@@ -1251,7 +1261,16 @@ html.js .bara-js { display: inline-block; }
   .boksida-titel::after { width: 35mm; margin: 3pt auto 15pt; }
   .boksida-text, .boksida-fragor, .boksida.korta .boksida-text, .boksida.korta .boksida-fragor { font-size: var(--bok-pt); line-height: var(--bok-rad); }
   .boksida-text p { margin: 0 0 7.5pt; }
-  .boksida-text p:first-child::first-letter { font-size: var(--bok-anfang); line-height: 0.8; }
+  .boksida-text .boksida-anfang p { margin: 0; }
+  /* Lärarens sida (Metod.astro, en ram som heter Lärarens sida eller Lärarens sidor) på ett eget blad, lika tät som i Word,
+     där den ryms på ett A4: texten i 9 pt och fältens kolumner som Words 2300 och 7338 twips (granskningen 2026-10-01). */
+  .m-lararsida { break-before: page; break-inside: avoid; margin: 0; }
+  .m-lararsida > h3 { font-size: 14pt; margin: 0 0 4pt; }
+  .m-lararsida > p { font-size: 9.5pt; margin: 0 0 6pt; }
+  .m-lararsida .m-ramdel { font-size: 9pt; line-height: 1.32; margin: 0; }
+  .m-lararsida .m-ramdel h4 { font-size: 9.5pt; padding: 3pt 6pt; }
+  .m-lararsida .m-ramfalt > div { grid-template-columns: 24% minmax(0, 1fr); }
+  .m-lararsida .m-ramfalt dt, .m-lararsida .m-ramfalt dd { padding: 3pt 6pt; }
   .boksida-text::after { width: 16mm; margin: 5pt auto 15pt; }
   .boksida-fragor li { grid-template-columns: 24pt 1fr; margin: 0 0 5.5pt; }
   .boksida-fot { font-size: 7.5pt; margin-top: 1.5mm; }

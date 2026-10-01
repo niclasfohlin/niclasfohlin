@@ -106,6 +106,9 @@ const ramAnkare = (d.ramar?.ramar ?? []).map((r) => ankare(r.rubrik));
 // Lästexterna blir boksidor (Boksida.astro, K-148), med nivåns färg i den ordning nivåerna först kommer, som i Word.
 const boksidor = lastexter(d.ramar?.ramar ?? []);
 const BOKNIVA = ['#4e7a43', '#a8742a', '#6e3450'];
+// Lärarens sidor till lästexterna (riggens namn: Lärarens sida och Lärarens sidor) ryms på ett A4 i Word och får ett eget
+// blad i utskriften, lika tätt (global.css, .m-lararsida).
+const arLararsida = (ram: { rubrik: string }) => /^Lärarens sid(a|or)\b/.test(ram.rubrik);
 // En fri tabell med meny: true står i menyn efter avsnittet den ligger efter på sidan, med rubrikens första led som namn
 // (Ljudstarten, Dagens ljud och Ordbanken i Ljudlek i grupp, som läraren letar efter varje pass).
 const menyEfter: Record<string, string | undefined> = {
@@ -461,7 +464,7 @@ const meny = [
         <Boksida l={boksidor.get(ram)!} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={BOKNIVA[boksidor.get(ram)!.nivaNr] ?? '#4b3a2f'} />
         <Filmruta filmer={vid({ ram: ram.rubrik })} titel={d.titel} />
       </>) : (<>
-        <section class={`m-ram${protokollDelas(ram) ? ' delad' : ''}`} id={`ram-${ri + 1}`}>
+        <section class={`m-ram${protokollDelas(ram) ? ' delad' : ''}${arLararsida(ram) ? ' m-lararsida' : ''}`} id={`ram-${ri + 1}`}>
           <h3 id={ramAnkare[ri]}>{hel(ram.rubrik)}</h3>
           {ram.text.map((s) => <p>{s}</p>)}
           {arElevensBlad(ram) && <p class="m-efter">Bladet att lägga framför eleven, med stor text och bara det eleven läser, finns i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>}

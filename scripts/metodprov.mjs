@@ -253,6 +253,20 @@ if (bilder) {
         try { prova(execFileSync('pdftotext', ['-enc', 'UTF-8', join(mapp, 'utskrift.pdf'), '-'], { encoding: 'utf8' }).split('\f'), 'utskriften'); } catch { console.log('  obs  pdftotext saknas, boksidorna i utskriften är inte prövade'); }
         if (wordSidor) prova(wordSidor, 'Word');
       }
+      // Lärarens sidor (riggens ramar som heter Lärarens sida): varje sida står hel på ett blad, med rubriken och det sista
+      // fältet på samma sida, i utskriften och i Word (granskningen 2026-10-01: i utskriften delades de på två eller tre).
+      const lararsidor = (metod.ramar?.ramar ?? []).filter((ram) => /^Lärarens sida\b/.test(String(ram.rubrik ?? '')) && ram.delar?.length);
+      if (lararsidor.length) {
+        const norm = (s) => String(s).normalize('NFC').toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
+        const nycklar = lararsidor.map((ram) => ({ rubrik: ram.rubrik, delar: [norm(ram.rubrik), norm(ram.delar.at(-1).falt.at(-1).text).slice(-40)] }));
+        const prova = (sidor, var_) => {
+          const ns = sidor.map(norm);
+          const inteEn = nycklar.filter((k) => ns.filter((s) => k.delar.every((x) => s.includes(x))).length !== 1).map((k) => k.rubrik);
+          inteEn.length ? nej(`${var_}: ${inteEn.length} av ${lararsidor.length} lärarsidor står inte hela på ett blad (${inteEn.slice(0, 3).join('; ')}${inteEn.length > 3 ? ' …' : ''})`) : ok(`${var_}: ${lararsidor.length} lärarsidor, ett helt blad var`);
+        };
+        try { prova(execFileSync('pdftotext', ['-enc', 'UTF-8', join(mapp, 'utskrift.pdf'), '-'], { encoding: 'utf8' }).split('\f'), 'utskriften'); } catch { console.log('  obs  pdftotext saknas, lärarsidorna i utskriften är inte prövade'); }
+        if (wordSidor) prova(wordSidor, 'Word');
+      }
   console.log('       Läs bilderna som en lärare som ska köra passet i morgon: fet stil betyder rubrik, inget bryts så att det läses fel,');
   console.log('       likvärdiga saker ser likadana ut, det läraren behöver kommer först. Dela höga bilder i bitar innan du läser dem.');
       if (metod.lathund) {
