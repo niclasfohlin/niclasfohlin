@@ -10,14 +10,14 @@
     "datum": "2026-09-30"
   },
   "boksamtal-i-grupp": {
-    "kalla": "c614df4f7f33cd60",
+    "kalla": "0fd672ce5cca903b",
     "skalor": [
       1.35,
       1.35,
       1.1,
       1.35
     ],
-    "datum": "2026-09-30"
+    "datum": "2026-10-01"
   },
   "brakkurs-i-grupp": {
     "kalla": "a16f314045d4a29d",
@@ -30,24 +30,24 @@
     "datum": "2026-09-30"
   },
   "faktatextsamtal-i-grupp": {
-    "kalla": "ce0a8b0c211d8bc0",
+    "kalla": "88351f030a6621da",
     "skalor": [
       1.3,
       1.35,
       1.3,
       1.35
     ],
-    "datum": "2026-09-30"
+    "datum": "2026-10-01"
   },
   "laslistor-i-grupp": {
-    "kalla": "d78befc996082834",
+    "kalla": "0bae237b47497597",
     "skalor": [
       1.2,
       1.35,
       1.2,
       1.35
     ],
-    "datum": "2026-09-30"
+    "datum": "2026-10-01"
   },
   "ljudlek-i-grupp": {
     "kalla": "17d31892f952e88a",
@@ -89,6 +89,16 @@
     ],
     "datum": "2026-09-30"
   },
+  "textsamtal-i-grupp": {
+    "kalla": "2d9fbb1391214785",
+    "skalor": [
+      1.25,
+      1.35,
+      1.35,
+      1.3
+    ],
+    "datum": "2026-10-01"
+  },
   "til-i-grupp": {
     "kalla": "3c0ad4b9fe54b80b",
     "skalor": [
@@ -100,13 +110,13 @@
     "datum": "2026-09-30"
   },
   "upprepad-lasning": {
-    "kalla": "5668d73a16933a9c",
+    "kalla": "5ffb5dc4d27b94a9",
     "skalor": [
       1.3,
       1.35,
       1.05,
       1.35
     ],
-    "datum": "2026-09-30"
+    "datum": "2026-10-01"
   }
 }

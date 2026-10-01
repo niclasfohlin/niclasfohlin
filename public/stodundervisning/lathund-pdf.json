@@ -5,9 +5,9 @@
     "datum": "2026-09-30"
   },
   "boksamtal-i-grupp": {
-    "kalla": "673b19786c643297",
-    "pdf": "7705d15911e5bf87",
-    "datum": "2026-09-30"
+    "kalla": "252854275cff808c",
+    "pdf": "86fd2f362a9724bc",
+    "datum": "2026-10-01"
   },
   "brakkurs-i-grupp": {
     "kalla": "7736dcd8c8ab07cf",
@@ -15,14 +15,14 @@
     "datum": "2026-09-30"
   },
   "faktatextsamtal-i-grupp": {
-    "kalla": "196827340f08429b",
-    "pdf": "6c6723cadf58d7fb",
-    "datum": "2026-09-30"
+    "kalla": "48534109eeca2e9b",
+    "pdf": "0b2ac58ace413513",
+    "datum": "2026-10-01"
   },
   "laslistor-i-grupp": {
-    "kalla": "a283586013db4b30",
-    "pdf": "c3f38622eccb7428",
-    "datum": "2026-09-30"
+    "kalla": "8e71f62579199180",
+    "pdf": "8c677596634591c5",
+    "datum": "2026-10-01"
   },
   "problemlosning-i-grupp": {
     "kalla": "47b1fbb2da94cae7",
@@ -45,13 +45,18 @@
     "datum": "2026-09-30"
   },
   "upprepad-lasning": {
-    "kalla": "ad904778f2815957",
-    "pdf": "c4457a4e79e62f86",
-    "datum": "2026-09-30"
+    "kalla": "341471d04baf458c",
+    "pdf": "57ed9a0df60be89a",
+    "datum": "2026-10-01"
   },
   "ljudlek-i-grupp": {
     "kalla": "4ad3fa9c8c31373b",
     "pdf": "4922e4e619fec45b",
     "datum": "2026-09-30"
+  },
+  "textsamtal-i-grupp": {
+    "kalla": "8d2dd46779343e84",
+    "pdf": "0543223152277d23",
+    "datum": "2026-10-01"
   }
 }
