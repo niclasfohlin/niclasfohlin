@@ -4,7 +4,24 @@
 // I utskriften får den sitt riktiga mått på en liggande sida (global.css, .m-mall). Planeringsmallarna i Word är
 // förlagan att skriva ut.
 import { delnamn, lage, STANDARD_NAMNARE, TWIP_MM, type Mall } from '../lib/brak';
+import TECKENBREDD from '../data/teckenbredd.json';
 interface Props { mall: Mall }
+// Ett bandnamn i rader som ryms i bredden (mm), mätt med Andikas egna bredder (src/data/teckenbredd.json, samma som
+// Word-filen mäter med) och 2 procent för den feta stilen. Bandets text står i elevens typsnitt (global.css).
+const BAND_FS = 5.6;
+const BAND_RAD = BAND_FS * 1.25;
+const TECKEN = new Map([...TECKENBREDD.tecken].map((c, i) => [c, i]));
+const ANDIKA = (TECKENBREDD.bredd as Record<string, (number | null)[]>).Andika;
+const textBredd = (s: string, fs: number) => [...s].reduce((a, c) => a + (ANDIKA[TECKEN.get(c) ?? -1] ?? 600) / 1000, 0) * fs * 1.02;
+function radbryt(text: string, bredd: number, fs: number): string[] {
+  const ut: string[] = [];
+  let rad = '';
+  for (const ord of text.split(/\s+/).filter(Boolean)) {
+    const prov = rad ? `${rad} ${ord}` : ord;
+    if (rad && textBredd(prov, fs) > bredd) { ut.push(rad); rad = ord; } else rad = prov;
+  }
+  return rad || !ut.length ? [...ut, rad] : ut;
+}
 const m = Astro.props.mall;
 const r2 = (v: number) => Math.round(v * 100) / 100;
 const L = (m.langdCm ?? 26) * 10;
@@ -55,14 +72,18 @@ if (m.typ === 'flode') {
     const B = 15398 * TWIP_MM;
     const kb = m.komma ? 1000 * TWIP_MM : 0;
     const w = (B - kb) / kolumner.length;
-    const h = (m.typ === 'rutnat' && !m.fot ? 8000 : 7000) * TWIP_MM;
-    const band = 12;
+    // Bandet rymmer en rad. Ett långt kolumnnamn bryts i kolumnens bredd, bandet växer och rutorna under krymper lika
+    // mycket, som i Word (mattaTabell i src/lib/metoddocx.ts): Parets väg skrev annars namnen över varandra.
+    const etikettRader = kolumner.map((k) => radbryt(k, w - 5, BAND_FS));
+    const extra = (Math.max(1, ...etikettRader.map((r) => r.length)) - 1) * BAND_RAD;
+    const band = 12 + extra;
+    const h = (m.typ === 'rutnat' && !m.fot ? 8000 : 7000) * TWIP_MM - extra;
     const rader = m.rader ?? 1;
     let x = 0.5;
     kolumner.forEach((k, i) => {
       rutor.push({ x, y: 0.5, w, h: band, band: true });
       for (let r = 0; r < rader; r++) rutor.push({ x, y: 0.5 + band + (r * h) / rader, w, h: h / rader });
-      etiketter.push({ x: x + 2.5, y: 0.5 + band * 0.66, t: k, fs: 5.6, mitt: false });
+      etikettRader[i].forEach((t, j) => etiketter.push({ x: x + 2.5, y: 0.5 + 12 * 0.66 + j * BAND_RAD, t, fs: BAND_FS, mitt: false }));
       x += w;
       if (m.komma === i + 1) {
         etiketter.push({ x: x + kb / 2, y: 0.5 + band + h - 12, t: ',', fs: 40, mitt: true, komma: true });

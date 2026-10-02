@@ -180,6 +180,10 @@ for (const fil of filer) {
   // under (src/lib/metoddocx.ts, sagoblad). I metodens fil står de i samma fält, med en radbrytning emellan, så i Word
   // prövas delarna var för sig.
   const sagofalt = new Set((d.ramar?.ramar ?? []).flatMap((r, i) => (r.sagoform ? r.delar.flatMap((del, j) => del.falt.map((_, k) => `ramar.ramar.${i}.delar.${j}.falt.${k}.text`)) : [])));
+  // En tärning (en kortlista som heter Tärning och har sex kort, src/lib/sagoblad.ts) står med sina ord på skärmen men
+  // inte i utskriften, där sidan hänvisar till tärningen att vika i planeringsmallarna (granskningen 2026-10-02).
+  const arTarning = (l) => /^Tärning\b/i.test(l.rubrik ?? '') && (d.kort?.listor ?? []).some((t) => (l.rubrik ?? '').includes(t)) && l.rader.flat().filter((c) => String(c ?? '').trim()).length === 6;
+  const tarningar = (d.ramar?.ramar ?? []).flatMap((r, i) => (r.listor ?? []).map((l, j) => (arTarning(l) ? new RegExp(`^ramar\\.ramar\\.${i}\\.listor\\.${j}\\.`) : null)).filter(Boolean));
   const saknas = [];
   for (const { vag, text } of texter(d, '', [])) {
     if (lastextRader.some((r) => r.test(vag))) continue;
@@ -187,7 +191,7 @@ for (const fil of filer) {
     const n = norm(text);
     const iWord = u?.word === false || word.includes(n) || !!lastextRubrik.get(vag)?.every((del) => word.includes(del))
       || (sagofalt.has(vag) && text.split('\n').every((del) => word.includes(norm(del))));
-    const iUtskrift = u?.utskrift === false || tommaRamar.some((r) => r.test(vag)) || utskrift.includes(n);
+    const iUtskrift = u?.utskrift === false || tommaRamar.some((r) => r.test(vag)) || tarningar.some((r) => r.test(vag)) || utskrift.includes(n);
     provade++;
     if (!iWord || !iUtskrift) saknas.push(`    ${vag}: saknas i ${[!iWord && 'Word-filen', !iUtskrift && 'sidans utskrift'].filter(Boolean).join(' och ')}\n      ”${text.length > 110 ? `${text.slice(0, 110)}…` : text}”`);
   }

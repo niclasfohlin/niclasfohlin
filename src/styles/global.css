@@ -800,6 +800,8 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 /* Mattans fot står på elevens matta: i elevens typsnitt (K-130), som i Word. */
 .m-mall-fot p { font-family: var(--typsnitt-elev); }
 .m-mall-utskrift { display: none; }
+/* Mallens underrad (Paret och Sagorna på Parets väg), som i Word, över bilden. */
+.m-mall-underrad { margin: 0.25rem 0 0; }
 @page mall { size: A4 landscape; margin: 10mm; }
 /* Kortarken (vikkort, bokstavskort, bokstavskartan) med smal marginal, så att så många kort som möjligt ryms på ett A4
    (Niclas 2026-09-29), som i Word. Upphovet står i foten också här. */
@@ -1279,6 +1281,8 @@ html.js .bara-js { display: inline-block; }
   .m-mall:has(.oversikt) { page: auto; break-before: auto; }
   .m-mall:has(.oversikt) .m-mall-ram { display: none; }
   .m-mall-utskrift { display: block; }
+  /* Det som bara hör till skärmen: tärningarnas ord, när tärningen att vika finns i planeringsmallarna. */
+  .m-ej-utskrift { display: none; }
   .m-ramdel h4, .m-ramfalt dt, .m-diplom { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .m-tabell, .m-snabbmall, .m-bockar, .m-gor-undvik, .m-band, .m-ruta, .m-rutin, .m-grund, .m-motto { font-size: 9.5pt; }
   .m-tabell tr, .m-snabbmall tr, .m-bockar li, .m-gor-undvik, .m-band, .m-ruta, .m-rutin, .m-grund, .m-motto, .m-fraga { break-inside: avoid; }
