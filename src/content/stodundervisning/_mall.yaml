@@ -207,6 +207,11 @@ ramar:
       #   - rubrik: Läs orden, kolumn för kolumn
       #     kolumner: [Konsonant + vokal, Vokal + konsonant]
       #     rader: [[se, is], [så, os]]
+      # sagoform: ramen ritas i Word som ett blad i en sagobok (Skrivkurs: sagoboken), med kurbits, lindormen som ram och
+      # bildbankens bilder vid stationerna. form: vag, berg, portratt, kort, omslag, sida, forfattare eller skyltar; ram:
+      # lindorm eller slinga; bilder: bildbankens ord för stationerna i fältens ordning; sidor, radMm, rita och kortbilder
+      # efter behov. Fältens text är frågan och, efter en radbrytning, startorden. Sidan hänvisar till planeringsmallarna.
+      # sagoform: { form: vag, ram: lindorm, titel: Sagans väg, undertitel: fyra steg, bilder: [stjärna, vägspärr, glödlampa, regnbåge], sidor: 2 }
       delar:
         - rubrik: Del 1 · Hej
           falt:
