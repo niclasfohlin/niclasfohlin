@@ -35,6 +35,10 @@ const adress = metodAdress(site.url, m.id).replace(/^https?:\/\//, '');
 const serie = koppling?.serie;
 const lektion = koppling?.lektion;
 const antalLektioner = serie?.lektioner.length ?? 0;
+// Materialet i faktarutan är egenskaper, som Format: det viktigaste i korta delar på en rad, och en länk till rätt ställe
+// för resten, metodens materialavsnitt eller lathundens materialsida (Niclas 2026-10-02: "Viktigaste och en länk till
+// rätt ställe", och ingen punktlista som gör att rutan växer neråt).
+const materialLank = d.ramar ? '#ramar' : harLathund(d) ? `/stodundervisning/${m.id}/lathund#lathund-material` : undefined;
 ---
 
 <Base title={d.titel} description={d.ingress} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
@@ -60,7 +64,7 @@ const antalLektioner = serie?.lektioner.length ?? 0;
           {d.period && <><dt>Period</dt><dd>{d.period}</dd></>}
           {d.grupp && <><dt>Grupp</dt><dd>{d.grupp}</dd></>}
           {serie && !lektion && antalLektioner > 0 && <><dt>Lektioner</dt><dd><a href="#lektionsbank">{antalLektioner === 1 ? 'En' : antalLektioner} i lektionsbanken</a></dd></>}
-          {d.material.length > 0 && <><dt class="bred">Material</dt><dd class="bred">{d.material.join('. ')}.</dd></>}
+          {d.material.length > 0 && <><dt class="bred">Material</dt><dd class="bred">{d.material.join(', ')}{materialLank && <>{' · '}<a href={materialLank}>{'allt material'}</a></>}</dd></>}
           {d.uppdaterad && <><dt>Uppdaterad</dt><dd>{formateraDatum(d.uppdaterad)}</dd></>}
         </dl>
       </div>

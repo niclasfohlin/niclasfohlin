@@ -26,8 +26,12 @@ format: ["liten grupp", "par"]
 tid: 20 minuter per pass, två till tre pass i veckan
 period: Sex till åtta veckor
 grupp: Tre till åtta elever
+# Faktarutans material: egenskaper, inte meningar (Niclas 2026-10-02). Det viktigaste i högst sex korta delar, högst 40
+# tecken var och 110 tillsammans, utan punkt, komma eller kolon. De står på en rad, och sidan länkar till metodens
+# material för resten. Antal, A3 och liknande står i metodens text och lathunden.
 material:
-  - Vad som behövs, en rad per sak
+  - en kort text per pass
+  - tavla och pennor
 # Dagens datum när posten publiceras eller ändras.
 uppdaterad: 2026-01-01
 # id på andra metoder som hör ihop med denna. Lägg också in den här metoden hos dem.

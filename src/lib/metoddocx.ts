@@ -1571,7 +1571,8 @@ function faktaTabell(d: MetodData, serie?: SerieKoppling): Barn[] {
   if (d.grupp) korta.push(['Grupp', d.grupp]);
   if (serie && !serie.lektion && serie.serie.lektioner.length) korta.push(['Lektioner', `${serie.serie.lektioner.length === 1 ? 'En' : serie.serie.lektioner.length} i lektionsbanken`]);
   if (d.uppdaterad) korta.push(['Uppdaterad', datumText(d.uppdaterad)]);
-  if (d.material.length) langa.push(['Material', `${d.material.join('. ')}.`]);
+  // Materialet är egenskaper på en rad, som på sidan, och resten står under metodens material eller i lathunden.
+  if (d.material.length) langa.push(['Material', `${d.material.join(', ')}${d.ramar ? ` · allt material under ${d.ramar.rubrik}` : d.lathund ? ' · allt material i lathunden' : ''}`]);
   const etikett = 1500;
   const halv = Math.floor(BREDD / 2);
   const bredder = [etikett, halv - etikett, etikett, BREDD - halv - etikett];

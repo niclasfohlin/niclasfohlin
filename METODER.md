@@ -14,7 +14,7 @@ Schemat i `src/content.config.ts` är strikt: ett okänt fält, en tabellrad med
 
 | I kompendiet | Fält | Syns som |
 |---|---|---|
-| Rubrik, underrubrik, faktaruta (tid, period, grupp, material) | `titel`, `undertitel`, `tid`, `period`, `grupp`, `material`, `omrade`, `arskurs`, `taggar`, `format` | sidhuvud och faktaruta, kortet i metodbanken, lathundens faktarutor, docx-framsidan |
+| Rubrik, underrubrik, faktaruta (tid, period, grupp, material; materialet är egenskaper, högst sex korta delar på en rad utan meningar, och sidan länkar till metodens material eller lathunden för resten, Niclas 2026-10-02) | `titel`, `undertitel`, `tid`, `period`, `grupp`, `material`, `omrade`, `arskurs`, `taggar`, `format` | sidhuvud och faktaruta, kortet i metodbanken, lathundens faktarutor, docx-framsidan |
 | Egen ingress (skrivs av oss) | `ingress` | kortet, startsidan, nyhetsbrevet, description |
 | Inledande stycken | `inledning` | första stycket på sidan |
 | "Så fungerar insatsen", "Så sätter du ihop gruppen", principer | `upplagg`, `gruppen`, `principer` (rubrik, text) | rutor |

@@ -142,7 +142,15 @@ const stodundervisning = defineCollection({
     tid: z.string().optional(),
     period: z.string().optional(),
     grupp: z.string().optional(),
-    material: z.array(z.string()).default([]),
+    // Faktarutans material är egenskaper, som format (Niclas 2026-10-02: "Viktigaste och en länk till rätt ställe", och
+    // ingen lång punktlista som gör att rutan växer neråt): högst sex korta delar som står på en rad, utan meningar.
+    // Sidan länkar till metodens materialavsnitt eller lathunden för resten, och detaljerna står i metodens text.
+    material: z.array(z.string()
+      .max(40, 'En del i faktarutans material har högst 40 tecken: det viktigaste, som "tolv berättartärningar". Antal och detaljer står i metodens text.')
+      .refine((s) => !/[.,:;]/.test(s), 'En del i faktarutans material är en egenskap, inte en mening: en sak per del, utan punkt, komma, kolon eller semikolon.'))
+      .max(6, 'Faktarutans material har högst sex delar, det viktigaste. Allt material står i metodens materialavsnitt och lathunden.')
+      .refine((m) => m.join(', ').length <= 110, 'Faktarutans material ryms på några rader: högst 110 tecken tillsammans. Ta färre eller kortare delar.')
+      .default([]),
     uppdaterad: z.coerce.date().optional(),
     // id på andra metoder som hör ihop med denna.
     relaterade: z.array(z.string()).default([]),
