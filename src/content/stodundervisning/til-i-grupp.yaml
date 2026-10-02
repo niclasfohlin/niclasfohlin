@@ -52,7 +52,7 @@ tabeller:
     text: För elever från ungefär årskurs 3 fungerar en och samma kapitelbok bättre än en ny liten bok varje dag. Boken ska fortfarande vara lätt att avkoda, men innehållet får bära i flera dagar. Dagens text är då ett kapitel eller ett antal utvalda sidor som går att läsa på cirka tio minuter. Markera dagens sidor med ett bokmärke eller en lapp och skriv kapitlet i lässchemat i stället för en boktitel. Ni återkommer till samma bok varje dag tills den är utläst, och sedan väljer ni en ny.
     kolumner:
       - "F–2: en bok per dag"
-      - "Åk 3–6: ett kapitel per dag"
+      - "Åk 3–6: ett kapitel per dag"
     rader:
       - - Ny liten bok varje pass, ur en nivåindelad serie. Bild- och rubrikvandring i förberedelsen. Hela boken läses om hemma.
         - Samma kapitelbok tills den är utläst. Återblick på gårdagens kapitel i förberedelsen. Dagens kapitel läses om hemma. Sedan ny bok.
@@ -255,7 +255,7 @@ lathund:
   innehall: Text, skrivbok och lässchema i mappen hem varje dag
   metoden:
     text:
-      - "Lärarledd intensiv lästräning i liten grupp för elever som behöver stöd i avkodning och läsflyt. Varje elev läser en egen text på sin nivå medan läraren lyssnar på en i taget: en bok per dag för de yngre, ett kapitel om dagen ur en kapitelbok för åk 3–6. Samma dag läses texten en gång till hemma med en vuxen, och eleven skriver tre favoritmeningar."
+      - "Lärarledd intensiv lästräning i liten grupp för elever som behöver stöd i avkodning och läsflyt. Varje elev läser en egen text på sin nivå medan läraren lyssnar på en i taget: en bok per dag för de yngre, ett kapitel om dagen ur en kapitelbok för åk 3–6. Samma dag läses texten en gång till hemma med en vuxen, och eleven skriver tre favoritmeningar."
       - Det är den dubbla läsningen, i skolan och hemma, som gör metoden intensiv. Texten ska vara lätt nog för att eleven ska lyckas.
     ruta:
       rubrik: Tre saker att hålla fast vid
@@ -301,7 +301,7 @@ lathund:
     not: "När eleven fastnar: vänta, peka på första ljudet, ljuda tillsammans, säg ordet och läs om meningen. Ett steg i taget. Fler än ett fel av tio ord: byt nivå."
   pass:
     rubrik: "Vi kör ett pass: tre elever i årskurs 2"
-    textRubrik: Gruppen · tre elever, åk 2, egen bok var
+    textRubrik: Gruppen · tre elever, åk 2, egen bok var
     utskrift: Skriv ut passexemplet
     text:
       - Amir läser upp sina tre meningar från gårdagens bok. ”Du läste hela första meningen utan att stanna. Varför valde du den?” Läraren signerar lässchemat. Sedan Selma och Noor.
@@ -391,11 +391,11 @@ lathund:
       punkter:
         - fet: Nivåindelade serier för F–3.
           text: Kiwi, Stjärnsvenska och Beta Pedagog finns på de flesta skolor.
-        - fet: Lättläst för åk 4–6.
+        - fet: Lättläst för åk 4–6.
           text: "Innehållet ska passa åldern även när texten är lätt: Nypon, Hegas och liknande förlag."
         - fet: Material i flera nivåer, till exempel Mellan raderna.
           text: Samma berättelse i olika svårighetsgrad gör det lätt att byta nivå.
-        - fet: Kapitelbok för åk 3–6.
+        - fet: Kapitelbok för åk 3–6.
           text: Samma bok varje dag, ett kapitel eller utvalda sidor per pass, tills den är utläst. Sedan ny bok.
         - fet: Hellre för lätt än för svår.
           text: Det är omläsningen som ger flyt. En elev som fastnar på vart femte ord läser inte om.

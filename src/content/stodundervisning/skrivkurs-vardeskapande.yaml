@@ -2,7 +2,7 @@
 # Skriven 2026-09-25 ur författarens metodtexter Värdeskapande skrivprojekt och Mentortexter och
 # intaget (intake/skrivkurs-vardeskapande.md). Besluten står i methods/skrivkurs-vardeskapande/analys.md.
 titel: "Skrivkurs: värdeskapande skrivande"
-undertitel: Lärarledd skrivkurs i liten grupp där eleverna skriver för en verklig mottagare, för åk 4–9
+undertitel: Lärarledd skrivkurs i liten grupp där eleverna skriver för en verklig mottagare, för åk 4–9
 ingress: "Ett körschema för en skrivkurs i liten grupp där eleverna skriver något som en verklig mottagare ska läsa och använda. Varje vecka börjar med en mentortext: gruppen pekar ut ett skrivdrag och lånar det till sin egen text. Kursen slutar med att texterna möter sin läsare, i ett möte eller en utställning."
 omrade: Skrivning
 arskurs:
@@ -28,19 +28,19 @@ relaterade:
   - skrivkurs-berattelseram
 utkast: false
 inledning:
-  - "Det här är ett körschema för en skrivkurs i liten grupp där eleverna skriver för en verklig mottagare. Värdeskapande skrivande gör skrivandet meningsfullt och viktigt på riktigt: eleverna får skapa något som andra får läsa, använda, uppleva eller svara på. Du väljer ett skrivprojekt, till exempel en skattjakt för åk 2 eller en guidebok till närområdet. Varje vecka börjar med en mentortext, en kort text som visar eleverna hur en text är byggd innan de skriver sin egen. Gruppen läser den tillsammans, pekar ut ett skrivdrag och använder det i dagens skrivande. Kursen slutar med att texterna möter sin mottagare."
+  - "Det här är ett körschema för en skrivkurs i liten grupp där eleverna skriver för en verklig mottagare. Värdeskapande skrivande gör skrivandet meningsfullt och viktigt på riktigt: eleverna får skapa något som andra får läsa, använda, uppleva eller svara på. Du väljer ett skrivprojekt, till exempel en skattjakt för åk 2 eller en guidebok till närområdet. Varje vecka börjar med en mentortext, en kort text som visar eleverna hur en text är byggd innan de skriver sin egen. Gruppen läser den tillsammans, pekar ut ett skrivdrag och använder det i dagens skrivande. Kursen slutar med att texterna möter sin mottagare."
   - Börja med de tre orden i tabellen nedan och passets sex steg. De två färdiga projekten, en tom projektplan och mentortexterna att kopiera finns under Projekten, efter Kort om grunden.
 upplagg:
   rubrik: Så fungerar insatsen
   text: "Kursen går två till tre pass i veckan i fem till åtta veckor, med fyra till tio elever och 60 minuter per pass. Före kursen väljer du projekt, kontaktar mottagaren och bestämmer dagen då texterna ska möta sin läsare. Projektets text delas i delar, en del i veckan och två pass per del: dag 1 börjar med veckans mentortext, dag 2 skriver eleverna klart och jämför. Sista veckan möter texterna sin läsare. Efter varje pass gör du en kort notering om vem som använde draget och vad nästa pass behöver. Efter perioden utvärderar du om eleven kan läsa en ny text som skribent och använda ett drag i en text till en mottagare."
 gruppen:
   rubrik: Så sätter du ihop gruppen
-  text: "Presentera kursen i klasserna med projektet, ”En skrivkurs där vi gör en skattjakt åt åk 2”, och fråga vilka som vill vara med. Två till fyra elever som behöver stöd i skrivandet är valda i förväg, och två eller fler som redan skriver med flyt kommer med genom anmälan. Ingen vet vem som valts ut av vilket skäl. Alla i gruppen skriver för samma mottagare, och alla går en kurs."
+  text: "Presentera kursen i klasserna med projektet, ”En skrivkurs där vi gör en skattjakt åt åk 2”, och fråga vilka som vill vara med. Två till fyra elever som behöver stöd i skrivandet är valda i förväg, och två eller fler som redan skriver med flyt kommer med genom anmälan. Ingen vet vem som valts ut av vilket skäl. Alla i gruppen skriver för samma mottagare, och alla går en kurs."
 principer:
   rubrik: Tre saker att hålla fast vid
   text: "Ett skrivdrag i taget: en text rymmer mycket, men om allt blir fokus blir inget i fokus. Skrivdraget lånar vi, innehållet är vår egen uppgift: eleven behåller sitt innehåll och prövar samma sätt att nå läsaren som mentortexten. Och texterna ska nå sin läsare: ordna så att eleverna får se hur texten tas emot, i ett möte eller genom läsarens svar efteråt."
 tabeller:
-  - rubrik: Tre ord i kursen, med skattjakten för åk 2 som exempel
+  - rubrik: Tre ord i kursen, med skattjakten för åk 2 som exempel
     plats: efter-inledning
     kolumner:
       - Ordet
@@ -94,12 +94,12 @@ tabeller:
         - Hur börjar texten, hur hänger delarna ihop, hur slutar den?
       - - Språk
         - Vilka ord och meningar gör skillnad?
-  - rubrik: "Åk 4–6 och åk 7–9: det som skiljer"
+  - rubrik: "Åk 4–6 och åk 7–9: det som skiljer"
     plats: efter-urval
     kolumner:
       - Vad
-      - Åk 4–6
-      - Åk 7–9
+      - Åk 4–6
+      - Åk 7–9
     rader:
       - - Mentortexterna
         - Korta texter som du skriver själv eller hittar i barnböcker och vardagstexter.
@@ -175,7 +175,7 @@ steg:
       gor: Visa projektplanen och säg vem vi skriver till. Bestäm var draget ska in i dagens text. Skriv uppgiften på tavlan, kort och konkret.
       fraser:
         - Nu prövar vi samma drag, men med vårt eget innehåll.
-        - Åk 2 ska läsa själva. Vad behöver en åttaåring?
+        - Åk 2 ska läsa själva. Vad behöver en åttaåring?
         - Skriv tre meningar som får läsaren att gissa platsen utan att du säger vilken den är.
     - namn: Läraren skriver
       fraga: Hur kan det låta i vår text?
@@ -197,7 +197,7 @@ steg:
       fraser:
         - Lägg din text bredvid mentortexten. Gör den samma sak?
         - Berätta för din kamrat hur du använde draget.
-        - Kommer vårt budskap fram till åk 2?
+        - Kommer vårt budskap fram till åk 2?
 arbetsform:
   rubrik: "Arbetsform: gemensamt, läraren visar, enskilt, i par och gemensamt"
   text: Först arbetar gruppen gemensamt, där den läser mentortexten och paren markerar draget. Sedan skriver läraren på tavlan medan eleverna tänker. Därefter arbetar eleverna enskilt, och varje elev skriver sin egen text medan läraren stödjer. Till sist i par och gemensamt, där eleverna läser sin text för en kamrat bredvid mentortexten och några läser upp. Med fyra till tio elever hinner du läsa över axeln hos alla.
@@ -223,11 +223,11 @@ arbetsform:
 exempel:
   valt:
     rubrik: Gruppen
-    text: "fem elever i åk 5, skattjakten för åk 2, vecka 2, dag 1: ledtrådarna. Draget: säg allt utom namnet."
+    text: "fem elever i åk 5, skattjakten för åk 2, vecka 2, dag 1: ledtrådarna. Draget: säg allt utom namnet."
   text:
     - "Läraren visar veckans mentortext stor på tavlan, och varje par har en kopia: ”Här är det alltid varmt, fast det är vinter ute. Det luktar klor, och det ekar när någon ropar. Du går in torr och kommer ut blöt. Var är du?” Läraren läser högt och frågar vad texten handlar om. ”Simhallen!” säger Omar. ”Hur vet du det? Står ordet simhall någonstans?”"
     - "”Nu läser vi om texten, men den här gången tittar vi på hur den är byggd.” Paren stryker under de ord som avslöjade platsen. Selma och Hugo har strukit under klor och kommer ut blöt. ”Den säger vad man gör där, men aldrig vad det heter”, säger Mira. Läraren skriver tre iakttagelser på tavlan: lukten, ljudet, det man gör. ”Vad hade hänt om gåtan börjat: Simhallen är varm?” Ebba skrattar: ”Då är den ju redan löst.” Gruppen ger draget ett namn: säg allt utom namnet."
-    - "Läraren pekar på projektplanen. ”Åk 2 ska läsa era ledtrådar själva. Vad behöver en åttaåring?” Korta meningar och ord de känner, svarar gruppen. Läraren skriver dagens uppgift på tavlan: skriv ledtråden till din plats i tre meningar, och säg allt utom namnet. Sedan skriver läraren en ledtråd om biblioteket och tänker högt: ”Här är det tyst. Nej, det kan vara många ställen. Här får du låna men aldrig köpa.” Omar föreslår: ”Här finns tusen böcker.” Läraren frågar: ”Säger vi böcker gissar de direkt. Hur säger vi det utan ordet?”"
+    - "Läraren pekar på projektplanen. ”Åk 2 ska läsa era ledtrådar själva. Vad behöver en åttaåring?” Korta meningar och ord de känner, svarar gruppen. Läraren skriver dagens uppgift på tavlan: skriv ledtråden till din plats i tre meningar, och säg allt utom namnet. Sedan skriver läraren en ledtråd om biblioteket och tänker högt: ”Här är det tyst. Nej, det kan vara många ställen. Här får du låna men aldrig köpa.” Omar föreslår: ”Här finns tusen böcker.” Läraren frågar: ”Säger vi böcker gissar de direkt. Hur säger vi det utan ordet?”"
     - "Alla skriver ledtråden till sin plats. Hugo sitter stilla. Läraren frågar: ”Vad gör man i matsalen?” ”Man köar och äter.” ”Skriv det, men säg inte matsal.” Hugo skriver: ”Här står alla i kö för att bli mätta.” Selma är klar tidigt och skriver en ledtråd till."
     - "Till sist lägger alla sin ledtråd bredvid gåtan och läser den för en kamrat, som gissar. Miras ledtråd avslöjar platsen direkt, eftersom den säger ordet gympa. Mira stryker det och skriver om bollarna som studsar. Tre elever läser upp. Efteråt skriver läraren en kort notering: Hugo kom igång av frågan om vad man gör på platsen, Selmas ledtråd blir mentortext dag 2 om Selma säger ja, och Mira behöver draget en gång till."
 fastnar:
@@ -325,22 +325,22 @@ grund:
 ramar:
   rubrik: Projekten
   text:
-    - "Projekt 1, Skattjakt för åk 2, och projekt 2, Guidebok till närområdet, är färdiga. Projekt 3 är en tom projektplan. Gruppen gör ett projekt, och varje projekt är en hel kurs. Projektplanen börjar med en översikt vecka för vecka och projektets syfte, mottagare, samarbetspartner och möte. Sedan kommer en ruta för varje vecka: texten eleverna skriver, skrivhandlingen, skrivdraget, mentortexten att läsa dag 1, frågan som pekar på draget och det eleven bestämmer själv. Efter varje projektplan kommer mentortexterna som kopieringssidor, en mening per rad och utan draget utskrivet, eftersom det ska eleverna hitta."
+    - "Projekt 1, Skattjakt för åk 2, och projekt 2, Guidebok till närområdet, är färdiga. Projekt 3 är en tom projektplan. Gruppen gör ett projekt, och varje projekt är en hel kurs. Projektplanen börjar med en översikt vecka för vecka och projektets syfte, mottagare, samarbetspartner och möte. Sedan kommer en ruta för varje vecka: texten eleverna skriver, skrivhandlingen, skrivdraget, mentortexten att läsa dag 1, frågan som pekar på draget och det eleven bestämmer själv. Efter varje projektplan kommer mentortexterna som kopieringssidor, en mening per rad och utan draget utskrivet, eftersom det ska eleverna hitta."
     - "Välj projekt efter gruppen och efter vem ni kan nå. Frågor som hjälper: Vem kan vi skriva för? Vem kan ha glädje eller nytta av vår kunskap? Vem vill vi glädja, hjälpa eller påverka på något sätt? Börja enkelt, för redan små projekt kan göra stor skillnad. Kontakta mottagaren före kursen, bestäm dagen då texterna ska möta sin läsare och planera hur eleverna får se läsarens reaktion. Samla också information om mottagaren: vad är viktigt att tänka på när vi skriver till dem, och hur tar vi reda på det?"
   ramar:
-    - rubrik: "Projekt 1: Skattjakt för åk 2"
+    - rubrik: "Projekt 1: Skattjakt för åk 2"
       text:
-        - Gruppen gör en skattjakt på skolan åt en klass i åk 2. Varje elev i kursen har ett lag i åk 2 och en plats på skolan, och skriver inbjudan till laget, ledtråden till platsen, uppdraget som lagen gör där och en berättelse till laget. Projektet tar fem veckor, fyra delar och en vecka för mötet. Mentortexterna att kopiera kommer efter planen.
+        - Gruppen gör en skattjakt på skolan åt en klass i åk 2. Varje elev i kursen har ett lag i åk 2 och en plats på skolan, och skriver inbjudan till laget, ledtråden till platsen, uppdraget som lagen gör där och en berättelse till laget. Projektet tar fem veckor, fyra delar och en vecka för mötet. Mentortexterna att kopiera kommer efter planen.
         - "Så går skattjakten: varje lag får den första ledtråden av sin elev och går till den platsen. Vid varje plats gör laget uppdraget och får ledtråden till nästa plats. Lagen går samma runda men börjar på olika ställen. När ett lag har varit på alla platser får det ledtråden till skattkistan, där berättelserna ligger."
       huvud:
         - rubrik: Syfte
-          text: Sprida glädje och ge åk 2 en skattjakt som de läser själva.
+          text: Sprida glädje och ge åk 2 en skattjakt som de läser själva.
         - rubrik: Mottagare
-          text: En klass i åk 2, i lika många lag som kursen har elever.
+          text: En klass i åk 2, i lika många lag som kursen har elever.
         - rubrik: Samarbetspartner
-          text: "Klassläraren i åk 2: bestäm dag, tid och lag i god tid."
+          text: "Klassläraren i åk 2: bestäm dag, tid och lag i god tid."
         - rubrik: Mötet
-          text: Åk 2 går skattjakten i lag. Eleverna i kursen står vid sina platser och ser lagen läsa ledtrådarna och hitta rätt.
+          text: Åk 2 går skattjakten i lag. Eleverna i kursen står vid sina platser och ser lagen läsa ledtrådarna och hitta rätt.
       oversikt:
         kolumner:
           - Vecka, text och mentortext
@@ -360,13 +360,13 @@ ramar:
             - "Berätta: laget vill läsa till slutet"
             - Börja mitt i en händelse
           - - Vecka 5 · Skattjakten
-            - "Möta läsaren: åk 2 går skattjakten"
+            - "Möta läsaren: åk 2 går skattjakten"
             - "Inget nytt drag: elevernas texter är mentortexter"
       delar:
         - rubrik: Skattjakten, vecka 1 · Inbjudan
           falt:
             - rubrik: Texten
-              text: En inbjudan till laget, fyra till sex meningar. Dag 1 börjar med projektet och mottagaren, och inbjudan lämnas till åk 2 efter dag 2.
+              text: En inbjudan till laget, fyra till sex meningar. Dag 1 börjar med projektet och mottagaren, och inbjudan lämnas till åk 2 efter dag 2.
             - rubrik: Skrivhandling
               text: "Bjuda in: laget ska vilja komma och veta vad, när och var."
             - rubrik: Skrivdrag
@@ -440,11 +440,11 @@ ramar:
         - rubrik: Skattjakten, vecka 5 · Mötet
           falt:
             - rubrik: Dag 1
-              text: Elevernas egna texter är veckans mentortexter. Varje elev läser en kamrats ledtråd och uppdrag så som åk 2 skulle läsa dem, och säger vad som behöver ändras. Gruppen skriver ledtråden till skattkistan tillsammans. Texterna skrivs rent och berättelserna läggs i kistan.
+              text: Elevernas egna texter är veckans mentortexter. Varje elev läser en kamrats ledtråd och uppdrag så som åk 2 skulle läsa dem, och säger vad som behöver ändras. Gruppen skriver ledtråden till skattkistan tillsammans. Texterna skrivs rent och berättelserna läggs i kistan.
             - rubrik: Dag 2
-              text: Åk 2 går skattjakten. Varje elev står vid sin plats, ser lagen läsa ledtråden och ger dem uppdraget och nästa ledtråd. Sist hittar lagen skattkistan och sina berättelser.
+              text: Åk 2 går skattjakten. Varje elev står vid sin plats, ser lagen läsa ledtråden och ger dem uppdraget och nästa ledtråd. Sist hittar lagen skattkistan och sina berättelser.
             - rubrik: Läsarens svar
-              text: Be klassläraren i åk 2 låta eleverna skriva eller rita det bästa med skattjakten. Läs svaren med gruppen.
+              text: Be klassläraren i åk 2 låta eleverna skriva eller rita det bästa med skattjakten. Läs svaren med gruppen.
             - rubrik: Reflektera
               text: Hur kändes det att se laget läsa din ledtråd? Blev det som du tänkt? Hur har ditt skrivande utvecklats i projektet? Vad vill du göra annorlunda nästa gång? Tas en text inte emot som eleven ville, prata om det och stötta eleven i känslorna som kommer.
     - rubrik: "Mentortexterna till skattjakten, att kopiera"
@@ -723,7 +723,7 @@ lathund:
   innehall: En mentortext i veckan
   metoden:
     text:
-      - "Lärarledd skrivkurs för åk 4–9 i en blandad grupp: några elever behöver stöd i skrivandet, några skriver med flyt. Eleverna skriver för en verklig mottagare, till exempel en skattjakt för åk 2 eller en guidebok till närområdet. Projektets text skrivs en del i veckan, och kursen slutar med att texterna möter sin läsare."
+      - "Lärarledd skrivkurs för åk 4–9 i en blandad grupp: några elever behöver stöd i skrivandet, några skriver med flyt. Eleverna skriver för en verklig mottagare, till exempel en skattjakt för åk 2 eller en guidebok till närområdet. Projektets text skrivs en del i veckan, och kursen slutar med att texterna möter sin läsare."
       - "Varje vecka börjar med en mentortext. Gruppen läser den, pekar ut ett skrivdrag och lånar det till sin egen text. Stegtabellen visar tiderna dag 1 och dag 2. Dag 2 läser gruppen samma text igen, läraren visar en elevtext i stället för att skriva själv, och eleverna skriver klart."
     ruta:
       rubrik: Tre saker att hålla fast vid
@@ -754,12 +754,12 @@ lathund:
           - "”Lägg din text bredvid mentortexten. Gör den samma sak?”"
   pass:
     rubrik: "Vi kör ett pass: ledtrådarna, vecka 2"
-    textRubrik: Gruppen · fem elever, åk 5, skattjakt för åk 2
+    textRubrik: Gruppen · fem elever, åk 5, skattjakt för åk 2
     utskrift: Skriv ut passexemplet
     text:
       - "Gåtan på tavlan: ”Här är det alltid varmt, fast det är vinter ute. Det luktar klor, och det ekar när någon ropar. Du går in torr och kommer ut blöt. Var är du?” ”Simhallen!” säger Omar. ”Står ordet simhall där?”"
       - "Paren läser igen och stryker under det som avslöjar: klor, kommer ut blöt. Mira: ”Den säger vad man gör där.” Draget får ett namn: säg allt utom namnet."
-      - "”Åk 2 ska läsa själva. Vad behöver en åttaåring?” Uppgiften på tavlan: skriv ledtråden till din plats i tre meningar, säg allt utom namnet. Läraren skriver om biblioteket och ändrar högt: ”Här får du låna men aldrig köpa.”"
+      - "”Åk 2 ska läsa själva. Vad behöver en åttaåring?” Uppgiften på tavlan: skriv ledtråden till din plats i tre meningar, säg allt utom namnet. Läraren skriver om biblioteket och ändrar högt: ”Här får du låna men aldrig köpa.”"
       - "Alla skriver. Hugo fastnar tills läraren frågar vad man gör i matsalen. Hugo skriver: ”Här står alla i kö för att bli mätta.”"
       - "Alla läser sin ledtråd bredvid gåtan för en kamrat, som gissar. Miras ledtråd säger ordet gympa, och Mira stryker det. Notering: Hugo kom igång av frågan om vad man gör där."
     forberett:
@@ -820,7 +820,7 @@ lathund:
     var:
       rubrik: Var mentortexterna finns
       punkter:
-        - fet: Skattjakt för åk 2.
+        - fet: Skattjakt för åk 2.
           text: Kopieringssidan efter projektplanen. En inbjudan, en gåta, reglerna för en lek och början på en berättelse.
         - fet: Guidebok till närområdet.
           text: Kopieringssidan efter projektplanen. Ett torg, en väg, en runsten, ett tips och början på en kokbok.
@@ -839,11 +839,11 @@ lathund:
     varjePass: Notera vem som använde draget och vem som behöver stöd.
 film:
   sekunder: 25.71
-  beskrivning: "Läs mentortexten tillsammans. Vad handlar den om? Läs igen: vilka ord avslöjar platsen? Ge draget ett namn. Säg vem ni skriver till: åk 2 ska läsa själva. Skriv din egen ledtråd till åk 2, med draget. Läs ledtråden för en kamrat, som gissar."
+  beskrivning: "Läs mentortexten tillsammans. Vad handlar den om? Läs igen: vilka ord avslöjar platsen? Ge draget ett namn. Säg vem ni skriver till: åk 2 ska läsa själva. Skriv din egen ledtråd till åk 2, med draget. Läs ledtråden för en kamrat, som gissar."
   rubrik: "Så gör eleven"
   ingress: "Fyra bilder ur filmen om vad eleven gör vid bordet. Filmen på metodens sida visar samma sak i rörelse."
   stillbilder:
     - text: "Paren stryker under orden som avslöjar platsen."
     - text: "Gruppen ger draget ett namn: säg allt utom namnet."
-    - text: "Skriv din egen ledtråd till åk 2, med draget."
+    - text: "Skriv din egen ledtråd till åk 2, med draget."
     - text: "Läs för en kamrat, som gissar: matsalen!"

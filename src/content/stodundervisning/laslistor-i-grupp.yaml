@@ -700,7 +700,7 @@ lathund:
     not: "Bekräfta, korrigera och ge stöd direkt när det händer. Korrigera kort: säg rätt ljud och låt eleven läsa om hela ordet från början. Vid många fel: modellera ordet igen och körläs det på nytt."
   pass:
     rubrik: "Vi kör ett pass: vecka 5, konsonantmöten"
-    textRubrik: Gruppen · fyra elever, åk 1, Läslista 4
+    textRubrik: Gruppen · fyra elever, åk 1, Läslista 4
     utskrift: Skriv ut passexemplet
     text:
       - "Läraren modellerar fem ord ur första kolumnen: ”sss-t-eee-nnn. Sten. Här är det lätt att tappa ett ljud. Hör ni vilket?” Eleverna lyssnar."

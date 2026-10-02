@@ -1,13 +1,13 @@
 # Metod i stödundervisning. Modellen står i src/content.config.ts och mallen i _mall.yaml.
 # Skriven av scripts/metod-yaml.mjs ur skrivkurs-berattelseram.mjs. Ändra i YAML-filen eller kör om skriptet.
 titel: "Skrivkurs: gemensam berättelseram"
-undertitel: Lärarledd skrivkurs i liten grupp där varje elev skriver sin egen bok inom en gemensam ram, för åk 3–6
+undertitel: Lärarledd skrivkurs i liten grupp där varje elev skriver sin egen bok inom en gemensam ram, för åk 3–6
 ingress: "Ett körschema för en skrivkurs i liten grupp: alla skriver en berättelse i sex delar efter samma ram, men var och en sin egen bok. Elever som behöver stöd i att bygga en berättelse blandas med elever som skriver med flyt, och kursen är något man får vara med i. Varje pass: ramen, ett skrivfokus, berätta, skriva, dela."
 omrade: Skrivning
 arskurs:
   - F-3
   - 4-6
-arskursText: åk 3–6
+arskursText: åk 3–6
 taggar:
   - textstruktur
   - skrivstrategier
@@ -609,7 +609,7 @@ lathund:
     not: "Så sätter du ihop gruppen: presentera kursen i klasserna med skylt och diplom och fråga vilka som vill vara med. Två till fyra elever som behöver stöd är valda i förväg, två eller fler som skriver med flyt bjuds in. Alla i gruppen är utvalda."
   pass:
     rubrik: "Vi kör ett pass: In i skogen, del 3"
-    textRubrik: Gruppen · sex elever, åk 4, skrivfokus miljö med sinnena
+    textRubrik: Gruppen · sex elever, åk 4, skrivfokus miljö med sinnena
     utskrift: Skriv ut passexemplet
     text:
       - Läraren pekar på del 3 i ramen. ”I dag går era huvudpersoner in i skogen. Hur den är annorlunda bestämmer ni.” Leo läser meningen där hans huvudperson hittar dörren i berget.

@@ -1,7 +1,7 @@
 # Metod i stödundervisning. Modellen står i src/content.config.ts och mallen i _mall.yaml.
-# Texten är Niclas egen, ur kompendiet för läsförståelse åk 4–9 (2026).
+# Texten är Niclas egen, ur kompendiet för läsförståelse åk 4–9 (2026).
 titel: Faktatextsamtal i grupp
-undertitel: Lärarlett läsförståelsearbete med SO- och NO-texter för åk 4–9
+undertitel: Lärarlett läsförståelsearbete med SO- och NO-texter för åk 4–9
 ingress: Ett körschema för 30-minuterspass i liten grupp där eleverna läser en kort faktatext ur SO eller NO stycke för stycke, reder ut det som skaver, fångar kärnan med få ord och samtalar om vad författaren vill säga. Läraren ramar in, modellerar och håller samtalet igång med öppna frågor.
 omrade: Läsning
 arskurs:
@@ -314,7 +314,7 @@ lathund:
     not: Det är författarens jobb att skriva begripligt, inte elevens fel att texten är svår.
   pass:
     rubrik: "Vi kör ett pass: vattnets kretslopp"
-    textRubrik: Texten · cirka 100 ord, NO åk 4
+    textRubrik: Texten · cirka 100 ord, NO åk 4
     titel: Vattnet rör sig i naturen
     text:
       - Solen värmer vattnet i havet, i sjöar och i marken. När vattnet blir varmt avdunstar det. Då blir vattnet vattenånga och stiger uppåt i luften.

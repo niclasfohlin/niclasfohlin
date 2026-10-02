@@ -1,7 +1,7 @@
 # Metod i stödundervisning. Modellen står i src/content.config.ts och mallen i _mall.yaml.
 # Omarbetad 2026-09-24 efter Nämnaren-artikeln (underlag/metoder/namnaren-2026-09), besluten i NATTEN.md.
 titel: Problemlösning i grupp
-undertitel: Lärarledd problemlösning och läsförståelse i liten grupp för åk 4–9
+undertitel: Lärarledd problemlösning och läsförståelse i liten grupp för åk 4–9
 ingress: Ett körschema för 20-minuterspass i liten grupp där eleverna läser, tolkar och löser matematiska problem i text. Läraren leder, modellerar och frågar i stället för att visa lösningen. Samma rutin varje gång, två till tre pass i veckan under sex till åtta veckor.
 omrade: Matematik
 arskurs:
@@ -75,7 +75,7 @@ tabeller:
           (Säfström m.fl., 2024; Lithner m.fl., 2025)
         - Lyssna efter var eleven fastnar, i tolkningen, utforskningen, lösningsidén eller omsättningen, och rikta stödet dit.
       - - |-
-          Vägledning om problemlösning i åk 4–8
+          Vägledning om problemlösning i åk 4–8
           (Woodward m.fl., 2012)
         - Starkt forskningsstöd för att undervisa om visuella representationer och för att låta eleverna övervaka och reflektera över sin problemlösning. Syns i jämförelsen, i att sätta ord på strategin och i valet av bild, tabell, tallinje eller material.
 passrutin:
@@ -221,7 +221,7 @@ roll:
 urval:
   rubrik: Var hittar du problemen?
   text:
-    - Problemen behöver du inte hitta på själv. De finns i läromedlets problemlösningsavsnitt, i Skolverkets Problembank åk 4–6 på Lärportalen, i Nämnarens Problemavdelning och bland Kängurutävlingens tidigare problem med lösningar på NCM:s webbplats. Ett problem är en uppgift där eleven inte direkt vet hur den ska lösas (Skolverket, 2022).
+    - Problemen behöver du inte hitta på själv. De finns i läromedlets problemlösningsavsnitt, i Skolverkets Problembank åk 4–6 på Lärportalen, i Nämnarens Problemavdelning och bland Kängurutävlingens tidigare problem med lösningar på NCM:s webbplats. Ett problem är en uppgift där eleven inte direkt vet hur den ska lösas (Skolverket, 2022).
   kravText: "Välj ett problem per pass som är rikt men kontrollerat och uppfyller tre krav:"
   krav:
     - rubrik: Matematiskt fokus
@@ -343,7 +343,7 @@ lathund:
             ”Hur kan vi kontrollera att svaret passar frågan?”
   pass:
     rubrik: "Vi kör ett pass: ljusstakarna på slottet"
-    textRubrik: Problemet · åk 4
+    textRubrik: Problemet · åk 4
     text:
       - På ett slott finns 29 ljusstakar. Några ljusstakar har plats för fem ljus och några har plats för sju ljus. Sammanlagt behövs 187 ljus.
       - Hur många ljusstakar finns det av varje sort?
@@ -431,8 +431,8 @@ lathund:
       rubrik: Var problemen finns
       punkter:
         - fet: Läromedlets problemlösningsavsnitt
-          text: för åk 4 till 9.
-        - fet: Skolverkets Problembank åk 4–6
+          text: för åk 4 till 9.
+        - fet: Skolverkets Problembank åk 4–6
           text: på Lärportalen.
         - fet: Nämnarens Problemavdelning
           text: och Kängurutävlingens tidigare problem med lösningar på NCM:s webbplats.
