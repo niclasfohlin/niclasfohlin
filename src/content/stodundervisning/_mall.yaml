@@ -6,17 +6,19 @@
 # Ett värde som innehåller kolon följt av mellanrum skrivs inom citattecken.
 # Repliker och citat står inom ” och ”, och citatet stängs i samma stycke: bygget stannar när citattecknen inte går
 # jämnt ut i ett stycke (en radbrytning \n börjar ett nytt).
+# "åk" och siffran efter skrivs med hårt mellanslag (U+00A0), som i undertiteln nedan, så att raden inte kan brytas
+# mellan dem: bygget stannar på "åk" med vanligt mellanslag före en siffra.
 
 titel: Metodens namn
 # Raden under rubriken: vad metoden är och för vem.
-undertitel: Lärarledd insats i liten grupp för åk 4–9
+undertitel: Lärarledd insats i liten grupp för åk 4–9
 ingress: Två till fyra meningar om vad metoden tränar och hur den används. Egen text som fungerar ensam i ett kort och i ett nyhetsbrev.
 # Exakt ett av: Matematik, Läsning, Skrivning
 omrade: Läsning
 # Minst ett av: F-3, 4-6, 7-9. Filtret i metodbanken använder nivåerna.
 arskurs: ["4-6", "7-9"]
-# Valfritt: årskursen som läsaren ser när nivåerna inte säger det exakt, t.ex. åk 3–6.
-# arskursText: åk 3–6
+# Valfritt: årskursen som läsaren ser när nivåerna inte säger det exakt, t.ex. åk 3–6.
+# arskursText: åk 3–6
 # id från src/data/taggar.json. Återanvänd före att lägga till.
 taggar: ["lasforstaelse"]
 # Valfritt antal av: enskilt, par, liten grupp, helklass
@@ -285,7 +287,7 @@ lathund:
     # not: cremefärgad not under tabellen
   pass:
     rubrik: "Vi kör ett pass: texten ”Titeln”"
-    textRubrik: Texten · cirka en sida, åk 4
+    textRubrik: Texten · cirka en sida, åk 4
     titel: Titeln
     text:
       - Exempeltexten eller problemet, ett stycke per rad.
