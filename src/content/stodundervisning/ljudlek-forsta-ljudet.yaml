@@ -19,11 +19,12 @@ tid: "30 minuter per pass, tre till fem pass i veckan"
 period: "Åtta till tolv pass i följd"
 grupp: "2–12 elever"
 material:
-  - "Bildkorten under Materialet, två ark på en sida: arket för gruppens rad, ett per par och ett till dig, ditt gärna i A3"
-  - "Bokstavskorten under Materialet och en spegel per par"
-  - "En whiteboardtavla, en penna och en trasa per elev, eller papper och penna"
-  - "Bokstavskartan i Ljudlek i grupp, en per par, till den som inte kan skriva bokstaven än"
-  - "Snabbmallen före och efter passet"
+  - bildkorten
+  - bokstavskorten
+  - speglar
+  - whiteboardtavlor
+  - bokstavskartan
+  - snabbmallen
 uppdaterad: "2026-09-30"
 utkast: false
 serie: "ljudlek-i-grupp"

@@ -19,11 +19,12 @@ tid: "30 minuter per pass, tre till fem pass i veckan"
 period: "Fyra till tolv pass i följd"
 grupp: "2–12 elever"
 material:
-  - "Bildkorten under Materialet: arket för gruppens rad, ett per par och ett till dig, ditt gärna förstorat till A3"
-  - "Platsrutorna i planeringsmallarna, laminerade, och en knapp som markör, en whiteboardpenna och en trasa per elev"
-  - "Två magneter till tavlan, en till kortet och en till markören"
-  - "Bokstavskorten under Materialet och en spegel per par"
-  - "Bokstavskartan i Ljudlek i grupp, en per par, och snabbmallen"
+  - bildkorten
+  - platsrutorna
+  - whiteboardpennor
+  - magneter
+  - bokstavskorten
+  - bokstavskartan
 uppdaterad: "2026-09-30"
 utkast: false
 serie: "ljudlek-i-grupp"

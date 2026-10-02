@@ -21,13 +21,12 @@ tid: 30 minuter per pass, tre pass i veckan
 period: Fem veckor
 grupp: Två till sex elever
 material:
-  - "Tiobas: centikuber, tiostavar och hundraplattor, en sats per par och en för läraren"
-  - Talbrickor med gruppens talsorter
-  - Lekpengar i enkronor, tiokronor, hundralappar och tusenlappar
-  - En talsortsmatta per elev och veckans kort ur gruppens paket
-  - Papper, penna och sifferkort 0–9 per par
-  - En tärning per par till Klar tidigt
-  - Ett tiobaspaket per elev att ta hem
+  - tiobas
+  - talbrickor
+  - lekpengar
+  - talsortsmatta
+  - veckans kort
+  - sifferkort och tärning
 uppdaterad: 2026-09-25
 relaterade:
   - problemlosning-i-grupp

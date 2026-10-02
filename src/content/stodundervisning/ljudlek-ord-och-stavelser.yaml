@@ -19,11 +19,12 @@ tid: "30 minuter per pass, tre till fem pass i veckan"
 period: "Högst en vecka, tre till fem pass"
 grupp: "2–12 elever"
 material:
-  - "Bildkorten under Materialet: arket för gruppens rad, ett per par och ett till dig"
-  - "Sex klossar eller knappar per elev och sex till dig"
-  - "Stavelsekorten under Materialet, en sats till dig"
-  - "Bokstavskorten under Materialet och en spegel per par"
-  - "Snabbmallen för noteringen efter passet"
+  - bildkorten
+  - klossar eller knappar
+  - stavelsekorten
+  - bokstavskorten
+  - speglar
+  - snabbmallen
 uppdaterad: "2026-09-30"
 utkast: false
 serie: "ljudlek-i-grupp"

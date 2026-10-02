@@ -19,10 +19,11 @@ tid: "30 minuter per pass, tre till fem pass i veckan"
 period: "Högst en vecka, tre till fem pass"
 grupp: "2–12 elever"
 material:
-  - "Rimkorten under Materialet, ett ark per par och ett till dig, ditt gärna förstorat till A3"
-  - "Restkorten under Materialet"
-  - "Bokstavskorten under Materialet och en spegel per par"
-  - "Snabbmallen för noteringen efter passet"
+  - rimkorten
+  - restkorten
+  - bokstavskorten
+  - speglar
+  - snabbmallen
 uppdaterad: "2026-09-30"
 utkast: false
 serie: "ljudlek-i-grupp"

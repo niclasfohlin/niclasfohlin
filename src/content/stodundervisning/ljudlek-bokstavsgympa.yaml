@@ -20,10 +20,11 @@ tid: "30 minuter per pass, tre till fem pass i veckan"
 period: "Oftast fyra till sex veckor, tills gruppen har haft bokstaven t"
 grupp: "2–12 elever"
 material:
-  - "Golvbokstäverna under Materialet, de bokstäver som gruppen har haft, laminerade och med halkskydd"
-  - "Bokstavskorten under Materialet och en spegel per par"
-  - "Bokstavskartan i Ljudlek i grupp, laminerad, en per elev, och din whiteboardpenna"
-  - "Snabbmallen för noteringen efter passet"
+  - golvbokstäverna
+  - bokstavskorten
+  - speglar
+  - bokstavskartan
+  - snabbmallen
 uppdaterad: "2026-09-30"
 utkast: false
 serie: "ljudlek-i-grupp"
