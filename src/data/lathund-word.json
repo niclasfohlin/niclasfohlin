@@ -1,6 +1,6 @@
 {
   "antalsuppfattning-i-grupp": {
-    "kalla": "7d2145a3161c63b1",
+    "kalla": "209d7c2b1c730a1e",
     "skalor": [
       1.25,
       1.35,
@@ -10,7 +10,7 @@
     "datum": "2026-10-02"
   },
   "boksamtal-i-grupp": {
-    "kalla": "6fec8d87263d574c",
+    "kalla": "cc03bdc5b27b096c",
     "skalor": [
       1.35,
       1.35,
@@ -20,7 +20,7 @@
     "datum": "2026-10-02"
   },
   "brakkurs-i-grupp": {
-    "kalla": "1e4ca896db3c2279",
+    "kalla": "5adecb412a2f4255",
     "skalor": [
       1.15,
       1.35,
@@ -30,7 +30,7 @@
     "datum": "2026-10-02"
   },
   "faktatextsamtal-i-grupp": {
-    "kalla": "931df3a98b68cfe9",
+    "kalla": "242e0b405d125498",
     "skalor": [
       1.3,
       1.35,
@@ -40,7 +40,7 @@
     "datum": "2026-10-02"
   },
   "laslistor-i-grupp": {
-    "kalla": "94945b4b1fbb6a0d",
+    "kalla": "a9e88fe43ecdc4c9",
     "skalor": [
       1.2,
       1.35,
@@ -50,7 +50,7 @@
     "datum": "2026-10-02"
   },
   "ljudlek-i-grupp": {
-    "kalla": "2f12788c59f5fbf9",
+    "kalla": "4adec05abdaca979",
     "skalor": [
       1.25,
       1.35,
@@ -60,7 +60,7 @@
     "datum": "2026-10-02"
   },
   "problemlosning-i-grupp": {
-    "kalla": "7d858d0980b32680",
+    "kalla": "23ef3a9574e853da",
     "skalor": [
       1.35,
       1.35,
@@ -70,7 +70,7 @@
     "datum": "2026-10-02"
   },
   "skrivkurs-berattelseram": {
-    "kalla": "72fed12c0433369c",
+    "kalla": "dd624613dc161a1a",
     "skalor": [
       1.2,
       1.35,
@@ -80,7 +80,7 @@
     "datum": "2026-10-02"
   },
   "skrivkurs-sagoboken": {
-    "kalla": "15ce92ca92475f22",
+    "kalla": "9b368580eba2b449",
     "skalor": [
       1.25,
       1.35,
@@ -90,7 +90,7 @@
     "datum": "2026-10-02"
   },
   "skrivkurs-vardeskapande": {
-    "kalla": "95c5857963097cc9",
+    "kalla": "e1e51e5ea7b98709",
     "skalor": [
       1.3,
       1.35,
@@ -100,7 +100,7 @@
     "datum": "2026-10-02"
   },
   "textsamtal-i-grupp": {
-    "kalla": "9843af44836b587e",
+    "kalla": "c26ab836d8796bea",
     "skalor": [
       1.25,
       1.3,
@@ -110,7 +110,7 @@
     "datum": "2026-10-02"
   },
   "til-i-grupp": {
-    "kalla": "47b0e4bbb2d03b0e",
+    "kalla": "f07028b70d146324",
     "skalor": [
       1.2,
       1.35,
@@ -120,7 +120,7 @@
     "datum": "2026-10-02"
   },
   "upprepad-lasning": {
-    "kalla": "d2c79852e8410f6c",
+    "kalla": "54ff5696b5c89666",
     "skalor": [
       1.3,
       1.35,
