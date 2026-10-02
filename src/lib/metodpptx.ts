@@ -119,6 +119,8 @@ function bilder(d: MetodData) {
     kallorEfter: l.material.var.efter,
     bord: l.material.bordet,
     checklista: d.checklista?.punkter ?? [],
+    // Rubriken ur metoden, som på sidan och i Word: Skrivkurs: sagoboken heter Checklista inför kursen (K-173).
+    checklistaRubrik: versaler(d.checklista?.rubrik ?? 'Checklista inför passet'),
     uppfoljning: [
       ...(d.uppfoljning?.rader ?? []).map((r) => `**${r.nar}:** ${r.vad}`),
       ...(l.material.varjePass ? [`**Varje pass:** ${l.material.varjePass}`] : []),
@@ -196,7 +198,9 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
   const plain = (t: any) => String(t ?? '').replace(/\*\*/g, '');
   // Uppskattad texthöjd i 16:9-bildens tum, tilltagen. Raderna räknas på den verkliga bredden (wIn gånger sx) och
   // den verkliga graden (size gånger grad), och höjden förs tillbaka till bildens tum (delat med sy).
-  const estLines = (t: any, wIn: number, size: number) => { const cpl = Math.max(8, Math.floor(wIn * sx * 72 / (size * grad * 0.52))); return Math.max(1, Math.ceil(plain(t).length / cpl)); };
+  // En radbrytning (\n) i texten börjar en ny rad: i Skrivkurs: sagobokens mall står stationen och frågan i samma cell,
+  // och raden fick en rads höjd, så att frågan klipptes av raden under (K-168, riggens estHCell).
+  const estLines = (t: any, wIn: number, size: number) => { const cpl = Math.max(8, Math.floor(wIn * sx * 72 / (size * grad * 0.52))); return Math.max(1, plain(t).split('\n').reduce((a, rad) => a + Math.max(1, Math.ceil(rad.length / cpl)), 0)); };
   const estH = (t: any, wIn: number, size: number, gap = 0) => estLines(t, wIn, size) * size * grad * 1.25 / 72 / sy + gap;
 
   function header(s: any, title: string, right: string, idx: number) {
@@ -384,6 +388,10 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
     header(s, b.titel, 'MALLEN', 3);
     rect(s, 0, 0.66, W, 0.44, BAND); rect(s, 0, 1.08, W, 0.02, INK);
     txt(s, b.bandVanster ?? '', 0.21, 0.76, 7.2, 0.25, { mono: true, size: 12, color: GREY });
+    // Underraden står på en rad i bandet, och en längre bryts och klipps av bandet (riggens varning för sagoboken
+    // 2026-10-02, K-168). Consolas är 0,55 gånger graden bred.
+    const bandTecken = Math.floor(7.2 * sx * 72 / (12 * grad * 0.55));
+    if ((b.bandVanster ?? '').length > bandTecken) varna(`bild 3: underraden har ${b.bandVanster.length} tecken, och bandet rymmer ${bandTecken}: korta lathund.mall.underrad`);
     txt(s, b.bandHoger ?? '', 6.6, 0.76, 6.5, 0.25, { mono: true, size: 12, color: GREY, align: 'right' });
     // Mattans och kortets fot är regeln för eleven: en rad, större text, inte fet.
     const regel = b.typ === 'matta' || b.typ === 'lista';
@@ -576,6 +584,18 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
     if (radEm < 0.9) varna(`bild 4: raderna i rutan "På bordet" står för tätt (${radEm.toFixed(2)} gånger teckengraden, minst 0,9): färre eller kortare källor eller rader på bordet`);
     darkBox(s, 'PÅ BORDET NÄR PASSET BÖRJAR', 0.46, bordY, 6.17, bordH);
     b.bord.forEach((t, i) => txt(s, t, 0.61 + (i % 2) * 3.03, bordY + 0.46 + Math.floor(i / 2) * rh, 2.95, rh, { size: 12 }));
+    // Varje sak har en fast rad, så en sak som behöver fler rader än raden rymmer går in i saken under i samma spalt
+    // (riggens varning för sagoboken 2026-10-02, K-168). Raderna räknas med Calibris medelbredd, 0,47 gånger graden:
+    // uppskattningen ovan är tilltagen och larmade på saker som ryms på en rad. Står raderna redan för tätt har rutan
+    // fått sin varning.
+    if (radEm >= 0.9) {
+      const radHojd = (12 * grad * 1.25) / 72 / sy;
+      const tecken = Math.max(8, Math.floor((2.95 * sx * 72) / (12 * grad * 0.47)));
+      b.bord.forEach((t, i) => {
+        const rader = Math.ceil(t.length / tecken);
+        if (i + 2 < b.bord.length && rader * radHojd > rh + 0.02) varna(`bild 4: "${t.slice(0, 40)}" på bordet tar ${rader} rader och går in i saken under: korta raden i lathund.material.bordet`);
+      });
+    }
 
     let ry = top + 0.16;
     let radH = 0.33, chkSize = 11.75, upSize = 12;
@@ -587,7 +607,7 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
     if (b.checklista.length) {
       const hs = chkRader();
       const chkH = 0.5 + hs.reduce((a, x) => a + x, 0) + 0.1;
-      darkBox(s, 'CHECKLISTA INFÖR PASSET', 7.27, ry, 5.6, chkH);
+      darkBox(s, b.checklistaRubrik, 7.27, ry, 5.6, chkH);
       let cy = ry + 0.46;
       b.checklista.forEach((t, i) => { txt(s, `☐  ${t}`, 7.43, cy, 5.4, hs[i], { size: chkSize }); cy += hs[i]; });
       ry += chkH + 0.22;
