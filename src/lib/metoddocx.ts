@@ -272,6 +272,16 @@ function ordBredd(ord: string, halvpunkter: number, o: { fet?: boolean; kursiv?:
   const em = [...ord].reduce((s, c) => s + (c === '⁠' ? 0 : (tabell[TECKENINDEX.get(c) ?? -1] ?? 600) / 1000), 0);
   return em * (andika && o.fet ? 1.02 : 1) * (storl(halvpunkter) ?? halvpunkter) * 10;
 }
+// Antalet rader en text tar i en bredd (twips), när Word bryter vid mellanslag.
+function radantal(text: string, bredd: number, halvpunkter: number, o: { fet?: boolean; kursiv?: boolean; font?: string } = {}): number {
+  const mellan = ordBredd(' ', halvpunkter, o);
+  let rader = 1, x = 0;
+  for (const ord of text.split(/\s+/).filter(Boolean)) {
+    const w = ordBredd(ord, halvpunkter, o);
+    if (x && x + mellan + w > bredd) { rader++; x = w; } else x += (x ? mellan : 0) + w;
+  }
+  return rader;
+}
 // En kolumn blir minst så bred som sitt längsta ord (K-139): Word och Google bryter annars ordet mitt i, utan
 // bindestreck ("Personbeskrivni/ng" i Berättelseramens lathund). Word bryter efter ett bindestreck och efter ett
 // tankstreck utan ordfog, så leden räknas för sig; ett mellanslag efter strecket delar dem, eftersom filen också körs i
@@ -1758,7 +1768,13 @@ function mattaTabell(kolumner: string[], o: { komma?: number; hojd: number; rade
   const utan = runt(INGEN_KANT);
   const antal = o.rader ?? 1;
   const huvud = rad(delar.map((x) => (x.komma ? cell([], { bredd: x.w, kanter: utan }) : cell([stycke(x.k, { fet: true, storlek: 32, efter: 0 })], { bredd: x.w, fyll: FARG.ljus, kanter: ram }))), { huvud: true, hojd: o.bandHojd });
-  const kropp = Array.from({ length: antal }, (_, r) => new TableRow({ cantSplit: true, height: { value: Math.floor(o.hojd / antal), rule: HeightRule.EXACT }, children: delar.map((x) => new TableCell({
+  // Bandet rymmer en rad. Bryts ett långt kolumnnamn (Parets väg i Skrivkurs: sagoboken, kartläggningens protokoll i
+  // Textsamtal i grupp, K-153) krymper raderna under lika mycket som bandet växer, så att mallen står på en sida och ingen
+  // rad hamnar ensam på nästa. Raderna räknas med typsnittets bredder (ordBredd) och enkla radhöjd (ENKEL_RAD).
+  const bandRader = Math.max(1, ...delar.filter((x) => !x.komma).map((x) => radantal(x.k, x.w - 240, 32, { fet: true })));
+  const extra = (bandRader - 1) * Math.round((ENKEL_RAD[ELEVFONT ?? 'Calibri'] ?? ENKEL_RAD.Calibri) * 16 * 20);
+  const kroppHojd = Math.max(antal * 400, o.hojd - extra);
+  const kropp = Array.from({ length: antal }, (_, r) => new TableRow({ cantSplit: true, height: { value: Math.floor(kroppHojd / antal), rule: HeightRule.EXACT }, children: delar.map((x) => new TableCell({
     width: { size: x.w, type: WidthType.DXA },
     borders: x.komma ? utan : ram,
     verticalAlign: VerticalAlign.BOTTOM,
