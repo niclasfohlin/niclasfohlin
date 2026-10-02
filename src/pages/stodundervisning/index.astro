@@ -220,17 +220,17 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
         const { metoder } = (await svar.json()) as { metoder: { id: string; data: unknown }[] };
         const poster = ids.map((id) => metoder.find((m) => m.id === id)).filter((m): m is { id: string; data: unknown } => Boolean(m));
         if (poster.length !== ids.length) throw new Error('En vald metod saknas i metoder.json. Sidan och datan kommer från olika byggen.');
-        const [{ metodDokument }, { Packer }, ljud, reserv, ramform] = await Promise.all([import('../../lib/metoddocx'), import('docx'), import('../../lib/ljudkort'), import('../../lib/reservbild'), import('../../lib/ramform')]);
+        const [{ metodDokument }, { Packer }, ljud, reserv, ramform, saga] = await Promise.all([import('../../lib/metoddocx'), import('docx'), import('../../lib/ljudkort'), import('../../lib/reservbild'), import('../../lib/ramform'), import('../../lib/sagoblad')]);
         // Ljudlekens kort har bilder och elevens typsnitt (src/lib/ljudkort.ts): de hämtas innan filen byggs, som bygget
         // läser dem från disken.
         const valda = poster as Parameters<typeof metodDokument>[0];
         // cache: 'no-cache' frågar alltid servern om filen har ändrats, så att den samlade filen aldrig byggs av en äldre bild.
         const hamta = async (adress: string) => { const svar = await fetch(adress, { cache: 'no-cache' }); if (!svar.ok) throw new Error(`${adress} svarade ${svar.status}`); return new Uint8Array(await svar.arrayBuffer()); };
-        const bildvagar = [...new Set(valda.flatMap((p) => ljud.metodensBilder(p.data, p.id)))];
+        const bildvagar = [...new Set(valda.flatMap((p) => [...ljud.metodensBilder(p.data, p.id), ...saga.sagoBilder(p.data)]))];
         const bilder = new Map(await Promise.all(bildvagar.map(async (b) => [b, await hamta(b)] as const)));
         const elevtypsnitt = valda.some((p) => ljud.harElevtypsnitt(p.data)) ? await hamta(ljud.ELEVTYPSNITT_TTF) : undefined;
-        // Boksidornas typsnitt (lästexterna, src/lib/ramform.ts), när någon vald metod har lästexter.
-        const boktypsnitt = valda.some((p) => ramform.harLastexter(p.data)) ? { cinzel: await hamta(ramform.BOKTYPSNITT_TTF.cinzel), dekor: await hamta(ramform.BOKTYPSNITT_TTF.dekor) } : undefined;
+        // Boksidornas och sagobladens typsnitt (src/lib/ramform.ts, src/lib/sagoblad.ts), när någon vald metod har dem.
+        const boktypsnitt = valda.some((p) => saga.harBoktypsnitt(p.data)) ? { cinzel: await hamta(ramform.BOKTYPSNITT_TTF.cinzel), dekor: await hamta(ramform.BOKTYPSNITT_TTF.dekor) } : undefined;
         // Reservbilderna (src/lib/reservbild.ts): filen byggs först en gång för att se vilka bilder den har, och varje
         // bilds reservbild hämtas som bygget ritade den ur samma SVG, som när filerna byggs vid bygget.
         const behovet = reserv.samlaReservbilder();

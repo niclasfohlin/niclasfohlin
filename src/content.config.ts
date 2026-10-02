@@ -3,6 +3,7 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import taggarData from './data/taggar.json';
 import publikationerData from './data/publikationer.json';
+import bildbankData from './data/bildbank.json';
 import { BAGE, ordgrupper, utanStod } from './lib/lasflyt';
 import { EFTER_FORMER, HOGST_EXTRAFILMER, platsFel, tolkaEfter } from './lib/film';
 
@@ -343,6 +344,25 @@ const stodundervisning = defineCollection({
         })).optional(),
         huvud: z.array(ramFalt).optional(),
         delar: z.array(z.strictObject({ rubrik: text, falt: z.array(ramFalt).min(1) })).min(1),
+        // Sagoformen (Skrivkurs: sagoboken, Niclas 2026-10-02: mallarna ska kännas som sagor, med kurbits överst och en
+        // drake som ram, och "Du behåller såklart all snygg design på alla mallar"): ramen ritas i Word som blad i en
+        // sagobok (sagoblad i src/lib/metoddocx.ts, ornamenten i src/lib/sagoform.js, båda ur metodriggen). form: vag
+        // (sagans väg), berg (Spänningsberget), portratt (hjältens kort), kort (listorna som kort, två på ett A4), omslag,
+        // sida och forfattare (bokens blad, utan sidfot), skyltar (vägskyltarna, två på ett A4). ram: lindorm eller
+        // slinga (förval). bilder: bildbankens ord för stationerna, i fältens ordning. sidor: sagans väg på flera blad.
+        // radMm: radernas höjd. rita: en ruta att rita i bredvid raderna. kortbilder: stationens rundel i stället för
+        // radens nummer, per lista och rad (null ger en prick).
+        sagoform: z.strictObject({
+          form: z.enum(['vag', 'berg', 'portratt', 'kort', 'omslag', 'sida', 'forfattare', 'skyltar']),
+          ram: z.enum(['lindorm', 'slinga']).optional(),
+          titel: z.string().optional(),
+          undertitel: z.string().optional(),
+          bilder: z.array(z.string()).optional(),
+          sidor: z.number().int().min(1).max(4).optional(),
+          radMm: z.number().min(5).max(20).optional(),
+          rita: z.boolean().optional(),
+          kortbilder: z.record(z.string(), z.array(z.string().nullable())).optional(),
+        }).optional(),
       })).min(1),
       efter: z.string().optional(),
     }).optional(),
@@ -561,6 +581,15 @@ const stodundervisning = defineCollection({
       else if (x && typeof x === 'object') for (const [k, v] of Object.entries(x)) citat(v, [...sti, k]);
     };
     citat(d, []);
+    // Sagoformens bilder finns i bildbanken, och kortbilder nämner ramens egna listor, annars saknas rundeln på bladet.
+    const iBildbanken = (ord: string) => !!(bildbankData as { ord: Record<string, string> }).ord[ord.trim().toLowerCase()];
+    (d.ramar?.ramar ?? []).forEach((r, ri) => {
+      const s = r.sagoform;
+      if (!s) return;
+      const sti = ['ramar', 'ramar', ri, 'sagoform'];
+      for (const ord of [...(s.bilder ?? []), ...Object.values(s.kortbilder ?? {}).flat()]) if (ord && !iBildbanken(ord)) ctx.addIssue({ code: 'custom', path: sti, message: `Bilden "${ord}" finns inte i bildbanken (public/bildbank/ och src/data/bildbank.json).` });
+      for (const lista of Object.keys(s.kortbilder ?? {})) if (!(r.listor ?? []).some((l) => l.rubrik === lista)) ctx.addIssue({ code: 'custom', path: sti, message: `kortbilder nämner listan "${lista}", som ramen inte har.` });
+    });
   }),
 });
 

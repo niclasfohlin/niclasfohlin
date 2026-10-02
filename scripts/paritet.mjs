@@ -176,12 +176,17 @@ for (const fil of filer) {
     const m = arLastext(r) && String(r.rubrik).match(/^([^,:]+), ([^:]+): (.+)$/);
     return m ? [[`ramar.ramar.${i}.rubrik`, [norm(`${m[1]} ${m[2]}`), norm(m[3])]]] : [];
   }));
+  // Ett sagoblad (sagoform) har fältets fråga och startord på var sin plats: startorden efter stationens namn och frågan
+  // under (src/lib/metoddocx.ts, sagoblad). I metodens fil står de i samma fält, med en radbrytning emellan, så i Word
+  // prövas delarna var för sig.
+  const sagofalt = new Set((d.ramar?.ramar ?? []).flatMap((r, i) => (r.sagoform ? r.delar.flatMap((del, j) => del.falt.map((_, k) => `ramar.ramar.${i}.delar.${j}.falt.${k}.text`)) : [])));
   const saknas = [];
   for (const { vag, text } of texter(d, '', [])) {
     if (lastextRader.some((r) => r.test(vag))) continue;
     const u = UNDANTAG.find((x) => x.vag.test(vag));
     const n = norm(text);
-    const iWord = u?.word === false || word.includes(n) || !!lastextRubrik.get(vag)?.every((del) => word.includes(del));
+    const iWord = u?.word === false || word.includes(n) || !!lastextRubrik.get(vag)?.every((del) => word.includes(del))
+      || (sagofalt.has(vag) && text.split('\n').every((del) => word.includes(norm(del))));
     const iUtskrift = u?.utskrift === false || tommaRamar.some((r) => r.test(vag)) || utskrift.includes(n);
     provade++;
     if (!iWord || !iUtskrift) saknas.push(`    ${vag}: saknas i ${[!iWord && 'Word-filen', !iUtskrift && 'sidans utskrift'].filter(Boolean).join(' och ')}\n      ”${text.length > 110 ? `${text.slice(0, 110)}…` : text}”`);

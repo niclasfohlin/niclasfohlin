@@ -20,8 +20,9 @@ const MAPP = join(rot, 'public', 'bildbank');
 const FORTECKNING = join(rot, 'src', 'data', 'bildbank.json');
 const kontrollera = process.argv.includes('--kontrollera');
 
-// Samma omskrivning som ljudkort.ts gör när den letar efter en bild: å aa, ä ae, ö oe, é e.
-const ascii = (ord) => ord.normalize('NFC').toLowerCase().replace(/å/g, 'aa').replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/é/g, 'e');
+// Filnamnet ur ordet: å aa, ä ae, ö oe, é e, och mellanslag bindestreck, så att ord i flera delar på tärningarna
+// (komma hem, en drake) får en adress (Skrivkurs: sagoboken, 2026-10-02). Ordet står i förteckningen.
+const ascii = (ord) => ord.normalize('NFC').toLowerCase().replace(/å/g, 'aa').replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/é/g, 'e').replace(/\s+/g, '-');
 const gammal = existsSync(FORTECKNING) ? JSON.parse(readFileSync(FORTECKNING, 'utf8')).ord ?? {} : {};
 const filer = existsSync(MAPP) ? readdirSync(MAPP).filter((f) => f.toLowerCase().endsWith('.svg')) : [];
 const ny = {};

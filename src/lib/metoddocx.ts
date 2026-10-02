@@ -13,9 +13,11 @@ import { brakDelar, delnamn, kortInfo, lage, STANDARD_NAMNARE, type KortInfo, ty
 import { andikaBredd, bagSvg, utanStod } from './lasflyt';
 import type { MetodPostISerie, SerieKoppling } from './serie';
 import { ANDIKA_ADRESS, ELEVTYPSNITT, VIK_TEXT, bildFor as bildForOrd, harElevtypsnitt, kartCeller, kortCeller, ljudenheter, ljudform, arDelark, type KartCell } from './ljudkort';
-import { arElevensBlad, harFragor, harLastexter, lastexter, protokollDelas, textlangd, type Lastext } from './ramform';
+import { arElevensBlad, harFragor, lastexter, protokollDelas, textlangd, type Lastext } from './ramform';
 import { filmerVid, huvudfilm, metodensFilmer, stegDelar, stillbilder, STILLBILD_MATT, type FilmPlats, type MetodFilm } from './film';
 import { reservNyckel } from './reservbild';
+import * as SAGA from './sagoform.js';
+import { arTarning, harBoktypsnitt, sagobladAv, tarningAv, type Sagoblad, type Sagofalt, type Station, type Tarning } from './sagoblad';
 import WORDSKALOR from '../data/lathund-word.json';
 import TECKENBREDD from '../data/teckenbredd.json';
 import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, RAMHOJD, TITEL_PT, boksidansMatt } from './boksida';
@@ -65,7 +67,9 @@ type Barn = Paragraph | Table;
 // och tabeller, och delaSektioner gör sektionerna av det. Efter ett kortark börjar en vanlig sektion igen. En boksida
 // (lästexten, boksida()) står i en egen sektion med 1,5 cm marginal och raden Till läraren och nivåns knapp i sidfoten.
 type Boksektion = { not: string; niva: string; vad: string; farg: string };
-class Sektionsbyte { constructor(readonly kortark: boolean, readonly bok?: Boksektion) {} }
+// Ett sagoblad (sagoFlod): rutan Till läraren i sidfoten, eller ingen sidfot på bokens blad.
+type Sagosektion = { not: string; utanSidfot: boolean };
+class Sektionsbyte { constructor(readonly kortark: boolean, readonly bok?: Boksektion, readonly saga?: Sagosektion) {} }
 type Flod = (Barn | Sektionsbyte)[];
 const arBarn = (x: Barn | Sektionsbyte): x is Barn => !(x instanceof Sektionsbyte);
 // Bilderna och elevens typsnitt till Word-filen (src/lib/ljudkort.ts): vid bygget lästa från public/, i webbläsaren
@@ -720,6 +724,415 @@ function boksida(l: Lastext): Barn[] {
   });
   return [punktStycke(), dubbelRam(BOKBREDD, ram, () => sidan)];
 }
+
+// ---------------------------------------------------------------- sagobladen och tärningen
+// Skrivkurs: sagoboken (Niclas 2026-10-02: mallarna ska kännas som sagor, "Snirklar och som curbits ... längs upp i
+// mallen och en drake som är som en ram runt en sida", och "Du behåller såklart all snygg design på alla mallar"). En ram
+// med sagoform är ett blad i en sagobok på ett eget A4, ett till ett med metodriggens build-docx.js (sagoblad, tarning):
+// rubriken i Cinzel, elevens text i elevens typsnitt och ornamenten ur src/lib/sagoform.js som bilder i tabellceller, så
+// att bladet går att skriva i. Ramen är lindormen (en drake runt sidan) eller slingan (kurbits överst, en dubbel linje av
+// två enkla runt innehållet och en liten prydnad nederst). Datan står i src/lib/sagoblad.ts. Formen följer reglerna för
+// Word och Google Dokument (wordparitet): rader med satt höjd utan cellmarginal upptill, höjder och marginaler i hela
+// bildpunkter och tabeller i celler med ett stycke på en punkt runt sig. Måtten är millimeter.
+const MM = 1440 / 25.4;
+const mmTw = (mm: number) => bildpunkt(Math.round(mm * MM));
+const twMm = (tw: number) => tw / MM;
+const mmPx = (mm: number) => Math.round((mm / 25.4) * 96);
+const PT_MM = 25.4 / 72;
+const SF = { titel: '3A2D24', rod: '8C2A1E', ockra: 'B07A22', gron: '2F5634', linje: 'B9A894', fraga: '5E5046', start: '9C8B7B', text: '2B2622' };
+// Egen kant utan linje: sajtens SAGA_INGEN står längre ned i filen och finns inte när de här konstanterna skapas.
+const SAGA_INGEN: IBorderOptions = { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' };
+const SAGA_INGA = { top: SAGA_INGEN, bottom: SAGA_INGEN, left: SAGA_INGEN, right: SAGA_INGEN };
+const SAGA_NOLL = { top: 0, bottom: 0, left: 0, right: 0 };
+const SAGA_UTAN = { ...SAGA_INGA, insideHorizontal: SAGA_INGEN, insideVertical: SAGA_INGEN };
+let sagoBildNr = 0;
+// Bildbankens bild som SVG-text ur Word-filens resurser (sagoBilder i src/lib/sagoblad.ts).
+function bildbankSvg(sokvag: string | null): string | null {
+  if (!sokvag) return null;
+  const data = RESURSER.bilder.get(sokvag);
+  if (!data) throw new Error(`Bilden ${sokvag} saknas i Word-filens resurser (sagoBilder i src/lib/sagoblad.ts).`);
+  return new TextDecoder().decode(data);
+}
+const sagoRun = (svg: string, bMm: number, hMm: number, namn: string) =>
+  svgRun(new TextEncoder().encode(svg), mmPx(bMm), mmPx(hMm), { name: `${namn} ${++sagoBildNr}`, description: namn, id: String(6000 + sagoBildNr) });
+// En bild i ett eget stycke, utan luft, med styckemärket i 1 pt, så att raden är bildens höjd.
+const sagoBild = (svg: string, bMm: number, hMm: number, namn: string, o: { align?: (typeof AlignmentType)[keyof typeof AlignmentType] } = {}) => new Paragraph({
+  alignment: o.align ?? AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 240 }, run: { size: 2, font: 'Calibri' }, children: [sagoRun(svg, bMm, hMm, namn)],
+});
+interface SagoText { align?: (typeof AlignmentType)[keyof typeof AlignmentType]; keepNext?: boolean; fore?: number; efter?: number; size?: number; color?: string; font?: string; caps?: boolean }
+const sagoText = (text: string | null | undefined, o: SagoText = {}) => new Paragraph({
+  alignment: o.align, keepNext: o.keepNext, spacing: { before: o.fore ?? 0, after: o.efter ?? 0, line: 240 },
+  children: [new TextRun({ text: String(text ?? ''), font: o.font ?? ELEVTYPSNITT, size: o.size ?? 24, color: o.color ?? SF.text, ...(o.caps ? { allCaps: true } : {}) })],
+});
+const sagoTomCell = (w: number) => new TableCell({ width: { size: w, type: WidthType.DXA }, borders: SAGA_INGA, margins: SAGA_NOLL, children: [punktStycke()] });
+const sagoLinje: IBorderOptions = { style: BorderStyle.SINGLE, size: 4, color: SF.linje };
+const ockraKant: IBorderOptions = { style: BorderStyle.SINGLE, size: 8, color: SF.ockra };
+// Sagobladens och tärningens tabeller är byggda efter reglerna för Google Dokument från början, som i riggen (exakta
+// höjder utan marginal upptill och med kantens bildpunkt nedtill, hela bildpunkter och ett stycke på en punkt runt en
+// tabell i en cell), och de har celler över flera rader, som googleTabeller inte kan bygga om. googleTabeller hoppar
+// därför över dem, och regelprovet (scripts/wordregler.mjs) prövar dem som alla andra.
+const GOOGLEKLARA = new WeakSet<Table>();
+const googleklar = (t: Table) => { GOOGLEKLARA.add(t); return t; };
+const sagoTabell = (w: number, kolumner: number[], rows: TableRow[]) => googleklar(new Table({ width: { size: w, type: WidthType.DXA }, columnWidths: kolumner, layout: TableLayoutType.FIXED, borders: SAGA_UTAN, rows }));
+// En rad att skriva på: en cell med en tunn linje under. Startorden står ljust i början av raden.
+function sagoSkrivrad(w: number, o: { span?: number; vanster?: number; start?: string; size?: number } = {}): TableCell {
+  return new TableCell({
+    width: { size: w, type: WidthType.DXA }, ...(o.span ? { columnSpan: o.span } : {}), verticalAlign: VerticalAlign.BOTTOM,
+    borders: { top: SAGA_INGEN, left: SAGA_INGEN, right: SAGA_INGEN, bottom: sagoLinje }, margins: { top: 0, bottom: 15, left: o.vanster ?? 80, right: 40 },
+    children: [o.start ? sagoText(o.start, { size: o.size ?? 24, color: SF.start }) : punktStycke()],
+  });
+}
+// Antalet rader i ett fält: höjden i cm ur metodens elevblad, delad med radavståndet.
+const raderAv = (cm: number | null | undefined, radMm: number, minst = 1) => Math.max(minst, Math.round(((cm ?? 2) * 10) / radMm));
+const textMm = (text: string | null | undefined, namn: 'andika' | 'cinzel', halvpunkter: number) => SAGA.textBredd(String(text ?? ''), namn, (halvpunkter / 2) * PT_MM);
+
+// Rubriken överst på bladet: titeln i Cinzel, undertiteln i versaler och namnraderna, med etiketter lika breda, så att
+// raderna börjar under varandra.
+function sagoRubrik(b: Sagoblad, w: number): Barn[] {
+  const ut: Barn[] = [new Paragraph({ alignment: AlignmentType.CENTER, outlineLevel: 1, spacing: { before: 40, after: 0, line: 240 }, children: [new TextRun({ text: b.titel, font: BOKTYPSNITT, size: b.titel.length > 18 ? 48 : 56, color: SF.titel })] })];
+  if (b.undertitel) ut.push(new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 60, line: 240 }, children: [new TextRun({ text: b.undertitel, font: BOKTYPSNITT, size: 20, color: SF.ockra, allCaps: true })] }));
+  if (b.namnrader.length) {
+    const lw = mmTw(Math.min(60, Math.max(...b.namnrader.map((n) => Math.ceil(SAGA.textBredd(`${n}:`, 'andika', 13 * PT_MM)))) + 4));
+    ut.push(punktStycke(), sagoTabell(w, [lw, w - lw], b.namnrader.map((n) => new TableRow({ cantSplit: true, height: { value: mmTw(8), rule: HeightRule.EXACT }, children: [
+      new TableCell({ width: { size: lw, type: WidthType.DXA }, verticalAlign: VerticalAlign.BOTTOM, borders: SAGA_INGA, margins: { top: 0, bottom: 15, left: 0, right: 80 }, children: [sagoText(`${n}:`, { size: 26, color: SF.fraga })] }),
+      sagoSkrivrad(w - lw),
+    ] }))), punktStycke());
+  }
+  return ut;
+}
+const rubrikHojd = (b: Sagoblad) => 14 + (b.undertitel ? 5.5 : 0) + (b.namnrader.length ? 2 + 8 * b.namnrader.length : 0);
+
+// Lindormen som ram. Word lägger en glipa på cirka 0,2 mm under varje bild, så bitarna står aldrig över varandra där
+// kroppen går tvärs över skarven: översta raden, med huvudet, slingan och svansen, har exakt bildens höjd; sidorna är var
+// sin hög bild från översta raden ned till botten, sammanslagna över innehållets rad och nedersta raden; nederkanten
+// står i nedersta raden, nedtill i cellen, så att den möter sidornas hörn hur högt innehållet än är.
+function lindormRam(innehall: (w: number, hMm: number) => Barn[]): Barn[] {
+  const B = twMm(BREDD_KORTARK), H = 264, botten = 20, sida = 19;
+  const toppTw = mmTw(44), topp = twMm(toppTw);
+  const ws = mmTw(sida), wm = BREDD_KORTARK - 2 * ws, sidaMm = twMm(ws), mittMm = twMm(wm);
+  const R = SAGA.lindorm(B, H, { topp, skarvar: [{ axel: 'y', varde: topp }, { axel: 'x', varde: sidaMm, fran: H - botten - 6 }, { axel: 'x', varde: B - sidaMm, fran: H - botten - 6 }] });
+  const bildCell = (svg: string, bMm: number, hMm: number, w: number, o: { span?: number; rowSpan?: number; botten?: boolean } = {}) => new TableCell({
+    width: { size: w, type: WidthType.DXA }, ...(o.span ? { columnSpan: o.span } : {}), ...(o.rowSpan ? { rowSpan: o.rowSpan } : {}),
+    verticalAlign: o.botten ? VerticalAlign.BOTTOM : VerticalAlign.TOP, borders: SAGA_INGA, margins: SAGA_NOLL, children: [sagoBild(svg, bMm, hMm, 'Lindormen, en drake runt sidan')],
+  });
+  const rows = [
+    new TableRow({ cantSplit: true, height: { value: toppTw, rule: HeightRule.EXACT }, children: [bildCell(R.utsnitt(0, 0, B, topp), B, topp, BREDD_KORTARK, { span: 3 })] }),
+    new TableRow({ cantSplit: true, children: [
+      bildCell(R.utsnitt(0, topp, sidaMm, H - topp), sidaMm, H - topp, ws, { rowSpan: 2 }),
+      new TableCell({ width: { size: wm, type: WidthType.DXA }, borders: SAGA_INGA, margins: { top: 0, bottom: 0, left: 100, right: 100 }, children: [punktStycke(), ...innehall(wm - 200, H - topp - botten), punktStycke()] }),
+      bildCell(R.utsnitt(B - sidaMm, topp, sidaMm, H - topp), sidaMm, H - topp, ws, { rowSpan: 2 }),
+    ] }),
+    new TableRow({ cantSplit: true, children: [bildCell(R.utsnitt(sidaMm, H - botten, mittMm, botten), mittMm, botten, wm, { botten: true })] }),
+  ];
+  return [punktStycke(), sagoTabell(BREDD_KORTARK, [ws, wm, ws], rows)];
+}
+// Slingan som ram: kurbitsslingan överst, innehållet i en dubbel ram av två enkla linjer (rött utanför, ockra innanför)
+// och en liten prydnad nederst.
+const SLINGA_INNEHALL = 277 - 30 - 11 - 16;
+function slingRam(innehall: (w: number) => Barn[]): Barn[] {
+  const B = twMm(BREDD_KORTARK), sh = 30;
+  const yttre: IBorderOptions = { style: BorderStyle.SINGLE, size: 12, color: SF.rod };
+  const inre: IBorderOptions = { style: BorderStyle.SINGLE, size: 6, color: SF.ockra };
+  const luft = 60;
+  const ruta = sagoTabell(BREDD_KORTARK, [BREDD_KORTARK], [new TableRow({ children: [new TableCell({
+    width: { size: BREDD_KORTARK, type: WidthType.DXA }, borders: runt(yttre), margins: { top: luft, bottom: luft, left: luft, right: luft },
+    children: [hjalpStycke(), sagoTabell(BREDD_KORTARK - 2 * luft, [BREDD_KORTARK - 2 * luft], [new TableRow({ children: [new TableCell({
+      width: { size: BREDD_KORTARK - 2 * luft, type: WidthType.DXA }, borders: runt(inre), margins: { top: 0, bottom: 0, left: 220, right: 220 },
+      children: [punktStycke(), ...innehall(BREDD_KORTARK - 2 * luft - 440), punktStycke()],
+    })] })]), hjalpStycke()],
+  })] })]);
+  return [sagoBild(SAGA.kurbitsslinga(B, sh), B, sh, 'Kurbitsslingan'), ruta, sagoBild(SAGA.prydnad(110, 11), 110, 11, 'Prydnaden')];
+}
+
+// En stations namn och fråga: numret och namnet i Cinzel och frågan i elevens typsnitt. Startorden står kursivt efter
+// namnet, ovanför raderna (Niclas 2026-10-02: "kursivt och över, inte på själva raden"), i 14 pt, eftersom eleven
+// skriver av dem.
+const stationNamn = (st: Station, size = 26, start?: string | null) => new Paragraph({ spacing: { before: 0, after: 0, line: 240 }, keepNext: true, children: [
+  new TextRun({ text: `${st.nr}  `, font: BOKTYPSNITT, size, color: SF.ockra }),
+  new TextRun({ text: st.namn, font: BOKTYPSNITT, size, color: SF.rod }),
+  ...(start ? [new TextRun({ text: `   ${start} …`, font: ELEVTYPSNITT, size: 28, italics: true, color: SF.fraga })] : []),
+] });
+const stationFraga = (st: Station) => sagoText(st.fraga, { size: 26, color: SF.fraga });
+
+// Sagans väg: rundeln i första kolumnen, sammanslagen över stationens rader, namnet med startorden och frågan, och sedan
+// raderna att skriva på. Med rita står en ruta att rita i bredvid raderna, som blir 13 mm höga för de yngstas handstil.
+function vagInnehall(b: Sagoblad, w: number, hojdMm: number): Barn[] {
+  const n = b.stationer.length;
+  const rum = hojdMm - rubrikHojd(b) - 6;
+  const kolM = mmTw(b.rita ? 27 : 29), kolR = b.rita ? mmTw(50) : 0, kolT = w - kolM - kolR;
+  const huvudTw = b.stationer.map((st) => mmTw((textMm(st.fraga, 'andika', 26) <= twMm(b.rita ? kolR + kolT : kolT) - 4 ? 13 : 18.5) + 2));
+  const radMm = b.rita ? 13 : (b.radMm ?? 7.5);
+  // Raderna fördelas efter höjderna i metodens elevblad, så att alla stationer ryms.
+  const rader = b.stationer.map((st) => raderAv(st.cm, radMm));
+  const behov = (radTw: number) => b.stationer.reduce((a, _, i) => a + huvudTw[i] + rader[i] * radTw, 0);
+  let radTw = mmTw(radMm);
+  while (twMm(behov(radTw)) > rum && radTw > mmTw(6)) radTw -= 15;
+  while (twMm(behov(radTw)) > rum) { const i = rader.indexOf(Math.max(...rader)); if (rader[i] <= 1) break; rader[i] -= 1; }
+  const rows: TableRow[] = [];
+  b.stationer.forEach((st, i) => {
+    // Rundeln har exakt stationens höjd, så att vägen blir hel genom stationerna.
+    const hMm = twMm(huvudTw[i] + rader[i] * radTw);
+    const bild = SAGA.rundel(twMm(kolM), hMm, bildbankSvg(st.bild), { upp: i > 0, ned: i < n - 1, r: Math.min(9.4, hMm * 0.34) }).svg(0, 0, twMm(kolM), hMm);
+    const rundel = new TableCell({ width: { size: kolM, type: WidthType.DXA }, rowSpan: 1 + rader[i], borders: SAGA_INGA, margins: SAGA_NOLL, children: [sagoBild(bild, twMm(kolM), hMm, `Stationen ${st.namn}`)] });
+    const huvud = new TableCell({ width: { size: kolR + kolT, type: WidthType.DXA }, ...(b.rita ? { columnSpan: 2 } : {}), verticalAlign: b.rita ? VerticalAlign.TOP : VerticalAlign.CENTER, borders: SAGA_INGA,
+      margins: { top: 0, bottom: 0, left: b.rita ? 60 : 80, right: 40 }, children: [stationNamn(st, 28, st.start), stationFraga(st)] });
+    rows.push(new TableRow({ cantSplit: true, height: { value: huvudTw[i], rule: HeightRule.EXACT }, children: [rundel, huvud] }));
+    const ruta = new TableCell({ width: { size: kolR, type: WidthType.DXA }, rowSpan: rader[i], verticalAlign: VerticalAlign.TOP, borders: runt(ockraKant),
+      margins: { top: 0, bottom: 0, left: 60, right: 60 }, children: [sagoText('Rita', { size: 24, color: SF.start })] });
+    for (let j = 0; j < rader[i]; j++) rows.push(new TableRow({ cantSplit: true, height: { value: radTw, rule: HeightRule.EXACT }, children: [
+      ...(b.rita && j === 0 ? [ruta] : []),
+      sagoSkrivrad(kolT, { size: b.rita ? 28 : 24, vanster: b.rita ? 160 : 80 }),
+    ] }));
+  });
+  return [...sagoRubrik(b, w), sagoTabell(w, b.rita ? [kolM, kolR, kolT] : [kolM, kolT], rows)];
+}
+
+// Spänningsberget: berget med vägen, och under det en rad för varje station med namnet, lågor att färga och en rad.
+function bergInnehall(b: Sagoblad, w: number, hojdMm: number): Barn[] {
+  const bMm = twMm(w);
+  const berg = SAGA.berget(bMm, 78, b.stationer.map((st) => bildbankSvg(st.bild)));
+  const kolN = mmTw(46), kolL = mmTw(44), kolT = w - kolN - kolL;
+  // Raderna fyller det som är kvar av sidan under berget, mellan 10 och 18 mm höga.
+  const kvar = hojdMm - rubrikHojd(b) - 78 - (b.text ? 9 : 0) - 6;
+  const radTw = mmTw(Math.max(10, Math.min(18, kvar / b.stationer.length)));
+  const lagor = SAGA.lagor(40, 8.5);
+  const rows = b.stationer.map((st) => new TableRow({ cantSplit: true, height: { value: radTw, rule: HeightRule.EXACT }, children: [
+    new TableCell({ width: { size: kolN, type: WidthType.DXA }, verticalAlign: VerticalAlign.BOTTOM, borders: { ...SAGA_INGA, bottom: sagoLinje }, margins: { top: 0, bottom: 15, left: 40, right: 40 }, children: [stationNamn(st, 26)] }),
+    new TableCell({ width: { size: kolL, type: WidthType.DXA }, verticalAlign: VerticalAlign.BOTTOM, borders: { ...SAGA_INGA, bottom: sagoLinje }, margins: { top: 0, bottom: 15, left: 40, right: 40 }, children: [sagoBild(lagor, 40, 8.5, 'Fem lågor att färga')] }),
+    sagoSkrivrad(kolT),
+  ] }));
+  return [...sagoRubrik(b, w), sagoBild(berg, bMm, 78, 'Spänningsberget'), ...(b.text ? [sagoText(b.text, { size: 26, color: SF.fraga, align: AlignmentType.CENTER, fore: 60, efter: 60 })] : []), punktStycke(),
+    sagoTabell(w, [kolN, kolL, kolT], rows), punktStycke()];
+}
+
+// Ett fält med rubrik och rader: etiketten i elevens typsnitt i 14 pt och ledtråden i 12 pt efter den, eller på en egen
+// rad när den inte ryms bredvid, och raderna under.
+const ETIKETT = 28, LEDTRAD = 24;
+const tvaHuvudrader = (f: Sagofalt, wMm: number, size = ETIKETT) => !!f.fraga && textMm(f.rubrik, 'andika', size) + textMm(`  ${f.fraga}`, 'andika', LEDTRAD) > wMm - 2;
+const faltHuvudMm = (f: Sagofalt, wMm: number, size?: number) => (tvaHuvudrader(f, wMm, size) ? 13.5 : 7.5);
+function faltRader(f: Sagofalt, w: number, radTw: number, o: { size?: number } = {}): Table {
+  const n = raderAv(f.cm, twMm(radTw));
+  const size = o.size ?? ETIKETT;
+  const tva = tvaHuvudrader(f, twMm(w), size);
+  const etikett = new TextRun({ text: f.rubrik, font: ELEVTYPSNITT, size, color: SF.rod });
+  const ledtrad = (fore: string) => new TextRun({ text: `${fore}${f.fraga}`, font: ELEVTYPSNITT, size: LEDTRAD, color: SF.fraga });
+  const huvudrad = (hMm: number, barn: TextRun[]) => new TableRow({ cantSplit: true, height: { value: mmTw(hMm), rule: HeightRule.EXACT }, children: [new TableCell({ width: { size: w, type: WidthType.DXA }, verticalAlign: VerticalAlign.BOTTOM, borders: SAGA_INGA, margins: SAGA_NOLL, children: [new Paragraph({ keepNext: true, spacing: { before: 0, after: 0, line: 240 }, children: barn })] })] });
+  const rows = tva ? [huvudrad(7.5, [etikett]), huvudrad(6, [ledtrad('')])] : [huvudrad(7.5, [etikett, ...(f.fraga ? [ledtrad('  ')] : [])])];
+  for (let j = 0; j < n; j++) rows.push(new TableRow({ cantSplit: true, height: { value: radTw, rule: HeightRule.EXACT }, children: [sagoSkrivrad(w, { vanster: 40 })] }));
+  return sagoTabell(w, [w], rows);
+}
+// Hjältens kort: den ovala ramen till vänster med de första fälten bredvid, och resten av fälten under.
+function portrattInnehall(b: Sagoblad, w: number, hojdMm: number): Barn[] {
+  const [bild, ...falt] = b.falt;
+  const kolB = mmTw(66), kolF = w - kolB - mmTw(4);
+  const radTw = mmTw(b.radMm ?? 8.5);
+  const ramMm = 86;
+  let anvant = 0;
+  const bredvid: Sagofalt[] = [], under: Sagofalt[] = [];
+  for (const f of falt) { const h = faltHuvudMm(f, twMm(kolF)) + raderAv(f.cm, twMm(radTw)) * twMm(radTw) + 2; if (!under.length && anvant + h <= ramMm + 4) { bredvid.push(f); anvant += h; } else under.push(f); }
+  const kol = sagoTabell(w, [kolB, mmTw(4), kolF], [new TableRow({ cantSplit: true, children: [
+    new TableCell({ width: { size: kolB, type: WidthType.DXA }, borders: SAGA_INGA, margins: SAGA_NOLL, children: [sagoBild(SAGA.portrattRam(66, ramMm), 66, ramMm, 'En oval ram att rita hjälten i'), sagoText(bild?.rubrik ?? '', { size: 26, color: SF.fraga, align: AlignmentType.CENTER })] }),
+    sagoTomCell(mmTw(4)),
+    new TableCell({ width: { size: kolF, type: WidthType.DXA }, borders: SAGA_INGA, margins: SAGA_NOLL, children: [...bredvid.flatMap((f) => [punktStycke(), faltRader(f, kolF, radTw)]), punktStycke()] }),
+  ] })]);
+  // Raderna under ramen blir högre tills fälten fyller sidan, högst 13 mm, och räcker det inte får det sista fältet fler.
+  const radsUnder = under.reduce((a, f) => a + raderAv(f.cm, twMm(radTw)), 0);
+  const overMm = rubrikHojd(b) + Math.max(ramMm + 8, anvant) + under.reduce((a, f) => a + faltHuvudMm(f, twMm(w)) + 2, 0) + 6;
+  const radUnderTw = radsUnder ? mmTw(Math.max(twMm(radTw), Math.min(13, (hojdMm - overMm) / radsUnder))) : radTw;
+  const extra = radsUnder ? Math.max(0, Math.floor((hojdMm - overMm - radsUnder * twMm(radUnderTw)) / twMm(radUnderTw))) : 0;
+  return [...sagoRubrik(b, w), punktStycke(), kol, ...under.flatMap((f, i) => [punktStycke(), faltRader({ ...f, cm: ((raderAv(f.cm, twMm(radTw)) + (i === under.length - 1 ? extra : 0)) * twMm(radUnderTw)) / 10 }, w, radUnderTw)]), punktStycke()];
+}
+// En ruta att rita i, med etiketten ljust överst.
+const ritruta = (rubrik: string, w: number, hMm: number) => sagoTabell(w, [w], [new TableRow({ cantSplit: true, height: { value: mmTw(hMm), rule: HeightRule.EXACT }, children: [new TableCell({ width: { size: w, type: WidthType.DXA }, borders: runt(ockraKant), margins: { top: 0, bottom: 15, left: 80, right: 80 }, children: [sagoText(rubrik, { size: 24, color: SF.start })] })] })]);
+// Omslaget: titelraderna, en stor ruta att rita i och raderna för författarna.
+function omslagInnehall(b: Sagoblad, w: number, hojdMm: number): Barn[] {
+  const ut: Barn[] = [];
+  const rutan = b.falt.find((f) => /rita|bild/i.test(f.rubrik));
+  const ovriga = b.falt.filter((f) => f !== rutan);
+  const radTw = mmTw(11);
+  const ovrigaMm = ovriga.reduce((a, f) => a + faltHuvudMm(f, twMm(w)) + raderAv(f.cm, 11) * 11 + 2, 0);
+  const rutaMm = Math.max(40, Math.min((rutan?.cm ?? 12) * 10, hojdMm - ovrigaMm - 14));
+  const [forst, ...efter] = ovriga;
+  if (forst) ut.push(punktStycke(), faltRader(forst, w, radTw, { size: 30 }));
+  if (rutan) ut.push(punktStycke(), ritruta(rutan.rubrik, w, rutaMm));
+  for (const f of efter) ut.push(punktStycke(), faltRader(f, w, radTw));
+  return [...ut, punktStycke()];
+}
+// En sida i sagoboken: titelraden, rutan att rita i och raderna, där de två första raderna står bredvid rutan för den
+// första bokstaven, som anfanget på boksidan.
+function sidaInnehall(b: Sagoblad, w: number, hojdMm: number): Barn[] {
+  const ut: Barn[] = [];
+  const titel = b.falt.find((f) => /titel/i.test(f.rubrik));
+  const rutan = b.falt.find((f) => /rita|bild/i.test(f.rubrik));
+  const texten = b.falt.find((f) => f !== titel && f !== rutan);
+  const radMm = 9.5, radTw = mmTw(radMm);
+  if (titel) ut.push(sagoTabell(w, [mmTw(30), w - mmTw(30)], [new TableRow({ cantSplit: true, height: { value: mmTw(12), rule: HeightRule.EXACT }, children: [
+    new TableCell({ width: { size: mmTw(30), type: WidthType.DXA }, verticalAlign: VerticalAlign.BOTTOM, borders: SAGA_INGA, margins: { top: 0, bottom: 15, left: 0, right: 80 }, children: [new Paragraph({ spacing: { before: 0, after: 0, line: 240 }, children: [new TextRun({ text: titel.rubrik, font: ELEVTYPSNITT, size: ETIKETT, color: SF.rod })] })] }),
+    sagoSkrivrad(w - mmTw(30), { size: 32 }),
+  ] })]), punktStycke({ spacing: { before: 0, after: 90, line: 240 } }));
+  const textMmHojd = texten ? raderAv(texten.cm, radMm) * radMm : 0;
+  const rutaMm = Math.max(50, hojdMm - textMmHojd - 30);
+  if (rutan) ut.push(ritruta(rutan.rubrik, w, rutaMm), punktStycke());
+  if (texten) {
+    const n = raderAv(texten.cm, radMm, 3);
+    const kolA = mmTw(2 * radMm + 1);
+    const anfang = SAGA.anfangsRuta(2 * radMm);
+    const rows: TableRow[] = [];
+    for (let j = 0; j < n; j++) rows.push(new TableRow({ cantSplit: true, height: { value: radTw, rule: HeightRule.EXACT }, children: j === 0
+      ? [new TableCell({ width: { size: kolA, type: WidthType.DXA }, rowSpan: 2, borders: SAGA_INGA, margins: SAGA_NOLL, children: [sagoBild(anfang, 2 * radMm - 0.5, 2 * radMm - 0.5, 'En ruta för den första bokstaven', { align: AlignmentType.LEFT })] }), sagoSkrivrad(w - kolA, { size: 28 })]
+      : j === 1 ? [sagoSkrivrad(w - kolA, { size: 28 })] : [sagoSkrivrad(w, { span: 2, size: 28, vanster: 40 })] }));
+    ut.push(sagoTabell(w, [kolA, w - kolA], rows));
+  }
+  return [...ut, punktStycke()];
+}
+// Författarna: två rutor att rita i, var och en med fälten bredvid.
+function forfattareInnehall(b: Sagoblad, w: number): Barn[] {
+  const rutan = b.falt.find((f) => /rita|bild/i.test(f.rubrik));
+  const falt = b.falt.filter((f) => f !== rutan);
+  const kolB = mmTw(58), kolF = w - kolB - mmTw(5);
+  const radTw = mmTw(9);
+  const block = () => sagoTabell(w, [kolB, mmTw(5), kolF], [new TableRow({ cantSplit: true, children: [
+    new TableCell({ width: { size: kolB, type: WidthType.DXA }, borders: SAGA_INGA, margins: SAGA_NOLL, children: [sagoBild(SAGA.portrattRam(56, 74), 56, 74, 'En oval ram att rita författaren i'), sagoText(rutan?.rubrik ?? '', { size: 26, color: SF.fraga, align: AlignmentType.CENTER })] }),
+    sagoTomCell(mmTw(5)),
+    new TableCell({ width: { size: kolF, type: WidthType.DXA }, borders: SAGA_INGA, margins: SAGA_NOLL, children: [...falt.flatMap((f) => [punktStycke(), faltRader(f, kolF, radTw)]), punktStycke()] }),
+  ] })]);
+  return [...sagoRubrik(b, w), punktStycke(), block(), punktStycke(), sagoBild(SAGA.prydnad(80, 9), 80, 9, 'Prydnaden'), punktStycke(), block(), punktStycke()];
+}
+// Två kort eller skyltar på ett A4, med streckad kant att klippa längs.
+const korthojd = () => bildpunkt(Math.floor((A4.height - 2 * KORTMARGINAL - 600) / 2));
+// Frågekorten och rollkorten: varje lista är ett kort på ett halvt A4, med en liten slinga överst, listans rubrik i Cinzel
+// och raderna numrerade i elevens typsnitt. Med kortbilder står stationens rundel i stället för numret, så att också den
+// som inte läser än hittar stationen, och en prick där raden inte hör till en station.
+function kortSagoblad(b: Sagoblad): Barn[] {
+  const ikonMm = 9.5;
+  const markor = (l: { rubrik: string }, i: number): TextRun | ImageRun => {
+    const bilder = b.kortbilder?.[l.rubrik];
+    if (!bilder) return new TextRun({ text: `${i + 1}.`, font: BOKTYPSNITT, size: 34, color: SF.rod });
+    const ord = bilder[i];
+    if (!ord) return new TextRun({ text: '•', font: BOKTYPSNITT, size: 34, color: SF.ockra });
+    const svg = SAGA.rundel(ikonMm, ikonMm, bildbankSvg(bildForOrd(ord)), { upp: false, ned: false, r: ikonMm * 0.47 }).svg(0, 0, ikonMm, ikonMm);
+    return sagoRun(svg, ikonMm, ikonMm, `Stationen ${ord}`);
+  };
+  const kort = (l: { rubrik: string; rader: string[][] }) => {
+    const med = !!b.kortbilder?.[l.rubrik];
+    return [
+      sagoBild(SAGA.kurbitsslinga(120, 20), 120, 20, 'Kurbitsslingan'),
+      new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 60, after: 160, line: 240 }, children: [new TextRun({ text: l.rubrik, font: BOKTYPSNITT, size: 36, color: SF.titel })] }),
+      ...l.rader.map((r, i) => new Paragraph({ indent: med ? { left: 1100, right: 400, hanging: 780 } : { left: 960, right: 400, hanging: 520 }, tabStops: [{ type: TabStopType.LEFT, position: med ? 1100 : 960 }], spacing: { before: 0, after: med ? 60 : 180, line: 240 }, children: [
+        markor(l, i), new TextRun({ children: [new Tab()], size: 34 }), new TextRun({ text: String(r[0] ?? ''), font: ELEVTYPSNITT, size: 34, color: SF.text }),
+      ] })),
+    ];
+  };
+  return [punktStycke(), sagoTabell(BREDD_KORTARK, [BREDD_KORTARK], b.listor.map((l) => new TableRow({ cantSplit: true, height: { value: korthojd(), rule: HeightRule.EXACT }, children: [new TableCell({
+    width: { size: BREDD_KORTARK, type: WidthType.DXA }, borders: runt(STRECKAD), margins: { top: 0, bottom: 15, left: 200, right: 200 }, children: kort(l),
+  })] })))];
+}
+// Vägskyltarna: en skylt för varje station, två på ett A4 med streckad kant att klippa längs. Rosetten står stort överst,
+// sedan numret och namnet i Cinzel, startorden och frågan i elevens typsnitt, så att gruppen ser skylten från golvet.
+function skyltarSagoblad(b: Sagoblad): Barn[] {
+  const skylt = (st: Station) => [
+    sagoBild(SAGA.rosett(120, 64, bildbankSvg(st.bild)), 120, 64, `Rosetten för ${st.namn}`),
+    new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 60, after: 0, line: 240 }, children: [
+      new TextRun({ text: `${st.nr}  `, font: BOKTYPSNITT, size: 72, color: SF.ockra }),
+      new TextRun({ text: st.namn, font: BOKTYPSNITT, size: 72, color: SF.rod }),
+    ] }),
+    ...(st.start ? [sagoText(st.start, { size: 48, align: AlignmentType.CENTER, fore: 40 })] : []),
+    ...(st.fraga ? [sagoText(st.fraga, { size: 30, color: SF.fraga, align: AlignmentType.CENTER, fore: 60 })] : []),
+    new Paragraph({ spacing: { before: 120, after: 0, line: 240 }, run: { size: 2, font: 'Calibri' }, alignment: AlignmentType.CENTER, children: [sagoRun(SAGA.prydnad(90, 10), 90, 10, 'Prydnaden')] }),
+    // Versionen under prydnaden, så att skyltarna i fyra och sex steg går att skilja åt.
+    ...(b.undertitel ? [sagoText(b.undertitel, { font: BOKTYPSNITT, size: 20, color: SF.ockra, align: AlignmentType.CENTER, caps: true, fore: 40 })] : []),
+  ];
+  const par: Station[][] = [];
+  for (let i = 0; i < b.stationer.length; i += 2) par.push(b.stationer.slice(i, i + 2));
+  return par.flatMap((tva, j) => [
+    j ? punktStycke({ pageBreakBefore: true }) : punktStycke(),
+    sagoTabell(BREDD_KORTARK, [BREDD_KORTARK], tva.map((st) => new TableRow({ cantSplit: true, height: { value: korthojd(), rule: HeightRule.EXACT }, children: [new TableCell({
+      width: { size: BREDD_KORTARK, type: WidthType.DXA }, verticalAlign: VerticalAlign.CENTER, borders: runt(STRECKAD), margins: { top: 0, bottom: 15, left: 200, right: 200 }, children: skylt(st),
+    })] }))),
+  ]);
+}
+function sagobladBarn(b: Sagoblad): Barn[] {
+  if (b.form === 'kort') return kortSagoblad(b);
+  if (b.form === 'skyltar') return skyltarSagoblad(b);
+  const innehall = (w: number, h: number): Barn[] => (b.form === 'vag' ? vagInnehall(b, w, h)
+    : b.form === 'berg' ? bergInnehall(b, w, h)
+      : b.form === 'portratt' ? portrattInnehall(b, w, h)
+        : b.form === 'omslag' ? omslagInnehall(b, w, h)
+          : b.form === 'sida' ? sidaInnehall(b, w, h)
+            : forfattareInnehall(b, w));
+  return b.ram === 'lindorm' ? lindormRam((w, h) => innehall(w, h)) : slingRam((w) => innehall(w, SLINGA_INNEHALL));
+}
+// Ramens blad, vart och ett på en egen sida i en egen sektion: rutan Till läraren i sidfoten, som på boksidan, och bokens
+// blad utan sidfot, så att de går att kopiera in i den tryckta boken (riggens läsbarhetsrunda 2026-10-02). Upphovet står
+// litet i sidhuvudet på alla, som på boksidan.
+function sagoFlod(ram: Ram, d: MetodData): Flod {
+  return [...sagobladAv(ram, d).flatMap((b) => [new Sektionsbyte(false, undefined, { not: b.not, utanSidfot: b.bokblad }), ...sagobladBarn(b)]), new Sektionsbyte(false)];
+}
+// Sidfoten på ett sagoblad: raden Till läraren till vänster och sidnumret till höger.
+function sagoFot(s: Sagosektion): Footer {
+  if (s.utanSidfot) return new Footer({ children: [punktStycke()] });
+  return new Footer({ children: [new Paragraph({
+    tabStops: [{ type: TabStopType.RIGHT, position: BREDD_KORTARK }], spacing: { after: 0 },
+    children: [
+      new TextRun({ text: s.not, size: s.not.length > 75 ? 13 : 15, color: BOK.not, font: 'Arial' }),
+      new TextRun({ children: [new Tab()], size: 18, font: 'Arial' }),
+      new TextRun({ text: 's. ', size: 18, color: BOK.gra, font: 'Arial' }),
+      new TextRun({ children: [PageNumber.CURRENT], size: 18, color: BOK.gra, font: 'Arial' }),
+    ],
+  })] });
+}
+// Tärningen (Niclas 2026-10-01: "stora berättelsetärningar i A4 som klipps ut och viks"): ett kors av sex sidor på 5,8 cm,
+// en tärning per A4, med en flik vid var och en av de sju kanterna som limmas. Korset har fyra sidor i mittkolumnen (A, C,
+// E, F uppifrån) och en på var sida om den andra (B och D). Streckad grå kant klipps och blå prickad viks, som på
+// vikkorten. Varje sida är en bild: tärningens färg, en dubbel ram med blommor i hörnen, frågan i Cinzel, bilden ur
+// bildbanken och ordet. Raderna har exakt höjd utan cellmarginal upptill, så att korset blir lika stort i Word och Google.
+const TARNING_TEXT = 'Klipp längs strecken. Vik längs de blå prickade linjerna och limma flikarna inuti tärningen.';
+function tarningTabell(t: Tarning): Table {
+  const s = 3285, fl = 630;
+  const bredder = [s - fl, fl, s, fl, s - fl];
+  // Rutnätet: en versal är en sida, en gemen en flik på den sidan och en punkt tomt. B och D går över två kolumner.
+  const NAT = ['.aAa.', 'BBCDD', '.eEe.', '.fFf.', '..f..'];
+  const vad = (r: number, c: number): { sida?: string; flik?: string } | null => {
+    const x = NAT[r]?.[c];
+    if (!x || x === '.') return null;
+    return x === x.toUpperCase() ? { sida: x } : { flik: x.toUpperCase() };
+  };
+  // Kanten mellan två rutor: två sidor, eller en sida och dess flik, viks. En ruta mot tomt, mot arkets kant eller mot en
+  // annan sidas flik klipps, och två tomma rutor har ingen kant. Båda cellerna får samma kant.
+  type Ruta = ReturnType<typeof vad>;
+  const kantMellan = (x: Ruta, y: Ruta): IBorderOptions => {
+    if (!x && !y) return SAGA_INGEN;
+    if (x?.sida && y?.sida) return x.sida === y.sida ? SAGA_INGEN : VIKLINJE;
+    if ((x?.sida && y?.flik === x.sida) || (y?.sida && x?.flik === y.sida)) return VIKLINJE;
+    return STRECKAD;
+  };
+  const sidaMm = Math.floor(twMm(s - 200) * 10) / 10;
+  const { ljus } = SAGA.TARNINGSFARGER[(t.nr - 1) % SAGA.TARNINGSFARGER.length];
+  const innehall = (bokstav: string) => {
+    const { ord, bild } = t.sidor['ABCDEF'.indexOf(bokstav)];
+    // sagoform.js är JavaScript, och TypeScript läser parametrarnas typer ur förvalen (null), så anropet får sin typ här.
+    const tarningssida = SAGA.tarningssida as unknown as (o: { nr: number; fraga: string; ord: string; bild: string | null; sida: number; allaOrd: string[] }) => string;
+    return [sagoBild(tarningssida({ nr: t.nr, fraga: t.fraga, ord, bild: bildbankSvg(bild), sida: sidaMm, allaOrd: t.allaOrd }), sidaMm, sidaMm, `Tärningens sida: ${ord}`)];
+  };
+  const rows = NAT.map((rad, r) => {
+    const celler: TableCell[] = [];
+    for (let c = 0; c < rad.length; c++) {
+      const x = vad(r, c);
+      const span = x?.sida && vad(r, c + 1)?.sida === x.sida ? 2 : 1;
+      celler.push(new TableCell({
+        width: { size: bredder.slice(c, c + span).reduce((a, v) => a + v, 0), type: WidthType.DXA }, ...(span > 1 ? { columnSpan: span } : {}),
+        verticalAlign: VerticalAlign.CENTER,
+        borders: { top: kantMellan(x, vad(r - 1, c)), bottom: kantMellan(x, vad(r + 1, c)), left: kantMellan(x, vad(r, c - 1)), right: kantMellan(x, vad(r, c + span)) },
+        ...(x?.flik ? { shading: { type: ShadingType.CLEAR, fill: ljus.replace('#', ''), color: 'auto' } } : {}),
+        margins: { top: 0, bottom: 15, left: 100, right: 100 },
+        children: x?.sida ? innehall(x.sida) : [punktStycke()],
+      }));
+      c += span - 1;
+    }
+    return new TableRow({ cantSplit: true, height: { value: r < 4 ? s : fl, rule: HeightRule.EXACT }, children: celler });
+  });
+  return googleklar(new Table({ alignment: AlignmentType.CENTER, width: { size: 3 * s, type: WidthType.DXA }, columnWidths: bredder, layout: TableLayoutType.FIXED, borders: UTAN_KANTER, rows }));
+}
 // stor: en elevkopia (planeringsmallarna), där listorna kommer först och sätts stort nog att läsas av ett par
 // eller visas för gruppen; annars (beskrivningen) står lärarnoten först och listorna efter.
 // kort: metodens kort att klippa (d.kort); blad: fältens höjd i cm när ramen är elevens blad (d.elevblad).
@@ -770,6 +1183,16 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
     const ettKort = arEttKort(alla, l);
     return elevlista({ ...l, rubrik: !o.stor && l.rubrik && !namngerRamen(l.rubrik) ? `${l.rubrik} · ${ram.rubrik}` : l.rubrik }, { storlek: ettKort ? 40 : storlek, luft: ettKort, hallIhopEfter: o.stor ? i === alla.length - 1 : i < alla.length - 1, brak: o.brak, elev: o.elev && !l.larare });
   });
+  // Berättartärningarna (src/lib/sagoblad.ts, tarningTabell): lärarens ruta först, sedan varje tärning på ett eget A4 med
+  // smal marginal, som ett kors att klippa, vika och limma, både i beskrivningen och i planeringsmallarna.
+  if ((ram.listor ?? []).some((l) => arTarning({ kort: o.kort }, l))) {
+    ut.push(...noter());
+    for (const l of ram.listor ?? []) {
+      if (!arTarning({ kort: o.kort }, l)) { ut.push(...elevlista(l, { storlek, brak: o.brak, elev: o.elev && !l.larare })); continue; }
+      ut.push(new Sektionsbyte(true), ...arkRubrik(l.rubrik, false), new Paragraph({ keepNext: true, spacing: { before: 0, after: 80 }, children: [textRun({ text: TARNING_TEXT, size: 16, color: FARG.svag })] }), tarningTabell(tarningAv(l, ram, { kort: o.kort })), new Sektionsbyte(false));
+    }
+    return ut;
+  }
   // Ljudlekens kort och kartan (src/lib/ljudkort.ts): lärarens ruta först, sedan varje ark i en egen sektion med smal
   // marginal, som i riggens kompendium, både i beskrivningen och i planeringsmallarna.
   if ((ram.listor ?? []).some((l) => ljudform({ kort: o.kort }, l))) {
@@ -1368,6 +1791,18 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
         filmVid({ ram: ram.rubrik });
         continue;
       }
+      // Ett sagoblad (sagoform): ramens rubrik och text för läraren, och sedan bladen, vart och ett på en egen sida med
+      // rutan Till läraren i sidfoten (sagoFlod).
+      if (ram.sagoform) {
+        ut.push(new Paragraph({ children: [run(ram.rubrik)], heading: HeadingLevel.HEADING_3, keepNext: true, spacing: { before: 240, after: 80 } }));
+        for (const s of ram.text) ut.push(stycke(s));
+        // Bokens blad har ingen sidfot, så rutan Till läraren står här i beskrivningen.
+        const [blad] = sagobladAv(ram, d);
+        if (blad.bokblad && blad.not) ut.push(stycke(blad.not, { farg: FARG.svag }));
+        ut.push(...sagoFlod(ram, d));
+        filmVid({ ram: ram.rubrik });
+        continue;
+      }
       ut.push(new Paragraph({ children: [run(ram.rubrik)], heading: HeadingLevel.HEADING_3, keepNext: true, spacing: { before: 240, after: 80 } }));
       if (ramArTom(ram)) {
         for (const s of ram.text) ut.push(stycke(s));
@@ -1471,6 +1906,14 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
       if (lastext) {
         if (o.baraTommaRamar) continue;
         const sida: Flod = [bokbyte(lastext), ...boksida(lastext)];
+        bladsidor.add(sida);
+        sidor.push(sida);
+        continue;
+      }
+      // Ett sagoblad står som det är, med upphovet i sidhuvudet. I filen med allt står det redan i beskrivningen.
+      if (ram.sagoform) {
+        if (o.baraTommaRamar) continue;
+        const sida = sagoFlod(ram, d);
         bladsidor.add(sida);
         sidor.push(sida);
         continue;
@@ -2122,7 +2565,17 @@ function sidfot(adress: string, bredd: number, liten = false): Footer {
 // kortark: Ljudlekens kort med 1 cm marginal, utan rubrikrad och med lathundens lilla fot, så att arket ryms på sidan.
 // bok: en boksida (lästexten, boksida()) med 1,5 cm marginal, upphovet i sidhuvudet och raden Till läraren, nivåns knapp
 // och sidnumret i sidfoten, som i metodriggen.
-function sektion(barn: Barn[], huvudtext: string, adress: string, o: { liggande?: boolean; smal?: boolean; lathund?: boolean; kortark?: boolean; bok?: Boksektion } = {}): ISectionOptions {
+function sektion(barn: Barn[], huvudtext: string, adress: string, o: { liggande?: boolean; smal?: boolean; lathund?: boolean; kortark?: boolean; bok?: Boksektion; saga?: Sagosektion } = {}): ISectionOptions {
+  // Ett sagoblad: kortarkets marginal på 1 cm, upphovet litet i sidhuvudet, som på boksidan, och rutan Till läraren och
+  // sidnumret i sidfoten, eller ingen sidfot på bokens blad (sagoFot).
+  if (o.saga) {
+    return {
+      properties: { page: { size: { ...A4, orientation: PageOrientation.PORTRAIT }, margin: { top: KORTMARGINAL, right: KORTMARGINAL, bottom: KORTMARGINAL, left: KORTMARGINAL, header: 280, footer: 280 } } },
+      headers: { default: bokHuvud(adress) },
+      footers: { default: sagoFot(o.saga) },
+      children: barn,
+    };
+  }
   if (o.bok) {
     return {
       properties: { page: { size: { ...A4, orientation: PageOrientation.PORTRAIT }, margin: BOKMARGINAL } },
@@ -2154,12 +2607,14 @@ function delaSektioner(flod: Flod, huvudtext: string, adress: string, o: { ligga
   let barn: Barn[] = [];
   let kortark = false;
   let bok: Boksektion | undefined;
-  const klar = () => { if (barn.length) ut.push(sektion(barn, huvudtext, adress, bok ? { bok } : kortark ? { kortark: true } : o)); barn = []; };
+  let saga: Sagosektion | undefined;
+  const klar = () => { if (barn.length) ut.push(sektion(barn, huvudtext, adress, saga ? { saga } : bok ? { bok } : kortark ? { kortark: true } : o)); barn = []; };
   for (const x of flod) {
     if (arBarn(x)) { barn.push(x); continue; }
     klar();
     kortark = x.kortark;
     bok = x.bok;
+    saga = x.saga;
   }
   klar();
   if (!ut.length) ut.push(sektion([new Paragraph({})], huvudtext, adress, o));
@@ -2173,9 +2628,9 @@ function typsnittFor(poster: MetodPost[]): { fonts?: { name: string; data: Buffe
   const fonts: { name: string; data: Buffer }[] = [];
   const elev = RESURSER.elevtypsnitt;
   if (elev && poster.some((p) => harElevtypsnitt(p.data))) fonts.push({ name: ELEVTYPSNITT, data: elev as Buffer });
-  if (poster.some((p) => harLastexter(p.data))) {
+  if (poster.some((p) => harBoktypsnitt(p.data))) {
     const bok = RESURSER.boktypsnitt;
-    if (!bok) throw new Error('Word-filen har boksidor men saknar Cinzel och Cinzel Decorative (public/fonts/boksida/), som src/lib/metodresurser.ts läser vid bygget och sidan hämtar i webbläsaren.');
+    if (!bok) throw new Error('Word-filen har boksidor eller sagoblad men saknar Cinzel och Cinzel Decorative (public/fonts/boksida/), som src/lib/metodresurser.ts läser vid bygget och sidan hämtar i webbläsaren.');
     fonts.push({ name: BOKTYPSNITT, data: bok.cinzel as Buffer }, { name: ANFANGTYPSNITT, data: bok.dekor as Buffer });
   }
   return fonts.length ? { fonts } : {};
@@ -2265,7 +2720,7 @@ function radKant(celler: TableCell[]): { word: number; google: number } {
 }
 function googleTabeller(barn: readonly unknown[]): void {
   for (const b of barn) {
-    if (!(b instanceof Table)) continue;
+    if (!(b instanceof Table) || GOOGLEKLARA.has(b)) continue;
     const rot = (b as unknown as { root: unknown[] }).root;
     rot.forEach((r, i) => {
       if (!(r instanceof TableRow)) return;

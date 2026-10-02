@@ -771,6 +771,7 @@ ramar:
     - "Här finns vägskyltarna, Sagans väg, Spänningsberget och Hjältens kort, alla i fyra och i sex steg. Här finns också berättartärningarna, frågekorten och rollkorten, modellsagorna och kontrastparen, bladen till boken, Sagokollen och Parets väg. Varje blad står på ett eget A4. Sagans väg står på två A4, med två eller tre stationer på varje sida, så att paret har gott om rader. Sagans väg i fyra steg har en ruta att rita i vid varje station, och paret skriver sagan direkt på bladet. Om raderna inte räcker, skriver paret meningen på en lapp och sätter den vid stationen. I sex steg planerar paret sagan på bladet Sagans väg och skriver den på linjerat papper eller på dator. Till den förstorade vägen kopierar du bladet Sagans väg för er version i A3 och sätter upp det på väggen. På den planerar gruppen sin saga i pass 5, och i pass 6 skriver du idéerna på lappar och sätter dem där. I fyra steg sätter lyssnarparet ett frågetecken på bladet Sagans väg, i rutan vid den station där de undrade något. Gruppens saga skriver du på blädderblocket, ett ark för varje station, och sätter upp arken under vägen. De tre bladen till boken är omslaget, Bokens sida och Författarna. De har ingen sidfot, så att kopiorna kan bli sidor i boken som de är. Paret får en kopia av Bokens sida för varje station, och i sex steg en till om en station blir lång. Omslaget kopierar du på tjockt papper. På sagans första sida skriver paret den första bokstaven stort i den lilla rutan bredvid de två första raderna, och på de andra sidorna skriver de sidans nummer i samma ruta. Från pass 24 ritar paret bilderna i rutan Rita. På omslaget skriver du elevernas namn på raderna Sagor av, eller så skriver eleverna själva. Två par delar på varje sida Författarna."
   ramar:
     - rubrik: Vägskyltarna i fyra steg
+      sagoform: { form: skyltar, undertitel: fyra steg, bilder: [ stjärna, vägspärr, glödlampa, regnbåge ] }
       text:
         - Det är fyra skyltar, en för varje station, och du lägger dem längs ett rep på golvet.
       delar:
@@ -784,6 +785,7 @@ ramar:
           falt:
             - { rubrik: Till läraren, text: "Skriv ut skyltarna för er version. De ligger längs repet i Sagostarten fram till pass 22, och när gruppen återberättar en saga eller spelar sagoteater." }
     - rubrik: Vägskyltarna i sex steg
+      sagoform: { form: skyltar, undertitel: sex steg, bilder: [ stjärna, vägspärr, handslag, eld, glödlampa, regnbåge ] }
       text:
         - Det är sex skyltar, en för varje station, och du lägger dem längs ett rep på golvet.
       delar:
@@ -799,6 +801,7 @@ ramar:
           falt:
             - { rubrik: Till läraren, text: "Skriv ut skyltarna för er version. De ligger längs repet i Sagostarten fram till pass 22, och när gruppen återberättar en saga eller spelar sagoteater." }
     - rubrik: Sagans väg i fyra steg
+      sagoform: { form: vag, ram: lindorm, rita: true, titel: Sagans väg, undertitel: fyra steg, bilder: [ stjärna, vägspärr, glödlampa, regnbåge ], sidor: 2 }
       text:
         - Paret ritar och berättar först och skriver sedan en eller två meningar vid varje station.
       huvud:
@@ -814,6 +817,7 @@ ramar:
           falt:
             - { rubrik: Till läraren, text: "Bladet har två sidor. Varje par får tre blad, ett för varje saga, och gruppen får ett i A3 till den förstorade vägen. I pass 20–⁠21 skriver paret de nya meningarna i boksagan på de tomma raderna. Får en mening inte plats, skriver paret den på en lapp och sätter lappen vid stationen. När sagan är skriven, sätter paret en bock vid bilden på varje station där sagan svarar på frågan. Paret tar bort en lapp från berättarpasset när det som står på den har kommit med i sagan." }
     - rubrik: Sagans väg i sex steg
+      sagoform: { form: vag, ram: lindorm, titel: Sagans väg, undertitel: sex steg, bilder: [ stjärna, vägspärr, handslag, eld, glödlampa, regnbåge ], sidor: 2, radMm: 10 }
       text:
         - Paret planerar sagan med några ord vid varje station, berättar och spelar den och skriver den sedan på linjerat papper eller på dator.
       huvud:
@@ -831,6 +835,7 @@ ramar:
           falt:
             - { rubrik: Till läraren, text: "Bladet har två sidor. Varje par får tre blad, ett för varje saga, och gruppen får ett i A3 till den förstorade vägen. Där en ny station börjar på det linjerade papperet, skriver paret stationens nummer i marginalen. På dator är stationerna rubriker i dokumentet. När sagan är skriven, sätter paret en bock vid bilden på varje station där sagan svarar på frågan. Paret tar bort en lapp från berättarpasset när det som står på den har kommit med i sagan." }
     - rubrik: Spänningsberget i fyra steg
+      sagoform: { form: berg, titel: Spänningsberget, undertitel: fyra steg, bilder: [ stjärna, vägspärr, glödlampa, regnbåge ] }
       text:
         - "Hur spännande är sagan vid varje station? Färga fler lågor ju mer spännande det är. Skriv ett ord om det som händer där."
       huvud:
@@ -847,6 +852,7 @@ ramar:
           falt:
             - { rubrik: Till läraren, text: "Paret färgar berget när de hittar på sagan. I pass 22 färgar lyssnarparet ett eget berg och ger det efter responsen till paret som skrev sagan. I pass 23 jämför paret lågorna på de två bergen innan de bearbetar sagan." }
     - rubrik: Spänningsberget i sex steg
+      sagoform: { form: berg, titel: Spänningsberget, undertitel: sex steg, bilder: [ stjärna, vägspärr, handslag, eld, glödlampa, regnbåge ] }
       text:
         - "Hur spännande är sagan vid varje station? Färga fler lågor ju mer spännande det är. Skriv ett ord om det som händer där."
       huvud:
@@ -865,6 +871,7 @@ ramar:
           falt:
             - { rubrik: Till läraren, text: "Paret färgar berget när de hittar på sagan. I pass 22 färgar lyssnarparet ett eget berg och ger det efter responsen till paret som skrev sagan. I pass 23 jämför paret lågorna på de två bergen innan de bearbetar sagan." }
     - rubrik: Hjältens kort i fyra steg
+      sagoform: { form: portratt, titel: Hjältens kort, undertitel: fyra steg, radMm: 10 }
       text:
         - Paret ritar hjälten och skriver vad hjälten heter, var hen bor, vad hen har med sig eller kan, vad hen är rädd för och vad hen vill.
       huvud:
@@ -882,6 +889,7 @@ ramar:
           falt:
             - { rubrik: Till läraren, text: "I pass 4 fyller gruppen i ett kort i A3. I pass 19 fyller paret i ett eget till boksagan, medan den ena sitter i heta stolen som hjälten. Det räcker med ett ord eller två i varje fält, eller så skriver du det paret säger. Saken från tärning 6 ritar eller skriver ni i fältet ”Hjälten har med sig eller kan”." }
     - rubrik: Hjältens kort i sex steg
+      sagoform: { form: portratt, titel: Hjältens kort, undertitel: sex steg }
       text:
         - Paret ritar hjälten och skriver vem hjälten är, vad hen är bra på, vad hen är rädd för och vad hen önskar sig mest av allt.
       huvud:
@@ -933,6 +941,7 @@ ramar:
         - rubrik: "Tärning 6B · Vilken sak?"
           rader: [[ett ljus], [ett rep], [en bok], [ett paraply], [ett frö], [en hatt]]
     - rubrik: Frågekorten i fyra steg
+      sagoform: { form: kort, kortbilder: { Kamratens frågor i fyra steg: [ stjärna, vägspärr, glödlampa, regnbåge, null ], Läsarens frågor i fyra steg: [ stjärna, vägspärr, null, glödlampa, regnbåge, null, null ] } }
       text:
         - På bladet står de två frågekorten i fyra steg. Paret har Kamratens frågor framför sig när de berättar sagan för varandra, och Läsarens frågor när de lyssnar på ett annat par.
       delar:
@@ -957,6 +966,7 @@ ramar:
             - [Undrade ni något? Sätt ett frågetecken där.]
             - [Säg tack till författarna.]
     - rubrik: Frågekorten i sex steg
+      sagoform: { form: kort, kortbilder: { Kamratens frågor i sex steg: [ stjärna, vägspärr, handslag, eld, glödlampa, regnbåge, null ], Läsarens frågor i sex steg: [ stjärna, vägspärr, eld, glödlampa, regnbåge, null, null ] } }
       text:
         - På bladet står de två frågekorten i sex steg. Paret har Kamratens frågor framför sig när de berättar sagan för varandra, och Läsarens frågor när de lyssnar på ett annat par.
       delar:
@@ -983,6 +993,7 @@ ramar:
             - [Undrade ni något? Sätt ett frågetecken där.]
             - [Säg tack till författarna.]
     - rubrik: Rollkorten
+      sagoform: { form: kort }
       text:
         - Rollkorten ligger framför paret när de skriver, och efter varje mening byter paret kort.
       delar:
@@ -1177,6 +1188,7 @@ ramar:
             - ["5. Lösningen: Vad gör hjälten själv med det hen har fått?"]
             - ["6. Landningen: Fick hjälten sin önskan? Hur känns det nu?"]
     - rubrik: Sagobokens omslag
+      sagoform: { form: omslag, ram: lindorm, titel: Sagoboken }
       text:
         - Det här är bokens framsida, och gruppen gör den tillsammans i pass 28.
       delar:
@@ -1190,6 +1202,7 @@ ramar:
           falt:
             - { rubrik: Till läraren, text: "Kopiera omslaget på tjockt papper. Skriv elevernas namn vid Sagor av, eller låt varje elev skriva sitt förnamn där." }
     - rubrik: Bokens sida
+      sagoform: { form: sida, titel: Bokens sida }
       text:
         - Det här är en sida i sagoboken. Den har en ruta att rita i och rader där paret skriver sagan rent.
       delar:
@@ -1202,6 +1215,7 @@ ramar:
           falt:
             - { rubrik: Till läraren, text: "Paret får en sida för varje station, och i sex steg en till om en station blir lång. På sagans första sida skriver paret den första bokstaven stort i den lilla rutan bredvid de två första raderna. På de andra sidorna skriver de sidans nummer där. Från pass 24 ritar paret bilderna i rutan Rita." }
     - rubrik: Författarna
+      sagoform: { form: forfattare, titel: Författarna }
       text:
         - Det här är sidan om författarna, och den står sist i boken. Paret ritar sig själva och skriver sina namn, sin klass och det bästa med sagan.
       delar:

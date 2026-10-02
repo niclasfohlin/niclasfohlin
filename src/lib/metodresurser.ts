@@ -6,7 +6,8 @@ import { join } from 'node:path';
 import { Resvg } from '@resvg/resvg-js';
 import sharp from 'sharp';
 import { ELEVTYPSNITT_TTF, harElevtypsnitt, metodensBilder } from './ljudkort';
-import { BOKTYPSNITT_TTF, harLastexter } from './ramform';
+import { BOKTYPSNITT_TTF } from './ramform';
+import { harBoktypsnitt, sagoBilder } from './sagoblad';
 import type { MetodPost } from './metod';
 import type { MetodResurser } from './metoddocx';
 import { reservMatt, reservNyckel, samlaReservbilder } from './reservbild';
@@ -16,11 +17,11 @@ const las = (sokvag: string) => new Uint8Array(readFileSync(join(PUBLIC, sokvag.
 
 export function lasResurser(poster: MetodPost[]): MetodResurser {
   const bilder = new Map<string, Uint8Array>();
-  for (const p of poster) for (const b of metodensBilder(p.data, p.id)) if (!bilder.has(b)) bilder.set(b, las(b));
+  for (const p of poster) for (const b of [...metodensBilder(p.data, p.id), ...sagoBilder(p.data)]) if (!bilder.has(b)) bilder.set(b, las(b));
   return {
     bilder,
     elevtypsnitt: poster.some((p) => harElevtypsnitt(p.data)) ? las(ELEVTYPSNITT_TTF) : undefined,
-    boktypsnitt: poster.some((p) => harLastexter(p.data)) ? { cinzel: las(BOKTYPSNITT_TTF.cinzel), dekor: las(BOKTYPSNITT_TTF.dekor) } : undefined,
+    boktypsnitt: poster.some((p) => harBoktypsnitt(p.data)) ? { cinzel: las(BOKTYPSNITT_TTF.cinzel), dekor: las(BOKTYPSNITT_TTF.dekor) } : undefined,
   };
 }
 
