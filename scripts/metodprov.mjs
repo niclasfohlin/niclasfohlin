@@ -238,9 +238,13 @@ if (bilder) {
       });
       if (lastexter.length) {
         const norm = (s) => String(s).normalize('NFC').toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
+        // Textens och den sista frågans sista ord, vart för sig: en kort text slutar i raden under anfanget, och pdftotext
+        // läser då ut den raden före resten (Saga A om räven i Skrivkurs: sagoboken, 2026-10-02), så att ett svep över de
+        // sista tecknen inte hittas fast texten står hel på sidan.
+        const sistaOrd = (s) => String(s).split(/\s+/).map(norm).filter(Boolean).slice(-6);
         const nycklar = lastexter.map((ram) => {
           const [text, fragor] = ram.listor;
-          return { rubrik: ram.rubrik, delar: [norm(text.rubrik), norm(text.rader.at(-1)[0]).slice(-40), norm(fragor.rader.at(-1)[0]).slice(-40)] };
+          return { rubrik: ram.rubrik, delar: [norm(text.rubrik), ...sistaOrd(text.rader.at(-1)[0]), ...sistaOrd(fragor.rader.at(-1)[0])] };
         });
         const prova = (sidor, var_) => {
           const ns = sidor.map(norm);
