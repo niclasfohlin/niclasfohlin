@@ -67,8 +67,8 @@ type Barn = Paragraph | Table;
 // och tabeller, och delaSektioner gör sektionerna av det. Efter ett kortark börjar en vanlig sektion igen. En boksida
 // (lästexten, boksida()) står i en egen sektion med 1,5 cm marginal och raden Till läraren och nivåns knapp i sidfoten.
 type Boksektion = { not: string; niva: string; vad: string; farg: string };
-// Ett sagoblad (sagoFlod): rutan Till läraren i sidfoten, eller ingen sidfot på bokens blad.
-type Sagosektion = { not: string; utanSidfot: boolean };
+// Ett sagoblad (sagoFlod): rutan Till läraren i sidfoten, eller på bokens blad ingen sidfot och en kortare upphovsrad.
+type Sagosektion = { not: string; bokblad: boolean };
 class Sektionsbyte { constructor(readonly kortark: boolean, readonly bok?: Boksektion, readonly saga?: Sagosektion) {} }
 type Flod = (Barn | Sektionsbyte)[];
 const arBarn = (x: Barn | Sektionsbyte): x is Barn => !(x instanceof Sektionsbyte);
@@ -1083,11 +1083,11 @@ const sagoFoljd = (ramar: Ram[], i: number): Ram[] => { const ut: Ram[] = []; fo
 // blad utan sidfot, så att de går att kopiera in i den tryckta boken (riggens läsbarhetsrunda 2026-10-02). Upphovet står
 // litet i sidhuvudet på alla, som på boksidan.
 function sagoFlod(ram: Ram, d: MetodData): Flod {
-  return [...sagobladAv(ram, d).flatMap((b) => [new Sektionsbyte(false, undefined, { not: b.not, utanSidfot: b.bokblad }), ...sagobladBarn(b)]), new Sektionsbyte(false)];
+  return [...sagobladAv(ram, d).flatMap((b) => [new Sektionsbyte(false, undefined, { not: b.not, bokblad: b.bokblad }), ...sagobladBarn(b)]), new Sektionsbyte(false)];
 }
 // Sidfoten på ett sagoblad: raden Till läraren till vänster och sidnumret till höger.
 function sagoFot(s: Sagosektion): Footer {
-  if (s.utanSidfot) return new Footer({ children: [punktStycke()] });
+  if (s.bokblad) return new Footer({ children: [punktStycke()] });
   return new Footer({ children: [new Paragraph({
     tabStops: [{ type: TabStopType.RIGHT, position: BREDD_KORTARK }], spacing: { after: 0 },
     children: [
@@ -2592,11 +2592,12 @@ function sidfot(adress: string, bredd: number, liten = false): Footer {
 // och sidnumret i sidfoten, som i metodriggen.
 function sektion(barn: Barn[], huvudtext: string, adress: string, o: { liggande?: boolean; smal?: boolean; lathund?: boolean; kortark?: boolean; bok?: Boksektion; saga?: Sagosektion } = {}): ISectionOptions {
   // Ett sagoblad: kortarkets marginal på 1 cm, upphovet litet i sidhuvudet, som på boksidan, och rutan Till läraren och
-  // sidnumret i sidfoten, eller ingen sidfot på bokens blad (sagoFot).
+  // sidnumret i sidfoten, eller ingen sidfot på bokens blad (sagoFot). Bokens blad bär bara © Niclas Fohlin ·
+  // niclasfohlin.se, så att raden inte ser ut som en stämpel på elevernas omslag (granskningen 2026-10-02, K-186).
   if (o.saga) {
     return {
       properties: { page: { size: { ...A4, orientation: PageOrientation.PORTRAIT }, margin: { top: KORTMARGINAL, right: KORTMARGINAL, bottom: KORTMARGINAL, left: KORTMARGINAL, header: 280, footer: 280 } } },
-      headers: { default: bokHuvud(adress) },
+      headers: { default: bokHuvud(o.saga.bokblad ? SAJT : adress) },
       footers: { default: sagoFot(o.saga) },
       children: barn,
     };
