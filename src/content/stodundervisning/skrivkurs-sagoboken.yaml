@@ -1,0 +1,1419 @@
+# Metod i stödundervisning. Modellen står i src/content.config.ts och mallen i _mall.yaml.
+# Skriven av riggen 2026-10-02 ur Niclas uppdrag (intake/skrivkurs-sagoboken.md), sökningen och analysen.
+titel: "Skrivkurs: sagoboken"
+undertitel: Lärarledd skrivkurs i liten grupp där eleverna skriver sagor i par och gör en tryckt sagobok, för åk 1–6
+ingress: "Gruppen läser sagor och hittar sagans väg i fyra eller sex steg: hjälten önskar sig något, ett problem står i vägen och växer, och slutet knyter an till önskan. Sedan gör gruppen en saga tillsammans och paren sina egna. Eleverna berättar och spelar varje saga innan de skriver den. Kursen slutar med en tryckt sagobok."
+omrade: Skrivning
+arskurs:
+  - F-3
+  - 4-6
+arskursText: åk 1–6
+taggar:
+  - textstruktur
+  - skrivstrategier
+format:
+  - liten grupp
+  - par
+tid: 60 minuter per pass, tre pass i veckan
+period: Tio veckor
+grupp: Fyra till tolv elever
+material:
+  - Vägskyltarna för er version och ett rep eller en tejp på golvet
+  - Tolv berättartärningar på tjockt papper, två för varje fråga
+  - Sagans väg på två sidor, tre exemplar till varje par och ett i A3 som blir den förstorade vägen på väggen
+  - Ett blädderblock eller stora ark till gruppens saga, ett ark för varje station
+  - Hjältens kort, ett per par och ett i A3
+  - Spänningsberget, tre per par och ett i A3
+  - Frågekorten för er version och rollkorten, ett blad av varje per par
+  - Modellsagorna och kontrastparet, en kopia per elev
+  - En låda med enkla saker till sagoteatern, som tyg, en hatt och en pinne
+  - Lappar, linjerat papper, pennor, färgpennor och en mapp per par
+  - En dator per par som skriver på dator, och headset till den som dikterar
+  - Sagobokens omslag, Bokens sida och bladet Författarna
+uppdaterad: 2026-10-02
+relaterade:
+  - skrivkurs-berattelseram
+utkast: false
+inledning:
+  - Sagor och berättande är nog inprogrammerat i vårt DNA. Ända sedan människan tittade upp mot stjärnorna och undrade vad som fanns där ute, har vi berättat sagor för varandra. Nu ska du hjälpa eleverna att bli en del av detta arv. Det är ett fantastiskt uppdrag.
+  - Eleverna lär sig bygga en saga som håller ihop. Sagans väg är kursens kärna. Hjälten önskar sig något, ett problem står i vägen och växer, och sagan landar när hjälten har löst det. Varje saga börjar muntligt. Eleverna hittar på sagan, berättar den för varandra och spelar upp den för gruppen. Först sedan skriver de sagan, och sist läser de den för andra. Gruppen gör en saga tillsammans, och sedan gör eleverna sina egna i par. Varje par får egna sidor för sin saga i sagoboken. Ni trycker boken, och paren läser sina sagor för riktiga läsare.
+  - "Under kursen läser du sagor högt och visar sagans väg i dem. Du låter eleverna berätta och spela sina sagor innan de skriver. När du skriver inför gruppen, tänker du högt om varför du väljer som du gör. Du leder paren så att båda berättar och båda skriver. Och du ger respons medan sagan ännu går att ändra, och rättar stavningen först när ni gör boken."
+  - "Sagans väg finns i två versioner. Fyra steg, med Hjälten, Problemet, Lösningen och Landningen, passar de flesta grupper i åk 1–⁠3. I sex steg kommer Hjälparen och Det värsta till före Lösningen, och den versionen passar de flesta grupper i åk 4–⁠6. Hela gruppen använder samma version. Välj fyra steg när de flesta i gruppen skriver högst några meningar på egen hand, och sex steg när de flesta skriver en halv sida. Berättartärningarna ger idéer när paret inte kommer på något, och de avgör när paret inte kommer överens."
+  - Kursen är tio veckor med tre pass i veckan, och varje pass är 60 minuter. Före kursen gör du Sagokollen, där varje elev berättar eller skriver en saga till en bild. Du bestämmer också vem som ska läsa boken. Läs först de två tabellerna Sagans väg och tabellen Från idé till saga, och sedan kursplanen och tabellen Materialet i varje pass. Mallarna, tärningarna och modellsagorna finns under Kursens material.
+upplagg:
+  rubrik: Så fungerar insatsen
+  text: "Kursen har tre pass i veckan under tio veckor, alltså 30 pass om 60 minuter, och gruppen har fyra till tolv elever. I vecka 1 läser gruppen sagor, hittar sagans väg i dem och spelar upp en av dem. I vecka 2 hittar gruppen på sin hjälte och sin saga, berättar den och spelar upp den. I vecka 3–⁠4 skriver gruppen sagan tillsammans med dig vid pennan. I vecka 5–⁠8 gör paren först en eller två korta sagor och sedan den saga som ska stå i boken. I fyra steg väljer paret en av de korta sagorna till boken och bygger ut den. Varje saga går igenom samma fem moment: gruppen eller paret hittar på den, berättar den, spelar upp den, skriver den och läser den för andra. I vecka 8–⁠10 rättar ni sagorna, ritar bilderna, formger boken och trycker den. Kursen slutar med ett boksläpp. Från pass 13 har du ett blad för varje par, Parets väg. Där skriver du efter varje pass vilken station paret är på och vad de behöver nästa pass. Före och efter kursen gör du Sagokollen, och boken visar vad paren kan."
+gruppen:
+  rubrik: Så sätter du ihop gruppen
+  text: "Sätt ihop paren med omsorg, så att de två i varje par är bra på olika saker. Den ena kanske skriver säkrare och den andra berättar mer, eller så stavar den ena säkert och den andra har idéerna. Paren håller ihop hela kursen, eftersom sagan är deras. Är eleverna ett udda antal, blir ett av paren en trio, och den tredje är Utbyggaren. Utbyggaren läser meningen högt och föreslår hur paret kan bygga ut den. Vill paret ha med förslaget, skriver Skrivaren in det, och efter varje mening går rollerna runt. När paret får respons, läser de sagan för ett annat par, sitt lyssnarpar. Är paren ett udda antal, läser de för varandra i en ring: par 1 läser för par 2, par 2 för par 3 och par 3 för par 1. Kursen passar elever som kan skriva några meningar men som räknar upp händelser eller löser problemet direkt när de skriver en berättelse. Elever som ännu inte ljudar ihop ord är också med. Vad du gör för dem och för andra elever står i tabellen När en elev behöver något mer."
+principer:
+  rubrik: Tre saker att hålla fast vid
+  text: "Hjälten löser problemet själv. Hjälparen ger något, en sak eller ett råd, men det är hjälten som gör det svåra. Därför frågar ni vid Lösningen vad hjälten själv gör. Berätta innan ni skriver. Paret berättar varje saga tre gånger innan de skriver den, två gånger för varandra och en gång på scenen, och sagan växer varje gång. Gruppen eller Berättaren säger också varje mening högt innan någon skriver den, så att den som skriver inte tappar tråden. Rätta först när ni gör boken. Medan paren skriver, ger du respons på sagan, och stavningen rättar ni tillsammans i vecka 8–⁠9, eftersom andra ska läsa sagan i boken."
+tabeller:
+  - rubrik: När en elev behöver något mer
+    plats: efter-inledning
+    text: "De flesta elever får det stöd de behöver i paret och genom rollerna. Här står vad du gör för enskilda elever."
+    kolumner:
+      - Eleven
+      - Så gör du
+    rader:
+      - - Ljudar inte ihop ord än
+        - Eleven är med. Som Skrivare skriver eleven det hen kan, till exempel startordet, den första bokstaven eller ett kort ord, och kamraten eller du skriver resten. Sedan läser eleven det som står och följer orden med fingret. Kan eleven inte läsa frågorna på kortet, berättar hen först, och kamraten läser frågorna. Samtidigt tränar eleven avkodning i en annan insats. Sätt inte två sådana elever i samma par.
+      - - Skriver långsamt
+        - Som Skrivare skriver eleven början av meningen, och kamraten skriver resten medan eleven säger den. Det räknas som elevens tur. I renskriften skriver eleven den första meningen på sidan, och kamraten eller du skriver resten. Du kan också låta eleven skriva på dator eller diktera, som tabellen För hand eller på dator säger.
+      - - Ny i svenskan
+        - Eleven får höra dagens modellsaga och orden på tärningarna före passet, gärna med studiehandledaren eller modersmålsläraren. Den läraren kan också lyssna när eleven berättar parets saga på det språk eleven är starkast i. I paret berättar eleven på svenska med stöd av bilderna på bladet, och kamraten hjälper till med ett ord när eleven fastnar.
+      - - Har en språkstörning
+        - Eleven har bilderna på bladet och tärningarna framför sig när hen berättar, och kamraten ställer en fråga i taget från kortet. Eleven berättar först, och kamraten ritar elevens svar på en lapp vid varje station. När de sedan byter och kamraten berättar, har eleven lapparna framför sig och lyssnar efter svaren.
+      - - Har svårt att vänta
+        - Eleven får en uppgift i varje del, som att slå tärningen, hålla kortet eller peka på stationen. I sagoteatern håller eleven lådan, säger ”Frys!” eller spelar hjälparen åt ett annat par.
+      - - Vill inte spela
+        - Eleven berättar och visar bilderna på bladet, eller så spelar kamraten. Vill eleven inte läsa vid boksläppet, läser kamraten eller du, medan paret visar bilderna.
+      - - Kamraten är borta
+        - Eleven skriver stationen ensam och säger varje mening högt innan hen skriver den. Nästa pass läser paret tillsammans det som eleven skrev. I ett berättarpass berättar eleven sagan för lyssnarparet och spelar upp den tillsammans med dem.
+  - rubrik: Sagans väg i fyra steg
+    plats: efter-inledning
+    meny: true
+    kolumner:
+      - Stationen
+      - Startorden
+      - Frågan
+    rader:
+      - - 1 Hjälten
+        - Det var en gång
+        - Vem är hjälten, och vad vill hen?
+      - - 2 Problemet
+        - Men en dag
+        - Vad står i vägen för det hen vill?
+      - - 3 Lösningen
+        - Då
+        - Hur löser hjälten problemet själv?
+      - - 4 Landningen
+        - Till slut
+        - Fick hjälten det hen ville?
+    not: "I fyra steg är sagan kort, med en eller två meningar vid varje station. Redan i första meningen vill hjälten något. Hjälten har också med sig en sak eller kan något, och det använder hen vid Lösningen."
+  - rubrik: Sagans väg i sex steg
+    plats: efter-inledning
+    kolumner:
+      - Stationen
+      - Startorden
+      - Frågan
+    rader:
+      - - 1 Hjälten
+        - Det var en gång
+        - Vem är hjälten, och vad önskar hen sig?
+      - - 2 Problemet
+        - Men en dag
+        - Vad står i vägen för önskan?
+      - - 3 Hjälparen
+        - På vägen mötte
+        - Vem hjälper hjälten, och vad får hjälten?
+      - - 4 Det värsta
+        - Plötsligt
+        - Hjälten försöker två gånger. Vad händer?
+      - - 5 Lösningen
+        - Men då
+        - Vad gör hjälten själv med det hen har fått?
+      - - 6 Landningen
+        - Till slut
+        - Fick hjälten sin önskan? Hur känns det nu?
+    not: "Sex steg har samma stationer som fyra steg och två till mellan Problemet och Lösningen, så att problemet hinner växa. Startorden är ett stöd, och i boksagan får paret byta dem mot egna."
+  - rubrik: Från idé till saga
+    plats: efter-inledning
+    meny: true
+    text: "Gruppens saga i vecka 2–⁠4 och parens sagor i vecka 5–⁠8 går igenom samma fem moment. Eleverna berättar sagan tre gånger innan de skriver den, och sagan hinner växa medan de berättar."
+    kolumner:
+      - Momentet
+      - Det eleverna gör
+      - Med vad
+    rader:
+      - - 1. Hitta på
+        - Paret slår tärningarna och väljer bland sidorna. I fyra steg ritar paret i rutan vid varje station, och i sex steg skriver de några ord där. Paret färgar också lågorna på berget. Ju mer spännande stationen ska vara, desto fler lågor färgar de.
+        - Tärningarna, Sagans väg och Spänningsberget, och Hjältens kort till gruppens saga och boksagan
+      - - 2. Berätta
+        - Paret berättar sagan för varandra två gånger med bladet Sagans väg framför sig. Kamraten läser frågan på kortet vid varje station, och när sagan är slut byter de. Den andra berättar då samma saga med svaren i.
+        - Sagans väg och Kamratens frågor
+      - - 3. Spela
+        - Paret spelar sagan för gruppen längs skyltarna. Lyssnarparet och gruppen ger idéer, som paret får på lappar. Sist väljer paret de lappar de vill ha och skriver en egen lapp om det som kom till när de berättade. Lapparna sätter de vid stationerna.
+        - Vägskyltarna, repet, lådan och lappar
+      - - 4. Skriva
+        - Berättaren säger en mening, Skrivaren säger den igen och skriver, och båda läser. Efter varje mening byter de roller. När paret har skrivit sagan, sätter de en bock vid varje station där sagan svarar på stationens fråga.
+        - Sagans väg, rollkorten och papper eller dator
+      - - 5. Läsa
+        - Paret läser sagan för ett annat par, som lyssnar och svarar på Läsarens frågor. När paret läser boksagan, färgar lyssnarparet också ett eget berg. Paret som skrev sagan jämför lågorna på de två bergen och ändrar sagan där det behövs.
+        - Läsarens frågor och Spänningsberget
+    not: "Gruppen hittar på sin saga i pass 4–⁠5, berättar och spelar den i pass 6 och skriver den med dig vid pennan i pass 7–⁠12. I pass 12 läser gruppen sagan och svarar på Läsarens frågor."
+  - rubrik: Berättartärningarna
+    plats: efter-inledning
+    kolumner:
+      - Tärningen
+      - Sidorna
+      - Till stationen
+    rader:
+      - - "1A · Vem?"
+        - en prinsessa, en trollkarl, en räv, en mus, en robot, en enhörning
+        - Hjälten
+      - - "1B · Vem?"
+        - en prins, en katt, en groda, en astronaut, en igelkott, en pingvin
+        - Hjälten
+      - - "2A · Var?"
+        - ett slott, en skog, en ö, ett berg, rymden, en stad
+        - Hjälten
+      - - "2B · Var?"
+        - havet, en öken, en stuga, ett skepp, en vulkan, ett tåg
+        - Hjälten
+      - - "3A · Vad önskar hen?"
+        - en skatt, komma hem, en vän, flyga, vinna, rädda någon
+        - Hjälten
+      - - "3B · Vad önskar hen?"
+        - en present, en krona, segla, en tårta, bli stark, sjunga
+        - Hjälten
+      - - "4A · Vad händer?"
+        - en storm, vilse, en drake, ett troll, inlåst, sjuk
+        - Problemet och Det värsta
+      - - "4B · Vad händer?"
+        - en varg, ett spöke, en orm, en krokodil, ett hål, natten
+        - Problemet och Det värsta
+      - - "5A · Vem hjälper?"
+        - en uggla, en fe, en häst, en myra, en björn, en hund
+        - Hjälparen, bara i sex steg
+      - - "5B · Vem hjälper?"
+        - en delfin, en örn, en farmor, ett bi, en sköldpadda, en ekorre
+        - Hjälparen, bara i sex steg
+      - - "6A · Vilken sak?"
+        - en nyckel, en trollstav, en karta, en spegel, en flöjt, ett par stövlar
+        - "Hjälten i fyra steg, och Hjälparen och Lösningen i sex steg"
+      - - "6B · Vilken sak?"
+        - ett ljus, ett rep, en bok, ett paraply, ett frö, en hatt
+        - "Hjälten i fyra steg, och Hjälparen och Lösningen i sex steg"
+    not: "Varje fråga har två tärningar, A och B, och alltså tolv sidor att välja bland. När paret planerar sin saga, slår de den ena tärningen eller båda och väljer en av sidorna. Paret får slå om en gång eller välja en annan sida, och när paret inte kommer överens avgör tärningen. I Sagostarten slår en elev en tärning för varje fråga. I fyra steg är det tärning 1, 3 och 4, och i sex steg också tärning 5 och 6. Gruppen slår tärning 2 i pass 4, och paren slår den när de planerar sin saga. I fyra steg slår paret tärning 6 vid Hjälten när de planerar, så att hjälten har saken med sig från början och kan använda den vid Lösningen. I sex steg kan paret slå tärning 4 en gång till vid Det värsta, så att samma problem blir värre. I sex steg frågar du alltid paret varför hjälparen finns i sagan."
+  - rubrik: Fem slags pass
+    plats: efter-tidsschema
+    text: "I kursplanen ser du om passet är ett läspass, ett planeringspass, ett berättarpass, ett skrivpass eller ett bokpass. Skrivpassen följer tidsschemat, och berättarpassen följer tabellen Berättarpasset. Några pass går till på ett annat sätt, och deras minuter står i tabellen Pass med egna minuter. Det är pass 1–⁠7, 12, 15, 22–⁠24, 26 och 30, och i fyra steg också pass 11, 18 och 19. I planeringspassen sitter du med två eller tre par. Från pass 13 börjar du med de par där du har skrivit på Parets väg att de behöver dig."
+    kolumner:
+      - Passet
+      - Minut för minut
+    rader:
+      - - Läspass
+        - "Pass 1–⁠3.\nFöre: kopiera dagens saga till varje elev och ta fram repet och skyltarna.\n0–⁠5 Du berättar musens saga i fyra meningar. I sex steg berättar du den vid skylt 1, 2, 5 och 6.\n5–⁠35 Du berättar dagens saga vid skyltarna och läser den sedan högt. Gruppen återberättar den längs skyltarna, och när du säger ”Byt!” tar nästa elev över. Gruppen hittar på en rörelse till varje startord, till exempel en båge med armarna när ni säger ”Det var en gång”.\n35–⁠50 Gruppen fyller i sagans väg på tavlan.\n50–⁠60 Gruppen spelar upp sagan längs skyltarna.\nDu kan säga: ”Vad vill hjälten? Vad står i vägen? Hur många gånger försöker hen?”"
+      - - Planeringspass
+        - "Pass 4–⁠5, 13 och 16.\nFöre: ta fram tärningarna, skyltarna, bladen, bergen och Hjältens kort.\n0–⁠5 Gruppen gör Sagostarten.\n5–⁠20 Gruppen eller paren slår tärningarna och väljer bland tärningarnas sidor.\n20–⁠50 Gruppen eller paren fyller i sagans väg och berget. I pass 4 fyller de i Hjältens kort, och i sex steg gör de det också i pass 16. Den ena sitter då i heta stolen som hjälten och svarar på frågor.\n50–⁠60 Två eller tre par berättar sagan längs skyltarna så långt den har kommit, och de andra berättar för sitt lyssnarpar.\nDu kan säga: ”Vad önskar sig hjälten mest av allt? Var vill ni ha flest lågor?” I fyra steg: ”Vad har hjälten med sig?” I sex steg: ”Varför finns hjälparen i sagan?”"
+      - - Berättarpass
+        - "Pass 6, 14 och 17, och i fyra steg också pass 19.\nPasset följer tabellen Berättarpasset, del för del."
+      - - Skrivpass
+        - "Pass 7–⁠12, 15, 18 och 20–⁠23, och i sex steg också pass 19.\nPasset följer tidsschemat, del för del."
+      - - Bokpass
+        - "Pass 24–⁠30.\nFöre: ta fram parens sagor, Bokens sidor och färgpennorna.\n0–⁠5 Gruppen gör Sagostarten, utan skyltarna.\n5–⁠15 Du visar dagens uppgift på en sida som du har gjort själv.\n15–⁠50 Paren rättar, skriver rent, ritar bilderna eller formger boken, och du sitter med ett par i taget.\n50–⁠60 Ett par läser en sida som är klar.\nDu kan säga: ”Läs meningen för mig. Finns det något ord som läsaren inte kan läsa som det står nu?”"
+  - rubrik: Berättarpasset
+    plats: efter-tidsschema
+    text: "Berättarpasset kommer i pass 6, 14 och 17, och i fyra steg också i pass 19. Paret berättar sagan tre gånger innan de skriver den, och den blir lite längre varje gång. Du visar först hur en saga växer, och sedan tar paren över. Sist skriver eller ritar paret på lappar det som de vill ha med i sagan."
+    kolumner:
+      - Delen
+      - Vad du gör och säger
+    rader:
+      - - "Sagostarten\n0–⁠5"
+        - "Gruppen slår tärningarna och berättar en saga med en mening vid varje skylt, som i skrivpasset.\nDu kan säga: ”Hur ska det gå?”"
+      - - "Sagan växer\n5–⁠10"
+        - "Berätta en kort egen saga vid skyltarna, en mening vid varje station. En elev får vara din kamrat. Vid varje station läser eleven frågan på kortet Kamratens frågor. Svara, och låt sedan eleven berätta din saga en gång till med svaren i. Fråga gruppen vad som var nytt andra gången.\nDu kan säga: ”Lyssna nu. Först berättar jag min saga, och sedan berättar min kamrat den med svaren i.” ”Vad var nytt andra gången?”"
+      - - "Paren berättar\n10–⁠30"
+        - "Paret lägger bladet Sagans väg mellan sig, med kortet bredvid. Den ena berättar station för station, och den andra läser stationens fråga på kortet. När sagan är slut byter de. Nu berättar den andra samma saga med svaren i, och den som berättade först lyssnar efter svaren. Kan den ena inte läsa frågorna än, berättar hen först, och kamraten läser frågorna. I en trio turas de två som lyssnar om att fråga, varannan station var. Sist bestämmer paret vem som spelar hjälten och vem som spelar det som står i vägen. Gå mellan paren och lyssna efter det som är nytt när den andra berättar.\nDu kan säga: ”Säg det igen, och ta med det hen frågade om.” ”Vad säger hjälten då? Säg det som hjälten.” ”Vilken station har flest lågor? Där tar ni god tid på er.”"
+      - - "Sagoteatern\n30–⁠55"
+        - "Paren spelar sin saga längs repet utan bladet, och de får ta en sak ur lådan om de vill. Paret får låna en kamrat ur publiken som hjälpare, och du kan vara berättare. Vid stationen med flest lågor säger du ”Frys!”, och hjälten säger högt vad hen tänker. Efter varje saga ger lyssnarparet en idé först, och sedan gruppen. En idé gör det värre för hjälten, ger hjälten ett försök till eller ger någon en replik. Den löser aldrig problemet åt hjälten. Du eller lyssnarparet ritar eller skriver varje idé på en lapp och ger den till paret direkt.\nDu kan säga: ”Frys! Vad tänker hjälten nu?” ”Vad kan göra det ännu värre för hjälten?” ”Vem löser det, hjälten eller någon annan?”"
+      - - "Fånga sagan\n55–⁠60"
+        - "Paret väljer de idéer de vill ha bland lapparna och skriver eller ritar en egen lapp för det som kom till när de berättade. Lapparna sätter de vid stationerna på bladet. Sedan säger paret högt vilken mening de ska börja med nästa pass, och skriver de första orden på en lapp vid stationen.\nDu kan säga: ”Vad vill ni att läsaren ska höra?” ”Säg meningen ni skriver först nästa gång.”"
+    not: "Pass 6 har en egen rad i tabellen Pass med egna minuter, och i fyra steg har pass 19 det också. I pass 14 visar du med din egen saga hur en saga växer, och i pass 17 visar ett par hur deras saga växte. Är ni två eller tre par, spelar varje par sagan två gånger och byter roller mellan gångerna. Är ni fem eller sex par, har varje par omkring fyra minuter på scenen. Ett par som glömmer sagan mellan passen kan spela in den när de berättar, och lyssna på inspelningen av stationen innan de skriver."
+  - rubrik: Berätta och spela med sagans väg
+    plats: efter-tidsschema
+    text: "Tabellen säger vad kamraten frågar vid varje station, vad paret gör på scenen och vilket skrivdrag paret använder i texten. På scenen spelar den ena hjälten och den andra det som står i vägen. Paret skriver det de har sagt och spelat, och i skrivpasset börjar de med meningen de bestämde i slutet av berättarpasset."
+    kolumner:
+      - Stationen
+      - Kamraten frågar
+      - På scenen
+      - I texten
+    rader:
+      - - Hjälten
+        - Var bor hjälten, och hur ser hen ut?
+        - Hjälten kliver fram och säger vad hen vill.
+        - Börja med vem, var och önskan.
+      - - Problemet
+        - "Hur känns det för hjälten?\nI fyra steg: Vad gör hjälten först? Varför går det inte?"
+        - Hjälten visar med kroppen hur hen känner sig.
+        - Låt kroppen visa känslan. I fyra steg skriver paret också ett försök som misslyckas.
+      - - "Hjälparen\nbara i sex steg"
+        - Vad säger hjälparen?
+        - Hjälparen ger hjälten saken eller rådet och säger en replik.
+        - En replik.
+      - - "Det värsta\nbara i sex steg"
+        - Vad gör hjälten först? Och vad händer då?
+        - Paret spelar båda försöken långsamt, ett steg i taget.
+        - Sakta ner vid det värsta.
+      - - Lösningen
+        - "Vad säger hjälten när hen löser problemet?\nI fyra steg: Vad har hjälten med sig, eller vad kan hen?"
+        - Hjälten använder det hen har eller kan och säger en replik.
+        - Låt hjälten göra det svåra själv, gärna med en replik.
+      - - Landningen
+        - Hur känns det för hjälten nu?
+        - Hjälten visar att önskan har gått i uppfyllelse.
+        - Knyt ihop slutet med önskan.
+    not: "I fyra steg hoppar paret över Hjälparen och Det värsta. På scenen säger figurerna högt vad de vill och känner, mer än man gör i verkligheten. Det visar du i pass 3 och 6."
+  - rubrik: Pass med egna minuter
+    plats: efter-tidsschema
+    text: "De här passen går till på ett annat sätt än de andra passen av samma slag. Här står deras minuter. Alla andra pass följer tidsschemat, tabellen Berättarpasset eller sin rad i Fem slags pass."
+    kolumner:
+      - Passet
+      - Minut för minut
+    rader:
+      - - Pass 1
+        - "Läspass.\n0–⁠10 Berätta att gruppen ska göra en sagobok och vem som ska läsa den, och säg vilka som är par. Berätta sedan musens saga och lägg ut en skylt för varje mening. I sex steg lägger du skylt 1, 2, 5 och 6. Så här går sagan: ”Det var en gång en mus som ville ha en skatt. Men en dag kom en stor drake och vaktade skatten. Då kröp musen in genom ett hål som var för litet för draken. Till slut hade musen skatten, precis som hon ville.”\n10–⁠25 Berätta modellsaga 1 vid skyltarna och läs den sedan högt. Stanna vid varje station, läs frågan på skylten och låt gruppen svara.\n25–⁠40 Gruppen återberättar sagan längs skyltarna. När du säger ”Byt!” tar nästa elev över.\n40–⁠50 Gruppen fyller i sagans väg på tavlan.\n50–⁠60 Gruppen återberättar sagan en gång till, med en elev vid varje skylt."
+      - - Pass 2
+        - "Läspass.\n0–⁠5 Du berättar musens saga.\n5–⁠20 Läs kontrastparet, saga A och saga B. Båda handlar om samma hjälte, men saga A saknar det som saga B har. Paren letar efter önskan och problemet i båda och pekar i texten.\n20–⁠35 Gruppen fyller i sagans väg för båda på tavlan och säger vad som saknas i saga A. Det skriver du under Sagornas ord, en rad för varje station.\n35–⁠50 Rita berget på tavlan, och gruppen färgar lågorna för båda sagorna.\n50–⁠60 Gruppen berättar saga B längs skyltarna."
+      - - Pass 3
+        - "Läspass.\n0–⁠5 Du berättar musens saga, och gruppen gör rörelserna till startorden.\n5–⁠25 Berätta och läs modellsaga 2, och gruppen återberättar den längs skyltarna.\n25–⁠40 Gruppen spelar sagan längs repet i sin första sagoteater, och du är berättare.\n40–⁠50 Gruppen berättar sagan en gång till med en ny hjälte som gruppen väljer.\n50–⁠60 Gruppen säger vad som är typiskt för en saga, och du skriver sagornas kännetecken under Sagornas ord."
+      - - Pass 4
+        - "Planeringspass.\n0–⁠10 Visa A-tärningarna, en i taget. Säg ordet under varje bild, och gruppen säger det efter. Gör sedan den första Sagostarten, och säg själv den första meningen.\n10–⁠20 Gruppen slår tärning 1, 2 och 3, i fyra steg också tärning 6. Är gruppen oense, avgör tärningen.\n20–⁠50 Gruppen fyller i Hjältens kort i A3. Sitt först i heta stolen som hjälten och svara på frågorna på kortet, och låt sedan två eller tre elever sitta där.\n50–⁠60 Eleverna prövar var sin första mening vid skylten Hjälten."
+      - - Pass 5
+        - "Planeringspass.\n0–⁠10 Visa B-tärningarna och gör Sagostarten.\n10–⁠20 Gruppen slår tärning 4, och i sex steg också tärning 5 och 6.\n20–⁠50 Gruppen skriver ett eller två ord vid varje station på den förstorade vägen och färgar berget i A3. Landningen bestämmer gruppen i pass 6.\n50–⁠60 Gruppen berättar sagan längs skyltarna."
+      - - Pass 6
+        - "Berättarpass för gruppen.\n0–⁠5 Gruppen gör Sagostarten.\n5–⁠25 Gruppen berättar sin saga längs repet, en elev vid varje skylt. Du läser frågan på kortet Kamratens frågor vid varje station, och den som står där svarar. Sedan berättar nya elever hela sagan en gång till med svaren i. Vid Landningen föreslår paren var sitt slut, och gruppen väljer det som knyter an till önskan.\n25–⁠50 Gruppen spelar sagan längs repet, och du är berättarrösten. Vid stationen med flest lågor säger du ”Frys!” Efter sagan ger paren idéer, och du skriver dem på lappar och sätter lapparna vid den förstorade vägen.\n50–⁠60 Gruppen väljer bland idéerna och säger den första meningen i gruppens saga."
+      - - Pass 7
+        - "Skrivpass.\n10–⁠20 Du visar draget att börja med vem, var och önskan.\n20–⁠35 Gruppen skriver stationen Hjälten med dig vid pennan.\n35–⁠50 Du visar rollerna med en elev och skriver fraserna på tavlan: ”Din tur.” ”Säg meningen igen.” ”Ska vi höra båda förslagen?” Paren får rollkorten och frågekorten och övar rollerna med gruppens mening.\n50–⁠60 Ett par läser gruppens station för de andra."
+      - - Pass 11
+        - "Skrivpass i fyra steg. Passet har inget nytt drag.\n10–⁠20 Du läser hela gruppens saga, och gruppen säger var dragen från pass 7–⁠10 syns.\n20–⁠50 Paren ritar en bild till varje station på sitt blad och berättar sagan för varandra."
+      - - Pass 12
+        - "Skrivpass.\n10–⁠20 Du visar hur man läser gruppens saga med kortet Läsarens frågor. Läs en station, svara som läsare på frågan på kortet och sätt ett frågetecken där du undrar något.\n20–⁠50 Gruppen läser hela sagan med kortet och ändrar en sak. I fyra steg skriver gruppen sedan en snabbsaga i fyra meningar på tavlan."
+      - - Pass 15 och 18
+        - "Skrivpass. Pass 18 går till så här bara i fyra steg.\n20–⁠50 Paren skriver hela sagan, en eller två meningar vid varje station. Sedan sätter de en bock vid varje station där sagan svarar på stationens fråga.\n50–⁠60 Varje par läser sagan för sitt lyssnarpar, som svarar på Läsarens frågor."
+      - - Pass 19
+        - "Berättarpass för boksagan, bara i fyra steg.\n0–⁠5 Gruppen gör Sagostarten.\n5–⁠20 Paret lägger bladen för parsaga 1 och 2 bredvid varandra, räknar hur många bockar varje saga har och väljer vilken saga som ska stå i boken. Sedan vänder paret bladen och ritar vägen ur minnet på en lapp, med en ruta för varje station. Paret fyller i Hjältens kort med ett ord eller en bild i varje fält. Den ena sitter i heta stolen och svarar som hjälten, medan den andra ritar svaren på kortet.\n20–⁠35 Paren berättar sagan två gånger med kortet Kamratens frågor och lappen med vägen, utan bladet.\n35–⁠55 Paren spelar sin saga som i Sagoteatern, och gruppen säger var sagan behöver en mening till: ett försök vid Problemet och en replik vid Lösningen.\n55–⁠60 Paren gör som i Fånga sagan."
+      - - Pass 22 och 23
+        - "Skrivpass. Passen har inget nytt drag.\nI pass 22, minut 10–⁠20, läser du gruppens saga, och gruppen lyssnar som ett lyssnarpar. Gruppen svarar på Läsarens frågor och färgar ett nytt berg i A3, och sedan jämför ni det med berget som gruppen färgade i pass 5. Sedan sätter varje par bockarna på bladet för boksagan, i fyra steg med en ny färg. I minut 20–⁠50 ger paren varandra respons med Läsarens frågor och berget.\nI pass 23, minut 10–⁠20, visar du på gruppens saga hur ni ändrar en station där de två bergen har olika många lågor. Läs stationen, säg vad läsaren missade, och lägg sedan till en mening, byt ett ord eller stryk en mening. I minut 20–⁠50 gör paren likadant med sina sagor. Lägger paret till en mening, skriver de den på en lapp och sätter lappen där meningen ska stå."
+      - - Pass 24
+        - "Bokpass.\n5–⁠15 Visa hur du rättar några meningar som du har skrivit själv. Rätta det läsaren behöver för att kunna läsa sagan: stavningen, stor bokstav och punkt.\n15–⁠50 Paren läser sagan för dig, ett par i taget. De andra paren ritar bilderna på Bokens sida, en sida för varje station, eller övar på att läsa sagan för sitt lyssnarpar.\n50–⁠60 Ett par läser en rättad station."
+      - - Pass 26
+        - "Bokpass. I sex steg gör alla elever Sagokollen samtidigt i minut 5–⁠20, och sedan skriver paren rent. I fyra steg gör eleverna Sagokollen hos dig, en i taget, medan paren skriver rent. Dela upp gruppen så att lika många gör den i pass 26, 27 och 28. Hjälper du ett par med renskriften, ta inte någon av dem till Sagokollen samma pass."
+      - - Pass 30
+        - "Boksläppet. Paren läser eller spelar sin saga för läsarna, en saga i taget, och skriver sina namn i böckerna. Vill en elev inte läsa, läser kamraten eller du, medan paret visar bilderna."
+  - rubrik: Skrivdragen
+    plats: efter-steg
+    text: "Ett skrivdrag är ett val som en författare gör för att läsaren ska se, höra eller känna något. I pass 7–⁠11 lär sig gruppen ett drag i taget, i fyra steg fyra av dragen. Draget att sakta ner kommer i pass 20. I pass 13–⁠21 står dagens drag i kursplanen, och pass 22 och 23 har inget nytt drag. Har du skrivit på Parets väg att paren behöver ett annat drag, tar du det draget i stället. Du lär ut varje drag på samma sätt. Du visar draget, och paren säger en mening med det. Sedan skriver paren meningen vid sin station och stryker under den, och när paret läser för gruppen börjar de med den meningen."
+    kolumner:
+      - Draget
+      - Så tänker du högt
+      - Det sitter när
+    rader:
+      - - "Börja med vem, var och önskan\nDraget hör till Hjälten. Välj det när hjälten inte vill något eller när önskan kommer sent.\nDraget finns i Bockarna Bruse, i Hans och Greta och i Jack och bönstjälken."
+        - "Jag skriver: Det var en gång en mus. Vet läsaren vad musen vill? Nej. Jag lägger till var hon bor och vad hon vill. Det var en gång en mus som bodde under en ek. Mest av allt ville hon ha en skatt."
+        - Paret skriver önskan i en av de två första meningarna utan att du frågar efter den.
+      - - "Låt kroppen visa känslan\nDraget hör till Problemet och Det värsta. Välj det när du hör ”hen blev rädd” eller ”hen var ledsen”.\nDraget finns i De tre små grisarna, i Hans och Greta och i Jack och bönstjälken."
+        - "Jag skriver: Räven var rädd. Nej, jag vill visa det. Rävens ben skakade."
+        - Paret byter själv ett känsloord mot något kroppen gör.
+      - - "En replik\nDraget hör till Hjälparen och Lösningen. Välj det när läsaren aldrig får höra vad figurerna säger, varken när hjälparen ger rådet eller när det gäller som mest.\nDraget finns i Bockarna Bruse, i Hans och Greta och i Jack och bönstjälken."
+        - "Jag skriver: Musen kröp in genom hålet. Vad sa hon då? Jag låter läsaren höra henne. ”Du är för stor för hålet”, viskade musen och kröp in."
+        - Paret skriver en replik med sa, ropade eller viskade, och repliken för sagan framåt.
+      - - "Sakta ner vid det värsta\nDraget hör till Det värsta, och i fyra steg till Problemet. Välj det när hjälten löser problemet redan i nästa mening.\nDraget finns i Hans och Greta, i Jack och bönstjälken och i saga B om räven, och i fyra steg i De tre små grisarna."
+        - "Jag skriver: Trollet kom. Nej, jag tar det steg för steg. Bron knakade. En grön hand tog tag i räcket."
+        - Stationen med flest lågor har flest meningar, och hjälten försöker två gånger.
+      - - "Knyt ihop slutet med önskan\nDraget hör till Landningen. Välj det när sagan slutar med att hjälten går hem eller vaknar.\nDraget finns i alla modellsagorna och i saga B i båda kontrastparen."
+        - "Jag skriver: Till slut gick musen hem. Vad ville hon i början? En skatt. Jag skriver: Till slut hade musen skatten, precis som hon ville."
+        - Den sista meningen säger om hjälten fick det hen ville.
+    not: "Gruppen samlar dragen på väggen under Sagornas ord och ger varje drag ett eget namn. Där får varje drag tre rader: gruppens namn på draget, meningen ur gruppens saga och en mening ur ett pars saga. Den tredje raden skriver du från vecka 5, om paret säger ja. Under Sagornas ord står också det som saknades i saga A, sagornas kännetecken och de ord paren ofta frågar efter. Där står också ord som för sagan vidare, som ”Plötsligt”, ”Efter ett tag” och ”Äntligen”. I pass 12 skriver du av listan på väggen, och från pass 13 har varje par en kopia i sin mapp."
+  - rubrik: Spänningen längs vägen
+    plats: efter-steg
+    text: "Dramaturgi är hur spänningen går upp och ner i en saga. Spänningsberget gör spänningen synlig. Stationerna står längs vägen, och lågorna visar hur spännande det är vid varje station. I pass 2 färgar gruppen lågorna för kontrastparet, och saga A blir platt medan saga B får en topp. Sedan använder paren berget tre gånger. När paret hittar på sagan, färgar de lågorna efter hur spännande de vill att varje station ska vara. När paret berättar och skriver får stationen med flest lågor mest tid och flest meningar, och där saktar paret ner. När lyssnarparet har hört sagan färgar de ett eget berg, och paret som skrev sagan jämför lågorna på de två bergen. Vid en station där bergen har olika många lågor behöver paret ändra sagan."
+    kolumner:
+      - Stationen
+      - Spänningen
+      - Läsaren tänker
+      - Skrivdraget
+    rader:
+      - - Hjälten
+        - Lugnt, en eller två lågor
+        - Vem är det här, och vad vill hen?
+        - Börja med vem, var och önskan.
+      - - Problemet
+        - "Spänningen stiger, två eller tre lågor\nI fyra steg är Problemet toppen, med fyra eller fem lågor"
+        - Oj, hur ska det gå?
+        - Låt kroppen visa känslan.
+      - - "Hjälparen\nbara i sex steg"
+        - En vilopaus, två lågor
+        - Kanske går det ändå.
+        - Låt hjälparen säga en replik.
+      - - "Det värsta\nbara i sex steg"
+        - Högst upp, fem lågor
+        - Jag håller andan.
+        - Sakta ner, och låt hjälten försöka två gånger.
+      - - Lösningen
+        - Spänningen släpper, tre lågor
+        - Äntligen!
+        - Låt hjälten säga en replik medan hen gör det svåra själv.
+      - - Landningen
+        - Lugnt igen, en låga
+        - Skönt, det blev bra.
+        - Knyt ihop slutet med önskan.
+    not: "I fyra steg är Problemet toppen, och så är bladet Spänningsberget för fyra steg ritat. I boksagan saktar paret ner vid Problemet med ett försök som misslyckas."
+  - rubrik: För hand eller på dator
+    plats: efter-arbetsform
+    text: "Paret skriver hela sagan på samma sätt, för hand eller på dator. I fyra steg skriver paren för hand på bladet Sagans väg, också när gruppen går i åk 4–⁠6. I sex steg kan ett par skriva på dator om båda skriver minst lika fort på tangentbordet som för hand. Det prövar ni genom att båda skriver samma mening för hand och på datorn. Behöver en elev dator eller diktering som anpassning, bestämmer du det före kursen. Eleven ska ha tränat verktyget, och då skriver hela paret på dator."
+    kolumner:
+      - Delen
+      - För hand
+      - På dator
+    rader:
+      - - Där sagan står
+        - I fyra steg skriver paret på bladet Sagans väg. I sex steg skriver paret på linjerat papper och sätter stationens nummer i marginalen.
+        - Paret skriver i ett delat dokument med stationerna som rubriker. Bladet Sagans väg ligger bredvid datorn, och där sätter paret bockarna.
+      - - Rollerna
+        - Skrivaren har pennan, och efter varje mening byter paret kort.
+        - Paret har en dator. Efter varje mening tar den nya Skrivaren över tangentbordet, och Berättaren pekar på bladet och rör inte tangenterna.
+      - - Stavningen
+        - Skrivaren skriver det hen hör, och ni rättar i bokpassen.
+        - Stavningskontrollen är av i skrivpassen och på i bokpassen. Den missar ungefär vart tredje fel och har svårt med sammansatta ord, så ni läser igenom texten själva också.
+      - - Båda läser
+        - Båda läser meningen tillsammans.
+        - Båda läser meningen på skärmen. Kan en elev inte läsa texten än, låter paret datorn läsa upp meningen.
+      - - Att diktera
+        - Kamraten eller du skriver det eleven säger, och sedan läser eleven texten och följer med fingret.
+        - En elev som har tränat dikterar med headset längst bort i rummet. Högst två par dikterar samtidigt. Skrivaren säger meningen igen till datorn, och paret rättar ord som datorn hörde fel.
+      - - Draget och nya meningar
+        - Paret drar ett blyertsstreck under meningen med draget. En ny mening skriver paret på en lapp och sätter lappen där meningen ska stå.
+        - Paret stryker under meningen med draget genom att trycka Ctrl + U. Vill paret lägga till en mening, skriver de den där den ska stå, i en annan färg.
+      - - Till boken
+        - Paret skriver rent på Bokens sida.
+        - Paret skriver ut texten för varje station och klistrar in den på Bokens sida. Innan paret skriver ut tar de bort sagans första bokstav. Sedan skriver de bokstaven stort för hand i rutan och ritar bilden.
+    not: "På en Chromebook läser Textuppläsning upp markerad text, och den finns under Inställningar > Tillgänglighet. I Word gör knappen Läs upp på fliken Granska samma sak. Google Dokument läser bara upp engelska. Eleven dikterar med Röstinmatning under Verktyg i Google Dokument, med knappen Diktera på fliken Start i Word eller med Diktering på en Chromebook. I Word stänger du av stavningskontrollen under Arkiv > Alternativ > Språkkontroll. Visar skolans Google Dokument röda streck under svenska ord, stänger du av dem under Verktyg > Stavning och grammatik. När du delar dokumentet i Classroom väljer du ”Eleverna kan redigera filen”."
+  - rubrik: Modellsagornas väg
+    plats: efter-urval
+    text: "I tabellen ser du var stationerna står i varje modellsaga och kontrastsaga, vilken fråga du ställer till gruppen och vad svaret är, och vilka ord du förklarar. Läs tabellen kvällen före läspasset."
+    kolumner:
+      - Sagan
+      - Vägen och svaret
+    rader:
+      - - Bockarna Bruse
+        - "Fyra steg, saga 1. Hjälten: tre bockar som vill upp på berget, där gräset är högt. Problemet: trollet under bron, som hotar att ta den lilla och sedan den mellersta bocken. Lösningen: den stora bocken stångar trollet ner i forsen. Landningen: bockarna äter tills de är runda som bollar.\nFrågan: Hur många gånger möter bockarna trollet? Är den stora bocken en hjälpare eller en av hjältarna?\nSvaret: Tre gånger, och problemet växer. Den stora bocken är en av hjältarna, eftersom alla tre vill upp på berget.\nFörklara: forsen."
+      - - De tre små grisarna
+        - "Fyra steg, saga 2. Hjälten: tre grisar som vill ha ett hus som ingen varg kan blåsa omkull. Problemet: vargen blåser omkull huset av halm och huset av pinnar. Lösningen: den tredje grisen bygger ett hus av sten och ställer en gryta med hett vatten under skorstenen. Landningen: grisarna bor i stenhuset, och vargen kommer aldrig tillbaka.\nFrågan: Hur många hus blåser vargen omkull, och vad gör den tredje grisen?\nSvaret: Två hus. Den tredje grisen bygger av sten och har ställt grytan under skorstenen, så grisarna löser det själva.\nFörklara: skorstenen."
+      - - Saga A om ekorren
+        - "Fyra steg, kontrast A. Ekorren går ut i skogen, äter en nöt och går hem. Sagan har ingen önskan och inget problem.\nFrågan: Vad vill ekorren, och vad står i vägen?\nSvaret: Ekorren vill inget, och inget står i vägen.\nFörklara: granen."
+      - - Saga B om ekorren
+        - "Fyra steg, kontrast B. Hjälten: ekorren vill ha den största nöten i hela skogen. Problemet: nöten sitter längst ut på en tunn gren, som inte bär ekorren. Lösningen: ekorren gnager av grenen, och nöten faller i mossan. Landningen: ekorren sitter i sitt bo med nöten.\nFrågan: Var står önskan i saga B, och var står den i saga A?\nSvaret: Önskan står i första meningen i saga B. Saga A har ingen önskan.\nFörklara: mossan."
+      - - Hans och Greta
+        - "Sex steg, saga 1. Hjälten: Hans och Greta önskar att ingen i familjen ska vara hungrig. Problemet: maten tar slut, och barnen går vilse. Hjälparen: ugglan säger att de kan vara listigare än den som bor i pepparkakshuset. Det värsta: häxan låser in Hans, Greta försöker öppna buren, och häxan vill att Greta kryper in i ugnen. Lösningen: Greta låtsas att hon inte kan, och häxan kryper in själv. Landningen: barnen kommer hem med pärlorna, och ingen är hungrig mer.\nFrågan: Vad får Greta av ugglan, och när använder hon det?\nSvaret: Rådet att vara listigare än häxan. Greta använder det vid ugnen, när hon säger: ”Jag vet inte hur man gör. Visa mig.”\nFörklara: listig och benbit."
+      - - Jack och bönstjälken
+        - "Sex steg, saga 2. Hjälten: Jack önskar att mamma aldrig mer ska oroa sig för mat. Problemet: kon ger ingen mjölk, och Jack byter den mot fem bönor. Hjälparen: jättens fru gömmer Jack och viskar att bönstjälken är svag. Det värsta: Jack tar guldet, hönan och harpan, och jätten klättrar efter honom. Lösningen: Jack hugger av bönstjälken med yxan. Landningen: hönan värper guldägg, och mamma behöver aldrig oroa sig mer.\nFrågan: Hur många gånger tar Jack något, och vad hjälper honom till slut?\nSvaret: Tre gånger. Han tar guldet, hönan och harpan. Frun säger att bönstjälken är svag, och Jack hugger av den själv.\nFörklara: marknaden och harpan."
+      - - Saga A om räven
+        - "Sex steg, kontrast A. Räven vill flyga, gör vingar av löv och flyger. Sagan löser problemet i en enda mening.\nFrågan: Hur många försök gör räven innan han flyger?\nSvaret: Inget försök. Räven flyger redan i nästa mening.\nFörklara: löv."
+      - - Saga B om räven
+        - "Sex steg, kontrast B. Hjälten: Rasmus vill flyga som gässen. Problemet: gässen flyger söderut, och rävar har inga vingar. Hjälparen: en gammal gås ger honom en fjäder. Det värsta: han hoppar från en sten och från en kulle och fastnar i en gran i stormen. Lösningen: han klättrar högst upp och håller fjädern mot vinden. Landningen: han flyger med gässen.\nFrågan: Hur många försök gör Rasmus, och vad händer varje gång?\nSvaret: Två försök. När han hoppar från stenen faller han i bäcken, och när han hoppar från kullen slänger stormen in honom i en gran.\nFörklara: lya och söderut."
+  - rubrik: Materialet i varje pass
+    plats: efter-urval
+    meny: true
+    text: "Tabellen säger vad du tar fram i varje pass. Från pass 4 tar du fram skyltarna längs repet och tärningarna till Sagostarten i varje pass, och från pass 22 bara tärningarna. I varje skrivpass tar du också fram dagens modellsaga. Gruppens material ligger på väggen, golvet eller bordet, och paret sparar sina blad och kort i sin mapp mellan passen. Gruppen planerar på den förstorade vägen i pass 5–⁠6, och paret får sitt första blad i pass 7."
+    kolumner:
+      - Passen
+      - Gruppen och du
+      - Varje par
+    rader:
+      - - Före kursen
+        - Sagokollen och bilden till den. Skyltarna, repet och lådan till sagoteatern, och tärningarna före pass 4.
+        - En mapp med parets namn, och ett delat dokument om paret skriver på dator
+      - - "1–⁠3\nläspass"
+        - "Skyltarna längs repet och dagens saga: saga 1 i pass 1, kontrastparet i pass 2 och saga 2 i pass 3. Vägen och berget ritar du på tavlan. Ett ark till Sagornas ord från pass 2, och lådan i pass 3."
+        - Dagens saga, en kopia per elev
+      - - "4–⁠6\ngruppens plan"
+        - I pass 4 A-tärningarna och Hjältens kort i A3. I pass 5 B-tärningarna, och från pass 5 den förstorade vägen och berget i A3. I pass 6 Kamratens frågor, repet, lådan och lappar.
+        - Inget eget blad än
+      - - "7–⁠12\ngruppens saga"
+        - Den förstorade vägen, blädderblocket, lappar och dagens modellsaga. Läsarens frågor i pass 12.
+        - Sagans väg för gruppens saga, rollkorten och frågekorten
+      - - "13–⁠15\nförsta sagan"
+        - Tärningarna i pass 13. Repet, skyltarna, lådan och lappar i pass 14. Parets väg, ett blad per par, från pass 13.
+        - Sagans väg och berget för den första sagan, en kopia av Sagornas ord och i sex steg linjerat papper
+      - - "16–⁠18\nandra sagan"
+        - Tärningarna i pass 16. Repet, skyltarna, lådan och lappar i pass 17.
+        - Sagans väg och berget för den andra sagan. I sex steg är den andra sagan boksagan, och paret får också Hjältens kort i pass 16.
+      - - "19–⁠21\nboksagan"
+        - I fyra steg tar du fram repet, skyltarna, lådan och lappar i pass 19, och i sex steg tärning 4 i pass 20.
+        - Bladen för boksagan och lappar, och i fyra steg Hjältens kort i pass 19
+      - - "22–⁠23\nresponsen"
+        - Tärningarna mitt på bordet, utan skyltarna
+        - Frågekorten, en blyertspenna och ett tomt berg till lyssnarparet i pass 22. I pass 23 parets berg och lyssnarparets.
+      - - "24–⁠27\nboken"
+        - Sagokollen och den nya bilden från pass 26
+        - Sagan och Bokens sida, en sida för varje station, och bladet Författarna i pass 27
+      - - "28–⁠30\nboksläppet"
+        - Omslaget på tjockt papper i pass 28, Sagokollen tills den är klar och boken i pass 29–⁠30. Repet, skyltarna och lådan om paren spelar sin saga.
+        - Sagan att öva på
+passrutin:
+  kallas: delar
+  text: Skrivpasset har samma fem delar varje gång, så paren vet vad som ska hända.
+  steg:
+    - text: "Gruppen slår tärningarna och berättar en saga med en mening vid varje vägskylt."
+      fas: Sagostarten
+    - text: "Paren säger var på vägen de är och läser sin sista mening."
+      fas: Där vi slutade
+    - text: "Du visar ett drag i en modellsaga och tänker högt, och varje par säger en mening med draget."
+      fas: Skrivdraget
+    - text: "I vecka 3–⁠4 berättar gruppen dagens station först och skriver den sedan med dagens drag, och i vecka 5–⁠8 gör paren likadant."
+      fas: Berätta och skriva
+    - text: "Ett par läser upp det de skrev och börjar med meningen där draget finns. Gruppen säger var det blev spännande och frågar hur det ska gå."
+      fas: Läsarna lyssnar
+  efterPasset: Från pass 13 skriver du på Parets väg vilken station paret är på, vem i paret som skrev, vad paret lade till i sagan och vad paret behöver nästa pass.
+tidsschema:
+  rubrik: 60 minuter, del för del
+  text: "Tiderna gäller skrivpasset. Läspassen, planeringspassen och bokpassen hittar du i tabellen Fem slags pass och berättarpassen i tabellen Berättarpasset. Några pass går till på ett annat sätt, och deras minuter står i tabellen Pass med egna minuter."
+  rader:
+    - tid: Före passet
+      fas: Förberedelse
+      vad: "Läs det paren skrev sist, och från pass 13 också dina noteringar på Parets väg. Välj sedan dagens drag efter kursplanen och tabellen Skrivdragen. Läs stället där draget syns i den modellsaga som tabellen pekar på. Skriv sedan två egna meningar med draget, om något annat än modellsagan, som du visar för gruppen. Lägg vägskyltarna längs repet, men från pass 22 lägger du bara tärningarna mitt på bordet. Ta fram det som står i tabellen Materialet i varje pass."
+    - tid: 0–5
+      fas: Sagostarten
+      vad: "En elev slår tärning 1, 3 och 4, och i sex steg också tärning 5 och 6. Eleven säger ordet under bilden på varje tärning och lägger tärningen vid rätt skylt, och gruppen säger ordet igen. Gruppen berättar en saga med en mening vid varje skylt, och den som står vid skylten säger meningen. Vid Problemet frågar gruppen: ”Hur ska det gå?” I sex steg frågar gruppen det vid Det värsta. Från pass 13 säger eleven vid den skylten två meningar, en om vad hjälten försöker och en om vad som går fel. Är eleverna färre än skyltarna, går de vidare till nästa skylt. Är de fler, turas de om från pass till pass. Från pass 22 berättar gruppen utan skyltarna, och tärningarna ligger mitt på bordet. Du pekar på den förstorade vägen på väggen bara när någon fastnar."
+    - tid: 5–10
+      fas: Där vi slutade
+      vad: "Paren säger vilken station de är på och läser sin sista mening. Har du skrivit på Parets väg att ett par ska öva ett eget drag, säger du draget till paret nu. Paret prövar det när de har skrivit med dagens drag. I vecka 3–⁠4 läser du i stället gruppens saga högt från blädderblocket och pekar på orden medan du läser."
+    - tid: 10–20
+      fas: Skrivdraget
+      vad: "Läs två till fem meningar ur en modellsaga där draget syns, och fråga vad författaren gör. Skriv sedan dina egna meningar på tavlan och tänk högt medan du skriver. De handlar om något annat än modellsagan. Gruppen ger draget ett namn, och du skriver namnet på gruppens lista Sagornas ord på väggen. Hur listan ser ut står i noten under tabellen Skrivdragen. Sist säger paren högt för varandra en mening med draget om sin egen station. Paret säger också var i sagan meningen ska stå. I vecka 3–⁠4 säger varje par en mening med draget om gruppens station."
+    - tid: 20–50
+      fas: Berätta och skriva
+      vad: "I vecka 3–⁠4 berättar paren först dagens station för varandra, och kamraten ställer frågan på kortet Kamratens frågor. Sedan föreslår varje elev en mening med dagens drag till stationen, högt eller på en lapp. Du läser förslagen högt, och gruppen väljer det som svarar bäst på stationens fråga. Den som föreslog meningen säger den, och du skriver den på blädderblocket. Det gemensamma skrivandet tar 15 minuter. Sedan övar paren rollerna med gruppens mening, och Skrivaren skriver på sitt blad så mycket av meningen som hen klarar. I fyra steg ritar paret också stationen i rutan.\nI vecka 5–⁠8 har paret sitt blad, sitt berg, lapparna från berättarpasset och rollkorten framför sig. Först berättar de stationen för varandra. Sedan säger Berättaren en mening, och Skrivaren säger den igen och skriver den. Båda läser meningen, och sedan byter de roller och kort. Paret skriver minst en mening med dagens drag vid stationen och stryker under den. Du sitter med två eller tre par, ett i taget, och lyssnar på båda i paret."
+    - tid: 50–60
+      fas: Läsarna lyssnar
+      vad: "Ett par läser det de skrev i dag och börjar med meningen de strök under. De andra säger vad meningen gjorde med dem och var det blev mest spännande, och de frågar: ”Hur ska det gå?” Sedan läser alla par sin sista mening tyst och ändrar ett ord om de vill. I vecka 3–⁠4 läser ett par gruppens station för de andra."
+  efter: "Blir ett par klart tidigt, läser paret sagan för sitt lyssnarpar. Paret kan också rita en bild till stationen på ett eget papper och använda den i boken. Ett par som inte blir klart börjar delen Berätta och skriva nästa skrivpass med att skriva klart stationen. Är sagan inte klar före ett planeringspass, skriver paret klart den medan de andra paren slår tärningarna. Ett par som ligger mer än ett pass efter sitter med dig i delen Berätta och skriva."
+steg:
+  rubrik: Vad du gör och säger i varje del
+  text: Under varje del står fraser du kan säga, och de är frågor som får eleverna att tänka.
+  rader:
+    - namn: Sagostarten
+      fraga: Hur går sagan?
+      gor: "Peka på skylten och låt den som står där säga meningen. Hjälp med startorden, men låt innehållet vara elevernas. Lyssna efter om hjälten vill något och om problemet står i vägen för det hjälten vill. Fastnar en elev, säger du frågan på skylten."
+      fraser:
+        - En mus som vill rädda sin syster. Vem säger första meningen?
+        - Nu kom stormen. Hur ska det gå?
+        - Draken kom. Hur hindrar draken musen från att få skatten?
+        - Vem löser problemet, musen eller någon annan?
+    - namn: Där vi slutade
+      fraga: Var på vägen är ni?
+      gor: "Låt varje par peka på sin station på sagans väg medan de läser. Har du skrivit ett eget drag för paret på Parets väg, säg draget till paret. Svara på innehållet och säg inget om stavningen."
+      fraser:
+        - Vilken station är ni på?
+        - Vad vill ni att läsaren ska få veta i dag?
+        - Vad händer härnäst på vägen?
+    - namn: Skrivdraget
+      fraga: Hur gör en författare?
+      gor: "Välj meningar där draget syns tydligt, och skriv dina egna med ett annat innehåll, så att paren inte skriver av. Tänk högt om valet och säg vad du skrev först och varför du ändrade det. Låt gruppen ge draget ett eget namn, och låt paret säga var i sagan de ska använda det."
+      fraser:
+        - Hör ni att det inte står att Greta var rädd? Vad står det i stället?
+        - "Jag skriver: Räven var rädd. Nej, jag vill visa det. Rävens ben skakade."
+        - Vad kallar vi det här draget?
+        - Hur kan er hjälte visa att hen är rädd, utan ordet rädd?
+        - Var i er saga ska ni använda draget?
+    - namn: Berätta och skriva
+      fraga: Vad händer vid stationen?
+      gor: "Lyssna efter om båda berättar och båda skriver, och om Skrivaren säger meningen igen innan hen skriver. Samtalet med ett par tar tre till fem minuter. Be paret läsa det de skrev i dag, och välj en sak att visa dem. Visa den med en mening eller på väggen, och fråga vad paret ska göra nu. Sitt först med de par som enligt Parets väg behöver dig, och med varje par minst varannat skrivpass. Frågar Skrivaren hur ett ord stavas, säger du: ”Skriv det du hör, så tittar vi på det inför boken.” Orden från tärningarna står på tärningarna, och hjältens namn står vid stationen Hjälten på bladet eller på Hjältens kort. De ord paren ofta frågar efter står under Sagornas ord."
+      fraser:
+        - Vad händer vid er station? Berätta för din kamrat först.
+        - Vilken mening sa ni på scenen? Skriv den först.
+        - Kan du säga meningen igen innan du skriver?
+        - Var i er station passar dagens drag?
+        - Hur många lågor har ni här? Hur många meningar behöver stationen då?
+        - Vad gör hjälten först? Och vad händer då?
+    - namn: Läsarna lyssnar
+      fraga: Var blev det spännande?
+      gor: "Låt lyssnarna svara som läsare och säga vad meningen gjorde med dem och var det blev mest spännande. Säger någon bara ”Bra!”, frågar du: ”Vad var det i meningen som gjorde det bra?” Avsluta med att fråga hur det ska gå."
+      fraser:
+        - Vad gjorde den meningen med dig?
+        - Var blev det mest spännande?
+        - Vad undrar ni?
+        - Hur ska det gå?
+arbetsform:
+  rubrik: "Arbetsform: gemensamt, läraren visar, i par, gemensamt igen"
+  text: "Passet börjar med hela gruppen. Sedan visar du skrivdraget, och därefter skriver paren. I vecka 3–⁠4 skriver gruppen tillsammans, och paren berättar och övar rollerna med gruppens mening. Passet slutar med hela gruppen igen."
+  delar:
+    - rubrik: 1. Gemensamt
+      text: Gruppen berättar vid skyltarna, och paren säger vilken station de är på
+      faser: [Sagostarten, Där vi slutade]
+    - rubrik: 2. Läraren visar
+      text: Du läser, skriver och tänker högt
+      faser: [Skrivdraget]
+    - rubrik: 3. I par
+      text: Eleverna arbetar två och två och byter roller
+      faser: [Berätta och skriva]
+    - rubrik: 4. Gemensamt igen
+      text: Hela gruppen samlas kring ett pars text
+      faser: [Läsarna lyssnar]
+exempel:
+  valt:
+    rubrik: Gruppen
+    text: "sex elever i åk 4, i tre par, som skriver efter sagans väg i sex steg. Det är pass 20 i vecka 7. Paren skriver klart Det värsta i den saga som ska stå i boken. Dagens drag är att sakta ner vid det värsta."
+  text:
+    - "Liam slår tärningarna och säger orden: en mus, rädda någon, en storm, en myra och en flöjt. Han lägger tärningarna vid skyltarna, gruppen säger orden igen, och sedan berättar gruppen sagan. Liam börjar: ”Det var en gång en mus som ville rädda sin syster.” Elin står vid Det värsta och säger två meningar: ”Plötsligt blåste stormen så hårt att musen inte kunde gå. Hon försökte krypa, men vinden drog henne bakåt.” Gruppen frågar: ”Hur ska det gå?” Sara står vid Lösningen och säger: ”Men då spelade musen på flöjten, och stormen somnade.”"
+    - "Alva och Omar läser sin sista mening: ”Prinsessan stod vid berget, och högst upp sov draken.” Alla tre paren är på Det värsta, och läraren säger att dagens drag är att sakta ner där."
+    - "Läraren läser ur Hans och Greta, där Greta står vid ugnen: ”Gretas händer skakade. Ugnen var het. Greta tog ett steg bakåt.” Läraren frågar vad författaren gör. Noah säger: ”Det är korta meningar.” Alva säger: ”Hon gör en sak i taget.” Gruppen känner igen draget att sakta ner vid det värsta. Det står redan på väggen. Läraren skriver två egna meningar på tavlan och tänker högt: ”Jag skriver: Trollet kom. Nej, jag tar det steg för steg. Bron knakade. En grön hand tog tag i räcket.” Sedan säger varje par en mening med draget om sin egen station. Omar säger: ”Prinsessan tog ett steg. En sten lossnade under foten.”"
+    - "Paren skriver. Omar är Berättaren och säger: ”Prinsessan klättrade, men stenarna rasade.” Det var Liam som föreslog stenarna när paret spelade upp sagan i pass 17, och lappen sitter vid stationen. Alva säger meningen igen och skriver, och de läser den tillsammans. Sedan byter de kort, och Alva berättar: ”Hon försökte igen, men då kom draken.” Elin och Noah är oense om vad som ska göra det ännu värre. De slår tärning 4 och får en storm, och Noah säger: ”Då blir det ännu värre!” Läraren sitter med Sara och Liam. Vid Det värsta har de bara en mening, och läraren frågar: ”Vad gör hjälten först? Och vad händer då?” De lägger till ett försök som misslyckas och stryker under meningen där de saktar ner."
+    - "Elin och Noah läser det de har skrivit vid Det värsta och börjar med meningen de strök under: ”Taket knakade. En planka lossnade, och sedan en till.” Gruppen säger att det var mest spännande när stormen kom, och Omar frågar: ”Hur ska det gå?” Ingen vet än. Efteråt skriver läraren på Parets väg för varje par. Sara och Liam har två försök, och nästa pass ska de höra hur Det värsta växer i Jack och bönstjälken. Alva tog pennan en gång när det var Omars tur, och Omar skriver först nästa pass. Elin och Noah saktade ner utan att läraren påminde dem."
+fastnar:
+  rubrik: När paret fastnar
+  text: "Ett par kan fastna på tre sätt: stationen är tom, paret har ingen idé, eller paret är oense. Börja med det minsta stödet."
+  fragaForst:
+    - Läs för mig det ni har skrivit. Var på vägen är ni?
+    - Vad önskar sig hjälten?
+  trappa:
+    - "Peka på stationen på sagans väg och läs frågan högt."
+    - "Låt paret slå tärningen för stationen och välja om de tar den nya idén eller behåller den gamla. Det finns tärningar för Hjälten, Problemet, Hjälparen och Det värsta. Har paret ingen idé alls, låt dem låna stationen från en modellsaga och sätta in sin egen hjälte."
+    - "Låt Berättaren berätta stationen högt, en mening i taget, och Skrivaren säga varje mening igen."
+    - "Låt paret spela stationen: den ena är hjälten och den andra det som står i vägen. Sedan skriver paret det de sa."
+    - "Ge paret två startord att välja mellan vid stationen, till exempel ”Plötsligt” eller ”Då hördes” vid Det värsta."
+    - "Skriv själv det eleven säger, som sekreterare, och låt eleven läsa tillbaka. Nästa mening skriver paret själv."
+  motto: Pennan stannar hos paret.
+roll:
+  rubrik: "Lärarens roll: hålla i vägen, inte i pennan"
+  text: Du håller i vägen så att sagorna hänger ihop och paren blir klara. Du visar ett drag i taget och skriver själv inför gruppen. Men sagan är parets. Bestämmer du vad hjälten gör, är sagan inte längre parets.
+  gor:
+    - Skriv inför gruppen och tänk högt om dina val.
+    - Låt varje elev lämna ett förslag innan gruppen skriver.
+    - Låt paret berätta och spela sagan innan de skriver den.
+    - Svara som läsare, till exempel ”Jag blev rädd när stenarna rasade”.
+    - Rätta stavningen tillsammans med paret inför boken.
+  undvik:
+    - Att skriva åt paret när det går för långsamt.
+    - Att rätta stavningen under skrivandet.
+    - Att berömma med ”Bra!” utan att säga vad du såg.
+    - Att låta en elev i paret skriva allt.
+    - Att låta paret skriva att hjälparen eller en ny figur löser problemet.
+urval:
+  rubrik: Var hittar du sagorna?
+  text:
+    - "Under Kursens material finns två modellsagor och ett kontrastpar för varje version. Modellsagorna är återberättade folksagor, och varje kontrastpar är två nyskrivna sagor om samma hjälte. Alla följer sagans väg. Läs fler folksagor högt och pröva dem mot vägen. Rödluvan och sagan om Guldlock och de tre björnarna är bra att pröva just för att de inte följer vägen. Vem löser problemet i Rödluvan, och vad önskar Guldlock? Gruppens saga och parens sagor blir sedan nya modellsagor."
+  kravText: "En saga är en bra modellsaga när den uppfyller tre krav:"
+  krav:
+    - rubrik: Hjälten önskar något
+      text: Önskan syns tidigt och sagan handlar om den
+    - rubrik: Problemet växer
+      text: Det blir gärna värre tre gånger, som i folksagorna
+    - rubrik: Hjälten löser det själv
+      text: Hjälparen ger något, men hjälten gör det svåra
+progression:
+  rubrik: "Kursplan: pass för pass"
+  text: "Kursen är 30 pass. Pass 1–⁠3 är vecka 1, pass 4–⁠6 är vecka 2, pass 7–⁠12 är vecka 3–⁠4, pass 13–⁠24 är vecka 5–⁠8 och pass 25–⁠30 är vecka 9–⁠10. Du lämnar över ansvaret till gruppen och sedan till paren. Varje pass är ett läspass, ett planeringspass, ett berättarpass, ett skrivpass eller ett bokpass. I tabellen står dagens drag vid varje skrivpass. Har du skrivit på Parets väg att paren behöver ett annat drag, tar du det draget i stället. Där versionerna skiljer sig, står det som gäller fyra steg först."
+  enhet: Pass
+  rader:
+    - vecka: "1"
+      led: Jag gör
+      fokus: "Läspass. Du berättar om sagoboken och vem som ska läsa den, och säger vilka som är par. Sedan berättar du modellsaga 1 och läser den högt. I fyra steg är det Bockarna Bruse och i sex steg Hans och Greta. Gruppen går längs vägskyltarna och återberättar sagan."
+      roll: Du berättar och läser högt och pekar på stationerna.
+    - vecka: "2"
+      led: Jag gör
+      fokus: "Läspass. Du läser kontrastparet, saga A och saga B. Det är två sagor om samma hjälte, och saga A saknar det som saga B har. Paren letar efter önskan och problemet i båda. Du ritar Spänningsberget på tavlan, och gruppen färgar lågorna för båda sagorna: saga A blir platt, och saga B får en topp."
+      roll: Du skriver det som saknas i saga A under Sagornas ord, en rad för varje station. Sedan letar paren efter just det i sina egna sagor.
+    - vecka: "3"
+      led: Jag gör
+      fokus: "Läspass. Du berättar och läser modellsaga 2, De tre små grisarna i fyra steg eller Jack och bönstjälken i sex steg. Gruppen spelar upp sagan längs skyltarna, och det är gruppens första sagoteater. Sedan berättar gruppen sagan en gång till med en ny hjälte som gruppen väljer. Gruppen säger vad sagor brukar ha, till exempel ”Det var en gång”, något som händer tre gånger och ett slut där hjälten får det hen ville. Du skriver det under Sagornas ord."
+      roll: Du är berättarrösten och visar hur figurerna säger högt vad de vill och känner.
+    - vecka: "4"
+      led: Vi gör
+      fokus: "Planeringspass. Du visar A-tärningarna och säger ordet under varje bild. Gruppen gör sin första Sagostart med tärning 1, 3 och 4. Sedan slår gruppen tärning 1, 2 och 3, i fyra steg också tärning 6. Gruppen fyller i Hjältens kort tillsammans."
+      roll: Du sitter först i heta stolen som hjälten och svarar på gruppens frågor. Sedan sitter eleverna där.
+    - vecka: "5"
+      led: Vi gör
+      fokus: "Planeringspass. Du visar B-tärningarna. Gruppen slår tärning 4, och i sex steg också tärning 5 och 6. Sedan planerar gruppen sagan på den förstorade vägen och färgar Spänningsberget efter hur spännande varje station ska vara."
+      roll: Du frågar vem som löser problemet.
+    - vecka: "6"
+      led: Vi gör
+      fokus: "Berättarpass. Gruppen berättar sin saga längs repet, en elev vid varje skylt, och bygger ut den med kortet Kamratens frågor. Gruppen bestämmer hur sagan slutar vid Landningen och spelar sedan upp den."
+      roll: Du läser frågorna på kortet, skriver idéerna på lappar och sätter lapparna vid den förstorade vägen.
+    - vecka: "7"
+      led: Vi gör
+      fokus: "Skrivpass. Gruppen skriver stationen Hjälten i sin saga, och dagens drag är att börja med vem, var och önskan. Paren får rollkorten och frågekorten och övar rollerna med gruppens mening."
+      roll: "Du håller pennan och tänker högt. Du visar rollerna med en elev. Sedan skriver du på tavlan de tre fraser som paren använder hela kursen: ”Din tur.” ”Säg meningen igen.” ”Ska vi höra båda förslagen?”"
+    - vecka: "8"
+      led: Vi gör
+      fokus: "Skrivpass. Gruppen skriver stationen Problemet, och dagens drag är att visa känslan genom det kroppen gör."
+      roll: Du låter varje elev föreslå en mening med draget, högt eller på en lapp.
+    - vecka: "9"
+      led: Vi gör
+      fokus: "Skrivpass. Gruppen skriver Lösningen i fyra steg och Hjälparen i sex steg, och dagens drag är en replik."
+      roll: Eleverna turas om att skriva ett ord eller en mening på blädderblocket, och de andra skriver det i luften.
+    - vecka: "10"
+      led: Vi gör
+      fokus: "Skrivpass. I fyra steg skriver gruppen Landningen och knyter ihop slutet med önskan. I sex steg skriver gruppen Det värsta och saktar ner där."
+      roll: Du frågar hur det känns för hjälten.
+    - vecka: "11"
+      led: Vi gör
+      fokus: "Skrivpass. I fyra steg läser gruppen sagan och säger var dragen syns, och paren ritar en bild till varje station. I sex steg skriver gruppen Lösningen och Landningen, och dagens drag är att knyta ihop slutet med önskan."
+      roll: Du frågar vem som löste problemet.
+    - vecka: "12"
+      led: Vi gör
+      fokus: "Skrivpass. Gruppen läser hela sagan med Läsarens frågor och ändrar en sak. I fyra steg skriver gruppen dessutom en snabbsaga på tavlan, en saga i fyra meningar som i Sagostarten."
+      roll: Du visar hur en läsare svarar på Läsarens frågor om gruppens saga. Efter passet skriver du av listan Sagornas ord på väggen, så att varje par får en kopia.
+    - vecka: "13"
+      led: Ni gör tillsammans
+      fokus: "Planeringspass. Paren hittar på sin första saga, som heter parsaga 1 i fyra steg och övningssagan i sex steg. De slår tärningarna och färgar berget. I fyra steg slår paren också tärning 6 vid Hjälten och ritar i rutan vid varje station. I sex steg skriver de några ord vid varje station."
+      roll: Du visar först med en elev hur ett par slår tärningarna, säger vad var och en vill och låter tärningen avgöra när de inte är överens. Sedan sitter du med två eller tre par.
+    - vecka: "14"
+      led: Ni gör tillsammans
+      fokus: "Berättarpass. Paren berättar sagan för varandra två gånger med kortet Kamratens frågor och spelar sedan upp den för gruppen. Sist väljer paret de idéer de vill ha, skriver en lapp för det som kom till när de berättade och sätter lapparna vid stationerna."
+      roll: Du visar med din egen saga hur sagan växer när kamraten frågar.
+    - vecka: "15"
+      led: Ni gör tillsammans
+      fokus: "Skrivpass. I fyra steg skriver paren parsaga 1 och i sex steg övningssagan, en eller två meningar vid varje station. Dagens drag är att börja med vem, var och önskan. Sist sätter paret en bock vid varje station där sagan svarar på stationens fråga. Sedan läser paret sagan för sitt lyssnarpar."
+      roll: Paren har övat rollerna i vecka 3–⁠4. Du sitter med de par som behöver öva på att byta roller.
+    - vecka: "16"
+      led: Ni gör tillsammans
+      fokus: "Planeringspass. I fyra steg hittar paren på parsaga 2. I sex steg hittar paren på boksagan. De ritar först vägen ur minnet på en lapp, med en ruta för varje station. Sedan slår de tärningarna och fyller i Hjältens kort medan den ena sitter i heta stolen som hjälten. Sedan fyller paren i båda versionerna i Sagans väg och färgar berget. I fyra steg ritar de i rutan vid varje station, och i sex steg skriver de några ord där."
+      roll: Du sitter med två eller tre par.
+    - vecka: "17"
+      led: Ni gör tillsammans
+      fokus: "Berättarpass. I fyra steg berättar paren parsaga 2 och i sex steg boksagan. De berättar sagan två gånger för varandra med kortet och spelar sedan upp den för gruppen. Sist väljer paret de idéer de vill ha, skriver en lapp för det som kom till när de berättade och sätter lapparna vid stationerna."
+      roll: Ett par visar hur deras saga växte. Du frågar när det är som värst för hjälten och hur sagan landar.
+    - vecka: "18"
+      led: Ni gör tillsammans
+      fokus: "Skrivpass. I fyra steg skriver paren parsaga 2, sätter bockarna och läser den för sitt lyssnarpar. I sex steg skriver paren Hjälten och Problemet i boksagan. Dagens drag är att visa känslan genom det kroppen gör."
+      roll: Du sitter med två eller tre par.
+    - vecka: "19"
+      led: Ni gör tillsammans
+      fokus: "I fyra steg är det ett berättarpass för boksagan. Paret lägger bladen för parsaga 1 och 2 bredvid varandra, räknar hur många bockar varje saga har och väljer vilken saga som ska stå i boken. Sedan vänder paret bladen och ritar vägen ur minnet på en lapp. De fyller i Hjältens kort medan den ena svarar som hjälten i heta stolen. Paret berättar sagan för varandra och för gruppen, och gruppen föreslår var en mening till behövs. I sex steg är det ett skrivpass. Paren skriver Hjälparen och börjar på Det värsta, och dagens drag är en replik."
+      roll: I fyra steg lyssnar du efter om hjälten försöker något vid Problemet och använder det hen har med sig vid Lösningen. I sex steg frågar du varför hjälparen finns i sagan.
+    - vecka: "20"
+      led: Ni gör tillsammans
+      fokus: "Skrivpass. I fyra steg skriver paret en mening till vid Hjälten och en vid Problemet, där hjälten försöker men misslyckas. Meningarna skriver de på de tomma raderna eller på en lapp vid stationen. I sex steg skriver paret klart Det värsta och kan slå tärning 4 en gång till, så att samma problem blir värre. Dagens drag är att sakta ner, vid Problemet i fyra steg och vid Det värsta i sex steg. I fyra steg ritar paret sedan försöket i rutan vid Problemet och berättar boksagan för sitt lyssnarpar."
+      roll: Du frågar vad hjälten gör först.
+    - vecka: "21"
+      led: Ni gör tillsammans
+      fokus: "Skrivpass. I fyra steg skriver paret en mening till vid Lösningen, gärna en replik, och en vid Landningen om hur det känns för hjälten. Sedan läser paret boksagan för sitt lyssnarpar. I sex steg skriver paret Lösningen och Landningen i boksagan. Dagens drag är att knyta ihop slutet med önskan."
+      roll: Du frågar om hjälten fick sin önskan.
+    - vecka: "22"
+      led: Ni gör tillsammans
+      fokus: "Skrivpass med respons. Passet har inget nytt drag. Du läser gruppens saga, och gruppen svarar som läsare och färgar ett eget berg. Paret sätter bockarna på bladet för boksagan, i fyra steg med en ny färg. Sedan läser paret sagan för sitt lyssnarpar. Lyssnarparet följer med i texten, svarar på Läsarens frågor, färgar ett eget berg och sätter ett frågetecken där de undrade något."
+      roll: Du lyssnar när paren ger respons och tar upp en av lyssnarnas frågor med hela gruppen.
+    - vecka: "23"
+      led: Ni gör tillsammans
+      fokus: "Skrivpass. Passet har inget nytt drag. Med gruppens saga visar du hur ni ändrar sagan där lågorna på de två bergen skiljer sig. Paret jämför sina lågor med lyssnarparets och ändrar en eller två saker i sagan efter lyssnarparets frågor och berg. En ny mening skriver paret på en lapp och sätter lappen där meningen ska stå. I sex steg frågar sig paret om det blir värre för varje försök."
+      roll: Du pratar kort med varje par om en sak i sagan som de kan ändra.
+    - vecka: "24"
+      led: Boken
+      fokus: "Bokpass. Med några meningar som du har skrivit själv visar du hur ni rättar stavning, stor bokstav och punkt. Sedan läser paren sagan högt för dig, ett par i taget, och ni rättar tillsammans. De par som väntar ritar bilderna på Bokens sidor, en i rutan Rita för varje station, eller övar på att läsa sagan."
+      roll: I fyra steg skriver du ordet rätt ovanför det felstavade, och paret läser det. I sex steg sätter du en prick i marginalen, och paret hittar felet.
+    - vecka: "25"
+      led: Boken
+      fokus: "Bokpass. Ni rättar färdigt, och de par som är klara börjar skriva sagan rent."
+      roll: Du rättar med ett par i taget.
+    - vecka: "26"
+      led: Boken
+      fokus: "Bokpass. Paren skriver sagan rent på Bokens sida. Den ena läser meningen från bladet, och den andra skriver den rent. Efter varje sida byter de. Ett par som har skrivit på dator skriver ut texten och klistrar den på Bokens sida. Kan en elev inte läsa än, läser kamraten meningen, och eleven skriver det hen kan. Den första bokstaven skriver de stort i rutan på sagans första sida."
+      roll: För de yngsta skriver du själv det som behövs i renskriften. I sex steg gör alla den andra Sagokollen samtidigt i början av passet. I fyra steg gör eleverna den med dig en i taget, lika många i pass 26, 27 och 28. När eleven har berättat sin nya saga, spelar du upp den första, och eleven säger vad som finns i den nya.
+    - vecka: "27"
+      led: Boken
+      fokus: "Bokpass. Paren ritar klart bilderna och fyller i sidan om författarna. Gruppen ritar bilderna till gruppens saga, som du har skrivit rent på Bokens sida."
+      roll: Du lägger sidorna i ordning. I sex steg läser varje elev sin första saga från Sagokollen och säger vad som finns i den nya. I fyra steg fortsätter du med Sagokollen.
+    - vecka: "28"
+      led: Boken
+      fokus: "Bokpass. Gruppen väljer en titel på boken och gör omslaget. Gruppens saga står först i boken. Sedan övar paren på att läsa sin saga högt eller spela upp den. Ska boken till ett tryckeri, skannar du sidorna och skickar filen efter passet."
+      roll: Medan paren övar skriver du innehållsförteckningen och gör klart Sagokollen.
+    - vecka: "29"
+      led: Boken
+      fokus: "Bokpass. Du skriver ut och binder ett exemplar av boken till varje elev, ett till biblioteket och ett till de inbjudna läsarna. Paren övar på att läsa eller spela upp sin saga."
+      roll: Du lyssnar när paren övar och hjälper dem att läsa tydligt och med inlevelse.
+    - vecka: "30"
+      led: Boken
+      fokus: "Boksläppet. Paren läser eller spelar upp sin saga för de inbjudna läsarna och skriver sina namn i böckerna. Ni ställer boken i skolans bibliotek. Har boken gått till ett tryckeri, blir boksläppet när böckerna har kommit."
+      roll: Du tar emot läsarna. Vill en elev inte läsa, läser kamraten eller du medan paret visar bilderna.
+uppfoljning:
+  text: "Sagokollen visar om eleven bygger en saga med vägens stationer utan att vägen ligger framme. Låt eleven göra samma uppgift före och efter kursen, på lika lång tid och på samma sätt. Efter kursen väljer du en ny bild av samma slag. På Parets väg skriver du det du ser hos varje par under kursen. Boken visar vad paren kan. Efter kursen berättar du för klassläraren vilka drag och stationer varje elev klarar själv."
+  rader:
+    - nar: Före kursen
+      vad: "Varje elev berättar eller skriver en saga om en bild."
+    - nar: Pass 13–⁠23
+      vad: "Skriv på Parets väg vad paret lade till när de berättade, om det kom med i texten och vilka drag paret använde."
+    - nar: I slutet av kursen, pass 26–⁠28
+      vad: "Varje elev gör samma uppgift med en ny bild och säger vad som finns i den nya sagan. Du jämför poängen med dem före kursen."
+mal:
+  rubrik: "Mål: vad eleven ska kunna göra efter kursen"
+  text: "Eleven ska göra det här oftare än före kursen:"
+  punkter:
+    - Berätta och spela upp en saga efter sagans väg, och bygga ut den muntligt
+    - Ge hjälten en önskan som sagan handlar om
+    - Låta ett problem stå i vägen för önskan, och i sex steg låta hjälten försöka minst två gånger så att problemet växer
+    - Låta hjälten lösa problemet själv, med det hen kan eller har fått
+    - Knyta ihop slutet med önskan
+    - Använda skrivdrag från väggen i sin egen saga, som att visa en känsla genom det kroppen gör eller skriva en replik
+    - "Säga meningen, skriva den och läsa den tillsammans med en kamrat, och byta roll efter varje mening"
+    - Läsa sin saga station för station och säga vad som finns och vad som saknas
+    - Ge respons som läsare genom att ställa en fråga eller säga var det blev spännande
+snabbmall:
+  text: Fyll i snabbmallen före och efter varje pass. Det du ser hos varje par skriver du på Parets väg.
+  fore:
+    - Dagens pass och det jag tar fram
+    - Dagens station och drag, och var i modellsagan draget finns
+    - Mina två meningar att visa
+    - Vilka par jag sitter med i dag
+  efter:
+    - "Vilket fel på sagans väg hörde jag: ingen önskan, ett problem som inte står i vägen för önskan, ett problem som löses direkt, en hjälpare som löser det eller ett slut utan önskan?"
+    - Vilka par använde dagens drag, och vilka använde ett drag från väggen utan att jag påminde dem?
+    - Vems förslag valde gruppen i dag (vecka 3–⁠4)?
+checklista:
+  rubrik: Checklista inför kursen
+  punkter:
+    - Bestämt vem som ska läsa boken, till exempel en annan klass.
+    - Frågat hemmen om namn och bilder får stå i boken.
+    - Gjort Sagokollen i veckan före kursen.
+    - Skrivit ut skyltarna och tagit fram repet och lådan.
+    - Gjort tärningarna för er version före pass 4.
+    - Kopierat det som tabellen Materialet i varje pass säger.
+    - Bestämt hur boken trycks och binds, och bjudit in läsarna.
+grund:
+  text: "Att undervisa explicit om berättelsens delar, som en strategi eleverna kan använda när de skriver, hör till det som har bäst belägg i forskningen om skrivundervisning, och elever som behöver stöd i skrivandet har ännu större nytta av det (Graham m.fl., 2012; Graham och Harris, 2005; Graham och Perin, 2007; Gillespie och Graham, 2014). Sagans väg är en sådan strategi, och den sätter hjältens önskan först och flera försök före lösningen, eftersom eleverna i sina sagor ofta räknar upp händelser eller löser problemet direkt (Thorsten, 2019). Elever som först berättar muntligt skriver sedan bättre berättelser, och de berättelser som eleverna har spelat upp blir bättre uppbyggda (Spencer och Petersen, 2018; Lee och Enciso, 2017). Elever som skriver i par och byter roller skriver bättre texter än när de skriver ensamma (Montanero m.fl., 2025; Yarrow och Topping, 2001). Kursen följer genrepedagogikens cirkelmodell, men eleverna skriver i par i stället för var för sig. Innan gruppen skriver kommer varje elev med ett förslag, eftersom de säkraste eleverna annars kan ta över hela det gemensamma skrivandet (Hermansson m.fl., 2019). Att skriva tillsammans, i par och för riktiga läsare kommer ur Skriv! (Fohlin och Wilson, 2026)."
+  kallor: Bygger på Graham, McKeown, Kiuhara och Harris (2012), Graham och Harris (2005), Graham och Perin (2007), Gillespie och Graham (2014), Thorsten (2019), Spencer och Petersen (2018), Lee och Enciso (2017), Montanero m.fl. (2025), Yarrow och Topping (2001), Hermansson m.fl. (2019) och Fohlin och Wilson, Skriv! (2026).
+ramar:
+  rubrik: Kursens material
+  text:
+    - "Här finns vägskyltarna, Sagans väg, Spänningsberget och Hjältens kort, alla i fyra och i sex steg. Här finns också berättartärningarna, frågekorten och rollkorten, modellsagorna och kontrastparen, bladen till boken, Sagokollen och Parets väg. Varje blad står på ett eget A4. Sagans väg står på två A4, med två eller tre stationer på varje sida, så att paret har gott om rader. Sagans väg i fyra steg har en ruta att rita i vid varje station, och paret skriver sagan direkt på bladet. Om raderna inte räcker, skriver paret meningen på en lapp och sätter den vid stationen. I sex steg planerar paret sagan på bladet Sagans väg och skriver den på linjerat papper eller på dator. Till den förstorade vägen kopierar du bladet Sagans väg för er version i A3 och sätter upp det på väggen. På den planerar gruppen sin saga i pass 5, och i pass 6 skriver du idéerna på lappar och sätter dem där. I fyra steg sätter lyssnarparet ett frågetecken på bladet Sagans väg, i rutan vid den station där de undrade något. Gruppens saga skriver du på blädderblocket, ett ark för varje station, och sätter upp arken under vägen. De tre bladen till boken är omslaget, Bokens sida och Författarna. De har ingen sidfot, så att kopiorna kan bli sidor i boken som de är. Paret får en kopia av Bokens sida för varje station, och i sex steg en till om en station blir lång. Omslaget kopierar du på tjockt papper. På sagans första sida skriver paret den första bokstaven stort i den lilla rutan bredvid de två första raderna, och på de andra sidorna skriver de sidans nummer i samma ruta. Från pass 24 ritar paret bilderna i rutan Rita. På omslaget skriver du elevernas namn på raderna Sagor av, eller så skriver eleverna själva. Två par delar på varje sida Författarna."
+  ramar:
+    - rubrik: Vägskyltarna i fyra steg
+      text:
+        - Det är fyra skyltar, en för varje station, och du lägger dem längs ett rep på golvet.
+      delar:
+        - rubrik: Vägskyltarna
+          falt:
+            - { rubrik: 1 Hjälten, text: "Vem är hjälten, och vad vill hen?\nDet var en gång" }
+            - { rubrik: 2 Problemet, text: "Vad står i vägen för det hen vill?\nMen en dag" }
+            - { rubrik: 3 Lösningen, text: "Hur löser hjälten problemet själv?\nDå" }
+            - { rubrik: 4 Landningen, text: "Fick hjälten det hen ville?\nTill slut" }
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Till läraren, text: "Skriv ut skyltarna för er version. De ligger längs repet i Sagostarten fram till pass 22, och när gruppen återberättar en saga eller spelar sagoteater." }
+    - rubrik: Vägskyltarna i sex steg
+      text:
+        - Det är sex skyltar, en för varje station, och du lägger dem längs ett rep på golvet.
+      delar:
+        - rubrik: Vägskyltarna
+          falt:
+            - { rubrik: 1 Hjälten, text: "Vem är hjälten, och vad önskar hen sig?\nDet var en gång" }
+            - { rubrik: 2 Problemet, text: "Vad står i vägen för önskan?\nMen en dag" }
+            - { rubrik: 3 Hjälparen, text: "Vem hjälper hjälten, och vad får hjälten?\nPå vägen mötte" }
+            - { rubrik: 4 Det värsta, text: "Hjälten försöker två gånger. Vad händer?\nPlötsligt" }
+            - { rubrik: 5 Lösningen, text: "Vad gör hjälten själv med det hen har fått?\nMen då" }
+            - { rubrik: 6 Landningen, text: "Fick hjälten sin önskan? Hur känns det nu?\nTill slut" }
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Till läraren, text: "Skriv ut skyltarna för er version. De ligger längs repet i Sagostarten fram till pass 22, och när gruppen återberättar en saga eller spelar sagoteater." }
+    - rubrik: Sagans väg i fyra steg
+      text:
+        - Paret ritar och berättar först och skriver sedan en eller två meningar vid varje station.
+      huvud:
+        - { rubrik: Vi som skriver, text: "" }
+      delar:
+        - rubrik: Sagans väg
+          falt:
+            - { rubrik: 1 Hjälten, text: "Vem är hjälten, och vad vill hen?\nDet var en gång" }
+            - { rubrik: 2 Problemet, text: "Vad står i vägen för det hen vill?\nMen en dag" }
+            - { rubrik: 3 Lösningen, text: "Hur löser hjälten problemet själv?\nDå" }
+            - { rubrik: 4 Landningen, text: "Fick hjälten det hen ville?\nTill slut" }
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Till läraren, text: "Bladet har två sidor. Varje par får tre blad, ett för varje saga, och gruppen får ett i A3 till den förstorade vägen. I pass 20–⁠21 skriver paret de nya meningarna i boksagan på de tomma raderna. Får en mening inte plats, skriver paret den på en lapp och sätter lappen vid stationen. När sagan är skriven, sätter paret en bock vid bilden på varje station där sagan svarar på frågan. Paret tar bort en lapp från berättarpasset när det som står på den har kommit med i sagan." }
+    - rubrik: Sagans väg i sex steg
+      text:
+        - Paret planerar sagan med några ord vid varje station, berättar och spelar den och skriver den sedan på linjerat papper eller på dator.
+      huvud:
+        - { rubrik: Vi som skriver, text: "" }
+      delar:
+        - rubrik: Sagans väg
+          falt:
+            - { rubrik: 1 Hjälten, text: "Vem är hjälten, och vad önskar hen sig?\nDet var en gång" }
+            - { rubrik: 2 Problemet, text: "Vad står i vägen för önskan?\nMen en dag" }
+            - { rubrik: 3 Hjälparen, text: "Vem hjälper hjälten, och vad får hjälten?\nPå vägen mötte" }
+            - { rubrik: 4 Det värsta, text: "Hjälten försöker två gånger. Vad händer?\nPlötsligt" }
+            - { rubrik: 5 Lösningen, text: "Vad gör hjälten själv med det hen har fått?\nMen då" }
+            - { rubrik: 6 Landningen, text: "Fick hjälten sin önskan? Hur känns det nu?\nTill slut" }
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Till läraren, text: "Bladet har två sidor. Varje par får tre blad, ett för varje saga, och gruppen får ett i A3 till den förstorade vägen. Där en ny station börjar på det linjerade papperet, skriver paret stationens nummer i marginalen. På dator är stationerna rubriker i dokumentet. När sagan är skriven, sätter paret en bock vid bilden på varje station där sagan svarar på frågan. Paret tar bort en lapp från berättarpasset när det som står på den har kommit med i sagan." }
+    - rubrik: Spänningsberget i fyra steg
+      text:
+        - "Hur spännande är sagan vid varje station? Färga fler lågor ju mer spännande det är. Skriv ett ord om det som händer där."
+      huvud:
+        - { rubrik: Vi som färgar, text: "" }
+        - { rubrik: Sagan, text: "" }
+      delar:
+        - rubrik: Spänningsberget
+          falt:
+            - { rubrik: 1 Hjälten, text: "" }
+            - { rubrik: 2 Problemet, text: "" }
+            - { rubrik: 3 Lösningen, text: "" }
+            - { rubrik: 4 Landningen, text: "" }
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Till läraren, text: "Paret färgar berget när de hittar på sagan. I pass 22 färgar lyssnarparet ett eget berg och ger det efter responsen till paret som skrev sagan. I pass 23 jämför paret lågorna på de två bergen innan de bearbetar sagan." }
+    - rubrik: Spänningsberget i sex steg
+      text:
+        - "Hur spännande är sagan vid varje station? Färga fler lågor ju mer spännande det är. Skriv ett ord om det som händer där."
+      huvud:
+        - { rubrik: Vi som färgar, text: "" }
+        - { rubrik: Sagan, text: "" }
+      delar:
+        - rubrik: Spänningsberget
+          falt:
+            - { rubrik: 1 Hjälten, text: "" }
+            - { rubrik: 2 Problemet, text: "" }
+            - { rubrik: 3 Hjälparen, text: "" }
+            - { rubrik: 4 Det värsta, text: "" }
+            - { rubrik: 5 Lösningen, text: "" }
+            - { rubrik: 6 Landningen, text: "" }
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Till läraren, text: "Paret färgar berget när de hittar på sagan. I pass 22 färgar lyssnarparet ett eget berg och ger det efter responsen till paret som skrev sagan. I pass 23 jämför paret lågorna på de två bergen innan de bearbetar sagan." }
+    - rubrik: Hjältens kort i fyra steg
+      text:
+        - Paret ritar hjälten och skriver vad hjälten heter, var hen bor, vad hen har med sig eller kan, vad hen är rädd för och vad hen vill.
+      huvud:
+        - { rubrik: Vi som skriver, text: "" }
+      delar:
+        - rubrik: Hjältens kort
+          falt:
+            - { rubrik: Rita hjälten, text: "" }
+            - { rubrik: Hjälten heter, text: "" }
+            - { rubrik: Hjälten bor, text: "" }
+            - { rubrik: Hjälten har med sig eller kan, text: "Det använder hjälten vid Lösningen." }
+            - { rubrik: Hjälten är rädd för, text: "" }
+            - { rubrik: Hjälten vill, text: "Det handlar sagan om." }
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Till läraren, text: "I pass 4 fyller gruppen i ett kort i A3. I pass 19 fyller paret i ett eget till boksagan, medan den ena sitter i heta stolen som hjälten. Det räcker med ett ord eller två i varje fält, eller så skriver du det paret säger. Saken från tärning 6 ritar eller skriver ni i fältet ”Hjälten har med sig eller kan”." }
+    - rubrik: Hjältens kort i sex steg
+      text:
+        - Paret ritar hjälten och skriver vem hjälten är, vad hen är bra på, vad hen är rädd för och vad hen önskar sig mest av allt.
+      huvud:
+        - { rubrik: Vi som skriver, text: "" }
+      delar:
+        - rubrik: Hjältens kort
+          falt:
+            - { rubrik: Rita hjälten, text: "" }
+            - { rubrik: Hjälten heter, text: "" }
+            - { rubrik: Hjälten bor, text: "" }
+            - { rubrik: Så ser hjälten ut, text: "" }
+            - { rubrik: Vänner och fiender, text: "" }
+            - { rubrik: Hjälten är bra på, text: "Det kan hjälpa hjälten att lösa problemet." }
+            - { rubrik: Hjälten är rädd för, text: "Det kan hända när det är som värst." }
+            - { rubrik: Mest av allt önskar hjälten, text: "Det handlar sagan om." }
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Till läraren, text: "Gruppen fyller i ett kort i A3 i pass 4, och paret fyller i ett eget till boksagan i pass 16, medan den ena sitter i heta stolen som hjälten." }
+    - rubrik: Berättartärningarna
+      text:
+        - Det är tolv tärningar, två för varje fråga, och varje tärning står på ett eget A4. Skriv ut dem på tjockt papper, 160 till 200 gram, och klipp, vik och limma dem före pass 4.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Så gör du tärningarna, text: "Klipp längs strecken. Vik längs de blå prickade linjerna och stryk lim på flikarna, som hamnar inuti tärningen. Tärning A och B för samma fråga har samma färg. En sats räcker till gruppen. Två par kan slå samtidigt, eftersom varje fråga har två tärningar. Med fem eller sex par slår två par åt gången, och de andra ritar eller skriver på Sagans väg så länge. I fyra steg behövs inte tärning 5. Spara tärningarna i en ask." }
+      listor:
+        - rubrik: "Tärning 1A · Vem?"
+          rader: [[en prinsessa], [en trollkarl], [en räv], [en mus], [en robot], [en enhörning]]
+        - rubrik: "Tärning 1B · Vem?"
+          rader: [[en prins], [en katt], [en groda], [en astronaut], [en igelkott], [en pingvin]]
+        - rubrik: "Tärning 2A · Var?"
+          rader: [[ett slott], [en skog], [en ö], [ett berg], [rymden], [en stad]]
+        - rubrik: "Tärning 2B · Var?"
+          rader: [[havet], [en öken], [en stuga], [ett skepp], [en vulkan], [ett tåg]]
+        - rubrik: "Tärning 3A · Vad önskar hen?"
+          rader: [[en skatt], [komma hem], [en vän], [flyga], [vinna], [rädda någon]]
+        - rubrik: "Tärning 3B · Vad önskar hen?"
+          rader: [[en present], [en krona], [segla], [en tårta], [bli stark], [sjunga]]
+        - rubrik: "Tärning 4A · Vad händer?"
+          rader: [[en storm], [vilse], [en drake], [ett troll], [inlåst], [sjuk]]
+        - rubrik: "Tärning 4B · Vad händer?"
+          rader: [[en varg], [ett spöke], [en orm], [en krokodil], [ett hål], [natten]]
+        - rubrik: "Tärning 5A · Vem hjälper?"
+          rader: [[en uggla], [en fe], [en häst], [en myra], [en björn], [en hund]]
+        - rubrik: "Tärning 5B · Vem hjälper?"
+          rader: [[en delfin], [en örn], [en farmor], [ett bi], [en sköldpadda], [en ekorre]]
+        - rubrik: "Tärning 6A · Vilken sak?"
+          rader: [[en nyckel], [en trollstav], [en karta], [en spegel], [en flöjt], [ett par stövlar]]
+        - rubrik: "Tärning 6B · Vilken sak?"
+          rader: [[ett ljus], [ett rep], [en bok], [ett paraply], [ett frö], [en hatt]]
+    - rubrik: Frågekorten i fyra steg
+      text:
+        - På bladet står de två frågekorten i fyra steg. Paret har Kamratens frågor framför sig när de berättar sagan för varandra, och Läsarens frågor när de lyssnar på ett annat par.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Till läraren, text: "Skriv ut ett blad per par och klipp isär korten. Den som lyssnar läser frågan för varje station på kortet Kamratens frågor, och den som berättar svarar. När sagan är slut byter de, och den andra berättar samma saga med svaren i. Lyssnarparet följer med i texten på bladet Sagans väg och svarar på Läsarens frågor i tur och ordning. Sedan sätter de ett frågetecken i rutan vid den station där de undrade något. I pass 22 färgar lyssnarparet också ett eget Spänningsberg innan de ser parets." }
+      listor:
+        - rubrik: Kamratens frågor i fyra steg
+          rader:
+            - ["Hjälten: Var bor hjälten, och hur ser hen ut?"]
+            - ["Problemet: Vad gör hjälten först? Varför går det inte?"]
+            - ["Lösningen: Vad har hjälten med sig, eller vad kan hen?"]
+            - ["Landningen: Hur känns det för hjälten nu?"]
+            - ["Nu byter vi, och jag berättar."]
+        - rubrik: Läsarens frågor i fyra steg
+          rader:
+            - ["Vem är hjälten, och vad vill hen?"]
+            - ["Vad står i vägen för det hen vill?"]
+            - [Var blev det mest spännande? Peka i sagan.]
+            - [Hur löste hjälten problemet?]
+            - [Fick hjälten det hen ville?]
+            - [Undrade ni något? Sätt ett frågetecken där.]
+            - [Säg tack till författarna.]
+    - rubrik: Frågekorten i sex steg
+      text:
+        - På bladet står de två frågekorten i sex steg. Paret har Kamratens frågor framför sig när de berättar sagan för varandra, och Läsarens frågor när de lyssnar på ett annat par.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Till läraren, text: "Skriv ut ett blad per par och klipp isär korten. Den som lyssnar läser frågan för varje station på kortet Kamratens frågor, och den som berättar svarar. När sagan är slut byter de, och den andra berättar samma saga med svaren i. Lyssnarparet följer med i texten och svarar på Läsarens frågor i tur och ordning. Sedan sätter de ett frågetecken med blyerts där de undrade något. Skriver paret på dator, skriver lyssnarparet en kommentar i dokumentet i stället. I pass 22 färgar lyssnarparet också ett eget Spänningsberg innan de ser parets." }
+      listor:
+        - rubrik: Kamratens frågor i sex steg
+          rader:
+            - ["Hjälten: Var bor hjälten, och hur ser hen ut?"]
+            - ["Problemet: Hur känns det för hjälten?"]
+            - ["Hjälparen: Vad säger hjälparen?"]
+            - ["Det värsta: Vad gör hjälten först? Och vad händer då?"]
+            - ["Lösningen: Vad säger hjälten när hen löser problemet?"]
+            - ["Landningen: Hur känns det för hjälten nu?"]
+            - ["Nu byter vi, och jag berättar."]
+        - rubrik: Läsarens frågor i sex steg
+          rader:
+            - ["Vem är hjälten, och vad önskar hen sig?"]
+            - ["Vad står i vägen för önskan?"]
+            - [Var blev det mest spännande? Peka i sagan.]
+            - [Hur löste hjälten problemet?]
+            - [Fick hjälten sin önskan?]
+            - [Undrade ni något? Sätt ett frågetecken där.]
+            - [Säg tack till författarna.]
+    - rubrik: Rollkorten
+      text:
+        - Rollkorten ligger framför paret när de skriver, och efter varje mening byter paret kort.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Till läraren, text: "Skriv ut den första sidan till varje par och den andra sidan till en trio, och klipp isär korten. Paren får korten i pass 7 och har dem på bordet i varje skrivpass. I en trio får den tredje eleven kortet Utbyggaren, och korten går runt efter varje mening." }
+      listor:
+        - rubrik: Berättaren
+          rader:
+            - [Jag säger meningen.]
+            - [Min kamrat säger den igen och skriver.]
+            - [Vi läser den tillsammans.]
+            - [Vi byter kort.]
+        - rubrik: Skrivaren
+          rader:
+            - [Jag säger meningen igen.]
+            - [Jag skriver den.]
+            - [Vi läser den tillsammans.]
+            - [Vi byter kort.]
+        - rubrik: Utbyggaren
+          rader:
+            - [Jag läser meningen högt.]
+            - [Jag säger hur den kan bli längre.]
+            - [Skrivaren lägger till det om vi vill.]
+            - [Vi byter kort.]
+    - rubrik: "Fyra steg, saga 1: Bockarna Bruse"
+      text:
+        - "Läs sagan högt. Gruppen hittar sagans väg och svarar på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Fråga, text: "Hur många gånger möter bockarna trollet? Är den stora bocken en hjälpare eller en av hjältarna?" }
+      listor:
+        - rubrik: Bockarna Bruse
+          rader:
+            - ["Det var en gång tre bockar som hette Bruse.\nI dalen där de bodde var gräset slut.\nDe ville upp på berget, där gräset var högt och grönt."]
+            - ["Men på vägen fanns en bro,\noch under bron bodde ett troll.\n”Vem trippar på min bro?” röt trollet.\n”Nu tar jag dig!”\n”Vänta på den mellersta bocken”, sa den lilla.\n”Vänta på den stora”, sa den mellersta."]
+            - ["Då gick den stora bocken Bruse ut på bron.\nNär trollet klättrade upp,\nstångade han trollet ner i forsen."]
+            - ["Till slut kom alla tre bockarna upp på berget.\nDe åt och åt tills de var runda som bollar.\nOch snipp, snapp, snut, så var sagan slut."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Hjälten: Vem är hjälten, och vad vill hen?"]
+            - ["2. Problemet: Vad står i vägen för det hen vill?"]
+            - ["3. Lösningen: Hur löser hjälten problemet själv?"]
+            - ["4. Landningen: Fick hjälten det hen ville?"]
+    - rubrik: "Fyra steg, saga 2: De tre små grisarna"
+      text:
+        - "Läs sagan högt. Gruppen hittar sagans väg och svarar på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Fråga, text: "Hur många hus blåser vargen omkull, och vad gör den tredje grisen?" }
+      listor:
+        - rubrik: De tre små grisarna
+          rader:
+            - ["Det var en gång tre små grisar\nsom ville ha ett hus\nsom ingen varg kunde blåsa omkull."]
+            - ["Men i skogen bodde en hungrig varg.\nDen första grisen byggde ett hus av halm,\noch vargen blåste omkull det.\nDen andra byggde ett hus av pinnar,\noch vargen blåste omkull det också.\nGrisarna skakade så att knäna slog mot varandra."]
+            - ["Då byggde den tredje grisen ett hus av sten,\noch alla tre sprang in.\nVargen blåste och blåste, men huset stod kvar.\nDå klättrade vargen ner genom skorstenen.\nMen den tredje grisen hade ställt en gryta\nmed hett vatten under skorstenen.\nVargen brände sig på svansen\noch sprang tillbaka till skogen."]
+            - ["Till slut bodde de tre grisarna i stenhuset,\noch vargen kom aldrig tillbaka."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Hjälten: Vem är hjälten, och vad vill hen?"]
+            - ["2. Problemet: Vad står i vägen för det hen vill?"]
+            - ["3. Lösningen: Hur löser hjälten problemet själv?"]
+            - ["4. Landningen: Fick hjälten det hen ville?"]
+    - rubrik: "Fyra steg, kontrast A: Saga A om ekorren"
+      text:
+        - "Läs saga A och saga B högt. Paren letar efter önskan och problemet i båda sagorna. Sedan fyller gruppen i sagans väg för båda och säger vad som saknas i saga A."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Fråga, text: "Vad vill ekorren, och vad står i vägen?" }
+      listor:
+        - rubrik: Saga A om ekorren
+          rader:
+            - ["Det var en gång en ekorre som bodde i en gran.\nEn dag gick hon ut i skogen.\nHon åt en nöt.\nSedan gick hon hem och sov."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Hjälten: Vem är hjälten, och vad vill hen?"]
+            - ["2. Problemet: Vad står i vägen för det hen vill?"]
+            - ["3. Lösningen: Hur löser hjälten problemet själv?"]
+            - ["4. Landningen: Fick hjälten det hen ville?"]
+    - rubrik: "Fyra steg, kontrast B: Saga B om ekorren"
+      text:
+        - "Läs saga A och saga B högt. Paren letar efter önskan och problemet i båda sagorna. Sedan fyller gruppen i sagans väg för båda och säger vad som saknas i saga A."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Fråga, text: "Var står önskan i saga B, och var står den i saga A?" }
+      listor:
+        - rubrik: Saga B om ekorren
+          rader:
+            - ["Det var en gång en ekorre\nsom ville ha den största nöten i hela skogen."]
+            - ["Men nöten satt längst ut på en tunn gren,\nsom gungade i vinden.\nGrenen var för tunn för att bära ekorren."]
+            - ["Då gnagde ekorren av grenen,\noch nöten föll ner i den mjuka mossan."]
+            - ["Till slut satt ekorren i sitt bo\nmed den största nöten i hela skogen."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Hjälten: Vem är hjälten, och vad vill hen?"]
+            - ["2. Problemet: Vad står i vägen för det hen vill?"]
+            - ["3. Lösningen: Hur löser hjälten problemet själv?"]
+            - ["4. Landningen: Fick hjälten det hen ville?"]
+    - rubrik: "Sex steg, saga 1: Hans och Greta"
+      text:
+        - "Läs sagan högt. Gruppen hittar sagans väg och svarar på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Fråga, text: "Vad får Greta av ugglan, och när använder hon det?" }
+      listor:
+        - rubrik: Hans och Greta
+          rader:
+            - ["Det var en gång två syskon, Hans och Greta, som bodde med sin pappa i ett litet hus vid en stor skog. De var fattiga, och mest av allt önskade de att ingen i familjen skulle behöva vara hungrig mer."]
+            - ["Men en dag var maten slut. Barnen plockade bär långt inne i skogen, och där gick de vilse. Hans hade strött brödsmulor efter sig för att hitta hem, men fåglarna hade ätit upp varenda en."]
+            - ["På vägen mötte de en gammal uggla. ”Längre in i skogen står ett hus av pepparkakor”, sa ugglan. ”Den som bor där är listig, men ni kan vara listigare.”"]
+            - ["Plötsligt stod huset framför dem, och barnen var så hungriga att de bröt loss en bit av taket. Då kom en häxa ut. Hon låste in Hans i en bur och ville göra honom fet. Häxan såg dåligt och ville känna på hans finger, för att se om han hade blivit fet. Då höll Hans fram en liten benbit, så att hon trodde att han var mager. På natten försökte Greta öppna buren, men låset satt fast. En morgon tröttnade häxan. Hon eldade i ugnen och sa åt Greta att krypa in och känna om den var varm. Gretas händer skakade. Ugnen var het. Greta tog ett steg bakåt."]
+            - ["Men då kom Greta ihåg ugglans råd. ”Jag vet inte hur man gör”, sa hon. ”Visa mig.” Häxan kröp in för att visa henne, och Greta slog igen luckan. Hon släppte ut Hans, och i häxans hus hittade de en kista full av pärlor."]
+            - ["Till slut bar en vit and dem över en sjö, och de hittade vägen hem. Pappa grät av glädje, och tack vare pärlorna behövde ingen i familjen vara hungrig mer."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Hjälten: Vem är hjälten, och vad önskar hen sig?"]
+            - ["2. Problemet: Vad står i vägen för önskan?"]
+            - ["3. Hjälparen: Vem hjälper hjälten, och vad får hjälten?"]
+            - ["4. Det värsta: Hjälten försöker två gånger. Vad händer?"]
+            - ["5. Lösningen: Vad gör hjälten själv med det hen har fått?"]
+            - ["6. Landningen: Fick hjälten sin önskan? Hur känns det nu?"]
+    - rubrik: "Sex steg, saga 2: Jack och bönstjälken"
+      text:
+        - "Läs sagan högt. Gruppen hittar sagans väg och svarar på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Fråga, text: "Hur många gånger tar Jack något, och vad hjälper honom till slut?" }
+      listor:
+        - rubrik: Jack och bönstjälken
+          rader:
+            - ["Det var en gång en pojke som hette Jack. Han bodde med sin mamma i en liten stuga, och de hade bara en ko kvar. Jack önskade att mamma aldrig mer skulle behöva oroa sig för mat."]
+            - ["Men en dag slutade kon att ge mjölk, och Jack skulle sälja den på marknaden. På vägen bytte han kon mot fem bönor. Mamma blev så arg att hon kastade ut bönorna genom fönstret."]
+            - ["På morgonen hade en bönstjälk vuxit ända upp i himlen. Jack klättrade upp och kom till ett slott. Där bodde en jätte som hade stulit guld från hela landet. Jättens fru gömde Jack i ugnen. ”Jätten är stark”, viskade hon, ”men bönstjälken är svag.”"]
+            - ["Plötsligt dånade golvet. ”Fi, fai, fo, fum, jag känner lukten av en människa!” vrålade jätten. Jack höll andan. Första gången tog han en påse guld när jätten somnade. Andra gången tog han en höna som värpte guldägg. Tredje gången tog han jättens harpa, men harpan ropade: ”Vakna, jätte! Vakna!” Jätten vaknade och klättrade efter honom nerför stjälken."]
+            - ["Men då kom Jack ihåg vad frun hade sagt. ”Mamma, yxan!” ropade han. Han högg och högg, och bönstjälken föll med ett brak. Jätten föll med den och kom aldrig tillbaka."]
+            - ["Till slut hade Jack och mamma guldet, hönan och harpan. Hönan värpte guldägg, harpan spelade på kvällarna, och mamma behövde aldrig mer oroa sig för mat."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Hjälten: Vem är hjälten, och vad önskar hen sig?"]
+            - ["2. Problemet: Vad står i vägen för önskan?"]
+            - ["3. Hjälparen: Vem hjälper hjälten, och vad får hjälten?"]
+            - ["4. Det värsta: Hjälten försöker två gånger. Vad händer?"]
+            - ["5. Lösningen: Vad gör hjälten själv med det hen har fått?"]
+            - ["6. Landningen: Fick hjälten sin önskan? Hur känns det nu?"]
+    - rubrik: "Sex steg, kontrast A: Saga A om räven"
+      text:
+        - "Läs saga A och saga B högt. Paren letar efter önskan och problemet i båda sagorna. Sedan fyller gruppen i sagans väg för båda och säger var saga A går för fort."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Fråga, text: "Hur många försök gör räven innan han flyger?" }
+      listor:
+        - rubrik: Saga A om räven
+          rader:
+            - ["Det var en gång en räv som ville flyga. Men rävar har inga vingar. Då gjorde han vingar av löv och flög. Sedan var han glad."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Hjälten: Vem är hjälten, och vad önskar hen sig?"]
+            - ["2. Problemet: Vad står i vägen för önskan?"]
+            - ["3. Hjälparen: Vem hjälper hjälten, och vad får hjälten?"]
+            - ["4. Det värsta: Hjälten försöker två gånger. Vad händer?"]
+            - ["5. Lösningen: Vad gör hjälten själv med det hen har fått?"]
+            - ["6. Landningen: Fick hjälten sin önskan? Hur känns det nu?"]
+    - rubrik: "Sex steg, kontrast B: Saga B om räven"
+      text:
+        - "Läs saga A och saga B högt. Paren letar efter önskan och problemet i båda sagorna. Sedan fyller gruppen i sagans väg för båda och säger var saga A går för fort."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Fråga, text: "Hur många försök gör Rasmus, och vad händer varje gång?" }
+      listor:
+        - rubrik: Saga B om räven
+          rader:
+            - ["Det var en gång en räv som hette Rasmus. Han bodde i en lya vid skogens kant, och varje kväll satt han och tittade på gässen. Mest av allt önskade han att han kunde flyga som de."]
+            - ["Men en dag flög gässen söderut, och Rasmus blev ensam kvar. Rävar har inga vingar, men han sprang efter dem så långt han orkade."]
+            - ["På vägen mötte han en gammal gås som hade stannat kvar. Hon gav honom en fjäder. ”Fjädern flyger bara från rätt ställe”, sa hon."]
+            - ["Rasmus hoppade från en sten, men han föll rakt ner i bäcken. Han klättrade upp på en kulle och hoppade igen, men då kom en storm. Vinden tog tag i honom och slängde in honom i en gran. Där satt han fast i grenarna, högt uppe, och det blev mörkt. Han frös."]
+            - ["Men då kom han ihåg gåsens ord. Han slet sig loss och klättrade högst upp i granen. Där uppe blåste vinden rakt söderut, och han höll fjädern mot vinden. Fjädern växte till två stora vingar, och Rasmus lyfte."]
+            - ["Till slut flög han ikapp gässen, precis som han hade önskat, och han var gladare än någonsin. Han flög med dem hela vägen söderut och hem igen på våren. Och sedan dess hälsar gässen på Rasmus varje gång de flyger förbi."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Hjälten: Vem är hjälten, och vad önskar hen sig?"]
+            - ["2. Problemet: Vad står i vägen för önskan?"]
+            - ["3. Hjälparen: Vem hjälper hjälten, och vad får hjälten?"]
+            - ["4. Det värsta: Hjälten försöker två gånger. Vad händer?"]
+            - ["5. Lösningen: Vad gör hjälten själv med det hen har fått?"]
+            - ["6. Landningen: Fick hjälten sin önskan? Hur känns det nu?"]
+    - rubrik: Sagobokens omslag
+      text:
+        - Det här är bokens framsida, och gruppen gör den tillsammans i pass 28.
+      delar:
+        - rubrik: Omslaget
+          falt:
+            - { rubrik: Bokens titel, text: "" }
+            - { rubrik: Rita omslaget, text: "" }
+            - { rubrik: Sagor av, text: "" }
+            - { rubrik: Skolan och året, text: "" }
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Till läraren, text: "Kopiera omslaget på tjockt papper. Skriv elevernas namn vid Sagor av, eller låt varje elev skriva sitt förnamn där." }
+    - rubrik: Bokens sida
+      text:
+        - Det här är en sida i sagoboken. Den har en ruta att rita i och rader där paret skriver sagan rent.
+      delar:
+        - rubrik: Bokens sida
+          falt:
+            - { rubrik: Sagans titel, text: "" }
+            - { rubrik: Rita, text: "" }
+            - { rubrik: Sagan, text: "" }
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Till läraren, text: "Paret får en sida för varje station, och i sex steg en till om en station blir lång. På sagans första sida skriver paret den första bokstaven stort i den lilla rutan bredvid de två första raderna. På de andra sidorna skriver de sidans nummer där. Från pass 24 ritar paret bilderna i rutan Rita." }
+    - rubrik: Författarna
+      text:
+        - Det här är sidan om författarna, och den står sist i boken. Paret ritar sig själva och skriver sina namn, sin klass och det bästa med sagan.
+      delar:
+        - rubrik: Författarna
+          falt:
+            - { rubrik: Rita er själva, text: "" }
+            - { rubrik: Vi heter, text: "" }
+            - { rubrik: Vi går i, text: "" }
+            - { rubrik: Vår saga heter, text: "" }
+            - { rubrik: Det bästa med sagan, text: "" }
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Till läraren, text: "Två par delar på varje sida, så du kopierar ett blad för varje två par. Paren fyller i sidan i pass 27." }
+    - rubrik: Sagokollen
+      text:
+        - "Sagokollen är ditt protokoll före och efter kursen. Skriv en siffra i varje kolumn: 2 när det kolumnen frågar efter finns i sagan och är utvecklat, 1 när det finns och 0 när det saknas. I kolumnen Meningar emellan skriver du hur många meningar som står mellan problemet och lösningen."
+      huvud:
+        - { rubrik: Gruppen, text: "" }
+        - { rubrik: Bilden före och efter, text: "" }
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Bilden, text: "Välj en bild som väcker en fråga, till exempel ett barn med en stor gammal nyckel. Efter kursen väljer du en ny bild av samma slag, som samma barn framför en låst dörr. I fyra steg kan du använda tre bilder i rad, där den sista lämnar problemet öppet." }
+            - { rubrik: Så gör du, text: "Säg: ”Berätta en saga om bilden” eller ”Skriv en saga om bilden”. Sagans väg ligger inte framme. I fyra steg berättar eleven för dig, cirka fem minuter per elev, och du spelar in sagan eller skriver ner den. I sex steg skriver eleven i 15 minuter. Är det mycket tungt för en elev att skriva, berättar hen i stället. Skriv B efter namnet när eleven berättar och S när eleven skriver. Efter kursen gör eleven uppgiften på samma sätt. Efter kursen spelar du i fyra steg upp elevens första saga direkt när eleven har berättat den nya. Sedan säger eleven vad som finns i den nya sagan." }
+            - { rubrik: Utvecklad, text: "Tidigt i sagan önskar sig hjälten något, och sagan handlar om det. Problemet står i vägen för önskan. Det blir värre för varje försök, men det gäller bara sex steg. Hjälten löser problemet själv, och landningen knyter an till önskan. I kolumnen Försök och hjälp betyder hjälp att en hjälpare ger hjälten något som hjälten sedan använder själv." }
+            - { rubrik: Meningar emellan, text: "Räkna meningarna mellan problemet och lösningen. Står det högst en mening emellan, löser hjälten problemet direkt. Den här kolumnen och kolumnen Försök och hjälp gäller bara sex steg. I fyra steg lämnar du dem tomma, eftersom sagan i fyra steg inte har någon station för försöken." }
+      listor:
+        - rubrik: "Sagokollen: före kursen"
+          larare: true
+          kolumner: [Eleven, Hjälte och önskan, Problemet, Försök och hjälp, Hjälten löser, Landningen, "Meningar emellan, antal"]
+          rader:
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+        - rubrik: "Sagokollen: efter kursen"
+          larare: true
+          kolumner: [Eleven, Hjälte och önskan, Problemet, Försök och hjälp, Hjälten löser, Landningen, "Meningar emellan, antal"]
+          rader:
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", ""]
+    - rubrik: Parets väg
+      text:
+        - Parets väg är ditt blad för varje par från pass 13 till boksläppet. Efter varje pass skriver du där det du hörde och såg, med parets egna ord när du kan. Bladet för pass 13–⁠23 finns i planeringsmallarna. Listan här gäller bokpassen, och i den skriver du i vilket pass paret blev klart med varje steg.
+      huvud:
+        - { rubrik: Paret, text: "" }
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Efter varje pass, text: "Skriv vilken station paret är på och vem som skrev. I berättarpassen skriver du vad paret lade till när kamraten frågade. I skrivpassen skriver du om det kom med i texten och vilka drag paret använde. Sitter det kvar lappar från berättarpasset när paret har skrivit klart stationen, kom det som står på dem inte med i texten. Sist skriver du vad paret behöver nästa pass. Det säger du till dem i delen Där vi slutade." }
+      listor:
+        - rubrik: "Parets väg: boken"
+          larare: true
+          kolumner: [Steget, Klart i pass]
+          rader:
+            - [Sagan rättad, ""]
+            - [Sagan renskriven på Bokens sida, ""]
+            - [Bilderna ritade, ""]
+            - [Sidan Författarna ifylld, ""]
+            - [Paret har övat att läsa sagan högt, ""]
+kort:
+  listor: [Tärning]
+elevblad:
+  Sagans väg i sex steg: { 1 Hjälten: 4, 2 Problemet: 4, 3 Hjälparen: 4, 4 Det värsta: 4, 5 Lösningen: 4, 6 Landningen: 4 }
+  Sagans väg i fyra steg: { 1 Hjälten: 6.5, 2 Problemet: 6.5, 3 Lösningen: 6.5, 4 Landningen: 6.5 }
+  Spänningsberget i sex steg: { 1 Hjälten: 1, 2 Problemet: 1, 3 Hjälparen: 1, 4 Det värsta: 1, 5 Lösningen: 1, 6 Landningen: 1 }
+  Spänningsberget i fyra steg: { 1 Hjälten: 1.4, 2 Problemet: 1.4, 3 Lösningen: 1.4, 4 Landningen: 1.4 }
+  Hjältens kort i sex steg: { Rita hjälten: 8.6, Hjälten heter: 0.9, Hjälten bor: 0.9, Så ser hjälten ut: 1.7, Vänner och fiender: 1.7, Hjälten är bra på: 1.7, Hjälten är rädd för: 1.7, Mest av allt önskar hjälten: 2.6 }
+  Hjältens kort i fyra steg: { Rita hjälten: 8.6, Hjälten heter: 1, Hjälten bor: 1, Hjälten har med sig eller kan: 3, Hjälten är rädd för: 3, Hjälten vill: 3 }
+  Sagobokens omslag: { Bokens titel: 2.2, Rita omslaget: 12, Sagor av: 4.4, Skolan och året: 1.1 }
+  Bokens sida: { Sagans titel: 1, Rita: 10, Sagan: 9.5 }
+  Författarna: { Rita er själva: 7, Vi heter: 0.9, Vi går i: 0.9, Vår saga heter: 0.9, Det bästa med sagan: 1.8 }
+mallar:
+  - rubrik: Parets väg
+    typ: rutnat
+    kolumner:
+      - Pass, station och vem som skrev
+      - Det paret lade till, och om det kom med i texten
+      - Draget
+      - Nästa pass
+    rader: 11
+    underrad: "Paret: ______________________ · Sagorna: ______________________"
+    text: Varje par har ett blad för pass 13–⁠23, med en rad för varje pass. Vad du skriver står under Parets väg i Kursens material.
+lathund:
+  innehall: En saga på sagans väg
+  metoden:
+    text:
+      - "Eleverna lär sig bygga en saga efter sagans väg: hjälten önskar sig något, ett problem står i vägen, och hjälten löser det själv. Fyra steg passar de flesta grupper i åk 1–⁠3 och sex steg de flesta i åk 4–⁠6."
+      - "Kursen är 30 pass. Gruppen läser och planerar i vecka 1–⁠2 och skriver en saga tillsammans i vecka 3–⁠4. Paren gör sina sagor i vecka 5–⁠8, och i vecka 8–⁠10 gör ni boken. Eleverna berättar och spelar varje saga innan de skriver den. Före kursen gör du Sagokollen och bestämmer vem som ska läsa boken."
+    ruta:
+      rubrik: Tre saker att hålla fast vid
+      punkter:
+        - { fet: Hjälten löser problemet själv., text: "Hjälparen ger något, men hjälten gör det svåra." }
+        - { fet: Berätta innan ni skriver., text: Paret berättar sagan tre gånger och säger varje mening högt innan någon skriver den. }
+        - { fet: Rätta först när ni gör boken., text: "Medan paren skriver, svarar du som läsare." }
+    tabell:
+      rubrik: Skrivpassets delar
+      kolumner: [Del, Exempelfraser]
+      rader:
+        - ["1 · Sagostarten\nSagan vid skyltarna", "”Nu kom stormen. Hur ska det gå?”"]
+        - ["2 · Där vi slutade\nSista meningen", "”Vilken station är ni på?”"]
+        - ["3 · Skrivdraget\nDu visar ett drag", "”Vad kallar vi det här draget?”"]
+        - ["4 · Berätta och skriva\nParet byter roller", "”Vad händer vid er station? Berätta för din kamrat först.”"]
+        - ["5 · Läsarna lyssnar\nEtt par läser", "”Var blev det mest spännande?”\n”Hur ska det gå?”"]
+    not: "I läspassen berättar och läser du en saga, och gruppen återberättar den längs skyltarna. I planeringspassen slår ni tärningarna och fyller i Sagans väg och berget. I vecka 3–⁠4 skriver du gruppens saga, och varje elev ger ett förslag innan du skriver. I berättarpassen berättar paren sagan två gånger med Kamratens frågor, spelar den för gruppen och sätter lappar vid stationerna."
+  pass:
+    rubrik: "Vi kör ett pass: Det värsta, sex steg"
+    textRubrik: Gruppen · sex elever i åk 4, pass 20
+    text:
+      - "Liam slår tärningarna och får en mus, önskan att rädda någon, en storm, en myra och en flöjt. Sedan berättar gruppen vid vägskyltarna. Läraren läser ur Hans och Greta: ”Gretas händer skakade. Ugnen var het. Greta tog ett steg bakåt.” Noah säger: ”Det är korta meningar.” Alva säger: ”Hon gör en sak i taget.” Gruppen känner igen draget att sakta ner vid det värsta, och varje par säger en egen mening med draget."
+      - "Omar berättar: ”Prinsessan klättrade, men stenarna rasade.” Alva säger meningen igen och skriver den, och sedan byter de roller. Elin och Noah är oense, så de slår tärning 4 och får en storm. Läraren frågar Sara och Liam: ”Vad gör hjälten först?” Sist läser Elin och Noah sin text och börjar med meningen de strök under. Omar frågar: ”Hur ska det gå?”"
+    forberett:
+      rubrik: Det jag förberedde
+      text:
+        - Jag läste parens sista meningar och Parets väg och valde draget att sakta ner vid det värsta. Jag hittade draget i Hans och Greta. Sedan skrev jag två egna meningar med draget.
+    klarTidigt: Paret läser sagan för ett annat par eller ritar en bild till stationen på ett eget papper.
+    schema:
+      rubrik: 60 minuter, del för del
+      rader:
+        - { tid: Före, fas: Förberedelse, vad: Läs parens sista meningar och välj skrivdraget. }
+        - { tid: 0–5, fas: 1 · Sagostarten, vad: "En elev slår tärning 1, 3 och 4, och i sex steg också tärning 5 och 6. Sedan berättar gruppen vid skyltarna.", fraser: [Hur ska det gå?] }
+        - { tid: 5–10, fas: 2 · Där vi slutade, vad: Varje par läser sin sista mening., fraser: [Vilken station är ni på?] }
+        - { tid: 10–20, fas: 3 · Skrivdraget, vad: "Du läser ur en modellsaga och skriver två egna meningar med draget. Sedan säger varje par en mening med draget.", fraser: [Vad kallar vi det här draget?] }
+        - { tid: 20–50, fas: 4 · Berätta och skriva, vad: "Berättaren säger meningen, Skrivaren säger den igen och skriver, båda läser, och sedan byter de rollkort. Paret stryker under meningen med draget.", fraser: [Vad gör hjälten först?] }
+        - { tid: 50–60, fas: 5 · Läsarna lyssnar, vad: "Ett par läser och börjar med meningen de strök under. Gruppen säger var det blev spännande.", fraser: [Var blev det mest spännande?] }
+  mall:
+    rubrik: Gruppens plan
+    underrad: "Pass 5–⁠6: du skriver gruppens ord på den förstorade vägen"
+    block:
+      - typ: tabell
+        rubrik: Sagans väg i fyra steg
+        kolumner: [Stationen, Gruppens ord]
+        rader:
+          - ["1 Hjälten · Det var en gång\nVem är hjälten, och vad vill hen?", ""]
+          - ["2 Problemet · Men en dag\nVad står i vägen för det hen vill?", ""]
+          - ["3 Lösningen · Då\nHur löser hjälten problemet själv?", ""]
+          - ["4 Landningen · Till slut\nFick hjälten det hen ville?", ""]
+      - typ: tabell
+        rubrik: Sagans väg i sex steg
+        kolumner: [Stationen, Gruppens ord]
+        rader:
+          - ["1 Hjälten · Det var en gång\nVem är hjälten, och vad önskar hen sig?", ""]
+          - ["2 Problemet · Men en dag\nVad står i vägen för önskan?", ""]
+          - ["3 Hjälparen · På vägen mötte\nVem hjälper hjälten, och vad får hjälten?", ""]
+          - ["4 Det värsta · Plötsligt\nHjälten försöker två gånger. Vad händer?", ""]
+          - ["5 Lösningen · Men då\nVad gör hjälten själv med det hen har fått?", ""]
+          - ["6 Landningen · Till slut\nFick hjälten sin önskan? Hur känns det nu?", ""]
+  material:
+    rubrik: Vad du behöver för ett pass
+    kravEtikett: Modellsagans krav
+    var:
+      rubrik: Var materialet finns
+      punkter:
+        - { fet: Metodens sida., text: "Under Kursens material finns vägskyltarna, sagans väg, Spänningsberget, Hjältens kort, tärningarna, frågekorten, rollkorten, modellsagorna, bokens sidor, Sagokollen och Parets väg." }
+        - { fet: Planeringsmallarna., text: "Där finns alla blad att skriva ut, ett på varje sida." }
+        - { fet: Skriver paret på dator?, text: "Gör ett delat dokument med stationerna som rubriker, och stäng av stavningskontrollen fram till bokpassen." }
+      efter: Skriv ut tärningarna på tjockt papper före pass 4.
+    bordet:
+      - "Läspassen: skyltarna längs repet och dagens saga"
+      - "Planeringspassen: tärningarna, Sagans väg, berget och Hjältens kort"
+      - "Berättarpassen: skyltarna, Sagans väg, Kamratens frågor, lappar och lådan"
+      - "Skrivpassen: Sagans väg, berget, frågekorten, rollkorten och dagens modellsaga"
+      - "Bokpassen: sagan, Bokens sida och sidan Författarna från pass 27"
+    varjePass: Från pass 13 skriver du på Parets väg vad varje par behöver nästa pass.
+film:
+  sekunder: 28.29
+  beskrivning: "En elev slår tre tärningar. Eleven lägger tärningarna vid skyltarna. Gruppen berättar sagan, en mening vid varje station. Maja säger: ”Det var en gång en mus som ville ha en skatt.” Ali säger: ”Men en dag kom en stor drake och vaktade skatten.” Gruppen frågar: ”Hur ska det gå?” Hjälten löser problemet själv. Ebba säger: ”Då kröp musen in genom ett hål som var för litet för draken.” Vid Landningen får hjälten sin önskan. Isak säger: ”Till slut hade musen skatten, precis som hon ville.”"
+  rubrik: "Så gör eleven"
+  ingress: "Fyra bilder ur filmen om Sagostarten i fyra steg, i en grupp i åk 2: en elev slår tärningarna, och gruppen berättar en saga med en mening vid varje station. Filmen på metodens sida visar samma sak i rörelse. De gula bubblorna är elevernas."
+  stillbilder:
+    - text: "Tärning 1, 3 och 4 visar en mus, en skatt och en drake."
+    - text: "Maja berättar om en mus som vill ha en skatt."
+    - text: "Draken vaktar skatten. Gruppen frågar hur det ska gå."
+    - text: "Musen löser problemet själv och får skatten."
+filmer:
+  - nr: 2
+    sekunder: 24.26
+    beskrivning: "Paret har berättat sagan förut. Omar berättar och Alva skriver. Omar säger: ”Prinsessan klättrade, men stenarna rasade.” Skrivaren säger meningen igen och skriver. Alva säger: ”Prinsessan klättrade, men stenarna rasade.” Båda läser högt. Omar och Alva säger: ”Prinsessan klättrade, men stenarna rasade.” Sedan byter de roller. Alva säger: ”Hon försökte igen, men då kom draken.” Omar säger: ”Hon försökte igen, men då kom draken.”"
+    rubrik: "Berättaren och Skrivaren"
+    ingress: "Fyra bilder ur filmen om delen Berätta och skriva i vecka 5–8, när paret skriver i sex steg. Berättaren säger meningen, Skrivaren säger den igen och skriver, och båda läser. Efter varje mening byter de roller. Sagans väg ligger till vänster och sagan till höger. De gula bubblorna är elevernas."
+    efter: "steg 4"
+    stillbilder:
+      - text: "Berättaren säger meningen först."
+      - text: "Skrivaren säger meningen igen och skriver."
+      - text: "Båda läser meningen högt."
+      - text: "Sedan berättar Alva, och Omar skriver meningen."
+  - nr: 3
+    sekunder: 20.91
+    beskrivning: "Grodan vill komma hem. Maja berättar, och Ali har kortet. Maja säger: ”Men en dag kom en storm.” Ali läser stationens fråga på kortet. Ali frågar: ”Vad gör hjälten först? Varför går det inte?” Maja svarar. Maja säger: ”Hon hoppar, men vinden är för stark.” Maja berättar klart, och Ali frågar vid varje station. När sagan är slut byter de. Ali berättar den med svaren i. Ali säger: ”… Grodan hoppade, men vinden var för stark.”"
+    rubrik: "Paren berättar"
+    ingress: "Fyra bilder ur filmen om delen Paren berättar i berättarpasset, med sagans väg i fyra steg. Maja berättar sagan, och vid varje station läser Ali frågan på kortet. Maja svarar. När sagan är slut byter de, och Ali berättar samma saga med svaren i. Den blå bubblan är frågan på kortet, och de gula är det paret säger."
+    efter: "tabell: Berättarpasset"
+    stillbilder:
+      - text: "Grodan vill komma hem. Maja berättar om stormen."
+      - text: "Ali läser stationens fråga på kortet."
+      - text: "Maja svarar på frågan."
+      - text: "När sagan är slut byter de. Ali berättar med svaren i."

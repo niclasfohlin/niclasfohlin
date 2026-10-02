@@ -70,14 +70,24 @@
     "datum": "2026-10-01"
   },
   "skrivkurs-berattelseram": {
-    "kalla": "2f5525062d562884",
+    "kalla": "f27a4bc1e7cbfea9",
     "skalor": [
       1.2,
       1.35,
       1.15,
       1.35
     ],
-    "datum": "2026-10-01"
+    "datum": "2026-10-02"
+  },
+  "skrivkurs-sagoboken": {
+    "kalla": "921b3f14a471664c",
+    "skalor": [
+      1.25,
+      1.35,
+      1.1,
+      1.35
+    ],
+    "datum": "2026-10-02"
   },
   "skrivkurs-vardeskapande": {
     "kalla": "dfadaa6766b58e4e",
