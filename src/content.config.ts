@@ -552,6 +552,15 @@ const stodundervisning = defineCollection({
     d.mallar.forEach((m, i) => { if (m.typ === 'flode' && (m.kolumner?.length ?? 0) < 2) ctx.addIssue({ code: 'custom', path: ['mallar', i, 'kolumner'], message: 'Ett flöde kräver minst två rutor.' }); });
     d.mallar.forEach((m, i) => { if (m.typ !== 'rutnat' && m.kolumner?.some((k) => !k)) ctx.addIssue({ code: 'custom', path: ['mallar', i, 'kolumner'], message: `Bara ett rutnät får ha tomma kolumnnamn; mallen ${m.typ} behöver namn i varje kolumn.` }); });
     d.mallar.forEach((m, i) => { if (m.komma && m.komma >= (m.kolumner?.length ?? 0)) ctx.addIssue({ code: 'custom', path: ['mallar', i, 'komma'], message: 'Kommat står efter en kolumn som har fler kolumner efter sig.' }); });
+    // Citattecknen går jämnt ut i varje stycke, och en radbrytning börjar ett nytt (K-174, Skrivkurs: sagoboken
+    // 2026-10-02: musens saga i pass 1 saknade sitt avslutande citattecken, och en mening i tidsschemat hade ett för mycket).
+    const citat = (x: unknown, sti: (string | number)[]): void => {
+      if (typeof x === 'string') {
+        for (const stycke of x.split('\n')) if ((stycke.match(/”/g) ?? []).length % 2) ctx.addIssue({ code: 'custom', path: sti, message: `Citattecknen ” går inte jämnt ut i stycket "${stycke.length > 90 ? `${stycke.slice(0, 90)}…` : stycke}": ett saknas eller är för mycket.` });
+      } else if (Array.isArray(x)) x.forEach((y, i) => citat(y, [...sti, i]));
+      else if (x && typeof x === 'object') for (const [k, v] of Object.entries(x)) citat(v, [...sti, k]);
+    };
+    citat(d, []);
   }),
 });
 

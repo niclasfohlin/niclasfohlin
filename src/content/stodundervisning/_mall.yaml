@@ -4,6 +4,8 @@
 # så det som skrivs här hamnar i alla tre. Delarna under "Modellen" är valfria: skriv bara det som finns.
 # En text med flera stycken skrivs som en lista med ett stycke per rad.
 # Ett värde som innehåller kolon följt av mellanrum skrivs inom citattecken.
+# Repliker och citat står inom ” och ”, och citatet stängs i samma stycke: bygget stannar när citattecknen inte går
+# jämnt ut i ett stycke (en radbrytning \n börjar ett nytt).
 
 titel: Metodens namn
 # Raden under rubriken: vad metoden är och för vem.
