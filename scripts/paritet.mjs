@@ -169,12 +169,19 @@ for (const fil of filer) {
   const word = norm(avkoda([xml, ...huvudOchFot].join(' ').replace(/<[^>]+>/g, '')));
   const tommaRamar = (d.ramar?.ramar ?? []).map((r, i) => (tomRam(r) ? new RegExp(`^ramar\\.ramar\\.${i}\\.(delar|huvud)\\.`) : null)).filter(Boolean);
   const lastextRader = (d.ramar?.ramar ?? []).map((r, i) => (arLastext(r) ? new RegExp(`^ramar\\.ramar\\.${i}\\.text\\.`) : null)).filter(Boolean);
+  // En lästexts rubrik står i två delar i Word: titeln överst på boksidan och nivån och vad i sidfotens knapp (FYRA STEG ·
+  // saga 1). Textsamtal i grupp hade dessutom hela rubriken i lärarsidornas rubriker, men Skrivkurs: sagoboken har inga
+  // lärarsidor (2026-10-02). Båda delarna ska stå i Word-filen; utskriften har rubriken i ett stycke.
+  const lastextRubrik = new Map((d.ramar?.ramar ?? []).flatMap((r, i) => {
+    const m = arLastext(r) && String(r.rubrik).match(/^([^,:]+), ([^:]+): (.+)$/);
+    return m ? [[`ramar.ramar.${i}.rubrik`, [norm(`${m[1]} ${m[2]}`), norm(m[3])]]] : [];
+  }));
   const saknas = [];
   for (const { vag, text } of texter(d, '', [])) {
     if (lastextRader.some((r) => r.test(vag))) continue;
     const u = UNDANTAG.find((x) => x.vag.test(vag));
     const n = norm(text);
-    const iWord = u?.word === false || word.includes(n);
+    const iWord = u?.word === false || word.includes(n) || !!lastextRubrik.get(vag)?.every((del) => word.includes(del));
     const iUtskrift = u?.utskrift === false || tommaRamar.some((r) => r.test(vag)) || utskrift.includes(n);
     provade++;
     if (!iWord || !iUtskrift) saknas.push(`    ${vag}: saknas i ${[!iWord && 'Word-filen', !iUtskrift && 'sidans utskrift'].filter(Boolean).join(' och ')}\n      ”${text.length > 110 ? `${text.slice(0, 110)}…` : text}”`);
