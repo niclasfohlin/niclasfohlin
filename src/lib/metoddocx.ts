@@ -17,7 +17,7 @@ import { arElevensBlad, harFragor, lastexter, protokollDelas, textlangd, type La
 import { filmerVid, huvudfilm, metodensFilmer, stegDelar, stillbilder, STILLBILD_MATT, type FilmPlats, type MetodFilm } from './film';
 import { reservNyckel } from './reservbild';
 import * as SAGA from './sagoform.js';
-import { arTarning, harBoktypsnitt, sagobladAv, tarningAv, type Sagoblad, type Sagofalt, type Station, type Tarning } from './sagoblad';
+import { arTarning, harBoktypsnitt, SAGO_UPPHOV, sagobladAv, tarningAv, type Sagoblad, type Sagofalt, type Station, type Tarning } from './sagoblad';
 import WORDSKALOR from '../data/lathund-word.json';
 import TECKENBREDD from '../data/teckenbredd.json';
 import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, RAMHOJD, TITEL_PT, boksidansMatt } from './boksida';
@@ -1064,6 +1064,21 @@ function sagobladBarn(b: Sagoblad): Barn[] {
             : forfattareInnehall(b, w));
   return b.ram === 'lindorm' ? lindormRam((w, h) => innehall(w, h)) : slingRam((w) => innehall(w, SLINGA_INNEHALL));
 }
+// Lärarens text till en följd av sagoblad: ramens rubrik, text och ruta Till läraren i vanlig storlek, och bildernas
+// upphov, så att läraren läser hur bladet används utan att läsa sidfoten (granskningen 2026-10-02).
+function sagoLarartext(ramar: Ram[], d: MetodData, rubrik: (text: string) => Barn): Barn[] {
+  const ut: Barn[] = [];
+  for (const r of ramar) {
+    ut.push(rubrik(r.rubrik));
+    for (const s of r.text) ut.push(stycke(s, { efter: 60 }));
+    const [blad] = sagobladAv(r, d);
+    if (blad.not) ut.push(stycke(blad.not, { farg: FARG.svag, storlek: 20, efter: 100 }));
+  }
+  ut.push(stycke(SAGO_UPPHOV, { farg: FARG.svag, storlek: 18 }));
+  return ut;
+}
+// En följd av ramar med sagoform från ramen i.
+const sagoFoljd = (ramar: Ram[], i: number): Ram[] => { const ut: Ram[] = []; for (let j = i; j < ramar.length && ramar[j].sagoform; j++) ut.push(ramar[j]); return ut; };
 // Ramens blad, vart och ett på en egen sida i en egen sektion: rutan Till läraren i sidfoten, som på boksidan, och bokens
 // blad utan sidfot, så att de går att kopiera in i den tryckta boken (riggens läsbarhetsrunda 2026-10-02). Upphovet står
 // litet i sidhuvudet på alla, som på boksidan.
@@ -1088,7 +1103,12 @@ function sagoFot(s: Sagosektion): Footer {
 // E, F uppifrån) och en på var sida om den andra (B och D). Streckad grå kant klipps och blå prickad viks, som på
 // vikkorten. Varje sida är en bild: tärningens färg, en dubbel ram med blommor i hörnen, frågan i Cinzel, bilden ur
 // bildbanken och ordet. Raderna har exakt höjd utan cellmarginal upptill, så att korset blir lika stort i Word och Google.
-const TARNING_TEXT = 'Klipp längs strecken. Vik längs de blå prickade linjerna och limma flikarna inuti tärningen.';
+const TARNING_TEXT = 'Klipp längs strecken, också de korta strecken vid flikarna. Vik längs de blå prickade linjerna och limma flikarna inuti tärningen.';
+// Rubriken och raden över korset i 9,5 pt, som i riggen (granskningen 2026-10-02: 7,5 och 8 pt var för små vid korset).
+const tarningRubrik = (text: string | undefined): Paragraph[] => [
+  ...(text ? [new Paragraph({ keepNext: true, spacing: { before: 0, after: 40 }, heading: HeadingLevel.HEADING_4, children: [textRun({ text, bold: true, size: 19, color: FARG.huvud, allCaps: true })] })] : []),
+  new Paragraph({ keepNext: true, spacing: { before: 0, after: 80 }, children: [textRun({ text: TARNING_TEXT, size: 19, color: FARG.svag })] }),
+];
 function tarningTabell(t: Tarning): Table {
   const s = 3285, fl = 630;
   const bredder = [s - fl, fl, s, fl, s - fl];
@@ -1188,10 +1208,10 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
   // Berättartärningarna (src/lib/sagoblad.ts, tarningTabell): lärarens ruta först, sedan varje tärning på ett eget A4 med
   // smal marginal, som ett kors att klippa, vika och limma, både i beskrivningen och i planeringsmallarna.
   if ((ram.listor ?? []).some((l) => arTarning({ kort: o.kort }, l))) {
-    ut.push(...noter());
+    ut.push(...noter(), stycke(SAGO_UPPHOV, { farg: FARG.svag, storlek: 18 }));
     for (const l of ram.listor ?? []) {
       if (!arTarning({ kort: o.kort }, l)) { ut.push(...elevlista(l, { storlek, brak: o.brak, elev: o.elev && !l.larare })); continue; }
-      ut.push(new Sektionsbyte(true), ...arkRubrik(l.rubrik, false), new Paragraph({ keepNext: true, spacing: { before: 0, after: 80 }, children: [textRun({ text: TARNING_TEXT, size: 16, color: FARG.svag })] }), tarningTabell(tarningAv(l, ram, { kort: o.kort })), new Sektionsbyte(false));
+      ut.push(new Sektionsbyte(true), ...tarningRubrik(l.rubrik), tarningTabell(tarningAv(l, ram, { kort: o.kort })), new Sektionsbyte(false));
     }
     return ut;
   }
@@ -1798,15 +1818,7 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
       // texter för läraren står samlade före en följd av sagoblad, så att varje blad inte får en nästan tom sida framför
       // sig (Skrivkurs: sagoboken, 2026-10-02). Bokens blad har ingen sidfot, så deras ruta Till läraren står där också.
       if (ram.sagoform) {
-        if (!ramarna[i - 1]?.sagoform) {
-          for (let j = i; j < ramarna.length && ramarna[j].sagoform; j++) {
-            const r = ramarna[j];
-            ut.push(new Paragraph({ children: [run(r.rubrik)], heading: HeadingLevel.HEADING_3, keepNext: true, spacing: { before: 240, after: 80 } }));
-            for (const s of r.text) ut.push(stycke(s));
-            const [blad] = sagobladAv(r, d);
-            if (blad.bokblad && blad.not) ut.push(stycke(blad.not, { farg: FARG.svag }));
-          }
-        }
+        if (!ramarna[i - 1]?.sagoform) ut.push(...sagoLarartext(sagoFoljd(ramarna, i), d, (text) => new Paragraph({ children: [run(text)], heading: HeadingLevel.HEADING_3, keepNext: true, spacing: { before: 240, after: 80 } })));
         ut.push(...sagoFlod(ram, d));
         filmVid({ ram: ram.rubrik });
         continue;
@@ -1849,8 +1861,10 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
   if (d.checklista) {
     sidor.push([
       ...under(d.checklista.rubrik),
-      stycke('Bocka av inför varje pass. Det som inte är gjort görs innan eleverna kommer.'),
-      skrivrad(['Datum', 'Pass nr']),
+      // En checklista inför kursen (Skrivkurs: sagoboken) görs en gång, så den har inget passnummer.
+      ...(/kursen/i.test(d.checklista.rubrik)
+        ? [stycke('Bocka av före kursen. Det som inte är gjort görs innan kursen börjar.'), skrivrad(['Datum'])]
+        : [stycke('Bocka av inför varje pass. Det som inte är gjort görs innan eleverna kommer.'), skrivrad(['Datum', 'Pass nr'])]),
       ...bockar(d.checklista.punkter, 1, { hojd: 560 }),
     ]);
   }
@@ -1906,7 +1920,7 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
   const bladsidor = new Set<Flod>();
   if (d.ramar) {
     const boksidor = lastexter(d.ramar.ramar);
-    for (const ram of d.ramar.ramar) {
+    for (const [i, ram] of d.ramar.ramar.entries()) {
       const tom = ramArTom(ram);
       // En lästext är en boksida, som eleven läser (boksida()). Sidfoten och sidhuvudet bär upphovet, så sidan får ingen
       // upphovsrad. I filen med allt står den redan i beskrivningen.
@@ -1921,6 +1935,8 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
       // Ett sagoblad står som det är, med upphovet i sidhuvudet. I filen med allt står det redan i beskrivningen.
       if (ram.sagoform) {
         if (o.baraTommaRamar) continue;
+        // Före en följd av blad en sida med lärarens text till dem, som i filen med allt.
+        if (!d.ramar.ramar[i - 1]?.sagoform) sidor.push([...under('Till läraren om bladen'), ...sagoLarartext(sagoFoljd(d.ramar.ramar, i), d, (text) => stycke(text, { fet: true, storlek: 24, efter: 40, hallIhop: true }))]);
         const sida = sagoFlod(ram, d);
         bladsidor.add(sida);
         sidor.push(sida);

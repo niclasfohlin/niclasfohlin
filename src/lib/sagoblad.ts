@@ -82,6 +82,9 @@ export function tarningAv(l: Lista, ram: Ram, d: Pick<MetodData, 'kort'>): Tarni
   };
 }
 
+// Upphovet för bildbankens bilder på bladen och tärningarna (MIT-licensen kräver det i kopiorna): på sidan under
+// materialet och i Word-filerna före bladen och vid tärningarna (granskningen 2026-10-02, P1).
+export const SAGO_UPPHOV = 'Bilderna på bladen och tärningarna: Fluent Emoji, © Microsoft Corporation, MIT-licens.';
 export const harSagoform = (d: Pick<MetodData, 'ramar' | 'kort'>): boolean =>
   (d.ramar?.ramar ?? []).some((r) => !!r.sagoform || (r.listor ?? []).some((l) => arTarning(d, l)));
 // Cinzel och Cinzel Decorative i Word-filen: boksidorna och sagobladen.

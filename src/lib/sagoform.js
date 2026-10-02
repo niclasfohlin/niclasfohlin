@@ -682,7 +682,8 @@ function tarningssida({ nr = 1, fraga = '', ord = '', bild = null, sida = 54, al
     R.prick([x, y], 0.75, F.guld, { kontur: F.kontur, tjock: 0.2 });
   }
   // Frågan överst, i versaler.
-  const etikett = fraga.toUpperCase();
+  // Tärningens nummer före frågan, så att gruppen hittar tärning 4 när läraren säger det (sajtens granskning 2026-10-02).
+  const etikett = (fraga ? `${nr} · ${fraga}` : String(nr)).toUpperCase();
   const em1 = Math.min(5.2, (s - 16) / Math.max(1, textBredd(etikett, 'cinzel', 1)));
   R.el.push({ t: 'ra', svg: `<g fill="${farg}">${textBana(etikett, 'cinzel', em1, s / 2, 10.2)}</g>`, b: [0, 0, s, 12] });
   // Bilden.
