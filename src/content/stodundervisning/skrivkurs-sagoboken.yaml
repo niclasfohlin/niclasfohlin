@@ -23,7 +23,7 @@ material:
   - Sagans väg på två sidor, tre exemplar till varje par och ett i A3 som blir den förstorade vägen på väggen
   - Ett blädderblock eller stora ark till gruppens saga, ett ark för varje station
   - Hjältens kort, ett per par och ett i A3
-  - Spänningsberget, tre per par och ett i A3
+  - Spänningsberget, tre per par och två i A3
   - Frågekorten för er version och rollkorten, ett blad av varje per par
   - Modellsagorna och kontrastparet, en kopia per elev
   - En låda med enkla saker till sagoteatern, som tyg, en hatt och en pinne
@@ -258,7 +258,7 @@ tabeller:
     not: "I fyra steg hoppar paret över Hjälparen och Det värsta. På scenen säger figurerna högt vad de vill och känner, mer än man gör i verkligheten. Det visar du i pass 3 och 6."
   - rubrik: Pass med egna minuter
     plats: efter-tidsschema
-    text: "De här passen går till på ett annat sätt än de andra passen av samma slag. Här står deras minuter. Alla andra pass följer tidsschemat, tabellen Berättarpasset eller sin rad i Fem slags pass."
+    text: "De här passen går till på ett annat sätt än de andra passen av samma slag. Här står bara de minuter som skiljer sig, och resten av passet följer det vanliga schemat. Alla andra pass följer tidsschemat, tabellen Berättarpasset eller sin rad i Fem slags pass."
     kolumner:
       - Passet
       - Minut för minut
@@ -295,7 +295,7 @@ tabeller:
         - "Boksläppet. Paren läser eller spelar sin saga för läsarna, en saga i taget, och skriver sina namn i böckerna. Vill en elev inte läsa, läser kamraten eller du, medan paret visar bilderna."
   - rubrik: Skrivdragen
     plats: efter-steg
-    text: "Ett skrivdrag är ett val som en författare gör för att läsaren ska se, höra eller känna något. I pass 7–⁠11 lär sig gruppen ett drag i taget, i fyra steg fyra av dragen. Draget att sakta ner kommer i pass 20. I pass 13–⁠21 står dagens drag i kursplanen, och pass 22 och 23 har inget nytt drag. Har du skrivit på Parets väg att paren behöver ett annat drag, tar du det draget i stället. Du lär ut varje drag på samma sätt. Du visar draget, och paren säger en mening med det. Sedan skriver paren meningen vid sin station och stryker under den, och när paret läser för gruppen börjar de med den meningen."
+    text: "Ett skrivdrag är ett val som en författare gör för att läsaren ska se, höra eller känna något. I pass 7–⁠11 lär sig gruppen ett drag i taget, i fyra steg fyra av dragen. I fyra steg kommer draget att sakta ner i pass 20. I pass 13–⁠21 står dagens drag i kursplanen, och pass 22 och 23 har inget nytt drag. Har du skrivit på Parets väg att paren behöver ett annat drag, tar du det draget i stället. Du lär ut varje drag på samma sätt. Du visar draget, och paren säger en mening med det. Sedan skriver paren meningen vid sin station och stryker under den, och när paret läser för gruppen börjar de med den meningen."
     kolumner:
       - Draget
       - Så tänker du högt
@@ -1387,8 +1387,8 @@ lathund:
     var:
       rubrik: Var materialet finns
       punkter:
-        - { fet: Metodens sida., text: "Under Kursens material finns vägskyltarna, sagans väg, Spänningsberget, Hjältens kort, tärningarna, frågekorten, rollkorten, modellsagorna, bokens sidor, Sagokollen och Parets väg." }
-        - { fet: Planeringsmallarna., text: "Där finns alla blad att skriva ut, ett på varje sida." }
+        - { fet: Metodens sida., text: "Under Kursens material står modellsagorna och vad varje blad och kort är till för." }
+        - { fet: Planeringsmallarna., text: "Där finns vägskyltarna, sagans väg, Spänningsberget, Hjältens kort, tärningarna, frågekorten, rollkorten, bokens sidor, Sagokollen och Parets väg att skriva ut, ett blad på varje sida." }
         - { fet: Skriver paret på dator?, text: "Gör ett delat dokument med stationerna som rubriker, och stäng av stavningskontrollen fram till bokpassen." }
       efter: Skriv ut tärningarna på tjockt papper före pass 4.
     bordet:
