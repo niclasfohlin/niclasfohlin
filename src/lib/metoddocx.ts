@@ -892,8 +892,10 @@ function bergInnehall(b: Sagoblad, w: number, hojdMm: number): Barn[] {
   const bMm = twMm(w);
   const berg = SAGA.berget(bMm, 78, b.stationer.map((st) => bildbankSvg(st.bild)));
   const kolN = mmTw(46), kolL = mmTw(44), kolT = w - kolN - kolL;
-  // Raderna fyller det som är kvar av sidan under berget, mellan 10 och 18 mm höga.
-  const kvar = hojdMm - rubrikHojd(b) - 78 - (b.text ? 9 : 0) - 6;
+  // Raderna fyller det som är kvar av sidan under berget, mellan 10 och 18 mm höga, utom 10 mm som Google Dokument
+  // behöver: där blir de exakta raderna och bilderna några millimeter högre, och berget i sex steg sköt prydnaden till en
+  // egen sida (scripts/googleprov.mjs, 2026-10-02).
+  const kvar = hojdMm - rubrikHojd(b) - 78 - (b.text ? 9 : 0) - 6 - 10;
   const radTw = mmTw(Math.max(10, Math.min(18, kvar / b.stationer.length)));
   const lagor = SAGA.lagor(40, 8.5);
   const rows = b.stationer.map((st) => new TableRow({ cantSplit: true, height: { value: radTw, rule: HeightRule.EXACT }, children: [
@@ -1783,7 +1785,8 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
     for (const s of d.ramar.text) ut.push(stycke(s));
     ut.push(...ljudRader(d));
     const boksidor = lastexter(d.ramar.ramar);
-    for (const ram of d.ramar.ramar) {
+    const ramarna = d.ramar.ramar;
+    for (const [i, ram] of ramarna.entries()) {
       // En lästext är en boksida på en egen sida, med titeln i boken i stället för en rubrik (boksida()).
       const lastext = boksidor.get(ram);
       if (lastext) {
@@ -1791,14 +1794,19 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
         filmVid({ ram: ram.rubrik });
         continue;
       }
-      // Ett sagoblad (sagoform): ramens rubrik och text för läraren, och sedan bladen, vart och ett på en egen sida med
-      // rutan Till läraren i sidfoten (sagoFlod).
+      // Ett sagoblad (sagoform) står på en egen sida med rutan Till läraren i sidfoten (sagoFlod). Ramarnas rubriker och
+      // texter för läraren står samlade före en följd av sagoblad, så att varje blad inte får en nästan tom sida framför
+      // sig (Skrivkurs: sagoboken, 2026-10-02). Bokens blad har ingen sidfot, så deras ruta Till läraren står där också.
       if (ram.sagoform) {
-        ut.push(new Paragraph({ children: [run(ram.rubrik)], heading: HeadingLevel.HEADING_3, keepNext: true, spacing: { before: 240, after: 80 } }));
-        for (const s of ram.text) ut.push(stycke(s));
-        // Bokens blad har ingen sidfot, så rutan Till läraren står här i beskrivningen.
-        const [blad] = sagobladAv(ram, d);
-        if (blad.bokblad && blad.not) ut.push(stycke(blad.not, { farg: FARG.svag }));
+        if (!ramarna[i - 1]?.sagoform) {
+          for (let j = i; j < ramarna.length && ramarna[j].sagoform; j++) {
+            const r = ramarna[j];
+            ut.push(new Paragraph({ children: [run(r.rubrik)], heading: HeadingLevel.HEADING_3, keepNext: true, spacing: { before: 240, after: 80 } }));
+            for (const s of r.text) ut.push(stycke(s));
+            const [blad] = sagobladAv(r, d);
+            if (blad.bokblad && blad.not) ut.push(stycke(blad.not, { farg: FARG.svag }));
+          }
+        }
         ut.push(...sagoFlod(ram, d));
         filmVid({ ram: ram.rubrik });
         continue;
