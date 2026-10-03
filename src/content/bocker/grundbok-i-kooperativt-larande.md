@@ -13,7 +13,7 @@ lankar:
     url: "https://www.studentlitteratur.se/kompetensutveckling/skola-f-6/specialpedagogik/grundbok-i-kooperativt-larande/"
   - text: "Hos Bokus"
     url: "https://www.bokus.com/bok/9789144116723/"
-taggar: ["kooperativt-larande", "tillganglig-undervisning"]
+taggar: ["kooperativt-larande", "tillganglig-undervisning", "socialt-samspel"]
 utkast: false
 ---
 

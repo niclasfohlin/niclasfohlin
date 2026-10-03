@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/specialpedagogik/kronika2/en-epidemi-i-skolan--nanannanismen-sprider-sig/"
 typ: "kronika"
 medforfattare: []
-taggar: ["skolutveckling"]
+taggar: ["skolutveckling", "undervisningskvalitet"]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

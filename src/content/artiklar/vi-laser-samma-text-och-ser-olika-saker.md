@@ -6,7 +6,7 @@ publikation: "vi-larare"
 originalUrl: "https://www.vilarare.se/nyheter/vi-larare-debatt/fohlin-vi-laser-samma-text-och-ser-olika-saker/"
 typ: "debatt"
 medforfattare: []
-taggar: ["skolutveckling"]
+taggar: ["skolutveckling", "undervisningskvalitet"]
 utvald: false
 # Hela texten ligger här. Niclas 2026-09-20: hela texten får ligga på sajten.
 heltext: true

@@ -14,7 +14,7 @@ lankar:
     url: "https://www.studentlitteratur.se/kompetensutveckling/skola-f-6/undervisning-och-metod/gruppstarkande-ledarskap/"
   - text: "Hos Bokus"
     url: "https://www.bokus.com/bok/9789144165998/"
-taggar: ["studiero", "kooperativt-larande", "undervisningskvalitet"]
+taggar: ["studiero", "kooperativt-larande", "undervisningskvalitet", "socialt-samspel"]
 utkast: false
 ---
 

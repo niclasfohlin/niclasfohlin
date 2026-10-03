@@ -13,7 +13,7 @@ lankar:
     url: "https://www.studentlitteratur.se/kompetensutveckling/skola-f-6/undervisning-och-metod/kooperativt-larande-i-praktiken-2/"
   - text: "Hos Bokus"
     url: "https://www.bokus.com/bok/9789144151854/"
-taggar: ["kooperativt-larande", "skolutveckling"]
+taggar: ["kooperativt-larande", "skolutveckling", "socialt-samspel"]
 utkast: false
 ---
 

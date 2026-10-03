@@ -13,7 +13,7 @@ lankar:
     url: "https://www.studentlitteratur.se/kurslitteratur/lararutbildning-och-pedagogik/pedagogik---allmant/kooperativt-larande-i-forskolan-och-skolans-forsta-ar/"
   - text: "Hos Bokus"
     url: "https://www.bokus.com/bok/9789144133942/"
-taggar: ["kooperativt-larande", "tillganglig-undervisning"]
+taggar: ["kooperativt-larande", "tillganglig-undervisning", "socialt-samspel"]
 utkast: false
 ---
 
