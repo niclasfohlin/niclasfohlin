@@ -2388,10 +2388,19 @@ function lhRader(antal: number, hojd = 420): Barn[] {
 // i varje storlek. Texten är så stor som raden och den längsta cellen tillåter, högst 28 pt, och sätts i den slutliga
 // storleken (stycke skalar graden, så den delas med skalan först), så att en cell aldrig bryts.
 function kortTabell(kolumner: string[], rader: string[][]): Barn[] {
-  const bredder = kolumnBredder(kolumner.length);
-  const radHojd = Math.floor((7000 * SKALA) / Math.max(1, rader.length));
   const langst = Math.max(...rader.flatMap((r) => r.map((c) => c.length)));
-  const pt = Math.max(14, Math.min(28, (radHojd / 20) * 0.45, (bredder[0] / 20 - 12) / (langst * 0.55))) / SKALA;
+  // Ett kort med meningar (Kompissamtal: Samtalsteknikerna, celler över 40 tecken) ryms inte i lika höga rader i 14 pt:
+  // kolumnerna får bredd efter sin längsta text, raderna höjd efter innehållet och texten 11 pt i skalan, så att
+  // mätningen (scripts/lathund-word.mjs) väljer den största som ryms på sidan också i Google Dokument, som kortet i
+  // PowerPoint (metodpptx.ts, lista; K-195). Ett kort med korta rader ritas som förut.
+  const meningar = langst > 40;
+  // Det längsta ordet i kolumnen ryms på en rad, så att inget ord bryts mitt i (Kamratspegling).
+  const ord = (i: number) => Math.max(...[kolumner[i], ...rader.map((r) => r[i] ?? '')].flatMap((t) => t.split(/\s+/)).map((w) => w.length));
+  const vikter = kolumner.map((k, i) => Math.max(24, k.length, ...rader.map((r) => (r[i] ?? '').length), ord(i) * 3));
+  const summa = vikter.reduce((a, v) => a + v, 0);
+  const bredder = meningar ? vikter.map((v, i) => (i === vikter.length - 1 ? BREDD - vikter.slice(0, -1).reduce((a, x) => a + Math.floor((BREDD * x) / summa), 0) : Math.floor((BREDD * v) / summa))) : kolumnBredder(kolumner.length);
+  const radHojd = meningar ? 0 : Math.floor((7000 * SKALA) / Math.max(1, rader.length));
+  const pt = meningar ? 11 : Math.max(14, Math.min(28, (radHojd / 20) * 0.45, (bredder[0] / 20 - 12) / (langst * 0.55))) / SKALA;
   const linje = kant(FARG.kant, 6);
   const kanter = { top: INGEN_KANT, left: INGEN_KANT, right: INGEN_KANT, bottom: linje };
   const huvud = rad(kolumner.map((k, i) => cell([new Paragraph({ children: [textRun({ text: k, font: MONO, size: 16, allCaps: true, color: FARG.svag })], spacing: { after: 0 } })], { bredd: bredder[i], kanter })), { huvud: true });

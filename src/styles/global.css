@@ -994,6 +994,8 @@ html.js .bara-js { display: inline-block; }
 .lh-korttabell th { font-family: ui-monospace, 'Cascadia Mono', Consolas, 'Liberation Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--farg-text-svag); font-weight: 500; text-align: left; padding: 0.3rem 0.75rem; border-bottom: 1px solid var(--farg-kant); }
 .lh-korttabell td { font-size: 1.35rem; line-height: 1.3; padding: 0.7rem 0.75rem; border-bottom: 1px solid var(--farg-kant); vertical-align: middle; }
 @media (max-width: 40rem) { .lh-korttabell td { font-size: 1.05rem; padding: 0.55rem 0.5rem; } }
+/* Ett kort med meningar (Lathund.astro, K-195): vanlig text och rader efter innehållet. */
+.lh-kort.meningar .lh-korttabell td { font-size: 1.05rem; line-height: 1.4; padding: 0.55rem 0.75rem; }
 .lh-mattatabell.m-tabell tbody:has(tr:only-child) td:empty { height: 17rem; }
 .lh-spalter { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.5rem; margin: 0.5rem 0 1rem; }
 .lh-spalt > h3 { margin: 0 0 0.35rem; font-size: 1rem; padding-bottom: 0.3rem; border-bottom: 2px solid var(--farg-text); }
@@ -1074,6 +1076,7 @@ html.js .bara-js { display: inline-block; }
   .lh-not.lh-regel { font-size: 13pt; }
   /* Kortet fyller den liggande sidan: raderna delar omkring 140 mm, och texten har storleken ur Lathund.astro. */
   .lh-korttabell td { height: calc(140mm / var(--rader, 7)); font-size: var(--kortstorlek, 20pt); padding: 0 3mm; }
+  .lh-kort.meningar .lh-korttabell td { height: auto; padding: 1.6mm 3mm; line-height: 1.3; }
   .lh-korttabell th { font-size: 8pt; }
   .lh-block { padding: 0.5rem 0.9rem 0.75rem; }
   .lh-spalter { gap: 0.6rem 1.25rem; margin: 0.25rem 0 0.6rem; }

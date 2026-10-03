@@ -29,6 +29,11 @@ const kort = form?.form === 'kort';
 // omkring 140 mm för raderna och kolumnerna lika breda (275 mm), som i PowerPoint.
 const kortRader = kort && form?.tabell ? form.tabell.rader.length : 1;
 const kortPt = kort && form?.tabell ? Math.round(Math.max(14, Math.min(28, (140 / kortRader) * 0.45 * 2.835, (275 / form.tabell.kolumner.length) * 2.835 / (Math.max(...form.tabell.rader.flatMap((r) => r.map((c) => c.length))) * 0.55)))) : 0;
+// Ett kort med meningar (Kompissamtal: Samtalsteknikerna, celler över 40 tecken) får kolumner efter sin längsta text,
+// mindre text och rader efter innehållet, som kortet i PowerPoint och Word (K-195).
+const kortMeningar = kort && form?.tabell ? Math.max(...form.tabell.rader.flatMap((r) => r.map((c) => c.length))) > 40 : false;
+const kortVikter = kortMeningar && form?.tabell ? form.tabell.kolumner.map((k, i) => Math.max(24, k.length, ...form.tabell!.rader.map((r) => (r[i] ?? '').length), 3 * Math.max(...[k, ...form.tabell!.rader.map((r) => r[i] ?? '')].flatMap((t) => t.split(' ')).map((w) => w.length)))) : [];
+const kortBredd = (i: number) => `${((kortVikter[i] / kortVikter.reduce((a, v) => a + v, 0)) * 100).toFixed(1)}%`;
 ---
 {l && (
   <div class="lh">
@@ -137,9 +142,10 @@ const kortPt = kort && form?.tabell ? Math.round(Math.max(14, Math.min(28, (140 
             </div>
           );
           if (b.typ === 'tabell' && kort) return (
-            <div class="lh-avsnitt lh-kort" style={`--rader:${kortRader};--kortstorlek:${kortPt}pt`}>
+            <div class:list={['lh-avsnitt lh-kort', { meningar: kortMeningar }]} style={`--rader:${kortRader};--kortstorlek:${kortMeningar ? 11 : kortPt}pt`}>
               <h3 class="lh-kicker">{b.rubrik}</h3>
               <table class="lh-korttabell">
+                {kortMeningar && <colgroup>{b.kolumner.map((_, i) => <col style={`width:${kortBredd(i)}`} />)}</colgroup>}
                 <thead><tr>{b.kolumner.map((k) => <th scope="col">{k}</th>)}</tr></thead>
                 <tbody>{b.rader.map((r) => <tr>{r.map((c) => <td>{c.replace(/ → /g, ' → ')}</td>)}</tr>)}</tbody>
               </table>

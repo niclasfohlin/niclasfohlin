@@ -434,20 +434,44 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
       // Ett kort att ha på bordet (strategikortet): tabellens rader stort över hela bilden, så att eleven kan läsa det
       // vid bordet. Kolumnrubrikerna står små och grå överst, och raderna delar höjden lika. Texten är så stor som
       // raderna och den längsta cellen tillåter, högst 28 pt, räknat på sidan (sx, sy) och i graden (K-061, som riggen).
-      const x0 = 0.21, fullW = W - 0.42, n = b.kolumner.length, cw = fullW / n;
+      // Ett kort med meningar (Kompissamtal: Samtalsteknikerna, åtta tekniker i tre kolumner) ryms inte så i 14 pt, och
+      // texten gick över radernas linjer: då får kolumnerna bredd efter sin längsta text, raderna höjd efter innehållet,
+      // och texten minskar tills allt ryms, ned till 10,5 pt (K-195, samma rättelse som i metodriggens renderare).
+      const x0 = 0.21, fullW = W - 0.42, n = b.kolumner.length;
       let y = areaTop;
       const [ra_, ti_] = [String(b.rubrik ?? '').toLowerCase(), String(b.titel ?? '').toLowerCase()];
       if (ra_ && !ra_.includes(ti_) && !ti_.includes(ra_)) { label(s, versaler(b.rubrik), x0, y, fullW, NAVY); y += 0.36; }
-      b.kolumner.forEach((k: string, i: number) => txt(s, versaler(k), x0 + i * cw + 0.15, y, cw - 0.3, 0.28, { mono: true, size: 12, color: GREY }));
+      const kolumnY = y;
       y += 0.34;
-      const rh = (areaBottom - y) / b.rader.length;
+      const hojd = areaBottom - y;
       const langst = Math.max(...b.rader.flatMap((r: string[]) => r.map((c) => String(c).length)));
-      const size = Math.max(14, Math.min(28, (rh * sy * 72 * 0.45) / grad, ((cw - 0.3) * sx * 72) / (langst * 0.55) / grad));
+      let cws: number[] = b.kolumner.map(() => fullW / n);
+      let rhs: number[] = b.rader.map(() => hojd / b.rader.length);
+      let size = Math.max(14, Math.min(28, (rhs[0] * sy * 72 * 0.45) / grad, ((cws[0] - 0.3) * sx * 72) / (langst * 0.55) / grad));
+      const behov = (sz: number, bredder: number[]) => b.rader.map((r: string[]) => Math.max(...r.map((c, i) => estH(String(c), bredder[i] - 0.3, sz, 0.1))));
+      if (behov(size, cws).some((h: number, ri: number) => h > rhs[ri])) {
+        const langd = (i: number) => Math.max(String(b.kolumner[i]).length, ...b.rader.map((r: string[]) => String(r[i] ?? '').length));
+        // Det längsta ordet i kolumnen ska rymmas på en rad, så att inget ord bryts mitt i (Kamratspegling).
+        const ord = (i: number) => Math.max(...[b.kolumner[i], ...b.rader.map((r: string[]) => r[i] ?? '')].flatMap((t: string) => String(t).split(/\s+/)).map((w: string) => w.length));
+        const vikter = b.kolumner.map((_: string, i: number) => Math.max(24, langd(i), ord(i) * 3));
+        const summa = vikter.reduce((a: number, v: number) => a + v, 0);
+        cws = vikter.map((v: number) => (fullW * v) / summa);
+        for (size = 14; size > 10.5 && behov(size, cws).reduce((a: number, h: number) => a + h, 0) > hojd; size -= 0.5);
+        const h = behov(size, cws);
+        const summaH = h.reduce((a: number, x: number) => a + x, 0);
+        if (summaH > hojd) varna(`bild 3: kortet ${b.rubrik ?? ''} ryms inte ens i 10,5 pt: korta texten i lathund.mall`);
+        const extra = Math.max(0, hojd - summaH) / h.length;
+        rhs = h.map((x: number) => x + extra);
+      }
+      const xs = cws.map((_: number, i: number) => x0 + cws.slice(0, i).reduce((a: number, w: number) => a + w, 0));
+      b.kolumner.forEach((k: string, i: number) => txt(s, versaler(k), xs[i] + 0.15, kolumnY, cws[i] - 0.3, 0.28, { mono: true, size: 12, color: GREY }));
+      let ry = y;
       b.rader.forEach((r: string[], ri: number) => {
-        rect(s, x0, y + ri * rh, fullW, 0.015, LINE);
-        r.forEach((c, i) => txt(s, String(c), x0 + i * cw + 0.15, y + ri * rh, cw - 0.3, rh, { size, valign: 'middle' }));
+        rect(s, x0, ry, fullW, 0.015, LINE);
+        r.forEach((c, i) => txt(s, String(c), xs[i] + 0.15, ry, cws[i] - 0.3, rhs[ri], { size, valign: 'middle' }));
+        ry += rhs[ri];
       });
-      rect(s, x0, y + b.rader.length * rh, fullW, 0.015, LINE);
+      rect(s, x0, ry, fullW, 0.015, LINE);
     } else {
       ritaBlock(s, b.block, areaTop, areaBottom);
     }
