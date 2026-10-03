@@ -24,6 +24,10 @@ export interface MetodFilm { film: Film; bas: string; vid?: FilmPlats; huvud: bo
 export const FILM_MATT = { bredd: 960, hojd: 540 };
 export const STILLBILD_MATT = { bredd: 960, hojd: 500 };
 export const HOGST_EXTRAFILMER = 2;
+// Upphovet för bildbankens bilder i filmerna (MIT-licensen kräver det i kopiorna; K-194). Metodriggens filmmotor ritar
+// alltid pekfingret ur bildbanken, och de flesta filmer har också ansikten, kort eller saker därifrån (riggen
+// 2026-10-03), så raden gäller varje metod med film. Den står efter grundens källor, på sidan och i Word-filen.
+export const FILM_UPPHOV = 'Bilderna i filmerna: Fluent Emoji, © Microsoft Corporation, MIT-licens.';
 
 export const filmAdress = (f: MetodFilm) => `${f.bas}.svg`;
 export const stillbilder = (f: MetodFilm) => [1, 2, 3, 4].map((nr) => `${f.bas}-${nr}.svg`);

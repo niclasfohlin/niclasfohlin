@@ -14,7 +14,7 @@ import { andikaBredd, bagSvg, utanStod } from './lasflyt';
 import type { MetodPostISerie, SerieKoppling } from './serie';
 import { ANDIKA_ADRESS, ELEVTYPSNITT, VIK_TEXT, arBildlista, bildFor as bildForOrd, bildlistansNamn, harElevtypsnitt, kartCeller, kortCeller, ljudenheter, ljudform, arDelark, type KartCell } from './ljudkort';
 import { arElevensBlad, harFragor, lastexter, protokollDelas, textlangd, type Lastext } from './ramform';
-import { filmerVid, huvudfilm, metodensFilmer, stegDelar, stillbilder, STILLBILD_MATT, type FilmPlats, type MetodFilm } from './film';
+import { FILM_UPPHOV, filmerVid, huvudfilm, metodensFilmer, stegDelar, stillbilder, STILLBILD_MATT, type FilmPlats, type MetodFilm } from './film';
 import { reservNyckel } from './reservbild';
 import * as SAGA from './sagoform.js';
 import { arTarning, harBoktypsnitt, SAGO_UPPHOV, sagobladAv, tarningAv, type Sagoblad, type Sagofalt, type Station, type Tarning } from './sagoblad';
@@ -1827,6 +1827,7 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
     ut.push(h2(d.grund.rubrik));
     ut.push(...grundRuta(d.grund.text));
     if (d.grund.kallor) ut.push(stycke(d.grund.kallor, { farg: FARG.svag, storlek: 18 }));
+    if (filmer.length) ut.push(stycke(FILM_UPPHOV, { farg: FARG.svag, storlek: 18 }));
     filmVid({ avsnitt: 'grund' });
   }
   for (const t of d.tabeller.filter((x) => x.plats === 'efter-grund')) friTabell(t);

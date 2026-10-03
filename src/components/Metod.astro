@@ -18,7 +18,7 @@ import { arElevensBlad, lastexter, protokollDelas } from '../lib/ramform';
 import Filmruta from './Filmruta.astro';
 import Boksida from './Boksida.astro';
 import Ramindex from './Ramindex.astro';
-import { filmerVid, metodensFilmer, stegDelar, type FilmPlats } from '../lib/film';
+import { FILM_UPPHOV, filmerVid, metodensFilmer, stegDelar, type FilmPlats } from '../lib/film';
 import type { SerieKoppling } from '../lib/serie';
 import type { MetodData } from '../lib/metod';
 import { ejBryt, ramArTom, passGrupper, passOrd, passOversikt, stegTexter, laskortKolumn, arEttKort } from '../lib/metod';
@@ -439,6 +439,7 @@ const meny = [
       <h2>{d.grund.rubrik}</h2>
       <div class="m-grund"><p>{d.grund.text}</p></div>
       {d.grund.kallor && <p class="m-kallor">{d.grund.kallor}</p>}
+      {filmer.length > 0 && <p class="m-kallor">{FILM_UPPHOV}</p>}
     </section>
   )}
   {/* Efter avsnittet, som i Word: avsnittet hålls ihop i utskriften, filmen för sig. */}
