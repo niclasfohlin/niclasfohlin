@@ -1,67 +1,72 @@
 {
   "antalsuppfattning-i-grupp": {
-    "kalla": "747ca75401a1b868",
+    "kalla": "bf4b509b55e46915",
     "pdf": "851a1360ed7e3c97",
     "datum": "2026-10-02"
   },
   "boksamtal-i-grupp": {
-    "kalla": "a5daceb78abd1169",
+    "kalla": "77b1e515a94ed7ca",
     "pdf": "09db1205a910a6ac",
     "datum": "2026-10-02"
   },
   "brakkurs-i-grupp": {
-    "kalla": "9a112f948f2f219a",
+    "kalla": "6a07ade2512094ec",
     "pdf": "55a20c76f0044763",
     "datum": "2026-10-02"
   },
   "faktatextsamtal-i-grupp": {
-    "kalla": "11807c5b688a522d",
+    "kalla": "68eaf0bd093209b7",
     "pdf": "89a552e013c2acb5",
     "datum": "2026-10-02"
   },
   "laslistor-i-grupp": {
-    "kalla": "6f4ed8a884f7697f",
+    "kalla": "4ef6dfe3bb308312",
     "pdf": "5fc9957b1faac30c",
     "datum": "2026-10-02"
   },
   "problemlosning-i-grupp": {
-    "kalla": "bdb4f09c7491588a",
+    "kalla": "1da65b7216296c68",
     "pdf": "3e70a7b2cdd44ae9",
     "datum": "2026-10-02"
   },
   "skrivkurs-berattelseram": {
-    "kalla": "26d36551c2397751",
+    "kalla": "67fc3affdc153e57",
     "pdf": "e09a0edfcac183dc",
     "datum": "2026-10-02"
   },
   "skrivkurs-vardeskapande": {
-    "kalla": "ff7dbcb0eceddf5f",
+    "kalla": "5e896ef5241084a7",
     "pdf": "3773bf6fbeb9335b",
     "datum": "2026-10-02"
   },
   "til-i-grupp": {
-    "kalla": "5f8e44dd8ff705ad",
+    "kalla": "3fa9377a49f7d4a2",
     "pdf": "cd054b0b96f84798",
     "datum": "2026-10-02"
   },
   "upprepad-lasning": {
-    "kalla": "7c8229a2fdd0d7cb",
+    "kalla": "6be9c5bb7ad14be7",
     "pdf": "c4d0e6795b1523b5",
     "datum": "2026-10-02"
   },
   "ljudlek-i-grupp": {
-    "kalla": "e87c9352a0c76b72",
+    "kalla": "d778b499e4ab821f",
     "pdf": "c3adbd667ea2e025",
     "datum": "2026-10-02"
   },
   "textsamtal-i-grupp": {
-    "kalla": "fb7f97023b59adef",
+    "kalla": "db07650415b7a149",
     "pdf": "8884aec92893b92f",
     "datum": "2026-10-02"
   },
   "skrivkurs-sagoboken": {
-    "kalla": "71aab82eb75c434f",
+    "kalla": "c2cf6151bc4ac636",
     "pdf": "aa83865563f4fc80",
     "datum": "2026-10-02"
+  },
+  "kompissamtal": {
+    "kalla": "922ac5ec78b66086",
+    "pdf": "3a9ee2ddaf5bcd6c",
+    "datum": "2026-10-03"
   }
 }
