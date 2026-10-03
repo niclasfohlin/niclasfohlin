@@ -7,12 +7,15 @@
 //   node scripts/taggar.mjs --sok läsflyt   Slå upp om ett ord är en tagg eller ett alias
 //   node scripts/taggar.mjs --forslag konflikthantering [fler id]   Lista poster vars text nämner taggens namn eller
 //                                           alias men saknar taggen, för att pröva en ny tagg mot det som redan finns
+//   node scripts/taggar.mjs --post src/content/artiklar/x.md   Lista taggar vars ord står i posten men som saknas
 //
 // Reglerna (Niclas 2026-10-03): en post har minst två och högst fem taggar. En ny tagg prövas alltid mot alla
 // befintliga artiklar, böcker och metoder med --forslag: träffarna är kandidater, och den som lägger till taggen läser
 // posten och avgör. Har en post redan fem taggar byts en ut bara när den nya är uppenbart bättre, det vill säga mer
 // precis om vad posten handlar om; då går den bredaste av de fem. När sökningen är gjord får taggen fältet provad
-// (datumet) i registret, och --kontrollera stoppar en tagg som är ny mot origin/main men saknar det.
+// (datumet) i registret, och --kontrollera stoppar en tagg som är ny mot origin/main men saknar det. En ny artikel,
+// bok eller metod stoppas på samma sätt tills dess taggförslag (--post) är lästa och avgjorda och posten står i
+// src/data/taggprov.json, så att det sker av sig självt också i en ny session.
 //
 // Inga beroenden utöver yaml (devDependency). Körs även av Claude Code-hooken.
 
@@ -135,31 +138,86 @@ if (args[0] === '--sok') {
   process.exit(0);
 }
 
-// Kandidater för en ny tagg: poster vars text (rubrik, ingress och brödtext, eller hela metodens fil) nämner taggens
-// namn eller ett alias i början av ett ord, så att böjningar räknas (konflikter, konflikten), men som saknar taggen.
+// Orden som hör till en tagg (namnet och aliasen) och ett mönster per ord, som träffar i början av ett ord så att
+// böjningar räknas (konflikter, konflikten). Ett ord på högst tre bokstäver (SKA, KL, EHT, NVC, ord, tal) räknas bara
+// som förkortning i versaler och som helt ord, eftersom "ska", "tal" och "ord" annars träffar nästan varje text.
+// Hårt mellanslag, ordfog och mjukt bindestreck styr bara radbrytningen.
+const bort = (t) => t.replace(/\u00a0/g, ' ').replace(/[\u2060\u00ad]/g, '');
+const tecken = (o) => o.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/[ -]/g, '[ -]');
+const taggOrd = (t) => [...new Set([t.label, ...t.alias].map((x) => x.toLowerCase()))];
+const monster = (o) => (o.replace(/[^\p{L}]/gu, '').length <= 3
+  ? new RegExp(`(?<![\\p{L}\\p{N}])${tecken(o.toUpperCase())}(?![\\p{L}\\p{N}])`, 'gu')
+  : new RegExp(`(?<![\\p{L}\\p{N}])${tecken(o)}`, 'giu'));
+const monsterFor = new Map(taggar.map((t) => [t.id, taggOrd(t).map((o) => [o, monster(o)])]));
+// Postens text för förslagen: utan adresser, så att en länk till förlagets kategori inte räknas som innehåll.
+const postText = (fil) => bort(readFileSync(fil, 'utf8')).replace(/https?:\/\/\S+/g, ' ');
+// Träffarna för en tagg i en text: [ord, antal] för varje ord som står där.
+const traffarFor = (id, text) => monsterFor.get(id).map(([o, re]) => [o, (text.match(re) ?? []).length]).filter(([, n]) => n > 0);
+// Taggförslagen för en post: registrets taggar vars ord står i posten men som posten saknar, flest träffar först.
+function forslagForPost(fil) {
+  const fm = frontmatter(fil);
+  const egna = Array.isArray(fm?.taggar) ? fm.taggar : [];
+  const text = postText(fil);
+  return taggar.filter((t) => !egna.includes(t.id))
+    .map((t) => ({ t, traffar: traffarFor(t.id, text) }))
+    .filter((x) => x.traffar.length)
+    .map((x) => ({ ...x, summa: x.traffar.reduce((a, [, n]) => a + n, 0) }))
+    .sort((a, b) => b.summa - a.summa);
+}
+const visaForslag = (f) => `${f.t.id} (${f.traffar.map(([o, n]) => `${o} ${n}`).join(', ')})`;
+const postVag = (fil) => relative(rot, fil).split('\\').join('/');
+
+// Nya poster prövas innan de kommer ut (Niclas 2026-10-03: "Bygg det så det sker också av automatik även i ny kontext
+// för dig"): en artikel, bok eller metod som inte finns på origin/main och inte är utkast stoppas av --kontrollera, och
+// därmed av npm run validera, tills taggförslagen är lästa och avgjorda och posten står i src/data/taggprov.json med
+// datumet. Utan git eller origin/main prövas inget här.
+const TAGGPROV = join(rot, 'src/data/taggprov.json');
+function lasTaggprov() {
+  try { return JSON.parse(readFileSync(TAGGPROV, 'utf8')).poster ?? {}; } catch { return {}; }
+}
+function oprovadePoster(filer) {
+  let ute;
+  try { ute = new Set(execFileSync('git', ['ls-tree', '-r', '--name-only', 'origin/main', 'src/content'], { cwd: rot, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).split('\n').filter(Boolean)); } catch { return []; }
+  const prov = lasTaggprov();
+  return filer.flatMap((fil) => {
+    const vag = postVag(fil);
+    if (ute.has(vag) || prov[vag]) return [];
+    const fm = frontmatter(fil);
+    if (!fm || fm._fel || fm.utkast) return [];
+    const f = forslagForPost(fil);
+    return [`${vag}: ny post. Pröva taggarna innan den kommer ut: ${f.length ? `registret föreslår ${f.slice(0, 8).map(visaForslag).join('; ')}` : 'inga andra taggar i registret nämns i posten'}. Läs posten, välj ${MINST} till ${HOGST} taggar (node scripts/taggar.mjs --post ${vag}), och skriv "${vag}": "<datum>" under poster i src/data/taggprov.json.`];
+  });
+}
+
+if (args[0] === '--post') {
+  const fil = resolve(args[1] ?? '');
+  const fm = args[1] ? frontmatter(fil) : null;
+  if (!fm || fm._fel) { console.error('Ange en post: node scripts/taggar.mjs --post src/content/artiklar/x.md'); process.exit(1); }
+  const egna = Array.isArray(fm.taggar) ? fm.taggar : [];
+  const f = forslagForPost(fil);
+  console.log(`${postVag(fil)}: ${egna.length} av högst ${HOGST} taggar (${egna.join(', ') || 'inga'}).`);
+  console.log(f.length
+    ? `Taggar vars ord står i posten men som saknas, flest träffar först. Läs och avgör; en tagg ska säga vad posten handlar om:\n${f.map((x) => `  ${String(x.summa).padStart(3)}  ${visaForslag(x)}`).join('\n')}`
+    : 'Inga andra taggar i registret nämns i posten.');
+  process.exit(0);
+}
+
 if (args[0] === '--forslag') {
   const ids = args.slice(1);
   if (!ids.length) { console.error('Ange taggens id: node scripts/taggar.mjs --forslag konflikthantering'); process.exit(1); }
-  // Hårt mellanslag, ordfog och mjukt bindestreck styr bara radbrytningen och ska inte hindra en träff.
-  const bort = (t) => t.replace(/\u00a0/g, ' ').replace(/[\u2060\u00ad]/g, '');
-  const tecken = (o) => o.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/[ -]/g, '[ -]');
   for (const id of ids) {
     const t = taggar.find((x) => x.id === id);
     if (!t) { console.error(`"${id}" är ingen tagg.`); process.exit(1); }
-    const ord = [...new Set([t.label, ...t.alias].map((x) => x.toLowerCase()))];
-    const monster = ord.map((o) => new RegExp(`(?<![\\p{L}\\p{N}])${tecken(o)}`, 'giu'));
     const rader = [];
     for (const fil of innehallsfiler()) {
       const fm = frontmatter(fil);
       if (!fm || fm._fel || fm.utkast) continue;
       const egna = Array.isArray(fm.taggar) ? fm.taggar : [];
       if (egna.includes(id)) continue;
-      const text = bort(readFileSync(fil, 'utf8'));
-      const traffar = ord.map((o, i) => [o, (text.match(monster[i]) ?? []).length]).filter(([, n]) => n > 0);
+      const traffar = traffarFor(id, postText(fil));
       if (!traffar.length) continue;
       const summa = traffar.reduce((a, [, n]) => a + n, 0);
-      const vag = relative(rot, fil).split('\\').join('/');
-      rader.push({ summa, rad: `  ${String(summa).padStart(3)}  ${vag.padEnd(64)} ${egna.length}/${HOGST} taggar  ${traffar.map(([o, n]) => `${o} ${n}`).join(', ')}` });
+      rader.push({ summa, rad: `  ${String(summa).padStart(3)}  ${postVag(fil).padEnd(64)} ${egna.length}/${HOGST} taggar  ${traffar.map(([o, n]) => `${o} ${n}`).join(', ')}` });
     }
     rader.sort((a, b) => b.summa - a.summa);
     console.log(`\n${t.label} (${id}): ${rader.length} poster nämner den men saknar taggen. Läs dem och avgör; en post har högst ${HOGST} taggar.`);
@@ -180,7 +238,7 @@ function oprovadeTaggar() {
 
 if (args[0] === '--kontrollera') {
   const filer = args[1] ? [resolve(args[1])] : innehallsfiler();
-  const fel = [...filer.flatMap(kontrolleraFil), ...(args[1] ? [] : oprovadeTaggar())];
+  const fel = [...filer.flatMap(kontrolleraFil), ...(args[1] ? [] : [...oprovadeTaggar(), ...oprovadePoster(filer)])];
   if (fel.length) {
     console.error(fel.join('\n'));
     process.exit(1);
