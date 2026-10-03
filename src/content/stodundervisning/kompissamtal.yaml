@@ -27,6 +27,7 @@ material:
   - penna och papper
   - lappar hem
 uppdaterad: 2026-10-03
+publicerad: 2026-10-03
 relaterade: []
 utkast: false
 inledning:
@@ -106,17 +107,19 @@ tabeller:
         - "”Ni tycker att det fungerar som det är. Det är ni som bestämmer.”"
   - rubrik: "Så kan eleverna säga: startorden"
     plats: efter-steg
+    meny: true
     text: Du modellerar startorden, och eleverna lär sig använda dem i samtalet och efteråt. Läs dem högt i samtal 1, och gör rundans mening färdig själv först, så att eleverna hör hur startordet låter. Ge en elev de andra startorden när hen behöver dem. Ta fram kortet Så kan du säga när någon behöver se orden, och kortet Peka på känslan när någon inte riktigt vet hur hen känner sig.
     kolumner:
       - Startord
       - När eleven säger det
       - Till exempel
     rader:
-      - - |-
-          Jag tänker att ___
-          Jag tror att ___
-        - När eleven säger vad hen tänker eller tror om det som hände.
-        - ”Jag tänker att vi inte hade bestämt var linjen gick.” ”Jag tror att du inte såg mig.”
+      - - Jag tänker att ___
+        - När eleven säger vad hen tänker om det som hände.
+        - ”Jag tänker att vi inte hade bestämt var linjen gick.”
+      - - Jag tror att ___
+        - När eleven säger vad hen tror om det som hände.
+        - ”Jag tror att du inte såg mig.”
       - - Jag känner mig ___ när ___
         - När eleven säger hur det kändes.
         - ”Jag känner mig ensam när ingen passar.”
@@ -138,6 +141,7 @@ tabeller:
     not: Också en anklagelse kan börja med ordet jag, som ”Jag tänker att du är elak” eller ”Jag undrar varför du alltid förstör”. Säg då vad eleven själv vill, som ”Du vill få vara med”, och låt hen säga hur det kändes, som ”När du sa att jag inte fick vara med, kände jag mig ledsen.” Tror eleven att kamraten gjorde det med flit, kan hen fråga ”Jag undrar om du menade det.” De äldre kan också be om något, som ”Kan du fråga mig innan du tar bollen?”
   - rubrik: "Överenskommelsen: tre krav"
     plats: efter-steg
+    meny: true
     text: En överenskommelse är något som gruppen bestämmer sig för att göra till nästa samtal. Det kan vara ett nytt beteende, ett nytt sätt att samarbeta eller något att tänka på, och gruppen skriver den som det eleverna ska göra. Gruppen föreslår och väljer, och du prövar varje förslag mot de tre kraven innan en elev skriver det på bladet.
     kolumner:
       - Kravet
@@ -162,7 +166,7 @@ tabeller:
       - Överenskommelsen
     rader:
       - - F–3
-        - Ett litet gosedjur kan vara talpinne. Visa reglerna med en rörelse, som att peka på öronen, och läs korten högt när du tar fram dem. Säg ”Inget elakt” i stället för ”Inga sänkningar”. Ha kortet Peka på känslan till hands, och låt eleven peka eller välja mellan två ord du säger. På frågan hur bra det fungerar visar de yngsta med fingrarna på en hand.
+        - Ett litet gosedjur kan vara talpinne. Visa reglerna med en rörelse, som att peka på öronen, och läs korten högt när du tar fram dem. Säg ”Inget elakt” i stället för ”Inga sänkningar”. Ha kortet Peka på känslan till hands, och låt eleven peka eller välja mellan två ord du säger. På frågan hur bra det fungerar visar de yngsta med fingrarna, från 0 till 10.
         - Gruppen kommer överens om en sak och visar den med en rörelse. Du skriver det eleverna säger.
       - - 4–6
         - Använd talpinnen och reglerna som de står, och korten när någon behöver dem.
@@ -190,6 +194,7 @@ tabeller:
         - Frågar de vuxna vad de har sett, och tar med det till nästa samtal.
   - rubrik: "Om något händer i gruppen"
     plats: efter-fastnar
+    meny: true
     kolumner:
       - Det som händer
       - Så gör du
@@ -267,7 +272,7 @@ steg:
         - Den som håller i talpinnen pratar, och vi andra lyssnar.
         - Jag får prata utan talpinnen när jag behöver föra samtalet vidare.
         - Det vi berättar här stannar här. Men det vi kommer överens om får de vuxna i skolan och era familjer veta.
-        - Ni ses varje dag i skolan. Här letar vi inte efter vem som har gjort fel. Vi pratar om hur ni vill ha det.
+        - Ni ses ofta i skolan. Här letar vi inte efter vem som har gjort fel. Vi pratar om hur ni vill ha det.
     - namn: Rundan
       fraga: Vem talar nu?
       gor: Säg rundans mening och gör den färdig själv först. Låt talpinnen gå ett varv. Den som står över får frågan igen när varvet är klart. En runda kan också gälla hur var och en känner sig i dag, med kortet Peka på känslan som stöd.
@@ -304,7 +309,7 @@ steg:
         - Tack för att du lyssnade på mig.
         - Till nästa gång lägger du märke till vad Omar gör.
 arbetsform:
-  rubrik: "Arbetsform: läraren leder, i tur och ordning, fritt med talpinnen"
+  rubrik: "Arbetsform: läraren leder, i tur och ordning, fritt med talpinnen och i tur och ordning igen"
   text: Ni sitter runt bordet hela samtalet. Först leder du, sedan går talpinnen ett varv, och i mitten av samtalet tar den som vill tala talpinnen. Sist går talpinnen ett varv till, så att alla får säga något innan ni går.
   delar:
     - rubrik: 1. Läraren leder
@@ -364,7 +369,7 @@ roll:
     - Att säga vem som har mer eller mindre rätt, också i förbigående, som ”Där har du rätt.”
     - Att fråga ”Vem började?” eller ”Varför gjorde du så?” Fråga ”Vad hände?”
     - Att kräva ett jag-⁠budskap av en elev som är upprörd.
-    - Att skriva överenskommelsen åt gruppen.
+    - Att skriva överenskommelsen åt gruppen, utom i F–3, där du skriver det eleverna säger.
     - Att föreläsa om hur man ska vara.
 hem:
   rubrik: Hem och skola
@@ -398,6 +403,7 @@ snabbmall:
   efter:
     - Överenskommelsen och det var och en ska göra
     - Budskapen och avbrotten, och vem som behöver mer stöd
+    - Tekniken du övade och hur det gick
 checklista:
   rubrik: Checklista inför samtal 1
   punkter:
