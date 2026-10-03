@@ -188,7 +188,9 @@ for (const fil of filer) {
   for (const { vag, text } of texter(d, '', [])) {
     if (lastextRader.some((r) => r.test(vag))) continue;
     const u = UNDANTAG.find((x) => x.vag.test(vag));
-    const n = norm(text);
+    // Arbetsformens delar står i remsan och på lathunden utan sitt nummer ("4. I tur och ordning igen" blir "I tur och
+    // ordning igen", passOversikt och arbetsformRad i src/lib/metod.ts), så numret prövas inte (Kompissamtal 2026-10-03).
+    const n = norm(/^arbetsform\.delar\.\d+\.rubrik$/.test(vag) ? text.replace(/^\d+\.\s*/, '') : text);
     const iWord = u?.word === false || word.includes(n) || !!lastextRubrik.get(vag)?.every((del) => word.includes(del))
       || (sagofalt.has(vag) && text.split('\n').every((del) => word.includes(norm(del))));
     const iUtskrift = u?.utskrift === false || tommaRamar.some((r) => r.test(vag)) || tarningar.some((r) => r.test(vag)) || utskrift.includes(n);
