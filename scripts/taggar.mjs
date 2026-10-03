@@ -13,7 +13,8 @@
 // befintliga artiklar, böcker och metoder med --forslag: träffarna är kandidater, och den som lägger till taggen läser
 // posten och avgör. Har en post redan fem taggar byts en ut bara när den nya är uppenbart bättre, det vill säga mer
 // precis om vad posten handlar om; då går den bredaste av de fem. När sökningen är gjord får taggen fältet provad
-// (datumet) i registret, och --kontrollera stoppar en tagg som är ny mot origin/main men saknar det. En ny artikel,
+// (datumet) i registret, och --kontrollera stoppar en tagg som är ny mot origin/main men saknar det. En helt ny tagg
+// skapas bara på fyra villkor och bär sin motivering i registret (se nyaTaggarFel nedan). En ny artikel,
 // bok eller metod stoppas på samma sätt tills dess taggförslag (--post) är lästa och avgjorda och posten står i
 // src/data/taggprov.json, så att det sker av sig självt också i en ny session.
 //
@@ -226,19 +227,47 @@ if (args[0] === '--forslag') {
   process.exit(0);
 }
 
-// En ny tagg (som inte finns i registret på origin/main) ska vara prövad mot alla befintliga poster innan den kommer
-// ut: fältet provad i registret säger att --forslag är körd och träffarna avgjorda (Niclas 2026-10-03: "En ny tagg bör
-// alltid leda till att databasen söks igenom"). Utan git eller origin/main prövas inget här.
-function oprovadeTaggar() {
+// En helt ny tagg (som inte finns i registret på origin/main) skapas bara när fyra saker stämmer (Niclas 2026-10-03:
+// "Bygg det i tagg-systemet"):
+//   1. Ingen befintlig tagg eller alias täcker ämnet (npm run taggar och --sok). Täcker en nästan, får den ett alias.
+//   2. Ämnet är det posten huvudsakligen handlar om eller tränar, inte en detalj i den.
+//   3. Genomgången av alla poster (--forslag) hittar minst en post till, eller fler texter om ämnet är på väg.
+//   4. Namnet är lärarens eget ord, och aliasen fångar de ord lärare söker på.
+// Registret bär skälen: motivering (1, 2 och 4, en eller två meningar), provad (datumet för genomgången) och, när
+// taggen bara har en post, fler (vilka texter som är på väg). --kontrollera stoppar en ny tagg som saknar något av
+// det. Utan git eller origin/main prövas inget här. Ett ord får dessutom bara höra till en tagg (alla taggar).
+const MOTIVERING_MINST = 40;
+function antalPoster(id) {
+  let n = 0;
+  for (const fil of innehallsfiler()) {
+    const fm = frontmatter(fil);
+    if (fm && !fm._fel && !fm.utkast && Array.isArray(fm.taggar) && fm.taggar.includes(id)) n++;
+  }
+  return n;
+}
+function nyaTaggarFel() {
   let ute;
   try { ute = JSON.parse(execFileSync('git', ['show', 'origin/main:src/data/taggar.json'], { cwd: rot, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] })).taggar; } catch { return []; }
   const fanns = new Set(ute.map((t) => t.id));
-  return taggar.filter((t) => !fanns.has(t.id) && !t.provad).map((t) => `src/data/taggar.json: taggen "${t.id}" är ny. Sök igenom alla poster med node scripts/taggar.mjs --forslag ${t.id}, avgör träffarna och skriv "provad": "<datum>" på taggen i registret.`);
+  const fel = [];
+  for (const t of taggar.filter((x) => !fanns.has(x.id))) {
+    const var_ = `src/data/taggar.json: taggen "${t.id}" är ny`;
+    if (String(t.motivering ?? '').trim().length < MOTIVERING_MINST) fel.push(`${var_}. Skriv "motivering" på taggen, en eller två meningar: vad posten huvudsakligen handlar om, varför ingen befintlig tagg eller alias täcker det, och att namnet är lärarens ord. Täcker en befintlig tagg nästan, lägg ett alias där i stället.`);
+    if (!t.provad) fel.push(`${var_}. Sök igenom alla poster med node scripts/taggar.mjs --forslag ${t.id}, avgör träffarna och skriv "provad": "<datum>" på taggen.`);
+    const n = antalPoster(t.id);
+    if (n < 2 && !String(t.fler ?? '').trim()) fel.push(`${var_} och har ${n} post${n === 1 ? '' : 'er'} efter genomgången. En tagg ska samla mer än en post: lägg den där den hör hemma, skriv i "fler" vilka texter om ämnet som är på väg, eller använd en befintlig tagg med ett nytt alias.`);
+  }
+  return fel;
+}
+function ordKrockar() {
+  const agare = new Map();
+  for (const t of taggar) for (const o of new Set([t.label, ...t.alias].map((x) => x.toLowerCase()))) agare.set(o, [...(agare.get(o) ?? []), t.id]);
+  return [...agare].filter(([, ids]) => ids.length > 1).map(([o, ids]) => `src/data/taggar.json: ordet "${o}" hör till ${ids.join(' och ')}. Ett ord får bara peka på en tagg.`);
 }
 
 if (args[0] === '--kontrollera') {
   const filer = args[1] ? [resolve(args[1])] : innehallsfiler();
-  const fel = [...filer.flatMap(kontrolleraFil), ...(args[1] ? [] : [...oprovadeTaggar(), ...oprovadePoster(filer)])];
+  const fel = [...filer.flatMap(kontrolleraFil), ...(args[1] ? [] : [...ordKrockar(), ...nyaTaggarFel(), ...oprovadePoster(filer)])];
   if (fel.length) {
     console.error(fel.join('\n'));
     process.exit(1);
