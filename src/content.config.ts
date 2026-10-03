@@ -100,6 +100,10 @@ const bocker = defineCollection({
 const text = z.string().trim().min(1, 'Tomt fält.');
 const stycken = z.array(text).min(1);
 const ruta = z.strictObject({ rubrik: text, text });
+// Rutorna överst i metoden (upplagg, gruppen, principer) svarar var på sin fråga och går att överblicka på en
+// mobilskärm med luft runt: högst 600 tecken (Niclas 2026-10-03 via metodriggen: längre än så "börjar det bli osnyggt").
+const RUTANS_GRANS = 600;
+const overstaRuta = z.strictObject({ rubrik: text, text: text.max(RUTANS_GRANS, `En ruta överst i metoden har högst ${RUTANS_GRANS} tecken, så att den går att överblicka på en mobilskärm (Niclas 2026-10-03). Låt huvudbeskedet stå först och detaljerna stå där de hör hemma.`) });
 // En film ur metodriggen (src/lib/film.ts): titel bara när filmen ska heta något annat än rubriken, längden, filmens
 // steg i ord (textalternativet), rubriken och ingressen över stillbilderna och texten under var och en.
 const filmFalt = z.strictObject({
@@ -183,10 +187,10 @@ const stodundervisning = defineCollection({
 
     // Modellen. Ett stycke per rad i listorna; en rad inuti en cell blir en ny rad i cellen.
     inledning: stycken,
-    upplagg: ruta.optional(),
+    upplagg: overstaRuta.optional(),
     // Så sätter du ihop gruppen: vilka elever som väljs och hur insatsen presenteras för dem.
-    gruppen: ruta.optional(),
-    principer: ruta.optional(),
+    gruppen: overstaRuta.optional(),
+    principer: overstaRuta.optional(),
     // Passrutinen. Ett steg är en text, eller text med fas (namnet på en rad i tidsschemat). Har stegen
     // faser ritas rutinen, tidsschemat och arbetsformen som en enda passöversikt: fasremsan med minuter
     // och arbetsform, och en tabell med en rad per fas (fas och tid, rutinens steg, vad som händer),

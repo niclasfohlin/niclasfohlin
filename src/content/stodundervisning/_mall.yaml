@@ -61,11 +61,16 @@ utkast: true
 # Modellen. Rubrikerna har standardvärden där de inte anges (se src/content.config.ts).
 inledning:
   - Vad metoden är, för vem och hur ett pass ser ut. Ett stycke per rad.
+# De tre rutorna svarar var på sin fråga, med delarna i den här ordningen, och har högst 600 tecken var, så att de
+# går att överblicka på en mobilskärm (Niclas 2026-10-03). Huvudbeskedet står först, siffror och metodens egna namn
+# står i stället för allmänna ord, och detaljer, felsökning och anteckningar står där de hör hemma.
 upplagg:
   rubrik: Så fungerar insatsen
-  text: Hur ofta, hur länge, hur stor grupp, vad ni arbetar med per pass, vad som noteras och hur perioden utvärderas.
-# gruppen: valfri ruta om hur gruppen sätts ihop (rubrik, text), efter upplägget.
-# principer: valfri ruta med det viktigaste att hålla fast vid.
+  text: Ramen (hur ofta, hur länge och hur många, med siffror), kärnan (vad som händer i passen och över perioden, med metodens egna namn på stegen) och uppföljningen (hur du ser att den hjälper).
+# gruppen: valfri ruta om vilka elever och hur (rubrik, text), efter upplägget: målgruppen efter vad eleverna gör,
+# gränsen (vem som behöver något annat först) och sammansättningen (storlek, blandning och par).
+# principer: valfri ruta med metodens tre viktigaste saker, högst fyra, var och en först i sin mening följd av
+# skälet eller handgreppet.
 # passrutin: stegen som texter, eller med fas (en rad i tidsschemat). Har alla steg en fas ritas rutinen,
 # tidsschemat och arbetsformen som en passöversikt (se problemlosning-i-grupp.yaml), och efterPasset blir raden Efter passet.
 passrutin:
