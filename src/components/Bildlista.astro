@@ -1,0 +1,18 @@
+---
+// En lista med en bild över varje ord (listans fält bilder; Kompissamtal: kortet Peka på känslan, för de yngsta som inte
+// läser och för den som inte riktigt vet hur hen känner sig): bilden ur bildbanken över ordet i elevens typsnitt, i
+// listans kolumner och rader, med luft runt varje ruta så att ett finger träffar en i taget. Samma kort i Word (bildlista
+// i src/lib/metoddocx.ts) och i metodriggens kompendium. Ordet står under bilden, så bilden har ingen egen alt-text.
+import { bildFor } from '../lib/ljudkort';
+interface Props { rubrik?: string; rader: string[][] }
+const { rubrik, rader } = Astro.props;
+const kolumner = Math.max(...rader.map((r) => r.length));
+---
+<div class="m-lista m-bildlista">
+  {rubrik && <h4 class="m-lista-rubrik">{rubrik}</h4>}
+  <ul class="m-bildlista-rutor" style={`--kolumner:${kolumner}`}>
+    {rader.flat().map((ord) => (ord.trim()
+      ? <li><img src={bildFor(ord)!} alt="" width="96" height="96" loading="lazy" decoding="async" /><span>{ord.trim()}</span></li>
+      : <li aria-hidden="true"></li>))}
+  </ul>
+</div>

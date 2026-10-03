@@ -11,8 +11,9 @@ import Lektionsbank from './Lektionsbank.astro';
 import Vikkort from './Vikkort.astro';
 import Bokstavskort from './Bokstavskort.astro';
 import Bokstavskarta from './Bokstavskarta.astro';
+import Bildlista from './Bildlista.astro';
 import Golvbokstaver from './Golvbokstaver.astro';
-import { ANDIKA_ADRESS, harElevtypsnitt, ljudform, upphovBilder } from '../lib/ljudkort';
+import { ANDIKA_ADRESS, arBildlista, harElevtypsnitt, ljudform, upphovBilder } from '../lib/ljudkort';
 import { arElevensBlad, lastexter, protokollDelas } from '../lib/ramform';
 import Filmruta from './Filmruta.astro';
 import Boksida from './Boksida.astro';
@@ -490,6 +491,7 @@ const meny = [
                 if (ljud === 'bokstavskort') return <Bokstavskort rubrik={l.rubrik} rader={l.rader} />;
                 if (ljud === 'golvbokstaver') return <Golvbokstaver rubrik={l.rubrik} rader={l.rader} id={id} titel={d.titel} />;
                 if (ljud === 'bokstavskarta') return <Bokstavskarta rubrik={l.rubrik} rader={l.rader} />;
+                if (arBildlista(l)) return <Bildlista rubrik={l.rubrik} rader={l.rader} />;
                 const info = kortInfo(d, l);
                 const forra = li > 0 ? kortInfo(d, ram.listor![li - 1])?.grupp : undefined;
                 // Ramens fält att fylla i (elevens namn på kartläggningens kopia) står överst i den första listan, så att

@@ -350,6 +350,9 @@ const stodundervisning = defineCollection({
           // Lärarens lista bland elevens (kartläggningens uppgifter som läraren läser upp): står i husets typsnitt, inte
           // elevens (K-130, riggens docs/elevmaterial.md). Ett protokoll med skrivkolumn känns igen av sig självt.
           larare: z.boolean().optional(),
+          // En bild över varje ord (Kompissamtal, kortet Peka på känslan, 2026-10-03): varje ord har en bild i bildbanken,
+          // och sidan, utskriften och Word ritar bilden över ordet, för de yngsta som inte läser (metodriggens bildlistor).
+          bilder: z.boolean().optional(),
         }).superRefine((l, ctx) => {
           const n = l.kolumner?.length ?? l.rader[0].length;
           l.rader.forEach((r, i) => { if (r.length !== n) ctx.addIssue({ code: 'custom', path: ['rader', i], message: `Raden ska ha ${n} celler, som ${l.kolumner ? 'rubrikerna' : 'första raden'}.` }); });
@@ -599,6 +602,10 @@ const stodundervisning = defineCollection({
     citat(d, []);
     // Sagoformens bilder finns i bildbanken, och kortbilder nämner ramens egna listor, annars saknas rundeln på bladet.
     const iBildbanken = (ord: string) => !!(bildbankData as { ord: Record<string, string> }).ord[ord.trim().toLowerCase()];
+    // En lista med bilder har en bild till varje ord, annars står ordet utan sitt ansikte.
+    (d.ramar?.ramar ?? []).forEach((r, ri) => (r.listor ?? []).forEach((l, li) => {
+      if (l.bilder) for (const ord of l.rader.flat()) if (ord.trim() && !iBildbanken(ord)) ctx.addIssue({ code: 'custom', path: ['ramar', 'ramar', ri, 'listor', li, 'bilder'], message: `Ordet "${ord}" har ingen bild i bildbanken (public/bildbank/ och src/data/bildbank.json), så listan kan inte ritas med bilder.` });
+    }));
     (d.ramar?.ramar ?? []).forEach((r, ri) => {
       const s = r.sagoform;
       if (!s) return;

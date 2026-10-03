@@ -694,6 +694,14 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-lista.kort td { font-size: 1.5rem; padding: 0.7rem 0.9rem; }
 /* På mobilen ryms kortets rader, som "sss-ooo-lll → sol", på en rad i en lägre grad (granskningen 2026-09-27). */
 @media (max-width: 40rem) { .m-lista.kort td { font-size: 1.05rem; padding: 0.55rem 0.6rem; } }
+/* En lista med en bild över varje ord (Bildlista.astro, Kompissamtal: kortet Peka på känslan): rutor i listans kolumner
+   med bilden över ordet i elevens typsnitt, och kanterna som i listornas tabeller. I utskriften håller kortet ihop. */
+.m-bildlista-rutor { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--kolumner, 3), minmax(0, 1fr)); border: 1px solid var(--farg-kant); border-radius: 8px; overflow: hidden; }
+.m-bildlista-rutor li { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 0.45rem; padding: 0.9rem 0.4rem 0.8rem; border-right: 1px solid var(--farg-kant); border-bottom: 1px solid var(--farg-kant); text-align: center; margin: 0 -1px -1px 0; }
+.m-bildlista-rutor img { width: 4.5rem; height: auto; }
+.m-bildlista-rutor span { font-family: var(--typsnitt-elev); font-size: 1.4rem; line-height: 1.2; color: var(--farg-text); overflow-wrap: anywhere; }
+@media (max-width: 40rem) { .m-bildlista-rutor img { width: 3.25rem; } .m-bildlista-rutor span { font-size: 1.1rem; } }
+@media print { .m-bildlista-rutor { break-inside: avoid; } .m-bildlista-rutor img { width: 2.4cm; } }
 /* Läskorten (K-063): två kort med streckad kant, bredvid varandra på skärmen och under varandra i mobilen. Bågen under
    varje ordgrupp i kortet med stöd är en kurva i blått (#2e6db4, som i Word och riggen), ritad som bakgrund under
    gruppen; gruppen bryts aldrig, och orden har sina vanliga mellanrum. */

@@ -33,7 +33,8 @@ export const VIK_TEXT = 'Klipp längs strecken och vik längs den blå prickade 
 // som klipps ut (Niclas 2026-09-29).
 export function upphovBilder(d: MetodData): string | undefined {
   const former = allaFormer(d);
-  const delar = [former.has('bildkort') && 'bildkorten', former.has('bokstavskarta') && 'bokstavskartan'].filter(Boolean);
+  const listor = (d.ramar?.ramar ?? []).flatMap((r) => r.listor ?? []).filter((l) => arBildlista(l)).map(bildlistansNamn);
+  const delar = [former.has('bildkort') && 'bildkorten', former.has('bokstavskarta') && 'bokstavskartan', ...listor].filter(Boolean);
   return delar.length ? `Bilderna på ${delar.join(' och ')}: Fluent Emoji, © Microsoft Corporation, MIT-licens.` : undefined;
 }
 
@@ -45,8 +46,13 @@ export function bildFor(ord?: string): string | null {
   return fil ? `/bildbank/${fil}` : null;
 }
 
-type Lista = { rubrik?: string; kolumner?: string[]; rader: string[][] };
+type Lista = { rubrik?: string; kolumner?: string[]; rader: string[][]; bilder?: boolean };
 export const kortCeller = (l: Lista) => l.rader.flat().map((c) => String(c ?? '').trim()).filter(Boolean);
+// En lista med en bild över varje ord (listans fält bilder, Kompissamtal: kortet Peka på känslan): sidan ritar den med
+// Bildlista.astro och Word med bildlista i src/lib/metoddocx.ts. Saknas en bild står listan som vanligt; schemat stoppar det.
+export const arBildlista = (l: Lista): boolean => !!l.bilder && kortCeller(l).length > 0 && kortCeller(l).every((k) => bildFor(k));
+// Hur upphovsraden nämner listan: "Bilderna på kortet Peka på känslan: …".
+export const bildlistansNamn = (l: Lista): string => (l.rubrik ? `kortet ${l.rubrik}` : 'korten med bilder');
 const arKortlista = (d: Pick<MetodData, 'kort'>, l: Lista) => (d.kort?.listor ?? []).some((t) => (l.rubrik ?? '').includes(t));
 
 export type Ljudform = 'bildkort' | 'bokstavskort' | 'golvbokstaver' | 'bokstavskarta';
@@ -113,6 +119,7 @@ export function metodensBilder(d: MetodData, id?: string): string[] {
       const f = ljudform(d, l);
       if (f === 'bildkort') for (const k of kortCeller(l)) ut.add(bildFor(k)!);
       if (f === 'bokstavskarta') for (const c of kartCeller(l)) if (c.bild) ut.add(c.bild);
+      if (arBildlista(l)) for (const k of kortCeller(l)) ut.add(bildFor(k)!);
     }
   }
   return [...ut];

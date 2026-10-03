@@ -12,7 +12,7 @@ import { arbetsformRad, arEttKort, arProtokoll, arskursText, datumText, ejBryt, 
 import { brakDelar, delnamn, kortInfo, lage, STANDARD_NAMNARE, type KortInfo, type Mall } from './brak';
 import { andikaBredd, bagSvg, utanStod } from './lasflyt';
 import type { MetodPostISerie, SerieKoppling } from './serie';
-import { ANDIKA_ADRESS, ELEVTYPSNITT, VIK_TEXT, bildFor as bildForOrd, harElevtypsnitt, kartCeller, kortCeller, ljudenheter, ljudform, arDelark, type KartCell } from './ljudkort';
+import { ANDIKA_ADRESS, ELEVTYPSNITT, VIK_TEXT, arBildlista, bildFor as bildForOrd, bildlistansNamn, harElevtypsnitt, kartCeller, kortCeller, ljudenheter, ljudform, arDelark, type KartCell } from './ljudkort';
 import { arElevensBlad, harFragor, lastexter, protokollDelas, textlangd, type Lastext } from './ramform';
 import { filmerVid, huvudfilm, metodensFilmer, stegDelar, stillbilder, STILLBILD_MATT, type FilmPlats, type MetodFilm } from './film';
 import { reservNyckel } from './reservbild';
@@ -1202,6 +1202,7 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
   const listor = () => (ram.listor ?? []).flatMap((l, i, alla) => {
     const stodKolumn = laskortKolumn(l);
     if (stodKolumn !== undefined) return laskortBarn(l, stodKolumn);
+    if (arBildlista(l)) return bildlistaBarn(l);
     const ettKort = arEttKort(alla, l);
     return elevlista({ ...l, rubrik: !o.stor && l.rubrik && !namngerRamen(l.rubrik) ? `${l.rubrik} · ${ram.rubrik}` : l.rubrik }, { storlek: ettKort ? 40 : storlek, luft: ettKort, hallIhopEfter: o.stor ? i === alla.length - 1 : i < alla.length - 1, brak: o.brak, elev: o.elev && !l.larare });
   });
@@ -1394,6 +1395,33 @@ function vikkortTabell(kort: string[]): Table {
       ])) }));
   }
   return new Table({ width: { size: halva * perRad * 2, type: WidthType.DXA }, columnWidths: Array(perRad * 2).fill(halva), layout: TableLayoutType.FIXED, borders: UTAN_KANTER, rows: rader });
+}
+// En lista med en bild över varje ord (listans fält bilder, Kompissamtal: kortet Peka på känslan, Bildlista.astro på
+// sidan): bilden över ordet i 20 pt i elevens typsnitt, centrerat, med luft runt varje ruta så att ett finger träffar en
+// ruta i taget, som i metodriggen (bildlista i build/build-docx.js). Bilden är 3,6 cm i två kolumner, 2,8 cm i tre och
+// 2,4 cm i fyra, så att tolv känslor i tre kolumner ryms på ett A4 med rubriken och en kort rad, också i Google Dokument,
+// som ritar raderna något högre än Word (riggens mätning 2026-10-03: 3,2 cm gav kortet en sida till i Google).
+function bildlistaBarn(l: { rubrik?: string; rader: string[][] }): Barn[] {
+  const n = Math.max(...l.rader.map((r) => r.length));
+  const bredd = Math.floor(BREDD_STAENDE / n);
+  const bild = px(n <= 2 ? 3.6 : n === 3 ? 2.8 : 2.4);
+  const luft = n <= 2 ? 300 : 160;
+  const rader = l.rader.map((r, ri) => new TableRow({ cantSplit: true, children: Array.from({ length: n }, (_, ci) => {
+    const ord = String(r[ci] ?? '').trim();
+    return new TableCell({
+      width: { size: bredd, type: WidthType.DXA }, borders: runt(kant()), margins: { top: luft, bottom: luft, left: 200, right: 200 },
+      children: ord ? [
+        new Paragraph({ alignment: AlignmentType.CENTER, keepNext: true, spacing: { before: 0, after: 100 }, children: [bildRun(bildForOrd(ord)!, bild, ord)] }),
+        new Paragraph({ alignment: AlignmentType.CENTER, keepNext: ri < l.rader.length - 1, spacing: { before: 0, after: 0 }, children: [elevRun(ord, 40)] }),
+      ] : [new Paragraph({})],
+    });
+  }) }));
+  return [
+    ...(l.rubrik ? [stycke(l.rubrik, { fet: true, farg: FARG.huvud, storlek: 16, versaler: true, fore: 120, efter: 60, hallIhop: true, niva4: true })] : []),
+    new Table({ width: { size: bredd * n, type: WidthType.DXA }, columnWidths: Array(n).fill(bredd), layout: TableLayoutType.FIXED, rows: rader }),
+    // Upphovet för bildbankens bilder (MIT-licensen kräver det i kopiorna), samma rad som under Materialet på sidan.
+    stycke(`Bilderna på ${bildlistansNamn(l)}: Fluent Emoji, © Microsoft Corporation, MIT-licens.`, { farg: FARG.svag, storlek: 18, fore: 80 }),
+  ];
 }
 // Bokstavskort: en bokstav i 96 pt i elevens typsnitt, ett restkort eller stavelsekort med två eller tre bokstäver mindre.
 // Fyra kort i bredd och sex rader, alla 24 på ett A4, cirka 4,7 × 4,4 cm med streckad kant och ingen skrivlinje.

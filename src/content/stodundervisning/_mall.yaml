@@ -213,7 +213,9 @@ ramar:
       # som är lärarens (kartläggningens uppgifter som läraren läser upp) får larare: true och står i husets typsnitt; ett
       # protokoll med skrivkolumn känns igen av sig självt. Kolumnrubriker
       # bara när de betyder något. Ritas stort, för att pekas i. Lärarnoten (delar) står före listorna på sidan
-      # och i Word-filen med allt, efter dem i elevkopiorna. Se laslistor-i-grupp.yaml.
+      # och i Word-filen med allt, efter dem i elevkopiorna. Se laslistor-i-grupp.yaml. En lista med bilder: true får en
+      # bild ur bildbanken över varje ord, för den som inte läser (kortet Peka på känslan i kompissamtal.yaml); varje ord
+      # ska ha en bild i bildbanken, annars stannar bygget.
       # listor:
       #   - rubrik: Läs orden, kolumn för kolumn
       #     kolumner: [Konsonant + vokal, Vokal + konsonant]
