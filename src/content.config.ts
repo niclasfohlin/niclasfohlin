@@ -46,7 +46,12 @@ const publikation = z.string().superRefine((varde, ctx) => {
   });
 });
 
-const taggar = z.array(tagg).default([]);
+// Minst två och högst fem taggar per post (Niclas 2026-10-03; scripts/taggar.mjs har samma gränser och reglerna för
+// en ny tagg).
+const taggar = z.array(tagg)
+  .min(2, 'En post har minst två taggar (Niclas 2026-10-03): lägg till en som säger vad posten handlar om, aldrig en utfyllnad.')
+  .max(5, 'En post har högst fem taggar (Niclas 2026-10-03): behåll de fem som bäst säger vad posten handlar om.')
+  .default([]);
 const ingress = z.string().min(40, 'Ingressen ska vara minst 40 tecken.').max(320, 'Ingressen ska vara högst 320 tecken. Resten hör hemma i brödtexten.');
 
 // Artiklar: texter som oftast är publicerade någon annanstans först.

@@ -43,7 +43,7 @@ Kommer mycket på en gång, som en ny metod med kommentarer eller flera önskem�
 
 ## Innehåll
 
-Poster skapas från mallen i respektive mapp: `_mall.md` för artiklar och böcker, `_mall.yaml` för metoder. Taggar och publikationer tas från registren i `src/data/`. Kör `npm run taggar` för att se vad som finns innan du väljer. En tagg får en egen sida först när något innehåll använder den.
+Poster skapas från mallen i respektive mapp: `_mall.md` för artiklar och böcker, `_mall.yaml` för metoder. Taggar och publikationer tas från registren i `src/data/`. Kör `npm run taggar` för att se vad som finns innan du väljer. En tagg får en egen sida först när något innehåll använder den. En post har minst två och högst fem taggar, och schemat stoppar annars. En ny tagg prövas alltid mot alla befintliga artiklar, böcker och metoder med `node scripts/taggar.mjs --forslag <id>`, och träffarna avgörs en och en; bygget stoppar en ny tagg som saknar `provad` (datumet för genomgången) i registret. Har en post redan fem taggar byts en ut bara när den nya är uppenbart bättre, det vill säga mer precis om vad posten handlar om, och då går den bredaste av de fem. Den andra taggen är aldrig en utfyllnad (Niclas 2026-10-03).
 
 Bilder läggs i `public/images/`. `npm run validera` krymper dem till sitt syfte, 480 pixlar breda och 1200 × 630 för en delningsbild, och gör ett PNG-foto till JPEG; ingen skalar för hand. Varje sida får ett eget delningskort med sin titel, som valideringen ritar; committa kortet med posten.
 
