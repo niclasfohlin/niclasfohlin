@@ -1398,14 +1398,15 @@ function vikkortTabell(kort: string[]): Table {
 }
 // En lista med en bild över varje ord (listans fält bilder, Kompissamtal: kortet Peka på känslan, Bildlista.astro på
 // sidan): bilden över ordet i 20 pt i elevens typsnitt, centrerat, med luft runt varje ruta så att ett finger träffar en
-// ruta i taget, som i metodriggen (bildlista i build/build-docx.js). Bilden är 3,6 cm i två kolumner, 2,8 cm i tre och
-// 2,4 cm i fyra, så att tolv känslor i tre kolumner ryms på ett A4 med rubriken och en kort rad, också i Google Dokument,
-// som ritar raderna något högre än Word (riggens mätning 2026-10-03: 3,2 cm gav kortet en sida till i Google).
+// ruta i taget, som i metodriggen (bildlista i build/build-docx.js). Bilden är 3,4 cm i två kolumner, 2,6 cm i tre och
+// 2,2 cm i fyra, så att tolv känslor i tre kolumner ryms på planeringsmallens A4 med ramens rubrik, text, rutan Till
+// läraren och upphovet, också i Google Dokument, som ritar raderna något högre än Word (riggens 2,8 cm gav en tom sida
+// efter kortet i Google, googleprov 2026-10-03).
 function bildlistaBarn(l: { rubrik?: string; rader: string[][] }): Barn[] {
   const n = Math.max(...l.rader.map((r) => r.length));
   const bredd = Math.floor(BREDD_STAENDE / n);
-  const bild = px(n <= 2 ? 3.6 : n === 3 ? 2.8 : 2.4);
-  const luft = n <= 2 ? 300 : 160;
+  const bild = px(n <= 2 ? 3.4 : n === 3 ? 2.6 : 2.2);
+  const luft = n <= 2 ? 260 : 140;
   const rader = l.rader.map((r, ri) => new TableRow({ cantSplit: true, children: Array.from({ length: n }, (_, ci) => {
     const ord = String(r[ci] ?? '').trim();
     return new TableCell({
@@ -1888,11 +1889,14 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
     ]);
   }
   if (d.checklista) {
+    // En checklista som görs en gång (inför kursen i Skrivkurs: sagoboken, inför samtal 1 i Kompissamtal) har inget
+    // passnummer, och tillfället står i rubriken efter inför (läsbarhetsgranskningen av Kompissamtal 2026-10-03).
+    const tillfalle = d.checklista.rubrik.match(/inför (.+)$/i)?.[1]?.trim();
+    const enGang = tillfalle && !/^(passet|varje pass|ett pass)$/i.test(tillfalle) ? tillfalle : undefined;
     sidor.push([
       ...under(d.checklista.rubrik),
-      // En checklista inför kursen (Skrivkurs: sagoboken) görs en gång, så den har inget passnummer.
-      ...(/kursen/i.test(d.checklista.rubrik)
-        ? [stycke('Bocka av före kursen. Det som inte är gjort görs innan kursen börjar.'), skrivrad(['Datum'])]
+      ...(enGang
+        ? [stycke(`Bocka av före ${enGang}. Det som inte är gjort görs innan ${/kursen/i.test(enGang) ? 'kursen börjar' : 'eleverna kommer'}.`), skrivrad(['Datum'])]
         : [stycke('Bocka av inför varje pass. Det som inte är gjort görs innan eleverna kommer.'), skrivrad(['Datum', 'Pass nr'])]),
       ...bockar(d.checklista.punkter, 1, { hojd: 560 }),
     ]);
@@ -2512,6 +2516,7 @@ function lathundBarn(post: MetodPost, o: { niva1?: boolean; skalor?: number[]; b
     // En enda ifylld tabell är ett kort att ha på bordet (strategikortet, K-061): hela bredden, stor text och lika
     // höga rader som fyller sidan, som i PowerPoint (lathundForm i metod.ts).
     const kort = lathundForm(l.mall).form === 'kort';
+    const kortMeningar = kort && (lathundForm(l.mall).tabell?.rader ?? []).flat().some((c) => String(c).length > 40);
     // De smala blocken fördelas på två spalter som på sidan: där lägger webbläsaren dem i ordning och
     // delar där spalterna blir jämnast i höjd. Här uppskattas höjden i rader och delningen väljs så att
     // den högsta spalten blir så låg som möjligt.
@@ -2573,9 +2578,10 @@ function lathundBarn(post: MetodPost, o: { niva1?: boolean; skalor?: number[]; b
           ...(b.citat ? [stycke(citat(b.citat), { kursiv: true, farg: BRUN, storlek: 20 })] : []),
         ] });
       } else if (b.typ === 'not' && (matta || kort)) {
-        // Mattans och kortets fot är regeln för eleven: större, inte fet.
+        // Mattans och kortets fot är regeln för eleven: större, inte fet. Ett kort med meningar är lärarens (Kompissamtal:
+        // Samtalsteknikerna), och dess not står i vanlig storlek, så att den inte blir sidans största text (K-195).
         tomSmala();
-        mall.push(...lhNot([stycke(b.text, { storlek: 28, efter: 0 })]));
+        mall.push(...lhNot([stycke(b.text, { storlek: kortMeningar ? 20 : 28, efter: 0 })]));
       } else if (b.typ === 'not') {
         smala.push({ vikt: 1 + Math.ceil(b.text.length / 110), f: () => lhNot([stycke(b.text, { storlek: 20, efter: 0 })]) });
       }

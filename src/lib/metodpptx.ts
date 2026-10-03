@@ -394,8 +394,10 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
     if ((b.bandVanster ?? '').length > bandTecken) varna(`bild 3: underraden har ${b.bandVanster.length} tecken, och bandet rymmer ${bandTecken}: korta lathund.mall.underrad`);
     txt(s, b.bandHoger ?? '', 6.6, 0.76, 6.5, 0.25, { mono: true, size: 12, color: GREY, align: 'right' });
     // Mattans och kortets fot är regeln för eleven: en rad, större text, inte fet.
-    const regel = b.typ === 'matta' || b.typ === 'lista';
-    const fotH = b.fot ? (regel ? 0.9 : 1.45) : 0, fotY = BOTTEN - fotH;
+    // Ett kort med meningar (lärarens kort, K-195) har en vanlig not i foten, inte elevens regel i stor text.
+    const meningar = b.typ === 'lista' && b.rader.some((r: string[]) => r.some((c) => String(c).length > 40));
+    const regel = b.typ === 'matta' || (b.typ === 'lista' && !meningar);
+    const fotH = b.fot ? (regel || meningar ? 0.9 : 1.45) : 0, fotY = BOTTEN - fotH;
     const areaTop = 1.25, areaBottom = fotY - 0.15;
 
     if (b.typ === 'schema') {
@@ -477,7 +479,7 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
     }
     if (b.fot) {
       rect(s, 0, fotY, W, fotH, CREAM); rect(s, 0, fotY, W, 0.02, INK);
-      txt(s, rich(b.fot.text ?? ''), 0.46, fotY + (regel ? 0.1 : 0.18), W - 0.92, fotH - (regel ? 0.2 : 0.3), { size: regel ? 17 : 12.5, valign: regel ? 'middle' : 'top' });
+      txt(s, rich(b.fot.text ?? ''), 0.46, fotY + (regel || meningar ? 0.1 : 0.18), W - 0.92, fotH - (regel || meningar ? 0.2 : 0.3), { size: regel ? 17 : 12.5, valign: regel || meningar ? 'middle' : 'top' });
     }
     fot(s);
     s.addNotes(`${b.anteckning} ${upphov}`);

@@ -147,7 +147,7 @@ const kortBredd = (i: number) => `${((kortVikter[i] / kortVikter.reduce((a, v) =
               <table class="lh-korttabell">
                 {kortMeningar && <colgroup>{b.kolumner.map((_, i) => <col style={`width:${kortBredd(i)}`} />)}</colgroup>}
                 <thead><tr>{b.kolumner.map((k) => <th scope="col">{k}</th>)}</tr></thead>
-                <tbody>{b.rader.map((r) => <tr>{r.map((c) => <td>{c.replace(/ → /g, ' → ')}</td>)}</tr>)}</tbody>
+                <tbody>{b.rader.map((r) => <tr>{r.map((c, i) => <td data-etikett={kortMeningar ? b.kolumner[i] : undefined}>{c.replace(/ → /g, ' → ')}</td>)}</tr>)}</tbody>
               </table>
             </div>
           );
@@ -166,7 +166,7 @@ const kortBredd = (i: number) => `${((kortVikter[i] / kortVikter.reduce((a, v) =
               {b.citat && <p class="lh-citat">{citat(b.citat)}</p>}
             </div>
           );
-          if (b.typ === 'not') return <p class:list={['lh-not', { 'lh-regel': matta || kort }]}>{b.text}</p>;
+          if (b.typ === 'not') return <p class:list={['lh-not', { 'lh-regel': matta || (kort && !kortMeningar) }]}>{b.text}</p>;
           return null;
         })}
       </div>
