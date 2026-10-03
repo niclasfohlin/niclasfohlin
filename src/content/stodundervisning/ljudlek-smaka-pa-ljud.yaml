@@ -36,7 +36,7 @@ inledning:
   - "Välj Smaka på ljud när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 5, sist och i mitten. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och Smaka på ljud hör till förmåga 5, Sist och i mitten, i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Smaka på ljud går igenom raderna i Så blir lektionen svårare, oftast i fyra till tolv pass. Ta nästa rad efter två pass i följd där dagens elever säger rätt ljud och skriver eller visar rätt bokstav i rätt ruta på nästan alla kort i steg 4. Efter sista raden går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Smaka på ljud går igenom raderna i Så blir lektionen svårare, oftast i fyra till tolv pass. Ta nästa rad när dagens elever säger rätt ljud och skriver eller visar rätt bokstav i rätt ruta på nästan alla kort i steg 4, två pass i följd. Efter sista raden går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"
@@ -151,7 +151,7 @@ tabeller:
     not: "Orden står i ordning, lättast först. Hur du säger orden och vilka ord som får vänta står under Ordbanken i Ljudlek i grupp."
 principer:
   rubrik: "Tre saker att hålla fast vid"
-  text: "Säg ordet långsamt och stanna på ljudet ni letar efter: sooolll. Säg sedan bara det ljudet, lll, och aldrig bokstavens namn. Blanda korten, så att eleverna lyssnar i stället för att gissa. Skriv bokstaven i rutan där ljudet hörs."
+  text: "Säg ordet långsamt, sooolll, stanna på ljudet ni letar efter och säg sedan bara det ljudet, lll, aldrig bokstavens namn. Blanda korten, så att eleverna lyssnar i stället för att gissa. Skriv bokstaven i rutan där ljudet hörs."
 passrutin:
   text: "Lektionen går i fyra steg, från att du visar till att var och en gör själv."
   steg:

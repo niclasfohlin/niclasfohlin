@@ -151,7 +151,7 @@ tabeller:
     not: "Orden står i ordning, lättast först. Hur du säger orden och vilka ord som får vänta står under Ordbanken i Ljudlek i grupp."
 principer:
   rubrik: "Tre saker att hålla fast vid"
-  text: "Dela ordet i början och resten, där resten börjar vid vokalen: /h/ och us, /st/ och ol. Ord med samma rest rimmar. Blanda par som rimmar med par som inte gör det, bland dem par som börjar med samma ljud, så att eleverna inte kan gissa. Byt början, och läs sist ord med restkorten när gruppen har haft bokstäverna."
+  text: "Dela ordet i början och resten, där resten börjar vid vokalen: /h/ och us, /st/ och ol. Ord med samma rest rimmar. Blanda par som rimmar med par som inte gör det, bland dem par som börjar med samma ljud, så att eleverna inte kan gissa. Byt början och låt påhittade ord räknas, så att eleverna lyssnar på hur orden låter."
 passrutin:
   text: "Lektionen går i fyra steg, från att du visar till att var och en gör själv."
   steg:
