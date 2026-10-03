@@ -23,7 +23,7 @@ En egen långsiktig plattform som samlar Niclas Fohlins publicerade artiklar, b�
 | Bok | titel, beskrivning, utgivningsår | förlag, medförfattare, serie, ISBN, omslag, länkar, taggar |
 | Metod | titel, ingress, område, årskurs, taggar | format, tid, material, uppdaterad, relaterade |
 
-Område är exakt ett av Matematik, Läsning och Skrivning. Årskurs är en eller flera av F-3, 4-6 och 7-9. Taggar beskriver vad innehållet handlar om eller tränar, till exempel avkodning, läsflyt, taluppfattning, stavning eller textstruktur.
+Område är exakt ett av Matematik, Läsning, Skrivning och Socialt (Socialt sedan 2026-10-03, för metoder om samspel, konflikter, känslor och trygghet). Årskurs är en eller flera av F-3, 4-6 och 7-9. Taggar beskriver vad innehållet handlar om eller tränar, till exempel avkodning, läsflyt, taluppfattning, stavning eller textstruktur.
 
 ## Taggar som håller över tid
 

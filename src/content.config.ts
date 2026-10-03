@@ -134,7 +134,7 @@ const stodundervisning = defineCollection({
     // Raden under rubriken, t.ex. "Lärarledd problemlösning i liten grupp för åk 4–9".
     undertitel: z.string().optional(),
     ingress,
-    omrade: z.enum(['Matematik', 'Läsning', 'Skrivning']),
+    omrade: z.enum(['Matematik', 'Läsning', 'Skrivning', 'Socialt']),
     arskurs: z.array(z.enum(['F-3', '4-6', '7-9'])).min(1, 'Ange minst en årskursnivå.'),
     // Årskursen som läsaren ser när nivåerna inte säger det exakt, t.ex. "åk 3–6" för en metod
     // som ligger under F-3 och 4-6. Filtreringen i metodbanken använder alltid arskurs.

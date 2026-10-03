@@ -22,11 +22,13 @@
   --farg-accent-ljus: #e6eef8;
   --farg-mork: #14202b;
   --farg-mork-text: #d5deea;
-  /* Ämnena i metodbanken: matematik i accenten, läsning grön, skrivning plommon. */
+  /* Ämnena i metodbanken: matematik i accenten, läsning grön, skrivning plommon och socialt rost (2026-10-03). */
   --farg-lasning: #1e6b45;
   --farg-lasning-ljus: #e3f1e8;
   --farg-skrivning: #6b2f6b;
   --farg-skrivning-ljus: #f1e6f1;
+  --farg-socialt: #8f3b14;
+  --farg-socialt-ljus: #f8eae1;
 
   --typsnitt-brod: system-ui, -apple-system, 'Segoe UI', sans-serif;
   --typsnitt-rubrik: system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -328,6 +330,7 @@ form.prenumerera button:hover { background: var(--farg-accent-mork); }
 .amne { flex: none; font-family: var(--typsnitt-ui); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.3rem 0.55rem; border-radius: 6px; margin-top: 0.15rem; background: var(--farg-accent-ljus); color: var(--farg-accent); }
 .amne[data-amne="Läsning"] { background: var(--farg-lasning-ljus); color: var(--farg-lasning); }
 .amne[data-amne="Skrivning"] { background: var(--farg-skrivning-ljus); color: var(--farg-skrivning); }
+.amne[data-amne="Socialt"] { background: var(--farg-socialt-ljus); color: var(--farg-socialt); }
 .kort-fakta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem 1rem; margin: 0.75rem 0 0.9rem; padding: 0.7rem 0.9rem; background: var(--farg-ton); border-radius: 8px; font-family: var(--typsnitt-ui); font-size: 0.9rem; }
 .kort-fakta div { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; }
 .kort-fakta dt { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); }

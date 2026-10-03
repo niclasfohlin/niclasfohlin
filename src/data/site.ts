@@ -13,7 +13,7 @@ export const site = {
   sidor: {
     artiklar: { titel: 'Artiklar', beskrivning: 'Krönikor, debattartiklar och intervjuer om skolan, publicerade i Vi Lärare, Göteborgs-Posten och andra tidningar. Sök bland texterna eller bläddra per år.' },
     bocker: { titel: 'Böcker', beskrivning: 'Niclas Fohlins böcker om kooperativt lärande, undervisning och läsinlärning, samt läromedel och kapitel i andra böcker.' },
-    stodundervisning: { titel: 'Stödundervisning', beskrivning: 'Metodbank för stödundervisning i matematik, läsning och skrivning. Varje metod har körschema, exempelfraser och mallar, och går att skriva ut och ladda ner som Word-fil.' },
+    stodundervisning: { titel: 'Stödundervisning', beskrivning: 'Metodbank för stödundervisning i matematik, läsning, skrivning och socialt samspel. Varje metod har körschema, exempelfraser och mallar, och går att skriva ut och ladda ner som Word-fil.' },
     om: { titel: 'Om Niclas Fohlin', beskrivning: 'Niclas Fohlin är samordnande specialpedagog på AcadeMedias grundskolor, speciallärare, författare och föreläsare.' },
     prenumerera: { titel: 'Prenumerera', beskrivning: 'Få ett mejl när det kommer nya texter, böcker eller metoder.' },
     taggar: { titel: 'Taggar', beskrivning: 'Alla ämnen som texterna och metoderna är taggade med.' },
@@ -32,6 +32,6 @@ export const site = {
   // personuppgifter, och nedladdningar och utskrifter som händelser på knapparna. Räkningen går till GoatCounter
   // och drar inga Netlify-krediter. Tomt: inget räknas. Se DRIFT.md under Besöksstatistik.
   statistik: 'https://niclasfohlin.goatcounter.com/count',
-  omraden: ['Matematik', 'Läsning', 'Skrivning'] as const,
+  omraden: ['Matematik', 'Läsning', 'Skrivning', 'Socialt'] as const,
   arskurser: ['F-3', '4-6', '7-9'] as const,
 };

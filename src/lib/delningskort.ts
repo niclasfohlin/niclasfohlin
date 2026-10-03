@@ -34,7 +34,7 @@ export interface Kort {
   fil: string; // /delning/<namn>-<kontrollsumma>.jpg
 }
 
-const FARG: Record<string, string> = { Matematik: '--farg-accent', Läsning: '--farg-lasning', Skrivning: '--farg-skrivning' };
+const FARG: Record<string, string> = { Matematik: '--farg-accent', Läsning: '--farg-lasning', Skrivning: '--farg-skrivning', Socialt: '--farg-socialt' };
 const las = (sokvag: string) => readFileSync(join(process.cwd(), sokvag));
 
 // Designsystemets variabler som kortet läser: de som mallen nämner och strecket färgas med (FARG), med sina värden ur
