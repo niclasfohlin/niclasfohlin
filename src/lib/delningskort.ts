@@ -37,13 +37,21 @@ export interface Kort {
 const FARG: Record<string, string> = { Matematik: '--farg-accent', Läsning: '--farg-lasning', Skrivning: '--farg-skrivning', Socialt: '--farg-socialt' };
 const las = (sokvag: string) => readFileSync(join(process.cwd(), sokvag));
 
-// Designsystemets variabler som kortet läser: de som mallen nämner och strecket färgas med (FARG), med sina värden ur
+// Designsystemets variabler som kortet läser: de som mallen nämner och strecket färgas med, med sina värden ur
 // :root-blocket i början av global.css. En ny variabel som kortet inte läser ritar alltså inte om korten (K-156).
-function designsystem(): string {
-  const css = las('src/styles/global.css').toString('utf8').replace(/\r\n/g, '\n');
-  const start = css.indexOf(':root {');
-  const varden = new Map([...css.slice(start, css.indexOf('\n}', start)).matchAll(/(--[\w-]+):\s*([^;]+);/g)].map((m) => [m[1], m[2].trim()]));
-  const lasta = new Set([...las(MALL).toString('utf8').matchAll(/var\((--[\w-]+)\)/g)].map((m) => m[1]).concat(Object.values(FARG), '--farg-accent'));
+// Strecket har områdets färg (FARG). De tre första områdenas färger har räknats in i varje korts summa sedan K-156 och
+// står kvar där, så att korten behåller sina adresser; ett nytt områdes färg räknas bara in i sina egna kort, så att
+// ett nytt område inte ritar om alla kort (Socialt 2026-10-03 hade annars ritat om 103 kort).
+const GRUNDFARGER = ['--farg-accent', '--farg-lasning', '--farg-skrivning'];
+let designVarden: Map<string, string> | undefined;
+function designsystem(farg: string): string {
+  if (!designVarden) {
+    const css = las('src/styles/global.css').toString('utf8').replace(/\r\n/g, '\n');
+    const start = css.indexOf(':root {');
+    designVarden = new Map([...css.slice(start, css.indexOf('\n}', start)).matchAll(/(--[\w-]+):\s*([^;]+);/g)].map((m) => [m[1], m[2].trim()]));
+  }
+  const varden = designVarden;
+  const lasta = new Set([...las(MALL).toString('utf8').matchAll(/var\((--[\w-]+)\)/g)].map((m) => m[1]).concat(GRUNDFARGER, farg));
   return [...lasta].filter((v) => varden.has(v)).sort().map((v) => `${v}: ${varden.get(v)}`).join('\n');
 }
 
@@ -87,12 +95,12 @@ export function allaKort(): Promise<Kort[]> {
       lagg({ sida: `/stodundervisning/${m.id}`, typ: 'metod', etikett: `Stödundervisning · ${m.data.omrade} · ${arskursText(m.data)}`, titel, undertitel: undertitel || m.data.undertitel || '', bild: portratt, farg: FARG[m.data.omrade] ?? '--farg-accent' });
     }
 
-    const gemensamt = [String(VERSION), las(MALL).toString('utf8').replace(/\r\n/g, '\n'), designsystem()];
+    const gemensamt = [String(VERSION), las(MALL).toString('utf8').replace(/\r\n/g, '\n')];
     const bilder = new Map<string, string>();
     const bildSumma = (b: string) => bilder.get(b) ?? bilder.set(b, createHash('sha256').update(las(join('public', b))).digest('hex')).get(b)!;
     return utan.map((k) => {
       const h = createHash('sha256');
-      for (const del of [...gemensamt, JSON.stringify(k), bildSumma(k.bild), bildSumma(portratt)]) h.update(del);
+      for (const del of [...gemensamt, designsystem(k.farg), JSON.stringify(k), bildSumma(k.bild), bildSumma(portratt)]) h.update(del);
       return { ...k, fil: `/delning/${k.namn}-${h.digest('hex').slice(0, 10)}.jpg` };
     });
   })();
