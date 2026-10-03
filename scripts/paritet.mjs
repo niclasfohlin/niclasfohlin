@@ -26,7 +26,7 @@ const MINST = 25;
 
 // Undantagen, med skälet. word eller utskrift: false betyder att texten inte ska stå där.
 const UNDANTAG = [
-  { vag: /^(taggar|relaterade|serie|omrade|arskurs|format|utkast|uppdaterad)(\.|$)/, word: false, utskrift: false, skal: 'register, id och datum, som sidan visar i annan form' },
+  { vag: /^(taggar|relaterade|serie|omrade|arskurs|format|utkast|uppdaterad|publicerad)(\.|$)/, word: false, utskrift: false, skal: 'register, id och datum, som sidan visar i annan form' },
   { vag: /^tranar$/, word: false, utskrift: false, skal: 'står i den generella metodens lektionsbank, inte i lektionen' },
   { vag: /^(kort|elevblad)(\.|$)/, word: false, utskrift: false, skal: 'pekar ut listor och fält; texterna prövas där de står, under ramar' },
   { vag: /^(film|filmer\.\d+)\.(titel|beskrivning)$/, word: false, utskrift: false, skal: 'filmens namn och textalternativ på skärmen; stillbildernas texter prövas' },

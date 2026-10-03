@@ -156,6 +156,9 @@ const stodundervisning = defineCollection({
       .refine((m) => m.join(', ').length <= 110, 'Faktarutans material ryms på några rader: högst 110 tecken tillsammans. Ta färre eller kortare delar.')
       .default([]),
     uppdaterad: z.coerce.date().optional(),
+    // Dagen metoden kom ut första gången. uppdaterad följer varje ändring (scripts/datumkoll.mjs), så när många metoder
+    // ändras samma dag som en ny kommer ut står den nya ändå först på startsidan (Kompissamtal 2026-10-03).
+    publicerad: z.coerce.date().optional(),
     // id på andra metoder som hör ihop med denna.
     relaterade: z.array(z.string()).default([]),
     utkast: z.boolean().default(false),

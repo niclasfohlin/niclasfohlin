@@ -25,7 +25,9 @@ export async function metoderSenaste() {
   const poster = await publicerade('stodundervisning');
   const serier = byggSerier(poster);
   const tid = (m: (typeof poster)[number]) => (serier.has(m.id) ? serieUppdaterad(serier.get(m.id)!, poster) : m.data.uppdaterad?.getTime() ?? 0);
-  return poster.filter((m) => !arLektion(m.data)).sort((a, b) => tid(b) - tid(a) || a.data.titel.localeCompare(b.data.titel, 'sv'));
+  // Samma datum: den som kom ut senast först (publicerad), så att en ny metod inte skyms när många ändras samma dag.
+  const ut = (m: (typeof poster)[number]) => m.data.publicerad?.getTime() ?? 0;
+  return poster.filter((m) => !arLektion(m.data)).sort((a, b) => tid(b) - tid(a) || ut(b) - ut(a) || a.data.titel.localeCompare(b.data.titel, 'sv'));
 }
 
 // Serierna bland de publicerade metoderna. Stoppar bygget när en lektion pekar på en serie eller förmåga som inte finns.

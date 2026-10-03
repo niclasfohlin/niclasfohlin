@@ -22,7 +22,7 @@ import { parse as parseYaml } from 'yaml';
 const rot = join(dirname(fileURLToPath(import.meta.url)), '..');
 const MAPP = 'src/content/stodundervisning';
 // Fält som inte är metodens innehåll (samma som sajtens fält i scripts/metoddiff.mjs).
-const INTE_INNEHALL = new Set(['uppdaterad', 'relaterade', 'utkast']);
+const INTE_INNEHALL = new Set(['uppdaterad', 'publicerad', 'relaterade', 'utkast']);
 const kontrollera = process.argv.includes('--kontrollera');
 
 // Dagens datum i svensk tid, som YYYY-MM-DD.

@@ -34,7 +34,7 @@ if (basFil && !existsSync(basFil)) { console.error(`metoddiff: basen ${basFil} f
 const bas = basFil ? parseYaml(readFileSync(basFil, 'utf8')) ?? {} : undefined;
 
 const FILM = new Set(['film', 'filmer']);
-const SAJTENS = new Set(['uppdaterad', 'relaterade', 'utkast']);
+const SAJTENS = new Set(['uppdaterad', 'publicerad', 'relaterade', 'utkast']);
 const visa = (x) => (x === undefined ? '(finns inte)' : typeof x === 'string' ? `”${x}”` : JSON.stringify(x));
 function skillnader(a, b, sti, ut) {
   if (JSON.stringify(a) === JSON.stringify(b)) return ut;

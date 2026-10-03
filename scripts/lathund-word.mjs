@@ -51,7 +51,7 @@ const gemensamHash = hashAv([`word-lathund, docx ${docxVersion}`, ...gemensamma.
 // överst eller en ny länk till en annan metod inte gör om lathunden (Niclas 2026-10-03: "Varför ändras lathunden av
 // datumet?"). Lathundens kod (metodpptx.ts och lathundBarn i metoddocx.ts) läser inga av fälten; läser den ett av dem
 // en dag, ändras koden och därmed den gemensamma delen, och alla lathundar görs om.
-const INTE_I_LATHUNDEN = ['uppdaterad', 'relaterade', 'utkast', 'upplagg', 'gruppen', 'principer'];
+const INTE_I_LATHUNDEN = ['uppdaterad', 'publicerad', 'relaterade', 'utkast', 'upplagg', 'gruppen', 'principer'];
 const metodKalla = (m) => { const d = { ...m.data }; for (const k of INTE_I_LATHUNDEN) delete d[k]; return Buffer.from(JSON.stringify(d)); };
 const kallHash = (m) => hashAv([gemensamHash, metodKalla(m)]);
 const lasManifest = () => { try { return JSON.parse(readFileSync(manifestFil, 'utf8')); } catch { return {}; } };
