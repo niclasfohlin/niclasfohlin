@@ -1,0 +1,744 @@
+# Metod i stödundervisning. Modellen står i sajtens src/content.config.ts och riggens kopia i build/schema.mjs.
+# Ny metod 2026-10-02 ur Niclas beskrivning i chatten (intake/kompissamtal.md). Analysen står i analys.md och
+# sökningarna i sokning.md. Området Socialt är riggens förslag till sajten (K-190).
+titel: Kompissamtal
+undertitel: Vuxenledda samtal i liten grupp där eleverna lär sig lyssna, säga hur de tänker och komma överens, för F–9
+ingress: Du leder tre till fem korta samtal med en liten grupp elever som behöver stöd i att prata och samarbeta med varandra. En talpinne visar vem som talar, och eleverna övar att säga ”jag tänker” och ”jag undrar” utan att anklaga. Varje samtal slutar med en överenskommelse som eleverna prövar i vardagen och du följer upp.
+omrade: Socialt
+arskurs:
+  - F-3
+  - 4-6
+  - 7-9
+arskursText: F–9
+taggar:
+  - socialt-samspel
+  - konflikthantering
+  - studiero
+format:
+  - liten grupp
+tid: Cirka 20 minuter per pass, ett samtal i veckan
+period: Tre till fem veckor
+grupp: Tre till sex elever
+material:
+  - en talpinne
+  - ett runt bord
+  - kort som stöd vid behov
+  - bladet Vår överenskommelse
+  - penna och papper
+  - lappar hem
+uppdaterad: 2026-10-03
+relaterade: []
+utkast: false
+inledning:
+  - Kompissamtal är en serie korta samtal där du leder en liten grupp elever som behöver stöd i att prata och samarbeta med varandra. Gruppen sitter vid ett runt bord, och en talpinne visar vem som talar. Den som håller talpinnen talar, och de andra lyssnar. Eleverna lär sig att säga vad de tänker, tror och känner utan att anklaga, och att vara nyfikna på hur kamraterna har det. Varje samtal slutar med en överenskommelse om något som gruppen ska göra annorlunda, och eleverna prövar den i leken, på rasten och i klassen före nästa samtal.
+  - Syftet är att eleverna med ord ska kunna reda ut det som skaver, också när ingen vuxen sitter bredvid. Du har fyra uppgifter. Du sätter ramarna med talpinnen och fyra samtalsregler, du modellerar startord och frågor som eleverna kan använda i samtalet och efteråt, du hjälper gruppen att komma överens om något litet som går att se, och du följer upp överenskommelsen i nästa samtal och i vardagen.
+  - Kompissamtal passar för vardagens konflikter mellan jämbördiga elever, till exempel bråk om reglerna i leken, att någon hamnar utanför eller en jargong med sänkningar. Börja med avsnittet Ett samtal på 20 minuter, och läs sedan tabellen Tre samtal. Under Så sätter du ihop gruppen står vilka elever som ska vara med, och när skolans rutin vid kränkningar går före.
+upplagg:
+  rubrik: Så fungerar insatsen
+  text: "Gruppen på tre till sex elever har tre samtal på cirka 20 minuter, ungefär ett i veckan och aldrig två dagar i rad. Varje samtal har samma fem delar: Starta, Rundan, Reda ut, Komma överens och Avsluta. Talpinnen visar vem som talar, och samtalet slutar med en överenskommelse som eleverna prövar till nästa gång. Efter samtal 3 bestämmer du om gruppen behöver ett eller två samtal till. Före samtal 1 och efter samtal 3 tittar du på gruppen under en rast och frågar varje elev för sig hur bra det fungerar i gruppen, från 0 till 10. Blir serien längre, gör du det också efter det sista."
+gruppen:
+  rubrik: Så sätter du ihop gruppen
+  text: "Gruppen är tre till sex jämbördiga elever ur samma klass eller fritidsgrupp som ofta hamnar i konflikt med varandra. Säger en elev att hen har blivit kränkt, följer du skolans rutin, och den går före kompissamtalet. Alla som är inblandade i konflikten är med, och ingen är med som hjälpare. Fråga varje elev för sig före samtal 1 om hen vill vara med. Högst var tredje elev får behöva mycket stöd i sitt beteende. Behöver fler det, säger någon nej eller är någon rädd för någon i gruppen, börja med enskilda samtal."
+tabeller:
+  - rubrik: "Tre samtal: ramarna, det vi har sett och det som håller"
+    plats: efter-tidsschema
+    meny: true
+    text: I rundan börjar du en mening, och var och en gör den färdig, så att eleverna övar ett startord i varje samtal.
+    kolumner:
+      - Samtal
+      - Det som händer
+    rader:
+      - - |-
+          1
+          Ramarna
+        - |-
+          Du visar talpinnen, läser reglerna och visar skillnaden mellan ett du-⁠budskap och ett jag-⁠budskap. Säg varför gruppen är här, utan att peka ut någon. Gruppen kommer överens om en första liten sak, och du säger vilken kamrat var och en ska lägga märke till.
+          Rundans mening är ”Jag känner mig glad när vi ___.”
+      - - |-
+          2
+          Det vi har sett
+        - |-
+          I rundan berömmer eleverna varandra. Var och en säger till sin kamrat vad hen har sett kamraten göra, och kamraten tackar. Sedan behåller ni överenskommelsen, ändrar den eller lägger till något.
+          Rundans mening är ”Jag såg att du ___.”
+      - - |-
+          3
+          Det som håller
+        - |-
+          Gruppen väljer det som ska fortsätta och bestämmer hur eleverna påminner varandra. Du ger klassläraren och fritids den överenskommelse som ska fortsätta. Efteråt frågar du var och en för sig hur bra det fungerar i gruppen, från 0 till 10.
+          Rundans mening är ”Jag tänker att det har blivit bättre när ___.”
+      - - |-
+          4–5
+          Vid behov
+        - Blir det fyra samtal, avslutar du serien i samtal 4 på samma sätt som i samtal 3. Blir det fem, följer du upp i samtal 4 som i samtal 2 och avslutar serien i samtal 5. Rundans mening är densamma som i samtal 2 när du följer upp, och som i samtal 3 när du avslutar.
+    not: Avsluta serien efter samtal 3 när elevernas siffror har stigit och de vuxna ser att överenskommelsen håller. Går det åt rätt håll men överenskommelsen håller inte än, boka ett eller två samtal till. Har inget ändrats efter samtal 3, eller efter det sista samtalet, ta upp gruppen med elevhälsan.
+  - rubrik: "Lärarens samtalstekniker: så gör du och så låter det"
+    plats: efter-steg
+    meny: true
+    text: De åtta teknikerna är de viktigaste för dig som leder samtalet. Öva en eller två i taget. Eleverna lär sig också kamratspeglingen och jag-⁠budskapet, så modellera dem först. Tabellen står också på kortet Samtalsteknikerna, som du kan ha i handen.
+    kolumner:
+      - Teknik
+      - Så gör du
+      - Så låter det
+    rader:
+      - - "Modellera"
+        - "Säg rundans mening eller ett jag-⁠budskap själv först, och håll det kort, så att eleverna hör hur det låter."
+        - "”Jag känner mig glad när vi leker.”"
+      - - "Öppna frågor"
+        - "Börja frågorna med vad eller hur, och vänta på svaret. Fråga aldrig varför någon gjorde något."
+        - "”Vad hände?” ”Vad tänkte du då?” ”Hur kändes det?”"
+      - - "Spegla"
+        - "Säg med egna ord det eleven sa och hur det kändes, och fråga om det stämmer."
+        - "”Du blev arg när Elsa ropade fusk. Stämmer det?”"
+      - - "Kamratspegling"
+        - "Be en elev säga med egna ord vad kamraten sa, innan hen svarar själv."
+        - "”Kan du säga med egna ord vad Omar sa?”"
+      - - "Säg önskan bakom"
+        - "När eleverna anklagar varandra, säg vad var och en själv vill."
+        - "”Du vill att det ska vara rättvist.” ”Och du vill veta var linjen går.”"
+      - - "Sammanfatta"
+        - "Säg kort vad var och en har sagt, utan att döma, och fråga om något saknas."
+        - "”Omar blev arg, och Elsa tänker att linjen inte var bestämd. Har jag missat något?”"
+      - - "Fråga när det gick bra"
+        - "Fråga när det har gått bättre och vad eleverna gjorde då, och fråga om de kommer på något mer."
+        - "”När gick det bättre? Vad gjorde ni då? Något mer?”"
+      - - "Rulla med motståndet"
+        - "Argumentera inte. Säg med egna ord vad eleverna sa, och säg att det är de som bestämmer vad de ska göra."
+        - "”Ni tycker att det fungerar som det är. Det är ni som bestämmer.”"
+  - rubrik: "Så kan eleverna säga: startorden"
+    plats: efter-steg
+    text: Du modellerar startorden, och eleverna lär sig använda dem i samtalet och efteråt. Läs dem högt i samtal 1, och gör rundans mening färdig själv först, så att eleverna hör hur startordet låter. Ge en elev de andra startorden när hen behöver dem. Ta fram kortet Så kan du säga när någon behöver se orden, och kortet Peka på känslan när någon inte riktigt vet hur hen känner sig.
+    kolumner:
+      - Startord
+      - När eleven säger det
+      - Till exempel
+    rader:
+      - - |-
+          Jag tänker att ___
+          Jag tror att ___
+        - När eleven säger vad hen tänker eller tror om det som hände.
+        - ”Jag tänker att vi inte hade bestämt var linjen gick.” ”Jag tror att du inte såg mig.”
+      - - Jag känner mig ___ när ___
+        - När eleven säger hur det kändes.
+        - ”Jag känner mig ensam när ingen passar.”
+      - - När du ___, känner jag mig ___
+        - När eleven säger till en kamrat vad kamraten gjorde och hur det kändes.
+        - ”När du ropar fusk, känner jag mig arg.”
+      - - Jag undrar ___
+        - När eleven frågar hur kamraten tänker och känner, eller undrar om kamraten gjorde det med flit.
+        - ”Jag undrar hur det är för dig, Liam.” ”Jag undrar om du menade det.”
+      - - Jag förstår ___, och jag ___
+        - När eleven visar att hen förstår kamraten och säger vad hen själv vill.
+        - ”Jag förstår att du ville vinna, och jag vill att alla får vara med.”
+      - - Jag såg att du ___
+        - När eleven ger beröm och säger vad kamraten gjorde.
+        - ”Jag såg att du frågade Liam om han ville vara med.”
+      - - Tack för ___
+        - När eleven tackar och säger vad hen tackar för.
+        - ”Tack för att du lyssnade på mig.”
+    not: Också en anklagelse kan börja med ordet jag, som ”Jag tänker att du är elak” eller ”Jag undrar varför du alltid förstör”. Säg då vad eleven själv vill, som ”Du vill få vara med”, och låt hen säga hur det kändes, som ”När du sa att jag inte fick vara med, kände jag mig ledsen.” Tror eleven att kamraten gjorde det med flit, kan hen fråga ”Jag undrar om du menade det.” De äldre kan också be om något, som ”Kan du fråga mig innan du tar bollen?”
+  - rubrik: "Överenskommelsen: tre krav"
+    plats: efter-steg
+    text: En överenskommelse är något som gruppen bestämmer sig för att göra till nästa samtal. Det kan vara ett nytt beteende, ett nytt sätt att samarbeta eller något att tänka på, och gruppen skriver den som det eleverna ska göra. Gruppen föreslår och väljer, och du prövar varje förslag mot de tre kraven innan en elev skriver det på bladet.
+    kolumner:
+      - Kravet
+      - Du frågar
+      - Till exempel
+    rader:
+      - - Det går att se eller höra
+        - ”Hur ser det ut när ni gör det?”
+        - ”Innan matchen bestämmer vi var linjerna går.”
+      - - Det säger vad ni gör
+        - ”Vad gör ni i stället?”
+        - ”I chatten skriver vi bara sådant som vi kan säga när alla hör.”
+      - - Alla kan säga ja
+        - "”Kan alla göra det här? Visa med tummen.” Fråga den som visar tummen åt sidan: ”Vad behövs för att du ska kunna säga ja?”"
+        - ”Vi turas om att välja lek på rasten.”
+    not: "En elev skriver gruppens överenskommelse på bladet, under Det här gör vi. I sista varvet säger var och en vad hen själv ska göra till nästa gång, och du skriver det på bladet med elevens namn. Säg sist: ”Fungerar det inte, pratar vi om det nästa gång.”"
+  - rubrik: "Så anpassar du för åldern"
+    plats: efter-steg
+    kolumner:
+      - Stadium
+      - Samtalet och språket
+      - Överenskommelsen
+    rader:
+      - - F–3
+        - Ett litet gosedjur kan vara talpinne. Visa reglerna med en rörelse, som att peka på öronen, och läs korten högt när du tar fram dem. Säg ”Inget elakt” i stället för ”Inga sänkningar”. Ha kortet Peka på känslan till hands, och låt eleven peka eller välja mellan två ord du säger. På frågan hur bra det fungerar visar de yngsta med fingrarna på en hand.
+        - Gruppen kommer överens om en sak och visar den med en rörelse. Du skriver det eleverna säger.
+      - - 4–6
+        - Använd talpinnen och reglerna som de står, och korten när någon behöver dem.
+        - En elev skriver överenskommelsen på bladet.
+      - - 7–9
+        - Talpinnen kan vara en sten eller en pinne. Eleverna säger reglerna på sitt eget sätt och använder egna ord för känslor. De kan ha kortet Så kan du säga som ett foto i mobilen. I samtal 1 kan rundans mening vara ”Jag tänker att det bästa med gruppen är ___.”
+        - Eleverna skriver den med egna ord, och den kan också gälla lektionerna och chatten. Du ger den till mentorn och ämneslärarna.
+  - rubrik: "Mellan samtalen: så använder eleverna det de har lärt sig"
+    plats: efter-arbetsform
+    meny: true
+    text: Det eleverna lär sig i samtalet ska de använda i leken, på rasten och i klassen. Därför har alla runt gruppen en uppgift mellan samtalen.
+    kolumner:
+      - Vem
+      - Mellan samtalen
+    rader:
+      - - Eleverna
+        - Prövar överenskommelsen. Var och en lägger märke till vad hens kamrat gör, så att hen kan berätta om det i nästa samtal.
+      - - Klassläraren
+        - Pekar på kortet Så kan du säga minst en gång om dagen, när något skaver, och frågar ”Hur kan du säga det i stället?” Säger vad hen ser, som ”Jag såg att du frågade Liam.”
+      - - De vuxna på rasten och fritids
+        - Får överenskommelsen och kortet. Säger till eleverna vad de ser, och berättar det också för dig.
+      - - Vårdnadshavarna
+        - Får lappen hem efter varje samtal och frågar sitt barn hur det går.
+      - - Du
+        - Frågar de vuxna vad de har sett, och tar med det till nästa samtal.
+  - rubrik: "Om något händer i gruppen"
+    plats: efter-fastnar
+    kolumner:
+      - Det som händer
+      - Så gör du
+    rader:
+      - - Någon avbryter eller talar utan talpinnen
+        - Ta lugnt talpinnen en stund och fråga ”Vad säger vår första regel?” Ge den sedan tillbaka till eleven som hade den.
+      - - Någon säger inget eller hittar inte orden
+        - Vänta. Låt eleven stå över, och fråga igen när varvet är klart. Den som behöver får säga en mening i taget med kortet Så kan du säga som stöd, välja mellan två ord, som ”Blev du mest ledsen eller mest arg?”, eller visa på kortet Peka på känslan.
+      - - Några tar över samtalet
+        - Låt talpinnen gå ett varv till, så att alla hörs. Säg ”Nu vill jag höra alla.”
+      - - Någon skämtar om någon, himlar med ögonen eller säger ”Det var bara skämt”
+        - Fråga ”Vad säger vår tredje regel?” En min kan också vara en sänkning. Fråga den det gällde hur det kändes.
+      - - Någon säger ”Han började!” eller ”Ja men du då?”, eller vill att du ska döma och straffa en kamrat
+        - Säg lugnt att ni inte behöver vara överens om vad som hände, och att ingen får straff i samtalet. Säg vad var och en vill, som ”Du vill att det ska vara rättvist.” Fråga sedan ”Vad skulle vara rättvist nästa gång?”
+      - - Överenskommelsen höll inte
+        - Fråga ”Hur har ni ändå klarat er?” Låt eleverna berätta vad som hände utan att säga namn. Välj tillsammans något mindre att pröva, eller ändra överenskommelsen.
+      - - Någon har inget beröm att ge
+        - Fråga ”Vad såg du hen göra förra gången, här vid bordet?” Berätta också vad de vuxna har sett, så att alla får beröm.
+      - - Någon blir arg eller ledsen
+        - Gör en paus. Lägg ned talpinnen, ta ett lugnt andetag och fråga vad eleven behöver. Kommer gruppen in upprörd eller blir det inte lugnt, avbryt samtalet och boka en ny tid.
+      - - Gruppen är inte redo att komma överens
+        - Argumentera inte. Säg med egna ord det eleverna sa, och säg att det är de själva som bestämmer vad de ska göra. Det kallas att rulla med motståndet. Be dem lägga märke till någon gång när det går lite bättre, och boka nästa samtal ändå.
+      - - En elev berättar om en kränkning
+        - Avbryt samtalet lugnt, prata med eleven för sig och följ skolans rutin. Den går före kompissamtalet.
+principer:
+  rubrik: Tre saker att hålla fast vid
+  text: "Samtala när alla är lugna, eftersom det går bäst att lösa problem då, och aldrig mitt i ett bråk. Ett bråk tar den vuxna som är där hand om direkt. Var varken polis eller domare, och stötta elevernas språk: ta emot känslan, fråga vad som ska hända nu, modellera startorden och låt eleverna prata direkt med varandra. Och följ alltid upp. Eleverna prövar överenskommelsen mellan samtalen, och varje samtal börjar med det som har hänt sedan sist."
+passrutin:
+  kallas: delar
+  text: "Varje samtal följer samma rutin i fem delar. Det gör samtalet tryggt för eleverna och lätt att leda. De fyra samtalsreglerna är numrerade på kortet Våra samtalsregler: 1 ”En i taget”, 2 ”Vi lyssnar på varandra”, 3 ”Inga sänkningar” och 4 ”Vi får stå över”."
+  steg:
+    - text: Du hälsar välkommen, och gruppen säger de fyra samtalsreglerna.
+      fas: Starta
+    - text: Du gör rundans mening färdig först, och sedan går talpinnen ett varv så att var och en gör den färdig.
+      fas: Rundan
+    - text: Den som vill tala tar talpinnen, och du ställer frågor och hjälper eleverna att hitta orden.
+      fas: Reda ut
+    - text: Gruppen föreslår vad den vill pröva till nästa gång, väljer ett förslag och skriver ned det.
+      fas: Komma överens
+    - text: Talpinnen går ett sista varv, och var och en säger vad hen själv ska göra till nästa gång och tackar någon.
+      fas: Avsluta
+  efterPasset: Du fyller i snabbmallen och lapparna hem. Sedan berättar du för klassläraren och för de vuxna på rasten och på fritids vad gruppen har kommit överens om.
+tidsschema:
+  rubrik: Ett samtal på 20 minuter
+  text: Förbered dig genom att läsa förra överenskommelsen och rundans mening i tabellen Tre samtal.
+  rader:
+    - tid: Före passet
+      fas: Förberedelse
+      vad: Ställ stolarna runt bordet och bestäm var eleverna ska sitta. Lägg talpinnen mitt på bordet, och ha korten, bladet Vår överenskommelse, en penna och papper för förslagen till hands. Hämta gruppen, eller se till att en vuxen följer den till rummet.
+    - tid: 0–4 min
+      fas: Starta
+      vad: I samtal 1 visar du talpinnen, läser reglerna och säger ett du-⁠budskap och ett jag-⁠budskap, så att eleverna hör skillnaden. Sedan säger gruppen reglerna själv. Säg varje gång att det ni berättar stannar i rummet.
+    - tid: 4–7 min
+      fas: Rundan
+      vad: Säg rundans mening och gör den färdig själv först. Håll ditt svar kort. Den som står över får frågan igen när varvet är klart.
+    - tid: 7–13 min
+      fas: Reda ut
+      vad: Lägg talpinnen mitt på bordet. Nicka åt den som har sagt minst av dem som räcker upp handen. I samtal 2 börjar du med vad som har blivit bättre, och i samtal 3 med det som ska fortsätta.
+    - tid: 13–17 min
+      fas: Komma överens
+      vad: Gruppen föreslår vad den vill pröva och väljer ett förslag, och en elev skriver det på bladet. Pröva förslagen mot de tre kraven (tabellen Överenskommelsen). Är gruppen inte redo att komma överens, argumentera inte (se Om något händer i gruppen).
+    - tid: 17–20 min
+      fas: Avsluta
+      vad: Var och en säger vad hen själv ska göra till nästa gång och tackar någon, och du skriver det på bladet tillsammans med tiden för nästa samtal. Se till att alla får ett tack. I samtal 1 säger du vilken kamrat var och en ska lägga märke till fram till nästa samtal, så att alla har någon som lägger märke till dem.
+  efter: Med fem eller sex elever räcker inte tiden i samtal 1, eftersom reglerna och det sista varvet tar längre tid. Då har Starta 0–⁠5 min, Rundan 5–⁠9 min, Reda ut 9–⁠13 min, Komma överens 13–⁠16 min och Avsluta 16–⁠20 min. Blir gruppen klar tidigt, låt talpinnen gå ett varv till med frågan ”Vad var bra i dag?”
+steg:
+  rubrik: "Samtalets fem delar: vad du gör och säger"
+  text: Delarna är desamma i varje samtal. Fraserna är frågor och meningar du kan säga. Välj en eller två i taget, och vänta på svaret.
+  fraserRubrik: Du kan säga
+  rader:
+    - namn: Starta
+      fraga: Hur pratar vi med varandra här?
+      gor: Hälsa välkommen. I samtal 1 visar du talpinnen, läser reglerna och visar skillnaden mellan ”Du är dum” och ”När du säger så, känner jag mig ledsen”. Sedan säger gruppen reglerna själv. Säg vad ni ska prata om och att ni inte letar efter vem som har gjort fel. Peka inte ut någon.
+      fraser:
+        - Den som håller i talpinnen pratar, och vi andra lyssnar.
+        - Jag får prata utan talpinnen när jag behöver föra samtalet vidare.
+        - Det vi berättar här stannar här. Men det vi kommer överens om får de vuxna i skolan och era familjer veta.
+        - Ni ses varje dag i skolan. Här letar vi inte efter vem som har gjort fel. Vi pratar om hur ni vill ha det.
+    - namn: Rundan
+      fraga: Vem talar nu?
+      gor: Säg rundans mening och gör den färdig själv först. Låt talpinnen gå ett varv. Den som står över får frågan igen när varvet är klart. En runda kan också gälla hur var och en känner sig i dag, med kortet Peka på känslan som stöd.
+      fraser:
+        - Jag börjar. Jag känner mig glad när vi spelar kort på rasten.
+        - Du får stå över, så kommer talpinnen tillbaka till dig sedan.
+        - Hur känner du dig i dag? Du kan peka på kortet om du vill.
+        - Vad såg du hen göra? Säg det till hen.
+    - namn: Reda ut
+      fraga: Vad hände, och hur kändes det?
+      gor: Fråga vad som hände och hur det kändes. Säg med egna ord det eleven sa, och fråga om det stämmer. Börjar eleverna anklaga varandra, säg vad var och en vill. Hjälp eleverna att prata direkt med varandra, och modellera hur det kan låta. Sammanfatta till sist vad var och en har sagt, och fråga om du har missat något.
+      fraser:
+        - Vad hände? Vad tänkte du då?
+        - Du blev arg när Elsa ropade fusk. Stämmer det?
+        - Kan du säga med egna ord vad Omar sa?
+        - Säg det till den det gäller.
+        - Hur tror du att det kändes för hen?
+        - Vad har blivit bättre sedan sist?
+    - namn: Komma överens
+      fraga: Vad gör vi till nästa gång?
+      gor: Låt gruppen komma med förslag, och skriv upp alla utan att värdera dem. Välj ett tillsammans och pröva det mot de tre kraven. I samtal 2 bestämmer ni om ni ska behålla överenskommelsen, ändra den eller lägga till något. I samtal 3 bestämmer ni vad som ska fortsätta och hur ni ska påminna varandra om det.
+      fraser:
+        - När gick det bättre? Vad gjorde ni då?
+        - Vad kan ni göra annorlunda till nästa gång?
+        - Hur ser det ut när ni gör det?
+        - Kan alla göra det här? Visa med tummen.
+        - Fungerar det inte, pratar vi om det nästa gång.
+    - namn: Avsluta
+      fraga: Vad tar du med dig?
+      gor: Låt talpinnen gå ett sista varv. Var och en säger vad hen själv ska göra till nästa gång och tackar någon för något särskilt. Skriv upp det var och en ska göra och tiden för nästa samtal på bladet. I samtal 1 säger du vilken kamrat var och en ska lägga märke till fram till nästa samtal.
+      fraser:
+        - Vad gör du själv till nästa gång?
+        - Vem vill du tacka, och för vad?
+        - Tack för att du lyssnade på mig.
+        - Till nästa gång lägger du märke till vad Omar gör.
+arbetsform:
+  rubrik: "Arbetsform: läraren leder, i tur och ordning, fritt med talpinnen"
+  text: Ni sitter runt bordet hela samtalet. Först leder du, sedan går talpinnen ett varv, och i mitten av samtalet tar den som vill tala talpinnen. Sist går talpinnen ett varv till, så att alla får säga något innan ni går.
+  delar:
+    - rubrik: 1. Läraren leder
+      text: du visar, och gruppen säger reglerna
+      faser:
+        - Starta
+    - rubrik: 2. I tur och ordning
+      text: du börjar, och sedan gör alla meningen färdig
+      faser:
+        - Rundan
+    - rubrik: 3. Fritt med talpinnen
+      text: den som vill tala räcker upp handen
+      faser:
+        - Reda ut
+        - Komma överens
+    - rubrik: 4. I tur och ordning igen
+      text: var och en säger vad hen ska göra och tackar någon
+      faser:
+        - Avsluta
+exempel:
+  valt:
+    rubrik: Gruppen
+    text: Elsa, Omar, Liam och Noor i åk 4 spelar fotboll på rasterna, och det slutar ofta i bråk om reglerna. Liam hamnar ibland utanför. Exemplet är samtal 1.
+  text:
+    - Läraren har bokat tre tisdagar och pratat kort med var och en. Alla ville vara med. Liam sa att han ibland inte får bollen, men att ingen är elak mot honom. Han ville att de skulle prata om det tillsammans. Läraren frågade också hur bra det fungerar i gruppen, från 0 till 10, och eleverna svarade 2, 3, 4 och 5. Talpinnen ligger mitt på det runda bordet, korten och bladet Vår överenskommelse finns till hands, och läraren har bestämt att Omar och Elsa inte sitter bredvid varandra.
+    - "Läraren håller upp talpinnen: ”Den som håller i talpinnen pratar, och vi andra lyssnar.” Läraren läser de fyra samtalsreglerna och frågar hur det ser ut och låter när man följer varje regel. Om regeln Vi lyssnar på varandra säger Noor: ”Man tittar mot den som pratar.” Läraren tar fram kortet Så kan du säga och läser startorden. Hen säger ”Du är dum” och sedan ”När du säger så, känner jag mig ledsen”, och frågar vilket som är lättast att lyssna på. Läraren fortsätter: ”Det ni berättar här stannar här, men det vi kommer överens om får de vuxna i skolan och era familjer veta. Ni spelar fotboll ihop, och ibland blir det bråk. Vi letar inte efter vem som har gjort fel. I dag pratar vi om hur ni vill ha det.”"
+    - "Rundans mening är ”Jag känner mig glad när vi ___.” Läraren gör den färdig först: ”Jag känner mig glad när vi leker.” Sedan säger Elsa ”Jag känner mig glad när vi vinner.” Liam står över. När varvet är klart frågar läraren igen, och Liam säger ”Jag känner mig glad när alla får passa.”"
+    - "Läraren lägger talpinnen mitt på bordet. Omar räcker upp handen, får en nick och tar talpinnen: ”Elsa skriker alltid fusk!” Läraren säger: ”Du blev arg när Elsa ropade fusk. Stämmer det?” Omar nickar. Läraren tar fram kortet igen, och Omar säger till Elsa: ”När du ropar fusk, känner jag mig arg.” Elsa tar talpinnen: ”Jag tänker att vi inte hade bestämt var linjen gick.” Noor säger: ”Jag undrar hur det är för dig, Liam.” Liam säger: ”Jag känner mig ensam när ingen passar.”"
+    - "Läraren frågar: ”Vad kan ni göra annorlunda till nästa gång?” Gruppen kommer med tre förslag, och läraren skriver upp dem. De väljer: ”Innan matchen bestämmer vi var linjerna går.” Läraren frågar hur det ser ut när de gör det, och Noor säger: ”Vi går runt planen och pekar.” Läraren frågar: ”Kan alla göra det här?” Alla visar tummen upp, och Elsa skriver överenskommelsen på bladet."
+    - "I sista varvet säger var och en vad hen själv ska göra till nästa gång och tackar någon, och läraren skriver det på bladet. Omar säger: ”Jag frågar Liam om han vill vara med.” Noor säger: ”Jag passar till den som är fri. Tack, Liam, för att du berättade.” Läraren säger vilken kamrat var och en ska lägga märke till, och Noor ska se vad Omar gör. Efteråt skriver läraren i snabbmallen att alla talade, att Omar sa sitt första jag-⁠budskap med kortet som stöd och att Liam stod över i rundan men sa mer längre fram i samtalet. Läraren ger alla fyra lappen hem och berättar för de vuxna på rasten vad gruppen har kommit överens om."
+fastnar:
+  rubrik: När samtalet kör fast
+  text: När en elev anklagar en kamrat, tystnar eller inte hittar orden, behöver hen ditt stöd som mest. Ta emot känslan först. Ge sedan minsta möjliga stöd, så att eleven hittar orden själv.
+  fragaForst:
+    - Vad hände?
+    - Vad tänkte du då?
+    - Hur kändes det?
+  trappa:
+    - Säg med egna ord det eleven sa, och fråga ”Stämmer det?”
+    - Säger eleven hur kamraten är, säg vad eleven själv vill, som ”Du vill få vara med.”
+    - Säg början på meningen, som ”När du”. Behöver eleven se orden, ta fram kortet Så kan du säga.
+    - Ge två ord att välja mellan, som ”Blev du mest ledsen eller mest arg?”
+    - Säg själv det jag-⁠budskap som eleven kanske menar, och fråga ”Är det så?”
+  motto: Ta emot känslan först. Orden kommer sedan.
+roll:
+  rubrik: "Lärarens roll: leda utan att döma"
+  text: Du leder samtalet och håller ramarna, men du är varken polis eller domare. Eleverna vill ofta att du ska säga vem som har rätt, och att den som har gjort fel ska få ett straff. Det är inte samtalets syfte. Eleverna behöver inte vara överens om vad som hände. Det de ska komma överens om är vad de gör nu. Den som leder är en vuxen som eleverna känner och som inte är inblandad i bråket. Det kan vara en fritidspedagog, elevassistent, kurator, lärare eller speciallärare. Lyssna mer än du talar, och visa själv hur ett jag-⁠budskap låter.
+  gor:
+    - Gör rundans mening färdig själv först, och håll det kort.
+    - Låt eleverna prata direkt med varandra.
+    - Använd samtalsteknikerna, en eller två i taget (tabellen Lärarens samtalstekniker).
+    - Beröm när eleverna använder startorden, som ”Du sa ’när du’ och berättade hur det kändes.”
+    - Fråga om gruppen vill höra ett förslag innan du kommer med ett, och låt gruppen avgöra.
+    - Följ upp överenskommelsen varje gång.
+  undvik:
+    - Att döma, ta parti eller bestämma straff.
+    - Att säga vem som har mer eller mindre rätt, också i förbigående, som ”Där har du rätt.”
+    - Att fråga ”Vem började?” eller ”Varför gjorde du så?” Fråga ”Vad hände?”
+    - Att kräva ett jag-⁠budskap av en elev som är upprörd.
+    - Att skriva överenskommelsen åt gruppen.
+    - Att föreläsa om hur man ska vara.
+hem:
+  rubrik: Hem och skola
+  text:
+    - Vårdnadshavarna får två slags lappar. Före samtal 1 skickar du hem en lapp om vad kompissamtal är och att eleven är med. Efter varje samtal fyller du i en lapp till varje elev med det gruppen har kommit överens om och det eleven själv ska göra, och ger lappen till eleven samma dag. Då kan vårdnadshavarna fråga hur det går och lägga märke till det som fungerar. Det kamraterna har sagt stannar i rummet. Båda lapparna finns i planeringsmallarna.
+uppfoljning:
+  text: Du behöver veta om samtalen gör skillnad utanför rummet. Titta på gruppen under en rast och fråga varje elev hur bra det fungerar, både före samtal 1 och efter samtal 3, och skriv det i snabbmallen.
+  rader:
+    - nar: Före samtal 1
+      vad: "Titta på gruppen under en rast, och räkna bråken, sänkningarna och hur ofta någon hamnar utanför. Fråga varje elev för sig: ”Hur bra fungerar det i gruppen, från 0 till 10?”"
+    - nar: I varje samtal
+      vad: Skriv vilka jag-⁠budskap och du-⁠budskap du hörde, vem som avbröt och vem som stod över. Fråga de vuxna runt gruppen vad de har sett.
+    - nar: Efter samtal 3
+      vad: Räkna samma saker under en rast, och fråga varje elev igen. Jämför med det du fick före samtal 1, och bestäm om gruppen behöver ett eller två samtal till.
+    - nar: Fyra veckor efter sista samtalet
+      vad: Fråga gruppen om överenskommelsen håller och om de använder startorden. Har det blivit sämre, påminn gruppen om den.
+mal:
+  punkter:
+    - Lyssna på den som talar utan att avbryta
+    - Säga vad hen tänker och känner med ett jag-⁠budskap
+    - Fråga en kamrat om hens tankar och känslor med ”Jag undrar”
+    - Beskriva något bra som en kamrat har gjort
+    - Komma överens om något som går att se, och göra det
+    - Använda startorden i leken, på rasten och i klassen
+snabbmall:
+  text: Fyll i den före och efter varje samtal. Det du skriver efteråt styr nästa samtal. Siffrorna från 0 till 10 och det du räknar på rasten skriver du i raden Det du och de vuxna har sett.
+  fore:
+    - Förra överenskommelsen
+    - Det du och de vuxna har sett
+    - Platserna runt bordet
+  efter:
+    - Överenskommelsen och det var och en ska göra
+    - Budskapen och avbrotten, och vem som behöver mer stöd
+checklista:
+  rubrik: Checklista inför samtal 1
+  punkter:
+    - Valt jämbördiga elever, och följt skolans rutin först om någon har blivit kränkt.
+    - Frågat varje elev om hen vill vara med, vad som skulle göra det lättare och hur bra det fungerar i gruppen, från 0 till 10.
+    - Räknat bråken, sänkningarna och hur ofta någon hamnar utanför under en rast.
+    - Skickat lappen hem före samtal 1.
+    - Bokat rummet och tre tider, ungefär en i veckan.
+    - Berättat om samtalen för de vuxna runt gruppen, och skrivit ut korten och bladet.
+grund:
+  text: I Bergmans kompissamtal sitter hela klassen i ring en gång i veckan, och en i taget berättar om veckans konflikter medan de andra lyssnar (Bergman, 2004). I den här metoden samtalar en liten grupp på samma sätt. Undervisning i socialt och emotionellt lärande stärker elevernas färdigheter och minskar beteendeproblemen, mest när eleverna övar själva, steg för steg (Durlak m.fl., 2011). Ingen har prövat delarna var för sig (EEF, 2021). Jag-⁠budskap väcker mindre fientlighet än du-⁠budskap (Kubany m.fl., 1992), särskilt när den som talar också visar att hen förstår den andra (Rogers m.fl., 2018). Du håller samtalen när eleverna är lugna, eftersom det går bäst att lösa problem då (EEF, 2021). Du följer också upp samtalen i vardagen, eftersom det eleverna övar på särskilda lektioner annars tycks gälla bara där (Skolverket, 2011).
+  kallor: Bygger på Bergman (2004), Durlak m.fl. (2011), EEF (2021), Kubany m.fl. (1992), Rogers m.fl. (2018) och Skolverket (2011).
+ramar:
+  rubrik: Material att skriva ut
+  text:
+    - Korten är stöd som du tar fram när du ser att någon behöver dem. Samtalet, reglerna och det du modellerar kommer först. Skriv ut korten på A4, en uppsättning till varje grupp, och laminera dem gärna. Klipp bort rutan Till läraren innan du lägger ett kort i en bänk eller sätter upp det på väggen. Skriv också ut kortet Så kan du säga till varje elevs bänk, till väggen i klassrummet och till de vuxna runt gruppen, och ett extra kort Våra samtalsregler till väggen. Till varje samtal skriver du ut ett nytt blad Vår överenskommelse, och till varje elev de två lapparna hem. Kortet Samtalsteknikerna är bara för dig.
+  ramar:
+    - rubrik: Våra samtalsregler
+      text:
+        - Ta fram kortet när ni går igenom reglerna i samtal 1 och när gruppen behöver påminnas.
+      listor:
+        - rubrik: Våra samtalsregler
+          rader:
+            - - 1. En i taget.
+              - Den som har talpinnen talar.
+            - - 2. Vi lyssnar på varandra.
+              - Vi tittar mot den som talar.
+            - - 3. Inga sänkningar.
+              - Det gäller både ord och miner.
+            - - 4. Vi får stå över.
+              - Talpinnen kommer tillbaka.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så använder du kortet
+              text: I samtal 1 läser du reglerna och frågar för varje regel hur det ser ut och låter när någon följer den. Att titta mot den som talar betyder att vända sig mot hen. Ingen behöver se hen i ögonen. De yngsta visar varje regel med en rörelse. I de andra samtalen säger gruppen reglerna själv.
+            - rubrik: Det som stannar i rummet
+              text: Säg i början av varje samtal att det någon berättar stannar här, men att de vuxna och hemmet får veta vad ni har kommit överens om. Du kan inte lova att hålla tyst om någon far illa.
+    - rubrik: Så kan du säga
+      text:
+        - Ta fram kortet när en elev behöver se orden. Varje elev kan ha en kopia i bänken.
+      listor:
+        - rubrik: Så kan du säga
+          rader:
+            - - Jag tänker att ___
+            - - Jag tror att ___
+            - - Jag känner mig ___ när ___
+            - - När du ___, känner jag mig ___
+            - - Jag undrar ___
+            - - Jag förstår ___, och jag ___
+            - - Jag såg att du ___
+            - - Tack för ___
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så använder du kortet
+              text: Läs startorden högt i samtal 1. Gör rundans mening färdig själv först, så att eleverna hör hur den låter. De andra startorden ger du en elev när hen behöver dem. Exemplen står i tabellen Så kan eleverna säga.
+            - rubrik: Utanför samtalet
+              text: Ge en kopia till varje elev, till klassläraren och till de vuxna på rasten och fritids. Klassläraren och de vuxna pekar på kortet när det skaver och frågar ”Hur kan du säga det i stället?”
+    - rubrik: Peka på känslan
+      text:
+        - Ta fram kortet när en elev inte riktigt vet hur hen känner sig.
+      listor:
+        - rubrik: Peka på känslan
+          bilder: true
+          rader:
+            - - glad
+              - lugn
+              - trygg
+            - - stolt
+              - tacksam
+              - nöjd
+            - - ledsen
+              - arg
+              - rädd
+            - - orolig
+              - besviken
+              - ensam
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så använder du kortet
+              text: Eleven pekar, och ni säger hela meningen tillsammans, som ”Jag känner mig orolig.”
+    - rubrik: Samtalsteknikerna
+      text:
+        - Det här kortet är ditt. Ha det i handen under samtalet, eller läs det före.
+      oversikt:
+        kolumner:
+          - Teknik
+          - Så gör du
+          - Så låter det
+        rader:
+          - - "Modellera"
+            - "Säg rundans mening eller ett jag-⁠budskap själv först, och håll det kort, så att eleverna hör hur det låter."
+            - "”Jag känner mig glad när vi leker.”"
+          - - "Öppna frågor"
+            - "Börja frågorna med vad eller hur, och vänta på svaret. Fråga aldrig varför någon gjorde något."
+            - "”Vad hände?” ”Vad tänkte du då?” ”Hur kändes det?”"
+          - - "Spegla"
+            - "Säg med egna ord det eleven sa och hur det kändes, och fråga om det stämmer."
+            - "”Du blev arg när Elsa ropade fusk. Stämmer det?”"
+          - - "Kamratspegling"
+            - "Be en elev säga med egna ord vad kamraten sa, innan hen svarar själv."
+            - "”Kan du säga med egna ord vad Omar sa?”"
+          - - "Säg önskan bakom"
+            - "När eleverna anklagar varandra, säg vad var och en själv vill."
+            - "”Du vill att det ska vara rättvist.” ”Och du vill veta var linjen går.”"
+          - - "Sammanfatta"
+            - "Säg kort vad var och en har sagt, utan att döma, och fråga om något saknas."
+            - "”Omar blev arg, och Elsa tänker att linjen inte var bestämd. Har jag missat något?”"
+          - - "Fråga när det gick bra"
+            - "Fråga när det har gått bättre och vad eleverna gjorde då, och fråga om de kommer på något mer."
+            - "”När gick det bättre? Vad gjorde ni då? Något mer?”"
+          - - "Rulla med motståndet"
+            - "Argumentera inte. Säg med egna ord vad eleverna sa, och säg att det är de som bestämmer vad de ska göra."
+            - "”Ni tycker att det fungerar som det är. Det är ni som bestämmer.”"
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så använder du kortet
+              text: Välj en eller två tekniker att öva på i varje samtal, och skriv i snabbmallen hur det gick.
+    - rubrik: Vår överenskommelse
+      text:
+        - Ni fyller i bladet under samtalet och läser det i början av nästa samtal.
+      huvud:
+        - rubrik: Datum
+      delar:
+        - rubrik: Till nästa samtal
+          falt:
+            - rubrik: Det här gör vi
+              text: ""
+            - rubrik: Det här gör var och en
+              text: ""
+            - rubrik: Vem lägger märke till vem?
+              text: ""
+            - rubrik: Nästa samtal
+              text: ""
+    - rubrik: Lappen hem före samtal 1
+      text:
+        - Varje elev tar med sig lappen hem före samtal 1.
+      huvud:
+        - rubrik: Namn
+      delar:
+        - rubrik: Till vårdnadshavaren
+          falt:
+            - rubrik: Kompissamtal
+              text: Ditt barn ska ha kompissamtal tillsammans med några kamrater från klassen eller fritids. Gruppen träffas ungefär en gång i veckan, cirka 20 minuter varje gång. Det blir tre gånger, ibland fyra eller fem. Barnen övar på att lyssna på varandra, säga vad de tänker och känner utan att anklaga varandra, och komma överens om något de ska göra annorlunda. Ingen pekas ut i samtalen.
+            - rubrik: Så kan du stötta ditt barn
+              text: Efter varje samtal får du en lapp med det gruppen har kommit överens om. Fråga gärna ditt barn hur det går, och berätta för barnet när du märker att överenskommelsen fungerar.
+            - rubrik: Första samtalet
+              text: ""
+            - rubrik: Lärare och kontakt
+              text: ""
+    - rubrik: Lappen hem efter samtalet
+      text:
+        - Läraren fyller i lappen efter samtalet, och ditt barn får den med sig hem samma dag.
+      huvud:
+        - rubrik: Namn
+      delar:
+        - rubrik: Till vårdnadshavaren
+          falt:
+            - rubrik: Vi har kommit överens om
+              text: ""
+            - rubrik: Det här gör jag
+              text: ""
+            - rubrik: Så kan du stötta ditt barn
+              text: Fråga ditt barn hur det går, och berätta för barnet när du märker att överenskommelsen fungerar.
+            - rubrik: Nästa samtal
+              text: ""
+elevblad:
+  Vår överenskommelse:
+    Det här gör vi: 4.5
+    Det här gör var och en: 7.5
+    Vem lägger märke till vem?: 3
+    Nästa samtal: 1.5
+  Lappen hem före samtal 1:
+    Första samtalet: 1.2
+    Lärare och kontakt: 2.5
+  Lappen hem efter samtalet:
+    Vi har kommit överens om: 3.5
+    Det här gör jag: 2.5
+    Nästa samtal: 1.2
+lathund:
+  innehall: Det som skaver i gruppen
+  metoden:
+    text:
+      - Du leder samtal med en liten grupp, där eleverna lär sig lyssna, säga hur de tänker och känner utan att anklaga varandra, och komma överens. Talpinnen visar vem som talar, och varje samtal slutar i en överenskommelse som gruppen prövar i vardagen.
+      - Gruppen har tre samtal, ett i veckan, och sedan ett eller två till vid behov. Före samtal 1 pratar du med varje elev, skickar lappen hem och berättar om samtalen för de vuxna runt gruppen. Säger en elev att hen har blivit kränkt, följer du skolans rutin, och den går före samtalen.
+    ruta:
+      rubrik: Tre saker att hålla fast vid
+      punkter:
+        - fet: Samtala när alla är lugna.
+          text: Ta aldrig samtalet mitt i ett bråk. Boka en tid.
+        - fet: Var varken polis eller domare.
+          text: Ta emot känslan, och fråga vad som ska hända nu.
+        - fet: Följ alltid upp överenskommelsen.
+          text: Varje samtal börjar med det som har hänt sedan sist.
+    tabell:
+      rubrik: Passet i fem delar
+      kolumner:
+        - Del
+        - Du kan säga
+      rader:
+        - - |-
+            1 · Starta
+            0–⁠4 min
+          - ”Den som håller i talpinnen pratar, och vi andra lyssnar.”
+        - - |-
+            2 · Rundan
+            4–⁠7 min
+          - ”Du får stå över, så kommer talpinnen tillbaka till dig sedan.”
+        - - |-
+            3 · Reda ut
+            7–⁠13 min
+          - |-
+            ”Vad hände? Hur kändes det?”
+            ”Du blev arg. Stämmer det?”
+        - - |-
+            4 · Komma överens
+            13–⁠17 min
+          - |-
+            ”Hur ser det ut när ni gör det?”
+            ”Kan alla göra det här?”
+        - - |-
+            5 · Avsluta
+            17–⁠20 min
+          - ”Vad gör du själv till nästa gång?”
+    not: "De fyra samtalsreglerna: 1. En i taget, den som har talpinnen talar. 2. Vi lyssnar på varandra och tittar mot den som talar. 3. Inga sänkningar, varken med ord eller miner. 4. Vi får stå över, och talpinnen kommer tillbaka."
+  pass:
+    rubrik: "Ett kompissamtal: samtal 1"
+    textRubrik: Gruppen · fyra elever i åk 4, samtal 1
+    text:
+      - Rundans mening är ”Jag känner mig glad när vi ___.” Läraren gör den färdig först. Liam står över och svarar när varvet är klart.
+      - "Omar säger: ”Elsa skriker alltid fusk!” Läraren säger: ”Du blev arg när Elsa ropade fusk. Stämmer det?” Läraren tar fram kortet Så kan du säga, och Omar säger till Elsa: ”När du ropar fusk, känner jag mig arg.” Noor säger: ”Jag undrar hur det är för dig, Liam.” Liam säger: ”Jag känner mig ensam när ingen passar.”"
+      - "Gruppen väljer: ”Innan matchen bestämmer vi var linjerna går.” Alla visar tummen upp. I sista varvet säger var och en vad hen ska göra och tackar någon. Omar säger: ”Jag frågar Liam om han vill vara med.” Noor ska lägga märke till vad Omar gör."
+    forberett:
+      rubrik: Det jag förberedde
+      text:
+        - Pratat kort med var och en, frågat om de vill vara med och hur bra det fungerar, från 0 till 10. Bestämt att Omar och Elsa inte sitter bredvid varandra. Talpinnen ligger mitt på bordet, och korten och bladet finns till hands.
+    klarTidigt: Låt talpinnen gå ett varv till med frågan ”Vad var bra i dag?”
+    schema:
+      rubrik: 20 minuter, del för del
+      rader:
+        - tid: Före
+          fas: Förberedelse
+          vad: Bestäm var eleverna ska sitta. Lägg talpinnen mitt på bordet, och ha korten och bladet till hands.
+        - tid: 0–4
+          fas: 1 · Starta
+          vad: "I samtal 1 visar du talpinnen, läser reglerna och säger ”Du är dum” och sedan ”När du säger så, känner jag mig ledsen”. Säg varje gång att det ni berättar stannar i rummet."
+        - tid: 4–7
+          fas: 2 · Rundan
+          vad: Du säger rundans mening och gör den färdig först. I samtal 2 är den ”Jag såg att du ___”, och i samtal 3 ”Jag tänker att det har blivit bättre när ___”.
+        - tid: 7–13
+          fas: 3 · Reda ut
+          vad: Nicka åt den som räcker upp handen och har sagt minst. I samtal 2 börjar du med det som har blivit bättre, och i samtal 3 med det som ska fortsätta.
+          fraser:
+            - Vad hände? Hur kändes det?
+        - tid: 13–17
+          fas: 4 · Komma överens
+          vad: Fråga om förslaget går att se, om det säger vad ni gör och om alla kan säga ja. I samtal 2 behåller ni överenskommelsen, ändrar den eller lägger till något. I samtal 3 väljer gruppen det som ska fortsätta.
+          fraser:
+            - Hur ser det ut när ni gör det?
+        - tid: 17–20
+          fas: 5 · Avsluta
+          vad: Var och en säger vad hen ska göra och tackar någon, och du skriver det och nästa samtal på bladet. I samtal 1 ger du varje elev en kamrat att lägga märke till. Efteråt fyller du i snabbmallen och lapparna hem.
+  mall:
+    rubrik: Samtalsteknikerna
+    underrad: Lärarens kort att ha i handen, samma som under Material att skriva ut
+    block:
+      - typ: tabell
+        rubrik: De åtta teknikerna
+        kolumner:
+          - Teknik
+          - Så gör du
+          - Så låter det
+        rader:
+          - - "Modellera"
+            - "Säg rundans mening eller ett jag-⁠budskap själv först, och håll det kort, så att eleverna hör hur det låter."
+            - "”Jag känner mig glad när vi leker.”"
+          - - "Öppna frågor"
+            - "Börja frågorna med vad eller hur, och vänta på svaret. Fråga aldrig varför någon gjorde något."
+            - "”Vad hände?” ”Vad tänkte du då?” ”Hur kändes det?”"
+          - - "Spegla"
+            - "Säg med egna ord det eleven sa och hur det kändes, och fråga om det stämmer."
+            - "”Du blev arg när Elsa ropade fusk. Stämmer det?”"
+          - - "Kamratspegling"
+            - "Be en elev säga med egna ord vad kamraten sa, innan hen svarar själv."
+            - "”Kan du säga med egna ord vad Omar sa?”"
+          - - "Säg önskan bakom"
+            - "När eleverna anklagar varandra, säg vad var och en själv vill."
+            - "”Du vill att det ska vara rättvist.” ”Och du vill veta var linjen går.”"
+          - - "Sammanfatta"
+            - "Säg kort vad var och en har sagt, utan att döma, och fråga om något saknas."
+            - "”Omar blev arg, och Elsa tänker att linjen inte var bestämd. Har jag missat något?”"
+          - - "Fråga när det gick bra"
+            - "Fråga när det har gått bättre och vad eleverna gjorde då, och fråga om de kommer på något mer."
+            - "”När gick det bättre? Vad gjorde ni då? Något mer?”"
+          - - "Rulla med motståndet"
+            - "Argumentera inte. Säg med egna ord vad eleverna sa, och säg att det är de som bestämmer vad de ska göra."
+            - "”Ni tycker att det fungerar som det är. Det är ni som bestämmer.”"
+      - typ: not
+        text: Öva på en eller två tekniker i taget. Eleverna lär sig också kamratspeglingen och jag-⁠budskapet.
+  material:
+    rubrik: Vad du behöver för ett kompissamtal
+    var:
+      rubrik: Var materialet finns
+      punkter:
+        - fet: Korten och bladet.
+          text: De finns i planeringsmallarna (Word), under Material att skriva ut.
+        - fet: Lapparna hem.
+          text: En lapp går hem före samtal 1 och en efter varje samtal. Lapparna och snabbmallen finns i planeringsmallarna (Word), och du fyller i dem samma dag som samtalet.
+        - fet: Talpinnen.
+          text: Den kan vara en kort pinne, en slät sten eller ett litet gosedjur. Ingen kastar den.
+        - fet: De vuxna runt gruppen.
+          text: Ge dem kortet Så kan du säga. Efter varje samtal får de också överenskommelsen, så att de kan lägga märke till det som fungerar.
+    bordet:
+      - Talpinnen mitt på bordet
+      - Korten till hands, att ta fram vid behov
+      - Bladet Vår överenskommelse och en penna
+      - Papper för förslagen
+      - Förra bladet, från och med samtal 2
+    varjePass: Samma dag fyller du i snabbmallen och lapparna hem och berättar för de vuxna.
+film:
+  sekunder: 29.55
+  beskrivning: "Läraren säger: ”Jag känner mig glad när vi leker.” Elsa säger: ”Jag känner mig glad när vi vinner.” Sedan tar den som vill tala talpinnen. Omar säger: ”Elsa skriker alltid fusk!” Läraren tar emot känslan och visar kortet. Läraren säger: ”Du blev arg. Stämmer det?” Omar säger till Elsa: ”När du ropar fusk, känner jag mig arg.” Noor säger: ”Jag undrar hur det är för dig, Liam.” Liam säger: ”Jag känner mig ensam när ingen passar.” Gruppen kommer överens och skriver. Läraren frågar: ”Kan alla göra det här?” Alla visar tummen upp."
+  rubrik: "Så gör eleverna"
+  ingress: "Fyra bilder ur filmen om samtal 1 med Elsa, Omar, Noor och Liam i åk 4. I rundan gör läraren meningen färdig först, och sedan gör den som har talpinnen likadant. Läraren säger med egna ord att Omar blev arg, och Omar använder orden på kortet för att säga hur det kändes. Noor undrar hur Liam har det, och gruppen kommer överens."
+  stillbilder:
+    - text: "Läraren börjar, och sedan talar den som har talpinnen."
+    - text: "Läraren tar emot känslan, och Omar använder kortet."
+    - text: "Noor undrar hur Liam har det, och Liam svarar."
+    - text: "Läraren frågar om alla kan göra det. Tummarna går upp."
+filmer:
+  - nr: 2
+    sekunder: 17.81
+    beskrivning: "Det är rast mellan samtalen, och Omar frågar Liam. Omar frågar: ”Vill du vara med, Liam?” Liam säger: ”Ja!” Noor tänker: ”Det berättar jag i samtalet.” I samtal 2 går talpinnen ett varv, och eleverna berömmer varandra. Läraren säger: ”Jag såg att du ___”. Noor säger till Omar: ”Omar, jag såg att du frågade Liam.” Omar säger till Noor: ”Tack för att du såg det, Noor.”"
+    rubrik: "Samtal 2: det vi har sett"
+    ingress: "Fyra bilder ur filmen om tiden mellan samtal 1 och samtal 2. På rasten gör Omar det han lovade och frågar om Liam vill vara med, och Noor lägger märke till det. I samtal 2 berättar Noor det för Omar, och Omar tackar."
+    efter: "tabell: Mellan samtalen"
+    stillbilder:
+      - text: "På rasten gör Omar det han lovade i samtal 1."
+      - text: "Noor ser det och tar det med till samtal 2."
+      - text: "Noor berättar för Omar vad hon såg på rasten."
+      - text: "Omar tackar, och talpinnen går vidare."
