@@ -702,6 +702,34 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-bildlista-rutor span { font-family: var(--typsnitt-elev); font-size: 1.4rem; line-height: 1.2; color: var(--farg-text); overflow-wrap: anywhere; }
 @media (max-width: 40rem) { .m-bildlista-rutor img { width: 3.25rem; } .m-bildlista-rutor span { font-size: 1.1rem; } }
 @media print { .m-bildlista-rutor { break-inside: avoid; } .m-bildlista-rutor img { width: 2.4cm; } }
+/* Nivåskylten (src/lib/nivaer.ts): nivåns namn i nivåns färg före listans rubrik, i fet stil och minst 14 pt, så att
+   kontrasten mot färgen räcker för stor text (vitt på grönt och rött, mörkt på gult). */
+.m-niva { display: inline-block; padding: 0.05em 0.45em; border-radius: 4px; background: var(--niva); color: var(--niva-text); font-size: 1.2rem; font-weight: 700; letter-spacing: 0; text-transform: none; vertical-align: middle; }
+/* Bilderna På bordet (Pabordet.astro): bilden i textens bredd med rubriken över och bildtexten under. Efter en vecka står
+   bilden utan egen rubrik, och bildtexten börjar med På bordet. Veckornas kort är lektionsbankens (m-lektionskort). */
+.m-pabordet { margin: 1rem 0 1.5rem; }
+.m-pabordet img { display: block; width: 100%; height: auto; border: 1px solid var(--farg-kant); border-radius: 8px; }
+.m-pabordet-rubrik { font-family: var(--typsnitt-ui); font-weight: 700; margin: 0 0 0.4rem; }
+.m-pabordet figcaption { font-size: 0.95rem; color: var(--farg-text-svag); margin-top: 0.4rem; }
+.m-pabordet.i-del { margin-top: 0.75rem; }
+.m-veckokort { margin: 1rem 0 1.5rem; }
+/* Kartan (src/lib/karta.ts, MetodTabell.astro): nivåernas kolumner har en linje i nivåns färg under namnet i rubrikraden,
+   som annars är som andra rubrikrader (Niclas 2026-10-04: raden med Bas, Medel och Avancerad såg tjock ut med hela
+   färgen och stor text); veckan och bladens namn är länkar. Varje vecka visar sin rad. */
+/* Kartans rubrikrad: nivåerna i hela sin färg, med namnet stort och fett som skyltarna på bladen, så att kontrasten räcker
+   för stor text, men nästan utan luft, så att raden blir lägre än en vanlig rubrikrad (Niclas 2026-10-04: "raden med bas
+   avancerad och medel är för tjock i höjd", och "Var snyggare ... med grön, gul, röd full färg"). */
+.m-tabell.karta thead th { padding-top: 0.1rem; padding-bottom: 0.1rem; line-height: 1.15; }
+.m-tabell th.niva { background: var(--niva); color: var(--niva-text); border-color: var(--niva); font-size: 1.2rem; }
+.m-karta-vecka { display: block; color: var(--farg-accent); }
+.m-karta-vecka .forsta { font-weight: 700; }
+.m-kartrad { margin: 0.75rem 0 0; }
+/* Veckans rad ur kartan står tätt under veckans ruta (Niclas 2026-10-04: marginalen mot tabellen ovanför var onödig). */
+.m-vecka .m-ramdel { margin-bottom: 0.5rem; }
+.m-vecka .m-kartrad { margin-top: 0; }
+.m-kartrad .kicker { margin: 0 0 0.35rem; }
+.metod-modell .m-veckokort h4 { margin: 0; font-size: 1.1rem; }
+.m-veckokort h4 a { color: var(--farg-accent); }
 /* Bildserierna (Seriesamtal, Serierutor.astro): rutorna som bygget ritade, elevens blad med seriens namn och en rad för
    elevens namn överst, provbildens ruta i textens bredd och arket att klippa ut. En bildserie står en ruta i bredd på en
    smal skärm, så att det som händer i rutan syns; en mall med tomma rutor behåller sina kolumner. Utskriften är nedan. */
@@ -809,6 +837,10 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-mall-svep { display: none; font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
 .m-mall-bild rect { fill: none; stroke: var(--farg-text); stroke-width: 0.3; }
 .m-mall-bild line { stroke: var(--farg-text); }
+/* Räknemattans streckade linje och talrutans rutnät, med var tionde linje tjockare (MallBild.astro). */
+.m-mall-bild line.streckad { stroke-dasharray: 4 3; }
+.m-mall-bild line.tunn { stroke: #A9C8E8; }
+.m-mall-bild line.tjock { stroke: #5B86B8; }
 /* Mallen ligger framför eleven: texten i den står i elevens typsnitt (K-130), som i planeringsmallarna. */
 .m-mall-bild text { fill: var(--farg-text); font-family: var(--typsnitt-elev); text-anchor: middle; }
 /* Namnet på en delad tallinje (fjärdedelar) står till vänster ovanför linjen, dämpat. */
@@ -1134,6 +1166,9 @@ html.js .bara-js { display: inline-block; }
   .m-tabell.stapla th, .m-tabell.stapla td { border: 0; border-top: 1px solid var(--farg-kant); }
   .m-tabell.stapla th[scope="row"] { background: var(--farg-accent-ljus); border-top: 0; }
   .m-tabell.stapla td::before { content: attr(data-rubrik); display: block; font-weight: 600; color: var(--farg-text-svag); font-size: 0.8rem; margin-bottom: 0.2em; }
+  /* I kursens karta har nivåns etikett en kant i nivåns färg också staplad, som linjen i rubrikraden; texten är som
+     de andra etiketterna, så att kontrasten räcker. */
+  .m-tabell.stapla td.niva::before, .m-tabell.steg td.niva::before { display: table; padding: 0 0.4em; border-radius: 4px; background: var(--niva); color: var(--niva-text); font-weight: 700; font-size: 1.2rem; line-height: 1.3; margin-bottom: 0.25em; }
   /* Staplad är första cellen kortets rubrik (Läs, Skrivhandling, Vecka 1 · Inbjudan till laget) och sätts fet, som en radrubrik. */
   .m-tabell.stapla td:first-child .forsta { font-weight: 600; }
   /* Kursplanens radrubrik är bara en siffra: staplad får den enheten framför sig, "Vecka 1". */
@@ -1332,6 +1367,36 @@ html.js .bara-js { display: inline-block; }
      arket att klippa ut på ett A4 med 1 cm marginal (@page kortark), 190 mm brett som i Word. Raden om Word står inte här. */
   .m-ram:has(.m-serieblad:not(.mall)), .m-ram:has(.m-ark), .m-ram:has(.m-serieruta) { break-before: page; }
   .m-serieblad { break-inside: avoid; margin: 0; }
+  /* En bild På bordet hålls ihop med sin bildtext. Veckornas kort leder till veckorna på skärmen och står inte i
+     utskriften, där veckorna följer efter varandra. */
+  .m-pabordet { break-inside: avoid; }
+  .m-pabordet img { width: 100%; }
+  /* Veckorna i en ram med lektioner (De fyra räknesätten): varje vecka börjar på en ny sida, med texten i 9 punkter och
+     smala etiketter (Niclas 2026-10-04: "Testa En sida med mindre text"), och raden ur kartan och bilden På bordet som
+     ett block efter rutan. Veckan är en sida hög (258 mm av satsytans 261), och bilden fyller det som blir kvar, som
+     veckosidan i Word. Räcker det inte till en bild som går att läsa (veckanRyms i src/lib/veckosida.ts, som räknar med
+     måtten här), står blocket i full storlek på nästa sida (tva-sidor), så att talen och bladen för nivåerna står med
+     bilden (Niclas 2026-10-04: bilderna såg för ihoptryckta ut, och "Om det är två sidor är det bättre att bas, medel och
+     avancerad är på samma sida som på bordet"). */
+  .m-vecka { break-before: page; }
+  .m-vecka:not(.tva-sidor) { height: 258mm; display: flex; flex-direction: column; break-inside: avoid; }
+  .m-vecka .m-ramdel { flex: none; margin: 0; font-size: 9pt; line-height: 1.3; }
+  .m-vecka .m-ramdel h4 { font-size: 10pt; padding: 1.5mm 3mm; }
+  .m-vecka .m-ramfalt > div { grid-template-columns: 31mm minmax(0, 1fr); }
+  .m-vecka .m-ramfalt dt, .m-vecka .m-ramfalt dd { padding: 1.2mm 2.5mm; }
+  .m-vecka .m-kartrad .m-tabell { font-size: 9pt; }
+  .m-tabell.karta thead th { padding-top: 0.4mm; padding-bottom: 0.4mm; }
+  .m-tabell th.niva { font-size: 14pt; line-height: 1.1; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .m-vecka-bild { break-inside: avoid; margin-top: 1.2mm; }
+  .m-vecka .m-kartrad { flex: none; }
+  .m-vecka:not(.tva-sidor) .m-vecka-bild, .m-vecka:not(.tva-sidor) .m-pabordet { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+  .m-vecka .m-pabordet { margin: 2mm 0 0; }
+  .m-vecka .m-pabordet img { border: 0; }
+  .m-vecka:not(.tva-sidor) .m-pabordet img { flex: 1 1 auto; min-height: 0; width: 100%; height: 100%; object-fit: contain; object-position: center top; }
+  .m-vecka .m-pabordet figcaption { flex: none; font-size: 9pt; }
+  .m-vecka.tva-sidor .m-vecka-bild { break-before: page; margin-top: 0; }
+  .m-veckokort { display: none; }
+  .m-niva { font-size: 14pt; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .m-serieblad:not(.mall) { page: mall; break-before: page; }
   .m-serieblad-huvud { margin: 0 0 3mm; font-size: 13pt; }
   .m-serieblad-titel { font-size: 15pt; }

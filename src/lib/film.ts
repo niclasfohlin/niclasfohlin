@@ -35,23 +35,24 @@ export const stillbilder = (f: MetodFilm) => [1, 2, 3, 4].map((nr) => `${f.bas}-
 export const filmNamn = (f: MetodFilm) => f.film.titel ?? f.film.rubrik;
 
 // Platserna, med samma ord i sidan (Metod.astro), Word-filen (metoddocx.ts) och schemat. Riggens efter är ett avsnitt
-// eller "tabell: <rubrik>"; sajten tar också "ram: <rubrik>", "steg N" och "stycke N". En fri tabell och en ram hittas
+// eller "tabell: <rubrik>"; sajten tar också "ram: <rubrik>", "steg N" och "stycke N", och "del: <rubrik>" efter en del
+// i en ram, som en vecka (bilderna På bordet, De fyra räknesätten 2026-10-04). En fri tabell, en ram och en del hittas
 // genom sin rubrik, hela eller ledet före kolon ("Ljudstarten" för "Ljudstarten: samma start varje pass").
 export const FILMAVSNITT = ['passrutin', 'tidsschema', 'steg', 'arbetsform', 'exempel', 'fastnar', 'roll', 'urval', 'hem', 'progression', 'uppfoljning', 'mal', 'snabbmall', 'checklista', 'grund', 'ramar'] as const;
-export type FilmPlats = { stycke: number } | { steg: number } | { tabell: string } | { ram: string } | { avsnitt: (typeof FILMAVSNITT)[number] };
-export const EFTER_FORMER = `ett avsnitt (${FILMAVSNITT.join(', ')}), "tabell: <rubrik>", "ram: <rubrik>", "steg <N>" eller "stycke <N>", med N från 1`;
+export type FilmPlats = { stycke: number } | { steg: number } | { tabell: string } | { ram: string } | { del: string } | { avsnitt: (typeof FILMAVSNITT)[number] };
+export const EFTER_FORMER = `ett avsnitt (${FILMAVSNITT.join(', ')}), "tabell: <rubrik>", "ram: <rubrik>", "del: <rubrik>", "steg <N>" eller "stycke <N>", med N från 1`;
 /** Tolkar fältet efter; undefined när texten inte är en plats. */
 export function tolkaEfter(efter: string): FilmPlats | undefined {
   const t = efter.trim();
-  const rubrik = t.match(/^(tabell|ram):\s*(.+)$/);
-  if (rubrik) return rubrik[1] === 'tabell' ? { tabell: rubrik[2].trim() } : { ram: rubrik[2].trim() };
+  const rubrik = t.match(/^(tabell|ram|del):\s*(.+)$/);
+  if (rubrik) return rubrik[1] === 'tabell' ? { tabell: rubrik[2].trim() } : rubrik[1] === 'ram' ? { ram: rubrik[2].trim() } : { del: rubrik[2].trim() };
   const tal = t.match(/^(steg|stycke)\s+([1-9]\d*)$/);
   if (tal) return tal[1] === 'steg' ? { steg: Number(tal[2]) } : { stycke: Number(tal[2]) };
   return (FILMAVSNITT as readonly string[]).includes(t) ? { avsnitt: t as (typeof FILMAVSNITT)[number] } : undefined;
 }
 export const sammaRubrik = (rubrik: string, namn: string) => rubrik === namn || rubrik.split(':')[0].trim() === namn;
 /** Beskedet när platsen inte finns i metoden, annars undefined. Schemat och scripts/filmpaket.mjs använder samma regler. */
-type MetodForPlats = { inledning?: string[]; steg?: { rader: unknown[] }; tabeller?: { rubrik: string }[]; ramar?: { ramar: { rubrik: string }[] } };
+type MetodForPlats = { inledning?: string[]; steg?: { rader: unknown[] }; tabeller?: { rubrik: string }[]; ramar?: { ramar: { rubrik: string; delar?: { rubrik: string }[] }[] } };
 export function platsFel(d: MetodForPlats, v: FilmPlats): string | undefined {
   if ('stycke' in v) { const n = d.inledning?.length ?? 0; return v.stycke > n ? `Inledningen har ${n} stycken; filmen kan inte stå efter stycke ${v.stycke}` : undefined; }
   if ('steg' in v) { const n = d.steg?.rader.length ?? 0; return v.steg > n ? `Metoden har ${n} steg; filmen kan inte stå efter steg ${v.steg}` : undefined; }
@@ -63,6 +64,10 @@ export function platsFel(d: MetodForPlats, v: FilmPlats): string | undefined {
   if ('ram' in v) {
     const antal = (d.ramar?.ramar ?? []).filter((r) => sammaRubrik(r.rubrik, v.ram)).length;
     return antal === 1 ? undefined : `${antal ? 'Flera' : 'Ingen'} ram har rubriken "${v.ram}" (hela rubriken eller ledet före kolon)`;
+  }
+  if ('del' in v) {
+    const antal = (d.ramar?.ramar ?? []).flatMap((r) => r.delar ?? []).filter((del) => sammaRubrik(del.rubrik, v.del)).length;
+    return antal === 1 ? undefined : `${antal ? 'Flera' : 'Ingen'} del i ramarna har rubriken "${v.del}" (hela rubriken eller ledet före kolon)`;
   }
   return (d as Record<string, unknown>)[v.avsnitt] ? undefined : `Metoden har inget avsnitt ${v.avsnitt}`;
 }
@@ -90,11 +95,12 @@ export function metodensFilmer(d: MetodData, id: string): MetodFilm[] {
 }
 export const huvudfilm = (filmer: MetodFilm[]) => filmer.find((f) => f.huvud);
 
-function passar(vid: FilmPlats, plats: FilmPlats): boolean {
+export function passar(vid: FilmPlats, plats: FilmPlats): boolean {
   if ('stycke' in vid) return 'stycke' in plats && plats.stycke === vid.stycke;
   if ('steg' in vid) return 'steg' in plats && plats.steg === vid.steg;
   if ('tabell' in vid) return 'tabell' in plats && sammaRubrik(plats.tabell, vid.tabell);
   if ('ram' in vid) return 'ram' in plats && sammaRubrik(plats.ram, vid.ram);
+  if ('del' in vid) return 'del' in plats && sammaRubrik(plats.del, vid.del);
   return 'avsnitt' in plats && plats.avsnitt === vid.avsnitt;
 }
 /** Extrafilmerna som står på platsen. */

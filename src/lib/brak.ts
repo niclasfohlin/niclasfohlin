@@ -8,9 +8,11 @@ import type { MetodData } from './metod';
 // nämnaren under, som i läroböckerna, på NCM:s bråkplank och på de nationella proven. I lärarens löptext står
 // snedstrecket kvar.
 export type BrakDel = { text: string } | { taljare: string; namnare: string };
+// Täljaren får ha tusental med hårt mellanslag, som riggens build-docx.js: divisionen 1 026/9 är 1 026 över 9. Utan det
+// blev ettan en egen siffra före bråket 026/9 (De fyra räknesätten, Blad 5 · Division, 2026-10-04).
 export function brakDelar(text: string): BrakDel[] {
   const ut: BrakDel[] = [];
-  const re = /(\d+)\/(\d+)/g;
+  const re = /(\d{1,3}(?:\u00a0\d{3})+|\d+)\/(\d+)/g;
   let sist = 0;
   let m: RegExpExecArray | null;
   while ((m = re.exec(text))) {
@@ -102,6 +104,15 @@ export function kortInfo(d: Pick<MetodData, 'kort'>, lista: { rubrik?: string; r
 export type Mall = MetodData['mallar'][number];
 export const STANDARD_NAMNARE = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12];
 export const TWIP_MM = 25.4 / 1440;
+// Talrutans mått (typ talruta, De fyra räknesätten): rutans sida i twips, avrundad till hela bildpunkter (15 twips) som
+// Words tabellrader, och antalet rutor över den liggande sidans bredd och 8 500 twips höjd. Sidan (MallBild.astro) och
+// Word (talrutaSida i metoddocx.ts) räknar med samma funktion; sidan räknade med exakta 8 mm och fick 33 kolumner mot
+// Words 34 (granskningen 2026-10-04).
+export const TALRUTANS_BREDD = 15398;
+export function talrutansMatt(rutaCm = 0.8, bredd = TALRUTANS_BREDD): { ruta: number; kol: number; rader: number } {
+  const ruta = Math.round(Math.round(rutaCm * 567) / 15) * 15;
+  return { ruta, kol: Math.floor(bredd / ruta), rader: Math.floor(8500 / ruta) };
+}
 const sgd = (a: number, b: number): number => (b ? sgd(b, a % b) : a);
 // Läget för k/n av längden L, räknat på det förkortade bråket, så att 1/2, 2/4 och 4/8 hamnar på samma punkt.
 export function lage(L: number, k: number, n: number, heltal = true): number {

@@ -6,6 +6,7 @@ import publikationerData from './data/publikationer.json';
 import bildbankData from './data/bildbank.json';
 import { BAGE, ordgrupper, utanStod } from './lib/lasflyt';
 import { EFTER_FORMER, HOGST_EXTRAFILMER, platsFel, tolkaEfter } from './lib/film';
+import { forstaLed, radensDel } from './lib/karta';
 
 // Registren är den enda sanningen om vilka taggar och publikationer som finns.
 // Ett okänt värde stoppar bygget med ett tydligt besked om vad som ska göras.
@@ -186,6 +187,19 @@ const stodundervisning = defineCollection({
       nr: z.union([z.literal(2), z.literal(3)], { error: 'nr är 2 eller 3: filerna heter <id>-film2.svg och <id>-film3.svg.' }),
       efter: text.refine((v) => tolkaEfter(v) !== undefined, { error: `efter är ${EFTER_FORMER}.` }),
     })).max(HOGST_EXTRAFILMER, `Högst ${HOGST_EXTRAFILMER} extrafilmer utöver huvudfilmen.`).default([]),
+    // Bilderna På bordet ur metodriggen (De fyra räknesätten i grupp, 2026-10-04, src/lib/pabordet.ts): det som ligger
+    // framför lärarens händer när hen har visat, en bild per vecka och en för materialet. Var och en står där efter
+    // säger, med samma ord som extrafilmerna och dessutom "del: <rubrik>" efter en del i en ram, som en vecka. Filerna
+    // hittas genom metodens id och bildens nummer: <id>-pabordet-<nr>.svg, 960 × 540.
+    pabordet: z.array(z.strictObject({
+      nr: z.number().int().min(0).max(30),
+      rubrik: text,
+      text,
+      efter: text.refine((v) => tolkaEfter(v) !== undefined, { error: `efter är ${EFTER_FORMER}.` }),
+    })).default([]),
+    // Nivåerna i en metod med nivåer (De fyra räknesätten: Bas, Medel och Avancerad, Niclas 2026-10-04), med färgen i hex.
+    // Ett led i en listas rubrik som heter som en nivå blir en skylt i nivåns färg före rubriken, på sidan och i Word.
+    nivaer: z.array(z.strictObject({ namn: text, farg: z.string().regex(/^[0-9A-Fa-f]{6}$/, 'Färgen skrivs som sex hexsiffror, som 3E8E41.') })).default([]),
     lektionsbank: z.strictObject({
       rubrik: z.string().default('Lektionsbanken'),
       text: z.string().optional(),
@@ -246,6 +260,11 @@ const stodundervisning = defineCollection({
       // meny: tabellen står i sidans meny, efter avsnittet den ligger efter, med rubrikens första led som namn. För det läraren
       // letar efter varje pass, som Ljudstarten, Dagens ljud och Ordbanken i Ljudlek i grupp (läsbarheten 2026-09-29).
       meny: z.boolean().optional(),
+      // karta: tabellen är kursens karta över veckorna (De fyra räknesätten, Niclas 2026-10-04: "måste ju också kunna
+      // tryckas på som länkar eller karta. Infon i den behövs också för varje vecka"). Varje rad är en del i ramen med
+      // lektioner, med delens första led först i första cellen ("Vecka 1"). Första cellen leder till veckan och bladens
+      // namn ("Addition 1") till räknebladen, på sidan och i Word, och varje vecka visar sin rad (src/lib/karta.ts).
+      karta: z.boolean().optional(),
       kolumner: z.array(text).min(2),
       rader: z.array(z.array(z.string())).min(1),
       not: z.string().optional(),
@@ -361,9 +380,21 @@ const stodundervisning = defineCollection({
           // En bild över varje ord (Kompissamtal, kortet Peka på känslan, 2026-10-03): varje ord har en bild i bildbanken,
           // och sidan, utskriften och Word ritar bilden över ordet, för de yngsta som inte läser (metodriggens bildlistor).
           bilder: z.boolean().optional(),
+          // Ett räkneblad (De fyra räknesätten, metodriggens TILL-SAJTEN 2026-10-04): listan är elevens blad med en uppgift
+          // per rad, och i Word får varje uppgift en ruta med uttrycket och ett rutnät att räkna i under, en siffra per ruta
+          // (rutor: kolumner och rader, rutaCm: rutans sida), eller en tom talrad att rita hoppen på (talrad). perRad är
+          // uppgifter per rad (två om inget sägs). En rad utan siffror är bladets uppmaning och blir en bred ruta sist.
+          // Sidan visar listan som förut, med en hänvisning till bladet i planeringsmallarna.
+          rakneblad: z.strictObject({
+            rutor: z.tuple([z.number().int().min(2).max(16), z.number().int().min(1).max(10)]).optional(),
+            rutaCm: z.number().min(0.4).max(1.2).optional(),
+            perRad: z.number().int().min(1).max(4).optional(),
+            talrad: z.boolean().optional(),
+          }).refine((r) => !!r.talrad !== !!r.rutor, 'Ett räkneblad har antingen rutor (ett rutnät) eller talrad: true.').optional(),
         }).superRefine((l, ctx) => {
           const n = l.kolumner?.length ?? l.rader[0].length;
           l.rader.forEach((r, i) => { if (r.length !== n) ctx.addIssue({ code: 'custom', path: ['rader', i], message: `Raden ska ha ${n} celler, som ${l.kolumner ? 'rubrikerna' : 'första raden'}.` }); });
+          if (l.rakneblad && n !== 1) ctx.addIssue({ code: 'custom', path: ['rakneblad'], message: 'Ett räkneblad har en uppgift per rad, i en kolumn.' });
         })).optional(),
         huvud: z.array(ramFalt).optional(),
         delar: z.array(z.strictObject({ rubrik: text, falt: z.array(ramFalt).min(1) })).min(1),
@@ -395,6 +426,11 @@ const stodundervisning = defineCollection({
         // Ett ark att klippa ut efter ramens delar, ritat i kod (src/lib/serieritning.js): bubblor är sex tankebubblor,
         // tre pratbubblor och en bubbla för det någon ropar, på ett A4 med kortarkens marginal på 1 cm.
         ark: z.enum(['bubblor']).optional(),
+        // Delarna är kursens veckor eller lektioner (De fyra räknesätten, Niclas 2026-10-04: "Veckorna kan göras som
+        // lektionerna i Ljudlek i grupp, så att läraren trycker på en vecka och kommer till den"): sidan visar ett kort per
+        // del överst i ramen, med delens rubrik och första fält (Fokus), som leder till delen, och ramen står i menyn. I
+        // Word börjar varje del på en ny sida, tätare, med sin bild På bordet (pabordet med efter: "del: <rubrik>") under.
+        lektioner: z.boolean().optional(),
       })).min(1),
       efter: z.string().optional(),
     }).optional(),
@@ -435,10 +471,14 @@ const stodundervisning = defineCollection({
     // A4 med underraden och en rad för elevens namn. etiketter ersätter numren med ett namn per ruta (Så kan det bli),
     // och de rutorna är högre, så att eleven har plats att rita. Rutorna ritas i kod (src/lib/serieritning.js), samma på
     // sidan och i Word.
+    // typ talruta är ett rutnät över ett liggande A4 (De fyra räknesätten, metodriggens TILL-SAJTEN 2026-10-04), med
+    // rutor på rutaCm och var tionde linje tjockare, så att tiotalen syns när eleven ritar rektangeln från övre vänstra
+    // hörnet. En matta med enPerSida och rader delar varje ark i så många lika höga fält med en streckad linje emellan
+    // (räknemattan: det första talet ovanför linjen, det andra under).
     mallar: z.array(z.strictObject({
       rubrik: text,
       text: z.string().optional(),
-      typ: z.enum(['brakplank', 'tallinjer', 'matta', 'rutnat', 'flode', 'serie']),
+      typ: z.enum(['brakplank', 'tallinjer', 'matta', 'rutnat', 'flode', 'serie', 'talruta']),
       rutor: z.union([z.literal(2), z.literal(4), z.literal(6)]).optional(),
       rader: z.number().int().min(1).max(12).optional(),
       // Ett tomt namn är en rubrik som eleven skriver själv; bara ett rutnät får ha det (se superRefine nedan).
@@ -451,6 +491,7 @@ const stodundervisning = defineCollection({
       // Bråkplankets och tallinjernas etiketter (false stänger av dem), eller seriemallens namn på rutorna.
       etiketter: z.union([z.boolean(), z.array(text).min(1)]).optional(),
       langdCm: z.number().positive().optional(),
+      rutaCm: z.number().min(0.4).max(1.5).optional(),
       radhojd: z.number().int().positive().optional(),
       mellanrum: z.number().int().positive().optional(),
       linjer: z.array(z.strictObject({ till: z.number().int().positive(), delar: z.number().int().positive(), langdCm: z.number().positive().optional() })).optional(),
@@ -532,6 +573,28 @@ const stodundervisning = defineCollection({
       const fel = v && platsFel(d, v);
       if (fel) ctx.addIssue({ code: 'custom', path: sti, message: `${fel}.` });
     });
+    // Kartan (src/lib/karta.ts): varje rad hör till en del i en ram med lektioner, med delens första led först.
+    d.tabeller.forEach((t, ti) => { if (t.karta) t.rader.forEach((r, i) => { if (!radensDel(d, r)) ctx.addIssue({ code: 'custom', path: ['tabeller', ti, 'rader', i, 0], message: `Kartans rad "${(r[0] ?? '').split('\n')[0]}" hör inte till någon del i en ram med lektioner: första ledet ska vara delens, som Vecka 1.` }); }); });
+    // Och åt andra hållet (granskningen 2026-10-04): högst en karta, varje vecka med en egen rad, och veckornas första led
+    // unika, eftersom ledet är veckans namn i kartan och i Words bokmärke. En ram med lektioner har inga listor, eftersom
+    // sidan ritar veckorna bara i en ram utan listor.
+    const kartor = d.tabeller.filter((t) => t.karta);
+    if (kartor.length > 1) ctx.addIssue({ code: 'custom', path: ['tabeller'], message: `Metoden har ${kartor.length} tabeller med karta: true; kursen har en karta.` });
+    const veckor = (d.ramar?.ramar ?? []).flatMap((r, ri) => (r.lektioner ? r.delar.map((del, di) => ({ ri, di, led: forstaLed(del.rubrik) })) : []));
+    veckor.forEach((v, i) => {
+      if (veckor.findIndex((x) => x.led === v.led) !== i) ctx.addIssue({ code: 'custom', path: ['ramar', 'ramar', v.ri, 'delar', v.di, 'rubrik'], message: `Två veckor börjar med "${v.led}"; ledet före · är veckans namn i kartan och ska vara unikt.` });
+      if (kartor.length && !kartor[0].rader.some((r) => forstaLed(r[0] ?? '') === v.led)) ctx.addIssue({ code: 'custom', path: ['ramar', 'ramar', v.ri, 'delar', v.di, 'rubrik'], message: `${v.led} har ingen rad i kartan "${kartor[0].rubrik}"; varje vecka visar sin rad.` });
+    });
+    (d.ramar?.ramar ?? []).forEach((r, ri) => { if (r.lektioner && r.listor) ctx.addIssue({ code: 'custom', path: ['ramar', 'ramar', ri, 'lektioner'], message: 'En ram med lektioner har inga listor: lägg listorna i en egen ram.' }); });
+    // Bilderna På bordet: egna nummer och en plats som finns (src/lib/pabordet.ts), och nivåerna med egna namn.
+    d.pabordet.forEach((b, i) => {
+      if (d.pabordet.findIndex((x) => x.nr === b.nr) !== i) ctx.addIssue({ code: 'custom', path: ['pabordet', i, 'nr'], message: `Två bilder På bordet har nr ${b.nr}; filerna skulle krocka.` });
+      const v = tolkaEfter(b.efter);
+      const fel = v && platsFel(d, v);
+      if (fel) ctx.addIssue({ code: 'custom', path: ['pabordet', i, 'efter'], message: `${fel.replace(/filmen/g, 'bilden')}.` });
+    });
+    d.nivaer.forEach((n, i) => { if (d.nivaer.findIndex((x) => x.namn === n.namn) !== i) ctx.addIssue({ code: 'custom', path: ['nivaer', i, 'namn'], message: `Nivån ${n.namn} står två gånger.` }); });
+    d.mallar.forEach((m, i) => { if (m.rutaCm && m.typ !== 'talruta') ctx.addIssue({ code: 'custom', path: ['mallar', i, 'rutaCm'], message: 'Bara en talruta har rutaCm.' }); });
     // Förmågorna numreras i följd från 1, så att en lektions formaga aldrig pekar på en annan förmåga än den skrevs för.
     d.lektionsbank?.formagor.forEach((f, i) => { if (f.nr !== i + 1) ctx.addIssue({ code: 'custom', path: ['lektionsbank', 'formagor', i, 'nr'], message: `Förmågan "${f.namn}" ska ha nummer ${i + 1}: förmågorna numreras i följd från 1.` }); });
     // Lathundens block snabbmall hämtar metodens snabbmall; utan den skulle blocket tyst försvinna.

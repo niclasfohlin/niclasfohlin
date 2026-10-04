@@ -12,6 +12,7 @@
 import BILDBANK from '../data/bildbank.json';
 import type { MetodData } from './metod';
 import { metodensFilmer, stillbilder } from './film';
+import { metodensPaBordet } from './pabordet';
 
 // Elevens typsnitt: Andika från SIL (Open Font License 1.1), här som delmängden Ljudlek Elev i public/fonts/ljudlek-elev/
 // med licensen. En ändrad fil som används för sig får inte heta Andika (OFL-FAQ 2.6), därför heter webbens fil Ljudlek
@@ -117,6 +118,8 @@ export function ljudenheter(ord: string, delar = false): string[] {
 export function metodensBilder(d: MetodData, id?: string): string[] {
   const ut = new Set<string>();
   if (id) for (const f of metodensFilmer(d, id)) for (const b of stillbilder(f)) ut.add(b);
+  // Bilderna På bordet (src/lib/pabordet.ts) står i Word-filen i satsens bredd.
+  if (id) for (const b of metodensPaBordet(d, id)) ut.add(b.adress);
   for (const ram of d.ramar?.ramar ?? []) {
     for (const l of ram.listor ?? []) {
       const f = ljudform(d, l);

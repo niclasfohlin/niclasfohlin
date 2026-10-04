@@ -27,6 +27,10 @@ import { kortInfo } from '../lib/brak';
 import { arTarning, harSagoform, SAGO_UPPHOV } from '../lib/sagoblad';
 import { arkAdress, arSerieMall, mallEtiketter, mallRutor as mallRutorAdresser, rutansText, serieRutor as serieRutorAdresser, svgMatt } from '../lib/bildserier';
 import { serieantal, serieFiler } from '../lib/bildserier-bygge';
+import { metodensPaBordet, paBordetVid } from '../lib/pabordet';
+import { listansNiva } from '../lib/nivaer';
+import { bladNamn, delensRad, kartan, metodensBlad, radensDel } from '../lib/karta';
+import { veckanRyms } from '../lib/veckosida';
 // "Åk 4–5" hålls ihop i ramarnas rubriker och länkar: hårt mellanslag efter Åk, ordfog efter tankstrecket.
 const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 '));
 // koppling: den generella metodens serie med lektionsbanken, eller lektionens plats i den (src/lib/serie.ts).
@@ -72,8 +76,11 @@ const friKlass = (t: { kolumner: string[]; rader: string[][] }) => (t.kolumner.l
 const pass = passOversikt(d);
 // Extrafilmerna (src/lib/film.ts, fältet filmer) står vid momentet de förklarar: sist i ett avsnitt, efter en fri tabell
 // eller en ram, efter ett steg eller efter ett stycke. Word-filen frågar på samma platser (metoddocx.ts, metodBarn). Huvudfilmen står i [id].astro.
+// Bilderna På bordet (src/lib/pabordet.ts) står på samma platser och ritas av samma Filmruta.astro, och dessutom efter en
+// del i en ram (del: <rubrik>, en vecka).
 const filmer = metodensFilmer(d, id);
-const vid = (p: FilmPlats) => filmerVid(filmer, p);
+const bilderPaBordet = metodensPaBordet(d, id);
+const vid = (p: FilmPlats) => [...filmerVid(filmer, p), ...paBordetVid(bilderPaBordet, p)];
 const ord = passOrd(d);
 const tavla = d.exempel?.tavla ? d.lathund?.mall.block.find((b) => b.typ === 'tavla') : undefined;
 const fraserRubrik = d.steg?.fraserRubrik ?? '';
@@ -122,6 +129,18 @@ const upptagna = new Set([...avsnitt.map((a) => a.id), 'upplagg', 'gruppen', 'pr
 const ankare = (s: string) => { let id = ankarnamn(s) || 'avsnitt'; for (let n = 2; upptagna.has(id); n++) id = `${ankarnamn(s)}-${n}`; upptagna.add(id); return id; };
 const tabellAnkare = new Map(d.tabeller.map((t) => [t, ankare(t.rubrik)]));
 const ramAnkare = (d.ramar?.ramar ?? []).map((r) => ankare(r.rubrik));
+// Veckorna som lektioner (en ram med lektioner, De fyra räknesätten, Niclas 2026-10-04): varje del har ett eget ankare, som
+// korten överst i ramen leder till, och ramen står i menyn med namnet efter kolon ("Till läraren: veckorna" blir Veckorna).
+const delAnkare = (d.ramar?.ramar ?? []).map((r) => (r.lektioner ? r.delar.map((del) => ankare(del.rubrik)) : []));
+const versalt = (s: string) => (s ? s.charAt(0).toLocaleUpperCase('sv') + s.slice(1) : s);
+const menyLektioner = (d.ramar?.ramar ?? []).flatMap((r, ri) => (r.lektioner ? [{ id: `ram-${ri + 1}`, namn: versalt((r.rubrik.split(':')[1] ?? r.rubrik).trim()) }] : []));
+// Kartan (src/lib/karta.ts): tabellen med karta leder till veckorna och räknebladen, och varje vecka visar sin rad.
+// Räknebladen får ett ankare var, som bladens namn i kartan leder till.
+const karta = kartan(d);
+const blad = metodensBlad(d);
+const bladAnkare = new Map([...blad].map(([namn, plats]) => [`${plats.ri}-${plats.li}`, ankare(`blad ${namn}`)]));
+const kartLankar = { vecka: (rad: string[]) => { const p = radensDel(d, rad); return p ? `#${delAnkare[p.ri][p.di]}` : undefined; }, blad: (namn: string) => { const p = blad.get(namn); return p ? `#${bladAnkare.get(`${p.ri}-${p.li}`)}` : undefined; }, namn: new Set(blad.keys()), nivaer: d.nivaer };
+const radLankar = { ...kartLankar, vecka: undefined };
 // Lästexterna blir boksidor (Boksida.astro, K-148), med nivåns färg i den ordning nivåerna först kommer, som i Word.
 const boksidor = lastexter(d.ramar?.ramar ?? []);
 const BOKNIVA = ['#4e7a43', '#a8742a', '#6e3450'];
@@ -138,7 +157,7 @@ const menyEfter: Record<string, string | undefined> = {
 const menyTabeller = d.tabeller.filter((t) => t.meny).map((t) => ({ efter: t.plats === 'efter-inledning' ? undefined : menyEfter[t.plats], post: { id: tabellAnkare.get(t)!, namn: t.rubrik.split(':')[0].trim() } }));
 const meny = [
   ...menyTabeller.filter((m) => !m.efter).map((m) => m.post),
-  ...avsnitt.flatMap((a) => [a, ...menyTabeller.filter((m) => m.efter === a.id).map((m) => m.post)]),
+  ...avsnitt.flatMap((a) => [a, ...menyTabeller.filter((m) => m.efter === a.id).map((m) => m.post), ...(a.id === 'ramar' ? menyLektioner : [])]),
 ];
 ---
 <div class="metod-modell">
@@ -161,7 +180,7 @@ const meny = [
     <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
@@ -227,7 +246,7 @@ const meny = [
     <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
@@ -264,7 +283,7 @@ const meny = [
     <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
@@ -287,7 +306,7 @@ const meny = [
     <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
@@ -329,7 +348,7 @@ const meny = [
     <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
@@ -366,7 +385,7 @@ const meny = [
     <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
@@ -465,7 +484,7 @@ const meny = [
     <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
@@ -496,12 +515,16 @@ const meny = [
           {ram.oversikt && <MetodTabell kolumner={ram.oversikt.kolumner} rader={ram.oversikt.rader} klass={kortaCeller(ram.oversikt.rader) ? 'fri tat' : friKlass(ram.oversikt)} radrubrik={false} />}
           {ram.listor ? (
             <>
-              {ram.delar.map((del) => (
+              {ram.delar.map((del) => (<>
                 <div class="m-listnot">
                   <p class="kicker">{del.rubrik}</p>
                   {del.falt.map((f) => <p><b>{f.rubrik}</b>{linjer(f.text).map((x, j) => <>{j > 0 && <br />}{repliker(x).map((r) => (r.replik ? <em>{r.text}</em> : r.text))}</>)}</p>)}
                 </div>
-              ))}
+                <Filmruta filmer={vid({ del: del.rubrik })} titel={d.titel} />
+              </>))}
+              {/* Räknebladen (rakneblad): här står uppgifterna, och bladet med rutnät att räkna i finns i Word. Hänvisningen står
+                  före listorna, så att den inte blir ensam på en sida i utskriften (granskningen 2026-10-04). */}
+              {(ram.listor ?? []).some((l) => l.rakneblad) && <p class="m-efter">{(ram.listor ?? []).filter((l) => l.rakneblad).length === 1 ? 'Bladet' : 'Bladen'}, med en ruta per uppgift och ett rutnät att räkna i, en siffra per ruta, finns i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>}
               {ram.listor.map((l, li) => {
                 // Ljudlekens former går före de andra korten (src/lib/ljudkort.ts).
                 const ljud = ljudform(d, l);
@@ -521,7 +544,7 @@ const meny = [
                 if (info && arTarning(d, l)) return <div class="m-ej-utskrift"><Kortlista rubrik={l.rubrik} info={info} nyGrupp={info.grupp !== forra} brak={brak} /></div>;
                 return info
                   ? <Kortlista rubrik={l.rubrik} info={info} nyGrupp={info.grupp !== forra} brak={brak} />
-                  : <Elevlista rubrik={l.rubrik} kolumner={l.kolumner} rader={l.rader} brak={brak} huvud={li === 0 ? ram.huvud : undefined} klass={arEttKort(ram.listor!, l) ? 'kort' : ''} elev={elevtypsnitt && !l.larare} />;
+                  : <Elevlista {...(l.rakneblad ? listansNiva(d.nivaer, l.rubrik) : { rubrik: l.rubrik })} id={bladAnkare.get(`${ri}-${li}`)} kolumner={l.kolumner} rader={l.rader} brak={brak} huvud={li === 0 ? ram.huvud : undefined} klass={arEttKort(ram.listor!, l) ? 'kort' : ''} elev={elevtypsnitt && !l.larare} />;
               })}
             </>
           ) : ramArTom(ram)
@@ -551,13 +574,29 @@ const meny = [
               : <p class="m-efter">Ramen att fylla i, med {ram.delar.length === 1 ? 'en del' : `${ram.delar.length} delar`}, finns i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a>.</p>)
             : (
               <div class="m-ramdelar">
+                {ram.lektioner && (
+                  <ol class="m-lektionskort m-veckokort" aria-label={`${ram.delar.length} ${(ram.rubrik.split(':')[1] ?? 'delar').trim()}`}>
+                    {ram.delar.map((del, di) => {
+                      const [forsta, ...resten] = del.rubrik.split(' · ');
+                      const nr = forsta.match(/\d+/)?.[0] ?? String(di + 1);
+                      return (
+                        <li class="m-lektionskort-kort">
+                          <p class="m-lektionskort-formaga"><span class="m-lektionskort-nr" aria-hidden="true">{nr}</span><span>{resten.length ? forsta : `Del ${di + 1}`}</span></p>
+                          <h4><a href={`#${delAnkare[ri][di]}`}>{resten.length ? resten.join(' · ') : del.rubrik}</a></h4>
+                          {del.falt[0] && <p>{del.falt[0].text}</p>}
+                        </li>
+                      );
+                    })}
+                  </ol>
+                )}
                 {ram.huvud && (
                   <dl class="m-ramfalt m-ramhuvud">
                     {ram.huvud.map((f) => <div><dt>{f.rubrik}</dt><dd>{f.text}</dd></div>)}
                   </dl>
                 )}
-                {ram.delar.map((del) => (
-                  <div class="m-ramdel">
+                {ram.delar.map((del, di) => {
+                  const rutan = (
+                  <div class="m-ramdel" id={ram.lektioner ? delAnkare[ri][di] : undefined}>
                     <h4>{del.rubrik}<span class="m-ramnamn"> · {ram.rubrik}</span></h4>
                     <dl class="m-ramfalt">
                       {del.falt.map((f) => (
@@ -565,7 +604,31 @@ const meny = [
                       ))}
                     </dl>
                   </div>
-                ))}
+                  );
+                  const bilder = vid({ del: del.rubrik });
+                  if (!ram.lektioner) return <>{rutan}<Filmruta filmer={bilder} titel={d.titel} /></>;
+                  // En vecka (en ram med lektioner): rutan, och sedan raden ur kartan och bilden På bordet som ett block. I
+                  // utskriften är veckan en sida och bilden fyller det som är kvar av den (global.css, .m-vecka); räcker det
+                  // inte till en bild som går att läsa (veckanRyms), står blocket i full storlek på nästa sida, så att talen
+                  // och bladen står med bilden (Niclas 2026-10-04).
+                  const kartrad = karta ? delensRad(karta, del.rubrik) : undefined;
+                  const ryms = veckanRyms(del.falt, kartrad?.slice(1), bilder.map((b) => ('bild' in b ? b.bild.text : '')).join(' '));
+                  return (
+                    <div class={`m-vecka${ryms ? '' : ' tva-sidor'}`}>
+                      {rutan}
+                      <div class="m-vecka-bild">
+                        {/* Veckans rad ur kartan står utan egen rubrik: nivåernas färger säger vad den är (Niclas
+                            2026-10-04: "Rubriken Talen och bladen i veckan behövs nog inte"). */}
+                        {kartrad && (
+                          <div class="m-kartrad">
+                            <MetodTabell kolumner={karta!.kolumner.slice(1)} rader={[kartrad.slice(1)]} klass="fri stapla" radrubrik={false} karta={radLankar} />
+                          </div>
+                        )}
+                        <Filmruta filmer={bilder} titel={d.titel} />
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             )}
           {/* Elevens blad med bildserien och arket att klippa ut står efter ramens delar, som i Word, där bladet står på ett

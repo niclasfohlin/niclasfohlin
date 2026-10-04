@@ -1,0 +1,15 @@
+---
+// En bild På bordet (src/lib/pabordet.ts): rubriken, bilden i textens bredd och bildtexten, på skärmen och i
+// utskriften. Efter en vecka (en del i en ram med lektioner) står bilden utan egen rubrik, och bildtexten börjar med
+// På bordet, som i Word, där veckan och bilden står på samma sida. Bilden hämtas först när läsaren närmar sig den, och
+// knappen Skriv ut väntar in den (data-utskriftsbild, Nedladdning.astro).
+import { PABORDET_MATT, iDel, type PaBordet } from '../lib/pabordet';
+interface Props { b: PaBordet }
+const { b } = Astro.props;
+const vecka = iDel(b);
+---
+<figure class={`m-pabordet${vecka ? ' i-del' : ''}`}>
+  {!vecka && <p class="m-pabordet-rubrik">På bordet · {b.bild.rubrik}</p>}
+  <img src={b.adress} alt={`På bordet: ${b.bild.rubrik}`} width={PABORDET_MATT.bredd} height={PABORDET_MATT.hojd} loading="lazy" decoding="async" data-utskriftsbild />
+  <figcaption>{vecka ? <><b>På bordet.</b>{' '}{b.bild.text}</> : b.bild.text}</figcaption>
+</figure>

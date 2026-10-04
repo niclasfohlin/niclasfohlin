@@ -31,6 +31,7 @@ const UNDANTAG = [
   { vag: /^(kort|elevblad)(\.|$)/, word: false, utskrift: false, skal: 'pekar ut listor och fält; texterna prövas där de står, under ramar' },
   { vag: /^(film|filmer\.\d+)\.(titel|beskrivning)$/, word: false, utskrift: false, skal: 'filmens namn och textalternativ på skärmen; stillbildernas texter prövas' },
   { vag: /^filmer\.\d+\.efter$/, word: false, utskrift: false, skal: 'filmens plats; platsen prövas nedan' },
+  { vag: /^pabordet\.\d+\.efter$/, word: false, utskrift: false, skal: 'bildens plats; platsen prövas nedan, som filmernas' },
   { vag: /^lathund\./, utskrift: false, skal: 'lathunden är en egen sida med egen utskrift' },
   { vag: /^mallar\.\d+\.text$/, word: false, skal: 'mallens text är till läraren och står bara på sidan' },
   { vag: /^mallar\.\d+\.underrad$/, utskrift: false, skal: 'raden ritas som fält med skrivlinjer på sidan' },
@@ -186,13 +187,19 @@ for (const fil of filer) {
   // inte i utskriften, där sidan hänvisar till tärningen att vika i planeringsmallarna (granskningen 2026-10-02).
   const arTarning = (l) => /^Tärning\b/i.test(l.rubrik ?? '') && (d.kort?.listor ?? []).some((t) => (l.rubrik ?? '').includes(t)) && l.rader.flat().filter((c) => String(c ?? '').trim()).length === 6;
   const tarningar = (d.ramar?.ramar ?? []).flatMap((r, i) => (r.listor ?? []).map((l, j) => (arTarning(l) ? new RegExp(`^ramar\\.ramar\\.${i}\\.listor\\.${j}\\.`) : null)).filter(Boolean));
+  // En räknebladsrubrik med en nivås led (nivaer, src/lib/nivaer.ts) står med nivåns skylt först och utan ledet:
+  // "Före och efter · Bas · Räkna i rutnätet" står som skylten Bas och "Före och efter · Räkna i rutnätet", på sidan och i
+  // Word. Andra listor står som de är skrivna, eftersom skylten bara ritas på räknebladen.
+  const nivaNamn = new Set((d.nivaer ?? []).map((x) => x.namn));
+  const raknebladsRubrik = (vag) => { const m = vag.match(/^ramar\.ramar\.(\d+)\.listor\.(\d+)\.rubrik$/); return !!m && !!d.ramar?.ramar?.[m[1]]?.listor?.[m[2]]?.rakneblad; };
+  const medNivanForst = (t) => { const led = t.split(' · '); const i = led.findIndex((x) => nivaNamn.has(x.trim())); return i < 0 ? t : `${led[i].trim()} ${led.filter((_, j) => j !== i).join(' · ')}`; };
   const saknas = [];
   for (const { vag, text } of texter(d, '', [])) {
     if (lastextRader.some((r) => r.test(vag))) continue;
     const u = UNDANTAG.find((x) => x.vag.test(vag));
     // Arbetsformens delar står i remsan och på lathunden utan sitt nummer ("4. I tur och ordning igen" blir "I tur och
     // ordning igen", passOversikt och arbetsformRad i src/lib/metod.ts), så numret prövas inte (Kompissamtal 2026-10-03).
-    const n = norm(/^arbetsform\.delar\.\d+\.rubrik$/.test(vag) ? text.replace(/^\d+\.\s*/, '') : text);
+    const n = norm(/^arbetsform\.delar\.\d+\.rubrik$/.test(vag) ? text.replace(/^\d+\.\s*/, '') : raknebladsRubrik(vag) ? medNivanForst(text) : text);
     const iWord = u?.word === false || word.includes(n) || !!lastextRubrik.get(vag)?.every((del) => word.includes(del))
       || (sagofalt.has(vag) && text.split('\n').every((del) => word.includes(norm(del))));
     const iUtskrift = u?.utskrift === false || tommaRamar.some((r) => r.test(vag)) || tarningar.some((r) => r.test(vag)) || utskrift.includes(n);
@@ -237,6 +244,21 @@ for (const fil of filer) {
     if (aW !== aU) saknas.push(`    ${namn}: står under rubriken ”${kort(aW)}” i Word-filen men under ”${kort(aU)}” i sidans utskrift; platsen ska vara densamma (src/lib/film.ts, filmerVid)`);
     const [fW, fU] = [textFore(word, pW), textFore(utskrift, pU)];
     if (fW !== fU) saknas.push(`    ${namn}: står efter ”${kort(fW)}” i Word-filen men efter ”${kort(fU)}” i sidans utskrift; platsen ska vara densamma (src/lib/film.ts, filmerVid)`);
+  }
+  // Bilderna På bordet (src/lib/pabordet.ts) prövas som filmerna: bilden står i samma avsnitt och efter samma text ur
+  // metodens fil i Word-filen och i utskriften. Bilden hittas genom sin rubrik och bildtext, som följer varandra i båda
+  // (bilden själv är ingen text); efter en vecka står bara bildtexten, som börjar med På bordet.
+  for (const b of d.pabordet ?? []) {
+    const namn = `bilden På bordet ${b.nr} (${b.rubrik})`;
+    const nyckel = norm(`På bordet ${/^del:/.test(b.efter ?? '') ? '' : b.rubrik} ${b.text}`);
+    const pW = word.indexOf(nyckel);
+    const pU = utskrift.indexOf(nyckel);
+    if (pW < 0 || pU < 0) { saknas.push(`    ${namn}: rubriken och bildtexten saknas i ${[pW < 0 && 'Word-filen', pU < 0 && 'sidans utskrift'].filter(Boolean).join(' och ')}`); continue; }
+    if (word.indexOf(nyckel, pW + 1) >= 0 || utskrift.indexOf(nyckel, pU + 1) >= 0) { saknas.push(`    ${namn}: två bilder har samma rubrik och bildtext; ge bilden en egen bildtext, så att dess plats går att pröva`); continue; }
+    const [aW, aU] = [avsnittFore(rubrikerWord, pW), avsnittFore(rubrikerUtskrift, pU)];
+    if (aW !== aU) saknas.push(`    ${namn}: står under rubriken ”${kort(aW)}” i Word-filen men under ”${kort(aU)}” i sidans utskrift; platsen ska vara densamma (src/lib/pabordet.ts, paBordetVid)`);
+    const [fW, fU] = [textFore(word, pW), textFore(utskrift, pU)];
+    if (fW !== fU) saknas.push(`    ${namn}: står efter ”${kort(fW)}” i Word-filen men efter ”${kort(fU)}” i sidans utskrift; platsen ska vara densamma (src/lib/pabordet.ts, paBordetVid)`);
   }
   if (saknas.length) {
     fel += saknas.length;

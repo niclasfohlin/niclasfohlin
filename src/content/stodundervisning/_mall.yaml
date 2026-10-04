@@ -42,6 +42,12 @@ publicerad: 2026-01-01
 relaterade: []
 # true: syns bara i npm run dev, ingen pdf-kontroll, inget mejl. Sätt false när metoden är klar att mejlas.
 utkast: true
+# Valfritt: kursens nivåer (De fyra räknesätten i grupp). Ett led i en räknebladsrubrik som heter som en nivå blir en
+# skylt i nivåns färg före rubriken ("Före och efter · Bas · Räkna i rutnätet"), och kartans kolumner med nivåns namn får färgen.
+# nivaer:
+#   - { namn: Bas, farg: 3E8E41 }
+#   - { namn: Medel, farg: F2C94C }
+#   - { namn: Avancerad, farg: D64541 }
 
 # Serier (Ljudlek i grupp): en generell metod med en lektionsbank och lektioner som är egna metoder. En ny lektion är en
 # ny fil med de tre fälten nedan: den syns i banken, i metodbanken och i seriens meny utan att den generella metoden
@@ -149,6 +155,9 @@ tabeller:
       - [Skrivbok, Här skriver eleven tre favoritmeningar]
     # Valfri not under tabellen.
     not: En mening som förklarar tabellen.
+    # Valfritt: karta: true gör tabellen till kursens karta (De fyra räknesätten). Varje rad hör till en vecka i ramen med
+    # lektioner: första cellen börjar med veckans första led ("Vecka 1\nHopp på talraden") och leder dit, och bladens namn
+    # i cellerna ("Addition 1 och Subtraktion 1") leder till räknebladen. Varje vecka visar sin rad.
 
 # Hem och skola, för insatser där hemmet gör en del av arbetet. Kontraktet och schemat blir egna sidor i planeringsmallarna.
 hem:
@@ -231,6 +240,18 @@ ramar:
       # rutor blir elevens blad efter delarna (liggande A4 i Word), en enda ruta står stort under texten. Fältet Ruta 1 i
       # delarna blir rutans alternativtext. ark: bubblor ger arket att klippa ut efter delarna.
       # serie: fonsterplatsen
+      # lektioner: true när delarna är kursens veckor (De fyra räknesätten): ett kort per vecka på sidan och Veckorna i
+      # menyn, och i Word varje vecka på en egen sida med sin rad ur kartan och sin bild På bordet.
+      # En lista med rakneblad är elevens räkneblad, en uppgift per rad: i Word en ruta per uppgift med ett rutnät att
+      # räkna i (rutor: [kolumner, rader], rutaCm) eller en tom talrad (talrad: true), perRad rutor i bredd. En rad utan
+      # siffror är bladets uppmaning. Rubrikens led "Blad 1 · Addition" ger bladets namn i kartan, Addition 1.
+      # listor:
+      #   - rubrik: Blad 1 · Addition · Hoppa på talraden
+      #     rakneblad: { talrad: true }
+      #     rader: [["38 + 25"], ["47 + 36"], ["Rita hoppen och skriv svaret."]]
+      #   - rubrik: Blad 1 · Multiplikation · Rektanglar
+      #     rakneblad: { rutor: [7, 7], rutaCm: 0.6, perRad: 3 }
+      #     rader: [["3 · 4"], ["4 · 6"]]
       delar:
         - rubrik: Del 1 · Hej
           falt:
@@ -264,7 +285,9 @@ diplom:
 # ska ha ett blad ("Tabellmall att fylla i" på bordet), finns bladet här. typ rutnat: band med kolumnnamn, tomma när
 # eleven skriver rubriken själv, och rader rutor. typ flode: rutor med pil mellan. typ matta, brakplank och tallinjer:
 # se src/content.config.ts. text är till läraren och står bara på sidan; underrad står på bladet. typ serie: tomma rutor
-# att rita en serie i, rutor 2, 4 eller 6, och etiketter som namn på rutorna i stället för nummer (Seriesamtal).
+# att rita en serie i, rutor 2, 4 eller 6, och etiketter som namn på rutorna i stället för nummer (Seriesamtal). typ
+# talruta: ett rutnät över ett liggande A4 med rutor på rutaCm och var tionde linje tjockare. En matta med enPerSida och
+# rader delar varje ark i lika höga fält med en streckad linje emellan (räknemattan i De fyra räknesätten).
 # mallar:
 #   - rubrik: Tabellmall att fylla i
 #     typ: rutnat
@@ -280,6 +303,10 @@ diplom:
 #     rutor: 2
 #     etiketter: [Så kan det bli, Så slutar det]
 #     underrad: Rita hur det kan bli i stället och hur det slutar.
+#   - rubrik: Talrutan
+#     typ: talruta
+#     rutaCm: 0.8
+#     underrad: "Rita rektangeln från övre vänstra hörnet · Namn: ______________"
 
 # Lathunden: fyra sidor ur snabbguiden (Metoden, Ett pass, Mallen, Material). Egen sida
 # /stodundervisning/<id>/lathund, utskrift i liggande A4 och Word-fil. Passlängd, grupp och
@@ -366,8 +393,9 @@ lathund:
 # plats i sidan, utskriften och Word. Filerna heter <id>-film2.svg och <id>-film2-1.svg … -4.svg. efter är ett avsnitt
 # (passrutin, tidsschema, steg, arbetsform, exempel, fastnar, roll, urval, hem, progression, uppfoljning, mal, snabbmall,
 # checklista, grund eller ramar: filmen står sist i avsnittet), "tabell: <rubrik>" (efter den fria tabellen),
-# "ram: <rubrik>" (efter ramen), "steg <N>" (efter steg N; tabellen delas där) eller "stycke <N>" (efter stycke N i
-# inledningen), med N från 1. En rubrik räcker med ledet före kolon. Rubrik och ingress är olika för varje film i metoden.
+# "ram: <rubrik>" (efter ramen), "del: <rubrik>" (efter en del i en ram), "steg <N>" (efter steg N; tabellen delas där)
+# eller "stycke <N>" (efter stycke N i inledningen), med N från 1. En rubrik räcker med ledet före kolon. Rubrik och
+# ingress är olika för varje film i metoden.
 # filmer:
 #   - nr: 2
 #     titel: "Bråket på fyra sätt"
@@ -381,3 +409,15 @@ lathund:
 #       - text: "…"
 #       - text: "…"
 #       - text: "…"
+# Bilderna På bordet ur metodriggen (De fyra räknesätten i grupp, src/lib/pabordet.ts): det som ligger på bordet, som
+# public/stodundervisning/<id>-pabordet-<nr>.svg i 960 × 540. efter är en plats som för en extrafilm, och "del: <rubrik>"
+# efter en vecka, där bilden står utan egen rubrik och bildtexten börjar med På bordet.
+# pabordet:
+#   - nr: 0
+#     rubrik: Materialet
+#     text: "Vad som ligger på bordet och var det kommer ifrån, i en eller två meningar."
+#     efter: "tabell: Materialet du behöver"
+#   - nr: 1
+#     rubrik: "Vecka 1 · Hopp på talraden"
+#     text: "Talen på tavlan och det eleverna har framför sig."
+#     efter: "del: Vecka 1 · Hopp på talraden"

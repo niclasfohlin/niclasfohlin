@@ -5,12 +5,15 @@
 // staplade, som i elevens läromedel (Brak.astro).
 import Brak from './Brak.astro';
 import { harFragor, textlangd } from '../lib/ramform';
+import { skyltText, type Niva } from '../lib/nivaer';
 // brak: bråken staplas (metoder i matematik); annars står texten som den är.
 // huvud: ramens fält att fylla i före listan (elevens namn på kartläggningens kopia), i samma block som listan.
 // elev: metoden har kort i elevens typsnitt (src/lib/ljudkort.ts), så bladet eleven läser står i det också; lärarens
 // protokoll behåller husets typsnitt.
-interface Props { rubrik?: string; kolumner?: string[]; rader: string[][]; klass?: string; brak?: boolean; huvud?: { rubrik: string; text: string }[]; elev?: boolean }
-const { rubrik, kolumner, rader, klass = '', brak = false, huvud, elev = false } = Astro.props;
+// niva: listans nivå (src/lib/nivaer.ts), som en skylt i nivåns färg före rubriken, där nivåns led inte står kvar.
+// id: ett ankare på listan (räknebladen, som kartan leder till, src/lib/karta.ts).
+interface Props { rubrik?: string; kolumner?: string[]; rader: string[][]; klass?: string; brak?: boolean; huvud?: { rubrik: string; text: string }[]; elev?: boolean; niva?: Niva; id?: string }
+const { rubrik, kolumner, rader, klass = '', brak = false, huvud, elev = false, niva, id } = Astro.props;
 // En kolumn där alla rader är tomma, bredvid kolumner med text, är en skrivkolumn (kartläggningens Före och Efter):
 // smal, och räknas inte när listan avgör om den är en enda kolumn text. Är alla kolumner tomma (ett schema att fylla
 // i) är ingen smal. Samma regel som i Word (elevlista i src/lib/metoddocx.ts).
@@ -29,13 +32,13 @@ const pil = (c: string) => c.replace(/ → /g, ' → ');
 // upp står för sig, bredvid varandra på datorn och efter varandra på telefonen. Samma form i Word (fragelista).
 const fragor = harFragor({ kolumner, rader }) ? rader.map((r) => (r[1] ?? '').trim()).filter(Boolean) : undefined;
 ---
-<div class={`m-lista ${bokstaver ? 'bokstaver' : ''} ${enKolumn ? 'en-kolumn' : ''} ${protokoll ? 'protokoll' : ''} ${manga ? 'manga' : ''} ${elev && !protokoll ? 'elev' : ''} ${fragor ? `fragor text-${textlangd({ rader })}` : ''} ${klass}`.replace(/\s+/g, ' ').trim()}>
+<div id={id} class={`m-lista ${bokstaver ? 'bokstaver' : ''} ${enKolumn ? 'en-kolumn' : ''} ${protokoll ? 'protokoll' : ''} ${manga ? 'manga' : ''} ${elev && !protokoll ? 'elev' : ''} ${fragor ? `fragor text-${textlangd({ rader })}` : ''} ${klass}`.replace(/\s+/g, ' ').trim()}>
   {huvud && (
     <dl class="m-ramfalt m-ramhuvud">
       {huvud.map((f) => <div><dt>{f.rubrik}</dt><dd>{f.text}</dd></div>)}
     </dl>
   )}
-  {rubrik && <h4 class="m-lista-rubrik">{rubrik}</h4>}
+  {rubrik && <h4 class="m-lista-rubrik">{niva && <><span class="m-niva" style={`--niva:#${niva.farg};--niva-text:#${skyltText(niva.farg)}`}>{niva.namn}</span>{' '}</>}{rubrik}</h4>}
   {fragor ? (
     <div class="m-fragetext">
       <div class="m-texten">{rader.map((r) => <p>{r[0]}</p>)}</div>

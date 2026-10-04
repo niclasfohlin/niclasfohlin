@@ -7,21 +7,40 @@
 // i rad 1 eller ovanför tabellen (fria tabeller, ordlistor, lathundens mallar) är första kolumnen
 // vanlig text. En rad där varje cell är skriven med versaler är en mellanrubrik i tabellen och
 // ritas som en rubrikrad (verbdelen i en läslista).
-interface Props { kolumner: string[]; rader: string[][]; bredder?: string[]; klass?: string; radrubrik?: boolean }
-const { kolumner, rader, bredder = [], klass = '', radrubrik = true } = Astro.props;
+// karta: tabellen är kursens karta (src/lib/karta.ts): rubrikraden har nivåernas färger, veckan i första kolumnen leder
+// till veckan (vecka), och bladens namn i cellerna leder till räknebladen (blad).
+interface KartaLankar { vecka?: (rad: string[]) => string | undefined; blad: (namn: string) => string | undefined; namn: Set<string>; nivaer: Niva[] }
+interface Props { kolumner: string[]; rader: string[][]; bredder?: string[]; klass?: string; radrubrik?: boolean; karta?: KartaLankar }
+const { kolumner, rader, bredder = [], klass = '', radrubrik = true, karta } = Astro.props;
 import { ejBryt } from '../lib/metod';
+import { bladDelar } from '../lib/karta';
+import { skyltText, type Niva } from '../lib/nivaer';
 // Raden under radrubriken (tider som "8–18 min · dag 2: 5–8") får inte brytas mitt i ett spann. Ett nummer före en
 // mittpunkt ("5 · Snögubben", "2 · Modellering") står kvar med ordet efter, så att numret aldrig står ensamt på en rad.
-const linjer = (t: string) => t.split('\n').map((x, j) => (j > 0 ? ejBryt(x) : x).replace(/^(\d+) · /, '$1 · '));
+// En lång uträkning med hårda mellanslag ("3 · 24 = 3 · 20 + 3 · 4 = 60 + 12 = 72") får brytas efter ett likhetstecken, så
+// att kolumnen inte blir bredare än sidan (De fyra räknesätten, tabellen Så visar du de fyra räknesätten). Word bryter
+// själv i cellen.
+const brytbar = (t: string) => t.replace(/\u00a0=\u00a0/g, '\u00a0= ');
+const linjer = (t: string) => brytbar(t).split('\n').map((x, j) => (j > 0 ? ejBryt(x) : x).replace(/^(\d+) · /, '$1 · '));
 // Repliker (”…”) i en cell sätts kursiva, som exempelfraserna i stegtabellen och replikerna i exemplet.
 const repliker = (s: string) => s.split(/(”[^”]*”)/).filter(Boolean).map((text) => ({ text, replik: text.startsWith('”') }));
 const arMellanrubrik = (r: string[]) => r.every((c) => c.trim() && c === c.toUpperCase() && /\p{L}/u.test(c));
+const niva = (k: string) => karta?.nivaer.find((n) => n.namn === k);
+// En kort tabell (högst fem rader) delas inte mellan sidor i utskriften (K-076), om den ryms: raderna räknas med omkring
+// 90 tecken över sidans bredd, delat lika på kolumnerna, och högst 40 rader hålls ihop. En högre tabell flyttades annars
+// till nästa sida och lämnade en halv sida tom (De fyra räknesätten, Så visar du de fyra räknesätten), som tabellHojd i
+// metoddocx.ts hindrar i Word.
+const perRad = Math.max(8, Math.floor(90 / Math.max(1, kolumner.length)));
+const textrader = rader.reduce((s, r) => s + 1 + Math.max(1, ...r.map((c) => c.split('\n').reduce((a, l) => a + Math.max(1, Math.ceil(l.length / perRad)), 0))), 0);
+const hel = rader.length <= 5 && textrader <= 40;
+// Bladens namn som länkar till räknebladen, i kartan.
+const lankDelar = (x: string) => bladDelar(x, karta!.namn).map((d) => ({ text: d.text.replace(/ (\d+)$/, '\u00a0$1'), href: d.blad ? karta!.blad(d.blad) : undefined }));
 ---
 {/* hel: en kort tabell (högst fem rader, som lästrappan) delas inte mellan sidor i utskriften, som i Word (K-076). */}
-<table class={`m-tabell ${klass} ${rader.length <= 5 ? 'hel' : ''}`.replace(/\s+/g, ' ').trim()}>
+<table class={`m-tabell ${klass} ${hel ? 'hel' : ''} ${karta ? 'karta' : ''}`.replace(/\s+/g, ' ').trim()}>
   {bredder.length > 0 && <colgroup>{bredder.map((b) => <col style={`width:${b}`} />)}</colgroup>}
   <thead>
-    <tr>{kolumner.map((k) => <th scope="col">{k}</th>)}</tr>
+    <tr>{kolumner.map((k) => { const n = niva(k); return n ? <th scope="col" class="niva" style={`--niva:#${n.farg};--niva-text:#${skyltText(n.farg)}`}>{k}</th> : <th scope="col">{k}</th>; })}</tr>
   </thead>
   <tbody>
     {rader.map((rad) => arMellanrubrik(rad)
@@ -33,7 +52,10 @@ const arMellanrubrik = (r: string[]) => r.every((c) => c.trim() && c === c.toUpp
           if (i === 0 && radrubrik) return <th scope="row" data-rubrik={kolumner[i]}><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</th>;
           // En tom cell ritas tom, så att :empty träffar (mattan och bladet på lathundens mallsida).
           if (i === 0 && !cell.trim()) return <td data-rubrik={kolumner[i]}></td>;
-          if (i === 0) return <td data-rubrik={kolumner[i]}><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</td>;
+          if (i === 0 && karta?.vecka) { const href = karta.vecka(rad); return <td data-rubrik={kolumner[i]}>{href ? <a class="m-karta-vecka" href={href}><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</a> : <><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</>}</td>; }
+          if (i === 0 && !karta) return <td data-rubrik={kolumner[i]}><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</td>;
+          // Staplad på en smal skärm får nivåns cell sin etikett i nivåns färg, som rubrikraden (global.css, td.niva::before).
+          if (karta) { const n = niva(kolumner[i]); return <td data-rubrik={kolumner[i]} class={n ? 'niva' : undefined} style={n ? `--niva:#${n.farg};--niva-text:#${skyltText(n.farg)}` : undefined}>{l.map((x, j) => <>{j > 0 && <br />}{lankDelar(x).map((dd) => (dd.href ? <a href={dd.href}>{dd.text}</a> : dd.text))}</>)}</td>; }
           return <td data-rubrik={kolumner[i]}>{l.map((x, j) => <>{j > 0 && <br />}{repliker(x).map((r) => (r.replik ? <em>{r.text}</em> : r.text))}</>)}</td>;
         })}
       </tr>
