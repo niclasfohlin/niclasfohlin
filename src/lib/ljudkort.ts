@@ -52,7 +52,9 @@ export const kortCeller = (l: Lista) => l.rader.flat().map((c) => String(c ?? ''
 // Bildlista.astro och Word med bildlista i src/lib/metoddocx.ts. Saknas en bild står listan som vanligt; schemat stoppar det.
 export const arBildlista = (l: Lista): boolean => !!l.bilder && kortCeller(l).length > 0 && kortCeller(l).every((k) => bildFor(k));
 // Hur upphovsraden nämner listan: "Bilderna på kortet Peka på känslan: …".
-export const bildlistansNamn = (l: Lista): string => (l.rubrik ? `kortet ${l.rubrik}` : 'korten med bilder');
+// Ett namn som slutar med frågetecken eller utropstecken står inom citattecken, så att kolonet efter det läses rätt:
+// "Bilderna på kortet ”Vad behöver hen?”: Fluent Emoji" (Seriesamtal, metodriggens upphovsrad 2026-10-04).
+export const bildlistansNamn = (l: Lista): string => (l.rubrik ? (/[?!]$/.test(l.rubrik.trim()) ? `kortet ”${l.rubrik.trim()}”` : `kortet ${l.rubrik}`) : 'korten med bilder');
 const arKortlista = (d: Pick<MetodData, 'kort'>, l: Lista) => (d.kort?.listor ?? []).some((t) => (l.rubrik ?? '').includes(t));
 
 export type Ljudform = 'bildkort' | 'bokstavskort' | 'golvbokstaver' | 'bokstavskarta';
@@ -77,10 +79,11 @@ function allaFormer(d: MetodData): Set<Ljudform> {
 // Elevens typsnitt i allt elevmaterial (Niclas 2026-09-29, K-130: "allt som ligger på bordet och är elevmaterial"), med
 // metodriggens regler (docs/elevmaterial.md): listor och kort som eleven läser, läskorten, elevens blad, mallarna och
 // diplomet, i alla metoder, så att eleven möter samma a, g och l överallt. Lärarens protokoll och listor märkta
-// larare: true, lathunden och ramarnas delar till läraren eller hemmet står i husets typsnitt. En metod utan elevmaterial
+// larare: true, lathunden och ramarnas delar till läraren eller hemmet står i husets typsnitt. En bildserie är elevens
+// blad (seriens namn och namnraden, Seriesamtal). En metod utan elevmaterial
 // behöver inte typsnittet, och då laddas och bäddas det inte in.
 export const harElevmaterial = (d: MetodData): boolean =>
-  (d.ramar?.ramar ?? []).some((r) => (r.listor?.length ?? 0) > 0) || Object.keys(d.elevblad ?? {}).length > 0 || d.mallar.length > 0 || !!d.diplom;
+  (d.ramar?.ramar ?? []).some((r) => (r.listor?.length ?? 0) > 0 || !!r.serie) || Object.keys(d.elevblad ?? {}).length > 0 || d.mallar.length > 0 || !!d.diplom;
 export const harElevtypsnitt = (d: MetodData): boolean => allaFormer(d).size > 0 || harElevmaterial(d);
 
 // Bokstavskartans celler: bokstaven, ordet och bilden. En bokstav utan bild har sin förklaring i ordets ställe ("som k").

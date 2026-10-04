@@ -227,6 +227,10 @@ ramar:
       # lindorm eller slinga; bilder: bildbankens ord för stationerna i fältens ordning; sidor, radMm, rita och kortbilder
       # efter behov. Fältens text är frågan och, efter en radbrytning, startorden. Sidan hänvisar till planeringsmallarna.
       # sagoform: { form: vag, ram: lindorm, titel: Sagans väg, undertitel: fyra steg, bilder: [stjärna, vägspärr, glödlampa, regnbåge], sidor: 2 }
+      # serie: en bildserie ur metodens scenfil src/data/bildserier/<metodens id>.json (Seriesamtal), ritad i kod. Flera
+      # rutor blir elevens blad efter delarna (liggande A4 i Word), en enda ruta står stort under texten. Fältet Ruta 1 i
+      # delarna blir rutans alternativtext. ark: bubblor ger arket att klippa ut efter delarna.
+      # serie: fonsterplatsen
       delar:
         - rubrik: Del 1 · Hej
           falt:
@@ -259,7 +263,8 @@ diplom:
 # Mallar att skriva ut, sist i planeringsmallarna på liggande A4 och som bilder på sidan. Säger metoden att eleverna
 # ska ha ett blad ("Tabellmall att fylla i" på bordet), finns bladet här. typ rutnat: band med kolumnnamn, tomma när
 # eleven skriver rubriken själv, och rader rutor. typ flode: rutor med pil mellan. typ matta, brakplank och tallinjer:
-# se src/content.config.ts. text är till läraren och står bara på sidan; underrad står på bladet.
+# se src/content.config.ts. text är till läraren och står bara på sidan; underrad står på bladet. typ serie: tomma rutor
+# att rita en serie i, rutor 2, 4 eller 6, och etiketter som namn på rutorna i stället för nummer (Seriesamtal).
 # mallar:
 #   - rubrik: Tabellmall att fylla i
 #     typ: rutnat
@@ -270,6 +275,11 @@ diplom:
 #   - rubrik: "Problem och lösning: problem-lösning-ruta"
 #     typ: flode
 #     kolumner: [Problem, Lösning, Resultat]
+#   - rubrik: Nästa gång
+#     typ: serie
+#     rutor: 2
+#     etiketter: [Så kan det bli, Så slutar det]
+#     underrad: Rita hur det kan bli i stället och hur det slutar.
 
 # Lathunden: fyra sidor ur snabbguiden (Metoden, Ett pass, Mallen, Material). Egen sida
 # /stodundervisning/<id>/lathund, utskrift i liggande A4 och Word-fil. Passlängd, grupp och

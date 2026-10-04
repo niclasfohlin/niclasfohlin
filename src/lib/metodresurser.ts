@@ -1,5 +1,6 @@
 // Bilderna och elevens typsnitt till Word-filerna vid bygget, lästa från public/ (src/lib/ljudkort.ts säger vilka), och
-// varje bilds reservbild, ritad ur samma SVG (src/lib/reservbild.ts).
+// varje bilds reservbild, ritad ur samma SVG (src/lib/reservbild.ts). Bildseriernas rutor (src/lib/bildserier.ts) ritas
+// här ur scenfilen, samma filer som bygget lägger under /stodundervisning/<id>/serier/.
 // Bara för bygget: i webbläsaren hämtas samma filer av sidan som bygger den samlade filen (src/pages/stodundervisning/index.astro).
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -8,6 +9,8 @@ import sharp from 'sharp';
 import { ELEVTYPSNITT_TTF, harElevtypsnitt, metodensBilder } from './ljudkort';
 import { BOKTYPSNITT_TTF } from './ramform';
 import { harBoktypsnitt, sagoBilder } from './sagoblad';
+import { serieBilder } from './bildserier';
+import { serieantal, serieFil } from './bildserier-bygge';
 import type { MetodPost } from './metod';
 import type { MetodResurser } from './metoddocx';
 import { reservMatt, reservNyckel, samlaReservbilder } from './reservbild';
@@ -17,7 +20,10 @@ const las = (sokvag: string) => new Uint8Array(readFileSync(join(PUBLIC, sokvag.
 
 export function lasResurser(poster: MetodPost[]): MetodResurser {
   const bilder = new Map<string, Uint8Array>();
-  for (const p of poster) for (const b of [...metodensBilder(p.data, p.id), ...sagoBilder(p.data)]) if (!bilder.has(b)) bilder.set(b, las(b));
+  for (const p of poster) {
+    for (const b of [...metodensBilder(p.data, p.id), ...sagoBilder(p.data)]) if (!bilder.has(b)) bilder.set(b, las(b));
+    for (const b of serieBilder(p.data, p.id, serieantal(p))) if (!bilder.has(b)) bilder.set(b, serieFil(p, b)!);
+  }
   return {
     bilder,
     elevtypsnitt: poster.some((p) => harElevtypsnitt(p.data)) ? las(ELEVTYPSNITT_TTF) : undefined,

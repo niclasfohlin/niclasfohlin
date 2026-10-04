@@ -1,0 +1,32 @@
+---
+// Rutor ritade i kod (Seriesamtal, src/lib/bildserier.ts): en bildseries rutor, provbildens enda ruta och en seriemalls
+// tomma rutor, som bygget ritade dem ur metodens scenfil med metodriggens kod (src/lib/serieritning.js). Elevens blad
+// (namn) har seriens namn och en rad för elevens namn överst, som i Word, och rutorna två i bredd, tre för sex rutor. På en
+// smal skärm står en bildserie en ruta i bredd, så att det som händer syns. I utskriften står bladet på ett liggande A4
+// (global.css), och en ensam ruta i textens bredd. Bilderna hämtas först när läsaren närmar sig dem, och knappen Skriv
+// ut väntar in dem (data-utskriftsbild, Nedladdning.astro).
+interface Ruta { src: string; alt: string; bredd: number; hojd: number }
+interface Props { rutor: Ruta[]; titel?: string; namn?: boolean; mall?: boolean; etikett?: string }
+const { rutor, titel, namn, mall, etikett } = Astro.props;
+const kolumner = rutor.length === 6 ? 3 : rutor.length === 1 ? 1 : 2;
+// Rutornas högsta höjd i utskriften, så att bladet ryms på ett liggande A4 (190 mm) med namnraden, och en mall också med
+// rubriken och underraden (global.css): höjden delas mellan raderna, som i Word. Två rutor med namn är en enda rad, högst
+// 118 mm, så att rutan behåller sin bredd.
+const rader = Math.ceil(rutor.length / kolumner);
+const hojd = rutor.length === 1 ? 0 : Math.min(mall && rutor.length === 2 ? 118 : 999, Math.floor(((mall ? 140 : 160) - 4 * (rader - 1)) / rader));
+---
+{rutor.length === 1 ? (
+  <p class="m-serieruta"><img src={rutor[0].src} alt={rutor[0].alt} width={rutor[0].bredd} height={rutor[0].hojd} loading="lazy" decoding="async" data-utskriftsbild /></p>
+) : (
+  <div class={`m-serieblad${mall ? ' mall' : ''}`} role="group" aria-label={etikett ?? titel}>
+    {namn && (
+      <p class="m-serieblad-huvud">
+        {titel && <span class="m-serieblad-titel">{titel}</span>}
+        <span class="m-serieblad-namn">Namn <span class="m-serieblad-linje" aria-hidden="true"></span></span>
+      </p>
+    )}
+    <ol class={`m-serierutor${mall ? '' : ' serie'}`} style={`--kolumner:${kolumner};--hojd:${hojd}mm`}>
+      {rutor.map((r) => <li><img src={r.src} alt={r.alt} width={r.bredd} height={r.hojd} loading="lazy" decoding="async" data-utskriftsbild /></li>)}
+    </ol>
+  </div>
+)}

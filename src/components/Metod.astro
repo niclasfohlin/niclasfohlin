@@ -13,6 +13,7 @@ import Bokstavskort from './Bokstavskort.astro';
 import Bokstavskarta from './Bokstavskarta.astro';
 import Bildlista from './Bildlista.astro';
 import Golvbokstaver from './Golvbokstaver.astro';
+import Serierutor from './Serierutor.astro';
 import { ANDIKA_ADRESS, arBildlista, harElevtypsnitt, ljudform, upphovBilder } from '../lib/ljudkort';
 import { arElevensBlad, lastexter, protokollDelas } from '../lib/ramform';
 import Filmruta from './Filmruta.astro';
@@ -24,11 +25,21 @@ import type { MetodData } from '../lib/metod';
 import { ejBryt, ramArTom, passGrupper, passOrd, passOversikt, stegTexter, laskortKolumn, arEttKort } from '../lib/metod';
 import { kortInfo } from '../lib/brak';
 import { arTarning, harSagoform, SAGO_UPPHOV } from '../lib/sagoblad';
+import { arkAdress, arSerieMall, mallEtiketter, mallRutor as mallRutorAdresser, rutansText, serieRutor as serieRutorAdresser, svgMatt } from '../lib/bildserier';
+import { serieantal, serieFiler } from '../lib/bildserier-bygge';
 // "Åk 4–5" hålls ihop i ramarnas rubriker och länkar: hårt mellanslag efter Åk, ordfog efter tankstrecket.
 const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 '));
 // koppling: den generella metodens serie med lektionsbanken, eller lektionens plats i den (src/lib/serie.ts).
 interface Props { d: MetodData; id: string; koppling?: SerieKoppling }
 const { d, id, koppling } = Astro.props;
+// Bildserierna, arken och seriemallarna (Seriesamtal, src/lib/bildserier.ts): filerna som bygget ritar ur metodens
+// scenfil, med sina mått, och rutornas alternativtext ur berättelsen, samma som i Word.
+const seriefiler = serieFiler({ id, data: d });
+const antalRutor = serieantal({ id, data: d });
+const ruta = (src: string, alt: string) => ({ src, alt, ...svgMatt(seriefiler.get(src)!) });
+type SerieRam = NonNullable<MetodData['ramar']>['ramar'][number];
+const serieBlad = (ram: SerieRam) => serieRutorAdresser(id, ram.serie!, antalRutor[ram.serie!]).map((src, i, alla) => ruta(src, rutansText(ram, i + 1, alla.length)));
+const mallBlad = (m: MetodData['mallar'][number]) => mallRutorAdresser(id, m).map((src, i) => ruta(src, `${m.rubrik}, ${mallEtiketter(m)?.[i] ?? `ruta ${i + 1}`}, tom att rita i`));
 // Lektionsbanken står på den generella metodens sida efter urvalet, där texten säger var lektionerna finns.
 const bank = koppling && !koppling.lektion ? koppling.serie : undefined;
 // Ljudlekens kort (src/lib/ljudkort.ts): elevens typsnitt på korten och bladen, upphovet för bilderna en gång under
@@ -115,8 +126,9 @@ const ramAnkare = (d.ramar?.ramar ?? []).map((r) => ankare(r.rubrik));
 const boksidor = lastexter(d.ramar?.ramar ?? []);
 const BOKNIVA = ['#4e7a43', '#a8742a', '#6e3450'];
 // Lärarens sidor till lästexterna (riggens namn: Lärarens sida och Lärarens sidor) ryms på ett A4 i Word och får ett eget
-// blad i utskriften, lika tätt (global.css, .m-lararsida).
-const arLararsida = (ram: { rubrik: string }) => /^Lärarens sid(a|or)\b/.test(ram.rubrik);
+// blad i utskriften, lika tätt (global.css, .m-lararsida). Ramen till en bildserie med flera rutor är också lärarens sida
+// (Seriesamtal: texten, berättelsen och rutan Till läraren), med elevens blad på ett eget liggande A4 efter.
+const arLararsida = (ram: { rubrik: string; serie?: string }) => /^Lärarens sid(a|or)\b/.test(ram.rubrik) || (!!ram.serie && (antalRutor[ram.serie] ?? 0) > 1);
 // En fri tabell med meny: true står i menyn efter avsnittet den ligger efter på sidan, med rubrikens första led som namn
 // (Ljudstarten, Dagens ljud och Ordbanken i Ljudlek i grupp, som läraren letar efter varje pass).
 const menyEfter: Record<string, string | undefined> = {
@@ -157,9 +169,12 @@ const meny = [
 
   {pass && d.passrutin && (
     <section id="passrutin" class="m-pass-avsnitt">
+      {/* Rubriken och ingressen i ett block, som utskriften håller ihop (global.css, .m-pass-huvud). */}
+      <div class="m-pass-huvud">
       <h2>{pass.rubrik}</h2>
       {d.passrutin.text && <p>{d.passrutin.text}</p>}
       {pass.text && <p>{pass.text}</p>}
+      </div>
       <div class={`m-remsa${pass.delar.length ? ' har-delar' : ''}`} style={`--kolumner:${pass.faser.map((f) => `minmax(7rem, ${f.minuter}fr)`).join(' ')};--rader:${pass.faser.map((f) => `minmax(auto, ${Math.sqrt(f.minuter).toFixed(2)}fr)`).join(' ')}`} role="img" aria-label={`Passets faser: ${pass.faser.map((f) => `${f.fas} ${f.tid}`).join(', ')}${pass.delar.length ? `. Arbetsform: ${pass.delar.map((x) => `${x.rubrik} ${x.tid}`).join(', ')}` : ''}`}>
         {passGrupper(pass).flatMap((g) => {
           const faser = g.faser.map(({ fas, nr }) => <div class="m-remsa-fas" style={`--nr:${nr + 1}`}><strong>{fas.fas}</strong><span>{fas.tid}</span></div>);
@@ -167,7 +182,8 @@ const meny = [
           return [...faser, <div class="m-remsa-del" style={`--fran:${g.del.fran + 1};--antal:${g.del.antal}`}><strong>{g.del.rubrik}</strong><span class="m-remsa-skiljare">{' '}·{' '}</span><span class="m-remsa-text">{g.del.text}</span></div>];
         })}
       </div>
-      <table class="m-tabell m-pass stapla" id="tidsschema">
+      {/* En passöversikt med mer än 2 300 tecken är längre än en sida i utskriften och får brytas mellan raderna (global.css). */}
+      <table class={`m-tabell m-pass stapla${[pass.fore ?? '', pass.efter ?? '', ...pass.faser.flatMap((f) => [f.fas, f.tid, f.vad, ...f.steg.map((s) => s.text)])].join('').length > 2300 ? ' lang' : ''}`} id="tidsschema">
         <colgroup><col style="width:18%" /><col style="width:40%" /><col style="width:42%" /></colgroup>
         <thead><tr><th scope="col">{ord.fas}</th><th scope="col">{ord.rutin(stegTexter(d).length)}</th><th scope="col">Så leder du det</th></tr></thead>
         <tbody>
@@ -473,6 +489,7 @@ const meny = [
         <section class={`m-ram${protokollDelas(ram) ? ' delad' : ''}${arLararsida(ram) ? ' m-lararsida' : ''}`} id={`ram-${ri + 1}`}>
           <h3 id={ramAnkare[ri]}>{hel(ram.rubrik)}</h3>
           {ram.text.map((s) => <p>{s}</p>)}
+          {ram.serie && antalRutor[ram.serie] === 1 && <Serierutor rutor={serieBlad(ram)} />}
           {ram.sagoform && <p class="m-efter">{sagoNamn[ram.sagoform.form] ?? 'Bladet'} att kopiera, i sagobokens form med ramen, bilderna och raderna, finns i <a href={mallarLank} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word). Här står vad {ram.sagoform.form === 'skyltar' || ram.sagoform.form === 'kort' ? 'de' : 'det'} innehåller.</p>}
           {(ram.listor ?? []).some((l) => arTarning(d, l)) && <p class="m-efter">Tärningarna att klippa, vika och limma, en på varje A4 med bilderna, finns i <a href={mallarLank} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word). Här står orden på sidorna, och de skrivs inte ut.</p>}
           {arElevensBlad(ram) && <p class="m-efter">Bladet att lägga framför eleven, med stor text och bara det eleven läser, finns i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>}
@@ -551,6 +568,17 @@ const meny = [
                 ))}
               </div>
             )}
+          {/* Elevens blad med bildserien och arket att klippa ut står efter ramens delar, som i Word, där bladet står på ett
+              liggande A4 och arket på ett A4 med 1 cm marginal. Utskriften från sidan ger dem samma sidor (global.css). */}
+          {ram.serie && antalRutor[ram.serie] > 1 && (<>
+            <Serierutor rutor={serieBlad(ram)} titel={hel(ram.rubrik)} namn etikett={`${ram.rubrik}, elevens blad`} />
+            <p class="m-efter m-serie-efter">Elevens blad finns också på ett liggande A4 i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>
+          </>)}
+          {ram.ark && (<>
+            <h4 class="m-lista-rubrik m-ark-rubrik">{ram.rubrik}</h4>
+            <p class="m-ark"><img src={arkAdress(id, ram.ark)} alt={`${ram.rubrik}: tankebubblor, pratbubblor och en bubbla för det någon ropar, att klippa ut`} width={svgMatt(seriefiler.get(arkAdress(id, ram.ark))!).bredd} height={svgMatt(seriefiler.get(arkAdress(id, ram.ark))!).hojd} loading="lazy" decoding="async" data-utskriftsbild /></p>
+            <p class="m-efter m-serie-efter">Arket finns i rätt storlek, på ett A4 med 1 cm marginal, i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>
+          </>)}
         </section>
         <Filmruta filmer={vid({ ram: ram.rubrik })} titel={d.titel} />
       </>))}
@@ -578,7 +606,7 @@ const meny = [
       {planketOchLinjen
         ? <p>Mallarna finns i rätt storlek på liggande A4 sist i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a>. Det hela är {helaCm} cm i bråkplanket och på tallinjen från 0 till 1, så att bitarna kan läggas mot linjen. Skrivs mallarna ut på A3 blir allt lika mycket större.{lathundBlad && ` ${lathundBlad} finns på lathundens tredje sida och står också sist i planeringsmallarna.`}</p>
         : <p>Mallarna finns i rätt storlek sist i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a>.{lathundBlad && ` ${lathundBlad} finns på lathundens tredje sida och står också där.`}</p>}
-      <p class="m-mall-svep">Bilderna är bredare än skärmen. Svep i sidled för att se hela mallen.</p>
+      {d.mallar.some((m) => !arSerieMall(m)) && <p class="m-mall-svep">Bilderna är bredare än skärmen. Svep i sidled för att se hela mallen.</p>}
       {d.mallar.map((m) => (
         <figure class="m-mall">
           <figcaption>
@@ -588,7 +616,9 @@ const meny = [
                 knyta till ett par (granskningen 2026-10-02, P1). */}
             {m.underrad && <p class="m-mall-underrad">{m.underrad}</p>}
           </figcaption>
-          <div class="m-mall-ram" tabindex="0" role="region" aria-label={`${m.rubrik}, bild`}><MallBild mall={m} /></div>
+          {arSerieMall(m)
+            ? <Serierutor rutor={mallBlad(m)} namn mall etikett={m.rubrik} />
+            : <div class="m-mall-ram" tabindex="0" role="region" aria-label={`${m.rubrik}, bild`}><MallBild mall={m} /></div>}
           {/* Mattans regel står i foten, som på bladet i Word. */}
           {m.fot && <div class="m-ruta m-mall-fot"><p>{m.fot}</p></div>}
           {/* Arken per talsort ryms inte i rätt storlek i utskriften från sidan: där står en hänvisning i stället för bilden. */}

@@ -386,6 +386,15 @@ const stodundervisning = defineCollection({
           rita: z.boolean().optional(),
           kortbilder: z.record(z.string(), z.array(z.string().nullable())).optional(),
         }).optional(),
+        // Bildserien (Seriesamtal, metodriggens TILL-SAJTEN 2026-10-04): id för en bildserie i metodens scenfil,
+        // src/data/bildserier/<metodens id>.json, ritad i kod ur metodriggen (src/lib/serieritning.js). Rutorna står efter
+        // ramens delar, på sidan två i bredd och i Word som elevens blad på ett liggande A4 med seriens namn och en rad för
+        // namnet. En serie med en enda ruta (provbilden) står stort direkt efter ramens text. Bygget stannar om serien
+        // saknas i scenfilen (src/lib/bildserier-bygge.ts).
+        serie: z.string().regex(/^[a-z0-9-]+$/, 'Seriens id skrivs med a–z, 0–9 och bindestreck, som i scenfilen.').refine((s) => !/^(mall|ark)-/.test(s), 'Ett id som börjar med mall- eller ark- krockar med mallarnas och arkens filer.').optional(),
+        // Ett ark att klippa ut efter ramens delar, ritat i kod (src/lib/serieritning.js): bubblor är sex tankebubblor,
+        // tre pratbubblor och en bubbla för det någon ropar, på ett A4 med kortarkens marginal på 1 cm.
+        ark: z.enum(['bubblor']).optional(),
       })).min(1),
       efter: z.string().optional(),
     }).optional(),
@@ -421,10 +430,16 @@ const stodundervisning = defineCollection({
     // ("Vad kan rubrikerna vara?"), och rader rutor som fyller sidan: sexfältaren, jämförelsetabellen, tabellmallen.
     // typ flode är rutor i följd med en pil mellan och namnet i ett band överst: tidslinjen, orsak-verkan-kedjan,
     // problem-lösning-rutan. Båda är elevblad på liggande A4; texten är till läraren och står bara på sidan.
+    // typ serie är tomma rutor att rita en serie i (Seriesamtal, metodriggens TILL-SAJTEN 2026-10-04): rutor 2, 4 eller
+    // 6, numrerade, med platsens och personernas ruta i den första och en rad för det som händer under varje, på liggande
+    // A4 med underraden och en rad för elevens namn. etiketter ersätter numren med ett namn per ruta (Så kan det bli),
+    // och de rutorna är högre, så att eleven har plats att rita. Rutorna ritas i kod (src/lib/serieritning.js), samma på
+    // sidan och i Word.
     mallar: z.array(z.strictObject({
       rubrik: text,
       text: z.string().optional(),
-      typ: z.enum(['brakplank', 'tallinjer', 'matta', 'rutnat', 'flode']),
+      typ: z.enum(['brakplank', 'tallinjer', 'matta', 'rutnat', 'flode', 'serie']),
+      rutor: z.union([z.literal(2), z.literal(4), z.literal(6)]).optional(),
       rader: z.number().int().min(1).max(12).optional(),
       // Ett tomt namn är en rubrik som eleven skriver själv; bara ett rutnät får ha det (se superRefine nedan).
       kolumner: z.array(z.string().trim()).min(1).optional(),
@@ -433,7 +448,8 @@ const stodundervisning = defineCollection({
       fot: z.string().optional(),
       enPerSida: z.boolean().optional(),
       namnare: z.array(z.number().int().positive()).optional(),
-      etiketter: z.boolean().optional(),
+      // Bråkplankets och tallinjernas etiketter (false stänger av dem), eller seriemallens namn på rutorna.
+      etiketter: z.union([z.boolean(), z.array(text).min(1)]).optional(),
       langdCm: z.number().positive().optional(),
       radhojd: z.number().int().positive().optional(),
       mellanrum: z.number().int().positive().optional(),
@@ -595,6 +611,13 @@ const stodundervisning = defineCollection({
     d.mallar.forEach((m, i) => { if (m.typ === 'flode' && (m.kolumner?.length ?? 0) < 2) ctx.addIssue({ code: 'custom', path: ['mallar', i, 'kolumner'], message: 'Ett flöde kräver minst två rutor.' }); });
     d.mallar.forEach((m, i) => { if (m.typ !== 'rutnat' && m.kolumner?.some((k) => !k)) ctx.addIssue({ code: 'custom', path: ['mallar', i, 'kolumner'], message: `Bara ett rutnät får ha tomma kolumnnamn; mallen ${m.typ} behöver namn i varje kolumn.` }); });
     d.mallar.forEach((m, i) => { if (m.komma && m.komma >= (m.kolumner?.length ?? 0)) ctx.addIssue({ code: 'custom', path: ['mallar', i, 'komma'], message: 'Kommat står efter en kolumn som har fler kolumner efter sig.' }); });
+    // Seriemallen har sina rutor och ett namn per ruta när den har namn; rutor och namnen hör bara till den.
+    d.mallar.forEach((m, i) => {
+      if (m.typ === 'serie' && !m.rutor) ctx.addIssue({ code: 'custom', path: ['mallar', i, 'rutor'], message: 'En seriemall har rutor: 2, 4 eller 6.' });
+      if (m.typ !== 'serie' && m.rutor) ctx.addIssue({ code: 'custom', path: ['mallar', i, 'rutor'], message: 'Bara en seriemall (typ serie) har rutor.' });
+      if (Array.isArray(m.etiketter) && (m.typ !== 'serie' || m.etiketter.length !== m.rutor)) ctx.addIssue({ code: 'custom', path: ['mallar', i, 'etiketter'], message: m.typ === 'serie' ? `Seriemallen har ${m.rutor} rutor och ska ha lika många namn.` : 'En lista med namn hör till en seriemall; bråkplanket och tallinjerna har etiketter: false.' });
+      if (m.typ === 'serie' && m.etiketter === false) ctx.addIssue({ code: 'custom', path: ['mallar', i, 'etiketter'], message: 'En seriemall har numrerade rutor utan etiketter, eller en lista med namn.' });
+    });
     // Citattecknen går jämnt ut i varje stycke, och en radbrytning börjar ett nytt (K-174, Skrivkurs: sagoboken
     // 2026-10-02: musens saga i pass 1 saknade sitt avslutande citattecken, och en mening i tidsschemat hade ett för mycket).
     // "åk" och siffran efter står ihop med ett hårt mellanslag, så att raden aldrig bryts mellan dem, som metodriggens
@@ -620,6 +643,11 @@ const stodundervisning = defineCollection({
       const sti = ['ramar', 'ramar', ri, 'sagoform'];
       for (const ord of [...(s.bilder ?? []), ...Object.values(s.kortbilder ?? {}).flat()]) if (ord && !iBildbanken(ord)) ctx.addIssue({ code: 'custom', path: sti, message: `Bilden "${ord}" finns inte i bildbanken (public/bildbank/ och src/data/bildbank.json).` });
       for (const lista of Object.keys(s.kortbilder ?? {})) if (!(r.listor ?? []).some((l) => l.rubrik === lista)) ctx.addIssue({ code: 'custom', path: sti, message: `kortbilder nämner listan "${lista}", som ramen inte har.` });
+    });
+    // En bildserie eller ett ark står i en vanlig ram: en lästext och ett sagoblad har sin egen sida.
+    (d.ramar?.ramar ?? []).forEach((r, ri) => {
+      if ((r.serie || r.ark) && r.sagoform) ctx.addIssue({ code: 'custom', path: ['ramar', 'ramar', ri, r.serie ? 'serie' : 'ark'], message: 'En ram med sagoform kan inte också ha en bildserie eller ett ark.' });
+      if (r.serie && r.ark) ctx.addIssue({ code: 'custom', path: ['ramar', 'ramar', ri, 'ark'], message: 'En ram har en bildserie eller ett ark, inte båda.' });
     });
   }),
 });

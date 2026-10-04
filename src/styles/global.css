@@ -494,7 +494,7 @@ button.lank:hover { color: var(--farg-accent); }
   .metod-modell > .metod-nav ul a[aria-current="true"] { border-left-color: var(--farg-accent); color: var(--farg-accent); font-weight: 600; background: var(--farg-ton); }
   .metod-modell > .metod-nav .lathund-lank { margin: 0 0 0.75rem 0.75rem; }
 }
-.metod-modell > p, .metod-modell section > p, .metod-text > p { margin: 0 0 1em; }
+.metod-modell > p, .metod-modell section > p, .metod-text > p, .m-pass-huvud > p { margin: 0 0 1em; }
 .metod-modell h2 { font-family: var(--typsnitt-ui); font-size: 1.5rem; color: var(--farg-text); margin: 2em 0 0.5em; }
 .metod-modell section + section { margin-top: 0; }
 .metod-modell .m-efter { color: var(--farg-text-svag); font-size: 0.98rem; }
@@ -702,6 +702,20 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-bildlista-rutor span { font-family: var(--typsnitt-elev); font-size: 1.4rem; line-height: 1.2; color: var(--farg-text); overflow-wrap: anywhere; }
 @media (max-width: 40rem) { .m-bildlista-rutor img { width: 3.25rem; } .m-bildlista-rutor span { font-size: 1.1rem; } }
 @media print { .m-bildlista-rutor { break-inside: avoid; } .m-bildlista-rutor img { width: 2.4cm; } }
+/* Bildserierna (Seriesamtal, Serierutor.astro): rutorna som bygget ritade, elevens blad med seriens namn och en rad för
+   elevens namn överst, provbildens ruta i textens bredd och arket att klippa ut. En bildserie står en ruta i bredd på en
+   smal skärm, så att det som händer i rutan syns; en mall med tomma rutor behåller sina kolumner. Utskriften är nedan. */
+.m-serieruta { margin: 0.75rem 0 1rem; }
+.m-serieruta img, .m-serierutor img, .m-ark img { display: block; width: 100%; height: auto; }
+.m-serieblad { margin: 1.25rem 0 0.5rem; }
+.m-serieblad-huvud { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 1.5rem; margin: 0 0 0.6rem; font-family: var(--typsnitt-elev); color: var(--farg-text); }
+.m-serieblad-titel { font-weight: 700; font-size: 1.15rem; }
+.m-serieblad-namn { margin-left: auto; }
+.m-serieblad-linje { display: inline-block; width: 9rem; height: 1rem; margin-left: 0.35rem; vertical-align: baseline; border-bottom: 1px solid var(--farg-text-svag); }
+.m-serierutor { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--kolumner, 2), minmax(0, 1fr)); gap: 0.6rem; }
+@media (max-width: 40rem) { .m-serierutor.serie { grid-template-columns: minmax(0, 1fr); } }
+.m-ark-rubrik { margin-top: 1rem; }
+.m-ark { margin: 0 0 0.5rem; max-width: 26rem; }
 /* Läskorten (K-063): två kort med streckad kant, bredvid varandra på skärmen och under varandra i mobilen. Bågen under
    varje ordgrupp i kortet med stöd är en kurva i blått (#2e6db4, som i Word och riggen), ritad som bakgrund under
    gruppen; gruppen bryts aldrig, och orden har sina vanliga mellanrum. */
@@ -1220,6 +1234,15 @@ html.js .bara-js { display: inline-block; }
   /* Korta tabeller och passöversikten med sin remsa delas inte mellan sidor, och ett stycke lämnar inte en eller två
      rader ensamma sist eller först på en sida (K-076, granskningen av Upprepad läsning). */
   .m-tabell.hel, .m-pass { break-inside: avoid; }
+  /* En lång passöversikt (över 2 300 tecken, Metod.astro) är längre än en sida och bryts mellan raderna, så att rubriken,
+     ingressen och remsan står med de första raderna. Hölls den ihop, hoppade den till nästa sida och lämnade en sida med
+     bara ingressen (Seriesamtal, Codex-granskningen 2026-10-04). */
+  .m-pass.lang { break-inside: auto; }
+  .m-pass.lang tr { break-inside: avoid; }
+  /* Passavsnittets rubrik och ingress hålls ihop (Metod.astro, .m-pass-huvud), och remsan följer: rubriken stod annars
+     ensam sist på en sida (Seriesamtal, Codex-granskningen 2026-10-04). Chrome följde varken break-after: avoid på
+     rubriken eller break-inside: avoid på blocket där, men delar aldrig ett inline-block. */
+  .m-pass-huvud { display: inline-block; width: 100%; vertical-align: top; }
   .m-remsa { break-after: avoid; }
   .metod-modell p { orphans: 3; widows: 3; }
   .m-remsa-fas, .m-remsa-del, .m-pass .m-pass-kant th, .m-pass .m-pass-kant td { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
@@ -1303,6 +1326,23 @@ html.js .bara-js { display: inline-block; }
      skrivs ut ur planeringsmallarna, så utskriften från sidan visar en hänvisning i stället för bilden. */
   #mallar > h2, #mallar > p { display: none; }
   .m-mall:has(.oversikt) { page: auto; break-before: auto; }
+  /* Lärarens sida till en bildserie eller ett ark börjar på en ny sida, som i Word, så att den går att kopiera hel.
+     Elevens blad med en bildserie står på ett liggande A4, som i Word (@page mall), och en seriemall på mallens sida.
+     Rutorna är så höga att bladet ryms med namnraden (--hojd, Serierutor.astro). Provbildens ruta står i textens bredd, och
+     arket att klippa ut på ett A4 med 1 cm marginal (@page kortark), 190 mm brett som i Word. Raden om Word står inte här. */
+  .m-ram:has(.m-serieblad:not(.mall)), .m-ram:has(.m-ark), .m-ram:has(.m-serieruta) { break-before: page; }
+  .m-serieblad { break-inside: avoid; margin: 0; }
+  .m-serieblad:not(.mall) { page: mall; break-before: page; }
+  .m-serieblad-huvud { margin: 0 0 3mm; font-size: 13pt; }
+  .m-serieblad-titel { font-size: 15pt; }
+  .m-serierutor { gap: 4mm; justify-items: center; }
+  .m-serierutor.serie { grid-template-columns: repeat(var(--kolumner, 2), minmax(0, 1fr)); }
+  .m-serierutor img { width: auto; max-width: 100%; max-height: var(--hojd); }
+  .m-serieruta { break-inside: avoid; }
+  .m-ark-rubrik { page: kortark; break-before: page; break-after: avoid; font-size: 8pt; margin: 0 0 1mm; }
+  .m-ark { page: kortark; max-width: none; margin: 0; }
+  .m-ark img { width: 190mm; }
+  .m-serie-efter { display: none; }
   .m-mall:has(.oversikt) .m-mall-ram { display: none; }
   .m-mall-utskrift { display: block; }
   /* Det som bara hör till skärmen: tärningarnas ord, när tärningen att vika finns i planeringsmallarna. */

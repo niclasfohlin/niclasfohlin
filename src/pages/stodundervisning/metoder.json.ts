@@ -1,13 +1,15 @@
 import type { APIRoute } from 'astro';
 import { metoderSorterade } from '../../lib/innehall';
 import { byggSerier, serieKoppling } from '../../lib/serie';
+import { serieantal } from '../../lib/bildserier-bygge';
 
 // Alla publicerade metoder med hela modellen. Läses av /stodundervisning när läsaren
 // väljer flera metoder och bygger en Word-fil i webbläsaren (src/lib/metoddocx.ts). En metod i en serie har sin plats
-// i serien med sig (serie), så att filen får samma lektionsbank som den som byggs vid bygget.
+// i serien med sig (serie), så att filen får samma lektionsbank som den som byggs vid bygget. En metod med bildserier har
+// antalet rutor i varje serie med sig (bildserier), så att webbläsaren vet vilka rutor den ska hämta (src/lib/bildserier.ts).
 export const GET: APIRoute = async () => {
   const metoder = await metoderSorterade();
   const serier = byggSerier(metoder);
-  const ut = { genererad: new Date().toISOString(), metoder: metoder.map((m) => ({ id: m.id, data: m.data, serie: serieKoppling(m.id, m.data, serier) })) };
+  const ut = { genererad: new Date().toISOString(), metoder: metoder.map((m) => ({ id: m.id, data: m.data, serie: serieKoppling(m.id, m.data, serier), bildserier: serieantal(m) })) };
   return new Response(JSON.stringify(ut), { headers: { 'Content-Type': 'application/json; charset=utf-8' } });
 };

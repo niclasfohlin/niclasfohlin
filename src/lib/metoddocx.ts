@@ -5,7 +5,7 @@
 // rubrikrad, band, gör/undvik och bockar. Varje sida bär © Niclas Fohlin och niclasfohlin.se.
 import {
   AlignmentType, Body, BorderStyle, Document, Footer, Header, HeadingLevel, HeightRule, ImageRun, ImportedXmlComponent, LevelFormat, NoBreakHyphen, PageNumber, PageOrientation,
-  Paragraph, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, VerticalAlign, WidthType,
+  Paragraph, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, UnderlineType, VerticalAlign, WidthType,
   type IBorderOptions, type IParagraphOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
 import { arbetsformRad, arEttKort, arProtokoll, arskursText, datumText, ejBryt, etikettOchText, laskortKolumn, laskortRubrik, lathundFakta, lathundForm, metaRad, metodAdress, passOrd, passOversikt, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost, type PassOrd } from './metod';
@@ -16,6 +16,7 @@ import { ANDIKA_ADRESS, ELEVTYPSNITT, VIK_TEXT, arBildlista, bildFor as bildForO
 import { arElevensBlad, harFragor, lastexter, protokollDelas, textlangd, type Lastext } from './ramform';
 import { FILM_UPPHOV, filmerVid, huvudfilm, metodensFilmer, stegDelar, stillbilder, STILLBILD_MATT, type FilmPlats, type MetodFilm } from './film';
 import { reservNyckel } from './reservbild';
+import { arkAdress, mallEtiketter, mallRutor as mallRutorAdresser, rutansText, serieAdress, svgMatt } from './bildserier';
 import * as SAGA from './sagoform.js';
 import { arTarning, harBoktypsnitt, SAGO_UPPHOV, sagobladAv, tarningAv, type Sagoblad, type Sagofalt, type Station, type Tarning } from './sagoblad';
 import WORDSKALOR from '../data/lathund-word.json';
@@ -66,10 +67,11 @@ type Barn = Paragraph | Table;
 // många kort som möjligt ryms på ett A4 (Niclas 2026-09-29), som i metodriggen. Sektionsbytet står i flödet av stycken
 // och tabeller, och delaSektioner gör sektionerna av det. Efter ett kortark börjar en vanlig sektion igen. En boksida
 // (lästexten, boksida()) står i en egen sektion med 1,5 cm marginal och raden Till läraren och nivåns knapp i sidfoten.
+// Elevens blad med en bildserie (liggande) står på ett liggande A4 med mallarnas smala marginal (seriebladBarn).
 type Boksektion = { not: string; niva: string; vad: string; farg: string };
 // Ett sagoblad (sagoFlod): rutan Till läraren i sidfoten, eller på bokens blad ingen sidfot och en kortare upphovsrad.
 type Sagosektion = { not: string; bokblad: boolean };
-class Sektionsbyte { constructor(readonly kortark: boolean, readonly bok?: Boksektion, readonly saga?: Sagosektion) {} }
+class Sektionsbyte { constructor(readonly kortark: boolean, readonly bok?: Boksektion, readonly saga?: Sagosektion, readonly liggande?: boolean) {} }
 type Flod = (Barn | Sektionsbyte)[];
 const arBarn = (x: Barn | Sektionsbyte): x is Barn => !(x instanceof Sektionsbyte);
 // Bilderna och elevens typsnitt till Word-filen (src/lib/ljudkort.ts): vid bygget lästa från public/, i webbläsaren
@@ -432,7 +434,9 @@ function tvaKolumner(rader: { nar: string; vad: string }[]): Barn[] {
 // Snabbmallen: en halv sida att fylla i. Med skrivrum blir raderna högre, för mallfilen och utskriften.
 function snabbmallTabell(titel: string, fore: string[], efter: string[], o: { skrivrum?: boolean; hojd?: number } = {}): Barn[] {
   const bredder = [Math.min(3600, Math.floor(BREDD * 0.4)), BREDD - Math.min(3600, Math.floor(BREDD * 0.4))];
-  const hojd = o.hojd ?? (o.skrivrum ? 900 : 420);
+  // Skrivrummet är 900 twips per rad upp till nio rader; med fler krymper det, så att mallen och upphovsraden ryms på ett A4
+  // (Seriesamtal, tio rader: upphovsraden hamnade ensam på sidan 2 i Word, googleprov 2026-10-04).
+  const hojd = o.hojd ?? (o.skrivrum ? Math.min(900, Math.floor(8100 / (fore.length + efter.length))) : 420);
   // Alla stycken utom den sista radens håller ihop med nästa, så att Word inte delar mallen över två sidor.
   const avsnitt = (text: string, fyll: string, farg: string) => rad([cell([stycke(text, { fet: true, farg, storlek: 20, efter: 0, hallIhop: true })], { bredd: BREDD, span: 2, fyll, kanter: runt(kant(fyll === FARG.huvud ? FARG.huvud : FARG.kant)) })]);
   const falt = (text: string, sist = false) => rad([
@@ -1158,11 +1162,15 @@ function tarningTabell(t: Tarning): Table {
 // stor: en elevkopia (planeringsmallarna), där listorna kommer först och sätts stort nog att läsas av ett par
 // eller visas för gruppen; annars (beskrivningen) står lärarnoten först och listorna efter.
 // kort: metodens kort att klippa (d.kort); blad: fältens höjd i cm när ramen är elevens blad (d.elevblad).
+// ensamRuta: en bildserie med en enda ruta, som står direkt under ramens text (ramensSerie).
 // elev: metoden har elevmaterial (K-130, src/lib/ljudkort.ts), så elevens blad och korten att klippa står i elevens
 // typsnitt.
-function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: MetodData['kort']; blad?: Record<string, number>; brak?: boolean; elev?: boolean } = {}): Flod {
+function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: MetodData['kort']; blad?: Record<string, number>; brak?: boolean; elev?: boolean; ensamRuta?: Barn[] } = {}): Flod {
   const ut: Flod = [];
   for (const s of ram.text) ut.push(stycke(s, { hallIhop: true }));
+  // En bildserie med en enda ruta (provbilden, ramensSerie) står stort under ramens text. Har ramen ett protokoll eller
+  // ett huvud börjar resten på nästa sida, så att protokollet går att kopiera (metodriggens modell.mjs, Seriesamtal).
+  if (o.ensamRuta) ut.push(...o.ensamRuta, ...(ram.listor?.length || ram.huvud ? [new Paragraph({ pageBreakBefore: true, spacing: { before: 0, after: 0 } })] : []));
   // En ordlista eller bokstavslista (bara korta celler) får lika breda kolumner; en översikt med
   // längre text får en smal etikettkolumn först, men bara när första kolumnen är etiketter. Bär den
   // längre text (som projektplanens "Vecka 1 · Inbjudan till laget" med mentortexten under) blir
@@ -1854,11 +1862,17 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
         filmVid({ ram: ram.rubrik });
         continue;
       }
-      ut.push(new Paragraph({ children: [run(ram.rubrik)], heading: HeadingLevel.HEADING_3, keepNext: true, spacing: { before: 240, after: 80 } }));
+      // En ram med en bildserie eller ett ark (Seriesamtal) är lärarens sida att skriva ut: den börjar på en ny sida, om den
+      // inte redan gör det efter förra ramens blad, och elevens blad och arket står efter delarna, i egna sektioner.
+      const nySida = !!(ram.serie || ram.ark) && !(ut.at(-1) instanceof Sektionsbyte);
+      ut.push(new Paragraph({ children: [run(ram.rubrik)], heading: HeadingLevel.HEADING_3, keepNext: true, pageBreakBefore: nySida || undefined, spacing: { before: 240, after: 80 } }));
+      const serie = ramensSerie(ram, post.id);
       if (ramArTom(ram)) {
         for (const s of ram.text) ut.push(stycke(s));
+        if (serie.ensam) ut.push(...serie.ensam);
         ut.push(stycke(d.elevblad[ram.rubrik] ? `${ram.rubrik} finns som elevens blad i planeringsmallarna, med rutor att skriva och rita i.` : `Ramen att fylla i, med ${ram.delar.length === 1 ? 'en del' : `${ram.delar.length} delar`}, finns i planeringsmallarna.`, { farg: FARG.svag }));
-      } else ut.push(...ramBarn(ram, { kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d) }));
+      } else ut.push(...ramBarn(ram, { kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d), ensamRuta: serie.ensam }));
+      ut.push(...serie.efter);
       filmVid({ ram: ram.rubrik });
     }
     if (d.ramar.efter) ut.push(stycke(d.ramar.efter, { farg: FARG.svag }));
@@ -1990,10 +2004,13 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
         continue;
       }
       if (o.baraTommaRamar && !tom) continue;
-      const sida: Flod = [...under(ram.rubrik), ...ramBarn(ram, { skrivrum: tom, stor: true, kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d) })];
+      const serie = ramensSerie(ram, post.id);
+      const sida: Flod = [...under(ram.rubrik), ...ramBarn(ram, { skrivrum: tom, stor: true, kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d), ensamRuta: serie.ensam })];
       // Ett kortark fyller sin sida och foten bär upphovet, så sidan får ingen upphovsrad (den hamnade ensam på en sida).
       if (d.elevblad[ram.rubrik] || sida.some((x) => x instanceof Sektionsbyte)) bladsidor.add(sida);
       sidor.push(sida);
+      // Elevens blad med bildserien och arket att klippa ut står efter lärarens sida, med upphovet i sidfoten.
+      if (serie.efter.length) { bladsidor.add(serie.efter); sidor.push(serie.efter); }
     }
   }
   // Diplomet bär sin egen rubrik: utan sidans rubrik och metodrad, så att eleven inte får Diplom två gånger (K-040).
@@ -2009,7 +2026,7 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
   // Ett ark per talsort (en matta med enPerSida) står på stående A4, en sida per kolumn; övriga mallar liggande.
   const mallsidor = d.mallar.flatMap((m) => (m.typ === 'matta' && m.enPerSida
     ? (m.kolumner ?? []).map((k) => ({ barn: medBredd(BREDD_STAENDE, () => medElevtypsnitt(elev, () => talsortSida(m, k))), liggande: false }))
-    : [{ barn: medBredd(BREDD_MALL, () => medElevtypsnitt(elev, () => mallSida(m))), liggande: true }]));
+    : [{ barn: medBredd(BREDD_MALL, () => medElevtypsnitt(elev, () => (m.typ === 'serie' ? serieMallSida(m, post.id) : mallSida(m)))), liggande: true }]));
   return [...sidor.map((barn) => ({ barn })), ...blad.map((barn) => ({ barn, liggande: true })), ...mallsidor];
 }
 
@@ -2297,6 +2314,91 @@ function talsortSida(m: Mall, k: string): Barn[] {
     ], [BREDD]),
   ];
 }
+// ---------------------------------------------------------------- bildserierna
+// Bildserierna, arket att klippa ut och seriemallarna (Seriesamtal, src/lib/bildserier.ts), ett till ett med metodriggens
+// build-docx.js (serieblad och bildark). Rutorna är svg-filer ur metodriggens kod (src/lib/serieritning.js), ritade vid
+// bygget och givna som resurser (src/lib/metodresurser.ts; i webbläsaren hämtade), så att varje bild är den som bygget
+// gjorde reservbilden till. Rutornas ord, numren och platsen står i bilden i elevens typsnitt.
+function serieResurs(adress: string, vad: string): Uint8Array {
+  const b = RESURSER.bilder.get(adress);
+  if (!b) throw new Error(`Word-filen saknar ${vad} (${adress}). Den ritas av src/lib/metodresurser.ts vid bygget och hämtas i webbläsaren (src/lib/bildserier.ts).`);
+  return b;
+}
+// En bildseries rutor i ordning, så många som resurserna har.
+function serieSvgar(id: string, serie: string): Uint8Array[] {
+  const ut: Uint8Array[] = [serieResurs(serieAdress(id, serie, 1), `bildserien ${serie}`)];
+  for (let nr = 2; RESURSER.bilder.has(serieAdress(id, serie, nr)); nr++) ut.push(RESURSER.bilder.get(serieAdress(id, serie, nr))!);
+  return ut;
+}
+// Luften mellan rutorna i hela bildpunkter (riggens 220 twips), så att Google Dokument ritar raden lika hög (K-141).
+const SERIE_MELLAN = 225;
+let serieBildNr = 0;
+// Ett serieblad: rutorna i en tabell utan kanter, två i bredd och tre för sex rutor, i satsens bredd och så höga som sidan
+// rymmer. En ensam ruta (provbilden) står i satsens bredd och högst 6 200 twips hög. Elevens blad har seriens namn och en
+// rad för elevens namn överst, i elevens typsnitt, och en mall har sidans rubrik och underraden över sig, så rutorna får
+// 7 700 twips där och 9 250 på ett blad med en bildserie (riggens mått: i Google Dokument tog en mall med 8 350 två sidor).
+function seriebladBarn(svgs: Uint8Array[], o: { titel?: string; namn?: boolean; mall?: boolean; alt: (nr: number) => string }): Barn[] {
+  const antal = svgs.length, kol = antal === 1 ? 1 : antal === 6 ? 3 : 2, rader = Math.ceil(antal / kol);
+  const cellB = Math.floor((BREDD - SERIE_MELLAN * (kol - 1)) / kol);
+  const matt = svgMatt(svgs[0]);
+  const maxH = antal === 1 ? 6200 : Math.floor(((o.mall ? 7700 : 9250) - SERIE_MELLAN * (rader - 1)) / rader);
+  let bildB = cellB, bildH = Math.round((cellB * matt.hojd) / matt.bredd);
+  if (bildH > maxH) { bildH = maxH; bildB = Math.round((maxH * matt.bredd) / matt.hojd); }
+  const twPx = (tw: number) => Math.round(tw / 15);
+  const bredder = Array.from({ length: kol * 2 - 1 }, (_, k) => (k % 2 ? SERIE_MELLAN : cellB));
+  const tom = (w: number) => new TableCell({ width: { size: w, type: WidthType.DXA }, borders: SAGA_INGA, margins: SAGA_NOLL, children: [new Paragraph({ spacing: { before: 0, after: 0 } })] });
+  const bild = (i: number) => new TableCell({
+    width: { size: cellB, type: WidthType.DXA }, borders: SAGA_INGA, margins: SAGA_NOLL, verticalAlign: VerticalAlign.CENTER,
+    children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 240 }, children: svgs[i] ? [svgRun(svgs[i], twPx(bildB), twPx(bildH), { name: `Ruta ${++serieBildNr}`, description: o.alt(i + 1), id: String(8000 + serieBildNr) })] : [] })],
+  });
+  const rows: TableRow[] = [];
+  for (let r = 0; r < rader; r++) {
+    if (r) rows.push(new TableRow({ cantSplit: true, height: { value: SERIE_MELLAN, rule: HeightRule.EXACT }, children: bredder.map((w) => tom(w)) }));
+    rows.push(new TableRow({ cantSplit: true, children: bredder.map((w, k) => (k % 2 ? tom(w) : bild(r * kol + k / 2))) }));
+  }
+  const tabellen = new Table({ width: { size: BREDD, type: WidthType.DXA }, columnWidths: bredder, layout: TableLayoutType.FIXED, borders: SAGA_UTAN, rows });
+  if (!o.titel && !o.namn) return [tabellen];
+  // Överst seriens namn till vänster och en rad för elevens namn till höger, i elevens typsnitt.
+  const huvud = new Paragraph({ keepNext: true, spacing: { before: 0, after: 140 }, tabStops: [{ type: TabStopType.RIGHT, position: BREDD }], children: [
+    ...(o.titel ? [textRun({ text: o.titel, bold: true, size: 30, color: FARG.text, font: ELEVTYPSNITT })] : []),
+    textRun({ children: [new Tab()], size: 26, font: ELEVTYPSNITT }),
+    textRun({ text: 'Namn ', size: 26, color: FARG.text, font: ELEVTYPSNITT }),
+    textRun({ text: '\u00a0'.repeat(46), size: 26, underline: { type: UnderlineType.SINGLE, color: '9A948C' }, font: ELEVTYPSNITT }),
+  ] });
+  return [huvud, tabellen];
+}
+// Bilderna en ram med en bildserie eller ett ark har (src/lib/bildserier.ts). ensam: en bildserie med en enda ruta, som
+// står stort under ramens text (ramBarn). efter: det som står efter ramens delar, elevens blad på ett liggande A4 och
+// arket att klippa ut på ett kortark med 1 cm marginal och ramens namn som liten rubrik, som korten, var för sig i en egen
+// sektion.
+function ramensSerie(ram: Ram, id: string): { ensam?: Barn[]; efter: Flod } {
+  const efter: Flod = [];
+  let ensam: Barn[] | undefined;
+  if (ram.serie) {
+    const svgs = serieSvgar(id, ram.serie);
+    const alt = (nr: number) => rutansText(ram, nr, svgs.length);
+    if (svgs.length === 1) ensam = seriebladBarn(svgs, { alt });
+    else efter.push(new Sektionsbyte(false, undefined, undefined, true), ...medBredd(BREDD_MALL, () => seriebladBarn(svgs, { titel: ram.rubrik, namn: true, alt })), new Sektionsbyte(false));
+  }
+  if (ram.ark) {
+    const svg = serieResurs(arkAdress(id, ram.ark), `arket ${ram.rubrik}`);
+    const matt = svgMatt(svg);
+    const bredd = Math.round(BREDD_KORTARK / 15), hojd = Math.round((bredd * matt.hojd) / matt.bredd);
+    efter.push(new Sektionsbyte(true), ...arkRubrik(ram.rubrik, false), new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 240 }, children: [svgRun(svg, bredd, hojd, { name: `Ark ${++serieBildNr}`, description: `${ram.rubrik}: tankebubblor, pratbubblor och en bubbla för det någon ropar, att klippa ut`, id: String(8000 + serieBildNr) })] }), new Sektionsbyte(false));
+  }
+  return { ensam, efter };
+}
+// En seriemall (typ serie): sidans rubrik och underraden, och de tomma rutorna med en rad för elevens namn, på liggande A4.
+function serieMallSida(m: Mall, id: string): Barn[] {
+  const svgs = mallRutorAdresser(id, m).map((a) => serieResurs(a, `seriemallen ${m.rubrik}`));
+  const namn = mallEtiketter(m);
+  return [
+    new Paragraph({ children: [run(m.rubrik, { font: HUSETS })], heading: HeadingLevel.HEADING_1, spacing: { before: 0, after: 40 } }),
+    ...(m.underrad ? [stycke(m.underrad, { storlek: 22, efter: 160 })] : []),
+    ...seriebladBarn(svgs, { namn: true, mall: true, alt: (nr) => `${m.rubrik}, ${namn?.[nr - 1] ?? `ruta ${nr}`}, tom att rita i` }),
+  ];
+}
+
 function mallSida(m: Mall): Barn[] {
   if (m.typ === 'matta' || m.typ === 'rutnat' || m.typ === 'flode') return mattaMallSida(m);
   const L = Math.round((m.langdCm ?? 26) * CM);
@@ -2670,7 +2772,8 @@ function sektion(barn: Barn[], huvudtext: string, adress: string, o: { liggande?
     children: barn,
   };
 }
-// Ett flöde med sektionsbyten blir sektioner: ett kortark i en egen sektion med smal marginal, det andra i sidans vanliga.
+// Ett flöde med sektionsbyten blir sektioner: ett kortark i en egen sektion med smal marginal, elevens blad med en
+// bildserie i en liggande, det andra i sidans vanliga.
 // En tom sektion hoppas över, så att två ark i följd inte lämnar en tom sida mellan sig.
 function delaSektioner(flod: Flod, huvudtext: string, adress: string, o: { liggande?: boolean; smal?: boolean } = {}): ISectionOptions[] {
   const ut: ISectionOptions[] = [];
@@ -2678,13 +2781,15 @@ function delaSektioner(flod: Flod, huvudtext: string, adress: string, o: { ligga
   let kortark = false;
   let bok: Boksektion | undefined;
   let saga: Sagosektion | undefined;
-  const klar = () => { if (barn.length) ut.push(sektion(barn, huvudtext, adress, saga ? { saga } : bok ? { bok } : kortark ? { kortark: true } : o)); barn = []; };
+  let liggande = false;
+  const klar = () => { if (barn.length) ut.push(sektion(barn, huvudtext, adress, saga ? { saga } : bok ? { bok } : kortark ? { kortark: true } : liggande ? { liggande: true, smal: true } : o)); barn = []; };
   for (const x of flod) {
     if (arBarn(x)) { barn.push(x); continue; }
     klar();
     kortark = x.kortark;
     bok = x.bok;
     saga = x.saga;
+    liggande = !!x.liggande;
   }
   klar();
   if (!ut.length) ut.push(sektion([new Paragraph({})], huvudtext, adress, o));

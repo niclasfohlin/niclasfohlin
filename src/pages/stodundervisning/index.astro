@@ -217,16 +217,17 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
       try {
         const svar = await fetch('/stodundervisning/metoder.json', { cache: 'no-cache' });
         if (!svar.ok) throw new Error(`metoder.json svarade ${svar.status}`);
-        const { metoder } = (await svar.json()) as { metoder: { id: string; data: unknown }[] };
-        const poster = ids.map((id) => metoder.find((m) => m.id === id)).filter((m): m is { id: string; data: unknown } => Boolean(m));
+        const { metoder } = (await svar.json()) as { metoder: { id: string; data: unknown; bildserier?: Record<string, number> }[] };
+        const poster = ids.map((id) => metoder.find((m) => m.id === id)).filter((m): m is { id: string; data: unknown; bildserier?: Record<string, number> } => Boolean(m));
         if (poster.length !== ids.length) throw new Error('En vald metod saknas i metoder.json. Sidan och datan kommer från olika byggen.');
-        const [{ metodDokument }, { Packer }, ljud, reserv, ramform, saga] = await Promise.all([import('../../lib/metoddocx'), import('docx'), import('../../lib/ljudkort'), import('../../lib/reservbild'), import('../../lib/ramform'), import('../../lib/sagoblad')]);
+        const [{ metodDokument }, { Packer }, ljud, reserv, ramform, saga, bildserier] = await Promise.all([import('../../lib/metoddocx'), import('docx'), import('../../lib/ljudkort'), import('../../lib/reservbild'), import('../../lib/ramform'), import('../../lib/sagoblad'), import('../../lib/bildserier')]);
         // Ljudlekens kort har bilder och elevens typsnitt (src/lib/ljudkort.ts): de hämtas innan filen byggs, som bygget
         // läser dem från disken.
         const valda = poster as Parameters<typeof metodDokument>[0];
         // cache: 'no-cache' frågar alltid servern om filen har ändrats, så att den samlade filen aldrig byggs av en äldre bild.
         const hamta = async (adress: string) => { const svar = await fetch(adress, { cache: 'no-cache' }); if (!svar.ok) throw new Error(`${adress} svarade ${svar.status}`); return new Uint8Array(await svar.arrayBuffer()); };
-        const bildvagar = [...new Set(valda.flatMap((p) => [...ljud.metodensBilder(p.data, p.id), ...saga.sagoBilder(p.data)]))];
+        // Bildseriernas rutor (src/lib/bildserier.ts) hämtas som bygget ritade dem, med antalet rutor ur metoder.json.
+        const bildvagar = [...new Set(valda.flatMap((p, i) => [...ljud.metodensBilder(p.data, p.id), ...saga.sagoBilder(p.data), ...bildserier.serieBilder(p.data, p.id, poster[i].bildserier)]))];
         const bilder = new Map(await Promise.all(bildvagar.map(async (b) => [b, await hamta(b)] as const)));
         const elevtypsnitt = valda.some((p) => ljud.harElevtypsnitt(p.data)) ? await hamta(ljud.ELEVTYPSNITT_TTF) : undefined;
         // Boksidornas och sagobladens typsnitt (src/lib/ramform.ts, src/lib/sagoblad.ts), när någon vald metod har dem.
