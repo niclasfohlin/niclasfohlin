@@ -1,0 +1,569 @@
+{
+  "om": "Bildserierna i Seriesamtal, ritade av build/serieritning.js, efter omtaget (methods/seriesamtal/omtag.md). Personerna står en gång, och varje ruta har platsen och tiden (plats) och en lista med delar i den ordning de ritas. Måtten i en ruta är 800 × 450. Replikerna står i pratbubblorna, namnen på skyltar under personerna, och tankebubblorna är lösa, att klippa ut. Analysen säger vad varje serie tränar och varför.",
+  "personer": {
+    "alva": { "alder": "yngre", "hud": "ljus", "troja": "#E8B83A", "byxor": "#3E5C8A", "har": {"stil": "hastsvans", "farg": "#8A5A2E"}, "namn": "Alva" },
+    "sam": { "alder": "yngre", "hud": "mork", "troja": "#4F86C6", "byxor": "#4A4A55", "har": {"stil": "kortlockigt", "farg": "#2A211C"}, "namn": "Sam" },
+    "mira": { "alder": "yngre", "hud": "varm", "troja": "#5A9E6F", "byxor": "#3D4A63", "har": {"stil": "flator", "farg": "#2F241E"}, "namn": "Mira" },
+    "leo": { "alder": "yngre", "hud": "ljus", "troja": "#C9524A", "byxor": "#4B5A72", "har": {"stil": "kort", "farg": "#C9A15A"}, "namn": "Leo" },
+    "k1": { "alder": "yngre", "hud": "mellan", "troja": "#9AA7B5", "byxor": "#4A4A55", "har": {"stil": "bob", "farg": "#3B2A20"} },
+    "k2": { "alder": "yngre", "hud": "ljus", "troja": "#B7A08A", "byxor": "#4A4A55", "har": {"stil": "kort", "farg": "#6B4A2E"} },
+    "vuxen": { "alder": "vuxen", "hud": "mellan", "troja": "#8D7BA8", "klader": "kofta", "byxor": "#3A3F4A", "har": {"stil": "knut", "farg": "#6B5446"}, "glasogon": true },
+    "elias": { "alder": "aldre", "hud": "ljus", "troja": "#E07B39", "klader": "luvtroja", "byxor": "#33405A", "har": {"stil": "sidbena", "farg": "#B07A3E"}, "ryggsack": "#4C5A6B", "namn": "Elias" },
+    "amir": { "alder": "aldre", "hud": "varm", "troja": "#8A8F98", "byxor": "#2F3A4E", "har": {"stil": "kort", "farg": "#1F1A17"}, "namn": "Amir" },
+    "nora": { "alder": "aldre", "hud": "ljus", "troja": "#8E6BBF", "byxor": "#2F3A4E", "har": {"stil": "langt", "farg": "#5A3A22"}, "namn": "Nora" },
+    "ida": { "alder": "aldre", "hud": "mork", "troja": "#3AA6A0", "byxor": "#3F3F4F", "har": {"stil": "kortlockigt", "farg": "#1E1916"}, "namn": "Ida" },
+    "lag1": { "alder": "aldre", "hud": "mellan", "troja": "#2F8F5B", "klader": "lagtroja", "kortarmad": true, "byxor": "#2B2B33", "har": {"stil": "snagg", "farg": "#2A211C"} },
+    "lag2": { "alder": "aldre", "hud": "ljus", "troja": "#2F8F5B", "klader": "lagtroja", "kortarmad": true, "byxor": "#2B2B33", "har": {"stil": "hastsvans", "farg": "#D8B36A"} },
+    "lag3": { "alder": "aldre", "hud": "mork", "troja": "#2F8F5B", "klader": "lagtroja", "kortarmad": true, "byxor": "#2B2B33", "har": {"stil": "kortlockigt", "farg": "#1E1916"} },
+    "malik": { "alder": "yngre", "har": {"stil": "kort"} },
+    "kompis": { "alder": "yngre", "har": {"stil": "lockigt"} },
+    "saga": { "alder": "yngre", "hud": "varm", "troja": "#D9668A", "byxor": "#3E4A63", "har": {"stil": "hastsvans", "farg": "#2F241E"}, "namn": "Saga" },
+    "noah": { "alder": "yngre", "hud": "ljus", "troja": "#5DA7D8", "byxor": "#4A4A55", "har": {"stil": "kort", "farg": "#7A4B26"}, "namn": "Noah" },
+    "isak": { "alder": "yngre", "hud": "mellan", "troja": "#7B8F3A", "byxor": "#3D4A63", "har": {"stil": "kortlockigt", "farg": "#3B2A20"}, "namn": "Isak" },
+    "wilma": { "alder": "yngre", "hud": "ljus", "troja": "#B5838D", "byxor": "#4B5A72", "har": {"stil": "flator", "farg": "#C9A15A"}, "namn": "Wilma" },
+    "k3": { "alder": "yngre", "hud": "ljus", "troja": "#9AA7B5", "byxor": "#4A4A55", "har": {"stil": "kort", "farg": "#6B4A2E"} }
+  },
+  "serier": {
+    "fonsterplatsen": {
+      "namn": "Fönsterplatsen",
+      "rutor": [
+        {
+          "plats": "I bussen",
+          "delar": [
+            { "typ": "buss" },
+            { "typ": "bussate", "x": 170, "y": 335, "b": 300, "h": 128 },
+            { "typ": "bussate", "x": 630, "y": 335, "b": 300, "h": 128 },
+            { "typ": "figur", "vem": "k1", "x": 555, "y": 335, "sitter": true, "vand": 0, "bakgrund": true, "hander": {"v": "kna", "h": "kna"} },
+            { "typ": "figur", "vem": "k2", "x": 705, "y": 335, "sitter": true, "vand": 0, "bakgrund": true, "hander": {"v": "kna", "h": "kna"} },
+            { "typ": "figur", "vem": "alva", "x": 95, "y": 335, "sitter": true, "vand": 0, "ser": -1, "hander": {"v": "kna", "h": "kna"}, "namnXY": [95,412] }
+          ]
+        },
+        {
+          "plats": "I bussen",
+          "delar": [
+            { "typ": "buss" },
+            { "typ": "bussate", "x": 170, "y": 335, "b": 300, "h": 128 },
+            { "typ": "bussate", "x": 630, "y": 335, "b": 300, "h": 128 },
+            { "typ": "figur", "vem": "k1", "x": 555, "y": 335, "sitter": true, "vand": 0, "bakgrund": true, "hander": {"v": "kna", "h": "kna"} },
+            { "typ": "figur", "vem": "k2", "x": 705, "y": 335, "sitter": true, "vand": 0, "bakgrund": true, "hander": {"v": "kna", "h": "kna"} },
+            { "typ": "figur", "vem": "alva", "x": 95, "y": 335, "sitter": true, "vand": 0, "ser": 1, "hander": {"v": "kna", "h": "kna"}, "namnXY": [95,412] },
+            { "typ": "figur", "vem": "sam", "x": 410, "y": 404, "vand": -1, "lutning": -6, "hander": {"v": [398,286], "h": [418,280]} },
+            { "typ": "prat", "vem": "sam", "x": 590, "y": 96, "text": "Får jag sitta vid fönstret?", "max": 250, "hander": {"v": [398,286], "h": [418,280]} }
+          ]
+        },
+        {
+          "plats": "I bussen",
+          "delar": [
+            { "typ": "buss" },
+            { "typ": "bussate", "x": 170, "y": 335, "b": 300, "h": 128 },
+            { "typ": "bussate", "x": 630, "y": 335, "b": 300, "h": 128 },
+            { "typ": "figur", "vem": "k1", "x": 555, "y": 335, "sitter": true, "vand": 0, "bakgrund": true, "hander": {"v": "kna", "h": "kna"} },
+            { "typ": "figur", "vem": "k2", "x": 705, "y": 335, "sitter": true, "vand": 0, "bakgrund": true, "hander": {"v": "kna", "h": "kna"} },
+            { "typ": "figur", "vem": "alva", "x": 95, "y": 335, "sitter": true, "vand": 0, "ser": -1, "hander": {"v": "kna", "h": "kna"}, "namnXY": [95,412] },
+            { "typ": "figur", "vem": "sam", "x": 410, "y": 404, "vand": -1, "lutning": -6, "hander": {"v": [398,286], "h": [418,280]} },
+            { "typ": "prat", "vem": "alva", "x": 255, "y": 96, "text": "Nej, jag var först.", "max": 260 }
+          ]
+        },
+        {
+          "plats": "I bussen",
+          "delar": [
+            { "typ": "buss" },
+            { "typ": "bussate", "x": 170, "y": 335, "b": 300, "h": 128 },
+            { "typ": "bussate", "x": 630, "y": 335, "b": 300, "h": 128 },
+            { "typ": "figur", "vem": "k1", "x": 555, "y": 335, "sitter": true, "vand": 0, "bakgrund": true, "hander": {"v": "kna", "h": "kna"} },
+            { "typ": "figur", "vem": "k2", "x": 705, "y": 335, "sitter": true, "vand": 0, "bakgrund": true, "hander": {"v": "kna", "h": "kna"} },
+            { "typ": "figur", "vem": "alva", "x": 95, "y": 335, "sitter": true, "vand": 0, "ser": 1, "ansikte": "tom", "hander": {"v": "kna", "h": "kna"}, "namnXY": [95,412] },
+            { "typ": "figur", "vem": "sam", "x": 245, "y": 335, "sitter": true, "vand": 0, "ser": -1, "ansikte": "tom", "hander": {"v": "mage", "h": "kna"}, "namnXY": [245,412] }
+          ]
+        }
+      ]
+    },
+    "spelet": {
+      "namn": "Spelet",
+      "rutor": [
+        {
+          "plats": "På fritids",
+          "delar": [
+            { "typ": "rum", "vagg": "#EFE6D8", "golv": 360, "golvfarg": "#C9B08E", "list": true },
+            { "typ": "hylla", "x": 300, "y": 70, "b": 200 },
+            { "typ": "fonster", "x": 590, "y": 50, "b": 160, "h": 125 },
+            { "typ": "stol", "x": 205, "y": 330, "vand": 1, "golv": 425 },
+            { "typ": "stol", "x": 455, "y": 330, "vand": -1, "golv": 425 },
+            { "typ": "figur", "vem": "mira", "x": 210, "y": 332, "sitter": true, "vand": 1, "golv": 425, "utan": "armar", "namnXY": [210,422], "blick": "ner" },
+            { "typ": "figur", "vem": "alva", "x": 450, "y": 332, "sitter": true, "vand": -1, "golv": 425, "utan": "armar", "namnXY": [450,422], "blick": "ner" },
+            { "typ": "bord", "x": 330, "y": 300, "b": 240, "golv": 425 },
+            { "typ": "fyraIRad", "x": 330, "y": 294, "b": 100 },
+            { "typ": "figur", "vem": "mira", "x": 210, "y": 332, "sitter": true, "vand": 1, "bara": "armar", "namn": false, "hander": {"v": "bord", "h": [276,290]}, "bordY": 292 },
+            { "typ": "figur", "vem": "alva", "x": 450, "y": 332, "sitter": true, "vand": -1, "bara": "armar", "namn": false, "hander": {"v": [384,290], "h": "bord"}, "bordY": 292 }
+          ]
+        },
+        {
+          "plats": "På fritids",
+          "delar": [
+            { "typ": "rum", "vagg": "#EFE6D8", "golv": 360, "golvfarg": "#C9B08E", "list": true },
+            { "typ": "hylla", "x": 300, "y": 70, "b": 200 },
+            { "typ": "fonster", "x": 590, "y": 50, "b": 160, "h": 125 },
+            { "typ": "stol", "x": 205, "y": 330, "vand": 1, "golv": 425 },
+            { "typ": "stol", "x": 455, "y": 330, "vand": -1, "golv": 425 },
+            { "typ": "figur", "vem": "mira", "x": 210, "y": 332, "sitter": true, "vand": 1, "golv": 425, "utan": "armar", "namnXY": [210,422] },
+            { "typ": "figur", "vem": "alva", "x": 450, "y": 332, "sitter": true, "vand": -1, "golv": 425, "utan": "armar", "namnXY": [450,422], "ser": 1 },
+            { "typ": "bord", "x": 330, "y": 300, "b": 240, "golv": 425 },
+            { "typ": "fyraIRad", "x": 330, "y": 294, "b": 100 },
+            { "typ": "figur", "vem": "mira", "x": 210, "y": 332, "sitter": true, "vand": 1, "bara": "armar", "namn": false, "hander": {"v": "bord", "h": [276,290]}, "bordY": 292 },
+            { "typ": "figur", "vem": "alva", "x": 450, "y": 332, "sitter": true, "vand": -1, "bara": "armar", "namn": false, "hander": {"v": [384,290], "h": "bord"}, "bordY": 292 },
+            { "typ": "figur", "vem": "leo", "x": 640, "y": 404, "vand": -1 },
+            { "typ": "prat", "vem": "leo", "x": 640, "y": 108, "text": "Får jag vara med?", "max": 240 }
+          ]
+        },
+        {
+          "plats": "På fritids",
+          "delar": [
+            { "typ": "rum", "vagg": "#EFE6D8", "golv": 360, "golvfarg": "#C9B08E", "list": true },
+            { "typ": "hylla", "x": 300, "y": 70, "b": 200 },
+            { "typ": "fonster", "x": 590, "y": 50, "b": 160, "h": 125 },
+            { "typ": "stol", "x": 205, "y": 330, "vand": 1, "golv": 425 },
+            { "typ": "stol", "x": 455, "y": 330, "vand": -1, "golv": 425 },
+            { "typ": "figur", "vem": "mira", "x": 210, "y": 332, "sitter": true, "vand": 1, "golv": 425, "utan": "armar", "namnXY": [210,422] },
+            { "typ": "figur", "vem": "alva", "x": 450, "y": 332, "sitter": true, "vand": -1, "golv": 425, "utan": "armar", "namnXY": [450,422], "ser": 1 },
+            { "typ": "bord", "x": 330, "y": 300, "b": 240, "golv": 425 },
+            { "typ": "fyraIRad", "x": 330, "y": 294, "b": 100 },
+            { "typ": "figur", "vem": "mira", "x": 210, "y": 332, "sitter": true, "vand": 1, "bara": "armar", "namn": false, "hander": {"v": "bord", "h": [304,262]}, "pekar": "h", "bordY": 292 },
+            { "typ": "figur", "vem": "alva", "x": 450, "y": 332, "sitter": true, "vand": -1, "bara": "armar", "namn": false, "hander": {"v": [384,290], "h": "bord"}, "bordY": 292 },
+            { "typ": "figur", "vem": "leo", "x": 640, "y": 404, "vand": -1 },
+            { "typ": "prat", "vem": "mira", "x": 215, "y": 112, "text": "Nej." }
+          ]
+        },
+        {
+          "plats": "På fritids",
+          "delar": [
+            { "typ": "rum", "vagg": "#EFE6D8", "golv": 360, "golvfarg": "#C9B08E", "list": true },
+            { "typ": "hylla", "x": 300, "y": 70, "b": 200 },
+            { "typ": "fonster", "x": 590, "y": 50, "b": 160, "h": 125 },
+            { "typ": "stol", "x": 205, "y": 330, "vand": 1, "golv": 425 },
+            { "typ": "stol", "x": 455, "y": 330, "vand": -1, "golv": 425 },
+            { "typ": "stol", "x": 575, "y": 330, "vand": 1, "golv": 425 },
+            { "typ": "figur", "vem": "mira", "x": 210, "y": 332, "sitter": true, "vand": 1, "golv": 425, "utan": "armar", "namnXY": [210,422], "ansikte": "tom" },
+            { "typ": "figur", "vem": "alva", "x": 450, "y": 332, "sitter": true, "vand": -1, "golv": 425, "utan": "armar", "namnXY": [450,422], "ansikte": "tom", "blick": "ner" },
+            { "typ": "bord", "x": 330, "y": 300, "b": 240, "golv": 425 },
+            { "typ": "figur", "vem": "leo", "x": 580, "y": 332, "sitter": true, "vand": 1, "golv": 425, "ansikte": "tom", "blick": "ner", "utan": "armar", "namnXY": [580,422] },
+            { "typ": "bord", "x": 690, "y": 300, "b": 160, "golv": 425 },
+            { "typ": "fyraIRad", "x": 330, "y": 294, "b": 100 },
+            { "typ": "figur", "vem": "mira", "x": 210, "y": 332, "sitter": true, "vand": 1, "bara": "armar", "namn": false, "hander": {"v": "bord", "h": [276,290]}, "bordY": 292 },
+            { "typ": "figur", "vem": "alva", "x": 450, "y": 332, "sitter": true, "vand": -1, "bara": "armar", "namn": false, "hander": {"v": [384,290], "h": "bord"}, "bordY": 292 },
+            { "typ": "figur", "vem": "leo", "x": 580, "y": 332, "sitter": true, "vand": 1, "bara": "armar", "namn": false, "hander": {"v": "bord", "h": "bord"}, "bordY": 294 }
+          ]
+        }
+      ]
+    },
+    "teckningen": {
+      "namn": "Teckningen",
+      "rutor": [
+        {
+          "plats": "I klassrummet",
+          "delar": [
+            { "typ": "rum", "vagg": "#E6ECEF", "golv": 360, "golvfarg": "#C2B49C", "list": true },
+            { "typ": "tavla", "x": 470, "y": 50, "b": 250, "h": 110 },
+            { "typ": "fonster", "x": 290, "y": 70, "b": 130, "h": 110 },
+            { "typ": "stol", "x": 170, "y": 330, "vand": 1, "golv": 425 },
+            { "typ": "figur", "vem": "alva", "x": 175, "y": 332, "sitter": true, "vand": 1, "golv": 425, "blick": "ner", "utan": "armar", "namnXY": [175,422] },
+            { "typ": "bord", "x": 340, "y": 300, "b": 300, "golv": 425 },
+            { "typ": "papper", "x": 278, "y": 296, "b": 92, "djup": 20, "ritat": true },
+            { "typ": "bitar", "x": 410, "y": 296, "b": 100, "antal": 6 },
+            { "typ": "figur", "vem": "alva", "x": 175, "y": 332, "sitter": true, "vand": 1, "bara": "armar", "namn": false, "hander": {"v": "bord", "h": [272,290]}, "bordY": 292 }
+          ]
+        },
+        {
+          "plats": "I klassrummet",
+          "delar": [
+            { "typ": "rum", "vagg": "#E6ECEF", "golv": 360, "golvfarg": "#C2B49C", "list": true },
+            { "typ": "tavla", "x": 470, "y": 50, "b": 250, "h": 110 },
+            { "typ": "fonster", "x": 290, "y": 70, "b": 130, "h": 110 },
+            { "typ": "dorr", "x": 690, "y": 165, "b": 96, "golv": 425 },
+            { "typ": "papperskorg", "x": 60, "golv": 428 },
+            { "typ": "stol", "x": 170, "y": 330, "vand": 1, "golv": 425 },
+            { "typ": "bord", "x": 340, "y": 300, "b": 300, "golv": 425 },
+            { "typ": "papper", "x": 278, "y": 296, "b": 92, "djup": 20 },
+            { "typ": "bitar", "x": 410, "y": 296, "b": 100, "antal": 6 },
+            { "typ": "figur", "vem": "alva", "x": 742, "y": 404, "vand": 1, "ser": -1, "ben": "ga" },
+            { "typ": "figur", "vem": "sam", "x": 120, "y": 404, "vand": 1 },
+            { "typ": "figur", "vem": "vuxen", "x": 560, "y": 404, "vand": -1, "hander": {"v": [455,260], "h": "ner"} },
+            { "typ": "prat", "vem": "vuxen", "x": 420, "y": 76, "text": "Sam, kan du slänga skräpet?", "max": 260 }
+          ]
+        },
+        {
+          "plats": "I klassrummet",
+          "delar": [
+            { "typ": "rum", "vagg": "#E6ECEF", "golv": 360, "golvfarg": "#C2B49C", "list": true },
+            { "typ": "tavla", "x": 470, "y": 50, "b": 250, "h": 110 },
+            { "typ": "fonster", "x": 290, "y": 70, "b": 130, "h": 110 },
+            { "typ": "dorr", "x": 690, "y": 165, "b": 96, "golv": 425 },
+            { "typ": "stol", "x": 170, "y": 330, "vand": 1, "golv": 425 },
+            { "typ": "bord", "x": 340, "y": 300, "b": 300, "golv": 425 },
+            { "typ": "papperskorg", "x": 60, "golv": 428 },
+            { "typ": "figur", "vem": "sam", "x": 150, "y": 404, "vand": -1, "hander": {"v": [86,308], "h": [100,314]}, "haller": [{"typ": "papper", "hand": "v", "b": 64, "djup": 16, "dx": 4, "dy": 6}] },
+            { "typ": "bitar", "x": 92, "y": 320, "b": 40, "antal": 3 }
+          ]
+        },
+        {
+          "plats": "I klassrummet",
+          "delar": [
+            { "typ": "rum", "vagg": "#E6ECEF", "golv": 360, "golvfarg": "#C2B49C", "list": true },
+            { "typ": "tavla", "x": 470, "y": 50, "b": 250, "h": 110 },
+            { "typ": "fonster", "x": 290, "y": 70, "b": 130, "h": 110 },
+            { "typ": "dorr", "x": 690, "y": 165, "b": 96, "golv": 425 },
+            { "typ": "bord", "x": 340, "y": 300, "b": 300, "golv": 425 },
+            { "typ": "papperskorg", "x": 60, "golv": 428, "innehall": "papper" },
+            { "typ": "figur", "vem": "alva", "x": 160, "y": 404, "vand": 1, "ansikte": "tom", "hander": {"v": "fram", "h": "fram"}, "haller": [{"typ": "papper", "b": 70, "djup": 18, "ritat": true, "vrid": -8, "dy": 6}] },
+            { "typ": "figur", "vem": "sam", "x": 330, "y": 404, "vand": -1, "ansikte": "tom" }
+          ]
+        }
+      ]
+    },
+    "vinsten": {
+      "namn": "Vinsten",
+      "rutor": [
+        {
+          "plats": "På rasten",
+          "delar": [
+            { "typ": "rum", "vagg": "#CFE6F5", "golv": 300, "golvfarg": "#BDBDB6" },
+            { "typ": "staket", "y": 236, "h": 64 },
+            { "typ": "pingisbord", "x": 400, "y": 312, "b": 330, "golv": 398 },
+            { "typ": "figur", "vem": "saga", "x": 185, "y": 404, "vand": 1, "hander": {"v": "ner", "h": "fram"}, "haller": [{"typ": "racket", "hand": "h"}] },
+            { "typ": "figur", "vem": "noah", "x": 615, "y": 404, "vand": -1, "hander": {"v": "fram", "h": "ner"}, "haller": [{"typ": "racket", "hand": "v"}] },
+            { "typ": "pingisboll", "x": 470, "y": 238 }
+          ]
+        },
+        {
+          "plats": "På rasten",
+          "delar": [
+            { "typ": "rum", "vagg": "#CFE6F5", "golv": 300, "golvfarg": "#BDBDB6" },
+            { "typ": "staket", "y": 236, "h": 64 },
+            { "typ": "pingisbord", "x": 400, "y": 312, "b": 330, "golv": 398 },
+            { "typ": "figur", "vem": "saga", "x": 185, "y": 404, "vand": 1, "hander": {"v": "vinka", "h": "vinka"}, "haller": [{"typ": "racket", "hand": "h", "vrid": 20}] },
+            { "typ": "figur", "vem": "noah", "x": 615, "y": 404, "vand": -1, "blick": "ner", "hander": {"v": "ner", "h": "ner"}, "haller": [{"typ": "racket", "hand": "v", "vrid": 160}] },
+            { "typ": "pingisboll", "x": 690, "y": 392 },
+            { "typ": "prat", "vem": "saga", "x": 250, "y": 84, "text": "Jaa! Jag vann!", "max": 260 }
+          ]
+        },
+        {
+          "plats": "På rasten",
+          "delar": [
+            { "typ": "rum", "vagg": "#CFE6F5", "golv": 300, "golvfarg": "#BDBDB6" },
+            { "typ": "staket", "y": 236, "h": 64 },
+            { "typ": "pingisbord", "x": 400, "y": 312, "b": 330, "golv": 398 },
+            { "typ": "figur", "vem": "k1", "x": 60, "y": 404, "vand": 1, "bakgrund": true },
+            { "typ": "figur", "vem": "saga", "x": 200, "y": 404, "vand": -1, "hander": {"v": "vinka", "h": "vinka"}, "haller": [{"typ": "racket", "hand": "h", "vrid": 20}] },
+            { "typ": "figur", "vem": "noah", "x": 690, "y": 404, "vand": 1, "ben": "ga", "blick": "ner" },
+            { "typ": "prat", "vem": "saga", "x": 300, "y": 84, "text": "Jag vann, jag vann!", "max": 280 }
+          ]
+        },
+        {
+          "plats": "På rasten",
+          "delar": [
+            { "typ": "rum", "vagg": "#CFE6F5", "golv": 300, "golvfarg": "#BDBDB6" },
+            { "typ": "staket", "y": 236, "h": 64 },
+            { "typ": "pingisbord", "x": 400, "y": 312, "b": 330, "golv": 398 },
+            { "typ": "bank", "x": 690, "y": 340, "b": 160, "golv": 420 },
+            { "typ": "figur", "vem": "saga", "x": 220, "y": 404, "vand": 1, "ansikte": "tom", "hander": {"v": "ner", "h": "fram"}, "haller": [{"typ": "racket", "hand": "h"}] },
+            { "typ": "figur", "vem": "noah", "x": 690, "y": 346, "sitter": true, "vand": 0, "ser": -1, "ansikte": "tom", "golv": 420, "hander": {"v": "kna", "h": "kna"}, "namnXY": [690,436] }
+          ]
+        }
+      ]
+    },
+    "chatten": {
+      "namn": "Chatten",
+      "rutor": [
+        {
+          "plats": "I korridoren",
+          "delar": [
+            { "typ": "rum", "vagg": "#E3E8EC", "golv": 380, "golvfarg": "#B8C1C8" },
+            { "typ": "skap", "x": 30, "y": 110, "antal": 6, "b": 78, "h": 270 },
+            { "typ": "fonster", "x": 570, "y": 70, "b": 180, "h": 135, "trad": true },
+            { "typ": "vaska", "x": 352, "golv": 408 },
+            { "typ": "figur", "vem": "amir", "x": 405, "y": 404, "vand": -1, "ben": "snubblar", "lutning": -24, "ansikte": "skrattar", "ryggsack": "#3F5E4A", "hander": {"v": "fram-upp", "h": "fram-upp"} },
+            { "typ": "figur", "vem": "elias", "x": 655, "y": 404, "vand": -1, "ansikte": "skrattar", "hander": {"v": "kamera", "h": "kamera"}, "haller": [{"typ": "mobil", "blixt": true, "storlek": 1.2}] },
+            { "typ": "prat", "vem": "elias", "x": 660, "y": 122, "text": "Kolla!" }
+          ]
+        },
+        {
+          "plats": "I chatten",
+          "delar": [
+            { "typ": "rum", "vagg": "#E3E8EC", "golv": 380, "golvfarg": "#B8C1C8" },
+            { "typ": "skap", "x": 30, "y": 110, "antal": 6, "b": 78, "h": 270 },
+            { "typ": "figur", "vem": "elias", "x": 205, "y": 404, "vand": 1, "blick": "ner", "hander": {"v": "mobil", "h": "mobil"}, "haller": [{"typ": "mobil", "storlek": 1.1}] },
+            { "typ": "zoom", "fran": [240,232], "till": [452,44,420] },
+            { "typ": "chatt", "x": 452, "y": 30, "b": 230, "h": 395, "bildAv": {"vem": "amir", "vand": -1, "ben": "snubblar", "lutning": -24, "ansikte": "skrattar", "hander": {"v": "fram-upp", "h": "fram-upp"}} }
+          ]
+        },
+        {
+          "plats": "Hemma på kvällen",
+          "delar": [
+            { "typ": "rum", "vagg": "#5D6C8C", "golv": 368, "golvfarg": "#7B6C61" },
+            { "typ": "fonster", "x": 520, "y": 60, "b": 170, "h": 140, "utsikt": "kvall" },
+            { "typ": "sang", "x": 90, "y": 330, "b": 330, "golv": 432 },
+            { "typ": "lampa", "x": 680, "y": 330, "golv": 432 },
+            { "typ": "figur", "vem": "amir", "x": 360, "y": 338, "sitter": true, "vand": 0, "blick": "ner", "golv": 432, "hander": {"v": "mobil", "h": "mobil"}, "haller": [{"typ": "mobil", "storlek": 1.1}], "huvudLut": 12, "namnXY": [360,420] }
+          ]
+        },
+        {
+          "plats": "Nästa morgon",
+          "delar": [
+            { "typ": "rum", "vagg": "#E3E8EC", "golv": 380, "golvfarg": "#B8C1C8" },
+            { "typ": "skap", "x": 30, "y": 110, "antal": 6, "b": 78, "h": 270 },
+            { "typ": "fonster", "x": 570, "y": 70, "b": 180, "h": 135, "utsikt": "morgon" },
+            { "typ": "klocka", "x": 772, "y": 250, "r": 20, "tid": [8,5] },
+            { "typ": "figur", "vem": "amir", "x": 300, "y": 404, "vand": 1, "ansikte": "tom", "ryggsack": "#3F5E4A" },
+            { "typ": "figur", "vem": "elias", "x": 545, "y": 404, "vand": -1, "ansikte": "tom" }
+          ]
+        }
+      ]
+    },
+    "lunchen": {
+      "namn": "Lunchen",
+      "rutor": [
+        {
+          "plats": "Vid skåpen",
+          "delar": [
+            { "typ": "rum", "vagg": "#E8ECE4", "golv": 380, "golvfarg": "#B9B6A8" },
+            { "typ": "skap", "x": 120, "y": 110, "antal": 7, "b": 78, "h": 270, "farg": "#9DB59A" },
+            { "typ": "figur", "vem": "nora", "x": 330, "y": 404, "vand": 1 },
+            { "typ": "figur", "vem": "ida", "x": 520, "y": 404, "vand": -1 },
+            { "typ": "prat", "vem": "nora", "x": 300, "y": 96, "text": "Vi äter lunch ihop!", "max": 260 }
+          ]
+        },
+        {
+          "plats": "I matsalen",
+          "delar": [
+            { "typ": "rum", "vagg": "#F0E9DB", "golv": 370, "golvfarg": "#CDBFA6" },
+            { "typ": "fonster", "x": 70, "y": 70, "b": 170, "h": 120 },
+            { "typ": "figur", "vem": "lag1", "x": 562, "y": 352, "sitter": true, "vand": 0, "ser": -1, "utan": "armar", "nummer": "7", "namn": false },
+            { "typ": "figur", "vem": "lag2", "x": 650, "y": 352, "sitter": true, "vand": 0, "ser": -1, "utan": "armar", "nummer": "4", "namn": false },
+            { "typ": "figur", "vem": "lag3", "x": 738, "y": 352, "sitter": true, "vand": 0, "ser": -1, "utan": "armar", "nummer": "9", "namn": false },
+            { "typ": "langbord", "x": 650, "y": 330, "b": 290, "golv": 432 },
+            { "typ": "bricka", "x": 590, "y": 322, "b": 60 },
+            { "typ": "bricka", "x": 712, "y": 322, "b": 60 },
+            { "typ": "figur", "vem": "lag1", "x": 562, "y": 352, "sitter": true, "vand": 0, "bara": "armar", "hander": {"v": [540,314], "h": [584,314]}, "namn": false },
+            { "typ": "figur", "vem": "lag2", "x": 650, "y": 352, "sitter": true, "vand": 0, "bara": "armar", "hander": {"v": "vinka", "h": [672,314]}, "namn": false },
+            { "typ": "figur", "vem": "lag3", "x": 738, "y": 352, "sitter": true, "vand": 0, "bara": "armar", "hander": {"v": [716,314], "h": [760,314]}, "namn": false },
+            { "typ": "figur", "vem": "nora", "x": 330, "y": 404, "vand": 0, "ser": 1, "hander": {"v": "bricka", "h": "bricka"}, "haller": [{"typ": "bricka", "b": 104, "dy": 4}] },
+            { "typ": "prat", "vem": "lag2", "x": 600, "y": 82, "text": "Nora, kom hit!", "max": 260, "namn": false }
+          ]
+        },
+        {
+          "plats": "I matsalen",
+          "delar": [
+            { "typ": "rum", "vagg": "#F0E9DB", "golv": 370, "golvfarg": "#CDBFA6" },
+            { "typ": "figur", "vem": "ida", "x": 140, "y": 352, "sitter": true, "vand": 0, "blick": "ner", "utan": "armar", "namnXY": [140,420] },
+            { "typ": "langbord", "x": 140, "y": 330, "b": 230, "golv": 432 },
+            { "typ": "bricka", "x": 140, "y": 322, "b": 60 },
+            { "typ": "figur", "vem": "ida", "x": 140, "y": 352, "sitter": true, "vand": 0, "bara": "armar", "hander": {"v": [118,318], "h": [164,318]}, "namn": false },
+            { "typ": "figur", "vem": "lag1", "x": 600, "y": 352, "sitter": true, "vand": 0, "ser": -1, "utan": "armar", "nummer": "7", "namn": false },
+            { "typ": "figur", "vem": "lag2", "x": 680, "y": 352, "sitter": true, "vand": 0, "ser": -1, "utan": "armar", "nummer": "4", "namn": false },
+            { "typ": "figur", "vem": "lag3", "x": 760, "y": 352, "sitter": true, "vand": 0, "ser": -1, "utan": "armar", "nummer": "9", "namn": false },
+            { "typ": "langbord", "x": 680, "y": 330, "b": 260, "golv": 432 },
+            { "typ": "figur", "vem": "lag1", "x": 600, "y": 352, "sitter": true, "vand": 0, "bara": "armar", "hander": {"v": [578,314], "h": [622,314]}, "namn": false },
+            { "typ": "figur", "vem": "lag2", "x": 680, "y": 352, "sitter": true, "vand": 0, "bara": "armar", "hander": {"v": [658,314], "h": [702,314]}, "namn": false },
+            { "typ": "figur", "vem": "lag3", "x": 760, "y": 352, "sitter": true, "vand": 0, "bara": "armar", "hander": {"v": [738,314], "h": [782,314]}, "namn": false },
+            { "typ": "figur", "vem": "nora", "x": 400, "y": 404, "vand": 0, "hander": {"v": "bricka", "h": "bricka"}, "haller": [{"typ": "bricka", "b": 104, "dy": 4}] }
+          ]
+        },
+        {
+          "plats": "I matsalen",
+          "delar": [
+            { "typ": "rum", "vagg": "#F0E9DB", "golv": 370, "golvfarg": "#CDBFA6" },
+            { "typ": "figur", "vem": "ida", "x": 140, "y": 352, "sitter": true, "vand": 1, "ser": 1, "blick": "upp", "huvudLut": -20, "ansikte": "tom", "utan": "armar", "namnXY": [140,420] },
+            { "typ": "langbord", "x": 140, "y": 330, "b": 230, "golv": 432 },
+            { "typ": "bricka", "x": 140, "y": 322, "b": 60 },
+            { "typ": "figur", "vem": "ida", "x": 140, "y": 352, "sitter": true, "vand": 1, "bara": "armar", "hander": {"v": [118,318], "h": [164,318]}, "namn": false },
+            { "typ": "figur", "vem": "lag1", "x": 600, "y": 352, "sitter": true, "vand": 0, "ser": -1, "utan": "armar", "nummer": "7", "namn": false },
+            { "typ": "figur", "vem": "lag2", "x": 680, "y": 352, "sitter": true, "vand": 0, "ser": -1, "utan": "armar", "nummer": "4", "namn": false },
+            { "typ": "figur", "vem": "lag3", "x": 760, "y": 352, "sitter": true, "vand": 0, "ser": -1, "utan": "armar", "nummer": "9", "namn": false },
+            { "typ": "langbord", "x": 680, "y": 330, "b": 260, "golv": 432 },
+            { "typ": "figur", "vem": "lag1", "x": 600, "y": 352, "sitter": true, "vand": 0, "bara": "armar", "hander": {"v": [578,314], "h": [622,314]}, "namn": false },
+            { "typ": "figur", "vem": "lag2", "x": 680, "y": 352, "sitter": true, "vand": 0, "bara": "armar", "hander": {"v": [658,314], "h": [702,314]}, "namn": false },
+            { "typ": "figur", "vem": "lag3", "x": 760, "y": 352, "sitter": true, "vand": 0, "bara": "armar", "hander": {"v": [738,314], "h": [782,314]}, "namn": false },
+            { "typ": "figur", "vem": "nora", "x": 400, "y": 404, "vand": 0, "ser": -1, "ansikte": "tom", "hander": {"v": "bricka", "h": "bricka"}, "haller": [{"typ": "bricka", "b": 104, "dy": 4}] }
+          ]
+        }
+      ]
+    },
+    "mjolken": {
+      "namn": "Mjölken",
+      "rutor": [
+        {
+          "delar": [
+            { "typ": "rum", "vagg": "#EDE6DA", "golv": 360, "golvfarg": "#C9B49A", "list": true },
+            { "typ": "fonster", "x": 70, "y": 50, "b": 160, "h": 125 },
+            { "typ": "tavla", "x": 470, "y": 45, "b": 230, "h": 105 },
+            { "typ": "figur", "vem": "isak", "x": 300, "y": 346, "sitter": true, "vand": 0, "ser": 1, "blick": "ner", "utan": "armar", "namnXY": [300,392] },
+            { "typ": "bord", "x": 330, "y": 330, "b": 330, "golv": 432 },
+            { "typ": "papper", "x": 338, "y": 322, "b": 82, "djup": 18, "ritat": true },
+            { "typ": "glas", "x": 462, "y": 318, "valt": true, "vand": -1, "langd": 74 },
+            { "typ": "figur", "vem": "isak", "x": 300, "y": 346, "sitter": true, "vand": 0, "bara": "armar", "hander": {"v": [258,318], "h": [298,322]}, "namn": false },
+            { "typ": "fart", "x": 532, "y": 300, "vand": 1 },
+            { "typ": "figur", "vem": "wilma", "x": 585, "y": 404, "vand": 1, "ben": "ga", "ryggsack": "#C46B4E" }
+          ]
+        }
+      ]
+    },
+    "chatten-nasta": {
+      "namn": "Chatten, en ny ruta",
+      "rutor": [
+        {
+          "plats": "I korridoren",
+          "delar": [
+            { "typ": "rum", "vagg": "#E3E8EC", "golv": 380, "golvfarg": "#B8C1C8" },
+            { "typ": "skap", "x": 30, "y": 110, "antal": 6, "b": 78, "h": 270 },
+            { "typ": "fonster", "x": 570, "y": 70, "b": 180, "h": 135 },
+            { "typ": "figur", "vem": "elias", "x": 330, "y": 404, "vand": 1, "hander": {"v": "ner", "h": [392,262]}, "haller": [{"typ": "mobil", "hand": "h", "storlek": 1.2, "vrid": 12}] },
+            { "typ": "figur", "vem": "amir", "x": 520, "y": 404, "vand": -1, "blick": "ner", "ryggsack": "#3F5E4A" },
+            { "typ": "prat", "vem": "elias", "x": 300, "y": 92, "b": 330, "h": 130 }
+          ]
+        }
+      ]
+    },
+    "egen": {
+      "namn": "Maliks händelse",
+      "rutor": [
+        {
+          "stil": "streck",
+          "plats": "På rasten",
+          "delar": [
+            { "typ": "mark", "y": 392 },
+            { "typ": "mal", "x": 610, "y": 392, "b": 150, "h": 110 },
+            { "typ": "figur", "vem": "kompis", "x": 115, "y": 392, "vand": 1, "hander": {"v": "ut", "h": "ut"}, "namn": "Kompis" },
+            { "typ": "figur", "vem": "malik", "x": 300, "y": 392, "vand": 1, "ben": "ga", "hander": {"v": "ut", "h": "ut"}, "namn": "Malik" },
+            { "typ": "boll", "x": 372, "y": 379 }
+          ]
+        },
+        {
+          "stil": "streck",
+          "delar": [
+            { "typ": "mark", "y": 392 },
+            { "typ": "mal", "x": 610, "y": 392, "b": 150, "h": 110 },
+            { "typ": "figur", "vem": "malik", "x": 400, "y": 392, "vand": 1, "ben": "snubblar", "hander": {"v": "ut", "h": "ut"}, "namn": "Malik" },
+            { "typ": "boll", "x": 462, "y": 379 },
+            { "typ": "figur", "vem": "kompis", "x": 150, "y": 392, "vand": 1, "ben": "ga", "hander": {"v": "ut", "h": "ut"}, "namn": "Kompis" }
+          ]
+        },
+        {
+          "stil": "streck",
+          "delar": [
+            { "typ": "mark", "y": 392 },
+            { "typ": "mal", "x": 610, "y": 392, "b": 150, "h": 110 },
+            { "typ": "figur", "vem": "kompis", "x": 440, "y": 392, "vand": 1, "ben": "ga", "hander": {"v": "ut", "h": "ut"}, "namn": "Kompis" },
+            { "typ": "boll", "x": 506, "y": 379 },
+            { "typ": "figur", "vem": "malik", "x": 250, "y": 392, "vand": 1, "hander": {"v": "ut", "h": "ut"}, "namn": "Malik" }
+          ]
+        },
+        {
+          "stil": "streck",
+          "delar": [
+            { "typ": "mark", "y": 392 },
+            { "typ": "mal", "x": 610, "y": 392, "b": 150, "h": 110 },
+            { "typ": "figur", "vem": "malik", "x": 250, "y": 392, "vand": 1, "hander": {"v": "ner", "h": "peka"}, "namn": "Malik" },
+            { "typ": "figur", "vem": "kompis", "x": 470, "y": 392, "vand": -1, "hander": {"v": "ner", "h": "ner"}, "namn": "Kompis" },
+            { "typ": "boll", "x": 430, "y": 379 },
+            { "typ": "prat", "vem": "malik", "x": 250, "y": 92, "text": "Ge tillbaka!" }
+          ]
+        }
+      ]
+    },
+    "egen-tanke-malik": {
+      "namn": "Maliks händelse, ruta 3 med Maliks tanke",
+      "rutor": [
+        {
+          "stil": "streck",
+          "delar": [
+            { "typ": "mark", "y": 392 },
+            { "typ": "mal", "x": 610, "y": 392, "b": 150, "h": 110 },
+            { "typ": "figur", "vem": "kompis", "x": 440, "y": 392, "vand": 1, "ben": "ga", "hander": {"v": "ut", "h": "ut"}, "namn": "Kompis" },
+            { "typ": "boll", "x": 506, "y": 379 },
+            { "typ": "figur", "vem": "malik", "x": 250, "y": 392, "vand": 1, "hander": {"v": "ut", "h": "ut"}, "namn": "Malik" },
+            { "typ": "tanke", "vem": "malik", "x": 230, "y": 98, "b": 300, "h": 130 }
+          ]
+        }
+      ]
+    },
+    "egen-tanke-ruta2": {
+      "namn": "Maliks händelse, ruta 2 med kompisens tanke",
+      "rutor": [
+        {
+          "stil": "streck",
+          "delar": [
+            { "typ": "mark", "y": 392 },
+            { "typ": "mal", "x": 610, "y": 392, "b": 150, "h": 110 },
+            { "typ": "figur", "vem": "malik", "x": 400, "y": 392, "vand": 1, "ben": "snubblar", "hander": {"v": "ut", "h": "ut"}, "namn": "Malik" },
+            { "typ": "boll", "x": 462, "y": 379 },
+            { "typ": "figur", "vem": "kompis", "x": 150, "y": 392, "vand": 1, "ben": "ga", "hander": {"v": "ut", "h": "ut"}, "namn": "Kompis" },
+            { "typ": "tanke", "vem": "kompis", "x": 205, "y": 98, "b": 320, "h": 130 }
+          ]
+        }
+      ]
+    },
+    "tom": {
+      "namn": "Tomma rutor",
+      "rutor": [
+        {
+          "delar": [
+          ]
+        },
+        {
+          "delar": [
+          ]
+        },
+        {
+          "delar": [
+          ]
+        },
+        {
+          "delar": [
+          ]
+        }
+      ]
+    },
+    "ritstod": {
+      "namn": "Så ritar du streckgubbar",
+      "rutor": [
+        {
+          "stil": "streck",
+          "delar": [
+            { "typ": "figur", "vem": "malik", "x": 75, "y": 340, "vand": 0, "namn": "står" },
+            { "typ": "figur", "vem": "malik", "x": 205, "y": 340, "vand": 1, "ben": "ga", "hander": {"v": "ut", "h": "ut"}, "namn": "går" },
+            { "typ": "pall", "x": 330, "y": 278, "golv": 340 },
+            { "typ": "figur", "vem": "malik", "x": 322, "y": 284, "sitter": true, "vand": 1, "golv": 340, "hander": {"v": "kna", "h": "kna"}, "namn": false },
+            { "typ": "text", "x": 330, "y": 374, "text": "sitter", "storlek": 26 },
+            { "typ": "figur", "vem": "malik", "x": 470, "y": 340, "vand": -1, "hander": {"v": "peka", "h": "ner"}, "namn": "pekar" },
+            { "typ": "figur", "vem": "malik", "x": 605, "y": 340, "vand": 0, "ansikte": "arg", "hander": {"v": "hoft", "h": "hoft"}, "namn": "är arg" },
+            { "typ": "figur", "vem": "malik", "x": 730, "y": 340, "vand": 0, "ansikte": "ledsen", "blick": "ner", "namn": "är ledsen" }
+          ]
+        }
+      ]
+    },
+    "tackt": {
+      "namn": "Täckta rutor, till huvudfilmens kolumn",
+      "rutor": [
+        {
+          "delar": [
+            { "typ": "rum", "golv": 450, "vagg": "#D3CBBE" }
+          ]
+        },
+        {
+          "delar": [
+            { "typ": "rum", "golv": 450, "vagg": "#D3CBBE" }
+          ]
+        },
+        {
+          "delar": [
+            { "typ": "rum", "golv": 450, "vagg": "#D3CBBE" }
+          ]
+        },
+        {
+          "delar": [
+            { "typ": "rum", "golv": 450, "vagg": "#D3CBBE" }
+          ]
+        }
+      ]
+    }
+  }
+}

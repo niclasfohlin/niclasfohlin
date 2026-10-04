@@ -1,142 +1,152 @@
 {
   "antalsuppfattning-i-grupp": {
-    "kalla": "dcba5789579c490e",
+    "kalla": "35286244e0c9488e",
     "skalor": [
       1.25,
       1.35,
       1.35,
       1.3
     ],
-    "datum": "2026-10-03"
+    "datum": "2026-10-04"
   },
   "boksamtal-i-grupp": {
-    "kalla": "5c72d3a6c884b09b",
+    "kalla": "2458d707c582d495",
     "skalor": [
       1.35,
       1.35,
       1.1,
       1.35
     ],
-    "datum": "2026-10-03"
+    "datum": "2026-10-04"
   },
   "brakkurs-i-grupp": {
-    "kalla": "d248514e74047a1d",
+    "kalla": "d1a6ec3823a39573",
     "skalor": [
       1.15,
       1.35,
       1.35,
       1.2
     ],
-    "datum": "2026-10-03"
+    "datum": "2026-10-04"
   },
   "faktatextsamtal-i-grupp": {
-    "kalla": "ba463666964c5d0d",
+    "kalla": "24552968af6f49ff",
     "skalor": [
       1.3,
       1.35,
       1.3,
       1.35
     ],
-    "datum": "2026-10-03"
+    "datum": "2026-10-04"
   },
   "kompissamtal": {
-    "kalla": "085e7ed0da8fb3b0",
+    "kalla": "3bb1ecccbfa249fb",
     "skalor": [
       1.25,
       1.2,
       1.35,
       1.2
     ],
-    "datum": "2026-10-03"
+    "datum": "2026-10-04"
   },
   "laslistor-i-grupp": {
-    "kalla": "8634f04a9a452240",
+    "kalla": "d688715ac167a89d",
     "skalor": [
       1.2,
       1.35,
       1.2,
       1.35
     ],
-    "datum": "2026-10-03"
+    "datum": "2026-10-04"
   },
   "ljudlek-i-grupp": {
-    "kalla": "7cac8f883231607c",
+    "kalla": "7fc8f3646a82b0fa",
     "skalor": [
       1.25,
       1.35,
       1.15,
       1.2
     ],
-    "datum": "2026-10-03"
+    "datum": "2026-10-04"
   },
   "problemlosning-i-grupp": {
-    "kalla": "840c4566126e67d5",
+    "kalla": "3c3cfa9488e64c44",
     "skalor": [
       1.35,
       1.35,
       1.35,
       1.3
     ],
-    "datum": "2026-10-03"
+    "datum": "2026-10-04"
   },
-  "skrivkurs-berattelseram": {
-    "kalla": "587af7f5c22a5c7d",
-    "skalor": [
-      1.2,
-      1.35,
-      1.15,
-      1.35
-    ],
-    "datum": "2026-10-03"
-  },
-  "skrivkurs-sagoboken": {
-    "kalla": "91fb264ea9a9c54a",
-    "skalor": [
-      1.25,
-      1.35,
-      1.1,
-      1.35
-    ],
-    "datum": "2026-10-03"
-  },
-  "skrivkurs-vardeskapande": {
-    "kalla": "59f4aab17d674e7d",
-    "skalor": [
-      1.3,
-      1.35,
-      1.35,
-      1.3
-    ],
-    "datum": "2026-10-03"
-  },
-  "textsamtal-i-grupp": {
-    "kalla": "eeef0217a43eb059",
+  "seriesamtal": {
+    "kalla": "2dd609abd76a1699",
     "skalor": [
       1.25,
       1.3,
       1.35,
       1.25
     ],
-    "datum": "2026-10-03"
+    "datum": "2026-10-04"
+  },
+  "skrivkurs-berattelseram": {
+    "kalla": "9c9973cdb4712ae7",
+    "skalor": [
+      1.2,
+      1.35,
+      1.15,
+      1.35
+    ],
+    "datum": "2026-10-04"
+  },
+  "skrivkurs-sagoboken": {
+    "kalla": "33eb1494ff2010fe",
+    "skalor": [
+      1.25,
+      1.35,
+      1.1,
+      1.35
+    ],
+    "datum": "2026-10-04"
+  },
+  "skrivkurs-vardeskapande": {
+    "kalla": "19e847a3f67496fd",
+    "skalor": [
+      1.3,
+      1.35,
+      1.35,
+      1.3
+    ],
+    "datum": "2026-10-04"
+  },
+  "textsamtal-i-grupp": {
+    "kalla": "84f6089793b76d92",
+    "skalor": [
+      1.25,
+      1.3,
+      1.35,
+      1.25
+    ],
+    "datum": "2026-10-04"
   },
   "til-i-grupp": {
-    "kalla": "3573c2e8dd7b7c0f",
+    "kalla": "01347be76faac2be",
     "skalor": [
       1.2,
       1.35,
       1.15,
       1.3
     ],
-    "datum": "2026-10-03"
+    "datum": "2026-10-04"
   },
   "upprepad-lasning": {
-    "kalla": "92fd29b3af283b35",
+    "kalla": "cab43f6d6b95ee97",
     "skalor": [
       1.3,
       1.35,
       1.05,
       1.35
     ],
-    "datum": "2026-10-03"
+    "datum": "2026-10-04"
   }
 }

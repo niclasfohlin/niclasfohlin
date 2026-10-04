@@ -1,0 +1,1241 @@
+# Metod i stödundervisning. Modellen står i sajtens src/content.config.ts och riggens kopia i build/schema.mjs.
+# Ny metod 2026-10-03 ur Niclas beskrivning i chatten (intake/seriesamtal.md). Analysen står i analys.md, sökningarna i
+# sokning.md och omtaget efter de fyra granskningarna i omtag.md. Efter rundorna samma kväll kom Niclas huvudtanke:
+# spola tillbaka till innan det hände och spela framåt (out/seriesamtal/fore-konflikten-2026-10-03.md). Bildserierna,
+# provbilden, bubblorna och mallarna ritas av riggen (build/serieritning.js, rigg.json serier) och föreslås till sajten
+# som en ny form. Omtaget 2026-10-04 efter genomspelningen och tabellrundan gjorde metoden enklare: modellen överst,
+# perioden i ordning efter passet, åtta samtalstekniker i en tabell och färre saker att skriva ut (analys.md). Namnet är
+# Seriesamtal, Niclas val 2026-10-04 (arbetsnamnet var Seriesamtal och ritprat).
+titel: Seriesamtal
+undertitel: Vuxenledda samtal där eleverna ritar en konflikt ruta för ruta och ser vad personerna tänkte och ville, för F–⁠5
+ingress: Du och en till fyra elever tar upp en konflikt och ritar den som en serie. Ni spolar tillbaka till när det var lugnt och går framåt en ruta i taget. Sedan ser ni serien ovanifrån och letar upp rutan där någon hade behövt göra annorlunda. Eleven lär sig av konflikter och övar på att tänka innan det svåra kommer.
+omrade: Socialt
+arskurs:
+  - F-3
+  - 4-6
+arskursText: F–5
+taggar:
+  - socialt-samspel
+  - konflikthantering
+format:
+  - enskilt
+  - liten grupp
+tid: Cirka 30 minuter per pass, två pass i veckan
+period: Sex till åtta veckor
+grupp: En till fyra elever
+material:
+  - sex bildserier
+  - bubblor att klippa ut
+  - mallar att rita i
+  - pärmar
+  - whiteboardpennor
+  - pinnar och tejp
+uppdaterad: 2026-10-04
+publicerad: 2026-10-04
+relaterade: [kompissamtal]
+utkast: false
+inledning:
+  - I ett seriesamtal tar du och eleverna upp en konflikt och ritar den som en serie. Ni spolar tillbaka till när det var lugnt, innan konflikten. Det är ruta 1. Sedan går ni framåt en ruta i taget till konflikten i den sista rutan, och på vägen frågar du vad som händer i nästa ruta. I samtalet efteråt får båda personerna en tankebubbla, och ni ser hela serien ovanifrån. Ni funderar på varför det blev så och i vilken ruta någon hade behövt tänka och göra annorlunda, så att konflikten inte hade uppstått. Sist ritar ni hur det kan bli i stället.
+  - Konflikter hör till att vara människa och är inget att vara rädd för. I en konflikt kan vi utvecklas socialt när vi förstår att människor har olika behov och vill olika saker. Därför är syftet att eleven lär sig av konflikter. Hen ska kunna se en social situation lite ovanifrån, förstå varför det blir som det blir och tänka innan det svåra kommer. Det kommer att bli konflikter också efter perioden, och det är inget misslyckande.
+  - Ett seriesamtal är ritprat i rutor, i den ordning det hände. Ritprat betyder att du ritar streckgubbar, pratbubblor för det någon säger och tankebubblor för det hen tänker, medan eleven berättar. Det ni ritar står kvar medan ni pratar, så att eleven hinner tänka och ni kan titta på en ruta igen. Så förstärker ritprat och seriesamtal lärandet. De gör också eleven nyfiken på sociala situationer och stöttar den som har svårt att lära sig av en konflikt på egen hand.
+  - I pass 1–⁠6 tar ni en färdig bildserie och börjar direkt i ruta 1. När ni sedan ritar en elevs egen händelse, berättar eleven först kort vad som hände. I passets sex delar heter stegen Spola tillbaka, Tankarna, Ovanifrån och Nästa gång. Före dem kommer delen Spaningen, där var och en berättar om sitt spanaruppdrag, en sak att lägga märke till mellan passen. Efter dem kommer delen Med mig. Före pass 1 skriver du ut det som står under Material att skriva ut och träffar varje elev för sig i cirka 15 minuter. För att börja läser du från avsnittet Ett pass på 30 minuter till och med tabellen Pass 1, och checklistan inför pass 1. Resten slår du upp när du behöver det.
+upplagg:
+  rubrik: Så fungerar insatsen
+  text: En till fyra elever har två pass på cirka 30 minuter i veckan under sex till åtta veckor, alltså 12–⁠16 pass. I varje serie spolar ni tillbaka till ruta 1, när det var lugnt, och går framåt en ruta i taget till konflikten i den sista rutan. Sedan får båda personerna en tankebubbla. Ni ser serien ovanifrån, letar upp rutan där någon hade behövt göra annorlunda och ritar hur det kan bli i stället. I pass 1–⁠6 tar ni en bildserie per pass, och sedan elevernas egna händelser. Före och efter perioden visar du provbilden för varje elev.
+gruppen:
+  rubrik: Så sätter du ihop gruppen
+  text: "Gruppen är en till fyra elever i F–⁠5 som ofta hamnar i bråk eller utanför och behöver stöd i att förstå vad andra menar och vill. Metoden passar särskilt elever som har assistent eller resurs för sina sociala behov, eftersom den vuxna tar med passens frågor ut på rasten. Eleven behöver kunna berätta i korta meningar. Säger en elev att hen har blivit kränkt, går skolans rutin före metoden. Fråga varje elev för sig om hen vill vara med. Högst en elev får behöva mycket stöd i sitt beteende. Gruppen kan ha en kamrat som förebild. Elever som står mot varandra i en konflikt är inte i samma grupp."
+tabeller:
+  - rubrik: Perioden pass för pass
+    plats: efter-tidsschema
+    meny: true
+    text: Pass 1–⁠6 har var sin bildserie, där två personer vill olika saker. Varje serie har fyra rutor och slutar där konflikten är som störst. I den sista rutan har personerna ansikten utan ögon och mun, och när det finns tid över ritar eleverna färdigt ansiktena. Under Material att skriva ut står lärarens sida före varje serie, med berättelsen, var ni stannar och vad personerna vill. Det eleven tar med sig från en bildserie är tumregeln. Från pass 4 berättar en elev serien utan att du ställer frågor, och på bordet ligger kortet Frågor vi ställer till varandra. Pass 1, pass 7, ett pass med en egen serie och det sista passet har egna tabeller efter Samtalsteknikerna.
+    kolumner:
+      - Pass
+      - Det som händer
+      - Det eleven tar med sig
+    rader:
+      - - |-
+          Pass 1
+          Fönsterplatsen
+        - Sam håller sig om magen och frågar om han får sitta vid fönstret. Alva säger nej, för hon var först.
+        - Man ser inte alltid vad någon behöver. Säg varför, eller fråga varför.
+      - - |-
+          Pass 2
+          Spelet
+        - Leo frågar om han får vara med när Mira och Alva spelar fyra i rad. Mira säger nej.
+        - Ett nej kan ha ett skäl. Säg skälet.
+      - - |-
+          Pass 3
+          Teckningen
+        - Sam slänger Alvas teckning, som låg med baksidan upp bland skräpet. Alva hittar den i papperskorgen.
+        - Den som inte såg kan inte veta.
+      - - |-
+          Pass 4
+          Vinsten
+        - Saga vinner över Noah i pingis och jublar. Noah går och sätter sig på en bänk.
+        - Den som vinner kan vara glad och samtidigt tänka på den som förlorar.
+      - - |-
+          Pass 5
+          Chatten
+        - Elias lägger ut en bild på Amir i klassens chatt, och många skrattar. Amir sitter ensam hemma.
+        - Ett skämt som är roligt för en kan såra en annan. Fråga innan du lägger ut en bild på någon.
+      - - |-
+          Pass 6
+          Lunchen
+        - Nora har sagt att hon ska äta med Ida, som är ny. I matsalen ropar fotbollslaget på Nora.
+        - Man kan vilja två saker samtidigt.
+      - - |-
+          Pass 7
+          En gång när det nästan blev bråk
+        - Var och en ritar en serie om en gång när det nästan blev bråk, men det blev inget. Serien börjar i ruta 1, när det var lugnt.
+        - Eleven ser vad någon gjorde så att det inte blev bråk, och kan göra likadant själv.
+      - - |-
+          Pass 8 till det näst sista
+          Egna händelser
+        - I varje pass ritar ni en elevs egen händelse, med samma steg som i bildserierna.
+        - Eleven får en plan för nästa gång det händer.
+      - - Det sista passet
+        - Med pärmarna och gruppens blad framför er ser ni tillbaka på perioden.
+        - Var och en väljer en tumregel och en sak att ta med sig.
+    not: Personerna i Chatten och Lunchen är runt tolv år, och de fyra första serierna fungerar i hela F–⁠5. I F–⁠2 kan gruppen upprepa en eller två av de fyra första serierna i stället för Chatten och Lunchen. Då börjar var och en med den person hen inte började med första gången. Bildserierna sitter på väggen under perioden, i den ordning ni har gjort dem.
+  - rubrik: "Samtalsteknikerna: vad du gör och hur det låter"
+    plats: efter-steg
+    meny: true
+    text: Med de här åtta teknikerna leder du samtalet i passets alla delar. De fyra första håller kvar samtalet vid bilden och vid elevens egna tankar. De fyra sista får eleverna att tala med varandra, så att samtalet går runt bordet. Du använder dem från pass 1 och övar särskilt på två i taget, i den ordning de står i tabellen. Gå vidare till två nya varje vecka. Bara tekniken Fråga varandra börjar senare, i pass 4. Skriv i snabbmallen hur det gick med de två teknikerna du övar på. Använd tankeord, till exempel tror, vet, vill, märker, menar, råkar, undrar och minns. En kort version står på lathundens sida 3.
+    kolumner:
+      - Teknik
+      - Så gör du
+      - Så låter det
+    rader:
+      - - Spegla
+        - Upprepa elevens egna ord i undrande ton, utan att berömma eller rätta.
+        - ”Du tänker att Elias ville vara elak.”
+      - - Fråga vad hen ser
+        - När eleven säger vad en person tänker eller vill, be eleven visa vad i bilden som får hen att säga det.
+        - ”Vad ser du som får dig att säga det?”
+      - - Pröva en tanke till
+        - Be eleven komma på en tanke till, och fråga vad personen ville när det är oklart.
+        - ”Kan hen ha tänkt eller velat något annat?”
+      - - Undra högt
+        - Säg högt vad du själv undrar om en person, så att eleverna hör hur en nyfiken fråga låter.
+        - ”Jag undrar vad Nora tänker när laget ropar.”
+      - - Tänk själv först
+        - Låt alla tänka tyst innan någon svarar. Den som har en tanke visar tummen.
+        - ”Tänk tyst. Visa tummen när du har en tanke.”
+      - - Skicka frågan vidare
+        - Låt en elev svara på det en kamrat sa, i stället för att du svarar själv.
+        - ”Vera, vad säger du om det Ella såg?”
+      - - Knyt ihop
+        - När två elever ser olika på samma ruta, fråga om båda kan stämma och vad i bilden som får dem att tro det.
+        - ”Ella och Vera, ni ser olika på det. Kan båda stämma?”
+      - - Fråga varandra
+        - Från pass 4 ligger kortet Frågor vi ställer till varandra på var sida av bordet. Låt eleverna ställa frågorna till varandra.
+        - ”Läs frågan på kortet och ställ den till Ella.”
+  - rubrik: "Pass 1: syftet, reglerna och tankebubblan"
+    plats: efter-steg
+    meny: true
+    text: Före pass 1 träffar du varje elev för sig. Pass 1 börjar med att du säger varför ni ses och vad som gäller i gruppen, och sedan gör ni en övning som visar att tankar inte syns. Till sist tar ni bildserien Fönsterplatsen, med kortare tid för de flesta delarna än i ett vanligt pass.
+    kolumner:
+      - Del
+      - Så gör du
+    rader:
+      - - |-
+          Samtalet före
+          Före pass 1
+        - Träffa en elev i taget i cirka 15 minuter. Berätta att ni i gruppen ritar bråk som serier och spolar tillbaka till när det var lugnt. Fråga om hen vill vara med. Visa sedan provbilden och fyll i protokollet. Låt eleven säga ett mål, till exempel ”Jag vill få vara med”, och skriv det på framsidan av elevens pärm. Be klassläraren sätta sin siffra från 0 till 10 för eleven.
+      - - |-
+          Förberedelse
+          Före passet
+        - Skriv gruppens regler överst på ett stort papper, gruppens blad, och sätt upp det på väggen. Lägg Fönsterplatsen på A3 mitt på bordet, med rutorna 2–⁠4 täckta. Ta fram en tankebubbla och en pratbubbla på var sin pinne till varje elev och till dig själv. Lägg fram lösa bubblor, pennor och spanarbladen med det första uppdraget.
+      - - |-
+          Varför vi ses
+          0–⁠4 min
+        - "I F–⁠2 säger du: ”Här ritar vi serier om hur det är att vara med andra. Tankar syns inte, men här kan vi rita dem.” I åk 3–⁠5 säger du: ”Ibland blir det bråk fast ingen ville det, eftersom vi inte kan se vad andra tänker. Här ritar vi händelser som serier och ser vad alla som var med tänkte och ville.” Säg också: ”Vi börjar i rutan där det var lugnt och går framåt en ruta i taget. Sedan letar vi upp rutan där någon hade behövt göra annorlunda. Jag bestämmer inte vem som hade rätt. Alla hamnar i bråk ibland, och det är inget farligt. Vi ritar för att förstå och lära oss av det.”"
+      - - |-
+          Gruppens regler
+          4–⁠6 min
+        - "Läs reglerna på gruppens blad: ”Den som äger serien bestämmer vad som står i den. Vi skrattar inte åt någons serie. Du får säga ’Jag vet inte’ eller ’Jag står över’. Det vi säger stannar här, men om jag får veta att någon far illa, måste jag berätta det för någon som kan hjälpa.”"
+      - - |-
+          Tankebubblan
+          6–⁠11 min
+        - "Titta tyst på något i rummet, skriv det i tankebubblan utan att någon ser och håll baksidan mot gruppen. Säg: ”Jag tänker på något. Vad tänker jag på?” Låt eleverna gissa, och säg sedan: ”Det kan ni inte veta. Tankar syns inte.” Håll pratbubblan vid munnen och säg: ”Jag tänker på pennan.” Vänd tankebubblan och säg: ”Nu vet ni, för jag sa det.” Var och en gör likadant med något eget, och de andra gissar."
+      - - |-
+          Spola tillbaka
+          11–⁠16 min
+        - "Säg: ”I den här serien går det snett. Vi spolar tillbaka till när det var lugnt.” Läs ruta 1, stanna och säg: ”Här har inget hänt än.” Visa sedan en ruta i taget, och stanna där det står Stanna här på lärarens sida."
+      - - |-
+          Tankarna
+          16–⁠21 min
+        - Säg själv vad en av personerna kan tänka, skriv det på en lös bubbla och lägg den vid personen. Sedan tar eleverna de roller du har bestämt, som i ett vanligt pass.
+      - - |-
+          Ovanifrån
+          21–⁠24 min
+        - "En elev berättar serien. Berätta sedan det som gruppen inte vet än: Sam mår illa när han åker buss, men inte när han kan titta ut genom fönstret. Fråga sist varför det blev så och i vilken ruta Alva eller Sam hade behövt tänka och göra annorlunda."
+      - - |-
+          Nästa gång
+          24–⁠27 min
+        - "Utgå från den rutan och fråga ”Hur kan det bli i stället?” Var och en säger vad Alva eller Sam kan göra, och två elever spelar upp ett av förslagen med bubblorna på pinne."
+      - - |-
+          Med mig
+          27–⁠30 min
+        - Var och en säger en sak hen tar med sig. Gruppen säger dagens tumregel, och du skriver den på gruppens blad. Dela ut spanarbladen.
+  - rubrik: "Pass 7: en gång när det nästan blev bråk"
+    plats: efter-steg
+    meny: true
+    text: Den första egna serien handlar om en gång när det nästan blev bråk, men det blev inget. Var och en ritar sin egen händelse i mallen med fyra rutor och följer samma steg som i bildserierna. I delen Ovanifrån letar eleverna upp rutan där någon gjorde något så att det inte blev bråk.
+    kolumner:
+      - Del
+      - Så gör du
+    rader:
+      - - |-
+          Förberedelse
+          Före passet
+        - Lägg fram elevernas pärmar, pennor och en mall med fyra rutor till var och en. Bestäm i vilken ordning eleverna ska rita sina egna händelser, med början i pass 8.
+      - - |-
+          Spaningen
+          0–⁠4 min
+        - Var och en berättar om sitt spanaruppdrag.
+      - - |-
+          Spola tillbaka
+          4–⁠13 min
+        - Var och en tänker på ett tillfälle när det nästan blev bråk, men det blev inget. Eleverna spolar tillbaka till när det var lugnt, ritar det i ruta 1 och ritar sedan en ruta i taget fram till det som hände. Du ritar åt den som vill.
+      - - |-
+          Tankarna
+          13–⁠17 min
+        - Var och en ritar sin egen tankebubbla och den andra personens, i rutan där det nästan blev bråk.
+      - - |-
+          Ovanifrån
+          17–⁠23 min
+        - Var och en visar sin serie och säger i vilken ruta någon gjorde något så att det inte blev bråk. Fråga ”Vad tänkte hen då?”
+      - - |-
+          Nästa gång
+          23–⁠26 min
+        - Fråga ”När kan du göra likadant?” Var och en säger när hen kan göra det.
+      - - |-
+          Med mig
+          26–⁠30 min
+        - "Var och en säger vad hen tar med sig, läser målet på sin pärm och säger hur det går med det. Berätta att ni från pass 8 ritar en elevs egen händelse i varje pass, och i vilken ordning ni tar dem. Dela ut spanarbladen med uppdraget ”Lägg märke till en gång när det nästan blev bråk, men det blev inget. Vad gjorde någon precis innan, så att det inte blev bråk?”"
+  - rubrik: Ett pass med en egen serie
+    plats: efter-steg
+    meny: true
+    text: Från pass 8 äger en elev serien i varje pass. Eleven berättar sin version först, ni spolar tillbaka till när det var lugnt, och de andra lyssnar och säger vad de undrar. Delarna och tiderna är desamma som i ett pass med en bildserie. Allt ritar ni på papper, också tankebubblorna, så att serien finns kvar i elevens pärm.
+    kolumner:
+      - Del
+      - Så gör du
+    rader:
+      - - |-
+          Förberedelse
+          Dagen före
+        - Prata i fem minuter med den som äger serien, och fråga ”Vill du rita något som har hänt dig, eller något som brukar bli svårt? Är det över nu? Får de andra höra det?” Pröva händelsen mot de tre kraven under ”Var hittar du bildserierna och händelserna?”, och säg att du inte bestämmer vem som hade rätt. Skriv ut mallen med fyra rutor på A3, eller den med sex om händelsen är lång. Före passet lägger du fram mallen, pennorna och bladet Nästa gång.
+      - - |-
+          Spaningen
+          0–⁠4 min
+        - Du eller en elev läser gruppens regler högt. Sedan berättar var och en om sitt spanaruppdrag, och från pass 9 berättar den som ägde serien i förra passet hur planen gick.
+      - - |-
+          Spola tillbaka
+          4–⁠11 min
+        - Låt ägaren berätta kort vad som hände. Spola sedan tillbaka till när det var lugnt och fråga ”Var var du? Vad gjorde du precis innan? Vad ville du då?” Det blir ruta 1. Ägaren berättar vidare, en ruta i taget fram till konflikten. Ägaren väljer om du eller hen ritar, och du rättar inget i det hen berättar. De andra lyssnar.
+      - - |-
+          Tankarna
+          11–⁠17 min
+        - Rita först ägarens egna tankebubblor, i ruta 1 och i rutan där det gick snett. Fråga sedan ”Får vi undra över vad den andra tänkte?” De andra i gruppen säger vad de undrar, och ägaren väljer vilken tanke som ska stå i den andra personens bubbla.
+      - - |-
+          Ovanifrån
+          17–⁠21 min
+        - Ägaren berättar hela serien. Fråga ”Vad gjorde du som hen märkte?” och sedan ”I vilken ruta hade någon behövt tänka och göra annorlunda?” Svaret kan också vara en ruta där den andra personen hade behövt göra annorlunda, och ägaren bestämmer vilken ruta det blir. Blev ägaren sårad, fråga också ”Vad behöver hända för att det ska bli bra för dig?”
+      - - |-
+          Nästa gång
+          21–⁠27 min
+        - Utgå från rutan där någon hade behövt göra annorlunda, och fråga ”Hur kan det bli i stället?” De andra kommer med förslag, ägaren väljer ett av dem, och ägaren eller du ritar det på bladet Nästa gång. Direkt efter passet fyller du i bladet Min plan med ägaren, och det tar cirka tio minuter.
+      - - |-
+          Med mig
+          27–⁠30 min
+        - Var och en säger vad hen tar med sig. Säg till ägaren något hen gjorde bra i samtalet, till exempel ”Du berättade fast det var svårt.” Ägaren får planen som sitt spanaruppdrag, och du skriver uppdraget på spanarbladet när ni fyller i bladet Min plan. De andras uppdrag är ”Lägg märke till en gång när det nästan blev bråk, men det blev inget. Vad gjorde någon precis innan, så att det inte blev bråk?”
+    not: Handlar serien om något som ska hända, ritar ni i ruta 1 hur det brukar börja och går fram till rutan där det brukar bli bråk. Sedan får personerna tankebubblor som vanligt, och i delen Nästa gång ritar ni hur det kan bli i stället och vad eleven, den andra personen och de vuxna kan göra.
+  - rubrik: Det sista passet
+    plats: efter-steg
+    meny: true
+    text: I det sista passet ser ni tillbaka på hela perioden, med elevernas pärmar och gruppens blad.
+    kolumner:
+      - Del
+      - Så gör du
+    rader:
+      - - |-
+          Förberedelse
+          Före passet
+        - Lägg fram varje elevs pärm, och ha gruppens blad på väggen.
+      - - |-
+          Starten
+          0–⁠5 min
+        - Säg ”I dag tittar vi tillbaka på allt vi har gjort.” Var och en berättar om sitt spanaruppdrag, och den som ägde serien i förra passet säger hur planen gick. Sedan läser var och en målet på sin pärm.
+      - - |-
+          Förut och nu
+          5–⁠13 min
+        - Var och en bläddrar i sin pärm, väljer en serie och pekar på rutan där någon hade behövt göra annorlunda. Sedan säger hen hur hen tänkte då och hur hen tänker nu, till exempel ”Först tänkte jag att han tog bollen med flit. Nu tror jag att han inte visste.” De andra säger en sak de har sett att hen har lärt sig.
+      - - |-
+          Tumreglerna
+          13–⁠21 min
+        - Gruppen läser tumreglerna på gruppens blad, och var och en väljer en att ta med sig.
+      - - |-
+          Med mig
+          21–⁠27 min
+        - Var och en säger eller ritar en sak hen tar med sig, vem som kan hjälpa hen efter perioden och ett råd till en elev som ska börja i en sådan grupp.
+      - - |-
+          Avslutet
+          27–⁠30 min
+        - Säg en sak du har sett hos var och en. Säg också att det kommer att bli bråk igen, och att de nu vet hur de kan lära sig av det. Berätta att du visar provbilden för var och en efter passet, och att ni ses igen om fyra veckor i ett påfyllningspass, där ni läser planerna och ritar en ruta om en gång när planen fungerade.
+  - rubrik: Så anpassar du för eleven
+    plats: efter-steg
+    kolumner:
+      - Eleven
+      - Så gör du
+    rader:
+      - - Förskoleklass
+        - Passet kan bli 20 minuter, med delarna Spaningen 0–⁠3 min, Spola tillbaka 3–⁠8 min, Tankarna 8–⁠12 min, Ovanifrån 12–⁠14 min, Nästa gång 14–⁠17 min och Med mig 17–⁠20 min. I delen Ovanifrån pekar eleven på rutan där någon hade behövt göra annorlunda. Dela pass 1 i två pass, ett med syftet, reglerna och tankebubblan, och ett med Fönsterplatsen. Räkna båda som pass 1. I övningen Tankebubblan ritar eleven det hen tittar på, i stället för att skriva det. Fråga mest om det ni ser och det personerna gör. Du ritar och skriver, och eleven pekar. Gör också det som står i raden F–⁠2.
+      - - F–⁠2
+        - Läs berättelsen och peka på personerna. Där ni stannar läser du de två vägarna framåt på lärarens sida och frågar vilken eleven tror på, till exempel ”Tror du att Alva säger nej, eller frågar hon om Sam mår illa?” Låt eleven välja mellan två tankar, och fråga ”Ville hen vara dum, eller ville hen något annat?” Du skriver i bubblan det eleven säger. Eleven gör spanaruppdraget med en vuxen i klassen, och när ni fyller i Min plan visar eleven med fingrarna hur stark känslan var. Har eleven varit med om något, ritpratar du med hen samma dag, och ni tar upp serien i gruppen om den uppfyller de tre kraven.
+      - - Åk 3–⁠5
+        - Eleverna skriver själva i bubblorna och ritar sina egna serier i mallen med fyra eller sex rutor. Fråga också vad den ena tror att den andra tänker, som ”Vad tror Elias att Amir tänker?”
+      - - Med språkstörning
+        - Prata om två rutor i taget, den ni just har läst och den före, och ställ en konkret fråga åt gången, till exempel ”Vad hände först? Och sedan?” Ge eleven början på en mening, till exempel ”Jag tror att hon”, ”Han vill” eller ”Hon visste inte att”. När det låser sig, ge två tankar eller två känslor att välja mellan, eller ställ en fråga som eleven kan svara ja eller nej på.
+      - - Med adhd
+        - Skriv passets sex delar på en lapp som eleven bockar av. Ge en uppgift i taget, som att leta ledtrådar i bilden, och låt eleven hålla i pennan. Gör en kort paus efter delen Tankarna, och korta delen Spaningen lika mycket som pausen tar.
+      - - Med autism
+        - Berätta före passet vad det handlar om och hur länge det håller på. Där ni stannar skriver ni personens tanke på en tankebubbla och lägger den vid personen, innan ni säger vad hen gör sedan. I delen Nästa gång säger du också vad som är klokt att göra och varför. I elevens egen serie ritar du hur de andra kan ha missförstått eleven, och frågar eleven vad de andra kan göra annorlunda.
+  - rubrik: En elev eller två till fyra
+    plats: efter-arbetsform
+    meny: true
+    text: Med en elev får eleven all din uppmärksamhet och hela passet. Med två till fyra elever hör eleverna fler tankar om samma ruta och övar med jämnåriga, och det är med jämnåriga som samspelet brukar bli svårt. Var och en får mindre tid, och den som berättar en egen händelse gör det inför fler.
+    kolumner:
+      - Del
+      - En elev och du
+      - Två till fyra elever
+    rader:
+      - - Passar för
+        - Förskoleklass och åk 1, en elev som skäms mycket eller blir överstimulerad i grupp, och en känslig händelse.
+        - Elever som kan vänta på sin tur några minuter och har nytta av att höra andra, gärna med en kamrat som förebild.
+      - - Spaningen
+        - Ni turas om. Eleven berättar om sitt spanaruppdrag, och du berättar något du själv har sett.
+        - Ni tar en runda, och den som håller upp sina bubblor pratar. Från pass 4 är det en kamrat som speglar, till exempel ”Du såg att han tog bollen.”
+      - - Spola tillbaka
+        - Du läser, och eleven säger vad som kan hända. Eleven bestämmer tempot.
+        - Du läser. Där ni stannar tänker alla först själva och visar tummen, och sedan säger ni i en runda vad som kan hända.
+      - - Tankarna
+        - Eleven tar en person och du den andra, och sedan byter ni. Säg din persons tankar som en undran, på samma sätt som i tekniken Undra högt.
+        - Eleverna tar en person var, och med tre elever är en av dem detektiv. Med fyra elever tar två och två samma person och jämför sina tankar.
+      - - Ovanifrån
+        - Eleven berättar hela serien, och ni letar tillsammans upp rutan där någon hade behövt göra annorlunda.
+        - En elev berättar hela serien, och de andra säger i vilken ruta någon hade behövt tänka och göra annorlunda.
+      - - Nästa gång
+        - Eleven ritar en ruta och du en annan, och ni spelar upp elevens ruta.
+        - Var och en ritar på bladet Nästa gång hur det kan bli i stället, och två elever spelar upp en av teckningarna.
+      - - Med mig
+        - Du säger en sak du såg hos eleven, och eleven säger vad hen tar med sig.
+        - Ni tar en runda där var och en säger vad hen tar med sig, gärna något som en kamrat fick hen att tänka på, till exempel ”Det Vera sa hade jag inte tänkt på.”
+      - - En egen serie
+        - Ni kan ta egna serier före pass 8, och de kan handla om något svårare, eftersom ingen annan hör. Eleven säger vad den andra kan ha tänkt, och du skriver det i en tankebubbla vid den andra personen.
+        - Ni tar en egen händelse bara när den uppfyller de tre kraven. Den som äger serien bestämmer vad som står i den, och de andra säger vad de undrar.
+      - - Din roll
+        - Du tar kamratens plats i samtalet. Låt eleven hålla i pennan ofta, så att det inte blir en intervju.
+        - Du fördelar ordet och skickar frågorna vidare till eleverna. Från pass 4 ställer eleverna frågorna till varandra.
+    not: Detektiven letar ledtrådar i bilden och säger sist vad hen har hittat och var i bilden det syns. Ni byter detektiv varje pass. Den som har tagit en person svarar som personen, i jagform. Hur eleverna talar med varandra står i de fyra sista samtalsteknikerna.
+  - rubrik: Med en assistent eller resursperson
+    plats: efter-arbetsform
+    meny: true
+    text: Metoden passar särskilt elever som har assistent eller resurs för sina sociala behov. Den vuxna som är med eleven under dagen kan ta med sig passens frågor och elevens plan ut på rasten. Annars följer det som eleven upptäcker vid bordet sällan med ut. Tabellen gäller när assistenten är den andra vuxna vid bordet. Leder assistenten gruppen, gäller det som står under Lärarens roll.
+    kolumner:
+      - När
+      - Vad assistenten gör
+      - Stödet hen behöver
+    rader:
+      - - Före perioden
+        - Läser metoden, ser filmerna och gör ett seriesamtal om något hen själv har varit med om, tillsammans med den som leder gruppen.
+        - En timme med en speciallärare eller specialpedagog.
+      - - I passen
+        - Sitter bredvid eleven, ritar när eleven vill och hjälper eleven att vänta på talpinnen. Svarar inte åt eleven.
+        - Handledning av en speciallärare eller specialpedagog i 20 minuter varannan vecka, med snabbmallen som underlag.
+      - - När assistenten var med i händelsen
+        - Väntar med sin version tills elevens står på pappret och ritar den sedan bredvid.
+        - Ett samtal med dig om händelsen före passet.
+      - - I vardagen
+        - Ställer frågorna på kortet Till de vuxna runt eleven före en situation som brukar bli svår, och efter att något har hänt, när eleven är lugn. Säger det till eleven när något går bra.
+        - Kortet Till de vuxna runt eleven, och elevens plan om eleven säger ja.
+      - - Efter perioden
+        - Fortsätter med frågorna och planen, och är med i påfyllningspasset efter fyra veckor. Kan leda en egen grupp nästa period.
+        - Elevens pärm och plan, och handledning.
+    not: Är ni fler än två vuxna, blir det svårt för eleverna att tala med varandra. Har flera elever assistent, är en av assistenterna med i passen, och de andra får kortet Till de vuxna runt eleven.
+  - rubrik: Om något händer
+    plats: efter-fastnar
+    meny: true
+    kolumner:
+      - Det som händer
+      - Så gör du
+    rader:
+      - - Eleven säger ”Han började!”
+        - Säg ”Då spolar vi tillbaka. Vad hände innan?” Rita ruta 1, när det var lugnt, och gå sedan framåt en ruta i taget. Stanna i rutan där eleven själv gjorde något.
+      - - Eleven försvarar sig eller skäms
+        - Peka på rutan och prata om det som händer där, till exempel ”Titta på ruta 3. Vad händer där?” Sitt kvar bredvid eleven, och säg vad hen gjorde bra i samtalet.
+      - - Eleven vill att den andra ska få straff
+        - Säg att de vuxna tar hand om det som gäller den andra, och att ni ritar för att förstå. Fråga ”Vad behöver hända för att det ska bli bra för dig?”
+      - - Eleven vill att du säger vem som hade rätt
+        - Fråga ”Vad ville Alva? Vad ville Sam?” och säg att båda ville något som går att förstå. Ville någon såra, förklarar du att man då säger stopp och berättar för en vuxen.
+      - - En elev svarar åt de andra eller tar över samtalet
+        - Säg ”Tack, Ella. Nu vill jag höra Vera.” Låt alla tänka först och visa tummen, och ge Ella ett uppdrag, som att leta ledtrådar i bilden.
+      - - Eleven blir arg för att det inte blev som hen trodde
+        - Säg ”Det hade kunnat bli så. Nu läser vi vad som hände här.” Fråga vad personen visste.
+      - - Eleven säger att det alltid blir bråk
+        - Fråga ”Vad gjorde någon de gånger det inte blev bråk?” och rita en sådan gång.
+      - - Någon skrattar åt en annans serie
+        - Påminn om regeln att ingen skrattar åt någons serie, och fråga den det gällde hur det kändes.
+      - - Eleven blir upprörd
+        - Lägg ned pennan och gör en paus. Blir det inte lugnt, får serien vänta till nästa pass.
+      - - En elev vill inte rita sin händelse
+        - Rita en påhittad serie om något liknande, eller ta en bildserie.
+      - - Eleven tycker att det är barnsligt
+        - Ta Chatten eller Lunchen tidigare, eller rita serien utan figurer, med bara rutor och bubblor.
+      - - Eleven tror att personen säger det som står i tankebubblan
+        - Håll tankebubblan vid personens huvud och säg ”Det här tänker hon, men hon säger det inte.”
+      - - En elev berättar om en kränkning eller att någon far illa
+        - Avbryt passet lugnt, prata med eleven för sig och följ skolans rutin. Den går före seriesamtalet.
+principer:
+  rubrik: Tre saker att hålla fast vid
+  text: Spola tillbaka och spela framåt. Börja i ruta 1, när det var lugnt, och gå framåt en ruta i taget till konflikten. Stanna på vägen och fråga vad som händer i nästa ruta, så att eleven tänker innan det svåra kommer. Båda personerna får en tankebubbla. Eleverna svarar som personerna, och du speglar det de säger utan att rätta. Se serien ovanifrån. Med hela serien framför er frågar du varför det blev så och i vilken ruta någon hade behövt tänka och göra annorlunda, så att konflikten inte hade uppstått. Sedan ritar ni hur det kan bli i stället. Så lär sig eleven av konflikten.
+passrutin:
+  kallas: delar
+  text: Passen med en bildserie och med en egen serie följer samma rutin i sex delar. Varje del har en fråga. Rutinen gör det tryggt att prata om något svårt, och eleverna lär sig frågorna så att de kan ställa dem själva.
+  steg:
+    - text: Vad såg du någon säga eller göra, och vad tror du att hen tänkte?
+      fas: Spaningen
+    - text: Vad händer i nästa ruta?
+      fas: Spola tillbaka
+    - text: Vad tänkte, kände och ville personerna?
+      fas: Tankarna
+    - text: Varför blev det så, och i vilken ruta hade någon behövt tänka och göra annorlunda?
+      fas: Ovanifrån
+    - text: Hur kan det bli i stället?
+      fas: Nästa gång
+    - text: Vad tar du med dig?
+      fas: Med mig
+  efterPasset: Du fyller i snabbmallen och lägger elevernas blad i pärmarna. Efter ett pass med en egen serie frågar du ägaren vilken vuxen hen vill visa planen för. Visar en egen serie att något runt eleven behöver ändras, tar du det vidare till klassläraren eller elevhälsan, om eleven säger ja.
+tidsschema:
+  rubrik: Ett pass på 30 minuter
+  text: Tabellen gäller ett pass med en bildserie, pass 2–⁠6. Läs snabbmallen från förra passet och lärarens sida för dagens serie. Lärarens sida har berättelsen och säger var ni stannar. Det du kan säga står under Passets sex delar. De andra passen har egna tabeller, som står efter Samtalsteknikerna.
+  rader:
+    - tid: Före passet
+      fas: Förberedelse
+      vad: Lägg dagens bildserie på A3 mitt på bordet, och täck rutorna 2–⁠4 med ett halvt A4-ark på varje ruta. Lägg fram bubblorna, talpinnen, elevernas pärmar och en whiteboardpenna till var och en, i var sin färg. Talpinnen går runt i rundorna, och den som håller i den pratar. Lägg också fram bladet Nästa gång och kortet ”Vad behöver hen?”, och från pass 4 kortet Frågor vi ställer till varandra. Skriv det nya spanaruppdraget från lärarens sida på spanarbladen.
+    - tid: 0–4 min
+      fas: Spaningen
+      vad: Var och en håller upp bubblorna på pinne och berättar om sitt spanaruppdrag, utan att säga några namn. Du speglar det var och en såg, och från pass 4 gör en kamrat det.
+    - tid: 4–11 min
+      fas: Spola tillbaka
+      vad: "Säg: ”I den här serien går det snett. Vi spolar tillbaka till när det var lugnt.” Börja i ruta 1. Ta sedan bort pappret från en ruta i taget och läs den, fram till konflikten i den sista rutan. Där det står Stanna här på lärarens sida stannar ni, och du ställer frågorna som står där. Alla tänker först själva, och sedan säger ni vad som kan hända."
+    - tid: 11–17 min
+      fas: Tankarna
+      vad: Var och en tar en av personerna och svarar som personen, i jagform. Med tre elever är en av dem detektiv och letar ledtrådar i bilden, och med fyra tar två och två samma person. Eleverna skriver personens tanke på en lös bubbla och lägger den i den ruta som står under Två tankar att välja mellan på lärarens sida. Sedan byter de person, läser den personens bubbla och säger om de tänker likadant. Sist säger detektiven vad hen har hittat i bilden.
+    - tid: 17–21 min
+      fas: Ovanifrån
+      vad: En elev berättar hela serien, och efter det läser du upp det som står under Det ni inte vet än på lärarens sida. Fråga sedan varför det blev så och i vilken ruta någon hade behövt tänka och göra annorlunda, så att konflikten inte hade uppstått.
+    - tid: 21–27 min
+      fas: Nästa gång
+      vad: "Utgå från rutan där någon hade behövt göra annorlunda, och fråga ”Hur kan det bli i stället?” Var och en ritar ett nytt slut på bladet Nästa gång, och två elever tar bubblorna på pinne och spelar upp en av teckningarna."
+    - tid: 27–30 min
+      fas: Med mig
+      vad: Talpinnen går en runda, och var och en säger vad hen tar med sig. Säg en sak du såg hos gruppen, skriv tumregeln på gruppens blad och dela ut spanarbladen.
+  efter: Delen Med mig hoppar ni aldrig över, eftersom det är där eleven säger vad hen har fått syn på.
+steg:
+  rubrik: "Passets sex delar: vad du gör och säger"
+  text: Det som skiljer i en egen serie står i tabellen Ett pass med en egen serie. Under Du kan säga står frågor och meningar att välja bland. Välj en eller två i taget, och vänta minst tre sekunder på svaret.
+  fraserRubrik: Du kan säga
+  rader:
+    - namn: Spaningen
+      fraga: Vad såg du någon säga eller göra, och vad tror du att hen tänkte?
+      gor: Låt eleven hålla upp pratbubblan och säga vad någon sa eller gjorde, och sedan tankebubblan och säga vad hen tror att personen tänkte. Eleven fick spanaruppdraget i slutet av förra passet. I pass 1 lär sig gruppen i stället vad bubblorna visar.
+      fraser:
+        - Vad såg du någon säga eller göra?
+        - Vad tror du att hen tänkte?
+        - Vad tänkte hen men sa inte?
+        - Hur gick det med din plan?
+    - namn: Spola tillbaka
+      fraga: Vad händer i nästa ruta?
+      gor: Fråga vad personerna vill och vet, i ruta 1 och där ni stannar. När ni stannar handlar det inte om att gissa rätt, och ”Vi vet inte än” är ett bra svar. När alla har sagt vad som kan hända, läser du nästa ruta.
+      fraser:
+        - Här har inget hänt än. Vad vill hon?
+        - Vad vet han? Vad vet han inte?
+        - Vad händer nu, tror du?
+        - Vi spolar tillbaka. Vad gjorde du precis innan det hände?
+    - namn: Tankarna
+      fraga: Vad tänkte, kände och ville personerna?
+      gor: Fråga vad i bilden som får eleven att säga det, när hen berättar vad en person tänker. Be om en tanke till innan ni skriver i bubblan.
+      fraser:
+        - Om du var Sam, vad skulle du vilja?
+        - Vad ser du som får dig att säga det?
+        - Vad tänkte hon i ruta 1? Vad tänker hon nu?
+        - Ville hen såra, eller ville hen något annat?
+        - Vad behöver han?
+    - namn: Ovanifrån
+      fraga: Varför blev det så, och i vilken ruta hade någon behövt tänka och göra annorlunda?
+      gor: Låt en elev berätta hela serien, och be gruppen lyssna efter vad personerna tänkte och ville. Från pass 4 berättar eleven utan att du ställer frågor.
+      fraser:
+        - Berätta hela serien från ruta 1.
+        - Varför blev det så?
+        - I vilken ruta hade någon behövt tänka och göra annorlunda?
+        - Vad gjorde du som hon märkte?
+        - Kan vi veta säkert? Hur kan du ta reda på det?
+    - namn: Nästa gång
+      fraga: Hur kan det bli i stället?
+      gor: Det eleverna ritar ska vara bra för båda personerna. Fråga också vad den andra personen och de vuxna kan göra.
+      fraser:
+        - Vad kunde hen ha gjort i stället?
+        - Vad tänker Sam då? Hur slutar det?
+        - Vad kan den andra göra? Vad kan vi vuxna göra?
+        - Har du varit med om något liknande? Berätta för mig efter passet.
+        - När det händer igen, vad kan du göra innan det blir bråk?
+    - namn: Med mig
+      fraga: Vad tar du med dig?
+      gor: Lärarens sida har ett förslag på dagens tumregel, och gruppen säger den med egna ord innan du skriver den.
+      fraser:
+        - Vad tar du med dig i dag?
+        - Vad tänkte du först? Vad tänker du nu?
+        - Jag märkte att ni ändrade er när ni tittade på ruta 1.
+arbetsform:
+  rubrik: "Arbetsform: runt samma bord"
+  text: Ni sitter runt samma bord hela passet, med serien mitt på bordet. I rundorna går talpinnen runt bordet, åt samma håll varje gång. Den som vill får stå över och ta sin tur sist. I en egen serie föreslår de andra hur det kan bli, och ägaren väljer ett av förslagen.
+  delar:
+    - rubrik: 1. I tur och ordning
+      text: var och en berättar
+      faser:
+        - Spaningen
+    - rubrik: 2. Gemensamt
+      text: ni tar en ruta i taget
+      faser:
+        - Spola tillbaka
+    - rubrik: 3. Var sin roll
+      text: eleverna är personerna eller detektiv
+      faser:
+        - Tankarna
+    - rubrik: 4. Gemensamt igen
+      text: ni ser hela serien
+      faser:
+        - Ovanifrån
+    - rubrik: 5. Var för sig
+      text: var och en ritar
+      faser:
+        - Nästa gång
+    - rubrik: 6. I tur och ordning igen
+      text: var och en säger en sak
+      faser:
+        - Med mig
+exempel:
+  valt:
+    rubrik: Gruppen
+    text: Ella, Malik och Vera i åk 4 hamnar ofta i bråk på rasten, eftersom de tror att andra är emot dem. Exemplet är pass 5 med bildserien Chatten.
+  text:
+    - Läraren har lagt Chatten på A3 mitt på bordet med rutorna 2–⁠4 täckta. Bredvid ligger bubblorna, en whiteboardpenna till var och en i var sin färg och kortet Frågor vi ställer till varandra. Ella är Elias, Malik är Amir, och Vera är detektiv. I snabbmallen står att Vera i förra passet kom på en tanke till utan hjälp.
+    - "Vera berättar om sitt spanaruppdrag: ”Det blev nästan bråk om en plats i matsalen. Men en kille frågade först om den var ledig.” Läraren läser ruta 1 och stannar: ”Bilden finns bara i Elias mobil. Vad tänker han göra med den?” Alla tänker tyst och visar tummen när de har en tanke. Ella säger: ”Han lägger ut den.” Vera säger: ”Han kanske visar Amir först.” Sedan tar läraren bort pappret från en ruta i taget och läser den."
+    - "I delen Tankarna frågar läraren: ”Ella, du är Elias. Vad ville du?” Ella svarar: ”Jag ville göra Amir ledsen. Jag gjorde det med flit.” Vera läser en fråga på kortet och ställer den till Ella: ”Vad får dig att tro det?” Ella pekar på ruta 2. Vera pekar på ruta 1: ”De skrattar båda två där.” Läraren säger: ”Ella och Vera, ni ser olika på det. Kan båda stämma?” Ella säger: ”Han tyckte att det var kul, men Amir blev ledsen.” Hon skriver Elias tanke, ”Alla ska skratta!”, på en tankebubbla och lägger den vid Elias i ruta 2. Malik, som är Amir, säger: ”Alla skrattar åt mig.” Han skriver tanken på en tankebubbla och lägger den vid Amir i ruta 3. Sedan byter Ella och Malik person och säger om de tänker likadant."
+    - "I delen Ovanifrån berättar Malik hela serien från ruta 1, och Vera säger: ”Det började när Elias la ut bilden.” Läraren berättar det som gruppen inte vet än: Elias vill gärna att de andra ska tycka att han är rolig, och Amir tycker inte om att bli fotad. Sedan frågar läraren: ”Varför blev det så?” Ella säger: ”Elias ville vara rolig, men Amir ville inte bli fotad.” Läraren frågar: ”I vilken ruta hade Elias behövt tänka och göra annorlunda?” Ella pekar på ruta 1."
+    - "I delen Nästa gång frågar läraren: ”Hur kan det bli i stället?” Ella ritar en ruta där Elias frågar: ”Får jag lägga ut den?” Malik ritar en ruta där Amir säger: ”Lägg inte ut den, okej?” Ella och Malik spelar upp Ellas ruta med bubblorna på pinne. I den sista delen, Med mig, säger Ella: ”Jag tar med mig att man kan skratta åt olika saker.” Gruppen säger tumregeln med egna ord, och läraren skriver den på gruppens blad."
+    - Efteråt skriver läraren i snabbmallen att Ella sa vad som kunde hända innan läraren visade nästa ruta, och att Vera hittade ledtråden i ruta 1 och ställde Ella en fråga från kortet. Läraren skriver också att Ella först sa att Elias gjorde det med flit och sedan att det kunde vara på två sätt. Sist skriver läraren att Ella hittade rutan där Elias hade behövt göra annorlunda, och att Malik utan hjälp sa vad Amir tänkte. I nästa pass tar gruppen Lunchen.
+fastnar:
+  rubrik: När en elev inte hittar tanken
+  text: När en elev inte vet vad en person tänker, eller bara ser sin egen sida av saken, behöver hen ditt stöd. Ge minsta möjliga stöd, så att eleven hittar tanken själv.
+  fragaForst:
+    - Vad gör hen i rutan?
+    - Vad säger hen?
+    - Vad tänker hen?
+  trappaText: "Gå uppför stödtrappan i stunden. Ge inte nästa stöd förrän eleven har prövat det förra:"
+  trappa:
+    - Peka på personens ansikte och kropp i rutan, och fråga vad eleven ser.
+    - Spegla det eleven sa, och vänta.
+    - Ge två tankar att välja mellan, som ”Tänker han ’Jag mår illa’ eller ’Jag vill sitta där’?” Lärarens sida har två tankar för varje person i serien.
+    - Säg början på meningen, som ”Han tror att”.
+    - Ta fram kortet ”Vad behöver hen?” och låt eleven peka på en bild av det personen behöver.
+    - Säg en tanke själv, och fråga ”Kan det vara så?”
+  motto: Börja med det som syns. Tanken kommer sedan.
+roll:
+  rubrik: "Lärarens roll: nyfiken, aldrig domare"
+  text: Du leder samtalet och dömer inte. Du visar eleverna att ett bråk går att lära sig av och inte är något att skämmas för. Eleverna vill ofta att du ska säga vem som hade rätt. Säg då att ni ritar för att förstå, och att det ni kommer fram till är vad var och en kan göra en annan gång. Den som leder är en vuxen som eleverna känner och som har tid två gånger i veckan under hela perioden. Det kan vara en speciallärare, specialpedagog, lärare, fritidspedagog, resurspedagog, elevassistent eller kurator. Samma person leder alla pass. Klassläraren sätter en siffra för eleven före och efter perioden, och därför är det bäst om någon annan än klassläraren leder gruppen. Leder en elevassistent, resurspedagog eller fritidspedagog, planerar en speciallärare eller specialpedagog passen med hen, och de ses 20 minuter varannan vecka med snabbmallen som underlag. Om du själv var med i händelsen, väntar du med din version tills elevens står på pappret och ritar den sedan bredvid, eller så leder en annan vuxen just det passet.
+  gor:
+    - Sitt bredvid den som berättar, så att ni båda tittar på serien.
+    - Låt eleven hålla i pennan när hen vill, och rita själv när eleven vill att du ritar.
+    - Ställ frågor som börjar med vad och hur.
+    - Rita elevens version först. I en egen serie väntar du med att föreslå andra tankar tills hela serien står på pappret, eftersom eleven annars försvarar sig.
+    - Var själv lugn. Märker du att du blir irriterad eller vill försvara någon, gör en paus.
+    - Spara elevens serier och blad i elevens pärm hos dig.
+  undvik:
+    - Att fråga ”Varför gjorde du så?” Fråga ”Vad hände?” och ”Vad tänkte du då?” Om serien kan du fråga ”Varför blev det så?”
+    - Att döma eller bestämma straff, och att ta parti för den ena mot den andra.
+    - Att kräva att eleven ber om ursäkt.
+    - Att rita en egen serie medan eleven är upprörd.
+    - Att visa en elevs serie för andra utan att eleven säger ja.
+urval:
+  rubrik: Var hittar du bildserierna och händelserna?
+  text:
+    - Bildserierna med lärarens sidor, bubblorna, mallarna, korten och bladen står under Material att skriva ut. I pass 7 ritar alla en egen serie om en gång när det nästan blev bråk, men det blev inget. Från pass 8 äger en elev serien i varje pass, i den ordning som du berättade för gruppen i pass 7. Med fyra elever och tolv pass får varje elev en egen serie, och med sexton pass får varje elev två. Med tre elever och tolv pass blir ett pass över, och med sexton pass blir två över. Blir det pass över, ritar ni något som ska hända och som gruppen väljer, och då får flera i gruppen vara med i det.
+    - En egen serie kan också handla om något som ska hända och som brukar bli svårt, till exempel rasten efter lunch eller en utflykt. Ingen behöver ha gjort fel.
+    - När ni ritar i gruppen skriver ni ”en kompis” eller en bokstav vid andra personer, och ni säger inte deras namn. Blir det bråk mellan passen, tar den vuxna som var där hand om det. Du frågar eleven om hen vill rita det, när det är hens tur eller i ett pass som blir över.
+  kravText: "Ni ritar en egen händelse i gruppen när den uppfyller tre krav:"
+  krav:
+    - rubrik: Händelsen pågår inte
+      text: Den är över eller har inte hänt än, och eleven är lugn när hen berättar.
+    - rubrik: Eleven vill
+      text: Eleven har själv sagt ja till att rita händelsen i gruppen.
+    - rubrik: Ingen annan i gruppen är inblandad
+      text: Är två i gruppen med i händelsen, ritar du den med var och en för sig.
+progression:
+  text: Du lämnar över ansvaret till eleverna. Först visar du själv hur man hittar tankarna, sedan hittar gruppen dem tillsammans i bildserierna och börjar ställa frågorna till varandra, och till sist ritar eleverna sina egna händelser.
+  enhet: Pass
+  rader:
+    - vecka: "1"
+      led: Jag gör
+      fokus: Bildserie 1, Fönsterplatsen, med syftet, reglerna och tankebubblan.
+      roll: Du säger syftet och reglerna, visar tankebubblan, stannar i berättelsen innan Alva svarar Sam och säger själv vad en av personerna kan tänka.
+    - vecka: 2–6
+      led: Vi gör
+      fokus: Bildserie 2–⁠6.
+      roll: Du läser och stannar, och eleverna säger vad som kan hända och svarar som personerna. Från pass 4 berättar en elev serien utan dina frågor, och eleverna ställer frågorna på kortet till varandra. Du ber om en tanke till.
+    - vecka: 7 till det sista
+      led: Ni gör
+      fokus: Pass 7 om en gång när det nästan blev bråk, egna händelser och det sista passet.
+      roll: Du ritar åt den som vill. Från pass 8 spolar du tillbaka till när det var lugnt och ritar elevens version, eller låter eleven rita. Efter det sista passet visar du provbilden för var och en.
+uppfoljning:
+  text: Du behöver veta om eleven ser mer i en social situation än förut, och om det märks utanför rummet. Provbilden och protokollet står under Material att skriva ut.
+  rader:
+    - nar: Före pass 1
+      vad: Visa provbilden för en elev i taget, och skriv poängen och båda siffrorna i protokollet.
+    - nar: I varje pass
+      vad: Skriv i snabbmallen vem som sa vad som kunde hända och vem som hittade rutan där någon hade behövt göra annorlunda.
+    - nar: Efter sista passet
+      vad: Visa provbilden och be om siffrorna igen. Visa eleven svaren före och efter.
+    - nar: Fyra veckor efter sista passet
+      vad: Håll ett påfyllningspass på 30 minuter där ni läser planerna, och fråga de vuxna runt eleven hur planen går.
+mal:
+  punkter:
+    - Berätta i ordning vad som hände, och säga vad som kan hända innan det händer
+    - Skilja på det någon säger och det någon tänker
+    - Säga vad hen själv och den andra tänkte, kände och ville
+    - Ge mer än en förklaring när det är oklart vad någon ville
+    - Säga vad hen själv gjorde och hur det påverkade den andra
+    - Säga när någon hade behövt göra annorlunda, och komma på ett sätt som fungerar för båda
+snabbmall:
+  text: Fyll i den före och efter varje pass. Det du skriver efteråt styr nästa pass.
+  fore:
+    - Dagens serie och vem som äger den
+    - Förra planen och spanaruppdragen
+    - Vem som är vilken person, och vem som är detektiv
+    - Teknikerna jag övar på
+  efter:
+    - Vem som sa vad som kunde hända i en bildserie, innan vi visade nästa ruta
+    - Vem som kom på en tanke till eller sa vad den andra ville, utan att jag frågade
+    - Vem som hittade rutan där någon hade behövt göra annorlunda
+    - Vem som sa vad hen själv gjorde och hur det blev för den andra
+    - Det eleverna tog med sig, planen och vem som får veta den
+    - Hur det gick med teknikerna jag övar på
+checklista:
+  rubrik: Checklista inför pass 1
+  punkter:
+    - Läst metoden, sett filmerna och gjort ett seriesamtal om något eget med en kollega.
+    - Haft samtalet med varje elev före pass 1 och berättat om gruppen för vårdnadshavarna.
+    - Bokat rummet, två tider i veckan och handledning om jag behöver den.
+    - Laminerat bildserierna, bubblorna och korten, och gjort en pärm per elev med elevens mål på framsidan.
+    - Skrivit reglerna överst på gruppens blad, ett stort papper på väggen, och lämnat kortet Till de vuxna runt eleven.
+grund:
+  text: "I Carol Grays seriesamtal (1994) ritar den vuxna och eleven streckgubbar, pratbubblor och tankebubblor medan de pratar, så att båda ser vad någon säger och vad hen tänker, både efter en händelse och före något som ska hända (Hutchins och Prelock, 2008). Få studier har prövat Grays metod, och 2006 hade ingen av dem prövat om den hjälper barn att förstå andras tankar (Hutchins och Prelock, 2006). Barn med autism lärde sig på några korta pass att använda tankebubblor och att förutsäga vad någon gör utifrån det hen tror (Wellman m.fl., 2002). Samtal i grupp om vad andra tänker har hjälpt barn från sju år att förstå andras tankar bättre (Bianco och Castelli, 2023). Pojkar i åk 3–⁠6 som hade tolv pass på sex veckor tolkade färre handlingar som fientliga och blev mindre arga (Hudley m.fl., 2007). När elever i åk 5 vid ett enda tillfälle tänkte på en egen händelse som om de såg den på avstånd, blev de mindre upprörda (Kross m.fl., 2011). De vuxna runt eleven tar med sig passens frågor ut på rasten, eftersom det eleverna övar under särskilda lektioner annars tycks gälla bara där (Skolverket, 2011)."
+  kallor: Bygger på Bianco och Castelli (2023), Gray (1994), Hudley m.fl. (2007), Hutchins och Prelock (2006, 2008), Kross m.fl. (2011), Skolverket (2011) och Wellman m.fl. (2002).
+ramar:
+  rubrik: Material att skriva ut
+  text:
+    - Före pass 1 skriver du ut lärarens sidor, bildserierna på A3, bubblorna, kortet ”Vad behöver hen?”, kortet Frågor vi ställer till varandra i två exemplar, provbilden och kortet Till de vuxna runt eleven. Till varje pass skriver du ut snabbmallen och ett spanarblad till varje elev. Till pass 2–⁠6 skriver du också ut bladet Nästa gång till varje elev, och till varje egen serie ett blad. Från pass 7 skriver du ut mallarna med fyra och sex rutor, och från pass 8 bladet Min plan. Mer än så behöver du inte.
+    - Bildserierna, bubblorna, de två korten på bordet och bladen är elevernas. Laminera serierna, bubblorna och korten, så att eleverna kan skriva och rita på dem med whiteboardpenna och sudda ut det efteråt. Efter passet tar du ett foto av serien innan du suddar. Vill du att eleverna ska ha serien i sin pärm, skriver du ut en papperskopia till var och en. En egen serie ritar ni på papper, så att den finns kvar. Lärarens sidor, provbildens protokoll och kortet Till de vuxna runt eleven är dina. Klipp bort rutan Till läraren innan du lägger ett kort på bordet. De bildserier ni har gjort och gruppens blad sitter på väggen under perioden, och elevens egna serier ligger i pärmen.
+  ramar:
+    - rubrik: "Bildserie 1: Fönsterplatsen"
+      serie: fonsterplatsen
+      text:
+        - Ni tar bildserien i pass 1. Skriv ut den på A3, laminera den och täck rutorna 2–⁠4 med papper. I delen Spola tillbaka läser du berättelsen högt och stannar där det står Stanna här. I delen Ovanifrån berättar du det som gruppen inte vet än, innan du frågar ”Varför blev det så? I vilken ruta hade någon behövt tänka och göra annorlunda?”
+      delar:
+        - rubrik: Berättelsen att läsa högt
+          falt:
+            - rubrik: Ruta 1
+              text: Klassen ska på utflykt med bussen. Alva kliver på först och sätter sig vid fönstret.
+            - rubrik: Stanna här
+              text: Här har inget hänt än. Vad vill Alva göra på resan? Vem kan komma fram till henne?
+            - rubrik: Ruta 2
+              text: "Sam kommer fram till Alva och håller sig om magen. Han frågar: ”Får jag sitta vid fönstret?”"
+            - rubrik: Stanna här
+              text: Vad vill Sam? Var har han händerna? Vad svarar Alva, tror du?
+            - rubrik: Ruta 3
+              text: "Alva svarar: ”Nej, jag var först.” Hon tittar ut."
+            - rubrik: Ruta 4
+              text: Sam sätter sig på platsen vid gången. Bussen åker iväg.
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Behoven
+              text: Alva vill titta ut, och hon var först. Sam vill inte må illa på resan.
+            - rubrik: Ledtråden
+              text: Sam håller sig om magen. Låt gruppen fundera på vad det betyder, och säg det inte själv. Kommer ingen på något, säger du ”Jag undrar varför Sam håller sig om magen.”
+            - rubrik: Två vägar framåt
+              text: Antingen säger Alva ”Nej, jag var först”, eller så frågar hon ”Mår du illa?”
+            - rubrik: Två tankar att välja mellan
+              text: Sam i ruta 2 kan tänka ”Jag mår illa” eller ”Jag vill sitta där.” Alva i ruta 3 kan tänka ”Jag vill titta ut” eller ”Sam vill bara ta min plats.”
+            - rubrik: Det ni inte vet än
+              text: Sam mår illa när han åker buss, men inte när han kan titta ut genom fönstret. Det vet inte Alva.
+            - rubrik: Tumregeln
+              text: Man ser inte alltid vad någon behöver. Säg varför, eller fråga varför.
+            - rubrik: Spanaruppdraget
+              text: Lägg märke till när någon behöver något. Hur märkte du det?
+    - rubrik: "Bildserie 2: Spelet"
+      serie: spelet
+      text:
+        - Ni tar bildserien i pass 2.
+      delar:
+        - rubrik: Berättelsen att läsa högt
+          falt:
+            - rubrik: Ruta 1
+              text: Mira och Alva spelar fyra i rad på fritids.
+            - rubrik: Stanna här
+              text: Här har inget hänt än. Vad vill Mira och Alva? Hur många kan spela fyra i rad samtidigt?
+            - rubrik: Ruta 2
+              text: "Leo kommer fram och frågar: ”Får jag vara med?”"
+            - rubrik: Stanna här
+              text: Vad vill Leo? Vad vill Mira? Vad svarar hon, tror du?
+            - rubrik: Ruta 3
+              text: "Mira pekar på spelet och säger: ”Nej.”"
+            - rubrik: Ruta 4
+              text: Leo sätter sig vid ett annat bord. Mira tittar efter honom.
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Behoven
+              text: Mira vill spela klart med Alva. Leo vill vara med.
+            - rubrik: Ledtråden
+              text: Fyra i rad är ett spel för två, och Mira pekar på spelet när hon säger nej.
+            - rubrik: Två vägar framåt
+              text: Antingen säger Mira ”Nej”, eller så säger hon ”Det är vår sista match. Sen får du spela.”
+            - rubrik: Två tankar att välja mellan
+              text: Mira i ruta 3 kan tänka ”Spelet är bara för två” eller ”Jag vill inte att Leo är med.” Leo i ruta 4 kan tänka ”De vill inte ha mig” eller ”Jag får spela sen.”
+            - rubrik: Det ni inte vet än
+              text: Mira och Alva hade bestämt att spela tre matcher, och det här är den sista.
+            - rubrik: Tumregeln
+              text: Ett nej kan ha ett skäl. Säg skälet.
+            - rubrik: Spanaruppdraget
+              text: Lägg märke till när någon säger nej. Vad kan skälet vara?
+    - rubrik: "Bildserie 3: Teckningen"
+      serie: teckningen
+      text:
+        - Ni tar bildserien i pass 3. Avsluta gärna delen Spaningen med en övning som visar vad serien handlar om. Lägg en penna på bordet. En elev blundar, och du flyttar pennan. Fråga de andra var den som blundade tror att pennan ligger. I delen Ovanifrån frågar du också vad Alva kunde ha gjort innan hon gick ut.
+      delar:
+        - rubrik: Berättelsen att läsa högt
+          falt:
+            - rubrik: Ruta 1
+              text: Alva ritar en teckning. På bordet ligger pappersbitar.
+            - rubrik: Stanna här
+              text: Här har inget hänt än. Vad tänker Alva om sin teckning?
+            - rubrik: Ruta 2
+              text: "Alva har lagt teckningen med baksidan upp och går ut. En vuxen säger: ”Sam, kan du slänga skräpet?”"
+            - rubrik: Stanna här
+              text: Vad ser Sam på bordet? Vet han att det vita pappret är en teckning? Vad gör han nu, tror du?
+            - rubrik: Ruta 3
+              text: Sam slänger bitarna och det vita pappret.
+            - rubrik: Ruta 4
+              text: Alva kommer in och hittar teckningen i papperskorgen. Sam står bredvid.
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Behoven
+              text: Alva vill att andra ska vara rädda om det hon har gjort. Sam vill hjälpa till och göra som den vuxna sa.
+            - rubrik: Ledtråden
+              text: Teckningen ligger med baksidan upp, så Sam ser bara ett vitt papper.
+            - rubrik: Två vägar framåt
+              text: Antingen slänger Sam allt, eller så frågar han ”Är det här skräp?”
+            - rubrik: Två tankar att välja mellan
+              text: Sam i ruta 3 kan tänka ”Det här är skräp” eller ”Jag slänger Alvas teckning.” Alva i ruta 4 kan tänka ”Sam slängde den med flit” eller ”Någon har slängt den.”
+            - rubrik: Det ni inte vet än
+              text: Alva ritade teckningen till sin mormor.
+            - rubrik: Tumregeln
+              text: Den som inte såg kan inte veta.
+            - rubrik: Spanaruppdraget
+              text: Lägg märke till en gång när någon inte visste något som du visste.
+    - rubrik: "Bildserie 4: Vinsten"
+      serie: vinsten
+      text:
+        - Ni tar bildserien i pass 4.
+      delar:
+        - rubrik: Berättelsen att läsa högt
+          falt:
+            - rubrik: Ruta 1
+              text: Saga och Noah spelar pingis på rasten.
+            - rubrik: Stanna här
+              text: Här har inget hänt än. Vad vill Saga? Vad vill Noah? Vad händer när en av dem förlorar?
+            - rubrik: Ruta 2
+              text: "Saga vinner. Hon sträcker upp armarna och ropar: ”Jaa! Jag vann!”"
+            - rubrik: Stanna här
+              text: Titta på Noah. Snart kommer en kompis fram till Saga. Vad gör Saga nu, tror du? Vad märker Noah då?
+            - rubrik: Ruta 3
+              text: "Saga ropar igen till kompisen: ”Jag vann, jag vann!” Noah går därifrån."
+            - rubrik: Ruta 4
+              text: Noah sitter på en bänk. Saga står kvar vid pingisbordet.
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Behoven
+              text: Saga vill få vara glad över att hon vann. Noah vill inte känna sig som en förlorare när andra ser på.
+            - rubrik: Ledtråden
+              text: Noah sänker racketen i ruta 2 och går därifrån i ruta 3, medan Saga jublar.
+            - rubrik: Två vägar framåt
+              text: Antingen ropar Saga igen, eller så säger hon ”Bra match! En till?”
+            - rubrik: Två tankar att välja mellan
+              text: Saga i ruta 3 kan tänka ”Vad roligt att jag vann!” eller ”Nu ska alla veta att Noah förlorade.” Noah i ruta 4 kan tänka ”Jag är dålig på pingis” eller ”Saga bryr sig inte om mig.”
+            - rubrik: Det ni inte vet än
+              text: Det var första gången Saga vann över Noah. Noah tycker att det är jobbigt att förlora när andra ser på.
+            - rubrik: Tumregeln
+              text: Den som vinner kan vara glad och samtidigt tänka på den som förlorar.
+            - rubrik: Spanaruppdraget
+              text: Lägg märke till en gång när det nästan blev bråk, men det blev inget. Vad gjorde någon precis innan, så att det inte blev bråk?
+    - rubrik: "Bildserie 5: Chatten"
+      serie: chatten
+      text:
+        - Ni tar bildserien i pass 5. Elias lägger ut bilden redan i ruta 2, så ni stannar bara en gång, efter ruta 1. Händer något liknande i klassen, följer du skolans rutin.
+      delar:
+        - rubrik: Berättelsen att läsa högt
+          falt:
+            - rubrik: Ruta 1
+              text: "Amir snubblar över en väska i korridoren och gör en rolig min. Elias skrattar, tar en bild och säger: ”Kolla!”"
+            - rubrik: Stanna här
+              text: Bilden finns bara i Elias mobil. Vad tänker han göra med den? Vad tror Amir att Elias ska göra med bilden?
+            - rubrik: Ruta 2
+              text: Elias lägger ut bilden i klassens chatt. Många svarar med skrattande emojier.
+            - rubrik: Ruta 3
+              text: På kvällen sitter Amir ensam hemma med mobilen.
+            - rubrik: Ruta 4
+              text: Nästa morgon möts Amir och Elias i korridoren.
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Behoven
+              text: Elias vill vara rolig och höra till. Amir vill inte bli utskrattad, och han vill själv bestämma över bilder på sig själv.
+            - rubrik: Ledtråden
+              text: I ruta 1 skrattar båda. I ruta 3 är Amir ensam med mobilen.
+            - rubrik: Två vägar framåt
+              text: Antingen lägger Elias ut bilden, eller så visar han bilden för Amir och frågar ”Får jag lägga ut den?”
+            - rubrik: Två tankar att välja mellan
+              text: Elias i ruta 2 kan tänka ”Amir skrattade ju också” eller ”Nu ska alla skratta åt Amir.” Amir i ruta 3 kan tänka ”Alla skrattar åt mig” eller ”Det var ganska roligt.”
+            - rubrik: Det ni inte vet än
+              text: Elias vill gärna att de andra tycker att han är rolig. Amir tycker inte om att bli fotad.
+            - rubrik: Tumregeln
+              text: Ett skämt som är roligt för en kan såra en annan. Fråga innan du lägger ut en bild på någon.
+            - rubrik: Spanaruppdraget
+              text: Lägg märke till när någon skrattar. Skrattar alla åt samma sak?
+    - rubrik: "Bildserie 6: Lunchen"
+      serie: lunchen
+      text:
+        - Ni tar bildserien i pass 6.
+      delar:
+        - rubrik: Berättelsen att läsa högt
+          falt:
+            - rubrik: Ruta 1
+              text: "Ida är ny i klassen. Vid skåpen säger Nora: ”Vi äter lunch ihop!”"
+            - rubrik: Stanna här
+              text: Här har inget hänt än. Vad vill Ida? Vad tänker hon när Nora säger det?
+            - rubrik: Ruta 2
+              text: "I matsalen ropar Noras fotbollslag: ”Nora, kom hit!”"
+            - rubrik: Stanna här
+              text: Laget ropar. Vad vill Nora nu? Var är Ida, och vad tänker hon? Vad gör Nora, tror du?
+            - rubrik: Ruta 3
+              text: Nora står med brickan. Ida sitter ensam, och laget sitter vid ett annat bord.
+            - rubrik: Ruta 4
+              text: Ida tittar upp mot Nora.
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Behoven
+              text: Nora vill vara med laget och hålla sitt ord. Ida vill inte sitta ensam.
+            - rubrik: Ledtråden
+              text: Nora står med brickan mellan två bord, och Ida sitter ensam.
+            - rubrik: Två vägar framåt
+              text: Antingen går Nora till laget, eller så säger hon ”Kom, Ida, vi sätter oss med laget.”
+            - rubrik: Två tankar att välja mellan
+              text: Nora i ruta 3 kan tänka ”Jag sa ju att vi skulle äta ihop” eller ”Jag vill sitta med laget”, och kanske tänker hon båda. Ida i ruta 4 kan tänka ”Nora glömde mig” eller ”Nora vill hellre vara med laget.”
+            - rubrik: Det ni inte vet än
+              text: Laget har match efter skolan och ska prata om den.
+            - rubrik: Tumregeln
+              text: Man kan vilja två saker samtidigt.
+            - rubrik: Spanaruppdraget
+              text: Tänk före lunchen eller rasten på vad någon vill göra där. Se sedan efter om det du tänkte stämde.
+    - rubrik: Bubblor att klippa ut
+      ark: bubblor
+      text:
+        - Ett ark räcker till två av er vid bordet, dig inräknad. Till en grupp med fyra elever blir det tre ark. Skriv ut arken på tjockt papper, laminera dem och klipp sedan ut bubblorna. Eleverna skriver i bubblorna med whiteboardpenna och lägger dem vid personerna i serien.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så använder du arket
+              text: Arket har tankebubblor, pratbubblor och en bubbla för det någon ropar eller skriker. Varje elev och du själv får en tankebubbla och en pratbubbla, som du tejpar på var sin pinne. Ni använder bubblorna på pinne i delen Spaningen, i pass 1 och när två elever spelar upp en teckning i delen Nästa gång. När eleverna byter person i delen Tankarna, tar var och en den andra personens bubbla.
+    - rubrik: Vad behöver hen?
+      text:
+        - I delen Tankarna använder ni kortet när gruppen ska säga vad en person vill eller behöver.
+      listor:
+        - rubrik: Vad behöver hen?
+          bilder: true
+          rader:
+            - - vara med
+              - få vara i fred
+              - få bestämma
+            - - hinna klart
+              - ha roligt
+              - få det rättvist
+            - - bli hörd
+              - göra rätt
+              - må bra
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så använder du kortet
+              text: Eleven pekar på en bild, och ni säger tillsammans en mening om personen, till exempel ”Leo vill vara med.” Två personer i en serie kan behöva samma sak, och en person kan behöva två saker.
+    - rubrik: Frågor vi ställer till varandra
+      text:
+        - Kortet är elevernas, och det ligger på bordet från pass 4.
+      listor:
+        - rubrik: Frågor vi ställer till varandra
+          rader:
+            - - Vad får dig att tro det?
+            - - Kan hen ha tänkt något annat?
+            - - Vad ville hen?
+            - - Vad behöver hen?
+            - - Hur kändes det för hen?
+            - - Tänker du som jag?
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så använder du kortet
+              text: En elev läser en fråga, till exempel ”Vad får dig att tro det?”, och ställer den till en kamrat. Lägg ett kort på varje sida av bordet. I F–⁠2 läser du frågan, och eleven ställer den.
+    - rubrik: Spanarbladet
+      text:
+        - Skriv det nya spanaruppdraget på bladet före passet, och ge eleven bladet sist i passet. Eleven har det i bänken eller hos sin assistent och tar med det till nästa pass. Ägarens uppdrag skriver du efter passet, när ni fyller i bladet Min plan.
+      huvud:
+        - rubrik: Namn
+      delar:
+        - rubrik: Till nästa pass
+          falt:
+            - rubrik: Mitt uppdrag
+              text: ""
+            - rubrik: Det här såg jag någon säga eller göra
+              text: ""
+            - rubrik: Det här tror jag att hen tänkte
+              text: ""
+    - rubrik: Min plan
+      text:
+        - Direkt efter ett pass med en egen serie fyller du i bladet tillsammans med den som äger serien, och eleven skriver eller ritar så mycket hen kan. Rita ett hjärta i elevens serie, i ruta 1 och i rutan där det gick snett. I varje hjärta skriver eleven hur stark känslan var, från 0 till 10. Fråga ”När började siffran stiga? Vad märkte du då?” och skriv svaret under Så märker jag att det börjar. I början av nästa pass skriver eleven ”bra”, ”så där” eller ”inte än” under Så gick det och säger varför.
+      huvud:
+        - rubrik: Namn
+      delar:
+        - rubrik: När det händer igen
+          falt:
+            - rubrik: När
+              text: ""
+            - rubrik: Så märker jag att det börjar
+              text: ""
+            - rubrik: Då kan jag
+              text: ""
+            - rubrik: Hur blir det för den andra då?
+              text: ""
+            - rubrik: Vem hjälper mig, och vad kan de vuxna göra?
+              text: ""
+            - rubrik: Så gick det
+              text: ""
+    - rubrik: Provbilden
+      serie: mjolken
+      text:
+        - Visa bilden för en elev i taget, före pass 1 och efter det sista passet. Be först eleven berätta vad som har hänt, och ställ sedan de andra frågorna. Skriv poängen i protokollet och elevens ord på protokollets baksida, med frågans nummer.
+      huvud:
+        - rubrik: Elevens namn
+      listor:
+        - rubrik: Provbildens frågor
+          larare: true
+          kolumner:
+            - Fråga
+            - Före
+            - Efter
+          rader:
+            - - |-
+                1. Berätta vad som har hänt.
+                Eleven får två poäng när hen berättar både att Wilma gick fort förbi och att glaset välte över Isaks papper.
+              - ""
+              - ""
+            - - |-
+                2. Vad tänker Isak? Vad tänker Wilma?
+                Eleven får två poäng när hen säger vad både Isak och Wilma tänker, vill eller vet.
+              - ""
+              - ""
+            - - |-
+                3. Gjorde Wilma det med flit? Kan det ha gått till på något annat sätt?
+                Eleven får två poäng när hen ger mer än en förklaring, eller säger att hen inte vet och förklarar varför.
+              - ""
+              - ""
+            - - |-
+                4. Vad kan de göra nu, så att det blir bra för båda?
+                Eleven får två poäng för ett förslag som tar hänsyn till båda.
+              - ""
+              - ""
+        - rubrik: Elevens egen siffra
+          larare: true
+          kolumner:
+            - Fråga
+            - Före
+            - Efter
+          rader:
+            - - Hur bra är du på att förstå vad andra tänker och vill? Visa en siffra från 0 till 10.
+              - ""
+              - ""
+        - rubrik: Klasslärarens siffra
+          larare: true
+          kolumner:
+            - Fråga
+            - Före
+            - Efter
+          rader:
+            - - Hur väl förstår eleven vad kamraterna menar och vill? Sätt en siffra från 0 till 10.
+              - ""
+              - ""
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Poängen
+              text: Ett svar som stämmer med bilden men bara ger en del av det som ger två poäng, till exempel bara den ena personen eller en enda förklaring, ger en poäng. Inget svar, eller ett svar som inte stämmer med bilden, ger noll poäng. Skriv också upp om eleven sa vad någon tänkte eller ville i fråga 1 utan att du frågade.
+            - rubrik: Efter perioden
+              text: Visa eleven svaren före och efter, och säg vad som har ändrats, till exempel ”Då sa du att hon gjorde det med flit. Nu säger du att hon kanske inte såg glaset.” En lägre egen siffra efter perioden kan vara ett gott tecken om eleven har börjat se sig själv tydligare.
+    - rubrik: Till de vuxna runt eleven
+      text:
+        - Lämna kortet till klassläraren, personalen på fritids och elevens assistent före pass 1. Kortet kan också gå hem om eleven och vårdnadshavarna vill. Elevens händelser står inte på kortet.
+      huvud:
+        - rubrik: Elevens namn
+      delar:
+        - rubrik: Om eleven och gruppen
+          falt:
+            - rubrik: Det här gör eleven i gruppen
+              text: Vi ritar konflikter som serier, med pratbubblor för det någon säger och tankebubblor för det hen tänker. Vi spolar tillbaka till när det var lugnt och går framåt en ruta i taget, så att eleven övar på att tänka innan det svåra kommer. Konflikter hör till livet, och i gruppen lär sig eleven av dem.
+            - rubrik: Orden vi använder
+              text: Vi skiljer på säga, tänka och känna, och vi frågar ”Ville hen såra, eller ville hen något annat?” och ”Vad behöver hen?”
+            - rubrik: Före en situation som brukar bli svår
+              text: Fråga ”Vad vill du? Vad tror du att de andra vill? Vad kan hända?” Har eleven en plan, påminn hen om den.
+            - rubrik: När något har hänt och eleven är lugn
+              text: Fråga ”Vad hände? Vad tänkte du? Vad tror du att den andra tänkte? När hade någon kunnat göra annorlunda?” Rita gärna två rutor på en lapp, med en pratbubbla och en tankebubbla.
+            - rubrik: Spanarbladet
+              text: Mellan passen har eleven ett spanaruppdrag, något att lägga märke till. Hjälp eleven att skriva eller rita det hen såg.
+            - rubrik: Så hjälper du
+              text: Säg det till eleven när något går bra. Berätta för den som leder gruppen när något går bra eller blir svårt.
+            - rubrik: Elevens plan
+              text: Från pass 8 gör eleven en plan, och du får se den om eleven säger ja.
+            - rubrik: Den som leder gruppen
+              text: ""
+mallar:
+  - rubrik: "Nästa gång"
+    typ: serie
+    rutor: 2
+    etiketter: ["Så kan det bli", "Så slutar det"]
+    underrad: "Rita hur det kan bli i stället och hur det slutar."
+  - rubrik: "Mallen med fyra rutor"
+    typ: serie
+    rutor: 4
+    underrad: "Streckgubbar räcker. Börja när det var lugnt och rita en ruta i taget."
+  - rubrik: "Mallen med sex rutor"
+    typ: serie
+    rutor: 6
+    underrad: "Streckgubbar räcker. Börja när det var lugnt och rita en ruta i taget."
+elevblad:
+  Spanarbladet:
+    Mitt uppdrag: 2.5
+    Det här såg jag någon säga eller göra: 7.5
+    Det här tror jag att hen tänkte: 6.5
+  Min plan:
+    När: 2
+    Så märker jag att det börjar: 2.5
+    Då kan jag: 3
+    Hur blir det för den andra då?: 3
+    Vem hjälper mig, och vad kan de vuxna göra?: 2.5
+    Så gick det: 3
+lathund:
+  innehall: Bildserier och egna serier
+  metoden:
+    text:
+      - Ni ritar en konflikt som en serie, så att eleverna lär sig av den och övar på att tänka innan det svåra kommer.
+      - En till fyra elever har två pass i veckan under sex till åtta veckor, först med sex bildserier och sedan med egna händelser. Säger en elev att hen har blivit kränkt, följer du skolans rutin.
+    ruta:
+      rubrik: Tre saker att hålla fast vid
+      punkter:
+        - fet: Spola tillbaka och spela framåt.
+          text: Börja i ruta 1, när det var lugnt, och gå framåt en ruta i taget till konflikten.
+        - fet: Båda personerna får en tankebubbla.
+          text: Eleverna svarar som personerna, och du speglar det de säger utan att rätta.
+        - fet: Se serien ovanifrån.
+          text: Fråga i vilken ruta någon hade behövt tänka och göra annorlunda. Sedan ritar ni hur det kan bli i stället.
+    tabell:
+      rubrik: Passet i sex delar
+      kolumner:
+        - Del
+        - Frågan
+      rader:
+        - - |-
+            1 · Spaningen
+            0–⁠4 min
+          - Vad såg du någon säga eller göra, och vad tror du att hen tänkte?
+        - - |-
+            2 · Spola tillbaka
+            4–⁠11 min
+          - Vad händer i nästa ruta?
+        - - |-
+            3 · Tankarna
+            11–⁠17 min
+          - Vad tänkte, kände och ville personerna?
+        - - |-
+            4 · Ovanifrån
+            17–⁠21 min
+          - Varför blev det så, och i vilken ruta hade någon behövt tänka och göra annorlunda?
+        - - |-
+            5 · Nästa gång
+            21–⁠27 min
+          - Hur kan det bli i stället?
+        - - |-
+            6 · Med mig
+            27–⁠30 min
+          - Vad tar du med dig?
+    not: I spanaruppdraget lägger eleven märke till något mellan passen. Lärarens sida för varje bildserie har berättelsen och säger var ni stannar. Pass 1 och ett pass med en egen serie står på sidan 3, och pass 7 och det sista passet står i metoden.
+  pass:
+    rubrik: "Ett pass med bildserien Chatten"
+    textRubrik: Gruppen · tre elever i åk 4, pass 5
+    text:
+      - "Ella är Elias, Malik är Amir, och Vera är detektiv. Läraren säger att det går snett, spolar tillbaka till ruta 1 och stannar: ”Vad tänker Elias göra med bilden?” Ella säger: ”Han lägger ut den.”"
+      - "Läraren visar en ruta i taget och frågar sedan: ”Ella, du är Elias. Vad ville du?” Ella svarar: ”Jag ville göra Amir ledsen.” Vera pekar på ruta 1: ”De skrattar båda två där.” Ella skriver Elias tanke på en bubbla: ”Alla ska skratta!” Malik skriver Amirs: ”Alla skrattar åt mig.”"
+      - "Läraren frågar: ”I vilken ruta hade Elias behövt tänka och göra annorlunda?” Ella pekar på ruta 1 och ritar en ny där Elias frågar: ”Får jag lägga ut den?”"
+    forberett:
+      rubrik: Det jag förberedde
+      text:
+        - Bestämt vem som är Elias, Amir och detektiv.
+        - Läst på lärarens sida för Chatten var vi stannar och vad gruppen inte vet än.
+    klarTidigt: Låt var och en rita en ny ruta där Amir berättar för Elias hur det kändes.
+    schema:
+      rubrik: 30 minuter, del för del
+      rader:
+        - tid: Före
+          fas: Förberedelse
+          vad: Lägg fram det som står under På bordet på sidan 4, och skriv det nya spanaruppdraget på spanarbladen.
+        - tid: 0–4
+          fas: 1 · Spaningen
+          vad: Var och en håller upp bubblorna på pinne och berättar om sitt spanaruppdrag, utan att säga några namn.
+        - tid: 4–11
+          fas: 2 · Spola tillbaka
+          vad: Säg att det går snett och spola tillbaka till ruta 1. Stanna innan Elias lägger ut bilden, och visa sedan en ruta i taget.
+          fraser:
+            - Vad händer nu, tror du?
+        - tid: 11–17
+          fas: 3 · Tankarna
+          vad: Var och en är en av personerna eller detektiv. Eleven skriver personens tanke på en lös bubbla. Sedan byter eleverna person.
+          fraser:
+            - Vad ser du som får dig att säga det?
+        - tid: 17–21
+          fas: 4 · Ovanifrån
+          vad: En elev berättar hela serien. Säg det gruppen inte vet än, och fråga i vilken ruta Elias hade behövt tänka och göra annorlunda.
+        - tid: 21–27
+          fas: 5 · Nästa gång
+          vad: Utgå från den rutan och fråga ”Hur kan det bli i stället?” Var och en ritar, och två elever spelar upp en av teckningarna.
+        - tid: 27–30
+          fas: 6 · Med mig
+          vad: Var och en säger vad hen tar med sig. Skriv tumregeln på gruppens blad och dela ut spanarbladen.
+  mall:
+    rubrik: Samtalet, pass 1 och en egen serie
+    underrad: Ditt kort under passet
+    block:
+      - typ: tabell
+        rubrik: Samtalsteknikerna
+        kolumner:
+          - Teknik
+          - Så låter det
+        rader:
+          - - Spegla
+            - ”Du tänker att han ville vara elak.”
+          - - Fråga vad hen ser
+            - ”Vad ser du som får dig att säga det?”
+          - - Pröva en tanke till
+            - ”Kan hen ha tänkt något annat?”
+          - - Undra högt
+            - ”Jag undrar vad Nora tänker.”
+          - - Tänk själv först
+            - ”Visa tummen när du har en tanke.”
+          - - Skicka frågan vidare
+            - ”Vera, vad säger du om det?”
+          - - Knyt ihop
+            - ”Ni ser olika på det. Kan båda stämma?”
+          - - Fråga varandra
+            - ”Läs frågan på kortet och ställ den till Ella.”
+      - typ: kedja
+        rubrik: Pass 1
+        steg:
+          - Varför vi ses 0–⁠4
+          - Gruppens regler 4–⁠6
+          - Tankebubblan 6–⁠11
+          - Spola tillbaka 11–⁠16
+          - Tankarna 16–⁠21
+          - Ovanifrån 21–⁠24
+          - Nästa gång 24–⁠27
+          - Med mig 27–⁠30
+        citat: Jag tänker på något. Vad tänker jag på?
+      - typ: tabell
+        rubrik: Ett pass med en egen serie
+        kolumner:
+          - Del
+          - Så gör du
+        rader:
+          - - Dagen före
+            - Pröva händelsen mot de tre kraven.
+          - - 1 · Spaningen
+            - Läs reglerna och fråga om uppdragen och förra planen.
+          - - 2 · Spola tillbaka
+            - Låt ägaren berätta kort. Fråga sedan ”Vad gjorde du precis innan?” och rita utan att rätta.
+          - - 3 · Tankarna
+            - Rita ägarens tankebubblor. Gruppen undrar vad den andra tänkte, och ägaren väljer.
+          - - 4 · Ovanifrån
+            - Fråga ”Vad gjorde du som hen märkte? I vilken ruta hade någon behövt tänka och göra annorlunda?”
+          - - 5 · Nästa gång
+            - De andra föreslår hur det kan bli, ägaren väljer och ni ritar det.
+          - - 6 · Med mig
+            - Planen blir ägarens spanaruppdrag, och efter passet fyller ni två i bladet Min plan, cirka tio minuter.
+      - typ: not
+        text: Vänta minst tre sekunder på svaret, och använd tankeorden tror, vet, vill och undrar.
+  material:
+    rubrik: Vad du behöver för ett pass
+    kravEtikett: Krav
+    var:
+      rubrik: Var materialet finns
+      punkter:
+        - fet: Bildserierna och lärarens sidor.
+          text: De står under Material att skriva ut och i planeringsmallarna (Word). Skriv ut serien på A3 och laminera den.
+        - fet: Bubblorna och korten.
+          text: Laminera tre ark bubblor och korten. Alla vid bordet får en tanke- och en pratbubbla på pinne.
+        - fet: Bladen.
+          text: Skriv ut spanarbladet till varje pass, och bladet Nästa gång, mallarna och Min plan när ni behöver dem.
+        - fet: Provbilden, protokollet och snabbmallen.
+          text: De står i planeringsmallarna. Skriv ut snabbmallen till varje pass.
+    bordet:
+      - Dagens bildserie på A3, med rutorna 2–⁠4 täckta
+      - Bubblorna och whiteboardpennor i en färg per elev
+      - Talpinnen, spanarbladen och bladet Nästa gång
+      - Korten, och mallen när ni ritar en egen serie
+      - Elevernas pärmar, lärarens sida och snabbmallen
+film:
+  sekunder: 28.67
+  beskrivning: "Spola tillbaka till ruta 1, när det var lugnt. Du frågar: ”Vad tänker Elias göra med bilden?” Ella säger: ”Han lägger ut den.” Gå framåt en ruta i taget. Du frågar: ”Vad händer i nästa ruta?” Båda personerna får en tankebubbla. Ella, som är Elias, säger: ”Alla ska skratta!” Malik, som är Amir, säger: ”Alla skrattar åt mig.” Se serien ovanifrån. Du frågar: ”I vilken ruta hade Elias behövt göra annorlunda?” Ella säger: ”I ruta 1. Han kunde ha frågat först.”"
+  rubrik: "Så gör gruppen"
+  ingress: "Fyra bilder ur filmen om pass 5, där Ella och Malik i åk 4 tar bildserien Chatten. Gruppen börjar i ruta 1, när det var lugnt, och Ella säger vad som kan hända. Sedan går gruppen framåt en ruta i taget, och Elias och Amir får var sin tankebubbla. Sist ser gruppen serien ovanifrån, och Ella säger i vilken ruta Elias hade behövt tänka och göra annorlunda."
+  stillbilder:
+    - text: "Ella ser ruta 1 och tror att Elias lägger ut bilden."
+    - text: "Ella skriver Elias tanke på en lös bubbla."
+    - text: "Malik skriver Amirs tanke på en lös bubbla."
+    - text: "Ella svarar att Elias i ruta 1 kunde ha frågat först."
+filmer:
+  - nr: 2
+    sekunder: 26.44
+    beskrivning: "Spola tillbaka till när det var lugnt. Du frågar: ”Vad gjorde du precis innan?” Malik säger: ”Vi spelade fotboll på rasten. Jag skulle skjuta.” Rätta inte. Rita hela serien först. Malik säger: ”Då tog han bollen med flit! Jag skrek: ’Ge tillbaka!’” Fråga först vad Malik själv tänkte. Du frågar: ”Vad tänkte du i ruta 3?” Malik säger: ”Nu får jag inte skjuta!” Fråga sedan vad den andra tänkte. Du frågar: ”Får vi undra vad kompisen ville i ruta 2?” Malik säger: ”Han ville också vara med.”"
+    rubrik: "En egen händelse"
+    ingress: "Fyra bilder ur filmen om en egen händelse i pass 8, när Malik är ensam med dig. Du spolar tillbaka till när det var lugnt, och Malik berättar medan du ritar utan att rätta. Först skriver du Maliks egen tanke i hans bubbla. Sedan undrar ni vad kompisen ville i ruta 2, och Malik tror att kompisen också ville vara med."
+    efter: "tabell: Ett pass med en egen serie"
+    stillbilder:
+      - text: "Du spolar tillbaka, och Malik berättar från ruta 1."
+      - text: "Malik säger ”med flit”, och du ritar utan att rätta."
+      - text: "Först skriver du Maliks egen tanke i hans bubbla."
+      - text: "Malik gissar vad kompisen ville, och du skriver det."
