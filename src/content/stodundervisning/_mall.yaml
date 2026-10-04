@@ -13,7 +13,7 @@ titel: Metodens namn
 # Raden under rubriken: vad metoden är och för vem.
 undertitel: Lärarledd insats i liten grupp för åk 4–9
 ingress: Två till fyra meningar om vad metoden tränar och hur den används. Egen text som fungerar ensam i ett kort och i ett nyhetsbrev.
-# Exakt ett av: Matematik, Läsning, Skrivning
+# Exakt ett av: Matematik, Läsning, Skrivning, Socialt
 omrade: Läsning
 # Minst ett av: F-3, 4-6, 7-9. Filtret i metodbanken använder nivåerna.
 arskurs: ["4-6", "7-9"]
