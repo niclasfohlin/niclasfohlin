@@ -1,0 +1,1221 @@
+# De fyra räknesätten i grupp. Källan är Niclas meddelande och styrning 2026-10-04 (intake/fyra-raknesatten.md),
+# och underlaget är intaget med registret (intake/fyra-raknesatten/REGISTER.md). Analysen står i analys.md.
+# Övningsbladen och kartläggningens blad ritas med rutnät i riggen (rigg.json rakneblad), och talrutan är en mall i
+# rigg.json, tills sajten har formerna.
+titel: De fyra räknesätten i grupp
+undertitel: Åtta veckors kurs i liten grupp för åk 3–7, där eleverna går från tiobas och multilink till skriftlig räkning
+ingress: En kurs i åtta veckor för två till tio elever i åk 3–7. Eleverna bygger, ritar och skriver talen i de fyra räknesätten tills de ser vad som händer. Läraren visar och tänker högt, gruppen gör tillsammans och eleven provar själv. I varje pass räknar gruppen samma tal åt båda hållen, plus med minus eller gånger med delat.
+omrade: Matematik
+arskurs:
+  - F-3
+  - 4-6
+  - 7-9
+arskursText: åk 3–7
+taggar:
+  - positionssystemet
+  - huvudrakning
+  - taluppfattning
+  - intensivtraning
+format:
+  - liten grupp
+  - par
+tid: 60 minuter per pass, två till tre pass i veckan
+period: Åtta veckor
+grupp: Två till tio elever
+material:
+  - tiobas och sifferkort
+  - multilink
+  - räknemattan och talrutan
+  - övningsblad
+uppdaterad: 2026-10-04
+publicerad: 2026-10-04
+relaterade:
+  - antalsuppfattning-i-grupp
+  - brakkurs-i-grupp
+utkast: false
+
+inledning:
+  - De fyra räknesätten i grupp är en kurs i åtta veckor för två till tio elever i åk 3–7, med två till tre pass på 60 minuter i veckan. Eleverna bygger talen med material, ser vad som händer i varje räknesätt och skriver det sedan med siffror, först med skriftlig huvudräkning och sedan i uppställning. Kursen är för elever som behöver stöd i att förstå växlingen och vad multiplikation och division betyder, och för elever som räknar utan att se om svaret är rimligt.
+  - Varje pass följer samma grund. Läraren visar först och tänker högt. Sedan bygger, lägger och skriver gruppen tillsammans. Därefter provar eleven själv, medan läraren går runt, lyssnar och ställer klargörande frågor. På slutet samlas gruppen kring en lärdom från dagens pass.
+  - Räknesätten hör ihop två och två, som två sidor av samma mynt, addition med subtraktion och multiplikation med division. Har läraren visat 57 + 28 = 85, räknar gruppen samma tal åt andra hållet, 85 − 28 = 57. Det som togs bort ligger kvar på mattans nedre rad och visar att 57 och 28 tillsammans är 85. Sedan räknar eleven själv på bladet, och en uppgift på varje blad räknar eleven också åt andra hållet.
+  - I addition och subtraktion bygger eleverna med tiobas på räknemattan och räknar i huvudet med talraden. I multiplikation och division bygger de rektanglar med multilink och ritar dem på talrutan. Talen lägger de med sifferkort på varandra till 657 och drar isär till 600 + 50 + 7, så att de ser talsorterna och kan ta en talsort i taget. I veckans första pass bygger eleverna, och i det andra ritar och skriver de, så att de till sist räknar på papper och ser materialet framför sig. Ett tredje pass befäster det som ännu inte sitter. Kursen har tre nivåer, Bas, Medel och Avancerad, som skiljer sig i talen och i skrivsätten, och gruppen får den nivå som kartläggningen visar, oavsett årskurs. Kursen tar vid där Antalsuppfattning i grupp slutar, och den kan också gå som en särskild kurs i åk 7.
+
+upplagg:
+  rubrik: Så fungerar insatsen
+  text: Två till tio elever träffas två till tre gånger i veckan i åtta veckor, 60 minuter per pass. Varje pass har fem steg, Uppvärmningen, Genomgången, Åt andra hållet, Bladet och Lärdomen, och gruppen räknar samma tal åt båda hållen. Vecka 1–4 gäller addition och subtraktion och vecka 5–8 multiplikation och division, och under veckan bygger, ritar och skriver eleverna. Kartläggningen veckan före och veckan efter kursen visar vad eleven kan räkna och förklara, och Mina lärdomar samlar elevens egna ord pass för pass.
+
+gruppen:
+  rubrik: Så sätter du ihop gruppen
+  text: Kursen är för elever i åk 3–7 som behöver stöd i att förstå växlingen och vad multiplikation och division betyder, och i att se varför uppställningen fungerar. Eleven ska kunna bygga och läsa tal med tiobas, som i Antalsuppfattning i grupp, och den som behöver stöd i det börjar där. Gruppen har två till tio elever på samma nivå, Bas, Medel eller Avancerad, som du väljer efter kartläggningen och inte efter årskurs. Med fler än sex elever arbetar de i fasta par, och med ett udda antal arbetar tre tillsammans. I åk 7 väljer eleven själv kursen och sätter ett eget mål vid starten.
+
+principer:
+  rubrik: Tre saker att hålla fast vid
+  text: Räkna samma tal åt båda hållen i varje pass. Det visar att räknesätten hör ihop, och den andra uträkningen kontrollerar den första. Bygg innan ni skriver. Det som händer på räknemattan skriver ni i samma kolumner i uppställningen, så att minnessiffran och den strukna siffran blir något eleven har sett. Säg talsorten varje gång, som fem tiotal i stället för fem, och använd samma fras varje gång, som ”Fler än nio ental? Växla.”
+
+passrutin:
+  text: Varje pass har samma grund, efter en kort uppvärmning. Du visar passets första uppgift och tänker högt, gruppen räknar samma tal åt andra hållet, eleven räknar själv på bladet, och till sist samlas ni kring en lärdom. I veckans första pass bygger eleverna med materialet, och i det andra ritar och skriver de. Allt nytt kommer i de två passen. I ett tredje pass skriver eleverna med materialet i asken och tar upp det som ännu inte sitter, och den som tvekar tar fram materialet igen.
+  steg:
+    - text: En elev läser förra passets lärdom, och gruppen gör en uppgift som visar den. Sedan lägger eleverna ett tal med sifferkorten, bygger det och växlar, och sist ger du talfakta muntligt.
+      fas: Uppvärmningen
+    - text: Läraren visar veckans räknesätt med passets första uppgift och tänker högt. Eleverna tittar och svarar på frågor.
+      fas: Genomgången
+    - text: Alla räknar samma tal åt andra hållet. I paret bygger den ena och den andra skriver, ett handgrepp i taget.
+      fas: Åt andra hållet
+    - text: Eleven räknar vidare på veckans blad, och en uppgift på varje blad räknar eleven också åt andra hållet. Läraren går runt, lyssnar och ställer klargörande frågor.
+      fas: Bladet
+    - text: Ni lägger de två uträkningarna bredvid varandra. Eleverna säger dagens lärdom, och alla skriver den i Mina lärdomar.
+      fas: Lärdomen
+  efterPasset: Läraren antecknar vem som kunde förklara växlingen och räkna åt andra hållet, och vad läraren ska visa igen nästa pass.
+
+tidsschema:
+  rubrik: Ett pass på 60 minuter
+  text: Förbered dig genom att räkna passets första uppgift åt båda hållen med materialet, eller med en bild när talen är för stora, och säga varje handgrepp högt. Remsan visar när du leder, när alla arbetar tillsammans och när eleven provar själv. Bladet får längst tid.
+  rader:
+    - tid: Före passet
+      fas: Förberedelse
+      vad: Välj passets tal för gruppens nivå i tabellen Talen och bladen i veckorna, och räkna dem själv medan du säger handgreppen högt. Lägg fram veckans material ur tabellen Materialet du behöver, veckans blad och elevernas Mina lärdomar.
+    - tid: 0–8 min
+      fas: Uppvärmningen
+      vad: Låt en elev läsa förra lärdomen och gör en uppgift som visar den. I det första passet bygger ni i stället ett tal ur kartläggningen. Säg ett tal som alla lägger med sifferkorten, drar isär och bygger, och låt dem växla. I vecka 5–8 bygger de med multilink, och korten är med i vecka 6–7. Ge sedan fyra till sex talfakta muntligt, låt eleverna tänka tyst och skriv en elevs tanke som en uträkning. Den dag ni tar upp läxan gör ni det i stället för talfakta.
+    - tid: 8–18 min
+      fas: Genomgången
+      vad: Berätta passets första uppgift som en kort händelse, gör ett överslag och räkna sedan uppgiften framför eleverna med materialet och skriften bredvid. Säg allt du gör och fråga gruppen under tiden. Visa sist veckans vanliga fel.
+    - tid: 18–30 min
+      fas: Åt andra hållet
+      vad: Räkna samma tal åt andra hållet och led ett handgrepp i taget. Paren byter roller till nästa uppgift med samma tal, som 85 − 57, så att båda har byggt. Gör en uppgift till om någon behöver mer än en påminnelse.
+    - tid: 30–52 min
+      fas: Bladet
+      vad: Låt eleven räkna vidare på veckans blad. Gå runt, stanna högst en halv minut hos varje elev och be eleven berätta vad hen gör. Med fler än sex elever börjar du hos de par som tvekade.
+    - tid: 52–60 min
+      fas: Lärdomen
+      vad: Visa båda uträkningarna och fråga vilket tal som är helheten. I addition och subtraktion är de andra två talen delarna, och i multiplikation och division antalet rader och antalet i varje rad. Paren säger en mening, en elev säger den till gruppen, och du skriver den på väggplanschen. Alla skriver lärdomen i Mina lärdomar.
+  efter: Blir en elev klar med bladet tar hen veckans andra blad, eller uppgifter ur matematikboken som passar veckans fokus.
+
+steg:
+  rubrik: Vad du gör och säger i varje steg
+  text: Fraserna gäller addition och subtraktion, utom den sista i Uppvärmningen. I multiplikation och division frågar du efter raderna och antalet i varje rad, som i tabellen Så visar du de fyra räknesätten.
+  rader:
+    - namn: Uppvärmningen
+      fraga: Vad lärde vi oss förra gången?
+      gor: Låt en elev läsa förra lärdomen ur Mina lärdomar och gör en uppgift som visar den. I det första passet finns ingen lärdom än, och då bygger ni ett tal ur kartläggningen. Säg sedan ett tal som eleverna lägger med sifferkorten, drar isär och bygger, och låt dem växla. Ge fyra till sex talfakta muntligt i dagens par av räknesätt. Eleverna tänker tyst, och du frågar hur de tänkte och skriver tanken som en uträkning, som 7 + 3 + 2 = 12. I vecka 1–4 är två av talfakta uppdelningar som eleverna behöver till dagens hopp, som ”Åtta är tre och hur mycket?” och ”77, hur långt till 80?” I vecka 5–8 bygger eleverna talet med multilink och tar sifferkorten bara i vecka 6–7, och talfakta tar du ur tabellerna de kan. Tanken ritar du som en delad rektangel med uträkningen bredvid, som 7 · 6 = 5 · 6 + 2 · 6.
+      fraser:
+        - Läs förra lärdomen. Kan du visa den med materialet?
+        - Lägg 52 med sifferkorten och dra isär. Vad är femman värd?
+        - Bygg 52. Byt en tiostav mot tio ental. Vilket tal är det nu?
+        - Sju plus fem. Hur tänkte du?
+        - Sju plus fem är tolv. Vilka två subtraktioner vet vi då?
+        - Sex gånger fyra är 24. Vilka två divisioner vet vi då?
+    - namn: Genomgången
+      fraga: Vad gör jag, och vad ser ni?
+      gor: Börja med en kort händelse och ett överslag. Gör sedan passets första uppgift framför eleverna och säg allt du gör, vad du lägger, var du lägger det, vad du växlar och vad du skriver. Fråga gruppen under tiden, men gör handgreppen själv. Visa sist veckans vanliga fel och fråga hur eleven kan ha tänkt.
+      fraser:
+        - Vad kan talen handla om?
+        - Ungefär hur mycket blir det?
+        - Fler än nio ental? Växla.
+        - Den lilla ettan är tiotalet jag växlade till. Var finns det på mattan?
+        - En elev skrev 57 + 28 = 715. Hur kan hen ha tänkt?
+    - namn: Åt andra hållet
+      fraga: Kan vi räkna det åt andra hållet tillsammans?
+      gor: Säg först hela händelsen med alla tre talen, som ”Ines hade 57 kronor, fick 28 och har nu 85”. Dölj sedan ett tal, som ”Ines har 85 kronor och fick nyss 28. Hur mycket hade hon från början?”, och fråga om ni söker helheten eller en del. Räkna sedan samma tal åt andra hållet med hela gruppen, ett handgrepp i taget. I paret bygger eller ritar den ena och den andra skriver, och till nästa uppgift med samma tal byter de, så att båda har byggt. Med ett udda antal arbetar tre tillsammans och turas om. Vänta tills alla är klara innan nästa handgrepp, och låt alla svara på tavlan eller i kör. Gå vidare till Bladet när varje elev gör nästa handgrepp rätt med högst en påminnelse och kan säga varför, som varför ni växlar eller vad raderna i rektangeln betyder.
+      fraser:
+        - Vi räknar åt andra hållet. Vad bygger vi?
+        - Räcker entalen?
+        - Skrivaren, vad skriver du nu?
+        - Lägg det ni tar bort på den nedre raden. Vilket tal blir raderna tillsammans?
+        - Samma händelse åt andra hållet. Söker vi helheten eller en del?
+    - namn: Bladet
+      fraga: Kan du göra det själv?
+      gor: Eleven räknar vidare på bladet, med materialet på bordet, och en uppgift på varje blad räknar eleven också åt andra hållet. Gå runt, stanna högst en halv minut hos varje elev, lyssna och ställ klargörande frågor. Fråga vad eleven gör och ser, och har eleven räknat fel, låt hen hitta felet själv. Den som fastnar medan du är hos någon annan markerar var hen fastnade och visar sitt senaste säkra steg med materialet. Gör flera samma fel, stoppar du arbetet och gör en uppgift till med gruppen.
+      fraser:
+        - Var behöver du växla? Hur ser du det innan du räknar?
+        - Visa med materialet vad du gjorde.
+        - Vad betyder den lilla ettan?
+        - Hur många tiotal är kvar nu?
+        - Stämmer det? Räkna åt andra hållet.
+    - namn: Lärdomen
+      fraga: Vad såg vi i dag?
+      gor: Lägg de två uträkningarna med svaren bredvid varandra och fråga vilka tre tal som finns i båda och vilket som är helheten. I 57 + 28 = 85 sökte ni helheten och i 85 − 28 = 57 en del. I multiplikation och division är helheten alla kuberna, och de andra två talen är antalet rader och antalet i varje rad. En rest står med i båda, som i 83/4 = 20 rest 3 och 4 · 20 + 3 = 83. Paren säger en mening till varandra, och en elev säger den till gruppen. Skriv elevens mening på väggplanschen och gör den exakt med ämnets ord. Alla skriver lärdomen i Mina lärdomar, med egna ord eller som på planschen, och den som behöver ritar den eller säger den medan du skriver. Sist säger du vad nästa pass handlar om.
+      fraser:
+        - Vilka tre tal finns i båda? Vilket är helheten?
+        - Säg det till din kamrat först.
+        - Hur skriver vi det, så att vi minns det nästa pass?
+        - I dag såg vi att tio ental blir ett tiotal.
+
+arbetsform:
+  rubrik: "Arbetsform: tillsammans, jag gör, vi gör, du gör, vi samlas"
+  text: Passet går från läraren till eleven och tillbaka till gruppen.
+  delar:
+    - rubrik: 1. Tillsammans
+      text: Alla svarar, och läraren frågar och skriver
+      faser:
+        - Uppvärmningen
+    - rubrik: 2. Jag gör
+      text: Läraren gör och tänker högt, eleverna tittar och svarar
+      faser:
+        - Genomgången
+    - rubrik: 3. Vi gör
+      text: Alla gör samma handgrepp, en bygger och en skriver
+      faser:
+        - Åt andra hållet
+    - rubrik: 4. Du gör
+      text: Var och en provar själv, läraren går runt och frågar
+      faser:
+        - Bladet
+    - rubrik: 5. Vi samlas
+      text: Paren säger en mening, och alla skriver sin lärdom
+      faser:
+        - Lärdomen
+
+tabeller:
+  - rubrik: "Materialet du behöver"
+    plats: efter-inledning
+    meny: true
+    text: Tiobasen och multilink visar hur stort talet är, och sifferkorten visar hur det skrivs. Du behöver också en egen sats av varje, och bilden efter tabellen visar materialet.
+    kolumner:
+      - Material
+      - Per elev
+      - Var du hittar det
+      - När ni använder det
+    rader:
+      - - "Tiobas\nental, tiostavar och hundraplattor"
+        - 20 ental, 15 tiostavar och 6 hundraplattor
+        - Skolans matematikmaterial. Tiobas finns att köpa i plast eller trä, och NCM:s matematikpapper har tiobas att skriva ut.
+        - Vecka 1–4. Eleven bygger talen på räknemattan och växlar själv.
+      - - "Sifferkort\n1–9, 10–90, 100–900 och 1 000–9 000"
+        - En sats, med en färg för varje talsort
+        - Montessoris sifferkort i trä eller plast, eller NCM:s positionskort att skriva ut.
+        - Vecka 1–4 och 6–7. Eleven lägger talet, drar isär det och skriver en talsort i taget. Korten visar inte växlingen. I subtraktion drar eleven bara isär talet som tas bort, aldrig båda, och i division behövs inte korten.
+      - - "Multilink\nkuber på 2 cm som går att sätta ihop"
+        - Omkring 100 kuber i två färger
+        - Skolans matematikmaterial, eller köp multilinkkuber.
+        - Vecka 5–8. Eleven bygger rektangeln, och tio kuber i ett torn är ett tiotal.
+      - - "Räknemattan\nett stående A4 per talsort"
+        - Tre ark, för hundratal, tiotal och ental
+        - Planeringsmallarna
+        - Vecka 1–4, med tiobasen. Arken ligger bredvid varandra, och en hundraplatta ryms ovanför och under linjen.
+      - - Talrutan och tomma talrader
+        - Ett blad per pass
+        - Planeringsmallarna
+        - Talraderna i vecka 1 och 4 och talrutan i vecka 5–8
+      - - Liten tavla, penna och lappar
+        - En tavla och några lappar
+        - Skolans material
+        - Varje pass. På lappen skriver du talet som tas bort i subtraktion.
+      - - Övningsblad, Mina lärdomar, läxan och kortet Säg varje gång
+        - Veckans blad, Mina lärdomar, läxan och ett kort
+        - Kursens material, planeringsmallarna och lathundens tredje sida
+        - Bladet i varje pass, kortet för den som behöver det och läxan en gång i veckan
+  - rubrik: "Så visar du de fyra räknesätten"
+    plats: efter-steg
+    meny: true
+    kolumner:
+      - Räknesätt
+      - Materialet
+      - Bilden
+      - Skriften
+      - Säg varje gång
+    rader:
+      - - Addition, 57 + 28
+        - Lägg det första talet på räknemattans övre rad och det andra på den nedre. Skjut upp entalen. Är de fler än nio, byt tio ental mot en tiostav och lägg den bland tiotalen. Skjut sist upp tiotalen.
+        - Talraden till huvudräkningen. Börja på det första talet och hoppa tiotalen och sedan entalen via ett jämnt tiotal, 57, 77, 80, 85. Till uppställningen ritar ni tiobasen med streck för tiotal och prickar för ental, och ni ringar in tio prickar och byter dem mot ett streck.
+        - 57 + 20 = 77 och 77 + 8 = 85. I uppställningen står entalen rakt under entalen. Du börjar med entalen och skriver minnessiffran ovanför tiotalen.
+        - ”Entalen under entalen.” ”Fler än nio ental? Växla.” ”Den lilla ettan är ett tiotal. Var finns det på mattan?”
+      - - Subtraktion, 85 − 28
+        - Bygg bara det första talet. Talet du tar bort står på en lapp. Räcker inte entalen, byt en tiostav mot tio ental. Lägg det du tar bort på den nedre raden, så att det syns. Jämför ni två tal, som när ni söker hur många fler, bygger ni båda, ett på varje rad, och skillnaden är det som bara det större talet har.
+        - Talraden. Ligger talen långt isär, hoppa bakåt, tiotalen först och sedan entalen via ett jämnt tiotal, 85, 65, 60, 57. Ligger talen nära, räkna upp, som i 64 − 58, där det är sex från 58 till 64. Till uppställningen ritar ni bara det första talet, och ni stryker ett streck och ritar tio prickar.
+        - 85 − 20 = 65 och 65 − 8 = 57. I uppställningen stryker du siffran du växlar från och skriver den nya siffran ovanför. Ovanför entalen skriver du en liten tia. Kontrollera med addition, 57 + 28 = 85.
+        - ”Räcker inte entalen? Växla.” ”Hur många tiotal är kvar nu?”
+      - - Multiplikation, 3 · 24
+        - Bygg tre rader med multilink, med två tiotorn och fyra lösa kuber i varje rad. Raderna blir en rektangel. Av de tolv lösa kuberna sätter ni ihop tio till ett tiotorn, och två är kvar.
+        - Rektangeln på talrutan. Antalet rader och antalet i varje rad är faktorerna, och antalet rutor är produkten. Dela rektangeln vid tiotalet, 3 · 20 och 3 · 4, och rita sedan en tom rektangel utan rutor, med talen vid sidorna.
+        - 3 · 24 = 3 · 20 + 3 · 4 = 60 + 12 = 72. I kort multiplikation börjar du med entalen, och minnessiffran ovanför lägger du till efter att du har multiplicerat tiotalen.
+        - ”Vad kan 3 · 24 vara? Tre rader med 24 stolar i varje.” ”Hur många rader? Hur många i varje rad?” ”Är alla delar med?”
+      - - Division, 72/3
+        - "Sätt ihop de 72 kuberna till sju tiotorn och två kuber, och dela ut tiotornen i tre tomma rader. Tornet som blir över bryter du isär till tio kuber, och sedan delar du ut de tolv lösa kuberna. Läs sedan rektangeln på det andra sättet. Vrid den, så att varje rad har tre kuber, och antalet rader är 20 + 4 = 24."
+        - Samma rektangel. Arean är 72 och den ena sidan 3. I den tomma rektangeln delar du upp 72 i 60 och 12, och den andra sidan blir 20 + 4 = 24.
+        - 72/3 = 60/3 + 12/3 = 20 + 4 = 24. I kort division skriver du 7¹2/3 = 24, där den lilla ettan är tiotalet som blev över. Resten är alltid mindre än det du delar med, och en nolla i kvoten skriver du ut, som i 832/8 = 104.
+        - ”Vet du hur många rader, eller hur många i varje rad?” ”Blir ett tiotal över? Växla.”
+    not: Lärdomen är elevens egen mening. Du skriver den på väggplanschen och gör den exakt med ämnets ord, som ”Tio ental blir ett tiotal” eller ”Varje del av rektangeln ska med”.
+  - rubrik: "Så skiljer sig nivåerna"
+    plats: efter-urval
+    text: Passen och veckorna är desamma på alla tre nivåer. Nivåerna skiljer sig i talen och i om eleven går vidare till kort multiplikation och kort division. Välj nivå efter kartläggningen och inte efter årskurs. Nivån Avancerad har tal i decimalform och kräver att eleven kan läsa tiondelar och hundradelar.
+    kolumner:
+      - Vad
+      - Bas
+      - Medel
+      - Avancerad
+    rader:
+      - - Addition och subtraktion
+        - Upp till 1 000, som 158 + 64 och 400 − 156
+        - Främst tresiffriga tal, med två växlingar och växling över nollan, som 386 + 457 och 600 − 247
+        - Fyrsiffriga tal och tal i decimalform, som 3 579 + 2 846 och 4 − 3,6. Eleven räknar i tiondelar och hundradelar, så att 4 − 3,6 blir 40 tiondelar minus 36 tiondelar. Tio hundradelar är en tiondel, och tio tiondelar är en hel
+      - - Multiplikation
+        - Inom tabellerna och tvåsiffrigt gånger ensiffrigt i rektangeln, som 3 · 14
+        - Tvåsiffrigt gånger ensiffrigt med kort multiplikation, som 3 · 26
+        - Tresiffrigt gånger ensiffrigt, som 4 · 236, och tvåsiffrigt gånger tvåsiffrigt i den tomma rektangeln, som 19 · 26. Ett decimaltal delas upp i heltal och tiondelar, som 1,5 · 4 = 1 · 4 + 0,5 · 4 = 6
+      - - Division
+        - Inom tabellerna, tvåsiffriga tal delat med ensiffriga i den tomma rektangeln, som 42/3, och rest med små tal, som 26/3
+        - Kort division med rest, som 83/4 = 20 rest 3
+        - Kort division med nollan mitt i kvoten, som 832/8 = 104
+  - rubrik: "Talen och bladen i veckorna"
+    karta: true
+    plats: efter-urval
+    meny: true
+    text: För varje vecka och nivå står passets första uppgift för pass 1, 2 och 3, i den ordningen, och gruppen räknar sedan samma tal åt andra hållet. I pass 2 visar du först det som står under Pass 2 på veckans sida, oftast förra passets uppgift ritad, och sedan passets uppgift ur tabellen. Allt nytt kommer i pass 1 och 2, och med två pass i veckan tar ni de två första uppgifterna. Veckans blad står först, och ett blad efter ”sedan” är för den som blir klar. Bladen räcker hela veckan, och eleven fortsätter där hen slutade. De sista uppgifterna på Subtraktion 1 och Division 4 väntar på det du visar i pass 2. En uppgift på varje blad räknar eleven också åt andra hållet, i rutan sist på bladet. Bladen står under Kursens material.
+    kolumner:
+      - Vecka
+      - Bas
+      - Medel
+      - Avancerad
+    rader:
+      - - "Vecka 1\nHopp på talraden"
+        - "37 + 26, 48 + 35, 57 + 7\nAddition 1 och Subtraktion 1"
+        - "58 + 27, 136 + 48, 195 + 8\nAddition 1 och Subtraktion 1"
+        - "386 + 245, 1,7 + 0,6, 1 450 + 380\nAddition 1 och Subtraktion 1"
+      - - "Vecka 2\nTio ental blir ett tiotal"
+        - "39 + 25, 47 + 37, 58 + 34\nAddition 2 och Subtraktion 2"
+        - "57 + 28, 68 + 25, 146 + 37\nAddition 2 och Subtraktion 2"
+        - "236 + 48, 345 + 192, 468 + 125\nAddition 3 och Subtraktion 3"
+      - - "Vecka 3\nHundratal och två växlingar"
+        - "67 + 76, 158 + 64, 145 + 87\nAddition 3 och Subtraktion 3"
+        - "386 + 457, 279 + 164, 657 + 286\nAddition 3 och Subtraktion 3, sedan Addition 4"
+        - "3 579 + 2 846, 1 768 + 3 495, 2 657 + 3 486\nAddition 4 och Subtraktion 3, sedan Addition 5"
+      - - "Vecka 4\nÖver nollan och välj sätt"
+        - "400 − 156, 302 − 297, 503 − 68\nSubtraktion 4 och repetition"
+        - "600 − 247, 701 − 698, 1 004 − 368\nSubtraktion 4 och repetition"
+        - "5 000 − 1 863, 4 − 3,6, 3 006 − 1 478\nSubtraktion 4 och 5"
+      - - "Vecka 5\nRektangeln"
+        - "3 · 4, 4 · 6, 7 · 5\nMultiplikation 1 och Division 1"
+        - "4 · 6, 6 · 7, 8 · 7\nMultiplikation 1 och Division 1"
+        - "6 · 8, 7 · 9, 12 · 8\nMultiplikation 1 och Division 1"
+      - - "Vecka 6\nRektangeln med tiotal"
+        - "3 · 14, 2 · 23, 4 · 13\nMultiplikation 2 och Division 2"
+        - "3 · 24, 2 · 32, 4 · 18\nMultiplikation 2 och Division 2"
+        - "3 · 28, 12 · 14, 13 · 15\nMultiplikation 2 och Division 2, sedan Multiplikation 5"
+      - - "Vecka 7\nKort multiplikation och kort division"
+        - "5 · 14, 69/3, 6 · 12\nMultiplikation 2 och Division 2, med rektangeln och utan den korta formen"
+        - "3 · 26, 96/4, 2 · 41\nMultiplikation 3 och Division 3"
+        - "4 · 236, 896/7, 2 · 341\nMultiplikation 3 och Division 3, sedan Multiplikation 4"
+      - - "Vecka 8\nNollan och resten i textuppgifter"
+        - "22/4, 26/3, 23/5\nDivision 2 och repetition"
+        - "83/4, 74/6, 95/4\nDivision 4 och Multiplikation 3"
+        - "618/6, 832/8, 1 254/6\nDivision 4 och Multiplikation 5, sedan Division 5"
+    not: I vecka 4 är uppgiften en subtraktion, och åt andra hållet blir den en addition. I vecka 7 är uppgiften i pass 2 en division. På Medel och Avancerad visar du kort division en gång till innan eleverna leder uträkningen, och Bas räknar med rektangeln. I vecka 8 är uppgiften en division, och åt andra hållet multiplicerar ni och lägger till resten, som 83/4 = 20 rest 3 och 4 · 20 + 3 = 83. Repetition är uppgifter ur bladen från tidigare veckor, och i vecka 8 räknar ni en addition och en subtraktion i uppvärmningen. Ett bygge med multilink har högst omkring 100 kuber, så att kuberna räcker, och större tal ritar ni. I addition och subtraktion ritar ni tiobasen med rutor, streck och prickar i veckans andra pass och när talen är för stora för materialet. I vecka 5 är en ruta på talrutan en kub. Från vecka 6 ritar eleven också en tom rektangel utan rutor, med talen vid sidorna.
+
+exempel:
+  rubrik: "Exempel: så går ett pass till"
+  valt:
+    rubrik: Gruppen
+    text: Sex elever i åk 5 arbetar på nivån Medel, och det är vecka 2, pass 1. Passets uppgift är 57 + 28 och åt andra hållet 85 − 28, och bladen är Addition 2 och Subtraktion 2.
+  text:
+    - Uppvärmningen börjar med förra veckans sista lärdom. Ines läser ur Mina lärdomar, ”På talraden hoppar vi tiotalen först”, och gruppen visar 46 + 30 + 7 med hopp på en tom talrad. Läraren säger ”Lägg 52 med sifferkorten och dra isär”, och Sara säger ”Femman är femtio”. Sedan bygger alla 52 med tiobas, och läraren säger ”Byt en tiostav mot tio ental”. Hamza säger ”Fyra tiotal och tolv ental, det är fortfarande 52”. Sist ger läraren talfakta muntligt, ”Sju plus fem. Hur tänkte du?”, och Alva svarar ”Jag tar tre från femman till sjuan, och det blir tio. Två till blir tolv”. Läraren skriver 7 + 3 + 2 = 12.
+    - I genomgången berättar läraren uppgiften som en händelse, ”Ines har 57 kronor och får 28 till”, gör ett överslag, ”ungefär 60 plus 30, alltså 90”, och lägger 57 på räknemattans övre rad och 28 på den nedre. Läraren skjuter upp entalen och säger ”Femton ental. Fler än nio ental? Växla.” Läraren lägger tio ental längs en tiostav, ”lika långa”, byter dem mot staven, lägger staven bland tiotalen och skjuter upp de två tiostavarna. Bredvid skriver läraren uppställningen med den lilla ettan ovanför tiotalen, ”Ettan är staven jag bytte till. Åtta tiotal och fem ental, 85.” Sist visar läraren 57 + 28 = 715 och frågar ”En elev skrev 715. Hur kan hen ha tänkt?”
+    - Sedan räknar alla samma tal åt andra hållet, 85 − 28. Läraren säger hela händelsen, ”Ines hade 57 kronor, fick 28 och har nu 85”, och döljer sedan ett tal, ”Ines har 85 kronor och fick nyss 28. Hur mycket hade hon från början?” Hamza säger ”Vi söker en del”. I varje par bygger den ena och den andra skriver. ”Vad bygger vi?” frågar läraren. Sara svarar ”Vi bygger bara 85, och 28 står på lappen”. ”Räcker entalen?” Ebbe skakar på huvudet, och paren byter en tiostav mot tio ental. De lägger det de tar bort på den nedre raden, åtta ental och två tiostavar. Melvin säger ”57 är kvar, och raderna är 85 tillsammans”.
+    - I Bladet räknar eleverna bladets första uppgift, 46 + 38. Läraren går runt. Melvin har skrivit 714, och läraren frågar ”Vad betyder ettan? Var finns den på mattan?” Melvin bygger om, växlar och skriver 84. Sedan räknar eleverna uppgiften åt andra hållet, 84 − 38.
+    - I Lärdomen ligger 57 + 28 = 85 och 85 − 28 = 57 bredvid varandra. ”Vilka tre tal finns i båda? Vilket är helheten?” Alva säger till sin kamrat ”85 är helheten. I plus blir tio ental ett tiotal, och i minus blir ett tiotal tio ental”, och sedan säger hon det till gruppen. Läraren skriver meningen på väggplanschen med räknesättens namn, ”I addition blir tio ental ett tiotal, och i subtraktion blir ett tiotal tio ental”, och alla skriver den i Mina lärdomar.
+    - Efter passet antecknar läraren att Melvin skrev båda kolumnsummorna och växlade efter frågan, och att Ebbe ska vara först att förklara uträkningen åt andra hållet i nästa pass.
+
+fastnar:
+  rubrik: När eleven fastnar
+  text: Fråga först och ge eleven ett handgrepp i taget. Fastnar flera på samma ställe, stoppar du arbetet och gör en uppgift till tillsammans.
+  fragaForst:
+    - Vad har du gjort hittills?
+    - Visa med materialet.
+  trappa:
+    - Rikta elevens blick utan att säga svaret, som ”Titta på entalen” eller ”Är alla delar med?”
+    - Säg frasen ”Fler än nio ental? Växla.” eller ”Räcker entalen?”
+    - Gå tillbaka till materialet och skriv det eleven gör bredvid.
+    - Är svaret orimligt ber du eleven läsa uppgiften högt, hitta på en räknehändelse eller räkna i huvudet.
+    - Gör ett handgrepp tillsammans och låt eleven göra nästa.
+  motto: Behöver du förklara länge vid bänken, behöver ni räkna mer tillsammans.
+
+roll:
+  rubrik: "Lärarens roll: visa och låt eleven göra"
+  text: Du visar i genomgången, och eleven räknar själv på bladet. Däremellan, i Åt andra hållet, lämnar du över ett handgrepp i taget.
+  gor:
+    - Visa först och säg allt du gör, också det som känns självklart.
+    - Säg talsorten varje gång, och samma fras varje gång.
+    - Fråga vad eleven gör och ser.
+    - Låt det ni tar bort ligga kvar på den nedre raden, så att båda uträkningarna syns.
+    - Skriv elevens mening som lärdom och gör den exakt med ämnets ord.
+  undvik:
+    - att ge regeln innan eleven har sett den i materialet
+    - att räkna åt eleven vid bänken
+    - att säga att en uppgift är lätt
+    - att visa flera nya sätt att räkna i samma pass
+    - att säga låna om växlingen
+
+urval:
+  rubrik: Var hittar du materialet och talen?
+  text:
+    - Talen för varje vecka och nivå står i tabellen Talen och bladen i veckorna. Materialet och var du hittar det står i tabellen Materialet du behöver. Övningsbladen, kartläggningen, Mina lärdomar och läxan står under Kursens material, och räknemattans ark, talrutan och de tomma talraderna står i planeringsmallarna. Kortet Säg varje gång är lathundens tredje sida. Fler uppgifter tar du ur gruppens matematikbok, om de passar veckans fokus och kraven.
+  kravText: "Välj passets tal så att de uppfyller tre krav:"
+  krav:
+    - rubrik: Samma tal åt båda hållen
+      text: Uppgiften och uträkningen åt andra hållet har samma tal, så att sambandet syns
+    - rubrik: Med och utan växling
+      text: Blanda uppgifter med och utan växling, så att eleven avgör när det behövs
+    - rubrik: Kända talfakta
+      text: Välj tal där eleven kan talfakta, så att det nya får all uppmärksamhet
+
+hem:
+  rubrik: "Läxan: Åt båda hållen"
+  text:
+    - En gång i veckan tar eleven hem bladet Åt båda hållen, där du har skrivit veckans uppgift, som 57 + 28 = 85. Hemma skriver eleven veckans lärdom, räknar samma tal åt andra hållet, 85 − 28 = 57, ritar talen som i passet, på en talrad, med streck och prickar eller som en rektangel, hittar på en händelse och förklarar uträkningen för en vuxen. Bilden efter avsnittet visar ett ifyllt blad. Läxan tar omkring tio minuter och går hem efter veckans andra pass, och ni tar upp den i Uppvärmningen i nästa pass, i stället för talfakta. Den sista läxan tar du upp i ett tredje pass eller i kartläggningen efter kursen. Berätta för vårdnadshavarna om kursen innan den första läxan går hem.
+
+progression:
+  rubrik: Kursplanen
+  text: Varje vecka har ett nytt fokus, och det nya kommer i pass 1 och 2. Vecka 1–4 är addition och subtraktion och vecka 5–8 multiplikation och division. Du tonar ut stödet, så att du först tänker högt hela vägen, sedan visar bara det nya och till sist låter eleverna leda uträkningen åt andra hållet. I vecka 4 och 8 repeterar ni också det kursen har haft. Kan flera i gruppen inte visa veckans grepp i slutet av veckan, gör ni veckan en gång till med nya tal, och kursen blir en vecka längre. Är det en elev, övar hen greppet i uppvärmningen och i ett tredje pass, om gruppen har ett, och gruppen går vidare.
+  rader:
+    - vecka: "1"
+      fokus: Hopp på talraden, addition och subtraktion i huvudet. Tiotalen först, och i subtraktion räkna upp när talen ligger nära
+      roll: Du tänker högt hela vägen och skriver hoppen som en uträkning
+    - vecka: "2"
+      fokus: Tio ental blir ett tiotal. Växling på räknemattan och med streck och prickar, med uppställningen bredvid
+      roll: Du tänker högt hela vägen
+    - vecka: "3"
+      fokus: Hundratal och två växlingar, med ritad tiobas och sifferkort
+      roll: Du visar det nya, och en elev tänker högt i resten av uträkningen
+    - vecka: "4"
+      fokus: Över nollan och välj sätt, talraden eller uppställningen. Blandad repetition
+      roll: Eleverna väljer sätt och förklarar valet
+    - vecka: "5"
+      fokus: Rektangeln med multilink. Alla rektanglar av ett antal kuber, multiplikation, och division på två sätt med samma rektangel
+      roll: Du tänker högt när du visar det nya, rektangeln
+    - vecka: "6"
+      fokus: Rektangeln med tiotal, den tomma rektangeln och rest med små tal
+      roll: Du visar delningen vid tiotalet, och en elev tänker högt i resten av uträkningen
+    - vecka: "7"
+      fokus: Kort multiplikation och kort division. På nivån Bas fortsätter ni med rektangeln
+      roll: Du visar kort multiplikation i pass 1 och kort division i pass 2, och en elev tänker högt med rektangeln
+    - vecka: "8"
+      fokus: Nollan i kvoten och resten i textuppgifter. I uppvärmningen räknar ni en addition och en subtraktion, och du delar ut kursintyget i sista passet. Kartläggningen efter görs veckan efter kursen
+      roll: Eleverna leder uträkningen åt andra hållet och väljer sätt
+
+uppfoljning:
+  text: Kartläggningen visar vad eleven kan räkna och förklara, före och efter. Mina lärdomar visar elevens ord pass för pass.
+  rader:
+    - nar: Före kursen
+      vad: Kartläggningen. Eleven räknar åtta uppgifter på sin nivå och visar och förklarar sex uppgifter. Du skriver vad eleven gör och säger.
+    - nar: Efter varje pass
+      vad: Din notering och elevens lärdom i Mina lärdomar.
+    - nar: Vecka 4
+      vad: Den blandade repetitionen visar om addition och subtraktion sitter.
+    - nar: Efter kursen
+      vad: Samma kartläggning veckan efter. Visa skillnaden och skriv nästa steg.
+
+mal:
+  punkter:
+    - visa med material och på talraden vad som händer i addition och subtraktion, och räkna med uppställning och växling på sin nivå
+    - visa en multiplikation och två divisioner i samma rektangel med en händelse till varje, och räkna med kort multiplikation och kort division på sin nivå, på nivån Bas med rektangeln
+    - förklara vad minnessiffran och den strukna siffran betyder, och vad resten är
+    - avgöra med ett överslag om ett svar är rimligt, och kontrollera det genom att räkna åt andra hållet
+
+checklista:
+  rubrik: Före första passet
+  punkter:
+    - Gör kartläggningen veckan före kursen och bestäm gruppens nivå.
+    - "Skriv ut per elev: räknemattans ark, talraderna, Addition 1, Subtraktion 1, Mina lärdomar och kortet."
+    - Läs vecka 1 under Kursens material i metoden, och räkna första talet åt båda hållen.
+    - Sätt upp en väggplansch för lärdomarna.
+    - Prata med varje elev i åk 7 om ett eget mål.
+
+grund:
+  text: Kursen följer den väg som forskningen om elever i matematiksvårigheter rekommenderar. Läraren visar och tänker högt, eleverna övar med stöd och sedan själva, och läraren kopplar materialet till bild och symbol (Fuchs m.fl., 2021). Eleven går från materialet till papperet i tre steg, först med bara materialet, sedan med materialet och varje steg antecknat och sist på papper medan hen föreställer sig materialet (McIntosh, 2008). Addition och subtraktion hör ihop, och gruppen räknar dem tillsammans (Larsson, 2011), och rektangeln är tankeredskapet för multiplikation och division, där sidorna är faktorerna och arean är produkten (Larsson, 2024). Korta repetitioner varje pass håller kunskapen kvar, och i övningen ska eleven klara omkring åtta uppgifter av tio, så att uppgifterna är lagom svåra (Rosenshine, 2012).
+  kallor: Bygger på Fuchs m.fl. (2021), McIntosh (2008), Larsson (2011, 2012, 2015 och 2024), Holmberg och Kilhamn (2014), Rosenshine (2012) och Specialpedagogiska skolmyndighetens stödmaterial om att intensifiera insatser i matematik (2024).
+
+ramar:
+  rubrik: Kursens material
+  text:
+    - Först kommer veckorna, en sida för varje vecka med det du visar och säger. Sedan kommer kartläggningen, övningsbladen, Mina lärdomar och läxan Åt båda hållen.
+    - Övningsbladen är elevens, fem för varje räknesätt, och eleven räknar i rutnätet, en siffra per ruta. Kopiera veckans blad till varje elev.
+  ramar:
+    # ---------------------------------------------------------------- Veckorna
+    - rubrik: "Till läraren: veckorna"
+      lektioner: true
+      text:
+        - "En sida för varje vecka, med veckans fokus överst och sist bilden På bordet, som visar materialet och skriften. Rutorna har talen för nivån Medel, och med en annan nivå säger du samma sak med talen i tabellen Talen och bladen i veckorna. Genomgången och Åt andra hållet gäller veckans första pass, och veckans vanliga fel står under Lyssna efter."
+      delar:
+        - rubrik: "Vecka 1 · Hopp på talraden"
+          falt:
+            - rubrik: "Fokus"
+              text: "Eleven adderar och subtraherar i huvudet med hopp på en tom talrad, tiotalen först, och räknar upp i subtraktion när talen ligger nära."
+            - rubrik: "Genomgången"
+              text: "Visa och säg ”Jag ska lägga till 27. Jag lägger 27 med sifferkorten och drar isär dem, 20 och 7. Det blir mina hopp. Jag ritar en tom talrad och sätter ut 58. Först tiotalen, två hopp om tio till 68 och 78. Sedan sju, två till 80 och fem till 85. Jag skriver 58 + 20 = 78 och 78 + 7 = 85.”\nNär gruppen är säker hoppar ni tjugo på en gång."
+            - rubrik: "Åt andra hållet"
+              text: "Hoppa bakåt, tiotalen först, och säg ”Jag står på 85 och tar bort 27. Först tjugo, till 65. Sedan sju, fem till 60 och två till 58. Jag skriver 85 − 20 = 65 och 65 − 7 = 58.”"
+            - rubrik: "Pass 2"
+              text: "Visa 71 − 69 ur bladet och säg ”Talen ligger nära. Jag räknar upp från 69, ett till 70 och ett till 71. Det är två.”"
+            - rubrik: "Nivåerna"
+              text: "På nivån Avancerad är talen i pass 2 tiondelar, och du säger ”Sjutton tiondelar och sex tiondelar. Tre tiondelar till 2 och tre tiondelar till, 2,3.”"
+            - rubrik: "Lyssna efter"
+              text: "Eleven som hoppar ett steg i taget.\nEleven som räknar strecken i stället för hoppen.\nEleven som hoppar bakåt fast talen ligger nära."
+        - rubrik: "Vecka 2 · Tio ental blir ett tiotal"
+          falt:
+            - rubrik: "Fokus"
+              text: "Eleven växlar tio ental till ett tiotal i addition och ett tiotal till tio ental i subtraktion, på räknemattan och i uppställningen."
+            - rubrik: "Genomgången"
+              text: "Visa och säg ”Jag lägger 57 på den övre raden och 28 på den nedre. Jag skjuter upp entalen, femton. Fler än nio ental? Växla. Jag lägger tio ental längs en tiostav. De är lika långa, och jag byter dem mot staven. Staven lägger jag bland tiotalen, och sedan skjuter jag upp de två tiostavarna från den nedre raden. Åtta tiotal och fem ental, 85.”\nLägg sedan entalen med sifferkorten och säg ”Sju och åtta är femton, och femton är två kort, tiokortet och femkortet. Tiokortet går till tiotalen.”\nSkriv uppställningen och säg ”Jag börjar med entalen, för där kan det bli ett nytt tiotal. Den lilla ettan ovanför tiotalen är samma tiotal som tiokortet och staven jag bytte till.”"
+            - rubrik: "Åt andra hållet"
+              text: "Tänk högt när du gör det första handgreppet, ”85 − 28. Jag bygger bara 85, och 28 står på lappen. Fem ental räcker inte för att ta bort åtta, så jag byter en tiostav mot tio ental. Sju tiotal och femton ental, och det är fortfarande 85. Jag stryker åttan och skriver en sjua ovanför och en liten tia ovanför entalen.” Låt paren göra resten.\nVisa sist 85 − 28 = 63 och fråga ”Hur kan hen ha tänkt?” Räkna åt andra hållet, 63 + 28 är 91 och inte 85."
+            - rubrik: "Pass 2"
+              text: "Eleverna ritar talen med streck och prickar och ringar in tio prickar."
+            - rubrik: "Nivåerna"
+              text: "På nivån Avancerad kan det bli två växlingar redan nu, som 186 + 257, och då säger du samma fras om tiotalen, ”Fler än nio tiotal? Växla.”"
+            - rubrik: "Lyssna efter"
+              text: "Eleven som skriver båda summorna, som 715.\nEleven som drar det mindre talet från det större i varje kolumn, som 63."
+        - rubrik: "Vecka 3 · Hundratal och två växlingar"
+          falt:
+            - rubrik: "Fokus"
+              text: "Eleven räknar med hundratal och två växlingar, ritar tiobasen med rutor, streck och prickar och skriver uppställningen."
+            - rubrik: "Uppvärmningen"
+              text: "Dela upp 543 på flera sätt med tiobasen, 500 + 40 + 3, 400 + 140 + 3 och 400 + 130 + 13."
+            - rubrik: "Genomgången"
+              text: "Visa och säg ”Jag ritar 386 med tre rutor, åtta streck och sex prickar, och 457 under. Tretton prickar. Jag ringar in tio prickar och ritar ett streck till bland tiotalen. Fjorton streck. Fler än nio tiotal? Växla. Jag ringar in tio streck och ritar en ruta till. Det blir 843.”\nLägg 843 med sifferkorten, 800, 40 och 3 på varandra, och skriv uppställningen med båda minnessiffrorna."
+            - rubrik: "Åt andra hållet"
+              text: "Räkna 843 − 457 och säg ”Tre ental räcker inte för sju. Jag stryker fyran, skriver en trea ovanför och en liten tia ovanför entalen. Tretton minus sju är sex. Tre tiotal räcker inte för fem. Jag stryker åttan, skriver en sjua ovanför och en liten tia ovanför trean. Tretton tiotal minus fem tiotal är åtta tiotal. Sju hundratal minus fyra hundratal är tre hundratal. Det blir 386.”"
+            - rubrik: "Nivåerna"
+              text: "På nivån Avancerad skriver du 29 som 29,0, ställer upp 29,0 + 6,3 och säger ”Entalen under entalen, och kommat under kommat.”"
+            - rubrik: "Lyssna efter"
+              text: "Eleven som räknar med den strukna siffrans gamla värde.\nEleven som glömmer en minnessiffra, som 386 + 457 = 833.\nEleven som ställer upp talen med de första siffrorna under varandra, som 253 + 74 = 993."
+        - rubrik: "Vecka 4 · Över nollan och välj sätt"
+          falt:
+            - rubrik: "Fokus"
+              text: "Eleven växlar över nollan, som i 600 − 247, och väljer mellan talraden och uppställningen efter talen."
+            - rubrik: "Genomgången"
+              text: "Visa och säg ”600 − 247. Jag lägger 600 med sifferkorten, och det är ett enda kort. Det finns inga lösa tiotal och inga lösa ental att ta från. Jag växlar ett hundratal till tio tiotal och sedan ett tiotal till tio ental. Nu är det fem hundratal, nio tiotal och tio ental, och det är fortfarande 600. Tio ental minus sju är tre, nio tiotal minus fyra är fem och fem hundratal minus två är tre. Det blir 353.”\nGör växlingen med tiobasen och skriv varje ny siffra ovanför."
+            - rubrik: "Åt andra hållet"
+              text: "Räkna 353 + 247 med två minnessiffror och säg ”Tio ental blir ett tiotal, och tio tiotal blir ett hundratal. Det blir 600.”"
+            - rubrik: "Pass 2"
+              text: "Visa 701 − 698 på talraden och säg ”Talen ligger nära. Jag räknar upp från 698, två till 700 och en till. Det är tre.”\nLäs sedan en jämförelse, ”Ellen är 152 cm och Omar 147 cm. Hur mycket längre är Ellen?” Säg att subtraktion också ger skillnaden mellan två tal, och räkna upp från 147, tre till 150 och två till 152. Ellen är fem cm längre.\nI lärdomen lägger ni talraden och uppställningen för 701 − 698 bredvid varandra och frågar var det syns att talen ligger nära och vilket sätt som var kortast."
+            - rubrik: "Pass 3"
+              text: "Eleverna räknar 1 004 − 368 på papper, och den som tvekar ritar tiobasen."
+            - rubrik: "Lyssna efter"
+              text: "Eleven som räknar nollan som tio efter växlingen.\nEleven som ställer upp fast talen ligger nära. Fråga om det finns en kortare väg, men en rätt uppställning är inget fel."
+        - rubrik: "Vecka 5 · Rektangeln"
+          falt:
+            - rubrik: "Fokus"
+              text: "Eleven bygger multiplikation som en rektangel och läser samma rektangel som två slags division."
+            - rubrik: "Uppvärmningen"
+              text: "I pass 1 får varje par tolv kuber och frågan ”Hur många olika rektanglar kan ni bygga av alla tolv?” Paren hittar 1 · 12, 2 · 6 och 3 · 4, och en vriden rektangel räknas som samma. Elva kuber ger bara en rektangel."
+            - rubrik: "Genomgången"
+              text: "Visa och säg ”Fyra rader med sex stolar i varje. Hur många stolar är det? Jag bygger fyra rader med multilink, sex kuber i varje rad. Fyra gånger sex. Jag bryter isär rektangeln i två delar med två rader i varje. Två rader med sex är tolv, och tolv till är 24.”\nVrid rektangeln och säg ”Nu är det sex rader med fyra i varje. Samma kuber, 6 · 4.”"
+            - rubrik: "Åt andra hållet"
+              text: "Ta samma 24 kuber och berätta två händelser. ”Vi har 24 stolar och ställer sex i varje rad. Hur många rader blir det?” Sätt ihop torn med sex kuber och lägg varje torn som en rad, ”Det blir fyra rader. 24 delat med 6 är 4.”\n”Vi ställer 24 stolar i fyra lika långa rader. Hur många blir det i varje rad?” Rita fyra rader på ett papper, lägg en kub i varje rad i taget och säg ”Det blir sex i varje rad. 24 delat med 4 är 6.” Peka på 24 i båda divisionerna och säg ”Överst står alla kuberna. Det är helheten.”"
+            - rubrik: "Pass 2"
+              text: "Ni ritar rektangeln från hörnet vid de tjocka linjerna på talrutan, en ruta för varje kub, och skriver 24 i hörnrutan och de fyra uträkningarna bredvid. Rektanglarna kan bli gruppens multiplikationsruta på väggen."
+            - rubrik: "Lyssna efter"
+              text: "Eleven som bara delar ut och inte känner igen frågan hur många rader det blir.\nEleven som skriver 6/24 när hen ska dela 24 med 6."
+        - rubrik: "Vecka 6 · Rektangeln med tiotal"
+          falt:
+            - rubrik: "Fokus"
+              text: "Eleven delar rektangeln vid tiotalet, ritar den tomma rektangeln och möter rest med små tal."
+            - rubrik: "Genomgången"
+              text: "Visa och säg ”Jag drar isär 24 med sifferkorten, 20 och 4. Jag bygger tre rader med 24 kuber, två tiotorn och fyra kuber i varje rad. Tre gånger två tiotorn är sex tiotorn, sextio. Tre gånger fyra kuber är tolv kuber, och tio av dem sätter jag ihop till ett tiotorn. 60 + 12 = 72.”"
+            - rubrik: "Åt andra hållet"
+              text: "Dela ut de 72 kuberna i tre rader, tiotornen först.\nLägg sist ut 14 kuber i fyra rader, en kub i varje rad i taget, och säg ”Tre i varje rad, och två är kvar. Räcker de till en kub till i varje rad? Nej, då behövs fyra.” Skriv 14/4 = 3 rest 2 och räkna åt andra hållet, 4 · 3 + 2 = 14."
+            - rubrik: "Pass 2"
+              text: "Rita förra passets rektangel på talrutan, en ruta för varje kub, med ett streck efter tjugo rutor i varje rad, och skriv 3 · 24 = 3 · 20 + 3 · 4 = 60 + 12 = 72.\nRita sedan en tom rektangel utan rutor, med talen vid sidorna, och räkna åt andra hållet, ”Arean är 72 och ena sidan är 3. Vad kan jag lätt dela med tre? Sextio delat med tre är tjugo. Tolv är kvar, och tolv delat med tre är fyra. Den andra sidan är 24.”"
+            - rubrik: "Nivåerna"
+              text: "På nivån Avancerad delar du upp båda sidorna i tiotal och ental, 12 · 14 = 10 · 10 + 10 · 4 + 2 · 10 + 2 · 4 = 168."
+            - rubrik: "Lyssna efter"
+              text: "Eleven som glömmer att multiplicera en del, som 3 · 24 = 3 · 20 + 4 = 64.\nEleven som delar upp 72 i 70 och 2 och fastnar.\nEleven som får en rest som är lika stor som det hen delar med.\nEleven på nivån Avancerad som räknar tiotalen gånger tiotalen och entalen gånger entalen, som 19 · 26 = 254."
+        - rubrik: "Vecka 7 · Kort multiplikation och kort division"
+          falt:
+            - rubrik: "Fokus"
+              text: "Eleven på nivåerna Medel och Avancerad skriver kort multiplikation och kort division och förklarar minnessiffran och den lilla ettan med kuberna."
+            - rubrik: "Genomgången"
+              text: "Visa och säg ”3 · 26. Jag börjar med entalen. Tre gånger sex kuber är arton. Tio av dem sätter jag ihop till ett torn, och åtta är kvar. Jag skriver åtta och en liten etta ovanför tvåan. Ettan väntar tills jag har multiplicerat tiotalen. Tre gånger två tiotal är sex tiotal, och med tornet jag satte ihop blir det sju tiotal. Det blir 78.”"
+            - rubrik: "Åt andra hållet"
+              text: "Räkna 78/3 och tänk högt också här, ”Sju tiotal delat i tre rader är två tiotal i varje rad, och ett tiotal blir över. Jag skriver tvåan. Blir ett tiotal över? Växla. Jag bryter isär tornet till tio ental och skriver en liten etta före åttan. Arton ental delat i tre rader är sex ental i varje rad. Jag skriver sexan.” Det blir 7¹8/3 = 26.\nFråga ”Vad betyder tvåan? Vad betyder den lilla ettan?”"
+            - rubrik: "Pass 2"
+              text: "Uppgiften är en division, 96/4, så att du visar kort division en gång till innan eleverna leder uträkningen."
+            - rubrik: "Nivåerna"
+              text: "På nivån Bas räknar ni samma tal med rektangeln och skriftlig huvudräkning, utan den korta formen.\nPå nivån Avancerad lägger eleverna tresiffriga tal med sifferkorten och drar isär dem, som 4 · 236 = 4 · 200 + 4 · 30 + 4 · 6."
+            - rubrik: "Lyssna efter"
+              text: "Eleven som lägger till minnessiffran innan hen multiplicerar tiotalen.\nEleven som skriver 18 i entalens ruta.\nEleven som delar tiotalen och entalen var för sig och tappar tiotalet som blev över, så att 78/3 blir 22 rest 2.\nEleven på nivån Bas som glömmer en del av rektangeln."
+        - rubrik: "Vecka 8 · Nollan och resten i textuppgifter"
+          falt:
+            - rubrik: "Fokus"
+              text: "Eleven skriver nollan i kvoten och avgör i textuppgifter vad resten betyder."
+            - rubrik: "Genomgången"
+              text: "Visa och säg ”Jag delar 83 kuber i fyra rader. Åtta tiotorn ger två i varje rad. Tre kuber är kvar. Kan jag lägga en till i varje rad? Nej, då behövs fyra. Varje rad har 20, och tre blir över.”\nSkriv 83/4 = 20 rest 3 och säg ”Nollan står bland entalen, för raderna fick inga lösa kuber.”"
+            - rubrik: "Åt andra hållet"
+              text: "Multiplicera och lägg till resten, 4 · 20 + 3 = 83."
+            - rubrik: "Pass 2"
+              text: "Visa 176/4 i den tomma rektangeln, 160 och 16, och i den korta formen, ”Ett hundratal räcker inte till fyra rader. Jag växlar det till tio tiotal, och med de sju blir det sjutton tiotal. Sjutton tiotal delat i fyra rader är fyra tiotal i varje rad, och ett tiotal blir över. Jag växlar det till tio ental, och med de sex blir det sexton. Sexton ental delat i fyra rader är fyra i varje rad.” Skriv 17¹6/4 = 44.\nLäs sedan tre textuppgifter och fråga vad varje tal står för, ”74 elever ska åka minibuss, och det får plats 8 i varje. Hur många bussar behövs?”, ”Du har 74 kronor, och en glass kostar 8 kronor. Hur många glassar kan du köpa?” och ”Ali har 24 kort. Sara har tre gånger så många. Hur många har Sara?”"
+            - rubrik: "Nivåerna"
+              text: "På nivån Avancerad visar du också 832/8, ”Åtta hundratal delat i åtta rader är ett hundratal i varje rad. Tre tiotal räcker inte till åtta rader. Noll tiotal i varje rad, och nollan skrivs. Tre tiotal och två ental är 32 ental, och 32 delat i åtta rader är fyra. Det blir 104.”"
+            - rubrik: "Lyssna efter"
+              text: "Eleven som får en rest som är större än det hen delar med.\nEleven som tappar nollan i kvoten.\nEleven som skriver skillnaden 5 − 2 som en liten siffra före ettan i stället för tvåan, så att 215/5 blir 63.\nEleven som räknar 24 + 3 när det står ”tre gånger så många”."
+    # ---------------------------------------------------------------- Kartläggningen
+    - rubrik: "Kartläggning: före och efter kursen"
+      text:
+        - Gör kartläggningen veckan före och veckan efter kursen, med en elev i taget eller två och två. Eleven räknar bladet för sin nivå och visar och förklarar sedan sex uppgifter i listan Visa och förklara.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så gör du
+              text: Före kursen tar du bladet för den nivå du tror passar, och eleven räknar det på egen hand, i rutnätet och utan material. Räknar eleven färre än fyra rätt, tar hen också bladet för nivån under, och med sju eller åtta rätt bladet för nivån över. Räknar eleven färre än fyra rätt på Bas, eller ett och ett också inom tjugo, börjar hen i Antalsuppfattning i grupp. Sedan visar och förklarar eleven de sex uppgifterna i listan Visa och förklara och skriver uppgiften på sin tavla, och du skriver vad eleven gör och säger i protokollet. Gruppens nivå är den där eleverna räknar en del rätt men inte kan förklara växlingen. Kan eleven växla men inte förklara gånger och delat, väljer du nivån efter de fyra sista uppgifterna på bladet, multiplikationen och divisionen. Efter kursen räknar eleven samma blad och visar samma uppgifter som före.
+            - rubrik: Lyssna efter
+              text: "Säger eleven ental och tiotal?\nSer eleven att talen ligger två från 300, så att 302 − 298 = 2 + 2, eller räknar hen ett och ett?\nVet eleven vad den lilla ettan är, och hur många tiotal som är kvar efter växlingen?\nMärker eleven ett orimligt svar?\nKänner eleven igen multiplikation och division i en händelse, och ser hen två divisioner i samma rektangel?"
+      listor:
+        - rubrik: Före och efter · Bas · Räkna i rutnätet
+          rakneblad: { rutor: [8, 4], rutaCm: 0.8 }
+          rader:
+            - - 58 + 26
+            - - 167 + 58
+            - - 73 − 28
+            - - 300 − 64
+            - - 4 · 7
+            - - 3 · 15
+            - - 18/3
+            - - 17/4
+        - rubrik: Före och efter · Medel · Räkna i rutnätet
+          rakneblad: { rutor: [8, 4], rutaCm: 0.8 }
+          rader:
+            - - 167 + 58
+            - - 478 + 365
+            - - 300 − 64
+            - - 524 − 287
+            - - 3 · 29
+            - - 6 · 38
+            - - 84/6
+            - - 93/4
+        - rubrik: Före och efter · Avancerad · Räkna i rutnätet
+          rakneblad: { rutor: [8, 4], rutaCm: 0.8 }
+          rader:
+            - - 18 + 4,75
+            - - 3 586 + 2 745
+            - - 524 − 287
+            - - 4 002 − 1 685
+            - - 6 · 238
+            - - 14 · 23
+            - - 645/5
+            - - 832/4
+        - rubrik: Visa och förklara · Uppgifterna
+          larare: true
+          kolumner:
+            - Uppgiften
+          rader:
+            - - Addition. Bygg 49 + 35 med tiobas. Vad är den lilla ettan?
+            - - Subtraktion. Bygg 72 − 35. Hur många tiotal är kvar när du har växlat?
+            - - Multiplikation. Bygg 3 · 6 med multilink. Berätta vad 3 · 6 kan vara. Vilka två divisioner ser du?
+            - - Division. Du har 15 kakor och lägger 4 på varje fat. Hur många fat blir fulla, och hur många kakor blir över? Visa med kuber och skriv divisionen.
+            - - Välj sätt. Räkna 302 − 298 som du vill. Varför valde du så?
+            - - Rimlighet. En elev skrev 35 + 28 = 513. Kan det stämma? Hur vet du?
+    # ---------------------------------------------------------------- Kartläggningens protokoll
+    - rubrik: "Kartläggning: lärarens protokoll"
+      text:
+        - Skriv vad eleven gör och säger vid varje uppgift. Skriv R för rätt svar och R+ när eleven också förklarar. Uppgifterna står i listan Visa och förklara.
+      delar:
+        - rubrik: Före kursen
+          falt:
+            - rubrik: Namn och datum
+            - rubrik: Addition
+            - rubrik: Subtraktion
+            - rubrik: Multiplikation
+            - rubrik: Division
+            - rubrik: Välj sätt
+            - rubrik: Rimlighet
+            - rubrik: Nivå och antal rätt på bladet
+        - rubrik: Efter kursen
+          falt:
+            - rubrik: Namn och datum
+            - rubrik: Addition
+            - rubrik: Subtraktion
+            - rubrik: Multiplikation
+            - rubrik: Division
+            - rubrik: Välj sätt
+            - rubrik: Rimlighet
+            - rubrik: Nivå och antal rätt på bladet
+    # ---------------------------------------------------------------- Övningsbladen
+    - rubrik: "Övningsblad: Addition"
+      text:
+        - På blad 1 hoppar eleven på talraden, och på blad 2–5 ställer eleven upp, med allt svårare tal. Tabellen Talen och bladen i veckorna säger vilket blad gruppen tar.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Bladen
+              text: Blad 1 har hopp på en tom talrad, blad 2 tvåsiffriga tal, blad 3 tresiffriga tal med en och två växlingar, blad 4 svar över tusen och additioner med tre tal, och blad 5 fyrsiffriga tal och decimaltal. Blad 2–5 har uppgifter med och utan växling.
+            - rubrik: Så gör eleven
+              text: Eleven gör ett överslag och räknar på talraden på blad 1 och i rutnätet på blad 2–5, med en siffra per ruta. Sist räknar eleven en av uppgifterna åt andra hållet. Materialet ligger på bordet.
+      listor:
+        - rubrik: Blad 1 · Addition · Hoppa på talraden
+          rakneblad: { talrad: true }
+          rader:
+            - - 38 + 25
+            - - 47 + 36
+            - - 29 + 44
+            - - 56 + 28
+            - - 65 + 17
+            - - 78 + 14
+            - - Välj en uppgift och räkna den åt andra hållet.
+        - rubrik: Blad 2 · Addition · Två siffror
+          rakneblad: { rutor: [8, 4], rutaCm: 0.8 }
+          rader:
+            - - 46 + 38
+            - - 52 + 36
+            - - 65 + 27
+            - - 73 + 18
+            - - 38 + 47
+            - - 61 + 27
+            - - Välj en uppgift och räkna den åt andra hållet.
+        - rubrik: Blad 3 · Addition · Tre siffror
+          rakneblad: { rutor: [8, 4], rutaCm: 0.8 }
+          rader:
+            - - 253 + 74
+            - - 324 + 152
+            - - 68 + 75
+            - - 186 + 257
+            - - 357 + 286
+            - - 148 + 253
+            - - Välj en uppgift och räkna den åt andra hållet.
+        - rubrik: Blad 4 · Addition · Över tusen och tre tal
+          rakneblad: { rutor: [8, 5], rutaCm: 0.8 }
+          rader:
+            - - 748 + 469
+            - - 586 + 657
+            - - 1 204 + 3 572
+            - - 18 + 36 + 29
+            - - 1 524 + 476
+            - - 245 + 367 + 188
+            - - Välj en uppgift och räkna den åt andra hållet.
+        - rubrik: Blad 5 · Addition · Fyra siffror och decimaltal
+          rakneblad: { rutor: [8, 5], rutaCm: 0.8 }
+          rader:
+            - - 2 486 + 1 357
+            - - 4 213 + 2 564
+            - - 1 538 + 976 + 467
+            - - 29 + 6,3
+            - - 4,75 + 2,6
+            - - 12,5 + 7,8
+            - - Välj en uppgift och räkna den åt andra hållet.
+    - rubrik: "Övningsblad: Subtraktion"
+      text:
+        - På blad 1 hoppar eleven bakåt och räknar upp på talraden, och på blad 2–5 ställer eleven upp, med allt svårare tal.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Bladen
+              text: Blad 1 har hopp bakåt och uppräkning på en tom talrad, blad 2 tvåsiffriga tal, blad 3 tresiffriga tal med en och två växlingar, blad 4 växling över nollan och tal som ligger nära varandra, och blad 5 fyrsiffriga tal och decimaltal. Blad 1–3 har var sin jämförelse, som eleven svarar på med en hel mening, och blad 2–5 har uppgifter med och utan växling.
+            - rubrik: Så gör eleven
+              text: När eleven tar bort något bygger hen bara det första talet, och i en jämförelse båda talen. Eleven räknar på talraden på blad 1 och i rutnätet på blad 2–5, och räknar sist en uppgift åt andra hållet, med addition.
+      listor:
+        - rubrik: Blad 1 · Subtraktion · Hoppa och räkna upp
+          rakneblad: { talrad: true }
+          rader:
+            - - 63 − 25
+            - - 83 − 36
+            - - "Ali har 84 kr och Sara 28 kr. Hur mycket mer har Ali?"
+            - - 92 − 14
+            - - 71 − 69
+            - - 62 − 57
+            - - Välj en uppgift och räkna den åt andra hållet.
+        - rubrik: Blad 2 · Subtraktion · Två siffror
+          rakneblad: { rutor: [8, 4], rutaCm: 0.8 }
+          rader:
+            - - 65 − 23
+            - - 84 − 38
+            - - "Ett rep är 92 cm och ett annat 27 cm. Hur mycket längre är det första?"
+            - - 91 − 18
+            - - 83 − 46
+            - - 77 − 35
+            - - Välj en uppgift och räkna den åt andra hållet.
+        - rubrik: Blad 3 · Subtraktion · Tre siffror
+          rakneblad: { rutor: [8, 4], rutaCm: 0.8 }
+          rader:
+            - - 290 − 64
+            - - 327 − 74
+            - - 473 − 128
+            - - 486 − 253
+            - - 136 − 57
+            - - "En skola har 532 elever och en annan 276. Hur många fler går i den första?"
+            - - Välj en uppgift och räkna den åt andra hållet.
+        - rubrik: Blad 4 · Subtraktion · Över nollan
+          rakneblad: { rutor: [8, 4], rutaCm: 0.8 }
+          rader:
+            - - 500 − 83
+            - - 404 − 257
+            - - 503 − 497
+            - - 704 − 258
+            - - 776 − 200
+            - - 1 000 − 713
+            - - Välj en uppgift och räkna den åt andra hållet.
+        - rubrik: Blad 5 · Subtraktion · Fyra siffror och decimaltal
+          rakneblad: { rutor: [8, 4], rutaCm: 0.8 }
+          rader:
+            - - 3 843 − 1 357
+            - - 7 223 − 2 455
+            - - 4 003 − 1 876
+            - - 832 − 295
+            - - 5 − 4,5
+            - - 12,7 − 3,4
+            - - Välj en uppgift och räkna den åt andra hållet.
+    - rubrik: "Övningsblad: Multiplikation"
+      text:
+        - På blad 1 ritar eleven rektanglar, och på blad 2–5 skriver eleven uträkningarna, med allt svårare tal.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Bladen
+              text: Blad 1 har rektanglar att bygga med multilink och rita i rutorna, blad 2 den tomma rektangeln med tiotal och skriftlig huvudräkning, blad 3 kort multiplikation med tvåsiffriga tal, blad 4 tresiffriga tal gånger ensiffriga, och blad 5 tvåsiffriga tal gånger tvåsiffriga i den tomma rektangeln och ett decimaltal.
+            - rubrik: Så gör eleven
+              text: Eleven ritar rektangeln och delar den när hen inte vet produkten, som 7 · 6 = 5 · 6 + 2 · 6. På blad 2–5 ritar eleven en tom rektangel utan rutor när hen behöver stöd, med talen vid sidorna, och rutnätet hjälper eleven att rita och skriva. Sist delar eleven svaret i en uppgift med ett av talen och skriver divisionen.
+      listor:
+        - rubrik: Blad 1 · Multiplikation · Rektanglar
+          rakneblad: { rutor: [7, 7], rutaCm: 0.6, perRad: 3 }
+          rader:
+            - - 3 · 4
+            - - 2 · 6
+            - - 4 · 5
+            - - 3 · 7
+            - - 7 · 6
+            - - 4 · 7
+            - - Välj en uppgift och dela svaret med ett av talen.
+        - rubrik: Blad 2 · Multiplikation · Tom rektangel med tiotal
+          rakneblad: { rutor: [10, 5], rutaCm: 0.7, perRad: 2 }
+          rader:
+            - - 4 · 12
+            - - 2 · 34
+            - - 3 · 26
+            - - 5 · 18
+            - - 4 · 26
+            - - 6 · 15
+            - - Välj en uppgift och dela svaret med ett av talen.
+        - rubrik: Blad 3 · Multiplikation · Kort multiplikation
+          rakneblad: { rutor: [8, 4], rutaCm: 0.8 }
+          rader:
+            - - 2 · 43
+            - - 3 · 27
+            - - 4 · 17
+            - - 6 · 14
+            - - 4 · 32
+            - - 3 · 48
+            - - Välj en uppgift och dela svaret med ett av talen.
+        - rubrik: Blad 4 · Multiplikation · Tre siffror gånger en
+          rakneblad: { rutor: [8, 4], rutaCm: 0.8 }
+          rader:
+            - - 3 · 321
+            - - 3 · 427
+            - - 4 · 201
+            - - 4 · 367
+            - - 6 · 245
+            - - 8 · 347
+            - - Välj en uppgift och dela svaret med ett av talen.
+        - rubrik: Blad 5 · Multiplikation · Två siffror gånger två
+          rakneblad: { rutor: [10, 6], rutaCm: 0.7, perRad: 2 }
+          rader:
+            - - 11 · 12
+            - - 12 · 13
+            - - 18 · 12
+            - - 19 · 26
+            - - 23 · 18
+            - - 1,5 · 4
+            - - Välj en uppgift utan decimaltal och dela svaret med ett av talen.
+    - rubrik: "Övningsblad: Division"
+      text:
+        - På blad 1 bygger och ritar eleven rektanglar och två slags division, och på blad 2–5 skriver eleven uträkningarna, med allt svårare tal.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Bladen
+              text: Blad 1 har division med multilink på båda sätten och två händelser, blad 2 den tomma rektangeln och rest, där eleven ritar resten som kuber bredvid rektangeln, blad 3 kort division med tvåsiffriga tal, blad 4 tresiffriga tal, rest och en nolla sist i kvoten, och blad 5 en nolla mitt i kvoten och fyrsiffriga tal.
+            - rubrik: Så gör eleven
+              text: Eleven ritar rektangeln eller skriver den korta divisionen i rutnätet. Blir något över, skriver eleven ”rest” och hur många, som 17/5 = 3 rest 2, och en nolla i kvoten skriver eleven ut. Sist multiplicerar eleven i en uppgift och lägger till resten, som 5 · 3 + 2 = 17.
+      listor:
+        - rubrik: Blad 1 · Division · Rektanglar och två slags division
+          rakneblad: { rutor: [7, 7], rutaCm: 0.6, perRad: 3 }
+          rader:
+            - - 12 stolar i 3 lika långa rader. Hur många i varje rad?
+            - - 12 stolar, 3 i varje rad. Hur många rader?
+            - - 20 kuber i 4 lika långa rader. Hur många i varje rad?
+            - - 20 kuber, 5 i varje rad. Hur många rader?
+            - - 18 kuber i 6 lika långa rader. Hur många i varje rad?
+            - - 16 kuber, 4 i varje rad. Hur många rader?
+            - - Välj en uppgift och skriv multiplikationen.
+        - rubrik: Blad 2 · Division · Tom rektangel och rest
+          rakneblad: { rutor: [8, 4], rutaCm: 0.8 }
+          rader:
+            - - 72/3
+            - - 84/4
+            - - 96/3
+            - - 56/4
+            - - 17/5
+            - - 19/3
+            - - Välj en uppgift med rest, skriv multiplikationen och lägg till resten.
+        - rubrik: Blad 3 · Division · Kort division
+          rakneblad: { rutor: [8, 4], rutaCm: 0.8 }
+          rader:
+            - - 69/3
+            - - 85/5
+            - - 92/4
+            - - 98/7
+            - - 73/3
+            - - 91/4
+            - - Välj en uppgift med rest, skriv multiplikationen och lägg till resten.
+        - rubrik: Blad 4 · Division · Tre siffror, rest och nolla
+          rakneblad: { rutor: [8, 4], rutaCm: 0.8 }
+          rader:
+            - - 81/4
+            - - 473/3
+            - - 848/4
+            - - 176/4
+            - - 156/6
+            - - 215/5
+            - - Välj en uppgift med rest, skriv multiplikationen och lägg till resten.
+        - rubrik: Blad 5 · Division · Nolla i kvoten
+          rakneblad: { rutor: [8, 4], rutaCm: 0.8 }
+          rader:
+            - - 864/8
+            - - 624/6
+            - - 1 026/9
+            - - 1 245/5
+            - - 2 436/6
+            - - 617/3
+            - - Välj en uppgift med rest, skriv multiplikationen och lägg till resten.
+    # ---------------------------------------------------------------- Mina lärdomar
+    - rubrik: "Mina lärdomar: vecka 1–2"
+      text:
+        - Skriv dagens lärdom med dina egna ord, eller rita den.
+      huvud:
+        - rubrik: Namn
+      delar:
+        - rubrik: Vecka 1
+          falt:
+            - rubrik: Pass 1
+            - rubrik: Pass 2
+            - rubrik: Pass 3
+        - rubrik: Vecka 2
+          falt:
+            - rubrik: Pass 1
+            - rubrik: Pass 2
+            - rubrik: Pass 3
+    - rubrik: "Mina lärdomar: vecka 3–4"
+      text:
+        - Skriv dagens lärdom med dina egna ord, eller rita den.
+      huvud:
+        - rubrik: Namn
+      delar:
+        - rubrik: Vecka 3
+          falt:
+            - rubrik: Pass 1
+            - rubrik: Pass 2
+            - rubrik: Pass 3
+        - rubrik: Vecka 4
+          falt:
+            - rubrik: Pass 1
+            - rubrik: Pass 2
+            - rubrik: Pass 3
+    - rubrik: "Mina lärdomar: vecka 5–6"
+      text:
+        - Skriv dagens lärdom med dina egna ord, eller rita den.
+      huvud:
+        - rubrik: Namn
+      delar:
+        - rubrik: Vecka 5
+          falt:
+            - rubrik: Pass 1
+            - rubrik: Pass 2
+            - rubrik: Pass 3
+        - rubrik: Vecka 6
+          falt:
+            - rubrik: Pass 1
+            - rubrik: Pass 2
+            - rubrik: Pass 3
+    - rubrik: "Mina lärdomar: vecka 7–8"
+      text:
+        - Skriv dagens lärdom med dina egna ord, eller rita den.
+      huvud:
+        - rubrik: Namn
+      delar:
+        - rubrik: Vecka 7
+          falt:
+            - rubrik: Pass 1
+            - rubrik: Pass 2
+            - rubrik: Pass 3
+        - rubrik: Vecka 8
+          falt:
+            - rubrik: Pass 1
+            - rubrik: Pass 2
+            - rubrik: Pass 3
+    # ---------------------------------------------------------------- Läxan
+    - rubrik: "Läxa: Åt båda hållen"
+      text:
+        - Skriv veckans uppgift med svaret. Eleven skriver veckans lärdom, räknar uppgiften åt andra hållet, ritar talen, hittar på en händelse och förklarar för en vuxen. Kopiera bladet dubbelsidigt, så att rutan Till vårdnadshavaren följer med.
+      huvud:
+        - rubrik: Namn
+        - rubrik: Vecka
+      delar:
+        - rubrik: Veckans uppgift åt båda hållen
+          falt:
+            - rubrik: Veckans lärdom
+            - rubrik: Uppgiften
+            - rubrik: Åt andra hållet
+              text: Räkna samma tal åt andra hållet. Lägg till resten, om det finns en.
+            - rubrik: Bilden
+              text: Rita talen som i passet, på en talrad, med streck och prickar eller som en rektangel.
+            - rubrik: Händelsen
+              text: Vad kan talen handla om?
+            - rubrik: Jag visade för
+        - rubrik: Till vårdnadshavaren
+          falt:
+            - rubrik: Varför
+              text: Ditt barn går en kurs i de fyra räknesätten. Varje vecka räknar vi samma tal åt båda hållen, som 57 + 28 = 85 och 85 − 28 = 57, så att barnet ser hur räknesätten hänger ihop.
+            - rubrik: Så gör ni
+              text: Barnet visar och förklarar veckans uppgift åt båda hållen för dig och berättar sin händelse, gärna med saker ni har hemma. Låt barnet berätta, och fråga hellre än att förklara själv. Omkring tio minuter räcker.
+            - rubrik: Säg så här
+              text: Hur tänkte du? Kan du visa det? Stämmer det åt andra hållet också?
+
+diplom:
+  kicker: De fyra räknesätten
+  rubrik: Kursintyg
+  text:
+    - tilldelas
+    - ___
+    - som har gått kursen De fyra räknesätten.
+    - Grattis!
+  underskrifter:
+    - Datum
+    - Lärare
+
+nivaer:
+  - { namn: Bas, farg: "3E8E41" }
+  - { namn: Medel, farg: "F2C94C" }
+  - { namn: Avancerad, farg: "D64541" }
+pabordet:
+  - nr: 0
+    rubrik: "Materialet"
+    text: "Tiobasen, sifferkorten på varandra och isär, och multilink som kuber, tiotorn och rektangel. Under dem räknemattans tre ark, talrutan och en tom talrad, som skrivs ut ur planeringsmallarna."
+    efter: "tabell: Materialet du behöver"
+  - nr: 1
+    rubrik: "Vecka 1 · Hopp på talraden"
+    text: "58 + 27 som hopp. 27 dras isär med sifferkorten till 20 och 7, och tiotalen hoppas först och sedan entalen via 80. Åt andra hållet hoppar 85 − 27 bakåt med samma delar, tiotalen först till 65 och sedan entalen via 60."
+    efter: "del: Vecka 1 · Hopp på talraden"
+  - nr: 2
+    rubrik: "Vecka 2 · Tio ental blir ett tiotal"
+    text: "Räknemattans två ark, för tiotal och ental, efter 85 − 28. 57 är kvar ovanför linjen, och 28 som togs bort ligger under. På tavlan står 57 + 28 med minnessiffran och åt andra hållet 85 − 28 med den strukna åttan och den lilla tian. Sifferkorten visar femton ental som tiokortet och femkortet."
+    efter: "del: Vecka 2 · Tio ental blir ett tiotal"
+  - nr: 3
+    rubrik: "Vecka 3 · Hundratal och två växlingar"
+    text: "386 + 457 ritad med rutor, streck och prickar, 457 under 386. Läraren ringar in tio prickar, som blir ett streck, och tio streck, som blir en ruta, så att det blir 843. Sifferkorten visar 843 på varandra och isär. På tavlan står uppgiften med två minnessiffror och åt andra hållet 843 − 457 med två växlingar."
+    efter: "del: Vecka 3 · Hundratal och två växlingar"
+  - nr: 4
+    rubrik: "Vecka 4 · Över nollan och välj sätt"
+    text: "Räknemattans tre ark efter 600 − 247, med 353 kvar ovanför linjen och 247 under. Sifferkortet visar att 600 är ett enda kort, utan lösa tiotal eller ental att ta från. På tavlan står hundratalet växlat till nio tiotal och tio ental, åt andra hållet 353 + 247 = 600 med två minnessiffror och 701 − 698 räknad uppåt på talraden."
+    efter: "del: Vecka 4 · Över nollan och välj sätt"
+  - nr: 5
+    rubrik: "Vecka 5 · Rektangeln"
+    text: "Fyra rader med sex kuber, isärbrutna i två och två rader, och samma rektangel byggd på två sätt i divisionen. På talrutan är rektangeln ritad från hörnet, med 24 i hörnrutan och de fyra uträkningarna bredvid."
+    efter: "del: Vecka 5 · Rektangeln"
+  - nr: 6
+    rubrik: "Vecka 6 · Rektangeln med tiotal"
+    text: "Tre rader med 24, två tiotorn och fyra lösa kuber i varje rad, och 24 draget isär med sifferkorten till 20 och 4. På tavlan står rektangeln delad vid tiotalet, 3 · 24 = 60 + 12 = 72, och 72/3 = 60/3 + 12/3. Den tomma rektangeln för 72/3 står på en tavla bredvid, där den andra sidan blir 20 + 4."
+    efter: "del: Vecka 6 · Rektangeln med tiotal"
+  - nr: 7
+    rubrik: "Vecka 7 · Kort multiplikation och kort division"
+    text: "Tre rader med 26. Av de arton lösa kuberna blir tio ett tiotorn och åtta är kvar, och minnessiffran står för det nya tiotornet. På tavlan står den korta multiplikationen 3 · 26, delarna i samma ordning som i den korta formen, och den korta divisionen 78/3, där den lilla ettan står för tornet som bröts isär."
+    efter: "del: Vecka 7 · Kort multiplikation och kort division"
+  - nr: 8
+    rubrik: "Vecka 8 · Nollan och resten i textuppgifter"
+    text: "83 kuber i fyra rader med tre kuber över. På tavlan står 83/4 = 20 rest 3 och 4 · 20 + 3 = 83, 176/4 och två textuppgifter med 74/8, där frågan avgör svaret: 10 bussar behövs, men bara 9 glassar."
+    efter: "del: Vecka 8 · Nollan och resten i textuppgifter"
+  - nr: 9
+    rubrik: "Läxan · ett ifyllt blad"
+    text: "Läxbladet Åt båda hållen ifyllt efter vecka 2. Läraren har skrivit 57 + 28 = 85. Eleven har skrivit lärdomen, räknat 85 − 28 = 57, ritat talen med streck och prickar, ringat in tio prickar och ritat ett nytt streck, och skrivit en händelse om kort."
+    efter: "hem"
+elevblad:
+  "Mina lärdomar: vecka 1–2":
+    Pass 1: 2.4
+    Pass 2: 2.4
+    Pass 3: 2.4
+  "Mina lärdomar: vecka 3–4":
+    Pass 1: 2.4
+    Pass 2: 2.4
+    Pass 3: 2.4
+  "Mina lärdomar: vecka 5–6":
+    Pass 1: 2.4
+    Pass 2: 2.4
+    Pass 3: 2.4
+  "Mina lärdomar: vecka 7–8":
+    Pass 1: 2.4
+    Pass 2: 2.4
+    Pass 3: 2.4
+  "Läxa: Åt båda hållen":
+    Veckans lärdom: 2.2
+    Uppgiften: 1.8
+    Åt andra hållet: 1.8
+    Bilden: 5
+    Händelsen: 2.2
+    Jag visade för: 1.2
+
+mallar:
+  - rubrik: Räknemattan
+    text: Ett stående A4 per talsort, en uppsättning per elev. Lägg de ark som talen behöver bredvid varandra, i ordningen hundratal, tiotal och ental. I addition bygger eleven det första talet ovanför linjen och det andra under. I subtraktion bygger eleven bara det första talet, ovanför linjen, och lägger det hen tar bort under linjen. En hundraplatta ryms på varje halva.
+    typ: matta
+    kolumner:
+      - Hundratal · 100
+      - Tiotal · 10
+      - Ental · 1
+    enPerSida: true
+    rader: 2
+  - rubrik: Tomma talrader
+    text: Ni använder talraderna i vecka 1 och 4, och eleven sätter ut talen själv och ritar hoppen som bågar. Skriv ut ett liggande A4 per elev.
+    typ: tallinjer
+    etiketter: false
+    linjer:
+      - { till: 1, delar: 1 }
+      - { till: 1, delar: 1 }
+      - { till: 1, delar: 1 }
+      - { till: 1, delar: 1 }
+      - { till: 1, delar: 1 }
+      - { till: 1, delar: 1 }
+
+  - rubrik: "Talrutan"
+    typ: talruta
+    rutaCm: 0.8
+    underrad: "Rita från övre vänstra hörnet och skriv produkten i hörnrutan · Namn: ________"
+lathund:
+  innehall: Samma tal åt båda hållen
+  metoden:
+    text:
+      - En kurs i åtta veckor för två till tio elever i åk 3–7. Varje pass har samma grund. Du visar först och tänker högt, gruppen gör tillsammans, eleven provar själv och ni samlas kring en lärdom.
+      - Ni räknar samma tal åt båda hållen, som 57 + 28 och 85 − 28. Vecka 1–4 är addition och subtraktion med tiobas och talrad, och vecka 5–8 multiplikation och division med multilink. Ni bygger i pass 1 och ritar och skriver i pass 2, och ett tredje pass befäster. Gör kartläggningen veckan före kursen.
+    ruta:
+      rubrik: Tre saker att hålla fast vid
+      punkter:
+        - fet: Räkna åt båda hållen i varje pass.
+          text: Samma tal, och den andra uträkningen kontrollerar den första.
+        - fet: Bygg innan ni skriver.
+          text: Skriv i samma kolumner som materialet ligger i.
+        - fet: Säg talsorten varje gång.
+          text: Ental, tiotal och hundratal, och samma fras varje gång.
+    tabell:
+      rubrik: Passets fem steg · tider och fraser
+      kolumner:
+        - Steg
+        - Exempelfraser
+      rader:
+        - - "1 · Uppvärmningen\n0–⁠8 min"
+          - "”Läs förra lärdomen. Kan du visa den med materialet?”\n”Sju plus fem. Hur tänkte du?”"
+        - - "2 · Genomgången\n8–⁠18 min"
+          - "”Vad kan talen handla om?”\n”Ungefär hur mycket blir det?”"
+        - - "3 · Åt andra hållet\n18–⁠30 min"
+          - "”Vi räknar åt andra hållet. Vad bygger vi?”\n”Vad vet vi, och vad söker vi?”"
+        - - "4 · Bladet\n30–⁠52 min"
+          - "”Visa med materialet vad du gjorde.”\n”Stämmer det? Räkna åt andra hållet.”"
+        - - "5 · Lärdomen\n52–⁠60 min"
+          - "”Vilka tre tal finns i båda? Vilket är helheten?”\n”Säg det till din kamrat först.”"
+    not: Med fler än sex elever arbetar de i fasta par, och du börjar hos paren som tvekade. Med ett udda antal arbetar tre tillsammans och turas om.
+  pass:
+    rubrik: "Vi kör ett pass: tio ental blir ett tiotal"
+    textRubrik: Gruppen · sex elever, nivån Medel, vecka 2, pass 1
+    text:
+      - Läraren lägger 57 på räknemattans övre rad och 28 på den nedre och skjuter upp entalen och säger ”Femton ental. Fler än nio ental? Växla.” Läraren byter tio ental mot en tiostav, skjuter upp tiotalen och skriver uppställningen bredvid, med en liten etta ovanför tiotalen.
+      - Alla räknar samma tal åt andra hållet, 85 − 28. Sara säger ”Vi bygger bara 85, och 28 står på lappen.” Paren växlar en tiostav och lägger det de tar bort på den nedre raden. Melvin säger ”57 är kvar, och raderna är 85 tillsammans.”
+      - På bladet skriver Melvin 46 + 38 = 714. Läraren frågar ”Vad betyder ettan? Var finns den på mattan?” Melvin bygger om och skriver 84. Alva säger lärdomen, och läraren skriver ”I addition blir tio ental ett tiotal, och i subtraktion blir ett tiotal tio ental.”
+    forberett:
+      rubrik: Det jag förberedde
+      text:
+        - Gjort 57 + 28 och 85 − 28 med tiobas och sagt orden högt. Arken för tiotal och ental, tiobas och en lapp per elev, bladen Addition 2 och Subtraktion 2, och Mina lärdomar.
+    klarTidigt: Veckans andra blad, eller uppgifter ur matematikboken som passar veckans fokus.
+    schema:
+      rubrik: 60 minuter, steg för steg
+      rader:
+        - tid: Före
+          fas: Förberedelse
+          vad: Räkna 57 + 28 och 85 − 28 själv med tiobas. Lägg fram arken för tiotal och ental, tiobas, lappar, tavlor och Addition 2 och Subtraktion 2.
+        - tid: 0–8
+          fas: 1 · Uppvärmningen
+          vad: Förra lärdomen, 52 med sifferkort och tiobas, och talfakta som sju plus fem.
+        - tid: 8–18
+          fas: 2 · Genomgången
+          vad: Du visar 57 + 28 och tänker högt. Visa sist felet 57 + 28 = 715.
+        - tid: 18–30
+          fas: 3 · Åt andra hållet
+          vad: Paren räknar 85 − 28. En bygger och en skriver, och de byter till nästa uppgift med samma tal, som 85 − 57.
+        - tid: 30–52
+          fas: 4 · Bladet
+          vad: Eleven räknar 46 + 38 och vidare på bladet. Du går runt och frågar.
+        - tid: 52–60
+          fas: 5 · Lärdomen
+          vad: 57 + 28 och 85 − 28 bredvid varandra, och 85 är helheten. Elevens mening på väggplanschen och i Mina lärdomar.
+  mall:
+    rubrik: Säg varje gång
+    underrad: "Ett kort per elev · Namn: ______________"
+    block:
+      - typ: tabell
+        rubrik: Säg det högt för dig själv
+        kolumner:
+          - När
+          - Säg
+        rader:
+          - - Talraden
+            - Ligger talen nära i subtraktion? Räkna upp. Annars tiotalen först.
+          - - Addition
+            - Entalen under entalen. Fler än nio ental? Växla.
+          - - Subtraktion
+            - Räcker inte entalen? Växla.
+          - - Multiplikation
+            - Hur många rader? Hur många i varje rad?
+          - - Division
+            - Hur många rader, eller hur många i varje rad? Blir ett tiotal över? Växla.
+      - typ: not
+        text: Räkna åt andra hållet, och i division lägger du till resten. Stämmer det?
+  material:
+    rubrik: Vad du behöver för kursen
+    kravEtikett: Talkrav
+    var:
+      rubrik: Var materialet finns
+      punkter:
+        - fet: Tiobas och sifferkort.
+          text: 20 ental, 15 tiostavar och 6 hundraplattor per elev, och en sats sifferkort eller NCM:s positionskort.
+        - fet: Multilink.
+          text: Kuber på 2 cm som går att sätta ihop, omkring 100 per elev i vecka 5–⁠8.
+        - fet: Bladen och mallarna.
+          text: Övningsbladen, kartläggningen, Mina lärdomar och läxan under Kursens material i metoden, och räknemattan, talrutan och talraderna i planeringsmallarna.
+        - fet: Talen.
+          text: Tabellen Talen och bladen i veckorna i metoden, för gruppens nivå.
+      efter: Räknemattan är tre stående A4, ett per talsort. Kortet på tredje sidan ligger framför eleven.
+    bordet:
+      - Räknemattan, tiobas och sifferkort i vecka 1–4
+      - Multilink och talrutan i vecka 5–8, sifferkort i vecka 6–7
+      - Tomma talrader i vecka 1 och 4, och en lapp för talet som tas bort
+      - En liten tavla, en penna och kortet per elev
+      - Veckans blad
+      - Mina lärdomar i elevens mapp
+film:
+  sekunder: 28.47
+  beskrivning: "57 + 28. Skjut upp entalen. En elev säger: ”Fler än nio ental? Växla!” Tio ental blir ett tiotal. Skriv 5 och minnessiffran 1 ovanför tiotalen. Skjut upp tiotalen: 1 + 5 + 2 = 8. Åt andra hållet: 85 − 28. En elev säger: ”Räcker inte entalen? Växla!” Ett tiotal blir tio ental. Stryk åttan i 85, skriv 7 och en liten tia. Ta bort 8 ental: 15 − 8 = 7. Ta bort 2 tiotal: 7 − 2 = 5. Kvar är 57."
+  rubrik: "Så gör eleven"
+  ingress: "Fyra bilder ur filmen om vecka 2, pass 1. Eleven räknar 57 + 28 på räknemattan och skriver växlingen i uppställningen bredvid. Sedan räknar eleven samma tal åt andra hållet, 85 − 28, och lägger det som tas bort på den nedre raden. Filmen på metodens sida visar samma sak i rörelse."
+  stillbilder:
+    - text: "57 + 28: entalen är skjutna ihop till 15. Växla."
+    - text: "Tio ental blir ett tiotal, ettan ovanför tiotalen: 85."
+    - text: "Åt andra hållet: 85 − 28. Räcker inte entalen? Växla."
+    - text: "Ett tiotal blir tio ental. 57 överst, 28 under linjen."
+filmer:
+  - nr: 2
+    titel: "Åt båda hållen på talraden"
+    sekunder: 29.49
+    beskrivning: "58 + 27. Dra isär 27 med sifferkorten: 20 och 7. Sätt ut 58. Hoppa tiotalen först. Sedan sju: två till 80 och fem till 85. Skriv hoppen som en uträkning. Åt andra hållet: 85 − 27. Långt isär: hoppa bakåt, tiotalen först. Sedan sju: fem till 60 och två till 58. Skriv hoppen som en uträkning."
+    rubrik: "Vecka 1: åt båda hållen på talraden"
+    ingress: "Fyra bilder ur filmen om vecka 1. Eleven drar isär 27 med sifferkorten och räknar 58 + 27 med hopp på en tom talrad, tiotalen först. Sedan räknar eleven åt andra hållet och hoppar bakåt från 85 med samma delar, tiotalen först, eftersom 85 och 27 ligger långt isär. Filmen på metodens sida visar samma sak i rörelse."
+    efter: "tabell: Så visar du de fyra räknesätten"
+    stillbilder:
+      - text: "Dra isär 27: 20 och 7. Först tiotalen, till 78."
+      - text: "58 + 20 = 78 och 78 + 7 = 85."
+      - text: "Långt isär: hoppa bakåt från 85, först 20."
+      - text: "85 − 20 = 65 och 65 − 7 = 58."
+  - nr: 3
+    titel: "Rektangeln med multilink"
+    sekunder: 29.73
+    beskrivning: "Bygg rader med fyra kuber, en hel rad i taget. Tre rader med fyra är en rektangel: 3 · 4 = 12. Åt andra hållet: hur många rader med fyra? Tre, 12/4 = 3. Samma tolv kuber, andra frågan: 12 i tre rader. En kub i varje rad i taget. Fyra i varje rad: 12/3 = 4. Samma rektangel, byggd på två sätt."
+    rubrik: "Vecka 5: rektangeln med multilink"
+    ingress: "Fyra bilder ur filmen om vecka 5. Eleven bygger hela rader med fyra kuber och får en rektangel med sidorna 3 och 4, som visar 3 · 4 = 12 och 12/4 = 3. Sedan delar eleven samma tolv kuber i tre rader, en kub i varje rad i taget, och får fyra i varje rad, 12/3 = 4. Det blir samma rektangel. Filmen på metodens sida visar samma sak i rörelse."
+    efter: "tabell: Så visar du de fyra räknesätten"
+    stillbilder:
+      - text: "Tre rader med fyra är en rektangel: 3 · 4 = 12."
+      - text: "Hur många rader med fyra? Tre: 12/4 = 3."
+      - text: "Dela i tre rader: en kub i varje rad i taget."
+      - text: "Fyra i varje rad: 12/3 = 4. Samma rektangel."

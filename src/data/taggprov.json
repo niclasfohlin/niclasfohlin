@@ -1,6 +1,7 @@
 {
   "_kommentar": "Nya poster vars taggförslag är lästa och avgjorda (Niclas 2026-10-03). npm run validera stoppar en ny artikel, bok eller metod som inte står här: kör node scripts/taggar.mjs --post <fil>, välj två till fem taggar som säger vad posten handlar om och skriv sedan in posten med dagens datum. Reglerna står i scripts/taggar.mjs.",
   "poster": {
-    "src/content/stodundervisning/seriesamtal.yaml": "2026-10-04"
+    "src/content/stodundervisning/seriesamtal.yaml": "2026-10-04",
+    "src/content/stodundervisning/fyra-raknesatten.yaml": "2026-10-04"
   }
 }
