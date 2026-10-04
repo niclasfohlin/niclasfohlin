@@ -583,7 +583,7 @@ urval:
     - rubrik: Eleven vill
       text: Eleven har själv sagt ja till att rita händelsen i gruppen.
     - rubrik: Ingen annan i gruppen är inblandad
-      text: Är två i gruppen med i händelsen, ritar du den med var och en för sig.
+      text: Är två i gruppen med, ritar du med var och en för sig, utom när ni ritar något som ska hända.
 progression:
   text: Du lämnar över ansvaret till eleverna. Först visar du själv hur man hittar tankarna, sedan hittar gruppen dem tillsammans i bildserierna och börjar ställa frågorna till varandra, och till sist ritar eleverna sina egna händelser.
   enhet: Pass
@@ -625,7 +625,6 @@ snabbmall:
     - Dagens serie och vem som äger den
     - Förra planen och spanaruppdragen
     - Vem som är vilken person, och vem som är detektiv
-    - Teknikerna jag övar på
   efter:
     - Vem som sa vad som kunde hända i en bildserie, innan vi visade nästa ruta
     - Vem som kom på en tanke till eller sa vad den andra ville, utan att jag frågade
@@ -1095,7 +1094,7 @@ lathund:
             6 · Med mig
             27–⁠30 min
           - Vad tar du med dig?
-    not: I spanaruppdraget lägger eleven märke till något mellan passen. Lärarens sida för varje bildserie har berättelsen och säger var ni stannar. Pass 1 och ett pass med en egen serie står på sidan 3, och pass 7 och det sista passet står i metoden.
+    not: I spanaruppdraget lägger eleven märke till något mellan passen. Lärarens sida för varje bildserie har berättelsen och säger var ni stannar. Ett pass med en egen serie står på sidan 3, och pass 1, pass 7 och det sista passet står i metoden.
   pass:
     rubrik: "Ett pass med bildserien Chatten"
     textRubrik: Gruppen · tre elever i åk 4, pass 5
@@ -1103,6 +1102,7 @@ lathund:
       - "Ella är Elias, Malik är Amir, och Vera är detektiv. Läraren säger att det går snett, spolar tillbaka till ruta 1 och stannar: ”Vad tänker Elias göra med bilden?” Ella säger: ”Han lägger ut den.”"
       - "Läraren visar en ruta i taget och frågar sedan: ”Ella, du är Elias. Vad ville du?” Ella svarar: ”Jag ville göra Amir ledsen.” Vera pekar på ruta 1: ”De skrattar båda två där.” Ella skriver Elias tanke på en bubbla: ”Alla ska skratta!” Malik skriver Amirs: ”Alla skrattar åt mig.”"
       - "Läraren frågar: ”I vilken ruta hade Elias behövt tänka och göra annorlunda?” Ella pekar på ruta 1 och ritar en ny där Elias frågar: ”Får jag lägga ut den?”"
+      - Har du en elev, tar du själv den andra personen, och ni spelar upp elevens ruta.
     forberett:
       rubrik: Det jag förberedde
       text:
