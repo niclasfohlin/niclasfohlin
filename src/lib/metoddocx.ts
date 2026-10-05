@@ -2470,20 +2470,34 @@ const nivaSkylt = (niva: Niva) => [
 // en egen sida, med nivåns skylt och rubriken överst, en namnrad och en ruta per uppgift: uttrycket i elevens typsnitt,
 // en division staplad som ett bråk, och under det ett rutnät att räkna i, en siffra per ruta, eller en tom talrad med en
 // pil. En rad utan siffror är bladets uppmaning och blir en bred ruta sist, med ett rutnät som är 16 rutor brett.
+//
+// Rutnätet är en svg-bild i exakt storlek med reservbild för Google (svgRun), som i metodriggens build-docx.js (rutnatSvg,
+// 2026-10-05). Med en tabellcell per ruta hade Word-filen med hela De fyra räknesätten 7 454 celler, och Word i telefonen
+// ritade räknebladen "segt" (Niclas 2026-10-05). Samma rutnät står en gång i filen hur många blad det än står på, och en
+// bild behåller sin storlek i Google Dokument, där en tabellrad med satt höjd bara är en minsta höjd. Med tjock blir var
+// tionde linje och ytterkanten grövre, så att tiotalen syns (talrutan). Varje linje ligger helt inne i bilden. Linjerna
+// ritas utan kantutjämning (crispEdges): talrutans reservbild förstoras 1,57 gånger, och kantutjämnade linjer blev där
+// omväxlande grå och ljusblå.
 const RUTNATSKANT = 'A9C8E8';
-function rutnatTabell(kol: number, rader: number, rutaTw: number): Table {
-  const k: IBorderOptions = { style: BorderStyle.SINGLE, size: 4, color: RUTNATSKANT };
-  return new Table({
-    width: { size: kol * rutaTw, type: WidthType.DXA }, columnWidths: Array(kol).fill(rutaTw), layout: TableLayoutType.FIXED,
-    rows: Array.from({ length: rader }, () => new TableRow({ cantSplit: true, height: { value: rutaTw, rule: HeightRule.EXACT },
-      children: Array.from({ length: kol }, () => new TableCell({ width: { size: rutaTw, type: WidthType.DXA }, borders: runt(k), margins: { top: 0, bottom: 0, left: 0, right: 0 },
-        children: [new Paragraph({ spacing: { before: 0, after: 0, line: 200 } })] })) })),
-  });
+const rutnatSvg = (kol: number, rader: number, rutaPx: number, tjock = 0) => {
+  const W = kol * rutaPx, H = rader * rutaPx;
+  const lage = (v: number, max: number, bredd: number) => Math.min(max - bredd / 2, Math.max(bredd / 2, v)).toFixed(2);
+  const linjer = (med: (i: number, sista: number) => boolean, farg: string, bredd: number) => [
+    ...Array.from({ length: kol + 1 }, (_, i) => i).filter((i) => med(i, kol)).map((i) => `<line x1="${lage(i * rutaPx, W, bredd)}" y1="0" x2="${lage(i * rutaPx, W, bredd)}" y2="${H}" stroke="#${farg}" stroke-width="${bredd}"/>`),
+    ...Array.from({ length: rader + 1 }, (_, j) => j).filter((j) => med(j, rader)).map((j) => `<line x1="0" y1="${lage(j * rutaPx, H, bredd)}" x2="${W}" y2="${lage(j * rutaPx, H, bredd)}" stroke="#${farg}" stroke-width="${bredd}"/>`),
+  ].join('');
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" shape-rendering="crispEdges">${linjer(() => true, RUTNATSKANT, 0.75)}${tjock ? linjer((i, sista) => i % tjock === 0 || i === sista, '5B86B8', 2.3) : ''}</svg>`;
+};
+// Räknebladens och talrutans bilder har id från 90000, långt från de andra bildernas (3000, 6000 …), tills räknarna blir en
+// per dokument (K-212).
+let raknebildNr = 0;
+function rutnatBild(kol: number, rader: number, rutaTw: number, o: { tjock?: number; mitt?: boolean; namn: string; beskrivning: string }): Paragraph {
+  const rutaPx = rutaTw / BILDPUNKT;
+  return new Paragraph({ alignment: o.mitt ? AlignmentType.CENTER : undefined, spacing: { before: 0, after: 0 }, children: [svgRun(new TextEncoder().encode(rutnatSvg(kol, rader, rutaPx, o.tjock)), kol * rutaPx, rader * rutaPx, { name: `${o.namn} ${++raknebildNr}`, description: o.beskrivning, id: String(90000 + raknebildNr) })] });
 }
 // Den tomma talraden: en linje med en pil, och luft ovanför där eleven ritar hoppen. Höjden i bildpunkter.
 const TALRAD_H = 110;
 const talradSvg = (px: number) => `<svg xmlns="http://www.w3.org/2000/svg" width="${px}" height="${TALRAD_H}" viewBox="0 0 ${px} ${TALRAD_H}"><line x1="6" y1="${TALRAD_H - 16}" x2="${px - 14}" y2="${TALRAD_H - 16}" stroke="#1b1b1b" stroke-width="2.5"/><path d="M${px - 24} ${TALRAD_H - 24}L${px - 10} ${TALRAD_H - 16}L${px - 24} ${TALRAD_H - 8}" fill="none" stroke="#1b1b1b" stroke-width="2.5" stroke-linejoin="round"/></svg>`;
-let talradNr = 0;
 function raknebladBarn(l: { rubrik?: string; rader: string[][]; rakneblad?: Rakneblad }, nivaer: Niva[], bokmarke?: string): Barn[] {
   const r = l.rakneblad!;
   const { niva, rubrik } = listansNiva(nivaer, l.rubrik);
@@ -2499,10 +2513,9 @@ function raknebladBarn(l: { rubrik?: string; rader: string[][]; rakneblad?: Rakn
   const arbete = (w: number, kol: number, rader: number): Barn => {
     if (r.talrad) {
       const pxB = Math.round((w - 400) / 15);
-      // Bildens id ligger långt från de andra bildernas (3000, 6000 …), tills räknarna blir en per dokument (K-212).
-      return new Paragraph({ spacing: { before: 0, after: 0 }, children: [svgRun(new TextEncoder().encode(talradSvg(pxB)), pxB, TALRAD_H, { name: `Talrad ${++talradNr}`, description: 'En tom talrad att rita hoppen på', id: String(90000 + talradNr) })] });
+      return new Paragraph({ spacing: { before: 0, after: 0 }, children: [svgRun(new TextEncoder().encode(talradSvg(pxB)), pxB, TALRAD_H, { name: `Talrad ${++raknebildNr}`, description: 'En tom talrad att rita hoppen på', id: String(90000 + raknebildNr) })] });
     }
-    return rutnatTabell(Math.min(kol, Math.floor((w - 400) / rutaTw)), rader, rutaTw);
+    return rutnatBild(Math.min(kol, Math.floor((w - 400) / rutaTw)), rader, rutaTw, { namn: 'Rutnät', beskrivning: 'Ett rutnät att räkna i, en siffra per ruta' });
   };
   // Uppgiften i elevens typsnitt, med radhöjden som en multipel av typsnittets rad (radHojd), som Google Dokument läser
   // likadant; riggens exakta radavstånd gjorde bladet två sidor i Google. En kort uppgift står större. En division som
@@ -2530,19 +2543,12 @@ function raknebladBarn(l: { rubrik?: string; rader: string[][]; rakneblad?: Rakn
 // Talrutan (mallar med typ talruta, ur metodriggens build-docx.js, B.talruta): ett rutnät över ett liggande A4, rutor på
 // rutaCm och var tionde linje tjockare, så att tiotalen syns när eleven ritar rektangeln från övre vänstra hörnet.
 function talrutaSida(m: Mall): Barn[] {
-  // Måtten ur src/lib/brak.ts (talrutansMatt), som sidan använder.
-  const { ruta, kol, rader } = talrutansMatt(m.rutaCm ?? 0.8, BREDD), tjock = 10;
-  const linje = (tj: boolean): IBorderOptions => ({ style: BorderStyle.SINGLE, size: tj ? 14 : 4, color: tj ? '5B86B8' : RUTNATSKANT });
+  // Måtten ur src/lib/brak.ts (talrutansMatt), som sidan använder. Rutnätet är en bild (rutnatBild), som räknebladens.
+  const { ruta, kol, rader } = talrutansMatt(m.rutaCm ?? 0.8, BREDD);
   return [
     new Paragraph({ children: [run(m.rubrik, { font: HUSETS })], heading: HeadingLevel.HEADING_1, spacing: { before: 0, after: 40 } }),
     ...(m.underrad ? [stycke(m.underrad, { storlek: 22, efter: 160 })] : []),
-    new Table({
-      width: { size: kol * ruta, type: WidthType.DXA }, columnWidths: Array(kol).fill(ruta), layout: TableLayoutType.FIXED, alignment: AlignmentType.CENTER,
-      rows: Array.from({ length: rader }, (_, ri) => new TableRow({ cantSplit: true, height: { value: ruta, rule: HeightRule.EXACT },
-        children: Array.from({ length: kol }, (_, ci) => new TableCell({ width: { size: ruta, type: WidthType.DXA }, margins: { top: 0, bottom: 0, left: 0, right: 0 },
-          borders: { top: linje(ri % tjock === 0), left: linje(ci % tjock === 0), bottom: linje((ri + 1) % tjock === 0 || ri === rader - 1), right: linje((ci + 1) % tjock === 0 || ci === kol - 1) },
-          children: [new Paragraph({ spacing: { before: 0, after: 0, line: 200 } })] })) })),
-    }),
+    rutnatBild(kol, rader, ruta, { tjock: 10, mitt: true, namn: 'Talruta', beskrivning: `${m.rubrik}: ett rutnät med var tionde linje tjockare` }),
   ];
 }
 
