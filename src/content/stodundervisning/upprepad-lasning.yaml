@@ -22,7 +22,7 @@ material:
   - läsrör
   - lappen hem
   - snabbmallen
-uppdaterad: 2026-10-03
+uppdaterad: 2026-10-05
 relaterade:
   - til-i-grupp
   - laslistor-i-grupp
@@ -800,3 +800,16 @@ film:
     - text: "Läraren visar med stöd: säg ljuden utan paus."
     - text: "I kör med stöd, i lärarens tempo: på stranden."
     - text: "Kamraten pekar på strategikortet: spring, springer."
+filmer:
+  - nr: 2
+    titel: "När eleven fastnar på ett ord"
+    sekunder: 27.29
+    beskrivning: "Eleven läser och fastnar på ett långt ord. Eleven säger: ”Vi gräver en …” Fråga och vänta tre sekunder. Du frågar: ”Vad kan du göra?” Du tänker: ”1 2 3”. Ordet kommer inte. Be eleven läsa om meningen. Du säger: ”Läs meningen från början.” Eleven säger: ”Vi gräver en … vall …” Peka på strategikortet. Du frågar: ”Vilken strategi kan hjälpa?” Eleven säger: ”Dela ordet!” Eleven delar ordet och läser om meningen. Eleven säger: ”vall … grav. Vallgrav!” Eleven säger: ”Vi gräver en vallgrav runt slottet.”"
+    rubrik: "När eleven fastnar: stödtrappan"
+    ingress: "Fyra bilder ur filmen om stödtrappan när eleven fastnar på ett ord: du frågar vad eleven kan göra, väntar, ber eleven läsa om meningen och pekar på strategikortet. Eleven löser ordet själv, utan att du visar strategin eller säger ordet. Filmen på metodens sida visar samma sak i rörelse."
+    efter: "fastnar"
+    stillbilder:
+      - text: "Eleven fastnar. Du frågar och väntar tre sekunder."
+      - text: "Du ber eleven läsa om meningen från början."
+      - text: "Du pekar på kortet. Eleven väljer ”Dela ordet”."
+      - text: "Till sist läser eleven ordet och meningen själv."

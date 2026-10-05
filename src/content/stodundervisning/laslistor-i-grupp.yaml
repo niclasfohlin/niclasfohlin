@@ -22,7 +22,7 @@ material:
   - bokstavskort
   - en lättläst bok
   - snabbmallen
-uppdaterad: 2026-10-03
+uppdaterad: 2026-10-05
 relaterade:
   - til-i-grupp
   - upprepad-lasning
@@ -810,3 +810,16 @@ film:
     - text: "Alla körläser i lärarens tempo: stol."
     - text: "I par: en pekar, eleven läser ”sen” där det står sten."
     - text: "Läs om hela ordet från början: sten."
+filmer:
+  - nr: 2
+    titel: "Från listan till boken"
+    sekunder: 27.08
+    beskrivning: "Visa det som flera behövde stöd i. Du säger: ”Lyssna på mötet i början: st-en, sp-ik.” Alla körläser orden efter dig. Alla säger: ”sten, spik”. Du säger: ”Nästa gång tänker vi på mötet i början.” Från vecka 4 läser ni sedan en stund i en riktig bok. Eleverna läser det de kan, och du läser resten. Eleverna säger: ”Hunden”. Du säger: ”gräver.” Prata om innehållet. Du frågar: ”Vad tror ni att hunden letar efter?” Omar hittar ett ord på sidan och läser det direkt. Omar säger: ”sand”."
+    rubrik: "Avslutningen: från listan till boken"
+    ingress: "Fyra bilder ur filmen om avslutningen på ett pass i vecka 5. Du visar konsonantmötet i sten och spik, som flera behövde stöd i, och alla körläser orden. Sedan läser eleverna det de kan i en riktig bok, och du läser resten och frågar om innehållet. Filmen på metodens sida visar samma sak i rörelse."
+    efter: "steg 4"
+    stillbilder:
+      - text: "Du visar mötet i början, och alla körläser."
+      - text: "I boken läser eleverna det de kan: Hunden."
+      - text: "Du läser ordet gräver och frågar om innehållet."
+      - text: "Omar hittar ordet sand på sidan och läser det direkt."

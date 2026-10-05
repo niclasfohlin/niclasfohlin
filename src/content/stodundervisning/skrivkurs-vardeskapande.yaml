@@ -23,7 +23,7 @@ material:
   - veckans mentortext
   - pennor och skrivbok
   - diplom
-uppdaterad: 2026-10-03
+uppdaterad: 2026-10-05
 relaterade:
   - skrivkurs-berattelseram
 utkast: false
@@ -847,3 +847,16 @@ film:
     - text: "Gruppen ger draget ett namn: säg allt utom namnet."
     - text: "Skriv din egen ledtråd till åk 2, med draget."
     - text: "Läs för en kamrat, som gissar: matsalen!"
+filmer:
+  - nr: 2
+    titel: "När du skriver på tavlan"
+    sekunder: 27.82
+    beskrivning: "Skriv ”Här är det tyst” och tänk högt. Du säger: ”Nej, det kan vara många ställen. Jag stryker.” Skriv i stället ”Här får du låna men aldrig köpa”. En elev föreslår en mening, och du skriver den. Omar säger: ”Här finns tusen böcker.” Ordet böcker avslöjar för mycket. Du säger: ”Säger vi böcker gissar de direkt. Hur säger vi det utan ordet?” Omar säger: ”Här sitter du och läser i timmar.”"
+    rubrik: "När du skriver på tavlan: pröva, stryk och ändra"
+    ingress: "Fyra bilder ur filmen om steget Läraren skriver, dag 1: du skriver en ledtråd på tavlan, tänker högt om draget och stryker det som är för vagt. En elev föreslår en mening där ett ord avslöjar platsen, och du frågar hur ni kan säga det utan ordet. Filmen på metodens sida visar samma sak i rörelse."
+    efter: "steg 4"
+    stillbilder:
+      - text: "Du skriver på tavlan och tänker högt."
+      - text: "Meningen är för vag, så du stryker och skriver om."
+      - text: "En elev föreslår: ”Här finns tusen böcker.”"
+      - text: "Utan ordet böcker: ”Här sitter du och läser i timmar.”"

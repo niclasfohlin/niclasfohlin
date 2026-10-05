@@ -24,7 +24,7 @@ material:
   - dagens mentortext
   - skylt och diplom
   - häftapparat
-uppdaterad: 2026-10-03
+uppdaterad: 2026-10-05
 relaterade:
   - skrivkurs-vardeskapande
   - skrivkurs-sagoboken
@@ -614,7 +614,7 @@ lathund:
     text:
       - Läraren pekar på del 3 i ramen. ”I dag går era huvudpersoner in i skogen. Hur den är annorlunda bestämmer ni.” Leo läser meningen där hans huvudperson hittar dörren i berget.
       - "Mentortexten läses högt: ”Det första jag märkte var tystnaden.” Läraren stannar: ”Hon börjar med ett öra, inte med ögonen.” På tavlan: se, höra, känna, lukta. Läraren skriver egna meningar och ändrar sig högt. Gruppen fyller spalten: silverlöv, ljus utan sol."
-      - "Eleverna berättar i par. Elias sitter tyst tills Nora frågar: ”Vad hör din huvudperson först?” Ett tickande, som en klocka. ”Skriv den meningen först.” Adam ändrar ”konstig mark” till ”marken gungade som en säng”."
+      - "Eleverna berättar i par. Elias sitter tyst tills Nora frågar: ”Vad hör din huvudperson först?” Ett tickande, som en klocka. ”Skriv den meningen först.” Adam ändrar ”marken var konstig” till ”marken gungade som en säng”."
       - "Tre elever läser upp en mening med ett sinne. Alla ändrar en sak. Notering: Elias berättar för läraren innan han skriver, Adams mening blir mentortext nästa pass."
     forberett:
       rubrik: Det jag förberedde
@@ -721,3 +721,16 @@ film:
     - text: "Skrivfokus: mentortexten och sinnena på tavlan."
     - text: "Berätta din del för en kamrat innan du skriver."
     - text: "Skriv din del, och börja med det du berättade."
+filmer:
+  - nr: 2
+    titel: "När du läser över axeln"
+    sekunder: 27.37
+    beskrivning: "Läs över axeln: ”Jag hörde ett brus långt bort.” Peka där eleven redan har använt skrivfokuset. Du säger: ”Här använder du örat. Det är dagens skrivfokus.” Fråga där en detalj saknas, och skriv inte åt eleven. Du säger: ”Du skriver att marken var konstig. Vad kände fötterna?” Eleven ändrar själv till ”marken gungade som en säng”. Eleven får läsa meningen för gruppen sist i passet. Du säger: ”Läs den meningen för oss sen.”"
+    rubrik: "Skrivtiden: när du läser över axeln"
+    ingress: "Fyra bilder ur filmen om skrivtiden: du pekar där Adam redan har använt skrivfokuset och frågar där en detalj saknas. Adam ändrar själv och får läsa meningen för gruppen sist i passet. Filmen på metodens sida visar samma sak i rörelse."
+    efter: "steg 4"
+    stillbilder:
+      - text: "Du pekar där Adam redan har använt skrivfokuset."
+      - text: "Du frågar där en detalj saknas utan att skriva åt Adam."
+      - text: "Adam ändrar själv till ”marken gungade som en säng”."
+      - text: "Adam får läsa meningen för gruppen sist i passet."
