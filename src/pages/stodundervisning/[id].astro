@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Taggar from '../../components/Taggar.astro';
 import Metod from '../../components/Metod.astro';
+import EjBryt from '../../components/EjBryt.astro';
 import Nedladdning from '../../components/Nedladdning.astro';
 import Seriemeny from '../../components/Seriemeny.astro';
 import Seriefot from '../../components/Seriefot.astro';
@@ -43,6 +44,8 @@ const materialLank = d.ramar ? '#ramar' : harLathund(d) ? `/stodundervisning/${m
 
 <Base title={d.titel} description={d.ingress} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
   <article class="metod" data-serie-adress={lektion && serie ? `/stodundervisning/${serie.id}` : undefined} data-serie-titel={lektion && serie ? serie.titel : undefined}>
+    {/* Ett spann som "1–4" bryts aldrig efter tankstrecket, i hela metoden (EjBryt.astro, K-227). */}
+    <EjBryt>
     {koppling && <Seriemeny koppling={koppling} />}
     <div class="metod-topp">
       <header class="metod-huvud">
@@ -92,6 +95,7 @@ const materialLank = d.ramar ? '#ramar' : harLathund(d) ? `/stodundervisning/${m
       )}
       <p class="upphov">{UPPHOV}. Metoden får användas i undervisning. Ange {SAJT} som källa när den sprids vidare. {adress}</p>
     </footer>
+    </EjBryt>
     {delningPa && <Delning sida={`/stodundervisning/${m.id}`} titel={d.titel} />}
     {kommentarerPa && <Kommentarer sida={`/stodundervisning/${m.id}`} titel={d.titel} />}
   </article>

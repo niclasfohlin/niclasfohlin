@@ -1,0 +1,18 @@
+---
+// Ett spann som "uppgift 1–4", "30–40 min" eller "åk 4–6" får aldrig brytas så att siffran hamnar först på nästa rad:
+// "1–" sist på en rad läses fel (ejBryt i src/lib/metod.ts). Metodsidan skriver ut text på ett tjugotal ställen, och
+// regeln satt bara på rubriker, tabellrader och ingressen, så på telefonen bröts "1–4" i kartläggningens ruta i De fyra
+// räknesätten (K-227, 2026-10-05; 495 spann i metodernas filer saknade ordfog). Därför går sidans innehåll genom regeln
+// här, på ett ställe: innehållet ritas till html, och ordfogen (U+2060) sätts efter tankstrecket i texten mellan
+// taggarna, aldrig i en tagg, ett attribut, ett skript eller en stil. Utskriften är samma sida och får den också.
+// Word-filen har ingen nytta av tecknet (K-169), och scripts/paritet.mjs räknar bara bokstäver och siffror.
+import { ejBryt } from '../lib/metod';
+
+const html = await Astro.slots.render('default');
+const ut = html
+  .split(/(<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<[^>]+>)/)
+  .map((del, i) => (i % 2 === 1 ? del : ejBryt(del)))
+  .join('');
+---
+
+<Fragment set:html={ut} />
