@@ -220,7 +220,7 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
         const { metoder } = (await svar.json()) as { metoder: { id: string; data: unknown; bildserier?: Record<string, number> }[] };
         const poster = ids.map((id) => metoder.find((m) => m.id === id)).filter((m): m is { id: string; data: unknown; bildserier?: Record<string, number> } => Boolean(m));
         if (poster.length !== ids.length) throw new Error('En vald metod saknas i metoder.json. Sidan och datan kommer från olika byggen.');
-        const [{ metodDokument }, { Packer }, ljud, reserv, ramform, saga, bildserier] = await Promise.all([import('../../lib/metoddocx'), import('docx'), import('../../lib/ljudkort'), import('../../lib/reservbild'), import('../../lib/ramform'), import('../../lib/sagoblad'), import('../../lib/bildserier')]);
+        const [{ metodDokument }, { packaWord }, ljud, reserv, ramform, saga, bildserier] = await Promise.all([import('../../lib/metoddocx'), import('../../lib/wordpaket'), import('../../lib/ljudkort'), import('../../lib/reservbild'), import('../../lib/ramform'), import('../../lib/sagoblad'), import('../../lib/bildserier')]);
         // Ljudlekens kort har bilder och elevens typsnitt (src/lib/ljudkort.ts): de hämtas innan filen byggs, som bygget
         // läser dem från disken.
         const valda = poster as Parameters<typeof metodDokument>[0];
@@ -238,7 +238,8 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
         metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt, boktypsnitt, png: behovet.png } });
         const png = new Map(await Promise.all([...behovet.behov.keys()].map(async (n) => [n, await hamta(reserv.reservAdress(n))] as const)));
         const dokument = metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt, boktypsnitt, png: (svg, bredd, hojd) => png.get(reserv.reservNyckel(svg, bredd, hojd)) } });
-        const blob = await Packer.toBlob(dokument);
+        // Packad som vid bygget, med likadana sidhuvuden och sidfötter delade (src/lib/wordpaket.ts, K-151).
+        const blob = await packaWord(dokument, 'blob');
         const filnamn = poster.length === 1 ? `${poster[0].id}${medMallarVal ? '' : '-beskrivning'}.docx` : `metoder-niclasfohlin-se${medMallarVal ? '' : '-beskrivningar'}.docx`;
         if (mal === 'drive' && drive) {
           window.clearTimeout(statusTimer);

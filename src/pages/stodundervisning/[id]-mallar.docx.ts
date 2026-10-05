@@ -1,5 +1,5 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
-import { Packer } from 'docx';
+import { packaWord } from '../../lib/wordpaket';
 import { publicerade } from '../../lib/innehall';
 import { mallDokument, DOCX_TYP } from '../../lib/metoddocx';
 import { lasResurser, medReservbilder } from '../../lib/metodresurser';
@@ -13,6 +13,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const GET: APIRoute = async ({ props }) => {
   const resurser = lasResurser([props.m]);
-  const buffert = await Packer.toBuffer(await medReservbilder((png) => mallDokument(props.m, { bas: site.url, resurser: { ...resurser, png } })));
+  const buffert = await packaWord(await medReservbilder((png) => mallDokument(props.m, { bas: site.url, resurser: { ...resurser, png } })), 'nodebuffer');
   return new Response(new Uint8Array(buffert), { headers: { 'Content-Type': DOCX_TYP } });
 };

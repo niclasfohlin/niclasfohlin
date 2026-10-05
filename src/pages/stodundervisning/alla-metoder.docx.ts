@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { Packer } from 'docx';
+import { packaWord } from '../../lib/wordpaket';
 import { metoderSorterade } from '../../lib/innehall';
 import { metodDokument, DOCX_TYP } from '../../lib/metoddocx';
 import { byggSerier, iSerieordning, serieKoppling } from '../../lib/serie';
@@ -14,6 +14,6 @@ export const GET: APIRoute = async () => {
   const serier = byggSerier(metoder);
   const poster = iSerieordning(metoder, serier).map((m) => ({ ...m, serie: serieKoppling(m.id, m.data, serier) }));
   const resurser = lasResurser(poster);
-  const buffert = await Packer.toBuffer(await medReservbilder((png) => metodDokument(poster, { bas: site.url, medMallar: true, resurser: { ...resurser, png } })));
+  const buffert = await packaWord(await medReservbilder((png) => metodDokument(poster, { bas: site.url, medMallar: true, resurser: { ...resurser, png } })), 'nodebuffer');
   return new Response(new Uint8Array(buffert), { headers: { 'Content-Type': DOCX_TYP } });
 };
