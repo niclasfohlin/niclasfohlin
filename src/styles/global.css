@@ -1441,7 +1441,9 @@ html.js .bara-js { display: inline-block; }
      boksidan som --bok-pt, --bok-rad och --bok-anfang), och raden Till läraren under ramen. Ramen får aldrig klippa:
      blir texten längre än sidan växer ramen, och metodprov.mjs stoppar på det (en text per sida, Niclas 2026-10-01). */
   .boksida { page: boksida; break-before: page; break-after: page; break-inside: avoid; max-width: none; margin: 0; }
-  .boksida-ram { min-height: 263mm; padding: 0 16.5mm; border-width: 4.5px; }
+  /* 256 mm, inte Words 263: foten under ramen (Om texten, upp till tre rader i Ordverkstad i grupp) ska rymmas på
+     samma sida, annars står nivåns märke ensamt på nästa (granskningen 2026-10-06). */
+  .boksida-ram { min-height: 256mm; padding: 0 16.5mm; border-width: 4.5px; }
   .boksida-titel { font-size: 27pt; line-height: 1.348; margin: 10pt 0 0; }
   .boksida-titel::after { width: 35mm; margin: 3pt auto 15pt; }
   .boksida-text, .boksida-fragor, .boksida.korta .boksida-text, .boksida.korta .boksida-fragor { font-size: var(--bok-pt); line-height: var(--bok-rad); }
@@ -1458,7 +1460,12 @@ html.js .bara-js { display: inline-block; }
   .m-lararsida .m-ramfalt dt, .m-lararsida .m-ramfalt dd { padding: 3pt 6pt; }
   .boksida-text::after { width: 16mm; margin: 5pt auto 15pt; }
   .boksida-fragor li { grid-template-columns: 24pt 1fr; margin: 0 0 5.5pt; }
-  .boksida-fot { font-size: 7.5pt; margin-top: 1.5mm; }
+  .boksida-fot { font-size: 7pt; line-height: 1.15; margin-top: 1mm; }
+  /* En kort lista (högst tio rader) och en ensam ruta Till läraren delas inte över sidor (granskningen 2026-10-06). */
+  .m-lista:has(tbody tr:nth-child(-n+10):last-child) { break-inside: avoid; }
+  .m-ramdelar > .m-ramdel:last-of-type:not(:first-of-type) { break-before: avoid-page; page-break-before: avoid; }
+  /* Raden om att diplomet finns i planeringsmallarna är till skärmen; i utskriften står diplomet självt. */
+  .m-diplom + .m-efter { display: none; }
   .boksida-knapp { font-size: 8pt; }
   .m-ram:has(.m-vikkort), .m-ram:has(.m-bokstavskort), .m-ram:has(.m-bokstavskarta) { break-before: auto; break-inside: auto !important; }
   .m-vikkort .m-lista-rubrik, .m-bokstavskort .m-lista-rubrik, .m-bokstavskarta .m-lista-rubrik { font-size: 8pt; margin: 0 0 1mm; }
@@ -1513,4 +1520,11 @@ html.js .bara-js { display: inline-block; }
   .bok-omslag-stor { max-width: 9rem; }
   .metod-topp .faktaruta dl { grid-template-columns: max-content 1fr; gap: 0.3rem 0.8rem; font-size: 0.9rem; }
   .cv th { width: 5rem; white-space: normal; }
+}
+
+/* En elevlista med tre eller fler kolumner på telefonen (kortet Ett långt ord i Ordverkstad i grupp): orden bryts inom
+   kolumnen och texten är mindre, så att "förstavelsen" inte går in i kolumnen bredvid (granskningen 2026-10-06). */
+@media (max-width: 40rem) {
+  .m-lista td { overflow-wrap: anywhere; }
+  .m-lista.elev:has(tr > td:nth-child(3)) td { font-size: 1.05rem; padding: 0.4rem 0.45rem; }
 }

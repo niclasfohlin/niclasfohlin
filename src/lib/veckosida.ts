@@ -28,5 +28,7 @@ export function veckanRyms(falt: { rubrik: string; text: string }[], kartrad: st
   let block = 0;
   if (kartrad) block += KARTRADEN + Math.max(...kartrad.map((c) => rader(c, KARTCELL_PER_RAD))) * 3.5;
   if (bildtext) block += rader(`På bordet. ${bildtext}`, BILDTEXT_PER_RAD) * 4.2;
-  return SATS - text - 3 - block >= MINSTA_BILD;
+  // Utan bild På bordet (Ordverkstad i grupp) behöver bara raden ur kartan rymmas; annars stod raden ensam på en egen
+  // sida efter varje vecka (granskningen 2026-10-06, P1).
+  return SATS - text - 3 - block >= (bildtext ? MINSTA_BILD : 0);
 }

@@ -21,7 +21,7 @@ import { iDel, metodensPaBordet, PABORDET_MATT, paBordetVid, type PaBordet } fro
 import { listansNiva, skyltText, type Niva } from './nivaer';
 import { bladDelar, bladNamn, delensRad, forstaLed, kartan, metodensBlad, radensDel, wordId } from './karta';
 import * as SAGA from './sagoform.js';
-import { arTarning, harBoktypsnitt, SAGO_UPPHOV, sagobladAv, tarningAv, type Sagoblad, type Sagofalt, type Station, type Tarning } from './sagoblad';
+import { arTarning, harBoktypsnitt, SAGO_UPPHOV, sagoBilder, sagobladAv, tarningAv, type Sagoblad, type Sagofalt, type Station, type Tarning } from './sagoblad';
 import WORDSKALOR from '../data/lathund-word.json';
 import TECKENBREDD from '../data/teckenbredd.json';
 import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, RAMHOJD, TITEL_PT, boksidansMatt } from './boksida';
@@ -1130,7 +1130,8 @@ function sagoLarartext(ramar: Ram[], d: MetodData, rubrik: (text: string) => Bar
     const [blad] = sagobladAv(r, d);
     if (blad.not) ut.push(stycke(blad.not, { farg: FARG.svag, storlek: 20, efter: 100 }));
   }
-  ut.push(stycke(SAGO_UPPHOV, { farg: FARG.svag, storlek: 18 }));
+  // Upphovet bara när bladen har bildbankens bilder (tidningens sida i Ordverkstad i grupp har inga; granskningen 2026-10-06).
+  if (sagoBilder(d).length) ut.push(stycke(SAGO_UPPHOV, { farg: FARG.svag, storlek: 18 }));
   return ut;
 }
 // En följd av ramar med sagoform från ramen i.
@@ -2040,7 +2041,7 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
   if (d.checklista) {
     // En checklista som görs en gång (inför kursen i Skrivkurs: sagoboken, inför samtal 1 i Kompissamtal) har inget
     // passnummer, och tillfället står i rubriken efter inför (läsbarhetsgranskningen av Kompissamtal 2026-10-03).
-    const tillfalle = d.checklista.rubrik.match(/inför (.+)$/i)?.[1]?.trim();
+    const tillfalle = d.checklista.rubrik.match(/(?:inför|före) (.+)$/i)?.[1]?.trim();
     const enGang = tillfalle && !/^(passet|varje pass|ett pass)$/i.test(tillfalle) ? tillfalle : undefined;
     sidor.push([
       ...under(d.checklista.rubrik),

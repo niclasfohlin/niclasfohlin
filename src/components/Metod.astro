@@ -24,7 +24,7 @@ import type { SerieKoppling } from '../lib/serie';
 import type { MetodData } from '../lib/metod';
 import { ejBryt, ramArTom, passGrupper, passOrd, passOversikt, stegTexter, laskortKolumn, arEttKort } from '../lib/metod';
 import { kortInfo } from '../lib/brak';
-import { arTarning, harSagoform, SAGO_UPPHOV } from '../lib/sagoblad';
+import { arTarning, SAGO_UPPHOV, sagoBilder } from '../lib/sagoblad';
 import { arkAdress, arSerieMall, mallEtiketter, mallRutor as mallRutorAdresser, rutansText, serieRutor as serieRutorAdresser, svgMatt } from '../lib/bildserier';
 import { serieantal, serieFiler } from '../lib/bildserier-bygge';
 import { metodensPaBordet, paBordetVid } from '../lib/pabordet';
@@ -50,7 +50,7 @@ const bank = koppling && !koppling.lektion ? koppling.serie : undefined;
 // materialet, och en rad till läraren om typsnittet, som hen kan använda till egna kort.
 const elevtypsnitt = harElevtypsnitt(d);
 // Sagobladen och tärningarna (src/lib/sagoblad.ts) har bildbankens bilder i Word-filerna, så upphovet står här också.
-const bildUpphov = upphovBilder(d) ?? (harSagoform(d) ? SAGO_UPPHOV : undefined);
+const bildUpphov = upphovBilder(d) ?? (sagoBilder(d).length ? SAGO_UPPHOV : undefined);
 // Sagobladen och tärningarna står i sin form bara i planeringsmallarna (Word): sidan säger det vid ramen, och utskriften
 // visar inte tärningarnas ordkort, som inte går att göra en tärning av (granskningen 2026-10-02, P1).
 const sagoNamn = { skyltar: 'Skyltarna', kort: 'Korten' } as Record<string, string>;
@@ -509,7 +509,7 @@ const meny = [
           <h3 id={ramAnkare[ri]}>{hel(ram.rubrik)}</h3>
           {ram.text.map((s) => <p>{s}</p>)}
           {ram.serie && antalRutor[ram.serie] === 1 && <Serierutor rutor={serieBlad(ram)} />}
-          {ram.sagoform && <p class="m-efter">{sagoNamn[ram.sagoform.form] ?? 'Bladet'} att kopiera, i sagobokens form med ramen, bilderna och raderna, finns i <a href={mallarLank} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word). Här står vad {ram.sagoform.form === 'skyltar' || ram.sagoform.form === 'kort' ? 'de' : 'det'} innehåller.</p>}
+          {ram.sagoform && <p class="m-efter">{sagoNamn[ram.sagoform.form] ?? 'Bladet'} att kopiera, med {ram.sagoform.bilder?.length ? 'ramen, bilderna och raderna' : 'ramen och raderna'}, finns i <a href={mallarLank} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word). Här står vad {ram.sagoform.form === 'skyltar' || ram.sagoform.form === 'kort' ? 'de' : 'det'} innehåller.</p>}
           {(ram.listor ?? []).some((l) => arTarning(d, l)) && <p class="m-efter">Tärningarna att klippa, vika och limma, en på varje A4 med bilderna, finns i <a href={mallarLank} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word). Här står orden på sidorna, och de skrivs inte ut.</p>}
           {arElevensBlad(ram) && <p class="m-efter">Bladet att lägga framför eleven, med stor text och bara det eleven läser, finns i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>}
           {ram.oversikt && <MetodTabell kolumner={ram.oversikt.kolumner} rader={ram.oversikt.rader} klass={kortaCeller(ram.oversikt.rader) ? 'fri tat' : friKlass(ram.oversikt)} radrubrik={false} />}
