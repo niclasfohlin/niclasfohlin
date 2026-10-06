@@ -7,7 +7,8 @@ import Brak from './Brak.astro';
 import type { KortInfo } from '../lib/brak';
 interface Props { rubrik?: string; info: KortInfo; nyGrupp?: boolean; brak?: boolean }
 const { rubrik, info, nyGrupp = false, brak = false } = Astro.props;
-const form = info.ett ? 'ett' : info.korta ? 'korta' : 'meningar';
+// medel: ordens delar (högst tio tecken), tre i bredd, som i Word (kortlista i src/lib/metoddocx.ts).
+const form = info.ett ? 'ett' : info.korta ? 'korta' : info.medel ? 'medel' : 'meningar';
 ---
 <div class={`m-lista m-kortlista ${form}${nyGrupp ? ' ny-grupp' : ''}`}>
   {rubrik && <h4 class="m-lista-rubrik">{rubrik}</h4>}

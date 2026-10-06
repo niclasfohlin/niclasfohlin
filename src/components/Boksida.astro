@@ -17,6 +17,19 @@ interface Props {
 }
 const { l, id, ankare, farg } = Astro.props;
 const rader = (t: string) => t.split('\n');
+// Fet och kursiv stil i en rad, som bokRuns i Word: **ord** och *ord* (förlagornas mellanrubriker i Ordverkstad i grupp).
+type Del = { text: string; fet?: boolean; kursiv?: boolean };
+const delar = (r: string): Del[] => {
+  const ut: Del[] = [];
+  let sist = 0;
+  for (const m of r.matchAll(/\*\*[^*]+\*\*|\*[^*]+\*/g)) {
+    if (m.index! > sist) ut.push({ text: r.slice(sist, m.index) });
+    ut.push(m[0].startsWith('**') ? { text: m[0].slice(2, -2), fet: true } : { text: m[0].slice(1, -1), kursiv: true });
+    sist = m.index! + m[0].length;
+  }
+  if (sist < r.length) ut.push({ text: r.slice(sist) });
+  return ut;
+};
 // Måtten är Word-sidans, ur samma uträkning (src/lib/boksida.ts): textens storlek och radavstånd, anfangets storlek,
 // dess kolumn och rad, och vad som står bredvid bokstaven (två rader, som Niclas valde i riggen) och under den. Bredden
 // och höjden står i em av textens storlek, så att utskriften (texten i Words punkter) blir som Word och skärmen samma
@@ -42,16 +55,16 @@ const fraga = (f: string) => f.match(/^(\d+)\.\s*([\s\S]*)$/);
           Bokstaven är dold för skärmläsare och står kvar i ordet, så att ordet läses helt. */}
       <div class="boksida-anfang">
         <span class="boksida-kol" aria-hidden="true"><span class="boksida-bokstav">{matt.bokstav}</span></span>
-        <p><span class="visually-hidden">{matt.bokstav}</span>{rader(matt.delat.inne).map((r, j) => <>{j > 0 && <br />}{r}</>)}</p>
+        <p><span class="visually-hidden">{matt.bokstav}</span>{rader(matt.delat.inne).map((r, j) => <>{j > 0 && <br />}{delar(r).map((x) => (x.fet ? <strong>{x.text}</strong> : x.kursiv ? <em>{x.text}</em> : x.text))}</>)}</p>
       </div>
-      {matt.delat.rest && <p>{rader(matt.delat.rest).map((r, j) => <>{j > 0 && <br />}{r}</>)}</p>}
-      {ovriga.map((s) => <p>{rader(s).map((r, j) => <>{j > 0 && <br />}{r}</>)}</p>)}
+      {matt.delat.rest && <p>{rader(matt.delat.rest).map((r, j) => <>{j > 0 && <br />}{delar(r).map((x) => (x.fet ? <strong>{x.text}</strong> : x.kursiv ? <em>{x.text}</em> : x.text))}</>)}</p>}
+      {ovriga.map((s) => <p>{rader(s).map((r, j) => <>{j > 0 && <br />}{delar(r).map((x) => (x.fet ? <strong>{x.text}</strong> : x.kursiv ? <em>{x.text}</em> : x.text))}</>)}</p>)}
     </div>
     {/* Numret är text, som i Word, där det står före frågan med en tabb, så att en fråga på flera rader står under sin början. */}
     <ol class="boksida-fragor">
       {l.fragor.map((f) => {
         const n = fraga(f);
-        return <li><span class="boksida-nr">{n ? `${n[1]}.` : ''}</span><span>{rader(n ? n[2] : f).map((r, j) => <>{j > 0 && <br />}{r}</>)}</span></li>;
+        return <li><span class="boksida-nr">{n ? `${n[1]}.` : ''}</span><span>{rader(n ? n[2] : f).map((r, j) => <>{j > 0 && <br />}{delar(r).map((x) => (x.fet ? <strong>{x.text}</strong> : x.kursiv ? <em>{x.text}</em> : x.text))}</>)}</span></li>;
       })}
     </ol>
   </div>

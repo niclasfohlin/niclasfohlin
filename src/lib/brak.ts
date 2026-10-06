@@ -75,6 +75,9 @@ export interface KortInfo {
   kopior: number;
   grupp: string;
   korta: boolean;
+  /** Ordens delar (Ordverkstad i grupp, 2026-10-06): kort med högst tio tecken, som borste, äventyr och -lig, står tre i
+   * bredd i mindre text än de korta, så att en vecka ryms på ett A4 och ett kort som damm eller -skap inte bryts. */
+  medel: boolean;
   ett: boolean;
   markning?: (i: number) => string;
 }
@@ -91,6 +94,7 @@ export function kortInfo(d: Pick<MetodData, 'kort'>, lista: { rubrik?: string; r
     kopior,
     grupp,
     korta: kort.every((k) => k.trim().length <= 5),
+    medel: !kort.every((k) => k.trim().length <= 5) && kort.every((k) => k.trim().length <= 10),
     ett: new Set(kort).size === 1,
     // Alla kort i en grupp får gruppen i hörnet, så att klippta satser går att sortera och korten har ett upp och
     // ned (6/8 och 8/9). Meningskorten får också ett nummer. Sajtens tillägg 2026-09-26 till riggens regel, där

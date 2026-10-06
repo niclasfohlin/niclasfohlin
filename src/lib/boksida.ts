@@ -28,6 +28,9 @@ export const TITEL_PT = 27;
 export const BOKLINJER = [230, 210, 190, 170];
 
 // Bredden av en text i Andika eller Cinzel, i punkter.
+// Fet och kursiv stil i texten skrivs som **ord** och *ord* (förlagornas mellanrubriker i Ordverkstad i grupp, 2026-10-06;
+// bokRuns i metoddocx.ts och Boksida.astro ritar dem). Tecknen tar ingen plats på raden.
+export const utanMarkering = (t: string) => t.replace(/\*\*([^*]+)\*\*|\*([^*]+)\*/g, '$1$2');
 export const breddPt = (t: string, pt: number, tabell: Record<string, number> = ANDIKA_BREDD) => [...t].reduce((a, c) => a + (tabell[c] ?? (c === '⁠' ? 0 : 0.56)), 0) * pt;
 // Delar ett stycke där Word bryter rad nummer n i en spalt som är bredd punkter bred: det som står på de n första raderna,
 // och resten. Raderna i stycket (\n) är egna rader.
@@ -41,7 +44,7 @@ export function delaVidRad(text: string, bredd: number, pt: number, n: number): 
     let rad = '';
     for (let i = 0; i < ord.length; i++) {
       const prov = rad ? `${rad} ${ord[i]}` : ord[i];
-      if (rad && breddPt(prov, pt) > bredd) {
+      if (rad && breddPt(utanMarkering(prov), pt) > bredd) {
         klara.push(rad); rader++; rad = ord[i];
         if (rader === n) return { inne: [...inne, klara.join(' ')].join('\n'), rest: [ord.slice(i).join(' '), ...segment.slice(si + 1)].join('\n'), rader };
       } else rad = prov;
@@ -59,7 +62,7 @@ export function antalRader(text: string, bredd: number, pt: number): number {
     let rad = '';
     for (const o of seg.split(' ')) {
       const prov = rad ? `${rad} ${o}` : o;
-      if (rad && breddPt(prov, pt) > bredd) { rader++; rad = o; } else rad = prov;
+      if (rad && breddPt(utanMarkering(prov), pt) > bredd) { rader++; rad = o; } else rad = prov;
     }
     rader++;
   }

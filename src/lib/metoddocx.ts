@@ -611,9 +611,10 @@ function fragelista(l: { rubrik?: string; rader: string[][] }, o: { storlek: num
 // text, och ett ensamt kort (problemet) över hela bredden, i ett eller flera exemplar. Märkningen står litet och grått
 // överst i kortet, så att korten går att sortera när de är klippta. Korten i en lista hålls på samma sida.
 function kortlista(info: KortInfo, brak = true): Table {
-  const perRad = info.ett ? 1 : info.korta ? 4 : 2;
+  // Korten i mellanstorlek (ordens delar, Ordverkstad i grupp) står tre i bredd i 28 pt och 3,2 cm höga, som i riggen.
+  const perRad = info.ett ? 1 : info.korta ? 4 : info.medel ? 3 : 2;
   const w = Math.floor(BREDD / perRad);
-  const hojd = Math.round((info.korta ? 4 : info.ett ? 3.6 : 4.5) * CM);
+  const hojd = Math.round((info.korta ? 4 : info.medel ? 3.2 : info.ett ? 3.6 : 4.5) * CM);
   const streckad: IBorderOptions = { style: BorderStyle.DASHED, size: 6, color: FARG.svag };
   const alla = info.kort.flatMap((k, i) => Array.from({ length: info.kopior }, () => ({ k, i })));
   const rader: TableRow[] = [];
@@ -627,12 +628,12 @@ function kortlista(info: KortInfo, brak = true): Table {
         // Märkningen står överst i hörnet på varje kort i raden, och texten en bit ned (K-039).
         verticalAlign: VerticalAlign.TOP,
         borders: k ? runt(streckad) : runt(INGEN_KANT),
-        margins: { top: 140, bottom: 140, left: 240, right: 240 },
+        margins: { top: 140, bottom: 140, left: info.korta || info.medel ? 120 : 240, right: info.korta || info.medel ? 120 : 240 },
         children: [
           ...(k && info.markning ? [new Paragraph({ keepNext: vidare, spacing: { after: 120, line: 240 }, children: [run(info.markning(k.i), { storlek: 15, farg: FARG.svag })] })] : []),
           ...(k && brak && ensamtBrakI(k.k)
             ? brakStycken(ensamtBrakI(k.k)!.taljare, ensamtBrakI(k.k)!.namnare, 2 * Math.round(((info.korta ? 64 : 28) * SKALA * (info.korta ? 1.25 : 1.45)) / 2), FARG.text, w - 480, { fore: info.korta ? 280 : 200, hallIhop: vidare })
-            : [new Paragraph({ alignment: AlignmentType.CENTER, keepNext: vidare, spacing: { before: info.korta ? 280 : 200, after: 0, line: 300 }, children: k ? (brak && /[0-9]+[/][0-9]+/.test(k.k) ? brakBarn(k.k, { storlek: info.korta ? 64 : 28, farg: FARG.text }, info.korta ? 1.25 : 1.45) : [run(k.k, { storlek: info.korta ? 80 : 28, farg: FARG.text })]) : [] })]),
+            : [new Paragraph({ alignment: AlignmentType.CENTER, keepNext: vidare, spacing: { before: info.korta ? 280 : 200, after: 0, line: 300 }, children: k ? (brak && /[0-9]+[/][0-9]+/.test(k.k) ? brakBarn(k.k, { storlek: info.korta ? 64 : 28, farg: FARG.text }, info.korta ? 1.25 : 1.45) : [run(k.k, { storlek: info.korta ? 80 : info.medel ? 56 : 28, farg: FARG.text })]) : [] })]),
         ],
       });
     }) }));
@@ -1017,19 +1018,25 @@ function sidaInnehall(b: Sagoblad, w: number, hojdMm: number): Barn[] {
   const rutan = b.falt.find((f) => /rita|bild/i.test(f.rubrik));
   const texten = b.falt.find((f) => f !== titel && f !== rutan);
   const radMm = 9.5, radTw = mmTw(radMm);
-  if (titel) ut.push(sagoTabell(w, [mmTw(30), w - mmTw(30)], [new TableRow({ cantSplit: true, height: { value: mmTw(12), rule: HeightRule.EXACT }, children: [
-    new TableCell({ width: { size: mmTw(30), type: WidthType.DXA }, verticalAlign: VerticalAlign.BOTTOM, borders: SAGA_INGA, margins: { top: 0, bottom: 15, left: 0, right: 80 }, children: [new Paragraph({ spacing: { before: 0, after: 0, line: 240 }, children: [new TextRun({ text: titel.rubrik, font: ELEVTYPSNITT, size: ETIKETT, color: SF.rod })] })] }),
-    sagoSkrivrad(w - mmTw(30), { size: 32 }),
-  ] })]), punktStycke({ spacing: { before: 0, after: 90, line: 240 } }));
+  // Titeln och ramens namnrader (huvud, som Skriven av på tidningens sida i Ordverkstad i grupp, 2026-10-06) står överst i
+  // samma form, med etiketterna lika breda, som riggens sidaInnehall i build/build-docx.js.
+  const etiketter = [...(titel ? [{ text: titel.rubrik, mm: 12, size: 32 }] : []), ...b.namnrader.map((n) => ({ text: n, mm: 10, size: 28 }))];
+  const lw = mmTw(b.namnrader.length ? Math.max(30, ...etiketter.map((e) => Math.ceil(SAGA.textBredd(e.text, 'andika', (ETIKETT / 2) * PT_MM)) + 4)) : 30);
+  if (etiketter.length) ut.push(sagoTabell(w, [lw, w - lw], etiketter.map((e) => new TableRow({ cantSplit: true, height: { value: mmTw(e.mm), rule: HeightRule.EXACT }, children: [
+    new TableCell({ width: { size: lw, type: WidthType.DXA }, verticalAlign: VerticalAlign.BOTTOM, borders: SAGA_INGA, margins: { top: 0, bottom: 15, left: 0, right: 80 }, children: [new Paragraph({ spacing: { before: 0, after: 0, line: 240 }, children: [new TextRun({ text: e.text, font: ELEVTYPSNITT, size: ETIKETT, color: SF.rod })] })] }),
+    sagoSkrivrad(w - lw, { size: e.size }),
+  ] }))), punktStycke({ spacing: { before: 0, after: 90, line: 240 } }));
   const textMmHojd = texten ? raderAv(texten.cm, radMm) * radMm : 0;
-  const rutaMm = Math.max(50, hojdMm - textMmHojd - 30);
+  const rutaMm = Math.max(50, hojdMm - textMmHojd - 30 - b.namnrader.length * 10);
   if (rutan) ut.push(ritruta(rutan.rubrik, w, rutaMm), punktStycke());
   if (texten) {
     const n = raderAv(texten.cm, radMm, 3);
     const kolA = mmTw(2 * radMm + 1);
     const anfang = SAGA.anfangsRuta(2 * radMm);
     const rows: TableRow[] = [];
-    for (let j = 0; j < n; j++) rows.push(new TableRow({ cantSplit: true, height: { value: radTw, rule: HeightRule.EXACT }, children: j === 0
+    // En sida utan titel fortsätter en text (Tidningens sida: fortsättning) och får ingen ruta för den första bokstaven.
+    if (!titel) for (let j = 0; j < n; j++) rows.push(new TableRow({ cantSplit: true, height: { value: radTw, rule: HeightRule.EXACT }, children: [sagoSkrivrad(w, { span: 2, size: 28, vanster: 40 })] }));
+    else for (let j = 0; j < n; j++) rows.push(new TableRow({ cantSplit: true, height: { value: radTw, rule: HeightRule.EXACT }, children: j === 0
       ? [new TableCell({ width: { size: kolA, type: WidthType.DXA }, rowSpan: 2, borders: SAGA_INGA, margins: SAGA_NOLL, children: [sagoBild(anfang, 2 * radMm - 0.5, 2 * radMm - 0.5, 'En ruta för den första bokstaven', { align: AlignmentType.LEFT })] }), sagoSkrivrad(w - kolA, { size: 28 })]
       : j === 1 ? [sagoSkrivrad(w - kolA, { size: 28 })] : [sagoSkrivrad(w, { span: 2, size: 28, vanster: 40 })] }));
     ut.push(sagoTabell(w, [kolA, w - kolA], rows));

@@ -690,6 +690,10 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-kort { position: relative; border: 1.5px dashed var(--farg-text-svag); border-radius: 4px; padding: 1.5rem 0.9rem 0.9rem; min-height: 7rem; display: flex; align-items: center; justify-content: center; text-align: center; font-family: var(--typsnitt-elev); font-size: 1.15rem; line-height: 1.45; }
 .m-kortlista.korta .m-kort { min-height: 0; aspect-ratio: 1; padding: 1.3rem 0.4rem 0.4rem; font-size: 2rem; line-height: 1.2; }
 .m-kortlista.ett .m-kort { min-height: 5rem; }
+/* Korten i mellanstorlek (ordens delar, Ordverkstad i grupp): tre i bredd, som i Word. */
+.m-kortlista.medel ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.m-kortlista.medel .m-kort { min-height: 0; aspect-ratio: 2 / 1; padding: 1.3rem 0.5rem 0.5rem; font-size: 1.5rem; line-height: 1.2; }
+@media (max-width: 40rem) { .m-kortlista.medel .m-kort { font-size: 1.15rem; } }
 /* Kortet ur en ensam kort lista i en ram (strategikortet, K-062): större text och luft mellan raderna. */
 .m-lista.kort td { font-size: 1.5rem; padding: 0.7rem 0.9rem; }
 /* På mobilen ryms kortets rader, som "sss-ooo-lll → sol", på en rad i en lägre grad (granskningen 2026-09-27). */
