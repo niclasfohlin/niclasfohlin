@@ -347,7 +347,7 @@ tabeller:
       - - Protokollet
         - Tre sidor per elev, för hela kursen
         - Efter varje pass
-  - rubrik: Veckorna
+  - rubrik: Delarna och texterna i veckorna
     plats: efter-urval
     karta: true
     meny: true
@@ -495,7 +495,7 @@ checklista:
     - Läs vecka 1 och skriv din text i förväg.
 
 grund:
-  text: "Det som har starkast stöd för elever i åk 3–9 som fastnar på långa ord är en enda väg genom ordet, som eleven tar både när hen läser och när hen stavar, i ord, meningar och text, och kursen bygger på den (Vaughn m.fl., 2022). Undervisning om ordens delar hjälper också de elever som behöver stöd i läsningen, och effekten är störst på stavningen och på de ord och delar som eleverna övar (Goodwin och Ahn, 2010; Bowers, Kirby och Deacon, 2010; Colenbrander m.fl., 2024; Galuschka m.fl., 2020). Herrström (2003) förordar att eleven delar ordet vid delarna och inte i stavelser, eftersom svenska ord stavas efter delarna också när de låter annorlunda. I en svensk sammansättning säger sista ordet vad det är (Lyster, 2019). Eleverna tar med sig delarna till skrivandet när de använder dem i egna texter (McCutchen m.fl., 2014), och därför har varje vecka två skrivpass. I skrivpassen visar läraren och tänker högt, texten har mål för början, mitten och slutet och för de långa orden, och paret byter roll efter varje mening (Fohlin och Wilson, 2027). Par med roller och tydliga anvisningar skriver bättre texter (Graham och Harris, 2016; Koster m.fl., 2015), medan fritt samarbete inte gav någon sådan effekt (Montanero m.fl., 2025). I en studie där elever i åk 4–5 tränade långa ord i 40 pass blev deras inställning till läsning sämre (Toste m.fl., 2019), och därför har kursen förlagor, en läsare och en tidning men ingen tidtagning."
+  text: "Det som har starkast stöd för elever i åk 4–9 som fastnar på långa ord är en enda väg genom ordet, som eleven tar både när hen läser och när hen stavar, i ord, meningar och text, och kursen bygger på den (Vaughn m.fl., 2022). Undervisning om ordens delar hjälper också de elever som behöver stöd i läsningen, och effekten är störst på stavningen och på de ord och delar som eleverna övar (Goodwin och Ahn, 2010; Bowers, Kirby och Deacon, 2010; Colenbrander m.fl., 2024; Galuschka m.fl., 2020). Herrström (2003) förordar att eleven delar ordet vid delarna och inte i stavelser, eftersom svenska ord stavas efter delarna också när de låter annorlunda. I en svensk sammansättning säger sista ordet vad det är (Lyster, 2019). Eleverna tar med sig delarna till skrivandet när de använder dem i egna texter (McCutchen m.fl., 2014), och därför har varje vecka två skrivpass. I skrivpassen visar läraren och tänker högt, texten har mål för början, mitten och slutet och för de långa orden, och paret byter roll efter varje mening (Fohlin och Wilson, 2027). Par med roller och tydliga anvisningar skriver bättre texter (Graham och Harris, 2016; Koster m.fl., 2015), medan fritt samarbete inte gav någon sådan effekt (Montanero m.fl., 2025). I en studie där elever i åk 4–5 tränade långa ord i 40 pass blev deras inställning till läsning sämre (Toste m.fl., 2019), och därför har kursen förlagor, en läsare och en tidning men ingen tidtagning."
   kallor: "Bygger på Vaughn m.fl. (2022), Goodwin och Ahn (2010), Bowers, Kirby och Deacon (2010), Colenbrander m.fl. (2024), Galuschka m.fl. (2020), Herrström (2003), Lyster (2019), McCutchen m.fl. (2014), Graham och Harris (2016), Koster m.fl. (2015), Montanero m.fl. (2025), Toste m.fl. (2019), Fohlin och Wilson, Skriv! (utkommer 2027), och Institutet för språk och folkminnen (2024 och 2025)."
 
 exempel:
@@ -1238,6 +1238,12 @@ elevblad:
     Texten: 12
   "Tidningens sida: fortsättning":
     Texten: 20
+  # Protokollets fält i 1,2 cm, så att varje ram ryms på ett A4 i Word och Google (granskningen 2026-10-06, P1); med
+  # 900 twips per fält stod Vecka 3 och Vecka 6 ensamma på egna sidor, och med 1,4 cm Vecka 3 (sajtens marginaler är 2 cm,
+  # riggens 1,27). Höjder ges i dag bara genom elevblad (K-200).
+  "Protokollet: vecka 1–3": { Läste: 1.2, Skrev: 1.2, Förklarade: 1.2 }
+  "Protokollet: vecka 4–6": { Läste: 1.2, Skrev: 1.2, Förklarade: 1.2 }
+  "Protokollet: vecka 7–8": { Läste: 1.2, Skrev: 1.2, Förklarade: 1.2 }
   "Kartläggning: elevens blad":
     "1": 1.6
     "2": 1.6
