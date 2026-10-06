@@ -1,0 +1,1409 @@
+# Ordverkstad i grupp. Riggens metod på Niclas uppdrag 2026-10-05 (intake/ordverkstad-i-grupp.md, ARBETSPLAN.md).
+# Underlaget är intaget med registret (intake/ordverkstad-i-grupp/REGISTER.md) och sökningen (sokning.md), och valen
+# står i analys.md. Orden, delningarna och fogarna prövas mot facit i ord.json och SALDO (node build/ord.mjs).
+titel: Ordverkstad i grupp
+undertitel: "Åtta veckors kurs i liten grupp för åk 3–6, där eleverna bygger, läser, stavar och skriver långa ord"
+ingress: "En kurs i åtta veckor för fyra till sex elever i åk 3–6 som läser korta ord men fastnar på långa. Varje vecka läser gruppen en förlaga, pusslar med ordens delar på kort och skriver en egen text till gruppens tidning, byggd som förlagan. Eleverna skriver i par de första fyra veckorna och sedan var för sig."
+omrade: Skrivning
+arskurs:
+  - F-3
+  - 4-6
+arskursText: åk 3–6
+taggar:
+  - avkodning
+  - stavning
+  - ordforrad
+  - intensivtraning
+format:
+  - liten grupp
+  - par
+tid: 60 minuter per pass, tre pass i veckan
+period: Åtta veckor
+grupp: Fyra till sex elever
+material:
+  - förlagorna
+  - ordkorten
+  - kortet Ett långt ord
+  - en miniwhiteboard per elev
+  - skrivplanen
+  - tidningens sida
+
+uppdaterad: 2026-10-06
+publicerad: 2026-10-06
+relaterade:
+  - laslistor-i-grupp
+  - textsamtal-i-grupp
+  - skrivkurs-berattelseram
+utkast: false
+
+inledning:
+  - "Ordverkstad i grupp är för elever i åk 3–6 som läser korta ord säkert men fastnar på långa. De gissar efter början av ordet, tappar ändelsen och stavar efter ljudet, och i egna texter väljer de bort de långa orden. I kursen lär de sig hur långa ord är byggda, först av ord som sätts ihop och sedan med ändelser och förstavelser. De delar långa ord för att läsa, stava och förklara dem, och de skriver orden i egna texter till gruppens tidning."
+  - "Varje vecka har en förlaga, en kort text full av långa ord, som en artikel om uppfinningar, en platsannons eller en instruktion till en tävling. På bordet ligger förlagan, kortet Ett långt ord och en miniwhiteboard med en whiteboardpenna för varje elev, och i ordpasset ett kuvert med ordkort för varje par. På ordkorten står delarna i veckans ord, som regn och hatt i förlagans regnhatt. Paren pusslar ihop delarna till ord, läser orden och bygger nya, som hattregn, och säger vad orden betyder. På väggen sitter planschen Delarna, där du skriver upp veckans delar när ni börjar en ny vecka."
+  - "Eleven tar varje långt ord med samma fyra steg, Dela ordet, En del i taget, Hela ordet och Vad betyder det? Stegen leder eleven genom hela ordet, en del i taget ända till ändelsen, så att hen slutar gissa efter början. Eleven stavar på samma sätt, en del i taget, och skriver varje del som när den står ensam. När eleven förklarar ordet börjar hen bakifrån, eftersom sista ordet i ett sammansatt ord säger vad det är, och ändelsen och förstavelsen ändrar det. En brandbil är en bil, en bilbrand är en brand och en ovän är ingen vän."
+  - "Veckan har tre pass om 60 minuter, ett ordpass och två skrivpass. Varje pass börjar med Ordstarten, fem minuter då alla skriver två långa ord på sin miniwhiteboard och tar dem med stegen. I ordpasset läser gruppen förlagan, du visar ett ord med stegen, och paren bygger egna ord med korten. I en diktamen skriver eleverna långa ord en del i taget, ihop."
+  - "I skrivpassen skriver eleverna en egen text byggd som förlagan, med en början, en mitt och ett slut och minst tre egna långa ord, varav minst ett med en av veckans delar. I vecka 1 hittar paret på en uppfinning och skriver om den, med namnet som rubrik, det som är jobbigt i mitten och vad uppfinningen gör i slutet. På bordet ligger då också skrivplanen, tidningens sida och kortet Vi skriver i par. Varje vecka visar du först hur förlagan är byggd och skriver din egen text på blädderblocket. Sedan gör paret en skrivplan, berättar texten för ett annat par och skriver den på tidningens sida med Kloka pennan: meningsbyggaren säger en mening, och sekreteraren säger den igen och skriver den. Från vecka 5 skriver var och en sin egen text, och kamraten är kontrollant: hen läser texten högt och pekar på de långa orden. Texten blir klar i det andra skrivpasset, och ingen text blir läxa."
+  - "Texterna blir gruppens tidning. Gruppen ger tidningen ett namn i vecka 1, och varje veckas texter blir en avdelning i den, som Uppfinningar, Lediga jobb och Djurlexikon. Texterna hänger ihop, och uppfinningen från vecka 1 kommer till exempel tillbaka i reklamen i vecka 3. Du samlar sidorna i en mapp. I vecka 8 gör gruppen ett omslag och läser tidningen för en inbjuden läsare, och efter kursen får varje elev ett eget exemplar."
+
+upplagg:
+  rubrik: Så fungerar insatsen
+  text: "Fyra till sex elever har tre pass om 60 minuter i veckan under åtta veckor. Varje vecka har en förlaga, ett ordpass och två skrivpass, och varje pass börjar med Ordstarten. I ordpasset bygger paren långa ord med ordkort och tar varje ord med samma fyra steg, Dela ordet, En del i taget, Hela ordet och Vad betyder det? I skrivpassen skriver eleverna en text till gruppens tidning, byggd som förlagan, i par i vecka 1–4 och var för sig i vecka 5–8. Kartläggningen före och efter kursen och protokollet efter varje pass visar hur eleven läser, stavar, förklarar och skriver långa ord."
+
+gruppen:
+  rubrik: Så sätter du ihop gruppen
+  text: "Kursen är för elever i åk 3–6 som läser korta ord säkert men fastnar på långa. De gissar efter början, tappar ändelsen, stavar efter ljudet eller skriver sammansatta ord isär, men de skriver meningar som en vuxen kan läsa. Den som ännu ljudar korta ord bokstav för bokstav eller läser mycket långsamt börjar i TIL i grupp, och i åk 3 kan hen också börja i Läslistor i grupp. Den som läser långa ord rätt men inte förstår texten behöver Textsamtal i grupp. Gruppen har fyra till sex elever med samma behov, i fasta par som kan skriva tillsammans och en trio när eleverna är fem."
+
+principer:
+  rubrik: Tre saker att hålla fast vid
+  text: "Ta varje långt ord med samma fyra steg, i Ordstarten, i förlagan och i elevens egen text. Eleven behöver en enda väg genom ordet, eftersom många regler blir för mycket att hålla reda på. Låt eleven förklara ordet bakifrån, varje gång. Sista ordet i ett sammansatt ord säger vad det är, och förstavelsen och ändelsen ändrar det, som o- i otur och -⁠lös i tandlös. Låt varje vecka sluta i en egen text till en läsare, byggd som förlagan. Där övar eleven stavningen i sina egna ord, och de långa orden blir värda att kunna."
+
+passrutin:
+  text: "Ordpasset är veckans första pass. Gruppen läser förlagan och arbetar med veckans delar, som eleverna sedan använder i sin egen text i skrivpassen."
+  steg:
+    - text: "Gruppen läser veckans och förra veckans delar på planschen Delarna i kör, och alla tar två långa ord med de fyra stegen på sin miniwhiteboard."
+      fas: Ordstarten
+    - text: "Gruppen tittar på bilder av det förlagan tar upp, läser förlagan och stryker under ord med veckans delar."
+      fas: Förlagan
+    - text: "Paren bygger ord av veckans delar med ordkorten och tar varje ord med stegen."
+      fas: Bygga
+    - text: "Paren läser veckans nya ord för varandra och säger vad de betyder."
+      fas: Nya ord
+    - text: "Eleven skriver långa ord på sin miniwhiteboard, en del i taget, ihop."
+      fas: Diktamen
+    - text: "Varje elev läser ett ord från sin miniwhiteboard och säger vad det betyder, och paren tänker ut vad deras text ska handla om."
+      fas: Läsa upp
+  kallas: delar
+  efterPasset: "Skriv i protokollet vad varje elev läste och förklarade, och skriv felen från diktamen innan eleverna suddar sina miniwhiteboards. Byt ett av Ordstartens ord i pass 2 eller 3 mot ett ord som flera elever inte kunde läsa."
+
+tidsschema:
+  rubrik: "Pass 1: ordpasset på 60 minuter"
+  text: "Förbered dig genom att läsa fältet Pass 1, ordpasset, på veckans sida under Till läraren: veckorna. Där står delarna och orden till Ordstarten, det du visar i Bygga, de nya orden och diktamen. Lathunden visar ett ordpass i vecka 2, minut för minut."
+  rader:
+    - tid: Före passet
+      fas: Förberedelse
+      vad: "Skriv veckans nya delar på planschen, och skriv Ordstartens två ord och veckans sex nya ord på stora tavlan. Ställ fram blädderblocket, och leta fram veckans bilder på datorn. Lägg fram förlagan, kortet Ett långt ord och en miniwhiteboard med whiteboardpenna och sudd till varje elev, och ett kuvert med ordkort till varje par."
+    - tid: 0–5 min
+      fas: Ordstarten
+      vad: "Peka på veckans och förra veckans delar. Ta sedan ett ord i taget. Alla skriver av ordet och tar det med stegen innan någon säger det, och sedan visar du eller en elev på stora tavlan."
+    - tid: 5–15 min
+      fas: Förlagan
+      vad: "Visa först bilder på datorn av två eller tre saker som förlagan tar upp, till exempel från en bildsökning. Fråga om någon känner igen dem, och säg vad de heter och vad orden betyder. Läs sedan förlagan högt, och därefter läser alla i kör. Prata om vem texten är skriven för (förlagans fråga 4) innan eleverna gör fråga 1."
+    - tid: 15–35 min
+      fas: Bygga
+      vad: "Visa ett ord med stegen på stora tavlan och tänk högt, och lägg sedan ordet med korten mitt på bordet. Paren gör fråga 2, som gäller ett annat ord. Sedan bygger varje par minst fem egna ord och ett som inte finns: de lägger delarna i rad, läser en del i taget, skjuter ihop korten och säger vad ordet betyder, bakifrån, och byter plats på delarna. Sist förklarar varje par sitt påhittade ord för gruppen."
+    - tid: 35–40 min
+      fas: Nya ord
+      vad: "Låt paren läsa orden från stora tavlan, och lyssna på ett par i taget."
+    - tid: 40–52 min
+      fas: Diktamen
+      vad: "Före diktamen lägger paren korten i kuvertet och vänder förlagan, och du suddar de nya orden på stora tavlan. Säg ordet, säg det sedan i en mening som du hittar på och säg ordet igen, och låt eleven säga delarna innan hen skriver. Titta på elevernas miniwhiteboards tillsammans, och låt eleven själv hitta en del som blev fel. Visa sedan veckans vanliga fel, och låt eleverna svara muntligt på fråga 3."
+    - tid: 52–60 min
+      fas: Läsa upp
+      vad: "Låt varje elev läsa ett ord från sin miniwhiteboard och förklara det bakifrån. Sedan säger du vem som ska läsa texten och vad eleverna ska skriva den här veckan. Paren, från vecka 5 var och en, tänker ut vad texten ska handla om, och du skriver idéerna på blädderblocket."
+  efter: "Vecka 1 börjar med fem minuter om kursen, och Bygga tar då 15 minuter. I vecka 1 visar du det första ordet i Ordstarten innan eleverna tar stegen. Blir ett par klart tidigt i Bygga, bygger det fler ord och läser dem för dig."
+
+steg:
+  rubrik: Vad du gör och säger i ordpasset
+  fraserRubrik: Du säger
+  text: "Stegen för ett långt ord och fraserna till dem står i tabellen De fyra stegen för ett långt ord. Här står hur du leder ordpasset och vad du säger i varje del."
+  rader:
+    - namn: Ordstarten
+      fraga: Hur är ordet byggt?
+      gor: "När du pekar på planschen säger gruppen delen och vad den gör. Vem som visar stegen på stora tavlan står i tabellen Så flyttas stödet, och eleven som leder säger stegen från kortet Ett långt ord."
+      fraser:
+        - Vad gör -⁠arna med ordet?
+        - Skriv av ordet och ta stegen.
+        - Visa oss på stora tavlan.
+    - namn: Förlagan
+      fraga: Vem är texten skriven för?
+      gor: "Låt eleverna säga vad de ser på bilderna innan du säger vad saken heter. Läs högt med inlevelse. När eleverna har strukit under, låt en elev säga delarna i ett av orden."
+      fraser:
+        - Känner någon igen det här?
+        - Hur märker du vem den är skriven för?
+        - Läs fråga 1 och stryk under orden.
+        - Var är delarna i det här ordet?
+    - namn: Bygga
+      fraga: Vad betyder ordet?
+      gor: "Säg allt du gör när du visar ordet, också när du delar det och börjar bakifrån. Gå sedan mellan paren och lyssna på ett ord i taget. När paret byter plats på delarna, fråga vad det nya ordet betyder, så att eleverna hör att sista ordet säger vad det är."
+      fraser:
+        - Vad betyder det? Börja bakifrån.
+        - Byt plats på delarna. Vad blir det nu?
+        - Finns ordet, eller har ni hittat på det?
+    - namn: Nya ord
+      fraga: Vilka delar känner du igen?
+      gor: "Lyssna efter om eleven läser en del i taget eller gissar efter början. Gissar eleven, peka på delarna och låt hen läsa ordet igen. Känner gruppen inte till ett ord, säg det i en mening."
+      fraser:
+        - Läs ordet för din kamrat.
+        - Var är delarna?
+        - Vad betyder det?
+    - namn: Diktamen
+      fraga: Hur många delar?
+      gor: "Rätta inte medan eleverna skriver. Fråga vilken del eleven är osäker på, och låt hen skriva den som när den står ensam, till exempel boll i snöbollarna."
+      fraser:
+        - Säg ordet. Hur många delar?
+        - Skriv en del i taget.
+        - Står ordet ihop?
+    - namn: Läsa upp
+      fraga: Vad ska er text handla om?
+      gor: "Låt eleven välja det ord hen är säkrast på. När du har sagt vem som ska läsa texten, fråga paren vad läsaren skulle vilja läsa om."
+      fraser:
+        - Vilket ord väljer du?
+        - Vad skulle läsaren vilja läsa om?
+        - Vad ska texten handla om?
+
+arbetsform:
+  rubrik: "Arbetsform i ordpasset: gemensamt, i par, var för sig, gemensamt igen"
+  text: "Ordpasset går från gruppen till paren och till var och en, och tillbaka till gruppen. Sedan kommer veckans två skrivpass."
+  delar:
+    - rubrik: 1. Gemensamt
+      text: Alla läser, och du leder
+      faser:
+        - Ordstarten
+        - Förlagan
+    - rubrik: 2. I par
+      text: Du visar först, och paren bygger och läser ord
+      faser:
+        - Bygga
+        - Nya ord
+    - rubrik: 3. Var för sig
+      text: Varje elev skriver orden du säger
+      faser:
+        - Diktamen
+    - rubrik: 4. Gemensamt igen
+      text: Var och en läser ett ord för gruppen
+      faser:
+        - Läsa upp
+
+tabeller:
+  - rubrik: "Veckans tre pass: ett ordpass och två skrivpass"
+    plats: efter-inledning
+    meny: true
+    kolumner:
+      - Pass
+      - Vad gruppen gör
+      - På bordet
+    rader:
+      - - "Pass 1\nOrdpasset"
+        - "Gruppen läser veckans förlaga, och paren bygger ord av veckans delar med ordkorten. I diktamen skriver eleverna långa ord en del i taget, ihop. Sist tänker paren ut vad deras text ska handla om."
+        - "Förlagan, kortet Ett långt ord, en miniwhiteboard per elev och ett kuvert med ordkort per par"
+      - - "Pass 2\nSkrivpasset"
+        - "Gruppen drar ramar runt förlagans början, mitt och slut, och du skriver din egen text på blädderblocket. Paret gör en skrivplan, berättar texten för ett annat par och börjar skriva på tidningens sida med Kloka pennan."
+        - "Förlagan, kortet Ett långt ord och en miniwhiteboard per elev, och till varje par skrivplanen, tidningens sida och kortet Vi skriver i par"
+      - - "Pass 3\nSkrivpasset"
+        - "Paret skriver klart, läser texten högt och tar de långa orden med stegen. Varje par läser sin text för gruppen, och du lägger sidan i tidningens mapp."
+        - "Samma som i pass 2, med parets skrivplan och sida från pass 2"
+    not: "Alla tre passen börjar med Ordstarten, och från vecka 5 skriver var och en sin egen text. I vecka 8 är pass 3 tidningens pass. Har gruppen bara två pass en vecka, tar ni ordpasset och ett skrivpass. Texten blir då kortare, med en eller två meningar i början, mitten och slutet, och paret kontrollerar texten och läser den för gruppen sist i skrivpasset. I vecka 8 tar ni då ordpasset och tidningens pass, och tidningen får sju avdelningar."
+  - rubrik: De fyra stegen för ett långt ord
+    plats: efter-steg
+    meny: true
+    text: Stegen är desamma när eleven läser och när hen stavar, och de står på kortet Ett långt ord, som ligger framför varje elev. Säg stegen högt tillsammans med eleven tills hen säger dem själv.
+    kolumner:
+      - Steg
+      - När eleven läser
+      - När eleven stavar
+      - Du säger
+    rader:
+      - - 1. Dela ordet
+        - Eleven ringar in förstavelsen och ändelsen och drar ett streck mellan delarna. En fog, som s i fotbollsplan, hör till delen före
+        - Eleven säger ordet och räknar delarna på fingrarna
+        - "”Var är delarna?”\n”Säg ordet. Hur många delar?”"
+      - - 2. En del i taget
+        - Eleven drar en båge under varje del och läser den. En lång del, som äventyr, läser eleven i stavelser
+        - Eleven skriver en del i taget och säger den. Hen skriver varje del som när den står ensam, som hand i handduk. Det finns tre vanliga undantag. En vokal faller bort eller byts, som i skolgård, pojkvän och veckodag. En konsonant blir dubbel före en ändelse, som i slemmig. Tre lika bokstäver blir två, som i glasstrut.
+        - "”Läs den första delen.”\n”Säg delarna. Skriv en del i taget.”"
+      - - 3. Hela ordet
+        - Eleven säger hela ordet och hör efter om det låter som ett ord
+        - Eleven läser det hen skrev och kollar att ordet står ihop och, när ordet har en fog, att fogen är med
+        - "”Låter det som ett ord?”\n”Står ordet ihop?”"
+      - - 4. Vad betyder det?
+        - Eleven säger vad ordet betyder och börjar bakifrån, som ”en cykelhjälm är en hjälm som man har när man cyklar”
+        - Eleven säger vad ordet betyder och kollar att delarna passar betydelsen, som rygg i ryggsäck, en säck man har på ryggen
+        - "”Vad betyder det? Börja bakifrån.”\n”Hur vet du det?”"
+    not: "Bakifrån betyder att sista ordet säger vad det är, och att ändelsen och förstavelsen ändrar det: -⁠arna säger att det är flera, -⁠lös betyder utan, och o- betyder inte. Har en förstavelse flera betydelser, säg vad den betyder i just det ordet, som o- i otur (inte) och i oväder (dåligt). Ibland räcker inte delarna, som i glasögon och hjärnröta, och då säger du vad ordet betyder."
+  - rubrik: "Pass 2 och 3: skrivpasset på 60 minuter"
+    plats: efter-arbetsform
+    meny: true
+    text: "Skrivpasset går från gruppen, där du skriver din text, till paren och tillbaka till gruppen. Pass 2 och 3 har samma delar, från Ordstarten till Läsa upp, och i vecka 1–4 också samma tider. I pass 2 börjar texten, och i pass 3 blir den klar. Förbered dig genom att läsa veckans sida och skriva din text en gång själv."
+    kolumner:
+      - Del
+      - Pass 2, texten börjar
+      - Pass 3, texten blir klar
+    rader:
+      - - Före passet
+        - "Skriv passets två ord till Ordstarten på stora tavlan, och ställ fram blädderblocket. Lägg fram förlagan, kortet Ett långt ord och en miniwhiteboard med whiteboardpenna och sudd till varje elev, och kortet Vi skriver i par, skrivplanen och tidningens sida till varje par. Från vecka 5 får varje elev en egen skrivplan och en egen sida. Ordkorten behövs inte i skrivpassen."
+        - "Som i pass 2, men lägg fram parens planer och sidor från pass 2."
+      - - "Ordstarten\n0–⁠5 min"
+        - "Gruppen läser delarna på planschen i kör och tar stegen på två ord, som i ordpasset."
+        - "Gruppen gör som i pass 2, med två nya ord."
+      - - "Förlagan\n5–⁠15 min"
+        - "Gruppen läser förlagan i kör, och alla drar en ram runt början, en runt mitten och en runt slutet på sin förlaga. Du visar på din, gärna förstorad till A3. Du påminner om vem som ska läsa texten och vad eleverna ska skriva. Paren skriver på skrivplanen vad texten ska handla om och vem som läser den, och ramarnas namn vid Början, Mitten och Slutet."
+        - "Paret läser sin text högt, jämför den med planen och förlagan och säger vad som är kvar."
+      - - "Din text\n15–⁠25 min"
+        - "Du skriver din plan och de första meningarna i din text på blädderblocket och tänker högt. Varje elev föreslår i tur och ordning ett ord eller en mening. Ett långt ord skriver du en del i taget, och du säger delarna medan du skriver."
+        - "Du läser din text högt, lägger till en mening som läsaren behöver och skriver slutet."
+      - - "Skriva\n25–⁠50 min"
+        - "Paret skriver några ord om början, mitten och slutet på skrivplanen och minst tre långa ord i delar, som säng | cykel. Paret berättar texten för ett annat par, och det andra paret säger vad de vill veta mer om. Paret skriver det på sin plan. Med tre par lyssnar du på det tredje. Sedan skriver paret på tidningens sida med Kloka pennan."
+        - "Paret skriver klart och tar med det lyssnarna undrade. Den som inte skrev den sista meningen läser texten högt, och paret tar de långa orden med stegen. Sist ritar paret bilden i rutan."
+      - - "Läsa upp\n50–⁠60 min"
+        - "Två par, från vecka 5 två elever, läser det de har skrivit för gruppen."
+        - "Varje par, från vecka 5 varje elev, läser sin text för gruppen, och lyssnarna säger vad som var bäst och vilket långt ord de hörde. Du lägger sidorna i tidningens mapp."
+      - - Efter passet
+        - "Skriv i protokollet vad varje elev läste, skrev och förklarade."
+        - "Skriv också om texten har en början, en mitt och ett slut, och vad paret lade till efter lyssnarnas fråga."
+    not: "Från vecka 5 gör var och en sin plan i pass 2, berättar texten för kamraten och säger varje mening högt innan hen skriver den. I pass 3 är kamraten då kontrollant, och Förlagan och Din text tar fem minuter var, så att Skriva får 35 minuter. Hinner ett par före de andra, läser paret texten för dig. Sedan skriver paret vidare i pass 2 och ritar mer till bilden i pass 3. I vecka 8 skriver eleverna klart i pass 2, och pass 3 är tidningens pass, som står på veckans sida."
+  - rubrik: Vad du gör och säger i skrivpasset
+    plats: efter-arbetsform
+    text: "Ordstarten leder du som i ordpasset. Här står hur du leder resten av skrivpasset, och fraserna som hör till det."
+    kolumner:
+      - Del
+      - Vad du gör
+      - Du säger
+    rader:
+      - - "Förlagan\nHur är texten byggd?"
+        - "Låt eleverna säga var början slutar och mitten börjar, och vad varje ram gör för läsaren. Dra ramen när gruppen är överens, och låt gruppen ge den ett namn, som Det jobbiga. Har förlagan flera stycken som är byggda likadant, som tre uppfinningar eller tre annonser, drar ni ramarna i ett av dem. I pass 3, fråga paren vad som är kvar att skriva."
+        - "”Var slutar början?”\n”Vad gör den här ramen för läsaren?”\n”Vilket namn ger vi den?”\n”Vad är kvar att skriva?”"
+      - - "Din text\nVad behöver läsaren veta först?"
+        - "Din plan och din text på veckans sida är förslag, och du tar med elevernas ord och meningar där de passar. Säg vad du tänker om läsaren medan du skriver, och ta ett långt ord med stegen. Skriv gärna en otydlig mening med flit, och fråga gruppen vad läsaren behöver. Fråga i pass 3 vad mer läsaren behöver veta."
+        - "”Vad måste vi börja med?”\n”Finns det ett bättre ord?”\n”Vilket långt ord passar här?”\n”Förstår läsaren det här?”"
+      - - "Skriva\nVad är nästa mening?"
+        - "Sitt med ett par i taget, tre till fem minuter med varje. Be paret läsa det de har skrivit, och hjälp till med en sak. Lyssna efter om sekreteraren säger meningen igen innan hen skriver och om paret byter efter varje mening. Från vecka 5 lyssnar du efter om eleven säger meningen högt innan hen skriver. Hur du hjälper eleven att stava ett ord står i tabellen När eleven fastnar i skrivandet."
+        - "”Hur går det?”\n”Säg meningen innan ni skriver den.”\n”Säg delarna och skriv en del i taget.”\n”Är du osäker? Dra en prickad linje under ordet.”"
+      - - "Läsa upp\nVad vill ni veta mer om?"
+        - "Låt lyssnarna svara som läsare. Säger någon bara att det var bra, frågar du vad som var bra. Fråga sist vilket långt ord gruppen hörde, och låt den som skrev ordet säga delarna och vad ordet betyder, bakifrån."
+        - "”Vad vill ni veta mer om?”\n”Vad var bäst i texten?”\n”Vilket långt ord hörde ni?”"
+  - rubrik: När eleven fastnar i skrivandet
+    plats: efter-fastnar
+    text: "Här står det som oftast händer i skrivpassen, och vad du gör då."
+    kolumner:
+      - Det du ser
+      - Det du gör
+    rader:
+      - - Paret kommer inte i gång
+        - "Läs förlagans början högt och fråga vad deras början ska säga. Paret får låna förlagans första mening och byta ut innehållet."
+      - - Varje mening börjar med ”och sen”
+        - "Peka på början, mitten och slutet på skrivplanen och fråga var meningen hör hemma. Visa ord som säger i vilken ordning något händer, som först och sedan, gärna ur förlagan, och låt paret välja ett."
+      - - Eleven vet inte hur ett ord stavas
+        - "Låt eleven säga delarna och skriva en del i taget, och låt kamraten hjälpa till med delarna. Är eleven osäker efter tio sekunder, drar hen en prickad linje under ordet och skriver vidare. Paret tar ordet med stegen när texten är klar."
+      - - Eleven väljer bort de långa orden
+        - "Fråga vilket långt ord eleven sa när hen berättade. Låt eleven säga delarna och skriva ordet på miniwhiteboarden först, en del i taget, ihop."
+      - - Eleven skriver mycket långsamt eller kan inte läsa sin text
+        - "Låt eleven vara meningsbyggare oftare, och från vecka 5 kan kamraten vara sekreterare, en mening i taget. Du kan också själv vara sekreterare: eleven säger meningen, du skriver, och eleven läser meningen."
+      - - Den ena i paret bestämmer alla meningar
+        - "Påminn om att paret byter efter varje mening, och låt den som tog över vara sekreterare för nästa mening. Fortsätter det, skriver eleverna var sin text efter samma plan."
+      - - Paret hinner inte klart i pass 3
+        - "Sätt dig med paret, eller från vecka 5 med eleven. Paret, eller eleven, säger resten av texten, och du eller kamraten skriver den på sidan, en mening i taget. Ingen text blir läxa."
+      - - Kamraten är borta
+        - "Eleven skriver vidare och säger varje mening högt innan hen skriver den, och du är kontrollant. I nästa pass läser paret det nya tillsammans."
+  - rubrik: Materialet du behöver
+    plats: efter-urval
+    meny: true
+    text: "Allt utom miniwhiteboards, whiteboardpennor och sudd, blädderblocket, datorn, det tomma papperet och mappen står under Kursens material."
+    kolumner:
+      - Material
+      - Hur många
+      - När ni använder det
+    rader:
+      - - Förlagan
+        - En per elev och vecka, och en till dig, gärna förstorad till A3
+        - I alla tre passen. Eleven stryker under, drar streck och drar ramar i den.
+      - - Ordkorten
+        - En sats per par och vecka, och en till dig, klippta och i kuvert
+        - "I ordpasset. Spara kuverten, eftersom korten med o- behövs igen i vecka 6."
+      - - Kortet Ett långt ord
+        - Ett per elev, för hela kursen
+        - I varje pass, på bordet
+      - - Kortet Vi skriver i par
+        - Ett per par
+        - I skrivpassen
+      - - Skrivplanen
+        - En per par i vecka 1–4 och en per elev i vecka 5–8, ny varje vecka
+        - I skrivpassen
+      - - Tidningens sida
+        - En första sida och en sida att fortsätta på, till varje par i vecka 1–4 och till varje elev i vecka 5–8, nya varje vecka
+        - I skrivpassen
+      - - Planschen Delarna
+        - Ett blädderblocksark på väggen
+        - I Ordstarten. När ni börjar veckan skriver du veckans delar ur listan Delarna på planschen.
+      - - En miniwhiteboard, en whiteboardpenna och ett sudd
+        - En per elev
+        - I Ordstarten och Diktamen, och när eleven prövar ett långt ord
+      - - Ett blädderblock
+        - Ett för gruppen
+        - Till idéerna i ordpasset och till din plan och din text i skrivpassen, så att de finns kvar till pass 3
+      - - En dator eller surfplatta
+        - En för gruppen
+        - I Förlagan i ordpasset, till bilderna före läsningen
+      - - Tomt papper
+        - Ett ark per par i vecka 2, och några ark i vecka 8
+        - Till kartan i vecka 2, och till omslaget och avdelningarnas sidor i vecka 8
+      - - En mapp
+        - En för gruppen
+        - Efter pass 3, då du lägger tidningens sidor i mappen
+      - - Kartläggningen
+        - Före och efter kursen kopierar du elevens ordlista två gånger per elev, en till eleven och en till dig. Varje elev får också bladet Dela orden, elevens blad och tidningens sida, och du har lärarens sidor.
+        - Veckan före och veckan efter kursen
+      - - Diplomet
+        - Ett per elev
+        - Sist i vecka 8
+      - - Protokollet
+        - Tre sidor per elev, för hela kursen
+        - Efter varje pass
+  - rubrik: Veckorna
+    plats: efter-urval
+    karta: true
+    meny: true
+    text: "Varje vecka har egna delar, en förlaga och en text som eleverna skriver till gruppens tidning."
+    kolumner:
+      - Vecka
+      - Delarna
+      - Förlagan
+      - Eleverna skriver
+    rader:
+      - - "Vecka 1\nTvå ord blir ett"
+        - Två ord blir ett ord, och sista ordet säger vad det är, som i cykelhjälm
+        - En tidningsartikel om tre uppfinningar
+        - I par en artikel om en egen uppfinning
+      - - "Vecka 2\nFogen"
+        - Fogen s, en vokal som faller bort eller byts, ord med tre delar och tre lika bokstäver som blir två
+        - En guide med skyltar till ett äventyrsbad
+        - I par en karta och en guide till sin drömskolgård, för en yngre klass
+      - - "Vecka 3\nIhop eller isär"
+        - Ett sammansatt ord skrivs ihop, och jätte- och super- skrivs ihop med ordet
+        - En reklam, och en slarvig reklam där tre ord har gått isär
+        - I par en reklam för sin uppfinning från vecka 1
+      - - "Vecka 4\nOrd som slutar på -⁠are"
+        - Med -⁠are blir ordet en person eller en sak som gör något, som läsare och dammsugare
+        - Platsannonser för påhittade yrken
+        - I par en platsannons för ett påhittat yrke
+      - - "Vecka 5\nFörstavelser"
+        - o-, miss-, åter- och sam-
+        - En rolig berättelse om en otursdag
+        - Var för sig en berättelse i jagform om en otursdag
+      - - "Vecka 6\nÄndelser som beskriver"
+        - -⁠ig, -⁠lig, -⁠lös och -⁠bar
+        - En lexikonartikel om ett påhittat djur
+        - Var för sig en lexikonartikel om ett eget fantasidjur
+      - - "Vecka 7\nOrd på -⁠ning, -⁠het, -⁠else och -⁠skap"
+        - Ändelserna -⁠ning och -⁠ing, -⁠het, -⁠else och -⁠skap, och fogen s efter -⁠ning, -⁠ing, -⁠het och -⁠skap
+        - En instruktion till en tävling
+        - Var för sig en instruktion till en lek, som en annan grupp prövar
+      - - "Vecka 8\nNyord"
+        - Nya ord byggda av ord som redan finns, och ord där delarna inte räcker
+        - Årets nya ord, ur Isofs nyordslistor
+        - Var för sig en artikel om ett eget nytt ord. Gruppen sätter ihop tidningen.
+    not: "Uppfinningen från vecka 1 kommer tillbaka i vecka 3 och gärna i vecka 4, och drömskolgården från vecka 2 gärna i vecka 7. I vecka 2 går kartan också till en yngre klass, och leken från vecka 7 prövar en annan grupp på en rast i vecka 8."
+
+fastnar:
+  rubrik: När eleven fastnar i ett ord
+  text: Fråga först, och ge sedan så lite stöd som möjligt. Gå tillbaka till det steg där eleven fastnade. En elev med ett modersmål där huvudordet står först, som arabiska, säger ofta att en brandbil är en brand. Peka då på sista ordet och fråga vad det är.
+  fragaForst:
+    - Var är delarna?
+    - Vilket steg är du på?
+  trappa:
+    - Peka på slutet av ordet och säg ”Ring in ändelsen.” Har ordet ingen ändelse, peka på skarven mellan delarna.
+    - Täck ordet med handen så att bara den första delen syns, och flytta handen en del i taget.
+    - Läs den första delen åt eleven, och låt eleven läsa nästa.
+    - Säg ordet och låt eleven dela det. Skriv sedan ett nytt ord med samma del, och låt eleven läsa det själv.
+  trappaText: "Gå uppför stödtrappan i stunden. Ge inte nästa stöd förrän eleven har prövat det förra:"
+  motto: Sluta alltid med ett ord som eleven läser själv.
+
+roll:
+  rubrik: "Lärarens roll: visa först, och låt eleven ta över"
+  text: "Du tänker högt när du visar ett ord i ordpasset och när du skriver din egen text i skrivpassen, och sedan gör eleverna samma sak själva. Säg samma fraser varje gång, så att eleven kan säga dem till sig själv."
+  gor:
+    - Visa ett ord med de fyra stegen och säg allt du gör.
+    - Skriv din egen text på blädderblocket inför gruppen, och låt varje elev ge ett ord eller en mening.
+    - Fråga vad ordet betyder, varje gång, och låt eleven börja bakifrån.
+    - Sitt med ett par i taget när paren skriver, och hjälp till med en sak.
+    - "När en elev har stavat fel, fråga först vilken del som blev fel. Hittar eleven inte felet, skriv ordet rätt ovanför och säg ”Så skrivs det i böcker.”"
+  undvik:
+    - att säga ordet innan eleven har prövat stegen
+    - att dela ordet i stavelser innan eleven har hittat delarna
+    - att rätta varje stavfel i elevens text, eller rätta med rödpenna
+    - att låta en elev i paret ta över, så att paret inte byter efter varje mening
+    - att skicka hem en text som inte blev klar
+
+urval:
+  rubrik: Var hittar du förlagorna och orden?
+  text:
+    - Förlagorna, ordkorten, veckans sida och bladen står under Kursens material, och tabellen Materialet du behöver säger hur många du skriver ut. Vill du ha fler ord, särskilt i åk 5–6, ta dem ur det gruppen läser i klassen och i ämnena, som -⁠ning i smältning och frysning.
+    - Förlagorna har också ord som eleverna inte har hört, som nyorden och de påhittade yrkena, men delarna i dem känner eleven. Säg ett ovanligt ord högt och i en mening innan gruppen läser det i förlagan, gärna med en bild, särskilt för elever med svenska som andraspråk. Låt paren bygga riktiga ord innan de hittar på egna.
+  kravText: "Välj egna ord så att de uppfyller tre krav:"
+  krav:
+    - rubrik: Ord eleven har hört
+      text: Eleven känner ordet när hen säger det, så att steg 3 och 4 går
+    - rubrik: Delar som syns
+      text: Delarna går att se och höra och betyder något, som cykel och hjälm
+    - rubrik: Veckans del
+      text: Ordet har veckans del, och gärna en del från en tidigare vecka
+
+progression:
+  rubrik: Så flyttas stödet
+  text: "Eleverna tar över vecka för vecka på två sätt, och varje rad säger båda: i Ordstarten från att du visar till att eleverna leder, och i skrivandet från att paret skriver en text tillsammans till att var och en skriver sin egen."
+  rader:
+    - vecka: "1"
+      fokus: Två ord blir ett
+      roll: "Ordstarten: du visar stegen och tänker högt. Skrivandet: du visar Kloka pennan i din text, och paret skriver en text tillsammans"
+    - vecka: "2"
+      fokus: Fogen
+      roll: "Ordstarten: du visar, och eleverna säger fraserna med dig. Skrivandet: paret skriver med Kloka pennan"
+    - vecka: "3"
+      fokus: Ihop eller isär
+      roll: "Ordstarten: en elev visar, och du hjälper till med fraserna. Skrivandet: paret skriver med Kloka pennan"
+    - vecka: "4"
+      fokus: Ord som slutar på -⁠are
+      roll: "Ordstarten: eleverna visar och säger fraserna själva. Skrivandet: paret tar de långa orden med kortet Ett långt ord, och du frågar innan du hjälper"
+    - vecka: "5"
+      fokus: Förstavelser
+      roll: "Ordstarten: eleverna visar, och du frågar vad förstavelsen gör. Skrivandet: var och en skriver sin text, och kamraten är kontrollant"
+    - vecka: "6"
+      fokus: Ändelser som beskriver
+      roll: "Ordstarten: en elev leder, och du hjälper till när det behövs. Skrivandet: eleverna föreslår de flesta meningarna i din text"
+    - vecka: "7"
+      fokus: Ord på -⁠ning, -⁠het, -⁠else och -⁠skap
+      roll: "Ordstarten: en elev leder, och du lyssnar. Skrivandet: var och en skriver sin text och tar de långa orden med stegen"
+    - vecka: "8"
+      fokus: Nyord
+      roll: "Ordstarten: eleverna leder. Skrivandet: var och en förklarar sitt nya ord för läsaren i tidningen"
+
+uppfoljning:
+  text: "Kartläggningen visar hur eleven läser, delar, stavar och förklarar långa ord och skriver dem i en text, före och efter kursen. Protokollet samlar det eleven läste, skrev och förklarade, vecka för vecka."
+  rader:
+    - nar: Före kursen
+      vad: Gör kartläggningen veckan före kursen.
+    - nar: Efter varje pass
+      vad: Skriv i protokollet.
+    - nar: Efter vecka 4
+      vad: Läs texterna från vecka 1 och 4. Ta felstavade ord till Ordstarten, och bestäm vem som behöver en sekreterare från vecka 5.
+    - nar: Efter kursen
+      vad: Gör kartläggningen igen. Ge klassläraren resultatet och vad eleven behöver nu.
+
+mal:
+  punkter:
+    - läsa långa ord som har kursens delar genom att dela dem, också ord som eleven inte har övat på
+    - stava långa ord en del i taget, skriva sammansatta ord ihop och få med fogen
+    - säga vad ett okänt ord betyder ur delarna, bakifrån
+    - skriva en kort text som är byggd som förlagan, med långa ord, till en läsare
+
+checklista:
+  rubrik: Före första passet
+  punkter:
+    - Gör kartläggningen veckan före kursen.
+    - Skriv ut förlagan och korten, och lägg ordkorten i kuvert.
+    - Skriv ut skrivplanen, tidningens sida och protokollet.
+    - Skaffa miniwhiteboards, whiteboardpennor, sudd, blädderblock och mapp.
+    - Bestäm de fasta paren, läsarna i vecka 2 och 8 och gruppen som prövar leken.
+    - Läs vecka 1 och skriv din text i förväg.
+
+grund:
+  text: "Det som har starkast stöd för elever i åk 3–9 som fastnar på långa ord är en enda väg genom ordet, som eleven tar både när hen läser och när hen stavar, i ord, meningar och text, och kursen bygger på den (Vaughn m.fl., 2022). Undervisning om ordens delar hjälper också de elever som behöver stöd i läsningen, och effekten är störst på stavningen och på de ord och delar som eleverna övar (Goodwin och Ahn, 2010; Bowers, Kirby och Deacon, 2010; Colenbrander m.fl., 2024; Galuschka m.fl., 2020). Herrström (2003) förordar att eleven delar ordet vid delarna och inte i stavelser, eftersom svenska ord stavas efter delarna också när de låter annorlunda. I en svensk sammansättning säger sista ordet vad det är (Lyster, 2019). Eleverna tar med sig delarna till skrivandet när de använder dem i egna texter (McCutchen m.fl., 2014), och därför har varje vecka två skrivpass. I skrivpassen visar läraren och tänker högt, texten har mål för början, mitten och slutet och för de långa orden, och paret byter roll efter varje mening (Fohlin och Wilson, 2027). Par med roller och tydliga anvisningar skriver bättre texter (Graham och Harris, 2016; Koster m.fl., 2015), medan fritt samarbete inte gav någon sådan effekt (Montanero m.fl., 2025). I en studie där elever i åk 4–5 tränade långa ord i 40 pass blev deras inställning till läsning sämre (Toste m.fl., 2019), och därför har kursen förlagor, en läsare och en tidning men ingen tidtagning."
+  kallor: "Bygger på Vaughn m.fl. (2022), Goodwin och Ahn (2010), Bowers, Kirby och Deacon (2010), Colenbrander m.fl. (2024), Galuschka m.fl. (2020), Herrström (2003), Lyster (2019), McCutchen m.fl. (2014), Graham och Harris (2016), Koster m.fl. (2015), Montanero m.fl. (2025), Toste m.fl. (2019), Fohlin och Wilson, Skriv! (utkommer 2027), och Institutet för språk och folkminnen (2024 och 2025)."
+
+exempel:
+  rubrik: "Exempel: så går ett skrivpass till"
+  valt:
+    rubrik: Gruppen
+    text: "Amir, Ella, Noah, Saga och Leo går i åk 4 och är med i kursen. Det är vecka 1 och pass 2, det första skrivpasset. I ordpasset läste gruppen förlagan Tre uppfinningar som världen behöver och byggde ord av två ord, och varje par bestämde vad deras uppfinning skulle vara. Amir och Leo är ett par, och Ella, Noah och Saga är en trio."
+  text:
+    - "I Ordstarten tar alla stegen på matlåda och glasögon på sin miniwhiteboard. Läraren visar matlåda på stora tavlan, och Saga säger ”En låda för mat.”"
+    - "Gruppen läser förlagan i kör och drar ramarna i Sängroboten. Läraren frågar ”Var slutar början?”, och Ella svarar att början är namnet och att mitten är det som är jobbigt. Gruppen kallar ramarna Namnet, Det jobbiga och Vad den gör. Läraren säger att uppfinningarna ska stå i tidningens första avdelning, och paren skriver uppfinningen och ramarnas namn på skrivplanen."
+    - "Läraren skriver sin plan på blädderblocket, med säng | cykel bland de långa orden, och sedan rubriken Sängcykeln. ”Vad måste vi börja med?” frågar hen. Amir säger ”Det jobbiga”, och läraren skriver ”Det är svårt att gå upp när det är kallt på morgonen.” Sedan visar läraren Kloka pennan. Hen säger nästa mening, ”Därför har vi uppfunnit sängcykeln”, och Leo säger den igen och skriver den på blädderblocket."
+    - "Amir och Leo har hittat på en cykel som flyger. De säger delarna och skriver flyg | cykel på skrivplanen. När de berättar för trion frågar Saga ”Var landar den?”, och Leo skriver frågan på skrivplanen. Sedan skriver de med Kloka pennan. Amir är meningsbyggare och säger ”Det tar lång tid att åka till skolan.” Leo är sekreterare, säger meningen igen och skriver den, och sedan läser de meningen tillsammans och byter roll. Läraren sitter med trion. De skriver om en hundrobot som går ut med hunden. Noah är sekreterare och fastnar på ryggsäck. Läraren säger ”Säg delarna.” Noah säger ”Rygg och säck”, skriver en del i taget och drar en prickad linje under ordet för säkerhets skull."
+    - "I Läsa upp läser Amir och Leo det de har skrivit: ”Flygcykeln. Det tar lång tid att åka till skolan. Därför har vi uppfunnit en flygcykel.” Ella frågar hur cykeln kommer upp i luften."
+    - "Efter passet skriver läraren i protokollet att Amir skrev flygcykel ihop, och att Noah sa delarna i ryggsäck, skrev ordet rätt och drog en prickad linje under. Trion tar ordet med stegen i pass 3."
+
+ramar:
+  rubrik: Kursens material
+  text:
+    - "Först kommer veckans sida, en för varje vecka, med ordpasset, uppgiften, din text och skrivpassen. Sedan kommer förlagorna, ordkorten, listan till planschen Delarna, kortet Ett långt ord, kortet Vi skriver i par, skrivplanen, tidningens sida, kartläggningen, protokollet och diplomet."
+    - "Förlagorna, ordkorten, kortet Ett långt ord, kortet Vi skriver i par, skrivplanen och tidningens sida är gjorda för eleven."
+  ramar:
+    # ---------------------------------------------------------------- Veckorna
+    - rubrik: "Till läraren: veckorna"
+      lektioner: true
+      text:
+        - "Varje vecka har en egen sida, veckans sida. Överst står veckans fokus och förlagan, sedan ordpasset under Pass 1, uppgiften, din plan och din text, och skrivpassen under Pass 2 och 3. Sist står veckans vanliga fel under Lyssna efter."
+      delar:
+        - rubrik: "Vecka 1 · Två ord blir ett"
+          falt:
+            - rubrik: Fokus
+              text: "Eleven läser och stavar ord som är byggda av två ord och säger vad de betyder, bakifrån."
+            - rubrik: Förlagan
+              text: "Tre uppfinningar som världen behöver, en tidningsartikel. Veckans ord i texten: sängrobot, regnhatt, cykelhiss, cykelhjälm, ryggsäck, matlåda, glasögon, tandrobot och matrobot. Före läsningen visar du bilder av en cykelhiss och en regnhatt."
+            - rubrik: Pass 1, ordpasset
+              text: "Börja med fem minuter om kursen: presentera den som Ordverkstaden, en verkstad där gruppen gör en tidning, och ge varje elev kortet Ett långt ord. Bygga tar därför 15 minuter.\nOrdstarten: planschen, de fyra första raderna i listan Ändelser som böjer ordet. Du visar brandbilen med stegen och tänker högt, och sedan tar alla bilbranden med stegen.\nBygga: visa och säg ”Sängrobot. Var är delarna? Säng och robot. Jag drar ett streck mellan dem och en båge under varje del. Säng, robot, sängrobot. Jag börjar bakifrån: en robot som bäddar sängen.” Byt plats på korten och fråga ”Vad är en robotsäng?”\nNya ord: sandlåda, lastbil, polisbil, tandkräm, snöskyffel och tvättmaskin.\nDiktamen: cykelhjälm, ryggsäck, tandborste, snöbollarna och snögubbe. Skriv sedan ”cykel hjälm” isär och fråga ”Är det ett ord eller två? Säg det högt.” Säg att det inte blir någon paus mellan delarna i ett sammansatt ord."
+            - rubrik: Uppgiften
+              text: "Paret hittar på en egen uppfinning och skriver om den till tidningen. Början: uppfinningens namn som rubrik, ett ord byggt av två ord. Mitten: det som är jobbigt. Slutet: vad uppfinningen gör och hur man använder den. Texten har minst tre ord som är byggda av två ord. Paret ritar uppfinningen i rutan."
+            - rubrik: Din plan
+              text: "Början: Sängcykeln. Mitten: kallt och svårt att gå upp. Slutet: trampa under täcket, ringklocka och matlåda. Långa ord i delar: säng | cykel, ring | klocka, mat | låda."
+            - rubrik: Din text
+              text: "Sängcykeln\nDet är svårt att gå upp när det är kallt på morgonen. Därför har vi uppfunnit sängcykeln. Du ligger kvar under täcket och trampar till skolan. Sängcykeln har en ringklocka, en lampa och en matlåda bak. Den är lika snabb som en vanlig cykel, men mycket mysigare."
+            - rubrik: Pass 2 och 3, skrivpassen
+              text: "Ordstarten: matlåda och glasögon i pass 2, cykelhjälmarna och snöbollarna i pass 3.\nFörlagan: dra ramarna i en uppfinning, som Sängroboten.\nDin text: visa Kloka pennan. Du är meningsbyggare och säger en mening, och en elev är sekreterare, säger den igen och skriver den på blädderblocket.\nLäsa upp i pass 3: gruppen ger tidningen ett namn."
+            - rubrik: Lyssna efter
+              text: "Eleven som läser cykel och gissar resten.\nEleven som säger att en sängrobot är en säng.\nEleven som tappar ändelsen och läser snöbollarna som snöboll.\nEleven som skriver ”cykel hjälm” isär, eller ”handuk” och ”ryksäck” efter hur det låter.\nEleven som säger att glasögon är ögon av glas. Säg att delarna ibland inte räcker."
+        - rubrik: "Vecka 2 · Fogen"
+          falt:
+            - rubrik: Fokus
+              text: "Eleven läser och stavar sammansatta ord där något händer i skarven, som fogen s, en vokal som faller bort eller byts och tre lika bokstäver som blir två, och ord med tre delar."
+            - rubrik: Förlagan
+              text: "Välkommen till Äventyrsbadet, en guide med skyltar. Veckans ord i texten: äventyrsbad, fotbollsplan, omklädningsrum, dricksvatten, gatlykta, ficklampa, skolbuss, gatukök, veckodag, glasstrut och nattåg. Före läsningen visar du bilder av ett äventyrsbad, ett gatukök och ett nattåg."
+            - rubrik: Pass 1, ordpasset
+              text: "Ordstarten: på planschen läser gruppen s, o och u mellan delarna och a som faller bort. Du visar orden cykelhiss och glasögonen.\nBygga: visa och säg ”Fotbollsplan. Fot, boll och plan, och mellan boll och plan står ett s. Fotboll är redan två ord, och när ett sådant ord står först kommer nästan alltid ett s. S:et hör till delen före. Fot, bolls, plan.” Visa sedan skolgård och säg ”Skola och gård. Här faller a:et bort. Skol, gård.” Läs äventyr i stavelser, ä, ven, tyr. När paren har gjort fråga 2 säger du ”Äventyr är ett ord, och ändå kommer ett s. Sådana ord lär vi oss ett i taget.”\nNya ord: pojkvän, flickskola, varuhus, fotbollsmatch, skolbänk och veckotidning.\nDiktamen: fotbollsplan, skolgården, veckodag, glasstrut och snöbollskrig. Skriv sedan ”fotbollplan” och fråga ”Är fotboll två ord?” Lägg korten glass och strut ihop och säg ”Tre s i rad. Då skriver vi bara två, glasstrut, och strecket står mellan glass och strut.”"
+            - rubrik: Uppgiften
+              text: "Paret skriver en guide till sin drömskolgård för en yngre klass och ritar en karta på ett tomt papper. Början: en mening som välkomnar läsaren. Mitten: tre skyltar med en eller två meningar var. Slutet: en mening som säger hej då. Texten har minst tre långa ord, och minst ett med fogen s. Skyltarna är långa ord."
+            - rubrik: Din plan
+              text: "Början: välkommen. Mitten: tre skyltar, fotbollsplanen, gungbrädan och pulkabacken. Slutet: ha en rolig rast. Långa ord i delar: fot | bolls | plan, gung | bräda, pulka | backe."
+            - rubrik: Din text
+              text: "Välkommen till drömskolgården! Följ skyltarna, så hittar du rätt.\nFotbollsplanen: Här spelar alla på rasterna. Bollarna ligger i en låda vid målet.\nGungbrädan: Sätt er på var sin sida och gunga upp och ner.\nPulkabacken: På vintern åker du pulka här, ända ner till staketet.\nHa en rolig rast!"
+            - rubrik: Pass 2 och 3, skrivpassen
+              text: "Ordstarten: fotbollsplanen och gatuköket i pass 2, nattåget och omklädningsrummet i pass 3.\nFörlagan: dra ramarna runt det första stycket, skyltarna och det sista stycket.\nSkriva i pass 3: paret ritar kartan i stället för bilden i rutan, med skyltarna på kartan. Efter pass 3 läser paren guiden för den yngre klassen och lämnar en kopia av kartan."
+            - rubrik: Lyssna efter
+              text: "Eleven som tappar s:et, som ”fotbollplan”.\nEleven som låter a:et stå kvar, som i ”skolagård”.\nEleven som skriver tre s i glasstrut.\nEleven som delar omklädningsrum på fel ställe, som omk och läd.\nEleven som sätter s där det inte ska vara, som ”skolsgård”."
+        - rubrik: "Vecka 3 · Ihop eller isär"
+          falt:
+            - rubrik: Fokus
+              text: "Eleven skriver sammansatta ord ihop och hör att ord som står isär betyder något annat, som en grönsak och en grön sak. Eleven skriver också jätte- och super- ihop med ordet."
+            - rubrik: Förlagan
+              text: "Två reklamer, tre fel: en reklam för en snöbollsmaskin och en slarvig reklam där tre ord har gått isär. Veckans ord i texten: supersnabb, superstark, jättestor, jätterolig, jättebra, jättegod, ostmacka, surstång och skumtomte. Före läsningen visar du bilder av en surstång och en skumtomte."
+            - rubrik: Pass 1, ordpasset
+              text: "Ordstarten: planschen jätte- och super-. Orden äventyrsbadet och veckodagar.\nBygga: lägg korten grön och sak isär och säg ”En grön sak. Det kan vara en boll eller en tröja.” Skjut ihop korten och säg ”Grönsak. Nu är det ett ord, och det blir ingen paus mellan delarna. En grönsak är en morot eller en gurka.” Sätt två framför båda: två grönsaker, men två gröna saker. Ta sedan grönsak med stegen på stora tavlan. Sedan gör paren fråga 2 och rättar den slarviga reklamen med korten.\nNya ord: jätteglad, jättelång, rökfri, blåbär, långfilm och storstad.\nDiktamen: jättebra, supersnabb, grönsakerna, ostmacka och strösocker. Skriv sedan ”jätte bra” och ”super snabb” isär och fråga ”Hur många ord är det? Säg det högt.” Säg att jätte- och super- alltid står ihop med ordet."
+            - rubrik: Uppgiften
+              text: "Paret skriver en reklam för sin uppfinning från vecka 1. Början: en rubrik och en fråga som får läsaren att stanna. Mitten: varför uppfinningen är jättebra. Slutet: det som säger åt läsaren att köpa. Texten har minst tre långa ord, och minst ett med jätte- eller super-."
+            - rubrik: Din plan
+              text: "Början: rubriken Köp en sängcykel! och en fråga om kalla morgnar. Mitten: supermjuk och jättesnabb. Slutet: köp i dag, kudde på köpet. Långa ord i delar: super | mjuk, jätte | snabb, säng | cykel."
+            - rubrik: Din text
+              text: "Köp en sängcykel!\nÄr du trött på kalla morgnar? Då är sängcykeln något för dig. Den är supermjuk och jättesnabb. Du kommer till skolan utan att lämna sängen. Köp din sängcykel i dag! Den kostar bara hundra kronor, och du får en kudde på köpet."
+            - rubrik: Pass 2 och 3, skrivpassen
+              text: "Ordstarten: jättestor och snöbollsmaskinen i pass 2, grönsaker och sjuksköterska i pass 3.\nFörlagan: dra ramarna i den första reklamen. Det sista stycket säger åt läsaren att köpa."
+            - rubrik: Lyssna efter
+              text: "Eleven som skriver ”jätte bra” isär.\nEleven som läser grönsakerna som grönsak.\nEleven som inte hör skillnad på grön sak och grönsak. Låt eleven säga båda högt."
+        - rubrik: "Vecka 4 · Ord som slutar på -⁠are"
+          falt:
+            - rubrik: Fokus
+              text: "Eleven läser och stavar ord på -⁠are, som betyder en person eller en sak som gör något, och ser att ett a faller bort, som i läsa och läsare."
+            - rubrik: Förlagan
+              text: "Lediga jobb i Fantasistaden, tre platsannonser för påhittade yrken. Veckans ord i texten: läsare, bagare, målare, dykare, lärare, fotbollsspelare, glassprovare, molnräknare och sakletare. Före läsningen visar du bilder av en dykare och en bagare."
+            - rubrik: Pass 1, ordpasset
+              text: "Ordstarten: planschen -⁠are. Orden jättegod och supersnabb.\nBygga: visa och säg ”Molnräknare. Jag ringar in ändelsen, are. Kvar är moln och räkn, av räkna, och a:et har fallit bort. Jag drar en båge under moln, räkn och are. Molnräknare. Bakifrån: en som räknar moln.”\nNya ord: dansare, sångare, hoppare, byggare, gräsklippare och skidåkare.\nDiktamen: spelarna, simmare, dammsugare, fotbollsspelare och bilförare. Skriv sedan ”simare” och säg ”Simma har två m, och de står kvar. Simmare.” Skriv ”fotbollspelare” och säg ”S:et står kvar fast nästa del börjar på s.” Fråga om en dammsugare är en person eller en sak."
+            - rubrik: Uppgiften
+              text: "Paret skriver en platsannons för ett påhittat yrke, gärna ett jobb med parets uppfinning från vecka 1. Början: yrket och sökes som rubrik. Mitten: vad man gör och vad man ska kunna. Slutet: hur man söker. Texten har minst tre ord på -⁠are."
+            - rubrik: Din plan
+              text: "Början: Sängcykelförare sökes. Mitten: cykla och berätta, pigg och duktig. Slutet: skriv om din bästa morgon. Långa ord i delar: för | are, berätt | are, upp | finn | are."
+            - rubrik: Din text
+              text: "Sängcykelförare sökes\nVi behöver en förare som provar vår nya sängcykel. Som förare cyklar du till skolan varje morgon och berättar vad som är bra och dåligt. Du ska vara pigg, tycka om att cykla och vara en duktig berättare. Du får en hjälm av vår uppfinnare. Så söker du: skriv en mening om din bästa morgon."
+            - rubrik: Pass 2 och 3, skrivpassen
+              text: "Ordstarten: molnräknare och läsaren i pass 2, fotbollsspelare och dammsugaren i pass 3.\nFörlagan: dra ramarna i en annons, som Molnräknare sökes.\nEfter veckan: läs parens texter från vecka 1 och 4, ta felstavade ord till Ordstarten och bestäm vem som behöver en sekreterare från vecka 5."
+            - rubrik: Lyssna efter
+              text: "Eleven som tappar ett m, som ”simare”.\nEleven som skriver ”fotbollspelare” med ett s.\nEleven som säger att en dammsugare är en person.\nEleven som delar spelarna i spel och arna. Visa att ordet är spelare och -⁠na, och att e:t i spelare faller bort.\nEleven som tror att snabbare är en person. Säg att snabbare används när man jämför, som mysigare."
+        - rubrik: "Vecka 5 · Förstavelser"
+          falt:
+            - rubrik: Fokus
+              text: "Eleven läser och stavar ord med förstavelserna o-, miss-, åter- och sam- och säger vad förstavelsen gör i just det ordet. Ost och orm börjar på o men har ingen förstavelse."
+            - rubrik: Förlagan
+              text: "Otursdagen, en rolig berättelse i jagform. Veckans ord i texten: otur, oväder, okänd, osäker, ojämn, missnöjd, misslyckas, samarbeta, samarbete, samtal och återvända. Före läsningen visar du en bild av ett oväder."
+            - rubrik: Pass 1, ordpasset
+              text: "Ordstarten: planschen o-, miss-, åter- och sam-, och -⁠ade och -⁠de. Orden dykare och glasstrut.\nBygga: visa och säg ”Missnöjd. Finns det en förstavelse? Miss. Jag ringar in den. Kvar är nöjd. Här betyder miss inte, så den som är missnöjd är inte nöjd.” Skriv sedan oväder på stora tavlan och säg att o betyder dåligt i oväder. Visa orm och säg ”Jag tar bort o. Blir rm ett ord? Nej. Orm har ingen förstavelse.” Säg att åter betyder tillbaka eller igen, som i återvända. Paren bygger ord och lägger dem i två högar, ord med förstavelse och ord utan, och gör fråga 2.\nNya ord: olycka, ovänlig, oklar, misstag, återbruk och samåka.\nDiktamen: otur, osäker, misslyckades, samarbete och okokt. Skriv sedan ”mislyckas” och säg ”Miss har två s, och de står kvar när lyckas kommer efter. Misslyckas.”"
+            - rubrik: Uppgiften
+              text: "Från den här veckan gör varje elev sin egen plan och skriver sin egen text. Kamraten lyssnar när eleven berättar och är kontrollant när texten är klar. Eleven skriver en rolig berättelse i jagform om en otursdag, som kan vara påhittad. Början: den första oturen. Mitten: oturen blir större. Slutet: det vänder. Texten har minst tre långa ord, och minst två med förstavelse."
+            - rubrik: Din plan
+              text: "Början: sängcykeln går sönder. Mitten: regn, osäker på vägen, blöt och missnöjd. Slutet: kompisen och samarbetet. Långa ord i delar: o | tur, o | säker, miss | nöjd, sam | arbet | ade."
+            - rubrik: Din text
+              text: "I går hade jag otur hela dagen. Först gick sängcykeln sönder, och jag fick springa till skolan. Sedan började det regna, och jag var osäker på vägen. Jag kom fram blöt och missnöjd. Men min kompis väntade med en handduk. På rasten samarbetade vi och lagade sängcykeln. Otur kan bli tur!"
+            - rubrik: Pass 2 och 3, skrivpassen
+              text: "Ordstarten: otur och missnöjd i pass 2, samarbetet och återvände i pass 3.\nFörlagan: dra ramarna för början, mitten och slutet i hela berättelsen.\nDin text: i pass 2 säger du varje mening högt innan du skriver den, som eleverna ska göra nu när var och en skriver sin egen text. I pass 3 är en elev kontrollant för din text, läser den högt och pekar på de långa orden, och du tar ett ord med stegen."
+            - rubrik: Lyssna efter
+              text: "Eleven som skriver ”mislyckas” med ett s.\nEleven som läser misslyckades som misslyckas.\nEleven som säger att o i ost är en förstavelse.\nEleven som säger att en ovän är en vän."
+        - rubrik: "Vecka 6 · Ändelser som beskriver"
+          falt:
+            - rubrik: Fokus
+              text: "Eleven läser och stavar ord med -⁠ig, -⁠lig, -⁠lös och -⁠bar och säger vad ändelsen betyder, som ”utan” i tandlös och ”går att” i ätbar."
+            - rubrik: Förlagan
+              text: "Molnkatten, en lexikonartikel om ett påhittat djur. Veckans ord i texten: dimmig, lurvig, farlig, ofarlig, osynlig, vänlig, färglös, ljudlös, tandlös, tvättbar och ätbar. Före läsningen visar du bilder av dimmiga berg och av mossa."
+            - rubrik: Pass 1, ordpasset
+              text: "Ordstarten: planschen -⁠ig, -⁠lig, -⁠lös och -⁠bar, och -⁠a och -⁠t. Orden oturen och misslyckades.\nBygga: visa och säg ”Färglös. Jag ringar in ändelsen, lös. Kvar är färg. Lös betyder utan, så färglös är utan färg.” Visa sedan dimmig och säg ”Dimma och ig. A:et faller bort. Dimmig.” Ta fram korten med o- från vecka 5 till fråga 2. Paren bygger ord med -⁠lös och -⁠bar och säger vad de betyder: tandlös är utan tänder, och det som är ätbart går att äta.\nNya ord: modig, sandig, kunglig, smaklös, läsbar och användbar.\nDiktamen: farlig, ljudlös, tvättbara, slemmig och taggig. Skriv sedan ”slemig” och säg ”Slem får två m före ig. Slemmig.”"
+            - rubrik: Uppgiften
+              text: "Eleven hittar på ett fantasidjur och skriver en lexikonartikel om det. Början: djurets namn och vad det är för djur. Mitten: rubrikerna ”Utseende och ljud” och ”Mat”. Slutet: rubriken ”Är den farlig?” och svaret. Texten har minst tre ord med -⁠ig, -⁠lig, -⁠lös eller -⁠bar. Eleven ritar djuret."
+            - rubrik: Din plan
+              text: "Början: Kuddräven bor i soffor. Mitten: utseende och ljud, mat. Slutet: ofarlig och vänlig. Långa ord i delar: prick | ig, ljud | lös, ät | bar | a, o | far | lig."
+            - rubrik: Din text
+              text: "Kuddräven\nKuddräven är ett litet djur som bor i soffor.\nUtseende och ljud: Pälsen är mjuk och prickig. Kuddräven är nästan ljudlös, men den snarkar när den sover.\nMat: Den äter smulor och tappade popcorn. Strumpor är inte ätbara, men den tuggar gärna på dem.\nÄr den farlig? Nej, kuddräven är ofarlig och vänlig."
+            - rubrik: Pass 2 och 3, skrivpassen
+              text: "Ordstarten: färglös och osynlig i pass 2, ofarliga och ätbara i pass 3.\nFörlagan: inledningen hör till början, och de två första rubrikerna är mitten."
+            - rubrik: Lyssna efter
+              text: "Eleven som skriver ”slemig” med ett m.\nEleven som skriver ”faralig”.\nEleven som läser tvättbara som tvättbar.\nEleven som tror att -⁠lös betyder mycket."
+        - rubrik: "Vecka 7 · Ord på -⁠ning, -⁠het, -⁠else och -⁠skap"
+          falt:
+            - rubrik: Fokus
+              text: "Eleven läser och stavar ord med -⁠ning, -⁠ing, -⁠het, -⁠else och -⁠skap, och ser att ord på -⁠ning, -⁠ing, -⁠het och -⁠skap får fogen s när de står först i ett sammansatt ord."
+            - rubrik: Förlagan
+              text: "Så går kråkhoppning till, en instruktion. Veckans ord i texten: kråkhoppning, tävling, samling, övning, landning, rörelse, säkerhet, vänskap, tävlingsregel och säkerhetsregel. Före läsningen visar du bilder av en kråka och ett barn som hoppar längdhopp."
+            - rubrik: Pass 1, ordpasset
+              text: "Ordstarten: planschen -⁠ning och -⁠ing, -⁠het och -⁠skap, och -⁠else. Orden ljudlöst och tvättbar.\nBygga: visa och säg ”Landning. Jag ringar in ändelsen, ning. Kvar är land, av landa. Landning är när man landar.” Visa sedan landningsbana och säg ”Landning och bana. Efter ning kommer ett s före nästa del. Landningsbana.” Säg att -⁠else inte får något s, som i födelsedag. Bygger paren tävlning eller öving, låt dem pröva båda ändelserna och säga ordet högt. Det som låter som ett ord de har hört är rätt.\nNya ord: läsning, målning, nyhet, frihet, händelse och kamratskap.\nDiktamen: tävlingen, säkerhet, rörelse, tävlingsregel och upplevelse. Skriv sedan ”tävlingregel” och fråga ”Står ing före en annan del?” Säg att det efter ning, ing, het och skap kommer ett s före nästa del."
+            - rubrik: Uppgiften
+              text: "Eleven skriver en instruktion till en lek, gärna på drömskolgården, och en annan grupp prövar en av gruppens lekar på en rast. Början: lekens namn och vad leken är. Mitten: rubrikerna ”Det här behöver ni” och ”Så går det till”, med orden först, sedan och därefter. Slutet: rubriken ”Säkerhet”. Texten har minst tre långa ord, och minst två med -⁠ning, -⁠ing, -⁠het, -⁠else eller -⁠skap."
+            - rubrik: Din plan
+              text: "Början: Däckhoppning, en lek på skolgården. Mitten: det här behöver ni, så går det till. Slutet: säkerhet och vänskap. Långa ord i delar: däck | hopp | ning, land | ning | en, vän | skap."
+            - rubrik: Din text
+              text: "Däckhoppning\nDäckhoppning är en lek på skolgården för fyra eller fler.\nDet här behöver ni: Fem gamla bildäck.\nSå går det till: Först lägger ni däcken i en rad. Sedan hoppar alla från däck till däck utan att nudda marken. Därefter räknar ni hoppen. Den som klarar flest hopp vinner.\nSäkerhet: Hoppa bara när det är torrt, och ta det lugnt vid landningen. Vänskap är viktigare än att vinna."
+            - rubrik: Pass 2 och 3, skrivpassen
+              text: "Ordstarten: kråkhoppning och rörelsen i pass 2, säkerhetsregler och vänskapen i pass 3.\nFörlagan: inledningen hör till början, och rubrikerna ”Det här behöver ni” och ”Så går det till” är mitten.\nGruppen väljer en av lekarna, som en annan grupp prövar på en rast i vecka 8. I Ordstarten efteråt får ni höra hur det gick."
+            - rubrik: Lyssna efter
+              text: "Eleven som tappar s:et, som ”tävlingregel”.\nEleven som läser säkerhetsregler som säkerhetsregel.\nEleven som läser landning utan att känna igen landa."
+        - rubrik: "Vecka 8 · Nyord"
+          falt:
+            - rubrik: Fokus
+              text: "Eleven förklarar nya ord ur delarna och bygger egna, och märker när delarna inte räcker, som i hjärnröta, och när ett ord inte har några delar, som skibidi. Gruppen sätter ihop tidningen och läser den för en inbjuden läsare."
+            - rubrik: Förlagan
+              text: "Årets nya ord, en artikel om fem ord ur Isofs nyordslistor 2024 och 2025. Veckans ord i texten: vänskapsbänk, avokadoskanner, balkongkraftverk, hjärnröta, nyord och nyordslista, och skibidi, som inte har några delar. Före läsningen visar du bilder av en vänskapsbänk och ett balkongkraftverk."
+            - rubrik: Pass 1, ordpasset
+              text: "Ordstarten: planschen, de delar eleverna väljer. Orden övningen och säkerheten.\nBygga: visa och säg ”Vänskapsbänk. Vänskap och bänk, och ett s mellan dem. Bakifrån: en bänk för den som vill prata med någon.” Visa sedan hjärnröta och säg ”Hjärna och röta. Men hjärnan ruttnar inte på riktigt. Här räcker inte delarna, och då frågar vi någon eller slår upp ordet.” Varje elev bygger ett eget nytt ord med korten, och de andra gissar vad det betyder, bakifrån.\nNya ord: osäkerhet, läsbarhet, omöjlighet, oläsbar, vänskapsband och säkerhetsbälte.\nDiktamen: vänskapsbänk, nyordslistan, avokadoskanner, säkerhetsregler och olycklig. Skriv sedan ”vänskapbänk” och fråga ”Står skap före en annan del?”"
+            - rubrik: Uppgiften
+              text: "I pass 2 hittar eleven på ett nytt ord av två ord som redan finns och skriver en artikel om det. Början: vad ordet betyder. Mitten: vad ordet är byggt av, och vad det är bakifrån. Slutet: en mening med ordet. Texten har minst tre långa ord, och ett av dem är det nya ordet."
+            - rubrik: Din plan
+              text: "Början: vad rastregn betyder. Mitten: rast och regn, och bakifrån ett regn. Slutet: en mening med ordet. Långa ord i delar: rast | regn, skol | gård | en, fot | bolls | match | en."
+            - rubrik: Din text
+              text: "Rastregn\nMitt nya ord är rastregn. Det är ett regn som kommer på rasten, ofta precis när hela klassen har gått ut på skolgården. Ordet är byggt av rast och regn, och bakifrån är det ett regn. Exempel: Det blev rastregn igen, så fotbollsmatchen fick vänta."
+            - rubrik: Pass 2 och 3, skrivpassen
+              text: "Ordstarten: vänskapsbänken och balkongkraftverket i pass 2.\nFörlagan: dra ramarna i ett av styckena, som det om vänskapsbänk. Slutet, en mening där ordet används, visar du med din text.\nTexten är kort, och eleven skriver den klart i pass 2. Kamraten är kontrollant sist i Skriva, och i Läsa upp läser varje elev hela sin text.\nPass 3 är tidningens pass, och alla texter kommer med. Ordstarten, 5 minuter: fotbollsplanen och molnräknare. Tidningen, 35 minuter: ni skriver en innehållsförteckning med en rad för varje avdelning, och två elever gör omslaget medan de andra skriver avdelningarnas namn, ett namn på varje sida. Läsa upp, 20 minuter: varje elev läser en av sina texter för den inbjudna läsaren, och du delar ut diplomen sist. Innan du kopierar tidningen skriver du rätt stavning med blyerts ovanför de övade ord som fortfarande är fel. Kopiera två sidor på varje ark, och dela ut häftet när du har gjort kartläggningen efter kursen."
+            - rubrik: Lyssna efter
+              text: "Eleven som inte börjar bakifrån och säger att en vänskapsbänk är en vän.\nEleven som läser säkerhetsregler som säkerhetsregel.\nEleven som inte märker att delarna inte räcker i hjärnröta."
+    - rubrik: "Förlaga, vecka 1: Tre uppfinningar som världen behöver"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Om texten", text: "Veckans ord i texten står på veckans sida. Uppfinningarnas namn är påhittade." }
+      listor:
+        - rubrik: "Tre uppfinningar som världen behöver"
+          rader:
+            - ["Varje dag är det något som är jobbigt. Här är tre nya saker som kan hjälpa dig."]
+            - ["**Sängroboten**"]
+            - ["Ingen orkar bädda sängen på morgonen. Sängroboten gör det åt dig. Den drar upp täcket och slätar ut lakanet. Du hinner packa matlådan och ryggsäcken medan den jobbar."]
+            - ["**Regnhatten**"]
+            - ["Det regnar, och du har ingen jacka. Då är regnhatten bäst. Den har ett stort tak av plast. Regnet rinner av, och du blir inte blöt. Den passar till och med över en cykelhjälm. Inte ens glasögonen blir blöta."]
+            - ["**Cykelhissen**"]
+            - ["Backen är lång, och benen är trötta. Cykelhissen står längst ner. Du rullar in och trycker på en knapp. Hissen lyfter dig, cykeln och ryggsäcken till toppen."]
+            - ["Vad behöver du själv? En tandrobot? En matrobot som lagar mat? Hitta på något och skriv till oss."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Stryk under fem ord som är byggda av två ord."]
+            - ["2. Dela ordet regnhatt med ett streck och byt plats på delarna. Vad är ett hattregn?"]
+            - ["3. Börja bakifrån: vad är en cykelhiss? Hur vet du det?"]
+            - ["4. Vem är artikeln skriven för? Vilka ord visar det?"]
+    - rubrik: "Förlaga, vecka 2: Välkommen till Äventyrsbadet"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Om texten", text: "Veckans ord i texten står på veckans sida." }
+      listor:
+        - rubrik: "Välkommen till Äventyrsbadet"
+          rader:
+            - ["Här på Äventyrsbadet finns mer än du hinner pröva på en enda dag. Badet är större än en fotbollsplan, och det är lätt att gå vilse. Läs guiden och följ skyltarna, så hittar du rätt."]
+            - ["**Omklädningsrummet**"]
+            - ["Här byter du om och duschar innan du går ut i solen. Handduk och solglasögon tar du med dig, men skorna lämnar du här."]
+            - ["**Rutschkanan**"]
+            - ["Den är lång som ett nattåg och snabb som en sportbil. Du startar högst upp i ett torn och landar med ett plask."]
+            - ["**Gatuköket**"]
+            - ["Här köper du mat, och över disken hänger en gammal gatlykta. Det finns också glasstrutar, dricksvatten och en bänk att vila på."]
+            - ["Äventyrsbadet är öppet alla veckodagar. Skolbussen stannar vid dörren. Har du tappat din ficklampa? Fråga i kassan, så hjälper vi dig. Välkommen tillbaka!"]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Stryk under fyra ord med ett s mellan delarna. Gör en ring runt två ord där en bokstav har fallit bort."]
+            - ["2. Dela ordet äventyrsbad med ett streck. Vilken del hör fogen s till? Är äventyr ett ord eller två?"]
+            - ["3. Börja bakifrån: vad är ett nattåg? Hur vet du det?"]
+            - ["4. Vem är guiden skriven för? Hur hjälper skyltarna den som läser?"]
+    - rubrik: "Förlaga, vecka 3: Två reklamer, tre fel"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Om texten", text: "Orden som står ihop och isär, som skumtomte och skum tomte, kommer ur Isofs övningar Sätta ihop ord (2025). Ostmacka, surstång och skumtomte står isär i den slarviga reklamen, och veckans andra ord i texten står på veckans sida." }
+      listor:
+        - rubrik: "Två reklamer, tre fel"
+          rader:
+            - ["Här är två reklamer. Läs dem och se om du vill köpa något."]
+            - ["**Snöbollsmaskinen**"]
+            - ["Är du trött på kalla händer? Då är det här något för dig. Snöbollsmaskinen är supersnabb och superstark. Den gör hundra snöbollar på en minut. Du behöver bara trycka på en knapp."]
+            - ["Bygg en jättestor snögubbe på tio minuter. Det blir jätteroligt, och du blir inte kall om händerna."]
+            - ["Köp din snöbollsmaskin i dag! Det är ett jättebra pris för en jättestor maskin. Du får en mössa på köpet. Skynda dig, innan snön smälter!"]
+            - ["**Den slarviga reklamen**"]
+            - ["Hungrig? Kom till kiosken vid torget! Här är det alltid kö."]
+            - ["Vi har en ost macka för tjugo kronor. Köp också en sur stång eller en skum tomte. Vi har även varm choklad."]
+            - ["Allt är jättegott. Barn får en glasstrut för tio kronor. Kom i dag, så ses vi!"]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Stryk under fyra ord som börjar med jätte eller super."]
+            - ["2. Läs den slarviga reklamen. Hitta de tre ord som har gått isär, och skjut ihop dem med ordkorten."]
+            - ["3. Börja bakifrån: vad är en skum tomte, och vad är en skumtomte? Hur vet du det?"]
+            - ["4. Vem är reklamerna skrivna för? Vilka meningar säger åt dig att köpa?"]
+    - rubrik: "Förlaga, vecka 4: Lediga jobb i Fantasistaden"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Om texten", text: "Ordet sakletare kommer från Pippi Långstrump, och de andra yrkena är påhittade." }
+      listor:
+        - rubrik: "Lediga jobb i Fantasistaden"
+          rader:
+            - ["Fantasistaden behöver hjälp. Här är tre lediga jobb. Du som är en bra läsare hittar säkert ett som passar dig."]
+            - ["**Glassprovare sökes**"]
+            - ["Som glassprovare provar du ny glass varje dag. Du ska kunna skilja på vanilj och choklad. Du jobbar i en kiosk vid fotbollsplanen, bredvid vår bagare. Så söker du: skicka en teckning av din bästa glass."]
+            - ["**Molnräknare sökes**"]
+            - ["Som molnräknare räknar du moln från ett högt tak. Du ska kunna räkna till tusen och vara supersnabb. Du jobbar ihop med vår målare, som målar molnen. Så söker du: skriv hur många moln du ser just nu."]
+            - ["**Sakletare sökes**"]
+            - ["Som sakletare letar du efter allt som någon har tappat. Fotbollsspelare, dykare och lärare tappar saker varje dag. Du ska vara envis och jättebra på att hitta. Så söker du: skriv en mening om något du har hittat."]
+            - ["Alla jobb är lediga nu. Skynda dig och sök, innan någon annan tar dem!"]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Stryk under sju olika ord som slutar på are."]
+            - ["2. Dela ordet sakletare med två streck. Vilket ord kommer let från, och vilken bokstav har fallit bort?"]
+            - ["3. Börja bakifrån: vad är en glassprovare? Hur vet du det?"]
+            - ["4. Vem är annonserna skrivna för? Vilken mening i varje annons säger hur man söker?"]
+    - rubrik: "Förlaga, vecka 5: Otursdagen"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Om texten", text: "Veckans ord i texten står på veckans sida." }
+      listor:
+        - rubrik: "Otursdagen"
+          rader:
+            - ["Jag hade otur redan på morgonen. Tandborsten var borta, och jag misslyckades med frukosten. Mackan föll med osten nedåt."]
+            - ["Skolbussen åkte utan mig. Jag vinkade, men den körde vidare. Jag tog cykelhjälmen och cyklade iväg."]
+            - ["Sedan kom ett oväder. Jag svängde fel och hamnade på en okänd gata. Jag var blöt och osäker på vägen."]
+            - ["Vägen var ojämn, och plötsligt gick luften ur däcket. En fågel såg på och verkade skratta. Jag var så missnöjd!"]
+            - ["Då kom min lärare med ett stort paraply. ”Nu samarbetar vi”, sa hon."]
+            - ["Hon höll paraplyet, och jag ledde cykeln. Vi hade ett fint samtal på vägen."]
+            - ["Efter en stund återvände solen. Det blev ett bra samarbete! Otur kan bli tur, om man får hjälp."]
+            - ["På kvällen hittade jag tandborsten i min sko."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Stryk under åtta ord som har förstavelsen o, miss, åter eller sam."]
+            - ["2. Dela orden otur och ost efter o. Vilket av dem har en förstavelse?"]
+            - ["3. Börja bakifrån: vad betyder samarbete? Hur vet du det?"]
+            - ["4. Berättelsen står i en tidning. Vem läser den, och vad i texten tycker de är roligt?"]
+    - rubrik: "Förlaga, vecka 6: Molnkatten"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Om texten", text: "Molnkatten är påhittad. Veckans ord i texten står på veckans sida." }
+      listor:
+        - rubrik: "Molnkatten"
+          rader:
+            - ["Molnkatten är ett litet djur, lika stort som en kanin. Den bor på dimmiga berg. Där ligger molnen så lågt att man kan ta på dem."]
+            - ["**Utseende och ljud**"]
+            - ["Pälsen är lurvig och färglös. Därför är molnkatten nästan osynlig i dimman. Det enda man ser är två gula ögon."]
+            - ["Molnkatten går ljudlöst på mjuka tassar. Man hör den bara när den spinner. Då låter det som ett litet åskmoln."]
+            - ["**Mat**"]
+            - ["Molnkatten äter bär och mossa. Mossan smakar ingenting, men molnkatten äter den ändå. Ibland hittar den en strumpa på marken. Strumpan är tvättbar men inte ätbar. Därför får strumpan ligga kvar."]
+            - ["**Är den farlig?**"]
+            - ["Nej, molnkatten är ofarlig och vänlig. Den är tandlös och kan inte bita. Den vill gärna bli klappad, men den är nästan osynlig. Därför är det nästan ingen som hittar den."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Stryk under åtta ord som har ändelsen ig, lig, lös eller bar."]
+            - ["2. Dela ordet ofarlig med två streck. Vilket ord kommer far från, och vilken bokstav har fallit bort?"]
+            - ["3. Börja bakifrån: vad betyder tvättbar? Hur vet du det?"]
+            - ["4. Vem slår upp ett djur i ett lexikon? Vilka frågor om molnkatten svarar artikeln på?"]
+    - rubrik: "Förlaga, vecka 7: Så går kråkhoppning till"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Om texten", text: "Ordet kråkhoppning kommer från Pippi Långstrump i Söderhavet. Leken är påhittad för kursen." }
+      listor:
+        - rubrik: "Så går kråkhoppning till"
+          rader:
+            - ["Kråkhoppning är en tävling för hela gruppen. Man hoppar som en kråka, med båda fötterna ihop. Vinnaren är den som hoppar längst."]
+            - ["**Det här behöver ni**"]
+            - ["Ni behöver krita, en mjuk matta och ett måttband. Mattan ska vara så mjuk som en kudde."]
+            - ["**Så går det till**"]
+            - ["Först ritar ni en linje med krita. Sedan är det samling vid linjen. Alla gör en övning med tio små hopp. Därefter får alla hoppa tre gånger."]
+            - ["Hoppet är en enda stor rörelse: böj knäna, svinga armarna och hoppa. Landningen ska vara stilla. Den första tävlingsregeln är att man inte får kliva över linjen. Sist mäter ni hoppen, och det längsta hoppet räknas."]
+            - ["**Säkerhet**"]
+            - ["Säkerhet är viktigast, och tävlingen har två säkerhetsregler. Hoppa aldrig på hal mark, för det är farligt. Landa på mattan, så är hoppet ofarligt. Heja på varandra, för vänskap betyder mer än att vinna."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Stryk under åtta ord med ändelsen ning, ing, het, else eller skap."]
+            - ["2. Dela ordet tävlingsregeln med streck. Vilken bokstav står i fogen?"]
+            - ["3. Börja bakifrån: vad är en säkerhetsregel? Hur vet du det?"]
+            - ["4. Vem ska följa en instruktion som den här? Vilka tre rubriker hjälper dem att hitta i texten?"]
+    - rubrik: "Förlaga, vecka 8: Årets nya ord"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Om texten", text: "Orden står i Isofs nyordslistor 2024 och 2025, och förklaringarna är skrivna för kursen." }
+      listor:
+        - rubrik: "Årets nya ord"
+          rader:
+            - ["Ett nytt ord kallas ett nyord. Varje år samlar språkforskare nyord i en nyordslista. Här är fem från 2024 och 2025."]
+            - ["Vänskapsbänk är en bänk för den som vill prata med någon. Den som sitter där visar att det går bra att komma fram. Ordet är byggt av vänskap och bänk, och bakifrån är det en bänk."]
+            - ["Avokadoskanner är en apparat som visar om en avokado är mogen. Ordet är byggt av avokado och skanner, och bakifrån är det en skanner."]
+            - ["Balkongkraftverk är små solpaneler som sitter på en balkong och ger el till hemmet. Ordet är byggt av balkong och kraftverk, och ett kraftverk gör el."]
+            - ["Hjärnröta är när man har tittat på för många korta klipp. Då känner man sig trött och tom i huvudet. Ordet har två delar, hjärna och röta. Men hjärnan ruttnar inte på riktigt."]
+            - ["Skibidi har inga delar, för ingen har byggt det av ord som redan finns. Det används om något konstigt, dåligt eller häftigt."]
+            - ["Vad i din vardag saknar ett ord? Hitta på ett nytt ord av ord som redan finns. Skriv en förklaring, delarna och en mening med ordet."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Stryk under de fem nya orden i artikeln. Vilket av dem har inga delar?"]
+            - ["2. Dela ordet avokadoskanner med ett streck och byt plats på delarna. Vad är en skanneravokado?"]
+            - ["3. Börja bakifrån: vad är ett balkongkraftverk? Hur vet du det?"]
+            - ["4. Vem läser en artikel om nya ord? Vad ber artikeln läsaren göra sist?"]
+    # ---------------------------------------------------------------- Ordkorten
+    - rubrik: Ordkorten
+      text:
+        - Varje vecka har en sida med kort. I ordpasset bygger paren ord med korten, delar dem och flyttar delarna.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så gör du
+              text: Skriv ut veckans kort en gång per par och en gång till dig, gärna på tjockt papper. Klipp isär korten och lägg varje sats i ett kuvert. Förstavelserna har ett streck efter sig och ändelserna ett streck före. Ett a i parentes, som i skol(a) och läs(a), faller bort när en annan del kommer efter, som i skolgård och läsare. Fogarna s, o och u har egna kort. Paren kan också bygga ord som inte finns. Låt eleven säga vad ett sådant ord skulle betyda, och hjälp eleven att skilja det från ett riktigt ord som har blivit fel, som tävlning för tävling.
+      listor:
+        - rubrik: "Vecka 1 · Ordkort"
+          rader: [[säng], [robot], [regn], [hatt], [cykel], [hiss], [hjälm], [tand], [borste], [snö], [boll], [brand], [bil], [glas], [ögon], [hand], [duk], ["-arna"]]
+        - rubrik: "Vecka 2 · Ordkort"
+          rader: [[äventyr], [bad], [fot], [boll], [plan], ["skol(a)"], [gård], [buss], ["veck(a)"], [dag], ["gat(a)"], [kök], [glass], [strut], [s], [s], [o], [u]]
+        - rubrik: "Vecka 3 · Ordkort"
+          rader: [["jätte-"], ["super-"], [stor], [bra], [god], [rolig], [snabb], [stark], [grön], [sak], [ost], [macka], [skum], [tomte], [sur], [stång], [strö], [socker]]
+        - rubrik: "Vecka 4 · Ordkort"
+          rader: [["läs(a)"], ["lär(a)"], ["spel(a)"], ["mål(a)"], ["dyk(a)"], ["simm(a)"], [glass], ["prov(a)"], [moln], ["räkn(a)"], [sak], ["let(a)"], [damm], ["sug(a)"], [fotboll], [s], ["-are"], ["-are"]]
+        - rubrik: "Vecka 5 · Ordkort"
+          rader: [["o-"], ["o-"], ["miss-"], ["miss-"], ["åter-"], ["sam-"], [tur], [vän], [säker], [lycka], [känd], [lyckas], [nöjd], [vända], [arbete], [tal], [ost], [orm]]
+        - rubrik: "Vecka 6 · Ordkort"
+          rader: [["-ig"], ["-ig"], ["-lig"], ["-lig"], ["-lös"], ["-lös"], ["-bar"], ["-bar"], [lurv], ["dimm(a)"], [färg], [ljud], [tand], [vän], ["far(a)"], ["tvätt(a)"], ["ät(a)"], [syn]]
+        - rubrik: "Vecka 7 · Ordkort"
+          rader: [["-ning"], ["-ing"], ["-het"], ["-else"], ["-skap"], [s], [regel], ["öv(a)"], ["land(a)"], ["tävl(a)"], ["saml(a)"], [säker], [ny], [fri], ["rör(a)"], ["händ(a)"], [kamrat], [vän]]
+        - rubrik: "Vecka 8 · Ordkort"
+          rader: [[vänskap], [s], [bänk], [avokado], [skanner], [balkong], [kraftverk], ["hjärn(a)"], [röta], [ny], [ord], [moln], [robot], [tand], [s], ["-are"], ["-lös"], [lista]]
+    # ---------------------------------------------------------------- Planschen
+    - rubrik: Delarna
+      text:
+        - Det här är din lista till planschen Delarna. Skriv av veckans delar på ett blädderblocksark på väggen när ni börjar veckan, så att planschen växer under kursen.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så gör du
+              text: Veckans sida säger vilka delar gruppen läser i Ordstarten. Gruppen säger delen och vad den gör. Vid fogarna och ändelserna som böjer ordet säger gruppen ett ord med delen, som fotbollsplan och bilarna.
+      listor:
+        - rubrik: Före ordet
+          rader:
+            - ["o-", "inte, tvärtom, dålig"]
+            - ["miss-", "inte, fel, dålig"]
+            - ["åter-", "tillbaka, igen"]
+            - ["sam-", "tillsammans"]
+            - ["jätte-, super-", "mycket"]
+        - rubrik: Mellan delarna
+          rader:
+            - ["s", "fotbollsplan, tävlingsregel"]
+            - ["o, u", "veckodag, gatukök"]
+            - ["a faller bort", "skolgård, farlig"]
+        - rubrik: Efter ordet
+          rader:
+            - ["-are", "en som gör, eller en sak som gör"]
+            - ["-ig, -lig", "som har, som är"]
+            - ["-lös", "utan"]
+            - ["-bar", "går att"]
+            - ["-ning, -ing", "det man gör"]
+            - ["-het, -skap", "det att vara"]
+            - ["-else", "det som händer, eller när man gör något"]
+        - rubrik: Ändelser som böjer ordet
+          rader:
+            - ["-en, -et", "bilen, huset"]
+            - ["-ar, -er, -or", "bilar, bananer, flickor"]
+            - ["-arna, -orna", "bilarna, flickorna"]
+            - ["-s", "Saras, bilens"]
+            - ["-ade, -de", "hoppade, återvände"]
+            - ["-a, -t", "lurviga, ljudlöst"]
+    # ---------------------------------------------------------------- Kortet Ett långt ord
+    - rubrik: Ett långt ord
+      text:
+        - Kortet ligger framför varje elev i varje pass, och stegen med fraserna står också på lathundens första sida.
+      huvud:
+        - rubrik: Namn
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så gör du
+              text: Skriv ut kortet till varje elev, gärna på tjockt papper och förminskat till A5. Fastnar eleven när hen läser, gå uppför stödtrappan under När eleven fastnar i ett ord.
+      listor:
+        - rubrik: De fyra stegen
+          rader:
+            - ["", Läsa, Stava]
+            - [1. Dela ordet, Ring in förstavelsen och ändelsen. Dra streck mellan delarna., Säg ordet. Räkna delarna.]
+            - [2. En del i taget, Dra en båge under varje del och läs den., Skriv en del i taget och säg den.]
+            - [3. Hela ordet, Säg ordet. Låter det som ett ord?, Läs ordet. Står det ihop? Är fogen med?]
+            - [4. Vad betyder det?, Börja bakifrån., Börja bakifrån. Passar delarna betydelsen?]
+        - rubrik: Till exempel
+          rader:
+            - ["cykel | hjälm | arna: cykelhjälmarna är hjälmarna man har när man cyklar"]
+            - ["o | tur: otur är inte tur"]
+    # ---------------------------------------------------------------- Vi skriver i par
+    - rubrik: Vi skriver i par
+      text:
+        - Varje par har kortet på bordet i skrivpassen.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så gör du
+              text: "Skriv ut kortet en gång per par, gärna förminskat till A5. Visa Kloka pennan i din text i vecka 1: du säger en mening, och en elev säger den igen och skriver den. Meningsbyggare är ett långt ord, så ta det med stegen. I en trio är den tredje kontrollant och kollar de långa orden i varje mening, och rollerna går runt efter varje mening. När texten är klar är alla i paret eller trion kontrollanter. Från vecka 5 skriver var och en sin text, och kamraten är kontrollant. I en trio läser eleverna varandras texter i tur och ordning."
+      listor:
+        - rubrik: Kloka pennan, vecka 1–4
+          rader:
+            - ["Meningsbyggaren säger meningen."]
+            - ["Sekreteraren säger meningen igen och skriver den."]
+            - ["Läs meningen tillsammans och byt roller."]
+        - rubrik: Var sin text, vecka 5–8
+          rader:
+            - ["Berätta din text för kamraten."]
+            - ["Säg varje mening högt innan du skriver den."]
+        - rubrik: Ett ord du är osäker på
+          rader:
+            - ["Säg delarna och skriv en del i taget."]
+            - ["Fortfarande osäker? Dra en prickad linje under ordet och skriv vidare."]
+        - rubrik: När ni lyssnar
+          rader:
+            - ["Vad vill ni veta mer om?"]
+            - ["Vilket långt ord hörde ni?"]
+        - rubrik: Kontrollanten
+          rader:
+            - ["Den som inte skrev sist läser texten högt."]
+            - ["Har vi med det lyssnarna undrade?"]
+            - ["Peka på varje långt ord. Står det ihop? Är fogen med?"]
+            - ["Har ett ord en prickad linje? Ta det med stegen och skriv det rätt ovanför."]
+    # ---------------------------------------------------------------- Skrivplanen
+    - rubrik: Skrivplanen
+      text:
+        - "I det första skrivpasset skriver paret på planen vad texten ska handla om och vem som läser den, ett par ord om början, mitten och slutet, minst tre långa ord i delar, som säng | cykel, och det som lyssnarna vill veta mer om. Från vecka 5 har varje elev en egen plan."
+      huvud:
+        - rubrik: Namn
+      delar:
+        - rubrik: Skrivplanen
+          falt:
+            - rubrik: "Vad handlar texten om?"
+            - rubrik: "Vem läser den?"
+            - rubrik: Början
+            - rubrik: Mitten
+            - rubrik: Slutet
+            - rubrik: Långa ord i delar
+            - rubrik: Lyssnarna undrar
+    # ---------------------------------------------------------------- Tidningens sida
+    - rubrik: Tidningens sida
+      sagoform: { form: sida, titel: Tidningens sida, radMm: 11 }
+      text:
+        - Det här är en sida i gruppens tidning, med en rad för titeln, en ruta att rita i och rader att skriva på. Eleverna skriver texten direkt på sidan med blyerts, och sidan går in i tidningen som den är.
+      huvud:
+        - rubrik: Skriven av
+      delar:
+        - rubrik: Tidningens sida
+          falt:
+            - { rubrik: Titel, text: "" }
+            - { rubrik: Bild, text: "" }
+            - { rubrik: Texten, text: "" }
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Till läraren, text: "Skriv ut en första sida och en sida att fortsätta på varje vecka, till varje par i vecka 1–4 och till varje elev i vecka 5–8. Sekreteraren, och från vecka 5 eleven, skriver textens första bokstav stort i den lilla rutan bredvid de första raderna. Paret ritar kartan i vecka 2 på ett tomt papper." }
+    - rubrik: "Tidningens sida: fortsättning"
+      sagoform: { form: sida, titel: Tidningens sida, radMm: 11 }
+      text:
+        - Den här sidan har bara rader. Eleverna skriver vidare på den när texten inte får plats på den första sidan.
+      huvud:
+        - rubrik: Skriven av
+      delar:
+        - rubrik: Tidningens sida
+          falt:
+            - { rubrik: Texten, text: "" }
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Till läraren, text: "Ge paret, eller från vecka 5 eleven, sidan när texten inte får plats på den första sidan." }
+    # ---------------------------------------------------------------- Kartläggningen
+    - rubrik: "Kartläggning: före och efter kursen"
+      text:
+        - Gör kartläggningen veckan före och veckan efter kursen, med samma ord båda gångerna. Ni övar inte de här orden i passen. Uppgift 1 och 4 gör du med en elev i taget, omkring fem minuter per elev, och uppgift 2, 3 och 5 med hela gruppen, omkring 20 minuter, en annan dag än uppgift 1 och 4.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så gör du
+              text: "Säg till eleven före kartläggningen att hen ska vara med i en verkstad där gruppen gör en tidning, och att orden i kartläggningen visar var ni ska börja. Eleven har ordlistan framför sig i uppgift 1 och bladet Dela orden i uppgift 2. Lägg undan dem före diktamen i uppgift 3, så att bara elevens blad ligger framme. Du har den här sidan. Uppgift 1: eleven läser orden högt, rad för rad, och du skriver det eleven säger ovanför ett ord som blir fel, på din egen kopia av ordlistan. Uppgift 2: visa övningsordet cykelhjälmarna först, och eleven ringar in ändelsen och drar streck mellan delarna på bladet Dela orden. Uppgift 3: du säger ordet, meningen och ordet igen, och eleven skriver på elevens blad. Uppgift 4: du läser frågan, och eleven svarar muntligt. Skriv svaret ordagrant. Uppgift 5: eleven skriver i tio minuter på tidningens sida om en sak som hen önskar fanns: vad den heter, vad som är jobbigt utan den och vad den gör."
+            - rubrik: Poängen
+              text: "Uppgift 1: ett poäng för varje ord som eleven läser rätt, också när eleven har delat ordet först, högst 16. Uppgift 2: ett poäng när eleven har märkt alla delar som i facit, med streck eller ring, högst 8. Uppgift 3: ett poäng för varje ord som är rätt stavat och ett för varje del som är rätt stavad, högst 8 för orden och 19 för delarna. Uppgift 4: två poäng när eleven säger både delarna och betydelsen, och ett när eleven säger det ena, högst 8. Uppgift 5: räkna de långa orden, och skriv vilka som står isär eller saknar fogen. Skriv också vilka av början, mitten och slutet texten har. Texten är av samma slag som i vecka 1, så efter kursen säger den mest om hur eleven skriver de långa orden."
+            - rubrik: Lyssna efter
+              text: "Gissar eleven efter början av ordet?\nTappar eleven ändelsen?\nDelar eleven ordet på fel ställe?\nFörklarar eleven ordet bakifrån?"
+      listor:
+        - rubrik: "Uppgift 2 · Facit"
+          larare: true
+          rader:
+            - ["bad | rums | dörr"]
+            - ["sommar | lov | et"]
+            - ["o | läs | lig"]
+            - ["hjälp | lös"]
+            - ["lek | plats"]
+            - ["mat | sal | en"]
+            - ["skol | bibliotek | et"]
+            - ["tåg | resa"]
+        - rubrik: "Uppgift 3 · Diktamen"
+          larare: true
+          kolumner: [Ordet, Delar, Meningen]
+          rader:
+            - [hundkoja, "2", Hunden sover i sin hundkoja.]
+            - [handbollsmatch, "3", En handbollsmatch spelas inomhus.]
+            - [gatsten, "2", Gatan är byggd av gatsten.]
+            - [otrygg, "2", Katten blev otrygg när det åskade.]
+            - [missförstå, "2", Det är lätt att missförstå en lapp.]
+            - [smutsig, "2", Tröjan blev smutsig i leran.]
+            - [tandläkare, "3", En tandläkare tittar på tänderna.]
+            - [vänlighet, "3", Vi tackade för hennes vänlighet.]
+        - rubrik: "Uppgift 4 · Förklara orden"
+          larare: true
+          rader:
+            - ["Vad kan en molnstövel vara? Hur vet du det?"]
+            - ["Vad kan ett bokregn vara? Hur vet du det?"]
+            - ["Vad betyder osnöig? Hur vet du det?"]
+            - ["Vad kan en läxrobot vara? Hur vet du det?"]
+    - rubrik: "Kartläggning: elevens ordlista"
+      text:
+        - Eleven läser orden högt i uppgift 1. Kopiera listan två gånger för varje elev, en till eleven och en till dig.
+      huvud:
+        - rubrik: Namn
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så gör du
+              text: Uppgifterna och poängen står under Kartläggning före och efter kursen. På din kopia skriver du det eleven säger ovanför ett ord som blir fel.
+      listor:
+        - rubrik: "Uppgift 1 · Läs orden, rad för rad"
+          rader:
+            - [diskmaskin, idrottshall]
+            - [hårborste, kyrkogård]
+            - [mjölkpaket, skolmat]
+            - [kylskåp, busshållplats]
+            - [hundägare, giftig]
+            - [brevbärare, hemlös]
+            - [oärlig, trygghet]
+            - [missförstånd, städning]
+    - rubrik: "Kartläggning: dela orden"
+      text:
+        - I uppgift 2 ringar eleven in ändelsen och drar streck mellan delarna. Kopiera bladet till varje elev.
+      huvud:
+        - rubrik: Namn
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så gör du
+              text: Visa övningsordet först, på stora tavlan. Facit och poängen står under Kartläggning före och efter kursen.
+      listor:
+        - rubrik: "Uppgift 2 · Ring in ändelsen, om ordet har en, och dra streck mellan delarna"
+          rader:
+            - ["Övning: cykelhjälmarna"]
+            - [badrumsdörr]
+            - [sommarlovet]
+            - [oläslig]
+            - [hjälplös]
+            - [lekplats]
+            - [matsalen]
+            - [skolbiblioteket]
+            - [tågresa]
+    - rubrik: "Kartläggning: elevens blad"
+      text:
+        - Eleven skriver diktamen i uppgift 3 på det här bladet och texten i uppgift 5 på tidningens sida. Kopiera båda till varje elev, och spara dem från kartläggningen före kursen, så att du kan jämföra dem efter kursen.
+      huvud:
+        - rubrik: Namn
+      delar:
+        - rubrik: Uppgift 3 · Diktamen
+          falt:
+            - rubrik: "1"
+            - rubrik: "2"
+            - rubrik: "3"
+            - rubrik: "4"
+            - rubrik: "5"
+            - rubrik: "6"
+            - rubrik: "7"
+            - rubrik: "8"
+    - rubrik: "Kartläggning: lärarens protokoll"
+      text:
+        - Skriv poängen för varje uppgift och det eleven sa i uppgift 1 och 4. Efter kursen jämför du poängen och svaren med dem före kursen och skriver vad eleven behöver nu.
+      delar:
+        - rubrik: Före kursen
+          falt:
+            - rubrik: Namn och datum
+            - rubrik: "Uppgift 1: rätt av 16, och det eleven sa"
+            - rubrik: "Uppgift 2: rätt av 8"
+            - rubrik: "Uppgift 3: rätt stavade ord av 8, och delar av 19"
+            - rubrik: "Uppgift 4: poäng av 8, och det eleven sa"
+            - rubrik: "Uppgift 5: långa ord, de som står isär eller saknar fog, och början, mitten och slut"
+        - rubrik: Efter kursen
+          falt:
+            - rubrik: Namn och datum
+            - rubrik: "Uppgift 1: rätt av 16, och det eleven sa"
+            - rubrik: "Uppgift 2: rätt av 8"
+            - rubrik: "Uppgift 3: rätt stavade ord av 8, och delar av 19"
+            - rubrik: "Uppgift 4: poäng av 8, och det eleven sa"
+            - rubrik: "Uppgift 5: långa ord, de som står isär eller saknar fog, och början, mitten och slut"
+            - rubrik: Vad eleven behöver nu
+    # ---------------------------------------------------------------- Protokollet
+    - rubrik: "Protokollet: vecka 1–3"
+      text:
+        - Varje elev har ett protokoll på tre sidor. Under Läste skriver du de ord som eleven läste fel eller med hjälp, och hur eleven läste dem. Under Skrev skriver du orden som blev fel i diktamen, så som eleven stavade dem, och de långa orden i texten. I vecka 1–4 skriver du också vem i paret som skrev dem. Skriv om texten har en början, en mitt och ett slut, och vad eleven lade till efter lyssnarnas fråga. Under Förklarade skriver du ordagrant vad eleven sa att ett ord betyder.
+      huvud:
+        - rubrik: Namn
+      delar:
+        - rubrik: Vecka 1
+          falt:
+            - rubrik: Läste
+            - rubrik: Skrev
+            - rubrik: Förklarade
+        - rubrik: Vecka 2
+          falt:
+            - rubrik: Läste
+            - rubrik: Skrev
+            - rubrik: Förklarade
+        - rubrik: Vecka 3
+          falt:
+            - rubrik: Läste
+            - rubrik: Skrev
+            - rubrik: Förklarade
+    - rubrik: "Protokollet: vecka 4–6"
+      text:
+        - Här fortsätter protokollet med vecka 4–6.
+      huvud:
+        - rubrik: Namn
+      delar:
+        - rubrik: Vecka 4
+          falt:
+            - rubrik: Läste
+            - rubrik: Skrev
+            - rubrik: Förklarade
+        - rubrik: Vecka 5
+          falt:
+            - rubrik: Läste
+            - rubrik: Skrev
+            - rubrik: Förklarade
+        - rubrik: Vecka 6
+          falt:
+            - rubrik: Läste
+            - rubrik: Skrev
+            - rubrik: Förklarade
+    - rubrik: "Protokollet: vecka 7–8"
+      text:
+        - Här fortsätter protokollet med vecka 7–8.
+      huvud:
+        - rubrik: Namn
+      delar:
+        - rubrik: Vecka 7
+          falt:
+            - rubrik: Läste
+            - rubrik: Skrev
+            - rubrik: Förklarade
+        - rubrik: Vecka 8
+          falt:
+            - rubrik: Läste
+            - rubrik: Skrev
+            - rubrik: Förklarade
+
+diplom:
+  kicker: Ordverkstaden
+  rubrik: Diplom
+  text:
+    - tilldelas
+    - ___
+    - som har delat, byggt, läst, stavat och förklarat långa ord i Ordverkstaden och skrivit i gruppens tidning.
+    - Grattis!
+  underskrifter:
+    - Datum
+    - Lärare
+
+kort:
+  listor:
+    - Ordkort
+
+elevblad:
+  Skrivplanen:
+    "Vad handlar texten om?": 1.2
+    "Vem läser den?": 1.2
+    Början: 2.8
+    Mitten: 2.8
+    Slutet: 2.8
+    Långa ord i delar: 2.8
+    Lyssnarna undrar: 2
+  Tidningens sida:
+    Texten: 12
+  "Tidningens sida: fortsättning":
+    Texten: 20
+  "Kartläggning: elevens blad":
+    "1": 1.6
+    "2": 1.6
+    "3": 1.6
+    "4": 1.6
+    "5": 1.6
+    "6": 1.6
+    "7": 1.6
+    "8": 1.6
+
+lathund:
+  innehall: En förlaga i veckan
+  metoden:
+    text:
+      - "Kursen är för elever i åk 3–6 som fastnar på långa ord. Gör kartläggningen veckan före kursen. Varje långt ord tas med de fyra stegen här bredvid."
+      - "Veckan har ett ordpass och två skrivpass, som står bredvid varandra på sidan Veckans tre pass. I pass 2 gör paret en skrivplan, berättar texten för ett annat par och skriver med Kloka pennan. I pass 3 skriver paret klart och läser för gruppen. Från vecka 5 skriver var och en sin text. Arbetsformen är ordpassets. Ha veckans sida framme."
+    ruta:
+      rubrik: Tre saker att hålla fast vid
+      punkter:
+        - fet: Samma fyra steg på varje långt ord.
+          text: I Ordstarten, i förlagan och i elevens text.
+        - fet: Låt eleven förklara bakifrån.
+          text: Sista ordet säger vad det är, och förstavelsen och ändelsen ändrar det.
+        - fet: En egen text till en läsare varje vecka.
+          text: Byggd som förlagan, med egna långa ord.
+    tabell:
+      rubrik: De fyra stegen · vad du säger
+      kolumner:
+        - Steg
+        - Du säger
+      rader:
+        - - "1 · Dela ordet\nRing in och dra streck"
+          - "”Var är delarna?”\n”Säg ordet. Hur många delar?”"
+        - - "2 · En del i taget\nEn båge under varje del"
+          - "”Läs den första delen.”\n”Säg delarna. Skriv en del i taget.”"
+        - - "3 · Hela ordet\nSäg hela ordet"
+          - "”Låter det som ett ord?”\n”Står ordet ihop?”"
+        - - "4 · Vad betyder det?\nBörja bakifrån"
+          - "”Vad betyder det? Börja bakifrån.”\n”Hur vet du det?”"
+    not: "När eleven fastnar i ett ord, fråga först ”Var är delarna?” Räcker inte det, be eleven ringa in ändelsen, och läs först sedan den första delen åt hen. Är eleven osäker när hen skriver, drar hen en prickad linje under ordet, och paret tar det med stegen när texten är klar."
+  pass:
+    rubrik: "Vi kör ett pass: ordpasset i vecka 2"
+    textRubrik: "Gruppen · fem elever i åk 4, vecka 2, pass 1"
+    text:
+      - "I Ordstarten läser gruppen i kör fogarna s, o och u och a som faller bort, och alla tar stegen på cykelhiss och glasögonen."
+      - "Läraren läser guiden till Äventyrsbadet högt, och sedan läser alla i kör. Saga säger att guiden är skriven för den som kommer dit första gången."
+      - "Läraren visar fotbollsplan: ”Fot, bolls, plan. S:et hör till delen före.” Amir och Leo lägger skol och buss och säger att a:et har fallit bort. Trion bygger glassbad, ett ord som inte finns, och Ella säger att det är ett bad med glass."
+      - "I diktamen skriver Noah ”fotbollplan”. Läraren frågar ”Är fotboll två ord?”, och Noah lägger till s:et. Sist får paren veckans uppgift, en guide till drömskolgården för en yngre klass."
+    forberett:
+      rubrik: Det jag förberedde
+      text:
+        - "På planschen skrev jag fogarna och a som faller bort, och på stora tavlan cykelhiss, glasögonen och de sex nya orden. Jag letade fram bilder av ett äventyrsbad och ett gatukök och lade fram förlagan, kortet Ett långt ord och en miniwhiteboard per elev, och ordkorten i kuvert per par."
+    klarTidigt: Paret bygger fler ord med korten och läser dem för mig.
+    schema:
+      rubrik: 60 minuter, minut för minut
+      rader:
+        - tid: Före
+          fas: Förberedelse
+          vad: Skriv delarna på planschen och orden på stora tavlan. Lägg fram förlagan, kortet Ett långt ord, miniwhiteboarden och ordkorten.
+        - tid: 0–5
+          fas: 1 · Ordstarten
+          vad: Alla läser delarna i kör och tar stegen på cykelhiss och glasögonen.
+        - tid: 5–15
+          fas: 2 · Förlagan
+          vad: Bilder av ett äventyrsbad och ett gatukök. Du läser guiden högt, och alla läser i kör. Fråga 4 och 1.
+        - tid: 15–35
+          fas: 3 · Bygga
+          vad: Du visar fotbollsplan och skolgård. Paren gör fråga 2 och bygger egna ord.
+        - tid: 35–40
+          fas: 4 · Nya ord
+          vad: Paren läser pojkvän, flickskola och de andra nya orden för varandra.
+        - tid: 40–52
+          fas: 5 · Diktamen
+          vad: Fotbollsplan, skolgården, veckodag, glasstrut och snöbollskrig, sedan felet ”fotbollplan” och fråga 3.
+        - tid: 52–60
+          fas: 6 · Läsa upp
+          vad: Ett ord var, och du säger uppgiften om drömskolgården.
+  mall:
+    rubrik: Veckans tre pass
+    underrad: "Från vecka 5 får Skriva i pass 3 tio minuter mer"
+    block:
+      - typ: tabell
+        rubrik: Pass 1 · Ordpasset
+        kolumner:
+          - Del
+          - Du säger
+        rader:
+          - - "Ordstarten\n0–⁠5 min"
+            - "”Skriv av ordet och ta stegen.”\n”Visa oss på stora tavlan.”"
+          - - "Förlagan\n5–⁠15 min"
+            - "”Känner någon igen det här?”\n”Hur märker du vem den är skriven för?”"
+          - - "Bygga\n15–⁠35 min"
+            - "”Vad betyder det? Börja bakifrån.”\n”Byt plats på delarna. Vad blir det nu?”"
+          - - "Nya ord\n35–⁠40 min"
+            - "”Läs ordet för din kamrat.”\n”Var är delarna?”"
+          - - "Diktamen\n40–⁠52 min"
+            - "”Säg ordet. Hur många delar?”\n”Står ordet ihop?”"
+          - - "Läsa upp\n52–⁠60 min"
+            - "”Vilket ord väljer du?”\n”Vad skulle läsaren vilja läsa om?”"
+      - typ: tabell
+        rubrik: Pass 2 och 3 · Skrivpasset
+        kolumner:
+          - Del
+          - Du säger
+        rader:
+          - - "Ordstarten\n0–⁠5 min"
+            - "”Skriv av ordet och ta stegen.”\n”Vad betyder det? Börja bakifrån.”"
+          - - "Förlagan\n5–⁠15 min"
+            - "”Var slutar början?”\n”Vad gör den här ramen för läsaren?”"
+          - - "Din text\n15–⁠25 min"
+            - "”Vad måste vi börja med?”\n”Vilket långt ord passar här?”"
+          - - "Skriva\n25–⁠50 min"
+            - "”Säg meningen innan ni skriver den.”\n”Säg delarna och skriv en del i taget.”"
+          - - "Läsa upp\n50–⁠60 min"
+            - "”Vad vill ni veta mer om?”\n”Vilket långt ord hörde ni?”"
+      - typ: not
+        text: "I pass 2 börjar texten, och i pass 3 blir den klar. I vecka 8 är pass 3 tidningens pass. Har gruppen bara två pass en vecka, tar ni ordpasset och ett skrivpass."
+  material:
+    rubrik: Vad du behöver för kursen
+    kravEtikett: Ordkrav
+    var:
+      rubrik: Var materialet finns
+      punkter:
+        - fet: Förlagorna och ordkorten.
+          text: En förlaga och en sida med kort för varje vecka står under Kursens material.
+        - fet: Veckans sida.
+          text: "Ordpasset, uppgiften, din text och skrivpassen står under Till läraren: veckorna."
+        - fet: Korten och bladen.
+          text: Korten Ett långt ord och Vi skriver i par, skrivplanen, tidningens sida, kartläggningen, protokollet och listan till planschen Delarna står under Kursens material.
+    bordet:
+      - Förlagan och kortet Ett långt ord
+      - Ordkorten i kuvert per par i ordpasset
+      - En miniwhiteboard, en whiteboardpenna och ett sudd per elev
+      - Skrivplanen och tidningens sida i skrivpassen
+      - Kortet Vi skriver i par, i skrivpassen
+      - "Vid tavlan: planschen Delarna, blädderblocket och datorn"
+film:
+  sekunder: 26.93
+  beskrivning: "Paret bygger ett långt ord med ordkorten. Steg 1, Dela ordet: paret lägger delarna i rad. Steg 2, En del i taget: paret pekar och läser. Eleven säger: ”cykel, hjälm, arna”. Steg 3, Hela ordet: paret skjuter ihop korten och läser. Låter det som ett ord? Eleven säger: ”cykelhjälmarna”. Steg 4, Vad betyder det? Läraren säger: ”Vad betyder det? Börja bakifrån.” Eleven säger: ”Hjälmarna man har när man cyklar.”"
+  rubrik: "Så gör paret"
+  ingress: "Fyra bilder ur filmen om ett långt ord med ordkorten. Paret lägger korten cykel, hjälm och -arna i rad, läser en del i taget, skjuter ihop korten och läser hela ordet. Sist säger en av dem vad ordet betyder, bakifrån: hjälmarna man har när man cyklar. Kortet Ett långt ord med de fyra stegen ligger på bordet. Filmen på metodens sida visar samma sak i rörelse."
+  stillbilder:
+    - text: "Dela ordet: paret lägger delarna i rad."
+    - text: "En del i taget: paret pekar och läser varje del."
+    - text: "Hela ordet: paret skjuter ihop korten och läser."
+    - text: "Vad betyder det? Eleven börjar bakifrån."
+filmer:
+  - nr: 2
+    sekunder: 29.31
+    beskrivning: "Diktamen i ordpasset. Läraren säger: ”fotbollsplan”. Steg 1, Dela ordet: eleven räknar delarna. Steg 2, En del i taget: eleven skriver en del och säger den. Eleven säger: ”fot bolls plan”. Steg 3, Hela ordet: står ordet ihop? Eleven säger: ”fotbollsplan”. Fogen s är med, och ordet står ihop. Steg 4, Vad betyder det? Läraren säger: ”Vad är en fotbollsplan? Börja bakifrån.” Eleven säger: ”En plan där man spelar fotboll.”"
+    rubrik: "Stava ett långt ord, en del i taget"
+    ingress: "Fyra bilder ur filmen om diktamen i ordpasset. Läraren säger fotbollsplan, och eleven säger delarna och räknar dem på fingrarna. Eleven skriver en del i taget, ihop, läser hela ordet och kollar att det står ihop och att fogen s är med. Sist säger eleven vad ordet betyder. Filmen på metodens sida visar samma sak i rörelse."
+    efter: "steg 5"
+    stillbilder:
+      - text: "Dela ordet: eleven räknar delarna fot, bolls, plan."
+      - text: "En del i taget: eleven har skrivit fot och bolls."
+      - text: "Hela ordet: det står ihop, och fogen s är med."
+      - text: "Vad betyder det? Eleven börjar bakifrån."
+  - nr: 3
+    sekunder: 24.62
+    beskrivning: "Meningsbyggaren säger meningen. Leo säger: ”Därför har vi uppfunnit en flygcykel.” Sekreteraren säger den igen och skriver den. Amir säger: ”Därför har vi uppfunnit en flygcykel.” Sekreteraren säger delarna och skriver en del i taget. Amir säger: ”flyg, cykel”. De läser meningen tillsammans. Amir och Leo säger: ”Därför har vi uppfunnit en flygcykel.” Sedan byter de roller."
+    rubrik: "Kloka pennan"
+    ingress: "Fyra bilder ur filmen om Kloka pennan i skrivpasset. Leo är meningsbyggare och säger meningen, och Amir är sekreterare, säger meningen igen och skriver den på tidningens sida. Det långa ordet flygcykel står i delar på skrivplanen, och Amir säger delarna och skriver en del i taget. Sedan läser de meningen tillsammans och byter roller. Skyltarna nederst finns bara i filmen och visar vem som har vilken roll. Filmen på metodens sida visar samma sak i rörelse."
+    efter: "tabell: Pass 2 och 3"
+    stillbilder:
+      - text: "Meningsbyggaren säger meningen."
+      - text: "Sekreteraren säger meningen igen och skriver."
+      - text: "Sekreteraren skriver flygcykel en del i taget."
+      - text: "De läser meningen tillsammans och byter roller."
