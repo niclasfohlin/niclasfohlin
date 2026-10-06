@@ -922,6 +922,21 @@ a.ri-titel, .ri-titel a { color: var(--farg-accent); font-weight: 600; text-deco
 .ri-forled { display: block; color: var(--farg-text-svag); font-size: 0.8rem; font-weight: 400; }
 .ri-extra { padding: 0.5rem 0 0.5rem 0.4rem; color: var(--farg-text-svag); font-size: 0.85rem; white-space: nowrap; text-decoration: underline; text-decoration-color: var(--farg-kant); }
 .ri-extra:hover { color: var(--farg-accent); text-decoration-color: currentColor; }
+/* Veckorna (posten veckor i Ramindex.astro, src/lib/veckomaterial.ts; Niclas 2026-10-06: det som används i samma vecka
+   ska stå listat på ett ställe): veckans nummer, veckans namn, som leder till veckans sida, och under namnet veckans
+   material, som leder till var sin sak. */
+.ri-vecka { grid-template-columns: 2.1rem minmax(0, 1fr); align-items: start; }
+.ri-vecka .ri-nr { grid-row: 1 / span 2; padding-top: 0.6rem; }
+.ri-vecka .ri-titel { padding: 0.5rem 0 0.45rem; }
+.ri-vecka:has(.ri-saker) .ri-titel { padding-bottom: 0; }
+.ri-saker { grid-column: 2; display: flex; flex-wrap: wrap; align-items: center; column-gap: 0.5rem; padding: 0 0 0.1rem; font-size: 0.9rem; }
+.ri-saker a { padding: 0.5rem 0; color: var(--farg-accent); text-decoration: underline; text-decoration-color: var(--farg-kant); text-underline-offset: 0.2em; }
+.ri-saker a:hover { text-decoration-color: currentColor; }
+.ri-punkt { color: var(--farg-text-svag); }
+/* Etiketten före det som gäller hela kursen, efter veckorna: liten och dämpad, som listornas rubriker. */
+.ri-etikett { padding: 0.6rem 0.9rem 0.4rem; background: var(--farg-ton-svag); color: var(--farg-text-svag); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+/* Länkarna mellan veckans kort och ramen de kommer ur (Metod.astro, bara på skärmen): veckans namn bryts inte mitt i. */
+.m-veckolank a { white-space: nowrap; }
 /* På en bredare skärm står en nivås texter i två spalter, så att lärarsidan står nära sin titel. */
 @media (min-width: 48rem) {
   .ri-texter { columns: 2; column-gap: 2.5rem; column-rule: 1px solid var(--farg-kant); }
@@ -1301,7 +1316,11 @@ html.js .bara-js { display: inline-block; }
   /* En lång ram (ett paket, en läxram, en sida mentortexter) börjar på ny sida, så att rubriken, texten och
      första noten står ihop och paketet går att kopiera för sig. */
   .m-ram:has(.m-lista ~ .m-lista ~ .m-lista ~ .m-lista) { break-before: page; }
-  .m-ramlankar { display: none; }
+  .m-ramlankar, .m-veckolank { display: none; }
+  /* Veckans kort fyller sin sida och kopieras till eleverna: ramen som står efter den sista veckans kort börjar på en
+     ny sida, så att lärarens text inte hamnar längst ned på kortens sida (src/lib/veckomaterial.ts). Nästa vecka
+     börjar redan en sida (.m-vecka). */
+  .m-veckans + .m-ram { break-before: page; }
   .m-lista td { font-size: 13pt; padding: 0.3rem 0.6rem; }
   /* Lärarens protokoll (en lista med skrivkolumn) är ett blad att kopiera per elev: täta rader, som i Word (K-071). */
   .m-lista.protokoll td { font-size: 11pt; padding: 0.12rem 0.5rem; }

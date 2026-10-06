@@ -7,6 +7,7 @@ import bildbankData from './data/bildbank.json';
 import { BAGE, ordgrupper, utanStod } from './lib/lasflyt';
 import { EFTER_FORMER, HOGST_EXTRAFILMER, platsFel, tolkaEfter } from './lib/film';
 import { forstaLed, radensDel } from './lib/karta';
+import { veckofel } from './lib/veckomaterial';
 
 // Registren är den enda sanningen om vilka taggar och publikationer som finns.
 // Ett okänt värde stoppar bygget med ett tydligt besked om vad som ska göras.
@@ -586,6 +587,9 @@ const stodundervisning = defineCollection({
       if (kartor.length && !kartor[0].rader.some((r) => forstaLed(r[0] ?? '') === v.led)) ctx.addIssue({ code: 'custom', path: ['ramar', 'ramar', v.ri, 'delar', v.di, 'rubrik'], message: `${v.led} har ingen rad i kartan "${kartor[0].rubrik}"; varje vecka visar sin rad.` });
     });
     (d.ramar?.ramar ?? []).forEach((r, ri) => { if (r.lektioner && r.listor) ctx.addIssue({ code: 'custom', path: ['ramar', 'ramar', ri, 'lektioner'], message: 'En ram med lektioner har inga listor: lägg listorna i en egen ram.' }); });
+    // Veckans material (src/lib/veckomaterial.ts, Niclas 2026-10-06): det som nämner en enda vecka står vid veckan. En
+    // rubrik som nämner en vecka som inte finns, eller två veckor, skulle hamna utanför veckorna utan att någon ser det.
+    for (const f of veckofel(d)) ctx.addIssue({ code: 'custom', path: f.li === undefined ? ['ramar', 'ramar', f.ri, 'rubrik'] : ['ramar', 'ramar', f.ri, 'listor', f.li, 'rubrik'], message: f.text });
     // Bilderna På bordet: egna nummer och en plats som finns (src/lib/pabordet.ts), och nivåerna med egna namn.
     d.pabordet.forEach((b, i) => {
       if (d.pabordet.findIndex((x) => x.nr === b.nr) !== i) ctx.addIssue({ code: 'custom', path: ['pabordet', i, 'nr'], message: `Två bilder På bordet har nr ${b.nr}; filerna skulle krocka.` });

@@ -17,7 +17,11 @@ const kod = (await build({ entryPoints: [join(rot, 'src/lib/ramindex.ts')], bund
 const { ramindex } = await import(`data:text/javascript;base64,${Buffer.from(kod).toString('base64')}`);
 
 const fel = [];
-const lankar = (poster) => poster.flatMap((p) => (p.typ === 'rad' ? [p.rad.lank.nr] : [...(p.oversikt ? [p.oversikt.nr] : []), ...p.rader.flatMap((r) => [r.lank.nr, ...(r.extra ? [r.extra.nr] : [])])]));
+// Posten veckor (src/lib/veckomaterial.ts) länkar ramen med lektioner som översikt och de ramar som står vid en vecka;
+// en lista vid en vecka är en länk in i sin ram och räknas inte.
+const lankar = (poster) => poster.flatMap((p) => (p.typ === 'rad' ? [p.rad.lank.nr]
+  : p.typ === 'veckor' ? [p.oversikt.nr, ...p.rader.flatMap((r) => r.saker.filter((x) => x.lista === undefined).map((x) => x.nr))]
+    : [...(p.oversikt ? [p.oversikt.nr] : []), ...p.rader.flatMap((r) => [r.lank.nr, ...(r.extra ? [r.extra.nr] : [])])]));
 
 // Alla metoder: inget stopp, och varje ram har exakt en länk.
 const mapp = join(rot, 'src/content/stodundervisning');

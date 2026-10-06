@@ -31,6 +31,7 @@ import { metodensPaBordet, paBordetVid } from '../lib/pabordet';
 import { listansNiva } from '../lib/nivaer';
 import { bladNamn, delensRad, kartan, metodensBlad, radensDel } from '../lib/karta';
 import { veckanRyms } from '../lib/veckosida';
+import { veckansLista, veckomaterial } from '../lib/veckomaterial';
 // "Åk 4–5" hålls ihop i ramarnas rubriker och länkar: hårt mellanslag efter Åk, ordfog efter tankstrecket.
 const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 '));
 // koppling: den generella metodens serie med lektionsbanken, eller lektionens plats i den (src/lib/serie.ts).
@@ -141,6 +142,41 @@ const blad = metodensBlad(d);
 const bladAnkare = new Map([...blad].map(([namn, plats]) => [`${plats.ri}-${plats.li}`, ankare(`blad ${namn}`)]));
 const kartLankar = { vecka: (rad: string[]) => { const p = radensDel(d, rad); return p ? `#${delAnkare[p.ri][p.di]}` : undefined; }, blad: (namn: string) => { const p = blad.get(namn); return p ? `#${bladAnkare.get(`${p.ri}-${p.li}`)}` : undefined; }, namn: new Set(blad.keys()), nivaer: d.nivaer };
 const radLankar = { ...kartLankar, vecka: undefined };
+// Veckans material (src/lib/veckomaterial.ts, Niclas 2026-10-06: "Man måste leta omkring för att hitta vecka 2 på 3
+// ställen"): i en kurs med veckor står det material som nämner en enda vecka direkt efter veckans sida, i filens
+// ordning, som i Word (metoddocx.ts). Ramarna ritas därför som punkter i den ordning de står på sidan: ramen med
+// lektioner först utan veckorna (huvud), och sedan en vecka i taget (vecka) med sitt material efter sig: en hel ram,
+// som förlagan, eller en lista med kort ur en ram (material), som veckans ordkort. Allt annat står kvar i filens
+// ordning: en ram vars listor står vid veckorna (Ordkorten) ritas utan dem, med sin text och sin ruta Till läraren.
+// Utan veckornas material är punkterna ramarna som de står i filen. En lista vid en vecka får ett eget ankare, som
+// materialets lista leder till, och på skärmen en länk till sin ram, där läraren läser hur korten görs i ordning.
+const vm = veckomaterial(d);
+const ramarna: SerieRam[] = d.ramar?.ramar ?? [];
+const listAnkare = new Map<string, string>();
+if (vm) for (const [ri, lagda] of vm.listor) for (const li of lagda.keys()) listAnkare.set(`${ri}-${li}`, ankare(ramarna[ri].listor![li].rubrik ?? `${ramarna[ri].rubrik} ${li + 1}`));
+type Punkt = { ram: SerieRam; ri: number; lage?: 'huvud' | 'vecka' | 'material'; vecka?: number; lista?: number; efter?: string };
+const punkter: Punkt[] = [];
+ramarna.forEach((ram, ri) => {
+  if (!vm) { punkter.push({ ram, ri }); return; }
+  if (vm.ramar.has(ri)) return;
+  if (ri !== vm.ri) {
+    const lagda = vm.listor.get(ri);
+    punkter.push({ ram: lagda ? { ...ram, listor: ram.listor!.filter((_, li) => !lagda.has(li)) } : ram, ri });
+    return;
+  }
+  punkter.push({ ram, ri, lage: 'huvud' });
+  for (const v of vm.veckor) {
+    punkter.push({ ram: { ...ram, text: [], huvud: undefined, oversikt: undefined }, ri, lage: 'vecka', vecka: v.di });
+    for (const x of v.saker) {
+      punkter.push(x.typ === 'ram'
+        ? { ram: ramarna[x.ri], ri: x.ri }
+        : { ram: veckansLista(ramarna[x.ri], x.li), ri: x.ri, lage: 'material', lista: x.li });
+    }
+  }
+  // En film eller bild som står efter ramen med lektioner står efter den sista veckans material.
+  punkter[punkter.length - 1].efter = ram.rubrik;
+});
+const indexAnkare = { del: (nr: number, di: number) => delAnkare[nr - 1]?.[di], lista: (nr: number, li: number) => listAnkare.get(`${nr - 1}-${li}`) };
 // Lästexterna blir boksidor (Boksida.astro, K-148), med nivåns färg i den ordning nivåerna först kommer, som i Word.
 const boksidor = lastexter(d.ramar?.ramar ?? []);
 const BOKNIVA = ['#4e7a43', '#a8742a', '#6e3450'];
@@ -500,13 +536,13 @@ const meny = [
       {bildUpphov && <p class="m-efter">{bildUpphov}</p>}
       {/* Med fyra ramar eller fler (ett paket per årskurs, läslistorna, projekten, lästexterna) blir sidan lång: en
           ordnad lista med länkar till varje ram, där nivåerna fälls ut (Ramindex.astro, K-152). */}
-      {d.ramar.ramar.length >= 4 && <Ramindex ramar={d.ramar.ramar} rubrik={d.ramar.rubrik} farger={BOKNIVA} />}
-      {d.ramar.ramar.map((ram, ri) => boksidor.has(ram) ? (<>
+      {d.ramar.ramar.length >= 4 && <Ramindex ramar={d.ramar.ramar} rubrik={d.ramar.rubrik} farger={BOKNIVA} ankare={indexAnkare} />}
+      {punkter.map(({ ram, ri, lage, vecka, lista, efter }) => boksidor.has(ram) ? (<>
         <Boksida l={boksidor.get(ram)!} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={BOKNIVA[boksidor.get(ram)!.nivaNr] ?? '#4b3a2f'} />
-        <Filmruta filmer={vid({ ram: ram.rubrik })} titel={d.titel} />
+        <Filmruta filmer={[...vid({ ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
       </>) : (<>
-        <section class={`m-ram${protokollDelas(ram) ? ' delad' : ''}${arLararsida(ram) ? ' m-lararsida' : ''}`} id={`ram-${ri + 1}`}>
-          <h3 id={ramAnkare[ri]}>{hel(ram.rubrik)}</h3>
+        <section class={`m-ram${protokollDelas(ram) ? ' delad' : ''}${arLararsida(ram) ? ' m-lararsida' : ''}${lage === 'material' ? ' m-veckans' : ''}`} id={lage === 'vecka' ? undefined : lage === 'material' ? listAnkare.get(`${ri}-${lista}`) : `ram-${ri + 1}`}>
+          {lage !== 'vecka' && lage !== 'material' && <h3 id={ramAnkare[ri]}>{hel(ram.rubrik)}</h3>}
           {ram.text.map((s) => <p>{s}</p>)}
           {ram.serie && antalRutor[ram.serie] === 1 && <Serierutor rutor={serieBlad(ram)} />}
           {ram.sagoform && <p class="m-efter">{sagoNamn[ram.sagoform.form] ?? 'Bladet'} att kopiera, med {ram.sagoform.bilder?.length ? 'ramen, bilderna och raderna' : 'ramen och raderna'}, finns i <a href={mallarLank} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word). Här står vad {ram.sagoform.form === 'skyltar' || ram.sagoform.form === 'kort' ? 'de' : 'det'} innehåller.</p>}
@@ -525,7 +561,11 @@ const meny = [
               {/* Räknebladen (rakneblad): här står uppgifterna, och bladet med rutnät att räkna i finns i Word. Hänvisningen står
                   före listorna, så att den inte blir ensam på en sida i utskriften (granskningen 2026-10-04). */}
               {(ram.listor ?? []).some((l) => l.rakneblad) && <p class="m-efter">{(ram.listor ?? []).filter((l) => l.rakneblad).length === 1 ? 'Bladet' : 'Bladen'}, med en ruta per uppgift och ett rutnät att räkna i, en siffra per ruta, finns i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>}
-              {ram.listor.map((l, li) => {
+              {ram.listor.map((l, plats) => {
+                // Listans plats i ramen som den står i filen: en ram kan ritas utan de listor som står vid veckorna, och
+                // en lista vid en vecka ritas ensam (src/lib/veckomaterial.ts).
+                const alla = ramarna[ri].listor ?? ram.listor!;
+                const li = alla.includes(l) ? alla.indexOf(l) : plats;
                 // Ljudlekens former går före de andra korten (src/lib/ljudkort.ts).
                 const ljud = ljudform(d, l);
                 if (ljud === 'bildkort') return <Vikkort rubrik={l.rubrik} rader={l.rader} />;
@@ -534,7 +574,7 @@ const meny = [
                 if (ljud === 'bokstavskarta') return <Bokstavskarta rubrik={l.rubrik} rader={l.rader} />;
                 if (arBildlista(l)) return <Bildlista rubrik={l.rubrik} rader={l.rader} />;
                 const info = kortInfo(d, l);
-                const forra = li > 0 ? kortInfo(d, ram.listor![li - 1])?.grupp : undefined;
+                const forra = li > 0 ? kortInfo(d, alla[li - 1])?.grupp : undefined;
                 // Ramens fält att fylla i (elevens namn på kartläggningens kopia) står överst i den första listan, så att
                 // de följer med listan i utskriften.
                 // En lästräningstext blir två läskort (K-063), och en ensam kort lista ett kort i stor stil (K-062).
@@ -543,8 +583,8 @@ const meny = [
                 // En tärnings ord står på skärmen men inte i utskriften: tärningen att vika finns i planeringsmallarna.
                 if (info && arTarning(d, l)) return <div class="m-ej-utskrift"><Kortlista rubrik={l.rubrik} info={info} nyGrupp={info.grupp !== forra} brak={brak} /></div>;
                 return info
-                  ? <Kortlista rubrik={l.rubrik} info={info} nyGrupp={info.grupp !== forra} brak={brak} />
-                  : <Elevlista {...(l.rakneblad ? listansNiva(d.nivaer, l.rubrik) : { rubrik: l.rubrik })} id={bladAnkare.get(`${ri}-${li}`)} kolumner={l.kolumner} rader={l.rader} brak={brak} huvud={li === 0 ? ram.huvud : undefined} klass={arEttKort(ram.listor!, l) ? 'kort' : ''} elev={elevtypsnitt && !l.larare} />;
+                  ? <Kortlista rubrik={l.rubrik} info={info} nyGrupp={lage === 'material' || info.grupp !== forra} brak={brak} />
+                  : <Elevlista {...(l.rakneblad ? listansNiva(d.nivaer, l.rubrik) : { rubrik: l.rubrik })} id={bladAnkare.get(`${ri}-${li}`)} kolumner={l.kolumner} rader={l.rader} brak={brak} huvud={plats === 0 ? ram.huvud : undefined} klass={arEttKort(alla, l) ? 'kort' : ''} elev={elevtypsnitt && !l.larare} />;
               })}
             </>
           ) : ramArTom(ram)
@@ -574,7 +614,7 @@ const meny = [
               : <p class="m-efter">Ramen att fylla i, med {ram.delar.length === 1 ? 'en del' : `${ram.delar.length} delar`}, finns i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a>.</p>)
             : (
               <div class="m-ramdelar">
-                {ram.lektioner && (
+                {ram.lektioner && lage !== 'vecka' && (
                   <ol class="m-lektionskort m-veckokort" aria-label={`${ram.delar.length} ${(ram.rubrik.split(':')[1] ?? 'delar').trim()}`}>
                     {ram.delar.map((del, di) => {
                       const [forsta, ...resten] = del.rubrik.split(' · ');
@@ -595,6 +635,8 @@ const meny = [
                   </dl>
                 )}
                 {ram.delar.map((del, di) => {
+                  // Ramen med lektioner i delar (se punkterna ovan): huvudet utan veckor, och sedan en vecka i taget.
+                  if (lage === 'huvud' || (lage === 'vecka' && di !== vecka)) return null;
                   const rutan = (
                   <div class="m-ramdel" id={ram.lektioner ? delAnkare[ri][di] : undefined}>
                     <h4>{del.rubrik}<span class="m-ramnamn"> · {ram.rubrik}</span></h4>
@@ -642,8 +684,17 @@ const meny = [
             <p class="m-ark"><img src={arkAdress(id, ram.ark)} alt={`${ram.rubrik}: tankebubblor, pratbubblor och en bubbla för det någon ropar, att klippa ut`} width={svgMatt(seriefiler.get(arkAdress(id, ram.ark))!).bredd} height={svgMatt(seriefiler.get(arkAdress(id, ram.ark))!).hojd} loading="lazy" decoding="async" data-utskriftsbild /></p>
             <p class="m-efter m-serie-efter">Arket finns i rätt storlek, på ett A4 med 1 cm marginal, i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>
           </>)}
+          {/* Länkarna mellan veckans kort och ramen de kommer ur (bara på skärmen): under veckans kort en länk till
+              ramens ruta Till läraren, med rutans första fält som ord ("Så gör du: Ordkorten"), och i ramen en länk
+              till varje veckas kort. */}
+          {lage === 'material' && (ramarna[ri].text.length > 0 || ramarna[ri].delar.length > 0) && (
+            <p class="m-efter m-veckolank">{ramarna[ri].delar[0]?.falt[0]?.rubrik ?? 'Till läraren'}:{' '}<a href={`#ram-${ri + 1}`}>{hel(ramarna[ri].rubrik)}</a></p>
+          )}
+          {!lage && vm?.listor.has(ri) && (
+            <p class="m-efter m-veckolank">Korten står vid sin vecka:{' '}{[...vm.listor.get(ri)!].map(([li, di], i) => <>{i > 0 && <span aria-hidden="true"> · </span>}<a href={`#${listAnkare.get(`${ri}-${li}`)}`}>{hel(vm.veckor[di].led)}</a></>)}</p>
+          )}
         </section>
-        <Filmruta filmer={vid({ ram: ram.rubrik })} titel={d.titel} />
+        <Filmruta filmer={[...(lage ? [] : vid({ ram: ram.rubrik })), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
       </>))}
       {d.ramar.efter && <p class="m-efter">{d.ramar.efter}</p>}
       <Filmruta filmer={vid({ avsnitt: 'ramar' })} titel={d.titel} />

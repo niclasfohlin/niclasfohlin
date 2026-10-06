@@ -4,29 +4,44 @@
 // gång fälls ut (Niclas 2026-10-01 valde förslag A, "för saker som listas många saker i samtidigt", som lektionerna i
 // Ljudlek i grupp): en nivå alltid, och en grupp med samma led före kolon ("Åk 1") när den har FALL_UT rader eller fler.
 // Listan finns bara på skärmen; utskriften gömmer den (global.css, .m-ramlankar).
-import { ramindex, type Indexrad } from '../lib/ramindex';
+// I en kurs med veckor där material hör till veckorna (src/lib/veckomaterial.ts, Niclas 2026-10-06) är veckorna en egen
+// post i kursens färg: en rad per vecka med veckans namn, som leder till veckans sida, och under det veckans material
+// ("Förlaga · Ordkort"), som leder till var sin sak. Ankarna till veckorna och listorna kommer från Metod.astro.
+// Det som står efter veckorna i listan gäller hela kursen, och det säger en liten etikett (granskningen 2026-10-06:
+// listan märkte inte ut var veckornas material slutar; Niclas: "vad som är generellt").
+import { ramindex, type Indexrad, type Indexvecka, type Ramlank } from '../lib/ramindex';
 import { ejBryt } from '../lib/metod';
 interface Props {
   ramar: Parameters<typeof ramindex>[0];
   rubrik: string;
   /** Nivåernas färger, i den ordning nivåerna först kommer, som boksidornas knapp. */
   farger: string[];
+  /** Ankaret till en del i en ram (en vecka) och till en lista i en ram, för posten veckor. */
+  ankare?: { del: (nr: number, di: number) => string | undefined; lista: (nr: number, li: number) => string | undefined };
 }
-const { ramar, rubrik, farger } = Astro.props;
+const { ramar, rubrik, farger, ankare } = Astro.props;
 const FALL_UT = 6;
 // Ett led som är längre än ledets spalt (omkring nio tecken, "Åk 4–5" ryms och "Kartläggning" inte) står på en egen rad
 // över sina ramar (granskningen 2026-10-01, K-156).
 const LANGT_LED = 9;
 const poster = ramindex(ramar);
+// Etiketten Hela kursen står före den första posten efter veckorna.
+const efterVeckorna = poster.findIndex((p) => p.typ === 'veckor') + 1;
+const visade: (typeof poster[number] | { typ: 'etikett'; namn: string })[] = poster.flatMap((p, nr) => (efterVeckorna > 0 && nr === efterVeckorna ? [{ typ: 'etikett' as const, namn: 'Hela kursen' }, p] : [p]));
 // "Åk 4–5" hålls ihop, som i ramarnas rubriker, och ett tal sist står kvar med ordet före ("Lördag klockan 14").
 const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 ')).replace(/ (\d{1,4})$/, ' $1');
 // Nivåns antal är dess numrerade texter, som metodens text räknar dem ("femton texter"), och alla rader om ingen är numrerad.
 const antal = (rader: Indexrad[]) => { const n = rader.filter((r) => /^\d+$/.test(r.etikett ?? '')).length || rader.length; return n === 1 ? 'en text' : `${n} texter`; };
 const arNummer = (s?: string) => !!s && /^\d+$/.test(s);
+// En länk till en ram, till en vecka i den eller till en lista i den.
+const mal = (l: Ramlank) => `#${(l.del !== undefined ? ankare?.del(l.nr, l.del) : l.lista !== undefined ? ankare?.lista(l.nr, l.lista) : undefined) ?? `ram-${l.nr}`}`;
+// Veckans nummer ur första ledet ("Vecka 2" blir 2), som texternas nummer.
+const veckansNr = (v: Indexvecka) => v.etikett.match(/\d+$/)?.[0] ?? '';
 ---
 <nav class="m-ramlankar ri" aria-label={`Hoppa till: ${rubrik}`}>
   <ul class="ri-lista">
-    {poster.map((p) => {
+    {visade.map((p) => {
+      if (p.typ === 'etikett') return <li class="ri-post ri-etikett">{p.namn}</li>;
       if (p.typ === 'rad') return <li class="ri-post"><a class="ri-lank" href={`#ram-${p.rad.lank.nr}`}>{hel(p.rad.lank.namn)}</a></li>;
       if (p.typ === 'led') {
         // Länken bär ledet för den som läser länkarna för sig ("Läxa 1–5, Åk 1"), som Lärarens sida bär sin titel.
@@ -34,6 +49,27 @@ const arNummer = (s?: string) => !!s && /^\d+$/.test(s);
         if (p.rader.length >= FALL_UT) return <li class="ri-post ri-led-fall"><details><summary><span class="ri-nivanamn">{hel(p.namn)}</span></summary>{lankar}</details></li>;
         return <li class={`ri-post ri-led${p.namn.length > LANGT_LED ? ' ri-led-lang' : ''}`}><span class="ri-ledrubrik">{hel(p.namn)}</span>{lankar}</li>;
       }
+      if (p.typ === 'veckor') return (
+        <li class="ri-post ri-niva ri-veckor" style="--niva: var(--farg-accent)">
+          <details>
+            <summary><span class="ri-nivanamn ri-prick">{p.namn}</span><span class="ri-antal">{p.antal}</span></summary>
+            <ol class="ri-texter">
+              <li class="ri-rad"><span class="ri-nr" aria-hidden="true"></span><a class="ri-titel" href={mal(p.oversikt)}>Översikt<span class="visually-hidden">: {p.oversikt.namn}</span></a></li>
+              {p.rader.map((v: Indexvecka) => (
+                <li class="ri-rad ri-vecka">
+                  <span class="ri-nr" aria-hidden="true">{veckansNr(v)}</span>
+                  <a class="ri-titel" href={mal(v.lank)}><span class="visually-hidden">{v.etikett}: </span>{hel(v.lank.namn)}</a>
+                  {v.saker.length > 0 && (
+                    <span class="ri-saker">
+                      {v.saker.map((x, i) => <>{i > 0 && <span class="ri-punkt" aria-hidden="true">·</span>}<a href={mal(x)}>{hel(x.namn)}<span class="visually-hidden">, {v.etikett}</span></a></>)}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </details>
+        </li>
+      );
       return (
         <li class="ri-post ri-niva" style={`--niva: ${farger[p.nivaNr] ?? 'var(--farg-accent)'}`}>
           <details>
