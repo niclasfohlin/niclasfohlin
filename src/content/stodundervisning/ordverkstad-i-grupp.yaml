@@ -425,7 +425,7 @@ roll:
 urval:
   rubrik: Var hittar du förlagorna och orden?
   text:
-    - Förlagorna, ordkorten, veckans sida och bladen står under Kursens material, och tabellen Materialet du behöver säger hur många du skriver ut. Vill du ha fler ord, särskilt i åk 5–6, ta dem ur det gruppen läser i klassen och i ämnena, som -⁠ning i smältning och frysning.
+    - "Under Kursens material står veckorna en i taget: först veckans sida, sedan förlagan och ordkorten. Efter vecka 8 står korten och bladen som gäller hela kursen. Tabellen Materialet du behöver säger hur många du skriver ut. Vill du ha fler ord, särskilt i åk 5–6, ta dem ur det gruppen läser i klassen och i ämnena, som -⁠ning i smältning och frysning."
     - Förlagorna har också ord som eleverna inte har hört, som nyorden och de påhittade yrkena, men delarna i dem känner eleven. Säg ett ovanligt ord högt och i en mening innan gruppen läser det i förlagan, gärna med en bild, särskilt för elever med svenska som andraspråk. Låt paren bygga riktiga ord innan de hittar på egna.
   kravText: "Välj egna ord så att de uppfyller tre krav:"
   krav:
@@ -514,14 +514,14 @@ exempel:
 ramar:
   rubrik: Kursens material
   text:
-    - "Först kommer veckans sida, en för varje vecka, med ordpasset, uppgiften, din text och skrivpassen. Sedan kommer förlagorna, ordkorten, listan till planschen Delarna, kortet Ett långt ord, kortet Vi skriver i par, skrivplanen, tidningens sida, kartläggningen, protokollet och diplomet."
+    - "Först kommer veckorna, en i taget. Varje vecka börjar med veckans sida, med ordpasset, uppgiften, din text och skrivpassen, och direkt efter den står veckans förlaga och veckans ordkort. Sedan kommer det som gäller hela kursen: hur du gör i ordning ordkorten, listan till planschen Delarna, kortet Ett långt ord, kortet Vi skriver i par, skrivplanen, tidningens sida, kartläggningen, protokollet och diplomet. Skrivplanen och tidningens sida skriver du ut på nytt varje vecka."
     - "Förlagorna, ordkorten, kortet Ett långt ord, kortet Vi skriver i par, skrivplanen och tidningens sida är gjorda för eleven."
   ramar:
     # ---------------------------------------------------------------- Veckorna
     - rubrik: "Till läraren: veckorna"
       lektioner: true
       text:
-        - "Varje vecka har en egen sida, veckans sida. Överst står veckans fokus och förlagan, sedan ordpasset under Pass 1, uppgiften, din plan och din text, och skrivpassen under Pass 2 och 3. Sist står veckans vanliga fel under Lyssna efter."
+        - "Varje vecka har en egen sida, veckans sida. Överst står veckans fokus och förlagan, sedan ordpasset under Pass 1, uppgiften, din plan och din text, och skrivpassen under Pass 2 och 3. Sist står veckans vanliga fel under Lyssna efter. Direkt efter veckans sida kommer veckans förlaga och veckans ordkort. Hur du gör i ordning korten står under Ordkorten, efter veckorna."
       delar:
         - rubrik: "Vecka 1 · Två ord blir ett"
           falt:
@@ -862,7 +862,7 @@ ramar:
     # ---------------------------------------------------------------- Ordkorten
     - rubrik: Ordkorten
       text:
-        - Varje vecka har en sida med kort. I ordpasset bygger paren ord med korten, delar dem och flyttar delarna.
+        - Varje vecka har en sida med kort, som står efter veckans förlaga. I ordpasset bygger paren ord med korten, delar dem och flyttar delarna.
       delar:
         - rubrik: Till läraren
           falt:
@@ -1368,7 +1368,7 @@ lathund:
       rubrik: Var materialet finns
       punkter:
         - fet: Förlagorna och ordkorten.
-          text: En förlaga och en sida med kort för varje vecka står under Kursens material.
+          text: En förlaga och en sida med kort står vid varje vecka under Kursens material.
         - fet: Veckans sida.
           text: "Ordpasset, uppgiften, din text och skrivpassen står under Till läraren: veckorna."
         - fet: Korten och bladen.
