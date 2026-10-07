@@ -42,7 +42,9 @@ const kontrollera = args.includes('--kontrollera');
 const vidBehov = args.includes('--vid-behov');
 const valda = args.filter((a) => !a.startsWith('--'));
 
-// Receptet: ändras något här görs alla filmer om. Måtten är filmens (960 × 540) gånger 4/3.
+// Receptet: ändras något här görs alla filmer om. Måtten är filmens (960 × 540) gånger 4/3. Klippet vid rutornas summa
+// (-t i gor) kom 2026-10-07 utan ny version av receptet: det tar bara bort det dubblade sista stilla läget, som i de
+// filmer som då fanns är kortare än 0,3 sekunder, och bilden är densamma. De görs om med nästa ändring av receptet.
 const BREDD = 1280, HOJD = 720, BILDER = 25, CRF = 30;
 const MARKE = '© Niclas Fohlin · niclasfohlin.se';
 // Filmen i 97 procent: bilden visar 991 × 557,4 av filmens egna enheter, 15,5 fria på var sida och 17,4 nederst.
@@ -241,19 +243,22 @@ async function gor(f, v, port) {
   mkdirSync(tmp, { recursive: true });
   try {
     const rutor = await ritaRutor(f, v.chrome, tmp, port, sekunder);
-    // ffmpegs lista: varje ruta med sin tid, den sista en gång till (så vill formatet ha det).
+    // ffmpegs lista: varje ruta med sin tid, den sista en gång till (så vill formatet ha det). ffmpeg ger den upprepade
+    // rutan den sista rutans tid en gång till, så mp4-filen klipps vid rutornas summa (-t). Utan klippet blir den längre
+    // än filmen med det sista stilla lägets längd: 0,74 s för De fyra räknesätten, film 3, när scenen nollställs i slutet.
     const sokvag = (p) => p.replaceAll('\\', '/');
     writeFileSync(join(tmp, 'lista.txt'), `${rutor.map((r) => `file '${sokvag(r.fil)}'\nduration ${(r.ms / 1000).toFixed(4)}`).join('\n')}\nfile '${sokvag(rutor.at(-1).fil)}'\n`);
     const ut = join(tmp, 'film.mp4');
+    const summa = (rutor.reduce((a, r) => a + r.ms, 0) / 1000).toFixed(3);
     execFileSync(v.ffmpeg, ['-y', '-hide_banner', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', join(tmp, 'lista.txt'),
-      '-vf', `fps=${BILDER},format=yuv420p`, '-c:v', 'libx264', '-preset', 'veryslow', '-tune', 'animation', '-crf', String(CRF), '-movflags', '+faststart', '-an',
+      '-vf', `fps=${BILDER},format=yuv420p`, '-c:v', 'libx264', '-preset', 'veryslow', '-tune', 'animation', '-crf', String(CRF), '-movflags', '+faststart', '-an', '-t', summa,
       '-metadata', `title=${titelFor(f)}`, '-metadata', 'artist=Niclas Fohlin', '-metadata', 'copyright=© Niclas Fohlin, niclasfohlin.se',
       '-metadata', `comment=https://niclasfohlin.se/stodundervisning/${f.id} · Bilderna i filmerna: Fluent Emoji, © Microsoft Corporation, MIT-licens.`, ut]);
     // Kontrollen: rätt mått och rätt längd, annars kastas filen.
     const strom = JSON.parse(execFileSync(v.ffprobe, ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=width,height,codec_name:format=duration', '-of', 'json', ut], { encoding: 'utf8' }));
     const s = strom.streams[0], langd = Number(strom.format.duration);
     if (s.codec_name !== 'h264' || s.width !== BREDD || s.height !== HOJD) throw new Error(`${f.bas}: mp4-filen blev ${s.codec_name} ${s.width} × ${s.height}`);
-    if (Math.abs(langd - sekunder) > 0.3) throw new Error(`${f.bas}: mp4-filen blev ${langd} s, filmen är ${sekunder} s`);
+    if (Math.abs(langd - sekunder) > 0.1) throw new Error(`${f.bas}: mp4-filen blev ${langd} s, filmen är ${sekunder} s`);
     const vald = await valjOmslag(rutor);
     const omslag = await sharp(vald.fil).resize(BREDD, HOJD).png({ palette: true, colours: 128, effort: 10 }).toBuffer();
     copyFileSync(ut, mp4For(f.bas));
