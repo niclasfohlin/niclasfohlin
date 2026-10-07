@@ -1,8 +1,11 @@
 # Metod i stödundervisning. Modellen står i src/content.config.ts och mallen i _mall.yaml.
 # Omarbetad 2026-09-24 efter Nämnaren-artikeln (underlag/metoder/namnaren-2026-09), besluten i NATTEN.md.
+# Passet är 30 minuter sedan 2026-10-07, på Niclas besked: underlaget säger 20, men 9 minuter för att lösa ett problem
+# var för optimistiskt. Lösa fick 8 minuter till (6–23) och Jämföra 2 (23–28). Passlängden och tiderna står i ingressen, tid, inledningen,
+# upplägget, tidsschemat, exemplet (en dryg kvart) och lathundens pass.
 titel: Problemlösning i grupp
 undertitel: Lärarledd problemlösning och läsförståelse i liten grupp för åk 4–9
-ingress: Ett körschema för 20-minuterspass i liten grupp där eleverna läser, tolkar och löser matematiska problem i text. Läraren leder, modellerar och frågar i stället för att visa lösningen. Samma rutin varje gång, två till tre pass i veckan under sex till åtta veckor.
+ingress: Ett körschema för 30-minuterspass i liten grupp där eleverna läser, tolkar och löser matematiska problem i text. Läraren leder, modellerar och frågar i stället för att visa lösningen. Samma rutin varje gång, två till tre pass i veckan under sex till åtta veckor.
 omrade: Matematik
 arskurs:
   - 4-6
@@ -13,24 +16,24 @@ taggar:
 format:
   - liten grupp
   - par
-tid: 20 minuter per pass, två till tre pass i veckan
+tid: 30 minuter per pass, två till tre pass i veckan
 period: Sex till åtta veckor
 grupp: Två till åtta elever
 material:
   - ett rikt problem per pass
   - miniwhiteboards eller papper
   - konkret material
-uppdaterad: 2026-10-03
+uppdaterad: 2026-10-07
 relaterade:
   - faktatextsamtal-i-grupp
   - antalsuppfattning-i-grupp
   - brakkurs-i-grupp
 utkast: false
 inledning:
-  - Det här är ett körschema för en lärarledd insats i liten grupp för elever som behöver stöd i att läsa, tolka och lösa matematiska problem i text. Insatsen är tidsbegränsad, riktad och har tät uppföljning. Varje pass är 20 minuter och följer samma rutin. Det är ett samtal, inte ett formulär att fylla i, och skillnaden mot vanligt grupparbete är att läraren leder, modellerar och stöttar. Att modellera är att tänka högt om hur man tar sig an problemet, som ”Jag vill rita det här för att se det framför mig”. Börja med rutinen och tidsschemat nedan. Forskningsgrunden finns kort sammanfattad sist.
+  - Det här är ett körschema för en lärarledd insats i liten grupp för elever som behöver stöd i att läsa, tolka och lösa matematiska problem i text. Insatsen är tidsbegränsad, riktad och har tät uppföljning. Varje pass är 30 minuter och följer samma rutin. Det är ett samtal, inte ett formulär att fylla i, och skillnaden mot vanligt grupparbete är att läraren leder, modellerar och stöttar. Att modellera är att tänka högt om hur man tar sig an problemet, som ”Jag vill rita det här för att se det framför mig”. Börja med rutinen och tidsschemat nedan. Forskningsgrunden finns kort sammanfattad sist.
 upplagg:
   rubrik: Så fungerar insatsen
-  text: "Insatsen pågår i sex till åtta veckor med två till tre pass på 20 minuter i veckan. Gruppen har två till åtta elever som behöver stöd i matematisk problemlösning och läsförståelse. Varje pass har ett problem i text. Du läser problemet högt, en elev återberättar det, och ni skriver vad ni vet och vad ni ska ta reda på. Sedan planerar ni hur ni ska visa problemet innan någon räknar, eleverna prövar i par, och till sist jämför ni två lösningar och sätter ord på strategin. Före och efter perioden ser du om eleven kan återberätta ett kort lästal, välja hur det ska visas och kontrollera svaret."
+  text: "Insatsen pågår i sex till åtta veckor med två till tre pass på 30 minuter i veckan. Gruppen har två till åtta elever som behöver stöd i matematisk problemlösning och läsförståelse. Varje pass har ett problem i text. Du läser problemet högt, en elev återberättar det, och ni skriver vad ni vet och vad ni ska ta reda på. Sedan planerar ni hur ni ska visa problemet innan någon räknar, eleverna prövar i par, och till sist jämför ni två lösningar och sätter ord på strategin. Före och efter perioden ser du om eleven kan återberätta ett kort lästal, välja hur det ska visas och kontrollera svaret."
 tabeller:
   - rubrik: Var behöver eleven stöd?
     plats: efter-fastnar
@@ -97,8 +100,8 @@ passrutin:
       fas: Jämföra
   efterPasset: Läraren skriver en kort notering om vad eleverna klarade med stöd.
 tidsschema:
-  rubrik: Ett pass på 20 minuter
-  text: Förbered dig genom att lösa problemet själv och fundera på var eleverna kan fastna. Remsan visar hur de 20 minuterna fördelas mellan passets faser och när gruppen arbetar gemensamt och i par. Längst tid får eleverna för att pröva själva.
+  rubrik: Ett pass på 30 minuter
+  text: Förbered dig genom att lösa problemet själv och fundera på var eleverna kan fastna. Remsan visar hur de 30 minuterna fördelas mellan passets faser och när gruppen arbetar gemensamt och i par. Längst tid får eleverna för att pröva själva.
   rader:
     - tid: Före passet
       fas: Förberedelse
@@ -109,13 +112,13 @@ tidsschema:
     - tid: 3–6 min
       fas: Planera
       vad: "Ingen räknar än. Välj inte åt eleverna, men hjälp dem i gång: ”En tabell kan vara bra när vi behöver pröva olika antal. Vad kan rubrikerna vara?”"
-    - tid: 6–15 min
+    - tid: 6–23 min
       fas: Lösa
       vad: Trio vid ojämnt antal. Du cirkulerar, frågar och noterar vilka lösningar som finns i gruppen, för det är dem ni ska jämföra.
-    - tid: 15–18 min
+    - tid: 23–28 min
       fas: Jämföra
       vad: Två lösningar eller två sätt att tänka visas, ordnas och kopplas ihop. Har gruppen bara ett sätt, be dem visa lösningen på ett annat. Är svaret rimligt? Vilken väg var tydligast, och varför fungerade den eller blev det en missuppfattning?
-    - tid: 18–20 min
+    - tid: 28–30 min
       fas: Avsluta
       vad: Sätt ord på strategin som fungerade och på det ni tar med er till nästa problem.
   efter: "Ett problem per pass. Blir gruppen klar tidigt: be dem visa lösningen på ett annat sätt, hitta en annan strategi eller skriva en egen liknande uppgift."
@@ -187,7 +190,7 @@ exempel:
     - "Läraren har löst problemet själv i förväg och vet att eleverna kan fastna i vad de två okända sakerna är. Passet börjar med att läraren läser problemet högt. En elev återberättar med egna ord: ”Det finns olika ljusstakar och vi ska ta reda på hur många det finns av varje sort.” Läraren säger: ”Bra. Då markerar vi frågan. Vad är det vi ska ta reda på?” Gruppen tänker och antecknar tillsammans: vi vet att det finns 29 ljusstakar, vi vet att det behövs 187 ljus, och vi ska ta reda på hur många som har fem ljus och hur många som har sju ljus."
     - "Sedan stannar läraren gruppen innan någon börjar räkna. ”Hur kan vi visa problemet så att vi ser det framför oss?” Eleverna föreslår att rita, göra en tabell eller prova med mindre tal. Läraren väljer inte åt dem, men hjälper dem i gång: ”En tabell kan vara bra när vi behöver pröva olika antal. Vad kan rubrikerna vara?”"
     - "Eleverna arbetar sedan i par, och vid ojämnt antal arbetar tre tillsammans i en trio. Läraren går runt och lyssnar. När ett par fastnar frågar läraren: ”Vad har ni gjort hittills?” och sedan ”Varför gjorde ni så?” Om de fortfarande inte kommer vidare ber läraren dem visa i tabellen vad de vet, eller prova med ett enklare antal först. Läraren ger inte lösningen, utan hjälper eleverna att ta nästa steg själva."
-    - "Efter några minuter samlar läraren gruppen igen. Två par får visa hur de tänkte. Det ena paret har gjort en tabell. Det andra har börjat med att tänka: ”Om alla vore femarmade skulle det bli för få ljus.” Läraren låter gruppen jämföra: ”Vad är lika i de här sätten? Vad hjälper oss att se skillnaden mellan fem ljus och sju ljus? Hur kan vi kontrollera att svaret passar frågan?”"
+    - "Efter en dryg kvart samlar läraren gruppen igen. Två par får visa hur de tänkte. Det ena paret har gjort en tabell. Det andra har börjat med att tänka: ”Om alla vore femarmade skulle det bli för få ljus.” Läraren låter gruppen jämföra: ”Vad är lika i de här sätten? Vad hjälper oss att se skillnaden mellan fem ljus och sju ljus? Hur kan vi kontrollera att svaret passar frågan?”"
     - "Passet avslutas med att läraren sätter ord på strategin: ”I dag använde vi tabell och prövade systematiskt. Vi började också med att förstå frågan innan vi räknade.” Efteråt skriver läraren en kort notering: flera elever kunde återberätta problemet, gruppen behövde stöd att välja representation, och nästa gång repeteras tabell som strategi."
   tavla: true
   tavlaText: "Visa tabellen först och resonemanget om alla vore femarmade sedan. I båda lösningarna ger varje byte från en femarmad till en sjuarmad stake två ljus till: tio byten ger tjugo ljus, och 42 / 2 = 21. Att översätta mellan två sätt att visa något är passets matematiska kärna."
@@ -354,7 +357,7 @@ lathund:
         - "Två lösningar jag hoppas få se: en tabell, och ”om alla vore femarmade skulle det bli för få ljus”."
     klarTidigt: Visa lösningen på ett annat sätt, hitta en annan strategi eller skriv en egen liknande uppgift.
     schema:
-      rubrik: 20 minuter, steg för steg
+      rubrik: 30 minuter, steg för steg
       rader:
         - tid: Före
           fas: Förberedelse
@@ -365,13 +368,13 @@ lathund:
         - tid: 3–6
           fas: 2 · Planera
           vad: Välj representation och strategi tillsammans. Ingen räknar än. Välj inte åt eleverna.
-        - tid: 6–15
+        - tid: 6–23
           fas: 3 · Lösa
           vad: Eleverna prövar i par, trio vid ojämnt antal. Du cirkulerar, frågar och noterar lösningar.
-        - tid: 15–18
+        - tid: 23–28
           fas: 4 · Jämföra
           vad: "Två lösningar eller två sätt att tänka visas, ordnas och kopplas ihop. Bara ett sätt: visa det på ett annat. Är svaret rimligt?"
-        - tid: 18–20
+        - tid: 28–30
           fas: Avsluta
           vad: Sätt ord på strategin som fungerade. Den korta noteringen skrivs efter passet.
   mall:
