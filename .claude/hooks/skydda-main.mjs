@@ -21,9 +21,20 @@ function byggerSajten(cmd, gren) {
   if (/\bcreateSiteBuild\b/.test(cmd)) return 'ett produktionsbygge (createSiteBuild)';
   if (/\bgh\s+pr\s+merge\b/.test(cmd)) return 'en sammanslagning på GitHub (gh pr merge), som bygger main';
   if (/\bkommentarer(\.mjs)?\s+(--\s+)?(av|på|pa|tak)(?=\s|$)/.test(cmd)) return 'npm run kommentarer, som bygger om sajten';
+  // En kedja som först ändrar en gren och sedan pushar main: kroken läser origin/main..main innan kedjan har körts och
+  // ser då inte vad som hamnar på main. Listan var tom, och en tom lista räknades som en push utan bygge, så kedjan
+  // `git merge … && git push` gick igenom också med stängd spärr (granskningen 2026-10-07). En sådan push prövas nu
+  // alltid mot spärren.
+  let andrarGren = false;
   for (const del of cmd.split(/&&|\|\||;|\n|\|/)) {
     const m = del.match(/\bgit\s+(?:-C\s+\S+\s+)?push\b(.*)$/);
-    if (!m) continue;
+    if (!m) {
+      if (/\bgit\s+(?:-C\s+\S+\s+)?(merge|pull|rebase|cherry-pick|commit|reset|switch|checkout|revert|am)\b/.test(del)) andrarGren = true;
+      // Byter kedjan gren före pushen är det den grenen en push utan namn gäller.
+      const byte = del.match(/\bgit\s+(?:-C\s+\S+\s+)?(?:switch|checkout)\s+(?:-\S+\s+)*([^\s-]\S*)/);
+      if (byte) gren = byte[1];
+      continue;
+    }
     const ord = m[1].trim().split(/\s+/).filter(Boolean);
     if (ord.includes('--dry-run') || ord.includes('-n')) continue;
     const refs = ord.filter((o) => !o.startsWith('-')).slice(1);
@@ -37,6 +48,7 @@ function byggerSajten(cmd, gren) {
     }
     for (const k of kallor) {
       if (!k) return 'en borttagning av main';
+      if (andrarGren) return 'en push till main i samma kommando som ändrar grenen (kör pushen som ett eget kommando, så ser kroken vad som laddas upp)';
       // Bygger inget när varje commit som inte redan ligger på origin/main bär [skip netlify].
       try {
         const nya = git(['log', `origin/main..${k}`, '--format=%B%x00']).split('\0').map((s) => s.trim()).filter(Boolean);
