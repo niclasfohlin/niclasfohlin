@@ -28,7 +28,8 @@ export async function getStaticPaths() {
 const { m, alla, koppling } = Astro.props;
 const d = m.data;
 // Huvudfilmen efter faktarutan (src/lib/film.ts); extrafilmerna ritar Metod.astro vid sina moment.
-const huvud = huvudfilm(metodensFilmer(d, m.id));
+const filmer = metodensFilmer(d, m.id);
+const huvud = huvudfilm(filmer);
 // En lektion har sin serie i menyn och sist på sidan, så att Hör ihop med bara visar metoder utanför serien.
 const iSerien = (x: (typeof alla)[number]) => Boolean(koppling) && (x.id === koppling!.serie.id || x.data.serie === koppling!.serie.id);
 const relaterade = alla.filter((x) => d.relaterade.includes(x.id) && !iSerien(x));
@@ -76,7 +77,7 @@ const materialLank = d.ramar ? '#ramar' : harLathund(d) ? `/stodundervisning/${m
           faktarutan, som på Word-filens första sida. Extrafilmerna står i texten (Metod.astro). */}
       {huvud && <Filmruta filmer={[huvud]} titel={d.titel} />}
       {delningPa && <Delning sida={`/stodundervisning/${m.id}`} titel={d.titel} plats="topp" />}
-      <Nedladdning id={m.id} titel={d.titel} harMallar={harMallar(d)} harLathund={harLathund(d)} ramar={d.ramar?.rubrik.toLowerCase()} />
+      <Nedladdning id={m.id} titel={d.titel} harMallar={harMallar(d)} harLathund={harLathund(d)} ramar={d.ramar?.rubrik.toLowerCase()} filmer={filmer.length} />
     </div>
 
     <Metod d={d} id={m.id} koppling={koppling} />

@@ -389,6 +389,10 @@ lathund:
 # Filmerna ur metodriggens filmpaket (METODER.md under Filmerna, src/lib/film.ts). Varje metod får en huvudfilm, film,
 # som står direkt efter faktarutan; stillbilderna står på sidan 1 i Word och i utskriften. Filerna <id>-film.svg och
 # <id>-film-1.svg … -4.svg ligger i public/stodundervisning/. titel bara när filmen ska heta något annat än rubriken.
+# Filmens namn (titel eller rubrik) och de fyra bildtexterna står också under filmen på filmbilden i lathundens
+# PowerPoint, och namnet i spelaren på lathundssidan och i zip-filens filnamn: ett namn på omkring 35 tecken ryms på en
+# rad också när metoden har tre filmer, ett längre tar två. Filmens mp4 och omslagsbild gör valideringen ur svg-filen
+# (scripts/filmmp4.mjs).
 # film:
 #   titel: "Ljudstarten i Ljudlek i grupp"
 #   sekunder: 18.9

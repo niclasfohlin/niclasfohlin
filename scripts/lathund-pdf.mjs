@@ -48,7 +48,7 @@ const pdfFor = (id) => join(pdfMapp, `${id}-lathund.pdf`);
 
 // Allt som påverkar pdf:en: metodens text, koden som bygger A4-varianten av PowerPoint-filen (med sajtens adress i
 // site.ts), PowerPoint-skriptet som gör pdf:en och pptxgenjs version.
-const gemensamma = ['src/lib/metodpptx.ts', 'src/lib/metod.ts', 'src/pages/utskrift/lathund/[id].pptx.ts', 'src/data/site.ts', 'scripts/pptx-till-pdf.ps1'];
+const gemensamma = ['src/lib/metodpptx.ts', 'src/lib/metod.ts', 'src/lib/lathundsidor.ts', 'src/pages/utskrift/lathund/[id].pptx.ts', 'src/data/site.ts', 'scripts/pptx-till-pdf.ps1'];
 const pptxgenjs = (() => { try { return JSON.parse(readFileSync(join(rot, 'node_modules', 'pptxgenjs', 'package.json'), 'utf8')).version; } catch { return 'okänd'; } })();
 const hashAv = (delar) => { const h = createHash('sha256'); for (const d of delar) h.update(d); return h.digest('hex').slice(0, 16); };
 // Textfiler hashas med LF oavsett radslut: arbetskopian på Windows har CRLF, Netlifys utcheckning LF.
@@ -58,7 +58,8 @@ const gemensamHash = hashAv([`pdf ur pptx i A4, pptxgenjs ${pptxgenjs}`, ...geme
 // överst eller en ny länk till en annan metod inte gör om lathunden (Niclas 2026-10-03: "Varför ändras lathunden av
 // datumet?"). Lathundens kod (metodpptx.ts och lathundBarn i metoddocx.ts) läser inga av fälten; läser den ett av dem
 // en dag, ändras koden och därmed den gemensamma delen, och alla lathundar görs om.
-const INTE_I_LATHUNDEN = ['uppdaterad', 'publicerad', 'relaterade', 'utkast', 'upplagg', 'gruppen', 'principer'];
+// film och filmer står bara på filmbilden i 16:9-filen, aldrig i pdf:en (K-242).
+const INTE_I_LATHUNDEN = ['uppdaterad', 'publicerad', 'relaterade', 'utkast', 'upplagg', 'gruppen', 'principer', 'film', 'filmer'];
 const metodKalla = (m) => { const d = { ...m.data }; for (const k of INTE_I_LATHUNDEN) delete d[k]; return Buffer.from(JSON.stringify(d)); };
 const kallHash = (m) => hashAv([gemensamHash, metodKalla(m)]);
 const filHash = (p) => hashAv([readFileSync(p)]);

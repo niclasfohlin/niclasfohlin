@@ -8,6 +8,8 @@ import Elevlista from './Elevlista.astro';
 import Tavla from './Tavla.astro';
 import type { MetodData } from '../lib/metod';
 import { lathundFakta, arbetsformRad, etikettOchText, lathundForm, passUtskrift } from '../lib/metod';
+// Sidornas etiketter med sin räkning, "Metoden · 1/4", ur samma lista som PowerPoint-filen räknar med.
+import { sidetikett } from '../lib/lathundsidor';
 interface Props { d: MetodData }
 const { d } = Astro.props;
 const l = d.lathund;
@@ -38,7 +40,7 @@ const kortBredd = (i: number) => `${((kortVikter[i] / kortVikter.reduce((a, v) =
 {l && (
   <div class="lh">
     <section class="lh-sida" id="lathund-metoden" aria-labelledby="lh-1">
-      <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-1">{d.titel}</h2><span class="lh-etikett">Metoden · 1/4</span></header>
+      <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-1">{d.titel}</h2><span class="lh-etikett">{sidetikett('Metoden')}</span></header>
       <div class="lh-fakta">
         {fakta.map((f) => <div><span class="lh-kicker">{f.rubrik}</span><strong>{f.text}</strong></div>)}
       </div>
@@ -65,7 +67,7 @@ const kortBredd = (i: number) => `${((kortVikter[i] / kortVikter.reduce((a, v) =
     </section>
 
     <section class="lh-sida" id="lathund-pass" aria-labelledby="lh-2">
-      <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-2">{l.pass.rubrik}</h2><span class="lh-etikett">Ett pass · 2/4</span></header>
+      <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-2">{l.pass.rubrik}</h2><span class="lh-etikett">{sidetikett('Ett pass')}</span></header>
       <div class="lh-kolumner">
         <div class="lh-kol">
           <div class="lh-ruta lh-elevtext" id="lathund-text">
@@ -100,7 +102,7 @@ const kortBredd = (i: number) => `${((kortVikter[i] / kortVikter.reduce((a, v) =
     </section>
 
     <section class="lh-sida" id="lathund-mall" aria-labelledby="lh-3">
-      <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-3">{l.mall.rubrik}</h2><span class="lh-etikett">Mallen · 3/4</span><span class="bara-js lh-lank"><button type="button" data-skriv-ut-mall>Skriv ut den här sidan</button></span></header>
+      <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-3">{l.mall.rubrik}</h2><span class="lh-etikett">{sidetikett('Mallen')}</span><span class="bara-js lh-lank"><button type="button" data-skriv-ut-mall>Skriv ut den här sidan</button></span></header>
       {l.mall.underrad && <p class="lh-underrad">{l.mall.underrad}</p>}
       <div class:list={['lh-block', { 'lh-block-matta': matta || kort }]}>
         {l.mall.block.map((b) => {
@@ -173,7 +175,7 @@ const kortBredd = (i: number) => `${((kortVikter[i] / kortVikter.reduce((a, v) =
     </section>
 
     <section class="lh-sida" id="lathund-material" aria-labelledby="lh-4">
-      <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-4">{l.material.rubrik}</h2><span class="lh-etikett">Material · 4/4</span></header>
+      <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-4">{l.material.rubrik}</h2><span class="lh-etikett">{sidetikett('Material')}</span></header>
       {d.urval && (
         <div class="lh-krav">
           {d.urval.krav.map((k, i) => <div><span class="lh-kicker">{l.material.kravEtikett} {i + 1}</span><strong>{k.rubrik}</strong><span>{k.text}</span></div>)}

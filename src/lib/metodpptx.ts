@@ -4,14 +4,25 @@
 // metodriggen, i sajtens palett. Innehållet är data i metoden; designen är låst här. Ryms text inte
 // krymper den ett steg och sedan varnas det i bygget: korta texten i metoden, ändra inte här.
 //
+// Före de fyra står filmbilden (Niclas 2026-10-07): metodens filmer, högst tre, som mp4 i bredd med filmens namn och
+// dess fyra bildtexter under. Den heter Filmerna och har inget nummer: lathundens bilder räknas 1/4 till 4/4 i varje
+// fil, eftersom metodernas texter hänvisar till lathundens sidor med nummer (src/lib/lathundsidor.ts). Filmbilden finns
+// bara i 16:9-filen; pdf:en i A4 är lathundens fyra sidor för utskrift. Mp4-filerna görs ur svg-filmerna av
+// scripts/filmmp4.mjs, och filmernas uppspelning sätts efteråt i filen (src/lib/filmfil.ts).
+//
 // Två format ur samma layout (Niclas 2026-09-27: "Pptx kan vara 16:9. De andra filerna är A4"): PowerPoint-filen
 // är 16:9 och lathundens pdf A4 liggande (src/pages/utskrift/lathund/[id].pptx.ts, gjord till pdf av
 // scripts/lathund-pdf.mjs). Layouten ritas i 16:9-måtten och primitiverna för över den till sidan (x och bredd
 // gånger sx, y och höjd gånger sy) med oförändrade teckengrader, så att A4-sidan fyller arket och texten skrivs
 // ut i full storlek i stället för 85 procent. Textuppskattningen räknar med den verkliga bredden, så att tabeller
 // och rutor fördelar höjden rätt också i A4.
+import { readFileSync } from 'node:fs';
 import PptxGenJS from 'pptxgenjs';
 import type { CollectionEntry } from 'astro:content';
+import { FILM_UPPHOV, filmNamn, metodensFilmer } from './film';
+import { filmbildensUppspelning, mp4Fil, omslagFil, provaFilmfiler } from './filmfil';
+import { filmbildNamn, sidetikett } from './lathundsidor';
+import TECKENBREDD from '../data/teckenbredd.json';
 import { lathundFakta, arbetsformRad, etikettOchText, lathundForm, passOrd } from './metod';
 import type { MetodData } from './metod';
 
@@ -130,6 +141,22 @@ function bilder(d: MetodData) {
   return { bild1, bild2, bild3, bild4 };
 }
 
+// Antalet rader en text tar i Calibri i en bredd i tum, när PowerPoint bryter vid mellanslag: typsnittets egna
+// teckenbredder (src/data/teckenbredd.json, samma som Word-filerna räknar med), med tre procents marginal. Filmbilden
+// räknar så, eftersom filmens namn och bildtexter står i smala spalter där en grov uppskattning ger en rad för mycket.
+const TECKENINDEX = new Map([...TECKENBREDD.tecken].map((c, i) => [c, i]));
+function calibriRader(text: string, tum: number, punkter: number, fet = false): number {
+  const tabell = (TECKENBREDD.bredd as Record<string, (number | null)[]>)[fet ? 'Calibri fet' : 'Calibri'];
+  const bredd = (ord: string) => [...ord].reduce((s, c) => s + (tabell[TECKENINDEX.get(c) ?? -1] ?? 600) / 1000, 0) * punkter;
+  const plats = tum * 72 * 0.97, mellan = bredd(' ');
+  let rader = 1, x = 0;
+  for (const ord of text.split(/\s+/).filter(Boolean)) {
+    const w = bredd(ord);
+    if (x && x + mellan + w > plats) { rader++; x = w; } else x += (x ? mellan : 0) + w;
+  }
+  return rader;
+}
+
 // A4-sidan är 88 procent så bred och 110 procent så hög som 16:9-bilden och rymmer lite mindre text. Den får därför
 // den största teckengraden i stegen nedan där sidorna inte varnar för något som 16:9-bilderna inte varnar för, samma
 // grad på alla fyra sidor. Metoder med luft skrivs ut i full storlek, täta krymper ett eller två steg.
@@ -138,7 +165,7 @@ const GRADER = [1, 0.97, 0.94, 0.91, 0.88];
 /** Lathunden som pptx-buffert. bas: sajtens adress för upphovsraden; format: 16:9 (standard) eller A4 liggande. */
 export async function lathundPptx(m: CollectionEntry<'stodundervisning'>, o: { bas: string; format?: LathundFormat }): Promise<Buffer> {
   const format = o.format ?? '16:9';
-  let valt = ritaLathund(m, o.bas, '16:9', 1);
+  let valt = ritaLathund(m, o.bas, '16:9', 1, format !== 'A4');
   if (format === 'A4') {
     const slag = (v: string) => v.replace(/\d+(?:[.,]\d+)?/g, '#');
     const tillatna = new Set(valt.varningar.map(slag));
@@ -151,15 +178,20 @@ export async function lathundPptx(m: CollectionEntry<'stodundervisning'>, o: { b
     console.log(`  ${m.id}: lathunden i A4 med ${Math.round(vald * 100)} procent av teckengraden`);
   }
   for (const v of valt.varningar) console.warn(`  ! ${m.id}${format === 'A4' ? ' (A4)' : ''}: ${v}`);
-  return (await valt.pres.write({ outputType: 'nodebuffer' })) as Buffer;
+  // Filen komprimeras: okomprimerad vägde lathunden 235 kB, komprimerad 32 kB (K-243, mätt på Ordverkstad i grupp).
+  const buffert = (await valt.pres.write({ outputType: 'nodebuffer', compression: true })) as Buffer;
+  return valt.filmer.length ? filmbildensUppspelning(buffert, 1, valt.filmer, m.data.uppdaterad ?? m.data.publicerad) : buffert;
 }
 
-// Ritar de fyra bilderna i formatet med teckengraden gånger grad och samlar varningarna.
-function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format: LathundFormat, grad: number): { pres: any; varningar: string[] } {
+// Ritar bilderna i formatet med teckengraden gånger grad och samlar varningarna: lathundens fyra, och i 16:9 filmbilden
+// före dem. filmer är textalternativet för varje film på filmbilden, i bildens ordning; tom när filen inte har någon.
+function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format: LathundFormat, grad: number, medFilmer = true): { pres: any; varningar: string[]; filmer: string[] } {
   const o = { bas };
   const d = m.data;
   if (!d.lathund) throw new Error(`${m.id} har ingen lathund`);
   const L = bilder(d);
+  // Filmbilden står först i 16:9-filen. medFilmer är falskt när bilderna bara ritas för att samla varningar.
+  const filmer = format === '16:9' && medFilmer ? metodensFilmer(d, m.id) : [];
   const Pptx: any = (PptxGenJS as any).default ?? PptxGenJS;
   const pres = new Pptx();
   const sida = SIDA[format];
@@ -203,11 +235,12 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
   const estLines = (t: any, wIn: number, size: number) => { const cpl = Math.max(8, Math.floor(wIn * sx * 72 / (size * grad * 0.52))); return Math.max(1, plain(t).split('\n').reduce((a, rad) => a + Math.max(1, Math.ceil(rad.length / cpl)), 0)); };
   const estH = (t: any, wIn: number, size: number, gap = 0) => estLines(t, wIn, size) * size * grad * 1.25 / 72 / sy + gap;
 
-  function header(s: any, title: string, right: string, idx: number) {
+  // right är sidans etikett, "Metoden · 1/4" ur sidetikett, eller filmbildens namn.
+  function header(s: any, title: string, right: string) {
     rect(s, 0, 0, W, 0.66, NAVY);
     txt(s, 'LATHUND', 0.46, 0.21, 1.5, 0.27, { mono: true, size: 12.75, color: WHITE });
     txt(s, title, 1.96, 0.16, 8.3, 0.39, { size: 18.75, bold: true, color: WHITE });
-    txt(s, `${right} · ${idx}/4`, 9.8, 0.21, 3.1, 0.27, { mono: true, size: 12.75, color: WHITE, align: 'right' });
+    txt(s, versaler(right), 9.8, 0.21, 3.1, 0.27, { mono: true, size: 12.75, color: WHITE, align: 'right' });
   }
   function fot(s: any) {
     txt(s, upphov, 0.46, H - 0.2, W - 0.92, 0.16, { mono: true, size: 7.5, color: GREY, align: 'right' });
@@ -316,10 +349,61 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
     return cy - y;
   }
 
+  // ---------------------------------------------------------------- FILMERNA
+  // Metodens filmer som mp4, i bredd efter antalet: en stor i mitten, två i bredd eller tre i bredd (Niclas 2026-10-07:
+  // "ha dem i en grid slide 1 (grupperade beroende på antal) som första slide med text under"). Över varje film står en
+  // liten speltriangel, filmens nummer och längd, under den filmens namn och dess fyra bildtexter. Omslagsbilden har
+  // inget spelmärke över sig: det täckte ordet mitt i filmen, och i Google Presentationer, som gör filmerna till
+  // stillbilder, såg det ut som en trasig film. Raden nederst säger var filmerna spelar då.
+  if (filmer.length) {
+    const s = pres.addSlide();
+    const n = filmer.length;
+    header(s, d.titel, filmbildNamn(n));
+    const M = 0.46, BR = W - 2 * M, RAD_Y = H - 0.56;
+    // PowerPoints spelarrad visas direkt under filmen när man pekar på den, och låg mitt i filmens namn när namnet stod
+    // tätt under filmen (Niclas 2026-10-07). Namnet börjar därför 0,6 tum under filmen.
+    const SPELARRAD = 0.6;
+    let form = n === 1 ? { w: 6.1, lucka: 0, y: 1.12, grad: 14, titel: 18 } : n === 2 ? { w: 6.0, lucka: BR - 12, y: 1.15, grad: 14.5, titel: 18 } : { w: (BR - 0.6) / 3, lucka: 0.3, y: 1.15, grad: 14, titel: 17 };
+    const namn = filmer.map(filmNamn);
+    // Namnet kan bli två rader i den smala spalten (Textsamtal i grupp har ett på 48 tecken), och alla spalters texter
+    // börjar på samma höjd. Bildtexterna har 22 punkters hängande indrag.
+    const matt = (v: typeof form) => {
+      const namnH = Math.max(...namn.map((t) => calibriRader(t, v.w, v.titel, true))) * v.titel * 1.22 / 72;
+      const textH = Math.max(...filmer.map((f) => f.film.stillbilder.reduce((a, b) => a + calibriRader(b.text, v.w - 22 / 72, v.grad) * v.grad * 1.2 / 72 + 5 / 72, 0)));
+      const textY = v.y + v.w * 9 / 16 + SPELARRAD + namnH + 0.1;
+      return { namnH, textY, slut: textY + textH };
+    };
+    // Ryms texterna inte ovanför sista raden krymper graden ett steg i taget, och en ensam film blir smalare; sedan varnas det.
+    let hojd = matt(form);
+    while (hojd.slut > RAD_Y - 0.06 && form.grad > 11.5) { form = { ...form, grad: form.grad - 0.5 }; hojd = matt(form); }
+    while (n === 1 && hojd.slut > RAD_Y - 0.06 && form.w > 5) { form = { ...form, w: form.w - 0.25 }; hojd = matt(form); }
+    if (hojd.slut > RAD_Y) varna('filmbilden: filmens namn och bildtexter ryms inte under filmen: korta filmens titel eller stillbildernas texter');
+    const fh = form.w * 9 / 16, x0 = n === 1 ? (W - form.w) / 2 : M;
+    filmer.forEach((f, i) => {
+      provaFilmfiler(f, d.titel);
+      const x = x0 + i * (form.w + form.lucka);
+      s.addShape(pres.ShapeType.triangle, { x: x + 0.005, y: form.y - 0.285, w: 0.15, h: 0.13, rotate: 90, fill: { color: AMBER }, line: { color: AMBER, width: 0 } });
+      txt(s, `${n === 1 ? 'FILMEN' : `FILM ${f.nr}`} · ${Math.round(f.film.sekunder)} SEKUNDER`, x + 0.24, form.y - 0.33, form.w - 0.24, 0.25, { mono: true, size: 12, color: AMBER });
+      s.addMedia({ type: 'video', path: mp4Fil(f), cover: `data:image/png;base64,${readFileSync(omslagFil(f)).toString('base64')}`, x, y: form.y, w: form.w, h: fh });
+      txt(s, namn[i], x, form.y + fh + SPELARRAD, form.w, hojd.namnH, { size: form.titel, bold: true });
+      // Bildtexterna som numrerad lista med hängande indrag, så att en text på två rader står rak under sig själv.
+      s.addText(f.film.stillbilder.map((b) => ({ text: hart(b.text), options: { bullet: { type: 'number', style: 'arabicPlain', indent: 22 }, fontFace: SANS, fontSize: form.grad, color: INK, breakLine: true } })),
+        { x, y: hojd.textY, w: form.w, h: RAD_Y - 0.06 - hojd.textY, isTextBox: true, margin: 0, valign: 'top', paraSpaceAfter: 5, fit: 'none' });
+    });
+    // Raden nederst: i PowerPoint spelar ett klick filmen. I Google Presentationer är filmerna stillbilder, och då
+    // säger raden var de spelar, med adressen som länk.
+    s.addText([
+      { text: `${n === 1 ? 'Klicka på filmen för att spela den' : 'Klicka på en film för att spela den'}. Spelar filmen inte här? Se den på ` },
+      { text: adress, options: { hyperlink: { url: `https://${adress}` } } },
+    ], { x: M, y: RAD_Y, w: BR, h: 0.24, isTextBox: true, margin: 0, fontFace: SANS, fontSize: 11, color: GREY, valign: 'top', fit: 'none' });
+    fot(s);
+    s.addNotes(`${d.titel}, ${n === 1 ? 'filmen' : 'filmerna'}: ${namn.join(', ')}. ${upphov} ${FILM_UPPHOV}`);
+  }
+
   // ---------------------------------------------------------------- 1 METODEN
   {
     const b = L.bild1, s = pres.addSlide();
-    header(s, b.titel, 'METODEN', 1);
+    header(s, b.titel, sidetikett('Metoden'));
     band(s, b.band);
     rect(s, MITT - 0.01, 1.48, 0.02, BOTTEN - 1.48, INK);
     label(s, b.introRubrik, V_X, 1.65, V_BREDD);
@@ -359,7 +443,7 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
   // ---------------------------------------------------------------- 2 ETT PASS
   {
     const b = L.bild2, s = pres.addSlide();
-    header(s, b.titel, 'ETT PASS', 2);
+    header(s, b.titel, sidetikett('Ett pass'));
     rect(s, 0, 0.66, W, 0.02, INK); rect(s, 5.89, 0.68, 0.02, BOTTEN - 0.68, INK);
     const gruppLang = plain(b.grupp).length > 52;
     const gruppH = gruppLang ? 0.45 : 0.25;
@@ -385,7 +469,7 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
   // ---------------------------------------------------------------- 3 MALLEN
   {
     const b = L.bild3, s = pres.addSlide();
-    header(s, b.titel, 'MALLEN', 3);
+    header(s, b.titel, sidetikett('Mallen'));
     rect(s, 0, 0.66, W, 0.44, BAND); rect(s, 0, 1.08, W, 0.02, INK);
     txt(s, b.bandVanster ?? '', 0.21, 0.76, 7.2, 0.25, { mono: true, size: 12, color: GREY });
     // Underraden står på en rad i bandet, och en längre bryts och klipps av bandet (riggens varning för sagoboken
@@ -590,7 +674,7 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
   // ---------------------------------------------------------------- 4 MATERIAL
   {
     const b = L.bild4, s = pres.addSlide();
-    header(s, b.titel, 'MATERIAL', 4);
+    header(s, b.titel, sidetikett('Material'));
     const harKrav = b.krav.length > 0;
     let top: number;
     if (harKrav) top = band(s, b.krav, true);
@@ -655,5 +739,5 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
     s.addNotes(`${b.anteckning} ${upphov}`);
   }
 
-  return { pres, varningar };
+  return { pres, varningar, filmer: filmer.map((f) => `${filmNamn(f)}, filmen: ${f.film.beskrivning}`) };
 }

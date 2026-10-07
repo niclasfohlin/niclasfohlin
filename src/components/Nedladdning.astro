@@ -4,15 +4,30 @@
 // Filerna byggs vid bygget av src/pages/stodundervisning/[id].docx.ts, [id]-mallar.docx.ts,
 // [id]-lathund.docx.ts och [id]-lathund.pptx.ts; lathundens pdf ligger i public/stodundervisning/ och görs om
 // automatiskt ur lathundens PowerPoint-kod i A4 liggande av npm run validera (scripts/lathund-pdf.mjs --vid-behov). Varje fil erbjuds med samma val (Word, PowerPoint, Drive, pdf) genom Filval.astro.
+// Metodens filmer är en egen rad, Filmerna (Niclas 2026-10-07): en zip-fil med filmerna som mp4, byggd av
+// src/pages/stodundervisning/[id]-filmer.zip.ts ur mp4-filerna som scripts/filmmp4.mjs gör ur svg-filmerna. Raden heter
+// inte Bara filmerna: de andra raderna med Bara är delar av Allt om metoden, och filmerna ligger inte i den filen.
 import Filval from './Filval.astro';
 import { site } from '../data/site';
 // ramar: namnet på metodens ramar (läslistorna, berättelseramarna) när de ligger i planeringsmallarna, så att knappen säger det.
 // titel: metodens titel, för besöksstatistiken ("Upprepad läsning: lathunden som pdf").
-interface Props { id: string; titel: string; harMallar: boolean; harLathund: boolean; ramar?: string }
-const { id, titel, harMallar, harLathund, ramar } = Astro.props;
+// filmer: hur många filmer metoden har; noll ger ingen rad.
+interface Props { id: string; titel: string; harMallar: boolean; harLathund: boolean; ramar?: string; filmer?: number }
+const { id, titel, harMallar, harLathund, ramar, filmer = 0 } = Astro.props;
+const filmord = filmer === 1 ? 'filmen' : 'filmerna';
 const drive = Boolean(site.driveKlientId);
-const delar = ['metodbeskrivningen', harMallar && 'planeringsmallarna', harLathund && 'lathunden'].filter(Boolean) as string[];
+const delar = ['beskrivningen', harMallar && 'mallarna', harLathund && 'lathunden'].filter(Boolean) as string[];
 const delarText = delar.length > 1 ? `${delar.slice(0, -1).join(', ')} och ${delar[delar.length - 1]}` : delar[0];
+// Raden under knapparna, en kort mening per sak läsaren kan undra över (Niclas 2026-10-07: texten "kan kortas ner
+// något. Särskilt nu med fler knappar att ladda ner"): vad Allt om metoden är, var filmerna finns, hur beskrivningen
+// blir en pdf, vad Drive gör och upphovet. En mening står bara när den gäller metoden.
+const hjalp = [
+  delar.length > 1 && `Allt om metoden är ${delarText} i en fil.`,
+  filmer > 0 && (harLathund ? `PowerPoint-filen börjar med ${filmord}, och zip-filen har ${filmer === 1 ? 'den' : 'dem'} som mp4.` : `Zip-filen har ${filmord} som mp4.`),
+  'Beskrivningen som pdf: välj Spara som PDF i utskriftsrutan.',
+  drive && 'Drive sparar en kopia i din Google Drive.',
+  'Alla filer bär © Niclas Fohlin.',
+].filter(Boolean).join(' ');
 const bas = `/stodundervisning/${id}`;
 ---
 <aside class="nedladdning" aria-labelledby={`nedladdning-${id}`}>
@@ -26,8 +41,19 @@ const bas = `/stodundervisning/${id}`;
     <li><span class="filrubrik">Allt om metoden</span> <Filval fil={bas} namn={id} rubrik="Allt om metoden" statistik={`${titel}: allt om metoden`} /></li>
     {harLathund && <li><span class="filrubrik">Bara lathunden</span> <Filval fil={`${bas}-lathund`} namn={`${id}-lathund`} rubrik="Lathunden" statistik={`${titel}: lathunden`} pdf pptx /></li>}
     {harMallar && <li><span class="filrubrik">Bara planeringsmallarna{ramar && ` och ${ramar}`}</span> <Filval fil={`${bas}-mallar`} namn={`${id}-mallar`} rubrik="Planeringsmallarna" statistik={`${titel}: planeringsmallarna`} /></li>}
+    {filmer > 0 && (
+      <li>
+        <span class="filrubrik">{filmer === 1 ? 'Filmen' : 'Filmerna'}</span>{' '}
+        <span class="filval" role="group" aria-label={`${filmer === 1 ? 'Filmen' : 'Filmerna'}: ladda ner`}>
+          <a href={`${bas}-filmer.zip`} download={`${id}-filmer.zip`} title={filmer === 1 ? 'Ladda ner filmen som mp4 i en zip-fil' : `Ladda ner metodens ${filmer} filmer som mp4 i en zip-fil`} data-goatcounter-click={`fil:${id}-filmer.zip`} data-goatcounter-title={`${titel}: ${filmord} som zip`}>
+            <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16"><rect x="3" y="3.5" width="14" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4.5 7.5v9h11v-9M8 11h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Zip<span class="visually-hidden">: {filmord} som mp4</span>
+          </a>
+        </span>
+      </li>
+    )}
   </ul>
-  <p class="meta">Utskriften kan också sparas som pdf: välj Spara som PDF i utskriftsrutan. Allt om metoden: {delarText}. Alla filer bär © Niclas Fohlin.{harLathund && ' Lathunden finns också som PowerPoint med fyra bilder, att visa på tavlan eller ha i telefonen.'}{drive && ` Drive sparar en kopia i din egen Google Drive${harLathund ? ': lathunden som presentation, det andra som Word' : ''}.`}</p>
+  <p class="meta">{hjalp}</p>
 </aside>
 
 <script>

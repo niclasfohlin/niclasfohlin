@@ -107,6 +107,24 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
 
+# Filmerna som mp4 (scripts/filmmp4.mjs) och zip-filen med metodens filmer: en dag, som de andra nedladdningarna.
+# Zip-länken på sidorna bär filens version.
+[[headers]]
+  for = "/stodundervisning/*.mp4"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/stodundervisning/*.zip"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+# Småbilderna i spelaren på lathundssidan (filmens omslagsbild i litet format): en dag, och länken bär filens version.
+[[headers]]
+  for = "/stodundervisning/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
 # Filmerna och deras stillbilder ur metodriggen (<id>-film.svg, <id>-film-1.svg …): en dag, som lathundarna, eftersom en
 # film kan göras om under samma namn.
 [[headers]]

@@ -25,10 +25,14 @@ const vanta = (ms) => new Promise((r) => setTimeout(r, ms));
 const iso = (d) => d.toISOString().replace(/\.\d{3}Z$/, 'Z');
 const RAKNINGEN_BORJADE = new Date(2026, 8, 28);
 
-// Provsiffrorna: 125 sidor och händelser, som veckan hade 2026-09-29.
+// Provsiffrorna: 125 sidor och händelser, som veckan hade 2026-09-29. En av filerna är zip-filen med en metods filmer
+// (Niclas 2026-10-07: "Se till att nedladdning du fixar kommer i statistiken också på sidan"), med flest nedladdningar
+// så att den står överst bland filerna.
+const ZIP = { path: 'fil:metod-7-filmer.zip', title: 'Metod 7: filmerna som zip' };
 const PROV = Array.from({ length: 125 }, (_, i) => {
   const id = i + 1;
   if (id <= 6) return { path: `dela:facebook:stodundervisning/metod-${id}`, path_id: id, title: `Metod ${id}: delad på Facebook`, event: true, count: 1 };
+  if (id === 7) return { ...ZIP, path_id: id, event: true, count: 9 };
   if (id <= 60) return { path: `fil:metod-${id}.docx`, path_id: id, title: `Metod ${id}: allt om metoden som Word`, event: true, count: 2 };
   return { path: `/stodundervisning/metod-${id}`, path_id: id, title: `Metod ${id} · Niclas Fohlin`, event: false, count: 5 };
 });
@@ -152,6 +156,13 @@ try {
   const klick = (period) => () => utvardera(`document.querySelector('[data-period="${period}"]').click()`);
   console.log(riktig ? 'Riktiga siffror med Niclas nyckel.' : 'Påhittad nyckel och provsiffror som härmar GoatCounter.');
   await prova('i dag, när sidan laddas', async () => {}, mal0.dag);
+  if (!riktig) {
+    // Zip-filen med filmerna räknas bland nedladdningarna (rutan ovan) och står bland filerna med sin titel.
+    const filer = await utvardera(`document.querySelector('[data-kategori="filer"]')?.textContent ?? ''`);
+    const syns = (filer ?? '').includes(ZIP.title);
+    if (!syns) fel++;
+    console.log(`${syns ? 'GRÖNT' : 'RÖTT '}  filmernas zip-fil står bland filerna${syns ? '' : `: ${(filer ?? '').slice(0, 200)}`}`);
+  }
   await prova('7 dagar', klick('vecka'), mal0.lang);
   await prova('30 dagar', klick('manad'), mal0.lang);
   await prova('1 år', klick('ar'), mal0.lang);

@@ -199,10 +199,11 @@ const overblivna = readdirSync(join(rot, 'public/stodundervisning')).filter((f) 
 if (overblivna.length) console.log(`Överblivna filmfiler, ta bort dem om de inte används: ${overblivna.join(', ')}`);
 const ids = klara.map((k) => k.id);
 console.log(`\nNästa steg, i ordning, innan något laddas upp (METODER.md under Filmerna):
-  1. npm run validera
+  1. npm run validera   (gör också filmernas mp4 och omslagsbild ur svg-filerna, scripts/filmmp4.mjs)
   2. node scripts/filmplats.mjs --utan-bygge ${ids.join(' ')}
   3. node scripts/filmprov.mjs ${ids.join(' ')}   (filmerna spelar med minskad rörelse, och Pausa fryser dem)
   4. för varje metod: node scripts/metodprov.mjs <id> --bilder   (${ids.join(', ')})
-  5. titta på varje film där den står, på sidan, i utskriften och i Word, och läs filmernas texter som svenska
+  5. titta på varje film där den står, på sidan, i utskriften och i Word, och läs filmernas texter som svenska;
+     titta på omslagsbilden och på filmbilden i lathundens PowerPoint (METODER.md under Filmerna som mp4)
   6. granskning, sedan en commit och en push med allt, och efter deployen node scripts/filmprov.mjs --adress https://niclasfohlin.se ${ids.join(' ')}
   7. ett nyhetsbrev om filmerna skickas bara när Niclas sagt skicka (utskick/)`);

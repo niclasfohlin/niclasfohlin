@@ -2,11 +2,14 @@
 import Base from '../../../layouts/Base.astro';
 import Lathund from '../../../components/Lathund.astro';
 import Filval from '../../../components/Filval.astro';
+import Filmspelare from '../../../components/Filmspelare.astro';
+import { FILM_UPPHOV, metodensFilmer } from '../../../lib/film';
 import { publicerade } from '../../../lib/innehall';
 import { datumText, metodAdress, passOrd, UPPHOV } from '../../../lib/metod';
 import { site } from '../../../data/site';
 
-// /stodundervisning/<id>/lathund: snabbguiden på fyra sidor, för skärm och liggande A4.
+// /stodundervisning/<id>/lathund: snabbguiden på fyra sidor, för skärm och liggande A4. Överst står metodens filmer i en
+// spelare (Filmspelare.astro, Niclas 2026-10-07); de hör till skärmen och står varken i utskriften eller i pdf:en.
 export async function getStaticPaths() {
   const metoder = await publicerade('stodundervisning');
   return metoder.filter((m) => m.data.lathund).map((m) => ({ params: { id: m.id }, props: { m } }));
@@ -16,6 +19,7 @@ const { m } = Astro.props;
 const d = m.data;
 const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/lathund`;
 const forSteg = passOrd(d).forSteg;
+const filmer = metodensFilmer(d, m.id);
 ---
 
 <Base title={`Lathund: ${d.titel}`} description={`Snabbguide till ${d.titel}: metoden i korthet, ett pass ${forSteg}, mallen och vad du behöver. Skriv ut i liggande A4 eller ladda ner som PowerPoint, pdf eller Word.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
@@ -33,6 +37,7 @@ const forSteg = passOrd(d).forSteg;
       <nav class="metod-nav lathund-nav" aria-label="Lathundens sidor">
         <span class="nav-etikett" aria-hidden="true">Lathundens sidor</span>
         <ul>
+          {filmer.length > 0 && <li><a href="#lathund-film">{filmer.length === 1 ? 'Filmen' : 'Filmerna'}</a></li>}
           <li><a href="#lathund-metoden">1 Metoden</a></li>
           <li><a href="#lathund-pass">2 Ett pass</a></li>
           <li><a href="#lathund-mall">3 Mallen</a></li>
@@ -40,8 +45,9 @@ const forSteg = passOrd(d).forSteg;
         </ul>
       </nav>
     </header>
+    {filmer.length > 0 && <Filmspelare filmer={filmer} id={m.id} titel={d.titel} />}
     <Lathund d={d} />
-    <p class="upphov">{UPPHOV}. Lathund till {d.titel}{d.uppdaterad && `, uppdaterad ${datumText(d.uppdaterad)}`}. {adress}</p>
+    <p class="upphov">{UPPHOV}. Lathund till {d.titel}{d.uppdaterad && `, uppdaterad ${datumText(d.uppdaterad)}`}. {adress}{filmer.length > 0 && `. ${FILM_UPPHOV}`}</p>
   </article>
   <div class="tryck-fot" aria-hidden="true">{UPPHOV} · {adress}</div>
 </Base>

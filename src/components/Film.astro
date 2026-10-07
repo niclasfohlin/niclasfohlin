@@ -75,7 +75,10 @@ const alt = `${filmNamn(f)}, filmen: ${f.film.beskrivning}`;
     if (!obj) return;
     let klar = false;
     const forsok = () => { if (!klar && starta(figur, obj)) klar = true; };
-    obj.addEventListener('load', () => { forsok(); if (!klar) somBild(figur, obj); }, { once: true });
+    // Vid varje laddning, inte bara den första: en webbläsare som gör om filmens dokument när filmen har varit gömd
+    // och visas igen (spelaren på lathundssidan, Filmspelare.astro) ska få regeln för minskad rörelse borttagen och
+    // Pausa kopplad till det nya dokumentet. Chrome behåller dokumentet; Safari är oprövad (granskningen 2026-10-07).
+    obj.addEventListener('load', () => { klar = false; forsok(); if (!klar) somBild(figur, obj); });
     if (!obj.getAttribute('data')) obj.setAttribute('data', figur.dataset.film!);
     forsok();
     // Laddar filmen inte alls inom tio sekunder visas den som bild.

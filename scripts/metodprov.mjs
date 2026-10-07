@@ -110,12 +110,25 @@ async function provaDocx(fil, namn) {
 }
 await provaDocx(join(dist, `${id}.docx`), 'allt om metoden (docx)');
 await provaDocx(join(dist, `${id}-mallar.docx`), 'mallarna (docx)');
+// Filmerna som zip: en mp4 per film och textfilen om upphovet, och metodsidan länkar till filen.
+if (metod.film) {
+  const zipfil = join(dist, `${id}-filmer.zip`);
+  if (existsSync(zipfil)) {
+    const zip = await JSZip.loadAsync(readFileSync(zipfil));
+    const filmer = 1 + (metod.filmer?.length ?? 0);
+    const mp4 = Object.keys(zip.files).filter((f) => f.endsWith('.mp4')).length;
+    mp4 === filmer ? ok(`filmerna (zip): ${filmer} ${filmer === 1 ? 'film' : 'filmer'} som mp4`) : nej(`filmerna (zip): ${mp4} mp4, metoden har ${filmer} filmer`);
+    zip.file('Upphov.txt') && (await zip.file('Upphov.txt').async('string')).includes('© Niclas Fohlin') ? ok('filmerna (zip): textfilen om upphovet följer med') : nej('filmerna (zip): Upphov.txt saknas eller saknar upphovet');
+    html.includes(`/stodundervisning/${id}-filmer.zip`) ? ok('metodsidan länkar till filmernas zip-fil') : nej('metodsidan länkar inte till filmernas zip-fil');
+  } else nej('filmerna (zip) saknas i dist');
+}
 if (metod.lathund) {
   const lathund = join(dist, id, 'lathund', 'index.html');
   existsSync(lathund) && readFileSync(lathund, 'utf8').includes('© Niclas Fohlin') ? ok('lathundssidan finns med upphov') : nej('lathundssidan saknas eller saknar upphov');
   html.includes(`/stodundervisning/${id}/lathund`) ? ok('metodsidan länkar till lathunden') : nej('metodsidan länkar inte till lathunden');
   await provaDocx(join(dist, `${id}-lathund.docx`), 'lathunden (docx)');
-  // Lathunden som PowerPoint: exakt fyra bilder, upphovet i varje bilds anteckning.
+  // Lathunden som PowerPoint: filmbilden först när metoden har film och sedan lathundens fyra bilder, med upphovet i
+  // varje bilds anteckning. scripts/lathundprov.mjs prövar räkningen på varje bild.
   const pptx = join(dist, `${id}-lathund.pptx`);
   if (existsSync(pptx)) {
     const zip = await JSZip.loadAsync(readFileSync(pptx));
@@ -123,8 +136,15 @@ if (metod.lathund) {
     const noter = Object.keys(zip.files).filter((f) => /^ppt\/notesSlides\/notesSlide\d+\.xml$/.test(f));
     let upphov = 0;
     for (const f of noter) if ((await zip.file(f).async('string')).includes('© Niclas Fohlin')) upphov++;
-    bilder.length === 4 ? ok('lathunden (pptx): fyra bilder') : nej(`lathunden (pptx): ${bilder.length} bilder, ska vara fyra`);
-    upphov === 4 ? ok('lathunden (pptx): upphov i alla fyra anteckningar') : nej(`lathunden (pptx): upphov i ${upphov} av 4 anteckningar`);
+    const filmer = (metod.film ? 1 : 0) + (metod.filmer?.length ?? 0);
+    const vantat = 4 + (filmer ? 1 : 0);
+    bilder.length === vantat ? ok(`lathunden (pptx): ${vantat} bilder${filmer ? ', filmbilden först' : ''}`) : nej(`lathunden (pptx): ${bilder.length} bilder, ska vara ${vantat}`);
+    upphov === vantat ? ok(`lathunden (pptx): upphov i alla ${vantat} anteckningar`) : nej(`lathunden (pptx): upphov i ${upphov} av ${vantat} anteckningar`);
+    if (filmer) {
+      const forsta = await zip.file('ppt/slides/slide1.xml').async('string');
+      const iFilen = Object.keys(zip.files).filter((f) => /^ppt\/media\/.*\.mp4$/.test(f)).length;
+      (forsta.match(/name="Media \d+"/g) ?? []).length === filmer && iFilen === filmer ? ok(`lathunden (pptx): filmbilden har metodens ${filmer} ${filmer === 1 ? 'film' : 'filmer'} som mp4`) : nej(`lathunden (pptx): filmbilden har ${(forsta.match(/name="Media \d+"/g) ?? []).length} filmer och filen ${iFilen} mp4, metoden har ${filmer}`);
+    }
     html.includes(`/stodundervisning/${id}-lathund.pptx`) ? ok('metodsidan länkar till lathundens pptx') : nej('metodsidan länkar inte till lathundens pptx');
     console.log(`       ${(statSync(pptx).size / 1024).toFixed(1)} kB`);
   } else nej('lathunden (pptx) saknas i dist');

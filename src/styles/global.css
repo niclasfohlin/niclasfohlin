@@ -386,6 +386,42 @@ html.js .samla {
 .film-knapp { flex: none; min-height: 2.25rem; padding: 0.3rem 0.9rem; border: 1px solid var(--farg-kant); border-radius: 999px; background: var(--farg-yta); color: var(--farg-accent); font: inherit; font-weight: 600; cursor: pointer; }
 .film-knapp:hover { border-color: var(--farg-accent); }
 .film-knapp:focus-visible { outline: 2px solid var(--farg-accent); outline-offset: 2px; }
+/* Spelaren överst på lathundssidan (Filmspelare.astro, Niclas 2026-10-07): metodens filmer en i taget, raden där
+   läsaren väljer film och knappen som laddar ner filmerna. Raden med valen syns bara med JavaScript; utan står filmerna
+   under varandra. Tre val i bredd också när metoden har två filmer, så att bilderna är lika stora i alla metoder. Från
+   48rem står valen och knappen till höger om filmen, valen som rader med bilden till vänster, så att lathunden börjar
+   högre upp. Regeln gäller bara skärm: i utskriften är spelaren borta (se @media print), och en utskrift i A3 eller
+   liggande är bred nog för att en regel utan screen annars skulle vinna över den (granskningen 2026-10-07). */
+.filmspelare { margin: 0 0 1.75rem; max-width: 40rem; }
+.filmspelare .film { margin-top: 0; }
+@media screen and (min-width: 48rem) {
+  .filmspelare { max-width: none; display: grid; grid-template-columns: minmax(0, 40rem) minmax(11rem, 19rem); column-gap: 1.5rem; align-items: start; }
+  .filmspelare .filmval-etikett { margin-top: 0; }
+  .filmspelare .filmval { grid-template-columns: minmax(0, 1fr); }
+  .filmspelare .filmval button { display: grid; grid-template-columns: minmax(4.5rem, 7rem) minmax(0, 1fr); align-items: center; }
+  .filmspelare .filmval img { height: 100%; border-bottom: 0; border-right: 1px solid var(--farg-kant); }
+  .filmspelare:not(.flera) .film-hamta { margin-top: 0; }
+}
+/* Luften mellan filmerna gäller bara när flera syns, utan JavaScript: en film som visas ensam efter ett val står på
+   samma höjd som den första. */
+.filmspelare-film:not([hidden]) ~ .filmspelare-film:not([hidden]) { margin-top: 1.25rem; }
+.filmval-ram { display: none; }
+html.js .filmval-ram { display: block; }
+.filmval-etikett { margin: 1rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--farg-text-svag); }
+.filmval { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.5rem; margin: 0.4rem 0 0; padding: 0; list-style: none; }
+.filmval button { display: block; width: 100%; height: 100%; padding: 0; border: 1px solid var(--farg-kant); border-radius: var(--radie); background: var(--farg-yta); color: var(--farg-text); font: inherit; text-align: left; overflow: hidden; cursor: pointer; }
+.filmval button:hover { border-color: var(--farg-accent); }
+.filmval button:focus-visible { outline: 2px solid var(--farg-accent); outline-offset: 2px; }
+.filmval button[aria-pressed="true"] { border-color: var(--farg-accent); box-shadow: 0 0 0 1px var(--farg-accent); background: var(--farg-accent-ljus); }
+.filmval img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; background: #f5f3ee; border-bottom: 1px solid var(--farg-kant); }
+.filmval span { display: block; padding: 0.35rem 0.5rem 0.45rem; font-family: var(--typsnitt-ui); font-size: 0.8rem; font-weight: 600; line-height: 1.25; }
+.filmval small { display: block; font-size: inherit; font-weight: 400; color: var(--farg-text-svag); }
+.film-hamta { margin: 0.7rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.9rem; }
+.film-hamta a { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.2rem 0.45rem; min-height: 2.25rem; padding: 0.3rem 0.95rem; border: 1px solid var(--farg-kant); border-radius: 1.125rem; background: var(--farg-yta); color: var(--farg-accent); font-weight: 600; text-decoration: none; }
+.film-hamta a:hover { border-color: var(--farg-accent); }
+.film-hamta a:focus-visible { outline: 2px solid var(--farg-accent); outline-offset: 2px; }
+.film-hamta svg { flex: none; }
+.film-hamta small { font-size: 0.8rem; font-weight: 400; color: var(--farg-text-svag); }
 .metod-topp .faktaruta { grid-area: fakta; margin: 0; box-shadow: var(--skugga); }
 .nedladdning { grid-area: ladda; font-family: var(--typsnitt-ui); font-size: 0.95rem; max-width: 46rem; }
 .nedladdning h2 { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); margin: 0 0 0.6em; }
@@ -1159,6 +1195,8 @@ html.js .bara-js { display: inline-block; }
 @media print {
   /* En liggande A4-sida per avsnitt: tät typografi, inga sidbrytningar inuti rutor och rader. */
   .lathund-huvud, .lathund .upphov, .lathund-nav, .lh-lank { display: none; }
+  /* Spelaren hör till skärmen. Tvingad, så att ingen skärmregel med fler klasser kan visa den på papperet. */
+  .filmspelare { display: none !important; }
   body.tryck-bara-mall .lh-sida:not(#lathund-mall) { display: none; }
   body.tryck-bara-mall #lathund-mall { break-after: auto; }
   /* Bara elevtexten: en ren sida i stående format med större grad, för kopior till gruppen. */

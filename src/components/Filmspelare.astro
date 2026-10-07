@@ -1,0 +1,77 @@
+---
+// Spelaren överst på lathundssidan (Niclas 2026-10-07: "alla filmerna i en spelare överst"): metodens filmer på ett
+// ställe, en i taget, med en rad där läsaren väljer film, och en knapp som laddar ner filmerna som mp4 i en zip-fil.
+// Varje film är samma Film.astro som på metodens sida, med samma Pausa, så spelaren har ingen egen uppspelning: den
+// visar en film och gömmer de andra. En film som inte visas hämtas först när den väljs (Film.astro hämtar en extrafilm
+// när den kommer i närheten av fönstret). Utan JavaScript står filmerna under varandra, och raden med valen syns inte.
+// Med en enda film finns ingen rad att välja i. På telefon står valen under filmen, på dator till höger om den.
+//
+// Valens småbilder är filmens omslagsbild i litet format (src/pages/stodundervisning/[film]-liten.webp.ts): den
+// innehållsrikaste stilla rutan, som scripts/filmmp4.mjs väljer. Stillbilderna till utskriften är ritade för att stå
+// med text under, och några är nästan tomma som småbild.
+import Film from './Film.astro';
+import { filmNamn, type MetodFilm } from '../lib/film';
+import { filmernasStorlek, megabyte, provaFilmfiler, SMABILD } from '../lib/filmfil';
+interface Props { filmer: MetodFilm[]; id: string; titel: string }
+const { filmer, id, titel } = Astro.props;
+for (const f of filmer) provaFilmfiler(f, titel);
+const flera = filmer.length > 1;
+const ord = flera ? 'filmerna' : 'filmen';
+const storlek = megabyte(filmernasStorlek(filmer));
+---
+<section class:list={['filmspelare', { flera }]} id="lathund-film" aria-label={flera ? 'Metodens filmer' : 'Metodens film'} data-filmspelare>
+  <div class="filmspelare-filmer">
+    {filmer.map((f) => <div class="filmspelare-film" data-filmspelare-film={f.nr}><Film f={f} titel={titel} /></div>)}
+  </div>
+  <div class="filmspelare-sida">
+    {flera && (
+      <div class="filmval-ram">
+        <p class="filmval-etikett" id="filmval-etikett">Metodens filmer</p>
+        <ul class="filmval" aria-labelledby="filmval-etikett">
+          {filmer.map((f, i) => (
+            <li>
+              <button type="button" aria-pressed={i === 0 ? 'true' : 'false'} data-filmspelare-val={f.nr}>
+                <img src={`${f.bas}-liten.webp`} alt="" width={SMABILD.bredd} height={SMABILD.hojd} decoding="async" />
+                <span>{filmNamn(f)}<small>{Math.round(f.film.sekunder)} sekunder</small></span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+    <p class="film-hamta">
+      <a href={`/stodundervisning/${id}-filmer.zip`} download={`${id}-filmer.zip`} data-goatcounter-click={`fil:${id}-filmer.zip`} data-goatcounter-title={`${titel}: ${ord} som zip`}>
+        <svg aria-hidden="true" viewBox="0 0 16 16" width="15" height="15"><path d="M8 2v8m0 0L4.5 6.5M8 10l3.5-3.5M3 13h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Ladda ner {ord}</span>
+        <small>zip · {flera ? `${filmer.length} filmer` : '1 film'} · {storlek}</small>
+      </a>
+    </p>
+  </div>
+</section>
+{flera && (
+  <script is:inline>
+    // Bara den första filmen visas från början, före första målningen, så att sidan inte hoppar när skriptet nedan
+    // har laddats. De andra filmerna hämtas först när de väljs.
+    (() => {
+      const spelare = document.currentScript.previousElementSibling;
+      if (!spelare || !spelare.matches('[data-filmspelare]')) return;
+      [...spelare.querySelectorAll('[data-filmspelare-film]')].forEach((film, i) => { film.hidden = i > 0; });
+    })();
+  </script>
+)}
+
+<script>
+  // Raden med valen: ett tryck visar den filmen och gömmer de andra. Knappen bär aria-pressed, så att en skärmläsare
+  // säger vilken film som visas.
+  for (const spelare of document.querySelectorAll<HTMLElement>('[data-filmspelare]')) {
+    const filmer = [...spelare.querySelectorAll<HTMLElement>('[data-filmspelare-film]')];
+    const val = [...spelare.querySelectorAll<HTMLButtonElement>('[data-filmspelare-val]')];
+    for (const knapp of val) {
+      knapp.addEventListener('click', () => {
+        const nr = knapp.dataset.filmspelareVal;
+        for (const film of filmer) film.hidden = film.dataset.filmspelareFilm !== nr;
+        for (const k of val) k.setAttribute('aria-pressed', k === knapp ? 'true' : 'false');
+      });
+    }
+  }
+</script>

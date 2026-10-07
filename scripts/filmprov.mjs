@@ -8,6 +8,12 @@
 // X-Frame-Options ur netlify.toml, som på Netlify, eftersom filmen står i en <object> (Film.astro) och rubriken avgör om
 // den får bäddas in.
 //
+// En metod med lathund prövas också på lathundssidan, där filmerna står i en spelare (Filmspelare.astro, Niclas
+// 2026-10-07): en film visas från början och spelar, varje val visar sin film och bara den, filmen som väljs hämtas och
+// rör sig, vägen tillbaka till den första filmen fungerar och Pausa fryser den där, knappen för zip-filen finns med
+// filens version, och spelaren är borta i utskriften också i ett brett fönster (granskningen 2026-10-07: en regel för
+// dator vann över utskriftens, och spelaren skrevs ut i A3 och liggande).
+//
 //   node scripts/filmprov.mjs                        alla publicerade metoder, ur dist (kör npm run validera först)
 //   node scripts/filmprov.mjs <id> …                 bara de metoderna
 //   node scripts/filmprov.mjs --adress https://niclasfohlin.se   sajten ute, efter deployen
@@ -127,15 +133,97 @@ const PROV = `(async () => {
   return { filmer: figurer.length, fel };
 })()`;
 
+// Körs på lathundssidan: spelaren med alla filmer.
+const PROV_SPELARE = `(async () => {
+  const vanta = (ms) => new Promise((r) => setTimeout(r, ms));
+  const spelare = document.querySelector('[data-filmspelare]');
+  if (!spelare) return { filmer: 0, fel: ['ingen spelare på lathundssidan'] };
+  const filmer = [...spelare.querySelectorAll('[data-filmspelare-film]')];
+  const val = [...spelare.querySelectorAll('[data-filmspelare-val]')];
+  const figur = (f) => f.querySelector('figure.film');
+  const namn = (f) => figur(f)?.dataset.namn ?? 'filmen';
+  const lage = (f) => {
+    const o = figur(f)?.querySelector('.film-bild');
+    if (!o || o.tagName !== 'OBJECT') return { fel: 'visas som stillbild, inte som film (' + (o ? o.tagName : 'inget') + ')' };
+    const d = o.contentDocument;
+    if (!d) return { fel: 'filmen gick inte att bädda in (X-Frame-Options?)' };
+    d.documentElement.getBoundingClientRect();
+    const a = d.getAnimations();
+    if (!a.length) return { fel: 'filmen har inga animeringar igång' };
+    return { t: Math.round(Math.max(...a.map((x) => x.currentTime ?? 0))) };
+  };
+  const vantaPa = async (f, ms) => { let l = lage(f); for (let i = 0; i < ms / 200 && l.fel; i++) { await vanta(200); l = lage(f); } return l; };
+  const synliga = () => filmer.filter((f) => !f.hidden && f.offsetParent !== null);
+  const fel = [];
+  if (!filmer.length) return { filmer: 0, fel: ['spelaren har ingen film'] };
+  if (synliga().length !== 1) fel.push('visar ' + synliga().length + ' filmer från början, väntat en');
+  if (filmer.length > 1 && val.length !== filmer.length) fel.push(val.length + ' val för ' + filmer.length + ' filmer');
+  if (filmer.length === 1 && val.length) fel.push('en film men en rad med val');
+  if (val.length && val.some((k) => k.offsetParent === null)) fel.push('raden med valen syns inte');
+  const rorSig = async (f) => {
+    const l0 = await vantaPa(f, 6000);
+    if (l0.fel) return namn(f) + ': ' + l0.fel;
+    await vanta(800);
+    return lage(f).t > l0.t ? '' : namn(f) + ': står still';
+  };
+  const forsta = await rorSig(filmer[0]);
+  if (forsta) fel.push(forsta);
+  for (const [i, k] of val.entries()) {
+    k.click();
+    await vanta(250);
+    const s = synliga();
+    if (s.length !== 1 || s[0] !== filmer[i]) { fel.push('valet ' + (i + 1) + ' visar inte sin film'); continue; }
+    if (k.getAttribute('aria-pressed') !== 'true' || val.filter((x) => x.getAttribute('aria-pressed') === 'true').length !== 1) fel.push('valet ' + (i + 1) + ': aria-pressed säger inte vilken film som visas');
+    const r = await rorSig(filmer[i]);
+    if (r) fel.push(r);
+    if (figur(filmer[i])?.querySelector('.film-knapp')?.hidden !== false) fel.push(namn(filmer[i]) + ': knappen Pausa syns inte');
+  }
+  // Vägen tillbaka: den första filmen igen. Den ska röra sig, och Pausa ska frysa den där den är.
+  if (val.length > 1) {
+    val[0].click();
+    await vanta(300);
+    const s = synliga();
+    if (s.length !== 1 || s[0] !== filmer[0]) fel.push('tillbaka till första filmen: den visas inte');
+    else {
+      const r = await rorSig(filmer[0]);
+      if (r) fel.push('tillbaka till första filmen: ' + r);
+      const k = figur(filmer[0])?.querySelector('.film-knapp');
+      if (!k || k.hidden) fel.push('tillbaka till första filmen: knappen Pausa syns inte');
+      else if (!r) {
+        k.click(); await vanta(300);
+        const p0 = lage(filmer[0]); await vanta(900); const p1 = lage(filmer[0]);
+        if (p0.fel || p1.fel || p1.t !== p0.t) fel.push('tillbaka till första filmen: Pausa fryser inte filmen');
+        k.click();
+      }
+    }
+  }
+  const zip = spelare.querySelector('.film-hamta a');
+  if (!zip) fel.push('knappen för zip-filen saknas');
+  else if (!(zip.getAttribute('href') ?? '').includes('-filmer.zip?v=')) fel.push('zip-länken saknar filens version: ' + zip.getAttribute('href'));
+  return { filmer: filmer.length, fel };
+})()`;
+
 let felSidor = 0;
 try {
-  for (const { id } of metoder) {
+  for (const { id, d } of metoder) {
     await skicka('Page.navigate', { url: `${bas}/stodundervisning/${id}` });
     let klar = false;
     for (let i = 0; i < 40 && !klar; i++) { await vanta(250); klar = (await utvardera('document.readyState')) === 'complete'; }
     const r = (await utvardera(PROV)) ?? { filmer: 0, fel: ['sidan svarade inte'] };
     if (r.fel.length) felSidor++;
     console.log(`${r.fel.length ? 'NEJ' : 'ok '}  ${id.padEnd(34)} ${r.filmer} ${r.filmer === 1 ? 'film' : 'filmer'}${r.fel.length ? `: ${r.fel.join('; ')}` : ''}`);
+    if (!d.lathund) continue;
+    await skicka('Page.navigate', { url: `${bas}/stodundervisning/${id}/lathund` });
+    klar = false;
+    for (let i = 0; i < 40 && !klar; i++) { await vanta(250); klar = (await utvardera('document.readyState')) === 'complete'; }
+    const s = (await utvardera(PROV_SPELARE)) ?? { filmer: 0, fel: ['lathundssidan svarade inte'] };
+    // Utskriften, i fönstrets fulla bredd: spelaren ska vara borta.
+    await skicka('Emulation.setEmulatedMedia', { media: 'print' });
+    const iUtskrift = await utvardera(`getComputedStyle(document.querySelector('[data-filmspelare]') ?? document.body).display`);
+    await skicka('Emulation.setEmulatedMedia', { media: '' });
+    if (s.filmer && iUtskrift !== 'none') s.fel.push(`spelaren syns i utskriften (display: ${iUtskrift})`);
+    if (s.fel.length) felSidor++;
+    console.log(`${s.fel.length ? 'NEJ' : 'ok '}  ${`${id}/lathund`.padEnd(34)} ${s.filmer} ${s.filmer === 1 ? 'film' : 'filmer'} i spelaren${s.fel.length ? `: ${s.fel.join('; ')}` : ''}`);
   }
 } finally {
   ws.close();
@@ -144,7 +232,7 @@ try {
 }
 const lage = `${minskad ? 'med minskad rörelse' : 'utan minskad rörelse'}, ${ute || `dist med X-Frame-Options ${ramregel ?? 'saknas'}`}`;
 if (felSidor) {
-  console.error(`\nfilmprov: filmerna i ${felSidor} av ${metoder.length} metoder spelar inte som de ska (${lage}). Film.astro och METODER.md under Filmerna.`);
+  console.error(`\nfilmprov: filmerna på ${felSidor} sidor spelar inte som de ska (${metoder.length} metoder prövade, ${lage}). Film.astro, Filmspelare.astro och METODER.md under Filmerna.`);
   process.exit(1);
 }
-console.log(`\nFilmerna i ${metoder.length} ${metoder.length === 1 ? 'metod' : 'metoder'} spelar, Pausa fryser dem och Spela fortsätter (${lage}).`);
+console.log(`\nFilmerna i ${metoder.length} ${metoder.length === 1 ? 'metod' : 'metoder'} spelar, Pausa fryser dem och Spela fortsätter, och spelaren på lathundssidan visar varje film (${lage}).`);

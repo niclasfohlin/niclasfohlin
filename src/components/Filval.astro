@@ -15,7 +15,7 @@ interface Props {
   rubrik: string;
   /** Finns filen också som pdf (lathunden, liggande fyra sidor)? */
   pdf?: boolean;
-  /** Finns filen också som PowerPoint (lathunden, fyra bilder)? Då sparar Drive-knappen den i stället för Word-filen. */
+  /** Finns filen också som PowerPoint (lathunden: filmbilden och fyra bilder)? Då sparar Drive-knappen den i stället för Word-filen. */
   pptx?: boolean;
   liten?: boolean;
   /** Filens namn i besöksstatistiken, med metodens titel: "Upprepad läsning: lathunden". Förval: rubrik. */
@@ -23,13 +23,13 @@ interface Props {
 }
 const { fil, namn, rubrik, pdf = false, pptx = false, liten = false, statistik = rubrik } = Astro.props;
 const drive = Boolean(site.driveKlientId);
-// Drive sparar den fil som passar bäst i Google: lathunden som PowerPoint (fyra liggande bilder, Google
-// Presentationer visar dem som de är), allt annat som Word.
+// Drive sparar den fil som passar bäst i Google: lathunden som PowerPoint (liggande bilder, som Google Presentationer
+// visar som de är; filmerna på filmbilden blir stillbilder där), allt annat som Word.
 const driveAndelse = pptx ? 'pptx' : 'docx';
 ---
 <span class:list={['filval', { liten }]} role="group" aria-label={`${rubrik}: ladda ner eller spara`}>
   {pptx && (
-    <a href={`${fil}.pptx`} download={`${namn}.pptx`} title="Ladda ner som PowerPoint, fyra bilder" data-goatcounter-click={`fil:${namn}.pptx`} data-goatcounter-title={`${statistik} som PowerPoint`}>
+    <a href={`${fil}.pptx`} download={`${namn}.pptx`} title="Ladda ner som PowerPoint" data-goatcounter-click={`fil:${namn}.pptx`} data-goatcounter-title={`${statistik} som PowerPoint`}>
       <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16"><rect x="2.5" y="4" width="15" height="10.5" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 14.5V17M7 17h6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M6.5 11.5V7h2a1.5 1.5 0 0 1 0 3h-2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
       PPTX<span class="visually-hidden">: {rubrik} som PowerPoint</span>
     </a>
