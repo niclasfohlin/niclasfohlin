@@ -1,6 +1,6 @@
 Du granskar en ny funktion på niclasfohlin.se (Astro 7, statiskt bygge): vid varje Word-fil i metodbanken finns nu ett filval, Word, Drive och för lathunden pdf, byggt som en grupp små knappar. Du har inga skrivrättigheter. Svara på svenska i markdown i formen längst ner.
 
-Läs först CLAUDE.md, STIL.md och METODER.md, sedan diffen: `git diff main -- src/ scripts/ package.json public/stodundervisning/` (grenen sajt/drive-och-pdf mot main).
+Läs först CLAUDE.md, ARBETSSATT.md, STIL.md och METODER.md, sedan diffen: `git diff main -- src/ scripts/ package.json public/stodundervisning/` (grenen sajt/drive-och-pdf mot main).
 
 Filerna: src/components/Filval.astro (gruppen, används på metodsidan via src/components/Nedladdning.astro, på lathunden src/pages/stodundervisning/[id]/lathund.astro och i metodbanken src/pages/stodundervisning/index.astro, även i urvalsraden "Spara valda i Drive"), src/scripts/drive.ts (Google Identity Services och Drive-API:t, behörigheten drive.file, multipart-uppladdning, laddas först vid tryck), src/data/site.ts (driveKlientId, tomt i dag: Drive-knapparna renderas då inte; Base.astro skriver id:t som data-drive-klient på html), src/styles/global.css (.filval, .filrader, .drive-status), scripts/lathund-pdf.mjs (lathunden som pdf med Chrome, committad i public/stodundervisning/, kontroll i npm run validera). Skärmbilder med Drive-knappen synlig (tillfälligt klient-id vid bygget): bifogade.
 

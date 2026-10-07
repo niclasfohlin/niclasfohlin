@@ -1,6 +1,6 @@
 Du granskar ett stilbyte på niclasfohlin.se, Niclas Fohlins författar- och kunskapssajt (Astro 7, statiskt bygge). Sajten har fått en ny form, riktningen "Klar handbok": vit yta, mörkt sidhuvud, djupblå accent, ett sanstypsnitt (läsarens eget, system-ui; sedan 2026-10-01 hämtas inget typsnitt), ljus blågrå ton för band och rutor, fyllda rubrikrader i tabeller, och på metodsidorna en sidnavigation i egen spalt till vänster som markerar avsnittet i bild. Innehållet, alltså metodernas YAML-filer, artiklarna och böckerna, är oförändrat och låst. Du har inga skrivrättigheter. Svara på svenska i markdown, i formen längst ner.
 
-Läs först ramarna: CLAUDE.md, STIL.md, KONCEPT.md och METODER.md.
+Läs först ramarna: CLAUDE.md, ARBETSSATT.md (Design och kod), STIL.md, KONCEPT.md och METODER.md.
 
 Ändringen i sin helhet syns med `git diff main -- src/ public/` (grenen sajt/klar-handbok mot main). Filerna som ändrats: src/styles/global.css (designsystemet, allt ligger där), src/layouts/Base.astro (typsnittspreload, theme-color), src/pages/stodundervisning/[id].astro (metodsidans topp: rubrik, faktaruta med etiketten "I korthet" och nedladdningarna i ett band), src/components/Metod.astro (sidnavigationen i egen spalt, innehållet i .metod-text, ett litet skript som markerar avsnittet i bild), src/lib/metoddocx.ts (Word-filernas färger följer sajten), public/fonts/ (typsnittet). Det byggda resultatet ligger i dist/.
 

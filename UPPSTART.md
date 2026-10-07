@@ -16,7 +16,7 @@ Det här dokumentet beskriver hur uppsättningen gjordes. Dagens läge hos varje
 | Brevo | Skapar kontot och API-nyckeln | Skapar lista och mall, sätter miljövariabler, testar formuläret |
 | Löpande innehåll och utveckling | Läser NATTEN.md och säger till när något ska ändras | Allt annat, inklusive sammanslagning, push och deploy |
 
-Niclas gav 2026-09-19 Claude Code fullt mandat att sköta tjänsterna. Det som ändå kräver Niclas är konton och inloggningar där en människa måste klicka, och de stegen står i INSTRUKTIONER.docx. Lösenord lämnas aldrig till Claude Code; nycklar och token som Niclas skapar för riggen får däremot ligga i lokala, git-ignorerade filer.
+Niclas gav 2026-09-19 Claude Code fullt mandat att sköta tjänsterna. Vad som ändå kräver Niclas står i CLAUDE.md under Det här gör bara Niclas, och stegen han gör i webbläsaren står i INSTRUKTIONER.docx. Lösenord lämnas aldrig till Claude Code; nycklar och token som Niclas skapar för riggen får däremot ligga i lokala, git-ignorerade filer.
 
 ## Steg 1: verktyg
 
@@ -82,7 +82,7 @@ Formuläret på /prenumerera fungerar utan Brevo men svarar då att prenumeratio
 
 Funktionens anrop mot Brevo verifieras mot Brevos aktuella API-dokumentation första gången den testas skarpt.
 
-Utskick sker som kampanj i Brevo. `/utskick` skriver utkastet och kan lägga upp kampanjen; den skickas när Niclas läst och sagt skicka.
+Utskick sker som kampanj i Brevo. `/utskick` skriver utkastet och kan lägga upp kampanjen; vem som säger skicka står i CLAUDE.md under Det här gör bara Niclas.
 
 ## Steg 7: Claude Codes behörigheter
 
@@ -96,7 +96,7 @@ Utskick sker som kampanj i Brevo. `/utskick` skriver utkastet och kan lägga upp
 
 Appens permission-läge avgör också vad som går. I läget Auto bedömer en klassificerare varje kommando och stoppar allt som liknar hantering av hemligheter, deploy eller ändring av egna behörigheter, oavsett vad settings.json säger. Ska Claude Code sköta driften behöver sessionen köras i läget som inte frågar (bypassPermissions). Claude Code kan begära bytet själv; Niclas godkänner det på kortet som visas.
 
-Fyra hooks körs automatiskt: efter kompaktering skriver `.claude/hooks/kontext.mjs` grenen, krediterna och köns läge i kort form (CLAUDE.md med ARBETSSATT.md och STIL.md läser Claude Code själv in igen); vid varje uppdrag skrivs kreditraden; commit på main och uppladdning med stängd kreditspärr stoppas; när en innehållsfil sparas med Write eller Edit kontrolleras taggar och publikation direkt. Det en hook skriver till sessionen får vara högst 10 000 tecken (DRIFT.md under Riggen).
+Krokarna som körs automatiskt, och gränsen för vad en krok får skriva till sessionen, står i DRIFT.md under Riggen.
 
 Personliga avvikelser och lokala token läggs i `.claude/settings.local.json`, som git ignorerar.
 

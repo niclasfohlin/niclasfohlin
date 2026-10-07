@@ -1,5 +1,7 @@
 # Koncept: niclasfohlin.se
 
+Konceptet skrevs före bygget och säger vad sajten ska bli. Tre saker har ändrats sedan dess, och där gäller reglerna: hela texten ligger alltid på sajten (ARBETSSATT.md under Texterna), mejlen om nytt innehåll går automatiskt (CLAUDE.md under Prenumeration och utskick), och kommentarerna har en databas (DRIFT.md under Kommentarer).
+
 ## Syfte
 
 En egen långsiktig plattform som samlar Niclas Fohlins publicerade artiklar, böcker och praktiska resurser för stödundervisning. Den ska vara enkel att förvalta från Claude Code och publiceras automatiskt via GitHub och Netlify. Sajten ska hålla i många år: Markdown i ett repo, inga inlåsningar, inget som kräver en tjänst för att innehållet ska finnas kvar.

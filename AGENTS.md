@@ -1,80 +1,16 @@
-# niclasfohlin.se
+# niclasfohlin.se, ingången för Codex
 
-Du förvaltar Niclas Fohlins författar- och kunskapssajt. Sajten ska vara snabb, sober och redaktionellt trovärdig. Läsbarhet före effekter. Ingen generisk AI-design.
-
-Det viktigaste först: allt arbete sker på grenar, `npm run validera` går igenom före varje commit, taggar och publikationer tas från registren i `src/data/`, och du slår ihop, pushar och deployar själv när valideringen är grön. Nytt innehåll mejlas prenumeranterna automatiskt efter deploy; längre nyhetsbrev skickas bara när Niclas säger skicka.
-
-Arbete som inte är ett direkt svar på Niclas går genom kön: `node scripts/ko.mjs lista`, `starta`, `klar`. Ett fel du hittar i förbifarten läggs i kön med `lagg`, det lagas inte i samma commit. Hur kön fungerar står i ARBETSSATT.md.
-
-@ARBETSSATT.md
-@STIL.md
-
-## Läs vid behov
+Reglerna för sajten står i tre filer, och den här filen upprepar dem inte. Läs dem innan du gör något. Där det står Claude Code gäller regeln också dig.
 
 | Fil | Vad den svarar på |
 |---|---|
-| KONCEPT.md | Vad sajten ska bli och varför |
-| DRIFT.md | Plattformarna: vad som finns hos GitHub, Netlify, Brevo och Loopia, var inloggningarna ligger, kommandon som fungerar, vad man gör när något är rött; kommentarerna och deras krediter |
-| METODER.md | Hur en metod tas emot och görs om: modellen, mappningen från kompendium till YAML, lathunden, textreglerna, kontrollerna, Codex-granskningen, metodriggen utanför repot |
-| UPPSTART.md | Hur drift, konton och behörigheter sattes upp från början |
-| KO.md | Kön. `node scripts/ko.mjs lista` visar den, `/natt` arbetar igenom den |
-| underlag/texter/ | Alla kända texter av Niclas i fulltext med register. `npm run texter` visar vilka som saknar post |
-| src/data/taggar.json | Alla tillåtna taggar med alias |
-| src/data/publikationer.json | Alla kända publikationer |
-| .codex/ och .agents/skills/ | Codex-speglingen av .claude: hooks och arbetsflöden |
+| CLAUDE.md | Vad sajten är, mandatet, vad bara Niclas gör och var allt annat står |
+| ARBETSSATT.md | Hur arbetet går till: grenar, valideringen, uppladdningen, kön, taggarna, drift och hemligheter |
+| STIL.md | Hur text skrivs |
 
-## Stack
+Det som bara gäller Codex:
 
-Astro 7 med TypeScript och Content Collections (glob-loader, Zod 4 via `astro/zod`). Statiskt bygge. GitHub versionshanterar, Netlify bygger och deployar från `main`. Netlify Functions i `netlify/functions/` för prenumeration och kommentarer. En databas, bara för kommentarerna (Netlify Database); inget CMS.
-
-Kommentarerna under artiklar, böcker och metoder är ett lager: `npm run kommentarer -- av` tar bort dem från hela sajten utan rester, och `npm run kommentarer` visar läget och krediterna. Läs DRIFT.md under Kommentarer innan du rör dem.
-
-Astro 7 använder en strikt kompilator: alla taggar måste stängas, ogiltig HTML-nästling rättas inte, och mellanrum mellan inline-element skrivs som `{" "}`. Markdown renderas av Sätteri. Node 22.12 eller senare.
-
-## Tre innehållstyper
-
-| Typ | Mapp | URL | Mall | Kommando |
-|---|---|---|---|---|
-| Artiklar | src/content/artiklar/ | /artiklar/<id> | _mall.md | /ny-artikel |
-| Böcker | src/content/bocker/ | /bocker/<id> | _mall.md | /ny-bok |
-| Stödundervisning | src/content/stodundervisning/ | /stodundervisning/<id> | _mall.yaml | /ny-metod |
-
-Filer som börjar med `_` läses inte in. `utkast: true` visas lokalt men aldrig i produktion. Scheman ligger i `src/content.config.ts` och är strikta med avsikt.
-
-Artiklar är oftast publicerade i Vi Lärare, Göteborgs-Posten eller en annan tidning först. Posten ska alltid visa var, med länk till originalet. Ingressen är egen text. Hela originaltexten ligger alltid på sajten, med `heltext: true`: Niclas sa 2026-09-24 att alla hans texter i Vi Lärare och andra tidningar ska finnas i fulltext här. Undantaget är poddavsnitt och intervjuer där texten inte är hans; de får länk och egen beskrivning.
-
-Stödundervisning är en metodbank, inte en blogg. Varje metod är en YAML-fil efter modellen i `_mall.yaml` och `src/content.config.ts`: inledning, upplägg, passrutin, tidsschema, steg med exempelfraser, arbetsform, exempel, när gruppen fastnar, lärarens roll, urval, progression, uppföljning, mål, snabbmall, checklista och grund. Sidan, lathunden (`/stodundervisning/<id>/lathund`, fyra sidor ur snabbguiden), utskriften och docx-filerna (`/stodundervisning/<id>.docx` med allt: beskrivning, planeringsmallar och lathund; `<id>-mallar.docx` och `<id>-lathund.docx` för delarna; flera valda metoder i en fil) och lathundens PowerPoint (`/stodundervisning/<id>-lathund.pptx`, metodens filmer på en bild först och sedan lathundens fyra bilder kant till kant) byggs ur samma data av `src/components/Metod.astro`, `src/lib/metoddocx.ts` och `src/lib/metodpptx.ts`, och allt som laddas ner bär © Niclas Fohlin och niclasfohlin.se. Metodens filmer står också i en spelare överst på lathundssidan och laddas ner som mp4 i en zip-fil (`/stodundervisning/<id>-filmer.zip`); mp4-filerna görs ur svg-filmerna av `scripts/filmmp4.mjs`, med upphovet i filmens nedre hörn (METODER.md under Filmerna som mp4). Exakt ett område (Matematik, Läsning, Skrivning, Socialt), minst en nivå (F-3, 4-6, 7-9) och taggar för vad den tränar. Delar som saknas i underlaget utelämnas. Genomförandet ska en lärare kunna följa i morgon.
-
-## Registren styr taggar och publikationer
-
-Bygget stoppar om en post använder en tagg eller publikation som inte finns i registret. Det är avsiktligt. Innan du taggar: kör `npm run taggar` och välj bland det som finns. Alias i registret fångar varianter som läsflyt, läs-flyt och träna läsflyt och pekar på en enda tagg. En ny tagg läggs till bara när ingen befintlig täcker samma sak, och då i samma commit som posten, med label, omrade, beskrivning och alias.
-
-Tagg-id skrivs med a-z, 0-9 och bindestreck. Läsaren ser label.
-
-## Prenumeration och utskick
-
-Formuläret på /prenumerera anropar `netlify/functions/prenumerera.mjs`, som lägger till kontakten i Brevo med dubbel opt-in. Utan miljövariabler svarar funktionen 503 och hänvisar till RSS. Miljövariablerna sätter du i Netlify med `netlify env:set`. Hemligheter ligger aldrig i git; var de förvaras står i DRIFT.md, liksom läget i Brevo (avsändaren är nyhetsbrev@niclasfohlin.se med svar till Niclas Gmail).
-
-Varje ny artikel, metod och bok mejlas prenumeranterna automatiskt: byggpluginen `netlify/plugins/utskick` körs efter varje lyckad produktionsdeploy, läser `nytt.json` ur bygget, jämför med det som redan mejlats (Netlify Blobs, lagret `utskick`) och skickar en Brevo-kampanj om det nya. Publicera därför bara det som är klart att mejlas; `utkast: true` hålls utanför.
-
-`/utskick` skriver ett längre nyhetsbrev som utkast till `utskick/` och kan lägga upp det som kampanj i Brevo. Det skickas först när Niclas läst utkastet och sagt skicka.
-
-## Kvalitet
-
-1. `npm run validera` går igenom före varje commit. Den kontrollerar register, lathundarnas pdf, typer och bygge.
-2. Små commits med tydliga meddelanden på svenska: "Artikel: ...", "Metod: ...", "Sajt: ...".
-3. Inga nya beroenden utan skäl. Inga UI-ramverk för det som CSS och lite vanilla JS löser.
-4. Semantisk HTML, tangentbordsnavigering, kontrast och alt-texter. Mobil först.
-5. Varje sida har unik title och description. Canonical, Open Graph, sitemap och RSS finns i Base.astro och ska vara kvar.
-6. Designsystemet ligger i `src/styles/global.css` som variabler. Bygg vidare där i stället för att sprida färger och mått i komponenter.
-
-## Mandat
-
-Niclas gav 2026-09-19 Claude Code fullt mandat att sköta sajten och tjänsterna runt den: GitHub, Netlify, Brevo, domänen och koden. Du slår ihop till main, pushar, deployar, sätter miljövariabler, lägger till taggar och publikationer och löser driftproblem utan att fråga, så länge `npm run validera` är grönt. Beslut Niclas ska känna till skrivs i NATTEN.md eller i svaret, efteråt. Verktygen, var inloggningarna ligger och anropen som fungerar står i DRIFT.md.
-
-## Det här gör bara Niclas
-
-1. Skapar konton och loggar in där en människa måste klicka i webbläsaren. Vad han ska göra, steg för steg, står i INSTRUKTIONER.docx.
-2. Säger skicka innan ett längre nyhetsbrev går ut. Mejlen om nytt innehåll går automatiskt.
-3. Lämnar fakta om sig själv och sina böcker. Du frågar efter underlag, du hittar inte på.
-4. Avgör rättigheterna. Hans stående besked 2026-09-24: alla hans artiklar ligger alltid i fulltext på sajten, utan att du frågar per text.
+| Sak | Vad som gäller |
+|---|---|
+| Uppdraget | Codex är oftast andra ögat. En granskning körs i läsläge med en prompt ur `scripts/codex/`, och Claude Code avgör fynden (DRIFT.md under Codex, METODER.md under Codex-granskningen) |
+| Speglingen | `.codex/` och `.agents/skills/` är Codex-speglingen av `.claude/`: krokarna i `.codex/hooks.json` med skripten i `.codex/hooks/`, agenten `.codex/agents/granskare.toml` och arbetsflödena `source-command-natt/SKILL.md`, `source-command-uppstart/SKILL.md`, `source-command-utskick/SKILL.md` och `source-command-validera/SKILL.md`. Speglingen är äldre än `.claude/` (K-246). Säger den något annat än CLAUDE.md och ARBETSSATT.md gäller de filerna |

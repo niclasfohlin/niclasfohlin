@@ -9,7 +9,7 @@
 //                                           alias men saknar taggen, för att pröva en ny tagg mot det som redan finns
 //   node scripts/taggar.mjs --post src/content/artiklar/x.md   Lista taggar vars ord står i posten men som saknas
 //
-// Reglerna (Niclas 2026-10-03): en post har minst två och högst fem taggar. En ny tagg prövas alltid mot alla
+// Reglerna står i ARBETSSATT.md under Innehåll; här står dem skriptet håller (Niclas 2026-10-03): en post har minst två och högst fem taggar. En ny tagg prövas alltid mot alla
 // befintliga artiklar, böcker och metoder med --forslag: träffarna är kandidater, och den som lägger till taggen läser
 // posten och avgör. Har en post redan fem taggar byts en ut bara när den nya är uppenbart bättre, det vill säga mer
 // precis om vad posten handlar om; då går den bredaste av de fem. När sökningen är gjord får taggen fältet provad

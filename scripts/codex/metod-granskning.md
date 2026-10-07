@@ -1,6 +1,6 @@
 Du granskar en ny metod i metodbanken på niclasfohlin.se (stödundervisning) som second opinion. Sajten är Niclas Fohlins författar- och kunskapssajt, byggd med Astro; metoderna är YAML-filer med strikt schema, och sidan, utskriften, lathunden och Word-filerna byggs ur samma data. Du har inga skrivrättigheter och ska inte ändra något. Svara på svenska, i markdown, i den form som anges längst ner.
 
-Läs först ramarna: CLAUDE.md, STIL.md och METODER.md. METODER.md beskriver modellen (vilka delar en metod har, hur de heter i YAML och var de syns), lathundens fyra sidor och blocktyper, samt vilka ändringar i Niclas text som är avsiktliga: lagernivåer bort, årskurs 4 till 9, kolon i stället för tankstreck i rubriker, "jag" i checklistan, elevantal enligt lathunden. Sådant ska du inte anmärka på.
+Läs först ramarna: CLAUDE.md, ARBETSSATT.md (Design och kod), STIL.md och METODER.md. METODER.md beskriver modellen (vilka delar en metod har, hur de heter i YAML och var de syns), lathundens fyra sidor och blocktyper, samt vilka ändringar i Niclas text som är avsiktliga: lagernivåer bort, årskurs 4 till 9, kolon i stället för tankstreck i rubriker, "jag" i checklistan, elevantal enligt lathunden. Sådant ska du inte anmärka på.
 
 Metoden som granskas: {{id}} ({{datum}}).
 

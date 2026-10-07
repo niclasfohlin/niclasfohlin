@@ -11,7 +11,7 @@
 // nästa produktionsbygge, 15 krediter, skulle ta saldot under 100. Då fortsätter arbetet lokalt som vanligt,
 // med grenar, npm run validera och sammanslagning till main, men main pushas inte. Det som väntar
 // säkerhetskopieras till grenen vantar-pa-krediter, som Netlify inte bygger, och laddas upp med en enda push
-// när krediterna är påfyllda. Hela gången står i DRIFT.md under Krediter.
+// när krediterna är påfyllda. Regeln och hela gången står i ARBETSSATT.md under Uppladdning, talen och mekaniken i DRIFT.md under Krediter.
 //
 // Saldot och trafiken läses ur samma anrop som Netlifys egen panel använder (Usage & billing och
 // Observability). De är odokumenterade: Netlifys öppna API redovisar inga krediter (2026-09-27).

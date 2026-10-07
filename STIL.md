@@ -18,13 +18,13 @@ Inget bristspråk om elever. Skriv "elever i läs- och skrivsvårigheter", aldri
 
 ## Fakta och källor
 
-Forskning refereras som parentescitat: (Författare, årtal). En källa som inte går att verifiera stryks. Inga påhittade siffror, årtal eller titlar. Fakta om Niclas, hans böcker och hans artiklar kommer från honom, inte från gissning.
+Forskning refereras som parentescitat: (Författare, årtal). En källa som inte går att verifiera stryks. Inga påhittade siffror, årtal eller titlar. Varifrån fakta om Niclas kommer står i CLAUDE.md under Det här gör bara Niclas.
 
 När en text bemöter en motståndare: erkänn först det som är rimligt i motpartens position, kritisera sedan.
 
 ## Ingresser
 
-Två till fyra meningar. Egen text som säger vad texten hävdar och varför den skrevs. Aldrig originalets ingress i omskriven form. Ingressen ska fungera ensam i ett kort på startsidan och i ett nyhetsbrev.
+Två till fyra meningar, minst 40 och högst 320 tecken; schemat stoppar annars. Egen text som säger vad texten hävdar och varför den skrevs. Aldrig originalets ingress i omskriven form. Ingressen ska fungera ensam i ett kort på startsidan och i ett nyhetsbrev.
 
 ## Metodtexter
 
