@@ -8,7 +8,7 @@ import {
   Paragraph, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, UnderlineType, VerticalAlign, WidthType,
   type IBorderOptions, type IParagraphOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
-import { arbetsformRad, arEttKort, arProtokoll, arskursText, datumText, ejBryt, etikettOchText, laskortKolumn, laskortRubrik, lathundFakta, lathundForm, metaRad, metodAdress, passOrd, passOversikt, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost, type PassOrd } from './metod';
+import { arbetsformRad, arEttKort, arProtokoll, arskursText, datumText, ejBryt, etikettOchText, laskortKolumn, laskortRubrik, lathundFakta, lathundForm, metaRad, metodAdress, passOrd, passOversikt, passTextKort, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost, type PassOrd } from './metod';
 import { brakDelar, delnamn, kortInfo, lage, STANDARD_NAMNARE, talrutansMatt, type KortInfo, type Mall } from './brak';
 import { andikaBredd, bagSvg, utanStod } from './lasflyt';
 import type { MetodPostISerie, SerieKoppling } from './serie';
@@ -2814,6 +2814,11 @@ function lhRuta(rubrik: string, barn: Barn[]): Barn[] {
 function lhNot(barn: Barn[]): Barn[] {
   return [tabell([rad([cell(barn, { bredd: BREDD, fyll: CREME, kanter: { ...runt(kant(CREME)), left: kant(BRUN, 24) } })])], [BREDD]), avstand(120)];
 }
+// Lärarens replik som pratbubbla (lathund.pass.repliker): en ruta med blå kant och ljus botten. Word och Google Dokument
+// ritar en tabellcell lika, men ingen av dem en pratbubbla med pekare utan en ritad form, så bubblan är en ruta här.
+function lhBubbla(text: string): Barn[] {
+  return [tabell([rad([cell([stycke(`”${text}”`, { storlek: 20, efter: 0 })], { bredd: BREDD, fyll: 'F3F6FA', kanter: runt(kant(FARG.huvud, 8)) })])], [BREDD]), avstand(70)];
+}
 // Ingen kant. I Word betyder "none" på en cell att tabellens kant gäller i stället, och docx sätter en
 // svart standardkant på varje tabell; "nil" tar bort kanten på riktigt. Skrivraderna sätter därför nil
 // på cellerna och på tabellen, så att bara den tunna linjen under varje rad blir kvar.
@@ -2924,8 +2929,10 @@ function lathundBarn(post: MetodPost, o: { niva1?: boolean; skalor?: number[]; b
       () => [
         ...lhRuta(l.pass.textRubrik, [
           ...(l.pass.titel ? [stycke(l.pass.titel, { fet: true, storlek: 21, efter: 40 })] : []),
-          ...l.pass.text.map((p, i, alla) => exempelStycke(p, { storlek: 18, efter: i === alla.length - 1 ? 0 : 40 })),
+          // En kort textruta, som ett problem att läsa högt, står större (passTextKort i metod.ts).
+          ...l.pass.text.map((p, i, alla) => exempelStycke(p, { storlek: passTextKort(l.pass) ? 24 : 18, efter: i === alla.length - 1 ? 0 : 40 })),
         ]),
+        ...(l.pass.repliker.length ? [kicker('Läraren säger', { farg: BRUN, fore: 0 }), ...l.pass.repliker.flatMap(lhBubbla)] : []),
         ...lhNot([kicker(l.pass.forberett.rubrik, { farg: BRUN, fore: 0 }), ...l.pass.forberett.text.map((p, i, alla) => stycke(p, { storlek: 18, efter: i === alla.length - 1 ? 0 : 40 }))]),
         ...(l.pass.klarTidigt ? lhNot([kicker('Klar tidigt', { fore: 0 }), stycke(l.pass.klarTidigt, { storlek: 18, efter: 0 })]) : []),
       ],

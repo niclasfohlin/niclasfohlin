@@ -350,6 +350,10 @@ lathund:
     text:
       - På ett slott finns 29 ljusstakar. Några ljusstakar har plats för fem ljus och några har plats för sju ljus. Sammanlagt behövs 187 ljus.
       - Hur många ljusstakar finns det av varje sort?
+    repliker:
+      - Kan du berätta problemet med egna ord?
+      - Vad är det vi ska ta reda på?
+      - Vad betyder talen i texten?
     forberett:
       rubrik: Det jag förberett
       text:

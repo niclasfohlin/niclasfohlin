@@ -39,6 +39,10 @@ const fel = [];
 for (const { id, d } of metoder) {
   const filmer = (d.film ? 1 : 0) + (d.filmer?.length ?? 0);
   const sager = (vad) => fel.push(`${id}: ${vad}`);
+  // Lärarens repliker på sidan 2 (lathund.pass.repliker) ska stå som pratbubblor i alla fyra filerna.
+  const repliker = (d.lathund?.pass?.repliker ?? []).map((r) => `”${r}”`);
+  const utanStyrtecken = (s) => tat(s.replace(/[ ]/g, ' ').replace(/[⁠­]/g, ''));
+  const saknade = (text) => repliker.filter((r) => !utanStyrtecken(text).includes(r));
 
   // PowerPoint-filen: bilderna i sin ordning, filmbilden först när metoden har film.
   const pptx = join(dist, `${id}-lathund.pptx`);
@@ -61,6 +65,7 @@ for (const { id, d } of metoder) {
         if (antal !== filmer) sager(`filmbilden har ${antal} filmer, metoden har ${filmer}`);
         if ((xml.match(/<p:video fullScrn="1">/g) ?? []).length !== filmer) sager('filmbildens filmer saknar uppspelning i helskärm');
       }
+      if (i === fore + 1 && saknade(xml.replace(/<[^>]+>/g, ' ')).length) sager(`PowerPoint-filens sida 2 saknar replikerna ${saknade(xml.replace(/<[^>]+>/g, ' ')).join(' ')}`);
     }
   }
 
@@ -74,6 +79,8 @@ for (const { id, d } of metoder) {
     if (funna.join(' | ') !== vantade.join(' | ')) sager(`lathundssidan räknar "${funna.join(' | ')}", väntat "${vantade.join(' | ')}"`);
     const iSpelaren = (html.match(/data-filmspelare-film=/g) ?? []).length;
     if (iSpelaren !== filmer) sager(`spelaren på lathundssidan har ${iSpelaren} filmer, metoden har ${filmer}`);
+    const bubblor = [...html.matchAll(/<p class="lh-bubbla"[^>]*>([^<]*)<\/p>/g)].map((m) => m[1]).join(' ');
+    if (saknade(bubblor).length) sager(`lathundssidan saknar replikerna ${saknade(bubblor).join(' ')}`);
   }
 
   // Word-lathunden: de fyra sidorna.
@@ -83,6 +90,7 @@ for (const { id, d } of metoder) {
     const xml = await (await JSZip.loadAsync(readFileSync(docx))).file('word/document.xml').async('string');
     const text = [...xml.matchAll(/<w:t[^>]*>([^<]*)<\/w:t>/g)].map((m) => m[1]).join('');
     for (const [i, s] of SIDOR.entries()) if (!text.includes(etikett(s, i + 1, SIDOR.length))) sager(`Word-lathunden bär inte etiketten "${etikett(s, i + 1, SIDOR.length)}"`);
+    if (saknade(text).length) sager(`Word-lathunden saknar replikerna ${saknade(text).join(' ')}`);
   }
 
   // Pdf:en: de fyra sidorna, en etikett per sida. Poppler finns där pdf:erna görs; saknas det prövas inte pdf:en.
@@ -94,6 +102,7 @@ for (const { id, d } of metoder) {
     if (sidor) {
       if (sidor.length !== SIDOR.length) sager(`pdf:en har ${sidor.length} sidor, väntat ${SIDOR.length}`);
       for (const [i, s] of SIDOR.entries()) if (!tat(sidor[i] ?? '').includes(etikett(s.toUpperCase(), i + 1, SIDOR.length))) sager(`pdf:ens sida ${i + 1} bär inte etiketten "${etikett(s.toUpperCase(), i + 1, SIDOR.length)}"`);
+      if (saknade(sidor[1] ?? '').length) sager(`pdf:ens sida 2 saknar replikerna ${saknade(sidor[1] ?? '').join(' ')}`);
     }
   }
 }

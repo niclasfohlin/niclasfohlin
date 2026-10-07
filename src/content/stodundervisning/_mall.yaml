@@ -354,6 +354,9 @@ lathund:
         - Vad läraren gjort innan.
     klarTidigt: Vad gruppen gör om den blir klar tidigt.
     # utskrift: knappens text vid texten (standard: Skriv ut till eleverna).
+    # repliker: högst tre saker läraren säger när texten eller problemet reds ut, utan citattecken. De står som
+    # pratbubblor under textrutan. Bara när textrutan är kort (ett problem, en fråga): berättar textrutan passet
+    # står replikerna redan där.
     # schema är tidsschemat minut för minut: samma faser i samma ordning och samma tider (Före passet blir
     # Före, "min" stryks), med "N · " framför de faser som är steg och numren i följd från 1. Bygget stannar
     # annars (content.config.ts), så att lathunden aldrig säger emot sidan.

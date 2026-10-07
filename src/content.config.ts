@@ -521,6 +521,10 @@ const stodundervisning = defineCollection({
         utskrift: z.string().optional(),
         titel: z.string().optional(),
         text: stycken,
+        // Det läraren säger när texten eller problemet reds ut, som pratbubblor under textrutan (Niclas 2026-10-07:
+        // "någon pratbubbla vad läraren säger när problemet bryts ner just i passet där"). För en kort textruta, som
+        // ett problem: en lathund som berättar passet i textrutan har replikerna där. Utan citattecken.
+        repliker: z.array(z.string()).max(3).default([]),
         forberett: z.strictObject({ rubrik: text, text: stycken }),
         klarTidigt: z.string().optional(),
         schema: z.strictObject({

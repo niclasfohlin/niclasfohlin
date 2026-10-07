@@ -23,7 +23,7 @@ import { FILM_UPPHOV, filmNamn, metodensFilmer } from './film';
 import { filmbildensUppspelning, mp4Fil, omslagFil, provaFilmfiler } from './filmfil';
 import { filmbildNamn, sidetikett } from './lathundsidor';
 import TECKENBREDD from '../data/teckenbredd.json';
-import { lathundFakta, arbetsformRad, etikettOchText, lathundForm, passOrd } from './metod';
+import { lathundFakta, arbetsformRad, etikettOchText, lathundForm, passOrd, passTextKort } from './metod';
 import type { MetodData } from './metod';
 
 export const PPTX_TYP = 'application/vnd.openxmlformats-officedocument.presentationml.presentation';
@@ -81,6 +81,7 @@ function bilder(d: MetodData) {
     titel: l.pass.rubrik,
     grupp: versaler(l.pass.textRubrik),
     exempel: [...(l.pass.titel ? [l.pass.titel] : []), ...l.pass.text],
+    repliker: (l.pass.repliker ?? []).map(citat),
     forberett: l.pass.forberett ? l.pass.forberett.text.join(' ') : undefined,
     // Rutans rubrik ur metoden, som på lathundssidan och i Word (K-075; förut fast DET JAG FÖRBEREDDE).
     forberettRubrik: versaler(l.pass.forberett?.rubrik ?? 'Det jag förberedde'),
@@ -450,14 +451,44 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
     txt(s, b.grupp, 0.46, 0.88, 5.4, gruppH, { mono: true, size: gruppLang ? 10.5 : 12, color: AMBER });
     const top2 = 1.2 + (gruppLang ? 0.2 : 0);
     const c1H = b.forberett ? Math.max(1.0, estH(b.forberett, 4.7, 12, 0.35)) : 0, c2H = b.klarTidigt ? Math.max(0.8, estH(b.klarTidigt, 4.7, 12, 0.35)) : 0;
-    const storyH = BOTTEN - top2 - (c1H ? c1H + 0.15 : 0) - (c2H ? c2H + 0.15 : 0);
+    const ledigt = BOTTEN - top2 - (c1H ? c1H + 0.15 : 0) - (c2H ? c2H + 0.15 : 0);
+    // Lärarens repliker som pratbubblor under textrutan (lathund.pass.repliker). Raderna räknas med Calibris egna
+    // teckenbredder, så att rutan och bubblorna får den höjd texten tar och ingen yta står tom.
+    const kort = passTextKort({ text: b.exempel });
+    const antalRader = (t: string, w: number, size: number) => calibriRader(plain(t), w * sx, size * grad);
+    const radHojd = (size: number) => size * grad * 1.2 / 72 / sy;
+    const BUBBLA = { x: 0.86, w: 4.6, size: 13, lucka: 0.16, luft: 0.2 };
+    const bubbelH = (t: string) => antalRader(t, BUBBLA.w - 0.36, BUBBLA.size) * radHojd(BUBBLA.size) + BUBBLA.luft;
+    const bubblorH = b.repliker.length ? 0.14 + 0.3 + b.repliker.reduce((a, t) => a + bubbelH(t) + BUBBLA.lucka, 0) : 0;
+    // Textens höjd: ett berättat pass uppskattas som förut (tilltaget), en kort text räknas rad för rad.
+    const exH = (size: number) => (kort
+      ? b.exempel.reduce((a, p) => a + antalRader(p, 4.97, size) * radHojd(size), 0) + (b.exempel.length - 1) * 5 * grad / 72 / sy
+      : b.exempel.reduce((a, p) => a + estH(p, 4.97, size, 0.07), 0));
+    const forText = ledigt - bubblorH;
+    // En kort text, som ett problem att läsa högt, står så stort som den ryms, högst 18 punkter (passTextKort i
+    // metod.ts). Ett berättat pass på omkring 130 ord fyller rutan och står i 11,5 punkter som förut.
+    let exGrad = 11.5;
+    if (kort) for (let g = 18; g > 11.5; g -= 0.5) if (exH(g) + 0.26 <= forText) { exGrad = g; break; }
+    if (b.repliker.length && exH(exGrad) + 0.26 > forText + 0.05) varna(`bild 2: replikerna och texten ryms inte i vänsterspalten (${(exH(exGrad) + 0.26 + bubblorH).toFixed(2)} > ${ledigt.toFixed(2)} tum): färre eller kortare repliker i lathund.pass.repliker`);
+    // Med repliker sluter rutan om texten och bubblorna står under; utan dem fyller rutan det lediga, som förut.
+    const storyH = b.repliker.length ? exH(exGrad) + 0.26 : ledigt;
     frame(s, 0.46, top2, 5.27, storyH, LINE, 0.75, CELL);
-    const need = b.exempel.reduce((a, p) => a + estH(p, 4.97, 11.5, 0.07), 0);
+    const need = exH(exGrad);
     if (need > storyH + 0.1) varna(`exemplet på bild 2 är långt (${need.toFixed(2)} > ${(storyH - 0.2).toFixed(2)} tum): korta lathund.pass.text till cirka 130 ord`);
     // Exemplet berättas rakt och replikerna (”…”) kursiva, som på sidan, i lathunden och i Word.
     const repliker = (t: string, sist: boolean) => t.split(/(”[^”]*”)/).filter(Boolean).map((x, j, alla) => ({ text: x, options: { italic: x.startsWith('”'), breakLine: !sist && j === alla.length - 1 } }));
-    txt(s, b.exempel.flatMap((t, i) => repliker(t, i === b.exempel.length - 1)), 0.61, top2 + 0.1, 4.97, storyH - 0.2, { size: 11.5, psa: 5 });
-    let y = top2 + storyH + 0.15;
+    txt(s, b.exempel.flatMap((t, i) => repliker(t, i === b.exempel.length - 1)), 0.61, top2 + 0.1, 4.97, storyH - 0.16, { size: exGrad, psa: 5 });
+    if (b.repliker.length) {
+      let by = top2 + storyH + 0.14;
+      label(s, 'LÄRAREN SÄGER', 0.46, by, 5.27);
+      by += 0.3;
+      for (const t of b.repliker) {
+        const h = bubbelH(t);
+        s.addText(skalad(t), { shape: pres.ShapeType.wedgeRoundRectCallout, x: BUBBLA.x * sx, y: by * sy, w: BUBBLA.w * sx, h: h * sy, fill: { color: BAND }, line: { color: NAVY, width: 1 }, fontFace: SANS, fontSize: BUBBLA.size * grad, color: INK, valign: 'middle', align: 'left', margin: [3, 12, 3, 12], fit: 'none' });
+        by += h + BUBBLA.lucka;
+      }
+    }
+    let y = top2 + ledigt + 0.15;
     if (b.forberett) { cream(s, 0.46, y, 5.27, c1H, b.forberett, 12, b.forberettRubrik); y += c1H + 0.15; }
     if (b.klarTidigt) cream(s, 0.46, y, 5.27, c2H, b.klarTidigt, 12, 'KLAR TIDIGT');
     label(s, b.schemaRubrik, 6.22, 0.88, 6.9);

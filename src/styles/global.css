@@ -1109,6 +1109,13 @@ html.js .bara-js { display: inline-block; }
 .lh-ruta-kropp { padding: 0.6rem 0.8rem 0.2rem; }
 .lh-ruta .lh-titel { font-weight: 700; font-size: 1.05rem; }
 .lh-ruta > ul { margin: 0.5rem 0.8rem 0.7rem; padding: 0; list-style: none; }
+/* En kort textruta, som ett problem att läsa högt, står större (passTextKort i metod.ts). */
+.lh-ruta.lh-kort .lh-ruta-kropp { font-size: 1.2rem; line-height: 1.45; }
+/* Lärarens repliker under textrutan, som pratbubblor (lathund.pass.repliker). Pekaren är en vriden ruta i bubblans kant. */
+.lh-repliker { margin: 0 0 1rem; }
+.lh-repliker > h3 { margin: 0 0 0.4rem; color: #8a5a1e; }
+.lh-kol p.lh-bubbla { position: relative; margin: 0 0 0.85rem 1.5rem; padding: 0.5rem 0.85rem; max-width: 26rem; background: var(--farg-ton); border: 1.5px solid var(--farg-accent); border-radius: 0.6rem; }
+.lh-bubbla::after { content: ''; position: absolute; left: 1.5rem; bottom: -0.42rem; width: 0.7rem; height: 0.7rem; background: var(--farg-ton); border-right: 1.5px solid var(--farg-accent); border-bottom: 1.5px solid var(--farg-accent); transform: rotate(45deg); }
 .lh-lista li { padding: 0.15rem 0; }
 .lh-tva { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1rem; }
 .lh-bockar label { display: flex; gap: 0.5rem; align-items: flex-start; cursor: pointer; }
@@ -1223,6 +1230,10 @@ html.js .bara-js { display: inline-block; }
   .lh-ruta > h3 { padding: 0.25rem 0.6rem; font-size: 7pt; }
   .lh-ruta-kropp { padding: 0.4rem 0.6rem 0.1rem; }
   .lh-ruta > ul { margin: 0.35rem 0.6rem 0.5rem; }
+  .lh-ruta.lh-kort .lh-ruta-kropp { font-size: 12.5pt; line-height: 1.35; }
+  .lh-repliker { margin: 0 0 0.5rem; break-inside: avoid; }
+  .lh-kol p.lh-bubbla { margin: 0 0 0.6rem 1.2rem; padding: 0.3rem 0.6rem; font-size: 10.5pt; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .lh-bubbla::after { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .lh-not { padding: 0.4rem 0.7rem; margin: 0.5rem 0; }
   .lh-tabell.m-tabell { font-size: 8.5pt; margin: 0.15rem 0 0.5rem; }
   .lh-tabell.m-tabell th, .lh-tabell.m-tabell td { padding: 0.3rem 0.45rem; }

@@ -7,7 +7,7 @@ import MetodTabell from './MetodTabell.astro';
 import Elevlista from './Elevlista.astro';
 import Tavla from './Tavla.astro';
 import type { MetodData } from '../lib/metod';
-import { lathundFakta, arbetsformRad, etikettOchText, lathundForm, passUtskrift } from '../lib/metod';
+import { lathundFakta, arbetsformRad, etikettOchText, lathundForm, passUtskrift, passTextKort } from '../lib/metod';
 // Sidornas etiketter med sin räkning, "Metoden · 1/4", ur samma lista som PowerPoint-filen räknar med.
 import { sidetikett } from '../lib/lathundsidor';
 interface Props { d: MetodData }
@@ -70,13 +70,19 @@ const kortBredd = (i: number) => `${((kortVikter[i] / kortVikter.reduce((a, v) =
       <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-2">{l.pass.rubrik}</h2><span class="lh-etikett">{sidetikett('Ett pass')}</span></header>
       <div class="lh-kolumner">
         <div class="lh-kol">
-          <div class="lh-ruta lh-elevtext" id="lathund-text">
+          <div class:list={['lh-ruta', 'lh-elevtext', passTextKort(l.pass) && 'lh-kort']} id="lathund-text">
             <h3>{l.pass.textRubrik}<span class="bara-js lh-lank"><button type="button" data-skriv-ut-text>{passUtskrift(l.pass)}</button></span></h3>
             <div class="lh-ruta-kropp">
               {l.pass.titel && <p class="lh-titel">{l.pass.titel}</p>}
               {l.pass.text.map((p) => <p>{repliker(p).map((x) => (x.replik ? <em>{x.text}</em> : x.text))}</p>)}
             </div>
           </div>
+          {l.pass.repliker.length > 0 && (
+            <div class="lh-repliker">
+              <h3 class="lh-kicker">Läraren säger</h3>
+              {l.pass.repliker.map((r) => <p class="lh-bubbla">{citat(r)}</p>)}
+            </div>
+          )}
           <div class="lh-not">
             <h3 class="lh-kicker">{l.pass.forberett.rubrik}</h3>
             {l.pass.forberett.text.map((p) => <p>{p}</p>)}

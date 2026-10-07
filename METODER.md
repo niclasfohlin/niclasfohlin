@@ -98,7 +98,7 @@ Fyra sidor ur Niclas snabbguide, i samma fil under `lathund`. Sidan `/stodunderv
 | Sida | Fält | Innehåll |
 |---|---|---|
 | 1 Metoden | `lathund.innehall`, `lathund.metoden` (text, ruta med punkter, tabell, not) | metoden i korthet; faktarutorna passlängd, grupp, frekvens hämtas från `tid`, `grupp`, `period` |
-| 2 Ett pass | `lathund.pass` (text, forberett, klarTidigt, schema med fraser) | passet steg för steg; elevtexten går att skriva ut för sig |
+| 2 Ett pass | `lathund.pass` (text, repliker, forberett, klarTidigt, schema med fraser) | passet steg för steg; elevtexten går att skriva ut för sig. En kort textruta, högst 60 ord, som ett problem att läsa högt, står större i alla filer (`passTextKort` i `src/lib/metod.ts`). `repliker`, högst tre, är det läraren säger när texten eller problemet reds ut: de står som pratbubblor under textrutan på lathundssidan, i PowerPoint-filen och pdf:en, och som rutor med blå kant i Word, där en pratbubbla skulle kräva en ritad form (Niclas 2026-10-07 om Problemlösning i grupp: "Liten text för problemet och mycket outnyttjad yta", "någon pratbubbla vad läraren säger när problemet bryts ner"). De hör till en lathund vars textruta är kort; en lathund som berättar passet i textrutan har replikerna där. `scripts/lathundprov.mjs` stannar när en replik saknas i någon av de fyra filerna |
 | 3 Mallen | `lathund.mall` (block) | blocken flödar i två spalter; typerna nedan |
 | 4 Material | `lathund.material` (var, bordet, varjePass) | kraven hämtas från `urval`, checklistan från `checklista` |
 

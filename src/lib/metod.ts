@@ -218,3 +218,12 @@ export function passOrd(d: MetodData): PassOrd {
 export function passUtskrift(pass: { textRubrik: string; utskrift?: string }): string {
   return pass.utskrift ?? (/^Gruppen\b/i.test(pass.textRubrik) ? 'Skriv ut passexemplet' : 'Skriv ut till eleverna');
 }
+
+/**
+ * Textrutan på lathundens sida 2 är kort när den bär ett problem eller en fråga och inte ett berättat pass: högst 60
+ * ord. Då står texten större i alla utdata (lathundssidan, PowerPoint och pdf, Word), så att rutan inte står med liten
+ * text och tom yta (Niclas 2026-10-07 om Problemlösning i grupp: "Liten text för problemet och mycket outnyttjad yta").
+ */
+export function passTextKort(pass: { titel?: string; text: string[] }): boolean {
+  return [pass.titel ?? '', ...pass.text].join(' ').split(/\s+/).filter(Boolean).length <= 60;
+}
