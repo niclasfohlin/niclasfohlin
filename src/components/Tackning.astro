@@ -1,0 +1,59 @@
+---
+// Täckningskartan i metodbanken (K-241; Niclas 2026-10-07, som valde formen C med kortens områdesmärken): mellan
+// väljaren och korten en stapel per metod över årskurserna F till 9, i områdets färg, i en bana per område. Namnet och
+// årskursen står ovanför stapeln där den börjar, så att banan läses som en trappa, och på dator står passet och takten i
+// en egen spalt till höger om skalan. Varje rad är en länk till metoden. Kartan ritas ur metodfilerna (src/lib/tackning.ts),
+// så en ny metod får sin rad av sig själv, och väljaren styr raderna med samma villkor som korten (index.astro). På
+// telefon är kartan hopfälld bakom sin rubrik från början (skriptet nedan, före första målningen); utan JavaScript är
+// den öppen, och inför utskrift öppnas den.
+import { site } from '../data/site';
+import type { MetodPost } from '../lib/metod';
+import { ejBryt } from '../lib/metod';
+import { arskursSpannet, SKALA, spannText, taktDelar } from '../lib/tackning';
+interface Props { metoder: MetodPost[]; taggar: (m: MetodPost) => string[] }
+const { metoder, taggar } = Astro.props;
+const rader = metoder.map((m) => ({ m, sp: arskursSpannet(m.data), takt: taktDelar(m.data) }));
+// Inom banan i trappa: det som börjar tidigast först, sedan det kortaste, sedan namnet.
+const ordning = (a: (typeof rader)[number], b: (typeof rader)[number]) => a.sp[0] - b.sp[0] || (a.sp[1] - a.sp[0]) - (b.sp[1] - b.sp[0]) || a.m.data.titel.localeCompare(b.m.data.titel, 'sv');
+const banor = site.omraden.map((o) => ({ o, rader: rader.filter((r) => r.m.data.omrade === o).sort(ordning) })).filter((b) => b.rader.length);
+// Etiketten börjar där stapeln börjar, men högst i kolumn 6, så att namnet får minst fem kolumner också för en metod som
+// börjar i åk 7 eller 8 (granskningen 2026-10-07).
+const etikettKolumn = (sp: [number, number]) => Math.min(sp[0], 5);
+---
+<details class="tk" id="tackning" open data-tackning>
+  <summary class="tk-huvud"><span class="tk-rubrik">Täckningskarta</span><span class="visually-hidden">: vilka årskurser metoderna gäller</span></summary>
+  <div class="tk-axel" aria-hidden="true"><span class="tk-skala">{SKALA.map((x) => <span>{x}</span>)}</span><span class="tk-axel-tom"></span></div>
+  {banor.map((b) => (
+    <div class="tk-bana" data-tk-grupp={b.o}>
+      <p class="tk-banenamn"><span class="amne" data-amne={b.o}>{b.o}</span></p>
+      <ul class="tk-rader">
+        {b.rader.map(({ m, sp, takt }) => (
+          <li data-karta data-omrade={m.data.omrade} data-arskurs={m.data.arskurs.join(' ')} data-taggar={taggar(m).join(' ')}>
+            <a class="tk-rad" href={`/stodundervisning/${m.id}`} style={`--fran:${sp[0]};--till:${sp[1]};--etikett:${etikettKolumn(sp)}`}>
+              <span class="tk-skala">
+                <span class="tk-etikett">{ejBryt(m.data.titel)}{' '}<span class="tk-ak">{sp[0] === 0 ? <><span class="visually-hidden">årskurs </span>{spannText(sp)}</> : `åk ${spannText(sp)}`}</span></span>
+                <span class="tk-stapel" aria-hidden="true"></span>
+              </span>
+              {(takt.delar.length > 0 || takt.period) && (<>
+                <span class="visually-hidden">, </span>
+                <span class="tk-takt">{takt.delar.map((del, i) => <>{i > 0 && ' · '}<span class="tk-del">{ejBryt(del)}</span></>)}{takt.period && <span class="tk-period">{ejBryt(takt.period)}</span>}</span>
+              </>)}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
+</details>
+<script is:inline>
+  // Hopfälld på telefon före första målningen, så att korten inte hoppar (granskningen 2026-10-07). Öppen inför
+  // utskrift, och som den var efteråt.
+  (() => {
+    const k = document.getElementById('tackning');
+    if (!k) return;
+    if (window.matchMedia('(max-width: 47.99rem)').matches) k.open = false;
+    let varOppen = k.open;
+    window.addEventListener('beforeprint', () => { varOppen = k.open; k.open = true; });
+    window.addEventListener('afterprint', () => { k.open = varOppen; });
+  })();
+</script>

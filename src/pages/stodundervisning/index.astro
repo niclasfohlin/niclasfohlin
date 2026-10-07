@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Taggar from '../../components/Taggar.astro';
 import Filval from '../../components/Filval.astro';
 import Metodkort from '../../components/Metodkort.astro';
+import Tackning from '../../components/Tackning.astro';
 import { site } from '../../data/site';
 import { metoderSorterade, taggLabel } from '../../lib/innehall';
 import { harMallar } from '../../lib/metod';
@@ -51,6 +52,8 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
       <p class="meta tom" data-tom hidden>Ingen metod matchar dina val. <button type="button" data-rensa-filter>Visa alla metoder</button></p>
     </form>
   )}
+
+  {metoder.length > 0 && <Tackning metoder={metoder} taggar={(m) => { const serie = serier.get(m.id); return serie ? serieTaggar(serie, allaMetoder) : m.data.taggar; }} />}
 
   {site.omraden.map((omrade) => {
     const lista = metoder.filter((m) => m.data.omrade === omrade);
@@ -102,6 +105,10 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
   const form = document.getElementById('filter') as HTMLFormElement | null;
   if (form) {
     const kort = Array.from(document.querySelectorAll<HTMLElement>('[data-metod]'));
+    // Täckningskartans rader och banor (Tackning.astro) följer samma val som korten.
+    const kartrader = Array.from(document.querySelectorAll<HTMLElement>('[data-karta]'));
+    const banor = Array.from(document.querySelectorAll<HTMLElement>('[data-tk-grupp]'));
+    const karta = document.querySelector<HTMLElement>('[data-tackning]');
     const sektioner = Array.from(document.querySelectorAll<HTMLElement>('[data-omrade-sektion]'));
     const antal = form.querySelector('[data-antal]') as HTMLElement;
     const namn = ['omrade', 'arskurs', 'tagg'] as const;
@@ -117,15 +124,20 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
       const data = new FormData(form!);
       const val = Object.fromEntries(namn.map((n) => [n, String(data.get(n) ?? '')]));
       const aktiv = namn.some((n) => val[n]);
+      const passar = (k: HTMLElement) =>
+        (!val.omrade || k.dataset.omrade === val.omrade) &&
+        (!val.arskurs || (k.dataset.arskurs ?? '').split(' ').includes(val.arskurs)) &&
+        (!val.tagg || (k.dataset.taggar ?? '').split(' ').includes(val.tagg));
       let synliga = 0;
       for (const k of kort) {
-        const passar =
-          (!val.omrade || k.dataset.omrade === val.omrade) &&
-          (!val.arskurs || (k.dataset.arskurs ?? '').split(' ').includes(val.arskurs)) &&
-          (!val.tagg || (k.dataset.taggar ?? '').split(' ').includes(val.tagg));
-        k.hidden = !passar;
-        if (passar) synliga++;
+        k.hidden = !passar(k);
+        if (!k.hidden) synliga++;
       }
+      let synligaRader = 0;
+      for (const r of kartrader) { r.hidden = !passar(r); if (!r.hidden) synligaRader++; }
+      for (const b of banor) b.hidden = !kartrader.some((r) => !r.hidden && b.contains(r));
+      // Utan träffar göms hela kartan: väljaren säger redan att ingen metod matchar.
+      if (karta) karta.hidden = synligaRader === 0;
       for (const s of sektioner) {
         s.hidden = aktiv && !Array.from(s.querySelectorAll<HTMLElement>('[data-metod]')).some((k) => !k.hidden);
       }
@@ -143,6 +155,7 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
     form.addEventListener('change', filtrera);
     filtrera();
   }
+
 
   // Flera metoder i en Word-fil. Data hämtas från metoder.json och filen byggs i webbläsaren
   // med samma generator som bygget använder (src/lib/metoddocx.ts), så innehållet är identiskt.

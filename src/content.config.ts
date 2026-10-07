@@ -8,6 +8,7 @@ import { BAGE, ordgrupper, utanStod } from './lib/lasflyt';
 import { EFTER_FORMER, HOGST_EXTRAFILMER, platsFel, tolkaEfter } from './lib/film';
 import { forstaLed, radensDel } from './lib/karta';
 import { veckofel } from './lib/veckomaterial';
+import { arskursFel } from './lib/tackning';
 
 // Registren är den enda sanningen om vilka taggar och publikationer som finns.
 // Ett okänt värde stoppar bygget med ett tydligt besked om vad som ska göras.
@@ -144,7 +145,9 @@ const stodundervisning = defineCollection({
     omrade: z.enum(['Matematik', 'Läsning', 'Skrivning', 'Socialt']),
     arskurs: z.array(z.enum(['F-3', '4-6', '7-9'])).min(1, 'Ange minst en årskursnivå.'),
     // Årskursen som läsaren ser när nivåerna inte säger det exakt, t.ex. "åk 3–6" för en metod
-    // som ligger under F-3 och 4-6. Filtreringen i metodbanken använder alltid arskurs.
+    // som ligger under F-3 och 4-6. Filtreringen i metodbanken använder alltid arskurs. Täckningskartan i
+    // metodbanken ritar metodens stapel ur texten ("åk 3–6", "F–2"), så den ska gå att läsa som ett spann och röra
+    // samma nivåer som arskurs; superRefine nedan stannar annars (src/lib/tackning.ts).
     arskursText: z.string().optional(),
     taggar,
     // Hur metoden används. Flera värden går bra.
@@ -556,6 +559,9 @@ const stodundervisning = defineCollection({
       }),
     }).optional(),
   }).superRefine((d, ctx) => {
+    // Täckningskartan (K-241): årskurstexten ska gå att läsa som ett spann och stämma med nivåerna.
+    const akFel = arskursFel(d);
+    if (akFel) ctx.addIssue({ code: 'custom', path: ['arskursText'], message: akFel });
     // En lektion har serie, formaga och tranar tillsammans, och ingen egen lektionsbank. Att serien och förmågan finns
     // prövas i src/lib/serie.ts, där alla metoder är kända.
     const lektionsfalt = [d.serie, d.formaga, d.tranar].filter((x) => x !== undefined).length;

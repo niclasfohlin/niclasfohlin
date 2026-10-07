@@ -734,6 +734,51 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-kartrad .kicker { margin: 0 0 0.35rem; }
 .metod-modell .m-veckokort h4 { margin: 0; font-size: 1.1rem; }
 .m-veckokort h4 a { color: var(--farg-accent); }
+/* Täckningskartan i metodbanken (Tackning.astro, src/lib/tackning.ts; K-241, Niclas 2026-10-07 valde formen): en
+   stapel per metod över årskurserna F till 9 i områdets färg, i en bana per område. Skalan är ett rutnät med tio
+   spalter, och stapeln spänner över spalterna --fran+1 till --till+1 (F är 0). Namnet och årskursen står ovanför
+   stapeln där den börjar, så att banan läses som en trappa. På dator står passet och takten i en egen spalt till höger
+   om skalan, skild med en linje, så att en stapel till åk 9 aldrig går in under texten. Kartan ritas utan bilder och
+   ritas om av väljaren med samma villkor som korten. */
+.tk { --tk-kant: 4px; --tk-luft: 0.6rem; font-family: var(--typsnitt-ui); margin: 1.25rem 0 2rem; }
+/* Rubrikraden fälls ut som sajtens andra utfällbara rader (.ri summary): pilen till höger, en ton, minst 2,75 rem. */
+.tk > summary { list-style: none; cursor: pointer; display: flex; align-items: center; min-height: 2.75rem; padding: 0.45rem 0.9rem; margin: 0 0 0.35rem; border: 1px solid var(--farg-kant); border-radius: 8px; background: var(--farg-ton-svag); }
+.tk > summary::-webkit-details-marker { display: none; }
+.tk > summary::after { content: ''; flex: none; width: 0.5rem; height: 0.5rem; margin-left: auto; border-right: 2px solid var(--farg-accent); border-bottom: 2px solid var(--farg-accent); transform: translateY(-0.15rem) rotate(45deg); }
+.tk[open] > summary::after { transform: translateY(0.1rem) rotate(-135deg); }
+.tk > summary:hover { background: var(--farg-ton); }
+.tk > summary:focus-visible { outline: 2px solid var(--farg-accent); outline-offset: 2px; }
+.tk-rubrik { font-size: 1.05rem; font-weight: 700; }
+.tk-skala { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); align-items: center; border-right: 1px solid var(--farg-kant);
+  background-image: linear-gradient(to right, var(--farg-kant) 1px, transparent 1px); background-size: 10% 100%; background-position: 0 0; }
+/* Axeln har banans kant och luft till vänster, så att siffrorna står mitt över staplarnas kolumner (granskningen 2026-10-07). */
+.tk-axel { position: sticky; top: 0; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr); background: var(--farg-bakgrund); border-bottom: 1px solid var(--farg-kant); padding: 0.35rem 0 0.25rem calc(var(--tk-kant) + var(--tk-luft)); }
+.tk-axel .tk-skala { background-image: none; border-right: 0; min-height: 1.5rem; font-size: 0.75rem; font-weight: 700; color: var(--farg-text-svag); }
+.tk-axel .tk-skala span { text-align: center; }
+.tk-axel-tom { display: none; }
+.tk-bana { margin: 0.6rem 0 0; border-left: var(--tk-kant) solid var(--tk, var(--farg-accent)); padding: 0.3rem 0 0.3rem var(--tk-luft); }
+.tk-bana[data-tk-grupp="Läsning"] { --tk: var(--farg-lasning); }
+.tk-bana[data-tk-grupp="Skrivning"] { --tk: var(--farg-skrivning); }
+.tk-bana[data-tk-grupp="Socialt"] { --tk: var(--farg-socialt); }
+.tk-banenamn { margin: 0 0 0.2rem; }
+.tk-rader { list-style: none; margin: 0; padding: 0; }
+.tk-rad { display: grid; grid-template-columns: minmax(0, 1fr); align-items: center; min-height: 2.75rem; padding: 0.2rem 0 0.3rem; text-decoration: none; color: inherit; }
+.tk-rad:hover, .tk-rad:focus-visible { background: var(--farg-ton-svag); }
+.tk-rad:focus-visible { outline: 2px solid var(--farg-accent); outline-offset: -2px; }
+.tk-rad .tk-skala { grid-template-rows: auto 0.65rem; row-gap: 0.1rem; }
+.tk-etikett { grid-column: calc(var(--etikett, var(--fran)) + 1) / -1; grid-row: 1; font-size: 0.85rem; font-weight: 600; color: var(--farg-accent); line-height: 1.2; padding-left: 0.15rem; }
+.tk-ak { font-size: 0.78rem; font-weight: 400; color: var(--farg-text-svag); white-space: nowrap; }
+.tk-stapel { grid-column: calc(var(--fran) + 1) / calc(var(--till) + 2); grid-row: 2; height: 0.65rem; border-radius: 3px; background: var(--tk, var(--farg-accent)); }
+.tk-takt { display: none; }
+.tk-del { white-space: nowrap; }
+.tk-period { display: block; }
+@media (min-width: 48rem) {
+  .tk-axel, .tk-rad { grid-template-columns: minmax(0, 1fr) 12rem; column-gap: 1.25rem; }
+  .tk-axel-tom { display: block; }
+  .tk-takt { display: block; font-size: 0.8rem; color: var(--farg-text-svag); align-self: center; padding-left: 0.75rem; border-left: 1px solid var(--farg-kant); }
+  .tk-rad { min-height: 2.6rem; }
+}
+
 /* Bildserierna (Seriesamtal, Serierutor.astro): rutorna som bygget ritade, elevens blad med seriens namn och en rad för
    elevens namn överst, provbildens ruta i textens bredd och arket att klippa ut. En bildserie står en ruta i bredd på en
    smal skärm, så att det som händer i rutan syns; en mall med tomma rutor behåller sina kolumner. Utskriften är nedan. */
@@ -1317,6 +1362,11 @@ html.js .bara-js { display: inline-block; }
      första noten står ihop och paketet går att kopiera för sig. */
   .m-ram:has(.m-lista ~ .m-lista ~ .m-lista ~ .m-lista) { break-before: page; }
   .m-ramlankar, .m-veckolank { display: none; }
+  /* Täckningskartan skrivs ut öppen med sina färger, och axeln följer inte med som fast rad. */
+  .tk-axel { position: static; }
+  .tk-stapel, .tk-bana { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .tk > summary::after { display: none; }
+  .tk-rad { break-inside: avoid; }
   /* Veckans kort fyller sin sida och kopieras till eleverna: ramen som står efter den sista veckans kort börjar på en
      ny sida, så att lärarens text inte hamnar längst ned på kortens sida (src/lib/veckomaterial.ts). Nästa vecka
      börjar redan en sida (.m-vecka). */
