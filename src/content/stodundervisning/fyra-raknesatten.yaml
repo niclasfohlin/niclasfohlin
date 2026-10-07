@@ -27,7 +27,7 @@ material:
   - multilink
   - räknemattan och talrutan
   - övningsblad
-uppdaterad: 2026-10-05
+uppdaterad: 2026-10-07
 publicerad: 2026-10-04
 relaterade:
   - antalsuppfattning-i-grupp
@@ -1211,7 +1211,7 @@ filmer:
       - text: "85 − 20 = 65 och 65 − 7 = 58."
   - nr: 3
     titel: "Rektangeln med multilink"
-    sekunder: 29.73
+    sekunder: 28.98
     beskrivning: "Bygg rader med fyra kuber, en hel rad i taget. Tre rader med fyra är en rektangel: 3 · 4 = 12. Åt andra hållet: hur många rader med fyra? Tre, 12/4 = 3. Samma tolv kuber, andra frågan: 12 i tre rader. En kub i varje rad i taget. Fyra i varje rad: 12/3 = 4. Samma rektangel, byggd på två sätt."
     rubrik: "Vecka 5: rektangeln med multilink"
     ingress: "Fyra bilder ur filmen om vecka 5. Eleven bygger hela rader med fyra kuber och får en rektangel med sidorna 3 och 4, som visar 3 · 4 = 12 och 12/4 = 3. Sedan delar eleven samma tolv kuber i tre rader, en kub i varje rad i taget, och får fyra i varje rad, 12/3 = 4. Det blir samma rektangel. Filmen på metodens sida visar samma sak i rörelse."
