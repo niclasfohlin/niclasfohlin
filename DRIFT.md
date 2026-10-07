@@ -40,6 +40,8 @@ Word och PowerPoint via COM lämnar ibland en process kvar när ett anrop bryts:
 
 Astro 7 kör `astro preview` som en bakgrundsprocess med låsfil: en andra `astro preview` startar inte utan avslutar tyst med hänvisning till den första, och `taskkill` på skalet dödar den inte. Skripten startar därför med `--ignore-lock` och stänger sin egen; en kvarglömd server syns med `npx astro preview status` och stoppas med `npx astro preview stop`.
 
+Krokarna står i `.claude/settings.json`: `.claude/hooks/kontext.mjs` efter en kompaktering, kreditraden vid varje uppdrag (`scripts/krediter.mjs --rad`), `.claude/hooks/skydda-main.mjs` före varje kommando (commit på main, uppladdning när kreditspärren är stängd) och `.claude/hooks/innehall.mjs` när en innehållsfil sparas med Write eller Edit (taggar och publikation; en fil som ändras genom skalet prövas först av `npm run validera`). Det en krok skriver till sessionen får vara högst 10 000 tecken: skriver den mer sparar Claude Code utdatan i en fil, och sessionen ser bara de första 2 000 tecknen (code.claude.com/docs/en/hooks). `kontext.mjs` skrev förut ARBETSSATT.md, STIL.md och hela KO.md, 180 000 tecken 2026-10-07, så varken kön eller krediterna kom fram efter en kompaktering. Den skriver nu grenen, krediterna och köns läge i kort form (det som pågår, prio 1 och det som väntar på Niclas), omkring 2 500 tecken, och kortar sig själv vid 9 000. CLAUDE.md med ARBETSSATT.md och STIL.md läser Claude Code själv in igen efter en kompaktering. Lägg inget i en krok som sessionen måste se och som kan växa.
+
 ## Hemligheter
 
 | Vad | Var den ligger | Hur den används |

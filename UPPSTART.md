@@ -96,7 +96,7 @@ Utskick sker som kampanj i Brevo. `/utskick` skriver utkastet och kan lägga upp
 
 Appens permission-läge avgör också vad som går. I läget Auto bedömer en klassificerare varje kommando och stoppar allt som liknar hantering av hemligheter, deploy eller ändring av egna behörigheter, oavsett vad settings.json säger. Ska Claude Code sköta driften behöver sessionen köras i läget som inte frågar (bypassPermissions). Claude Code kan begära bytet själv; Niclas godkänner det på kortet som visas.
 
-Tre hooks körs automatiskt: efter kompaktering läses ARBETSSATT.md, STIL.md och KO.md in igen; commit på main stoppas; när en innehållsfil sparas kontrolleras taggar och publikation direkt.
+Fyra hooks körs automatiskt: efter kompaktering skriver `.claude/hooks/kontext.mjs` grenen, krediterna och köns läge i kort form (CLAUDE.md med ARBETSSATT.md och STIL.md läser Claude Code själv in igen); vid varje uppdrag skrivs kreditraden; commit på main och uppladdning med stängd kreditspärr stoppas; när en innehållsfil sparas med Write eller Edit kontrolleras taggar och publikation direkt. Det en hook skriver till sessionen får vara högst 10 000 tecken (DRIFT.md under Riggen).
 
 Personliga avvikelser och lokala token läggs i `.claude/settings.local.json`, som git ignorerar.
 
