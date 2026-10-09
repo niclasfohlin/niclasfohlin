@@ -23,6 +23,7 @@ Läs raden för det du ska göra. Avsnitten står i den här filen, ett per steg
 | skriva ett längre nyhetsbrev | flödet `/utskick` (`.claude/commands/utskick.md`) och CLAUDE.md under Prenumeration och utskick |
 | bara köra valideringen | flödet `/validera` (`.claude/commands/validera.md`) |
 | sätta upp riggen från början | flödet `/uppstart` (`.claude/commands/uppstart.md`) och UPPSTART.md |
+| lämna över till en annan session, eller ta över efter en | Överlämning |
 | komma vidare när du har fastnat | När du fastnar |
 
 ## Innan du börjar en uppgift
@@ -107,6 +108,12 @@ Alla kända texter av Niclas ligger i `underlag/texter/`, ett blad per text med 
 ## Metoder ur underlag
 
 Niclas lämnar metoder till stödundervisning som kompendier (docx och pdf) med en fast modell och lathundar (pptx, pdf). Hur en metod tas emot, görs om till YAML, provas, granskas av Codex och läggs in står i METODER.md, med de publicerade metoderna som förebild; det körbara flödet är `/ny-metod`. Underlagen ligger i `underlag/metoder/`, som git ignorerar eftersom repot är publikt.
+
+## Överlämning
+
+När Niclas säger att en annan session tar över lämnas inget kvar i den här sessionens huvud. Allt arbete ligger i git och är uppladdat, eller står som en post i kön. Det som väntar på Niclas är blockerat med `--behovs`. Lärdomarna står i minnet, och en regel som har ändrats står i sin handbok. Överst i NATTEN.md står ett avsnitt Överlämning med läget, det som är öppet, det andra sessioner har fått och ännu inte gjort, och det Niclas har fått höra som oprövat.
+
+En session som tar över läser det avsnittet och kör `node scripts/ko.mjs lista` innan den gör något annat.
 
 ## När du fastnar
 
