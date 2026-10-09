@@ -1,0 +1,49 @@
+---
+// Elevens sida till två texter (src/lib/ramform.ts, textparAv; Niclas 2026-10-08: "en elevversion som alla tittar på från
+// en projektor eller är utskriven som ser lite intressant ut med frågor under"), som i Word (textpar i metoddocx.ts) och i
+// metodriggens kompendium: en boksida med titeln i Cinzel och den röda dubbla linjen, raden till eleven, de två texterna i
+// var sin spalt med numret och namnet överst och frågorna att prata om under en tunn linje. Lärarens sida, med texterna
+// och rutorna, står före (Metod.astro). I utskriften står sidan på ett eget A4 med storleken ur samma uträkning som Word
+// (src/lib/boksida.ts, textparMatt); på en smal skärm står texterna under varandra.
+import type { Textpar } from '../lib/ramform';
+import { BOKRAD, textparMatt } from '../lib/boksida';
+interface Props { p: Textpar; id: string }
+const { p, id } = Astro.props;
+const matt = textparMatt(p);
+const stil = [`--bok-pt: ${matt.pt}pt`, `--bok-rad: ${(BOKRAD.Andika * matt.line / 240).toFixed(3)}`].join('; ');
+// Fet och kursiv stil i en rad, som bokRuns i Word: **ord** och *ord*.
+type Del = { text: string; fet?: boolean; kursiv?: boolean };
+const delar = (r: string): Del[] => {
+  const ut: Del[] = [];
+  let sist = 0;
+  for (const m of r.matchAll(/\*\*[^*]+\*\*|\*[^*]+\*/g)) {
+    if (m.index! > sist) ut.push({ text: r.slice(sist, m.index) });
+    ut.push(m[0].startsWith('**') ? { text: m[0].slice(2, -2), fet: true } : { text: m[0].slice(1, -1), kursiv: true });
+    sist = m.index! + m[0].length;
+  }
+  if (sist < r.length) ut.push({ text: r.slice(sist) });
+  return ut;
+};
+// Raderna i ett stycke, var och en med sina delar.
+const rader = (t: string) => t.split('\n').map(delar);
+---
+<section class="m-ram boksida formsida textpar" id={id} style={stil} aria-label={`Elevens sida: ${p.titel}`}>
+  <div class="boksida-ram">
+    <h4 class="boksida-titel">{p.titel}</h4>
+    {p.text && <p class="formsida-rad">{rader(p.text).map((r, j) => <>{j > 0 && <br />}{r.map((x) => (x.fet ? <strong>{x.text}</strong> : x.kursiv ? <em>{x.text}</em> : x.text))}</>)}</p>}
+    <div class="textpar-spalter">
+      {p.texter.map((t, k) => (
+        <div class="textpar-spalt">
+          <p class="textpar-nr" aria-hidden="true">{k + 1}</p>
+          <p class="formsida-etikett"><span class="visually-hidden">{k + 1}. </span>{p.kolumner[k]}</p>
+          {t.split('\n\n').map((st) => <p>{rader(st).map((r, j) => <>{j > 0 && <br />}{r.map((x) => (x.fet ? <strong>{x.text}</strong> : x.kursiv ? <em>{x.text}</em> : x.text))}</>)}</p>)}
+        </div>
+      ))}
+    </div>
+    <p class="formsida-rubrik">Frågor att prata om</p>
+    <ol class="boksida-fragor">
+      {p.fragor.map((f, i) => <li><span class="boksida-nr">{i + 1}.</span><span>{rader(f).map((r, j) => <>{j > 0 && <br />}{r.map((x) => (x.fet ? <strong>{x.text}</strong> : x.kursiv ? <em>{x.text}</em> : x.text))}</>)}</span></li>)}
+    </ol>
+  </div>
+  <p class="boksida-fot"><span>{p.not}</span></p>
+</section>

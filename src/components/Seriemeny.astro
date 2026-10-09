@@ -8,7 +8,8 @@ interface Props { koppling: SerieKoppling }
 const { koppling } = Astro.props;
 const { serie, lektion } = koppling;
 const bas = '/stodundervisning';
-const har = lektion ? `${lektion.formaga} · ${lektion.namn}` : 'Översikt och lektionsbank';
+const { ord } = serie;
+const har = lektion ? (ord.numrerad ? `${lektion.formaga} · ${lektion.namn}` : lektion.namn) : ord.oversikt;
 // Flikarna på datorn står i jämna rader, lika breda: omkring tre i bredd på en smalare skärm och fem på en bred. Antalet
 // kolumner väljs så att raderna blir få och ingen flik står ensam på sista raden; en kolumn fler än målet får kosta lite
 // (nio flikar blir tre gånger tre eller fem och fyra, sju blir fyra och tre, tio blir fyra, fyra och två; granskningen
@@ -24,20 +25,20 @@ const kolumner = (mal: number) => {
   return bast;
 };
 ---
-<nav class="serie-meny" aria-label={`${serie.titel}: översikt och lektioner`}>
+<nav class="serie-meny" aria-label={`${serie.titel}: översikt och ${ord.flera}`}>
   <p class="serie-meny-namn">{serie.titel}</p>
   <ol class="serie-meny-flikar" style={`--kol-smal:${kolumner(3)};--kol-bred:${kolumner(5)}`}>
     <li><a href={`${bas}/${serie.id}`} aria-current={lektion ? undefined : 'page'}>Översikt</a></li>
     {serie.lektioner.map((l) => (
-      <li><a href={`${bas}/${l.id}`} aria-current={lektion?.id === l.id ? 'page' : undefined}><span class="serie-nr" aria-hidden="true">{l.formaga}</span>{l.namn}</a></li>
+      <li><a href={`${bas}/${l.id}`} aria-current={lektion?.id === l.id ? 'page' : undefined}>{ord.numrerad && <span class="serie-nr" aria-hidden="true">{l.formaga}</span>}{l.namn}</a></li>
     ))}
   </ol>
   <details class="serie-meny-fall">
-    <summary><span class="visually-hidden">{lektion ? 'Lektion' : 'Du är på'}</span> {har}</summary>
+    <summary><span class="visually-hidden">{lektion ? ord.en.charAt(0).toLocaleUpperCase('sv') + ord.en.slice(1) : 'Du är på'}</span> {har}</summary>
     <ol>
-      <li><a href={`${bas}/${serie.id}`} aria-current={lektion ? undefined : 'page'}>Översikt och lektionsbank</a></li>
+      <li><a href={`${bas}/${serie.id}`} aria-current={lektion ? undefined : 'page'}>{ord.oversikt}</a></li>
       {serie.lektioner.map((l) => (
-        <li><a href={`${bas}/${l.id}`} aria-current={lektion?.id === l.id ? 'page' : undefined}><span class="serie-nr" aria-hidden="true">{l.formaga}</span>{l.namn}</a></li>
+        <li><a href={`${bas}/${l.id}`} aria-current={lektion?.id === l.id ? 'page' : undefined}>{ord.numrerad && <span class="serie-nr" aria-hidden="true">{l.formaga}</span>}{l.namn}</a></li>
       ))}
     </ol>
   </details>

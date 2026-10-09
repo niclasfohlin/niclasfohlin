@@ -11,9 +11,9 @@ import {
 import { arbetsformRad, arEttKort, arProtokoll, arskursText, datumText, ejBryt, etikettOchText, laskortKolumn, laskortRubrik, lathundFakta, lathundForm, metaRad, metodAdress, passOrd, passOversikt, passTextKort, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost, type PassOrd } from './metod';
 import { brakDelar, delnamn, kortInfo, lage, STANDARD_NAMNARE, talrutansMatt, type KortInfo, type Mall } from './brak';
 import { andikaBredd, bagSvg, utanStod } from './lasflyt';
-import type { MetodPostISerie, SerieKoppling } from './serie';
+import { platsISerien, type MetodPostISerie, type SerieKoppling } from './serie';
 import { ANDIKA_ADRESS, ELEVTYPSNITT, VIK_TEXT, arBildlista, bildFor as bildForOrd, bildlistansNamn, harElevtypsnitt, kartCeller, kortCeller, ljudenheter, ljudform, arDelark, type KartCell } from './ljudkort';
-import { arElevensBlad, harFragor, lastexter, protokollDelas, textlangd, type Lastext } from './ramform';
+import { arElevensBlad, harFragor, lastexter, protokollDelas, strukturAv, textlangd, textparAv, textparLarare, type Lastext, type Struktur, type Textpar } from './ramform';
 import { FILM_UPPHOV, filmerVid, huvudfilm, metodensFilmer, stegDelar, stillbilder, STILLBILD_MATT, type FilmPlats, type MetodFilm } from './film';
 import { reservNyckel } from './reservbild';
 import { arkAdress, mallEtiketter, mallRutor as mallRutorAdresser, rutansText, serieAdress, svgMatt } from './bildserier';
@@ -25,7 +25,7 @@ import * as SAGA from './sagoform.js';
 import { arTarning, harBoktypsnitt, SAGO_UPPHOV, sagoBilder, sagobladAv, tarningAv, type Sagoblad, type Sagofalt, type Station, type Tarning } from './sagoblad';
 import WORDSKALOR from '../data/lathund-word.json';
 import TECKENBREDD from '../data/teckenbredd.json';
-import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, RAMHOJD, TITEL_PT, boksidansMatt } from './boksida';
+import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, FORMLUFT, FORMRAD_PT, RAMHOJD, TITEL_PT, boksidansMatt, strukturMatt, textparMatt } from './boksida';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
 const FARG = {
@@ -675,6 +675,7 @@ function bokRuns(text: string, bas: IRunOptions): TextRun[] {
 // Knappen med nivån i sidfoten: vit text i Cinzel på nivåns färg, med luft på båda sidor. På kartläggningens blad står
 // bara nivån, och raden Till läraren säger före eller efter.
 function nivaKnapp(b: Boksektion): TextRun[] {
+  if (!b.niva) return [];
   const knapp = { font: BOKTYPSNITT, color: 'FFFFFF', shading: { type: ShadingType.CLEAR, fill: b.farg, color: 'auto' } };
   const vad = /^kartläggning/i.test(b.vad) ? [] : [new TextRun({ text: '  ·  ', size: 19, ...knapp }), new TextRun({ text: b.vad, size: b.vad.length > 8 ? 15 : 17, ...knapp })];
   return [new TextRun({ text: '  ', size: 19, ...knapp }), new TextRun({ text: b.niva.toUpperCase(), size: 19, ...knapp }), ...vad, new TextRun({ text: '  ', size: 19, ...knapp })];
@@ -774,6 +775,127 @@ function boksida(l: Lastext): Barn[] {
     ],
   });
   return [punktStycke(), dubbelRam(BOKBREDD, ram, () => sidan)];
+}
+
+// ---------------------------------------------------------------- två texter och strukturen
+// Elevens sida till två texter och en kooperativ struktur på ett A4 (Texttyper i grupp, src/lib/ramform.ts textparAv och
+// strukturAv), ett till ett med metodriggens build-docx.js (textpar och struktur), som Niclas granskade 2026-10-09. Båda
+// har boksidans form: den dubbla ramen, titeln i Cinzel med den röda dubbla linjen och en rad till eleven i Andika 15 pt.
+// Elevens sida har de två texterna i var sin spalt med numret och namnet överst och frågorna att prata om under en tunn
+// linje; strukturen har bilden På bordet, stegen under Så gör ni och rutan om vad strukturen tränar, med en tunn röd
+// kant. Storleken och bilden räknas i src/lib/boksida.ts, som sidans utskrift också använder. Sidfoten bär ramens namn
+// eller rutan Till läraren, och sidhuvudet upphovet.
+const formbyte = (not: string) => new Sektionsbyte(false, { not, niva: '', vad: '', farg: '' });
+// Ett stycke i en form: en rad per rad, med **fet** och *kursiv*.
+function formRuns(text: string, stil: IRunOptions): TextRun[] {
+  const barn: TextRun[] = [];
+  String(text).split('\n').forEach((rad, j) => { if (j) barn.push(new TextRun({ break: 1, size: stil.size })); if (rad) barn.push(...bokRuns(rad, stil)); });
+  return barn;
+}
+// Titeln i Cinzel med den röda dubbla linjen under, och raden till eleven, som på boksidan.
+function formTitel(titel: string, text: string, efterRaden: number): Paragraph[] {
+  const inreBredd = BOKBREDD - 2 * DUBBEL_GLAPP;
+  const luftI = FORMLUFT - DUBBEL_GLAPP;
+  const mitt = (bredd: number) => ({ left: Math.round((inreBredd - bredd) / 2), right: Math.round((inreBredd - bredd) / 2) });
+  const rod = { style: BorderStyle.SINGLE, size: 6, color: BOK.rod, space: 0 } as const;
+  return [
+    new Paragraph({ alignment: AlignmentType.CENTER, outlineLevel: 1, indent: { left: luftI, right: luftI }, spacing: { before: 200, after: 60, line: 240 },
+      children: [new TextRun({ text: titel, font: BOKTYPSNITT, size: TITEL_PT * 2, color: BOK.titel })] }),
+    punktStycke({ indent: mitt(2000), spacing: { before: 0, after: 0, line: 240 }, border: { bottom: rod } }),
+    punktStycke({ indent: mitt(1970), spacing: { before: 0, after: 240, line: 147 }, border: { bottom: rod } }),
+    ...(text ? [new Paragraph({ alignment: AlignmentType.CENTER, indent: { left: luftI, right: luftI }, spacing: { before: 0, after: efterRaden, line: 230 }, children: formRuns(text, { size: FORMRAD_PT * 2, color: BOK.text, font: ELEVTYPSNITT }) })] : []),
+  ];
+}
+const formCentrerat = (text: string, o: { size: number; efter?: number; fore?: number }) => new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: o.fore ?? 0, after: o.efter ?? 0, line: 240 }, children: [new TextRun({ text, font: BOKTYPSNITT, size: o.size, color: BOK.rod })] });
+// En numrerad rad (en fråga eller ett steg): numret och texten efter en tabb, så att en rad på två rader står under sin början.
+function formNumrerad(texter: string[], o: { size: number; line: number; efter: number; ihop: 'alla' | 'mellan' }): Paragraph[] {
+  const luftI = FORMLUFT - DUBBEL_GLAPP;
+  const elev: IRunOptions = { size: o.size, color: BOK.text, font: ELEVTYPSNITT };
+  return texter.map((t, i) => new Paragraph({
+    indent: { left: luftI + 480, right: luftI, hanging: 480 }, tabStops: [{ type: TabStopType.LEFT, position: luftI + 480 }], keepLines: true,
+    keepNext: o.ihop === 'alla' || i < texter.length - 1, spacing: { after: o.efter, line: o.line },
+    children: [new TextRun({ text: `${i + 1}.`, ...elev }), new TextRun({ children: [new Tab()], size: o.size }), ...formRuns(t, elev)],
+  }));
+}
+const FORM_INGEN = { style: BorderStyle.NONE, size: 0, color: 'auto' } as const;
+const FORM_RAM = { style: BorderStyle.SINGLE, size: 12, color: BOK.ram } as const;
+const FORM_SKILJARE = { style: BorderStyle.SINGLE, size: 4, color: BOK.skiljare } as const;
+const FORM_UTAN = { top: FORM_INGEN, bottom: FORM_INGEN, left: FORM_INGEN, right: FORM_INGEN, insideHorizontal: FORM_INGEN, insideVertical: FORM_INGEN };
+const FORM_NOLL = { top: 0, bottom: 0, left: 0, right: 0 };
+const formCell = (barn: Barn[], o: { bredd: number; span?: number; kanter: Record<'top' | 'bottom' | 'left' | 'right', IBorderOptions>; marginaler?: typeof FORM_NOLL }) =>
+  new TableCell({ width: { size: o.bredd, type: WidthType.DXA }, columnSpan: o.span, borders: o.kanter, margins: o.marginaler ?? FORM_NOLL, children: barn });
+// En kort linje mitt på raden: den tunna mellan delarna.
+const formLinje = (bredd: number, fore: number, efter: number) => {
+  const inreBredd = BOKBREDD - 2 * DUBBEL_GLAPP;
+  return punktStycke({ indent: { left: Math.round((inreBredd - bredd) / 2), right: Math.round((inreBredd - bredd) / 2) }, spacing: { before: fore, after: efter, line: 240 }, border: { bottom: { ...FORM_SKILJARE, space: 1 } } });
+};
+
+// Elevens sida till två texter. Ryms texterna och frågorna inte ens i 14 punkter stannar bygget.
+function textpar(p: Textpar): Barn[] {
+  const matt = textparMatt(p);
+  if (!matt.ryms) throw new Error(`Två texter ”${p.titel}” (${p.not}) ryms inte på ett A4, inte ens i 14 punkter. Korta texterna eller frågorna (src/lib/boksida.ts, textparMatt).`);
+  const { size, line, spaltH, restH, spaltW, inne } = matt;
+  const inreBredd = BOKBREDD - 2 * DUBBEL_GLAPP;
+  const luftI = FORMLUFT - DUBBEL_GLAPP;
+  const elev: IRunOptions = { size, color: BOK.text, font: ELEVTYPSNITT };
+  const spalt = (k: number) => [
+    formCentrerat(String(k + 1), { size: 40 }),
+    formCentrerat(p.kolumner[k] ?? '', { size: 21, efter: 200 }),
+    ...String(p.texter[k] ?? '').split('\n\n').map((st, j, alla) => new Paragraph({ spacing: { before: 0, after: j < alla.length - 1 ? 150 : 0, line }, children: formRuns(st, elev) })),
+  ];
+  const sidan = new Table({
+    width: { size: inreBredd, type: WidthType.DXA }, columnWidths: [spaltW, inreBredd - spaltW], layout: TableLayoutType.FIXED, borders: FORM_UTAN,
+    rows: [
+      new TableRow({ children: [formCell(formTitel(p.titel, p.text, 360), { bredd: inreBredd, span: 2, kanter: { top: FORM_RAM, left: FORM_RAM, right: FORM_RAM, bottom: FORM_INGEN } })] }),
+      new TableRow({ height: { value: spaltH, rule: HeightRule.ATLEAST }, children: [
+        formCell(spalt(0), { bredd: spaltW, kanter: { top: FORM_INGEN, left: FORM_RAM, right: FORM_SKILJARE, bottom: FORM_INGEN }, marginaler: { top: 0, bottom: 0, left: luftI, right: inne } }),
+        formCell(spalt(1), { bredd: inreBredd - spaltW, kanter: { top: FORM_INGEN, left: FORM_INGEN, right: FORM_RAM, bottom: FORM_INGEN }, marginaler: { top: 0, bottom: 0, left: inne, right: luftI } }),
+      ] }),
+      new TableRow({ height: { value: restH, rule: HeightRule.ATLEAST }, children: [formCell([
+        formLinje(5400, 100, 400),
+        formCentrerat('Frågor att prata om', { size: 26, efter: 200 }),
+        ...formNumrerad(p.fragor, { size, line, efter: 120, ihop: 'mellan' }),
+      ], { bredd: inreBredd, span: 2, kanter: { top: FORM_INGEN, left: FORM_RAM, right: FORM_RAM, bottom: FORM_RAM } })] }),
+    ],
+  });
+  return [punktStycke(), dubbelRam(BOKBREDD, FORM_RAM, () => sidan)];
+}
+
+// Strukturens sida, med bilden På bordet som hör till ramen. Ryms den inte ens i 12 punkter med bilden i 60 procent stannar
+// bygget.
+function struktur(s: Struktur, bild?: PaBordet): Barn[] {
+  const matt = strukturMatt(s, bild ? PABORDET_MATT : undefined);
+  if (!matt.ryms) throw new Error(`Strukturen ”${s.titel}” ryms inte på ett A4, inte ens i 12 punkter och med bilden i 60 procent. Korta stegen eller rutan (src/lib/boksida.ts, strukturMatt).`);
+  const { size, line, rutaPt, bildB, bildH, restH } = matt;
+  const inreBredd = BOKBREDD - 2 * DUBBEL_GLAPP;
+  const luftI = FORMLUFT - DUBBEL_GLAPP;
+  const bilden = bild ? [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 200 }, children: [bildRun(bild.adress, Math.round(((bildB / 20) * 4) / 3), `På bordet: ${bild.bild.rubrik}. ${bild.bild.text}`, Math.round(((bildH / 20) * 4) / 3))] })] : [];
+  // Rutan: ett stycke med kant runt om, med rubriken i Cinzel och texten i elevens typsnitt, så att den ser likadan ut i
+  // Word och i Google Dokument.
+  const kant = { style: BorderStyle.SINGLE, size: 8, color: BOK.rod, space: 8 } as const;
+  const rutStorlek = Math.round(rutaPt * 2);
+  const rutan = new Paragraph({
+    indent: { left: luftI + 300, right: luftI + 300 }, spacing: { before: 200, after: 200, line: 240 }, keepLines: true,
+    border: { top: kant, bottom: kant, left: kant, right: kant },
+    children: [
+      new TextRun({ text: s.rutaRubrik, font: BOKTYPSNITT, size: rutStorlek, color: BOK.rod }),
+      ...s.ruta.flatMap((x) => [new TextRun({ break: 1, size: rutStorlek }), ...formRuns(x, { size: rutStorlek, color: BOK.text, font: ELEVTYPSNITT })]),
+    ],
+  });
+  const sidan = new Table({
+    width: { size: inreBredd, type: WidthType.DXA }, columnWidths: [inreBredd], layout: TableLayoutType.FIXED, borders: FORM_UTAN,
+    rows: [
+      new TableRow({ children: [formCell(formTitel(s.titel, s.text, 240), { bredd: inreBredd, kanter: { top: FORM_RAM, left: FORM_RAM, right: FORM_RAM, bottom: FORM_INGEN } })] }),
+      new TableRow({ height: { value: restH, rule: HeightRule.ATLEAST }, children: [formCell([
+        ...bilden,
+        formLinje(5400, 0, 200),
+        formCentrerat('Så gör ni', { size: 26, efter: 160 }),
+        ...formNumrerad(s.steg, { size, line, efter: 100, ihop: 'alla' }),
+        rutan,
+      ], { bredd: inreBredd, kanter: { top: FORM_INGEN, left: FORM_RAM, right: FORM_RAM, bottom: FORM_RAM } })] }),
+    ],
+  });
+  return [punktStycke(), dubbelRam(BOKBREDD, FORM_RAM, () => sidan)];
 }
 
 // ---------------------------------------------------------------- sagobladen och tärningen
@@ -1041,6 +1163,17 @@ function sidaInnehall(b: Sagoblad, w: number, hojdMm: number): Barn[] {
       ? [new TableCell({ width: { size: kolA, type: WidthType.DXA }, rowSpan: 2, borders: SAGA_INGA, margins: SAGA_NOLL, children: [sagoBild(anfang, 2 * radMm - 0.5, 2 * radMm - 0.5, 'En ruta för den första bokstaven', { align: AlignmentType.LEFT })] }), sagoSkrivrad(w - kolA, { size: 28 })]
       : j === 1 ? [sagoSkrivrad(w - kolA, { size: 28 })] : [sagoSkrivrad(w, { span: 2, size: 28, vanster: 40 })] }));
     ut.push(sagoTabell(w, [kolA, w - kolA], rows));
+  }
+  // Fälten efter texten, som brevpapperets fråga till läsaren, svarsdag och hälsning (Texttyp: Beskrivande text, ur
+  // riggens sidaInnehall 2026-10-08, där tre rundor såg att de föll bort): etiketten i rött på den första raden och fler
+  // rader under, i fältets höjd ur elevblad.
+  const efter = b.falt.filter((f) => f !== titel && f !== rutan && f !== texten);
+  if (efter.length) {
+    const ew = mmTw(Math.max(30, ...efter.map((f) => Math.ceil(SAGA.textBredd(f.rubrik, 'andika', (ETIKETT / 2) * PT_MM)) + 4)));
+    const rows = efter.flatMap((f) => Array.from({ length: raderAv(f.cm, radMm) }, (_, j) => new TableRow({ cantSplit: true, height: { value: radTw, rule: HeightRule.EXACT }, children: j === 0
+      ? [new TableCell({ width: { size: ew, type: WidthType.DXA }, verticalAlign: VerticalAlign.BOTTOM, borders: SAGA_INGA, margins: { top: 0, bottom: 15, left: 0, right: 80 }, children: [new Paragraph({ spacing: { before: 0, after: 0, line: 240 }, children: [new TextRun({ text: f.rubrik, font: ELEVTYPSNITT, size: ETIKETT, color: SF.rod })] })] }), sagoSkrivrad(w - ew, { size: 28 })]
+      : [sagoSkrivrad(w, { span: 2, size: 28, vanster: 40 })] })));
+    ut.push(punktStycke({ spacing: { before: 0, after: 120, line: 240 } }), sagoTabell(w, [ew, w - ew], rows));
   }
   return [...ut, punktStycke()];
 }
@@ -1724,7 +1857,7 @@ function faktaTabell(d: MetodData, serie?: SerieKoppling): Barn[] {
   // långt (Bråkkurs i grupp, 2026-09-30).
   const korta: [string, string][] = [];
   const langa: [string, string][] = [];
-  if (serie?.lektion) langa.push(['Hör till', `${serie.serie.titel}, förmåga\u00a0${serie.lektion.formaga}\u00a0av\u00a0${serie.serie.formagor.length}: ${serie.formaga?.namn ?? ''}`]);
+  if (serie?.lektion) langa.push(['Hör till', `${serie.serie.titel}, ${platsISerien(serie.serie, serie.formaga)}`]);
   korta.push(['Område', d.omrade], ['Årskurs', arskursText(d)]);
   if (d.format.length) korta.push(['Format', d.format.join(', ')]);
   if (d.tid) korta.push(['Tid', d.tid]);
@@ -1768,8 +1901,10 @@ function lektionsbankBarn(serie: SerieKoppling['serie']): Barn[] {
   const bredder = [2300, 4200, BREDD - 6500];
   const ut: Barn[] = [h2(serie.rubrik)];
   if (serie.text) ut.push(stycke(serie.text, { hallIhop: true }));
-  const rader = serie.formagor.map((f) => [`${f.nr} · ${f.namn}`, f.lektioner.map((l) => `${l.namn}: ${l.tranar}`).join('\n') || 'Ingen lektion ännu', f.skal ?? '']);
-  ut.push(...rubrikTabell(['Förmåga', 'Lektionerna och vad eleven tränar', 'Skälet till platsen'], rader, bredder, { radrubrik: false }));
+  // Seriens ord (src/lib/serie.ts, serieOrd): en serie av kurser har en kurs per rad och inga nummer.
+  const { ord } = serie;
+  const rader = serie.formagor.map((f) => [ord.numrerad ? `${f.nr} · ${f.namn}` : f.namn, f.lektioner.map((l) => `${l.namn}: ${l.tranar}`).join('\n') || `Ingen ${ord.en} ännu`, f.skal ?? '']);
+  ut.push(...rubrikTabell([ord.grupp, ord.kolumn, ord.skalRubrik], rader, bredder, { radrubrik: false }));
   if (serie.not) ut.push(...ruta('', serie.not));
   return ut;
 }
@@ -1991,10 +2126,28 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
     const ramensRubrik = (ram: Ram, nySida = false) => new Paragraph({ children: [run(ram.rubrik)], heading: HeadingLevel.HEADING_3, keepNext: true, pageBreakBefore: nySida || undefined, spacing: { before: 240, after: 80 } });
     // En ram, där den står. ram är ramen som den ritas: en ram vars listor står vid veckorna ritas utan dem.
     const enRam = (i: number, ram: Ram): void => {
+      // Två texter (textparAv i src/lib/ramform.ts): lärarens sida, ramen med texterna och rutorna men utan frågorna och
+      // med en rad om elevens sida, och sedan elevens sida på ett eget A4 (textpar()).
+      const par = textparAv(ram);
+      if (par) {
+        enRam(i, textparLarare(ram));
+        ut.push(formbyte(par.not), ...textpar(par), new Sektionsbyte(false));
+        return;
+      }
       // Ramen som står direkt efter den sista veckans material börjar på en ny sida: veckans kort fyller sin sida och
       // kopieras till eleverna, och lärarens text ska inte hamna längst ned på den.
       const forstEfterVeckorna = efterVeckorna;
       efterVeckorna = false;
+      // En kooperativ struktur (strukturAv) är en sida på ett eget A4 med den första bilden På bordet som hör till ramen
+      // (struktur()). Fler bilder till ramen, som bild A och bild B i Lika och olika, står efter sidan.
+      const st = strukturAv(ram);
+      if (st) {
+        const [bild, ...fler] = paBordetVid(bilderPaBordet, { ram: ram.rubrik });
+        ut.push(formbyte(st.not || ram.rubrik), ...struktur(st, bild), new Sektionsbyte(false));
+        for (const b of fler) ut.push(...pabordetBarn(b));
+        for (const f of filmerVid(filmer, { ram: ram.rubrik })) ut.push(...filmBarn(f));
+        return;
+      }
       // En lästext är en boksida på en egen sida, med titeln i boken i stället för en rubrik (boksida()).
       const lastext = boksidor.get(ram);
       if (lastext) {
@@ -2156,6 +2309,28 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
     const ramensSidor = (i: number, ram: Ram): Flod[] => {
       const ut: Flod[] = [];
       const tom = ramArTom(ram);
+      // Två texter: lärarens sida och elevens sida på ett eget A4 (textpar()), och en kooperativ struktur: sidan med
+      // bilden, och fler bilder till ramen (bild A och bild B) på en sida efter (struktur()). I filen med allt står de
+      // redan i beskrivningen.
+      const par = textparAv(ram);
+      if (par) {
+        if (o.baraTommaRamar) return ut;
+        ut.push(...ramensSidor(i, textparLarare(ram)));
+        const sida: Flod = [formbyte(par.not), ...textpar(par)];
+        bladsidor.add(sida);
+        ut.push(sida);
+        return ut;
+      }
+      const st = strukturAv(ram);
+      if (st) {
+        if (o.baraTommaRamar) return ut;
+        const [bild, ...fler] = paBordetVid(paBordet, { ram: ram.rubrik });
+        const sida: Flod = [formbyte(st.not || ram.rubrik), ...struktur(st, bild)];
+        bladsidor.add(sida);
+        ut.push(sida);
+        if (fler.length) ut.push(fler.flatMap((b) => pabordetBarn(b)));
+        return ut;
+      }
       // En lästext är en boksida, som eleven läser (boksida()). Sidfoten och sidhuvudet bär upphovet, så sidan får ingen
       // upphovsrad. I filen med allt står den redan i beskrivningen.
       const lastext = boksidor.get(ram);
@@ -2938,7 +3113,7 @@ function lathundBarn(post: MetodPost, o: { niva1?: boolean; skalor?: number[]; b
       ],
       () => {
         const bredder = [1300, BREDD - 1300];
-        const huvud = rad(['Tid', 'Vad händer'].map((k, i) => cell([new Paragraph({ children: [textRun({ text: k, font: MONO, size: 16, allCaps: true, color: FARG.vit })], spacing: { after: 0 } })], { bredd: bredder[i], fyll: FARG.text, kanter: runt(kant(FARG.text)) })), { huvud: true });
+        const huvud = rad(l.pass.schema.kolumner.map((k, i) => cell([new Paragraph({ children: [textRun({ text: k, font: MONO, size: 16, allCaps: true, color: FARG.vit })], spacing: { after: 0 } })], { bredd: bredder[i], fyll: FARG.text, kanter: runt(kant(FARG.text)) })), { huvud: true });
         const kropp = l.pass.schema.rader.map((r, i) => rad([
           cell([new Paragraph({ children: [textRun({ text: r.tid, font: MONO, size: 18, bold: true, color: FARG.svag })], spacing: { after: 0 } })], { bredd: bredder[0], fyll: i % 2 === 1 ? FARG.rand : undefined }),
           cell([

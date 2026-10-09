@@ -67,6 +67,12 @@ utkast: true
 #       namn: Rim
 #       skal: Varför förmågan står här i ordningen.
 #   not: Vad som gäller när gruppen går vidare.
+#   # En serie där varje barn är en hel kurs (Texttyper i grupp) har bankens ord: kurser i stället för lektioner, sitt
+#   # eget ord för förmågan, sin rubrik över skälen i Word och inga nummer framför namnen.
+#   slag: kurser                       # lektioner (förval) eller kurser
+#   grupp: Texttyp                     # förval Förmåga
+#   skalRubrik: Det texten gör för läsaren   # förval Skälet till platsen
+#   numrerad: false                    # förval true
 
 # Modellen. Rubrikerna har standardvärden där de inte anges (se src/content.config.ts).
 inledning:
@@ -240,6 +246,12 @@ ramar:
       # efter behov. Fältens text är frågan och, efter en radbrytning, startorden. Sidan hänvisar till planeringsmallarna.
       # sagoform: { form: vag, ram: lindorm, titel: Sagans väg, undertitel: fyra steg, bilder: [stjärna, vägspärr, glödlampa, regnbåge], sidor: 2 }
       # På formen sida står ramens huvud (Skriven av) som namnrader under titeln, och en sida utan fältet Titel får bara rader.
+      # Två texter (Texttyper i grupp): en ram vars första lista har två kolumner och en rad, de två texterna sida vid sida,
+      # och vars andra lista heter Frågorna, med tre till fem frågor. Den får elevens sida, en boksida med texterna i två
+      # spalter och frågorna under, efter lärarens sida (METODER.md under Modellen).
+      # Strukturen (Texttyper i grupp): en ram som heter "Strukturen, <var>: <namn>", med listorna Så gör ni (fyra till
+      # nio steg) och rutan om vad strukturen tränar (en eller två rader), och en bild På bordet med efter "ram: <ramens
+      # rubrik>". Den blir en boksida på ett A4 med bilden, stegen och rutan.
       # serie: en bildserie ur metodens scenfil src/data/bildserier/<metodens id>.json (Seriesamtal), ritad i kod. Flera
       # rutor blir elevens blad efter delarna (liggande A4 i Word), en enda ruta står stort under texten. Fältet Ruta 1 i
       # delarna blir rutans alternativtext. ark: bubblor ger arket att klippa ut efter delarna.
@@ -360,6 +372,8 @@ lathund:
     # schema är tidsschemat minut för minut: samma faser i samma ordning och samma tider (Före passet blir
     # Före, "min" stryks), med "N · " framför de faser som är steg och numren i följd från 1. Bygget stannar
     # annars (content.config.ts), så att lathunden aldrig säger emot sidan.
+    # kolumner när raderna inte är minuter, som de sju stegen när läraren tänker högt i Texttyper i grupp (förval Tid
+    # och Vad händer): kolumner: [Nr, Du gör och säger högt]
     schema:
       rubrik: 30 minuter, steg för steg
       rader:

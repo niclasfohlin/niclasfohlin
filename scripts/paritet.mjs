@@ -28,6 +28,7 @@ const MINST = 25;
 const UNDANTAG = [
   { vag: /^(taggar|relaterade|serie|omrade|arskurs|format|utkast|uppdaterad|publicerad)(\.|$)/, word: false, utskrift: false, skal: 'register, id och datum, som sidan visar i annan form' },
   { vag: /^tranar$/, word: false, utskrift: false, skal: 'står i den generella metodens lektionsbank, inte i lektionen' },
+  { vag: /^lektionsbank\.skalRubrik$/, utskrift: false, skal: 'rubriken över skälen i Word-filens tabell; sidan visar banken som kort, med skälet i varje kort' },
   { vag: /^(kort|elevblad)(\.|$)/, word: false, utskrift: false, skal: 'pekar ut listor och fält; texterna prövas där de står, under ramar' },
   { vag: /^(film|filmer\.\d+)\.(titel|beskrivning)$/, word: false, utskrift: false, skal: 'filmens namn och textalternativ på skärmen; stillbildernas texter prövas' },
   { vag: /^filmer\.\d+\.efter$/, word: false, utskrift: false, skal: 'filmens plats; platsen prövas nedan' },
@@ -144,6 +145,16 @@ const arLastext = (ram) => {
   return !!m && (ram.listor ?? []).length === 2 && text.rubrik === m[3] && fragor.rubrik === 'Frågorna' && !text.kolumner && !fragor.kolumner && !ram.huvud && !ram.oversikt;
 };
 
+// En kooperativ struktur (strukturAv i src/lib/ramform.ts, samma regel) är en sida med strukturens namn som titel och den
+// första bilden På bordet som hör till ramen, utan rubrik och bildtext, som i metodriggens kompendium: bildens rubrik och
+// text står i dess textalternativ, alt på sidan och descr i Word. Ramens rubrik står i Word som namnet, och "Strukturen,
+// vecka 1" bara på sidan, för skärmläsaren. Fler bilder till ramen (bild A och bild B) står som andra bilder På bordet.
+const arStruktur = (ram) => {
+  const [steg, ruta] = ram.listor ?? [];
+  return /^Strukturen, [^:]+: .+$/.test(String(ram.rubrik ?? '')) && (ram.listor ?? []).length === 2 && steg.rubrik === 'Så gör ni' && !steg.kolumner && !ruta.kolumner
+    && steg.rader.length >= 4 && steg.rader.length <= 9 && ruta.rader.length >= 1 && ruta.rader.length <= 2 && !ram.huvud && !ram.oversikt && !ram.sagoform;
+};
+
 function texter(x, vag, ut, minst = MINST) {
   if (typeof x === 'string') { if (x.length >= minst && /\p{L}/u.test(x)) ut.push({ vag, text: x }); }
   else if (Array.isArray(x)) x.forEach((y, i) => texter(y, `${vag}.${i}`, ut, minst));
@@ -193,14 +204,27 @@ for (const fil of filer) {
   const nivaNamn = new Set((d.nivaer ?? []).map((x) => x.namn));
   const raknebladsRubrik = (vag) => { const m = vag.match(/^ramar\.ramar\.(\d+)\.listor\.(\d+)\.rubrik$/); return !!m && !!d.ramar?.ramar?.[m[1]]?.listor?.[m[2]]?.rakneblad; };
   const medNivanForst = (t) => { const led = t.split(' · '); const i = led.findIndex((x) => nivaNamn.has(x.trim())); return i < 0 ? t : `${led[i].trim()} ${led.filter((_, j) => j !== i).join(' · ')}`; };
+  // Strukturernas sidor: rubriken i Word som namnet, och den första bilden På bordet till ramen i textalternativet.
+  const strukturRubrik = new Map((d.ramar?.ramar ?? []).flatMap((r, i) => (arStruktur(r) ? [[`ramar.ramar.${i}.rubrik`, norm(String(r.rubrik).replace(/^Strukturen, [^:]+: /, ''))]] : [])));
+  const strukturBilder = new Set((d.ramar?.ramar ?? []).filter(arStruktur).flatMap((r) => { const b = (d.pabordet ?? []).find((x) => x.efter === `ram: ${r.rubrik}`); return b ? [b.nr] : []; }));
+  const altWord = new Set([...xml.matchAll(/\bdescr="([^"]*)"/g)].map((m) => norm(avkoda(m[1]))));
+  const altSida = new Set([...readFileSync(sida, 'utf8').matchAll(/\balt="([^"]*)"/g)].map((m) => norm(avkoda(m[1]))));
   const saknas = [];
+  for (const nr of strukturBilder) {
+    const b = d.pabordet.find((x) => x.nr === nr);
+    const alt = norm(`På bordet: ${b.rubrik}. ${b.text}`);
+    if (!altWord.has(alt) || !altSida.has(alt)) saknas.push(`    bilden På bordet ${nr} (${b.rubrik}) på strukturens sida: textalternativet med rubriken och bildtexten saknas i ${[!altWord.has(alt) && 'Word-filen', !altSida.has(alt) && 'sidan'].filter(Boolean).join(' och ')}`);
+  }
   for (const { vag, text } of texter(d, '', [])) {
     if (lastextRader.some((r) => r.test(vag))) continue;
+    // Strukturens bild prövas ovan, i textalternativet.
+    const pb = vag.match(/^pabordet\.(\d+)\.(rubrik|text)$/);
+    if (pb && strukturBilder.has(d.pabordet[Number(pb[1])].nr)) continue;
     const u = UNDANTAG.find((x) => x.vag.test(vag));
     // Arbetsformens delar står i remsan och på lathunden utan sitt nummer ("4. I tur och ordning igen" blir "I tur och
     // ordning igen", passOversikt och arbetsformRad i src/lib/metod.ts), så numret prövas inte (Kompissamtal 2026-10-03).
     const n = norm(/^arbetsform\.delar\.\d+\.rubrik$/.test(vag) ? text.replace(/^\d+\.\s*/, '') : raknebladsRubrik(vag) ? medNivanForst(text) : text);
-    const iWord = u?.word === false || word.includes(n) || !!lastextRubrik.get(vag)?.every((del) => word.includes(del))
+    const iWord = u?.word === false || word.includes(n) || !!lastextRubrik.get(vag)?.every((del) => word.includes(del)) || (strukturRubrik.has(vag) && word.includes(strukturRubrik.get(vag)))
       || (sagofalt.has(vag) && text.split('\n').every((del) => word.includes(norm(del))));
     const iUtskrift = u?.utskrift === false || tommaRamar.some((r) => r.test(vag)) || tarningar.some((r) => r.test(vag)) || utskrift.includes(n);
     provade++;
@@ -220,7 +244,9 @@ for (const fil of filer) {
   const rubrikerWord = allaWord.filter((r) => iBada.has(r.text));
   const rubrikerUtskrift = tryckt.rubriker.filter((r) => iBada.has(r.text));
   const avsnittFore = (rubriker, pos) => rubriker.filter((r) => r.plats < pos).at(-1)?.text ?? 'början';
-  const langa = texter(d, '', []).filter(({ vag }) => !UNDANTAG.some((x) => x.vag.test(vag))).map(({ text }) => norm(text));
+  // Strukturens ruta Till läraren står i sidfoten i Word och under ramen på sidan, så den räknas inte som texten före en bild.
+  const strukturDelar = (d.ramar?.ramar ?? []).map((r, i) => (arStruktur(r) ? new RegExp(`^ramar\\.ramar\\.${i}\\.delar\\.`) : null)).filter(Boolean);
+  const langa = texter(d, '', []).filter(({ vag }) => !UNDANTAG.some((x) => x.vag.test(vag)) && !strukturDelar.some((r) => r.test(vag))).map(({ text }) => norm(text));
   const textFore = (doc, pos) => {
     let bast = { text: 'början', slut: -1 };
     for (const n of langa) { const i = doc.lastIndexOf(n, pos - n.length); if (i >= 0 && (i + n.length > bast.slut || (i + n.length === bast.slut && n.length > bast.text.length))) bast = { text: n, slut: i + n.length }; }
@@ -249,6 +275,7 @@ for (const fil of filer) {
   // metodens fil i Word-filen och i utskriften. Bilden hittas genom sin rubrik och bildtext, som följer varandra i båda
   // (bilden själv är ingen text); efter en vecka står bara bildtexten, som börjar med På bordet.
   for (const b of d.pabordet ?? []) {
+    if (strukturBilder.has(b.nr)) continue;
     const namn = `bilden På bordet ${b.nr} (${b.rubrik})`;
     const nyckel = norm(`På bordet ${/^del:/.test(b.efter ?? '') ? '' : b.rubrik} ${b.text}`);
     const pW = word.indexOf(nyckel);

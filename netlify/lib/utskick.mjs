@@ -30,7 +30,7 @@ export function brev(nya, sajt) {
     <p style="margin:0 0 4px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;font-size:14px;color:#5a635e;">${html(p.etikett)}</p>
     <h2 style="margin:0 0 8px;font-size:22px;line-height:1.25;"><a href="${sajt}${p.url}" style="color:#18221d;text-decoration:none;">${html(p.titel)}</a></h2>
     <p style="margin:0 0 12px;">${html(p.ingress)}</p>${p.lektioner?.length ? `
-    <p style="margin:0 0 12px;">${p.lektioner.length === 1 ? 'Med lektionen' : `Med ${p.lektioner.length} lektioner`}: ${p.lektioner.map((l) => lank(l, l.namn ?? l.titel)).join(', ')}.</p>` : ''}
+    <p style="margin:0 0 12px;">${p.lektioner.length === 1 ? `Med ${p.lektioner[0].ord?.den ?? 'lektionen'}` : `Med ${p.lektioner.length} ${p.lektioner[0].ord?.flera ?? 'lektioner'}`}: ${p.lektioner.map((l) => lank(l, l.namn ?? l.titel)).join(', ')}.</p>` : ''}
     <p style="margin:0 0 28px;">${lank(p, 'Läs på niclasfohlin.se')}</p>`).join('');
   return `<!doctype html>
 <html lang="sv"><body style="margin:0;padding:0;background:#f7f6f1;font-family:Georgia,'Times New Roman',serif;color:#18221d;">

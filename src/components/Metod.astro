@@ -15,9 +15,11 @@ import Bildlista from './Bildlista.astro';
 import Golvbokstaver from './Golvbokstaver.astro';
 import Serierutor from './Serierutor.astro';
 import { ANDIKA_ADRESS, arBildlista, harElevtypsnitt, ljudform, upphovBilder } from '../lib/ljudkort';
-import { arElevensBlad, lastexter, protokollDelas } from '../lib/ramform';
+import { arElevensBlad, lastexter, protokollDelas, strukturAv, textparAv, textparLarare, type Struktur as StrukturForm, type Textpar as TextparForm } from '../lib/ramform';
 import Filmruta from './Filmruta.astro';
 import Boksida from './Boksida.astro';
+import Struktur from './Struktur.astro';
+import Textpar from './Textpar.astro';
 import Ramindex from './Ramindex.astro';
 import { FILM_UPPHOV, filmerVid, metodensFilmer, stegDelar, type FilmPlats } from '../lib/film';
 import type { SerieKoppling } from '../lib/serie';
@@ -110,7 +112,7 @@ const avsnitt = [
   d.fastnar && { id: 'fastnar', namn: 'När det fastnar' },
   d.roll && { id: 'roll', namn: 'Lärarens roll' },
   d.urval && { id: 'urval', namn: urvalNamn(d.urval.rubrik) },
-  bank && { id: 'lektionsbank', namn: 'Lektionsbanken' },
+  bank && { id: 'lektionsbank', namn: bank.ord.meny },
   d.hem && { id: 'hem', namn: 'Hem och skola' },
   d.progression && { id: 'progression', namn: 'Progression' },
   d.uppfoljning && { id: 'uppfoljning', namn: 'Uppföljning' },
@@ -154,7 +156,7 @@ const vm = veckomaterial(d);
 const ramarna: SerieRam[] = d.ramar?.ramar ?? [];
 const listAnkare = new Map<string, string>();
 if (vm) for (const [ri, lagda] of vm.listor) for (const li of lagda.keys()) listAnkare.set(`${ri}-${li}`, ankare(ramarna[ri].listor![li].rubrik ?? `${ramarna[ri].rubrik} ${li + 1}`));
-type Punkt = { ram: SerieRam; ri: number; lage?: 'huvud' | 'vecka' | 'material'; vecka?: number; lista?: number; efter?: string };
+type Punkt = { ram: SerieRam; ri: number; lage?: 'huvud' | 'vecka' | 'material'; vecka?: number; lista?: number; efter?: string; par?: TextparForm };
 const punkter: Punkt[] = [];
 ramarna.forEach((ram, ri) => {
   if (!vm) { punkter.push({ ram, ri }); return; }
@@ -176,6 +178,15 @@ ramarna.forEach((ram, ri) => {
   // En film eller bild som står efter ramen med lektioner står efter den sista veckans material.
   punkter[punkter.length - 1].efter = ram.rubrik;
 });
+// Två texter (src/lib/ramform.ts, textparAv): ramen ritas som lärarens sida, med texterna och rutorna men utan frågorna och
+// med en rad om elevens sida, och elevens sida (Textpar.astro) står efter den, som i Word.
+for (const p of punkter) {
+  const par = p.lage ? null : textparAv(p.ram);
+  if (par) { p.par = par; p.ram = textparLarare(p.ram); }
+}
+// En kooperativ struktur (strukturAv) är en sida (Struktur.astro) med den första bilden På bordet som hör till ramen; fler
+// bilder till ramen (bild A och bild B i Lika och olika) står efter sidan, som i Word.
+const strukturer = new Map<SerieRam, StrukturForm>(ramarna.flatMap((r) => { const s = strukturAv(r); return s ? [[r, s] as [SerieRam, StrukturForm]] : []; }));
 const indexAnkare = { del: (nr: number, di: number) => delAnkare[nr - 1]?.[di], lista: (nr: number, li: number) => listAnkare.get(`${nr - 1}-${li}`) };
 // Lästexterna blir boksidor (Boksida.astro, K-148), med nivåns färg i den ordning nivåerna först kommer, som i Word.
 const boksidor = lastexter(d.ramar?.ramar ?? []);
@@ -537,10 +548,16 @@ const meny = [
       {/* Med fyra ramar eller fler (ett paket per årskurs, läslistorna, projekten, lästexterna) blir sidan lång: en
           ordnad lista med länkar till varje ram, där nivåerna fälls ut (Ramindex.astro, K-152). */}
       {d.ramar.ramar.length >= 4 && <Ramindex ramar={d.ramar.ramar} rubrik={d.ramar.rubrik} farger={BOKNIVA} ankare={indexAnkare} />}
-      {punkter.map(({ ram, ri, lage, vecka, lista, efter }) => boksidor.has(ram) ? (<>
+      {punkter.map(({ ram, ri, lage, vecka, lista, efter, par }) => boksidor.has(ram) ? (<>
         <Boksida l={boksidor.get(ram)!} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={BOKNIVA[boksidor.get(ram)!.nivaNr] ?? '#4b3a2f'} />
         <Filmruta filmer={[...vid({ ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
-      </>) : (<>
+      </>) : strukturer.has(ram) ? (() => {
+        const [bild, ...fler] = paBordetVid(bilderPaBordet, { ram: ram.rubrik });
+        return (<>
+          <Struktur s={strukturer.get(ram)!} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} bild={bild} />
+          <Filmruta filmer={[...fler, ...filmerVid(filmer, { ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
+        </>);
+      })() : (<>
         <section class={`m-ram${protokollDelas(ram) ? ' delad' : ''}${arLararsida(ram) ? ' m-lararsida' : ''}${lage === 'material' ? ' m-veckans' : ''}`} id={lage === 'vecka' ? undefined : lage === 'material' ? listAnkare.get(`${ri}-${lista}`) : `ram-${ri + 1}`}>
           {lage !== 'vecka' && lage !== 'material' && <h3 id={ramAnkare[ri]}>{hel(ram.rubrik)}</h3>}
           {ram.text.map((s) => <p>{s}</p>)}
@@ -694,6 +711,7 @@ const meny = [
             <p class="m-efter m-veckolank">Korten står vid sin vecka:{' '}{[...vm.listor.get(ri)!].map(([li, di], i) => <>{i > 0 && <span aria-hidden="true"> · </span>}<a href={`#${listAnkare.get(`${ri}-${li}`)}`}>{hel(vm.veckor[di].led)}</a></>)}</p>
           )}
         </section>
+        {par && <Textpar p={par} id={`ram-${ri + 1}-elev`} />}
         <Filmruta filmer={[...(lage ? [] : vid({ ram: ram.rubrik })), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
       </>))}
       {d.ramar.efter && <p class="m-efter">{d.ramar.efter}</p>}

@@ -6,16 +6,18 @@ interface Props { koppling: SerieKoppling }
 const { koppling } = Astro.props;
 const { serie, lektion, forra, nasta } = koppling;
 const bas = '/stodundervisning';
+const { ord } = serie;
+const versal = (s: string) => s.charAt(0).toLocaleUpperCase('sv') + s.slice(1);
 ---
 {lektion && (
-  <nav class="serie-fot" aria-label={`Lektionerna i ${serie.titel}`}>
+  <nav class="serie-fot" aria-label={`${versal(ord.de)} i ${serie.titel}`}>
     <p class="serie-bladdra">
       {forra
-        ? <a class="forra" href={`${bas}/${forra.id}`}><span class="serie-bladdra-etikett">Förra lektionen</span>{forra.namn}</a>
+        ? <a class="forra" href={`${bas}/${forra.id}`}><span class="serie-bladdra-etikett">Förra {ord.den}</span>{forra.namn}</a>
         : <a class="forra" href={`${bas}/${serie.id}`}><span class="serie-bladdra-etikett">Tillbaka till</span>{serie.titel}</a>}
       {nasta
-        ? <a class="nasta" href={`${bas}/${nasta.id}`}><span class="serie-bladdra-etikett">Nästa lektion</span>{nasta.namn}</a>
-        : <a class="nasta" href={`${bas}/${serie.id}#lektionsbank`}><span class="serie-bladdra-etikett">Alla lektioner</span>{serie.titel}</a>}
+        ? <a class="nasta" href={`${bas}/${nasta.id}`}><span class="serie-bladdra-etikett">Nästa {ord.en}</span>{nasta.namn}</a>
+        : <a class="nasta" href={`${bas}/${serie.id}#lektionsbank`}><span class="serie-bladdra-etikett">Alla {ord.flera}</span>{serie.titel}</a>}
     </p>
   </nav>
 )}

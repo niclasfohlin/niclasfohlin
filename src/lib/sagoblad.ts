@@ -5,7 +5,7 @@
 // tärningen), så att sajtens Word-fil och riggens kompendium har samma blad.
 import type { MetodData } from './metod';
 import { bildFor, kortCeller } from './ljudkort';
-import { harLastexter } from './ramform';
+import { harBoksidor } from './ramform';
 
 type Ram = NonNullable<MetodData['ramar']>['ramar'][number];
 type Lista = NonNullable<Ram['listor']>[number];
@@ -87,8 +87,9 @@ export function tarningAv(l: Lista, ram: Ram, d: Pick<MetodData, 'kort'>): Tarni
 export const SAGO_UPPHOV = 'Bilderna på bladen och tärningarna: Fluent Emoji, © Microsoft Corporation, MIT-licens.';
 export const harSagoform = (d: Pick<MetodData, 'ramar' | 'kort'>): boolean =>
   (d.ramar?.ramar ?? []).some((r) => !!r.sagoform || (r.listor ?? []).some((l) => arTarning(d, l)));
-// Cinzel och Cinzel Decorative i Word-filen: boksidorna och sagobladen.
-export const harBoktypsnitt = (d: MetodData): boolean => harLastexter(d) || harSagoform(d);
+// Cinzel och Cinzel Decorative i Word-filen: boksidorna (lästexterna, elevens sida till två texter och strukturerna) och
+// sagobladen.
+export const harBoktypsnitt = (d: MetodData): boolean => harBoksidor(d) || harSagoform(d);
 
 // Bildbankens bilder som sagobladen och tärningarna ritar: stationernas rundlar, frågekortens och tärningarnas sidor.
 // Word-filens resurser läser dem vid bygget och hämtar dem i webbläsaren (src/lib/metodresurser.ts, stodundervisning/index.astro).

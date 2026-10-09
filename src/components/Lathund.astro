@@ -93,7 +93,7 @@ const kortBredd = (i: number) => `${((kortVikter[i] / kortVikter.reduce((a, v) =
           <h3 class="lh-kicker">{l.pass.schema.rubrik}</h3>
           <table class="m-tabell lh-tabell lh-schema">
             <colgroup><col style="width:5.5rem" /><col /></colgroup>
-            <thead><tr><th scope="col">Tid</th><th scope="col">Vad händer</th></tr></thead>
+            <thead><tr>{l.pass.schema.kolumner.map((k) => <th scope="col">{k}</th>)}</tr></thead>
             <tbody>
               {l.pass.schema.rader.map((r) => (
                 <tr>

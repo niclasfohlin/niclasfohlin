@@ -30,8 +30,60 @@ export function lastexter<R extends RamMedRubrik>(ramar: R[]): Map<R, Lastext> {
   }
   return ut;
 }
+// Två texter (Texttyper i grupp, metodriggens TILL-SAJTEN 2026-10-09; Niclas 2026-10-08: "en elevversion som alla tittar
+// på från en projektor eller är utskriven som ser lite intressant ut med frågor under", och "Alla sådana kontrasterande
+// par av texter ska ha detta. I de andra, men även i hela sajten på sikt."): en ram vars första lista har två kolumner och
+// en rad, de två texterna sida vid sida, och vars andra och sista lista heter Frågorna, med tre till fem frågor utan
+// kolumner. Ramen har inget huvud, ingen översikt och ingen sagoform, och listan med texterna är inte lärarens. Samma regel
+// som riggens build/modell.mjs (textparAv), så att riggens metodfil fungerar som den är. Word (textpar i metoddocx.ts),
+// sidan och utskriften (Metod.astro, Textpar.astro) ritar först lärarens sida, ramen med texterna och rutorna men utan
+// frågorna och med en rad om elevens sida i stället för ramens text, och sedan elevens sida som en boksida på ett eget A4:
+// titeln, ramens text, de två texterna i två spalter och frågorna under.
+export interface Textpar { titel: string; kolumner: string[]; texter: string[]; fragor: string[]; text: string; not: string }
+export const TEXTPAR_RAD = 'Elevens sida kommer efter den här, med texterna sida vid sida och frågorna under. Visa den på tavlan, eller skriv ut den.';
+type FormRam = RamMedRubrik & { text?: string[]; sagoform?: unknown; listor?: (Lista & { larare?: boolean })[] };
+export function textparAv(ram: FormRam): Textpar | null {
+  const listor = ram.listor ?? [];
+  const [texter, fragor] = listor;
+  if (listor.length !== 2 || (texter.kolumner ?? []).length !== 2 || texter.rader.length !== 1 || texter.larare) return null;
+  if (fragor.rubrik !== 'Frågorna' || fragor.kolumner || fragor.rader.length < 3 || fragor.rader.length > 5 || ram.huvud || ram.oversikt || ram.sagoform) return null;
+  return {
+    titel: texter.rubrik ?? '', kolumner: texter.kolumner!.map(String), texter: texter.rader[0].map((c) => String(c ?? '')),
+    fragor: fragor.rader.map((r) => String(r[0] ?? '').replace(/^\d+\.\s*/, '')), text: ram.text?.[0] ?? '', not: ram.rubrik,
+  };
+}
+// Lärarens sida till två texter: ramen med texterna och rutorna, utan frågorna, och raden om elevens sida i stället för
+// ramens text, som står på elevens sida.
+export const textparLarare = <R extends FormRam>(ram: R): R => ({ ...ram, text: [TEXTPAR_RAD], listor: [ram.listor![0]] });
+
+// En kooperativ struktur på ett A4 (Texttyper i grupp, metodriggens TILL-SAJTEN 2026-10-09; Niclas 2026-10-09: "En social
+// aktivitet för varje texttyp beskriven på en sida som en kooperativ struktur som tränar det centrala i texttypen ... en
+// designad A4 med en bild som visar den sociala aktiviteten, en tydlig steg för steg beskrivning och en kort ruta med hur
+// den används för att träna texttypen"; sidan är både lärarens och elevernas och ligger på bordet när gruppen gör
+// strukturen): en ram som heter "Strukturen, <var>: <namn>", vars första lista heter Så gör ni och har fyra till nio steg
+// utan kolumner, och vars andra och sista lista har en eller två rader utan kolumner, rutan om vad strukturen tränar.
+// Ramens text är raden under namnet, och rutan Till läraren står under ramen, som på boksidan. Bilden är den första bilden
+// På bordet med efter "ram: <ramens rubrik>"; fler bilder till ramen (bild A och bild B i Lika och olika) står efter sidan.
+// Samma regel som riggens build/modell.mjs (strukturAv). Word (struktur i metoddocx.ts), sidan och utskriften
+// (Struktur.astro) ritar den som en boksida på ett eget A4.
+export interface Struktur { vid: string; titel: string; steg: string[]; rutaRubrik: string; ruta: string[]; text: string; not: string }
+export function strukturAv(ram: FormRam): Struktur | null {
+  const m = ram.rubrik.match(/^Strukturen, ([^:]+): (.+)$/);
+  const listor = ram.listor ?? [];
+  const [steg, ruta] = listor;
+  if (!m || listor.length !== 2 || steg.rubrik !== 'Så gör ni' || steg.kolumner || ruta.kolumner) return null;
+  if (steg.rader.length < 4 || steg.rader.length > 9 || ruta.rader.length < 1 || ruta.rader.length > 2 || ram.huvud || ram.oversikt || ram.sagoform) return null;
+  const not = ram.delar.filter((del) => /^Till läraren$/i.test(del.rubrik.trim())).flatMap((del) => del.falt.map((f) => `${f.rubrik}: ${f.text}`)).join(' ');
+  return {
+    vid: m[1].trim(), titel: m[2].trim(), steg: steg.rader.map((r) => String(r[0] ?? '').replace(/^\d+\.\s*/, '')),
+    rutaRubrik: ruta.rubrik ?? '', ruta: ruta.rader.map((r) => String(r[0] ?? '')), text: ram.text?.[0] ?? '', not: not ? `Till läraren: ${not}` : '',
+  };
+}
+
 // Har metoden lästexter, som blir boksidor? Då bär Word-filen Cinzel och Cinzel Decorative (public/fonts/boksida/).
 export const harLastexter = (d: { ramar?: { ramar: RamMedRubrik[] } }): boolean => lastexter(d.ramar?.ramar ?? []).size > 0;
+// Har metoden boksidor av något slag: lästexter, elevens sida till två texter eller strukturer? Då bär Word-filen Cinzel.
+export const harBoksidor = (d: { ramar?: { ramar: FormRam[] } }): boolean => harLastexter(d) || (d.ramar?.ramar ?? []).some((r) => !!textparAv(r) || !!strukturAv(r));
 export const BOKTYPSNITT_TTF = { cinzel: '/fonts/boksida/Cinzel-dokument.ttf', dekor: '/fonts/boksida/CinzelDecorative-dokument.ttf' };
 
 // En text med frågor (screeningens nivå 6–8 i Ljudlek i grupp, som i Niclas original): två kolumner, texten som eleven

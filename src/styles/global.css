@@ -701,6 +701,30 @@ button.lank:hover { color: var(--farg-accent); }
   .boksida-ram { padding: 1rem 1.1rem 1.25rem; }
   .boksida-titel { font-size: 1.5rem; }
 }
+/* Elevens sida till två texter och strukturens sida (Textpar.astro, Struktur.astro): boksidans ram och titel, med raden
+   till eleven, rubrikerna i Cinzel i rött och texten i elevens typsnitt, som i Word. På en smal skärm står de två texterna
+   under varandra, på bredare sida vid sida med en tunn linje emellan. */
+.formsida-rad { font-family: var(--typsnitt-elev); font-size: 1.05rem; line-height: 1.45; text-align: center; margin: 0 0 1.2rem; }
+.formsida-rubrik, .formsida-etikett, .textpar-nr, .struktur-ruta-rubrik { font-family: 'Cinzel', serif; font-weight: 400; color: var(--bok-rod); text-align: center; }
+.formsida-rubrik { font-size: 1.05rem; margin: 1.2rem 0 0.7rem; }
+.formsida-rubrik::before { content: ''; display: block; width: 45%; margin: 0 auto 1.2rem; border-top: 1px solid var(--bok-skiljare); }
+.textpar-spalter { display: grid; grid-template-columns: 1fr; gap: 1.2rem; font-family: var(--typsnitt-elev); font-size: 1.1rem; line-height: var(--bok-rad, 1.55); }
+.textpar-spalt p { margin: 0 0 0.6em; }
+.textpar-spalt p:last-child { margin-bottom: 0; }
+.textpar-spalt .textpar-nr { font-size: 1.6rem; line-height: 1.2; margin: 0; }
+.textpar-spalt .formsida-etikett { font-size: 0.85rem; margin: 0 0 0.8rem; }
+@media (min-width: 34rem) {
+  .textpar-spalter { grid-template-columns: 1fr 1fr; gap: 0; }
+  .textpar-spalt:first-child { padding-right: 1rem; border-right: 1px solid var(--bok-skiljare); }
+  .textpar-spalt:last-child { padding-left: 1rem; }
+}
+.struktur-bild { margin: 0 auto 1rem; max-width: var(--bild-andel, 80%); }
+.struktur-bild img { display: block; width: 100%; height: auto; }
+@media (max-width: 34rem) { .struktur-bild { max-width: none; } }
+.formsida .boksida-fragor { font-size: 1.1rem; }
+.struktur-ruta { border: 1px solid var(--bok-rod); padding: 0.6rem 0.9rem; margin: 1.1rem 0.6rem 0; font-family: var(--typsnitt-elev); font-size: 1rem; line-height: 1.45; }
+.struktur-ruta p { margin: 0; }
+.struktur-ruta .struktur-ruta-rubrik { text-align: left; font-size: 0.95rem; margin: 0 0 0.2rem; }
 /* Elevlistor i en ram (läslistor): orden stora och lätta att peka i, kolumnrubrikerna små och dämpade, ingen fet första kolumn. */
 .m-lista { margin: 0.75rem 0 1.5rem; }
 .m-lista-rubrik { font-family: var(--typsnitt-ui); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-accent); margin: 0 0 0.35rem; }
@@ -1579,6 +1603,27 @@ html.js .bara-js { display: inline-block; }
   .boksida-text::after { width: 16mm; margin: 5pt auto 15pt; }
   .boksida-fragor li { grid-template-columns: 24pt 1fr; margin: 0 0 5.5pt; }
   .boksida-fot { font-size: 7pt; line-height: 1.15; margin-top: 1mm; }
+  /* Elevens sida till två texter och strukturens sida på ett eget A4, som boksidan (.boksida ovan) men med texten 12 mm
+     in från ramens kant (700 twips, src/lib/boksida.ts FORMLUFT) och storleken ur samma uträkning som Word: --bok-pt och
+     --bok-rad för texterna, frågorna och stegen, --ruta-pt för strukturens ruta och --bild-andel för bilden. */
+  .formsida .boksida-ram { padding: 0 11.5mm; }
+  .formsida-rad { font-size: 15pt; line-height: 1.544; margin: 0 0 12pt; }
+  .textpar .formsida-rad { margin-bottom: 18pt; }
+  .textpar-spalter { grid-template-columns: 1fr 1fr; gap: 0; font-size: var(--bok-pt); line-height: var(--bok-rad); }
+  .textpar-spalt:first-child { padding-right: 15pt; border-right: 0.5pt solid var(--bok-skiljare); }
+  .textpar-spalt:last-child { padding-left: 15pt; }
+  .textpar-spalt p { margin: 0 0 7.5pt; }
+  .textpar-spalt .textpar-nr { font-size: 20pt; line-height: 1.348; margin: 0; }
+  .textpar-spalt .formsida-etikett { font-size: 10.5pt; line-height: 1.348; margin: 0 0 10pt; }
+  .formsida-rubrik { font-size: 13pt; line-height: 1.348; margin: 5pt 0 10pt; }
+  .formsida-rubrik::before { width: 95mm; margin: 0 auto 20pt; border-top-width: 0.5pt; }
+  .struktur .formsida-rubrik::before { margin-bottom: 10pt; }
+  .formsida .boksida-fragor { font-size: var(--bok-pt); line-height: var(--bok-rad); }
+  .textpar .boksida-fragor li { margin: 0 0 6pt; }
+  .struktur .boksida-fragor li { margin: 0 0 5pt; }
+  .struktur-bild { max-width: var(--bild-andel); margin: 0 auto 10pt; }
+  .struktur-ruta { font-size: var(--ruta-pt); line-height: 1.611; border: 1pt solid var(--bok-rod); padding: 8pt; margin: 10pt 15pt 0; }
+  .struktur-ruta .struktur-ruta-rubrik { font-size: var(--ruta-pt); margin: 0; }
   /* En kort lista (högst tio rader) och en ensam ruta Till läraren delas inte över sidor (granskningen 2026-10-06). */
   .m-lista:has(tbody tr:nth-child(-n+10):last-child) { break-inside: avoid; }
   .m-ramdelar > .m-ramdel:last-of-type:not(:first-of-type) { break-before: avoid-page; page-break-before: avoid; }

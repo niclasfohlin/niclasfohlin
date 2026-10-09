@@ -1,0 +1,46 @@
+---
+// En kooperativ struktur på ett A4 (src/lib/ramform.ts, strukturAv; Niclas 2026-10-09: "en designad A4 med en bild som
+// visar den sociala aktiviteten, en tydlig steg för steg beskrivning och en kort ruta med hur den används för att träna
+// texttypen"), som i Word (struktur i metoddocx.ts) och i metodriggens kompendium: en boksida med strukturens namn i Cinzel
+// och den röda dubbla linjen, raden om strukturen, bilden På bordet av gruppen, stegen under Så gör ni och rutan om vad
+// strukturen tränar, med en tunn röd kant. Rutan Till läraren står under ramen. Sidan ligger på bordet när gruppen gör
+// strukturen, så i utskriften står den på ett eget A4 med storleken och bildens bredd ur samma uträkning som Word
+// (src/lib/boksida.ts, strukturMatt). Bilden hämtas först när läsaren närmar sig den, och Skriv ut väntar in den.
+import type { Struktur } from '../lib/ramform';
+import { BOKRAD, strukturMatt } from '../lib/boksida';
+import { PABORDET_MATT, type PaBordet } from '../lib/pabordet';
+interface Props { s: Struktur; id: string; ankare: string; bild?: PaBordet }
+const { s, id, ankare, bild } = Astro.props;
+const matt = strukturMatt(s, bild ? PABORDET_MATT : undefined);
+const stil = [`--bok-pt: ${matt.pt}pt`, `--bok-rad: ${(BOKRAD.Andika * matt.line / 240).toFixed(3)}`, `--ruta-pt: ${matt.rutaPt}pt`, `--bild-andel: ${Math.round(matt.skala * 100)}%`].join('; ');
+type Del = { text: string; fet?: boolean; kursiv?: boolean };
+const delar = (r: string): Del[] => {
+  const ut: Del[] = [];
+  let sist = 0;
+  for (const m of r.matchAll(/\*\*[^*]+\*\*|\*[^*]+\*/g)) {
+    if (m.index! > sist) ut.push({ text: r.slice(sist, m.index) });
+    ut.push(m[0].startsWith('**') ? { text: m[0].slice(2, -2), fet: true } : { text: m[0].slice(1, -1), kursiv: true });
+    sist = m.index! + m[0].length;
+  }
+  if (sist < r.length) ut.push({ text: r.slice(sist) });
+  return ut;
+};
+// Raderna i ett stycke, var och en med sina delar.
+const rader = (t: string) => t.split('\n').map(delar);
+---
+<section class="m-ram boksida formsida struktur" id={id} style={stil}>
+  <div class="boksida-ram">
+    <h3 id={ankare} class="boksida-titel"><span class="visually-hidden">Strukturen, {s.vid}: </span>{s.titel}</h3>
+    {s.text && <p class="formsida-rad">{rader(s.text).map((r, j) => <>{j > 0 && <br />}{r.map((x) => (x.fet ? <strong>{x.text}</strong> : x.kursiv ? <em>{x.text}</em> : x.text))}</>)}</p>}
+    {bild && <p class="struktur-bild"><img src={bild.adress} alt={`På bordet: ${bild.bild.rubrik}. ${bild.bild.text}`} width={PABORDET_MATT.bredd} height={PABORDET_MATT.hojd} loading="lazy" decoding="async" data-utskriftsbild /></p>}
+    <p class="formsida-rubrik">Så gör ni</p>
+    <ol class="boksida-fragor struktur-steg">
+      {s.steg.map((x, i) => <li><span class="boksida-nr">{i + 1}.</span><span>{rader(x).map((r, j) => <>{j > 0 && <br />}{r.map((x) => (x.fet ? <strong>{x.text}</strong> : x.kursiv ? <em>{x.text}</em> : x.text))}</>)}</span></li>)}
+    </ol>
+    <div class="struktur-ruta">
+      <p class="struktur-ruta-rubrik">{s.rutaRubrik}</p>
+      {s.ruta.map((x) => <p>{rader(x).map((r, j) => <>{j > 0 && <br />}{r.map((x) => (x.fet ? <strong>{x.text}</strong> : x.kursiv ? <em>{x.text}</em> : x.text))}</>)}</p>)}
+    </div>
+  </div>
+  {s.not && <p class="boksida-fot"><span>{s.not}</span></p>}
+</section>

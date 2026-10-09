@@ -7,7 +7,24 @@ import type { MetodData, MetodPost } from './metod';
 
 export interface Lektion { id: string; titel: string; namn: string; formaga: number; tranar: string }
 export interface BankFormaga { nr: number; namn: string; skal?: string; lektioner: Lektion[] }
-export interface Serie { id: string; titel: string; rubrik: string; text?: string; not?: string; formagor: BankFormaga[]; lektioner: Lektion[] }
+export interface Serie { id: string; titel: string; rubrik: string; text?: string; not?: string; formagor: BankFormaga[]; lektioner: Lektion[]; ord: SerieOrd }
+// Seriens ord, så att en serie av kurser (Texttyper i grupp) inte säger lektion och förmåga: barnet i ental och flertal,
+// bestämd och obestämd form, banken som menyn och kortet nämner den, gruppen (Förmåga, Texttyp), rubriken över skälen i
+// Word och om namnen bär numret. Ljudlek i grupp har förvalen i schemat (src/content.config.ts, lektionsbank).
+export interface SerieOrd { en: string; den: string; flera: string; de: string; meny: string; oversikt: string; iBanken: string; kolumn: string; grupp: string; skalRubrik: string; numrerad: boolean }
+const SLAG = {
+  lektioner: { en: 'lektion', den: 'lektionen', flera: 'lektioner', de: 'lektionerna', meny: 'Lektionsbanken', oversikt: 'Översikt och lektionsbank', iBanken: 'i lektionsbanken', kolumn: 'Lektionerna och vad eleven tränar' },
+  kurser: { en: 'kurs', den: 'kursen', flera: 'kurser', de: 'kurserna', meny: 'Kurserna', oversikt: 'Översikt och kurser', iBanken: 'i serien', kolumn: 'Kursen och vad eleven tränar' },
+};
+export function serieOrd(bank: NonNullable<MetodData['lektionsbank']>): SerieOrd {
+  return { ...SLAG[bank.slag ?? 'lektioner'], grupp: bank.grupp ?? 'Förmåga', skalRubrik: bank.skalRubrik ?? 'Skälet till platsen', numrerad: bank.numrerad ?? true };
+}
+// Var en lektion står i serien, som faktarutans rad Hör till: "förmåga 3 av 8: Första ljudet", och utan nummer
+// "texttyp: Argumenterande text".
+export function platsISerien(serie: Serie, formaga: BankFormaga | undefined): string {
+  const grupp = serie.ord.grupp.toLocaleLowerCase('sv');
+  return serie.ord.numrerad ? `${grupp} ${formaga?.nr ?? ''} av ${serie.formagor.length}: ${formaga?.namn ?? ''}` : `${grupp}: ${formaga?.namn ?? ''}`;
+}
 // Det en metod vet om sin serie. Den generella metoden har serien med banken; en lektion har dessutom sin plats i
 // banken, förmågan och lektionerna före och efter i bankens ordning.
 export interface SerieKoppling { serie: Serie; lektion?: Lektion; formaga?: BankFormaga; forra?: Lektion; nasta?: Lektion }
@@ -28,7 +45,7 @@ export function byggSerier(metoder: MetodPost[]): Map<string, Serie> {
   for (const m of metoder) {
     const bank = m.data.lektionsbank;
     if (!bank) continue;
-    serier.set(m.id, { id: m.id, titel: m.data.titel, rubrik: bank.rubrik, text: bank.text, not: bank.not, formagor: bank.formagor.map((f) => ({ ...f, lektioner: [] })), lektioner: [] });
+    serier.set(m.id, { id: m.id, titel: m.data.titel, rubrik: bank.rubrik, text: bank.text, not: bank.not, formagor: bank.formagor.map((f) => ({ ...f, lektioner: [] })), lektioner: [], ord: serieOrd(bank) });
   }
   const fel: string[] = [];
   for (const m of metoder) {

@@ -9,20 +9,23 @@ const { serie } = Astro.props;
 const versal = (s: string) => (s ? s.charAt(0).toLocaleUpperCase('sv') + s.slice(1) : s);
 const punkt = (s: string) => (/[.!?]$/.test(s) ? s : `${s}.`);
 const antal = serie.lektioner.length;
+// Seriens ord (src/lib/serie.ts, serieOrd): Förmåga och lektion i Ljudlek i grupp, Texttyp och kurs utan nummer i
+// Texttyper i grupp.
+const { ord } = serie;
 ---
 <section id="lektionsbank" class="m-bank">
   <h2>{serie.rubrik}</h2>
   {serie.text && <p>{serie.text}</p>}
-  <ol class="m-lektionskort" aria-label={`${antal === 1 ? 'En lektion' : `${antal} lektioner`}, ordnade efter förmåga`}>
+  <ol class="m-lektionskort" aria-label={`${antal === 1 ? `En ${ord.en}` : `${antal} ${ord.flera}`}, ordnade efter ${ord.grupp.toLocaleLowerCase('sv')}`}>
     {serie.formagor.flatMap((f) => (f.lektioner.length ? f.lektioner : [undefined]).map((l) => (
       <li class={`m-lektionskort-kort${l ? '' : ' tom'}`}>
-        <p class="m-lektionskort-formaga"><span class="m-lektionskort-nr" aria-hidden="true">{f.nr}</span><span>Förmåga<span class="visually-hidden"> {f.nr}</span>: {f.namn}</span></p>
+        <p class="m-lektionskort-formaga">{ord.numrerad && <span class="m-lektionskort-nr" aria-hidden="true">{f.nr}</span>}<span>{ord.grupp}{ord.numrerad && <span class="visually-hidden"> {f.nr}</span>}: {f.namn}</span></p>
         {l ? (
           <>
             <h3><a href={`/stodundervisning/${l.id}`}>{l.namn}</a></h3>
             <p>{punkt(versal(l.tranar))}</p>
           </>
-        ) : <p class="meta">Ingen lektion ännu.</p>}
+        ) : <p class="meta">Ingen {ord.en} ännu.</p>}
         {f.skal && <p class="m-lektionskort-skal">{f.skal}</p>}
       </li>
     )))}

@@ -25,12 +25,13 @@ export const GET: APIRoute = async () => {
       const serie = m.data.serie ? serier.get(m.data.serie) : undefined;
       return {
         typ: 'metod',
-        etikett: serie ? `Ny lektion i ${serie.titel}` : `Ny metod i stödundervisning: ${m.data.omrade}, ${arskursText(m.data).replace(/\u2060/g, '')}`,
+        etikett: serie ? `Ny ${serie.ord.en} i ${serie.titel}` :`Ny metod i stödundervisning: ${m.data.omrade}, ${arskursText(m.data).replace(/\u2060/g, '')}`,
         url: `/stodundervisning/${m.id}`,
         titel: m.data.titel,
         ingress: m.data.ingress,
         datum: (m.data.uppdaterad ?? new Date(0)).toISOString().slice(0, 10),
-        ...(serie ? { serie: { url: `/stodundervisning/${serie.id}`, titel: serie.titel }, namn: lektionsnamn(m.data.titel), ordning: serie.lektioner.findIndex((l) => l.id === m.id) } : {}),
+        // Seriens ord följer med, så att brevet säger "Med 4 kurser" om en serie av kurser (src/lib/serie.ts, serieOrd).
+        ...(serie ? { serie: { url: `/stodundervisning/${serie.id}`, titel: serie.titel }, namn: lektionsnamn(m.data.titel), ordning: serie.lektioner.findIndex((l) => l.id === m.id), ord: { den: serie.ord.den, flera: serie.ord.flera } } : {}),
       };
     }),
     ...bocker.map((b) => ({

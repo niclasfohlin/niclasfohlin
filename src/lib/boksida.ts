@@ -143,3 +143,77 @@ export function boksidansMatt(l: Lastext): Boksidesmatt {
   const alla = BOKLINJER.map(forsok);
   return alla.find((f) => f.ryms) ?? alla[alla.length - 1];
 }
+
+// Elevens sida till två texter och strukturens sida (src/lib/ramform.ts, textparAv och strukturAv) har boksidans ram, men
+// texten står närmare ramen än lästextens: 700 twips, som i metodriggens build-docx.js (textpar och struktur). Måtten och
+// uträkningen är riggens, så att sidan blir densamma i sajtens Word-fil, i riggens kompendium och i sidans utskrift.
+export const FORMLUFT = 700;
+// Raden under titeln (ramens text till eleven) står i Andika 15 pt.
+export const FORMRAD_PT = 15;
+const titelRaderFor = (titel: string) => Math.max(1, Math.ceil(breddPt(titel, TITEL_PT, CINZEL_BREDD) / ((BOKBREDD - 2 * FORMLUFT) / 20)));
+// Bredderna i twips inne i den dubbla ramen (30 twips in från den yttre kanten, metoddocx.ts DUBBEL_GLAPP).
+const INRE = BOKBREDD - 2 * 30;
+const LUFT_I = FORMLUFT - 30;
+
+export interface Textparmatt {
+  /** Storleken i halva punkter (33, 32, 30 eller 28) och i punkter, radavståndet som multipel och raden i punkter. */
+  size: number; pt: number; line: number; radPt: number;
+  /** Höjderna i twips: titeln med linjen och raden, spalterna och raden med frågorna, som fyller resten av ramen. */
+  titelH: number; spaltH: number; restH: number;
+  /** Spaltens bredd i twips (den första; den andra är resten), och luften mot mittlinjen. */
+  spaltW: number; inne: number;
+  ryms: boolean;
+}
+// Elevens sida till två texter: den största storleken, från 16,5 till 14 punkter, där titeln, raden, de två texterna och
+// frågorna ryms på ett A4. Ryms de inte ens i 14 punkter står ryms false, och Word-byggaret stannar.
+export function textparMatt(p: { titel: string; texter: string[]; fragor: string[]; text: string }): Textparmatt {
+  const spaltW = Math.floor(INRE / 2);
+  const inne = 300;
+  const titelRader = titelRaderFor(p.titel);
+  const helBredd = (INRE - 2 * LUFT_I) / 20 * 0.965;
+  const radenRader = p.text ? antalRader(p.text, helBredd, FORMRAD_PT) : 0;
+  const textBredd = (spaltW - LUFT_I - inne) / 20 * 0.965;
+  const fragaBredd = (INRE - 2 * LUFT_I - 480) / 20 * 0.965;
+  const forsok = (size: number): Textparmatt => {
+    const pt = size / 2, line = 230;
+    const radPt = BOKRAD.Andika * pt * line / 240;
+    const titelH = 200 + Math.ceil(titelRader * BOKRAD.Cinzel * TITEL_PT * 20) + 60 + 24 + 45 + 240 + Math.ceil(radenRader * BOKRAD.Andika * FORMRAD_PT * 20) + 360;
+    const spaltH = nedBildpunkt(Math.ceil(Math.ceil(BOKRAD.Cinzel * 20 * 20) + Math.ceil(BOKRAD.Cinzel * 10.5 * 20) + 200 + Math.max(...p.texter.map((t) => antalRader(utanMarkering(t), textBredd, pt))) * radPt * 20));
+    const fragorH = 100 + 400 + Math.ceil(BOKRAD.Cinzel * 13 * 20) + 200 + p.fragor.reduce((h, f) => h + antalRader(f, fragaBredd, pt) * radPt * 20 + 120, 0);
+    const restH = nedBildpunkt(Math.max(0, RAMHOJD - titelH - spaltH - 450));
+    return { size, pt, line, radPt, titelH, spaltH, restH, spaltW, inne, ryms: titelH + spaltH + fragorH + 450 <= RAMHOJD };
+  };
+  const alla = [33, 32, 30, 28].map(forsok);
+  return alla.find((f) => f.ryms) ?? alla[alla.length - 1];
+}
+
+export interface Strukturmatt {
+  /** Stegens storlek i halva punkter och i punkter, radavståndet, raden i punkter och rutans storlek i punkter. */
+  size: number; pt: number; line: number; radPt: number; rutaPt: number;
+  /** Bildens andel av bredden innanför luften, och dess bredd och höjd i twips. */
+  skala: number; bildB: number; bildH: number;
+  /** Titelns höjd och resten av ramen i twips. */
+  titelH: number; restH: number;
+  ryms: boolean;
+}
+// Strukturens sida: den största storleken och bilden, från 15 punkter och bilden i 80 procent av bredden till 12 punkter
+// och 60 procent, där titeln, raden, bilden, stegen och rutan ryms på ett A4.
+export function strukturMatt(s: { titel: string; steg: string[]; ruta: string[]; text: string }, bild?: { bredd: number; hojd: number }): Strukturmatt {
+  const titelRader = titelRaderFor(s.titel);
+  const helB = INRE - 2 * LUFT_I;
+  const helBredd = helB / 20 * 0.965;
+  const radenRader = s.text ? antalRader(s.text, helBredd, FORMRAD_PT) : 0;
+  const stegBredd = (helB - 480) / 20 * 0.965;
+  const rutaBredd = (helB - 2 * 300) / 20 * 0.965;
+  const forsok = ([size, skala]: number[]): Strukturmatt => {
+    const bildB = Math.round(helB * skala), bildH = bild ? Math.round((bildB * bild.hojd) / bild.bredd) : 0;
+    const pt = size / 2, line = 230, radPt = BOKRAD.Andika * pt * line / 240, rutaPt = pt - 1.5;
+    const titelH = 200 + Math.ceil(titelRader * BOKRAD.Cinzel * TITEL_PT * 20) + 60 + 24 + 45 + 240 + Math.ceil(radenRader * BOKRAD.Andika * FORMRAD_PT * 20) + 240;
+    const stegH = 100 + Math.ceil(BOKRAD.Cinzel * 13 * 20) + 160 + s.steg.reduce((h, x) => h + antalRader(x, stegBredd, pt) * radPt * 20 + 100, 0);
+    const rutaH = 200 + 2 * 160 + (1 + s.ruta.reduce((n, x) => n + antalRader(x, rutaBredd, rutaPt), 0)) * BOKRAD.Andika * rutaPt * 20 + 200;
+    const restH = nedBildpunkt(Math.max(0, RAMHOJD - titelH - 450));
+    return { size, pt, line, radPt, rutaPt, skala, bildB, bildH, titelH, restH, ryms: titelH + bildH + 200 + stegH + rutaH + 450 <= RAMHOJD };
+  };
+  const alla = [[30, 0.8], [28, 0.8], [28, 0.7], [26, 0.8], [26, 0.7], [24, 0.7], [26, 0.6], [24, 0.6]].map(forsok);
+  return alla.find((f) => f.ryms) ?? alla[alla.length - 1];
+}

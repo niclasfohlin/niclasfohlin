@@ -209,6 +209,13 @@ const stodundervisning = defineCollection({
       text: z.string().optional(),
       formagor: z.array(z.strictObject({ nr: z.number().int().positive(), namn: text, skal: z.string().optional() })).min(1),
       not: z.string().optional(),
+      // Bankens ord (Texttyper i grupp, 2026-10-09, metodriggens TILL-SAJTEN punkt 2): en serie där varje barn är en hel
+      // kurs har kurser i stället för lektioner (slag), sitt eget ord för förmågan (grupp, som Texttyp), sin rubrik över
+      // skälen i Word och inga nummer framför namnen (numrerad: false). Orden står i src/lib/serie.ts (serieOrd).
+      slag: z.enum(['lektioner', 'kurser']).default('lektioner'),
+      grupp: z.string().default('Förmåga'),
+      skalRubrik: z.string().default('Skälet till platsen'),
+      numrerad: z.boolean().default(true),
     }).optional(),
 
     // Modellen. Ett stycke per rad i listorna; en rad inuti en cell blir en ny rad i cellen.
@@ -529,6 +536,9 @@ const stodundervisning = defineCollection({
         klarTidigt: z.string().optional(),
         schema: z.strictObject({
           rubrik: text,
+          // Kolumnernas rubriker, när raderna inte är passets minuter (Texttyper i grupp, 2026-10-09: hur läraren tänker
+          // högt i sju steg, med numret i den första kolumnen och det läraren gör och säger i den andra).
+          kolumner: z.tuple([text, text]).default(['Tid', 'Vad händer']),
           rader: z.array(z.strictObject({ tid: text, fas: text, vad: text, fraser: z.array(z.string()).default([]) })).min(1),
         }),
       }),

@@ -87,6 +87,7 @@ function bilder(d: MetodData) {
     forberettRubrik: versaler(l.pass.forberett?.rubrik ?? 'Det jag förberedde'),
     klarTidigt: l.pass.klarTidigt,
     schemaRubrik: versaler(l.pass.schema.rubrik),
+    schemaKolumner: l.pass.schema.kolumner.map(versaler),
     schema: l.pass.schema.rader.map((r) => ({ tid: r.tid, fas: r.fas, text: r.vad + (r.fraser.length ? ' ' + r.fraser.map(citat).join(' · ') : '') })),
     anteckning: `${d.titel}, ett pass ${passOrd(d).forSteg} med ett exempel.`,
   };
@@ -492,7 +493,7 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
     if (b.forberett) { cream(s, 0.46, y, 5.27, c1H, b.forberett, 12, b.forberettRubrik); y += c1H + 0.15; }
     if (b.klarTidigt) cream(s, 0.46, y, 5.27, c2H, b.klarTidigt, 12, 'KLAR TIDIGT');
     label(s, b.schemaRubrik, 6.22, 0.88, 6.9);
-    shapeTable(s, 6.22, 1.2, 6.66, 1.45, ['TID', 'VAD HÄNDER'], b.schema.map((r) => ({ namn: r.tid, fet: r.fas, rader: [r.text] })), BOTTEN - 1.2);
+    shapeTable(s, 6.22, 1.2, 6.66, 1.45, b.schemaKolumner, b.schema.map((r) => ({ namn: r.tid, fet: r.fas, rader: [r.text] })), BOTTEN - 1.2);
     fot(s);
     s.addNotes(`${b.anteckning} ${upphov}`);
   }

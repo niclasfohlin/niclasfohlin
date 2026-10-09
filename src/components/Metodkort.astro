@@ -12,7 +12,8 @@ import type { Serie } from '../lib/serie';
 interface Props { m: MetodPost; valj?: boolean; serie?: Serie; taggar?: string[] }
 const { m, valj = false, serie, taggar = m.data.taggar } = Astro.props;
 const lektioner = serie?.lektioner ?? [];
-const antal = lektioner.length === 1 ? 'En lektion' : `${lektioner.length} lektioner`;
+const ord = serie?.ord;
+const antal = lektioner.length === 1 ? `En ${ord?.en ?? 'lektion'}` : `${lektioner.length} ${ord?.flera ?? 'lektioner'}`;
 ---
 <article class={`kort metodkort${serie ? ' seriekort' : ''}`} data-metod data-omrade={m.data.omrade} data-arskurs={m.data.arskurs.join(' ')} data-taggar={taggar.join(' ')}>
   <div class="kort-topp">
@@ -25,9 +26,9 @@ const antal = lektioner.length === 1 ? 'En lektion' : `${lektioner.length} lekti
   <p class="ingress">{m.data.ingress}</p>
   {lektioner.length > 0 && (
     <details class="kort-serie">
-      <summary>{antal} i lektionsbanken</summary>
+      <summary>{antal} {ord?.iBanken}</summary>
       <ol class="kort-lektioner">
-        {lektioner.map((l) => <li><a href={`/stodundervisning/${l.id}`}><span class="serie-nr" aria-hidden="true">{l.formaga}</span>{l.namn}</a></li>)}
+        {lektioner.map((l) => <li><a href={`/stodundervisning/${l.id}`}>{ord?.numrerad && <span class="serie-nr" aria-hidden="true">{l.formaga}</span>}{l.namn}</a></li>)}
       </ol>
     </details>
   )}
