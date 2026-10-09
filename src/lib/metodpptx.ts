@@ -493,7 +493,8 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
     if (b.forberett) { cream(s, 0.46, y, 5.27, c1H, b.forberett, 12, b.forberettRubrik); y += c1H + 0.15; }
     if (b.klarTidigt) cream(s, 0.46, y, 5.27, c2H, b.klarTidigt, 12, 'KLAR TIDIGT');
     label(s, b.schemaRubrik, 6.22, 0.88, 6.9);
-    shapeTable(s, 6.22, 1.2, 6.66, 1.45, b.schemaKolumner, b.schema.map((r) => ({ namn: r.tid, fet: r.fas, rader: [r.text] })), BOTTEN - 1.2);
+    // En kolumn med bara nummer (stegen när läraren tänker högt i Texttyper i grupp) är smal, så att replikerna får plats.
+    shapeTable(s, 6.22, 1.2, 6.66, b.schema.every((r) => r.tid.trim().length <= 2) ? 0.85 : 1.45, b.schemaKolumner, b.schema.map((r) => ({ namn: r.tid, fet: r.fas, rader: [r.text] })), BOTTEN - 1.2);
     fot(s);
     s.addNotes(`${b.anteckning} ${upphov}`);
   }

@@ -16,5 +16,8 @@ export const metodensPaBordet = (d: MetodData, id: string): PaBordet[] =>
   (d.pabordet ?? []).map((b) => ({ bild: b, adress: `/stodundervisning/${id}-pabordet-${b.nr}.svg`, vid: tolkaEfter(b.efter) }));
 /** Bilderna som står på platsen. */
 export const paBordetVid = (bilder: PaBordet[], plats: FilmPlats) => bilder.filter((b) => b.vid && passar(b.vid, plats));
+/** Bildens textalternativ när den står utan rubrik och bildtext (strukturens sida): rubriken och texten, med en punkt
+ * efter rubriken bara när den inte redan slutar med ett skiljetecken (Berätta mera!). */
+export const bildensAlt = (b: PaBordet) => `På bordet: ${b.bild.rubrik}${/[.!?]$/.test(b.bild.rubrik) ? '' : '.'} ${b.bild.text}`;
 /** Bilden står efter en del i en ram (en vecka): utan egen rubrik, med "På bordet." först i bildtexten. */
 export const iDel = (b: PaBordet) => !!b.vid && 'del' in b.vid;

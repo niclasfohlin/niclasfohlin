@@ -412,7 +412,7 @@ ramar:
             - rubrik: Fokus
               text: "Gruppen skriver till hela läsarnas klass, och eleven säger hur, med ord för var och när."
             - rubrik: Dagens mening
-              text: "Pass 5: i stället för en mening visar du dina två versioner av en början. Pass 6: ”Klipp lite i papperet.” Pass 6: ”Klipp lite i papperet.”"
+              text: "Pass 5: i stället för en mening visar du dina två versioner av en början. Pass 6: ”Klipp lite i papperet.”"
             - rubrik: Pass 5
               text: "0–⁠8 min. Två sätt i era texter: visa dina två versioner, och fråga ”Vad kan läsaren göra efter den andra?” Skriv om ett ställe och tänk högt, och alla gör samma sak.\n8–⁠18 min. Ringflygaren: du gör en, och alla gör efter dig.\n18–⁠25 min. Säg ”Jag skriver, ni tänker.” Gruppen säger vem som läser och lägger minst en lapp åt sidan. Du skriver början.\n25–⁠45 min. Skriv: var och en skriver fortsättningen.\n45–⁠49 min. Gruppen hör två fortsättningar och väljer en.\n49–⁠56 min. En elev läser upp texten över pärmen, och du gör ringflygaren exakt som det står. Gruppen skriver in det som fattades där du stannade.\n56–⁠60 min. Rita en stapel för texten på tavlan, och lägg texten i lådan.\nEfter passet. Skriv texten på dator, ett exemplar per par, och skicka lådan."
             - rubrik: Pass 6
@@ -448,7 +448,7 @@ ramar:
             - rubrik: Fokus
               text: "Eleven ser vad hen gör nu, känner igen en uppgift som ber om en instruktion och ser sina läsare spela efter texten."
             - rubrik: Pass 11
-              text: "0–⁠13 min. Säg uppgiften som i pass 1. Eleven ritar en ny figur av samma slag och skriver.\n13–⁠24 min. 13–⁠24 min. Före och efter: en elev ur det andra paret ritar efter båda de korta texterna, den första utan tillägget. Eleven lägger allt bredvid varandra och fyller i en stapel för varje text. Fråga ”Vad gör du nu som du inte gjorde då?”\n24–⁠28 min. Ta fram Båten och Grisen. Säg att båda är instruerande texter, och fråga ”Vad finns i båda?”\n28–⁠36 min. Uppgifterna: visa elevens sida, och paren svarar på frågorna.\n36–⁠60 min. Skriv: eleven bygger ut sin egen text där läsaren stannade eller du frågade. Sist sätter hen två eller tre underrubriker, som Det här behöver du och Så spelar ni."
+              text: "0–⁠13 min. Säg uppgiften som i pass 1. Eleven ritar en ny figur av samma slag och skriver.\n13–⁠24 min. Före och efter: en elev ur det andra paret ritar efter båda de korta texterna, den första utan tillägget. Eleven lägger allt bredvid varandra och fyller i en stapel för varje text. Fråga ”Vad gör du nu som du inte gjorde då?”\n24–⁠28 min. Ta fram Båten och Grisen. Säg att båda är instruerande texter, och fråga ”Vad finns i båda?”\n28–⁠36 min. Uppgifterna: visa elevens sida, och paren svarar på frågorna.\n36–⁠60 min. Skriv: eleven bygger ut sin egen text där läsaren stannade eller du frågade. Sist sätter hen två eller tre underrubriker, som Det här behöver du och Så spelar ni."
             - rubrik: Pass 12
               text: "0–⁠5 min. Eleven lägger fram texten och det spelet behöver. Gå igenom sidan Spelstunden, vecka 6.\n5–⁠25 min. Spelstunden: parets två läsare spelar den enas spel efter texten. Eleven ser på, skriver in det som fattades mellan omgångarna och skriver läsarnas svarsrader.\n25–⁠45 min. Läsarna spelar den andras spel på samma sätt.\n45–⁠55 min. Eleven fyller i stapeln Mitt spel. Det läsarna undrade blir nästa mål, och det hen tar med sig blir ett råd till nästa grupp, som du sparar. Eleven lägger texten och spelet i ett kuvert till läsarnas klass.\n55–⁠60 min. Fråga igen ”Vad gör en instruktion bra?” och jämför med svaren från pass 1. Säg när gruppen samlas igen."
             - rubrik: Lägg märke till
@@ -958,7 +958,7 @@ elevblad:
     Har du gjort en helikopter av papper?: 2
     Vilka spel kan du?: 3
     Vad är svårt när du gör något efter en instruktion?: 3
-    Det här gör läsaren utan att tänka: 6
+    Det här gör läsaren utan att tänka: 4
 
 mallar:
   - rubrik: Lapparna

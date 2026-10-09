@@ -40,7 +40,8 @@ const antalLektioner = serie?.lektioner.length ?? 0;
 // Materialet i faktarutan är egenskaper, som Format: det viktigaste i korta delar på en rad, och en länk till rätt ställe
 // för resten, metodens materialavsnitt eller lathundens materialsida (Niclas 2026-10-02: "Viktigaste och en länk till
 // rätt ställe", och ingen punktlista som gör att rutan växer neråt).
-const materialLank = d.ramar ? '#ramar' : harLathund(d) ? `/stodundervisning/${m.id}/lathund#lathund-material` : undefined;
+// En generell metod utan egna ramar (Texttyper i grupp) har materialet i sina kurser, och länken leder till banken.
+const materialLank = d.ramar ? '#ramar' : d.lektionsbank ? '#lektionsbank' : harLathund(d) ? `/stodundervisning/${m.id}/lathund#lathund-material` : undefined;
 ---
 
 <Base title={d.titel} description={d.ingress} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
@@ -60,14 +61,14 @@ const materialLank = d.ramar ? '#ramar' : harLathund(d) ? `/stodundervisning/${m
       <div class="faktaruta">
         <p class="faktaruta-etikett">I korthet</p>
         <dl>
-          {lektion && serie && <><dt>Hör till</dt><dd><a href={`/stodundervisning/${serie.id}`}>{serie.titel}</a>, {platsISerien(serie, koppling?.formaga)}</dd></>}
+          {lektion && serie && <><dt>Hör till</dt><dd><a href={`/stodundervisning/${serie.id}`}>{serie.titel}</a>{platsISerien(serie, koppling?.formaga, lektion) && `, ${platsISerien(serie, koppling?.formaga, lektion)}`}</dd></>}
           <dt>Område</dt><dd>{d.omrade}</dd>
           <dt>Årskurs</dt><dd>{arskursText(d)}</dd>
           {d.format.length > 0 && <><dt>Format</dt><dd>{d.format.join(', ')}</dd></>}
           {d.tid && <><dt>Tid</dt><dd>{d.tid}</dd></>}
           {d.period && <><dt>Period</dt><dd>{d.period}</dd></>}
           {d.grupp && <><dt>Grupp</dt><dd>{d.grupp}</dd></>}
-          {serie && !lektion && antalLektioner > 0 && <><dt>Lektioner</dt><dd><a href="#lektionsbank">{antalLektioner === 1 ? 'En' : antalLektioner} i lektionsbanken</a></dd></>}
+          {serie && !lektion && antalLektioner > 0 && <><dt>{serie.ord.flera.charAt(0).toLocaleUpperCase('sv') + serie.ord.flera.slice(1)}</dt><dd><a href="#lektionsbank">{antalLektioner === 1 ? 'En' : antalLektioner} {serie.ord.iBanken}</a></dd></>}
           {d.material.length > 0 && <><dt class="bred">Material</dt><dd class="bred">{d.material.join(', ')}{materialLank && <>{' · '}<a href={materialLank}>{'allt material'}</a></>}</dd></>}
           {d.uppdaterad && <><dt>Uppdaterad</dt><dd>{formateraDatum(d.uppdaterad)}</dd></>}
         </dl>

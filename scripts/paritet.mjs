@@ -212,7 +212,7 @@ for (const fil of filer) {
   const saknas = [];
   for (const nr of strukturBilder) {
     const b = d.pabordet.find((x) => x.nr === nr);
-    const alt = norm(`På bordet: ${b.rubrik}. ${b.text}`);
+    const alt = norm(`På bordet: ${b.rubrik} ${b.text}`);
     if (!altWord.has(alt) || !altSida.has(alt)) saknas.push(`    bilden På bordet ${nr} (${b.rubrik}) på strukturens sida: textalternativet med rubriken och bildtexten saknas i ${[!altWord.has(alt) && 'Word-filen', !altSida.has(alt) && 'sidan'].filter(Boolean).join(' och ')}`);
   }
   for (const { vag, text } of texter(d, '', [])) {

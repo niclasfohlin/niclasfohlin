@@ -8,7 +8,7 @@
 // (src/lib/boksida.ts, strukturMatt). Bilden hämtas först när läsaren närmar sig den, och Skriv ut väntar in den.
 import type { Struktur } from '../lib/ramform';
 import { BOKRAD, strukturMatt } from '../lib/boksida';
-import { PABORDET_MATT, type PaBordet } from '../lib/pabordet';
+import { PABORDET_MATT, bildensAlt, type PaBordet } from '../lib/pabordet';
 interface Props { s: Struktur; id: string; ankare: string; bild?: PaBordet }
 const { s, id, ankare, bild } = Astro.props;
 const matt = strukturMatt(s, bild ? PABORDET_MATT : undefined);
@@ -32,7 +32,7 @@ const rader = (t: string) => t.split('\n').map(delar);
   <div class="boksida-ram">
     <h3 id={ankare} class="boksida-titel"><span class="visually-hidden">Strukturen, {s.vid}: </span>{s.titel}</h3>
     {s.text && <p class="formsida-rad">{rader(s.text).map((r, j) => <>{j > 0 && <br />}{r.map((x) => (x.fet ? <strong>{x.text}</strong> : x.kursiv ? <em>{x.text}</em> : x.text))}</>)}</p>}
-    {bild && <p class="struktur-bild"><img src={bild.adress} alt={`På bordet: ${bild.bild.rubrik}. ${bild.bild.text}`} width={PABORDET_MATT.bredd} height={PABORDET_MATT.hojd} loading="lazy" decoding="async" data-utskriftsbild /></p>}
+    {bild && <p class="struktur-bild"><img src={bild.adress} alt={bildensAlt(bild)} width={PABORDET_MATT.bredd} height={PABORDET_MATT.hojd} loading="lazy" decoding="async" data-utskriftsbild /></p>}
     <p class="formsida-rubrik">Så gör ni</p>
     <ol class="boksida-fragor struktur-steg">
       {s.steg.map((x, i) => <li><span class="boksida-nr">{i + 1}.</span><span>{rader(x).map((r, j) => <>{j > 0 && <br />}{r.map((x) => (x.fet ? <strong>{x.text}</strong> : x.kursiv ? <em>{x.text}</em> : x.text))}</>)}</span></li>)}

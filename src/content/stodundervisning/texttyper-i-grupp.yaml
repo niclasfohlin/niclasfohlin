@@ -264,9 +264,9 @@ tabeller:
         - "Hen läser texten som läsaren, med kortet, och skriver in det läsaren saknar. Vad hen gör sedan står i kursens tabell Det du ser, och det du gör."
       - - "Eleven väntar på dig i stället för att börja"
         - "Ge starthjälpen. Anteckna vem det var, under Till nästa pass på bladet Det jag hör, och pröva längre fram om det räcker med uppmuntran."
-    not: "Starthjälpen med första meningen är kursernas eget val, och studierna har inte prövat den."
   - rubrik: De fyra kurserna bredvid varandra
-    plats: efter-grund
+    plats: efter-urval
+    meny: true
     text: "Kurserna har samma fyra steg, samma pass i sex delar och samma åtta grepp. Det som skiljer dem är vad texten gör för läsaren, vilka läsarna är, hur de svarar och vad gruppen lär sig med två texter bredvid varandra."
     kolumner:
       - Kurs

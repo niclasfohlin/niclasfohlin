@@ -261,10 +261,13 @@ if (bilder) {
         // Textens och den sista frågans sista ord, vart för sig: en kort text slutar i raden under anfanget, och pdftotext
         // läser då ut den raden före resten (Saga A om räven i Skrivkurs: sagoboken, 2026-10-02), så att ett svep över de
         // sista tecknen inte hittas fast texten står hel på sidan.
+        // Den sista frågan står dessutom hel, i följd: en veckas sida som nämner texten och dess personer har annars alla
+        // de korta orden (Kaninen i gympapåsen i Texttyp: Berättande text, 2026-10-09, där veckans sida räknades som en
+        // andra sida med texten).
         const sistaOrd = (s) => String(s).split(/\s+/).map(norm).filter(Boolean).slice(-6);
         const nycklar = lastexter.map((ram) => {
           const [text, fragor] = ram.listor;
-          return { rubrik: ram.rubrik, delar: [norm(text.rubrik), ...sistaOrd(text.rader.at(-1)[0]), ...sistaOrd(fragor.rader.at(-1)[0])] };
+          return { rubrik: ram.rubrik, delar: [norm(text.rubrik), ...sistaOrd(text.rader.at(-1)[0]), ...sistaOrd(fragor.rader.at(-1)[0]), norm(String(fragor.rader.at(-1)[0]).replace(/^\d+\.\s*/, ''))] };
         });
         const prova = (sidor, var_) => {
           const ns = sidor.map(norm);

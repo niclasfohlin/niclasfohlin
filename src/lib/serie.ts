@@ -21,8 +21,11 @@ export function serieOrd(bank: NonNullable<MetodData['lektionsbank']>): SerieOrd
 }
 // Var en lektion står i serien, som faktarutans rad Hör till: "förmåga 3 av 8: Första ljudet", och utan nummer
 // "texttyp: Argumenterande text".
-export function platsISerien(serie: Serie, formaga: BankFormaga | undefined): string {
+// Heter kursen som sin grupp i en serie utan nummer ("Texttyp: Instruerande text" under texttypen Instruerande text)
+// säger platsen inget som titeln inte redan säger, och raden Hör till har bara seriens namn (granskningen 2026-10-09).
+export function platsISerien(serie: Serie, formaga: BankFormaga | undefined, lektion?: Lektion): string {
   const grupp = serie.ord.grupp.toLocaleLowerCase('sv');
+  if (!serie.ord.numrerad && lektion && formaga && lektion.namn === formaga.namn) return '';
   return serie.ord.numrerad ? `${grupp} ${formaga?.nr ?? ''} av ${serie.formagor.length}: ${formaga?.namn ?? ''}` : `${grupp}: ${formaga?.namn ?? ''}`;
 }
 // Det en metod vet om sin serie. Den generella metoden har serien med banken; en lektion har dessutom sin plats i

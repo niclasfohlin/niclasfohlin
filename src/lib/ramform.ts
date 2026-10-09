@@ -54,7 +54,10 @@ export function textparAv(ram: FormRam): Textpar | null {
 }
 // Lärarens sida till två texter: ramen med texterna och rutorna, utan frågorna, och raden om elevens sida i stället för
 // ramens text, som står på elevens sida.
-export const textparLarare = <R extends FormRam>(ram: R): R => ({ ...ram, text: [TEXTPAR_RAD], listor: [ram.listor![0]] });
+// Listan med texterna märks, så att Word-filen behåller textens radbrytningar (ett steg per rad i Instruerande text) i
+// cellerna, som elevens sida gör; sidan och utskriften gör det med CSS (.m-textpar-larare).
+export const TEXTPAR_LISTOR = new WeakSet<object>();
+export const textparLarare = <R extends FormRam>(ram: R): R => { const lista = { ...ram.listor![0] }; TEXTPAR_LISTOR.add(lista); return { ...ram, text: [TEXTPAR_RAD], listor: [lista] }; };
 
 // En kooperativ struktur på ett A4 (Texttyper i grupp, metodriggens TILL-SAJTEN 2026-10-09; Niclas 2026-10-09: "En social
 // aktivitet för varje texttyp beskriven på en sida som en kooperativ struktur som tränar det centrala i texttypen ... en

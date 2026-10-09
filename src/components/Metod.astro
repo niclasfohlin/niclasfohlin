@@ -201,7 +201,17 @@ const menyEfter: Record<string, string | undefined> = {
   'efter-tidsschema': pass ? 'passrutin' : 'tidsschema', 'efter-steg': 'steg', 'efter-arbetsform': 'arbetsform',
   'efter-fastnar': 'fastnar', 'efter-urval': bank ? 'lektionsbank' : 'urval', 'efter-grund': 'grund',
 };
-const menyTabeller = d.tabeller.filter((t) => t.meny).map((t) => ({ efter: t.plats === 'efter-inledning' ? undefined : menyEfter[t.plats], post: { id: tabellAnkare.get(t)!, namn: t.rubrik.split(':')[0].trim() } }));
+// Saknar metoden avsnittet tabellen står efter (Texttyper i grupp har tabeller efter steg men ingen stegtabell), står
+// posten efter det närmaste avsnittet före i sidans ordning som finns, eller överst, så att ingen tabell faller ur
+// menyn (granskningen 2026-10-09: fyra av sju tabeller saknades).
+const sidansOrdning = ['passrutin', 'tidsschema', 'steg', 'arbetsform', 'exempel', 'fastnar', 'roll', 'urval', 'lektionsbank', 'hem', 'progression', 'uppfoljning', 'mal', 'snabbmall', 'checklista', 'grund'];
+const finns = new Set(avsnitt.map((a) => a.id));
+const narmastFore = (id: string | undefined) => {
+  if (!id || finns.has(id)) return id;
+  for (let i = sidansOrdning.indexOf(id) - 1; i >= 0; i--) if (finns.has(sidansOrdning[i])) return sidansOrdning[i];
+  return undefined;
+};
+const menyTabeller = d.tabeller.filter((t) => t.meny).map((t) => ({ efter: t.plats === 'efter-inledning' ? undefined : narmastFore(menyEfter[t.plats]), post: { id: tabellAnkare.get(t)!, namn: t.rubrik.split(':')[0].trim() } }));
 const meny = [
   ...menyTabeller.filter((m) => !m.efter).map((m) => m.post),
   ...avsnitt.flatMap((a) => [a, ...menyTabeller.filter((m) => m.efter === a.id).map((m) => m.post), ...(a.id === 'ramar' ? menyLektioner : [])]),
@@ -417,9 +427,13 @@ const meny = [
     <section id="urval">
       <h2>{d.urval.rubrik}</h2>
       {d.urval.text.map((s) => <p>{s}</p>)}
-      {d.urval.kravText && <p>{d.urval.kravText}</p>}
-      <div class="m-band" style={`--delar:${d.urval.krav.length}`}>
-        {d.urval.krav.map((x) => <div><strong>{x.rubrik}</strong><span>{x.text}</span></div>)}
+      {/* Raden före kraven hålls ihop med dem i utskriften, så att den inte står ensam sist på en sida (granskningen
+          2026-10-09). */}
+      <div class="m-krav">
+        {d.urval.kravText && <p>{d.urval.kravText}</p>}
+        <div class="m-band" style={`--delar:${d.urval.krav.length}`}>
+          {d.urval.krav.map((x) => <div><strong>{x.rubrik}</strong><span>{x.text}</span></div>)}
+        </div>
       </div>
       {d.ramar && <p class="m-efter"><a href="#ramar">{d.ramar.rubrik}</a> ligger efter grunden, och som egna sidor att kopiera i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>}
       <Filmruta filmer={vid({ avsnitt: 'urval' })} titel={d.titel} />
@@ -480,7 +494,7 @@ const meny = [
     <section id="mal">
       <h2>{d.mal.rubrik}</h2>
       <p>{d.mal.text}</p>
-      <ul class="m-bockar tva" data-bockar>{d.mal.punkter.map((p) => <li><label><input type="checkbox" /> {p}</label></li>)}</ul>
+      <ul class="m-bockar tva" data-bockar>{d.mal.punkter.map((p) => <li><label><input type="checkbox" /> <span>{p}</span></label></li>)}</ul>
       <p class="bara-js m-rensa"><button type="button" class="lank" data-rensa-bockar>Rensa kryssen</button></p>
       <Filmruta filmer={vid({ avsnitt: 'mal' })} titel={d.titel} />
     </section>
@@ -510,7 +524,7 @@ const meny = [
   {d.checklista && (
     <section id="checklista">
       <h2>{d.checklista.rubrik}</h2>
-      <ul class="m-bockar" data-bockar>{d.checklista.punkter.map((p) => <li><label><input type="checkbox" /> {p}</label></li>)}</ul>
+      <ul class="m-bockar" data-bockar>{d.checklista.punkter.map((p) => <li><label><input type="checkbox" /> <span>{p}</span></label></li>)}</ul>
       <p class="bara-js m-rensa"><button type="button" class="lank" data-rensa-bockar>Rensa kryssen</button></p>
       <Filmruta filmer={vid({ avsnitt: 'checklista' })} titel={d.titel} />
     </section>
@@ -558,12 +572,12 @@ const meny = [
           <Filmruta filmer={[...fler, ...filmerVid(filmer, { ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
         </>);
       })() : (<>
-        <section class={`m-ram${protokollDelas(ram) ? ' delad' : ''}${arLararsida(ram) ? ' m-lararsida' : ''}${lage === 'material' ? ' m-veckans' : ''}`} id={lage === 'vecka' ? undefined : lage === 'material' ? listAnkare.get(`${ri}-${lista}`) : `ram-${ri + 1}`}>
+        <section class={`m-ram${protokollDelas(ram) ? ' delad' : ''}${arLararsida(ram) ? ' m-lararsida' : ''}${lage === 'material' ? ' m-veckans' : ''}${par ? ' m-textpar-larare' : ''}`} id={lage === 'vecka' ? undefined : lage === 'material' ? listAnkare.get(`${ri}-${lista}`) : `ram-${ri + 1}`}>
           {lage !== 'vecka' && lage !== 'material' && <h3 id={ramAnkare[ri]}>{hel(ram.rubrik)}</h3>}
           {ram.text.map((s) => <p>{s}</p>)}
           {ram.serie && antalRutor[ram.serie] === 1 && <Serierutor rutor={serieBlad(ram)} />}
           {ram.sagoform && <p class="m-efter">{sagoNamn[ram.sagoform.form] ?? 'Bladet'} att kopiera, med {ram.sagoform.bilder?.length ? 'ramen, bilderna och raderna' : 'ramen och raderna'}, finns i <a href={mallarLank} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word). Här står vad {ram.sagoform.form === 'skyltar' || ram.sagoform.form === 'kort' ? 'de' : 'det'} innehåller.</p>}
-          {(ram.listor ?? []).some((l) => arTarning(d, l)) && <p class="m-efter">Tärningarna att klippa, vika och limma, en på varje A4 med bilderna, finns i <a href={mallarLank} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word). Här står orden på sidorna, och de skrivs inte ut.</p>}
+          {(ram.listor ?? []).some((l) => arTarning(d, l)) && <p class="m-efter m-ej-utskrift">Tärningarna att klippa, vika och limma, en på varje A4 med bilderna, finns i <a href={mallarLank} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word). Här står orden på sidorna, och de skrivs inte ut.</p>}
           {arElevensBlad(ram) && <p class="m-efter">Bladet att lägga framför eleven, med stor text och bara det eleven läser, finns i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>}
           {ram.oversikt && <MetodTabell kolumner={ram.oversikt.kolumner} rader={ram.oversikt.rader} klass={kortaCeller(ram.oversikt.rader) ? 'fri tat' : friKlass(ram.oversikt)} radrubrik={false} />}
           {ram.listor ? (
@@ -598,7 +612,9 @@ const meny = [
                 const stodKolumn = info ? undefined : laskortKolumn(l);
                 if (stodKolumn !== undefined) return <Laskort lista={l} stodKolumn={stodKolumn} />;
                 // En tärnings ord står på skärmen men inte i utskriften: tärningen att vika finns i planeringsmallarna.
-                if (info && arTarning(d, l)) return <div class="m-ej-utskrift"><Kortlista rubrik={l.rubrik} info={info} nyGrupp={info.grupp !== forra} brak={brak} /></div>;
+                // Alla tärningar står i samma form, tre ord i bredd, också när ett ord är längre än tio tecken (en
+                // astronaut): annars stod tärningarna i en ram i två storlekar (Texttyp: Berättande text, 2026-10-09).
+                if (info && arTarning(d, l)) return <div class="m-ej-utskrift"><Kortlista rubrik={l.rubrik} info={{ ...info, korta: false, medel: true }} nyGrupp={info.grupp !== forra} brak={brak} /></div>;
                 return info
                   ? <Kortlista rubrik={l.rubrik} info={info} nyGrupp={lage === 'material' || info.grupp !== forra} brak={brak} />
                   : <Elevlista {...(l.rakneblad ? listansNiva(d.nivaer, l.rubrik) : { rubrik: l.rubrik })} id={bladAnkare.get(`${ri}-${li}`)} kolumner={l.kolumner} rader={l.rader} brak={brak} huvud={plats === 0 ? ram.huvud : undefined} klass={arEttKort(alla, l) ? 'kort' : ''} elev={elevtypsnitt && !l.larare} />;
@@ -618,21 +634,22 @@ const meny = [
                     )}
                     {ram.delar.map((del) => (
                       <div class="m-ramdel">
-                        <h4>{del.rubrik}<span class="m-ramnamn"> · {ram.rubrik}</span></h4>
+                        <h4>{del.rubrik}{del.rubrik !== ram.rubrik && <span class="m-ramnamn"> · {ram.rubrik}</span>}</h4>
                         <dl class="m-ramfalt">
                           {del.falt.map((f) => <div style={`--hojd:${d.elevblad[ram.rubrik][f.rubrik] ?? 2}`}><dt>{f.rubrik}</dt><dd></dd></div>)}
                         </dl>
                       </div>
                     ))}
                   </div>
-                  <p class="m-efter">Bladet finns i full storlek i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a>.</p>
+                  {/* Ett sagoblad har redan sin hänvisning till planeringsmallarna överst i ramen (granskningen 2026-10-09). */}
+                  {!ram.sagoform && <p class="m-efter">Bladet finns i full storlek i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a>.</p>}
                 </>
               )
               : <p class="m-efter">Ramen att fylla i, med {ram.delar.length === 1 ? 'en del' : `${ram.delar.length} delar`}, finns i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a>.</p>)
             : (
               <div class="m-ramdelar">
                 {ram.lektioner && lage !== 'vecka' && (
-                  <ol class="m-lektionskort m-veckokort" aria-label={`${ram.delar.length} ${(ram.rubrik.split(':')[1] ?? 'delar').trim()}`}>
+                  <ol class="m-lektionskort m-veckokort" aria-label={(ram.rubrik.split(':')[1] ?? 'delarna').trim().replace(/^\p{Ll}/u, (c) => c.toLocaleUpperCase('sv'))}>
                     {ram.delar.map((del, di) => {
                       const [forsta, ...resten] = del.rubrik.split(' · ');
                       const nr = forsta.match(/\d+/)?.[0] ?? String(di + 1);
@@ -656,7 +673,7 @@ const meny = [
                   if (lage === 'huvud' || (lage === 'vecka' && di !== vecka)) return null;
                   const rutan = (
                   <div class="m-ramdel" id={ram.lektioner ? delAnkare[ri][di] : undefined}>
-                    <h4>{del.rubrik}<span class="m-ramnamn"> · {ram.rubrik}</span></h4>
+                    <h4>{del.rubrik}{del.rubrik !== ram.rubrik && <span class="m-ramnamn"> · {ram.rubrik}</span>}</h4>
                     <dl class="m-ramfalt">
                       {del.falt.map((f) => (
                         <div><dt>{f.rubrik}</dt><dd>{f.kursiv ? <em>{linjer(f.text).map((x, j) => <>{j > 0 && <br />}{x}</>)}</em> : linjer(f.text).map((x, j) => <>{j > 0 && <br />}{x}</>)}</dd></div>

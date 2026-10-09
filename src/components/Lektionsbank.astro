@@ -12,6 +12,8 @@ const antal = serie.lektioner.length;
 // Seriens ord (src/lib/serie.ts, serieOrd): Förmåga och lektion i Ljudlek i grupp, Texttyp och kurs utan nummer i
 // Texttyper i grupp.
 const { ord } = serie;
+// Heter lektionen som förmågan, som kursen Argumenterande text under texttypen Argumenterande text, står bara gruppens ord
+// överst, så att namnet inte står två gånger.
 ---
 <section id="lektionsbank" class="m-bank">
   <h2>{serie.rubrik}</h2>
@@ -19,7 +21,7 @@ const { ord } = serie;
   <ol class="m-lektionskort" aria-label={`${antal === 1 ? `En ${ord.en}` : `${antal} ${ord.flera}`}, ordnade efter ${ord.grupp.toLocaleLowerCase('sv')}`}>
     {serie.formagor.flatMap((f) => (f.lektioner.length ? f.lektioner : [undefined]).map((l) => (
       <li class={`m-lektionskort-kort${l ? '' : ' tom'}`}>
-        <p class="m-lektionskort-formaga">{ord.numrerad && <span class="m-lektionskort-nr" aria-hidden="true">{f.nr}</span>}<span>{ord.grupp}{ord.numrerad && <span class="visually-hidden"> {f.nr}</span>}: {f.namn}</span></p>
+        <p class="m-lektionskort-formaga">{ord.numrerad && <span class="m-lektionskort-nr" aria-hidden="true">{f.nr}</span>}<span>{ord.grupp}{ord.numrerad && <span class="visually-hidden"> {f.nr}</span>}{l?.namn !== f.namn && `: ${f.namn}`}</span></p>
         {l ? (
           <>
             <h3><a href={`/stodundervisning/${l.id}`}>{l.namn}</a></h3>

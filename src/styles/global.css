@@ -704,7 +704,7 @@ button.lank:hover { color: var(--farg-accent); }
 /* Elevens sida till två texter och strukturens sida (Textpar.astro, Struktur.astro): boksidans ram och titel, med raden
    till eleven, rubrikerna i Cinzel i rött och texten i elevens typsnitt, som i Word. På en smal skärm står de två texterna
    under varandra, på bredare sida vid sida med en tunn linje emellan. */
-.formsida-rad { font-family: var(--typsnitt-elev); font-size: 1.05rem; line-height: 1.45; text-align: center; margin: 0 0 1.2rem; }
+.formsida-rad { font-family: var(--typsnitt-elev); font-size: 1.05rem; line-height: 1.45; text-align: center; margin: 0 0 1.2rem; text-wrap: balance; }
 .formsida-rubrik, .formsida-etikett, .textpar-nr, .struktur-ruta-rubrik { font-family: 'Cinzel', serif; font-weight: 400; color: var(--bok-rod); text-align: center; }
 .formsida-rubrik { font-size: 1.05rem; margin: 1.2rem 0 0.7rem; }
 .formsida-rubrik::before { content: ''; display: block; width: 45%; margin: 0 auto 1.2rem; border-top: 1px solid var(--bok-skiljare); }
@@ -721,6 +721,11 @@ button.lank:hover { color: var(--farg-accent); }
 .struktur-bild { margin: 0 auto 1rem; max-width: var(--bild-andel, 80%); }
 .struktur-bild img { display: block; width: 100%; height: auto; }
 @media (max-width: 34rem) { .struktur-bild { max-width: none; } }
+/* På en smal skärm står de två texterna bara på elevens sida, direkt under lärarens rutor: i lärarens tabell blev
+   spalterna för smala, och samma texter stod två gånger i följd. På dator och i utskriften står de i båda, som i Word. */
+@media screen and (max-width: 34rem) { .m-textpar-larare .m-lista { display: none; } }
+/* Texternas radbrytningar (ett steg per rad) står kvar i lärarens tabell, som på elevens sida. */
+.m-textpar-larare .m-lista td { white-space: pre-line; }
 .formsida .boksida-fragor { font-size: 1.1rem; }
 .struktur-ruta { border: 1px solid var(--bok-rod); padding: 0.6rem 0.9rem; margin: 1.1rem 0.6rem 0; font-family: var(--typsnitt-elev); font-size: 1rem; line-height: 1.45; }
 .struktur-ruta p { margin: 0; }
@@ -783,7 +788,9 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 /* Kartans rubrikrad: nivåerna i hela sin färg, med namnet stort och fett som skyltarna på bladen, så att kontrasten räcker
    för stor text, men nästan utan luft, så att raden blir lägre än en vanlig rubrikrad (Niclas 2026-10-04: "raden med bas
    avancerad och medel är för tjock i höjd", och "Var snyggare ... med grön, gul, röd full färg"). */
-.m-tabell.karta thead th { padding-top: 0.1rem; padding-bottom: 0.1rem; line-height: 1.15; }
+/* På skärmen har bara en karta med nivåer den låga raden; en karta utan nivåer (Texttyper i grupp) har vanlig
+   rubrikrad (granskningen 2026-10-09). I utskriften är raden låg i alla kartor, och veckosidans mått räknar med det. */
+.m-tabell.karta:has(th.niva) thead th { padding-top: 0.1rem; padding-bottom: 0.1rem; line-height: 1.15; }
 .m-tabell th.niva { background: var(--niva); color: var(--niva-text); border-color: var(--niva); font-size: 1.2rem; }
 .m-karta-vecka { display: block; color: var(--farg-accent); }
 .m-karta-vecka .forsta { font-weight: 700; }
@@ -1128,6 +1135,9 @@ html.js .bara-js { display: inline-block; }
 .lh-kol, .lh-avsnitt { min-width: 0; overflow-x: auto; }
 .lh-kol, .lh-avsnitt { min-width: 0; overflow-x: auto; }
 .lh-kol p, .lh-block p { margin: 0 0 0.6em; }
+/* Inget ensamt ord på en egen rad i lathundens rubriker, celler och stycken ("TEXT", "då?”" på sidan 2 i Texttyper i grupp,
+   granskningen 2026-10-09). */
+.lh-sida :is(h2, h3, p, td, th, li) { text-wrap: pretty; }
 .lh-ruta { border: 1.5px solid var(--farg-text); margin: 0.75rem 0 1rem; }
 .lh-ruta > h3 { margin: 0; background: var(--farg-text); color: #fff; font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.4rem 0.8rem; font-weight: 500; }
 .lh-ruta-kropp { padding: 0.6rem 0.8rem 0.2rem; }
@@ -1503,6 +1513,13 @@ html.js .bara-js { display: inline-block; }
   /* max-width: en webbläsare som inte kan lägga mallen på en liggande sida krymper den till sidans bredd i stället för att
      klippa den. Chrome, Edge och Firefox lägger den liggande i riktigt mått. */
   .m-mall-bild { width: calc(var(--bredd) * 1mm); min-width: 0; max-width: 100%; }
+  /* Mallens rubrik, text och fot står tätt, så att mallen ryms med foten på sin liggande sida (Texttyper i grupp,
+     2026-10-09: foten under Lapparna, Planen och Mina texter hamnade ensam på nästa sida). */
+  .m-mall figcaption h3 { font-size: 12pt; margin: 0 0 1mm; }
+  .m-mall figcaption p { font-size: 8.5pt; line-height: 1.3; margin: 0 0 1.5mm; }
+  .m-mall-fot { margin-top: 2mm; padding: 1.5mm 3mm; }
+  .m-mall-fot p { font-size: 9pt; line-height: 1.3; }
+  .m-krav { break-inside: avoid; }
   /* Avsnittets rubrik och ingress blir inte ensamma sist på en sida: varje mall bär sin egen rubrik. Arken per talsort
      skrivs ut ur planeringsmallarna, så utskriften från sidan visar en hänvisning i stället för bilden. */
   #mallar > h2, #mallar > p { display: none; }
@@ -1531,7 +1548,7 @@ html.js .bara-js { display: inline-block; }
   .m-vecka .m-ramfalt > div { grid-template-columns: 31mm minmax(0, 1fr); }
   .m-vecka .m-ramfalt dt, .m-vecka .m-ramfalt dd { padding: 1.2mm 2.5mm; }
   .m-vecka .m-kartrad .m-tabell { font-size: 9pt; }
-  .m-tabell.karta thead th { padding-top: 0.4mm; padding-bottom: 0.4mm; }
+  .m-tabell.karta thead th { padding-top: 0.4mm; padding-bottom: 0.4mm; line-height: 1.15; }
   .m-tabell th.niva { font-size: 14pt; line-height: 1.1; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .m-vecka-bild { break-inside: avoid; margin-top: 1.2mm; }
   .m-vecka .m-kartrad { flex: none; }
