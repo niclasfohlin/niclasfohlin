@@ -286,6 +286,48 @@
     "sekunder": 29.81,
     "omslagVid": 14.88
   },
+  "texttyp-argumenterande-text-film": {
+    "kalla": "b00b2636a22cdd24",
+    "mp4": "6f35a280f6d33a57",
+    "omslag": "d1b5875d25695ec1",
+    "sekunder": 28.52,
+    "omslagVid": 19.68
+  },
+  "texttyp-berattande-text-film": {
+    "kalla": "24730eb014340fe6",
+    "mp4": "765e1b3899675312",
+    "omslag": "7812a9189db81a9f",
+    "sekunder": 29.86,
+    "omslagVid": 21.08
+  },
+  "texttyp-beskrivande-text-film": {
+    "kalla": "aea1eb9fbaba1cfd",
+    "mp4": "39513b3b29f5e5f6",
+    "omslag": "847e81f54a459eee",
+    "sekunder": 29.45,
+    "omslagVid": 20.88
+  },
+  "texttyp-instruerande-text-film": {
+    "kalla": "6958c1ce9d28cd17",
+    "mp4": "d788b30df559e6df",
+    "omslag": "8a24cd920ebba221",
+    "sekunder": 28.91,
+    "omslagVid": 20.44
+  },
+  "texttyper-i-grupp-film": {
+    "kalla": "3de712a70a0266f3",
+    "mp4": "3982051d5bfefa71",
+    "omslag": "7b862e5d1e8e3cbd",
+    "sekunder": 28.76,
+    "omslagVid": 17.68
+  },
+  "texttyper-i-grupp-film2": {
+    "kalla": "dc4594039aa1f260",
+    "mp4": "dc068af874ab2621",
+    "omslag": "b9693a8d68bed8a1",
+    "sekunder": 27.04,
+    "omslagVid": 4.8
+  },
   "til-i-grupp-film": {
     "kalla": "44fc738036d203f5",
     "mp4": "bdc5db9b9d738b30",

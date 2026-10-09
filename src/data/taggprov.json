@@ -3,6 +3,11 @@
   "poster": {
     "src/content/stodundervisning/seriesamtal.yaml": "2026-10-04",
     "src/content/stodundervisning/fyra-raknesatten.yaml": "2026-10-04",
-    "src/content/stodundervisning/ordverkstad-i-grupp.yaml": "2026-10-06"
+    "src/content/stodundervisning/ordverkstad-i-grupp.yaml": "2026-10-06",
+    "src/content/stodundervisning/texttyper-i-grupp.yaml": "2026-10-09",
+    "src/content/stodundervisning/texttyp-argumenterande-text.yaml": "2026-10-09",
+    "src/content/stodundervisning/texttyp-berattande-text.yaml": "2026-10-09",
+    "src/content/stodundervisning/texttyp-beskrivande-text.yaml": "2026-10-09",
+    "src/content/stodundervisning/texttyp-instruerande-text.yaml": "2026-10-09"
   }
 }

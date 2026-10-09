@@ -1,0 +1,1160 @@
+# Texttyp: Berättande text. Den andra kursen i serien Texttyper i grupp, efter piloten Texttyp: Argumenterande text, på
+# Niclas uppdrag 2026-10-06 (intake/texttyp-berattande-text.md och intake/texttyper-i-grupp.md). Formen är seriens
+# (methods/texttyper-i-grupp/kursstandard.md), och det som gäller alla kurser står i methods/texttyper-i-grupp/metod.yaml.
+# Kursens två texter är Niclas: en berättelse till yngre elever som gruppen först intervjuar, och en spökberättelse från
+# en känd plats, läst på en spökläsning med en läsplats under ett lakan. Underlaget är seriens register
+# (intake/texttyper-i-grupp/REGISTER.md) med sökning 7–9, och valen står i analys.md. De två texterna om Sara i skogen
+# och lärarens ord om dem kommer ur Skriv! (intake/skrivkurs-sagoboken/skriv-bok.md, rad 801–823), och frågan
+# ”Hur märker läsaren det?” från rad 3718.
+titel: "Texttyp: Berättande text"
+undertitel: "Sex veckors kurs i liten grupp för åk 4–7, där eleverna berättar för läsare som svarar"
+ingress: "En kurs i sex veckor för två till tio elever i åk 4–7 som i sina berättelser räknar upp det som händer. Eleverna lär sig berätta så att läsaren är med. De skriver först en berättelse till yngre elever som de har intervjuat, och sedan en spökberättelse till en spökläsning. Kursen hör till Texttyper i grupp."
+omrade: Skrivning
+arskurs:
+  - 4-6
+  - 7-9
+arskursText: åk 4–7
+taggar:
+  - skrivstrategier
+  - textstruktur
+  - formativ-bedomning
+  - intensivtraning
+format:
+  - liten grupp
+  - par
+tid: 60 minuter per pass, två pass i veckan
+period: Sex veckor
+grupp: Två till tio elever
+material:
+  - lappar
+  - bladet Planen
+  - kortet Läsarens frågor
+  - bladet Intervjun
+  - "veckans texter"
+  - "ett lakan och två ficklampor"
+
+uppdaterad: 2026-10-09
+publicerad: 2026-10-09
+relaterade: []
+utkast: false
+serie: texttyper-i-grupp
+formaga: 2
+tranar: "berätta så att läsaren är med, genom att välja det läsaren vill vara med om, visa hur det känns och stanna kvar i det som händer"
+
+inledning:
+  - "Texttyp: Berättande text är en kurs för elever i åk 4–7 som behöver stöd i att skriva. När de skriver en berättelse räknar de ofta upp det som händer, från morgon till kväll. Det som skulle bli spännande är över på en mening, och läsaren får inte veta hur det känns. I kursen lär de sig berätta för en läsare. En berättande text låter läsaren vara med om något, och den lyckas när läsaren får veta vem det handlar om och var, vad som händer, hur det känns och hur det går. Kursen har två berättelser, två läsare och samma fyra steg. Den första berättelsen går till en yngre elev som eleverna har intervjuat, och den andra är en spökberättelse till lyssnarna på en spökläsning."
+  - "På tavlan står tre rader: Vem läser? Vad vill vi? När får vi svar? Vid den tredje står när läsaren får höra berättelsen och svarar. På bordet ligger lappar, bladet Planen, kortet Läsarens frågor och bladet Intervjun. Lapparna är remsor av papper, som du klipper ur arket Lapparna. På den första lappen skriver eleverna vad de vill att läsaren ska känna. Är läsaren Vera, sju år, kan det stå ”Vera ska skratta”. På var och en av de andra skriver de något som händer, med några ord: ”Påsen rör på sig”. Sedan lägger de lapparna på bladet Planen. Vid varje lapp frågar de sig om läsaren vill vara med om det. De lägger minst en lapp åt sidan, och den som gör det säger varför. De lappar som ligger kvar lägger de i ordning, och det är planen för berättelsen."
+  - "Eleven lär sig genom att höra dig tänka högt och sedan göra likadant. Du frågar som läsaren, säger dina val högt och lämnar över. Det eleven ska ta över är att välja för läsarens skull och säga valet högt: ”Jag lägger den här lappen åt sidan, för Vera tycker att åska är läskigt.” Eleven gör varje berättelse med samma fyra steg, Tänk, Planera, Säg och Skriv. De står på bladet Planen. I steget Säg berättar eleven för en läsare ur ett annat par. Läsaren håller kortet och frågar bara det hen inte fick veta. Det eleven svarar då är oftast det som saknades, till exempel hur det känns. Svaret blir en ny lapp och sedan en mening i berättelsen. Mitt i skrivandet möter eleven andras berättelser och läsarens frågor, och väljer vad hen använder i sin egen berättelse. När berättelsen är klar skriver hen vad hen tar med sig till nästa."
+  - "Kursens läsare lyssnar, eftersom eleverna läser upp sina berättelser. De första läsarna är yngre elever. I vecka 1 intervjuar varje par en yngre elev om vad hen tycker om, och paret skriver svaren på bladet Intervjun. I vecka 2 planerar paret en berättelse till just den eleven, och var och en skriver sin. I vecka 3 kommer de yngre eleverna på läsbesök, får höra berättelserna och säger vad de minns bäst. De andra läsarna är lyssnarna på en spökläsning, och dem bjuder eleverna själva in. Eleverna skriver spökberättelser från en plats som alla känner, i eller nära skolan: först en med parets plan och sedan en egen. Den egna läser eleven upp i det sista passet, när ni har byggt en läsplats under ett lakan och gjort det mörkt i rummet. Efter varje berättelse säger lyssnarna var i berättelsen de var med, och vad de undrar."
+  - "De sex veckorna går från att du visar till att eleven skriver själv. I vecka 1 skriver eleven en kort berättelse utan stöd, som ni lägger bredvid en ny i vecka 6. I vecka 2 visar du hur du planerar och skriver en berättelse, och paren gör efter dig. I vecka 3 skriver gruppen en berättelse tillsammans, i vecka 4 planerar paren en spökberättelse, och i vecka 5 planerar var och en sin egen. I vecka 6, före spökläsningen, läser gruppen två uppgifter som liknar provens, så att eleven känner igen när en uppgift ber om en berättande text. Det som gäller alla kurser i serien står i Texttyper i grupp: vilka eleverna är, hur du tänker högt, vad du gör när en elev fastnar och vad kurserna bygger på."
+
+upplagg:
+  rubrik: Så fungerar insatsen
+  text: "Två till tio elever har två pass om 60 minuter i veckan under sex veckor. Eleven gör varje berättelse med fyra steg, Tänk, Planera, Säg och Skriv: hen säger vem som läser, väljer det läsaren vill vara med om, berättar för en läsare och skriver. Du tar bort stödet vecka för vecka: du visar, gruppen skriver tillsammans, paren planerar och var och en skriver sin egen berättelse. Berättelsen från vecka 2 läser eleven för en yngre elev som paret har intervjuat, och spökberättelsen på en spökläsning. De korta berättelserna i pass 1 och 11, elevens diagram och det du hör visar om kursen hjälper."
+
+gruppen:
+  rubrik: Så sätter du ihop gruppen
+  text: "Kursen är för elever i åk 4–7 som i sina berättelser räknar upp det som händer: problemet löser sig på en mening, och läsaren får inte veta hur det känns. Eleven behöver kunna berätta om något som har hänt och få ned läsbara meningar för hand, på dator eller genom att diktera. Den som redan låter läsaren vara med får inte ut mycket av kursen, och den vars största hinder är stavningen behöver stöd i stavning vid sidan av kursen. Gruppen har två till tio elever. Du sätter ihop paren efter vem som stöttar vem. Med udda antal blir ett av paren tre, och med två elever är du läsare åt dem."
+
+principer:
+  rubrik: Tre saker att hålla fast vid
+  text: "Nämn läsaren före första ordet, i varje berättelse. Läsaren avgör vad som ska med. Lägg något åt sidan eller lägg till något för läsarens skull, och säg varför, så att valet hörs och syns på pappret. Kör fast högt, och säg vad du gör då. Eleven behöver höra att också du fastnar och hur du tar dig vidare. De tre sakerna ska först höras från dig och sedan från eleven, och det är dem du lyssnar efter."
+
+passrutin:
+  text: "Fem av passen, pass 4 och pass 6 till 9, har samma sex delar. I delarna Tänk och planera, Säg och Skriv gör eleverna de fyra stegen. En berättelse tar oftast två pass. Tabellens minuter gäller pass 7, där eleverna planerar, berättar och börjar skriva. De andra fyra passen har samma delar med andra minuter, och alla passens minuter står på veckans sida."
+  steg:
+    - text: "En elev läser dagens mening som läsaren. Alla skriver en ny mening som svar, och ni lägger dem bredvid varandra. Var och en gör sin mening bättre."
+      fas: Läs som läsaren
+    - text: "Du visar det som står på veckans sida. Gruppen säger vad de hörde och prövar samma sak en gång tillsammans."
+      fas: Visa och pröva
+    - text: "Eleven läser bladet Mitt mål. Paret säger vem som läser. På lappar skriver de vad läsaren ska känna och det som händer, och lägger minst en åt sidan och resten i ordning."
+      fas: Tänk och planera
+    - text: "Skribenten berättar för en läsare ur ett annat par. Läsaren har kortet och frågar det hen inte fick veta. Svaret blir en ny lapp. Sist säger läsaren sin första mening."
+      fas: Säg
+    - text: "Var och en skriver efter planen, på varannan rad. Den som är klar läser berättelsen som läsaren, med kortet, och skriver in det läsaren saknar."
+      fas: Skriv
+    - text: "Två elever läser en mening ur sin berättelse och berättar om ett val."
+      fas: Läs upp
+  kallas: delar
+  efterPasset: "Fäst lapparna på bladet Planen. Fyll i fältet Till nästa pass på bladet Det jag hör. Efter pass 4, 8 och 10 läser du berättelserna och svarar. Se Till läraren: de korta berättelserna."
+
+tidsschema:
+  rubrik: "Ett pass i sex delar"
+  text: "Förbered dig genom att läsa veckans sida under Till läraren: veckorna. Där står dagens mening, vad du visar och vad du ska lägga märke till, och passets minuter när de skiljer sig från tabellens. Minuterna är hållpunkter: det tar tid att komma i gång, och Skriv är lång för att passet ska ha luft."
+  rader:
+    - tid: Före passet
+      fas: Förberedelse
+      vad: "Skriv tavlans tre rader och dagens mening. Lägg fram lappar, pennor, bladet Planen, kortet och mapparna. Välj två eller tre elever som du lyssnar särskilt på."
+    - tid: 0–5 min
+      fas: Läs som läsaren
+      vad: "Fråga ”Vad vet du nu? Vad undrar du?” Den som inte hinner skriva säger sin mening. Fråga sedan ”Vilken mening ger läsaren mest? Varför?”"
+    - tid: 5–15 min
+      fas: Visa och pröva
+      vad: "Skriv på tavlan vad ni övar på, och visa bara det. Fråga ”Vad hörde ni mig säga?” Lägg undan veckans texter före Skriv."
+    - tid: 15–27 min
+      fas: Tänk och planera
+      vad: "Fråga efter läsaren före händelserna. Vid varje lapp: ”Vill läsaren vara med om det?” Sedan: ”Vilken lapp lägger ni åt sidan? Varför?”"
+    - tid: 27–33 min
+      fas: Säg
+      vad: "Lyssna på en skribent i taget, och säg ”Det du svarade nu ska med i berättelsen.” Kan hen inte svara, tar paret reda på det."
+    - tid: 33–57 min
+      fas: Skriv
+      vad: "Säg ”Skriv det du sa.” Läs en mening över axeln och ställ en enda fråga ur kortet, som ”Hur känns det?” Rätta inte nu. Den som inte kommer i gång får hjälp med första meningen."
+    - tid: 57–60 min
+      fas: Läs upp
+      vad: "Fråga efter ett val: ”Vilken lapp lade du åt sidan? Varför?” När en berättelse är klar skriver eleven vad hen tar med sig."
+  efter: "Tavlans tre rader är frågorna om läsaren: Vem läser? Vad vill vi? När får vi svar? Vid den första skriver du vem som ska höra berättelsen, och vid den tredje när läsaren svarar: i dag, på läsbesöket, i nästa pass eller på spökläsningen. Svaret på frågan Vad vill vi? står på den första lappen, och på tavlan när hela gruppen vill samma sak. Dagens mening tar du aldrig ur en elevs egen berättelse. Har gruppen läst texten som meningen kommer ur, skriver eleverna en egen mening och inte den som följer i texten. De tre svarsraderna är läsarens svar, och de står på kortets andra sida: Nu vet jag, Här var jag med och Nu undrar jag."
+
+arbetsform:
+  rubrik: "Arbetsform: gemensamt, läraren visar, i par, gemensamt igen"
+  text: "I delen Säg sätter sig två par ihop, och läsaren kommer ur det andra paret. De två som berättar gör det samtidigt, var och en för sin läsare. Blir ett par över, är du läsare åt det paret, och åt ett annat par nästa gång. Så blir det i varje pass när gruppen har två, tre, sex, sju eller tio elever. Då skriver du på bladet Det jag hör vad det paret säger, och den andra i paret säger sist sin första mening till dig. Är en i paret borta, blir kamraten den tredje i ett annat par. I pass 9 har var och en sin egen plan, och då är kamraten läsaren. Paren är desamma hela kursen, och paret får planera på sitt starkaste språk."
+  delar:
+    - rubrik: 1. Gemensamt
+      text: Hela gruppen, med dig vid tavlan
+      faser:
+        - Läs som läsaren
+    - rubrik: 2. Läraren visar
+      text: Du tänker högt, och gruppen gör likadant
+      faser:
+        - Visa och pröva
+    - rubrik: 3. I par
+      text: "Två och två, med var sin text"
+      faser:
+        - Tänk och planera
+        - Säg
+        - Skriv
+    - rubrik: 4. Gemensamt igen
+      text: Två elever berättar om ett val
+      faser:
+        - Läs upp
+
+tabeller:
+  - rubrik: Läsaren frågar, och eleven svarar
+    plats: efter-inledning
+    text: "När eleven planerar och berättar svarar hen på det en läsare undrar. Frågorna står på kortet Läsarens frågor."
+    kolumner:
+      - Läsaren frågar
+      - Eleven
+      - Du säger
+    rader:
+      - - Vem är det, och var?
+        - Säger vem det handlar om och var vi är, så att läsaren ser platsen framför sig
+        - ”Vad ser läsaren när berättelsen börjar?”
+      - - Vad händer?
+        - "Berättar något som går snett eller är konstigt, och stannar kvar i det"
+        - "”Vad märker hen först? Vad prövar hen?”"
+      - - Hur känns det?
+        - Visar hur det känns, med det personen gör och det som händer i kroppen
+        - ”Hur märker läsaren det?”
+      - - Hur går det?
+        - Säger hur det går för den som berättelsen handlar om
+        - ”Vad vet läsaren när sista meningen är läst?”
+    not: "Det läsaren ska känna står på den första lappen. Frågan Hur känns det? gäller den som berättelsen handlar om. I elevens diagram ger varje fråga minst en ruta i stapeln. Orden inledning, handling och avslutning tar ni upp i vecka 6."
+  - rubrik: De sex veckorna
+    plats: efter-inledning
+    meny: true
+    karta: true
+    text: "Varje vecka har två pass. Kursen har två berättelser med var sin läsare: i vecka 2 och 3 är läsaren den yngre eleven, och i vecka 4 till 6 lyssnarna på spökläsningen."
+    kolumner:
+      - Vecka
+      - Det som händer
+      - Eleven skriver
+      - Läsaren
+    rader:
+      - - "Vecka 1\nLäsaren"
+        - "Pass 1: en kort berättelse, och två texter om samma boll.\nPass 2: intervjun med de yngre eleverna, och berättelsen Kaninen i gympapåsen."
+        - "En kort berättelse"
+        - Du
+      - - "Vecka 2\nDu visar"
+        - "Pass 3: du visar stegen, och paren planerar, berättar och börjar skriva.\nPass 4: du skriver klart din text, och var och en sin."
+        - "En berättelse till sin yngre elev"
+        - "Den yngre eleven. En läsare ur ett annat par frågar"
+      - - "Vecka 3\nGruppens text"
+        - "Pass 5: gruppen skriver till de yngre eleverna.\nPass 6: du visar hur en känsla märks. Läsbesöket."
+        - "En fortsättning på gruppens berättelse, och mer i sin egen"
+        - "De yngre eleverna, på läsbesöket"
+      - - "Vecka 4\nParens text"
+        - "Pass 7: du läser en spökberättelse högt, och paren planerar och börjar skriva.\nPass 8: du visar hur det läskiga får vänta."
+        - En spökberättelse, med parets plan
+        - "Lyssnarna på spökläsningen. Ett annat par svarar"
+      - - "Vecka 5\nEgen text"
+        - "Pass 9: eleven väljer plats, planerar och börjar skriva.\nPass 10: eleven skriver klart och övar på att läsa högt."
+        - En egen spökberättelse
+        - "Lyssnarna på spökläsningen. Kamraten svarar"
+      - - "Vecka 6\nSvaren"
+        - "Pass 11: en ny kort berättelse, och två uppgifter som liknar provens.\nPass 12: spökläsningen."
+        - "En kort berättelse, och mer i sin spökberättelse"
+        - Du, och lyssnarna på spökläsningen
+    not: "De yngre eleverna går i en klass på skolan, och du ber deras lärare om två saker före kursen: intervjun och läsbesöket. Avsnittet Var hittar du texterna och läsarna? säger hur du gör. Hur stödet tas bort vecka för vecka står i Texttyper i grupp, under Så tas stödet bort."
+  - rubrik: Det du ser, och det du gör
+    plats: efter-fastnar
+    text: "Här står det som brukar hända i just den här kursen. Stödtrappan för när en elev fastnar, och det du gör och undviker som lärare, står i Texttyper i grupp. Där står också det du gör under Skriv, i tabellerna Skrivstödet och Eleven som har svårt att få ned texten."
+    kolumner:
+      - Det du ser
+      - Det du gör
+    rader:
+      - - Eleven vill inte lägga någon lapp åt sidan
+        - "Fråga ”Var händer det första som läsaren vill vara med om?” Eleven lägger lapparna före den lappen åt sidan."
+      - - "Berättelsen blir en lista med ”och sedan”"
+        - "Låt eleven peka på lappen där det viktigaste händer. Fråga ”Vad hör och ser du precis då?”, och skriv ned det eleven säger. Ge eleven det du har skrivit. Den lappen får flest meningar."
+      - - Det som går snett är över på en mening
+        - "Fråga ”Vad prövar hen först, som inte går?” Svaret blir en ny lapp. I berättelsen till Vera lockar hon först på Sotis, som smiter."
+      - - Eleven skriver att någon blev rädd eller glad
+        - "Fråga ”Hur märker läsaren det?” Svaret blir en ny lapp."
+      - - Eleven är klar före de andra
+        - "Hen läser berättelsen som läsaren, med kortet, och skriver in det läsaren saknar. Från pass 6 bygger hen ut ett ställe, med en fråga från blädderblocket. Sedan läser hen för en kamrat som också är klar."
+      - - "Berättelsen blir för lång att läsa upp"
+        - "Berättelsen till den yngre eleven får ta omkring en och en halv minut att läsa högt, och spökberättelsen omkring två. Eleven stryker en mening där inget händer."
+      - - Spöket syns direkt, eller det är blod och vapen i berättelsen
+        - "Fråga ”Vad hör lyssnarna innan något syns?”, och ta fram listan från pass 8. Det blodiga gör dem inte räddare."
+      - - Eleven vill inte skriva något läskigt
+        - "Hen skriver en mystisk eller rolig berättelse från sin plats, med spökberättelsens tre regler."
+      - - Berättelsen slutar med att någon vaknar
+        - "Fråga ”Hur går det för hen? Vad vet lyssnarna när du har läst sista meningen?”"
+      - - "Eleven vill inte läsa högt"
+        - "På läsbesöket läser kamraten, och eleven ställer frågorna. På spökläsningen läser en kamrat eller du, och eleven håller ficklampan."
+  - rubrik: Åk 4–5 och åk 6–7
+    plats: efter-urval
+    text: "Kursen är densamma i alla årskurser. Det här byter du i åk 6–7."
+    kolumner:
+      - Vad
+      - Åk 4–5
+      - Åk 6–7
+    rader:
+      - - De yngre eleverna
+        - En förskoleklass eller en etta, på skolan eller en skola i närheten
+        - "En klass i åk 1–3, på skolan eller en skola i närheten. Sidan Läsbesöket, vecka 3, säger hur ni gör med inspelningar"
+      - - Platsen för spökberättelsen
+        - En plats på skolan som alla går förbi
+        - "Också en plats nära skolan dit eleven får gå själv, som busshållplatsen"
+      - - Läsplatsen
+        - Under lakanet
+        - Gruppen bestämmer själv hur de bygger läsplatsen
+      - - Texterna
+        - Som de står
+        - Byt 5B mot elevernas årskurs
+      - - Läsarens frågor
+        - De fyra på kortet
+        - "En rad till från pass 9, som du skriver för hand på kortet: Vad tänker hen? Eleven låter läsaren höra en tanke"
+      - - Orden
+        - Berättelse, det som händer och slutet
+        - "Också inledning, handling och avslutning, redan från vecka 1"
+      - - Bladet En gång när
+        - Bladet under Kursens material
+        - "Linjerat papper eller dator, om eleverna hellre vill det"
+    not: "I pass 9 visar du i åk 6–7 hur en tanke låter i en berättelse, och det står på veckans sida för vecka 5."
+  - rubrik: Materialet du behöver
+    plats: efter-urval
+    meny: true
+    kolumner:
+      - Material
+      - Hur många
+      - När och hur ni använder det
+    rader:
+      - - Lappar
+        - Ett ark per par räcker till ungefär tre pass
+        - "Varje pass från pass 3. Hur du gör lapparna, och vad eleverna skriver på dem, står under Till läraren: lapparna"
+      - - Bladet Planen
+        - Ett per par i vecka 2 och 4, ett per elev i vecka 5
+        - "I delen Tänk och planera. Eleverna lägger lapparna i ordning i den vänstra rutan, uppifrån och lite omlott, och minst en lapp i den högra, Åt sidan"
+      - - Kortet Läsarens frågor
+        - "Ett per par, och ett per elev från pass 8"
+        - "I delen Säg, och när någon läser en berättelse som läsaren"
+      - - Bladet Intervjun
+        - Två per par
+        - "Pass 1, när paren övar, och pass 2, med de yngre eleverna. Sedan ligger det framme när paren planerar, till och med pass 6"
+      - - Diagrammet Mina texter och bladet Mitt mål
+        - Ett papper per elev, med diagrammet på ena sidan och bladet Mitt mål på den andra
+        - "Eleven läser målet i delen Tänk och planera, och skriver vad hen tar med sig när en berättelse är klar. Hen fyller i staplarna i pass 6, 8 och 11"
+      - - "Sidan Strukturen, vecka 1: Berätta mera!, och berättartärningarna"
+        - "En sida på tavlan, och tärning 1, 2 och 4, som står direkt efter sidan"
+        - "Pass 1. Skriv ut tärningarna på tjockt papper, och vik och limma dem före passet"
+      - - Veckans texter
+        - Ett blad per par
+        - "Texterna står efter veckans sida i vecka 1, 3, 4 och 6. Av Två texter och Uppgifter skriver du ut elevens sida"
+      - - Bladet En gång när
+        - Ett per elev, två gånger
+        - "Pass 1 och pass 11. Uppgiften, och hur du svarar, står under Till läraren: de korta berättelserna"
+      - - Inbjudan
+        - En per lyssnare
+        - "Pass 10. Den står efter veckans sida för vecka 5"
+      - - Bladet Det jag hör
+        - Ett per vecka
+        - "I handen medan paren planerar, berättar och skriver"
+      - - Bladet Till läraren i den yngre klassen
+        - Ett
+        - Före kursen
+      - - En mapp per elev, skrivpapper, färgpennor och gem
+        - En mapp per elev
+        - "Varje pass. Eleven skriver på varannan rad, så att det läsaren saknar går att skriva in"
+      - - Ett blädderblock och häftmassa, eller en dator med projektor
+        - Till gruppen
+        - "Din berättelse (pass 3 och 4), gruppens berättelse (pass 5), listan över hur en känsla märks (från pass 6), reglerna (från pass 7) och listan över det läskiga (från pass 8)"
+      - - "Ett lakan, en kudde, två ficklampor och ett rum som går att göra mörkt"
+        - Till gruppen
+        - "Pass 12. Hur ni bygger läsplatsen står under Spökläsningen, vecka 6"
+      - - "En dator eller platta med elevens skrivstöd"
+        - "En per elev som skriver bäst så"
+        - "I delen Skriv. Bestäm före kursen, med klassläraren, hur varje elev skriver"
+    not: "Allt du skriver ut står under Kursens material och i planeringsmallarna."
+
+urval:
+  rubrik: Var hittar du texterna och läsarna?
+  text:
+    - "Texterna står under Kursens material, direkt efter sidan för den vecka de hör till. Mentortexterna är de två berättelser ni har som förebild: Kaninen i gympapåsen i vecka 1, som är skriven till Vera, sju år, och Krok nummer tretton i vecka 4, som är skriven till lyssnarna på en spökläsning. Du kan byta texterna mot egna. Då behöver du två korta texter om samma sak, och en berättelse där du kan säga vem den är skriven till."
+    - "De yngre eleverna går i förskoleklass eller på lågstadiet, och i tabellen Åk 4–5 och åk 6–7 står vilka som passar. Be deras lärare om två saker före kursen, och ge hen bladet Till läraren i den yngre klassen. I pass 2 kommer ett barn till varje par, och paret intervjuar barnet i en kvart. I pass 6 kommer samma barn på läsbesök och får höra berättelserna. Eleverna bjuder själva in lyssnarna till spökläsningen i pass 12. Vilka de bjuder in, och hur många, står under Spökläsningen, vecka 6."
+  kravText: "Spökberättelsen har tre regler, som du skriver på blädderblocket till pass 7:"
+  krav:
+    - rubrik: "En plats som alla känner"
+      text: "Lyssnarna har gått där, och eleven får gå dit själv på en rast och lyssna"
+    - rubrik: "Ingen pekas ut"
+      text: "Ingen som finns på riktigt är den läskiga eller råkar illa ut, och platsen är ingens hem eller arbetsrum"
+    - rubrik: "Det går bra till slut"
+      text: "Den som berättelsen handlar om klarar sig"
+
+uppfoljning:
+  text: "Du ser om kursen hjälper i det du hör och i det eleven skriver. Läsarnas svar står under berättelserna, och eleven följer sina berättelser i diagrammet."
+  rader:
+    - nar: Varje pass
+      vad: Skriv vad två eller tre elever säger, på bladet Det jag hör.
+    - nar: "Pass 6, 8 och 11"
+      vad: "Eleven fyller i diagrammet och ser om målet syns."
+    - nar: Pass 1 och 11
+      vad: "Ni lägger de korta berättelserna bredvid varandra."
+    - nar: Efter kursen
+      vad: "Eleven skriver Uppgift 1 efter fyra till sex veckor, och du svarar. Fråga klassläraren om eleven säger vem som läser."
+
+mal:
+  rubrik: "Mål: det eleven gör efter kursen"
+  text: "Efter kursen gör eleven oftare det här:"
+  punkter:
+    - Säger vem som ska läsa och vad läsaren ska känna, innan hen skriver
+    - Väljer det läsaren vill vara med om, och lägger något annat åt sidan
+    - Visar hur det känns, så att läsaren inte behöver fråga
+    - "Stannar kvar i det som händer, så att det inte är över på en mening, och säger hur det går"
+    - Jämför sin berättelse med en annan och säger vad hen tar med sig till nästa gång
+    - Känner igen en uppgift som ber om en berättande text
+
+checklista:
+  rubrik: Checklista inför kursen
+  punkter:
+    - "Be först en lärare i en yngre klass om intervjun och läsbesöket."
+    - "Bestäm vilka som ska vara med, och sätt ihop paren."
+    - "Skriv ut En gång när, Intervjun och texterna om bollen till pass 1."
+    - "Läs Texttyper i grupp, och öva högt på det du visar i vecka 2."
+    - "Klipp lappar till pass 3, och bestäm varje elevs skrivstöd."
+    - "Boka ett mörkt rum som rymmer lyssnarna till pass 12, och dagen då ni samlas igen."
+
+grund:
+  text: "Kursen bygger på en skrivstrategi i steg, som börjar med läsaren. Läraren visar strategin och tänker högt, och tar sedan bort stödet lite i taget (Harris och Graham, 2017; Fohlin och Wilson, 2027). I en svensk studie i åk 3 och 4 hade de flesta berättelserna ett problem, men det löstes efter en till tre meningar. Att bara jämföra två versioner av samma berättelse ändrade inte elevernas egna texter. När läraren också riktade samtalet mot det som skilde versionerna åt, blev elevernas berättelser mer utvecklade (Thorsten, 2019). I en italiensk studie i åk 4 skrev eleverna om något de själva hade varit med om. Nästan alla texter hade en början, en händelse och ett slut. De elever som under femton veckor fick lära sig att lyfta fram det viktiga, med ord, känslor och egna tankar, skrev längre och bättre texter, också tre månader senare (Gelati och Boscolo, 2009). I en svensk studie i åk 5 var en liten ökning av textkvaliteten borta efter tre till fyra månader (Grenner, 2021). Därför samlas gruppen en gång till efter kursen. Att det läskiga ska vänta och aldrig synas helt är råd från författare och lärare. Att eleverna intervjuar sina läsare, att Säg är ett eget steg och att berättelserna läses upp är kursens egna val. Studierna har inte prövat något av det."
+  kallor: "Bygger på Harris och Graham (2017), Thorsten (2019), Gelati och Boscolo (2009), Grenner (2021) och Fohlin och Wilson, Skriv! (utkommer 2027)."
+
+exempel:
+  rubrik: "Exempel: så går pass 7 till"
+  valt:
+    rubrik: Gruppen
+    text: "Fyra elever i åk 5, vecka 4, pass 7. Paren är Alma och Idris, och Tyra och Leo. I pass 6 läste de sina berättelser för Noel och Juni i förskoleklassen. I dag börjar de på spökberättelsen. Läraren lyssnar särskilt på Idris och Tyra."
+  text:
+    - "Läs som läsaren. På tavlan står en mening ur gruppens berättelse: ”Hunden gömde sig under bordet.” På läsbesöket undrade Juni varför. Leo läser meningen som Juni: ”Nu vet jag att hunden gömde sig. Nu undrar jag varför.” Alla skriver en ny mening som svar, och de lägger meningarna bredvid varandra. Läraren frågar vilken som ger Juni mest. Alma pekar på Tyras mening, ”Den hade ätit upp hela mackan, och nu slickade den sig om nosen”, och säger: ”Nu ser man hunden.” Var och en gör sin egen mening bättre."
+    - "Visa och pröva. Läraren säger att nästa berättelse är en spökberättelse och har nya läsare, och läser Krok nummer tretton högt. Hen visar de tre reglerna på blädderblocket och säger sin egen plats: ”Trappan ner till källaren. Alla här har gått i den.” Hen sätter upp tre lappar: ”Vi hämtar stolar”, ”Lampan slocknar” och ”Någon andas där nere”. Tyra säger: ”Lägg stolarna åt sidan. De vill inte höra om stolar.” Läraren frågar: ”Om berättelsen gick till Noel och Juni i stället, vilka lappar låg kvar då?” Leo säger: ”Inte den om att någon andas. De skulle inte våga gå ner dit sedan.”"
+    - "Tänk och planera. Först ringar var och en in det som den yngre eleven mindes bäst. Ur Idris berättelse mindes Noel ”när skorna flög”. Läraren frågar: ”Vad gjorde du just där?” Idris säger: ”Jag stannade kvar. Det tog tre meningar.” Han skriver det under Det här tar jag med mig, på bladet Mitt mål. Alma och Idris enas om förrådet bakom gympasalen och skriver på den första lappen: ”De ska rysa.” De skriver fyra lappar med sådant som händer. Var och en pekar på den lapp hen själv skulle lägga åt sidan. Idris pekar på lappen ”Vi byter om till gympan” och säger: ”Vill de vara med om det? Det gör de ju varje vecka.” Alma pekar på samma lapp och säger: ”Vi börjar när lampan blinkar.” Idris lägger lappen åt sidan. Sedan håller han upp lappen ”Dörren går i lås” och säger: ”Till Noel hade vi lagt bort den här också. Han skulle inte våga gå på gympan sedan.” Läraren säger: ”Just det. Nu lyssnar de som kommer på spökläsningen, och de vill rysa.”"
+    - "Säg. Alma berättar för Leo ur det andra paret. Leo har kortet och frågar: ”Hur känns det när bollarna rullar?” Alma svarar: ”Det blir kallt i nacken, fast det är varmt där inne.” Läraren säger: ”Det du svarade nu ska med i berättelsen.” Alma skriver ”kallt i nacken” på en ny lapp. Sist säger Leo första meningen i sin egen berättelse: ”Det luktar alltid sågspån utanför slöjdsalen.”"
+    - "Skriv. Var och en skriver början på sin berättelse. Tyra sitter stilla och säger: ”Jag vet inte hur jag ska börja. Jag tittar på tavlan. Vem läser? De som kommer på spökläsningen.” Hon skriver: ”Du har säkert gått förbi dörren vid slöjdsalen.” Leo dikterar på datorn och säger till Tyra: ”Jag börjar med lukten, för den känner alla igen.” Läraren läser Idris första mening över axeln, ”Vi skulle hämta bollar i förrådet”, och frågar: ”Var är vi?” Idris svarar: ”Bakom gympasalen, där det alltid är mörkt.” Han skriver in det. När de slutar skriva har Tyra fem meningar och Leo nio."
+    - "Läs upp. Paren säger vad de tar reda på till nästa pass. Idris säger: ”Vi går till förrådet och lyssnar. Och luktar.” Läraren ger varje par tre lappar att ta med."
+    - "På bladet Det jag hör står efter passet: Läsaren nämns: Leo, ”den känner alla igen”, utan att jag frågade. Lagt åt sidan eller lagt till: Idris, ”Det gör de ju varje vecka”, och Almas lapp ”kallt i nacken”. Kör fast: Tyra, ”Jag tittar på tavlan.” Frågan under Skriv: till Idris, ”Var är vi?” Till nästa pass: Idris berättar i Säg."
+
+ramar:
+  rubrik: Kursens material
+  text:
+    - "Först kommer veckans sida, en för varje vecka, och direkt efter den kommer veckans material, som texterna, sidan om strukturen med tärningarna, manuset till din visning och sidan om läsbesöket. Sedan kommer det som används i flera veckor: sidan om återkopplingen, sidan om lapparna, kortet Läsarens frågor och bladen. Arket Lapparna, bladet Planen och diagrammet Mina texter står sist, bland mallarna."
+  ramar:
+    # ---------------------------------------------------------------- Veckorna
+    - rubrik: "Till läraren: veckorna"
+      lektioner: true
+      text:
+        - "Varje vecka har en egen sida, veckans sida. Överst står veckans fokus, och i vecka 2 till 5 dagens mening till Läs som läsaren. Sedan kommer de två passen och sist det du ska lägga märke till. De grepp för återkoppling som passen nämner, till exempel Starterna runt bordet och Två texter halvvägs, står under Till läraren: återkopplingen. När en berättelse är klar skriver eleven på bladet Mitt mål vad hen tar med sig, och när nästa berättelse börjar läser hen det först. Mellan passen svarar du på de korta berättelserna efter pass 1 och 11 och på berättelserna efter pass 4, 8 och 10, och före pass 5 och 9 skriver du två korta versioner till Två sätt i era texter. Har gruppen gått en annan kurs i serien, läser eleven i pass 1 sitt sista mål och säger vad hen känner igen i den nya berättelsen, och du kortar visningen i pass 3."
+      delar:
+        - rubrik: "Vecka 1 · Läsaren"
+          falt:
+            - rubrik: Fokus
+              text: "Eleven läser som läsaren och säger vad hen vet och vad hen undrar, och paret möter sin yngre elev."
+            - rubrik: Pass 1
+              text: "0–⁠5 min. Kursen: ni ska berätta för läsare som ni träffar. Fråga ”Vad gör en berättelse bra?”, och spara svaren till pass 12.\n5–⁠20 min. Säg uppgiften med orden under Till läraren: de korta berättelserna. Eleven väljer ett förslag och skriver till dig, i tio minuter utan stöd.\n20–⁠32 min. Två texter, vecka 1: Bollen på taket. Visa elevens sida, och ställ frågorna under texterna. Säg sedan: båda är berättande texter, och den andra låter läsaren vara med.\n32–⁠45 min. Strukturen, vecka 1: Berätta mera!, med berättartärningarna. Följ stegen på sidan.\n45–⁠56 min. Intervjun: läs frågorna på bladet. De två i paret övar på varandra, och den som frågar skriver några ord vid varje fråga.\n56–⁠60 min. Läs upp: var och en säger en sak som hen vill veta om sin yngre elev."
+            - rubrik: Pass 2
+              text: "0–⁠5 min. Läs som läsaren, första gången: du har båda rollerna, med meningen ”Det hände något konstigt i matsalen.” Säg: ”Nu vet jag att något hände. Nu undrar jag vad.”\n5–⁠20 min. Intervjun: de yngre eleverna kommer. Den ena i paret frågar, och den andra skriver. Sist läser paret upp svaren och frågar ”Stämmer det?”\n20–⁠35 min. Dela ut kortet Läsarens frågor, och läs berättelsen till Vera högt. Gruppen läser den som Vera och svarar på bladets frågor.\n35–⁠50 min. Ge tillbaka de korta berättelserna, med dina tre svarsrader. Eleven drar ett streck under sin och skriver minst tre meningar om det du undrade.\n50–⁠60 min. Målet: eleven föreslår ett mål ur det du undrade, som ”Jag visar hur det känns”, och skriver det på bladet Mitt mål."
+            - rubrik: Lägg märke till
+              text: "Eleven som säger att en bra berättelse är en lång berättelse.\nEleven som säger vad Vera undrar utan att du frågar."
+        - rubrik: "Vecka 2 · Du visar"
+          falt:
+            - rubrik: Fokus
+              text: "Eleven hör dig välja för läsarens skull och gör samma sak i paret."
+            - rubrik: Dagens mening
+              text: "Pass 3: ”Mitt på skolgården stod en gul grävmaskin.”, ur din berättelse. I pass 4 läser alla sin början i stället."
+            - rubrik: Pass 3
+              text: "0–⁠5 min. Läs som läsaren. Från och med i dag skriver alla en mening som svar.\n5–⁠20 min. Visa de tre första stegen och börja skriva, med manuset under Visningen, vecka 2.\n20–⁠35 min. Paren planerar för sin yngre elev, med lappar och bladet Intervjun. På den första lappen skriver de vad hen ska känna, och på de andra något som händer.\n35–⁠41 min. Säg. Sist säger läsaren första meningen i sin egen berättelse. Paret bestämmer en sak att ta reda på till nästa pass, helst det läsaren frågade om.\n41–⁠60 min. Skriv: var och en skriver början. Vid minut 52, Två sätt i era texter: ”Många berättar vad som händer, några också hur det känns.”"
+            - rubrik: Pass 4
+              text: "0–⁠5 min. Starterna runt bordet: var och en läser sin början.\n5–⁠15 min. Visa och pröva: skriv vidare på blädderblocket. Fråga ”Vad sa jag när jag körde fast?” Eleven skriver på Mitt mål en mening för när det tar emot.\n15–⁠19 min. Tänk och planera. Det paren har tagit reda på blir en ny lapp. Fråga ”Var i berättelsen hör den hemma?”\n19–⁠25 min. Säg. Den som inte berättade i pass 3 berättar.\n25–⁠57 min. Skriv. Var och en skriver tills varje lapp är med. Vid minut 41, Två texter halvvägs: ”Vad har du med som jag inte har?”\n57–⁠60 min. Läs upp. Två elever berättar om ett val."
+            - rubrik: Lägg märke till
+              text: "Eleven som säger de fyra stegen utan att titta på bladet.\nEleven som säger ”för hon” eller ”för han” om läsaren."
+        - rubrik: "Vecka 3 · Gruppens text"
+          falt:
+            - rubrik: Fokus
+              text: "Gruppen skriver till de yngre eleverna, och eleven visar hur det känns."
+            - rubrik: Dagens mening
+              text: "Pass 5: dina två versioner. Pass 6: ”Hon blev glad.”"
+            - rubrik: Pass 5
+              text: "0–⁠5 min. Två sätt i era texter: ”Vad gör den andra versionen för läsaren?”\n5–⁠15 min. Säg ”Jag skriver, ni tänker.” Med intervjubladen framme skriver varje par tre lappar, och gruppen väljer början och lägger minst en lapp åt sidan.\n15–⁠23 min. En elev har kortet och är läsaren. Eleverna säger varje mening innan du skriver den, fram till där det går snett.\n23–⁠50 min. Skriv: var och en skriver fortsättningen själv, alltså vad personen prövar först, som inte går, och hur det går sedan.\n50–⁠55 min. Var och en läser sin text för kamraten. Gruppen hör två och väljer en.\n55–⁠60 min. Läs berättelsen och fyll i en stapel på tavlan. Skriv in fortsättningen efter passet."
+            - rubrik: Pass 6
+              text: "0–⁠5 min. Läs som läsaren.\n5–⁠15 min. Visa och pröva: Två texter, vecka 3, som rutan Till läraren säger. Sedan gör gruppen samma sak med ”Han blev rädd.”\n15–⁠18 min. Tänk och planera: eleven läser Mitt mål och stället med din fråga.\n18–⁠23 min. Säg. Eleven berättar det stället för en läsare ur ett annat par.\n23–⁠45 min. Skriv. Eleven bygger ut stället, skriver klart och läser berättelsen för kamraten, som säger var hen var med. Sist fyller eleven i stapeln Yngre eleven.\n45–⁠60 min. Läs upp blir läsbesöket: följ sidan Läsbesöket, vecka 3.\nEfter passet. Ge elevernas klasslärare ett blad Planen med tavlans tre rader."
+            - rubrik: Lägg märke till
+              text: "Eleven som säger hur det märks, som ”hon biter på tröjärmen”, när läsaren frågar hur det känns. Skriv orden på blädderblocket, under frågan ”Hur märker läsaren det?”\nEleven som visar en känsla i varje mening. Fråga var läsaren ska vara med mest."
+        - rubrik: "Vecka 4 · Parens text"
+          falt:
+            - rubrik: Fokus
+              text: "Paret väljer en känd plats och stannar kvar i det som händer: det läskiga får vänta."
+            - rubrik: Dagens mening
+              text: "Pass 7: meningen barnen undrade över. Pass 8: första meningen i Två texter, vecka 4."
+            - rubrik: Pass 7
+              text: "0–⁠5 min. Läs som läsaren.\n5–⁠15 min. Visa och pröva: läs Krok nummer tretton högt. Visa reglerna och tre lappar för din plats, och gruppen lägger en åt sidan.\n15–⁠27 min. Tänk och planera. Från och med nu lyssnar du innan du frågar vem som läser. Var och en skriver vad hen tar med sig: det hen gjorde där den yngre eleven var mest med. Paret enas om en plats, och var och en pekar på en lapp att lägga åt sidan.\n27–⁠57 min. Säg och Skriv, som i passets tabell.\n57–⁠60 min. Läs upp. Varje par får tre lappar till platsen, för ljud, lukter och det som känns."
+            - rubrik: Pass 8
+              text: "0–⁠5 min. Läs som läsaren.\n5–⁠15 min. Visa och pröva: Två texter, vecka 4. Ställ frågorna under texterna. Gruppen säger sedan vad som hörs först på din plats, och det blir en ny lapp.\n15–⁠19 min. Tänk och planera. Paren väljer lappen där lyssnarna ska rysa mest. Före den lägger de lapparna från platsen. Den som inte var där blundar och säger tre ljud.\n19–⁠25 min. Säg. Den andra i paret berättar, och läsaren får fråga ”Vad märker hen först?” Frågan ”Vad var det?” får inget svar.\n25–⁠57 min. Skriv, tills varje lapp är med. Från minut 52 läser eleven för läsaren, som ringar in ett ställe. Eleven fyller i sin stapel och skriver vad hen tar med sig.\n57–⁠60 min. Läs upp. Fråga ”Vilken text skriver du i klassen nu? Vem läser den?”"
+            - rubrik: Lägg märke till
+              text: "Eleven som inte själv har sagt varför en lapp läggs åt sidan. Hen behåller parets plats i pass 9.\nEleven som låter något höras eller skymta innan det syns."
+        - rubrik: "Vecka 5 · Egen text"
+          falt:
+            - rubrik: Fokus
+              text: "Eleven gör alla fyra stegen själv, med kamraten som läsare."
+            - rubrik: Dagens mening
+              text: "Pass 9: dina två versioner. Pass 10: ”Sakta, sakta sänkte han skopan.”"
+            - rubrik: Pass 9
+              text: "0–⁠5 min. Två sätt i era texter, ur pass 8: ”Vad gör den andra versionen för läsaren?”\n5–⁠12 min. Visa och pröva. Visa hur din plan från pass 7 blir en lista på tomt papper. Gruppen väljer vilken händelse du ska stryka och säger varför. I åk 6–7 visar du också hur en tanke låter: ”Det är bara vinden, tänkte jag.”\n12–⁠26 min. Tänk och planera. Eleven läser det hen tog med sig, skriver ett nytt mål ur dina svarsrader och överst i planen vem hen bjuder in. Hen väljer en egen plats och planerar med lappar, eller som en lista om hen sa sitt val själv i vecka 4. Den som behåller parets plats byter en händelse mot en egen.\n26–⁠32 min. Säg. Alla berättar för kamraten, tre minuter var.\n32–⁠57 min. Skriv. Vid minut 44, Starterna runt bordet: alla läser en mening.\n57–⁠60 min. Läs upp. Fråga ”Vad behöver du lyssna efter på din plats till nästa pass?”"
+            - rubrik: Pass 10
+              text: "0–⁠5 min. Läs som läsaren. Fråga hur det gick med texten i klassen.\n5–⁠38 min. Eleven skriver klart, med det hen har hört eller sett vid platsen. Berättelsen tar högst två minuter att läsa högt. Vid minut 20, Läsaren halvvägs.\n38–⁠47 min. Skribenten läser för kamraten, som ringar in stället där hen var mest med och säger svarsraderna. Skribenten svarar, men aldrig vad det läskiga var.\n47–⁠53 min. Paret prövar berättelserna mot reglerna och läser dem för en ny kamrat.\n53–⁠60 min. Inbjudan. Är berättelsen inte klar, säger eleven sitt slut, och du skriver det.\nEfter passet. Gör det som står under Före passet på sidan Spökläsningen, vecka 6."
+            - rubrik: Lägg märke till
+              text: "Eleven som börjar skriva utan plan.\nEleven som säger sitt val utan att du frågar."
+        - rubrik: "Vecka 6 · Svaren"
+          falt:
+            - rubrik: Fokus
+              text: "Eleven ser vad hen gör nu, känner igen texttypen i en uppgift och läser för sina lyssnare."
+            - rubrik: Pass 11
+              text: "0–⁠13 min. Säg uppgiften som i pass 1, med de nya förslagen under Till läraren: de korta berättelserna. Se vem som planerar innan hen skriver.\n13–⁠20 min. Före och efter: eleven lägger de två korta bredvid varandra och fyller i en stapel för vardera, den första utan tillägget. Paren frågar varandra ”Vad gör du nu som du inte gjorde då?”\n20–⁠25 min. Ta fram Krok nummer tretton och berättelsen till Vera. Fråga ”Båda är berättande texter. Vad har båda?”\n25–⁠35 min. Uppgifterna: visa elevens sida, och ställ frågorna under uppgifterna.\n35–⁠48 min. Skriv: eleven bygger ut stället där du har skrivit ”Vad märker hen först?” och stryker en mening där inget händer.\n48–⁠60 min. Eleven fyller i stapeln för spökberättelsen. Två par övar ihop, och var och en läser sin. Fråga vem som läser själv i pass 12."
+            - rubrik: Pass 12
+              text: "0–⁠10 min. Bygg läsplatsen tillsammans, som det står under Spökläsningen, vecka 6. Var och en säger sin första mening under lakanet, med ficklampan.\n10–⁠45 min. Spökläsningen: lyssnarna kommer, och du släcker. En i taget läser under lakanet. Efter varje berättelse säger lyssnarna var de var med och vad de undrar, och du skriver det på ett papper med elevens namn.\n45–⁠60 min. Tänd och tacka lyssnarna. Eleven fäster sitt papper under berättelsen och skriver på Mitt mål vad hen tar med sig och nästa mål ur det lyssnarna undrade. Fråga igen ”Vad gör en berättelse bra?” och jämför med svaren från pass 1. Säg när gruppen samlas igen. Kopiera berättelserna med papperen och behåll diagrammet och Mitt mål. Eleven tar hem sin mapp."
+            - rubrik: Lägg märke till
+              text: "Eleven som säger vem som läser, i en uppgift som hen aldrig har sett.\nEleven som nämner läsaren när du frågar vad som gör en berättelse bra."
+    # ---------------------------------------------------------------- Veckans material
+    - rubrik: "Två texter, vecka 1: Bollen på taket"
+      text:
+        - "Läs båda texterna och prata om frågorna under."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Pass 1
+              text: "Läs båda texterna högt, och ställ frågorna i tur och ordning. Låt paren prata en stund om varje fråga innan ni tar svaren i hela gruppen. Säg sedan att båda är berättande texter, men att den andra låter läsaren vara med."
+        - rubrik: Det du lyssnar efter
+          falt:
+            - rubrik: "1. Vad är lika?"
+              text: "Händelsen, platsen och hur det går: bollen hamnar på taket, och vaktmästaren hämtar den."
+            - rubrik: "2. I vilken är du med?"
+              text: "I den andra. Den första räknar upp det som hände i tur och ordning, och två meningar börjar med Sedan."
+            - rubrik: "3. Var märker du det?"
+              text: "Bollen syns i en hög båge, den ligger kvar på taket, och alla tittar. Texten stannar kvar medan bollen ligger där."
+            - rubrik: "4. Hur känns det?"
+              text: "Öronen blir varma. Texten säger inte att den som berättar skäms, men läsaren märker det."
+      listor:
+        - rubrik: Två texter om samma boll
+          kolumner:
+            - Den första texten
+            - Den andra texten
+          rader:
+            - - "På rasten spelade vi fotboll. Jag sköt bollen på taket. Vaktmästaren hämtade den med en stege. Sedan spelade vi igen. Sedan ringde det in."
+              - "På rasten for bollen i en hög båge över målet. Den landade på taket och låg kvar där. Alla tittade på mig. Mina öron blev varma. Då kom vaktmästaren med den långa stegen, och snart studsade bollen på gruset igen."
+        - rubrik: Frågorna
+          rader:
+            - ["Vad är lika i de två texterna?"]
+            - ["I vilken av dem är du med om det som händer?"]
+            - ["Var i texten märker du det?"]
+            - ["Hur känns det för den som berättar? Hur vet du det?"]
+    - rubrik: "Strukturen, vecka 1: Berätta mera!"
+      text:
+        - "Samma berättelse för flera lyssnare. Den som lyssnar säger ”Berätta mera!”, och berättelsen blir bättre för varje gång."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Pass 1
+              text: "Efter Två texter gör ni strukturen, med tärning 1, 2 och 4, som står direkt efter sidan. Har ni inte tärningarna, skriv fyra svar per tärning på lappar. Med två elever eller udda antal är du också lyssnare. Säg till när minuten har gått. Visa sidan på tavlan."
+      listor:
+        - rubrik: Så gör ni
+          rader:
+            - ["Var och en slår tärningarna och tänker ut en kort berättelse med det som kom upp."]
+            - ["Ställ er två och två. Den ena berättar på en minut."]
+            - ["Den som lyssnar säger ”Berätta mera!” där hen vill veta mer."]
+            - ["Den som berättar lägger till hur det ser ut eller hur det känns."]
+            - ["Byt roller: nu berättar den andra."]
+            - ["Tacka kamraten och hitta en ny. Gör om steg 2 till 5, med det du lade till."]
+            - ["Efter tre omgångar: säg till gruppen vad som blev bättre i din berättelse."]
+        - rubrik: Så tränar ni berättande text
+          rader:
+            - ["Där lyssnaren säger ”Berätta mera!” vill hen vara med, och just där behöver er text mer om hur det ser ut och hur det känns. Det lägger ni till när ni skriver."]
+    - rubrik: "Berättartärningarna, vecka 1: Till Berätta mera!"
+      text:
+        - "Det är tolv tärningar, två för varje fråga, och varje tärning står på ett eget A4. I Berätta mera! använder ni tärning 1, 2 och 4: Vem?, Var? och Vad händer? Skriv ut dem på tjockt papper, 160 till 200 gram, och klipp, vik och limma dem före pass 1."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Så gör du tärningarna, text: "Klipp längs strecken. Vik längs de blå prickade linjerna och stryk lim på flikarna, som hamnar inuti tärningen. Tärning A och B för samma fråga har samma färg. En sats räcker till gruppen. Spara tärningarna i en ask." }
+      listor:
+        - rubrik: "Tärning 1A · Vem?"
+          rader: [[en prinsessa], [en trollkarl], [en räv], [en mus], [en robot], [en enhörning]]
+        - rubrik: "Tärning 1B · Vem?"
+          rader: [[en prins], [en katt], [en groda], [en astronaut], [en igelkott], [en pingvin]]
+        - rubrik: "Tärning 2A · Var?"
+          rader: [[ett slott], [en skog], [en ö], [ett berg], [rymden], [en stad]]
+        - rubrik: "Tärning 2B · Var?"
+          rader: [[havet], [en öken], [en stuga], [ett skepp], [en vulkan], [ett tåg]]
+        - rubrik: "Tärning 3A · Vad önskar hen?"
+          rader: [[en skatt], [komma hem], [en vän], [flyga], [vinna], [rädda någon]]
+        - rubrik: "Tärning 3B · Vad önskar hen?"
+          rader: [[en present], [en krona], [segla], [en tårta], [bli stark], [sjunga]]
+        - rubrik: "Tärning 4A · Vad händer?"
+          rader: [[en storm], [vilse], [en drake], [ett troll], [inlåst], [sjuk]]
+        - rubrik: "Tärning 4B · Vad händer?"
+          rader: [[en varg], [ett spöke], [en orm], [en krokodil], [ett hål], [natten]]
+        - rubrik: "Tärning 5A · Vem hjälper?"
+          rader: [[en uggla], [en fe], [en häst], [en myra], [en björn], [en hund]]
+        - rubrik: "Tärning 5B · Vem hjälper?"
+          rader: [[en delfin], [en örn], [en farmor], [ett bi], [en sköldpadda], [en ekorre]]
+        - rubrik: "Tärning 6A · Vilken sak?"
+          rader: [[en nyckel], [en trollstav], [en karta], [en spegel], [en flöjt], [ett par stövlar]]
+        - rubrik: "Tärning 6B · Vilken sak?"
+          rader: [[ett ljus], [ett rep], [en bok], [ett paraply], [ett frö], [en hatt]]
+    - rubrik: "Mentortext, vecka 1: Kaninen i gympapåsen"
+      text:
+        - "Läs berättelsen som Vera, och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Pass 2
+              text: "Läs berättelsen högt, och lägg undan den innan eleverna skriver. Den används igen i pass 11."
+      listor:
+        - rubrik: Kaninen i gympapåsen
+          rader:
+            - ["Till Vera, sju år, som tycker om kaniner och kurragömma."]
+            - ["Veras gympapåse hade ramlat ner från kroken i korridoren. Hon lyfte upp den. Då rörde påsen på sig."]
+            - ["Vera stod alldeles stilla. Det prasslade där inne. Två långa öron stack upp ur påsen."]
+            - ["Det var Sotis, klassens kanin! Genom dörren såg Vera att buren i klassrummet stod öppen. På golvet framför henne låg en halv morot."]
+            - ["”Kom, Sotis”, viskade Vera. Men Sotis hoppade ur påsen och skuttade in under en bänk. Sedan under nästa bänk."]
+            - ["Veras händer blev svettiga. Snart skulle det ringa in, och då kom tjugo par fötter springande."]
+            - ["Då kom Vera på en sak. Hon lade sitt äpple mitt på golvet och väntade. En nos kom fram. Sedan hela Sotis."]
+            - ["När klassen kom in satt Vera med kaninen i knät. Sotis åt äpple, och Vera fick den halva moroten."]
+            - ["Maja och Yusuf, 5B"]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Läs berättelsen som Vera. Vem handlar den om, och var är vi?"]
+            - ["2. Vad händer? Stryk under det Vera märker först."]
+            - ["3. Hur känns det för Vera? Ringa in två ställen där du märker det."]
+            - ["4. Hur går det?"]
+            - ["5. Vad har Maja och Yusuf valt för just Vera?"]
+    - rubrik: "Visningen, vecka 2: Planen och berättelsen"
+      text:
+        - "I pass 3 visar du de tre första stegen och skriver första meningen, och i pass 4 skriver du vidare. Säg stegens namn medan du gör dem, och peka på dem på bladet Planen. Tre saker ska höras: läsaren först, en lapp åt sidan för läsarens skull, och att du kör fast och säger vad du gör då."
+      oversikt:
+        kolumner:
+          - Du gör
+          - Du säger högt
+        rader:
+          - - "Pass 3. Skriver på tavlan: Sixten, 6 år. Skriver på första lappen: ”Sixten ska skratta”"
+            - "”Tänk. Sixten läser. Han gillar grävmaskiner, och han ska skratta. Det skriver jag först.”"
+          - - "Skriver tre lappar: ”Vaktmästaren tappar nycklarna”, ”Sixten sänker skopan” och ”Grävmaskinen går sönder”"
+            - "”Planera. Jag skriver allt jag kommer på som kan hända. Sedan väljer jag.”"
+          - - "Håller upp lappen ”Grävmaskinen går sönder”, och lägger den i rutan Åt sidan"
+            - "”Vill Sixten vara med om det? Nej. Han sa att det är läskigt när saker går sönder, och han ska skratta. Den lägger jag åt sidan.”"
+          - - "Skriver en lapp till, ”Sixten får tuta”, håller upp den och gör som gruppen säger"
+            - "”Vill Sixten vara med om det? Vad säger ni? Varför?”"
+          - - "Lägger lapparna i ordning och numrerar dem"
+            - "”Var börjar jag? Där Sixten kan se något framför sig: en gul grävmaskin mitt på skolgården.”"
+          - - "Berättar för en elev, som har kortet Läsarens frågor"
+            - "”Säg. Fråga mig det du inte får veta. Vaktmästaren tappar nycklarna i gropen. Sixten klättrar upp i grävmaskinen och får upp dem.”"
+          - - "Svarar eleven, som frågar hur det känns. Pekar annars på kortets tredje fråga. Skriver svaret på en ny lapp: ”Tungan sticker ut”"
+            - "”Det pirrar i magen, och tungan sticker ut. Det ska med.”"
+          - - "Vänder dig till gruppen, och skriver elevernas svar på tavlan"
+            - "”Vad sa jag allra först? Vad gjorde jag med lappen om att grävmaskinen går sönder?”"
+          - - "Skriver första meningen på blädderblocket"
+            - "”Skriv. Mitt på skolgården stod en gul grävmaskin.”"
+          - - "Pass 4. Skriver om nycklarna och Sixten som klättrar upp. Stannar med pennan i luften"
+            - "”Nu kör jag fast. Jag tittar på tavlan. Vem läser? Sixten. Vad undrar han? Hur det känns.”"
+          - - "Skriver vidare, med den nya lappen"
+            - "”Det pirrade i magen, och tungan stack ut ur mungipan. Nu märker Sixten hur det känns.”"
+          - - "Skriver slutet och läser hela berättelsen högt"
+            - "”Hur går det? Nycklarna kommer upp, och Sixten får tuta. Det var kortets fyra frågor.”"
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Pass 3 och pass 4
+              text: "Sixten är ett exempel: han tycker att det är roligt när vuxna gör fel. Byter du honom mot ett barn som du har intervjuat, skriver du egna lappar och en egen berättelse, med dagens mening ur den. Lägger gruppen ”Sixten får tuta” åt sidan, slutar berättelsen när nycklarna kommer upp. Har gruppen fler än sex elever, ritar du de två rutorna från bladet Planen på tavlan och skriver lapparna stort, på halva A4-ark."
+            - rubrik: Din text
+              text: "Mitt på skolgården stod en gul grävmaskin. Vaktmästaren skulle laga ett rör, men han tappade nycklarna rakt ner i gropen. Plopp, sa det. Då klättrade Sixten upp i grävmaskinen. Det pirrade i magen, och tungan stack ut ur mungipan. Sakta, sakta sänkte han skopan. Upp kom en hög med lera, och överst låg nycklarna. ”Nu får du tuta”, sa vaktmästaren. Och Sixten tutade så att hela skolan hörde det."
+    - rubrik: "Två texter, vecka 3: Sara i skogen"
+      text:
+        - "Läs båda texterna och prata om frågorna under."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Pass 6
+              text: "Den första texten står på tavlan. Säg: ”Nu vet läsaren att Sara är vilse. Men jag vill att det ska kännas mer. Jag kan visa vad som händer i kroppen.” Skriv den andra texten bredvid, med de tre nya meningarna, och läs den högt. Dela sedan ut elevens sida och ställ frågorna i tur och ordning."
+            - rubrik: På tavlan
+              text: "Skriv ”Hur märker läsaren det?” vid texterna. Under den skriver du vad de nya meningarna visar: det som händer i kroppen, och det Sara gör och ser. Skriv frågan också överst på blädderblocket, där listan över hur en känsla märks börjar. Sudda texterna innan eleverna skriver, och låt frågan stå kvar. Texterna, frågorna och dina ord kommer ur Skriv! (Fohlin och Wilson, 2027)."
+        - rubrik: Det du lyssnar efter
+          falt:
+            - rubrik: "1. Vad har den andra?"
+              text: "Tre meningar till: hjärtat slår snabbt, Sara vänder sig om, och bakom henne finns bara träd och mörker."
+            - rubrik: "2. Vad märker du som läsare?"
+              text: "Läsaren blir nyfiken på vad som finns i mörkret och känner det Sara känner. I den första vet läsaren bara att hon är vilse."
+            - rubrik: "3. Vad skapar spänning?"
+              text: "Eleverna pekar ofta på ”Och mörker”, som står ensamt sist, eller på ”bara träd”."
+            - rubrik: "4. Var märks känslan?"
+              text: "Det märks i kroppen, på hjärtat som slår, och i det hon gör och ser. Texten säger aldrig att hon är rädd."
+      listor:
+        - rubrik: Två texter om Sara
+          kolumner:
+            - Den första texten
+            - Den andra texten
+          rader:
+            - - "Var är jag? Sara stannade mellan träden. Hon kände inte igen stigen längre."
+              - "Var är jag? Sara stannade mellan träden. Hon kände inte igen stigen längre. Hjärtat slog snabbt. Hon vände sig om, men bakom henne fanns bara träd. Och mörker."
+        - rubrik: Frågorna
+          rader:
+            - ["Vad har den andra texten som den första inte har?"]
+            - ["Vad märker du som läsare? Blir du nyfiken?"]
+            - ["Vilket ord eller vilken mening skapar spänning?"]
+            - ["Var märker du hur Sara känner sig?"]
+    - rubrik: "Läsbesöket, vecka 3: De yngre eleverna lyssnar"
+      text:
+        - "I pass 6 läser eleverna sina berättelser för de yngre elever som de har intervjuat."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Före besöket
+              text: "Barnen kommer när 45 minuter av passet har gått och stannar i en kvart. Bestäm med deras lärare vem som följer dem. Ställ en stol åt barnet hos varje par, och ha gruppens berättelse framme på blädderblocket."
+            - rubrik: Gruppens berättelse
+              text: "Läs den först, för alla barnen. Fråga ”Vad undrar ni?”, och skriv upp en sak som de undrar och vilken mening i berättelsen det gäller. Den meningen blir dagens mening i pass 7."
+            - rubrik: Elevernas berättelser
+              text: "Sedan sätter sig varje barn hos sitt par, och var och en i paret läser sin berättelse för barnet. Berättelserna har samma plan, men barnet minns olika saker ur dem. Efter varje berättelse frågar skribenten ”Vad minns du bäst? Vad undrar du?”, och kamraten skriver svaren under berättelsen."
+            - rubrik: Om något saknas
+              text: "Den som inte är klar läser det som finns och säger resten. Den som inte vill läsa högt låter kamraten läsa och ställer själv frågorna. Är ett barn borta, läser paret för ett annat pars barn, och du ser till att barnet får höra berättelserna efteråt."
+            - rubrik: Om barnen går på en annan skola
+              text: "Har skolan inga yngre elever, frågar du en förskoleklass eller en etta på en skola i närheten. Gör då intervjun och läsningen med inspelningar, och gör likadant om barnen inte kan komma. Till pass 2 spelar deras lärare in barnens svar på frågorna, och paren lyssnar och skriver. I pass 6 spelar ni in gruppens och elevernas berättelser. Deras lärare spelar upp dem för barnen och spelar in vad de minns och undrar, och det får eleverna höra i pass 7."
+    - rubrik: "Två texter, vecka 4: Omklädningsrummet"
+      text:
+        - "Läs båda texterna som en av lyssnarna på spökläsningen, och prata om frågorna under."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Pass 8
+              text: "Läs båda texterna högt, och ställ frågorna i tur och ordning."
+            - rubrik: Efteråt
+              text: "Börja en lista på blädderblocket över det som gör en berättelse läskig, under frågan ”Vad märker hen först?” Eleverna säger det med egna ord, och du skriver deras ord på listan."
+        - rubrik: Det du lyssnar efter
+          falt:
+            - rubrik: "1. Vad är lika?"
+              text: "Platsen, den som berättar, början och slutet."
+            - rubrik: "2. I vilken hinner du bli rädd?"
+              text: "I den andra. I den första syns spöket direkt, och sedan är det över."
+            - rubrik: "3. Vad hör och ser du?"
+              text: "Först ett ljud, en dusch som droppar, och sedan en skymt av något vitt. Det läskiga får vänta."
+            - rubrik: "4. Vad får du aldrig veta?"
+              text: "Vad det var bakom draperiet. Den som lyssnar får gissa, och det gör berättelsen läskig."
+      listor:
+        - rubrik: Två texter om samma omklädningsrum
+          kolumner:
+            - Den första texten
+            - Den andra texten
+          rader:
+            - - "På måndagsmorgonen gick jag in i omklädningsrummet. Där stod ett spöke. Jag sprang därifrån så fort jag kunde."
+              - "På måndagsmorgonen gick jag in i omklädningsrummet. Längst in droppade en dusch. Ingen hade varit där sedan i fredags. Något vitt rörde sig bakom duschdraperiet. Jag sprang därifrån så fort jag kunde."
+        - rubrik: Frågorna
+          rader:
+            - ["Vad är lika i de två texterna?"]
+            - ["I vilken av dem hinner du bli rädd?"]
+            - ["Vad hör och ser du innan den som berättar springer?"]
+            - ["Vad får du aldrig veta?"]
+    - rubrik: "Mentortext, vecka 4: Krok nummer tretton"
+      text:
+        - "Läs berättelsen, och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: "Pass 7, 8, 9 och 11"
+              text: "Berättelsen utspelar sig i samma korridor som berättelsen till Vera. Läs den högt i pass 7, och ställ fråga 1. Fråga 2 och 3 tar den som är klar tidigt i pass 8, och fråga 4 hör till pass 11. I åk 6–7 visar du i pass 9 meningen med ”tänkte jag”."
+      listor:
+        - rubrik: Krok nummer tretton
+          rader:
+            - ["Det var sista dagen före lovet, och alla andra hade gått hem. Korridoren var halvmörk och luktade våta vantar, som alltid."]
+            - ["På krok nummer tretton hängde en grå gympapåse. Jag hade aldrig sett den förut."]
+            - ["Jag skulle bara hämta min jacka. Då hörde jag det. Ritsch. Som när någon drar i ett snöre."]
+            - ["Påsen på krok tretton svängde fram och tillbaka. Min jacka bredvid hängde stilla. Det är bara vinden, tänkte jag. Men fönstren var stängda."]
+            - ["Jag ville springa, men benen lydde inte. Snöret gick upp, sakta, av sig självt. Något där inne drog efter andan."]
+            - ["Då tändes lamporna. Vaktmästaren stod i dörren. ”Är du kvar?” sa han. ”Krok tretton”, viskade jag och pekade. Där hängde ingen påse."]
+            - ["”Tretton?” sa han. ”Den kroken tog vi bort för många år sedan.”"]
+            - ["Hela vägen hem räknade jag krokarna i huvudet. Tolv. Fjorton."]
+            - ["Maja och Yusuf, 5B"]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Vem ska höra den här berättelsen? Hur märker du det?"]
+            - ["2. Vad hör den som berättar innan hen ser något röra sig?"]
+            - ["3. Vad får du aldrig veta? Varför, tror du?"]
+            - ["4. Jämför med berättelsen till Vera. Båda är berättande texter. Vad har båda?"]
+    - rubrik: "Inbjudan, vecka 5: Spökläsningen"
+      text:
+        - "Fyll i inbjudan, och ge den till någon som du vill ska komma och lyssna. Bjud in någon som är lika gammal som du eller äldre."
+      huvud:
+        - rubrik: Till
+      delar:
+        - rubrik: Kom på spökläsning!
+          falt:
+            - rubrik: Platsen i min berättelse
+            - rubrik: Dag och klockslag
+            - rubrik: Rum
+            - rubrik: Hälsningar
+    - rubrik: "Uppgifter, vecka 6: Två uppgifter"
+      text:
+        - "Läs de två uppgifterna och svara på frågorna under."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Pass 11
+              text: "Uppgifterna liknar dem i de nationella proven. Den första ber om en berättelse, och den andra om en instruktion. Hinner ni, planerar paren den första muntligt. Ingen skriver en text till uppgifterna i dag."
+            - rubrik: Efter kursen
+              text: "Uppgift 1 skriver eleven när gruppen samlas igen efter kursen. Då läser hen först det hen skrev på Mitt mål i pass 12, och ditt svar på berättelsen från pass 11. Sedan gör hen de fyra stegen, med kamraten som läsare. Du svarar med tre svarsrader, och eleven fyller i stapeln Efter kursen."
+        - rubrik: Det du lyssnar efter
+          falt:
+            - rubrik: "1. Vem ska läsa?"
+              text: "De som läser skolans tidning i den första, och förskoleklassen i den andra."
+            - rubrik: "2. Vilken ber dig berätta?"
+              text: "Den första: en berättelse om någon som tappar bort något viktigt i skolan. Den andra ber om en instruktion."
+            - rubrik: "3. Vilka av kortets frågor?"
+              text: "”Vad händer?” hör till problemet, ”Hur känns det?” till hur huvudpersonen upplever det, och ”Hur går det?” till hur det löser sig. Huvudpersonen är den som berättelsen handlar om."
+            - rubrik: "4. Inledning, handling och avslutning?"
+              text: "Inledningen svarar på vem och var, handlingen på vad som händer och hur det känns, och avslutningen på hur det går."
+      listor:
+        - rubrik: Två uppgifter
+          kolumner:
+            - Den första uppgiften
+            - Den andra uppgiften
+          rader:
+            - - "Skolans tidning ska ge ut ett nummer med berättelser från skolan. Skriv en berättelse om någon som tappar bort något viktigt i skolan. Vilket problem får huvudpersonen? Hur upplever huvudpersonen det? Hur löser det sig? Tänk på att berättelsen ska ha en inledning, en handling och en avslutning. Ge din berättelse en rubrik."
+              - "Förskoleklassen vill lära sig en ny lek till rasten. Skriv en instruktion till en lek som du kan. Skriv så att den som läser kan leka leken utan att fråga dig."
+        - rubrik: Frågorna
+          rader:
+            - ["Vem ska läsa? Ringa in läsaren."]
+            - ["Vilken uppgift ber dig berätta? Stryk under orden som säger det."]
+            - ["Vilken av kortets frågor hör till var och en av uppgiftens frågor?"]
+            - ["Vad är inledning, handling och avslutning?"]
+    - rubrik: "Spökläsningen, vecka 6: Läsplatsen och lyssnarna"
+      text:
+        - "I pass 12 läser eleverna sina spökberättelser för inbjudna lyssnare."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Före passet
+              text: "Efter pass 10 läser du varje berättelse mot reglerna och skriver ”Vad märker hen först?” vid ett ställe där det går för fort. Bryter en berättelse mot en regel, ändrar eleven det i pass 11. Efter pass 11 rättar du det som gör berättelserna svåra att läsa högt, och skriver ut dem som är skrivna på dator. Säg till klassläraren och lyssnarnas lärare när spökläsningen är. Till pass 12 tar du med lakan, kudde, två ficklampor, berättelserna och ett papper per elev."
+            - rubrik: Lyssnarna
+              text: "Varje elev bjuder in en lyssnare, eller två om gruppen har fem elever eller färre. Lyssnaren är en kamrat som är lika gammal eller äldre, ett äldre syskon eller en vuxen på skolan. Eleven skriver namnet överst i sin plan i pass 9. Bjud också in klassläraren. De yngre eleverna bjuder ni inte in, eftersom spökberättelserna är skrivna för äldre lyssnare. Klockslaget på inbjudan är tio minuter efter passets början."
+            - rubrik: Läsplatsen
+              text: "Bygg den tillsammans med eleverna. Lägg ett lakan över ett bord, eller spänn det mellan två stolar, så att två elever får plats under det. Lägg dit en kudde och en ficklampa. Dra för fönstren, och släck när alla sitter. Den som läser sitter under lakanet med ficklampan, och lyssnarna sitter på golvet runt om."
+            - rubrik: Ordningen
+              text: "Bestäm ordningen efter pass 11. Börja med någon som vill, och lägg den lugnaste berättelsen sist. Tio berättelser tar omkring trettiofem minuter. Har gruppen fler än sex elever, tänder du efter halva tiden och låter alla sträcka på sig. Har den fyra eller färre, läser varje par också en av sina berättelser från pass 8."
+            - rubrik: Den som läser
+              text: "Eleven läser sin berättelse långsamt, och ännu långsammare mot slutet. I pass 11 väljer hen hur: hen läser själv, har kamraten bredvid sig under lakanet eller låter en kamrat eller dig läsa. Den som inte läser själv håller ficklampan eller sitter bland lyssnarna."
+            - rubrik: Svaren
+              text: "Säg till lyssnarna innan du släcker: ”Efter varje berättelse säger två av er var i berättelsen ni var med, och vad ni undrar.” I en grupp med fler än sex elever svarar en lyssnare. Skriv det de säger på ett papper med elevens namn, i ljuset från den andra ficklampan, eller be en vuxen lyssnare skriva. Undrar någon vad det läskiga var, har berättelsen lyckats. Ingen säger om en berättelse var bra eller dålig."
+    # ---------------------------------------------------------------- Det som används i flera veckor
+    - rubrik: "Till läraren: återkopplingen"
+      text:
+        - "Fem av kursens åtta grepp för återkoppling gör ni mitt i berättelsen, medan den fortfarande går att ändra. Eleven möter något, som en kamrats början, din fråga, kamratens berättelse eller läsarens svar. Hen bestämmer direkt om hen tar med det, ändrar sin berättelse eller behåller den, och säger varför. Efter varje berättelse skriver eleven på bladet Mitt mål vad hen tar med sig, och när nästa berättelse börjar läser hen det först. Eleven skriver på varannan rad, så att det hen ändrar går att skriva in."
+      delar:
+        - rubrik: Greppen
+          falt:
+            - rubrik: Två texter där en sak skiljer
+              text: "Det här gör ni i pass 1, och i pass 6 och 8 innan eleverna skriver. Händelsen och platsen är lika, och en sak skiljer. I pass 1 skiljer flera saker."
+            - rubrik: Alla svar på bordet
+              text: "Det här gör ni i delen Läs som läsaren, från pass 3. Alla skriver en ny mening och lägger den bredvid de andras, och gruppen pekar ut den mening som ger läsaren mest. Var och en gör sin egen bättre."
+            - rubrik: Starterna runt bordet
+              text: "Det här gör ni mitt i berättelsen, i början av pass 4 och vid minut 44 i pass 9. Var och en läser sin början högt, eller en mening ur den, och de andra säger var de är med och vad de undrar. Sedan väljer var och en om hen ändrar sin början."
+            - rubrik: Frågan medan eleven skriver
+              text: "Det här gör du under Skriv i varje pass. Läs en mening över axeln och ställ en enda fråga ur kortet, oftast ”Hur känns det?”, och från pass 8 också ”Vad märker hen först?” Eleven svarar och väljer om svaret ska med i berättelsen. Skriv frågan på bladet Det jag hör."
+            - rubrik: Två sätt i era texter
+              text: "Vid minut 52 i pass 3 stoppar du skrivandet i två minuter och berättar om två sätt som du ser att eleverna skriver på, utan att peka ut någon: ”Många berättar vad som händer, några också hur det känns.” Var och en väljer hur hen skriver vidare. Före pass 5 och 9 skriver du själv två korta versioner på tavlan, en som liknar det många skrev och en med det som fattades, som ”Sedan gick vi hem.” och ”Jag hoppade så högt att mössan trillade av.” Ingen av dem är en elevs berättelse."
+            - rubrik: Två texter halvvägs
+              text: "Det här gör ni mitt i berättelsen, vid minut 41 i pass 4. Paret har samma plan. Var och en läser sin berättelse högt för den andra och frågar: ”Vad har du med som jag inte har?” Var och en tar med en sak eller säger varför inte."
+            - rubrik: Läsaren halvvägs
+              text: "Det här gör ni mitt i berättelsen, vid minut 20 i pass 10. Skribenten läser det hen har skrivit för en läsare ur det andra paret, som säger var i berättelsen hen var med och vad hen undrar. Skribenten väljer vad hen skriver härnäst, och läsaren letar i sin egen berättelse efter ett ställe där det går för fort. Med två elever är du läsaren."
+            - rubrik: Före och efter
+              text: "Det här gör ni i pass 11, när den nya korta berättelsen är klar. Eleven lägger sina två korta berättelser bredvid varandra, och paren frågar varandra: ”Vad gör du nu som du inte gjorde då? Vad gör du redan från början nästa gång?”"
+            - rubrik: Reglerna
+              text: "Fråga vad varje berättelse gör för läsaren. Ingen frågar vilken som är sämst. Du visar en elevs hela berättelse för gruppen bara om eleven säger ja. Ett grepp mitt i berättelsen tar högst fem minuter. Har gruppen fler än sex elever, delar ni er på två bord under Alla svar på bordet och Starterna runt bordet. Vid det andra bordet har en elev kortet och leder."
+    - rubrik: "Till läraren: lapparna"
+      text:
+        - "Eleverna planerar varje berättelse med lappar. På varje lapp står en sak i planen, med några ord eller en kort mening. Lapparna går att flytta, lägga åt sidan och lägga i ordning, och därför syns elevens val på bordet."
+      delar:
+        - rubrik: Lapparna
+          falt:
+            - rubrik: Så gör du dem
+              text: "Skriv ut arket Lapparna, som står bland mallarna sist i materialet. Klipp längs linjerna, så blir det arton lappar. Ett ark räcker till ett par i ungefär tre pass. Från pass 3 lägger du lapparna i en hög på bordet. Efter passet fäster du parens lappar på bladet Planen."
+            - rubrik: Den första lappen
+              text: "På den skriver eleverna vad de vill att läsaren ska känna, en enda sak: ”Vera ska skratta” eller ”De ska rysa”."
+            - rubrik: Det som händer
+              text: "På var och en av de andra lapparna står en händelse: ”Påsen rör på sig”, ”Kaninen gömmer sig” och ”Det börjar åska”. Eleverna skriver fler än de behöver, så att det finns något att välja bort. Det som läsaren inte vill vara med om lägger de i rutan Åt sidan på bladet Planen, och de andra lapparna lägger de i ordning."
+            - rubrik: Nya lappar
+              text: "När läsaren har frågat i delen Säg skriver skribenten sitt svar på en ny lapp: ”Svettiga händer”. Det eleverna tar reda på till nästa pass blir också en lapp. I pass 8 är det något de hörde vid platsen: ”Det surrar i en fläkt”."
+            - rubrik: Ett exempel
+              text: "Dina sex lappar från visningen i pass 3 står i manuset under Visningen, vecka 2. Bilderna På bordet för vecka 2 och vecka 4 visar hur lapparna ligger på bladet Planen."
+    - rubrik: Kortet Läsarens frågor
+      sagoform: { form: kort }
+      text:
+        - "Läsaren har frågorna framför sig när skribenten berättar, och frågar bara det hen inte fick veta. När skribenten har läst upp sin berättelse svarar läsaren med de tre svarsraderna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så gör du
+              text: "Skriv ut ett kort per par, och ett per elev från pass 8. Klipp längs de streckade linjerna, utom den i mitten, och vik där. Från pass 6 får läsaren också fråga ”Hur märker läsaren det?”, och från pass 8 ”Vad märker hen först?”"
+      listor:
+        - rubrik: Läsaren frågar
+          rader:
+            - ["Vem är det, och var?"]
+            - ["Vad händer?"]
+            - ["Hur känns det?"]
+            - ["Hur går det?"]
+        - rubrik: Läsaren svarar
+          rader:
+            - ["Nu vet jag ___"]
+            - ["Här var jag med: ___"]
+            - ["Nu undrar jag ___"]
+    - rubrik: Intervjun
+      text:
+        - "Fråga er yngre elev, och skriv några ord vid varje fråga. Läs sedan upp svaren och fråga: Stämmer det?"
+      huvud:
+        - rubrik: Vi som frågar
+        - rubrik: Vi intervjuar
+      delar:
+        - rubrik: Intervjun
+          falt:
+            - rubrik: Vad tycker du om att göra?
+            - rubrik: "Vilket djur eller vilken sak gillar du?"
+            - rubrik: Vad är det roligaste du vet?
+            - rubrik: Vad är lite läskigt?
+            - rubrik: Vem ska berättelsen handla om?
+    - rubrik: En gång när
+      sagoform: { form: sida, titel: En gång när, radMm: 11 }
+      text:
+        - "Välj ett av de tre förslagen, och skriv en berättelse till din lärare om den gången."
+      huvud:
+        - rubrik: Berättelse till
+        - rubrik: Från
+        - rubrik: En gång när jag
+      delar:
+        - rubrik: Berättelsen
+          falt:
+            - { rubrik: Min berättelse, text: "" }
+    - rubrik: Mitt mål
+      text:
+        - "Skriv ett mål i taget. När målet syns i din berättelse skriver du ett nytt under. Efter varje berättelse skriver du vad du tar med dig till nästa, och när nästa berättelse börjar läser du det först."
+      huvud:
+        - rubrik: Namn
+      delar:
+        - rubrik: När jag skriver
+          falt:
+            - rubrik: När det tar emot säger jag
+            - rubrik: Mina mål
+            - rubrik: Det här tar jag med mig
+    - rubrik: "Till läraren: de korta berättelserna"
+      text:
+        - "De korta berättelserna i pass 1 och pass 11 visar vad eleven gör utan stöd, och de går till dig. Här står också hur du svarar på berättelserna i hela kursen och hur eleven räknar när hen fyller i sin stapel."
+      delar:
+        - rubrik: De korta berättelserna
+          falt:
+            - rubrik: Uppgiften
+              text: "Säg samma ord i pass 1 och pass 11, och skriv dem på tavlan: ”Välj ett av de tre förslagen, och skriv en berättelse till mig om den gången. Jag var inte där.” Säg inget om vad berättelsen ska innehålla. På tavlan står bara uppgiften och de tre förslagen. Papper ligger framme för den som vill planera, och i pass 11 också lappar."
+            - rubrik: Förslagen i pass 1
+              text: "Förslagen är ”En gång när jag blev rädd”, ”En gång när jag hade otur” och ”En gång när jag blev överraskad”, i den ordningen. Eleven skriver sitt val på raden En gång när jag, på bladet En gång när."
+            - rubrik: Förslagen i pass 11
+              text: "Förslagen är ”En gång när jag blev arg”, ”En gång när jag kom för sent” och ”En gång när jag blev stolt”, i den ordningen. Säg efter uppgiften vilket förslag som är elevens: det som står på samma plats som det hen valde i pass 1. Då är de två berättelserna av samma slag. Hen skriver med samma verktyg som då, för hand, på dator eller genom att diktera."
+            - rubrik: Så svarar du
+              text: "Skriv tre svarsrader på varje berättelse: Nu vet jag, Här var jag med och Nu undrar jag. Under Nu undrar jag skriver du en av kortets frågor, den som berättelsen inte svarar på. Ett svar kan lyda: ”Nu vet jag att du fastnade i hissen. Här var jag med: när lampan slocknade. Nu undrar jag hur det känns att stå där i mörkret.” En berättelse tar tre till fem minuter. Efter pass 4, 8 och 10 tar tio berättelser omkring en timme."
+            - rubrik: När du svarar
+              text: "Den korta berättelsen svarar du på till pass 2. Efter pass 4 skriver du också ”Hur märker läsaren det?” vid ett ställe där en känsla bara sägs, och efter pass 8 och pass 10 ”Vad märker hen först?” där det går för fort. I spökberättelsen frågar du aldrig vad det läskiga var. Ditt svar på berättelsen från pass 11 får eleven när gruppen samlas igen."
+            - rubrik: Så räknar ni
+              text: "Från pass 6 sätter eleven ett streck i kanten vid det hen räknar och fyller i sin stapel, som det står under diagrammet. En känsla som bara sägs ger ingen ruta, och ”Sedan gick vi hem” svarar inte på Hur går det? Rutan för det som händer fyller eleven i när läsaren får veta vad personen märker eller prövar innan det är över. I åk 6–7 räknar ni en tanke som ett ställe där det märks hur det känns."
+            - rubrik: Efter pass 11
+              text: "I pass 11 räknar eleven den första korta berättelsen utan tillägget från pass 2, som står under strecket. Efter passet läser du berättelserna och rättar staplarna om de inte stämmer. En ruta mer eller mindre säger inte mycket. Se efter vad eleven gör nu som hen inte gjorde då, också i spökberättelsen. Visa berättelserna och diagrammet för klassläraren."
+    - rubrik: Det jag hör
+      text:
+        - "Skriv ut ett blad per vecka. Ha det i handen medan paren planerar, berättar och skriver. Skriv elevens namn och det hen säger medan du lyssnar. Ringa in det eleven sa utan att du frågade. Efter passet fyller du i Till nästa pass."
+      huvud:
+        - rubrik: Vecka, och eleverna jag lyssnar särskilt på
+      delar:
+        - rubrik: Det jag hör
+          falt:
+            - rubrik: Läsaren nämns
+            - rubrik: Något läggs åt sidan eller läggs till för läsarens skull
+            - rubrik: Den som kör fast säger vad hen gör
+            - rubrik: Frågan jag ställde under Skriv
+            - rubrik: Till nästa pass
+    - rubrik: Till läraren i den yngre klassen
+      text:
+        - "Ge bladet till läraren i den yngre klassen före kursen. Skriv in antalet barn, rummet, dagarna och klockslagen först. Intervjun börjar 5 minuter in i pass 2, och läsbesöket 45 minuter in i pass 6. Vik undan de här raderna innan du lämnar bladet."
+      delar:
+        - rubrik: Till dig som har barnen vi berättar för
+          falt:
+            - rubrik: Det vi ber dig om
+              text: "Eleverna i vår skrivkurs övar på att berätta för någon som lyssnar. Två och två intervjuar de ett av dina barn och skriver sedan var sin berättelse till just det barnet. Vi behöver ________ barn två gånger, en kvart varje gång, i rum ________. Du behöver bara välja barnen. Säg till om vi ska hämta och lämna dem."
+            - rubrik: "1. Intervjun, den ________ klockan ________"
+              text: "Eleverna frågar vad barnet tycker om att göra, vad som är roligt, vad som är lite läskigt och vem berättelsen ska handla om. Välj gärna barn som tycker om att prata."
+            - rubrik: "2. Läsbesöket, den ________ klockan ________"
+              text: "Samma barn kommer tillbaka och får höra berättelserna som eleverna har skrivit till dem. Eleverna frågar vad barnet minns bäst och vad hen undrar. Vill barnen rita något ur berättelsen efteråt, får vi gärna teckningarna."
+
+kort:
+  listor: [Tärning]
+elevblad:
+  Det jag hör:
+    Läsaren nämns: 3
+    Något läggs åt sidan eller läggs till för läsarens skull: 3
+    Den som kör fast säger vad hen gör: 3
+    Frågan jag ställde under Skriv: 3
+    Till nästa pass: 2.5
+  En gång när:
+    Min berättelse: 16
+  Mitt mål:
+    När det tar emot säger jag: 3
+    Mina mål: 8
+    Det här tar jag med mig: 6
+  Intervjun:
+    Vad tycker du om att göra?: 3
+    Vilket djur eller vilken sak gillar du?: 3
+    Vad är det roligaste du vet?: 3
+    Vad är lite läskigt?: 3
+    Vem ska berättelsen handla om?: 3
+  "Inbjudan, vecka 5: Spökläsningen":
+    Platsen i min berättelse: 3
+    Dag och klockslag: 2.5
+    Rum: 2.5
+    Hälsningar: 2.5
+
+mallar:
+  - rubrik: Lapparna
+    typ: rutnat
+    text: "Av arket gör du lapparna som eleverna planerar med. Skriv ut ett ark till varje par, och klipp längs linjerna, så blir det arton lappar. Hur länge ett ark räcker står under Till läraren: lapparna. Eleverna skriver en sak på varje lapp. På den första skriver de vad läsaren ska känna, och på var och en av de andra något som händer. Senare skriver de också det de svarade läsaren och det de har tagit reda på. Den som skriver på dator fyller i arket i Word innan du skriver ut det. Dina lappar från visningen står i manuset under Visningen, vecka 2."
+    kolumner: ["", "", ""]
+    rader: 6
+    underrad: "Klipp längs linjerna, så blir det arton lappar. Skriv en sak på varje lapp."
+    fot: "Den första lappen: det vi vill. Var och en av de andra: något som händer, med några ord. En ny lapp: det jag svarade läsaren."
+  - rubrik: Planen
+    typ: matta
+    text: "Bladet ligger framför paret i delen Tänk och planera, och framför var och en i vecka 5. Skriv ut det på liggande A4. Lapparna klipper du ur arket Lapparna. Den första lappen säger vad paret vill att läsaren ska känna. I den vänstra rutan lägger paret den lappen och lapparna med det som händer, i ordning uppifrån och lite omlott. Lappen som paret lägger åt sidan ligger kvar i den högra."
+    kolumner:
+      - Det vi vill, och det som händer
+      - "Åt sidan: det här vill läsaren inte vara med om"
+    fot: "Tänk: vem läser, och vad vill vi? Planera: det vi vill först, och på varje lapp något som händer. Säg: berätta för en läsare. Skriv: skriv det du sa, och det du svarade."
+  - rubrik: Mina texter
+    typ: rutnat
+    text: "Diagrammet ligger i elevens mapp. Eleven fyller i stapeln nedifrån: en ruta när läsaren får veta vem det handlar om och var, en ruta när berättelsen stannar kvar i det som händer, en ruta för varje ställe där det märks hur det känns och en ruta när läsaren får veta hur det går. Gränsfallen står under Så räknar ni, i Till läraren: de korta berättelserna. Stapeln har plats för sex rutor, och ingen behöver fylla den: fyra rutor är en hel berättelse. Stapeln Efter kursen fyller eleven i när gruppen samlas igen."
+    kolumner:
+      - Yngre eleven
+      - Vår spöktext
+      - Min spöktext
+      - Första korta
+      - Sista korta
+      - Efter kursen
+    rader: 6
+    underrad: "Namn: ____________________   En stapel för varje berättelse som jag har skrivit. Fyll i nedifrån. Fyra rutor är en hel berättelse."
+    fot: "En ruta för vem och var. En ruta när jag stannar kvar i det som händer: det personen märker eller prövar först. En ruta för varje ställe där det märks hur det känns. En ruta för hur det går."
+
+pabordet:
+  - nr: 1
+    rubrik: "Vecka 1 · Läsaren"
+    text: "Berättelsen till Vera efter pass 2. I kanten står kortets frågor, var och en där Vera får svar."
+    efter: "del: Vecka 1 · Läsaren"
+  - nr: 2
+    rubrik: "Vecka 2 · Du visar"
+    text: "Tavlan och bladet Planen när du har planerat i pass 3. Den sjätte lappen kommer i Säg."
+    efter: "del: Vecka 2 · Du visar"
+  - nr: 3
+    rubrik: "Vecka 3 · Gruppens text"
+    text: "Tavlan i pass 6: texterna om Sara, de nya meningarna markerade, din fråga och vad de visar."
+    efter: "del: Vecka 3 · Gruppens text"
+  - nr: 4
+    rubrik: "Vecka 4 · Parens text"
+    text: "Ett pars plan i pass 7. Till Noel, deras yngre elev, hade också Dörren går i lås legat åt sidan."
+    efter: "del: Vecka 4 · Parens text"
+  - nr: 5
+    rubrik: "Vecka 5 · Egen text"
+    text: "Din plan som lista i pass 9, med två nya händelser, och kamratens svar på en berättelse i pass 10."
+    efter: "del: Vecka 5 · Egen text"
+  - nr: 6
+    rubrik: "Vecka 6 · Svaren"
+    text: "En elevs två korta berättelser, från pass 1 och pass 11, och diagrammet Mina texter under. Eleven har markerat det hen räknar i den sista och fyllt i en stapel för vardera."
+    efter: "del: Vecka 6 · Svaren"
+  - nr: 7
+    rubrik: "Strukturen · Berätta mera!"
+    text: "Två och två berättar, och den som lyssnar säger ”Berätta mera!” Sedan hittar var och en en ny kamrat."
+    efter: "ram: Strukturen, vecka 1: Berätta mera!"
+
+lathund:
+  innehall: Läsare som lyssnar
+  metoden:
+    text:
+      - "Kursen är för elever i åk 4–7 som räknar upp det som händer i sina berättelser. Eleven lär sig berätta så att läsaren är med, i fyra steg: Tänk, Planera, Säg och Skriv. Tabellen visar passets delar."
+      - "Läsarna är en yngre elev, som paret intervjuar i pass 2 och läser för i pass 6, och lyssnarna på spökläsningen i pass 12. Passen med egna minuter står på sidan Mallen, och stödtrappan i lathunden för Texttyper i grupp."
+    ruta:
+      rubrik: Tre saker att hålla fast vid
+      punkter:
+        - fet: Nämn läsaren före första ordet.
+          text: Läsaren avgör vad som ska med.
+        - fet: Lägg åt sidan eller lägg till, för läsarens skull.
+          text: Säg varför, så att valet hörs och syns.
+        - fet: Kör fast högt.
+          text: Säg vad du gör då.
+      efter: Först från dig, sedan från eleven. Det är dem du lyssnar efter.
+    tabell:
+      rubrik: Passets delar · vad du säger
+      kolumner:
+        - Del
+        - Du säger
+      rader:
+        - - "1 · Läs som läsaren\nAlla svar på bordet"
+          - "”Vad vet du nu? Vad undrar du?”\n”Vilken mening ger läsaren mest?”"
+        - - "2 · Visa och pröva\nDu tänker högt"
+          - "”Vad hörde ni mig säga?”\n”Nu prövar vi samma sak tillsammans.”"
+        - - "3 · Tänk och planera"
+          - "”Vill läsaren vara med om det?”\n”Vilken lapp lägger ni åt sidan? Varför?”"
+        - - "4 · Säg\nEn läsare ur ett annat par"
+          - "”Fråga bara det du inte fick veta.”\n”Det du svarade nu ska med i berättelsen.”"
+        - - "5 · Skriv\nEn enda fråga"
+          - "”Skriv det du sa.”\n”Hur känns det? Skriv det.”"
+        - - "6 · Läs upp\nEtt val"
+          - "”Vilken lapp lade du åt sidan? Varför?”\n”Vad tar du med dig?”"
+    not: "De tre svarsraderna: Nu vet jag, Här var jag med, Nu undrar jag. På läsbesöket frågar eleven ”Vad minns du bäst? Vad undrar du?” På spökläsningen säger lyssnarna var de var med och vad de undrar."
+  pass:
+    rubrik: "Vi kör ett pass: pass 7 i vecka 4"
+    textRubrik: "Gruppen · fyra elever i åk 5 börjar på spökberättelsen"
+    text:
+      - "På tavlan står en mening ur gruppens berättelse: ”Hunden gömde sig under bordet.” Leo läser den som Juni i förskoleklassen: ”Nu undrar jag varför.”"
+      - "Läraren läser Krok nummer tretton och visar reglerna och tre lappar för sin plats. Tyra säger: ”Lägg stolarna åt sidan. De vill inte höra om stolar.”"
+      - "Alma och Idris enas om förrådet bakom gympasalen. Idris pekar på lappen ”Vi byter om till gympan”: ”Det gör de ju varje vecka.” Leo ur det andra paret frågar: ”Hur känns det när bollarna rullar?” Alma svarar: ”Det blir kallt i nacken.” Svaret blir en ny lapp."
+      - "Läraren frågar Idris över axeln: ”Var är vi?” Tyra kör fast och säger: ”Jag tittar på tavlan. Vem läser?” Sedan skriver hon."
+    forberett:
+      rubrik: Det jag förberedde
+      text:
+        - "Jag skrev tavlans tre rader och en mening ur gruppens berättelse. Jag hade Krok nummer tretton, blädderblocket med reglerna och tre lappar för min egen plats. På bordet låg lappar, bladet Planen, kortet och mapparna med svaren från läsbesöket. Jag lyssnade särskilt på Idris och Tyra."
+    klarTidigt: "Eleven läser sin början som läsaren, med kortet, och skriver in det läsaren saknar."
+    schema:
+      rubrik: 60 minuter, minut för minut
+      rader:
+        - tid: Före
+          fas: Förberedelse
+          vad: Skriv tavlans tre rader och dagens mening. Lägg fram lappar, bladet Planen, kortet och mapparna.
+        - tid: 0–5
+          fas: 1 · Läs som läsaren
+          vad: En elev läser meningen som läsaren. Alla skriver en ny mening, och ni lägger dem bredvid varandra.
+        - tid: 5–15
+          fas: 2 · Visa och pröva
+          vad: "Läs Krok nummer tretton högt. Visa de tre reglerna och din plan. Gruppen lägger en lapp åt sidan."
+        - tid: "15–27"
+          fas: 3 · Tänk och planera
+          vad: Eleven skriver vad hen tar med sig. Paren enas om en plats och skriver lappar. Var och en pekar på en lapp att lägga åt sidan.
+        - tid: "27–33"
+          fas: 4 · Säg
+          vad: "Två par sätter sig ihop. Skribenten berättar för en läsare ur det andra paret, och svaret blir en ny lapp. Läsaren säger sin egen första mening. Blir ett par över, är du läsaren."
+        - tid: "33–57"
+          fas: 5 · Skriv
+          vad: "Var och en skriver början. Du läser över axeln och ställer en enda fråga. Rätta inte nu."
+        - tid: 57–60
+          fas: 6 · Läs upp
+          vad: "Paren säger vad de ska ta reda på vid platsen."
+  mall:
+    rubrik: Passen med egna minuter
+    underrad: "Pass 4 och pass 6 till 9 följer passet i sex delar"
+    block:
+      - typ: tabell
+        rubrik: Pass 1 till 5
+        kolumner:
+          - Pass och minuter
+          - Det ni gör
+        rader:
+          - - "PASS 1\n0–⁠20 min"
+            - "”Vad gör en berättelse bra?” Den korta berättelsen: tio minuter utan stöd."
+          - - "20–⁠32 min"
+            - "Två texter om samma boll. ”I vilken är du med?”"
+          - - "32–⁠60 min"
+            - "Berätta mera! med tärningarna. Paren övar på intervjun. Läs upp."
+          - - "PASS 2\n0–⁠20 min"
+            - "Läs som läsaren. Intervjun med de yngre eleverna."
+          - - "20–⁠35 min"
+            - "Berättelsen till Vera. Var får hon svar på varje fråga?"
+          - - "35–⁠60 min"
+            - "Dina tre svarsrader. Eleven svarar under ett streck och skriver sitt mål."
+          - - "PASS 3\n0–⁠20 min"
+            - "Läs som läsaren. Du visar hur du tänker, planerar, berättar och börjar skriva."
+          - - "20–⁠60 min"
+            - "Paren planerar och berättar. Alla skriver början. Två sätt vid 52."
+          - - "PASS 4\n0–⁠60 min"
+            - "Starterna. Du skriver vidare, kör fast. Säg 19–25, Skriv 25–57, halvvägs vid 41."
+          - - "PASS 5\n0–⁠23 min"
+            - "Två sätt i era texter. ”Jag skriver, ni tänker.” Du skriver gruppens början."
+          - - "23–⁠60 min"
+            - "Var och en skriver fortsättningen. Gruppen väljer en. Räkna berättelsen i en stapel."
+      - typ: tabell
+        rubrik: Pass 6 till 12
+        kolumner:
+          - Pass och minuter
+          - Det ni gör
+        rader:
+          - - "PASS 6\n0–⁠45 min"
+            - "Två texter om Sara. Säg 18–23, Skriv 23–45."
+          - - "45–⁠60 min"
+            - "Läsbesöket: de yngre eleverna lyssnar."
+          - - "PASS 8\n0–⁠60 min"
+            - "Två texter, vecka 4. Säg 19–25, Skriv 25–57. Läsaren från 52."
+          - - "PASS 9\n0–⁠60 min"
+            - "Två sätt i era texter. Planen som lista. Säg 26–32, Skriv 32–57, starterna vid 44."
+          - - "PASS 10\n0–⁠38 min"
+            - "Läs som läsaren. Eleven skriver klart. Läsaren halvvägs vid 20."
+          - - "38–⁠60 min"
+            - "Kamraten är läsare. Reglerna och listan. Läs högt. Inbjudan."
+          - - "PASS 11\n0–⁠20 min"
+            - "Den korta berättelsen igen. Före och efter."
+          - - "20–⁠60 min"
+            - "Krok nummer tretton. Uppgifterna. Eleven bygger ut ett ställe. Öva på att läsa högt."
+          - - "PASS 12\n0–⁠10 min"
+            - "Bygg läsplatsen under lakanet."
+          - - "10–⁠60 min"
+            - "Spökläsningen till minut 45. Du skriver lyssnarnas svar. Mitt mål."
+  material:
+    rubrik: Vad du behöver för kursen
+    kravEtikett: "Spökberättelsens regler"
+    var:
+      rubrik: Var materialet finns
+      punkter:
+        - fet: Veckans sida.
+          text: "Dagens mening, det du visar och det du ska lägga märke till står i metoden, under Till läraren: veckorna. Greppen står under Till läraren: återkopplingen, och veckans texter direkt efter veckans sida."
+        - fet: Kortet och bladen.
+          text: Kortet, bladet Intervjun, bladet En gång när och de andra bladen står under Kursens material. Arket Lapparna, bladet Planen och diagrammet står i planeringsmallarna.
+        - fet: Det som gäller alla kurser.
+          text: "Hur du tänker högt, vad du gör när en elev fastnar och hur du hjälper den som har svårt att få ned texten står i Texttyper i grupp."
+    bordet:
+      - Lappar ur arket Lapparna, och pennor
+      - "Bladet Planen och kortet Läsarens frågor"
+      - Bladet Intervjun, till och med pass 6
+      - Mapparna med Mina texter och Mitt mål
+      - Veckans text, som läggs undan när eleverna skriver
+      - "På tavlan: Vem läser? Vad vill vi? När får vi svar?"
+film:
+  sekunder: 29.86
+  beskrivning: "Tänk: vem läser, och vad vill ni? Eleven säger: ”Vera läser. Hon ska skratta.” Vera tänker: ”Kaniner!” Planera: det ni vill, och på varje lapp något som händer. Läraren frågar: ”Vill Vera vara med om det?” Vera tänker: ”Huu, åska!” Eleven säger: ”Åt sidan. Vera tycker att åska är läskigt.” Säg: berätta för en läsare ur ett annat par. Läsaren frågar: ”Hur känns det?” Läraren säger att svaret ska med i berättelsen. Eleven säger: ”Veras händer blev svettiga.” Skriv: skriv det du sa."
+  rubrik: "Så gör eleven: Tänk, Planera, Säg, Skriv"
+  ingress: "Fyra bilder ur filmen om de fyra stegen, som paren gör i vecka 2. Här planerar ett par en berättelse till Vera, sju år, som de har intervjuat. Vera är inte i rummet: hon syns i bilden eftersom paret tänker på henne. Filmen på metodens sida visar samma sak i rörelse."
+  stillbilder:
+    - text: "Tänk: vem läser? Vera tycker om kaniner. Vad vill ni?"
+    - text: "Planera: läraren frågar om Vera vill. En lapp åt sidan."
+    - text: "Säg: en läsare ur ett annat par frågar. Ny lapp."
+    - text: "Skriv: eleven skriver det hen sa till läsaren."
