@@ -10,8 +10,9 @@ import { site } from '../../data/site';
 // /stodundervisning/<id>.docx: allt om metoden i en Word-fil, byggd vid bygget ur samma data som
 // sidan: metodbeskrivningen, planeringsmallarna och lathunden. "Hela" ska betyda hela. En metod i en serie får sin
 // plats i serien med sig, så att den generella metoden har lektionsbanken och lektionen raden Hör till.
-// En metod med en bank (src/lib/bank.ts) får också bankens filer här: /stodundervisning/<id>-<problem>-<nivå>.docx, med
-// bara enheterna eller med följesidorna (-med-lararens-sida), en per nivå och en för alla nivåer (bankDokument).
+// En metod med en bank (src/lib/bank.ts) har bankens enheter i filen med allt, som i utskriften, och får dessutom bankens
+// filer här: /stodundervisning/<id>-<problem>-<nivå>.docx, med bara enheterna eller med följesidorna (-med-lararens-sida),
+// en per nivå och en för alla nivåer (bankDokument).
 export const getStaticPaths: GetStaticPaths = async () => {
   const metoder = await publicerade('stodundervisning');
   const serier = byggSerier(metoder);

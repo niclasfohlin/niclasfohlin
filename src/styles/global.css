@@ -434,12 +434,16 @@ html.js .nedladdning .skriv-ut { display: block; }
 /* Filraderna: vad filen innehåller, sedan valet Word, Drive, pdf som en grupp små knappar. */
 .filrader { list-style: none; margin: 0 0 0.75rem; padding: 0; display: flex; flex-direction: column; gap: 0.45rem; }
 .filrader li { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.75rem; }
+/* Raden Skriv ut finns bara med JavaScript (bara-js), och står då som de andra raderna (granskningen 2026-10-10). */
+html.js .filrader > li.bara-js { display: flex; }
 .filrubrik { flex: 0 0 11.5rem; }
 .filval { display: inline-flex; flex-wrap: wrap; max-width: 100%; border: 1px solid var(--farg-kant); border-radius: 6px; overflow: hidden; background: var(--farg-yta); font-family: var(--typsnitt-ui); font-size: 0.85rem; line-height: 1; vertical-align: middle; }
 .filval > a, .filval > button { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.25rem; padding: 0 0.7rem; color: var(--farg-accent); font: inherit; font-weight: 600; text-decoration: none; background: none; border: 0; border-left: 1px solid var(--farg-kant); cursor: pointer; }
 .filval > :first-child { border-left: 0; }
 .filval > a:hover, .filval > button:hover { background: var(--farg-accent-ljus); color: var(--farg-accent-mork); }
 .filval > button[disabled] { color: var(--farg-text-svag); cursor: default; }
+/* Skriv ut: Bara beskrivningen finns bara när sidan har material att lämna utanför (data-material i Metod.astro). */
+body:not(:has([data-material])) .filval > [data-skriv-ut='beskrivning'] { display: none; }
 /* Drive kräver JavaScript: knappen finns bara när html har klassen js. */
 .drive-knapp { display: none; }
 html.js .filval > .drive-knapp { display: inline-flex; }
@@ -787,6 +791,8 @@ button.lank:hover { color: var(--farg-accent); }
 .bank-oversikt > h3 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .bank-lista { margin: 0.75rem 0; padding-left: 1.4rem; }
 .bank-rad { display: none; }
+/* Nivåns enheter med följesidorna står bara i utskriften; på skärmen står de på enheternas sidor (Bank.astro). */
+.bank-utskrift { display: none; }
 .bank-filer { margin: 1.25rem 0 0; padding: 0.75rem 0 0; border-top: 1px solid var(--farg-kant); font-family: var(--typsnitt-ui); font-size: 0.95rem; }
 .bank-filer-rubrik { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); margin: 0 0 0.5rem; }
 .bankfiler-niva { margin: 0; }
@@ -803,8 +809,12 @@ button.lank:hover { color: var(--farg-accent); }
 @media (max-width: 40rem) {
   .bankfiler col.nivakol { width: 5.6rem; }
   .bankfiler .filval { display: flex; width: 100%; }
-  .bankfiler .filval > a { flex: 1 1 0; min-height: 2.5rem; padding: 0 0.3rem; }
-  .bankfiler .filval svg { display: none; }
+  .bankfiler .filval > a { flex: 1 1 0; min-width: 0; min-height: 2.75rem; padding: 0.2rem; justify-content: center; }
+  /* I telefonen bara bladen, stora, så att P och W syns och bladet når nära knappens kant (Niclas 2026-10-10: "lite
+     större ikoner i mobil och båda i pc"). Bladet krymper med knappen i den smalaste telefonen. Namnet står kvar för
+     skärmläsaren. */
+  .bankfiler .filval svg { width: 100%; max-width: 2.25rem; height: auto; }
+  .bankfiler .filval-namn { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 }
 /* En enhets sida ([id]/[enhet].astro): nivån och numret, titeln, bladen som knappar att hoppa till och utskriften. Varje
    blad har sitt namn i en rad med nivåns färg och en knapp som skriver ut bara bladet. Sist förra och nästa enhet. */
@@ -1801,6 +1811,12 @@ html.js .bara-js { display: inline-block; }
   .enhet-blad { margin: 0; }
   .bank-niva > summary, .bank-filer { display: none; }
   .bank-rad { display: block; }
+  /* Utskriften av hela beskrivningen har nivåernas enheter med följesidorna, var och en på sitt blad (Bank.astro). Banken
+     står som block, så att bladen bryter sidor och får sina sidformat (@page bokliggande) som på enheternas sidor. */
+  .bank { display: block; }
+  /* Skriv ut bara beskrivningen (Nedladdning.astro): sidan utan metodens material (data-material i Metod.astro). */
+  html[data-utskrift='beskrivning'] [data-material] { display: none !important; }
+  .bank-utskrift { display: block; }
   /* Nivåerna står utfällda också när utskriften görs utan skript (Bank.astro fäller ut dem vid beforeprint). */
   .bank-niva::details-content { content-visibility: visible; display: block; }
   .bank-niva { border: 0; background: none; }

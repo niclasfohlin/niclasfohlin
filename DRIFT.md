@@ -124,7 +124,8 @@ Besök och nedladdningar räknas i GoatCounter (Niclas 2026-09-28: statistik som
 | Adressen som tar emot räkningen; tom stänger av allt | `statistik` i `src/data/site.ts` |
 | Skriptet och raden om räkningen i sidfoten | `src/layouts/Base.astro` |
 | Nedladdningar som händelser: `fil:<filnamn>`, `fil:drive:<filnamn>` för Drive, med titeln "Upprepad läsning: lathunden som pdf" (`statistik` i Filval) | `data-goatcounter-click` och `data-goatcounter-title` i `src/components/Filval.astro` och på textlänkarna till planeringsmallarna i `Metod.astro` |
-| Utskrifter (`utskrift:<id>`, `utskrift:<id>-lathund`) och metodbankens valda metoder (`fil:valda-metoder.docx`) | `Nedladdning.astro`, `src/pages/stodundervisning/[id]/lathund.astro`, `src/pages/stodundervisning/index.astro` |
+| Utskrifter (`utskrift:<id>` för Allt, `utskrift:<id>:beskrivning` för Bara beskrivningen, `utskrift:<id>/<enhet>` för ett problems eller en texts sida, `utskrift:<id>-lathund`) och metodbankens valda metoder (`fil:valda-metoder.docx`) | `Nedladdning.astro`, `src/pages/stodundervisning/[id]/[enhet].astro`, `src/pages/stodundervisning/[id]/lathund.astro`, `src/pages/stodundervisning/index.astro` |
+| Besök på ett problems eller en texts egen sida (`/stodundervisning/<id>/<enhet>`): räknas på statistiksidan under metoden, som lathunden, med "på undersidorna" | `src/pages/statistik.astro` |
 | Delningar från delningsraden: `dela:<kanal>:<sida>`, med titeln "Upprepad läsning: delad på Facebook" (kanalerna facebook, linkedin, instagram, mejl, kopiera och fler) | skriptet i `src/components/Delning.astro`, som räknar med `goatcounter.count` |
 | Statistiksidan i kategorier | `src/pages/statistik.astro`, stilarna under Statistiken i `global.css` |
 

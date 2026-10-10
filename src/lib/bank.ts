@@ -14,8 +14,12 @@
 // följesidor på en egen sida, /stodundervisning/<id>/<nivå>-<nummer> ([id]/[enhet].astro), och metodens sida visar
 // nivåernas översikter med länkar till sidorna och filerna (Metod.astro, Bankfiler.astro). Word-filerna och pdf:erna
 // finns per nivå och för alla nivåer, med bara enheterna (elevens blad) eller med följesidorna (metoddocx.ts, bankDokument;
-// scripts/bankpdf.mjs). Beskrivningen, utskriften av den och filen Allt om metoden har nivåernas översikter men inte
-// enheterna, och planeringsmallarna har dem inte heller.
+// scripts/bankpdf.mjs).
+// Banken lägger bara till och tar inget bort (Niclas 2026-10-10: "Om skriv ut hela beskrivningen i alla är verkligen att
+// skriva ut allt bör denna också vara det? Gillar inte riktigt för mycket specialfall från sida till sida"): utskriften av
+// allt, Word-filen Allt om metoden och planeringsmallarna har enheterna med följesidorna, nivå för nivå, som i
+// andra metoder, och Bara beskrivningen har dem inte (METODER.md under Utskriften). Bara skärmen är kortare: där står
+// enheterna på sina egna sidor.
 //
 // Inga Node-beroenden: Word-filen av flera metoder byggs i webbläsaren med samma regel.
 import { lastexter, type Lastext } from './ramform';
@@ -51,7 +55,7 @@ export interface Bank {
   foljesidor: string[];
   nivaer: Bankniva[];
   enheter: Bankenhet[];
-  /** Ramarna som står på enheternas sidor och inte på metodens: enheterna och följesidorna. */
+  /** Ramarna som står på enheternas sidor och på metodens sida bara i utskriften: enheterna och följesidorna. */
   ramar: Set<number>;
   /** Nivåernas översikter, som står på metodens sida i bankens nivåer. */
   oversikter: Set<number>;
@@ -147,10 +151,10 @@ export function enhetICell(n: Bankniva, cell: string): Bankenhet | undefined {
   });
 }
 
-/** Raden om bankens filer och sidor, i beskrivningen efter nivåerna: i Word (metodBarn) och i sidans utskrift (Bank.astro). */
+/** Raden om bankens filer och sidor, i beskrivningen före nivåerna: i Word (metodBarn) och i sidans utskrift (Metod.astro). */
 export const bankRad = (b: Bank, adress: string) => {
   const alla = b.ord.alla.charAt(0).toLocaleUpperCase('sv') + b.ord.alla.slice(1);
-  return `${alla} står i egna filer, en för varje nivå och en för alla nivåer: bara ${b.ord.alla}, eller ${b.ord.alla} med ${foljeText(b)}. De finns på ${adress}, där varje ${b.ord.en} också har en egen sida.`;
+  return `${alla} finns också i egna filer, en för varje nivå och en för alla nivåer: bara ${b.ord.alla}, eller ${b.ord.alla} med ${foljeText(b)}. Filerna finns på ${adress}, och varje ${b.ord.en} har en egen sida där.`;
 };
 
 /** Förra och nästa enhet på samma nivå. */

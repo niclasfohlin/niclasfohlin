@@ -14,37 +14,48 @@ import type { Bank } from '../lib/bank';
 // ramar: namnet på metodens ramar (läslistorna, berättelseramarna) när de ligger i planeringsmallarna, så att knappen säger det.
 // titel: metodens titel, för besöksstatistiken ("Upprepad läsning: lathunden som pdf").
 // filmer: hur många filmer metoden har; noll ger ingen rad.
-// bank: metodens bank (src/lib/bank.ts): problemen eller texterna står i egna filer, i en tabell sist i rutan (Bankfiler.astro;
-// Niclas 2026-10-10: "tidigt i metoden en extra nedladdningsruta i någon form av enkel tabell"), och planeringsmallarna har
-// dem inte, så knappen nämner dem inte.
+// bank: metodens bank (src/lib/bank.ts): problemen eller texterna finns också i egna filer, i en tabell sist i rutan
+// (Bankfiler.astro; Niclas 2026-10-10: "tidigt i metoden en extra nedladdningsruta i någon form av enkel tabell"). Allt om
+// metoden och planeringsmallarna har dem som i andra metoder: banken lägger till filer och tar inget bort.
 interface Props { id: string; titel: string; harMallar: boolean; harLathund: boolean; ramar?: string; filmer?: number; bank?: Bank; farger?: Record<string, string> }
-const { id, titel, harMallar, harLathund, ramar: ramarna, filmer = 0, bank, farger = {} } = Astro.props;
-const ramar = bank ? undefined : ramarna;
+const { id, titel, harMallar, harLathund, ramar, filmer = 0, bank, farger = {} } = Astro.props;
 const filmord = filmer === 1 ? 'filmen' : 'filmerna';
 const drive = Boolean(site.driveKlientId);
-const delar = ['beskrivningen', harMallar && 'mallarna', harLathund && 'lathunden'].filter(Boolean) as string[];
+const delar = ['beskrivningen', ramar, harMallar && 'mallarna', harLathund && 'lathunden'].filter(Boolean) as string[];
 const delarText = delar.length > 1 ? `${delar.slice(0, -1).join(', ')} och ${delar[delar.length - 1]}` : delar[0];
 // Raden under knapparna, en kort mening per sak läsaren kan undra över (Niclas 2026-10-07: texten "kan kortas ner
 // något. Särskilt nu med fler knappar att ladda ner"): vad Allt om metoden är, var filmerna finns, hur beskrivningen
 // blir en pdf, vad Drive gör och upphovet. En mening står bara när den gäller metoden.
 const hjalp = [
   delar.length > 1 && `Allt om metoden är ${delarText} i en fil.`,
-  bank && `${bank.ord.alla.charAt(0).toLocaleUpperCase('sv')}${bank.ord.alla.slice(1)} står i egna filer, i tabellen.`,
+  bank && `${bank.ord.alla.charAt(0).toLocaleUpperCase('sv')}${bank.ord.alla.slice(1)} finns också i egna filer, nivå för nivå, i tabellen.`,
   filmer > 0 && (harLathund ? `PowerPoint-filen börjar med ${filmord}, och zip-filen har ${filmer === 1 ? 'den' : 'dem'} som mp4.` : `Zip-filen har ${filmord} som mp4.`),
-  'Beskrivningen som pdf: välj Spara som PDF i utskriftsrutan.',
+  'Som pdf: välj Spara som PDF i utskriftsrutan.',
   drive && 'Drive sparar en kopia i din Google Drive.',
   'Alla filer bär © Niclas Fohlin.',
 ].filter(Boolean).join(' ');
 const bas = `/stodundervisning/${id}`;
+const skrivareSvg = '<svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16"><path d="M5.5 7.5v-4h9v4M5.5 14.5h-2v-7h13v7h-2M5.5 11.5h9v5h-9z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>';
 ---
 <aside class="nedladdning" aria-labelledby={`nedladdning-${id}`}>
   <h2 id={`nedladdning-${id}`}>Ladda ner och skriv ut</h2>
   {harLathund && <p>Lathunden är fyra sidor att ha bredvid sig under passet, med egen utskrift i liggande A4.</p>}
-  <ul class="nedladdning-lista">
-    {harLathund && <li><a class="knapp" href={`${bas}/lathund`}>Öppna lathunden</a></li>}
-    <li class="bara-js"><button type="button" class={harLathund ? 'knapp sekundar' : 'knapp'} data-skriv-ut data-goatcounter-click={`utskrift:${id}`} data-goatcounter-title={`${titel}: utskrift av hela beskrivningen`}>Skriv ut hela beskrivningen</button></li>
-  </ul>
+  {harLathund && (
+    <ul class="nedladdning-lista">
+      <li><a class="knapp" href={`${bas}/lathund`}>Öppna lathunden</a></li>
+    </ul>
+  )}
   <ul class="filrader">
+    {/* Skriv ut: Allt är hela sidan, och Bara beskrivningen sidan utan metodens material (data-material i Metod.astro; Niclas
+        2026-10-10: "Skriv ut: Hela metoden (allt), Bara metodbeskrivningen"). Stilmallen visar knappen Bara beskrivningen
+        bara när sidan har material, så att gränsen står på ett ställe och en ny metod får knapparna utan eget arbete. */}
+    <li class="bara-js">
+      <span class="filrubrik" id={`skriv-ut-${id}`}>Skriv ut</span>{' '}
+      <span class="filval" role="group" aria-labelledby={`skriv-ut-${id}`}>
+        <button type="button" data-skriv-ut="allt" data-goatcounter-click={`utskrift:${id}`} data-goatcounter-title={`${titel}: utskrift av allt`}><Fragment set:html={skrivareSvg} /><span class="visually-hidden">Skriv ut </span><span class="skriv-ut-namn">Allt</span></button>
+        <button type="button" data-skriv-ut="beskrivning" data-goatcounter-click={`utskrift:${id}:beskrivning`} data-goatcounter-title={`${titel}: utskrift av beskrivningen`}><Fragment set:html={skrivareSvg} /><span class="visually-hidden">Skriv ut </span><span class="skriv-ut-namn">Bara beskrivningen</span></button>
+      </span>
+    </li>
     <li><span class="filrubrik">Allt om metoden</span> <Filval fil={bas} namn={id} rubrik="Allt om metoden" statistik={`${titel}: allt om metoden`} /></li>
     {harLathund && <li><span class="filrubrik">Bara lathunden</span> <Filval fil={`${bas}-lathund`} namn={`${id}-lathund`} rubrik="Lathunden" statistik={`${titel}: lathunden`} pdf pptx /></li>}
     {harMallar && <li><span class="filrubrik">Bara planeringsmallarna{ramar && ` och ${ramar}`}</span> <Filval fil={`${bas}-mallar`} namn={`${id}-mallar`} rubrik="Planeringsmallarna" statistik={`${titel}: planeringsmallarna`} /></li>}
@@ -65,18 +76,32 @@ const bas = `/stodundervisning/${id}`;
 </aside>
 
 <script>
-  // Utskriftsknappen visas bara när html har klassen js; utan JavaScript skriver läsaren ut som vanligt.
-  // Bilder som bara står i utskriften (filmens stillbilder, Filmbilder.astro) hämtas först nu: knappen väntar in dem,
-  // högst tre sekunder, och den som skriver ut med webbläsarens meny får dem hämtade när utskriften börjar.
+  // Utskriftsknapparna visas bara när html har klassen js; utan JavaScript skriver läsaren ut som vanligt.
+  // Bilder som bara står i utskriften (filmens stillbilder, Filmbilder.astro, bankens blad, Bank.astro) hämtas först nu:
+  // knappen väntar in dem, högst tjugo sekunder, och säger under tiden hur många som är kvar (granskningen 2026-10-10: en
+  // bank har ett hundratal bilder). Den som skriver ut med webbläsarens meny får dem hämtade när utskriften börjar.
   const utskriftsbilder = () => [...document.querySelectorAll<HTMLImageElement>('img[data-utskriftsbild]')];
-  const hamta = () => Promise.all(utskriftsbilder().map((b) => {
+  // Bara beskrivningen: sidan utan metodens material (data-material i Metod.astro, global.css), och bilderna där hämtas inte.
+  const DOLT = '[data-material]';
+  const hamta = () => Promise.all(utskriftsbilder().filter((b) => document.documentElement.dataset.utskrift !== 'beskrivning' || !b.closest(DOLT)).map((b) => {
     b.loading = 'eager';
     return b.naturalWidth > 0 ? undefined : new Promise((klar) => { b.addEventListener('load', klar, { once: true }); b.addEventListener('error', klar, { once: true }); });
   }));
   window.addEventListener('beforeprint', () => { hamta(); });
+  window.addEventListener('afterprint', () => { delete document.documentElement.dataset.utskrift; });
   for (const knapp of document.querySelectorAll<HTMLButtonElement>('[data-skriv-ut]')) {
     knapp.addEventListener('click', async () => {
-      await Promise.race([hamta(), new Promise((klar) => setTimeout(klar, 3000))]);
+      if (knapp.dataset.skrivUt === 'beskrivning') document.documentElement.dataset.utskrift = 'beskrivning';
+      else delete document.documentElement.dataset.utskrift;
+      const namn = knapp.querySelector<HTMLElement>('.skriv-ut-namn');
+      const forut = namn?.textContent ?? '';
+      const kvar = () => utskriftsbilder().filter((b) => b.naturalWidth === 0 && (document.documentElement.dataset.utskrift !== 'beskrivning' || !b.closest(DOLT))).length;
+      knapp.setAttribute('aria-busy', 'true');
+      const visa = window.setInterval(() => { const n = kvar(); if (namn && n) namn.textContent = `Hämtar bilder, ${n} kvar`; }, 250);
+      await Promise.race([hamta(), new Promise((klar) => setTimeout(klar, 20000))]);
+      window.clearInterval(visa);
+      if (namn) namn.textContent = forut;
+      knapp.removeAttribute('aria-busy');
       window.print();
     });
   }

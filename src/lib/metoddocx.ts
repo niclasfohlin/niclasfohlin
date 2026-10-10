@@ -27,6 +27,7 @@ import WORDSKALOR from '../data/lathund-word.json';
 import TECKENBREDD from '../data/teckenbredd.json';
 import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, FORMLUFT, FORMRAD_PT, LIGGANDE_BOK, LIGGANDE_BREDD, PROBLEMLUFT, PROBLEMTITEL_PT, RAMHOJD, TITEL_PT, boksidansMatt, losningarMatt, problemMatt, strukturMatt, textparMatt } from './boksida';
 import { bankAv, bankfilensRamar, bankRad, type Bankfil } from './bank';
+import { MATERIAL } from './material';
 import { losningarnasNiva, losningarnasNot, problemformer } from './problemform';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
@@ -2101,7 +2102,9 @@ function lararsidaBarn(ram: Ram, larare: { l: Lastext; bilder: PaBordet[]; namn:
   ];
 }
 
-function metodBarn(post: MetodPostISerie, bas: string): Flod {
+// material: false ger bara beskrivningen, utan metodens material (src/lib/material.ts; Materialet och Diplomet, mallarna
+// står inte här), som knappen Bara beskrivningen på sidan: metodbankens fil utan mallar och lathundar (metodDokument med medMallar: false).
+function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } = { material: true }): Flod {
   const d = post.data;
   const ut: Flod = [];
   ut.push(new Paragraph({ children: [run(d.titel)], heading: HeadingLevel.HEADING_1, spacing: { before: 0, after: 60 } }));
@@ -2267,14 +2270,15 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
     filmVid({ avsnitt: 'grund' });
   }
   for (const t of d.tabeller.filter((x) => x.plats === 'efter-grund')) friTabell(t);
-  if (d.ramar) {
+  if (d.ramar && (o.material || !MATERIAL.has('ramar'))) {
     ut.push(h2(d.ramar.rubrik));
     for (const s of d.ramar.text) ut.push(stycke(s));
     ut.push(...ljudRader(d));
     const boksidor = lastexter(d.ramar.ramar);
     const ramarna = d.ramar.ramar;
-    // Problemens tre blad (src/lib/problemform.ts) och banken (src/lib/bank.ts): i filen med allt står nivåernas
-    // översikter, som på sidan, och enheterna med sina följesidor står i bankens egna filer (bankDokument).
+    // Problemens tre blad (src/lib/problemform.ts) och banken (src/lib/bank.ts): i filen med allt står allt, nivå för nivå,
+    // som i utskriften av sidan och i bankens fil med alla nivåer och följesidorna (Niclas 2026-10-10: "Skriv ut hela
+    // beskrivningen" och Allt om metoden är allt, också i en metod med en bank).
     const former = problemformer(ramarna, bilderPaBordet);
     const bank = bankAv(d);
     const ramVal = (ram: Ram) => ({ kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d), efterDel, bildtext: (rubrik: string) => paBordetVid(bilderPaBordet, { del: rubrik }).map((b) => b.bild.text).join(' '), nivaer: d.nivaer, karta });
@@ -2359,10 +2363,11 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
     // ordning. Allt annat står kvar i filens ordning: en ram vars listor står vid veckorna ritas utan dem.
     const vm = veckomaterial(d);
     const paNySida = () => ut.at(-1) instanceof Sektionsbyte;
-    // Banken: nivåernas översikter först, som på sidan, och en rad om bankens filer.
+    // Banken först bland ramarna, som på sidan: en rad om bankens filer och sidor, och sedan varje nivå med sin översikt och
+    // sina enheter med följesidorna, i bankens ordning (bankfilensRamar, samma som bankens fil med alla nivåer).
     if (bank) {
-      for (const n of bank.nivaer) if (n.oversikt !== undefined) enRam(n.oversikt, ramarna[n.oversikt]);
       ut.push(stycke(bankRad(bank, metodAdress(bas, post.id).replace(/^https?:\/\//, '')), { farg: FARG.svag }));
+      for (const i of bankfilensRamar(bank, { medFoljesidor: true })) enRam(i, ramarna[i]);
     }
     for (const [i, ram] of ramarna.entries()) {
       if (bank && (bank.ramar.has(i) || bank.oversikter.has(i))) continue;
@@ -2387,7 +2392,7 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
     if (d.ramar.efter) ut.push(stycke(d.ramar.efter, { farg: FARG.svag }));
     filmVid({ avsnitt: 'ramar' });
   }
-  if (d.diplom) {
+  if (d.diplom && (o.material || !MATERIAL.has('diplom'))) {
     ut.push(h2(d.diplom.rubrik));
     ut.push(stycke('Diplomet finns som egen sida i planeringsmallarna.', { farg: FARG.svag }));
   }
@@ -2397,8 +2402,8 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
 // Mallarna: snabbmallen, checklistan, målkollen, kontraktet, schemat, ramarna och diplomet, en per
 // sida, med plats att skriva. I filen med allt står de färdiga ramarna redan i beskrivningen och
 // hoppas då över här (baraTommaRamar); i mallfilen för sig finns alla ramar.
-// bank: bara de här ramarna, i den här ordningen, och inget annat: en fil ur metodens bank (bankDokument). Utan bank har
-// planeringsmallarna varken bankens enheter, följesidor eller översikter, som står i bankens filer och i beskrivningen.
+// bank: bara de här ramarna, i den här ordningen, och inget annat: en fil ur metodens bank (bankDokument). Utan bank står
+// en metods bank först bland ramarna, i bankens ordning, som på sidan och i beskrivningen.
 function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; bank?: number[] } = {}): { barn: Flod; liggande?: boolean }[] {
   const d = post.data;
   const sidor: Flod[] = [];
@@ -2600,7 +2605,8 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
     // en ram vars listor står vid veckorna ritas utan dem. I filen med allt har bara de tomma ramarna en sida här.
     const vm = o.baraTommaRamar || o.bank ? undefined : veckomaterial(d);
     if (o.bank) for (const i of o.bank) sidor.push(...ramensSidor(i, ramarna[i]));
-    else for (const [i, ram] of ramarna.entries()) {
+    else if (bank) for (const i of bankfilensRamar(bank, { medFoljesidor: true })) sidor.push(...ramensSidor(i, ramarna[i]));
+    if (!o.bank) for (const [i, ram] of ramarna.entries()) {
       if (bank && (bank.ramar.has(i) || bank.oversikter.has(i))) continue;
       if (!vm) { sidor.push(...ramensSidor(i, ram)); continue; }
       if (vm.ramar.has(i)) continue;
@@ -3741,7 +3747,7 @@ export function metodDokument(poster: MetodPostISerie[], o: { bas: string; medMa
   }
   for (const post of poster) {
     const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
-    sektioner.push(...delaSektioner(metodBarn(post, o.bas), `${post.data.titel} · ${SAJT}`, adress));
+    sektioner.push(...delaSektioner(metodBarn(post, o.bas, { material: o.medMallar !== false }), `${post.data.titel} · ${SAJT}`, adress));
     if (o.medMallar) {
       for (const sida of mallBarn(post, o.bas, { baraTommaRamar: true })) sektioner.push(...delaSektioner(sida.barn, `Mall · ${post.data.titel} · ${SAJT}`, adress, { liggande: sida.liggande, smal: sida.liggande }));
       for (const sida of medBredd(BREDD_LATHUND, () => lathundBarn(post))) sektioner.push(sektion(sida, `Lathund · ${post.data.titel} · ${SAJT}`, `${adress}/lathund`, { lathund: true }));

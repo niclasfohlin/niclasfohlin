@@ -23,12 +23,14 @@ import Textpar from './Textpar.astro';
 import Ramindex from './Ramindex.astro';
 import Bank from './Bank.astro';
 import Problemsida from './Problemsida.astro';
-import { bankAv, nivaFarger, BOKNIVA, type Bankenhet } from '../lib/bank';
+import { bankAv, bankRad, enhetAdress, nivaFarger, BOKNIVA, type Bankenhet } from '../lib/bank';
 import { losningarnasNiva, losningarnasNot, problemformer } from '../lib/problemform';
 import { filmerVid, grundUpphov, metodensFilmer, stegDelar, type FilmPlats } from '../lib/film';
 import type { SerieKoppling } from '../lib/serie';
 import type { MetodData } from '../lib/metod';
-import { ejBryt, ramArTom, passGrupper, passOrd, passOversikt, stegTexter, laskortKolumn, arEttKort } from '../lib/metod';
+import { ejBryt, metodAdress, ramArTom, passGrupper, passOrd, passOversikt, stegTexter, laskortKolumn, arEttKort } from '../lib/metod';
+import { site } from '../data/site';
+import { materialAttribut } from '../lib/material';
 import { kortInfo } from '../lib/brak';
 import { arTarning, sagoUpphov } from '../lib/sagoblad';
 import { arkAdress, arSerieMall, mallEtiketter, mallRutor as mallRutorAdresser, rutansText, serieRutor as serieRutorAdresser, svgMatt } from '../lib/bildserier';
@@ -46,7 +48,8 @@ const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 '));
 interface Props { d: MetodData; id: string; koppling?: SerieKoppling; enhet?: Bankenhet }
 const { d, id, koppling, enhet } = Astro.props;
 // Banken: texter eller problem i nivåer på egna sidor (src/lib/bank.ts, Niclas 2026-10-10). Metodens sida har nivåernas
-// översikter (Bank.astro) där enheterna och deras följesidor annars hade stått.
+// översikter (Bank.astro) där enheterna och deras följesidor annars hade stått, och enheterna med följesidorna bara i
+// utskriften av allt.
 const banken = bankAv(d);
 const bankFarger = banken ? nivaFarger(d, banken) : {};
 // Bildserierna, arken och seriemallarna (Seriesamtal, src/lib/bildserier.ts): filerna som bygget ritar ur metodens
@@ -201,13 +204,24 @@ else ramarna.forEach((ram, ri) => {
 // Det som gäller hela kursen börjar på en ny sida i utskriften, som i Word, också när den sista veckans material är en
 // hel ram (Inbjudan till läsaren i Skrivkurs: sagoboken; granskningen 2026-10-10).
 if (sistaVeckan >= 0 && punkter[sistaVeckan + 1]) punkter[sistaVeckan + 1].helaKursen = true;
+// Bankens enheter på metodens sida: varje nivå med sina enheter och följesidor i bankens ordning, som i Word-filen med
+// allt och i bankens fil med alla nivåer. På skärmen står bara nivåernas översikter, och enheterna på egna sidor; i
+// utskriften av allt står de (Niclas 2026-10-10: "Om skriv ut hela beskrivningen i alla är verkligen att skriva ut allt bör
+// denna också vara det?"), och Bara beskrivningen har dem inte, eftersom Materialet är material (data-material nedan).
+const bankPunkter = new Map<string, Punkt[]>(banken && !enhet ? banken.nivaer.map((n) => [n.namn, n.enheter.flatMap((e) => [...e.fore, e.ri, ...e.efter]).map((ri) => ({ ram: ramarna[ri], ri }))]) : []);
+// Gamla länkar till en enhet eller en följesida på metodens sida (#ram-12, #lararens-sida, #bas-problem-1) leder till
+// enhetens sida, till bladet (Bank.astro).
+const bankLankar = banken && !enhet ? Object.fromEntries(banken.enheter.flatMap((e) => [...e.fore, e.ri, ...e.efter].flatMap((ri, k) => {
+  const mal = `${enhetAdress(id, e)}${k ? `#blad-${ri + 1}` : ''}`;
+  return [[`ram-${ri + 1}`, mal], [ramAnkare[ri], mal]];
+}))) : undefined;
 // Två texter (src/lib/ramform.ts, textparAv): ramen ritas som lärarens sida, med texterna och rutorna men utan frågorna och
 // med en rad om elevens sida, och elevens sida (Textpar.astro) står efter den, som i Word.
 // Problemens tre blad (src/lib/problemform.ts, metodriggens TILL-SAJTEN 2026-10-10, Det nya punkt 1–3): problemets sida
 // med bilden (Problemsida.astro), bladet Två lösningar med de ritade lösningarna och utan lärarens sida före (Textpar.astro
 // med bilder), och lärarens sida med problemet i en ruta överst och lösningarna efter texten. Samma regler som i Word.
 const former = problemformer(ramarna, bilderPaBordet);
-for (const p of punkter) {
+for (const p of [...punkter, ...[...bankPunkter.values()].flat()]) {
   const par = p.lage ? null : textparAv(p.ram);
   if (par && former.losningar(p.ram)) p.par = par;
   else if (par) { p.par = par; p.ram = textparLarare(p.ram); }
@@ -467,11 +481,12 @@ const meny = [
           {d.urval.krav.map((x) => <div><strong>{x.rubrik}</strong><span>{x.text}</span></div>)}
         </div>
       </div>
-      {/* I en bank (src/lib/bank.ts) står enheterna inte i planeringsmallarna utan på egna sidor och i bankens filer
-          (granskningen 2026-10-10, P1: raden skickade läraren till en fil där problemen inte fanns). */}
+      {/* I en bank (src/lib/bank.ts) leder raden till enheternas egna sidor och nivåernas filer, som läraren skriver ut ur,
+          i stället för till planeringsmallarna, där alla enheter står i en lång fil (granskningen 2026-10-10). Raden handlar
+          om materialet och följer det: Bara beskrivningen skriver inte ut den. */}
       {d.ramar && (banken
-        ? <p class="m-efter"><a href="#ramar">{d.ramar.rubrik}</a> ligger efter grunden, nivå för nivå, där varje {banken.ord.en} har en egen sida. {banken.ord.alla.charAt(0).toLocaleUpperCase('sv') + banken.ord.alla.slice(1)} att skriva ut finns i egna filer, en för varje nivå, i tabellen under Ladda ner och skriv ut.</p>
-        : <p class="m-efter"><a href="#ramar">{d.ramar.rubrik}</a> ligger efter grunden, och som egna sidor att kopiera i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>)}
+        ? <p class="m-efter" data-material={materialAttribut('ramar')}><a href="#ramar">{d.ramar.rubrik}</a> ligger efter grunden, nivå för nivå, där varje {banken.ord.en} har en egen sida. {banken.ord.alla.charAt(0).toLocaleUpperCase('sv') + banken.ord.alla.slice(1)} att skriva ut finns i egna filer, en för varje nivå, i tabellen under Ladda ner och skriv ut.</p>
+        : <p class="m-efter" data-material={materialAttribut('ramar')}><a href="#ramar">{d.ramar.rubrik}</a> ligger efter grunden, och som egna sidor att kopiera i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>)}
       <Filmruta filmer={vid({ avsnitt: 'urval' })} titel={d.titel} />
     </section>
   )}
@@ -589,8 +604,13 @@ const meny = [
 
   </>)}
 
+  {/* Materialet, Diplomet och Mallar att skriva ut är metodens material, och allt före dem är beskrivningen (Niclas
+      2026-10-10: "Skriv ut: Hela metoden (allt), Bara metodbeskrivningen"). Avsnitten står i src/lib/material.ts och märks här
+      som data-material: knappen Bara beskrivningen (Nedladdning.astro), stilmallen (global.css, som visar knappen bara när
+      sidan har material) och scripts/utskriftsformat.mjs läser märkningen, och Word-filen utan mallar och lathundar (metodBarn
+      i metoddocx.ts) läser samma lista. */}
   {d.ramar && (
-    <section id={enhet ? undefined : 'ramar'} class={enhet ? 'enhet-blad-lista' : undefined}>
+    <section id={enhet ? undefined : 'ramar'} class={enhet ? 'enhet-blad-lista' : undefined} data-material={enhet ? undefined : materialAttribut('ramar')}>
       {!enhet && (<>
       <h2>{d.ramar.rubrik}</h2>
       {d.ramar.text.map((s) => <p>{s}</p>)}
@@ -600,10 +620,10 @@ const meny = [
       {bildUpphov && <p class="m-efter">{bildUpphov}</p>}
       {/* Med fyra ramar eller fler (ett paket per årskurs, läslistorna, projekten, lästexterna) blir sidan lång: en
           ordnad lista med länkar till varje ram, där nivåerna fälls ut (Ramindex.astro, K-152). */}
-      {banken && <Bank d={d} id={id} bank={banken} farger={bankFarger} ankare={(i) => ramAnkare[i]} friKlass={friKlass} />}
-      {d.ramar.ramar.length - (banken ? banken.ramar.size + banken.oversikter.size : 0) >= 4 && <Ramindex ramar={d.ramar.ramar} rubrik={d.ramar.rubrik} farger={BOKNIVA} ankare={indexAnkare} bank={banken ?? undefined} />}
       </>)}
-      {punkter.map((punkt) => {
+      {(() => {
+      // Ett blad som det ritas: på metodens sida, i bankens nivåer (bara i utskriften) och på en enhets sida.
+      const rita = (punkt: Punkt) => {
         const { ram, ri, lage, vecka, lista, efter, par, helaKursen } = punkt;
         const pbild = former.bild(ram);
         const losning = former.losningar(ram)?.bilder ?? [];
@@ -835,14 +855,27 @@ const meny = [
             {innehall}
           </div>
         );
-      })}
+      };
+      return (<>
+        {/* Banken: raden om bankens filer och sidor (bara i utskriften), och varje nivå med sin översikt och, i utskriften,
+            sina enheter med följesidorna (Bank.astro). */}
+        {banken && !enhet && (
+          <div class="bank" data-bank data-lankar={JSON.stringify(bankLankar)}>
+            <p class="m-efter bank-rad">{bankRad(banken, metodAdress(site.url, id).replace(/^https?:\/\//, ''))}</p>
+            {banken.nivaer.map((n) => <Bank d={d} id={id} bank={banken} niva={n} farger={bankFarger} ankare={(i) => ramAnkare[i]} friKlass={friKlass}>{bankPunkter.get(n.namn)!.map(rita)}</Bank>)}
+          </div>
+        )}
+        {!enhet && d.ramar.ramar.length - (banken ? banken.ramar.size + banken.oversikter.size : 0) >= 4 && <Ramindex ramar={d.ramar.ramar} rubrik={d.ramar.rubrik} farger={BOKNIVA} ankare={indexAnkare} bank={banken ?? undefined} />}
+        {punkter.map(rita)}
+      </>);
+      })()}
       {!enhet && d.ramar.efter && <p class="m-efter">{d.ramar.efter}</p>}
       {!enhet && <Filmruta filmer={vid({ avsnitt: 'ramar' })} titel={d.titel} />}
     </section>
   )}
 
   {d.diplom && !enhet && (
-    <section id="diplom">
+    <section id="diplom" data-material={materialAttribut('diplom')}>
       <h2>{d.diplom.rubrik}</h2>
       <div class="m-diplom">
         {d.diplom.kicker && <p class="kicker">{d.diplom.kicker}</p>}
@@ -855,7 +888,7 @@ const meny = [
   )}
 
   {d.mallar.length > 0 && !enhet && (
-    <section id="mallar">
+    <section id="mallar" data-material={materialAttribut('mallar')}>
       <h2>Mallar att skriva ut</h2>
       {planketOchLinjen
         ? <p>Mallarna finns i rätt storlek på liggande A4 sist i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a>. Det hela är {helaCm} cm i bråkplanket och på tallinjen från 0 till 1, så att bitarna kan läggas mot linjen. Skrivs mallarna ut på A3 blir allt lika mycket större.{lathundBlad && ` ${lathundBlad} finns på lathundens tredje sida och står också sist i planeringsmallarna.`}</p>
