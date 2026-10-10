@@ -778,8 +778,10 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 /* Korten i mellanstorlek (ordens delar, Ordverkstad i grupp): tre i bredd, som i Word. Kortet behåller sin form men växer
    när ordet bryts på två rader i telefonen, i stället för att texten går genom kanten (tärningarna, granskningen 2026-10-10). */
 .m-kortlista.medel ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.m-kortlista.medel .m-kort { min-height: auto; align-self: stretch; aspect-ratio: 2 / 1; padding: 1.3rem 0.5rem 0.5rem; font-size: 1.5rem; line-height: 1.2; }
-@media (max-width: 40rem) { .m-kortlista.medel .m-kort { font-size: 1.15rem; } }
+.m-kortlista.medel .m-kort { min-height: auto; aspect-ratio: 2 / 1; padding: 1.3rem 0.5rem 0.5rem; font-size: 1.5rem; line-height: 1.2; }
+/* I telefonen har korten ingen fast form: de sträcks till radens höjd, så att korten i en rad är lika höga också när
+   ett ord bryts på två rader. */
+@media (max-width: 40rem) { .m-kortlista.medel .m-kort { font-size: 1.15rem; aspect-ratio: auto; min-height: 3.6rem; } }
 /* Kortet ur en ensam kort lista i en ram (strategikortet, K-062): större text och luft mellan raderna. */
 .m-lista.kort td { font-size: 1.5rem; padding: 0.7rem 0.9rem; }
 /* På mobilen ryms kortets rader, som "sss-ooo-lll → sol", på en rad i en lägre grad (granskningen 2026-09-27). */
