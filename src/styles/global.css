@@ -369,7 +369,7 @@ html.js .samla {
 .metod { max-width: none; }
 /* Toppen på metodsidan: ett ljust band över hela bredden med rubrik, ingress och nedladdningarna till
    vänster och faktarutan till höger. Under det modellen med sidnavigationen i en egen spalt. */
-.metod-topp { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "huvud" "fakta" "ladda"; gap: 1.25rem 3rem; align-items: start; padding: 1.5rem 0 2rem; margin: 0 0 2.5rem; background: var(--farg-ton); box-shadow: 0 0 0 100vmax var(--farg-ton); clip-path: inset(0 -100vmax); border-bottom: 1px solid var(--farg-kant); }
+.metod-topp { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "huvud" "fakta" "ladda"; gap: 1.25rem 3rem; align-items: start; padding: 1.5rem 0; margin: 0 0 1.5rem; background: var(--farg-ton); box-shadow: 0 0 0 100vmax var(--farg-ton); clip-path: inset(0 -100vmax); border-bottom: 1px solid var(--farg-kant); }
 .metod-huvud { grid-area: huvud; max-width: 46rem; }
 .metod-huvud h1 { font-size: clamp(1.9rem, 4.5vw, 2.75rem); margin-bottom: 0.3em; }
 .metod-huvud .undertitel { font-family: var(--typsnitt-ui); color: var(--farg-text-svag); font-size: 1.2rem; font-weight: 500; margin: 0 0 1rem; text-wrap: balance; }
@@ -428,6 +428,8 @@ html.js .filmval-ram { display: block; }
 .nedladdning { grid-area: ladda; font-family: var(--typsnitt-ui); font-size: 0.95rem; max-width: 46rem; }
 .nedladdning h2 { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); margin: 0 0 0.6em; }
 .nedladdning p { margin: 0 0 0.75em; }
+/* Rutan slutar med den sista raden knappar, utan luft under (Niclas 2026-10-10). */
+.nedladdning > :last-child { margin-bottom: 0; }
 .nedladdning-lista { list-style: none; padding: 0; margin: 0 0 0.75rem; display: flex; flex-wrap: wrap; gap: 0.6rem; }
 .nedladdning .skriv-ut { display: none; }
 html.js .nedladdning .skriv-ut { display: block; }
@@ -811,9 +813,10 @@ button.lank:hover { color: var(--farg-accent); }
   .bankfiler .filval { display: flex; width: 100%; }
   .bankfiler .filval > a { flex: 1 1 0; min-width: 0; min-height: 2.75rem; padding: 0.2rem; justify-content: center; }
   /* I telefonen bara bladen, stora, så att P och W syns och bladet når nära knappens kant (Niclas 2026-10-10: "lite
-     större ikoner i mobil och båda i pc"). Bladet krymper med knappen i den smalaste telefonen. Namnet står kvar för
-     skärmläsaren. */
-  .bankfiler .filval svg { width: 100%; max-width: 2.25rem; height: auto; }
+     större ikoner i mobil och båda i pc"; ur tre bilder valde han 29 punkter med strecket 1,5 punkter, som de små
+     ikonerna). Bladet krymper med knappen i den smalaste telefonen. Namnet står kvar för skärmläsaren. */
+  .bankfiler .filval svg { width: 100%; max-width: 1.8rem; height: auto; }
+  .bankfiler .filval svg :is(path, rect) { vector-effect: non-scaling-stroke; stroke-width: 1.5px; }
   .bankfiler .filval-namn { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 }
 /* En enhets sida ([id]/[enhet].astro): nivån och numret, titeln, bladen som knappar att hoppa till och utskriften. Varje

@@ -9,7 +9,6 @@
 // inte Bara filmerna: de andra raderna med Bara är delar av Allt om metoden, och filmerna ligger inte i den filen.
 import Filval from './Filval.astro';
 import Bankfiler from './Bankfiler.astro';
-import { site } from '../data/site';
 import type { Bank } from '../lib/bank';
 // ramar: namnet på metodens ramar (läslistorna, berättelseramarna) när de ligger i planeringsmallarna, så att knappen säger det.
 // titel: metodens titel, för besöksstatistiken ("Upprepad läsning: lathunden som pdf").
@@ -20,26 +19,14 @@ import type { Bank } from '../lib/bank';
 interface Props { id: string; titel: string; harMallar: boolean; harLathund: boolean; ramar?: string; filmer?: number; bank?: Bank; farger?: Record<string, string> }
 const { id, titel, harMallar, harLathund, ramar, filmer = 0, bank, farger = {} } = Astro.props;
 const filmord = filmer === 1 ? 'filmen' : 'filmerna';
-const drive = Boolean(site.driveKlientId);
-const delar = ['beskrivningen', ramar, harMallar && 'mallarna', harLathund && 'lathunden'].filter(Boolean) as string[];
-const delarText = delar.length > 1 ? `${delar.slice(0, -1).join(', ')} och ${delar[delar.length - 1]}` : delar[0];
-// Raden under knapparna, en kort mening per sak läsaren kan undra över (Niclas 2026-10-07: texten "kan kortas ner
-// något. Särskilt nu med fler knappar att ladda ner"): vad Allt om metoden är, var filmerna finns, hur beskrivningen
-// blir en pdf, vad Drive gör och upphovet. En mening står bara när den gäller metoden.
-const hjalp = [
-  delar.length > 1 && `Allt om metoden är ${delarText} i en fil.`,
-  bank && `${bank.ord.alla.charAt(0).toLocaleUpperCase('sv')}${bank.ord.alla.slice(1)} finns också i egna filer, nivå för nivå, i tabellen.`,
-  filmer > 0 && (harLathund ? `PowerPoint-filen börjar med ${filmord}, och zip-filen har ${filmer === 1 ? 'den' : 'dem'} som mp4.` : `Zip-filen har ${filmord} som mp4.`),
-  'Som pdf: välj Spara som PDF i utskriftsrutan.',
-  drive && 'Drive sparar en kopia i din Google Drive.',
-  'Alla filer bär © Niclas Fohlin.',
-].filter(Boolean).join(' ');
+// Rutan har bara rubriker och knappar (Niclas 2026-10-10: "rensa text som inte behövs eller förklarar sig själv med bara
+// knapparna och rubriker"): ingen mening om lathunden och inget stycke under knapparna. Det knapparna gör står i deras
+// titel (Filval.astro).
 const bas = `/stodundervisning/${id}`;
 const skrivareSvg = '<svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16"><path d="M5.5 7.5v-4h9v4M5.5 14.5h-2v-7h13v7h-2M5.5 11.5h9v5h-9z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>';
 ---
 <aside class="nedladdning" aria-labelledby={`nedladdning-${id}`}>
   <h2 id={`nedladdning-${id}`}>Ladda ner och skriv ut</h2>
-  {harLathund && <p>Lathunden är fyra sidor att ha bredvid sig under passet, med egen utskrift i liggande A4.</p>}
   {harLathund && (
     <ul class="nedladdning-lista">
       <li><a class="knapp" href={`${bas}/lathund`}>Öppna lathunden</a></li>
@@ -72,7 +59,6 @@ const skrivareSvg = '<svg aria-hidden="true" viewBox="0 0 20 20" width="16" heig
     )}
   </ul>
   {bank && <Bankfiler id={id} titel={titel} bank={bank} farger={farger} />}
-  <p class="meta">{hjalp}</p>
 </aside>
 
 <script>
