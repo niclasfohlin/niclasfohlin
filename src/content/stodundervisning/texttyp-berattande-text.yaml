@@ -33,7 +33,7 @@ material:
   - "veckans texter"
   - "ett lakan och två ficklampor"
 
-uppdaterad: 2026-10-09
+uppdaterad: 2026-10-10
 publicerad: 2026-10-09
 relaterade: []
 utkast: false
@@ -998,6 +998,7 @@ pabordet:
     rubrik: "Strukturen · Berätta mera!"
     text: "Två och två berättar, och den som lyssnar säger ”Berätta mera!” Sedan hittar var och en en ny kamrat."
     efter: "ram: Strukturen, vecka 1: Berätta mera!"
+    fluent: ["pojke", "flicka", "flicka-2", "pojke-2"]
 
 lathund:
   innehall: Läsare som lyssnar

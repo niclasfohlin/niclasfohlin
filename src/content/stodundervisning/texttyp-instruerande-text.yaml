@@ -36,7 +36,7 @@ material:
   - pappersremsor och gem
   - veckans texter
 
-uppdaterad: 2026-10-09
+uppdaterad: 2026-10-10
 publicerad: 2026-10-09
 relaterade: []
 utkast: false
@@ -1018,6 +1018,7 @@ pabordet:
     rubrik: "Strukturen · Kommunicera"
     text: "Skribenten säger stegen över pärmen, läsaren gör och frågar, och den som ser på har båda framför sig."
     efter: "ram: Strukturen, vecka 2: Kommunicera"
+    fluent: ["pojke", "flicka", "barn"]
 
 lathund:
   innehall: Läsare som gör det som står

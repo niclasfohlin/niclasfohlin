@@ -25,6 +25,9 @@ const enKolumn = skriv.filter((s) => !s).length === 1;
 // Många skrivkolumner (gruppens översikt i Ljudlek i grupp har nio) delar på bredden i stället för att vara 4,5 rem var,
 // så att protokollet ryms på telefonen och i utskriften.
 const manga = skriv.filter(Boolean).length > 4;
+// Ett tomt schema med många kolumner (Sagokollen i Skrivkurs: sagoboken, sju kolumner) rullar i sidled på telefonen, så
+// att kolumnrubrikerna inte skrivs in i varandra (granskningen i telefonen 2026-10-10).
+const schema = tomma.every(Boolean) && n >= 5;
 const protokoll = skriv.some(Boolean);
 // En pil står kvar med orden på båda sidor ("sss-ooo-lll → sol" på strategikortet), också när raden bryts på mobilen.
 const pil = (c: string) => c.replace(/ → /g, ' → ');
@@ -32,7 +35,7 @@ const pil = (c: string) => c.replace(/ → /g, ' → ');
 // upp står för sig, bredvid varandra på datorn och efter varandra på telefonen. Samma form i Word (fragelista).
 const fragor = harFragor({ kolumner, rader }) ? rader.map((r) => (r[1] ?? '').trim()).filter(Boolean) : undefined;
 ---
-<div id={id} class={`m-lista ${bokstaver ? 'bokstaver' : ''} ${enKolumn ? 'en-kolumn' : ''} ${protokoll ? 'protokoll' : ''} ${manga ? 'manga' : ''} ${elev && !protokoll ? 'elev' : ''} ${fragor ? `fragor text-${textlangd({ rader })}` : ''} ${klass}`.replace(/\s+/g, ' ').trim()}>
+<div id={id} class={`m-lista ${bokstaver ? 'bokstaver' : ''} ${enKolumn ? 'en-kolumn' : ''} ${protokoll ? 'protokoll' : ''} ${manga ? 'manga' : ''} ${schema ? 'schema' : ''} ${elev && !protokoll ? 'elev' : ''} ${fragor ? `fragor text-${textlangd({ rader })}` : ''} ${klass}`.replace(/\s+/g, ' ').trim()}>
   {huvud && (
     <dl class="m-ramfalt m-ramhuvud">
       {huvud.map((f) => <div><dt>{f.rubrik}</dt><dd>{f.text}</dd></div>)}

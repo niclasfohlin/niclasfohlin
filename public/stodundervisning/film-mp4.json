@@ -217,32 +217,39 @@
     "omslagVid": 21.76
   },
   "skrivkurs-berattelseram-film": {
-    "kalla": "025ff083d7848727",
-    "mp4": "7fe184470090d463",
-    "omslag": "363a3f689f31e776",
-    "sekunder": 20.22,
-    "omslagVid": 13.72
+    "kalla": "e047177e66d27a90",
+    "mp4": "d8dbe2f67476a31c",
+    "omslag": "f2700c450fd3ed79",
+    "sekunder": 29.71,
+    "omslagVid": 2.36
   },
   "skrivkurs-berattelseram-film2": {
-    "kalla": "d46bd58adda0ca20",
-    "mp4": "df74e5914dd1ac6b",
-    "omslag": "1cd514a4447a34e0",
-    "sekunder": 27.37,
-    "omslagVid": 19.4
+    "kalla": "4764ae8031613b0f",
+    "mp4": "c7751c1384395a0e",
+    "omslag": "6965a02fcc9ccc78",
+    "sekunder": 28.23,
+    "omslagVid": 19.32
+  },
+  "skrivkurs-berattelseram-film3": {
+    "kalla": "c0fe042d6def678e",
+    "mp4": "72f7d0a351d95426",
+    "omslag": "e4571a734ce62384",
+    "sekunder": 24.62,
+    "omslagVid": 13.84
   },
   "skrivkurs-sagoboken-film": {
-    "kalla": "36b1c00280929168",
-    "mp4": "926fe1e066f48039",
-    "omslag": "f6a2682fb7542296",
-    "sekunder": 28.29,
-    "omslagVid": 1
+    "kalla": "aa990cdf32a70932",
+    "mp4": "838e458f4b8e26a6",
+    "omslag": "3d4c0bf19e5d1d3b",
+    "sekunder": 28.59,
+    "omslagVid": 13.64
   },
   "skrivkurs-sagoboken-film2": {
-    "kalla": "936030b993c6f63d",
-    "mp4": "45e60c2d8116084f",
-    "omslag": "a5ae4a922db00ffe",
-    "sekunder": 24.26,
-    "omslagVid": 11.4
+    "kalla": "ab26d3c1399dee4f",
+    "mp4": "abfbcadb553aa8ca",
+    "omslag": "ef2bc18e8adacdb8",
+    "sekunder": 23.04,
+    "omslagVid": 14.44
   },
   "skrivkurs-sagoboken-film3": {
     "kalla": "1b7b6f9b10248c09",
@@ -252,18 +259,25 @@
     "omslagVid": 5.44
   },
   "skrivkurs-vardeskapande-film": {
-    "kalla": "b121bc31dc03c874",
-    "mp4": "ab45550f983fbca7",
-    "omslag": "324e9a551c22b0c9",
-    "sekunder": 25.71,
-    "omslagVid": 22.72
+    "kalla": "4e751e9ae699e9bf",
+    "mp4": "554b644d13be0de2",
+    "omslag": "fb1a1385076ec7a9",
+    "sekunder": 27.98,
+    "omslagVid": 16.76
   },
   "skrivkurs-vardeskapande-film2": {
-    "kalla": "2a7b76e79b005fc4",
-    "mp4": "c6dfa510169e9959",
-    "omslag": "8200d3fe9e44876a",
-    "sekunder": 27.82,
-    "omslagVid": 22.88
+    "kalla": "148ae508d33db15d",
+    "mp4": "4e4f1bc8fad70566",
+    "omslag": "e275f9cad0143485",
+    "sekunder": 27.19,
+    "omslagVid": 20.76
+  },
+  "skrivkurs-vardeskapande-film3": {
+    "kalla": "921d4f6f4f2d8877",
+    "mp4": "9c5f0db8c2f8a6fe",
+    "omslag": "a6bf818733f9c993",
+    "sekunder": 27.73,
+    "omslagVid": 12.6
   },
   "textsamtal-i-grupp-film": {
     "kalla": "d31ae3c95d5342e4",

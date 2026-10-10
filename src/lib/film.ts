@@ -28,6 +28,14 @@ export const HOGST_EXTRAFILMER = 2;
 // alltid pekfingret ur bildbanken, och de flesta filmer har också ansikten, kort eller saker därifrån (riggen
 // 2026-10-03), så raden gäller varje metod med film. Den står efter grundens källor, på sidan och i Word-filen.
 export const FILM_UPPHOV = 'Bilderna i filmerna: Fluent Emoji, © Microsoft Corporation, MIT-licens.';
+// Raden vid grunden nämner också figurerna i bilderna På bordet, som riggen ritar ur Fluent Emoji (pabordet.fluent;
+// K-277), med riggens ord: "Bilderna i filmerna och figurerna På bordet: …".
+export function grundUpphov(d: Pick<MetodData, 'pabordet'>, harFilmer: boolean): string | undefined {
+  const figurer = d.pabordet.some((b) => b.fluent?.length);
+  if (!harFilmer && !figurer) return undefined;
+  const vad = harFilmer && figurer ? 'Bilderna i filmerna och figurerna På bordet' : harFilmer ? 'Bilderna i filmerna' : 'Figurerna På bordet';
+  return `${vad}: Fluent Emoji, © Microsoft Corporation, MIT-licens.`;
+}
 
 export const filmAdress = (f: MetodFilm) => `${f.bas}.svg`;
 export const stillbilder = (f: MetodFilm) => [1, 2, 3, 4].map((nr) => `${f.bas}-${nr}.svg`);

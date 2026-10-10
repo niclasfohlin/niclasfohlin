@@ -37,6 +37,11 @@ const arNummer = (s?: string) => !!s && /^\d+$/.test(s);
 const mal = (l: Ramlank) => `#${(l.del !== undefined ? ankare?.del(l.nr, l.del) : l.lista !== undefined ? ankare?.lista(l.nr, l.lista) : undefined) ?? `ram-${l.nr}`}`;
 // Veckans nummer ur första ledet ("Vecka 2" blir 2), som texternas nummer.
 const veckansNr = (v: Indexvecka) => v.etikett.match(/\d+$/)?.[0] ?? '';
+// Det som står före "vecka N" i ledet, som projektet i Skattjakten vecka 3, står synligt ovanför projektets första vecka,
+// och ett led utan tal (Start, Boken) ovanför sin titel, eftersom numret annars ensamt säger var raden hör hemma
+// (granskningen av skrivkurserna 2026-10-10).
+const veckansGrupp = (v: Indexvecka | undefined) => (v && /\d+$/.test(v.etikett) ? v.etikett.replace(/\s*(vecka|del)?[  ]*\d+$/i, '').trim() : '');
+const forled = (v: Indexvecka, forra: Indexvecka | undefined) => (!veckansNr(v) ? v.etikett : veckansGrupp(v) && veckansGrupp(v) !== veckansGrupp(forra) ? veckansGrupp(v) : '');
 ---
 <nav class="m-ramlankar ri" aria-label={`Hoppa till: ${rubrik}`}>
   <ul class="ri-lista">
@@ -55,10 +60,10 @@ const veckansNr = (v: Indexvecka) => v.etikett.match(/\d+$/)?.[0] ?? '';
             <summary><span class="ri-nivanamn ri-prick">{p.namn}</span><span class="ri-antal">{p.antal}</span></summary>
             <ol class="ri-texter">
               <li class="ri-rad"><span class="ri-nr" aria-hidden="true"></span><a class="ri-titel" href={mal(p.oversikt)}>Översikt<span class="visually-hidden">: {p.oversikt.namn}</span></a></li>
-              {p.rader.map((v: Indexvecka) => (
+              {p.rader.map((v: Indexvecka, vi: number) => (
                 <li class="ri-rad ri-vecka">
                   <span class="ri-nr" aria-hidden="true">{veckansNr(v)}</span>
-                  <a class="ri-titel" href={mal(v.lank)}><span class="visually-hidden">{v.etikett}: </span>{hel(v.lank.namn)}</a>
+                  <a class="ri-titel" href={mal(v.lank)}>{forled(v, p.rader[vi - 1]) && <span class="ri-forled" aria-hidden="true">{forled(v, p.rader[vi - 1])}</span>}<span class="visually-hidden">{v.etikett}: </span>{hel(v.lank.namn)}</a>
                   {v.saker.length > 0 && (
                     <span class="ri-saker">
                       {v.saker.map((x, i) => <>{i > 0 && <span class="ri-punkt" aria-hidden="true">·</span>}<a href={mal(x)}>{hel(x.namn)}<span class="visually-hidden">, {v.etikett}</span></a></>)}

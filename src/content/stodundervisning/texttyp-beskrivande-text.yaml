@@ -33,7 +33,7 @@ material:
   - veckans texter
   - brevpapper och kuvert
 
-uppdaterad: 2026-10-09
+uppdaterad: 2026-10-10
 publicerad: 2026-10-09
 relaterade: []
 utkast: false
@@ -973,14 +973,17 @@ pabordet:
     rubrik: "Strukturen · Lika och olika"
     text: "Två elever med var sin bild och en pärm emellan beskriver tills de har hittat det som skiljer."
     efter: "ram: Strukturen, vecka 1: Lika och olika"
+    fluent: ["pojke", "flicka"]
   - nr: 8
     rubrik: "Bild A"
     text: "Bild A till Lika och olika. Klipp isär bild A och bild B."
     efter: "ram: Strukturen, vecka 1: Lika och olika"
+    fluent: ["sol", "äpple", "bok", "glas", "katt"]
   - nr: 9
     rubrik: "Bild B"
     text: "Bild B till Lika och olika. Fyra saker skiljer sig från bild A."
     efter: "ram: Strukturen, vecka 1: Lika och olika"
+    fluent: ["måne", "banan", "oppen-bok", "glas", "katt"]
 
 lathund:
   innehall: Läsare som inte har sett det

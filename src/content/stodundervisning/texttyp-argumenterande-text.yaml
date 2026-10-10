@@ -32,7 +32,7 @@ material:
   - diagrammet Mina texter
   - en mapp per elev
 
-uppdaterad: 2026-10-09
+uppdaterad: 2026-10-10
 publicerad: 2026-10-09
 relaterade: []
 utkast: false
@@ -873,6 +873,7 @@ pabordet:
     rubrik: "Strukturen · Konstruktiv debatt"
     text: "Två par har var sin sida i frågan, och efter en stund byter de sida."
     efter: "ram: Strukturen, vecka 1: Konstruktiv debatt"
+    fluent: ["pojke", "flicka-2", "flicka", "pojke-2"]
 
 lathund:
   innehall: En läsare som svarar

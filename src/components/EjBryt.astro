@@ -8,12 +8,14 @@
 // Word-filen har ingen nytta av tecknet (K-169), och scripts/paritet.mjs räknar bara bokstäver och siffror.
 // Vecka och pass står med ett hårt mellanslag före sitt nummer, så att "Efter vecka 3" inte bryts före siffran i en smal
 // kolumn på telefonen (granskningen av Texttyper i grupp, 2026-10-09).
+// Dag och del likadant, och talet före sekunder och minuter ("dag 1", "28 sekunder"; granskningen av skrivkurserna
+// i telefonen, 2026-10-10).
 import { ejBryt } from '../lib/metod';
 
 const html = await Astro.slots.render('default');
 const ut = html
   .split(/(<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<[^>]+>)/)
-  .map((del, i) => (i % 2 === 1 ? del : ejBryt(del).replace(/\b(vecka|pass|Vecka|Pass) (?=\d)/g, '$1 ')))
+  .map((del, i) => (i % 2 === 1 ? del : ejBryt(del).replace(/\b(vecka|pass|dag|del|Vecka|Pass|Dag|Del) (?=\d)/g, '$1 ').replace(/(\d) (sekunder|minuter|min)\b/g, '$1 $2')))
   .join('');
 ---
 

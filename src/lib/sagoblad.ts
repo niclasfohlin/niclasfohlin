@@ -15,7 +15,8 @@ export interface Station { nr: string; namn: string; fraga: string; start: strin
 export interface Sagofalt { rubrik: string; fraga: string; start: string | null; cm: number | null }
 export interface Sagoblad {
   form: Sagoform['form'];
-  // Bokens blad (omslaget, en sida och författarna) kopieras in i den tryckta boken, så de har ingen sidfot.
+  // Bokens blad (omslaget, en sida och författarna) kopieras in i den tryckta boken, så de har ingen sidfot. En sida med
+  // sidfot (en inbjudan eller ett kort, som inte är en sida i boken) har den, med ramens namn, så att läraren hittar bladet.
   bokblad: boolean;
   ram: 'lindorm' | 'slinga';
   rita: boolean;
@@ -28,8 +29,10 @@ export interface Sagoblad {
   falt: Sagofalt[];
   stationer: Station[];
   listor: { rubrik: string; rader: string[][] }[];
-  // Rutan Till läraren som en rad i sidfoten, som på boksidan.
+  // Rutan Till läraren, som står i beskrivningen före bladet.
   not: string;
+  // Sidfotens rad: rutan Till läraren, och på en sida med sidfot ramens namn först, så att läraren hittar bladet.
+  fot: string;
 }
 
 // Bildbankens bild för ett ord på en tärning eller vid en station: hela ordet först och sedan utan en eller ett, så att
@@ -53,11 +56,13 @@ export function sagobladAv(ram: Ram, d: Pick<MetodData, 'elevblad'>): Sagoblad[]
     const ord = s.bilder?.[i];
     return { nr: m ? m[1] : String(i + 1), namn: m ? m[2] : f.rubrik, fraga: f.fraga, start: f.start, cm: f.cm, bild: ord ? bildFor(ord) : null };
   });
+  const sidfot = s.form === 'sida' && !!s.sidfot;
   const ett: Sagoblad = {
-    form: s.form, bokblad: ['omslag', 'sida', 'forfattare'].includes(s.form), ram: s.ram ?? 'slinga', rita: !!s.rita,
+    form: s.form, bokblad: ['omslag', 'sida', 'forfattare'].includes(s.form) && !sidfot, ram: s.ram ?? 'slinga', rita: !!s.rita,
     titel: s.titel ?? ram.rubrik, undertitel: s.undertitel ?? null, namnrader: (ram.huvud ?? []).map((h) => h.rubrik), text: ram.text[0] ?? null,
     radMm: s.radMm, kortbilder: s.kortbilder, falt, stationer, listor: (ram.listor ?? []).map((l) => ({ rubrik: l.rubrik ?? '', rader: l.rader })),
     not: not ? `Till läraren: ${not}` : '',
+    fot: sidfot ? `${ram.rubrik}.${not ? ` Till läraren: ${not}` : ''}` : not ? `Till läraren: ${not}` : '',
   };
   if (s.form !== 'vag' || !((s.sidor ?? 1) > 1)) return [ett];
   const per = Math.ceil(stationer.length / s.sidor!);
@@ -84,7 +89,21 @@ export function tarningAv(l: Lista, ram: Ram, d: Pick<MetodData, 'kort'>): Tarni
 
 // Upphovet för bildbankens bilder på bladen och tärningarna (MIT-licensen kräver det i kopiorna): på sidan under
 // materialet och i Word-filerna före bladen och vid tärningarna (granskningen 2026-10-02, P1).
-export const SAGO_UPPHOV = 'Bilderna på bladen och tärningarna: Fluent Emoji, © Microsoft Corporation, MIT-licens.';
+// Raden säger bara det som har bildbankens bilder: bladen (stationernas rundlar och kortbilderna) och tärningarna. I
+// Texttyp: Berättande text har bladen kurbits och bara tärningarna bilder (K-277). Med ramar räknas bara de bladen, så att
+// raden i Word bara står vid en följd av blad som har bilder (granskningen av skrivkurserna 2026-10-10).
+export function sagoUpphov(d: MetodData, ramar: Ram[] = d.ramar?.ramar ?? []): string | undefined {
+  let blad = false;
+  let tarningar = false;
+  for (const ram of ramar) {
+    const s = ram.sagoform;
+    if ([...(s?.bilder ?? []), ...Object.values(s?.kortbilder ?? {}).flat()].some((ord) => ord && bildFor(ord))) blad = true;
+    if ((ram.listor ?? []).some((l) => arTarning(d, l) && kortCeller(l).some((k) => bildForSida(k)))) tarningar = true;
+  }
+  const delar = [blad && 'bladen', tarningar && 'tärningarna'].filter(Boolean);
+  return delar.length ? `Bilderna på ${delar.join(' och ')}: Fluent Emoji, © Microsoft Corporation, MIT-licens.` : undefined;
+}
+export const TARNING_UPPHOV = 'Bilderna på tärningarna: Fluent Emoji, © Microsoft Corporation, MIT-licens.';
 export const harSagoform = (d: Pick<MetodData, 'ramar' | 'kort'>): boolean =>
   (d.ramar?.ramar ?? []).some((r) => !!r.sagoform || (r.listor ?? []).some((l) => arTarning(d, l)));
 // Cinzel och Cinzel Decorative i Word-filen: boksidorna (lästexterna, elevens sida till två texter och strukturerna) och

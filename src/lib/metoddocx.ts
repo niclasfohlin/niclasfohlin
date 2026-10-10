@@ -13,8 +13,8 @@ import { brakDelar, delnamn, kortInfo, lage, STANDARD_NAMNARE, talrutansMatt, ty
 import { andikaBredd, bagSvg, utanStod } from './lasflyt';
 import { platsISerien, type MetodPostISerie, type SerieKoppling } from './serie';
 import { ANDIKA_ADRESS, ELEVTYPSNITT, VIK_TEXT, arBildlista, bildFor as bildForOrd, bildlistansNamn, harElevtypsnitt, kartCeller, kortCeller, ljudenheter, ljudform, arDelark, type KartCell } from './ljudkort';
-import { arElevensBlad, harFragor, lastexter, protokollDelas, strukturAv, textlangd, textparAv, textparLarare, TEXTPAR_LISTOR, type Lastext, type Struktur, type Textpar } from './ramform';
-import { FILM_UPPHOV, filmerVid, huvudfilm, metodensFilmer, stegDelar, stillbilder, STILLBILD_MATT, type FilmPlats, type MetodFilm } from './film';
+import { arElevensBlad, harFragor, lastexter, protokollDelas, strukturAv, textlangd, textparAv, textparLarare, arTextparLista, type Lastext, type Struktur, type Textpar } from './ramform';
+import { filmerVid, grundUpphov, huvudfilm, metodensFilmer, stegDelar, stillbilder, STILLBILD_MATT, type FilmPlats, type MetodFilm } from './film';
 import { reservNyckel } from './reservbild';
 import { arkAdress, mallEtiketter, mallRutor as mallRutorAdresser, rutansText, serieAdress, svgMatt } from './bildserier';
 import { bildensAlt, iDel, metodensPaBordet, PABORDET_MATT, paBordetVid, type PaBordet } from './pabordet';
@@ -22,7 +22,7 @@ import { listansNiva, skyltText, type Niva } from './nivaer';
 import { bladDelar, bladNamn, delensRad, forstaLed, kartan, metodensBlad, radensDel, wordId } from './karta';
 import { veckansLista, veckomaterial } from './veckomaterial';
 import * as SAGA from './sagoform.js';
-import { arTarning, harBoktypsnitt, SAGO_UPPHOV, sagoBilder, sagobladAv, tarningAv, type Sagoblad, type Sagofalt, type Station, type Tarning } from './sagoblad';
+import { arTarning, harBoktypsnitt, sagobladAv, sagoUpphov, TARNING_UPPHOV, tarningAv, type Sagoblad, type Sagofalt, type Station, type Tarning } from './sagoblad';
 import WORDSKALOR from '../data/lathund-word.json';
 import TECKENBREDD from '../data/teckenbredd.json';
 import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, FORMLUFT, FORMRAD_PT, RAMHOJD, TITEL_PT, boksidansMatt, strukturMatt, textparMatt } from './boksida';
@@ -580,14 +580,17 @@ function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][];
   // täta (omkring 6 mm, som smalt linjerat papper), så att noten, namnet, rubriken och listorna ryms på en sida att kopiera
   // per elev. Lästrappan före och efter i Upprepad läsning har två listor och ryms så (K-071), och Ljudlekens protokoll har
   // tre listor med 29 rader på sidan med tabellerna.
-  const storlek = smal ? Math.min(o.storlek, 22) : o.storlek;
+  // Texterna i lärarens tabell till Två texter står i högst 12 punkter: lärarens sida är ingen elevsida (elevens sida
+  // kommer efter), och i planeringsmallarnas stora storlek rymdes den inte på ett A4 i Google (Berättelseramen, Amir på
+  // rasten, 2026-10-10; K-266).
+  const storlek = smal ? Math.min(o.storlek, 22) : arTextparLista(l) ? Math.min(o.storlek, 24) : o.storlek;
   const bokstaver = l.rader.every((r) => r.every((c) => c.trim().length <= 2));
   if (l.rubrik) ut.push(stycke(l.rubrik, { fet: true, farg: FARG.huvud, storlek: 16, versaler: true, fore: 120, efter: 60, hallIhop: true, niva4: true }));
   const rader: TableRow[] = [];
   if (l.kolumner) rader.push(rad(l.kolumner.map((k, i) => cell([stycke(k, { storlek: 15, versaler: true, farg: FARG.svag, efter: 0, hallIhop: true, mitt: !!smal && skriv[i] })], { bredd: bredder[i], fyll: FARG.rand, tat: !!smal })), { huvud: true }));
   l.rader.forEach((r, ri) => {
     const ihop = ri < l.rader.length - 1 || !!o.hallIhopEfter;
-    rader.push(rad(Array.from({ length: n }, (_, i) => cell([stycke(r[i] ?? '', { storlek, fore: o.luft ? 100 : 0, efter: o.luft ? 100 : 0, hallIhop: ihop, mitt: bokstaver, brak: o.brak, radbryt: TEXTPAR_LISTOR.has(l), font: o.elev && !smal ? ELEVTYPSNITT : undefined })], { bredd: bredder[i], tat: !!smal }))));
+    rader.push(rad(Array.from({ length: n }, (_, i) => cell([stycke(r[i] ?? '', { storlek, fore: o.luft ? 100 : 0, efter: o.luft ? 100 : 0, hallIhop: ihop, mitt: bokstaver, brak: o.brak, radbryt: arTextparLista(l), font: o.elev && !smal ? ELEVTYPSNITT : undefined })], { bredd: bredder[i], tat: !!smal }))));
   });
   ut.push(tabell(rader, bredder), avstand());
   return ut;
@@ -691,7 +694,7 @@ function bokFot(b: Boksektion): Footer {
       new TextRun({ children: [new Tab()], size: 18, font: 'Arial' }),
       ...nivaKnapp(b),
       new TextRun({ text: '   ', size: 18, font: 'Arial' }),
-      new TextRun({ text: 's. ', size: 18, color: BOK.gra, font: 'Arial' }),
+      new TextRun({ text: 's. ', size: 18, color: BOK.gra, font: 'Arial' }), // hårt mellanslag: s. och sidnumret på samma rad
       new TextRun({ children: [PageNumber.CURRENT], size: 18, color: BOK.gra, font: 'Arial' }),
     ],
   })] });
@@ -1266,7 +1269,8 @@ function sagoLarartext(ramar: Ram[], d: MetodData, rubrik: (text: string) => Bar
     if (blad.not) ut.push(stycke(blad.not, { farg: FARG.svag, storlek: 20, efter: 100 }));
   }
   // Upphovet bara när bladen har bildbankens bilder (tidningens sida i Ordverkstad i grupp har inga; granskningen 2026-10-06).
-  if (sagoBilder(d).length) ut.push(stycke(SAGO_UPPHOV, { farg: FARG.svag, storlek: 18 }));
+  const upphov = sagoUpphov(d, ramar);
+  if (upphov) ut.push(stycke(upphov, { farg: FARG.svag, storlek: 18 }));
   return ut;
 }
 // En följd av ramar med sagoform från ramen i.
@@ -1275,7 +1279,7 @@ const sagoFoljd = (ramar: Ram[], i: number): Ram[] => { const ut: Ram[] = []; fo
 // blad utan sidfot, så att de går att kopiera in i den tryckta boken (riggens läsbarhetsrunda 2026-10-02). Upphovet står
 // litet i sidhuvudet på alla, som på boksidan.
 function sagoFlod(ram: Ram, d: MetodData): Flod {
-  return [...sagobladAv(ram, d).flatMap((b) => [new Sektionsbyte(false, undefined, { not: b.not, bokblad: b.bokblad }), ...sagobladBarn(b)]), new Sektionsbyte(false)];
+  return [...sagobladAv(ram, d).flatMap((b) => [new Sektionsbyte(false, undefined, { not: b.fot, bokblad: b.bokblad }), ...sagobladBarn(b)]), new Sektionsbyte(false)];
 }
 // Sidfoten på ett sagoblad: raden Till läraren till vänster och sidnumret till höger.
 function sagoFot(s: Sagosektion): Footer {
@@ -1285,7 +1289,7 @@ function sagoFot(s: Sagosektion): Footer {
     children: [
       new TextRun({ text: s.not, size: s.not.length > 75 ? 13 : 15, color: BOK.not, font: 'Arial' }),
       new TextRun({ children: [new Tab()], size: 18, font: 'Arial' }),
-      new TextRun({ text: 's. ', size: 18, color: BOK.gra, font: 'Arial' }),
+      new TextRun({ text: 's. ', size: 18, color: BOK.gra, font: 'Arial' }), // hårt mellanslag: s. och sidnumret på samma rad
       new TextRun({ children: [PageNumber.CURRENT], size: 18, color: BOK.gra, font: 'Arial' }),
     ],
   })] });
@@ -1470,7 +1474,7 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
   // Berättartärningarna (src/lib/sagoblad.ts, tarningTabell): lärarens ruta först, sedan varje tärning på ett eget A4 med
   // smal marginal, som ett kors att klippa, vika och limma, både i beskrivningen och i planeringsmallarna.
   if ((ram.listor ?? []).some((l) => arTarning({ kort: o.kort }, l))) {
-    ut.push(...noter(), stycke(SAGO_UPPHOV, { farg: FARG.svag, storlek: 18 }));
+    ut.push(...noter(), stycke(TARNING_UPPHOV, { farg: FARG.svag, storlek: 18 }));
     for (const l of ram.listor ?? []) {
       if (!arTarning({ kort: o.kort }, l)) { ut.push(...elevlista(l, { storlek, brak: o.brak, elev: o.elev && !l.larare })); continue; }
       ut.push(new Sektionsbyte(true), ...tarningRubrik(l.rubrik), tarningTabell(tarningAv(l, ram, { kort: o.kort })), new Sektionsbyte(false));
@@ -2113,7 +2117,8 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
     ut.push(h2(d.grund.rubrik));
     ut.push(...grundRuta(d.grund.text));
     if (d.grund.kallor) ut.push(stycke(d.grund.kallor, { farg: FARG.svag, storlek: 18 }));
-    if (filmer.length) ut.push(stycke(FILM_UPPHOV, { farg: FARG.svag, storlek: 18 }));
+    const upphov = grundUpphov(d, filmer.length > 0);
+    if (upphov) ut.push(stycke(upphov, { farg: FARG.svag, storlek: 18 }));
     filmVid({ avsnitt: 'grund' });
   }
   for (const t of d.tabeller.filter((x) => x.plats === 'efter-grund')) friTabell(t);
@@ -2303,12 +2308,23 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
   }
   // Elevens blad fyller sidan med fälten i sina mått, så där bär sidfoten upphovet ensam, som på mallarnas sidor.
   const bladsidor = new Set<Flod>();
-  const upphovsrad = () => stycke(`${UPPHOV}. Mall till ${d.titel}, ${metodAdress(bas, post.id)}.`, { farg: FARG.svag, storlek: 18, fore: 160 });
+  // Figurerna ur Fluent Emoji i bilderna På bordet (pabordet.fluent): planeringsmallarna har ingen grund, så upphovsraden
+  // på en sida med en sådan bild säger det, och har bara strukturernas egna sidor sådana bilder står det på mallarnas
+  // första sida (granskningen av skrivkurserna 2026-10-10: MIT-licensen kräver raden i kopiorna).
+  const figurRad = metodensPaBordet(d, post.id).some((b) => b.bild.fluent?.length) ? grundUpphov(d, false) : undefined;
+  const figurBilder = new WeakSet<object>();
+  const bordet = (b: PaBordet, maxHojd?: number): Barn[] => {
+    const ut = pabordetBarn(b, maxHojd);
+    if (b.bild.fluent?.length) for (const x of ut) figurBilder.add(x as object);
+    return ut;
+  };
+  const harFigur = (sida: Flod) => !!figurRad && sida.some((x) => figurBilder.has(x as object));
+  const upphovsrad = (figur = false) => stycke(`${UPPHOV}. Mall till ${d.titel}, ${metodAdress(bas, post.id)}.${figur && figurRad ? ` ${figurRad}` : ''}`, { farg: FARG.svag, storlek: 18, fore: 160 });
   if (d.ramar) {
     const ramarna = d.ramar.ramar;
     const boksidor = lastexter(ramarna);
     const paBordet = metodensPaBordet(d, post.id);
-    const ramVal = (ram: Ram, tom: boolean) => ({ skrivrum: tom, stor: true, kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d), efterDel: (rubrik: string, maxHojd?: number) => paBordetVid(paBordet, { del: rubrik }).flatMap((b) => pabordetBarn(b, maxHojd === undefined ? undefined : maxHojd - radantal(`På bordet. ${b.bild.text}`, BREDD, 19) * 235)), bildtext: (rubrik: string) => paBordetVid(paBordet, { del: rubrik }).map((b) => b.bild.text).join(' '), nivaer: d.nivaer, karta: kartaFor(post) });
+    const ramVal = (ram: Ram, tom: boolean) => ({ skrivrum: tom, stor: true, kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d), efterDel: (rubrik: string, maxHojd?: number) => paBordetVid(paBordet, { del: rubrik }).flatMap((b) => bordet(b, maxHojd === undefined ? undefined : maxHojd - radantal(`På bordet. ${b.bild.text}`, BREDD, 19) * 235)), bildtext: (rubrik: string) => paBordetVid(paBordet, { del: rubrik }).map((b) => b.bild.text).join(' '), nivaer: d.nivaer, karta: kartaFor(post) });
     // En rams sidor i planeringsmallarna, i ordning. ram är ramen som den ritas: en ram vars listor står vid veckorna
     // ritas utan dem.
     const ramensSidor = (i: number, ram: Ram): Flod[] => {
@@ -2333,7 +2349,7 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
         const sida: Flod = [formbyte(st.not || ram.rubrik), ...struktur(st, bild)];
         bladsidor.add(sida);
         ut.push(sida);
-        if (fler.length) ut.push(fler.flatMap((b) => pabordetBarn(b)));
+        if (fler.length) ut.push(fler.flatMap((b) => bordet(b)));
         return ut;
       }
       // En lästext är en boksida, som eleven läser (boksida()). Sidfoten och sidhuvudet bär upphovet, så sidan får ingen
@@ -2402,7 +2418,7 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
           for (const blad of ramensSidor(x.ri, ramarna[x.ri])) {
             if (!nySida()) sida.push(new Sektionsbyte(false));
             sida.push(...blad);
-            if (!bladsidor.has(blad)) sida.push(upphovsrad());
+            if (!bladsidor.has(blad)) sida.push(upphovsrad(harFigur(blad)));
             sida.push(new Sektionsbyte(false));
           }
         }
@@ -2414,7 +2430,9 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
   // Diplomet bär sin egen rubrik: utan sidans rubrik och metodrad, så att eleven inte får Diplom två gånger (K-040).
   // Diplomet är elevens (riggens docs/elevmaterial.md): texten i elevens typsnitt; kickern står kvar i sitt.
   if (d.diplom) sidor.push([...medElevtypsnitt(harElevtypsnitt(d), () => diplomBarn(d.diplom!))]);
-  for (const sida of sidor) if (!bladsidor.has(sida)) sida.push(upphovsrad());
+  const vanliga = sidor.filter((sida) => !bladsidor.has(sida));
+  const ingenFigur = !!figurRad && !vanliga.some(harFigur);
+  for (const sida of vanliga) sida.push(upphovsrad(harFigur(sida) || (ingenFigur && sida === vanliga[0])));
   // Mallarna (bråkplanket och tallinjerna) sist, var och en på en liggande sida med smal marginal. Sidfoten bär
   // upphovet, så att planket och linjerna får hela höjden. Är lathundens tredje sida ett blad att lägga på bordet
   // (talsortsmattan, bladet Bråket på fyra sätt) står bladet först bland dem, så att det kopieras med resten.

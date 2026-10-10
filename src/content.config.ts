@@ -195,11 +195,14 @@ const stodundervisning = defineCollection({
     // framför lärarens händer när hen har visat, en bild per vecka och en för materialet. Var och en står där efter
     // säger, med samma ord som extrafilmerna och dessutom "del: <rubrik>" efter en del i en ram, som en vecka. Filerna
     // hittas genom metodens id och bildens nummer: <id>-pabordet-<nr>.svg, 960 × 540.
+    // fluent: bildbankens ord för figurerna ur Fluent Emoji i bilden (metodriggens pabordet.json, 2026-10-09), så att
+    // upphovsraden vid grunden nämner figurerna På bordet (K-277; MIT-licensen kräver raden i kopiorna).
     pabordet: z.array(z.strictObject({
       nr: z.number().int().min(0).max(30),
       rubrik: text,
       text,
       efter: text.refine((v) => tolkaEfter(v) !== undefined, { error: `efter är ${EFTER_FORMER}.` }),
+      fluent: z.array(z.string()).optional(),
     })).default([]),
     // Nivåerna i en metod med nivåer (De fyra räknesätten: Bas, Medel och Avancerad, Niclas 2026-10-04), med färgen i hex.
     // Ett led i en listas rubrik som heter som en nivå blir en skylt i nivåns färg före rubriken, på sidan och i Word.
@@ -416,7 +419,8 @@ const stodundervisning = defineCollection({
         // sida och forfattare (bokens blad, utan sidfot), skyltar (vägskyltarna, två på ett A4). ram: lindorm eller
         // slinga (förval). bilder: bildbankens ord för stationerna, i fältens ordning. sidor: sagans väg på flera blad.
         // radMm: radernas höjd. rita: en ruta att rita i bredvid raderna. kortbilder: stationens rundel i stället för
-        // radens nummer, per lista och rad (null ger en prick).
+        // radens nummer, per lista och rad (null ger en prick). sidfot: bara formen sida, för ett blad som inte är en sida i
+        // boken (inbjudan, kort): bladet får sidfot med ramens namn och rutan Till läraren (metodriggen 2026-10-09).
         sagoform: z.strictObject({
           form: z.enum(['vag', 'berg', 'portratt', 'kort', 'omslag', 'sida', 'forfattare', 'skyltar']),
           ram: z.enum(['lindorm', 'slinga']).optional(),
@@ -427,6 +431,7 @@ const stodundervisning = defineCollection({
           radMm: z.number().min(5).max(20).optional(),
           rita: z.boolean().optional(),
           kortbilder: z.record(z.string(), z.array(z.string().nullable())).optional(),
+          sidfot: z.boolean().optional(),
         }).optional(),
         // Bildserien (Seriesamtal, metodriggens TILL-SAJTEN 2026-10-04): id för en bildserie i metodens scenfil,
         // src/data/bildserier/<metodens id>.json, ritad i kod ur metodriggen (src/lib/serieritning.js). Rutorna står efter

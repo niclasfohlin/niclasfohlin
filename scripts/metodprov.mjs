@@ -230,7 +230,15 @@ if (bilder) {
       // typsnitt gav raderna dubbel höjd): texten utan raderna med adressen och sidnumret är tom.
       if (wordSidor) {
         const tomma = wordSidor.map((t, i) => [i + 1, t.split(metod.titel).join('').replace(/niclasfohlin\.se\S*/g, '').replace(/Sida \d+ av \d+/g, '').replace(/Niclas Fohlin|Mall|Lathund/gi, '').replace(/[\s·©]/g, '')]).filter(([i, t]) => !t && i < wordSidor.length).map(([i]) => i);
-        tomma.length ? nej(`Word: sidan ${tomma.join(', ')} har bara sidhuvud och sidfot`) : ok(`Word: ${wordSidor.length - 1} sidor, ingen tom`);
+        // Ett blad i formen sida med bara ett textfält, utan titel, ruta att rita i och namnrad, är bara rader att skriva på
+        // (Min bok: fler rader i Skrivkurs: gemensam berättelseram, 2026-10-10): sidaInnehall i metoddocx.ts ritar
+        // textfältet utan etikett, och sidan har ingen text i Word. Så många sidor får vara utan.
+        const radblad = (metod.ramar?.ramar ?? []).filter((r) => {
+          const falt = r.delar.filter((del) => !/^Till läraren$/i.test(del.rubrik.trim())).flatMap((del) => del.falt);
+          return r.sagoform?.form === 'sida' && !r.huvud?.length && falt.length === 1 && !/titel|rita|bild/i.test(falt[0].rubrik);
+        }).length;
+        tomma.length > radblad ? nej(`Word: sidan ${tomma.join(', ')} har bara sidhuvud och sidfot${radblad ? ` (${radblad} blad med bara rader väntas)` : ''}`)
+          : ok(`Word: ${wordSidor.length - 1} sidor, ingen tom${tomma.length ? ` (sidan ${tomma.join(', ')} är ett blad med bara rader)` : ''}`);
       }
       // Läskorten (K-063): varje lästräningstext är ett A4 med båda korten, med stöd och utan stöd, som i Word. Står
       // korten på var sin sida har texten eller utskriftens mått vuxit (Upprepad läsning 2026-09-27: en marginal på 1 em

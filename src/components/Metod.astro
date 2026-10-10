@@ -21,12 +21,12 @@ import Boksida from './Boksida.astro';
 import Struktur from './Struktur.astro';
 import Textpar from './Textpar.astro';
 import Ramindex from './Ramindex.astro';
-import { FILM_UPPHOV, filmerVid, metodensFilmer, stegDelar, type FilmPlats } from '../lib/film';
+import { filmerVid, grundUpphov, metodensFilmer, stegDelar, type FilmPlats } from '../lib/film';
 import type { SerieKoppling } from '../lib/serie';
 import type { MetodData } from '../lib/metod';
 import { ejBryt, ramArTom, passGrupper, passOrd, passOversikt, stegTexter, laskortKolumn, arEttKort } from '../lib/metod';
 import { kortInfo } from '../lib/brak';
-import { arTarning, SAGO_UPPHOV, sagoBilder } from '../lib/sagoblad';
+import { arTarning, sagoUpphov } from '../lib/sagoblad';
 import { arkAdress, arSerieMall, mallEtiketter, mallRutor as mallRutorAdresser, rutansText, serieRutor as serieRutorAdresser, svgMatt } from '../lib/bildserier';
 import { serieantal, serieFiler } from '../lib/bildserier-bygge';
 import { metodensPaBordet, paBordetVid } from '../lib/pabordet';
@@ -53,7 +53,7 @@ const bank = koppling && !koppling.lektion ? koppling.serie : undefined;
 // materialet, och en rad till läraren om typsnittet, som hen kan använda till egna kort.
 const elevtypsnitt = harElevtypsnitt(d);
 // Sagobladen och tärningarna (src/lib/sagoblad.ts) har bildbankens bilder i Word-filerna, så upphovet står här också.
-const bildUpphov = upphovBilder(d) ?? (sagoBilder(d).length ? SAGO_UPPHOV : undefined);
+const bildUpphov = upphovBilder(d) ?? sagoUpphov(d);
 // Sagobladen och tärningarna står i sin form bara i planeringsmallarna (Word): sidan säger det vid ramen, och utskriften
 // visar inte tärningarnas ordkort, som inte går att göra en tärning av (granskningen 2026-10-02, P1).
 const sagoNamn = { skyltar: 'Skyltarna', kort: 'Korten' } as Record<string, string>;
@@ -156,8 +156,9 @@ const vm = veckomaterial(d);
 const ramarna: SerieRam[] = d.ramar?.ramar ?? [];
 const listAnkare = new Map<string, string>();
 if (vm) for (const [ri, lagda] of vm.listor) for (const li of lagda.keys()) listAnkare.set(`${ri}-${li}`, ankare(ramarna[ri].listor![li].rubrik ?? `${ramarna[ri].rubrik} ${li + 1}`));
-type Punkt = { ram: SerieRam; ri: number; lage?: 'huvud' | 'vecka' | 'material'; vecka?: number; lista?: number; efter?: string; par?: TextparForm };
+type Punkt = { ram: SerieRam; ri: number; lage?: 'huvud' | 'vecka' | 'material'; vecka?: number; lista?: number; efter?: string; par?: TextparForm; helaKursen?: boolean };
 const punkter: Punkt[] = [];
+let sistaVeckan = -1;
 ramarna.forEach((ram, ri) => {
   if (!vm) { punkter.push({ ram, ri }); return; }
   if (vm.ramar.has(ri)) return;
@@ -177,7 +178,11 @@ ramarna.forEach((ram, ri) => {
   }
   // En film eller bild som står efter ramen med lektioner står efter den sista veckans material.
   punkter[punkter.length - 1].efter = ram.rubrik;
+  sistaVeckan = punkter.length - 1;
 });
+// Det som gäller hela kursen börjar på en ny sida i utskriften, som i Word, också när den sista veckans material är en
+// hel ram (Inbjudan till läsaren i Skrivkurs: sagoboken; granskningen 2026-10-10).
+if (sistaVeckan >= 0 && punkter[sistaVeckan + 1]) punkter[sistaVeckan + 1].helaKursen = true;
 // Två texter (src/lib/ramform.ts, textparAv): ramen ritas som lärarens sida, med texterna och rutorna men utan frågorna och
 // med en rad om elevens sida, och elevens sida (Textpar.astro) står efter den, som i Word.
 for (const p of punkter) {
@@ -535,7 +540,7 @@ const meny = [
       <h2>{d.grund.rubrik}</h2>
       <div class="m-grund"><p>{d.grund.text}</p></div>
       {d.grund.kallor && <p class="m-kallor">{d.grund.kallor}</p>}
-      {filmer.length > 0 && <p class="m-kallor">{FILM_UPPHOV}</p>}
+      {grundUpphov(d, filmer.length > 0) && <p class="m-kallor">{grundUpphov(d, filmer.length > 0)}</p>}
     </section>
   )}
   {/* Efter avsnittet, som i Word: avsnittet hålls ihop i utskriften, filmen för sig. */}
@@ -562,7 +567,7 @@ const meny = [
       {/* Med fyra ramar eller fler (ett paket per årskurs, läslistorna, projekten, lästexterna) blir sidan lång: en
           ordnad lista med länkar till varje ram, där nivåerna fälls ut (Ramindex.astro, K-152). */}
       {d.ramar.ramar.length >= 4 && <Ramindex ramar={d.ramar.ramar} rubrik={d.ramar.rubrik} farger={BOKNIVA} ankare={indexAnkare} />}
-      {punkter.map(({ ram, ri, lage, vecka, lista, efter, par }) => boksidor.has(ram) ? (<>
+      {punkter.map(({ ram, ri, lage, vecka, lista, efter, par, helaKursen }) => boksidor.has(ram) ? (<>
         <Boksida l={boksidor.get(ram)!} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={BOKNIVA[boksidor.get(ram)!.nivaNr] ?? '#4b3a2f'} />
         <Filmruta filmer={[...vid({ ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
       </>) : strukturer.has(ram) ? (() => {
@@ -572,7 +577,7 @@ const meny = [
           <Filmruta filmer={[...fler, ...filmerVid(filmer, { ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
         </>);
       })() : (<>
-        <section class={`m-ram${protokollDelas(ram) ? ' delad' : ''}${arLararsida(ram) ? ' m-lararsida' : ''}${lage === 'material' ? ' m-veckans' : ''}${par ? ' m-textpar-larare' : ''}`} id={lage === 'vecka' ? undefined : lage === 'material' ? listAnkare.get(`${ri}-${lista}`) : `ram-${ri + 1}`}>
+        <section class={`m-ram${protokollDelas(ram) ? ' delad' : ''}${arLararsida(ram) ? ' m-lararsida' : ''}${lage === 'material' ? ' m-veckans' : ''}${par ? ' m-textpar-larare' : ''}${helaKursen ? ' m-hela-kursen' : ''}`} id={lage === 'vecka' ? undefined : lage === 'material' ? listAnkare.get(`${ri}-${lista}`) : `ram-${ri + 1}`}>
           {lage !== 'vecka' && lage !== 'material' && <h3 id={ramAnkare[ri]}>{hel(ram.rubrik)}</h3>}
           {ram.text.map((s) => <p>{s}</p>)}
           {ram.serie && antalRutor[ram.serie] === 1 && <Serierutor rutor={serieBlad(ram)} />}
@@ -652,10 +657,11 @@ const meny = [
                   <ol class="m-lektionskort m-veckokort" aria-label={(ram.rubrik.split(':')[1] ?? 'delarna').trim().replace(/^\p{Ll}/u, (c) => c.toLocaleUpperCase('sv'))}>
                     {ram.delar.map((del, di) => {
                       const [forsta, ...resten] = del.rubrik.split(' · ');
-                      const nr = forsta.match(/\d+/)?.[0] ?? String(di + 1);
+                      // Ett led utan tal (Start · pass 1, Boken · pass 14 och 15) får inget nummer (granskningen 2026-10-10).
+                      const nr = forsta.match(/\d+/)?.[0] ?? (resten.length ? '' : String(di + 1));
                       return (
                         <li class="m-lektionskort-kort">
-                          <p class="m-lektionskort-formaga"><span class="m-lektionskort-nr" aria-hidden="true">{nr}</span><span>{resten.length ? forsta : `Del ${di + 1}`}</span></p>
+                          <p class="m-lektionskort-formaga">{nr && <span class="m-lektionskort-nr" aria-hidden="true">{nr}</span>}<span>{resten.length ? forsta : `Del ${di + 1}`}</span></p>
                           <h4><a href={`#${delAnkare[ri][di]}`}>{resten.length ? resten.join(' · ') : del.rubrik}</a></h4>
                           {del.falt[0] && <p>{del.falt[0].text}</p>}
                         </li>

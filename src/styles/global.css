@@ -697,6 +697,20 @@ button.lank:hover { color: var(--farg-accent); }
   .boksida-fot { color: var(--bok-not-skarm); }
   .boksida-knapp { background: color-mix(in srgb, var(--bok-niva) 80%, #000); }
 }
+/* På skärmen är raden Till läraren under boksidan, strukturen och elevens sida i läsbar storlek, eftersom den kan ha
+   en instruktion som bara står där ("Med fler än sex elever gör ni två gallerier"); bara A4-sidan i utskriften och Word
+   kräver den lilla raden. Etiketten med nivån står till höger också när den bryts ned, och luften under foten håller
+   den ihop med sidan ovanför, så att den inte ser ut som rubrik för nästa block (granskningen av skrivkurserna
+   2026-10-10, i telefonen). */
+@media screen {
+  .boksida-fot { font-size: 0.9rem; line-height: 1.45; margin-bottom: 1.5rem; }
+  .boksida-knapp { margin-left: auto; }
+}
+/* Inget ensamt ord sist i en rubrik på skärmen ("…vecka 4: Till" / "laget", "SAMMA" / "PLATS"; granskningen av
+   skrivkurserna i telefonen 2026-10-10). Utskriften behåller sina rader, som A4-sidornas mått räknar med. */
+@media screen {
+  .metod-text :is(h2, h3, h4), .boksida-titel { text-wrap: balance; }
+}
 @media (max-width: 40rem) {
   .boksida-ram { padding: 1rem 1.1rem 1.25rem; }
   .boksida-titel { font-size: 1.5rem; }
@@ -739,6 +753,12 @@ button.lank:hover { color: var(--farg-accent); }
 .m-lista tbody tr:last-child td { border-bottom: 0; }
 .m-lista.bokstaver td { font-size: 1.7rem; text-align: center; }
 .m-lista.en-kolumn td { font-size: 1.25rem; }
+/* Ett tomt schema med många kolumner (Elevlista.astro, schema) rullar i sidled på en smal skärm, med kolumner som är
+   breda nog för sina rubriker. */
+@media screen and (max-width: 40rem) {
+  .m-lista.schema { overflow-x: auto; }
+  .m-lista.schema table { min-width: 44rem; }
+}
 /* Skrivkolumner (kartläggningens Före och Efter, Elevlista.astro): smala, med en kant mot texten och rubriken i mitten. */
 .m-lista th.skriv, .m-lista td.skriv { width: 4.5rem; text-align: center; border-left: 1px solid var(--farg-kant); }
 /* Bråk i elevmaterialet står staplade, som i läroböckerna (Brak.astro): siffrorna i full storlek och i textens typsnitt. */
@@ -755,9 +775,10 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-kort { position: relative; border: 1.5px dashed var(--farg-text-svag); border-radius: 4px; padding: 1.5rem 0.9rem 0.9rem; min-height: 7rem; display: flex; align-items: center; justify-content: center; text-align: center; font-family: var(--typsnitt-elev); font-size: 1.15rem; line-height: 1.45; }
 .m-kortlista.korta .m-kort { min-height: 0; aspect-ratio: 1; padding: 1.3rem 0.4rem 0.4rem; font-size: 2rem; line-height: 1.2; }
 .m-kortlista.ett .m-kort { min-height: 5rem; }
-/* Korten i mellanstorlek (ordens delar, Ordverkstad i grupp): tre i bredd, som i Word. */
+/* Korten i mellanstorlek (ordens delar, Ordverkstad i grupp): tre i bredd, som i Word. Kortet behåller sin form men växer
+   när ordet bryts på två rader i telefonen, i stället för att texten går genom kanten (tärningarna, granskningen 2026-10-10). */
 .m-kortlista.medel ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.m-kortlista.medel .m-kort { min-height: 0; aspect-ratio: 2 / 1; padding: 1.3rem 0.5rem 0.5rem; font-size: 1.5rem; line-height: 1.2; }
+.m-kortlista.medel .m-kort { min-height: auto; align-self: stretch; aspect-ratio: 2 / 1; padding: 1.3rem 0.5rem 0.5rem; font-size: 1.5rem; line-height: 1.2; }
 @media (max-width: 40rem) { .m-kortlista.medel .m-kort { font-size: 1.15rem; } }
 /* Kortet ur en ensam kort lista i en ram (strategikortet, K-062): större text och luft mellan raderna. */
 .m-lista.kort td { font-size: 1.5rem; padding: 0.7rem 0.9rem; }
@@ -1402,7 +1423,8 @@ html.js .bara-js { display: inline-block; }
   .film-bilder-ingress { font-family: var(--typsnitt-ui); font-size: 9pt; line-height: 1.3; color: #555; margin: 0 0 0.3rem; }
   .film-bilder ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 7.75cm); gap: 0.25cm 0.9cm; }
   .film-bilder img { display: block; width: 100%; height: auto; }
-  .film-bilder li p { font-family: var(--typsnitt-ui); font-size: 9pt; line-height: 1.3; margin: 0.06cm 0 0; }
+  /* Inget ensamt ord på bildtextens andra rad ("där.", "gör." i Skrivkurs: värdeskapande, granskningen 2026-10-10). */
+  .film-bilder li p { font-family: var(--typsnitt-ui); font-size: 9pt; line-height: 1.3; margin: 0.06cm 0 0; text-wrap: pretty; }
   .film-bilder li b { color: var(--farg-accent); }
   /* En extrafilms stillbilder i texten, vid momentet den förklarar (Metod.astro): luft före och efter, och rutan hålls ihop. */
   .metod-text .film-bilder { margin: 0.8rem 0 1rem; }
@@ -1454,6 +1476,8 @@ html.js .bara-js { display: inline-block; }
      ny sida, så att lärarens text inte hamnar längst ned på kortens sida (src/lib/veckomaterial.ts). Nästa vecka
      börjar redan en sida (.m-vecka). */
   .m-veckans + .m-ram { break-before: page; }
+  /* Det som gäller hela kursen börjar på en ny sida, som i Word (Metod.astro, helaKursen). */
+  .m-ram.m-hela-kursen { break-before: page; }
   .m-lista td { font-size: 13pt; padding: 0.3rem 0.6rem; }
   /* Lärarens protokoll (en lista med skrivkolumn) är ett blad att kopiera per elev: täta rader, som i Word (K-071). */
   .m-lista.protokoll td { font-size: 11pt; padding: 0.12rem 0.5rem; }
