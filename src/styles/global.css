@@ -743,6 +743,92 @@ button.lank:hover { color: var(--farg-accent); }
 .formsida .boksida-fragor { font-size: 1.1rem; }
 .struktur-ruta { border: 1px solid var(--bok-rod); padding: 0.6rem 0.9rem; margin: 1.1rem 0.6rem 0; font-family: var(--typsnitt-elev); font-size: 1rem; line-height: 1.45; }
 .struktur-ruta p { margin: 0; }
+/* Problemets sida (Problemsida.astro): boksidans ram utan anfang, problemet i elevens typsnitt, bilden och frågan i en
+   ruta med tunn röd kant, som i Word (problemsida i metoddocx.ts) och i metodriggens kompendium. */
+.problemsida-text { font-family: var(--typsnitt-elev); font-size: 1.15rem; line-height: var(--bok-rad, 1.6); }
+.problemsida-text p { margin: 0 0 0.6em; }
+.problemsida-bild { margin: 1rem auto; max-width: var(--bild-andel, 90%); }
+.problemsida-bild img, .losningar-bild img, .m-bildpar img { display: block; width: 100%; height: auto; }
+.bild-lank { display: block; cursor: zoom-in; }
+.bild-lank:focus-visible { outline: 2px solid var(--farg-accent); outline-offset: 2px; }
+.problemsida-fraga { border: 1px solid var(--bok-rod); padding: 0.7rem 1rem; margin: 1rem 0.5rem 0; font-family: var(--typsnitt-elev); font-size: 1.15rem; line-height: 1.5; }
+.problemsida-fraga-rubrik { font-family: 'Cinzel', serif; color: var(--bok-rod); font-size: 1rem; margin: 0 0 0.25rem; }
+.problemsida-fraga p { margin: 0; }
+.problemsida-fraga ol { list-style: none; margin: 0; padding: 0; }
+.problemsida-fraga li { display: grid; grid-template-columns: 1.6em 1fr; }
+@media (max-width: 34rem) { .problemsida-bild { max-width: none; } }
+/* Två lösningar (Textpar.astro med bilder): de ritade lösningarna i spalterna, med namnet överst. */
+.losningar .losningar-namn { font-size: 1rem; margin: 0 0 0.5rem; }
+.losningar .losningar-bild { margin: 0 auto; max-width: var(--bild-andel, 100%); }
+/* Två lösningar är ett liggande blad: på en bred skärm får det mer bredd än boksidan, så att lösningarna går att läsa. */
+@media screen and (min-width: 48rem) { .boksida.textpar.losningar { max-width: 58rem; } }
+/* Lärarens sida till ett problem: problemet i en ruta överst och lösningarna bredvid varandra efter texten. */
+.m-problemruta p { margin: 0 0 0.45em; }
+.m-problemruta p:last-child { margin-bottom: 0; }
+.m-bildpar { display: grid; grid-template-columns: 1fr; gap: 1rem; margin: 1rem 0; }
+.m-bildpar figure { margin: 0; }
+.m-bildpar figcaption { font-family: var(--typsnitt-ui); font-size: 0.85rem; color: var(--farg-text-svag); margin: 0.3rem 0 0; }
+@media (min-width: 34rem) { .m-bildpar { grid-template-columns: 1fr 1fr; } }
+/* Banken (src/lib/bank.ts, Bank.astro): en nivå per rad som fälls ut, med nivåns färg i kanten, översikten med länkar till
+   enheternas sidor och nivåns filer sist. */
+.bank { display: flex; flex-direction: column; gap: 0.6rem; margin: 1rem 0 1.75rem; }
+.bank-niva { border: 1px solid var(--farg-kant); border-left: 6px solid var(--niva); border-radius: 8px; background: var(--farg-yta); }
+.bank-niva > summary { list-style: none; display: flex; align-items: baseline; gap: 0.75rem; min-height: 2.75rem; padding: 0.7rem 1rem; cursor: pointer; font-family: var(--typsnitt-ui); }
+.bank-niva > summary::-webkit-details-marker { display: none; }
+.bank-niva > summary::after { content: ''; flex: none; margin-left: auto; width: 0.55rem; height: 0.55rem; border-right: 2px solid var(--farg-text-svag); border-bottom: 2px solid var(--farg-text-svag); transform: translateY(-0.15rem) rotate(45deg); align-self: center; }
+.bank-niva[open] > summary { border-bottom: 1px solid var(--farg-kant); }
+.bank-niva[open] > summary::after { transform: translateY(0.1rem) rotate(-135deg); }
+.bank-nivanamn { font-size: 1.15rem; font-weight: 700; color: color-mix(in srgb, var(--niva) 85%, #000); }
+.bank-antal { font-size: 0.95rem; color: var(--farg-text-svag); }
+.bank-innehall { padding: 0.25rem 1rem 1rem; }
+.bank-oversikt { margin: 0; }
+.bank-oversikt > h3 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.bank-lista { margin: 0.75rem 0; padding-left: 1.4rem; }
+.m-tabell-lank { font-weight: 600; }
+.bank-filer { margin: 1.25rem 0 0; padding: 0.75rem 0 0; border-top: 1px solid var(--farg-kant); font-family: var(--typsnitt-ui); font-size: 0.95rem; }
+.bank-filer-rubrik { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); margin: 0 0 0.5rem; }
+.bankfiler-niva { margin: 0; }
+.bankfiler-niva .filrubrik { flex-basis: 16rem; }
+/* Tabellen i nedladdningsrutan: alla nivåer och varje nivå, bara enheterna eller med följesidorna, i Pdf och Word. */
+.bankfiler { width: 100%; max-width: 40rem; table-layout: fixed; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.9rem; }
+.bankfiler col.nivakol { width: 7.5rem; }
+.bankfiler caption { caption-side: top; text-align: left; font-weight: 700; margin: 0 0 0.35rem; }
+.bankfiler th, .bankfiler td { padding: 0.35rem 0.5rem 0.35rem 0; text-align: left; vertical-align: middle; border-top: 1px solid var(--farg-kant); }
+.bankfiler thead th, .bankfiler thead td { border-top: 0; font-size: 0.8rem; font-weight: 600; line-height: 1.3; color: var(--farg-text-svag); vertical-align: bottom; }
+.bankfiler tbody th { font-weight: 600; white-space: nowrap; }
+.bankfiler-niva-namn::before { content: ''; display: inline-block; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--niva); margin-right: 0.4rem; }
+.bankfiler .filval { display: inline-flex; flex-wrap: nowrap; width: auto; }
+@media (max-width: 40rem) {
+  .bankfiler col.nivakol { width: 5.6rem; }
+  .bankfiler .filval { display: flex; width: 100%; }
+  .bankfiler .filval > a { flex: 1 1 0; min-height: 2.5rem; padding: 0 0.3rem; }
+  .bankfiler .filval svg { display: none; }
+}
+/* En enhets sida ([id]/[enhet].astro): nivån och numret, titeln, bladen som knappar att hoppa till och utskriften. Varje
+   blad har sitt namn i en rad med nivåns färg och en knapp som skriver ut bara bladet. Sist förra och nästa enhet. */
+.enhet-huvud { margin: 0 0 1rem; }
+.enhet-kicker { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; font-family: var(--typsnitt-ui); font-size: 0.95rem; color: var(--farg-text-svag); margin: 0.6rem 0 0.25rem; }
+.enhet-niva { background: color-mix(in srgb, var(--niva) 85%, #000); color: #fff; font-weight: 700; padding: 0.1rem 0.6rem; border-radius: 4px; }
+.enhet-huvud h1 { margin: 0 0 0.9rem; }
+.enhet-blad-nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0 0 0.9rem; padding: 0; }
+.enhet-blad-nav a { display: inline-flex; align-items: center; min-height: 2.5rem; padding: 0 0.95rem; border: 1px solid var(--farg-kant); border-radius: 1.25rem; background: var(--farg-yta); font-family: var(--typsnitt-ui); font-size: 0.95rem; font-weight: 600; text-decoration: none; }
+.enhet-blad-nav a:hover { border-color: var(--farg-accent); }
+.enhet-knappar { margin: 0; }
+.enhet-blad { margin: 2.25rem 0 0; scroll-margin-top: 0.75rem; }
+.enhet-bladhuvud { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 1rem; border-top: 3px solid var(--niva); padding: 0.6rem 0 0; margin: 0 0 0.9rem; }
+.enhet-bladhuvud h2 { font-size: 1.2rem; margin: 0; }
+.knapp.liten { min-height: 2.5rem; padding: 0.3rem 0.9rem; font-size: 0.9rem; }
+.enhet-blad > .m-ram, .enhet-blad > .boksida { margin-top: 0; }
+@media screen { .enhet-blad > .m-ram > h3 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
+.enhet-fot { display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: 0.75rem 1rem; margin: 2.5rem 0 1rem; padding: 1rem 0 0; border-top: 1px solid var(--farg-kant); font-family: var(--typsnitt-ui); }
+.enhet-fot a { display: flex; flex-direction: column; gap: 0.15rem; font-weight: 600; text-decoration: none; }
+.enhet-nasta { text-align: right; }
+.enhet-alla { align-self: center; text-align: center; }
+.enhet-fot-etikett { font-size: 0.8rem; font-weight: 400; color: var(--farg-text-svag); }
+@media (max-width: 34rem) {
+  .enhet-fot { grid-template-columns: 1fr 1fr; }
+  .enhet-alla { grid-column: 1 / -1; grid-row: 2; }
+}
 .struktur-ruta .struktur-ruta-rubrik { text-align: left; font-size: 0.95rem; margin: 0 0 0.2rem; }
 /* Elevlistor i en ram (läslistor): orden stora och lätta att peka i, kolumnrubrikerna små och dämpade, ingen fet första kolumn. */
 .m-lista { margin: 0.75rem 0 1.5rem; }
@@ -1005,6 +1091,8 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 /* Boksidorna (lästexterna) med 1,5 cm marginal runt ramen, som i Word, och en smalare fot för upphovet, så att ramen och
    raden Till läraren under den ryms på sidan. */
 @page boksida { size: A4; margin: 15mm 15mm 8mm; @bottom-center { content: var(--tryck-text, ''); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 8pt; color: #555; } }
+/* Två lösningar på ett liggande A4 med riggens marginaler (720 twips, src/lib/boksida.ts LIGGANDE_BOK). */
+@page bokliggande { size: A4 landscape; margin: 12.7mm 12.7mm 8mm; @bottom-center { content: var(--tryck-text, ''); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 8pt; color: #555; } }
 .lh .m-lista { margin: 0.25rem 0 0.75rem; }
 .lh .m-lista td { font-size: 1.05rem; padding: 0.3rem 0.6rem; }
 .lh .m-lista.bokstaver td { font-size: 1.3rem; }
@@ -1370,6 +1458,15 @@ html.js .bara-js { display: inline-block; }
   .m-mall-svep { display: block; }
   .m-kortlista.korta .m-kort { font-size: 1.6rem; }
   .m-tabell.stapla td.tom { display: none; }
+  /* Nivåns översikt i en bank (Bank.astro) som täta kort i telefonen: enhetens namn som länk överst, raden om vad den
+     tränar under och resten med etiketten på samma rad, så att tio problem inte blir tre skärmar. */
+  .bank-oversikt .m-tabell.stapla tr { border-radius: 6px; margin-bottom: 0.5rem; padding: 0.5rem 0.75rem; }
+  .bank-oversikt .m-tabell.stapla td { border-top: 0; padding: 0.1rem 0; }
+  .bank-oversikt .m-tabell.stapla td:first-child { font-size: 1.05rem; }
+  .bank-oversikt .m-tabell.stapla td:nth-child(-n+2)::before { display: none; }
+  .bank-oversikt .m-tabell.stapla td:nth-child(2) { color: var(--farg-text-svag); padding-bottom: 0.25rem; }
+  .bank-oversikt .m-tabell.stapla td:nth-child(n+3) { font-size: 0.92rem; }
+  .bank-oversikt .m-tabell.stapla td:nth-child(n+3)::before { display: inline; content: attr(data-rubrik) ": "; font-size: inherit; }
   .m-band > div { border-left: 0; border-top: 1px solid var(--farg-kant); }
   .m-band > div:first-child { border-top: 0; }
   /* Urvalsraden på mobil: låg och utan hjälptext. Antalet på en rad, kryssrutan bredvid knappen på nästa. */
@@ -1667,6 +1764,43 @@ html.js .bara-js { display: inline-block; }
   .struktur-bild { max-width: var(--bild-andel); margin: 0 auto 10pt; }
   .struktur-ruta { font-size: var(--ruta-pt); line-height: 1.611; border: 1pt solid var(--bok-rod); padding: 8pt; margin: 10pt 15pt 0; }
   .struktur-ruta .struktur-ruta-rubrik { font-size: var(--ruta-pt); margin: 0; }
+  /* Problemets sida på ett eget A4, som i Word: texten 13,6 mm in från ramens kant (800 twips, src/lib/boksida.ts
+     PROBLEMLUFT), titeln i 28 punkter, storleken, bildens andel och luften runt bilden ur samma uträkning (problemMatt). */
+  .problemsida .boksida-ram { padding: 0 13.6mm; }
+  .problemsida .boksida-titel { font-size: 28pt; margin-top: 13pt; }
+  .problemsida .boksida-titel::after { margin-bottom: 16pt; }
+  .problemsida-text { font-size: var(--bok-pt); line-height: var(--bok-rad); }
+  .problemsida-text p { margin: 0 0 10pt; }
+  .problemsida-bild { max-width: var(--bild-andel); margin: calc(5pt + var(--bild-luft)) auto calc(10pt + var(--bild-luft)); }
+  .problemsida-fraga { font-size: var(--fraga-pt); line-height: 1.678; border: 1pt solid var(--bok-rod); padding: 8pt; margin: 10pt 15pt 0; }
+  .problemsida-fraga-rubrik { font-size: 14pt; line-height: 1.348; margin: 0; }
+  /* Två lösningar på ett liggande A4 (@page bokliggande), som i Word: texten 10 mm in från ramens kant, titeln i 24 punkter,
+     bilderna i spalterna med namnet överst och frågorna under. */
+  .textpar.losningar { page: bokliggande; }
+  .textpar.losningar .boksida-ram { min-height: 170mm; padding: 0 10mm; }
+  .textpar.losningar .boksida-titel { font-size: 24pt; margin-top: 8pt; }
+  .textpar.losningar .boksida-titel::after { margin-bottom: 8pt; }
+  .textpar.losningar .formsida-rad { font-size: 14pt; margin-bottom: 10pt; }
+  .textpar.losningar .textpar-spalt:first-child { padding-right: 13pt; }
+  .textpar.losningar .textpar-spalt:last-child { padding-left: 13pt; }
+  .textpar.losningar .losningar-namn { font-size: 13pt; margin: 0 0 6pt; }
+  .textpar.losningar .formsida-rubrik { font-size: 12pt; margin: 3pt 0 6pt; }
+  .textpar.losningar .formsida-rubrik::before { margin-bottom: 12pt; }
+  .textpar.losningar .boksida-fragor li { margin: 0 0 4pt; }
+  /* Lärarens sida till ett problem: problemet i en tät ruta och lösningarna bredvid varandra, så att bladet ryms på ett A4. */
+  .m-problemruta { font-size: 9pt; line-height: 1.35; padding: 5pt 8pt; margin: 0 0 6pt; }
+  .m-problemruta .kicker { font-size: 8pt; margin: 0 0 2pt; }
+  .m-bildpar { grid-template-columns: 1fr 1fr; gap: 12pt; margin: 4pt 0 8pt; break-inside: avoid; }
+  .m-bildpar figcaption { font-size: 8pt; margin: 2pt 0 0; }
+  /* En enhets sida: bara bladen, och bara det blad som knappen valde. */
+  .enhet-huvud, .enhet-bladhuvud, .enhet-fot, .enhet .upphov, .utskrift-gomd { display: none !important; }
+  .enhet-blad { margin: 0; }
+  .bank-niva > summary, .bank-filer { display: none; }
+  /* Nivåerna står utfällda också när utskriften görs utan skript (Bank.astro fäller ut dem vid beforeprint). */
+  .bank-niva::details-content { content-visibility: visible; display: block; }
+  .bank-niva { border: 0; background: none; }
+  .bank-innehall { padding: 0; }
+  .bank-oversikt > h3 { position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; }
   /* En kort lista (högst tio rader) och en ensam ruta Till läraren delas inte över sidor (granskningen 2026-10-06). */
   .m-lista:has(tbody tr:nth-child(-n+10):last-child) { break-inside: avoid; }
   .m-ramdelar > .m-ramdel:last-of-type:not(:first-of-type) { break-before: avoid-page; page-break-before: avoid; }

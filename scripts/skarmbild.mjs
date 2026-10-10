@@ -7,6 +7,9 @@
 //   node scripts/skarmbild.mjs <url> <ut.png> --mobil       Mobil, 390 px, mobilläge, hela sidan
 //   node scripts/skarmbild.mjs <url> <ut.png> --bredd 768   Egen bredd
 //   node scripts/skarmbild.mjs <url> <ut.png> --hojd 2000   Bara sidans övre del
+//   node scripts/skarmbild.mjs <url> <ut.png> --js "<uttryck>"   Kör ett uttryck i sidan först, som att fälla ut en nivå
+//                                                              (document.querySelector('details').open = true)
+//   node scripts/skarmbild.mjs <url> <ut.png> --fran <väljare>  Börja bilden vid elementet, med --hojd som höjd
 //
 // En sida som är högre än 6 000 punkter sparas i delar, <ut>-1.png, <ut>-2.png och så vidare, var och en högst
 // 6 000 punkter hög: Chrome ritar inte hela ytan på en gång, och nederdelen blev annars vit (K-037).
@@ -17,7 +20,8 @@ import { spawn } from 'node:child_process';
 import { existsSync, writeFileSync } from 'node:fs';
 
 const args = process.argv.slice(2);
-const [url, ut] = args.filter((a) => !a.startsWith('--'));
+// Värdena efter --bredd, --hojd, --js och --fran är inte adressen eller filen.
+const [url, ut] = args.filter((a, i) => !a.startsWith('--') && !['--bredd', '--hojd', '--js', '--fran'].includes(args[i - 1]));
 if (!url || !ut) {
   console.error('Ange url och utfil: node scripts/skarmbild.mjs <url> <ut.png> [--mobil] [--bredd <px>]');
   process.exit(1);
@@ -26,6 +30,8 @@ const mobil = args.includes('--mobil');
 const bredd = args.includes('--bredd') ? Number(args[args.indexOf('--bredd') + 1]) : mobil ? 390 : 1280;
 // --hojd <px> tar bara sidans övre del, för mycket långa sidor.
 const maxHojd = args.includes('--hojd') ? Number(args[args.indexOf('--hojd') + 1]) : Infinity;
+const js = args.includes('--js') ? args[args.indexOf('--js') + 1] : undefined;
+const fran = args.includes('--fran') ? args[args.indexOf('--fran') + 1] : undefined;
 const dpr = mobil ? 2 : 1;
 // Sidor högre än DEL punkter tas i avsnitt och sparas som <ut>-1.png, <ut>-2.png … (K-037).
 const DEL = 6000;
@@ -69,13 +75,15 @@ try {
   for (let i = 0; i < 80 && !handelser.includes('Page.loadEventFired'); i++) await vanta(100);
   await vanta(400);
   const utvardera = async (expression) => (await skicka('Runtime.evaluate', { expression, returnByValue: true })).result.result.value;
-  const hojd = Math.min(maxHojd, await utvardera('Math.ceil(Math.max(document.documentElement.scrollHeight, document.body.scrollHeight))'));
+  if (js) { await utvardera(js); await vanta(400); }
+  const topp = fran ? Math.max(0, Math.floor(await utvardera(`(() => { const e = document.querySelector(${JSON.stringify(fran)}); return e ? e.getBoundingClientRect().top + scrollY - 12 : 0; })()`))) : 0;
+  const hojd = Math.min(maxHojd, await utvardera('Math.ceil(Math.max(document.documentElement.scrollHeight, document.body.scrollHeight))') - topp);
   const bredast = await utvardera('Math.ceil(document.documentElement.scrollWidth)');
   const sidled = bredast > bredd ? `, OBS sidan är ${bredast} px bred och rullar i sidled` : '';
   if (hojd <= DEL) {
-    await skicka('Emulation.setDeviceMetricsOverride', { width: bredd, height: hojd, deviceScaleFactor: dpr, mobile: mobil });
+    await skicka('Emulation.setDeviceMetricsOverride', { width: bredd, height: topp ? (mobil ? 844 : 900) : hojd, deviceScaleFactor: dpr, mobile: mobil });
     await vanta(200);
-    const klipp = Number.isFinite(maxHojd) ? { clip: { x: 0, y: 0, width: bredd, height: hojd, scale: 1 } } : {};
+    const klipp = Number.isFinite(maxHojd) || topp ? { clip: { x: 0, y: topp, width: bredd, height: hojd, scale: 1 } } : {};
     const svar = await skicka('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true, ...klipp });
     writeFileSync(ut, Buffer.from(svar.result.data, 'base64'));
     console.log(`${ut}: ${bredd}x${hojd} css-px${sidled}`);

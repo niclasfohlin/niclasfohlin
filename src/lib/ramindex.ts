@@ -12,6 +12,7 @@
 // listan och spärren nedan i npm run validera.
 import { lastexter } from './ramform';
 import { veckomaterial } from './veckomaterial';
+import type { Bank } from './bank';
 
 /** En länk till en ram: ramens nummer (ankaret ram-<nr>) och texten. del: länken leder till en del i ramen (en vecka),
  * och lista: till en lista i ramen, som index. */
@@ -33,10 +34,12 @@ const versal = (s: string) => s.charAt(0).toLocaleUpperCase('sv') + s.slice(1);
 const LARARSIDA = /^Lärarens sida: (.+)$/;
 const LARARSIDOR = /^Lärarens sidor: (.+)$/;
 
-export function ramindex<R extends Ram>(ramar: R[]): Indexpost[] {
+// bank: metodens bank (src/lib/bank.ts). Enheterna och följesidorna står på egna sidor och nivåernas översikter i bankens
+// nivåer, som står först bland ramarna (Bank.astro), så listan har bara de andra ramarna.
+export function ramindex<R extends Ram>(ramar: R[], bank?: Bank): Indexpost[] {
   const texter = lastexter(ramar);
   const nivaer = new Map<string, Indexniva>();
-  const anvanda = new Set<number>();
+  const anvanda = new Set<number>(bank ? [...bank.ramar, ...bank.oversikter] : []);
   // Veckorna och det som står vid dem (veckomaterial.ts) är en egen post och står inte under en nivå eller ett led.
   const vm = veckomaterial({ ramar: { ramar } });
   if (vm) { anvanda.add(vm.ri); for (const i of vm.ramar.keys()) anvanda.add(i); }
@@ -115,6 +118,8 @@ export function ramindex<R extends Ram>(ramar: R[]): Indexpost[] {
   const lankade = poster.flatMap(({ post: p }) => (p.typ === 'rad' ? [p.rad.lank.nr]
     : p.typ === 'veckor' ? [p.oversikt.nr, ...p.rader.flatMap((r) => r.saker.filter((x) => x.lista === undefined).map((x) => x.nr))]
       : [...(p.typ === 'niva' && p.oversikt ? [p.oversikt.nr] : []), ...p.rader.flatMap((r) => [r.lank.nr, ...(r.extra ? [r.extra.nr] : [])])]));
+  // Bankens ramar nås genom bankens nivåer.
+  if (bank) for (const i of [...bank.ramar, ...bank.oversikter]) lankade.push(i + 1);
   if (lankade.length !== ramar.length || new Set(lankade).size !== ramar.length) throw new Error(`Materialets lista: ${ramar.length} ramar men ${new Set(lankade).size} olika länkar av ${lankade.length} (src/lib/ramindex.ts).`);
   return poster.sort((a, b) => a.forst - b.forst).map((p) => p.post);
 }

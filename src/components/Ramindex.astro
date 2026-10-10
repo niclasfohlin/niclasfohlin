@@ -11,6 +11,7 @@
 // listan märkte inte ut var veckornas material slutar; Niclas: "vad som är generellt").
 import { ramindex, type Indexrad, type Indexvecka, type Ramlank } from '../lib/ramindex';
 import { ejBryt } from '../lib/metod';
+import type { Bank } from '../lib/bank';
 interface Props {
   ramar: Parameters<typeof ramindex>[0];
   rubrik: string;
@@ -18,13 +19,15 @@ interface Props {
   farger: string[];
   /** Ankaret till en del i en ram (en vecka) och till en lista i en ram, för posten veckor. */
   ankare?: { del: (nr: number, di: number) => string | undefined; lista: (nr: number, li: number) => string | undefined };
+  /** Metodens bank (src/lib/bank.ts): dess ramar står i bankens nivåer och inte i listan. */
+  bank?: Bank;
 }
-const { ramar, rubrik, farger, ankare } = Astro.props;
+const { ramar, rubrik, farger, ankare, bank } = Astro.props;
 const FALL_UT = 6;
 // Ett led som är längre än ledets spalt (omkring nio tecken, "Åk 4–5" ryms och "Kartläggning" inte) står på en egen rad
 // över sina ramar (granskningen 2026-10-01, K-156).
 const LANGT_LED = 9;
-const poster = ramindex(ramar);
+const poster = ramindex(ramar, bank);
 // Etiketten Hela kursen står före den första posten efter veckorna.
 const efterVeckorna = poster.findIndex((p) => p.typ === 'veckor') + 1;
 const visade: (typeof poster[number] | { typ: 'etikett'; namn: string })[] = poster.flatMap((p, nr) => (efterVeckorna > 0 && nr === efterVeckorna ? [{ typ: 'etikett' as const, namn: 'Hela kursen' }, p] : [p]));

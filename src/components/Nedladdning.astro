@@ -8,12 +8,18 @@
 // src/pages/stodundervisning/[id]-filmer.zip.ts ur mp4-filerna som scripts/filmmp4.mjs gör ur svg-filmerna. Raden heter
 // inte Bara filmerna: de andra raderna med Bara är delar av Allt om metoden, och filmerna ligger inte i den filen.
 import Filval from './Filval.astro';
+import Bankfiler from './Bankfiler.astro';
 import { site } from '../data/site';
+import type { Bank } from '../lib/bank';
 // ramar: namnet på metodens ramar (läslistorna, berättelseramarna) när de ligger i planeringsmallarna, så att knappen säger det.
 // titel: metodens titel, för besöksstatistiken ("Upprepad läsning: lathunden som pdf").
 // filmer: hur många filmer metoden har; noll ger ingen rad.
-interface Props { id: string; titel: string; harMallar: boolean; harLathund: boolean; ramar?: string; filmer?: number }
-const { id, titel, harMallar, harLathund, ramar, filmer = 0 } = Astro.props;
+// bank: metodens bank (src/lib/bank.ts): problemen eller texterna står i egna filer, i en tabell sist i rutan (Bankfiler.astro;
+// Niclas 2026-10-10: "tidigt i metoden en extra nedladdningsruta i någon form av enkel tabell"), och planeringsmallarna har
+// dem inte, så knappen nämner dem inte.
+interface Props { id: string; titel: string; harMallar: boolean; harLathund: boolean; ramar?: string; filmer?: number; bank?: Bank; farger?: Record<string, string> }
+const { id, titel, harMallar, harLathund, ramar: ramarna, filmer = 0, bank, farger = {} } = Astro.props;
+const ramar = bank ? undefined : ramarna;
 const filmord = filmer === 1 ? 'filmen' : 'filmerna';
 const drive = Boolean(site.driveKlientId);
 const delar = ['beskrivningen', harMallar && 'mallarna', harLathund && 'lathunden'].filter(Boolean) as string[];
@@ -23,6 +29,7 @@ const delarText = delar.length > 1 ? `${delar.slice(0, -1).join(', ')} och ${del
 // blir en pdf, vad Drive gör och upphovet. En mening står bara när den gäller metoden.
 const hjalp = [
   delar.length > 1 && `Allt om metoden är ${delarText} i en fil.`,
+  bank && `${bank.ord.alla.charAt(0).toLocaleUpperCase('sv')}${bank.ord.alla.slice(1)} står i egna filer, i tabellen.`,
   filmer > 0 && (harLathund ? `PowerPoint-filen börjar med ${filmord}, och zip-filen har ${filmer === 1 ? 'den' : 'dem'} som mp4.` : `Zip-filen har ${filmord} som mp4.`),
   'Beskrivningen som pdf: välj Spara som PDF i utskriftsrutan.',
   drive && 'Drive sparar en kopia i din Google Drive.',
@@ -53,6 +60,7 @@ const bas = `/stodundervisning/${id}`;
       </li>
     )}
   </ul>
+  {bank && <Bankfiler id={id} titel={titel} bank={bank} farger={farger} />}
   <p class="meta">{hjalp}</p>
 </aside>
 

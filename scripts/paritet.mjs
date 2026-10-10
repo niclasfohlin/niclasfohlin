@@ -12,6 +12,12 @@
 // (filmen, menyerna, nedladdningsrutan) inte. Korta texter prövas inte, eftersom formen gör om dem: etiketter, numrerade
 // rubriker i remsan, fasernas namn.
 //
+// En metod med en bank (src/lib/bank.ts) har enheterna och deras följesidor på egna sidor och i bankens egna filer, inte
+// i beskrivningen. För den läses Word-filen med allt och bankens fil med alla nivåer och följesidorna som en Word-fil,
+// och metodens sida och enheternas sidor som en utskrift, så att regeln gäller som förut. Problemens bilder (problemets
+// sida, Två lösningar och lösningarna på lärarens sida, src/lib/problemform.ts) står utan rubrik och bildtext och prövas
+// som strukturens bild, i textalternativet, och lösningarna i ord är bildernas textalternativ på bladet Två lösningar.
+//
 //   node scripts/paritet.mjs            alla publicerade metoder i dist
 //   node scripts/paritet.mjs <id> …     bara de metoderna
 import { createHash } from 'node:crypto';
@@ -155,6 +161,12 @@ const arStruktur = (ram) => {
     && steg.rader.length >= 4 && steg.rader.length <= 9 && ruta.rader.length >= 1 && ruta.rader.length <= 2 && !ram.huvud && !ram.oversikt && !ram.sagoform;
 };
 
+// Två texter (textparAv i src/lib/ramform.ts, samma regel): två kolumner och en rad, och frågorna.
+const arTextpar = (ram) => {
+  const [t, f] = ram.listor ?? [];
+  return (ram.listor ?? []).length === 2 && (t.kolumner ?? []).length === 2 && t.rader.length === 1 && !t.larare && f.rubrik === 'Frågorna' && !f.kolumner && f.rader.length >= 3 && f.rader.length <= 5 && !ram.huvud && !ram.oversikt && !ram.sagoform;
+};
+
 function texter(x, vag, ut, minst = MINST) {
   if (typeof x === 'string') { if (x.length >= minst && /\p{L}/u.test(x)) ut.push({ vag, text: x }); }
   else if (Array.isArray(x)) x.forEach((y, i) => texter(y, `${vag}.${i}`, ut, minst));
@@ -162,6 +174,8 @@ function texter(x, vag, ut, minst = MINST) {
   return ut;
 }
 
+// Bankernas filer, ur bygget (src/pages/stodundervisning/bankfiler.json.ts).
+const bankfiler = existsSync(join(rot, 'dist/stodundervisning/bankfiler.json')) ? JSON.parse(readFileSync(join(rot, 'dist/stodundervisning/bankfiler.json'), 'utf8')) : [];
 const mapp = join(rot, 'src/content/stodundervisning');
 const valda = process.argv.slice(2);
 const filer = readdirSync(mapp).filter((f) => f.endsWith('.yaml') && !f.startsWith('_')).filter((f) => !valda.length || valda.includes(f.slice(0, -5)));
@@ -174,12 +188,21 @@ for (const fil of filer) {
   const sida = join(rot, 'dist/stodundervisning', id, 'index.html');
   const docx = join(rot, 'dist/stodundervisning', `${id}.docx`);
   if (!existsSync(sida) || !existsSync(docx)) { console.error(`paritet: ${id} saknas i dist (sidan eller Word-filen). Kör npm run validera, som bygger först.`); fel++; continue; }
-  const tryckt = utskriftstext(readFileSync(sida, 'utf8'));
+  // En bank: metodens sida och enheternas sidor är utskriften, Word-filen med allt och bankens fil med alla nivåer och
+  // följesidorna är Word-filen.
+  const bankensFil = bankfiler.find((f) => f.metod === id && /-alla-med-lararens-sida$/.test(f.namn));
+  const enhetssidor = bankensFil ? readdirSync(join(rot, 'dist/stodundervisning', id), { withFileTypes: true }).filter((x) => x.isDirectory() && existsSync(join(rot, 'dist/stodundervisning', id, x.name, 'index.html')) && x.name !== 'lathund').map((x) => join(rot, 'dist/stodundervisning', id, x.name, 'index.html')) : [];
+  const html = [readFileSync(sida, 'utf8'), ...enhetssidor.map((f) => readFileSync(f, 'utf8'))].join('\n');
+  const tryckt = utskriftstext(html);
   const utskrift = norm(tryckt.text);
-  const zip = await JSZip.loadAsync(readFileSync(docx));
-  const xml = await zip.file('word/document.xml').async('string');
-  // Sidhuvuden och sidfötter hör till Word-filen: boksidornas rad Till läraren står i sidfoten.
-  const huvudOchFot = await Promise.all(Object.keys(zip.files).filter((n) => /^word\/(header|footer)\d*\.xml$/.test(n)).map((n) => zip.file(n).async('string')));
+  let xml = '';
+  const huvudOchFot = [];
+  for (const fil of [docx, ...(bankensFil ? [join(rot, 'dist/stodundervisning', `${bankensFil.namn}.docx`)] : [])]) {
+    const zip = await JSZip.loadAsync(readFileSync(fil));
+    xml += await zip.file('word/document.xml').async('string');
+    // Sidhuvuden och sidfötter hör till Word-filen: boksidornas rad Till läraren står i sidfoten.
+    huvudOchFot.push(...await Promise.all(Object.keys(zip.files).filter((n) => /^word\/(header|footer)\d*\.xml$/.test(n)).map((n) => zip.file(n).async('string'))));
+  }
   const word = norm(avkoda([xml, ...huvudOchFot].join(' ').replace(/<[^>]+>/g, '')));
   const tommaRamar = (d.ramar?.ramar ?? []).map((r, i) => (tomRam(r) ? new RegExp(`^ramar\\.ramar\\.${i}\\.(delar|huvud)\\.`) : null)).filter(Boolean);
   const lastextRader = (d.ramar?.ramar ?? []).map((r, i) => (arLastext(r) ? new RegExp(`^ramar\\.ramar\\.${i}\\.text\\.`) : null)).filter(Boolean);
@@ -208,8 +231,22 @@ for (const fil of filer) {
   const strukturRubrik = new Map((d.ramar?.ramar ?? []).flatMap((r, i) => (arStruktur(r) ? [[`ramar.ramar.${i}.rubrik`, norm(String(r.rubrik).replace(/^Strukturen, [^:]+: /, ''))]] : [])));
   const strukturBilder = new Set((d.ramar?.ramar ?? []).filter(arStruktur).flatMap((r) => { const b = (d.pabordet ?? []).find((x) => x.efter === `ram: ${r.rubrik}`); return b ? [b.nr] : []; }));
   const altWord = new Set([...xml.matchAll(/\bdescr="([^"]*)"/g)].map((m) => norm(avkoda(m[1]))));
-  const altSida = new Set([...readFileSync(sida, 'utf8').matchAll(/\balt="([^"]*)"/g)].map((m) => norm(avkoda(m[1]))));
+  const altSida = new Set([...html.matchAll(/\balt="([^"]*)"/g)].map((m) => norm(avkoda(m[1]))));
   const saknas = [];
+  // Problemens bilder (src/lib/problemform.ts): bilden till problemets sida och lösningarna till bladet Två lösningar, som
+  // också står på lärarens sida. De har ingen rubrik eller bildtext; rubriken och texten står i textalternativet.
+  const tvaLosningar = new Map((d.ramar?.ramar ?? []).flatMap((r, i) => (/^Två lösningar: /.test(r.rubrik) && arTextpar(r) && (d.pabordet ?? []).filter((b) => b.efter === `ram: ${r.rubrik}`).length === 2 ? [[i, r]] : [])));
+  const problemRamar = new Set((d.ramar?.ramar ?? []).filter((r) => { const m = arLastext(r) && String(r.rubrik).match(/^([^,:]+), ([^:]+): (.+)$/); return !!m && /^problem(\s|$)/i.test(m[2]); }).map((r) => `ram: ${r.rubrik}`));
+  const problemBilder = new Set((d.pabordet ?? []).filter((b) => problemRamar.has(b.efter) || [...tvaLosningar.values()].some((r) => b.efter === `ram: ${r.rubrik}`)).map((b) => b.nr));
+  for (const nr of problemBilder) {
+    const b = d.pabordet.find((x) => x.nr === nr);
+    const alt = norm(`På bordet: ${b.rubrik}${/[.!?]$/.test(b.rubrik) ? '' : '.'} ${b.text}`);
+    if (!altWord.has(alt) || !altSida.has(alt)) saknas.push(`    bilden På bordet ${nr} (${b.rubrik}): textalternativet med rubriken och bildtexten saknas i ${[!altWord.has(alt) && 'Word-filerna', !altSida.has(alt) && 'sidorna'].filter(Boolean).join(' och ')}`);
+  }
+  // Lösningarna i ord på bladet Två lösningar står i bildernas textalternativ, med lösningens namn först.
+  const losningsText = new Map([...tvaLosningar].flatMap(([i, r]) => r.listor[0].rader[0].map((t, k) => [`ramar.ramar.${i}.listor.0.rader.0.${k}`, norm(`${r.listor[0].kolumner[k]}: ${t}`)])));
+  // Bladets rubrik står i två delar, som en lästexts: titeln överst och nivån och vad i sidfotens knapp.
+  const losningsRubrik = new Map([...tvaLosningar].flatMap(([i, r]) => { const m = r.rubrik.match(/^Två lösningar: ([^,]+), ([^,]+), (.+)$/); return m ? [[`ramar.ramar.${i}.rubrik`, [norm(`${m[1]} ${m[2]}`), norm(m[3])]]] : []; }));
   for (const nr of strukturBilder) {
     const b = d.pabordet.find((x) => x.nr === nr);
     const alt = norm(`På bordet: ${b.rubrik} ${b.text}`);
@@ -219,7 +256,19 @@ for (const fil of filer) {
     if (lastextRader.some((r) => r.test(vag))) continue;
     // Strukturens bild prövas ovan, i textalternativet.
     const pb = vag.match(/^pabordet\.(\d+)\.(rubrik|text)$/);
-    if (pb && strukturBilder.has(d.pabordet[Number(pb[1])].nr)) continue;
+    if (pb && (strukturBilder.has(d.pabordet[Number(pb[1])].nr) || problemBilder.has(d.pabordet[Number(pb[1])].nr))) continue;
+    if (losningsText.has(vag)) {
+      const n = losningsText.get(vag);
+      if (!altWord.has(n) || !altSida.has(n)) saknas.push(`    ${vag}: lösningen i ord saknas som bildens textalternativ i ${[!altWord.has(n) && 'Word-filerna', !altSida.has(n) && 'sidorna'].filter(Boolean).join(' och ')}`);
+      provade++;
+      continue;
+    }
+    if (losningsRubrik.has(vag)) {
+      const delar = losningsRubrik.get(vag);
+      if (!delar.every((x) => word.includes(x)) || !delar.every((x) => utskrift.includes(x))) saknas.push(`    ${vag}: bladets titel eller nivå saknas i ${[!delar.every((x) => word.includes(x)) && 'Word-filerna', !delar.every((x) => utskrift.includes(x)) && 'utskriften'].filter(Boolean).join(' och ')}`);
+      provade++;
+      continue;
+    }
     const u = UNDANTAG.find((x) => x.vag.test(vag));
     // Arbetsformens delar står i remsan och på lathunden utan sitt nummer ("4. I tur och ordning igen" blir "I tur och
     // ordning igen", passOversikt och arbetsformRad i src/lib/metod.ts), så numret prövas inte (Kompissamtal 2026-10-03).
@@ -275,7 +324,7 @@ for (const fil of filer) {
   // metodens fil i Word-filen och i utskriften. Bilden hittas genom sin rubrik och bildtext, som följer varandra i båda
   // (bilden själv är ingen text); efter en vecka står bara bildtexten, som börjar med På bordet.
   for (const b of d.pabordet ?? []) {
-    if (strukturBilder.has(b.nr)) continue;
+    if (strukturBilder.has(b.nr) || problemBilder.has(b.nr)) continue;
     const namn = `bilden På bordet ${b.nr} (${b.rubrik})`;
     const nyckel = norm(`På bordet ${/^del:/.test(b.efter ?? '') ? '' : b.rubrik} ${b.text}`);
     const pW = word.indexOf(nyckel);
@@ -374,6 +423,7 @@ const reservMapp = join(rot, 'dist/stodundervisning/reservbild');
 const reservbilder = new Set(existsSync(reservMapp) ? readdirSync(reservMapp).map((f) => sha(readFileSync(join(reservMapp, f)))) : []);
 const reservTypsnitt = cmapTecken(readFileSync(join(rot, 'src/data/typsnitt/Reservbild-Regular.ttf')));
 const reservFel = new Set();
+const bankensDocx = new Set(bankfiler.map((f) => `${f.namn}.docx`));
 let reservAntal = 0;
 for (const namn of readdirSync(join(rot, 'dist/stodundervisning')).filter((f) => f.endsWith('.docx'))) {
   const zip = await JSZip.loadAsync(readFileSync(join(rot, 'dist/stodundervisning', namn)));
@@ -393,7 +443,8 @@ for (const namn of readdirSync(join(rot, 'dist/stodundervisning')).filter((f) =>
     reservAntal++;
     const [pw, ph] = [png.readUInt32BE(16), png.readUInt32BE(20)];
     if (pw <= 1 && ph <= 1) reservFel.add(`${namn}: en bild har en punkt som reservbild, som Google Dokument visar som en ruta`);
-    else if (!reservbilder.has(sha(png))) reservFel.add(`${namn}: reservbilden ${media} finns inte under /stodundervisning/reservbild/, så filen som webbläsaren bygger saknar den (src/pages/stodundervisning/reservbild/[nyckel].png.ts)`);
+    // Bankens filer (src/lib/bank.ts) byggs bara vid bygget, aldrig i webbläsaren, så deras reservbilder behöver inte stå där.
+    else if (!bankensDocx.has(namn) && !reservbilder.has(sha(png))) reservFel.add(`${namn}: reservbilden ${media} finns inte under /stodundervisning/reservbild/, så filen som webbläsaren bygger saknar den (src/pages/stodundervisning/reservbild/[nyckel].png.ts)`);
     if (Math.abs(pw / ph / (Number(ruta[1]) / Number(ruta[2])) - 1) > Math.max(0.005, 1.5 / ph)) reservFel.add(`${namn}: en reservbild är ${pw} × ${ph} pixlar men står i en ruta med andra proportioner (reservMatt i src/lib/reservbild.ts)`);
   }
   for (const media of Object.keys(zip.files).filter((n) => n.startsWith('word/media/'))) {

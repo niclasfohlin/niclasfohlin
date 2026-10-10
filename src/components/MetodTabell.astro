@@ -9,9 +9,10 @@
 // ritas som en rubrikrad (verbdelen i en läslista).
 // karta: tabellen är kursens karta (src/lib/karta.ts): rubrikraden har nivåernas färger, veckan i första kolumnen leder
 // till veckan (vecka), och bladens namn i cellerna leder till räknebladen (blad).
+// lank: första kolumnens celler som leder till en sida, som problemen i nivåns översikt i en bank (src/lib/bank.ts).
 interface KartaLankar { vecka?: (rad: string[]) => string | undefined; blad: (namn: string) => string | undefined; namn: Set<string>; nivaer: Niva[] }
-interface Props { kolumner: string[]; rader: string[][]; bredder?: string[]; klass?: string; radrubrik?: boolean; karta?: KartaLankar }
-const { kolumner, rader, bredder = [], klass = '', radrubrik = true, karta } = Astro.props;
+interface Props { kolumner: string[]; rader: string[][]; bredder?: string[]; klass?: string; radrubrik?: boolean; karta?: KartaLankar; lank?: (cell: string) => string | undefined }
+const { kolumner, rader, bredder = [], klass = '', radrubrik = true, karta, lank } = Astro.props;
 import { ejBryt } from '../lib/metod';
 import { bladDelar } from '../lib/karta';
 import { skyltText, type Niva } from '../lib/nivaer';
@@ -53,6 +54,7 @@ const lankDelar = (x: string) => bladDelar(x, karta!.namn).map((d) => ({ text: d
           // En tom cell ritas tom, så att :empty träffar (mattan och bladet på lathundens mallsida).
           if (i === 0 && !cell.trim()) return <td data-rubrik={kolumner[i]}></td>;
           if (i === 0 && karta?.vecka) { const href = karta.vecka(rad); return <td data-rubrik={kolumner[i]}>{href ? <a class="m-karta-vecka" href={href}><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</a> : <><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</>}</td>; }
+          if (i === 0 && !karta && lank?.(cell)) return <td data-rubrik={kolumner[i]}><a class="m-tabell-lank" href={lank(cell)}><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</a></td>;
           if (i === 0 && !karta) return <td data-rubrik={kolumner[i]}><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</td>;
           // Staplad på en smal skärm får nivåns cell sin etikett i nivåns färg, som rubrikraden (global.css, td.niva::before).
           if (karta) { const n = niva(kolumner[i]); return <td data-rubrik={kolumner[i]} class={n ? 'niva' : undefined} style={n ? `--niva:#${n.farg};--niva-text:#${skyltText(n.farg)}` : undefined}>{l.map((x, j) => <>{j > 0 && <br />}{lankDelar(x).map((dd) => (dd.href ? <a href={dd.href}>{dd.text}</a> : dd.text))}</>)}</td>; }

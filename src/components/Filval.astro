@@ -20,9 +20,13 @@ interface Props {
   liten?: boolean;
   /** Filens namn i besöksstatistiken, med metodens titel: "Upprepad läsning: lathunden". Förval: rubrik. */
   statistik?: string;
+  /** Pdf:ens form i knappens titel: lathunden är liggande, bankens filer (src/lib/bank.ts) är stående A4 med liggande blad. */
+  pdfTitel?: string;
+  /** Utan Drive: bankens tabell erbjuder Pdf och Word (Niclas 2026-10-10: "docx/pdf"), så att en rad ryms i telefonen. */
+  utanDrive?: boolean;
 }
-const { fil, namn, rubrik, pdf = false, pptx = false, liten = false, statistik = rubrik } = Astro.props;
-const drive = Boolean(site.driveKlientId);
+const { fil, namn, rubrik, pdf = false, pptx = false, liten = false, statistik = rubrik, pdfTitel = 'Ladda ner som pdf, liggande', utanDrive = false } = Astro.props;
+const drive = Boolean(site.driveKlientId) && !utanDrive;
 // Drive sparar den fil som passar bäst i Google: lathunden som PowerPoint (liggande bilder, som Google Presentationer
 // visar som de är; filmerna på filmbilden blir stillbilder där), allt annat som Word.
 const driveAndelse = pptx ? 'pptx' : 'docx';
@@ -41,7 +45,7 @@ const driveAndelse = pptx ? 'pptx' : 'docx';
     </button>
   )}
   {pdf && (
-    <a href={`${fil}.pdf`} download={`${namn}.pdf`} title="Ladda ner som pdf, liggande" data-goatcounter-click={`fil:${namn}.pdf`} data-goatcounter-title={`${statistik} som pdf`}>
+    <a href={`${fil}.pdf`} download={`${namn}.pdf`} title={pdfTitel} data-goatcounter-click={`fil:${namn}.pdf`} data-goatcounter-title={`${statistik} som pdf`}>
       <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16"><path d="M5 2h7l4 4v12H5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 2v4h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7.5 15v-5h1.6a1.5 1.5 0 0 1 0 3H7.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Pdf<span class="visually-hidden">: {rubrik}</span>
     </a>

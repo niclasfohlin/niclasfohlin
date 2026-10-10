@@ -21,6 +21,10 @@ import Boksida from './Boksida.astro';
 import Struktur from './Struktur.astro';
 import Textpar from './Textpar.astro';
 import Ramindex from './Ramindex.astro';
+import Bank from './Bank.astro';
+import Problemsida from './Problemsida.astro';
+import { bankAv, nivaFarger, BOKNIVA, type Bankenhet } from '../lib/bank';
+import { losningarnasNiva, losningarnasNot, problemformer } from '../lib/problemform';
 import { filmerVid, grundUpphov, metodensFilmer, stegDelar, type FilmPlats } from '../lib/film';
 import type { SerieKoppling } from '../lib/serie';
 import type { MetodData } from '../lib/metod';
@@ -29,7 +33,7 @@ import { kortInfo } from '../lib/brak';
 import { arTarning, sagoUpphov } from '../lib/sagoblad';
 import { arkAdress, arSerieMall, mallEtiketter, mallRutor as mallRutorAdresser, rutansText, serieRutor as serieRutorAdresser, svgMatt } from '../lib/bildserier';
 import { serieantal, serieFiler } from '../lib/bildserier-bygge';
-import { metodensPaBordet, paBordetVid } from '../lib/pabordet';
+import { bildensAlt, metodensPaBordet, paBordetVid, PABORDET_MATT } from '../lib/pabordet';
 import { listansNiva } from '../lib/nivaer';
 import { bladNamn, delensRad, kartan, metodensBlad, radensDel } from '../lib/karta';
 import { veckanRyms } from '../lib/veckosida';
@@ -37,8 +41,14 @@ import { veckansLista, veckomaterial } from '../lib/veckomaterial';
 // "Åk 4–5" hålls ihop i ramarnas rubriker och länkar: hårt mellanslag efter Åk, ordfog efter tankstrecket.
 const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 '));
 // koppling: den generella metodens serie med lektionsbanken, eller lektionens plats i den (src/lib/serie.ts).
-interface Props { d: MetodData; id: string; koppling?: SerieKoppling }
-const { d, id, koppling } = Astro.props;
+// enhet: sidan för en enhet i banken (src/lib/bank.ts, [id]/[enhet].astro): bara enhetens ramar, i den ordning de står i
+// bankens filer, var och en som ett blad med sitt namn och en knapp som skriver ut bladet, och inget annat ur metoden.
+interface Props { d: MetodData; id: string; koppling?: SerieKoppling; enhet?: Bankenhet }
+const { d, id, koppling, enhet } = Astro.props;
+// Banken: texter eller problem i nivåer på egna sidor (src/lib/bank.ts, Niclas 2026-10-10). Metodens sida har nivåernas
+// översikter (Bank.astro) där enheterna och deras följesidor annars hade stått.
+const banken = bankAv(d);
+const bankFarger = banken ? nivaFarger(d, banken) : {};
 // Bildserierna, arken och seriemallarna (Seriesamtal, src/lib/bildserier.ts): filerna som bygget ritar ur metodens
 // scenfil, med sina mått, och rutornas alternativtext ur berättelsen, samma som i Word.
 const seriefiler = serieFiler({ id, data: d });
@@ -111,7 +121,9 @@ const avsnitt = [
   d.exempel && { id: 'exempel', namn: 'Exempel' },
   d.fastnar && { id: 'fastnar', namn: 'När det fastnar' },
   d.roll && { id: 'roll', namn: 'Lärarens roll' },
-  d.urval && { id: 'urval', namn: urvalNamn(d.urval.rubrik) },
+  // Heter urvalets kärna som ramarna ("Var hittar du problemen?" och Problemen) står det som en handling, Hitta problemen,
+  // så att menyn inte har två poster med samma namn (Problemlösning i grupp, 2026-10-10).
+  d.urval && { id: 'urval', namn: d.ramar && urvalNamn(d.urval.rubrik) === d.ramar.rubrik ? `Hitta ${d.ramar.rubrik.toLowerCase()}` : urvalNamn(d.urval.rubrik) },
   bank && { id: 'lektionsbank', namn: bank.ord.meny },
   d.hem && { id: 'hem', namn: 'Hem och skola' },
   d.progression && { id: 'progression', namn: 'Progression' },
@@ -159,7 +171,13 @@ if (vm) for (const [ri, lagda] of vm.listor) for (const li of lagda.keys()) list
 type Punkt = { ram: SerieRam; ri: number; lage?: 'huvud' | 'vecka' | 'material'; vecka?: number; lista?: number; efter?: string; par?: TextparForm; helaKursen?: boolean };
 const punkter: Punkt[] = [];
 let sistaVeckan = -1;
-ramarna.forEach((ram, ri) => {
+// En enhets sida: enhetens ramar i bankens ordning (följesidorna före, enheten, följesidorna efter). Metodens sida med en
+// bank: bankens nivåer först bland ramarna (Bank.astro), eftersom de är materialets största del, och sedan de andra
+// ramarna i filens ordning, utan enheterna, följesidorna och översikterna.
+const enhetensRamar = enhet ? [...enhet.fore, enhet.ri, ...enhet.efter] : undefined;
+if (enhetensRamar) for (const ri of enhetensRamar) punkter.push({ ram: ramarna[ri], ri });
+else ramarna.forEach((ram, ri) => {
+  if (banken && (banken.ramar.has(ri) || banken.oversikter.has(ri))) return;
   if (!vm) { punkter.push({ ram, ri }); return; }
   if (vm.ramar.has(ri)) return;
   if (ri !== vm.ri) {
@@ -185,17 +203,24 @@ ramarna.forEach((ram, ri) => {
 if (sistaVeckan >= 0 && punkter[sistaVeckan + 1]) punkter[sistaVeckan + 1].helaKursen = true;
 // Två texter (src/lib/ramform.ts, textparAv): ramen ritas som lärarens sida, med texterna och rutorna men utan frågorna och
 // med en rad om elevens sida, och elevens sida (Textpar.astro) står efter den, som i Word.
+// Problemens tre blad (src/lib/problemform.ts, metodriggens TILL-SAJTEN 2026-10-10, Det nya punkt 1–3): problemets sida
+// med bilden (Problemsida.astro), bladet Två lösningar med de ritade lösningarna och utan lärarens sida före (Textpar.astro
+// med bilder), och lärarens sida med problemet i en ruta överst och lösningarna efter texten. Samma regler som i Word.
+const former = problemformer(ramarna, bilderPaBordet);
 for (const p of punkter) {
   const par = p.lage ? null : textparAv(p.ram);
-  if (par) { p.par = par; p.ram = textparLarare(p.ram); }
+  if (par && former.losningar(p.ram)) p.par = par;
+  else if (par) { p.par = par; p.ram = textparLarare(p.ram); }
 }
+// Bladets namn på en enhets sida: enheten heter som sitt ord (Problemet, Texten) och en följesida som sitt namn (Lärarens
+// sida, Två lösningar).
+const bladetsNamn = (ram: SerieRam, ri: number) => (enhet && ri === enhet.ri && banken ? banken.ord.bestamd.charAt(0).toLocaleUpperCase('sv') + banken.ord.bestamd.slice(1) : ram.rubrik.split(':')[0]);
 // En kooperativ struktur (strukturAv) är en sida (Struktur.astro) med den första bilden På bordet som hör till ramen; fler
 // bilder till ramen (bild A och bild B i Lika och olika) står efter sidan, som i Word.
 const strukturer = new Map<SerieRam, StrukturForm>(ramarna.flatMap((r) => { const s = strukturAv(r); return s ? [[r, s] as [SerieRam, StrukturForm]] : []; }));
 const indexAnkare = { del: (nr: number, di: number) => delAnkare[nr - 1]?.[di], lista: (nr: number, li: number) => listAnkare.get(`${nr - 1}-${li}`) };
 // Lästexterna blir boksidor (Boksida.astro, K-148), med nivåns färg i den ordning nivåerna först kommer, som i Word.
 const boksidor = lastexter(d.ramar?.ramar ?? []);
-const BOKNIVA = ['#4e7a43', '#a8742a', '#6e3450'];
 // Lärarens sidor till lästexterna (riggens namn: Lärarens sida och Lärarens sidor) ryms på ett A4 i Word och får ett eget
 // blad i utskriften, lika tätt (global.css, .m-lararsida). Ramen till en bildserie med flera rutor är också lärarens sida
 // (Seriesamtal: texten, berättelsen och rutan Till läraren), med elevens blad på ett eget liggande A4 efter.
@@ -223,7 +248,7 @@ const meny = [
 ];
 ---
 <div class="metod-modell">
-  {meny.length > 2 && (
+  {meny.length > 2 && !enhet && (
     <nav class="metod-nav" aria-label="På den här sidan">
       {d.lathund && <a class="lathund-lank" href={`/stodundervisning/${id}/lathund`}>Öppna lathunden</a>}
       <span class="nav-etikett" aria-hidden="true">På den här sidan</span>
@@ -231,6 +256,8 @@ const meny = [
     </nav>
   )}
   <div class="metod-text">
+  {/* En enhets sida har bara enhetens blad (banken, src/lib/bank.ts), och allt fram till ramarna står på metodens sida. */}
+  {!enhet && (<>
   {d.inledning.map((s, i) => <><p>{s}</p><Filmruta filmer={vid({ stycke: i + 1 })} titel={d.titel} /></>)}
 
   {/* Rutornas rubriker är rubriker, så att en skärmläsare kan hoppa till dem (K-028). De står direkt under h1. */}
@@ -556,8 +583,11 @@ const meny = [
     </section>
   ))}
 
+  </>)}
+
   {d.ramar && (
-    <section id="ramar">
+    <section id={enhet ? undefined : 'ramar'} class={enhet ? 'enhet-blad-lista' : undefined}>
+      {!enhet && (<>
       <h2>{d.ramar.rubrik}</h2>
       {d.ramar.text.map((s) => <p>{s}</p>)}
       {elevtypsnitt && (
@@ -566,8 +596,22 @@ const meny = [
       {bildUpphov && <p class="m-efter">{bildUpphov}</p>}
       {/* Med fyra ramar eller fler (ett paket per årskurs, läslistorna, projekten, lästexterna) blir sidan lång: en
           ordnad lista med länkar till varje ram, där nivåerna fälls ut (Ramindex.astro, K-152). */}
-      {d.ramar.ramar.length >= 4 && <Ramindex ramar={d.ramar.ramar} rubrik={d.ramar.rubrik} farger={BOKNIVA} ankare={indexAnkare} />}
-      {punkter.map(({ ram, ri, lage, vecka, lista, efter, par, helaKursen }) => boksidor.has(ram) ? (<>
+      {banken && <Bank d={d} id={id} bank={banken} farger={bankFarger} ankare={(i) => ramAnkare[i]} friKlass={friKlass} />}
+      {d.ramar.ramar.length - (banken ? banken.ramar.size + banken.oversikter.size : 0) >= 4 && <Ramindex ramar={d.ramar.ramar} rubrik={d.ramar.rubrik} farger={BOKNIVA} ankare={indexAnkare} bank={banken ?? undefined} />}
+      </>)}
+      {punkter.map((punkt) => {
+        const { ram, ri, lage, vecka, lista, efter, par, helaKursen } = punkt;
+        const pbild = former.bild(ram);
+        const losning = former.losningar(ram)?.bilder ?? [];
+        const larare = former.larare(ram);
+        const problemet = larare && { stycken: larare.l.stycken, fragor: larare.l.fragor, bilder: larare.bilder, namn: larare.namn };
+        const innehall = pbild ? (<>
+        <Problemsida l={boksidor.get(ram)!} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={bankFarger[boksidor.get(ram)!.niva] ?? BOKNIVA[boksidor.get(ram)!.nivaNr] ?? '#4b3a2f'} bild={pbild} />
+        <Filmruta filmer={[...filmerVid(filmer, { ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
+      </>) : par && losning.length === 2 ? (<>
+        <Textpar p={par} id={`ram-${ri + 1}`} bilder={losning} rubrik={ram.rubrik} not={losningarnasNot(ram)} farg={bankFarger[losningarnasNiva(ram.rubrik)?.niva ?? '']} />
+        <Filmruta filmer={[...filmerVid(filmer, { ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
+      </>) : boksidor.has(ram) ? (<>
         <Boksida l={boksidor.get(ram)!} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={BOKNIVA[boksidor.get(ram)!.nivaNr] ?? '#4b3a2f'} />
         <Filmruta filmer={[...vid({ ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
       </>) : strukturer.has(ram) ? (() => {
@@ -577,9 +621,28 @@ const meny = [
           <Filmruta filmer={[...fler, ...filmerVid(filmer, { ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
         </>);
       })() : (<>
-        <section class={`m-ram${protokollDelas(ram) ? ' delad' : ''}${arLararsida(ram) ? ' m-lararsida' : ''}${lage === 'material' ? ' m-veckans' : ''}${par ? ' m-textpar-larare' : ''}${helaKursen ? ' m-hela-kursen' : ''}`} id={lage === 'vecka' ? undefined : lage === 'material' ? listAnkare.get(`${ri}-${lista}`) : `ram-${ri + 1}`}>
+        <section class={`m-ram${protokollDelas(ram) ? ' delad' : ''}${arLararsida(ram) ? ' m-lararsida' : ''}${problemet ? ' m-problemlarare' : ''}${lage === 'material' ? ' m-veckans' : ''}${par ? ' m-textpar-larare' : ''}${helaKursen ? ' m-hela-kursen' : ''}`} id={lage === 'vecka' ? undefined : lage === 'material' ? listAnkare.get(`${ri}-${lista}`) : `ram-${ri + 1}`}>
           {lage !== 'vecka' && lage !== 'material' && <h3 id={ramAnkare[ri]}>{hel(ram.rubrik)}</h3>}
+          {/* Lärarens sida till ett problem: problemet i en ruta överst, ur problemets ram (problemetTill ovan). */}
+          {problemet && (
+            <div class="m-ruta m-problemruta">
+              <p class="kicker">Problemet</p>
+              {problemet.stycken.map((t) => <p>{linjer(t).map((x, j) => <>{j > 0 && <br />}{x}</>)}</p>)}
+              {problemet.fragor.map((t) => <p>{t}</p>)}
+            </div>
+          )}
           {ram.text.map((s) => <p>{s}</p>)}
+          {/* och de två lösningarna bredvid varandra, med namnen under, som eleverna får dem på bladet Två lösningar. */}
+          {problemet && problemet.bilder.length === 2 && (
+            <div class="m-bildpar">
+              {problemet.bilder.map((b, k) => (
+                <figure>
+                  <a href={b.adress} class="bild-lank" title="Öppna bilden i full storlek"><img src={b.adress} alt={bildensAlt(b)} width={PABORDET_MATT.bredd} height={PABORDET_MATT.hojd} loading="lazy" decoding="async" data-utskriftsbild /></a>
+                  <figcaption>{problemet.namn[k] ?? ''}</figcaption>
+                </figure>
+              ))}
+            </div>
+          )}
           {ram.serie && antalRutor[ram.serie] === 1 && <Serierutor rutor={serieBlad(ram)} />}
           {ram.sagoform && <p class="m-efter">{sagoNamn[ram.sagoform.form] ?? 'Bladet'} att kopiera, med {ram.sagoform.bilder?.length ? 'ramen, bilderna och raderna' : 'ramen och raderna'}, finns i <a href={mallarLank} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word). Här står vad {ram.sagoform.form === 'skyltar' || ram.sagoform.form === 'kort' ? 'de' : 'det'} innehåller.</p>}
           {(ram.listor ?? []).some((l) => arTarning(d, l)) && <p class="m-efter m-ej-utskrift">Tärningarna att klippa, vika och limma, en på varje A4 med bilderna, finns i <a href={mallarLank} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word). Här står orden på sidorna, och de skrivs inte ut.</p>}
@@ -587,7 +650,10 @@ const meny = [
           {ram.oversikt && <MetodTabell kolumner={ram.oversikt.kolumner} rader={ram.oversikt.rader} klass={kortaCeller(ram.oversikt.rader) ? 'fri tat' : friKlass(ram.oversikt)} radrubrik={false} />}
           {ram.listor ? (
             <>
-              {ram.delar.map((del) => (<>
+              {/* Elevens blad med listor (kartläggningen i Problemlösning i grupp, metodriggens TILL-SAJTEN 2026-10-10, Det
+                  nya punkt 6): det eleven läser står först, med namnraden, och fälten att skriva i efter, i sina höjder,
+                  som i Word. Andra ramar med listor har lärarens not före listorna. */}
+              {!d.elevblad[ram.rubrik] && ram.delar.map((del) => (<>
                 <div class="m-listnot">
                   <p class="kicker">{del.rubrik}</p>
                   {del.falt.map((f) => <p><b>{f.rubrik}</b>{linjer(f.text).map((x, j) => <>{j > 0 && <br />}{repliker(x).map((r) => (r.replik ? <em>{r.text}</em> : r.text))}</>)}</p>)}
@@ -624,6 +690,18 @@ const meny = [
                   ? <Kortlista rubrik={l.rubrik} info={info} nyGrupp={lage === 'material' || info.grupp !== forra} brak={brak} />
                   : <Elevlista {...(l.rakneblad ? listansNiva(d.nivaer, l.rubrik) : { rubrik: l.rubrik })} id={bladAnkare.get(`${ri}-${li}`)} kolumner={l.kolumner} rader={l.rader} brak={brak} huvud={plats === 0 ? ram.huvud : undefined} klass={arEttKort(alla, l) ? 'kort' : ''} elev={elevtypsnitt && !l.larare} />;
               })}
+              {d.elevblad[ram.rubrik] && (
+                <div class="m-ramdelar m-elevblad">
+                  {ram.delar.map((del) => (
+                    <div class="m-ramdel">
+                      <h4>{del.rubrik}{!del.rubrik.includes(ram.rubrik) && <span class="m-ramnamn"> · {ram.rubrik}</span>}</h4>
+                      <dl class="m-ramfalt">
+                        {del.falt.map((f) => <div style={`--hojd:${d.elevblad[ram.rubrik][f.rubrik] ?? 2}`}><dt>{f.rubrik}</dt><dd>{f.text}</dd></div>)}
+                      </dl>
+                    </div>
+                  ))}
+                </div>
+              )}
             </>
           ) : ramArTom(ram)
             ? (d.elevblad[ram.rubrik]
@@ -736,13 +814,28 @@ const meny = [
         </section>
         {par && <Textpar p={par} id={`ram-${ri + 1}-elev`} />}
         <Filmruta filmer={[...(lage ? [] : vid({ ram: ram.rubrik })), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
-      </>))}
-      {d.ramar.efter && <p class="m-efter">{d.ramar.efter}</p>}
-      <Filmruta filmer={vid({ avsnitt: 'ramar' })} titel={d.titel} />
+      </>);
+        // På en enhets sida är varje ram ett blad med sitt namn och en knapp som skriver ut bara bladet ([id]/[enhet].astro).
+        if (!enhet) return innehall;
+        const namn = bladetsNamn(ram, ri);
+        // I en mening står lärarens sida och problemet med liten bokstav, och ett blad med eget namn (Två lösningar) som det heter.
+        const iMening = ri === enhet.ri || /^Lärarens sida$/i.test(namn) ? namn.toLowerCase() : namn;
+        return (
+          <div class="enhet-blad" data-blad={`ram-${ri + 1}`} id={`blad-${ri + 1}`}>
+            <div class="enhet-bladhuvud">
+              <h2>{namn}</h2>
+              <button type="button" class="knapp sekundar liten bara-js" data-skriv-ut-blad={`ram-${ri + 1}`} data-goatcounter-click={`utskrift:${id}/${enhet.slug}`} data-goatcounter-title={`${d.titel}: ${enhet.l.niva}, ${enhet.l.vad}, ${iMening}`}>Skriv ut {iMening}</button>
+            </div>
+            {innehall}
+          </div>
+        );
+      })}
+      {!enhet && d.ramar.efter && <p class="m-efter">{d.ramar.efter}</p>}
+      {!enhet && <Filmruta filmer={vid({ avsnitt: 'ramar' })} titel={d.titel} />}
     </section>
   )}
 
-  {d.diplom && (
+  {d.diplom && !enhet && (
     <section id="diplom">
       <h2>{d.diplom.rubrik}</h2>
       <div class="m-diplom">
@@ -755,7 +848,7 @@ const meny = [
     </section>
   )}
 
-  {d.mallar.length > 0 && (
+  {d.mallar.length > 0 && !enhet && (
     <section id="mallar">
       <h2>Mallar att skriva ut</h2>
       {planketOchLinjen

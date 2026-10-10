@@ -1,0 +1,79 @@
+---
+// Bankens nivåer på metodens sida (src/lib/bank.ts; Niclas 2026-10-10: problemen ska hittas utan "evigt scrollande i
+// onödan", och "översikten kunna peka till ett visst problem för Bas, Medel och Avancerad samt dessa docx/pdf också på
+// den översikten fast bara din nivå"). En nivå per rad som fälls ut, som nivåerna i materialets lista (Ramindex.astro,
+// Niclas 2026-10-01: det som listar många saker på en gång fälls ut). I nivån står dess översikt, ramen Lärarens sidor:
+// <nivå>, med texten, tabellen och rutorna, där enhetens namn i första kolumnen leder till enhetens sida, och sist
+// nivåns filer. Saknar nivån översikt står enheterna som en numrerad lista med länkar. I utskriften står alla nivåer
+// utfällda, utan länkar och filer, så att beskrivningen har översikterna, som Word-filen med allt.
+import MetodTabell from './MetodTabell.astro';
+import Bankfiler from './Bankfiler.astro';
+import { enhetAdress, enhetICell, type Bank } from '../lib/bank';
+import { ejBryt } from '../lib/metod';
+import type { MetodData } from '../lib/metod';
+interface Props { d: MetodData; id: string; bank: Bank; farger: Record<string, string>; ankare: (ri: number) => string; friKlass: (t: { kolumner: string[]; rader: string[][] }) => string }
+const { d, id, bank, farger, ankare, friKlass } = Astro.props;
+const ramarna = d.ramar!.ramar;
+const linjer = (t: string) => t.split('\n');
+const repliker = (s: string) => s.split(/(”[^”]*”)/).filter(Boolean).map((text) => ({ text, replik: text.startsWith('”') }));
+const antal = (n: number) => `${n === 1 ? 'ett' : n} ${n === 1 ? bank.ord.en : bank.ord.flera}`;
+---
+<div class="bank" data-bank>
+  {bank.nivaer.map((n) => {
+    const ram = n.oversikt !== undefined ? ramarna[n.oversikt] : undefined;
+    const numrerade = n.enheter.filter((e) => e.nr !== undefined).length;
+    return (
+      <details class="bank-niva" id={ram ? `ram-${n.oversikt! + 1}` : `niva-${n.slug}`} style={`--niva: ${farger[n.namn]}`}>
+        <summary>
+          <span class="bank-nivanamn">{n.namn}</span>
+          <span class="bank-antal">{antal(numrerade || n.enheter.length)}{numrerade && numrerade < n.enheter.length ? (n.enheter.every((e) => e.nr !== undefined || /^kartläggning/i.test(e.l.vad)) ? ` och ${n.enheter.length - numrerade} för kartläggningen` : ` och ${n.enheter.length - numrerade} till`) : ''}</span>
+        </summary>
+        <div class="bank-innehall">
+          {ram ? (
+            <section class="m-ram bank-oversikt">
+              <h3 id={ankare(n.oversikt!)}>{ejBryt(ram.rubrik)}</h3>
+              {ram.text.map((s) => <p>{s}</p>)}
+              {ram.oversikt && <MetodTabell kolumner={ram.oversikt.kolumner} rader={ram.oversikt.rader} klass={friKlass(ram.oversikt)} radrubrik={false} lank={(cell) => { const e = enhetICell(n, cell); return e ? enhetAdress(id, e) : undefined; }} />}
+              {ram.delar.length > 0 && (
+                <div class="m-ramdelar">
+                  {ram.delar.map((del) => (
+                    <div class="m-ramdel">
+                      <h4>{del.rubrik}<span class="m-ramnamn"> · {ram.rubrik}</span></h4>
+                      <dl class="m-ramfalt">
+                        {del.falt.map((f) => <div><dt>{f.rubrik}</dt><dd>{linjer(f.text).map((x, j) => <>{j > 0 && <br />}{repliker(x).map((r) => (r.replik ? <em>{r.text}</em> : r.text))}</>)}</dd></div>)}
+                      </dl>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+          ) : (
+            <ol class="bank-lista">
+              {n.enheter.map((e) => <li><a href={enhetAdress(id, e)}>{e.nr !== undefined ? `${e.nr}. ` : `${e.l.vad.charAt(0).toLocaleUpperCase('sv')}${e.l.vad.slice(1)}: `}{e.l.titel}</a></li>)}
+            </ol>
+          )}
+          {/* Saknar översikten en enhet står den under tabellen, så att varje enhet går att nå från nivån. */}
+          {ram?.oversikt && n.enheter.some((e) => !ram.oversikt!.rader.some((r) => enhetICell(n, r[0] ?? '') === e)) && (
+            <p class="m-efter bank-fler">Fler på nivån: {n.enheter.filter((e) => !ram.oversikt!.rader.some((r) => enhetICell(n, r[0] ?? '') === e)).map((e, i) => <>{i > 0 && ', '}<a href={enhetAdress(id, e)}>{e.l.titel}</a></>)}</p>
+          )}
+          <div class="bank-filer">
+            <p class="bank-filer-rubrik">{n.namn} att skriva ut</p>
+            <Bankfiler id={id} titel={d.titel} bank={bank} niva={n} farger={farger} />
+          </div>
+        </div>
+      </details>
+    );
+  })}
+</div>
+
+<script>
+  // I utskriften står alla nivåer utfällda, som översikterna i Word-filen med allt, och efteråt som läsaren hade dem.
+  const nivaer = [...document.querySelectorAll<HTMLDetailsElement>('[data-bank] details')];
+  let oppna: boolean[] = [];
+  window.addEventListener('beforeprint', () => { oppna = nivaer.map((x) => x.open); for (const x of nivaer) x.open = true; });
+  window.addEventListener('afterprint', () => { nivaer.forEach((x, i) => { x.open = oppna[i] ?? x.open; }); });
+  // En länk till en nivå (#ram-3 från en enhets sida, Alla problem på nivån Bas) fäller ut den.
+  const visa = () => { const mal = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null; const x = mal instanceof HTMLDetailsElement ? mal : mal?.closest('[data-bank] details'); if (x instanceof HTMLDetailsElement) x.open = true; };
+  visa();
+  window.addEventListener('hashchange', visa);
+</script>

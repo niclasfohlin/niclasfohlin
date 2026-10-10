@@ -1,0 +1,41 @@
+---
+// Problemets sida (Problemlösning i grupp, metodriggens TILL-SAJTEN 2026-10-10, Det nya punkt 1; Niclas: "Varje problem
+// ska ha en svartvit bild kopplat till sig som kan hjälpa en att tänka kring problemet och lösningen"), som i Word
+// (problemsida i metoddocx.ts) och i riggens kompendium (problemkort): boksidans dubbla ram utan anfang, titeln i Cinzel
+// med den röda dubbla linjen, problemet i elevens typsnitt, den svartvita bilden och frågan i en ruta med tunn röd kant,
+// med rubriken Frågan eller Frågorna. Rutan Till läraren och nivåns knapp står under ramen, som på lästexterna. Bilden
+// har problemets rubrik och bildtext som textalternativ. I utskriften står sidan på ett eget A4 med storleken ur samma
+// uträkning som Word (src/lib/boksida.ts, problemMatt). Bilden leder till svg-filen, så att den går att se stor i telefonen
+// (K-296).
+import type { Lastext } from '../lib/ramform';
+import { BOKRAD, problemMatt } from '../lib/boksida';
+import { bildensAlt, PABORDET_MATT, type PaBordet } from '../lib/pabordet';
+interface Props { l: Lastext; id: string; ankare: string; farg: string; bild: PaBordet }
+const { l, id, ankare, farg, bild } = Astro.props;
+const matt = problemMatt(l, PABORDET_MATT);
+const fragor = l.fragor.map((f) => f.replace(/^\d+\.\s*/, ''));
+const stil = [
+  `--bok-niva: ${farg}`,
+  `--bok-pt: ${matt.pt}pt`,
+  `--bok-rad: ${(BOKRAD.Andika * matt.line / 240).toFixed(3)}`,
+  `--fraga-pt: ${matt.fragaPt}pt`,
+  `--bild-andel: ${Math.round(matt.skala * 100)}%`,
+  `--bild-luft: ${(matt.extra / 20).toFixed(1)}pt`,
+].join('; ');
+---
+<section class="m-ram boksida problemsida" id={id} style={stil}>
+  <div class="boksida-ram">
+    <h3 id={ankare} class="boksida-titel"><span class="visually-hidden">{l.niva}, {l.vad}: </span>{l.titel}</h3>
+    <div class="problemsida-text">
+      {l.stycken.map((s) => <p>{s.split('\n').map((r, j) => <>{j > 0 && <br />}{r}</>)}</p>)}
+    </div>
+    <p class="problemsida-bild"><a href={bild.adress} class="bild-lank" title="Öppna bilden i full storlek"><img src={bild.adress} alt={bildensAlt(bild)} width={PABORDET_MATT.bredd} height={PABORDET_MATT.hojd} loading="lazy" decoding="async" data-utskriftsbild /></a></p>
+    <div class="problemsida-fraga">
+      <p class="problemsida-fraga-rubrik">{fragor.length > 1 ? 'Frågorna' : 'Frågan'}</p>
+      {fragor.length > 1
+        ? <ol>{fragor.map((f, i) => <li><span class="boksida-nr">{i + 1}.</span><span>{f}</span></li>)}</ol>
+        : <p>{fragor[0]}</p>}
+    </div>
+  </div>
+  <p class="boksida-fot"><span>{l.not}</span> <span class="boksida-knapp">{l.niva.toUpperCase()} · {l.vad}</span></p>
+</section>

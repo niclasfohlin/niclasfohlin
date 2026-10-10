@@ -217,3 +217,71 @@ export function strukturMatt(s: { titel: string; steg: string[]; ruta: string[];
   const alla = [[30, 0.8], [28, 0.8], [28, 0.7], [26, 0.8], [26, 0.7], [24, 0.7], [26, 0.6], [24, 0.6]].map(forsok);
   return alla.find((f) => f.ryms) ?? alla[alla.length - 1];
 }
+
+// Problemets sida (Problemlösning i grupp, metodriggens TILL-SAJTEN 2026-10-10, Det nya punkt 1; riggens build-docx.js,
+// problemkort): boksidans ram utan anfang, titeln i Cinzel med den röda dubbla linjen, problemet i elevens typsnitt, den
+// svartvita bilden och frågan i en ruta med tunn röd kant. Texten står 800 twips från ramen. Storleken och bildens andel
+// väljs som i riggen, från 19 punkter och hela bredden till 13 punkter och 65 procent, och luften som blir över delas
+// mellan bilden och frågan, högst 850 twips vardera.
+export const PROBLEMLUFT = 800;
+export const PROBLEMTITEL_PT = 28;
+export interface Problemmatt {
+  size: number; pt: number; line: number; radPt: number; fragaPt: number;
+  skala: number; bildB: number; bildH: number; titelH: number; restH: number; extra: number;
+  ryms: boolean;
+}
+export function problemMatt(l: { titel: string; stycken: string[]; fragor: string[] }, bild: { bredd: number; hojd: number }): Problemmatt {
+  const luftI = PROBLEMLUFT - 30;
+  const titelRader = Math.max(1, Math.ceil(breddPt(l.titel, PROBLEMTITEL_PT, CINZEL_BREDD) / ((BOKBREDD - 2 * PROBLEMLUFT) / 20)));
+  const helB = INRE - 2 * luftI;
+  const textBredd = helB / 20 * 0.965;
+  const rutaBredd = (helB - 2 * 300) / 20 * 0.965;
+  const fragor = l.fragor.map((x) => x.replace(/^\d+\.\s*/, ''));
+  const forsok = ([size, skala]: number[]): Problemmatt => {
+    const bildB = Math.round(helB * skala), bildH = Math.round((bildB * bild.hojd) / bild.bredd);
+    const pt = size / 2, line = 260, radPt = BOKRAD.Andika * pt * line / 240;
+    const titelH = 260 + Math.ceil(titelRader * BOKRAD.Cinzel * PROBLEMTITEL_PT * 20) + 60 + 24 + 45 + 320;
+    const textH = l.stycken.reduce((h, t) => h + antalRader(t, textBredd, pt) * radPt * 20 + 200, 0);
+    const fragaPt = pt + 1;
+    const fragaH = 200 + 2 * 200 + Math.ceil(BOKRAD.Cinzel * 14 * 20) + fragor.reduce((h, t) => h + antalRader(t, rutaBredd - (fragor.length > 1 ? 24 : 0), fragaPt) * BOKRAD.Andika * fragaPt * 20 + 80, 0) + 200;
+    const behov = titelH + textH + bildH + 300 + fragaH + 450;
+    const extra = Math.min(850, Math.max(0, Math.floor((RAMHOJD - behov - 200) / 3)));
+    const restH = nedBildpunkt(Math.max(0, RAMHOJD - titelH - 450));
+    return { size, pt, line, radPt, fragaPt, skala, bildB, bildH, titelH, restH, extra, ryms: behov <= RAMHOJD };
+  };
+  const alla = [[38, 1], [36, 1], [36, 0.95], [34, 0.95], [34, 0.85], [32, 0.85], [32, 0.75], [30, 0.75], [28, 0.75], [28, 0.65], [26, 0.65]].map(forsok);
+  return alla.find((f) => f.ryms) ?? alla[alla.length - 1];
+}
+
+// Två lösningar (Det nya punkt 2; riggens tvalosningar): elevens blad på ett liggande A4 med boksidans ram, titeln, raden
+// till eleven, de två ritade lösningarna i var sin spalt med namnet överst och frågorna under. Sidan har 720 twips marginal
+// och 900 nedtill, för sidfoten, som riggens liggande boksektion.
+export const LIGGANDE_BOK = { top: 720, bottom: 900, left: 720, right: 720, header: 450, footer: 450 };
+export const LIGGANDE_BREDD = BOK_A4.height - LIGGANDE_BOK.left - LIGGANDE_BOK.right;
+export const LIGGANDE_HOJD = Math.round((BOK_A4.width - LIGGANDE_BOK.top - LIGGANDE_BOK.bottom - 2 * 24 - 150) / 15) * 15;
+export interface Losningsmatt {
+  size: number; pt: number; radPt: number; titelPt: number;
+  skala: number; bildB: number; bildH: number; titelH: number; spaltH: number; restH: number; spaltW: number; inne: number;
+  ryms: boolean;
+}
+export function losningarMatt(p: { titel: string; text: string; fragor: string[] }, bild: { bredd: number; hojd: number }): Losningsmatt {
+  const inreBredd = LIGGANDE_BREDD - 2 * 30;
+  const luftI = 600 - 30, inne = 260;
+  const spaltW = Math.floor(inreBredd / 2);
+  const titelPt = 24;
+  const fragor = p.fragor.map((x) => x.replace(/^\d+\.\s*/, ''));
+  const fragaBredd = (inreBredd - 2 * luftI - 480) / 20 * 0.965;
+  const radenPt = 14;
+  const radenRader = p.text ? antalRader(p.text, (inreBredd - 2 * luftI) / 20 * 0.965, radenPt) : 0;
+  const forsok = ([size, skala]: number[]): Losningsmatt => {
+    const bildB = Math.round((spaltW - luftI - inne) * skala), bildH = Math.round((bildB * bild.hojd) / bild.bredd);
+    const pt = size / 2, radPt = BOKRAD.Andika * pt * 230 / 240;
+    const titelH = 160 + Math.ceil(BOKRAD.Cinzel * titelPt * 20) + 60 + 24 + 45 + 160 + Math.ceil(radenRader * BOKRAD.Andika * radenPt * 20) + 200;
+    const spaltH = nedBildpunkt(Math.ceil(BOKRAD.Cinzel * 13 * 20) + 120 + bildH + 120);
+    const fragorH = 60 + 240 + Math.ceil(BOKRAD.Cinzel * 12 * 20) + 120 + fragor.reduce((h, t) => h + antalRader(t, fragaBredd, pt) * radPt * 20 + 80, 0);
+    const restH = nedBildpunkt(Math.max(0, LIGGANDE_HOJD - titelH - spaltH - 300));
+    return { size, pt, radPt, titelPt, skala, bildB, bildH, titelH, spaltH, restH, spaltW, inne, ryms: titelH + spaltH + fragorH + 300 <= LIGGANDE_HOJD };
+  };
+  const alla = [[28, 1], [26, 1], [26, 0.95], [24, 0.95], [24, 0.9], [22, 0.9], [22, 0.85]].map(forsok);
+  return alla.find((f) => f.ryms) ?? alla[alla.length - 1];
+}

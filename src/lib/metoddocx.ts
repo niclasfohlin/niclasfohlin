@@ -25,7 +25,9 @@ import * as SAGA from './sagoform.js';
 import { arTarning, harBoktypsnitt, sagobladAv, sagoUpphov, TARNING_UPPHOV, tarningAv, type Sagoblad, type Sagofalt, type Station, type Tarning } from './sagoblad';
 import WORDSKALOR from '../data/lathund-word.json';
 import TECKENBREDD from '../data/teckenbredd.json';
-import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, FORMLUFT, FORMRAD_PT, RAMHOJD, TITEL_PT, boksidansMatt, strukturMatt, textparMatt } from './boksida';
+import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, FORMLUFT, FORMRAD_PT, LIGGANDE_BOK, LIGGANDE_BREDD, PROBLEMLUFT, PROBLEMTITEL_PT, RAMHOJD, TITEL_PT, boksidansMatt, losningarMatt, problemMatt, strukturMatt, textparMatt } from './boksida';
+import { bankAv, bankfilensRamar, foljeText, type Bankfil } from './bank';
+import { losningarnasNiva, losningarnasNot, problemformer } from './problemform';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
 const FARG = {
@@ -72,7 +74,8 @@ type Barn = Paragraph | Table;
 // och tabeller, och delaSektioner gör sektionerna av det. Efter ett kortark börjar en vanlig sektion igen. En boksida
 // (lästexten, boksida()) står i en egen sektion med 1,5 cm marginal och raden Till läraren och nivåns knapp i sidfoten.
 // Elevens blad med en bildserie (liggande) står på ett liggande A4 med mallarnas smala marginal (seriebladBarn).
-type Boksektion = { not: string; niva: string; vad: string; farg: string };
+// liggande: bladet Två lösningar på ett liggande A4 (tvaLosningar), med riggens marginaler (LIGGANDE_BOK i boksida.ts).
+type Boksektion = { not: string; niva: string; vad: string; farg: string; liggande?: boolean };
 // Ett sagoblad (sagoFlod): rutan Till läraren i sidfoten, eller på bokens blad ingen sidfot och en kortare upphovsrad.
 type Sagosektion = { not: string; bokblad: boolean };
 class Sektionsbyte { constructor(readonly kortark: boolean, readonly bok?: Boksektion, readonly saga?: Sagosektion, readonly liggande?: boolean) {} }
@@ -687,7 +690,7 @@ function nivaKnapp(b: Boksektion): TextRun[] {
 // Sidfoten på en boksida: raden Till läraren till vänster, och nivåns knapp och sidnumret till höger, som i riggen.
 function bokFot(b: Boksektion): Footer {
   return new Footer({ children: [new Paragraph({
-    tabStops: [{ type: TabStopType.RIGHT, position: BOKBREDD }],
+    tabStops: [{ type: TabStopType.RIGHT, position: b.liggande ? LIGGANDE_BREDD : BOKBREDD }],
     spacing: { after: 0 },
     children: [
       new TextRun({ text: b.not, size: b.not.length > 75 ? 13 : 15, color: BOK.not, font: 'Arial' }),
@@ -900,6 +903,133 @@ function struktur(s: Struktur, bild?: PaBordet): Barn[] {
     ],
   });
   return [punktStycke(), dubbelRam(BOKBREDD, FORM_RAM, () => sidan)];
+}
+
+// ---------------------------------------------------------------- problemen
+// Problemens tre blad (Problemlösning i grupp, src/lib/problemform.ts), ett till ett med metodriggens build-docx.js
+// (problemkort, tvalosningar och bildpar), med samma mått som sidans utskrift (problemMatt och losningarMatt i boksida.ts).
+// Problemets sida: boksidans dubbla ram utan anfang, titeln i Cinzel med den röda dubbla linjen, problemet i elevens
+// typsnitt, den svartvita bilden och frågan i en ruta med tunn röd kant. Sidfoten bär rutan Till läraren och nivåns knapp,
+// som lästexterna.
+const problembyte = (l: Lastext) => new Sektionsbyte(false, { not: l.not, niva: l.niva, vad: l.vad, farg: BOK.kort[l.nivaNr] ?? BOK.ram });
+function problemsida(l: Lastext, bild: PaBordet): Barn[] {
+  const matt = problemMatt(l, PABORDET_MATT);
+  if (!matt.ryms) throw new Error(`Problemet ”${l.titel}” (${l.niva}, ${l.vad}) ryms inte på ett A4, inte ens i 13 punkter och med bilden i 65 procent. Korta problemet eller frågan (src/lib/boksida.ts, problemMatt).`);
+  const { size, line, fragaPt, titelH, bildB, bildH, extra } = matt;
+  const inreBredd = BOKBREDD - 2 * DUBBEL_GLAPP;
+  const luftI = PROBLEMLUFT - DUBBEL_GLAPP;
+  const mitt = (bredd: number) => ({ left: Math.round((inreBredd - bredd) / 2), right: Math.round((inreBredd - bredd) / 2) });
+  const rod = { style: BorderStyle.SINGLE, size: 6, color: BOK.rod, space: 0 } as const;
+  const fragor = l.fragor.map((x) => x.replace(/^\d+\.\s*/, ''));
+  const elev: IRunOptions = { size, color: BOK.text, font: ELEVTYPSNITT };
+  const titel = [
+    new Paragraph({ alignment: AlignmentType.CENTER, outlineLevel: 1, indent: { left: luftI, right: luftI }, spacing: { before: 260, after: 60, line: 240 },
+      children: [new TextRun({ text: l.titel, font: BOKTYPSNITT, size: PROBLEMTITEL_PT * 2, color: BOK.titel })] }),
+    punktStycke({ indent: mitt(2000), spacing: { before: 0, after: 0, line: 240 }, border: { bottom: rod } }),
+    punktStycke({ indent: mitt(1970), spacing: { before: 0, after: 320, line: 147 }, border: { bottom: rod } }),
+  ];
+  const stycken = l.stycken.map((t) => new Paragraph({ indent: { left: luftI, right: luftI }, spacing: { before: 0, after: 200, line }, children: formRuns(t, elev) }));
+  // Luften som blir över delas mellan bilden och frågan, så att sidan fylls jämnt (problemMatt).
+  const bilden = new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 100 + extra, after: 200 + extra }, children: [bildRun(bild.adress, Math.round(((bildB / 20) * 4) / 3), bildensAlt(bild), Math.round(((bildH / 20) * 4) / 3))] });
+  // Frågan i en ruta med tunn röd kant: rubriken Frågan i Cinzel och frågan i elevens typsnitt, numrerad när de är flera.
+  const kant = { style: BorderStyle.SINGLE, size: 8, color: BOK.rod, space: 8 } as const;
+  const fp = Math.round(fragaPt * 2);
+  const rutan = new Paragraph({
+    indent: { left: luftI + 300, right: luftI + 300 }, spacing: { before: 200, after: 200, line: 250 }, keepLines: true,
+    border: { top: kant, bottom: kant, left: kant, right: kant },
+    children: [
+      new TextRun({ text: fragor.length > 1 ? 'Frågorna' : 'Frågan', font: BOKTYPSNITT, size: 28, color: BOK.rod }),
+      ...fragor.flatMap((t, i) => [new TextRun({ break: 1, size: fp }), ...(fragor.length > 1 ? [new TextRun({ text: `${i + 1}.  `, size: fp, color: BOK.text, font: ELEVTYPSNITT })] : []), ...formRuns(t, { size: fp, color: BOK.text, font: ELEVTYPSNITT })]),
+    ],
+  });
+  const sidan = new Table({
+    width: { size: inreBredd, type: WidthType.DXA }, columnWidths: [inreBredd], layout: TableLayoutType.FIXED, borders: FORM_UTAN,
+    rows: [
+      new TableRow({ children: [formCell(titel, { bredd: inreBredd, kanter: { top: FORM_RAM, left: FORM_RAM, right: FORM_RAM, bottom: FORM_INGEN } })] }),
+      new TableRow({ height: { value: matt.restH, rule: HeightRule.ATLEAST }, children: [formCell([...stycken, bilden, rutan], { bredd: inreBredd, kanter: { top: FORM_INGEN, left: FORM_RAM, right: FORM_RAM, bottom: FORM_RAM } })] }),
+    ],
+  });
+  void titelH;
+  return [punktStycke(), dubbelRam(BOKBREDD, FORM_RAM, () => sidan)];
+}
+// Två lösningar: elevens blad på ett liggande A4, med boksidans ram, titeln, raden till eleven, de två ritade lösningarna
+// i var sin spalt med namnet överst och en tunn linje emellan, och frågorna att prata om under. Ingen lärarsida står före:
+// lärarens text om lösningarna står på lärarens sida till problemet. Sidfoten bär ramens rutor och nivåns knapp.
+// nivaNr: nivåns plats bland lästexternas nivåer, för knappens färg, som på problemets sida.
+const losningsbyte = (ram: Ram, nivaNr: number) => {
+  const n = losningarnasNiva(ram.rubrik);
+  return new Sektionsbyte(false, { not: losningarnasNot(ram) || ram.rubrik, niva: n?.niva ?? '', vad: n ? `${n.vad} · två lösningar` : 'två lösningar', farg: BOK.kort[nivaNr] ?? BOK.ram, liggande: true });
+};
+// Nivåns plats för en ram Två lösningar, ur lästexterna.
+const losningensNivaNr = (ram: Ram, texter: Map<unknown, Lastext>) => [...texter.values()].find((l) => l.niva === losningarnasNiva(ram.rubrik)?.niva)?.nivaNr ?? 0;
+function tvaLosningar(p: Textpar, bilder: PaBordet[]): Barn[] {
+  const matt = losningarMatt(p, PABORDET_MATT);
+  if (!matt.ryms) throw new Error(`Två lösningar ”${p.titel}” ryms inte på ett liggande A4. Korta frågorna (src/lib/boksida.ts, losningarMatt).`);
+  const { size, bildB, bildH, spaltH, restH, spaltW, inne, titelPt } = matt;
+  const inreBredd = LIGGANDE_BREDD - 2 * DUBBEL_GLAPP;
+  const luftI = 600 - DUBBEL_GLAPP;
+  const mitt = (bredd: number) => ({ left: Math.round((inreBredd - bredd) / 2), right: Math.round((inreBredd - bredd) / 2) });
+  const rod = { style: BorderStyle.SINGLE, size: 6, color: BOK.rod, space: 0 } as const;
+  const elev: IRunOptions = { size, color: BOK.text, font: ELEVTYPSNITT };
+  const fragor = p.fragor.map((x) => x.replace(/^\d+\.\s*/, ''));
+  const centrerat = (text: string, o: { size: number; efter?: number }) => new Paragraph({ alignment: AlignmentType.CENTER, keepNext: true, spacing: { before: 0, after: o.efter ?? 0, line: 240 }, children: [new TextRun({ text, font: BOKTYPSNITT, size: o.size, color: BOK.rod })] });
+  const forstaRaden = [
+    new Paragraph({ alignment: AlignmentType.CENTER, outlineLevel: 1, indent: { left: luftI, right: luftI }, spacing: { before: 160, after: 60, line: 240 },
+      children: [new TextRun({ text: p.titel, font: BOKTYPSNITT, size: titelPt * 2, color: BOK.titel })] }),
+    punktStycke({ indent: mitt(2000), spacing: { before: 0, after: 0, line: 240 }, border: { bottom: rod } }),
+    punktStycke({ indent: mitt(1970), spacing: { before: 0, after: 160, line: 147 }, border: { bottom: rod } }),
+    ...(p.text ? [new Paragraph({ alignment: AlignmentType.CENTER, indent: { left: luftI, right: luftI }, spacing: { before: 0, after: 200, line: 230 }, children: formRuns(p.text, { size: 28, color: BOK.text, font: ELEVTYPSNITT }) })] : []),
+  ];
+  // Bilden har lösningen i ord som textalternativ, som på sidan.
+  const spalt = (k: number) => [
+    centrerat(p.kolumner[k] ?? '', { size: 26, efter: 120 }),
+    new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0 }, children: [bildRun(bilder[k].adress, Math.round(((bildB / 20) * 4) / 3), `${p.kolumner[k]}: ${p.texter[k]}`, Math.round(((bildH / 20) * 4) / 3))] }),
+  ];
+  const fragestycken = fragor.map((t, i) => new Paragraph({
+    indent: { left: luftI + 480, right: luftI, hanging: 480 }, tabStops: [{ type: TabStopType.LEFT, position: luftI + 480 }], keepLines: true,
+    keepNext: i < fragor.length - 1, spacing: { after: 80, line: 230 },
+    children: [new TextRun({ text: `${i + 1}.`, ...elev }), new TextRun({ children: [new Tab()], size }), ...formRuns(t, elev)],
+  }));
+  const sidan = new Table({
+    width: { size: inreBredd, type: WidthType.DXA }, columnWidths: [spaltW, inreBredd - spaltW], layout: TableLayoutType.FIXED, borders: FORM_UTAN,
+    rows: [
+      new TableRow({ children: [formCell(forstaRaden, { bredd: inreBredd, span: 2, kanter: { top: FORM_RAM, left: FORM_RAM, right: FORM_RAM, bottom: FORM_INGEN } })] }),
+      new TableRow({ height: { value: spaltH, rule: HeightRule.ATLEAST }, cantSplit: true, children: [
+        formCell(spalt(0), { bredd: spaltW, kanter: { top: FORM_INGEN, left: FORM_RAM, right: FORM_SKILJARE, bottom: FORM_INGEN }, marginaler: { top: 0, bottom: 0, left: luftI, right: inne } }),
+        formCell(spalt(1), { bredd: inreBredd - spaltW, kanter: { top: FORM_INGEN, left: FORM_INGEN, right: FORM_RAM, bottom: FORM_INGEN }, marginaler: { top: 0, bottom: 0, left: inne, right: luftI } }),
+      ] }),
+      new TableRow({ height: { value: restH, rule: HeightRule.ATLEAST }, children: [formCell([
+        punktStycke({ indent: mitt(5400), spacing: { before: 60, after: 240, line: 240 }, border: { bottom: { ...FORM_SKILJARE, space: 1 } } }),
+        centrerat('Frågor att prata om', { size: 24, efter: 120 }),
+        ...fragestycken,
+      ], { bredd: inreBredd, span: 2, kanter: { top: FORM_INGEN, left: FORM_RAM, right: FORM_RAM, bottom: FORM_RAM } })] }),
+    ],
+  });
+  return [punktStycke(), dubbelRam(LIGGANDE_BREDD, FORM_RAM, () => sidan)];
+}
+// Lärarens sida till ett problem: problemet och frågorna i en ruta överst, ur problemets egen ram, så att läraren har
+// problemet på bladet utan att texten står två gånger i metodens fil.
+function problemRuta(l: Lastext): Barn[] {
+  const barn = [
+    new Paragraph({ children: [run('Problemet', { fet: true, farg: FARG.huvud, storlek: 20 })], spacing: { after: 40 }, keepNext: true }),
+    ...[...l.stycken, ...l.fragor].map((t, i, alla) => new Paragraph({ children: t.split('\n').flatMap((rad, j) => [...(j ? [new TextRun({ break: 1, size: 20 })] : []), run(rad, { storlek: 20 })]), spacing: { after: i === alla.length - 1 ? 0 : 60 }, keepNext: true })),
+  ];
+  return [tabell([rad([cell(barn, { bredd: BREDD, fyll: FARG.ljus, kanter: { left: kant(FARG.huvud, 24) }, tat: true })])], [BREDD]), avstand(120)];
+}
+// De två lösningarna bredvid varandra, utan kanter, med namnet under varje bild, som eleverna får dem på bladet Två lösningar.
+function bildpar(bilder: PaBordet[], namn: string[]): Barn[] {
+  const ingen = { top: INGEN, bottom: INGEN, left: INGEN, right: INGEN };
+  const mellan = 240;
+  const w = Math.floor((BREDD - mellan) / 2);
+  const bredd = Math.round(((w / 20) * 4) / 3);
+  const hojd = Math.round((bredd * PABORDET_MATT.hojd) / PABORDET_MATT.bredd);
+  const bildCell = (k: number) => new TableCell({ width: { size: w, type: WidthType.DXA }, borders: ingen, margins: { top: 0, bottom: 60, left: 0, right: 0 }, children: [
+    new Paragraph({ spacing: { before: 0, after: 40 }, keepNext: true, children: [bildRun(bilder[k].adress, bredd, bildensAlt(bilder[k]), hojd)] }),
+    new Paragraph({ spacing: { before: 0, after: 0 }, children: [run(namn[k] ?? '', { storlek: 18, farg: FARG.svag })] }),
+  ] });
+  const tom = new TableCell({ width: { size: mellan, type: WidthType.DXA }, borders: ingen, children: [new Paragraph({ spacing: { after: 0 } })] });
+  return [new Table({ width: { size: BREDD, type: WidthType.DXA }, columnWidths: [w, mellan, BREDD - w - mellan], layout: TableLayoutType.FIXED,
+    borders: { ...ingen, insideHorizontal: INGEN, insideVertical: INGEN }, rows: [new TableRow({ cantSplit: true, children: [bildCell(0), tom, bildCell(1)] })] }), avstand(120)];
 }
 
 // ---------------------------------------------------------------- sagobladen och tärningen
@@ -1393,7 +1523,7 @@ function veckansBildHojd(falt: { rubrik: string; text: string }[], rad: string[]
 // ramens text utan veckorna ('inga') och sedan en vecka i taget (veckans index), så att veckans material kan stå emellan.
 // paNySida: det som ritas står först i ett nytt avsnitt, som redan börjar på en ny sida, och får då ingen egen
 // sidbrytning före sig.
-function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: MetodData['kort']; blad?: Record<string, number>; brak?: boolean; elev?: boolean; ensamRuta?: Barn[]; efterDel?: (rubrik: string, maxHojd?: number) => Barn[]; bildtext?: (rubrik: string) => string; nivaer?: Niva[]; karta?: { tabell?: MetodData['tabeller'][number]; vecka: (led: string) => string; blad: (namn: string) => string | undefined; lankar: KartaWord }; veckor?: 'inga' | number; paNySida?: boolean } = {}): Flod {
+function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: MetodData['kort']; blad?: Record<string, number>; brak?: boolean; elev?: boolean; ensamRuta?: Barn[]; efterDel?: (rubrik: string, maxHojd?: number) => Barn[]; bildtext?: (rubrik: string) => string; nivaer?: Niva[]; karta?: { tabell?: MetodData['tabeller'][number]; vecka: (led: string) => string; blad: (namn: string) => string | undefined; lankar: KartaWord }; veckor?: 'inga' | number; paNySida?: boolean; tat?: boolean } = {}): Flod {
   const ut: Flod = [];
   const enVecka = typeof o.veckor === 'number';
   // Ramens text hänger ihop med det som följer, utom när veckorna börjar på en ny sida: Google Dokument flyttade då
@@ -1436,7 +1566,7 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
     const tvaSidor = plats !== undefined && !!bildtext && plats - bildtextensHojd(bildtext) < VECKOBILD_MINST * veckobildensHojd();
     return [
       ...(ram.lektioner && !(o.paNySida && nr === 0) ? [new Paragraph({ pageBreakBefore: true, spacing: { before: 0, after: 0, line: 240 }, run: { size: 2, font: 'Calibri' } })] : []),
-      ...ramFaltTabell(del.falt, { rubrik: korta || ram.listor ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum, hojder: o.blad ? del.falt.map((f) => o.blad![f.rubrik]) : undefined, elevblad: !!o.blad, tat: ram.lektioner, bokmarke: ram.lektioner && o.karta ? o.karta.vecka(forstaLed(del.rubrik)) : undefined, luftEfter: rad && !tvaSidor ? VECKANS_LUFT : undefined }),
+      ...ramFaltTabell(del.falt, { rubrik: korta || ram.listor ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum, hojder: o.blad ? del.falt.map((f) => o.blad![f.rubrik]) : undefined, elevblad: !!o.blad, tat: ram.lektioner || o.tat, bokmarke: ram.lektioner && o.karta ? o.karta.vecka(forstaLed(del.rubrik)) : undefined, luftEfter: rad && !tvaSidor ? VECKANS_LUFT : undefined }),
       ...(tvaSidor ? [luft(LUFT_RAD, true, { nySida: true })] : []),
       // Veckans rad ur kartan: talen och bladen för varje nivå, med bladens namn som länkar.
       ...(rad && o.karta?.tabell ? (() => { const k = o.karta!.tabell!.kolumner.slice(1); return rubrikTabell(k, [rad.slice(1)], k.map(() => Math.floor(BREDD / k.length)), { radrubrik: false, hallIhop: true, hallIhopEfter: true, storlek: 19, karta: { ...o.karta!.lankar, vecka: undefined } }); })() : []),
@@ -1956,6 +2086,22 @@ function kartaFor(post: MetodPost) {
   return { tabell, vecka, blad: bladId, lankar };
 }
 // Hela metoden i den ordning modellen har.
+// Lärarens sida till ett problem (src/lib/problemform.ts): problemet i en ruta överst, ramens text, de två lösningarna
+// bredvid varandra och sedan rutan I passet, tätare, så att allt om problemet står på ett A4, som i metodriggen.
+function lararsidaBarn(ram: Ram, larare: { l: Lastext; bilder: PaBordet[]; namn: string[] }, val: Parameters<typeof ramBarn>[1]): Flod {
+  return [
+    ...problemRuta(larare.l),
+    ...ram.text.map((s) => stycke(s, { hallIhop: true })),
+    ...(larare.bilder.length === 2 ? bildpar(larare.bilder, larare.namn) : []),
+    ...ramBarn({ ...ram, text: [] }, { ...val, tat: true }),
+  ];
+}
+// Raden i beskrivningen om bankens filer (src/lib/bank.ts), efter nivåernas översikter.
+const bankRad = (b: NonNullable<ReturnType<typeof bankAv>>, adress: string) => {
+  const alla = b.ord.alla.charAt(0).toLocaleUpperCase('sv') + b.ord.alla.slice(1);
+  return `${alla} står i egna filer, en för varje nivå och en för alla nivåer: bara ${b.ord.alla}, eller ${b.ord.alla} med ${foljeText(b)}. De finns på ${adress}, där varje ${b.ord.en} också har en egen sida.`;
+};
+
 function metodBarn(post: MetodPostISerie, bas: string): Flod {
   const d = post.data;
   const ut: Flod = [];
@@ -2128,11 +2274,22 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
     ut.push(...ljudRader(d));
     const boksidor = lastexter(d.ramar.ramar);
     const ramarna = d.ramar.ramar;
+    // Problemens tre blad (src/lib/problemform.ts) och banken (src/lib/bank.ts): i filen med allt står nivåernas
+    // översikter, som på sidan, och enheterna med sina följesidor står i bankens egna filer (bankDokument).
+    const former = problemformer(ramarna, bilderPaBordet);
+    const bank = bankAv(d);
     const ramVal = (ram: Ram) => ({ kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d), efterDel, bildtext: (rubrik: string) => paBordetVid(bilderPaBordet, { del: rubrik }).map((b) => b.bild.text).join(' '), nivaer: d.nivaer, karta });
     let efterVeckorna = false;
     const ramensRubrik = (ram: Ram, nySida = false) => new Paragraph({ children: [run(ram.rubrik)], heading: HeadingLevel.HEADING_3, keepNext: true, pageBreakBefore: nySida || undefined, spacing: { before: 240, after: 80 } });
     // En ram, där den står. ram är ramen som den ritas: en ram vars listor står vid veckorna ritas utan dem.
     const enRam = (i: number, ram: Ram): void => {
+      // Två lösningar: elevens blad på ett liggande A4, utan lärarens sida före (tvaLosningar()).
+      const los = former.losningar(ram);
+      if (los) {
+        ut.push(losningsbyte(ram, losningensNivaNr(ram, boksidor)), ...tvaLosningar(los.par, los.bilder), new Sektionsbyte(false));
+        for (const f of filmerVid(filmer, { ram: ram.rubrik })) ut.push(...filmBarn(f));
+        return;
+      }
       // Två texter (textparAv i src/lib/ramform.ts): lärarens sida, ramen med texterna och rutorna men utan frågorna och
       // med en rad om elevens sida, och sedan elevens sida på ett eget A4 (textpar()).
       const par = textparAv(ram);
@@ -2155,6 +2312,14 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
         for (const f of filmerVid(filmer, { ram: ram.rubrik })) ut.push(...filmBarn(f));
         return;
       }
+      // Problemets sida: en boksida utan anfang, med bilden mellan problemet och frågan (problemsida()).
+      const pbild = former.bild(ram);
+      if (pbild) {
+        const l = boksidor.get(ram)!;
+        ut.push(problembyte(l), ...problemsida(l, pbild), new Sektionsbyte(false));
+        for (const f of filmerVid(filmer, { ram: ram.rubrik })) ut.push(...filmBarn(f));
+        return;
+      }
       // En lästext är en boksida på en egen sida, med titeln i boken i stället för en rubrik (boksida()).
       const lastext = boksidor.get(ram);
       if (lastext) {
@@ -2173,7 +2338,9 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
       }
       // En ram med en bildserie eller ett ark (Seriesamtal) är lärarens sida att skriva ut: den börjar på en ny sida, om den
       // inte redan gör det efter förra ramens blad, och elevens blad och arket står efter delarna, i egna sektioner.
-      const nySida = (!!(ram.serie || ram.ark) || forstEfterVeckorna) && !(ut.at(-1) instanceof Sektionsbyte);
+      // Lärarens sida till ett problem är ett blad: den börjar på en ny sida, med problemet överst och lösningarna efter texten.
+      const larare = former.larare(ram);
+      const nySida = (!!(ram.serie || ram.ark) || forstEfterVeckorna || !!larare) && !(ut.at(-1) instanceof Sektionsbyte);
       ut.push(ramensRubrik(ram, nySida));
       const serie = ramensSerie(ram, post.id);
       if (ramArTom(ram)) {
@@ -2183,7 +2350,8 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
         // ett blad som bara skrivs i, eller som läraren fyller i, får rutor att skriva i (granskningen 2026-10-09).
         const rita = [...ram.text, ...ram.delar.flatMap((del) => del.falt.map((f) => f.rubrik))].some((s) => /\brit(a|ar|ad)\b|\bbild/i.test(s));
         ut.push(stycke(d.elevblad[ram.rubrik] ? `${ram.rubrik} finns i full storlek i planeringsmallarna, med ${rita ? 'rutor att skriva och rita i' : 'rutor att skriva i'}.` : `Ramen att fylla i, med ${ram.delar.length === 1 ? 'en del' : `${ram.delar.length} delar`}, finns i planeringsmallarna.`, { farg: FARG.svag }));
-      } else ut.push(...ramBarn(ram, { ...ramVal(ram), ensamRuta: serie.ensam }));
+      } else if (larare) ut.push(...lararsidaBarn(ram, larare, ramVal(ram)));
+      else ut.push(...ramBarn(ram, { ...ramVal(ram), ensamRuta: serie.ensam }));
       ut.push(...serie.efter);
       filmVid({ ram: ram.rubrik });
     };
@@ -2192,7 +2360,13 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
     // ordning. Allt annat står kvar i filens ordning: en ram vars listor står vid veckorna ritas utan dem.
     const vm = veckomaterial(d);
     const paNySida = () => ut.at(-1) instanceof Sektionsbyte;
+    // Banken: nivåernas översikter först, som på sidan, och en rad om bankens filer.
+    if (bank) {
+      for (const n of bank.nivaer) if (n.oversikt !== undefined) enRam(n.oversikt, ramarna[n.oversikt]);
+      ut.push(stycke(bankRad(bank, metodAdress(bas, post.id).replace(/^https?:\/\//, '')), { farg: FARG.svag }));
+    }
     for (const [i, ram] of ramarna.entries()) {
+      if (bank && (bank.ramar.has(i) || bank.oversikter.has(i))) continue;
       if (!vm) { enRam(i, ram); continue; }
       if (vm.ramar.has(i)) continue;
       if (i !== vm.ri) {
@@ -2224,14 +2398,16 @@ function metodBarn(post: MetodPostISerie, bas: string): Flod {
 // Mallarna: snabbmallen, checklistan, målkollen, kontraktet, schemat, ramarna och diplomet, en per
 // sida, med plats att skriva. I filen med allt står de färdiga ramarna redan i beskrivningen och
 // hoppas då över här (baraTommaRamar); i mallfilen för sig finns alla ramar.
-function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } = {}): { barn: Flod; liggande?: boolean }[] {
+// bank: bara de här ramarna, i den här ordningen, och inget annat: en fil ur metodens bank (bankDokument). Utan bank har
+// planeringsmallarna varken bankens enheter, följesidor eller översikter, som står i bankens filer och i beskrivningen.
+function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; bank?: number[] } = {}): { barn: Flod; liggande?: boolean }[] {
   const d = post.data;
   const sidor: Flod[] = [];
   const under = (namn: string) => [
     new Paragraph({ children: [run(namn)], heading: HeadingLevel.HEADING_1, spacing: { before: 0, after: 40 } }),
     stycke(`${d.titel} · ${arskursText(d)}`, { kursiv: true, farg: FARG.huvud, storlek: 24, efter: 160 }),
   ];
-  if (d.snabbmall) {
+  if (d.snabbmall && !o.bank) {
     sidor.push([
       ...under('Snabbmall'),
       ...(d.snabbmall.text ? [stycke(d.snabbmall.text)] : []),
@@ -2239,7 +2415,7 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
       ...snabbmallTabell(d.titel, d.snabbmall.fore, d.snabbmall.efter, { skrivrum: true }),
     ]);
   }
-  if (d.checklista) {
+  if (d.checklista && !o.bank) {
     // En checklista som görs en gång (inför kursen i Skrivkurs: sagoboken, inför samtal 1 i Kompissamtal) har inget
     // passnummer, och tillfället står i rubriken efter inför (läsbarhetsgranskningen av Kompissamtal 2026-10-03).
     const tillfalle = d.checklista.rubrik.match(/(?:inför|före) (.+)$/i)?.[1]?.trim();
@@ -2252,7 +2428,7 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
       ...bockar(d.checklista.punkter, 1, { hojd: 560 }),
     ]);
   }
-  if (d.hem?.kontrakt) {
+  if (d.hem?.kontrakt && !o.bank) {
     const k = d.hem.kontrakt;
     const b = Math.floor(BREDD / 3);
     const underskrifter = tabell([
@@ -2268,7 +2444,7 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
       underskrifter,
     ]);
   }
-  if (d.hem?.schema) {
+  if (d.hem?.schema && !o.bank) {
     const s = d.hem.schema;
     sidor.push([
       ...under(s.rubrik),
@@ -2283,7 +2459,7 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
   // fält om målen, som Bråkkursens Uppgifterna och målen); De fyra räknesätten har ingen sådan, och hänvisningen ledde
   // ingenstans (granskningen 2026-10-04).
   const malensUppgifter = (d.ramar?.ramar ?? []).some((r) => /^Kartläggning/.test(r.rubrik) && r.delar.some((del) => del.falt.some((f) => /\bmål/i.test(f.rubrik))));
-  if (d.mal) {
+  if (d.mal && !o.bank) {
     const bredder = [BREDD - 2400, 1200, 1200];
     const huvud = rad(['Efter perioden ska eleven oftare kunna', 'Före', 'Efter'].map((k, i) => cell([stycke(k, { fet: true, farg: FARG.vit, storlek: 20, mitt: i > 0, efter: 0 })], { bredd: bredder[i], fyll: FARG.huvud, kanter: runt(kant(FARG.huvud)) })), { huvud: true });
     const kropp = d.mal.punkter.map((p, i) => rad([
@@ -2319,17 +2495,38 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
     return ut;
   };
   const harFigur = (sida: Flod) => !!figurRad && sida.some((x) => figurBilder.has(x as object));
-  const upphovsrad = (figur = false) => stycke(`${UPPHOV}. Mall till ${d.titel}, ${metodAdress(bas, post.id)}.${figur && figurRad ? ` ${figurRad}` : ''}`, { farg: FARG.svag, storlek: 18, fore: 160 });
+  const upphovsrad = (figur = false) => stycke(`${UPPHOV}. ${o.bank ? 'Ur' : 'Mall till'} ${d.titel}, ${metodAdress(bas, post.id)}.${figur && figurRad ? ` ${figurRad}` : ''}`, { farg: FARG.svag, storlek: 18, fore: 160 });
   if (d.ramar) {
     const ramarna = d.ramar.ramar;
     const boksidor = lastexter(ramarna);
     const paBordet = metodensPaBordet(d, post.id);
     const ramVal = (ram: Ram, tom: boolean) => ({ skrivrum: tom, stor: true, kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d), efterDel: (rubrik: string, maxHojd?: number) => paBordetVid(paBordet, { del: rubrik }).flatMap((b) => bordet(b, maxHojd === undefined ? undefined : maxHojd - radantal(`På bordet. ${b.bild.text}`, BREDD, 19) * 235)), bildtext: (rubrik: string) => paBordetVid(paBordet, { del: rubrik }).map((b) => b.bild.text).join(' '), nivaer: d.nivaer, karta: kartaFor(post) });
+    const former = problemformer(ramarna, paBordet);
+    const bank = bankAv(d);
     // En rams sidor i planeringsmallarna, i ordning. ram är ramen som den ritas: en ram vars listor står vid veckorna
     // ritas utan dem.
     const ramensSidor = (i: number, ram: Ram): Flod[] => {
       const ut: Flod[] = [];
       const tom = ramArTom(ram);
+      // Problemens blad (src/lib/problemform.ts): bladet Två lösningar på ett liggande A4 och problemets sida. I filen med
+      // allt står de redan i beskrivningen.
+      const los = former.losningar(ram);
+      if (los) {
+        if (o.baraTommaRamar) return ut;
+        const sida: Flod = [losningsbyte(ram, losningensNivaNr(ram, boksidor)), ...tvaLosningar(los.par, los.bilder)];
+        bladsidor.add(sida);
+        ut.push(sida);
+        return ut;
+      }
+      const pbild = former.bild(ram);
+      if (pbild) {
+        if (o.baraTommaRamar) return ut;
+        const l = boksidor.get(ram)!;
+        const sida: Flod = [problembyte(l), ...problemsida(l, pbild)];
+        bladsidor.add(sida);
+        ut.push(sida);
+        return ut;
+      }
       // Två texter: lärarens sida och elevens sida på ett eget A4 (textpar()), och en kooperativ struktur: sidan med
       // bilden, och fler bilder till ramen (bild A och bild B) på en sida efter (struktur()). I filen med allt står de
       // redan i beskrivningen.
@@ -2387,7 +2584,10 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
       }
       if (o.baraTommaRamar && !tom) return ut;
       const serie = ramensSerie(ram, post.id);
-      const sida: Flod = [...under(ram.rubrik), ...ramBarn(ram, { ...ramVal(ram, tom), ensamRuta: serie.ensam })];
+      const larare = former.larare(ram);
+      const sida: Flod = [...under(ram.rubrik), ...(larare ? lararsidaBarn(ram, larare, ramVal(ram, tom)) : ramBarn(ram, { ...ramVal(ram, tom), ensamRuta: serie.ensam }))];
+      // Lärarens sida till ett problem fyller sitt A4, och sidfoten bär upphovet, så sidan får ingen upphovsrad, som bladen.
+      if (larare) bladsidor.add(sida);
       // Ett kortark fyller sin sida och foten bär upphovet, så sidan får ingen upphovsrad (den hamnade ensam på en sida).
       // Veckorna och räknebladen fyller också var sin sida.
       if (d.elevblad[ram.rubrik] || sida.some((x) => x instanceof Sektionsbyte) || ram.lektioner || (ram.listor ?? []).some((l) => l.rakneblad)) bladsidor.add(sida);
@@ -2399,8 +2599,10 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
     // Veckans material (src/lib/veckomaterial.ts, Niclas 2026-10-06): i mallfilen för sig står veckans material direkt
     // efter veckans sida, som i beskrivningen, så att en vecka är sidor i följd. Allt annat står kvar i filens ordning:
     // en ram vars listor står vid veckorna ritas utan dem. I filen med allt har bara de tomma ramarna en sida här.
-    const vm = o.baraTommaRamar ? undefined : veckomaterial(d);
-    for (const [i, ram] of ramarna.entries()) {
+    const vm = o.baraTommaRamar || o.bank ? undefined : veckomaterial(d);
+    if (o.bank) for (const i of o.bank) sidor.push(...ramensSidor(i, ramarna[i]));
+    else for (const [i, ram] of ramarna.entries()) {
+      if (bank && (bank.ramar.has(i) || bank.oversikter.has(i))) continue;
       if (!vm) { sidor.push(...ramensSidor(i, ram)); continue; }
       if (vm.ramar.has(i)) continue;
       if (i !== vm.ri) {
@@ -2429,7 +2631,7 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
   }
   // Diplomet bär sin egen rubrik: utan sidans rubrik och metodrad, så att eleven inte får Diplom två gånger (K-040).
   // Diplomet är elevens (riggens docs/elevmaterial.md): texten i elevens typsnitt; kickern står kvar i sitt.
-  if (d.diplom) sidor.push([...medElevtypsnitt(harElevtypsnitt(d), () => diplomBarn(d.diplom!))]);
+  if (d.diplom && !o.bank) sidor.push([...medElevtypsnitt(harElevtypsnitt(d), () => diplomBarn(d.diplom!))]);
   const vanliga = sidor.filter((sida) => !bladsidor.has(sida));
   const ingenFigur = !!figurRad && !vanliga.some(harFigur);
   for (const sida of vanliga) sida.push(upphovsrad(harFigur(sida) || (ingenFigur && sida === vanliga[0])));
@@ -2438,9 +2640,9 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean } 
   // (talsortsmattan, bladet Bråket på fyra sätt) står bladet först bland dem, så att det kopieras med resten.
   // Mallarna och bladet ligger framför eleven: i elevens typsnitt, när metoden har elevmaterial (K-130), som på sidan.
   const elev = harElevtypsnitt(d);
-  const blad = d.lathund && arMatta(d.lathund.mall) ? medBredd(BREDD_MALL, () => [medElevtypsnitt(elev, () => mattaSida(d.lathund!.mall))]) : [];
+  const blad = !o.bank && d.lathund && arMatta(d.lathund.mall) ? medBredd(BREDD_MALL, () => [medElevtypsnitt(elev, () => mattaSida(d.lathund!.mall))]) : [];
   // Ett ark per talsort (en matta med enPerSida) står på stående A4, en sida per kolumn; övriga mallar liggande.
-  const mallsidor = d.mallar.flatMap((m) => (m.typ === 'matta' && m.enPerSida
+  const mallsidor = o.bank ? [] : d.mallar.flatMap((m) => (m.typ === 'matta' && m.enPerSida
     ? (m.kolumner ?? []).map((k) => ({ barn: medBredd(BREDD_STAENDE, () => medElevtypsnitt(elev, () => talsortSida(m, k))), liggande: false }))
     : [{ barn: medBredd(BREDD_MALL, () => medElevtypsnitt(elev, () => (m.typ === 'serie' ? serieMallSida(m, post.id) : m.typ === 'talruta' ? talrutaSida(m) : mallSida(m)))), liggande: true }]));
   return [...sidor.map((barn) => ({ barn })), ...blad.map((barn) => ({ barn, liggande: true })), ...mallsidor];
@@ -3306,7 +3508,7 @@ function sektion(barn: Barn[], huvudtext: string, adress: string, o: { liggande?
   }
   if (o.bok) {
     return {
-      properties: { page: { size: { ...A4, orientation: PageOrientation.PORTRAIT }, margin: BOKMARGINAL } },
+      properties: { page: { size: { ...A4, orientation: o.bok.liggande ? PageOrientation.LANDSCAPE : PageOrientation.PORTRAIT }, margin: o.bok.liggande ? LIGGANDE_BOK : BOKMARGINAL } },
       headers: { default: bokHuvud(adress) },
       footers: { default: bokFot(o.bok) },
       children: barn,
@@ -3565,6 +3767,20 @@ export function lathundProvDokument(post: MetodPost, nr: number, skala: number, 
   const adress = `${metodAdress(o.bas, post.id).replace(/^https?:\/\//, '')}/lathund`;
   const sidor = medBredd(BREDD_LATHUND, () => lathundBarn(post, { niva1: nr === 1, skalor: [skala, skala, skala, skala], baraSida: nr }));
   return dokument(`Lathund: ${post.data.titel}, sida ${nr}`, sidor.map((sida) => sektion(sida, '', adress, { lathund: true })));
+}
+
+// En fil ur metodens bank (src/lib/bank.ts): en nivå eller alla, med bara enheterna (problemets sidor) eller med
+// följesidorna (nivåns översikt, och för varje problem lärarens sida, problemets sida och Två lösningar).
+export function bankDokument(post: MetodPost, fil: Pick<Bankfil, 'niva' | 'medFoljesidor' | 'rubrik'>, o: { bas: string; resurser?: MetodResurser }): Document {
+  instans = 0;
+  RESURSER = o.resurser ?? { bilder: new Map() };
+  const bank = bankAv(post.data);
+  if (!bank) throw new Error(`${post.data.titel} har ingen bank (src/lib/bank.ts).`);
+  const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
+  const sidor = mallBarn(post, o.bas, { bank: bankfilensRamar(bank, fil) });
+  const huvud = `${fil.niva ? fil.niva.namn : 'Alla nivåer'} · ${post.data.titel} · ${SAJT}`;
+  const sektioner = sidor.flatMap((sida) => delaSektioner(sida.barn, huvud, adress));
+  return dokument(`${post.data.titel}: ${fil.rubrik}`, sektioner, typsnittFor([post]));
 }
 
 // Bara mallarna till en metod.

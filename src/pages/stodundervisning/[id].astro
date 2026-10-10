@@ -16,6 +16,7 @@ import { publicerade, formateraDatum } from '../../lib/innehall';
 import { arskursText, ejBryt, harLathund, harMallar, metodAdress, SAJT, UPPHOV } from '../../lib/metod';
 import { byggSerier, platsISerien, serieKoppling } from '../../lib/serie';
 import { site } from '../../data/site';
+import { bankAv, nivaFarger } from '../../lib/bank';
 
 export async function getStaticPaths() {
   const metoder = await publicerade('stodundervisning');
@@ -41,6 +42,8 @@ const antalLektioner = serie?.lektioner.length ?? 0;
 // för resten, metodens materialavsnitt eller lathundens materialsida (Niclas 2026-10-02: "Viktigaste och en länk till
 // rätt ställe", och ingen punktlista som gör att rutan växer neråt).
 // En generell metod utan egna ramar (Texttyper i grupp) har materialet i sina kurser, och länken leder till banken.
+// Metodens bank (src/lib/bank.ts): problemen eller texterna i egna filer, i nedladdningsrutans tabell.
+const bank = bankAv(d) ?? undefined;
 const materialLank = d.ramar ? '#ramar' : d.lektionsbank ? '#lektionsbank' : harLathund(d) ? `/stodundervisning/${m.id}/lathund#lathund-material` : undefined;
 ---
 
@@ -78,7 +81,7 @@ const materialLank = d.ramar ? '#ramar' : d.lektionsbank ? '#lektionsbank' : har
           faktarutan, som på Word-filens första sida. Extrafilmerna står i texten (Metod.astro). */}
       {huvud && <Filmruta filmer={[huvud]} titel={d.titel} />}
       {delningPa && <Delning sida={`/stodundervisning/${m.id}`} titel={d.titel} plats="topp" />}
-      <Nedladdning id={m.id} titel={d.titel} harMallar={harMallar(d)} harLathund={harLathund(d)} ramar={d.ramar?.rubrik.toLowerCase()} filmer={filmer.length} />
+      <Nedladdning id={m.id} titel={d.titel} harMallar={harMallar(d)} harLathund={harLathund(d)} ramar={d.ramar?.rubrik.toLowerCase()} filmer={filmer.length} bank={bank} farger={bank ? nivaFarger(d, bank) : undefined} />
     </div>
 
     <Metod d={d} id={m.id} koppling={koppling} />

@@ -5,12 +5,29 @@
 // var sin spalt med numret och namnet överst och frågorna att prata om under en tunn linje. Lärarens sida, med texterna
 // och rutorna, står före (Metod.astro). I utskriften står sidan på ett eget A4 med storleken ur samma uträkning som Word
 // (src/lib/boksida.ts, textparMatt); på en smal skärm står texterna under varandra.
+//
+// Två lösningar (Problemlösning i grupp, metodriggens TILL-SAJTEN 2026-10-10, Det nya punkt 2; riggens tvalosningar): med
+// bilder står de två ritade lösningarna i spalterna, med namnet överst (Lösning A, Lösning B) och texten som bildens
+// textalternativ, och sidan står på ett liggande A4 i utskriften, med storleken ur samma uträkning som Word
+// (losningarMatt). Rutan Till läraren och nivåns knapp står under ramen, som på problemets sida. Ingen lärarsida står före:
+// lärarens text om lösningarna står på lärarens sida till problemet (Metod.astro). Bilderna leder till svg-filen, så att
+// de går att se stora i telefonen (K-296).
 import type { Textpar } from '../lib/ramform';
-import { BOKRAD, textparMatt } from '../lib/boksida';
-interface Props { p: Textpar; id: string }
-const { p, id } = Astro.props;
+import { BOKRAD, losningarMatt, textparMatt } from '../lib/boksida';
+import { PABORDET_MATT, type PaBordet } from '../lib/pabordet';
+interface Props { p: Textpar; id: string; bilder?: PaBordet[]; rubrik?: string; not?: string; farg?: string }
+const { p, id, bilder, rubrik, not, farg } = Astro.props;
+const medBilder = !!bilder && bilder.length === 2;
+const lm = medBilder ? losningarMatt(p, PABORDET_MATT) : undefined;
 const matt = textparMatt(p);
-const stil = [`--bok-pt: ${matt.pt}pt`, `--bok-rad: ${(BOKRAD.Andika * matt.line / 240).toFixed(3)}`].join('; ');
+const stil = [
+  `--bok-pt: ${lm ? lm.pt : matt.pt}pt`,
+  `--bok-rad: ${(BOKRAD.Andika * (lm ? 230 : matt.line) / 240).toFixed(3)}`,
+  ...(lm ? [`--bild-andel: ${Math.round(lm.skala * 100)}%`] : []),
+  ...(farg ? [`--bok-niva: ${farg}`] : []),
+].join('; ');
+// Nivån och vad ur rubriken "Två lösningar: Bas, problem 1, Äpplena", till knappen i sidfoten.
+const ur = rubrik?.match(/^Två lösningar: ([^,]+), ([^,]+), (.+)$/);
 // Fet och kursiv stil i en rad, som bokRuns i Word: **ord** och *ord*.
 type Del = { text: string; fet?: boolean; kursiv?: boolean };
 const delar = (r: string): Del[] => {
@@ -27,12 +44,17 @@ const delar = (r: string): Del[] => {
 // Raderna i ett stycke, var och en med sina delar.
 const rader = (t: string) => t.split('\n').map(delar);
 ---
-<section class="m-ram boksida formsida textpar" id={id} style={stil} aria-label={`Elevens sida: ${p.titel}`}>
+<section class:list={['m-ram', 'boksida', 'formsida', 'textpar', { losningar: medBilder }]} id={id} style={stil} aria-label={`Elevens sida: ${p.titel}`}>
   <div class="boksida-ram">
     <h4 class="boksida-titel">{p.titel}</h4>
     {p.text && <p class="formsida-rad">{rader(p.text).map((r, j) => <>{j > 0 && <br />}{r.map((x) => (x.fet ? <strong>{x.text}</strong> : x.kursiv ? <em>{x.text}</em> : x.text))}</>)}</p>}
     <div class="textpar-spalter">
-      {p.texter.map((t, k) => (
+      {medBilder ? bilder!.map((b, k) => (
+        <div class="textpar-spalt">
+          <p class="formsida-etikett losningar-namn">{p.kolumner[k]}</p>
+          <p class="losningar-bild"><a href={b.adress} class="bild-lank" title="Öppna bilden i full storlek"><img src={b.adress} alt={`${p.kolumner[k]}: ${p.texter[k]}`} width={PABORDET_MATT.bredd} height={PABORDET_MATT.hojd} loading="lazy" decoding="async" data-utskriftsbild /></a></p>
+        </div>
+      )) : p.texter.map((t, k) => (
         <div class="textpar-spalt">
           <p class="textpar-nr" aria-hidden="true">{k + 1}</p>
           <p class="formsida-etikett"><span class="visually-hidden">{k + 1}. </span>{p.kolumner[k]}</p>
@@ -45,5 +67,7 @@ const rader = (t: string) => t.split('\n').map(delar);
       {p.fragor.map((f, i) => <li><span class="boksida-nr">{i + 1}.</span><span>{rader(f).map((r, j) => <>{j > 0 && <br />}{r.map((x) => (x.fet ? <strong>{x.text}</strong> : x.kursiv ? <em>{x.text}</em> : x.text))}</>)}</span></li>)}
     </ol>
   </div>
-  <p class="boksida-fot"><span>{p.not}</span></p>
+  {medBilder
+    ? <p class="boksida-fot"><span>{not}</span> {ur && <span class="boksida-knapp">{ur[1].toUpperCase()} · {ur[2]} · två lösningar</span>}</p>
+    : <p class="boksida-fot"><span>{p.not}</span></p>}
 </section>

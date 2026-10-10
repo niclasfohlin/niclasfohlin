@@ -1,0 +1,43 @@
+---
+// Bankens filer att ladda ner och skriva ut (src/lib/bank.ts; Niclas 2026-10-10: "en extra nedladdningsruta i någon form
+// av enkel tabell", en rad för alla nivåer och en per nivå, med bara problemen och med lärarens sida och kontrastparet, i
+// docx och pdf, och samma filer "på översikten fast bara din nivå"). Utan nivå är det tabellen i nedladdningsrutan
+// överst på metodens sida: kolumnerna är de två slagen, raderna alla nivåer och varje nivå. Med en nivå är det nivåns två
+// rader i bankens nivå på sidan. Filerna byggs ur metodens fil: Word av [id].docx.ts (bankDokument i metoddocx.ts) och
+// pdf:en av npm run validera (scripts/bankpdf.mjs). Pdf och Word, utan Drive, så att en rad ryms i telefonen.
+import Filval from './Filval.astro';
+import { bankfiler, foljeText, type Bank, type Bankniva } from '../lib/bank';
+interface Props { id: string; titel: string; bank: Bank; niva?: Bankniva; farger: Record<string, string> }
+const { id, titel, bank, niva, farger } = Astro.props;
+const filer = bankfiler(id, bank);
+const bas = '/stodundervisning/';
+const versal = (s: string) => s.charAt(0).toLocaleUpperCase('sv') + s.slice(1);
+const bara = `Bara ${bank.ord.alla}`;
+const med = `Med ${foljeText(bank)}`;
+const fil = (n: Bankniva | undefined, medFoljesidor: boolean) => filer.find((f) => f.niva === n && f.medFoljesidor === medFoljesidor)!;
+const val = (n: Bankniva | undefined, medFoljesidor: boolean) => {
+  const f = fil(n, medFoljesidor);
+  return { fil: `${bas}${f.namn}`, namn: f.namn, rubrik: f.rubrik, statistik: `${titel}: ${f.rubrik.toLowerCase()}`, pdf: true, pdfTitel: 'Ladda ner som pdf', utanDrive: true, liten: true };
+};
+---
+{niva ? (
+  <ul class="filrader bankfiler-niva">
+    <li><span class="filrubrik">{bara}</span> <Filval {...val(niva, false)} /></li>
+    <li><span class="filrubrik">{med}</span> <Filval {...val(niva, true)} /></li>
+  </ul>
+) : (
+  <table class="bankfiler">
+    <caption>{versal(bank.ord.alla)} att skriva ut</caption>
+    <colgroup><col class="nivakol" /><col /><col /></colgroup>
+    <thead><tr><td></td><th scope="col">{bara}</th><th scope="col">{med}</th></tr></thead>
+    <tbody>
+      {[undefined, ...bank.nivaer].map((n) => (
+        <tr>
+          <th scope="row">{n ? <span class="bankfiler-niva-namn" style={`--niva: ${farger[n.namn]}`}>{n.namn}</span> : 'Alla nivåer'}</th>
+          <td><Filval {...val(n, false)} /></td>
+          <td><Filval {...val(n, true)} /></td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+)}

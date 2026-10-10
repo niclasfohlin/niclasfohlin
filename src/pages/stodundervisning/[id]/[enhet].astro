@@ -1,0 +1,90 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Metod from '../../../components/Metod.astro';
+import EjBryt from '../../../components/EjBryt.astro';
+import { publicerade } from '../../../lib/innehall';
+import { bankAv, enhetAdress, grannar, nivaFarger, type Bankenhet } from '../../../lib/bank';
+import { metodAdress, UPPHOV } from '../../../lib/metod';
+import { site } from '../../../data/site';
+
+// /stodundervisning/<id>/<nivå>-<nummer>: en enhet i metodens bank (src/lib/bank.ts; Niclas 2026-10-10 om Problemlösning i
+// grupp: problemen ska inte ligga "scrollandes på mobilen i evigheter", och det ska gå "att bara skriva ut problem utan allt
+// annat och bara problem samt med tillhörande lärarens sida och kontrastpar"). Sidan har enhetens blad i den ordning de
+// står i bankens filer: lärarens sida, problemet och Två lösningar, var och en med en knapp som skriver ut bara bladet,
+// och en knapp överst som skriver ut alla. Sist leder sidan till förra och nästa enhet på nivån och tillbaka till nivån
+// på metodens sida. Bladen ritas av Metod.astro, som på metodens sida, så att formerna är desamma.
+export async function getStaticPaths() {
+  const metoder = await publicerade('stodundervisning');
+  return metoder.flatMap((m) => {
+    const bank = bankAv(m.data);
+    return bank ? bank.enheter.map((e) => ({ params: { id: m.id, enhet: e.slug }, props: { m, e } })) : [];
+  });
+}
+
+const { m, e: given } = Astro.props as { m: Awaited<ReturnType<typeof publicerade<'stodundervisning'>>>[number]; e: Bankenhet };
+const d = m.data;
+const bank = bankAv(d)!;
+// Enheten ur sidans egen bank, så att nivåerna och grannarna är samma föremål.
+const e = bank.enheter.find((x) => x.slug === given.slug)!;
+const { forra, nasta, niva } = grannar(bank, e);
+const farg = nivaFarger(d, bank)[niva.namn];
+const versal = (s: string) => s.charAt(0).toLocaleUpperCase('sv') + s.slice(1);
+const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/${e.slug}`;
+const bladen = [...e.fore, e.ri, ...e.efter];
+const ramarna = d.ramar!.ramar;
+const bladNamn = (ri: number) => (ri === e.ri ? versal(bank.ord.bestamd) : ramarna[ri].rubrik.split(':')[0]);
+const allaBlad = bladen.length === 2 ? 'båda sidorna' : `alla ${['', 'en', 'två', 'tre', 'fyra', 'fem'][bladen.length] ?? bladen.length} sidorna`;
+const nivanAdress = `/stodundervisning/${m.id}#${niva.oversikt !== undefined ? `ram-${niva.oversikt + 1}` : `niva-${niva.slug}`}`;
+const numrerade = niva.enheter.filter((x) => x.nr !== undefined).length;
+const kicker = e.nr !== undefined ? `${versal(bank.ord.en)} ${e.nr} av ${numrerade}` : versal(e.l.vad);
+// Beskrivningen: enhetens första stycke, kortat vid ett ord.
+const forsta = e.l.stycken[0].replace(/\s+/g, ' ');
+const beskrivning = `${niva.namn}, ${e.l.vad} i ${d.titel}: ${forsta.length > 120 ? `${forsta.slice(0, forsta.lastIndexOf(' ', 118))} …` : forsta}`;
+const lank = (x: Bankenhet) => `${x.nr !== undefined ? `${x.nr}. ` : ''}${x.l.titel}`;
+---
+
+<Base title={`${e.l.titel} · ${niva.namn}, ${e.l.vad} · ${d.titel}`} description={beskrivning} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
+  <article class="metod enhet" style={`--niva: ${farg}`}>
+    <EjBryt>
+    <header class="enhet-huvud">
+      <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${m.id}`}>{d.titel}</a> · <a href={nivanAdress}>{niva.namn}</a></p>
+      <p class="enhet-kicker"><span class="enhet-niva">{niva.namn}</span> {kicker}</p>
+      <h1>{e.l.titel}</h1>
+      <nav class="enhet-blad-nav" aria-label="Sidorna">
+        <ul>{bladen.map((ri) => <li><a href={`#blad-${ri + 1}`}>{bladNamn(ri)}</a></li>)}</ul>
+      </nav>
+      <p class="enhet-knappar bara-js"><button type="button" class="knapp" data-skriv-ut-blad="" data-goatcounter-click={`utskrift:${m.id}/${e.slug}`} data-goatcounter-title={`${d.titel}: ${niva.namn}, ${e.l.vad}, ${allaBlad}`}>Skriv ut {allaBlad}</button></p>
+    </header>
+    <Metod d={d} id={m.id} enhet={e} />
+    <nav class="enhet-fot" aria-label={`Fler ${bank.ord.flera} på nivån ${niva.namn}`}>
+      {forra ? <a class="enhet-forra" href={enhetAdress(m.id, forra)}><span class="enhet-fot-etikett">Förra</span>{lank(forra)}</a> : <span></span>}
+      <a class="enhet-alla" href={nivanAdress}>Alla {bank.ord.alla} på nivån {niva.namn}</a>
+      {nasta ? <a class="enhet-nasta" href={enhetAdress(m.id, nasta)}><span class="enhet-fot-etikett">Nästa</span>{lank(nasta)}</a> : <span></span>}
+    </nav>
+    <p class="upphov">{UPPHOV}. Ur {d.titel}, {niva.namn}, {e.l.vad}. Får användas i undervisning. {adress}</p>
+    </EjBryt>
+  </article>
+  <div class="tryck-fot" aria-hidden="true">{UPPHOV} · {adress}</div>
+</Base>
+
+<script>
+  // Knapparna skriver ut alla blad (data-skriv-ut-blad tom) eller bara ett (dess ram-nummer): de andra bladen göms medan
+  // utskriften pågår. Bilderna hämtas först när läsaren närmar sig dem, så knappen väntar in dem, högst tre sekunder, som
+  // knappen Skriv ut på metodens sida (Nedladdning.astro).
+  const bilder = () => [...document.querySelectorAll<HTMLImageElement>('img[data-utskriftsbild]')];
+  const hamta = () => Promise.all(bilder().map((b) => {
+    b.loading = 'eager';
+    return b.naturalWidth > 0 ? undefined : new Promise((klar) => { b.addEventListener('load', klar, { once: true }); b.addEventListener('error', klar, { once: true }); });
+  }));
+  window.addEventListener('beforeprint', () => { hamta(); });
+  const blad = [...document.querySelectorAll<HTMLElement>('.enhet-blad')];
+  window.addEventListener('afterprint', () => { for (const b of blad) b.classList.remove('utskrift-gomd'); });
+  for (const knapp of document.querySelectorAll<HTMLButtonElement>('[data-skriv-ut-blad]')) {
+    knapp.addEventListener('click', async () => {
+      const valt = knapp.dataset.skrivUtBlad;
+      for (const b of blad) b.classList.toggle('utskrift-gomd', !!valt && b.dataset.blad !== valt);
+      await Promise.race([hamta(), new Promise((klar) => setTimeout(klar, 3000))]);
+      window.print();
+    });
+  }
+</script>
