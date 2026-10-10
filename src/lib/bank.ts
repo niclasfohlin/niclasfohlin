@@ -140,12 +140,18 @@ export function bankfilensRamar(b: Bank, f: Pick<Bankfil, 'niva' | 'medFoljesido
 
 /** Enheten som en cell i nivåns översikt pekar på: "1. Äpplena", "Kartläggning före: Bland vagnarna" eller titeln. */
 export function enhetICell(n: Bankniva, cell: string): Bankenhet | undefined {
-  const c = cell.trim().toLowerCase();
+  const c = cell.replace(/\s+/g, ' ').trim().toLowerCase();
   return n.enheter.find((e) => {
     const t = e.l.titel.toLowerCase();
     return c === t || (e.nr !== undefined && c === `${e.nr}. ${t}`) || c === `${e.l.vad}: ${t}`.toLowerCase();
   });
 }
+
+/** Raden om bankens filer och sidor, i beskrivningen efter nivåerna: i Word (metodBarn) och i sidans utskrift (Bank.astro). */
+export const bankRad = (b: Bank, adress: string) => {
+  const alla = b.ord.alla.charAt(0).toLocaleUpperCase('sv') + b.ord.alla.slice(1);
+  return `${alla} står i egna filer, en för varje nivå och en för alla nivåer: bara ${b.ord.alla}, eller ${b.ord.alla} med ${foljeText(b)}. De finns på ${adress}, där varje ${b.ord.en} också har en egen sida.`;
+};
 
 /** Förra och nästa enhet på samma nivå. */
 export function grannar(b: Bank, e: Bankenhet): { forra?: Bankenhet; nasta?: Bankenhet; niva: Bankniva; plats: number } {

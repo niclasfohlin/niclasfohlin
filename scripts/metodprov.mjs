@@ -218,6 +218,50 @@ if (bilder) {
         wordPdfSync(join(rot, 'dist/stodundervisning', `${id}.docx`), wordPdf, { timeout: 180000 });
         wordSidor = execFileSync('pdftotext', ['-enc', 'UTF-8', wordPdf, '-'], { encoding: 'utf8' }).split('\f').map((t) => t.replace(/\s+/g, ' '));
       } catch { console.log('  obs  Word eller pdftotext saknas, Word-filens sidor är inte prövade'); }
+      // Banken (src/lib/bank.ts, METODER.md under Banken): enheterna och deras följesidor står på enheternas egna sidor och i
+      // bankens filer, inte i metodens utskrift eller i filen med allt. Varje enhets sida skrivs ut, och bankens fil med alla
+      // nivåer och följesidorna görs till pdf av Word, och bladen nedan prövas där. Den första enhetens sida tas också som
+      // skärmbild, enhet-desktop.png och enhet-mobil.png.
+      const bankfil = (() => { try { return JSON.parse(readFileSync(join(rot, 'dist/stodundervisning/bankfiler.json'), 'utf8')).find((f) => f.metod === id && /-alla-med-lararens-sida$/.test(f.namn)); } catch { return undefined; } })();
+      let bankUtskrift;
+      let bankWord;
+      if (bankfil) {
+        const enheter = readdirSync(join(rot, 'dist/stodundervisning', id), { withFileTypes: true })
+          .filter((x) => x.isDirectory() && !['lathund', 'serier'].includes(x.name) && existsSync(join(rot, 'dist/stodundervisning', id, x.name, 'index.html')))
+          .map((x) => x.name);
+        try {
+          bankUtskrift = [];
+          for (const e of enheter) {
+            tryck(`${url}/${e}`, 'enhet-utskrift.pdf');
+            bankUtskrift.push(...execFileSync('pdftotext', ['-enc', 'UTF-8', join(mapp, 'enhet-utskrift.pdf'), '-'], { encoding: 'utf8' }).split('\f').map((t) => t.replace(/\s+/g, ' ')));
+          }
+          if (enheter.length) { bild(`${url}/${enheter[0]}`, 'enhet-desktop.png'); bild(`${url}/${enheter[0]}`, 'enhet-mobil.png', ['--mobil']); }
+          // Metodens sida med den första nivån utfälld, så att granskningen ser översikten och nivåns filer i telefonen.
+          bild(url, 'bank-mobil.png', ['--mobil', '--js', "document.querySelector('details.bank-niva').open = true", '--fran', '.bank', '--hojd', '5000']);
+          ok(`banken: ${enheter.length} sidor med en enhet var, utskrivna (${bankUtskrift.filter((t) => t.trim()).length} blad), och skärmbilder av ${enheter[0]}`);
+        } catch { bankUtskrift = undefined; console.log('  obs  Chrome eller pdftotext saknas, enheternas sidor är inte utskrivna'); }
+        try {
+          const bpdf = join(mapp, 'bank-word.pdf');
+          wordPdfSync(join(rot, 'dist/stodundervisning', `${bankfil.namn}.docx`), bpdf, { timeout: 600000 });
+          bankWord = execFileSync('pdftotext', ['-enc', 'UTF-8', bpdf, '-'], { encoding: 'utf8' }).split('\f').map((t) => t.replace(/\s+/g, ' '));
+          ok(`banken: ${bankfil.namn}.docx är ${bankWord.length - 1} sidor i Word`);
+        } catch { console.log('  obs  Word eller pdftotext saknas, bankens Word-fil är inte prövad'); }
+        // Bladet Två lösningar (src/lib/problemform.ts): titeln och den sista frågan på exakt ett blad, i båda.
+        const tva = (metod.ramar?.ramar ?? []).filter((r) => /^Två lösningar: /.test(String(r.rubrik)) && r.listor?.[1]?.rubrik === 'Frågorna');
+        if (tva.length) {
+          const norm = (s) => String(s).normalize('NFC').toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
+          const nycklar = tva.map((r) => ({ rubrik: r.rubrik, delar: [norm(r.listor[0].rubrik), norm(String(r.listor[1].rader.at(-1)[0]).replace(/^\d+\.\s*/, ''))] }));
+          for (const [sidor, var_] of [[bankUtskrift, 'enheternas utskrift'], [bankWord, 'bankens Word-fil']]) {
+            if (!sidor) continue;
+            const ns = sidor.map(norm);
+            const inteEn = nycklar.filter((k) => ns.filter((s) => k.delar.every((x) => s.includes(x))).length !== 1).map((k) => k.rubrik);
+            inteEn.length ? nej(`${var_}: ${inteEn.length} av ${tva.length} blad Två lösningar står inte hela på ett blad (${inteEn.slice(0, 3).join('; ')}${inteEn.length > 3 ? ' …' : ''})`) : ok(`${var_}: ${tva.length} blad Två lösningar, ett helt blad var`);
+          }
+        }
+      }
+      const tryckSidor = () => bankUtskrift ?? execFileSync('pdftotext', ['-enc', 'UTF-8', join(mapp, 'utskrift.pdf'), '-'], { encoding: 'utf8' }).split('\f');
+      const tryckNamn = bankUtskrift ? 'enheternas utskrift' : 'utskriften';
+      const wordNamn = bankWord ? 'bankens Word-fil' : 'Word';
       if (metod.film) {
         const sista = metod.film.stillbilder[3].text;
         const sida1 = (pdf) => execFileSync('pdftotext', ['-enc', 'UTF-8', '-f', '1', '-l', '1', pdf, '-'], { encoding: 'utf8' }).replace(/\s+/g, ' ');
@@ -273,9 +317,14 @@ if (bilder) {
         // de korta orden (Kaninen i gympapåsen i Texttyp: Berättande text, 2026-10-09, där veckans sida räknades som en
         // andra sida med texten).
         const sistaOrd = (s) => String(s).split(/\s+/).map(norm).filter(Boolean).slice(-6);
+        // Problemets sida (src/lib/problemform.ts) har frågan i en ruta som heter Frågan eller Frågorna; lärarens sida till
+        // problemet har samma problem och frågor överst, så rutans namn före den första frågan skiljer bladen åt.
+        const arProblemsida = (ram) => /^[^,:]+, problem\b/i.test(String(ram.rubrik)) && (metod.pabordet ?? []).some((b) => b.efter === `ram: ${ram.rubrik}`);
         const nycklar = lastexter.map((ram) => {
           const [text, fragor] = ram.listor;
-          return { rubrik: ram.rubrik, delar: [norm(text.rubrik), ...sistaOrd(text.rader.at(-1)[0]), ...sistaOrd(fragor.rader.at(-1)[0]), norm(String(fragor.rader.at(-1)[0]).replace(/^\d+\.\s*/, ''))] };
+          const forsta = String(fragor.rader[0][0]).replace(/^\d+\.\s*/, '');
+          const ruta = arProblemsida(ram) ? [norm(fragor.rader.length > 1 ? `Frågorna 1. ${forsta}` : `Frågan ${forsta}`)] : [];
+          return { rubrik: ram.rubrik, delar: [norm(text.rubrik), ...sistaOrd(text.rader.at(-1)[0]), ...sistaOrd(fragor.rader.at(-1)[0]), norm(String(fragor.rader.at(-1)[0]).replace(/^\d+\.\s*/, '')), ...ruta] };
         });
         const prova = (sidor, var_) => {
           const ns = sidor.map(norm);
@@ -286,8 +335,8 @@ if (bilder) {
           else if (delade.length) nej(`${var_}: två lästexter på samma sida (sidan ${delade.join(', ')})`);
           else ok(`${var_}: ${lastexter.length} lästexter, en hel sida var`);
         };
-        try { prova(execFileSync('pdftotext', ['-enc', 'UTF-8', join(mapp, 'utskrift.pdf'), '-'], { encoding: 'utf8' }).split('\f'), 'utskriften'); } catch { console.log('  obs  pdftotext saknas, boksidorna i utskriften är inte prövade'); }
-        if (wordSidor) prova(wordSidor, 'Word');
+        try { prova(tryckSidor(), tryckNamn); } catch { console.log('  obs  pdftotext saknas, boksidorna i utskriften är inte prövade'); }
+        if (bankWord ?? wordSidor) prova(bankWord ?? wordSidor, wordNamn);
       }
       // Lärarens sidor (riggens ramar som heter Lärarens sida): varje sida står hel på ett blad, med rubriken och det sista
       // fältet på samma sida, i utskriften och i Word (granskningen 2026-10-01: i utskriften delades de på två eller tre).
@@ -300,8 +349,8 @@ if (bilder) {
           const inteEn = nycklar.filter((k) => ns.filter((s) => k.delar.every((x) => s.includes(x))).length !== 1).map((k) => k.rubrik);
           inteEn.length ? nej(`${var_}: ${inteEn.length} av ${lararsidor.length} lärarsidor står inte hela på ett blad (${inteEn.slice(0, 3).join('; ')}${inteEn.length > 3 ? ' …' : ''})`) : ok(`${var_}: ${lararsidor.length} lärarsidor, ett helt blad var`);
         };
-        try { prova(execFileSync('pdftotext', ['-enc', 'UTF-8', join(mapp, 'utskrift.pdf'), '-'], { encoding: 'utf8' }).split('\f'), 'utskriften'); } catch { console.log('  obs  pdftotext saknas, lärarsidorna i utskriften är inte prövade'); }
-        if (wordSidor) prova(wordSidor, 'Word');
+        try { prova(tryckSidor(), tryckNamn); } catch { console.log('  obs  pdftotext saknas, lärarsidorna i utskriften är inte prövade'); }
+        if (bankWord ?? wordSidor) prova(bankWord ?? wordSidor, wordNamn);
       }
   console.log('       Läs bilderna som en lärare som ska köra passet i morgon: fet stil betyder rubrik, inget bryts så att det läses fel,');
   console.log('       likvärdiga saker ser likadana ut, det läraren behöver kommer först. Dela höga bilder i bitar innan du läser dem.');

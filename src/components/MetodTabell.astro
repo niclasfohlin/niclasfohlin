@@ -12,7 +12,10 @@
 // lank: första kolumnens celler som leder till en sida, som problemen i nivåns översikt i en bank (src/lib/bank.ts).
 interface KartaLankar { vecka?: (rad: string[]) => string | undefined; blad: (namn: string) => string | undefined; namn: Set<string>; nivaer: Niva[] }
 interface Props { kolumner: string[]; rader: string[][]; bredder?: string[]; klass?: string; radrubrik?: boolean; karta?: KartaLankar; lank?: (cell: string) => string | undefined }
-const { kolumner, rader, bredder = [], klass = '', radrubrik = true, karta, lank } = Astro.props;
+const { kolumner, rader: givna, bredder = [], klass = '', radrubrik = true, karta, lank } = Astro.props;
+// Ett nummer först i första kolumnen står kvar med ordet efter ("4. Chokladbollarna"), som i Word (rubrikTabell i
+// metoddocx.ts); numret stod annars ensamt på en rad i en smal kolumn (granskningen 2026-10-10).
+const rader = givna.map((r) => r.map((c, i) => (i === 0 ? String(c).replace(/^(\d+\.) (?=\S)/, '$1\u00a0') : c)));
 import { ejBryt } from '../lib/metod';
 import { bladDelar } from '../lib/karta';
 import { skyltText, type Niva } from '../lib/nivaer';

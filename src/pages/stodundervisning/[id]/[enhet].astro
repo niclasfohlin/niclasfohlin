@@ -33,14 +33,14 @@ const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/${e.s
 const bladen = [...e.fore, e.ri, ...e.efter];
 const ramarna = d.ramar!.ramar;
 const bladNamn = (ri: number) => (ri === e.ri ? versal(bank.ord.bestamd) : ramarna[ri].rubrik.split(':')[0]);
-const allaBlad = bladen.length === 2 ? 'båda sidorna' : `alla ${['', 'en', 'två', 'tre', 'fyra', 'fem'][bladen.length] ?? bladen.length} sidorna`;
+const allaBlad = bladen.length === 1 ? 'sidan' : bladen.length === 2 ? 'båda sidorna' : `alla ${['', 'en', 'två', 'tre', 'fyra', 'fem'][bladen.length] ?? bladen.length} sidorna`;
 const nivanAdress = `/stodundervisning/${m.id}#${niva.oversikt !== undefined ? `ram-${niva.oversikt + 1}` : `niva-${niva.slug}`}`;
 const numrerade = niva.enheter.filter((x) => x.nr !== undefined).length;
 const kicker = e.nr !== undefined ? `${versal(bank.ord.en)} ${e.nr} av ${numrerade}` : versal(e.l.vad);
 // Beskrivningen: enhetens första stycke, kortat vid ett ord.
 const forsta = e.l.stycken[0].replace(/\s+/g, ' ');
 const beskrivning = `${niva.namn}, ${e.l.vad} i ${d.titel}: ${forsta.length > 120 ? `${forsta.slice(0, forsta.lastIndexOf(' ', 118))} …` : forsta}`;
-const lank = (x: Bankenhet) => `${x.nr !== undefined ? `${x.nr}. ` : ''}${x.l.titel}`;
+const lank = (x: Bankenhet) => (x.nr !== undefined ? `${x.nr}. ${x.l.titel}` : `${versal(x.l.vad)}: ${x.l.titel}`);
 ---
 
 <Base title={`${e.l.titel} · ${niva.namn}, ${e.l.vad} · ${d.titel}`} description={beskrivning} typ="article" tryckText={`${UPPHOV} · ${adress}`}>

@@ -467,7 +467,11 @@ const meny = [
           {d.urval.krav.map((x) => <div><strong>{x.rubrik}</strong><span>{x.text}</span></div>)}
         </div>
       </div>
-      {d.ramar && <p class="m-efter"><a href="#ramar">{d.ramar.rubrik}</a> ligger efter grunden, och som egna sidor att kopiera i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>}
+      {/* I en bank (src/lib/bank.ts) står enheterna inte i planeringsmallarna utan på egna sidor och i bankens filer
+          (granskningen 2026-10-10, P1: raden skickade läraren till en fil där problemen inte fanns). */}
+      {d.ramar && (banken
+        ? <p class="m-efter"><a href="#ramar">{d.ramar.rubrik}</a> ligger efter grunden, nivå för nivå, där varje {banken.ord.en} har en egen sida. {banken.ord.alla.charAt(0).toLocaleUpperCase('sv') + banken.ord.alla.slice(1)} att skriva ut finns i egna filer, en för varje nivå, i tabellen under Ladda ner och skriv ut.</p>
+        : <p class="m-efter"><a href="#ramar">{d.ramar.rubrik}</a> ligger efter grunden, och som egna sidor att kopiera i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>)}
       <Filmruta filmer={vid({ avsnitt: 'urval' })} titel={d.titel} />
     </section>
   )}
@@ -632,13 +636,14 @@ const meny = [
             </div>
           )}
           {ram.text.map((s) => <p>{s}</p>)}
-          {/* och de två lösningarna bredvid varandra, med namnen under, som eleverna får dem på bladet Två lösningar. */}
+          {/* och de två lösningarna bredvid varandra, med namnet över varje bild, som på bladet Två lösningar: under bilderna
+              lästes "Lösning A" i telefonen som rubrik på B (granskningen 2026-10-10, P1). */}
           {problemet && problemet.bilder.length === 2 && (
             <div class="m-bildpar">
               {problemet.bilder.map((b, k) => (
                 <figure>
-                  <a href={b.adress} class="bild-lank" title="Öppna bilden i full storlek"><img src={b.adress} alt={bildensAlt(b)} width={PABORDET_MATT.bredd} height={PABORDET_MATT.hojd} loading="lazy" decoding="async" data-utskriftsbild /></a>
                   <figcaption>{problemet.namn[k] ?? ''}</figcaption>
+                  <a href={b.adress} class="bild-lank" title="Öppna bilden i full storlek"><img src={b.adress} alt={bildensAlt(b)} width={PABORDET_MATT.bredd} height={PABORDET_MATT.hojd} loading="lazy" decoding="async" data-utskriftsbild /></a>
                 </figure>
               ))}
             </div>
@@ -702,6 +707,7 @@ const meny = [
                   ))}
                 </div>
               )}
+              {d.elevblad[ram.rubrik] && <p class="m-efter">Bladet finns i full storlek i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a>.</p>}
             </>
           ) : ramArTom(ram)
             ? (d.elevblad[ram.rubrik]

@@ -26,7 +26,7 @@ import { arTarning, harBoktypsnitt, sagobladAv, sagoUpphov, TARNING_UPPHOV, tarn
 import WORDSKALOR from '../data/lathund-word.json';
 import TECKENBREDD from '../data/teckenbredd.json';
 import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, FORMLUFT, FORMRAD_PT, LIGGANDE_BOK, LIGGANDE_BREDD, PROBLEMLUFT, PROBLEMTITEL_PT, RAMHOJD, TITEL_PT, boksidansMatt, losningarMatt, problemMatt, strukturMatt, textparMatt } from './boksida';
-import { bankAv, bankfilensRamar, foljeText, type Bankfil } from './bank';
+import { bankAv, bankfilensRamar, bankRad, type Bankfil } from './bank';
 import { losningarnasNiva, losningarnasNot, problemformer } from './problemform';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
@@ -336,6 +336,9 @@ export const arMellanrubrik = (r: string[]) => r.every((c) => c.trim() && c === 
 // kolumnen länkar till veckans bokmärke och bladens namn till räknebladens bokmärken, som på sidan.
 interface KartaWord { vecka?: (rad: string[]) => string | undefined; blad: (namn: string) => string | undefined; namn: Set<string>; nivaer: Niva[] }
 function rubrikTabell(kolumner: string[], rader: string[][], givna: number[], o: { fetAndra?: boolean; huvudFyll?: string; hallIhop?: boolean; hallIhopEfter?: boolean; radrubrik?: boolean; storlek?: number; tomHojd?: number; ramad?: boolean; karta?: KartaWord } = {}): Barn[] {
+  // Ett nummer först i första kolumnen står kvar med ordet efter, som på sidan (MetodTabell.astro): "4." stod annars ensamt
+  // på en rad över "Chokladbollarna" (granskningen 2026-10-10).
+  rader = rader.map((r) => r.map((c, i) => (i === 0 ? String(c).replace(/^(\d+\.) (?=\S)/, '$1\u00a0') : c)));
   // ramad: ett blad att bygga på (talsortsmattan), fyra ramade fält med ljust namnband, som i PowerPoint.
   const ramad = !!o.ramad;
   const huvudFyll = o.huvudFyll ?? FARG.huvud;
@@ -1016,7 +1019,8 @@ function problemRuta(l: Lastext): Barn[] {
   ];
   return [tabell([rad([cell(barn, { bredd: BREDD, fyll: FARG.ljus, kanter: { left: kant(FARG.huvud, 24) }, tat: true })])], [BREDD]), avstand(120)];
 }
-// De två lösningarna bredvid varandra, utan kanter, med namnet under varje bild, som eleverna får dem på bladet Två lösningar.
+// De två lösningarna bredvid varandra, utan kanter, med namnet över varje bild, som på bladet Två lösningar och på sidan
+// (granskningen 2026-10-10: under bilderna lästes namnet i telefonen som rubrik på bilden under).
 function bildpar(bilder: PaBordet[], namn: string[]): Barn[] {
   const ingen = { top: INGEN, bottom: INGEN, left: INGEN, right: INGEN };
   const mellan = 240;
@@ -1024,8 +1028,8 @@ function bildpar(bilder: PaBordet[], namn: string[]): Barn[] {
   const bredd = Math.round(((w / 20) * 4) / 3);
   const hojd = Math.round((bredd * PABORDET_MATT.hojd) / PABORDET_MATT.bredd);
   const bildCell = (k: number) => new TableCell({ width: { size: w, type: WidthType.DXA }, borders: ingen, margins: { top: 0, bottom: 60, left: 0, right: 0 }, children: [
-    new Paragraph({ spacing: { before: 0, after: 40 }, keepNext: true, children: [bildRun(bilder[k].adress, bredd, bildensAlt(bilder[k]), hojd)] }),
-    new Paragraph({ spacing: { before: 0, after: 0 }, children: [run(namn[k] ?? '', { storlek: 18, farg: FARG.svag })] }),
+    new Paragraph({ spacing: { before: 0, after: 40 }, keepNext: true, children: [run(namn[k] ?? '', { storlek: 18, farg: FARG.svag })] }),
+    new Paragraph({ spacing: { before: 0, after: 0 }, children: [bildRun(bilder[k].adress, bredd, bildensAlt(bilder[k]), hojd)] }),
   ] });
   const tom = new TableCell({ width: { size: mellan, type: WidthType.DXA }, borders: ingen, children: [new Paragraph({ spacing: { after: 0 } })] });
   return [new Table({ width: { size: BREDD, type: WidthType.DXA }, columnWidths: [w, mellan, BREDD - w - mellan], layout: TableLayoutType.FIXED,
@@ -1566,7 +1570,7 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
     const tvaSidor = plats !== undefined && !!bildtext && plats - bildtextensHojd(bildtext) < VECKOBILD_MINST * veckobildensHojd();
     return [
       ...(ram.lektioner && !(o.paNySida && nr === 0) ? [new Paragraph({ pageBreakBefore: true, spacing: { before: 0, after: 0, line: 240 }, run: { size: 2, font: 'Calibri' } })] : []),
-      ...ramFaltTabell(del.falt, { rubrik: korta || ram.listor ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum, hojder: o.blad ? del.falt.map((f) => o.blad![f.rubrik]) : undefined, elevblad: !!o.blad, tat: ram.lektioner || o.tat, bokmarke: ram.lektioner && o.karta ? o.karta.vecka(forstaLed(del.rubrik)) : undefined, luftEfter: rad && !tvaSidor ? VECKANS_LUFT : undefined }),
+      ...ramFaltTabell(del.falt, { rubrik: (korta || ram.listor) && !del.rubrik.includes(ram.rubrik) ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum, hojder: o.blad ? del.falt.map((f) => o.blad![f.rubrik]) : undefined, elevblad: !!o.blad, tat: ram.lektioner || o.tat, bokmarke: ram.lektioner && o.karta ? o.karta.vecka(forstaLed(del.rubrik)) : undefined, luftEfter: rad && !tvaSidor ? VECKANS_LUFT : undefined }),
       ...(tvaSidor ? [luft(LUFT_RAD, true, { nySida: true })] : []),
       // Veckans rad ur kartan: talen och bladen för varje nivå, med bladens namn som länkar.
       ...(rad && o.karta?.tabell ? (() => { const k = o.karta!.tabell!.kolumner.slice(1); return rubrikTabell(k, [rad.slice(1)], k.map(() => Math.floor(BREDD / k.length)), { radrubrik: false, hallIhop: true, hallIhopEfter: true, storlek: 19, karta: { ...o.karta!.lankar, vecka: undefined } }); })() : []),
@@ -2096,11 +2100,6 @@ function lararsidaBarn(ram: Ram, larare: { l: Lastext; bilder: PaBordet[]; namn:
     ...ramBarn({ ...ram, text: [] }, { ...val, tat: true }),
   ];
 }
-// Raden i beskrivningen om bankens filer (src/lib/bank.ts), efter nivåernas översikter.
-const bankRad = (b: NonNullable<ReturnType<typeof bankAv>>, adress: string) => {
-  const alla = b.ord.alla.charAt(0).toLocaleUpperCase('sv') + b.ord.alla.slice(1);
-  return `${alla} står i egna filer, en för varje nivå och en för alla nivåer: bara ${b.ord.alla}, eller ${b.ord.alla} med ${foljeText(b)}. De finns på ${adress}, där varje ${b.ord.en} också har en egen sida.`;
-};
 
 function metodBarn(post: MetodPostISerie, bas: string): Flod {
   const d = post.data;

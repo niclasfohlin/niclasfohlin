@@ -64,7 +64,8 @@ async function innehallHash(docx) {
   const bilder = [];
   // Bara bildernas svg: Word ritar dem, och reservbilderna (png) görs ur dem vid bygget, med verktyg som kan skilja i
   // bildpunkter mellan datorn och Netlify.
-  for (const namn of Object.keys(zip.files)) if (/^word\/media\/.+\.svg$/i.test(namn)) bilder.push(sha(await zip.file(namn).async('uint8array')));
+  // Radsluten räknas inte: en svg-fil som git har checkat ut med CRLF på Windows är samma bild som på Netlify.
+  for (const namn of Object.keys(zip.files)) if (/^word\/media\/.+\.svg$/i.test(namn)) bilder.push(sha((await zip.file(namn).async('string')).replace(/\r\n/g, '\n')));
   return sha([typsnittHash, ...delar, ...bilder.sort()].join('\n'));
 }
 const pdfFor = (namn) => join(pdfMapp, `${namn}.pdf`);

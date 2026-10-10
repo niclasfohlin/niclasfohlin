@@ -111,6 +111,8 @@ h3 { font-size: 1.15rem; }
 .rop p { margin: 0 0 0.75em; }
 .knapp { display: inline-flex; align-items: center; min-height: 2.75rem; background: var(--farg-accent); color: #fff; font-family: var(--typsnitt-ui); font-weight: 600; text-decoration: none; padding: 0.5rem 1.15rem; border-radius: 6px; }
 .knapp:hover { color: #fff; background: var(--farg-accent-mork); }
+/* En knapp som är en <button> (Skriv ut alla tre sidorna på en enhets sida) får annars webbläsarens kant och mindre text. */
+button.knapp { border: 0; font-size: 1rem; line-height: inherit; cursor: pointer; }
 
 /* Om-sidan: porträtt bredvid ingressen, sedan tabeller för bakgrund och utbildning. */
 .om-huvud { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem 2.5rem; align-items: end; margin-bottom: 2rem; max-width: var(--matt-bredd); }
@@ -767,7 +769,7 @@ button.lank:hover { color: var(--farg-accent); }
 .m-problemruta p:last-child { margin-bottom: 0; }
 .m-bildpar { display: grid; grid-template-columns: 1fr; gap: 1rem; margin: 1rem 0; }
 .m-bildpar figure { margin: 0; }
-.m-bildpar figcaption { font-family: var(--typsnitt-ui); font-size: 0.85rem; color: var(--farg-text-svag); margin: 0.3rem 0 0; }
+.m-bildpar figcaption { font-family: var(--typsnitt-ui); font-size: 0.85rem; color: var(--farg-text-svag); margin: 0 0 0.3rem; }
 @media (min-width: 34rem) { .m-bildpar { grid-template-columns: 1fr 1fr; } }
 /* Banken (src/lib/bank.ts, Bank.astro): en nivå per rad som fälls ut, med nivåns färg i kanten, översikten med länkar till
    enheternas sidor och nivåns filer sist. */
@@ -784,7 +786,7 @@ button.lank:hover { color: var(--farg-accent); }
 .bank-oversikt { margin: 0; }
 .bank-oversikt > h3 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .bank-lista { margin: 0.75rem 0; padding-left: 1.4rem; }
-.m-tabell-lank { font-weight: 600; }
+.bank-rad { display: none; }
 .bank-filer { margin: 1.25rem 0 0; padding: 0.75rem 0 0; border-top: 1px solid var(--farg-kant); font-family: var(--typsnitt-ui); font-size: 0.95rem; }
 .bank-filer-rubrik { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); margin: 0 0 0.5rem; }
 .bankfiler-niva { margin: 0; }
@@ -794,7 +796,7 @@ button.lank:hover { color: var(--farg-accent); }
 .bankfiler col.nivakol { width: 7.5rem; }
 .bankfiler caption { caption-side: top; text-align: left; font-weight: 700; margin: 0 0 0.35rem; }
 .bankfiler th, .bankfiler td { padding: 0.35rem 0.5rem 0.35rem 0; text-align: left; vertical-align: middle; border-top: 1px solid var(--farg-kant); }
-.bankfiler thead th, .bankfiler thead td { border-top: 0; font-size: 0.8rem; font-weight: 600; line-height: 1.3; color: var(--farg-text-svag); vertical-align: bottom; }
+.bankfiler thead th, .bankfiler thead td { border-top: 0; font-size: 0.85rem; font-weight: 600; line-height: 1.3; color: var(--farg-text); vertical-align: bottom; }
 .bankfiler tbody th { font-weight: 600; white-space: nowrap; }
 .bankfiler-niva-namn::before { content: ''; display: inline-block; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--niva); margin-right: 0.4rem; }
 .bankfiler .filval { display: inline-flex; flex-wrap: nowrap; width: auto; }
@@ -825,6 +827,8 @@ button.lank:hover { color: var(--farg-accent); }
 .enhet-nasta { text-align: right; }
 .enhet-alla { align-self: center; text-align: center; }
 .enhet-fot-etikett { font-size: 0.8rem; font-weight: 400; color: var(--farg-text-svag); }
+/* Upphovet sist, som på metodens sida; adressen är ett långt ord och får brytas, så att sidan inte rullar i sidled i telefonen. */
+.enhet .upphov { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); overflow-wrap: anywhere; }
 @media (max-width: 34rem) {
   .enhet-fot { grid-template-columns: 1fr 1fr; }
   .enhet-alla { grid-column: 1 / -1; grid-row: 2; }
@@ -1791,11 +1795,12 @@ html.js .bara-js { display: inline-block; }
   .m-problemruta { font-size: 9pt; line-height: 1.35; padding: 5pt 8pt; margin: 0 0 6pt; }
   .m-problemruta .kicker { font-size: 8pt; margin: 0 0 2pt; }
   .m-bildpar { grid-template-columns: 1fr 1fr; gap: 12pt; margin: 4pt 0 8pt; break-inside: avoid; }
-  .m-bildpar figcaption { font-size: 8pt; margin: 2pt 0 0; }
+  .m-bildpar figcaption { font-size: 8pt; margin: 0 0 2pt; }
   /* En enhets sida: bara bladen, och bara det blad som knappen valde. */
   .enhet-huvud, .enhet-bladhuvud, .enhet-fot, .enhet .upphov, .utskrift-gomd { display: none !important; }
   .enhet-blad { margin: 0; }
   .bank-niva > summary, .bank-filer { display: none; }
+  .bank-rad { display: block; }
   /* Nivåerna står utfällda också när utskriften görs utan skript (Bank.astro fäller ut dem vid beforeprint). */
   .bank-niva::details-content { content-visibility: visible; display: block; }
   .bank-niva { border: 0; background: none; }

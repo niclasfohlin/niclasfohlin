@@ -8,7 +8,9 @@
 // utfällda, utan länkar och filer, så att beskrivningen har översikterna, som Word-filen med allt.
 import MetodTabell from './MetodTabell.astro';
 import Bankfiler from './Bankfiler.astro';
-import { enhetAdress, enhetICell, type Bank } from '../lib/bank';
+import { bankRad, enhetAdress, enhetICell, type Bank } from '../lib/bank';
+import { metodAdress } from '../lib/metod';
+import { site } from '../data/site';
 import { ejBryt } from '../lib/metod';
 import type { MetodData } from '../lib/metod';
 interface Props { d: MetodData; id: string; bank: Bank; farger: Record<string, string>; ankare: (ri: number) => string; friKlass: (t: { kolumner: string[]; rader: string[][] }) => string }
@@ -64,6 +66,9 @@ const antal = (n: number) => `${n === 1 ? 'ett' : n} ${n === 1 ? bank.ord.en : b
       </details>
     );
   })}
+  {/* I utskriften och i Word (metodBarn) en rad om var enheterna står, eftersom filerna och sidorna inte syns på papper
+      (granskningen 2026-10-10, P2). */}
+  <p class="m-efter bank-rad">{bankRad(bank, metodAdress(site.url, id).replace(/^https?:\/\//, ''))}</p>
 </div>
 
 <script>
