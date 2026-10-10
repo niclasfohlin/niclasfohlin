@@ -22,8 +22,9 @@ MAPP = os.path.join(ROT, 'public', 'fonts', 'ljudlek-elev')
 # som elevmaterialet i matematiken och på bildkorten behöver.
 TECKEN = list(range(0x20, 0x7F)) + [0xA0, 0xC4, 0xC5, 0xD6, 0xE4, 0xE5, 0xF6, 0xC9, 0xE9, 0xDC, 0xFC, 0x2013, 0x2014, 0x2018, 0x2019, 0x201C, 0x201D, 0x2026, 0x2060,
           # Mittpunkt, gånger, minus (matematikens kort), pricken under varje ljud på bildkorten och pilen i flödesmallarna
-          # och på strategikortet (sss-ooo-lll → sol).
-          0xB7, 0xD7, 0x2212, 0x2022, 0x2192]
+          # och på strategikortet (sss-ooo-lll → sol). Kvadraten och kuben ² och ³ kom till 2026-10-10, för Avancerats problem
+          # i Problemlösning i grupp (3² + 2² och n²), som i riggens delmängd.
+          0xB7, 0xD7, 0x2212, 0x2022, 0x2192, 0xB2, 0xB3]
 # Utan ligaturer (liga): Andika slår annars ihop f och i, och f och l, till ett tecken där i:et saknar prick, och den som
 # lär sig läsa känner igen i:et på pricken (fin, flicka, fisk; granskningen 2026-09-29). Word slår inte på dem.
 FUNKTIONER = ['kern', 'ccmp', 'locl', 'mark', 'mkmk']

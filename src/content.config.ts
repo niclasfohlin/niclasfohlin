@@ -194,11 +194,12 @@ const stodundervisning = defineCollection({
     // Bilderna På bordet ur metodriggen (De fyra räknesätten i grupp, 2026-10-04, src/lib/pabordet.ts): det som ligger
     // framför lärarens händer när hen har visat, en bild per vecka och en för materialet. Var och en står där efter
     // säger, med samma ord som extrafilmerna och dessutom "del: <rubrik>" efter en del i en ram, som en vecka. Filerna
-    // hittas genom metodens id och bildens nummer: <id>-pabordet-<nr>.svg, 960 × 540.
+    // hittas genom metodens id och bildens nummer: <id>-pabordet-<nr>.svg, 960 × 540. Numret går till 99, som i riggen:
+    // Problemlösning i grupp har tre bilder per problem, 90 i allt (2026-10-10).
     // fluent: bildbankens ord för figurerna ur Fluent Emoji i bilden (metodriggens pabordet.json, 2026-10-09), så att
     // upphovsraden vid grunden nämner figurerna På bordet (K-277; MIT-licensen kräver raden i kopiorna).
     pabordet: z.array(z.strictObject({
-      nr: z.number().int().min(0).max(30),
+      nr: z.number().int().min(0).max(99),
       rubrik: text,
       text,
       efter: text.refine((v) => tolkaEfter(v) !== undefined, { error: `efter är ${EFTER_FORMER}.` }),
