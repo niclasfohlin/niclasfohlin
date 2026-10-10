@@ -31,6 +31,10 @@ Granska sex saker.
 
 6. Filmerna. Varje metod har en huvudfilm direkt efter faktarutan och kan ha en eller två extrafilmer (fälten film och filmer, METODER.md under Filmerna). Stämmer bildtexterna och filmens beskrivning med metodens text, ord för ord där de säger samma sak? Står varje extrafilm vid momentet den förklarar, på sidan, i utskriften och i Word, eller hade ett annat ställe (ett visst steg, en viss tabell) passat bättre? Står huvudfilmens fyra bilder på sidan 1 i Word och i utskriften? Lathundens PowerPoint börjar med bilden Filmerna, och lathundssidan med en spelare (METODER.md under Filmerna som mp4): säger filmens namn och de fyra bildtexterna under filmen vad filmen visar, också för den som inte har sett den, och är omslagsbilden ett färdigt läge i filmen och inte en tom eller nollställd scen?
 
+Särskilda frågor och avgränsningen för den här granskningen (läs dem före allt annat ovan; de går före de sex punkterna där de säger något annat):
+
+{{fragor}}
+
 Lämna fynden så här. Var konkret: fil, rad eller rubrik, vad som står, vad som borde stå. Inga allmänna råd utan belägg.
 
 ## Sammanfattning
