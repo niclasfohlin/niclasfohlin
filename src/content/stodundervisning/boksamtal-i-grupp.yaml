@@ -57,6 +57,7 @@ principer:
 tabeller:
   - rubrik: "Perioden: en bok från bokvalet till boktipset"
     plats: efter-inledning
+    meny: true
     text: "Perioden har tre slags pass: bokvalet, läspassen och slutet. Tabellen visar perioden i tidsordning, med det som är nytt och var det står. Den säger när något tidigast kommer, och gruppen avgör takten. I en bok med högst tolv läspass hinner ni till raden Från läspass 6. Raden Från läspass 10 väntar till nästa bok. Då börjar ni där ni slutade."
     kolumner:
       - När
@@ -213,6 +214,7 @@ tabeller:
     not: "Kortets frågor är ”Var det något du gillade?” och ”Var det något du inte gillade?”, ”Var det något du inte förstod eller undrade över?” och ”Lade du märke till något mönster eller någon koppling?” Förklara orden första gången: ett mönster är något som kommer tillbaka, som tre bröder och tre prov i en saga, och en koppling är något som boken påminner om. De första passen säger du efter laget runt kort vad var och en sa, så att gruppen ser hur man hittar en tråd. Ser ingen något som hänger ihop, säger du vilka två som sa det. Det ni fortfarande undrar över blir en fråga på tavlan. Det du säger i stegen står också på kortet Du som leder, med ”Vad tar vi med oss till tavlan?” sist."
   - rubrik: "Första passet: bokvalet"
     plats: efter-fastnar
+    meny: true
     text: I bokvalet väljer gruppen själv vilken bok ni ska läsa, och då blir boken gruppens egen. Välj två böcker ur nivåns lista efter det eleverna sa i läsintervjun om vad de gillar. Sidan om nivån föreslår böcker som går bra ihop. De två ska vara ungefär lika långa men olika i genre, miljö eller ton. Båda ska passa gruppen, och du ska ha läst dem. På bordet räcker ett exemplar av varje bok per elevpar, men till läspass 1 behöver varje elev den bok gruppen väljer. Reservera därför ett exemplar per elev av båda. Av den bok som inte vann behåller du några exemplar och lämnar tillbaka resten. Tavlan gör du i ordning sist i bokvalet, i den form du har valt.
     kolumner:
       - Tid
@@ -234,6 +236,7 @@ tabeller:
     not: Blir det lika två gånger, avgör du och säger varför. Den bok som inte vann står kvar i rummet och går att låna hem. Efter bokvalet gör du läsplanen.
   - rubrik: "Läspass 1: allt visas första gången"
     plats: efter-fastnar
+    meny: true
     text: Läspass 1 börjar där du slutade läsa i bokvalet. Passet har samma fyra delar som de andra, men du visar allt för första gången. Därför läser du kortare, och i samtalet räcker laget runt.
     kolumner:
       - Tid och del
@@ -255,6 +258,7 @@ tabeller:
     not: Tråden och ”Hur vet du det?” kommer i läspass 2. Då skriver ni också den första samtalsregeln på arket, den du sa i läspass 1, och du läser lite kortare. Är ni fler än fem, räcker laget runt i läspass 2 också, och tråden kommer när ni har delat er, tidigast i läspass 3.
   - rubrik: "Samtalsreglerna: tre regler, en i taget"
     plats: efter-fastnar
+    meny: true
     text: "Många elever talar till dig och väntar på nästa fråga. De behöver lära sig att tala med varandra. Tre saker hjälper dem: paret först, tre samtalsregler som gruppen tar en i taget, och talkort när några få talar mest. Reglerna står på ett blädderblocksark bredvid tavlan, som i tabellen."
     kolumner:
       - Regeln
@@ -291,6 +295,7 @@ tabeller:
     not: Ett talkort är ett tomt kort eller en bit papper, ett per elev. Visa korten själv första gången, med sidan om Talkort på bordet, och ta bort dem när alla kommer in i tråden ändå. Fråga inte en elev inför gruppen varför hen är tyst, och beröm inte stort när hen säger något. Säger en elev ingenting i gruppen efter några veckor, ta upp det med elevhälsan.
   - rubrik: "Eleverna tar över: en bit i taget"
     plats: efter-fastnar
+    meny: true
     text: "I början leder du allt. Sedan tar eleverna över, det minsta först. Gå vidare när gruppen klarar steget utan din hjälp, och gå tillbaka ett steg när den inte gör det längre. Du läser alltid själv."
     kolumner:
       - Det du gjorde
@@ -312,6 +317,7 @@ tabeller:
     not: Är ni fler än fem, gäller stegen den grupp där du sitter. Leder en elev samtalet i läspassen, leder en elev också laget runt i slutsamtalet. I bokens andra halva byter du frågan i Var är vi? till ”Vad har hänt hittills?” De två första gångerna berättar du själv på en halv minut vem boken handlar om och de tre eller fyra viktigaste raderna. Sedan berättar eleverna så, till den bredvid och för gruppen, gärna först utan tavlan. Den som inte vill stå vid tavlan berättar från sin plats.
   - rubrik: "Fler än fem: två samtalsgrupper"
     plats: efter-fastnar
+    meny: true
     text: Laget runt med sex elever tar för lång tid. Är ni fler än fem, delar ni er i två samtalsgrupper när Samtala börjar, med högst fem i varje. Resten av passet och slutsamtalet gör ni tillsammans.
     kolumner:
       - Frågan
@@ -330,6 +336,7 @@ tabeller:
     not: Varje samtalsgrupp har ett eget frågekort och ett eget kort Du som leder, som står bland materialet. Blanda grupperna, så att varje grupp har någon som gärna börjar. Metoden fungerar också i helklass. Då läser du för alla, och klassen samtalar i grupper om tre till fem.
   - rubrik: "Sista passet: slutet"
     plats: efter-fastnar
+    meny: true
     text: "I det sista läspasset läser du ut boken. Det har Var är vi? och Med mig som vanligt, men i stället för samtalet säger var och en ett ord om boken och skriver upp den på sitt kort Böcker jag har läst ut. Slutet är nästa pass, helst efter en helg, så att eleverna hinner tänka på boken. Slutsamtalet för ni tillsammans, också när ni är fler än fem. Rita före slutet fyra spalter på ett blädderblocksark, en per fråga på frågekortet: Gillade, Gillade inte, Undrade och Mönster. Boka i förväg en stund i elevernas klasser veckan efter, då den som vill tipsar sin klass i en minut, med boken i handen."
     kolumner:
       - Tid

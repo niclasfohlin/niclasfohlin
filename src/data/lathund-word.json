@@ -1,6 +1,6 @@
 {
   "antalsuppfattning-i-grupp": {
-    "kalla": "cbd4bcb86fdefc93",
+    "kalla": "83cc70c6b98b5b90",
     "skalor": [
       1.25,
       1.35,
@@ -10,7 +10,7 @@
     "datum": "2026-10-12"
   },
   "boksamtal-i-grupp": {
-    "kalla": "33013ad8a15798ec",
+    "kalla": "f77aee5e55f2440d",
     "skalor": [
       1.35,
       1.35,
@@ -20,7 +20,7 @@
     "datum": "2026-10-12"
   },
   "brakkurs-i-grupp": {
-    "kalla": "f07a7a92410534e8",
+    "kalla": "d42ae1c8638e6592",
     "skalor": [
       1.15,
       1.35,
@@ -30,7 +30,7 @@
     "datum": "2026-10-12"
   },
   "faktatextsamtal-i-grupp": {
-    "kalla": "422c63dee150639e",
+    "kalla": "17c1ee79861db589",
     "skalor": [
       1.3,
       1.35,
@@ -40,7 +40,7 @@
     "datum": "2026-10-12"
   },
   "fyra-raknesatten": {
-    "kalla": "5ed21589d64987b8",
+    "kalla": "61763e9b420cc040",
     "skalor": [
       1.2,
       1.35,
@@ -50,7 +50,7 @@
     "datum": "2026-10-12"
   },
   "kompissamtal": {
-    "kalla": "b0bfc46d657530ce",
+    "kalla": "42bd2320b0af54bb",
     "skalor": [
       1.25,
       1.2,
@@ -60,7 +60,7 @@
     "datum": "2026-10-12"
   },
   "laslistor-i-grupp": {
-    "kalla": "78d86a948e19a7c4",
+    "kalla": "7120b87fd0bcd150",
     "skalor": [
       1.2,
       1.35,
@@ -70,7 +70,7 @@
     "datum": "2026-10-12"
   },
   "ljudlek-i-grupp": {
-    "kalla": "7db5abafe5588440",
+    "kalla": "f658aa46ae8c5232",
     "skalor": [
       1.25,
       1.35,
@@ -80,7 +80,7 @@
     "datum": "2026-10-12"
   },
   "ordverkstad-i-grupp": {
-    "kalla": "59383e3564ff1fde",
+    "kalla": "189c6205d5318bb8",
     "skalor": [
       1.3,
       1.35,
@@ -90,7 +90,7 @@
     "datum": "2026-10-12"
   },
   "problemlosning-i-grupp": {
-    "kalla": "0823a3c2968f0ce9",
+    "kalla": "445a20f71bd8ded3",
     "skalor": [
       1.25,
       1.35,
@@ -100,7 +100,7 @@
     "datum": "2026-10-12"
   },
   "seriesamtal": {
-    "kalla": "379a88fffcab1a4e",
+    "kalla": "fec1eb6df1c0ac06",
     "skalor": [
       1.25,
       1.3,
@@ -110,7 +110,7 @@
     "datum": "2026-10-12"
   },
   "skrivkurs-berattelseram": {
-    "kalla": "498dbc42b0dc6cc3",
+    "kalla": "1022bf3f53a74db4",
     "skalor": [
       1.35,
       1.35,
@@ -120,7 +120,7 @@
     "datum": "2026-10-12"
   },
   "skrivkurs-sagoboken": {
-    "kalla": "c06ec8b3560b2e12",
+    "kalla": "c012cafd37972da7",
     "skalor": [
       1.25,
       1.35,
@@ -130,7 +130,7 @@
     "datum": "2026-10-12"
   },
   "skrivkurs-vardeskapande": {
-    "kalla": "e4689d07cadfab94",
+    "kalla": "dfe518615ea4ecbe",
     "skalor": [
       1.35,
       1.35,
@@ -140,7 +140,7 @@
     "datum": "2026-10-12"
   },
   "textsamtal-i-grupp": {
-    "kalla": "97e2ae3d2d846890",
+    "kalla": "065a59506aa9a4b0",
     "skalor": [
       1.25,
       1.3,
@@ -150,7 +150,7 @@
     "datum": "2026-10-12"
   },
   "texttyp-argumenterande-text": {
-    "kalla": "88b32c767cfac7fc",
+    "kalla": "d224c04323825f54",
     "skalor": [
       1.3,
       1.35,
@@ -160,7 +160,7 @@
     "datum": "2026-10-12"
   },
   "texttyp-berattande-text": {
-    "kalla": "5c4653a8d73d2fd0",
+    "kalla": "5e9ae8ab78d75121",
     "skalor": [
       1.3,
       1.35,
@@ -170,7 +170,7 @@
     "datum": "2026-10-12"
   },
   "texttyp-beskrivande-text": {
-    "kalla": "7d90c8e57ad2cd6d",
+    "kalla": "a42babae6b46e461",
     "skalor": [
       1.35,
       1.35,
@@ -180,7 +180,7 @@
     "datum": "2026-10-12"
   },
   "texttyp-instruerande-text": {
-    "kalla": "b55423e213021484",
+    "kalla": "b4dd69da63b0d765",
     "skalor": [
       1.3,
       1.35,
@@ -190,7 +190,7 @@
     "datum": "2026-10-12"
   },
   "texttyper-i-grupp": {
-    "kalla": "13af5811940b6f9b",
+    "kalla": "03f71c47c80f14df",
     "skalor": [
       1.35,
       1.35,
@@ -200,7 +200,7 @@
     "datum": "2026-10-12"
   },
   "til-i-grupp": {
-    "kalla": "6dcc63370f01b605",
+    "kalla": "eff2dda412d91c7b",
     "skalor": [
       1.2,
       1.35,
@@ -210,7 +210,7 @@
     "datum": "2026-10-12"
   },
   "upprepad-lasning": {
-    "kalla": "ae651fdec5705293",
+    "kalla": "fad1b59c75c79767",
     "skalor": [
       1.3,
       1.35,
