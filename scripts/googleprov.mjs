@@ -21,7 +21,8 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { basename, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { innehall, jamforWordGoogle } from 'wordparitet';
+import { jamforWordGoogle } from 'wordparitet';
+import { wordinnehall } from './wordinnehall.mjs';
 import { INLOGGNING, testmappen } from './google.mjs';
 
 const rot = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -46,7 +47,10 @@ if (args.includes('--alla') || args.includes('--andrade')) {
     const andrade = [];
     for (const f of filer) {
       const ute = await fetch(`https://niclasfohlin.se/stodundervisning/${basename(f)}?v=${Date.now()}`);
-      if (!ute.ok || (await innehall(Buffer.from(await ute.arrayBuffer()))) !== (await innehall(readFileSync(f)))) andrade.push(f);
+      // Innehållet jämförs utan det som skiftar mellan datorn och Netlify (scripts/wordinnehall.mjs, K-178): bildernas
+      // löpnummer, svg-filernas radslut och reservbilderna. En fil som inte finns ute är ny och prövas.
+      // Här räknas också formatmallarna, numreringen och fristående png-bilder (allt), som kan ändra sidorna.
+      if (!ute.ok || (await wordinnehall(Buffer.from(await ute.arrayBuffer()), '', { allt: true })) !== (await wordinnehall(readFileSync(f), '', { allt: true }))) andrade.push(f);
     }
     filer = andrade;
     console.log(`${filer.length} Word-filer skiljer sig från dem som ligger ute.`);

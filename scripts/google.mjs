@@ -16,4 +16,14 @@ export const TESTMAPP = 'Prov före uppladdning · niclasfohlin.se';
 /** Testmappens id; mappen skapas om den inte finns. */
 export const testmappen = () => modulensMapp(TESTMAPP, { inloggning: INLOGGNING });
 /** Google Dokuments pdf av Word-filen (en Buffer); med mappId ligger dokumentet kvar i testmappen. Svarar { pdf, lank }. */
-export const googlePdf = (docx, o = {}) => modulensPdf(docx, { ...o, inloggning: INLOGGNING });
+// Ett tillfälligt fel hos Google (500, 502, 503 eller 429) prövas igen, tre gånger med längre väntan: ett enda 500 från
+// Drive stoppade annars hela valideringen mitt i mätningen av lathundarna (K-239, senast 2026-10-12).
+export async function googlePdf(docx, o = {}) {
+  for (let forsok = 1; ; forsok++) {
+    try { return await modulensPdf(docx, { ...o, inloggning: INLOGGNING }); } catch (e) {
+      if (forsok >= 4 || !/svarade (429|500|502|503)\b/.test(String(e?.message))) throw e;
+      console.log(`  Google svarade med ett tillfälligt fel, försök ${forsok + 1} av 4 om ${forsok * 10} sekunder …`);
+      await new Promise((r) => setTimeout(r, forsok * 10000));
+    }
+  }
+}

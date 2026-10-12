@@ -28,7 +28,7 @@ import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import JSZip from 'jszip';
+import { wordinnehall } from './wordinnehall.mjs';
 
 const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
@@ -46,28 +46,9 @@ const sha = (b) => createHash('sha256').update(b).digest('hex');
 // Typsnitten som Word-filerna bäddar in: ändras de (ett nytt tecken i elevens typsnitt) ändras pdf:en.
 const TYPSNITT = ['public/fonts/ljudlek-elev/LjudlekElev-Regular.ttf', 'public/fonts/boksida/Cinzel-dokument.ttf', 'public/fonts/boksida/CinzelDecorative-dokument.ttf'];
 const typsnittHash = sha(TYPSNITT.map((f) => (existsSync(join(rot, f)) ? sha(readFileSync(join(rot, f))) : `saknas:${f}`)).join('|'));
-// Word-filens innehåll: text, tabeller och former i document.xml, sidhuvuden och sidfötter, utan id och löpnummer, och
-// bilderna som innehåll, sorterade, så att samma fil ger samma summa oavsett i vilken ordning bygget gjorde filerna.
-async function innehallHash(docx) {
-  const zip = await JSZip.loadAsync(readFileSync(docx));
-  const delar = [];
-  const utanId = (xml) => xml
-    .replace(/\s(?:id|name)="[^"]*"/g, '')
-    .replace(/\sr:(?:embed|id|link)="[^"]*"/g, '')
-    .replace(/\sw:(?:id|rsid\w*)="[^"]*"/g, '');
-  for (const namn of Object.keys(zip.files).sort()) {
-    if (/^word\/(document|header\d*|footer\d*)\.xml$/.test(namn)) delarPush(namn, utanId(await zip.file(namn).async('string')));
-  }
-  function delarPush(namn, xml) { delar.push(`${namn.replace(/\d+/g, '#')}:${sha(xml)}`); }
-  // Sidhuvudenas och sidfötternas nummer i filnamnen kan skifta; summorna sorteras.
-  delar.sort();
-  const bilder = [];
-  // Bara bildernas svg: Word ritar dem, och reservbilderna (png) görs ur dem vid bygget, med verktyg som kan skilja i
-  // bildpunkter mellan datorn och Netlify.
-  // Radsluten räknas inte: en svg-fil som git har checkat ut med CRLF på Windows är samma bild som på Netlify.
-  for (const namn of Object.keys(zip.files)) if (/^word\/media\/.+\.svg$/i.test(namn)) bilder.push(sha((await zip.file(namn).async('string')).replace(/\r\n/g, '\n')));
-  return sha([typsnittHash, ...delar, ...bilder.sort()].join('\n'));
-}
+// Word-filens innehåll som kontrollsumma (scripts/wordinnehall.mjs, som googleprov.mjs delar): text, tabeller och former,
+// sidhuvuden och sidfötter, bildernas svg och fotona, utan id, löpnummer, radslut och reservbilder.
+const innehallHash = async (docx) => wordinnehall(readFileSync(docx), typsnittHash);
 const pdfFor = (namn) => join(pdfMapp, `${namn}.pdf`);
 const kanda = new Set(filer.map((f) => `${f.namn}.pdf`));
 // En pdf i manifestet som ingen bank längre har (en borttagen nivå, en metod utan bank). Bara manifestets filer räknas,
