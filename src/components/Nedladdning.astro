@@ -9,6 +9,8 @@
 // inte Bara filmerna: de andra raderna med Bara är delar av Allt om metoden, och filmerna ligger inte i den filen.
 import Filval from './Filval.astro';
 import Bankfiler from './Bankfiler.astro';
+import Nivafiler from './Nivafiler.astro';
+import type { Nivamaterial } from '../lib/nivamaterial';
 import type { Bank } from '../lib/bank';
 // ramar: namnet på metodens ramar (läslistorna, berättelseramarna) när de ligger i planeringsmallarna, så att knappen säger det.
 // Har namnet ett och i sig (böckerna och materialet) står det efter ett komma, så att raden inte får två och.
@@ -17,8 +19,9 @@ import type { Bank } from '../lib/bank';
 // bank: metodens bank (src/lib/bank.ts): problemen eller texterna finns också i egna filer, i en tabell sist i rutan
 // (Bankfiler.astro; Niclas 2026-10-10: "tidigt i metoden en extra nedladdningsruta i någon form av enkel tabell"). Allt om
 // metoden och planeringsmallarna har dem som i andra metoder: banken lägger till filer och tar inget bort.
-interface Props { id: string; titel: string; harMallar: boolean; harLathund: boolean; ramar?: string; filmer?: number; bank?: Bank; farger?: Record<string, string> }
-const { id, titel, harMallar, harLathund, ramar, filmer = 0, bank, farger = {} } = Astro.props;
+// nivamaterial: metodens material i nivåer (src/lib/nivamaterial.ts): nivåernas filer i en tabell sist i rutan, som bankens.
+interface Props { id: string; titel: string; harMallar: boolean; harLathund: boolean; ramar?: string; filmer?: number; bank?: Bank; farger?: Record<string, string>; nivamaterial?: Nivamaterial }
+const { id, titel, harMallar, harLathund, ramar, filmer = 0, bank, farger = {}, nivamaterial } = Astro.props;
 const filmord = filmer === 1 ? 'filmen' : 'filmerna';
 // Rutan har bara rubriker och knappar (Niclas 2026-10-10: "rensa text som inte behövs eller förklarar sig själv med bara
 // knapparna och rubriker"): ingen mening om lathunden och inget stycke under knapparna. Det knapparna gör står i deras
@@ -61,6 +64,7 @@ const skrivareSvg = '<svg aria-hidden="true" viewBox="0 0 20 20" width="16" heig
     )}
   </ul>
   {bank && <Bankfiler id={id} titel={titel} bank={bank} farger={farger} />}
+  {nivamaterial && <Nivafiler id={id} titel={titel} nm={nivamaterial} />}
 </aside>
 
 <script>

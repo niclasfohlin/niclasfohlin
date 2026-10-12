@@ -110,5 +110,33 @@
     "sidor": 36,
     "kB": 598,
     "datum": "2026-10-10"
+  },
+  "boksamtal-i-grupp-bockerna-alla": {
+    "word": "53615833500d88632247ea84b4830c9dd1367bde0fb995ef2e20f10ca2111d28",
+    "pdf": "9dea2d843ca35142ce3054d505d49bfd82d707a2dbdab235f0aefde707850834",
+    "sidor": 6,
+    "kB": 499,
+    "datum": "2026-10-12"
+  },
+  "boksamtal-i-grupp-bockerna-bas": {
+    "word": "7e2860c82ce15c1effbc2be709bb8d01765eee4ad37c37c2d5d805c021d4d480",
+    "pdf": "90384b4075560a4cc59a2b1e5b0e457aa7d982e754a5633251ac0106b9bed9c4",
+    "sidor": 2,
+    "kB": 339,
+    "datum": "2026-10-12"
+  },
+  "boksamtal-i-grupp-bockerna-medel": {
+    "word": "cb2c6f247c079dd67ad8fda433e06051fb5bcfe73a16ee75705bc88b4a146d65",
+    "pdf": "16508355ebf20fafa914680186bd653259a98293816c9608f63d96d03566dede",
+    "sidor": 2,
+    "kB": 338,
+    "datum": "2026-10-12"
+  },
+  "boksamtal-i-grupp-bockerna-avancerat": {
+    "word": "256e619949ca953b41c91960dc7ef9e9a72aad0902b389b5d9f337034572652c",
+    "pdf": "63356109b9028fa2bd644d676b0268535a4bc3b091b669a8deeb451e002dc787",
+    "sidor": 2,
+    "kB": 341,
+    "datum": "2026-10-12"
   }
 }

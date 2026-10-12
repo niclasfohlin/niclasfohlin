@@ -4,8 +4,11 @@
 // nivåns material. På metodens sida står varje nivå som en rad i nivåns färg som fälls ut, med nivåns ramar i, som
 // nivåerna i en bank (Bank.astro, samma stilar). Regeln har inga egna fält, så en ny metod får raderna av sig själv.
 // Ramarna ska stå i följd i filen, nivå för nivå, annars gäller regeln inte och ramarna står var för sig som förut:
-// sidan har då samma ordning som Word. Inga Node-beroenden.
+// sidan har då samma ordning som Word. Nivåns ramar finns också som egna filer, Word och pdf, en per nivå och en för alla
+// nivåer (nivafiler), i nedladdningsrutan och i nivån, som bankens filer. Inga Node-beroenden.
 import type { Niva } from './nivaer';
+import { veckomaterial } from './veckomaterial';
+import { bankAv } from './bank';
 
 type Ram = { rubrik: string; oversikt?: { rader: string[][] } };
 /** En nivå: nivån med sin färg, ramarnas index i filens ordning, antalet rader i nivåns översikter (böckerna) och
@@ -56,4 +59,24 @@ export function nivamaterial(ramar: Ram[], nivaer: Niva[], utanfor: (ri: number)
     };
   }
   return undefined;
+}
+
+/** Metodens nivåmaterial med sidans villkor: inte i en kurs där material står vid veckorna (veckomaterial.ts), och inte i en metod med en bank. */
+export function metodensNivamaterial(d: { nivaer?: Niva[]; ramar?: { ramar: (Ram & { lektioner?: boolean; listor?: { rubrik?: string; rader: string[][] }[]; delar?: unknown[] })[] } }): Nivamaterial | undefined {
+  if (!d.ramar || veckomaterial(d as Parameters<typeof veckomaterial>[0])) return undefined;
+  // En metod med en bank har sina nivåer där (Bank.astro, med samma ankare niva-<nivå>): två uppsättningar nivårader på en
+  // sida vore svårare att läsa, så regeln gäller inte då.
+  if (bankAv(d as Parameters<typeof bankAv>[0])) return undefined;
+  return nivamaterial(d.ramar.ramar, d.nivaer ?? []);
+}
+
+/** En fil med en nivås material, eller alla nivåers: /stodundervisning/<id>-<led>-<nivå>.docx och .pdf, som bankens filer. */
+export interface Nivafil { namn: string; niva?: Nivarad; rubrik: string; ramar: number[] }
+export function nivafiler(id: string, nm: Nivamaterial): Nivafil[] {
+  return [undefined, ...nm.nivaer].map((n) => ({
+    namn: `${id}-${slug(nm.led)}-${n ? n.slug : 'alla'}`,
+    niva: n,
+    rubrik: `${n ? n.niva.namn : 'Alla nivåer'}: ${nm.led.toLocaleLowerCase('sv')}`,
+    ramar: n ? n.ramar : nm.nivaer.flatMap((x) => x.ramar),
+  }));
 }

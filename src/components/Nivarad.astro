@@ -3,9 +3,12 @@
 // bank (Bank.astro, samma stilar, .bank-niva i global.css). I utskriften står nivån utfälld, utan raden.
 // Har nivån fler än en ram står länkar till dem överst i den utfällda nivån (Om nivån · Böckerna): i telefonen ligger
 // listan annars flera skärmar ned, efter sidan om nivån.
-import type { Nivarad } from '../lib/nivamaterial';
-interface Props { rad: Nivarad; enhet?: string }
-const { rad, enhet } = Astro.props;
+// Sist i nivån står nivåns filer, Pdf och Word (Nivafiler.astro), som i en bank.
+import Nivafiler from './Nivafiler.astro';
+import type { Nivamaterial, Nivarad } from '../lib/nivamaterial';
+interface Props { rad: Nivarad; nm: Nivamaterial; id: string; titel: string }
+const { rad, nm, id, titel } = Astro.props;
+const enhet = nm.enhet;
 ---
 <details class="bank-niva" id={`niva-${rad.slug}`} style={`--niva: #${rad.niva.farg}`} data-niva>
   <summary>
@@ -15,6 +18,7 @@ const { rad, enhet } = Astro.props;
   <div class="bank-innehall">
     {rad.lankar.length > 1 && <p class="bank-nivalankar">{rad.lankar.map((l, i) => <>{i > 0 && <span aria-hidden="true">·</span>}<a href={`#ram-${l.ri + 1}`}>{l.namn}<span class="visually-hidden">, {rad.niva.namn}</span></a></>)}</p>}
     <slot />
+    <div class="bank-filer"><Nivafiler id={id} titel={titel} nm={nm} niva={rad} /></div>
   </div>
 </details>
 
@@ -32,4 +36,6 @@ const { rad, enhet } = Astro.props;
   };
   visa();
   window.addEventListener('hashchange', visa);
+  // Samma länk en gång till, efter att läsaren har stängt nivån, ändrar inte adressen: då prövas klicket (granskningen 2026-10-12).
+  document.addEventListener('click', (e) => { if (e.target instanceof Element && e.target.closest('a[href^="#"]')) setTimeout(visa, 0); });
 </script>

@@ -67,8 +67,9 @@ Stödundervisning är en metodbank, inte en blogg. Varje metod är en YAML-fil e
 | Filmerna som mp4 i en zip-fil | `/stodundervisning/<id>-filmer.zip` |
 | I en metod med en bank av problem eller texter i nivåer: varje problem eller text på en egen sida, med lärarens sida och de andra bladen | `/stodundervisning/<id>/<nivå>-<nummer>` |
 | Bankens blad, per nivå och för alla nivåer, bara problemen eller med lärarens sida och de andra bladen, i Word och pdf | `/stodundervisning/<id>-problem-<nivå>.docx` och `.pdf`, med `-med-lararens-sida` |
+| I en metod där ramarna heter efter nivåerna, som litteraturlistorna i boksamtalet: varje nivås material för sig, och alla nivåers, i Word och pdf (METODER.md under Nivåernas material) | `/stodundervisning/<id>-<led>-<nivå>.docx` och `.pdf`, och `-alla` |
 
-Modellens delar, lathunden, filmerna, banken, serier med lektionsbank och kurser i veckor står i METODER.md. Läs den innan du rör en metod eller koden som bygger den.
+Modellens delar, lathunden, filmerna, banken, nivåernas material, serier med lektionsbank och kurser i veckor står i METODER.md. Läs den innan du rör en metod eller koden som bygger den.
 
 ## Prenumeration och utskick
 

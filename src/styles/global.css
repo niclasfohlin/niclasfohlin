@@ -811,6 +811,9 @@ button.lank:hover { color: var(--farg-accent); }
 .bankfiler thead th, .bankfiler thead td { border-top: 0; font-size: 0.85rem; font-weight: 600; line-height: 1.3; color: var(--farg-text); vertical-align: bottom; }
 .bankfiler tbody th { font-weight: 600; white-space: nowrap; }
 .bankfiler-niva-namn::before { content: ''; display: inline-block; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--niva); margin-right: 0.4rem; }
+/* Nivåernas filer (Nivafiler.astro): en kolumn, och nivåns namn leder ned till nivån på sidan. */
+.bankfiler.nivafiler { max-width: 22rem; }
+a.bankfiler-niva-namn { display: inline-block; padding: 0.4rem 0; color: inherit; }
 .bankfiler .filval { display: inline-flex; flex-wrap: nowrap; width: auto; }
 @media (max-width: 40rem) {
   .bankfiler col.nivakol { width: 5.6rem; }

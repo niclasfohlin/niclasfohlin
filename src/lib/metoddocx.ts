@@ -2170,7 +2170,7 @@ function lararsidaBarn(ram: Ram, larare: { l: Lastext; bilder: PaBordet[]; namn:
 }
 
 // material: false ger bara beskrivningen, utan metodens material (src/lib/material.ts; Materialet och Diplomet, mallarna
-// står inte här), som knappen Bara beskrivningen på sidan: metodbankens fil utan mallar och lathundar (metodDokument med medMallar: false).
+// står inte här), som knappen Metoden på sidan: metodbankens fil utan mallar och lathundar (metodDokument med medMallar: false).
 function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } = { material: true }): Flod {
   const d = post.data;
   const ut: Flod = [];
@@ -2476,7 +2476,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
 // hoppas då över här (baraTommaRamar); i mallfilen för sig finns alla ramar.
 // bank: bara de här ramarna, i den här ordningen, och inget annat: en fil ur metodens bank (bankDokument). Utan bank står
 // en metods bank först bland ramarna, i bankens ordning, som på sidan och i beskrivningen.
-function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; bank?: number[] } = {}): { barn: Flod; liggande?: boolean }[] {
+function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; bank?: number[]; figurradVidFigur?: boolean } = {}): { barn: Flod; liggande?: boolean }[] {
   const d = post.data;
   const sidor: Flod[] = [];
   const under = (namn: string) => [
@@ -2712,7 +2712,9 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
   // Diplomet är elevens (riggens docs/elevmaterial.md): texten i elevens typsnitt; kickern står kvar i sitt.
   if (d.diplom && !o.bank) sidor.push([...medElevtypsnitt(harElevtypsnitt(d), () => diplomBarn(d.diplom!))]);
   const vanliga = sidor.filter((sida) => !bladsidor.has(sida));
-  const ingenFigur = !!figurRad && !vanliga.some(harFigur);
+  // figurradVidFigur: raden om figurernas upphov står bara på en sida som har figurer, och inte på filens första sida när
+  // ingen sida har dem (nivåernas filer, ramarDokument: litteraturlistorna har inga figurer På bordet).
+  const ingenFigur = !!figurRad && !o.figurradVidFigur && !vanliga.some(harFigur);
   for (const sida of vanliga) sida.push(upphovsrad(harFigur(sida) || (ingenFigur && sida === vanliga[0]), harOmslag(sida)));
   // Mallarna (bråkplanket och tallinjerna) sist, var och en på en liggande sida med smal marginal. Sidfoten bär
   // upphovet, så att planket och linjerna får hela höjden. Är lathundens tredje sida ett blad att lägga på bordet
@@ -3859,6 +3861,17 @@ export function bankDokument(post: MetodPost, fil: Pick<Bankfil, 'niva' | 'medFo
   const sidor = mallBarn(post, o.bas, { bank: bankfilensRamar(bank, fil) });
   const huvud = `${fil.niva ? fil.niva.namn : 'Alla nivåer'} · ${post.data.titel} · ${SAJT}`;
   const sektioner = sidor.flatMap((sida) => delaSektioner(sida.barn, huvud, adress));
+  return dokument(`${post.data.titel}: ${fil.rubrik}`, sektioner, typsnittFor([post]));
+}
+
+// En fil med bara de här ramarna, ett blad per sida som i planeringsmallarna: en nivås material eller alla nivåers
+// (src/lib/nivamaterial.ts, nivafiler), som bankens filer. huvud är det som står först i sidhuvudet, nivåns namn.
+export function ramarDokument(post: MetodPost, fil: { ramar: number[]; rubrik: string; huvud: string }, o: { bas: string; resurser?: MetodResurser }): Document {
+  instans = 0;
+  RESURSER = o.resurser ?? { bilder: new Map() };
+  const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
+  const sidor = mallBarn(post, o.bas, { bank: fil.ramar, figurradVidFigur: true });
+  const sektioner = sidor.flatMap((sida) => delaSektioner(sida.barn, `${fil.huvud} · ${post.data.titel} · ${SAJT}`, adress));
   return dokument(`${post.data.titel}: ${fil.rubrik}`, sektioner, typsnittFor([post]));
 }
 

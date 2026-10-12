@@ -1,22 +1,27 @@
 import type { APIRoute } from 'astro';
 import { publicerade } from '../../lib/innehall';
 import { bankAv, bankfiler, bankfilensRamar } from '../../lib/bank';
+import { metodensNivamaterial, nivafiler } from '../../lib/nivamaterial';
 
 // /stodundervisning/bankfiler.json: bankernas filer (src/lib/bank.ts), som scripts/bankpdf.mjs gör pdf av ur Word-filerna
 // efter bygget. Varje fil har sitt namn och hur många sidor den ska ha: en per enhet med bara enheterna, och med
 // följesidorna en per blad och en till två per nivås översikt (minst och högst). Listan byggs ur samma regel som sidorna
 // och Word-filerna, så att skriptet aldrig gissar vilka filer som finns. ramar är filens ramar i ordning och
 // oversikter nivåernas översikter bland dem, som scripts/paritet.mjs prövar texterna i.
+// Nivåernas filer i en metod med nivåer i materialet (src/lib/nivamaterial.ts) står här också, med slag: 'niva', så att
+// samma skript gör deras pdf:er: en ram är ett blad, och en sida om nivån får ta två sidor.
 export const GET: APIRoute = async () => {
   const metoder = await publicerade('stodundervisning');
   const filer = metoder.flatMap((m) => {
+    const nm = metodensNivamaterial(m.data);
+    const nivans = nm ? nivafiler(m.id, nm).map((f) => ({ metod: m.id, namn: f.namn, rubrik: f.rubrik, slag: 'niva', minst: f.ramar.length, hogst: f.ramar.length * 2, ramar: f.ramar, oversikter: [] as number[] })) : [];
     const bank = bankAv(m.data);
-    if (!bank) return [];
-    return bankfiler(m.id, bank).map((f) => {
+    if (!bank) return nivans;
+    return [...nivans, ...bankfiler(m.id, bank).map((f) => {
       const ramar = bankfilensRamar(bank, f);
       const antal = ramar.filter((ri) => bank.oversikter.has(ri)).length;
       return { metod: m.id, namn: f.namn, rubrik: f.rubrik, minst: ramar.length, hogst: ramar.length + antal, ramar, oversikter: ramar.filter((ri) => bank.oversikter.has(ri)) };
-    });
+    })];
   });
   return new Response(JSON.stringify(filer, null, 1), { headers: { 'Content-Type': 'application/json; charset=utf-8' } });
 };

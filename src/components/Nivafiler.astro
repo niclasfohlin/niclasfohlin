@@ -1,0 +1,36 @@
+---
+// Nivåernas filer att ladda ner och skriva ut (src/lib/nivamaterial.ts; Niclas 2026-10-12: när materialet är delat i
+// nivåer "kommer det som en specifik länk vid materialet som har lite mer design och nedladdning docx/pdf i rutan i
+// början"). Utan nivå är det tabellen i nedladdningsrutan överst på metodens sida, som bankens (Bankfiler.astro, samma
+// stilar): en rad för alla nivåer och en per nivå, och nivåns namn leder ned till nivån på sidan. Med en nivå är det
+// nivåns rad sist i den utfällda nivån. Filerna byggs ur metodens fil: Word av [id].docx.ts (ramarDokument i
+// metoddocx.ts) och pdf:en av npm run validera (scripts/bankpdf.mjs). Pdf och Word, utan Drive, så att raden ryms i
+// telefonen.
+import Filval from './Filval.astro';
+import { nivafiler, type Nivamaterial, type Nivarad } from '../lib/nivamaterial';
+interface Props { id: string; titel: string; nm: Nivamaterial; niva?: Nivarad }
+const { id, titel, nm, niva } = Astro.props;
+const filer = nivafiler(id, nm);
+const val = (n: Nivarad | undefined) => {
+  const f = filer.find((x) => x.niva === n)!;
+  return { fil: `/stodundervisning/${f.namn}`, namn: f.namn, rubrik: f.rubrik, statistik: `${titel}: ${f.rubrik.toLowerCase()}`, pdf: true, pdfTitel: 'Ladda ner som pdf', utanDrive: true, liten: true };
+};
+---
+{niva ? (
+  <ul class="filrader bankfiler-niva">
+    <li><span class="filrubrik">{niva.niva.namn} att skriva ut</span> <Filval {...val(niva)} /></li>
+  </ul>
+) : (
+  <table class="bankfiler nivafiler">
+    <caption>{nm.led} att skriva ut</caption>
+    <colgroup><col class="nivakol" /><col /></colgroup>
+    <tbody>
+      {[undefined, ...nm.nivaer].map((n) => (
+        <tr>
+          <th scope="row">{n ? <a class="bankfiler-niva-namn" href={`#niva-${n.slug}`} style={`--niva: #${n.niva.farg}`}>{n.niva.namn}</a> : 'Alla nivåer'}</th>
+          <td><Filval {...val(n)} /></td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+)}
