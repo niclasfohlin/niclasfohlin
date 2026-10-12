@@ -1,3 +1,3 @@
-2026-10-10
+2026-10-12
 
-Senaste nyhetsbrevet: "Trettio nya problem att lösa i grupp" (Problemlösning i grupp med trettio problem i tre nivåer, Textsamtal i grupp att ladda ner och skrivkursernas mallar), kampanj 20 i Brevo, skickad 2026-10-10 till listan Prenumeranter. Utkastet: 2026-10-10-problem.md.
+Senaste nyhetsbrevet: "Så leder du ett boksamtal vid tavlan" (Chambers boksamtal i grupp, omskriven efter återkoppling från en skola, med litteraturlistan om trettio böcker på tre nivåer), kampanj 21 i Brevo, skickad 2026-10-12 till listan Prenumeranter. Utkastet: 2026-10-12-boksamtal.md.
