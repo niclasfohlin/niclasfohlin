@@ -26,7 +26,10 @@ const filer = valda.length ? valda : readdirSync(DIST).filter((f) => f.endsWith(
 const BOCKEN = 'tecken som inte är prövade i Word och Google';
 const UNDANTAG = [
   { regel: BOCKEN, fil: 'problemlosning-i-grupp', tecken: '✓', skal: 'bocken i exemplets tabell, i en cell där raden inte blir högre' },
-  { regel: BOCKEN, fil: 'alla-metoder', tecken: '✓', skal: 'samlingsfilen har Problemlösning i grupp i sig' },
+  // Chambers boksamtal i grupp, omtaget 2026-10-12: frågan som fick svar har en bock på bokens tavla, i lathundens mall
+  // och efter exemplet. Bocken är metodens egen sak (en fråga får en bock när boken svarar), och raden står i tavlans ruta.
+  { regel: BOCKEN, fil: 'boksamtal-i-grupp', tecken: '✓', skal: 'bocken vid frågan som fick svar på bokens tavla, i tavlans ruta' },
+  { regel: BOCKEN, fil: 'alla-metoder', tecken: '✓', skal: 'samlingsfilen har Problemlösning i grupp och Chambers boksamtal i grupp i sig' },
 ];
 
 let fel = 0;

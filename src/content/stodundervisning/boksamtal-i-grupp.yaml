@@ -1,8 +1,18 @@
 # Metod i stödundervisning. Modellen står i src/content.config.ts och mallen i _mall.yaml.
 # Texten är Niclas egen, ur kompendiet för läsförståelse åk 4–9 (2026).
+# Omtaget 2026-10-10 (intake/ARBETSORDER-boksamtal-2026-10-10.md, analysen i analys-omtag-2026-10.md): en hel bok
+# tillsammans, med bokvalet, läspasset i fyra delar, bokens tavla, slutet och tio böcker på var och en av tre nivåer.
+# Omtaget av kärnan 2026-10-11 (intake/ARBETSORDER-boksamtal-karnan-2026-10-11.md): passet nämner sakerna, och bokens
+# tavla, post-it-lapparna och frågekortet förklaras hela i var sin del efter passet. Sedan kommer det eleverna tar över
+# och det som gäller en större grupp. Progressionen står som den fria tabellen Eleverna tar över, intill passet.
+# Efter de första rundorna 2026-10-11 (out/boksamtal-i-grupp/beslut-karnan-rundor-2026-10-11.md): paret först, tre
+# samtalsregler som gruppen tar en i taget, och strukturen Talkort på en egen sida (Niclas 2026-10-11, sökning 10).
+# Efter helhetens rundor 2026-10-11 (out/boksamtal-i-grupp/beslut-karnan-helheten-2026-10-11.md): tabellen Perioden är
+# periodens karta, läspass 1 har en egen tabell, och perioden står i tidsordning efter exemplet.
+# Sidorna om nivåerna och litteraturlistorna skrivs in ur bocker/ med node methods/boksamtal-i-grupp/bocker/infor.mjs.
 titel: Chambers boksamtal i grupp
-undertitel: Lärarlett samtal om skönlitteratur som utvecklar elevens tänkande, för åk 4–9
-ingress: Ett körschema för 30-minuterspass i liten grupp där läraren leder ett samtal om en kort skönlitterär text enligt Aidan Chambers ”Jag undrar”. Fyra grundfrågor samlar allas först-tankar, sedan fördjupar ni med ”Hur vet du det?”. Ingen sitter på rätt svar, inte ens läraren.
+undertitel: En hel bok tillsammans i liten grupp, med högläsning och samtal om boken, för åk 4–9
+ingress: En liten grupp i åk 4–9 läser en hel bok tillsammans och lär sig att hålla ihop berättelsen över flera veckor. Du läser högt, och eleverna följer med i sina egna exemplar. I samtalet använder ni Aidan Chambers ”Jag undrar” och hans fråga ”Hur vet du det?” Bokens tavla på väggen växer från pass till pass.
 omrade: Läsning
 arskurs:
   - 4-6
@@ -13,364 +23,1042 @@ taggar:
   - lasframjande
 format:
   - liten grupp
-tid: Cirka 30 minuter per pass, två till tre pass i veckan
-period: Sex till åtta veckor
+tid: 40 minuter per pass, två till tre pass i veckan
+period: Fem till tio veckor, en bok
 grupp: Fyra till tio elever
 material:
-  - en kort skönlitterär text
-  - tavla för de fyra spalterna
-  - förberedda specialfrågor
-uppdaterad: 2026-10-03
+  - ett exemplar av boken per elev
+  - bokens tavla
+  - post-it och ett frågekort
+uppdaterad: 2026-10-12
 relaterade:
-  - faktatextsamtal-i-grupp
   - textsamtal-i-grupp
+  - faktatextsamtal-i-grupp
+  - til-i-grupp
 utkast: false
+nivaer:
+  - { namn: Bas, farg: "4E7A43" }
+  - { namn: Medel, farg: "A8742A" }
+  - { namn: Avancerat, farg: "6E3450" }
 inledning:
-  - Det här är ett körschema för en lärarledd insats i liten grupp där eleverna samtalar om skönlitteratur. Insatsen är tidsbegränsad, riktad och har tät uppföljning. Varje pass är cirka 30 minuter och följer samma rutin. Metoden bygger på Aidan Chambers boksamtal, på svenska kallad ”Jag undrar”. Syftet är inte att kontrollera att eleverna läst rätt, utan att utveckla deras tänkande om texter. Eleverna läser en kort skönlitterär text, delar sina först-tankar med fyra enkla frågor och fördjupar sedan samtalet tillsammans. Läraren leder, men ingen sitter på de rätta svaren, inte ens läraren.
-  - Faktatextsamtal i grupp täcker ämnestexterna. Det här är samtalet om skönlitteratur. Börja med rutinen och tidsschemat nedan. Forskningsgrunden finns kort sammanfattad sist.
+  - Chambers boksamtal i grupp är en lärarledd insats där fyra till tio elever i åk 4–9 läser en hel bok tillsammans och samtalar om den. Den är för elever som behöver stöd i läsförståelsen, och för den som aldrig har läst ut en bok som andra pratar om. Eleven lär sig att hålla ihop en berättelse över flera veckor och att samtala om den, som läsare gör.
+  - Du läser högt, och varje elev följer med i sitt eget exemplar av boken. På väggen sitter bokens tavla, en tavla för hela boken, oftast ett blädderblocksark. I din bok sitter en post-it som du har skrivit före passet, på ett ställe där texten blir svår. Varje elev har en egen, tom post-it och sätter den under läsningen där hen vill säga något. När ni samtalar ligger frågekortet mitt på bordet, med Aidan Chambers fyra frågor, och var och en väljer en.
+  - Varje läspass börjar och slutar vid tavlan. Först säger var och en till den bredvid vad som hände förra gången, en elev berättar för gruppen, och alla gissar vad som händer nu. Sedan läser du i drygt 20 minuter. I samtalet slår alla upp boken vid sin post-it och säger en sak var, först till den bredvid. Gruppen följer sedan en tråd med Chambers fråga ”Hur vet du det?” Sist säger eleverna dagens rad. Du skriver den på tavlan, och en ny fråga när ni har en. Frågan står kvar tills boken svarar, och då får den en bock. Ingen sitter på de rätta svaren, inte ens du.
+  - "Perioden är en bok. Metoden har tre nivåer med tio böcker på varje. Före bokvalet gör du läsintervjun, ett kort samtal med varje elev, och väljer två av böckerna. I bokvalet väljer gruppen en av dem. Perioden slutar med ett samtal om hela boken, och var och en skriver ett boktips till en läsare. Hur lång perioden blir beror på boken: Nattkorpen av Johan Rundberg tar omkring 12 läspass, och Momo eller kampen om tiden av Michael Ende omkring 27."
 upplagg:
   rubrik: Så fungerar insatsen
-  text: "Insatsen pågår i sex till åtta veckor med två till tre pass på cirka 30 minuter i veckan. Gruppen har fyra till tio elever. Varje pass har en kort skönlitterär text eller ett avsnitt ur en gemensam bok. Du läser texten högt, eleverna läser den själva, och gruppen samlar först-tankar med de fyra grundfrågorna innan du fördjupar med ”Hur vet du det?” Till sist säger alla en sak de tar med sig. Före och efter perioden samtalar eleven kort om en text, och du ser om hen kan dela en tanke, motivera den och bygga vidare på andras."
+  text: "Fyra till tio elever läser en hel bok tillsammans, 40 minuter per pass och två till tre pass i veckan. Perioden är fem till tio veckor, från bokvalet till slutsamtalet och boktipset. Före den behöver du en till tre veckor till läsintervjuerna och böckerna. Läspasset har fyra delar: Var är vi?, Läs, Samtala och Med mig. Du läser högt i drygt 20 minuter, eleverna följer med i sina böcker, och bokens tavla håller ihop berättelsen. Läsintervjun före och efter boken, och det eleven säger i passen, visar om hen håller ihop berättelsen och kan säga var i boken en tanke kommer ifrån."
+gruppen:
+  rubrik: Så sätter du ihop gruppen
+  text: "Metoden är för elever som kan avkoda men läser långsamt och tappar sammanhanget, och för den som aldrig har läst ut en bok som andra pratar om. Eleven behöver kunna förstå en berättelse som hen hör och orka lyssna och följa med i boken i drygt 20 minuter. Den som avkodar mödosamt kan vara med, eftersom du läser högt: hen lyssnar och hittar tillbaka i texten när du säger sidnumret. Avkodning och läsflyt tränar hen vid sidan av boken. Gruppen har fyra till tio elever. Är ni fler än fem, samtalar ni i två grupper, och hur ni gör står under Fler än fem."
 principer:
   rubrik: Tre saker att hålla fast vid
-  text: "Säg ”Jag undrar” i stället för ”Varför”, eftersom ”Varför” kan låta som ett förhör. Det finns inget facit: alla svar är värda att höra, också det som ingen annan har tänkt på. Och fråga ofta ”Hur vet du det?”, så att eleverna går tillbaka till texten."
+  text: Läs mycket och med få avbrott. Stanna bara vid din post-it, högst två gånger per pass, och när någon har tappat bort sig, så att boken får det mesta av passet. Bär frågorna med er. Gruppens frågor står på tavlan tills boken svarar, och i slutsamtalet ser ni vilka som fick svar. Fråga ”Hur vet du det?”, och säg ”Jag undrar” i stället för ”Varför”. Då går eleverna tillbaka till boken, och ingen sitter på facit.
+tabeller:
+  - rubrik: "Perioden: en bok från bokvalet till boktipset"
+    plats: efter-inledning
+    text: "Perioden har tre slags pass: bokvalet, läspassen och slutet. Tabellen visar perioden i tidsordning, med det som är nytt och var det står. Den säger när något tidigast kommer, och gruppen avgör takten. I en bok med högst tolv läspass hinner ni till raden Från läspass 6. Raden Från läspass 10 väntar till nästa bok. Då börjar ni där ni slutade."
+    kolumner:
+      - När
+      - Det som är nytt
+      - Här står det
+    rader:
+      - - Före bokvalet
+        - Du gör läsintervjun, fem minuter per elev, läser de två böckerna och reserverar exemplar. Räkna med en till tre veckor.
+        - Följ upp effekten · Var hittar du böckerna och läsplanen?
+      - - Bokvalet
+        - Gruppen får se två böcker och röstar. Du läser början av den som vann.
+        - "Första passet: bokvalet"
+      - - Läspass 1
+        - Du visar allt för första gången och läser kortare. I samtalet räcker laget runt.
+        - Läspass 1
+      - - Läspass 2 och 3
+        - Tråden, den första samtalsregeln och protokollet. Från läspass 3 samtalar ni i två grupper, om ni är fler än fem.
+        - Samtalsreglerna · Fler än fem · Följ upp effekten
+      - - Från läspass 4
+        - En elev skriver på tavlan. Nästa samtalsregel tar ni när den förra syns i samtalet, tidigast i läspass 5.
+        - Eleverna tar över · Samtalsreglerna
+      - - Från läspass 6
+        - En elev leder Var är vi? vid tavlan. I bokens andra halva berättar eleverna vad som har hänt hittills.
+        - Eleverna tar över
+      - - Från läspass 10
+        - En elev leder laget runt, senare också tråden.
+        - Eleverna tar över
+      - - Det sista läspasset
+        - Du läser ut boken. I stället för samtalet säger alla ett ord om boken och skriver upp den på sitt kort Böcker jag har läst ut.
+        - "Sista passet: slutet"
+      - - Slutet
+        - Slutsamtalet om hela boken, och boktipset.
+        - "Sista passet: slutet"
+      - - Efter slutet
+        - Du gör läsintervjun igen, omkring tio minuter, och ni väljer elevens nästa bok.
+        - Följ upp effekten
+    not: När boken är vald gör du läsplanen och skriver in det som är nytt i ett läspass. Hur du gör står i avsnittet Var hittar du böckerna och läsplanen?
+  - rubrik: Varför en hel bok blir svår, och vad metoden gör
+    plats: efter-inledning
+    text: Sex saker gör det svårt att läsa en hel bok tillsammans och samtala om den. Tabellen visar vad metoden gör åt var och en.
+    kolumner:
+      - Det som händer
+      - Så kan det låta
+      - Så gör metoden
+    rader:
+      - - Eleven tappar sammanhanget mellan passen
+        - ”Var var vi?” ”Vad hände förra gången?”
+        - Passet börjar vid bokens tavla. Var och en säger till den bredvid vad som hände, och en elev berättar med raderna som stöd.
+      - - Eleven blandar ihop personerna och tappar bort sig vid ett tidshopp
+        - ”Vem är han?”
+        - Personerna står på tavlan, med streck mellan dem som hör ihop. Du stannar vid din post-it där texten blir svår.
+      - - Eleven kommer inte in i boken eller tröttnar
+        - ”Tråkigt.” ”Kan vi inte bara läsa?”
+        - Gruppen väljer boken i bokvalet. I läspasset läser du drygt 20 minuter med få avbrott.
+      - - Eleven glömmer sin fråga innan boken svarar
+        - ”Vad var det vi undrade?”
+        - Frågorna står på tavlan och får en bock när boken svarar.
+      - - Samtalet blir ett referat eller ett förhör
+        - ”Den var bra.” ”Först kom han, sen gick de.”
+        - Var och en säger en sak med boken uppslagen vid sin post-it, och gruppen väljer tråden ur det eleverna sa.
+      - - Eleven vågar inte säga sin tanke, eller talar bara med dig
+        - ”Jag vet inte.” ”Samma som hon.”
+        - Var och en säger sin sak till den bredvid först, och gruppen tar tre samtalsregler, en i taget.
+  - rubrik: "Bokens tavla: en tavla för hela boken"
+    plats: efter-arbetsform
+    text: Ni har samma tavla hela boken, och den sitter kvar från bokvalet till slutet. Den har tre rutor, med frågor till varje ruta. I Var är vi? börjar passet med att ni läser tavlan, och i Med mig slutar det med att ni fyller på den.
+    kolumner:
+      - Rutan
+      - I rutan står
+      - När passet börjar
+      - När passet slutar
+    rader:
+      - - Det här har hänt
+        - En rad per läspass, med passets nummer. Hoppar boken i tiden, står det först på raden, som ”Två år senare”.
+        - ”Vad hände förra gången?”
+        - ”Vad hände i dag, i en mening?”
+      - - Personerna
+        - Namnet, några ord om vem det är och ett streck mellan dem som hör ihop.
+        - Du pekar på namnen medan eleven berättar.
+        - ”Kom det någon ny?”
+      - - Frågorna vi bär med oss
+        - Det gruppen undrar och boken inte har svarat på än. Frågan som fick svar får en bock, gärna med sidnumret.
+        - Ni läser dem som inte har en bock. ”Vad tror du händer nu?”
+        - ”Har boken svarat på någon fråga?” ”Vad undrar vi nu?”
+    not: Eleverna turas om att berätta, med raderna som stöd. Blir dagens rad en detalj, fråga ”Vem var viktigast i dag, och vad hände?” Frågorna på tavlan är gruppens egna. Den första säger du själv, från din post-it, och sedan kommer de från eleverna. En fråga som ingen kan svara på än är bra. Du pekar på tavlan när någon undrar vem en person är.
+  - rubrik: "Tavlans form: välj efter rummet"
+    plats: efter-arbetsform
+    text: Grundformen är ett blädderblocksark på väggen. Tavlan ska sitta kvar mellan passen, och alla ska se den medan ni läser och samtalar, så välj en annan form om rummet kräver det.
+    kolumner:
+      - Formen
+      - Passar när
+      - Tänk på
+    rader:
+      - - Blädderblock
+        - Arket får sitta kvar, eller du rullar ihop det och samtalsreglerna och tar dem med dig.
+        - Rutan Det här har hänt rymmer omkring tio rader. Sedan fortsätter ni på ett ark bredvid, med de gamla raderna i en mening överst.
+      - - Whiteboard
+        - Rummet är gruppens eget.
+        - Skriv ”Låt stå” på tavlan.
+      - - Skärm, som smartboard eller projektor
+        - Skärmen är på i varje pass.
+        - Mallen Bokens tavla är en tabell som du skriver i. Strecken går inte att dra där, så skriv på personens rad vem hen hör ihop med.
+      - - Laminerad A3 med whiteboardpenna
+        - Du går mellan rum, boken är kort och ni är högst fem.
+        - Arket ligger på bordet, och raderna suddas lätt ut i en väska.
+    not: Fotografera tavlan efter varje pass, vilken form du än väljer. Då har du den kvar om något suddas, och den som var borta kan se bilden.
+  - rubrik: "Post-it-lapparna: din före passet, elevens under läsningen"
+    plats: efter-arbetsform
+    text: Metoden har två slags post-it. Din skriver du före passet, och elevens är tom.
+    kolumner:
+      - Om den
+      - Din post-it
+      - Elevens post-it
+    rader:
+      - - När
+        - Före passet, när du läser om dagens sidor.
+        - Du delar ut den när ni börjar läsa, och eleven sätter den medan du läser.
+      - - Hur många
+        - En per läspass, högst två.
+        - En per läspass. De sitter kvar tills boktipset är klart. Eleven trycker in de gamla mot sidan, så att bara dagens sticker ut.
+      - - Var
+        - I din bok, där texten blir svår, som vid ett tidshopp, en ny person eller ett ord som berättelsen hänger på. I bokens andra halva också där något från en tidigare rad på tavlan kommer tillbaka.
+        - I elevens bok, i kanten vid det ställe där hen vill säga något, som vid något hen gillar, undrar över eller inte förstår.
+      - - Det står på den
+        - "Sidan och tre rader: Jag undrar, Det står och Jag tror."
+        - Ingenting. Eleven skriver inte på den, och får flytta den till ett bättre ställe.
+      - - Så används den
+        - I Läs stannar du vid den och säger de tre raderna på under en minut. Vid ”Det står” läser du meningen ur boken och pekar på den.
+        - I Samtala slår eleven upp boken vid dagens post-it och säger sin sak där, först till den bredvid och sedan till gruppen.
+      - - I Momo
+        - ”Jag undrar om man kan spara tid på en bank. Det står”, och så läser du meningen om att lägga in tid och få tillbaka den. ”Jag tror inte att det går.”
+        - Ella sätter sin när en ny person kommer in. I samtalet säger hon ”Här slutade jag förstå. Vem är han?”
+    not: Den som inte har satt sin post-it när läsningen är slut gör det när du lägger fram frågekortet. Hen säger sitt sist. Den som har satt sin vid något hen inte förstod hjälper gruppen mest, och det stället tar ni först i tråden. Varje elev har samma exemplar varje pass, med en namnlapp innanför pärmen, så att hen har kvar sina ställen till slutsamtalet och boktipset.
+  - rubrik: "Samtalet med frågekortet: fyra steg"
+    plats: efter-arbetsform
+    text: Här står Samtala steg för steg. Frågekortet har Chambers fyra grundfrågor, som står under tabellen. Ni har ett kort per samtalsgrupp. Det är en hjälp att komma i gång och ingen lista att gå igenom (Chambers, 1993).
+    kolumner:
+      - Steg
+      - Det som händer
+      - Du säger
+    rader:
+      - - 1 · Lägg fram
+        - Du lägger kortet mitt på bordet, och de första passen läser du frågorna högt. Alla slår upp boken vid dagens post-it och väljer en av kortets frågor.
+        - ”Slå upp boken vid din post-it.”
+      - - 2 · Laget runt
+        - "Först säger var och en till den bredvid om gissningen stämde, och säger sin sak. I laget runt säger en i taget sin sak till gruppen, och de andra lyssnar."
+        - ”Stämde din gissning? Säg det till den bredvid, och säg din sak.” ”Vem börjar?”
+      - - 3 · Tråden
+        - Har någon sagt att hen inte förstod, tar ni det stället först. De två som sa något som hänger ihop säger sedan mer, och de andra bygger vidare.
+        - ”Vi tar Ellas ställe först. Vem kan visa?” ”Sa två av er något som hänger ihop?”
+      - - 4 · Tillbaka till boken
+        - Eleven visar var det står och läser meningen, eller låter dig läsa den. Kan ingen förklara det någon inte förstod, läser du om stället.
+        - ”Hur vet du det? Visa i boken.”
+    not: "Kortets frågor är ”Var det något du gillade?” och ”Var det något du inte gillade?”, ”Var det något du inte förstod eller undrade över?” och ”Lade du märke till något mönster eller någon koppling?” Förklara orden första gången: ett mönster är något som kommer tillbaka, som tre bröder och tre prov i en saga, och en koppling är något som boken påminner om. De första passen säger du efter laget runt kort vad var och en sa, så att gruppen ser hur man hittar en tråd. Ser ingen något som hänger ihop, säger du vilka två som sa det. Det ni fortfarande undrar över blir en fråga på tavlan. Det du säger i stegen står också på kortet Du som leder, med ”Vad tar vi med oss till tavlan?” sist."
+  - rubrik: "Första passet: bokvalet"
+    plats: efter-fastnar
+    text: I bokvalet väljer gruppen själv vilken bok ni ska läsa, och då blir boken gruppens egen. Välj två böcker ur nivåns lista efter det eleverna sa i läsintervjun om vad de gillar. Sidan om nivån föreslår böcker som går bra ihop. De två ska vara ungefär lika långa men olika i genre, miljö eller ton. Båda ska passa gruppen, och du ska ha läst dem. På bordet räcker ett exemplar av varje bok per elevpar, men till läspass 1 behöver varje elev den bok gruppen väljer. Reservera därför ett exemplar per elev av båda. Av den bok som inte vann behåller du några exemplar och lämnar tillbaka resten. Tavlan gör du i ordning sist i bokvalet, i den form du har valt.
+    kolumner:
+      - Tid
+      - Vad händer
+      - Du säger
+    rader:
+      - - 0–10
+        - Du visar omslagen, berättar kort om böckerna och läser första sidan ur båda. Paren följer med i böckerna.
+        - ”Vi ska läsa en hel bok, en riktig bok som andra i er ålder läser.”
+      - - 10–20
+        - Paren läser baksidorna och tips från en tidigare grupp, om sådana finns.
+        - ”Vad lockar dig? Vad undrar du?”
+      - - 20–25
+        - Gruppen röstar med röstsedlar i en låda, en röst var. Blir det lika läser du en sida till ur båda, och gruppen röstar igen.
+        - ”Skriv bokens namn på röstsedeln.”
+      - - 25–40
+        - Visa gärna en bild av platsen där boken utspelar sig. Du läser början, och paren följer med. Du ritar tavlans tre rutor och skriver bokens namn överst.
+        - ”Den andra boken står kvar här, och den kan bli nästa bok.”
+    not: Blir det lika två gånger, avgör du och säger varför. Den bok som inte vann står kvar i rummet och går att låna hem. Efter bokvalet gör du läsplanen.
+  - rubrik: "Läspass 1: allt visas första gången"
+    plats: efter-fastnar
+    text: Läspass 1 börjar där du slutade läsa i bokvalet. Passet har samma fyra delar som de andra, men du visar allt för första gången. Därför läser du kortare, och i samtalet räcker laget runt.
+    kolumner:
+      - Tid och del
+      - Vad händer
+      - Du säger
+    rader:
+      - - 0–5 · Var är vi?
+        - Tavlans rutor är tomma, så ni berättar början tillsammans. Var och en säger till den bredvid vad hen tror händer nu.
+        - ”Vad hände i början?” ”Vad tror du händer nu?”
+      - - 5–23 · Läs
+        - Du visar din post-it i din bok och delar ut en post-it var. Efter ett par minuter läser du i en kvart och stannar vid din post-it. Eleverna följer med och sätter sin post-it.
+        - ”Sätt din post-it där du vill säga något.” ”Jag undrar”, ”Det står” och ”Jag tror”
+      - - 23–35 · Samtala
+        - Du lägger fram frågekortet, läser frågorna högt och förklarar mönster och koppling. Var och en väljer en fråga och säger sin sak till den bredvid, och sedan till gruppen.
+        - ”Stämde din gissning?” ”Allt du tänker om boken är värt att säga.” ”Vem börjar?”
+      - - 35–40 · Med mig
+        - Eleverna säger den första raden och den första personen, och du skriver. Den första frågan säger du själv, från din post-it.
+        - ”Vad hände i dag, i en mening?”
+    not: Tråden och ”Hur vet du det?” kommer i läspass 2. Då skriver ni också den första samtalsregeln på arket, den du sa i läspass 1, och du läser lite kortare. Är ni fler än fem, räcker laget runt i läspass 2 också, och tråden kommer när ni har delat er, tidigast i läspass 3.
+  - rubrik: "Samtalsreglerna: tre regler, en i taget"
+    plats: efter-fastnar
+    text: "Många elever talar till dig och väntar på nästa fråga. De behöver lära sig att tala med varandra. Tre saker hjälper dem: paret först, tre samtalsregler som gruppen tar en i taget, och talkort när några få talar mest. Reglerna står på ett blädderblocksark bredvid tavlan, som i tabellen."
+    kolumner:
+      - Regeln
+      - Se
+      - Höra
+    rader:
+      - - 1 · Allt vi tänker om boken är värt att säga.
+        - Vi har boken uppslagen vid vår post-it och visar stället.
+        - ”Jag tänker på sidan där Fusi kommer in.” ”Jag undrar vem han är.” ”Pass, kom tillbaka till mig.”
+      - - 2 · Vi bygger vidare på det någon sa.
+        - Vi vänder oss mot den som talar och väntar tills hen har talat färdigt.
+        - ”Jag håller med dig, för han har bråttom.” ”Jag tänker annorlunda, för han ville spara tid.” ”Hur vet du det?”
+      - - 3 · Vi bjuder in varandra.
+        - Vi vänder oss till den som inte har sagt något än.
+        - ”Vad tycker du?” ”Håller du med?” ”Tycker du likadant eller annorlunda?”
+    not: "En regel tar ni före samtalet, på omkring fem minuter: fråga ”Vad är viktigt när man samtalar om en bok?”, säg regeln och låt gruppen säga den med egna ord. Skriv den på arket, och fyll i Se och Höra tillsammans. Läs kortare det passet. De första passen med regeln frågar du sist i Samtala ”Vad gjorde vi bra i samtalet i dag?”, och säger en sak du hörde. Den första regeln sa du redan i läspass 1, och i läspass 2 skriver ni den. Nästa regel tar ni när den förra syns och hörs i samtalet utan att du påminner, tidigast tre läspass senare. Arket följer med till nästa bok."
+  - rubrik: "Samtalet mellan eleverna: det du gör"
+    plats: efter-fastnar
+    text: Reglerna är gruppens, och det här är din del.
+    kolumner:
+      - Du vill att de
+      - Det du gör
+      - Du säger
+    rader:
+      - - vågar säga sitt
+        - Låt den som vill vänta säga ”Pass”, och kom tillbaka sist. Då kan hen visa sitt ställe och låta dig läsa meningen.
+        - ”Jag kommer tillbaka till dig.”
+      - - svarar på varandra
+        - När en regel är ny prövar paren den först, och den som lyssnar svarar med en fras från arket. I gruppen väntar du tre sekunder, så att en kamrat hinner svara.
+        - ”Vem vill bygga vidare på det Noor sa?” ”Du byggde vidare på det Elias sa.”
+      - - kommer in i tråden
+        - Säg vad du ser när en elev bjuder in en kamrat. Talar några få mest, ger du alla ett talkort.
+        - ”Du frågade vad Sara tyckte.”
+    not: Ett talkort är ett tomt kort eller en bit papper, ett per elev. Visa korten själv första gången, med sidan om Talkort på bordet, och ta bort dem när alla kommer in i tråden ändå. Fråga inte en elev inför gruppen varför hen är tyst, och beröm inte stort när hen säger något. Säger en elev ingenting i gruppen efter några veckor, ta upp det med elevhälsan.
+  - rubrik: "Eleverna tar över: en bit i taget"
+    plats: efter-fastnar
+    text: "I början leder du allt. Sedan tar eleverna över, det minsta först. Gå vidare när gruppen klarar steget utan din hjälp, och gå tillbaka ett steg när den inte gör det längre. Du läser alltid själv."
+    kolumner:
+      - Det du gjorde
+      - Det eleverna gör nu
+      - Ungefär när
+    rader:
+      - - 1 · Du höll pennan.
+        - En elev skriver ett namn, drar ett streck eller sätter bocken, och senare hela raden.
+        - tidigast läspass 4
+      - - 2 · Du frågade ”Hur vet du det?”
+        - Eleverna frågar varandra, och du väntar.
+        - från regel 2, tidigast läspass 5, i paret
+      - - 3 · Du ledde Var är vi?
+        - En elev ställer de två frågorna vid tavlan.
+        - tidigast läspass 6
+      - - 4 · Du ledde samtalet.
+        - En elev leder laget runt med kortet Du som leder, senare också tråden.
+        - tidigast läspass 10
+    not: Är ni fler än fem, gäller stegen den grupp där du sitter. Leder en elev samtalet i läspassen, leder en elev också laget runt i slutsamtalet. I bokens andra halva byter du frågan i Var är vi? till ”Vad har hänt hittills?” De två första gångerna berättar du själv på en halv minut vem boken handlar om och de tre eller fyra viktigaste raderna. Sedan berättar eleverna så, till den bredvid och för gruppen, gärna först utan tavlan. Den som inte vill stå vid tavlan berättar från sin plats.
+  - rubrik: "Fler än fem: två samtalsgrupper"
+    plats: efter-fastnar
+    text: Laget runt med sex elever tar för lång tid. Är ni fler än fem, delar ni er i två samtalsgrupper när Samtala börjar, med högst fem i varje. Resten av passet och slutsamtalet gör ni tillsammans.
+    kolumner:
+      - Frågan
+      - Svaret
+    rader:
+      - - Från när?
+        - Tidigast i läspass 3. Före det samtalar alla tillsammans, och då räcker laget runt.
+      - - Var sitter du?
+        - Med den ena gruppen, och du byter grupp varje pass, så att du hör båda.
+      - - Vem leder den andra?
+        - En elev som vill läser upp kortet Du som leder, en rad i taget. I början hoppar hen över rad 5 och 6, som är tråden. Nästa pass läser en annan. Vill ingen, läser gruppen kortet tillsammans.
+      - - Vad gör gruppen utan dig?
+        - Laget runt och, om tiden räcker, ett varv till med en annan av frågekortets frågor. Gruppen följer en tråd först när den klarar tråden de pass du sitter med, gärna med talkort.
+      - - Vad tar gruppen med sig?
+        - En fråga till Med mig, när den har en.
+    not: Varje samtalsgrupp har ett eget frågekort och ett eget kort Du som leder, som står bland materialet. Blanda grupperna, så att varje grupp har någon som gärna börjar. Metoden fungerar också i helklass. Då läser du för alla, och klassen samtalar i grupper om tre till fem.
+  - rubrik: "Sista passet: slutet"
+    plats: efter-fastnar
+    text: "I det sista läspasset läser du ut boken. Det har Var är vi? och Med mig som vanligt, men i stället för samtalet säger var och en ett ord om boken och skriver upp den på sitt kort Böcker jag har läst ut. Slutet är nästa pass, helst efter en helg, så att eleverna hinner tänka på boken. Slutsamtalet för ni tillsammans, också när ni är fler än fem. Rita före slutet fyra spalter på ett blädderblocksark, en per fråga på frågekortet: Gillade, Gillade inte, Undrade och Mönster. Boka i förväg en stund i elevernas klasser veckan efter, då den som vill tipsar sin klass i en minut, med boken i handen."
+    kolumner:
+      - Tid
+      - Vad händer
+      - Du säger
+    rader:
+      - - 0–5
+        - Ni berättar boken vid tavlan, en bit var.
+        - ”Berätta boken från början.”
+      - - 5–12
+        - Med den bredvid bläddrar eleverna bland sina post-it och väljer en sak var om hela boken. I laget runt säger de sin sak, och du skriver den i rätt spalt.
+        - ”Vad vill du säga om hela boken?”
+      - - 12–20
+        - Ni drar streck mellan det som hänger ihop och följer tråden med flest streck.
+        - ”Sa två av er något som hänger ihop?” ”Hur vet du det?”
+      - - 20–25
+        - Ni går igenom frågorna på tavlan.
+        - ”Vilka frågor fick svar, och var i boken? Vilka är fortfarande öppna?”
+      - - 25–40
+        - Var och en fyller i bladet Boktipset och läser upp sitt tips.
+        - ”Vem vill du ska läsa boken?”
+    not: "Är ni fler än fem, säger var och en sin sak till den bredvid i stället för laget runt, och du skriver några i varje spalt. Eleverna tar ur sina post-it efter boktipset. Bladet Boktipset har sex rader. Vid ”Till” skriver eleven läsaren, helst sin egen klass, vid ”Bra att veta” en varning, som att boken börjar långsamt, och vid ”Min fråga till dig” en fråga som läsaren bär med sig. Den som skriver långsamt fyller i tre rader och säger resten. Spara tipsen i ett kuvert till nästa grupps bokval."
+  - rubrik: Så skiljer sig nivåerna
+    plats: efter-urval
+    text: Nivåerna bygger mer på temat och innehållet än på hur svår boken är att läsa, eftersom du läser högt och eleven följer med. Välj nivå efter gruppens ålder och efter vad gruppen är redo för. Frågorna för åldern blir vuxnare från nivå till nivå, eftersom äldre elever vet mer om världen och om hur berättelser är byggda. Före varje lista står en sida om nivån.
+    kolumner:
+      - Det som skiljer
+      - Bas
+      - Medel
+      - Avancerat
+    rader:
+      - - Årskurs
+        - nära åk 4–5
+        - nära åk 6–7
+        - nära åk 8–9
+      - - Huvudpersonerna
+        - ofta i elevernas ålder
+        - tolv till fjorton år
+        - oftast tonåringar och vuxna
+      - - Temana
+        - vänskap, mod, rättvisa och förlust
+        - sorg, flykt, att höra till och att bli äldre
+        - våld, makt, kärlek och meningen med livet
+      - - Frågor för åldern
+        - platsen, personerna, ordningen och egna minnen
+        - vems berättelse det är och vad som känns sant
+        - berättaren, ordningen och när boken skrevs
+      - - Läspassen
+        - 9 till 27
+        - 11 till 21
+        - 8 till 21
+  - rubrik: "Materialet: det du skriver ut, och när"
+    plats: efter-grund
+    text: Materialet står efter böckerna. Av sidorna om böckerna behöver du bara de två för gruppens nivå, sidan om nivån och litteraturlistan.
+    kolumner:
+      - Vad
+      - Hur många
+      - När
+    rader:
+      - - Läsintervjun och kortet Böcker jag har läst ut
+        - ett av varje per elev
+        - före bokvalet, och igen vid bokens slut
+      - - Röstsedlarna
+        - två per elev
+        - bokvalet
+      - - Bokens tavla
+        - en, som du ritar av eller visar på skärm
+        - bokvalet
+      - - Läsplanen
+        - ett blad per tio läspass
+        - när boken är vald
+      - - Frågekortet med kortet Du som leder
+        - ett blad per samtalsgrupp
+        - från läspass 1
+      - - Protokollet
+        - ett per elev
+        - från läspass 2
+      - - Sidan om Talkort och ett tomt kort per elev
+        - en sida per samtalsgrupp
+        - när några få talar mest
+      - - Boktipset
+        - ett per elev
+        - slutet
 passrutin:
-  text: Varje pass följer samma rutin. Det gör insatsen lätt att leda och tryggt för eleverna att veta vad som ska hända.
+  text: Passet börjar och slutar vid bokens tavla, och däremellan läser du högt och gruppen samtalar. Den sista delen heter Med mig, efter det ni tar med er till nästa pass. Tabellen visar passet när du leder det själv. Tavlan, post-it-lapparna och samtalet med frågekortet har egna avsnitt efter arbetsformen. Efter exemplet står perioden i tidsordning, från bokvalet till slutet.
   steg:
-    - Läraren läser texten högt.
-    - Eleverna läser den själva, i par eller tyst, och markerar något de fastnade för.
-    - Gruppen samlar först-tankar med de fyra frågorna.
-    - Läraren drar trådar och fördjupar med fler frågor.
-    - Var och en säger till sist en sak de tar med sig.
+    - text: Var och en säger till den bredvid vad som hände förra gången, och en elev berättar för gruppen. Ni läser tavlans frågor utan bock, och alla säger sin gissning till den bredvid.
+      fas: Var är vi?
+    - text: Du läser högt till dagens stopp i läsplanen, och eleverna följer med. Vid din post-it stannar du och säger ”Jag undrar”, ”Det står” och ”Jag tror”. Varje elev sätter sin post-it där hen vill säga något.
+      fas: Läs
+    - text: Var och en väljer en av frågekortets frågor och säger sin sak vid dagens post-it, först till den bredvid och sedan laget runt. Det någon inte förstod tar ni först, och sedan en tråd ur det eleverna sa.
+      fas: Samtala
+    - text: Vid tavlan säger eleverna dagens rad och vem som är ny, och du skriver. En fråga som fick svar får en bock, och har ni en ny fråga, skriver du den.
+      fas: Med mig
+  efterPasset: Fotografera tavlan, och skriv i läsplanen vad gruppen sa och vad du tar upp nästa gång.
+  kallas: delar
 tidsschema:
-  rubrik: 30 minuter, steg för steg
-  text: Förbered dig genom att läsa texten själv och förbereda två till tre specialfrågor. Sedan följer du tidsschemat.
+  rubrik: Ett läspass på 40 minuter
   rader:
     - tid: Före passet
       fas: Förberedelse
-      vad: Välj en kort text. Läs den själv. Förbered två till tre specialfrågor. Bestäm hur texten ska läsas.
-    - tid: 0–10 min
+      vad: Läs om dagens sidor. Skriv din post-it där texten blir svår, och läs stället högt för dig själv. Titta på tavlan och i läsplanen.
+    - tid: 0–5 min
+      fas: Var är vi?
+      vad: Fråga ”Vad hände förra gången?” Blir något fel, peka på tavlan i stället för att rätta. Fråga sedan ”Vad tror du händer nu?”
+    - tid: 5–27 min
       fas: Läs
-      vad: Läraren läser högt och tänker högt på ett par ställen. Eleverna läser sedan i par eller tyst och markerar något de fastnade för.
-    - tid: 10–15 min
-      fas: Samla först-tankar
-      vad: Ställ de fyra grundfrågorna, en i taget, laget runt. Skriv upp svaren i fyra spalter. Ännu ingen lång diskussion.
-    - tid: 15–27 min
-      fas: Fördjupa
-      vad: Dra trådar ur spalterna. Använd allmänna frågor och specialfrågor. Fråga ofta ”Hur vet du det?”.
-    - tid: 27–30 min
-      fas: Avsluta
-      vad: Var och en säger en sak de tar med sig. Eventuellt en rad i loggen eller ett betyg på texten.
-  efter: "En kort text per pass. Blir gruppen klar tidigt: be dem hitta ett textställe som stöder en tanke, jämföra med en annan bok eller skriva en fråga till författaren."
-steg:
-  rubrik: "Passets fyra steg: vad du gör och säger"
-  text: De fyra stegen är ryggraden i passet. I steg tre växer elevernas tänkande. Använd fraserna för att bjuda in, inte för att förhöra.
-  fraserRubrik: Vad du säger
-  rader:
-    - namn: Läs
-      fraga: Möt texten
-      gor: Läs högt och modellera ett par tankar. Låt eleverna läsa själva och markera.
-      fraser:
-        - Här undrar jag vad som händer sen.
-        - Markera en mening du fastnade för.
-        - Sätt ett frågetecken där något var svårt.
-    - namn: Samla först-tankar
-      fraga: Vad bär du med dig?
-      gor: Ställ de fyra grundfrågorna laget runt. Skriv i fyra spalter. Håll det kort.
-      fraser:
-        - Var det något du gillade?
-        - Var det något du inte gillade?
-        - Var det något du undrade över?
-        - Märkte du något mönster eller någon koppling?
-    - namn: Fördjupa
-      fraga: Hur tänker du?
-      gor: Dra trådar ur spalterna. Lägg till allmänna frågor och specialfrågor. Be om textstöd.
-      fraser:
-        - Berätta mer.
-        - Hur vet du det?
-        - Vad i texten får dig att tänka så?
-        - Är det någon som tänker annorlunda?
-    - namn: Avsluta
-      fraga: Vad tar du med dig?
-      gor: Låt var och en säga en sak. Knyt ihop några trådar.
-      fraser:
-        - Säg en tanke, en fråga eller en favoritmening.
-        - Vad vill du läsa vidare om?
-tabeller:
-  - rubrik: "Frågorna: vilka och när"
-    text: Chambers delar in frågorna i tre slag. Du börjar alltid med grundfrågorna. Sedan väljer du bland de allmänna och de särskilda frågorna för att fördjupa. Du behöver inte ställa alla. Välj de som passar texten och gruppen.
-    plats: efter-steg
-    kolumner:
-      - Frågetyp
-      - Vad de gör och när
-      - Exempel
-    rader:
-      - - |-
-          Grundfrågor
-          Steg 2, alltid
-        - Fyra enkla frågor som samlar elevernas först-tankar. Börja med det självklara så att ingen kan misslyckas.
-        - |-
-          ”Var det något du gillade?”
-          ”Var det något du inte gillade?”
-          ”Var det något du inte förstod eller undrade över?”
-          ”Lade du märke till några mönster eller kopplingar?”
-      - - |-
-          Allmänna frågor
-          Steg 3, för att vidga
-        - Öppna frågor som passar vilken text som helst och knyter an till annat ni läst.
-        - |-
-          ”Vad lade du märke till först?”
-          ”Om en kompis frågade vad texten handlar om, vad skulle du säga?”
-          ”Påminner den om något du läst förut?”
-          ”Skulle du vilja läsa mer av det här?”
-      - - |-
-          Specialfrågor
-          Steg 3, för att fördjupa
-        - Frågor du förberett om just den här texten. De hjälper eleverna att se sådant de inte når själva.
-        - |-
-          ”Vems berättelse är det här?”
-          ”Var och när utspelar det sig?”
-          ”Vilken person blev du mest nyfiken på?”
-          ”Vad tyckte du om slutet?”
-    not: Den viktigaste frågan i steg tre är ”Hur vet du det?”. Den skickar eleven tillbaka till texten för att hitta stöd för sin tanke, och det är där tänkandet växer.
+      vad: Dela ut en post-it var och säg ”Sätt din post-it där du vill säga något.” Säg sidnumret när du börjar och efter din post-it.
+    - tid: 27–36 min
+      fas: Samtala
+      vad: Lägg fram frågekortet och fråga ”Stämde din gissning?” Efter laget runt frågar du ”Sa två av er något som hänger ihop?” och följer tråden med ”Hur vet du det?”
+    - tid: 36–40 min
+      fas: Med mig
+      vad: Fråga ”Vad hände i dag, i en mening?”, ”Kom det någon ny?”, ”Har boken svarat på någon fråga?” och ”Vad undrar vi nu?” Säg vem som berättar nästa gång.
+  efter: I Läs förklarar du ett namn eller ett ord med en mening, utan att stanna. Tappar någon sidan, säger du sidnumret igen, och den som tappar raden lyssnar vidare och hittar tillbaka nästa gång du säger sidnumret. Har någon tappat bort sig i berättelsen, fråga ”Var slutade du förstå?” och läs om därifrån. Minuterna är hållpunkter. De första passen tar tavlan och samtalet längre tid, och då läser du kortare. Blir samtalet klart tidigt, läser du några sidor till eller tar upp en fråga från tavlan. Blir det ont om tid, tar ni bara laget runt och ett ”Hur vet du det?” i Samtala, och dagens rad och bocken i Med mig.
 arbetsform:
-  rubrik: "Arbetsform: gemensamt, enskilt, gemensamt"
-  text: Passet rör sig i tre steg. Först gemensamt, där läraren läser och modellerar. Sedan läser eleverna själva, i par eller tyst, och markerar. Till sist gemensamt igen, där ni samlar tankar och fördjupar. Med fyra till tio elever kommer alla till tals. Just därför passar liten grupp den här metoden, eftersom även den som är tyst i helklass vågar dela en tanke här.
+  rubrik: "Arbetsform: gemensamt, läraren läser, gemensamt igen"
+  text: Vid tavlan och i början av samtalet säger var och en sin sak till den bredvid, innan någon säger den till gruppen. Vid tavlan fyller den som lyssnar i det som saknas, och nästa pass berättar hen först. Är ni ett udda antal, är tre en grupp.
   delar:
     - rubrik: 1. Gemensamt
-      text: Läraren läser och modellerar
-    - rubrik: 2. Enskilt eller i par
-      text: Eleverna läser och markerar
+      text: hela gruppen vid tavlan
+      faser:
+        - Var är vi?
+    - rubrik: 2. Läraren läser
+      text: eleverna följer med i sina böcker
+      faser:
+        - Läs
     - rubrik: 3. Gemensamt igen
-      text: Samla först-tankar och fördjupa
+      text: runt bordet, och sist vid tavlan
+      faser:
+        - Samtala
+        - Med mig
 exempel:
   valt:
-    rubrik: Texten läraren valt
-    text: En kort novell, cirka fyra sidor, om en pojke som inte vågar säga ifrån.
+    rubrik: Boken gruppen valde
+    text: Momo eller kampen om tiden av Michael Ende, på nivån Bas. Gruppen valde den framför Ishavspirater, och läsplanen har 27 läspass.
   text:
-    - "Läraren har läst novellen i förväg och förberett tre specialfrågor om huvudpersonen, miljön och slutet. Passet börjar med att läraren läser de första sidorna högt och stannar en gång: ”Här undrar jag vad han känner när han tittar bort. Markera gärna ett ställe ni fastnar på.” Eleverna läser resten i par och sätter frågetecken där något skaver."
-    - Sedan samlar läraren först-tankar. ”Var det något ni gillade?” Laget runt. ”Var det något ni inte gillade? Var det något ni undrade över? Märkte ni något mönster?” Svaren skrivs i fyra spalter på tavlan, kort och utan diskussion än.
-    - "Nu drar läraren i trådarna. En elev har skrivit att slutet var konstigt. ”Berätta mer. Hur vet du att det var konstigt?” Eleven bläddrar tillbaka och pekar på en mening. Läraren följer upp med en specialfråga: ”Vems berättelse är det egentligen?” Gruppen märker att vi bara hör pojkens tankar, aldrig de andras. En annan elev kopplar till en tidigare bok om mod. Läraren håller samtalet öppet och ber ofta om textstöd, men talar inte om vad novellen betyder."
-    - "Passet avslutas med att var och en säger en sak de tar med sig: en tanke, en fråga eller en favoritmening. Efteråt skriver läraren en kort notering: alla deltog, två elever kunde motivera med textexempel, och nästa gång övar vi mer på att gå tillbaka till texten."
+    - "Adam, Ella, Elias, Noor och Sara går i åk 5 och har sitt sjätte läspass. Läraren leder fortfarande hela passet och håller pennan. Kvällen före har hen läst om dagens sidor och skrivit en post-it om att spara tid på en bank."
+    - "Passet börjar vid tavlan. Läraren frågar: ”Vad hände förra gången?” Var och en säger det till den bredvid, och sedan berättar Adam för gruppen: ”Folk går till Momo, för hon lyssnar. Sen kom de grå herrarna.” Gruppen läser frågorna som inte har en bock, och var och en säger till den bredvid vad hen tror händer nu. Noor säger: ”Nu tror jag att de tar någons tid.”"
+    - Läraren säger sidnumret och läser, och eleverna följer med i sina böcker. Vid sin post-it stannar hen och säger de tre raderna, säger sidnumret igen och läser vidare från samma mening. Noor, som hade tappat sidan, hittar rätt. När en ny person kommer in i berättelsen sätter Ella sin post-it där.
+    - "När läsningen är slut lägger läraren frågekortet mitt på bordet, och alla slår upp boken vid sin post-it och väljer en av kortets frågor. Läraren frågar: ”Stämde din gissning?” Noor säger till Sara: ”Ja, de tog Fusis tid.” Sedan säger var och en sin sak till den bredvid. I laget runt börjar Elias: ”Nu fattar jag varför folk glömmer dem. Den grå herren tar bort minnet när han går, och Fusi tror att det var hans egen idé att spara tid.” Noor säger att Fusi får bråttom, som hennes storebror. Ella säger: ”Här slutade jag förstå. Vem är han?” Adam gillade inte att ingen märker de grå herrarna, och Sara gillade när den grå herren räknade Fusis liv i sekunder."
+    - "Läraren säger: ”Vi tar Ellas ställe först. Vem kan visa?” Sara slår upp sidan där Fusi kommer in och visar raden där det står att han är frisör. Sedan frågar läraren: ”Sa två av er något som hänger ihop?” Adam svarar: ”Elias och Noor. De sparar tid och har ändå bråttom.” Läraren frågar Elias: ”Hur vet du det?” Elias läser meningen vid sin post-it, och gruppen följer tråden."
+    - "Vid tavlan frågar läraren vad som hände i dag, och Sara säger dagens rad: ”Fusi sparar tid.” Ella säger att Fusi är ny och hör ihop med de grå herrarna, och läraren skriver upp honom, med ett streck dit. Frågan ”Varför glömmer folk dem?” får en bock, och Sara har en ny fråga: ”Kan de ta Momos tid också?” Läraren säger att Ella berättar nästa gång. Efteråt fotograferar läraren tavlan och skriver i läsplanen, under Det gruppen sa: ”De som sparar tid har ändå bråttom.”"
+  tavla: true
+  tavlaText: Så ser tavlan ut efter det sjätte läspasset, med en rad per läspass och en bock vid frågan som fick svar. På väggen står de tre rutorna sida vid sida, och från Fusi går ett streck till de grå herrarna, som i filmen Så växer bokens tavla.
 fastnar:
   rubrik: När samtalet stannar
-  text: Ibland tystnar gruppen. Det är inte ett misslyckande. Ge eleverna tanketid och ett litet stöd, inte ett svar.
+  text: Ibland tystnar gruppen. Det är inget misslyckande. Ge eleverna tanketid och ett litet stöd, men inget svar.
   fragaForst:
     - Vad fastnade du för?
-    - Vad i texten får dig att tänka så?
+    - Vad i boken får dig att tänka så?
   trappa:
-    - Gå tillbaka till en spalt och välj en tanke att bygga vidare på.
-    - Be eleven läsa upp meningen den fastnade för.
-    - Ställ en av dina förberedda specialfrågor.
-    - Be eleverna jämföra två olika tankar i gruppen.
-    - Låt dem skriva en rad innan de pratar, om det är lättare.
-  motto: Börja alltid med det självklaraste. Då kan ingen elev känna att den svarat fel.
+    - Be en elev slå upp boken vid sin post-it och läsa meningen där, eller peka på den och låta dig läsa.
+    - Gå till tavlan och välj en fråga som gruppen bär med sig.
+    - Ställ en av frågorna för åldern, som står på sidan om nivån.
+    - Lyft två olika tankar som eleverna har sagt, och be gruppen jämföra dem.
+    - Låt eleverna skriva en rad på ett papper innan de pratar, om det är lättare.
+  motto: Börja med det självklara. Då kan ingen elev känna att hen har svarat fel.
 roll:
-  rubrik: "Lärarens roll: leda utan att förhöra"
-  text: Du leder samtalet, men du äger inte tolkningen. Säg ”Jag undrar” i stället för ”Varför”. Lyssna mer än du talar. Visa att du själv undrar, tvekar och ändrar dig. Då vågar eleverna göra detsamma.
+  rubrik: "Lärarens roll: läsa, leda och lyssna"
+  text: Du läser boken högt och leder samtalet, men du bestämmer inte vad boken betyder, och du säger hellre för lite om den. Lyssna mer än du talar. Säg ”Jag undrar” i stället för att fråga ”Varför”, och visa att du själv undrar, tvekar och ändrar dig. Då vågar eleverna göra detsamma.
   gor:
-    - Börja med det självklara.
+    - Läs boken själv innan du föreslår den.
+    - Läs med inlevelse och med få avbrott.
     - Samla allas tankar innan ni fördjupar.
-    - Be ofta om textstöd.
+    - Låt tråden komma ur det eleverna sa.
+    - Be om textstöd.
     - Låt flera tolkningar finnas samtidigt.
   undvik:
-    - Att fråga ”Varför?”.
+    - Att stanna efter varje sida.
+    - Att låta eleverna läsa högt i tur och ordning.
+    - Att gå igenom en lista med frågor efter varje kapitel.
+    - Att fråga ”Varför” eller tolka åt eleverna.
     - Att leta efter ett rätt svar.
-    - Att läraren tolkar åt eleverna.
     - Att fråga ”Vad tyckte du om boken?” som första fråga.
+    - Att göra läsningen till en kontroll med frågor och betyg.
 urval:
-  rubrik: Var hittar du texterna?
+  rubrik: Var hittar du böckerna och läsplanen?
   text:
-    - Välj korta texter med något att prata om. En text som rymmer en lucka, ett svårt val eller en stark känsla väcker fler tankar än en text där allt redan är utskrivet. Bra källor är noveller och korta kapitel, bilderböcker som bär dubbla budskap även för äldre, och lättlästa serier. Material med flera svårighetsnivåer som Mellan raderna gör det lätt att möta gruppen rätt, eftersom samma berättelse finns i olika nivåer. För en grupp som läser en gemensam bänkbok kan du i stället välja ut ett laddat avsnitt och samtala om det.
-  kravText: "Välj en text per pass som uppfyller tre krav:"
+    - "På varje nivå, Bas, Medel och Avancerat, har metoden tio böcker: fem från 2012 eller senare och fem klassiker. I nivåns lista ser du ungefär hur många läspass varje bok tar, var ljudboken och talboken finns, var du lånar och köper boken och om det finns en lärarhandledning."
+    - Böckerna lånar du genom skolbiblioteket, kommunens skolbibliotekscentral eller folkbiblioteket, och i Libris ser du vilka bibliotek som har dem. Låna samma utgåva till alla, så att sidnumren stämmer. Fråga om klassuppsättningar och om ett skollån med längre lånetid. Många folkbibliotek har bokcirkelkassar med sju eller åtta exemplar av samma bok och en lånetid på fyra till åtta veckor. Kassarna har sällan böcker för åk 4–7. En vuxen ansvarar för hela kassen, så du lånar den själv och förnyar lånet. En elev med läsnedsättning kan få talboken i Legimus genom skolbiblioteket, och vårdnadshavaren skriver under användaravtalet. Kontot i Legimus är elevens eget. En elev som har boken i en lättläst version läser den i förväg eller efteråt, och i passet följer hen med i originalet.
+    - Läsplanen gör du på mallen Läsplanen, efter din utgåva. Listans läspass är för det mesta räknade på ljudbokens eller talbokens speltid, och du läser oftast något långsammare. Räkna därför med ett par läspass mer än listan säger. Pröva hur många sidor du hinner läsa högt på 20 minuter, och dela boken i läspass. Låt varje pass sluta där eleverna vill veta vad som händer sedan. Det stället är passets stopp. Skriv in sidorna och stoppet, och det som är nytt i ett läspass, som en samtalsregel eller protokollet. Välj takten efter boken, två pass i veckan för en kort bok och tre för en lång. Tar boken mer än omkring 20 läspass, kan du berätta ett mellanparti kort med egna ord. Skriv det i läsplanen och som en rad på tavlan. Läser du hela boken, tar perioden längre tid.
+    - Böckerna ligger kvar i rummet mellan passen. Den som har varit borta följer med ändå, för i Var är vi? och på tavlan får hen veta vad som har hänt. Hen kan också ta igen passet med ljudboken eller talboken. Den som vill läsa vidare hemma lånar ett eget exemplar eller lyssnar på ljudboken, men berättar inte för de andra vad som händer.
+  kravText: "Väljer du en bok utanför listan, ska den uppfylla tre krav:"
   krav:
-    - rubrik: Något att prata om
+    - rubrik: Något att samtala om
       text: En lucka, ett val eller en känsla att tolka
-    - rubrik: Lagom längd
-      text: Går att läsa och hinna samtala om på 30 minuter
-    - rubrik: Möjlig att läsa med stöd
-      text: Möjlig att förstå med stöd, men med något att fundera på
-progression:
-  text: Ansvaret flyttas gradvis till eleverna. Med tiden kan en elev själv ställa grundfrågorna och leda delar av samtalet.
-  rader:
-    - vecka: 1–2
-      fokus: Lära sig de fyra grundfrågorna och våga dela.
-      roll: Läraren ställer alla frågor och modellerar ”Hur vet du det?”.
-    - vecka: 3–4
-      fokus: Motivera tankar med textstöd.
-      roll: Läraren fördjupar med special- och allmänna frågor.
-    - vecka: 5–6
-      fokus: Bygga vidare på varandras tankar.
-      roll: Läraren håller sig mer i bakgrunden och lyssnar.
-    - vecka: 7–8 vid behov
-      fokus: En elev leder grundfrågorna.
-      roll: Läraren stöttar samtalsledaren och följer upp.
+    - rubrik: Ett tema för åldern
+      text: Temat angår eleverna i gruppen. Boken får vara för svår att läsa själv.
+    - rubrik: Lagom lång
+      text: 8 till 27 läspass. Över 20 kan du berätta ett mellanparti.
 uppfoljning:
-  text: Du behöver veta om passen ger effekt, inte bara att de har genomförts. Gör en enkel före- och efterkoll.
+  text: Du behöver veta om passen ger effekt, och det räcker inte att boken blir utläst. Läsintervjun och protokollet står bland materialet, ett av varje per elev. På dem står frågorna och det du lyssnar efter. Läsplanen samlar det gruppen sa, och protokollet det varje elev sa. Jämför det eleven säger i bokens slut med det hen sa i början, och den andra läsintervjun med den första.
   rader:
-    - nar: Före insatsen
-      vad: Eleven samtalar kort om en text. Notera om eleven kan dela en tanke, motivera den och lyssna på andra.
-    - nar: Efter sex till åtta veckor
-      vad: Samtala om en liknande text och jämför med startläget.
+    - nar: Före bokvalet
+      vad: Gör läsintervjun, fem minuter per elev, om senaste boken, vad eleven gör när hen inte förstår och vad hen gillar. Eleven fyller i kortet Böcker jag har läst ut.
+    - nar: Under boken
+      vad: Skriv i protokollet vad eleven säger i Var är vi? och Samtala, i bokens början, mitt och slut. I en kort bok räcker början och slutet.
+    - nar: Efter slutet
+      vad: Gör läsintervjun igen, omkring tio minuter. Eleven återberättar hela boken. Ni väljer hens nästa bok, och du skriver vilket stöd hen behöver i den.
 mal:
   punkter:
-    - Dela en tanke om en text
-    - Motivera den med något i texten
-    - Ställa en egen fråga till texten
+    - Berätta vad som har hänt hittills
+    - Säga vem som är vem i boken och hur personerna hör ihop
+    - Bära med sig en fråga och märka när boken svarar
+    - Säga en tanke och visa var i boken den kommer ifrån
     - Bygga vidare på en kamrats tanke
     - Se ett mönster eller en koppling
     - Sätta ord på sin läsupplevelse
-snabbmall:
-  text: En halv sida att fylla i före och efter varje pass, särskilt de första två veckorna. Håll det enkelt. Det är regelbundenheten och att komma tillbaka igen nästa pass som gör skillnad.
-  fore:
-    - Text
-    - Specialfrågor (två till tre)
-    - Hur texten ska läsas
-  efter:
-    - Deltog alla?
-    - Vad ska övas nästa gång?
+    - Berätta om boken för någon som inte har läst den
 checklista:
   punkter:
-    - Valt en kort text med något att prata om och läst den själv.
-    - Förberett två till tre specialfrågor.
-    - Bestämt hur texten ska läsas.
-    - Påmint mig själv om de fyra grundfrågorna.
-    - Bestämt hur jag ska avsluta passet.
+    - Läst boken, lånat böckerna och gjort läsplanen.
+    - Läst om dagens sidor och skrivit min post-it.
+    - Tittat på tavlan och i läsplanen.
+    - Tagit med en post-it per elev, frågekortet och kortet Du som leder, och talkort om de behövs.
+    - Bestämt samtalsgrupperna, om vi är fler än fem.
 grund:
-  text: "Metoden bygger på Aidan Chambers boksamtal, på svenska ”Jag undrar” (Chambers, 1993). Kärnan är de fyra grundfrågorna om vad eleven gillade, ogillade, undrade över och vilka mönster den såg, samt de allmänna och särskilda frågor som fördjupar samtalet. Två principer bär metoden: att fråga ”Jag undrar” i stället för ”Varför”, och att ofta fråga ”Hur vet du det?” så att eleverna går tillbaka till texten. Att samtala om texter i liten grupp gynnar särskilt de elever som har svårt att komma till tals i helklass (Reichenberg och Lundberg, 2011). Att läraren modellerar och gradvis lämnar över ansvaret kommer från reciprok undervisning (Palincsar och Brown, 1984) och GRR-modellen."
-  kallor: Bygger på Chambers (1993), Palincsar och Brown (1984), Reichenberg och Lundberg (2011), samt Skolverkets material om läsförståelse och boksamtal på Lärportalen.
+  text: "Metoden bygger på Aidan Chambers boksamtal, på svenska ”Jag undrar” (Chambers, 1993), och på hans bild av läsandet som en cirkel, där urvalet, läsningen och samtalet hör ihop (Chambers, 1991). Kärnan är de fyra grundfrågorna om vad eleven gillade, inte gillade, undrade över och vilka mönster hen såg, och frågan ”Hur vet du det?”, som skickar eleven tillbaka till boken. I en studie i England läste lärare två hela, krävande romaner högt för klasser i Year 8, ungefär åk 7. De läste snabbare än vanligt under tolv veckor, och de elever som låg minst ett år efter i läsförståelse gick i genomsnitt fram 16 månader i läsålder. Studien hade ingen jämförelsegrupp, så belägget är lovande men svagt (Westbrook m.fl., 2019). En vägledning för åk 4–9 rekommenderar att eleverna arbetar med krävande texter två till tre gånger i veckan under sex till tio veckor, och belägget är måttligt (Vaughn m.fl., 2022). Att samtala om texter i liten grupp gynnar särskilt de elever som sällan kommer till tals i helklass (Reichenberg och Lundberg, 2011). I en studie i åk 9 räckte fler elever upp handen, också de blyga, när de först hade talat med en kamrat (Mundelsee och Jurkowski, 2021). Att läraren modellerar och gradvis lämnar över ansvaret kommer från reciprok undervisning (Palincsar och Brown, 1984) och GRR-modellen. Gruppen lär sig samtalsreglerna på samma sätt, en i taget: läraren visar hur regeln syns och hörs, och eleverna prövar den (Fohlin och Wilson, 2025)."
+  kallor: Bygger på Chambers (1991), Chambers (1993), Fohlin och Wilson (2025), Mundelsee och Jurkowski (2021), Palincsar och Brown (1984), Reichenberg och Lundberg (2011), Vaughn m.fl. (2022), Westbrook m.fl. (2019), samt Skolverkets material om läsförståelse och boksamtal på Lärportalen.
+pabordet:
+  - nr: 1
+    rubrik: "Läspasset · Det som finns i rummet"
+    text: "Bokens tavla sitter på väggen. I lärarens bok sitter en post-it med tre rader och i elevens bok en tom post-it, och i samtalet ligger frågekortet mitt på bordet. Kortet i bilden har ett ord per fråga."
+    efter: "stycke 4"
+    fluent: [oppen-bok]
+  - nr: 2
+    rubrik: "Bokvalet · Två böcker och röstsedlarna"
+    text: "De två böckerna ligger på bordet i bokvalet, och på röstsedeln skriver eleven den bok hen vill läsa."
+    efter: "tabell: Första passet"
+    fluent: [bok, valurna]
+  - nr: 3
+    rubrik: "Slutet · Spalterna och ett boktips"
+    text: "I slutsamtalet om Momo har läraren skrivit en sak från var och en i de fyra spalterna, och gruppen har dragit ett streck mellan det som hänger ihop. Under spalterna ligger början av Noors boktips till sin klass."
+    efter: "tabell: Sista passet"
+  - nr: 4
+    rubrik: "Strukturen · Talkort"
+    text: "Fyra talkort ligger mitt på bordet. Ella har sitt kvar, och Noor bjuder in henne."
+    efter: "ram: Strukturen, samtalet: Talkort"
+    fluent: [pojke, flicka, pojke-2, flicka-2, barn]
+ramar:
+  rubrik: Böckerna och materialet
+  text:
+    - "Först står böckerna, nivå för nivå, sedan materialet, med mallarna Bokens tavla och Läsplanen sist."
+  ramar:
+    # BOKKORTEN
+    - rubrik: "Böckerna: Bas, om nivån"
+      text:
+        - "Bas passar oftast en grupp nära åk 4–5. Du känner din grupp bäst. En bok på Bas kan också passa en äldre grupp som behöver en tydlig handling och personer som är lätta att följa."
+        - "Välj böcker som knyter an till elevernas liv. Kring åk 4–5 är kompisarna viktiga, och eleverna funderar mycket över vad som är rättvist, hur det är att våga och hur det är att förlora någon. Böckerna på Bas handlar om just det. När gruppen samtalar om en person i boken, kan eleverna se sitt eget liv på tryggt avstånd och förstå sig själva och världen lite bättre."
+        - "Ett tema i boken kan hänga ihop med det klassen arbetar med i andra ämnen, och då har eleverna mer att knyta samtalet till. Med grundfrågan om mönster och kopplingar hittar eleverna sambanden själva."
+        - "Kring åk 4–5 utgår eleverna mest från det som händer och från sig själva. Frågorna för åldern kan då handla om platsen, personerna, ordningen och elevens egna minnen (Chambers, 1993). De passar böckerna på Bas. Där finns tydliga platser, som Stockholm 1880, Ishavet och Mattisskogen, personer som är lätta att känna igen sig i och flera tidshopp. Tillbakablickar och beskrivningar av miljöer och personer står också i kursplanen i svenska för mellanstadiet."
+      delar:
+        - rubrik: "Att välja bok"
+          falt:
+            - { rubrik: "Två böcker till bokvalet", text: "Nattkorpen och Glasbarnen: en deckare som utspelar sig 1880 och en spökhistoria i nutid\nRonja rövardotter och Bröderna Lejonhjärta: två av Astrid Lindgren, en ljusare och en mörkare\nIshavspirater och Momo eller kampen om tiden: två långa, ett äventyr över havet och en saga om tiden" }
+            - { rubrik: "I andra ämnen", text: "Momo i matematik: räkna om frisören Fusis liv till sekunder, som den grå herren gör\nMomo i historia: synen på tid, från bondesamhällets årstider till fabrikens klocka\nNattkorpen i historia: Stockholm och barnens villkor på 1800-talet" }
+            - { rubrik: "Svårt innehåll", text: "Död i familjen: Glasbarnen och Bröderna Lejonhjärta, där båda bröderna dör och slutet har lästs som ett självmord\nBarn som far illa: Nattkorpen, Matilda och Ishavspirater, där barn rövas bort och blir slavar\nMord: Jefferson och Nattkorpen, som också skildrar en avrättning\nVet du att en elev har varit med om något liknande, tala med eleven och vårdnadshavaren innan du föreslår boken." }
+        - rubrik: "Frågor för åldern"
+          falt:
+            - { rubrik: "Exempel", text: "”Var utspelar sig berättelsen? Hade det kunnat hända någon annanstans?”\n”Påminner någon i boken dig om någon du känner?”\n”Har du själv varit med om något som händer i boken?”\n”Berättar du alltid det som hände i ordning? Gör boken det?”" }
+    - rubrik: "Böckerna: Bas"
+      text:
+        - "Här är tio böcker för en grupp nära åk 4–5, fem från 2012 eller senare och fem klassiker."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Listan", text: "Läspassen är räknade på ljudbokens eller talbokens speltid, med 22 minuters läsning per läspass. Jefferson är räknad på sidorna." }
+      oversikt:
+        kolumner: [Boken, Läspass, "Var boken finns"]
+        bilder: [omslag/bas-01.jpg, omslag/bas-02.jpg, omslag/bas-03.jpg, omslag/bas-04.jpg, omslag/bas-05.jpg, omslag/bas-06.jpg, omslag/bas-07.jpg, omslag/bas-08.jpg, omslag/bas-09.jpg, omslag/bas-10.jpg]
+        bredder: [11, 35, 11, 43]
+        rader:
+          - ["**Nattkorpen** (2021)\nJohan Rundberg\n*utsatta barn, vem man är, rättvisa*", "12\n183 sidor", "**Lyssna** [Storytel](https://www.storytel.com/se/books/nattkorpen-m%C3%A5nvind-hoff-1249147) · [BookBeat](https://www.bookbeat.com/se/book/nattkorpen-manvind-hoff-299622) · [Legimus](https://www.legimus.se/bok/?librisId=q3f1g8sgnj27qpbm)\n**Låna** [Libris](https://libris.kb.se/z9dfk2sjwqlgmxtc)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789127164031) · [Adlibris](https://www.adlibris.com/sv/bok/nattkorpen-9789127164031) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=27-16403-1&utaninlogg=ja)\n**Handledning** [Natur & Kultur](https://www.nok.se/globalassets/al/block-till-produktsidor/barn-och-ungdom/nattkorpen/lararhandledning_nattkorpen_johan-rundberg.pdf) · [Stockholmskällan](https://stockholmskallan.stockholm.se/skola/lektioner/4-6-nattkorpens-stockholmskarta/)"]
+          - ["**Jefferson** (2018)\nJean-Claude Mourlevat\n*rättvisa, vänskap, människor och djur*", "20\n260 sidor", "**Lyssna** ingen ljudbok hittad · [Legimus](https://www.legimus.se/bok/?librisId=0d40bl47xns4hz5q)\n**Låna** [Libris](https://libris.kb.se/xbv3z9s5v258551m)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789178133239) · [Adlibris](https://www.adlibris.com/sv/bok/jefferson-9789178133239) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=7813-323-9&utaninlogg=ja)\n**Handledning** [ALMA](https://alma.se/globalassets/lasguider/sv_jefferson_web.pdf)"]
+          - ["**Glasbarnen** (2013)\nKristina Ohlsson\n*sorg, rädsla, ett hus med historia*", "10\n239 sidor", "**Lyssna** [Storytel](https://www.storytel.com/se/books/glasbarnen-47773) · [BookBeat](https://www.bookbeat.com/se/book/glasbarnen-17093) · [Legimus](https://www.legimus.se/bok/?librisId=sb48b0p42klqw4b)\n**Låna** [Libris](https://libris.kb.se/tc58h9352cv3j9r)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789187027321) · [Adlibris](https://www.adlibris.com/sv/bok/glasbarnen-9789187027321) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=87027-32-1&utaninlogg=ja)"]
+          - ["**Brorsan är kung!** (2016)\nJenny Jägerfeld\n*vänskap, ärlighet, att vara sig själv*", "9\n141 sidor", "**Lyssna** [Storytel](https://www.storytel.com/se/books/brorsan-%C3%A4r-kung-82339) · [BookBeat](https://www.bookbeat.com/se/book/brorsan-ar-kung-23196) · [Legimus](https://www.legimus.se/bok/?librisId=vd6k83262l1qcnv)\n**Låna** [Libris](https://libris.kb.se/wf7kv7271w59p9k)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789129726251/brorsan-ar-kung/) · [Adlibris](https://www.adlibris.com/sv/bok/brorsan-ar-kung-9789129726251) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=29-72625-1&utaninlogg=ja)\n**Handledning** [Rabén & Sjögren](https://images.rabensjogren.se/1e9f22ba-51cc-47af-aa6a-2cfb6f41a587.pdf)"]
+          - ["**Ishavspirater** (2015)\nFrida Nilsson\n*syskonkärlek, mod, vuxna som utnyttjar barn*", "23\n393 sidor", "**Lyssna** [Storytel](https://www.storytel.com/se/books/ishavspirater-35369) · [BookBeat](https://www.bookbeat.com/se/book/ishavspirater-14965) · [Legimus](https://www.legimus.se/bok/?librisId=9tmx1gfm45r860b)\n**Låna** [Libris](https://libris.kb.se/0jbl1rtb25g6gwt)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789127136854) · [Adlibris](https://www.adlibris.com/sv/bok/ishavspirater-9789127136854) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=27-13685-4&utaninlogg=ja)\n**Handledning** [Natur & Kultur](https://www.nok.se/globalassets/al/block-till-produktsidor/barn-och-ungdom/ishavspirater/lararhandledning-till-ishavspirater-av-frida-nilsson.pdf)"]
+          - ["**Momo eller kampen om tiden** (1973)\nMichael Ende\n*tid, att lyssna, vänskap*", "27\n310 sidor", "**Lyssna** [Storytel](https://www.storytel.com/se/books/momo-eller-kampen-om-tiden-9043) · [BookBeat](https://www.bookbeat.com/se/book/momo-eller-kampen-om-tiden-15222) · [Legimus](https://www.legimus.se/bok/?librisId=j2vx10vv2xqr3t1)\n**Låna** [Libris](https://libris.kb.se/k2vv8flw22q48rg)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789150216547) · [Adlibris](https://www.adlibris.com/sv/bok/momo-eller-kampen-om-tiden-en-sagoroman-9789150216547) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=502-1654-7&utaninlogg=ja)"]
+          - ["**Matilda** (1988)\nRoald Dahl\n*makt, orättvisa, barns rätt, läsning*", "11\n261 sidor", "**Lyssna** ljudbok finns, se Libris · [Legimus](https://www.legimus.se/bok/?librisId=4ngrwv2g0wbc99l)\n**Låna** [Libris](https://libris.kb.se/f023cj1bcz15z90p)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789190006788/matilda/) · [Adlibris](https://www.adlibris.com/sv/bok/matilda-9789190006788) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=90006-78-8&utaninlogg=ja)\n**Handledning** [Bookmark](https://bookmarkforlag.se/matilda-lararhandledning/)"]
+          - ["**Ronja rövardotter** (1981)\nAstrid Lindgren\n*frihet, lojalitet, vänskap över gränser, naturen*", "12\n204 sidor", "**Lyssna** [Storytel](https://www.storytel.com/se/books/ronja-r%C3%B6vardotter-1030) · [BookBeat](https://www.bookbeat.com/se/book/ronja-rovardotter-541737) · [Legimus](https://www.legimus.se/bok/?librisId=g1zwgcc1dj59wb70)\n**Låna** [Libris](https://libris.kb.se/tc5d5t353085s54)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789129742299) · [Adlibris](https://www.adlibris.com/sv/bok/ronja-rovardotter-9789129742299) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=29-74229-9&utaninlogg=ja)\n**Handledning** [Rabén & Sjögren](https://images.rabensjogren.se/ec038c4e-2571-43c9-8407-1d4015f26b60.pdf)"]
+          - ["**Bröderna Lejonhjärta** (1973)\nAstrid Lindgren\n*liv och död, mod, syskonkärlek*", "14\n214 sidor", "**Lyssna** [Storytel](https://www.storytel.com/se/books/br%C3%B6derna-lejonhj%C3%A4rta-1053) · [BookBeat](https://www.bookbeat.com/se/book/broderna-lejonhjarta-541734) · [Legimus](https://www.legimus.se/bok/?librisId=zh9cg7s927vnmwp)\n**Låna** [Libris](https://libris.kb.se/2ldh9hcd333rg4b)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789129754391/broderna-lejonhjarta/) · [Adlibris](https://www.adlibris.com/sv/bok/broderna-lejonhjarta-9789129754391) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=29-75439-1&utaninlogg=ja)\n**Handledning** [Rabén & Sjögren](https://images.rabensjogren.se/6c1ca5e2-1165-4e46-8739-61b1ba7585c4.pdf)"]
+          - ["**Kensukes rike** (1999)\nMichael Morpurgo\n*överlevnad, vänskap mellan generationer, saknad*", "10\n149 sidor", "**Lyssna** ingen ljudbok hittad · [Legimus](https://www.legimus.se/bok/?librisId=5phhcvxh32znlc7)\n**Låna** [Libris](https://libris.kb.se/h1tvhcnt1t4rkhn)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789172216259/kensukes-rike/) · [Adlibris](https://www.adlibris.com/sv/bok/kensukes-rike-9789172216259) · [En bok för alla](https://enbokforalla.se/bocker/kensukes-rike/)"]
+    - rubrik: "Böckerna: Medel, om nivån"
+      text:
+        - "Medel passar oftast en grupp nära åk 6–7, men du känner din grupp bäst. En bok på Medel kan också passa en yngre grupp som är redo för temat, och en äldre grupp som behöver vänta med böckerna på Avancerat."
+        - "Välj böcker som knyter an till elevernas liv. I den åldern lämnar många barndomen bakom sig. Kroppen, kompisarna och familjen förändras, och många byter skola. Böckerna på Medel handlar om sorg, flykt, att höra till och att bli äldre, och huvudpersonerna är ofta lika gamla som eleverna. I samtalet om boken får eleverna ord för det de själva är mitt i, och de ser hur andra har det i en annan tid och på en annan plats."
+        - "Flera böcker på Medel tar upp sådant som klassen arbetar med i historia, geografi och samhällskunskap, och då kan läsningen gå i takt med det arbetet. Det eleverna vet från lektionerna hjälper dem att förstå boken, och i boken möter de en människa som är med om just det."
+        - "Kring åk 6–7 vet eleverna mer om världen och kan se en händelse från flera håll. Frågorna för åldern kan då handla om vems berättelse det är, om någon som inte är med i boken och om det som känns sant (Chambers, 1993). De passar böckerna på Medel, där flera bygger på verkliga människors liv."
+      delar:
+        - rubrik: "Att välja bok"
+          falt:
+            - { rubrik: "Två böcker till bokvalet", text: "Tio över ett och En ö i havet: att förlora sitt hem, i dagens Kiruna och i Wien i slutet av 1930-talet\nBrun flicka drömmer och Eldens hemlighet: verkliga människors liv, den ena på vers och den andra på prosa\nComedy Queen och Ett hål om dagen: humor och allvar, svensk realism och ett amerikanskt äventyr" }
+            - { rubrik: "I andra ämnen", text: "Tio över ett i geografi: gruvan i Kiruna och staden som flyttar\nEn ö i havet i historia: andra världskriget och barn på flykt" }
+            - { rubrik: "Svårt innehåll", text: "Självmord: Comedy Queen och Den utvalde, där samhället också dödar spädbarn och gamla\nMissbruk hemma: Balladen om en bruten näsa\nKrig och flykt: En ö i havet, där judiska föräldrar skickar bort sina barn, och Eldens hemlighet\nMord och våld: Ett hål om dagen\nVet du att en elev har varit med om något liknande, tala med eleven och elevhälsan innan du föreslår boken. Ha skolans rutin vid oro för en elev till hands." }
+        - rubrik: "Frågor för åldern"
+          falt:
+            - { rubrik: "Exempel", text: "”Vilken person blev du mest nyfiken på? Är det den viktigaste personen i berättelsen?”\n”Finns det någon som inte är med i boken, men som behövs för att berättelsen ska kunna hända?”\n”Vilka delar av boken känns mest som på riktigt?”\n”Fick boken dig att tänka annorlunda om något du själv har varit med om?”" }
+    - rubrik: "Böckerna: Medel"
+      text:
+        - "Här är tio böcker för en grupp nära åk 6–7, fem från 2012 eller senare och fem klassiker."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Listan", text: "Läspassen är räknade på ljudbokens eller talbokens speltid, med 22 minuters läsning per läspass." }
+      oversikt:
+        kolumner: [Boken, Läspass, "Var boken finns"]
+        bilder: [omslag/medel-01.jpg, omslag/medel-02.jpg, omslag/medel-03.jpg, omslag/medel-04.jpg, omslag/medel-05.jpg, omslag/medel-06.jpg, omslag/medel-07.jpg, omslag/medel-08.jpg, omslag/medel-09.jpg, omslag/medel-10.jpg]
+        bredder: [11, 35, 11, 43]
+        rader:
+          - ["**Comedy Queen** (2018)\nJenny Jägerfeld\n*sorg, självmord, humor som skydd*", "14\n221 sidor", "**Lyssna** [Storytel](https://www.storytel.com/se/books/comedy-queen-206699) · [BookBeat](https://www.bookbeat.com/se/book/comedy-queen-76528) · [Legimus](https://www.legimus.se/bok/?librisId=wf7pwtx74lwr5lt)\n**Låna** [Libris](https://libris.kb.se/2lbgn4lw0hlkmpwz)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789129747898/comedy-queen/) · [Adlibris](https://www.adlibris.com/sv/bok/comedy-queen-9789129747898) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=29-74789-8&utaninlogg=ja)\n**Handledning** [Rabén & Sjögren](https://images.rabensjogren.se/c243da4a-6899-4cbb-a9e9-a8874765de54.pdf)"]
+          - ["**Tio över ett** (2016)\nAnn-Helén Laestadius\n*oro, en stad som flyttar, förälskelse*", "20\n261 sidor", "**Lyssna** [Storytel](https://www.storytel.com/se/books/tio-%C3%B6ver-ett-86550) · [BookBeat](https://www.bookbeat.com/se/book/tio-over-ett-21587) · [Legimus](https://www.legimus.se/bok/?librisId=l4x8sc6x405mk0d)\n**Låna** [Libris](https://libris.kb.se/1kcsttmc539cncp)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789129707885/tio-over-ett/) · [Adlibris](https://www.adlibris.com/sv/bok/tio-over-ett-9789129707885) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=29-70788-5&utaninlogg=ja)\n**Handledning** [Ninas språkrum](https://ninassprakrum.com/svenska-7/bokprojekt-tio-over-ett-av-ann-helen-laestadius/)"]
+          - ["**Balladen om en bruten näsa** (2012)\nArne Svingen\n*fattigdom, missbruk hemma, att våga sjunga*", "12\n252 sidor", "**Lyssna** ingen ljudbok hittad · [Legimus](https://www.legimus.se/bok/?librisId=2ldjbpkd48ddhw8)\n**Låna** [Libris](https://libris.kb.se/bvn2n54n2p8h1n2)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789188662040/balladen-om-en-bruten-nasa/) · [Adlibris](https://www.adlibris.com/sv/bok/balladen-om-en-bruten-nasa-9789188662040) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=88662-04-0&utaninlogg=ja)\n**Handledning** [En bok för alla](https://enbokforalla.se/wp-content/uploads/2017/12/Balladen-om-en-bruten-nasa-lararmaterial.pdf)"]
+          - ["**Vänta på vind** (2019)\nOskar Kroon\n*att lämna barndomen, kärlek, skilda föräldrar*", "12\n204 sidor", "**Lyssna** [Storytel](https://www.storytel.com/se/books/v%C3%A4nta-p%C3%A5-vind-805722) · [BookBeat](https://www.bookbeat.com/se/book/vanta-pa-vind-131331) · [Legimus](https://www.legimus.se/bok/?librisId=w6gk5zrqt75qkcrj)\n**Låna** [Libris](https://libris.kb.se/9t2333817ls0gk7j)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789178093847/vanta-pa-vind/) · [Adlibris](https://www.adlibris.com/sv/bok/vanta-pa-vind-9789178093847) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=7809-384-7&utaninlogg=ja)"]
+          - ["**Brun flicka drömmer** (2014)\nJacqueline Woodson\n*att hitta sin röst, rasism, familj*", "11\n333 sidor", "**Lyssna** [Cd-bok](https://www.bokus.com/bok/9789178530205/brun-flicka-drommer/) · [Legimus](https://www.legimus.se/bok/?librisId=8j978ch46h8ps04p)\n**Låna** [Libris](https://libris.kb.se/cpstzgw39w6zj0m6)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789127169432/brun-flicka-drommer/) · [Adlibris](https://www.adlibris.com/sv/bok/brun-flicka-drommer-9789127169432) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=27-16943-2&utaninlogg=ja)\n**Handledning** [ALMA](https://alma.se/globalassets/lasguider/alma-lasnyckel-brun-flicka-drommer.pdf)"]
+          - ["**En ö i havet** (1996)\nAnnika Thor\n*flykt, att vara ny, syskon*", "16\n285 sidor", "**Lyssna** [Storytel](https://www.storytel.com/se/books/en-%C3%B6-i-havet-3794) · [BookBeat](https://www.bookbeat.com/se/book/en-o-i-havet-331) · [UR](https://urplay.se/program/240851-en-o-i-havet) · [Legimus](https://www.legimus.se/bok/?librisId=8slmw2cl2s1xjdp)\n**Låna** [Libris](https://libris.kb.se/9vcjpsmt7mmfm7dc)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789179811679) · [Adlibris](https://www.adlibris.com/sv/bok/en-o-i-havet-9789179811679) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=7981-167-9&utaninlogg=ja)\n**Handledning** [Sveriges Radio](https://www.sverigesradio.se/Diverse/AppData/Isidor/Files/3171/14e3c4c2-4990-4a73-b0d6-d2c410e5f472.pdf)"]
+          - ["**Ett hål om dagen** (1998)\nLouis Sachar\n*orättvisa, släktens förbannelse, vänskap, skuld*", "16\n254 sidor", "**Lyssna** [Storytel](https://www.storytel.com/se/books/ett-h%C3%A5l-om-dagen-62001) · [Legimus](https://www.legimus.se/bok/?librisId=bw99crph8vm081rz)\n**Låna** [Libris](https://libris.kb.se/fs2ld3t3cgd79407)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789132213977) · [Adlibris](https://www.adlibris.com/sv/bok/ett-hal-om-dagen-9789132213977) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=32-21397-7&utaninlogg=ja)\n**Handledning** [UR, avsnitt 10](https://urplay.se/serie/230390-boktrailern/extra)"]
+          - ["**Den utvalde** (1993)\nLois Lowry\n*frihet och kontroll, minnen, att välja*", "14\n214 sidor", "**Lyssna** ingen ljudbok hittad · [Legimus](https://www.legimus.se/bok/?librisId=m5z6v26z5pmxd4m)\n**Låna** [Libris](https://libris.kb.se/3mfshmwf1wrlg9z)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789127151338) · [Adlibris](https://www.adlibris.com/sv/bok/den-utvalde-9789127151338) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=27-15133-8&utaninlogg=ja)\n**Handledning** [UR, avsnitt 9](https://urplay.se/serie/230390-boktrailern/extra)"]
+          - ["**Eldens hemlighet** (1995)\nHenning Mankell\n*krig, landminor, att leva vidare*", "14\n165 sidor", "**Lyssna** ingen ljudbok hittad · [Legimus](https://www.legimus.se/bok/?librisId=5phkqm4h1hp2ptr)\n**Låna** [Libris](https://libris.kb.se/6r52b1434m9sbg0z)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789129751239/eldens-hemlighet/) · [Adlibris](https://www.adlibris.com/sv/bok/eldens-hemlighet-9789129751239) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=29-75123-9&utaninlogg=ja)"]
+          - ["**Trollkarlen från Övärlden** (1968)\nUrsula K. Le Guin\n*makt, ansvar, stolthet, mörkret inom en*", "21\n190 sidor", "**Lyssna** ingen ljudbok hittad · [Legimus](https://www.legimus.se/bok/?librisId=r93581734n5jmp7)\n**Låna** [Libris](https://libris.kb.se/p69bnt6rm9p4b1k8)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789180941129/trollkarlen-fran-ovarlden/) · [Adlibris](https://www.adlibris.com/sv/bok/trollkarlen-fran-ovarlden-9789180941129) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=8094-112-9&utaninlogg=ja)"]
+    - rubrik: "Böckerna: Avancerat, om nivån"
+      text:
+        - "Avancerat passar oftast en grupp nära åk 8–9. Du känner din grupp bäst. En bok på Avancerat kan passa en grupp i åk 7 som är redo för temat, och en bok på Medel kan vara rätt också för en grupp i åk 9."
+        - "Välj böcker som knyter an till elevernas liv. I åttan och nian frågar sig många vem de är, vad kamratgruppen gör med dem och vad som är värt något. Böckerna på Avancerat handlar om våld, makt, kärlek och meningen med livet, och flera tar upp verkliga händelser i Sverige och i världen. I samtalet om boken prövar eleverna tillsammans sina tankar om sig själva och om världen."
+        - "På Avancerat kan läsningen gå i takt med det eleverna arbetar med i historia och samhällskunskap. Boken ger ämnet ett ansikte, och det eleverna kan från lektionerna hjälper dem att se vad boken säger om sin tid."
+        - "Kring åk 8–9 har eleverna läst mer och vet mer om historia och samhälle. Frågorna för åldern kan då handla om hur berättelsen är byggd, alltså vem som berättar och i vilken ordning vi får veta det som händer, och om när och var boken skrevs (Chambers, 1993). De passar böckerna på Avancerat. Där berättar Agnes i Intet och Rayan i Yani själva, När hundarna kommer följer flera familjer, och Hjärtans fröjd växlar mellan nu och återblickar. Berättarperspektiv står också i kursplanen i svenska för högstadiet."
+      delar:
+        - rubrik: "Att välja bok"
+          falt:
+            - { rubrik: "Två böcker till bokvalet", text: "När hundarna kommer och Flugornas herre: vad en grupp får unga att göra, i en svensk roman och i en klassiker om pojkar på en öde ö\nIntet och Möss och människor: två korta böcker om vad som gör livet värt något, i en dansk skolklass och bland lantarbetare i Kalifornien på 1930-talet\nHimlabrand och I taket lyser stjärnorna: en första kärlek, bland renskötare i Jokkmokk och i en vardag med en sjuk mamma" }
+            - { rubrik: "I andra ämnen", text: "Flugornas herre och När hundarna kommer i historia: hur våld och hat växer i en grupp. Den ena skrevs efter andra världskriget, och den andra handlar om nynazism i Sverige på 1990-talet.\nHimlabrand i historia: samerna och rasbiologin" }
+            - { rubrik: "Svårt innehåll", text: "Självmord: Hjärtans fröjd\nMord och våld: När hundarna kommer, Möss och människor, Yani och Flugornas herre. I Intet offrar barnen en flickas oskuld och ett finger, och till sist dödar de en pojke.\nVåld i familjen: Maresi\nEn förälder som dör: I taket lyser stjärnorna\nVet du att en elev har varit med om något liknande, tala med eleven och elevhälsan innan du föreslår boken. Ha skolans rutin vid oro för en elev till hands." }
+        - rubrik: "Frågor för åldern"
+          falt:
+            - { rubrik: "Exempel", text: "”Vem berättar, och hur vet vi det?”\n”Fick vi veta det som hände i den ordning det hände?”\n”Vad tycker berättaren om det personerna gör? Och vad tycker du?”\n”Vet någon något om när och var boken skrevs? Ska vi ta reda på det?”" }
+    - rubrik: "Böckerna: Avancerat"
+      text:
+        - "Här är tio böcker för en grupp nära åk 8–9, fem från 2012 eller senare och fem klassiker."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Listan", text: "Läspassen är räknade på ljudbokens eller talbokens speltid, med 22 minuters läsning per läspass." }
+      oversikt:
+        kolumner: [Boken, Läspass, "Var boken finns"]
+        bilder: [omslag/avancerat-01.jpg, omslag/avancerat-02.jpg, omslag/avancerat-03.jpg, omslag/avancerat-04.jpg, omslag/avancerat-05.jpg, omslag/avancerat-06.jpg, omslag/avancerat-07.jpg, omslag/avancerat-08.jpg, omslag/avancerat-09.jpg, omslag/avancerat-10.jpg]
+        bredder: [11, 35, 11, 43]
+        rader:
+          - ["**Vi ska ju bara cykla förbi** (2022)\nEllen Strömberg\n*vänskap, längtan bort, första kärleken, småstaden*", "20\n247 sidor", "**Lyssna** [Storytel](https://www.storytel.com/se/books/vi-ska-ju-bara-cykla-f%C3%B6rbi-2182210) · [BookBeat](https://www.bookbeat.com/se/book/vi-ska-ju-bara-cykla-forbi-1021381) · [Legimus](https://www.legimus.se/bok/?librisId=v9m9x0w2s82492fl)\n**Låna** [Libris](https://libris.kb.se/xbkfzgbxvk7kmjcx)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789129736892) · [Adlibris](https://www.adlibris.com/sv/bok/vi-ska-ju-bara-cykla-forbi-9789129736892) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=29-73689-2&utaninlogg=ja)"]
+          - ["**När hundarna kommer** (2015)\nJessica Schiefauer\n*våld, hat, gruppen, skuld, kärlek*", "17\n301 sidor", "**Lyssna** [Storytel](https://www.storytel.com/se/books/n%C3%A4r-hundarna-kommer-55621) · [BookBeat](https://www.bookbeat.com/se/book/nar-hundarna-kommer-645) · [Legimus](https://www.legimus.se/bok/?librisId=bwz0thzh80trvwr1)\n**Låna** [Libris](https://libris.kb.se/2n986x3m0mkmrl9x)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789179814700) · [Adlibris](https://www.adlibris.com/sv/bok/nar-hundarna-kommer-9789179814700) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=7981-470-0&utaninlogg=ja)\n**Handledning** [UR, avsnitt 8](https://urplay.se/serie/230390-boktrailern/extra)"]
+          - ["**Himlabrand** (2021)\nMoa Backe Åstot\n*kärlek, identitet, samiskt liv, kolonial historia*", "15\n205 sidor", "**Lyssna** [Storytel](https://www.storytel.com/se/books/himlabrand-1567450) · [BookBeat](https://www.bookbeat.com/se/book/himlabrand-299574) · [Legimus](https://www.legimus.se/bok/?librisId=r5rz1vtspwbndtpl)\n**Låna** [Libris](https://libris.kb.se/wbz2j3lttz88n1x2)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789129737264) · [Adlibris](https://www.adlibris.com/sv/bok/himlabrand-9789129737264) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=29-73726-4&utaninlogg=ja)\n**Handledning** [Rabén & Sjögren](https://images.rabensjogren.se/1cd8189c-ace1-4e89-92b0-15779cb8f90b.pdf)"]
+          - ["**Yani** (2022)\nNora Khalil\n*vänskap, utvisning, sorg, förorten*", "10\n197 sidor", "**Lyssna** [Storytel](https://www.storytel.com/se/books/yani-1998012) · [BookBeat](https://www.bookbeat.com/se/book/yani-768995) · [Legimus](https://www.legimus.se/bok/?librisId=r6npknnwpf99bqsd)\n**Låna** [Libris](https://libris.kb.se/dv6tv3fhbp8clb9q)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789127184831) · [Adlibris](https://www.adlibris.com/sv/bok/yani-9789127184831) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=27-18483-1&utaninlogg=ja)\n**Handledning** [Natur & Kultur](https://www.nok.se/globalassets/al/block-till-produktsidor/barn-och-ungdom/yani/lararhandledning_yani_nora-khalil.pdf)"]
+          - ["**Maresi** (2014)\nMaria Turtschaninoff\n*frihet, makt och kön, kunskap, mod*", "13\n205 sidor", "**Lyssna** [Storytel](https://www.storytel.com/se/books/maresi-kr%C3%B6nikor-fr%C3%A5n-r%C3%B6da-klostret-301857) · [BookBeat](https://www.bookbeat.com/se/book/maresi-kronikor-fran-roda-klostret-39008) · [Legimus](https://www.legimus.se/bok/?librisId=2ldplmgd1kqkq94)\n**Låna** [Libris](https://libris.kb.se/tdg0nnz0r26ptcs8)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789523336742) · [Adlibris](https://www.adlibris.com/sv/bok/maresi-kronikor-fran-roda-klostret-9789523336742)"]
+          - ["**Möss och människor** (1937)\nJohn Steinbeck\n*vänskap, drömmar, ensamhet, utsatthet*", "10\n137 sidor", "**Lyssna** [Storytel](https://www.storytel.com/se/sv/books/m%C3%B6ss-och-m%C3%A4nniskor-1493500) · [BookBeat](https://www.bookbeat.com/se/book/moss-och-manniskor-12558) · [Legimus](https://www.legimus.se/bok/?librisId=cwppkhbp141clwk)\n**Låna** [Libris](https://libris.kb.se/m5077695krtwtl1p)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789100807641) · [Adlibris](https://www.adlibris.com/sv/bok/moss-och-manniskor-9789100807641) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=0-080764-1&utaninlogg=ja)"]
+          - ["**Flugornas herre** (1954)\nWilliam Golding\n*makt, gruppen, rädsla, civilisation och ondska*", "21\n196 sidor", "**Lyssna** [BookBeat](https://www.bookbeat.com/se/book/flugornas-herre-755577) · [Legimus](https://www.legimus.se/bok/?librisId=sb4dmz6433rsw32)\n**Låna** [Libris](https://libris.kb.se/g28zxm45d30k7drd)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789100815455) · [Adlibris](https://www.adlibris.com/sv/bok/flugornas-herre-9789100815455) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=0-081545-5&utaninlogg=ja)\n**Handledning** [Bonnierförlagen](https://www.bonnierforlagen.se/wp-content/uploads/2026/02/lh-flugornasherre.pdf)"]
+          - ["**Intet** (2000)\nJanne Teller\n*meningen med livet, grupptryck, värde*", "8\n142 sidor", "**Lyssna** ingen ljudbok hittad · [Legimus](https://www.legimus.se/bok/?librisId=9tmptg8m1vsp25m)\n**Låna** [Libris](https://libris.kb.se/9tm25q2m26d32n5)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789188279972) · [Adlibris](https://www.adlibris.com/sv/bok/intet-9789188279972) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=88279-97-2&utaninlogg=ja)"]
+          - ["**Hjärtans fröjd** (1992)\nPer Nilsson\n*första kärleken, svek, förtvivlan*", "9\n148 sidor", "**Lyssna** ingen ljudbok hittad · [Legimus](https://www.legimus.se/bok/?librisId=sckm42d6q80s63rb)\n**Låna** [Libris](https://libris.kb.se/7rkxvjtk06pg189)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789129704846) · [Adlibris](https://www.adlibris.com/sv/bok/hjartans-frojd-9789129704846) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=29-70484-6&utaninlogg=ja)"]
+          - ["**I taket lyser stjärnorna** (2003)\nJohanna Thydell\n*sorg, sjukdom, vänskap, kärlek*", "17\n222 sidor", "**Lyssna** [Storytel](https://www.storytel.com/se/books/i-taket-lyser-stj%C3%A4rnorna-16460) · [BookBeat](https://www.bookbeat.com/se/book/i-taket-lyser-stjarnorna-15563) · [Legimus](https://www.legimus.se/bok/?librisId=m5z08htz5hksrzf)\n**Låna** [Libris](https://libris.kb.se/0jbcnw0b5l27m6h)\n**Köpa** [Bokus](https://www.bokus.com/bok/9789150113051) · [Adlibris](https://www.adlibris.com/sv/bok/i-taket-lyser-stjarnorna-9789150113051) · [Läromedia](https://www.laromedia.se/start.php?site=visabokinfo&isbn=501-1305-1&utaninlogg=ja)\n**Handledning** [Filminstitutet, filmen](https://www.filminstitutet.se/sv/fa-kunskap-om-film/filmpedagogik/filmhandledningar/i-taket-lyser-stjarnorna/)"]
+    # /BOKKORTEN
+    - rubrik: Frågekortet
+      sagoform:
+        form: kort
+      text:
+        - Varje samtalsgrupp har ett frågekort, och den som leder har kortet Du som leder.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så gör du
+              text: Skriv ut ett blad per samtalsgrupp och klipp isär de två korten. Frågekortet lägger du mitt på bordet i Samtala, och var och en väljer en av frågorna. Kortet Du som leder har du själv i början, och sedan ger du det till den elev som leder. Hur korten används står under Samtalet med frågekortet.
+      listor:
+        - rubrik: "Frågekortet: välj en fråga"
+          rader:
+            - - Var det något du gillade?
+            - - Var det något du inte gillade?
+            - - Var det något du inte förstod eller undrade över?
+            - - Lade du märke till något mönster eller någon koppling?
+        - rubrik: "Du som leder: läs en rad i taget"
+          rader:
+            - - Slå upp boken vid din post-it.
+            - - Stämde din gissning? Säg det till den bredvid, och säg din sak.
+            - - Vem börjar?
+            - - Var det någon som inte förstod? Vem kan visa stället?
+            - - Sa två av er något som hänger ihop?
+            - - Hur vet du det? Visa i boken.
+            - - Vad tar vi med oss till tavlan?
+    - rubrik: "Strukturen, samtalet: Talkort"
+      text:
+        - "Alla har ett talkort. När du har sagt något lägger du ditt kort mitt på bordet. I bilden har Ella sitt kort kvar."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Samtala
+              text: "Korten tar du fram när några få talar mest. Hur du visar dem, och när du tar bort dem, står under Samtalet mellan eleverna. Talkort är en struktur ur det kooperativa lärandet. Två andra finns redan i passet: paret först är EPA, och laget runt är Rondellen."
+      listor:
+        - rubrik: Så gör ni
+          rader:
+            - ["Alla får ett talkort."]
+            - ["Den som vill börjar. Säg en sak, och lägg sedan ditt kort mitt på bordet."]
+            - ["Nu lyssnar du. Du får prata igen när allas kort ligger på bordet, eller när någon frågar dig ”Hur vet du det?”"]
+            - ["Du får bjuda in den som har sitt kort kvar: ”Vad tycker du?”"]
+            - ["Vill du inte säga något nu? Säg ”Pass” och lägg ditt kort."]
+            - ["När alla kort ligger på bordet tar ni tillbaka dem och börjar om."]
+        - rubrik: Så tränar ni samtalet
+          rader:
+            - ["Alla får säga en sak innan någon säger en till. Den som brukar vänta får prata, och den som brukar säga mycket lyssnar."]
+            - ["Så kan du börja: ”Jag håller med dig, för”, ”Jag tänker annorlunda, för” eller ”Menar du att”."]
+    - rubrik: Böcker jag har läst ut
+      sagoform:
+        form: kort
+      text:
+        - Ett kort per elev.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så gör du
+              text: Kopiera ett kort per elev, och låt eleven skriva sitt namn på baksidan. I läsintervjun före bokvalet skriver eleven på kortet de böcker hen har läst ut. Du sparar kortet, och i det sista läspasset, när boken är utläst, skriver eleven dit den också.
+      listor:
+        - rubrik: Böcker jag har läst ut
+          rader:
+            - - "________________________________________"
+            - - "________________________________________"
+            - - "________________________________________"
+            - - "________________________________________"
+            - - "________________________________________"
+            - - "________________________________________"
+    - rubrik: Röstsedlarna
+      text:
+        - Skriv bokens namn på röstsedeln.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så gör du
+              text: Kopiera bladet så att varje elev har två röstsedlar, och klipp isär dem. Den andra är till för en ny röstning, om det blir lika. Eleverna skriver namnet på den bok de vill läsa, viker röstsedeln och lägger den i en låda. Du räknar rösterna högt.
+      listor:
+        - rubrik: Röstsedlar
+          rader:
+            - - "Jag vill läsa:\n__________________________________________"
+    - rubrik: Boktipset
+      text:
+        - Vem vill du ska läsa boken? Skriv ditt boktips till den läsaren.
+      huvud:
+        - rubrik: Namn
+      delar:
+        - rubrik: Mitt boktips
+          falt:
+            - rubrik: Till
+              text: ""
+            - rubrik: Boken
+              text: ""
+            - rubrik: Den här boken är för dig som
+              text: ""
+            - rubrik: Det bästa är
+              text: ""
+            - rubrik: Bra att veta
+              text: ""
+            - rubrik: Min fråga till dig
+              text: ""
+    - rubrik: Läsintervjun
+      text:
+        - Kopiera ett blad per elev. Ställ frågorna i ett samtal med varje elev, och skriv svaren med elevens egna ord. Före bokvalet tar samtalet fem minuter, och eleven fyller också i kortet Böcker jag har läst ut. Efter slutet tar det omkring tio minuter, och eleven återberättar boken utan tavlan. Ha den andra boken från bokvalet framme när ni väljer nästa bok. Stödet i nästa bok kan vara talboken eller en stund i veckan med dig.
+      huvud:
+        - rubrik: Elevens namn
+          text: ""
+        - rubrik: Boken
+          text: ""
+      delar:
+        - rubrik: Före bokvalet
+          falt:
+            - rubrik: Har du läst ut en bok? Vilken läste du ut senast, och vad handlade den om?
+              text: ""
+            - rubrik: Vad gör du när du inte förstår vad som händer i en bok?
+              text: ""
+            - rubrik: Vad gillar du i en berättelse, när du läser, ser film eller spelar?
+              text: ""
+            - rubrik: Hur är det att läsa en bok tillsammans med andra?
+              text: ""
+        - rubrik: Efter slutet
+          falt:
+            - rubrik: Berätta vad som händer i boken vi läste, från början till slut.
+              text: ""
+            - rubrik: Vad gör du numera när du inte förstår vad som händer i en bok?
+              text: ""
+            - rubrik: Hur var det att läsa boken tillsammans med andra?
+              text: ""
+            - rubrik: Vilken blir din nästa bok, och vilken hjälp vill du ha med den?
+              text: ""
+    - rubrik: Protokollet
+      text:
+        - Skriv passets nummer och sedan elevens egna ord. Sätt ett f efter det eleven sa som svar på en fråga från dig. Skriv direkt efter passet, medan du minns orden.
+        - Tre gånger under boken lyssnar du extra noga, två läspass i följd varje gång. Början är läspass 2 och 3, mitten två läspass mitt i boken, och slutet de två läspassen före det sista. I en bok med högst tolv läspass räcker början och slutet. I slutsamtalet skriver du elevens sak om hela boken.
+        - I Var är vi? lyssnar du på den som berättar vid tavlan och på ett par när de berättar för varandra, ett nytt par varje pass. I Samtala lyssnar du på var och en, i laget runt och i tråden. Är ni fler än fem, hör du en samtalsgrupp och två par per pass.
+        - Lyssna efter om eleven berättar i rätt ordning och säger namnen och hur personerna hör ihop, och om hen säger sin sak i gruppen, säger när boken svarar på en fråga, pekar i boken, bygger vidare på en kamrats tanke och ser ett mönster eller en koppling.
+      huvud:
+        - rubrik: Elevens namn
+          text: ""
+        - rubrik: Boken
+          text: ""
+      delar:
+        - rubrik: Under boken
+          falt:
+            - rubrik: Bokens början · Var är vi?
+              text: ""
+            - rubrik: Bokens början · Samtala
+              text: ""
+            - rubrik: Bokens mitt · Var är vi?
+              text: ""
+            - rubrik: Bokens mitt · Samtala
+              text: ""
+            - rubrik: Bokens slut · Var är vi?
+              text: ""
+            - rubrik: Bokens slut · Samtala
+              text: ""
+            - rubrik: Slutsamtalet
+              text: ""
+mallar:
+  - rubrik: Bokens tavla
+    typ: matta
+    kolumner:
+      - Det här har hänt
+      - Personerna
+      - Frågorna vi bär med oss
+    underrad: "Boken: ____________________"
+    fot: "När passet börjar: ”Vad hände förra gången?” ”Vad tror du händer nu?” När passet slutar: ”Vad hände i dag, i en mening?” ”Kom det någon ny?” ”Har boken svarat på någon fråga?” ”Vad undrar vi nu?”"
+    text: Rita av mallen på ett blädderblocksark, eller visa den på skärmen och skriv i den. Hur tavlan används står i beskrivningen, under Bokens tavla.
+  - rubrik: Läsplanen
+    typ: rutnat
+    kolumner:
+      - Läspass, sidor och stopp
+      - Det som är nytt
+      - Det gruppen sa
+      - Nästa gång
+    rader: 10
+    underrad: "Boken och utgåvan: ______________________________"
+    text: Gör läsplanen när boken är vald. Pröva hur många sidor du hinner läsa högt på 20 minuter, och skriv för varje läspass sidorna och stoppet, alltså stället där läsningen slutar. Skriv också in det som är nytt i ett läspass, som en samtalsregel. Efter passet skriver du vad gruppen sa och vad du tar upp nästa gång. Bladet rymmer tio läspass, så en bok med 27 läspass behöver tre blad.
+kort:
+  listor:
+    - Röstsedlar
+  kopior:
+    Röstsedlar: 5
+elevblad:
+  Boktipset:
+    Till: 1.2
+    Boken: 1.5
+    Den här boken är för dig som: 3.3
+    Det bästa är: 3.3
+    Bra att veta: 2.4
+    Min fråga till dig: 2.3
 lathund:
-  innehall: En kort skönlitterär text
+  innehall: En hel bok, ett exemplar per elev
   metoden:
     text:
-      - Lärarlett samtal om skönlitteratur som utvecklar elevens tänkande. Eleverna läser en kort text, delar sina först-tankar med fyra enkla frågor och fördjupar sedan samtalet tillsammans.
-      - Syftet är inte att kontrollera att eleverna läst rätt. Läraren leder, men ingen sitter på de rätta svaren, inte ens läraren.
+      - Ni läser en hel bok. Du läser högt, och eleverna följer med i sina böcker. På väggen sitter bokens tavla, i varje bok en post-it, och i samtalet ligger frågekortet mitt på bordet.
+      - Varje läspass börjar och slutar vid tavlan, och eleverna säger sin sak till den bredvid innan de säger den till gruppen. Du leder, men ingen sitter på de rätta svaren, inte ens du. Är ni fler än fem, samtalar ni i två grupper, tidigast i läspass 3. Du sitter med den ena, och i den andra läser en elev upp kortet Du som leder.
     ruta:
       rubrik: Tre saker att hålla fast vid
       punkter:
-        - fet: Säg ”jag undrar” i stället för ”varför”.
-          text: Varför kan låta som ett förhör.
-        - fet: Det finns inget facit.
-          text: Alla svar är värda att höra, även det som ingen annan tänkte.
-        - fet: Fråga ofta ”hur vet du det?”
-          text: Då går eleverna tillbaka till texten.
+        - fet: Läs mycket och med få avbrott.
+          text: Stanna vid din post-it, högst två gånger per pass.
+        - fet: Bär frågorna med er.
+          text: De står på tavlan tills boken svarar.
+        - fet: Fråga ”Hur vet du det?”
+          text: Då går eleverna tillbaka till boken.
     tabell:
-      rubrik: "Frågorna: vilka och när"
+      rubrik: Läspasset i fyra delar
       kolumner:
-        - Frågetyp
-        - Exempel
+        - Del
+        - Exempelfraser
       rader:
         - - |-
-            Grundfrågor
-            Steg 2, alltid. Laget runt, en i taget.
+            1 · Var är vi?
+            Vid tavlan
           - |-
-            ”Var det något du gillade?”
-            ”Var det något du inte gillade?”
-            ”Var det något du inte förstod eller undrade över?”
-            ”Lade du märke till några mönster eller kopplingar?”
+            ”Vad hände förra gången?”
+            ”Vad tror du händer nu?”
         - - |-
-            Allmänna frågor
-            Steg 3, för att vidga.
+            2 · Läs
+            I böckerna
           - |-
-            ”Vad lade du märke till först?”
-            ”Påminner den om något du läst förut?”
+            ”Sätt din post-it där du vill säga något.”
+            ”Var slutade du förstå?”
         - - |-
-            Specialfrågor
-            Steg 3, förberedda om just den texten.
+            3 · Samtala
+            Runt bordet
           - |-
-            ”Vems berättelse är det här?”
-            ”Vad tyckte du om slutet?”
-    not: Den viktigaste frågan i steg 3 är ”hur vet du det?” Den skickar eleven tillbaka till texten för att hitta stöd. Det är där tänkandet växer.
+            ”Sa två av er något som hänger ihop?”
+            ”Hur vet du det?”
+        - - |-
+            4 · Med mig
+            Vid tavlan igen
+          - |-
+            ”Vad hände i dag, i en mening?”
+            ”Har boken svarat på någon fråga?”
+    not: "Var och en väljer en av frågekortets fyra frågor: ”Var det något du gillade?” eller ”Var det något du inte gillade?”, ”Var det något du inte förstod eller undrade över?” eller ”Lade du märke till något mönster eller någon koppling?”"
   pass:
-    rubrik: "Vi kör ett pass: texten ”Nyckeln”"
-    textRubrik: Texten · cirka en sida, åk 4
-    titel: Nyckeln
+    rubrik: "Läspass 6 i Momo"
+    textRubrik: Gruppen · fem elever i åk 5 · nivån Bas
+    titel: Momo eller kampen om tiden
     text:
-      - Det låg en nyckel på asfalten utanför kiosken. Alva såg den först, men det var Milo som tog upp den.
-      - – Den är min nu, sa han.
-      - – Den är inte din. Den är någons, sa Alva.
-      - "Milo vände nyckeln i handen. På den satt en bricka av trä med tre bokstäver: E V A."
-      - – Vi kan sätta upp en lapp, sa Alva.
-      - Milo stoppade nyckeln i fickan. – Eller så väntar vi. Letar någon så kommer de tillbaka hit.
-      - De satte sig på trappan. Alva räknade sjutton personer som gick förbi. Ingen letade efter någonting.
-      - När klockan blev fem reste Milo sig upp och gav nyckeln till Alva. – Du såg den först, sa han.
+      - Alla säger till den bredvid vad som hände förra gången, och Adam berättar vid tavlan att de grå herrarna har kommit. Sedan gissar alla vad som händer nu.
+      - Läraren läser och stannar vid sin post-it. Ella sätter sin post-it där en ny person kommer in.
+      - I laget runt säger Elias varför folk glömmer de grå herrarna. Noor säger att Fusi får bråttom, som hennes storebror. Ella frågar vem Fusi är, och Sara visar stället där det står att han är frisör. Adam hör att Elias och Noor sa något som hänger ihop.
+      - Vid tavlan får frågan ”Varför glömmer folk dem?” en bock, och Sara har en ny fråga.
     forberett:
-      rubrik: Mina tre specialfrågor
+      rubrik: Det jag förberett
       text:
-        - Vems berättelse är det här? · Vad tyckte du om slutet? · Vilken person blev du mest nyfiken på?
+        - "Läst om sidorna där Fusi kommer in. Min post-it: Jag undrar om man kan spara tid på en bank. Det står: meningen om att lägga in tid och få tillbaka den. Jag tror inte att det går."
+    klarTidigt: Läs några sidor till, eller ta en fråga på tavlan.
     schema:
-      rubrik: 30 minuter, steg för steg
+      rubrik: Ett läspass på 40 minuter
       rader:
         - tid: Före
           fas: Förberedelse
-          vad: Välj en kort text. Läs den själv. Förbered två till tre specialfrågor. Bestäm hur texten ska läsas.
-        - tid: 0–10
-          fas: "1 · Läs"
-          vad: Läraren läser högt och tänker högt på ett par ställen. Eleverna läser sedan i par eller tyst och markerar något de fastnade för.
-          fraser:
-            - Här undrar jag vad som händer sen.
-            - Markera en mening du fastnade för.
-        - tid: 10–15
-          fas: 2 · Samla först-tankar
-          vad: De fyra grundfrågorna, en i taget, laget runt. Skriv upp svaren i fyra spalter. Ännu ingen lång diskussion.
-        - tid: 15–27
-          fas: "3 · Fördjupa"
-          vad: Dra trådar ur spalterna. Lägg till allmänna frågor och specialfrågor. Be om textstöd.
-          fraser:
-            - Berätta mer.
-            - Hur vet du det?
-            - Är det någon som tänker annorlunda?
-        - tid: 27–30
-          fas: 4 · Avsluta
-          vad: "Var och en säger en sak de tar med sig. Knyt ihop några trådar. Efteråt: kort notering i loggen."
+          vad: Läs om dagens sidor, skriv din post-it och läs stället högt. Se på tavlan och läsplanen.
+        - tid: 0–5
+          fas: 1 · Var är vi?
+          vad: Alla säger till den bredvid vad som hände förra gången, och en elev berättar vid tavlan. Ni läser frågorna utan bock, och alla gissar vad som händer nu. Är ni ett udda antal, är tre en grupp.
+        - tid: 5–27
+          fas: 2 · Läs
+          vad: Du läser, stannar vid din post-it och säger ”Jag undrar”, ”Det står” och ”Jag tror”. Eleverna sätter sin post-it där de vill säga något.
+        - tid: 27–36
+          fas: 3 · Samtala
+          vad: "Du lägger fram frågekortet, och var och en väljer en fråga. ”Stämde din gissning?” Alla säger sin sak vid sin post-it, först till den bredvid och sedan laget runt. Det någon inte förstod tar ni först, och sedan en tråd."
+        - tid: 36–40
+          fas: 4 · Med mig
+          vad: Eleverna säger dagens rad och nya personer, och du skriver. En fråga som fick svar får en bock, och har ni en ny fråga, skriver du den.
   mall:
-    rubrik: Mallen jag skriver i under samtalet
-    underrad: Steg 2 · först-tankar, laget runt · elevens egna ord
+    rubrik: Bokens tavla efter sex läspass
+    underrad: Det här har hänt · Personerna · Frågorna vi bär med oss
     block:
-      - typ: spalter
+      - typ: tavla
+        text: Michael Ende, läspass 6 av 27
+        fraga: Momo eller kampen om tiden
+        listor:
+          - rubrik: Det här har hänt
+            punkter:
+              - 1 Momo bor i ruinen.
+              - 2 Folk går till Momo.
+              - 3 Momo får vänner.
+              - 4 Gigi berättar.
+              - 5 De grå herrarna kommer.
+              - 6 Fusi sparar tid.
+        tabell:
+          rubrik: Personerna
+          kolumner:
+            - Namnet
+            - Vem det är
+          rader:
+            - ["Momo", "lyssnar"]
+            - ["Beppo och Gigi", "Momos vänner"]
+            - ["De grå herrarna", "stjäl tid"]
+            - ["Fusi", "frisör, streck till de grå herrarna"]
+        annat:
+          rubrik: Frågorna vi bär med oss
+          rader:
+            - Var kommer Momo ifrån?
+            - Vilka är de grå herrarna?
+            - "Varför glömmer folk dem? ✓"
+            - Kan de ta Momos tid också?
+      - typ: not
+        text: Skriv en rad per läspass. Dra streck mellan personerna som hör ihop. Sätt en bock vid frågan som fick svar, gärna med sidan.
+      - typ: tabell
+        rubrik: Samtalsreglerna
         kolumner:
-          - namn: Gillade
-            fraga: Var det något du gillade?
-          - namn: Ogillade
-            fraga: Var det något du inte gillade?
-          - namn: Frågetecken
-            fraga: Var det något du undrade över?
-          - namn: Mönster
-            fraga: Mönster eller kopplingar?
-        rader: 5
-      - typ: skrivruta
-        rubrik: Steg 3 · Fördjupningsfråga
-        text: "Dra en tråd ur en spalt, och fråga alltid: ”hur vet du det?”"
-        rader: 3
+          - Nr
+          - Regeln
+        rader:
+          - ["1", "Allt vi tänker om boken är värt att säga."]
+          - ["2", "Vi bygger vidare på det någon sa."]
+          - ["3", "Vi bjuder in varandra."]
+      - typ: tabell
+        rubrik: Perioden
+        kolumner:
+          - När
+          - Det som är nytt
+        rader:
+          - ["Bokvalet", "Två böcker, röstning och början av boken"]
+          - ["Läspass 1", "Du visar allt, och i samtalet räcker laget runt"]
+          - ["Läspass 2 och 3", "Tråden. Första samtalsregeln, med kortare läsning"]
+          - ["Tidigast läspass 4", "En elev skriver på tavlan, och sedan tar eleverna över en bit i taget"]
+          - ["Slutet", "Slutsamtalet om hela boken, och boktipset"]
   material:
-    rubrik: Vad du behöver för ett boksamtal
-    kravEtikett: Textkrav
+    rubrik: Vad du behöver för ett läspass
+    kravEtikett: Bokkrav
     var:
-      rubrik: Var texterna finns
+      rubrik: Var böckerna finns
       punkter:
-        - fet: Noveller och korta kapitel.
-          text: Ett laddat avsnitt ur gruppens gemensamma bänkbok fungerar lika bra.
-        - fet: Bilderböcker med dubbla budskap.
-          text: Bär även för äldre elever.
-        - fet: Lättlästa serier.
-          text: Låg tröskel, fullt tolkningsutrymme.
-        - fet: Material i flera nivåer, t.ex. Mellan raderna.
-          text: Samma berättelse i olika svårighetsgrad gör det lätt att möta gruppen rätt.
+        - fet: Tio böcker per nivå i metoden.
+          text: Listan visar läspassen, ljudboken och var boken finns.
+        - fet: Skolbiblioteket och folkbiblioteket.
+          text: Klassuppsättningar, skollån och bokcirkelkassar.
+        - fet: Ljudbok och talbok.
+          text: Talboken i Legimus för en elev med läsnedsättning.
+      efter: I planeringsmallarna finns bokens tavla, frågekortet med kortet Du som leder, sidan om Talkort, kortet Böcker jag har läst ut, röstsedlarna, boktipset, läsplanen, läsintervjun och protokollet. Bokvalet, läspass 1 och slutet har egna tabeller i beskrivningen.
     bordet:
-      - Egen kopia av texten till varje elev
-      - Penna att markera och sätta frågetecken med
-      - Tavla eller blädderblock med fyra spalter
-      - Dina två till tre specialfrågor nedskrivna
-      - Snabbmallen för noteringen efteråt
-      - Bord där alla ser varandra
-    varjePass: "En rad i loggen: deltog alla, vad ska övas nästa gång?"
+      - Ett exemplar av boken per elev, och ditt med din post-it
+      - En post-it per elev, och frågekortet hos dig till Samtala
+      - Bokens tavla på väggen, med samtalsreglerna bredvid, och en penna
+      - Läsplanen hos dig
+    varjePass: Fotografera tavlan, och skriv i läsplanen vad gruppen sa och vad du tar upp nästa gång.
 film:
-  sekunder: 27.6
-  beskrivning: "Först-tankar: fyra frågor, laget runt. Svaren skrivs kort, och ingen diskuterar än. Läraren drar en tråd ur spalterna. Eleven går tillbaka till texten och pekar."
-  rubrik: "Så gör eleven"
-  ingress: "Fyra bilder ur filmen om vad eleven gör vid bordet. Filmen på metodens sida visar samma sak i rörelse."
+  sekunder: 29.76
+  beskrivning: "Var är vi? Adam berättar. Adam säger: ”De grå herrarna har kommit.” Läraren stannar vid sin post-it. Läraren säger: ”Jag undrar om man kan spara tid.” Elias visar var boken svarar. Elias säger: ”Den grå herren tar bort minnet!” Läraren frågar: ”Hur vet du det?” Elias säger: ”Här står det.” Frågan får en bock. Läraren frågar: ”Har boken svarat?” Sara frågar: ”Kan de ta Momos tid också?”"
+  rubrik: "Ett läspass i fyra bilder"
+  ingress: "Fyra bilder ur filmen om ett läspass i Momo, en för varje del av passet: Var är vi?, Läs, Samtala och Med mig. Filmen på metodens sida visar samma sak i rörelse."
   stillbilder:
-    - text: "Först-tankar laget runt: läraren frågar, alla svarar."
-    - text: "Svaren i fyra spalter, utan diskussion än."
-    - text: "Läraren drar en tråd: Berätta mer. Hur vet du det?"
-    - text: "Eleven pekar på slutet i texten: det är textstödet."
+    - text: "Var är vi? Adam berättar vid tavlan."
+    - text: "Läs: läraren stannar vid sin post-it."
+    - text: "Samtala: vid sin post-it visar Elias var det står."
+    - text: "Med mig: frågan får en bock, och en ny kommer."
+filmer:
+  - nr: 2
+    sekunder: 28.27
+    beskrivning: "Bokvalet: bokens namn och tre tomma rutor. Läspass 1: läraren skriver det eleverna säger. Adam säger: ”Momo bor i ruinen.” Läraren skriver: ”Momo”. Läraren säger den första frågan: Var kommer Momo ifrån? Läspass 6: Sara säger raden ”Fusi sparar tid.” Läraren skriver: ”Fusi”. Varför glömmer folk dem? Boken har svarat, så frågan får en bock. Slutet: var Momo kommer ifrån är ännu öppet."
+    rubrik: "Så växer bokens tavla"
+    ingress: "Fyra bilder ur filmen om bokens tavla, från bokvalet till slutet. I den första bilden syns hela tavlan, och sedan visar kameran två av de tre rutorna i taget. Filmen på metodens sida visar samma sak i rörelse."
+    efter: "tabell: Bokens tavla"
+    stillbilder:
+      - text: "Bokvalet: bokens namn och tre tomma rutor."
+      - text: "Läspass 1: eleverna säger raden, och läraren skriver."
+      - text: "Läspass 6: sex rader, och läraren drar ett streck."
+      - text: "Slutet: tre frågor fick svar, och en är öppen."
+  - nr: 3
+    titel: "Samtalet med frågekortet"
+    sekunder: 29.71
+    beskrivning: "Läraren lägger fram kortet. Läraren säger: ”Slå upp boken vid din post-it.” Alla väljer en av kortets frågor. Laget runt: en sak var. Läraren frågar: ”Vem börjar?” Elias säger: ”Fusi tror att det var hans egen idé.” Noor säger: ”Fusi får bråttom, som min storebror.” Tråden: två tankar hänger ihop. Läraren frågar: ”Sa två av er något som hänger ihop?” Adam säger: ”Elias och Noor!” Tillbaka till boken: Elias visar. Läraren säger: ”Hur vet du det? Visa i boken.” Elias säger: ”Här står det.”"
+    rubrik: "Samtalet i fyra steg"
+    ingress: "Fyra bilder ur filmen om samtalet i det sjätte läspasset i Momo, en för varje steg i tabellen. Filmen på metodens sida visar samma sak i rörelse."
+    efter: "tabell: Samtalet med frågekortet"
+    stillbilder:
+      - text: "Lägg fram: läraren lägger kortet mitt på bordet."
+      - text: "Laget runt: var och en säger en sak vid sin post-it."
+      - text: "Tråden: Adam hör att det Elias och Noor sa hänger ihop."
+      - text: "Tillbaka till boken: Elias visar var det står."
