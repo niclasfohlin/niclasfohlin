@@ -918,6 +918,19 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
    rubrikrad (granskningen 2026-10-09). I utskriften är raden låg i alla kartor, och veckosidans mått räknar med det. */
 .m-tabell.karta:has(th.niva) thead th { padding-top: 0.1rem; padding-bottom: 0.1rem; line-height: 1.15; }
 .m-tabell th.niva { background: var(--niva); color: var(--niva-text); border-color: var(--niva); font-size: 1.2rem; }
+/* Litteraturlistan (Litteraturlista.astro, src/lib/litteraturlista.ts; Chambers boksamtal i grupp): omslaget i en smal
+   första kolumn, läspassen som ett stort tal i nivåns färg och rubrikraden i nivåns färg, med stor text som i kursens
+   karta, så att kontrasten räcker. Kolumnernas andelar står i colgroup och är önskemål: en kolumn blir aldrig smalare än
+   sitt längsta ord. */
+.m-bocker { font-size: 0.9rem; line-height: 1.45; }
+.m-bocker thead th, .m-bocker thead td { background: var(--niva, var(--farg-accent)); color: var(--niva-text, #fff); border-color: var(--niva, var(--farg-accent)); }
+.m-bocker[style] thead th { font-size: 1.17rem; font-weight: 700; padding-top: 0.15rem; padding-bottom: 0.15rem; line-height: 1.2; }
+.m-bocker .rad { display: block; }
+.m-bocker td.omslag { padding: 0.45rem; }
+.m-bocker td.omslag img { display: block; width: 100%; min-width: 2.75rem; max-width: 4rem; height: auto; margin: 0 auto; border: 1px solid var(--farg-kant); }
+.m-bocker td.tal { text-align: center; }
+.m-bocker .talet { display: block; font-size: 1.7rem; font-weight: 700; line-height: 1.1; color: var(--niva, var(--farg-accent)); }
+.m-bocker td.tal .under { display: block; margin-top: 0; font-size: 0.78rem; font-style: normal; color: var(--farg-text-svag); white-space: nowrap; }
 .m-karta-vecka { display: block; color: var(--farg-accent); }
 .m-karta-vecka .forsta { font-weight: 700; }
 .m-kartrad { margin: 0.75rem 0 0; }
@@ -1434,6 +1447,23 @@ html.js .bara-js { display: inline-block; }
   .m-tabell.steg th[scope="row"] { background: var(--farg-accent-ljus); border-top: 0; }
   .m-tabell.steg td::before { content: attr(data-rubrik); display: block; font-weight: 600; color: var(--farg-text-svag); font-size: 0.8rem; margin-bottom: 0.2em; }
   /* Tabeller med fyra eller fler kolumner (klassen stapla, t.ex. ramarnas översikt) staplas på samma sätt. */
+  /* Litteraturlistan i telefonen: varje bok ett kort med nivåns färg i kanten, omslaget bredvid boken och läspassen,
+     och raderna om var boken finns under, med länkar som går att träffa med tummen. */
+  .m-bocker colgroup { display: none; }
+  .m-bocker thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .m-bocker, .m-bocker tbody { display: block; }
+  .m-bocker tbody tr { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); column-gap: 0.8rem; border: 1px solid var(--farg-kant); border-left: 4px solid var(--niva, var(--farg-accent)); border-radius: 6px; margin-bottom: 0.6rem; padding: 0.7rem 0.75rem; }
+  .m-bocker tbody td { display: block; border: 0; padding: 0; }
+  .m-bocker td.omslag { grid-row: 1 / span 2; padding: 0; }
+  .m-bocker td.omslag img { max-width: none; }
+  .m-bocker td.boken { grid-column: 2; font-size: 0.95rem; }
+  .m-bocker td.tal { grid-column: 2; text-align: left; margin-top: 0.3rem; }
+  .m-bocker .talet { display: inline; font-size: 1.3rem; }
+  .m-bocker .talet::after { content: " " attr(data-enhet); font-size: 0.9rem; font-weight: 400; color: var(--farg-text); }
+  .m-bocker td.tal .under { display: inline; font-size: 0.9rem; }
+  .m-bocker td.tal .under::before { content: "· "; }
+  .m-bocker td.finns { grid-column: 1 / -1; margin-top: 0.6rem; padding-top: 0.35rem; border-top: 1px solid var(--farg-kant); font-size: 0.95rem; }
+  .m-bocker td.finns a { display: inline-block; padding: 0.35rem 0.1rem; }
   .m-tabell.stapla colgroup { display: none; }
   .m-tabell.stapla thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .m-tabell.stapla, .m-tabell.stapla tbody, .m-tabell.stapla tr, .m-tabell.stapla th, .m-tabell.stapla td { display: block; width: auto; }
@@ -1690,6 +1720,18 @@ html.js .bara-js { display: inline-block; }
   .m-vecka .m-kartrad .m-tabell { font-size: 9pt; }
   .m-tabell.karta thead th { padding-top: 0.4mm; padding-bottom: 0.4mm; line-height: 1.15; }
   .m-tabell th.niva { font-size: 14pt; line-height: 1.1; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  /* Litteraturlistan i utskriften, som i Word: på en egen sida, i 9 punkter med täta rader, så att tio böcker och rutan
+     under ryms på sidan, och omslaget 40 bildpunkter brett. */
+  .m-ram:has(> .m-bocker) { break-before: page; }
+  .m-bocker { font-size: 9pt; line-height: 1.25; margin: 4pt 0 8pt; }
+  .m-bocker th, .m-bocker td { padding: 1.5pt 6pt; }
+  .m-bocker thead td { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .m-bocker[style] thead th { font-size: 14pt; padding-top: 0.4mm; padding-bottom: 0.4mm; line-height: 1.15; }
+  .m-bocker td.omslag { padding: 2pt 4pt; }
+  .m-bocker td.omslag img { width: 10.6mm; min-width: 0; }
+  .m-bocker .talet { font-size: 18pt; }
+  .m-bocker td.tal .under { font-size: 8pt; }
+  .m-bocker tr { break-inside: avoid; }
   .m-vecka-bild { break-inside: avoid; margin-top: 1.2mm; }
   .m-vecka .m-kartrad { flex: none; }
   .m-vecka:not(.tva-sidor) .m-vecka-bild, .m-vecka:not(.tva-sidor) .m-pabordet { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }

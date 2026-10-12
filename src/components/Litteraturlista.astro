@@ -1,0 +1,45 @@
+---
+// Litteraturlistan (src/lib/litteraturlista.ts; Chambers boksamtal i grupp, Niclas 2026-10-10: "bara översikten och en
+// miniatyr framsida från förslagen senaste utgåva på svenska"): en ramöversikt med en bild per rad, bokens omslag, i en
+// smal första kolumn utan rubrik. Länkarna i cellerna är länkar, läspassen står som ett stort tal i nivåns färg med
+// bokens sidor små och grå under, och rubrikraden har nivåns färg, som i Word (litteraturlista i metoddocx.ts).
+// På en smal skärm är varje bok ett kort: omslaget bredvid boken och läspassen, och raderna om var boken finns under.
+// Omslagen hämtas när läsaren närmar sig dem, och Skriv ut väntar in dem (data-utskriftsbild, Nedladdning.astro).
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { bildMatt, inline, kolumnandelar, omslagAdress, talcell } from '../lib/litteraturlista';
+import { skyltText, type Niva } from '../lib/nivaer';
+interface Props { oversikt: { kolumner: string[]; rader: string[][]; bilder?: string[]; bredder?: number[] }; id: string; niva?: Niva }
+const { oversikt: ov, id, niva } = Astro.props;
+const andelar = kolumnandelar(ov.kolumner.length, ov.bredder);
+// Bildens mått läses ur filen, så att sidan inte hoppar när omslaget kommer. Bygget stannar på en bild som saknas.
+const bild = (sokvag: string) => {
+  const adress = omslagAdress(id, sokvag);
+  const fil = join(process.cwd(), 'public', adress);
+  if (!existsSync(fil)) throw new Error(`Litteraturlistan i ${id}: bilden ${adress} saknas i public/.`);
+  const matt = bildMatt(new Uint8Array(readFileSync(fil)));
+  if (!matt) throw new Error(`Litteraturlistan i ${id}: bilden ${adress} är varken jpg eller png.`);
+  return { adress, ...matt };
+};
+---
+<table class="m-tabell m-bocker" style={niva ? `--niva:#${niva.farg};--niva-text:#${skyltText(niva.farg)}` : undefined}>
+  <colgroup>{andelar.map((a) => <col style={`width:${(a * 100).toFixed(1)}%`} />)}</colgroup>
+  <thead>
+    <tr><td></td>{ov.kolumner.map((k) => <th scope="col">{k}</th>)}</tr>
+  </thead>
+  <tbody>
+    {ov.rader.map((rad, ri) => {
+      const b = bild(ov.bilder![ri]);
+      return (
+        <tr>
+          <td class="omslag"><img src={b.adress} alt="" width={b.bredd} height={b.hojd} loading="lazy" decoding="async" data-utskriftsbild /></td>
+          {rad.map((cell, i) => {
+            const tal = talcell(cell);
+            if (tal) return <td class="tal" data-rubrik={ov.kolumner[i]}><span class="talet" data-enhet={ov.kolumner[i].toLowerCase()}>{tal.tal}</span>{' '}{tal.under && <span class="under">{tal.under}</span>}</td>;
+            return <td class={i === 0 ? 'boken' : 'finns'} data-rubrik={ov.kolumner[i]}>{cell.split('\n').map((l) => <span class="rad">{inline(l).map((d) => (d.href ? <a href={d.href}>{d.text}</a> : d.fet ? <b>{d.text}</b> : d.kursiv ? <em>{d.text}</em> : d.text))}</span>)}</td>;
+          })}
+        </tr>
+      );
+    })}
+  </tbody>
+</table>

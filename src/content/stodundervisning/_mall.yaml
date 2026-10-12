@@ -223,7 +223,13 @@ ramar:
     - rubrik: "Berättelseram 1: Titeln"
       text:
         - Ramens inledning.
-      # Valfri översikt, en rad per del.
+      # Valfri översikt, en rad per del. bredder är kolumnernas relativa bredd, när de inte ska vara som sajten väljer.
+      # Med bilder är översikten en litteraturlista (boksamtal-i-grupp.yaml, METODER.md under Litteraturlistan): en bild
+      # per rad, bokens omslag, i en smal första kolumn utan rubrik, med sökvägen i metodens mapp
+      # (public/stodundervisning/<id>/), och bredder har då bildens kolumn först. I listans celler är [text](https://…) en
+      # länk, **fet** fet och *kursiv* kursiv, och en cell som bara är ett tal med en rad under är läspassen.
+      #   bilder: [omslag/bas-01.jpg]
+      #   bredder: [11, 35, 11, 43]
       oversikt:
         kolumner: [Del, Rubrik, Vad händer, Skrivfokus]
         rader:

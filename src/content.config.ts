@@ -378,7 +378,21 @@ const stodundervisning = defineCollection({
       ramar: z.array(z.strictObject({
         rubrik: text,
         text: stycken,
-        oversikt: z.strictObject({ kolumner: z.array(text).min(2), rader: z.array(z.array(z.string())).min(1) }).optional(),
+        // En litteraturlista (Chambers boksamtal i grupp, Niclas 2026-10-10, metodriggens TILL-SAJTEN 2026-10-12): bilder är en
+        // bild per rad, bokens omslag, i en smal första kolumn utan rubrik, med sökvägen i metodens mapp
+        // (public/stodundervisning/<id>/, som omslag/bas-01.jpg). bredder är kolumnernas relativa bredd, med bildens kolumn
+        // först när bilder finns. I listans celler ritas [text](https://…) som en länk, **fet** och *kursiv*, och en cell
+        // som bara är ett tal med en rad under (läspassen över bokens sidor) som ett stort tal (src/lib/litteraturlista.ts).
+        oversikt: z.strictObject({
+          kolumner: z.array(text).min(2),
+          rader: z.array(z.array(z.string())).min(1),
+          bilder: z.array(z.string().regex(/^[\w/-]+(\.[\w/-]+)*\.(jpg|png)$/, 'En bild i en översikt är en jpg eller png i metodens mapp, som omslag/bas-01.jpg.')).optional(),
+          bredder: z.array(z.number().positive()).optional(),
+        }).superRefine((o, ctx) => {
+          if (o.bilder && o.bilder.length !== o.rader.length) ctx.addIssue({ code: 'custom', path: ['bilder'], message: `Översikten har ${o.rader.length} rader men ${o.bilder.length} bilder: en bild per rad, i radernas ordning.` });
+          const n = o.kolumner.length + (o.bilder ? 1 : 0);
+          if (o.bredder && o.bredder.length !== n) ctx.addIssue({ code: 'custom', path: ['bredder'], message: `Översikten har ${n} kolumner${o.bilder ? ', med bildens kolumn först,' : ''} men ${o.bredder.length} bredder.` });
+        }).optional(),
         // Listor: elevmaterial i ramen (ordlistor, bokstäver, meningar, en kort text), flera per ram.
         // Kolumnrubriker bara när de betyder något; utan dem ritas listan utan rubrikrad. Ritas stort,
         // för att läggas på bordet och pekas i. Lärarnoten (delar) står före listorna på sidan och i

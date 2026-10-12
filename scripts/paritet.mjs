@@ -42,6 +42,7 @@ const UNDANTAG = [
   { vag: /^mallar\.\d+\.text$/, word: false, skal: 'mallens text är till läraren och står bara på sidan' },
   { vag: /^mallar\.\d+\.underrad$/, utskrift: false, skal: 'raden ritas som fält med skrivlinjer på sidan' },
   { vag: /^ramar\.ramar\.\d+\.(serie|ark)$/, word: false, utskrift: false, skal: 'bildseriens och arkets id i metodens scenfil; rutorna står som bilder (src/lib/bildserier.ts)' },
+  { vag: /^ramar\.ramar\.\d+\.oversikt\.bilder\.\d+$/, word: false, utskrift: false, skal: 'litteraturlistans omslag, filens sökväg; bilden står i listans första kolumn (src/lib/litteraturlista.ts)' },
   { vag: /^mallar\.\d+\.etiketter\.\d+$/, word: false, utskrift: false, skal: 'seriemallens namn på rutorna står i rutornas bilder, i elevens typsnitt (src/lib/serieritning.js)' },
 ];
 
@@ -166,8 +167,11 @@ const arTextpar = (ram) => {
   return (ram.listor ?? []).length === 2 && (t.kolumner ?? []).length === 2 && t.rader.length === 1 && !t.larare && f.rubrik === 'Frågorna' && !f.kolumner && f.rader.length >= 3 && f.rader.length <= 5 && !ram.huvud && !ram.oversikt && !ram.sagoform;
 };
 
+// En länk i en cell, [text](https://…) i litteraturlistan (src/lib/litteraturlista.ts), står som sin text: adressen syns
+// varken i Word eller i utskriften.
+const utanLankar = (s) => s.replace(/\[([^\]\n]+)\]\(https?:\/\/[^)\s]+\)/g, '$1');
 function texter(x, vag, ut, minst = MINST) {
-  if (typeof x === 'string') { if (x.length >= minst && /\p{L}/u.test(x)) ut.push({ vag, text: x }); }
+  if (typeof x === 'string') { const t = utanLankar(x); if (t.length >= minst && /\p{L}/u.test(t)) ut.push({ vag, text: t }); }
   else if (Array.isArray(x)) x.forEach((y, i) => texter(y, `${vag}.${i}`, ut, minst));
   else if (x && typeof x === 'object') for (const [k, v] of Object.entries(x)) texter(v, vag ? `${vag}.${k}` : k, ut, minst);
   return ut;

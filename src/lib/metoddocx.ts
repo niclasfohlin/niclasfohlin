@@ -4,7 +4,7 @@
 // Designelementen är samma som på sidan (src/components/Metod.astro): rutor, tabeller med
 // rubrikrad, band, gör/undvik och bockar. Varje sida bär © Niclas Fohlin och niclasfohlin.se.
 import {
-  AlignmentType, Body, Bookmark, BorderStyle, Document, Footer, Header, HeadingLevel, HeightRule, ImageRun, ImportedXmlComponent, InternalHyperlink, LevelFormat, NoBreakHyphen, PageNumber, PageOrientation,
+  AlignmentType, Body, Bookmark, BorderStyle, Document, ExternalHyperlink, Footer, Header, HeadingLevel, HeightRule, ImageRun, ImportedXmlComponent, InternalHyperlink, LevelFormat, NoBreakHyphen, PageNumber, PageOrientation,
   Paragraph, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, UnderlineType, VerticalAlign, WidthType,
   type IBorderOptions, type IParagraphOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
@@ -29,6 +29,7 @@ import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, FORMLUFT, FORMRAD_PT, 
 import { bankAv, bankfilensRamar, bankRad, type Bankfil } from './bank';
 import { MATERIAL } from './material';
 import { losningarnasNiva, losningarnasNot, problemformer } from './problemform';
+import { bildMatt, inline, kolumnandelar, omslagAdress, radensNamn, ramensNiva, talcell } from './litteraturlista';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
 const FARG = {
@@ -395,6 +396,56 @@ function rubrikTabell(kolumner: string[], rader: string[][], givna: number[], o:
     return cell(barn, { bredd: bredder[i], fyll: mellan ? FARG.ljus : ri % 2 === 1 ? FARG.rand : undefined });
     // En rad utan text är en skrivrad: ge den höjd för handskrift (tomHojd: en ruta att bygga i på bordet).
   }), { hojd: r.every((t) => !t.trim()) ? (o.tomHojd ?? 420) : undefined }));
+  return [tabell([huvud, ...kropp], bredder), avstand()];
+}
+// Litteraturlistan (src/lib/litteraturlista.ts; Chambers boksamtal i grupp, Niclas 2026-10-10: "bara översikten och en
+// miniatyr framsida"), ett till ett med metodriggens build-docx.js: omslaget i en smal första kolumn utan rubrik, texten i
+// 9 punkter med raderna i en cell utan mellanrum och tät cellmarginal, så att tio böcker och rutan under ryms på en sida
+// också i Google Dokument, läspassen som ett stort tal i nivåns färg med sidorna små och grå under, och länkarna blå och
+// understrukna. Rubrikraden har nivåns färg, när ramen heter som en nivå, med texten i 14 punkter som i kursens karta,
+// så att kontrasten räcker för stor text (ockran ger 4,1 mot både vit och mörk text).
+let omslagNr = 0;
+function inlineBarn(text: string, bas: IRunOptions): (TextRun | ExternalHyperlink)[] {
+  return inline(text).map((d) => (d.href
+    ? new ExternalHyperlink({ link: d.href, children: [textRun({ ...bas, text: d.text, color: FARG.huvud, underline: { type: UnderlineType.SINGLE, color: FARG.huvud } })] })
+    : textRun({ ...bas, text: d.text, bold: d.fet || undefined, italics: d.kursiv || undefined })));
+}
+function litteraturlista(ram: Ram, nivaer: Niva[], id?: string): Barn[] {
+  const ov = ram.oversikt!;
+  const niva = ramensNiva(ram.rubrik, nivaer);
+  const fyll = niva?.farg ?? FARG.huvud;
+  const andelar = kolumnandelar(ov.kolumner.length, ov.bredder);
+  const givna = andelar.map((a) => Math.round(a * BREDD));
+  givna[givna.length - 1] += BREDD - givna.reduce((a, x) => a + x, 0);
+  // Rubrikradens ord ryms i sin kolumn (rymOrden): Läspass i 14 punkter bröts annars mitt i ordet i den smala kolumnen.
+  const bredder = rymOrden(givna, ov.kolumner.map((k, i) => ({ kolumn: i + 1, text: k, halvpunkter: niva ? 28 : 20, fet: true })));
+  const STORLEK = 18;
+  const OMSLAG = 40;
+  const huvud = rad(['', ...ov.kolumner].map((k, i) => cell([stycke(k, { fet: true, farg: niva ? skyltText(niva.farg) : FARG.vit, storlek: niva ? 28 : 20, efter: 0 })], { bredd: bredder[i], fyll, tat: true, kanter: runt(kant(fyll)) })), { huvud: true });
+  const omslag = (sokvag: string, namn: string): Paragraph => {
+    const adress = omslagAdress(id ?? '', sokvag);
+    const data = RESURSER.bilder.get(adress);
+    if (!data) throw new Error(`Bilden ${adress} saknas i Word-filens resurser (src/lib/litteraturlista.ts, listornasBilder).`);
+    const matt = bildMatt(data);
+    if (!matt) throw new Error(`Bilden ${adress} är varken jpg eller png.`);
+    return new Paragraph({ spacing: { before: 0, after: 0 }, children: [new ImageRun({ type: matt.typ, data, transformation: { width: OMSLAG, height: Math.round((OMSLAG * matt.hojd) / matt.bredd) }, altText: { name: `Omslag ${++omslagNr}`, description: `Omslaget till ${namn}`, id: String(11000 + omslagNr) } })] });
+  };
+  const kropp = ov.rader.map((r, ri) => {
+    const zebra = ri % 2 === 1 ? FARG.rand : undefined;
+    return rad([
+      cell([omslag(ov.bilder![ri], radensNamn(r))], { bredd: bredder[0], fyll: zebra, tat: true }),
+      ...r.map((text, i) => {
+        const tal = talcell(text);
+        const barn = tal
+          ? [
+            new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0 }, children: [textRun({ text: tal.tal, bold: true, size: 36, color: niva?.farg ?? FARG.huvud })] }),
+            ...(tal.under ? [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0 }, children: [textRun({ text: tal.under, size: 16, color: FARG.svag })] })] : []),
+          ]
+          : text.split('\n').map((l) => new Paragraph({ spacing: { before: 0, after: 0 }, children: inlineBarn(l, { size: STORLEK }) }));
+        return cell(barn, { bredd: bredder[i + 1], fyll: zebra, tat: true });
+      }),
+    ]);
+  });
   return [tabell([huvud, ...kropp], bredder), avstand()];
 }
 // Stegtabellen: nummer och namn i versaler, frågan under, sedan vad du gör och fraserna med citattecken. fran och till
@@ -1397,14 +1448,18 @@ function sagobladBarn(b: Sagoblad): Barn[] {
 // upphov, så att läraren läser hur bladet används utan att läsa sidfoten (granskningen 2026-10-02).
 function sagoLarartext(ramar: Ram[], d: MetodData, rubrik: (text: string) => Barn): Barn[] {
   const ut: Barn[] = [];
-  for (const r of ramar) {
-    ut.push(rubrik(r.rubrik));
-    for (const s of r.text) ut.push(stycke(s, { efter: 60 }));
-    const [blad] = sagobladAv(r, d);
-    if (blad.not) ut.push(stycke(blad.not, { farg: FARG.svag, storlek: 20, efter: 100 }));
-  }
   // Upphovet bara när bladen har bildbankens bilder (tidningens sida i Ordverkstad i grupp har inga; granskningen 2026-10-06).
   const upphov = sagoUpphov(d, ramar);
+  // Texten till ett ensamt blad hålls ihop med sin rubrik: Frågekortet i Chambers boksamtal i grupp fick rubriken och
+  // ramens rad sist på litteraturlistans sida och rutan Till läraren ensam på nästa (2026-10-12). En följd av flera blad
+  // får dela sig, eftersom den kan vara högre än en sida.
+  const ihop = ramar.length === 1;
+  for (const r of ramar) {
+    ut.push(rubrik(r.rubrik));
+    const [blad] = sagobladAv(r, d);
+    r.text.forEach((s, j) => ut.push(stycke(s, { efter: 60, hallIhop: (ihop && (j < r.text.length - 1 || !!blad.not || !!upphov)) || undefined })));
+    if (blad.not) ut.push(stycke(blad.not, { farg: FARG.svag, storlek: 20, efter: 100, hallIhop: (ihop && !!upphov) || undefined }));
+  }
   if (upphov) ut.push(stycke(upphov, { farg: FARG.svag, storlek: 18 }));
   return ut;
 }
@@ -1528,7 +1583,7 @@ function veckansBildHojd(falt: { rubrik: string; text: string }[], rad: string[]
 // ramens text utan veckorna ('inga') och sedan en vecka i taget (veckans index), så att veckans material kan stå emellan.
 // paNySida: det som ritas står först i ett nytt avsnitt, som redan börjar på en ny sida, och får då ingen egen
 // sidbrytning före sig.
-function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: MetodData['kort']; blad?: Record<string, number>; brak?: boolean; elev?: boolean; ensamRuta?: Barn[]; efterDel?: (rubrik: string, maxHojd?: number) => Barn[]; bildtext?: (rubrik: string) => string; nivaer?: Niva[]; karta?: { tabell?: MetodData['tabeller'][number]; vecka: (led: string) => string; blad: (namn: string) => string | undefined; lankar: KartaWord }; veckor?: 'inga' | number; paNySida?: boolean; tat?: boolean } = {}): Flod {
+function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: MetodData['kort']; blad?: Record<string, number>; brak?: boolean; elev?: boolean; ensamRuta?: Barn[]; efterDel?: (rubrik: string, maxHojd?: number) => Barn[]; bildtext?: (rubrik: string) => string; nivaer?: Niva[]; id?: string; karta?: { tabell?: MetodData['tabeller'][number]; vecka: (led: string) => string; blad: (namn: string) => string | undefined; lankar: KartaWord }; veckor?: 'inga' | number; paNySida?: boolean; tat?: boolean } = {}): Flod {
   const ut: Flod = [];
   const enVecka = typeof o.veckor === 'number';
   // Ramens text hänger ihop med det som följer, utom när veckorna börjar på en ny sida: Google Dokument flyttade då
@@ -1543,11 +1598,14 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
   // kolumnerna lika breda, annars staplas orden och bryts mitt i.
   const korta = !!ram.oversikt && ram.oversikt.rader.every((r) => r.every((c) => c.length <= 30));
   const etiketter = !!ram.oversikt && ram.oversikt.rader.every((r) => (r[0] ?? '').length <= 30 && !(r[0] ?? '').includes('\n'));
-  if (ram.oversikt && !enVecka) {
+  // En översikt med bilder är en litteraturlista (src/lib/litteraturlista.ts). bredder ger annars kolumnernas andelar.
+  if (ram.oversikt?.bilder && !enVecka) ut.push(...litteraturlista(ram, o.nivaer ?? [], o.id));
+  else if (ram.oversikt && !enVecka) {
     const n = ram.oversikt.kolumner.length;
     const forsta = korta || !etiketter ? Math.floor(BREDD / n) : 1100;
     const rest = Math.floor((BREDD - forsta) / (n - 1));
-    ut.push(...rubrikTabell(ram.oversikt.kolumner, ram.oversikt.rader, ram.oversikt.kolumner.map((_, i) => (i === 0 ? forsta : i === n - 1 ? BREDD - forsta - rest * (n - 2) : rest)), { hallIhop: korta, hallIhopEfter: korta, radrubrik: false, storlek: korta && o.stor ? 30 : undefined }));
+    const summa = (ram.oversikt.bredder ?? []).reduce((a, x) => a + x, 0);
+    ut.push(...rubrikTabell(ram.oversikt.kolumner, ram.oversikt.rader, ram.oversikt.bredder ? ram.oversikt.bredder.map((b) => Math.floor((b / summa) * BREDD)) : ram.oversikt.kolumner.map((_, i) => (i === 0 ? forsta : i === n - 1 ? BREDD - forsta - rest * (n - 2) : rest)), { hallIhop: korta, hallIhopEfter: korta, radrubrik: false, storlek: korta && o.stor ? 30 : undefined }));
   }
   // Ramens huvud (fält att fylla i före delarna) står först. Har ramen listor står det i stället direkt före den första
   // listan, som på sidan, så att elevens namn och tecknen på kartläggningens protokoll hör till listan.
@@ -2281,7 +2339,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     // beskrivningen" och Allt om metoden är allt, också i en metod med en bank).
     const former = problemformer(ramarna, bilderPaBordet);
     const bank = bankAv(d);
-    const ramVal = (ram: Ram) => ({ kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d), efterDel, bildtext: (rubrik: string) => paBordetVid(bilderPaBordet, { del: rubrik }).map((b) => b.bild.text).join(' '), nivaer: d.nivaer, karta });
+    const ramVal = (ram: Ram) => ({ kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d), efterDel, bildtext: (rubrik: string) => paBordetVid(bilderPaBordet, { del: rubrik }).map((b) => b.bild.text).join(' '), nivaer: d.nivaer, id: post.id, karta });
     let efterVeckorna = false;
     const ramensRubrik = (ram: Ram, nySida = false) => new Paragraph({ children: [run(ram.rubrik)], heading: HeadingLevel.HEADING_3, keepNext: true, pageBreakBefore: nySida || undefined, spacing: { before: 240, after: 80 } });
     // En ram, där den står. ram är ramen som den ritas: en ram vars listor står vid veckorna ritas utan dem.
@@ -2343,7 +2401,8 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
       // inte redan gör det efter förra ramens blad, och elevens blad och arket står efter delarna, i egna sektioner.
       // Lärarens sida till ett problem är ett blad: den börjar på en ny sida, med problemet överst och lösningarna efter texten.
       const larare = former.larare(ram);
-      const nySida = (!!(ram.serie || ram.ark) || forstEfterVeckorna || !!larare) && !(ut.at(-1) instanceof Sektionsbyte);
+      // En litteraturlista (en översikt med bilder) börjar också på en ny sida, så att de tio böckerna står på en sida.
+      const nySida = (!!(ram.serie || ram.ark) || forstEfterVeckorna || !!larare || !!ram.oversikt?.bilder) && !(ut.at(-1) instanceof Sektionsbyte);
       ut.push(ramensRubrik(ram, nySida));
       const serie = ramensSerie(ram, post.id);
       if (ramArTom(ram)) {
@@ -2504,7 +2563,7 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
     const ramarna = d.ramar.ramar;
     const boksidor = lastexter(ramarna);
     const paBordet = metodensPaBordet(d, post.id);
-    const ramVal = (ram: Ram, tom: boolean) => ({ skrivrum: tom, stor: true, kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d), efterDel: (rubrik: string, maxHojd?: number) => paBordetVid(paBordet, { del: rubrik }).flatMap((b) => bordet(b, maxHojd === undefined ? undefined : maxHojd - radantal(`På bordet. ${b.bild.text}`, BREDD, 19) * 235)), bildtext: (rubrik: string) => paBordetVid(paBordet, { del: rubrik }).map((b) => b.bild.text).join(' '), nivaer: d.nivaer, karta: kartaFor(post) });
+    const ramVal = (ram: Ram, tom: boolean) => ({ skrivrum: tom, stor: true, kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d), efterDel: (rubrik: string, maxHojd?: number) => paBordetVid(paBordet, { del: rubrik }).flatMap((b) => bordet(b, maxHojd === undefined ? undefined : maxHojd - radantal(`På bordet. ${b.bild.text}`, BREDD, 19) * 235)), bildtext: (rubrik: string) => paBordetVid(paBordet, { del: rubrik }).map((b) => b.bild.text).join(' '), nivaer: d.nivaer, id: post.id, karta: kartaFor(post) });
     const former = problemformer(ramarna, paBordet);
     const bank = bankAv(d);
     // En rams sidor i planeringsmallarna, i ordning. ram är ramen som den ritas: en ram vars listor står vid veckorna
