@@ -1,0 +1,30 @@
+---
+// En nivå i materialet (src/lib/nivamaterial.ts): en rad i nivåns färg som fälls ut, med nivåns ramar i, som nivån i en
+// bank (Bank.astro, samma stilar, .bank-niva i global.css). I utskriften står nivån utfälld, utan raden.
+import type { Nivarad } from '../lib/nivamaterial';
+interface Props { rad: Nivarad; enhet?: string }
+const { rad, enhet } = Astro.props;
+---
+<details class="bank-niva" id={`niva-${rad.slug}`} style={`--niva: #${rad.niva.farg}`} data-niva>
+  <summary>
+    <span class="bank-nivanamn">{rad.niva.namn}</span>
+    {rad.antal > 0 && <span class="bank-antal">{rad.antal}{enhet ? ` ${enhet}` : ''}</span>}
+  </summary>
+  <div class="bank-innehall"><slot /></div>
+</details>
+
+<script>
+  // I utskriften står alla nivåer utfällda, som i Word-filen med allt, och efteråt som läsaren hade dem.
+  const nivaer = [...document.querySelectorAll<HTMLDetailsElement>('details[data-niva]')];
+  let oppna: boolean[] = [];
+  window.addEventListener('beforeprint', () => { oppna = nivaer.map((x) => x.open); for (const x of nivaer) x.open = true; });
+  window.addEventListener('afterprint', () => { nivaer.forEach((x, i) => { x.open = oppna[i] ?? x.open; }); });
+  // En länk till nivån eller till något i den (#niva-bas, #ram-2) fäller ut nivån och visar målet.
+  const visa = () => {
+    const mal = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+    const x = mal?.closest('details[data-niva]');
+    if (x instanceof HTMLDetailsElement && !x.open) { x.open = true; mal!.scrollIntoView(); }
+  };
+  visa();
+  window.addEventListener('hashchange', visa);
+</script>

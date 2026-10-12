@@ -23,6 +23,7 @@ import Textpar from './Textpar.astro';
 import Ramindex from './Ramindex.astro';
 import Litteraturlista from './Litteraturlista.astro';
 import Bank from './Bank.astro';
+import Nivarad from './Nivarad.astro';
 import Problemsida from './Problemsida.astro';
 import { bankAv, bankRad, enhetAdress, nivaFarger, BOKNIVA, type Bankenhet } from '../lib/bank';
 import { losningarnasNiva, losningarnasNot, problemformer } from '../lib/problemform';
@@ -39,6 +40,7 @@ import { serieantal, serieFiler } from '../lib/bildserier-bygge';
 import { bildensAlt, metodensPaBordet, paBordetVid, PABORDET_MATT } from '../lib/pabordet';
 import { listansNiva } from '../lib/nivaer';
 import { omslagUpphov, ramensNiva } from '../lib/litteraturlista';
+import { nivamaterial } from '../lib/nivamaterial';
 import { bladNamn, delensRad, kartan, metodensBlad, radensDel } from '../lib/karta';
 import { veckanRyms } from '../lib/veckosida';
 import { veckansLista, veckomaterial } from '../lib/veckomaterial';
@@ -173,6 +175,9 @@ const radLankar = { ...kartLankar, vecka: undefined };
 // materialets lista leder till, och på skärmen en länk till sin ram, där läraren läser hur korten görs i ordning.
 const vm = veckomaterial(d);
 const ramarna: SerieRam[] = d.ramar?.ramar ?? [];
+// Nivåernas material (src/lib/nivamaterial.ts): ramar som heter efter metodens nivåer står som nivårader som fälls ut,
+// som bankens nivåer. I en kurs med veckor står materialet vid veckorna, och då gäller regeln inte.
+const nm = !enhet && !vm ? nivamaterial(ramarna, d.nivaer, (ri) => !!banken && (banken.ramar.has(ri) || banken.oversikter.has(ri))) : undefined;
 const listAnkare = new Map<string, string>();
 if (vm) for (const [ri, lagda] of vm.listor) for (const li of lagda.keys()) listAnkare.set(`${ri}-${li}`, ankare(ramarna[ri].listor![li].rubrik ?? `${ramarna[ri].rubrik} ${li + 1}`));
 type Punkt = { ram: SerieRam; ri: number; lage?: 'huvud' | 'vecka' | 'material'; vecka?: number; lista?: number; efter?: string; par?: TextparForm; helaKursen?: boolean };
@@ -873,8 +878,15 @@ const meny = [
             {banken.nivaer.map((n) => <Bank d={d} id={id} bank={banken} niva={n} farger={bankFarger} ankare={(i) => ramAnkare[i]} friKlass={friKlass}>{bankPunkter.get(n.namn)!.map(rita)}</Bank>)}
           </div>
         )}
-        {!enhet && d.ramar.ramar.length - (banken ? banken.ramar.size + banken.oversikter.size : 0) >= 4 && <Ramindex ramar={d.ramar.ramar} rubrik={d.ramar.rubrik} farger={BOKNIVA} ankare={indexAnkare} bank={banken ?? undefined} />}
-        {punkter.map(rita)}
+        {/* Nivåernas material (Nivarad.astro): en rad per nivå i nivåns färg, med nivåns ramar i. Står nivåerna först i
+            filen står raderna före materialets lista, som bankens nivåer; annars där den första av ramarna står. */}
+        {nm && nm.ramar.has(punkter[0]?.ri) && <div class="bank" data-nivaer>{nm.nivaer.map((n) => <Nivarad rad={n} enhet={nm.enhet}>{punkter.filter((p) => n.ramar.includes(p.ri)).map(rita)}</Nivarad>)}</div>}
+        {!enhet && d.ramar.ramar.length - (banken ? banken.ramar.size + banken.oversikter.size : 0) - (nm?.ramar.size ?? 0) >= 4 && <Ramindex ramar={d.ramar.ramar} rubrik={d.ramar.rubrik} farger={BOKNIVA} ankare={indexAnkare} bank={banken ?? undefined} utanfor={nm?.ramar} />}
+        {punkter.map((p) => (!nm?.ramar.has(p.ri)
+          ? rita(p)
+          : p.ri === nm.forst && p.ri !== punkter[0].ri
+            ? <div class="bank" data-nivaer>{nm.nivaer.map((n) => <Nivarad rad={n} enhet={nm.enhet}>{punkter.filter((x) => n.ramar.includes(x.ri)).map(rita)}</Nivarad>)}</div>
+            : null))}
       </>);
       })()}
       {!enhet && d.ramar.efter && <p class="m-efter">{d.ramar.efter}</p>}

@@ -36,10 +36,11 @@ const LARARSIDOR = /^Lärarens sidor: (.+)$/;
 
 // bank: metodens bank (src/lib/bank.ts). Enheterna och följesidorna står på egna sidor och nivåernas översikter i bankens
 // nivåer, som står först bland ramarna (Bank.astro), så listan har bara de andra ramarna.
-export function ramindex<R extends Ram>(ramar: R[], bank?: Bank): Indexpost[] {
+// utanfor: ramar som står på ett annat ställe på sidan och inte i listan, som nivåernas material (src/lib/nivamaterial.ts).
+export function ramindex<R extends Ram>(ramar: R[], bank?: Bank, utanfor?: Set<number>): Indexpost[] {
   const texter = lastexter(ramar);
   const nivaer = new Map<string, Indexniva>();
-  const anvanda = new Set<number>(bank ? [...bank.ramar, ...bank.oversikter] : []);
+  const anvanda = new Set<number>([...(bank ? [...bank.ramar, ...bank.oversikter] : []), ...(utanfor ?? [])]);
   // Veckorna och det som står vid dem (veckomaterial.ts) är en egen post och står inte under en nivå eller ett led.
   const vm = veckomaterial({ ramar: { ramar } });
   if (vm) { anvanda.add(vm.ri); for (const i of vm.ramar.keys()) anvanda.add(i); }
@@ -120,6 +121,8 @@ export function ramindex<R extends Ram>(ramar: R[], bank?: Bank): Indexpost[] {
       : [...(p.typ === 'niva' && p.oversikt ? [p.oversikt.nr] : []), ...p.rader.flatMap((r) => [r.lank.nr, ...(r.extra ? [r.extra.nr] : [])])]));
   // Bankens ramar nås genom bankens nivåer.
   if (bank) for (const i of [...bank.ramar, ...bank.oversikter]) lankade.push(i + 1);
+  // Nivåernas material nås genom nivåernas rader.
+  for (const i of utanfor ?? []) lankade.push(i + 1);
   if (lankade.length !== ramar.length || new Set(lankade).size !== ramar.length) throw new Error(`Materialets lista: ${ramar.length} ramar men ${new Set(lankade).size} olika länkar av ${lankade.length} (src/lib/ramindex.ts).`);
   return poster.sort((a, b) => a.forst - b.forst).map((p) => p.post);
 }
