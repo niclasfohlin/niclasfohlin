@@ -444,7 +444,7 @@ html.js .filrader > li.bara-js { display: flex; }
 .filval > :first-child { border-left: 0; }
 .filval > a:hover, .filval > button:hover { background: var(--farg-accent-ljus); color: var(--farg-accent-mork); }
 .filval > button[disabled] { color: var(--farg-text-svag); cursor: default; }
-/* Skriv ut: Bara beskrivningen finns bara när sidan har material att lämna utanför (data-material i Metod.astro). */
+/* Skriv ut: Metoden finns bara när sidan har material att lämna utanför (data-material i Metod.astro). */
 body:not(:has([data-material])) .filval > [data-skriv-ut='beskrivning'] { display: none; }
 /* Drive kräver JavaScript: knappen finns bara när html har klassen js. */
 .drive-knapp { display: none; }
@@ -789,6 +789,10 @@ button.lank:hover { color: var(--farg-accent); }
 .bank-nivanamn { font-size: 1.15rem; font-weight: 700; color: color-mix(in srgb, var(--niva) 85%, #000); }
 .bank-antal { font-size: 0.95rem; color: var(--farg-text-svag); }
 .bank-innehall { padding: 0.25rem 1rem 1rem; }
+/* Länkarna överst i en utfälld nivå med flera ramar (Nivarad.astro): Om nivån · Böckerna. */
+.bank-nivalankar { display: flex; flex-wrap: wrap; align-items: center; column-gap: 0.6rem; margin: 0.35rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.95rem; color: var(--farg-text-svag); }
+.bank-nivalankar a { padding: 0.55rem 0; color: var(--farg-accent); font-weight: 600; text-decoration: underline; text-decoration-color: var(--farg-kant); text-underline-offset: 0.2em; }
+.bank-nivalankar a:hover { text-decoration-color: currentColor; }
 .bank-oversikt { margin: 0; }
 .bank-oversikt > h3 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .bank-lista { margin: 0.75rem 0; padding-left: 1.4rem; }
@@ -1862,7 +1866,7 @@ html.js .bara-js { display: inline-block; }
   /* En enhets sida: bara bladen, och bara det blad som knappen valde. */
   .enhet-huvud, .enhet-bladhuvud, .enhet-fot, .enhet .upphov, .utskrift-gomd { display: none !important; }
   .enhet-blad { margin: 0; }
-  .bank-niva > summary, .bank-filer { display: none; }
+  .bank-niva > summary, .bank-filer, .bank-nivalankar { display: none; }
   .bank-rad { display: block; }
   /* Utskriften av hela beskrivningen har nivåernas enheter med följesidorna, var och en på sitt blad (Bank.astro). Banken
      står som block, så att bladen bryter sidor och får sina sidformat (@page bokliggande) som på enheternas sidor. */

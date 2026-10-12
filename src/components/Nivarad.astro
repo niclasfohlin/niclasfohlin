@@ -1,6 +1,8 @@
 ---
 // En nivå i materialet (src/lib/nivamaterial.ts): en rad i nivåns färg som fälls ut, med nivåns ramar i, som nivån i en
 // bank (Bank.astro, samma stilar, .bank-niva i global.css). I utskriften står nivån utfälld, utan raden.
+// Har nivån fler än en ram står länkar till dem överst i den utfällda nivån (Om nivån · Böckerna): i telefonen ligger
+// listan annars flera skärmar ned, efter sidan om nivån.
 import type { Nivarad } from '../lib/nivamaterial';
 interface Props { rad: Nivarad; enhet?: string }
 const { rad, enhet } = Astro.props;
@@ -10,7 +12,10 @@ const { rad, enhet } = Astro.props;
     <span class="bank-nivanamn">{rad.niva.namn}</span>
     {rad.antal > 0 && <span class="bank-antal">{rad.antal}{enhet ? ` ${enhet}` : ''}</span>}
   </summary>
-  <div class="bank-innehall"><slot /></div>
+  <div class="bank-innehall">
+    {rad.lankar.length > 1 && <p class="bank-nivalankar">{rad.lankar.map((l, i) => <>{i > 0 && <span aria-hidden="true">·</span>}<a href={`#ram-${l.ri + 1}`}>{l.namn}<span class="visually-hidden">, {rad.niva.namn}</span></a></>)}</p>}
+    <slot />
+  </div>
 </details>
 
 <script>

@@ -8,8 +8,10 @@
 import type { Niva } from './nivaer';
 
 type Ram = { rubrik: string; oversikt?: { rader: string[][] } };
-/** En nivå: nivån med sin färg, ramarnas index i filens ordning och antalet rader i nivåns översikter (böckerna). */
-export interface Nivarad { niva: Niva; slug: string; ramar: number[]; antal: number }
+/** En nivå: nivån med sin färg, ramarnas index i filens ordning, antalet rader i nivåns översikter (böckerna) och
+ * ramarnas namn till länkarna överst i den utfällda nivån: det som står efter nivån i ramens namn (Om nivån), och ledet
+ * för ramen som bara heter som nivån (Böckerna). */
+export interface Nivarad { niva: Niva; slug: string; ramar: number[]; antal: number; lankar: { ri: number; namn: string }[] }
 /** Nivåernas material: ledet före kolon (Böckerna), ordet för det som räknas (böcker), nivåerna och alla ramarna. */
 export interface Nivamaterial { led: string; enhet?: string; nivaer: Nivarad[]; ramar: Set<number>; forst: number }
 
@@ -46,7 +48,8 @@ export function nivamaterial(ramar: Ram[], nivaer: Niva[], utanfor: (ri: number)
       enhet: enhetAv(led),
       nivaer: namn.map((n) => {
         const egna = rader.filter((r) => r.niva.namn === n);
-        return { niva: egna[0].niva, slug: slug(n), ramar: egna.map((r) => r.ri), antal: egna.reduce((s, r) => s + (ramar[r.ri].oversikt?.rader.length ?? 0), 0) };
+        const namnAv = (ri: number) => { const rest = ramar[ri].rubrik.slice(led.length + 2 + n.length).replace(/^, /, ''); return rest ? rest.charAt(0).toLocaleUpperCase('sv') + rest.slice(1) : led; };
+        return { niva: egna[0].niva, slug: slug(n), ramar: egna.map((r) => r.ri), antal: egna.reduce((s, r) => s + (ramar[r.ri].oversikt?.rader.length ?? 0), 0), lankar: egna.map((r) => ({ ri: r.ri, namn: namnAv(r.ri) })) };
       }),
       ramar: new Set(rader.map((r) => r.ri)),
       forst: rader[0].ri,

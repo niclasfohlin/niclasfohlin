@@ -216,7 +216,7 @@ if (sistaVeckan >= 0 && punkter[sistaVeckan + 1]) punkter[sistaVeckan + 1].helaK
 // Bankens enheter på metodens sida: varje nivå med sina enheter och följesidor i bankens ordning, som i Word-filen med
 // allt och i bankens fil med alla nivåer. På skärmen står bara nivåernas översikter, och enheterna på egna sidor; i
 // utskriften av allt står de (Niclas 2026-10-10: "Om skriv ut hela beskrivningen i alla är verkligen att skriva ut allt bör
-// denna också vara det?"), och Bara beskrivningen har dem inte, eftersom Materialet är material (data-material nedan).
+// denna också vara det?"), och utskriften Metoden har dem inte, eftersom Materialet är material (data-material nedan).
 const bankPunkter = new Map<string, Punkt[]>(banken && !enhet ? banken.nivaer.map((n) => [n.namn, n.enheter.flatMap((e) => [...e.fore, e.ri, ...e.efter]).map((ri) => ({ ram: ramarna[ri], ri }))]) : []);
 // Gamla länkar till en enhet eller en följesida på metodens sida (#ram-12, #lararens-sida, #bas-problem-1) leder till
 // enhetens sida, till bladet (Bank.astro).
@@ -492,7 +492,7 @@ const meny = [
       </div>
       {/* I en bank (src/lib/bank.ts) leder raden till enheternas egna sidor och nivåernas filer, som läraren skriver ut ur,
           i stället för till planeringsmallarna, där alla enheter står i en lång fil (granskningen 2026-10-10). Raden handlar
-          om materialet och följer det: Bara beskrivningen skriver inte ut den. */}
+          om materialet och följer det: utskriften Metoden skriver inte ut den. */}
       {d.ramar && (banken
         ? <p class="m-efter" data-material={materialAttribut('ramar')}><a href="#ramar">{d.ramar.rubrik}</a> ligger efter grunden, nivå för nivå, där varje {banken.ord.en} har en egen sida. {banken.ord.alla.charAt(0).toLocaleUpperCase('sv') + banken.ord.alla.slice(1)} att skriva ut finns i egna filer, en för varje nivå, i tabellen under Ladda ner och skriv ut.</p>
         : <p class="m-efter" data-material={materialAttribut('ramar')}><a href="#ramar">{d.ramar.rubrik}</a> ligger efter grunden, och som egna sidor att kopiera i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>)}
@@ -615,7 +615,7 @@ const meny = [
 
   {/* Materialet, Diplomet och Mallar att skriva ut är metodens material, och allt före dem är beskrivningen (Niclas
       2026-10-10: "Skriv ut: Hela metoden (allt), Bara metodbeskrivningen"). Avsnitten står i src/lib/material.ts och märks här
-      som data-material: knappen Bara beskrivningen (Nedladdning.astro), stilmallen (global.css, som visar knappen bara när
+      som data-material: knappen Metoden (Nedladdning.astro), stilmallen (global.css, som visar knappen bara när
       sidan har material) och scripts/utskriftsformat.mjs läser märkningen, och Word-filen utan mallar och lathundar (metodBarn
       i metoddocx.ts) läser samma lista. */}
   {d.ramar && (

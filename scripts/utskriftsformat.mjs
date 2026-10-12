@@ -2,12 +2,12 @@
 // Stående och liggande sidor i utskriften (Niclas 2026-10-10: "Kolla också bara att stående och liggande sidor korrekt är
 // gjorda för det med utskriftens knapp", och "Om du hittar fel sedan behöver det lösas att det inte någonsin blir fel på
 // det igen kring stående och liggande"). Varje metodsida och varje enhets sida i en bank skrivs ut med Chrome, en gång per
-// utskriftsknapp på sidan (Skriv ut: Allt och Bara beskrivningen i Nedladdning.astro, bladens knappar på en enhets sida),
+// utskriftsknapp på sidan (Skriv ut: Allt och Metoden i Nedladdning.astro, bladens knappar på en enhets sida),
 // genom att knappen trycks som en läsare trycker den. Varje sida i utskriften jämförs med bladet den står på i Word-filen
 // med allt (/stodundervisning/<id>.docx), och sidan ska vara liggande precis när bladet är liggande i Word.
 //
 // Skriptet prövar också gränsen mellan beskrivningen och materialet (data-material i Metod.astro): en metodsida med
-// material har knappen Bara beskrivningen, och dess utskrift har varje avsnitt i beskrivningen som Allt har men inget
+// material har knappen Metoden, och dess utskrift har varje avsnitt i beskrivningen som Allt har men inget
 // av materialet.
 //
 // Word-filen läses som block: ett nytt block börjar där Word börjar en ny sida (sidbrytning före ett stycke, en sidbrytning
@@ -213,18 +213,18 @@ async function prova(f, s, nr) {
   await f.oppna(`${bas}${s.adress}`);
   // Knapparna på sidan, som läsaren ser dem: utskriftsrutans val och bladens knappar på en enhets sida.
   const knappar = await f.kor(`[...document.querySelectorAll('[data-skriv-ut], [data-skriv-ut-blad]')].map((k, i) => ({ i, synlig: k.checkVisibility(), namn: k.textContent.replace(/\\s+/g, ' ').trim(), typ: k.dataset.skrivUt ?? 'blad', blad: k.dataset.skrivUtBlad, utan: k.dataset.skrivUt === 'beskrivning' }))`) ?? [];
-  // Knappar som stilmallen gömmer (Bara beskrivningen på en sida utan material) trycks inte, som läsaren inte kan trycka dem.
+  // Knappar som stilmallen gömmer (utskriften Metoden på en sida utan material) trycks inte, som läsaren inte kan trycka dem.
   const synliga = knappar.filter((k) => k.synlig);
   const lagen = synliga.length ? synliga : [{ i: -1, namn: 'webbläsarens utskrift' }];
   let godkand = true;
   // Beskrivningen och materialet (data-material i Metod.astro): sidans avsnitt på översta nivån, med de första texterna i
-  // vart och ett, och om avsnittet är material. Har sidan material ska knappen Bara beskrivningen finnas, och
+  // vart och ett, och om avsnittet är material. Har sidan material ska knappen Metoden finnas, och
   // tvärtom (Nedladdning.astro, global.css).
   const delar = await f.kor(`[...document.querySelectorAll('section[id]')].filter((x) => !x.parentElement.closest('section[id]')).map((x) => ({ id: x.id, material: x.hasAttribute('data-material'), prover: [...x.querySelectorAll('h2, h3, h4, p, figcaption, td')].slice(0, 12).map((e) => e.textContent) }))`) ?? [];
   const harMaterial = delar.some((x) => x.material);
   if (synliga.some((k) => k.typ === 'allt') && harMaterial !== synliga.some((k) => k.utan)) {
     godkand = false;
-    fel.push(`${s.adress}: sidan ${harMaterial ? 'har material men ingen knapp Bara beskrivningen' : 'har knappen Bara beskrivningen men inget material'} (data-material i Metod.astro, global.css)`);
+    fel.push(`${s.adress}: sidan ${harMaterial ? 'har material men ingen knapp Metoden' : 'har knappen Metoden men inget material'} (data-material i Metod.astro, global.css)`);
   }
   const utskrivet = new Map();
   for (const k of lagen) {
@@ -292,7 +292,7 @@ async function prova(f, s, nr) {
     // Åt andra hållet: ett liggande blad i Word som står helt på en sida i utskriften ska stå på en liggande sida där.
     // Bladet räknas som helt på sidan när nästan alla dess ord står där, och det har så många ord att en beskrivning som
     // bara nämner bladet inte har dem alla.
-    // Bara beskrivningen (Nedladdning.astro) har inga blad, så där prövas det inte.
+    // Utskriften Metoden (Nedladdning.astro) har inga blad, så där prövas det inte.
     if (!k.utan) for (const b of block.filter((x) => x.liggande && !x.lathundblad && x.ord.size >= MINST_ORD)) {
       const sidorna = format.map((_, i) => i).filter((i) => iSidan(b, i) >= 0.9);
       if (sidorna.length && !sidorna.some((i) => format[i])) fel1(`${s.adress} (${k.namn}): bladet "${b.borjan}" är liggande i Word men står på en stående sida i utskriften (sidan ${sidorna.map((i) => i + 1).join(', ')})`);
@@ -301,7 +301,7 @@ async function prova(f, s, nr) {
     if (k.blad && format.length !== 1) fel1(`${s.adress} (${k.namn}): bladet blir ${format.length} sidor i utskriften, ska vara en`);
     rader.push(`${s.adress} (${k.namn}): ${format.length} sidor, ${format.filter(Boolean).length} liggande`);
   }
-  // Bara beskrivningen har varje avsnitt i beskrivningen som Allt har, och inget avsnitt som är material.
+  // Utskriften Metoden har varje avsnitt i beskrivningen som Allt har, och inget avsnitt som är material.
   if (utskrivet.has('allt') && utskrivet.has('beskrivning')) {
     for (const x of delar) {
       // Den första texten i avsnittet som står precis en gång i utskriften av allt: en mening som beskrivningen också har
@@ -310,8 +310,8 @@ async function prova(f, s, nr) {
       const prov = x.prover.map((t) => platt(t).slice(0, 30)).find((t) => t.length >= 20 && allt.indexOf(t) >= 0 && allt.indexOf(t) === allt.lastIndexOf(t));
       if (!prov) continue;
       const med = utskrivet.get('beskrivning').includes(prov);
-      if (x.material && med) { godkand = false; fel.push(`${s.adress} (Bara beskrivningen): materialet #${x.id} står med i utskriften`); }
-      if (!x.material && !med) { godkand = false; fel.push(`${s.adress} (Bara beskrivningen): beskrivningens avsnitt #${x.id} saknas i utskriften`); }
+      if (x.material && med) { godkand = false; fel.push(`${s.adress} (Metoden): materialet #${x.id} står med i utskriften`); }
+      if (!x.material && !med) { godkand = false; fel.push(`${s.adress} (Metoden): beskrivningens avsnitt #${x.id} saknas i utskriften`); }
     }
   }
   if (godkand) klara[s.adress] = s.nyckel;

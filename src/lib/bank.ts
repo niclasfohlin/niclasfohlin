@@ -18,7 +18,7 @@
 // Banken lägger bara till och tar inget bort (Niclas 2026-10-10: "Om skriv ut hela beskrivningen i alla är verkligen att
 // skriva ut allt bör denna också vara det? Gillar inte riktigt för mycket specialfall från sida till sida"): utskriften av
 // allt, Word-filen Allt om metoden och planeringsmallarna har enheterna med följesidorna, nivå för nivå, som i
-// andra metoder, och Bara beskrivningen har dem inte (METODER.md under Utskriften). Bara skärmen är kortare: där står
+// andra metoder, och utskriften Metoden har dem inte (METODER.md under Utskriften). Bara skärmen är kortare: där står
 // enheterna på sina egna sidor.
 //
 // Inga Node-beroenden: Word-filen av flera metoder byggs i webbläsaren med samma regel.

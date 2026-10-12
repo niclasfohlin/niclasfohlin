@@ -34,14 +34,15 @@ const skrivareSvg = '<svg aria-hidden="true" viewBox="0 0 20 20" width="16" heig
     </ul>
   )}
   <ul class="filrader">
-    {/* Skriv ut: Allt är hela sidan, och Bara beskrivningen sidan utan metodens material (data-material i Metod.astro; Niclas
-        2026-10-10: "Skriv ut: Hela metoden (allt), Bara metodbeskrivningen"). Stilmallen visar knappen Bara beskrivningen
+    {/* Skriv ut: Allt är hela sidan, och Metoden sidan utan metodens material (data-material i Metod.astro; Niclas
+        2026-10-10: "Skriv ut: Hela metoden (allt), Bara metodbeskrivningen", och 2026-10-12 om knappens namn, som först var
+        Bara beskrivningen: "Så det blir Allt och Metoden?"). Stilmallen visar knappen Metoden
         bara när sidan har material, så att gränsen står på ett ställe och en ny metod får knapparna utan eget arbete. */}
     <li class="bara-js">
       <span class="filrubrik" id={`skriv-ut-${id}`}>Skriv ut</span>{' '}
       <span class="filval" role="group" aria-labelledby={`skriv-ut-${id}`}>
         <button type="button" data-skriv-ut="allt" data-goatcounter-click={`utskrift:${id}`} data-goatcounter-title={`${titel}: utskrift av allt`}><Fragment set:html={skrivareSvg} /><span class="visually-hidden">Skriv ut </span><span class="skriv-ut-namn">Allt</span></button>
-        <button type="button" data-skriv-ut="beskrivning" data-goatcounter-click={`utskrift:${id}:beskrivning`} data-goatcounter-title={`${titel}: utskrift av beskrivningen`}><Fragment set:html={skrivareSvg} /><span class="visually-hidden">Skriv ut </span><span class="skriv-ut-namn">Bara beskrivningen</span></button>
+        <button type="button" data-skriv-ut="beskrivning" data-goatcounter-click={`utskrift:${id}:beskrivning`} data-goatcounter-title={`${titel}: utskrift av beskrivningen`}><Fragment set:html={skrivareSvg} /><span class="visually-hidden">Skriv ut </span><span class="skriv-ut-namn">Metoden</span></button>
       </span>
     </li>
     <li><span class="filrubrik">Allt om metoden</span> <Filval fil={bas} namn={id} rubrik="Allt om metoden" statistik={`${titel}: allt om metoden`} /></li>
@@ -68,7 +69,7 @@ const skrivareSvg = '<svg aria-hidden="true" viewBox="0 0 20 20" width="16" heig
   // knappen väntar in dem, högst tjugo sekunder, och säger under tiden hur många som är kvar (granskningen 2026-10-10: en
   // bank har ett hundratal bilder). Den som skriver ut med webbläsarens meny får dem hämtade när utskriften börjar.
   const utskriftsbilder = () => [...document.querySelectorAll<HTMLImageElement>('img[data-utskriftsbild]')];
-  // Bara beskrivningen: sidan utan metodens material (data-material i Metod.astro, global.css), och bilderna där hämtas inte.
+  // Utskriften Metoden: sidan utan metodens material (data-material i Metod.astro, global.css), och bilderna där hämtas inte.
   const DOLT = '[data-material]';
   const hamta = () => Promise.all(utskriftsbilder().filter((b) => document.documentElement.dataset.utskrift !== 'beskrivning' || !b.closest(DOLT)).map((b) => {
     b.loading = 'eager';
