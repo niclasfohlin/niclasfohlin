@@ -29,7 +29,7 @@ import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, FORMLUFT, FORMRAD_PT, 
 import { bankAv, bankfilensRamar, bankRad, type Bankfil } from './bank';
 import { MATERIAL } from './material';
 import { losningarnasNiva, losningarnasNot, problemformer } from './problemform';
-import { bildMatt, inline, kolumnandelar, omslagAdress, radensNamn, ramensNiva, talcell } from './litteraturlista';
+import { bildMatt, inline, kolumnandelar, omslagAdress, omslagUpphov, OMSLAG_KORT, radensNamn, ramensNiva, talcell } from './litteraturlista';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
 const FARG = {
@@ -405,6 +405,8 @@ function rubrikTabell(kolumner: string[], rader: string[][], givna: number[], o:
 // understrukna. Rubrikraden har nivåns färg, när ramen heter som en nivå, med texten i 14 punkter som i kursens karta,
 // så att kontrasten räcker för stor text (ockran ger 4,1 mot både vit och mörk text).
 let omslagNr = 0;
+// Listornas tabeller, så att planeringsmallarnas sida med en lista får raden om omslagens upphov (mallBarn).
+const OMSLAGSTABELLER = new WeakSet<object>();
 function inlineBarn(text: string, bas: IRunOptions): (TextRun | ExternalHyperlink)[] {
   return inline(text).map((d) => (d.href
     ? new ExternalHyperlink({ link: d.href, children: [textRun({ ...bas, text: d.text, color: FARG.huvud, underline: { type: UnderlineType.SINGLE, color: FARG.huvud } })] })
@@ -446,7 +448,11 @@ function litteraturlista(ram: Ram, nivaer: Niva[], id?: string): Barn[] {
       }),
     ]);
   });
-  return [tabell([huvud, ...kropp], bredder), avstand()];
+  // Luften efter listan är liten (luft i stället för avstand), och rutan Till läraren efter den likaså (noter i ramBarn):
+  // i planeringsmallarna rymdes sidan i Word men inte i Google Dokument, där upphovsraden hamnade ensam på nästa sida.
+  const lista = tabell([huvud, ...kropp], bredder);
+  OMSLAGSTABELLER.add(lista);
+  return [lista, luft(120)];
 }
 // Stegtabellen: nummer och namn i versaler, frågan under, sedan vad du gör och fraserna med citattecken. fran och till
 // (räknat från 1) ger en del av tabellen, när en extrafilm står efter ett steg (src/lib/film.ts, stegDelar).
@@ -1629,7 +1635,7 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
     const tvaSidor = plats !== undefined && !!bildtext && plats - bildtextensHojd(bildtext) < VECKOBILD_MINST * veckobildensHojd();
     return [
       ...(ram.lektioner && !(o.paNySida && nr === 0) ? [new Paragraph({ pageBreakBefore: true, spacing: { before: 0, after: 0, line: 240 }, run: { size: 2, font: 'Calibri' } })] : []),
-      ...ramFaltTabell(del.falt, { rubrik: (korta || ram.listor) && !del.rubrik.includes(ram.rubrik) ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum, hojder: o.blad ? del.falt.map((f) => o.blad![f.rubrik]) : undefined, elevblad: !!o.blad, tat: ram.lektioner || o.tat, bokmarke: ram.lektioner && o.karta ? o.karta.vecka(forstaLed(del.rubrik)) : undefined, luftEfter: rad && !tvaSidor ? VECKANS_LUFT : undefined }),
+      ...ramFaltTabell(del.falt, { rubrik: (korta || ram.listor) && !del.rubrik.includes(ram.rubrik) ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum, hojder: o.blad ? del.falt.map((f) => o.blad![f.rubrik]) : undefined, elevblad: !!o.blad, tat: ram.lektioner || o.tat, bokmarke: ram.lektioner && o.karta ? o.karta.vecka(forstaLed(del.rubrik)) : undefined, luftEfter: rad && !tvaSidor ? VECKANS_LUFT : ram.oversikt?.bilder ? 60 : undefined }),
       ...(tvaSidor ? [luft(LUFT_RAD, true, { nySida: true })] : []),
       // Veckans rad ur kartan: talen och bladen för varje nivå, med bladens namn som länkar.
       ...(rad && o.karta?.tabell ? (() => { const k = o.karta!.tabell!.kolumner.slice(1); return rubrikTabell(k, [rad.slice(1)], k.map(() => Math.floor(BREDD / k.length)), { radrubrik: false, hallIhop: true, hallIhopEfter: true, storlek: 19, karta: { ...o.karta!.lankar, vecka: undefined } }); })() : []),
@@ -2091,6 +2097,9 @@ function ljudRader(d: MetodData): Paragraph[] {
     const adress = ANDIKA_ADRESS.replace(/^https:\/\//, '').replace(/\/$/, '');
     ut.push(stycke(`${namnt ? 'Ladda ner Andika' : 'Elevens material står i Andika, ett gratis typsnitt från SIL som är gjort för att vara lätt att läsa. Ladda ner det'} på ${adress} och använd det när du gör egna kort och blad.`, { farg: FARG.svag }));
   }
+  // Litteraturlistornas omslag (src/lib/litteraturlista.ts) är förlagens bilder, och det står en gång under materialet.
+  const omslag = omslagUpphov(d);
+  if (omslag) ut.push(stycke(omslag, { farg: FARG.svag }));
   return ut;
 }
 
@@ -2391,8 +2400,12 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
       // Ett sagoblad (sagoform) står på en egen sida med rutan Till läraren i sidfoten (sagoFlod). Ramarnas rubriker och
       // texter för läraren står samlade före en följd av sagoblad, så att varje blad inte får en nästan tom sida framför
       // sig (Skrivkurs: sagoboken, 2026-10-02). Bokens blad har ingen sidfot, så deras ruta Till läraren står där också.
+      // Litteraturlistan står på en egen sida: det som följer efter den börjar på en ny sida, också lärarens text till ett
+      // sagoblad. Frågekortets text rymdes annars precis under listan i Word men inte i Google Dokument (2026-10-12).
+      const efterLista = !!ramarna[i - 1]?.oversikt?.bilder && !(ut.at(-1) instanceof Sektionsbyte);
       if (ram.sagoform) {
-        if (!ramarna[i - 1]?.sagoform) ut.push(...sagoLarartext(sagoFoljd(ramarna, i), d, (text) => new Paragraph({ children: [run(text)], heading: HeadingLevel.HEADING_3, keepNext: true, spacing: { before: 240, after: 80 } })));
+        let forst = efterLista;
+        if (!ramarna[i - 1]?.sagoform) ut.push(...sagoLarartext(sagoFoljd(ramarna, i), d, (text) => { const ny = forst; forst = false; return new Paragraph({ children: [run(text)], heading: HeadingLevel.HEADING_3, keepNext: true, pageBreakBefore: ny || undefined, spacing: { before: 240, after: 80 } }); }));
         ut.push(...sagoFlod(ram, d));
         filmVid({ ram: ram.rubrik });
         return;
@@ -2402,7 +2415,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
       // Lärarens sida till ett problem är ett blad: den börjar på en ny sida, med problemet överst och lösningarna efter texten.
       const larare = former.larare(ram);
       // En litteraturlista (en översikt med bilder) börjar också på en ny sida, så att de tio böckerna står på en sida.
-      const nySida = (!!(ram.serie || ram.ark) || forstEfterVeckorna || !!larare || !!ram.oversikt?.bilder) && !(ut.at(-1) instanceof Sektionsbyte);
+      const nySida = (!!(ram.serie || ram.ark) || forstEfterVeckorna || !!larare || !!ram.oversikt?.bilder || efterLista) && !(ut.at(-1) instanceof Sektionsbyte);
       ut.push(ramensRubrik(ram, nySida));
       const serie = ramensSerie(ram, post.id);
       if (ramArTom(ram)) {
@@ -2558,7 +2571,9 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
     return ut;
   };
   const harFigur = (sida: Flod) => !!figurRad && sida.some((x) => figurBilder.has(x as object));
-  const upphovsrad = (figur = false) => stycke(`${UPPHOV}. ${o.bank ? 'Ur' : 'Mall till'} ${d.titel}, ${metodAdress(bas, post.id)}.${figur && figurRad ? ` ${figurRad}` : ''}`, { farg: FARG.svag, storlek: 18, fore: 160 });
+  // En sida med en litteraturlista säger också vems omslagen är, eftersom sidan går att skriva ut för sig.
+  const harOmslag = (sida: Flod) => sida.some((x) => OMSLAGSTABELLER.has(x as object));
+  const upphovsrad = (figur = false, omslag = false) => stycke(`${UPPHOV}. ${o.bank ? 'Ur' : 'Mall till'} ${d.titel}, ${metodAdress(bas, post.id)}.${figur && figurRad ? ` ${figurRad}` : ''}${omslag ? ` ${OMSLAG_KORT}` : ''}`, { farg: FARG.svag, storlek: 18, fore: 160 });
   if (d.ramar) {
     const ramarna = d.ramar.ramar;
     const boksidor = lastexter(ramarna);
@@ -2698,7 +2713,7 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
   if (d.diplom && !o.bank) sidor.push([...medElevtypsnitt(harElevtypsnitt(d), () => diplomBarn(d.diplom!))]);
   const vanliga = sidor.filter((sida) => !bladsidor.has(sida));
   const ingenFigur = !!figurRad && !vanliga.some(harFigur);
-  for (const sida of vanliga) sida.push(upphovsrad(harFigur(sida) || (ingenFigur && sida === vanliga[0])));
+  for (const sida of vanliga) sida.push(upphovsrad(harFigur(sida) || (ingenFigur && sida === vanliga[0]), harOmslag(sida)));
   // Mallarna (bråkplanket och tallinjerna) sist, var och en på en liggande sida med smal marginal. Sidfoten bär
   // upphovet, så att planket och linjerna får hela höjden. Är lathundens tredje sida ett blad att lägga på bordet
   // (talsortsmattan, bladet Bråket på fyra sätt) står bladet först bland dem, så att det kopieras med resten.

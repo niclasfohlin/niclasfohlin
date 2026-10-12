@@ -12,8 +12,9 @@ import { skyltText, type Niva } from '../lib/nivaer';
 // protokoll behåller husets typsnitt.
 // niva: listans nivå (src/lib/nivaer.ts), som en skylt i nivåns färg före rubriken, där nivåns led inte står kvar.
 // id: ett ankare på listan (räknebladen, som kartan leder till, src/lib/karta.ts).
-interface Props { rubrik?: string; kolumner?: string[]; rader: string[][]; klass?: string; brak?: boolean; huvud?: { rubrik: string; text: string }[]; elev?: boolean; niva?: Niva; id?: string }
-const { rubrik, kolumner, rader, klass = '', brak = false, huvud, elev = false, niva, id } = Astro.props;
+// numrerad: raderna har nummer, som på kortet i sagoformen i Word (kortSagoblad i metoddocx.ts).
+interface Props { rubrik?: string; kolumner?: string[]; rader: string[][]; klass?: string; brak?: boolean; huvud?: { rubrik: string; text: string }[]; elev?: boolean; niva?: Niva; id?: string; numrerad?: boolean }
+const { rubrik, kolumner, rader, klass = '', brak = false, huvud, elev = false, niva, id, numrerad = false } = Astro.props;
 // En kolumn där alla rader är tomma, bredvid kolumner med text, är en skrivkolumn (kartläggningens Före och Efter):
 // smal, och räknas inte när listan avgör om den är en enda kolumn text. Är alla kolumner tomma (ett schema att fylla
 // i) är ingen smal. Samma regel som i Word (elevlista i src/lib/metoddocx.ts).
@@ -51,7 +52,7 @@ const fragor = harFragor({ kolumner, rader }) ? rader.map((r) => (r[1] ?? '').tr
     <table>
       {kolumner && <thead><tr>{kolumner.map((k, i) => <th scope="col" class={skriv[i] ? 'skriv' : undefined}>{k}</th>)}</tr></thead>}
       <tbody>
-        {rader.map((r) => <tr>{r.map((c, i) => <td class={skriv[i] ? 'skriv' : undefined}><Brak text={pil(c)} stapla={brak} /></td>)}</tr>)}
+        {rader.map((r, ri) => <tr>{r.map((c, i) => <td class={skriv[i] ? 'skriv' : undefined}>{numrerad && i === 0 && <span class="m-lista-nr">{ri + 1}.</span>}<Brak text={pil(c)} stapla={brak} /></td>)}</tr>)}
       </tbody>
     </table>
   )}

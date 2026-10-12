@@ -3,8 +3,12 @@
 // under, som i läroböckerna. Används i elevlistorna och korten i matematik, aldrig i lärarens löptext. Med
 // stapla={false} står texten som den är, så att ett datum som 3/10 i en läslista förblir ett datum. HTML:en byggs
 // i src/lib/brak.ts (brakHtml), eftersom Astros kompilator inte tolkar uttryck inuti <math>.
+// En följd av understreck (sex eller fler) är en skrivlinje och ritas som en linje i fältets bredd: som text bröts den
+// i telefonen till en lång och en kort rad, och på röstsedeln gick den ut genom kortets kant (Chambers boksamtal i
+// grupp, granskningen 2026-10-12).
 import { brakHtml } from '../lib/brak';
 interface Props { text: string; stapla?: boolean }
 const { text, stapla = true } = Astro.props;
+const delar = text.split(/(_{6,})/).filter(Boolean);
 ---
-{stapla ? <Fragment set:html={brakHtml(text)} /> : text}
+{delar.map((d) => (/^_{6,}$/.test(d) ? <span class="m-skrivlinje" aria-hidden="true"></span> : stapla ? <Fragment set:html={brakHtml(d)} /> : d))}

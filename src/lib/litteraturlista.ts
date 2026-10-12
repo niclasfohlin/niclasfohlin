@@ -48,6 +48,10 @@ interface MedOversikt { ramar?: { ramar: { oversikt?: { bilder?: string[] } }[] 
 /** Litteraturlistornas bilder i en metod, för Word-filernas resurser (metodensBilder i ljudkort.ts). */
 export const listornasBilder = (d: MedOversikt, id: string): string[] => (d.ramar?.ramar ?? []).flatMap((r) => (r.oversikt?.bilder ?? []).map((b) => omslagAdress(id, b)));
 
+/** Omslagens upphov, en gång under materialet på sidan och i Word, och kort på listans sida i planeringsmallarna. */
+export const OMSLAG_KORT = 'Bokomslagen är förlagens.';
+export const omslagUpphov = (d: MedOversikt): string | undefined => ((d.ramar?.ramar ?? []).some((r) => r.oversikt?.bilder?.length) ? 'Bokomslagen i listorna är förlagens, från böckernas senaste svenska utgåvor.' : undefined);
+
 /** Bokens namn i en rad, till omslagets textalternativ: det feta i radens första cell, annars cellens första rad. */
 export const radensNamn = (rad: string[]) => inline(rad[0] ?? '').find((d) => d.fet)?.text ?? utanInline((rad[0] ?? '').split('\n')[0]);
 

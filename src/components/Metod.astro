@@ -38,7 +38,7 @@ import { arkAdress, arSerieMall, mallEtiketter, mallRutor as mallRutorAdresser, 
 import { serieantal, serieFiler } from '../lib/bildserier-bygge';
 import { bildensAlt, metodensPaBordet, paBordetVid, PABORDET_MATT } from '../lib/pabordet';
 import { listansNiva } from '../lib/nivaer';
-import { ramensNiva } from '../lib/litteraturlista';
+import { omslagUpphov, ramensNiva } from '../lib/litteraturlista';
 import { bladNamn, delensRad, kartan, metodensBlad, radensDel } from '../lib/karta';
 import { veckanRyms } from '../lib/veckosida';
 import { veckansLista, veckomaterial } from '../lib/veckomaterial';
@@ -622,6 +622,7 @@ const meny = [
         <p class="m-efter">{andikaNamnt ? 'Ladda ner Andika' : 'Elevens material står i Andika, ett gratis typsnitt från SIL som är gjort för att vara lätt att läsa. Ladda ner det'} på <a href={ANDIKA_ADRESS}>software.sil.org/andika</a> och använd det när du gör egna kort och blad.</p>
       )}
       {bildUpphov && <p class="m-efter">{bildUpphov}</p>}
+      {omslagUpphov(d) && <p class="m-efter">{omslagUpphov(d)}</p>}
       {/* Med fyra ramar eller fler (ett paket per årskurs, läslistorna, projekten, lästexterna) blir sidan lång: en
           ordnad lista med länkar till varje ram, där nivåerna fälls ut (Ramindex.astro, K-152). */}
       </>)}
@@ -720,7 +721,7 @@ const meny = [
                 if (info && arTarning(d, l)) return <div class="m-ej-utskrift"><Kortlista rubrik={l.rubrik} info={{ ...info, korta: false, medel: true }} nyGrupp={info.grupp !== forra} brak={brak} /></div>;
                 return info
                   ? <Kortlista rubrik={l.rubrik} info={info} nyGrupp={lage === 'material' || info.grupp !== forra} brak={brak} />
-                  : <Elevlista {...(l.rakneblad ? listansNiva(d.nivaer, l.rubrik) : { rubrik: l.rubrik })} id={bladAnkare.get(`${ri}-${li}`)} kolumner={l.kolumner} rader={l.rader} brak={brak} huvud={plats === 0 ? ram.huvud : undefined} klass={arEttKort(alla, l) ? 'kort' : ''} elev={elevtypsnitt && !l.larare} />;
+                  : <Elevlista {...(l.rakneblad ? listansNiva(d.nivaer, l.rubrik) : { rubrik: l.rubrik })} id={bladAnkare.get(`${ri}-${li}`)} kolumner={l.kolumner} rader={l.rader} brak={brak} huvud={plats === 0 ? ram.huvud : undefined} klass={arEttKort(alla, l) ? 'kort' : ''} elev={elevtypsnitt && !l.larare} numrerad={ram.sagoform?.form === 'kort' && !ram.sagoform.kortbilder?.[l.rubrik ?? '']} />;
               })}
               {d.elevblad[ram.rubrik] && (
                 <div class="m-ramdelar m-elevblad">

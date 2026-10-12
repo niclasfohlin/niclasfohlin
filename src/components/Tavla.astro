@@ -21,7 +21,9 @@ const citat = (f: string) => `”${f}”`;
     <p class="lh-listrubrik">{b.tabell.rubrik}</p>
     <table class="lh-tavla-tabell">
       <thead><tr>{b.tabell.kolumner.map((k) => <th scope="col">{k}</th>)}</tr></thead>
-      <tbody>{b.tabell.rader.map((r) => <tr>{r.map((c) => <td>{c}</td>)}</tr>)}</tbody>
+      {/* Raden med bocken är den som träffade (187 ✓ i Problemlösning i grupp) och står grön; förut var det alltid sista raden,
+          och då blev den sista personen på bokens tavla grön utan skäl (granskningen 2026-10-12). */}
+      <tbody>{b.tabell.rader.map((r) => <tr class={r.some((c) => c.includes('✓')) ? 'traff' : undefined}>{r.map((c) => <td>{c}</td>)}</tr>)}</tbody>
     </table>
     {b.annat && <><p class="lh-listrubrik">{b.annat.rubrik}</p>{b.annat.rader.map((r) => <p>{r}</p>)}</>}
     {b.svar && <p><span class="lh-ram lh-svar">{b.svar}</span></p>}
