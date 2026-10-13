@@ -53,6 +53,9 @@ utkast: true
 # Valfritt: namnen på raderna i ett fält med flera rader (lärarens sida i Faktatextsamtal i grupp). En rad som börjar med
 # ett av dem och ett kolon ("Red ut: två tredjedelar …") får namnet i husets blå, så att ögat hittar raden.
 # radetiketter: [Red ut, Lyssna efter, Lockar]
+# I ramar (under rubrik och text): ovrigt: <metodens namn på det material som inte är bankens enheter eller ramar med blad,
+#   som Bladen och korten>, så får det en egen fil. vidEnheterna: [<ramens rubrik>, …] är ramarna som hör till varje enhet i
+#   banken, som bladet Kärnorna till varje text: de står då också på varje enhets sida, med egen knapp.
 
 # Serier (Ljudlek i grupp): en generell metod med en lektionsbank och lektioner som är egna metoder. En ny lektion är en
 # ny fil med de tre fälten nedan: den syns i banken, i metodbanken och i seriens meny utan att den generella metoden

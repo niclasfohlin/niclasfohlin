@@ -1,12 +1,14 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { packaWord } from '../../lib/wordpaket';
 import { publicerade } from '../../lib/innehall';
-import { bankDokument, bladDokument, metodDokument, ramarDokument, DOCX_TYP } from '../../lib/metoddocx';
+import { bankDokument, bladDokument, metodDokument, passDokument, ramarDokument, DOCX_TYP } from '../../lib/metoddocx';
 import { byggSerier, serieKoppling } from '../../lib/serie';
 import { bankAv, bankfiler } from '../../lib/bank';
 import { metodensNivamaterial, nivafiler } from '../../lib/nivamaterial';
 import { bladfiler, metodensBladmaterial } from '../../lib/bladmaterial';
 import { ovrigtfil } from '../../lib/ovrigt';
+import { harMaterial } from '../../lib/material';
+import { harLathund } from '../../lib/metod';
 import { lasResurser, medReservbilder } from '../../lib/metodresurser';
 import { site } from '../../data/site';
 
@@ -21,6 +23,11 @@ import { site } from '../../data/site';
 // /stodundervisning/<id>-<ledet i flertal>-<namn eller alla>-blad.docx (bladDokument), och ramarna med sina ifyllda blad,
 // -sidor.docx (ramarDokument med blad: 'ifyllda'). En metod som namnger sitt övriga material (ramar.ovrigt,
 // src/lib/ovrigt.ts) får det i en fil, /stodundervisning/<id>-<namnet>.docx.
+// En metod med material får också /stodundervisning/<id>-metoden.docx: bara beskrivningen, utan materialet, mallarna och
+// lathunden, av samma kod som filen med allt (metodDokument med medMallar: false). Dess pdf är det knappen Skriv ut:
+// Metoden öppnar (Niclas 2026-10-13: ett system för utskriftsknapparna, som alltid blir 1:1; METODER.md under Utskriften).
+// En metod med lathund får /stodundervisning/<id>-lathund-text.docx: passets text för sig (passDokument), vars pdf
+// knappen vid texten på lathundssidan öppnar.
 export const getStaticPaths: GetStaticPaths = async () => {
   const metoder = await publicerade('stodundervisning');
   const serier = byggSerier(metoder);
@@ -31,6 +38,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const ovrigt = ovrigtfil(m.data, m.id);
     return [
       { params: { id: m.id }, props: { m: { ...m, serie: serieKoppling(m.id, m.data, serier) } } },
+      ...(harMaterial(m.data) ? [{ params: { id: `${m.id}-metoden` }, props: { m: { ...m, serie: serieKoppling(m.id, m.data, serier) }, metoden: true } }] : []),
+      ...(harLathund(m.data) ? [{ params: { id: `${m.id}-lathund-text` }, props: { m: { ...m, serie: undefined }, passet: true } }] : []),
       ...(nm ? nivafiler(m.id, nm).map((f) => ({ params: { id: f.namn }, props: { m: { ...m, serie: undefined }, nivafil: { ramar: f.ramar, rubrik: f.rubrik, huvud: f.niva ? f.niva.niva.namn : 'Alla nivåer' } } })) : []),
       ...(bm ? bladfiler(m.id, bm).map((f) => ({ params: { id: f.namn }, props: { m: { ...m, serie: undefined }, ...(f.slag === 'blad' ? { bladfil: { bilder: f.bilder, rubrik: f.rubrik, huvud: f.huvud } } : { nivafil: { ramar: f.ramar, rubrik: f.rubrik, huvud: f.huvud, blad: 'ifyllda' as const } }) } })) : []),
       ...(ovrigt ? [{ params: { id: ovrigt.namn }, props: { m: { ...m, serie: undefined }, nivafil: { ramar: ovrigt.ramar, rubrik: ovrigt.rubrik, huvud: ovrigt.huvud } } }] : []),
@@ -45,12 +54,14 @@ export const GET: APIRoute = async ({ props }) => {
   const bank = bankfil ? bankAv(props.m.data) : null;
   const nivafil = props.nivafil as { ramar: number[]; rubrik: string; huvud: string; blad?: 'alla' | 'ifyllda' | 'inga' } | undefined;
   const bladfil = props.bladfil as { bilder: number[]; rubrik: string; huvud: string } | undefined;
-  const buffert = await packaWord(await medReservbilder((png) => (bladfil
+  const buffert = await packaWord(await medReservbilder((png) => (props.passet
+    ? passDokument(props.m, { bas: site.url })
+    : bladfil
     ? bladDokument(props.m, bladfil, { bas: site.url, resurser: { ...resurser, png } })
     : nivafil
     ? ramarDokument(props.m, nivafil, { bas: site.url, resurser: { ...resurser, png } })
     : bankfil && bank
     ? bankDokument(props.m, { niva: bank.nivaer.find((n) => n.namn === bankfil.niva), medFoljesidor: bankfil.medFoljesidor, rubrik: bankfil.rubrik }, { bas: site.url, resurser: { ...resurser, png } })
-    : metodDokument([props.m], { bas: site.url, medMallar: true, resurser: { ...resurser, png } }))), 'nodebuffer');
+    : metodDokument([props.m], { bas: site.url, medMallar: !props.metoden, baraMetoden: !!props.metoden, resurser: { ...resurser, png } }))), 'nodebuffer');
   return new Response(new Uint8Array(buffert), { headers: { 'Content-Type': DOCX_TYP } });
 };

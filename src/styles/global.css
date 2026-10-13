@@ -444,8 +444,10 @@ html.js .filrader > li.bara-js { display: flex; }
 .filval > :first-child { border-left: 0; }
 .filval > a:hover, .filval > button:hover { background: var(--farg-accent-ljus); color: var(--farg-accent-mork); }
 .filval > button[disabled] { color: var(--farg-text-svag); cursor: default; }
-/* Skriv ut: Metoden finns bara när sidan har material att lämna utanför (data-material i Metod.astro). */
-body:not(:has([data-material])) .filval > [data-skriv-ut='beskrivning'] { display: none; }
+/* En utskriftsknapp som hämtar sin pdf (SkrivUtPdf.astro) visar att den arbetar. */
+/* Raden Skriv ut i nedladdningsrutan finns bara där knappen ger utskriftsrutan (data-bara-direkt, SkrivUtPdf.astro). */
+.filrader > li[data-bara-direkt][hidden] { display: none; }
+[data-skriv-ut-pdf][aria-busy='true'] { opacity: 0.6; cursor: progress; }
 /* Drive kräver JavaScript: knappen finns bara när html har klassen js. */
 .drive-knapp { display: none; }
 html.js .filval > .drive-knapp { display: inline-flex; }
@@ -1362,11 +1364,11 @@ html.js .bara-js { display: inline-block; }
 .lathund-nav { margin: 0 0 1.5rem; }
 /* Utskrift av en del av lathunden: liten länk i bandet eller i rutan, bara med JavaScript. */
 .lh-lank { margin-left: auto; }
-.lh-lank button { font: inherit; font-family: var(--typsnitt-ui); font-size: 0.8rem; background: none; border: 0; padding: 0; color: inherit; text-decoration: underline; text-underline-offset: 0.15em; cursor: pointer; text-transform: none; letter-spacing: 0; }
-.lh-huvud .lh-lank button { color: rgba(255, 255, 255, 0.9); }
+.lh-lank button, .lh-lank a { font: inherit; font-family: var(--typsnitt-ui); font-size: 0.8rem; background: none; border: 0; padding: 0; color: inherit; text-decoration: underline; text-underline-offset: 0.15em; cursor: pointer; text-transform: none; letter-spacing: 0; }
+.lh-huvud .lh-lank button, .lh-huvud .lh-lank a { color: rgba(255, 255, 255, 0.9); }
 .lh-ruta > h3 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.15rem 0.75rem; }
 .lh-ruta > h3 .lh-lank { margin-left: auto; }
-.lh-ruta > h3 .lh-lank button { color: rgba(255, 255, 255, 0.9); font-size: 0.75rem; }
+.lh-ruta > h3 .lh-lank button, .lh-ruta > h3 .lh-lank a { color: rgba(255, 255, 255, 0.9); font-size: 0.75rem; }
 .lathund .upphov { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
 .lathund-lank { font-weight: 600; }
 .lh-kicker { font-family: ui-monospace, 'Cascadia Mono', Consolas, 'Liberation Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--farg-text-svag); font-weight: 500; }
@@ -1489,15 +1491,6 @@ html.js .bara-js { display: inline-block; }
   .lathund-huvud, .lathund .upphov, .lathund-nav, .lh-lank { display: none; }
   /* Spelaren hör till skärmen. Tvingad, så att ingen skärmregel med fler klasser kan visa den på papperet. */
   .filmspelare { display: none !important; }
-  body.tryck-bara-mall .lh-sida:not(#lathund-mall) { display: none; }
-  body.tryck-bara-mall #lathund-mall { break-after: auto; }
-  /* Bara elevtexten: en ren sida i stående format med större grad, för kopior till gruppen. */
-  body.tryck-bara-text .lh-sida:not(#lathund-pass), body.tryck-bara-text #lathund-pass .lh-huvud, body.tryck-bara-text #lathund-pass .lh-kol > :not(.lh-elevtext), body.tryck-bara-text #lathund-pass .lh-kol:last-child { display: none; }
-  body.tryck-bara-text #lathund-pass { break-after: auto; font-size: 13pt; line-height: 1.6; }
-  body.tryck-bara-text #lathund-pass .lh-kolumner { grid-template-columns: 1fr; padding: 0; }
-  body.tryck-bara-text .lh-elevtext { border: 0; }
-  body.tryck-bara-text .lh-elevtext > h3 { background: none; color: var(--farg-text-svag); padding: 0 0 0.5rem; }
-  body.tryck-bara-text .lh-elevtext .lh-titel { font-size: 18pt; }
   .lh-sida { break-after: page; break-inside: auto; border: 0; border-radius: 0; margin: 0; font-size: 9.5pt; line-height: 1.38; }
   .lh-sida:last-child { break-after: auto; }
   .lh-huvud, .lh-ruta > h3, .lh-tabell.m-tabell thead th, .lh-not, .lh-fakta, .lh-krav, .lh-underrad, .lh-skrivruta { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
@@ -2031,8 +2024,6 @@ html.js .bara-js { display: inline-block; }
   /* Utskriften av hela beskrivningen har nivåernas enheter med följesidorna, var och en på sitt blad (Bank.astro). Banken
      står som block, så att bladen bryter sidor och får sina sidformat (@page bokliggande) som på enheternas sidor. */
   .bank { display: block; }
-  /* Skriv ut bara beskrivningen (Nedladdning.astro): sidan utan metodens material (data-material i Metod.astro). */
-  html[data-utskrift='beskrivning'] [data-material] { display: none !important; }
   .bank-utskrift { display: block; }
   /* Nivåerna står utfällda också när utskriften görs utan skript (Bank.astro fäller ut dem vid beforeprint). */
   .bank-niva::details-content { content-visibility: visible; display: block; }

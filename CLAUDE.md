@@ -58,9 +58,11 @@ Stödundervisning är en metodbank, inte en blogg. Varje metod är en YAML-fil e
 
 | Vad läraren får | Adress |
 |---|---|
-| Sidan, som också är utskriften: allt eller metoden utan materialet (METODER.md under Utskriften) | `/stodundervisning/<id>` |
+| Sidan | `/stodundervisning/<id>` |
+| Utskriften, som pdf av Word-filerna: allt, eller metoden utan materialet (METODER.md under Utskriften) | `/stodundervisning/<id>.pdf` och `<id>-metoden.pdf` |
 | Lathunden, fyra sidor ur snabbguiden, med metodens filmer i en spelare överst | `/stodundervisning/<id>/lathund` |
 | Word-filen med allt: beskrivning, planeringsmallar och lathund | `/stodundervisning/<id>.docx` |
+| Word-filen med bara metoden, utan materialet | `/stodundervisning/<id>-metoden.docx` |
 | Delarna var för sig | `<id>-mallar.docx` och `<id>-lathund.docx` |
 | Flera valda metoder i en Word-fil | sätts ihop av det läraren väljer i metodbanken, `/stodundervisning/` |
 | Lathundens PowerPoint, med filmerna på en bild först och sedan lathundens fyra bilder kant till kant | `/stodundervisning/<id>-lathund.pptx` |

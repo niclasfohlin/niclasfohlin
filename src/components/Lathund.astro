@@ -7,11 +7,13 @@ import MetodTabell from './MetodTabell.astro';
 import Elevlista from './Elevlista.astro';
 import Tavla from './Tavla.astro';
 import type { MetodData } from '../lib/metod';
-import { lathundFakta, arbetsformRad, etikettOchText, lathundForm, passUtskrift, passTextKort } from '../lib/metod';
+import { lathundFakta, arbetsformRad, etikettOchText, lathundForm, passPdfnamn, passUtskrift, passTextKort } from '../lib/metod';
+import { lathundensMall, utskriftAdress } from '../lib/utskrift';
 // Sidornas etiketter med sin räkning, "Metoden · 1/4", ur samma lista som PowerPoint-filen räknar med.
 import { sidetikett } from '../lib/lathundsidor';
-interface Props { d: MetodData }
-const { d } = Astro.props;
+// id: metodens id, för länkarna till pdf:erna som de två små knapparna öppnar (passets text och mallen, SkrivUtPdf.astro).
+interface Props { d: MetodData; id: string }
+const { d, id } = Astro.props;
 const l = d.lathund;
 // Rutans inledning: en fet etikett och en mager fråga (K-025).
 const inledning = l?.metoden.ruta.inledning ? etikettOchText(l.metoden.ruta.inledning) : null;
@@ -71,7 +73,7 @@ const kortBredd = (i: number) => `${((kortVikter[i] / kortVikter.reduce((a, v) =
       <div class="lh-kolumner">
         <div class="lh-kol">
           <div class:list={['lh-ruta', 'lh-elevtext', passTextKort(l.pass) && 'lh-kort']} id="lathund-text">
-            <h3>{l.pass.textRubrik}<span class="bara-js lh-lank"><button type="button" data-skriv-ut-text>{passUtskrift(l.pass)}</button></span></h3>
+            <h3>{l.pass.textRubrik}<span class="lh-lank"><a href={`/stodundervisning/${id}-lathund-text.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="3" data-direkt={passUtskrift(l.pass)}>{passPdfnamn(l.pass)}</a></span></h3>
             <div class="lh-ruta-kropp">
               {l.pass.titel && <p class="lh-titel">{l.pass.titel}</p>}
               {l.pass.text.map((p) => <p>{repliker(p).map((x) => (x.replik ? <em>{x.text}</em> : x.text))}</p>)}
@@ -108,7 +110,7 @@ const kortBredd = (i: number) => `${((kortVikter[i] / kortVikter.reduce((a, v) =
     </section>
 
     <section class="lh-sida" id="lathund-mall" aria-labelledby="lh-3">
-      <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-3">{l.mall.rubrik}</h2><span class="lh-etikett">{sidetikett('Mallen')}</span><span class="bara-js lh-lank"><button type="button" data-skriv-ut-mall>Skriv ut den här sidan</button></span></header>
+      <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-3">{l.mall.rubrik}</h2><span class="lh-etikett">{sidetikett('Mallen')}</span><span class="lh-lank"><a href={utskriftAdress(lathundensMall(d, id))} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande data-sidor-hogst="1"><span data-direkt="Skriv ut den här sidan">Den här sidan som pdf</span><span class="visually-hidden">: {l.mall.rubrik}</span></a></span></header>
       {l.mall.underrad && <p class="lh-underrad">{l.mall.underrad}</p>}
       <div class:list={['lh-block', { 'lh-block-matta': matta || kort }]}>
         {l.mall.block.map((b) => {

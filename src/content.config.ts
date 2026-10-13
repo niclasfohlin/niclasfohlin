@@ -385,6 +385,13 @@ const stodundervisning = defineCollection({
       // 2026-10-13). Med namnet får det materialet en egen fil att skriva ut, Word och pdf, i nedladdningsrutan
       // (src/lib/ovrigt.ts): annars ligger det sist i planeringsmallarna, efter bankens alla sidor.
       ovrigt: text.optional(),
+      // Ramarna som hör till varje enhet i banken, med ramens rubrik: det som skrivs ut till varje text eller varje problem,
+      // som bladet Kärnorna i Faktatextsamtal i grupp, som gruppen har på A3 i båda passen med varje text. De står då
+      // också på varje enhets sida, med en egen knapp, så att sidan har allt som veckan behöver (Niclas 2026-10-13: "Om
+      // kärnan används i varje text pass. Borde inte den också finnas på varje sida då? För då börjar sidan likna en
+      // veckas lektion"). Det som skrivs ut en gång för hela perioden (kort, kartläggning) står inte här. Ramen står
+      // kvar på metodens sida och i filerna som förut (src/lib/utskrift.ts, [id]/[enhet].astro).
+      vidEnheterna: z.array(text).default([]),
       ramar: z.array(z.strictObject({
         rubrik: text,
         text: stycken,

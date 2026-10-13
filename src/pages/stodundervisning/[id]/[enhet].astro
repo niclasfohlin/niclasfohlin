@@ -4,11 +4,13 @@ import Metod from '../../../components/Metod.astro';
 import EjBryt from '../../../components/EjBryt.astro';
 import Bladfiler from '../../../components/Bladfiler.astro';
 import Pabordet from '../../../components/Pabordet.astro';
+import SkrivUtPdf from '../../../components/SkrivUtPdf.astro';
 import { publicerade } from '../../../lib/innehall';
 import { bankAv, enhetAdress, grannar, nivaFarger, type Bankenhet } from '../../../lib/bank';
 import { bladKort, bladpar, bladsidaAdress, gruppId, harExempel, ledFlera, ledSida, metodensBladmaterial, type Bladrad } from '../../../lib/bladmaterial';
 import { arIfylltBlad, metodensPaBordet, type PaBordet } from '../../../lib/pabordet';
 import { metodAdress, UPPHOV } from '../../../lib/metod';
+import { enhetensUtskrifter, radensUtskrifter, utskriftAdress, vidEnheterna, type VidEnheten } from '../../../lib/utskrift';
 import { site } from '../../../data/site';
 
 // /stodundervisning/<id>/<nivå>-<nummer>: en enhet i metodens bank (src/lib/bank.ts; Niclas 2026-10-10 om Problemlösning i
@@ -50,14 +52,16 @@ interface Vy {
   skylt: string; kicker: string;
   /** Sidans blad: ankaret och namnet i raden överst. */
   nav: { id: string; namn: string }[];
-  /** Det knappen överst skriver ut, och raden i statistiken. */
-  allaBlad: string; statistik: string;
+  /** Det knappen överst skriver ut, pdf:en den öppnar (src/lib/utskrift.ts) och raden i statistiken. */
+  allaBlad: string; allaPdf: string; statistik: string;
   forra?: Lank; nasta?: Lank; fotEtikett: string; upphov: string;
   /** Det som hör ihop med sidan: modellens texter, eller textens modell när sidan inte kan visa bladet (bladpar i
    * src/lib/bladmaterial.ts). */
   hor?: { etikett: string; lankar: Lank[] };
   /** Enhetens blad ur en ram med blad: veckans blad på textens sida, under ramarnas led som rubrik (Modellen). */
-  blad?: { rad: Bladrad; b: PaBordet; nr: string; led: string; sida: string; exempel: boolean };
+  blad?: { rad: Bladrad; b: PaBordet; nr: string; led: string; sida: string; exempel: boolean; pdf: string };
+  /** Ramarna som hör till varje enhet (ramar.vidEnheterna, src/lib/utskrift.ts), som bladet Kärnorna till varje text. */
+  vid: VidEnheten[];
 }
 let vy: Vy;
 let enhet: Bankenhet | undefined;
@@ -80,9 +84,10 @@ if (givenRad && bm) {
     skylt: bm.led, kicker: `${i + 1} av ${bm.rader.length}`,
     nav: [{ id: `blad-${rad.ri + 1}`, namn: 'Sidan' }, ...rad.blad.map((b) => ({ id: `bild-${b.bild.nr}`, namn: bladKort(rad, b) }))],
     allaBlad: delar.length > 1 ? `${delar.slice(0, -1).join(', ')} och ${delar[delar.length - 1]}` : delar[0],
+    allaPdf: utskriftAdress(radensUtskrifter(d, m.id, bm, rad).alla),
     statistik: `${d.titel}: ${rad.namn}`,
     forra: bm.rader[i - 1] && lank(bm.rader[i - 1]), nasta: bm.rader[i + 1] && lank(bm.rader[i + 1]),
-    fotEtikett: `De andra ${ledFlera(bm).toLowerCase()}`, upphov: `${bm.led.toLowerCase()} ${rad.namn}`,
+    fotEtikett: `De andra ${ledFlera(bm).toLowerCase()}`, upphov: `${bm.led.toLowerCase()} ${rad.namn}`, vid: [],
   };
   const bank = bankAv(d);
   const enheterna = par.filter((p) => p.rad === rad).map((p) => bank!.enheter.find((x) => x.ri === p.enhet)!);
@@ -111,10 +116,11 @@ if (givenRad && bm) {
     tillbaka: { adress: `/stodundervisning/${m.id}#${niva.oversikt !== undefined ? `ram-${niva.oversikt + 1}` : `niva-${niva.slug}`}`, namn: niva.namn }, allaText: `Alla ${bank.ord.alla} på nivån ${niva.namn}`,
     skylt: niva.namn, kicker: e.nr !== undefined ? `${versal(bank.ord.en)} ${e.nr} av ${numrerade}` : versal(e.l.vad),
     nav: bladen.map((ri) => ({ id: `blad-${ri + 1}`, namn: bladNamn(ri) })),
-    allaBlad, statistik: `${d.titel}: ${niva.namn}, ${e.l.vad}`,
+    allaBlad, allaPdf: utskriftAdress(enhetensUtskrifter(d, m.id, bank, e).alla), statistik: `${d.titel}: ${niva.namn}, ${e.l.vad}`,
     forra: forra && lank(forra), nasta: nasta && lank(nasta),
-    fotEtikett: `Fler ${bank.ord.flera} på nivån ${niva.namn}`, upphov: `${niva.namn}, ${e.l.vad}`,
+    fotEtikett: `Fler ${bank.ord.flera} på nivån ${niva.namn}`, upphov: `${niva.namn}, ${e.l.vad}`, vid: vidEnheterna(d, m.id),
   };
+  for (const v of vy.vid) vy.nav.push({ id: `vid-${v.ri + 1}`, namn: v.rubrik });
   const raderna = par.filter((p) => p.enhet === e.ri).map((p) => p.rad);
   // Följesidan säger vilket av ramens blad som hör till enheten ("modellen är Tankekartan, blad 1"). Då står bladet på
   // enhetens sida, under ramarnas led som rubrik, Modellen, med en knapp som skriver ut bara bladet och en rad som leder
@@ -129,7 +135,7 @@ if (givenRad && bm) {
   };
   const funnet = raderna.length === 1 ? bladet(raderna[0]) : undefined;
   if (bm && funnet) {
-    vy.blad = { ...funnet, led: bm.led, sida: ledSida(bm), exempel: harExempel(bm) };
+    vy.blad = { ...funnet, led: bm.led, sida: ledSida(bm), exempel: harExempel(bm), pdf: utskriftAdress(radensUtskrifter(d, m.id, bm, funnet.rad).blad.get(funnet.b.bild.nr)!) };
     vy.nav.push({ id: 'enhetens-blad', namn: bm.led });
   } else if (bm && raderna.length) vy.hor = { etikett: bm.led, lankar: raderna.map((x) => ({ adress: bladsidaAdress(m.id, x), namn: x.namn })) };
 }
@@ -151,17 +157,29 @@ const figurer = metodensPaBordet(d, m.id).some((b) => b.bild.fluent?.length && s
         <ul>{vy.nav.map((x) => <li><a href={`#${x.id}`}>{x.namn}</a></li>)}</ul>
       </nav>
       {vy.hor && <p class="enhet-hor"><span class="enhet-hor-etikett">{vy.hor.etikett}:</span>{' '}{vy.hor.lankar.map((x, i) => <>{i > 0 && ' · '}<a href={x.adress}>{x.namn}</a></>)}</p>}
-      <p class="enhet-knappar bara-js"><button type="button" class="knapp" data-skriv-ut-blad="" data-goatcounter-click={`utskrift:${m.id}/${vy.slug}`} data-goatcounter-title={`${vy.statistik}, ${vy.allaBlad}`}>Skriv ut {vy.allaBlad}</button></p>
+      <p class="enhet-knappar"><a class="knapp" href={vy.allaPdf} target="_blank" rel="noopener" data-skriv-ut-pdf data-direkt={`Skriv ut ${vy.allaBlad}`} data-goatcounter-click={`utskrift:${m.id}/${vy.slug}`} data-goatcounter-title={`${vy.statistik}, ${vy.allaBlad}`}>{versal(vy.allaBlad)} som pdf</a></p>
     </header>
     {/* Enhetens blad ur en ram med blad, som veckans blad på textens sida, bland enhetens andra blad (platsen efter-bladen i
         Metod.astro). Knappen överst skriver ut enhetens egna sidor, och bladet har sin egen knapp (data-egen), eftersom
         det skrivs ut för sig, liggande och gärna på A3. */}
     <Metod d={d} id={m.id} enhet={enhet} bladenhet={bladenhet}>
+    {/* Ramarna som hör till varje enhet (ramar.vidEnheterna), som bladet Kärnorna till varje text: bladet med en egen
+        knapp, och en rad som leder till ramen på metodens sida, där det står hur bladet används. */}
+    {vy.vid.map((v) => (
+      <div slot="efter-bladen" class="enhet-blad" id={`vid-${v.ri + 1}`}>
+        <div class="enhet-bladhuvud">
+          <h2>{v.rubrik}</h2>
+          <a class="knapp sekundar liten" href={utskriftAdress(v.utskrift)} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande={v.blad.length ? '' : undefined} data-sidor-hogst={Math.max(1, v.blad.length) * (v.blad.length ? 1 : 3)} data-goatcounter-click={`utskrift:${m.id}/${vy.slug}`} data-goatcounter-title={`${vy.statistik}, ${v.rubrik.toLowerCase()}`}><span data-direkt={v.blad.length === 1 ? 'Skriv ut bladet' : v.blad.length ? 'Skriv ut bladen' : 'Skriv ut sidan'}>{v.blad.length === 1 ? 'Bladet' : v.blad.length ? 'Bladen' : 'Sidan'} som pdf</span><span class="visually-hidden">: {v.rubrik}</span></a>
+        </div>
+        <p class="enhet-bladtext">Hur {v.blad.length === 1 ? 'bladet' : v.blad.length ? 'bladen' : 'det'} används står under <a href={`/stodundervisning/${m.id}#ram-${v.ri + 1}`}>{v.rubrik}</a> på metodens sida.</p>
+        {v.blad.map((b) => <Pabordet b={b} utanRubrik />)}
+      </div>
+    ))}
     {vy.blad && (
-      <div slot="efter-bladen" class="enhet-blad" data-blad={`bild-${vy.blad.b.bild.nr}`} data-egen id="enhetens-blad">
+      <div slot="efter-bladen" class="enhet-blad" id="enhetens-blad">
         <div class="enhet-bladhuvud">
           <h2>{vy.blad.led}</h2>
-          <button type="button" class="knapp sekundar liten bara-js" data-skriv-ut-blad={`bild-${vy.blad.b.bild.nr}`} data-liggande data-goatcounter-click={`utskrift:${m.id}/${vy.slug}`} data-goatcounter-title={`${vy.statistik}, bladet`}>Skriv ut bladet</button>
+          <a class="knapp sekundar liten" href={vy.blad.pdf} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande data-sidor-hogst="1" data-goatcounter-click={`utskrift:${m.id}/${vy.slug}`} data-goatcounter-title={`${vy.statistik}, bladet`}><span data-direkt="Skriv ut bladet">Bladet som pdf</span><span class="visually-hidden">: {vy.blad.rad.namn}, blad {vy.blad.nr}</span></a>
         </div>
         <p class="enhet-bladtext">{vy.blad.rad.namn}, blad {vy.blad.nr}. {vy.blad.sida}{vy.blad.exempel ? ', exemplet' : ''} och de andra bladen står på sidan <a href={bladsidaAdress(m.id, vy.blad.rad)}>{vy.blad.rad.namn}</a>.</p>
         <Pabordet b={vy.blad.b} utanRubrik />
@@ -188,25 +206,12 @@ const figurer = metodensPaBordet(d, m.id).some((b) => b.bild.fluent?.length && s
   <div class="tryck-fot" aria-hidden="true">{UPPHOV} · {adress}</div>
 </Base>
 
+<SkrivUtPdf />
+
 <script>
-  // Knapparna skriver ut alla blad (data-skriv-ut-blad tom) eller bara ett (dess märke, en ram eller en bild): de andra bladen göms medan
-  // utskriften pågår. Bilderna hämtas först när läsaren närmar sig dem, så knappen väntar in dem, högst tre sekunder, som
-  // knappen Skriv ut på metodens sida (Nedladdning.astro).
-  const bilder = () => [...document.querySelectorAll<HTMLImageElement>('img[data-utskriftsbild]')];
-  const hamta = () => Promise.all(bilder().map((b) => {
-    b.loading = 'eager';
-    return b.naturalWidth > 0 ? undefined : new Promise((klar) => { b.addEventListener('load', klar, { once: true }); b.addEventListener('error', klar, { once: true }); });
-  }));
-  window.addEventListener('beforeprint', () => { hamta(); });
-  const blad = [...document.querySelectorAll<HTMLElement>('.enhet-blad')];
-  window.addEventListener('afterprint', () => { for (const b of blad) b.classList.remove('utskrift-gomd'); });
-  for (const knapp of document.querySelectorAll<HTMLButtonElement>('[data-skriv-ut-blad]')) {
-    knapp.addEventListener('click', async () => {
-      const valt = knapp.dataset.skrivUtBlad;
-      // Ett blad med egen knapp (data-egen, enhetens blad ur en ram med blad) skrivs bara ut med den knappen.
-      for (const b of blad) b.classList.toggle('utskrift-gomd', valt ? b.dataset.blad !== valt : b.dataset.egen !== undefined);
-      await Promise.race([hamta(), new Promise((klar) => setTimeout(klar, 3000))]);
-      window.print();
-    });
-  }
+  // Den som skriver ut sidan med webbläsarens egen meny får bilderna hämtade när utskriften börjar. Knapparna skriver
+  // inte ut sidan: de öppnar pdf:er ur Word-filerna (SkrivUtPdf.astro).
+  window.addEventListener('beforeprint', () => {
+    for (const b of document.querySelectorAll<HTMLImageElement>('img[data-utskriftsbild]')) b.loading = 'eager';
+  });
 </script>

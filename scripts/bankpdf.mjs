@@ -20,8 +20,20 @@
 //   node scripts/bankpdf.mjs --kontrollera  stanna om en pdf saknas, är överbliven eller inte är gjord av Word-filen i dist
 //                                           (körs i npm run build, efter bygget)
 //
-// Kräver Word (node_modules/wordparitet/ps/word-pdf.ps1), Python med pikepdf (pip install pikepdf) och Poppler (pdfinfo,
-// pdftotext) när en pdf ska göras. Bara en Word-körning åt gången.
+// Samma skript gör pdf av varje metods fil med allt och av filen med bara metoden (slag allt och metoden i listan): det
+// är pdf:erna som knapparna Skriv ut: Allt och Metoden öppnar (K-342; Niclas 2026-10-13: "Vill inte ha glidning här. Så
+// bättre med ett system för skriv ut knapparna", och "System med att den drar från sidorna eller Yaml kommer aldrig få
+// exakt paritet med pdf. Så bättre med ett system som alltid blir 1:1").
+//
+// Kartan: knapparna på en texts, ett problems och en rams sida öppnar några sidor ur en av de här pdf:erna
+// (scripts/pdfdelar.mjs klipper ut dem när sajten byggs). Word-filen bär en lista över sina ramar och blad i ordning
+// (egenskapen sidkarta, src/lib/metoddocx.ts) och ett bokmärke där var och en börjar. Word sparar bokmärkena i pdf:en
+// (scripts/word-jobb.ps1), och scripts/pdfkarta.py läser vilken sida de står på. Av det skrivs karta i manifestet:
+// varje rams och blads första och sista sida i pdf:en. Sidan läses ur pdf:en och inte ur Word, som lägger ut sidorna
+// olika när det visar ett dokument och när det sparar det som pdf.
+//
+// Kräver Word (scripts/word-jobb.ps1), Python med pikepdf (pip install pikepdf) och Poppler (pdfinfo, pdftotext) när en
+// pdf ska göras. Alla filer görs i en Word-körning, och bara en Word-körning åt gången.
 import { copyFileSync, existsSync, mkdirSync, readFileSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
@@ -59,6 +71,36 @@ const innehallHash = async (docx) => {
   return wordinnehall(data, /w:name="Anton"/.test(typsnitt) ? `${typsnittHash}|${antonHash}` : typsnittHash);
 };
 const pdfFor = (namn) => join(pdfMapp, `${namn}.pdf`);
+// Word-filens sidkarta (egenskapen sidkarta i docProps/custom.xml): ramarna och bladen i filens ordning, med antalet
+// avsnitt var. En fil utan egenskapen har ingen karta (filen med allt, lathunden).
+const avkoda = (t) => t.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&amp;/g, '&');
+const sidkartaI = async (docx) => {
+  const xml = await (await JSZip.loadAsync(readFileSync(docx))).file('docProps/custom.xml')?.async('string');
+  const m = xml?.match(/name="sidkarta"[^>]*>\s*<vt:lpwstr>([\s\S]*?)<\/vt:lpwstr>/);
+  return m ? JSON.parse(avkoda(m[1])) : undefined;
+};
+// Kartan: var varje ram och blad står i pdf:en, ur sidkartan och sidan där pdf:en har varje bokmärke (sida_0 …).
+const bokmarkenI = (pdf) => JSON.parse(execFileSync('python', [join(rot, 'scripts', 'pdfkarta.py'), pdf], { encoding: 'utf8', maxBuffer: 1 << 26 }));
+const kartaAv = (sidkarta, bokmarken, sidor, namn) => {
+  const borjan = sidkarta.map((p, k) => {
+    const sida = bokmarken[`sida_${k}`];
+    if (!sida) throw new Error(`${namn}: pdf:en har inget bokmärke sida_${k} (${p.bild !== undefined ? `bladet ${p.bild}` : `ramen ${p.ram}`})`);
+    return sida;
+  });
+  return sidkarta.map((p, k) => {
+    const fran = borjan[k];
+    const till = (borjan[k + 1] ?? sidor + 1) - 1;
+    if (!(fran >= 1 && till >= fran)) throw new Error(`${namn}: ${p.bild !== undefined ? `bladet ${p.bild}` : `ramen ${p.ram}`} börjar på sidan ${fran} och nästa del på sidan ${borjan[k + 1] ?? sidor + 1}; varje del ska börja på en ny sida`);
+    return { ...(p.ram !== undefined ? { ram: p.ram } : {}), ...(p.bild !== undefined ? { bild: p.bild } : {}), fran, till };
+  });
+};
+// Kartans led, ramens nummer och bladets bild i ordning, ska vara Word-filens sidkarta. Numren är ramens plats i
+// metodens fil och bildens nummer, och de kan flyttas utan att Word-filens innehåll ändras: en ram som läggs till före
+// banken, eller lärarsidor som byter plats i filen. Då är pdf:en densamma men kartan pekar fel, och knapparnas pdf:er
+// skulle klippas ur fel sidor med grönt bygge (granskningen 2026-10-13, P1). Sidorna är desamma när Word-filens summa
+// är densamma, så leden skrivs om efter plats, utan Word.
+const led = (poster) => JSON.stringify(poster.map((p) => [p.ram ?? null, p.bild ?? null]));
+const kartansLed = (karta, sidkarta) => (karta.length !== sidkarta.length ? undefined : karta.map((k, i) => ({ ...(sidkarta[i].ram !== undefined ? { ram: sidkarta[i].ram } : {}), ...(sidkarta[i].bild !== undefined ? { bild: sidkarta[i].bild } : {}), fran: k.fran, till: k.till })));
 const kanda = new Set(filer.map((f) => `${f.namn}.pdf`));
 // En pdf i manifestet som ingen bank längre har (en borttagen nivå, en metod utan bank). Bara manifestets filer räknas,
 // så att andra pdf:er i mappen (lathundarna) aldrig rörs.
@@ -75,6 +117,11 @@ if (kontrollera) {
     else if (!existsSync(docx)) fel.push(`${f.namn}.docx saknas i dist`);
     else if (post.word !== await innehallHash(docx)) fel.push(`${f.namn}.pdf är gjord av en äldre Word-fil`);
     else if (post.pdf !== sha(readFileSync(pdfFor(f.namn)))) fel.push(`${f.namn}.pdf stämmer inte med manifestet`);
+    else {
+      const sidkarta = await sidkartaI(docx);
+      if (sidkarta && !post.karta) fel.push(`${f.namn}: manifestet saknar kartan över ramarnas sidor`);
+      else if (sidkarta && led(post.karta) !== led(sidkarta)) fel.push(`${f.namn}: kartan i manifestet har andra ramar och blad än Word-filen, så knapparnas pdf:er skulle klippas ur fel sidor`);
+    }
   }
   for (const f of overblivna()) fel.push(`${f}: överbliven, ingen bank har filen (ta bort filen och raden i manifestet)`);
   if (fel.length) { console.error(`Bankens pdf:er:\n  ${fel.join('\n  ')}\nKör: npm run validera (eller node scripts/bankpdf.mjs efter ett bygge)`); process.exit(1); }
@@ -102,33 +149,72 @@ for (const f of filer) {
   const post = manifest[f.namn];
   if (alla || !post || post.word !== summa || !existsSync(pdfFor(f.namn)) || post.pdf !== sha(readFileSync(pdfFor(f.namn)))) att.push(f);
 }
-if (!att.length) { writeFileSync(manifestFil, JSON.stringify(manifest, null, 2) + '\n'); console.log(`Bankens pdf:er är aktuella (${filer.length} filer).`); process.exit(0); }
-console.log(`Gör pdf ur Word för ${att.map((f) => f.namn).join(', ')} …`);
+// En aktuell pdf utan karta i manifestet, fast Word-filen har en sidkarta: Word sparar filen igen, för bokmärkenas skull.
+// En karta med andra led än Word-filens sidkarta, men lika många, får leden omskrivna efter plats (se kartansLed).
+const utanKarta = [];
+let omskrivna = 0;
+for (const f of filer) {
+  if (att.includes(f)) continue;
+  const sidkarta = await sidkartaI(join(dist, `${f.namn}.docx`));
+  if (!sidkarta) continue;
+  const karta = manifest[f.namn]?.karta;
+  if (karta && led(karta) === led(sidkarta)) continue;
+  const ny = karta && kartansLed(karta, sidkarta);
+  if (ny) { manifest[f.namn].karta = ny; omskrivna += 1; } else utanKarta.push(f);
+}
+if (omskrivna) console.log(`Kartans ramar och blad är omskrivna efter Word-filernas sidkarta i ${omskrivna} filer (sidorna är desamma).`);
+if (!att.length && !utanKarta.length) { writeFileSync(manifestFil, JSON.stringify(manifest, null, 2) + '\n'); console.log(`Pdf:erna ur Word är aktuella (${filer.length} filer).`); process.exit(0); }
+if (att.length) console.log(`Gör pdf ur Word för ${att.map((f) => f.namn).join(', ')} …`);
+if (utanKarta.length) console.log(`Läser var ramarna står i ${utanKarta.length} filer som redan har sin pdf …`);
 const tmp = join(tmpdir(), `bankpdf-${process.pid}`);
 mkdirSync(tmp, { recursive: true });
 let fel = 0;
-for (const f of att) {
+// Alla filer i en Word-körning (scripts/word-jobb.ps1). En fil som bara saknar kartan sparas också som pdf, för
+// bokmärkenas skull, men den pdf:en läggs inte ut: den som finns är gjord av samma Word-fil.
+const jobb = [...att.map((f) => ({ f, ny: true })), ...utanKarta.map((f) => ({ f, ny: false }))].map(({ f, ny }) => {
   const kopia = join(tmp, `${f.namn}.docx`);
+  copyFileSync(join(dist, `${f.namn}.docx`), kopia);
+  return { f, ny, docx: kopia, pdf: join(tmp, `${f.namn}-word.pdf`) };
+});
+const jobbFil = join(tmp, 'jobb.json');
+const svarFil = join(tmp, 'svar.json');
+writeFileSync(jobbFil, JSON.stringify(jobb.map((j) => ({ docx: j.docx, pdf: j.pdf }))));
+try { execFileSync('powershell', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', join(rot, 'scripts', 'word-jobb.ps1'), jobbFil, svarFil], { stdio: 'ignore', timeout: 3600000 }); } catch (e) { console.error(`bankpdf: Word-körningen gick inte igenom (${e.message.split('\n')[0]}).`); }
+const svar = existsSync(svarFil) ? JSON.parse(readFileSync(svarFil, 'utf8').replace(/^\uFEFF/, '')) : [];
+const svarFor = (j) => svar.find((x) => x.docx === j.docx);
+for (const j of jobb) {
+  const f = j.f;
   const tmpPdf = join(tmp, `${f.namn}.pdf`);
   try {
-    copyFileSync(join(dist, `${f.namn}.docx`), kopia);
-    const wordPdf = join(tmp, `${f.namn}-word.pdf`);
-    execFileSync('powershell', ['-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', join(rot, 'node_modules', 'wordparitet', 'ps', 'word-pdf.ps1'), kopia, wordPdf], { stdio: 'ignore', timeout: 600000 });
+    const r = svarFor(j);
+    if (!r) throw new Error('Word svarade inte för filen');
+    if (r.fel) throw new Error(`Word: ${r.fel}`);
+    const sidkarta = await sidkartaI(j.docx);
+    const wordPdf = j.pdf;
     if (!existsSync(wordPdf)) throw new Error('Word gjorde ingen pdf');
+    const last = sidkarta ? bokmarkenI(wordPdf) : undefined;
+    if (!j.ny) {
+      // Bara kartan: pdf:en som finns är gjord av samma Word-fil, så den nya har samma sidor.
+      if (last.sidor !== manifest[f.namn].sidor) throw new Error(`den nya pdf:en är ${last.sidor} sidor men den som finns ${manifest[f.namn].sidor}`);
+      manifest[f.namn].karta = kartaAv(sidkarta, last.bokmarken, last.sidor, f.namn);
+      console.log(`  ok   ${f.namn}: kartan över ${manifest[f.namn].karta.length} ramar och blad`);
+      continue;
+    }
     execFileSync('python', [join(rot, 'scripts', 'pdfpack.py'), wordPdf, tmpPdf], { stdio: 'inherit', timeout: 600000 });
     if (!existsSync(tmpPdf)) throw new Error('pdfpack.py gjorde ingen pdf');
     const info = execFileSync('pdfinfo', [tmpPdf], { encoding: 'utf8' });
     const sidor = Number((info.match(/Pages:\s+(\d+)/) || [])[1]);
     // Ett blad per sida: en sida som spiller över ger fler sidor än bladen, och då är något fel i formen.
     if (sidor < f.minst || sidor > f.hogst) throw new Error(`pdf:en är ${sidor} sidor, ska vara ${f.minst === f.hogst ? f.minst : `${f.minst} till ${f.hogst}`} (ett blad per sida)`);
-    const text = execFileSync('pdftotext', [tmpPdf, '-'], { encoding: 'latin1' }).split('\f').slice(0, sidor);
+    const text = execFileSync('pdftotext', [tmpPdf, '-'], { encoding: 'latin1', maxBuffer: 1 << 28 }).split('\f').slice(0, sidor);
     const utan = text.map((t, i) => (t.includes('Niclas Fohlin') ? 0 : i + 1)).filter(Boolean);
     if (utan.length) throw new Error(`sidan ${utan.join(', ')} saknar upphovet`);
+    const karta = sidkarta ? kartaAv(sidkarta, last.bokmarken, sidor, f.namn) : undefined;
     const ut = pdfFor(f.namn);
     copyFileSync(tmpPdf, `${ut}.tmp`);
     renameSync(`${ut}.tmp`, ut);
     if (existsSync(dist)) copyFileSync(ut, join(dist, `${f.namn}.pdf`));
-    manifest[f.namn] = { word: summor.get(f.namn), pdf: sha(readFileSync(ut)), sidor, kB: Math.round(readFileSync(ut).length / 1024), datum: new Date().toISOString().slice(0, 10) };
+    manifest[f.namn] = { word: summor.get(f.namn), pdf: sha(readFileSync(ut)), sidor, kB: Math.round(readFileSync(ut).length / 1024), datum: new Date().toISOString().slice(0, 10), ...(karta ? { karta } : {}) };
     console.log(`  ok   ${f.namn}.pdf: ${sidor} sidor, ${manifest[f.namn].kB} kB (${Math.round(readFileSync(wordPdf).length / 1024)} kB ur Word)`);
   } catch (e) {
     fel++;

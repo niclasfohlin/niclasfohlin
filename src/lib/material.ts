@@ -7,5 +7,10 @@
 export const MATERIAL = new Set(['ramar', 'diplom', 'mallar'] as const);
 export type Materialavsnitt = 'ramar' | 'diplom' | 'mallar';
 
+/** Har metoden material, alltså något som utskriften Metoden lämnar utanför? Då finns knappen Metoden och Word-filen
+ * med bara metoden (src/pages/stodundervisning/[id].docx.ts). */
+export const harMaterial = (d: { ramar?: unknown; diplom?: unknown; mallar?: unknown[] }): boolean =>
+  (MATERIAL.has('ramar') && !!d.ramar) || (MATERIAL.has('diplom') && !!d.diplom) || (MATERIAL.has('mallar') && (d.mallar?.length ?? 0) > 0);
+
 /** Attributet data-material på sidan: tomt för ett avsnitt som är material, annars inget. */
 export const materialAttribut = (avsnitt: Materialavsnitt): '' | undefined => (MATERIAL.has(avsnitt) ? '' : undefined);

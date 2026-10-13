@@ -81,6 +81,12 @@ def main(kalla, ut):
             for x in xo.values():
                 if x.get('/Subtype') == '/Form':
                     behandla(x)
+    # Dispositionen bär Word-filens bokmärken (sida_0 …), som scripts/bankpdf.mjs har läst kartan ur före packningen
+    # (scripts/pdfkarta.py). Läraren ska inte se dem i sin pdf-läsare.
+    if '/Outlines' in pdf.Root:
+        del pdf.Root['/Outlines']
+    if '/PageMode' in pdf.Root:
+        del pdf.Root['/PageMode']
     pdf.remove_unreferenced_resources()
     pdf.save(ut, compress_streams=True, object_stream_mode=pikepdf.ObjectStreamMode.generate)
 

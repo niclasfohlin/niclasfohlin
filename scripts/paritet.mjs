@@ -503,7 +503,9 @@ const reservMapp = join(rot, 'dist/stodundervisning/reservbild');
 const reservbilder = new Set(existsSync(reservMapp) ? readdirSync(reservMapp).map((f) => sha(readFileSync(join(reservMapp, f)))) : []);
 const reservTypsnitt = cmapTecken(readFileSync(join(rot, 'src/data/typsnitt/Reservbild-Regular.ttf')));
 const reservFel = new Set();
-const bankensDocx = new Set(bankfiler.map((f) => `${f.namn}.docx`));
+// Filen med allt och filen med bara metoden står i listan för pdf:ernas skull (slag allt och metoden) men är inga
+// bankfiler: webbläsaren bygger dem också, så deras reservbilder prövas som förut.
+const bankensDocx = new Set(bankfiler.filter((f) => !['allt', 'metoden', 'lathundtext'].includes(f.slag)).map((f) => `${f.namn}.docx`));
 let reservAntal = 0;
 for (const namn of readdirSync(join(rot, 'dist/stodundervisning')).filter((f) => f.endsWith('.docx'))) {
   const zip = await JSZip.loadAsync(readFileSync(join(rot, 'dist/stodundervisning', namn)));

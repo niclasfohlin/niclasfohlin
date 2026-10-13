@@ -218,6 +218,12 @@ export function passOrd(d: MetodData): PassOrd {
 export function passUtskrift(pass: { textRubrik: string; utskrift?: string }): string {
   return pass.utskrift ?? (/^Gruppen\b/i.test(pass.textRubrik) ? 'Skriv ut passexemplet' : 'Skriv ut till eleverna');
 }
+// Samma knapp där webbläsaren öppnar pdf:en i stället för utskriftsrutan (SkrivUtPdf.astro): vad pdf:en är.
+export function passPdfnamn(pass: { textRubrik: string; utskrift?: string }): string {
+  const vad = passUtskrift(pass).replace(/^Skriv ut /i, '');
+  const namn = /^till /i.test(vad) ? `Texten ${vad}` : vad;
+  return `${namn.charAt(0).toLocaleUpperCase('sv')}${namn.slice(1)} som pdf`;
+}
 
 /**
  * Textrutan på lathundens sida 2 är kort när den bär ett problem eller en fråga och inte ett berättat pass: högst 60

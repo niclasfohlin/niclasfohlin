@@ -1,0 +1,60 @@
+---
+// Utskriftsknapparnas skript, ett för hela sajten (K-342; Niclas 2026-10-13: "Vill inte ha glidning här. Så bättre med ett
+// system för skriv ut knapparna", och "System med att den drar från sidorna eller Yaml kommer aldrig få exakt paritet med
+// pdf. Så bättre med ett system som alltid blir 1:1"). En knapp som skriver ut är en länk till en pdf (data-skriv-ut-pdf),
+// och pdf:en är en Word-fil som Word har sparat, eller sidor ur en sådan (scripts/bankpdf.mjs, scripts/pdfdelar.mjs,
+// src/lib/utskrift.ts). Utskriften, pdf:en och Word-filen är därför samma sidor. Regeln står i METODER.md under Utskriften.
+//
+// Utan skript, i telefonen och i Safari och Firefox öppnar länken pdf:en, som läsaren skriver ut därifrån, och knappen
+// säger det: "Texten som pdf". I Chromium på datorn (Chrome, Edge, Chromebook) laddas pdf:en i en dold ram och skrivs ut
+// därifrån, och då heter knappen "Skriv ut texten" (data-direkt på det element vars text byts). Så är en knapp som heter
+// Skriv ut alltid en knapp som ger utskriftsrutan (Niclas 2026-09-27, om lathunden, där sättet prövades först). Raden
+// Skriv ut i nedladdningsrutan visas bara där (data-bara-direkt): i telefonen har raden under samma pdf att öppna, och
+// två rader ska inte göra samma sak. En länk med flera delar har texten som byts i ett eget element, så att resten av
+// länkens namn, som en dold fortsättning för skärmläsare, står kvar.
+//
+// Komponenten läggs på varje sida som har en sådan länk. Astro tar med skriptet en gång per sida.
+---
+<script>
+  const kanSkrivaUtPdf = () => {
+    const ua = (navigator as Navigator & { userAgentData?: { mobile: boolean } }).userAgentData;
+    return ua?.mobile === false && navigator.pdfViewerEnabled === true;
+  };
+  if (kanSkrivaUtPdf()) {
+    for (const el of document.querySelectorAll<HTMLElement>('[data-direkt]')) el.textContent = el.dataset.direkt ?? el.textContent;
+    // En rad som bara finns där knappen skriver ut (raden Skriv ut i nedladdningsrutan, där raden under har samma pdf
+    // att ladda ner): utan den här möjligheten vore de två raderna samma sak.
+    for (const el of document.querySelectorAll<HTMLElement>('[data-bara-direkt]')) el.hidden = false;
+    for (const lank of document.querySelectorAll<HTMLAnchorElement>('a[data-skriv-ut-pdf]')) {
+      lank.addEventListener('click', (e) => {
+        // Med en tangent nedtryckt öppnar läsaren pdf:en i en ny flik, som länken säger.
+        if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        if (lank.getAttribute('aria-busy') === 'true') return;
+        document.querySelector('iframe.skriv-ut-pdf')?.remove();
+        const ram = document.createElement('iframe');
+        ram.className = 'skriv-ut-pdf';
+        ram.title = 'Pdf för utskrift';
+        ram.tabIndex = -1;
+        ram.setAttribute('aria-hidden', 'true');
+        ram.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden';
+        // En stor fil tar några sekunder att hämta: knappen säger att den arbetar, och går inte att trycka två gånger.
+        lank.setAttribute('aria-busy', 'true');
+        const klar = () => lank.removeAttribute('aria-busy');
+        const reserv = window.setTimeout(klar, 30000);
+        ram.addEventListener('load', () => {
+          window.clearTimeout(reserv);
+          klar();
+          try {
+            ram.contentWindow!.focus();
+            ram.contentWindow!.print();
+          } catch {
+            location.assign(lank.href);
+          }
+        }, { once: true });
+        ram.src = lank.href;
+        document.body.append(ram);
+      });
+    }
+  }
+</script>

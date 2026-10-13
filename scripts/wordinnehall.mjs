@@ -24,7 +24,9 @@ export async function wordinnehall(data, forst = '', { allt = false } = {}) {
   const utanId = (xml) => xml
     .replace(/\s(?:id|name)="[^"]*"/g, '')
     .replace(/\sr:(?:embed|id|link)="[^"]*"/g, '')
-    .replace(/\sw:(?:id|rsid\w*)="[^"]*"/g, '');
+    .replace(/\sw:(?:id|rsid\w*)="[^"]*"/g, '')
+    // Bokmärkena där en ram eller ett blad börjar (sidkartan i src/lib/metoddocx.ts) syns inte och ändrar inga sidor.
+    .replace(/<w:bookmark(?:Start|End)\b[^>]*\/>/g, '');
   for (const namn of Object.keys(zip.files).sort()) {
     if (DELAR.test(namn)) delar.push(`${namn.replace(/\d+/g, '#')}:${sha(utanId(await zip.file(namn).async('string')))}`);
   }

@@ -5,7 +5,7 @@
 // rubrikrad, band, gör/undvik och bockar. Varje sida bär © Niclas Fohlin och niclasfohlin.se.
 import {
   AlignmentType, Body, Bookmark, BorderStyle, Document, ExternalHyperlink, Footer, Header, HeadingLevel, HeightRule, HorizontalPositionRelativeFrom, ImageRun, ImportedXmlComponent, InternalHyperlink, LevelFormat, NoBreakHyphen, PageNumber, PageOrientation,
-  Paragraph, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, TextWrappingType, UnderlineType, VerticalAlign, VerticalPositionRelativeFrom, WidthType,
+  Paragraph, type Run, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, TextWrappingType, UnderlineType, VerticalAlign, VerticalPositionRelativeFrom, WidthType,
   type IBorderOptions, type IFloating, type IParagraphOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
 import { arbetsformRad, arEttKort, arProtokoll, arskursText, datumText, ejBryt, etikettOchText, laskortKolumn, laskortRubrik, lathundFakta, lathundForm, metaRad, metodAdress, passOrd, passOversikt, passTextKort, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost, type PassOrd } from './metod';
@@ -89,6 +89,24 @@ type Sagosektion = { not: string; bokblad: boolean };
 type Bladsektion = { top: number; bottom: number; left: number; right: number };
 class Sektionsbyte { constructor(readonly kortark: boolean, readonly bok?: Boksektion, readonly saga?: Sagosektion, readonly liggande?: boolean, readonly blad?: Bladsektion) {} }
 type Flod = (Barn | Sektionsbyte)[];
+// Sidkartan (K-342; Niclas 2026-10-13: "System med att den drar från sidorna eller Yaml kommer aldrig få exakt paritet med
+// pdf. Så bättre med ett system som alltid blir 1:1"). Utskriftsknapparna på en texts, ett problems och en rams sida
+// öppnar en pdf som är sidor ur Word-filens pdf, och då måste det gå att säga exakt vilka sidor en ram eller ett blad
+// står på. Varje sida i en fil ur mallBarn vet därför vilken ram den är (och vilket blad, bildens nummer). Filen bär
+// listan i ordning i dokumentets egenskap sidkarta, och ett bokmärke (sida_0, sida_1 …) i det första stycket på varje
+// sådan sida. Word sparar bokmärkena i pdf:en (scripts/word-jobb.ps1), och scripts/bankpdf.mjs läser där vilken sida
+// vart och ett står på och skriver ramarnas och bladens sidor i manifestet bank-pdf.json, som scripts/pdfdelar.mjs
+// klipper efter. Sidan läses ur pdf:en och inte ur Word, som lägger ut sidorna olika när det visar ett dokument och
+// när det sparar det som pdf. Egenskapen och bokmärkena syns inte i dokumentet och ändrar inte dess sidor.
+type Sidvad = { ram?: number; bild?: number };
+// En fil med fristående blad (bankens filer, ramarnas filer, bladens filer): varje ram skrivs också ut för sig, som
+// sidor ur filens pdf. Där står inget löpande sidnummer i sidfoten, och en text eller ett blad som räknar sina sidor
+// börjar om på 1, så att ett utskrivet blad inte säger "Sida 29 av 31" och elevens text inte "s. 5" på sin andra sida
+// (granskningen 2026-10-13). Filen med allt och planeringsmallarna är hela dokument och räknar sidorna genom filen.
+let FRISTAENDE_BLAD = false;
+const egenRakning = () => (FRISTAENDE_BLAD ? { pageNumbers: { start: 1 } } : {});
+type Sidpost = Sidvad & { s: number };
+const SIDANS_VAD = new WeakMap<Flod, Sidvad>();
 const arBarn = (x: Barn | Sektionsbyte): x is Barn => !(x instanceof Sektionsbyte);
 // Bilderna och elevens typsnitt till Word-filen (src/lib/ljudkort.ts): vid bygget lästa från public/, i webbläsaren
 // hämtade, och givna till metodDokument och mallDokument. RESURSER gäller medan en fil byggs. png ger varje bilds
@@ -2925,7 +2943,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
 // blad: vilka av ramarnas blad (bildblad()) som står efter sin ram: alla (förval), bara de ifyllda (exemplet som läraren
 // visar) eller inga. Så går modellens sida med sitt exempel att lägga i en fil (ramarDokument) och de tomma bladen i en
 // annan (bladDokument).
-function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; bank?: number[]; figurradVidFigur?: boolean; blad?: Bladurval } = {}): { barn: Flod; liggande?: boolean }[] {
+function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; bank?: number[]; figurradVidFigur?: boolean; blad?: Bladurval } = {}): { barn: Flod; liggande?: boolean; vad?: Sidvad }[] {
   const d = post.data;
   const sidor: Flod[] = [];
   const under = (namn: string) => [
@@ -3035,10 +3053,14 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
     // Ramens blad (bildblad()), var och ett på ett eget liggande A4 efter ramens sidor, i bildernas ordning. I filen med
     // allt står de redan i beskrivningen, efter sin ram.
     const adress = metodAdress(bas, post.id).replace(/^https?:\/\//, '');
-    const ramensBlad = (ram: Ram): Flod[] => (o.baraTommaRamar ? [] : bladVid(paBordet, ram.rubrik).filter((b) => bladIUrval(b, o.blad)).map((b) => { const sida = bladFlod(b, adress); bladsidor.add(sida); return sida; }));
+    const ramensBlad = (i: number, ram: Ram): Flod[] => (o.baraTommaRamar ? [] : bladVid(paBordet, ram.rubrik).filter((b) => bladIUrval(b, o.blad)).map((b) => { const sida = bladFlod(b, adress); bladsidor.add(sida); SIDANS_VAD.set(sida, { ram: i, bild: b.bild.nr }); return sida; }));
     // En rams sidor i planeringsmallarna, i ordning, med ramens blad sist. ram är ramen som den ritas: en ram vars listor
     // står vid veckorna ritas utan dem.
-    const ramensSidor = (i: number, ram: Ram): Flod[] => [...ramensEgna(i, ram), ...ramensBlad(ram)];
+    const ramensSidor = (i: number, ram: Ram): Flod[] => {
+      const egna = ramensEgna(i, ram);
+      for (const sida of egna) SIDANS_VAD.set(sida, { ram: i });
+      return [...egna, ...ramensBlad(i, ram)];
+    };
     const ramensEgna = (i: number, ram: Ram): Flod[] => {
       const ut: Flod[] = [];
       const tom = ramArTom(ram);
@@ -3197,7 +3219,7 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
   const mallsidor = o.bank ? [] : d.mallar.flatMap((m) => (m.typ === 'matta' && m.enPerSida
     ? (m.kolumner ?? []).map((k) => ({ barn: medBredd(BREDD_STAENDE, () => medElevtypsnitt(elev, () => talsortSida(m, k))), liggande: false }))
     : [{ barn: medBredd(BREDD_MALL, () => medElevtypsnitt(elev, () => (m.typ === 'serie' ? serieMallSida(m, post.id) : m.typ === 'talruta' ? talrutaSida(m) : mallSida(m)))), liggande: true }]));
-  return [...sidor.map((barn) => ({ barn })), ...blad.map((barn) => ({ barn, liggande: true })), ...mallsidor];
+  return [...sidor.map((barn) => ({ barn, vad: SIDANS_VAD.get(barn) })), ...blad.map((barn) => ({ barn, liggande: true })), ...mallsidor];
 }
 
 // Nivåerna som står på elevens blad fast läraren säger dem: fälten i rutan Till läraren som heter Nivå eller Uppgift med
@@ -4041,7 +4063,7 @@ function sidfot(adress: string, bredd: number, liten = false): Footer {
   const storlek = liten ? 15 : 18;
   return new Footer({ children: [new Paragraph({
     tabStops: [{ type: TabStopType.RIGHT, position: bredd }],
-    children: [run(`${UPPHOV} · ${adress}`, { farg: FARG.svag, storlek }), textRun({ children: [new Tab(), 'Sida ', PageNumber.CURRENT, ' av ', PageNumber.TOTAL_PAGES], color: FARG.svag, size: storlek })],
+    children: [run(`${UPPHOV} · ${adress}`, { farg: FARG.svag, storlek }), ...(FRISTAENDE_BLAD ? [] : [textRun({ children: [new Tab(), 'Sida ', PageNumber.CURRENT, ' av ', PageNumber.TOTAL_PAGES], color: FARG.svag, size: storlek })])],
     border: liten ? undefined : { top: { style: BorderStyle.SINGLE, size: 4, color: FARG.kant, space: 4 } },
     spacing: { after: 0 },
   })] });
@@ -4058,7 +4080,7 @@ function sektion(barn: Barn[], huvudtext: string, adress: string, o: { liggande?
   // niclasfohlin.se, så att raden inte ser ut som en stämpel på elevernas omslag (granskningen 2026-10-02, K-186).
   if (o.saga) {
     return {
-      properties: { page: { size: { ...A4, orientation: PageOrientation.PORTRAIT }, margin: { top: KORTMARGINAL, right: KORTMARGINAL, bottom: KORTMARGINAL, left: KORTMARGINAL, header: 280, footer: 280 } } },
+      properties: { page: { size: { ...A4, orientation: PageOrientation.PORTRAIT }, margin: { top: KORTMARGINAL, right: KORTMARGINAL, bottom: KORTMARGINAL, left: KORTMARGINAL, header: 280, footer: 280 }, ...egenRakning() } },
       headers: { default: bokHuvud(o.saga.bokblad ? SAJT : adress) },
       footers: { default: sagoFot(o.saga) },
       children: barn,
@@ -4080,7 +4102,7 @@ function sektion(barn: Barn[], huvudtext: string, adress: string, o: { liggande?
   // läraren, nivåns knapp och sidnumret i sidfoten, som hos riggen.
   if (o.bok?.fakta) {
     return {
-      properties: { titlePage: true, page: { size: { ...A4, orientation: PageOrientation.PORTRAIT }, margin: FAKTAMARGINAL } },
+      properties: { titlePage: true, page: { size: { ...A4, orientation: PageOrientation.PORTRAIT }, margin: FAKTAMARGINAL, ...egenRakning() } },
       headers: { first: faktaForsta(o.bok, adress), default: faktaHuvud(o.bok, adress) },
       footers: { first: new Footer({ children: [punktStycke()] }), default: bokFot(o.bok) },
       children: barn,
@@ -4088,7 +4110,7 @@ function sektion(barn: Barn[], huvudtext: string, adress: string, o: { liggande?
   }
   if (o.bok) {
     return {
-      properties: { page: { size: { ...A4, orientation: o.bok.liggande ? PageOrientation.LANDSCAPE : PageOrientation.PORTRAIT }, margin: o.bok.liggande ? LIGGANDE_BOK : BOKMARGINAL } },
+      properties: { page: { size: { ...A4, orientation: o.bok.liggande ? PageOrientation.LANDSCAPE : PageOrientation.PORTRAIT }, margin: o.bok.liggande ? LIGGANDE_BOK : BOKMARGINAL, ...egenRakning() } },
       headers: { default: bokHuvud(adress) },
       footers: { default: bokFot(o.bok) },
       children: barn,
@@ -4278,7 +4300,7 @@ function googleTabeller(barn: readonly unknown[]): void {
   }
 }
 // beskrivning: dokumentets beskrivning i stället för upphovet, i mätningens prov (faktatextProvDokument).
-function dokument(titel: string, sektioner: ISectionOptions[], typsnitt: { fonts?: { name: string; data: Buffer }[] } = {}, beskrivning = `${UPPHOV} · ${SAJT}`): Document {
+function dokument(titel: string, sektioner: ISectionOptions[], typsnitt: { fonts?: { name: string; data: Buffer }[] } = {}, beskrivning = `${UPPHOV} · ${SAJT}`, sidkarta?: Sidpost[]): Document {
   // Två tabeller i följd får ett stycke på en punkt emellan, som i en cell: Google lägger annars ett i normal storlek.
   // Ett avsnitt som börjar med en tabell börjar med ett sådant stycke (Google lade lathundens sida 1 14 pt lägre), och
   // ett tomt stycke sist i ett avsnitt tas bort, eftersom nästa avsnitt ändå börjar på en ny sida (sidan efter
@@ -4291,11 +4313,26 @@ function dokument(titel: string, sektioner: ISectionOptions[], typsnitt: { fonts
   const sista = sektioner.at(-1);
   if (sista && sista.children.at(-1) instanceof Table) sektioner = [...sektioner.slice(0, -1), { ...sista, children: [...sista.children, avsnittsStycke()] }];
   for (const s of sektioner) googleTabeller(s.children);
+  // Sidkartans bokmärken: det första stycket i avsnittet där varje ram och blad börjar (ett avsnitt som börjar med en
+  // tabell har fått ett stycke före den, ovan).
+  if (sidkarta) {
+    let i = 0;
+    sidkarta.forEach((post, k) => {
+      const forst = sektioner[i]?.children[0];
+      if (!(forst instanceof Paragraph)) throw new Error(`${titel}: sidkartans del ${k + 1} börjar inte med ett stycke, så den kan inte få sitt bokmärke (dokument i src/lib/metoddocx.ts).`);
+      const bokmarke = new Bookmark({ id: `sida_${k}`, children: [] });
+      forst.addRunToFront(bokmarke.end as unknown as Run);
+      forst.addRunToFront(bokmarke.start as unknown as Run);
+      i += post.s;
+    });
+  }
   return new Document({
     ...typsnitt,
     creator: 'Niclas Fohlin',
     title: titel,
     description: beskrivning,
+    // Sidkartan (se SIDANS_VAD): vilka ramar och blad filen har, i ordning, och hur många avsnitt var och en är.
+    ...(sidkarta ? { customProperties: [{ name: 'sidkarta', value: JSON.stringify(sidkarta) }] } : {}),
     // Rubrikerna som standardstilar (en definition per nivå) och svenska som dokumentspråk.
     styles: {
       default: {
@@ -4313,8 +4350,11 @@ function dokument(titel: string, sektioner: ISectionOptions[], typsnitt: { fonts
 }
 
 // En eller flera metoder i en fil, med planeringsmallarna och lathunden efter varje metod om medMallar är satt.
-export function metodDokument(poster: MetodPostISerie[], o: { bas: string; medMallar?: boolean; resurser?: MetodResurser }): Document {
+// baraMetoden: filen med bara metoden för en metod (<id>-metoden.docx), som knappen Skriv ut: Metoden öppnar som pdf. Sist
+// står en rad om var materialet finns, eftersom beskrivningen hänvisar till det (granskningen 2026-10-13).
+export function metodDokument(poster: MetodPostISerie[], o: { bas: string; medMallar?: boolean; baraMetoden?: boolean; resurser?: MetodResurser }): Document {
   instans = 0;
+  FRISTAENDE_BLAD = false;
   RESURSER = o.resurser ?? { bilder: new Map() };
   const sektioner: ISectionOptions[] = [];
   if (poster.length === 0) {
@@ -4331,7 +4371,9 @@ export function metodDokument(poster: MetodPostISerie[], o: { bas: string; medMa
   }
   for (const post of poster) {
     const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
-    sektioner.push(...delaSektioner(metodBarn(post, o.bas, { material: o.medMallar !== false }), `${post.data.titel} · ${SAJT}`, adress));
+    const flod = metodBarn(post, o.bas, { material: o.medMallar !== false });
+    if (o.baraMetoden) flod.push(stycke(`Materialet, planeringsmallarna och lathunden hör inte till den här filen. De står på ${adress} och i filen Allt om metoden.`, { farg: FARG.svag, storlek: 18, fore: 240 }));
+    sektioner.push(...delaSektioner(flod, `${post.data.titel} · ${SAJT}`, adress));
     if (o.medMallar) {
       for (const sida of mallBarn(post, o.bas, { baraTommaRamar: true })) sektioner.push(...delaSektioner(sida.barn, `Mall · ${post.data.titel} · ${SAJT}`, adress, { liggande: sida.liggande, smal: sida.liggande }));
       for (const sida of medBredd(BREDD_LATHUND, () => lathundBarn(post))) sektioner.push(sektion(sida, `Lathund · ${post.data.titel} · ${SAJT}`, `${adress}/lathund`, { lathund: true }));
@@ -4343,6 +4385,7 @@ export function metodDokument(poster: MetodPostISerie[], o: { bas: string; medMa
 // Lathunden till en metod: fyra liggande sidor.
 export function lathundDokument(post: MetodPost, o: { bas: string }): Document {
   instans = 0;
+  FRISTAENDE_BLAD = false;
   const adress = `${metodAdress(o.bas, post.id).replace(/^https?:\/\//, '')}/lathund`;
   const sidor = medBredd(BREDD_LATHUND, () => lathundBarn(post, { niva1: true }));
   if (sidor.length === 0) sidor.push([stycke(`${post.data.titel} har ingen lathund.`)]);
@@ -4350,9 +4393,26 @@ export function lathundDokument(post: MetodPost, o: { bas: string }): Document {
   return dokument(`Lathund: ${post.data.titel}`, sektioner);
 }
 
+// Passets text för sig (K-342): lathundens exempel på ett pass, eller texten till eleverna, på ett stående A4 i större
+// stil. Det är filen som knappen vid texten på lathundssidan skriver ut, som pdf (passUtskrift i src/lib/metod.ts): förut
+// skrev knappen ut en del av sidan, och nu är varje utskrift en pdf av en Word-fil (Niclas 2026-10-13).
+export function passDokument(post: MetodPost, o: { bas: string }): Document {
+  instans = 0;
+  FRISTAENDE_BLAD = false;
+  const pass = post.data.lathund!.pass;
+  const adress = `${metodAdress(o.bas, post.id).replace(/^https?:\/\//, '')}/lathund`;
+  const barn: Barn[] = [
+    stycke(pass.textRubrik, { farg: FARG.svag, storlek: 20, efter: 160 }),
+    ...(pass.titel ? [stycke(pass.titel, { fet: true, storlek: 36, efter: 200, hallIhop: true })] : []),
+    ...pass.text.map((p) => replikStycke(p, { storlek: 26, efter: 200 })),
+  ];
+  return dokument(`${post.data.titel}: ${pass.textRubrik}`, [sektion(barn, `${post.data.titel} · ${SAJT}`, adress)]);
+}
+
 // En enda sida ur lathunden i en given skala, för mätningen i Word (scripts/lathund-word.mjs).
 export function lathundProvDokument(post: MetodPost, nr: number, skala: number, o: { bas: string }): Document {
   instans = 0;
+  FRISTAENDE_BLAD = false;
   const adress = `${metodAdress(o.bas, post.id).replace(/^https?:\/\//, '')}/lathund`;
   const sidor = medBredd(BREDD_LATHUND, () => lathundBarn(post, { niva1: nr === 1, skalor: [skala, skala, skala, skala], baraSida: nr }));
   return dokument(`Lathund: ${post.data.titel}, sida ${nr}`, sidor.map((sida) => sektion(sida, '', adress, { lathund: true })));
@@ -4362,14 +4422,16 @@ export function lathundProvDokument(post: MetodPost, nr: number, skala: number, 
 // följesidorna (nivåns översikt, och för varje problem lärarens sida, problemets sida och Två lösningar).
 export function bankDokument(post: MetodPost, fil: Pick<Bankfil, 'niva' | 'medFoljesidor' | 'rubrik'>, o: { bas: string; resurser?: MetodResurser }): Document {
   instans = 0;
+  FRISTAENDE_BLAD = true;
   RESURSER = o.resurser ?? { bilder: new Map() };
   const bank = bankAv(post.data);
   if (!bank) throw new Error(`${post.data.titel} har ingen bank (src/lib/bank.ts).`);
   const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
   const sidor = mallBarn(post, o.bas, { bank: bankfilensRamar(bank, fil) });
   const huvud = `${fil.niva ? fil.niva.namn : 'Alla nivåer'} · ${post.data.titel} · ${SAJT}`;
-  const sektioner = sidor.flatMap((sida) => delaSektioner(sida.barn, huvud, adress));
-  return dokument(`${post.data.titel}: ${fil.rubrik}`, sektioner, typsnittFor([post]));
+  const karta: Sidpost[] = [];
+  const sektioner = sidor.flatMap((sida) => { const s = delaSektioner(sida.barn, huvud, adress); karta.push({ ...sida.vad, s: s.length }); return s; });
+  return dokument(`${post.data.titel}: ${fil.rubrik}`, sektioner, typsnittFor([post]), undefined, karta);
 }
 
 // En fil med bara de här ramarna, ett blad per sida som i planeringsmallarna: en nivås material eller alla nivåers
@@ -4379,11 +4441,13 @@ export function bankDokument(post: MetodPost, fil: Pick<Bankfil, 'niva' | 'medFo
 // bordet vid ramen ritas som vanligt.
 export function ramarDokument(post: MetodPost, fil: { ramar: number[]; rubrik: string; huvud: string; blad?: Bladurval }, o: { bas: string; resurser?: MetodResurser }): Document {
   instans = 0;
+  FRISTAENDE_BLAD = true;
   RESURSER = o.resurser ?? { bilder: new Map() };
   const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
   const sidor = mallBarn(post, o.bas, { bank: fil.ramar, figurradVidFigur: true, blad: fil.blad });
-  const sektioner = sidor.flatMap((sida) => delaSektioner(sida.barn, `${fil.huvud} · ${post.data.titel} · ${SAJT}`, adress));
-  return dokument(`${post.data.titel}: ${fil.rubrik}`, sektioner, typsnittFor([post]));
+  const karta: Sidpost[] = [];
+  const sektioner = sidor.flatMap((sida) => { const s = delaSektioner(sida.barn, `${fil.huvud} · ${post.data.titel} · ${SAJT}`, adress); karta.push({ ...sida.vad, s: s.length }); return s; });
+  return dokument(`${post.data.titel}: ${fil.rubrik}`, sektioner, typsnittFor([post]), undefined, karta);
 }
 
 // En fil med bara blad (bildblad()): bladen med de här numren (pabordet[].nr), i den här ordningen, ett per liggande sida
@@ -4392,6 +4456,7 @@ export function ramarDokument(post: MetodPost, fil: { ramar: number[]; rubrik: s
 // ramarDokument) står bara i dokumentets titel. Filen bär elevens typsnitt, som cellerna står i, och inget annat.
 export function bladDokument(post: MetodPost, fil: { bilder: number[]; rubrik: string; huvud: string }, o: { bas: string; resurser?: MetodResurser }): Document {
   instans = 0;
+  FRISTAENDE_BLAD = true;
   RESURSER = o.resurser ?? { bilder: new Map() };
   const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
   const alla = metodensPaBordet(post.data, post.id);
@@ -4400,10 +4465,11 @@ export function bladDokument(post: MetodPost, fil: { bilder: number[]; rubrik: s
     if (!b || !arBlad(b)) throw new Error(`${post.data.titel}: bilden På bordet ${nr} ${b ? `("${b.bild.rubrik}") är inget blad: rubriken börjar inte med "Blad: "` : 'finns inte'} (src/lib/pabordet.ts).`);
     return b;
   });
-  const sektioner = blad.flatMap((b) => delaSektioner(bladFlod(b, adress), `${fil.huvud} · ${post.data.titel} · ${SAJT}`, adress));
+  const karta: Sidpost[] = [];
+  const sektioner = blad.flatMap((b) => { const s = delaSektioner(bladFlod(b, adress), `${fil.huvud} · ${post.data.titel} · ${SAJT}`, adress); karta.push({ bild: b.bild.nr, s: s.length }); return s; });
   if (!sektioner.length) sektioner.push(sektion([stycke(`${post.data.titel} har inga blad i ${fil.rubrik}.`)], `${fil.huvud} · ${post.data.titel} · ${SAJT}`, adress));
   const elev = RESURSER.elevtypsnitt;
-  return dokument(`${post.data.titel}: ${fil.rubrik} · ${fil.huvud}`, sektioner, elev ? { fonts: [{ name: ELEVTYPSNITT, data: elev as Buffer }] } : {});
+  return dokument(`${post.data.titel}: ${fil.rubrik} · ${fil.huvud}`, sektioner, elev ? { fonts: [{ name: ELEVTYPSNITT, data: elev as Buffer }] } : {}, undefined, karta.length ? karta : undefined);
 }
 
 // Provet för mätningen av sidlåset (scripts/sidlas.mjs, src/pages/utskrift/sidlas/[fil].docx.ts): metodens alla
@@ -4413,6 +4479,7 @@ export function bladDokument(post: MetodPost, fil: { bilder: number[]; rubrik: s
 // (faktatextensBorjan), så att regeln om vad som är en del står på ett ställe, faktatextAv i src/lib/ramform.ts.
 export function faktatextProvDokument(post: MetodPost, o: { bas: string; last: boolean; resurser?: MetodResurser }): Document {
   instans = 0;
+  FRISTAENDE_BLAD = false;
   RESURSER = o.resurser ?? { bilder: new Map() };
   const d = post.data;
   const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
@@ -4432,6 +4499,7 @@ export function faktatextProvDokument(post: MetodPost, o: { bas: string; last: b
 // Bara mallarna till en metod.
 export function mallDokument(post: MetodPost, o: { bas: string; resurser?: MetodResurser }): Document {
   instans = 0;
+  FRISTAENDE_BLAD = false;
   RESURSER = o.resurser ?? { bilder: new Map() };
   const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
   const sidor = mallBarn(post, o.bas);

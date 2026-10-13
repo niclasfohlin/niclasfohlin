@@ -45,6 +45,7 @@ import { metodensNivamaterial } from '../lib/nivamaterial';
 import { metodensBladmaterial, bladKort, bladRubrik, bladsidaAdress, ledSida, type Bladrad } from '../lib/bladmaterial';
 import { ovrigtfil } from '../lib/ovrigt';
 import { sidlasFor } from '../lib/sidlas';
+import { enhetensUtskrifter, radensUtskrifter, utskriftAdress } from '../lib/utskrift';
 import Bladgrupp from './Bladgrupp.astro';
 import Filval from './Filval.astro';
 import Pabordet from './Pabordet.astro';
@@ -929,11 +930,13 @@ const meny = [
         // veckans blad går att skriva ut med ett tryck (Niclas 2026-10-13: modellerna på egna sidor "likt texterna").
         if (bladenhet) {
           const stat = (vad: string) => ({ 'data-goatcounter-click': `utskrift:${id}/${bladenhet.slug}`, 'data-goatcounter-title': `${d.titel}: ${bladenhet.namn}, ${vad}` });
+          // Knapparna öppnar pdf:erna som klipps ur ramens filer (src/lib/utskrift.ts, SkrivUtPdf.astro).
+          const pdf = radensUtskrifter(d, id, bladgrupp!, bladenhet);
           return (<>
             <div class="enhet-blad" data-blad={`ram-${ri + 1}`} id={`blad-${ri + 1}`}>
               <div class="enhet-bladhuvud">
                 <h2>{ledSida(bladgrupp!)}</h2>
-                <button type="button" class="knapp sekundar liten bara-js" data-skriv-ut-blad={`ram-${ri + 1}`} data-sidor-hogst="2" {...stat('sidan')}>Skriv ut sidan</button>
+                <a class="knapp sekundar liten" href={utskriftAdress(pdf.sidan)} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="2" data-direkt="Skriv ut sidan" {...stat('sidan')}>Sidan som pdf</a>
               </div>
               {innehall}
             </div>
@@ -941,7 +944,7 @@ const meny = [
               <div class="enhet-blad" data-blad={`bild-${b.bild.nr}`} id={`bild-${b.bild.nr}`}>
                 <div class="enhet-bladhuvud">
                   <h2>{bladRubrik(bladenhet, b)}</h2>
-                  <button type="button" class="knapp sekundar liten bara-js" data-skriv-ut-blad={`bild-${b.bild.nr}`} data-liggande {...stat(bladKort(bladenhet, b).toLowerCase())}>Skriv ut {bladKort(bladenhet, b).toLowerCase()}</button>
+                  <a class="knapp sekundar liten" href={utskriftAdress(pdf.blad.get(b.bild.nr)!)} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande data-sidor-hogst="1" data-direkt={`Skriv ut ${bladKort(bladenhet, b).toLowerCase()}`} {...stat(bladKort(bladenhet, b).toLowerCase())}>{bladKort(bladenhet, b)} som pdf</a>
                 </div>
                 <Pabordet b={b} utanRubrik />
               </div>
@@ -955,11 +958,13 @@ const meny = [
         // En faktatext är två till sex sidor, och lärarens sida till den en eller två: knappen säger det, så att provet av
         // utskriften inte kräver en sida (scripts/utskriftsformat.mjs).
         const sidorHogst = enhet.l.faktatext ? (ri === enhet.ri ? 6 : 2) : undefined;
+        // Knappen öppnar pdf:en som klipps ur nivåns fil (src/lib/utskrift.ts, SkrivUtPdf.astro).
+        const pdf = enhetensUtskrifter(d, id, banken!, enhet).ramar.get(ri)!;
         return (
           <div class="enhet-blad" data-blad={`ram-${ri + 1}`} id={`blad-${ri + 1}`}>
             <div class="enhet-bladhuvud">
               <h2>{namn}</h2>
-              <button type="button" class="knapp sekundar liten bara-js" data-skriv-ut-blad={`ram-${ri + 1}`} data-sidor-hogst={sidorHogst} data-goatcounter-click={`utskrift:${id}/${enhet.slug}`} data-goatcounter-title={`${d.titel}: ${enhet.l.niva}, ${enhet.l.vad}, ${iMening}`}>Skriv ut {iMening}</button>
+              <a class="knapp sekundar liten" href={utskriftAdress(pdf)} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst={sidorHogst ?? 1} data-direkt={`Skriv ut ${iMening}`} data-goatcounter-click={`utskrift:${id}/${enhet.slug}`} data-goatcounter-title={`${d.titel}: ${enhet.l.niva}, ${enhet.l.vad}, ${iMening}`}>{namn} som pdf</a>
             </div>
             {innehall}
           </div>

@@ -15,6 +15,7 @@ import type { Bladmaterial } from '../lib/bladmaterial';
 import type { Ovrigtfil } from '../lib/ovrigt';
 import type { Nivamaterial } from '../lib/nivamaterial';
 import type { Bank } from '../lib/bank';
+import SkrivUtPdf from './SkrivUtPdf.astro';
 // ramar: namnet på metodens ramar (läslistorna, berättelseramarna) när de ligger i planeringsmallarna, så att knappen säger det.
 // Har namnet ett och i sig (böckerna och materialet) står det efter ett komma, så att raden inte får två och.
 // titel: metodens titel, för besöksstatistiken ("Upprepad läsning: lathunden som pdf").
@@ -27,8 +28,9 @@ import type { Bank } from '../lib/bank';
 // bankens (Bladfiler.astro).
 // ovrigt: filen med det material som inte står på något av de ställena (src/lib/ovrigt.ts, fältet ramar.ovrigt), under
 // metodens eget namn för det, som Bladen och korten. Rutans tabeller följer då de delar metoden säger att materialet har.
-interface Props { id: string; titel: string; harMallar: boolean; harLathund: boolean; ramar?: string; filmer?: number; bank?: Bank; farger?: Record<string, string>; nivamaterial?: Nivamaterial; bladmaterial?: Bladmaterial; ovrigt?: Ovrigtfil }
-const { id, titel, harMallar, harLathund, ramar, filmer = 0, bank, farger = {}, nivamaterial, bladmaterial, ovrigt } = Astro.props;
+// harMaterial: metoden har material (src/lib/material.ts), och då finns knappen Metoden och filen med bara metoden.
+interface Props { id: string; titel: string; harMallar: boolean; harLathund: boolean; harMaterial: boolean; ramar?: string; filmer?: number; bank?: Bank; farger?: Record<string, string>; nivamaterial?: Nivamaterial; bladmaterial?: Bladmaterial; ovrigt?: Ovrigtfil }
+const { id, titel, harMallar, harLathund, harMaterial, ramar, filmer = 0, bank, farger = {}, nivamaterial, bladmaterial, ovrigt } = Astro.props;
 const filmord = filmer === 1 ? 'filmen' : 'filmerna';
 // Rutan har bara rubriker och knappar (Niclas 2026-10-10: "rensa text som inte behövs eller förklarar sig själv med bara
 // knapparna och rubriker"): ingen mening om lathunden och inget stycke under knapparna. Det knapparna gör står i deras
@@ -44,18 +46,22 @@ const skrivareSvg = '<svg aria-hidden="true" viewBox="0 0 20 20" width="16" heig
     </ul>
   )}
   <ul class="filrader">
-    {/* Skriv ut: Allt är hela sidan, och Metoden sidan utan metodens material (data-material i Metod.astro; Niclas
-        2026-10-10: "Skriv ut: Hela metoden (allt), Bara metodbeskrivningen", och 2026-10-12 om knappens namn, som först var
-        Bara beskrivningen: "Så det blir Allt och Metoden?"). Stilmallen visar knappen Metoden
-        bara när sidan har material, så att gränsen står på ett ställe och en ny metod får knapparna utan eget arbete. */}
-    <li class="bara-js">
+    {/* Skriv ut: Allt är Word-filen med allt som pdf, och Metoden Word-filen med bara metoden, utan metodens material
+        (src/lib/material.ts; Niclas 2026-10-10: "Skriv ut: Hela metoden (allt), Bara metodbeskrivningen", och 2026-10-12
+        om knappens namn: "Så det blir Allt och Metoden?"). Knapparna är länkar till pdf:erna (SkrivUtPdf.astro; Niclas
+        2026-10-13: ett system för utskriftsknapparna, som alltid blir 1:1 med Word-filen). Metoden finns bara när
+        metoden har material att lämna utanför. Raden visas bara där knappen ger utskriftsrutan (SkrivUtPdf.astro): annars
+        gjorde den samma sak som Pdf på raden under. */}
+    <li data-bara-direkt hidden>
       <span class="filrubrik" id={`skriv-ut-${id}`}>Skriv ut</span>{' '}
       <span class="filval" role="group" aria-labelledby={`skriv-ut-${id}`}>
-        <button type="button" data-skriv-ut="allt" data-goatcounter-click={`utskrift:${id}`} data-goatcounter-title={`${titel}: utskrift av allt`}><Fragment set:html={skrivareSvg} /><span class="visually-hidden">Skriv ut </span><span class="skriv-ut-namn">Allt</span></button>
-        <button type="button" data-skriv-ut="beskrivning" data-goatcounter-click={`utskrift:${id}:beskrivning`} data-goatcounter-title={`${titel}: utskrift av beskrivningen`}><Fragment set:html={skrivareSvg} /><span class="visually-hidden">Skriv ut </span><span class="skriv-ut-namn">Metoden</span></button>
+        <a href={`${bas}.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf="allt" title="Word-filen med allt som pdf" data-goatcounter-click={`utskrift:${id}`} data-goatcounter-title={`${titel}: utskrift av allt`}><Fragment set:html={skrivareSvg} /><span class="skriv-ut-namn">Allt</span></a>
+        {harMaterial && <a href={`${bas}-metoden.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf="metoden" title="Word-filen med bara metoden som pdf" data-goatcounter-click={`utskrift:${id}:beskrivning`} data-goatcounter-title={`${titel}: utskrift av beskrivningen`}><Fragment set:html={skrivareSvg} /><span class="skriv-ut-namn">Metoden</span></a>}
       </span>
     </li>
-    <li><span class="filrubrik">Allt om metoden</span> <Filval fil={bas} namn={id} rubrik="Allt om metoden" statistik={`${titel}: allt om metoden`} /></li>
+    <li><span class="filrubrik">Allt om metoden</span> <Filval fil={bas} namn={id} rubrik="Allt om metoden" statistik={`${titel}: allt om metoden`} pdf pdfTitel="Ladda ner som pdf" /></li>
+    {/* Bara metoden: Word-filen utan metodens material, samma fil som knappen Metoden skriver ut (METODER.md under Utskriften). */}
+    {harMaterial && <li><span class="filrubrik">Bara metoden</span> <Filval fil={`${bas}-metoden`} namn={`${id}-metoden`} rubrik="Bara metoden" statistik={`${titel}: bara metoden`} pdf pdfTitel="Ladda ner som pdf" /></li>}
     {harLathund && <li><span class="filrubrik">Bara lathunden</span> <Filval fil={`${bas}-lathund`} namn={`${id}-lathund`} rubrik="Lathunden" statistik={`${titel}: lathunden`} pdf pptx /></li>}
     {harMallar && <li><span class="filrubrik">Bara planeringsmallarna{ramar && (ramar.includes(' och ') ? `, ${ramar}` : ` och ${ramar}`)}</span> <Filval fil={`${bas}-mallar`} namn={`${id}-mallar`} rubrik="Planeringsmallarna" statistik={`${titel}: planeringsmallarna`} /></li>}
     {filmer > 0 && (
@@ -81,34 +87,13 @@ const skrivareSvg = '<svg aria-hidden="true" viewBox="0 0 20 20" width="16" heig
   )}
 </aside>
 
+<SkrivUtPdf />
+
 <script>
-  // Utskriftsknapparna visas bara när html har klassen js; utan JavaScript skriver läsaren ut som vanligt.
-  // Bilder som bara står i utskriften (filmens stillbilder, Filmbilder.astro, bankens blad, Bank.astro) hämtas först nu:
-  // knappen väntar in dem, högst tjugo sekunder, och säger under tiden hur många som är kvar (granskningen 2026-10-10: en
-  // bank har ett hundratal bilder). Den som skriver ut med webbläsarens meny får dem hämtade när utskriften börjar.
-  const utskriftsbilder = () => [...document.querySelectorAll<HTMLImageElement>('img[data-utskriftsbild]')];
-  // Utskriften Metoden: sidan utan metodens material (data-material i Metod.astro, global.css), och bilderna där hämtas inte.
-  const DOLT = '[data-material]';
-  const hamta = () => Promise.all(utskriftsbilder().filter((b) => document.documentElement.dataset.utskrift !== 'beskrivning' || !b.closest(DOLT)).map((b) => {
-    b.loading = 'eager';
-    return b.naturalWidth > 0 ? undefined : new Promise((klar) => { b.addEventListener('load', klar, { once: true }); b.addEventListener('error', klar, { once: true }); });
-  }));
-  window.addEventListener('beforeprint', () => { hamta(); });
-  window.addEventListener('afterprint', () => { delete document.documentElement.dataset.utskrift; });
-  for (const knapp of document.querySelectorAll<HTMLButtonElement>('[data-skriv-ut]')) {
-    knapp.addEventListener('click', async () => {
-      if (knapp.dataset.skrivUt === 'beskrivning') document.documentElement.dataset.utskrift = 'beskrivning';
-      else delete document.documentElement.dataset.utskrift;
-      const namn = knapp.querySelector<HTMLElement>('.skriv-ut-namn');
-      const forut = namn?.textContent ?? '';
-      const kvar = () => utskriftsbilder().filter((b) => b.naturalWidth === 0 && (document.documentElement.dataset.utskrift !== 'beskrivning' || !b.closest(DOLT))).length;
-      knapp.setAttribute('aria-busy', 'true');
-      const visa = window.setInterval(() => { const n = kvar(); if (namn && n) namn.textContent = `Hämtar bilder, ${n} kvar`; }, 250);
-      await Promise.race([hamta(), new Promise((klar) => setTimeout(klar, 20000))]);
-      window.clearInterval(visa);
-      if (namn) namn.textContent = forut;
-      knapp.removeAttribute('aria-busy');
-      window.print();
-    });
-  }
+  // Den som skriver ut sidan med webbläsarens egen meny får bilderna som bara står i utskriften hämtade när utskriften
+  // börjar (filmens stillbilder, Filmbilder.astro, bankens blad, Bank.astro). Knapparna i rutan skriver inte ut sidan:
+  // de öppnar Word-filens pdf (SkrivUtPdf.astro).
+  window.addEventListener('beforeprint', () => {
+    for (const b of document.querySelectorAll<HTMLImageElement>('img[data-utskriftsbild]')) b.loading = 'eager';
+  });
 </script>
