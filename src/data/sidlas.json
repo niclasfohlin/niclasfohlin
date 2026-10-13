@@ -1,0 +1,61 @@
+{
+  "faktatextsamtal-i-grupp": {
+    "kalla": "a989387f1a49a78a",
+    "datum": "2026-10-13",
+    "las": {
+      "Bas, text 1: Vattenplaneten": [
+        3,
+        6
+      ],
+      "Bas, text 2: Från sjö till kran": [],
+      "Bas, text 3: Snö och hagel": [
+        5
+      ],
+      "Bas, text 4: Därför flyter is": [
+        2
+      ],
+      "Bas, text 5: En kran åt alla": [
+        2,
+        5
+      ],
+      "Medel, text 1: Solens familj": [
+        5
+      ],
+      "Medel, text 2: Vägen ut i rymden": [
+        2
+      ],
+      "Medel, text 3: Jorden och Mars": [
+        2,
+        7
+      ],
+      "Medel, text 4: Därför blir det sommar": [
+        7
+      ],
+      "Medel, text 5: Skräpet runt jorden": [
+        2,
+        7
+      ],
+      "Avancerat, text 1: Kroppens försvar": [
+        6,
+        8
+      ],
+      "Avancerat, text 2: Sjukdomen som försvann": [
+        3,
+        5,
+        7
+      ],
+      "Avancerat, text 3: Virus och bakterier": [
+        1,
+        6,
+        8
+      ],
+      "Avancerat, text 4: När medicinen sviker": [
+        6
+      ],
+      "Avancerat, text 5: Gåtan på sjukhuset": [
+        1,
+        7
+      ]
+    }
+  }
+}

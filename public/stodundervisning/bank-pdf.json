@@ -138,5 +138,152 @@
     "sidor": 2,
     "kB": 341,
     "datum": "2026-10-12"
+  },
+  "faktatextsamtal-i-grupp-modellerna-alla-blad": {
+    "word": "6cc49cdd36e43373b65654376868c217e7e33c235c0429989b91e6889c7e41fb",
+    "pdf": "be7228b67683e9b8cc719836b22844ab4955ae3c246fa660c093260fe11e2115",
+    "sidor": 15,
+    "kB": 386,
+    "datum": "2026-10-13"
+  },
+  "faktatextsamtal-i-grupp-modellerna-alla-sidor": {
+    "word": "ba51424b5728562716b8c98ceb59db284448e7e5fb8f3d6f71b5b274eb04078f",
+    "pdf": "42ad9fae33e90354e9d83713de9afa1cc336350726d202bf9671350b6903a195",
+    "sidor": 10,
+    "kB": 492,
+    "datum": "2026-10-13"
+  },
+  "faktatextsamtal-i-grupp-modellerna-tankekartan-blad": {
+    "word": "80463844ae15353eb752c75fa4e36aa4e86626d8765e54fd20750f75ddd11693",
+    "pdf": "e534a1252dd2ff3edbe4e5cf43f59aa5deee6e36bbe766e3a2e47927828dcebb",
+    "sidor": 3,
+    "kB": 152,
+    "datum": "2026-10-13"
+  },
+  "faktatextsamtal-i-grupp-modellerna-tankekartan-sidor": {
+    "word": "c47f51c7d5e2d07118d3e7fbb5931bc5836cfbf94c39720876fdbb23bea529f2",
+    "pdf": "2bd9bfa84ab7cf1e232c8423d44a1ce4533b8273556f5fdb7e5e59815f9ead3f",
+    "sidor": 2,
+    "kB": 305,
+    "datum": "2026-10-13"
+  },
+  "faktatextsamtal-i-grupp-modellerna-tidslinjen-blad": {
+    "word": "add96b78b160f5e83d6d24bf567fe175ed1344db84ba118f84b1d4ec6a8d7b2f",
+    "pdf": "ea8f3b75433c752671b3f29ad752d6a81024b1fd25925aee038d9724d21f8e0f",
+    "sidor": 3,
+    "kB": 162,
+    "datum": "2026-10-13"
+  },
+  "faktatextsamtal-i-grupp-modellerna-tidslinjen-sidor": {
+    "word": "9526443230c00ba40d0209eec549c2d5016597286cac7939e539073feeb1c2ca",
+    "pdf": "ceedd10cc8851096e228e241c2c54bddf37ec011b20296fe491aa3be4cd39a39",
+    "sidor": 2,
+    "kB": 304,
+    "datum": "2026-10-13"
+  },
+  "faktatextsamtal-i-grupp-modellerna-venndiagrammet-blad": {
+    "word": "bd3d178bac6071b459f79ed7baa086f1376860463aaadf41b279ff9379cb3792",
+    "pdf": "6ba61b292a2cac05ae4dd805006bba50bfd2fca031ff8b863616803b033cf4c8",
+    "sidor": 3,
+    "kB": 160,
+    "datum": "2026-10-13"
+  },
+  "faktatextsamtal-i-grupp-modellerna-venndiagrammet-sidor": {
+    "word": "2d9e70bd7a8b344fe1705ff192417ffee7f904d6aeda677ba619c5c5a957d32b",
+    "pdf": "8311044e251069320a530874f36d66819ce30c3be4aa5d8889744f1237b7c9dc",
+    "sidor": 2,
+    "kB": 305,
+    "datum": "2026-10-13"
+  },
+  "faktatextsamtal-i-grupp-modellerna-kedjan-blad": {
+    "word": "5c262a4be707ea3888ffc9cbab35cba7b577f03414a179eea5bc22dc894b8aec",
+    "pdf": "bda85835961a494469d77c855c4bf2c5edaa71a6ca9461ca614286eac5829fa2",
+    "sidor": 3,
+    "kB": 147,
+    "datum": "2026-10-13"
+  },
+  "faktatextsamtal-i-grupp-modellerna-kedjan-sidor": {
+    "word": "04c57193db29c066b8d48cfeaed74a49038cb10d3c6b207220137b39f4bdb7dc",
+    "pdf": "980958c28e6a85f6648c37064c2e00d6bda4e7be795a383ee7aff533b47fee2f",
+    "sidor": 2,
+    "kB": 306,
+    "datum": "2026-10-13"
+  },
+  "faktatextsamtal-i-grupp-modellerna-problem-och-losning-blad": {
+    "word": "3b4dd8d51e78a2be5623b4b6d5852370c20174280dc41fec947bf7cb0846240e",
+    "pdf": "1325c56c56dc8a5756ff9d7f4c148ed0f2fe3df783446043fee2e559b09defd9",
+    "sidor": 3,
+    "kB": 171,
+    "datum": "2026-10-13"
+  },
+  "faktatextsamtal-i-grupp-modellerna-problem-och-losning-sidor": {
+    "word": "2bb6806ec6718e730f76b0f585f78de69db017ec16e26dc0403b0bf492f31c9b",
+    "pdf": "939d125db0437950602c7c42bd19cd0625272ecc60f87bf8d23ec8f48cfbd179",
+    "sidor": 2,
+    "kB": 314,
+    "datum": "2026-10-13"
+  },
+  "faktatextsamtal-i-grupp-bladen-och-korten": {
+    "word": "0db687c0a345ee6639f34c259b63a693f376a8449410f71c004738ba7f4b2fee",
+    "pdf": "316f4c0d1b326de6c5bd065c71bb17d1025264ca8e659a2ccc327a3e73bd74b1",
+    "sidor": 14,
+    "kB": 402,
+    "datum": "2026-10-13"
+  },
+  "faktatextsamtal-i-grupp-texter-alla": {
+    "word": "c3337d64a71ce964dffa18d345a1f8d8ee5b80c096167bccf49ec465892132e5",
+    "pdf": "ec4ca0ddd6f993f3a9f6ef4faf92a19aca6d2b43cdd85cf993ed6a07909b7ee4",
+    "sidor": 60,
+    "kB": 782,
+    "datum": "2026-10-13"
+  },
+  "faktatextsamtal-i-grupp-lararens-sidor-alla": {
+    "word": "911bb9c334dec217eb54cc254c6a5a6c106d89792d7079640ee60d6b321d7d03",
+    "pdf": "87973547ec49308f4134aad934912b5c35f7c58a834176308920a9a49230f318",
+    "sidor": 30,
+    "kB": 1161,
+    "datum": "2026-10-13"
+  },
+  "faktatextsamtal-i-grupp-texter-bas": {
+    "word": "97fd70b0dfb433362f94c2b0e0ba26d87fb9357dc89fcd3e22447d30a92370f4",
+    "pdf": "851dd6b3222891c84df03c5522c7d65d198c0fbc7fcab0d1a8840eea21ae52f7",
+    "sidor": 15,
+    "kB": 313,
+    "datum": "2026-10-13"
+  },
+  "faktatextsamtal-i-grupp-lararens-sidor-bas": {
+    "word": "44b05d1f7fa4312138025ca02e0503318dccfc8960fec8355080c2a9914202c3",
+    "pdf": "c42280d20f83611eddebe697530e728891ad51b46005aacd556ec0ff8d872b9e",
+    "sidor": 10,
+    "kB": 532,
+    "datum": "2026-10-13"
+  },
+  "faktatextsamtal-i-grupp-texter-medel": {
+    "word": "d1fc5ee1a0d5e4b89469aa39dc8742b221f77afc9d923901bde6c68547389394",
+    "pdf": "e05823bf304600a3601a8acc419d765912dc87ec0c06985f6f4e4013f16a040f",
+    "sidor": 20,
+    "kB": 348,
+    "datum": "2026-10-13"
+  },
+  "faktatextsamtal-i-grupp-lararens-sidor-medel": {
+    "word": "c184f7b4188b6cd9357060c1d10552017a014bda6bf4ead4261927c545280624",
+    "pdf": "8f28fa7ad82d76da88ae9fdaee72273d38eecc23c7040aaff1e16b5478fb92a2",
+    "sidor": 10,
+    "kB": 608,
+    "datum": "2026-10-13"
+  },
+  "faktatextsamtal-i-grupp-texter-avancerat": {
+    "word": "5b270eaf513c712d6b4860c76f9d2bfd9d44306a088153e90ab49b29d7dd07fe",
+    "pdf": "bb79f7ee15e13e48b994428376ea3bfa19956f189e56d5c48e3ba0ad20e40fad",
+    "sidor": 25,
+    "kB": 386,
+    "datum": "2026-10-13"
+  },
+  "faktatextsamtal-i-grupp-lararens-sidor-avancerat": {
+    "word": "b3097bbef697ee20797b6300294d9225cfc3665efc797aee68f1305630badb7d",
+    "pdf": "281db05ba0e00dfb934024c9e694f20efc10c50758f9c42e042c676986bd807a",
+    "sidor": 10,
+    "kB": 575,
+    "datum": "2026-10-13"
   }
 }
