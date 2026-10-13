@@ -37,7 +37,11 @@
       "Bash(rm:*)",
       "Bash(touch:*)",
       "Bash(date:*)",
-      "Bash(sleep:*)"
+      "Bash(sleep:*)",
+      "Bash(python:*)",
+      "Bash(pdftoppm:*)",
+      "Bash(pdfinfo:*)",
+      "Bash(file:*)"
     ],
     "ask": [
       "Bash(gh repo delete:*)",
