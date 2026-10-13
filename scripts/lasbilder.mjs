@@ -13,11 +13,14 @@ import sharp from 'sharp';
 
 const rot = join(dirname(fileURLToPath(import.meta.url)), '..');
 
-/** Delar metodens skärmbilder i läsbitar och returnerar bitarnas sökvägar, datorn och telefonen för sig. */
-export async function lasbilder(id) {
-  const prov = join(rot, 'underlag', 'prov', id);
-  const ut = { desktop: [], mobil: [] };
-  for (const [slag, hojd, mappnamn] of [['desktop', 1700, 'lasbilder'], ['mobil', 2600, 'lasbilder-mobil']]) {
+const SLAG = [['desktop', 1700, 'lasbilder'], ['mobil', 2600, 'lasbilder-mobil']];
+
+/** Delar metodens skärmbilder i läsbitar och returnerar bitarnas sökvägar, datorn och telefonen för sig. prov: mappen med
+ * skärmbilderna, annars metodens mapp i underlag/prov/. slagen: bildernas förled, bitarnas höjd och mappen de hamnar i;
+ * scripts/forhandsbilder.mjs delar också lathundssidans bilder. */
+export async function lasbilder(id, prov = join(rot, 'underlag', 'prov', id), slagen = SLAG) {
+  const ut = Object.fromEntries(slagen.map(([slag]) => [slag, []]));
+  for (const [slag, hojd, mappnamn] of slagen) {
     const nr = (f) => Number(f.match(/-(\d+)\.png$/)?.[1] ?? 0);
     const kallor = existsSync(prov) ? readdirSync(prov).filter((f) => new RegExp(`^${slag}(-\\d+)?\\.png$`).test(f)).sort((a, b) => nr(a) - nr(b)) : [];
     const mapp = join(prov, mappnamn);

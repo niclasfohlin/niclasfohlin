@@ -17,6 +17,7 @@ Windows 11, Node 24 lokalt (Netlify bygger med 22.12), Git Bash som skal i Claud
 | `scripts/pptx-till-pdf.ps1` | repot, kräver PowerPoint | pptx eller odp till pdf via COM |
 | Chrome headless | `C:\Program Files\Google\Chrome\Application\chrome.exe` | utskrift till pdf, Lighthouse |
 | `node scripts/skarmbild.mjs` | repot | en skärmbild via CDP med riktig mobilemulering |
+| `node scripts/forhandsbilder.mjs <metodfil>` | repot, körs av metodriggen | metodens sida som läsbitar före leveransen, ur en kopia av main i en tillfällig mapp (METODER.md under Metodriggen) |
 | `node scripts/skarmbilder.mjs` | repot | sajtens viktigaste sidor på desktop och mobil ur dist, till underlag/prov/sajt/ |
 | `node_modules/wordparitet/ps/word-pdf.ps1 <docx> [<pdf>]` | repot, kräver Word | docx till pdf via COM, sedan `pdftoppm -r 40 -png` för en bild per sida; skriver sidantalet |
 | `scripts/word-sidor.ps1 <docx…>` | repot, kräver Word | bara sidantal |
