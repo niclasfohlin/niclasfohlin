@@ -1,0 +1,125 @@
+---
+// En faktatext som sidor i en faktabok (Faktatextsamtal i grupp, metodriggens TILL-SAJTEN 2026-10-13, Det nya punkt 1;
+// Niclas 2026-10-12: faktatexterna ska "se ut som riktiga texter och utifrån åldern på eleverna. Med faktarutor, riktiga
+// förklarande bilder och texter", och "Se till att det ser modernt ut i sin design"), som i Word (faktatext() i
+// src/lib/metoddocx.ts) och ett till ett med metodriggen: etiketten och titeln i Anton, ett kort tjockt streck i nivåns
+// färg, ingressen med Siffran bredvid, avsnitten med numret på en bricka, ordförklaringarna och faktarutan bredvid sitt
+// avsnitt, bilderna i full bredd med bildtexten efter en fyrkant, fördjupningen på en tonad platta, den gula rutan
+// Visste du att och sist Läs mer. Texten står i elevens typsnitt. Regeln som känner igen texten står i
+// src/lib/ramform.ts (faktatextAv).
+// På en bred skärm och i utskriften står marginalen bredvid textspalten, som i Word. I telefonen finns ingen marginal:
+// det som hör till avsnittet (orden, Siffran och faktarutan) står då direkt efter avsnittets text, i den ordningen.
+// Ramens text är etiketten, och rutan Till läraren står sist med nivåns knapp, som på boksidan. Rubriken säger nivån
+// och texten för skärmläsare, som ramens rubrik gör.
+import type { Faktatext, Faktadel } from '../lib/ramform';
+import { bildensAlt, type PaBordet } from '../lib/pabordet';
+interface Props {
+  f: Faktatext;
+  /** Ramens ankare (ram-1 …) och rubrikens, som länkarna till ramarna pekar på. */
+  id: string;
+  ankare: string;
+  /** Nivåns färg. */
+  farg: string;
+  /** Ramens rubrik och bilderna På bordet som står vid ramen: platsen "Bild: <namn>" får bilden med det namnet. */
+  rubrik: string;
+  bilder: PaBordet[];
+  /** Sidlåset (src/lib/sidlas.ts): delarna som Word börjar en ny sida med. Utskriften bryter sidan före dem. */
+  las?: number[];
+}
+const { f, id, ankare, farg, rubrik, bilder, las = [] } = Astro.props;
+// Fet stil kring ordet som förklaras, första gången det står (**ord**), och kursiv (*ord*), som bokRuns i Word.
+type Bit = { text: string; fet?: boolean; kursiv?: boolean };
+const bitar = (r: string): Bit[] => {
+  const ut: Bit[] = [];
+  let sist = 0;
+  for (const m of r.matchAll(/\*\*[^*]+\*\*|\*[^*]+\*/g)) {
+    if (m.index! > sist) ut.push({ text: r.slice(sist, m.index) });
+    ut.push(m[0].startsWith('**') ? { text: m[0].slice(2, -2), fet: true } : { text: m[0].slice(1, -1), kursiv: true });
+    sist = m.index! + m[0].length;
+  }
+  if (sist < r.length) ut.push({ text: r.slice(sist) });
+  return ut;
+};
+const bildVid = (namn: string) => {
+  const b = bilder.find((x) => x.bild.rubrik === namn);
+  if (!b) throw new Error(`Faktatexten "${rubrik}": platsen "Bild: ${namn}" har ingen bild På bordet med rubriken "${namn}" och efter "ram: ${rubrik}".`);
+  return b;
+};
+// Länkens synliga text är domänen, som i Word: adressen är lång, och eleven ska se vart länken leder.
+const doman = (adress: string) => adress.replace(/^https?:\/\/(www\.)?/, '').replace(/\/.*$/, '');
+type Avsnitt = Extract<Faktadel, { slag: 'avsnitt' | 'fordjupning' }>;
+const harMarginal = (d: Avsnitt) => !!(d.siffran || d.fakta || d.ord?.length);
+---
+<section class="m-ram faktatext" id={id} style={`--fakta-niva: ${farg}`}>
+  <div class="fakta-sidor">
+    <header class="fakta-huvud">
+      {f.etikett && <p class="fakta-etikett"><span>{f.etikett}</span></p>}
+      <h3 id={ankare} class="fakta-titel"><span class="visually-hidden">{f.niva}, {f.vad}: </span>{f.titel}</h3>
+      <div class:list={['fakta-spalter', { 'med-marginal': !!f.siffran }]}>
+        <div class="fakta-ingress">{f.ingress.map((s) => <p>{bitar(s).map((x) => (x.fet ? <strong>{x.text}</strong> : x.kursiv ? <em>{x.text}</em> : x.text))}</p>)}</div>
+        {f.siffran && (
+          <aside class="fakta-marginal">
+            <div class="fakta-siffran"><p class="fakta-marg-etikett">Siffran</p><p class="fakta-tal">{f.siffran[0]}</p><p>{f.siffran[1]}</p></div>
+          </aside>
+        )}
+      </div>
+    </header>
+    {f.delar.map((d, di) => {
+      if (d.slag === 'avsnitt' || d.slag === 'fordjupning') return (
+        <section class:list={['fakta-avsnitt', { 'fakta-platta': d.slag === 'fordjupning', 'fakta-ny-sida': las.includes(di) }]}>
+          {d.slag === 'fordjupning' && <p class="fakta-etikett"><span>Fördjupning</span></p>}
+          <h4 class="fakta-mellanrubrik">{d.slag === 'avsnitt' && <><span class="fakta-nr">{d.nr}</span>{' '}</>}{d.rubrik}</h4>
+          <div class:list={['fakta-spalter', { 'med-marginal': harMarginal(d) }]}>
+            <div class="fakta-text">{d.stycken.map((s) => <p>{bitar(s).map((x) => (x.fet ? <strong>{x.text}</strong> : x.kursiv ? <em>{x.text}</em> : x.text))}</p>)}</div>
+            {harMarginal(d) && (
+              <aside class="fakta-marginal">
+                {d.siffran && <div class="fakta-siffran"><p class="fakta-marg-etikett">Siffran</p><p class="fakta-tal">{d.siffran[0]}</p><p>{d.siffran[1]}</p></div>}
+                {d.fakta && (
+                  <div class="fakta-margfakta">
+                    <p class="fakta-marg-etikett">Fakta</p>
+                    <p class="fakta-margrubrik">{d.fakta.rubrik}</p>
+                    <dl>{d.fakta.rader.map((r) => (r.length > 1 ? <div><dt>{r[0]}</dt><dd>{r[1]}</dd></div> : <div><dd>{r[0]}</dd></div>))}</dl>
+                  </div>
+                )}
+                {d.ord?.length && (
+                  <div class="fakta-ord">
+                    <p class="fakta-marg-etikett">Ord i texten</p>
+                    <dl>{d.ord.map(([o, forklaring]) => <div><dt>{o}</dt><dd>{forklaring}</dd></div>)}</dl>
+                  </div>
+                )}
+              </aside>
+            )}
+          </div>
+        </section>
+      );
+      if (d.slag === 'bild') {
+        const b = bildVid(d.namn);
+        return (
+          <figure class:list={['fakta-bild', { 'fakta-ny-sida': las.includes(di) }]}>
+            <a href={b.adress} class="bild-lank" title="Öppna bilden i full storlek"><img src={b.adress} alt={bildensAlt(b)} width={b.matt.bredd} height={b.matt.hojd} loading="lazy" decoding="async" data-utskriftsbild /></a>
+            <figcaption>{d.text}</figcaption>
+          </figure>
+        );
+      }
+      if (d.slag === 'fakta') return (
+        <aside class:list={['fakta-ruta', { 'fakta-ny-sida': las.includes(di) }]}>
+          <p class="fakta-rutrubrik"><span class="fakta-etikett"><span>Fakta</span></span> {d.rubrik}</p>
+          <ul>{d.rader.map((r) => <li>{r.length > 1 ? <><b>{r[0]}</b>{' '}{r[1]}</> : r[0]}</li>)}</ul>
+        </aside>
+      );
+      if (d.slag === 'visste') return (
+        <aside class:list={['fakta-visste', { 'fakta-ny-sida': las.includes(di) }]}>
+          <h4>Visste du att …</h4>
+          {d.rader.map((r) => <p>{r.length > 1 ? <><span class="fakta-tal">{r[0]}</span>{' '}{r[1]}</> : <>… {r[0]}</>}</p>)}
+        </aside>
+      );
+      return (
+        <aside class:list={['fakta-lasmer', { 'fakta-ny-sida': las.includes(di) }]}>
+          <h4>Läs mer</h4>
+          <ul>{d.rader.map((r) => <li>{r[0]}{r[1] && <>{' '}<a href={r[1]} rel="noopener">{doman(r[1])}</a></>}</li>)}</ul>
+        </aside>
+      );
+    })}
+  </div>
+  <p class="boksida-fot fakta-fot"><span>{f.not}</span> <span class="fakta-knapp">{f.niva.toUpperCase()} · {f.vad}</span></p>
+</section>

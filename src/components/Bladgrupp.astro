@@ -1,0 +1,41 @@
+---
+// Ramarna med blad på metodens sida, som de fem modellerna i Faktatextsamtal i grupp (src/lib/bladmaterial.ts): en rad
+// som fälls ut, med en länk till varje rams egen sida och sist filerna för alla ramarna, i samma form som en nivå med
+// sina texter i en bank (Bank.astro, samma stilar, .bank-niva i global.css). Niclas 2026-10-13, om modellerna skulle stå
+// som rader med allt i eller få egna sidor "med förklaring, exempel och mallarna likt texterna": "Jag tycker de få egna
+// sidor." Varje ram står därför på en egen sida ([id]/[enhet].astro) med ramen, exemplet och bladen, var och en med en
+// knapp som skriver ut bara det bladet. Raden har husets blå i kanten, eftersom den inte är en nivå.
+// Efter raden står ramarna med sina blad (sloten, ritade av Metod.astro), bara i utskriften av allt: på skärmen finns de
+// på sina egna sidor, och utskriften har allt, som Word-filen med allt (Niclas 2026-10-10: en ny form lägger till och tar
+// inget bort).
+import Bladfiler from './Bladfiler.astro';
+import { bladsidaAdress, gruppId, ledFlera, ledAntal, type Bladmaterial } from '../lib/bladmaterial';
+interface Props { bm: Bladmaterial; id: string; titel: string }
+const { bm, id, titel } = Astro.props;
+---
+<details class="bank-niva utan-utskrift" id={gruppId(bm)} style="--niva: var(--farg-accent)" data-bladgrupp>
+  <summary>
+    <span class="bank-nivanamn">{ledFlera(bm)}</span>
+    <span class="bank-antal">{ledAntal(bm)}</span>
+  </summary>
+  <div class="bank-innehall">
+    <ol class="bank-lista">
+      {bm.rader.map((r, i) => <li><a href={bladsidaAdress(id, r)}>{i + 1}. {r.namn}</a></li>)}
+    </ol>
+    <div class="bank-filer">
+      <p class="bank-filer-rubrik">{ledFlera(bm)} att skriva ut</p>
+      <Bladfiler id={id} titel={titel} bm={bm} lista />
+    </div>
+  </div>
+</details>
+{Astro.slots.has('default') && <div class="bank-utskrift"><slot /></div>}
+
+<script>
+  // En länk till raden (#modellerna, från en modells sida) fäller ut den.
+  const visa = () => {
+    const mal = location.hash ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+    if (mal instanceof HTMLDetailsElement && mal.matches('[data-bladgrupp]') && !mal.open) mal.open = true;
+  };
+  visa();
+  window.addEventListener('hashchange', visa);
+</script>

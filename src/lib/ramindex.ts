@@ -10,7 +10,7 @@
 // det materialet står då inte på något annat ställe i listan.
 // Bara sidan läser listan; utskriften gömmer den och Word har sina egna rubriker. scripts/ramindexprov.mjs prövar
 // listan och spärren nedan i npm run validera.
-import { lastexter } from './ramform';
+import { enhetstexter } from './ramform';
 import { veckomaterial } from './veckomaterial';
 import type { Bank } from './bank';
 
@@ -26,7 +26,7 @@ export interface Indexvecka { etikett: string; lank: Ramlank; saker: Ramlank[] }
 export interface Indexveckor { typ: 'veckor'; namn: string; antal: string; oversikt: Ramlank; rader: Indexvecka[] }
 export type Indexpost = { typ: 'rad'; rad: Indexrad } | { typ: 'led'; namn: string; rader: Indexrad[] } | Indexniva | Indexveckor;
 
-type Ram = Parameters<typeof lastexter>[0][number] & { lektioner?: boolean };
+type Ram = Parameters<typeof enhetstexter>[0][number] & { lektioner?: boolean };
 // Antalet delar med ordet i flertal: "8 veckor". Ett ord som inte står här får bara talet.
 const FLERTAL: Record<string, string> = { vecka: 'veckor', lektion: 'lektioner', pass: 'pass', dag: 'dagar', del: 'delar', steg: 'steg', text: 'texter', samtal: 'samtal' };
 const versal = (s: string) => s.charAt(0).toLocaleUpperCase('sv') + s.slice(1);
@@ -38,7 +38,7 @@ const LARARSIDOR = /^Lärarens sidor: (.+)$/;
 // nivåer, som står först bland ramarna (Bank.astro), så listan har bara de andra ramarna.
 // utanfor: ramar som står på ett annat ställe på sidan och inte i listan, som nivåernas material (src/lib/nivamaterial.ts).
 export function ramindex<R extends Ram>(ramar: R[], bank?: Bank, utanfor?: Set<number>): Indexpost[] {
-  const texter = lastexter(ramar);
+  const texter = enhetstexter(ramar);
   const nivaer = new Map<string, Indexniva>();
   const anvanda = new Set<number>([...(bank ? [...bank.ramar, ...bank.oversikter] : []), ...(utanfor ?? [])]);
   // Veckorna och det som står vid dem (veckomaterial.ts) är en egen post och står inte under en nivå eller ett led.
@@ -106,6 +106,19 @@ export function ramindex<R extends Ram>(ramar: R[], bank?: Bank, utanfor?: Set<n
   // Övriga ramar: ett led före kolon som två eller fler ramar i följd delar blir en grupp, annars en rad var.
   const ovriga = ramar.map((ram, i) => ({ ram, nr: i + 1 })).filter(({ nr }) => !anvanda.has(nr - 1));
   for (let k = 0; k < ovriga.length; k++) {
+    // En ram som längre fram följs av en ram med ramens rubrik som led ("Kartläggningen" och "Kartläggningen: protokollet")
+    // äger ramarna däremellan: de står under ramens namn, med ramen själv som Översikt. Kartläggningens två elevblad heter
+    // Text 1 och Text 2, för att eleven inte ska läsa ordet kartläggning, och lästes i listan som veckans texter
+    // (Faktatextsamtal i grupp, riggens läsning i telefonbredd och granskningen 2026-10-13). Utan ramar emellan gäller
+    // regeln inte, så att två ramar som bara delar namn står som förut.
+    const agare = ovriga[k].ram.rubrik;
+    let sist = -1;
+    for (let m = k + 2; m < ovriga.length; m++) if (ovriga[m].ram.rubrik.startsWith(`${agare}: `)) sist = m;
+    if (sist > 0 && ovriga.slice(k + 1, sist).some((x) => !x.ram.rubrik.startsWith(`${agare}: `))) {
+      poster.push({ forst: ovriga[k].nr, post: { typ: 'led', namn: agare, rader: ovriga.slice(k, sist + 1).map((x, j) => ({ lank: { nr: x.nr, namn: j === 0 ? 'Översikt' : x.ram.rubrik.startsWith(`${agare}: `) ? versal(x.ram.rubrik.slice(agare.length + 2)) : x.ram.rubrik } })) } });
+      k = sist;
+      continue;
+    }
     const led = ovriga[k].ram.rubrik.match(/^([^:]+): (.+)$/)?.[1];
     let slut = k + 1;
     if (led) while (slut < ovriga.length && ovriga[slut].ram.rubrik.startsWith(`${led}: `)) slut++;

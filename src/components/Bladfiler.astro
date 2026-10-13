@@ -1,0 +1,40 @@
+---
+// Filerna för ramarna med blad, som modellerna i Faktatextsamtal i grupp (src/lib/bladmaterial.ts, bladfiler; Niclas
+// 2026-10-13: "Modeller (bara de tre tomma mallarna) Beskrivning (Exempel + beskrivningen av modellen) båda i docx och
+// pdf", och om förslaget: "Nedladdning och även nedladdning bland länkarna"). Utan rad är det tabellen i
+// nedladdningsrutan överst på metodens sida, med bankens stilar (Bankfiler.astro): en rad för alla ramarna, och
+// kolumnerna Bladen och Sidor och exempel. Med lista är det samma två filer som rader, i ramarnas rad på metodens sida
+// (Bladgrupp.astro), och med en rad är det den ramens två filer, sist på ramens egen sida ([id]/[enhet].astro).
+// Kolumnerna betyder samma sak som i bankens tabell: till vänster det gruppen får, till höger det läraren har.
+// Filerna byggs ur metodens fil: Word av [id].docx.ts (bladDokument och ramarDokument i metoddocx.ts) och pdf:en av
+// npm run validera (scripts/bankpdf.mjs). Pdf och Word, utan Drive, så att raden ryms i telefonen.
+import Filval from './Filval.astro';
+import { allaRader, bladfiler, harExempel, ledFlera, type Bladmaterial, type Bladrad } from '../lib/bladmaterial';
+interface Props { id: string; titel: string; bm: Bladmaterial; rad?: Bladrad; lista?: boolean }
+const { id, titel, bm, rad, lista = false } = Astro.props;
+const filer = bladfiler(id, bm);
+const val = (r: Bladrad | undefined, slag: 'blad' | 'sidor') => {
+  const f = filer.find((x) => x.rad === r && x.slag === slag);
+  return f && { fil: `/stodundervisning/${f.namn}`, namn: f.namn, rubrik: f.rubrik, statistik: `${titel}: ${f.rubrik.toLowerCase()}`, pdf: true, pdfTitel: slag === 'blad' ? 'Ladda ner som pdf, liggande' : 'Ladda ner som pdf', utanDrive: true, liten: true };
+};
+const exempel = harExempel(bm);
+---
+{rad || lista ? (
+  <ul class="filrader bankfiler-niva">
+    {val(rad, 'blad') && <li><span class="filrubrik">Bladen</span> <Filval {...val(rad, 'blad')!} /></li>}
+    <li><span class="filrubrik">{rad ? (exempel ? 'Sidan och exemplet' : 'Sidan') : (exempel ? 'Sidor och exempel' : 'Sidorna')}</span> <Filval {...val(rad, 'sidor')!} /></li>
+  </ul>
+) : (
+  <table class="bankfiler">
+    <caption>{ledFlera(bm)} att skriva ut</caption>
+    <colgroup><col class="nivakol" /><col /><col /></colgroup>
+    <thead><tr><td></td><th scope="col">Bladen</th><th scope="col">{exempel ? 'Sidor och exempel' : 'Sidorna'}</th></tr></thead>
+    <tbody>
+      <tr>
+        <th scope="row">{allaRader(bm)}</th>
+        <td>{val(undefined, 'blad') && <Filval {...val(undefined, 'blad')!} />}</td>
+        <td><Filval {...val(undefined, 'sidor')!} /></td>
+      </tr>
+    </tbody>
+  </table>
+)}

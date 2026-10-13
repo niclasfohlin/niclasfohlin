@@ -245,12 +245,14 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
         const elevtypsnitt = valda.some((p) => ljud.harElevtypsnitt(p.data)) ? await hamta(ljud.ELEVTYPSNITT_TTF) : undefined;
         // Boksidornas och sagobladens typsnitt (src/lib/ramform.ts, src/lib/sagoblad.ts), när någon vald metod har dem.
         const boktypsnitt = valda.some((p) => saga.harBoktypsnitt(p.data)) ? { cinzel: await hamta(ramform.BOKTYPSNITT_TTF.cinzel), dekor: await hamta(ramform.BOKTYPSNITT_TTF.dekor) } : undefined;
+        // Faktatexternas typsnitt Anton (src/lib/ramform.ts), när någon vald metod har faktatexter.
+        const faktatypsnitt = valda.some((p) => ramform.harFaktatexter(p.data)) ? await hamta(ramform.FAKTATYPSNITT_TTF) : undefined;
         // Reservbilderna (src/lib/reservbild.ts): filen byggs först en gång för att se vilka bilder den har, och varje
         // bilds reservbild hämtas som bygget ritade den ur samma SVG, som när filerna byggs vid bygget.
         const behovet = reserv.samlaReservbilder();
-        metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt, boktypsnitt, png: behovet.png } });
+        metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt, boktypsnitt, faktatypsnitt, png: behovet.png } });
         const png = new Map(await Promise.all([...behovet.behov.keys()].map(async (n) => [n, await hamta(reserv.reservAdress(n))] as const)));
-        const dokument = metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt, boktypsnitt, png: (svg, bredd, hojd) => png.get(reserv.reservNyckel(svg, bredd, hojd)) } });
+        const dokument = metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt, boktypsnitt, faktatypsnitt, png: (svg, bredd, hojd) => png.get(reserv.reservNyckel(svg, bredd, hojd)) } });
         // Packad som vid bygget, med likadana sidhuvuden och sidfötter delade (src/lib/wordpaket.ts, K-151).
         const blob = await packaWord(dokument, 'blob');
         const filnamn = poster.length === 1 ? `${poster[0].id}${medMallarVal ? '' : '-beskrivning'}.docx` : `metoder-niclasfohlin-se${medMallarVal ? '' : '-beskrivningar'}.docx`;

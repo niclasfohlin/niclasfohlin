@@ -50,6 +50,9 @@ utkast: true
 #   - { namn: Bas, farg: 3E8E41 }
 #   - { namn: Medel, farg: F2C94C }
 #   - { namn: Avancerad, farg: D64541 }
+# Valfritt: namnen på raderna i ett fält med flera rader (lärarens sida i Faktatextsamtal i grupp). En rad som börjar med
+# ett av dem och ett kolon ("Red ut: två tredjedelar …") får namnet i husets blå, så att ögat hittar raden.
+# radetiketter: [Red ut, Lyssna efter, Lockar]
 
 # Serier (Ljudlek i grupp): en generell metod med en lektionsbank och lektioner som är egna metoder. En ny lektion är en
 # ny fil med de tre fälten nedan: den syns i banken, i metodbanken och i seriens meny utan att den generella metoden
@@ -450,6 +453,10 @@ lathund:
 # Bilderna På bordet ur metodriggen (De fyra räknesätten i grupp, src/lib/pabordet.ts): det som ligger på bordet, som
 # public/stodundervisning/<id>-pabordet-<nr>.svg i 960 × 540. efter är en plats som för en extrafilm, och "del: <rubrik>"
 # efter en vecka, där bilden står utan egen rubrik och bildtexten börjar med På bordet.
+# En bild vars rubrik börjar med "Blad: " är ett blad att skriva ut eller skriva i, på en egen liggande sida efter sin ram
+# (efter: "ram: <ramens rubrik>"). Bildens mått, bladets skrivytor och fälten elev och skala står inte här: de kommer ur
+# riggens pabordet.json med node scripts/pabordetdata.mjs <riggens out/<slug>>, som också kopierar bilderna (METODER.md
+# under Bladet).
 # pabordet:
 #   - nr: 0
 #     rubrik: Materialet

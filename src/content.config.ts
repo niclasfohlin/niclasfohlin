@@ -208,6 +208,11 @@ const stodundervisning = defineCollection({
     // Nivåerna i en metod med nivåer (De fyra räknesätten: Bas, Medel och Avancerad, Niclas 2026-10-04), med färgen i hex.
     // Ett led i en listas rubrik som heter som en nivå blir en skylt i nivåns färg före rubriken, på sidan och i Word.
     nivaer: z.array(z.strictObject({ namn: text, farg: z.string().regex(/^[0-9A-Fa-f]{6}$/, 'Färgen skrivs som sex hexsiffror, som 3E8E41.') })).default([]),
+    // Radetiketter (Faktatextsamtal i grupp, metodriggens TILL-SAJTEN 2026-10-13, Det nya punkt 2): namnen på raderna i ett
+    // fält med flera rader, som Red ut, Lyssna efter och Lockar på lärarens sida. En rad som börjar med en av dem och ett
+    // kolon får etiketten i husets blå, på sidan, i utskriften och i Word, så att ögat hittar raden. Etiketten är inte
+    // fet, eftersom fet stil är rubrik. Det gäller fält som inte är kursiva. Riggen har listan i rigg.json.
+    radetiketter: z.array(text).default([]),
     lektionsbank: z.strictObject({
       rubrik: z.string().default('Lektionsbanken'),
       text: z.string().optional(),
@@ -375,6 +380,11 @@ const stodundervisning = defineCollection({
     ramar: z.strictObject({
       rubrik: z.string().default('Ramarna'),
       text: stycken,
+      // Namnet på det material som inte står i en bank, i nivåernas rader eller bland ramarna med blad, som Bladen och
+      // korten i Faktatextsamtal i grupp (Kärnorna, korten, Egen text och kartläggningen; Niclas godkände förslaget
+      // 2026-10-13). Med namnet får det materialet en egen fil att skriva ut, Word och pdf, i nedladdningsrutan
+      // (src/lib/ovrigt.ts): annars ligger det sist i planeringsmallarna, efter bankens alla sidor.
+      ovrigt: text.optional(),
       ramar: z.array(z.strictObject({
         rubrik: text,
         text: stycken,

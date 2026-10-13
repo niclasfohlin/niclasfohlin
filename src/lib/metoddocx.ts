@@ -4,28 +4,30 @@
 // Designelementen är samma som på sidan (src/components/Metod.astro): rutor, tabeller med
 // rubrikrad, band, gör/undvik och bockar. Varje sida bär © Niclas Fohlin och niclasfohlin.se.
 import {
-  AlignmentType, Body, Bookmark, BorderStyle, Document, ExternalHyperlink, Footer, Header, HeadingLevel, HeightRule, ImageRun, ImportedXmlComponent, InternalHyperlink, LevelFormat, NoBreakHyphen, PageNumber, PageOrientation,
-  Paragraph, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, UnderlineType, VerticalAlign, WidthType,
-  type IBorderOptions, type IParagraphOptions, type IRunOptions, type ISectionOptions,
+  AlignmentType, Body, Bookmark, BorderStyle, Document, ExternalHyperlink, Footer, Header, HeadingLevel, HeightRule, HorizontalPositionRelativeFrom, ImageRun, ImportedXmlComponent, InternalHyperlink, LevelFormat, NoBreakHyphen, PageNumber, PageOrientation,
+  Paragraph, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, TextWrappingType, UnderlineType, VerticalAlign, VerticalPositionRelativeFrom, WidthType,
+  type IBorderOptions, type IFloating, type IParagraphOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
 import { arbetsformRad, arEttKort, arProtokoll, arskursText, datumText, ejBryt, etikettOchText, laskortKolumn, laskortRubrik, lathundFakta, lathundForm, metaRad, metodAdress, passOrd, passOversikt, passTextKort, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost, type PassOrd } from './metod';
 import { brakDelar, delnamn, kortInfo, lage, STANDARD_NAMNARE, talrutansMatt, type KortInfo, type Mall } from './brak';
 import { andikaBredd, bagSvg, utanStod } from './lasflyt';
 import { platsISerien, type MetodPostISerie, type SerieKoppling } from './serie';
 import { ANDIKA_ADRESS, ELEVTYPSNITT, VIK_TEXT, arBildlista, bildFor as bildForOrd, bildlistansNamn, harElevtypsnitt, kartCeller, kortCeller, ljudenheter, ljudform, arDelark, type KartCell } from './ljudkort';
-import { arElevensBlad, harFragor, lastexter, protokollDelas, strukturAv, textlangd, textparAv, textparLarare, arTextparLista, type Lastext, type Struktur, type Textpar } from './ramform';
+import { arElevensBlad, FAKTAORD, faktatexter, harFaktatexter, harFragor, lastexter, protokollDelas, strukturAv, textlangd, textparAv, textparLarare, arTextparLista, type Faktadel, type Faktatext, type Lastext, type Struktur, type Textpar } from './ramform';
 import { filmerVid, grundUpphov, huvudfilm, metodensFilmer, stegDelar, stillbilder, STILLBILD_MATT, type FilmPlats, type MetodFilm } from './film';
 import { reservNyckel } from './reservbild';
 import { arkAdress, mallEtiketter, mallRutor as mallRutorAdresser, rutansText, serieAdress, svgMatt } from './bildserier';
-import { bildensAlt, iDel, metodensPaBordet, PABORDET_MATT, paBordetVid, type PaBordet } from './pabordet';
+import { arBlad, arIfylltBlad, bildensAlt, bladVid, iDel, metodensPaBordet, PABORDET_MATT, paBordetVid, type Bladyta, type PaBordet } from './pabordet';
 import { listansNiva, skyltText, type Niva } from './nivaer';
 import { bladDelar, bladNamn, delensRad, forstaLed, kartan, metodensBlad, radensDel, wordId } from './karta';
 import { veckansLista, veckomaterial } from './veckomaterial';
 import * as SAGA from './sagoform.js';
 import { arTarning, harBoktypsnitt, sagobladAv, sagoUpphov, TARNING_UPPHOV, tarningAv, type Sagoblad, type Sagofalt, type Station, type Tarning } from './sagoblad';
 import WORDSKALOR from '../data/lathund-word.json';
+import { sidlasFor } from './sidlas';
 import TECKENBREDD from '../data/teckenbredd.json';
-import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, FORMLUFT, FORMRAD_PT, LIGGANDE_BOK, LIGGANDE_BREDD, PROBLEMLUFT, PROBLEMTITEL_PT, RAMHOJD, TITEL_PT, boksidansMatt, losningarMatt, problemMatt, strukturMatt, textparMatt } from './boksida';
+import ANTON_BREDD from '../data/faktatext/anton-bredder.json';
+import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, FORMLUFT, FORMRAD_PT, LIGGANDE_BOK, LIGGANDE_BREDD, PROBLEMLUFT, PROBLEMTITEL_PT, RAMHOJD, TITEL_PT, boksidansMatt, breddPt, losningarMatt, problemMatt, strukturMatt, textparMatt } from './boksida';
 import { bankAv, bankfilensRamar, bankRad, type Bankfil } from './bank';
 import { MATERIAL } from './material';
 import { losningarnasNiva, losningarnasNot, problemformer } from './problemform';
@@ -77,10 +79,15 @@ type Barn = Paragraph | Table;
 // (lästexten, boksida()) står i en egen sektion med 1,5 cm marginal och raden Till läraren och nivåns knapp i sidfoten.
 // Elevens blad med en bildserie (liggande) står på ett liggande A4 med mallarnas smala marginal (seriebladBarn).
 // liggande: bladet Två lösningar på ett liggande A4 (tvaLosningar), med riggens marginaler (LIGGANDE_BOK i boksida.ts).
-type Boksektion = { not: string; niva: string; vad: string; farg: string; liggande?: boolean };
+// fakta: en faktatext (faktatext()) på flera sidor, med boksidans marginal: från textens andra sida ett sidhuvud med
+// huvud (områdets namn och titeln) över en linje i nivåns färg och boksidans sidfot, och på den första bara upphovet.
+// figurer: raden om figurernas upphov, när textens bilder har figurer ur bildbanken.
+type Boksektion = { not: string; niva: string; vad: string; farg: string; liggande?: boolean; fakta?: { huvud: string; figurer?: string } };
 // Ett sagoblad (sagoFlod): rutan Till läraren i sidfoten, eller på bokens blad ingen sidfot och en kortare upphovsrad.
 type Sagosektion = { not: string; bokblad: boolean };
-class Sektionsbyte { constructor(readonly kortark: boolean, readonly bok?: Boksektion, readonly saga?: Sagosektion, readonly liggande?: boolean) {} }
+// Ett blad som en bild över hela den liggande sidan (bildblad()): sidans marginaler i twips, som följer bladets skrivytor.
+type Bladsektion = { top: number; bottom: number; left: number; right: number };
+class Sektionsbyte { constructor(readonly kortark: boolean, readonly bok?: Boksektion, readonly saga?: Sagosektion, readonly liggande?: boolean, readonly blad?: Bladsektion) {} }
 type Flod = (Barn | Sektionsbyte)[];
 const arBarn = (x: Barn | Sektionsbyte): x is Barn => !(x instanceof Sektionsbyte);
 // Bilderna och elevens typsnitt till Word-filen (src/lib/ljudkort.ts): vid bygget lästa från public/, i webbläsaren
@@ -88,14 +95,16 @@ const arBarn = (x: Barn | Sektionsbyte): x is Barn => !(x instanceof Sektionsbyt
 // reservbild, ritad ur samma SVG (src/lib/reservbild.ts): vid bygget ritar src/lib/metodresurser.ts den, i
 // webbläsaren hämtas den som samma bygge ritade.
 // boktypsnitt: Cinzel och Cinzel Decorative till boksidorna (public/fonts/boksida/), när metoden har lästexter.
-export interface MetodResurser { bilder: Map<string, Uint8Array>; elevtypsnitt?: Uint8Array; boktypsnitt?: { cinzel: Uint8Array; dekor: Uint8Array }; png?: (svg: Uint8Array, bredd: number, hojd: number) => Uint8Array | undefined }
+// faktatypsnitt: Anton till faktatexternas rubriker (public/fonts/faktatext/), när metoden har faktatexter.
+export interface MetodResurser { bilder: Map<string, Uint8Array>; elevtypsnitt?: Uint8Array; boktypsnitt?: { cinzel: Uint8Array; dekor: Uint8Array }; faktatypsnitt?: Uint8Array; png?: (svg: Uint8Array, bredd: number, hojd: number) => Uint8Array | undefined }
 let RESURSER: MetodResurser = { bilder: new Map() };
 // Varje bild i Word-filen är en SVG med sin reservbild (Niclas 2026-09-30: i Google Dokument blev bilderna blå rutor).
 // Saknas reservbilden stannar bygget, så att en fil med en tom reservbild aldrig kan laddas upp eller hämtas.
-function svgRun(svg: Uint8Array, bredd: number, hojd: number, altText: { name: string; description: string; id: string }): ImageRun {
+// flytande: bilden ligger förankrad på sidan i stället för i raden. Bara bladets bild bakom texten (bildblad()) är det.
+function svgRun(svg: Uint8Array, bredd: number, hojd: number, altText: { name: string; description: string; id: string }, flytande?: IFloating): ImageRun {
   const png = RESURSER.png?.(svg, bredd, hojd);
   if (!png) throw new Error(`Word-filen saknar reservbilden ${reservNyckel(svg, bredd, hojd)} (${altText.description}). Den ritas ur bildens SVG av src/lib/metodresurser.ts vid bygget och hämtas i webbläsaren från /stodundervisning/reservbild/.`);
-  return new ImageRun({ type: 'svg', data: svg, transformation: { width: bredd, height: hojd }, altText, fallback: { type: 'png', data: png } });
+  return new ImageRun({ type: 'svg', data: svg, transformation: { width: bredd, height: hojd }, altText, fallback: { type: 'png', data: png }, ...(flytande ? { floating: flytande } : {}) });
 }
 let instans = 0; // numrerade listor: varje lista börjar om på 1
 
@@ -139,6 +148,11 @@ function medElevtypsnitt<T>(pa: boolean, fn: () => T): T {
 function run(text: string, o: StyckeVal = {}): TextRun {
   const val: IRunOptions = { text, italics: o.kursiv, bold: o.fet, color: o.farg, size: storl(o.storlek), allCaps: o.versaler, font: o.font ?? ELEVFONT };
   return new TextRun(hardaStreck(val));
+}
+// En text som löpor, där en radbrytning i texten (\n) är en ny rad i stycket: Word visar annars radslutet som ett
+// mellanslag (granskningen 2026-10-13, P1; scripts/paritet.mjs stannar på ett radslut inne i en text).
+function radRuns(text: string, o: StyckeVal = {}): TextRun[] {
+  return text.split('\n').flatMap((rad, j) => (j ? [new TextRun({ break: 1, size: storl(o.storlek) }), run(rad, o)] : [run(rad, o)]));
 }
 // Alla andra textlöpor går hit, så att skalan och elevens typsnitt gäller dem också.
 function textRun(o: IRunOptions): TextRun {
@@ -220,8 +234,12 @@ function replikStycke(text: string, o: StyckeVal = {}): Paragraph {
 }
 function stycke(text: string, o: StyckeVal = {}): Paragraph {
   return new Paragraph({
-    // radbryt: en radbrytning i texten (\n) blir en ny rad i stycket, som på lärarens sida till två texter.
-    children: o.brak ? brakBarn(text, o) : o.radbryt ? text.split('\n').flatMap((rad, j) => (j ? [new TextRun({ break: 1, size: storl(o.storlek) }), run(rad, o)] : [run(rad, o)])) : [run(text, o)],
+    // En radbrytning i texten (\n) blir en ny rad i stycket, i varje form, som på sidan och i utskriften. Förut gällde det
+    // bara där formen bad om det (radbryt), och annars visade Word radslutet som ett mellanslag: kortet När det skaver i
+    // Faktatextsamtal i grupp har tre ledtrådar under varandra i en cell, och de lästes som en fras (granskningen
+    // 2026-10-13, P1). Röstsedlarna i Boksamtal i grupp och provbildens frågor i Seriesamtal hade samma fel.
+    // scripts/paritet.mjs stannar på ett radslut inne i en text i en Word-fil.
+    children: o.brak ? brakBarn(text, o) : radRuns(text, o),
     spacing: { before: o.fore ?? 0, after: o.efter ?? 120 },
     keepNext: o.hallIhop,
     pageBreakBefore: o.nySida,
@@ -599,7 +617,11 @@ const CM = 567;
 // bokmarke: rubrikraden bär ett bokmärke, som kartan länkar till (en vecka, src/lib/karta.ts).
 // luftEfter: ett stycke på en punkt med den höjden (twips) efter tabellen i stället för det vanliga avståndet, när en tabell
 // följer tätt under (veckans rad ur kartan; Google kräver ett stycke mellan två tabeller).
-function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[], o: { rubrik?: string; skrivrum?: boolean; hojder?: (number | undefined)[]; elevblad?: boolean; hallIhopEfter?: boolean; tat?: boolean; bokmarke?: string; luftEfter?: number } = {}): Barn[] {
+// etiketter: metodens radetiketter (fältet radetiketter, Faktatextsamtal i grupp, metodriggens TILL-SAJTEN 2026-10-13, Det
+// nya punkt 2): i ett fält med flera rader som inte är kursivt får en rad som börjar med en av etiketterna och ett kolon
+// etiketten i husets blå, så att ögat hittar raden på lärarens sida (Red ut, Lyssna efter, Lockar). Etiketten är inte
+// fet, eftersom fet stil är rubrik.
+function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[], o: { rubrik?: string; skrivrum?: boolean; hojder?: (number | undefined)[]; elevblad?: boolean; hallIhopEfter?: boolean; tat?: boolean; bokmarke?: string; luftEfter?: number; etiketter?: string[] } = {}): Barn[] {
   const forsta = o.tat ? Math.max(1100, Math.ceil(Math.max(...falt.flatMap((f) => f.rubrik.split(/\s+/)).map((w) => ordBredd(w, 20, { fet: true })))) + 300) : o.elevblad ? 2000 : 2300;
   const bredder = [forsta, BREDD - forsta];
   const rader: TableRow[] = [];
@@ -612,10 +634,18 @@ function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[
     const linjer = f.text.split('\n');
     const tom = !f.text.trim();
     const hojd = o.hojder?.[i];
+    const etikett = (l: string) => (linjer.length > 1 && !f.kursiv ? o.etiketter?.find((e) => l.startsWith(`${e}: `)) : undefined);
+    const linje = (l: string, j: number) => {
+      const val = { storlek: 20, efter: j === linjer.length - 1 ? 0 : 20, hallIhop: !sist };
+      const e = etikett(l);
+      if (!e) return replikStycke(l, { ...val, kursiv: f.kursiv });
+      // Raden efter etiketten står som i de andra fälten, med replikerna kursiva (replikStycke).
+      return new Paragraph({ children: [run(`${e}: `, { storlek: 20, farg: FARG.huvud }), ...l.slice(e.length + 2).split(/(”[^”]*”)/).filter(Boolean).map((t) => run(t, { storlek: 20, kursiv: t.startsWith('”') }))], spacing: { before: 0, after: val.efter }, keepNext: val.hallIhop });
+    };
     rader.push(rad([
       // Etiketterna och namnraden på elevens blad är elevens (riggens docs/elevmaterial.md): i elevens typsnitt, som på sidan.
       cell([stycke(f.rubrik, { fet: true, storlek: o.elevblad ? 24 : 20, efter: 0, hallIhop: !sist, font: o.elevblad ? ELEVTYPSNITT : undefined })], { bredd: bredder[0], fyll: FARG.rand, tat: o.tat }),
-      cell(tom ? [stycke('', { efter: 0, hallIhop: !sist })] : linjer.map((l, j) => replikStycke(l, { kursiv: f.kursiv, storlek: 20, efter: j === linjer.length - 1 ? 0 : 20, hallIhop: !sist })), { bredd: bredder[1], tat: o.tat }),
+      cell(tom ? [stycke('', { efter: 0, hallIhop: !sist })] : linjer.map(linje), { bredd: bredder[1], tat: o.tat }),
     ], { hojd: hojd ? Math.round(hojd * CM) : tom ? (o.skrivrum ? 900 : 420) : undefined }));
   });
   return [tabell(rader, bredder), o.luftEfter !== undefined ? luft(o.luftEfter, o.hallIhopEfter) : o.hallIhopEfter ? new Paragraph({ spacing: { before: 0, after: 160 }, keepNext: true }) : avstand()];
@@ -626,7 +656,9 @@ function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[
 // luft: ett kort att ha på bordet (strategikortet, K-062) får luft mellan raderna.
 // elev: metoden har elevmaterial (K-130, src/lib/ljudkort.ts), så bladet eleven läser står i elevens typsnitt; lärarens
 // protokoll i husets.
-function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][]; larare?: boolean }, o: { storlek: number; hallIhopEfter?: boolean; brak?: boolean; luft?: boolean; elev?: boolean }): Barn[] {
+// tat: mindre luft över och under texten i cellerna, på elevens blad med en bild som eleven ser på, så att texten, bilden
+// och rutan Till läraren ryms på ett A4 (ramBarn, elevsida).
+function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][]; larare?: boolean }, o: { storlek: number; hallIhopEfter?: boolean; brak?: boolean; luft?: boolean; elev?: boolean; tat?: boolean }): Barn[] {
   if (harFragor(l)) return fragelista(l, o);
   const ut: Barn[] = [];
   const n = Math.max(...l.rader.map((r) => r.length), l.kolumner?.length ?? 1);
@@ -654,7 +686,7 @@ function elevlista(l: { rubrik?: string; kolumner?: string[]; rader: string[][];
   if (l.kolumner) rader.push(rad(l.kolumner.map((k, i) => cell([stycke(k, { storlek: 15, versaler: true, farg: FARG.svag, efter: 0, hallIhop: true, mitt: !!smal && skriv[i] })], { bredd: bredder[i], fyll: FARG.rand, tat: !!smal })), { huvud: true }));
   l.rader.forEach((r, ri) => {
     const ihop = ri < l.rader.length - 1 || !!o.hallIhopEfter;
-    rader.push(rad(Array.from({ length: n }, (_, i) => cell([stycke(r[i] ?? '', { storlek, fore: o.luft ? 100 : 0, efter: o.luft ? 100 : 0, hallIhop: ihop, mitt: bokstaver, brak: o.brak, radbryt: arTextparLista(l), font: o.elev && !smal ? ELEVTYPSNITT : undefined })], { bredd: bredder[i], tat: !!smal }))));
+    rader.push(rad(Array.from({ length: n }, (_, i) => cell([stycke(r[i] ?? '', { storlek, fore: o.luft ? 100 : 0, efter: o.luft ? 100 : 0, hallIhop: ihop, mitt: bokstaver, brak: o.brak, radbryt: arTextparLista(l), font: o.elev && !smal ? ELEVTYPSNITT : undefined })], { bredd: bredder[i], tat: !!smal || !!o.tat }))));
   });
   ut.push(tabell(rader, bredder), avstand());
   return ut;
@@ -702,7 +734,7 @@ function kortlista(info: KortInfo, brak = true): Table {
           ...(k && info.markning ? [new Paragraph({ keepNext: vidare, spacing: { after: 120, line: 240 }, children: [run(info.markning(k.i), { storlek: 15, farg: FARG.svag })] })] : []),
           ...(k && brak && ensamtBrakI(k.k)
             ? brakStycken(ensamtBrakI(k.k)!.taljare, ensamtBrakI(k.k)!.namnare, 2 * Math.round(((info.korta ? 64 : 28) * SKALA * (info.korta ? 1.25 : 1.45)) / 2), FARG.text, w - 480, { fore: info.korta ? 280 : 200, hallIhop: vidare })
-            : [new Paragraph({ alignment: AlignmentType.CENTER, keepNext: vidare, spacing: { before: info.korta ? 280 : 200, after: 0, line: 300 }, children: k ? (brak && /[0-9]+[/][0-9]+/.test(k.k) ? brakBarn(k.k, { storlek: info.korta ? 64 : 28, farg: FARG.text }, info.korta ? 1.25 : 1.45) : [run(k.k, { storlek: info.korta ? 80 : info.medel ? 56 : 28, farg: FARG.text })]) : [] })]),
+            : [new Paragraph({ alignment: AlignmentType.CENTER, keepNext: vidare, spacing: { before: info.korta ? 280 : 200, after: 0, line: 300 }, children: k ? (brak && /[0-9]+[/][0-9]+/.test(k.k) ? brakBarn(k.k, { storlek: info.korta ? 64 : 28, farg: FARG.text }, info.korta ? 1.25 : 1.45) : radRuns(k.k, { storlek: info.korta ? 80 : info.medel ? 56 : 28, farg: FARG.text })) : [] })]),
         ],
       });
     }) }));
@@ -741,10 +773,12 @@ function bokRuns(text: string, bas: IRunOptions): TextRun[] {
   return ut.length ? ut : [textRun({ ...bas, text: '' })];
 }
 // Knappen med nivån i sidfoten: vit text i Cinzel på nivåns färg, med luft på båda sidor. På kartläggningens blad står
-// bara nivån, och raden Till läraren säger före eller efter.
+// bara nivån, och raden Till läraren säger före eller efter. Under en faktatext står knappen i Anton, faktatextens eget
+// typsnitt: en metod med faktatexter bär Anton men inte Cinzel (riggens knapp står i Cinzel också där, utan att filen
+// bär typsnittet).
 function nivaKnapp(b: Boksektion): TextRun[] {
   if (!b.niva) return [];
-  const knapp = { font: BOKTYPSNITT, color: 'FFFFFF', shading: { type: ShadingType.CLEAR, fill: b.farg, color: 'auto' } };
+  const knapp = { font: b.fakta ? FAKTATYPSNITT : BOKTYPSNITT, color: 'FFFFFF', shading: { type: ShadingType.CLEAR, fill: b.farg, color: 'auto' } };
   const vad = /^kartläggning/i.test(b.vad) ? [] : [new TextRun({ text: '  ·  ', size: 19, ...knapp }), new TextRun({ text: b.vad, size: b.vad.length > 8 ? 15 : 17, ...knapp })];
   return [new TextRun({ text: '  ', size: 19, ...knapp }), new TextRun({ text: b.niva.toUpperCase(), size: 19, ...knapp }), ...vad, new TextRun({ text: '  ', size: 19, ...knapp })];
 }
@@ -932,7 +966,7 @@ function textpar(p: Textpar): Barn[] {
 // Strukturens sida, med bilden På bordet som hör till ramen. Ryms den inte ens i 12 punkter med bilden i 60 procent stannar
 // bygget.
 function struktur(s: Struktur, bild?: PaBordet): Barn[] {
-  const matt = strukturMatt(s, bild ? PABORDET_MATT : undefined);
+  const matt = strukturMatt(s, bild?.matt);
   if (!matt.ryms) throw new Error(`Strukturen ”${s.titel}” ryms inte på ett A4, inte ens i 12 punkter och med bilden i 60 procent. Korta stegen eller rutan (src/lib/boksida.ts, strukturMatt).`);
   const { size, line, rutaPt, bildB, bildH, restH } = matt;
   const inreBredd = BOKBREDD - 2 * DUBBEL_GLAPP;
@@ -974,7 +1008,7 @@ function struktur(s: Struktur, bild?: PaBordet): Barn[] {
 // som lästexterna.
 const problembyte = (l: Lastext) => new Sektionsbyte(false, { not: l.not, niva: l.niva, vad: l.vad, farg: BOK.kort[l.nivaNr] ?? BOK.ram });
 function problemsida(l: Lastext, bild: PaBordet): Barn[] {
-  const matt = problemMatt(l, PABORDET_MATT);
+  const matt = problemMatt(l, bild.matt);
   if (!matt.ryms) throw new Error(`Problemet ”${l.titel}” (${l.niva}, ${l.vad}) ryms inte på ett A4, inte ens i 13 punkter och med bilden i 65 procent. Korta problemet eller frågan (src/lib/boksida.ts, problemMatt).`);
   const { size, line, fragaPt, titelH, bildB, bildH, extra } = matt;
   const inreBredd = BOKBREDD - 2 * DUBBEL_GLAPP;
@@ -1024,7 +1058,7 @@ const losningsbyte = (ram: Ram, nivaNr: number) => {
 // Nivåns plats för en ram Två lösningar, ur lästexterna.
 const losningensNivaNr = (ram: Ram, texter: Map<unknown, Lastext>) => [...texter.values()].find((l) => l.niva === losningarnasNiva(ram.rubrik)?.niva)?.nivaNr ?? 0;
 function tvaLosningar(p: Textpar, bilder: PaBordet[]): Barn[] {
-  const matt = losningarMatt(p, PABORDET_MATT);
+  const matt = losningarMatt(p, bilder[0].matt);
   if (!matt.ryms) throw new Error(`Två lösningar ”${p.titel}” ryms inte på ett liggande A4. Korta frågorna (src/lib/boksida.ts, losningarMatt).`);
   const { size, bildB, bildH, spaltH, restH, spaltW, inne, titelPt } = matt;
   const inreBredd = LIGGANDE_BREDD - 2 * DUBBEL_GLAPP;
@@ -1084,15 +1118,386 @@ function bildpar(bilder: PaBordet[], namn: string[]): Barn[] {
   const mellan = 240;
   const w = Math.floor((BREDD - mellan) / 2);
   const bredd = Math.round(((w / 20) * 4) / 3);
-  const hojd = Math.round((bredd * PABORDET_MATT.hojd) / PABORDET_MATT.bredd);
+  // Bildens egna mått (PaBordet.matt): bilderna På bordet var 960 × 540 till 2026-10-13.
+  const hojd = (k: number) => Math.round((bredd * bilder[k].matt.hojd) / bilder[k].matt.bredd);
   const bildCell = (k: number) => new TableCell({ width: { size: w, type: WidthType.DXA }, borders: ingen, margins: { top: 0, bottom: 60, left: 0, right: 0 }, children: [
     new Paragraph({ spacing: { before: 0, after: 40 }, keepNext: true, children: [run(namn[k] ?? '', { storlek: 18, farg: FARG.svag })] }),
-    new Paragraph({ spacing: { before: 0, after: 0 }, children: [bildRun(bilder[k].adress, bredd, bildensAlt(bilder[k]), hojd)] }),
+    new Paragraph({ spacing: { before: 0, after: 0 }, children: [bildRun(bilder[k].adress, bredd, bildensAlt(bilder[k]), hojd(k))] }),
   ] });
   const tom = new TableCell({ width: { size: mellan, type: WidthType.DXA }, borders: ingen, children: [new Paragraph({ spacing: { after: 0 } })] });
   return [new Table({ width: { size: BREDD, type: WidthType.DXA }, columnWidths: [w, mellan, BREDD - w - mellan], layout: TableLayoutType.FIXED,
     borders: { ...ingen, insideHorizontal: INGEN, insideVertical: INGEN }, rows: [new TableRow({ cantSplit: true, children: [bildCell(0), tom, bildCell(1)] })] }), avstand(120)];
 }
+
+// ---------------------------------------------------------------- faktatexten
+// En faktatext på flera sidor (Faktatextsamtal i grupp, metodriggens TILL-SAJTEN 2026-10-13, Det nya punkt 1; Niclas
+// 2026-10-12: faktatexterna ska "se ut som riktiga texter och utifrån åldern på eleverna. Med faktarutor, riktiga
+// förklarande bilder och texter", ha "en egen del i varje text som är lite knasig eller fantastisk. Typ en del som heter
+// Visste du att …", och "Se till att det ser modernt ut i sin design"), ett till ett med metodriggens build-docx.js
+// (faktatext). faktatextAv i src/lib/ramform.ts känner igen den på ramens form. Texten är ett litet kapitel i en faktabok:
+// en etikett och titeln i Anton, ingressen med Siffran bredvid, och sedan avsnitten i en textspalt på 12,5 cm med en
+// marginalspalt på 5 cm bredvid, där ordförklaringarna och faktarutan står. Mellan avsnitten står det som går över hela
+// bredden: bilderna med bildtext, rutan Visste du att och sist Läs mer. Fördjupningen är ett avsnitt på en tonad platta.
+// Brödtexten står i elevens typsnitt, 13 punkter med omkring 50 tecken per rad, ojämn högerkant och ingen avstavning.
+// Allt är stycken och tabeller utan linjer, så att Google Dokument ritar sidorna som Word: inga tabeller i celler, inga
+// textrutor, inget teckenavstånd och inga exakta radhöjder. Texten flödar över sidorna, tre på Bas, fyra på Medel och fem
+// på Avancerat hos riggen, och raden Till läraren och nivån står i sidfoten (sektion()).
+// Anton finns i Google Dokument, och Word-filen bär riggens delmängd under samma namn (public/fonts/faktatext/, OFL;
+// OFL-FAQ 1.11 och 1.12, som Andika och Cinzel). Delmängden har hhea-måtten också som win- och typo-mått, eftersom Word
+// räknar radens höjd med win-måtten och Google med hhea-måtten (1,73 mot 1,51 gånger storleken i den hela filen).
+const FAKTATYPSNITT = 'Anton';
+// Färgerna: rubrikernas mörka blå, nivåns färg som enda accent, med en ljus ton av den, och det gula i rutan Visste du
+// att, som är den enda rutan i en annan färg.
+const FAKTA = { mork: '17324D', text: '1F2630', dov: '4A5563', linje: 'C9D2DC', gul: 'FFF2BF', gulkant: 'F2B705', platta: 'F3F1EC' };
+// Sidans rutnät i twips: textspalten, luften och marginalspalten.
+const FAKTASPALT = 7090;
+const FAKTALUFT = 300;
+const FAKTAMARG = BOKBREDD - FAKTASPALT - FAKTALUFT;
+// Boksidans marginal på 1,5 cm, med plats för sidhuvudet över texten från textens andra sida.
+const FAKTAMARGINAL = { ...BOKMARGINAL, top: 1020, header: 500 };
+// En ljus ton av en färg: färgen blandad med vitt, andel färg 0 till 1.
+const ljusTon = (hex: string, andel = 0.13) => [0, 2, 4].map((i) => Math.round(255 - (255 - parseInt(hex.slice(i, i + 2), 16)) * andel).toString(16).padStart(2, '0')).join('').toUpperCase();
+// Nivåns färg: metodens egen (nivaer), annars boksidornas i den ordning nivåerna först kommer.
+const nivansFarg = (nivaer: Niva[], f: { niva: string; nivaNr: number }) => (nivaer.find((n) => n.namn === f.niva)?.farg ?? BOK.kort[f.nivaNr % BOK.kort.length]).toUpperCase();
+// Textens bilder: en bild På bordet vid ramen hör till platsen "Bild: <namn>" när den har namnet som rubrik. De andra
+// bilderna vid ramen står efter texten, som vanliga bilder På bordet (blad på egna sidor).
+function faktabilder(f: Faktatext, vidRamen: PaBordet[]): { iTexten: PaBordet[]; efter: PaBordet[] } {
+  const namn = new Set(f.delar.flatMap((x) => (x.slag === 'bild' ? [x.namn] : [])));
+  return { iTexten: vidRamen.filter((b) => namn.has(b.bild.rubrik)), efter: vidRamen.filter((b) => !namn.has(b.bild.rubrik)) };
+}
+// Faktatextens sektionsbyte: sidhuvudet får områdets namn ur etiketten ("Vatten · text 1 av 5" ger VATTEN) och titeln,
+// sidfoten ramens ruta Till läraren (annars metodens namn) och nivåns knapp, och textens första sida raden om figurernas
+// upphov när någon av textens bilder har figurer ur bildbanken (pabordet.fluent): en fil med bara texterna har ingen
+// annan sida som säger det, och MIT-licensen kräver raden i kopiorna.
+const faktabyte = (f: Faktatext, o: { farg: string; metod: string; bilder: PaBordet[] }) => new Sektionsbyte(false, {
+  not: f.not || o.metod, niva: f.niva, vad: f.vad, farg: o.farg,
+  fakta: { huvud: [f.etikett.split(' · ')[0].toLocaleUpperCase('sv'), f.titel].filter(Boolean).join('  ·  '), figurer: o.bilder.some((b) => b.bild.fluent?.length) ? 'Figurerna i bilderna: Fluent Emoji, © Microsoft Corporation, MIT-licens.' : undefined },
+});
+// Sidlåset (src/data/sidlas.json, mätt av scripts/sidlas.mjs i npm run validera; förebilden är metodriggens
+// build/sidlas.mjs, Niclas 2026-10-07 om Google-provets obs: "Men granska detta med Obs och lös det då"). En faktatext
+// flödar över sidorna, och Word och Google Dokument bryter inte sidan på samma ställe: Word håller ihop en rubrik med sin
+// tabell och en ruta vars rad inte får delas, och flyttar hela blocket till nästa sida när det inte ryms, medan Google
+// fyller sidan och delar. Virus och bakterier var fem sidor i Word och fyra i Google (2026-10-13), eftersom rutan Läs
+// mer rymdes på sidan fyra där. En uttrycklig sidbrytning följer båda. Därför börjar de delar av texten (index i
+// Faktatext.delar) som Word börjar en ny sida med, när sidan före har luft nederst, med en uttrycklig sidbrytning. Netlify
+// har ingen Word, så mätningen görs på datorn och filen committas, som lathundens storlekar (lathund-word.json).
+// Så sätts låset, så att delen står där den stod i Word före låset:
+//   luften före delen (ett tomt stycke på en halv rad) tas bort: stod den sist på sidan före syntes den inte, och stod
+//   den först på den nya sidan blev den annars ensam på en sida, med delen på nästa (riggens lärdom 2026-10-13);
+//   en del som börjar med ett stycke (ett avsnitts mellanrubrik, en bild) får sidbrytningen på stycket, och avståndet
+//   före stycket blir noll, eftersom Word stryker det överst på en sida efter en vanlig sidbrytning men inte efter en
+//   uttrycklig;
+//   en del som börjar med en tabell (fördjupningen och rutorna) får ett stycke på en punkt med sidbrytning före sig, och
+//   står då en dryg punkt lägre än före låset.
+// En sida som börjar mitt i en del, där ett avsnitt delas, låses inte: där flödar texten.
+// Uppslaget står i src/lib/sidlas.ts, som sidans utskrift också läser.
+// las: de delar som börjar en ny sida (sidlåset). Utan las flödar texten fritt, som i mätningens prov.
+function faktatext(f: Faktatext, o: { farg: string; ramen: string; bilder: PaBordet[]; las?: number[] }): Barn[] {
+  const farg = o.farg;
+  const inga = { top: FORM_INGEN, bottom: FORM_INGEN, left: FORM_INGEN, right: FORM_INGEN };
+  const BROD = 26, RAD = 215, LITEN = 23;
+  const elev: IRunOptions = { size: BROD, color: FAKTA.text, font: ELEVTYPSNITT };
+  const liten: IRunOptions = { size: LITEN, color: FAKTA.text, font: ELEVTYPSNITT };
+  const anton = (text: string, size: number, color: string, mer: Partial<IRunOptions> = {}) => textRun({ text, font: FAKTATYPSNITT, size, color, ...mer } as IRunOptions);
+  // En etikett: vit text i Anton på en färgad platta, med hårda mellanslag som luft.
+  const etikett = (text: string, fill: string, size = 19) => [anton(`  ${text}  `, size, 'FFFFFF', { shading: { type: ShadingType.CLEAR, fill, color: 'auto' } })];
+  const radbyte = () => new TextRun({ break: 1, size: LITEN });
+  // Riggens dokument har Arial 11 punkter och radavståndet 1,15 som grund, och sajtens har Calibri och enkelt radavstånd.
+  // Ett tomt styckes höjd är styckemärkets, och ett stycke med en bild får radavståndet på bildens höjd. De stycken som
+  // ärver grunden hos riggen har den därför utskriven här, så att sidorna bryts på samma ställen som riggens.
+  const GRUND = { size: 22, font: 'Arial' };
+  const tomt = (mer: Omit<IParagraphOptions, 'children'> = {}) => new Paragraph({ spacing: { before: 0, after: 0, line: 240 }, run: GRUND, ...mer, children: [new TextRun({ text: '', size: 4, font: 'Arial' })] });
+  // Luften mellan delarna: en halv rad och avståndet efter. Sidlåset tar bort luften före en låst del.
+  const luften = new WeakSet<object>();
+  const mellan = (efter = 200) => { const p = tomt({ spacing: { before: 0, after: efter, line: 120 } }); luften.add(p); return p; };
+  const brod = (text: string, efter: number) => new Paragraph({ spacing: { before: 0, after: efter, line: RAD }, children: bokRuns(text, elev) });
+  const fcell = (barn: Barn | Barn[], c: { w: number; fill?: string; kanter?: Partial<Record<'top' | 'bottom' | 'left' | 'right', IBorderOptions>>; mar?: typeof FORM_NOLL }) => new TableCell({
+    width: { size: c.w, type: WidthType.DXA }, shading: c.fill ? { type: ShadingType.CLEAR, fill: c.fill, color: 'auto' } : undefined,
+    borders: { ...inga, ...(c.kanter ?? {}) }, margins: c.mar ?? FORM_NOLL, verticalAlign: VerticalAlign.TOP, children: [barn].flat(),
+  });
+  // Rutnätet: en tabell utan linjer med textspalten, luften och marginalspalten.
+  const spalter = (rows: TableRow[]) => new Table({ width: { size: BOKBREDD, type: WidthType.DXA }, columnWidths: [FAKTASPALT, FAKTALUFT, FAKTAMARG], layout: TableLayoutType.FIXED, borders: FORM_UTAN, rows });
+  const ut: Barn[] = [];
+
+  // Sidans huvud: etiketten, titeln, ett kort tjockt streck i nivåns färg och ingressen. Titeln står i 36 punkter, och i
+  // 30 när den inte ryms på två rader.
+  if (f.etikett) ut.push(new Paragraph({ spacing: { before: 0, after: 90, line: 240 }, children: etikett(f.etikett.toLocaleUpperCase('sv'), FAKTA.mork) }));
+  const titelPt = breddPt(f.titel, 36, ANTON_BREDD as Record<string, number>) > (BOKBREDD / 20) * 0.96 * 2 ? 30 : 36;
+  ut.push(new Paragraph({ outlineLevel: 1, spacing: { before: 0, after: 40, line: 216 }, children: [anton(f.titel, titelPt * 2, FAKTA.mork)] }));
+  ut.push(punktStycke({ indent: { left: 0, right: BOKBREDD - 1300 }, spacing: { before: 0, after: 190, line: 240 }, border: { bottom: { style: BorderStyle.SINGLE, size: 48, color: farg, space: 0 } } }));
+  const ingress = (hoger: number) => f.ingress.map((s) => new Paragraph({ spacing: { before: 0, after: 200, line: 218 }, indent: { right: hoger }, children: bokRuns(s, { size: 31, color: FAKTA.mork, font: ELEVTYPSNITT }) }));
+
+  // Marginalens ordförklaringar: etiketten Ord i texten, och sedan ordet och förklaringen. Ordet och förklaringen är ett
+  // stycke, så att de inte skiljs åt när avsnittet fortsätter på nästa sida, och etiketten står i det första ordets stycke.
+  const ordlista = (ord: [string, string][]) => ord.map(([ordet, forklaring], i) => new Paragraph({
+    spacing: { before: 60, after: 60, line: 200 }, keepLines: true,
+    ...(i ? { border: { top: { style: BorderStyle.SINGLE, size: 4, color: FAKTA.linje, space: 3 } } } : {}),
+    children: [
+      ...(i ? [] : [anton(FAKTAORD.ord.toLocaleUpperCase('sv'), 18, farg), radbyte()]),
+      textRun({ ...liten, text: ordet, bold: true, color: FAKTA.mork }),
+      radbyte(),
+      ...bokRuns(forklaring, liten),
+    ],
+  }));
+  // Siffran: ett tal i stor grad och en rad som jämför det med något känt, som i en rekordbok.
+  const siffran = (s: [string, string]) => [
+    new Paragraph({ spacing: { before: 60, after: 0, line: 240 }, children: [anton(FAKTAORD.siffran.toLocaleUpperCase('sv'), 18, farg)] }),
+    new Paragraph({ spacing: { before: 0, after: 0, line: 216 }, border: { top: { style: BorderStyle.SINGLE, size: 4, color: FAKTA.linje, space: 3 } }, children: [anton(s[0], 64, farg)] }),
+    new Paragraph({ spacing: { before: 0, after: 100, line: 200 }, children: bokRuns(s[1], liten) }),
+  ];
+  // Faktarutan i marginalen: etiketten Fakta, rutans rubrik och raderna, med ordet över sitt värde. Etiketten, rubriken
+  // och den första raden är ett stycke som hålls ihop, så att rubriken inte blir ensam sist på en sida.
+  const marginalfakta = (x: { rubrik: string; rader: string[][] }) => {
+    const rad = (r: string[]) => (r.length > 1 ? [textRun({ ...liten, text: r[0], bold: true, color: FAKTA.mork }), radbyte(), ...bokRuns(r[1], liten)] : bokRuns(r[0], liten));
+    const [forsta, ...resten] = x.rader;
+    return [
+      new Paragraph({ spacing: { before: 60, after: 30, line: 216 }, keepLines: true, children: [anton('FAKTA', 18, farg), radbyte(), anton(x.rubrik, 24, FAKTA.mork), ...(forsta ? [radbyte(), ...rad(forsta)] : [])] }),
+      ...resten.map((r) => new Paragraph({ spacing: { before: 30, after: 30, line: 200 }, keepLines: true, children: rad(r) })),
+    ];
+  };
+  // Sidans huvud fortsätter: ingressen i textspalten och Siffran i marginalen, eller ingressen ensam.
+  if (f.siffran) ut.push(spalter([new TableRow({ children: [fcell(ingress(0), { w: FAKTASPALT }), fcell(tomt(), { w: FAKTALUFT }), fcell(siffran(f.siffran), { w: FAKTAMARG })] })]), mellan(60));
+  else ut.push(...ingress(1400));
+
+  // Ett avsnitt: numret på en bricka i nivåns färg och mellanrubriken, styckena i textspalten och det som hör till
+  // avsnittet i marginalen. Fördjupningen står på en tonad platta, med sin etikett över rubriken och utan nummer.
+  // last: delen börjar en ny sida (sidlåset): ett avsnitts mellanrubrik bär då sidbrytningen.
+  const avsnitt = (d: Extract<Faktadel, { slag: 'avsnitt' | 'fordjupning' }>, last: boolean): Barn[] => {
+    const platta = d.slag === 'fordjupning';
+    const fill = platta ? FAKTA.platta : undefined;
+    const rubrik = new Paragraph({ spacing: { before: platta ? 60 : 0, after: 70, line: 240 }, keepNext: true, keepLines: true, outlineLevel: 2, pageBreakBefore: (last && !platta) || undefined,
+      children: [...(d.slag === 'avsnitt' ? [...etikett(String(d.nr), farg, 28), anton('  ', 28, FAKTA.mork)] : []), anton(d.rubrik, 32, FAKTA.mork)] });
+    // I ett vanligt avsnitt står mellanrubriken före tabellen, som ett eget stycke som hålls ihop med den, så att raden
+    // med styckena får delas över två sidor: när hela avsnittet flyttades till nästa sida blev en text på Avancerat sju
+    // sidor med halvtomma sidor hos riggen, mot måttet fem.
+    const vanster = d.stycken.map((t, i) => brod(t, i === d.stycken.length - 1 ? (platta ? 160 : 60) : 150));
+    // Fördjupningens etikett och rubrik står i en egen rad på plattan, som hänger ihop med raden under. I samma rad som
+    // styckena hindrade de Word från att dela raden, medan Google Dokument delade den (riggens jämförelse 2026-10-12).
+    const huvudrad = platta ? [new TableRow({ cantSplit: true, children: [
+      fcell([new Paragraph({ spacing: { before: 120, after: 60, line: 240 }, keepNext: true, children: etikett('FÖRDJUPNING', FAKTA.mork, 18) }), rubrik], { w: FAKTASPALT, fill, mar: { top: 0, bottom: 0, left: 200, right: 0 } }),
+      fcell(tomt({ keepNext: true }), { w: FAKTALUFT, fill }),
+      fcell(tomt({ keepNext: true }), { w: FAKTAMARG, fill }),
+    ] })] : [];
+    const hoger: Barn[] = [...(d.siffran ? siffran(d.siffran) : []), ...(d.fakta ? marginalfakta(d.fakta) : []), ...(d.ord?.length ? ordlista(d.ord) : [])];
+    if (!hoger.length) hoger.push(tomt());
+    const tabell = spalter([...huvudrad, new TableRow({ cantSplit: false, children: [
+      fcell(vanster, { w: FAKTASPALT, fill, mar: platta ? { top: 0, bottom: 0, left: 200, right: 0 } : FORM_NOLL }),
+      fcell(tomt(), { w: FAKTALUFT, fill }),
+      fcell(hoger, { w: FAKTAMARG, fill, mar: platta ? { top: 120, bottom: 0, left: 0, right: 160 } : FORM_NOLL }),
+    ] })]);
+    return platta ? [tabell] : [rubrik, tabell];
+  };
+  // En bild över hela bredden, med bildtexten som eleven läser under, efter en liten fyrkant i nivåns färg. Bildens egen
+  // text (pabordet.text) är dess textalternativ. Saknar platsen sin bild stannar bygget.
+  // last: bilden börjar en ny sida (sidlåset): bildens stycke bär sidbrytningen, utan avstånd före.
+  const bild = (d: Extract<Faktadel, { slag: 'bild' }>, last: boolean): Barn[] => {
+    const b = o.bilder.find((x) => x.bild.rubrik === d.namn);
+    if (!b) throw new Error(`Faktatexten "${o.ramen}": platsen "Bild: ${d.namn}" har ingen bild På bordet med rubriken "${d.namn}" och efter "ram: ${o.ramen}".`);
+    const bredd = Math.round((((BOKBREDD * (b.skala ?? 1)) / 20) * 4) / 3), hojd = Math.round((bredd * b.matt.hojd) / b.matt.bredd);
+    return [
+      new Paragraph({ keepNext: true, pageBreakBefore: last || undefined, spacing: { before: last ? 0 : 60, after: 70, line: 276 }, run: GRUND, children: [bildRun(b.adress, bredd, bildensAlt(b), hojd)] }),
+      new Paragraph({ spacing: { before: 0, after: 220, line: 200 }, indent: { right: 1700 }, children: [new TextRun({ text: '■ ', size: 18, color: farg, font: 'Arial' }), ...bokRuns(d.text, { size: LITEN, color: FAKTA.dov, font: ELEVTYPSNITT })] }),
+    ];
+  };
+  // En ruta över hela bredden: en cell med ton, och en tjock kant upptill eller till vänster.
+  const ruta = (barn: Barn[], r: { fill: string; kant: Partial<Record<'top' | 'left', IBorderOptions>> }) => new Table({
+    width: { size: BOKBREDD, type: WidthType.DXA }, columnWidths: [BOKBREDD], layout: TableLayoutType.FIXED, borders: FORM_UTAN,
+    rows: [new TableRow({ cantSplit: true, children: [fcell(barn, { w: BOKBREDD, fill: r.fill, kanter: r.kant, mar: { top: 150, bottom: 150, left: 240, right: 240 } })] })],
+  });
+  const tjock = (color: string): IBorderOptions => ({ style: BorderStyle.SINGLE, size: 36, color, space: 0 });
+  const rad12: IRunOptions = { size: 24, color: FAKTA.text, font: ELEVTYPSNITT };
+  // Faktarutan i full bredd (en ruta som inte står direkt efter ett avsnitt, eller har fler än sex rader): etiketten
+  // Fakta, rutans rubrik och en rad per faktum. En rad med två celler är ett ord och dess värde.
+  const fakta = (d: Extract<Faktadel, { slag: 'fakta' }>) => ruta([
+    new Paragraph({ spacing: { before: 0, after: 80, line: 240 }, keepNext: true, children: [...etikett('FAKTA', farg, 18), anton(`  ${d.rubrik}`, 28, FAKTA.mork)] }),
+    ...d.rader.map((r, i) => (r.length === 1 && d.rader.some((x) => x.length > 1)
+      ? new Paragraph({ spacing: { before: 0, after: 90, line: 205 }, children: bokRuns(r[0], rad12) })
+      : new Paragraph({ spacing: { before: 0, after: i === d.rader.length - 1 ? 0 : 70, line: 205 }, indent: { left: 260, hanging: 260 },
+        children: [textRun({ ...rad12, text: '•  ', color: farg }), ...(r.length > 1 ? [textRun({ ...rad12, text: `${r[0]}  `, bold: true, color: FAKTA.mork }), ...bokRuns(r[1], rad12)] : bokRuns(r[0], rad12))] }))),
+  ], { fill: ljusTon(farg), kant: { left: tjock(farg) } });
+  // Visste du att: rubriken i Anton, och varje faktum för sig. En rad med två celler börjar med ett stort tal eller ord.
+  const visste = (d: Extract<Faktadel, { slag: 'visste' }>) => ruta([
+    new Paragraph({ spacing: { before: 0, after: 90, line: 240 }, keepNext: true, children: [anton(FAKTAORD.visste, 36, FAKTA.mork)] }),
+    ...d.rader.map((r, i) => new Paragraph({ spacing: { before: 0, after: i === d.rader.length - 1 ? 0 : 110, line: r.length > 1 ? 240 : 210 },
+      children: r.length > 1 ? [anton(`${r[0]} `, 52, farg), ...bokRuns(r[1], elev)] : [textRun({ ...elev, text: '… ', color: farg, bold: true }), ...bokRuns(r[0], elev)] })),
+  ], { fill: FAKTA.gul, kant: { top: tjock(FAKTA.gulkant) } });
+  // Läs mer: en rad per länk, med en pil, texten och adressen som länk, där bara domänen visas.
+  const lasmer = (d: Extract<Faktadel, { slag: 'lasmer' }>) => ruta([
+    new Paragraph({ spacing: { before: 0, after: 80, line: 240 }, keepNext: true, children: [anton(FAKTAORD.lasmer, 28, FAKTA.mork)] }),
+    ...d.rader.map((r, i) => new Paragraph({ spacing: { before: 0, after: i === d.rader.length - 1 ? 0 : 60, line: 205 }, indent: { left: 260, hanging: 260 },
+      children: [textRun({ ...rad12, text: '→  ', color: farg }), ...bokRuns(r[0], rad12),
+        ...(r[1] ? [new TextRun({ text: '  ', size: 24, font: 'Arial' }), new ExternalHyperlink({ link: r[1], children: [textRun({ text: r[1].replace(/^https?:\/\/(www\.)?/, '').replace(/\/.*$/, ''), size: 22, color: farg, font: ELEVTYPSNITT, underline: { type: UnderlineType.SINGLE, color: farg } })] })] : [])] })),
+  ], { fill: 'FFFFFF', kant: { top: { style: BorderStyle.SINGLE, size: 18, color: FAKTA.mork, space: 0 } } });
+
+  f.delar.forEach((d, i) => {
+    // Sidlåset: en låst del börjar en ny sida. Luften före den tas bort, och en del som börjar med en tabell får
+    // sidbrytningen på ett stycke på en punkt före sig; ett avsnitt och en bild bär den själva.
+    const last = !!o.las?.includes(i);
+    if (last && luften.has(ut[ut.length - 1])) ut.pop();
+    if (last && d.slag !== 'avsnitt' && d.slag !== 'bild') ut.push(punktStycke({ pageBreakBefore: true }));
+    if (d.slag === 'avsnitt') ut.push(...avsnitt(d, last), mellan(170));
+    else if (d.slag === 'fordjupning') ut.push(...avsnitt(d, last), mellan(220));
+    else if (d.slag === 'bild') ut.push(...bild(d, last));
+    else if (d.slag === 'fakta') ut.push(fakta(d), mellan(220));
+    else if (d.slag === 'visste') ut.push(visste(d), mellan(220));
+    else ut.push(lasmer(d), mellan(120));
+  });
+  return ut;
+}
+// Det varje del av en faktatext börjar med i Words pdf, läst uppifrån och från vänster, och det texten själv börjar med:
+// mätningen av sidlåset (scripts/sidlas.mjs) känner igen vilken del som står överst på en sida på det. Ett avsnitt
+// börjar med numret, mellanrubriken och första stycket, och bilden, som inte har någon text, med bildtexten.
+function faktatextensBorjan(f: Faktatext): { borjar: string; delar: string[] } {
+  const ren = (t: string) => t.replace(/\*/g, '');
+  return {
+    borjar: `${f.etikett.toLocaleUpperCase('sv')} ${f.titel}`,
+    delar: f.delar.map((d) => ren(d.slag === 'avsnitt' ? `${d.nr} ${d.rubrik} ${d.stycken[0] ?? ''}` : d.slag === 'fordjupning' ? `FÖRDJUPNING ${d.rubrik} ${d.stycken[0] ?? ''}` : d.slag === 'bild' ? d.text
+      : d.slag === 'fakta' ? `FAKTA ${d.rubrik}` : d.slag === 'visste' ? `${FAKTAORD.visste} ${(d.rader[0] ?? []).join(' ')}` : `${FAKTAORD.lasmer} ${d.rader[0]?.[0] ?? ''}`)),
+  };
+}
+// Faktatextens sidhuvud från textens andra sida: områdets namn och titeln i Anton 9 punkter över en tunn linje i nivåns
+// färg, så att lösa sidor hittar hem, och upphovet litet och grått till höger, som på boksidan (riggens sidhuvud har
+// inte upphovet). Textens första sida har titeln och bara upphovet (bokHuvud), med raden om figurerna under.
+function faktaHuvud(b: Boksektion, adress: string): Header {
+  return new Header({ children: [new Paragraph({
+    tabStops: [{ type: TabStopType.RIGHT, position: BOKBREDD }], spacing: { before: 0, after: 0, line: 240 },
+    border: { bottom: { style: BorderStyle.SINGLE, size: 8, color: b.farg, space: 4 } },
+    children: [
+      new TextRun({ text: b.fakta?.huvud ?? '', font: FAKTATYPSNITT, size: 18, color: FAKTA.dov }),
+      new TextRun({ children: [new Tab()], size: 15, font: 'Arial' }),
+      new TextRun({ text: `${UPPHOV} · ${adress}`, size: 15, color: BOK.not, font: 'Arial' }),
+    ],
+  })] });
+}
+function faktaForsta(b: Boksektion, adress: string): Header {
+  const rad = (text: string, size: number) => new Paragraph({ alignment: AlignmentType.RIGHT, spacing: { before: 0, after: 0, line: 240 }, run: { size, font: 'Arial' }, children: [new TextRun({ text, size, color: BOK.not, font: 'Arial' })] });
+  return new Header({ children: [rad(`${UPPHOV} · ${adress}`, 15), ...(b.fakta?.figurer ? [rad(b.fakta.figurer, 13)] : [])] });
+}
+
+// ---------------------------------------------------------------- bladet
+// Ett blad att skriva ut och skriva i (Faktatextsamtal i grupp, metodriggens TILL-SAJTEN 2026-10-13, Det nya punkt 4): en
+// bild På bordet vars rubrik börjar med "Blad: " (arBlad i src/lib/pabordet.ts), som en tom modell. Niclas 2026-10-12:
+// "Kan inte dessa läggas bredd till bredd på docx utan marginaler, liggande, och ha tomma textrutor i sig som
+// docx-version? Så slipper du ha en version med tabeller helt. Gärna så att det också fungerar i Google Drive." Bladet
+// är hela den liggande sidan, ett till ett med metodriggens build-docx.js (bildblad): bilden ligger bakom texten,
+// förankrad i sidans hörn, och över den ligger en tabell utan linjer med en cell för varje yta där eleven skriver
+// (ytorna kommer ur bilden, PaBordet.ytor). Den som skriver ut får det ritade bladet, och den som skriver i filen ställer
+// markören i ett fält och skriver. Ett ifyllt blad (exemplet om skolan, arIfylltBlad) är bara bilden.
+// Riggen mätte 2026-10-12 med wordparitets jämförelse: bilden bakom texten och tabellen över den står lika i Word och i
+// Google Dokument, och cellerna går att skriva i direkt i båda. En textruta ritar Google som en teckning i ett eget
+// fönster, så rutorna är celler. Fem saker krävdes för att tabellen ska stå lika i båda:
+//   stycket som bär bilden har radavståndet 20, eftersom Google annars ger det en hel rad och tabellen hamnar 4 mm för lågt;
+//   raderna har satt höjd i hela bildpunkter, och cellerna ingen marginal upptill eller nedtill (wordparitet, REGLER.md);
+//   kanter som ligger närmare varandra än två millimeter blir en, så att rutnätet inte får smala spår;
+//   den sista raden att skriva på slutar senast 198 mm från sidans överkant, där bilden slutar;
+//   sidans marginaler är minst 6,5 mm, så att Word inte varnar för marginaler utanför det utskrivbara området.
+// Den som skriver mer i en cell än raden rymmer flyttar resten av bladet nedåt i Google, som gör raden högre, medan Word
+// klipper texten. scripts/wordregler.mjs har undantaget för bilden bakom texten, som regeln om det Google saknar annars
+// stoppar.
+//
+// Upphovet (riggens blad har inget): en rad i Arial 6 punkter mitt under bilden, som är ritad inom 8 till 198 mm av
+// sidans 210. Raden är tabellens sista rad, i textens lager. I sidhuvudet eller sidfoten syns den inte, eftersom bilden
+// har vit botten och ligger över dem (prövat i Word 2026-10-13), och ett sidhuvud hade dessutom kunnat flytta cellerna.
+// Raden slutar 201,3 mm från sidans överkant, så att texten står en dryg millimeter under bildens nedersta linje och
+// sektionens sista stycke ryms med marginal före sidans nederkant vid 203,5 mm, också i Google Dokument.
+const BLADSIDA = { b: 297, h: 210, nederst: 198, snappMm: 2, minstMm: 4, marginalMm: 6.5, upphovMm: 201.3, upphov: 12 };
+function bladrutnat(ytor: Bladyta[], k: number) {
+  // Kanterna i bildens punkter. Kanter som ligger nära varandra blir en.
+  const kanter = (varden: number[]) => { const ut: number[] = []; for (const v of [...new Set(varden)].sort((a, b) => a - b)) if (!ut.length || v - ut[ut.length - 1] > BLADSIDA.snappMm / k) ut.push(v); return ut; };
+  const narmast = (v: number, lista: number[]) => lista.reduce((bast, x) => (Math.abs(x - v) < Math.abs(bast - v) ? x : bast), lista[0]);
+  const tak = BLADSIDA.nederst / k;
+  const ramar = ytor.map((y) => ({ ...y, x0: y.x, x1: y.x + y.b, y0: y.y, y1: Math.min(y.y + y.h, tak) })).filter((y) => y.y1 - y.y0 > BLADSIDA.minstMm / k);
+  const xs = kanter(ramar.flatMap((y) => [y.x0, y.x1])), ys = kanter(ramar.flatMap((y) => [y.y0, y.y1]));
+  for (const y of ramar) { y.x0 = narmast(y.x0, xs); y.x1 = narmast(y.x1, xs); y.y0 = narmast(y.y0, ys); y.y1 = narmast(y.y1, ys); }
+  return { xs, ys, ramar: ramar.filter((y) => y.x1 > y.x0 && y.y1 > y.y0) };
+}
+// Bladets skrivytor: ett ifyllt blad har inga celler, eftersom läraren visar det och ingen skriver i det.
+const bladytor = (b: PaBordet) => (arIfylltBlad(b) ? [] : b.ytor ?? []);
+// Bladets marginaler: tabellen börjar vid den första ytans kant, och resten av sidan är bildens. Ett blad utan celler
+// har 6,5 mm runt om.
+function bladmarginaler(b: PaBordet): Bladsektion {
+  const k = BLADSIDA.b / b.matt.bredd, { xs, ys } = bladrutnat(bladytor(b), k);
+  const minst = Math.round(BLADSIDA.marginalMm * MM);
+  if (!xs.length) return { top: minst, bottom: minst, left: minst, right: minst };
+  const m = { top: Math.round((ys[0] * k - 0.4) * MM), bottom: minst, left: Math.round(xs[0] * k * MM), right: Math.round((BLADSIDA.b - xs[xs.length - 1] * k) * MM) - 30 };
+  if (Math.min(m.top, m.left, m.right) < minst) throw new Error(`Bladet "${b.bild.rubrik}": en skrivyta ligger närmare papperets kant än ${String(BLADSIDA.marginalMm).replace('.', ',')} mm. Word varnar då för marginaler utanför det utskrivbara området; rita ytorna längre in (riggens docs/bladen.md).`);
+  return m;
+}
+// adress: metodens adress, som står i upphovet under bilden.
+function bildblad(b: PaBordet, adress: string): Barn[] {
+  if (Math.abs(b.matt.hojd / b.matt.bredd - BLADSIDA.h / BLADSIDA.b) > 0.01) throw new Error(`Bladet "${b.bild.rubrik}" är ${b.matt.bredd} × ${b.matt.hojd} punkter. Ett blad är hela den liggande sidan, 1485 × 1050 (src/data/pabordet.json, scripts/pabordetdata.mjs).`);
+  const k = BLADSIDA.b / b.matt.bredd; // millimeter per punkt i bilden
+  const emu = (mm: number) => Math.round(mm * 36000);
+  const bakom = bildRun(b.adress, mmPx(BLADSIDA.b), bildensAlt(b), mmPx(b.matt.hojd * k), {
+    horizontalPosition: { relative: HorizontalPositionRelativeFrom.PAGE, offset: 0 },
+    verticalPosition: { relative: VerticalPositionRelativeFrom.PAGE, offset: emu((BLADSIDA.h - b.matt.hojd * k) / 2) },
+    behindDocument: true, allowOverlap: true, lockAnchor: true, wrap: { type: TextWrappingType.NONE },
+  });
+  const ankare = new Paragraph({ spacing: { before: 0, after: 0, line: 20 }, run: { size: 2, font: 'Calibri' }, children: [bakom, new TextRun({ text: '', size: 2, font: 'Calibri' })] });
+  const rutnat = bladrutnat(bladytor(b), k);
+  const { ys, ramar } = rutnat;
+  // Ett blad utan celler har en enda kolumn mellan marginalerna, för upphovets rad.
+  const xs = ramar.length ? rutnat.xs : [BLADSIDA.marginalMm / k, (BLADSIDA.b - BLADSIDA.marginalMm) / k];
+  const bredder = xs.slice(1).map((x, n) => Math.round((x - xs[n]) * k * MM));
+  const INGA = { top: INGEN, bottom: INGEN, left: INGEN, right: INGEN };
+  const i = (q: (typeof ramar)[number], n: number, m: number) => xs[n] >= q.x0 && xs[n + 1] <= q.x1 && ys[m] >= q.y0 && ys[m + 1] <= q.y1;
+  const summa = (fran: number, antal: number) => bredder.slice(fran, fran + antal).reduce((a, c) => a + c, 0);
+  // Det som skrivs i en cell står i elevens typsnitt, 13 punkter: styckemärket bär det också, eftersom en tom cell tar
+  // sin stil därifrån när någon ställer markören där och skriver (riggen har stilen bara på en tom textlöpa).
+  const skrift = { font: ELEVTYPSNITT, size: 26, color: FARG.text };
+  const rader: TableRow[] = [];
+  for (let m = 0; m < ys.length - 1; m++) {
+    const celler: TableCell[] = [];
+    let n = 0;
+    while (n < xs.length - 1) {
+      const q = ramar.find((y) => i(y, n, m));
+      if (q) {
+        const spar = xs.indexOf(q.x1) - xs.indexOf(q.x0);
+        // Fortsättningen av en cell som går över flera rader lägger docx till själv.
+        if (ys[m] === q.y0) celler.push(new TableCell({
+          columnSpan: spar, rowSpan: ys.indexOf(q.y1) - ys.indexOf(q.y0), borders: INGA, width: { size: summa(n, spar), type: WidthType.DXA },
+          verticalAlign: q.lage === 'mitt' ? VerticalAlign.CENTER : q.lage === 'nere' ? VerticalAlign.BOTTOM : VerticalAlign.TOP, margins: { top: 0, bottom: 0, left: 75, right: 75 },
+          children: [new Paragraph({ spacing: { before: 0, after: 0, line: 170 }, alignment: q.mitt ? AlignmentType.CENTER : AlignmentType.LEFT, run: skrift, children: [new TextRun({ text: '', ...skrift })] })],
+        }));
+        n += spar;
+      } else {
+        // Tomma spår bredvid varandra blir en cell.
+        let antal = 1;
+        while (n + antal < xs.length - 1 && !ramar.some((y) => i(y, n + antal, m))) antal++;
+        celler.push(new TableCell({ columnSpan: antal, borders: INGA, margins: FORM_NOLL, width: { size: summa(n, antal), type: WidthType.DXA }, children: [punktStycke()] }));
+        n += antal;
+      }
+    }
+    rader.push(new TableRow({ cantSplit: true, height: { value: bildpunkt((ys[m + 1] - ys[m]) * k * MM), rule: HeightRule.EXACT }, children: celler }));
+  }
+  // Upphovets rad, sist i tabellen: från den sista skrivradens kant ned till 201,3 mm, med texten nederst i cellen.
+  // Radens höjd är det som återstår dit, så att radernas avrundning till hela bildpunkter inte flyttar upphovet.
+  const ovan = bladmarginaler(b).top + rader.reduce((a, r) => a + Number(radInst(r).height!.value), 0);
+  const upphov = { font: 'Arial', size: BLADSIDA.upphov, color: BOK.not };
+  rader.push(new TableRow({ cantSplit: true, height: { value: bildpunkt(BLADSIDA.upphovMm * MM - ovan), rule: HeightRule.EXACT }, children: [new TableCell({
+    columnSpan: bredder.length, borders: INGA, margins: FORM_NOLL, width: { size: summa(0, bredder.length), type: WidthType.DXA }, verticalAlign: VerticalAlign.BOTTOM,
+    children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 240 }, run: upphov, children: [new TextRun({ text: `${UPPHOV} · ${adress}`, ...upphov })] })],
+  })] }));
+  // Tabellen följer redan reglerna för rader med satt höjd, och googleTabeller kan inte bygga om en rad med celler över
+  // flera rader: den lämnas som den är (googleklar).
+  return [ankare, googleklar(new Table({ layout: TableLayoutType.FIXED, width: { size: summa(0, bredder.length), type: WidthType.DXA }, columnWidths: bredder, indent: { size: 0, type: WidthType.DXA }, margins: FORM_NOLL, borders: { ...INGA, insideHorizontal: INGEN, insideVertical: INGEN }, rows: rader }))];
+}
+// Bladet i flödet: ensamt på ett liggande A4 med bladets marginaler, och sedan en vanlig sida igen. Bladet behöver inte
+// sin ram: flödet går att lägga var som helst, också i en fil med bara blad (bladDokument).
+const bladFlod = (b: PaBordet, adress: string): Flod => [new Sektionsbyte(false, undefined, undefined, true, bladmarginaler(b)), ...bildblad(b, adress), new Sektionsbyte(false)];
+// Vilka av ramarnas blad en fil har efter ramarna: alla, bara de ifyllda (exemplet om skolan, som läraren visar, utan de
+// tomma bladen) eller inga. De tomma bladen för sig är en egen fil (bladDokument).
+export type Bladurval = 'alla' | 'ifyllda' | 'inga';
+const bladIUrval = (b: PaBordet, urval: Bladurval = 'alla') => urval === 'alla' || (urval === 'ifyllda' && arIfylltBlad(b));
+// Ett blad hör till en ram och står direkt efter den. Står det någon annanstans stannar bygget, eftersom bladet annars
+// ritades som en vanlig bild På bordet i satsens bredd, eller inte alls i planeringsmallarna.
+function bladensPlatser(bilder: PaBordet[]): void {
+  const fel = bilder.find((b) => arBlad(b) && !(b.vid && 'ram' in b.vid));
+  if (fel) throw new Error(`Bladet "${fel.bild.rubrik}" (På bordet ${fel.bild.nr}) har efter: "${fel.bild.efter}". Ett blad står på ett eget liggande A4 direkt efter sin ram: skriv efter: "ram: <ramens rubrik>" (src/lib/pabordet.ts).`);
+}
+// Bilderna som eleven ser på (PaBordet.elev) på ett elevens blad med listor (ramen står i elevblad): de står på bladet,
+// direkt efter det eleven läser. Utan listor eller utanför elevblad är bilden en vanlig bild På bordet efter ramen.
+const elevbilderVid = (d: MetodData, ram: Ram, bilder: PaBordet[]) => (d.elevblad[ram.rubrik] && ram.listor?.length ? paBordetVid(bilder, { ram: ram.rubrik }).filter((b) => b.elev && !arBlad(b)) : []);
 
 // ---------------------------------------------------------------- sagobladen och tärningen
 // Skrivkurs: sagoboken (Niclas 2026-10-02: mallarna ska kännas som sagor, "Snirklar och som curbits ... längs upp i
@@ -1589,9 +1994,17 @@ function veckansBildHojd(falt: { rubrik: string; text: string }[], rad: string[]
 // ramens text utan veckorna ('inga') och sedan en vecka i taget (veckans index), så att veckans material kan stå emellan.
 // paNySida: det som ritas står först i ett nytt avsnitt, som redan börjar på en ny sida, och får då ingen egen
 // sidbrytning före sig.
-function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: MetodData['kort']; blad?: Record<string, number>; brak?: boolean; elev?: boolean; ensamRuta?: Barn[]; efterDel?: (rubrik: string, maxHojd?: number) => Barn[]; bildtext?: (rubrik: string) => string; nivaer?: Niva[]; id?: string; karta?: { tabell?: MetodData['tabeller'][number]; vecka: (led: string) => string; blad: (namn: string) => string | undefined; lankar: KartaWord }; veckor?: 'inga' | number; paNySida?: boolean; tat?: boolean } = {}): Flod {
+// bildmatt: måtten på bilden På bordet vid en del, när den har en (bilderna har egna mått, PaBordet.matt).
+// radetiketter: metodens radetiketter, som får husets blå först på en rad i ett fält (ramFaltTabell).
+// elevbilder: bilderna som eleven ser på (PaBordet.elev) på ett elevens blad med listor, ritade utan rubrik: de står
+// direkt efter det eleven läser, och rutan Till läraren kommer sist, i lärarens form.
+function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: MetodData['kort']; blad?: Record<string, number>; brak?: boolean; elev?: boolean; ensamRuta?: Barn[]; efterDel?: (rubrik: string, maxHojd?: number) => Barn[]; bildtext?: (rubrik: string) => string; bildmatt?: (rubrik: string) => PaBordet['matt'] | undefined; radetiketter?: string[]; elevbilder?: Barn[]; nivaer?: Niva[]; id?: string; karta?: { tabell?: MetodData['tabeller'][number]; vecka: (led: string) => string; blad: (namn: string) => string | undefined; lankar: KartaWord }; veckor?: 'inga' | number; paNySida?: boolean; tat?: boolean } = {}): Flod {
   const ut: Flod = [];
   const enVecka = typeof o.veckor === 'number';
+  // Elevens blad med en bild som eleven ser på (Faktatextsamtal i grupp, kartläggningens två texter, metodriggens
+  // TILL-SAJTEN 2026-10-13, Det nya punkt 6): det eleven läser står i 13 punkter, som hos riggen, så att texten, bilden
+  // och rutan ryms på ett A4, och listornas rubriker står utan ramens namn, eftersom bladet är elevens.
+  const elevsida = !!o.elevbilder?.length && !!ram.listor?.length;
   // Ramens text hänger ihop med det som följer, utom när veckorna börjar på en ny sida: Google Dokument flyttade då
   // texten till en egen sida före den första veckan, eftersom den hängde ihop med sidbrytningen (Word bortser från det).
   if (!enVecka) for (const s of ram.text) ut.push(stycke(s, { hallIhop: !ram.lektioner || undefined }));
@@ -1632,10 +2045,17 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
     // ihoptryckta ut, och "Om det är två sidor är det bättre att bas, medel och avancerad är på samma sida som på bordet").
     const plats = ram.lektioner ? veckansBildHojd(del.falt, rad?.slice(1), '') : undefined;
     const bildtext = ram.lektioner ? o.bildtext?.(del.rubrik) ?? '' : '';
-    const tvaSidor = plats !== undefined && !!bildtext && plats - bildtextensHojd(bildtext) < VECKOBILD_MINST * veckobildensHojd();
+    const tvaSidor = plats !== undefined && !!bildtext && plats - bildtextensHojd(bildtext) < VECKOBILD_MINST * veckobildensHojd(o.bildmatt?.(del.rubrik));
+    // En del med en bild På bordet i en vanlig ram (lärarens sida till en faktatext: rutan för modellpasset med bilden
+    // Ett möjligt resultat, metodriggens TILL-SAJTEN 2026-10-13, Det nya punkt 2): delen börjar på en ny sida och hålls
+    // ihop med bilden, tät som en vecka, så att rutan och bilden står på ett A4 och lärarens sida blir två. Den första
+    // delen får ingen sidbrytning, eftersom ramens rubrik och text då stod ensamma på sidan före.
+    const medBild = !ram.lektioner && !!o.bildtext?.(del.rubrik);
+    // På elevens blad med en bild som eleven ser på står rutan Till läraren i lärarens form, inte som fält att skriva i.
+    const elevensFalt = !!o.blad && !elevsida;
     return [
-      ...(ram.lektioner && !(o.paNySida && nr === 0) ? [new Paragraph({ pageBreakBefore: true, spacing: { before: 0, after: 0, line: 240 }, run: { size: 2, font: 'Calibri' } })] : []),
-      ...ramFaltTabell(del.falt, { rubrik: (korta || ram.listor) && !del.rubrik.includes(ram.rubrik) ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum, hojder: o.blad ? del.falt.map((f) => o.blad![f.rubrik]) : undefined, elevblad: !!o.blad, tat: ram.lektioner || o.tat, bokmarke: ram.lektioner && o.karta ? o.karta.vecka(forstaLed(del.rubrik)) : undefined, luftEfter: rad && !tvaSidor ? VECKANS_LUFT : ram.oversikt?.bilder ? 60 : undefined }),
+      ...((ram.lektioner && !(o.paNySida && nr === 0)) || (medBild && nr > 0) ? [new Paragraph({ pageBreakBefore: true, spacing: { before: 0, after: 0, line: 240 }, run: { size: 2, font: 'Calibri' } })] : []),
+      ...ramFaltTabell(del.falt, { rubrik: (korta || ram.listor) && !del.rubrik.includes(ram.rubrik) ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum, hojder: elevensFalt ? del.falt.map((f) => o.blad![f.rubrik]) : undefined, elevblad: elevensFalt, tat: ram.lektioner || o.tat || medBild, bokmarke: ram.lektioner && o.karta ? o.karta.vecka(forstaLed(del.rubrik)) : undefined, luftEfter: rad && !tvaSidor ? VECKANS_LUFT : medBild ? VECKANS_LUFT : ram.oversikt?.bilder ? 60 : undefined, hallIhopEfter: medBild || undefined, etiketter: o.radetiketter }),
       ...(tvaSidor ? [luft(LUFT_RAD, true, { nySida: true })] : []),
       // Veckans rad ur kartan: talen och bladen för varje nivå, med bladens namn som länkar.
       ...(rad && o.karta?.tabell ? (() => { const k = o.karta!.tabell!.kolumner.slice(1); return rubrikTabell(k, [rad.slice(1)], k.map(() => Math.floor(BREDD / k.length)), { radrubrik: false, hallIhop: true, hallIhopEfter: true, storlek: 19, karta: { ...o.karta!.lankar, vecka: undefined } }); })() : []),
@@ -1654,7 +2074,7 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
   // rader) sätts ett steg mindre så att listorna, noten och upphovet ryms på en sida och ingen
   // ensam rad hamnar på en sida för sig.
   const radantal = (ram.listor ?? []).reduce((a, l) => a + l.rader.length, 0);
-  const storlek = o.stor ? (radantal > 12 ? 28 : 32) : 26;
+  const storlek = o.stor && !elevsida ? (radantal > 12 ? 28 : 32) : 26;
   // I elevkopian får listorna bryta sida mellan sig, men den sista håller ihop med lärarnoten efter,
   // så att noten och upphovet aldrig står ensamma på en sida. I beskrivningen hålls listorna ihop.
   // En lästräningstext blir två läskort på en egen sida (K-063), och en ensam kort lista ett kort i 20 pt (K-062).
@@ -1668,7 +2088,7 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
     if (stodKolumn !== undefined) return [...efterBlad, ...laskortBarn(l, stodKolumn)];
     if (arBildlista(l)) return [...efterBlad, ...bildlistaBarn(l)];
     const ettKort = arEttKort(alla, l);
-    return [...efterBlad, ...elevlista({ ...l, rubrik: !o.stor && l.rubrik && !namngerRamen(l.rubrik) ? `${l.rubrik} · ${ram.rubrik}` : l.rubrik }, { storlek: ettKort ? 40 : storlek, luft: ettKort, hallIhopEfter: o.stor ? i === alla.length - 1 : i < alla.length - 1, brak: o.brak, elev: o.elev && !l.larare })];
+    return [...efterBlad, ...elevlista({ ...l, rubrik: !o.stor && !elevsida && l.rubrik && !namngerRamen(l.rubrik) ? `${l.rubrik} · ${ram.rubrik}` : l.rubrik }, { storlek: ettKort ? 40 : storlek, luft: ettKort, hallIhopEfter: elevsida || (o.stor ? i === alla.length - 1 : i < alla.length - 1), brak: o.brak, elev: o.elev && !l.larare, tat: elevsida || undefined })];
   });
   // Berättartärningarna (src/lib/sagoblad.ts, tarningTabell): lärarens ruta först, sedan varje tärning på ett eget A4 med
   // smal marginal, som ett kors att klippa, vika och limma, både i beskrivningen och i planeringsmallarna.
@@ -1730,6 +2150,8 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
   const delas = protokoll && protokollDelas(ram) ? [new Paragraph({ pageBreakBefore: true, spacing: { before: 0, after: 0 } })] : [];
   // Räknebladen fyller var sin sida, så lärarens noter står före dem också i planeringsmallarna.
   const rakneblad = (ram.listor ?? []).some((l) => l.rakneblad);
+  // Elevens blad med en bild som eleven ser på: det eleven läser, bilden och sist rutan Till läraren, som hos riggen.
+  if (elevsida) { ut.push(...huvud(), ...listor(), ...o.elevbilder!, ...noter()); return ut; }
   if (ram.listor) ut.push(...(o.stor && !protokoll && !rakneblad ? [...huvud(), ...listor(), ...noter()] : [...noter(), ...delas, ...huvud(), ...listor()]));
   else ut.push(...noter(o.veckor === 'inga' ? [] : enVecka ? [ram.delar[o.veckor as number]] : ram.delar));
   return ut;
@@ -1778,10 +2200,10 @@ const VIKLINJE: IBorderOptions = { style: BorderStyle.DOTTED, size: 14, color: F
 const INGEN: IBorderOptions = { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' };
 const px = (cm: number) => Math.round((cm / 2.54) * 96);
 let ljudBildNr = 0;
-function bildRun(sokvag: string, storlek: number, namn: string, hojd = storlek): ImageRun {
+function bildRun(sokvag: string, storlek: number, namn: string, hojd = storlek, flytande?: IFloating): ImageRun {
   const data = RESURSER.bilder.get(sokvag);
   if (!data) throw new Error(`Bilden ${sokvag} saknas i Word-filens resurser (src/lib/ljudkort.ts, metodensBilder).`);
-  return svgRun(data, storlek, hojd, { name: `Bild ${++ljudBildNr}`, description: namn, id: String(3000 + ljudBildNr) });
+  return svgRun(data, storlek, hojd, { name: `Bild ${++ljudBildNr}`, description: namn, id: String(3000 + ljudBildNr) }, flytande);
 }
 const elevRun = (text: string, size: number, farg = FARG.text) => new TextRun({ text, size, color: farg, font: ELEVTYPSNITT });
 // Arkets rubrik och, för vikkorten, raden om klipp och vik: små, så att arket får plats på sidan.
@@ -2189,7 +2611,14 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
   // ett steg eller efter ett stycke.
   // Bilderna På bordet (src/lib/pabordet.ts) står på samma platser som extrafilmerna, och efter en del i en ram (en vecka).
   const bilderPaBordet = metodensPaBordet(d, post.id);
-  const filmVid = (...platser: FilmPlats[]) => { for (const p of platser) { for (const f of filmerVid(filmer, p)) ut.push(...filmBarn(f)); for (const b of paBordetVid(bilderPaBordet, p)) ut.push(...pabordetBarn(b)); } };
+  bladensPlatser(bilderPaBordet);
+  // Bilderna som redan står i sin form: en faktatexts bilder på sina platser och bilden på elevens blad. De ritas inte
+  // en gång till som vanliga bilder På bordet efter ramen.
+  const placerade = new Set<PaBordet>();
+  // Ett blad (bildblad()) står ensamt på ett liggande A4 där det hör hemma, direkt efter sin ram, i bildernas ordning.
+  const adress = metodAdress(bas, post.id).replace(/^https?:\/\//, '');
+  const bordsbild = (b: PaBordet): Flod => (arBlad(b) ? bladFlod(b, adress) : pabordetBarn(b));
+  const filmVid = (...platser: FilmPlats[]) => { for (const p of platser) { for (const f of filmerVid(filmer, p)) ut.push(...filmBarn(f)); for (const b of paBordetVid(bilderPaBordet, p)) if (!placerade.has(b)) ut.push(...bordsbild(b)); } };
   const efterDel = (rubrik: string, maxHojd?: number) => [...filmerVid(filmer, { del: rubrik }).flatMap(filmBarn), ...paBordetVid(bilderPaBordet, { del: rubrik }).flatMap((b) => pabordetBarn(b, maxHojd === undefined ? undefined : maxHojd - radantal(`På bordet. ${b.bild.text}`, BREDD, 19) * 235))];
   const karta = kartaFor(post);
   d.inledning.forEach((s, i) => { ut.push(stycke(s)); filmVid({ stycke: i + 1 }); });
@@ -2348,11 +2777,25 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     // beskrivningen" och Allt om metoden är allt, också i en metod med en bank).
     const former = problemformer(ramarna, bilderPaBordet);
     const bank = bankAv(d);
-    const ramVal = (ram: Ram) => ({ kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d), efterDel, bildtext: (rubrik: string) => paBordetVid(bilderPaBordet, { del: rubrik }).map((b) => b.bild.text).join(' '), nivaer: d.nivaer, id: post.id, karta });
+    // Bilden som eleven ser på (PaBordet.elev) står på elevens blad, i ramen, och inte en gång till efter den.
+    const elevbilder = (ram: Ram) => { const bilder = elevbilderVid(d, ram, bilderPaBordet); for (const b of bilder) placerade.add(b); return bilder.flatMap((b) => pabordetBarn(b, undefined, { utanRubrik: true })); };
+    const ramVal = (ram: Ram) => ({ kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d), efterDel, bildtext: (rubrik: string) => paBordetVid(bilderPaBordet, { del: rubrik }).map((b) => b.bild.text).join(' '), bildmatt: (rubrik: string) => paBordetVid(bilderPaBordet, { del: rubrik })[0]?.matt, radetiketter: d.radetiketter, elevbilder: elevbilder(ram), nivaer: d.nivaer, id: post.id, karta });
     let efterVeckorna = false;
     const ramensRubrik = (ram: Ram, nySida = false) => new Paragraph({ children: [run(ram.rubrik)], heading: HeadingLevel.HEADING_3, keepNext: true, pageBreakBefore: nySida || undefined, spacing: { before: 240, after: 80 } });
+    const faktasidor = faktatexter(ramarna);
     // En ram, där den står. ram är ramen som den ritas: en ram vars listor står vid veckorna ritas utan dem.
     const enRam = (i: number, ram: Ram): void => {
+      // En faktatext (faktatextAv i src/lib/ramform.ts) är sidor i en faktabok, i en egen sektion, med bilderna På bordet
+      // på sina platser i texten (faktatext()). En bild vid ramen som ingen plats nämner står efter texten.
+      const fakta = faktasidor.get(ram);
+      if (fakta) {
+        const { iTexten } = faktabilder(fakta, paBordetVid(bilderPaBordet, { ram: ram.rubrik }));
+        const farg = nivansFarg(d.nivaer, fakta);
+        ut.push(faktabyte(fakta, { farg, metod: d.titel, bilder: iTexten }), ...faktatext(fakta, { farg, ramen: ram.rubrik, bilder: iTexten, las: sidlasFor(post.id, ram.rubrik) }), new Sektionsbyte(false));
+        for (const b of iTexten) placerade.add(b);
+        filmVid({ ram: ram.rubrik });
+        return;
+      }
       // Två lösningar: elevens blad på ett liggande A4, utan lärarens sida före (tvaLosningar()).
       const los = former.losningar(ram);
       if (los) {
@@ -2378,7 +2821,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
       if (st) {
         const [bild, ...fler] = paBordetVid(bilderPaBordet, { ram: ram.rubrik });
         ut.push(formbyte(st.not || ram.rubrik), ...struktur(st, bild), new Sektionsbyte(false));
-        for (const b of fler) ut.push(...pabordetBarn(b));
+        for (const b of fler) ut.push(...bordsbild(b));
         for (const f of filmerVid(filmer, { ram: ram.rubrik })) ut.push(...filmBarn(f));
         return;
       }
@@ -2415,7 +2858,10 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
       // Lärarens sida till ett problem är ett blad: den börjar på en ny sida, med problemet överst och lösningarna efter texten.
       const larare = former.larare(ram);
       // En litteraturlista (en översikt med bilder) börjar också på en ny sida, så att de tio böckerna står på en sida.
-      const nySida = (!!(ram.serie || ram.ark) || forstEfterVeckorna || !!larare || !!ram.oversikt?.bilder || efterLista) && !(ut.at(-1) instanceof Sektionsbyte);
+      // Elevens blad med en bild som eleven ser på är ett blad att kopiera, ett A4 hos riggen: det börjar på en ny sida,
+      // och ramen efter likaså, så att inget annat står på elevens blad.
+      const elevsida = (r: Ram | undefined) => !!r && !ramArTom(r) && elevbilderVid(d, r, bilderPaBordet).length > 0;
+      const nySida = (!!(ram.serie || ram.ark) || forstEfterVeckorna || !!larare || !!ram.oversikt?.bilder || efterLista || elevsida(ram) || elevsida(ramarna[i - 1])) && !(ut.at(-1) instanceof Sektionsbyte);
       ut.push(ramensRubrik(ram, nySida));
       const serie = ramensSerie(ram, post.id);
       if (ramArTom(ram)) {
@@ -2476,7 +2922,10 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
 // hoppas då över här (baraTommaRamar); i mallfilen för sig finns alla ramar.
 // bank: bara de här ramarna, i den här ordningen, och inget annat: en fil ur metodens bank (bankDokument). Utan bank står
 // en metods bank först bland ramarna, i bankens ordning, som på sidan och i beskrivningen.
-function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; bank?: number[]; figurradVidFigur?: boolean } = {}): { barn: Flod; liggande?: boolean }[] {
+// blad: vilka av ramarnas blad (bildblad()) som står efter sin ram: alla (förval), bara de ifyllda (exemplet som läraren
+// visar) eller inga. Så går modellens sida med sitt exempel att lägga i en fil (ramarDokument) och de tomma bladen i en
+// annan (bladDokument).
+function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; bank?: number[]; figurradVidFigur?: boolean; blad?: Bladurval } = {}): { barn: Flod; liggande?: boolean }[] {
   const d = post.data;
   const sidor: Flod[] = [];
   const under = (namn: string) => [
@@ -2565,8 +3014,8 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
   // första sida (granskningen av skrivkurserna 2026-10-10: MIT-licensen kräver raden i kopiorna).
   const figurRad = metodensPaBordet(d, post.id).some((b) => b.bild.fluent?.length) ? grundUpphov(d, false) : undefined;
   const figurBilder = new WeakSet<object>();
-  const bordet = (b: PaBordet, maxHojd?: number): Barn[] => {
-    const ut = pabordetBarn(b, maxHojd);
+  const bordet = (b: PaBordet, maxHojd?: number, val?: Parameters<typeof pabordetBarn>[2]): Barn[] => {
+    const ut = pabordetBarn(b, maxHojd, val);
     if (b.bild.fluent?.length) for (const x of ut) figurBilder.add(x as object);
     return ut;
   };
@@ -2578,14 +3027,36 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
     const ramarna = d.ramar.ramar;
     const boksidor = lastexter(ramarna);
     const paBordet = metodensPaBordet(d, post.id);
-    const ramVal = (ram: Ram, tom: boolean) => ({ skrivrum: tom, stor: true, kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d), efterDel: (rubrik: string, maxHojd?: number) => paBordetVid(paBordet, { del: rubrik }).flatMap((b) => bordet(b, maxHojd === undefined ? undefined : maxHojd - radantal(`På bordet. ${b.bild.text}`, BREDD, 19) * 235)), bildtext: (rubrik: string) => paBordetVid(paBordet, { del: rubrik }).map((b) => b.bild.text).join(' '), nivaer: d.nivaer, id: post.id, karta: kartaFor(post) });
+    bladensPlatser(paBordet);
+    const ramVal = (ram: Ram, tom: boolean) => ({ skrivrum: tom, stor: true, kort: d.kort, blad: d.elevblad[ram.rubrik], brak: d.omrade === 'Matematik', elev: harElevtypsnitt(d), efterDel: (rubrik: string, maxHojd?: number) => paBordetVid(paBordet, { del: rubrik }).flatMap((b) => bordet(b, maxHojd === undefined ? undefined : maxHojd - radantal(`På bordet. ${b.bild.text}`, BREDD, 19) * 235)), bildtext: (rubrik: string) => paBordetVid(paBordet, { del: rubrik }).map((b) => b.bild.text).join(' '), bildmatt: (rubrik: string) => paBordetVid(paBordet, { del: rubrik })[0]?.matt, radetiketter: d.radetiketter, elevbilder: elevbilderVid(d, ram, paBordet).flatMap((b) => bordet(b, undefined, { utanRubrik: true })), nivaer: d.nivaer, id: post.id, karta: kartaFor(post) });
     const former = problemformer(ramarna, paBordet);
     const bank = bankAv(d);
-    // En rams sidor i planeringsmallarna, i ordning. ram är ramen som den ritas: en ram vars listor står vid veckorna
-    // ritas utan dem.
-    const ramensSidor = (i: number, ram: Ram): Flod[] => {
+    const faktasidor = faktatexter(ramarna);
+    // Ramens blad (bildblad()), var och ett på ett eget liggande A4 efter ramens sidor, i bildernas ordning. I filen med
+    // allt står de redan i beskrivningen, efter sin ram.
+    const adress = metodAdress(bas, post.id).replace(/^https?:\/\//, '');
+    const ramensBlad = (ram: Ram): Flod[] => (o.baraTommaRamar ? [] : bladVid(paBordet, ram.rubrik).filter((b) => bladIUrval(b, o.blad)).map((b) => { const sida = bladFlod(b, adress); bladsidor.add(sida); return sida; }));
+    // En rams sidor i planeringsmallarna, i ordning, med ramens blad sist. ram är ramen som den ritas: en ram vars listor
+    // står vid veckorna ritas utan dem.
+    const ramensSidor = (i: number, ram: Ram): Flod[] => [...ramensEgna(i, ram), ...ramensBlad(ram)];
+    const ramensEgna = (i: number, ram: Ram): Flod[] => {
       const ut: Flod[] = [];
       const tom = ramArTom(ram);
+      // En faktatext (faktatextAv i src/lib/ramform.ts): sidor i en faktabok, i en egen sektion med upphovet i sidhuvudet
+      // och raden Till läraren i sidfoten (faktatext()). En bild vid ramen som ingen plats i texten nämner står på en sida
+      // efter. I filen med allt står texten redan i beskrivningen.
+      const fakta = faktasidor.get(ram);
+      if (fakta) {
+        if (o.baraTommaRamar) return ut;
+        const { iTexten, efter } = faktabilder(fakta, paBordetVid(paBordet, { ram: ram.rubrik }));
+        const farg = nivansFarg(d.nivaer, fakta);
+        const sida: Flod = [faktabyte(fakta, { farg, metod: d.titel, bilder: iTexten }), ...faktatext(fakta, { farg, ramen: ram.rubrik, bilder: iTexten, las: sidlasFor(post.id, ram.rubrik) })];
+        bladsidor.add(sida);
+        ut.push(sida);
+        const ovriga = efter.filter((b) => !arBlad(b));
+        if (ovriga.length) ut.push(ovriga.flatMap((b) => bordet(b)));
+        return ut;
+      }
       // Problemens blad (src/lib/problemform.ts): bladet Två lösningar på ett liggande A4 och problemets sida. I filen med
       // allt står de redan i beskrivningen.
       const los = former.losningar(ram);
@@ -2611,7 +3082,7 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
       const par = textparAv(ram);
       if (par) {
         if (o.baraTommaRamar) return ut;
-        ut.push(...ramensSidor(i, textparLarare(ram)));
+        ut.push(...ramensEgna(i, textparLarare(ram)));
         const sida: Flod = [formbyte(par.not), ...textpar(par)];
         bladsidor.add(sida);
         ut.push(sida);
@@ -3025,17 +3496,23 @@ type Rakneblad = NonNullable<NonNullable<Ram['listor']>[number]['rakneblad']>;
 // På bordet, så att veckan och bilden ryms på ett A4, som i metodriggens veckosida (build-docx.js, B.pabordet iVecka).
 // maxHojd (twips): på en veckosida krymper bilden till det som finns kvar på sidan, ned till 85 procent av full storlek
 // (VECKOBILD_MINST); ramBarn flyttar raden ur kartan och bilden till nästa sida när det inte räcker.
+// Bilden har sina egna mått (PaBordet.matt; Faktatextsamtal i grupp, metodriggens TILL-SAJTEN 2026-10-13, Det nya punkt
+// 9): bilderna var 960 × 540 till dess, och de som inte står med andra mått i src/data/pabordet.json är det än.
+// skala (PaBordet.skala, mellan 0,5 och 1) ritar bilden smalare och mitt på raden, när den annars inte ryms på sidan med
+// texten den hör till (Kärnorna efter läspasset, under exemplet). Skalan gäller inte en bild vid en del.
+// utanRubrik: bilden som eleven ser på (PaBordet.elev) står på elevens blad utan rubriken På bordet, med bildtexten under.
 const VECKOBILD_MINST = 0.85;
-const veckobildensHojd = () => Math.round((BREDD * PABORDET_MATT.hojd) / PABORDET_MATT.bredd);
-function pabordetBarn(b: PaBordet, maxHojd?: number): Barn[] {
-  const hel = Math.round(BREDD / 15);
-  const hojdHel = Math.round((hel * PABORDET_MATT.hojd) / PABORDET_MATT.bredd);
-  const hojd = maxHojd ? Math.max(Math.round(hojdHel * VECKOBILD_MINST), Math.min(hojdHel, Math.floor(maxHojd / 15))) : hojdHel;
-  const bredd = Math.round((hojd * PABORDET_MATT.bredd) / PABORDET_MATT.hojd);
+const veckobildensHojd = (matt: PaBordet['matt'] = PABORDET_MATT) => Math.round((BREDD * matt.hojd) / matt.bredd);
+function pabordetBarn(b: PaBordet, maxHojd?: number, o: { utanRubrik?: boolean } = {}): Barn[] {
   const vecka = iDel(b);
+  const rad = Math.round(BREDD / 15);
+  const hel = Math.round(rad * (vecka ? 1 : b.skala ?? 1));
+  const hojdHel = Math.round((hel * b.matt.hojd) / b.matt.bredd);
+  const hojd = maxHojd ? Math.max(Math.round(hojdHel * VECKOBILD_MINST), Math.min(hojdHel, Math.floor(maxHojd / 15))) : hojdHel;
+  const bredd = Math.round((hojd * b.matt.bredd) / b.matt.hojd);
   return [
-    ...(vecka ? [] : [stycke(`På bordet · ${b.bild.rubrik}`, { fet: true, farg: FARG.huvud, storlek: 22, fore: 200, efter: 60, hallIhop: true })]),
-    new Paragraph({ keepNext: true, alignment: bredd < hel ? AlignmentType.CENTER : undefined, spacing: { before: vecka ? 140 : 0, after: 60 }, children: [bildRun(b.adress, bredd, `På bordet: ${b.bild.rubrik}`, hojd)] }),
+    ...(vecka || o.utanRubrik ? [] : [stycke(`På bordet · ${b.bild.rubrik}`, { fet: true, farg: FARG.huvud, storlek: 22, fore: 200, efter: 60, hallIhop: true })]),
+    new Paragraph({ keepNext: true, alignment: bredd < rad ? AlignmentType.CENTER : undefined, spacing: { before: vecka ? 140 : o.utanRubrik ? 80 : 0, after: 60 }, children: [bildRun(b.adress, bredd, o.utanRubrik ? bildensAlt(b) : `På bordet: ${b.bild.rubrik}`, hojd)] }),
     new Paragraph({ spacing: { before: 0, after: vecka ? 0 : 160 }, children: [...(vecka ? [run('På bordet. ', { fet: true, storlek: 19 })] : []), run(b.bild.text, { storlek: 19 })] }),
   ];
 }
@@ -3575,7 +4052,7 @@ function sidfot(adress: string, bredd: number, liten = false): Footer {
 // kortark: Ljudlekens kort med 1 cm marginal, utan rubrikrad och med lathundens lilla fot, så att arket ryms på sidan.
 // bok: en boksida (lästexten, boksida()) med 1,5 cm marginal, upphovet i sidhuvudet och raden Till läraren, nivåns knapp
 // och sidnumret i sidfoten, som i metodriggen.
-function sektion(barn: Barn[], huvudtext: string, adress: string, o: { liggande?: boolean; smal?: boolean; lathund?: boolean; kortark?: boolean; bok?: Boksektion; saga?: Sagosektion } = {}): ISectionOptions {
+function sektion(barn: Barn[], huvudtext: string, adress: string, o: { liggande?: boolean; smal?: boolean; lathund?: boolean; kortark?: boolean; bok?: Boksektion; saga?: Sagosektion; blad?: Bladsektion } = {}): ISectionOptions {
   // Ett sagoblad: kortarkets marginal på 1 cm, upphovet litet i sidhuvudet, som på boksidan, och rutan Till läraren och
   // sidnumret i sidfoten, eller ingen sidfot på bokens blad (sagoFot). Bokens blad bär bara © Niclas Fohlin ·
   // niclasfohlin.se, så att raden inte ser ut som en stämpel på elevernas omslag (granskningen 2026-10-02, K-186).
@@ -3584,6 +4061,28 @@ function sektion(barn: Barn[], huvudtext: string, adress: string, o: { liggande?
       properties: { page: { size: { ...A4, orientation: PageOrientation.PORTRAIT }, margin: { top: KORTMARGINAL, right: KORTMARGINAL, bottom: KORTMARGINAL, left: KORTMARGINAL, header: 280, footer: 280 } } },
       headers: { default: bokHuvud(o.saga.bokblad ? SAJT : adress) },
       footers: { default: sagoFot(o.saga) },
+      children: barn,
+    };
+  }
+  // Ett blad som en bild över hela den liggande sidan (bildblad()): bladets egna marginaler, och varken sidhuvud eller
+  // sidfot, som hos riggen. De är satta (tomma), så att sektionen inte ärver den förra sektionens. Upphovet står i
+  // bladets tabell, under bilden.
+  if (o.blad) {
+    return {
+      properties: { page: { size: { ...A4, orientation: PageOrientation.LANDSCAPE }, margin: { ...o.blad, header: 0, footer: 0 } } },
+      headers: { default: new Header({ children: [punktStycke()] }) },
+      footers: { default: new Footer({ children: [punktStycke()] }) },
+      children: barn,
+    };
+  }
+  // En faktatext (faktatext()): textens första sida är dess förstasida, med etiketten och titeln, och har bara upphovet
+  // i sidhuvudet och ingen sidfot. Från den andra sidan står områdets namn och titeln i sidhuvudet, och raden Till
+  // läraren, nivåns knapp och sidnumret i sidfoten, som hos riggen.
+  if (o.bok?.fakta) {
+    return {
+      properties: { titlePage: true, page: { size: { ...A4, orientation: PageOrientation.PORTRAIT }, margin: FAKTAMARGINAL } },
+      headers: { first: faktaForsta(o.bok, adress), default: faktaHuvud(o.bok, adress) },
+      footers: { first: new Footer({ children: [punktStycke()] }), default: bokFot(o.bok) },
       children: barn,
     };
   }
@@ -3621,7 +4120,8 @@ function delaSektioner(flod: Flod, huvudtext: string, adress: string, o: { ligga
   let bok: Boksektion | undefined;
   let saga: Sagosektion | undefined;
   let liggande = false;
-  const klar = () => { if (barn.length) ut.push(sektion(barn, huvudtext, adress, saga ? { saga } : bok ? { bok } : kortark ? { kortark: true } : liggande ? { liggande: true, smal: true } : o)); barn = []; };
+  let blad: Bladsektion | undefined;
+  const klar = () => { if (barn.length) ut.push(sektion(barn, huvudtext, adress, blad ? { blad } : saga ? { saga } : bok ? { bok } : kortark ? { kortark: true } : liggande ? { liggande: true, smal: true } : o)); barn = []; };
   for (const x of flod) {
     if (arBarn(x)) { barn.push(x); continue; }
     klar();
@@ -3629,6 +4129,7 @@ function delaSektioner(flod: Flod, huvudtext: string, adress: string, o: { ligga
     bok = x.bok;
     saga = x.saga;
     liggande = !!x.liggande;
+    blad = x.blad;
   }
   klar();
   if (!ut.length) ut.push(sektion([new Paragraph({})], huvudtext, adress, o));
@@ -3646,6 +4147,12 @@ function typsnittFor(poster: MetodPost[]): { fonts?: { name: string; data: Buffe
     const bok = RESURSER.boktypsnitt;
     if (!bok) throw new Error('Word-filen har boksidor eller sagoblad men saknar Cinzel och Cinzel Decorative (public/fonts/boksida/), som src/lib/metodresurser.ts läser vid bygget och sidan hämtar i webbläsaren.');
     fonts.push({ name: BOKTYPSNITT, data: bok.cinzel as Buffer }, { name: ANFANGTYPSNITT, data: bok.dekor as Buffer });
+  }
+  // Faktatexternas rubriker står i Anton (faktatext()). Saknas typsnittet i resurserna stannar bygget, som för boksidorna.
+  if (poster.some((p) => harFaktatexter(p.data))) {
+    const anton = RESURSER.faktatypsnitt;
+    if (!anton) throw new Error('Word-filen har faktatexter men saknar Anton (public/fonts/faktatext/), som src/lib/metodresurser.ts läser vid bygget och sidan hämtar i webbläsaren.');
+    fonts.push({ name: FAKTATYPSNITT, data: anton as Buffer });
   }
   return fonts.length ? { fonts } : {};
 }
@@ -3770,7 +4277,8 @@ function googleTabeller(barn: readonly unknown[]): void {
     });
   }
 }
-function dokument(titel: string, sektioner: ISectionOptions[], typsnitt: { fonts?: { name: string; data: Buffer }[] } = {}): Document {
+// beskrivning: dokumentets beskrivning i stället för upphovet, i mätningens prov (faktatextProvDokument).
+function dokument(titel: string, sektioner: ISectionOptions[], typsnitt: { fonts?: { name: string; data: Buffer }[] } = {}, beskrivning = `${UPPHOV} · ${SAJT}`): Document {
   // Två tabeller i följd får ett stycke på en punkt emellan, som i en cell: Google lägger annars ett i normal storlek.
   // Ett avsnitt som börjar med en tabell börjar med ett sådant stycke (Google lade lathundens sida 1 14 pt lägre), och
   // ett tomt stycke sist i ett avsnitt tas bort, eftersom nästa avsnitt ändå börjar på en ny sida (sidan efter
@@ -3787,7 +4295,7 @@ function dokument(titel: string, sektioner: ISectionOptions[], typsnitt: { fonts
     ...typsnitt,
     creator: 'Niclas Fohlin',
     title: titel,
-    description: `${UPPHOV} · ${SAJT}`,
+    description: beskrivning,
     // Rubrikerna som standardstilar (en definition per nivå) och svenska som dokumentspråk.
     styles: {
       default: {
@@ -3866,13 +4374,59 @@ export function bankDokument(post: MetodPost, fil: Pick<Bankfil, 'niva' | 'medFo
 
 // En fil med bara de här ramarna, ett blad per sida som i planeringsmallarna: en nivås material eller alla nivåers
 // (src/lib/nivamaterial.ts, nivafiler), som bankens filer. huvud är det som står först i sidhuvudet, nivåns namn.
-export function ramarDokument(post: MetodPost, fil: { ramar: number[]; rubrik: string; huvud: string }, o: { bas: string; resurser?: MetodResurser }): Document {
+// blad: vilka av ramarnas blad (bilder På bordet vars rubrik börjar med "Blad: ") som står efter sina ramar i filen: alla
+// (förval), bara de ifyllda (modellens sida och exemplet om skolan, utan de tomma bladen) eller inga. Andra bilder På
+// bordet vid ramen ritas som vanligt.
+export function ramarDokument(post: MetodPost, fil: { ramar: number[]; rubrik: string; huvud: string; blad?: Bladurval }, o: { bas: string; resurser?: MetodResurser }): Document {
   instans = 0;
   RESURSER = o.resurser ?? { bilder: new Map() };
   const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
-  const sidor = mallBarn(post, o.bas, { bank: fil.ramar, figurradVidFigur: true });
+  const sidor = mallBarn(post, o.bas, { bank: fil.ramar, figurradVidFigur: true, blad: fil.blad });
   const sektioner = sidor.flatMap((sida) => delaSektioner(sida.barn, `${fil.huvud} · ${post.data.titel} · ${SAJT}`, adress));
   return dokument(`${post.data.titel}: ${fil.rubrik}`, sektioner, typsnittFor([post]));
+}
+
+// En fil med bara blad (bildblad()): bladen med de här numren (pabordet[].nr), i den här ordningen, ett per liggande sida
+// med cellerna att skriva i, utan ramarnas text, som modellernas tomma blad att skriva ut. Ett ifyllt blad bland dem
+// ritas utan celler. Bladens sidor har varken sidhuvud eller sidfot, så huvud (nivåns eller gruppens namn, som i
+// ramarDokument) står bara i dokumentets titel. Filen bär elevens typsnitt, som cellerna står i, och inget annat.
+export function bladDokument(post: MetodPost, fil: { bilder: number[]; rubrik: string; huvud: string }, o: { bas: string; resurser?: MetodResurser }): Document {
+  instans = 0;
+  RESURSER = o.resurser ?? { bilder: new Map() };
+  const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
+  const alla = metodensPaBordet(post.data, post.id);
+  const blad = fil.bilder.map((nr) => {
+    const b = alla.find((x) => x.bild.nr === nr);
+    if (!b || !arBlad(b)) throw new Error(`${post.data.titel}: bilden På bordet ${nr} ${b ? `("${b.bild.rubrik}") är inget blad: rubriken börjar inte med "Blad: "` : 'finns inte'} (src/lib/pabordet.ts).`);
+    return b;
+  });
+  const sektioner = blad.flatMap((b) => delaSektioner(bladFlod(b, adress), `${fil.huvud} · ${post.data.titel} · ${SAJT}`, adress));
+  if (!sektioner.length) sektioner.push(sektion([stycke(`${post.data.titel} har inga blad i ${fil.rubrik}.`)], `${fil.huvud} · ${post.data.titel} · ${SAJT}`, adress));
+  const elev = RESURSER.elevtypsnitt;
+  return dokument(`${post.data.titel}: ${fil.rubrik} · ${fil.huvud}`, sektioner, elev ? { fonts: [{ name: ELEVTYPSNITT, data: elev as Buffer }] } : {});
+}
+
+// Provet för mätningen av sidlåset (scripts/sidlas.mjs, src/pages/utskrift/sidlas/[fil].docx.ts): metodens alla
+// faktatexter i följd, var och en i sin sektion som i de riktiga filerna. Utan lås (last: false) är det filen som
+// mätningen läser Words sidbrytningar ur. Med låsen i src/data/sidlas.json (last: true) prövar mätningen att Word bryter
+// sidorna som före låset. Dokumentets beskrivning bär, som JSON, det mätningen känner igen texterna och delarna på
+// (faktatextensBorjan), så att regeln om vad som är en del står på ett ställe, faktatextAv i src/lib/ramform.ts.
+export function faktatextProvDokument(post: MetodPost, o: { bas: string; last: boolean; resurser?: MetodResurser }): Document {
+  instans = 0;
+  RESURSER = o.resurser ?? { bilder: new Map() };
+  const d = post.data;
+  const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
+  const huvud = `${d.titel} · ${SAJT}`;
+  const bilder = metodensPaBordet(d, post.id);
+  const texter = [...faktatexter(d.ramar?.ramar ?? [])];
+  const sektioner = texter.flatMap(([ram, f]) => {
+    const { iTexten } = faktabilder(f, paBordetVid(bilder, { ram: ram.rubrik }));
+    const farg = nivansFarg(d.nivaer, f);
+    return delaSektioner([faktabyte(f, { farg, metod: d.titel, bilder: iTexten }), ...faktatext(f, { farg, ramen: ram.rubrik, bilder: iTexten, las: o.last ? sidlasFor(post.id, ram.rubrik) : [] })], huvud, adress);
+  });
+  if (!sektioner.length) sektioner.push(sektion([stycke(`${d.titel} har inga faktatexter.`)], huvud, adress));
+  const borjan = texter.map(([ram, f]) => { const b = faktatextensBorjan(f); return { rubrik: ram.rubrik, borjar: b.borjar.slice(0, 80), delar: b.delar.map((t) => t.slice(0, 80)) }; });
+  return dokument(`${d.titel}: faktatexterna, prov för sidlåset`, sektioner, typsnittFor([post]), JSON.stringify({ texter: borjan }));
 }
 
 // Bara mallarna till en metod.

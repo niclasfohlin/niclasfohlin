@@ -82,10 +82,11 @@ function allaFormer(d: MetodData): Set<Ljudform> {
 // metodriggens regler (docs/elevmaterial.md): listor och kort som eleven läser, läskorten, elevens blad, mallarna och
 // diplomet, i alla metoder, så att eleven möter samma a, g och l överallt. Lärarens protokoll och listor märkta
 // larare: true, lathunden och ramarnas delar till läraren eller hemmet står i husets typsnitt. En bildserie är elevens
-// blad (seriens namn och namnraden, Seriesamtal). En metod utan elevmaterial
+// blad (seriens namn och namnraden, Seriesamtal). Ett blad att skriva i (en bild På bordet vars rubrik börjar med
+// "Blad: ", src/lib/pabordet.ts) har celler i elevens typsnitt i Word-filen. En metod utan elevmaterial
 // behöver inte typsnittet, och då laddas och bäddas det inte in.
 export const harElevmaterial = (d: MetodData): boolean =>
-  (d.ramar?.ramar ?? []).some((r) => (r.listor?.length ?? 0) > 0 || !!r.serie) || Object.keys(d.elevblad ?? {}).length > 0 || d.mallar.length > 0 || !!d.diplom;
+  (d.ramar?.ramar ?? []).some((r) => (r.listor?.length ?? 0) > 0 || !!r.serie) || Object.keys(d.elevblad ?? {}).length > 0 || d.mallar.length > 0 || !!d.diplom || (d.pabordet ?? []).some((b) => b.rubrik.startsWith('Blad: '));
 export const harElevtypsnitt = (d: MetodData): boolean => allaFormer(d).size > 0 || harElevmaterial(d);
 
 // Bokstavskartans celler: bokstaven, ordet och bilden. En bokstav utan bild har sin förklaring i ordets ställe ("som k").

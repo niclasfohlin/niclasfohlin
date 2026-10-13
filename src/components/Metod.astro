@@ -15,9 +15,10 @@ import Bildlista from './Bildlista.astro';
 import Golvbokstaver from './Golvbokstaver.astro';
 import Serierutor from './Serierutor.astro';
 import { ANDIKA_ADRESS, arBildlista, harElevtypsnitt, ljudform, upphovBilder } from '../lib/ljudkort';
-import { arElevensBlad, lastexter, protokollDelas, strukturAv, textparAv, textparLarare, type Struktur as StrukturForm, type Textpar as TextparForm } from '../lib/ramform';
+import { arElevensBlad, faktatexter, lastexter, protokollDelas, strukturAv, textparAv, textparLarare, type Struktur as StrukturForm, type Textpar as TextparForm } from '../lib/ramform';
 import Filmruta from './Filmruta.astro';
 import Boksida from './Boksida.astro';
+import Faktatext from './Faktatext.astro';
 import Struktur from './Struktur.astro';
 import Textpar from './Textpar.astro';
 import Ramindex from './Ramindex.astro';
@@ -37,10 +38,16 @@ import { kortInfo } from '../lib/brak';
 import { arTarning, sagoUpphov } from '../lib/sagoblad';
 import { arkAdress, arSerieMall, mallEtiketter, mallRutor as mallRutorAdresser, rutansText, serieRutor as serieRutorAdresser, svgMatt } from '../lib/bildserier';
 import { serieantal, serieFiler } from '../lib/bildserier-bygge';
-import { bildensAlt, metodensPaBordet, paBordetVid, PABORDET_MATT } from '../lib/pabordet';
+import { arBlad, bildensAlt, bladVid, metodensPaBordet, paBordetVid, PABORDET_MATT } from '../lib/pabordet';
 import { listansNiva } from '../lib/nivaer';
 import { omslagUpphov, ramensNiva } from '../lib/litteraturlista';
 import { metodensNivamaterial } from '../lib/nivamaterial';
+import { metodensBladmaterial, bladKort, bladRubrik, bladsidaAdress, ledSida, type Bladrad } from '../lib/bladmaterial';
+import { ovrigtfil } from '../lib/ovrigt';
+import { sidlasFor } from '../lib/sidlas';
+import Bladgrupp from './Bladgrupp.astro';
+import Filval from './Filval.astro';
+import Pabordet from './Pabordet.astro';
 import { bladNamn, delensRad, kartan, metodensBlad, radensDel } from '../lib/karta';
 import { veckanRyms } from '../lib/veckosida';
 import { veckansLista, veckomaterial } from '../lib/veckomaterial';
@@ -49,8 +56,12 @@ const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 '));
 // koppling: den generella metodens serie med lektionsbanken, eller lektionens plats i den (src/lib/serie.ts).
 // enhet: sidan för en enhet i banken (src/lib/bank.ts, [id]/[enhet].astro): bara enhetens ramar, i den ordning de står i
 // bankens filer, var och en som ett blad med sitt namn och en knapp som skriver ut bladet, och inget annat ur metoden.
-interface Props { d: MetodData; id: string; koppling?: SerieKoppling; enhet?: Bankenhet }
-const { d, id, koppling, enhet } = Astro.props;
+// bladenhet: sidan för en ram med blad (src/lib/bladmaterial.ts, en modell i Faktatextsamtal i grupp): ramen som ett blad
+// och sedan varje blad för sig, med sitt namn och en knapp som skriver ut bara det, och inget annat ur metoden.
+interface Props { d: MetodData; id: string; koppling?: SerieKoppling; enhet?: Bankenhet; bladenhet?: Bladrad }
+const { d, id, koppling, enhet, bladenhet } = Astro.props;
+// En undersida: en enhets sida i banken eller en rams sida. Där står bara sidans blad.
+const undersida = !!enhet || !!bladenhet;
 // Banken: texter eller problem i nivåer på egna sidor (src/lib/bank.ts, Niclas 2026-10-10). Metodens sida har nivåernas
 // översikter (Bank.astro) där enheterna och deras följesidor annars hade stått, och enheterna med följesidorna bara i
 // utskriften av allt.
@@ -75,6 +86,14 @@ const bildUpphov = upphovBilder(d) ?? sagoUpphov(d);
 // visar inte tärningarnas ordkort, som inte går att göra en tärning av (granskningen 2026-10-02, P1).
 const sagoNamn = { skyltar: 'Skyltarna', kort: 'Korten' } as Record<string, string>;
 const mallarLank = `/stodundervisning/${id}-mallar.docx`;
+// Filen där en ram står att skriva ut (riggens läsning av Faktatextsamtal i grupp i telefonbredd 2026-10-13: "Ett blad har
+// ingen väg till en fil där det står"): har metoden en fil med det övriga materialet (ramar.ovrigt, src/lib/ovrigt.ts) och
+// står ramen i den, leder hänvisningen vid ramen dit, annars till planeringsmallarna. Bladet Egen text låg annars omkring
+// 120 sidor in i en fil på 2 MB. Statistikens namn är samma som nedladdningsrutans (Filval.astro).
+const ovrig = ovrigtfil(d, id);
+const ramensFil = (ri: number) => (ovrig?.ramar.includes(ri)
+  ? { fore: 'filen ', adress: `/stodundervisning/${ovrig.namn}.docx`, fil: `${ovrig.namn}.docx`, namn: ovrig.rubrik, statistik: `${d.titel}: ${ovrig.rubrik.toLowerCase()} som Word` }
+  : { fore: '', adress: mallarLank, fil: `${id}-mallar.docx`, namn: 'planeringsmallarna', statistik: `${d.titel}: planeringsmallarna som Word` });
 const andikaNamnt = (d.ramar?.text ?? []).some((s) => s.includes('Andika'));
 const efterInledning = d.tabeller.filter((t) => t.plats === 'efter-inledning');
 const efterTidsschema = d.tabeller.filter((t) => t.plats === 'efter-tidsschema');
@@ -177,7 +196,26 @@ const vm = veckomaterial(d);
 const ramarna: SerieRam[] = d.ramar?.ramar ?? [];
 // Nivåernas material (src/lib/nivamaterial.ts): ramar som heter efter metodens nivåer står som nivårader som fälls ut,
 // som bankens nivåer. I en kurs med veckor står materialet vid veckorna, och då gäller regeln inte.
-const nm = !enhet ? metodensNivamaterial(d) : undefined;
+const nm = !undersida ? metodensNivamaterial(d) : undefined;
+// Ramar med blad (src/lib/bladmaterial.ts): modellerna i Faktatextsamtal i grupp har egna sidor, och på metodens sida
+// står de som en rad med länkar (Bladgrupp.astro). Bankens ramar och nivåernas material står redan på sina ställen.
+const bm = !undersida ? metodensBladmaterial(d, id) : undefined;
+const utanforListan = new Set<number>([...(nm?.ramar ?? []), ...(bm?.ramar ?? [])]);
+// Ramens grupp på en rams sida, för namnet Modellens sida.
+const bladgrupp = bladenhet ? metodensBladmaterial(d, id) : undefined;
+// Länkar i de fria tabellerna (Niclas 2026-10-13 om Faktatextsamtal i grupp: hur texterna och modellerna läggs upp "med
+// länkar och nedladdning"; om kursens karta 2026-10-04: tabellen "måste ju också kunna tryckas på som länkar eller
+// karta"). En cell som är en texts titel leder till textens sida i banken, och en cell som är namnet på en ram med blad
+// (en modell), med eller utan ett nummer före, leder till ramens sida. Tabellen Texterna, vecka för vecka blir så
+// kartan in till veckans text och veckans modell. Bara en titel som en enda enhet har blir en länk.
+const cellLank = !undersida && (banken || bm) ? (cell: string): string | undefined => {
+  const c = cell.replace(/\s+/g, ' ').trim();
+  const traffar = banken?.enheter.filter((x) => x.l.titel === c) ?? [];
+  if (traffar.length === 1) return enhetAdress(id, traffar[0]);
+  const namn = c.replace(/^\d+\.? /, '');
+  const rad = bm?.rader.find((x) => x.namn === namn);
+  return rad ? bladsidaAdress(id, rad) : undefined;
+} : undefined;
 const listAnkare = new Map<string, string>();
 if (vm) for (const [ri, lagda] of vm.listor) for (const li of lagda.keys()) listAnkare.set(`${ri}-${li}`, ankare(ramarna[ri].listor![li].rubrik ?? `${ramarna[ri].rubrik} ${li + 1}`));
 type Punkt = { ram: SerieRam; ri: number; lage?: 'huvud' | 'vecka' | 'material'; vecka?: number; lista?: number; efter?: string; par?: TextparForm; helaKursen?: boolean };
@@ -186,7 +224,7 @@ let sistaVeckan = -1;
 // En enhets sida: enhetens ramar i bankens ordning (följesidorna före, enheten, följesidorna efter). Metodens sida med en
 // bank: bankens nivåer först bland ramarna (Bank.astro), eftersom de är materialets största del, och sedan de andra
 // ramarna i filens ordning, utan enheterna, följesidorna och översikterna.
-const enhetensRamar = enhet ? [...enhet.fore, enhet.ri, ...enhet.efter] : undefined;
+const enhetensRamar = enhet ? [...enhet.fore, enhet.ri, ...enhet.efter] : bladenhet ? [bladenhet.ri] : undefined;
 if (enhetensRamar) for (const ri of enhetensRamar) punkter.push({ ram: ramarna[ri], ri });
 else ramarna.forEach((ram, ri) => {
   if (banken && (banken.ramar.has(ri) || banken.oversikter.has(ri))) return;
@@ -217,10 +255,10 @@ if (sistaVeckan >= 0 && punkter[sistaVeckan + 1]) punkter[sistaVeckan + 1].helaK
 // allt och i bankens fil med alla nivåer. På skärmen står bara nivåernas översikter, och enheterna på egna sidor; i
 // utskriften av allt står de (Niclas 2026-10-10: "Om skriv ut hela beskrivningen i alla är verkligen att skriva ut allt bör
 // denna också vara det?"), och utskriften Metoden har dem inte, eftersom Materialet är material (data-material nedan).
-const bankPunkter = new Map<string, Punkt[]>(banken && !enhet ? banken.nivaer.map((n) => [n.namn, n.enheter.flatMap((e) => [...e.fore, e.ri, ...e.efter]).map((ri) => ({ ram: ramarna[ri], ri }))]) : []);
+const bankPunkter = new Map<string, Punkt[]>(banken && !undersida ? banken.nivaer.map((n) => [n.namn, n.enheter.flatMap((e) => [...e.fore, e.ri, ...e.efter]).map((ri) => ({ ram: ramarna[ri], ri }))]) : []);
 // Gamla länkar till en enhet eller en följesida på metodens sida (#ram-12, #lararens-sida, #bas-problem-1) leder till
 // enhetens sida, till bladet (Bank.astro).
-const bankLankar = banken && !enhet ? Object.fromEntries(banken.enheter.flatMap((e) => [...e.fore, e.ri, ...e.efter].flatMap((ri, k) => {
+const bankLankar = banken && !undersida ? Object.fromEntries(banken.enheter.flatMap((e) => [...e.fore, e.ri, ...e.efter].flatMap((ri, k) => {
   const mal = `${enhetAdress(id, e)}${k ? `#blad-${ri + 1}` : ''}`;
   return [[`ram-${ri + 1}`, mal], [ramAnkare[ri], mal]];
 }))) : undefined;
@@ -244,10 +282,25 @@ const strukturer = new Map<SerieRam, StrukturForm>(ramarna.flatMap((r) => { cons
 const indexAnkare = { del: (nr: number, di: number) => delAnkare[nr - 1]?.[di], lista: (nr: number, li: number) => listAnkare.get(`${nr - 1}-${li}`) };
 // Lästexterna blir boksidor (Boksida.astro, K-148), med nivåns färg i den ordning nivåerna först kommer, som i Word.
 const boksidor = lastexter(d.ramar?.ramar ?? []);
+// Faktatexterna blir sidor i en faktabok (Faktatext.astro; faktatextAv i src/lib/ramform.ts), med bilderna På bordet på
+// sina platser i texten. En bild vid ramen som ingen plats nämner står efter texten, som en vanlig bild På bordet.
+const faktasidor = faktatexter(d.ramar?.ramar ?? []);
+const faktabilder = (ram: SerieRam) => paBordetVid(bilderPaBordet, { ram: ram.rubrik });
+const utanPlats = (ram: SerieRam) => { const namn = new Set(faktasidor.get(ram)!.delar.flatMap((x) => (x.slag === 'bild' ? [x.namn] : []))); return faktabilder(ram).filter((b) => !namn.has(b.bild.rubrik)); };
+// Nivåns färg: bankens (metodens egna nivåer), metodens nivå med det namnet, eller boksidornas i nivåernas ordning.
+const nivaFarg = (namn: string, nr: number) => bankFarger[namn] ?? (d.nivaer.find((n) => n.namn === namn) ? `#${d.nivaer.find((n) => n.namn === namn)!.farg.toLowerCase()}` : BOKNIVA[nr] ?? '#4b3a2f');
+// Radetiketterna (fältet radetiketter, Faktatextsamtal i grupp 2026-10-13): en rad i ett fält som börjar med en av
+// etiketterna och ett kolon får etiketten i husets blå, som i Word, så att ögat hittar raden på lärarens sida. Det gäller
+// fält med flera rader, som i Word (ramFaltTabell i metoddocx.ts): i ett fält med en enda rad finns inget att hitta bland.
+const etikettAv = (rad: string, rader: number) => (rader > 1 ? d.radetiketter.find((e) => rad.startsWith(`${e}: `)) : undefined);
+// Bilden som eleven ser på (PaBordet.elev, kartläggningens blad): den står direkt efter det eleven läser, utan rubriken
+// På bordet, med bildtexten under, och rutan Till läraren står sist i lärarens form, som i Word.
+const elevbild = (ram: SerieRam) => paBordetVid(bilderPaBordet, { ram: ram.rubrik }).find((b) => b.elev);
 // Lärarens sidor till lästexterna (riggens namn: Lärarens sida och Lärarens sidor) ryms på ett A4 i Word och får ett eget
 // blad i utskriften, lika tätt (global.css, .m-lararsida). Ramen till en bildserie med flera rutor är också lärarens sida
 // (Seriesamtal: texten, berättelsen och rutan Till läraren), med elevens blad på ett eget liggande A4 efter.
-const arLararsida = (ram: { rubrik: string; serie?: string }) => /^Lärarens sid(a|or)\b/.test(ram.rubrik) || (!!ram.serie && (antalRutor[ram.serie] ?? 0) > 1);
+// En ram med blad (modellens sida, src/lib/bladmaterial.ts) är också lärarens: ett A4 i Word, och lika tät i utskriften.
+const arLararsida = (ram: { rubrik: string; serie?: string }) => /^Lärarens sid(a|or)\b/.test(ram.rubrik) || (!!ram.serie && (antalRutor[ram.serie] ?? 0) > 1) || bladVid(bilderPaBordet, ram.rubrik).length > 0;
 // En fri tabell med meny: true står i menyn efter avsnittet den ligger efter på sidan, med rubrikens första led som namn
 // (Ljudstarten, Dagens ljud och Ordbanken i Ljudlek i grupp, som läraren letar efter varje pass).
 const menyEfter: Record<string, string | undefined> = {
@@ -271,7 +324,7 @@ const meny = [
 ];
 ---
 <div class="metod-modell">
-  {meny.length > 2 && !enhet && (
+  {meny.length > 2 && !undersida && (
     <nav class="metod-nav" aria-label="På den här sidan">
       {d.lathund && <a class="lathund-lank" href={`/stodundervisning/${id}/lathund`}>Öppna lathunden</a>}
       <span class="nav-etikett" aria-hidden="true">På den här sidan</span>
@@ -280,7 +333,7 @@ const meny = [
   )}
   <div class="metod-text">
   {/* En enhets sida har bara enhetens blad (banken, src/lib/bank.ts), och allt fram till ramarna står på metodens sida. */}
-  {!enhet && (<>
+  {!undersida && (<>
   {d.inledning.map((s, i) => <><p>{s}</p><Filmruta filmer={vid({ stycke: i + 1 })} titel={d.titel} /></>)}
 
   {/* Rutornas rubriker är rubriker, så att en skärmläsare kan hoppa till dem (K-028). De står direkt under h1. */}
@@ -292,7 +345,7 @@ const meny = [
     <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} cellank={cellLank} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
@@ -358,7 +411,7 @@ const meny = [
     <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} cellank={cellLank} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
@@ -395,7 +448,7 @@ const meny = [
     <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} cellank={cellLank} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
@@ -418,7 +471,7 @@ const meny = [
     <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} cellank={cellLank} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
@@ -460,7 +513,7 @@ const meny = [
     <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} cellank={cellLank} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
@@ -506,7 +559,7 @@ const meny = [
     <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} cellank={cellLank} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
@@ -605,7 +658,7 @@ const meny = [
     <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
-      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} />
+      <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} cellank={cellLank} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
     </section>
@@ -619,8 +672,8 @@ const meny = [
       sidan har material) och scripts/utskriftsformat.mjs läser märkningen, och Word-filen utan mallar och lathundar (metodBarn
       i metoddocx.ts) läser samma lista. */}
   {d.ramar && (
-    <section id={enhet ? undefined : 'ramar'} class={enhet ? 'enhet-blad-lista' : undefined} data-material={enhet ? undefined : materialAttribut('ramar')}>
-      {!enhet && (<>
+    <section id={undersida ? undefined : 'ramar'} class={undersida ? 'enhet-blad-lista' : undefined} data-material={undersida ? undefined : materialAttribut('ramar')}>
+      {!undersida && (<>
       <h2>{d.ramar.rubrik}</h2>
       {d.ramar.text.map((s) => <p>{s}</p>)}
       {elevtypsnitt && (
@@ -645,6 +698,9 @@ const meny = [
       </>) : par && losning.length === 2 ? (<>
         <Textpar p={par} id={`ram-${ri + 1}`} bilder={losning} rubrik={ram.rubrik} not={losningarnasNot(ram)} farg={bankFarger[losningarnasNiva(ram.rubrik)?.niva ?? '']} />
         <Filmruta filmer={[...filmerVid(filmer, { ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
+      </>) : faktasidor.has(ram) ? (<>
+        <Faktatext f={faktasidor.get(ram)!} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={nivaFarg(faktasidor.get(ram)!.niva, faktasidor.get(ram)!.nivaNr)} rubrik={ram.rubrik} bilder={faktabilder(ram)} las={sidlasFor(id, ram.rubrik)} />
+        <Filmruta filmer={[...utanPlats(ram), ...filmerVid(filmer, { ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
       </>) : boksidor.has(ram) ? (<>
         <Boksida l={boksidor.get(ram)!} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={BOKNIVA[boksidor.get(ram)!.nivaNr] ?? '#4b3a2f'} />
         <Filmruta filmer={[...vid({ ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
@@ -679,9 +735,9 @@ const meny = [
             </div>
           )}
           {ram.serie && antalRutor[ram.serie] === 1 && <Serierutor rutor={serieBlad(ram)} />}
-          {ram.sagoform && <p class="m-efter">{sagoNamn[ram.sagoform.form] ?? 'Bladet'} att kopiera, med {ram.sagoform.bilder?.length ? 'ramen, bilderna och raderna' : 'ramen och raderna'}, finns i <a href={mallarLank} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word). Här står vad {ram.sagoform.form === 'skyltar' || ram.sagoform.form === 'kort' ? 'de' : 'det'} innehåller.</p>}
-          {(ram.listor ?? []).some((l) => arTarning(d, l)) && <p class="m-efter m-ej-utskrift">Tärningarna att klippa, vika och limma, en på varje A4 med bilderna, finns i <a href={mallarLank} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word). Här står orden på sidorna, och de skrivs inte ut.</p>}
-          {arElevensBlad(ram) && <p class="m-efter">Bladet att lägga framför eleven, med stor text och bara det eleven läser, finns i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>}
+          {ram.sagoform && <p class="m-efter">{sagoNamn[ram.sagoform.form] ?? 'Bladet'} att kopiera, med {ram.sagoform.bilder?.length ? 'ramen, bilderna och raderna' : 'ramen och raderna'}, finns i {ramensFil(ri).fore}<a href={ramensFil(ri).adress} data-goatcounter-click={`fil:${ramensFil(ri).fil}`} data-goatcounter-title={ramensFil(ri).statistik}>{ramensFil(ri).namn}</a> (Word). Här står vad {ram.sagoform.form === 'skyltar' || ram.sagoform.form === 'kort' ? 'de' : 'det'} innehåller.</p>}
+          {(ram.listor ?? []).some((l) => arTarning(d, l)) && <p class="m-efter m-ej-utskrift">Tärningarna att klippa, vika och limma, en på varje A4 med bilderna, finns i {ramensFil(ri).fore}<a href={ramensFil(ri).adress} data-goatcounter-click={`fil:${ramensFil(ri).fil}`} data-goatcounter-title={ramensFil(ri).statistik}>{ramensFil(ri).namn}</a> (Word). Här står orden på sidorna, och de skrivs inte ut.</p>}
+          {arElevensBlad(ram) && <p class="m-efter">Bladet att lägga framför eleven, med stor text och bara det eleven läser, finns i {ramensFil(ri).fore}<a href={ramensFil(ri).adress} data-goatcounter-click={`fil:${ramensFil(ri).fil}`} data-goatcounter-title={ramensFil(ri).statistik}>{ramensFil(ri).namn}</a> (Word).</p>}
           {/* En översikt med bilder är en litteraturlista (Litteraturlista.astro); bredder ger annars kolumnernas andelar. */}
           {ram.oversikt?.bilder
             ? <Litteraturlista oversikt={ram.oversikt} id={id} niva={ramensNiva(ram.rubrik, d.nivaer)} />
@@ -700,7 +756,7 @@ const meny = [
               </>))}
               {/* Räknebladen (rakneblad): här står uppgifterna, och bladet med rutnät att räkna i finns i Word. Hänvisningen står
                   före listorna, så att den inte blir ensam på en sida i utskriften (granskningen 2026-10-04). */}
-              {(ram.listor ?? []).some((l) => l.rakneblad) && <p class="m-efter">{(ram.listor ?? []).filter((l) => l.rakneblad).length === 1 ? 'Bladet' : 'Bladen'}, med en ruta per uppgift och ett rutnät att räkna i, en siffra per ruta, finns i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>}
+              {(ram.listor ?? []).some((l) => l.rakneblad) && <p class="m-efter">{(ram.listor ?? []).filter((l) => l.rakneblad).length === 1 ? 'Bladet' : 'Bladen'}, med en ruta per uppgift och ett rutnät att räkna i, en siffra per ruta, finns i {ramensFil(ri).fore}<a href={ramensFil(ri).adress} data-goatcounter-click={`fil:${ramensFil(ri).fil}`} data-goatcounter-title={ramensFil(ri).statistik}>{ramensFil(ri).namn}</a> (Word).</p>}
               {ram.listor.map((l, plats) => {
                 // Listans plats i ramen som den står i filen: en ram kan ritas utan de listor som står vid veckorna, och
                 // en lista vid en vecka ritas ensam (src/lib/veckomaterial.ts).
@@ -728,7 +784,18 @@ const meny = [
                   ? <Kortlista rubrik={l.rubrik} info={info} nyGrupp={lage === 'material' || info.grupp !== forra} brak={brak} />
                   : <Elevlista {...(l.rakneblad ? listansNiva(d.nivaer, l.rubrik) : { rubrik: l.rubrik })} id={bladAnkare.get(`${ri}-${li}`)} kolumner={l.kolumner} rader={l.rader} brak={brak} huvud={plats === 0 ? ram.huvud : undefined} klass={arEttKort(alla, l) ? 'kort' : ''} elev={elevtypsnitt && !l.larare} numrerad={ram.sagoform?.form === 'kort' && !ram.sagoform.kortbilder?.[l.rubrik ?? '']} />;
               })}
-              {d.elevblad[ram.rubrik] && (
+              {/* Eleven ser på en bild (PaBordet.elev): bilden direkt efter det eleven läser, och rutan Till läraren sist i
+                  lärarens form. */}
+              {d.elevblad[ram.rubrik] && elevbild(ram) && (<>
+                <figure class="m-elevbild"><a href={elevbild(ram)!.adress} class="bild-lank" title="Öppna bilden i full storlek"><img src={elevbild(ram)!.adress} alt={bildensAlt(elevbild(ram)!)} width={elevbild(ram)!.matt.bredd} height={elevbild(ram)!.matt.hojd} loading="lazy" decoding="async" data-utskriftsbild /></a><figcaption>{elevbild(ram)!.bild.text}</figcaption></figure>
+                {ram.delar.map((del) => (
+                  <div class="m-listnot">
+                    <p class="kicker">{del.rubrik}</p>
+                    {del.falt.map((f) => <p><b>{f.rubrik}</b>{linjer(f.text).map((x, j) => <>{j > 0 && <br />}{repliker(x).map((r) => (r.replik ? <em>{r.text}</em> : r.text))}</>)}</p>)}
+                  </div>
+                ))}
+              </>)}
+              {d.elevblad[ram.rubrik] && !elevbild(ram) && (
                 <div class="m-ramdelar m-elevblad">
                   {ram.delar.map((del) => (
                     <div class="m-ramdel">
@@ -740,7 +807,7 @@ const meny = [
                   ))}
                 </div>
               )}
-              {d.elevblad[ram.rubrik] && <p class="m-efter">Bladet finns i full storlek i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a>.</p>}
+              {d.elevblad[ram.rubrik] && <p class="m-efter">Bladet finns i full storlek i {ramensFil(ri).fore}<a href={ramensFil(ri).adress} data-goatcounter-click={`fil:${ramensFil(ri).fil}`} data-goatcounter-title={ramensFil(ri).statistik}>{ramensFil(ri).namn}</a>.</p>}
             </>
           ) : ramArTom(ram)
             ? (d.elevblad[ram.rubrik]
@@ -764,10 +831,10 @@ const meny = [
                     ))}
                   </div>
                   {/* Ett sagoblad har redan sin hänvisning till planeringsmallarna överst i ramen (granskningen 2026-10-09). */}
-                  {!ram.sagoform && <p class="m-efter">Bladet finns i full storlek i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a>.</p>}
+                  {!ram.sagoform && <p class="m-efter">Bladet finns i full storlek i {ramensFil(ri).fore}<a href={ramensFil(ri).adress} data-goatcounter-click={`fil:${ramensFil(ri).fil}`} data-goatcounter-title={ramensFil(ri).statistik}>{ramensFil(ri).namn}</a>.</p>}
                 </>
               )
-              : <p class="m-efter">Ramen att fylla i, med {ram.delar.length === 1 ? 'en del' : `${ram.delar.length} delar`}, finns i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a>.</p>)
+              : <p class="m-efter">Ramen att fylla i, med {ram.delar.length === 1 ? 'en del' : `${ram.delar.length} delar`}, finns i {ramensFil(ri).fore}<a href={ramensFil(ri).adress} data-goatcounter-click={`fil:${ramensFil(ri).fil}`} data-goatcounter-title={ramensFil(ri).statistik}>{ramensFil(ri).namn}</a>.</p>)
             : (
               <div class="m-ramdelar">
                 {ram.lektioner && lage !== 'vecka' && (
@@ -799,13 +866,15 @@ const meny = [
                     <h4>{del.rubrik}{del.rubrik !== ram.rubrik && <span class="m-ramnamn"> · {ram.rubrik}</span>}</h4>
                     <dl class="m-ramfalt">
                       {del.falt.map((f) => (
-                        <div><dt>{f.rubrik}</dt><dd>{f.kursiv ? <em>{linjer(f.text).map((x, j) => <>{j > 0 && <br />}{x}</>)}</em> : linjer(f.text).map((x, j) => <>{j > 0 && <br />}{x}</>)}</dd></div>
+                        <div><dt>{f.rubrik}</dt><dd>{f.kursiv ? <em>{linjer(f.text).map((x, j) => <>{j > 0 && <br />}{x}</>)}</em> : linjer(f.text).map((x, j, alla) => { const e = etikettAv(x, alla.length); return <>{j > 0 && <br />}{e ? <><span class="m-radetikett">{e}:</span>{x.slice(e.length + 1)}</> : x}</>; })}</dd></div>
                       ))}
                     </dl>
                   </div>
                   );
                   const bilder = vid({ del: del.rubrik });
-                  if (!ram.lektioner) return <>{rutan}<Filmruta filmer={bilder} titel={d.titel} /></>;
+                  // En del med en bild i en vanlig ram (lärarens sida: rutan för modellpasset med bilden Ett möjligt resultat):
+                  // rutan och bilden hålls ihop, och i utskriften börjar de på en ny sida, som i Word.
+                  if (!ram.lektioner) return bilder.length ? <div class="m-del-med-bild">{rutan}<Filmruta filmer={bilder} titel={d.titel} /></div> : rutan;
                   // En vecka (en ram med lektioner): rutan, och sedan raden ur kartan och bilden På bordet som ett block. I
                   // utskriften är veckan en sida och bilden fyller det som är kvar av den (global.css, .m-vecka); räcker det
                   // inte till en bild som går att läsa (veckanRyms), står blocket i full storlek på nästa sida, så att talen
@@ -852,18 +921,45 @@ const meny = [
           )}
         </section>
         {par && <Textpar p={par} id={`ram-${ri + 1}-elev`} />}
-        <Filmruta filmer={[...(lage ? [] : vid({ ram: ram.rubrik })), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
+        <Filmruta filmer={[...(lage ? [] : vid({ ram: ram.rubrik }).filter((x) => !('bild' in x && ((x.elev && d.elevblad[ram.rubrik]) || (bladenhet && arBlad(x)))))), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
       </>);
         // På en enhets sida är varje ram ett blad med sitt namn och en knapp som skriver ut bara bladet ([id]/[enhet].astro).
+        if (!undersida) return innehall;
+        // En rams sida (bladenhet): ramen som ett blad, Modellens sida, och sedan varje blad för sig med en egen knapp, så att
+        // veckans blad går att skriva ut med ett tryck (Niclas 2026-10-13: modellerna på egna sidor "likt texterna").
+        if (bladenhet) {
+          const stat = (vad: string) => ({ 'data-goatcounter-click': `utskrift:${id}/${bladenhet.slug}`, 'data-goatcounter-title': `${d.titel}: ${bladenhet.namn}, ${vad}` });
+          return (<>
+            <div class="enhet-blad" data-blad={`ram-${ri + 1}`} id={`blad-${ri + 1}`}>
+              <div class="enhet-bladhuvud">
+                <h2>{ledSida(bladgrupp!)}</h2>
+                <button type="button" class="knapp sekundar liten bara-js" data-skriv-ut-blad={`ram-${ri + 1}`} data-sidor-hogst="2" {...stat('sidan')}>Skriv ut sidan</button>
+              </div>
+              {innehall}
+            </div>
+            {bladenhet.blad.map((b) => (
+              <div class="enhet-blad" data-blad={`bild-${b.bild.nr}`} id={`bild-${b.bild.nr}`}>
+                <div class="enhet-bladhuvud">
+                  <h2>{bladRubrik(bladenhet, b)}</h2>
+                  <button type="button" class="knapp sekundar liten bara-js" data-skriv-ut-blad={`bild-${b.bild.nr}`} data-liggande {...stat(bladKort(bladenhet, b).toLowerCase())}>Skriv ut {bladKort(bladenhet, b).toLowerCase()}</button>
+                </div>
+                <Pabordet b={b} utanRubrik />
+              </div>
+            ))}
+          </>);
+        }
         if (!enhet) return innehall;
         const namn = bladetsNamn(ram, ri);
         // I en mening står lärarens sida och problemet med liten bokstav, och ett blad med eget namn (Två lösningar) som det heter.
         const iMening = ri === enhet.ri || /^Lärarens sida$/i.test(namn) ? namn.toLowerCase() : namn;
+        // En faktatext är två till sex sidor, och lärarens sida till den en eller två: knappen säger det, så att provet av
+        // utskriften inte kräver en sida (scripts/utskriftsformat.mjs).
+        const sidorHogst = enhet.l.faktatext ? (ri === enhet.ri ? 6 : 2) : undefined;
         return (
           <div class="enhet-blad" data-blad={`ram-${ri + 1}`} id={`blad-${ri + 1}`}>
             <div class="enhet-bladhuvud">
               <h2>{namn}</h2>
-              <button type="button" class="knapp sekundar liten bara-js" data-skriv-ut-blad={`ram-${ri + 1}`} data-goatcounter-click={`utskrift:${id}/${enhet.slug}`} data-goatcounter-title={`${d.titel}: ${enhet.l.niva}, ${enhet.l.vad}, ${iMening}`}>Skriv ut {iMening}</button>
+              <button type="button" class="knapp sekundar liten bara-js" data-skriv-ut-blad={`ram-${ri + 1}`} data-sidor-hogst={sidorHogst} data-goatcounter-click={`utskrift:${id}/${enhet.slug}`} data-goatcounter-title={`${d.titel}: ${enhet.l.niva}, ${enhet.l.vad}, ${iMening}`}>Skriv ut {iMening}</button>
             </div>
             {innehall}
           </div>
@@ -872,7 +968,7 @@ const meny = [
       return (<>
         {/* Banken: raden om bankens filer och sidor (bara i utskriften), och varje nivå med sin översikt och, i utskriften,
             sina enheter med följesidorna (Bank.astro). */}
-        {banken && !enhet && (
+        {banken && !undersida && (
           <div class="bank" data-bank data-lankar={JSON.stringify(bankLankar)}>
             <p class="m-efter bank-rad">{bankRad(banken, metodAdress(site.url, id).replace(/^https?:\/\//, ''))}</p>
             {banken.nivaer.map((n) => <Bank d={d} id={id} bank={banken} niva={n} farger={bankFarger} ankare={(i) => ramAnkare[i]} friKlass={friKlass}>{bankPunkter.get(n.namn)!.map(rita)}</Bank>)}
@@ -881,20 +977,38 @@ const meny = [
         {/* Nivåernas material (Nivarad.astro): en rad per nivå i nivåns färg, med nivåns ramar i. Står nivåerna först i
             filen står raderna före materialets lista, som bankens nivåer; annars där den första av ramarna står. */}
         {nm && nm.ramar.has(punkter[0]?.ri) && <div class="bank" data-nivaer>{nm.nivaer.map((n) => <Nivarad rad={n} nm={nm} id={id} titel={d.titel}>{punkter.filter((p) => n.ramar.includes(p.ri)).map(rita)}</Nivarad>)}</div>}
-        {!enhet && d.ramar.ramar.length - (banken ? banken.ramar.size + banken.oversikter.size : 0) - (nm?.ramar.size ?? 0) >= 4 && <Ramindex ramar={d.ramar.ramar} rubrik={d.ramar.rubrik} farger={BOKNIVA} ankare={indexAnkare} bank={banken ?? undefined} utanfor={nm?.ramar} />}
-        {punkter.map((p) => (!nm?.ramar.has(p.ri)
+        {/* Ramarna med blad (Bladgrupp.astro): en rad med en länk till varje rams sida och filerna, och ramarna med sina
+            blad efter raden, bara i utskriften. Står de först bland ramarna står raden före materialets lista, som
+            nivåerna; annars där den första av ramarna står. */}
+        {bm && bm.ramar.has(punkter[0]?.ri) && <div class="bank" data-bladrader><Bladgrupp bm={bm} id={id} titel={d.titel}>{punkter.filter((p) => bm.ramar.has(p.ri)).map(rita)}</Bladgrupp></div>}
+        {/* Det övriga materialet (ramar.ovrigt, src/lib/ovrigt.ts) har sitt namn över listan och sin fil efter den, som
+            nivåernas och ramarnas rader har (granskningen 2026-10-13: listan var det enda slaget material utan namn och
+            fil, och bladet Kärnorna, som skrivs ut varje vecka, nåddes bara genom nedladdningsrutan). */}
+        {!undersida && ovrig && <p class="bank-filer-rubrik m-ovrigt-namn m-ej-utskrift">{ovrig.rubrik}</p>}
+        {!undersida && d.ramar.ramar.length - (banken ? banken.ramar.size + banken.oversikter.size : 0) - utanforListan.size >= 4 && <Ramindex ramar={d.ramar.ramar} rubrik={d.ramar.rubrik} farger={BOKNIVA} ankare={indexAnkare} bank={banken ?? undefined} utanfor={utanforListan} />}
+        {!undersida && ovrig && (
+          <div class="bank-filer m-ovrigt-filer">
+            <p class="bank-filer-rubrik">{ovrig.rubrik} att skriva ut</p>
+            <Filval fil={`/stodundervisning/${ovrig.namn}`} namn={ovrig.namn} rubrik={ovrig.rubrik} statistik={`${d.titel}: ${ovrig.rubrik.toLowerCase()}`} pdf pdfTitel="Ladda ner som pdf" utanDrive liten />
+          </div>
+        )}
+        {punkter.map((p) => (bm?.ramar.has(p.ri)
+          ? (p.ri === bm.forst && p.ri !== punkter[0].ri ? <div class="bank" data-bladrader><Bladgrupp bm={bm} id={id} titel={d.titel}>{punkter.filter((x) => bm.ramar.has(x.ri)).map(rita)}</Bladgrupp></div> : null)
+          : !nm?.ramar.has(p.ri)
           ? rita(p)
           : p.ri === nm.forst && p.ri !== punkter[0].ri
             ? <div class="bank" data-nivaer>{nm.nivaer.map((n) => <Nivarad rad={n} nm={nm} id={id} titel={d.titel}>{punkter.filter((x) => n.ramar.includes(x.ri)).map(rita)}</Nivarad>)}</div>
             : null))}
       </>);
       })()}
-      {!enhet && d.ramar.efter && <p class="m-efter">{d.ramar.efter}</p>}
-      {!enhet && <Filmruta filmer={vid({ avsnitt: 'ramar' })} titel={d.titel} />}
+      {/* En enhets sida kan lägga ett blad till efter enhetens egna: veckans blad ur en ram med blad ([id]/[enhet].astro). */}
+      {undersida && <slot name="efter-bladen" />}
+      {!undersida && d.ramar.efter && <p class="m-efter">{d.ramar.efter}</p>}
+      {!undersida && <Filmruta filmer={vid({ avsnitt: 'ramar' })} titel={d.titel} />}
     </section>
   )}
 
-  {d.diplom && !enhet && (
+  {d.diplom && !undersida && (
     <section id="diplom" data-material={materialAttribut('diplom')}>
       <h2>{d.diplom.rubrik}</h2>
       <div class="m-diplom">
@@ -907,7 +1021,7 @@ const meny = [
     </section>
   )}
 
-  {d.mallar.length > 0 && !enhet && (
+  {d.mallar.length > 0 && !undersida && (
     <section id="mallar" data-material={materialAttribut('mallar')}>
       <h2>Mallar att skriva ut</h2>
       {planketOchLinjen

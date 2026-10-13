@@ -151,6 +151,17 @@ const arLastext = (ram) => {
   return !!m && (ram.listor ?? []).length === 2 && text.rubrik === m[3] && fragor.rubrik === 'Frågorna' && !text.kolumner && !fragor.kolumner && !ram.huvud && !ram.oversikt;
 };
 
+// En faktatext (faktatextAv i src/lib/ramform.ts, samma regel) är sidor i en faktabok: ramens text är etiketten, och
+// listornas rubriker säger vad delarna är. Listan "Bild: <namn>" är platsen för bilden På bordet med det namnet, och
+// rubriken skrivs inte ut: bildens rubrik och text står i dess textalternativ, och listans rad är bildtexten. Under Läs
+// mer står adressen som sin domän, med hela adressen som länkens mål.
+const arFaktatext = (ram) => {
+  const m = String(ram.rubrik ?? '').match(/^([^,:]+), ([^:]+): (.+)$/);
+  const listor = ram.listor ?? [];
+  return !!m && listor.length >= 3 && listor[0].rubrik === m[3] && !ram.huvud && !ram.oversikt && !ram.sagoform && !ram.serie && !ram.ark
+    && !listor.some((l) => l.kolumner || l.larare) && listor.some((l) => /^Fakta: ./.test(l.rubrik ?? '') || l.rubrik === 'Visste du att …');
+};
+
 // En kooperativ struktur (strukturAv i src/lib/ramform.ts, samma regel) är en sida med strukturens namn som titel och den
 // första bilden På bordet som hör till ramen, utan rubrik och bildtext, som i metodriggens kompendium: bildens rubrik och
 // text står i dess textalternativ, alt på sidan och descr i Word. Ramens rubrik står i Word som namnet, och "Strukturen,
@@ -177,6 +188,9 @@ function texter(x, vag, ut, minst = MINST) {
   return ut;
 }
 
+// Det om bilderna På bordet som inte står i metodens fil (src/data/pabordet.json, scripts/pabordetdata.mjs): elev säger att
+// eleven ser på bilden.
+const bilddata = existsSync(join(rot, 'src/data/pabordet.json')) ? JSON.parse(readFileSync(join(rot, 'src/data/pabordet.json'), 'utf8')) : {};
 // Bankernas filer, ur bygget (src/pages/stodundervisning/bankfiler.json.ts).
 const bankfiler = existsSync(join(rot, 'dist/stodundervisning/bankfiler.json')) ? JSON.parse(readFileSync(join(rot, 'dist/stodundervisning/bankfiler.json'), 'utf8')) : [];
 const mapp = join(rot, 'src/content/stodundervisning');
@@ -203,6 +217,11 @@ for (const fil of filer) {
     huvudOchFot.push(...await Promise.all(Object.keys(zip.files).filter((n) => /^word\/(header|footer)\d*\.xml$/.test(n)).map((n) => zip.file(n).async('string'))));
   }
   const word = norm(avkoda([xml, ...huvudOchFot].join(' ').replace(/<[^>]+>/g, '')));
+  // Ett radslut inne i en text (w:t) visar Word som ett mellanslag: raderna som metodens fil har under varandra läses då
+  // som en fras (kortet När det skaver i Faktatextsamtal i grupp, granskningen 2026-10-13). En radbrytning ska vara en
+  // ny rad i stycket (stycke i src/lib/metoddocx.ts), eller ett mellanrum där texten är en rad, som i sidfoten.
+  const radslut = [...[xml, ...huvudOchFot].join(' ').matchAll(/<w:t(?:\s[^>]*)?>([^<]*\n[^<]*)<\/w:t>/g)].map((m) => avkoda(m[1]).replace(/\n/g, ' ⏎ ').slice(0, 80));
+  if (radslut.length) { console.error(`paritet: ${id}.docx har ${radslut.length} texter med ett radslut som Word visar som mellanslag, först "${radslut[0]}". Bryt raden i stycket (stycke i src/lib/metoddocx.ts).`); fel += radslut.length; }
   const tommaRamar = (d.ramar?.ramar ?? []).map((r, i) => (tomRam(r) ? new RegExp(`^ramar\\.ramar\\.${i}\\.(delar|huvud)\\.`) : null)).filter(Boolean);
   const lastextRader = (d.ramar?.ramar ?? []).map((r, i) => (arLastext(r) ? new RegExp(`^ramar\\.ramar\\.${i}\\.text\\.`) : null)).filter(Boolean);
   // En lästexts rubrik står i två delar i Word: titeln överst på boksidan och nivån och vad i sidfotens knapp (FYRA STEG ·
@@ -237,6 +256,19 @@ for (const fil of filer) {
   const tvaLosningar = new Map((d.ramar?.ramar ?? []).flatMap((r, i) => (/^Två lösningar: /.test(r.rubrik) && arTextpar(r) && (d.pabordet ?? []).filter((b) => b.efter === `ram: ${r.rubrik}`).length === 2 ? [[i, r]] : [])));
   const problemRamar = new Set((d.ramar?.ramar ?? []).filter((r) => { const m = arLastext(r) && String(r.rubrik).match(/^([^,:]+), ([^:]+): (.+)$/); return !!m && /^problem(\s|$)/i.test(m[2]); }).map((r) => `ram: ${r.rubrik}`));
   const problemBilder = new Set((d.pabordet ?? []).filter((b) => problemRamar.has(b.efter) || [...tvaLosningar.values()].some((r) => b.efter === `ram: ${r.rubrik}`)).map((b) => b.nr));
+  // Faktatextens bilder (på platsen "Bild: <namn>" i texten), bladen (rubriken börjar med "Blad: ", src/lib/pabordet.ts)
+  // och bilden som eleven ser på (elev i src/data/pabordet.json) står utan rubriken På bordet, som problemens bilder:
+  // rubriken och texten står i textalternativet, och de prövas där.
+  const faktaplatser = new Set((d.ramar?.ramar ?? []).filter(arFaktatext).flatMap((r) => (r.listor ?? []).flatMap((l) => { const m = String(l.rubrik ?? '').match(/^Bild: (.+)$/); return m ? [`ram: ${r.rubrik}|${m[1]}`] : []; })));
+  for (const b of d.pabordet ?? []) {
+    if (faktaplatser.has(`${b.efter}|${b.rubrik}`) || /^Blad: /.test(b.rubrik) || bilddata[id]?.[String(b.nr)]?.elev) problemBilder.add(b.nr);
+  }
+  // Platsens rubrik ("Bild: <namn>") och adresserna under Läs mer skrivs inte ut som de står.
+  const faktaUndantag = (d.ramar?.ramar ?? []).flatMap((r, i) => (arFaktatext(r) ? (r.listor ?? []).flatMap((l, j) => [
+    ...(/^Bild: ./.test(l.rubrik ?? '') ? [`ramar.ramar.${i}.listor.${j}.rubrik`] : []),
+    ...(l.rubrik === 'Läs mer' ? l.rader.flatMap((rad, k) => (/^https?:\/\//.test(String(rad[1] ?? '')) ? [`ramar.ramar.${i}.listor.${j}.rader.${k}.1`] : [])) : []),
+  ]) : []));
+  const utanUtskrift = new Set(faktaUndantag);
   // Texterna och bildernas textalternativ prövas mot en Word-fil och en utskrift: metodens sida mot Word-filen med allt, och
   // i en bank också enheternas sidor mot bankens fil med alla nivåer och följesidorna (nedan). ram väljer ramarna.
   const ramAv = (efter) => (d.ramar?.ramar ?? []).findIndex((r) => `ram: ${r.rubrik}` === efter);
@@ -261,10 +293,16 @@ for (const fil of filer) {
   for (const { vag, text } of texter(d, '', [])) {
     const ri = vag.match(/^ramar\.ramar\.(\d+)\./);
     if (!ram(ri ? Number(ri[1]) : -1)) continue;
-    if (lastextRader.some((r) => r.test(vag))) continue;
+    if (lastextRader.some((r) => r.test(vag)) || utanUtskrift.has(vag)) continue;
     // Strukturens bild prövas ovan, i textalternativet.
     const pb = vag.match(/^pabordet\.(\d+)\.(rubrik|text)$/);
     if (pb && (strukturBilder.has(d.pabordet[Number(pb[1])].nr) || problemBilder.has(d.pabordet[Number(pb[1])].nr))) continue;
+    // En bild vid en del i en ram (del: <rubrik>) står utan egen rubrik, med bildtexten som börjar med På bordet. Bildens
+    // rubrik, som Ett möjligt resultat: Vattenplaneten, står då i textalternativet, på sidan och i Word.
+    if (pb && pb[2] === 'rubrik' && /^del: /.test(d.pabordet[Number(pb[1])].efter)) {
+      const alt = norm(`På bordet: ${text}`);
+      if (altWord.has(alt) && altSida.has(alt)) { provade++; continue; }
+    }
     if (losningsText.has(vag)) {
       const n = losningsText.get(vag);
       if (!altWord.has(n) || !altSida.has(n)) ut.push(`    ${vag}: lösningen i ord saknas som bildens textalternativ i ${[!altWord.has(n) && 'Word-filerna', !altSida.has(n) && 'sidorna'].filter(Boolean).join(' och ')}`);
@@ -292,14 +330,23 @@ for (const fil of filer) {
   saknas.push(...provaTexter({ word, utskrift, altWord, altSida }));
   // Banken (src/lib/bank.ts): enheternas egna sidor och bankens filer byggs på andra vägar än metodens sida och filen med
   // allt (Metod.astro med enhet, mallBarn i metoddocx.ts), så bankens texter prövas där också, med bankens fil med alla
-  // nivåer och följesidorna som Word-fil (granskningen 2026-10-10).
-  const bankfil = bankfiler.find((f) => f.metod === id && /-alla-med-lararens-sida$/.test(f.namn));
+  // nivåer och följesidorna som Word-fil (granskningen 2026-10-10). I en bank där följesidorna står i egna filer
+  // (sidorForSig i bank.ts, faktatexterna) prövas filerna med alla nivåer tillsammans: texterna och lärarens sidor.
+  const bankens = bankfiler.filter((f) => f.metod === id && !f.slag);
+  const medSidor = bankens.find((f) => /-alla-med-lararens-sida$/.test(f.namn));
+  const bankfilerna = medSidor ? [medSidor] : bankens.filter((f) => /-alla$/.test(f.namn));
+  const bankfil = bankfilerna.length ? { namn: bankfilerna.map((f) => f.namn).join(' och '), oversikter: bankfilerna.flatMap((f) => f.oversikter ?? []), ramar: bankfilerna.flatMap((f) => f.ramar ?? []) } : undefined;
   if (bankfil) {
     const mappen = join(rot, 'dist/stodundervisning', id);
     const enhetsHtml = readdirSync(mappen, { withFileTypes: true }).filter((x) => x.isDirectory() && !['lathund', 'serier'].includes(x.name) && existsSync(join(mappen, x.name, 'index.html'))).map((x) => readFileSync(join(mappen, x.name, 'index.html'), 'utf8')).join('\n');
-    const bzip = await JSZip.loadAsync(readFileSync(join(rot, 'dist/stodundervisning', `${bankfil.namn}.docx`)));
-    const bxml = await bzip.file('word/document.xml').async('string');
-    const bdelar = await Promise.all(Object.keys(bzip.files).filter((n) => /^word\/(header|footer)\d*\.xml$/.test(n)).map((n) => bzip.file(n).async('string')));
+    const bxmlDelar = [];
+    const bdelar = [];
+    for (const f of bankfilerna) {
+      const bzip = await JSZip.loadAsync(readFileSync(join(rot, 'dist/stodundervisning', `${f.namn}.docx`)));
+      bxmlDelar.push(await bzip.file('word/document.xml').async('string'));
+      bdelar.push(...await Promise.all(Object.keys(bzip.files).filter((n) => /^word\/(header|footer)\d*\.xml$/.test(n)).map((n) => bzip.file(n).async('string'))));
+    }
+    const bxml = bxmlDelar.join(' ');
     // Nivåernas översikter står på metodens sida och i bankens fil, inte på enheternas sidor, och prövas med metodens sida.
     const oversikter = new Set(bankfil.oversikter ?? []);
     const iBanken = new Set((bankfil.ramar ?? []).filter((ri) => !oversikter.has(ri)));

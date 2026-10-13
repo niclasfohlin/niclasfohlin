@@ -1,4 +1,5 @@
-// Bilderna och elevens typsnitt till Word-filerna vid bygget, lästa från public/ (src/lib/ljudkort.ts säger vilka), och
+// Bilderna och elevens typsnitt till Word-filerna vid bygget, lästa från public/ (src/lib/ljudkort.ts säger vilka),
+// boksidornas och faktatexternas typsnitt (src/lib/ramform.ts), och
 // varje bilds reservbild, ritad ur samma SVG (src/lib/reservbild.ts). Bildseriernas rutor (src/lib/bildserier.ts) ritas
 // här ur scenfilen, samma filer som bygget lägger under /stodundervisning/<id>/serier/.
 // Bara för bygget: i webbläsaren hämtas samma filer av sidan som bygger den samlade filen (src/pages/stodundervisning/index.astro).
@@ -7,7 +8,7 @@ import { join } from 'node:path';
 import { Resvg } from '@resvg/resvg-js';
 import sharp from 'sharp';
 import { ELEVTYPSNITT_TTF, harElevtypsnitt, metodensBilder } from './ljudkort';
-import { BOKTYPSNITT_TTF } from './ramform';
+import { BOKTYPSNITT_TTF, FAKTATYPSNITT_TTF, harFaktatexter } from './ramform';
 import { harBoktypsnitt, sagoBilder } from './sagoblad';
 import { serieBilder } from './bildserier';
 import { serieantal, serieFil } from './bildserier-bygge';
@@ -28,6 +29,8 @@ export function lasResurser(poster: MetodPost[]): MetodResurser {
     bilder,
     elevtypsnitt: poster.some((p) => harElevtypsnitt(p.data)) ? las(ELEVTYPSNITT_TTF) : undefined,
     boktypsnitt: poster.some((p) => harBoktypsnitt(p.data)) ? { cinzel: las(BOKTYPSNITT_TTF.cinzel), dekor: las(BOKTYPSNITT_TTF.dekor) } : undefined,
+    // Anton till faktatexternas rubriker (faktatext() i metoddocx.ts), bara när någon metod har faktatexter.
+    faktatypsnitt: poster.some((p) => harFaktatexter(p.data)) ? las(FAKTATYPSNITT_TTF) : undefined,
   };
 }
 

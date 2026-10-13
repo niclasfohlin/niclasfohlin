@@ -6,16 +6,19 @@
 // rader i bankens nivå på sidan. Filerna byggs ur metodens fil: Word av [id].docx.ts (bankDokument i metoddocx.ts) och
 // pdf:en av npm run validera (scripts/bankpdf.mjs). Pdf och Word, utan Drive, så att en rad ryms i telefonen.
 import Filval from './Filval.astro';
-import { bankfiler, foljeText, type Bank, type Bankniva } from '../lib/bank';
+import { bankfiler, foljeFlera, foljeText, type Bank, type Bankniva } from '../lib/bank';
 interface Props { id: string; titel: string; bank: Bank; niva?: Bankniva; farger: Record<string, string> }
 const { id, titel, bank, niva, farger } = Astro.props;
 const filer = bankfiler(id, bank);
 const bas = '/stodundervisning/';
 const versal = (s: string) => s.charAt(0).toLocaleUpperCase('sv') + s.slice(1);
-const bara = `Bara ${bank.ord.alla}`;
-const med = `Med ${foljeText(bank)}`;
-const fil = (n: Bankniva | undefined, medFoljesidor: boolean) => filer.find((f) => f.niva === n && f.medFoljesidor === medFoljesidor)!;
-const val = (n: Bankniva | undefined, medFoljesidor: boolean) => {
+// I en bank där följesidorna står för sig (bank.sidorForSig, faktatexterna) heter kolumnerna efter det filen har:
+// Texterna och Lärarens sidor. Annars Bara problemen och Med lärarens sida och Två lösningar.
+const andra = bank.sidorForSig ? 'bara' as const : true;
+const bara = bank.sidorForSig ? versal(bank.ord.alla) : `Bara ${bank.ord.alla}`;
+const med = bank.sidorForSig ? foljeFlera(bank) : `Med ${foljeText(bank)}`;
+const fil = (n: Bankniva | undefined, medFoljesidor: boolean | 'bara') => filer.find((f) => f.niva === n && f.medFoljesidor === medFoljesidor)!;
+const val = (n: Bankniva | undefined, medFoljesidor: boolean | 'bara') => {
   const f = fil(n, medFoljesidor);
   return { fil: `${bas}${f.namn}`, namn: f.namn, rubrik: f.rubrik, statistik: `${titel}: ${f.rubrik.toLowerCase()}`, pdf: true, pdfTitel: 'Ladda ner som pdf', utanDrive: true, liten: true };
 };
@@ -23,7 +26,7 @@ const val = (n: Bankniva | undefined, medFoljesidor: boolean) => {
 {niva ? (
   <ul class="filrader bankfiler-niva">
     <li><span class="filrubrik">{bara}</span> <Filval {...val(niva, false)} /></li>
-    <li><span class="filrubrik">{med}</span> <Filval {...val(niva, true)} /></li>
+    <li><span class="filrubrik">{med}</span> <Filval {...val(niva, andra)} /></li>
   </ul>
 ) : (
   <table class="bankfiler">
@@ -35,7 +38,7 @@ const val = (n: Bankniva | undefined, medFoljesidor: boolean) => {
         <tr>
           <th scope="row">{n ? <span class="bankfiler-niva-namn" style={`--niva: ${farger[n.namn]}`}>{n.namn}</span> : 'Alla nivåer'}</th>
           <td><Filval {...val(n, false)} /></td>
-          <td><Filval {...val(n, true)} /></td>
+          <td><Filval {...val(n, andra)} /></td>
         </tr>
       ))}
     </tbody>

@@ -5,6 +5,8 @@ import Metod from '../../components/Metod.astro';
 import EjBryt from '../../components/EjBryt.astro';
 import Nedladdning from '../../components/Nedladdning.astro';
 import { metodensNivamaterial } from '../../lib/nivamaterial';
+import { metodensBladmaterial } from '../../lib/bladmaterial';
+import { ovrigtfil } from '../../lib/ovrigt';
 import Seriemeny from '../../components/Seriemeny.astro';
 import Seriefot from '../../components/Seriefot.astro';
 import Filmruta from '../../components/Filmruta.astro';
@@ -82,7 +84,7 @@ const materialLank = d.ramar ? '#ramar' : d.lektionsbank ? '#lektionsbank' : har
           faktarutan, som på Word-filens första sida. Extrafilmerna står i texten (Metod.astro). */}
       {huvud && <Filmruta filmer={[huvud]} titel={d.titel} />}
       {delningPa && <Delning sida={`/stodundervisning/${m.id}`} titel={d.titel} plats="topp" />}
-      <Nedladdning id={m.id} titel={d.titel} harMallar={harMallar(d)} harLathund={harLathund(d)} ramar={d.ramar?.rubrik.toLowerCase()} filmer={filmer.length} bank={bank} farger={bank ? nivaFarger(d, bank) : undefined} nivamaterial={metodensNivamaterial(d)} />
+      <Nedladdning id={m.id} titel={d.titel} harMallar={harMallar(d)} harLathund={harLathund(d)} ramar={d.ramar?.rubrik.toLowerCase()} filmer={filmer.length} bank={bank} farger={bank ? nivaFarger(d, bank) : undefined} nivamaterial={metodensNivamaterial(d)} bladmaterial={metodensBladmaterial(d, m.id)} ovrigt={ovrigtfil(d, m.id)} />
     </div>
 
     <Metod d={d} id={m.id} koppling={koppling} />

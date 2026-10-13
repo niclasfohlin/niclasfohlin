@@ -681,6 +681,68 @@ button.lank:hover { color: var(--farg-accent); }
 .m-grund p { margin: 0; }
 /* Ramarna: varje ram har rubrik, inledning, översikt och delar med ett fält per rad. */
 .m-ram { margin: 1.5rem 0 0; }
+/* Faktatexten (Faktatext.astro; Faktatextsamtal i grupp, metodriggens TILL-SAJTEN 2026-10-13): sidor i en faktabok, som i
+   Word. Rubrikerna, etiketterna och de stora talen står i Anton, samma delmängd som Word-filen bär
+   (public/fonts/faktatext/, OFL), och texten i elevens typsnitt. Typsnittet hämtas först när en faktatext visas.
+   Färgerna är riggens: rubrikernas mörka blå, nivåns färg som enda accent och det gula i rutan Visste du att. På
+   skärmen är nivåns färg mörkare under liten vit text, så att kontrasten räcker (Medel är ockra).
+   I telefonen finns ingen marginal: orden, Siffran och faktarutan står efter avsnittets text, på en ljus ton av
+   nivåns färg. Från 48rem står de i en marginalspalt bredvid texten, 12,5 mot 5 som i Word. */
+@font-face { font-family: 'Anton'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/faktatext/Anton-dokument.ttf') format('truetype'); }
+:root { --fakta-mork: #17324d; --fakta-text: #1f2630; --fakta-dov: #4a5563; --fakta-linje: #c9d2dc; --fakta-gul: #fff2bf; --fakta-gulkant: #f2b705; --fakta-platta: #f3f1ec; --typsnitt-fakta: 'Anton', 'Arial Narrow', 'Roboto Condensed', system-ui, sans-serif; }
+.faktatext { max-width: 46rem; --fakta-niva-mork: color-mix(in srgb, var(--fakta-niva) 78%, #000); }
+.fakta-sidor { background: #fff; color: var(--fakta-text); border: 1px solid var(--farg-kant); border-radius: 6px; padding: 1.1rem 1rem 1.25rem; font-family: var(--typsnitt-elev); font-size: 1.08rem; line-height: 1.6; }
+.fakta-etikett { margin: 0 0 0.5rem; line-height: 1; }
+.fakta-etikett > span { display: inline-block; font-family: var(--typsnitt-fakta); font-size: 0.8rem; font-weight: 400; letter-spacing: 0.03em; text-transform: uppercase; color: #fff; background: var(--fakta-mork); padding: 0.3em 0.65em 0.26em; }
+.fakta-titel { font-family: var(--typsnitt-fakta); font-weight: 400; font-size: 2.3rem; line-height: 1.12; color: var(--fakta-mork); margin: 0; text-wrap: balance; }
+.fakta-titel::after { content: ''; display: block; width: 4.2rem; border-bottom: 6px solid var(--fakta-niva); margin: 0.6rem 0 0.9rem; }
+.fakta-ingress p { font-size: 1.2rem; line-height: 1.5; color: var(--fakta-mork); margin: 0 0 0.8rem; }
+.fakta-ingress p:last-child { margin-bottom: 0; }
+.fakta-marg-etikett { font-family: var(--typsnitt-fakta); font-size: 0.8rem; letter-spacing: 0.03em; text-transform: uppercase; color: var(--fakta-niva-mork); line-height: 1.2; margin: 0 0 0.2rem; }
+.fakta-tal { font-family: var(--typsnitt-fakta); font-size: 2.2rem; line-height: 1.1; color: var(--fakta-niva-mork); margin: 0; }
+.fakta-siffran p:last-child { margin: 0.15rem 0 0; }
+.faktatext .fakta-avsnitt { margin: 1.6rem 0 0; }
+.fakta-mellanrubrik { display: flex; align-items: baseline; gap: 0.55rem; font-family: var(--typsnitt-fakta); font-weight: 400; font-size: 1.35rem; line-height: 1.25; color: var(--fakta-mork); margin: 0 0 0.5rem; }
+.fakta-nr { flex: none; min-width: 1.55em; text-align: center; background: var(--fakta-niva-mork); color: #fff; padding: 0.04em 0.3em 0; font-size: 0.9em; }
+.fakta-text p { margin: 0 0 0.75rem; }
+.fakta-text p:last-child { margin-bottom: 0; }
+.fakta-text strong, .fakta-ingress strong { font-weight: 700; color: var(--fakta-mork); }
+.fakta-marginal { display: grid; gap: 0.9rem; margin: 0.9rem 0 0; padding: 0.7rem 0.85rem 0.75rem; background: color-mix(in srgb, var(--fakta-niva) 9%, #fff); border-left: 4px solid var(--fakta-niva); font-size: 0.98rem; line-height: 1.45; }
+.fakta-marginal p, .fakta-marginal dl, .fakta-marginal dd { margin: 0; }
+.fakta-marginal dl > div + div { border-top: 1px solid var(--fakta-linje); margin-top: 0.4rem; padding-top: 0.4rem; }
+.fakta-marginal dt { font-weight: 700; color: var(--fakta-mork); }
+.fakta-marginal .fakta-margrubrik { font-family: var(--typsnitt-fakta); font-size: 1.05rem; line-height: 1.25; color: var(--fakta-mork); margin: 0 0 0.3rem; }
+.faktatext .fakta-platta { background: var(--fakta-platta); padding: 0.9rem 0.85rem 1rem; margin-left: -0.5rem; margin-right: -0.5rem; }
+.fakta-platta .fakta-marginal { background: #fff; }
+.fakta-bild { margin: 1.5rem 0 0; }
+.fakta-bild img { display: block; width: 100%; height: auto; }
+.fakta-bild figcaption { font-size: 0.95rem; line-height: 1.4; color: var(--fakta-dov); margin: 0.4rem 0 0; }
+.fakta-bild figcaption::before { content: '■'; font-family: Arial, sans-serif; font-size: 0.8em; color: var(--fakta-niva); margin-right: 0.45em; }
+.fakta-ruta { background: color-mix(in srgb, var(--fakta-niva) 13%, #fff); border-left: 6px solid var(--fakta-niva); padding: 0.8rem 1rem; margin: 1.5rem 0 0; }
+.fakta-rutrubrik { font-family: var(--typsnitt-fakta); font-size: 1.2rem; color: var(--fakta-mork); margin: 0 0 0.4rem; }
+.fakta-rutrubrik .fakta-etikett > span { background: var(--fakta-niva-mork); margin-right: 0.4rem; vertical-align: 0.15em; }
+.fakta-ruta ul { margin: 0; padding-left: 1.2rem; }
+.fakta-ruta li::marker { color: var(--fakta-niva-mork); }
+.fakta-visste { background: var(--fakta-gul); border-top: 6px solid var(--fakta-gulkant); padding: 0.8rem 1rem 0.95rem; margin: 1.6rem 0 0; }
+.fakta-visste h4 { font-family: var(--typsnitt-fakta); font-weight: 400; font-size: 1.5rem; line-height: 1.2; color: var(--fakta-mork); margin: 0 0 0.3rem; }
+.fakta-visste p { margin: 0; }
+.fakta-visste p + p { margin-top: 0.5rem; }
+.fakta-visste .fakta-tal { font-size: 1.9rem; }
+.fakta-lasmer { border-top: 3px solid var(--fakta-mork); padding: 0.7rem 0 0; margin: 1.6rem 0 0; }
+.fakta-lasmer h4 { font-family: var(--typsnitt-fakta); font-weight: 400; font-size: 1.2rem; line-height: 1.2; color: var(--fakta-mork); margin: 0 0 0.4rem; }
+.fakta-lasmer ul { list-style: none; margin: 0; padding: 0; font-size: 0.98rem; line-height: 1.45; }
+.fakta-lasmer li { position: relative; padding: 0.3rem 0 0.3rem 1.5em; margin: 0; }
+.fakta-lasmer li::before { content: '→'; position: absolute; left: 0; color: var(--fakta-niva-mork); }
+.fakta-lasmer a { color: var(--fakta-niva-mork); text-decoration: underline; text-underline-offset: 0.2em; }
+.fakta-knapp { font-family: var(--typsnitt-fakta); font-size: 0.8rem; letter-spacing: 0.03em; background: var(--fakta-niva-mork); color: #fff; padding: 0.2em 0.7em 0.14em; white-space: nowrap; }
+@media (min-width: 48rem) {
+  .fakta-sidor { padding: 1.75rem 2rem 2rem; }
+  .fakta-titel { font-size: 3rem; }
+  .fakta-spalter { display: grid; grid-template-columns: minmax(0, 12.5fr) minmax(0, 5fr); column-gap: 1.25rem; align-items: start; }
+  .fakta-marginal { margin: 0; padding: 0; background: none; border: 0; font-size: 0.92rem; }
+  .faktatext .fakta-platta { padding: 1rem 1.1rem 1.1rem; margin-left: -1.1rem; margin-right: -1.1rem; }
+  .fakta-platta .fakta-marginal { background: none; }
+}
 /* Boksidan (Boksida.astro): en lästext som en sida i en gammal bok, som i Word. Lättläst (korta) har större text. */
 .boksida { max-width: 40rem; }
 .boksida-ram { border: 4px double var(--bok-ram); padding: 1.5rem 2rem 1.75rem; background: #fff; color: var(--bok-text); }
@@ -788,6 +850,8 @@ button.lank:hover { color: var(--farg-accent); }
 .bank-niva[open] > summary::after { transform: translateY(0.1rem) rotate(-135deg); }
 .bank-nivanamn { font-size: 1.15rem; font-weight: 700; color: color-mix(in srgb, var(--niva) 85%, #000); }
 .bank-antal { font-size: 0.95rem; color: var(--farg-text-svag); }
+/* Ramarna med blad (Bladgrupp.astro): en rad med länkar, med luft till nivåernas rader före. */
+.bank[data-bladrader] { margin-top: 1rem; }
 .bank-innehall { padding: 0.25rem 1rem 1rem; }
 /* Länkarna överst i en utfälld nivå med flera ramar (Nivarad.astro): Om nivån · Böckerna. */
 .bank-nivalankar { display: flex; flex-wrap: wrap; align-items: center; column-gap: 0.6rem; margin: 0.35rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.95rem; color: var(--farg-text-svag); }
@@ -795,11 +859,26 @@ button.lank:hover { color: var(--farg-accent); }
 .bank-nivalankar a:hover { text-decoration-color: currentColor; }
 .bank-oversikt { margin: 0; }
 .bank-oversikt > h3 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.bank-lista { margin: 0.75rem 0; padding-left: 1.4rem; }
+/* Numret står i länkens text (1. Vattenplaneten), så listan har inga egna nummer: annars stod numret två gånger. */
+.bank-lista { list-style: none; margin: 0.5rem 0; padding-left: 0; }
+.bank-lista a { display: inline-block; padding: 0.35rem 0; }
 .bank-rad { display: none; }
 /* Nivåns enheter med följesidorna står bara i utskriften; på skärmen står de på enheternas sidor (Bank.astro). */
 .bank-utskrift { display: none; }
 .bank-filer { margin: 1.25rem 0 0; padding: 0.75rem 0 0; border-top: 1px solid var(--farg-kant); font-family: var(--typsnitt-ui); font-size: 0.95rem; }
+/* En rams egna filer sist på ramens sida ([id]/[enhet].astro). */
+.enhet-filer { margin-top: 2.25rem; }
+.enhet-filer .m-efter { margin: 0.75rem 0 0; color: var(--farg-text-svag); }
+/* Raden under rubriken vid enhetens blad: vilket blad det är, och var ramens sida står (enhet.astro). */
+.enhet-bladtext { font-family: var(--typsnitt-ui); font-size: 0.95rem; color: var(--farg-text-svag); margin: 0 0 0.75rem; }
+.enhet-bladtext a { display: inline-block; padding: 0.35rem 0; }
+/* Det som hör ihop med sidan, textens modell eller modellens texter, som en rad länkar under sidans egna (enhet.astro). */
+.enhet-hor { margin: 0 0 0.9rem; font-family: var(--typsnitt-ui); font-size: 0.95rem; }
+.enhet-hor-etikett { color: var(--farg-text-svag); }
+.enhet-hor a { display: inline-block; padding: 0.35rem 0; }
+/* Det övriga materialets namn över listan och filen efter den (Metod.astro). */
+.m-ovrigt-namn { margin: 1.75rem 0 0.25rem; }
+.m-ovrigt-filer { margin: 0.5rem 0 1.5rem; }
 .bank-filer-rubrik { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); margin: 0 0 0.5rem; }
 .bankfiler-niva { margin: 0; }
 .bankfiler-niva .filrubrik { flex-basis: 16rem; }
@@ -839,6 +918,7 @@ a.bankfiler-niva-namn { display: inline-block; padding: 0.4rem 0; color: inherit
 .enhet-blad { margin: 2.25rem 0 0; scroll-margin-top: 0.75rem; }
 .enhet-bladhuvud { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 1rem; border-top: 3px solid var(--niva); padding: 0.6rem 0 0; margin: 0 0 0.9rem; }
 .enhet-bladhuvud h2 { font-size: 1.2rem; margin: 0; }
+.enhet-bladhuvud .knapp { margin-left: auto; }
 .knapp.liten { min-height: 2.5rem; padding: 0.3rem 0.9rem; font-size: 0.9rem; }
 .enhet-blad > .m-ram, .enhet-blad > .boksida { margin-top: 0; }
 @media screen { .enhet-blad > .m-ram > h3 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
@@ -859,7 +939,9 @@ a.bankfiler-niva-namn { display: inline-block; padding: 0.4rem 0; color: inherit
 .m-lista-rubrik { font-family: var(--typsnitt-ui); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-accent); margin: 0 0 0.35rem; }
 .m-lista table { width: 100%; border-collapse: collapse; table-layout: fixed; font-family: var(--typsnitt-ui); border: 1px solid var(--farg-kant); border-radius: 8px; overflow: hidden; }
 .m-lista thead th { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--farg-text-svag); background: var(--farg-ton-svag); padding: 0.4rem 0.8rem; text-align: left; border-bottom: 1px solid var(--farg-kant); }
-.m-lista td { font-size: 1.35rem; line-height: 1.3; padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--farg-kant); vertical-align: top; }
+/* En radbrytning i en cell står kvar, som i Word: kortet När det skaver i Faktatextsamtal i grupp har ett sätt per rad
+   ("marginalen", "bilden", "ett exempel"), och på sidan stod de på en rad (riggens läsning i telefonbredd 2026-10-13). */
+.m-lista td { font-size: 1.35rem; line-height: 1.3; padding: 0.5rem 0.8rem; border-bottom: 1px solid var(--farg-kant); vertical-align: top; white-space: pre-line; }
 /* Radens nummer på ett kort i sagoformen (Frågekortet, Du som leder), som på kortet i Word, så att metodens text kan säga
    rad 5 och 6. */
 .m-lista .m-lista-nr { color: var(--farg-text-svag); margin-right: 0.45em; font-variant-numeric: tabular-nums; }
@@ -921,6 +1003,18 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-pabordet-rubrik { font-family: var(--typsnitt-ui); font-weight: 700; margin: 0 0 0.4rem; }
 .m-pabordet figcaption { font-size: 0.95rem; color: var(--farg-text-svag); margin-top: 0.4rem; }
 .m-pabordet.i-del { margin-top: 0.75rem; }
+/* Ett blad (Pabordet.astro, arBlad i src/lib/pabordet.ts): en bild över hela den liggande sidan, som gruppen har på A3
+   eller ett par på A4. På skärmen står bladets namn över bilden, som leder till svg-filen så att bladet går att se stort. */
+.m-blad { margin: 1.25rem 0 1.5rem; }
+.m-blad-rubrik { font-family: var(--typsnitt-ui); font-weight: 700; margin: 0 0 0.4rem; }
+.m-blad img { display: block; width: 100%; height: auto; background: #fff; border: 1px solid var(--farg-kant); border-radius: 4px; }
+.m-blad figcaption { font-size: 0.95rem; color: var(--farg-text-svag); margin-top: 0.4rem; }
+/* Bilden som eleven ser på (PaBordet.elev): direkt efter det eleven läser, utan rubrik, på vitt som elevens blad. */
+.m-elevbild { margin: 1rem 0 1.25rem; }
+.m-elevbild img { display: block; width: 100%; height: auto; background: #fff; }
+.m-elevbild figcaption { font-family: var(--typsnitt-elev); font-size: 0.95rem; color: var(--farg-text-svag); margin-top: 0.4rem; }
+/* Radetiketterna (fältet radetiketter): radens namn i husets blå, inte fet, eftersom fet stil är rubrik. */
+.m-radetikett { color: var(--farg-accent); }
 .m-veckokort { margin: 1rem 0 1.5rem; }
 /* Kartan (src/lib/karta.ts, MetodTabell.astro): nivåernas kolumner har en linje i nivåns färg under namnet i rubrikraden,
    som annars är som andra rubrikrader (Niclas 2026-10-04: raden med Bas, Medel och Avancerad såg tjock ut med hela
@@ -1134,6 +1228,8 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 @page kortark { size: A4; margin: 10mm 10mm 14mm; @bottom-center { content: var(--tryck-text, ''); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 8pt; color: #555; } }
 /* Boksidorna (lästexterna) med 1,5 cm marginal runt ramen, som i Word, och en smalare fot för upphovet, så att ramen och
    raden Till läraren under den ryms på sidan. */
+@page faktatext { size: A4; margin: 15mm 15mm 12mm; @bottom-center { content: var(--tryck-text, ''); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 8pt; color: #555; } }
+@page blad { size: A4 landscape; margin: 0; }
 @page boksida { size: A4; margin: 15mm 15mm 8mm; @bottom-center { content: var(--tryck-text, ''); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 8pt; color: #555; } }
 /* Två lösningar på ett liggande A4 med riggens marginaler (720 twips, src/lib/boksida.ts LIGGANDE_BOK). */
 @page bokliggande { size: A4 landscape; margin: 12.7mm 12.7mm 8mm; @bottom-center { content: var(--tryck-text, ''); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 8pt; color: #555; } }
@@ -1717,7 +1813,19 @@ html.js .bara-js { display: inline-block; }
   /* En bild På bordet hålls ihop med sin bildtext. Veckornas kort leder till veckorna på skärmen och står inte i
      utskriften, där veckorna följer efter varandra. */
   .m-pabordet { break-inside: avoid; }
+  /* Bladet på en egen liggande sida med bara bilden, kant till kant som i Word, där bladets namn är ritat i bilden.
+     Upphovet står litet i bildens tomma kant nederst (bilden är ritad mellan 8 och 198 mm av 210). */
+  .m-blad { page: blad; break-before: page; break-after: page; break-inside: avoid; position: relative; margin: 0; width: 297mm; height: 209mm; overflow: hidden; }
+  .m-blad-rubrik, .m-blad figcaption { display: none; }
+  .m-blad img { width: 297mm; height: 209mm; object-fit: contain; border: 0; border-radius: 0; }
+  .m-blad::after { content: var(--tryck-text, ''); position: absolute; left: 0; right: 0; bottom: 4mm; text-align: center; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 7pt; color: #555; }
+  .m-elevbild { break-inside: avoid; margin: 8pt 0; }
+  /* En del med en bild (lärarens sida: rutan för modellpasset med bilden Ett möjligt resultat) börjar på en ny sida och
+     hålls ihop med bilden, som i Word. */
+  .m-del-med-bild { break-before: page; break-inside: avoid; }
   .m-pabordet img { width: 100%; }
+  /* Länken runt bilden (Pabordet.astro) tar ingen plats i utskriften, så att bilden fyller veckans sida som förut. */
+  .m-pabordet .bild-lank { display: contents; }
   /* Veckorna i en ram med lektioner (De fyra räknesätten): varje vecka börjar på en ny sida, med texten i 9 punkter och
      smala etiketter (Niclas 2026-10-04: "Testa En sida med mindre text"), och raden ur kartan och bilden På bordet som
      ett block efter rutan. Veckan är en sida hög (258 mm av satsytans 261), och bilden fyller det som blir kvar, som
@@ -1805,6 +1913,47 @@ html.js .bara-js { display: inline-block; }
   .boksida-text, .boksida-fragor, .boksida.korta .boksida-text, .boksida.korta .boksida-fragor { font-size: var(--bok-pt); line-height: var(--bok-rad); }
   .boksida-text p { margin: 0 0 7.5pt; }
   .boksida-text .boksida-anfang p { margin: 0; }
+  /* Faktatexten på egna A4 med Word-sidans mått (faktatext() i metoddocx.ts): 1,5 cm marginal, textspalten 12,5 cm och
+     marginalspalten 5 cm, texten i 13 punkter med Words radavstånd, titeln i 36 punkter och ingressen i 15,5. Texten
+     flödar över sidorna: ett avsnitt får delas, mellanrubriken hålls ihop med avsnittets början, och ett ord med sin
+     förklaring, en bild med sin bildtext och rutorna hålls hela. Raden Till läraren och nivåns knapp står efter texten. */
+  .faktatext { page: faktatext; break-before: page; break-after: page; max-width: none; margin: 0; --fakta-niva-mork: var(--fakta-niva); }
+  .fakta-sidor { border: 0; border-radius: 0; padding: 0; font-size: 13pt; line-height: 1.443; }
+  .fakta-etikett > span { font-size: 9.5pt; }
+  .fakta-titel { font-size: 36pt; line-height: 1.08; }
+  .fakta-titel::after { width: 23mm; border-bottom-width: 6pt; margin: 4pt 0 10pt; }
+  .fakta-spalter { display: grid; grid-template-columns: 125mm 50mm; column-gap: 5mm; align-items: start; }
+  .fakta-ingress p { font-size: 15.5pt; line-height: 1.46; margin: 0 0 10pt; }
+  .fakta-marginal { display: block; margin: 0; padding: 0; background: none; border: 0; font-size: 11.5pt; line-height: 1.34; }
+  .fakta-marginal > div + div { margin-top: 8pt; }
+  .fakta-marginal dl > div { break-inside: avoid; }
+  .fakta-marg-etikett { font-size: 9pt; }
+  .fakta-tal { font-size: 32pt; }
+  .fakta-marginal .fakta-margrubrik { font-size: 12pt; }
+  .faktatext .fakta-avsnitt { margin: 11pt 0 0; }
+  .fakta-mellanrubrik { font-size: 16pt; margin: 0 0 4pt; padding-top: 2pt; break-after: avoid; }
+  .fakta-nr { font-size: 14pt; }
+  .fakta-text p { margin: 0 0 7.5pt; orphans: 2; widows: 2; }
+  .faktatext .fakta-platta { padding: 6pt 0 8pt 10pt; margin: 11pt 0 0; }
+  .fakta-platta .fakta-marginal { background: none; }
+  .fakta-bild { margin: 10pt 0 11pt; break-inside: avoid; }
+  .fakta-bild figcaption { font-size: 11.5pt; line-height: 1.34; margin: 3.5pt 30mm 0 0; }
+  .fakta-ruta, .fakta-visste, .fakta-lasmer { break-inside: avoid; margin: 11pt 0 0; }
+  /* Sidlåset (src/lib/sidlas.ts): delen börjar en ny sida där Word-filen gör det, så att texten har samma sidor i
+     utskriften som i Word (Niclas 2026-10-13). */
+  .faktatext .fakta-ny-sida { break-before: page; margin-top: 0; }
+  /* En etikett står aldrig sist på en sida utan det den hör till, marginalens faktaruta delas inte, och raden Till
+     läraren sist i texten står inte ensam på en egen sida (granskningen 2026-10-13). */
+  .fakta-platta > .fakta-etikett, .fakta-marg-etikett { break-after: avoid; }
+  .fakta-margfakta { break-inside: avoid; }
+  .faktatext .fakta-fot { break-before: avoid; }
+  .fakta-visste { padding: 7.5pt 12pt; border-top-width: 4.5pt; }
+  .fakta-visste h4 { font-size: 18pt; }
+  .fakta-visste .fakta-tal { font-size: 26pt; }
+  .fakta-lasmer h4 { font-size: 14pt; }
+  .fakta-lasmer ul { font-size: 12pt; }
+  .fakta-lasmer li { padding: 0 0 0 1.5em; margin: 0 0 3pt; }
+  .fakta-fot { margin-top: 8pt; }
   /* Lärarens sida (Metod.astro, en ram som heter Lärarens sida eller Lärarens sidor) på ett eget blad, lika tät som i Word,
      där den ryms på ett A4: texten i 9 pt och fältens kolumner som Words 2300 och 7338 twips (granskningen 2026-10-01). */
   .m-lararsida { break-before: page; break-inside: avoid; margin: 0; }
@@ -1867,9 +2016,17 @@ html.js .bara-js { display: inline-block; }
   .m-bildpar { grid-template-columns: 1fr 1fr; gap: 12pt; margin: 4pt 0 8pt; break-inside: avoid; }
   .m-bildpar figcaption { font-size: 8pt; margin: 0 0 2pt; }
   /* En enhets sida: bara bladen, och bara det blad som knappen valde. */
-  .enhet-huvud, .enhet-bladhuvud, .enhet-fot, .enhet .upphov, .utskrift-gomd { display: none !important; }
+  .enhet-huvud, .enhet-bladhuvud, .enhet-bladtext, .enhet-fot, .enhet-filer, .enhet .upphov, .utskrift-gomd { display: none !important; }
   .enhet-blad { margin: 0; }
-  .bank-niva > summary, .bank-filer, .bank-nivalankar { display: none; }
+  /* Nivåns lista med länkar till enheternas sidor (bank-lista, när nivån saknar en översikt) är en väg på skärmen. I
+     utskriften följer enheterna direkt efter, och listan stod utan rubrik, med sista raden ensam på en egen sida
+     (Faktatextsamtal i grupp 2026-10-13). */
+  .bank-niva > summary, .bank-filer, .bank-nivalankar, .bank-lista { display: none; }
+  /* En rad som bara har länkar och filer (en nivå utan översikt i Bank.astro, ramarnas rad i Bladgrupp.astro) har då
+     inget kvar att skriva ut. Den göms helt: den tomma raden låg annars ensam på en sida mellan nivåns sista text och
+     nästa nivås första blad, som båda börjar en ny sida (utskriften Allt 2026-10-13, tre tomma sidor). */
+  .bank-niva.utan-utskrift { display: none; }
+  .bank[data-bladrader] { margin-top: 0; }
   .bank-rad { display: block; }
   /* Utskriften av hela beskrivningen har nivåernas enheter med följesidorna, var och en på sitt blad (Bank.astro). Banken
      står som block, så att bladen bryter sidor och får sina sidformat (@page bokliggande) som på enheternas sidor. */

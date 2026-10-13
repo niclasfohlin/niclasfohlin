@@ -6,7 +6,8 @@
 // sidor).
 //
 // Banken känns igen på ramarnas rubriker, utan nya fält, med samma regler som materialets lista (ramindex.ts):
-//   en enhet är en lästext, "<nivå>, <vad>: <titel>" (lastexter i ramform.ts), som "Bas, problem 1: Äpplena";
+//   en enhet är en lästext eller en faktatext, "<nivå>, <vad>: <titel>" (enhetstexter i ramform.ts), som "Bas, problem 1:
+//   Äpplena" och "Bas, text 1: Vattenplaneten";
 //   en följesida är en ram som heter "<namn>: <nivå>, <vad>, <titel>", som "Lärarens sida: Bas, problem 1, Äpplena" och
 //   "Två lösningar: Bas, problem 1, Äpplena", och hör till enheten med samma nivå, vad och titel;
 //   nivåns översikt är ramen "Lärarens sidor: <nivå>".
@@ -21,10 +22,15 @@
 // andra metoder, och utskriften Metoden har dem inte (METODER.md under Utskriften). Bara skärmen är kortare: där står
 // enheterna på sina egna sidor.
 //
+// I en bank av faktatexter (Faktatextsamtal i grupp) är filerna delade på ett annat sätt (Niclas 2026-10-13: "faktatexter
+// är en kolumn och lärarhandledning den andra och med Allt, Bas, Medel och Avancerat"): texterna för sig och lärarens sidor
+// för sig, utan en fil med båda. En faktatext är flera sidor och kopieras en per elev, och lärarens sida skrivs ut en
+// gång, så en fil med båda skulle få läraren att plocka sidor vid kopiatorn (sidorForSig nedan).
+//
 // Inga Node-beroenden: Word-filen av flera metoder byggs i webbläsaren med samma regel.
-import { lastexter, type Lastext } from './ramform';
+import { enhetstexter, type Enhetstext } from './ramform';
 
-type Ram = Parameters<typeof lastexter>[0][number];
+type Ram = Parameters<typeof enhetstexter>[0][number];
 type Metod = { ramar?: { ramar: Ram[] } };
 
 /** Färre enheter än så står kvar på metodens sida, som förut. */
@@ -37,9 +43,10 @@ const ORD: Record<string, { en: string; bestamd: string; flera: string; alla: st
 };
 
 export interface Bankenhet {
-  /** Lästextens plats bland ramarna. */
+  /** Textens plats bland ramarna. */
   ri: number;
-  l: Lastext;
+  /** Nivån, vad och titeln ur ramens namn, och texten själv: en lästext (boksida, problem) eller en faktatext. */
+  l: Enhetstext;
   /** Numret ur vad ("problem 4" ger 4), annars inget (kartläggning före). */
   nr?: number;
   /** Sidans namn i adressen: nivån och numret, "bas-4", eller nivån och vad, "lattlast-kartlaggning-fore". */
@@ -53,6 +60,8 @@ export interface Bank {
   ord: { en: string; bestamd: string; flera: string; alla: string; slug: string };
   /** Följesidornas namn i den ordning de först kommer: Lärarens sida, Två lösningar. */
   foljesidor: string[];
+  /** Följesidorna står i egna filer, och ingen fil har enheterna med följesidorna: en bank där varje enhet är en faktatext. */
+  sidorForSig: boolean;
   nivaer: Bankniva[];
   enheter: Bankenhet[];
   /** Ramarna som står på enheternas sidor och på metodens sida bara i utskriften: enheterna och följesidorna. */
@@ -67,7 +76,7 @@ const UPPTAGNA = new Set(['lathund', 'serier']);
 
 export function bankAv(d: Metod): Bank | null {
   const ramar = d.ramar?.ramar ?? [];
-  const texter = lastexter(ramar);
+  const texter = enhetstexter(ramar);
   if (texter.size < BANK_MINST) return null;
   const nycklar = new Map<string, Bankenhet>();
   const nivaer = new Map<string, Bankniva>();
@@ -106,7 +115,7 @@ export function bankAv(d: Metod): Bank | null {
     if (UPPTAGNA.has(e.slug) || slugar.has(e.slug)) throw new Error(`Banken: två enheter, eller en enhet och en annan sida, får adressen ${e.slug} (${ramar[e.ri].rubrik}). Ge nivån eller numret ett annat namn.`);
     slugar.add(e.slug);
   }
-  return { ord: { ...ord, slug: slugAv(ord.flera) }, foljesidor, nivaer: [...nivaer.values()], enheter, ramar: bankramar, oversikter };
+  return { ord: { ...ord, slug: slugAv(ord.flera) }, foljesidor, sidorForSig: enheter.every((e) => !!e.l.faktatext), nivaer: [...nivaer.values()], enheter, ramar: bankramar, oversikter };
 }
 
 /** Enhetens sida. */
@@ -120,10 +129,27 @@ export const foljeText = (b: Bank) => {
   return ord.length > 1 ? `${ord.slice(0, -1).join(', ')} och ${ord[ord.length - 1]}` : ord[0];
 };
 
-/** En fil ur banken: en nivå eller alla, med bara enheterna eller med följesidorna. */
-export interface Bankfil { namn: string; niva?: Bankniva; medFoljesidor: boolean; rubrik: string }
+// Följesidornas namn i flertal, som filen med bara följesidorna heter efter. Ett nytt namn läggs till här.
+const FOLJE_FLERA: Record<string, string> = { 'Lärarens sida': 'Lärarens sidor' };
+/** Följesidorna i flertal, som kolumnen och filen heter: "Lärarens sidor". */
+export const foljeFlera = (b: Bank) => {
+  const ord = b.foljesidor.map((n) => { const f = FOLJE_FLERA[n]; if (!f) throw new Error(`Banken: följesidan "${n}" har inget namn i flertal i src/lib/bank.ts. Lägg till det i FOLJE_FLERA (Lärarens sida: Lärarens sidor).`); return f; });
+  return ord.length > 1 ? `${ord.slice(0, -1).join(', ')} och ${ord[ord.length - 1].toLowerCase()}` : ord[0];
+};
+/** En fil ur banken: en nivå eller alla, med bara enheterna (false), med följesidorna (true) eller med bara följesidorna
+ * ('bara', i en bank där följesidorna står för sig). */
+export interface Bankfil { namn: string; niva?: Bankniva; medFoljesidor: boolean | 'bara'; rubrik: string }
 export function bankfiler(id: string, b: Bank): Bankfil[] {
   const ut: Bankfil[] = [];
+  if (b.sidorForSig) {
+    const sidor = foljeFlera(b);
+    for (const niva of [undefined, ...b.nivaer]) {
+      const var_ = niva ? niva.slug : 'alla';
+      ut.push({ namn: `${id}-${b.ord.slug}-${var_}`, niva, medFoljesidor: false, rubrik: `${niva ? niva.namn : 'Alla nivåer'}: ${b.ord.alla}` });
+      ut.push({ namn: `${id}-${slugAv(sidor)}-${var_}`, niva, medFoljesidor: 'bara', rubrik: `${niva ? niva.namn : 'Alla nivåer'}: ${sidor.toLowerCase()}` });
+    }
+    return ut;
+  }
   for (const niva of [undefined, ...b.nivaer]) {
     for (const medFoljesidor of [false, true]) {
       const namn = `${id}-${b.ord.slug}-${niva ? niva.slug : 'alla'}${medFoljesidor ? '-med-lararens-sida' : ''}`;
@@ -134,11 +160,12 @@ export function bankfiler(id: string, b: Bank): Bankfil[] {
   return ut;
 }
 
-/** Ramarna i en fil ur banken, i ordning: per nivå översikten och sedan enhet för enhet med följesidorna runt. */
+/** Ramarna i en fil ur banken, i ordning: per nivå översikten och sedan enhet för enhet med följesidorna runt, eller bara
+ * följesidorna. */
 export function bankfilensRamar(b: Bank, f: Pick<Bankfil, 'niva' | 'medFoljesidor'>): number[] {
   return (f.niva ? [f.niva] : b.nivaer).flatMap((n) => [
     ...(f.medFoljesidor && n.oversikt !== undefined ? [n.oversikt] : []),
-    ...n.enheter.flatMap((e) => (f.medFoljesidor ? [...e.fore, e.ri, ...e.efter] : [e.ri])),
+    ...n.enheter.flatMap((e) => (f.medFoljesidor === 'bara' ? [...e.fore, ...e.efter] : f.medFoljesidor ? [...e.fore, e.ri, ...e.efter] : [e.ri])),
   ]);
 }
 
@@ -154,6 +181,7 @@ export function enhetICell(n: Bankniva, cell: string): Bankenhet | undefined {
 /** Raden om bankens filer och sidor, i beskrivningen före nivåerna: i Word (metodBarn) och i sidans utskrift (Metod.astro). */
 export const bankRad = (b: Bank, adress: string) => {
   const alla = b.ord.alla.charAt(0).toLocaleUpperCase('sv') + b.ord.alla.slice(1);
+  if (b.sidorForSig) return `${alla} och ${foljeFlera(b).toLowerCase()} finns också i egna filer, en för varje nivå och en för alla nivåer: ${b.ord.alla} för sig och ${foljeFlera(b).toLowerCase()} för sig. Filerna finns på ${adress}, och varje ${b.ord.en} har en egen sida där.`;
   return `${alla} finns också i egna filer, en för varje nivå och en för alla nivåer: bara ${b.ord.alla}, eller ${b.ord.alla} med ${foljeText(b)}. Filerna finns på ${adress}, och varje ${b.ord.en} har en egen sida där.`;
 };
 

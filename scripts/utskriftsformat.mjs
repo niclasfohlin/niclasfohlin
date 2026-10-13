@@ -31,7 +31,7 @@
 import { spawn, execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { createServer } from 'node:http';
-import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -168,7 +168,18 @@ const nyckel = async (s) => {
 };
 const cache = existsSync(cacheFil) ? JSON.parse(readFileSync(cacheFil, 'utf8')) : {};
 const nycklar = await Promise.all(sidor.map(async (s) => ({ ...s, nyckel: await nyckel(s) })));
-const att = nycklar.filter((s) => alla || cache[s.adress] !== s.nyckel);
+// Utskriften Allt av en metods sida sparas, under sidans nyckel, åt scripts/sidparitet.mjs, som jämför dess sidor med
+// Word-filens (Niclas 2026-10-13: "Det ska alltid ske en granskning mellan slutgiltig docx och skriv ut allt"). Saknas
+// den sparade utskriften skrivs sidan ut igen, också när inget har ändrats.
+const alltMapp = join(rot, 'node_modules/.cache/utskrift-allt');
+const arMetodsida = (s) => s.adress === `/stodundervisning/${s.id}`;
+const alltFil = (s) => join(alltMapp, `${s.id}--${s.nyckel}.pdf`);
+const sparaAllt = (s, fil) => {
+  mkdirSync(alltMapp, { recursive: true });
+  for (const f of readdirSync(alltMapp)) if (f.startsWith(`${s.id}--`)) rmSync(join(alltMapp, f));
+  copyFileSync(fil, alltFil(s));
+};
+const att = nycklar.filter((s) => alla || cache[s.adress] !== s.nyckel || (arMetodsida(s) && !existsSync(alltFil(s))));
 if (!att.length) { console.log(`utskriftsformat: ${sidor.length} sidor, ingen ändrad sedan förra körningen`); server.close(); process.exit(0); }
 
 const port = 9800 + Math.floor(Math.random() * 150);
@@ -212,7 +223,7 @@ async function prova(f, s, nr) {
   const block = await blockFor(s.id);
   await f.oppna(`${bas}${s.adress}`);
   // Knapparna på sidan, som läsaren ser dem: utskriftsrutans val och bladens knappar på en enhets sida.
-  const knappar = await f.kor(`[...document.querySelectorAll('[data-skriv-ut], [data-skriv-ut-blad]')].map((k, i) => ({ i, synlig: k.checkVisibility(), namn: k.textContent.replace(/\\s+/g, ' ').trim(), typ: k.dataset.skrivUt ?? 'blad', blad: k.dataset.skrivUtBlad, utan: k.dataset.skrivUt === 'beskrivning' }))`) ?? [];
+  const knappar = await f.kor(`[...document.querySelectorAll('[data-skriv-ut], [data-skriv-ut-blad]')].map((k, i) => ({ i, synlig: k.checkVisibility(), namn: k.textContent.replace(/\\s+/g, ' ').trim(), typ: k.dataset.skrivUt ?? 'blad', blad: k.dataset.skrivUtBlad, hogst: Number(k.dataset.sidorHogst) || 1, liggande: k.dataset.liggande !== undefined, utan: k.dataset.skrivUt === 'beskrivning' }))`) ?? [];
   // Knappar som stilmallen gömmer (utskriften Metoden på en sida utan material) trycks inte, som läsaren inte kan trycka dem.
   const synliga = knappar.filter((k) => k.synlig);
   const lagen = synliga.length ? synliga : [{ i: -1, namn: 'webbläsarens utskrift' }];
@@ -241,6 +252,7 @@ async function prova(f, s, nr) {
     await f.kor(`Promise.race([Promise.all([...document.images].map((b) => { b.loading = 'eager'; return b.complete ? 0 : new Promise((r) => { b.onload = b.onerror = r; }); })), new Promise((r) => setTimeout(r, 8000))])`);
     const fil = join(mapp, `sida-${nr}.pdf`);
     writeFileSync(fil, await f.pdf());
+    if (arMetodsida(s) && (k.typ === 'allt' || k.i === -1)) sparaAllt(s, fil);
     const info = execFileSync('pdfinfo', ['-f', '1', '-l', '99999', fil], { encoding: 'utf8' });
     const format = [...info.matchAll(/Page\s+\d+ size:\s+([\d.]+) x ([\d.]+)/g)].map((m) => Number(m[1]) > Number(m[2]));
     const texter = execFileSync('pdftotext', ['-enc', 'UTF-8', fil, '-'], { encoding: 'utf8' }).split('\f').slice(0, format.length);
@@ -253,6 +265,13 @@ async function prova(f, s, nr) {
     // Sidfotens ord (global.css, --tryck-text: © Niclas Fohlin · niclasfohlin.se/stodundervisning/<id>/<enhet>) står i
     // Word-filens sidfot, som inte läses, och räknas inte heller här, också när utskriften bara är ett blad.
     for (const w of ord(`niclas fohlin niclasfohlin se ${s.adress}`)) vanliga.add(w);
+    // Ett blad som är en bild över hela sidan (src/lib/pabordet.ts, arBlad; Faktatextsamtal i grupp 2026-10-13) har bara
+    // upphovet som text, i Word och i utskriften. Blockets egna ord är orden utan upphovets, och ett block utan egna ord
+    // går inte att känna igen på texten: det räknas i stället. Utskriften får ha så många liggande sidor utan text som
+    // Word-filen har liggande blad utan text, och utskriften av allt på metodens sida ska ha just så många.
+    const egna = (b) => { let n = 0; for (const w of b.ord) if (!vanliga.has(w)) n++; return n; };
+    const tommaBlad = block.filter((b) => b.liggande && !b.lathundblad && egna(b) < MINST_ORD).length;
+    let textlosa = 0;
     // Hur stor del av ett blocks ord som står på en sida, med sidans alla ord: ett liggande blad i Word (Ledtrådsbladet i
     // Textsamtal i grupp) står i utskriften på en sida med lärarens text om bladet, som Word har i beskrivningen.
     const iSidan = (b, i) => { let n = 0; for (const w of b.ord) if (sidord[i].has(w)) n++; return n / Math.max(1, b.ord.size); };
@@ -264,9 +283,9 @@ async function prova(f, s, nr) {
     format.forEach((ligger, i) => {
       const o = new Set([...sidord[i]].filter((w) => !vanliga.has(w)));
       if (visa) console.log(`  ${s.adress} (${k.namn}) s. ${i + 1}: ${ligger ? 'liggande' : 'stående'}, ${o.size} egna ord: ${texter[i].replace(/\s+/g, ' ').trim().slice(0, 70)}`);
-      if (o.size < MINST_ORD) { if (ligger) fel1(`${s.adress} (${k.namn}): sidan ${i + 1} är liggande men har för lite text för att jämföras med Word (${texter[i].replace(/\s+/g, ' ').trim().slice(0, 50)})`); else obs.push(`${s.adress} (${k.namn}): sidan ${i + 1}, stående, har för lite text för att jämföras med Word`); return; }
+      if (o.size < MINST_ORD) { if (ligger) { textlosa++; if (textlosa > tommaBlad) fel1(`${s.adress} (${k.namn}): sidan ${i + 1} är liggande men har för lite text för att jämföras med Word, och Word-filen har bara ${tommaBlad} liggande blad utan text (${texter[i].replace(/\s+/g, ' ').trim().slice(0, 50)})`); } else obs.push(`${s.adress} (${k.namn}): sidan ${i + 1}, stående, har för lite text för att jämföras med Word`); return; }
       // En liggande sida som har ett liggande blad ur Word är rätt, också när lärarens text om bladet står på samma sida.
-      if (ligger && block.some((b) => b.liggande && b.ord.size >= MINST_ORD && iSidan(b, i) >= 0.8)) return;
+      if (ligger && block.some((b) => b.liggande && egna(b) >= MINST_ORD && iSidan(b, i) >= 0.8)) return;
       // Likheten är täckningen (hur stor del av sidans ord blocket har) gånger roten ur precisionen (hur stor del av
       // blockets ord som står på sidan). Roten gör att en lång beskrivning som har sidans ord vinner över ett litet blad
       // som den bara berättar om (Bråket på fyra sätt i Bråkkurs i grupp), och att ett blad vinner över beskrivningen när
@@ -293,12 +312,18 @@ async function prova(f, s, nr) {
     // Bladet räknas som helt på sidan när nästan alla dess ord står där, och det har så många ord att en beskrivning som
     // bara nämner bladet inte har dem alla.
     // Utskriften Metoden (Nedladdning.astro) har inga blad, så där prövas det inte.
-    if (!k.utan) for (const b of block.filter((x) => x.liggande && !x.lathundblad && x.ord.size >= MINST_ORD)) {
+    if (!k.utan) for (const b of block.filter((x) => x.liggande && !x.lathundblad && egna(x) >= MINST_ORD)) {
       const sidorna = format.map((_, i) => i).filter((i) => iSidan(b, i) >= 0.9);
       if (sidorna.length && !sidorna.some((i) => format[i])) fel1(`${s.adress} (${k.namn}): bladet "${b.borjan}" är liggande i Word men står på en stående sida i utskriften (sidan ${sidorna.map((i) => i + 1).join(', ')})`);
     }
-    // En enhets knapp för ett blad skriver ut bladet på en sida (Lärarens sida, Problemet, Två lösningar).
-    if (k.blad && format.length !== 1) fel1(`${s.adress} (${k.namn}): bladet blir ${format.length} sidor i utskriften, ska vara en`);
+    // Utskriften av allt på metodens sida har varje blad utan text som Word-filen har, på en liggande sida.
+    if (k.typ === 'allt' && s.adress === `/stodundervisning/${s.id}` && textlosa !== tommaBlad) fel1(`${s.adress} (${k.namn}): utskriften har ${textlosa} liggande sidor utan text, och Word-filen har ${tommaBlad} liggande blad utan text`);
+    // En enhets knapp för ett blad skriver ut bladet på en sida (Lärarens sida, Problemet, Två lösningar). Ett blad som är
+    // flera sidor, som en faktatext och lärarens sida till den, säger det på knappen (data-sidor-hogst, Metod.astro).
+    // Ett blad som är en bild över hela den liggande sidan har ingen text att känna igen: knappen säger att bladet ligger
+    // (data-liggande, Metod.astro), och då ska varje sida i utskriften vara liggande.
+    if (k.blad && k.liggande && !format.every(Boolean)) fel1(`${s.adress} (${k.namn}): bladet ligger, men utskriften har en stående sida`);
+    if (k.blad && format.length > k.hogst) fel1(`${s.adress} (${k.namn}): bladet blir ${format.length} sidor i utskriften, ska vara ${k.hogst === 1 ? 'en' : `högst ${k.hogst}`}`);
     rader.push(`${s.adress} (${k.namn}): ${format.length} sidor, ${format.filter(Boolean).length} liggande`);
   }
   // Utskriften Metoden har varje avsnitt i beskrivningen som Allt har, och inget avsnitt som är material.

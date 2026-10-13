@@ -25,11 +25,112 @@ export function lastexter<R extends RamMedRubrik>(ramar: R[]): Map<R, Lastext> {
     const [text, fragor] = ram.listor ?? [];
     if (!m || (ram.listor ?? []).length !== 2 || text.rubrik !== m[3] || fragor.rubrik !== 'Frågorna' || text.kolumner || fragor.kolumner || ram.huvud || ram.oversikt) continue;
     if (!nivaer.includes(m[1])) nivaer.push(m[1]);
-    const not = ram.delar.map((del) => `${del.rubrik} · ${del.falt.map((f) => `${f.rubrik}: ${f.text}`).join(' ')}`).join(' ');
+    // Raden Till läraren är en rad, i sidfoten i Word och under texten på sidan: en radbrytning i ett fält blir ett mellanrum.
+    const not = ram.delar.map((del) => `${del.rubrik} · ${del.falt.map((f) => `${f.rubrik}: ${f.text}`).join(' ')}`).join(' ').replace(/\s*\n\s*/g, ' ');
     ut.set(ram, { niva: m[1], nivaNr: nivaer.indexOf(m[1]), vad: m[2], titel: m[3], stycken: text.rader.map((r) => String(r[0])), fragor: fragor.rader.map((r) => String(r[0])), not });
   }
   return ut;
 }
+// En faktatext (Faktatextsamtal i grupp, metodriggens TILL-SAJTEN 2026-10-13; Niclas 2026-10-12: faktatexter som "ska se
+// ut som riktiga texter och utifrån åldern på eleverna. Med faktarutor, riktiga förklarande bilder och texter", med "en
+// egen del i varje text som är lite knasig eller fantastisk. Typ en del som heter Visste du att …"): en ram som heter
+// "<nivå>, <vad>: <titel>", som en lästext, och som har tre listor eller fler utan kolumner. Den första heter som titeln
+// och är ingressen. De andra är textens delar i den ordning de står på sidorna, och listans rubrik säger vad delen är:
+//   Fakta: <rubrik>        en faktaruta. Direkt efter ett avsnitt eller en fördjupning, och med högst sex rader, hör den
+//                          till avsnittet och står i marginalen bredvid det. En rad med två celler är ett ord och dess värde.
+//   Bild: <namn>           platsen för bilden På bordet med det namnet som rubrik och efter "ram: <ramens rubrik>".
+//                          Listans rad är bildtexten som eleven läser.
+//   Ord i texten           ordförklaringar till avsnittet före: ordet och förklaringen i var sin cell
+//   Siffran                ett stort tal och en rad om det, bredvid avsnittet före, eller bredvid ingressen när listan
+//                          står direkt efter den
+//   Fördjupning: <rubrik>  ett avsnitt som går djupare, på en tonad platta, utan nummer
+//   Visste du att …        rutan sist i texten. En rad med två celler börjar med ett stort tal eller ord.
+//   Läs mer                länkarna: texten och adressen i var sin cell
+//   allt annat             ett avsnitt: rubriken är mellanrubriken, och varje rad är ett stycke. Formen numrerar avsnitten.
+// En faktatext har minst en faktaruta eller rutan Visste du att, och det skiljer den från andra ramar med listor. Ramens
+// text är etiketten över titeln, som "Vatten · text 4 av 5", och rutan Till läraren står i sidfoten. Samma regel som
+// riggens build/modell.mjs (faktatextAv), så att riggens metodfil fungerar som den är. Word (faktatext i metoddocx.ts),
+// sidan och utskriften (Faktatext.astro) ritar den som sidor i en faktabok.
+export type Faktadel =
+  | { slag: 'avsnitt'; nr: number; rubrik: string; stycken: string[]; ord?: [string, string][]; siffran?: [string, string]; fakta?: { rubrik: string; rader: string[][] } }
+  | { slag: 'fordjupning'; rubrik: string; stycken: string[]; ord?: [string, string][]; siffran?: [string, string]; fakta?: { rubrik: string; rader: string[][] } }
+  | { slag: 'fakta'; rubrik: string; rader: string[][] }
+  | { slag: 'bild'; namn: string; text: string }
+  | { slag: 'visste'; rader: string[][] }
+  | { slag: 'lasmer'; rader: string[][] };
+export interface Faktatext { niva: string; nivaNr: number; vad: string; titel: string; etikett: string; ingress: string[]; siffran?: [string, string]; delar: Faktadel[]; not: string }
+export const FAKTAORD = { visste: 'Visste du att …', lasmer: 'Läs mer', ord: 'Ord i texten', siffran: 'Siffran' };
+type FaktaRam = RamMedRubrik & { text?: string[]; sagoform?: unknown; serie?: unknown; ark?: unknown; listor?: (Lista & { larare?: boolean })[] };
+export function faktatextAv(ram: FaktaRam): Omit<Faktatext, 'nivaNr'> | null {
+  const m = ram.rubrik.match(/^([^,:]+), ([^:]+): (.+)$/);
+  const listor: (Lista & { larare?: boolean })[] = ram.listor ?? [];
+  if (!m || listor.length < 3 || listor[0].rubrik !== m[3] || ram.huvud || ram.oversikt || ram.sagoform || ram.serie || ram.ark) return null;
+  if (listor.some((l) => l.kolumner || l.larare)) return null;
+  if (!listor.some((l) => /^Fakta: ./.test(l.rubrik ?? '') || l.rubrik === FAKTAORD.visste)) return null;
+  const delar: Faktadel[] = [];
+  let nr = 0;
+  let siffran: [string, string] | undefined;
+  const arAvsnitt = (del: Faktadel | undefined): del is Extract<Faktadel, { slag: 'avsnitt' | 'fordjupning' }> => !!del && (del.slag === 'avsnitt' || del.slag === 'fordjupning');
+  listor.slice(1).forEach((l, li) => {
+    const rub = l.rubrik ?? '';
+    const forra = delar[delar.length - 1];
+    const rader = l.rader.map((r) => r.map((c) => String(c ?? '')));
+    let x: RegExpMatchArray | null;
+    // Siffran direkt efter ingressen står bredvid den, överst på textens första sida.
+    if (rub === FAKTAORD.siffran && li === 0) { siffran = [rader[0][0], rader[0][1] ?? '']; return; }
+    // En kort faktaruta direkt efter ett avsnitt hör till avsnittet. Listan före ska vara avsnittet självt.
+    if ((x = rub.match(/^Fakta: (.+)$/)) && arAvsnitt(forra) && rader.length <= 6 && !forra.fakta) { forra.fakta = { rubrik: x[1], rader }; return; }
+    if ((x = rub.match(/^Fakta: (.+)$/))) delar.push({ slag: 'fakta', rubrik: x[1], rader });
+    else if ((x = rub.match(/^Bild: (.+)$/))) delar.push({ slag: 'bild', namn: x[1], text: rader[0]?.[0] ?? '' });
+    else if ((x = rub.match(/^Fördjupning: (.+)$/))) delar.push({ slag: 'fordjupning', rubrik: x[1], stycken: rader.map((r) => r[0]) });
+    else if (rub === FAKTAORD.visste) delar.push({ slag: 'visste', rader });
+    else if (rub === FAKTAORD.lasmer) delar.push({ slag: 'lasmer', rader });
+    else if (rub === FAKTAORD.ord || rub === FAKTAORD.siffran) {
+      // Ordförklaringarna och Siffran hör till avsnittet före. Står de någon annanstans är texten felbyggd.
+      if (!arAvsnitt(forra)) throw new Error(`Faktatexten "${ram.rubrik}": listan "${rub}" ska stå direkt efter ett avsnitt eller en fördjupning, eftersom den hör till avsnittet och står bredvid det.`);
+      if (rub === FAKTAORD.ord) forra.ord = [...(forra.ord ?? []), ...rader.map((r): [string, string] => [r[0], r[1] ?? ''])];
+      else forra.siffran = [rader[0][0], rader[0][1] ?? ''];
+    } else delar.push({ slag: 'avsnitt', nr: ++nr, rubrik: rub, stycken: rader.map((r) => r[0]) });
+  });
+  const not = ram.delar.map((del) => `${del.rubrik} · ${del.falt.map((f) => `${f.rubrik}: ${f.text}`).join(' ')}`).join(' ').replace(/\s*\n\s*/g, ' ');
+  return { niva: m[1], vad: m[2], titel: m[3], etikett: ram.text?.[0] ?? '', ingress: listor[0].rader.map((r) => String(r[0] ?? '')), ...(siffran ? { siffran } : {}), delar, not };
+}
+/** Metodens faktatexter, med nivåerna numrerade i den ordning de först kommer, som lästexternas. */
+export function faktatexter<R extends FaktaRam>(ramar: R[]): Map<R, Faktatext> {
+  const nivaer: string[] = [];
+  const ut = new Map<R, Faktatext>();
+  for (const ram of ramar) {
+    const f = faktatextAv(ram);
+    if (!f) continue;
+    if (!nivaer.includes(f.niva)) nivaer.push(f.niva);
+    ut.set(ram, { ...f, nivaNr: nivaer.indexOf(f.niva) });
+  }
+  return ut;
+}
+// Texterna som kan vara enheter i en bank (src/lib/bank.ts) och rader under sin nivå i materialets lista
+// (src/lib/ramindex.ts): lästexterna och faktatexterna, med nivån, vad och titeln ur ramens namn. Nivåerna numreras i den
+// ordning de först kommer bland dem alla.
+export interface Enhetstext { niva: string; nivaNr: number; vad: string; titel: string; lastext?: Lastext; faktatext?: Faktatext }
+export function enhetstexter<R extends FaktaRam>(ramar: R[]): Map<R, Enhetstext> {
+  const las = lastexter(ramar);
+  const fakta = faktatexter(ramar);
+  const nivaer: string[] = [];
+  const ut = new Map<R, Enhetstext>();
+  for (const ram of ramar) {
+    const l = las.get(ram);
+    const f = l ? undefined : fakta.get(ram);
+    const x = l ?? f;
+    if (!x) continue;
+    if (!nivaer.includes(x.niva)) nivaer.push(x.niva);
+    ut.set(ram, { niva: x.niva, nivaNr: nivaer.indexOf(x.niva), vad: x.vad, titel: x.titel, ...(l ? { lastext: l } : {}), ...(f ? { faktatext: f } : {}) });
+  }
+  return ut;
+}
+/** Har metoden faktatexter? Då bär Word-filen Anton (public/fonts/faktatext/). */
+export const harFaktatexter = (d: { ramar?: { ramar: FaktaRam[] } }): boolean => faktatexter(d.ramar?.ramar ?? []).size > 0;
+// Riggens delmängd av Anton till faktatexternas rubriker i Word-filerna (11 kB, SIL Open Font License, OFL-Anton.txt bredvid).
+export const FAKTATYPSNITT_TTF = '/fonts/faktatext/Anton-dokument.ttf';
+
 // Två texter (Texttyper i grupp, metodriggens TILL-SAJTEN 2026-10-09; Niclas 2026-10-08: "en elevversion som alla tittar
 // på från en projektor eller är utskriven som ser lite intressant ut med frågor under", och "Alla sådana kontrasterande
 // par av texter ska ha detta. I de andra, men även i hela sajten på sikt."): en ram vars första lista har två kolumner och

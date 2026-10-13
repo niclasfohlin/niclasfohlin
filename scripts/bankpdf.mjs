@@ -28,6 +28,7 @@ import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import JSZip from 'jszip';
 import { wordinnehall } from './wordinnehall.mjs';
 
 const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -48,7 +49,15 @@ const TYPSNITT = ['public/fonts/ljudlek-elev/LjudlekElev-Regular.ttf', 'public/f
 const typsnittHash = sha(TYPSNITT.map((f) => (existsSync(join(rot, f)) ? sha(readFileSync(join(rot, f))) : `saknas:${f}`)).join('|'));
 // Word-filens innehåll som kontrollsumma (scripts/wordinnehall.mjs, som googleprov.mjs delar): text, tabeller och former,
 // sidhuvuden och sidfötter, bildernas svg och fotona, utan id, löpnummer, radslut och reservbilder.
-const innehallHash = async (docx) => wordinnehall(readFileSync(docx), typsnittHash);
+// Faktatexternas Anton (public/fonts/faktatext/) räknas bara för en Word-fil som bär typsnittet, så att de pdf:er som
+// gjordes innan typsnittet fanns behåller sina summor och inte görs om (Faktatextsamtal i grupp, 2026-10-13).
+const ANTON = 'public/fonts/faktatext/Anton-dokument.ttf';
+const antonHash = existsSync(join(rot, ANTON)) ? sha(readFileSync(join(rot, ANTON))) : `saknas:${ANTON}`;
+const innehallHash = async (docx) => {
+  const data = readFileSync(docx);
+  const typsnitt = await (await JSZip.loadAsync(data)).file('word/fontTable.xml')?.async('string') ?? '';
+  return wordinnehall(data, /w:name="Anton"/.test(typsnitt) ? `${typsnittHash}|${antonHash}` : typsnittHash);
+};
 const pdfFor = (namn) => join(pdfMapp, `${namn}.pdf`);
 const kanda = new Set(filer.map((f) => `${f.namn}.pdf`));
 // En pdf i manifestet som ingen bank längre har (en borttagen nivå, en metod utan bank). Bara manifestets filer räknas,

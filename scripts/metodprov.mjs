@@ -98,7 +98,11 @@ async function provaDocx(fil, namn) {
   for (const f of Object.keys(zip.files).filter((x) => /^word\/(header|footer)\d*\.xml$/.test(x))) harUpphov.set(f, (await zip.file(f).async('string')).includes('© Niclas Fohlin'));
   const sektionsdelar = [...(dokument ?? '').matchAll(/<w:sectPr\b[\s\S]*?<\/w:sectPr>/g)].map((m) => [...m[0].matchAll(/<w:(?:header|footer)Reference\b[^>]*r:id="([^"]+)"/g)].map((r) => delar.get(r[1])));
   const sektioner = sektionsdelar.length;
-  const upphov = sektionsdelar.filter((d) => d.some((f) => harUpphov.get(f))).length;
+  // Ett blad som är en bild över hela den liggande sidan (bildblad i metoddocx.ts, Faktatextsamtal i grupp 2026-10-13) har
+  // varken sidhuvud eller sidfot, eftersom bilden täcker dem: upphovet står som sista rad i bladets egen tabell. En
+  // sektion bär därför upphovet också när det står i sektionens egen text.
+  const sektionstexter = (dokument ?? '').split(/<w:sectPr\b[\s\S]*?<\/w:sectPr>/).slice(0, sektioner);
+  const upphov = sektionsdelar.filter((d, i) => d.some((f) => harUpphov.get(f)) || (sektionstexter[i] ?? '').includes('© Niclas Fohlin')).length;
   const fotter = { length: sektioner };
   const stilar = await zip.file('word/styles.xml')?.async('string');
   const dubbla = ['Heading1', 'Heading2'].filter((s) => (stilar?.match(new RegExp(`w:styleId="${s}"`, 'g')) || []).length > 1);
@@ -264,8 +268,11 @@ if (bilder) {
           const falt = r.delar.filter((del) => !/^Till läraren$/i.test(del.rubrik.trim())).flatMap((del) => del.falt);
           return r.sagoform?.form === 'sida' && !r.huvud?.length && falt.length === 1 && !/titel|rita|bild/i.test(falt[0].rubrik);
         }).length;
-        tomma.length > radblad ? nej(`Word: sidan ${tomma.join(', ')} har bara sidhuvud och sidfot${radblad ? ` (${radblad} blad med bara rader väntas)` : ''}`)
-          : ok(`Word: ${wordSidor.length - 1} sidor, ingen tom${tomma.length ? ` (sidan ${tomma.join(', ')} är ett blad med bara rader)` : ''}`);
+        // Ett blad som är en bild över hela sidan (en bild På bordet vars rubrik börjar med "Blad: ", src/lib/pabordet.ts)
+        // har all sin text ritad i bilden, så sidan har ingen text i Word utom upphovet. Så många sidor till får vara utan.
+        const bildblad = (metod.pabordet ?? []).filter((b) => /^Blad: /.test(String(b.rubrik ?? ''))).length;
+        tomma.length > radblad + bildblad ? nej(`Word: sidan ${tomma.join(', ')} har bara sidhuvud och sidfot${radblad + bildblad ? ` (${radblad + bildblad} blad utan text väntas)` : ''}`)
+          : ok(`Word: ${wordSidor.length - 1} sidor, ingen tom${tomma.length ? ` (sidan ${tomma.join(', ')} är ${bildblad ? 'blad utan text' : 'ett blad med bara rader'})` : ''}`);
       }
       // Läskorten (K-063): varje lästräningstext är ett A4 med båda korten, med stöd och utan stöd, som i Word. Står
       // korten på var sin sida har texten eller utskriftens mått vuxit (Upprepad läsning 2026-09-27: en marginal på 1 em
@@ -326,11 +333,23 @@ if (bilder) {
       const lararsidor = (metod.ramar?.ramar ?? []).filter((ram) => /^Lärarens sida\b/.test(String(ram.rubrik ?? '')) && ram.delar?.length);
       if (lararsidor.length) {
         const norm = (s) => String(s).normalize('NFC').toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
-        const nycklar = lararsidor.map((ram) => ({ rubrik: ram.rubrik, delar: [norm(ram.rubrik), norm(ram.delar.at(-1).falt.at(-1).text).slice(-40)] }));
+        // En lärarsida med en bild vid en av sina delar (del: <rubrik>, som rutan för modellpasset med bilden Ett möjligt
+        // resultat i Faktatextsamtal i grupp) är två sidor: rutan med bilden börjar på en ny sida. Då ska rubriken stå på en
+        // sida och det sista fältet på samma sida eller nästa.
+        const medBild = (ram) => ram.delar.some((del) => (metod.pabordet ?? []).some((b) => b.efter === `del: ${del.rubrik}`));
+        const nycklar = lararsidor.map((ram) => ({ rubrik: ram.rubrik, tva: medBild(ram), delar: [norm(ram.rubrik), norm(ram.delar.at(-1).falt.at(-1).text).slice(-40)] }));
         const prova = (sidor, var_) => {
           const ns = sidor.map(norm);
-          const inteEn = nycklar.filter((k) => ns.filter((s) => k.delar.every((x) => s.includes(x))).length !== 1).map((k) => k.rubrik);
-          inteEn.length ? nej(`${var_}: ${inteEn.length} av ${lararsidor.length} lärarsidor står inte hela på ett blad (${inteEn.slice(0, 3).join('; ')}${inteEn.length > 3 ? ' …' : ''})`) : ok(`${var_}: ${lararsidor.length} lärarsidor, ett helt blad var`);
+          // Rubriken står också efter rutans namn på den andra sidan i utskriften (· Lärarens sida: …), så sidan räknas
+          // från där rubriken först står, och det sista fältet ska stå på en enda sida.
+          const hel = (k) => {
+            if (!k.tva) return ns.filter((s) => k.delar.every((x) => s.includes(x))).length === 1;
+            const forst = ns.findIndex((s) => s.includes(k.delar[0]));
+            const sist = ns.map((s, i) => (s.includes(k.delar[1]) ? i : -1)).filter((i) => i >= 0);
+            return forst >= 0 && sist.length === 1 && (sist[0] === forst || sist[0] === forst + 1);
+          };
+          const inteEn = nycklar.filter((k) => !hel(k)).map((k) => k.rubrik);
+          inteEn.length ? nej(`${var_}: ${inteEn.length} av ${lararsidor.length} lärarsidor står inte hela på ett blad, eller på två i följd när sidan har en bild vid en del (${inteEn.slice(0, 3).join('; ')}${inteEn.length > 3 ? ' …' : ''})`) : ok(`${var_}: ${lararsidor.length} lärarsidor, ${nycklar.some((k) => k.tva) ? 'hela på ett blad eller två i följd' : 'ett helt blad var'}`);
         };
         try { prova(tryckSidor(), tryckNamn); } catch { console.log('  obs  pdftotext saknas, lärarsidorna i utskriften är inte prövade'); }
         if (wordSidor) prova(wordSidor, wordNamn);
