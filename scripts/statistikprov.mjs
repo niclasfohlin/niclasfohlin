@@ -27,12 +27,15 @@ const RAKNINGEN_BORJADE = new Date(2026, 8, 28);
 
 // Provsiffrorna: 125 sidor och händelser, som veckan hade 2026-09-29. En av filerna är zip-filen med en metods filmer
 // (Niclas 2026-10-07: "Se till att nedladdning du fixar kommer i statistiken också på sidan"), med flest nedladdningar
-// så att den står överst bland filerna.
+// så att den står överst bland filerna. En metod har en sida som slumpar skrivkort (Kortskrivning, 2026-10-14), och dess
+// besök ska stå under metoden med sidans namn; metoden har flest besök, så att den står överst.
 const ZIP = { path: 'fil:metod-7-filmer.zip', title: 'Metod 7: filmerna som zip' };
 const PROV = Array.from({ length: 125 }, (_, i) => {
   const id = i + 1;
   if (id <= 6) return { path: `dela:facebook:stodundervisning/metod-${id}`, path_id: id, title: `Metod ${id}: delad på Facebook`, event: true, count: 1 };
   if (id === 7) return { ...ZIP, path_id: id, event: true, count: 9 };
+  if (id === 61) return { path: '/stodundervisning/metod-61', path_id: id, title: 'Metod 61 · Niclas Fohlin', event: false, count: 20 };
+  if (id === 62) return { path: '/stodundervisning/metod-61/skrivkort', path_id: id, title: 'Ta fram ett skrivkort: Metod 61 · Niclas Fohlin', event: false, count: 4 };
   if (id <= 60) return { path: `fil:metod-${id}.docx`, path_id: id, title: `Metod ${id}: allt om metoden som Word`, event: true, count: 2 };
   return { path: `/stodundervisning/metod-${id}`, path_id: id, title: `Metod ${id} · Niclas Fohlin`, event: false, count: 5 };
 });
@@ -162,6 +165,11 @@ try {
     const syns = (filer ?? '').includes(ZIP.title);
     if (!syns) fel++;
     console.log(`${syns ? 'GRÖNT' : 'RÖTT '}  filmernas zip-fil står bland filerna${syns ? '' : `: ${(filer ?? '').slice(0, 200)}`}`);
+    // Besöken på sidan som slumpar skrivkort står under metoden, med sidans namn.
+    const metoder = await utvardera(`document.querySelector('[data-kategori="metoder"]')?.textContent ?? ''`);
+    const skrivkort = /Metod 61[\s\S]*4 på Ta fram ett skrivkort/.test(metoder ?? '');
+    if (!skrivkort) fel++;
+    console.log(`${skrivkort ? 'GRÖNT' : 'RÖTT '}  sidan som slumpar skrivkort står under metoden${skrivkort ? '' : `: ${(metoder ?? '').slice(0, 200)}`}`);
   }
   await prova('7 dagar', klick('vecka'), mal0.lang);
   await prova('30 dagar', klick('manad'), mal0.lang);
