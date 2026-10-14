@@ -52,7 +52,7 @@ import Pabordet from './Pabordet.astro';
 import { bladNamn, delensRad, kartan, metodensBlad, radensDel } from '../lib/karta';
 import { veckanRyms } from '../lib/veckosida';
 import { veckansLista, veckomaterial } from '../lib/veckomaterial';
-import { harSkrivkort, skrivkortAdress, SKRIVKORT_LANK } from '../lib/skrivkort';
+import { borjaHar, harSkrivkort, skrivkortAdress, SKRIVKORT_LANK } from '../lib/skrivkort';
 // "Åk 4–5" hålls ihop i ramarnas rubriker och länkar: hårt mellanslag efter Åk, ordfog efter tankstrecket.
 const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 '));
 // koppling: den generella metodens serie med lektionsbanken, eller lektionens plats i den (src/lib/serie.ts).
@@ -218,6 +218,10 @@ const cellLank = !undersida && (banken || bm) ? (cell: string): string | undefin
   const rad = bm?.rader.find((x) => x.namn === namn);
   return rad ? bladsidaAdress(id, rad) : undefined;
 } : undefined;
+// Korten Börja här (src/lib/skrivkort.ts): i en översikt med nivåernas namn som kolumner och passets nummer först leder
+// kortets namn till kortet på sidan som slumpar korten, stort med klockan, och under tabellen leder varje nivå till sina
+// tio kort, att visa eller skriva ut (Niclas 2026-10-14: sidan som slumpar ska stå tydligt i metoden).
+const borja = (ram: SerieRam) => (!undersida && ram.oversikt ? borjaHar(id, ram.oversikt) : undefined);
 const listAnkare = new Map<string, string>();
 if (vm) for (const [ri, lagda] of vm.listor) for (const li of lagda.keys()) listAnkare.set(`${ri}-${li}`, ankare(ramarna[ri].listor![li].rubrik ?? `${ramarna[ri].rubrik} ${li + 1}`));
 type Punkt = { ram: SerieRam; ri: number; lage?: 'huvud' | 'vecka' | 'material'; vecka?: number; lista?: number; efter?: string; par?: TextparForm; helaKursen?: boolean };
@@ -538,6 +542,7 @@ const meny = [
     <section id="urval">
       <h2>{d.urval.rubrik}</h2>
       {d.urval.text.map((s) => <p>{s}</p>)}
+      {harSkrivkort(id) && <p class="m-skrivkort-knapp"><a class="knapp" href={skrivkortAdress(id)}>{SKRIVKORT_LANK}</a></p>}
       {/* Raden före kraven hålls ihop med dem i utskriften, så att den inte står ensam sist på en sida (granskningen
           2026-10-09). */}
       <div class="m-krav">
@@ -744,7 +749,8 @@ const meny = [
           {/* En översikt med bilder är en litteraturlista (Litteraturlista.astro); bredder ger annars kolumnernas andelar. */}
           {ram.oversikt?.bilder
             ? <Litteraturlista oversikt={ram.oversikt} id={id} niva={ramensNiva(ram.rubrik, d.nivaer)} />
-            : ram.oversikt && <MetodTabell kolumner={ram.oversikt.kolumner} rader={ram.oversikt.rader} bredder={andelar(ram.oversikt.bredder)} klass={kortaCeller(ram.oversikt.rader) ? 'fri tat' : friKlass(ram.oversikt)} radrubrik={false} />}
+            : ram.oversikt && <MetodTabell kolumner={ram.oversikt.kolumner} rader={ram.oversikt.rader} bredder={andelar(ram.oversikt.bredder)} klass={kortaCeller(ram.oversikt.rader) ? 'fri tat' : friKlass(ram.oversikt)} radrubrik={false} cellank={borja(ram)?.lank} />}
+          {borja(ram) && <p class="m-efter m-borja">Tryck på ett kort i tabellen, så visas det stort med klockan. Nivåns tio kort, att visa eller skriva ut: {borja(ram)!.nivaer.map((n, i) => <>{i > 0 && ' · '}<a href={n.adress}>{n.namn}</a></>)}.</p>}
           {ram.listor ? (
             <>
               {/* Elevens blad med listor (kartläggningen i Problemlösning i grupp, metodriggens TILL-SAJTEN 2026-10-10, Det

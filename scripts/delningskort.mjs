@@ -91,8 +91,9 @@ try {
       const laddad = new Promise((r) => handelser.set('Page.loadEventFired', r));
       await skicka('Page.navigate', { url: `http://localhost:${port}${k.mall}` });
       await Promise.race([laddad, vanta(15000)]);
-      // Typsnittet och bilderna ska vara inne innan kortet fotograferas.
-      await skicka('Runtime.evaluate', { awaitPromise: true, expression: 'document.fonts.ready.then(() => Promise.all([...document.images].map((i) => i.complete ? 1 : new Promise((r) => { i.onload = i.onerror = r; })))).then(() => true)' });
+      // Typsnittet och bilderna ska vara inne innan kortet fotograferas, och ett kort som ritas av ett skript (skrivkorten
+      // på kortet för sidan som slumpar dem) ska vara ritat: mallen sätter då window.dkKlar.
+      await skicka('Runtime.evaluate', { awaitPromise: true, expression: 'Promise.resolve(window.dkKlar).then(() => document.fonts.ready).then(() => Promise.all([...document.images].map((i) => i.complete ? 1 : new Promise((r) => { i.onload = i.onerror = r; })))).then(() => true)' });
       await vanta(80);
       // Titeln klipps inte i mallen (K-156), så en titel på mer än tre rader skulle trycka ned resten av kortet.
       const rader = (await skicka('Runtime.evaluate', { returnByValue: true, expression: '(() => { const t = document.querySelector(".dk-titel"); return t ? Math.round(t.getBoundingClientRect().height / parseFloat(getComputedStyle(t).lineHeight)) : 0; })()' })).result?.result?.value ?? 0;

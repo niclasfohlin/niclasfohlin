@@ -2,7 +2,9 @@
 import Base from '../../../layouts/Base.astro';
 import { publicerade } from '../../../lib/innehall';
 import { metodAdress, UPPHOV } from '../../../lib/metod';
-import { bildAdress, kortPdfNamn, skrivkortAv, SKRIVKORT_LANK } from '../../../lib/skrivkort';
+import { kortAdress, kortData, kortPdfNamn, skrivkortAv, skrivkortAdress, SKRIVKORT_LANK } from '../../../lib/skrivkort';
+import Delning from '../../../components/Delning.astro';
+import { delningPa } from '../../../lib/delning';
 import { site } from '../../../data/site';
 
 // /stodundervisning/<id>/skrivkort: sidan som slumpar skrivkort ur metodens bibliotek (src/lib/skrivkort.ts), som
@@ -37,18 +39,10 @@ const { m } = Astro.props;
 const d = m.data;
 const b = skrivkortAv(m.id)!;
 const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/skrivkort`;
-// Det sidans skript behöver, utan källornas adresser och mått, som bara läraren läser under kortet.
-const data = {
-  fraga: b.fraga,
-  fragaBild: b.fragaBild,
-  nivaer: b.nivaer.map((n) => ({ namn: n.namn, farg: `#${n.farg}` })),
-  kort: b.kort.map((k) => ({ id: k.id, niva: k.niva, nr: k.nr, form: k.form, ...(k.text ? { text: k.text } : {}), ...(k.bild ? { bild: k.bild } : {}), ...(k.citat ? { citat: k.citat } : {}), ...(k.handelse ? { handelse: k.handelse } : {}) })),
-  bilder: Object.fromEntries(Object.entries(b.bilder).map(([namn, x]) => [namn, {
-    stor: bildAdress(m.id, x.fil), liten: bildAdress(m.id, x.liten), alt: x.alt, rad: x.rad,
-    ...(x.motiv ? { motiv: x.motiv } : {}), ...(x.bakgrund ? { bakgrund: x.bakgrund } : {}), ...(x.ai ? { ai: true } : {}),
-    ...(x.adress ? { adress: x.adress } : {}), ...(x.licens ? { licens: x.licens } : {}), ...(x.licensadress ? { licensadress: x.licensadress } : {}), ...(x.upphov ? { upphov: x.upphov } : {}),
-  }])),
-};
+// Den korta adressen, som läraren kan skriva på tavlan (src/lib/skrivkortlank.ts).
+const kort = `${site.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}${kortAdress(m.id)}`;
+// Det sidans skript ritar korten ur (src/lib/skrivkort.ts, kortData).
+const data = kortData(m.id, b);
 const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
 ---
 
@@ -135,26 +129,26 @@ const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
 
     <noscript><p class="sk-tom">Sidan behöver JavaScript för att slumpa korten och visa klockan.</p></noscript>
 
-    <p class="upphov">{UPPHOV}. Skrivkorten till <a href={`/stodundervisning/${m.id}`}>{d.titel}</a>: {b.kort.length} kort, {b.nivaer.map((n) => `${antal(n.namn)} på ${n.namn}`).join(', ')}. Bildernas upphov står i kortets fot. {adress}</p>
+    <p class="upphov">{UPPHOV}. Skrivkorten till <a href={`/stodundervisning/${m.id}`}>{d.titel}</a>: {b.kort.length} kort, {b.nivaer.map((n) => `${antal(n.namn)} på ${n.namn}`).join(', ')}. Bildernas upphov står i kortets fot. Sidans korta adress är {kort}.</p>
 
     {/* Varje korts pdf, med filens version i adressen (scripts/filversion.mjs sätter den i länkarna efter bygget), så att
         webbläsaren aldrig ger ett äldre kort än sidan. Skriptet läser adresserna härifrån. */}
     <template id="sk-pdf">{b.kort.map((k) => <a data-kort={k.id} href={`/stodundervisning/${kortPdfNamn(m.id, k.id)}.pdf`}></a>)}</template>
     <script type="application/json" id="sk-data" set:html={JSON.stringify(data).replace(/</g, '\\u003c')}></script>
+    {/* Delningsraden, som på metodens sida: sidan har ett eget delningskort med tre skrivkort och klockan
+        (src/lib/delningskort.ts), så att den går att dela direkt (Niclas 2026-10-14). */}
+    {delningPa && <Delning sida={skrivkortAdress(m.id)} titel={`${SKRIVKORT_LANK}: ${d.titel}`} />}
   </article>
 </Base>
 
 <script>
-  type Kort = { id: string; niva: string; nr: number; form: 'bild' | 'citat' | 'handelse'; text?: string; bild?: string; citat?: { rad: string; vem: string; verk?: string; ar?: number | string; oversatt?: string }; handelse?: { ar: number | string; vad: string; plats?: string; bakgrund?: string } };
-  type Bild = { stor: string; liten: string; alt: string; rad: string; motiv?: string; bakgrund?: string; ai?: boolean; adress?: string; licens?: string; licensadress?: string; upphov?: string };
-  type Data = { fraga: string; fragaBild: string; nivaer: { namn: string; farg: string }[]; kort: Kort[]; bilder: Record<string, Bild> };
+  import { el, kortet as ritaKort, passa, type Data, type Kort } from '../../../scripts/skrivkortet';
 
   const sida = document.querySelector<HTMLElement>('.skrivkortsida')!;
   const metod = sida.dataset.metod!;
   const data: Data = JSON.parse(document.getElementById('sk-data')!.textContent!);
   const kortMed = new Map(data.kort.map((k) => [k.id, k]));
   const pdfFor = new Map([...(document.getElementById('sk-pdf') as HTMLTemplateElement).content.querySelectorAll<HTMLAnchorElement>('a[data-kort]')].map((a) => [a.dataset.kort!, a.getAttribute('href')!]));
-  const farg = (niva: string) => data.nivaer.find((n) => n.namn === niva)?.farg ?? '#4b3a2f';
   const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 
   // Det som sparas till nästa gång, i den här webbläsaren. Utan lagring (privat fönster) fungerar sidan ändå.
@@ -188,84 +182,8 @@ const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
   }
 
   // ---------- Kortet ----------
-  const el = (tag: string, klass?: string, text?: string) => { const e = document.createElement(tag); if (klass) e.className = klass; if (text !== undefined) e.textContent = text; return e; };
-  // Raderna i en vers står på egna rader, och varje versrad står hel så länge texten inte blir mindre än två tredjedelar
-  // av sin storlek, som i Word (riggens skrivkortform.js: 36 punkter och nedåt till 24). Sedan får raderna brytas.
-  const rader = (p: HTMLElement, text: string) => {
-    const delar = text.split('\n').filter(Boolean);
-    if (delar.length < 2) { p.textContent = text; return; }
-    p.classList.add('sk-vers', 'hel');
-    for (const r of delar) p.append(el('span', 'sk-versrad', r));
-  };
-  function kortet(k: Kort, liten: boolean): HTMLElement {
-    const bild = k.bild ? data.bilder[k.bild] : undefined;
-    const egen = (k.text ?? '').trim();
-    const utanFraga = k.form === 'bild' && !egen;
-    const f = el('div', `skrivkort form-${k.form}${liten ? ' liten' : ''}`);
-    f.style.setProperty('--niva', farg(k.niva));
-    f.dataset.niva = k.niva;
-    f.dataset.kort = k.id;
-    const innehall = el('div', 'sk-innehall');
-    const img = () => {
-      const i = document.createElement('img');
-      i.className = 'sk-bild';
-      i.src = liten ? bild!.liten : bild!.stor;
-      i.alt = bild!.alt;
-      i.width = liten ? 480 : 1200;
-      i.height = liten ? 320 : 800;
-      i.decoding = 'async';
-      return i;
-    };
-    if (k.form === 'bild') {
-      if (bild) f.append(img());
-      const t = el('p', `sk-text${utanFraga ? ' sk-uppgift' : ''}`);
-      t.textContent = egen || data.fragaBild;
-      innehall.append(t);
-    } else if (k.form === 'citat' && k.citat) {
-      innehall.append(el('span', 'sk-tecken', '”'));
-      const q = el('blockquote', 'sk-citatrad');
-      const p = el('p'); rader(p, k.citat.rad); q.append(p);
-      innehall.append(q, el('span', 'sk-linje'));
-      const vem = el('p', 'sk-vem');
-      vem.append(el('span', 'sk-namn', k.citat.vem));
-      const under = [k.citat.verk, k.citat.ar].filter(Boolean).join(', ');
-      if (under) vem.append(' ', el('span', 'sk-verk', under));
-      innehall.append(vem);
-      if (egen) innehall.append(el('p', 'sk-text sk-egen', egen));
-    } else if (k.form === 'handelse' && k.handelse) {
-      innehall.append(el('p', 'sk-ar', String(k.handelse.ar)), el('p', 'sk-vad', k.handelse.vad));
-      if (egen) innehall.append(el('p', 'sk-text sk-egen', egen));
-    }
-    f.append(innehall);
-    // En händelse med foto har bilden närmast foten, som i Word.
-    if (k.form === 'handelse' && bild) f.append(img());
-    const fot = el('div', 'sk-fot');
-    const rad1 = el('div', 'sk-fotrad');
-    rad1.append(el('span', 'sk-fraga', utanFraga ? '' : data.fraga), el('span', 'sk-markning', `${k.niva} · ${k.nr}`));
-    fot.append(rad1);
-    if (bild) fot.append(el('p', 'sk-upphov', bild.rad));
-    f.append(fot);
-    return f;
-  }
-  // Texten så stor som kortet rymmer: från nivåns storlek och nedåt, tills innehållet ryms över foten.
-  function passa(kort: HTMLElement) {
-    const inne = kort.querySelector<HTMLElement>('.sk-innehall');
-    if (!inne || kort.classList.contains('liten')) return;
-    const bredd = kort.clientWidth;
-    let skala = 1;
-    kort.style.setProperty('--skala', '1');
-    const vers = kort.querySelector<HTMLElement>('.sk-vers');
-    if (vers) {
-      vers.classList.add('hel');
-      while (skala > 0.68 && vers.scrollWidth > vers.clientWidth + 1) { skala -= 0.02; kort.style.setProperty('--skala', skala.toFixed(2)); }
-      if (vers.scrollWidth > vers.clientWidth + 1) vers.classList.remove('hel');
-    }
-    while (skala > 0.45 && inne.scrollHeight > inne.clientHeight + 1) {
-      skala -= 0.04;
-      kort.style.setProperty('--skala', skala.toFixed(2));
-    }
-    kort.dataset.bredd = String(bredd);
-  }
+  // Kortets form står i src/scripts/skrivkortet.ts, som delningskortet för sidan också ritar med.
+  const kortet = (k: Kort, liten: boolean) => ritaKort(data, k, liten);
 
   // ---------- Läget ----------
   const scen = $('sk-scen');

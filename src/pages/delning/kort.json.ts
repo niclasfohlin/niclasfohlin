@@ -3,6 +3,7 @@
 import { allaKort } from '../../lib/delningskort';
 
 export async function GET() {
-  const kort = (await allaKort()).map(({ sida, namn, fil }) => ({ sida, namn, fil, mall: `/delning/kort/${namn}` }));
+  // Sidan som slumpar skrivkort har en egen mall (src/pages/delning/skrivkort/[namn].astro).
+  const kort = (await allaKort()).map(({ sida, namn, fil, skrivkort }) => ({ sida, namn, fil, mall: skrivkort ? `/delning/skrivkort/${namn}` : `/delning/kort/${namn}` }));
   return new Response(JSON.stringify(kort, null, 1) + '\n', { headers: { 'Content-Type': 'application/json; charset=utf-8' } });
 }

@@ -24,12 +24,14 @@ export function grupperaNya(nya) {
   return nya.filter((p) => !(p.serie && urler.has(p.serie.url))).map((p) => (lektioner.has(p.url) ? { ...p, lektioner: lektioner.get(p.url) } : p));
 }
 
+// En post kan ha egna rader med länkar efter ingressen (lankar i nytt.json), som sidan som slumpar skrivkort i en metod.
 export function brev(nya, sajt) {
   const lank = (p, text) => `<a href="${sajt}${p.url}" style="color:#2f5d50;">${html(text)}</a>`;
   const delar = grupperaNya(nya).map((p) => `
     <p style="margin:0 0 4px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;font-size:14px;color:#5a635e;">${html(p.etikett)}</p>
     <h2 style="margin:0 0 8px;font-size:22px;line-height:1.25;"><a href="${sajt}${p.url}" style="color:#18221d;text-decoration:none;">${html(p.titel)}</a></h2>
-    <p style="margin:0 0 12px;">${html(p.ingress)}</p>${p.lektioner?.length ? `
+    <p style="margin:0 0 12px;">${html(p.ingress)}</p>${(p.lankar ?? []).map((l) => `
+    <p style="margin:0 0 12px;">${lank(l, l.text)}${l.efter ? `: ${html(l.efter)}` : ''}.</p>`).join('')}${p.lektioner?.length ? `
     <p style="margin:0 0 12px;">${p.lektioner.length === 1 ? `Med ${p.lektioner[0].ord?.den ?? 'lektionen'}` : `Med ${p.lektioner.length} ${p.lektioner[0].ord?.flera ?? 'lektioner'}`}: ${p.lektioner.map((l) => lank(l, l.namn ?? l.titel)).join(', ')}.</p>` : ''}
     <p style="margin:0 0 28px;">${lank(p, 'Läs på niclasfohlin.se')}</p>`).join('');
   return `<!doctype html>

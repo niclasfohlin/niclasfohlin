@@ -18,6 +18,13 @@
   external_node_modules = ["@waline/vercel"]
 
 # Korta adresser till kommentarernas panel och till registreringen av administratören.
+# Den korta adressen till sidan som slumpar skrivkort (Niclas 2026-10-14: "en direktlänk till slumpgeneratorn").
+# Adressen står också i src/lib/skrivkortlank.ts (KORTA), som Word-filen läser.
+[[redirects]]
+  from = "/skrivkort"
+  to = "/stodundervisning/kortskrivning-skriv-varje-dag/skrivkort"
+  status = 301
+
 [[redirects]]
   from = "/kommentarer/admin"
   to = "/.netlify/functions/kommentarer/ui"

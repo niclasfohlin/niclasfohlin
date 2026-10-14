@@ -8,6 +8,7 @@ import {
   Paragraph, type Run, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, TextWrappingType, UnderlineType, VerticalAlign, VerticalPositionRelativeFrom, WidthType,
   type IBorderOptions, type IFloating, type IParagraphOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
+import { harSkrivkort, kortAdress, SKRIVKORT_LANK } from './skrivkortlank';
 import { arbetsformRad, arEttKort, arProtokoll, arskursText, datumText, ejBryt, etikettOchText, laskortKolumn, laskortRubrik, lathundFakta, lathundForm, metaRad, metodAdress, passOrd, passOversikt, passTextKort, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost, type PassOrd } from './metod';
 import { brakDelar, delnamn, kortInfo, lage, STANDARD_NAMNARE, talrutansMatt, type KortInfo, type Mall } from './brak';
 import { andikaBredd, bagSvg, utanStod } from './lasflyt';
@@ -2732,6 +2733,15 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
   if (d.urval) {
     ut.push(h2(d.urval.rubrik));
     for (const s of d.urval.text) ut.push(stycke(s));
+    // Sidan som slumpar skrivkort (src/lib/skrivkortlank.ts), med adressen som länk, där sidan har knappen
+    // Ta fram ett skrivkort (Niclas 2026-10-14: sidan ska stå tydligt i metoden).
+    if (harSkrivkort(post.id)) {
+      const sida = `${bas.replace(/\/$/, '')}${kortAdress(post.id)}`;
+      ut.push(new Paragraph({ spacing: { before: 0, after: 120 }, children: [
+        textRun({ text: `${SKRIVKORT_LANK}: ` }),
+        new ExternalHyperlink({ link: sida, children: [textRun({ text: sida.replace(/^https?:\/\//, ''), color: FARG.huvud, underline: { type: UnderlineType.SINGLE, color: FARG.huvud } })] }),
+      ] }));
+    }
     if (d.urval.kravText) ut.push(stycke(d.urval.kravText, { hallIhop: true }));
     ut.push(...band(d.urval.krav));
     filmVid({ avsnitt: 'urval' });
