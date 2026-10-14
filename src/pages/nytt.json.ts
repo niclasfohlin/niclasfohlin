@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { artiklarSorterade, metoderSorterade, bockerSorterade, publikationNamn } from '../lib/innehall';
 import { byggSerier, lektionsnamn } from '../lib/serie';
 import { arskursText } from '../lib/metod';
-import { harSkrivkort, skrivkortAdress, SKRIVKORT_LANK } from '../lib/skrivkortlank';
+import { metodensCentrala } from '../lib/centrala';
 
 // Maskinläsbar lista över allt som är publicerat: artiklar, metoder och böcker.
 // Byggpluginen netlify/plugins/utskick läser den efter varje lyckad deploy (via
@@ -34,7 +34,8 @@ export const GET: APIRoute = async () => {
         ingress: m.data.ingress,
         datum: (m.data.uppdaterad ?? new Date(0)).toISOString().slice(0, 10),
         // Seriens ord följer med, så att brevet säger "Med 4 kurser" om en serie av kurser (src/lib/serie.ts, serieOrd).
-        ...(harSkrivkort(m.id) ? { lankar: [{ url: skrivkortAdress(m.id), text: SKRIVKORT_LANK, efter: 'slumpa fram dagens kort och visa det stort med en klocka som alla ser' }] } : {}),
+        // De centrala sakerna (src/lib/centrala.ts) får en rad var med länken efter ingressen.
+        ...(metodensCentrala(m.data).length ? { lankar: metodensCentrala(m.data).map((c) => ({ url: c.adress, text: c.namn, efter: c.mejl })) } : {}),
         ...(serie ? { serie: { url: `/stodundervisning/${serie.id}`, titel: serie.titel }, namn: lektionsnamn(m.data.titel), ordning: serie.lektioner.findIndex((l) => l.id === m.id), ord: { den: serie.ord.den, flera: serie.ord.flera } } : {}),
       };
     }),

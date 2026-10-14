@@ -22,12 +22,15 @@ material:
   - lässchema
   - böcker på rätt nivå
   - snabbmall och kontrakt
-uppdaterad: 2026-10-03
+uppdaterad: 2026-10-14
 relaterade:
   - laslistor-i-grupp
   - upprepad-lasning
   - ljudlek-i-grupp
 utkast: false
+centrala:
+  - id: lasstrategier
+    efterText: fastnar
 inledning:
   - Det här är ett körschema för en lärarledd insats i liten grupp för elever som behöver stöd i avkodning och läsflyt. Insatsen är tidsbegränsad, riktad och har tät uppföljning. Varje pass är 20 minuter i skolan och följer samma rutin. Samma dag läser eleven boken en gång till hemma tillsammans med en vuxen och skriver tre favoritmeningar. Det är den dubbla läsningen, i skolan och hemma, som gör metoden intensiv. Börja med rutinen och tidsschemat nedan. Forskningsgrunden finns kort sammanfattad sist.
 upplagg:
@@ -141,13 +144,13 @@ exempel:
     - "Passet avslutas med att läraren säger samma sak som varje dag: ”Ikväll läser ni boken en gång till för någon hemma. Välj tre meningar ni gillar och skriv dem i skrivboken.” Mapparna läggs i ryggsäckarna. Efteråt skriver läraren en kort notering: alla tre hade läst hemma, Selma läser om meningen själv nu, Noor byter nivå."
 fastnar:
   rubrik: När eleven fastnar
-  text: När en elev fastnar på ett ord är det lätt att säga ordet direkt. Gör tvärtom. Vänta, fråga och ge minsta möjliga stöd som tar eleven ett steg vidare.
+  text: När en elev fastnar på ett ord är det lätt att säga ordet direkt. Gör tvärtom. Vänta, fråga och ge minsta möjliga stöd som tar eleven ett steg vidare. Lässtrategier är ett A4 på metodens sida att ha i handen under passet. Där står de strategier eleven kan lära sig, och hur du märker att eleven tappar förståelsen.
   fragaForst:
     - Prova. Vad står det?
   trappaText: "En stödtrappa att gå uppför i stunden. Ge inte nästa steg förrän eleven har prövat det föregående:"
   trappa:
     - Vänta tre sekunder. Många elever löser ordet själva.
-    - "Peka på första bokstaven: ”Vilket ljud börjar ordet med?”"
+    - "Peka på första bokstaven: ”Börja här och ljuda hela ordet.”"
     - Ljuda tillsammans, eller dela ordet i delar.
     - Säg ordet och låt eleven läsa meningen om från början.
     - "Om eleven fastnar på fler än ett ord av tio: boken är för svår. Byt nivå till nästa pass."

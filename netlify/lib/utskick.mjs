@@ -24,7 +24,7 @@ export function grupperaNya(nya) {
   return nya.filter((p) => !(p.serie && urler.has(p.serie.url))).map((p) => (lektioner.has(p.url) ? { ...p, lektioner: lektioner.get(p.url) } : p));
 }
 
-// En post kan ha egna rader med länkar efter ingressen (lankar i nytt.json), som sidan som slumpar skrivkort i en metod.
+// En post kan ha egna rader med länkar efter ingressen (lankar i nytt.json), som en metods centrala saker (src/lib/centrala.ts).
 export function brev(nya, sajt) {
   const lank = (p, text) => `<a href="${sajt}${p.url}" style="color:#2f5d50;">${html(text)}</a>`;
   const delar = grupperaNya(nya).map((p) => `

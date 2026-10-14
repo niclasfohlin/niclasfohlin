@@ -527,10 +527,12 @@ button.lank:hover { color: var(--farg-accent); }
 .metod-nav a[aria-current="true"] { color: var(--farg-accent); font-weight: 600; }
 /* Länken till lathunden står för sig, före avsnittslistan: den lämnar sidan. */
 .metod-nav .lathund-lank { display: inline-block; font-weight: 700; color: var(--farg-accent); text-decoration: underline; text-underline-offset: 0.15em; margin: 0 0 0.75rem; }
-/* Sidan som slumpar skrivkort (src/lib/skrivkort.ts) står först, som lathunden lämnar den sidan. */
-.metod-nav .skrivkort-lank { margin-right: 1.1rem; }
-.metod-skrivkort { margin: 1rem 0 0; }
-.metodkort .skrivkort-lank { font-weight: 600; }
+/* De centrala sakerna (src/lib/centrala.ts), som Ta fram ett skrivkort och Lässtrategier, står först i menyn: som lathunden
+   lämnar de sidan. Under ingressen och i texten är de blå knappar i en rad. */
+.metod-nav .central-lank { margin-right: 1.1rem; }
+.metod-centrala { margin: 1rem 0 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.m-central-knapp { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.metodkort .central-lank { font-weight: 600; }
 .metod-modell section, .metod-modell .m-ruta[id], .metod-modell .m-ram h3[id] { scroll-margin-top: 1.5rem; }
 .metod-modell { font-size: 1.0625rem; line-height: 1.65; }
 .metod-text { max-width: 46rem; min-width: 0; }

@@ -70,6 +70,7 @@ Stödundervisning är en metodbank, inte en blogg. Varje metod är en YAML-fil e
 | I en metod med en bank av problem eller texter i nivåer: varje problem eller text på en egen sida, med lärarens sida och de andra bladen | `/stodundervisning/<id>/<nivå>-<nummer>` |
 | Bankens blad, per nivå och för alla nivåer, bara problemen eller med lärarens sida och de andra bladen, i Word och pdf | `/stodundervisning/<id>-problem-<nivå>.docx` och `.pdf`, med `-med-lararens-sida` |
 | I en metod där ramarna heter efter nivåerna, som litteraturlistorna i boksamtalet: varje nivås material för sig, och alla nivåers, i Word och pdf (METODER.md under Nivåernas material) | `/stodundervisning/<id>-<led>-<nivå>.docx` och `.pdf`, och `-alla` |
+| En central sak som metoden visar, egen eller delad med andra metoder: en sida, som Ta fram ett skrivkort, eller en pdf, som Lässtrategier, med en blå knapp under ingressen, i menyn, i texten och på metodens kort (METODER.md under De centrala sakerna) | sakens adress i `src/data/centrala.json`, som `/stodundervisning/lasstrategier.pdf`, och den korta, som `/lasstrategier` |
 
 Modellens delar, lathunden, filmerna, banken, nivåernas material, serier med lektionsbank och kurser i veckor står i METODER.md. Läs den innan du rör en metod eller koden som bygger den.
 

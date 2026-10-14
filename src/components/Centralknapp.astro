@@ -1,0 +1,9 @@
+---
+// Knappen till en central sak (src/lib/centrala.ts), med sakens namn: under ingressen, överst i menyn, i texten och på
+// metodens kort. En pdf öppnas i en ny flik och har ett namn i statistiken. medTitel säger metodens namn till en
+// skärmläsare, där flera metoder står bredvid varandra, som i metodbanken.
+import { centralLank, type Central } from '../lib/centrala';
+interface Props { c: Central; metod: string; titel: string; klass?: string; medTitel?: boolean }
+const { c, metod, titel, klass = 'knapp', medTitel = false } = Astro.props;
+---
+<a class={klass} {...centralLank(c, metod, titel)}>{c.namn}{medTitel && <span class="visually-hidden">: {titel}</span>}{c.slag === 'pdf' && <span class="visually-hidden">, pdf</span>}</a>

@@ -52,7 +52,10 @@ import Pabordet from './Pabordet.astro';
 import { bladNamn, delensRad, kartan, metodensBlad, radensDel } from '../lib/karta';
 import { veckanRyms } from '../lib/veckosida';
 import { veckansLista, veckomaterial } from '../lib/veckomaterial';
-import { borjaHar, harSkrivkort, skrivkortAdress, SKRIVKORT_LANK } from '../lib/skrivkort';
+import { borjaHar } from '../lib/skrivkort';
+import Centralknapp from './Centralknapp.astro';
+import Centralrad from './Centralrad.astro';
+import { centralaVid, metodensCentrala } from '../lib/centrala';
 // "Åk 4–5" hålls ihop i ramarnas rubriker och länkar: hårt mellanslag efter Åk, ordfog efter tankstrecket.
 const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 '));
 // koppling: den generella metodens serie med lektionsbanken, eller lektionens plats i den (src/lib/serie.ts).
@@ -120,6 +123,8 @@ const pass = passOversikt(d);
 // Bilderna På bordet (src/lib/pabordet.ts) står på samma platser och ritas av samma Filmruta.astro, och dessutom efter en
 // del i en ram (del: <rubrik>, en vecka).
 const filmer = metodensFilmer(d, id);
+// De centrala sakerna (src/lib/centrala.ts): överst i menyn och i texten efter meningen som nämner dem (Centralrad.astro).
+const centrala = metodensCentrala(d);
 const bilderPaBordet = metodensPaBordet(d, id);
 const vid = (p: FilmPlats) => [...filmerVid(filmer, p), ...paBordetVid(bilderPaBordet, p)];
 const ord = passOrd(d);
@@ -332,7 +337,7 @@ const meny = [
 <div class="metod-modell">
   {meny.length > 2 && !undersida && (
     <nav class="metod-nav" aria-label="På den här sidan">
-      {harSkrivkort(id) && <a class="lathund-lank skrivkort-lank" href={skrivkortAdress(id)}>{SKRIVKORT_LANK}</a>}
+      {centrala.map((c) => <Centralknapp c={c} metod={id} titel={d.titel} klass="lathund-lank central-lank" />)}
       {d.lathund && <a class="lathund-lank" href={`/stodundervisning/${id}/lathund`}>Öppna lathunden</a>}
       <span class="nav-etikett" aria-hidden="true">På den här sidan</span>
       <ul>{meny.map((a) => <li><a href={`#${a.id}`} data-avsnitt={a.id}>{a.namn}</a></li>)}</ul>
@@ -341,7 +346,7 @@ const meny = [
   <div class="metod-text">
   {/* En enhets sida har bara enhetens blad (banken, src/lib/bank.ts), och allt fram till ramarna står på metodens sida. */}
   {!undersida && (<>
-  {d.inledning.map((s, i) => <><p>{s}</p><Filmruta filmer={vid({ stycke: i + 1 })} titel={d.titel} /></>)}
+  {d.inledning.map((s, i) => <><p>{s}</p><Centralrad saker={centralaVid(d, { stycke: i + 1 })} metod={id} titel={d.titel} /><Filmruta filmer={vid({ stycke: i + 1 })} titel={d.titel} /></>)}
 
   {/* Rutornas rubriker är rubriker, så att en skärmläsare kan hoppa till dem (K-028). De står direkt under h1. */}
   {d.upplagg && <div class="m-ruta" id="upplagg"><h2 class="kicker">{d.upplagg.rubrik}</h2><p>{d.upplagg.text}</p></div>}
@@ -352,6 +357,7 @@ const meny = [
     <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
+      <Centralrad saker={centralaVid(d, { tabell: t.rubrik })} metod={id} titel={d.titel} />
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} cellank={cellLank} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
@@ -418,6 +424,7 @@ const meny = [
     <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
+      <Centralrad saker={centralaVid(d, { tabell: t.rubrik })} metod={id} titel={d.titel} />
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} cellank={cellLank} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
@@ -455,6 +462,7 @@ const meny = [
     <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
+      <Centralrad saker={centralaVid(d, { tabell: t.rubrik })} metod={id} titel={d.titel} />
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} cellank={cellLank} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
@@ -478,6 +486,7 @@ const meny = [
     <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
+      <Centralrad saker={centralaVid(d, { tabell: t.rubrik })} metod={id} titel={d.titel} />
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} cellank={cellLank} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
@@ -504,6 +513,7 @@ const meny = [
     <section id="fastnar">
       <h2>{d.fastnar.rubrik}</h2>
       <p>{d.fastnar.text}</p>
+      <Centralrad saker={centralaVid(d, { avsnitt: 'fastnar' })} metod={id} titel={d.titel} />
       <div class="m-ruta m-fraga">
         <p class="kicker">Fråga alltid först:</p>
         {d.fastnar.fragaForst.map((f) => <p class="stor">{f}</p>)}
@@ -520,6 +530,7 @@ const meny = [
     <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
+      <Centralrad saker={centralaVid(d, { tabell: t.rubrik })} metod={id} titel={d.titel} />
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} cellank={cellLank} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
@@ -530,6 +541,7 @@ const meny = [
     <section id="roll">
       <h2>{d.roll.rubrik}</h2>
       <p>{d.roll.text}</p>
+      <Centralrad saker={centralaVid(d, { avsnitt: 'roll' })} metod={id} titel={d.titel} />
       <div class="m-gor-undvik">
         <div class="gor"><h3>Gör så här</h3><ul>{d.roll.gor.map((x) => <li>{x}</li>)}</ul></div>
         <div class="undvik"><h3>Undvik</h3><ul>{d.roll.undvik.map((x) => <li>{x}</li>)}</ul></div>
@@ -542,7 +554,7 @@ const meny = [
     <section id="urval">
       <h2>{d.urval.rubrik}</h2>
       {d.urval.text.map((s) => <p>{s}</p>)}
-      {harSkrivkort(id) && <p class="m-skrivkort-knapp"><a class="knapp" href={skrivkortAdress(id)}>{SKRIVKORT_LANK}</a></p>}
+      <Centralrad saker={centralaVid(d, { avsnitt: 'urval' })} metod={id} titel={d.titel} />
       {/* Raden före kraven hålls ihop med dem i utskriften, så att den inte står ensam sist på en sida (granskningen
           2026-10-09). */}
       <div class="m-krav">
@@ -567,6 +579,7 @@ const meny = [
     <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
+      <Centralrad saker={centralaVid(d, { tabell: t.rubrik })} metod={id} titel={d.titel} />
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} cellank={cellLank} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />
@@ -577,6 +590,7 @@ const meny = [
     <section id="hem">
       <h2>{d.hem.rubrik}</h2>
       {d.hem.text.map((s) => <p>{s}</p>)}
+      <Centralrad saker={centralaVid(d, { avsnitt: 'hem' })} metod={id} titel={d.titel} />
       {d.hem.kontrakt && (
         <div class="m-kontrakt">
           <p class="kicker">{d.hem.kontrakt.rubrik}</p>
@@ -666,6 +680,7 @@ const meny = [
     <section id={tabellAnkare.get(t)}>
       <h2>{t.rubrik}</h2>
       {t.text && <p>{t.text}</p>}
+      <Centralrad saker={centralaVid(d, { tabell: t.rubrik })} metod={id} titel={d.titel} />
       <MetodTabell kolumner={t.kolumner} rader={t.rader} klass={friKlass(t)} radrubrik={false} karta={t.karta ? kartLankar : undefined} cellank={cellLank} />
       {t.not && <div class="m-ruta"><p>{t.not}</p></div>}
       <Filmruta filmer={vid({ tabell: t.rubrik })} titel={d.titel} />

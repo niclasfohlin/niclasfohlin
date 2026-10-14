@@ -16,7 +16,9 @@
 //   material (data-material i Metod.astro, src/lib/material.ts);
 //   pdf:en bakom Metoden har varje avsnitt i beskrivningen som Allt har, och inget av materialet;
 //   ingen knapp på sidan skriver ut sidan själv (de gamla märkena data-skriv-ut och data-skriv-ut-blad), och inget skript i
-//   bygget anropar window.print.
+//   bygget anropar window.print;
+//   varje central sak (src/data/centrala.json) finns i bygget, en pdf bär namnet och upphovet, och den korta adressen
+//   leder dit (netlify.toml). Det prövas varje gång, före sidorna.
 // Att pdf:erna är gjorda av de Word-filer som ligger i bygget prövar scripts/bankpdf.mjs --kontrollera, och delarna klipps
 // ur dem vid varje bygge.
 //
@@ -92,6 +94,34 @@ const pdf = (adress) => {
   return pdfer.get(fil);
 };
 const textI = (p) => { if (p.text === undefined) p.text = platt(execFileSync('pdftotext', ['-enc', 'UTF-8', p.fil, '-'], { encoding: 'utf8', maxBuffer: 1 << 28 })); return p.text; };
+
+// De centrala sakerna (src/data/centrala.json, src/lib/centrala.ts), som knapparna leder till: varje sak finns i bygget,
+// en pdf bär sitt namn och © Niclas Fohlin och niclasfohlin.se, som allt annat som laddas ner (CLAUDE.md under Tre
+// innehållstyper), och varje kort adress står i netlify.toml och leder till sakens adress. Prövas varje gång.
+{
+  const toml = readFileSync(join(rot, 'netlify.toml'), 'utf8');
+  const omleder = new Map([...toml.matchAll(/\[\[redirects\]\]\s+from\s*=\s*"([^"]+)"\s+to\s*=\s*"([^"]+)"\s+status\s*=\s*(\d+)/g)].map((m) => [m[1], { till: m[2], status: Number(m[3]) }]));
+  const fel = [];
+  for (const c of JSON.parse(readFileSync(join(rot, 'src/data/centrala.json'), 'utf8'))) {
+    if (c.slag === 'pdf') {
+      const fil = join(dist, c.adress);
+      if (!existsSync(fil)) fel.push(`${c.id}: ${c.adress} saknas i bygget; pdf:en läggs i public${c.adress}`);
+      else {
+        const text = execFileSync('pdftotext', ['-enc', 'UTF-8', fil, '-'], { encoding: 'utf8' }).normalize('NFC').replace(/\s+/g, ' ');
+        for (const [krav, prov] of [[c.namn, text.includes(c.namn)], ['© Niclas Fohlin', /©\s*Niclas Fohlin/.test(text)], ['niclasfohlin.se', text.includes('niclasfohlin.se')]]) if (!prov) fel.push(`${c.id}: pdf:en saknar "${krav}"`);
+      }
+    } else if (!existsSync(join(dist, c.adress, 'index.html'))) fel.push(`${c.id}: sidan ${c.adress} finns inte i bygget`);
+    if (c.kort) {
+      const o = omleder.get(c.kort);
+      if (!o || o.till !== c.adress || o.status !== 301) fel.push(`${c.id}: netlify.toml leder inte ${c.kort} till ${c.adress} med status 301`);
+    }
+  }
+  if (fel.length) {
+    for (const f of fel) console.error(`  fel  ${f}`);
+    console.error('utskriftsformat: de centrala sakerna stämmer inte med registret, src/data/centrala.json.');
+    process.exit(1);
+  }
+}
 
 // En liten server för dist, så att sidorna läses som på sajten, med sina absoluta adresser.
 const TYPER = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.mjs': 'text/javascript', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.woff2': 'font/woff2', '.ttf': 'font/ttf', '.json': 'application/json', '.mp4': 'video/mp4', '.pdf': 'application/pdf' };

@@ -8,7 +8,7 @@ import {
   Paragraph, type Run, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, TextWrappingType, UnderlineType, VerticalAlign, VerticalPositionRelativeFrom, WidthType,
   type IBorderOptions, type IFloating, type IParagraphOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
-import { harSkrivkort, kortAdress, SKRIVKORT_LANK } from './skrivkortlank';
+import { centralaVid, lasbarAdress, type Textplats } from './centrala';
 import { arbetsformRad, arEttKort, arProtokoll, arskursText, datumText, ejBryt, etikettOchText, laskortKolumn, laskortRubrik, lathundFakta, lathundForm, metaRad, metodAdress, passOrd, passOversikt, passTextKort, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost, type PassOrd } from './metod';
 import { brakDelar, delnamn, kortInfo, lage, STANDARD_NAMNARE, talrutansMatt, type KortInfo, type Mall } from './brak';
 import { andikaBredd, bagSvg, utanStod } from './lasflyt';
@@ -2639,14 +2639,26 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
   const bordsbild = (b: PaBordet): Flod => (arBlad(b) ? bladFlod(b, adress) : pabordetBarn(b));
   const filmVid = (...platser: FilmPlats[]) => { for (const p of platser) { for (const f of filmerVid(filmer, p)) ut.push(...filmBarn(f)); for (const b of paBordetVid(bilderPaBordet, p)) if (!placerade.has(b)) ut.push(...bordsbild(b)); } };
   const efterDel = (rubrik: string, maxHojd?: number) => [...filmerVid(filmer, { del: rubrik }).flatMap(filmBarn), ...paBordetVid(bilderPaBordet, { del: rubrik }).flatMap((b) => pabordetBarn(b, maxHojd === undefined ? undefined : maxHojd - radantal(`På bordet. ${b.bild.text}`, BREDD, 19) * 235))];
+  // De centrala sakerna (src/lib/centrala.ts): namnet och adressen som länk direkt efter texten som nämner saken, där sidan
+  // har knappen. Hålls texten ihop med det som följer, hålls raden också ihop med det.
+  const centraltVid = (p: Textplats, hallIhop = false) => {
+    for (const c of centralaVid(d, p)) {
+      const lank = `${bas.replace(/\/$/, '')}${lasbarAdress(c)}`;
+      ut.push(new Paragraph({ keepNext: hallIhop, spacing: { before: 0, after: 120 }, children: [
+        textRun({ text: `${c.namn}: ` }),
+        new ExternalHyperlink({ link: lank, children: [textRun({ text: lank.replace(/^https?:\/\//, ''), color: FARG.huvud, underline: { type: UnderlineType.SINGLE, color: FARG.huvud } })] }),
+      ] }));
+    }
+  };
   const karta = kartaFor(post);
-  d.inledning.forEach((s, i) => { ut.push(stycke(s)); filmVid({ stycke: i + 1 }); });
+  d.inledning.forEach((s, i) => { ut.push(stycke(s)); centraltVid({ stycke: i + 1 }); filmVid({ stycke: i + 1 }); });
   if (d.upplagg) ut.push(...ruta(d.upplagg.rubrik, d.upplagg.text));
   if (d.gruppen) ut.push(...ruta(d.gruppen.rubrik, d.gruppen.text));
   if (d.principer) ut.push(...ruta(d.principer.rubrik, d.principer.text));
   const friTabell = (t: MetodData['tabeller'][number]) => {
     ut.push(h2(t.rubrik));
     if (t.text) ut.push(stycke(t.text, { hallIhop: true }));
+    centraltVid({ tabell: t.rubrik }, true);
     const forsta = 2300;
     const rest = Math.floor((BREDD - forsta) / (t.kolumner.length - 1));
     const bredder = t.kolumner.map((_, i) => (i === 0 ? forsta : i === t.kolumner.length - 1 ? BREDD - forsta - rest * (t.kolumner.length - 2) : rest));
@@ -2714,6 +2726,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
   if (d.fastnar) {
     ut.push(h2(d.fastnar.rubrik));
     ut.push(stycke(d.fastnar.text, { hallIhop: true }));
+    centraltVid({ avsnitt: 'fastnar' }, true);
     ut.push(...fragaRuta('Fråga alltid först:', d.fastnar.fragaForst));
     ut.push(stycke(d.fastnar.trappaText, { hallIhop: true }));
     nyLista();
@@ -2727,21 +2740,14 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
   if (d.roll) {
     ut.push(h2(d.roll.rubrik));
     ut.push(stycke(d.roll.text, { hallIhop: true }));
+    centraltVid({ avsnitt: 'roll' }, true);
     ut.push(...gorUndvik(d.roll.gor, d.roll.undvik));
     filmVid({ avsnitt: 'roll' });
   }
   if (d.urval) {
     ut.push(h2(d.urval.rubrik));
     for (const s of d.urval.text) ut.push(stycke(s));
-    // Sidan som slumpar skrivkort (src/lib/skrivkortlank.ts), med adressen som länk, där sidan har knappen
-    // Ta fram ett skrivkort (Niclas 2026-10-14: sidan ska stå tydligt i metoden).
-    if (harSkrivkort(post.id)) {
-      const sida = `${bas.replace(/\/$/, '')}${kortAdress(post.id)}`;
-      ut.push(new Paragraph({ spacing: { before: 0, after: 120 }, children: [
-        textRun({ text: `${SKRIVKORT_LANK}: ` }),
-        new ExternalHyperlink({ link: sida, children: [textRun({ text: sida.replace(/^https?:\/\//, ''), color: FARG.huvud, underline: { type: UnderlineType.SINGLE, color: FARG.huvud } })] }),
-      ] }));
-    }
+    centraltVid({ avsnitt: 'urval' });
     if (d.urval.kravText) ut.push(stycke(d.urval.kravText, { hallIhop: true }));
     ut.push(...band(d.urval.krav));
     filmVid({ avsnitt: 'urval' });
@@ -2751,6 +2757,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
   if (d.hem) {
     ut.push(h2(d.hem.rubrik));
     for (const s of d.hem.text) ut.push(stycke(s));
+    centraltVid({ avsnitt: 'hem' });
     if (d.hem.kontrakt) ut.push(...kontraktRuta(d.hem.kontrakt));
     if (d.hem.schema) ut.push(stycke(`${d.hem.schema.rubrik}: ${d.hem.schema.text ? `${d.hem.schema.text} ` : ''}Schemat med ${d.hem.schema.rader} rader att fylla i finns i planeringsmallarna.`, { farg: FARG.svag }));
     filmVid({ avsnitt: 'hem' });

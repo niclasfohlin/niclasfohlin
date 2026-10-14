@@ -31,6 +31,9 @@ relaterade:
   - texttyper-i-grupp
   - skrivkurs-vardeskapande
 utkast: false
+centrala:
+  - id: skrivkort
+    efterText: urval
 nivaer:
   - { namn: Bas, farg: "4E7A43" }
   - { namn: Medel, farg: "A8742A" }

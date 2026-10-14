@@ -22,7 +22,7 @@ material:
   - bokstavskort
   - en lättläst bok
   - snabbmallen
-uppdaterad: 2026-10-05
+uppdaterad: 2026-10-14
 relaterade:
   - til-i-grupp
   - upprepad-lasning
@@ -30,6 +30,9 @@ relaterade:
   - textsamtal-i-grupp
   - ordverkstad-i-grupp
 utkast: false
+centrala:
+  - id: lasstrategier
+    efterText: "tabell: Bekräfta, korrigera, ge stöd"
 inledning:
   - "Läslistor utvecklar elevernas avkodningsförmåga genom strukturerad och upprepad läsning. Arbetet med en lista följer alltid samma rörelse: läraren modellerar, gruppen körläser och eleverna läser i par. Rörelsen går från mest till minst stöd, och det är rörelsen som är metoden. Listan i sig utvecklar ingen avkodning."
   - "Ni arbetar med en läslista i veckan, enligt de sju listorna i avsnittet Läslistorna. Rörelsen kan rymmas i ett enda arbetspass på 15 minuter och göras varje dag, eller fördelas över veckan: läraren modellerar och gruppen körläser i början av veckan, paren läser och läser om under resten. Ordningen är alltid densamma, oavsett om rörelsen tar 15 minuter eller en hel vecka."
@@ -70,7 +73,7 @@ tabeller:
     not: Med fyra pass i veckan stryker du en av dagarna tisdag till torsdag. Från vecka 4 avslutas varje pass, också måndag och fredag, med några minuter i boken.
   - rubrik: Bekräfta, korrigera, ge stöd
     plats: efter-steg
-    text: Läraren cirkulerar mellan paren under hela parläsningen. Din uppgift är att bekräfta, korrigera och ge stöd, direkt när det händer. Det är den snabba återkopplingen som utvecklar avkodningen, inte listan.
+    text: Läraren cirkulerar mellan paren under hela parläsningen. Din uppgift är att bekräfta, korrigera och ge stöd, direkt när det händer. Det är den snabba återkopplingen som utvecklar avkodningen, inte listan. Lässtrategier är ett A4 på metodens sida att ha i handen när du cirkulerar. Där står strategierna eleven kan lära sig, och från vecka 4, när ni läser i boken, strategierna för förståelsen. I listan rättar du direkt, och i boken väntar du tills meningen är slut.
     kolumner:
       - Bekräfta
       - Korrigera

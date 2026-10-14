@@ -44,6 +44,14 @@ publicerad: 2026-01-01
 relaterade: []
 # true: syns bara i npm run dev, ingen pdf-kontroll, inget mejl. Sätt false när metoden är klar att mejlas.
 utkast: true
+# Valfritt: de centrala sakerna som metoden visar, ur registret src/data/centrala.json (METODER.md under De centrala
+# sakerna): en sida, som Ta fram ett skrivkort, eller en pdf, som Lässtrategier, egen eller delad med andra metoder.
+# Knappen står under ingressen, överst i menyn, på metodens kort och i texten efter platsen efterText: ett avsnitt med
+# text (fastnar, urval, roll, hem), "tabell: <rubrik>" eller "stycke <N>" i inledningen. Texten där nämner saken vid
+# namn, i en mening som säger vad den är och var den finns, och knappen följer direkt på texten; bygget stannar annars.
+# centrala:
+#   - id: lasstrategier
+#     efterText: "tabell: Läsfelen och strategierna"
 # Valfritt: kursens nivåer (De fyra räknesätten i grupp). Ett led i en räknebladsrubrik som heter som en nivå blir en
 # skylt i nivåns färg före rubriken ("Före och efter · Bas · Räkna i rutnätet"), och kartans kolumner med nivåns namn får färgen.
 # nivaer:

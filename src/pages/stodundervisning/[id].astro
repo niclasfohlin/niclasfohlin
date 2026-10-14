@@ -21,12 +21,15 @@ import { byggSerier, platsISerien, serieKoppling } from '../../lib/serie';
 import { site } from '../../data/site';
 import { bankAv, nivaFarger } from '../../lib/bank';
 import { harMaterial } from '../../lib/material';
-import { harSkrivkort, skrivkortAdress, SKRIVKORT_LANK } from '../../lib/skrivkort';
+import Centralknapp from '../../components/Centralknapp.astro';
+import { metodensCentrala, provaCentrala } from '../../lib/centrala';
 
 export async function getStaticPaths() {
   const metoder = await publicerade('stodundervisning');
   // Varje metod har en huvudfilm; bygget stannar annars (src/lib/film.ts).
   provaHuvudfilmer(metoder);
+  // Varje central sak visas av metoden den hör till och av minst en metod (src/lib/centrala.ts).
+  provaCentrala(metoder);
   const serier = byggSerier(metoder);
   return metoder.map((m) => ({ params: { id: m.id }, props: { m, alla: metoder, koppling: serieKoppling(m.id, m.data, serier) } }));
 }
@@ -36,6 +39,7 @@ const d = m.data;
 // Huvudfilmen efter faktarutan (src/lib/film.ts); extrafilmerna ritar Metod.astro vid sina moment.
 const filmer = metodensFilmer(d, m.id);
 const huvud = huvudfilm(filmer);
+const centrala = metodensCentrala(d);
 // En lektion har sin serie i menyn och sist på sidan, så att Hör ihop med bara visar metoder utanför serien.
 const iSerien = (x: (typeof alla)[number]) => Boolean(koppling) && (x.id === koppling!.serie.id || x.data.serie === koppling!.serie.id);
 const relaterade = alla.filter((x) => d.relaterade.includes(x.id) && !iSerien(x));
@@ -65,8 +69,8 @@ const materialLank = d.ramar ? '#ramar' : d.lektionsbank ? '#lektionsbank' : har
         <h1>{d.titel}</h1>
         {d.undertitel && <p class="undertitel">{ejBryt(d.undertitel)}</p>}
         <p class="ingress">{ejBryt(d.ingress)}</p>
-        {/* Sidan som slumpar skrivkort, överst så att den syns när metoden öppnas (Niclas 2026-10-14). */}
-        {harSkrivkort(m.id) && <p class="metod-skrivkort"><a class="knapp" href={skrivkortAdress(m.id)}>{SKRIVKORT_LANK}</a></p>}
+        {/* De centrala sakerna (src/lib/centrala.ts), överst så att de syns när metoden öppnas (Niclas 2026-10-14). */}
+        {centrala.length > 0 && <p class="metod-centrala">{centrala.map((c) => <Centralknapp c={c} metod={m.id} titel={d.titel} />)}</p>}
       </header>
       <div class="faktaruta">
         <p class="faktaruta-etikett">I korthet</p>

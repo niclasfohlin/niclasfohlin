@@ -1,0 +1,19 @@
+[
+  {
+    "id": "skrivkort",
+    "namn": "Ta fram ett skrivkort",
+    "slag": "sida",
+    "adress": "/stodundervisning/kortskrivning-skriv-varje-dag/skrivkort",
+    "kort": "/skrivkort",
+    "metod": "kortskrivning-skriv-varje-dag",
+    "mejl": "slumpa fram dagens kort och visa det stort med en klocka som alla ser"
+  },
+  {
+    "id": "lasstrategier",
+    "namn": "Lässtrategier",
+    "slag": "pdf",
+    "adress": "/stodundervisning/lasstrategier.pdf",
+    "kort": "/lasstrategier",
+    "mejl": "ett A4 att ha i handen under passet, med strategierna för ordet, meningen och rösten och för förståelsen"
+  }
+]

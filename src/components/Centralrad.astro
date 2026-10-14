@@ -1,0 +1,9 @@
+---
+// Knapparna till de centrala saker som står på en plats i texten (src/lib/centrala.ts), direkt efter texten som nämner
+// dem. Word-filen har samma saker på samma plats (metoddocx.ts).
+import Centralknapp from './Centralknapp.astro';
+import type { Central } from '../lib/centrala';
+interface Props { saker: Central[]; metod: string; titel: string }
+const { saker, metod, titel } = Astro.props;
+---
+{saker.length > 0 && <p class="m-central-knapp">{saker.map((c) => <Centralknapp c={c} metod={metod} titel={titel} />)}</p>}

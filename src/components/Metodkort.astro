@@ -1,13 +1,14 @@
 ---
 // Metodkortet, samma på startsidan och i metodbanken: titel med ämnesmärke, faktaremsa (årskurs,
-// grupp, pass, hur ofta), ingress, taggar och raden med lathund och filval. I metodbanken
+// grupp, pass, hur ofta), ingress, taggar och raden med de centrala sakerna (src/lib/centrala.ts), lathund och filval. I metodbanken
 // också kryssrutan Välj för samlad nedladdning. En serie (Ljudlek i grupp) är ett kort som de andra, med
 // lektionerna bakom en rad som fälls ut, så att kortet inte växer med banken och lektionerna inte står som egna
 // kort; kortet filtreras på allt serien tränar (Niclas valde formen 2026-09-29).
 import Taggar from './Taggar.astro';
 import Filval from './Filval.astro';
 import { harLathund, kortFakta } from '../lib/metod';
-import { harSkrivkort, skrivkortAdress, SKRIVKORT_LANK } from '../lib/skrivkort';
+import Centralknapp from './Centralknapp.astro';
+import { metodensCentrala } from '../lib/centrala';
 import type { MetodPost } from '../lib/metod';
 import type { Serie } from '../lib/serie';
 interface Props { m: MetodPost; valj?: boolean; serie?: Serie; taggar?: string[] }
@@ -35,7 +36,7 @@ const antal = lektioner.length === 1 ? `En ${ord?.en ?? 'lektion'}` : `${lektion
   )}
   <Taggar taggar={taggar} />
   <p class="kort-rad">
-    {harSkrivkort(m.id) && <a class="skrivkort-lank" href={skrivkortAdress(m.id)}>{SKRIVKORT_LANK}<span class="visually-hidden">: {m.data.titel}</span></a>}
+    {metodensCentrala(m.data).map((c) => <Centralknapp c={c} metod={m.id} titel={m.data.titel} klass="central-lank" medTitel />)}
     {harLathund(m.data) && <a class="lathund-lank" href={`/stodundervisning/${m.id}/lathund`}>Lathund<span class="visually-hidden">: {m.data.titel}</span></a>}
     <Filval fil={`/stodundervisning/${m.id}`} namn={m.id} rubrik={`Allt om ${m.data.titel}`} statistik={`${m.data.titel}: allt om metoden`} liten />
     {valj && <label class="valj"><input type="checkbox" name="valda" value={m.id} /> Välj<span class="visually-hidden"> {m.data.titel}</span></label>}

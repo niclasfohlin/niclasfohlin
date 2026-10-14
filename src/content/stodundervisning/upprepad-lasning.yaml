@@ -22,12 +22,15 @@ material:
   - läsrör
   - lappen hem
   - snabbmallen
-uppdaterad: 2026-10-05
+uppdaterad: 2026-10-14
 relaterade:
   - til-i-grupp
   - laslistor-i-grupp
   - textsamtal-i-grupp
 utkast: false
+centrala:
+  - id: lasstrategier
+    efterText: "tabell: Läsfelen och strategierna"
 inledning:
   - "Upprepad läsning betyder att eleverna läser samma text flera gånger, tills orden går lätt och läsningen får flyt. Här arbetar ni utan tidtagning och diagram. I stället följer varje pass samma ordning: eleverna läser, läraren modellerar utifrån det hen har hört, och eleverna läser igen, till exempel i kör och i par. Texten är densamma genom hela passet."
   - "Syftet är att eleven ska läsa med flyt och förstå det hen läser. Då går orden lätt och läsningen låter som när man pratar, och när det tar stopp använder eleven en strategi på egen hand. Ditt uppdrag består av fyra saker. Eleverna läser samma text flera gånger, och du visar dem strategier i texten de läser. Eleverna sätter ord på strategierna vid bordet, och du följer läsflytet på lästrappan. Lästrappan har fem steg, från att gissa till att läsa med flyt, och målet är att eleven går upp några steg."
@@ -126,7 +129,7 @@ tabeller:
     not: "Läser ni samma text en hel vecka kan eleverna läsa mer på egen hand för varje pass som går. Börja med eko, gå sedan över till kör och par och sluta med en ny lyssnare eller lästeater. Stafettläsning i hela gruppen, där en läser och de andra väntar, ger lite läsning för var och en och gör många oroliga. Gör stafetten i par."
   - rubrik: Läsfelen och strategierna
     plats: efter-steg
-    text: "Här står vanliga läsfel, från gissningar till att eleven inte hör sig själv, och den strategi som hjälper eleven vidare vid varje fel. Strategierna står med samma namn på elevens strategikort under Materialet, och eleverna säger namnet när de använder strategin. Visa en strategi i taget, den som texten och eleven behöver."
+    text: "Här står vanliga läsfel, från gissningar till att eleven inte hör sig själv, och den strategi som hjälper eleven vidare vid varje fel. Strategierna står med samma namn på elevens strategikort under Materialet, och eleverna säger namnet när de använder strategin. Visa en strategi i taget, den som texten och eleven behöver. Lässtrategier är ett A4 på metodens sida att ha i handen under passet. Där står de här strategierna och fler, också för förståelsen."
     kolumner:
       - Läsfelet
       - Så låter det

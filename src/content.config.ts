@@ -6,6 +6,7 @@ import publikationerData from './data/publikationer.json';
 import bildbankData from './data/bildbank.json';
 import { BAGE, ordgrupper, utanStod } from './lib/lasflyt';
 import { EFTER_FORMER, HOGST_EXTRAFILMER, platsFel, tolkaEfter } from './lib/film';
+import { centralAv, registerFel, textplatsFel, tolkaTextplats, TEXTPLATS_FORMER } from './lib/centrala';
 import { forstaLed, radensDel } from './lib/karta';
 import { veckofel } from './lib/veckomaterial';
 import { arskursFel } from './lib/tackning';
@@ -26,6 +27,10 @@ for (const p of publikationerData.publikationer) {
   for (const a of p.alias) publikationAlias.set(a.toLowerCase(), p.id);
   publikationAlias.set(p.namn.toLowerCase(), p.id);
 }
+
+// Registret över de centrala sakerna (src/lib/centrala.ts) prövas här, innan någon metod läses.
+const centralaFel = registerFel();
+if (centralaFel.length) throw new Error(`De centrala sakerna:\n${centralaFel.join('\n')}`);
 
 const tagg = z.string().superRefine((varde, ctx) => {
   if (taggIds.has(varde)) return;
@@ -204,6 +209,14 @@ const stodundervisning = defineCollection({
       text,
       efter: text.refine((v) => tolkaEfter(v) !== undefined, { error: `efter är ${EFTER_FORMER}.` }),
       fluent: z.array(z.string()).optional(),
+    })).default([]),
+    // De centrala sakerna som metoden visar (Niclas 2026-10-14, src/lib/centrala.ts): en sida eller en pdf ur registret
+    // src/data/centrala.json, egen eller delad med andra metoder, som Ta fram ett skrivkort och Lässtrategier. efterText är
+    // platsen i texten där knappen står, direkt efter texten som nämner saken: ett avsnitt med text, "tabell: <rubrik>"
+    // eller "stycke <N>". Knappen står också under ingressen, överst i menyn och på metodens kort.
+    centrala: z.array(z.strictObject({
+      id: z.string().refine((v) => centralAv(v) !== undefined, { error: (i) => `${String(i.input)} finns inte i src/data/centrala.json.` }),
+      efterText: text.refine((v) => tolkaTextplats(v) !== undefined, { error: `efterText är ${TEXTPLATS_FORMER}.` }),
     })).default([]),
     // Nivåerna i en metod med nivåer (De fyra räknesätten: Bas, Medel och Avancerad, Niclas 2026-10-04), med färgen i hex.
     // Ett led i en listas rubrik som heter som en nivå blir en skylt i nivåns färg före rubriken, på sidan och i Word.
@@ -656,6 +669,14 @@ const stodundervisning = defineCollection({
       const v = tolkaEfter(b.efter);
       const fel = v && platsFel(d, v);
       if (fel) ctx.addIssue({ code: 'custom', path: ['pabordet', i, 'efter'], message: `${fel.replace(/filmen/g, 'bilden')}.` });
+    });
+    // De centrala sakerna: en gång var, och en plats vars text nämner saken (src/lib/centrala.ts).
+    d.centrala.forEach((x, i) => {
+      if (d.centrala.findIndex((y) => y.id === x.id) !== i) ctx.addIssue({ code: 'custom', path: ['centrala', i, 'id'], message: `${x.id} står två gånger.` });
+      const c = centralAv(x.id);
+      const v = tolkaTextplats(x.efterText);
+      const fel = c && v && textplatsFel(d, c, v);
+      if (fel) ctx.addIssue({ code: 'custom', path: ['centrala', i, 'efterText'], message: `${fel}.` });
     });
     d.nivaer.forEach((n, i) => { if (d.nivaer.findIndex((x) => x.namn === n.namn) !== i) ctx.addIssue({ code: 'custom', path: ['nivaer', i, 'namn'], message: `Nivån ${n.namn} står två gånger.` }); });
     d.mallar.forEach((m, i) => { if (m.rutaCm && m.typ !== 'talruta') ctx.addIssue({ code: 'custom', path: ['mallar', i, 'rutaCm'], message: 'Bara en talruta har rutaCm.' }); });
