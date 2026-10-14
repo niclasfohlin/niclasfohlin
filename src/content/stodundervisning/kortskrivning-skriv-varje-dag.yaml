@@ -206,7 +206,7 @@ grund:
 ramar:
   rubrik: Materialet
   text:
-    - "Här står de tio första passen och sedan korten till dem, nivå för nivå. Skrivlistan finns i planeringsmallarna."
+    - "Här står de tio första passen och vilka kort som hör till dem. Korten finns på sidan Ta fram ett skrivkort. Skrivlistan finns i planeringsmallarna."
   ramar:
     - rubrik: "Börja här: de tio första passen"
       text:
@@ -294,6 +294,7 @@ lathund:
   pass:
     rubrik: Vi kör det första passet
     textRubrik: Första passet · omkring 25 minuter
+    utskrift: Skriv ut passexemplet
     titel: Boken, din text och papperskorgen, och sedan passet
     text:
       - "Läraren delar ut skrivböckerna: ”Boken är din och står kvar här. Jag läser bara det du visar mig, och du får hitta på. Blir jag orolig för någon berättar jag det vidare.”"
@@ -368,6 +369,13 @@ lathund:
       - Högen med de kort gruppen har haft
       - En klocka som alla ser
       - En bunt lösa papper
+    uppfoljning:
+      - nar: Veckans sista pass
+        vad: Säg ”streck” efter tre minuter. Alla drar ett streck och skriver vidare. När klockan ringer räknar eleven orden före strecket, fyller i skrivlistan, jämför med förra talet och sätter en stjärna vid en text. Sedan Dela. Passet blir två till tre minuter längre.
+      - nar: Du noterar efter varje pass
+        vad: Vilka som inte började inom en minut, vem som suddade eller frågade om stavningen, hur många som ännu skrev när klockan ringde, och nästa skrivtid.
+      - nar: Vecka 6
+        vad: Ett pass är Skriv igen, utan kort. Eleven läser en stjärnmärkt text och skriver nytt om samma sak. I Dela säger eleven vad som är nytt.
 film:
   sekunder: 29.21
   beskrivning: "Läraren visar dagens skrivkort. Läraren säger: ”Skriv vad du tänker när du ser, läser eller tänker på det här.” Hon säger sin egen första mening. Läraren säger: ”Det började med att vattnet sjönk.” Klockan startar. Alla skriver. Maja skriver: ”Kaptenen bor kvar i sitt gamla hus”. Hon stryker över ordet hus. Maja skriver: ”skepp.” Tar det stopp, skriver hon sista ordet igen. Maja skriver: ”Han väntar på vattnet vattnet vattnet”. Klockan ringer. Maja stryker under en rad. Hon läser raden för Elias. Elias säger: ”Berätta mer om kaptenen.”"
