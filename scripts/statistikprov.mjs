@@ -46,9 +46,19 @@ const summa = (lista) => {
   return [alla - handelser, handelser - dela, dela];
 };
 
-// Det GoatCounter själv räknar, för i dag och för perioden från 28 september (7 dagar, 30 dagar och år).
+// Det GoatCounter själv räknar, för varje period med samma början som statistiksidan (periodStart i
+// src/pages/statistik.astro): i dag från midnatt, 7 och 30 dagar och året bakåt från timmen nu, men aldrig före 28
+// september, då räkningen började. Provet jämförde först alla perioder med tiden sedan 28 september, vilket bara stämde
+// den första veckan (2026-10-14: 7 dagar blev rött fast sidan räknade rätt).
+const periodStart = (period) => {
+  const nu = new Date();
+  const dagar = period === 'vecka' ? 7 : period === 'manad' ? 30 : 365;
+  const start = period === 'dag' ? new Date(nu.getFullYear(), nu.getMonth(), nu.getDate()) : new Date(nu.getTime() - dagar * 86400000);
+  start.setMinutes(0, 0, 0);
+  return start < RAKNINGEN_BORJADE ? new Date(RAKNINGEN_BORJADE) : start;
+};
 async function forvantat() {
-  if (!riktig) return { dag: summa(PROV), lang: summa(PROV) };
+  if (!riktig) return { dag: summa(PROV), vecka: summa(PROV), manad: summa(PROV), ar: summa(PROV) };
   const api = async (vag, par) => {
     const u = new URL('https://niclasfohlin.goatcounter.com/api/v0' + vag);
     for (const [k, v] of par) u.searchParams.append(k, String(v));
@@ -56,9 +66,9 @@ async function forvantat() {
     return (await fetch(u, { headers: { Authorization: `Bearer ${nyckel}` } })).json();
   };
   const slut = new Date(); slut.setMinutes(0, 0, 0); slut.setHours(slut.getHours() + 1);
-  const nu = new Date();
   const ut = {};
-  for (const [namn, start] of [['dag', new Date(nu.getFullYear(), nu.getMonth(), nu.getDate())], ['lang', RAKNINGEN_BORJADE]]) {
+  for (const namn of ['dag', 'vecka', 'manad', 'ar']) {
+    const start = periodStart(namn);
     const tot = await api('/stats/total', [['start', iso(start)], ['end', iso(slut)]]);
     const hits = [];
     const sedda = new Set();
@@ -151,7 +161,10 @@ try {
     const stoppade = l.filter((x) => x.status === 'Failed to fetch').length;
     const status429 = l.filter((x) => x.status === 429).length;
     const visade = await tal();
-    const ratt = JSON.stringify(visade) === JSON.stringify(forvantade);
+    // Med riktiga siffror kan några besök komma in mellan GoatCounters svar till provet och till sidan.
+    const ratt = riktig
+      ? visade.length === forvantade.length && visade.every((v, i) => v >= forvantade[i] && v - forvantade[i] <= 3)
+      : JSON.stringify(visade) === JSON.stringify(forvantade);
     const ok = /Hämtat/.test(r.s) && !stoppade && !status429 && ratt;
     if (!ok) fel++;
     console.log(`${ok ? 'GRÖNT' : 'RÖTT '}  ${namn.padEnd(34)} ${r.s.padEnd(16)} ${String(r.ms).padStart(5)} ms  ${String(l.length).padStart(2)} anrop  stoppade ${stoppade}  429 ${status429}  rutor ${visade.join('/')}${ratt ? '' : ` (GoatCounter: ${forvantade.join('/')})`}`);
@@ -171,9 +184,9 @@ try {
     if (!skrivkort) fel++;
     console.log(`${skrivkort ? 'GRÖNT' : 'RÖTT '}  sidan som slumpar skrivkort står under metoden${skrivkort ? '' : `: ${(metoder ?? '').slice(0, 200)}`}`);
   }
-  await prova('7 dagar', klick('vecka'), mal0.lang);
-  await prova('30 dagar', klick('manad'), mal0.lang);
-  await prova('1 år', klick('ar'), mal0.lang);
+  await prova('7 dagar', klick('vecka'), mal0.vecka);
+  await prova('30 dagar', klick('manad'), mal0.manad);
+  await prova('1 år', klick('ar'), mal0.ar);
   await prova('i dag igen, sparat', klick('dag'), mal0.dag);
   await skicka('Page.navigate', { url });
   await vanta(700);
@@ -183,7 +196,7 @@ try {
     await klick('manad')();
     await vanta(150);
     await klick('ar')();
-  }, mal0.lang);
+  }, mal0.ar);
   ws.close();
 } finally {
   proc.kill();
