@@ -40,7 +40,7 @@ inledning:
   - Kortskrivning är en kvart om dagen då alla skriver och ingen rättar. Den är för elever som inte kommer igång, som suddar mer än de skriver eller som frågar om det är rätt.
   - "Varje elev har en egen skrivbok och en penna. Du visar dagens skrivkort (på engelska writing prompt): en bild som är början på en berättelse, och för de äldre eleverna ibland ett citat eller en händelse ur historien. På bordet ligger högen med de kort gruppen har haft och en bunt lösa papper, och alla ser klockan."
   - "Uppgiften är densamma varje dag: ”Skriv vad du tänker när du ser, läser eller tänker på det här.” Eleven skriver utan att stanna och utan att sudda, och läser sedan en rad för en kamrat om hen vill. När ingen bedömer texten vågar fler börja."
-  - I de tio första passen säger eleverna sin första tanke till en kamrat innan de skriver. Korten Börja här, under Materialet, är ett förslag till de passen. Sedan slumpar du dagens kort på sidan Ta fram ett skrivkort, som visar kortet stort med en klocka som alla ser. I vecka 6 läser eleven en av sina texter och skriver nytt om samma sak.
+  - I de tio första passen säger eleverna sin första tanke till en kamrat innan de skriver. Korten Börja här, under Materialet, är ett förslag till de passen. Sedan slumpar du dagens kort på sidan Ta fram ett skrivkort. Efter hand kan delandet växa till en klass med skribenter, om ni vill. I vecka 6 läser eleven en av sina texter och skriver nytt om samma sak.
 upplagg:
   rubrik: Så fungerar insatsen
   text: "Passet är 10–15 minuter, varje dag eller minst tre gånger i veckan, i sex veckor och sedan så länge gruppen vill, 2–8 elever eller en hel klass. Passet har tre delar: Dagens kort, Skriv och Dela. Du visar kortet, säger uppgiften och din egen första mening. Alla skriver tills klockan ringer, i början tre minuter och efter hand upp till åtta. Sedan läser den som vill en rad för en kamrat, som svarar ”Berätta mer om …”. En gång i veckan räknar eleven orden från de tre första minuterna, och efter varje pass noterar du vilka som inte började inom en minut."
@@ -139,6 +139,30 @@ tabeller:
         - Skrivboken har ritruta och breda linjer. Eleverna ritar i en minut innan klockan startar. Ord vid bilden är också text. I Dela visar de sidan och läser för en kamrat.
       - - Dator eller diktering
         - Dokumentet är skrivboken. Eleven raderar inte, gör ny rad vid ”streck” och har skrivlistan på ett löst blad (se Så ser du att det hjälper). Den som dikterar sitter en bit ifrån.
+  - rubrik: Från delande till en klass med skribenter
+    plats: efter-urval
+    meny: true
+    text: "När eleverna har blivit varma i kläderna kan delandet växa, om du och eleverna får ut något av det. Syftet är en skrivande gemenskap, där eleverna ser sig själva som skribenter och märker att deras ord räknas. Ta ett steg upp ibland, och gå gärna tillbaka. Ni gör stegen i Dela och galleriet vid ett annat tillfälle, så skrivtiden är densamma. Varje steg är en väg in och inget krav. Eleven väljer själv vad andra får höra eller läsa, och ingen rättar det. Stärk eleven med ord som säger vad hen gjorde som skribent."
+    kolumner:
+      - Steget
+      - Så gör ni
+      - Du kan säga
+    rader:
+      - - En rad till en kamrat
+        - Det ni gör i Dela varje pass.
+        - ”Jag ser att du vågade läsa din rad.”
+      - - Läraren läser upp
+        - Den som vill ger dig en text som du läser för alla. Hen väljer om du säger namnet.
+        - ”Det här har en skribent i rummet skrivit.”
+      - - Favoriten
+        - Den som vill läser en stjärnmärkt text för gruppen. En rad ur den kan bli dagens kort nästa gång, om skribenten säger ja.
+        - ”Jag blev nyfiken när du skrev …”
+      - - Galleriet
+        - "Den som vill sätter upp en renskriven text i rummet några dagar. Läsarna kan lämna en post-it-lapp: ”Berätta mer om …”"
+        - ”Nu har din text läsare.”
+      - - Skriva i par
+        - I Dela väljer paret en av sina rader och skriver vidare på ett löst papper. De turas om med pennan.
+        - ”Det är så skribenter arbetar.”
 urval:
   rubrik: Var hittar du skrivkorten?
   text:
@@ -163,6 +187,9 @@ progression:
     - vecka: Från pass 11
       fokus: Du slumpar dagens kort. När de flesta börjar inom en minut hoppar ni över första tanken. Den som behöver det säger sin till dig.
       roll: Ibland skriver du den första minuten, annars sitter du hos den som inte har börjat. I Dela lyssnar du hos ett par.
+    - vecka: När ni är varma i kläderna
+      fokus: När få står över i Dela kan delandet växa (se Från delande till en klass med skribenter).
+      roll: Du väljer steg tillsammans med eleverna och säger vad de gör som skribenter.
     - vecka: Veckans sista pass
       fokus: "Eleverna räknar orden (se Så ser du att det hjälper)."
       roll: "Du frågar sist: ”Kom någon på något nytt medan ni skrev?”"
@@ -357,12 +384,12 @@ lathund:
       punkter:
         - fet: Skrivkorten.
           text: 110 kort på var och en av nivåerna Bas, Medel och Avancerat, på sidan Ta fram ett skrivkort, som du når från metodens sida.
-        - fet: Ett eller tio.
-          text: Välj ett kort eller tio och en nivå. Kortet visas stort med en klocka bredvid, eller skrivs ut.
         - fet: Börja här.
           text: Tio kort per nivå som förslag till de tio första passen, under Materialet på metodens sida, med en början att låna.
         - fet: Skrivlistan.
           text: Mallen Min skrivlista finns i planeringsmallarna på metodens sida. En per elev.
+        - fet: När delandet växer.
+          text: Se tabellen Från delande till en klass med skribenter i metoden.
     bordet:
       - En skrivbok och en penna till varje elev
       - Dagens skrivkort, på skärmen eller utskrivet
