@@ -335,12 +335,14 @@ const meny = [
 ];
 ---
 <div class="metod-modell">
-  {meny.length > 2 && !undersida && (
+  {/* Menyn står när sidan har fler än två avsnitt, och alltid när metoden har en central sak, som står överst i den
+      (granskningen 2026-10-14); då står avsnitten bara när de är fler än två. */}
+  {(meny.length > 2 || centrala.length > 0) && !undersida && (
     <nav class="metod-nav" aria-label="På den här sidan">
       {centrala.map((c) => <Centralknapp c={c} metod={id} titel={d.titel} klass="lathund-lank central-lank" />)}
       {d.lathund && <a class="lathund-lank" href={`/stodundervisning/${id}/lathund`}>Öppna lathunden</a>}
-      <span class="nav-etikett" aria-hidden="true">På den här sidan</span>
-      <ul>{meny.map((a) => <li><a href={`#${a.id}`} data-avsnitt={a.id}>{a.namn}</a></li>)}</ul>
+      {meny.length > 2 && <><span class="nav-etikett" aria-hidden="true">På den här sidan</span>
+      <ul>{meny.map((a) => <li><a href={`#${a.id}`} data-avsnitt={a.id}>{a.namn}</a></li>)}</ul></>}
     </nav>
   )}
   <div class="metod-text">

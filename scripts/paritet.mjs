@@ -28,6 +28,9 @@ import JSZip from 'jszip';
 
 const rot = join(dirname(fileURLToPath(import.meta.url)), '..');
 const MINST = 25;
+// De centrala sakerna och sajtens adress utan https://, som Word-filens rad om en sak börjar med (src/lib/metoddocx.ts).
+const CENTRALA = JSON.parse(readFileSync(join(rot, 'src/data/centrala.json'), 'utf8'));
+const SAJT = readFileSync(join(rot, 'src/data/site.ts'), 'utf8').match(/url: '(?:https?:\/\/)?([^'/]+)/)[1];
 
 // Undantagen, med skälet. word eller utskrift: false betyder att texten inte ska stå där.
 const UNDANTAG = [
@@ -218,6 +221,16 @@ for (const fil of filer) {
     huvudOchFot.push(...await Promise.all(Object.keys(zip.files).filter((n) => /^word\/(header|footer)\d*\.xml$/.test(n)).map((n) => zip.file(n).async('string'))));
   }
   const word = norm(avkoda([xml, ...huvudOchFot].join(' ').replace(/<[^>]+>/g, '')));
+  // De centrala sakerna (src/lib/centrala.ts): metodens sida har knappen till saken, och Word-filen raden med namnet och
+  // adressen. Platsen sätts av samma kod i båda; här prövas att ingen av dem faller bort (granskningen 2026-10-14).
+  for (const x of d.centrala ?? []) {
+    const c = CENTRALA.find((y) => y.id === x.id);
+    if (!c) continue;
+    const rad = `${c.namn}: ${SAJT}${c.kort ?? c.adress}`;
+    if (!word.includes(norm(rad))) { console.error(`paritet: ${id}.docx saknar raden "${rad}" (centrala, ${c.id}).`); fel++; }
+    const knappar = [...html.matchAll(/<a\b[^>]*\bhref="([^"]*)"[^>]*>([\s\S]*?)<\/a>/g)].filter((m) => m[1].split('?')[0] === c.adress && m[2].replace(/<[^>]+>/g, '').startsWith(c.namn));
+    if (knappar.length < 3) { console.error(`paritet: ${id} har ${knappar.length} knappar till ${c.namn}; sidan ska ha den under ingressen, överst i menyn och i texten (centrala, ${c.id}).`); fel++; }
+  }
   // Ett radslut inne i en text (w:t) visar Word som ett mellanslag: raderna som metodens fil har under varandra läses då
   // som en fras (kortet När det skaver i Faktatextsamtal i grupp, granskningen 2026-10-13). En radbrytning ska vara en
   // ny rad i stycket (stycke i src/lib/metoddocx.ts), eller ett mellanrum där texten är en rad, som i sidfoten.
