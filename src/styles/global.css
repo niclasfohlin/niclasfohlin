@@ -2149,11 +2149,6 @@ html.js .bara-js { display: inline-block; }
 .sk-om { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); border-top: 1px solid var(--farg-kant); padding-top: 0.25rem; }
 .sk-om summary { cursor: pointer; min-height: 2.75rem; display: flex; align-items: center; font-weight: 600; color: var(--farg-text); }
 .sk-om p { margin: 0 0 0.6em; }
-/* Helskärm: kortet och klockan fyller skärmen, för projektorn. */
-.sk-ett:fullscreen { background: var(--farg-bakgrund); padding: 2vh 2vw; grid-template-columns: minmax(0, calc(96vh * 0.75)) minmax(16rem, 1fr); align-items: center; overflow: auto; }
-.sk-ett:fullscreen .sk-urtavla { width: min(100%, 44vh); }
-.sk-ett:fullscreen .sk-tid { font-size: 7vh; }
-.sk-ett:fullscreen .sk-om, .sk-ett:fullscreen #sk-skrivut-ett, .sk-ett:fullscreen #sk-tillbaka { display: none; }
 
 /* Tio kort: ett rutnät att välja ur. */
 .sk-tio-rad { justify-content: space-between; margin: 0 0 0.9rem; }
@@ -2217,7 +2212,9 @@ html.js .bara-js { display: inline-block; }
 @keyframes sk-blinka { 50% { fill: var(--klocka-yta-ljus); } }
 @media (prefers-reduced-motion: reduce) { .sk-klocka.slut .sk-urtavla-bakgrund { animation: none; fill: var(--klocka-yta-ljus); } }
 .sk-minuter { display: flex; align-items: center; gap: 0.4rem; }
-.sk-steg, .sk-ljud { display: inline-grid; place-items: center; width: 2.75rem; height: 2.75rem; padding: 0; border: 1.5px solid var(--farg-accent); border-radius: 6px; background: var(--farg-yta); color: var(--farg-accent); font: 700 1.4rem/1 var(--typsnitt-ui); cursor: pointer; }
+.sk-tidrad { display: flex; align-items: center; justify-content: center; gap: 0.6rem; }
+.sk-tidrad .sk-lamna { display: none; }
+.sk-steg, .sk-ljud, .sk-lamna { display: inline-grid; place-items: center; width: 2.75rem; height: 2.75rem; padding: 0; border: 1.5px solid var(--farg-accent); border-radius: 6px; background: var(--farg-yta); color: var(--farg-accent); font: 700 1.4rem/1 var(--typsnitt-ui); cursor: pointer; }
 .sk-steg:disabled { opacity: 0.4; cursor: default; }
 .sk-minutfalt { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.95rem; color: var(--farg-text-svag); }
 .sk-minutfalt input { width: 3.6rem; min-height: 2.75rem; border: 1.5px solid var(--farg-kant); border-radius: 6px; background: var(--farg-yta); color: var(--farg-text); font: 700 1.3rem var(--typsnitt-ui); text-align: center; -moz-appearance: textfield; appearance: textfield; }
@@ -2227,8 +2224,8 @@ html.js .bara-js { display: inline-block; }
 .sk-klockknappar .knapp { justify-content: center; border: 0; cursor: pointer; font-size: 1rem; }
 .sk-klockknappar .knapp.sekundar { border: 1.5px solid var(--farg-accent); }
 .sk-start { min-width: 7rem; }
-.sk-ljud { padding: 0.5rem; }
-.sk-ljud svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sk-ljud, .sk-lamna { padding: 0.5rem; }
+.sk-ljud svg, .sk-lamna svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .sk-ljud .sk-hogtalare { fill: currentColor; }
 .sk-ljud[aria-pressed="true"] .sk-kryss, .sk-ljud[aria-pressed="false"] .sk-vagor { display: none; }
 .sk-ljud[aria-pressed="false"] { color: var(--farg-text-svag); border-color: var(--farg-kant); }
@@ -2237,7 +2234,48 @@ html.js .bara-js { display: inline-block; }
   .sk-klocka { grid-template-columns: 7rem minmax(0, 1fr); justify-items: start; align-items: center; column-gap: 1rem; }
   .sk-urtavla { grid-row: 1 / span 4; width: 7rem; }
   .sk-tid { font-size: 2.2rem; }
-  .sk-klockknappar { justify-content: flex-start; }
+  .sk-tidrad, .sk-klockknappar { justify-content: flex-start; }
+}
+/* Helskärm, för projektorn och telefonen. Kortet får sin plats först, så stort som skärmen rymmer, och klockan tar det som
+   blir över (Niclas 2026-10-14, efter helskärm i telefonen: timern ska få sin plats "men inte stjäla plats från
+   skrivkortet"). På en liggande skärm står klockan bredvid kortet och urtavlan växer med skärmens höjd, så att den syns
+   långt bak i ett klassrum; är skärmen låg, som en liggande telefon, står klockan i en rad som under kortet. På en
+   stående skärm står kortet överst i hela bredden och klockan i en rad under. */
+.sk-ett:fullscreen { background: var(--farg-bakgrund); padding: 2dvh 2vw; gap: 2dvh 2vw; overflow: hidden; align-items: center; justify-items: center; }
+.sk-ett:fullscreen .sk-sidospalt { width: 100%; gap: 0.75rem; }
+.sk-ett:fullscreen .sk-om, .sk-ett:fullscreen .sk-atgarder { display: none; }
+.sk-ett:fullscreen .sk-lamna { display: inline-grid; }
+@media (orientation: landscape) {
+  .sk-ett:fullscreen { grid-template-columns: auto minmax(0, 1fr); }
+  .sk-ett:fullscreen .sk-kortplats { width: min(calc(96dvh * 0.75), calc(96vw - 15rem)); }
+  .sk-ett:fullscreen .sk-urtavla { width: min(100%, calc(96dvh - 14rem), 55dvh); }
+  .sk-ett:fullscreen .sk-tid { font-size: clamp(2.2rem, 7dvh, 5rem); }
+}
+@media (orientation: portrait) {
+  /* Kortets plats är raden som blir över när klockan har fått sin höjd, och kortet är så stort som platsen rymmer. */
+  .sk-ett:fullscreen { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; }
+  .sk-ett:fullscreen .sk-kortplats { container-type: size; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+  .sk-ett:fullscreen .sk-kortplats .skrivkort { width: min(100cqw, 75cqh); }
+  .sk-ett:fullscreen .sk-sidospalt { max-width: 34rem; }
+}
+/* Klockan i en rad: urtavlan till vänster och tiden och knapparna bredvid, som i telefonen. */
+/* Klockan som en smal rad: en mindre urtavla till vänster, tiden med ljudet och knappen som lämnar helskärm, och under
+   dem Starta och Börja om. Minuterna ställs innan, så väljaren står inte här, och beskedet Tiden är slut läses bara av
+   skärmläsaren: urtavlan blinkar och tiden står på 0:00. */
+@media (orientation: portrait), (max-height: 34rem) {
+  .sk-ett:fullscreen .sk-klocka { grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "tavla rad" "tavla knappar"; justify-items: start; align-items: center; gap: 0.4rem 0.9rem; padding: 0.6rem 0.75rem; }
+  .sk-ett:fullscreen .sk-urtavla { grid-area: tavla; width: min(5rem, 22dvh); }
+  .sk-ett:fullscreen .sk-tidrad { grid-area: rad; justify-content: flex-start; }
+  .sk-ett:fullscreen .sk-klockknappar { grid-area: knappar; justify-content: flex-start; flex-wrap: nowrap; }
+  .sk-ett:fullscreen .sk-tid { font-size: 2rem; }
+  .sk-ett:fullscreen .sk-start { min-width: 0; }
+  .sk-ett:fullscreen .sk-minuter { display: none; }
+  .sk-ett:fullscreen .sk-slut { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+/* En låg liggande skärm, som en liggande telefon: kortet har hela höjden och klockan står bredvid, så urtavlan får växa. */
+@media (orientation: landscape) and (max-height: 34rem) {
+  .sk-ett:fullscreen .sk-urtavla { width: min(10rem, 45dvh); }
+  .sk-ett:fullscreen .sk-tid { font-size: 2.6rem; }
 }
 @media print {
   .skrivkortsida .sk-val, .skrivkortsida .sk-sidospalt, .skrivkortsida .sk-tio-rad { display: none; }

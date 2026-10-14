@@ -91,7 +91,17 @@ const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
             <g class="sk-streck" id="sk-streck"></g>
             <circle class="sk-mitt" r="7"></circle>
           </svg>
-          <p class="sk-tid" id="sk-tid" aria-live="off">3:00</p>
+          {/* Tiden med ljudet bredvid, och i helskärm knappen som lämnar den, så att klockan blir en smal rad under kortet
+              i en stående skärm (global.css, Helskärm). */}
+          <div class="sk-tidrad">
+            <p class="sk-tid" id="sk-tid" aria-live="off">3:00</p>
+            <button type="button" class="sk-ljud" id="sk-ljud" aria-pressed="true" aria-label="Ljudet när tiden är slut" title="Ljudet när tiden är slut">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path class="sk-hogtalare" d="M4 9h4l5-4v14l-5-4H4z"></path><path class="sk-vagor" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"></path><path class="sk-kryss" d="M16.5 9.5l5 5M21.5 9.5l-5 5"></path></svg>
+            </button>
+            <button type="button" class="sk-lamna" id="sk-lamna" aria-label="Lämna helskärm" title="Lämna helskärm">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"></path></svg>
+            </button>
+          </div>
           <p class="sk-slut" id="sk-slut" role="status"></p>
           <div class="sk-minuter">
             <button type="button" class="sk-steg" data-steg="-1" aria-label="En minut kortare">−</button>
@@ -101,9 +111,6 @@ const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
           <div class="sk-klockknappar">
             <button type="button" class="knapp sk-start" id="sk-start">Starta</button>
             <button type="button" class="knapp sekundar sk-omstart" id="sk-omstart">Börja om</button>
-            <button type="button" class="sk-ljud" id="sk-ljud" aria-pressed="true" aria-label="Ljudet när tiden är slut" title="Ljudet när tiden är slut">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path class="sk-hogtalare" d="M4 9h4l5-4v14l-5-4H4z"></path><path class="sk-vagor" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"></path><path class="sk-kryss" d="M16.5 9.5l5 5M21.5 9.5l-5 5"></path></svg>
-            </button>
           </div>
         </section>
         <div class="sk-atgarder">
@@ -431,12 +438,11 @@ const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
   });
 
   // ---------- Helskärm ----------
-  helskarmKnapp.addEventListener('click', () => {
-    if (document.fullscreenElement) void document.exitFullscreen();
-    else void ett.requestFullscreen?.();
-  });
+  // Knappen Helskärm står under klockan. I helskärm lämnar knappen med ikonen bredvid tiden den, och Esc eller
+  // telefonens bakåt gör det också.
+  helskarmKnapp.addEventListener('click', () => { void ett.requestFullscreen?.(); });
+  $('sk-lamna').addEventListener('click', () => { if (document.fullscreenElement) void document.exitFullscreen(); });
   document.addEventListener('fullscreenchange', () => {
-    helskarmKnapp.textContent = document.fullscreenElement ? 'Lämna helskärm' : 'Helskärm';
     const kort = plats.querySelector<HTMLElement>('.skrivkort');
     if (kort) requestAnimationFrame(() => passa(kort));
   });
