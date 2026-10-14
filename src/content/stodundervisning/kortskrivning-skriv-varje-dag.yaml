@@ -2,7 +2,7 @@
 # biblioteket i skrivkort/ (node build/skrivkort.mjs kortskrivning-skriv-varje-dag).
 titel: "Kortskrivning: skriv varje dag"
 undertitel: Tio minuter med dagens skrivkort och fem att dela, för åk 1–9
-ingress: "Varje dag skriver gruppen eller klassen utifrån dagens skrivkort: en bild som sätter igång en berättelse, eller ett citat. Den som vill läser sedan en rad för en kamrat. Ingen rättar, och inget kan bli fel. Metoden har 110 skrivkort på var och en av tre nivåer."
+ingress: "Varje dag skriver gruppen eller klassen utifrån dagens skrivkort: en bild som sätter igång en berättelse, eller ett citat. Den som vill läser sedan en rad för en kamrat. Ingen rättar, och inget kan bli fel. Dagens kort slumpar du fram ur 330 skrivkort, och det visas stort med en klocka som alla ser."
 omrade: Skrivning
 arskurs:
   - F-3
@@ -40,7 +40,7 @@ inledning:
   - Kortskrivning är en kvart om dagen då alla skriver och ingen rättar. Den är för elever som inte kommer igång, som suddar mer än de skriver eller som frågar om det är rätt.
   - "Varje elev har en egen skrivbok och en penna. Du visar dagens skrivkort (på engelska writing prompt): en bild som är början på en berättelse, och för de äldre eleverna ibland ett citat eller en händelse ur historien. På bordet ligger högen med de kort gruppen har haft och en bunt lösa papper, och alla ser klockan."
   - "Uppgiften är densamma varje dag: ”Skriv vad du tänker när du ser, läser eller tänker på det här.” Eleven skriver utan att stanna och utan att sudda, och läser sedan en rad för en kamrat om hen vill. När ingen bedömer texten vågar fler börja."
-  - I de tio första passen säger eleverna sin första tanke till en kamrat innan de skriver. Korten Börja här, under Materialet, är ett förslag till de passen. Sedan slumpar du dagens kort på metodens sida. I vecka 6 läser eleven en av sina texter och skriver nytt om samma sak.
+  - I de tio första passen säger eleverna sin första tanke till en kamrat innan de skriver. Korten Börja här, under Materialet, är ett förslag till de passen. Sedan slumpar du dagens kort på sidan Ta fram ett skrivkort, som visar kortet stort med en klocka som alla ser. I vecka 6 läser eleven en av sina texter och skriver nytt om samma sak.
 upplagg:
   rubrik: Så fungerar insatsen
   text: "Passet är 10–15 minuter, varje dag eller minst tre gånger i veckan, i sex veckor och sedan så länge gruppen vill, 2–8 elever eller en hel klass. Passet har tre delar: Dagens kort, Skriv och Dela. Du visar kortet, säger uppgiften och din egen första mening. Alla skriver tills klockan ringer, i början tre minuter och efter hand upp till åtta. Sedan läser den som vill en rad för en kamrat, som svarar ”Berätta mer om …”. En gång i veckan räknar eleven orden från de tre första minuterna, och efter varje pass noterar du vilka som inte började inom en minut."
@@ -142,7 +142,7 @@ tabeller:
 urval:
   rubrik: Var hittar du skrivkorten?
   text:
-    - "Skrivkorten ligger i ett bibliotek på metodens sida, med 110 kort på var och en av nivåerna Bas, Medel och Avancerat, ungefär åk 1–3, 4–6 och 7–9. På Bas är varje kort en bild: något ur sagans värld, något knasigt eller något att undra över. På Medel är två av tre kort bilder eller händelser med foto, och resten är citat ur sagor och dikter. På Avancerat är hälften bilder och händelser, hälften dikter och citat. Välj nivå och slumpa fram ett eller tio kort att visa på skärmen eller skriva ut."
+    - "Skrivkorten ligger på sidan Ta fram ett skrivkort, med 110 kort på var och en av nivåerna Bas, Medel och Avancerat, ungefär åk 1–3, 4–6 och 7–9. På Bas är varje kort en bild: något ur sagans värld, något knasigt eller något att undra över. På Medel är två av tre kort bilder eller händelser med foto, och resten är citat ur sagor och dikter. På Avancerat är hälften bilder och händelser, hälften dikter och citat. Välj ett kort eller tio och tryck på en nivå. Varje tryck ger nya kort. Kortet visas stort med en klocka bredvid, som du ställer på skrivtiden och som ringer när tiden är slut, och korten går att skriva ut."
     - Korten är inte märkta som lättsamma eller allvarliga, och inget tungt är bortvalt. Välj nivå efter eleverna och hur vuxet kortet ska vara, inte efter årskursen, och se på kortet före passet.
   kravText: "Gör du ett eget kort, till exempel ur dagens lektion, eller låter eleverna göra ett, ska det klara tre krav:"
   krav:
@@ -210,7 +210,7 @@ ramar:
   ramar:
     - rubrik: "Börja här: de tio första passen"
       text:
-        - Varje nivå har tio kort. Kort 1 hör till första passet och kort 10 till det tionde. Tabellen visar vilka korten är och ger en början att låna till varje pass. Efter tabellen står det första passet och det som kommer till i pass 1–10. De tio korten är ett förslag. Du kan när som helst slumpa fram ett eller tio nya kort och själv ge eleverna en början att låna.
+        - Varje nivå har tio kort. Kort 1 hör till första passet och kort 10 till det tionde. Tabellen visar vilka korten är och ger en början att låna till varje pass. Efter tabellen står det första passet och det som kommer till i pass 1–10. De tio korten är ett förslag. Du kan när som helst slumpa fram ett eller tio nya kort på sidan Ta fram ett skrivkort och själv ge eleverna en början att låna.
       oversikt:
         kolumner:
           - Pass
@@ -243,7 +243,7 @@ ramar:
         - rubrik: "Pass 1–10: det som kommer till"
           falt:
             - rubrik: Dagens kort
-              text: "Visa kortet på skärmen eller på ett A4 ur biblioteket, eller ge varje par ett utklippt kort. Klipp ut dagens kort och lägg det i högen efter passet: högen är de kort gruppen har haft."
+              text: "Visa kortet på skärmen från sidan Ta fram ett skrivkort, eller skriv ut det där på ett A4. Lägg det utskrivna kortet i högen efter passet: högen är de kort gruppen har haft."
             - rubrik: En början att låna
               text: Sätt ett tomt blad på väggen. Före varje pass skriver du dagens början under de förra. Börja din egen första mening med den. Den som behöver lånar en början eller en rad ur kortet. Bladet sitter kvar hela perioden.
             - rubrik: Pass 1–6
@@ -354,10 +354,10 @@ lathund:
     var:
       rubrik: Var materialet finns
       punkter:
-        - fet: Biblioteket.
-          text: 110 kort på var och en av nivåerna Bas, Medel och Avancerat, på metodens sida.
+        - fet: Skrivkorten.
+          text: 110 kort på var och en av nivåerna Bas, Medel och Avancerat, på sidan Ta fram ett skrivkort, som du når från metodens sida.
         - fet: Ett eller tio.
-          text: Välj nivå och slumpa ett eller tio kort att visa på skärmen eller skriva ut.
+          text: Välj ett kort eller tio och en nivå. Kortet visas stort med en klocka bredvid, eller skrivs ut.
         - fet: Börja här.
           text: Tio kort per nivå som förslag till de tio första passen, under Materialet på metodens sida, med en början att låna.
         - fet: Skrivlistan.
