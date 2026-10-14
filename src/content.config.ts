@@ -607,6 +607,9 @@ const stodundervisning = defineCollection({
         var: z.strictObject({ rubrik: text, punkter: z.array(punkt).min(1), efter: z.string().optional() }),
         bordet: z.array(text).min(1),
         varjePass: z.string().optional(),
+        // Uppföljningen på lathundens sida 4 i kortare form, i stället för uppföljningens rader, när de inte ryms i rutan
+        // (Kortskrivning: skriv varje dag 2026-10-14, metodriggens bild4.uppfoljning). Metodens tabell står kvar på sidan.
+        uppfoljning: z.array(z.strictObject({ nar: text, vad: text })).min(1).optional(),
       }),
     }).optional(),
   }).superRefine((d, ctx) => {

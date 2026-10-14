@@ -2177,8 +2177,8 @@ html.js .bara-js { display: inline-block; }
 .skrivkort.liten .sk-vers .sk-versrad + .sk-versrad::before { content: ' / '; }
 .skrivkort .sk-linje { display: block; flex: none; width: 16.7cqi; height: 0; border-top: max(2px, 0.45cqi) solid var(--niva); margin: calc(4.5cqi * var(--skala)) 0 calc(2.5cqi * var(--skala)); }
 .skrivkort .sk-vem { line-height: 1.3; }
-.skrivkort .sk-namn { font-family: 'Cinzel', var(--typsnitt-rubrik); font-size: calc(2.95cqi * var(--skala)); }
-.skrivkort .sk-verk { font-size: calc(2.45cqi * var(--skala)); color: var(--sk-dov); margin-left: 0.4em; }
+.skrivkort .sk-namn { font-family: 'Cinzel', var(--typsnitt-rubrik); font-size: max(calc(2.95cqi * var(--skala)), 0.72rem); }
+.skrivkort .sk-verk { font-size: max(calc(2.45cqi * var(--skala)), 0.66rem); color: var(--sk-dov); margin-left: 0.4em; }
 /* Händelsen: årtalet stort i nivåns färg och meningen om vad som hände. Utan foto är årtalet dubbelt så stort. */
 .skrivkort .sk-ar { font-family: 'Anton', var(--typsnitt-ui); font-size: calc(15cqi * var(--skala)); line-height: 1.05; color: var(--niva); }
 .skrivkort .sk-vad { font-size: calc(5.3cqi * var(--skala)); line-height: 1.32; margin-top: calc(1cqi * var(--skala)); }

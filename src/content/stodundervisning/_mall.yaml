@@ -415,6 +415,10 @@ lathund:
     bordet:
       - Vad som ska ligga på bordet när passet börjar
     varjePass: Vad som noteras efter varje pass.
+    # Uppföljningen på lathundens sida 4 i kortare form, när metodens rader inte ryms i rutan (Kortskrivning: skriv varje
+    # dag, 2026-10-14). Utan fältet står uppföljningens rader där. Samma form som uppfoljning.rader.
+    # uppfoljning:
+    #   - { nar: Veckans sista pass, vad: Vad som görs. }
 # Filmerna ur metodriggens filmpaket (METODER.md under Filmerna, src/lib/film.ts). Varje metod får en huvudfilm, film,
 # som står direkt efter faktarutan; stillbilderna står på sidan 1 i Word och i utskriften. Filerna <id>-film.svg och
 # <id>-film-1.svg … -4.svg ligger i public/stodundervisning/. titel bara när filmen ska heta något annat än rubriken.

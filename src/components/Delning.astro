@@ -20,8 +20,11 @@ interface Props {
   titel: string;
   /** Var raden står: topp (under metodens ruta) eller fot (ovanför kommentarerna). Ger unika id. */
   plats?: 'topp' | 'fot';
+  /** Kopiera länk, Mejl, Instagram och Fler appar tar med adressens # (sidan som slumpar skrivkort: kortet som visas).
+   *  Facebook och LinkedIn får sidans adress, eftersom de visar sidans delningskort. */
+  medKort?: boolean;
 }
-const { sida, titel, plats = 'fot' } = Astro.props;
+const { sida, titel, plats = 'fot', medKort = false } = Astro.props;
 const u = encodeURIComponent(new URL(sida, site.url).href);
 const rubrik = `delning-${plats}`;
 const knappar = [
@@ -33,7 +36,7 @@ const knappar = [
   { kanal: 'fler', ord: 'Fler appar' },
 ];
 ---
-<section class:list={['delning', plats]} data-delning>
+<section class:list={['delning', plats]} data-delning data-med-kort={medKort ? '' : undefined}>
   <h2 id={rubrik}>Dela</h2>
   <ul>
     {knappar.map(({ kanal, ord, href }) => href ? (
@@ -106,6 +109,9 @@ const knappar = [
       const p = rad.querySelector('.delning-besked');
       if (p) p.textContent = text;
     };
+    // Adressen som följer med: sidans, eller med kortet som visas när raden ber om det (Kortskrivning, granskningen
+    // 2026-10-14: Kopiera länk gav sidan utan kortet).
+    const adress = () => (rad.hasAttribute('data-med-kort') && location.hash ? `${url}${location.hash}` : url);
     for (const el of rad.querySelectorAll<HTMLElement>('[data-kanal]')) {
       const kanal = el.dataset.kanal ?? '';
       if (kanal in kan) {
@@ -116,6 +122,8 @@ const knappar = [
       if (kanal === 'instagram') el.addEventListener('pointerdown', () => void hamta());
       el.addEventListener('click', async () => {
         rakna(kanal);
+        const url = adress();
+        if (kanal === 'mejl') el.setAttribute('href', `mailto:?subject=${encodeURIComponent(titel)}&body=${encodeURIComponent(ingress)}%0D%0A%0D%0A${encodeURIComponent(url)}`);
         if (kanal === 'kopiera') visa((await kopiera(url)) ? 'Länken är kopierad.' : `Markera och kopiera länken: ${url}`);
         if (kanal === 'fler') navigator.share({ title: titel, text: titel, url }).catch(() => {});
         if (kanal === 'instagram') {

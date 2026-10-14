@@ -210,14 +210,14 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
     const KANAL: Record<string, string> = { facebook: 'Facebook', linkedin: 'LinkedIn', instagram: 'Instagram', mejl: 'Mejl', kopiera: 'Kopiera länk', fler: 'Fler appar' };
     const DELAD = /: (delad på .+|skickad med mejl|länken kopierad|delad i en annan app)$/;
     function kategorier(hits: Hit[]) {
-      const metoder = new Map<string, { namn: string; sida: number; lathund: number; enheter: number }>();
+      const metoder = new Map<string, { namn: string; sida: number; lathund: number; enheter: number; skrivkort: number }>();
       const filer = new Map<string, Rad>();
       const delningar = new Map<string, { namn: string; antal: number; kanaler: Map<string, number> }>();
       let delade = 0;
       const k: Record<string, Rad[]> = { artiklar: [], bocker: [], utskrifter: [], ovriga: [] };
       const metod = (id: string) => {
         let x = metoder.get(id);
-        if (!x) { x = { namn: id, sida: 0, lathund: 0, enheter: 0 }; metoder.set(id, x); }
+        if (!x) { x = { namn: id, sida: 0, lathund: 0, enheter: 0, skrivkort: 0 }; metoder.set(id, x); }
         return x;
       };
       for (const h of hits) {
@@ -251,6 +251,9 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
         if (m) { const x = metod(m[1]); x.sida += h.count; if (titel) x.namn = titel; continue; }
         m = h.path.match(/^\/stodundervisning\/([^/]+)\/lathund$/);
         if (m) { const x = metod(m[1]); x.lathund += h.count; if (x.namn === m[1] && titel) x.namn = titel.replace(/^Lathund:\s*/, ''); continue; }
+        // Sidan som slumpar skrivkort (src/pages/stodundervisning/[id]/skrivkort.astro): räknas under metoden, med sitt namn.
+        m = h.path.match(/^\/stodundervisning\/([^/]+)\/skrivkort$/);
+        if (m) { metod(m[1]).skrivkort += h.count; continue; }
         // Ett problems eller en texts egen sida i en bank (src/lib/bank.ts), "Äpplena · Bas, problem 1 · Problemlösning i
         // grupp": räknas under metoden, som lathunden.
         m = h.path.match(/^\/stodundervisning\/([^/]+)\/([^/]+)$/);
@@ -261,7 +264,7 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
       }
       // En metod rankas efter besöken på metodsidan; lathundens och undersidornas besök står under namnet.
       const metodRader: Rad[] = [...metoder.values()].map((x) => {
-        const fler = [x.lathund && `${x.lathund} på lathunden`, x.enheter && `${x.enheter} på undersidorna`].filter(Boolean);
+        const fler = [x.lathund && `${x.lathund} på lathunden`, x.skrivkort && `${x.skrivkort} på Ta fram ett skrivkort`, x.enheter && `${x.enheter} på undersidorna`].filter(Boolean);
         return { namn: x.namn, under: fler.length ? `och ${fler.join(', ')}` : undefined, antal: x.sida };
       });
       const delRader: Rad[] = [...delningar.values()].map((x) => ({

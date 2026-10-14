@@ -440,6 +440,26 @@ if (utan.length) {
   for (const rad of utan.slice(0, 10)) console.error(`  ${rad}`);
   process.exit(1);
 }
+// Statistiken (Niclas 2026-10-14: "Kolla också att statistiken funkar för allt", efter att utskriftsknapparna blivit
+// pdf:er, K-342): varje länk som går att trycka på till en egen fil (Word, PowerPoint, pdf, zip, mp4) och varje
+// utskriftsknapp har ett namn i statistiken, data-goatcounter-click (DRIFT.md under Besöksstatistik). Lathundens knappar
+// till passtexten och mallen saknade det i en dag. Länkarna i en mall (<template>), som sidan som slumpar skrivkort läser
+// kortens adresser ur, trycker ingen på.
+const utanNamn = [];
+for (const sida of htmlFiler(join(rot, 'dist'))) {
+  const html = readFileSync(sida, 'utf8').replace(/<template\b[\s\S]*?<\/template>/g, '');
+  for (const m of html.matchAll(/<(a|button)\b([^>]*)>/g)) {
+    const attr = m[2];
+    const href = attr.match(/\bhref="([^"]+)"/)?.[1] ?? '';
+    const egenFil = /^\/[^/]/.test(href) && /\.(docx|pptx|pdf|zip|mp4)(\?|$)/.test(href);
+    if ((egenFil || /data-skriv-ut-pdf/.test(attr)) && !/data-goatcounter-click="/.test(attr)) utanNamn.push(`${sida.slice(join(rot, 'dist').length)}: ${href || attr.slice(0, 60)}`);
+  }
+}
+if (utanNamn.length) {
+  console.error(`paritet: ${utanNamn.length} länkar till filer eller utskriftsknappar saknar namn i statistiken (data-goatcounter-click):`);
+  for (const rad of utanNamn.slice(0, 10)) console.error(`  ${rad}`);
+  process.exit(1);
+}
 // Elevens typsnitt (K-130): varje tecken som Word-filerna skriver i elevens typsnitt (i Word heter det Andika, i webbens
 // fil Ljudlek Elev; src/lib/ljudkort.ts) finns i typsnittsfilen, annars ritar
 // Word det i ett annat typsnitt mitt i elevens material. Webbfilen görs ur samma teckenlista (scripts/elevtypsnitt.py).
@@ -560,4 +580,4 @@ if (filmerUtanPaus.length) {
   console.error(`paritet: ${filmerUtanPaus.length} filmer styr inte sina animeringar med var(--spel), så Pausa fryser dem inte: ${filmerUtanPaus.slice(0, 5).join(', ')}. Be metodriggen om animation-play-state: var(--spel,running).`);
   process.exit(1);
 }
-console.log(`Paritet: ${provade} texter i ${filer.length} metoder står både i Word-filen och i sidans utskrift, filmerna står på samma plats i båda och går att pausa, länkarna till filerna bär version, elevens typsnitt har varje tecken i elevmaterialet, och Word-filernas ${reservAntal} bilder har en riktig reservbild för Google Dokument.`);
+console.log(`Paritet: ${provade} texter i ${filer.length} metoder står både i Word-filen och i sidans utskrift, filmerna står på samma plats i båda och går att pausa, länkarna till filerna bär version och har namn i statistiken, elevens typsnitt har varje tecken i elevmaterialet, och Word-filernas ${reservAntal} bilder har en riktig reservbild för Google Dokument.`);

@@ -4054,8 +4054,9 @@ function lathundBarn(post: MetodPost, o: { niva1?: boolean; skalor?: number[]; b
       ],
       () => [
         ...(d.checklista ? lhRuta(d.checklista.rubrik, d.checklista.punkter.map((p, i, alla) => new Paragraph({ children: [bockRun(20), run(` ${p}`, { storlek: 20 })], spacing: { after: i === alla.length - 1 ? 0 : 40 } }))) : []),
-        ...(d.uppfoljning || l.material.varjePass ? lhRuta('Uppföljning', [
-          ...(d.uppfoljning?.rader ?? []).map((r) => new Paragraph({ children: [textRun({ text: `${r.nar}: `, bold: true, size: 20 }), textRun({ text: r.vad, size: 20 })], spacing: { after: 60 } })),
+        ...(d.uppfoljning || l.material.uppfoljning || l.material.varjePass ? lhRuta('Uppföljning', [
+          // Lathundens egen kortare uppföljning, när metoden har en (lathund.material.uppfoljning), annars metodens rader.
+          ...(l.material.uppfoljning ?? d.uppfoljning?.rader ?? []).map((r) => new Paragraph({ children: [textRun({ text: `${r.nar}: `, bold: true, size: 20 }), textRun({ text: r.vad, size: 20 })], spacing: { after: 60 } })),
           ...(l.material.varjePass ? [new Paragraph({ children: [textRun({ text: 'Varje pass: ', bold: true, size: 20 }), textRun({ text: l.material.varjePass, size: 20 })], spacing: { after: 0 } })] : []),
         ]) : []),
       ],

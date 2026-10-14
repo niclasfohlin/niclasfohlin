@@ -135,7 +135,7 @@ function bilder(d: MetodData) {
     // Rubriken ur metoden, som på sidan och i Word: Skrivkurs: sagoboken heter Checklista inför kursen (K-173).
     checklistaRubrik: versaler(d.checklista?.rubrik ?? 'Checklista inför passet'),
     uppfoljning: [
-      ...(d.uppfoljning?.rader ?? []).map((r) => `**${r.nar}:** ${r.vad}`),
+      ...(l.material.uppfoljning ?? d.uppfoljning?.rader ?? []).map((r) => `**${r.nar}:** ${r.vad}`),
       ...(l.material.varjePass ? [`**Varje pass:** ${l.material.varjePass}`] : []),
     ],
     anteckning: `${d.titel}, materialet: krav, var det finns, vad som ligger på bordet, checklistan och uppföljningen.`,

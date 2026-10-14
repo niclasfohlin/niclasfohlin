@@ -746,11 +746,13 @@ const meny = [
           {ram.sagoform && <p class="m-efter">{sagoNamn[ram.sagoform.form] ?? 'Bladet'} att kopiera, med {ram.sagoform.bilder?.length ? 'ramen, bilderna och raderna' : 'ramen och raderna'}, finns i {ramensFil(ri).fore}<a href={ramensFil(ri).adress} data-goatcounter-click={`fil:${ramensFil(ri).fil}`} data-goatcounter-title={ramensFil(ri).statistik}>{ramensFil(ri).namn}</a> (Word). Här står vad {ram.sagoform.form === 'skyltar' || ram.sagoform.form === 'kort' ? 'de' : 'det'} innehåller.</p>}
           {(ram.listor ?? []).some((l) => arTarning(d, l)) && <p class="m-efter m-ej-utskrift">Tärningarna att klippa, vika och limma, en på varje A4 med bilderna, finns i {ramensFil(ri).fore}<a href={ramensFil(ri).adress} data-goatcounter-click={`fil:${ramensFil(ri).fil}`} data-goatcounter-title={ramensFil(ri).statistik}>{ramensFil(ri).namn}</a> (Word). Här står orden på sidorna, och de skrivs inte ut.</p>}
           {arElevensBlad(ram) && <p class="m-efter">Bladet att lägga framför eleven, med stor text och bara det eleven läser, finns i {ramensFil(ri).fore}<a href={ramensFil(ri).adress} data-goatcounter-click={`fil:${ramensFil(ri).fil}`} data-goatcounter-title={ramensFil(ri).statistik}>{ramensFil(ri).namn}</a> (Word).</p>}
+          {/* Korten Börja här (borja): raden står före tabellen, så att nivåernas tio kort nås utan att rulla förbi den i
+              telefonen (granskningen i telefonbredd 2026-10-14). */}
+          {borja(ram) && <p class="m-efter m-borja">Tryck på ett kort i tabellen, så visas det stort med klockan. Nivåns tio kort, att visa eller skriva ut: {borja(ram)!.nivaer.map((n, i) => <>{i > 0 && ' · '}<a href={n.adress}>{n.namn}</a></>)}.</p>}
           {/* En översikt med bilder är en litteraturlista (Litteraturlista.astro); bredder ger annars kolumnernas andelar. */}
           {ram.oversikt?.bilder
             ? <Litteraturlista oversikt={ram.oversikt} id={id} niva={ramensNiva(ram.rubrik, d.nivaer)} />
             : ram.oversikt && <MetodTabell kolumner={ram.oversikt.kolumner} rader={ram.oversikt.rader} bredder={andelar(ram.oversikt.bredder)} klass={kortaCeller(ram.oversikt.rader) ? 'fri tat' : friKlass(ram.oversikt)} radrubrik={false} cellank={borja(ram)?.lank} />}
-          {borja(ram) && <p class="m-efter m-borja">Tryck på ett kort i tabellen, så visas det stort med klockan. Nivåns tio kort, att visa eller skriva ut: {borja(ram)!.nivaer.map((n, i) => <>{i > 0 && ' · '}<a href={n.adress}>{n.namn}</a></>)}.</p>}
           {ram.listor ? (
             <>
               {/* Elevens blad med listor (kartläggningen i Problemlösning i grupp, metodriggens TILL-SAJTEN 2026-10-10, Det

@@ -48,6 +48,9 @@ const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
 
 <Base title={`${SKRIVKORT_LANK}: ${d.titel}`} description={`Slumpa fram ett skrivkort eller tio ur ${b.kort.length} kort på Bas, Medel och Avancerat, visa kortet stort med en klocka som alla ser, och skriv ut det.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
   <article class="skrivkortsida" data-metod={m.id} data-titel={d.titel}>
+    {/* Statistiken (DRIFT.md under Besöksstatistik): besöken räknas under metoden som "på Ta fram ett skrivkort",
+        utskrifterna som utskrift:<id>/skrivkort och …:tio, helskärmen och när klockan startas som skrivkort:<id>:…
+        Varje tryck på en nivå räknas inte, så att statistiken och GoatCounters tak inte fylls av slumpningen. */}
     <header class="sk-huvud">
       <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${m.id}`}>{d.titel}</a> · Skrivkort</p>
       <h1>{SKRIVKORT_LANK}</h1>
@@ -76,7 +79,7 @@ const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
     <div class="sk-scen" id="sk-scen" data-lage="tom">
       <p class="sk-tom">Tryck på Alla, Bas, Medel eller Avancerat.</p>
       <div class="sk-ett" id="sk-ett" hidden>
-        <div class="sk-kortplats" id="sk-kortplats"></div>
+        <div class="sk-kortplats" id="sk-kortplats" tabindex="-1" aria-label="Kortet"></div>
         <div class="sk-sidospalt">
         <section class="sk-klocka" id="sk-klocka" aria-label="Klockan">
           <svg class="sk-urtavla" viewBox="-110 -110 220 220" role="img" aria-labelledby="sk-tid">
@@ -108,8 +111,8 @@ const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
           </div>
         </section>
         <div class="sk-atgarder">
-          <a class="knapp sekundar" id="sk-skrivut-ett" href="#" target="_blank" rel="noopener">Skriv ut kortet</a>
-          <button type="button" class="knapp sekundar" id="sk-helskarm" hidden>Helskärm</button>
+          <a class="knapp sekundar" id="sk-skrivut-ett" href="#" target="_blank" rel="noopener" data-goatcounter-click={`utskrift:${m.id}/skrivkort`} data-goatcounter-title={`${d.titel}: utskrift av ett skrivkort`}>Skriv ut kortet</a>
+          <button type="button" class="knapp sekundar" id="sk-helskarm" hidden data-goatcounter-click={`skrivkort:${m.id}:helskarm`} data-goatcounter-title={`${d.titel}: skrivkortet i helskärm`}>Helskärm</button>
           <button type="button" class="knapp sekundar" id="sk-tillbaka" hidden>Tillbaka till de tio</button>
         </div>
         <details class="sk-om" id="sk-om" hidden>
@@ -121,7 +124,7 @@ const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
       <div class="sk-tio-ram" id="sk-tio-ram" hidden>
         <div class="sk-atgarder sk-tio-rad">
           <p class="sk-tio-not">Tryck på ett kort för att visa det stort med klockan.</p>
-          <a class="knapp sekundar" id="sk-skrivut-tio" href="#" target="_blank" rel="noopener">Skriv ut alla tio</a>
+          <a class="knapp sekundar" id="sk-skrivut-tio" href="#" target="_blank" rel="noopener" data-goatcounter-click={`utskrift:${m.id}/skrivkort:tio`} data-goatcounter-title={`${d.titel}: utskrift av tio skrivkort`}>Skriv ut alla tio</a>
         </div>
         <ol class="sk-tio" id="sk-tio"></ol>
       </div>
@@ -137,7 +140,7 @@ const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
     <script type="application/json" id="sk-data" set:html={JSON.stringify(data).replace(/</g, '\\u003c')}></script>
     {/* Delningsraden, som på metodens sida: sidan har ett eget delningskort med tre skrivkort och klockan
         (src/lib/delningskort.ts), så att den går att dela direkt (Niclas 2026-10-14). */}
-    {delningPa && <Delning sida={skrivkortAdress(m.id)} titel={`${SKRIVKORT_LANK}: ${d.titel}`} />}
+    {delningPa && <Delning sida={skrivkortAdress(m.id)} titel={`${SKRIVKORT_LANK}: ${d.titel}`} medKort />}
   </article>
 </Base>
 
@@ -239,6 +242,7 @@ const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
     // Elevens typsnitt, Anton och Cinzel hämtas först när ett kort visas, och texten tar annan plats när de har kommit.
     void document.fonts?.ready.then(() => { if (kort.isConnected) passa(kort); });
     tillbaka.hidden = !franTio;
+    plats.setAttribute('aria-label', `Kortet ${k.niva} ${k.nr}`);
     skrivutEtt.href = pdfFor.get(k.id) ?? '#';
     helskarmKnapp.hidden = !document.fullscreenEnabled;
     omKortet(k);
@@ -258,7 +262,8 @@ const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
       const namn = k.form === 'citat' ? `citat av ${k.citat?.vem}` : k.form === 'handelse' ? `${k.handelse?.ar}` : (k.bild ? data.bilder[k.bild].alt : '');
       knapp.setAttribute('aria-label', `Visa ${k.niva} ${k.nr} stort: ${namn}`);
       knapp.append(kortet(k, true));
-      knapp.addEventListener('click', () => { visaEtt(k, true); tillScenen(); });
+      // Fokus följer med till kortet, eftersom knappen göms när kortet visas.
+      knapp.addEventListener('click', () => { visaEtt(k, true); tillScenen(); plats.focus({ preventScroll: true }); });
       li.append(knapp);
       return li;
     }));
@@ -289,6 +294,9 @@ const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
     const kort = (lista ?? '').split(',').map((id) => kortMed.get(id)).filter((k): k is Kort => !!k);
     if (!kort.length) return;
     dragna = kort;
+    // Ett kort som öppnas via adressen (länkarna i tabellen Börja här) räknas som visat, som ett slumpat.
+    for (const k of kort) if (!sparat.sedda.includes(k.id)) sparat.sedda.push(k.id);
+    spara();
     if (kort.length === 1) visaEtt(kort[0], false);
     else if (valt && kortMed.has(valt)) visaEtt(kortMed.get(valt)!, true);
     else visaTio();
@@ -459,6 +467,8 @@ const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
       stanna();
       void hallVaken(false);
     } else {
+      // En klocka som startar från början räknas i statistiken, en som fortsätter efter paus inte.
+      if (kvar <= 0 || kvar === langd) (window as { goatcounter?: { count: (v: object) => void } }).goatcounter?.count({ path: `skrivkort:${metod}:klocka`, title: `${sida.dataset.titel}: klockan startad`, event: true });
       if (kvar <= 0) kvar = langd;
       klocka.classList.remove('slut');
       slutText.textContent = '';

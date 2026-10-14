@@ -73,7 +73,7 @@ const kortBredd = (i: number) => `${((kortVikter[i] / kortVikter.reduce((a, v) =
       <div class="lh-kolumner">
         <div class="lh-kol">
           <div class:list={['lh-ruta', 'lh-elevtext', passTextKort(l.pass) && 'lh-kort']} id="lathund-text">
-            <h3>{l.pass.textRubrik}<span class="lh-lank"><a href={`/stodundervisning/${id}-lathund-text.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="3" data-direkt={passUtskrift(l.pass)}>{passPdfnamn(l.pass)}</a></span></h3>
+            <h3>{l.pass.textRubrik}<span class="lh-lank"><a href={`/stodundervisning/${id}-lathund-text.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="3" data-direkt={passUtskrift(l.pass)} data-goatcounter-click={`utskrift:${id}-lathund:passet`} data-goatcounter-title={`${d.titel}: utskrift av lathundens passtext`}>{passPdfnamn(l.pass)}</a></span></h3>
             <div class="lh-ruta-kropp">
               {l.pass.titel && <p class="lh-titel">{l.pass.titel}</p>}
               {l.pass.text.map((p) => <p>{repliker(p).map((x) => (x.replik ? <em>{x.text}</em> : x.text))}</p>)}
@@ -110,7 +110,7 @@ const kortBredd = (i: number) => `${((kortVikter[i] / kortVikter.reduce((a, v) =
     </section>
 
     <section class="lh-sida" id="lathund-mall" aria-labelledby="lh-3">
-      <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-3">{l.mall.rubrik}</h2><span class="lh-etikett">{sidetikett('Mallen')}</span><span class="lh-lank"><a href={utskriftAdress(lathundensMall(d, id))} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande data-sidor-hogst="1"><span data-direkt="Skriv ut den här sidan">Den här sidan som pdf</span><span class="visually-hidden">: {l.mall.rubrik}</span></a></span></header>
+      <header class="lh-huvud"><span class="lh-kicker">Lathund</span><h2 id="lh-3">{l.mall.rubrik}</h2><span class="lh-etikett">{sidetikett('Mallen')}</span><span class="lh-lank"><a href={utskriftAdress(lathundensMall(d, id))} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande data-sidor-hogst="1" data-goatcounter-click={`utskrift:${id}-lathund:mallen`} data-goatcounter-title={`${d.titel}: utskrift av lathundens mall`}><span data-direkt="Skriv ut den här sidan">Den här sidan som pdf</span><span class="visually-hidden">: {l.mall.rubrik}</span></a></span></header>
       {l.mall.underrad && <p class="lh-underrad">{l.mall.underrad}</p>}
       <div class:list={['lh-block', { 'lh-block-matta': matta || kort }]}>
         {l.mall.block.map((b) => {
@@ -207,11 +207,11 @@ const kortBredd = (i: number) => `${((kortVikter[i] / kortVikter.reduce((a, v) =
               <p class="bara-js m-rensa"><button type="button" class="lank" data-rensa-bockar>Rensa kryssen</button></p>
             </div>
           )}
-          {(d.uppfoljning || l.material.varjePass) && (
+          {(d.uppfoljning || l.material.uppfoljning || l.material.varjePass) && (
             <div class="lh-ruta">
               <h3>Uppföljning</h3>
               <div class="lh-ruta-kropp">
-                {d.uppfoljning?.rader.map((r) => <p><strong>{r.nar}:</strong> {r.vad}</p>)}
+                {(l.material.uppfoljning ?? d.uppfoljning?.rader ?? []).map((r) => <p><strong>{r.nar}:</strong> {r.vad}</p>)}
                 {l.material.varjePass && <p><strong>Varje pass:</strong> {l.material.varjePass}</p>}
               </div>
             </div>
