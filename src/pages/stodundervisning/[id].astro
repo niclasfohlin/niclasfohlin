@@ -21,6 +21,7 @@ import { byggSerier, platsISerien, serieKoppling } from '../../lib/serie';
 import { site } from '../../data/site';
 import { bankAv, nivaFarger } from '../../lib/bank';
 import { harMaterial } from '../../lib/material';
+import { harSkrivkort, skrivkortAdress, SKRIVKORT_LANK } from '../../lib/skrivkort';
 
 export async function getStaticPaths() {
   const metoder = await publicerade('stodundervisning');
@@ -64,6 +65,8 @@ const materialLank = d.ramar ? '#ramar' : d.lektionsbank ? '#lektionsbank' : har
         <h1>{d.titel}</h1>
         {d.undertitel && <p class="undertitel">{ejBryt(d.undertitel)}</p>}
         <p class="ingress">{ejBryt(d.ingress)}</p>
+        {/* Sidan som slumpar skrivkort, överst så att den syns när metoden öppnas (Niclas 2026-10-14). */}
+        {harSkrivkort(m.id) && <p class="metod-skrivkort"><a class="knapp" href={skrivkortAdress(m.id)}>{SKRIVKORT_LANK}</a></p>}
       </header>
       <div class="faktaruta">
         <p class="faktaruta-etikett">I korthet</p>

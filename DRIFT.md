@@ -87,6 +87,7 @@ Sajten heter niclasfohlin (id `8af49398-3862-4b58-84a6-88f68d0064c1`, team nicla
 | Utskickets minne | `netlify blobs:get utskick skickat` (lagret utskick, nyckeln skickat) |
 | Funktionsloggar | `netlify logs --source functions --function utskick --json --since 30m` |
 | Funktioner lokalt | `netlify functions:serve` eller `netlify dev` (läser produktionens variabler) |
+| Ett utkast som Niclas prövar i telefonen | `netlify deploy --dir dist --functions <en tom mapp> --message "<vad>"` efter `npm run validera`, utan `--prod`: en tillfällig adress (`https://<id>--niclasfohlin.netlify.app`) med det som ligger i dist, utan bygge hos Netlify och utan funktioner, så den drar bara trafikens krediter. Prenumeration och kommentarer svarar inte där. Niclas kallar den temporär Netlify |
 
 Miljövariablerna i Netlify: `BREVO_API_KEY` (hemlig), `UTSKICK_HEMLIGHET` (hemlig), `BREVO_LIST_ID` (2), `BREVO_DOI_TEMPLATE_ID` (1), `SITE_URL` (https://niclasfohlin.se), `NODE_VERSION` (22.12.0).
 

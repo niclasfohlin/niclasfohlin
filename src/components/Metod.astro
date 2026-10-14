@@ -52,6 +52,7 @@ import Pabordet from './Pabordet.astro';
 import { bladNamn, delensRad, kartan, metodensBlad, radensDel } from '../lib/karta';
 import { veckanRyms } from '../lib/veckosida';
 import { veckansLista, veckomaterial } from '../lib/veckomaterial';
+import { harSkrivkort, skrivkortAdress, SKRIVKORT_LANK } from '../lib/skrivkort';
 // "Åk 4–5" hålls ihop i ramarnas rubriker och länkar: hårt mellanslag efter Åk, ordfog efter tankstrecket.
 const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 '));
 // koppling: den generella metodens serie med lektionsbanken, eller lektionens plats i den (src/lib/serie.ts).
@@ -327,6 +328,7 @@ const meny = [
 <div class="metod-modell">
   {meny.length > 2 && !undersida && (
     <nav class="metod-nav" aria-label="På den här sidan">
+      {harSkrivkort(id) && <a class="lathund-lank skrivkort-lank" href={skrivkortAdress(id)}>{SKRIVKORT_LANK}</a>}
       {d.lathund && <a class="lathund-lank" href={`/stodundervisning/${id}/lathund`}>Öppna lathunden</a>}
       <span class="nav-etikett" aria-hidden="true">På den här sidan</span>
       <ul>{meny.map((a) => <li><a href={`#${a.id}`} data-avsnitt={a.id}>{a.namn}</a></li>)}</ul>

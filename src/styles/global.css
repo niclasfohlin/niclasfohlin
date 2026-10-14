@@ -527,6 +527,10 @@ button.lank:hover { color: var(--farg-accent); }
 .metod-nav a[aria-current="true"] { color: var(--farg-accent); font-weight: 600; }
 /* Länken till lathunden står för sig, före avsnittslistan: den lämnar sidan. */
 .metod-nav .lathund-lank { display: inline-block; font-weight: 700; color: var(--farg-accent); text-decoration: underline; text-underline-offset: 0.15em; margin: 0 0 0.75rem; }
+/* Sidan som slumpar skrivkort (src/lib/skrivkort.ts) står först, som lathunden lämnar den sidan. */
+.metod-nav .skrivkort-lank { margin-right: 1.1rem; }
+.metod-skrivkort { margin: 1rem 0 0; }
+.metodkort .skrivkort-lank { font-weight: 600; }
 .metod-modell section, .metod-modell .m-ruta[id], .metod-modell .m-ram h3[id] { scroll-margin-top: 1.5rem; }
 .metod-modell { font-size: 1.0625rem; line-height: 1.65; }
 .metod-text { max-width: 46rem; min-width: 0; }
@@ -538,7 +542,7 @@ button.lank:hover { color: var(--farg-accent); }
   .metod-modell > .metod-nav ul a { display: block; padding: 0.4rem 0.75rem; border-left: 3px solid transparent; color: var(--farg-text-svag); }
   .metod-modell > .metod-nav ul a:hover { color: var(--farg-accent); background: var(--farg-ton-svag); }
   .metod-modell > .metod-nav ul a[aria-current="true"] { border-left-color: var(--farg-accent); color: var(--farg-accent); font-weight: 600; background: var(--farg-ton); }
-  .metod-modell > .metod-nav .lathund-lank { margin: 0 0 0.75rem 0.75rem; }
+  .metod-modell > .metod-nav .lathund-lank { display: block; margin: 0 0 0.75rem 0.75rem; }
 }
 .metod-modell > p, .metod-modell section > p, .metod-text > p, .m-pass-huvud > p { margin: 0 0 1em; }
 .metod-modell h2 { font-family: var(--typsnitt-ui); font-size: 1.5rem; color: var(--farg-text); margin: 2em 0 0.5em; }
@@ -2096,4 +2100,145 @@ html.js .bara-js { display: inline-block; }
 @media (max-width: 40rem) {
   .m-lista td { overflow-wrap: anywhere; }
   .m-lista.elev:has(tr > td:nth-child(3)) td { font-size: 1.05rem; padding: 0.4rem 0.45rem; }
+}
+
+/* Skrivkorten och sidan som slumpar dem (Kortskrivning: skriv varje dag, src/pages/stodundervisning/[id]/skrivkort.astro;
+   Niclas 2026-10-14). Kortet har skrivkortens form ur metodriggen (build/skrivkortform.js), som Word-filen har den
+   (src/lib/skrivkortform.ts): en ram i nivåns färg, fotot i 3:2 överst, texten i elevens typsnitt, årtalet och
+   citattecknet i Anton, namnet under ett citat i Cinzel, och foten med uppgiften, nivån och numret och bildens upphov.
+   Måtten står i kortets bredd (cqi), så att kortet ser likadant ut stort på en projektor och litet bland tio, och
+   storlekarna är riggens punkter delade med kortets bredd i Word (510 punkter). Texten krymper där den inte ryms
+   (--skala, sidans skript). Klockan är en time timer: den röda ytan är tiden som är kvar. */
+:root { --sk-text: #2b2622; --sk-dov: #645c53; --sk-linje: #d9d2c7; --klocka-yta: #c8322a; --klocka-yta-ljus: #fbe3e0; }
+.sk-huvud .ingress { margin-bottom: 0.5rem; }
+.sk-val { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1.75rem; margin: 0.5rem 0 1rem; padding: 0.6rem 0; background: var(--farg-bakgrund); font-family: var(--typsnitt-ui); }
+@media (min-width: 48rem) {
+  .sk-val { position: sticky; top: 0; z-index: 3; border-bottom: 1px solid var(--farg-kant); }
+}
+.sk-valrad { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.7rem; }
+.sk-etikett { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); }
+.sk-segment { display: inline-flex; border: 1.5px solid var(--farg-accent); border-radius: 6px; overflow: hidden; }
+.sk-antal { min-height: 2.75rem; padding: 0.35rem 0.95rem; border: 0; background: var(--farg-yta); color: var(--farg-accent); font: 600 1rem/1.2 var(--typsnitt-ui); cursor: pointer; }
+.sk-antal + .sk-antal { border-left: 1.5px solid var(--farg-accent); }
+.sk-antal[aria-pressed="true"] { background: var(--farg-accent); color: #fff; }
+.sk-nivaknappar { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.sk-niva { --niva: var(--farg-text); display: inline-flex; align-items: center; justify-content: flex-start; min-height: 2.75rem; min-width: 6.5rem; padding: 0.3rem 0.85rem 0.3rem 0.7rem; font-weight: 700; font-size: 1.05rem; border: 1.5px solid color-mix(in srgb, var(--niva) 45%, white); border-left: 6px solid var(--niva); border-radius: 6px; background: var(--farg-yta); color: var(--farg-text); font-family: var(--typsnitt-ui); text-align: left; cursor: pointer; }
+.sk-niva:hover { background: color-mix(in srgb, var(--niva) 9%, white); }
+.sk-niva.senast { background: color-mix(in srgb, var(--niva) 14%, white); border-color: var(--niva); }
+.sk-niva:active { transform: translateY(1px); }
+@media (max-width: 30rem) {
+  .sk-valrad, .sk-nivaknappar { width: 100%; }
+  .sk-nivaknappar { display: grid; grid-template-columns: 1fr 1fr; }
+  .sk-segment { flex: 1; }
+  .sk-antal { flex: 1; }
+}
+
+.sk-scen { margin: 0 0 1.5rem; }
+.sk-tom { margin: 0; padding: 2.5rem 1rem; border: 1.5px dashed var(--farg-kant); border-radius: var(--radie); text-align: center; color: var(--farg-text-svag); font-family: var(--typsnitt-ui); }
+.sk-scen:not([data-lage="tom"]) > .sk-tom { display: none; }
+/* Ett kort: kortet så högt som fönstret under urvalet, och klockan bredvid. På en smal skärm står klockan under. */
+.sk-ett { display: grid; gap: 1rem; }
+.sk-kortplats { min-width: 0; }
+@media (min-width: 48rem) {
+  .sk-ett { grid-template-columns: minmax(0, calc((100svh - 6.5rem) * 0.75)) minmax(15rem, 1fr); gap: 1.5rem; align-items: start; }
+}
+.sk-sidospalt { display: grid; gap: 1rem; align-content: start; min-width: 0; }
+.sk-atgarder { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; font-family: var(--typsnitt-ui); }
+.sk-atgarder .knapp { justify-content: center; font-size: 0.95rem; cursor: pointer; }
+.sk-atgarder .knapp[aria-busy="true"] { opacity: 0.7; cursor: progress; }
+.sk-om { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); border-top: 1px solid var(--farg-kant); padding-top: 0.25rem; }
+.sk-om summary { cursor: pointer; min-height: 2.75rem; display: flex; align-items: center; font-weight: 600; color: var(--farg-text); }
+.sk-om p { margin: 0 0 0.6em; }
+/* Helskärm: kortet och klockan fyller skärmen, för projektorn. */
+.sk-ett:fullscreen { background: var(--farg-bakgrund); padding: 2vh 2vw; grid-template-columns: minmax(0, calc(96vh * 0.75)) minmax(16rem, 1fr); align-items: center; overflow: auto; }
+.sk-ett:fullscreen .sk-urtavla { width: min(100%, 44vh); }
+.sk-ett:fullscreen .sk-tid { font-size: 7vh; }
+.sk-ett:fullscreen .sk-om, .sk-ett:fullscreen #sk-skrivut-ett, .sk-ett:fullscreen #sk-tillbaka { display: none; }
+
+/* Tio kort: ett rutnät att välja ur. */
+.sk-tio-rad { justify-content: space-between; margin: 0 0 0.9rem; }
+.sk-tio-not { margin: 0; color: var(--farg-text-svag); font-size: 0.95rem; }
+.sk-tio { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(10.5rem, 45%), 1fr)); gap: 1rem; }
+.sk-val-kort { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; text-align: left; border-radius: 3px; }
+.sk-val-kort:hover .skrivkort, .sk-val-kort:focus-visible .skrivkort { outline: 3px solid var(--farg-accent); outline-offset: 3px; }
+.sk-val-kort:focus-visible { outline: none; }
+
+/* Kortet. */
+.skrivkort { --niva: #4b3a2f; --skala: 1; container-type: inline-size; display: flex; flex-direction: column; width: 100%; aspect-ratio: 3 / 4; background: #fff; border: 2px solid var(--niva); color: var(--sk-text); font-family: var(--typsnitt-elev); overflow: hidden; }
+.skrivkort .sk-bild { display: block; flex: none; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; background: var(--farg-ton); }
+.skrivkort .sk-innehall { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; justify-content: center; padding: 4cqi 6.3cqi; overflow: hidden; }
+.skrivkort p { margin: 0; }
+.skrivkort .sk-text { font-size: calc(7.45cqi * var(--skala)); line-height: 1.32; overflow-wrap: break-word; }
+.skrivkort[data-niva="Medel"] .sk-text { font-size: calc(6.27cqi * var(--skala)); }
+.skrivkort[data-niva="Avancerat"] .sk-text { font-size: calc(5.3cqi * var(--skala)); }
+.skrivkort .sk-egen { margin-top: calc(6cqi * var(--skala)); }
+/* Citatet: ett stort citattecken i nivåns färg, citatet, en kort linje och vem som skrev det. */
+.skrivkort .sk-tecken { display: block; height: calc(11cqi * var(--skala)); font-family: 'Anton', var(--typsnitt-ui); font-size: calc(21cqi * var(--skala)); line-height: 0.95; color: var(--niva); }
+.skrivkort .sk-citatrad { margin: 0; }
+.skrivkort .sk-citatrad p { font-size: calc(7cqi * var(--skala)); line-height: 1.3; }
+.skrivkort .sk-versrad { display: block; }
+.skrivkort .sk-vers.hel .sk-versrad { white-space: nowrap; }
+.skrivkort.liten .sk-vers .sk-versrad { display: inline; white-space: normal; }
+.skrivkort.liten .sk-vers .sk-versrad + .sk-versrad::before { content: ' / '; }
+.skrivkort .sk-linje { display: block; flex: none; width: 16.7cqi; height: 0; border-top: max(2px, 0.45cqi) solid var(--niva); margin: calc(4.5cqi * var(--skala)) 0 calc(2.5cqi * var(--skala)); }
+.skrivkort .sk-vem { line-height: 1.3; }
+.skrivkort .sk-namn { font-family: 'Cinzel', var(--typsnitt-rubrik); font-size: calc(2.95cqi * var(--skala)); }
+.skrivkort .sk-verk { font-size: calc(2.45cqi * var(--skala)); color: var(--sk-dov); margin-left: 0.4em; }
+/* Händelsen: årtalet stort i nivåns färg och meningen om vad som hände. Utan foto är årtalet dubbelt så stort. */
+.skrivkort .sk-ar { font-family: 'Anton', var(--typsnitt-ui); font-size: calc(15cqi * var(--skala)); line-height: 1.05; color: var(--niva); }
+.skrivkort .sk-vad { font-size: calc(5.3cqi * var(--skala)); line-height: 1.32; margin-top: calc(1cqi * var(--skala)); }
+.skrivkort.form-handelse:not(:has(.sk-bild)) .sk-ar { font-size: calc(29cqi * var(--skala)); }
+.skrivkort.form-handelse:not(:has(.sk-bild)) .sk-vad { font-size: calc(6.7cqi * var(--skala)); margin-top: calc(2.5cqi * var(--skala)); }
+/* Foten: uppgiften och nivån med numret på en rad, och bildens upphov under. */
+.skrivkort .sk-fot { flex: none; border-top: 1px solid var(--sk-linje); padding: 2.4cqi 3.5cqi 2.2cqi; }
+.skrivkort .sk-fotrad { display: flex; align-items: center; justify-content: space-between; gap: 2cqi; }
+.skrivkort .sk-fraga { font-size: max(2.35cqi, 0.72rem); line-height: 1.25; }
+.skrivkort .sk-markning { flex: none; margin-left: auto; padding: 0.35em 0.8em; background: color-mix(in srgb, var(--niva) 82%, black); color: #fff; font-family: 'Cinzel', var(--typsnitt-ui); font-size: max(2.25cqi, 0.68rem); line-height: 1; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+.skrivkort .sk-upphov { margin-top: 0.8cqi; font-family: Arial, var(--typsnitt-ui); font-size: max(1.5cqi, 0.6rem); line-height: 1.3; color: var(--sk-dov); }
+/* Bland tio: samma kort i liten form, med texten avskuren där den inte ryms och bara nivån och numret i foten. */
+.skrivkort.liten .sk-innehall { justify-content: flex-start; padding: 5cqi 6cqi; }
+.skrivkort.liten .sk-text, .skrivkort.liten .sk-citatrad p, .skrivkort.liten .sk-vad { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden; }
+.skrivkort.liten.form-citat .sk-citatrad p { -webkit-line-clamp: 5; }
+.skrivkort.liten .sk-fraga, .skrivkort.liten .sk-upphov { display: none; }
+.skrivkort.liten .sk-markning { font-size: max(4.2cqi, 0.62rem); }
+
+/* Klockan. */
+.sk-klocka { display: grid; justify-items: center; gap: 0.55rem; padding: 1rem; border: 1px solid var(--farg-kant); border-radius: var(--radie); background: var(--farg-ton-svag); font-family: var(--typsnitt-ui); }
+.sk-urtavla { width: min(100%, 15rem); height: auto; }
+.sk-urtavla-bakgrund { fill: #fff; stroke: var(--farg-text); stroke-width: 2.5; }
+.sk-yta { fill: var(--klocka-yta); }
+.sk-streck line { stroke: var(--farg-text); stroke-width: 1.2; }
+.sk-streck line.fem { stroke-width: 2.6; }
+.sk-mitt { fill: var(--farg-text); }
+.sk-tid { margin: 0; font-size: 2.6rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+.sk-slut { margin: 0; min-height: 1.3em; font-weight: 700; color: var(--klocka-yta); }
+.sk-slut:empty { display: none; }
+.sk-klocka.slut .sk-urtavla-bakgrund { animation: sk-blinka 1s ease-in-out 4; }
+@keyframes sk-blinka { 50% { fill: var(--klocka-yta-ljus); } }
+@media (prefers-reduced-motion: reduce) { .sk-klocka.slut .sk-urtavla-bakgrund { animation: none; fill: var(--klocka-yta-ljus); } }
+.sk-minuter { display: flex; align-items: center; gap: 0.4rem; }
+.sk-steg, .sk-ljud { display: inline-grid; place-items: center; width: 2.75rem; height: 2.75rem; padding: 0; border: 1.5px solid var(--farg-accent); border-radius: 6px; background: var(--farg-yta); color: var(--farg-accent); font: 700 1.4rem/1 var(--typsnitt-ui); cursor: pointer; }
+.sk-steg:disabled { opacity: 0.4; cursor: default; }
+.sk-minutfalt { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.95rem; color: var(--farg-text-svag); }
+.sk-minutfalt input { width: 3.6rem; min-height: 2.75rem; border: 1.5px solid var(--farg-kant); border-radius: 6px; background: var(--farg-yta); color: var(--farg-text); font: 700 1.3rem var(--typsnitt-ui); text-align: center; -moz-appearance: textfield; appearance: textfield; }
+.sk-minutfalt input::-webkit-outer-spin-button, .sk-minutfalt input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.sk-minutfalt input:disabled { background: transparent; color: var(--farg-text); border-color: transparent; }
+.sk-klockknappar { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
+.sk-klockknappar .knapp { justify-content: center; border: 0; cursor: pointer; font-size: 1rem; }
+.sk-klockknappar .knapp.sekundar { border: 1.5px solid var(--farg-accent); }
+.sk-start { min-width: 7rem; }
+.sk-ljud { padding: 0.5rem; }
+.sk-ljud svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.sk-ljud .sk-hogtalare { fill: currentColor; }
+.sk-ljud[aria-pressed="true"] .sk-kryss, .sk-ljud[aria-pressed="false"] .sk-vagor { display: none; }
+.sk-ljud[aria-pressed="false"] { color: var(--farg-text-svag); border-color: var(--farg-kant); }
+/* På en smal skärm står klockan under kortet i en rad: urtavlan till vänster och tiden och knapparna bredvid. */
+@media (max-width: 47.99rem) {
+  .sk-klocka { grid-template-columns: 7rem minmax(0, 1fr); justify-items: start; align-items: center; column-gap: 1rem; }
+  .sk-urtavla { grid-row: 1 / span 4; width: 7rem; }
+  .sk-tid { font-size: 2.2rem; }
+  .sk-klockknappar { justify-content: flex-start; }
+}
+@media print {
+  .skrivkortsida .sk-val, .skrivkortsida .sk-sidospalt, .skrivkortsida .sk-tio-rad { display: none; }
 }

@@ -1,0 +1,583 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { publicerade } from '../../../lib/innehall';
+import { metodAdress, UPPHOV } from '../../../lib/metod';
+import { bildAdress, kortPdfNamn, skrivkortAv, SKRIVKORT_LANK } from '../../../lib/skrivkort';
+import { site } from '../../../data/site';
+
+// /stodundervisning/<id>/skrivkort: sidan som slumpar skrivkort ur metodens bibliotek (src/lib/skrivkort.ts), som
+// Niclas beskrev den 2026-10-14 (metodriggens out/TILL-SAJTEN.md, under Sidan som slumpar):
+//
+//   Urvalet   Läraren väljer ett kort eller tio och trycker på Alla, Bas, Medel eller Avancerat. Varje tryck slumpar nya
+//             kort ur det urvalet, så att läraren kan trycka om och om igen tills ett kort passar.
+//   Ett kort  visas stort, med klockan bredvid. Tio kort visas tillsammans, och ett tryck på ett av dem visar det ensamt
+//             och stort med klockan.
+//   Klockan   räknar ned och visar tiden som en yta som krymper, som en time timer: 1 till 99 minuter, går att pausa
+//             och starta om, och ringer när tiden är slut, med en knapp för ljudet. Kortet och klockan syns samtidigt.
+//   Utskrift  Det som har slumpats går att skriva ut, ett kort eller alla tio. Utskriften är kortets sida ur nivåns
+//             Word-fil, som Word har sparat som pdf (src/lib/skrivkortform.ts, scripts/bankpdf.mjs, scripts/pdfdelar.mjs),
+//             så att utskriften och Word-filen är samma sida (METODER.md under Utskriften). Tio kort fogas ihop i
+//             webbläsaren av de tio sidorna.
+//
+// Sajten avgjorde resten: ljudet är en klocka som ringer tre gånger, gjord i webbläsaren utan ljudfil; antalet, den
+// senaste nivån, minuterna och ljudet sparas i webbläsaren till nästa gång, liksom vilka kort som har visats, så att ett
+// kort inte kommer igen förrän urvalets alla kort har varit framme (riggens förslag 2026-10-13); och på en smal skärm står
+// klockan under kortet. Adressen bär korten (#bas-017), så att en omladdning visar samma kort. Knapparna heter bara som
+// nivåerna, utan årskurser (Niclas 2026-10-14: "Kalla dem bara Bas, Medel och Avancerat").
+//
+// Pixabays licens låter bilden stå på kortet men inte delas ut som lös fil (riggens brev), så sidan har ingen knapp som
+// laddar ner en bild för sig. Det läraren behöver veta om kortet, bildens motiv, en händelses bakgrund och en översättning,
+// står under kortet i en rad som fälls ut och aldrig på kortet.
+export async function getStaticPaths() {
+  const metoder = await publicerade('stodundervisning');
+  return metoder.filter((m) => skrivkortAv(m.id)).map((m) => ({ params: { id: m.id }, props: { m } }));
+}
+
+const { m } = Astro.props;
+const d = m.data;
+const b = skrivkortAv(m.id)!;
+const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/skrivkort`;
+// Det sidans skript behöver, utan källornas adresser och mått, som bara läraren läser under kortet.
+const data = {
+  fraga: b.fraga,
+  fragaBild: b.fragaBild,
+  nivaer: b.nivaer.map((n) => ({ namn: n.namn, farg: `#${n.farg}` })),
+  kort: b.kort.map((k) => ({ id: k.id, niva: k.niva, nr: k.nr, form: k.form, ...(k.text ? { text: k.text } : {}), ...(k.bild ? { bild: k.bild } : {}), ...(k.citat ? { citat: k.citat } : {}), ...(k.handelse ? { handelse: k.handelse } : {}) })),
+  bilder: Object.fromEntries(Object.entries(b.bilder).map(([namn, x]) => [namn, {
+    stor: bildAdress(m.id, x.fil), liten: bildAdress(m.id, x.liten), alt: x.alt, rad: x.rad,
+    ...(x.motiv ? { motiv: x.motiv } : {}), ...(x.bakgrund ? { bakgrund: x.bakgrund } : {}), ...(x.ai ? { ai: true } : {}),
+    ...(x.adress ? { adress: x.adress } : {}), ...(x.licens ? { licens: x.licens } : {}), ...(x.licensadress ? { licensadress: x.licensadress } : {}), ...(x.upphov ? { upphov: x.upphov } : {}),
+  }])),
+};
+const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
+---
+
+<Base title={`${SKRIVKORT_LANK}: ${d.titel}`} description={`Slumpa fram ett skrivkort eller tio ur ${b.kort.length} kort på Bas, Medel och Avancerat, visa kortet stort med en klocka som alla ser, och skriv ut det.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
+  <article class="skrivkortsida" data-metod={m.id} data-titel={d.titel}>
+    <header class="sk-huvud">
+      <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${m.id}`}>{d.titel}</a> · Skrivkort</p>
+      <h1>{SKRIVKORT_LANK}</h1>
+      <p class="ingress">Välj ett kort eller tio och tryck på en nivå. Varje tryck ger nya kort. Visa kortet stort med klockan, eller skriv ut det.</p>
+    </header>
+
+    <div class="sk-val">
+      <div class="sk-valrad" role="group" aria-labelledby="sk-antal-etikett">
+        <span class="sk-etikett" id="sk-antal-etikett">Antal</span>
+        <div class="sk-segment">
+          <button type="button" class="sk-antal" data-antal="1" aria-pressed="true">Ett kort</button>
+          <button type="button" class="sk-antal" data-antal="10" aria-pressed="false">Tio kort</button>
+        </div>
+      </div>
+      <div class="sk-valrad" role="group" aria-labelledby="sk-niva-etikett">
+        <span class="sk-etikett" id="sk-niva-etikett">Slumpa ur</span>
+        <div class="sk-nivaknappar">
+          <button type="button" class="sk-niva" data-niva="Alla">Alla</button>
+          {b.nivaer.map((n) => (
+            <button type="button" class="sk-niva" data-niva={n.namn} style={`--niva:#${n.farg}`}>{n.namn}</button>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="sk-scen" id="sk-scen" data-lage="tom">
+      <p class="sk-tom">Tryck på Alla, Bas, Medel eller Avancerat.</p>
+      <div class="sk-ett" id="sk-ett" hidden>
+        <div class="sk-kortplats" id="sk-kortplats"></div>
+        <div class="sk-sidospalt">
+        <section class="sk-klocka" id="sk-klocka" aria-label="Klockan">
+          <svg class="sk-urtavla" viewBox="-110 -110 220 220" role="img" aria-labelledby="sk-tid">
+            <circle class="sk-urtavla-bakgrund" r="104"></circle>
+            <path class="sk-yta" id="sk-yta" d=""></path>
+            <g class="sk-streck" id="sk-streck"></g>
+            <circle class="sk-mitt" r="7"></circle>
+          </svg>
+          <p class="sk-tid" id="sk-tid" aria-live="off">3:00</p>
+          <p class="sk-slut" id="sk-slut" role="status"></p>
+          <div class="sk-minuter">
+            <button type="button" class="sk-steg" data-steg="-1" aria-label="En minut kortare">−</button>
+            <label class="sk-minutfalt"><input type="number" id="sk-minuter" min="1" max="99" step="1" value="3" inputmode="numeric" /><span>min</span></label>
+            <button type="button" class="sk-steg" data-steg="1" aria-label="En minut längre">+</button>
+          </div>
+          <div class="sk-klockknappar">
+            <button type="button" class="knapp sk-start" id="sk-start">Starta</button>
+            <button type="button" class="knapp sekundar sk-omstart" id="sk-omstart">Börja om</button>
+            <button type="button" class="sk-ljud" id="sk-ljud" aria-pressed="true" aria-label="Ljudet när tiden är slut" title="Ljudet när tiden är slut">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path class="sk-hogtalare" d="M4 9h4l5-4v14l-5-4H4z"></path><path class="sk-vagor" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"></path><path class="sk-kryss" d="M16.5 9.5l5 5M21.5 9.5l-5 5"></path></svg>
+            </button>
+          </div>
+        </section>
+        <div class="sk-atgarder">
+          <a class="knapp sekundar" id="sk-skrivut-ett" href="#" target="_blank" rel="noopener">Skriv ut kortet</a>
+          <button type="button" class="knapp sekundar" id="sk-helskarm" hidden>Helskärm</button>
+          <button type="button" class="knapp sekundar" id="sk-tillbaka" hidden>Tillbaka till de tio</button>
+        </div>
+        <details class="sk-om" id="sk-om" hidden>
+          <summary>Om kortet, till dig</summary>
+          <div id="sk-om-text"></div>
+        </details>
+        </div>
+      </div>
+      <div class="sk-tio-ram" id="sk-tio-ram" hidden>
+        <div class="sk-atgarder sk-tio-rad">
+          <p class="sk-tio-not">Tryck på ett kort för att visa det stort med klockan.</p>
+          <a class="knapp sekundar" id="sk-skrivut-tio" href="#" target="_blank" rel="noopener">Skriv ut alla tio</a>
+        </div>
+        <ol class="sk-tio" id="sk-tio"></ol>
+      </div>
+    </div>
+
+    <noscript><p class="sk-tom">Sidan behöver JavaScript för att slumpa korten och visa klockan.</p></noscript>
+
+    <p class="upphov">{UPPHOV}. Skrivkorten till <a href={`/stodundervisning/${m.id}`}>{d.titel}</a>: {b.kort.length} kort, {b.nivaer.map((n) => `${antal(n.namn)} på ${n.namn}`).join(', ')}. Bildernas upphov står i kortets fot. {adress}</p>
+
+    {/* Varje korts pdf, med filens version i adressen (scripts/filversion.mjs sätter den i länkarna efter bygget), så att
+        webbläsaren aldrig ger ett äldre kort än sidan. Skriptet läser adresserna härifrån. */}
+    <template id="sk-pdf">{b.kort.map((k) => <a data-kort={k.id} href={`/stodundervisning/${kortPdfNamn(m.id, k.id)}.pdf`}></a>)}</template>
+    <script type="application/json" id="sk-data" set:html={JSON.stringify(data).replace(/</g, '\\u003c')}></script>
+  </article>
+</Base>
+
+<script>
+  type Kort = { id: string; niva: string; nr: number; form: 'bild' | 'citat' | 'handelse'; text?: string; bild?: string; citat?: { rad: string; vem: string; verk?: string; ar?: number | string; oversatt?: string }; handelse?: { ar: number | string; vad: string; plats?: string; bakgrund?: string } };
+  type Bild = { stor: string; liten: string; alt: string; rad: string; motiv?: string; bakgrund?: string; ai?: boolean; adress?: string; licens?: string; licensadress?: string; upphov?: string };
+  type Data = { fraga: string; fragaBild: string; nivaer: { namn: string; farg: string }[]; kort: Kort[]; bilder: Record<string, Bild> };
+
+  const sida = document.querySelector<HTMLElement>('.skrivkortsida')!;
+  const metod = sida.dataset.metod!;
+  const data: Data = JSON.parse(document.getElementById('sk-data')!.textContent!);
+  const kortMed = new Map(data.kort.map((k) => [k.id, k]));
+  const pdfFor = new Map([...(document.getElementById('sk-pdf') as HTMLTemplateElement).content.querySelectorAll<HTMLAnchorElement>('a[data-kort]')].map((a) => [a.dataset.kort!, a.getAttribute('href')!]));
+  const farg = (niva: string) => data.nivaer.find((n) => n.namn === niva)?.farg ?? '#4b3a2f';
+  const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+
+  // Det som sparas till nästa gång, i den här webbläsaren. Utan lagring (privat fönster) fungerar sidan ändå.
+  const NYCKEL = `skrivkort:${metod}`;
+  type Sparat = { antal: number; niva?: string; minuter: number; ljud: boolean; sedda: string[] };
+  const sparat: Sparat = (() => {
+    const forval: Sparat = { antal: 1, minuter: 3, ljud: true, sedda: [] };
+    try { return { ...forval, ...JSON.parse(localStorage.getItem(NYCKEL) ?? '{}') }; } catch { return forval; }
+  })();
+  const spara = () => { try { localStorage.setItem(NYCKEL, JSON.stringify(sparat)); } catch { /* utan lagring */ } };
+
+  // ---------- Slumpen ----------
+  // Ett kort kommer inte igen förrän urvalets alla kort har varit framme. När det inte finns nog med kort som inte har
+  // visats börjar urvalet om, och de kort som redan står på skärmen dras inte igen i samma tryck.
+  const slumpa = <T,>(xs: T[]) => { const a = [...xs]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  function dra(niva: string, n: number): Kort[] {
+    const urval = data.kort.filter((k) => niva === 'Alla' || k.niva === niva);
+    const sedda = new Set(sparat.sedda);
+    let nya = urval.filter((k) => !sedda.has(k.id));
+    const valda: Kort[] = slumpa(nya).slice(0, n);
+    if (valda.length < n) {
+      // Urvalet börjar om: dess kort räknas inte längre som visade.
+      const iUrvalet = new Set(urval.map((k) => k.id));
+      sparat.sedda = sparat.sedda.filter((id) => !iUrvalet.has(id));
+      nya = urval.filter((k) => !valda.includes(k));
+      valda.push(...slumpa(nya).slice(0, n - valda.length));
+    }
+    sparat.sedda.push(...valda.map((k) => k.id));
+    spara();
+    return valda;
+  }
+
+  // ---------- Kortet ----------
+  const el = (tag: string, klass?: string, text?: string) => { const e = document.createElement(tag); if (klass) e.className = klass; if (text !== undefined) e.textContent = text; return e; };
+  // Raderna i en vers står på egna rader, och varje versrad står hel så länge texten inte blir mindre än två tredjedelar
+  // av sin storlek, som i Word (riggens skrivkortform.js: 36 punkter och nedåt till 24). Sedan får raderna brytas.
+  const rader = (p: HTMLElement, text: string) => {
+    const delar = text.split('\n').filter(Boolean);
+    if (delar.length < 2) { p.textContent = text; return; }
+    p.classList.add('sk-vers', 'hel');
+    for (const r of delar) p.append(el('span', 'sk-versrad', r));
+  };
+  function kortet(k: Kort, liten: boolean): HTMLElement {
+    const bild = k.bild ? data.bilder[k.bild] : undefined;
+    const egen = (k.text ?? '').trim();
+    const utanFraga = k.form === 'bild' && !egen;
+    const f = el('div', `skrivkort form-${k.form}${liten ? ' liten' : ''}`);
+    f.style.setProperty('--niva', farg(k.niva));
+    f.dataset.niva = k.niva;
+    f.dataset.kort = k.id;
+    const innehall = el('div', 'sk-innehall');
+    const img = () => {
+      const i = document.createElement('img');
+      i.className = 'sk-bild';
+      i.src = liten ? bild!.liten : bild!.stor;
+      i.alt = bild!.alt;
+      i.width = liten ? 480 : 1200;
+      i.height = liten ? 320 : 800;
+      i.decoding = 'async';
+      return i;
+    };
+    if (k.form === 'bild') {
+      if (bild) f.append(img());
+      const t = el('p', `sk-text${utanFraga ? ' sk-uppgift' : ''}`);
+      t.textContent = egen || data.fragaBild;
+      innehall.append(t);
+    } else if (k.form === 'citat' && k.citat) {
+      innehall.append(el('span', 'sk-tecken', '”'));
+      const q = el('blockquote', 'sk-citatrad');
+      const p = el('p'); rader(p, k.citat.rad); q.append(p);
+      innehall.append(q, el('span', 'sk-linje'));
+      const vem = el('p', 'sk-vem');
+      vem.append(el('span', 'sk-namn', k.citat.vem));
+      const under = [k.citat.verk, k.citat.ar].filter(Boolean).join(', ');
+      if (under) vem.append(' ', el('span', 'sk-verk', under));
+      innehall.append(vem);
+      if (egen) innehall.append(el('p', 'sk-text sk-egen', egen));
+    } else if (k.form === 'handelse' && k.handelse) {
+      innehall.append(el('p', 'sk-ar', String(k.handelse.ar)), el('p', 'sk-vad', k.handelse.vad));
+      if (egen) innehall.append(el('p', 'sk-text sk-egen', egen));
+    }
+    f.append(innehall);
+    // En händelse med foto har bilden närmast foten, som i Word.
+    if (k.form === 'handelse' && bild) f.append(img());
+    const fot = el('div', 'sk-fot');
+    const rad1 = el('div', 'sk-fotrad');
+    rad1.append(el('span', 'sk-fraga', utanFraga ? '' : data.fraga), el('span', 'sk-markning', `${k.niva} · ${k.nr}`));
+    fot.append(rad1);
+    if (bild) fot.append(el('p', 'sk-upphov', bild.rad));
+    f.append(fot);
+    return f;
+  }
+  // Texten så stor som kortet rymmer: från nivåns storlek och nedåt, tills innehållet ryms över foten.
+  function passa(kort: HTMLElement) {
+    const inne = kort.querySelector<HTMLElement>('.sk-innehall');
+    if (!inne || kort.classList.contains('liten')) return;
+    const bredd = kort.clientWidth;
+    let skala = 1;
+    kort.style.setProperty('--skala', '1');
+    const vers = kort.querySelector<HTMLElement>('.sk-vers');
+    if (vers) {
+      vers.classList.add('hel');
+      while (skala > 0.68 && vers.scrollWidth > vers.clientWidth + 1) { skala -= 0.02; kort.style.setProperty('--skala', skala.toFixed(2)); }
+      if (vers.scrollWidth > vers.clientWidth + 1) vers.classList.remove('hel');
+    }
+    while (skala > 0.45 && inne.scrollHeight > inne.clientHeight + 1) {
+      skala -= 0.04;
+      kort.style.setProperty('--skala', skala.toFixed(2));
+    }
+    kort.dataset.bredd = String(bredd);
+  }
+
+  // ---------- Läget ----------
+  const scen = $('sk-scen');
+  const valrad = document.querySelector<HTMLElement>('.sk-val')!;
+  const ett = $('sk-ett');
+  const tioRam = $('sk-tio-ram');
+  const tio = $<HTMLOListElement>('sk-tio');
+  const plats = $('sk-kortplats');
+  const tillbaka = $<HTMLButtonElement>('sk-tillbaka');
+  const skrivutEtt = $<HTMLAnchorElement>('sk-skrivut-ett');
+  const skrivutTio = $<HTMLAnchorElement>('sk-skrivut-tio');
+  const helskarmKnapp = $<HTMLButtonElement>('sk-helskarm');
+  // Efter en dragning står korten direkt under urvalet, så att kortet och klockan syns hela och urvalet går att trycka
+  // på igen utan att rulla.
+  const tillScenen = () => {
+    const under = valrad.getBoundingClientRect().bottom;
+    const topp = scen.getBoundingClientRect().top;
+    const fast = getComputedStyle(valrad).position === 'sticky';
+    const mal = fast ? under + 12 : 12;
+    if (Math.abs(topp - mal) > 4) window.scrollBy({ top: topp - mal, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  };
+  const om = $<HTMLDetailsElement>('sk-om');
+  let dragna: Kort[] = [];
+
+  function omKortet(k: Kort) {
+    const ut = $('sk-om-text');
+    ut.replaceChildren();
+    const bild = k.bild ? data.bilder[k.bild] : undefined;
+    const p = (text: string) => ut.append(el('p', undefined, text));
+    if (k.handelse) { if (k.handelse.plats) p(`Platsen: ${k.handelse.plats}.`); if (k.handelse.bakgrund) p(k.handelse.bakgrund); }
+    if (k.citat?.oversatt) p(k.citat.oversatt);
+    if (bild?.motiv) p(`Bilden: ${bild.motiv}.`.replace(/\.\.$/, '.'));
+    if (bild?.bakgrund) p(bild.bakgrund);
+    if (bild) {
+      const kalla = el('p', 'sk-kalla');
+      kalla.append(`${bild.rad} `);
+      if (bild.adress) { const a = el('a', undefined, 'Bildens källa') as HTMLAnchorElement; a.href = bild.adress; a.rel = 'noopener'; a.target = '_blank'; kalla.append(a); }
+      if (bild.licensadress && bild.licens) { kalla.append(', '); const a = el('a', undefined, bild.licens) as HTMLAnchorElement; a.href = bild.licensadress; a.rel = 'noopener'; a.target = '_blank'; kalla.append(a); }
+      kalla.append('.');
+      ut.append(kalla);
+    }
+    om.hidden = !ut.childElementCount;
+  }
+
+  function visaEtt(k: Kort, franTio: boolean) {
+    scen.dataset.lage = 'ett';
+    tioRam.hidden = true;
+    ett.hidden = false;
+    const kort = kortet(k, false);
+    plats.replaceChildren(kort);
+    kort.querySelector('img')?.addEventListener('load', () => passa(kort), { once: true });
+    passa(kort);
+    // Elevens typsnitt, Anton och Cinzel hämtas först när ett kort visas, och texten tar annan plats när de har kommit.
+    void document.fonts?.ready.then(() => { if (kort.isConnected) passa(kort); });
+    tillbaka.hidden = !franTio;
+    skrivutEtt.href = pdfFor.get(k.id) ?? '#';
+    helskarmKnapp.hidden = !document.fullscreenEnabled;
+    omKortet(k);
+    om.open = false;
+    history.replaceState(null, '', `#${franTio ? `${dragna.map((x) => x.id).join(',')}/${k.id}` : k.id}`);
+  }
+  function visaTio() {
+    scen.dataset.lage = 'tio';
+    ett.hidden = true;
+    tioRam.hidden = false;
+    if (document.fullscreenElement) void document.exitFullscreen();
+    tio.replaceChildren(...dragna.map((k) => {
+      const li = el('li');
+      const knapp = el('button', 'sk-val-kort') as HTMLButtonElement;
+      knapp.type = 'button';
+      knapp.dataset.kort = k.id;
+      const namn = k.form === 'citat' ? `citat av ${k.citat?.vem}` : k.form === 'handelse' ? `${k.handelse?.ar}` : (k.bild ? data.bilder[k.bild].alt : '');
+      knapp.setAttribute('aria-label', `Visa ${k.niva} ${k.nr} stort: ${namn}`);
+      knapp.append(kortet(k, true));
+      knapp.addEventListener('click', () => { visaEtt(k, true); tillScenen(); });
+      li.append(knapp);
+      return li;
+    }));
+    history.replaceState(null, '', `#${dragna.map((x) => x.id).join(',')}`);
+  }
+
+  // ---------- Urvalet ----------
+  const antalKnappar = [...document.querySelectorAll<HTMLButtonElement>('.sk-antal')];
+  const nivaKnappar = [...document.querySelectorAll<HTMLButtonElement>('.sk-niva')];
+  const visaAntal = () => antalKnappar.forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.antal) === sparat.antal)));
+  const visaNiva = (niva?: string) => nivaKnappar.forEach((b) => b.classList.toggle('senast', b.dataset.niva === niva));
+  antalKnappar.forEach((b) => b.addEventListener('click', () => { sparat.antal = Number(b.dataset.antal); spara(); visaAntal(); }));
+  nivaKnappar.forEach((b) => b.addEventListener('click', () => {
+    const niva = b.dataset.niva!;
+    sparat.niva = niva;
+    visaNiva(niva);
+    dragna = dra(niva, sparat.antal);
+    if (sparat.antal === 1) visaEtt(dragna[0], false); else visaTio();
+    tillScenen();
+  }));
+  tillbaka.addEventListener('click', () => { const fran = plats.querySelector<HTMLElement>('.skrivkort')?.dataset.kort; visaTio(); tillScenen(); tio.querySelector<HTMLButtonElement>(`button[data-kort="${fran}"]`)?.focus({ preventScroll: true }); });
+  visaAntal();
+  visaNiva(sparat.niva);
+
+  // Korten i adressen: #bas-017 är ett kort, #bas-017,medel-002,… är tio, och /bas-017 efter tio är det som visas stort.
+  (() => {
+    const [lista, valt] = decodeURIComponent(location.hash.slice(1)).split('/');
+    const kort = (lista ?? '').split(',').map((id) => kortMed.get(id)).filter((k): k is Kort => !!k);
+    if (!kort.length) return;
+    dragna = kort;
+    if (kort.length === 1) visaEtt(kort[0], false);
+    else if (valt && kortMed.has(valt)) visaEtt(kortMed.get(valt)!, true);
+    else visaTio();
+  })();
+
+  // ---------- Utskriften ----------
+  // Ett kort är kortets pdf, klippt ur nivåns pdf. Tio kort fogas ihop här av de tio pdf:erna, med pdf-lib, som hämtas
+  // först när någon skriver ut tio. Där webbläsaren kan skriva ut en pdf direkt (Chromium på datorn) öppnas
+  // utskriftsrutan, som knapparna i src/components/SkrivUtPdf.astro gör; annars öppnas pdf:en i en ny flik.
+  const kanSkrivaUtPdf = () => {
+    const ua = (navigator as Navigator & { userAgentData?: { mobile: boolean } }).userAgentData;
+    return ua?.mobile === false && navigator.pdfViewerEnabled === true;
+  };
+  async function tioPdf(): Promise<string> {
+    const { PDFDocument } = await import('pdf-lib');
+    const ut = await PDFDocument.create();
+    for (const k of dragna) {
+      const svar = await fetch(pdfFor.get(k.id)!);
+      if (!svar.ok) throw new Error(`${k.id}: ${svar.status}`);
+      const kalla = await PDFDocument.load(await svar.arrayBuffer());
+      for (const s of await ut.copyPages(kalla, kalla.getPageIndices())) ut.addPage(s);
+    }
+    ut.setTitle(`Skrivkort: ${dragna.map((k) => `${k.niva} ${k.nr}`).join(', ')}`);
+    ut.setAuthor('Niclas Fohlin');
+    return URL.createObjectURL(new Blob([new Uint8Array(await ut.save())], { type: 'application/pdf' }));
+  }
+  function skrivUt(url: string) {
+    document.querySelector('iframe.skriv-ut-pdf')?.remove();
+    const ram = document.createElement('iframe');
+    ram.className = 'skriv-ut-pdf';
+    ram.title = 'Pdf för utskrift';
+    ram.tabIndex = -1;
+    ram.setAttribute('aria-hidden', 'true');
+    ram.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden';
+    ram.addEventListener('load', () => { try { ram.contentWindow!.focus(); ram.contentWindow!.print(); } catch { window.open(url, '_blank'); } }, { once: true });
+    ram.src = url;
+    document.body.append(ram);
+  }
+  const direkt = kanSkrivaUtPdf();
+  // Ett kort: länken öppnar kortets pdf, eller utskriftsrutan där det går. Med en tangent nedtryckt öppnas pdf:en i en
+  // ny flik, som länken säger.
+  skrivutEtt.addEventListener('click', (e) => {
+    if (!direkt || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    skrivUt(skrivutEtt.href);
+  });
+  skrivutTio.addEventListener('click', async (e) => {
+    e.preventDefault();
+    if (skrivutTio.getAttribute('aria-busy') === 'true') return;
+    skrivutTio.setAttribute('aria-busy', 'true');
+    const text = skrivutTio.textContent;
+    skrivutTio.textContent = 'Fogar ihop korten …';
+    // Fliken öppnas medan knappen trycks, så att webbläsaren inte stoppar den som ett fönster som öppnar sig självt.
+    const flik = direkt ? null : window.open('', '_blank');
+    try {
+      const url = await tioPdf();
+      if (direkt) skrivUt(url); else if (flik) flik.location.href = url; else location.assign(url);
+      skrivutTio.textContent = text;
+    } catch {
+      flik?.close();
+      skrivutTio.textContent = 'Det gick inte. Försök igen';
+      window.setTimeout(() => { skrivutTio.textContent = text; }, 4000);
+    }
+    skrivutTio.removeAttribute('aria-busy');
+  });
+
+  // ---------- Helskärm ----------
+  helskarmKnapp.addEventListener('click', () => {
+    if (document.fullscreenElement) void document.exitFullscreen();
+    else void ett.requestFullscreen?.();
+  });
+  document.addEventListener('fullscreenchange', () => {
+    helskarmKnapp.textContent = document.fullscreenElement ? 'Lämna helskärm' : 'Helskärm';
+    const kort = plats.querySelector<HTMLElement>('.skrivkort');
+    if (kort) requestAnimationFrame(() => passa(kort));
+  });
+  new ResizeObserver(() => { const kort = plats.querySelector<HTMLElement>('.skrivkort'); if (kort && Number(kort.dataset.bredd) !== kort.clientWidth) passa(kort); }).observe(plats);
+
+  // ---------- Klockan ----------
+  // En nedräkning som visar tiden som en röd yta som krymper medurs mot tolv, som en time timer, och siffrorna under.
+  // Hela ytan är den inställda tiden. Tiden räknas mot klockan i datorn, och en timer (inte webbläsarens ritslinga, som
+  // står still i en dold flik) ritar om den och ringer, så att den ringer också när läraren har bytt fönster. Medan
+  // klockan går hålls skärmen vaken där webbläsaren kan det.
+  const yta = $('sk-yta');
+  const tidText = $('sk-tid');
+  const slutText = $('sk-slut');
+  const klocka = $('sk-klocka');
+  const startKnapp = $<HTMLButtonElement>('sk-start');
+  const omstart = $<HTMLButtonElement>('sk-omstart');
+  const minFalt = $<HTMLInputElement>('sk-minuter');
+  const ljudKnapp = $<HTMLButtonElement>('sk-ljud');
+  const streck = $('sk-streck');
+  for (let i = 0; i < 60; i++) {
+    const v = (i / 60) * Math.PI * 2;
+    const lang = i % 5 === 0 ? 14 : 6;
+    const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    l.setAttribute('x1', String(Math.sin(v) * 104)); l.setAttribute('y1', String(-Math.cos(v) * 104));
+    l.setAttribute('x2', String(Math.sin(v) * (104 - lang))); l.setAttribute('y2', String(-Math.cos(v) * (104 - lang)));
+    if (i % 5 === 0) l.classList.add('fem');
+    streck.append(l);
+  }
+  const R = 96;
+  function ritaYta(andel: number) {
+    // andel: den del av tiden som är kvar, 1 till 0. Ytan går från visaren medurs till tolv.
+    if (andel >= 0.9999) { yta.setAttribute('d', `M0 ${-R}A${R} ${R} 0 1 1 0 ${R}A${R} ${R} 0 1 1 0 ${-R}Z`); return; }
+    if (andel <= 0) { yta.setAttribute('d', ''); return; }
+    const v = (1 - andel) * Math.PI * 2;
+    const x = Math.sin(v) * R, y = -Math.cos(v) * R;
+    yta.setAttribute('d', `M0 0L${x.toFixed(2)} ${y.toFixed(2)}A${R} ${R} 0 ${andel > 0.5 ? 1 : 0} 1 0 ${-R}Z`);
+  }
+  const visaTid = (ms: number) => { const s = Math.ceil(ms / 1000); tidText.textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
+  let langd = sparat.minuter * 60000;
+  let kvar = langd;
+  let slut = 0;
+  let gar = false;
+  let ram = 0; // timern som ritar om klockan
+  let vaken: { release: () => Promise<void> } | null = null;
+  const hallVaken = async (pa: boolean) => {
+    try {
+      if (pa && !vaken) vaken = await (navigator as Navigator & { wakeLock?: { request: (t: string) => Promise<{ release: () => Promise<void> }> } }).wakeLock?.request('screen') ?? null;
+      if (!pa && vaken) { await vaken.release(); vaken = null; }
+    } catch { vaken = null; }
+  };
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && gar) { vaken = null; void hallVaken(true); } });
+  function uppdatera() {
+    const nu = gar ? Math.max(0, slut - performance.now()) : kvar;
+    ritaYta(nu / langd);
+    visaTid(nu);
+    if (gar && nu <= 0) klar();
+  }
+  const stanna = () => { window.clearInterval(ram); window.clearTimeout(slag); };
+  let slag = 0;
+  const ga = () => { stanna(); ram = window.setInterval(uppdatera, 200); slag = window.setTimeout(uppdatera, Math.max(0, slut - performance.now()) + 20); };
+  function knappar() {
+    startKnapp.textContent = gar ? 'Pausa' : kvar > 0 && kvar < langd ? 'Fortsätt' : 'Starta';
+    klocka.classList.toggle('gar', gar);
+    minFalt.disabled = gar;
+    klocka.querySelectorAll<HTMLButtonElement>('.sk-steg').forEach((b) => { b.disabled = gar; });
+  }
+  function satt(minuter: number) {
+    const m = Math.min(99, Math.max(1, Math.round(minuter) || 1));
+    minFalt.value = String(m);
+    sparat.minuter = m;
+    spara();
+    langd = m * 60000;
+    kvar = langd;
+    gar = false;
+    stanna();
+    klocka.classList.remove('slut');
+    slutText.textContent = '';
+    knappar();
+    uppdatera();
+  }
+  function klar() {
+    gar = false;
+    kvar = 0;
+    stanna();
+    klocka.classList.add('slut');
+    slutText.textContent = 'Tiden är slut';
+    knappar();
+    void hallVaken(false);
+    if (sparat.ljud) ring();
+  }
+  startKnapp.addEventListener('click', () => {
+    forbered();
+    if (gar) {
+      kvar = Math.max(0, slut - performance.now());
+      gar = false;
+      stanna();
+      void hallVaken(false);
+    } else {
+      if (kvar <= 0) kvar = langd;
+      klocka.classList.remove('slut');
+      slutText.textContent = '';
+      slut = performance.now() + kvar;
+      gar = true;
+      void hallVaken(true);
+      ga();
+    }
+    knappar();
+    uppdatera();
+  });
+  omstart.addEventListener('click', () => { void hallVaken(false); satt(Number(minFalt.value)); });
+  minFalt.addEventListener('change', () => satt(Number(minFalt.value)));
+  klocka.querySelectorAll<HTMLButtonElement>('.sk-steg').forEach((b) => b.addEventListener('click', () => satt(Number(minFalt.value) + Number(b.dataset.steg))));
+  minFalt.value = String(sparat.minuter);
+
+  // Ljudet: en klocka som slår tre gånger, gjord i webbläsaren (Web Audio), så att sidan inte hämtar en ljudfil.
+  // Ljudet förbereds när läraren trycker på Starta, eftersom webbläsaren bara släpper fram ljud efter ett tryck.
+  let ljud: AudioContext | undefined;
+  function forbered() {
+    try { ljud ??= new AudioContext(); if (ljud.state === 'suspended') void ljud.resume(); } catch { ljud = undefined; }
+  }
+  function ring() {
+    if (!ljud) return;
+    const t0 = ljud.currentTime + 0.05;
+    for (let slag = 0; slag < 3; slag++) {
+      const t = t0 + slag * 1.1;
+      for (const [hz, styrka, tid] of [[784, 0.32, 2.2], [1568, 0.12, 1.4], [2352, 0.06, 0.9], [3136, 0.03, 0.6]] as const) {
+        const o = ljud.createOscillator();
+        const g = ljud.createGain();
+        o.type = 'sine';
+        o.frequency.value = hz;
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(styrka, t + 0.01);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + tid);
+        o.connect(g).connect(ljud.destination);
+        o.start(t);
+        o.stop(t + tid + 0.05);
+      }
+    }
+  }
+  const visaLjud = () => { ljudKnapp.setAttribute('aria-pressed', String(sparat.ljud)); ljudKnapp.title = sparat.ljud ? 'Ljudet är på. Tryck för att stänga av det' : 'Ljudet är av. Tryck för att sätta på det'; };
+  ljudKnapp.addEventListener('click', () => { sparat.ljud = !sparat.ljud; spara(); visaLjud(); if (sparat.ljud) forbered(); });
+  visaLjud();
+  satt(sparat.minuter);
+</script>

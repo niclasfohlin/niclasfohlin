@@ -29,7 +29,7 @@ const ROT = 'CLAUDE.md';
 const INNEHALL = [
   'src/content/artiklar/', 'src/content/bocker/', 'src/content/stodundervisning/',
   'public/stodundervisning/', 'public/bildbank/', 'public/delning/', 'public/images/', 'public/fonts/',
-  'underlag/texter/', 'utskick/', 'src/data/bildserier/',
+  'underlag/texter/', 'utskick/', 'src/data/bildserier/', 'src/data/skrivkort/',
 ];
 // Sidorna är sajtens adresser: Astro läser varje fil i mappen som en sida, så mappen är kroken.
 const SIDOR = 'src/pages/';

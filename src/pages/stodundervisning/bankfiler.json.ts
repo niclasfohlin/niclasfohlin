@@ -6,6 +6,7 @@ import { bladfiler, metodensBladmaterial } from '../../lib/bladmaterial';
 import { ovrigtfil } from '../../lib/ovrigt';
 import { harMaterial } from '../../lib/material';
 import { harLathund } from '../../lib/metod';
+import { nivafilNamn, skrivkortAv } from '../../lib/skrivkort';
 
 // /stodundervisning/bankfiler.json: bankernas filer (src/lib/bank.ts), som scripts/bankpdf.mjs gör pdf av ur Word-filerna
 // efter bygget. Varje fil har sitt namn och hur många sidor den ska ha: en per enhet med bara enheterna, och med
@@ -23,6 +24,8 @@ import { harLathund } from '../../lib/metod';
 // här också: deras pdf:er är det knapparna Skriv ut: Allt och Metoden öppnar (K-342, Niclas 2026-10-13). De har inga
 // gränser för sidantalet, eftersom beskrivningen flödar. Lathundens passtext för sig (slag: 'lathundtext') är en till
 // tre sidor.
+// Skrivkortens filer (src/lib/skrivkortform.ts, slag: 'skrivkort'), en per nivå med ett kort per sida, så att sidan
+// som slumpar korten kan skriva ut varje kort som en sida ur Word-filens pdf (scripts/pdfdelar.mjs).
 export const GET: APIRoute = async () => {
   const metoder = await publicerade('stodundervisning');
   const filer = metoder.flatMap((m) => {
@@ -37,6 +40,8 @@ export const GET: APIRoute = async () => {
     const ovrigt = ovrigtfil(m.data, m.id);
     nivans.push(...(bm ? bladfiler(m.id, bm).map((f) => ({ metod: m.id, namn: f.namn, rubrik: f.rubrik, slag: f.slag as string, minst: f.minst, hogst: f.hogst, ramar: f.ramar, oversikter: [] as number[] })) : []));
     if (ovrigt) nivans.push({ metod: m.id, namn: ovrigt.namn, rubrik: ovrigt.rubrik, slag: 'ovrigt', minst: ovrigt.minst, hogst: ovrigt.hogst, ramar: ovrigt.ramar, oversikter: [] });
+    const skrivkort = skrivkortAv(m.id);
+    if (skrivkort) nivans.push(...skrivkort.nivaer.map((n) => { const antal = skrivkort.kort.filter((k) => k.niva === n.namn).length; return { metod: m.id, namn: nivafilNamn(m.id, n.namn), rubrik: `Skrivkort: ${n.namn}`, slag: 'skrivkort', minst: antal, hogst: antal, ramar: [] as number[], oversikter: [] as number[] }; }));
     const bank = bankAv(m.data);
     if (!bank) return [...hela, ...nivans];
     const fakta = new Set(bank.enheter.filter((e) => e.l.faktatext).map((e) => e.ri));

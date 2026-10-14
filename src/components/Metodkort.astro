@@ -7,6 +7,7 @@
 import Taggar from './Taggar.astro';
 import Filval from './Filval.astro';
 import { harLathund, kortFakta } from '../lib/metod';
+import { harSkrivkort, skrivkortAdress, SKRIVKORT_LANK } from '../lib/skrivkort';
 import type { MetodPost } from '../lib/metod';
 import type { Serie } from '../lib/serie';
 interface Props { m: MetodPost; valj?: boolean; serie?: Serie; taggar?: string[] }
@@ -34,6 +35,7 @@ const antal = lektioner.length === 1 ? `En ${ord?.en ?? 'lektion'}` : `${lektion
   )}
   <Taggar taggar={taggar} />
   <p class="kort-rad">
+    {harSkrivkort(m.id) && <a class="skrivkort-lank" href={skrivkortAdress(m.id)}>{SKRIVKORT_LANK}<span class="visually-hidden">: {m.data.titel}</span></a>}
     {harLathund(m.data) && <a class="lathund-lank" href={`/stodundervisning/${m.id}/lathund`}>Lathund<span class="visually-hidden">: {m.data.titel}</span></a>}
     <Filval fil={`/stodundervisning/${m.id}`} namn={m.id} rubrik={`Allt om ${m.data.titel}`} statistik={`${m.data.titel}: allt om metoden`} liten />
     {valj && <label class="valj"><input type="checkbox" name="valda" value={m.id} /> Välj<span class="visually-hidden"> {m.data.titel}</span></label>}
