@@ -4388,5 +4388,47 @@
     "sidor": 1,
     "kB": 148,
     "datum": "2026-10-13"
+  },
+  "kortskrivning-skriv-varje-dag": {
+    "word": "a764ba59aa0939edf58643b773a7e74fbd9df12825b95750e998f47cb634fe92",
+    "pdf": "646152bb11bba44567ac316d11b67fc3f78fd41e2a626d71eb73088a17c89224",
+    "sidor": 15,
+    "kB": 511,
+    "datum": "2026-10-14"
+  },
+  "kortskrivning-skriv-varje-dag-metoden": {
+    "word": "4c24fc6075ce96ea543b6d2a9fe7ce3ba0e6f4d7f680a5ba21c5225e442342a6",
+    "pdf": "fde190e86a50bb1792f0a6998676d0cb910058c184eca7c4a0223d2652bad2ad",
+    "sidor": 6,
+    "kB": 407,
+    "datum": "2026-10-14"
+  },
+  "kortskrivning-skriv-varje-dag-lathund-text": {
+    "word": "eaa75997f7a84713c7405b41b099239a0d37149daf42dfc84644be7e73f30597",
+    "pdf": "ffddd50a9757797ba8eef025619977b241a278b5663e28b97f8c9307aec64851",
+    "sidor": 1,
+    "kB": 215,
+    "datum": "2026-10-14"
+  },
+  "kortskrivning-skriv-varje-dag-skrivkort-bas": {
+    "word": "e6246293129393fe88f74e5d012e45b0b87f94a0d915d4cfe7ed8f0aefbe6a6b",
+    "pdf": "2dbd21e59123683ce5e64bc2a97a469fc1978eca53295b339c6b319956b89ffb",
+    "sidor": 110,
+    "kB": 17215,
+    "datum": "2026-10-14"
+  },
+  "kortskrivning-skriv-varje-dag-skrivkort-medel": {
+    "word": "f24f6f560cac64fb0f5870ed7cd34c273e66f3ec302d3bb3bbf1089d7fa0f309",
+    "pdf": "ffb061c6dd59d01a16158fdac2012888b97656d1bc00768a224a491ba6e5fbd4",
+    "sidor": 110,
+    "kB": 10341,
+    "datum": "2026-10-14"
+  },
+  "kortskrivning-skriv-varje-dag-skrivkort-avancerat": {
+    "word": "4ea5fe8e5112b590be43b38d1a0d2828c3f4c0b64f1757c94596d4a29f0cc2d8",
+    "pdf": "6cefac8c68882a4eabca4bfd7508da63a33f2f199fff5464950c63c27b08e457",
+    "sidor": 110,
+    "kB": 7711,
+    "datum": "2026-10-14"
   }
 }

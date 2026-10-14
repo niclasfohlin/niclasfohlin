@@ -59,6 +59,16 @@
     ],
     "datum": "2026-10-13"
   },
+  "kortskrivning-skriv-varje-dag": {
+    "kalla": "43452f6d4ec09016",
+    "skalor": [
+      1.1,
+      1.35,
+      1.35,
+      1.15
+    ],
+    "datum": "2026-10-14"
+  },
   "laslistor-i-grupp": {
     "kalla": "e6003ed3e332877f",
     "skalor": [

@@ -1,0 +1,392 @@
+# Kortskrivning: skriv varje dag. Analysen står i analys.md, skrivkortens standard i skrivkortsstandard.md och
+# biblioteket i skrivkort/ (node build/skrivkort.mjs kortskrivning-skriv-varje-dag).
+titel: "Kortskrivning: skriv varje dag"
+undertitel: Tio minuter med dagens skrivkort och fem att dela, för åk 1–9
+ingress: "Varje dag skriver gruppen eller klassen utifrån dagens skrivkort: en bild som sätter igång en berättelse, eller ett citat. Den som vill läser sedan en rad för en kamrat. Ingen rättar, och inget kan bli fel. Metoden har 110 skrivkort på var och en av tre nivåer."
+omrade: Skrivning
+arskurs:
+  - F-3
+  - 4-6
+  - 7-9
+arskursText: åk 1–9
+taggar:
+  - skrivflyt
+  - tillganglig-undervisning
+format:
+  - liten grupp
+  - helklass
+tid: 10–15 minuter per pass, varje dag eller minst tre gånger i veckan
+period: Sex veckor, och sedan så länge gruppen vill
+grupp: Två till åtta elever, eller en hel klass
+material:
+  - skrivbok och penna
+  - dagens skrivkort
+  - korten Börja här
+  - klocka som alla ser
+  - lösa papper
+  - blad på väggen
+uppdaterad: 2026-10-14
+publicerad: 2026-10-14
+relaterade:
+  - texttyper-i-grupp
+  - skrivkurs-vardeskapande
+utkast: false
+nivaer:
+  - { namn: Bas, farg: "4E7A43" }
+  - { namn: Medel, farg: "A8742A" }
+  - { namn: Avancerat, farg: "6E3450" }
+
+inledning:
+  - Kortskrivning är en kvart om dagen då alla skriver och ingen rättar. Den är för elever som inte kommer igång, som suddar mer än de skriver eller som frågar om det är rätt.
+  - "Varje elev har en egen skrivbok och en penna. Du visar dagens skrivkort (på engelska writing prompt): en bild som är början på en berättelse, och för de äldre eleverna ibland ett citat eller en händelse ur historien. På bordet ligger högen med de kort gruppen har haft och en bunt lösa papper, och alla ser klockan."
+  - "Uppgiften är densamma varje dag: ”Skriv vad du tänker när du ser, läser eller tänker på det här.” Eleven skriver utan att stanna och utan att sudda, och läser sedan en rad för en kamrat om hen vill. När ingen bedömer texten vågar fler börja."
+  - I de tio första passen säger eleverna sin första tanke till en kamrat innan de skriver. Korten Börja här, under Materialet, är ett förslag till de passen. Sedan slumpar du dagens kort på metodens sida. I vecka 6 läser eleven en av sina texter och skriver nytt om samma sak.
+upplagg:
+  rubrik: Så fungerar insatsen
+  text: "Passet är 10–15 minuter, varje dag eller minst tre gånger i veckan, i sex veckor och sedan så länge gruppen vill, 2–8 elever eller en hel klass. Passet har tre delar: Dagens kort, Skriv och Dela. Du visar kortet, säger uppgiften och din egen första mening. Alla skriver tills klockan ringer, i början tre minuter och efter hand upp till åtta. Sedan läser den som vill en rad för en kamrat, som svarar ”Berätta mer om …”. En gång i veckan räknar eleven orden från de tre första minuterna, och efter varje pass noterar du vilka som inte började inom en minut."
+gruppen:
+  rubrik: Så sätter du ihop gruppen
+  text: Metoden är för elever som inte kommer igång, som suddar och börjar om eller som frågar om det är rätt. Eleven behöver kunna forma bokstäver och skriva ord som de låter. Den som lägger all kraft på bokstäverna eller stavningen behöver också undervisning i det, och den som har dator eller diktering som verktyg använder det. Den som är ny i svenska ritar, skriver ord eller skriver på sitt starkaste språk. Sätt ihop par som trivs med varandra, och en grupp om tre vid udda antal. Är en elev ensam, eller kamraten borta, är du den som lyssnar.
+principer:
+  rubrik: Tre saker att hålla fast vid
+  text: Ingen rättar eller bedömer, för skrivboken är elevens, och du läser bara det eleven själv visar. Pennan stannar inte, och det som blir fel stryks över. Ni skriver varje gång ni ses, helst varje dag, för det är vanan som gör att fler börjar direkt. Tyder något i en text på att en elev far illa går du vidare med det enligt skolans rutin.
+
+tidsschema:
+  rubrik: Passet, del för del
+  text: "Skrivtiden börjar på tre minuter, och passet är då omkring tio minuter. Skriver de flesta fortfarande när klockan ringer, lägger du till en minut nästa pass, upp till åtta. Slutar de flesta före klockan, tar du bort en minut, som lägst till tre. Den som vill står över första tanken eller raden. Det allra första passet tar omkring 25 minuter och står i Börja här: de tio första passen."
+  rader:
+    - tid: Före passet
+      fas: Förberedelse
+      vad: Ta dagens skrivkort och tänk ut din egen första mening.
+    - tid: 2 min
+      fas: Dagens kort
+      vad: Visa kortet. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. I de tio första passen säger eleverna sin första tanke till en kamrat.
+    - tid: 3–8 min
+      fas: Skriv
+      vad: Starta klockan. Alla skriver utan att stanna, du också den första minuten. När klockan ringer skriver eleverna klart sin mening.
+    - tid: 5 min
+      fas: Dela
+      vad: "Eleverna läser sin text och stryker under en rad som någon ska få höra. De läser raden för en kamrat, som säger: ”Berätta mer om …” Den som läste berättar eller skriver en rad till."
+
+exempel:
+  rubrik: "Exempel: det tredje passet i en grupp"
+  valt:
+    rubrik: Gruppen
+    text: "Fem elever i åk 5, i tredje passet. Dagens skrivkort är det tredje kortet i Börja här på Medel: en bild av två rostiga båtar som står i en öken."
+  text:
+    - "Läraren visar kortet, säger uppgiften och sin egen första mening: ”Det började med att vattnet sjönk en liten bit varje dag.” Hon säger: ”Det är själva skrivandet som är viktigt, inte att det blir klart.” Eleverna säger sin första tanke till den bredvid. ”Skriv det du sa”, säger hon och ställer klockan på fem minuter."
+    - "Elias sitter still. Läraren sätter sig bredvid, frågar efter hans första tanke och skriver den som första rad i hans skrivbok: ”Att havet har tagit slut.”"
+    - "Klockan ringer, och alla stryker under en rad. Läraren läser sin rad först. Maja läser sin för Elias: ”Kaptenen bor kvar i sitt gamla skepp, för han tror att vattnet kommer tillbaka.” ”Berätta mer om kaptenen”, säger Elias, och Maja skriver en rad till. Hugo står över i dag."
+    - "Lärarens notering: Elias började inte inom en minut, men kom igång när hans egna ord stod först. Fyra av fem skrev ännu när klockan ringde. Sex minuter i morgon, och då skriver Elias sin första rad själv."
+
+tabeller:
+  - rubrik: När pennan stannar
+    plats: efter-tidsschema
+    meny: true
+    kolumner:
+      - Det du ser eller hör
+      - Det du gör och säger
+    rader:
+      - - ”Är det rätt?”
+        - "”Det du skriver är rätt.” Visar eleven sin text svarar du som i Dela: ”Berätta mer om …”"
+      - - Eleven har inte börjat efter en minut
+        - "Sätt dig bredvid: ”Vad var din första tanke?” Skriv elevens ord som första rad i skrivboken. ”Det där är dina ord. Fortsätt.”"
+      - - Samma elev har inte börjat nästa pass heller
+        - "”Vad var din första tanke? Skriv det.” Skriv bara de första orden åt den som inte får ned det."
+      - - Eleven har inte skrivit på tre pass
+        - Fråga var det tar stopp. Är det idén, väljer ni kort tillsammans. Är det orden, skriver du det eleven säger. Är det modet, skriver eleven på ett löst papper som hen får slänga.
+      - - ”Hur stavas det?”
+        - ”Skriv det som du hör det, sätt prickar under och skriv vidare.” Stavningen tar ni en annan gång.
+      - - Eleven suddar
+        - "”Stryk över och skriv vidare.” En pil får visa vart tanken gick. Ge gärna alla en bläckpenna."
+      - - ”Klar!” efter två rader
+        - ”Skriv ditt sista ord igen tills nästa tanke kommer.”
+      - - ”Jag kommer inte på något.”
+        - ”Ta ett kort ur högen, eller skriv om något annat.”
+      - - Eleven står över i Dela gång på gång
+        - ”Säg en tanke ur texten, eller låt din kamrat läsa raden tyst.”
+  - rubrik: Kort om kortskrivning
+    plats: efter-fastnar
+    meny: true
+    text: De flesta skolor är överens om att läsning behöver tid varje dag. Skrivandet får sällan samma självklara plats. Kortskrivning är ett sätt att ge skrivandet en självklar plats i undervisningen. Det är också ett skrivande där fler vågar, eftersom ingen rättar och ingenting kan bli fel. En egen skrivbok förstärker att skrivandet är elevernas, en plats där tankar får växa och återbesökas över tid. Eleverna behöver höra flera gånger att det här skiljer sig från annat skrivande i skolan. Säg därför en rad ur tabellen innan klockan startar, den första raden i pass 1 och den sista i pass 6.
+    kolumner:
+      - Det eleverna behöver förstå
+      - Så kan läraren säga
+    rader:
+      - - Det finns inget rätt eller fel
+        - ”Jag är inte ute efter ett visst svar. Det du skriver är rätt.”
+      - - Texten ska inte bedömas eller rättas
+        - ”Det här skrivandet är för att tänka och lära, inte för att rättas.”
+      - - Det behöver inte bli en färdig produkt
+        - ”Det är själva skrivandet som är viktigt, inte att det blir klart.”
+      - - Texten är främst för dig själv
+        - ”Vi skriver för att utveckla våra tankar. Det är värt något i sig.”
+      - - Du får veta i förväg om något ska delas
+        - ”Vissa texter är bara dina. Ibland delar vi en mening med varandra.”
+      - - Det viktiga är att du skriver
+        - ”Skriv och se vart det leder. Låt inte pennan stanna, även när det är trögt. Skriv vad du ser, hör, tänker och känner.”
+
+  - rubrik: I en klass, med de yngsta och på dator
+    plats: efter-fastnar
+    meny: true
+    kolumner:
+      - Variant
+      - Det som ändras
+    rader:
+      - - En hel klass
+        - Passet är detsamma. Är ni två vuxna sitter den ena hos den som inte har börjat. Eleverna läser i par, och två eller tre som vill läser sedan sin rad för alla.
+      - - De yngsta, åk 1–2
+        - Skrivboken har ritruta och breda linjer. Eleverna ritar i en minut innan klockan startar. Ord vid bilden är också text. I Dela visar de sidan och läser för en kamrat.
+      - - Dator eller diktering
+        - Dokumentet är skrivboken. Eleven raderar inte, gör ny rad vid ”streck” och har skrivlistan på ett löst blad (se Så ser du att det hjälper). Den som dikterar sitter en bit ifrån.
+urval:
+  rubrik: Var hittar du skrivkorten?
+  text:
+    - "Skrivkorten ligger i ett bibliotek på metodens sida, med 110 kort på var och en av nivåerna Bas, Medel och Avancerat, ungefär åk 1–3, 4–6 och 7–9. På Bas är varje kort en bild: något ur sagans värld, något knasigt eller något att undra över. På Medel är två av tre kort bilder eller händelser med foto, och resten är citat ur sagor och dikter. På Avancerat är hälften bilder och händelser, hälften dikter och citat. Välj nivå och slumpa fram ett eller tio kort att visa på skärmen eller skriva ut."
+    - Korten är inte märkta som lättsamma eller allvarliga, och inget tungt är bortvalt. Välj nivå efter eleverna och hur vuxet kortet ska vara, inte efter årskursen, och se på kortet före passet.
+  kravText: "Gör du ett eget kort, till exempel ur dagens lektion, eller låter eleverna göra ett, ska det klara tre krav:"
+  krav:
+    - rubrik: Något att säga
+      text: Alla har något att skriva utan att kunna något i förväg.
+    - rubrik: Många svar
+      text: Tjugo elever skriver tjugo olika texter.
+    - rubrik: Väcker något
+      text: Kortet väcker en tanke, lust, längtan, sorg eller förundran.
+
+progression:
+  rubrik: Så växer det över sex veckor
+  enhet: När
+  rader:
+    - vecka: Pass 1–10
+      fokus: "Ta gärna korten Börja här i ordning. Passen står i Börja här: de tio första passen."
+      roll: Du skriver den första minuten, visar din sida först i Dela och lyssnar hos ett par.
+    - vecka: Från pass 11
+      fokus: Du slumpar dagens kort. När de flesta börjar inom en minut hoppar ni över första tanken. Den som behöver det säger sin till dig.
+      roll: Ibland skriver du den första minuten, annars sitter du hos den som inte har börjat. I Dela lyssnar du hos ett par.
+    - vecka: Veckans sista pass
+      fokus: "Eleverna räknar orden (se Så ser du att det hjälper)."
+      roll: "Du frågar sist: ”Kom någon på något nytt medan ni skrev?”"
+    - vecka: Vecka 6
+      fokus: Ett pass är Skriv igen, utan kort.
+      roll: "Du frågar: ”Vad går lättare nu än när vi började?”"
+    - vecka: Efter vecka 6
+      fokus: Gruppen fortsätter så länge den vill. Eleven kan ta med en stjärnmärkt text till skrivundervisningen.
+      roll: Du stämmer av målen, elev för elev.
+uppfoljning:
+  rubrik: Så ser du att det hjälper
+  text: "En gång i veckan räknar eleven orden från de tre första minuterna och jämför talet med sitt förra. Ingen jämför sitt tal med någon annans. Passet blir då två till tre minuter längre. Hoppa inte över räkningen, för det är den som är prövad i försök. Talet beror också på kortet. Säg det till eleverna, och ta gärna ett bildkort den dagen. Är skrivtiden tre minuter räknar eleven alla ord."
+  rader:
+    - nar: Veckans sista pass
+      vad: Säg ”streck” när tre minuter har gått. Alla drar ett streck efter sitt sista ord och skriver vidare.
+    - nar: När klockan ringer
+      vad: Eleven räknar alla ord fram till strecket, också dem du skrev, fyller i skrivlistan och sätter en stjärna vid veckans favorittext.
+    - nar: När de har fyllt i
+      vad: "Be två elever visa dig skrivlistan: ”Vad ser du i din lista?” Säg vad du har sett: ”Du började direkt i dag.” Sedan delar ni som vanligt."
+    - nar: Efter varje pass
+      vad: "Skriv en rad i din egen skrivbok: vilka som inte började inom en minut, vem som suddade eller frågade om stavningen, hur många som ännu skrev när klockan ringde, och nästa skrivtid."
+    - nar: Vecka 6
+      vad: "Ett pass är Skriv igen, utan kort: eleven läser en stjärnmärkt text och skriver nytt om samma sak. I Dela säger eleven vad som är nytt."
+mal:
+  punkter:
+    - börja skriva inom en minut
+    - skriva hela skrivtiden utan att sudda
+    - skriva ett ord som det låter och gå vidare
+    - skriva fler ord på tre minuter än i början
+checklista:
+  rubrik: Checklista inför första passet
+  punkter:
+    - Varje elev har en skrivbok med skrivlistan vikt och inklistrad längst bak, och jag har en egen.
+    - Gruppens kort 1 och kort 1 från en annan nivå går att visa för alla, och klockan syns.
+    - Lösa papper och en papperskorg står framme, och ett blad med ”Jag ser …” sitter på väggen.
+    - Jag har tänkt ut min första mening till gruppens kort 1.
+grund:
+  text: Att skriva utan stopp och utan återkoppling kallar Peter Elbow fritt skrivande. Den som rättar under skrivandet och vill ha början perfekt ger lätt upp, skriver han (Elbow, 1973). Linda Rief skriver med sina elever i åk 8 och skriver ned elevens egna ord när någon inte kommer igång (Rief, 2018). Nio elever i åk 6 berättar att en text blir meningsfull när den får en mottagare i klassen (Jansson m.fl., 2021). Att fler vågar när ingen rättar bygger på lärares erfarenhet och intervjuer med elever. I två försök i åk 3 fick en grupp varje vecka veta hur många ord de hade skrivit. De fick bättre skrivflyt än kontrollgruppen, och i det ena försöket också än de som bara övade (Truckenmiller m.fl., 2014; Koenig m.fl., 2016). I ett norskt försök i åk 1–2 gav mer skrivande inte bättre texter (Skar m.fl., 2023), så skrivundervisningen behövs också.
+  kallor: Bygger på Fohlin och Wilson, Skriv! (utkommer 2027), Elbow (1973), Rief (2018), Jansson m.fl. (2021), Truckenmiller m.fl. (2014), Koenig m.fl. (2016) och Skar m.fl. (2023).
+
+ramar:
+  rubrik: Materialet
+  text:
+    - "Här står de tio första passen och sedan korten till dem, nivå för nivå. Skrivlistan finns i planeringsmallarna."
+  ramar:
+    - rubrik: "Börja här: de tio första passen"
+      text:
+        - Varje nivå har tio kort. Kort 1 hör till första passet och kort 10 till det tionde. Tabellen visar vilka korten är och ger en början att låna till varje pass. Efter tabellen står det första passet och det som kommer till i pass 1–10. De tio korten är ett förslag. Du kan när som helst slumpa fram ett eller tio nya kort och själv ge eleverna en början att låna.
+      oversikt:
+        kolumner:
+          - Pass
+          - Bas
+          - Medel
+          - Avancerat
+          - En början att låna
+        rader:
+          - ["1", "En flicka rider på en snigel", "Ett hus på en valrygg", "Ett öga i en mur", "”Jag ser …”"]
+          - ["2", "En man möter en drake", "Ett kyrktorn i en sjö", "Citat: Karin Boye", "”Jag tänker på …”"]
+          - ["3", "En flicka släpar ett lejon", "Två båtar i en öken", "VR-glasögon på en cykel", "”Det började med att …”"]
+          - ["4", "Getter i ett träd", "Citat: H.C. Andersen", "Citat: Stig Dagerman", "”Jag undrar …”"]
+          - ["5", "En katt vid en dörr till vintern", "Handbojor i snön", "En ängel bärs på en bår", "”Strax innan …”"]
+          - ["6", "En flicka på en översvämmad väg", "En jätte av is på ett berg", "Citat: Henry David Thoreau", "”Tänk om …”"]
+          - ["7", "Ett barn som blåser bort", "1967: alla bilar byter sida", "1930: Gandhi går till havet", "”Om jag var där …”"]
+          - ["8", "En flicka och ett ånglok i snön", "Citat: Sigbjörn Obstfelder", "Citat: Henrik Ibsen", "”Det påminner mig om …”"]
+          - ["9", "Ett barn och en ren", "En flicka på en gunga", "Ett gäng på en brygga", "”Nästa dag …”"]
+          - ["10", "En ö på en sköldpaddas rygg", "Citat: Emily Dickinson", "Citat: Edith Södergran", "”Jag tror att …”"]
+      delar:
+        - rubrik: Första passet, omkring 25 minuter
+          falt:
+            - rubrik: Boken
+              text: "Dela ut skrivböckerna: ”Boken är din och står kvar här. Jag läser bara det du visar mig, och du får hitta på. Blir jag orolig för någon berättar jag det vidare.”"
+            - rubrik: Du skriver
+              text: "Visa kort 1 från en annan nivå, så att gruppens eget kort 1 är nytt i passet. Skriv i två minuter så att alla ser, i din skrivbok mitt på bordet eller på tavlan, och tänk högt. Stryk över ett ord, sätt prickar under ett svårt ord, och skriv ditt sista ord igen när det tar stopp."
+            - rubrik: Papperskorgen
+              text: Gruppen skriver utifrån samma kort i två minuter på lösa papper som ingen läser. Den som vill sparar sitt, och de andra skrynklar ihop och slänger.
+            - rubrik: Passet
+              text: "Håll sedan passet med gruppens kort 1 och tre minuters skrivtid. Säg före Dela att den som vill står över. Läs din rad först, och låt gruppen svara: ”Berätta mer om …”"
+        - rubrik: "Pass 1–10: det som kommer till"
+          falt:
+            - rubrik: Dagens kort
+              text: "Visa kortet på skärmen eller på ett A4 ur biblioteket, eller ge varje par ett utklippt kort. Klipp ut dagens kort och lägg det i högen efter passet: högen är de kort gruppen har haft."
+            - rubrik: En början att låna
+              text: Sätt ett tomt blad på väggen. Före varje pass skriver du dagens början under de förra. Börja din egen första mening med den. Den som behöver lånar en början eller en rad ur kortet. Bladet sitter kvar hela perioden.
+            - rubrik: Pass 1–6
+              text: Säg nästa rad ur tabellen i Kort om kortskrivning innan klockan startar.
+            - rubrik: Första tanken
+              text: "Eleverna säger sin första tanke till en kamrat innan klockan startar. Stå då hos den som brukar bli sittande, och säg sedan till alla: ”Skriv det du sa.”"
+            - rubrik: Dela
+              text: Visa din egen sida och läs din rad först.
+
+mallar:
+  - rubrik: Min skrivlista
+    typ: rutnat
+    underrad: En rad i veckan. Räkna orden fram till strecket, och skriv eller rita hur det gick.
+    kolumner:
+      - Datum
+      - Ord på tre minuter
+      - Så gick det
+    rader: 8
+
+lathund:
+  innehall: Ett skrivkort om dagen
+  metoden:
+    text:
+      - "Varje dag i sex veckor skriver alla utifrån dagens skrivkort, och sedan läser den som vill en rad för en kamrat. Uppgiften är densamma varje dag, och det som växlar är kortet."
+      - Till de tio första passen finns korten Börja här som förslag. Sedan slumpar du dagens kort, och den som behöver säger sin första tanke till dig. Skrivtiden börjar på tre minuter. Lägg till en minut om de flesta skriver när klockan ringer, upp till åtta, och ta bort en om de flesta slutar tidigt. Den som vill står över första tanken eller raden.
+    ruta:
+      rubrik: Tre saker att hålla fast vid
+      punkter:
+        - fet: Ingen text rättas.
+          text: Skrivboken är elevens, och du läser bara det eleven visar.
+        - fet: Pennan stannar inte.
+          text: Den som fastnar skriver sitt sista ord igen, och det som blir fel stryks över.
+        - fet: Ni skriver varje gång ni ses.
+          text: Skriv helst varje dag. Vanan gör att fler börjar direkt.
+    tabell:
+      rubrik: Passet i tre delar
+      kolumner:
+        - Del
+        - Ni gör och säger
+      rader:
+        - - "1 · Dagens kort\n2 min"
+          - "Visa kortet. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. I pass 1–10 säger eleverna sin första tanke till en kamrat.\n”Skriv vad du tänker när du ser, läser eller tänker på det här.”"
+        - - "2 · Skriv\n3–⁠8 min"
+          - "Starta klockan och skriv själv den första minuten.\n”Låt inte pennan stanna, även när det är trögt.”"
+        - - "3 · Dela\n5 min"
+          - "Eleverna stryker under en rad och läser den för en kamrat. Den som läste berättar eller skriver en rad till.\nKamraten: ”Berätta mer om …”"
+    not: "När pennan stannar. Den som inte har börjat efter en minut: ”Vad var din första tanke?” Skriv svaret som elevens första rad. Den som frågar om stavningen: ”Skriv det som du hör det, och sätt prickar under.” Den som suddar: ”Stryk över och skriv vidare.” Den som är utan idé: ”Ta ett kort ur högen, eller skriv om något annat.”"
+  pass:
+    rubrik: Vi kör det första passet
+    textRubrik: Första passet · omkring 25 minuter
+    titel: Boken, din text och papperskorgen, och sedan passet
+    text:
+      - "Läraren delar ut skrivböckerna: ”Boken är din och står kvar här. Jag läser bara det du visar mig, och du får hitta på. Blir jag orolig för någon berättar jag det vidare.”"
+      - Hon visar kort 1 från en annan nivå och skriver i två minuter så att alla ser. Hon tänker högt, stryker över ett ord och sätter prickar under ett annat. Sedan skriver gruppen utifrån samma kort i två minuter på lösa papper, och de flesta slänger sitt.
+      - "Nu visar hon gruppens kort 1, och passet går som i schemat Passet, del för del, med tre minuters skrivtid. Före Dela säger hon att den som vill står över. Hon läser sin egen rad först, och gruppen svarar: ”Berätta mer om …”"
+    forberett:
+      rubrik: Det jag förberedde
+      text:
+        - En skrivbok till var och en, och min egen. Lösa papper och en papperskorg.
+        - Gruppens kort 1 och kort 1 från en annan nivå, och ett blad på väggen med ”Jag ser …”.
+    klarTidigt: Den som säger ”klar” skriver sitt sista ord igen tills nästa tanke kommer.
+    schema:
+      rubrik: Passet, del för del
+      rader:
+        - tid: Före
+          fas: Förberedelse
+          vad: Ta dagens skrivkort och tänk ut din egen första mening.
+        - tid: 2 min
+          fas: 1 · Dagens kort
+          vad: Visa kortet. Citat och händelser läser du högt. Säg uppgiften och din egen första mening. I de tio första passen säger eleverna sin första tanke till en kamrat.
+          fraser:
+            - Skriv vad du tänker när du ser, läser eller tänker på det här.
+        - tid: 3–8 min
+          fas: 2 · Skriv
+          vad: Alla skriver utan att stanna, du också den första minuten. När klockan ringer skriver eleverna klart sin mening.
+          fraser:
+            - Låt inte pennan stanna, även när det är trögt.
+        - tid: 5 min
+          fas: 3 · Dela
+          vad: "Eleverna läser sin text och stryker under en rad. De läser raden för en kamrat, som säger: ”Berätta mer om …” Den som läste berättar eller skriver en rad till."
+  mall:
+    rubrik: Det eleverna behöver förstå
+    underrad: Tabellen i Kort om kortskrivning, med passets nummer först i raden
+    block:
+      - typ: tabell
+        rubrik: "Pass 1–6: säg en rad per pass innan klockan startar"
+        kolumner:
+          - Det eleverna behöver förstå
+          - Så kan läraren säga
+        rader:
+          - - 1 · Det finns inget rätt eller fel
+            - ”Jag är inte ute efter ett visst svar. Det du skriver är rätt.”
+          - - 2 · Texten ska inte bedömas eller rättas
+            - ”Det här skrivandet är för att tänka och lära, inte för att rättas.”
+          - - 3 · Det behöver inte bli en färdig produkt
+            - ”Det är själva skrivandet som är viktigt, inte att det blir klart.”
+          - - 4 · Texten är främst för dig själv
+            - ”Vi skriver för att utveckla våra tankar. Det är värt något i sig.”
+          - - 5 · Du får veta i förväg om något ska delas
+            - ”Vissa texter är bara dina. Ibland delar vi en mening med varandra.”
+          - - 6 · Det viktiga är att du skriver
+            - ”Skriv och se vart det leder. Låt inte pennan stanna, även när det är trögt. Skriv vad du ser, hör, tänker och känner.”
+      - typ: not
+        text: Ur Skriv! (Fohlin och Wilson, utkommer 2027).
+  material:
+    rubrik: Vad du behöver för ett pass
+    kravEtikett: Kortkrav
+    var:
+      rubrik: Var materialet finns
+      punkter:
+        - fet: Biblioteket.
+          text: 110 kort på var och en av nivåerna Bas, Medel och Avancerat, på metodens sida.
+        - fet: Ett eller tio.
+          text: Välj nivå och slumpa ett eller tio kort att visa på skärmen eller skriva ut.
+        - fet: Börja här.
+          text: Tio kort per nivå som förslag till de tio första passen, under Materialet på metodens sida, med en början att låna.
+        - fet: Skrivlistan.
+          text: Mallen Min skrivlista finns i planeringsmallarna på metodens sida. En per elev.
+    bordet:
+      - En skrivbok och en penna till varje elev
+      - Dagens skrivkort, på skärmen eller utskrivet
+      - Högen med de kort gruppen har haft
+      - En klocka som alla ser
+      - En bunt lösa papper
+film:
+  sekunder: 29.21
+  beskrivning: "Läraren visar dagens skrivkort. Läraren säger: ”Skriv vad du tänker när du ser, läser eller tänker på det här.” Hon säger sin egen första mening. Läraren säger: ”Det började med att vattnet sjönk.” Klockan startar. Alla skriver. Maja skriver: ”Kaptenen bor kvar i sitt gamla hus”. Hon stryker över ordet hus. Maja skriver: ”skepp.” Tar det stopp, skriver hon sista ordet igen. Maja skriver: ”Han väntar på vattnet vattnet vattnet”. Klockan ringer. Maja stryker under en rad. Hon läser raden för Elias. Elias säger: ”Berätta mer om kaptenen.”"
+  rubrik: "Så går ett pass"
+  ingress: "Fyra bilder ur filmen om ett pass, med Majas skrivbok i bild. Kortet i bilderna är förenklat: det riktiga är ett foto av två rostiga båtar i en öken. Filmen på metodens sida visar samma sak i rörelse."
+  stillbilder:
+    - text: "Läraren säger uppgiften och sin egen första mening."
+    - text: "Maja stryker över ett ord och skriver sista ordet igen."
+    - text: "Klockan ringer, och Maja stryker under en rad."
+    - text: "Maja läser raden för Elias, som vill höra mer."
+filmer:
+  - nr: 2
+    sekunder: 20.6
+    beskrivning: "En minut har gått. Elias har inte börjat. Elias tänker: ”Hur ska jag börja?” Läraren sätter sig bredvid och frågar. Läraren frågar: ”Vad var din första tanke?” Elias säger: ”Att havet har tagit slut.” Läraren skriver hans ord som första rad. Läraren skriver: ”Att havet har tagit slut.” Läraren säger: ”Det där är dina ord. Fortsätt.” Elias skriver vidare själv. Elias skriver: ”Fiskarna flyttade först.”"
+    rubrik: "När eleven inte har börjat"
+    ingress: "Fyra bilder ur filmen om eleven som inte har börjat. Filmen på metodens sida visar samma sak i rörelse."
+    efter: "exempel"
+    stillbilder:
+      - text: "En minut har gått, och Elias har inte börjat."
+      - text: "Läraren sätter sig bredvid och frågar. Elias svarar."
+      - text: "Läraren skriver hans ord. ”Det där är dina ord.”"
+      - text: "Elias skriver vidare själv."
