@@ -116,6 +116,15 @@ function laggIn() {
       rapport.rutor.push(`bilden På bordet ${b.nr} (pabordet-${b.nr}.svg ligger inte bredvid metodfilen)`);
     }
   }
+  // Bladens mått och skrivytor står i riggens pabordet.json, och kopians eget scripts/pabordetdata.mjs skriver in dem i
+  // kopians src/data/pabordet.json, som flödet /ny-metod gör hos sajten (K-363, riggens brev 2026-10-16: ett blad med
+  // andra mått än 960 × 540 stoppade annars bygget av kopian).
+  if (existsSync(join(mapp, 'pabordet.json'))) {
+    const { slug } = JSON.parse(readFileSync(join(mapp, 'pabordet.json'), 'utf8'));
+    if (slug !== id) throw new Error(`pabordet.json bredvid metodfilen gäller ${slug}, inte ${id}. Ge rätt mapp eller --id.`);
+    const p = kor(process.execPath, [join(kopia, 'scripts', 'pabordetdata.mjs'), mapp], { cwd: kopia });
+    if (p.status !== 0) throw new Error(`scripts/pabordetdata.mjs gick inte i kopian:\n${p.stderr || p.stdout}`);
+  }
   const omslag = [...new Set((d.ramar?.ramar ?? []).flatMap((r) => r.oversikt?.bilder ?? []))];
   for (const sokvag of omslag) {
     const mal = join(stod, id, sokvag);
