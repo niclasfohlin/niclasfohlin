@@ -79,8 +79,10 @@ function aktivitetKort(kat: Aktivitetskategori, k: Aktivitet, { B, svg, png }: {
   delar.push(stycke(k.rad, { pt: 12.5, efter: 90, line: 276, keepNext: true }));
   const fakta = [k.grupp, k.tid, platsText(k.plats), ...(k.beroring ? ['Rör vid varandra'] : [])].filter(Boolean).join(`${NBSP}${NBSP}·${NBSP}${NBSP}`);
   delar.push(stycke(fakta, { pt: 10, farg, fet: true, efter: 120, keepNext: true }));
-  // Bilden i 3:2, 72 procent av kortets bredd, i bildpunkter (15 twips per bildpunkt).
-  const bx = Math.round((B * 0.72) / 15), by = Math.round((bx * 2) / 3);
+  // Bilden i 3:2, 64 procent av kortets bredd, i bildpunkter (15 twips per bildpunkt). Med 72 procent fyllde de längsta
+  // korten 99 procent av sidan i Word, och Google Dokument ritar varje kort 7,6 punkter högre, så sex av 100 kort fick en
+  // andra sida där (googleprov 2026-10-16). 64 procent ger kortet 27 punkter luft.
+  const bx = Math.round((B * 0.64) / 15), by = Math.round((bx * 2) / 3);
   const reserv = png(svg, bx, by);
   if (!reserv) throw new Error(`Aktivitetskortet ${k.id} saknar reservbilden till ${k.bild} (src/lib/metodresurser.ts).`);
   delar.push(new Paragraph({ alignment: AlignmentType.CENTER, keepNext: true, spacing: { before: 0, after: 60, line: 240 }, children: [new ImageRun({ type: 'svg', data: svg, transformation: { width: bx, height: by }, fallback: { type: 'png', data: reserv }, altText: { title: k.namn, description: k.alt, name: k.bild } })] }));
@@ -108,7 +110,9 @@ export function aktivitetskortDokument(id: string, b: Aktivitetsbank, kategori: 
   const lista = kategorinsKort(b, kategori);
   if (!kat || !lista.length) throw new Error(`Aktivitetskorten i ${id} har inga kort i kategorin ${kategori}.`);
   const B = PAGE_W - 2 * MARGINAL;
-  const children: (Paragraph | Table)[] = [];
+  // Ett stycke på en punkt före första kortets band, som före de andra: en tabell först i dokumentet börjar 14 punkter
+  // lägre i Google Dokument (wordparitet, REGLER.md).
+  const children: (Paragraph | Table)[] = [punkt()];
   lista.forEach((k, i) => {
     if (i) children.push(punkt({ pageBreakBefore: true }));
     children.push(...aktivitetKort(kat, k, { B, svg: kortbildSvg(id, k.bild), png }));
