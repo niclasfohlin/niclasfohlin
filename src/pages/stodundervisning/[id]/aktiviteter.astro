@@ -2,10 +2,11 @@
 import Base from '../../../layouts/Base.astro';
 import { publicerade } from '../../../lib/innehall';
 import { metodAdress, UPPHOV } from '../../../lib/metod';
-import { aktiviteterAv, aktiviteterAdress, aktiviteterData, kategorinsKort } from '../../../lib/aktiviteter';
+import { aktiviteterAv, aktiviteterAdress, aktiviteterData, kategorifilNamn, kategorinsKort } from '../../../lib/aktiviteter';
 import { centralAv, lasbarAdress } from '../../../lib/centrala';
 import Delning from '../../../components/Delning.astro';
 import Klocka from '../../../components/Klocka.astro';
+import Filval from '../../../components/Filval.astro';
 import { delningPa } from '../../../lib/delning';
 import { site } from '../../../data/site';
 
@@ -37,7 +38,7 @@ import { site } from '../../../data/site';
 //             raden om vad aktiviteten är, som de sex korten (Niclas 2026-10-16: "Inte allt. Men namnet och vad det är").
 //
 // Ett kort kommer inte igen förrän urvalets alla kort har varit framme, som skrivkorten, och det som har visats, listan,
-// antalet, den senaste kategorin och klockans minuter sparas i webbläsaren till nästa gång. Adressen bär korten
+// den senaste kategorin och klockans minuter sparas i webbläsaren till nästa gång. Antalet börjar alltid på sex. Adressen bär korten
 // (#lara-kanna-01), så att en omladdning visar samma kort.
 export async function getStaticPaths() {
   const metoder = await publicerade('stodundervisning');
@@ -94,6 +95,7 @@ const data = aktiviteterData(m.id, b);
         <div class="ak-sex-ram" id="ak-sex-ram" hidden>
           <p class="sk-tio-not">Tryck på ett kort för att se det helt.</p>
           <ol class="ak-sex" id="ak-sex"></ol>
+          <p class="kb-igen">Tryck på kategorin igen, så kommer sex andra.</p>
         </div>
       </div>
 
@@ -111,7 +113,7 @@ const data = aktiviteterData(m.id, b);
           <span>Att skriva ut</span> <span class="ak-valda-antal" id="ak-valda-antal">0</span>
         </button>
         <div class="ak-valda-innehall" id="ak-valda-innehall">
-          <h2 class="ak-valda-rubrik" id="ak-valda-rubrik">Att skriva ut <span class="ak-valda-antal">0</span></h2>
+          <h2 class="ak-valda-rubrik" id="ak-valda-rubrik" tabindex="-1">Att skriva ut <span class="ak-valda-antal">0</span></h2>
           <p class="ak-valda-tom" id="ak-valda-tom">Listan är tom. Tryck på bocken i ett korts hörn, så hamnar kortet här.</p>
           <ol class="ak-valda-lista" id="ak-valda-lista"></ol>
           <div class="sk-atgarder ak-valda-knappar">
@@ -134,11 +136,12 @@ const data = aktiviteterData(m.id, b);
           <ol class="ak-alla-lista">
             {kategorinsKort(b, k.id).map((x) => <li><button type="button" class="ak-visa" data-kort={x.id}><span class="ak-visa-namn"><span class="ak-nr">{x.nr}</span> {x.namn}</span> <span class="ak-visa-rad">{x.rad}</span></button></li>)}
           </ol>
+          <p class="ak-alla-filer"><span class="filrubrik">Alla {kategorinsKort(b, k.id).length} kort, ett per A4</span> <Filval fil={`/stodundervisning/${kategorifilNamn(m.id, k.id)}`} namn={kategorifilNamn(m.id, k.id)} rubrik={`Aktivitetskorten i ${k.namn}`} statistik={`${d.titel}: aktivitetskorten i ${k.namn}`} pdf pdfTitel="Ladda ner som pdf, ett kort per A4" utanDrive liten /></p>
         </details>
       ))}
     </section>
 
-    <noscript><p class="sk-tom">Sidan behöver JavaScript för att slumpa korten. Korten finns också i Word och pdf under <a href={`/stodundervisning/${m.id}`}>{d.titel}</a>.</p></noscript>
+    <noscript><p class="sk-tom">Sidan behöver JavaScript för att slumpa korten. Korten finns också i Word och pdf under Alla aktiviteter, kategori för kategori.</p></noscript>
 
     <p class="upphov">{UPPHOV}. Aktivitetskorten till <a href={`/stodundervisning/${m.id}`}>{d.titel}</a>: {b.kort.length} kort, {b.kategorier.map((k) => `${kategorinsKort(b, k.id).length} i ${k.namn}`).join(', ')}. Sidans korta adress är {kort}.</p>
 
@@ -161,6 +164,8 @@ const data = aktiviteterData(m.id, b);
 
   type Sparat = { antal: number; kategori?: string; minuter: number; ljud: boolean; sedda: string[]; bockade: string[] };
   const { varde: sparat, spara } = lagring<Sparat>(`aktiviteter:${metod}`, { antal: 6, minuter: 10, ljud: true, sedda: [], bockade: [] });
+  // Sex kort är förvalt varje gång sidan öppnas (Niclas 2026-10-16), också när läraren valde ett kort förra gången.
+  sparat.antal = 6;
   sparat.bockade = sparat.bockade.filter((id) => kortMed.has(id));
 
   // ---------- Läget ----------
@@ -174,6 +179,7 @@ const data = aktiviteterData(m.id, b);
   const skrivutEtt = $<HTMLAnchorElement>('ak-skrivut-ett');
   let dragna: Aktivitet[] = [];
   let visat: Aktivitet | undefined;
+  let klockansKort: string | undefined;
   const tillScenen = () => {
     const under = valrad.getBoundingClientRect().bottom;
     const topp = scen.getBoundingClientRect().top;
@@ -231,7 +237,14 @@ const data = aktiviteterData(m.id, b);
       const bort = el('button', 'ak-valt-bort', '×') as HTMLButtonElement;
       bort.type = 'button';
       bort.setAttribute('aria-label', `Ta bort ${k.namn} ur listan`);
-      bort.addEventListener('click', () => bocka(id, false));
+      // Fokus går till nästa kort i listan, eller till listans rad eller rubrik när listan blir tom.
+      bort.addEventListener('click', () => {
+        const i = sparat.bockade.indexOf(id);
+        bocka(id, false);
+        const kvar = lista.querySelectorAll<HTMLButtonElement>('.ak-valt-bort');
+        if (kvar.length) kvar[Math.min(i, kvar.length - 1)].focus();
+        else (rad.offsetParent ? rad : $('ak-valda-rubrik')).focus();
+      });
       li.append(visa, bort);
       return li;
     }));
@@ -273,7 +286,8 @@ const data = aktiviteterData(m.id, b);
     tillbaka.hidden = !franSex;
     plats.setAttribute('aria-label', `Kortet ${k.namn}`);
     skrivutEtt.href = k.pdf;
-    if (!ur.gar()) ur.satt(minuterAv(k));
+    // Klockan följer kortet: ett annat kort stannar den och ställer den på sin tid, och samma kort låter den gå.
+    if (k.id !== klockansKort) { ur.satt(minuterAv(k)); klockansKort = k.id; }
     history.replaceState(null, '', `#${franSex ? `${dragna.map((x) => x.id).join(',')}/${k.id}` : k.id}`);
   }
   function visaSex() {
@@ -334,14 +348,16 @@ const data = aktiviteterData(m.id, b);
 
   // ---------- Adressen ----------
   // #lara-kanna-01 är ett kort, #a,b,c,d,e,f är sex, och /x efter sex är det som visas helt. #lista=a,b,c är en lista
-  // från en annan enhet: korten läggs till i listan att skriva ut.
+  // från en annan enhet: den blir listan att skriva ut, och sidan säger till när den ersätter en annan lista.
   (() => {
     const hash = decodeURIComponent(location.hash.slice(1));
     const fran = hash.match(/^lista=(.*)$/);
     if (fran) {
-      const nya = fran[1].split(',').filter((id) => kortMed.has(id) && !bockad(id));
-      sparat.bockade.push(...nya);
+      const nya = [...new Set(fran[1].split(',').filter((id) => kortMed.has(id)))];
+      const ersatt = sparat.bockade.length > 0 && sparat.bockade.join(',') !== nya.join(',');
+      sparat.bockade = nya;
       spara();
+      if (ersatt) $('ak-valda-not').textContent = 'Listan kommer från länken och har ersatt den som fanns här.';
       history.replaceState(null, '', location.pathname);
       valda.dataset.oppen = 'true';
       rad.setAttribute('aria-expanded', 'true');

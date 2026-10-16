@@ -2320,7 +2320,8 @@ html.js .bara-js { display: inline-block; }
 .aktivitetskort.liten .kb-band-namn { min-width: 0; overflow-wrap: anywhere; }
 .aktivitetskort.liten .kb-band-nr { display: none; }
 .aktivitetskort.liten .kb-huvud { padding: 0.6rem 0.75rem 0; }
-.aktivitetskort.liten .kb-namn { font-size: 1.15rem; margin: 0 0 0.2rem; }
+/* Ett långt namn i ett ord, som Uppskattningsnätet, bryts inom kortet i stället för att klippas i en smal telefon. */
+.aktivitetskort.liten .kb-namn { font-size: clamp(1rem, 10.5cqi, 1.15rem); margin: 0 0 0.2rem; overflow-wrap: anywhere; hyphens: auto; }
 /* Raden om vad aktiviteten är står hel, också i telefonen (Niclas 2026-10-16: "Man måste ju i översikten fatta själva
    metoden ... Inte allt. Men namnet och vad det är"). */
 .aktivitetskort.liten .kb-rad { font-size: 0.85rem; line-height: 1.35; }
@@ -2412,6 +2413,8 @@ html.js .bara-js { display: inline-block; }
 .ak-visa:hover { background: var(--farg-accent-ljus); }
 .ak-visa-namn { font-weight: 600; color: var(--farg-accent); }
 .ak-visa-rad { font-size: 0.92rem; line-height: 1.4; color: var(--farg-text); }
+/* Kategorins Word-fil och pdf med alla kort, ett per A4, sist i kategorin. */
+.ak-alla-filer { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; margin: 0; padding: 0.6rem 1rem 0.9rem; border-top: 1px solid var(--farg-kant); font-family: var(--typsnitt-ui); }
 
 /* Brainbreakkortet: gruppens kort, stort och i elevens typsnitt, i 3:4 som skrivkortet, så att helskärmen ritar det på
    samma sätt. Texten krymper där den inte ryms (--skala, sidans skript). */
@@ -2429,6 +2432,8 @@ html.js .bara-js { display: inline-block; }
 .bb-fem { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 @media (min-width: 48rem) { .bb-fem { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .bb-slumpa { min-width: 10rem; justify-content: center; font-size: 1.05rem; border: 0; cursor: pointer; }
+/* Raden under de sex korten om att trycka igen, diskret som raden över dem. */
+.kb-igen { margin: 0.9rem 0 0; text-align: center; font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
 .sk-val-kort:hover .brainbreakkort, .sk-val-kort:focus-visible .brainbreakkort { outline: 3px solid var(--farg-accent); outline-offset: 3px; }
 
 /* Musiken: tre knappar under klockan, kanalen som passar kortet först och märkt, och under dem en enkel spelare med
@@ -2468,7 +2473,7 @@ html.js .bara-js { display: inline-block; }
 }
 @media (orientation: portrait) { .sk-ett:fullscreen .sk-kortplats .brainbreakkort { width: min(100cqw, 75cqh); } }
 @media print {
-  .kortbanksida .sk-val, .kortbanksida .sk-sidospalt, .kortbanksida .ak-valda, .kortbanksida .ak-alla, .kortbanksida .sk-tio-not, .kortbanksida .ak-bock { display: none; }
+  .kortbanksida .sk-val, .kortbanksida .sk-sidospalt, .kortbanksida .ak-valda, .kortbanksida .ak-alla, .kortbanksida .sk-tio-not, .kortbanksida .kb-igen, .kortbanksida .ak-bock { display: none; }
   .kortbanksida .ak-med-bock.vald .aktivitetskort { border-color: var(--farg-kant); box-shadow: none; }
   .kortbanksida .ak-kortplats .aktivitetskort .kb-band { padding-right: 1em; }
   .kortbanksida .ak-yta { display: block; }
