@@ -44,8 +44,9 @@ pabordet:
     efter: "ram: Lärarens skattning"
   - nr: 2
     rubrik: "Blad: Vår grupp"
-    text: Elevens blad att skriva ut. Eleven ringar in ett svar från 1 till 5 på sex påståenden, tre om gruppen och tre om sig själv, och skriver på raderna det hen vill säga om gruppen.
+    text: Elevens blad att skriva ut. Eleven ringar in ett svar från 1 till 5 på sex påståenden, tre om gruppen och tre om sig själv, och skriver på raderna det hen vill säga om gruppen. Har skolan Google, finns bladet också som formulär med en färdig sammanställning på niclasfohlin.se/vargrupp. Gör en kopia, publicera formuläret och skicka det i Classroom, så visar sammanställningen gruppens snitt vid varje tillfälle.
     efter: "ram: Gruppreflektion"
+    google: /vargrupp
 
 inledning:
   - Gruppstärkande aktiviteter är lekar, utmaningar, samtal och byggen där gruppen bara kan lyckas tillsammans. Metoden passar en hel klass och en särskild undervisningsgrupp med minst fyra elever. Den behövs mest när gruppen är ny, när några står utanför eller när samarbetet går trögt.

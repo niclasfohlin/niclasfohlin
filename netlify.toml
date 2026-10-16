@@ -46,6 +46,14 @@
   to = "/stodundervisning/gruppstarkande-aktiviteter/brainbreaks"
   status = 301
 
+# Bladet Vår grupp som Google Formulär med en sammanställning: Googles sida för att kopiera kalkylarket, som har
+# formuläret kopplat (fältet google på bladet i metodens fil; scripts/vargrupp/, DRIFT.md under Google Formulär).
+# Status 302, eftersom kalkylarket kan bytas.
+[[redirects]]
+  from = "/vargrupp"
+  to = "https://docs.google.com/spreadsheets/d/1sgn09bYenX62hhOaO8CBqbPtbel2m4mhR_X7ObUNlYo/copy"
+  status = 302
+
 # Korta adresser till kommentarernas panel och till registreringen av administratören.
 [[redirects]]
   from = "/kommentarer/admin"

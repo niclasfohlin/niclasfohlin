@@ -209,6 +209,11 @@ const stodundervisning = defineCollection({
       text,
       efter: text.refine((v) => tolkaEfter(v) !== undefined, { error: `efter är ${EFTER_FORMER}.` }),
       fluent: z.array(z.string()).optional(),
+      // google: en kort adress på sajten som leder till Googles sida för att kopiera bladet som Google Formulär med en
+      // sammanställning (Gruppstärkande aktiviteter, bladet Vår grupp, Niclas 2026-10-16). Bladet får knappen Kopiera
+      // formuläret och sammanställningen, och bladets text nämner adressen, så att den står också i Word och på papper.
+      // scripts/utskriftsformat.mjs prövar att netlify.toml leder adressen till Google.
+      google: z.string().regex(/^\/[a-z0-9-]+$/, 'google är en kort adress på sajten, som /vargrupp.').optional(),
     })).default([]),
     // De centrala sakerna som metoden visar (Niclas 2026-10-14, src/lib/centrala.ts): en sida eller en pdf ur registret
     // src/data/centrala.json, egen eller delad med andra metoder, som Ta fram ett skrivkort och Lässtrategier. efterText är

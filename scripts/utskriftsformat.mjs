@@ -116,9 +116,19 @@ const textI = (p) => { if (p.text === undefined) p.text = platt(execFileSync('pd
       if (!o || o.till !== c.adress || o.status !== 301) fel.push(`${c.id}: netlify.toml leder inte ${c.kort} till ${c.adress} med status 301`);
     }
   }
+  // Ett blad med fältet google (bladet som Google Formulär, Gruppstärkande aktiviteter 2026-10-16): knappens korta
+  // adress leder i netlify.toml till Googles sida för att kopiera ett kalkylark, så att knappen aldrig går till en
+  // sida som inte finns.
+  const knappar = new Set();
+  const las = (d) => { for (const e of readdirSync(d, { withFileTypes: true })) { const p = join(d, e.name); if (e.isDirectory()) las(p); else if (e.name === 'index.html') for (const m of readFileSync(p, 'utf8').matchAll(/class="m-blad-google"><a[^>]*href="([^"]+)"/g)) knappar.add(m[1]); } };
+  las(join(dist, 'stodundervisning'));
+  for (const k of knappar) {
+    const o = omleder.get(k);
+    if (!o || !/^https:\/\/docs\.google\.com\/spreadsheets\/d\/[\w-]+\/copy$/.test(o.till) || o.status !== 302) fel.push(`bladet med google ${k}: netlify.toml leder inte ${k} till Googles sida för att kopiera ett kalkylark med status 302`);
+  }
   if (fel.length) {
     for (const f of fel) console.error(`  fel  ${f}`);
-    console.error('utskriftsformat: de centrala sakerna stämmer inte med registret, src/data/centrala.json.');
+    console.error('utskriftsformat: de centrala sakerna eller bladens Google-knappar stämmer inte med registret, src/data/centrala.json, eller netlify.toml.');
     process.exit(1);
   }
 }

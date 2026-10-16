@@ -21,6 +21,7 @@ const blad = arBlad(b);
     {!utanRubrik && <p class="m-blad-rubrik">{bladNamn(b)}</p>}
     <a href={b.adress} class="bild-lank" title="Öppna bladet i full storlek"><img src={b.adress} alt={bildensAlt(b)} width={b.matt.bredd} height={b.matt.hojd} loading="lazy" decoding="async" data-utskriftsbild /></a>
     <figcaption>{b.bild.text}</figcaption>
+    {b.bild.google && <p class="m-blad-google"><a class="knapp sekundar" href={b.bild.google} target="_blank" rel="noopener" data-goatcounter-click={`google:${b.bild.google.slice(1)}`} data-goatcounter-title={`${bladNamn(b)}: kopiera formuläret och sammanställningen i Google`}>Kopiera formuläret och sammanställningen</a></p>}
   </figure>
 ) : (
   <figure class={`m-pabordet${vecka ? ' i-del' : ''}`}>
