@@ -2,6 +2,28 @@
   "metod": "gruppstarkande-aktiviteter",
   "titel": "Gruppstärkande aktiviteter: brainbreaks",
   "farg": "1C6E73",
+  "kategorier": [
+    {
+      "id": "rorelse",
+      "namn": "Rörelse"
+    },
+    {
+      "id": "dans-och-rytm",
+      "namn": "Dans & rytm"
+    },
+    {
+      "id": "lek",
+      "namn": "Lek"
+    },
+    {
+      "id": "hjarngympa",
+      "namn": "Hjärngympa"
+    },
+    {
+      "id": "lugn",
+      "namn": "Lugn"
+    }
+  ],
   "musik": [
     {
       "id": "glad",
@@ -32,6 +54,7 @@
     {
       "id": "bb-01",
       "nr": 1,
+      "kategori": "lugn",
       "namn": "Fokusbollen",
       "minuter": 2,
       "slag": "lugn",
@@ -44,6 +67,7 @@
     {
       "id": "bb-02",
       "nr": 2,
+      "kategori": "lugn",
       "namn": "Blunda och lyssna",
       "minuter": 2,
       "slag": "lugn",
@@ -56,6 +80,7 @@
     {
       "id": "bb-03",
       "nr": 3,
+      "kategori": "hjarngympa",
       "namn": "Blinka och knäpp",
       "minuter": 1,
       "slag": "lugn",
@@ -68,6 +93,7 @@
     {
       "id": "bb-04",
       "nr": 4,
+      "kategori": "lugn",
       "namn": "Varma händer",
       "minuter": 2,
       "slag": "lugn",
@@ -80,6 +106,7 @@
     {
       "id": "bb-05",
       "nr": 5,
+      "kategori": "lugn",
       "namn": "Mindfulness",
       "minuter": 3,
       "slag": "lugn",
@@ -92,6 +119,7 @@
     {
       "id": "bb-06",
       "nr": 6,
+      "kategori": "rorelse",
       "namn": "Gör det jag säger",
       "minuter": 2,
       "slag": "pigg",
@@ -104,6 +132,7 @@
     {
       "id": "bb-07",
       "nr": 7,
+      "kategori": "rorelse",
       "namn": "Balansera",
       "minuter": 2,
       "slag": "lugn",
@@ -116,6 +145,7 @@
     {
       "id": "bb-08",
       "nr": 8,
+      "kategori": "lek",
       "namn": "Härma mig",
       "minuter": 3,
       "slag": "pigg",
@@ -128,6 +158,7 @@
     {
       "id": "bb-09",
       "nr": 9,
+      "kategori": "lek",
       "namn": "Ballongvolleyboll",
       "minuter": 8,
       "slag": "pigg",
@@ -140,6 +171,7 @@
     {
       "id": "bb-10",
       "nr": 10,
+      "kategori": "rorelse",
       "namn": "Stretching",
       "minuter": 3,
       "slag": "lugn",
@@ -152,6 +184,7 @@
     {
       "id": "bb-11",
       "nr": 11,
+      "kategori": "lek",
       "namn": "Hemliga handslaget",
       "minuter": 3,
       "slag": "lugn",
@@ -165,6 +198,7 @@
     {
       "id": "bb-12",
       "nr": 12,
+      "kategori": "hjarngympa",
       "namn": "Skriv med fel hand",
       "minuter": 5,
       "slag": "lugn",
@@ -177,6 +211,7 @@
     {
       "id": "bb-13",
       "nr": 13,
+      "kategori": "dans-och-rytm",
       "namn": "Klappa takten",
       "minuter": 2,
       "slag": "lugn",
@@ -189,6 +224,7 @@
     {
       "id": "bb-14",
       "nr": 14,
+      "kategori": "lek",
       "namn": "Skulle du?",
       "minuter": 3,
       "slag": "pigg",
@@ -201,6 +237,7 @@
     {
       "id": "bb-15",
       "nr": 15,
+      "kategori": "rorelse",
       "namn": "Snurra!",
       "minuter": 2,
       "slag": "pigg",
@@ -213,6 +250,7 @@
     {
       "id": "bb-16",
       "nr": 16,
+      "kategori": "lek",
       "namn": "Byt plats",
       "minuter": 3,
       "slag": "pigg",
@@ -225,6 +263,7 @@
     {
       "id": "bb-17",
       "nr": 17,
+      "kategori": "lek",
       "namn": "På linjen",
       "minuter": 4,
       "slag": "lugn",
@@ -237,6 +276,7 @@
     {
       "id": "bb-18",
       "nr": 18,
+      "kategori": "dans-och-rytm",
       "namn": "Frys!",
       "minuter": 8,
       "slag": "pigg",
@@ -249,6 +289,7 @@
     {
       "id": "bb-19",
       "nr": 19,
+      "kategori": "lek",
       "namn": "Mingla",
       "minuter": 5,
       "slag": "pigg",
@@ -261,6 +302,7 @@
     {
       "id": "bb-20",
       "nr": 20,
+      "kategori": "lek",
       "namn": "Följa John!",
       "minuter": 3,
       "slag": "pigg",
@@ -273,6 +315,7 @@
     {
       "id": "bb-21",
       "nr": 21,
+      "kategori": "rorelse",
       "namn": "Rör om i grytan",
       "minuter": 2,
       "slag": "pigg",
@@ -285,6 +328,7 @@
     {
       "id": "bb-22",
       "nr": 22,
+      "kategori": "lek",
       "namn": "Samma tecken",
       "minuter": 2,
       "slag": "lugn",
@@ -297,6 +341,7 @@
     {
       "id": "bb-23",
       "nr": 23,
+      "kategori": "dans-och-rytm",
       "namn": "Regnstormen",
       "minuter": 2,
       "slag": "lugn",
@@ -309,6 +354,7 @@
     {
       "id": "bb-24",
       "nr": 24,
+      "kategori": "lek",
       "namn": "Det hemliga talet",
       "minuter": 4,
       "slag": "pigg",
@@ -321,6 +367,7 @@
     {
       "id": "bb-25",
       "nr": 25,
+      "kategori": "lek",
       "namn": "Byta namn",
       "minuter": 5,
       "slag": "pigg",
@@ -333,6 +380,7 @@
     {
       "id": "bb-26",
       "nr": 26,
+      "kategori": "rorelse",
       "namn": "Skaka loss",
       "minuter": 1,
       "slag": "pigg",
@@ -345,6 +393,7 @@
     {
       "id": "bb-27",
       "nr": 27,
+      "kategori": "dans-och-rytm",
       "namn": "Dansen i fyra steg",
       "minuter": 5,
       "slag": "pigg",
@@ -357,6 +406,7 @@
     {
       "id": "bb-28",
       "nr": 28,
+      "kategori": "hjarngympa",
       "namn": "Är du med?",
       "minuter": 3,
       "slag": "pigg",
@@ -369,6 +419,7 @@
     {
       "id": "bb-29",
       "nr": 29,
+      "kategori": "lek",
       "namn": "Bogserbåten",
       "minuter": 3,
       "slag": "pigg",
@@ -382,6 +433,7 @@
     {
       "id": "bb-30",
       "nr": 30,
+      "kategori": "dans-och-rytm",
       "namn": "Klappen går runt",
       "minuter": 2,
       "slag": "lugn",
@@ -394,6 +446,7 @@
     {
       "id": "bb-31",
       "nr": 31,
+      "kategori": "lek",
       "namn": "Zip zap",
       "minuter": 3,
       "slag": "lugn",
@@ -406,6 +459,7 @@
     {
       "id": "bb-32",
       "nr": 32,
+      "kategori": "lek",
       "namn": "Energibollen",
       "minuter": 3,
       "slag": "pigg",
@@ -418,6 +472,7 @@
     {
       "id": "bb-33",
       "nr": 33,
+      "kategori": "lek",
       "namn": "Det här är ingen penna",
       "minuter": 4,
       "slag": "lugn",
@@ -430,6 +485,7 @@
     {
       "id": "bb-34",
       "nr": 34,
+      "kategori": "rorelse",
       "namn": "Ja, vi gör det!",
       "minuter": 3,
       "slag": "pigg",
@@ -442,6 +498,7 @@
     {
       "id": "bb-35",
       "nr": 35,
+      "kategori": "dans-och-rytm",
       "namn": "Vardagsdisco",
       "minuter": 2,
       "slag": "pigg",
@@ -454,6 +511,7 @@
     {
       "id": "bb-36",
       "nr": 36,
+      "kategori": "lek",
       "namn": "Gissa stegen",
       "minuter": 3,
       "slag": "lugn",
@@ -466,6 +524,7 @@
     {
       "id": "bb-37",
       "nr": 37,
+      "kategori": "dans-och-rytm",
       "namn": "Aw-so-go",
       "minuter": 3,
       "slag": "lugn",
@@ -478,6 +537,7 @@
     {
       "id": "bb-38",
       "nr": 38,
+      "kategori": "dans-och-rytm",
       "namn": "Klappa och säg",
       "minuter": 2,
       "slag": "lugn",
@@ -491,6 +551,7 @@
     {
       "id": "bb-39",
       "nr": 39,
+      "kategori": "hjarngympa",
       "namn": "Ett-tre-två",
       "minuter": 2,
       "slag": "pigg",
@@ -504,6 +565,7 @@
     {
       "id": "bb-40",
       "nr": 40,
+      "kategori": "rorelse",
       "namn": "Tolv till ett",
       "minuter": 4,
       "slag": "pigg",
@@ -516,6 +578,7 @@
     {
       "id": "bb-41",
       "nr": 41,
+      "kategori": "rorelse",
       "namn": "Landskapet",
       "minuter": 5,
       "slag": "pigg",
@@ -528,6 +591,7 @@
     {
       "id": "bb-42",
       "nr": 42,
+      "kategori": "rorelse",
       "namn": "Som om",
       "minuter": 3,
       "slag": "pigg",
@@ -540,6 +604,7 @@
     {
       "id": "bb-43",
       "nr": 43,
+      "kategori": "lek",
       "namn": "Idrotterna",
       "minuter": 3,
       "slag": "pigg",
@@ -552,6 +617,7 @@
     {
       "id": "bb-44",
       "nr": 44,
+      "kategori": "rorelse",
       "namn": "Rymdresan",
       "minuter": 4,
       "slag": "pigg",
@@ -564,6 +630,7 @@
     {
       "id": "bb-45",
       "nr": 45,
+      "kategori": "dans-och-rytm",
       "namn": "Vicka",
       "minuter": 2,
       "slag": "pigg",
@@ -576,6 +643,7 @@
     {
       "id": "bb-46",
       "nr": 46,
+      "kategori": "lek",
       "namn": "Bönorna",
       "minuter": 5,
       "slag": "pigg",
@@ -588,6 +656,7 @@
     {
       "id": "bb-47",
       "nr": 47,
+      "kategori": "lek",
       "namn": "Berg-och-dalbanan",
       "minuter": 2,
       "slag": "lugn",
@@ -600,6 +669,7 @@
     {
       "id": "bb-48",
       "nr": 48,
+      "kategori": "rorelse",
       "namn": "Hundra tillsammans",
       "minuter": 5,
       "slag": "pigg",
@@ -612,6 +682,7 @@
     {
       "id": "bb-49",
       "nr": 49,
+      "kategori": "dans-och-rytm",
       "namn": "Linjalhoppet",
       "minuter": 2,
       "slag": "pigg",
@@ -624,6 +695,7 @@
     {
       "id": "bb-50",
       "nr": 50,
+      "kategori": "rorelse",
       "namn": "Kortleken",
       "minuter": 4,
       "slag": "pigg",
@@ -636,6 +708,7 @@
     {
       "id": "bb-51",
       "nr": 51,
+      "kategori": "lek",
       "namn": "Hitta och rör",
       "minuter": 2,
       "slag": "pigg",
@@ -648,6 +721,7 @@
     {
       "id": "bb-52",
       "nr": 52,
+      "kategori": "rorelse",
       "namn": "Myrsteg och jättekliv",
       "minuter": 3,
       "slag": "lugn",
@@ -660,6 +734,7 @@
     {
       "id": "bb-53",
       "nr": 53,
+      "kategori": "rorelse",
       "namn": "Upp utan händer",
       "minuter": 2,
       "slag": "lugn",
@@ -672,6 +747,7 @@
     {
       "id": "bb-54",
       "nr": 54,
+      "kategori": "hjarngympa",
       "namn": "Lillfinger och tumme",
       "minuter": 1,
       "slag": "lugn",
@@ -684,6 +760,7 @@
     {
       "id": "bb-55",
       "nr": 55,
+      "kategori": "hjarngympa",
       "namn": "Kors och tvärs",
       "minuter": 2,
       "slag": "lugn",
@@ -696,6 +773,7 @@
     {
       "id": "bb-56",
       "nr": 56,
+      "kategori": "hjarngympa",
       "namn": "Öra och näsa",
       "minuter": 1,
       "slag": "lugn",
@@ -708,6 +786,7 @@
     {
       "id": "bb-57",
       "nr": 57,
+      "kategori": "hjarngympa",
       "namn": "Liggande åttan",
       "minuter": 2,
       "slag": "lugn",
@@ -720,6 +799,7 @@
     {
       "id": "bb-58",
       "nr": 58,
+      "kategori": "hjarngympa",
       "namn": "Korsgången",
       "minuter": 2,
       "slag": "pigg",
@@ -732,6 +812,7 @@
     {
       "id": "bb-59",
       "nr": 59,
+      "kategori": "hjarngympa",
       "namn": "Skriv i luften",
       "minuter": 3,
       "slag": "lugn",
@@ -744,6 +825,7 @@
     {
       "id": "bb-60",
       "nr": 60,
+      "kategori": "hjarngympa",
       "namn": "Osynliga bilder",
       "minuter": 3,
       "slag": "lugn",
@@ -756,6 +838,7 @@
     {
       "id": "bb-61",
       "nr": 61,
+      "kategori": "hjarngympa",
       "namn": "Kroppens tal",
       "minuter": 3,
       "slag": "lugn",
@@ -768,6 +851,7 @@
     {
       "id": "bb-62",
       "nr": 62,
+      "kategori": "lek",
       "namn": "Pappersbollen",
       "minuter": 3,
       "slag": "pigg",
@@ -780,6 +864,7 @@
     {
       "id": "bb-63",
       "nr": 63,
+      "kategori": "rorelse",
       "namn": "Knälyft i par",
       "minuter": 2,
       "slag": "pigg",
@@ -793,6 +878,7 @@
     {
       "id": "bb-64",
       "nr": 64,
+      "kategori": "hjarngympa",
       "namn": "Stanna och skriv",
       "minuter": 4,
       "slag": "pigg",
@@ -805,6 +891,7 @@
     {
       "id": "bb-65",
       "nr": 65,
+      "kategori": "hjarngympa",
       "namn": "Räkna i par",
       "minuter": 2,
       "slag": "lugn",
@@ -817,6 +904,7 @@
     {
       "id": "bb-66",
       "nr": 66,
+      "kategori": "lugn",
       "namn": "Fjärilsandningen",
       "minuter": 2,
       "slag": "lugn",
@@ -829,6 +917,7 @@
     {
       "id": "bb-67",
       "nr": 67,
+      "kategori": "lugn",
       "namn": "Fyrkantsandning",
       "minuter": 2,
       "slag": "lugn",
@@ -841,6 +930,7 @@
     {
       "id": "bb-68",
       "nr": 68,
+      "kategori": "lugn",
       "namn": "Hundandningen",
       "minuter": 2,
       "slag": "lugn",
@@ -853,6 +943,7 @@
     {
       "id": "bb-69",
       "nr": 69,
+      "kategori": "lugn",
       "namn": "Bänkhunden",
       "minuter": 2,
       "slag": "lugn",
@@ -865,6 +956,7 @@
     {
       "id": "bb-70",
       "nr": 70,
+      "kategori": "lek",
       "namn": "Mexikanska vågen",
       "minuter": 2,
       "slag": "pigg",
@@ -877,6 +969,7 @@
     {
       "id": "bb-71",
       "nr": 71,
+      "kategori": "dans-och-rytm",
       "namn": "Huvud, axlar, knä",
       "minuter": 2,
       "slag": "pigg",
@@ -889,6 +982,7 @@
     {
       "id": "bb-72",
       "nr": 72,
+      "kategori": "rorelse",
       "namn": "Plocka äpplen",
       "minuter": 3,
       "slag": "lugn",
@@ -901,6 +995,7 @@
     {
       "id": "bb-73",
       "nr": 73,
+      "kategori": "dans-och-rytm",
       "namn": "Dirigenten",
       "minuter": 3,
       "slag": "lugn",
@@ -913,6 +1008,7 @@
     {
       "id": "bb-74",
       "nr": 74,
+      "kategori": "lugn",
       "namn": "Fem sinnen",
       "minuter": 3,
       "slag": "lugn",
@@ -925,6 +1021,7 @@
     {
       "id": "bb-75",
       "nr": 75,
+      "kategori": "rorelse",
       "namn": "Robot och spagetti",
       "minuter": 2,
       "slag": "pigg",
@@ -937,6 +1034,7 @@
     {
       "id": "bb-76",
       "nr": 76,
+      "kategori": "lugn",
       "namn": "Isbiten som smälter",
       "minuter": 2,
       "slag": "lugn",
@@ -949,6 +1047,7 @@
     {
       "id": "bb-77",
       "nr": 77,
+      "kategori": "lugn",
       "namn": "Ballongen",
       "minuter": 2,
       "slag": "lugn",
@@ -961,6 +1060,7 @@
     {
       "id": "bb-78",
       "nr": 78,
+      "kategori": "rorelse",
       "namn": "Popcorn",
       "minuter": 2,
       "slag": "pigg",
@@ -973,6 +1073,7 @@
     {
       "id": "bb-79",
       "nr": 79,
+      "kategori": "hjarngympa",
       "namn": "Bokstaven på ryggen",
       "minuter": 3,
       "slag": "lugn",
@@ -986,6 +1087,7 @@
     {
       "id": "bb-80",
       "nr": 80,
+      "kategori": "lek",
       "namn": "Gruppstatyn",
       "minuter": 6,
       "slag": "pigg",

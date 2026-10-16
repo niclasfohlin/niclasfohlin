@@ -8,8 +8,8 @@ export type Kategori = { id: string; namn: string; farg: string };
 export type Aktivitet = { id: string; kategori: string; nr: number; namn: string; rad: string; grupp: string; tid: string; plats: string; beroring?: boolean; material: string[]; steg: string[]; tanka: string[]; bild: string; alt: string; pdf: string };
 export type Aktivitetsdata = { kategorier: Kategori[]; kort: Aktivitet[] };
 export type Kanal = { id: string; namn: string; kanal: string; strom: string; reserv: string; sida: string };
-export type Brainbreak = { id: string; nr: number; namn: string; minuter: number; slag: string; musik: string; plats: string; beroring?: boolean; text: string; bild: string; alt: string };
-export type Brainbreakdata = { farg: string; musik: Kanal[]; kort: Brainbreak[] };
+export type Brainbreak = { id: string; nr: number; kategori: string; namn: string; minuter: number; slag: string; musik: string; plats: string; beroring?: boolean; text: string; bild: string; alt: string };
+export type Brainbreakdata = { farg: string; kategorier: { id: string; namn: string }[]; musik: Kanal[]; kort: Brainbreak[] };
 
 export const el = (tag: string, klass?: string, text?: string) => { const e = document.createElement(tag); if (klass) e.className = klass; if (text !== undefined) e.textContent = text; return e; };
 const NBSP = ' ';
@@ -61,12 +61,13 @@ export function aktivitetskortet(data: Aktivitetsdata, k: Aktivitet, liten: bool
   return f;
 }
 
-/** Brainbreakkortet, gruppens kort som visas stort. liten är formen bland sex: bandet, namnet och bilden. */
+/** Brainbreakkortet, gruppens kort som visas stort. liten är formen bland sex: bandet, namnet och bilden. Bandet har
+ *  kortets kategori, som Lek eller Lugn, så att den syns också bland sex (Niclas 2026-10-16). */
 export function brainbreakkortet(data: Brainbreakdata, k: Brainbreak, liten: boolean): HTMLElement {
   const f = el('article', `brainbreakkort${liten ? ' liten' : ''}`);
   f.style.setProperty('--kat', data.farg);
   f.dataset.kort = k.id;
-  f.append(bandet('Brainbreak', `${k.minuter}${NBSP}min${NBSP}·${NBSP}${k.nr}`));
+  f.append(bandet(data.kategorier.find((x) => x.id === k.kategori)?.namn ?? 'Brainbreak', `${k.minuter}${NBSP}min${NBSP}·${NBSP}${k.nr}`));
   const huvud = el('div', 'kb-huvud');
   huvud.append(el(liten ? 'p' : 'h2', 'kb-namn', k.namn));
   if (k.beroring) huvud.append(el('p', 'kb-fakta', 'Rör vid varandra'));

@@ -2431,7 +2431,6 @@ html.js .bara-js { display: inline-block; }
 /* Sex kort i rader och kolumner med jämnt antal: tre rader och två kolumner i telefonen, två och tre på en bred skärm. */
 .bb-fem { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 @media (min-width: 48rem) { .bb-fem { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.bb-slumpa { min-width: 10rem; justify-content: center; font-size: 1.05rem; border: 0; cursor: pointer; }
 /* Raden under de sex korten om att trycka igen, diskret som raden över dem. */
 .kb-igen { margin: 0.9rem 0 0; text-align: center; font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
 .sk-val-kort:hover .brainbreakkort, .sk-val-kort:focus-visible .brainbreakkort { outline: 3px solid var(--farg-accent); outline-offset: 3px; }

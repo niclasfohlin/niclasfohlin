@@ -1,7 +1,7 @@
 ---
 // Mallen för delningskortet till sidan som slumpar brainbreaks, 1200 × 630 (Niclas 2026-10-14: en sida att dela får en
 // egen delningsbild i en egen mall). Den har delningskortens form (src/pages/delning/kort/[namn].astro), med titeln till
-// vänster, och till höger tre brainbreakkort i en solfjäder och klockan, ritade med sidans egen kod
+// vänster, och till höger tre hela brainbreakkort i en solfjäder och klockan, ritade med sidans egen kod
 // (src/scripts/kortbanken.ts), så att bilden visar korten som de ser ut. Mallen är egen, så att en ändring här bara ritar
 // om kortet för sidan som slumpar och inte alla sidors kort (src/lib/delningskort.ts räknar in den bara där). Sidan finns
 // bara för att scripts/delningskort.mjs ska fotografera den; den länkas inte och indexeras inte.
@@ -84,9 +84,13 @@ const yta = `M0 0L${(Math.sin(v) * R).toFixed(2)} ${(-Math.cos(v) * R).toFixed(2
       import { brainbreakkortet, type Brainbreakdata } from '../../../scripts/kortbanken';
       const data: Brainbreakdata = JSON.parse(document.getElementById('dk-data')!.textContent!);
       const platser = [...document.getElementById('dk-korten')!.children] as HTMLElement[];
-      const korten = data.kort.map((k, i) => { const kort = brainbreakkortet(data, k, true); platser[i].append(kort); return kort; });
+      // Hela kort med texten, som det stora kortet på sidan, så att bilden visar vad en brainbreak är; texten krymper
+      // tills den ryms, som på sidan.
+      const korten = data.kort.map((k, i) => { const kort = brainbreakkortet(data, k, false); platser[i].append(kort); return kort; });
+      const passa = (kort: HTMLElement) => { let skala = 1; kort.style.setProperty('--skala', '1'); while (skala > 0.5 && kort.scrollHeight > kort.clientHeight + 1) { skala -= 0.04; kort.style.setProperty('--skala', skala.toFixed(2)); } };
       (window as Window & { dkKlar?: Promise<unknown> }).dkKlar = document.fonts.ready
-        .then(() => Promise.all(korten.flatMap((k) => [...k.querySelectorAll('img')]).map((i) => (i.complete ? 1 : new Promise((r) => { i.onload = i.onerror = r; })))));
+        .then(() => Promise.all(korten.flatMap((k) => [...k.querySelectorAll('img')]).map((i) => (i.complete ? 1 : new Promise((r) => { i.onload = i.onerror = r; })))))
+        .then(() => korten.forEach(passa));
     </script>
   </body>
 </html>

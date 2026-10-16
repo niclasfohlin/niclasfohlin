@@ -18,10 +18,11 @@ import { site } from '../../../data/site';
 // musik". Kvällen efter blev fem sex (Niclas: "6 slumpade där med? Blir väl snyggare med rader och kolumner. Med jämt
 // antal"): tre rader och två kolumner i telefonen, två rader och tre kolumner på en bred skärm.
 //
-//   Urvalet   Sex kort slumpas fram direkt när sidan öppnas (Niclas 2026-10-16: "6 automatiskt slumpas fram direkt"),
-//             och varje tryck på Sex nya ger sex andra, som en diskret rad under korten säger (Niclas: "Kanske 'Sex nya'
-//             på knappen och ... diskret text att trycka igen för 6 nya"). Ett kort kommer inte igen förrän alla har
-//             varit framme.
+//   Urvalet   Sex kort ur Alla slumpas fram direkt när sidan öppnas (Niclas 2026-10-16: "6 automatiskt slumpas fram
+//             direkt och är markerad"), och knapparna Slumpa ur ger sex andra ur alla kort eller ur en kategori, som Lek
+//             eller Lugn (Niclas: "kanske ha dessa taggar som slumpningsknappar också"), som en diskret rad under
+//             korten säger. Kategorin står i kortets band. Ett kort kommer inte igen förrän urvalets alla har varit
+//             framme.
 //   Kortet    Ett tryck på ett av de sex visar det stort, med klockan bredvid ställd på kortets minuter (Klocka.astro,
 //             src/scripts/klocka.ts, samma klocka som på Ta fram ett skrivkort) och helskärm för projektorn.
 //   Musiken   Tre knappar under klockan: Glad och peppig, Dans och modern, Lugn och avslappnad. Kanalen som passar
@@ -55,22 +56,28 @@ const kort = `${site.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}${c ? la
 const kortdata = kortdataAdress(brainbreaksAdress(m.id), brainbreaksData(m.id, b));
 ---
 
-<Base title={`${namn}: ${d.titel}`} description={`Slumpa fram sex brainbreaks ur ${b.kort.length}, välj en och visa den stort med en klocka och musik i tre kategorier.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
+<Base title={`${namn}: ${d.titel}`} description={`Slumpa fram sex brainbreaks ur ${b.kort.length} i ${b.kategorier.length} kategorier, välj en och visa den stort med en klocka och musik.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
   <article class="kortbanksida brainbreaksida" data-metod={m.id} data-titel={d.titel} data-kortdata={kortdata}>
     {/* Statistiken (DRIFT.md under Besöksstatistik): besöken räknas under metoden som "på Ta fram en brainbreak", och
-        helskärmen, klockan och varje kanal som startas som brainbreaks:<id>:… Varje tryck på Sex nya räknas inte. */}
+        helskärmen, klockan och varje kanal som startas som brainbreaks:<id>:… Varje tryck på en kategori räknas inte. */}
     <header class="sk-huvud">
       <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${m.id}`}>{d.titel}</a> · Brainbreaks</p>
       <h1>{namn}</h1>
-      <p class="ingress">Här står sex brainbreaks, och Sex nya ger sex andra. Välj en, så står den stort med klockan och musiken.</p>
+      <p class="ingress">Här står sex brainbreaks. Tryck på Alla eller en kategori, så kommer sex andra. Välj en, så står den stort med klockan och musiken.</p>
     </header>
 
     <div class="sk-val">
-      <button type="button" class="knapp bb-slumpa" id="bb-slumpa">Sex nya</button>
+      <div class="sk-valrad" role="group" aria-labelledby="bb-kat-etikett">
+        <span class="sk-etikett" id="bb-kat-etikett">Slumpa ur</span>
+        <div class="sk-nivaknappar bb-kategorier">
+          <button type="button" class="sk-niva" data-kategori="alla">Alla</button>
+          {b.kategorier.map((k) => <button type="button" class="sk-niva" data-kategori={k.id}>{k.namn}</button>)}
+        </div>
+      </div>
     </div>
 
     <div class="sk-scen" id="bb-scen" data-lage="tom">
-      <p class="sk-tom">Tryck på Sex nya.</p>
+      <p class="sk-tom">Tryck på Alla eller en kategori.</p>
       <div class="sk-ett bb-ett" id="bb-ett" hidden>
         <div class="sk-kortplats" id="bb-kortplats" tabindex="-1" aria-label="Kortet"></div>
         <div class="sk-sidospalt">
@@ -106,7 +113,7 @@ const kortdata = kortdataAdress(brainbreaksAdress(m.id), brainbreaksData(m.id, b
       <div class="bb-fem-ram" id="bb-fem-ram" hidden>
         <p class="sk-tio-not">Tryck på den brainbreak gruppen vill göra.</p>
         <ol class="bb-fem" id="bb-fem"></ol>
-        <p class="kb-igen">Tryck på Sex nya, så kommer sex andra.</p>
+        <p class="kb-igen">Tryck på Alla eller kategorin igen, så kommer sex andra.</p>
       </div>
     </div>
 
@@ -274,14 +281,17 @@ const kortdata = kortdataAdress(brainbreaksAdress(m.id), brainbreaksData(m.id, b
     }));
     history.replaceState(null, '', `#${dragna.map((x) => x.id).join(',')}`);
   }
-  function slumpa() {
-    const r = dra(data.kort, 6, sparat.sedda);
+  // Slumpa ur Alla eller en kategori; knappen som tryckts senast är märkt.
+  const katKnappar = [...document.querySelectorAll<HTMLButtonElement>('.bb-kategorier .sk-niva')];
+  function slumpa(kat: string) {
+    katKnappar.forEach((b) => b.classList.toggle('senast', b.dataset.kategori === kat));
+    const r = dra(kat === 'alla' ? data.kort : data.kort.filter((k) => k.kategori === kat), 6, sparat.sedda);
     dragna = r.valda;
     sparat.sedda = r.sedda;
     spara();
     visaFem();
   }
-  $('bb-slumpa').addEventListener('click', () => { slumpa(); tillScenen(); });
+  katKnappar.forEach((b) => b.addEventListener('click', () => { slumpa(b.dataset.kategori!); tillScenen(); }));
   tillbaka.addEventListener('click', () => { const fran = visat?.id; visaFem(); tillScenen(); fem.querySelector<HTMLButtonElement>(`button[data-kort="${fran}"]`)?.focus({ preventScroll: true }); });
 
   // ---------- Helskärm ----------
@@ -303,8 +313,8 @@ const kortdata = kortdataAdress(brainbreaksAdress(m.id), brainbreaksData(m.id, b
   (() => {
     const [lista, valt] = decodeURIComponent(location.hash.slice(1)).split('/');
     const kort = (lista ?? '').split(',').map((id) => kortMed.get(id)).filter((k): k is Brainbreak => !!k);
-    // Utan kort i adressen slumpas sex fram direkt, utan att sidan rullar.
-    if (!kort.length) { slumpa(); return; }
+    // Utan kort i adressen slumpas sex ur Alla fram direkt, utan att sidan rullar.
+    if (!kort.length) { slumpa('alla'); return; }
     dragna = kort;
     for (const k of kort) if (!sparat.sedda.includes(k.id)) sparat.sedda.push(k.id);
     spara();
