@@ -161,6 +161,25 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
 
+# Bilderna under metoderna, som skrivkortens bilder, filmernas omslag och litteraturlistornas omslag (jpg och png),
+# och kortens data på sidorna som slumpar kort (src/lib/kortdata.ts): en dag, som de andra filerna. Skrivkortens bilder
+# hade ingen cache förrän 2026-10-16 (max-age=0), eftersom de kom efter att cachen sattes, och kortens data har sin
+# version i adressen.
+[[headers]]
+  for = "/stodundervisning/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/stodundervisning/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/stodundervisning/*.json"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
 # Word-filernas reservbilder (src/lib/reservbild.ts), som webbläsaren hämtar när läsaren bygger en fil med flera metoder.
 # Namnet är SVG-bildens innehåll och mått, inte PNG-bildens, så en ny ritare kan ge en ny bild under samma namn: en dag,
 # som filmerna, och webbläsaren frågar ändå servern varje gång (cache: 'no-cache' i index.astro).

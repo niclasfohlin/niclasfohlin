@@ -3,6 +3,7 @@ import Base from '../../../layouts/Base.astro';
 import { publicerade } from '../../../lib/innehall';
 import { metodAdress, UPPHOV } from '../../../lib/metod';
 import { kortAdress, kortData, kortPdfNamn, skrivkortAv, skrivkortAdress, SKRIVKORT_LANK } from '../../../lib/skrivkort';
+import { kortdataAdress } from '../../../lib/kortdata';
 import Delning from '../../../components/Delning.astro';
 import Klocka from '../../../components/Klocka.astro';
 import { delningPa } from '../../../lib/delning';
@@ -42,13 +43,14 @@ const b = skrivkortAv(m.id)!;
 const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/skrivkort`;
 // Den korta adressen, som läraren kan skriva på tavlan (src/lib/skrivkortlank.ts).
 const kort = `${site.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}${kortAdress(m.id)}`;
-// Det sidans skript ritar korten ur (src/lib/skrivkort.ts, kortData).
+// Det sidans skript ritar korten ur (src/lib/skrivkort.ts, kortData), i en egen fil bredvid sidan (src/lib/kortdata.ts).
 const data = kortData(m.id, b);
+const kortdata = kortdataAdress(skrivkortAdress(m.id), data);
 const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
 ---
 
 <Base title={`${SKRIVKORT_LANK}: ${d.titel}`} description={`Slumpa fram ett skrivkort eller tio ur ${b.kort.length} kort på Bas, Medel och Avancerat, visa kortet stort med en klocka som alla ser, och skriv ut det.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
-  <article class="skrivkortsida" data-metod={m.id} data-titel={d.titel}>
+  <article class="skrivkortsida" data-metod={m.id} data-titel={d.titel} data-kortdata={kortdata}>
     {/* Statistiken (DRIFT.md under Besöksstatistik): besöken räknas under metoden som "på Ta fram ett skrivkort",
         utskrifterna som utskrift:<id>/skrivkort och …:tio, helskärmen och när klockan startas som skrivkort:<id>:…
         Varje tryck på en nivå räknas inte, så att statistiken och GoatCounters tak inte fylls av slumpningen. */}
@@ -110,7 +112,6 @@ const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
     {/* Varje korts pdf, med filens version i adressen (scripts/filversion.mjs sätter den i länkarna efter bygget), så att
         webbläsaren aldrig ger ett äldre kort än sidan. Skriptet läser adresserna härifrån. */}
     <template id="sk-pdf">{b.kort.map((k) => <a data-kort={k.id} href={`/stodundervisning/${kortPdfNamn(m.id, k.id)}.pdf`}></a>)}</template>
-    <script type="application/json" id="sk-data" set:html={JSON.stringify(data).replace(/</g, '\\u003c')}></script>
     {/* Delningsraden, som på metodens sida: sidan har ett eget delningskort med tre skrivkort och klockan
         (src/lib/delningskort.ts), så att den går att dela direkt (Niclas 2026-10-14). */}
     {delningPa && <Delning sida={skrivkortAdress(m.id)} titel={`${SKRIVKORT_LANK}: ${d.titel}`} medKort />}
@@ -121,10 +122,11 @@ const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
   import { el, kortet as ritaKort, passa, type Data, type Kort } from '../../../scripts/skrivkortet';
   import { klocka } from '../../../scripts/klocka';
   import { ettkortLank, flerakortKnapp } from '../../../scripts/pdfutskrift';
+  import { hamtaKortdata } from '../../../scripts/kortdata';
 
   const sida = document.querySelector<HTMLElement>('.skrivkortsida')!;
   const metod = sida.dataset.metod!;
-  const data: Data = JSON.parse(document.getElementById('sk-data')!.textContent!);
+  const data = await hamtaKortdata<Data>(sida);
   const kortMed = new Map(data.kort.map((k) => [k.id, k]));
   const pdfFor = new Map([...(document.getElementById('sk-pdf') as HTMLTemplateElement).content.querySelectorAll<HTMLAnchorElement>('a[data-kort]')].map((a) => [a.dataset.kort!, a.getAttribute('href')!]));
   const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;

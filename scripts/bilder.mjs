@@ -34,6 +34,11 @@ const summa = (f) => createHash('sha256').update(readFileSync(f)).digest('hex').
 const gjorda = existsSync(FORTECKNING) ? JSON.parse(readFileSync(FORTECKNING, 'utf8')) : {};
 const filer = alla(join(rot, 'public', 'images')).filter((f) => /\.(jpe?g|png|webp)$/i.test(f));
 const nya = filer.filter((f) => gjorda[webb(f)] !== summa(f));
+// Kortens teckningar (aktivitetskorten och brainbreakkorten i public/stodundervisning/<id>/kort/): svg i en enda linje,
+// som svgo bantar nedan. Förteckningen minns dem som bilderna.
+const stod = join(rot, 'public', 'stodundervisning');
+const kortsvg = existsSync(stod) ? alla(stod).filter((f) => /[\\/]kort[\\/][^\\/]+\.svg$/i.test(f)) : [];
+const nyaSvg = kortsvg.filter((f) => gjorda[webb(f)] !== summa(f));
 
 // Ikonerna ur favicon.svg: apple-touch-icon.png (180 × 180, hemskärmen på iPhone och iPad) och favicon.ico (32 × 32,
 // för webbläsare och robotar som frågar efter den; utan dem gav de över 400 fel om dygnet, 2026-09-27). De görs om
@@ -44,9 +49,9 @@ const ico = join(rot, 'public', 'favicon.ico');
 const ikonerAktuella = !existsSync(svg) || (gjorda['/favicon.svg'] === summa(svg) && existsSync(apple) && existsSync(ico));
 
 if (kontrollera) {
-  for (const f of nya) console.log(`  inte gjord: ${webb(f)} (${kb(statSync(f).size)} kB)`);
+  for (const f of [...nya, ...nyaSvg]) console.log(`  inte gjord: ${webb(f)} (${kb(statSync(f).size)} kB)`);
   if (!ikonerAktuella) console.log('  ikonerna är inte gjorda ur /favicon.svg');
-  const fel = nya.length > 0 || !ikonerAktuella;
+  const fel = nya.length > 0 || nyaSvg.length > 0 || !ikonerAktuella;
   console.log(fel ? 'Bilderna eller ikonerna är inte gjorda i rätt storlek. Kör: node scripts/bilder.mjs' : `Bilderna har rätt storlek (${filer.length} st), och ikonerna är aktuella.`);
   process.exit(fel ? 1 : 0);
 }
@@ -112,8 +117,25 @@ if (!ikonerAktuella) {
   console.log('  ikonerna gjorda ur /favicon.svg: /apple-touch-icon.png och /favicon.ico');
 }
 
+// Kortens teckningar med koordinaterna avrundade till hela punkter, av svgo, som också följer med Astro (Niclas
+// 2026-10-16: "dessa brainbreaks och aktivitetsbilder borde gå att få till billigt va?"). Teckningen är 600 × 400 och
+// ritas aldrig större än så på sidan, så avrundningen syns inte, och filen blir omkring hälften så stor: 2,0 kB blev
+// 1,1 kB över nätet i snitt (mätt 2026-10-16 på 180 teckningar, med en jämförelse sida vid sida).
+if (nyaSvg.length) {
+  const { optimize } = await import('svgo');
+  let fore = 0, efter = 0;
+  for (const fil of nyaSvg) {
+    const text = readFileSync(fil, 'utf8');
+    const ut = optimize(text, { multipass: true, floatPrecision: 0, plugins: ['preset-default'] }).data;
+    fore += Buffer.byteLength(text);
+    if (Buffer.byteLength(ut) < Buffer.byteLength(text) * 0.9) { writeFileSync(fil, ut); efter += Buffer.byteLength(ut); } else efter += Buffer.byteLength(text);
+    gjorda[webb(fil)] = summa(fil);
+  }
+  console.log(`  kortens teckningar: ${nyaSvg.length} svg, ${kb(fore)} kB blev ${kb(efter)} kB`);
+}
+
 // Förteckningen följer filerna: bilder som tagits bort försvinner ur den.
-const finns = new Set([...alla(join(rot, 'public', 'images')).map(webb), ...(existsSync(svg) ? ['/favicon.svg'] : [])]);
+const finns = new Set([...alla(join(rot, 'public', 'images')).map(webb), ...kortsvg.map(webb), ...(existsSync(svg) ? ['/favicon.svg'] : [])]);
 const ny = Object.fromEntries(Object.entries(gjorda).filter(([k]) => finns.has(k)).sort(([a], [b]) => a.localeCompare(b)));
 if (JSON.stringify(ny) !== JSON.stringify(existsSync(FORTECKNING) ? JSON.parse(readFileSync(FORTECKNING, 'utf8')) : null)) writeFileSync(FORTECKNING, JSON.stringify(ny, null, 2) + '\n');
-console.log(nya.length ? `${nya.length} bilder gjordes i rätt storlek. Committa dem och src/data/bilder.json med ändringen.` : `Bilderna har rätt storlek (${filer.length} st).`);
+console.log(nya.length || nyaSvg.length ? `${nya.length + nyaSvg.length} bilder gjordes i rätt storlek. Committa dem och src/data/bilder.json med ändringen.` : `Bilderna har rätt storlek (${filer.length} st), och kortens ${kortsvg.length} teckningar är bantade.`);

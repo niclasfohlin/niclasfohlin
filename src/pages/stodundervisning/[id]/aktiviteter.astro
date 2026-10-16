@@ -4,6 +4,7 @@ import { publicerade } from '../../../lib/innehall';
 import { metodAdress, UPPHOV } from '../../../lib/metod';
 import { aktiviteterAv, aktiviteterAdress, aktiviteterData, kategorifilNamn, kategorinsKort } from '../../../lib/aktiviteter';
 import { centralAv, lasbarAdress } from '../../../lib/centrala';
+import { kortdataAdress } from '../../../lib/kortdata';
 import Delning from '../../../components/Delning.astro';
 import Klocka from '../../../components/Klocka.astro';
 import Filval from '../../../components/Filval.astro';
@@ -52,11 +53,11 @@ const c = centralAv('aktiviteter');
 const namn = c?.namn ?? 'Ta fram en aktivitet';
 const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/aktiviteter`;
 const kort = `${site.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}${c ? lasbarAdress(c) : aktiviteterAdress(m.id)}`;
-const data = aktiviteterData(m.id, b);
+const kortdata = kortdataAdress(aktiviteterAdress(m.id), aktiviteterData(m.id, b));
 ---
 
 <Base title={`${namn}: ${d.titel}`} description={`Slumpa fram ett aktivitetskort eller sex ur ${b.kort.length} i ${b.kategorier.length} kategorier, samla dem du vill ha i en lista och skriv ut dem, ett kort per A4.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
-  <article class="kortbanksida aktivitetssida" data-metod={m.id} data-titel={d.titel}>
+  <article class="kortbanksida aktivitetssida" data-metod={m.id} data-titel={d.titel} data-kortdata={kortdata}>
     {/* Statistiken (DRIFT.md under Besöksstatistik): besöken räknas under metoden som "på Ta fram en aktivitet",
         utskrifterna som utskrift:<id>/aktiviteter och …:listan, och listans länk som aktiviteter:<id>:lank. Varje tryck
         på en kategori räknas inte, så att statistiken och GoatCounters tak inte fylls av slumpningen. */}
@@ -145,7 +146,6 @@ const data = aktiviteterData(m.id, b);
 
     <p class="upphov">{UPPHOV}. Aktivitetskorten till <a href={`/stodundervisning/${m.id}`}>{d.titel}</a>: {b.kort.length} kort, {b.kategorier.map((k) => `${kategorinsKort(b, k.id).length} i ${k.namn}`).join(', ')}. Sidans korta adress är {kort}.</p>
 
-    <script type="application/json" id="ak-data" set:html={JSON.stringify(data).replace(/</g, '\\u003c')}></script>
     {delningPa && <Delning sida={aktiviteterAdress(m.id)} titel={`${namn}: ${d.titel}`} medKort />}
   </article>
 </Base>
@@ -154,10 +154,11 @@ const data = aktiviteterData(m.id, b);
   import { aktivitetskortet, dra, el, lagring, type Aktivitet, type Aktivitetsdata } from '../../../scripts/kortbanken';
   import { klocka } from '../../../scripts/klocka';
   import { ettkortLank, flerakortKnapp } from '../../../scripts/pdfutskrift';
+  import { hamtaKortdata } from '../../../scripts/kortdata';
 
   const sida = document.querySelector<HTMLElement>('.aktivitetssida')!;
   const metod = sida.dataset.metod!;
-  const data: Aktivitetsdata = JSON.parse(document.getElementById('ak-data')!.textContent!);
+  const data = await hamtaKortdata<Aktivitetsdata>(sida);
   const kortMed = new Map(data.kort.map((k) => [k.id, k]));
   const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
   const raknaHandelse = (path: string, title: string) => (window as { goatcounter?: { count: (v: object) => void } }).goatcounter?.count({ path, title, event: true });

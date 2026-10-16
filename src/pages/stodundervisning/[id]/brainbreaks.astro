@@ -4,6 +4,7 @@ import { publicerade } from '../../../lib/innehall';
 import { metodAdress, UPPHOV } from '../../../lib/metod';
 import { brainbreaksAv, brainbreaksAdress, brainbreaksData } from '../../../lib/aktiviteter';
 import { centralAv, lasbarAdress } from '../../../lib/centrala';
+import { kortdataAdress } from '../../../lib/kortdata';
 import Delning from '../../../components/Delning.astro';
 import Klocka from '../../../components/Klocka.astro';
 import { delningPa } from '../../../lib/delning';
@@ -51,11 +52,11 @@ const c = centralAv('brainbreaks');
 const namn = c?.namn ?? 'Ta fram en brainbreak';
 const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/brainbreaks`;
 const kort = `${site.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}${c ? lasbarAdress(c) : brainbreaksAdress(m.id)}`;
-const data = brainbreaksData(m.id, b);
+const kortdata = kortdataAdress(brainbreaksAdress(m.id), brainbreaksData(m.id, b));
 ---
 
 <Base title={`${namn}: ${d.titel}`} description={`Slumpa fram sex brainbreaks ur ${b.kort.length}, välj en och visa den stort med en klocka och musik i tre kategorier.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
-  <article class="kortbanksida brainbreaksida" data-metod={m.id} data-titel={d.titel}>
+  <article class="kortbanksida brainbreaksida" data-metod={m.id} data-titel={d.titel} data-kortdata={kortdata}>
     {/* Statistiken (DRIFT.md under Besöksstatistik): besöken räknas under metoden som "på Ta fram en brainbreak", och
         helskärmen, klockan och varje kanal som startas som brainbreaks:<id>:… Varje tryck på Sex nya räknas inte. */}
     <header class="sk-huvud">
@@ -113,7 +114,6 @@ const data = brainbreaksData(m.id, b);
 
     <p class="upphov">{UPPHOV}. Brainbreakkorten till <a href={`/stodundervisning/${m.id}`}>{d.titel}</a>: {b.kort.length} kort. Musiken kommer från {b.musik.map((k, i) => <>{i > 0 && (i === b.musik.length - 1 ? ' och ' : ', ')}<a href={k.sida} rel="noopener">{k.kanal}</a></>)}, utan reklam. Sidans korta adress är {kort}.</p>
 
-    <script type="application/json" id="bb-data" set:html={JSON.stringify(data).replace(/</g, '\\u003c')}></script>
     {delningPa && <Delning sida={brainbreaksAdress(m.id)} titel={`${namn}: ${d.titel}`} medKort />}
   </article>
 </Base>
@@ -121,10 +121,11 @@ const data = brainbreaksData(m.id, b);
 <script>
   import { brainbreakkortet, dra, el, lagring, type Brainbreak, type Brainbreakdata } from '../../../scripts/kortbanken';
   import { klocka } from '../../../scripts/klocka';
+  import { hamtaKortdata } from '../../../scripts/kortdata';
 
   const sida = document.querySelector<HTMLElement>('.brainbreaksida')!;
   const metod = sida.dataset.metod!;
-  const data: Brainbreakdata = JSON.parse(document.getElementById('bb-data')!.textContent!);
+  const data = await hamtaKortdata<Brainbreakdata>(sida);
   const kortMed = new Map(data.kort.map((k) => [k.id, k]));
   const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
   const raknaHandelse = (path: string, title: string) => (window as { goatcounter?: { count: (v: object) => void } }).goatcounter?.count({ path, title, event: true });
