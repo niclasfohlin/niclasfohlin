@@ -2,6 +2,7 @@
 import Base from '../../../layouts/Base.astro';
 import Metod from '../../../components/Metod.astro';
 import EjBryt from '../../../components/EjBryt.astro';
+import Boklankar from '../../../components/Boklankar.astro';
 import Bladfiler from '../../../components/Bladfiler.astro';
 import Pabordet from '../../../components/Pabordet.astro';
 import SkrivUtPdf from '../../../components/SkrivUtPdf.astro';
@@ -148,7 +149,7 @@ const figurer = metodensPaBordet(d, m.id).some((b) => b.bild.fluent?.length && s
 
 <Base title={vy.sidtitel} description={vy.beskrivning} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
   <article class="metod enhet" style={`--niva: ${vy.farg}`}>
-    <EjBryt>
+    <EjBryt><Boklankar>
     <header class="enhet-huvud">
       <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${m.id}`}>{d.titel}</a> · <a href={vy.tillbaka.adress}>{vy.tillbaka.namn}</a></p>
       <p class="enhet-kicker"><span class="enhet-niva">{vy.skylt}</span> {vy.kicker}</p>
@@ -201,7 +202,7 @@ const figurer = metodensPaBordet(d, m.id).some((b) => b.bild.fluent?.length && s
       {vy.nasta ? <a class="enhet-nasta" href={vy.nasta.adress}><span class="enhet-fot-etikett">Nästa</span>{vy.nasta.namn}</a> : <span></span>}
     </nav>
     <p class="upphov">{UPPHOV}. Ur {d.titel}, {vy.upphov}. Får användas i undervisning. {adress}{figurer && ' Figurerna i bilderna: Fluent Emoji, © Microsoft Corporation, MIT-licens.'}</p>
-    </EjBryt>
+    </Boklankar></EjBryt>
   </article>
   <div class="tryck-fot" aria-hidden="true">{UPPHOV} · {adress}</div>
 </Base>

@@ -9,6 +9,8 @@ import {
   type IBorderOptions, type IFloating, type IParagraphOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
 import { centralaVid, lasbarAdress, type Textplats } from './centrala';
+import { bokdelar } from './boklankar';
+import { site } from '../data/site';
 import { arbetsformRad, arEttKort, arProtokoll, arskursText, datumText, ejBryt, etikettOchText, laskortKolumn, laskortRubrik, lathundFakta, lathundForm, metaRad, metodAdress, passOrd, passOversikt, passTextKort, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost, type PassOrd } from './metod';
 import { brakDelar, delnamn, kortInfo, lage, STANDARD_NAMNARE, talrutansMatt, type KortInfo, type Mall } from './brak';
 import { andikaBredd, bagSvg, utanStod } from './lasflyt';
@@ -152,7 +154,7 @@ function dubbelRam(bredd: number, kant: IBorderOptions, inre: (bredd: number) =>
 
 // brak: bråken i texten står staplade (elevmaterial); nySida: stycket börjar på en ny sida.
 // niva4: stycket är en rubrik på nivå 4 i Word (en listas rubrik under ramens nivå 3), så att den syns i navigeringen (K-035).
-interface StyckeVal { kursiv?: boolean; fet?: boolean; farg?: string; storlek?: number; fore?: number; efter?: number; hallIhop?: boolean; mitt?: boolean; versaler?: boolean; font?: string; brak?: boolean; nySida?: boolean; niva4?: boolean; radbryt?: boolean }
+interface StyckeVal { kursiv?: boolean; fet?: boolean; farg?: string; storlek?: number; fore?: number; efter?: number; hallIhop?: boolean; mitt?: boolean; versaler?: boolean; font?: string; brak?: boolean; nySida?: boolean; niva4?: boolean; radbryt?: boolean; understruken?: boolean }
 
 // Elevens typsnitt i elevmaterialet (K-130, src/lib/ljudkort.ts): medan medElevtypsnitt gäller får varje textlöpa utan
 // eget typsnitt elevens, så att korten att klippa och mallarna står i det, som på sidan. Utanför gäller husets.
@@ -165,13 +167,21 @@ function medElevtypsnitt<T>(pa: boolean, fn: () => T): T {
   try { return fn(); } finally { ELEVFONT = gammal; }
 }
 function run(text: string, o: StyckeVal = {}): TextRun {
-  const val: IRunOptions = { text, italics: o.kursiv, bold: o.fet, color: o.farg, size: storl(o.storlek), allCaps: o.versaler, font: o.font ?? ELEVFONT };
+  const val: IRunOptions = { text, italics: o.kursiv, bold: o.fet, color: o.farg, size: storl(o.storlek), allCaps: o.versaler, font: o.font ?? ELEVFONT, underline: o.understruken ? { type: UnderlineType.SINGLE, color: o.farg } : undefined };
   return new TextRun(hardaStreck(val));
+}
+// Niclas böcker blir länkar till bokens sida på sajten där de nämns (src/lib/boklankar.ts, K-362), blå och understrukna
+// som länkarna i litteraturlistan. Det gäller texten i styckena, cellerna, rutorna och listorna, och inte rubrikerna,
+// som på sidan.
+function lopor(text: string, o: StyckeVal = {}): (TextRun | ExternalHyperlink)[] {
+  return bokdelar(text).map((d) => (d.adress
+    ? new ExternalHyperlink({ link: `${site.url}${d.adress}`, children: [run(d.text, { ...o, farg: FARG.huvud, understruken: true })] })
+    : run(d.text, o)));
 }
 // En text som löpor, där en radbrytning i texten (\n) är en ny rad i stycket: Word visar annars radslutet som ett
 // mellanslag (granskningen 2026-10-13, P1; scripts/paritet.mjs stannar på ett radslut inne i en text).
-function radRuns(text: string, o: StyckeVal = {}): TextRun[] {
-  return text.split('\n').flatMap((rad, j) => (j ? [new TextRun({ break: 1, size: storl(o.storlek) }), run(rad, o)] : [run(rad, o)]));
+function radRuns(text: string, o: StyckeVal = {}): (TextRun | ExternalHyperlink)[] {
+  return text.split('\n').flatMap((rad, j) => (j ? [new TextRun({ break: 1, size: storl(o.storlek) }), ...lopor(rad, o)] : lopor(rad, o)));
 }
 // Alla andra textlöpor går hit, så att skalan och elevens typsnitt gäller dem också.
 function textRun(o: IRunOptions): TextRun {
@@ -238,14 +248,14 @@ function brakBarn(text: string, o: StyckeVal = {}, faktor = 1.45): TextRun[] {
 // Exemplet berättas rakt; replikerna (”…”) sätts kursiva, som exempelfraserna, så att en lärare hittar det som sägs.
 export function exempelStycke(text: string, o: { hallIhop?: boolean; storlek?: number; efter?: number } = {}): Paragraph {
   const delar = text.split(/(”[^”]*”)/).filter(Boolean);
-  return new Paragraph({ children: delar.map((t) => run(t, { kursiv: t.startsWith('”'), storlek: o.storlek })), spacing: { before: 0, after: o.efter ?? 120 }, keepNext: o.hallIhop });
+  return new Paragraph({ children: delar.flatMap((t) => lopor(t, { kursiv: t.startsWith('”'), storlek: o.storlek })), spacing: { before: 0, after: o.efter ?? 120 }, keepNext: o.hallIhop });
 }
 // En tabellcell med repliker (”…”) sätter dem kursiva, som exempelfraserna i stegtabellen (lathundens
 // stegtabell, en fri tabell med ett citat), så att en lärare ser vad som sägs.
 function replikStycke(text: string, o: StyckeVal = {}): Paragraph {
   const delar = text.split(/(”[^”]*”)/).filter(Boolean);
   return new Paragraph({
-    children: delar.map((t) => run(t, { ...o, kursiv: o.kursiv || t.startsWith('”') })),
+    children: delar.flatMap((t) => lopor(t, { ...o, kursiv: o.kursiv || t.startsWith('”') })),
     spacing: { before: o.fore ?? 0, after: o.efter ?? 120 },
     keepNext: o.hallIhop,
     alignment: o.mitt ? AlignmentType.CENTER : undefined,
@@ -270,7 +280,7 @@ function h2(text: string): Paragraph {
   return new Paragraph({ children: [run(text)], heading: HeadingLevel.HEADING_2, keepNext: true, spacing: { before: 320, after: 100 } });
 }
 function numrerad(text: string, o: StyckeVal = {}): Paragraph {
-  return new Paragraph({ children: [run(text, o)], numbering: { reference: 'nummer', level: 0, instance: instans }, spacing: { after: 60 } });
+  return new Paragraph({ children: lopor(text, o), numbering: { reference: 'nummer', level: 0, instance: instans }, spacing: { after: 60 } });
 }
 function nyLista(): void { instans += 1; }
 
@@ -303,14 +313,14 @@ function avstand(efter = 160): Paragraph { return new Paragraph({ spacing: { bef
 // Rutans rubrik står på egen rad, som på sidan och i kompendiet; utan rubrik bara texten.
 function ruta(rubrik: string, text: string, o: { kursivText?: boolean } = {}): Barn[] {
   const barn = rubrik
-    ? [new Paragraph({ children: [run(rubrik, { fet: true, farg: FARG.huvud })], spacing: { after: 40 }, keepNext: true }), new Paragraph({ children: [run(text, { kursiv: o.kursivText })], spacing: { after: 0 } })]
-    : [new Paragraph({ children: [run(text, { kursiv: o.kursivText })], spacing: { after: 0 } })];
+    ? [new Paragraph({ children: [run(rubrik, { fet: true, farg: FARG.huvud })], spacing: { after: 40 }, keepNext: true }), new Paragraph({ children: lopor(text, { kursiv: o.kursivText }), spacing: { after: 0 } })]
+    : [new Paragraph({ children: lopor(text, { kursiv: o.kursivText }), spacing: { after: 0 } })];
   return [tabell([rad([cell(barn, { bredd: BREDD, fyll: FARG.ljus, kanter: { left: kant(FARG.huvud, 24) } })])], [BREDD]), avstand()];
 }
 // Passrutinen: numrerade steg i en ruta.
 function rutinRuta(steg: string[]): Barn[] {
   nyLista();
-  const barn = steg.map((s, i) => new Paragraph({ children: [run(s)], numbering: { reference: 'nummer', level: 0, instance: instans }, spacing: { after: i === steg.length - 1 ? 0 : 60 } }));
+  const barn = steg.map((s, i) => new Paragraph({ children: lopor(s), numbering: { reference: 'nummer', level: 0, instance: instans }, spacing: { after: i === steg.length - 1 ? 0 : 60 } }));
   return [tabell([rad([cell(barn, { bredd: BREDD, fyll: FARG.ljus, kanter: { left: kant(FARG.huvud, 24) } })])], [BREDD]), avstand()];
 }
 // Ett ords bredd i twips, i typsnittet och storleken (halva punkter, före lathundens skala) som gäller när texten skapas
@@ -604,7 +614,7 @@ function kontraktRuta(k: Kontrakt): Barn[] {
   const barn: Paragraph[] = [
     stycke(k.rubrik.toUpperCase(), { fet: true, farg: FARG.huvud, storlek: 17, efter: 100 }),
     stycke(k.inledning, { kursiv: true, storlek: 20 }),
-    ...k.ansvar.map((a) => new Paragraph({ children: [run(`${a.rubrik}. `, { fet: true, storlek: 20 }), run(a.text, { storlek: 20 })], spacing: { after: 120 } })),
+    ...k.ansvar.map((a) => new Paragraph({ children: [run(`${a.rubrik}. `, { fet: true, storlek: 20 }), ...lopor(a.text, { storlek: 20 })], spacing: { after: 120 } })),
   ];
   if (k.efter) barn.push(stycke(k.efter, { farg: FARG.svag, storlek: 20, efter: 0 }));
   return [tabell([rad([cell(barn, { bredd: BREDD, kanter: runt(kant(FARG.text)) })])], [BREDD]), avstand()];
@@ -659,7 +669,7 @@ function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[
       const e = etikett(l);
       if (!e) return replikStycke(l, { ...val, kursiv: f.kursiv });
       // Raden efter etiketten står som i de andra fälten, med replikerna kursiva (replikStycke).
-      return new Paragraph({ children: [run(`${e}: `, { storlek: 20, farg: FARG.huvud }), ...l.slice(e.length + 2).split(/(”[^”]*”)/).filter(Boolean).map((t) => run(t, { storlek: 20, kursiv: t.startsWith('”') }))], spacing: { before: 0, after: val.efter }, keepNext: val.hallIhop });
+      return new Paragraph({ children: [run(`${e}: `, { storlek: 20, farg: FARG.huvud }), ...l.slice(e.length + 2).split(/(”[^”]*”)/).filter(Boolean).flatMap((t) => lopor(t, { storlek: 20, kursiv: t.startsWith('”') }))], spacing: { before: 0, after: val.efter }, keepNext: val.hallIhop });
     };
     rader.push(rad([
       // Etiketterna och namnraden på elevens blad är elevens (riggens docs/elevmaterial.md): i elevens typsnitt, som på sidan.

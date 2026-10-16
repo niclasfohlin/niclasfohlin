@@ -1,0 +1,10 @@
+---
+// Niclas böcker blir länkar till bokens sida där de nämns i metodens text (K-362, src/lib/boklankar.ts): innehållet
+// ritas till html, och titlarna i texten mellan taggarna får länken, utom i länkar, knappar och rubriker. Metodens sida
+// och en enhets sida går igenom den, som genom EjBryt. Word-filen får samma länkar i metoddocx.ts.
+import { lankaBocker } from '../lib/boklankar';
+
+const html = await Astro.slots.render('default');
+---
+
+<Fragment set:html={lankaBocker(html)} />
