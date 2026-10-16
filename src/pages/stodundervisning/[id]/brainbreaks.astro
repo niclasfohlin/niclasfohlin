@@ -239,13 +239,14 @@ const kortdata = kortdataAdress(brainbreaksAdress(m.id), brainbreaksData(m.id, b
   window.addEventListener('pagehide', () => pausa());
 
   // ---------- Kortet och de fem ----------
-  // Taggen på kortet som står stort ger sex nya ur kortets kategori, som kategorins knapp, som då blir märkt och får
-  // fokus. I helskärm är taggen en etikett.
+  // Taggen på kortet som står stort ger sex nya ur kortets kategori, som kategorins knapp, som då blir märkt. Fokus går
+  // till det första av de sex nya, som syns (kategorins knapp står ovanför skärmen; granskningen 2026-10-16). I helskärm
+  // är taggen en etikett.
   const taggen = (kat: string) => {
     if (document.fullscreenElement) return;
     slumpa(kat);
     tillScenen();
-    katKnappar.find((b) => b.dataset.kategori === kat)?.focus({ preventScroll: true });
+    fem.querySelector<HTMLButtonElement>('button')?.focus({ preventScroll: true });
     raknaHandelse(`brainbreaks:${metod}:tagg`, `${sida.dataset.titel}: sex nya ur kortets kategori`);
   };
   const kortet = (k: Brainbreak, liten: boolean) => brainbreakkortet(data, k, liten, liten ? undefined : taggen);
@@ -307,7 +308,12 @@ const kortdata = kortdataAdress(brainbreaksAdress(m.id), brainbreaksData(m.id, b
   // ---------- Helskärm ----------
   helskarmKnapp.addEventListener('click', () => { void ett.requestFullscreen?.(); });
   document.querySelector<HTMLButtonElement>('.sk-lamna')!.addEventListener('click', () => { if (document.fullscreenElement) void document.exitFullscreen(); });
-  document.addEventListener('fullscreenchange', () => { const f = plats.querySelector<HTMLElement>('.brainbreakkort'); if (f) requestAnimationFrame(() => passa(f)); });
+  // I helskärm är taggen en etikett, också för tangentbordet.
+  document.addEventListener('fullscreenchange', () => {
+    plats.querySelector<HTMLButtonElement>('button.kb-tagg')?.toggleAttribute('disabled', !!document.fullscreenElement);
+    const f = plats.querySelector<HTMLElement>('.brainbreakkort');
+    if (f) requestAnimationFrame(() => passa(f));
+  });
   new ResizeObserver(() => { const f = plats.querySelector<HTMLElement>('.brainbreakkort'); if (f && Number(f.dataset.bredd) !== f.clientWidth) passa(f); }).observe(plats);
 
   // ---------- Klockan ----------

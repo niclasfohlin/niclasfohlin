@@ -3,7 +3,7 @@
 // och samma som i Word (src/lib/aktivitetskortform.ts): ett band i kortets färg med kategorin eller ordet Brainbreak och
 // numret, namnet i elevens typsnitt, bilden i en enda linje och texten. Stilarna står under Aktivitetskorten och
 // brainbreakkorten i global.css. Sidorna som slumpar korten och deras delningskort ritar med samma kod.
-import { ejBryt } from '../lib/metod';
+import { hallIhop } from '../lib/ejbryt';
 
 export type Kategori = { id: string; namn: string; farg: string };
 export type Aktivitet = { id: string; kategori: string; nr: number; namn: string; rad: string; grupp: string; tid: string; plats: string; beroring?: boolean; material: string[]; steg: string[]; tanka: string[]; bild: string; alt: string; pdf: string };
@@ -12,8 +12,8 @@ export type Kanal = { id: string; namn: string; kanal: string; strom: string; re
 export type Brainbreak = { id: string; nr: number; kategori: string; namn: string; minuter: number; slag: string; musik: string; plats: string; beroring?: boolean; text: string; bild: string; alt: string };
 export type Brainbreakdata = { farg: string; kategorier: { id: string; namn: string; farg: string }[]; musik: Kanal[]; kort: Brainbreak[] };
 
-// Ett spann som "i grupper om 3–5" bryts aldrig efter tankstrecket, som i metodens text (ejBryt i src/lib/metod.ts).
-export const el = (tag: string, klass?: string, text?: string) => { const e = document.createElement(tag); if (klass) e.className = klass; if (text !== undefined) e.textContent = ejBryt(text); return e; };
+// Ett spann som "i grupper om 3–5" och "10 min" bryts aldrig över två rader, som i metodens text (src/lib/ejbryt.ts).
+export const el = (tag: string, klass?: string, text?: string) => { const e = document.createElement(tag); if (klass) e.className = klass; if (text !== undefined) e.textContent = hallIhop(text); return e; };
 const NBSP = ' ';
 
 function bandet(vanster: string, hoger: string) {

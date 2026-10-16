@@ -2236,13 +2236,16 @@ html.js .bara-js { display: inline-block; }
 .sk-ljud .sk-hogtalare { fill: currentColor; }
 .sk-ljud[aria-pressed="true"] .sk-kryss, .sk-ljud[aria-pressed="false"] .sk-vagor { display: none; }
 .sk-ljud[aria-pressed="false"] { color: var(--farg-text-svag); border-color: var(--farg-kant); }
-/* På en smal skärm står klockan under kortet i en rad: urtavlan till vänster och tiden och knapparna bredvid. */
-@media (max-width: 47.99rem) {
+/* På en smal skärm står klockan under kortet i en rad: urtavlan till vänster och tiden och knapparna bredvid. Under 23 rem
+   ryms inte minuterna bredvid urtavlan (sidan rullade i sidled i 320 punkter, granskningen 2026-10-16), och där står allt
+   under varandra med en mindre urtavla. */
+@media (min-width: 23rem) and (max-width: 47.99rem) {
   .sk-klocka { grid-template-columns: 7rem minmax(0, 1fr); justify-items: start; align-items: center; column-gap: 1rem; }
   .sk-urtavla { grid-row: 1 / span 4; width: 7rem; }
   .sk-tid { font-size: 2.2rem; }
   .sk-tidrad, .sk-klockknappar { justify-content: flex-start; }
 }
+@media (max-width: 22.99rem) { .sk-urtavla { width: 10rem; } }
 /* Helskärm, för projektorn och telefonen. Kortet får sin plats först, så stort som skärmen rymmer, och klockan tar det som
    blir över (Niclas 2026-10-14, efter helskärm i telefonen: timern ska få sin plats "men inte stjäla plats från
    skrivkortet"). På en liggande skärm står klockan bredvid kortet och urtavlan växer med skärmens höjd, så att den syns
@@ -2252,6 +2255,13 @@ html.js .bara-js { display: inline-block; }
 .sk-ett:fullscreen .sk-sidospalt { width: 100%; gap: 0.75rem; }
 .sk-ett:fullscreen .sk-om, .sk-ett:fullscreen .sk-atgarder { display: none; }
 .sk-ett:fullscreen .sk-lamna { display: inline-grid; }
+/* En liggande skärm som är så hög att klockan står bredvid kortet med urtavlan överst har inte den smala skärmens rad,
+   också när den är smalare än 48 rem (720 × 545: tiden och Lämna helskärm hamnade utanför, granskningen 2026-10-16). */
+@media (orientation: landscape) and (min-height: 34.01rem) {
+  .sk-ett:fullscreen .sk-klocka { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+  .sk-ett:fullscreen .sk-urtavla { grid-row: auto; }
+  .sk-ett:fullscreen .sk-tidrad, .sk-ett:fullscreen .sk-klockknappar { justify-content: center; }
+}
 @media (orientation: landscape) {
   .sk-ett:fullscreen { grid-template-columns: auto minmax(0, 1fr); }
   .sk-ett:fullscreen .sk-kortplats { width: min(calc(96dvh * 0.75), calc(96vw - 15rem)); }
@@ -2269,9 +2279,12 @@ html.js .bara-js { display: inline-block; }
 /* Klockan som en smal rad: en mindre urtavla till vänster, tiden med ljudet och knappen som lämnar helskärm, och under
    dem Starta och Börja om. Minuterna ställs innan, så väljaren står inte här, och beskedet Tiden är slut läses bara av
    skärmläsaren: urtavlan blinkar och tiden står på 0:00. */
+/* Urtavlan är aldrig bredare än det som blir över i spalten när tiden och knapparna har fått sina 15 rem, så att knappen
+   som lämnar helskärm syns också på en liten liggande telefon (640 × 360 och 568 × 320, granskningen 2026-10-16). */
 @media (orientation: portrait), (max-height: 34rem) {
+  .sk-ett:fullscreen .sk-sidospalt { container-type: inline-size; }
   .sk-ett:fullscreen .sk-klocka { grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "tavla rad" "tavla knappar"; justify-items: start; align-items: center; gap: 0.4rem 0.9rem; padding: 0.6rem 0.75rem; }
-  .sk-ett:fullscreen .sk-urtavla { grid-area: tavla; width: min(5rem, 22dvh); }
+  .sk-ett:fullscreen .sk-urtavla { grid-area: tavla; width: max(3rem, min(5rem, 22dvh, 100cqw - 15rem)); }
   .sk-ett:fullscreen .sk-tidrad { grid-area: rad; justify-content: flex-start; }
   .sk-ett:fullscreen .sk-klockknappar { grid-area: knappar; justify-content: flex-start; flex-wrap: nowrap; }
   .sk-ett:fullscreen .sk-tid { font-size: 2rem; }
@@ -2281,7 +2294,7 @@ html.js .bara-js { display: inline-block; }
 }
 /* En låg liggande skärm, som en liggande telefon: kortet har hela höjden och klockan står bredvid, så urtavlan får växa. */
 @media (orientation: landscape) and (max-height: 34rem) {
-  .sk-ett:fullscreen .sk-urtavla { width: min(10rem, 45dvh); }
+  .sk-ett:fullscreen .sk-urtavla { width: max(3rem, min(10rem, 45dvh, 100cqw - 15rem)); }
   .sk-ett:fullscreen .sk-tid { font-size: 2.6rem; }
 }
 @media print {
