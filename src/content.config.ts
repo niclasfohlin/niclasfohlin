@@ -211,7 +211,8 @@ const stodundervisning = defineCollection({
       fluent: z.array(z.string()).optional(),
       // google: en kort adress på sajten som leder till Googles sida för att kopiera bladet som Google Formulär med en
       // sammanställning (Gruppstärkande aktiviteter, bladet Vår grupp, Niclas 2026-10-16). Bladet får knappen Kopiera
-      // formuläret och sammanställningen, och bladets text nämner adressen, så att den står också i Word och på papper.
+      // formuläret och sammanställningen på sidan. Bladets text är bildens textalternativ i Word, så adressen nämns i
+      // metodens text vid bladet, som raden om bladet i ramen före, och står då också i Word och på papper.
       // scripts/utskriftsformat.mjs prövar att netlify.toml leder adressen till Google.
       google: z.string().regex(/^\/[a-z0-9-]+$/, 'google är en kort adress på sajten, som /vargrupp.').optional(),
     })).default([]),

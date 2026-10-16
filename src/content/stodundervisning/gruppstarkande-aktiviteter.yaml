@@ -44,7 +44,7 @@ pabordet:
     efter: "ram: Lärarens skattning"
   - nr: 2
     rubrik: "Blad: Vår grupp"
-    text: Elevens blad att skriva ut. Eleven ringar in ett svar från 1 till 5 på sex påståenden, tre om gruppen och tre om sig själv, och skriver på raderna det hen vill säga om gruppen. Har skolan Google, finns bladet också som formulär med en färdig sammanställning på niclasfohlin.se/vargrupp. Gör en kopia, publicera formuläret och skicka det i Classroom, så visar sammanställningen gruppens snitt vid varje tillfälle.
+    text: Elevens blad att skriva ut. Eleven ringar in ett svar från 1 till 5 på sex påståenden, tre om gruppen och tre om sig själv, och skriver på raderna det hen vill säga om gruppen.
     efter: "ram: Gruppreflektion"
     google: /vargrupp
 
@@ -501,7 +501,7 @@ lathund:
           - Du gör
         rader:
           - ["Ingen pekas ut", "Ingen behöver berätta vad hen skrev. Ni nämner bara namn när någon har gjort något bra."]
-          - ["1 · Vår grupp", "Eleverna fyller i bladet så att ingen ser grannens. Samla in bladen."]
+          - ["1 · Vår grupp", "Eleverna fyller i bladet så att ingen ser grannens. Samla in bladen. Har skolan Google, kan eleverna svara i formuläret på niclasfohlin.se/vargrupp i stället, och sammanställningen räknar ut gruppens snitt vid varje tillfälle."]
           - ["2 · Frågorna", "Ställ två eller tre frågor, och prata två eller tre minuter om varje. Alla tänker tyst först. Är eleverna fler än sex, pratar de i grupper om två till fyra."]
           - ["3 · Lyft", "Säg vad gruppen gör bra. Gör gruppen det förra gångens mening säger, blir den det ni gör bra, annars står den kvar. Är eleverna fler än sex, berättar två eller tre grupper först vad de pratade om."]
           - ["4 · Två meningar", "Föreslå dem ur det eleverna sa. Från vecka 8 föreslår eleverna dem. Fråga om alla kan stå bakom dem, och skriv dem på tavlan som något ni gör."]
