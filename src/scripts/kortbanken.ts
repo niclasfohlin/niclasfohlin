@@ -3,15 +3,17 @@
 // och samma som i Word (src/lib/aktivitetskortform.ts): ett band i kortets färg med kategorin eller ordet Brainbreak och
 // numret, namnet i elevens typsnitt, bilden i en enda linje och texten. Stilarna står under Aktivitetskorten och
 // brainbreakkorten i global.css. Sidorna som slumpar korten och deras delningskort ritar med samma kod.
+import { ejBryt } from '../lib/metod';
 
 export type Kategori = { id: string; namn: string; farg: string };
 export type Aktivitet = { id: string; kategori: string; nr: number; namn: string; rad: string; grupp: string; tid: string; plats: string; beroring?: boolean; material: string[]; steg: string[]; tanka: string[]; bild: string; alt: string; pdf: string };
 export type Aktivitetsdata = { kategorier: Kategori[]; kort: Aktivitet[] };
 export type Kanal = { id: string; namn: string; kanal: string; strom: string; reserv: string; sida: string };
 export type Brainbreak = { id: string; nr: number; kategori: string; namn: string; minuter: number; slag: string; musik: string; plats: string; beroring?: boolean; text: string; bild: string; alt: string };
-export type Brainbreakdata = { farg: string; kategorier: { id: string; namn: string }[]; musik: Kanal[]; kort: Brainbreak[] };
+export type Brainbreakdata = { farg: string; kategorier: { id: string; namn: string; farg: string }[]; musik: Kanal[]; kort: Brainbreak[] };
 
-export const el = (tag: string, klass?: string, text?: string) => { const e = document.createElement(tag); if (klass) e.className = klass; if (text !== undefined) e.textContent = text; return e; };
+// Ett spann som "i grupper om 3–5" bryts aldrig efter tankstrecket, som i metodens text (ejBryt i src/lib/metod.ts).
+export const el = (tag: string, klass?: string, text?: string) => { const e = document.createElement(tag); if (klass) e.className = klass; if (text !== undefined) e.textContent = ejBryt(text); return e; };
 const NBSP = ' ';
 
 function bandet(vanster: string, hoger: string) {
@@ -61,15 +63,29 @@ export function aktivitetskortet(data: Aktivitetsdata, k: Aktivitet, liten: bool
   return f;
 }
 
-/** Brainbreakkortet, gruppens kort som visas stort. liten är formen bland sex: bandet, namnet och bilden. Bandet har
- *  kortets kategori, som Lek eller Lugn, så att den syns också bland sex (Niclas 2026-10-16). */
-export function brainbreakkortet(data: Brainbreakdata, k: Brainbreak, liten: boolean): HTMLElement {
+/** Brainbreakkortet, gruppens kort som visas stort. liten är formen bland sex: bandet, namnet, kategorin och bilden.
+ *  Bandet säger Brainbreak, och kategorin, som Lek eller Lugn, står som en tagg under namnet, i kategorins färg, som också
+ *  är kortets kant och band (Niclas 2026-10-16: "Att de heter Brainbreak i bandet men med en tagg lugn"). Med vidTagg
+ *  är taggen en knapp som ger sex nya ur kategorin (Niclas 2026-10-16: "Kan du göra taggen klickbar så man kommer till 6
+ *  nya om man trycker på den"). Bland sex är hela kortet knappen som väljer det, och där är taggen en etikett. */
+export function brainbreakkortet(data: Brainbreakdata, k: Brainbreak, liten: boolean, vidTagg?: (kategori: string) => void): HTMLElement {
+  const kat = data.kategorier.find((x) => x.id === k.kategori);
   const f = el('article', `brainbreakkort${liten ? ' liten' : ''}`);
-  f.style.setProperty('--kat', data.farg);
+  f.style.setProperty('--kat', kat?.farg ?? data.farg);
   f.dataset.kort = k.id;
-  f.append(bandet(data.kategorier.find((x) => x.id === k.kategori)?.namn ?? 'Brainbreak', `${k.minuter}${NBSP}min${NBSP}·${NBSP}${k.nr}`));
+  f.append(bandet('Brainbreak', `${k.minuter}${NBSP}min${NBSP}·${NBSP}${k.nr}`));
   const huvud = el('div', 'kb-huvud');
   huvud.append(el(liten ? 'p' : 'h2', 'kb-namn', k.namn));
+  if (kat && vidTagg && !liten) {
+    const t = el('button', 'kb-tagg', kat.namn) as HTMLButtonElement;
+    t.type = 'button';
+    t.title = `Sex nya ur ${kat.namn}`;
+    t.setAttribute('aria-label', `Sex nya ur ${kat.namn}`);
+    // Två korsade pilar: knappen slumpar.
+    t.insertAdjacentHTML('beforeend', '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 4h4v4M4 20 20 4M20 16v4h-4M15 15l5 5M4 4l5 5" /></svg>');
+    t.addEventListener('click', () => vidTagg(kat.id));
+    huvud.append(t);
+  } else if (kat) huvud.append(el('p', 'kb-tagg', kat.namn));
   if (k.beroring) huvud.append(el('p', 'kb-fakta', 'Rör vid varandra'));
   f.append(huvud, bilden(k.bild, k.alt));
   if (!liten) f.append(el('p', 'kb-text', k.text));

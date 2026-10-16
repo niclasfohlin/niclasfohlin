@@ -36,7 +36,7 @@ export interface Aktivitet {
 export interface Aktivitetsbank { metod: string; titel: string; kategorier: Aktivitetskategori[]; kort: Aktivitet[] }
 
 export interface Musikkanal { id: string; namn: string; kanal: string; strom: string; reserv: string; sida: string }
-export interface Brainbreakkategori { id: string; namn: string }
+export interface Brainbreakkategori { id: string; namn: string; farg: string }
 export interface Brainbreak {
   id: string;
   nr: number;
@@ -110,7 +110,7 @@ export function brainbreaksAv(id: string): Brainbreakbank | undefined {
   if (fargFel(b.farg)) fel.push('farg är inte sex hexsiffror');
   const kanaler = new Set(b.musik.map((m) => m.id));
   const kategorier = new Set((b.kategorier ?? []).map((k) => k.id));
-  for (const k of b.kategorier ?? []) if (!/^[a-z0-9-]+$/.test(k.id ?? '') || !k.namn?.trim()) fel.push(`kategorin ${k.id}: id och namn`);
+  for (const k of b.kategorier ?? []) if (!/^[a-z0-9-]+$/.test(k.id ?? '') || !k.namn?.trim() || fargFel(k.farg ?? '')) fel.push(`kategorin ${k.id}: id, namn och färg (sex hexsiffror)`);
   fel.push(...kategoriFel(b.kategorier ?? [], b.kort));
   for (const m of b.musik) if (!/^https:\/\//.test(m.strom ?? '') || !/^https:\/\//.test(m.reserv ?? '') || !/^https:\/\//.test(m.sida ?? '') || !m.namn?.trim() || !m.kanal?.trim()) fel.push(`kanalen ${m.id}: namn, kanal och adresserna strom, reserv och sida (https)`);
   const sedda = new Set<string>();
@@ -157,7 +157,7 @@ export function aktiviteterData(id: string, b: Aktivitetsbank, urval?: string[])
 export function brainbreaksData(id: string, b: Brainbreakbank, urval?: string[]) {
   return {
     farg: `#${b.farg}`,
-    kategorier: b.kategorier.map((k) => ({ id: k.id, namn: k.namn })),
+    kategorier: b.kategorier.map((k) => ({ id: k.id, namn: k.namn, farg: `#${k.farg}` })),
     musik: b.musik.map((m) => ({ id: m.id, namn: m.namn, kanal: m.kanal, strom: m.strom, reserv: m.reserv, sida: m.sida })),
     kort: urvalet(b.kort, urval).map((k) => ({ ...k, bild: kortbildAdress(id, k.bild) })),
   };

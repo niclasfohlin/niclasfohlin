@@ -2339,8 +2339,14 @@ html.js .bara-js { display: inline-block; }
 @media (min-width: 60rem) { .ak-yta { grid-template-columns: minmax(0, 1fr) 17.5rem; } }
 .ak-hoger { display: grid; gap: 1.25rem; align-content: start; align-self: stretch; min-width: 0; }
 .ak-kortplats { min-width: 0; }
-.ak-kortknappar { display: grid; gap: 0.5rem; }
-.ak-kortknappar .knapp { width: 100%; }
+.ak-kortknappar { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.ak-kortknappar .knapp { flex: 1 1 10rem; }
+/* I en smal skärm står Skriv ut kortet och Tillbaka till de sex över kortet, så att de syns utan att läraren rullar förbi
+   hela kortet, och klockan efter kortet (Niclas 2026-10-16: "Kan inte hitta skriv ut knappen längre på ett kort"). */
+@media (max-width: 47.99rem) {
+  .ak-yta:has(> .ak-scen[data-lage="ett"]) > .ak-hoger, .ak-yta:has(> .ak-scen[data-lage="ett"]) .ak-verktyg { display: contents; }
+  .ak-yta:has(> .ak-scen[data-lage="ett"]) .ak-kortknappar { order: -1; }
+}
 .ak-sex { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 0.9rem; }
 .ak-sex-kort { display: grid; }
 .ak-val-kort { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: pointer; text-align: left; border-radius: 4px; }
@@ -2422,6 +2428,18 @@ html.js .bara-js { display: inline-block; }
 .brainbreakkort .kb-band { font-size: max(2.4cqi, 0.62rem); padding: 1.6cqi 3.5cqi; }
 .brainbreakkort .kb-huvud { padding: 3.2cqi 6cqi 0; }
 .brainbreakkort .kb-namn { margin: 0; font-family: var(--typsnitt-elev); font-size: calc(7.2cqi * var(--skala)); font-weight: 400; line-height: 1.12; }
+/* Kategorin som en tagg under namnet, i kategorins färg. */
+.brainbreakkort .kb-tagg { display: inline-block; margin: 1.6cqi 0 0; padding: 0.5cqi 2.2cqi; border: 1px solid transparent; border-radius: 999px; background: color-mix(in srgb, var(--kat) 13%, white); color: color-mix(in srgb, var(--kat) 85%, black); font-family: var(--typsnitt-ui); font-weight: 700; font-size: max(2.6cqi, 0.72rem); line-height: 1.3; }
+.brainbreakkort.liten .kb-tagg { margin-top: 2.5cqi; padding: 0.8cqi 3.5cqi; font-size: max(5.2cqi, 0.72rem); }
+/* På kortet som står stort är taggen en knapp som ger sex nya ur kategorin: en kant, två korsade pilar och minst
+   1,75 rem hög, så att den går att träffa i telefonen. I helskärm gör gruppen kortet, och där är den en etikett, som
+   knapparna under klockan är borta där. */
+.brainbreakkort button.kb-tagg { display: inline-flex; align-items: center; gap: 0.4em; min-height: 1.75rem; border-color: color-mix(in srgb, var(--kat) 40%, white); cursor: pointer; }
+.brainbreakkort button.kb-tagg:hover { background: color-mix(in srgb, var(--kat) 24%, white); }
+.brainbreakkort button.kb-tagg:focus-visible { outline: 3px solid var(--kat); outline-offset: 2px; }
+.brainbreakkort button.kb-tagg svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.sk-ett:fullscreen .brainbreakkort button.kb-tagg { pointer-events: none; border-color: transparent; }
+.sk-ett:fullscreen .brainbreakkort button.kb-tagg svg { display: none; }
 .brainbreakkort .kb-fakta { margin: 0.8cqi 0 0; font-family: var(--typsnitt-ui); font-weight: 700; font-size: max(2.4cqi, 0.7rem); color: color-mix(in srgb, var(--kat) 80%, black); }
 .brainbreakkort .kb-bild { flex: none; width: 78%; margin: 2.5cqi auto 1.5cqi; }
 .brainbreakkort .kb-text { margin: 0; padding: 0 6cqi 4cqi; font-family: var(--typsnitt-elev); font-size: calc(4.6cqi * var(--skala)); line-height: 1.38; }
@@ -2461,14 +2479,30 @@ html.js .bara-js { display: inline-block; }
 .bb-volym input { flex: 1; min-width: 0; height: 2rem; margin: 0; accent-color: var(--farg-accent); cursor: pointer; }
 .bb-musik-not { margin: 0; font-size: 0.85rem; color: var(--farg-text-svag); }
 .bb-musik-not:empty { display: none; }
-/* I helskärm på en dator står spelaren under klockan, utan kanalknapparna, så att läraren kan pausa och ställa volymen
-   (Niclas 2026-10-16: "Spelaren och volym slider ska funka även i helskärm under klockan på pc"), och urtavlan lämnar
-   plats åt den. I en telefon är helskärmen kortet och klockan. */
-.sk-ett:fullscreen .bb-musik { display: none; }
+/* I helskärm står spelaren under klockan, så att läraren kan pausa och ställa volymen (Niclas 2026-10-16: "Spelaren och
+   volym slider ska funka även i helskärm under klockan på pc"). På en dator står kanalerna där också, som små knappar
+   ovanför spelaren, så att läraren kan byta kanal utan att lämna helskärm (Niclas samma dag: "i pc ska man kunna byta
+   kanal i fullscreen ... väljaren av station behöver inte vara så stor vid spelaren"), och i telefonen likaså, där de
+   ryms under klockan utan att kortet krymper. På en dator är spalten lika hög som kortet, kanalerna och spelaren tar sin
+   höjd, och urtavlan fyller det som blir över, så att klockan krymper av sig själv när de behöver plats. Där klockan står
+   i en rad, som i telefonen, står spelaren också i en rad: spela, vad som spelar och volymen (Niclas samma dag: "Vid
+   fullsida förut i mobilen fanns inte spelaren under klockan"). */
+.sk-ett:fullscreen .bb-musik h2 { display: none; }
+.sk-ett:fullscreen .bb-kanaler { grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr)); gap: 0.35rem; }
+.sk-ett:fullscreen .bb-kanal { justify-items: center; min-height: 2.4rem; padding: 0.2rem 0.5rem; text-align: center; }
+.sk-ett:fullscreen .bb-kanal-kalla, .sk-ett:fullscreen .bb-passar { display: none; }
+.sk-ett:fullscreen .bb-kanal-namn { font-size: 0.85rem; line-height: 1.2; }
 @media (orientation: landscape) and (min-height: 34.01rem) {
-  .sk-ett:fullscreen .bb-musik { display: grid; }
-  .sk-ett:fullscreen .bb-musik h2, .sk-ett:fullscreen .bb-kanaler { display: none; }
-  .brainbreaksida .sk-ett:fullscreen .sk-urtavla { width: min(100%, calc(96dvh - 21rem), 50dvh); }
+  .brainbreaksida .sk-ett:fullscreen { grid-template-rows: minmax(0, 1fr); }
+  .brainbreaksida .sk-ett:fullscreen .sk-sidospalt { align-self: stretch; grid-template-rows: minmax(0, 1fr) auto; }
+  .brainbreaksida .sk-ett:fullscreen .sk-klocka { grid-template-rows: minmax(0, 1fr); min-height: 0; }
+  .brainbreaksida .sk-ett:fullscreen .sk-urtavla { width: 100%; height: 100%; min-height: 0; }
+}
+@media (orientation: portrait), (max-height: 34rem) {
+  .sk-ett:fullscreen .bb-kanal-namn { font-size: 0.8rem; }
+  .sk-ett:fullscreen .bb-spelare { grid-template-columns: auto minmax(0, 1fr) minmax(0, 1.3fr); grid-template-areas: "knapp rad volym"; padding: 0.4rem 0.6rem; }
+  .sk-ett:fullscreen .bb-spelare:has(.bb-volym[hidden]) { grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "knapp rad"; }
+  .sk-ett:fullscreen .bb-spelar { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 0.8rem; }
 }
 @media (orientation: portrait) { .sk-ett:fullscreen .sk-kortplats .brainbreakkort { width: min(100cqw, 75cqh); } }
 @media print {

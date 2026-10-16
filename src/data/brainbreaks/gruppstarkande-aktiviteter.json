@@ -5,23 +5,28 @@
   "kategorier": [
     {
       "id": "rorelse",
-      "namn": "Rörelse"
+      "namn": "Rörelse",
+      "farg": "B23A48"
     },
     {
       "id": "dans-och-rytm",
-      "namn": "Dans & rytm"
+      "namn": "Dans & rytm",
+      "farg": "6B4FA0"
     },
     {
       "id": "lek",
-      "namn": "Lek"
+      "namn": "Lek",
+      "farg": "2E7D5B"
     },
     {
       "id": "hjarngympa",
-      "namn": "Hjärngympa"
+      "namn": "Hjärngympa",
+      "farg": "2D5DA1"
     },
     {
       "id": "lugn",
-      "namn": "Lugn"
+      "namn": "Lugn",
+      "farg": "1C6E73"
     }
   ],
   "musik": [
