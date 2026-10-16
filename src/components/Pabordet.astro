@@ -6,10 +6,10 @@
 // leder till svg-filen, så att den går att se stor i telefonen: en bild med en grupps post-it-lappar går inte att läsa i
 // telefonbredd (riggens läsning 2026-10-13, och K-296).
 // Ett blad (arBlad: rubriken börjar med "Blad: ", Faktatextsamtal i grupp 2026-10-13) står med sitt namn över bilden och
-// leder till svg-filen, så att bladet går att se stort i telefonen. I utskriften är bladet en egen liggande sida med bara
-// bilden, som i Word, där bladets namn är ritat i bilden (global.css, .m-blad). Textalternativet är bildens rubrik och
-// text, som i Word, och scripts/paritet.mjs prövar det.
-import { arBlad, arIfylltBlad, bildensAlt, bladNamn, iDel, type PaBordet } from '../lib/pabordet';
+// leder till svg-filen, så att bladet går att se stort i telefonen. I utskriften är bladet en egen sida med bara bilden,
+// liggande eller stående som i Word (arStaendeBlad), där bladets namn är ritat i bilden (global.css, .m-blad).
+// Textalternativet är bildens rubrik och text, som i Word, och scripts/paritet.mjs prövar det.
+import { arBlad, arIfylltBlad, arStaendeBlad, bildensAlt, bladNamn, iDel, type PaBordet } from '../lib/pabordet';
 // utanRubrik: bladet står under sin egen rubrik på ramens sida ([id]/[enhet].astro), så namnet och ankaret står där.
 interface Props { b: PaBordet; utanRubrik?: boolean }
 const { b, utanRubrik = false } = Astro.props;
@@ -17,7 +17,7 @@ const vecka = iDel(b);
 const blad = arBlad(b);
 ---
 {blad ? (
-  <figure class:list={['m-blad', { ifyllt: arIfylltBlad(b) }]} id={utanRubrik ? undefined : `blad-${b.bild.nr}`}>
+  <figure class:list={['m-blad', { ifyllt: arIfylltBlad(b), staende: arStaendeBlad(b) }]} id={utanRubrik ? undefined : `blad-${b.bild.nr}`}>
     {!utanRubrik && <p class="m-blad-rubrik">{bladNamn(b)}</p>}
     <a href={b.adress} class="bild-lank" title="Öppna bladet i full storlek"><img src={b.adress} alt={bildensAlt(b)} width={b.matt.bredd} height={b.matt.hojd} loading="lazy" decoding="async" data-utskriftsbild /></a>
     <figcaption>{b.bild.text}</figcaption>

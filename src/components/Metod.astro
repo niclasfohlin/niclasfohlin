@@ -38,7 +38,7 @@ import { kortInfo } from '../lib/brak';
 import { arTarning, sagoUpphov } from '../lib/sagoblad';
 import { arkAdress, arSerieMall, mallEtiketter, mallRutor as mallRutorAdresser, rutansText, serieRutor as serieRutorAdresser, svgMatt } from '../lib/bildserier';
 import { serieantal, serieFiler } from '../lib/bildserier-bygge';
-import { arBlad, bildensAlt, bladVid, metodensPaBordet, paBordetVid, PABORDET_MATT } from '../lib/pabordet';
+import { arBlad, arStaendeBlad, bildensAlt, bladVid, metodensPaBordet, paBordetVid, PABORDET_MATT } from '../lib/pabordet';
 import { listansNiva } from '../lib/nivaer';
 import { omslagUpphov, ramensNiva } from '../lib/litteraturlista';
 import { metodensNivamaterial } from '../lib/nivamaterial';
@@ -971,7 +971,7 @@ const meny = [
               <div class="enhet-blad" data-blad={`bild-${b.bild.nr}`} id={`bild-${b.bild.nr}`}>
                 <div class="enhet-bladhuvud">
                   <h2>{bladRubrik(bladenhet, b)}</h2>
-                  <a class="knapp sekundar liten" href={utskriftAdress(pdf.blad.get(b.bild.nr)!)} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande data-sidor-hogst="1" data-direkt={`Skriv ut ${bladKort(bladenhet, b).toLowerCase()}`} {...stat(bladKort(bladenhet, b).toLowerCase())}>{bladKort(bladenhet, b)} som pdf</a>
+                  <a class="knapp sekundar liten" href={utskriftAdress(pdf.blad.get(b.bild.nr)!)} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande={arStaendeBlad(b) ? undefined : ''} data-sidor-hogst="1" data-direkt={`Skriv ut ${bladKort(bladenhet, b).toLowerCase()}`} {...stat(bladKort(bladenhet, b).toLowerCase())}>{bladKort(bladenhet, b)} som pdf</a>
                 </div>
                 <Pabordet b={b} utanRubrik />
               </div>

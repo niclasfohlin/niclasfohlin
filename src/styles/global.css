@@ -1017,6 +1017,8 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-blad-rubrik { font-family: var(--typsnitt-ui); font-weight: 700; margin: 0 0 0.4rem; }
 .m-blad img { display: block; width: 100%; height: auto; background: #fff; border: 1px solid var(--farg-kant); border-radius: 4px; }
 .m-blad figcaption { font-size: 0.95rem; color: var(--farg-text-svag); margin-top: 0.4rem; }
+/* Ett stående blad (arStaendeBlad) står smalare på en bred skärm, så att hela bladet ryms i höjd. */
+.m-blad.staende { max-width: 30rem; }
 /* Bilden som eleven ser på (PaBordet.elev): direkt efter det eleven läser, utan rubrik, på vitt som elevens blad. */
 .m-elevbild { margin: 1rem 0 1.25rem; }
 .m-elevbild img { display: block; width: 100%; height: auto; background: #fff; }
@@ -1238,6 +1240,7 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
    raden Till läraren under den ryms på sidan. */
 @page faktatext { size: A4; margin: 15mm 15mm 12mm; @bottom-center { content: var(--tryck-text, ''); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 8pt; color: #555; } }
 @page blad { size: A4 landscape; margin: 0; }
+@page bladstaende { size: A4 portrait; margin: 0; }
 @page boksida { size: A4; margin: 15mm 15mm 8mm; @bottom-center { content: var(--tryck-text, ''); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 8pt; color: #555; } }
 /* Två lösningar på ett liggande A4 med riggens marginaler (720 twips, src/lib/boksida.ts LIGGANDE_BOK). */
 @page bokliggande { size: A4 landscape; margin: 12.7mm 12.7mm 8mm; @bottom-center { content: var(--tryck-text, ''); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 8pt; color: #555; } }
@@ -1817,6 +1820,8 @@ html.js .bara-js { display: inline-block; }
   .m-blad { page: blad; break-before: page; break-after: page; break-inside: avoid; position: relative; margin: 0; width: 297mm; height: 209mm; overflow: hidden; }
   .m-blad-rubrik, .m-blad figcaption { display: none; }
   .m-blad img { width: 297mm; height: 209mm; object-fit: contain; border: 0; border-radius: 0; }
+  .m-blad.staende { page: bladstaende; width: 210mm; height: 296mm; max-width: none; }
+  .m-blad.staende img { width: 210mm; height: 296mm; }
   .m-blad::after { content: var(--tryck-text, ''); position: absolute; left: 0; right: 0; bottom: 4mm; text-align: center; font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 7pt; color: #555; }
   .m-elevbild { break-inside: avoid; margin: 8pt 0; }
   /* En del med en bild (lärarens sida: rutan för modellpasset med bilden Ett möjligt resultat) börjar på en ny sida och
@@ -2281,4 +2286,190 @@ html.js .bara-js { display: inline-block; }
 }
 @media print {
   .skrivkortsida .sk-val, .skrivkortsida .sk-sidospalt, .skrivkortsida .sk-tio-rad { display: none; }
+}
+
+/* Aktivitetskorten och brainbreakkorten och sidorna som slumpar dem (Gruppstärkande aktiviteter, 2026-10-16;
+   src/pages/stodundervisning/[id]/aktiviteter.astro och brainbreaks.astro, src/scripts/kortbanken.ts). Korten har
+   riggens form (build/kortform.js), som Word-filen har den (src/lib/aktivitetskortform.ts): ett band i kategorins färg
+   med kategorin och numret, namnet i elevens typsnitt, bilden i en enda linje på vitt och texten. Urvalet, de stora
+   korten, klockan och helskärmen har stilarna från Ta fram ett skrivkort ovan. */
+.kb-band { display: flex; justify-content: space-between; gap: 1rem; margin: 0; padding: 0.55em 1em 0.5em; background: color-mix(in srgb, var(--kat) 88%, black); color: #fff; font-family: 'Cinzel', var(--typsnitt-rubrik); font-size: 0.85rem; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.2; }
+.kb-band-nr { flex: none; }
+.kb-bild { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; background: #fff; }
+
+.aktivitetskort { --kat: #2f6e8e; background: #fff; color: var(--sk-text); border: 1px solid var(--farg-kant); border-radius: 4px; overflow: hidden; font-family: var(--typsnitt-ui); }
+.aktivitetskort .kb-huvud { padding: 1rem 1.25rem 0.25rem; }
+.aktivitetskort .kb-namn { margin: 0 0 0.3rem; font-family: var(--typsnitt-elev); font-size: clamp(1.6rem, 4vw, 2.1rem); font-weight: 400; line-height: 1.15; }
+.aktivitetskort .kb-rad { margin: 0 0 0.45rem; font-size: 1.05rem; line-height: 1.45; }
+.aktivitetskort .kb-fakta { margin: 0; font-size: 0.9rem; font-weight: 700; color: color-mix(in srgb, var(--kat) 80%, black); }
+.aktivitetskort .kb-bild { width: 72%; margin: 0.5rem auto 0.25rem; }
+.aktivitetskort .kb-steg, .aktivitetskort .kb-tva { margin: 0 1.25rem; padding: 0.9rem 0 0.4rem; border-top: 1.5px solid var(--kat); }
+.aktivitetskort .kb-rubrik { margin: 0 0 0.45rem; font-size: 1.05rem; font-weight: 700; color: color-mix(in srgb, var(--kat) 80%, black); font-family: var(--typsnitt-ui); }
+.aktivitetskort .kb-steg ol { margin: 0; padding-left: 1.6rem; }
+.aktivitetskort .kb-steg li { margin: 0 0 0.45rem; line-height: 1.5; }
+.aktivitetskort .kb-steg li::marker { font-weight: 700; color: color-mix(in srgb, var(--kat) 80%, black); }
+.aktivitetskort .kb-tva { display: grid; grid-template-columns: minmax(0, 0.56fr) minmax(0, 1fr); gap: 1.25rem; margin-bottom: 0.9rem; }
+.aktivitetskort .kb-tva ul { margin: 0; padding-left: 1.1rem; font-size: 0.95rem; line-height: 1.45; }
+.aktivitetskort .kb-tva li { margin: 0 0 0.3rem; }
+.aktivitetskort .kb-tva li::marker { color: var(--kat); }
+@media (max-width: 30rem) { .aktivitetskort .kb-tva { grid-template-columns: minmax(0, 1fr); gap: 0.6rem; } }
+/* Bland sex: bandet med kategorin, namnet, raden och bilden. Numret står på det stora kortet. Bandets text krymper
+   med kortet, så att det längsta ordet, Samarbetsutmaningar, ryms också i en telefon som är 320 punkter bred. */
+.aktivitetskort.liten { height: 100%; display: flex; flex-direction: column; container-type: inline-size; }
+.aktivitetskort.liten .kb-band { font-size: min(0.68rem, 6.6cqi); letter-spacing: 0.02em; padding: 0.45em 0.7em; }
+.aktivitetskort.liten .kb-band-namn { min-width: 0; overflow-wrap: anywhere; }
+.aktivitetskort.liten .kb-band-nr { display: none; }
+.aktivitetskort.liten .kb-huvud { padding: 0.6rem 0.75rem 0; }
+.aktivitetskort.liten .kb-namn { font-size: 1.15rem; margin: 0 0 0.2rem; }
+/* Raden om vad aktiviteten är står hel, också i telefonen (Niclas 2026-10-16: "Man måste ju i översikten fatta själva
+   metoden ... Inte allt. Men namnet och vad det är"). */
+.aktivitetskort.liten .kb-rad { font-size: 0.85rem; line-height: 1.35; }
+.aktivitetskort.liten .kb-bild { width: 86%; margin: 0.4rem auto 0.5rem; }
+
+/* Sidan Ta fram en aktivitet: korten och listan att skriva ut bredvid på en bred skärm. */
+/* Kategorierna har långa namn (Samarbetsutmaningar), så i telefonen står de i en kolumn. */
+@media (max-width: 30rem) { .ak-kategorier { grid-template-columns: minmax(0, 1fr); } }
+/* Kortet eller de sex till vänster, och till höger en spalt med knapparna och klockan när ett kort visas helt och under
+   dem listan att skriva ut (Niclas 2026-10-16: "Kan den inte ligga under klockan så att kortet för aktiviteten blir
+   större att se på pc?"). Under 60rem står listan i en rad längst ned, så där har spalten bara knapparna och klockan, och
+   bland sex finns ingen spalt. Spalten är lika hög som kortet, så att listan kan följa med när sidan rullas. */
+.ak-yta { display: grid; gap: 1.25rem; align-items: start; }
+@media (min-width: 48rem) { .ak-yta:has(> .ak-scen[data-lage="ett"]) { grid-template-columns: minmax(0, 1fr) 17.5rem; } }
+@media (min-width: 60rem) { .ak-yta { grid-template-columns: minmax(0, 1fr) 17.5rem; } }
+.ak-hoger { display: grid; gap: 1.25rem; align-content: start; align-self: stretch; min-width: 0; }
+.ak-kortplats { min-width: 0; }
+.ak-kortknappar { display: grid; gap: 0.5rem; }
+.ak-kortknappar .knapp { width: 100%; }
+.ak-sex { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 0.9rem; }
+.ak-sex-kort { display: grid; }
+.ak-val-kort { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; cursor: pointer; text-align: left; border-radius: 4px; }
+.ak-val-kort:hover .aktivitetskort { outline: 2px solid color-mix(in srgb, var(--farg-accent) 45%, transparent); outline-offset: 2px; }
+.ak-val-kort:focus-visible .aktivitetskort { outline: 3px solid var(--farg-accent); outline-offset: 2px; }
+.ak-val-kort:focus-visible { outline: none; }
+/* Bocken (Niclas 2026-10-16: "liten diskret bock som förklarar sig själv och sedan adderar den till en lista att skriva
+   ut"): en liten ring med en bock, som fylls blå när kortet står i listan att skriva ut, och kortets kant blir då blå.
+   Bland sex står den i kortets nedre hörn, och på det stora kortet till höger i bandet, som lämnar plats åt den. Ytan
+   att trycka på är 44 punkter (::before). */
+.ak-med-bock { position: relative; }
+.ak-bock { position: absolute; right: 0.3rem; bottom: 0.3rem; display: grid; place-items: center; width: 2rem; height: 2rem; padding: 0; border: 0; background: none; cursor: pointer; }
+.ak-bock::before { content: ''; position: absolute; inset: calc((100% - 2.75rem) / 2); }
+.ak-bock svg { width: 1.35rem; height: 1.35rem; border-radius: 50%; border: 1.5px solid color-mix(in srgb, var(--sk-text) 32%, white); background: #fff; fill: none; stroke: color-mix(in srgb, var(--sk-text) 38%, white); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.ak-bock:hover svg { border-color: var(--farg-accent); stroke: var(--farg-accent); }
+.ak-bock[aria-pressed="true"] svg { background: var(--farg-accent); border-color: var(--farg-accent); stroke: #fff; }
+.ak-bock:focus-visible { outline: none; }
+.ak-bock:focus-visible svg { outline: 3px solid var(--farg-accent); outline-offset: 2px; }
+/* På det stora kortet: vit på kategorins färg, lika hög som bandet (2,25 em av bandets text, .kb-band ovan). */
+.ak-kortplats .aktivitetskort .kb-band { padding-right: 3.1rem; }
+.ak-kortplats .ak-bock { top: 0; bottom: auto; right: 0.55rem; width: 2.4rem; height: calc(0.85rem * 2.25); }
+.ak-kortplats .ak-bock svg { width: 1.45rem; height: 1.45rem; border-color: rgb(255 255 255 / 0.9); background: rgb(255 255 255 / 0.1); stroke: rgb(255 255 255 / 0.75); }
+.ak-kortplats .ak-bock:hover svg { background: rgb(255 255 255 / 0.3); border-color: #fff; stroke: #fff; }
+.ak-kortplats .ak-bock[aria-pressed="true"] svg { background: var(--farg-accent); border-color: #fff; stroke: #fff; }
+.ak-kortplats .ak-bock:focus-visible svg { outline-color: #fff; }
+.ak-med-bock.vald .aktivitetskort { border-color: var(--farg-accent); box-shadow: 0 0 0 1px var(--farg-accent); }
+
+/* Listan att skriva ut. På en bred skärm en spalt som följer med, i telefonen en rad längst ned som fäller ut listan. */
+.ak-valda { font-family: var(--typsnitt-ui); }
+.ak-valda-rad { display: none; }
+.ak-valda-innehall { padding: 0.9rem 1rem 1rem; border: 1px solid var(--farg-kant); border-radius: var(--radie); background: var(--farg-ton-svag); }
+.ak-valda-rubrik { margin: 0 0 0.6rem; font-size: 1.05rem; }
+.ak-valda-antal { display: inline-grid; place-items: center; min-width: 1.6em; height: 1.6em; padding: 0 0.35em; margin-left: 0.25rem; border-radius: 999px; background: var(--farg-accent); color: #fff; font-size: 0.85em; font-weight: 700; }
+.ak-valda-tom { margin: 0 0 0.75rem; color: var(--farg-text-svag); font-size: 0.95rem; }
+.ak-valda-lista { list-style: none; margin: 0 0 0.75rem; padding: 0; display: grid; gap: 0.35rem; max-height: 50vh; overflow-y: auto; }
+.ak-valt { display: flex; align-items: stretch; border: 1px solid var(--farg-kant); border-left: 5px solid var(--kat); border-radius: 6px; background: var(--farg-yta); }
+.ak-valt-namn { flex: 1; min-height: 2.75rem; padding: 0.35rem 0.6rem; border: 0; background: none; text-align: left; font: inherit; font-size: 0.95rem; color: var(--farg-text); cursor: pointer; }
+.ak-valt-bort { flex: none; width: 2.75rem; border: 0; border-left: 1px solid var(--farg-kant); background: none; font: 700 1.3rem/1 var(--typsnitt-ui); color: var(--farg-text-svag); cursor: pointer; }
+.ak-valt-bort:hover { color: var(--farg-accent); }
+.ak-nr { font-weight: 700; color: var(--farg-text-svag); margin-right: 0.15rem; }
+.ak-valda-knappar { display: grid; gap: 0.5rem; }
+.ak-valda-knappar .knapp { width: 100%; }
+.ak-valda-knappar [aria-disabled="true"] { opacity: 0.45; pointer-events: none; }
+.ak-valda-not { margin: 0.6rem 0 0; font-size: 0.85rem; color: var(--farg-text-svag); overflow-wrap: anywhere; }
+.ak-valda-not:empty { display: none; }
+@media (min-width: 60rem) { .ak-valda { position: sticky; top: 5.5rem; } }
+@media (max-width: 59.99rem) {
+  .ak-valda { position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; }
+  .ak-valda-rad { display: flex; align-items: center; justify-content: center; gap: 0.25rem; width: 100%; min-height: 3.25rem; border: 0; border-top: 1px solid var(--farg-kant); background: var(--farg-yta); color: var(--farg-text); font: 700 1rem var(--typsnitt-ui); box-shadow: 0 -4px 14px rgb(0 0 0 / 0.08); cursor: pointer; }
+  .ak-valda-rad::after { content: ''; width: 0.5rem; height: 0.5rem; margin-left: 0.6rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(0.15rem) rotate(-135deg); }
+  .ak-valda[data-oppen="true"] .ak-valda-rad::after { transform: translateY(-0.15rem) rotate(45deg); }
+  .ak-valda-innehall { display: none; max-height: 70vh; overflow-y: auto; border-radius: 0; border-width: 1px 0 0; }
+  .ak-valda[data-oppen="true"] .ak-valda-innehall { display: block; }
+  .ak-valda .ak-valda-rubrik { display: none; }
+  .aktivitetssida { padding-bottom: 4rem; }
+}
+
+/* Alla aktiviteter, kategori för kategori. */
+.ak-alla { margin: 2.5rem 0 1rem; }
+.ak-alla h2 { margin-bottom: 0.3rem; }
+.ak-alla > p { margin: 0 0 0.75rem; color: var(--farg-text-svag); }
+.ak-alla-kategori { border: 1px solid var(--farg-kant); border-left: 6px solid var(--kat); border-radius: 8px; background: var(--farg-yta); margin: 0 0 0.5rem; font-family: var(--typsnitt-ui); }
+.ak-alla-kategori > summary { display: flex; align-items: baseline; gap: 0.75rem; min-height: 2.75rem; padding: 0.65rem 1rem; cursor: pointer; list-style: none; }
+.ak-alla-kategori > summary::-webkit-details-marker { display: none; }
+.ak-alla-namn { font-weight: 700; color: color-mix(in srgb, var(--kat) 85%, black); }
+.ak-alla-antal { color: var(--farg-text-svag); font-size: 0.9rem; }
+/* Varje kort med namnet och raden om vad aktiviteten är, så att listan går att välja ur utan att öppna korten. */
+.ak-alla-lista { list-style: none; margin: 0; padding: 0.25rem 0.75rem 0.9rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(19rem, 100%), 1fr)); gap: 0.35rem 1rem; }
+.ak-visa { display: grid; gap: 0.15rem; width: 100%; min-height: 2.75rem; padding: 0.45rem 0.5rem; border: 0; border-radius: 4px; background: none; text-align: left; font: inherit; cursor: pointer; }
+.ak-visa:hover { background: var(--farg-accent-ljus); }
+.ak-visa-namn { font-weight: 600; color: var(--farg-accent); }
+.ak-visa-rad { font-size: 0.92rem; line-height: 1.4; color: var(--farg-text); }
+
+/* Brainbreakkortet: gruppens kort, stort och i elevens typsnitt, i 3:4 som skrivkortet, så att helskärmen ritar det på
+   samma sätt. Texten krymper där den inte ryms (--skala, sidans skript). */
+.brainbreakkort { --kat: #1c6e73; --skala: 1; container-type: inline-size; display: flex; flex-direction: column; width: 100%; aspect-ratio: 3 / 4; background: #fff; color: var(--sk-text); border: 2px solid var(--kat); overflow: hidden; }
+.brainbreakkort .kb-band { font-size: max(2.4cqi, 0.62rem); padding: 1.6cqi 3.5cqi; }
+.brainbreakkort .kb-huvud { padding: 3.2cqi 6cqi 0; }
+.brainbreakkort .kb-namn { margin: 0; font-family: var(--typsnitt-elev); font-size: calc(7.2cqi * var(--skala)); font-weight: 400; line-height: 1.12; }
+.brainbreakkort .kb-fakta { margin: 0.8cqi 0 0; font-family: var(--typsnitt-ui); font-weight: 700; font-size: max(2.4cqi, 0.7rem); color: color-mix(in srgb, var(--kat) 80%, black); }
+.brainbreakkort .kb-bild { flex: none; width: 78%; margin: 2.5cqi auto 1.5cqi; }
+.brainbreakkort .kb-text { margin: 0; padding: 0 6cqi 4cqi; font-family: var(--typsnitt-elev); font-size: calc(4.6cqi * var(--skala)); line-height: 1.38; }
+.brainbreakkort.liten .kb-huvud { padding: 4cqi 5cqi 0; }
+.brainbreakkort.liten .kb-namn { font-size: 9cqi; }
+.brainbreakkort.liten .kb-bild { width: 88%; margin: auto auto 4cqi; }
+/* Sex kort i rader och kolumner med jämnt antal: tre rader och två kolumner i telefonen, två och tre på en bred skärm. */
+.bb-fem { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+@media (min-width: 48rem) { .bb-fem { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.bb-slumpa { min-width: 10rem; justify-content: center; font-size: 1.05rem; border: 0; cursor: pointer; }
+.sk-val-kort:hover .brainbreakkort, .sk-val-kort:focus-visible .brainbreakkort { outline: 3px solid var(--farg-accent); outline-offset: 3px; }
+
+/* Musiken: tre knappar under klockan, kanalen som passar kortet först och märkt, och under dem en enkel spelare med
+   spela och paus, vad som spelar och volymen. */
+.bb-musik { display: grid; gap: 0.45rem; font-family: var(--typsnitt-ui); }
+.bb-musik h2 { margin: 0; }
+.bb-kanaler { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.45rem; }
+.bb-kanal { display: grid; align-content: center; justify-items: start; gap: 0.1rem; min-height: 3.1rem; padding: 0.4rem 0.7rem; border: 1.5px solid var(--farg-kant); border-radius: 6px; background: var(--farg-yta); color: var(--farg-text); text-align: left; font: inherit; cursor: pointer; }
+.bb-kanal-namn { font-weight: 700; font-size: 0.95rem; }
+.bb-kanal-kalla { font-size: 0.75rem; color: var(--farg-text-svag); }
+.bb-passar { display: none; font-size: 0.72rem; font-weight: 700; color: var(--farg-accent); }
+.bb-kanal.forval .bb-passar { display: block; }
+.bb-kanal.forval { border-color: var(--farg-accent); }
+.bb-kanal[aria-pressed="true"] { background: var(--farg-accent); border-color: var(--farg-accent); color: #fff; }
+.bb-kanal[aria-pressed="true"] .bb-kanal-kalla, .bb-kanal[aria-pressed="true"] .bb-passar { color: #fff; }
+.bb-spelare { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "knapp rad" "volym volym"; align-items: center; gap: 0.35rem 0.75rem; padding: 0.6rem 0.75rem; border: 1px solid var(--farg-kant); border-radius: 8px; background: var(--farg-yta); }
+.bb-spela { grid-area: knapp; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; padding: 0; border: 0; border-radius: 50%; background: var(--farg-accent); color: #fff; cursor: pointer; }
+.bb-spela svg { width: 1.3rem; height: 1.3rem; fill: currentColor; }
+.bb-spela[data-lage="spelar"] .bb-ikon-spela, .bb-spela:not([data-lage="spelar"]) .bb-ikon-paus { display: none; }
+.bb-spela:focus-visible { outline: 3px solid var(--farg-accent); outline-offset: 2px; }
+.bb-spelar { grid-area: rad; margin: 0; font-size: 0.9rem; line-height: 1.35; color: var(--farg-text); }
+.bb-volym { grid-area: volym; display: flex; align-items: center; gap: 0.5rem; }
+.bb-volym[hidden] { display: none; }
+.bb-volym svg { flex: none; width: 1.4rem; height: 1.4rem; fill: none; stroke: var(--farg-text-svag); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.bb-volym .bb-hogtalare { fill: var(--farg-text-svag); }
+.bb-volym input { flex: 1; min-width: 0; height: 2rem; margin: 0; accent-color: var(--farg-accent); cursor: pointer; }
+.bb-musik-not { margin: 0; font-size: 0.85rem; color: var(--farg-text-svag); }
+.bb-musik-not:empty { display: none; }
+/* I helskärm på en dator står spelaren under klockan, utan kanalknapparna, så att läraren kan pausa och ställa volymen
+   (Niclas 2026-10-16: "Spelaren och volym slider ska funka även i helskärm under klockan på pc"), och urtavlan lämnar
+   plats åt den. I en telefon är helskärmen kortet och klockan. */
+.sk-ett:fullscreen .bb-musik { display: none; }
+@media (orientation: landscape) and (min-height: 34.01rem) {
+  .sk-ett:fullscreen .bb-musik { display: grid; }
+  .sk-ett:fullscreen .bb-musik h2, .sk-ett:fullscreen .bb-kanaler { display: none; }
+  .brainbreaksida .sk-ett:fullscreen .sk-urtavla { width: min(100%, calc(96dvh - 21rem), 50dvh); }
+}
+@media (orientation: portrait) { .sk-ett:fullscreen .sk-kortplats .brainbreakkort { width: min(100cqw, 75cqh); } }
+@media print {
+  .kortbanksida .sk-val, .kortbanksida .sk-sidospalt, .kortbanksida .ak-valda, .kortbanksida .ak-alla, .kortbanksida .sk-tio-not, .kortbanksida .ak-bock { display: none; }
+  .kortbanksida .ak-med-bock.vald .aktivitetskort { border-color: var(--farg-kant); box-shadow: none; }
+  .kortbanksida .ak-kortplats .aktivitetskort .kb-band { padding-right: 1em; }
+  .kortbanksida .ak-yta { display: block; }
 }

@@ -111,7 +111,7 @@ export function metodensBladmaterial(d: MetodData, id: string): Bladmaterial | u
   const nm = metodensNivamaterial(d);
   const bm = bladmaterial(d.ramar.ramar, metodensPaBordet(d, id), (ri) => (!!bank && (bank.ramar.has(ri) || bank.oversikter.has(ri))) || !!nm?.ramar.has(ri));
   // Ramens sida har ramens namn som adress, och den får inte krocka med en enhets sida i banken eller metodens andra sidor.
-  const upptagna = new Set(['lathund', 'serier', ...(bank?.enheter.map((e) => e.slug) ?? [])]);
+  const upptagna = new Set(['lathund', 'serier', 'skrivkort', 'aktiviteter', 'brainbreaks', 'kort', ...(bank?.enheter.map((e) => e.slug) ?? [])]);
   for (const r of bm?.rader ?? []) {
     if (!r.slug || upptagna.has(r.slug)) throw new Error(`${d.titel}: ramen "${bm!.led}: ${r.namn}" får adressen ${r.slug}, som en annan sida redan har. Ge ramen ett annat namn.`);
     upptagna.add(r.slug);

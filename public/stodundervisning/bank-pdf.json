@@ -4430,5 +4430,61 @@
     "sidor": 110,
     "kB": 7711,
     "datum": "2026-10-14"
+  },
+  "gruppstarkande-aktiviteter": {
+    "word": "9467b2f12f5b6419e710b0980f9db07053ee162dfe9b9896b7f177b6e9536392",
+    "pdf": "f096ef2a3b7f6cd8ac82bf98f04e82872dd42184df282718224531ca645949ae",
+    "sidor": 22,
+    "kB": 689,
+    "datum": "2026-10-16"
+  },
+  "gruppstarkande-aktiviteter-metoden": {
+    "word": "c84a6f8eede46ce7e810e96b0c0d113315756a4436d2e456bad7ce7b0b26ec05",
+    "pdf": "71ff2818ec40f04b10f7e71375a11e0d645156b19104652297f9ed20c708258e",
+    "sidor": 10,
+    "kB": 423,
+    "datum": "2026-10-16"
+  },
+  "gruppstarkande-aktiviteter-lathund-text": {
+    "word": "03fe0d62c62e0c548c9f31fdfc80e67f4adf7ab7b2486b603f157fd9d5088261",
+    "pdf": "4492cf61de180137148a27892708cbaa7e56458a45bd3dbcb70583f835d8a7fb",
+    "sidor": 1,
+    "kB": 221,
+    "datum": "2026-10-16"
+  },
+  "gruppstarkande-aktiviteter-aktivitetskort-lara-kanna": {
+    "word": "b6037a35cbcdac40463dfc559a9e9ea67e178e82296a13c041012ede22e5f0b2",
+    "pdf": "2e41a06f2cb567f6db3ac4b0ea474e3a807720b79c875d9984f48d938e6c8feb",
+    "sidor": 20,
+    "kB": 272,
+    "datum": "2026-10-16"
+  },
+  "gruppstarkande-aktiviteter-aktivitetskort-trygghet": {
+    "word": "5d24c06d7b6e13547ab64d47e4eb5707879d4575df10ced4c901a81a01e16a4f",
+    "pdf": "a463b61f7ceaf7e9438c296fd23d1d6d115afbef84428905865db9390a72d53c",
+    "sidor": 20,
+    "kB": 276,
+    "datum": "2026-10-16"
+  },
+  "gruppstarkande-aktiviteter-aktivitetskort-utmaningar": {
+    "word": "8f2e1194ca95b528298b24b34e3d1772e32dee7b2101edb107ba82b8529f2b28",
+    "pdf": "6bae6fbe29d097bcec608b066d0401d1662ae15856084cb039f2fbd38437a712",
+    "sidor": 20,
+    "kB": 283,
+    "datum": "2026-10-16"
+  },
+  "gruppstarkande-aktiviteter-aktivitetskort-mal": {
+    "word": "abcb1ae16657c77bdf948b566a2ec5596db5336f732a276b4cad8930ab5049db",
+    "pdf": "e5ae2ba01343db37ef9d28fa713dce796d9ad902d6fd20738fca61906c5884e3",
+    "sidor": 20,
+    "kB": 285,
+    "datum": "2026-10-16"
+  },
+  "gruppstarkande-aktiviteter-aktivitetskort-skapa": {
+    "word": "51c26db8a01f4642ac7fbd8562e38d5ff34278485758eca876373752372db8d8",
+    "pdf": "8a5fba8b6003a6be3acd0f7c6f96c2386cf47102ff23d4e81b99dfc8ab82b6de",
+    "sidor": 20,
+    "kB": 290,
+    "datum": "2026-10-16"
   }
 }

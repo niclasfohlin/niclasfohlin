@@ -40,6 +40,8 @@ export const arBlad = (b: PaBordet) => BLAD.test(b.bild.rubrik);
 export const bladNamn = (b: PaBordet) => b.bild.rubrik.match(BLAD)?.[1] ?? b.bild.rubrik;
 /** Ett ifyllt blad, som exemplet om skolan. */
 export const arIfylltBlad = (b: PaBordet) => arBlad(b) && /, exemplet\b/.test(bladNamn(b));
+/** Ett stående blad, högre än brett (Vår grupp i Gruppstärkande aktiviteter, 2026-10-16), står på ett stående A4. */
+export const arStaendeBlad = (b: PaBordet) => arBlad(b) && b.matt.hojd > b.matt.bredd;
 /** Ramens blad, i bildernas ordning. */
 export const bladVid = (bilder: PaBordet[], ramensRubrik: string) => paBordetVid(bilder, { ram: ramensRubrik }).filter(arBlad);
 /** Bilderna som står på platsen. */

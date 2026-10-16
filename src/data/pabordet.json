@@ -76,5 +76,9 @@
     "91": {"bredd":960,"hojd":650,"skala":0.8},
     "92": {"bredd":960,"hojd":300,"elev":true},
     "93": {"bredd":960,"hojd":300,"elev":true}
+  },
+  "gruppstarkande-aktiviteter": {
+    "1": {"bredd":1485,"hojd":1050,"ytor":[{"namn":"Grupp","x":1128.4,"y":62,"b":316.6,"h":42,"lage":"nere"},{"namn":"Termin","x":1137.1,"y":124,"b":307.9,"h":42,"lage":"nere"},{"namn":"Bli bättre på, vecka 2","x":44,"y":884,"b":220.2,"h":102,"lage":"uppe"},{"namn":"Bli bättre på, vecka 4","x":284.2,"y":884,"b":214.2,"h":102,"lage":"uppe"},{"namn":"Bli bättre på, vecka 6","x":518.3,"y":884,"b":214.2,"h":102,"lage":"uppe"},{"namn":"Bli bättre på, vecka 8","x":752.5,"y":884,"b":214.2,"h":102,"lage":"uppe"},{"namn":"Bli bättre på, vecka 10","x":986.7,"y":884,"b":214.2,"h":102,"lage":"uppe"},{"namn":"Bli bättre på, vecka 12","x":1220.8,"y":884,"b":220.2,"h":102,"lage":"uppe"}]},
+    "2": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Vecka","x":127.9,"y":256,"b":172.1,"h":44,"lage":"nere"},{"namn":"Namn, om du vill","x":246.6,"y":316,"b":313.4,"h":44,"lage":"nere"},{"namn":"Det jag vill säga 1","x":40,"y":1218,"b":970,"h":50,"lage":"nere"},{"namn":"Det jag vill säga 2","x":40,"y":1278,"b":970,"h":50,"lage":"nere"},{"namn":"Det jag vill säga 3","x":40,"y":1338,"b":970,"h":50,"lage":"nere"}]}
   }
 }

@@ -72,7 +72,7 @@ export interface Bank {
 
 export const slugAv = (s: string) => s.toLowerCase().replace(/[åä]/g, 'a').replace(/ö/g, 'o').replace(/[éè]/g, 'e').replace(/ü/g, 'u').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 // Adressens sista led får inte krocka med metodens andra sidor under /stodundervisning/<id>/.
-const UPPTAGNA = new Set(['lathund', 'serier']);
+const UPPTAGNA = new Set(['lathund', 'serier', 'skrivkort', 'aktiviteter', 'brainbreaks', 'kort']);
 
 export function bankAv(d: Metod): Bank | null {
   const ramar = d.ramar?.ramar ?? [];

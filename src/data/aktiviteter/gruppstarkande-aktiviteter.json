@@ -1,0 +1,3043 @@
+{
+  "metod": "gruppstarkande-aktiviteter",
+  "titel": "Gruppstärkande aktiviteter",
+  "kategorier": [
+    {
+      "id": "lara-kanna",
+      "namn": "Lära känna varandra",
+      "farg": "2F6E8E"
+    },
+    {
+      "id": "trygghet",
+      "namn": "Trygghet och gemenskap",
+      "farg": "4E7A43"
+    },
+    {
+      "id": "utmaningar",
+      "namn": "Samarbetsutmaningar",
+      "farg": "B5562B"
+    },
+    {
+      "id": "mal",
+      "namn": "Gemensamma mål",
+      "farg": "6E3450"
+    },
+    {
+      "id": "skapa",
+      "namn": "Skapa och bygga",
+      "farg": "A8742A"
+    }
+  ],
+  "kort": [
+    {
+      "id": "lara-kanna-01",
+      "kategori": "lara-kanna",
+      "nr": 1,
+      "namn": "Berätta mera",
+      "rad": "Alla går runt, möts två och två och berättar för varandra, och ingen står ensam med handen uppe.",
+      "grupp": "4–8 elever eller en klass",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Tre frågor, till exempel ur Frågekorten under Materialet"
+      ],
+      "steg": [
+        "Säg: ”Ser du någon med handen uppe, gå dit, så att ingen står ensam. Ni är klara när alla har pratat med tre olika.”",
+        "Visa med en elev hur ni möts: gå till någon med handen uppe, ta ner händerna, hälsa med namn, berätta och tacka. Säg högt när någon gör det.",
+        "Säg en fråga, som ”Vad gillar du att göra på fritiden?”, och låt eleverna gå lugnt runt med handen uppe tills alla har hittat någon.",
+        "Säg ”Stopp!” efter två eller tre minuter. Säg nästa fråga och en ny hälsning, som en bugning. Alla räcker upp handen och letar upp någon ny.",
+        "Samla gruppen: ”Vem kom till dig när du stod med handen uppe?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Säg ramarna först: gå lugnt, prata tyst och gå till den första som har handen uppe.",
+        "Den som tvekar kan gå med dig de första gångerna och lyssna innan hen berättar själv.",
+        "De äldre ber om lite till innan de tackar: ”Berätta mera!”",
+        "Är ni ett udda antal, är du med och möter den som står ensam."
+      ],
+      "bild": "lara-kanna-01.svg",
+      "alt": "Två barn står mittemot varandra och det ena berättar, och ett tredje går med handen uppe och letar efter någon att prata med"
+    },
+    {
+      "id": "lara-kanna-02",
+      "kategori": "lara-kanna",
+      "nr": 2,
+      "namn": "Vilka är vi?",
+      "rad": "Små grupper svarar på samma fråga och lyssnar så noga att de kan berätta varandras svar.",
+      "grupp": "4–8 elever eller en klass, i grupper om 3–5",
+      "tid": "10–15 min",
+      "plats": "inne",
+      "material": [
+        "En klocka som alla ser",
+        "Två frågor på tavlan, till exempel ur Frågekorten"
+      ],
+      "steg": [
+        "Säg: ”En i taget svarar, och de andra lyssnar noga. Ni är klara när ni kan berätta varandras svar på två frågor.”",
+        "Visa med en elev hur ni lyssnar och säger svaret med egna ord: ”Du gillar stranden mest, för att du kan bada.” Säg högt när någon gör det.",
+        "Dela in eleverna i grupper om tre till fem, till exempel bänkgrupperna.",
+        "Ställ den första frågan, som ”Vilken plats gillar du mest?” Var och en svarar i 30–45 sekunder på klockan.",
+        "Fråga varje grupp: ”Vad svarade någon annan i er grupp?” En berättar för alla. Ta sedan nästa fråga.",
+        "Samla gruppen: ”Hur märkte du att de andra lyssnade på dig?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Kring vissa frågor börjar ett längre samtal. Låt det få tid, och spara de andra frågorna till en annan dag.",
+        "Den som inte vill svara säger ”pass” och får en ny chans när de andra har svarat.",
+        "De yngsta får korta frågor, som ”När fyller du år?” De äldre kan få ”Vad skulle du ändra om du var rektor?”",
+        "Efter några gånger håller gruppen själv tiden, och du fyller på med frågor om det ni arbetar med."
+      ],
+      "bild": "lara-kanna-02.svg",
+      "alt": "Tre barn i en liten grupp, det mittersta berättar med handen framför sig och de två andra vänder sig mot det och lyssnar"
+    },
+    {
+      "id": "lara-kanna-03",
+      "kategori": "lara-kanna",
+      "nr": 3,
+      "namn": "Ställ dig upp!",
+      "rad": "Eleverna ställer sig upp när ett påstående stämmer, ser vilka som gillar samma sak och letar sist efter något som alla delar.",
+      "grupp": "4–8 elever eller en klass",
+      "tid": "15–20 min",
+      "plats": "inne",
+      "material": [
+        "6–8 påståenden som passar gruppen"
+      ],
+      "steg": [
+        "Säg: ”Ställ dig upp när påståendet stämmer för dig, och titta vilka som står med dig. Vi är klara när vi har hittat något som stämmer för alla.”",
+        "Visa med en elev hur ni säger varför ni står och frågar tillbaka: ”Jag läser varje kväll. Och du?” Säg högt när någon gör det.",
+        "Låt alla sitta i en ring. Säg ett påstående, som ”Ställ dig upp om du gillar att läsa”, och fortsätt: ”Stå kvar om du gillar fantasy.”",
+        "Låt dem som står berätta för den bredvid varför de ställde sig. Sedan sätter sig alla igen.",
+        "Ta fler påståenden. Till sist viskar eleverna förslag till dig, och du säger dem ett i taget tills ni hittar ett som får alla att stå.",
+        "Samla gruppen: ”Hur hittade ni något som stämde för alla?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Välj påståenden som inte blir för privata eller pekar ut någon. Familjen, kroppen och pengar passar sällan.",
+        "Den som inte kan eller vill ställa sig räcker upp handen i stället.",
+        "Ett påstående som ”kan stå på ett ben i fem sekunder” ger skratt. Låt alla som vill visa.",
+        "Hittar ni inget som stämmer för alla, ge en ledtråd: något som alla har gjort i dag."
+      ],
+      "bild": "lara-kanna-03.svg",
+      "alt": "Två barn sitter kvar på sina stolar, och ett tredje har ställt sig upp bredvid sin stol med handen i luften"
+    },
+    {
+      "id": "lara-kanna-04",
+      "kategori": "lara-kanna",
+      "nr": 4,
+      "namn": "Speed-dejting med tärning",
+      "rad": "Paren slår tärning, frågar och svarar, och byter samtalskompis tills alla har pratat med tre olika i gruppen.",
+      "grupp": "6–8 elever eller en klass, i par",
+      "tid": "15–20 min",
+      "plats": "inne",
+      "material": [
+        "En tärning per par",
+        "Sex frågor ur Frågekorten, en för varje siffra, på tavlan",
+        "Stolar i två rader"
+      ],
+      "steg": [
+        "Säg: ”Fråga varandra, och ställ frågan tillbaka så att båda svarar. Ni är klara när alla har pratat med tre olika.”",
+        "Visa med en elev hur ni frågar tillbaka: ”Jag spelar helst fotboll. Och du?” Säg högt när någon gör det.",
+        "Låt eleverna sätta sig mittemot varandra i två rader, och visa frågorna, som ”1. Vad gör du helst på helgen?” och ”2. Vilken mat gillar du?”",
+        "Den ena slår och ställer frågan som hör till siffran. Den andra svarar och ställer frågan tillbaka, eller slår för en ny.",
+        "Säg ”Byt!” efter två eller tre minuter. Ena raden flyttar en stol åt höger, och den som blir utan stol går till den lediga i andra änden.",
+        "Samla gruppen: ”Vad gjorde den du pratade med som fick dig att vilja berätta mer?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Välj frågor som du tror att många har svar på och som inte blir för privata.",
+        "Den som inte vill svara på en fråga får slå igen.",
+        "Blir någon utan par, är du med själv, eller så pratar tre tillsammans.",
+        "I stället för tärningen kan paren dra lappar ur Oavslutade meningar eller lägga bitar ur Legosamtal."
+      ],
+      "bild": "lara-kanna-04.svg",
+      "alt": "Två barn sitter mittemot varandra på stolar, och det ena lutar sig fram med tärningen i handen och ska slå"
+    },
+    {
+      "id": "lara-kanna-05",
+      "kategori": "lara-kanna",
+      "nr": 5,
+      "namn": "Oavslutade meningar",
+      "rad": "Gruppen drar lappar, avslutar meningar om sig själva och lyssnar klart på varandra tills lapparna är slut.",
+      "grupp": "4–8 elever eller en klass, i grupper om 2–4",
+      "tid": "15–20 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Meningar att avsluta, under Materialet, två per elev"
+      ],
+      "steg": [
+        "Säg: ”Ni turas om att dra en lapp och avsluta meningen. Hjälp varandra, och låt alla prata klart. Ni är klara när lapparna är slut.”",
+        "Visa med en elev hur ni hjälper den som fastnar: vänta lugnt och fråga sedan ”Vill du ha en idé eller passa?” Säg högt när någon gör det.",
+        "Varje grupp sitter i en ring kring en hög lappar med meningar som ”Jag blir glad när …” och ”Jag är bra på …”.",
+        "Den första drar en lapp, läser den högt, tänker en stund och säger hela meningen med sina egna tankar.",
+        "De andra lyssnar klart och säger något som uppmuntrar, som ”Berätta mer!” Sedan drar nästa en lapp.",
+        "Samla gruppen: ”Vad gjorde ni när det var svårt för någon att avsluta en mening?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Det är okej att passa eller skicka lappen vidare. Den som passar kan få lappen igen senare.",
+        "Se till att ingen drar nästa lapp innan den som pratar är klar.",
+        "De yngsta kan ha en bild på lappen, och du läser meningen högt.",
+        "En grupp som är klar kan byta hög med en annan som är klar."
+      ],
+      "bild": "lara-kanna-05.svg",
+      "alt": "Tre barn sitter på golvet, det första läser högt från en lapp och de två andra lyssnar"
+    },
+    {
+      "id": "lara-kanna-06",
+      "kategori": "lara-kanna",
+      "nr": 6,
+      "namn": "Legosamtal",
+      "rad": "Eleverna turas om att lägga en legobit i mitten och berätta om färgens ämne, och bygger sist ett torn av allas bitar.",
+      "grupp": "4–8 elever eller en klass, i grupper om 2–3",
+      "tid": "15–20 min",
+      "plats": "inne",
+      "material": [
+        "Legobitar i tre färger, en av varje färg per elev",
+        "Färgernas ämnen på tavlan"
+      ],
+      "steg": [
+        "Säg: ”Varje färg är ett ämne att berätta om. Ni är klara när alla bitar ligger i mitten och alla har berättat.”",
+        "Visa med en elev hur den som lyssnar ställer en fråga: ”Hur lärde du dig att simma?” Säg högt när någon gör det.",
+        "Skriv färgernas ämnen på tavlan, som röd för intressen, blå för mat och grön för skolan. Ge varje elev en bit av varje färg.",
+        "Den första lägger en bit i mitten och berättar något om sig själv kring färgens ämne. De andra får ställa en fråga.",
+        "Gruppen turas om tills alla bitar ligger i mitten. Sist bygger de ett torn av bitarna, så att allas berättelser sitter ihop.",
+        "Samla gruppen: ”Vad gjorde ni för att alla skulle få lägga sina bitar?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Skriv början på meningar på tavlan till den som behöver, som ”Jag gillar …” och ”Hemma brukar vi …”.",
+        "Familjen passar som ämne först när gruppen är trygg, och den som inte vill berätta om den väljer ett annat ämne.",
+        "Med pappersbitar i olika färger lägger gruppen ett mönster i stället för ett torn.",
+        "Eleverna kan ta med sina bitar till Speed-dejting med tärning."
+      ],
+      "bild": "lara-kanna-06.svg",
+      "alt": "Två barn sitter på golvet mittemot varandra med ett litet torn av legobitar mellan sig, och det ena lägger en bit till"
+    },
+    {
+      "id": "lara-kanna-07",
+      "kategori": "lara-kanna",
+      "nr": 7,
+      "namn": "Vilken är falsk?",
+      "rad": "Var och en skriver två sanna meningar och en falsk om sig själv, och gruppen listar ut tillsammans vilken som är falsk.",
+      "grupp": "4–8 elever eller en klass, i grupper om 3–5",
+      "tid": "15–20 min",
+      "plats": "inne",
+      "material": [
+        "Papper och penna till varje elev"
+      ],
+      "steg": [
+        "Säg: ”Skriv tre meningar om dig själv. Två är sanna och en är falsk. Gruppen är klar när alla har läst sina.”",
+        "Hitta på några exempel tillsammans först, som ”Jag har en orm hemma” och ”Jag kan vicka på öronen”, så att fantasin kommer igång.",
+        "Visa med en elev hur ni kommer överens om en gissning: ”Jag tror att ormen är falsk. Vad tror du?” Säg högt när någon gör det.",
+        "Låt eleverna skriva sina tre meningar i tre eller fyra minuter. Gå runt och hjälp den som fastnar.",
+        "En i taget läser upp sina meningar. De andra får ställa en fråga var och kommer sedan överens om vilken de tror är falsk.",
+        "Den som läste berättar vilken som var falsk, och gärna lite mer om en sann. Sedan läser nästa.",
+        "Samla gruppen: ”Hur kom ni överens om vilken mening som var falsk?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som har svårt att skriva kan säga sina meningar till dig eller en kompis, som skriver.",
+        "Meningarna handlar bara om en själv. Ingen skämtar om någon annan.",
+        "Är gruppen inte överens, gäller den gissning som flest tror på.",
+        "De yngsta kan säga en sann och en falsk mening, utan att skriva."
+      ],
+      "bild": "lara-kanna-07.svg",
+      "alt": "Ett barn läser sina meningar från ett papper, och två barn lutar huvudena mot varandra och kommer överens om en gissning"
+    },
+    {
+      "id": "lara-kanna-08",
+      "kategori": "lara-kanna",
+      "nr": 8,
+      "namn": "Hitta någon som",
+      "rad": "Alla går runt och frågar varandra, och gruppen hjälps åt tills varje ruta på allas papper har ett namn.",
+      "grupp": "6–8 elever eller en klass",
+      "tid": "15–20 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Ett papper per elev med 6–9 rutor, som ”har ett husdjur”, ”gillar glass” och ”har ett syskon”",
+        "En penna per elev"
+      ],
+      "steg": [
+        "Säg: ”Hitta någon som stämmer för varje ruta. Ni är klara när alla har ett namn i varje ruta, så hjälp varandra.”",
+        "Visa med en elev hur den som svarar nej tipsar: ”Hej Sara! Har du något husdjur?” ”Nej, men fråga Ali!” Säg högt när någon gör det.",
+        "Eleverna går till en ledig kamrat och ställer en fråga från papperet. Vid ett ja skriver eleven kamratens namn, och vid ett nej tackar hen och letar vidare.",
+        "Den som har fyllt sitt papper hjälper någon annan. Är en ruta tom efter tio minuter, fråga hela gruppen: ”Vem har ett husdjur?”",
+        "Samla gruppen: ”Vem hjälpte dig att hitta ett namn?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Uppmuntra eleverna att gå till kamrater som de inte brukar vara med.",
+        "Med en liten grupp blir det färre rutor, och samma namn får stå två gånger.",
+        "De yngsta kan ha en bild i varje ruta, och kompisen skriver sitt eget namn.",
+        "Välj rutor som du vet stämmer för någon i gruppen, och minst en ruta för varje elev."
+      ],
+      "bild": "lara-kanna-08.svg",
+      "alt": "Ett barn med ett papper frågar, ett annat räcker upp handen och svarar ja, och ett tredje går vidare med sitt papper"
+    },
+    {
+      "id": "lara-kanna-09",
+      "kategori": "lara-kanna",
+      "nr": 9,
+      "namn": "Vilken beskriver mig?",
+      "rad": "Var och en väljer en bild som passar hen och berättar varför, och gruppen lyssnar och tackar var och en.",
+      "grupp": "4–8 elever, eller en klass i grupper om 4–6",
+      "tid": "15–20 min",
+      "plats": "inne",
+      "material": [
+        "Bilder, fler än antalet elever, som landskap, färger, former och tavlor"
+      ],
+      "steg": [
+        "Säg: ”Välj en bild som passar dig eller som du tycker om. Ni är klara när alla har berättat om sin bild och fått ett tack.”",
+        "Lägg ut bilderna på golvet. Eleverna går runt, tittar och plockar upp en bild när de är redo. Vill flera ha samma bild, delar de på den.",
+        "Låt gruppen sätta sig i en ring med bilderna. En klass sätter sig i ringar om fyra till sex.",
+        "Visa med din egen bild: ”Jag valde havet, för att jag blir lugn där.” En elev tackar och säger vad hen gillade. Säg högt när någon gör det.",
+        "En i taget berättar om sin bild. Efter varje berättelse säger någon tack och vad hen tyckte om att höra.",
+        "Samla gruppen: ”Vad gjorde gruppen för den som berättade?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som tvekar kan säga ett ord om bilden, eller berätta för dig först.",
+        "Bilder som väcker känslor och tankar fungerar bäst, som vykort, konstkort eller bilder ur tidningar.",
+        "Eleverna kan också berätta i Berätta mera, med bilden i handen."
+      ],
+      "bild": "lara-kanna-09.svg",
+      "alt": "Ett barn står och håller upp sin bild, och två barn sitter på golvet och lyssnar"
+    },
+    {
+      "id": "lara-kanna-10",
+      "kategori": "lara-kanna",
+      "nr": 10,
+      "namn": "Venndiagram",
+      "rad": "Paret berättar om sig själva för varandra och fyller ett gemensamt Venndiagram med det som är lika och det som skiljer.",
+      "grupp": "4–8 elever eller en klass, i par",
+      "tid": "15–20 min",
+      "plats": "inne",
+      "material": [
+        "Ett papper per par, där paret ritar två cirklar som går in i varandra",
+        "Stödfrågor på tavlan",
+        "En penna per elev"
+      ],
+      "steg": [
+        "Säg: ”Ni ska hitta vad ni har gemensamt och vad som skiljer er åt. Ni är klara när det står minst tre saker i mitten.”",
+        "Visa med en elev hur ni frågar och letar efter det som är lika: ”Jag har en katt. Har du något husdjur?” Säg högt när någon gör det.",
+        "Dela in eleverna i par som du tror fungerar bra. Låt varje par rita ett Venndiagram, och visa stödfrågorna på tavlan.",
+        "Paren frågar varandra i sju eller åtta minuter. Det som är lika skriver de i mitten, och det som skiljer dem åt i var sin cirkel.",
+        "Låt varje par visa sitt Venndiagram för ett annat par.",
+        "Samla gruppen: ”Hur hittade ni det ni hade gemensamt?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Blir någon utan par, gör tre elever ett diagram med tre cirklar. I mitten står det som alla tre har gemensamt.",
+        "Den som tvekar kan vara i par med dig första gången.",
+        "Säg: ”Det är bra att vara olika. Det som skiljer er åt är lika viktigt som det ni har gemensamt.”",
+        "De yngsta kan rita i cirklarna i stället för att skriva."
+      ],
+      "bild": "lara-kanna-10.svg",
+      "alt": "Två barn håller upp var sin cirkel, och cirklarna går in i varandra mellan dem"
+    },
+    {
+      "id": "lara-kanna-11",
+      "kategori": "lara-kanna",
+      "nr": 11,
+      "namn": "Parpromenad",
+      "rad": "Paren går en promenad, pratar om en fråga och kommer tillbaka med en tanke som de båda vill berätta.",
+      "grupp": "4–8 elever eller en klass, i par",
+      "tid": "15–20 min",
+      "plats": "ute",
+      "material": [
+        "En fråga som passar gruppen"
+      ],
+      "steg": [
+        "Säg: ”Ni går en promenad två och två och pratar om frågan. Ni är klara när alla par har berättat en tanke som ni båda står bakom.”",
+        "Visa med en elev hur ni lämnar över ordet till varandra: ”Nu har jag sagt mitt. Vad skulle du göra?” Säg högt när någon gör det.",
+        "Säg frågan, som ”Vad skulle du göra om du fick bestämma en hel dag?” Visa vägen, kanske runt skolgården, och var ni samlas efteråt.",
+        "Dela in eleverna i par, och blir någon över går tre tillsammans. Paren går i fem till åtta minuter. Gå sist, så att du ser alla.",
+        "När alla är tillbaka säger båda i varje par en mening om parets tanke.",
+        "Samla gruppen: ”Hur gjorde ni så att båda fick prata?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Låt de första promenaderna gå en bestämd väg, så att alla hittar tillbaka i tid.",
+        "Använd öppna frågor som du tror att eleverna har svar på.",
+        "Ge den som behöver exempelfraser, som ”Vad tycker du?” och ”Hur menar du?”",
+        "Promenaden kan också gå från en plats till en annan, som till matsalen."
+      ],
+      "bild": "lara-kanna-11.svg",
+      "alt": "Två barn går bredvid varandra, och det bakre berättar med handen framför sig"
+    },
+    {
+      "id": "lara-kanna-12",
+      "kategori": "lara-kanna",
+      "nr": 12,
+      "namn": "Vad är lika?",
+      "rad": "Några elever ställer sig upp, och gruppen listar ut tillsammans vad de som står har gemensamt, tills alla har stått upp.",
+      "grupp": "4–8 elever eller en klass",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "material": [
+        "En lista med grupper av namn och vad varje grupp har gemensamt"
+      ],
+      "steg": [
+        "Säg: ”Jag säger några namn, och de ställer sig upp. Ni andra listar ut vad de har gemensamt. Ni är klara när alla har stått upp.”",
+        "Visa med en elev hur ni funderar i par: viska en gissning och fråga ”Vad tror du?” Säg högt när någon gör det.",
+        "Låt alla sitta i en ring. Säg två till fem namn ur din lista. De ställer sig, och du frågar: ”Varför sa jag just de här namnen?”",
+        "Låt de andra fundera i par och gissa. Ge ledtrådar, eller berätta själv om ingen hittar det. Ta nya namn tills alla har stått upp.",
+        "Samla gruppen: ”Hur hjälpte ni varandra att lista ut det?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Välj positiva eller neutrala likheter, som kläder, intressen och husdjur. Säg det till eleverna, så att ingen gissar något nedsättande.",
+        "De äldre kan ta över. Två elever väljer i hemlighet något de har gemensamt, och gruppen gissar.",
+        "Den som inte vill stå upp räcker upp handen från sin plats, eller står upp tillsammans med dig."
+      ],
+      "bild": "lara-kanna-12.svg",
+      "alt": "Två barn står bredvid varandra i samma ställning, och två barn sitter och funderar på vad de har gemensamt"
+    },
+    {
+      "id": "lara-kanna-13",
+      "kategori": "lara-kanna",
+      "nr": 13,
+      "namn": "Fyra hörn",
+      "rad": "Var och en väljer det hörn som passar hen, och alla i hörnet får säga varför de valde det.",
+      "grupp": "6–8 elever eller en klass",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Fyra papper med hörnens svar i ord och bild, som vinter, vår, sommar och höst",
+        "Häftmassa"
+      ],
+      "steg": [
+        "Säg: ”Välj det hörn som passar dig bäst. I hörnet berättar ni för varandra varför. Ni är klara när alla där har sagt sitt.”",
+        "Visa med en elev hur ni ger ordet till den som inte har sagt något än: ”Vad tänker du?” Säg högt när någon gör det.",
+        "Sätt upp papperen i var sitt hörn, eller ute på fyra ställen en bit isär. Säg frågan, som ”Vilken årstid gillar du mest?”",
+        "Alla står i mitten, blundar och pekar mot sitt hörn när du räknar till tre, så att ingen påverkas av någon annan.",
+        "Eleverna går till sitt hörn och pratar i grupper om två till fem. Gå runt och lyssna.",
+        "Efter tre eller fyra minuter berättar någon från varje hörn för alla vad de pratade om.",
+        "Samla gruppen: ”Vad gjorde ni i hörnet för att alla skulle få säga sitt?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Välj frågor där inget svar är fel.",
+        "Står någon ensam i ett hörn, gå dit och prata med hen.",
+        "Med en liten grupp räcker två eller tre hörn.",
+        "Bilder i hörnen hjälper den som inte läser än."
+      ],
+      "bild": "lara-kanna-13.svg",
+      "alt": "Tre barn står och pekar åt var sitt håll, mot det hörn de har valt"
+    },
+    {
+      "id": "lara-kanna-14",
+      "kategori": "lara-kanna",
+      "nr": 14,
+      "namn": "Skala",
+      "rad": "Eleverna ställer sig på en linje efter hur mycket de håller med, och förklarar för varandra varför de står där.",
+      "grupp": "4–8 elever eller en klass",
+      "tid": "15–20 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Två koner eller lappar som visar linjens ändar, 1 och 10",
+        "4–6 påståenden som passar gruppen"
+      ],
+      "steg": [
+        "Säg: ”Ställ er på linjen efter vad ni tycker. Alla platser är bra. Vid varje påstående är ni klara när alla har förklarat varför de står där.”",
+        "Visa med en elev hur ni förklarar och frågar: ”Jag gillar att vara ute. Varför står du där?” Säg högt när någon gör det.",
+        "Peka ut linjens ändar: 1 håller inte med alls, och 10 håller helt med. Säg ett påstående, som ”Det är roligare att vara ute än inne”.",
+        "Låt alla tänka tyst och ställa sig på linjen när du säger ”Nu!” Sedan förklarar de för den bredvid varför de står där.",
+        "Låt några från olika delar av linjen berätta en tanke från samtalet. Ta sedan nästa påstående.",
+        "Samla gruppen: ”Vem förstod du bättre när du hörde varför hen stod där?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Välj påståenden som många har en tanke om. Börja med mat och väder, och ta större frågor när gruppen är trygg.",
+        "Med de yngsta räcker tre platser: ja, kanske och nej.",
+        "Den som tvekar kan ställa sig bredvid en kompis och lyssna först.",
+        "Står någon ensam, gå dit och lyssna. De äldre kan förklara för någon som står långt bort."
+      ],
+      "bild": "lara-kanna-14.svg",
+      "alt": "Barnen står på olika ställen mellan två koner, och två av dem vänder sig mot varandra och pratar"
+    },
+    {
+      "id": "lara-kanna-15",
+      "kategori": "lara-kanna",
+      "nr": 15,
+      "namn": "Mötas på mitten",
+      "rad": "Var och en ritar i sin ruta, och gruppen gör sedan en gemensam mitt där något från alla finns med.",
+      "grupp": "4–8 elever eller en klass, i grupper om 3–5",
+      "tid": "15–20 min",
+      "plats": "inne",
+      "material": [
+        "Ett A3 per grupp, där gruppen ritar en ruta i mitten och en ruta per elev runt den",
+        "Pennor"
+      ],
+      "steg": [
+        "Säg: ”Var och en ritar eller skriver i sin ruta. Sedan gör ni mitten tillsammans. Ni är klara när något från alla finns med i mitten.”",
+        "Visa med en elev hur ni föreslår något till mitten och frågar: ”Ska vi ta med din hund och min fotboll?” Säg högt när någon gör det.",
+        "Säg temat, som ett djur, en plats eller något ni gillar att göra. Alla ritar eller skriver i sin egen ruta i tre minuter.",
+        "En i taget berättar för gruppen om det hen har ritat eller skrivit, och de andra lyssnar.",
+        "I fem minuter gör gruppen mitten, som en bild, några ord eller ett namn på gruppen. Sedan visar varje grupp sin mitt för alla.",
+        "Samla gruppen: ”Hur fick ni med något från alla i mitten?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Se till att alla får berätta varvet runt innan gruppen börjar med mitten.",
+        "Mitten får rymma olika idéer, och gruppen samlar något från var och en.",
+        "Ett namn på gruppen är en bra mitt när gruppen ska arbeta ihop en längre tid.",
+        "De yngsta ritar, och du skriver orden åt dem om de vill."
+      ],
+      "bild": "lara-kanna-15.svg",
+      "alt": "Två barn sitter mittemot varandra vid ett bord och pekar på mitten av papperet"
+    },
+    {
+      "id": "lara-kanna-16",
+      "kategori": "lara-kanna",
+      "nr": 16,
+      "namn": "Namnbollen",
+      "rad": "Gruppen kastar en mjuk boll i en ordning där alla får den, säger namnen och behåller ordningen när alla byter plats.",
+      "grupp": "4–10 elever, eller en klass i ringar om 8–10, där en elev börjar i varje ring",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "material": [
+        "En mjuk boll eller en ärtpåse per ring"
+      ],
+      "steg": [
+        "Säg: ”Bollen ska gå till alla, och vi säger namnen. Vi är klara när ordningen håller, också när alla har bytt plats.”",
+        "Visa med en elev hur ni kastar: säg namnet, vänta tills ni ser varandra och kasta mjukt underifrån. Säg högt när någon gör det.",
+        "Ställ gruppen i en ring. Säg ditt namn och kasta till den bredvid, så att bollen går ett varv och alla säger sitt namn.",
+        "Säg någons namn och kasta till hen. Hen säger ett nytt namn och kastar vidare, tills alla har fått bollen och den sista kastar till dig.",
+        "Kasta i samma ordning igen. Sedan byter alla plats i ringen och kastar till samma person som förut. Den som fångar säger tack med kastarens namn.",
+        "Samla gruppen: ”Hur hjälpte ni varandra att komma ihåg namnen?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Glömmer någon ett namn, hjälper ringen till.",
+        "Den som har svårt att fånga kan få bollen rullad på golvet.",
+        "När ordningen bestäms korsar den som har fått bollen armarna, så att alla ser vilka som är kvar.",
+        "Gruppen kan slå sitt eget rekord: ta tid på ett varv i ordningen och försök igen."
+      ],
+      "bild": "lara-kanna-16.svg",
+      "alt": "Ett barn kastar en mjuk boll och säger ett namn, och den som ska fånga sträcker fram händerna"
+    },
+    {
+      "id": "lara-kanna-17",
+      "kategori": "lara-kanna",
+      "nr": 17,
+      "namn": "Inre och yttre cirkel",
+      "rad": "Eleverna pratar med den mittemot och flyttar ett steg, tills alla har pratat med alla i den andra cirkeln.",
+      "grupp": "6–10 elever, eller en klass i dubbla cirklar om 8–10",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Frågor på tavlan, en för varje byte, till exempel ur Frågekorten under Materialet"
+      ],
+      "steg": [
+        "Säg: ”Ni ska prata med alla i den andra cirkeln. Ni är klara när den yttre cirkeln har gått ett helt varv.”",
+        "Visa med en elev hur ni säger något tillbaka, som ”Det visste jag inte!”, och tackar varandra. Säg högt när någon gör det.",
+        "Ställ hälften av eleverna bredvid varandra i en cirkel med ansiktet utåt. De andra ställer sig mittemot var och en i en yttre cirkel.",
+        "Säg en fråga, som ”Vad gör du helst efter skolan?” Den inre cirkeln frågar, den yttre svarar, och sedan frågar de tillbaka.",
+        "Säg ”Ett steg!” efter en eller två minuter. Den yttre cirkeln går ett steg åt sin högra sida. Ta nästa fråga.",
+        "Samla gruppen: ”Vad sa någon tillbaka till dig som kändes bra?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Blir någon utan par, är du med själv, eller så står två tillsammans i den yttre cirkeln.",
+        "Den som tvekar kan stå i par med en kompis, och de svarar tillsammans.",
+        "Med de yngsta hjälper markeringar på golvet, så att alla vet var de ska stå.",
+        "När gruppen kan cirklarna fungerar de också med frågor om det ni arbetar med."
+      ],
+      "bild": "lara-kanna-17.svg",
+      "alt": "Två par står mittemot varandra och pratar, ett i varje par berättar med handen framför sig"
+    },
+    {
+      "id": "lara-kanna-18",
+      "kategori": "lara-kanna",
+      "nr": 18,
+      "namn": "Fråga, fråga, byt!",
+      "rad": "Eleverna möts två och två, frågar och svarar, byter frågekort och går vidare tills alla har pratat med fem olika.",
+      "grupp": "6–8 elever eller en klass",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Ett frågekort per elev, ur Frågekorten under Materialet"
+      ],
+      "steg": [
+        "Säg: ”Ni frågar och svarar, byter frågekort och går vidare. Räkna mötena på fingrarna. Ni är klara när alla har pratat med fem olika.”",
+        "Visa med en elev hur ni hjälper den som inte vet vad hen ska svara: ”Vill du ha en idé?” Säg högt när någon gör det.",
+        "Ge varje elev ett frågekort. Eleverna går runt med handen uppe, och två som möts hälsar med namn.",
+        "Den ena läser frågan på sitt kort, och den andra svarar. Sedan läser den andra sin fråga. De byter kort och går vidare med handen uppe.",
+        "Samla gruppen: ”Vad gjorde ni när någon inte visste vad hen skulle svara?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Läs frågorna högt med de yngsta innan ni börjar.",
+        "Den som inte vill svara på en fråga säger ”pass”, och de byter kort ändå.",
+        "I en ny grupp upprepar var och en den andras namn innan hen svarar, så att alla lär sig namnen.",
+        "Den som har mött fem fortsätter, så att ingen står ensam. Står någon länge ensam med handen uppe, gå dit själv."
+      ],
+      "bild": "lara-kanna-18.svg",
+      "alt": "Ett barn räcker fram sitt frågekort, ett annat sträcker handen mot det, och ett tredje går med handen uppe och letar efter någon"
+    },
+    {
+      "id": "lara-kanna-19",
+      "kategori": "lara-kanna",
+      "nr": 19,
+      "namn": "Hitta din flock",
+      "rad": "Alla får ett djur och hittar sin flock utan ord, och gruppen är klar när alla flockar är hela.",
+      "grupp": "6–8 elever eller en klass",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Djurkort med bild, ett per elev, tre eller fyra av varje djur"
+      ],
+      "steg": [
+        "Säg: ”Ni får ett djur och hittar er flock utan ord, bara genom att låta eller röra er som djuret. Ni är klara när alla flockar är hela.”",
+        "Visa med en elev hur ni hittar varandra utan ord: gör ditt djur, lyssna och vinka med dig den som gör likadant. Säg högt när någon gör det.",
+        "Säg att det är tre eller fyra i varje flock, och ge varje elev ett djurkort. Eleverna tittar på sitt kort utan att visa det.",
+        "Låt alla sprida ut sig. Säg ”Nu!” Alla låter eller rör sig som sitt djur samtidigt och letar efter dem som gör likadant.",
+        "När en flock är samlad sätter den sig. I flocken säger alla sitt namn och svarar på en fråga, som ”Vad vore bäst med att vara ditt djur?”",
+        "Samla gruppen: ”Hur hittade ni varandra utan ord?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Välj djur med tydliga läten och rörelser, som katt, ko, hund, kråka och groda.",
+        "Den som inte vill låta kan röra sig som djuret, eller leta tillsammans med dig.",
+        "De äldre kan bara röra sig, utan läten.",
+        "Flockarna kan bli grupperna i nästa aktivitet."
+      ],
+      "bild": "lara-kanna-19.svg",
+      "alt": "Två barn flaxar med armarna som fåglar och vänder sig mot varandra, och ett tredje sitter på huk som en groda"
+    },
+    {
+      "id": "lara-kanna-20",
+      "kategori": "lara-kanna",
+      "nr": 20,
+      "namn": "Rörelsebytet",
+      "rad": "Eleverna hälsar med en rörelse som den andra härmar, och tar med sig den andras rörelse till nästa möte.",
+      "grupp": "5–8 elever eller en klass",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Inget"
+      ],
+      "steg": [
+        "Säg: ”Hitta på en rörelse som är din hälsning. När ni möts byter ni rörelser. Ni är klara när alla har bytt med fyra olika.”",
+        "Låt var och en hitta på en kort rörelse, som en vinkning, en bugning eller ett hopp.",
+        "Visa med en elev hur ni byter: säg era namn, gör rörelsen långsamt två gånger och härma den andras. Säg högt när någon gör det.",
+        "Eleverna går runt. Två som möts byter rörelser och räknar bytet på fingrarna. Var och en går vidare och hälsar på nästa med sin nya rörelse.",
+        "Räck upp handen och säg stopp när alla har bytt med fyra. Låt tre eller fyra visa rörelsen de har nu. Gruppen gissar vems den var från början.",
+        "Samla gruppen: ”Vad gjorde ni för att den andra skulle hinna lära sig er rörelse?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som tvekar kan börja med en liten rörelse, som att nicka eller vinka.",
+        "Säg först att alla gör rörelserna på stället, utan att röra vid någon.",
+        "De äldre tar med sig namnet också: ”Den här har jag fått av Leo.”",
+        "Med de yngsta kan ni först göra rörelserna i en ring, där alla härmar en i taget."
+      ],
+      "bild": "lara-kanna-20.svg",
+      "alt": "Två barn står mittemot varandra i samma ställning, med en arm i luften och ett ben lyft, det ena visar och det andra härmar"
+    },
+    {
+      "id": "trygghet-01",
+      "kategori": "trygghet",
+      "nr": 1,
+      "namn": "Skicka vidare!",
+      "rad": "Gruppen skickar en rörelse utan ord från person till person, och alla behövs för att den ska komma hela vägen runt.",
+      "grupp": "4–8 elever eller en klass i grupper om 4–8",
+      "tid": "15–20 min",
+      "plats": "inne eller ute",
+      "beroring": true,
+      "material": [
+        "Inget"
+      ],
+      "steg": [
+        "Säg: ”Nu skickar vi en rörelse runt ringen utan ord. Vi är klara när den har kommit fram till den sista.”",
+        "Visa med en elev hur du knackar lätt på ryggen och visar rörelsen långsamt tills eleven nickar. Säg högt när någon gör det.",
+        "Låt alla utom en stå i en ring med ansiktet inåt och blunda. Den som står utanför hittar på en rörelse, som att spela gitarr.",
+        "Hen knackar någon på ryggen, och eleven vänder sig om och härmar rörelsen. Sedan knackar eleven nästa i ringen på ryggen och visar den vidare.",
+        "Låt den sista och den som började visa rörelsen samtidigt. Skratta tillsammans åt det som har ändrats på vägen.",
+        "Låt gruppen prata om hur rörelsen kan komma fram likadan. Gör sedan ett varv till: den som började går in i ringen, och en ny går ut.",
+        "Samla gruppen: ”Vad gjorde ni för att rörelsen skulle komma fram likadan?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som inte vill bli rörd vid kan få sitt namn viskat i stället för en knackning.",
+        "Den som inte vill blunda kan titta ner i golvet tills det är hens tur.",
+        "Börja med enkla rörelser för de yngsta. Äldre kan skicka en rörelse i två eller tre delar."
+      ],
+      "bild": "trygghet-01.svg",
+      "alt": "Ett barn spelar luftgitarr för ett barn som har vänt sig om, och två barn står kvar i ringen och väntar på sin tur."
+    },
+    {
+      "id": "trygghet-02",
+      "kategori": "trygghet",
+      "nr": 2,
+      "namn": "Hör vi ihop?",
+      "rad": "Alla letar upp dem de hör ihop med genom att fråga och beskriva, och gruppen är klar när alla har hittat sina.",
+      "grupp": "Hela gruppen, från 4 elever",
+      "tid": "15–20 min",
+      "plats": "inne",
+      "material": [
+        "Kort eller saker där två till fyra hör ihop, som bild och ord, något till varje elev"
+      ],
+      "steg": [
+        "Säg: ”Alla har något som hör ihop med någon annans. Vi är klara när alla har hittat dem de hör ihop med.”",
+        "Ge varje elev ett kort eller en sak och säg hur många som hör ihop: ”Ni är två eller tre.” Eleverna tittar på sitt i hemlighet.",
+        "Visa med en elev hur ni beskriver utan att visa, och tackar: ”Jag har något som …” ”Vi hör inte ihop, tack!” Säg högt när någon gör det.",
+        "Låt eleverna gå runt i rummet. När två möts beskriver de vad de har, utan att visa, och listar ut tillsammans om de hör ihop.",
+        "Hör de inte ihop tackar de varandra och letar vidare. De som hör ihop letar tillsammans tills alla i deras grupp är samlade.",
+        "Samla gruppen: ”Vad sa någon till dig som gjorde det lätt att fråga?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Låt den som tvekar gå med dig i början och höra hur du frågar.",
+        "För de yngsta passar bokstav och bild eller legobitar i samma färg. Äldre kan få begrepp och förklaringar ur det ni läser.",
+        "Ni kan också höra ihop genom att låta som samma djur eller visa samma känsla med kroppen.",
+        "Använd leken när du vill bilda par eller grupper till nästa uppgift."
+      ],
+      "bild": "trygghet-02.svg",
+      "alt": "Två barn står mittemot varandra med var sitt kort intill bröstet, och det ena berättar vad det har."
+    },
+    {
+      "id": "trygghet-03",
+      "kategori": "trygghet",
+      "nr": 3,
+      "namn": "Resenären",
+      "rad": "Gruppen turas om att vara resenär och hjälps åt att gissa vad som finns i ryggsäcken, tills alla har rest.",
+      "grupp": "4–6 elever eller en klass i grupper om 4–6",
+      "tid": "15–20 min",
+      "plats": "inne eller ute",
+      "material": [
+        "En ryggsäck till varje grupp, med en sak för varje elev",
+        "Saker eller bildkort för en resa, som en solhatt, en snorkel eller en karta"
+      ],
+      "steg": [
+        "Säg: ”Ni turas om att vara resenär, och alla hjälps åt att gissa. Ni är klara när alla har rest en gång.”",
+        "Visa leken med dig som resenär, och hur gruppen hjälper när det är svårt: ”Kan du visa hur man använder den?” Säg högt när någon gör det.",
+        "Låt varje grupp sitta i en ring. Resenären tittar i hemlighet på en sak i ryggsäcken och säger: ”Hej alla, jag har varit och rest i vida världen!”",
+        "Alla svarar: ”Var har du varit någonstans?” Resenären väljer ett resmål som passar saken: ”Jag har varit på en strand i Grekland!”",
+        "Alla frågar: ”Vad har du tagit med dig i ryggsäcken?” Resenären svarar ”Gissa om ni kan!” och mimar saken, tills någon gissar rätt.",
+        "Resenären lägger saken bredvid sig och ger ryggsäcken till den som sitter till vänster, så att alla får resa i tur och ordning.",
+        "Samla gruppen: ”Hur hjälpte ni resenären när det var svårt att visa?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som tvekar kan resa tillsammans med en kompis och mima saken ihop.",
+        "Resmålet kan ge en ledtråd, som en strand och en snorkel.",
+        "Resenären får ge en ledtråd med ord när gruppen har gissat en stund."
+      ],
+      "bild": "trygghet-03.svg",
+      "alt": "En resenär med ryggsäcken i handen visar något utan ord, och två barn i gruppen gissar, det ena med handen uppe."
+    },
+    {
+      "id": "trygghet-04",
+      "kategori": "trygghet",
+      "nr": 4,
+      "namn": "Robotleken",
+      "rad": "Ledaren ser till att gruppens två robotar har fri väg framför sig, och alla tre får vara ledare.",
+      "grupp": "Hela gruppen, från 4 elever, i grupper om 3",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "beroring": true,
+      "material": [
+        "Koner eller rep som visar områdets gränser"
+      ],
+      "steg": [
+        "Säg: ”Två av er är robotar och en är ledare. Ledaren ser till att robotarna har fri väg. Ni är klara när alla tre har varit ledare.”",
+        "Visa med en elev som robot hur du tar lätt i axlarna och vänder hen: ”Nu vänder jag dig.” Säg högt när någon gör det.",
+        "Märk ut området med koner eller rep. Robotarna ställer sig i området med fri väg framför sig. Säg ”Robotar, gå!”, och robotarna går långsamt rakt fram.",
+        "Kommer en robot till en bänk, en gräns eller en annan robot, stannar hen och trampar på stället. Ledaren skyndar dit och vänder hen mot fri väg.",
+        "Räck upp handen och säg stopp efter två minuter. Ledaren blir robot, och en robot som inte har varit ledare tar över.",
+        "Samla gruppen: ”Vad gjorde ni så att ledaren inte blev stressad?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Utan beröring visar ledaren med handen åt vilket håll roboten ska gå, och roboten vänder sig själv.",
+        "Robotarna går långsamt, och ledaren skyndar med snabba steg utan att springa.",
+        "Går det inte jämnt ut, blir någon grupp ett par med en robot, vilket är lättare, eller fyra med tre robotar, vilket är svårare."
+      ],
+      "bild": "trygghet-04.svg",
+      "alt": "En robot har gått fram till en kon och trampar på stället, ledaren skyndar dit, och den andra roboten går stelt åt andra hållet."
+    },
+    {
+      "id": "trygghet-05",
+      "kategori": "trygghet",
+      "nr": 5,
+      "namn": "Skulptören",
+      "rad": "Gruppen formar leran till en kopia av statyn, och alla tre får vara staty, lera och skulptör.",
+      "grupp": "Hela gruppen, från 4 elever, i grupper om 3",
+      "tid": "15–20 min",
+      "plats": "inne",
+      "beroring": true,
+      "material": [
+        "Kort med en känsla, ett verb eller ett djur, tre till varje grupp"
+      ],
+      "steg": [
+        "Säg: ”En är staty, en är lera och en är skulptör. Ni är klara när alla har haft alla tre roller.”",
+        "Visa med en elev som lera hur du frågar ”Får jag forma dig?” och flyttar en arm lätt och långsamt. Säg högt när någon gör det.",
+        "Leran kryper ihop som en lerklump. Statyn drar ett kort och visar känslan, verbet eller djuret med hela kroppen.",
+        "Skulptören frågar leran: ”Får jag forma dig?” Vid ja flyttar hen varsamt lerans armar och ben, och vid nej formar hen med ord, tills leran liknar statyn.",
+        "De tackar varandra och byter roller: statyn blir lera, leran skulptör och skulptören staty. Gör tre rundor.",
+        "Samla gruppen: ”Vad gjorde skulptören som fick leran att känna sig trygg?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Skulptören rör bara armar och ben, lätt och långsamt. Huvudet formar hen med ord.",
+        "Den som inte vill röra eller bli rörd vid kan göra alla rundor med ord. Då formar leran sig själv.",
+        "Börja med djur för de yngsta. Äldre kan forma känslor eller ord ur det ni läser.",
+        "Går det inte jämnt ut, arbetar några i par. Skulptören formar då leran efter kortet, utan staty."
+      ],
+      "bild": "trygghet-05.svg",
+      "alt": "Statyn står med armarna i luften, och skulptören lyfter varsamt ena armen på leran så att den liknar statyn."
+    },
+    {
+      "id": "trygghet-06",
+      "kategori": "trygghet",
+      "nr": 6,
+      "namn": "Spegel, spegel",
+      "rad": "Paret rör sig som en spegelbild, så lika att ingen ser vem som leder, och båda får leda.",
+      "grupp": "Hela gruppen, från 4 elever, i par",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Inget"
+      ],
+      "steg": [
+        "Säg: ”Ni är varandras spegel. Rör er långsamt. Ni klarar det när ingen kan se vem som leder.”",
+        "Visa med en elev hur den som leder rör sig så långsamt att spegeln hinner med. Säg högt när någon gör det.",
+        "Låt paren stå mittemot varandra. Säg vem som börjar leda, till exempel den med kortast hår.",
+        "Den som leder rör långsamt på armar, huvud och ansikte. Den andra speglar rörelserna med sin egen kropp.",
+        "Säg ”Byt!” varje minut i fyra minuter, så att båda leder två gånger.",
+        "Samla gruppen: ”Vad gjorde den som ledde så att det blev lätt att följa?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som är osäker kan vara i en trio och spegla tillsammans med en kompis.",
+        "Låt paren prata först om rörelser som båda klarar och mår bra av.",
+        "De yngsta kan börja med bara armarna. Äldre kan byta ledare utan ord, så att ingen som tittar ser när det sker."
+      ],
+      "bild": "trygghet-06.svg",
+      "alt": "Två barn står mittemot varandra och lyfter samma arm och samma knä, som spegelbilder."
+    },
+    {
+      "id": "trygghet-07",
+      "kategori": "trygghet",
+      "nr": 7,
+      "namn": "Grupprörelse",
+      "rad": "Gruppen sätter ihop allas rörelser till en rörelseramsa och tränar tills alla kan den.",
+      "grupp": "Hela gruppen, från 4 elever, i grupper om 2–5",
+      "tid": "15–20 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Inget"
+      ],
+      "steg": [
+        "Säg: ”Var och en hittar på en kort rörelse. Ni sätter ihop dem till en rörelseramsa, och ni är klara när alla kan den.”",
+        "Visa några rörelser, som en snurr. Visa sedan med en elev hur ni hjälper den som inte kan: ”Vi gör den långsamt.” Säg högt när någon gör det.",
+        "Låt var och en tänka ut en rörelse som de andra också kan göra. I gruppen visar var och en sin, och gruppen bestämmer en ordning.",
+        "Låt gruppen träna rörelseramsan i ungefär fem minuter, tills alla kan den.",
+        "Grupperna visar sina rörelseramsor för varandra, en grupp i taget, och de andra applåderar.",
+        "Samla gruppen: ”Hur hjälpte ni varandra så att alla kunde rörelseramsan?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som inte kommer på en rörelse kan välja en av dem du visade.",
+        "Låt alla grupper visa samtidigt om någon tvekar att stå framme.",
+        "Använd rörelseramsan igen när gruppen firar, tackar eller peppar varandra.",
+        "Grupperna kan lära hela klassen sina rörelseramsor, så att det blir en lång dans."
+      ],
+      "bild": "trygghet-07.svg",
+      "alt": "Tre barn i rad gör samma danssteg i takt, med ena armen i luften."
+    },
+    {
+      "id": "trygghet-08",
+      "kategori": "trygghet",
+      "nr": 8,
+      "namn": "Magisk promenad",
+      "rad": "Hela gruppen tar sig över rummet på magiska sätt, som på månen eller i djup lera, och kommer fram samtidigt.",
+      "grupp": "Hela gruppen, från 4 elever",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Inget"
+      ],
+      "steg": [
+        "Säg: ”Tre gånger tar vi oss över rummet på magiska sätt. Vi väntar in varandra, och vi klarar det när alla kommer fram samtidigt.”",
+        "Visa med en elev hur ni håller ihop. Ni tittar åt sidan, saktar in och frågar: ”Är alla med?” Säg högt när någon gör det.",
+        "Ställ eleverna bredvid varandra på ena sidan. Ge det första sättet, som på månen, och gå själv med. Säg vad du ser: ”Titta, vi svävar!”",
+        "När alla har kommit över ger du ett nytt sätt för vägen tillbaka, som i djup lera eller jagade av bin, fast jättelångsamt.",
+        "Gå en tredje gång med en stegring: ”Gå glada, först med ett litet leende och till sist så glada att ni hoppar.”",
+        "Samla gruppen: ”Vad gjorde någon annan som fick dig att våga?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som tvekar kan gå bredvid dig eller en kompis och göra likadant.",
+        "Ge eleverna uppmuntrande fraser, som ”Snyggt!” och ”Vilken idé!”, och stoppa genast den som skrattar åt någon.",
+        "Börja med djur och platser, som månen, innan ni prövar känslor.",
+        "Eleverna kan också röra sig fritt i rummet medan du ropar ut nya sätt, gärna till musik."
+      ],
+      "bild": "trygghet-08.svg",
+      "alt": "Tre barn tar sig över rummet i rad med stora, långsamma kliv och svävande armar, som på månen."
+    },
+    {
+      "id": "trygghet-09",
+      "kategori": "trygghet",
+      "nr": 9,
+      "namn": "Rörelsering",
+      "rad": "Var och en visar en rörelse som hela ringen gör tillsammans, tills alla har fått visa sin.",
+      "grupp": "Hela gruppen, från 4 elever",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Inget"
+      ],
+      "steg": [
+        "Säg: ”Var och en visar en rörelse, och alla gör den tillsammans. Vi är klara när alla har visat sin.”",
+        "Visa med en elev hur alla tittar på den som visar och härmar, så att hen ser att alla är med. Säg högt när någon gör det.",
+        "Ställ er i en ring. Börja själv med en rörelse, som en klappsekvens, en vinkning eller ett danssteg. Alla härmar den samtidigt.",
+        "Sedan visar den som står bredvid dig en rörelse, och alla härmar den. Fortsätt varvet runt tills alla har visat sin.",
+        "Samla gruppen: ”Vad gjorde gruppen som hjälpte dig att visa din rörelse?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Ge några rörelser att välja på, så att den som inte kommer på en egen kan ta en av dem.",
+        "Den som vill kan säga ”pass” och få en ny chans sist.",
+        "Äldre kan lägga varje ny rörelse till de förra, så att ringen till sist gör hela raden."
+      ],
+      "bild": "trygghet-09.svg",
+      "alt": "Fyra barn i ringen har båda händerna på huvudet och gör samma rörelse samtidigt."
+    },
+    {
+      "id": "trygghet-10",
+      "kategori": "trygghet",
+      "nr": 10,
+      "namn": "Styr varandra",
+      "rad": "Den ena blundar och bygger, den andra styr med ord, och paret är klart när båda har styrt.",
+      "grupp": "Hela gruppen, från 4 elever, i par",
+      "tid": "15–20 min",
+      "plats": "inne",
+      "material": [
+        "Legobitar till varje par: fem lösa och två färdiga figurer av fem bitar",
+        "Ögonbindlar, för den som vill"
+      ],
+      "steg": [
+        "Säg: ”Den ena blundar och bygger, och den andra styr med ord. Ni är klara när ni båda har styrt.”",
+        "Ge varje par fem lösa legobitar och två färdiga figurer. Den som styr tar en figur och gömmer den för den som bygger.",
+        "Visa med en elev hur du styr en sak i taget: ”Lägg den långa biten överst. Säg till när du är klar.” Säg högt när någon gör det.",
+        "Den som bygger blundar eller tar på sig en ögonbindel. Den som styr säger hur bitarna ska sitta, med ord som ”höger” och ”vrid”, utan att röra dem.",
+        "Låt paret jämföra bygget med figuren och bygga den andra med bytta roller.",
+        "Samla gruppen: ”Vad sa den som styrde som hjälpte mest?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Ögonbindeln är ett val. Den som inte vill blunda bygger med öppna ögon, och figuren står gömd bakom en bok.",
+        "De yngsta kan bygga med tre bitar. Äldre kan rita en figur eller ta sig runt en bana.",
+        "Tänk på vilka som blir par de första gångerna, så att de lyckas tillsammans.",
+        "Blir det en över, styr två tillsammans och turas om att säga en sak var."
+      ],
+      "bild": "trygghet-10.svg",
+      "alt": "Ett barn som blundar bygger ett torn av klossar på bordet, och kompisen bredvid pekar och styr med ord."
+    },
+    {
+      "id": "trygghet-11",
+      "kategori": "trygghet",
+      "nr": 11,
+      "namn": "Massage",
+      "rad": "Gruppen ger varandra en lugn stund, och alla får både ge och ta emot en massage på axlarna.",
+      "grupp": "Hela gruppen, från 4 elever",
+      "tid": "15–20 min",
+      "plats": "inne",
+      "beroring": true,
+      "material": [
+        "Stolar till hälften av eleverna",
+        "Lugn musik och dämpat ljus, om du vill"
+      ],
+      "steg": [
+        "Säg: ”Nu ger vi varandra en lugn stund. Den som sitter bestämmer. Vi är klara när alla har både gett och fått massage.”",
+        "Visa med en elev hur du knådar och trummar lätt på axlarna, ovanpå kläderna, och frågar: ”Är det lagom?” Säg högt när någon gör det.",
+        "Hälften sitter på stolar i en ring med näsan inåt. De andra ställer sig bakom var sin stol och frågar: ”Får jag massera dig?”",
+        "Svarar den som sitter ja, masserar den andra lugnt axlarna. Svarar hen nej, väntar den som står.",
+        "Säg ”Byt!” efter en minut. Den som sitter säger ”Tack för massagen!”, och den som står går till nästa stol och frågar igen.",
+        "Efter tre massager byter alla plats, så att de som har suttit står, och ni gör tre till.",
+        "Samla gruppen: ”Vad gjorde den som masserade så att du kände dig trygg?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som inte vill vara med vilar på stolen och lyssnar.",
+        "Säg till genast om någon trycker för hårt, och visa igen hur lätt rörelserna ska vara.",
+        "Börja kort med de yngsta, gärna med en massagesaga: ”Regnet droppar, vinden blåser.”",
+        "Blir någon över, vilar den som står utan stol en massage."
+      ],
+      "bild": "trygghet-11.svg",
+      "alt": "Två barn sitter på var sin stol och blundar, och bakom dem står två barn som lugnt masserar deras axlar."
+    },
+    {
+      "id": "trygghet-12",
+      "kategori": "trygghet",
+      "nr": 12,
+      "namn": "Gissa mitt yrke",
+      "rad": "Gruppen turas om att visa ett yrke utan ord och hjälps åt att gissa, tills alla har visat ett.",
+      "grupp": "Hela gruppen, från 4 elever, i grupper om 3–5",
+      "tid": "10–15 min",
+      "plats": "inne",
+      "material": [
+        "Lappar med yrken, gärna med bild, som kock, frisör och brandman, en till varje elev",
+        "En skål till varje grupp"
+      ],
+      "steg": [
+        "Säg: ”Ni turas om att visa ett yrke utan ord, och alla hjälps åt att gissa. Ni är klara när alla har visat ett.”",
+        "Visa med en elev hur gruppen ställer ja- och nejfrågor när det är svårt att gissa: ”Jobbar du inne?” Säg högt när någon gör det.",
+        "Lägg lapparna i en skål mitt på varje grupps bord. Alla grupper spelar samtidigt, och du går mellan borden.",
+        "En elev drar en lapp och visar yrket med kroppen, utan ord. De andra gissar, och när de har gissat rätt applåderar alla.",
+        "Nästa elev drar en lapp, tills alla i gruppen har visat ett yrke.",
+        "Samla gruppen: ”Vad gjorde ni när det var svårt att gissa?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som tvekar kan visa yrket tillsammans med en kompis.",
+        "Ge eleverna uppmuntrande ord före start, som ”Bra idé!” och ”Nu är vi nära!”",
+        "Byt yrken mot personer eller saker ur det ni arbetar med i ämnena."
+      ],
+      "bild": "trygghet-12.svg",
+      "alt": "Ett barn låtsas steka pannkakor i en stekpanna, och två barn bredvid gissar, det ena med handen uppe."
+    },
+    {
+      "id": "trygghet-13",
+      "kategori": "trygghet",
+      "nr": 13,
+      "namn": "Sardinburken",
+      "rad": "En gömmer sig, och den som hittar gömstället gömmer sig där också, tills hela gruppen är i sardinburken.",
+      "grupp": "Hela gruppen, från 5 elever",
+      "tid": "15–20 min",
+      "plats": "inne eller ute",
+      "beroring": true,
+      "material": [
+        "Inget"
+      ],
+      "steg": [
+        "Säg: ”En gömmer sig, och den som hittar gömstället gömmer sig där också. En omgång är klar när alla är i sardinburken.”",
+        "Visa med en elev hur ni tyst gör plats åt den som hittar er och viskar ”Kom in, här finns plats.” Säg högt när någon gör det.",
+        "Säg var gränserna går och var det går att gömma sig. Välj den som gömmer sig först. Alla andra blundar och räknar högt till 50.",
+        "Alla letar. Den som hittar gömstället kryper tyst in där, tätt intill de andra, och väntar.",
+        "När bara två letar säger sardinerna ”pip” lågt, så att de sista hittar fram. Omgången är slut när alla är inne.",
+        "Spela två eller tre omgångar. Varje gång gömmer sig någon som inte har gömt sig än, och som vill.",
+        "Samla gruppen: ”Vad gjorde ni för att de sista skulle hitta fram?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som inte vill sitta tätt kan sitta bredvid gömstället, så nära det går.",
+        "De yngsta kan leta två och två.",
+        "Välj ett område med många gömställen, där inget är farligt att klättra på och inga skåp eller dörrar går i lås."
+      ],
+      "bild": "trygghet-13.svg",
+      "alt": "Tre barn sitter tätt i rad på huk i sitt gömställe, som sardiner i en burk, och ett fjärde barn kommer letande med handen över ögonen."
+    },
+    {
+      "id": "trygghet-14",
+      "kategori": "trygghet",
+      "nr": 14,
+      "namn": "Simon säger, ingen åker ut",
+      "rad": "Två grupper leker Simon säger samtidigt och välkomnar den som gör fel, så att alla är med hela leken.",
+      "grupp": "Hela gruppen, från 6 elever, i två grupper",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Inget"
+      ],
+      "steg": [
+        "Säg: ”Vi leker Simon säger i två grupper. Den som gör fel byter grupp och blir välkomnad. Vi klarar det när alla är med hela leken.”",
+        "Visa med en elev hur gruppen tar emot den som kommer över: ni gör plats, tittar på hen och säger ”Välkommen!” Säg högt när någon gör det.",
+        "Dela gruppen i två, som står en bit ifrån varandra. Led själv ena gruppen första gången, och låt en elev leda den andra.",
+        "Ledaren säger ”Simon säger: sträck upp höger hand!”, och gruppen gör det. Säger ledaren inte ”Simon säger” först, står gruppen still.",
+        "Den som gör fel går över till den andra gruppen. Byt ledare varannan minut, tre eller fyra gånger, så att flera får leda.",
+        "Samla gruppen: ”Vad gjorde ni när någon kom över till er grupp?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som tvekar att leda kan leda tillsammans med en kompis.",
+        "Är ni färre än sex leker ni i en grupp, och den som gör fel ställer sig bredvid ledaren och leder med.",
+        "Ge de yngsta få och långsamma instruktioner, och de äldre snabba och kluriga, som ”rör vid vänster öra med höger hand”."
+      ],
+      "bild": "trygghet-14.svg",
+      "alt": "Ledaren och ett barn sträcker upp höger hand, och ett barn går över till den andra gruppen, där ett barn vinkar välkommen."
+    },
+    {
+      "id": "trygghet-15",
+      "kategori": "trygghet",
+      "nr": 15,
+      "namn": "Dansmemory",
+      "rad": "Paren blir memorybrickor med var sin rörelse och gör den så likadant att ett memorypar kan hitta alla par.",
+      "grupp": "Hela gruppen i par, från 6 elever",
+      "tid": "15–20 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Inget"
+      ],
+      "steg": [
+        "Säg: ”Ni blir memorybrickor, två och två med samma rörelse. Vi är klara när memoryparet har hittat alla par.”",
+        "Visa med en elev hur ett par gör sin rörelse likadant, och hur memoryparet frågar varandra: ”Ska vi ta den?” Säg högt när någon gör det.",
+        "Välj ett memorypar som går ut en stund. De andra paren hittar på en kort rörelse och övar tills de gör den likadant.",
+        "Alla sätter sig utspridda på golvet som brickor, så att de två i ett par inte sitter bredvid varandra.",
+        "Memoryparet kommer in och pekar på två brickor, en i taget. Varje bricka reser sig och gör sin rörelse.",
+        "Hör brickorna ihop gör de rörelsen tillsammans och blir hjälpare, som går med memoryparet och viskar vad de minns. Annars sätter de sig igen.",
+        "Samla gruppen: ”Vad gjorde brickorna som hjälpte memoryparet?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Ge exempel på rörelser, som en snurr, en klapp eller ett hopp, så att alla par kommer i gång.",
+        "Gör leken flera gånger under terminen, så att alla får vara memorypar. Blir någon över, är du med som bricka.",
+        "De yngsta kan börja med två par som brickor. Äldre kan göra rörelser i två delar."
+      ],
+      "bild": "trygghet-15.svg",
+      "alt": "Memoryparet pekar på en bricka som har rest sig och dansar, och en annan bricka sitter på golvet och väntar."
+    },
+    {
+      "id": "trygghet-16",
+      "kategori": "trygghet",
+      "nr": 16,
+      "namn": "Båten i hamn",
+      "rad": "Livbojarna och hamnen leder båten över rummet med ljud, och gruppen klarar det när båten har kommit i hamn.",
+      "grupp": "5–12 elever eller en klass i två grupper",
+      "tid": "15–20 min",
+      "plats": "inne eller ute",
+      "material": [
+        "En ögonbindel, för den som vill"
+      ],
+      "steg": [
+        "Säg: ”Båten seglar med slutna ögon, och vi andra leder den med ljud. Vi klarar det när båten har kommit i hamn.”",
+        "Visa med en elev som båt hur du som livboj säger ”pip pip” lugnt en armlängd bort, så att båten svänger. Säg högt när någon gör det.",
+        "Välj en båt och en hamn, som ställer sig långt ifrån varandra. Alla andra är livbojar och står stilla utspridda mellan dem.",
+        "Båten blundar eller tar på sig en ögonbindel och går långsamt mot hamnen med armarna framåt. Hamnen lockar hela tiden med ”tuut tuut”.",
+        "När båten är i hamn applåderar alla. Nya elever blir båt och hamn, tills alla som vill har seglat.",
+        "Samla gruppen: ”Vad gjorde ni som fick båten att våga gå?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Ögonbindeln är ett val. Den som vill blundar i stället, och den som inte vill segla är livboj eller hamn.",
+        "Kom överens före start om att ingen skämtar med båten och att livbojarna står stilla.",
+        "De yngsta kan segla två och två, där den ena har öppna ögon. Svårare blir det med två båtar och två hamnar.",
+        "Med en klass leker grupperna i var sin halva av rummet."
+      ],
+      "bild": "trygghet-16.svg",
+      "alt": "Båten går med slutna ögon och armarna framåt, en livboj ropar pip pip, och hamnen lockar med armarna uppe."
+    },
+    {
+      "id": "trygghet-17",
+      "kategori": "trygghet",
+      "nr": 17,
+      "namn": "Hur varmt?",
+      "rad": "Gruppen leder den som letar till en gömd sak genom att sjunga starkare ju närmare hen kommer.",
+      "grupp": "Hela gruppen, från 4 elever",
+      "tid": "10–15 min",
+      "plats": "inne",
+      "material": [
+        "En sak att gömma, som en ärtpåse eller en mjuk boll"
+      ],
+      "steg": [
+        "Säg: ”En letar efter en sak som vi har gömt, och vi andra hjälper till med sång. Vi klarar det när saken är hittad.”",
+        "Visa med en elev som letar hur gruppen sjunger starkare när hen närmar sig saken och svagare när hen går bort. Säg högt när någon gör det.",
+        "Välj en sång som alla kan, som ”Blinka lilla stjärna där”. Den som ska leta går ut, och du gömmer saken medan alla ser.",
+        "Den som letar kommer in. Gruppen sjunger starkare när hen kommer närmare saken och svagare när hen går bort.",
+        "När saken är hittad jublar alla. Den som letade gömmer saken nästa gång, medan en ny går ut. Spela fyra eller fem omgångar.",
+        "Samla gruppen: ”Vad gjorde ni för att den som letade skulle hitta?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som inte vill leta ensam kan leta tillsammans med en kompis.",
+        "Den som inte vill sjunga kan nynna eller klappa, starkare och svagare.",
+        "För de yngsta kan saken synas lite. Äldre kan leda med klappar, som blir både starkare och snabbare nära saken."
+      ],
+      "bild": "trygghet-17.svg",
+      "alt": "Ett barn böjer sig mot en boll under en stol, och två barn sjunger med ena handen på bröstet och leder hen dit."
+    },
+    {
+      "id": "trygghet-18",
+      "kategori": "trygghet",
+      "nr": 18,
+      "namn": "Universum",
+      "rad": "Alla är planeter som rör sig utan att krocka, och den som vill blir en sol som de andra går runt.",
+      "grupp": "Hela gruppen, från 6 elever",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Inget"
+      ],
+      "steg": [
+        "Säg: ”Ni är planeter som rör er hela tiden utan att krocka. Vi klarar det när alla som vill har fått vara sol.”",
+        "Visa med en elev hur ni frågar den som inte har varit sol: ”Vill du bli sol nu?” Säg högt när någon gör det.",
+        "Låt planeterna gå runt i rummet med minst en armlängd mellan sig.",
+        "Den som vill sträcker båda armarna rakt upp och blir en sol, som står still. Alla planeter går då i en bana runt solen.",
+        "Solen räknar tyst till tjugo, tar ner armarna och blir planet igen. Det får finnas högst två solar, och planeterna går runt den närmaste.",
+        "Säg ”Vem har inte varit sol än?” om samma elever blir sol igen och igen.",
+        "Samla gruppen: ”Vad gjorde ni för att alla skulle få vara sol?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som inte vill bli sol är planet hela leken, och universum behöver sina planeter.",
+        "Äldre kan vara sol så länge de vill, utan att räkna.",
+        "Planeterna går inne. Ute kan banorna bli stora, och då kan planeterna jogga."
+      ],
+      "bild": "trygghet-18.svg",
+      "alt": "En sol står med båda armarna rakt upp, och fyra planeter går runt den."
+    },
+    {
+      "id": "trygghet-19",
+      "kategori": "trygghet",
+      "nr": 19,
+      "namn": "Tillsammansdansen",
+      "rad": "Paren, och sedan ringar om fyra eller sex, rör sig tillsammans med pennor mellan fingertopparna utan att tappa dem.",
+      "grupp": "Hela gruppen, från 4 elever, i par och sedan i grupper om 4–6",
+      "tid": "15–20 min",
+      "plats": "inne",
+      "material": [
+        "En penna till varje elev, med lock på"
+      ],
+      "steg": [
+        "Säg: ”Ni håller pennor mellan er och rör er tillsammans. Ni klarar det när ni kan sätta er och resa er utan att tappa dem.”",
+        "Visa med en elev: ni står mittemot varandra med två pennor, en mellan varje par pekfingrar. Nicka innan ni rör er. Säg högt när någon gör det.",
+        "Låt paren göra likadant och gå långsamt runt i rummet, först medan de pratar och sedan tysta.",
+        "Utmana paren att sätta sig på golvet och resa sig igen utan att tappa en penna. En tappad penna betyder bara ett nytt försök.",
+        "Sätt ihop paren till ringar om fyra eller sex, med en penna mellan varje granne. Ringarna gör samma sak.",
+        "Sist kan hela gruppen bilda en stor ring. Räkna hur många sekunder den håller, och försök slå ert eget rekord.",
+        "Samla gruppen: ”Hur visste ni vad den andra skulle göra när ni var tysta?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Lättare blir det med en mjuk boll eller ett suddgummi mellan handflatorna, innan ni går över till pennor.",
+        "Den som inte vill stå i par kan vara med i en trio, med pennorna i en triangel.",
+        "Musik gör det roligare. Äldre kan röra sig i sidled och snurra ett varv tillsammans."
+      ],
+      "bild": "trygghet-19.svg",
+      "alt": "Två barn står mittemot varandra och håller två pennor mellan pekfingrarna."
+    },
+    {
+      "id": "trygghet-20",
+      "kategori": "trygghet",
+      "nr": 20,
+      "namn": "Befria med tre",
+      "rad": "Den som blir kullad fryser, och tre andra befriar hen, så att ingen står fryst länge.",
+      "grupp": "Hela gruppen, från 6 elever",
+      "tid": "15–20 min",
+      "plats": "inne eller ute",
+      "beroring": true,
+      "material": [
+        "Koner eller rep som visar områdets gränser"
+      ],
+      "steg": [
+        "Säg: ”Den som blir kullad fryser, och tre andra befriar hen. Vi klarar det när ingen står fryst länge.”",
+        "Visa med en elev en lätt kull med två fingrar på axeln, och hur ni ropar: ”Vi behöver en till här!” Säg högt när någon gör det.",
+        "Märk ut området. Välj en kullare för var sjätte elev, och alla kullare jagar samtidigt. Den som blir kullad fryser med armarna rakt upp.",
+        "Tre som är fria ställer sig runt den som har frusit och säger tillsammans: ”Ett, två, tre, du är fri!” Då är hen med igen.",
+        "Räck upp handen och säg stopp efter två minuter, eller när det inte finns tre fria kvar. Byt kullare. Alla är fria igen. Gör tre eller fyra omgångar.",
+        "Samla gruppen: ”Vad gjorde ni när ni såg att någon hade frusit?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Utan beröring kullar kullaren genom att ropa ”Frys!” en armlängd bakom någon. Visa först hur lång en armlängd är.",
+        "Den som inte vill springa kan gå. Alla behövs, för det krävs tre för att befria.",
+        "Med de yngsta räcker det med två som befriar. I en idrottssal kan ni springa, men i ett klassrum går alla."
+      ],
+      "bild": "trygghet-20.svg",
+      "alt": "Ett barn står fryst med armarna rakt upp, två barn ställer sig runt det, och ett tredje kommer springande."
+    },
+    {
+      "id": "utmaningar-01",
+      "kategori": "utmaningar",
+      "nr": 1,
+      "namn": "Forma gruppen!",
+      "rad": "Gruppen blundar och formar tillsammans en kvadrat eller en triangel av ett rep, och alla håller i repet hela tiden.",
+      "grupp": "4–6 elever eller en klass i grupper om 4–6",
+      "tid": "15–20 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Ett rep på ungefär 4 meter till varje grupp, med ändarna knutna ihop"
+      ],
+      "steg": [
+        "Säg: ”Ni ska blunda och forma en figur av repet, och alla håller i repet hela tiden. Ni är klara när alla säger att figuren är färdig.”",
+        "Visa med en elev hur man säger var man är och frågar de andra: ”Jag är ett hörn. Vem är nästa hörn?” Säg högt när någon gör det.",
+        "Låt varje grupp sätta sig på golvet i en ring och hålla i repet med båda händerna. Säg en figur, till exempel en kvadrat, och låt alla blunda.",
+        "Gruppen pratar och flyttar sig sittande tills alla säger att figuren är färdig. Säg ”Titta!”, och låt gruppen prata en minut om vad som hjälpte.",
+        "Ge gruppen ett andra försök med slutna ögon, och säg sedan en ny figur. Gör två eller tre figurer.",
+        "Samla gruppen: ”Vad sa någon som hjälpte er att förstå varandra utan att se?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som inte vill blunda kan titta ner i golvet, eller sitta utanför och berätta för gruppen hur figuren blev.",
+        "För de yngsta passar en kvadrat, och ett första försök med öppna ögon.",
+        "Svårare för de äldre är en romb, en rätvinklig triangel eller en stjärna."
+      ],
+      "bild": "utmaningar-01.svg",
+      "alt": "Tre barn sitter och håller i samma rep, så att repet bildar en triangel mellan deras händer"
+    },
+    {
+      "id": "utmaningar-02",
+      "kategori": "utmaningar",
+      "nr": 2,
+      "namn": "Bort med händerna!",
+      "rad": "Gruppen skickar en apelsin från den första till den sista utan att använda händerna, och alla ska ha rört vid den.",
+      "grupp": "4–8 elever eller en klass i grupper om 6–8",
+      "tid": "15–20 min",
+      "plats": "inne",
+      "beroring": true,
+      "material": [
+        "En stol till varje elev",
+        "4–8 saker till varje grupp, som apelsiner, ärtpåsar och mjuka bollar",
+        "En tidning till den som vill"
+      ],
+      "steg": [
+        "Säg: ”Sakerna ska gå från den första till den sista utan händer, och alla ska röra vid dem. Ni klarar det när alla saker har kommit fram.”",
+        "Ställ stolarna i två rader, vända mot varandra och en meter isär, och låt alla sätta sig. Sakerna går i sicksack från ena änden till den andra.",
+        "Visa med en elev hur den som lämnar säger ”Nu kommer den!” och väntar tills den andra säger ”Jag har den!” Säg högt när någon gör det.",
+        "Lägg apelsinen i knät på den första. Gruppen prövar fötter, haka, armbågar och knän. Tappar gruppen apelsinen, går den tillbaka till den första.",
+        "När en sak är framme får gruppen en poäng och nästa sak. Flera grupper lägger ihop sina poäng till klassens.",
+        "Har ni flera grupper, låt dem visa varandra sitt bästa sätt och pröva en annan grupps idé.",
+        "Samla gruppen: ”Hur hjälpte ni den som skulle ta emot?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som inte vill vara så nära andra kan ta emot saken och skicka den vidare på en uppslagen tidning, eller räkna poängen.",
+        "Målet är att hitta nya och roliga sätt att flytta saken. Det spelar ingen roll vilken grupp som är snabbast.",
+        "En stor mjuk boll är lättare. En liten frukt är svårare, och svårast är det utan fötter."
+      ],
+      "bild": "utmaningar-02.svg",
+      "alt": "Två barn sitter på stolar mittemot varandra, och en apelsin går från det enas fötter till det andras"
+    },
+    {
+      "id": "utmaningar-03",
+      "kategori": "utmaningar",
+      "nr": 3,
+      "namn": "Marken är lava!",
+      "rad": "Gruppen tar sig över lavan i några rockringar och klarar det när alla har kommit över.",
+      "grupp": "4–8 elever eller en klass i grupper om 4–6",
+      "tid": "15–25 min",
+      "plats": "inne eller ute",
+      "beroring": true,
+      "material": [
+        "Rockringar, en färre än antalet elever",
+        "Två rep eller tejp till start och mål"
+      ],
+      "steg": [
+        "Säg: ”Golvet är lava. Ni får bara stå i rockringarna, och ni klarar det när alla har kommit över till andra sidan.”",
+        "Lägg två rep fyra till sex meter isär. Alla står bakom startrepet, och rockringarna ligger framför dem.",
+        "Visa med en elev hur ni frågar innan ni kliver in i samma rockring: ”Får jag kliva in hos dig?” Säg högt när någon gör det.",
+        "Låt gruppen planera en minut. Den som står i en rockring får lyfta en tom rockring och lägga den framför sig. Två får dela rockring.",
+        "Trampar någon utanför, säg ”Lava!” Hen står still tills gruppen har hjälpt hen in i en rockring igen.",
+        "Stanna efter första försöket och fråga: ”Vad fungerade, och vad gör ni annorlunda nu?” Låt gruppen pröva igen.",
+        "Samla gruppen: ”Vad gjorde någon för att hjälpa en annan över lavan?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Utan beröring får gruppen en rockring mer än antalet elever, så att var och en kan stå i sin egen.",
+        "Den som inte vill gå över kan säga ”Lava!” när någon trampar utanför.",
+        "Ingen bär eller lyfter någon. Gruppen hjälper med ord, som ”Ta det lugnt, du klarar det!”",
+        "Pröva också aktiviteten ute på skolgården."
+      ],
+      "bild": "utmaningar-03.svg",
+      "alt": "Tre barn står i var sin rockring på golvet, och det främsta lägger en rockring framför sig"
+    },
+    {
+      "id": "utmaningar-04",
+      "kategori": "utmaningar",
+      "nr": 4,
+      "namn": "Rockringen",
+      "rad": "Gruppen håller varandra i händerna och för en rockring ett helt varv runt ringen, utan att någon släpper taget.",
+      "grupp": "4–10 elever eller en klass i grupper om 6–8",
+      "tid": "15–20 min",
+      "plats": "inne eller ute",
+      "beroring": true,
+      "material": [
+        "En eller två rockringar till varje grupp",
+        "En klocka, om ni tar tid",
+        "Korta rep, till den som hellre håller i ett rep"
+      ],
+      "steg": [
+        "Säg: ”Rockringen ska gå ett helt varv runt ringen utan att någon släpper taget. Ni är klara när den är tillbaka där den började.”",
+        "Visa med en elev hur ni frågar innan ni tar varandras händer: ”Får jag ta din hand?” Säg högt när någon gör det.",
+        "Låt alla ställa sig i en ring med ansiktet inåt. Trä rockringen på en elevs arm, och låt sedan alla ta varandras händer.",
+        "Den som har rockringen kliver igenom den, med huvudet först, och för den vidare till grannens arm. Grannarna hjälper till utan att släppa.",
+        "Släpper någon, tar ni tag igen och fortsätter. Efter första varvet pratar gruppen en minut om vad som fungerade bäst och prövar igen.",
+        "Ta tid på nästa varv om gruppen vill, och låt dem försöka slå sitt eget rekord.",
+        "Samla gruppen: ”Vad gjorde någon som hjälpte gruppen?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som inte vill hålla händer kan ta tiden eller räkna varven.",
+        "Låt gruppen heja på den som har rockringen: ”Kom igen!”",
+        "I en klass går alla grupper samtidigt i två minuter. Varje grupp räknar sina varv, och ni lägger ihop dem.",
+        "Det blir svårare med två rockringar som går åt var sitt håll och måste förbi varandra."
+      ],
+      "bild": "utmaningar-04.svg",
+      "alt": "Tre barn håller varandra i händerna, och det mittersta kliver igenom en rockring som hänger på armarna"
+    },
+    {
+      "id": "utmaningar-05",
+      "kategori": "utmaningar",
+      "nr": 5,
+      "namn": "Hur långt kan vi räkna?",
+      "rad": "Gruppen räknar högt tillsammans, en i taget och utan bestämd ordning, och försöker komma så långt som möjligt.",
+      "grupp": "4–10 elever eller en klass i grupper om 5–8",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Papper och penna till gruppens rekord"
+      ],
+      "steg": [
+        "Säg: ”Vi räknar så långt vi kan, en i taget och utan bestämd ordning. Alla säger minst ett tal. Pratar ni i mun på varandra, börjar vi om.”",
+        "Visa med en elev hur man väntar in varandra: säg ”Ett”, och låt eleven säga ”Två” efter en tyst stund. Säg högt när någon gör det.",
+        "Låt alla stå i en ring och blunda eller titta ner i golvet. Börja själv med ”Ett”, och sedan säger någon ”Två”.",
+        "Säger två elever ett tal samtidigt, är försöket slut. Skriv upp det högsta talet, ge er en applåd och börja om från ett.",
+        "Gör fyra eller fem försök, och se om gruppen kan slå sitt rekord. Säg ”Bra jobbat!” efter varje försök.",
+        "Samla gruppen: ”Vad gjorde någon som hjälpte er att inte säga samtidigt?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Är det för svårt i en stor grupp, dela den i två mindre.",
+        "Den som inte vill säga tal kan hålla räkningen och säga gruppens rekord efter varje försök.",
+        "Svårare blir det när alla ska ha sagt ett tal innan någon säger ett andra.",
+        "För de yngsta är målet att komma till tio."
+      ],
+      "bild": "utmaningar-05.svg",
+      "alt": "Fyra barn står i rad, och ett av dem håller handen vid munnen och säger nästa tal"
+    },
+    {
+      "id": "utmaningar-06",
+      "kategori": "utmaningar",
+      "nr": 6,
+      "namn": "Hela havet stormar tillsammans",
+      "rad": "Stolarna blir färre för varje gång musiken tystnar, och gruppen hjälps åt så att alla får plats på stolarna som är kvar.",
+      "grupp": "4–8 elever eller en klass i ringar om 6–8",
+      "tid": "10–15 min",
+      "plats": "inne",
+      "beroring": true,
+      "material": [
+        "En stol till varje elev",
+        "Musik som du kan stänga av och sätta på"
+      ],
+      "steg": [
+        "Säg: ”Det är storm, och livbåtarna sjunker en efter en. Ni klarar det när alla har en hand på en stol varje gång musiken tystnar. Ingen åker ut!”",
+        "Visa med en elev hur ni bjuder in någon som letar plats: ”Kom hit, här finns plats!” Säg högt när någon gör det.",
+        "Ställ stolarna i en ring med ryggstöden inåt. Spela musik medan alla går runt stolarna.",
+        "Stäng av musiken, och alla sätter sig eller sätter en hand på en stol. Ta bort en stol och sätt på musiken igen.",
+        "När bara några stolar är kvar, fråga: ”Hur få stolar kan vi klara oss med?” Låt gruppen pröva, och avsluta när den har klarat sitt antal.",
+        "Samla gruppen: ”Hur hjälpte någon dig att få plats?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Ingen står på en stol eller sitter i någons knä. Alla går, så att ingen springer in i någon.",
+        "Utan beröring har alla en hand på en stol och rör inte vid varandra. Hur få stolar räcker då?",
+        "Den som inte vill vara med kan sköta musiken och ta bort en stol varje gång."
+      ],
+      "bild": "utmaningar-06.svg",
+      "alt": "Två barn sitter på var sin stol, och ett tredje står mellan dem med en hand på varje stol"
+    },
+    {
+      "id": "utmaningar-07",
+      "kategori": "utmaningar",
+      "nr": 7,
+      "namn": "Håll huvudet kallt!",
+      "rad": "Gruppen hjälps åt så att alla har sin ärtpåse på huvudet, och den som tappar sin fryser tills någon lägger tillbaka den.",
+      "grupp": "4–10 elever eller en klass",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "material": [
+        "En ärtpåse till varje elev",
+        "Musik, om ni vill"
+      ],
+      "steg": [
+        "Säg: ”Ni klarar det om alla har ärtpåsen på huvudet när jag säger stopp. Rör inte er egen. Tappar du den, fryser du tills någon hjälper.”",
+        "Visa med en elev hur du frågar ”Får jag?” och lägger tillbaka hens ärtpåse utan att tappa din egen. Säg högt när någon gör det.",
+        "Dela ut ärtpåsarna. Alla lägger sin på huvudet och går långsamt runt i rummet. Den som tappar sin står stilla tills någon hjälper.",
+        "Gör det svårare efter ett par minuter. Låt eleverna gå fortare, gå på tå eller röra sig till musik i olika takt.",
+        "Räck upp handen och säg stopp efter fem till tio minuter, och se om alla har ärtpåsen på huvudet.",
+        "Samla gruppen: ”Vem kom och hjälpte dig?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "De yngsta får hålla en hand på sin egen ärtpåse när de plockar upp någon annans.",
+        "Den som inte vill ha en ärtpåse på huvudet kan vara räddare. Hen hjälper den som har frusit.",
+        "Säger någon nej till hjälpen, räcker hjälparen fram ärtpåsen, och den frusna lägger den på huvudet själv."
+      ],
+      "bild": "utmaningar-07.svg",
+      "alt": "Ett barn står stilla med armarna ut, och ett annat lägger tillbaka ärtpåsen på hens huvud"
+    },
+    {
+      "id": "utmaningar-08",
+      "kategori": "utmaningar",
+      "nr": 8,
+      "namn": "Ringen runt",
+      "rad": "Gruppen skickar en banan ett varv runt ringen, och varje fråga går hela vägen tillbaka till den som började.",
+      "grupp": "4–12 elever, eller en klass i två ringar",
+      "tid": "15–20 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Två eller tre saker att skicka, till exempel en banan, en penna och en mössa"
+      ],
+      "steg": [
+        "Säg: ”Bananen ska gå ett helt varv. Varje fråga går tillbaka till mig och varje svar ut igen. Ni klarar det när bananen är tillbaka hos mig.”",
+        "Visa med två elever hur ni vänder er mot den ni pratar med, säger orden tydligt och väntar på svaret. Säg högt när någon gör det.",
+        "Ge bananen till eleven bredvid: ”Här är en banan.” Hen frågar ”En vad?”, du svarar ”En banan!” och hen säger ”Jaha, en banan!”",
+        "Hen ger bananen vidare med samma ord. Nästa frågar ”En vad?”, och frågan går tillbaka från person till person, ända till dig.",
+        "Du svarar ”En banan!”, och svaret går ut samma väg. Den nya säger ”Jaha, en banan!” och ger bananen vidare.",
+        "Ge gruppen en applåd när bananen är tillbaka. Gör nästa varv svårare: skicka en penna åt andra hållet samtidigt.",
+        "Samla gruppen: ”Vad gjorde ni för att frågan och svaret inte skulle tappas på vägen?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som inte vill vara med i ringen kan lyssna och sedan berätta var det blev svårast.",
+        "För de yngsta passar en liten ring om fyra eller fem.",
+        "I en klass leder en elev den andra ringen och svarar ”En banan!” där."
+      ],
+      "bild": "utmaningar-08.svg",
+      "alt": "Tre barn står i rad, och det första ger en banan till det andra, som vänder sig tillbaka och frågar"
+    },
+    {
+      "id": "utmaningar-09",
+      "kategori": "utmaningar",
+      "nr": 9,
+      "namn": "Teambuilding med stationsarbete",
+      "rad": "Gruppen går mellan fyra stationer med uppdrag som alla behövs till, och pratar vid varje station om hur samarbetet kan bli bättre.",
+      "grupp": "4–6 elever eller en klass i grupper om 4–6",
+      "tid": "25–35 min",
+      "plats": "inne eller ute",
+      "beroring": true,
+      "material": [
+        "En rockring och en klocka",
+        "Tejp till en ruta, 70 × 70 cm",
+        "Ett måttband vid station 4",
+        "Lappar med uppdragen, om grupperna går själva"
+      ],
+      "steg": [
+        "Säg: ”Ni ska klara fyra uppdrag som grupp. Vid varje station pratar ni efter första försöket om hur ni kan hjälpas åt, och prövar igen där det går.”",
+        "Visa med en elev hur man ger ett förslag och frågar de andra: ”Ska vi pröva så här?” Säg högt när någon gör det.",
+        "Sprid ut stationerna, och låt varje grupp börja på en egen. Byt efter fem till sju minuter, tills alla har varit på alla fyra.",
+        "Station 1: Alla kliver igenom en rockring som de håller åt varandra, utan att röra den. Ta tid. Station 2: Alla står i rutan och räknar till fem.",
+        "Station 3: Gruppen ställer sig på en rad efter födelsedag, januari i ena änden, utan att prata. Sedan säger var och en sin födelsedag.",
+        "Station 4: Gruppen gissar hur lång raden blir med allas fötter häl mot tå, och mäter sedan.",
+        "Samla gruppen: ”Vid vilken station samarbetade ni bäst, och vad gjorde ni då?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som inte vill vara med i ett uppdrag kan ta tid, läsa uppdraget högt eller mäta.",
+        "Utan beröring blir rutan så stor att alla får plats utan att röra vid varandra. Ingen lyfter någon.",
+        "Har ni fler än fyra grupper, gör två av varje station."
+      ],
+      "bild": "utmaningar-09.svg",
+      "alt": "Ett barn på huk håller en rockring, ett annat kliver igenom den och ett tredje väntar på sin tur"
+    },
+    {
+      "id": "utmaningar-10",
+      "kategori": "utmaningar",
+      "nr": 10,
+      "namn": "Alla till 20",
+      "rad": "Gruppen skickar kort till varandra utan att prata och är klar när alla har fyra kort som blir 20.",
+      "grupp": "4–5 elever eller en klass i grupper om 4–5",
+      "tid": "15–20 min",
+      "plats": "inne",
+      "material": [
+        "En kortlek till varje grupp, utan kungar, damer och knektar. Ess är 1"
+      ],
+      "steg": [
+        "Säg: ”Ni är klara när alla i gruppen har fyra kort som blir 20. Ni får inte prata, så ni behöver hjälpa varandra på andra sätt.”",
+        "Visa att 10, 5, 3 och 2 blir 20, och visa med en elev hur man ber om ett tal med fingrarna. Säg högt när någon gör det.",
+        "Låt gruppen sitta i en halvcirkel och ge var och en fyra kort. Lägg resten av kortleken hos den första, i ena änden.",
+        "Den första drar ett kort i taget och skickar ett kort ur handen till nästa. Alla tar emot ett och skickar ett, så att alla har fyra kort.",
+        "Den sista lägger sitt kort i en hög. Den som har 20 skickar vidare det kort hen får. När kortleken är slut, blandar ni högen och fortsätter.",
+        "Samla gruppen: ”Hur hjälpte ni varandra utan ord?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Lättare för de yngsta är två kort var, som ska bli 10.",
+        "Svårare blir det om du tar bort femmorna och tiorna, så att det finns färre sätt att få 20.",
+        "Den som inte vill hålla kort kan sköta kortleken, dra korten och ge dem till den första.",
+        "Fastnar gruppen länge, ge dem en minut att prata och låt dem sedan fortsätta tyst."
+      ],
+      "bild": "utmaningar-10.svg",
+      "alt": "Två barn sitter vid ett bord mittemot varandra, och det ena har korten i handen och räcker över ett kort"
+    },
+    {
+      "id": "utmaningar-11",
+      "kategori": "utmaningar",
+      "nr": 11,
+      "namn": "Tappa inte bollen!",
+      "rad": "Gruppen kastar en boll till och från mitten, byter plats tills alla har stått där och räknar kasten.",
+      "grupp": "4–10 elever eller en klass i ringar om 6–10",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "material": [
+        "En mjuk boll som är lätt att kasta och fånga, en till varje ring"
+      ],
+      "steg": [
+        "Säg: ”Alla ska få stå i mitten, och ingen ska tappa bollen. Ni klarar det när alla har varit i mitten. Vi räknar kasten tillsammans.”",
+        "Visa med en elev hur du ser på den du kastar till, säger hens namn och kastar lugnt underifrån. Säg högt när någon gör det.",
+        "Ställ alla i en ring, med en elev och bollen i mitten.",
+        "Eleven i mitten kastar bollen till någon i ringen och byter plats med en annan som inte har varit i mitten. Den eleven springer in i mitten.",
+        "Den som fick bollen kastar till den nya i mitten, och så fortsätter det. Räkna kasten högt. Tappar någon bollen, börjar ni räkna från noll.",
+        "Samla gruppen: ”Vad gjorde ni för att det skulle bli lätt att fånga?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Påminn om att heja på varandra, också på den som tappar. Börja långsamt och öka takten.",
+        "Den som inte vill springa kan stå bredvid och räkna kasten högt åt gruppen.",
+        "För de yngsta passar det att gå i stället för att springa, och att kasta med en studs.",
+        "I en klass har varje ring sin boll, och ni lägger ihop kasten till klassens rekord."
+      ],
+      "bild": "utmaningar-11.svg",
+      "alt": "Ett barn kastar bollen mot mitten, där ett annat springer in för att fånga den"
+    },
+    {
+      "id": "utmaningar-12",
+      "kategori": "utmaningar",
+      "nr": 12,
+      "namn": "Knuten",
+      "rad": "Gruppen håller varandra i händerna i en knut och vecklar ut sig till en ring, utan att någon släpper taget.",
+      "grupp": "6, 8 eller 10 elever, eller en klass i grupper om 8",
+      "tid": "15–20 min",
+      "plats": "inne eller ute",
+      "beroring": true,
+      "material": [
+        "Korta rep till den som hellre håller i ett rep än i en hand"
+      ],
+      "steg": [
+        "Säg: ”Ni ska bli en knut och sedan en ring igen utan att släppa taget. Ni klarar det när ni står i en ring, hand i hand.”",
+        "Visa med en elev hur ni frågar ”Får jag ta din hand?”, och hur man säger ”Stopp!” när ett grepp gör ont. Säg högt när någon gör det.",
+        "Ställ gruppen tätt i en ring, och är ni ett udda antal är du med. Med högra handen tar alla högra handen hos någon som inte står bredvid.",
+        "Sedan tar alla en annan persons vänstra hand med sin vänstra. Ingen håller samma person i båda händerna.",
+        "Säg: ”Veckla ut er nu, långsamt.” Händerna får vrida sig i greppet. Efter ett stopp står alla stilla tills den som sa stopp säger ”Nu går det.”",
+        "Fastnar gruppen i flera minuter, får den bestämma att två händer släpper och tar ett nytt grepp.",
+        "Samla gruppen: ”Vad gjorde gruppen när det var som svårast?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Utan beröring håller eleverna i korta rep.",
+        "Den som inte vill vara med kan stå utanför och säga stopp om ett grepp ser ut att göra ont.",
+        "Ibland blir det två ringar, eller några står vända utåt. Det räknas som klart.",
+        "För de yngsta passar en knut om sex."
+      ],
+      "bild": "utmaningar-12.svg",
+      "alt": "Fyra barn står tätt och håller varandras händer i kors framför bröstet"
+    },
+    {
+      "id": "utmaningar-13",
+      "kategori": "utmaningar",
+      "nr": 13,
+      "namn": "Bänken",
+      "rad": "Gruppen står på en bänk och byter plats tills alla står i bokstavsordning efter förnamn, utan att någon kliver ner.",
+      "grupp": "5–8 elever eller en klass i grupper om 6–8",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "beroring": true,
+      "material": [
+        "En gymnastikbänk till varje grupp, eller en stock ute",
+        "Tejp, om gruppen står på golvet"
+      ],
+      "steg": [
+        "Säg: ”Ställ er i bokstavsordning efter förnamn, A i den här änden. Ni får bara röra er på bänken, och alla hjälper till så att ingen ramlar.”",
+        "Visa med en elev hur ni går förbi varandra: håll i varandras underarmar, och säg ”Nu kliver jag” innan du kliver. Säg högt när någon gör det.",
+        "Låt alla kliva upp på bänken i den ordning de står, och sedan byta plats. De håller i varandra och hjälps åt att hålla balansen.",
+        "Kliver någon ner, får hen en hand att hålla i och kliver upp igen där hen stod, och ni fortsätter.",
+        "När gruppen är klar, säger var och en sitt namn från A till Ö. Gör det svårare nästa gång, utan ord eller efter födelsedag från januari.",
+        "Samla gruppen: ”Hur hjälpte ni varandra att komma förbi på bänken?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som inte vill stå på bänken kan gå bredvid och säga stopp om någon är på väg att ramla.",
+        "Utan beröring, och lättare för de yngsta, står gruppen mellan två tejpremsor på golvet, en halv meter isär. De yngsta ställer sig efter längd.",
+        "Ingen lyfter eller bär någon förbi. Låt gruppen ta den tid den behöver.",
+        "Ställ bänken som vanligt, med sittytan uppåt, och flytta undan allt som står runt den."
+      ],
+      "bild": "utmaningar-13.svg",
+      "alt": "Fyra barn står på en bänk, och två av dem håller i varandra när de byter plats"
+    },
+    {
+      "id": "utmaningar-14",
+      "kategori": "utmaningar",
+      "nr": 14,
+      "namn": "Heliumpinnen",
+      "rad": "Gruppen sänker en lätt pinne som vilar på allas pekfingrar till golvet, och alla fingrar ska röra pinnen hela vägen.",
+      "grupp": "4–10 elever eller en klass i grupper om 8",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "material": [
+        "En lätt och rak pinne till varje grupp, 2–3 meter lång, till exempel en bambukäpp eller en tältstång"
+      ],
+      "steg": [
+        "Säg: ”Pinnen ska ner till golvet. Den vilar på era pekfingrar, och alla fingrar ska röra pinnen hela vägen. Ni får inte hålla om den.”",
+        "Visa med en elev hur pinnen vilar ovanpå pekfingret, och hur man säger ”Vänta!” när pinnen stiger. Säg högt när någon gör det.",
+        "Låt gruppen stå i två rader mittemot varandra. Alla håller ut pekfingrarna i brösthöjd, och du lägger pinnen på dem.",
+        "Låt gruppen försöka. Ofta stiger pinnen, eftersom alla trycker lite uppåt. Skratta tillsammans. Lämnar ett finger pinnen, börjar ni om i brösthöjd.",
+        "Efter några försök får gruppen prata en minut om en plan och pröva igen. Avsluta när pinnen ligger på golvet, eller efter tio minuter.",
+        "Samla gruppen: ”Vad gjorde ni när pinnen steg?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som inte vill vara med kan stå vid ena änden och säga hur långt det är kvar till golvet.",
+        "Lättare för de yngsta är en rockring på fingrarna, i en grupp om fyra till sex.",
+        "Svårare blir det utan ord, så att gruppen löser det med blickar och tecken."
+      ],
+      "bild": "utmaningar-14.svg",
+      "alt": "Tre barn står i rad med armarna böjda och håller pekfingrarna under en lång pinne i brösthöjd"
+    },
+    {
+      "id": "utmaningar-15",
+      "kategori": "utmaningar",
+      "nr": 15,
+      "namn": "Månbollen",
+      "rad": "Gruppen håller en badboll i luften så länge det går och räknar slagen, och ingen slår två gånger i rad.",
+      "grupp": "4–10 elever eller en klass i grupper om 6–8",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "material": [
+        "En uppblåst badboll till varje grupp",
+        "Papper och penna till gruppens rekord"
+      ],
+      "steg": [
+        "Säg: ”Vi ska hålla badbollen i luften så länge vi kan, och alla ska få slå. Ingen slår två gånger i rad, och vi räknar varje slag högt.”",
+        "Visa med en elev hur man ropar ”Min!” innan man slår, så att två inte slår samtidigt. Säg högt när någon gör det.",
+        "Låt gruppen sprida ut sig. Kasta själv upp badbollen, och räkna högt tillsammans för varje slag.",
+        "Nuddar badbollen golvet, skriver du upp talet, och gruppen börjar om på noll. Gör tre till fem försök.",
+        "Låt gruppen prata en minut om hur de kan komma längre, och försöka slå sitt eget rekord. Flera grupper lägger ihop sina bästa tal.",
+        "Samla gruppen: ”Vad gjorde ni för att alla skulle få slå?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "En badboll eller en ballong är mjuk och långsam, så att alla vågar slå. Ta ballongen till de yngsta.",
+        "Den som inte vill slå kan räkna högt och skriva upp gruppens rekord.",
+        "Svårare blir det när alla ska ha slagit en gång innan någon slår för andra gången."
+      ],
+      "bild": "utmaningar-15.svg",
+      "alt": "Tre barn tittar uppåt, och det mittersta slår upp en badboll i luften"
+    },
+    {
+      "id": "utmaningar-16",
+      "kategori": "utmaningar",
+      "nr": 16,
+      "namn": "Gruppjonglering",
+      "rad": "Gruppen kastar mjuka bollar i en bestämd ordning, säger namnet på den som ska fånga och håller tre bollar i gång samtidigt.",
+      "grupp": "5–8 elever eller en klass i grupper om 5–7",
+      "tid": "15–20 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Mjuka bollar eller ärtpåsar, några fler än antalet elever"
+      ],
+      "steg": [
+        "Säg: ”Vi ska jonglera tillsammans. Alla kastar och alla fångar, och vi klarar det när tre bollar går runt samtidigt.”",
+        "Visa med en elev hur du säger namnet, väntar tills hen ser på dig och kastar lugnt underifrån. Säg högt när någon gör det.",
+        "Ställ gruppen i en ring. Alla utom den som börjar räcker upp en hand. Den som börjar säger namnet på någon mittemot och kastar.",
+        "Den som får bollen tar ner handen, säger namnet på någon med handen uppe och kastar. Den sista kastar till den som började.",
+        "Gör samma varv igen, i samma ordning, tills alla vet vem de får bollen av och vem de kastar till.",
+        "Lägg till en boll i taget. Pröva sedan baklänges, så att var och en kastar till den hen fick bollen av.",
+        "Samla gruppen: ”Hur hjälpte det att säga namnet innan ni kastade?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Ingen kastar till den som står bredvid.",
+        "Den som inte vill kasta kan stå bredvid och ge nya bollar till den som börjar.",
+        "För de yngsta passar en boll i taget, gärna en ärtpåse, som är lätt att fånga.",
+        "Svårare blir det med en boll fler än det finns elever i ringen."
+      ],
+      "bild": "utmaningar-16.svg",
+      "alt": "Ett barn kastar en boll högt över den som står bredvid, och ett tredje sträcker upp händerna för att fånga den"
+    },
+    {
+      "id": "utmaningar-17",
+      "kategori": "utmaningar",
+      "nr": 17,
+      "namn": "Trafikstockningen",
+      "rad": "Två halvor av gruppen byter sida på en rad rutor och är klara först när alla har kommit över.",
+      "grupp": "5–9 elever från åk 4, eller en klass i grupper om 6–8",
+      "tid": "20–30 min",
+      "plats": "inne eller ute",
+      "beroring": true,
+      "material": [
+        "Papper, papperstallrikar eller tejp till rutorna, en ruta mer än antalet elever på rutorna"
+      ],
+      "steg": [
+        "Säg: ”Ni står i en trafikstockning. De två halvorna ska byta sida, och ni klarar det när alla har kommit över till andra sidan.”",
+        "Lägg rutorna i en rad, ett kort steg isär. Varje halva ställer sig på sin sida om den tomma rutan i mitten, med ansiktet mot den.",
+        "Säg reglerna: ”Kliv fram till en tom ruta, eller förbi en som är vänd mot dig, till en tom ruta. En flyttar i taget, och ingen går bakåt.”",
+        "Visa med en elev hur man föreslår ett drag och frågar de andra: ”Ska jag kliva nu?” Säg högt när någon gör det.",
+        "Fastnar gruppen, säg ”Hmm, vad tror ni?” eller visa första draget: den som står närmast den tomma rutan kliver fram. Gruppen får börja om när den vill.",
+        "När gruppen har klarat det, be dem göra det en gång till och se om det går lättare.",
+        "Samla gruppen: ”Hur bestämde ni vem som skulle flytta?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Pröva själv med mynt på bordet innan, två åt varje håll och en tom plats i mitten.",
+        "Är ni udda, räknar en elev dragen och säger till om någon går bakåt. Det kan vara den som inte vill stå på rutorna.",
+        "Utan beröring ligger rutorna så glest att man kan kliva förbi utan att hålla i någon.",
+        "Lättare blir det med två elever på varje sida och fem rutor. De andra hjälper till från sidan."
+      ],
+      "bild": "utmaningar-17.svg",
+      "alt": "Två barn står vända åt ena hållet och två åt det andra på en rad rutor, med en tom ruta mellan dem"
+    },
+    {
+      "id": "utmaningar-18",
+      "kategori": "utmaningar",
+      "nr": 18,
+      "namn": "Flygande mattan",
+      "rad": "Alla står på en filt och försöker vända den upp och ner tillsammans utan att någon kliver ner på golvet.",
+      "grupp": "4–10 elever eller en klass i grupper om 6–8",
+      "tid": "15–20 min",
+      "plats": "inne eller ute",
+      "beroring": true,
+      "material": [
+        "En filt eller ett lakan till varje grupp, så stort att alla får plats med lite yta över"
+      ],
+      "steg": [
+        "Säg: ”Filten är en flygande matta. Vänd den upp och ner, och försök att inte kliva av. Ni klarar det när alla står på filtens andra sida.”",
+        "Visa med en elev hur man ger ett förslag och frågar de andra: ”Ska vi pröva så här?” Säg högt när någon gör det.",
+        "Lägg filten på golvet, och vik den mindre om gruppen får gott om plats. Låt alla ställa sig på den och planera en minut innan någon rör filten.",
+        "Kliver någon av, kliver hen upp igen och gruppen fortsätter. Räkna kliven av filten. När gruppen har klarat det, gör ni det en gång till med färre kliv.",
+        "Samla gruppen: ”Hur kom ni överens om hur ni skulle göra?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som inte vill stå på filten kan räkna kliven och säga till när någon kliver av.",
+        "Utan beröring tar ni en större filt, så att alla får plats utan att hålla i varandra.",
+        "Ingen lyfter eller bär någon. Ett lakan glider på ett halt golv, så ta en filt eller gör det på gräs.",
+        "Svårare blir det om ni viker filten en gång till och prövar igen."
+      ],
+      "bild": "utmaningar-18.svg",
+      "alt": "Fyra barn står tätt på en filt på golvet och håller varandra i händerna"
+    },
+    {
+      "id": "utmaningar-19",
+      "kategori": "utmaningar",
+      "nr": 19,
+      "namn": "Händer och fötter",
+      "rad": "Gruppen listar ut hur alla kan stå när bara så många händer och fötter som du säger får nudda golvet.",
+      "grupp": "4–8 elever eller en klass i grupper om 4–6",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "beroring": true,
+      "material": [
+        "Gymnastikmattor, om ni är inne"
+      ],
+      "steg": [
+        "Säg: ”Jag säger hur många händer och fötter som får nudda golvet. Ni klarar det när alla står så medan vi räknar högt till fem.”",
+        "Visa med en elev hur ni frågar innan ni tar stöd av varandra: ”Kan jag hålla i din axel?” Säg högt när någon gör det.",
+        "Börja lätt, till exempel ”Sex fötter och två händer” till en grupp om fyra. Knän och rumpor får inte nudda golvet.",
+        "Låt gruppen prata och pröva. Gör det sedan svårare med färre händer och fötter, men minst lika många fötter som det finns elever.",
+        "Har ni flera grupper, får de visa varandra sina lösningar och pröva en annan grupps.",
+        "Samla gruppen: ”Hur hjälptes ni åt att stå kvar?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Gör det på mattor eller gräs. Ingen bär eller lyfter någon.",
+        "Utan beröring stödjer eleverna sig mot väggen, eller ute mot ett staket eller ett träd, i stället för mot varandra.",
+        "Den som inte vill vara med kan räkna händerna och fötterna och säga om gruppen klarade det.",
+        "Den som har svårt att stå på ett ben har båda fötterna i golvet, och gruppen löser resten."
+      ],
+      "bild": "utmaningar-19.svg",
+      "alt": "Tre barn håller varandra i händerna, och två av dem står på ett ben"
+    },
+    {
+      "id": "utmaningar-20",
+      "kategori": "utmaningar",
+      "nr": 20,
+      "namn": "Trasiga kvadrater",
+      "rad": "Gruppen ger varandra bitar utan att prata och är klar när alla har en hel kvadrat framför sig.",
+      "grupp": "4–5 elever eller en klass i grupper om 4–5",
+      "tid": "15–25 min",
+      "plats": "inne",
+      "material": [
+        "Fyra kartongkvadrater, 12 × 12 cm, och fyra kuvert per grupp",
+        "Kvadrat 1: klipp diagonalt till två stora trianglar. Kvadrat 2: klipp mitt itu",
+        "Kvadrat 3: klipp mitt itu, och ena halvan diagonalt till två långa trianglar",
+        "Kvadrat 4: klipp diagonalt, och ena halvan från räta hörnet till långsidans mitt"
+      ],
+      "steg": [
+        "Säg: ”Ni är klara när alla har en hel kvadrat framför sig, och alla kvadrater är lika stora. Ni får inte prata, peka eller ta, bara ge.”",
+        "Visa med en elev hur man ger: titta på hens bitar och lägg en bit framför hen. Säg högt när någon gör det.",
+        "Låt fyra sitta runt ett bord med ett kuvert var. Är ni fem, ser den femte till att ingen pratar eller tar.",
+        "Låt gruppen arbeta tyst. Fastnar den länge, säg: ”Titta på vad de andra behöver.”",
+        "Säg ”Nu får ni prata” när alla är klara.",
+        "Samla gruppen: ”Hur märkte du vad någon annan behövde?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Kuvert 1: stor triangel, rektangel, liten triangel. 2: stor triangel, lång triangel. 3: rektangel, liten triangel. 4: rektangel, lång triangel, stor triangel.",
+        "Kvadraterna blir som innan du klippte. Två små trianglar blir en för liten kvadrat, så vänta med att hjälpa.",
+        "Vill någon inte vara med, tar grannen hens kuvert.",
+        "De yngsta får prata. Klipp två kvadrater diagonalt och två mitt itu, en triangel och en rektangel per kuvert."
+      ],
+      "bild": "utmaningar-20.svg",
+      "alt": "Två barn sitter vid ett bord, och det ena räcker en bit till det andra, som har en triangel framför sig"
+    },
+    {
+      "id": "mal-01",
+      "kategori": "mal",
+      "nr": 1,
+      "namn": "Strategimöte",
+      "rad": "Gruppen enas om sina tre bästa tips inför en gemensam uppgift, och listan är klar när allas tankar har hörts.",
+      "grupp": "4–8 elever eller en klass",
+      "tid": "20–30 min",
+      "plats": "inne",
+      "material": [
+        "Papper och pennor",
+        "Tavlan eller ett stort papper till listan",
+        "Det som uppgiften behöver"
+      ],
+      "steg": [
+        "Säg vilken uppgift som väntar: ”Först har vi ett strategimöte om hur vi lyckas tillsammans. Listan är klar när allas tips har hörts.”",
+        "Låt var och en skriva ner sina bästa tips själv i två minuter.",
+        "Visa med en elev hur ett par väljer. Ni läser varsitt tips och frågar varandra: ”Vilket tror du mest på, och varför?” Säg högt när någon gör det.",
+        "Låt eleverna läsa sina tips för varandra i par och välja de två som de tror mest på.",
+        "Skriv upp parens tips på tavlan. Låt gruppen enas om de tre bästa, och ring in dem.",
+        "Låt gruppen göra uppgiften med listan synlig. Säg det högt när du ser någon följa ett tips.",
+        "Samla gruppen: ”Vilket tips hjälpte oss, och när såg du någon följa det?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Välj en uppgift på ungefär tio minuter, gärna en som har varit svår förut. Korten Heliumpinnen och Månbollen i Samarbetsutmaningar passar.",
+        "Beröm eleverna för deras tankar. Varje tips är värt att höra, också det som inte kommer med på listan.",
+        "Den som inte vill läsa sitt tips högt kan låta kompisen i paret läsa det.",
+        "De yngsta säger sina tips i par, och du skriver listan med en liten bild till varje tips."
+      ],
+      "bild": "mal-01.svg",
+      "alt": "Två barn sitter vid ett bord och planerar, och ett tredje lutar sig in och pekar på bordet"
+    },
+    {
+      "id": "mal-02",
+      "kategori": "mal",
+      "nr": 2,
+      "namn": "Ta beslut",
+      "rad": "Gruppen läser allas förslag, ett i taget, och väljer sedan tillsammans det som den tror är bäst för alla.",
+      "grupp": "4–6 elever eller en klass i grupper om 4",
+      "tid": "15–25 min",
+      "plats": "inne",
+      "material": [
+        "En mössa eller en låda per grupp",
+        "Post-it-lappar och pennor"
+      ],
+      "steg": [
+        "Säg vad gruppen ska bestämma, som vad ni ska göra på fredag: ”Ni är klara när alla förslag har hörts och ni har valt ett tillsammans.”",
+        "Visa med en elev hur ni säger något om varje förslag: ”Jag gillar … Jag undrar …” Säg högt när någon gör det.",
+        "Låt var och en tänka själv, skriva ett förslag på en post-it-lapp och lägga den i mössan.",
+        "Låt gruppen välja en läsare som blandar lapparna, drar en och läser upp den. Sedan säger var och en vad hen tycker om förslaget.",
+        "Fortsätt tills alla förslag är lästa. Låt gruppen vrida och vända på dem och välja det som den tror är bäst för alla.",
+        "Fastnar gruppen, låt alla visa en till fem fingrar för varje förslag. Räkna ihop fingrarna, och fråga om alla kan stå bakom förslaget som får flest.",
+        "Samla gruppen: ”Vad gjorde någon som hjälpte er att lyssna på alla?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Lapparna har inga namn. Då handlar samtalet om idéerna.",
+        "Välj ett beslut som gruppen får fatta på riktigt, som en lek, en plats eller hur ni firar något.",
+        "Den som tvekar får säga ”pass” och säga sitt sist i varvet, innan läsaren drar nästa lapp.",
+        "De yngsta ritar sitt förslag, och du visar lapparna en i taget."
+      ],
+      "bild": "mal-02.svg",
+      "alt": "Ett barn läser upp en lapp, lådan med förslagen står på bordet, och två barn lyssnar"
+    },
+    {
+      "id": "mal-03",
+      "kategori": "mal",
+      "nr": 3,
+      "namn": "Konstruktiv debatt",
+      "rad": "Två halvor av gruppen letar argument för och emot, och gruppen är klar när varje halva kan säga den andras bästa argument.",
+      "grupp": "4–6 elever eller en klass i grupper om 4–6",
+      "tid": "20–30 min",
+      "plats": "inne",
+      "material": [
+        "En fråga med två sidor, skriven på tavlan",
+        "Papper och pennor"
+      ],
+      "steg": [
+        "Säg: ”Ingen vinner i dag. Ni är klara när ni kan säga den andra sidans bästa argument.”",
+        "Visa med en elev hur man först säger vad den andra sidan sa: ”Du säger att … Jag tänker att …” Säg högt när någon gör det.",
+        "Dela varje grupp i två halvor. Den ena halvan letar argument för och den andra emot i fem minuter.",
+        "Låt halvorna sitta mittemot varandra och debattera i fem minuter. Var och en svarar på det den andra sidan sa och säger sitt argument.",
+        "Avbryt, och låt varje halva enas om den andra halvans bästa argument och säga det.",
+        "Låt hela gruppen sammanfatta vad den nu vet om frågan, och skriv upp det på tavlan.",
+        "Samla gruppen: ”Vilket argument från den andra sidan fick dig att tänka nytt?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Välj en fråga som eleverna bryr sig om och som inte handlar om någon här, som ”Ska mobilen ligga i en låda under dagen?”",
+        "Säg att sidan är en roll, oavsett vad eleven själv tycker.",
+        "Den som inte vill tala i debatten kan anteckna argumenten och läsa upp den andra halvans bästa.",
+        "De yngsta tar ställning till en enkel fråga, som om det är roligast att leka inne eller ute."
+      ],
+      "bild": "mal-03.svg",
+      "alt": "Två par står mittemot varandra, en i det vänstra paret säger ett argument med handen framåt, och det högra paret lyssnar"
+    },
+    {
+      "id": "mal-04",
+      "kategori": "mal",
+      "nr": 4,
+      "namn": "Tidsresenärerna",
+      "rad": "Tidsresenärer från framtiden berättar hur gruppens problem blev löst, och gruppen väljer sedan en idé att pröva nu.",
+      "grupp": "6–10 elever eller en klass",
+      "tid": "15–25 min",
+      "plats": "inne",
+      "material": [
+        "Ett problem som hela gruppen känner igen",
+        "Lappar med tidpunkterna: i eftermiddag, i morgon, nästa vecka, om ett år och om tio år"
+      ],
+      "steg": [
+        "Säg: ”I dag får vi besök från framtiden. Tidsresenärerna vet hur vårt problem blev löst. Vi är klara när vi har valt en idé att pröva.”",
+        "Ge minst tre elever som vill vara tidsresenärer var sin lapp med en tidpunkt.",
+        "Visa med en elev hur du svarar som tidsresenär: ”Jag kommer från nästa vecka. Vi löste det så här: …” Säg högt när någon gör det.",
+        "Låt tidsresenärerna stå framme och lyssna medan de andra berättar om problemet, till exempel: ”Det blir bråk om vem som får vara med på rasten.”",
+        "Fråga ”Hur blev det löst?” och låt tidsresenärerna berätta, en minut var, från den närmaste tidpunkten till den som ligger längst bort.",
+        "Låt gruppen välja en idé från framtiden att pröva från i dag, och skriv upp den.",
+        "Samla gruppen: ”Vad sa någon som hjälpte er att bli överens?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Låt tidsresenärerna hitta på och överdriva.",
+        "Den som inte kommer på något kan spåna med gruppen först, eller vara tidsresenär tillsammans med en kompis.",
+        "Välj ett problem som hela gruppen delar och som inte pekar ut någon.",
+        "För de äldre kan två tidsresenärer från samma tidpunkt berätta om två olika lösningar."
+      ],
+      "bild": "mal-04.svg",
+      "alt": "En tidsresenär landar med ett hopp och armarna ut, och tre barn vänder sig mot hen och lyssnar"
+    },
+    {
+      "id": "mal-05",
+      "kategori": "mal",
+      "nr": 5,
+      "namn": "Klassens topplista",
+      "rad": "Gruppen gör en topplista med sina bästa tips för att samarbeta, högst sex, och alla har varit med och valt dem.",
+      "grupp": "4–8 elever eller en klass",
+      "tid": "20–30 min",
+      "plats": "inne",
+      "material": [
+        "Papper och pennor",
+        "Ett stort papper till topplistan, som får sitta uppe i flera veckor"
+      ],
+      "steg": [
+        "Säg: ”Vi gör en topplista med våra bästa tips för att samarbeta, högst sex. Vi är klara när den sitter uppe och alla har valt.”",
+        "Visa med en elev hur ni ser till att båda tipsen hörs: ”Nu har jag sagt mitt. Vad har du skrivit?” Säg högt när någon gör det.",
+        "Låt var och en tänka själv en stund och skriva ner sina bästa tips för att samarbeta.",
+        "Låt eleverna berätta sina tips för varandra i par och enas om sina tre bästa.",
+        "Skriv upp parens tips på det stora papperet och lägg ihop dem som säger samma sak.",
+        "Låt gruppen välja: var och en sätter tre streck vid de tips hen tycker mest om. Ring in de sex med flest, och häng upp listan.",
+        "Samla gruppen: ”Vad gjorde någon som hjälpte er att välja tips?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Skriv tipsen som det man gör, som ”Vi tittar på den som pratar” och ”Vi frågar alla innan vi bestämmer”.",
+        "Påminn om topplistan de kommande veckorna, säg högt när någon gör det som står där, och låt gruppen ändra den.",
+        "Den som inte vill säga sitt tips högt kan låta en kompis läsa det.",
+        "De yngsta säger sina tips, och du skriver dem och ritar en liten bild till varje."
+      ],
+      "bild": "mal-05.svg",
+      "alt": "Ett barn håller upp topplistan, och två barn räcker upp handen med fler tips"
+    },
+    {
+      "id": "mal-06",
+      "kategori": "mal",
+      "nr": 6,
+      "namn": "Spå i framtiden!",
+      "rad": "Var och en skriver rubriker i en tidning från framtiden, och gruppen gör sedan en gemensam förstasida om det den vill nå.",
+      "grupp": "4–8 elever eller en klass",
+      "tid": "20–30 min",
+      "plats": "inne",
+      "material": [
+        "En förstasida på A4 till var och en, med tidningens namn överst",
+        "Pennor",
+        "Ett stort papper till gruppens förstasida"
+      ],
+      "steg": [
+        "Säg: ”Ni får en tidning som kommer ut om ett år. Vad står det om vår grupp? Vi är klara när vi har gjort en förstasida tillsammans.”",
+        "Visa med en elev hur ni frågar: ”Får vi ta med din rubrik?” Säg högt när någon gör det.",
+        "Dela ut förstasidorna. Låt var och en skriva rubriker själv, om gruppen, om sig själv eller om något ni arbetar med.",
+        "Låt eleverna läsa de rubriker de vill för varandra i par eller små grupper.",
+        "Om en rubrik gör er glada, fråga: ”Vad gjorde vi för att komma dit?” Om den oroar, fråga: ”Hur kan vi klara det på bästa sätt?”",
+        "Gör gruppens förstasida tillsammans, med tre till fem rubriker som stärker gruppen och några rader om vad ni gjorde för att komma dit.",
+        "Samla gruppen: ”Vilken rubrik från någon annan fick dig att tänka nytt?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Ge eleverna tid att tänka efter, och ta emot alla rubriker, också dem som oroar.",
+        "Byt ett år mot en termin, om det passar bättre.",
+        "De yngsta ritar en bild från framtiden och säger sin rubrik, som du skriver.",
+        "Häng upp gruppens förstasida, och läs den igen när tiden har gått."
+      ],
+      "bild": "mal-06.svg",
+      "alt": "Två barn håller upp en tidning mellan sig och läser rubrikerna"
+    },
+    {
+      "id": "mal-07",
+      "kategori": "mal",
+      "nr": 7,
+      "namn": "Du sa, jag tänker",
+      "rad": "En grupp som har haft en konflikt lyssnar på varandra med en talpinne och enas om vad den gör nu.",
+      "grupp": "4–6 elever",
+      "tid": "15–20 min",
+      "plats": "inne",
+      "material": [
+        "En talpinne per grupp, som en penna eller en liten pinne"
+      ],
+      "steg": [
+        "Säg: ”Vi lyssnar på varandra med talpinnen. Vi är klara när vi har bestämt tillsammans vad vi gör nu.” Sätt er i en ring där ingen stör.",
+        "Visa med en elev hur man lyssnar till punkt och sedan säger ”När du säger att …, så tänker jag att …” Säg högt när någon gör det.",
+        "Låt talpinnen gå ett varv. Var och en tar upp något någon har sagt förut, och börjar med ”När du säger att …”.",
+        "Låt gruppen fundera tyst en minut: ”Vad är klokt för gruppen att göra nu?” Låt sedan talpinnen gå ett varv till, med en tanke var.",
+        "Låt gruppen ta ett gemensamt beslut och säga det högt, som ”Det här gör vi nu: vi turas om med pennan.”",
+        "Samla gruppen: ”Hur kändes det när de andra lyssnade på dig till punkt?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Gör aktiviteten när känslorna har lagt sig och eleverna kan resonera tillsammans.",
+        "Ett exempel på meningen: ”När du säger att du ska ha pennan, så tänker jag att jag inte får vara med.”",
+        "Den som inte vill säga något skickar talpinnen vidare och får den igen i nästa varv.",
+        "Säger en elev att hen har blivit kränkt, följer du skolans rutin. Den går före aktiviteten."
+      ],
+      "bild": "mal-07.svg",
+      "alt": "Tre barn sitter i en ring, och ett håller talpinnen och pratar medan två vänder sig mot hen och lyssnar"
+    },
+    {
+      "id": "mal-08",
+      "kategori": "mal",
+      "nr": 8,
+      "namn": "Öde ö-pyramiden",
+      "rad": "Gruppen rangordnar tio saker att ha med sig till en öde ö, och är klar när alla kan förklara ordningen.",
+      "grupp": "4–5 elever eller en klass i grupper om 4",
+      "tid": "20–30 min",
+      "plats": "inne",
+      "material": [
+        "Tio lappar per grupp: vatten, rep, tändstickor, filt, ficklampa, kniv, karta, fiskelina, presenning och plåster",
+        "En pyramid på ett papper, med plats för en lapp överst och sedan två, tre och fyra",
+        "En tärning"
+      ],
+      "steg": [
+        "Säg: ”Ni har strandat på en öde ö med tio saker. Lägg dem i en pyramid. Ni är klara när alla kan förklara ordningen.”",
+        "Låt var och en först tänka själv i en minut: vilken sak är viktigast, och varför?",
+        "Visa med en elev hur ni frågar alla innan ni lägger en lapp: ”Ska vattnet ligga överst?” Säg högt när någon gör det.",
+        "Låt gruppen lägga pyramiden tillsammans, med den viktigaste saken överst.",
+        "Ge eleverna var sitt nummer. När pyramiden ligger klar, slår du tärningen, och slår igen om ingen har numret. Den med numret förklarar ordningen.",
+        "Säg sedan att havet tar fyra saker. Låt gruppen enas om vilka sex den behåller.",
+        "Samla gruppen: ”Vad gjorde någon så att alla kom till tals?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Det finns ingen rätt ordning. Alla behöver kunna förklara den, eftersom ingen vet vem tärningen väljer.",
+        "Den som tärningen väljer får ta med sig en kompis och förklara tillsammans.",
+        "De yngsta får bilder på lapparna och sex saker i tre rader.",
+        "Byt ämne efter gruppen: vad ni packar till en utflykt, eller vad som gör en grupp bra."
+      ],
+      "bild": "mal-08.svg",
+      "alt": "Ett barn lutar sig över en pyramid av lappar och lägger den översta, och två barn tittar på"
+    },
+    {
+      "id": "mal-09",
+      "kategori": "mal",
+      "nr": 9,
+      "namn": "Först överens",
+      "rad": "Eleverna väljer mellan två saker, i par och sedan i grupper om fyra, och går till en vägg när alla är överens.",
+      "grupp": "4–8 elever eller en klass",
+      "tid": "15–25 min",
+      "plats": "inne",
+      "material": [
+        "Två skyltar, A och B, på var sin vägg",
+        "Sex till tio val med två sidor, som sommar eller vinter",
+        "Tavlan"
+      ],
+      "steg": [
+        "Säg: ”Ni väljer mellan två saker och går till en vägg först när ni är överens. Vi är klara när vi vet flera sätt att bli överens.”",
+        "Visa med en elev hur ni frågar innan ni går: ”Varför vill du det?” Säg högt när någon gör det.",
+        "Låt eleverna ställa sig i par i mitten av rummet. Läs ett val, som ”Vill ni hellre kunna flyga eller kunna bli osynliga?”, och peka på väggarna.",
+        "Låt paren prata tills de är överens och gå till sin vägg tillsammans.",
+        "Stanna efter några val och fråga: ”Hur blev ni överens?” Skriv sätten på tavlan, som att turas om, kompromissa eller lyssna på skälen.",
+        "Låt två par gå ihop till en grupp om fyra. Nu ska alla fyra vara överens.",
+        "Samla gruppen: ”Vilket sätt att bli överens kändes bäst för alla?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Välj roliga val som inte handlar om någon i gruppen. För de äldre kan valen vara dilemman om nätet.",
+        "Ett par som inte blir överens stannar i mitten och berättar varför. Det är också ett svar.",
+        "Går det inte jämnt ut, blir ett par tre eller en grupp sex.",
+        "Se efter vem som ger med sig. Låt den som brukar ge med sig säga sitt först nästa gång."
+      ],
+      "bild": "mal-09.svg",
+      "alt": "Ett par står och pratar, och ett par som har blivit överens går sida vid sida mot skylten"
+    },
+    {
+      "id": "mal-10",
+      "kategori": "mal",
+      "nr": 10,
+      "namn": "Gruppens överenskommelse",
+      "rad": "Gruppen enas om tre till fem saker som gör att alla känner sig trygga, och skriver dem inuti en ritad människa.",
+      "grupp": "4–8 elever eller en klass",
+      "tid": "20–30 min",
+      "plats": "inne",
+      "material": [
+        "Ett stort papper med konturen av en människa",
+        "Post-it-lappar och pennor"
+      ],
+      "steg": [
+        "Säg: ”Vi ska bestämma hur vi är mot varandra, så att alla känner sig trygga. Vi är klara när alla kan stå för det.”",
+        "Visa med en elev hur man säger till: ”Det kan jag inte stå för. Kan vi skriva …?” Säg högt när någon gör det.",
+        "Fråga: ”Vad gör att du känner dig trygg i en grupp?” Låt var och en skriva en eller två saker på post-it-lappar.",
+        "Låt eleverna läsa sina lappar för varandra i par och lägga ihop dem som säger samma sak.",
+        "Sätt lapparna runt människan. Låt gruppen enas om tre till fem saker. Skriv dem inuti människan som något ni gör.",
+        "Läs sakerna högt och fråga om alla kan stå för dem. Skriv om det som behövs, och låt alla skriva sitt namn runt människan.",
+        "Samla gruppen: ”Vad gjorde någon som hjälpte er att lyssna på alla?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Har gruppen svårt att komma igång, ge exempel: vi lyssnar på den som pratar, ingen tvingas vara med, och vi har roligt tillsammans.",
+        "Hellre tre saker som alla minns än tio. Skriv dem som det ni gör, som ”Vi väntar på varandra”.",
+        "Häng upp människan och läs den innan nästa aktivitet. Låt gruppen ändra den när det behövs."
+      ],
+      "bild": "mal-10.svg",
+      "alt": "Två barn skriver på ett stort papper med en ritad människa"
+    },
+    {
+      "id": "mal-11",
+      "kategori": "mal",
+      "nr": 11,
+      "namn": "Välkommen hit",
+      "rad": "Gruppen tar ställning till påståenden om att höra till och bestämmer sedan vad den gör för att alla ska känna sig välkomna.",
+      "grupp": "4–8 elever eller en klass",
+      "tid": "20–30 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Två skyltar, JA och NEJ, några meter från varandra",
+        "Tre eller fyra påståenden på en lapp till dig",
+        "Tavlan eller ett papper"
+      ],
+      "steg": [
+        "Säg: ”Vi ska prata om att vara välkommen. Ni är klara när ni har valt två saker som gör att alla känner sig välkomna här.”",
+        "Visa med en elev hur ni lyssnar när någon säger varför hen står där, och tackar. Säg högt när någon gör det.",
+        "Låt eleverna börja i mitten. Läs ett påstående, som ”Det är svårt att börja i en ny klass.” Låt dem ställa sig vid JA, NEJ eller i mitten.",
+        "Låt två eller tre säga varför de står där. Den som vill får byta plats. Läs nästa påstående.",
+        "Fråga: ”Vad kan vi göra för att alla ska känna sig välkomna?” Låt eleverna tänka själva, prata i par och sedan i gruppen.",
+        "Låt gruppen välja två saker som alla vill göra, och skriv upp dem.",
+        "Samla gruppen: ”Vad gjorde någon i dag som fick dig att känna dig välkommen?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Välj påståenden efter gruppen, och inga om någon här eller om något som har hänt nyss.",
+        "Mitten är också ett svar. Den som inte vill välja står där och behöver inte säga varför.",
+        "Ett påstående till: ”Det är lätt att vara ny.”",
+        "De yngsta svarar på två påståenden och visar tummen upp eller ned där de sitter."
+      ],
+      "bild": "mal-11.svg",
+      "alt": "Två barn står vid skylten JA, ett i mitten och ett vid skylten NEJ"
+    },
+    {
+      "id": "mal-12",
+      "kategori": "mal",
+      "nr": 12,
+      "namn": "Målkastet",
+      "rad": "Gruppen sätter ett eget mål för hur många poäng den kastar ihop på två minuter, och prövar igen tills den når det.",
+      "grupp": "4–8 elever eller en klass",
+      "tid": "20–30 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Fyra korgar eller rockringar",
+        "Mjuka bollar eller ärtpåsar",
+        "Tejp eller rep till kastlinjen",
+        "En klocka"
+      ],
+      "steg": [
+        "Säg: ”Ni kastar ihop så många poäng ni kan på två minuter, alla tillsammans. Först sätter ni ert eget mål. Ni är klara när ni når det.”",
+        "Ställ korgarna två till fem meter från kastlinjen. Den närmaste ger 1 poäng, sedan 3 och 5, och den längst bort 9. Lägg bollarna bakom linjen.",
+        "Visa med en elev hur hämtaren ger bollen i handen till kastaren, och hur man föreslår: ”Ska vi pröva så här?” Säg högt när någon gör det.",
+        "Låt gruppen sätta sitt mål och välja kastare och hämtare. Hämtarna går in från sidan och ger bollarna till kastarna bakom linjen.",
+        "Starta klockan. Hämtarna får inte hjälpa bollarna ner i korgen, och ingen byter jobb förrän klockan har stannat.",
+        "Räkna poängen tillsammans. Låt gruppen prata om vad den ändrar, och spela igen tills den når målet, högst fyra gånger.",
+        "Samla gruppen: ”Vad gjorde någon som hjälpte er mot målet?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Ge inga egna förslag. Låt gruppen hitta sitt sätt.",
+        "Den som inte vill kasta har ett lika viktigt jobb som hämtare.",
+        "Fira när gruppen når sitt mål, och skriv upp rekordet.",
+        "De yngsta kastar ärtpåsar i rockringar nära kastlinjen."
+      ],
+      "bild": "mal-12.svg",
+      "alt": "Ett barn kastar en boll mot en rockring på golvet, och ett annat barn böjer sig efter en boll vid sidan"
+    },
+    {
+      "id": "mal-13",
+      "kategori": "mal",
+      "nr": 13,
+      "namn": "Tjugo i ordning",
+      "rad": "Gruppen rör vid tjugo numrerade lappar i ordning, så fort den kan, och alla rör vid minst en lapp.",
+      "grupp": "4–10 elever",
+      "tid": "15–25 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Tjugo lappar eller koner med talen 1 till 20, som du lägger huller om buller i fältet",
+        "Ett rep eller tejp runt fältet, fem gånger fem meter",
+        "En klocka"
+      ],
+      "steg": [
+        "Säg: ”Rör vid lapparna i ordning, från 1 till 20. Vi tar tid. Ni är klara när ni har nått 20 och alla har rört vid en.”",
+        "Säg regeln: bara en i taget får vara inne i fältet. Den som går in rör vid nästa tal, eller flera i rad, och går ut igen.",
+        "Visa med en elev hur ni byter vid kanten: den som kommer ut säger nästa tal högt, som ”Nu sju!” Säg högt när någon gör det.",
+        "Låt gruppen planera i två minuter utanför fältet: vem tar vilka tal, och i vilken ordning går ni in?",
+        "Starta klockan. Ett fel tal räknas inte. Stoppa klockan vid 20, och säg tiden.",
+        "Låt gruppen planera om och försöka igen, tre eller fyra gånger. Skriv upp tiderna, så att gruppen ser hur den blir snabbare.",
+        "Samla gruppen: ”Vem kom med en idé som hjälpte?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Gruppen tävlar mot sin egen tid. Fira varje gång den slår sitt rekord.",
+        "Den som inte vill springa kan gå och ta tal nära kanten.",
+        "De yngsta har tio lappar. De äldre har trettio, eller bokstäver som de rör vid i bokstavsordning.",
+        "Lägg lapparna en bit från väggar och bord."
+      ],
+      "bild": "mal-13.svg",
+      "alt": "Ett barn böjer sig efter en kon i fältet, och två barn väntar vid kanten, där det ena pekar på nästa kon"
+    },
+    {
+      "id": "mal-14",
+      "kategori": "mal",
+      "nr": 14,
+      "namn": "Rollkorten",
+      "rad": "Gruppen löser en uppgift där var och en har en roll som behövs, och sedan byter alla roll.",
+      "grupp": "4–8 elever eller en klass i grupper om 4",
+      "tid": "20–30 min",
+      "plats": "inne",
+      "material": [
+        "Fyra rollkort per grupp: den som hämtar, den som läser, den som frågar och den som hejar",
+        "En uppgift per varv, som tar fem till tio minuter, med instruktionen på en lapp",
+        "Materialet till uppgifterna, hos dig"
+      ],
+      "steg": [
+        "Säg: ”I dag har alla en roll som gruppen behöver. Ni klarar uppgiften när alla har gjort sin del.”",
+        "Dela ut rollkorten: en hämtar materialet hos dig, en läser instruktionen, en frågar dig och en hejar på gruppen och ser till att alla hörs.",
+        "Visa med en elev hur den som hejar låter: ”Bra idé! Vad tycker du?” Säg högt när någon gör det.",
+        "Låt var och en säga en mening som passar sin roll. Låt sedan grupperna göra uppgiften. Svara bara på frågor från den som frågar.",
+        "Låt alla skicka rollkortet till grannen, och ge gruppen en ny uppgift. Gör två varv i dag och resten ett annat pass, tills alla har haft alla roller.",
+        "Samla gruppen: ”Hur hjälpte de andra dig att göra din del?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Går det inte jämnt ut, har en elev två roller i en grupp om tre, eller så hejar två i en grupp om fem.",
+        "Välj en uppgift som ingen klarar ensam, som ett pussel eller att bygga något efter en ritning.",
+        "De yngsta får bilder på rollkorten: en låda, en bok, ett frågetecken och en tumme upp."
+      ],
+      "bild": "mal-14.svg",
+      "alt": "Fyra barn med var sin roll, där ett bär lådan med materialet, ett läser instruktionen, ett räcker upp handen och ett hejar med armarna upp"
+    },
+    {
+      "id": "mal-15",
+      "kategori": "mal",
+      "nr": 15,
+      "namn": "Vi leder en lek",
+      "rad": "Två elever leder en samarbetslek för gruppen, och gruppen hjälper dem att lyckas.",
+      "grupp": "4–8 elever eller en klass",
+      "tid": "20–30 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Ett av korten med en samarbetslek som gruppen redan har gjort, till exempel ”Rockringen” eller ”Spegel, spegel”",
+        "Det som leken behöver"
+      ],
+      "steg": [
+        "Säg: ”I dag leder två av er en lek. Vi andra hjälper dem att lyckas. Vi är klara när de har lett leken och samtalet efteråt.”",
+        "Visa med en ledare hur gruppen hjälper: alla tittar på hen och blir tysta när hen räcker upp handen och säger stopp. Säg högt när någon gör det.",
+        "Låt ledarna börja leken så som du brukar: säga målet, visa hur man gör och fråga om något är oklart.",
+        "Låt ledarna leda leken. Håll dig i bakgrunden, och hjälp bara när ledarna ber om det.",
+        "Låt ledarna leda samtalet: ”Vad gjorde någon som hjälpte gruppen?”",
+        "Samla gruppen: ”Vad gjorde ledarna bra, och vem vill leda nästa gång?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Fråga två som vill leda, och planera med dem dagen före: vilket kort de väljer, vad de säger först och vad de visar.",
+        "Börja med en lek som gruppen kan, och låt ledarna vara två, så att ingen står ensam framme.",
+        "Prata med ledarna efteråt: ”Vad gick bra, och varför? Vad skulle ni ändra nästa gång?”",
+        "Låt alla som vill få leda någon gång under terminen."
+      ],
+      "bild": "mal-15.svg",
+      "alt": "Två ledare står framför gruppen, den ena visar med handen och den andra räcker upp handen som signal, och tre barn lyssnar"
+    },
+    {
+      "id": "mal-16",
+      "kategori": "mal",
+      "nr": 16,
+      "namn": "Tackrundan",
+      "rad": "Efter en aktivitet tackar var och en någon i gruppen för något hen gjorde, och alla får ett tack.",
+      "grupp": "4–8 elever eller en klass",
+      "tid": "5–10 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Inget"
+      ],
+      "steg": [
+        "Säg före en aktivitet, i en ring: ”Se vad den till höger gör för gruppen. Efteråt tackar du hen. Vi är klara när alla har fått ett tack.”",
+        "Visa med en elev hur ett tack låter: ”Tack för att du väntade på mig när jag kom efter.” Säg högt när någon gör det.",
+        "Ställ gruppen i samma ring när aktiviteten är slut.",
+        "Samla gruppen: ”Vad har vi gjort bra för varandra i dag?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som inte kommer på något kan säga ”Tack för att du var med”, eller få hjälp av gruppen.",
+        "Gör tackrundan efter varje aktivitet i några veckor. Ett enkelt tack som blir en vana ändrar stämningen i gruppen.",
+        "Byt håll i ringen nästa gång, så att alla tackar och får tack av fler.",
+        "Fråga när tacket har gått runt: ”Hur kändes det att få ett tack?”"
+      ],
+      "bild": "mal-16.svg",
+      "alt": "Fyra barn i en ring, och ett vänder sig till den bredvid med handen framåt och tackar"
+    },
+    {
+      "id": "mal-17",
+      "kategori": "mal",
+      "nr": 17,
+      "namn": "Uppskattningsnätet",
+      "rad": "Gruppen bygger ett nät av garn där alla håller i tråden, och var och en får höra vad någon uppskattar hos hen.",
+      "grupp": "4–8 elever eller en klass",
+      "tid": "10–20 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Ett garnnystan",
+        "En lapp till varje elev, med namnet på den hen ska kasta till",
+        "En sax"
+      ],
+      "steg": [
+        "Säg: ”Vi bygger ett nät tillsammans. Det är klart när alla håller i tråden och har fått en uppskattning.” Ställ er i en ring.",
+        "Visa hur ni gör: håll i änden, titta på eleven du kastar till och säg ”Jag uppskattar att du hälsar på alla.” Säg högt när någon gör det.",
+        "Låt den som får nystanet hålla i tråden, säga vad hen uppskattar hos eleven på lappen och kasta till den eleven. Den sista kastar till dig.",
+        "Fortsätt tills alla håller i tråden. Låt gruppen titta på nätet och lyfta det lite tillsammans.",
+        "Gå runt och klipp tråden mellan händerna, så att alla får behålla en bit: ”Biten påminner om nätet vi har byggt.”",
+        "Samla gruppen: ”Hur kändes det att höra vad någon uppskattar hos dig?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Gör i förväg en ordning där alla är med, och ge varje elev en lapp med namnet på den hen kastar till.",
+        "Uppskattningen gäller något den andra gör: att hen hjälper, lyssnar eller får andra att skratta.",
+        "Ge den som tvekar en mening att börja med, som ”Jag uppskattar att du är med”.",
+        "Aktiviteten passar som avslutning när gruppen ska skiljas eller en termin är slut."
+      ],
+      "bild": "mal-17.svg",
+      "alt": "Fyra barn i en ring med garntrådar mellan händerna, och ett håller upp nystanet för att kasta"
+    },
+    {
+      "id": "mal-18",
+      "kategori": "mal",
+      "nr": 18,
+      "namn": "Löv på trädet",
+      "rad": "Var och en skriver på ett löv vad hen tar med sig från gruppen, och tillsammans blir löven gruppens träd.",
+      "grupp": "4–8 elever eller en klass",
+      "tid": "15–25 min",
+      "plats": "inne",
+      "material": [
+        "Ett stort papper med ett träd, med rötter, stam och grenar",
+        "Ett löv av papper till var och en",
+        "Pennor och tejp"
+      ],
+      "steg": [
+        "Säg: ”Vi gör ett träd av det vi tar med oss från vår tid tillsammans. Trädet är klart när allas löv sitter på det.”",
+        "Visa med en elev hur man lyssnar när någon läser sitt löv och säger något tillbaka: ”Det minns jag också!” Säg högt när någon gör det.",
+        "Ge var och en ett löv. Låt alla skriva själva i några minuter vad de tar med sig: något de har lärt sig, något roligt eller en vän.",
+        "Låt eleverna läsa sina löv för varandra i par.",
+        "Gå till trädet tillsammans. Låt var och en läsa sitt löv och tejpa fast det där hen vill på trädet.",
+        "Säg sedan något om trädet: ”Rötterna är det vi har byggt på, stammen är gruppen, och löven är det vi tar med oss.”",
+        "Samla gruppen: ”Vad har någon i gruppen gett dig som du tar med dig?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Säg inget i förväg om var löven ska sitta. Var och en väljer själv.",
+        "Den som inte vill läsa högt kan sätta upp sitt löv utan att läsa, eller låta dig läsa det.",
+        "De yngsta ritar på sitt löv, och du skriver det de säger.",
+        "Aktiviteten passar som avslutning när gruppen ska skiljas eller en termin är slut."
+      ],
+      "bild": "mal-18.svg",
+      "alt": "Ett barn sträcker sig upp och sätter ett löv på trädet, och ett annat barn väntar med sitt löv"
+    },
+    {
+      "id": "mal-19",
+      "kategori": "mal",
+      "nr": 19,
+      "namn": "Välj en symbol",
+      "rad": "Var och en väljer en sak som står för tiden i gruppen och berättar varför, och gruppen lyssnar tills alla har berättat.",
+      "grupp": "4–8 elever eller en klass i grupper om 4–6",
+      "tid": "15–25 min",
+      "plats": "inne",
+      "material": [
+        "Många små saker i mitten, fler än antalet elever, som leksaker, vykort, stenar, knappar och nycklar"
+      ],
+      "steg": [
+        "Säg: ”Här är många saker. Välj en som säger något om hur det har varit i vår grupp. Vi är klara när alla har berättat.”",
+        "Visa hur du berättar och hur de andra tittar på dig: ”Jag valde stenen, för att vi har blivit en stadig grupp.” Säg högt när någon gör det.",
+        "Låt alla titta på sakerna en stund i tystnad och välja en var.",
+        "Låt varje grupp sätta sig i en ring, och låt var och en först berätta för den bredvid om sin sak.",
+        "Låt var och en i ringen visa sin sak och säga varför hen valde den.",
+        "Låt alla behålla sin sak, om det går, som ett minne från gruppen.",
+        "Samla gruppen: ”Vilken sak säger något om oss allihop?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som inte vill berätta kan visa sin sak och säga ett ord.",
+        "Välj saker som går att ge bort, som stenar, kulor eller vykort, om eleverna ska få behålla dem.",
+        "Aktiviteten passar som avslutning när gruppen ska skiljas eller en termin är slut."
+      ],
+      "bild": "mal-19.svg",
+      "alt": "Små saker ligger på golvet, ett barn håller upp sin sak och ett annat böjer sig ned och väljer"
+    },
+    {
+      "id": "mal-20",
+      "kategori": "mal",
+      "nr": 20,
+      "namn": "Gruppens temperatur",
+      "rad": "Gruppen visar med handen hur samarbetet går och enas om en sak som gör det en siffra bättre nästa gång.",
+      "grupp": "4–8 elever eller en klass",
+      "tid": "10–15 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Tavlan eller ett papper"
+      ],
+      "steg": [
+        "Säg efter en aktivitet: ”Nu tar vi gruppens temperatur. Vi är klara när vi har valt en sak som gör vårt samarbete bättre.”",
+        "Visa med en elev hur ni pratar om gruppen och inte om någon: ”Vi lyssnade bra. Vi kan vänta in alla bättre.” Säg högt när någon gör det.",
+        "Fråga: ”Hur varmt var vårt samarbete i dag?” Låt alla tänka och visa samtidigt på ”ett, två, tre”, från en knuten näve till fem fingrar.",
+        "Säg vad du ser, utan namn: ”Jag ser mest treor och fyror, och några tvåor.”",
+        "Låt eleverna prata i par: ”Vad gjorde vi som var bra? Vad skulle göra det en siffra bättre?”",
+        "Låt paren säga sina idéer i gruppen. Låt gruppen enas om en sak att pröva nästa gång, och skriv upp den.",
+        "Samla gruppen: ”Vad sa någon i paret som hjälpte er att hitta idén?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Siffran gäller gruppens samarbete. Fråga efter vad gruppen kan göra, och låt ingen peka ut någon.",
+        "Den som inte vill visa låter handen ligga kvar. Det är också ett svar.",
+        "De yngsta visar med armen: längs sidan, snett upp eller rakt upp.",
+        "Ta temperaturen efter samma slags aktivitet några gånger, så att gruppen ser om siffran stiger."
+      ],
+      "bild": "mal-20.svg",
+      "alt": "Fyra barn i rad visar med ena armen hur varmt samarbetet var, från längs sidan till rakt upp"
+    },
+    {
+      "id": "skapa-01",
+      "kategori": "skapa",
+      "nr": 1,
+      "namn": "Skapa en saga",
+      "rad": "Gruppen hittar på en saga ur en bild och ritar den i sex rutor, och var och en ritar minst en ruta.",
+      "grupp": "4–8 elever i två grupper, eller en klass i grupper om 3–4",
+      "tid": "30–40 min",
+      "plats": "inne",
+      "material": [
+        "Ett startkort per grupp med en bild, som en drake vid en sjö",
+        "En serieremsa med sex tomma rutor på ett A3 per grupp",
+        "Pennor, en färg per elev"
+      ],
+      "steg": [
+        "Säg: ”Ni ska hitta på en saga tillsammans ur er bild. Ni är klara när alla har ritat i sagan.” Ge varje grupp ett startkort.",
+        "Visa med en elev hur man bygger vidare på den andras idé i stället för att byta idé: ”Ja, och sedan …” Säg högt när någon gör det.",
+        "Låt gruppen prata om bilden i fem minuter: vem är med, vad händer och hur slutar det?",
+        "Ge gruppen serieremsan och varje elev en penna, alla i olika färger. Låt gruppen bestämma vad som händer i varje ruta och vem som ritar vilken.",
+        "Låt eleverna rita i 15 minuter. Var och en ritar minst en ruta, och de andra hjälper till med idéer.",
+        "Låt grupperna mötas två och två och berätta sin saga för varandra, ruta för ruta. De som lyssnar säger vad de tyckte bäst om.",
+        "Samla gruppen: ”Vilken idé från någon annan blev en del av er saga?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som inte vill rita kan berätta vad som händer i rutan medan en kamrat ritar, och lägga till en detalj när hen vill.",
+        "För de yngsta räcker fyra rutor och en bild de känner igen. De äldre kan skriva pratbubblor.",
+        "Efteråt kan eleverna skriva sagan i par eller bygga vidare på den."
+      ],
+      "bild": "skapa-01.svg",
+      "alt": "Tre barn vid ett bord, det i mitten ritar på serieremsan och de två andra lutar sig fram och pekar"
+    },
+    {
+      "id": "skapa-02",
+      "kategori": "skapa",
+      "nr": 2,
+      "namn": "Mandala med naturmaterial",
+      "rad": "Gruppen lägger en mandala av kottar, löv och stenar, och var och en samlar ett slags material till mönstret.",
+      "grupp": "4–8 elever, eller en klass i par eller grupper om 3–5",
+      "tid": "30–40 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Kottar, löv, stenar och pinnar som gruppen samlar",
+        "En bild på en mandala att visa",
+        "En kamera eller en surfplatta"
+      ],
+      "steg": [
+        "Säg: ”En mandala är ett mönster som är likadant runt om. Ni lägger en tillsammans, och ni är klara när allas material finns med.” Visa bilden.",
+        "Visa med en elev hur man föreslår: ”Ska vi lägga stenarna runt mitten?” Säg högt när någon gör det.",
+        "Låt gruppen planera i fem minuter: vad ligger i mitten, vilka ringar kommer runt den, och vem samlar vilket material?",
+        "Låt var och en samla två nävar av sitt material i fem minuter. Alla håller sig där du ser dem.",
+        "Låt gruppen lägga mandalan inifrån och ut i tio minuter. Var och en lägger sitt material, och gruppen hjälps åt att få mönstret likadant runt om.",
+        "Låt gruppen berätta hur de tänkte. I en klass tittar grupperna på varandras. Fotografera mandalorna.",
+        "Samla gruppen: ”Hur blev ni överens när ni ville olika?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "I ett par kan eleverna turas om: den ena bestämmer över mandalan, och den andra hämtar material och uppmuntrar. Sedan byter de.",
+        "Inne kan du ta med en låda med naturmaterial, och gruppen delar upp det innan de lägger mandalan.",
+        "För de yngsta räcker en mitt och en ring. De äldre kan dela mönstret i fyra eller åtta lika delar."
+      ],
+      "bild": "skapa-02.svg",
+      "alt": "Två barn på huk på var sin sida om en ring av kottar och stenar på marken, med en sten i mitten, och det ena lägger dit en sten"
+    },
+    {
+      "id": "skapa-03",
+      "kategori": "skapa",
+      "nr": 3,
+      "namn": "Brobygge med papper",
+      "rad": "Gruppen bygger en bro av papper och tejp mellan två bord, och var och en har en roll i bygget.",
+      "grupp": "4–8 elever eller en klass i grupper om 3–4",
+      "tid": "30–40 min",
+      "plats": "inne",
+      "material": [
+        "Tio A4-papper och en tejprulle per grupp",
+        "Två bord per grupp, med 30 cm emellan",
+        "Papper och penna till ritningen",
+        "Suddgummin att lägga på bron"
+      ],
+      "steg": [
+        "Säg: ”Ni ska bygga en bro av papper och tejp från ett bord till ett annat. Ni är klara när bron bär sig själv och alla har byggt.”",
+        "Ge varje elev en roll utöver att bygga: sköta materialet, ta tiden, rita eller heja. Två kan dela en roll.",
+        "Visa med en elev hur ni bjuder in någon: ”Vill du sätta dit nästa bit?” Säg högt när någon gör det.",
+        "Låt gruppen rita bron i fem minuter innan någon rör materialet.",
+        "Låt gruppen bygga i 15 minuter. Den som tar tiden säger till när halva tiden har gått.",
+        "Låt en grupp i taget berätta hur de tänkte. Lägg sedan ett suddgummi i taget mitt på bron, och räkna högt tillsammans tills bron ger efter.",
+        "Samla gruppen: ”Vad gjorde någon som hjälpte bron att hålla?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som tvekar kan börja med att ta tiden eller rita, och gå in i bygget när hen vill.",
+        "Gör det lättare med ett kortare avstånd mellan borden, och svårare med ett längre eller med färre papper.",
+        "I en klass lägger grupperna ihop broarnas suddgummin. Fråga vad som gjorde bron stark.",
+        "Ett annat pass bygger grupperna bron en gång till, med en idé från en annan grupp, och prövar igen."
+      ],
+      "bild": "skapa-03.svg",
+      "alt": "Två bord med en bro av papper emellan, ett barn håller i bron och ett tejpar fast den"
+    },
+    {
+      "id": "skapa-04",
+      "kategori": "skapa",
+      "nr": 4,
+      "namn": "Gemensamt brobygge",
+      "rad": "Två grupper bygger var sin halva av en bro, och bron blir hel först när halvorna möts och håller ihop.",
+      "grupp": "4–8 elever i två grupper, eller en klass i grupper om 2–4, två och två som vängrupper",
+      "tid": "30–40 min",
+      "plats": "inne",
+      "material": [
+        "Byggmaterial, som kaplastavar, sugrör, lego, papper eller kartong",
+        "Tejp",
+        "Ett bord per grupp, med ett mellanrum till vängruppens bord",
+        "Papper och penna till ritningen"
+      ],
+      "steg": [
+        "Säg: ”Ni och er vängrupp bygger var sin halva av en bro. Ni är klara när halvorna möts och håller ihop.” Visa vilka grupper som är vängrupper.",
+        "Visa med en elev hur man föreslår något för den andra gruppen: ”Ska vi pröva så här?” Säg högt när någon gör det.",
+        "Låt varje grupp prata och rita sin halva i fem minuter. Var och en bestämmer vilken del hen bygger.",
+        "Låt varje grupp bygga sin halva i 10–15 minuter. Halvorna ska mötas över mellanrummet.",
+        "Låt grupperna föra ihop halvorna två och två. Fråga: ”Hur får ni halvorna att bli en hel bro?” Låt dem pröva och laga i fem minuter.",
+        "Låt grupperna visa broarna två och två och berätta hur de fick ihop dem.",
+        "Samla gruppen: ”Hur var det att samarbeta i er grupp, och med er vängrupp?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Blir en grupp över i en klass, bygger tre grupper var sin del av samma bro.",
+        "För mer spänning hänger ett lakan mellan grupperna medan de bygger.",
+        "Det blir lättare om vängrupperna bestämmer bredden och höjden där halvorna möts innan de bygger.",
+        "Den som tvekar kan vara budbärare och bära frågor mellan grupperna."
+      ],
+      "bild": "skapa-04.svg",
+      "alt": "Två barn som håller fram var sin halva av en bro, och halvorna möts på mitten ovanpå två torn"
+    },
+    {
+      "id": "skapa-05",
+      "kategori": "skapa",
+      "nr": 5,
+      "namn": "Ärtor och tandpetare",
+      "rad": "Gruppen bygger ett torn av blötlagda gula ärtor och tandpetare, och var och en bygger med sin del av materialet.",
+      "grupp": "4–8 elever eller en klass i grupper om 3–4",
+      "tid": "25–35 min",
+      "plats": "inne",
+      "material": [
+        "Omkring 40 gula ärtor per grupp i en skål, blötlagda ett dygn",
+        "Omkring 60 tandpetare per grupp",
+        "Papper och penna till ritningen"
+      ],
+      "steg": [
+        "Säg: ”Ni ska bygga ett torn som är högt och stadigt. Ni är klara när det står själv och allas ärtor finns med.”",
+        "Dela ärtorna och tandpetarna lika, så att var och en har en egen hög framför sig.",
+        "Visa med en elev hur man håller bygget stadigt åt den som sticker en tandpetare i en ärta: ”Jag håller, sätt dit!” Säg högt när någon gör det.",
+        "Låt gruppen prata och rita bygget i tre minuter innan någon börjar bygga.",
+        "Låt gruppen bygga i 15 minuter och ändra bygget när något inte håller. Var och en bygger med sina egna ärtor och tandpetare.",
+        "Låt varje grupp visa sitt bygge och berätta vad som lyckades och vad de skulle göra annorlunda.",
+        "Samla gruppen: ”Vad gjorde någon som hjälpte bygget?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Uppgiften kan också vara att bygga något fritt eller en bestämd form, som en kub eller ett hus.",
+        "För de yngsta räcker en platt figur, som en triangel. De äldre kan bygga efter en ritning som du har gjort.",
+        "Den som tvekar kan börja med att hålla bygget stadigt medan de andra sticker i."
+      ],
+      "bild": "skapa-05.svg",
+      "alt": "Två barn på huk vid ett bygge av tandpetare och ärtor på golvet, det ena sätter dit en ärta, och ett tredje tittar på"
+    },
+    {
+      "id": "skapa-06",
+      "kategori": "skapa",
+      "nr": 6,
+      "namn": "Tidningstornet",
+      "rad": "Gruppen bygger ett högt och stadigt torn av en tidning och tejp, och var och en bygger med sina tidningssidor.",
+      "grupp": "4–8 elever eller en klass i grupper om 2–4",
+      "tid": "20–30 min",
+      "plats": "inne",
+      "material": [
+        "En tidning per grupp",
+        "En tejprulle per grupp",
+        "Ett måttband"
+      ],
+      "steg": [
+        "Säg: ”Bygg ett så högt torn ni kan av en tidning och tejp. Ni är klara när det står själv i tio sekunder och alla har byggt.”",
+        "Visa med en elev hur man frågar efter den andras idé innan man bygger: ”Hur tänker du?” Säg högt när någon gör det.",
+        "Låt gruppen dela tidningen lika och fundera i tre minuter på hur tornet ska se ut.",
+        "Låt gruppen bygga tornet i tio minuter.",
+        "Mät tornet från foten till toppen när det har stått själv i tio sekunder. Faller det, får gruppen två minuter att laga det.",
+        "Låt gruppen berätta hur de tänkte. I en klass visar grupperna sina torn för varandra och lägger ihop tornens höjder.",
+        "Samla gruppen: ”Vad gjorde någon som hjälpte tornet att stå?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Säg inget om vilket torn som är högst. Fråga vad som gjorde tornet stadigt. I tekniken kan ni tala om material, tyngdpunkt och stödyta.",
+        "Ett annat pass bygger gruppen en gång till, med det de ville göra bättre eller en idé från en annan grupp, och mäter igen.",
+        "Det blir svårare med vind från ett papper som någon viftar med, eller med A4-papper i stället för tidning.",
+        "Den som tvekar kan ha hand om tejpen och riva bitar till de andra."
+      ],
+      "bild": "skapa-06.svg",
+      "alt": "Tre barn vid ett högt torn av tidningspapper, ett tejpar högst upp, ett håller i tornet och ett räcker fram tejpen"
+    },
+    {
+      "id": "skapa-07",
+      "kategori": "skapa",
+      "nr": 7,
+      "namn": "Bygg och rita vidare",
+      "rad": "Var och en börjar en teckning eller ett bygge, och gruppen skickar dem runt tills alla har lagt till något i allas.",
+      "grupp": "4–8 elever eller en klass, i grupper om 3–5",
+      "tid": "15–25 min",
+      "plats": "inne",
+      "material": [
+        "Papper och pennor, lera eller byggmaterial som lego, lika mycket till var och en"
+      ],
+      "steg": [
+        "Säg: ”Var och en börjar en teckning, och sedan ritar ni vidare på varandras. Ni är klara när alla har fått tillbaka sin egen.”",
+        "Visa med en elev hur man lägger till något utan att sudda och lämnar över: ”Här får du.” ”Tack!” Säg högt när någon gör det.",
+        "Skriv fraserna på tavlan. Låt gruppen sätta sig runt ett bord. Var och en ritar eller bygger i två minuter.",
+        "Säg: ”Skicka vidare!” varannan minut. Alla lämnar åt samma håll, tittar på det de får och lägger till något, tills var och en har fått tillbaka sitt.",
+        "Låt var och en visa det hen började med och berätta hur det blev.",
+        "Samla gruppen: ”Vad lade någon annan till som du blev glad över?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Säg till den som har svårt att släppa sitt eget att det kommer tillbaka som något nytt. Det är det roliga.",
+        "Den som inte vill berätta visar det hen började med, och de andra säger vad de lade till.",
+        "Gör det lättare med grupper om tre och byte varje minut, och svårare med ett tema, som ett djur som inte finns."
+      ],
+      "bild": "skapa-07.svg",
+      "alt": "Två par barn, och i varje par räcker det ena sin teckning till det andra"
+    },
+    {
+      "id": "skapa-08",
+      "kategori": "skapa",
+      "nr": 8,
+      "namn": "Bygg en maskot",
+      "rad": "Gruppen bygger en maskot som får stå på gruppens bord, och var och en gör en del av den.",
+      "grupp": "4–8 elever eller en klass i grupper om 3–5, gärna en grupp som arbetar ihop länge",
+      "tid": "30–40 min",
+      "plats": "inne",
+      "material": [
+        "Lera, återvinningsmaterial, piprensare, tyg eller papper",
+        "Lim, tejp och sax",
+        "Papper och penna till skissen"
+      ],
+      "steg": [
+        "Säg: ”Ni ska bygga en maskot för er grupp. Ni är klara när alla har gjort en del av den.”",
+        "Visa med en elev hur man ber om hjälp: ”Kan du hålla medan jag limmar?” Säg högt när någon gör det.",
+        "Låt gruppen prata och rita en skiss i fem minuter: hur ser maskoten ut, vad heter den, och vem gör vilken del, som huvudet eller benen?",
+        "Låt eleverna bygga sina delar och sätta ihop dem i 20 minuter. Stanna gruppen halvvägs och fråga: ”Är alla med? Hur kan ni hjälpa varandra?”",
+        "Låt gruppen visa sin maskot och berätta vad den heter och vem som gjorde vad.",
+        "Samla gruppen: ”Vilken del har någon annan gjort som du gillar extra mycket?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Maskoten står på gruppens bord så länge gruppen finns.",
+        "I en tillfällig grupp kan maskoten vara ett djur eller en figur ur en bok ni läser.",
+        "Maskoten går bra att göra i slöjden eller tekniken.",
+        "Den som tvekar kan välja maskotens färger eller namn och bygga med när hen vill."
+      ],
+      "bild": "skapa-08.svg",
+      "alt": "Gruppens maskot står på bordet, och barnen på var sin sida pekar och sträcker fram händerna mot den"
+    },
+    {
+      "id": "skapa-09",
+      "kategori": "skapa",
+      "nr": 9,
+      "namn": "Spagettihuset",
+      "rad": "Gruppen bygger ett hus av spagetti och skumgodis, och alla bygger med sin del tills huset står i tio sekunder.",
+      "grupp": "4–8 elever eller en klass i grupper om 3–4",
+      "tid": "20–25 min",
+      "plats": "inne",
+      "material": [
+        "30 okokta spagettistrån per grupp",
+        "15 små skumgodisar per grupp",
+        "En klocka som alla ser"
+      ],
+      "steg": [
+        "Säg: ”Ni ska bygga ett hus av spagetti och skumgodis. Ni är klara när huset står själv i tio sekunder och alla har byggt med sin del.”",
+        "Dela materialet så att var och en har några spagettistrån och skumgodisar framför sig.",
+        "Visa med en elev hur man frågar den som inte har sagt något än: ”Vad tycker du?” Säg högt när någon gör det.",
+        "Låt gruppen planera i två minuter utan att röra materialet. Var och en säger minst en idé.",
+        "Låt gruppen bygga i sju minuter. Säg till när det är en minut kvar.",
+        "Gå till ett hus i taget och räkna högt till tio tillsammans med alla. Låt gruppen berätta hur de tänkte.",
+        "Samla gruppen: ”Vilken idé från planeringen hjälpte er när ni byggde?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Ett hus som rasar är ett försök. Fråga vad gruppen lärde sig, och låt dem bygga en gång till.",
+        "Säg att materialet är till för att bygga med. Byt skumgodiset mot modellera om någon inte vill ta i det.",
+        "Den som tvekar kan hålla huset stadigt medan de andra bygger.",
+        "Det blir svårare om taket ska bära ett suddgummi."
+      ],
+      "bild": "skapa-09.svg",
+      "alt": "Ett hus av spagetti och skumgodis på golvet, två barn på huk håller i det, och två står bredvid och jublar"
+    },
+    {
+      "id": "skapa-10",
+      "kategori": "skapa",
+      "nr": 10,
+      "namn": "Människomaskinen",
+      "rad": "Gruppen bygger en maskin av sina kroppar, och var och en är en del som rör sig och låter.",
+      "grupp": "4–8 elever eller en klass i grupper om 4–6",
+      "tid": "15–20 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Inget"
+      ],
+      "steg": [
+        "Säg: ”Ni ska bygga en maskin av er själva. Ni är klara när alla är med och maskinen går.”",
+        "Visa med en elev hur man passar in sin del i takten: ”Jag gör mitt ljud när du sträcker armen.” Säg högt när någon gör det.",
+        "Låt gruppen bestämma på två minuter vad maskinen gör, till exempel popcorn, glass eller ren tvätt.",
+        "Låt en elev börja med en rörelse och ett ljud som hen upprepar. Nästa elev ställer sig nära och lägger till en egen rörelse och ett eget ljud.",
+        "Fortsätt tills alla är med. Säg: ”Maskinen går fortare!”, sedan ”Långsammare!” och sist ”Stopp!”",
+        "I en klass visar grupperna sina maskiner för varandra, och de som tittar gissar vad maskinen gör.",
+        "Samla gruppen: ”Hur fick ni era delar att passa ihop?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Delarna kan stå nära utan att röra vid varandra. Den som vill lägger en hand på en axel, om den andra säger ja.",
+        "Den som tvekar kan vara knappen som sätter igång och stänger av maskinen.",
+        "Med de äldre kan maskinen visa något ur ett ämne, som vattnets kretslopp eller ett hjärta.",
+        "Med de yngsta kan du själv vara den första delen."
+      ],
+      "bild": "skapa-10.svg",
+      "alt": "Fyra barn i rad med kantiga armar, omväxlande på huk och stående, som delar i en maskin"
+    },
+    {
+      "id": "skapa-11",
+      "kategori": "skapa",
+      "nr": 11,
+      "namn": "Kroppsbokstäver",
+      "rad": "Gruppen skriver ett ord med sina kroppar, bokstav för bokstav, och varje bokstav behöver hela gruppen.",
+      "grupp": "4–8 elever i två grupper, eller en klass i grupper om 3–4",
+      "tid": "20–30 min",
+      "plats": "inne eller ute",
+      "beroring": true,
+      "material": [
+        "Lappar med korta ord, som SOL, HUS eller KATT, ett ord per grupp"
+      ],
+      "steg": [
+        "Säg: ”Ni ska skriva ett ord med era kroppar. Varje bokstav behöver hela gruppen, och ni är klara när de andra kan läsa ert ord.”",
+        "Visa med en elev ett L, och fråga först: ”Får jag ta din arm?” Låt alla pröva T, O och X. Säg högt när någon gör det.",
+        "Ge varje grupp en lapp med ett ord. Låt grupperna planera och öva sina bokstäver i fem minuter, på var sin plats där de andra inte ser.",
+        "Låt en grupp i taget visa sitt ord, en bokstav i taget. De andra sitter, säger bokstäverna högt och läser ordet.",
+        "Samla gruppen: ”Hur kom ni överens om hur en bokstav skulle se ut?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som inte vill röras vid står en bit ifrån de andra, och bokstaven går ändå att läsa.",
+        "Bokstäverna går att göra stående eller liggande på golvet eller marken.",
+        "För de yngsta räcker en bokstav, gärna den första i någons namn.",
+        "De äldre kan visa ett ordspråk, ett ord per grupp, så att klassen läser det tillsammans."
+      ],
+      "bild": "skapa-11.svg",
+      "alt": "Två barn bildar bokstaven A med huvudena ihop och händerna som strecket, och ett tredje läser och pekar"
+    },
+    {
+      "id": "skapa-12",
+      "kategori": "skapa",
+      "nr": 12,
+      "namn": "Jättetangram",
+      "rad": "Gruppen lägger en figur av stora pusselbitar i kartong, och var och en flyttar bara sina egna bitar.",
+      "grupp": "4–7 elever eller en klass i grupper om 3–5",
+      "tid": "20–30 min",
+      "plats": "inne",
+      "material": [
+        "Ett tangram per grupp, sju bitar klippta ur en stor kartong",
+        "Bilder på figurer att lägga, som ett hus och en båt",
+        "En bild på kvadraten där linjerna mellan bitarna syns"
+      ],
+      "steg": [
+        "Säg: ”Ni lägger en figur av bitarna. Var och en flyttar bara sina egna bitar, så ni behöver varandra. Ni är klara när figuren ser ut som bilden.”",
+        "Dela ut bitarna så att alla har minst en.",
+        "Visa med en elev hur man säger var en bit passar utan att ta den: ”Din triangel kan ligga här.” Säg högt när någon gör det.",
+        "Ta fram bilden på den första figuren. Låt gruppen titta och prata en minut, och sedan lägga figuren.",
+        "Ta fram en figur till på samma sätt. Sist lägger gruppen alla sju bitarna till en kvadrat. Fastnar de, visar du bilden där linjerna syns.",
+        "Samla gruppen: ”Vad sa någon som hjälpte dig att hitta platsen för din bit?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Förstora en mall för tangram och klipp bitarna stora, så att alla kan stå runt och se.",
+        "Det blir lättare med bilder där linjerna mellan bitarna syns, och svårare med bara figurens kontur, eller när gruppen bara får peka.",
+        "Den som tvekar kan börja med att hålla bilden och lägga sin bit när hen vill."
+      ],
+      "bild": "skapa-12.svg",
+      "alt": "Två barn på huk lägger stora pusselbitar på golvet, och ett tredje håller upp bilden på figuren"
+    },
+    {
+      "id": "skapa-13",
+      "kategori": "skapa",
+      "nr": 13,
+      "namn": "Ägget",
+      "rad": "Gruppen bygger ett skydd åt ett rått ägg som ska släppas, och var och en har sin egen uppgift.",
+      "grupp": "4–8 elever eller en klass i grupper om 3–4",
+      "tid": "25–35 min",
+      "plats": "inne eller ute",
+      "material": [
+        "Ett rått ägg per grupp",
+        "Tio sugrör, fem A4-papper, en tejprulle och en sax per grupp",
+        "Ett uppgiftskort per elev",
+        "En plastduk att släppa äggen på"
+      ],
+      "steg": [
+        "Säg: ”Ni bygger ett skydd åt ett ägg, och var och en har en egen uppgift. Ni har lyckats när ägget faller från ett bord och är helt.”",
+        "Låt alla ta var sitt kort: en är ensam om att klippa, en om att tejpa, en får inte prata, och de andra bygger med bara en hand.",
+        "Visa med en elev som inte får prata hur man frågar så att hen kan nicka: ”Menar du så här?” Säg högt när någon gör det.",
+        "Låt gruppen planera och rita skyddet i fem minuter, och sedan bygga i tio minuter och lägga ägget i skyddet.",
+        "Låt varje grupp visa sitt skydd och berätta hur de tänkte. Släpp äggen ett i taget från samma bord när alla har räknat ner.",
+        "Samla gruppen: ”Hur hjälpte ni den som inte fick prata?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Släpp äggen själv, över plastduken eller ute. Ingen elev står på en stol.",
+        "Går ägget sönder, fråga vad gruppen skulle ändra och låt dem bygga en gång till.",
+        "Med de yngsta räcker uppgifterna att klippa och tejpa. Är någon allergisk mot ägg, tar ni en vattenballong i stället.",
+        "Den som tvekar väljer sitt kort först, och ingen får ett kort som pekar ut något hen har svårt med."
+      ],
+      "bild": "skapa-13.svg",
+      "alt": "Det mittersta barnet håller upp ägget i sitt skydd, och de två andra sträcker sig upp mot det"
+    },
+    {
+      "id": "skapa-14",
+      "kategori": "skapa",
+      "nr": 14,
+      "namn": "Uppfinnarna",
+      "rad": "Gruppen bygger en uppfinning av återvinningsmaterial, ger den ett namn och visar den, och allas saker finns med i den.",
+      "grupp": "4–8 elever eller en klass i grupper om 3–5",
+      "tid": "30–40 min",
+      "plats": "inne",
+      "material": [
+        "En låda med återvinningsmaterial, som toalettrullar, kartonger, korkar, sugrör och garn",
+        "Tejp, lim och sax"
+      ],
+      "steg": [
+        "Säg: ”Ni ska uppfinna något som någon behöver, bygga det och visa det. Ni är klara när allt ni väljer ur lådan finns med.”",
+        "Låt var och en välja två saker ur lådan och lägga dem i gruppens hög.",
+        "Visa med en elev hur man hittar en plats för den andras sak: ”Din kork kan bli ett hjul!” Säg högt när någon gör det.",
+        "Låt gruppen titta på högen och bestämma på fem minuter: vad gör uppfinningen, och vem behöver den?",
+        "Låt gruppen bygga uppfinningen i 15 minuter. Var och en sätter fast sina egna saker.",
+        "Låt gruppen ge uppfinningen ett namn och visa den, och alla säger en mening. I en klass säger de som tittar vad de skulle använda den till.",
+        "Samla gruppen: ”Hur fick ni allas saker att passa i samma uppfinning?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som inte vill tala inför de andra kan visa hur uppfinningen fungerar medan någon annan berättar.",
+        "Med de yngsta kan uppfinningen hjälpa en figur ur en saga. De äldre kan lösa ett problem på skolan.",
+        "Samla återvinningsmaterial några veckor innan, gärna tillsammans med eleverna."
+      ],
+      "bild": "skapa-14.svg",
+      "alt": "En uppfinning med hjul och antenn på golvet, ett barn pekar, ett på huk visar hur den fungerar och ett jublar"
+    },
+    {
+      "id": "skapa-15",
+      "kategori": "skapa",
+      "nr": 15,
+      "namn": "Gruppens blomma",
+      "rad": "Gruppen ritar en blomma där mitten visar det som alla har gemensamt och varje kronblad något som är ens eget.",
+      "grupp": "4–8 elever eller en klass i grupper om 3–5",
+      "tid": "20–30 min",
+      "plats": "inne",
+      "material": [
+        "Ett A3-papper per grupp",
+        "Pennor i olika färger, en färg per elev"
+      ],
+      "steg": [
+        "Säg: ”Ni ritar gruppens blomma, med det ni har gemensamt i mitten och ett kronblad för var och en. Ni är klara när alla blad är fyllda.”",
+        "Visa med en elev hur man frågar hela gruppen och väntar in allas svar: ”Vilket ställe har alla varit på?” Säg högt när någon gör det.",
+        "Låt gruppen rita en stor cirkel i mitten och ett blad per elev runt den.",
+        "Låt gruppen leta efter tre saker som alla har gemensamt, som något de gillar, kan eller har varit med om, och skriva dem i mitten.",
+        "Låt var och en skriva eller rita något eget med sin penna i sitt blad.",
+        "Låt gruppen visa blomman och berätta vad som står i mitten. I en klass visar grupperna för varandra.",
+        "Samla gruppen: ”Vad fick du veta om någon i gruppen som du inte visste förut?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Hittar gruppen bara en eller två saker som alla har gemensamt, räcker det.",
+        "Den som inte vill berätta mycket om sig själv kan välja något enkelt, som en färg eller ett djur.",
+        "Med de yngsta skriver du det eleverna säger, och de ritar.",
+        "Sätt upp blommorna i klassrummet så länge grupperna arbetar ihop."
+      ],
+      "bild": "skapa-15.svg",
+      "alt": "Det mittersta barnet håller upp gruppens blomma, och de två andra jublar"
+    },
+    {
+      "id": "skapa-16",
+      "kategori": "skapa",
+      "nr": 16,
+      "namn": "Gruppens flagga",
+      "rad": "Gruppen hittar på sitt namn, sin flagga och sin ramsa, och alla får med en idé i något av dem.",
+      "grupp": "4–8 elever eller en klass i grupper om 3–5, gärna en grupp som arbetar ihop länge",
+      "tid": "30–40 min",
+      "plats": "inne",
+      "material": [
+        "Ett A3-papper per grupp",
+        "Pennor eller färg",
+        "En pinne och tejp till flaggan"
+      ],
+      "steg": [
+        "Säg: ”Ni ska hitta på gruppens namn, flagga och ramsa. Ni är klara när alla har fått med en idé.”",
+        "Visa med en elev hur man frågar om alla kan stå för ett förslag: ”Kan alla tänka sig det här namnet?” Säg högt när någon gör det.",
+        "Låt var och en berätta något hen gillar eller är bra på, och låt gruppen leta efter något som alla har gemensamt.",
+        "Låt alla föreslå namn, och låt gruppen välja ett som alla kan stå för.",
+        "Låt gruppen rita flaggan i tio minuter och hitta på en kort ramsa med namnet. Var och en ritar en del av flaggan.",
+        "Låt gruppen visa flaggan och säga ramsan. I en klass gör grupperna det för varandra.",
+        "Samla gruppen: ”Hur kom ni överens om namnet?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Säg först att namnet ska vara snällt och handla om gruppen själv, och att grupperna inte tävlar mot varandra.",
+        "Den som inte vill säga ramsan kan hålla flaggan.",
+        "Med de yngsta kan namnet vara ett djur, och ramsan kan vara namnet, som ni klappar i stavelser.",
+        "Använd flaggan och ramsan när gruppen börjar något eller firar."
+      ],
+      "bild": "skapa-16.svg",
+      "alt": "Fyra barn i rad, de två i mitten håller upp flaggan mellan sig och de två ytterst jublar"
+    },
+    {
+      "id": "skapa-17",
+      "kategori": "skapa",
+      "nr": 17,
+      "namn": "Papperskedjan",
+      "rad": "Var och en skriver på pappersremsor vad hen gör för gruppen, och remsorna blir en kedja som behöver allas länkar.",
+      "grupp": "4–8 elever eller en klass",
+      "tid": "20–25 min",
+      "plats": "inne",
+      "material": [
+        "Pappersremsor i olika färger, omkring 3 × 20 cm, två eller tre per elev",
+        "Pennor",
+        "Tejp eller häftapparat"
+      ],
+      "steg": [
+        "Säg: ”Vi ska göra gruppens kedja. Varje länk är något som någon av oss gör för gruppen, och kedjan är klar när allas länkar sitter i den.”",
+        "Ge exempel: ”Jag lyssnar”, ”Jag får andra att skratta” och ”Jag hjälper den som fastnar”.",
+        "Visa med en elev hur man föreslår en länk åt en kamrat: ”Jag har sett att du hjälper andra.” Säg högt när någon gör det.",
+        "Låt var och en skriva en eller två saker på sina remsor i fem minuter. Kamraterna får föreslå högt.",
+        "Låt var och en läsa sina remsor högt, eller låta en kamrat läsa, och tejpa fast dem som ringar i kedjan. Häng upp kedjan.",
+        "Samla gruppen: ”Vilken länk är du glad att gruppen har?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som inte kommer på något kan få hjälp av en kamrat som säger vad hen har sett.",
+        "Med de yngsta skriver du det eleverna säger, och de ritar på remsan.",
+        "Kedjan kan växa. Efter en aktivitet sätter gruppen på en länk för något som någon gjorde för de andra.",
+        "I en klass läser var och en bara en remsa högt."
+      ],
+      "bild": "skapa-17.svg",
+      "alt": "Tre barn i rad som håller upp papperskedjan mellan sig"
+    },
+    {
+      "id": "skapa-18",
+      "kategori": "skapa",
+      "nr": 18,
+      "namn": "Gruppennan",
+      "rad": "Gruppen ritar en figur med en penna som sitter i allas snören, och pennan rör sig rätt bara när alla hjälps åt.",
+      "grupp": "4–6 elever eller en klass i grupper om 4",
+      "tid": "20–25 min",
+      "plats": "inne",
+      "material": [
+        "En tjock tuschpenna per grupp, med ett gummiband runt",
+        "Ett snöre per elev, omkring en meter, knutet i gummibandet",
+        "Ett stort papper per grupp, fasttejpat på golvet eller ett bord",
+        "En bild på ett hus att rita"
+      ],
+      "steg": [
+        "Säg: ”Ni ska rita ett hus med pennan, och var och en håller i ett snöre. Ni är klara när huset är ritat och ingen har rört pennan.”",
+        "Låt eleverna ställa sig runt papperet och ta var sitt snöre. Ställ pennan med spetsen mot papperet, mitt på.",
+        "Visa med en elev hur den ena drar och den andra släpper efter: ”Nu drar jag, släpp lite!” Säg högt när någon gör det.",
+        "Låt gruppen öva i två minuter på en rak linje och en cirkel.",
+        "Ta fram bilden på huset. Låt gruppen planera i två minuter vem som drar åt vilket håll, och sedan rita huset.",
+        "Låt gruppen rita en gång till, nu en figur som de väljer själva.",
+        "Samla gruppen: ”Hur visste du när du skulle dra och när du skulle släppa efter?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Det blir lättare med färre snören och en cirkel, och svårare om gruppen skriver sitt namn eller ritar utan att prata.",
+        "Den som tvekar kan börja med att säga vart pennan ska, och ta ett snöre när hen vill.",
+        "Med en klass kan grupperna rita samma figur och sedan titta på varandras och berätta hur de gjorde."
+      ],
+      "bild": "skapa-18.svg",
+      "alt": "Fyra barn som håller i var sitt snöre, och snörena möts i pennan på papperet på golvet"
+    },
+    {
+      "id": "skapa-19",
+      "kategori": "skapa",
+      "nr": 19,
+      "namn": "Bygg likadant",
+      "rad": "Gruppen kopierar ett bygge som står bakom en skärm, och alla turas om att gå och titta och beskriva.",
+      "grupp": "4–8 elever eller en klass i grupper om 3–4",
+      "tid": "15–25 min",
+      "plats": "inne",
+      "material": [
+        "Två likadana högar med lego eller byggklossar per grupp, 6–10 bitar i varje",
+        "En skärm per grupp, som en pärm som står upp några meter bort, med den ena högen hopbyggd bakom"
+      ],
+      "steg": [
+        "Säg: ”Bakom skärmen står ett bygge, och ni bygger ett likadant. Ni är klara när alla har gått dit och tittat och kopian är klar.”",
+        "Ge gruppen den andra högen. Skriv orden ovanpå, under och bredvid på tavlan.",
+        "Visa med en elev hur man frågar tillbaka när någon beskriver en bit: ”Ligger den röda ovanpå den blå?” Säg högt när någon gör det.",
+        "Låt en elev titta på bygget i tio sekunder och gå tillbaka. Hen berättar om en bit i taget, vilken färg den har och var den ligger.",
+        "De som bygger turas om att lägga och får fråga. Byt den som tittar tills alla har tittat minst en gång och kopian är klar.",
+        "Ta bort skärmen. Låt gruppen jämföra och säga vad som blev likadant.",
+        "Samla gruppen: ”Vilka ord hjälpte er mest att bygga likadant?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Det blir lättare med färre bitar i olika färger, och svårare med bitar i samma färg.",
+        "Den som tvekar kan gå och titta tillsammans med en kamrat.",
+        "Med de äldre kan en elev bygga det som står bakom skärmen."
+      ],
+      "bild": "skapa-19.svg",
+      "alt": "Ett barn på huk tittar på bygget bakom skärmen, och på andra sidan bygger två barn likadant"
+    },
+    {
+      "id": "skapa-20",
+      "kategori": "skapa",
+      "nr": 20,
+      "namn": "Kulbanan",
+      "rad": "Gruppen bygger en kulbana av kartong och toalettrullar, och kulan rullar hela vägen genom allas delar.",
+      "grupp": "4–8 elever eller en klass i grupper om 3–5",
+      "tid": "30–40 min",
+      "plats": "inne",
+      "material": [
+        "Omkring tio toalett- och hushållsrullar per grupp, hela eller kluvna",
+        "Kartong, tejp och sax",
+        "En kula eller en liten boll och en mugg per grupp"
+      ],
+      "steg": [
+        "Säg: ”Ni ska bygga en kulbana. Var och en bygger en del, och ni är klara när kulan rullar genom allas delar ner i muggen.”",
+        "Visa med en elev hur två grannar prövar skarven mellan sina delar: ”Rullar kulan från min del in i din?” Säg högt när någon gör det.",
+        "Låt gruppen planera i fem minuter: var börjar banan, i vilken ordning kommer delarna, och hur möts de?",
+        "Låt var och en bygga sin del i 15 minuter och prata ihop sig med grannarna i banan.",
+        "Låt gruppen pröva banan. Var och en håller sin del, och någon släpper kulan från den högsta. Gruppen lagar där den fastnar och prövar igen.",
+        "Låt gruppen tejpa fast banan mot en vägg, en stol eller en hög böcker och visa den. Alla tittar när kulan rullar.",
+        "Samla gruppen: ”Var fastnade kulan, och hur löste ni det tillsammans?” Säg vad eleverna gjorde för varandra, och låt var och en tacka grannen."
+      ],
+      "tanka": [
+        "Den som tvekar kan släppa kulan och säga var den fastnar.",
+        "Det blir lättare med en bana längs ett bord, och svårare om kulan ska byta riktning tre gånger.",
+        "Samla rullar några veckor innan, gärna tillsammans med eleverna."
+      ],
+      "bild": "skapa-20.svg",
+      "alt": "Två barn håller kulbanan i sicksack mellan sig, kulan ligger högst upp och muggen står längst ned, och ett tredje jublar"
+    }
+  ]
+}

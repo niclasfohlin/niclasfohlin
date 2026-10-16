@@ -15,7 +15,7 @@
 // med felkod 1 annars. Varje körning gör omkring 20 anrop mot timmens 500. Kräver Chrome. Se DRIFT.md under
 // Besöksstatistik.
 import { spawn } from 'node:child_process';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 
 const url = process.argv[2];
 if (!url) { console.error('Ange adressen till /statistik.'); process.exit(1); }
@@ -27,15 +27,22 @@ const RAKNINGEN_BORJADE = new Date(2026, 8, 28);
 
 // Provsiffrorna: 125 sidor och händelser, som veckan hade 2026-09-29. En av filerna är zip-filen med en metods filmer
 // (Niclas 2026-10-07: "Se till att nedladdning du fixar kommer i statistiken också på sidan"), med flest nedladdningar
-// så att den står överst bland filerna. En metod har en sida som slumpar skrivkort (Kortskrivning, 2026-10-14), och dess
-// besök ska stå under metoden med sidans namn; metoden har flest besök, så att den står överst.
+// så att den står överst bland filerna. Varje central sida som hör till en metod (src/data/centrala.json), som Ta fram
+// ett skrivkort (Kortskrivning, 2026-10-14) och Ta fram en aktivitet och Ta fram en brainbreak (Gruppstärkande
+// aktiviteter, 2026-10-16), har besök som ska stå under metoden med sidans namn; metoderna har flest besök, så att de
+// står överst.
 const ZIP = { path: 'fil:metod-7-filmer.zip', title: 'Metod 7: filmerna som zip' };
+const CENTRALA = JSON.parse(readFileSync(new URL('../src/data/centrala.json', import.meta.url), 'utf8')).filter((c) => c.slag === 'sida' && c.metod);
+const CENTRALA_METODER = [...new Set(CENTRALA.map((c) => c.metod))];
+const SIDOR = [
+  ...CENTRALA_METODER.map((metod, i) => ({ path: `/stodundervisning/${metod}`, title: `Metodprov ${i + 1} · Niclas Fohlin`, event: false, count: 20 })),
+  ...CENTRALA.map((c, i) => ({ path: c.adress, title: `${c.namn}: Metodprov ${CENTRALA_METODER.indexOf(c.metod) + 1} · Niclas Fohlin`, event: false, count: 4 + i })),
+];
 const PROV = Array.from({ length: 125 }, (_, i) => {
   const id = i + 1;
   if (id <= 6) return { path: `dela:facebook:stodundervisning/metod-${id}`, path_id: id, title: `Metod ${id}: delad på Facebook`, event: true, count: 1 };
   if (id === 7) return { ...ZIP, path_id: id, event: true, count: 9 };
-  if (id === 61) return { path: '/stodundervisning/metod-61', path_id: id, title: 'Metod 61 · Niclas Fohlin', event: false, count: 20 };
-  if (id === 62) return { path: '/stodundervisning/metod-61/skrivkort', path_id: id, title: 'Ta fram ett skrivkort: Metod 61 · Niclas Fohlin', event: false, count: 4 };
+  if (id > 60 && id <= 60 + SIDOR.length) return { ...SIDOR[id - 61], path_id: id };
   if (id <= 60) return { path: `fil:metod-${id}.docx`, path_id: id, title: `Metod ${id}: allt om metoden som Word`, event: true, count: 2 };
   return { path: `/stodundervisning/metod-${id}`, path_id: id, title: `Metod ${id} · Niclas Fohlin`, event: false, count: 5 };
 });
@@ -178,11 +185,15 @@ try {
     const syns = (filer ?? '').includes(ZIP.title);
     if (!syns) fel++;
     console.log(`${syns ? 'GRÖNT' : 'RÖTT '}  filmernas zip-fil står bland filerna${syns ? '' : `: ${(filer ?? '').slice(0, 200)}`}`);
-    // Besöken på sidan som slumpar skrivkort står under metoden, med sidans namn.
-    const metoder = await utvardera(`document.querySelector('[data-kategori="metoder"]')?.textContent ?? ''`);
-    const skrivkort = /Metod 61[\s\S]*4 på Ta fram ett skrivkort/.test(metoder ?? '');
-    if (!skrivkort) fel++;
-    console.log(`${skrivkort ? 'GRÖNT' : 'RÖTT '}  sidan som slumpar skrivkort står under metoden${skrivkort ? '' : `: ${(metoder ?? '').slice(0, 200)}`}`);
+    // Besöken på varje central sida står under sin metod, med sidans namn.
+    const rader = await utvardera(`[...document.querySelectorAll('[data-kategori="metoder"] li')].map((li) => li.textContent)`);
+    CENTRALA.forEach((c, i) => {
+      const metod = `Metodprov ${CENTRALA_METODER.indexOf(c.metod) + 1}`;
+      const rad = (rader ?? []).find((r) => r.includes(metod)) ?? '';
+      const ratt = rad.includes(`${4 + i} på ${c.namn}`);
+      if (!ratt) fel++;
+      console.log(`${ratt ? 'GRÖNT' : 'RÖTT '}  ${c.namn} står under metoden${ratt ? '' : `: ${rad.slice(0, 200) || (rader ?? []).join(' | ').slice(0, 200)}`}`);
+    });
   }
   await prova('7 dagar', klick('vecka'), mal0.vecka);
   await prova('30 dagar', klick('manad'), mal0.manad);

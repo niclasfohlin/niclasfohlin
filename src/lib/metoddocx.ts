@@ -18,7 +18,7 @@ import { arElevensBlad, FAKTAORD, faktatexter, harFaktatexter, harFragor, lastex
 import { filmerVid, grundUpphov, huvudfilm, metodensFilmer, stegDelar, stillbilder, STILLBILD_MATT, type FilmPlats, type MetodFilm } from './film';
 import { reservNyckel } from './reservbild';
 import { arkAdress, mallEtiketter, mallRutor as mallRutorAdresser, rutansText, serieAdress, svgMatt } from './bildserier';
-import { arBlad, arIfylltBlad, bildensAlt, bladVid, iDel, metodensPaBordet, PABORDET_MATT, paBordetVid, type Bladyta, type PaBordet } from './pabordet';
+import { arBlad, arIfylltBlad, arStaendeBlad, bildensAlt, bladVid, iDel, metodensPaBordet, PABORDET_MATT, paBordetVid, type Bladyta, type PaBordet } from './pabordet';
 import { listansNiva, skyltText, type Niva } from './nivaer';
 import { bladDelar, bladNamn, delensRad, forstaLed, kartan, metodensBlad, radensDel, wordId } from './karta';
 import { veckansLista, veckomaterial } from './veckomaterial';
@@ -87,7 +87,7 @@ type Boksektion = { not: string; niva: string; vad: string; farg: string; liggan
 // Ett sagoblad (sagoFlod): rutan Till läraren i sidfoten, eller på bokens blad ingen sidfot och en kortare upphovsrad.
 type Sagosektion = { not: string; bokblad: boolean };
 // Ett blad som en bild över hela den liggande sidan (bildblad()): sidans marginaler i twips, som följer bladets skrivytor.
-type Bladsektion = { top: number; bottom: number; left: number; right: number };
+type Bladsektion = { top: number; bottom: number; left: number; right: number; staende?: boolean };
 class Sektionsbyte { constructor(readonly kortark: boolean, readonly bok?: Boksektion, readonly saga?: Sagosektion, readonly liggande?: boolean, readonly blad?: Bladsektion) {} }
 type Flod = (Barn | Sektionsbyte)[];
 // Sidkartan (K-342; Niclas 2026-10-13: "System med att den drar från sidorna eller Yaml kommer aldrig få exakt paritet med
@@ -1420,12 +1420,19 @@ function faktaForsta(b: Boksektion, adress: string): Header {
 // Raden slutar 201,3 mm från sidans överkant, så att texten står en dryg millimeter under bildens nedersta linje och
 // sektionens sista stycke ryms med marginal före sidans nederkant vid 203,5 mm, också i Google Dokument.
 const BLADSIDA = { b: 297, h: 210, nederst: 198, snappMm: 2, minstMm: 4, marginalMm: 6.5, upphovMm: 201.3, upphov: 12 };
-function bladrutnat(ytor: Bladyta[], k: number) {
+// Ett stående blad (Vår grupp i Gruppstärkande aktiviteter, metodriggens TILL-SAJTEN 2026-10-16; Niclas: "stående A4a. Är
+// vanligare och snyggare"), som riggens BLADSIDA_STAENDE: bilden är 1050 × 1485 punkter, den sista raden att skriva på
+// slutar senast 285 mm från sidans överkant, och upphovet står lika långt från nederkanten som på det liggande bladet.
+const BLADSIDA_STAENDE = { ...BLADSIDA, b: 210, h: 297, nederst: 285, upphovMm: 288.3 };
+type Bladmatt = typeof BLADSIDA;
+/** Bladets sida: stående när bilden är högre än bred (arStaendeBlad i src/lib/pabordet.ts), annars liggande. */
+const bladsida = (b: PaBordet): Bladmatt => (arStaendeBlad(b) ? BLADSIDA_STAENDE : BLADSIDA);
+function bladrutnat(ytor: Bladyta[], k: number, S: Bladmatt = BLADSIDA) {
   // Kanterna i bildens punkter. Kanter som ligger nära varandra blir en.
-  const kanter = (varden: number[]) => { const ut: number[] = []; for (const v of [...new Set(varden)].sort((a, b) => a - b)) if (!ut.length || v - ut[ut.length - 1] > BLADSIDA.snappMm / k) ut.push(v); return ut; };
+  const kanter = (varden: number[]) => { const ut: number[] = []; for (const v of [...new Set(varden)].sort((a, b) => a - b)) if (!ut.length || v - ut[ut.length - 1] > S.snappMm / k) ut.push(v); return ut; };
   const narmast = (v: number, lista: number[]) => lista.reduce((bast, x) => (Math.abs(x - v) < Math.abs(bast - v) ? x : bast), lista[0]);
-  const tak = BLADSIDA.nederst / k;
-  const ramar = ytor.map((y) => ({ ...y, x0: y.x, x1: y.x + y.b, y0: y.y, y1: Math.min(y.y + y.h, tak) })).filter((y) => y.y1 - y.y0 > BLADSIDA.minstMm / k);
+  const tak = S.nederst / k;
+  const ramar = ytor.map((y) => ({ ...y, x0: y.x, x1: y.x + y.b, y0: y.y, y1: Math.min(y.y + y.h, tak) })).filter((y) => y.y1 - y.y0 > S.minstMm / k);
   const xs = kanter(ramar.flatMap((y) => [y.x0, y.x1])), ys = kanter(ramar.flatMap((y) => [y.y0, y.y1]));
   for (const y of ramar) { y.x0 = narmast(y.x0, xs); y.x1 = narmast(y.x1, xs); y.y0 = narmast(y.y0, ys); y.y1 = narmast(y.y1, ys); }
   return { xs, ys, ramar: ramar.filter((y) => y.x1 > y.x0 && y.y1 > y.y0) };
@@ -1435,28 +1442,30 @@ const bladytor = (b: PaBordet) => (arIfylltBlad(b) ? [] : b.ytor ?? []);
 // Bladets marginaler: tabellen börjar vid den första ytans kant, och resten av sidan är bildens. Ett blad utan celler
 // har 6,5 mm runt om.
 function bladmarginaler(b: PaBordet): Bladsektion {
-  const k = BLADSIDA.b / b.matt.bredd, { xs, ys } = bladrutnat(bladytor(b), k);
-  const minst = Math.round(BLADSIDA.marginalMm * MM);
-  if (!xs.length) return { top: minst, bottom: minst, left: minst, right: minst };
-  const m = { top: Math.round((ys[0] * k - 0.4) * MM), bottom: minst, left: Math.round(xs[0] * k * MM), right: Math.round((BLADSIDA.b - xs[xs.length - 1] * k) * MM) - 30 };
-  if (Math.min(m.top, m.left, m.right) < minst) throw new Error(`Bladet "${b.bild.rubrik}": en skrivyta ligger närmare papperets kant än ${String(BLADSIDA.marginalMm).replace('.', ',')} mm. Word varnar då för marginaler utanför det utskrivbara området; rita ytorna längre in (riggens docs/bladen.md).`);
+  const S = bladsida(b), k = S.b / b.matt.bredd, { xs, ys } = bladrutnat(bladytor(b), k, S);
+  const minst = Math.round(S.marginalMm * MM);
+  const staende = S === BLADSIDA_STAENDE || undefined;
+  if (!xs.length) return { top: minst, bottom: minst, left: minst, right: minst, staende };
+  const m = { top: Math.round((ys[0] * k - 0.4) * MM), bottom: minst, left: Math.round(xs[0] * k * MM), right: Math.round((S.b - xs[xs.length - 1] * k) * MM) - 30, staende };
+  if (Math.min(m.top, m.left, m.right) < minst) throw new Error(`Bladet "${b.bild.rubrik}": en skrivyta ligger närmare papperets kant än ${String(S.marginalMm).replace('.', ',')} mm. Word varnar då för marginaler utanför det utskrivbara området; rita ytorna längre in (riggens docs/bladen.md).`);
   return m;
 }
 // adress: metodens adress, som står i upphovet under bilden.
 function bildblad(b: PaBordet, adress: string): Barn[] {
-  if (Math.abs(b.matt.hojd / b.matt.bredd - BLADSIDA.h / BLADSIDA.b) > 0.01) throw new Error(`Bladet "${b.bild.rubrik}" är ${b.matt.bredd} × ${b.matt.hojd} punkter. Ett blad är hela den liggande sidan, 1485 × 1050 (src/data/pabordet.json, scripts/pabordetdata.mjs).`);
-  const k = BLADSIDA.b / b.matt.bredd; // millimeter per punkt i bilden
+  const S = bladsida(b);
+  if (Math.abs(b.matt.hojd / b.matt.bredd - S.h / S.b) > 0.01) throw new Error(`Bladet "${b.bild.rubrik}" är ${b.matt.bredd} × ${b.matt.hojd} punkter. Ett blad är hela sidan, liggande 1485 × 1050 eller stående 1050 × 1485 (src/data/pabordet.json, scripts/pabordetdata.mjs).`);
+  const k = S.b / b.matt.bredd; // millimeter per punkt i bilden
   const emu = (mm: number) => Math.round(mm * 36000);
-  const bakom = bildRun(b.adress, mmPx(BLADSIDA.b), bildensAlt(b), mmPx(b.matt.hojd * k), {
+  const bakom = bildRun(b.adress, mmPx(S.b), bildensAlt(b), mmPx(b.matt.hojd * k), {
     horizontalPosition: { relative: HorizontalPositionRelativeFrom.PAGE, offset: 0 },
-    verticalPosition: { relative: VerticalPositionRelativeFrom.PAGE, offset: emu((BLADSIDA.h - b.matt.hojd * k) / 2) },
+    verticalPosition: { relative: VerticalPositionRelativeFrom.PAGE, offset: emu((S.h - b.matt.hojd * k) / 2) },
     behindDocument: true, allowOverlap: true, lockAnchor: true, wrap: { type: TextWrappingType.NONE },
   });
   const ankare = new Paragraph({ spacing: { before: 0, after: 0, line: 20 }, run: { size: 2, font: 'Calibri' }, children: [bakom, new TextRun({ text: '', size: 2, font: 'Calibri' })] });
-  const rutnat = bladrutnat(bladytor(b), k);
+  const rutnat = bladrutnat(bladytor(b), k, S);
   const { ys, ramar } = rutnat;
   // Ett blad utan celler har en enda kolumn mellan marginalerna, för upphovets rad.
-  const xs = ramar.length ? rutnat.xs : [BLADSIDA.marginalMm / k, (BLADSIDA.b - BLADSIDA.marginalMm) / k];
+  const xs = ramar.length ? rutnat.xs : [S.marginalMm / k, (S.b - S.marginalMm) / k];
   const bredder = xs.slice(1).map((x, n) => Math.round((x - xs[n]) * k * MM));
   const INGA = { top: INGEN, bottom: INGEN, left: INGEN, right: INGEN };
   const i = (q: (typeof ramar)[number], n: number, m: number) => xs[n] >= q.x0 && xs[n + 1] <= q.x1 && ys[m] >= q.y0 && ys[m + 1] <= q.y1;
@@ -1492,8 +1501,8 @@ function bildblad(b: PaBordet, adress: string): Barn[] {
   // Upphovets rad, sist i tabellen: från den sista skrivradens kant ned till 201,3 mm, med texten nederst i cellen.
   // Radens höjd är det som återstår dit, så att radernas avrundning till hela bildpunkter inte flyttar upphovet.
   const ovan = bladmarginaler(b).top + rader.reduce((a, r) => a + Number(radInst(r).height!.value), 0);
-  const upphov = { font: 'Arial', size: BLADSIDA.upphov, color: BOK.not };
-  rader.push(new TableRow({ cantSplit: true, height: { value: bildpunkt(BLADSIDA.upphovMm * MM - ovan), rule: HeightRule.EXACT }, children: [new TableCell({
+  const upphov = { font: 'Arial', size: S.upphov, color: BOK.not };
+  rader.push(new TableRow({ cantSplit: true, height: { value: bildpunkt(S.upphovMm * MM - ovan), rule: HeightRule.EXACT }, children: [new TableCell({
     columnSpan: bredder.length, borders: INGA, margins: FORM_NOLL, width: { size: summa(0, bredder.length), type: WidthType.DXA }, verticalAlign: VerticalAlign.BOTTOM,
     children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 240 }, run: upphov, children: [new TextRun({ text: `${UPPHOV} · ${adress}`, ...upphov })] })],
   })] }));
@@ -4104,12 +4113,13 @@ function sektion(barn: Barn[], huvudtext: string, adress: string, o: { liggande?
       children: barn,
     };
   }
-  // Ett blad som en bild över hela den liggande sidan (bildblad()): bladets egna marginaler, och varken sidhuvud eller
-  // sidfot, som hos riggen. De är satta (tomma), så att sektionen inte ärver den förra sektionens. Upphovet står i
-  // bladets tabell, under bilden.
+  // Ett blad som en bild över hela sidan (bildblad()), liggande eller stående: bladets egna marginaler, och varken
+  // sidhuvud eller sidfot, som hos riggen. De är satta (tomma), så att sektionen inte ärver den förra sektionens. Upphovet
+  // står i bladets tabell, under bilden.
   if (o.blad) {
+    const { staende, ...marginal } = o.blad;
     return {
-      properties: { page: { size: { ...A4, orientation: PageOrientation.LANDSCAPE }, margin: { ...o.blad, header: 0, footer: 0 } } },
+      properties: { page: { size: { ...A4, orientation: staende ? PageOrientation.PORTRAIT : PageOrientation.LANDSCAPE }, margin: { ...marginal, header: 0, footer: 0 } } },
       headers: { default: new Header({ children: [punktStycke()] }) },
       footers: { default: new Footer({ children: [punktStycke()] }) },
       children: barn,

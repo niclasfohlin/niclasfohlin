@@ -30,6 +30,22 @@
   to = "/stodundervisning/lasstrategier.pdf"
   status = 301
 
+[[redirects]]
+  from = "/gruppstarkande"
+  to = "/stodundervisning/gruppstarkande-aktiviteter/aktiviteter"
+  status = 301
+
+[[redirects]]
+  from = "/brainbreaks"
+  to = "/stodundervisning/gruppstarkande-aktiviteter/brainbreaks"
+  status = 301
+
+# Niclas skrev /brainbrakes (2026-10-16), och den leder till samma sida.
+[[redirects]]
+  from = "/brainbrakes"
+  to = "/stodundervisning/gruppstarkande-aktiviteter/brainbreaks"
+  status = 301
+
 # Korta adresser till kommentarernas panel och till registreringen av administratören.
 [[redirects]]
   from = "/kommentarer/admin"

@@ -18,17 +18,25 @@ import { site } from '../data/site';
 import { publicerade, publikationNamn, typLabel } from './innehall';
 import { arskursText } from './metod';
 import { delningensKort, kortData, skrivkortAdress, skrivkortAv } from './skrivkort';
+import { aktiviteterAdress, aktiviteterAv, aktiviteterData, brainbreaksAdress, brainbreaksAv, brainbreaksData, delningensAktiviteter, delningensBrainbreaks } from './aktiviteter';
+import { centralAv } from './centrala';
 
 export const MALL = 'src/pages/delning/kort/[namn].astro';
-// Kortet för sidan som slumpar skrivkort har en egen mall, som bara räknas in i det kortet.
+// Kortet för sidan som slumpar skrivkort har en egen mall, som bara räknas in i det kortet, och så har korten för
+// sidorna som slumpar aktivitetskort och brainbreaks.
 export const SKRIVKORTSMALL = 'src/pages/delning/skrivkort/[namn].astro';
+export const KORTBANKSMALL = { aktiviteter: 'src/pages/delning/aktiviteter/[namn].astro', brainbreaks: 'src/pages/delning/brainbreaks/[namn].astro' } as const;
+// Avsnitten i global.css som korten på de egna mallarna ritas med. Aktivitetskorten och brainbreakkorten läser
+// skrivkortens färger, så deras kort räknar in båda avsnitten; skrivkortens kort bara sitt eget.
+const SKRIVKORTSSTIL = '/* Skrivkorten och sidan som slumpar dem';
+const KORTBANKSSTIL = '/* Aktivitetskorten och brainbreakkorten';
 // Höjs när något som påverkar korten ändras utanför filerna som räknas in nedan.
 const VERSION = 1;
 
 export interface Kort {
   sida: string; // sidans adress, t.ex. /stodundervisning/brakkurs-i-grupp
   namn: string; // filnamnets början, t.ex. stodundervisning-brakkurs-i-grupp
-  typ: 'start' | 'om' | 'avsnitt' | 'artikel' | 'bok' | 'metod' | 'skrivkort';
+  typ: 'start' | 'om' | 'avsnitt' | 'artikel' | 'bok' | 'metod' | 'skrivkort' | 'aktiviteter' | 'brainbreaks';
   etikett: string; // raden över titeln, tom på huvudsidorna
   titel: string;
   undertitel: string;
@@ -37,8 +45,12 @@ export interface Kort {
   fil: string; // /delning/<namn>-<kontrollsumma>.jpg
   /** Sidan som slumpar skrivkort: metoden och korten som står på kortet (src/lib/skrivkort.ts, delningensKort). */
   skrivkort?: { metod: string; kort: string[] };
+  /** Sidorna som slumpar aktivitetskort och brainbreaks: metoden och korten som står på kortet (src/lib/aktiviteter.ts). */
+  kortbank?: { slag: keyof typeof KORTBANKSMALL; metod: string; kort: string[] };
 }
 
+// Små tal med bokstäver, som i sajtens texter.
+const TAL = ['noll', 'en', 'två', 'tre', 'fyra', 'fem', 'sex', 'sju', 'åtta', 'nio', 'tio', 'elva', 'tolv'];
 const FARG: Record<string, string> = { Matematik: '--farg-accent', Läsning: '--farg-lasning', Skrivning: '--farg-skrivning', Socialt: '--farg-socialt' };
 const las = (sokvag: string) => readFileSync(join(process.cwd(), sokvag));
 
@@ -102,6 +114,12 @@ export function allaKort(): Promise<Kort[]> {
       // till slumpgeneratorn som har egen delabild").
       const sk = skrivkortAv(m.id);
       if (sk) lagg({ sida: skrivkortAdress(m.id), typ: 'skrivkort', etikett: `Skrivkort · ${arskursText(m.data)}`, titel: 'Ta fram ett skrivkort', undertitel: `${sk.kort.length} kort i tre nivåer, stora på skärmen med en klocka som alla ser`, bild: portratt, farg: FARG[m.data.omrade] ?? '--farg-accent', skrivkort: { metod: m.id, kort: delningensKort(sk) } });
+      // Sidorna som slumpar aktivitetskort och brainbreaks har var sitt kort med tre av sidans kort (Niclas 2026-10-14:
+      // en sida att dela får en egen delningsbild i en egen mall).
+      const ak = aktiviteterAv(m.id);
+      if (ak) lagg({ sida: aktiviteterAdress(m.id), typ: 'aktiviteter', etikett: `Aktivitetskort · ${arskursText(m.data)}`, titel: centralAv('aktiviteter')?.namn ?? 'Ta fram en aktivitet', undertitel: `${ak.kort.length} aktiviteter i ${TAL[ak.kategorier.length] ?? ak.kategorier.length} kategorier, sex i taget, att samla i en lista och skriva ut`, bild: portratt, farg: FARG[m.data.omrade] ?? '--farg-accent', kortbank: { slag: 'aktiviteter', metod: m.id, kort: delningensAktiviteter(ak) } });
+      const bb = brainbreaksAv(m.id);
+      if (bb) lagg({ sida: brainbreaksAdress(m.id), typ: 'brainbreaks', etikett: `Brainbreaks · ${arskursText(m.data)}`, titel: centralAv('brainbreaks')?.namn ?? 'Ta fram en brainbreak', undertitel: `${bb.kort.length} brainbreaks, sex i taget, stora på skärmen med en klocka och musik`, bild: portratt, farg: FARG[m.data.omrade] ?? '--farg-accent', kortbank: { slag: 'brainbreaks', metod: m.id, kort: delningensBrainbreaks(bb) } });
     }
 
     const gemensamt = [String(VERSION), las(MALL).toString('utf8').replace(/\r\n/g, '\n')];
@@ -109,15 +127,25 @@ export function allaKort(): Promise<Kort[]> {
     const bildSumma = (b: string) => bilder.get(b) ?? bilder.set(b, createHash('sha256').update(las(join('public', b))).digest('hex')).get(b)!;
     // Skrivkortens kort ritas med kortets egen kod och form (src/scripts/skrivkortet.ts och avsnittet om skrivkorten i
     // global.css), med korten och deras bilder: allt det räknas in, så att kortet ritas om när något av det ändras.
+    // Avsnittet slutar där aktivitetskortens börjar, med ett radslut som när det var sist i filen, så att kortet behöll
+    // sin adress när aktivitetskorten kom (2026-10-16).
+    const css = las('src/styles/global.css').toString('utf8').replace(/\r\n/g, '\n');
+    const skrivkortsStil = css.slice(css.indexOf(SKRIVKORTSSTIL), css.includes(KORTBANKSSTIL) ? css.indexOf(KORTBANKSSTIL) : undefined).replace(/\n+$/, '\n');
     const skrivkortSumma = (s: NonNullable<Kort['skrivkort']>) => {
-      const css = las('src/styles/global.css').toString('utf8').replace(/\r\n/g, '\n');
       const data = kortData(s.metod, skrivkortAv(s.metod)!, s.kort);
-      return [las(SKRIVKORTSMALL).toString('utf8').replace(/\r\n/g, '\n'), las('src/scripts/skrivkortet.ts').toString('utf8').replace(/\r\n/g, '\n'), css.slice(css.indexOf('/* Skrivkorten och sidan som slumpar dem')), JSON.stringify(data),
+      return [las(SKRIVKORTSMALL).toString('utf8').replace(/\r\n/g, '\n'), las('src/scripts/skrivkortet.ts').toString('utf8').replace(/\r\n/g, '\n'), skrivkortsStil, JSON.stringify(data),
         ...Object.values(data.bilder).map((b) => bildSumma(b.stor.replace(/^\//, '')))].join('|');
+    };
+    // Aktivitetskorten och brainbreakkorten ritas med sidornas kod och form (src/scripts/kortbanken.ts och avsnitten om
+    // skrivkorten och korten i global.css), med korten och deras bilder.
+    const kortbankSumma = (s: NonNullable<Kort['kortbank']>) => {
+      const data = s.slag === 'aktiviteter' ? aktiviteterData(s.metod, aktiviteterAv(s.metod)!, s.kort) : brainbreaksData(s.metod, brainbreaksAv(s.metod)!, s.kort);
+      return [las(KORTBANKSMALL[s.slag]).toString('utf8').replace(/\r\n/g, '\n'), las('src/scripts/kortbanken.ts').toString('utf8').replace(/\r\n/g, '\n'), css.slice(css.indexOf(SKRIVKORTSSTIL)), JSON.stringify(data),
+        ...data.kort.map((k) => bildSumma(k.bild.replace(/^\//, '')))].join('|');
     };
     return utan.map((k) => {
       const h = createHash('sha256');
-      for (const del of [...gemensamt, designsystem(k.farg), JSON.stringify(k), bildSumma(k.bild), bildSumma(portratt), ...(k.skrivkort ? [skrivkortSumma(k.skrivkort)] : [])]) h.update(del);
+      for (const del of [...gemensamt, designsystem(k.farg), JSON.stringify(k), bildSumma(k.bild), bildSumma(portratt), ...(k.skrivkort ? [skrivkortSumma(k.skrivkort)] : []), ...(k.kortbank ? [kortbankSumma(k.kortbank)] : [])]) h.update(del);
       return { ...k, fil: `/delning/${k.namn}-${h.digest('hex').slice(0, 10)}.jpg` };
     });
   })();

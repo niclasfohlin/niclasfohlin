@@ -8,7 +8,7 @@ import SkrivUtPdf from '../../../components/SkrivUtPdf.astro';
 import { publicerade } from '../../../lib/innehall';
 import { bankAv, enhetAdress, grannar, nivaFarger, type Bankenhet } from '../../../lib/bank';
 import { bladKort, bladpar, bladsidaAdress, gruppId, harExempel, ledFlera, ledSida, metodensBladmaterial, type Bladrad } from '../../../lib/bladmaterial';
-import { arIfylltBlad, metodensPaBordet, type PaBordet } from '../../../lib/pabordet';
+import { arIfylltBlad, arStaendeBlad, metodensPaBordet, type PaBordet } from '../../../lib/pabordet';
 import { metodAdress, UPPHOV } from '../../../lib/metod';
 import { enhetensUtskrifter, radensUtskrifter, utskriftAdress, vidEnheterna, type VidEnheten } from '../../../lib/utskrift';
 import { site } from '../../../data/site';
@@ -169,7 +169,7 @@ const figurer = metodensPaBordet(d, m.id).some((b) => b.bild.fluent?.length && s
       <div slot="efter-bladen" class="enhet-blad" id={`vid-${v.ri + 1}`}>
         <div class="enhet-bladhuvud">
           <h2>{v.rubrik}</h2>
-          <a class="knapp sekundar liten" href={utskriftAdress(v.utskrift)} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande={v.blad.length ? '' : undefined} data-sidor-hogst={Math.max(1, v.blad.length) * (v.blad.length ? 1 : 3)} data-goatcounter-click={`utskrift:${m.id}/${vy.slug}`} data-goatcounter-title={`${vy.statistik}, ${v.rubrik.toLowerCase()}`}><span data-direkt={v.blad.length === 1 ? 'Skriv ut bladet' : v.blad.length ? 'Skriv ut bladen' : 'Skriv ut sidan'}>{v.blad.length === 1 ? 'Bladet' : v.blad.length ? 'Bladen' : 'Sidan'} som pdf</span><span class="visually-hidden">: {v.rubrik}</span></a>
+          <a class="knapp sekundar liten" href={utskriftAdress(v.utskrift)} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande={v.blad.length && !v.blad.some(arStaendeBlad) ? '' : undefined} data-sidor-hogst={Math.max(1, v.blad.length) * (v.blad.length ? 1 : 3)} data-goatcounter-click={`utskrift:${m.id}/${vy.slug}`} data-goatcounter-title={`${vy.statistik}, ${v.rubrik.toLowerCase()}`}><span data-direkt={v.blad.length === 1 ? 'Skriv ut bladet' : v.blad.length ? 'Skriv ut bladen' : 'Skriv ut sidan'}>{v.blad.length === 1 ? 'Bladet' : v.blad.length ? 'Bladen' : 'Sidan'} som pdf</span><span class="visually-hidden">: {v.rubrik}</span></a>
         </div>
         <p class="enhet-bladtext">Hur {v.blad.length === 1 ? 'bladet' : v.blad.length ? 'bladen' : 'det'} används står under <a href={`/stodundervisning/${m.id}#ram-${v.ri + 1}`}>{v.rubrik}</a> på metodens sida.</p>
         {v.blad.map((b) => <Pabordet b={b} utanRubrik />)}
@@ -179,7 +179,7 @@ const figurer = metodensPaBordet(d, m.id).some((b) => b.bild.fluent?.length && s
       <div slot="efter-bladen" class="enhet-blad" id="enhetens-blad">
         <div class="enhet-bladhuvud">
           <h2>{vy.blad.led}</h2>
-          <a class="knapp sekundar liten" href={vy.blad.pdf} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande data-sidor-hogst="1" data-goatcounter-click={`utskrift:${m.id}/${vy.slug}`} data-goatcounter-title={`${vy.statistik}, bladet`}><span data-direkt="Skriv ut bladet">Bladet som pdf</span><span class="visually-hidden">: {vy.blad.rad.namn}, blad {vy.blad.nr}</span></a>
+          <a class="knapp sekundar liten" href={vy.blad.pdf} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande={arStaendeBlad(vy.blad.b) ? undefined : ''} data-sidor-hogst="1" data-goatcounter-click={`utskrift:${m.id}/${vy.slug}`} data-goatcounter-title={`${vy.statistik}, bladet`}><span data-direkt="Skriv ut bladet">Bladet som pdf</span><span class="visually-hidden">: {vy.blad.rad.namn}, blad {vy.blad.nr}</span></a>
         </div>
         <p class="enhet-bladtext">{vy.blad.rad.namn}, blad {vy.blad.nr}. {vy.blad.sida}{vy.blad.exempel ? ', exemplet' : ''} och de andra bladen står på sidan <a href={bladsidaAdress(m.id, vy.blad.rad)}>{vy.blad.rad.namn}</a>.</p>
         <Pabordet b={vy.blad.b} utanRubrik />

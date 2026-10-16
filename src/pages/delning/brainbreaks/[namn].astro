@@ -1,0 +1,92 @@
+---
+// Mallen för delningskortet till sidan som slumpar brainbreaks, 1200 × 630 (Niclas 2026-10-14: en sida att dela får en
+// egen delningsbild i en egen mall). Den har delningskortens form (src/pages/delning/kort/[namn].astro), med titeln till
+// vänster, och till höger tre brainbreakkort i en solfjäder och klockan, ritade med sidans egen kod
+// (src/scripts/kortbanken.ts), så att bilden visar korten som de ser ut. Mallen är egen, så att en ändring här bara ritar
+// om kortet för sidan som slumpar och inte alla sidors kort (src/lib/delningskort.ts räknar in den bara där). Sidan finns
+// bara för att scripts/delningskort.mjs ska fotografera den; den länkas inte och indexeras inte.
+import '../../../styles/global.css';
+import { site } from '../../../data/site';
+import { allaKort, type Kort } from '../../../lib/delningskort';
+import { brainbreaksAv, brainbreaksData } from '../../../lib/aktiviteter';
+
+export async function getStaticPaths() {
+  return (await allaKort()).filter((kort) => kort.kortbank?.slag === 'brainbreaks').map((kort) => ({ params: { namn: kort.namn }, props: { kort } }));
+}
+
+const { kort } = Astro.props as { kort: Kort };
+const { metod, kort: urval } = kort.kortbank!;
+const data = brainbreaksData(metod, brainbreaksAv(metod)!, urval);
+const n = kort.titel.length;
+const storlek = n <= 18 ? 76 : n <= 36 ? 62 : 52;
+// Klockans röda yta, två tredjedelar kvar, som på sidan (en time timer).
+const R = 96, andel = 2 / 3, v = (1 - andel) * Math.PI * 2;
+const yta = `M0 0L${(Math.sin(v) * R).toFixed(2)} ${(-Math.cos(v) * R).toFixed(2)}A${R} ${R} 0 1 1 0 ${-R}Z`;
+---
+
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>{kort.titel}</title>
+    <style>
+      html, body { margin: 0; padding: 0; background: #fff; }
+      .dk { display: flex; width: 1200px; height: 630px; overflow: hidden; background: var(--farg-yta); color: var(--farg-text); font-family: var(--typsnitt-rubrik); }
+      .dk-streck { flex: none; width: 18px; background: var(--dk-farg); }
+      .dk-text { flex: 1; min-width: 0; display: flex; flex-direction: column; padding: 56px 72px 56px 64px; }
+      .dk-etikett { margin: 0 0 26px; max-width: none; font-size: 24px; line-height: 1.25; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--dk-farg); }
+      .dk-titel { margin: 0; max-width: none; font-size: var(--dk-storlek); line-height: 1.06; font-weight: 800; letter-spacing: -0.015em; color: var(--farg-text); text-wrap: balance; }
+      .dk-under { margin: 22px 0 0; max-width: none; font-size: 34px; line-height: 1.3; font-weight: 500; color: var(--farg-text-svag); text-wrap: pretty; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+      .dk-innehall { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-bottom: 16px; }
+      .dk-fot { flex: none; display: flex; align-items: center; gap: 18px; }
+      .dk-fot img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; object-position: top; border: 2px solid var(--farg-kant); }
+      .dk-namn { font-size: 27px; line-height: 1.2; font-weight: 700; }
+      .dk-adress { font-size: 23px; line-height: 1.3; color: var(--farg-text-svag); }
+      .dk-korten { position: relative; flex: none; width: 600px; overflow: hidden; background: var(--farg-ton); }
+      .dk-bb { position: absolute; top: 150px; width: 240px; box-shadow: 0 14px 34px rgba(20, 32, 43, 0.24); }
+      .dk-bb:nth-child(1) { left: 18px; transform: rotate(-8deg); }
+      .dk-bb:nth-child(2) { left: 158px; top: 92px; width: 280px; z-index: 2; }
+      .dk-bb:nth-child(3) { left: 340px; transform: rotate(8deg); }
+      .dk-klocka { position: absolute; right: 26px; top: 22px; z-index: 3; width: 136px; height: 136px; filter: drop-shadow(0 6px 14px rgba(20, 32, 43, 0.22)); }
+    </style>
+  </head>
+  <body>
+    <div class="dk" style={`--dk-farg: var(${kort.farg}); --dk-storlek: ${storlek}px`}>
+      <div class="dk-streck"></div>
+      <div class="dk-text">
+        <div class="dk-innehall">
+          {kort.etikett && <p class="dk-etikett">{kort.etikett}</p>}
+          <h1 class="dk-titel">{kort.titel}</h1>
+          {kort.undertitel && <p class="dk-under">{kort.undertitel}</p>}
+        </div>
+        <div class="dk-fot">
+          <img src={site.portratt} alt="" />
+          <div>
+            <div class="dk-namn">{site.namn}</div>
+            <div class="dk-adress">niclasfohlin.se</div>
+          </div>
+        </div>
+      </div>
+      <div class="dk-korten">
+        <div id="dk-korten">{data.kort.map(() => <div class="dk-bb"></div>)}</div>
+        <svg class="dk-klocka" viewBox="-110 -110 220 220" aria-hidden="true">
+          <circle r="104" fill="#fff" stroke="var(--farg-text)" stroke-width="5"></circle>
+          <path d={yta} fill="var(--klocka-yta)"></path>
+          {Array.from({ length: 12 }, (_, i) => { const a = (i / 12) * Math.PI * 2; return <line x1={Math.sin(a) * 104} y1={-Math.cos(a) * 104} x2={Math.sin(a) * 88} y2={-Math.cos(a) * 88} stroke="var(--farg-text)" stroke-width="5"></line>; })}
+          <circle r="9" fill="var(--farg-text)"></circle>
+        </svg>
+        <script type="application/json" id="dk-data" set:html={JSON.stringify(data).replace(/</g, '\\u003c')}></script>
+      </div>
+    </div>
+    <script>
+      // Korten ritas med sidans kod, och scripts/delningskort.mjs väntar på dkKlar innan kortet fotograferas.
+      import { brainbreakkortet, type Brainbreakdata } from '../../../scripts/kortbanken';
+      const data: Brainbreakdata = JSON.parse(document.getElementById('dk-data')!.textContent!);
+      const platser = [...document.getElementById('dk-korten')!.children] as HTMLElement[];
+      const korten = data.kort.map((k, i) => { const kort = brainbreakkortet(data, k, true); platser[i].append(kort); return kort; });
+      (window as Window & { dkKlar?: Promise<unknown> }).dkKlar = document.fonts.ready
+        .then(() => Promise.all(korten.flatMap((k) => [...k.querySelectorAll('img')]).map((i) => (i.complete ? 1 : new Promise((r) => { i.onload = i.onerror = r; })))));
+    </script>
+  </body>
+</html>

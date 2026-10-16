@@ -1,0 +1,552 @@
+# Gruppstärkande aktiviteter. Analysen står i analys.md och analysen av omtaget i analys-omtag-2026-10.md, kortens
+# standard i kortstandard.md, korten i aktiviteter/ och brainbreaks/, bildernas scener i bilder/ (node build/kort.mjs
+# gruppstarkande-aktiviteter) och bladen Lärarens skattning och Vår grupp i pabordet.yaml (build/blad/).
+titel: Gruppstärkande aktiviteter
+undertitel: Aktiviteter där alla behövs, och en grupp som du följer vecka för vecka, för F–9
+ingress: "En eller två gånger i veckan gör en klass eller en mindre grupp en aktivitet där alla behövs och ingen åker ut, och du leder den i fem delar. Varje vecka skattar du hur gruppen mår och samarbetar, och varannan vecka svarar eleverna på ett blad och samtalar om gruppen. Aktiviteterna finns på 100 kort i fem kategorier."
+omrade: Socialt
+arskurs:
+  - F-3
+  - 4-6
+  - 7-9
+arskursText: F–9
+taggar:
+  - socialt-samspel
+  - kooperativt-larande
+  - studiero
+format:
+  - liten grupp
+  - helklass
+tid: 10–40 minuter per pass, en eller två gånger i veckan
+period: Tolv veckor eller mer, så länge gruppen behöver det
+grupp: Från fyra elever till en hel klass
+material:
+  - korten på sajten
+  - kortets material
+  - Lärarens skattning
+  - bladet Vår grupp
+  - frågekort och meningar att avsluta
+uppdaterad: 2026-10-16
+publicerad: 2026-10-16
+centrala:
+  - id: aktiviteter
+    efterText: urval
+  - id: brainbreaks
+    efterText: urval
+relaterade:
+  - kompissamtal
+  - kortskrivning-skriv-varje-dag
+utkast: false
+pabordet:
+  - nr: 1
+    rubrik: "Blad: Lärarens skattning"
+    text: Diagrammet att skriva ut, med skattningen 1–10 uppåt och veckorna 1–12 åt höger, vad skattningarna betyder och en rad för det gruppen ska bli bättre på.
+    efter: "ram: Lärarens skattning"
+  - nr: 2
+    rubrik: "Blad: Vår grupp"
+    text: Elevens blad att skriva ut. Eleven ringar in ett svar från 1 till 5 på sex påståenden, tre om gruppen och tre om sig själv, och skriver på raderna det hen vill säga om gruppen.
+    efter: "ram: Gruppreflektion"
+
+inledning:
+  - Gruppstärkande aktiviteter är lekar, utmaningar, samtal och byggen där gruppen bara kan lyckas tillsammans. Metoden passar en hel klass och en särskild undervisningsgrupp med minst fyra elever. Den behövs mest när gruppen är ny, när några står utanför eller när samarbetet går trögt.
+  - "Metoden har två delar. Den första är aktiviteten, som du leder i fem delar. Du förklarar aktiviteten och modellerar ett beteende som gruppen behöver, till exempel att fråga ”Får jag ta din hand?” Sedan genomför ni aktiviteten, och du är med och säger högt vad någon gör för gruppen. Efteråt ställer du kortets fråga och säger vad eleverna gjorde för varandra, och sist tackar de varandra."
+  - "Den andra delen är gruppen över tid. Ni gör en eller två aktiviteter i veckan, och varje vecka skattar du hur gruppen mår och samarbetar och sätter ett kryss i diagrammet Lärarens skattning. Varannan vecka fyller eleverna i bladet Vår grupp, och du leder en gruppreflektion som slutar i två meningar: ”Detta gör vi bra. Detta ska vi bli bättre på.” I aktiviteterna veckorna efter modellerar du det gruppen ska bli bättre på."
+  - "Du väljer aktiviteterna ur 100 aktivitetskort i fem kategorier: Lära känna varandra, Trygghet och gemenskap, Samarbetsutmaningar, Gemensamma mål och Skapa och bygga. De första veckorna väljer du ur de två första. Kortet är ett A4 som du har i handen eller visar på skärmen, och stegen på kortet följer de fem delarna. De 80 brainbreakkorten är korta rörelsepauser för en grupp som har suttit länge, och på skärmen har de en klocka och musik. Korten finns på sajtens sidor Ta fram en aktivitet och Ta fram en brainbreak, som du når från metodens sida."
+  - Efter metodens två delar står vad forskningen säger om samarbete och gemenskap, vad som gör en aktivitet gruppstärkande, hur du gör om en lek till samarbete, din roll när gruppen ska bli en grupp, vad du gör när det inte går som tänkt och fler frågor efter en aktivitet. Sist står Materialet med Lärarens skattning och Gruppreflektion.
+upplagg:
+  rubrik: Så fungerar insatsen
+  text: "Gruppen är en klass eller minst fyra elever, och insatsen pågår i tolv veckor eller längre. En eller två gånger i veckan gör ni en aktivitet på 10–30 minuter i fem delar: Förklara, Modellera, Genomför, Återkoppla och Tacka. När gruppen har suttit länge på en lektion, tar ni en brainbreak på 1–8 minuter. Varannan vecka leder du en gruppreflektion på 20–30 minuter efter en aktivitet på omkring tio minuter. Eleverna fyller i bladet Vår grupp, och sist bestämmer ni vad gruppen ska bli bättre på. Det modellerar du veckorna efter. Varje vecka skattar du gruppen från 1 till 10 i Lärarens skattning."
+gruppen:
+  rubrik: Så sätter du ihop gruppen
+  text: Metoden är för en klass eller en särskild undervisningsgrupp med minst fyra elever, särskilt när gruppen är ny, några står utanför eller samarbetet går trögt. Pågår kränkningar, följer du först skolans rutin, eftersom en aktivitet kan göra det värre för den som blir kränkt. Med fyra till åtta elever gör ni aktiviteten tillsammans. Saknas en elev för kortet, är du med, och saknas fler, väljer du ett annat kort. I en klass gör du fasta grupper om fyra till sex, byter dem efter några veckor och delar eller slår ihop dem när kortet kräver det. Sätt elever som trissar upp varandra i olika grupper.
+principer:
+  rubrik: Tre saker att hålla fast vid
+  text: Alla behövs, och ingen åker ut eller vinner över någon annan. Ingen tvingas delta, dela med sig eller bli rörd vid, och den som tvekar får en riktig roll, till exempel att ta tiden. Säg högt vad någon gör för gruppen, och avsluta varje gång med återkopplingen och tacket, så att eleverna ser vad de gjorde för varandra.
+
+tidsschema:
+  rubrik: En aktivitet i fem delar
+  text: "Varje aktivitet har samma fem delar, och stegen på kortet följer dem: det första steget är det du säger när du förklarar, steget som börjar med Visa är det du modellerar, och det sista steget är återkopplingen och tacket."
+  rader:
+    - tid: 1–3 min
+      fas: Förklara
+      vad: "Säg kortets mål: ”Ni är klara när alla …” Från vecka 3 säger du också vad gruppen ska bli bättre på. Säg vem var och en ska tacka efteråt, och låt en elev säga målet med egna ord."
+    - tid: 1–2 min
+      fas: Modellera
+      vad: Visa med en elev kortets beteende, till exempel ”Får jag ta din hand?”, och från vecka 3 också det gruppen ska bli bättre på.
+    - tid: 5–20 min
+      fas: Genomför
+      vad: "Var med. Det viktigaste är att säga högt vad någon gör för gruppen, helst när någon gör det du visade: ”Sara lyfte armen, och då kom rockringen vidare.” Behöver du stanna gruppen, räck upp handen och säg stopp."
+    - tid: 2–4 min
+      fas: Återkoppla
+      vad: Ställ kortets fråga, och låt två eller tre svara. Säg med namn vad eleverna gjorde för varandra, och om någon gjorde det du visade.
+    - tid: 1 min
+      fas: Tacka
+      vad: "Var och en tackar grannen för något hen gjorde: ”Tack för att du …” Så får alla ett tack."
+
+exempel:
+  rubrik: "Exempel: Rockringen i en grupp i åk 4"
+  valt:
+    rubrik: Gruppen
+    text: Fem elever i åk 4 går i en undervisningsgrupp, och det är den femte veckan. Vid gruppreflektionen förra veckan ringade de flesta in 4 eller 5 på ”Jag känner mig trygg i gruppen”, och gruppen bestämde sig för att bli bättre på att hjälpa den som fastnar. Dagens kort är Rockringen ur Samarbetsutmaningar.
+  text:
+    - "Läraren samlar gruppen i en ring: ”Rockringen ska gå ett varv utan att någon släpper taget. Ni är klara när den är tillbaka hos mig. Förra veckan sa ni att ni skulle bli bättre på att hjälpa den som fastnar. Efteråt tackar var och en grannen.” Hon ber Ali säga med egna ord vad de ska göra. Leo vill inte hålla händer. ”Leo, vill du hålla i ett kort rep eller ta tiden?” Leo tar tiden."
+    - "Sedan visar läraren med Amina hur man frågar innan man tar någons hand och hur man hjälper den som fastnar: ”Böj dig, så lyfter jag armen.”"
+    - "Rockringen fastnar hos Elias. Sara säger: ”Böj dig, så lyfter jag armen.” Läraren säger högt: ”Sara lyfte armen, och då kom rockringen vidare.” När rockringen är tillbaka säger Leo: ”Fyrtio sekunder!” Gruppen vill pröva igen, och nu tar det trettio sekunder."
+    - "Läraren frågar: ”Vad gjorde någon som hjälpte gruppen?” Elias säger att Sara visade hur han skulle böja sig, och Amina säger att alla frågade innan de tog någons hand. Läraren säger: ”Ni frågade innan ni tog varandras händer, och när rockringen fastnade hos Elias hjälpte Sara till. Leo tog tiden på båda varven. Nästa gång prövar vi med två rockringar.” Sist ställer sig Leo i ringen, och tacket går runt, så att också han får ett. Elias säger: ”Tack, Sara, för att du lyfte armen.”"
+    - Efter veckans sista aktivitet skattar läraren gruppen till 6 i Lärarens skattning och drar ett streck från förra veckans 5.
+
+tabeller:
+  - rubrik: I en klass, i en liten grupp och med de yngsta
+    plats: efter-fastnar
+    meny: true
+    kolumner:
+      - Gruppen
+      - Så gör du
+    rader:
+      - - Fler än åtta eller en klass
+        - Alla grupper gör samma aktivitet. Visa kortets beteende med en grupp inför de andra, och gå runt och säg högt vad någon gör. Grupperna svarar själva på kortets fråga. Du ger hela klassen återkoppling, och tacket går runt i grupperna.
+      - - Fyra till åtta elever
+        - Ni gör aktiviteten tillsammans. Säger kortet färre elever än ni är, delar ni er i två grupper. Säger kortet att grupperna visar varandra sina lösningar, visar ni dem för en annan grupp på skolan eller prövar igen.
+      - - De yngsta
+        - "Välj korta aktiviteter, och visa varje steg innan eleverna gör det. Låt tacket vara en enda mening, som ”Tack, Ali, för att du höll i repet.”"
+  - rubrik: De fem kategorierna
+    plats: efter-urval
+    meny: true
+    kolumner:
+      - Kategori
+      - Välj den när
+      - Till exempel
+    rader:
+      - - Lära känna varandra
+        - gruppen är ny eller några inte känner varandra
+        - Berätta mera och Venndiagram
+      - - Trygghet och gemenskap
+        - eleverna behöver lita på varandra och ha roligt tillsammans
+        - Magisk promenad och ”Spegel, spegel”
+      - - Samarbetsutmaningar
+        - gruppen är redo att lösa något som ingen klarar ensam
+        - Rockringen och ”Marken är lava!”
+      - - Gemensamma mål
+        - gruppen ska sätta mål, ta beslut, reda ut ett problem eller skiljas
+        - Strategimöte och Uppskattningsnätet
+      - - Skapa och bygga
+        - gruppen ska skapa något gemensamt att vara stolt över
+        - Tidningstornet och Gruppens blomma
+  - rubrik: Gemenskapen i gruppen, enligt forskningen
+    plats: efter-grund
+    meny: true
+    text: Att höra till en grupp är ett av människans grundläggande behov, och i skolan påverkar det både hur eleverna mår och hur de lär sig. I en grupp där eleverna trivs tillsammans och litar på varandra vågar fler pröva, fråga och göra fel. Samarbetande aktiviteter hjälper eleverna att hitta sin röst och sin plats i gruppen, och de skapar ett vi. I aktiviteterna bygger eleverna relationer och vänskap, utvecklar sin sociala förmåga och får en grund för lärandet (Fohlin och Wilson, 2023). Sammanhållning och vänskap kommer inte av sig själva. De växer långsamt, och de växer när eleverna gör saker som de bara klarar tillsammans.
+    kolumner:
+      - Det forskningen visar
+      - Vad det betyder för dig
+    rader:
+      - - Läsåret 2021/22 hade 54 procent av de 11-åriga flickorna högt stöd från klasskamraterna. Bland de 13- och 15-åriga flickorna var det drygt 40 procent och bland pojkarna 58–65 procent. Andelarna var lägre än läsåret 2009/10 (Folkhälsomyndigheten, 2023).
+        - Folkhälsomyndigheten mäter stödet med tre påståenden om klassen. På bladet Vår grupp är de påstående 1, 2 och 4, med gruppen i stället för klassen.
+      - - Tre av tio elever i åk 4–9 känner sig inte som en del av gemenskapen på skolan (Friends, 2025).
+        - Också i en liten undervisningsgrupp kan någon känna sig utanför.
+      - - I klasser med ett gott klimat mellan eleverna hjälper de varandra mer, kränker varandra mindre och kan i högre grad ägna sig åt det de ska lära sig (Skolverket, 2022).
+        - Gemenskapen är en del av undervisningen.
+      - - Barn vars vän också räknade dem som en vän tog mindre skada av mobbning (Hodges m.fl., 1999).
+        - Se till att varje elev har en vän.
+      - - I klasser där statusen var jämnare fördelad mådde barnen bättre, oavsett vilken status de själva hade i klassen (Östberg, 2003).
+        - En grupp där alla är med hjälper alla.
+      - - Femton veckor med kooperativt lärande i åk 5 gjorde eleverna lite mer accepterade av kamraterna, men det syntes ingen säker skillnad i vem som var vän med vem (Klang m.fl., 2020).
+        - Vänskap kan ta längre tid än femton veckor. Följ gruppen vecka för vecka.
+      - - Särskilda lektioner i social kompetens, som skolorna schemalade i alla klasser oavsett behov, hängde ihop med mer mobbning bland flickor och yngre pojkar (Skolverket, 2011).
+        - Gör aktiviteterna när gruppen behöver dem, och så länge den behöver dem.
+  - rubrik: Kärnkomponenterna
+    plats: efter-grund
+    meny: true
+    text: "En aktivitet är gruppstärkande när gruppen bara kan lyckas eller misslyckas tillsammans. Boken Gruppstärkande ledarskap (Fohlin och Wilson, 2023) beskriver tre sätt att nå ett mål: att tävla, att arbeta var för sig och att samarbeta. Aktiviteterna i metoden är samarbetande. Boken beskriver också sex ingredienser som en sådan aktivitet behöver, och de är metodens kärnkomponenter. Gör du en egen aktivitet, utgår du från dem och prövar den mot de fyra kraven."
+    kolumner:
+      - Kärnkomponent
+      - Vad den betyder
+      - Så syns den i aktiviteten
+    rader:
+      - - Gruppidentitet och trygghet
+        - Gruppen blir ett vi, och eleverna litar på varandra.
+        - Eleverna hälsar på varandra, hejar och firar, och efteråt tackar de varandra.
+      - - Inkludering och acceptans
+        - Ingen elimineras, och de andra hjälper och hejar.
+        - Kortets Att tänka på säger hur alla kan vara med.
+      - - Positivt ömsesidigt beroende
+        - Vi lyckas bara om alla lyckas.
+        - Du säger gruppens mål innan ni börjar.
+      - - Roller och ansvar
+        - Var och en vet vad hen gör, och rollerna byts.
+        - Alla har en uppgift, som att ta tiden eller peppa.
+      - - Social utveckling och gemensamt problemlösande
+        - Gruppen pratar strategi, prövar och prövar igen.
+        - Gruppen planerar innan den börjar. I återkopplingen och i gruppreflektionen pratar den om hur det gick.
+      - - Gemensam glädje
+        - Att lyckas tillsammans och att misslyckas tillsammans svetsar ihop.
+        - Gruppen skrattar tillsammans när något går fel och firar när det går bra.
+    not: Kärnkomponenterna och vad de betyder är hämtade ur Gruppstärkande ledarskap (Fohlin och Wilson, 2023).
+  - rubrik: Gör om en lek till samarbete
+    plats: efter-grund
+    meny: true
+    text: Många lekar som du redan kan går att göra om till samarbetslekar. Små ändringar gör stor skillnad.
+    kolumner:
+      - I leken finns
+      - Gör så här
+    rader:
+      - - poäng och en vinnare
+        - Ta bort poängen, eller lägg ihop allas poäng och fira när gruppen når en summa som ni har bestämt.
+      - - någon som åker ut
+        - Låt den som missar byta grupp eller roll, som i kortet ”Simon säger, ingen åker ut”.
+      - - en uppgift som en elev klarar ensam
+        - Lägg in ett hinder som kräver två eller tre elever, eller ge varje elev en del av materialet.
+      - - ett lopp på tid
+        - Låt gruppen slå sitt eget rekord. I en klass berättar grupperna för varandra hur de gjorde.
+      - - några som gör och några som väntar
+        - Byt roller och platser tills alla har prövat varje roll och plats.
+      - - ett mål för var och en
+        - Gör målet till hela gruppens, så att ni är klara när alla har klarat det, och fira tillsammans.
+    not: Raderna bygger på de tretton sätten i Gruppstärkande ledarskap (Fohlin och Wilson, 2023).
+  - rubrik: Din roll när gruppen ska bli en grupp
+    plats: efter-grund
+    meny: true
+    text: Det räcker inte med aktiviteterna. Boken Gruppstärkande ledarskap beskriver fem saker som du gör för att gruppen ska bli trygg, både i aktiviteterna och under resten av dagen.
+    kolumner:
+      - Gör så här
+      - Till exempel
+    rader:
+      - - Var en förebild
+        - Lyssna, var nyfiken och skratta med eleverna. Säg oftare ”fundera tillsammans” och ”ta hjälp av varandra” än ”var tysta”.
+      - - Tänk långsiktigt
+        - En grupp blir inte trygg på en eftermiddag. Låt eleverna först lära känna varandra och bli trygga, och ge dem sedan mål som de bara når tillsammans. Följ gruppen i gruppreflektionen.
+      - - Modellera och ge verktyg
+        - "Visa beteendet i Modellera. Skriv gärna några exempelfraser på tavlan tillsammans med eleverna: ”Får jag ta din hand?”"
+      - - Värna elevernas integritet
+        - Prata om samtycke och om hur ni tar emot det som andra säger. Den som vill får titta först.
+      - - Lyft fram det eleverna gör för varandra
+        - "Säg högt vad någon gjorde och varför det hjälpte: ”Jag såg att Ali och Sara tittade på varandra så att de kunde skicka rockringen på bästa sätt. Det gjorde att ni lyckades bättre.” Gör det också på lektionerna."
+    not: Raderna bygger på Gruppstärkande ledarskap (Fohlin och Wilson, 2023).
+  - rubrik: När det inte går som tänkt
+    plats: efter-grund
+    meny: true
+    kolumner:
+      - Det du ser eller hör
+      - Det du gör och säger
+    rader:
+      - - En elev vill inte vara med
+        - Tvinga inte eleven. Ge hen en riktig roll, som att ta tiden, och visa hen nästa kort dagen före.
+      - - En elev vill inte bli rörd vid
+        - Gör aktiviteten utan beröring, som kortets Att tänka på säger, eller låt eleven hålla i ett kort rep eller en penna i stället för en hand. Eleven behöver inte förklara varför.
+      - - Ni är ett udda antal
+        - Bli själv par med en elev, eller låt ett par bli tre.
+      - - Någon tar över och bestämmer
+        - "Ge eleven uppgiften att fråga de andra: ”Kan du se till att alla har sagt sitt förslag?”"
+      - - ”Det var ditt fel!”
+        - "Stanna gruppen. ”Vi lyckas och misslyckas tillsammans. Vad kan ni göra så att det går bra för alla?” Låt den som fick skulden välja plats eller roll."
+      - - Någon står i utkanten, och de andra tar inte med hen
+        - Säg högt något eleven gjorde för gruppen. Öva kortets beteende med eleven före passet, och låt hen visa det med dig i Modellera.
+      - - En elev är ny eller ensam
+        - Låt hen ha samma kamrat bredvid sig i några veckor. Är hen ny, berättar gruppen i Förklara hur aktiviteten går till.
+      - - Gruppen bråkar om reglerna
+        - "Stanna gruppen. ”Vad är målet nu?” Låt gruppen bestämma en regel och pröva igen."
+      - - Gruppen lyckas inte efter flera försök
+        - "Gör aktiviteten lättare, till exempel med ett förslag ur kortets Att tänka på, eller sluta medan leken är god och gå till återkopplingen och tacket: ”Vi försökte tillsammans. Vad prövar vi nästa gång?”"
+      - - Det blir för vilt
+        - Stanna gruppen. Gör nästa försök jättelångsamt, eller byt till ett lugnare kort.
+      - - ”Det här är larvigt”
+        - Låt äldre elever bestämma reglerna, välja kortet eller leda en aktivitet själva. Säg vad ni övar i aktiviteten.
+      - - Någon säger något elakt
+        - Stanna gruppen och säg lugnt att det inte är okej. Följ sedan skolans rutin.
+  - rubrik: Fler frågor efter en aktivitet
+    plats: efter-grund
+    meny: true
+    text: Kortets fråga räcker oftast. Vill gruppen prata mer i återkopplingen, väljer du en fråga ur tabellen. Boken Gruppstärkande ledarskap delar in frågorna i fem slag. I gruppreflektionen bestämmer ni vad gruppen ska bli bättre på.
+    kolumner:
+      - Slag
+      - Så kan du fråga
+    rader:
+      - - Öppna frågor
+        - ”Vad var roligt i aktiviteten?” ”Hur hjälpte du din grupp?”
+      - - Frågor kring känslor
+        - ”Hur kändes det när alla i gruppen hade tagit sig igenom banan?” ”Hur kändes det när de andra hejade på dig?”
+      - - Analyserande frågor
+        - ”Vad gjorde att ni lyckades?” ”Skulle den här aktiviteten passa för förskoleklassen?”
+      - - Filosofiska frågor
+        - ”Är det bättre att vinna själv eller tillsammans med en grupp?” ”Är det bra att kunna samarbeta som ni gjorde nu? När kan det behövas i livet?”
+      - - Framåtsyftande frågor
+        - ”Vad kan ni göra bättre nästa gång?” ”Hur skulle du förändra aktiviteten nästa gång?”
+    not: Slagen och frågorna är hämtade ur Gruppstärkande ledarskap (Fohlin och Wilson, 2023).
+
+urval:
+  rubrik: Var hittar du aktivitetskorten och brainbreakkorten?
+  text:
+    - Aktivitetskorten ligger på sidan Ta fram en aktivitet, som har 20 kort i var och en av de fem kategorierna. Välj om du vill se ett kort eller sex, och tryck på en kategori. Varje tryck ger nya kort. Tryck på bocken i hörnet på de kort du vill ha, så hamnar de i listan att skriva ut. Slumpa igen, lägg till fler och skriv ut listan. Kortet är ett A4 med rubrikerna Så gör ni, Material och Att tänka på. Tiden på kortet gäller alla fem delarna, och kortet säger om eleverna rör vid varandra. En aktivitet som tar mer än 30 minuter, till exempel hälften av dem i Skapa och bygga, delar ni upp på två pass, och båda passen slutar med återkopplingen och tacket. Gör gärna samma aktivitet flera gånger, eftersom gruppen samarbetar bättre i en aktivitet som den känner igen. Spara de kort som gruppen har gjort och vill göra igen.
+    - Brainbreakkorten ligger på sidan Ta fram en brainbreak, som har 80 kort. Sidan slumpar fram sex, och gruppen väljer ett. Kortet visas stort med en klocka som är ställd på kortets minuter, och du kan sätta på glad och peppig musik, dansmusik och modern musik eller lugn och avslappnad musik från sidans radio. Du startar klockan och är själv med, och du avslutar genom att räcka upp handen och säga stopp. Ska gruppen orka mer efteråt, gör ni två eller tre pigga brainbreaks i rad och sist en lugn, så att pausen blir omkring tio minuter.
+  kravText: "En aktivitet som du väljer, eller gör själv, ska klara fyra krav:"
+  krav:
+    - rubrik: Alla behövs
+      text: Gruppen lyckas bara tillsammans, och ingen åker ut eller vinner.
+    - rubrik: Alla kan delta
+      text: Den som tvekar har en roll, och det finns en väg utan beröring.
+    - rubrik: Alla känner sig accepterade
+      text: De andra hjälper och hejar, och ingen står ensam inför gruppen.
+    - rubrik: Det är roligt
+      text: Gruppen skrattar och firar tillsammans.
+
+uppfoljning:
+  rubrik: Gruppen över tid
+  text: Gör en eller två aktiviteter i veckan så länge gruppen behöver det, och gärna två de första sex veckorna. Byter du grupperna i en klass, börjar de nya grupperna med ett kort ur Lära känna varandra. När gruppen ska skiljas, gör ni en avslutande aktivitet ur Gemensamma mål, som Uppskattningsnätet. Då läser du upp raden nederst i Lärarens skattning och säger vad ni har blivit bättre på. Lärarens skattning, Gruppreflektion och bladet Vår grupp står under Materialet. Gäller två rader samtidigt, gör du det som står först.
+  rader:
+    - nar: Varje vecka
+      vad: Skatta gruppen i Lärarens skattning.
+    - nar: Varannan vecka
+      vad: Från vecka 2 fyller eleverna i Vår grupp, och du leder en gruppreflektion efter en kort aktivitet i ett av veckans pass. I de två veckorna efter modellerar du det gruppen ska bli bättre på.
+    - nar: Vecka 1–4
+      vad: Välj kort utan beröring ur Lära känna varandra och Trygghet och gemenskap. Sedan väljer du fler kort ur Samarbetsutmaningar, Gemensamma mål och Skapa och bygga.
+    - nar: Kort med beröring
+      vad: Välj dem från vecka 5, när de flesta ringar in 4 eller 5 på ”Jag känner mig trygg i gruppen”.
+    - nar: Linjen nedåt två veckor i rad
+      vad: Gör två aktiviteter i veckan ur Trygghet och gemenskap. Välj kort utan beröring, gärna sådana som gruppen redan kan, och ta upp det du har sett i nästa gruppreflektion.
+    - nar: Linjen under 7 i fyra veckor, utan att stiga
+      vad: Välj kort ur en kategori som ni inte har använt på länge, och fråga i gruppreflektionen vad ni kan bli lite bättre på.
+    - nar: Linjen på 7 eller mer i fyra veckor
+      vad: Gör en aktivitet i veckan och en gruppreflektion i månaden, om de flesta också ringar in 4 eller 5 på varje påstående i Vår grupp.
+mal:
+  punkter:
+    - samarbeta mot ett mål som gruppen bara når tillsammans
+    - lyssna, turas om och heja på varandra
+    - pröva igen när något går fel
+    - säga vad någon annan gjorde för gruppen och tacka för det
+    - säga vad gruppen gör bra och vad den ska bli bättre på
+checklista:
+  rubrik: Checklista inför första gången
+  punkter:
+    - Jag har läst kortet, tagit fram materialet och vet vilket beteende jag modellerar.
+    - Jag har tänkt ut en roll åt den som kan tveka.
+    - Jag visar stoppet första gången, med handen i luften och ordet stopp, och gruppen prövar det.
+    - Jag har skrivit ut Lärarens skattning, och bladet Vår grupp till den första gruppreflektionen.
+grund:
+  text: Metoden bygger på kapitlet om gruppstärkande övningar och samarbetande aktiviteter i Gruppstärkande ledarskap (Fohlin och Wilson, 2023). I ett samarbete når eleverna målet bara tillsammans, och en sammanställning av 148 studier med elever i åldern 12–15 år visar att samarbete i undervisningen ger bättre kamratrelationer och högre prestationer än tävling och arbete var för sig (Roseth m.fl., 2008). I klasser där lärarna oftare sa högt vad elever med låg status kunde och bidrog med, deltog de eleverna mer (Cohen och Lotan, 1995), och därför säger du högt vad någon gör för gruppen. I en svensk studie av kooperativt lärande i åk 5 var samtalet om hur gruppen hade fungerat den del som lärarna gjorde minst av (Klang m.fl., 2020), och därför har gruppen en gruppreflektion varannan vecka. I en sammanställning av studier med elever i åldern 5–12 år arbetade eleverna mer med uppgiften direkt efter rörelse i klassrummet, som oftast pågick i omkring tio minuter (Watson m.fl., 2017).
+  kallor: Bygger på Fohlin och Wilson, Gruppstärkande ledarskap (2023), Fohlin m.fl., Grundbok i kooperativt lärande (2017), Roseth m.fl. (2008), Cohen och Lotan (1995), Klang m.fl. (2020), Watson m.fl. (2017), Hodges m.fl. (1999), Östberg (2003), Folkhälsomyndigheten (2023), Friends (2025) och Skolverket (2011, 2022).
+
+ramar:
+  rubrik: Materialet
+  text:
+    - Här står Lärarens skattning och Gruppreflektion med bladet Vår grupp. Sist står frågekorten och meningarna att avsluta, som hör till aktiviteterna i Lära känna varandra. Aktivitetskorten och brainbreakkorten finns på sidorna Ta fram en aktivitet och Ta fram en brainbreak.
+  ramar:
+    - rubrik: Lärarens skattning
+      text:
+        - Lärarens skattning är ett diagram för tolv veckor. Skriv ut det när ni börjar, och ett nytt om ni fortsätter efter vecka 12. Varje vecka skattar du från 1 till 10 hur gruppen mår och samarbetar, och tabellen visar hur gruppen ser ut vid varje skattning.
+      oversikt:
+        kolumner:
+          - Skattning
+          - Så ser gruppen ut
+        rader:
+          - ["9–10 · Mycket bra", "Alla är med och tar hand om varandra. Gruppen löser det mesta själv."]
+          - ["7–8 · Bra", "Alla är med. Gruppen samarbetar för det mesta, med lite stöd av dig."]
+          - ["5–6 · Ibland", "Någon står ibland utanför. Samarbetet går när du leder det."]
+          - ["3–4 · Svårt", "Flera står utanför. Samarbetet stannar ofta, och det blir lätt bråk."]
+          - ["1–2 · Fungerar inte", "Det är otryggt i gruppen, och eleverna samarbetar inte."]
+      delar:
+        - rubrik: Så gör du
+          falt:
+            - rubrik: Varje vecka
+              text: Skatta i slutet av veckan, gärna direkt efter veckans sista pass. Tänk då på hur gruppen har haft det i aktiviteterna, på lektionerna och på rasterna.
+            - rubrik: Vem du har missat
+              text: Tänk på vem du inte har sagt något om den här veckan. Nästa gång säger du högt vad hen gör för gruppen.
+            - rubrik: Krysset
+              text: Sätt ett kryss vid veckan och skattningen, och dra ett streck från förra veckans kryss.
+            - rubrik: Linjen
+              text: Avsnittet Gruppen över tid säger vad du gör när linjen går nedåt, står still eller ligger högt.
+            - rubrik: Tänk på
+              text: Skatta gruppen som helhet, och i en klass hela klassen. Jämför inte med andra grupper. Är ni två vuxna, skattar ni var för sig de första veckorna och enas om krysset. Skattar du 1 eller 2, följer du skolans rutin.
+    - rubrik: Gruppreflektion
+      text:
+        - "Ni gör gruppreflektionen varannan vecka, från vecka 2, direkt efter en aktivitet som gruppen redan kan och som tar omkring tio minuter. Gruppreflektionen tar 20–30 minuter och slutar i två meningar: ”Detta gör vi bra. Detta ska vi bli bättre på.” Är eleverna fler än sex, pratar de i grupper om två till fyra medan du går runt och lyssnar, och när du lyfter det gruppen gör bra, berättar två eller tre grupper först vad de har pratat om. I en klass säger du till eleverna, innan de fyller i bladet, att gruppen på bladet är hela klassen."
+      delar:
+        - rubrik: Så leder du gruppreflektionen
+          falt:
+            - rubrik: Ingen pekas ut
+              text: Ingen behöver berätta vad hen skrev. Ni nämner bara någon vid namn när hen har gjort något bra, och den som inte vill svara får hålla med någon annan.
+            - rubrik: 1 · Vår grupp
+              text: Eleverna sitter så att ingen ser grannens blad och fyller i sitt eget på omkring fem minuter. Med de yngsta och den som behöver läser du påståendena och orden över ringarna högt och pekar på dem. Samla in bladen.
+            - rubrik: 2 · Frågorna
+              text: Ställ två eller tre frågor. Från vecka 4 börjar du med frågan om förra gångens mening, det gruppen skulle bli bättre på. Efter varje fråga tänker alla tyst innan ni pratar två eller tre minuter. Skriv upp det du hör.
+            - rubrik: 3 · Lyft
+              text: Säg med namn vad du har sett och hört att gruppen gör bra. Gör gruppen nu det som förra gångens mening säger, blir det något den gör bra. Annars står meningen kvar som det gruppen ska bli bättre på.
+            - rubrik: 4 · Två meningar
+              text: "Föreslå två meningar ur det eleverna sa. Från vecka 8 föreslår eleverna dem. Fråga om alla kan stå bakom dem, och skriv dem på tavlan som något ni gör och säger: ”Vi väntar in varandra och frågar: Är alla med?”"
+        - rubrik: Frågor att välja bland
+          falt:
+            - rubrik: Om gruppen
+              text: ”Förra gången sa vi att vi skulle bli bättre på att vänta in varandra. När såg du någon göra det? Också på lektionerna och rasten?” ”Vad gör vi bra när vi samarbetar?” ”Vad kan vi bli lite bättre på?”
+            - rubrik: Om var och en
+              text: ”Vad gjorde någon som hjälpte gruppen de här veckorna?” ”Vad kan du göra för gruppen nästa vecka?”
+        - rubrik: Efteråt
+          falt:
+            - rubrik: Ett lågt svar
+              text: Läs först de blad där någon har ringat in 1 eller 2 på påstående 4, 5 eller 6. Står elevens namn där, talar du enskilt med hen. Står inget namn, säger du till alla att de kan komma till dig.
+            - rubrik: Läs och räkna
+              text: Läs det eleverna har skrivit, och räkna för varje påstående hur många av de svarande som ringade in 4 eller 5. Jämför antalen med förra gången, och skriv dem och det gruppen gör bra på baksidan av Lärarens skattning.
+            - rubrik: Två veckor framåt
+              text: Skriv det gruppen ska bli bättre på i raden nederst i Lärarens skattning. Välj kort där gruppen kan öva det. Säg högt när någon gör det, också på lektionerna och rasten.
+    - rubrik: Frågekort och meningar att avsluta
+      text:
+        - "Här är frågekort och meningar att klippa ut till aktiviteterna i Lära känna varandra. Frågekorten passar till Berätta mera, Inre och yttre cirkel, Speed-dejting med tärning, ”Vilka är vi?” och ”Fråga, fråga, byt!”, och meningarna hör till Oavslutade meningar. Skriv gärna egna frågor och meningar som passar gruppen."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Klipp
+              text: Skriv ut en omgång meningar till varje grupp, och så många frågekort att varje elev får ett i ”Fråga, fråga, byt!” Klipp längs linjerna, så att varje rad blir ett kort. I de andra aktiviteterna väljer du frågor ur listan.
+      listor:
+        - rubrik: Frågekort
+          rader:
+            - ["Vad gillar du att göra på fritiden?"]
+            - ["Vilken mat gillar du?"]
+            - ["Vilket djur skulle du vilja vara för en dag?"]
+            - ["Vad är du bra på?"]
+            - ["Vad tycker du om att göra på loven?"]
+            - ["Vilken bok, film eller serie tycker du om?"]
+            - ["Vad skulle du vilja lära dig?"]
+            - ["Var tycker du om att vara?"]
+            - ["Vad gör dig glad?"]
+            - ["Vilken superkraft skulle du välja?"]
+            - ["Vad gör du helst på helgen?"]
+            - ["Vad skulle du göra om du fick bestämma allt en hel dag?"]
+        - rubrik: Meningar att avsluta
+          rader:
+            - ["Jag blir glad när …"]
+            - ["Jag är bra på …"]
+            - ["En sak jag vill lära mig är …"]
+            - ["Min favoritplats är …"]
+            - ["Om jag fick bestämma allt en hel dag skulle jag …"]
+            - ["Jag skrattar när …"]
+            - ["En bra kompis är någon som …"]
+            - ["Något jag är stolt över är …"]
+            - ["Om jag kunde resa vart som helst skulle jag åka till …"]
+            - ["Det bästa med vår grupp är …"]
+            - ["Jag tycker om när någon …"]
+            - ["På helgen tycker jag om att …"]
+
+lathund:
+  innehall: En aktivitet i fem delar
+  metoden:
+    text:
+      - En eller två gånger i veckan gör gruppen en aktivitet där alla behövs och ingen åker ut. Du väljer den ur 100 kort.
+      - Varannan vecka fyller eleverna i bladet Vår grupp, och du leder en gruppreflektion. I veckorna efter modellerar du det gruppen ska bli bättre på. Varje vecka skattar du i Lärarens skattning hur gruppen mår och samarbetar.
+    ruta:
+      rubrik: Tre saker att hålla fast vid
+      punkter:
+        - fet: Alla behövs.
+          text: Ingen åker ut eller vinner över någon annan.
+        - fet: Ingen tvingas.
+          text: Den som tvekar får en riktig roll, som att ta tiden.
+        - fet: Säg högt vad någon gör för gruppen.
+          text: Återkopplingen och tacket hör till varje gång.
+    tabell:
+      rubrik: En aktivitet i fem delar
+      kolumner:
+        - Del
+        - Du gör och säger
+      rader:
+        - - "1 · Förklara\n1–⁠3 min"
+          - "Säg målet, och från vecka 3 också det gruppen ska bli bättre på. En elev säger målet med egna ord. Säg vem var och en ska tacka.\n”Ni är klara när alla …”"
+        - - "2 · Modellera\n1–⁠2 min"
+          - "Visa med en elev kortets beteende, och från vecka 3 också det gruppen ska bli bättre på.\n”Får jag ta din hand?”"
+        - - "3 · Genomför\n5–⁠20 min"
+          - "Var med, och säg högt vad någon gör för gruppen, helst när någon gör det du visade.\n”Sara lyfte armen, och då kom rockringen vidare.”"
+        - - "4 · Återkoppla\n2–⁠4 min"
+          - Ställ kortets fråga, och låt två eller tre svara. Säg vad eleverna gjorde för varandra och om någon gjorde det du visade.
+        - - "5 · Tacka\n1 min"
+          - "Var och en tackar grannen för något hen gjorde.\n”Tack för att du …”"
+    not: "När det inte går som tänkt: Säger någon ”Det var ditt fel!”, svara: ”Vi lyckas och misslyckas tillsammans.” Den som inte vill bli rörd vid håller i ett kort rep. Blir det för vilt, räck upp handen, säg stopp och gör nästa försök jättelångsamt."
+  pass:
+    rubrik: Vi gör en aktivitet
+    textRubrik: Rockringen
+    utskrift: Skriv ut passexemplet
+    titel: Fem elever i åk 4, vecka 5. De ska bli bättre på att hjälpa den som fastnar.
+    text:
+      - "Läraren samlar gruppen i en ring: ”Rockringen ska gå ett varv utan att någon släpper taget. Ni är klara när den är tillbaka hos mig.” Leo vill inte hålla händer och får ta tiden. Läraren visar med Amina hur man hjälper den som fastnar: ”Böj dig, så lyfter jag armen.”"
+      - "Rockringen fastnar hos Elias. Sara säger: ”Böj dig, så lyfter jag armen.” Läraren säger: ”Sara lyfte armen, och då kom rockringen vidare.” Den kommer runt på fyrtio sekunder, och gruppen vill pröva igen."
+      - "Läraren frågar: ”Vad gjorde någon som hjälpte gruppen?” Elias och Amina svarar, och läraren säger vad eleverna gjorde för varandra. Sist går tacket runt: ”Tack, Sara, för att du lyfte armen.”"
+    forberett:
+      rubrik: Det jag förberedde
+      text:
+        - En rockring, en till om vi prövar två, korta rep, en klocka och plats för en ring.
+        - En roll åt den som inte vill hålla händer, och det beteende jag modellerar.
+    klarTidigt: Går det fort, prövar gruppen med två rockringar som går åt var sitt håll.
+    schema:
+      rubrik: Aktiviteten, del för del
+      rader:
+        - tid: 1–3 min
+          fas: 1 · Förklara
+          vad: Säg målet. Leo tar tiden.
+        - tid: 1–2 min
+          fas: 2 · Modellera
+          vad: "Visa: ”Böj dig, så lyfter jag armen.”"
+        - tid: 5–20 min
+          fas: 3 · Genomför
+          vad: Var med, och säg vad Sara gjorde
+        - tid: 2–4 min
+          fas: 4 · Återkoppla
+          vad: ”Vad gjorde någon som hjälpte gruppen?”
+        - tid: 1 min
+          fas: 5 · Tacka
+          vad: Tacket går runt
+  mall:
+    rubrik: Gruppreflektion
+    underrad: 20–30 minuter varannan vecka, efter en kort aktivitet
+    block:
+      - typ: tabell
+        rubrik: Så leder du den
+        kolumner:
+          - Del
+          - Du gör
+        rader:
+          - ["Ingen pekas ut", "Ingen behöver berätta vad hen skrev. Ni nämner bara namn när någon har gjort något bra."]
+          - ["1 · Vår grupp", "Eleverna fyller i bladet så att ingen ser grannens. Samla in bladen."]
+          - ["2 · Frågorna", "Ställ två eller tre frågor, och prata två eller tre minuter om varje. Alla tänker tyst först. Är eleverna fler än sex, pratar de i grupper om två till fyra."]
+          - ["3 · Lyft", "Säg vad gruppen gör bra. Gör gruppen det förra gångens mening säger, blir den det ni gör bra, annars står den kvar. Är eleverna fler än sex, berättar två eller tre grupper först vad de pratade om."]
+          - ["4 · Två meningar", "Föreslå dem ur det eleverna sa. Från vecka 8 föreslår eleverna dem. Fråga om alla kan stå bakom dem, och skriv dem på tavlan som något ni gör."]
+      - typ: tabell
+        rubrik: Frågor att välja bland
+        kolumner:
+          - Frågor om
+          - Så kan du fråga
+        rader:
+          - ["Gruppen", "”Förra gången sa vi att vi skulle bli bättre på att vänta in varandra. När såg du någon göra det? Också på lektionerna och rasten?”\n”Vad gör vi bra när vi samarbetar?”\n”Vad kan vi bli lite bättre på?”"]
+          - ["Var och en", "”Vad gjorde någon som hjälpte gruppen de här veckorna?”\n”Vad kan du göra för gruppen nästa vecka?”"]
+      - typ: not
+        text: "Gruppreflektionen slutar i två meningar: ”Detta gör vi bra. Detta ska vi bli bättre på.” Tala enskilt med den som har ringat in 1 eller 2 om sig själv. Står inget namn, säger du till alla att de kan komma till dig."
+  material:
+    rubrik: Vad du behöver
+    kravEtikett: Krav på en aktivitet
+    var:
+      rubrik: Var materialet finns
+      punkter:
+        - fet: Aktivitetskorten.
+          text: Sidan Ta fram en aktivitet har 100 kort i fem kategorier.
+        - fet: Brainbreakkorten.
+          text: Sidan Ta fram en brainbreak har 80 kort, en klocka och musik.
+        - fet: Lärarens skattning och Gruppreflektion.
+          text: Under Materialet på metodens sida, med bladet Vår grupp och frågekorten.
+    bordet:
+      - Kortet, i handen eller på skärmen
+      - Kortets material
+      - En klocka, om ni tar tid
+      - Vår grupp och pennor, varannan vecka
+    uppfoljning:
+      - nar: Varje vecka
+        vad: Skatta gruppen från 1 till 10, sätt ett kryss och dra ett streck från förra veckans.
+      - nar: Varannan vecka
+        vad: Bladet Vår grupp och en gruppreflektion. Skriv det gruppen ska bli bättre på i diagrammet.
+      - nar: Vecka 1–4
+        vad: Kort utan beröring ur Lära känna varandra och Trygghet och gemenskap.
+      - nar: Linjen nedåt två veckor i rad
+        vad: Två aktiviteter i veckan ur Trygghet och gemenskap, utan beröring.
+film:
+  sekunder: 29.9
+  beskrivning: "Leo tar tiden. De andra håller händer. Läraren säger: ”Ni är klara när rockringen är tillbaka hos mig.” Elias fastnar i rockringen, och Sara hjälper. Sara säger: ”Böj dig, så lyfter jag armen.” Läraren säger vad Sara gjorde. Läraren säger: ”Sara lyfte armen, och då kom rockringen vidare.” Rockringen är tillbaka. Leo säger: ”Fyrtio sekunder!” Läraren frågar efteråt. Läraren frågar: ”Vad gjorde någon som hjälpte gruppen?” Elias säger: ”Sara visade hur jag skulle böja mig.”"
+  rubrik: "Så gör gruppen"
+  ingress: "Rockringen ska gå ett varv runt gruppen utan att någon släpper taget. Här är fyra bilder ur filmen, med en grupp i åk 4. Leo, som inte vill hålla händer, tar tiden."
+  stillbilder:
+    - text: "Läraren säger målet, och Leo tar tiden."
+    - text: "Sara hjälper Elias, och läraren säger vad Sara gjorde."
+    - text: "Rockringen kommer runt, och Leo säger tiden."
+    - text: "Läraren frågar, och Elias säger vad Sara gjorde."

@@ -1,0 +1,361 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { publicerade } from '../../../lib/innehall';
+import { metodAdress, UPPHOV } from '../../../lib/metod';
+import { aktiviteterAv, aktiviteterAdress, aktiviteterData, kategorinsKort } from '../../../lib/aktiviteter';
+import { centralAv, lasbarAdress } from '../../../lib/centrala';
+import Delning from '../../../components/Delning.astro';
+import Klocka from '../../../components/Klocka.astro';
+import { delningPa } from '../../../lib/delning';
+import { site } from '../../../data/site';
+
+// /stodundervisning/<id>/aktiviteter: sidan Ta fram en aktivitet, som slumpar aktivitetskort ur metodens databas
+// (src/lib/aktiviteter.ts), som Niclas beskrev den kvällen 2026-10-16 (metodriggens out/gruppstarkande-aktiviteter/
+// TILL-SAJTEN.md): "i varje kategori kan man slumpa 1 eller 6 stycken, så att de står i 3 rader och 2 kolumner. Man kan
+// ha en timer där också. Men jag tänker mer att det handlar om att skriva ut. Ska man kunna bocka för aktiviteter i en
+// lista när man får fram 6, sedan slumpa och fortsätta bocka, och när som helst trycka på Skriv ut, så får man dem man har
+// bockat för?"
+//
+//   Urvalet   Ett kort eller sex, och Alla eller en av de fem kategorierna. Varje tryck slumpar nya kort ur urvalet.
+//   Sex kort  står i tre rader och två kolumner, med bandet, namnet, raden och bilden. Ett tryck på kortet visar det helt.
+//   Bocken    Varje kort har en liten bock i hörnet som lägger kortet i listan Att skriva ut (Niclas 2026-10-16: "Bocka
+//             för låter lite trubbigt. Kan det inte vara liten diskret bock som förklarar sig själv och sedan adderar den
+//             till en lista att skriva ut"). Listan står kvar när läraren slumpar igen eller byter kategori, och ett kort i
+//             listan slumpas inte fram igen förrän det är borta ur den (Niclas: "En som man bockat ska ju inte slumpas fram
+//             igen förrens den är avbokad"). Listan står bredvid korten på en bred skärm och bakom en rad längst ned i
+//             telefonen (Niclas: "någon form av lista eller bank med de man bockat som funkar på pc och mobil"). Den
+//             sparas i webbläsaren, och dess länk bär korten, så att samma lista går att öppna på en annan enhet.
+//   Utskrift  Skriv ut listan ger korten i listans ordning, ett kort per A4. Ett kort är kortets sida ur kategorins
+//             Word-fil, som Word har sparat som pdf (src/lib/aktivitetskortform.ts, scripts/bankpdf.mjs,
+//             scripts/pdfdelar.mjs), och flera kort fogas ihop i webbläsaren (src/scripts/pdfutskrift.ts), så att
+//             utskriften och Word-filen är samma sidor (METODER.md under Utskriften).
+//   Klockan   står bredvid ett kort som visas helt, som på Ta fram ett skrivkort, ställd på kortets tid. Den är inte det
+//             viktiga, så den står efter knapparna. På en bred skärm står knapparna, klockan och listan att skriva ut i en
+//             spalt till höger, listan under klockan, så att kortet får resten av bredden.
+//   Alla      Varje kategoris 20 kort står i en lista som fälls ut, så att läraren kan ta fram ett kort som gruppen har
+//             gjort förut (riggens förslag, eftersom metoden ber gruppen göra samma aktivitet flera gånger), med namnet och
+//             raden om vad aktiviteten är, som de sex korten (Niclas 2026-10-16: "Inte allt. Men namnet och vad det är").
+//
+// Ett kort kommer inte igen förrän urvalets alla kort har varit framme, som skrivkorten, och det som har visats, listan,
+// antalet, den senaste kategorin och klockans minuter sparas i webbläsaren till nästa gång. Adressen bär korten
+// (#lara-kanna-01), så att en omladdning visar samma kort.
+export async function getStaticPaths() {
+  const metoder = await publicerade('stodundervisning');
+  return metoder.filter((m) => aktiviteterAv(m.id)).map((m) => ({ params: { id: m.id }, props: { m } }));
+}
+
+const { m } = Astro.props;
+const d = m.data;
+const b = aktiviteterAv(m.id)!;
+const c = centralAv('aktiviteter');
+const namn = c?.namn ?? 'Ta fram en aktivitet';
+const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/aktiviteter`;
+const kort = `${site.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}${c ? lasbarAdress(c) : aktiviteterAdress(m.id)}`;
+const data = aktiviteterData(m.id, b);
+---
+
+<Base title={`${namn}: ${d.titel}`} description={`Slumpa fram ett aktivitetskort eller sex ur ${b.kort.length} i ${b.kategorier.length} kategorier, samla dem du vill ha i en lista och skriv ut dem, ett kort per A4.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
+  <article class="kortbanksida aktivitetssida" data-metod={m.id} data-titel={d.titel}>
+    {/* Statistiken (DRIFT.md under Besöksstatistik): besöken räknas under metoden som "på Ta fram en aktivitet",
+        utskrifterna som utskrift:<id>/aktiviteter och …:listan, och listans länk som aktiviteter:<id>:lank. Varje tryck
+        på en kategori räknas inte, så att statistiken och GoatCounters tak inte fylls av slumpningen. */}
+    <header class="sk-huvud">
+      <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${m.id}`}>{d.titel}</a> · Aktiviteter</p>
+      <h1>{namn}</h1>
+      <p class="ingress">Välj om du vill se ett kort eller sex, och tryck på en kategori. Varje tryck ger nya kort. Tryck på bocken i hörnet på de kort du vill ha, så hamnar de i listan att skriva ut.</p>
+    </header>
+
+    <div class="sk-val">
+      <div class="sk-valrad" role="group" aria-labelledby="ak-antal-etikett">
+        <span class="sk-etikett" id="ak-antal-etikett">Antal</span>
+        <div class="sk-segment">
+          <button type="button" class="sk-antal" data-antal="1" aria-pressed="false">Ett kort</button>
+          <button type="button" class="sk-antal" data-antal="6" aria-pressed="true">Sex kort</button>
+        </div>
+      </div>
+      <div class="sk-valrad" role="group" aria-labelledby="ak-kat-etikett">
+        <span class="sk-etikett" id="ak-kat-etikett">Slumpa ur</span>
+        <div class="sk-nivaknappar ak-kategorier">
+          <button type="button" class="sk-niva" data-kategori="alla">Alla</button>
+          {b.kategorier.map((k) => (
+            <button type="button" class="sk-niva" data-kategori={k.id} style={`--niva:#${k.farg}`}>{k.namn}</button>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    {/* Kortet eller de sex till vänster, och i spalten till höger knapparna och klockan när ett kort visas helt, med listan
+        att skriva ut under dem (Niclas 2026-10-16: "Kan den inte ligga under klockan så att kortet för aktiviteten blir
+        större att se på pc?"). */}
+    <div class="ak-yta">
+      <div class="sk-scen ak-scen" id="ak-scen" data-lage="tom">
+        <p class="sk-tom">Tryck på Alla eller på en kategori.</p>
+        <div class="ak-kortplats" id="ak-kortplats" tabindex="-1" aria-label="Kortet" hidden></div>
+        <div class="ak-sex-ram" id="ak-sex-ram" hidden>
+          <p class="sk-tio-not">Tryck på ett kort för att se det helt.</p>
+          <ol class="ak-sex" id="ak-sex"></ol>
+        </div>
+      </div>
+
+      <div class="ak-hoger">
+      <div class="sk-sidospalt ak-verktyg" id="ak-verktyg" hidden>
+        <div class="sk-atgarder ak-kortknappar">
+          <a class="knapp sekundar" id="ak-skrivut-ett" href="#" target="_blank" rel="noopener" data-goatcounter-click={`utskrift:${m.id}/aktiviteter`} data-goatcounter-title={`${d.titel}: utskrift av ett aktivitetskort`}>Skriv ut kortet</a>
+          <button type="button" class="knapp sekundar" id="ak-tillbaka" hidden>Tillbaka till de sex</button>
+        </div>
+        <Klocka />
+      </div>
+
+      <aside class="ak-valda" id="ak-valda" aria-labelledby="ak-valda-rubrik" data-oppen="false">
+        <button type="button" class="ak-valda-rad" id="ak-valda-rad" aria-expanded="false" aria-controls="ak-valda-innehall">
+          <span>Att skriva ut</span> <span class="ak-valda-antal" id="ak-valda-antal">0</span>
+        </button>
+        <div class="ak-valda-innehall" id="ak-valda-innehall">
+          <h2 class="ak-valda-rubrik" id="ak-valda-rubrik">Att skriva ut <span class="ak-valda-antal">0</span></h2>
+          <p class="ak-valda-tom" id="ak-valda-tom">Listan är tom. Tryck på bocken i ett korts hörn, så hamnar kortet här.</p>
+          <ol class="ak-valda-lista" id="ak-valda-lista"></ol>
+          <div class="sk-atgarder ak-valda-knappar">
+            <a class="knapp" id="ak-skrivut-valda" href="#" target="_blank" rel="noopener" data-goatcounter-click={`utskrift:${m.id}/aktiviteter:listan`} data-goatcounter-title={`${d.titel}: utskrift av listans aktivitetskort`}>Skriv ut listan</a>
+            <button type="button" class="knapp sekundar" id="ak-kopiera" data-goatcounter-click={`aktiviteter:${m.id}:lank`} data-goatcounter-title={`${d.titel}: listans länk kopierad`}>Kopiera listans länk</button>
+            <button type="button" class="knapp sekundar" id="ak-tom">Töm listan</button>
+          </div>
+          <p class="ak-valda-not" id="ak-valda-not" role="status"></p>
+        </div>
+      </aside>
+      </div>
+    </div>
+
+    <section class="ak-alla" aria-labelledby="ak-alla-rubrik">
+      <h2 id="ak-alla-rubrik">Alla aktiviteter</h2>
+      <p>Ta fram ett kort som gruppen har gjort förut och vill göra igen.</p>
+      {b.kategorier.map((k) => (
+        <details class="ak-alla-kategori" style={`--kat:#${k.farg}`}>
+          <summary><span class="ak-alla-namn">{k.namn}</span> <span class="ak-alla-antal">{kategorinsKort(b, k.id).length} kort</span></summary>
+          <ol class="ak-alla-lista">
+            {kategorinsKort(b, k.id).map((x) => <li><button type="button" class="ak-visa" data-kort={x.id}><span class="ak-visa-namn"><span class="ak-nr">{x.nr}</span> {x.namn}</span> <span class="ak-visa-rad">{x.rad}</span></button></li>)}
+          </ol>
+        </details>
+      ))}
+    </section>
+
+    <noscript><p class="sk-tom">Sidan behöver JavaScript för att slumpa korten. Korten finns också i Word och pdf under <a href={`/stodundervisning/${m.id}`}>{d.titel}</a>.</p></noscript>
+
+    <p class="upphov">{UPPHOV}. Aktivitetskorten till <a href={`/stodundervisning/${m.id}`}>{d.titel}</a>: {b.kort.length} kort, {b.kategorier.map((k) => `${kategorinsKort(b, k.id).length} i ${k.namn}`).join(', ')}. Sidans korta adress är {kort}.</p>
+
+    <script type="application/json" id="ak-data" set:html={JSON.stringify(data).replace(/</g, '\\u003c')}></script>
+    {delningPa && <Delning sida={aktiviteterAdress(m.id)} titel={`${namn}: ${d.titel}`} medKort />}
+  </article>
+</Base>
+
+<script>
+  import { aktivitetskortet, dra, el, lagring, type Aktivitet, type Aktivitetsdata } from '../../../scripts/kortbanken';
+  import { klocka } from '../../../scripts/klocka';
+  import { ettkortLank, flerakortKnapp } from '../../../scripts/pdfutskrift';
+
+  const sida = document.querySelector<HTMLElement>('.aktivitetssida')!;
+  const metod = sida.dataset.metod!;
+  const data: Aktivitetsdata = JSON.parse(document.getElementById('ak-data')!.textContent!);
+  const kortMed = new Map(data.kort.map((k) => [k.id, k]));
+  const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+  const raknaHandelse = (path: string, title: string) => (window as { goatcounter?: { count: (v: object) => void } }).goatcounter?.count({ path, title, event: true });
+
+  type Sparat = { antal: number; kategori?: string; minuter: number; ljud: boolean; sedda: string[]; bockade: string[] };
+  const { varde: sparat, spara } = lagring<Sparat>(`aktiviteter:${metod}`, { antal: 6, minuter: 10, ljud: true, sedda: [], bockade: [] });
+  sparat.bockade = sparat.bockade.filter((id) => kortMed.has(id));
+
+  // ---------- Läget ----------
+  const scen = $('ak-scen');
+  const valrad = document.querySelector<HTMLElement>('.sk-val')!;
+  const verktyg = $('ak-verktyg');
+  const sexRam = $('ak-sex-ram');
+  const sex = $<HTMLOListElement>('ak-sex');
+  const plats = $('ak-kortplats');
+  const tillbaka = $<HTMLButtonElement>('ak-tillbaka');
+  const skrivutEtt = $<HTMLAnchorElement>('ak-skrivut-ett');
+  let dragna: Aktivitet[] = [];
+  let visat: Aktivitet | undefined;
+  const tillScenen = () => {
+    const under = valrad.getBoundingClientRect().bottom;
+    const topp = scen.getBoundingClientRect().top;
+    const fast = getComputedStyle(valrad).position === 'sticky';
+    const mal = fast ? under + 12 : 12;
+    if (Math.abs(topp - mal) > 4) window.scrollBy({ top: topp - mal, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  };
+
+  // ---------- Listan att skriva ut ----------
+  const valda = $('ak-valda');
+  const lista = $<HTMLOListElement>('ak-valda-lista');
+  const bockad = (id: string) => sparat.bockade.includes(id);
+  function bocka(id: string, pa: boolean) {
+    sparat.bockade = sparat.bockade.filter((x) => x !== id);
+    if (pa) sparat.bockade.push(id);
+    spara();
+    visaBockar();
+  }
+  // Bocken i kortets band: en knapp som lägger kortet i listan, och tar bort det med ett tryck till. ram är kortets ram,
+  // som bär bocken och märks när kortet står i listan.
+  const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7 3.7 7.3-8"/></svg>';
+  function visaBock(b: HTMLButtonElement) {
+    const k = kortMed.get(b.dataset.kort!)!;
+    const med = bockad(k.id);
+    b.setAttribute('aria-pressed', String(med));
+    b.setAttribute('aria-label', `${k.namn} i listan att skriva ut`);
+    b.title = med ? 'I listan att skriva ut. Tryck för att ta bort' : 'Lägg i listan att skriva ut';
+    b.closest('.ak-med-bock')?.classList.toggle('vald', med);
+  }
+  function medBock(ram: HTMLElement, k: Aktivitet) {
+    const b = el('button', 'ak-bock') as HTMLButtonElement;
+    b.type = 'button';
+    b.dataset.kort = k.id;
+    b.innerHTML = BOCK;
+    b.addEventListener('click', () => bocka(k.id, !bockad(k.id)));
+    ram.classList.add('ak-med-bock');
+    ram.append(b);
+    visaBock(b);
+    return ram;
+  }
+  function visaBockar() {
+    const n = sparat.bockade.length;
+    document.querySelectorAll('.ak-valda-antal').forEach((x) => { x.textContent = String(n); });
+    $('ak-valda-tom').hidden = n > 0;
+    lista.replaceChildren(...sparat.bockade.map((id) => {
+      const k = kortMed.get(id)!;
+      const kat = data.kategorier.find((x) => x.id === k.kategori)!;
+      const li = el('li', 'ak-valt');
+      li.style.setProperty('--kat', kat.farg);
+      const visa = el('button', 'ak-valt-namn') as HTMLButtonElement;
+      visa.type = 'button';
+      visa.append(el('span', 'ak-nr', String(k.nr)), ` ${k.namn}`);
+      visa.title = `Visa ${k.namn}`;
+      visa.addEventListener('click', () => { stang(); visaEtt(k, false); tillScenen(); plats.focus({ preventScroll: true }); });
+      const bort = el('button', 'ak-valt-bort', '×') as HTMLButtonElement;
+      bort.type = 'button';
+      bort.setAttribute('aria-label', `Ta bort ${k.namn} ur listan`);
+      bort.addEventListener('click', () => bocka(id, false));
+      li.append(visa, bort);
+      return li;
+    }));
+    // Bockarna på korten som står på skärmen följer listan.
+    document.querySelectorAll<HTMLButtonElement>('.ak-bock[data-kort]').forEach(visaBock);
+    valda.classList.toggle('har-kort', n > 0);
+    $('ak-skrivut-valda').setAttribute('aria-disabled', String(n === 0));
+    $('ak-tom').hidden = n === 0;
+    $('ak-kopiera').hidden = n === 0;
+  }
+  $('ak-tom').addEventListener('click', () => { sparat.bockade = []; spara(); visaBockar(); });
+
+  // Listan i telefonen: en rad längst ned med antalet, som fäller ut listan över sidan.
+  const rad = $<HTMLButtonElement>('ak-valda-rad');
+  const stang = () => { valda.dataset.oppen = 'false'; rad.setAttribute('aria-expanded', 'false'); };
+  rad.addEventListener('click', () => { const oppen = valda.dataset.oppen !== 'true'; valda.dataset.oppen = String(oppen); rad.setAttribute('aria-expanded', String(oppen)); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && valda.dataset.oppen === 'true') { stang(); rad.focus(); } });
+
+  // Listans länk: sidans adress med korten i listan, som öppnar samma lista i en annan webbläsare.
+  $('ak-kopiera').addEventListener('click', async () => {
+    const url = `${location.origin}${location.pathname}#lista=${sparat.bockade.join(',')}`;
+    const not = $('ak-valda-not');
+    try { await navigator.clipboard.writeText(url); not.textContent = 'Länken är kopierad. Öppna den på en annan enhet, så har du samma lista där.'; } catch { not.textContent = url; }
+    window.setTimeout(() => { not.textContent = ''; }, 6000);
+  });
+
+  // ---------- Kortet och de sex ----------
+  const kortet = (k: Aktivitet, liten: boolean) => aktivitetskortet(data, k, liten);
+  const minuterAv = (k: Aktivitet) => Number(k.tid.match(/\d+/)?.[0] ?? sparat.minuter);
+  function visaEtt(k: Aktivitet, franSex: boolean) {
+    visat = k;
+    scen.dataset.lage = 'ett';
+    sexRam.hidden = true;
+    plats.hidden = false;
+    verktyg.hidden = false;
+    const ram = el('div');
+    ram.append(kortet(k, false));
+    plats.replaceChildren(medBock(ram, k));
+    tillbaka.hidden = !franSex;
+    plats.setAttribute('aria-label', `Kortet ${k.namn}`);
+    skrivutEtt.href = k.pdf;
+    if (!ur.gar()) ur.satt(minuterAv(k));
+    history.replaceState(null, '', `#${franSex ? `${dragna.map((x) => x.id).join(',')}/${k.id}` : k.id}`);
+  }
+  function visaSex() {
+    visat = undefined;
+    scen.dataset.lage = 'sex';
+    plats.hidden = true;
+    verktyg.hidden = true;
+    sexRam.hidden = false;
+    sex.replaceChildren(...dragna.map((k) => {
+      const li = el('li', 'ak-sex-kort');
+      const knapp = el('button', 'ak-val-kort') as HTMLButtonElement;
+      knapp.type = 'button';
+      knapp.dataset.kort = k.id;
+      knapp.setAttribute('aria-label', `Visa ${k.namn} helt`);
+      knapp.append(kortet(k, true));
+      knapp.addEventListener('click', () => { visaEtt(k, true); tillScenen(); plats.focus({ preventScroll: true }); });
+      li.append(knapp);
+      return medBock(li, k);
+    }));
+    history.replaceState(null, '', `#${dragna.map((x) => x.id).join(',')}`);
+  }
+
+  // ---------- Urvalet ----------
+  const antalKnappar = [...document.querySelectorAll<HTMLButtonElement>('.sk-antal')];
+  const katKnappar = [...document.querySelectorAll<HTMLButtonElement>('.ak-kategorier .sk-niva')];
+  const visaAntal = () => antalKnappar.forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.antal) === sparat.antal)));
+  const visaKategori = (kat?: string) => katKnappar.forEach((b) => b.classList.toggle('senast', b.dataset.kategori === kat));
+  antalKnappar.forEach((b) => b.addEventListener('click', () => { sparat.antal = Number(b.dataset.antal); spara(); visaAntal(); }));
+  katKnappar.forEach((b) => b.addEventListener('click', () => {
+    const kat = b.dataset.kategori!;
+    sparat.kategori = kat;
+    visaKategori(kat);
+    // Ett kort i listan slumpas inte fram igen förrän det är borta ur listan.
+    const urval = data.kort.filter((k) => (kat === 'alla' || k.kategori === kat) && !bockad(k.id));
+    if (!urval.length) { scen.dataset.lage = 'tom'; plats.hidden = true; verktyg.hidden = true; sexRam.hidden = true; scen.querySelector('.sk-tom')!.textContent = 'Alla kort i kategorin står i listan att skriva ut. Ta bort ett ur listan, eller välj en annan kategori.'; return; }
+    const r = dra(urval, sparat.antal, sparat.sedda);
+    dragna = r.valda;
+    sparat.sedda = r.sedda;
+    spara();
+    if (sparat.antal === 1) visaEtt(dragna[0], false); else visaSex();
+    tillScenen();
+  }));
+  tillbaka.addEventListener('click', () => { const fran = visat?.id; visaSex(); tillScenen(); sex.querySelector<HTMLButtonElement>(`button[data-kort="${fran}"]`)?.focus({ preventScroll: true }); });
+  document.querySelectorAll<HTMLButtonElement>('.ak-visa').forEach((b) => b.addEventListener('click', () => { const k = kortMed.get(b.dataset.kort!); if (!k) return; visaEtt(k, false); tillScenen(); plats.focus({ preventScroll: true }); }));
+  visaAntal();
+  visaKategori(sparat.kategori);
+
+  // ---------- Klockan ----------
+  const ur = klocka(document.querySelector<HTMLElement>('.sk-klocka')!, {
+    val: { minuter: sparat.minuter, ljud: sparat.ljud },
+    spara: (v) => { sparat.minuter = v.minuter; sparat.ljud = v.ljud; spara(); },
+    vidStart: () => raknaHandelse(`aktiviteter:${metod}:klocka`, `${sida.dataset.titel}: klockan startad`),
+  });
+
+  // ---------- Utskriften ----------
+  ettkortLank(skrivutEtt);
+  flerakortKnapp($('ak-skrivut-valda'), () => ({ adresser: sparat.bockade.map((id) => kortMed.get(id)!.pdf), titel: `Aktivitetskort: ${sparat.bockade.map((id) => kortMed.get(id)!.namn).join(', ')}` }));
+
+  // ---------- Adressen ----------
+  // #lara-kanna-01 är ett kort, #a,b,c,d,e,f är sex, och /x efter sex är det som visas helt. #lista=a,b,c är en lista
+  // från en annan enhet: korten läggs till i listan att skriva ut.
+  (() => {
+    const hash = decodeURIComponent(location.hash.slice(1));
+    const fran = hash.match(/^lista=(.*)$/);
+    if (fran) {
+      const nya = fran[1].split(',').filter((id) => kortMed.has(id) && !bockad(id));
+      sparat.bockade.push(...nya);
+      spara();
+      history.replaceState(null, '', location.pathname);
+      valda.dataset.oppen = 'true';
+      rad.setAttribute('aria-expanded', 'true');
+      return;
+    }
+    const [lista_, valt] = hash.split('/');
+    const kort = (lista_ ?? '').split(',').map((id) => kortMed.get(id)).filter((k): k is Aktivitet => !!k);
+    if (!kort.length) return;
+    dragna = kort;
+    for (const k of kort) if (!sparat.sedda.includes(k.id)) sparat.sedda.push(k.id);
+    spara();
+    if (kort.length === 1) visaEtt(kort[0], false);
+    else if (valt && kortMed.has(valt)) visaEtt(kortMed.get(valt)!, true);
+    else visaSex();
+  })();
+  visaBockar();
+</script>

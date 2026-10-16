@@ -15,5 +15,23 @@
     "adress": "/stodundervisning/lasstrategier.pdf",
     "kort": "/lasstrategier",
     "mejl": "ett A4 att ha i handen under passet, med strategierna för ordet, meningen och rösten och för förståelsen"
+  },
+  {
+    "id": "aktiviteter",
+    "namn": "Ta fram en aktivitet",
+    "slag": "sida",
+    "adress": "/stodundervisning/gruppstarkande-aktiviteter/aktiviteter",
+    "kort": "/gruppstarkande",
+    "metod": "gruppstarkande-aktiviteter",
+    "mejl": "slumpa fram ett aktivitetskort eller sex ur hundra i fem kategorier, samla dem du vill ha i en lista och skriv ut dem"
+  },
+  {
+    "id": "brainbreaks",
+    "namn": "Ta fram en brainbreak",
+    "slag": "sida",
+    "adress": "/stodundervisning/gruppstarkande-aktiviteter/brainbreaks",
+    "kort": "/brainbreaks",
+    "metod": "gruppstarkande-aktiviteter",
+    "mejl": "slumpa fram sex brainbreaks, välj en och visa den stort med klockan och musiken"
   }
 ]

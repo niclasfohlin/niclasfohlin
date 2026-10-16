@@ -1,0 +1,307 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { publicerade } from '../../../lib/innehall';
+import { metodAdress, UPPHOV } from '../../../lib/metod';
+import { brainbreaksAv, brainbreaksAdress, brainbreaksData } from '../../../lib/aktiviteter';
+import { centralAv, lasbarAdress } from '../../../lib/centrala';
+import Delning from '../../../components/Delning.astro';
+import Klocka from '../../../components/Klocka.astro';
+import { delningPa } from '../../../lib/delning';
+import { site } from '../../../data/site';
+
+// /stodundervisning/<id>/brainbreaks: sidan Ta fram en brainbreak, som slumpar brainbreakkort ur metodens databas
+// (src/lib/aktiviteter.ts), som Niclas beskrev den 2026-10-16 (metodriggens out/gruppstarkande-aktiviteter/TILL-SAJTEN.md):
+// "På sajten ska man kunna slumpa fram dem fem i taget och kunna välja en. Den ska ha samma klocka och möjlighet att sätta
+// på passande musik. Jag tänker någon form av gratis radio som alltid spelar", och kvällen samma dag: "musiken i
+// brainbreaks i tre tydliga kategorier: 1. glad och peppig musik, 2. dansmusik och modern musik, 3. lugn och avslappnad
+// musik". Kvällen efter blev fem sex (Niclas: "6 slumpade där med? Blir väl snyggare med rader och kolumner. Med jämt
+// antal"): tre rader och två kolumner i telefonen, två rader och tre kolumner på en bred skärm.
+//
+//   Urvalet   Varje tryck på Slumpa ger sex nya kort, och ett kort kommer inte igen förrän alla har varit framme.
+//   Kortet    Ett tryck på ett av de sex visar det stort, med klockan bredvid ställd på kortets minuter (Klocka.astro,
+//             src/scripts/klocka.ts, samma klocka som på Ta fram ett skrivkort) och helskärm för projektorn.
+//   Musiken   Tre knappar under klockan: Glad och peppig, Dans och modern, Lugn och avslappnad. Kanalen som passar
+//             kortet står först och är märkt, men musiken startar först när läraren trycker, eftersom webbläsarna bara
+//             spelar ljud efter ett tryck. Under knapparna står en enkel spelare med spela och paus, vad som spelar och
+//             volymen (Niclas 2026-10-16: "Vill ha en volym slider och enkel spelare för musiken som funkar"), också
+//             under klockan i helskärm på en dator (global.css). En iPhone låter inte en sida ställa volymen, så där
+//             står bara knappen och raden. När klockan ringer tystnar
+//             musiken, så att signalen hörs, och den tystnar när läraren går tillbaka till de sex, slumpar nya eller
+//             lämnar sidan (Niclas 2026-10-16: "När man går tillbaka till de 6 så fortsätter musiken att spela. Lämnar
+//             man sidan bör musiken försvinna?"), eftersom spelaren bara står bredvid det stora kortet. Kanalerna är riggens (brainbreaks.json): Radio Swiss Pop, SomaFM PopTron
+//             och Radio Swiss Classic, alla utan reklam. Svarar en ström inte prövas reserven, och sedan säger sidan det
+//             med en länk till kanalens egen sida. SomaFM nekar strömmen till testadresser (403 för netlify.app och
+//             localhost) och spelar från niclasfohlin.se (prövat 2026-10-16), och sidan tar sig inte förbi spärren.
+//             Niclas avgjorde samma dag att sidan spelar kanalerna (K-364).
+//
+// Det som har visats, minuterna, klockans ljud och musikens volym sparas i webbläsaren till nästa gång, och adressen bär
+// korten (#bb-12).
+export async function getStaticPaths() {
+  const metoder = await publicerade('stodundervisning');
+  return metoder.filter((m) => brainbreaksAv(m.id)).map((m) => ({ params: { id: m.id }, props: { m } }));
+}
+
+const { m } = Astro.props;
+const d = m.data;
+const b = brainbreaksAv(m.id)!;
+const c = centralAv('brainbreaks');
+const namn = c?.namn ?? 'Ta fram en brainbreak';
+const adress = `${metodAdress(site.url, m.id).replace(/^https?:\/\//, '')}/brainbreaks`;
+const kort = `${site.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}${c ? lasbarAdress(c) : brainbreaksAdress(m.id)}`;
+const data = brainbreaksData(m.id, b);
+---
+
+<Base title={`${namn}: ${d.titel}`} description={`Slumpa fram sex brainbreaks ur ${b.kort.length}, välj en och visa den stort med en klocka och musik i tre kategorier.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
+  <article class="kortbanksida brainbreaksida" data-metod={m.id} data-titel={d.titel}>
+    {/* Statistiken (DRIFT.md under Besöksstatistik): besöken räknas under metoden som "på Ta fram en brainbreak", och
+        helskärmen, klockan och varje kanal som startas som brainbreaks:<id>:… Varje tryck på Slumpa räknas inte. */}
+    <header class="sk-huvud">
+      <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${m.id}`}>{d.titel}</a> · Brainbreaks</p>
+      <h1>{namn}</h1>
+      <p class="ingress">Tryck på Slumpa, så kommer sex brainbreaks. Välj en, så står den stort med klockan och musiken.</p>
+    </header>
+
+    <div class="sk-val">
+      <button type="button" class="knapp bb-slumpa" id="bb-slumpa">Slumpa sex</button>
+    </div>
+
+    <div class="sk-scen" id="bb-scen" data-lage="tom">
+      <p class="sk-tom">Tryck på Slumpa sex.</p>
+      <div class="sk-ett bb-ett" id="bb-ett" hidden>
+        <div class="sk-kortplats" id="bb-kortplats" tabindex="-1" aria-label="Kortet"></div>
+        <div class="sk-sidospalt">
+          <Klocka />
+          <section class="bb-musik" aria-labelledby="bb-musik-rubrik">
+            <h2 class="sk-etikett" id="bb-musik-rubrik">Musik</h2>
+            <div class="bb-kanaler" id="bb-kanaler">
+              {b.musik.map((k) => (
+                <button type="button" class="bb-kanal" data-kanal={k.id} aria-pressed="false" data-goatcounter-click={`brainbreaks:${m.id}:musik:${k.id}`} data-goatcounter-title={`${d.titel}: musiken ${k.namn.toLowerCase()}`}><span class="bb-kanal-namn">{k.namn}</span><span class="bb-kanal-kalla">{k.kanal}</span><span class="bb-passar">Passar kortet</span></button>
+              ))}
+            </div>
+            <div class="bb-spelare">
+              <button type="button" class="bb-spela" id="bb-spela" aria-label="Spela musiken">
+                <svg class="bb-ikon-spela" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" /></svg>
+                <svg class="bb-ikon-paus" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 5h4v14h-4zM13.5 5h4v14h-4z" /></svg>
+              </button>
+              <p class="bb-spelar" id="bb-spelar" aria-live="polite">Välj musik ovanför.</p>
+              <label class="bb-volym" id="bb-volym-rad">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path class="bb-hogtalare" d="M4 9.5v5h3.5l4.5 4v-13l-4.5 4z" /><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" /></svg>
+                <span class="visually-hidden">Volym</span>
+                <input type="range" id="bb-volym" min="0" max="100" step="5" value="70" />
+              </label>
+            </div>
+            <p class="bb-musik-not" id="bb-musik-not" role="status"></p>
+            <audio id="bb-ljud" preload="none"></audio>
+          </section>
+          <div class="sk-atgarder">
+            <button type="button" class="knapp sekundar" id="bb-helskarm" hidden data-goatcounter-click={`brainbreaks:${m.id}:helskarm`} data-goatcounter-title={`${d.titel}: brainbreaken i helskärm`}>Helskärm</button>
+            <button type="button" class="knapp sekundar" id="bb-tillbaka" hidden>Tillbaka till de sex</button>
+          </div>
+        </div>
+      </div>
+      <div class="bb-fem-ram" id="bb-fem-ram" hidden>
+        <p class="sk-tio-not">Tryck på den brainbreak gruppen vill göra.</p>
+        <ol class="bb-fem" id="bb-fem"></ol>
+      </div>
+    </div>
+
+    <noscript><p class="sk-tom">Sidan behöver JavaScript för att slumpa korten och visa klockan.</p></noscript>
+
+    <p class="upphov">{UPPHOV}. Brainbreakkorten till <a href={`/stodundervisning/${m.id}`}>{d.titel}</a>: {b.kort.length} kort. Musiken kommer från {b.musik.map((k, i) => <>{i > 0 && (i === b.musik.length - 1 ? ' och ' : ', ')}<a href={k.sida} rel="noopener">{k.kanal}</a></>)}, utan reklam. Sidans korta adress är {kort}.</p>
+
+    <script type="application/json" id="bb-data" set:html={JSON.stringify(data).replace(/</g, '\\u003c')}></script>
+    {delningPa && <Delning sida={brainbreaksAdress(m.id)} titel={`${namn}: ${d.titel}`} medKort />}
+  </article>
+</Base>
+
+<script>
+  import { brainbreakkortet, dra, el, lagring, type Brainbreak, type Brainbreakdata } from '../../../scripts/kortbanken';
+  import { klocka } from '../../../scripts/klocka';
+
+  const sida = document.querySelector<HTMLElement>('.brainbreaksida')!;
+  const metod = sida.dataset.metod!;
+  const data: Brainbreakdata = JSON.parse(document.getElementById('bb-data')!.textContent!);
+  const kortMed = new Map(data.kort.map((k) => [k.id, k]));
+  const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+  const raknaHandelse = (path: string, title: string) => (window as { goatcounter?: { count: (v: object) => void } }).goatcounter?.count({ path, title, event: true });
+
+  type Sparat = { minuter: number; ljud: boolean; volym: number; sedda: string[] };
+  const { varde: sparat, spara } = lagring<Sparat>(`brainbreaks:${metod}`, { minuter: 3, ljud: true, volym: 70, sedda: [] });
+
+  const scen = $('bb-scen');
+  const valrad = document.querySelector<HTMLElement>('.sk-val')!;
+  const ett = $('bb-ett');
+  const femRam = $('bb-fem-ram');
+  const fem = $<HTMLOListElement>('bb-fem');
+  const plats = $('bb-kortplats');
+  const tillbaka = $<HTMLButtonElement>('bb-tillbaka');
+  const helskarmKnapp = $<HTMLButtonElement>('bb-helskarm');
+  let dragna: Brainbreak[] = [];
+  let visat: Brainbreak | undefined;
+  const tillScenen = () => {
+    const under = valrad.getBoundingClientRect().bottom;
+    const topp = scen.getBoundingClientRect().top;
+    const fast = getComputedStyle(valrad).position === 'sticky';
+    const mal = fast ? under + 12 : 12;
+    if (Math.abs(topp - mal) > 4) window.scrollBy({ top: topp - mal, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  };
+
+  // Texten så stor som kortet rymmer: från sin storlek och nedåt, tills texten ryms.
+  function passa(kort: HTMLElement) {
+    if (kort.classList.contains('liten')) return;
+    let skala = 1;
+    kort.style.setProperty('--skala', '1');
+    while (skala > 0.5 && kort.scrollHeight > kort.clientHeight + 1) { skala -= 0.04; kort.style.setProperty('--skala', skala.toFixed(2)); }
+    kort.dataset.bredd = String(kort.clientWidth);
+  }
+
+  // ---------- Musiken ----------
+  // Kanalknapparna väljer och startar en kanal, och spelaren under dem pausar och startar den igen. En radio spelar live,
+  // så en paus släpper strömmen och spela hämtar den på nytt, där sändningen är nu.
+  const ljud = $<HTMLAudioElement>('bb-ljud');
+  const not = $('bb-musik-not');
+  const spelaKnapp = $<HTMLButtonElement>('bb-spela');
+  const spelarRad = $('bb-spelar');
+  const volym = $<HTMLInputElement>('bb-volym');
+  const kanalKnappar = [...document.querySelectorAll<HTMLButtonElement>('.bb-kanal')];
+  let vald: string | undefined;
+  let spelar = false;
+  let provatReserv = false;
+  const kanalen = () => data.musik.find((x) => x.id === vald);
+  const visaKanal = () => kanalKnappar.forEach((b) => b.setAttribute('aria-pressed', String(spelar && b.dataset.kanal === vald)));
+  const markeraForval = (k?: Brainbreak) => kanalKnappar.forEach((b) => b.classList.toggle('forval', !!k && b.dataset.kanal === k.musik));
+  function visaSpelaren(lage: 'tyst' | 'laddar' | 'spelar' | 'paus') {
+    const k = kanalen();
+    spelaKnapp.dataset.lage = lage === 'laddar' || lage === 'spelar' ? 'spelar' : 'paus';
+    spelaKnapp.setAttribute('aria-label', spelaKnapp.dataset.lage === 'spelar' ? 'Pausa musiken' : 'Spela musiken');
+    spelarRad.textContent = !k ? 'Välj musik ovanför.' : lage === 'laddar' ? `${k.namn} laddar …` : lage === 'spelar' ? `${k.namn} spelar, ${k.kanal}` : `${k.namn} är pausad`;
+    visaKanal();
+  }
+  function starta(id: string) {
+    const k = data.musik.find((x) => x.id === id);
+    if (!k) return;
+    not.textContent = '';
+    vald = id;
+    spelar = true;
+    provatReserv = false;
+    ljud.src = k.strom;
+    ljud.volume = Number(volym.value) / 100;
+    visaSpelaren('laddar');
+    void ljud.play().catch(() => { /* felet hanteras av error nedan, eller av att läraren trycker igen */ });
+  }
+  function pausa() {
+    if (!spelar) return;
+    spelar = false;
+    ljud.pause();
+    ljud.removeAttribute('src');
+    ljud.load();
+    visaSpelaren(vald ? 'paus' : 'tyst');
+  }
+  kanalKnappar.forEach((b) => b.addEventListener('click', () => starta(b.dataset.kanal!)));
+  // Spela utan vald kanal startar kanalen som passar kortet, annars den första.
+  spelaKnapp.addEventListener('click', () => {
+    if (spelar) { pausa(); return; }
+    const id = vald ?? (visat && visat.musik !== 'ingen' ? visat.musik : data.musik[0]?.id);
+    if (id) { starta(id); raknaHandelse(`brainbreaks:${metod}:musik:${id}`, `${sida.dataset.titel}: musiken ${(data.musik.find((x) => x.id === id)?.namn ?? '').toLowerCase()}`); }
+  });
+  ljud.addEventListener('playing', () => { if (spelar) visaSpelaren('spelar'); });
+  ljud.addEventListener('waiting', () => { if (spelar) visaSpelaren('laddar'); });
+  ljud.addEventListener('error', () => {
+    const k = kanalen();
+    if (!k || !spelar) return;
+    if (!provatReserv) { provatReserv = true; ljud.src = k.reserv; void ljud.play().catch(() => {}); return; }
+    spelar = false;
+    visaSpelaren('paus');
+    not.replaceChildren(`${k.kanal} går inte att spela här. `, Object.assign(el('a', undefined, `Lyssna på kanalens egen sida`) as HTMLAnchorElement, { href: k.sida, target: '_blank', rel: 'noopener' }), '.');
+  });
+  // Volymen. En iPhone låter inte en sida ändra den (volume är alltid 1 där), och då står bara knappen och raden.
+  ljud.volume = 0.5;
+  if (Math.abs(ljud.volume - 0.5) > 0.01) $('bb-volym-rad').hidden = true;
+  volym.value = String(sparat.volym);
+  ljud.volume = sparat.volym / 100;
+  volym.addEventListener('input', () => { ljud.volume = Number(volym.value) / 100; sparat.volym = Number(volym.value); spara(); });
+  // Lämnar läraren sidan, eller byter flik eller app, tystnar musiken.
+  document.addEventListener('visibilitychange', () => { if (document.hidden) pausa(); });
+  window.addEventListener('pagehide', () => pausa());
+
+  // ---------- Kortet och de fem ----------
+  const kortet = (k: Brainbreak, liten: boolean) => brainbreakkortet(data, k, liten);
+  function visaEtt(k: Brainbreak, franFem: boolean) {
+    visat = k;
+    scen.dataset.lage = 'ett';
+    femRam.hidden = true;
+    ett.hidden = false;
+    const f = kortet(k, false);
+    plats.replaceChildren(f);
+    f.querySelector('img')?.addEventListener('load', () => passa(f), { once: true });
+    passa(f);
+    void document.fonts?.ready.then(() => { if (f.isConnected) passa(f); });
+    tillbaka.hidden = !franFem;
+    plats.setAttribute('aria-label', `Kortet ${k.namn}`);
+    helskarmKnapp.hidden = !document.fullscreenEnabled;
+    if (!ur.gar()) ur.satt(k.minuter);
+    markeraForval(k);
+    // Kanalen som passar står först bland knapparna.
+    const forval = kanalKnappar.find((b) => b.dataset.kanal === k.musik);
+    const lista = $('bb-kanaler');
+    if (forval) lista.prepend(forval); else for (const b of kanalKnappar) lista.append(b);
+    history.replaceState(null, '', `#${franFem ? `${dragna.map((x) => x.id).join(',')}/${k.id}` : k.id}`);
+  }
+  function visaFem() {
+    visat = undefined;
+    scen.dataset.lage = 'tio';
+    ett.hidden = true;
+    femRam.hidden = false;
+    pausa();
+    if (document.fullscreenElement) void document.exitFullscreen();
+    fem.replaceChildren(...dragna.map((k) => {
+      const li = el('li');
+      const knapp = el('button', 'sk-val-kort') as HTMLButtonElement;
+      knapp.type = 'button';
+      knapp.dataset.kort = k.id;
+      knapp.setAttribute('aria-label', `Visa ${k.namn} stort`);
+      knapp.append(kortet(k, true));
+      knapp.addEventListener('click', () => { visaEtt(k, true); tillScenen(); plats.focus({ preventScroll: true }); });
+      li.append(knapp);
+      return li;
+    }));
+    history.replaceState(null, '', `#${dragna.map((x) => x.id).join(',')}`);
+  }
+  $('bb-slumpa').addEventListener('click', () => {
+    const r = dra(data.kort, 6, sparat.sedda);
+    dragna = r.valda;
+    sparat.sedda = r.sedda;
+    spara();
+    visaFem();
+    tillScenen();
+  });
+  tillbaka.addEventListener('click', () => { const fran = visat?.id; visaFem(); tillScenen(); fem.querySelector<HTMLButtonElement>(`button[data-kort="${fran}"]`)?.focus({ preventScroll: true }); });
+
+  // ---------- Helskärm ----------
+  helskarmKnapp.addEventListener('click', () => { void ett.requestFullscreen?.(); });
+  document.querySelector<HTMLButtonElement>('.sk-lamna')!.addEventListener('click', () => { if (document.fullscreenElement) void document.exitFullscreen(); });
+  document.addEventListener('fullscreenchange', () => { const f = plats.querySelector<HTMLElement>('.brainbreakkort'); if (f) requestAnimationFrame(() => passa(f)); });
+  new ResizeObserver(() => { const f = plats.querySelector<HTMLElement>('.brainbreakkort'); if (f && Number(f.dataset.bredd) !== f.clientWidth) passa(f); }).observe(plats);
+
+  // ---------- Klockan ----------
+  // När tiden är slut tystnar musiken, så att klockan hörs.
+  const ur = klocka(document.querySelector<HTMLElement>('.sk-klocka')!, {
+    val: { minuter: sparat.minuter, ljud: sparat.ljud },
+    spara: (v) => { sparat.minuter = v.minuter; sparat.ljud = v.ljud; spara(); },
+    vidStart: () => raknaHandelse(`brainbreaks:${metod}:klocka`, `${sida.dataset.titel}: klockan startad`),
+    vidSlut: () => pausa(),
+  });
+
+  // ---------- Adressen ----------
+  (() => {
+    const [lista, valt] = decodeURIComponent(location.hash.slice(1)).split('/');
+    const kort = (lista ?? '').split(',').map((id) => kortMed.get(id)).filter((k): k is Brainbreak => !!k);
+    if (!kort.length) return;
+    dragna = kort;
+    for (const k of kort) if (!sparat.sedda.includes(k.id)) sparat.sedda.push(k.id);
+    spara();
+    if (kort.length === 1) visaEtt(kort[0], false);
+    else if (valt && kortMed.has(valt)) visaEtt(kortMed.get(valt)!, true);
+    else visaFem();
+  })();
+</script>
