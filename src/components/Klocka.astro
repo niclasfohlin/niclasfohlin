@@ -1,0 +1,36 @@
+---
+// Klockan på sidorna som slumpar kort: Ta fram ett skrivkort ([id]/skrivkort.astro, Niclas 2026-10-14) och Ta fram en
+// brainbreak ([id]/brainbreaks.astro, Niclas 2026-10-16: "Den ska ha samma klocka"). En nedräkning som visar tiden som
+// en yta som krymper, som en time timer, med minuterna, Starta och Börja om och en knapp för ljudet. Knappen som lämnar
+// helskärm står bredvid tiden och syns bara i helskärm. Skriptet är src/scripts/klocka.ts, och stilarna står under
+// Klockan i global.css.
+---
+<section class="sk-klocka" aria-label="Klockan">
+  <svg class="sk-urtavla" viewBox="-110 -110 220 220" role="img" aria-label="Tiden som är kvar">
+    <circle class="sk-urtavla-bakgrund" r="104"></circle>
+    <path class="sk-yta" d=""></path>
+    <g class="sk-streck"></g>
+    <circle class="sk-mitt" r="7"></circle>
+  </svg>
+  {/* Tiden med ljudet bredvid, och i helskärm knappen som lämnar den, så att klockan blir en smal rad under kortet i en
+      stående skärm (global.css, Helskärm). */}
+  <div class="sk-tidrad">
+    <p class="sk-tid" aria-live="off">3:00</p>
+    <button type="button" class="sk-ljud" aria-pressed="true" aria-label="Ljudet när tiden är slut" title="Ljudet när tiden är slut">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path class="sk-hogtalare" d="M4 9h4l5-4v14l-5-4H4z"></path><path class="sk-vagor" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"></path><path class="sk-kryss" d="M16.5 9.5l5 5M21.5 9.5l-5 5"></path></svg>
+    </button>
+    <button type="button" class="sk-lamna" aria-label="Lämna helskärm" title="Lämna helskärm">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"></path></svg>
+    </button>
+  </div>
+  <p class="sk-slut" role="status"></p>
+  <div class="sk-minuter">
+    <button type="button" class="sk-steg" data-steg="-1" aria-label="En minut kortare">−</button>
+    <label class="sk-minutfalt"><input class="sk-minutinput" type="number" min="1" max="99" step="1" value="3" inputmode="numeric" aria-label="Minuter" /><span>min</span></label>
+    <button type="button" class="sk-steg" data-steg="1" aria-label="En minut längre">+</button>
+  </div>
+  <div class="sk-klockknappar">
+    <button type="button" class="knapp sk-start">Starta</button>
+    <button type="button" class="knapp sekundar sk-omstart">Börja om</button>
+  </div>
+</section>

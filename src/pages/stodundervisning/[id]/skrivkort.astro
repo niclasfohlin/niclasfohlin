@@ -4,6 +4,7 @@ import { publicerade } from '../../../lib/innehall';
 import { metodAdress, UPPHOV } from '../../../lib/metod';
 import { kortAdress, kortData, kortPdfNamn, skrivkortAv, skrivkortAdress, SKRIVKORT_LANK } from '../../../lib/skrivkort';
 import Delning from '../../../components/Delning.astro';
+import Klocka from '../../../components/Klocka.astro';
 import { delningPa } from '../../../lib/delning';
 import { site } from '../../../data/site';
 
@@ -81,35 +82,7 @@ const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
       <div class="sk-ett" id="sk-ett" hidden>
         <div class="sk-kortplats" id="sk-kortplats" tabindex="-1" aria-label="Kortet"></div>
         <div class="sk-sidospalt">
-        <section class="sk-klocka" id="sk-klocka" aria-label="Klockan">
-          <svg class="sk-urtavla" viewBox="-110 -110 220 220" role="img" aria-labelledby="sk-tid">
-            <circle class="sk-urtavla-bakgrund" r="104"></circle>
-            <path class="sk-yta" id="sk-yta" d=""></path>
-            <g class="sk-streck" id="sk-streck"></g>
-            <circle class="sk-mitt" r="7"></circle>
-          </svg>
-          {/* Tiden med ljudet bredvid, och i helskärm knappen som lämnar den, så att klockan blir en smal rad under kortet
-              i en stående skärm (global.css, Helskärm). */}
-          <div class="sk-tidrad">
-            <p class="sk-tid" id="sk-tid" aria-live="off">3:00</p>
-            <button type="button" class="sk-ljud" id="sk-ljud" aria-pressed="true" aria-label="Ljudet när tiden är slut" title="Ljudet när tiden är slut">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path class="sk-hogtalare" d="M4 9h4l5-4v14l-5-4H4z"></path><path class="sk-vagor" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"></path><path class="sk-kryss" d="M16.5 9.5l5 5M21.5 9.5l-5 5"></path></svg>
-            </button>
-            <button type="button" class="sk-lamna" id="sk-lamna" aria-label="Lämna helskärm" title="Lämna helskärm">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"></path></svg>
-            </button>
-          </div>
-          <p class="sk-slut" id="sk-slut" role="status"></p>
-          <div class="sk-minuter">
-            <button type="button" class="sk-steg" data-steg="-1" aria-label="En minut kortare">−</button>
-            <label class="sk-minutfalt"><input type="number" id="sk-minuter" min="1" max="99" step="1" value="3" inputmode="numeric" /><span>min</span></label>
-            <button type="button" class="sk-steg" data-steg="1" aria-label="En minut längre">+</button>
-          </div>
-          <div class="sk-klockknappar">
-            <button type="button" class="knapp sk-start" id="sk-start">Starta</button>
-            <button type="button" class="knapp sekundar sk-omstart" id="sk-omstart">Börja om</button>
-          </div>
-        </section>
+        <Klocka />
         <div class="sk-atgarder">
           <a class="knapp sekundar" id="sk-skrivut-ett" href="#" target="_blank" rel="noopener" data-goatcounter-click={`utskrift:${m.id}/skrivkort`} data-goatcounter-title={`${d.titel}: utskrift av ett skrivkort`}>Skriv ut kortet</a>
           <button type="button" class="knapp sekundar" id="sk-helskarm" hidden data-goatcounter-click={`skrivkort:${m.id}:helskarm`} data-goatcounter-title={`${d.titel}: skrivkortet i helskärm`}>Helskärm</button>
@@ -146,6 +119,8 @@ const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
 
 <script>
   import { el, kortet as ritaKort, passa, type Data, type Kort } from '../../../scripts/skrivkortet';
+  import { klocka } from '../../../scripts/klocka';
+  import { ettkortLank, flerakortKnapp } from '../../../scripts/pdfutskrift';
 
   const sida = document.querySelector<HTMLElement>('.skrivkortsida')!;
   const metod = sida.dataset.metod!;
@@ -303,71 +278,15 @@ const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
   })();
 
   // ---------- Utskriften ----------
-  // Ett kort är kortets pdf, klippt ur nivåns pdf. Tio kort fogas ihop här av de tio pdf:erna, med pdf-lib, som hämtas
-  // först när någon skriver ut tio. Där webbläsaren kan skriva ut en pdf direkt (Chromium på datorn) öppnas
-  // utskriftsrutan, som knapparna i src/components/SkrivUtPdf.astro gör; annars öppnas pdf:en i en ny flik.
-  const kanSkrivaUtPdf = () => {
-    const ua = (navigator as Navigator & { userAgentData?: { mobile: boolean } }).userAgentData;
-    return ua?.mobile === false && navigator.pdfViewerEnabled === true;
-  };
-  async function tioPdf(): Promise<string> {
-    const { PDFDocument } = await import('pdf-lib');
-    const ut = await PDFDocument.create();
-    for (const k of dragna) {
-      const svar = await fetch(pdfFor.get(k.id)!);
-      if (!svar.ok) throw new Error(`${k.id}: ${svar.status}`);
-      const kalla = await PDFDocument.load(await svar.arrayBuffer());
-      for (const s of await ut.copyPages(kalla, kalla.getPageIndices())) ut.addPage(s);
-    }
-    ut.setTitle(`Skrivkort: ${dragna.map((k) => `${k.niva} ${k.nr}`).join(', ')}`);
-    ut.setAuthor('Niclas Fohlin');
-    return URL.createObjectURL(new Blob([new Uint8Array(await ut.save())], { type: 'application/pdf' }));
-  }
-  function skrivUt(url: string) {
-    document.querySelector('iframe.skriv-ut-pdf')?.remove();
-    const ram = document.createElement('iframe');
-    ram.className = 'skriv-ut-pdf';
-    ram.title = 'Pdf för utskrift';
-    ram.tabIndex = -1;
-    ram.setAttribute('aria-hidden', 'true');
-    ram.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden';
-    ram.addEventListener('load', () => { try { ram.contentWindow!.focus(); ram.contentWindow!.print(); } catch { window.open(url, '_blank'); } }, { once: true });
-    ram.src = url;
-    document.body.append(ram);
-  }
-  const direkt = kanSkrivaUtPdf();
-  // Ett kort: länken öppnar kortets pdf, eller utskriftsrutan där det går. Med en tangent nedtryckt öppnas pdf:en i en
-  // ny flik, som länken säger.
-  skrivutEtt.addEventListener('click', (e) => {
-    if (!direkt || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
-    e.preventDefault();
-    skrivUt(skrivutEtt.href);
-  });
-  skrivutTio.addEventListener('click', async (e) => {
-    e.preventDefault();
-    if (skrivutTio.getAttribute('aria-busy') === 'true') return;
-    skrivutTio.setAttribute('aria-busy', 'true');
-    const text = skrivutTio.textContent;
-    skrivutTio.textContent = 'Fogar ihop korten …';
-    // Fliken öppnas medan knappen trycks, så att webbläsaren inte stoppar den som ett fönster som öppnar sig självt.
-    const flik = direkt ? null : window.open('', '_blank');
-    try {
-      const url = await tioPdf();
-      if (direkt) skrivUt(url); else if (flik) flik.location.href = url; else location.assign(url);
-      skrivutTio.textContent = text;
-    } catch {
-      flik?.close();
-      skrivutTio.textContent = 'Det gick inte. Försök igen';
-      window.setTimeout(() => { skrivutTio.textContent = text; }, 4000);
-    }
-    skrivutTio.removeAttribute('aria-busy');
-  });
+  // Ett kort är kortets pdf, klippt ur nivåns pdf, och tio kort fogas ihop i webbläsaren (src/scripts/pdfutskrift.ts).
+  ettkortLank(skrivutEtt);
+  flerakortKnapp(skrivutTio, () => ({ adresser: dragna.map((k) => pdfFor.get(k.id)!), titel: `Skrivkort: ${dragna.map((k) => `${k.niva} ${k.nr}`).join(', ')}` }));
 
   // ---------- Helskärm ----------
   // Knappen Helskärm står under klockan. I helskärm lämnar knappen med ikonen bredvid tiden den, och Esc eller
   // telefonens bakåt gör det också.
   helskarmKnapp.addEventListener('click', () => { void ett.requestFullscreen?.(); });
-  $('sk-lamna').addEventListener('click', () => { if (document.fullscreenElement) void document.exitFullscreen(); });
+  document.querySelector<HTMLButtonElement>('.sk-lamna')!.addEventListener('click', () => { if (document.fullscreenElement) void document.exitFullscreen(); });
   document.addEventListener('fullscreenchange', () => {
     const kort = plats.querySelector<HTMLElement>('.skrivkort');
     if (kort) requestAnimationFrame(() => passa(kort));
@@ -375,143 +294,11 @@ const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
   new ResizeObserver(() => { const kort = plats.querySelector<HTMLElement>('.skrivkort'); if (kort && Number(kort.dataset.bredd) !== kort.clientWidth) passa(kort); }).observe(plats);
 
   // ---------- Klockan ----------
-  // En nedräkning som visar tiden som en röd yta som krymper medurs mot tolv, som en time timer, och siffrorna under.
-  // Hela ytan är den inställda tiden. Tiden räknas mot klockan i datorn, och en timer (inte webbläsarens ritslinga, som
-  // står still i en dold flik) ritar om den och ringer, så att den ringer också när läraren har bytt fönster. Medan
-  // klockan går hålls skärmen vaken där webbläsaren kan det.
-  const yta = $('sk-yta');
-  const tidText = $('sk-tid');
-  const slutText = $('sk-slut');
-  const klocka = $('sk-klocka');
-  const startKnapp = $<HTMLButtonElement>('sk-start');
-  const omstart = $<HTMLButtonElement>('sk-omstart');
-  const minFalt = $<HTMLInputElement>('sk-minuter');
-  const ljudKnapp = $<HTMLButtonElement>('sk-ljud');
-  const streck = $('sk-streck');
-  for (let i = 0; i < 60; i++) {
-    const v = (i / 60) * Math.PI * 2;
-    const lang = i % 5 === 0 ? 14 : 6;
-    const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-    l.setAttribute('x1', String(Math.sin(v) * 104)); l.setAttribute('y1', String(-Math.cos(v) * 104));
-    l.setAttribute('x2', String(Math.sin(v) * (104 - lang))); l.setAttribute('y2', String(-Math.cos(v) * (104 - lang)));
-    if (i % 5 === 0) l.classList.add('fem');
-    streck.append(l);
-  }
-  const R = 96;
-  function ritaYta(andel: number) {
-    // andel: den del av tiden som är kvar, 1 till 0. Ytan går från visaren medurs till tolv.
-    if (andel >= 0.9999) { yta.setAttribute('d', `M0 ${-R}A${R} ${R} 0 1 1 0 ${R}A${R} ${R} 0 1 1 0 ${-R}Z`); return; }
-    if (andel <= 0) { yta.setAttribute('d', ''); return; }
-    const v = (1 - andel) * Math.PI * 2;
-    const x = Math.sin(v) * R, y = -Math.cos(v) * R;
-    yta.setAttribute('d', `M0 0L${x.toFixed(2)} ${y.toFixed(2)}A${R} ${R} 0 ${andel > 0.5 ? 1 : 0} 1 0 ${-R}Z`);
-  }
-  const visaTid = (ms: number) => { const s = Math.ceil(ms / 1000); tidText.textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
-  let langd = sparat.minuter * 60000;
-  let kvar = langd;
-  let slut = 0;
-  let gar = false;
-  let ram = 0; // timern som ritar om klockan
-  let vaken: { release: () => Promise<void> } | null = null;
-  const hallVaken = async (pa: boolean) => {
-    try {
-      if (pa && !vaken) vaken = await (navigator as Navigator & { wakeLock?: { request: (t: string) => Promise<{ release: () => Promise<void> }> } }).wakeLock?.request('screen') ?? null;
-      if (!pa && vaken) { await vaken.release(); vaken = null; }
-    } catch { vaken = null; }
-  };
-  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && gar) { vaken = null; void hallVaken(true); } });
-  function uppdatera() {
-    const nu = gar ? Math.max(0, slut - performance.now()) : kvar;
-    ritaYta(nu / langd);
-    visaTid(nu);
-    if (gar && nu <= 0) klar();
-  }
-  const stanna = () => { window.clearInterval(ram); window.clearTimeout(slag); };
-  let slag = 0;
-  const ga = () => { stanna(); ram = window.setInterval(uppdatera, 200); slag = window.setTimeout(uppdatera, Math.max(0, slut - performance.now()) + 20); };
-  function knappar() {
-    startKnapp.textContent = gar ? 'Pausa' : kvar > 0 && kvar < langd ? 'Fortsätt' : 'Starta';
-    klocka.classList.toggle('gar', gar);
-    minFalt.disabled = gar;
-    klocka.querySelectorAll<HTMLButtonElement>('.sk-steg').forEach((b) => { b.disabled = gar; });
-  }
-  function satt(minuter: number) {
-    const m = Math.min(99, Math.max(1, Math.round(minuter) || 1));
-    minFalt.value = String(m);
-    sparat.minuter = m;
-    spara();
-    langd = m * 60000;
-    kvar = langd;
-    gar = false;
-    stanna();
-    klocka.classList.remove('slut');
-    slutText.textContent = '';
-    knappar();
-    uppdatera();
-  }
-  function klar() {
-    gar = false;
-    kvar = 0;
-    stanna();
-    klocka.classList.add('slut');
-    slutText.textContent = 'Tiden är slut';
-    knappar();
-    void hallVaken(false);
-    if (sparat.ljud) ring();
-  }
-  startKnapp.addEventListener('click', () => {
-    forbered();
-    if (gar) {
-      kvar = Math.max(0, slut - performance.now());
-      gar = false;
-      stanna();
-      void hallVaken(false);
-    } else {
-      // En klocka som startar från början räknas i statistiken, en som fortsätter efter paus inte.
-      if (kvar <= 0 || kvar === langd) (window as { goatcounter?: { count: (v: object) => void } }).goatcounter?.count({ path: `skrivkort:${metod}:klocka`, title: `${sida.dataset.titel}: klockan startad`, event: true });
-      if (kvar <= 0) kvar = langd;
-      klocka.classList.remove('slut');
-      slutText.textContent = '';
-      slut = performance.now() + kvar;
-      gar = true;
-      void hallVaken(true);
-      ga();
-    }
-    knappar();
-    uppdatera();
+  // Klockan står i src/scripts/klocka.ts, som sidan Ta fram en brainbreak delar. En klocka som startar från början räknas
+  // i statistiken, en som fortsätter efter paus inte.
+  klocka(document.querySelector<HTMLElement>('.sk-klocka')!, {
+    val: { minuter: sparat.minuter, ljud: sparat.ljud },
+    spara: (v) => { sparat.minuter = v.minuter; sparat.ljud = v.ljud; spara(); },
+    vidStart: () => (window as { goatcounter?: { count: (v: object) => void } }).goatcounter?.count({ path: `skrivkort:${metod}:klocka`, title: `${sida.dataset.titel}: klockan startad`, event: true }),
   });
-  omstart.addEventListener('click', () => { void hallVaken(false); satt(Number(minFalt.value)); });
-  minFalt.addEventListener('change', () => satt(Number(minFalt.value)));
-  klocka.querySelectorAll<HTMLButtonElement>('.sk-steg').forEach((b) => b.addEventListener('click', () => satt(Number(minFalt.value) + Number(b.dataset.steg))));
-  minFalt.value = String(sparat.minuter);
-
-  // Ljudet: en klocka som slår tre gånger, gjord i webbläsaren (Web Audio), så att sidan inte hämtar en ljudfil.
-  // Ljudet förbereds när läraren trycker på Starta, eftersom webbläsaren bara släpper fram ljud efter ett tryck.
-  let ljud: AudioContext | undefined;
-  function forbered() {
-    try { ljud ??= new AudioContext(); if (ljud.state === 'suspended') void ljud.resume(); } catch { ljud = undefined; }
-  }
-  function ring() {
-    if (!ljud) return;
-    const t0 = ljud.currentTime + 0.05;
-    for (let slag = 0; slag < 3; slag++) {
-      const t = t0 + slag * 1.1;
-      for (const [hz, styrka, tid] of [[784, 0.32, 2.2], [1568, 0.12, 1.4], [2352, 0.06, 0.9], [3136, 0.03, 0.6]] as const) {
-        const o = ljud.createOscillator();
-        const g = ljud.createGain();
-        o.type = 'sine';
-        o.frequency.value = hz;
-        g.gain.setValueAtTime(0.0001, t);
-        g.gain.exponentialRampToValueAtTime(styrka, t + 0.01);
-        g.gain.exponentialRampToValueAtTime(0.0001, t + tid);
-        o.connect(g).connect(ljud.destination);
-        o.start(t);
-        o.stop(t + tid + 0.05);
-      }
-    }
-  }
-  const visaLjud = () => { ljudKnapp.setAttribute('aria-pressed', String(sparat.ljud)); ljudKnapp.title = sparat.ljud ? 'Ljudet är på. Tryck för att stänga av det' : 'Ljudet är av. Tryck för att sätta på det'; };
-  ljudKnapp.addEventListener('click', () => { sparat.ljud = !sparat.ljud; spara(); visaLjud(); if (sparat.ljud) forbered(); });
-  visaLjud();
-  satt(sparat.minuter);
 </script>
