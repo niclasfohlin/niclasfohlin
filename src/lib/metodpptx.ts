@@ -81,6 +81,8 @@ function bilder(d: MetodData) {
     titel: l.pass.rubrik,
     grupp: versaler(l.pass.textRubrik),
     exempel: [...(l.pass.titel ? [l.pass.titel] : []), ...l.pass.text],
+    // Passexemplets titel står fet, som på lathundssidan och i Word (K-390; förut mager i PowerPoint och pdf:en).
+    exempelTitel: !!l.pass.titel,
     repliker: (l.pass.repliker ?? []).map(citat),
     forberett: l.pass.forberett ? l.pass.forberett.text.join(' ') : undefined,
     // Rutans rubrik ur metoden, som på lathundssidan och i Word (K-075; förut fast DET JAG FÖRBEREDDE).
@@ -477,8 +479,8 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
     const need = exH(exGrad);
     if (need > storyH + 0.1) varna(`exemplet på bild 2 är långt (${need.toFixed(2)} > ${(storyH - 0.2).toFixed(2)} tum): korta lathund.pass.text till cirka 130 ord`);
     // Exemplet berättas rakt och replikerna (”…”) kursiva, som på sidan, i lathunden och i Word.
-    const repliker = (t: string, sist: boolean) => t.split(/(”[^”]*”)/).filter(Boolean).map((x, j, alla) => ({ text: x, options: { italic: x.startsWith('”'), breakLine: !sist && j === alla.length - 1 } }));
-    txt(s, b.exempel.flatMap((t, i) => repliker(t, i === b.exempel.length - 1)), 0.61, top2 + 0.1, 4.97, storyH - 0.16, { size: exGrad, psa: 5 });
+    const repliker = (t: string, sist: boolean, fet = false) => t.split(/(”[^”]*”)/).filter(Boolean).map((x, j, alla) => ({ text: x, options: { italic: x.startsWith('”'), bold: fet || undefined, breakLine: !sist && j === alla.length - 1 } }));
+    txt(s, b.exempel.flatMap((t, i) => repliker(t, i === b.exempel.length - 1, i === 0 && b.exempelTitel)), 0.61, top2 + 0.1, 4.97, storyH - 0.16, { size: exGrad, psa: 5 });
     if (b.repliker.length) {
       let by = top2 + storyH + 0.14;
       label(s, 'LÄRAREN SÄGER', 0.46, by, 5.27);
