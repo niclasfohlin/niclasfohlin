@@ -1,0 +1,9 @@
+---
+// Knappen till ett lektionskort (src/lib/lektionskort.ts): bredvid Öppna lathunden i nedladdningsrutan, i menyn och på
+// metodens kort, och vid lektionen i texten (Filmruta.astro). Pdf:en öppnas i en ny flik och räknas i statistiken.
+// medTitel säger metodens namn till en skärmläsare, där flera metoder står bredvid varandra, som i metodbanken.
+import { lektionskortLank, type Lektionskort } from '../lib/lektionskort';
+interface Props { k: Lektionskort; titel: string; klass?: string; medTitel?: boolean }
+const { k, titel, klass = 'knapp', medTitel = false } = Astro.props;
+---
+<a class={klass} {...lektionskortLank(k, titel)}>{k.knapp}{medTitel && <span class="visually-hidden">: {titel}</span>}<span class="visually-hidden">, pdf</span></a>

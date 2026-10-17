@@ -24,6 +24,7 @@ import { bankAv, nivaFarger } from '../../lib/bank';
 import { harMaterial } from '../../lib/material';
 import Centralknapp from '../../components/Centralknapp.astro';
 import { metodensCentrala, provaCentrala } from '../../lib/centrala';
+import { metodensLektionskort } from '../../lib/lektionskort';
 
 export async function getStaticPaths() {
   const metoder = await publicerade('stodundervisning');
@@ -93,7 +94,7 @@ const materialLank = d.ramar ? '#ramar' : d.lektionsbank ? '#lektionsbank' : har
           faktarutan, som på Word-filens första sida. Extrafilmerna står i texten (Metod.astro). */}
       {huvud && <Filmruta filmer={[huvud]} titel={d.titel} />}
       {delningPa && <Delning sida={`/stodundervisning/${m.id}`} titel={d.titel} plats="topp" />}
-      <Nedladdning id={m.id} titel={d.titel} harMallar={harMallar(d)} harLathund={harLathund(d)} harMaterial={harMaterial(d)} ramar={d.ramar?.rubrik.toLowerCase()} filmer={filmer.length} bank={bank} farger={bank ? nivaFarger(d, bank) : undefined} nivamaterial={metodensNivamaterial(d)} bladmaterial={metodensBladmaterial(d, m.id)} ovrigt={ovrigtfil(d, m.id)} />
+      <Nedladdning id={m.id} titel={d.titel} lektionskort={metodensLektionskort(d, m.id)} harMallar={harMallar(d)} harLathund={harLathund(d)} harMaterial={harMaterial(d)} ramar={d.ramar?.rubrik.toLowerCase()} filmer={filmer.length} bank={bank} farger={bank ? nivaFarger(d, bank) : undefined} nivamaterial={metodensNivamaterial(d)} bladmaterial={metodensBladmaterial(d, m.id)} ovrigt={ovrigtfil(d, m.id)} />
     </div>
 
     <Metod d={d} id={m.id} koppling={koppling} />

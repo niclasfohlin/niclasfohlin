@@ -13,8 +13,11 @@ import { skyltText, type Niva } from '../lib/nivaer';
 // niva: listans nivå (src/lib/nivaer.ts), som en skylt i nivåns färg före rubriken, där nivåns led inte står kvar.
 // id: ett ankare på listan (räknebladen, som kartan leder till, src/lib/karta.ts).
 // numrerad: raderna har nummer, som på kortet i sagoformen i Word (kortSagoblad i metoddocx.ts).
-interface Props { rubrik?: string; kolumner?: string[]; rader: string[][]; klass?: string; brak?: boolean; huvud?: { rubrik: string; text: string }[]; elev?: boolean; niva?: Niva; id?: string; numrerad?: boolean }
-const { rubrik, kolumner, rader, klass = '', brak = false, huvud, elev = false, niva, id, numrerad = false } = Astro.props;
+// larare: listan är lärarens (larare: true i metodens fil, som Skrivkollens Orden att säga i Säg, skriv och läs): husets
+// typsnitt i vanlig storlek, eftersom läraren läser den och ingen elev pekar i den. Stor stil delade ord och sköt
+// kolumner utanför skärmen i telefonen (riggens läsning 2026-10-17).
+interface Props { rubrik?: string; kolumner?: string[]; rader: string[][]; klass?: string; brak?: boolean; huvud?: { rubrik: string; text: string }[]; elev?: boolean; niva?: Niva; id?: string; numrerad?: boolean; larare?: boolean }
+const { rubrik, kolumner, rader, klass = '', brak = false, huvud, elev = false, niva, id, numrerad = false, larare = false } = Astro.props;
 // En kolumn där alla rader är tomma, bredvid kolumner med text, är en skrivkolumn (kartläggningens Före och Efter):
 // smal, och räknas inte när listan avgör om den är en enda kolumn text. Är alla kolumner tomma (ett schema att fylla
 // i) är ingen smal. Samma regel som i Word (elevlista i src/lib/metoddocx.ts).
@@ -36,7 +39,7 @@ const pil = (c: string) => c.replace(/ → /g, ' → ');
 // upp står för sig, bredvid varandra på datorn och efter varandra på telefonen. Samma form i Word (fragelista).
 const fragor = harFragor({ kolumner, rader }) ? rader.map((r) => (r[1] ?? '').trim()).filter(Boolean) : undefined;
 ---
-<div id={id} class={`m-lista ${bokstaver ? 'bokstaver' : ''} ${enKolumn ? 'en-kolumn' : ''} ${protokoll ? 'protokoll' : ''} ${manga ? 'manga' : ''} ${schema ? 'schema' : ''} ${elev && !protokoll ? 'elev' : ''} ${fragor ? `fragor text-${textlangd({ rader })}` : ''} ${klass}`.replace(/\s+/g, ' ').trim()}>
+<div id={id} class={`m-lista ${bokstaver ? 'bokstaver' : ''} ${enKolumn ? 'en-kolumn' : ''} ${protokoll ? 'protokoll' : ''} ${manga ? 'manga' : ''} ${schema ? 'schema' : ''} ${elev && !protokoll ? 'elev' : ''} ${fragor ? `fragor text-${textlangd({ rader })}` : ''} ${larare ? 'larare' : ''} ${klass}`.replace(/\s+/g, ' ').trim()}>
   {huvud && (
     <dl class="m-ramfalt m-ramhuvud">
       {huvud.map((f) => <div><dt>{f.rubrik}</dt><dd>{f.text}</dd></div>)}

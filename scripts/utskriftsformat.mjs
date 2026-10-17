@@ -18,7 +18,8 @@
 //   ingen knapp på sidan skriver ut sidan själv (de gamla märkena data-skriv-ut och data-skriv-ut-blad), och inget skript i
 //   bygget anropar window.print;
 //   varje central sak (src/data/centrala.json) finns i bygget, en pdf bär namnet och upphovet, och den korta adressen
-//   leder dit (netlify.toml). Det prövas varje gång, före sidorna.
+//   leder dit (netlify.toml), och varje lektionskort som en knapp leder till finns, bär ordet och upphovet och är högst
+//   ett A4. Det prövas varje gång, före sidorna.
 // Att pdf:erna är gjorda av de Word-filer som ligger i bygget prövar scripts/bankpdf.mjs --kontrollera, och delarna klipps
 // ur dem vid varje bygge.
 //
@@ -116,6 +117,25 @@ const textI = (p) => { if (p.text === undefined) p.text = platt(execFileSync('pd
       if (!o || o.till !== c.adress || o.status !== 301) fel.push(`${c.id}: netlify.toml leder inte ${c.kort} till ${c.adress} med status 301`);
     }
   }
+  // Lektionskorten (src/lib/lektionskort.ts, Niclas 2026-10-17): varje knapp till ett kort leder till en pdf i bygget som
+  // bär ordet Lektionskort, © Niclas Fohlin och niclasfohlin.se, och varje kort i public/stodundervisning/ har en knapp.
+  // Ett kort är högst ett A4 (Niclas 2026-10-17: "Tänker de ska vara max en a4a i framtiden"); Säg, skriv och läs kort
+  // kom före regeln och har en baksida med alla meningar.
+  {
+    const FORE_REGELN = new Set(['sag-skriv-och-las-lektionskort.pdf']);
+    const lankade = new Set();
+    const lasKort = (d) => { for (const e of readdirSync(d, { withFileTypes: true })) { const p = join(d, e.name); if (e.isDirectory()) lasKort(p); else if (e.name === 'index.html') for (const m of readFileSync(p, 'utf8').matchAll(/href="\/stodundervisning\/([a-z0-9-]+-lektionskort(?:-[23])?\.pdf)/g)) lankade.add(m[1]); } };
+    lasKort(join(dist, 'stodundervisning'));
+    for (const f of lankade) {
+      const fil = join(dist, 'stodundervisning', f);
+      if (!existsSync(fil)) { fel.push(`lektionskortet ${f} saknas i bygget; pdf:en från metodriggen läggs i public/stodundervisning/${f}`); continue; }
+      const text = execFileSync('pdftotext', ['-enc', 'UTF-8', fil, '-'], { encoding: 'utf8' }).normalize('NFC').replace(/\s+/g, ' ');
+      for (const [krav, prov] of [['Lektionskort', text.includes('Lektionskort')], ['© Niclas Fohlin', /©\s*Niclas Fohlin/.test(text)], ['niclasfohlin.se', text.includes('niclasfohlin.se')]]) if (!prov) fel.push(`lektionskortet ${f}: pdf:en saknar "${krav}"`);
+      const sidor = Number(execFileSync('pdfinfo', [fil], { encoding: 'utf8' }).match(/Pages:\s+(\d+)/)?.[1] ?? 0);
+      if (sidor > 1 && !FORE_REGELN.has(f)) fel.push(`lektionskortet ${f} har ${sidor} sidor; ett lektionskort är högst ett A4 (METODER.md under Lektionskortet)`);
+    }
+    for (const f of readdirSync(join(rot, 'public', 'stodundervisning')).filter((f) => /-lektionskort(-[23])?\.pdf$/.test(f))) if (!lankade.has(f)) fel.push(`lektionskortet ${f} ligger i public/stodundervisning/ men ingen metod visar det (fältet lektionskort)`);
+  }
   // Ett blad med fältet google (bladet som Google Formulär, Gruppstärkande aktiviteter 2026-10-16): knappens korta
   // adress leder i netlify.toml till Googles sida för att kopiera ett kalkylark, så att knappen aldrig går till en
   // sida som inte finns.
@@ -128,7 +148,7 @@ const textI = (p) => { if (p.text === undefined) p.text = platt(execFileSync('pd
   }
   if (fel.length) {
     for (const f of fel) console.error(`  fel  ${f}`);
-    console.error('utskriftsformat: de centrala sakerna eller bladens Google-knappar stämmer inte med registret, src/data/centrala.json, eller netlify.toml.');
+    console.error('utskriftsformat: de centrala sakerna, lektionskorten eller bladens Google-knappar stämmer inte med registret, src/data/centrala.json, metodernas fält lektionskort eller netlify.toml.');
     process.exit(1);
   }
 }

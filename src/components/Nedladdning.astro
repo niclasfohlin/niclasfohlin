@@ -16,6 +16,8 @@ import type { Ovrigtfil } from '../lib/ovrigt';
 import type { Nivamaterial } from '../lib/nivamaterial';
 import type { Bank } from '../lib/bank';
 import SkrivUtPdf from './SkrivUtPdf.astro';
+import Lektionskortknapp from './Lektionskortknapp.astro';
+import type { Lektionskort } from '../lib/lektionskort';
 // ramar: namnet på metodens ramar (läslistorna, berättelseramarna) när de ligger i planeringsmallarna, så att knappen säger det.
 // Har namnet ett och i sig (böckerna och materialet) står det efter ett komma, så att raden inte får två och.
 // titel: metodens titel, för besöksstatistiken ("Upprepad läsning: lathunden som pdf").
@@ -29,8 +31,10 @@ import SkrivUtPdf from './SkrivUtPdf.astro';
 // ovrigt: filen med det material som inte står på något av de ställena (src/lib/ovrigt.ts, fältet ramar.ovrigt), under
 // metodens eget namn för det, som Bladen och korten. Rutans tabeller följer då de delar metoden säger att materialet har.
 // harMaterial: metoden har material (src/lib/material.ts), och då finns knappen Metoden och filen med bara metoden.
-interface Props { id: string; titel: string; harMallar: boolean; harLathund: boolean; harMaterial: boolean; ramar?: string; filmer?: number; bank?: Bank; farger?: Record<string, string>; nivamaterial?: Nivamaterial; bladmaterial?: Bladmaterial; ovrigt?: Ovrigtfil }
-const { id, titel, harMallar, harLathund, harMaterial, ramar, filmer = 0, bank, farger = {}, nivamaterial, bladmaterial, ovrigt } = Astro.props;
+// lektionskort: metodens lektionskort (src/lib/lektionskort.ts), blå knappar bredvid Öppna lathunden (Niclas 2026-10-17:
+// "Blå knappar bredvid lathunden"), och först i rutan i en lektion utan lathund.
+interface Props { id: string; titel: string; harMallar: boolean; harLathund: boolean; harMaterial: boolean; ramar?: string; filmer?: number; bank?: Bank; farger?: Record<string, string>; nivamaterial?: Nivamaterial; bladmaterial?: Bladmaterial; ovrigt?: Ovrigtfil; lektionskort?: Lektionskort[] }
+const { id, titel, harMallar, harLathund, harMaterial, ramar, filmer = 0, bank, farger = {}, nivamaterial, bladmaterial, ovrigt, lektionskort = [] } = Astro.props;
 const filmord = filmer === 1 ? 'filmen' : 'filmerna';
 // Rutan har bara rubriker och knappar (Niclas 2026-10-10: "rensa text som inte behövs eller förklarar sig själv med bara
 // knapparna och rubriker"): ingen mening om lathunden och inget stycke under knapparna. Det knapparna gör står i deras
@@ -40,9 +44,10 @@ const skrivareSvg = '<svg aria-hidden="true" viewBox="0 0 20 20" width="16" heig
 ---
 <aside class="nedladdning" aria-labelledby={`nedladdning-${id}`}>
   <h2 id={`nedladdning-${id}`}>Ladda ner och skriv ut</h2>
-  {harLathund && (
+  {(harLathund || lektionskort.length > 0) && (
     <ul class="nedladdning-lista">
-      <li><a class="knapp" href={`${bas}/lathund`}>Öppna lathunden</a></li>
+      {harLathund && <li><a class="knapp" href={`${bas}/lathund`}>Öppna lathunden</a></li>}
+      {lektionskort.map((k) => <li><Lektionskortknapp k={k} titel={titel} /></li>)}
     </ul>
   )}
   <ul class="filrader">

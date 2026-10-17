@@ -9,6 +9,7 @@ import {
   type IBorderOptions, type IFloating, type IParagraphOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
 import { centralaVid, lasbarAdress, type Textplats } from './centrala';
+import { lektionskortVid, metodensLektionskort, type Lektionskort } from './lektionskort';
 import { bokdelar } from './boklankar';
 import { site } from '../data/site';
 import { arbetsformRad, arEttKort, arProtokoll, arskursText, datumText, ejBryt, etikettOchText, laskortKolumn, laskortRubrik, lathundFakta, lathundForm, metaRad, metodAdress, passOrd, passOversikt, passTextKort, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost, type PassOrd } from './metod';
@@ -2676,8 +2677,19 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
   // Ett blad (bildblad()) står ensamt på ett liggande A4 där det hör hemma, direkt efter sin ram, i bildernas ordning.
   const adress = metodAdress(bas, post.id).replace(/^https?:\/\//, '');
   const bordsbild = (b: PaBordet): Flod => (arBlad(b) ? bladFlod(b, adress) : pabordetBarn(b));
-  const filmVid = (...platser: FilmPlats[]) => { for (const p of platser) { for (const f of filmerVid(filmer, p)) ut.push(...filmBarn(f)); for (const b of paBordetVid(bilderPaBordet, p)) if (!placerade.has(b)) ut.push(...bordsbild(b)); } };
-  const efterDel = (rubrik: string, maxHojd?: number) => [...filmerVid(filmer, { del: rubrik }).flatMap(filmBarn), ...paBordetVid(bilderPaBordet, { del: rubrik }).flatMap((b) => pabordetBarn(b, maxHojd === undefined ? undefined : maxHojd - radantal(`På bordet. ${b.bild.text}`, BREDD, 19) * 235))];
+  // Lektionskorten (src/lib/lektionskort.ts): knappens namn och adressen som länk vid lektionen, där sidan har knappen,
+  // först på platsen, före en film på samma plats, som på sidan.
+  const lektionskort = metodensLektionskort(d, post.id);
+  const kortRad = (k: Lektionskort) => {
+    const lank = `${bas.replace(/\/$/, '')}${k.adress}`;
+    return new Paragraph({ spacing: { before: 0, after: 120 }, children: [
+      textRun({ text: `${k.knapp}: ` }),
+      new ExternalHyperlink({ link: lank, children: [textRun({ text: lank.replace(/^https?:\/\//, ''), color: FARG.huvud, underline: { type: UnderlineType.SINGLE, color: FARG.huvud } })] }),
+    ] });
+  };
+  const kortVid = (p: FilmPlats) => lektionskortVid(lektionskort, p).map(kortRad);
+  const filmVid = (...platser: FilmPlats[]) => { for (const p of platser) { ut.push(...kortVid(p)); for (const f of filmerVid(filmer, p)) ut.push(...filmBarn(f)); for (const b of paBordetVid(bilderPaBordet, p)) if (!placerade.has(b)) ut.push(...bordsbild(b)); } };
+  const efterDel = (rubrik: string, maxHojd?: number) => [...kortVid({ del: rubrik }), ...filmerVid(filmer, { del: rubrik }).flatMap(filmBarn), ...paBordetVid(bilderPaBordet, { del: rubrik }).flatMap((b) => pabordetBarn(b, maxHojd === undefined ? undefined : maxHojd - radantal(`På bordet. ${b.bild.text}`, BREDD, 19) * 235))];
   // De centrala sakerna (src/lib/centrala.ts): namnet och adressen som länk direkt efter texten som nämner saken, där sidan
   // har knappen. Hålls texten ihop med det som följer, hålls raden också ihop med det.
   const centraltVid = (p: Textplats, hallIhop = false) => {
@@ -2874,6 +2886,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
       const los = former.losningar(ram);
       if (los) {
         ut.push(losningsbyte(ram, losningensNivaNr(ram, boksidor)), ...tvaLosningar(los.par, los.bilder), new Sektionsbyte(false));
+        ut.push(...kortVid({ ram: ram.rubrik }));
         for (const f of filmerVid(filmer, { ram: ram.rubrik })) ut.push(...filmBarn(f));
         return;
       }
@@ -2896,6 +2909,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
         const [bild, ...fler] = paBordetVid(bilderPaBordet, { ram: ram.rubrik });
         ut.push(formbyte(st.not || ram.rubrik), ...struktur(st, bild), new Sektionsbyte(false));
         for (const b of fler) ut.push(...bordsbild(b));
+        ut.push(...kortVid({ ram: ram.rubrik }));
         for (const f of filmerVid(filmer, { ram: ram.rubrik })) ut.push(...filmBarn(f));
         return;
       }
@@ -2904,6 +2918,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
       if (pbild) {
         const l = boksidor.get(ram)!;
         ut.push(problembyte(l), ...problemsida(l, pbild), new Sektionsbyte(false));
+        ut.push(...kortVid({ ram: ram.rubrik }));
         for (const f of filmerVid(filmer, { ram: ram.rubrik })) ut.push(...filmBarn(f));
         return;
       }

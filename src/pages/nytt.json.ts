@@ -3,6 +3,7 @@ import { artiklarSorterade, metoderSorterade, bockerSorterade, publikationNamn }
 import { byggSerier, lektionsnamn } from '../lib/serie';
 import { arskursText } from '../lib/metod';
 import { metodensCentrala } from '../lib/centrala';
+import { LEKTIONSKORT_MEJL, metodensLektionskort } from '../lib/lektionskort';
 
 // Maskinläsbar lista över allt som är publicerat: artiklar, metoder och böcker.
 // Byggpluginen netlify/plugins/utskick läser den efter varje lyckad deploy (via
@@ -35,7 +36,8 @@ export const GET: APIRoute = async () => {
         datum: (m.data.uppdaterad ?? new Date(0)).toISOString().slice(0, 10),
         // Seriens ord följer med, så att brevet säger "Med 4 kurser" om en serie av kurser (src/lib/serie.ts, serieOrd).
         // De centrala sakerna (src/lib/centrala.ts) får en rad var med länken efter ingressen.
-        ...(metodensCentrala(m.data).length ? { lankar: metodensCentrala(m.data).map((c) => ({ url: c.adress, text: c.namn, efter: c.mejl })) } : {}),
+        // Lektionskorten (src/lib/lektionskort.ts) får en rad var efter de centrala sakerna.
+        ...(metodensCentrala(m.data).length || m.data.lektionskort.length ? { lankar: [...metodensCentrala(m.data).map((c) => ({ url: c.adress, text: c.namn, efter: c.mejl })), ...metodensLektionskort(m.data, m.id).map((k) => ({ url: k.adress, text: k.knapp, efter: LEKTIONSKORT_MEJL }))] } : {}),
         ...(serie ? { serie: { url: `/stodundervisning/${serie.id}`, titel: serie.titel }, namn: lektionsnamn(m.data.titel), ordning: serie.lektioner.findIndex((l) => l.id === m.id), ord: { den: serie.ord.den, flera: serie.ord.flera } } : {}),
       };
     }),

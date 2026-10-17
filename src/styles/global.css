@@ -960,6 +960,8 @@ a.bankfiler-niva-namn { display: inline-block; padding: 0.4rem 0; color: inherit
 .m-lista tbody tr:last-child td { border-bottom: 0; }
 .m-lista.bokstaver td { font-size: 1.7rem; text-align: center; }
 .m-lista.en-kolumn td { font-size: 1.25rem; }
+/* Lärarens lista (larare: true, Elevlista.astro): vanlig storlek, eftersom läraren läser den och ingen elev pekar i den. */
+.m-lista.larare td { font-size: 1.05rem; }
 /* Ett tomt schema med många kolumner (Elevlista.astro, schema) rullar i sidled på en smal skärm, med kolumner som är
    breda nog för sina rubriker. */
 @media screen and (max-width: 40rem) {
@@ -1621,6 +1623,9 @@ html.js .bara-js { display: inline-block; }
   .m-kortlista.meningar ul { grid-template-columns: minmax(0, 1fr); }
   .m-tabell.fri:not(.stapla) td:first-child { min-width: 6.5rem; }
   .m-lista th.skriv, .m-lista td.skriv { width: 3.2rem; }
+  /* Skrivkolumnens rubrik (Vecka 8 i Skrivkollen) ryms i sin kolumn och bryts mellan orden i stället för att skäras av. */
+  .m-lista th.skriv { padding-left: 0.15rem; padding-right: 0.15rem; letter-spacing: 0; }
+  .m-lista.larare td { font-size: 1.05rem; }
   .m-mall-svep { display: block; }
   .m-kortlista.korta .m-kort { font-size: 1.6rem; }
   .m-tabell.stapla td.tom { display: none; }

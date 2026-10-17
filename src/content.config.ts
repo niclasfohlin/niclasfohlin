@@ -7,6 +7,7 @@ import bildbankData from './data/bildbank.json';
 import { BAGE, ordgrupper, utanStod } from './lib/lasflyt';
 import { EFTER_FORMER, HOGST_EXTRAFILMER, platsFel, tolkaEfter } from './lib/film';
 import { centralAv, registerFel, textplatsFel, tolkaTextplats, TEXTPLATS_FORMER } from './lib/centrala';
+import { HOGST_LEKTIONSKORT, LEKTIONSKORT_PLATS, lektionskortFel } from './lib/lektionskort';
 import { forstaLed, radensDel } from './lib/karta';
 import { veckofel } from './lib/veckomaterial';
 import { arskursFel } from './lib/tackning';
@@ -224,6 +225,14 @@ const stodundervisning = defineCollection({
       id: z.string().refine((v) => centralAv(v) !== undefined, { error: (i) => `${String(i.input)} finns inte i src/data/centrala.json.` }),
       efterText: text.refine((v) => tolkaTextplats(v) !== undefined, { error: `efterText är ${TEXTPLATS_FORMER}.` }),
     })).default([]),
+    // Lektionskorten (Niclas 2026-10-17, src/lib/lektionskort.ts): ett A4 att ha i handen när läraren leder en lektion som
+    // återkommer, högst tre i en metod. Pdf:en heter <id>-lektionskort.pdf, och -2 och -3 när de är fler, och knappen står
+    // bredvid Öppna lathunden och vid lektionen i texten. namn är lektionens namn, som knappen bär när korten är fler än
+    // ett. efter är platsen vid lektionen, med extrafilmernas ord, och utan den står knappen efter passets tabell.
+    lektionskort: z.array(z.strictObject({
+      namn: text.optional(),
+      efter: text.refine((v) => tolkaEfter(v) !== undefined, { error: `efter är ${EFTER_FORMER}.` }).optional(),
+    })).max(HOGST_LEKTIONSKORT, { error: `En metod har högst ${HOGST_LEKTIONSKORT} lektionskort (Niclas 2026-10-17: "Över det är det inte en reproducerande lektion").` }).default([]),
     // Nivåerna i en metod med nivåer (De fyra räknesätten: Bas, Medel och Avancerad, Niclas 2026-10-04), med färgen i hex.
     // Ett led i en listas rubrik som heter som en nivå blir en skylt i nivåns färg före rubriken, på sidan och i Word.
     nivaer: z.array(z.strictObject({ namn: text, farg: z.string().regex(/^[0-9A-Fa-f]{6}$/, 'Färgen skrivs som sex hexsiffror, som 3E8E41.') })).default([]),
@@ -683,6 +692,14 @@ const stodundervisning = defineCollection({
       const v = tolkaTextplats(x.efterText);
       const fel = c && v && textplatsFel(d, c, v);
       if (fel) ctx.addIssue({ code: 'custom', path: ['centrala', i, 'efterText'], message: `${fel}.` });
+    });
+    // Lektionskorten: lektionens namn när korten är fler än ett, och en plats som finns (src/lib/lektionskort.ts).
+    const kortFel = lektionskortFel(d);
+    if (kortFel) ctx.addIssue({ code: 'custom', path: ['lektionskort'], message: kortFel });
+    d.lektionskort.forEach((k, i) => {
+      const v = tolkaEfter(k.efter ?? LEKTIONSKORT_PLATS);
+      const fel = v && platsFel(d, v);
+      if (fel) ctx.addIssue({ code: 'custom', path: ['lektionskort', i, 'efter'], message: `${fel.replace(/filmen/g, 'lektionskortet')}.` });
     });
     d.nivaer.forEach((n, i) => { if (d.nivaer.findIndex((x) => x.namn === n.namn) !== i) ctx.addIssue({ code: 'custom', path: ['nivaer', i, 'namn'], message: `Nivån ${n.namn} står två gånger.` }); });
     d.mallar.forEach((m, i) => { if (m.rutaCm && m.typ !== 'talruta') ctx.addIssue({ code: 'custom', path: ['mallar', i, 'rutaCm'], message: 'Bara en talruta har rutaCm.' }); });

@@ -2,13 +2,19 @@
 // En film på metodens sida och dess stillbilder i utskriften, på samma plats (src/lib/film.ts): filmen syns på
 // skärmen, stillbilderna i utskriften. Huvudfilmen står direkt efter faktarutan ([id].astro), en extrafilm vid sitt
 // moment (Metod.astro), och Word-filen har stillbilderna på samma platser (metoddocx.ts). En bild På bordet
-// (src/lib/pabordet.ts) står på samma platser, med samma ord för platsen, och ritas av Pabordet.astro.
+// (src/lib/pabordet.ts) står på samma platser, med samma ord för platsen, och ritas av Pabordet.astro. Ett lektionskort
+// (src/lib/lektionskort.ts) står också på sin plats, vid lektionen, som en blå knapp till pdf:en (Lektionskortknapp.astro).
 import Film from './Film.astro';
 import Filmbilder from './Filmbilder.astro';
 import Pabordet from './Pabordet.astro';
+import Lektionskortknapp from './Lektionskortknapp.astro';
 import type { MetodFilm } from '../lib/film';
 import type { PaBordet } from '../lib/pabordet';
-interface Props { filmer: (MetodFilm | PaBordet)[]; titel: string }
+import type { Lektionskort } from '../lib/lektionskort';
+interface Props { filmer: (MetodFilm | PaBordet | Lektionskort)[]; titel: string }
 const { filmer, titel } = Astro.props;
+const kort = filmer.filter((f): f is Lektionskort => 'lektionskort' in f);
+const ovriga = filmer.filter((f): f is MetodFilm | PaBordet => !('lektionskort' in f));
 ---
-{filmer.map((f) => ('bild' in f ? <Pabordet b={f} /> : <><Film f={f} titel={titel} /><Filmbilder f={f} /></>))}
+{kort.length > 0 && <p class="m-central-knapp m-lektionskort">{kort.map((k) => <Lektionskortknapp k={k} titel={titel} />)}</p>}
+{ovriga.map((f) => ('bild' in f ? <Pabordet b={f} /> : <><Film f={f} titel={titel} /><Filmbilder f={f} /></>))}

@@ -52,6 +52,15 @@ utkast: true
 # centrala:
 #   - id: lasstrategier
 #     efterText: "tabell: Läsfelen och strategierna"
+# Valfritt: lektionskorten (METODER.md under Lektionskortet), högst tre: ett A4 ur metodriggen att ha i handen när
+# läraren leder en lektion som återkommer, i public/stodundervisning/<id>-lektionskort.pdf (-2, -3). Knappen står bredvid
+# Öppna lathunden och vid lektionen, efter platsen efter, med extrafilmernas ord; utan efter efter passets tabell. namn
+# är lektionens namn, som knappen bär när korten är fler än ett ("Lektionskort: Ordpasset").
+# lektionskort:
+#   - namn: Ordpasset
+#     efter: tidsschema
+#   - namn: Skrivpassen
+#     efter: "tabell: Pass 2 och 3"
 # Valfritt: kursens nivåer (De fyra räknesätten i grupp). Ett led i en räknebladsrubrik som heter som en nivå blir en
 # skylt i nivåns färg före rubriken ("Före och efter · Bas · Räkna i rutnätet"), och kartans kolumner med nivåns namn får färgen.
 # nivaer:

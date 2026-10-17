@@ -42,6 +42,7 @@ const UNDANTAG = [
   { vag: /^filmer\.\d+\.efter$/, word: false, utskrift: false, skal: 'filmens plats; platsen prövas nedan' },
   { vag: /^pabordet\.\d+\.efter$/, word: false, utskrift: false, skal: 'bildens plats; platsen prövas nedan, som filmernas' },
   { vag: /^centrala\.\d+\.(id|efterText)$/, word: false, utskrift: false, skal: 'den centrala sakens id och plats; sidan och Word-filen sätter knappen och länken på platsen med samma kod (src/lib/centrala.ts)' },
+  { vag: /^lektionskort\.\d+\.efter$/, word: false, utskrift: false, skal: 'lektionskortets plats; sidan och Word-filen sätter knappen och länken på platsen med samma kod (src/lib/lektionskort.ts)' },
   { vag: /^lathund\./, utskrift: false, skal: 'lathunden är en egen sida med egen utskrift' },
   { vag: /^mallar\.\d+\.text$/, word: false, skal: 'mallens text är till läraren och står bara på sidan' },
   { vag: /^mallar\.\d+\.underrad$/, utskrift: false, skal: 'raden ritas som fält med skrivlinjer på sidan' },
@@ -231,6 +232,17 @@ for (const fil of filer) {
     const knappar = [...html.matchAll(/<a\b[^>]*\bhref="([^"]*)"[^>]*>([\s\S]*?)<\/a>/g)].filter((m) => m[1].split('?')[0] === c.adress && m[2].replace(/<[^>]+>/g, '').startsWith(c.namn));
     if (knappar.length < 3) { console.error(`paritet: ${id} har ${knappar.length} knappar till ${c.namn}; sidan ska ha den under ingressen, överst i menyn och i texten (centrala, ${c.id}).`); fel++; }
   }
+  // Lektionskorten (src/lib/lektionskort.ts): knappen bredvid Öppna lathunden i nedladdningsrutan och i menyn och vid
+  // lektionen i texten, och Word-filen raden med knappens namn och adressen på samma plats.
+  const lektionskort = d.lektionskort ?? [];
+  lektionskort.forEach((k, i) => {
+    const fil = `${id}-lektionskort${i > 0 ? `-${i + 1}` : ''}.pdf`;
+    const knapp = lektionskort.length > 1 && k.namn ? `Lektionskort: ${k.namn}` : 'Lektionskort';
+    const rad = `${knapp}: ${SAJT}/stodundervisning/${fil}`;
+    if (!word.includes(norm(rad))) { console.error(`paritet: ${id}.docx saknar raden "${rad}" (lektionskort ${i + 1}).`); fel++; }
+    const knappar = [...html.matchAll(/<a\b[^>]*\bhref="([^"]*)"[^>]*>([\s\S]*?)<\/a>/g)].filter((m) => m[1].split('?')[0] === `/stodundervisning/${fil}` && m[2].replace(/<[^>]+>/g, '').startsWith(knapp));
+    if (knappar.length < 3) { console.error(`paritet: ${id} har ${knappar.length} knappar till ${knapp}; sidan ska ha den i nedladdningsrutan och menyn bredvid Öppna lathunden och vid lektionen i texten (lektionskort ${i + 1}).`); fel++; }
+  });
   // Ett radslut inne i en text (w:t) visar Word som ett mellanslag: raderna som metodens fil har under varandra läses då
   // som en fras (kortet När det skaver i Faktatextsamtal i grupp, granskningen 2026-10-13). En radbrytning ska vara en
   // ny rad i stycket (stycke i src/lib/metoddocx.ts), eller ett mellanrum där texten är en rad, som i sidfoten.

@@ -173,6 +173,21 @@ En pdf görs av metodriggen (`node build/material.mjs <namn>`, i riggens `out/ma
 
 En ny sak är en post i registret, filen eller sidan och raderna i metodfilerna, utan ny kod. En ny plats i texten läggs till i `TEXTAVSNITT` i `src/lib/centrala.ts`, i `Metod.astro` och i `metoddocx.ts` i samma commit.
 
+### Lektionskortet: ett A4 att ha i handen vid lektionen
+
+Niclas 2026-10-17, när Säg, skriv och läs kom med sitt A4 att laminera: "Detta får bli en ny standard. När en metod har en lektion som återupprepas med samma eller växlande innehåll ska det finnas ett lektionskort i metoden. En metod kan ha flera Lektionskort. Men max 3 för en enskild metod. Över det är det inte en reproducerande lektion." Och om var det står: "Lektionskortet ska då finnas som blå knapp vid lektionen. Blå [knappar] bredvid [lathunden] (fler än 1 Lektionskort: lektionsnamn)." Kortet hette först Lärarens lathund, och Niclas ville ha ett namn som inte blandas ihop med metodens lathund. Det är högst ett A4 ("Tänker de ska vara max en a4a i framtiden"); Säg, skriv och läs kort kom före regeln och har en baksida med alla meningar. Metodriggen gör kortet som en pdf, i en egen design att läsa i handen, och bygger lektionskort till Ljudlek i grupps lektioner (K-384).
+
+| Del | Så gör sajten |
+|---|---|
+| Fältet | `lektionskort` i metodens fil, högst tre poster (schemat stannar annars). `namn` är lektionens namn och krävs när korten är fler än ett. `efter` är platsen vid lektionen, med extrafilmernas ord (Filmerna nedan), och utan den står knappen efter passets tabell |
+| Filerna | `public/stodundervisning/<id>-lektionskort.pdf`, och `-lektionskort-2.pdf` och `-3.pdf` när korten är fler, ur riggens leverans. Pdf:en bär ordet Lektionskort, © Niclas Fohlin och niclasfohlin.se och har en titel |
+| Knappen | Samma blå knapp (`Lektionskortknapp.astro`) bredvid Öppna lathunden i nedladdningsrutan och i menyn och på metodens kort i metodbanken, och vid lektionen i texten, först på platsen och före en film där (`Filmruta.astro`). Den heter Lektionskort, och med fler kort "Lektionskort: <namn>". En lektion utan lathund har knappen först i nedladdningsrutan. Ett tryck öppnar pdf:en i en ny flik och räknas som en utskrift, `utskrift:<id>/lektionskort` (`-2`, `-3`) |
+| Word | En rad med knappens namn och adressen som länk på platsen i texten (`kortVid` i `metoddocx.ts`), som de centrala sakernas rad |
+| Mejlet | Mejlet om en ny metod har en rad per kort efter de centrala sakerna: "Lektionskort: ett A4 att ha i handen när du leder lektionen" (`nytt.json.ts`) |
+| Kontrollerna | Schemat stannar på fler än tre kort, på flera kort utan namn och på en plats som inte finns. `scripts/paritet.mjs` stannar när sidan har färre än tre knappar till ett kort eller Word-filen saknar raden. `scripts/utskriftsformat.mjs` stannar när pdf:en saknas i bygget, saknar ordet eller upphovet, har fler än en sida, eller ligger i `public/stodundervisning/` utan att någon metod visar den |
+
+Ett lektionskort är inte en central sak: det hör till en lektion i en metod, och står därför vid lathunden och lektionen, inte under ingressen.
+
 ### Banken: problem och texter på egna sidor
 
 Niclas 2026-10-10 om Problemlösning i grupp, med trettio problem i tre nivåer och tre blad per problem: "Känns konstigt om allt bara ska ligga scrollandes på mobilen i evigheter", och "skapa en struktur för hur problemen hittas, visas och listas så det inte blir svåröverskådligt eller evigt scrollande i onödan och att man har möjlighet att bara skriva ut problem utan allt annat och bara problem samt med tillhörande lärarens sida och kontrastpar". Textsamtal i grupp hade samma form med femtio texter, och utskriften av hela beskrivningen var 201 sidor (K-163). Metodens sida i telefonen gick från 234 skärmar till omkring 50.

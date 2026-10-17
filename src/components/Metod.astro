@@ -56,6 +56,8 @@ import { borjaHar } from '../lib/skrivkort';
 import Centralknapp from './Centralknapp.astro';
 import Centralrad from './Centralrad.astro';
 import { centralaVid, metodensCentrala } from '../lib/centrala';
+import Lektionskortknapp from './Lektionskortknapp.astro';
+import { lektionskortVid, metodensLektionskort } from '../lib/lektionskort';
 // "Åk 4–5" hålls ihop i ramarnas rubriker och länkar: hårt mellanslag efter Åk, ordfog efter tankstrecket.
 const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 '));
 // koppling: den generella metodens serie med lektionsbanken, eller lektionens plats i den (src/lib/serie.ts).
@@ -126,7 +128,10 @@ const filmer = metodensFilmer(d, id);
 // De centrala sakerna (src/lib/centrala.ts): överst i menyn och i texten efter meningen som nämner dem (Centralrad.astro).
 const centrala = metodensCentrala(d);
 const bilderPaBordet = metodensPaBordet(d, id);
-const vid = (p: FilmPlats) => [...filmerVid(filmer, p), ...paBordetVid(bilderPaBordet, p)];
+// Lektionskorten (src/lib/lektionskort.ts): bredvid Öppna lathunden i menyn och vid lektionen i texten, först på platsen,
+// så att knappen står direkt efter det som beskriver lektionen och före en film på samma plats.
+const lektionskort = metodensLektionskort(d, id);
+const vid = (p: FilmPlats) => [...lektionskortVid(lektionskort, p), ...filmerVid(filmer, p), ...paBordetVid(bilderPaBordet, p)];
 const ord = passOrd(d);
 const tavla = d.exempel?.tavla ? d.lathund?.mall.block.find((b) => b.typ === 'tavla') : undefined;
 const fraserRubrik = d.steg?.fraserRubrik ?? '';
@@ -336,11 +341,13 @@ const meny = [
 ---
 <div class="metod-modell">
   {/* Menyn står när sidan har fler än två avsnitt, och alltid när metoden har en central sak, som står överst i den
-      (granskningen 2026-10-14); då står avsnitten bara när de är fler än två. */}
-  {(meny.length > 2 || centrala.length > 0) && !undersida && (
+      (granskningen 2026-10-14), eller ett lektionskort, som står bredvid Öppna lathunden (Niclas 2026-10-17); då står
+      avsnitten bara när de är fler än två. */}
+  {(meny.length > 2 || centrala.length > 0 || lektionskort.length > 0) && !undersida && (
     <nav class="metod-nav" aria-label="På den här sidan">
       {centrala.map((c) => <Centralknapp c={c} metod={id} titel={d.titel} klass="lathund-lank central-lank" />)}
       {d.lathund && <a class="lathund-lank" href={`/stodundervisning/${id}/lathund`}>Öppna lathunden</a>}
+      {lektionskort.map((k) => <Lektionskortknapp k={k} titel={d.titel} klass="lathund-lank central-lank" />)}
       {meny.length > 2 && <><span class="nav-etikett" aria-hidden="true">På den här sidan</span>
       <ul>{meny.map((a) => <li><a href={`#${a.id}`} data-avsnitt={a.id}>{a.namn}</a></li>)}</ul></>}
     </nav>
@@ -811,7 +818,7 @@ const meny = [
                 if (info && arTarning(d, l)) return <div class="m-ej-utskrift"><Kortlista rubrik={l.rubrik} info={{ ...info, korta: false, medel: true }} nyGrupp={info.grupp !== forra} brak={brak} /></div>;
                 return info
                   ? <Kortlista rubrik={l.rubrik} info={info} nyGrupp={lage === 'material' || info.grupp !== forra} brak={brak} />
-                  : <Elevlista {...(l.rakneblad ? listansNiva(d.nivaer, l.rubrik) : { rubrik: l.rubrik })} id={bladAnkare.get(`${ri}-${li}`)} kolumner={l.kolumner} rader={l.rader} brak={brak} huvud={plats === 0 ? ram.huvud : undefined} klass={arEttKort(alla, l) ? 'kort' : ''} elev={elevtypsnitt && !l.larare} numrerad={ram.sagoform?.form === 'kort' && !ram.sagoform.kortbilder?.[l.rubrik ?? '']} />;
+                  : <Elevlista {...(l.rakneblad ? listansNiva(d.nivaer, l.rubrik) : { rubrik: l.rubrik })} id={bladAnkare.get(`${ri}-${li}`)} kolumner={l.kolumner} rader={l.rader} brak={brak} huvud={plats === 0 ? ram.huvud : undefined} klass={arEttKort(alla, l) ? 'kort' : ''} elev={elevtypsnitt && !l.larare} larare={!!l.larare} numrerad={ram.sagoform?.form === 'kort' && !ram.sagoform.kortbilder?.[l.rubrik ?? '']} />;
               })}
               {/* Eleven ser på en bild (PaBordet.elev): bilden direkt efter det eleven läser, och rutan Till läraren sist i
                   lärarens form. */}

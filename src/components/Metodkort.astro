@@ -1,6 +1,7 @@
 ---
 // Metodkortet, samma på startsidan och i metodbanken: titel med ämnesmärke, faktaremsa (årskurs,
-// grupp, pass, hur ofta), ingress, taggar och raden med de centrala sakerna (src/lib/centrala.ts), lathund och filval. I metodbanken
+// grupp, pass, hur ofta), ingress, taggar och raden med de centrala sakerna (src/lib/centrala.ts), lathund, lektionskorten
+// bredvid den (src/lib/lektionskort.ts) och filval. I metodbanken
 // också kryssrutan Välj för samlad nedladdning. En serie (Ljudlek i grupp) är ett kort som de andra, med
 // lektionerna bakom en rad som fälls ut, så att kortet inte växer med banken och lektionerna inte står som egna
 // kort; kortet filtreras på allt serien tränar (Niclas valde formen 2026-09-29).
@@ -8,6 +9,8 @@ import Taggar from './Taggar.astro';
 import Filval from './Filval.astro';
 import { harLathund, kortFakta } from '../lib/metod';
 import Centralknapp from './Centralknapp.astro';
+import Lektionskortknapp from './Lektionskortknapp.astro';
+import { metodensLektionskort } from '../lib/lektionskort';
 import { metodensCentrala } from '../lib/centrala';
 import type { MetodPost } from '../lib/metod';
 import type { Serie } from '../lib/serie';
@@ -38,6 +41,7 @@ const antal = lektioner.length === 1 ? `En ${ord?.en ?? 'lektion'}` : `${lektion
   <p class="kort-rad">
     {metodensCentrala(m.data).map((c) => <Centralknapp c={c} metod={m.id} titel={m.data.titel} klass="central-lank" medTitel />)}
     {harLathund(m.data) && <a class="lathund-lank" href={`/stodundervisning/${m.id}/lathund`}>Lathund<span class="visually-hidden">: {m.data.titel}</span></a>}
+    {metodensLektionskort(m.data, m.id).map((k) => <Lektionskortknapp k={k} titel={m.data.titel} klass="central-lank" medTitel />)}
     <Filval fil={`/stodundervisning/${m.id}`} namn={m.id} rubrik={`Allt om ${m.data.titel}`} statistik={`${m.data.titel}: allt om metoden`} liten />
     {valj && <label class="valj"><input type="checkbox" name="valda" value={m.id} /> Välj<span class="visually-hidden"> {m.data.titel}</span></label>}
   </p>
