@@ -1,0 +1,162 @@
+{
+ "design": "strategipapper",
+ "fil": "Lektionskort - Ljudlek - Smaka på ljud",
+ "titel": "Ljudlek: Smaka på ljud",
+ "dokumenttitel": "Ljudlek: Smaka på ljud · Lektionskort",
+ "knapp": "Lektionskort",
+ "infoUtanRuta": true,
+ "info": [
+  "F–2 · 30 minuter · 2–12 elever"
+ ],
+ "fot": "© Niclas Fohlin, niclasfohlin.se, där du skriver ut lektionens material",
+ "ingress": "**Mål:** kunna höra det sista ljudet och ljudet i mitten av ett ord.",
+ "ruta": {
+  "punkter": [
+   {
+    "rubrik": "Säg det långsamt",
+    "text": "Dra ut ordet: sooolll."
+   },
+   {
+    "rubrik": "Säg bara ljudet",
+    "text": "Stanna på ljudet och säg bara det: lll, inte ell."
+   },
+   {
+    "rubrik": "Markör och bokstav",
+    "text": "Lägg markören där ljudet hörs och skriv bokstaven."
+   },
+   {
+    "rubrik": "Vänd kortet",
+    "text": "Stämmer bokstaven?"
+   }
+  ],
+  "storlek": {
+   "rubrik": 23,
+   "text": 20
+  }
+ },
+ "delar": [
+  {
+   "rubrik": "Orden",
+   "text": "Arket har tolv kort. Blanda dem.",
+   "kolumner": [
+    "Ljudet",
+    "Orden"
+   ],
+   "bredder": [
+    35,
+    65
+   ],
+   "storlek": 20,
+   "rader": [
+    [
+     "Rad 1 · Sist: s, t och k\nhus: det sista ljudet är /s/",
+     "hus, mus, båt, morot, tomat, raket, ost, tält, salt, lök, fisk, mask"
+    ],
+    [
+     "Rad 2 · Sist: l, r och n\nsol: det sista ljudet är /l/",
+     "sol, säl, nål, fågel, kamel, tiger, bäver, smör, ben, melon, sten, svan"
+    ],
+    [
+     "Rad 3 · I mitten\nsol: ljudet i mitten är /o/",
+     "sol, ben, pil, nål, mål, båt, tåg, hus, mus, säl, räv, lök\nOrdparen: sol, sil · mus, mos · mos, mås · ben, bin · hel, häl · lök, lok"
+    ],
+    [
+     "Rad 4 · Var ljudet hörs\n/s/ i hus: sist. /s/ i sol: först.",
+     "Arket I mitten. Fråga: var hör du /s/ i hus?"
+    ]
+   ],
+   "not": "Ta ord med bokstäver som gruppen har haft. Den som inte kan bokstaven pekar på kartan.",
+   "tat": true,
+   "namnrad": 17
+  },
+  {
+   "rubrik": "Passet",
+   "kolumner": [
+    "Delen",
+    "Så leder du",
+    "Du säger, till exempel"
+   ],
+   "bredder": [
+    22,
+    43,
+    35
+   ],
+   "storlek": 18,
+   "rader": [
+    [
+     "Före passet",
+     "Bildkorten för raden, ett ark per par, med ordet på baksidan. Platsrutorna Först, Mitten och Sist per elev och på tavlan. En markör och en penna per elev och en bokstavskarta per par. Välj dagens ljud, en bokstav som gruppen övar. Börja i rad 1. Bestäm paren och dagens elever: två eller tre som du lyssnar på i steg 4."
+    ],
+    [
+     "Ljudstart\n0–5 min · alla i kör",
+     "Dagens ljud: visa bokstaven, och alla säger ljudet i spegeln. Sätt ihop fem ord: mat, lök, nöt, pil, gås. Dela upp fyra: sol, lus, mat, lök. Du säger ljuden först.",
+     "Sätt ihop: ”Mmmooosss. Vilket ord blir det?”\nDela upp: ”Mus. Säg ljuden och håll upp ett finger för varje.”"
+    ],
+    [
+     "1 Stanna på ljudet\n5–9 min · du visar",
+     "Tre kort. Säg ordet långsamt, lägg markören där ljudet hörs och skriv bokstaven.",
+     "”Hus. Hhhuuusss.”\n”Det sista ljudet jag hör är sss.”"
+    ],
+    [
+     "2 Skriv i rutan\n9–15 min · alla",
+     "Sex ord. Alla skriver bokstaven i rätt ruta och visar samtidigt.",
+     "”Skriv bokstaven och håll handen över.”\n”Händerna bort. Lll. Det sista ljudet i sol är lll.”"
+    ],
+    [
+     "3 Fråga och svara\n15–20 min · i par",
+     "Sex kort. Den ena frågar efter ett ljud, den andra lägger markören och skriver. Sedan byter de.",
+     "”Vilket ljud hör du i mitten av sol?”\n”Var hör du sss i hus?”"
+    ],
+    [
+     "4 Mina ord\n20–25 min · var och en",
+     "Tre kort var. Skriv bokstaven i rätt ruta.",
+     "”Säg ordet långsamt. Vad hör du sist?”\n”Du stannade på det sista ljudet: lll.”"
+    ],
+    [
+     "Avslut\n25–30 min · alla",
+     "Var och en svarar. Säg vad du hörde.",
+     "”Säg ett ord från i dag och vad du gjorde med det.”"
+    ],
+    [
+     "Efter passet",
+     "Skriv upp vilka av dagens elever som klarade steg 4. Nästa rad när dagens elever har två rätt i steg 4, två pass i följd."
+    ]
+   ],
+   "tat": true,
+   "namnrad": 17
+  },
+  {
+   "rubrik": "Lyssna efter",
+   "text": "I alla steg: vänta tre sekunder och fråga ”Vad hör du?” Säg först vad eleven gjorde rätt.",
+   "kolumner": [
+    "Det eleven gör",
+    "Så gör du"
+   ],
+   "bredder": [
+    36,
+    64
+   ],
+   "storlek": 19,
+   "rader": [
+    [
+     "”sol”, ”ol” eller ”sss” för det sista ljudet i sol",
+     "”Säg ordet långsamt och stanna på det sista: sooolll. Bara lll.”"
+    ],
+    [
+     "”ell” för l, ”tö” för båt",
+     "”Ell är namnet. Hur låter den? Lll.” Säg t kort och utan ö: bååå-⁠t."
+    ],
+    [
+     "”sk” för det sista ljudet i fisk",
+     "Dra ut s:et och säg k:et kort: ”Fff-⁠i-⁠sss-⁠k. Det sista är /k/.”"
+    ],
+    [
+     "”sss, lll” för ljudet i mitten av sol",
+     "”Du hörde sss och lll. Vad hör du mellan dem? Sooolll.”"
+    ]
+   ],
+   "tat": true,
+   "namnrad": 17
+  }
+ ]
+}

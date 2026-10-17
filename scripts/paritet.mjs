@@ -43,6 +43,7 @@ const UNDANTAG = [
   { vag: /^pabordet\.\d+\.efter$/, word: false, utskrift: false, skal: 'bildens plats; platsen prövas nedan, som filmernas' },
   { vag: /^centrala\.\d+\.(id|efterText)$/, word: false, utskrift: false, skal: 'den centrala sakens id och plats; sidan och Word-filen sätter knappen och länken på platsen med samma kod (src/lib/centrala.ts)' },
   { vag: /^lektionskort\.\d+\.efter$/, word: false, utskrift: false, skal: 'lektionskortets plats; sidan och Word-filen sätter knappen och länken på platsen med samma kod (src/lib/lektionskort.ts)' },
+  { vag: /^lektionskort\.\d+\.text$/, word: false, skal: 'meningen vid lektionskortets knapp i Materialet; Word-filen har kortet självt på sina egna sidor, och meningen före kortets sidbrytning blev ensam på en sida (kortets texter prövas nedan)' },
   { vag: /^lathund\./, utskrift: false, skal: 'lathunden är en egen sida med egen utskrift' },
   { vag: /^mallar\.\d+\.text$/, word: false, skal: 'mallens text är till läraren och står bara på sidan' },
   { vag: /^mallar\.\d+\.underrad$/, utskrift: false, skal: 'raden ritas som fält med skrivlinjer på sidan' },
@@ -52,6 +53,28 @@ const UNDANTAG = [
 ];
 
 const norm = (s) => s.normalize('NFC').toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
+// En Word-fils text, med sidhuvuden och sidfötter, normaliserad som ovan.
+const wordtext = async (fil) => {
+  const zip = await JSZip.loadAsync(readFileSync(fil));
+  const delar = await Promise.all(Object.keys(zip.files).filter((n) => /^word\/(document|header\d*|footer\d*)\.xml$/.test(n)).map((n) => zip.file(n).async('string')));
+  return norm(avkoda(delar.join(' ').replace(/<[^>]+>/g, '')));
+};
+// Lektionskortets texter (src/data/lektionskort/<stam>.json, riggens papper.json): titeln, raden under knappen, målet,
+// rutorna och delarna, cell för cell och rad för rad, baksidan och källraden. Fet stil (**) och ordfogen (U+2060) är form.
+const kortetsTexter = (p) => {
+  const ut = [];
+  const lagg = (t) => { for (const rad of String(t ?? '').split('\n')) { const r = rad.replace(/\*\*/g, '').replace(/\u2060/g, '').trim(); if (r) ut.push(r); } };
+  const sida = (s) => {
+    lagg(s.titel); lagg(s.undertitel); for (const t of s.info ?? []) lagg(t); lagg(s.ingress);
+    for (const k of s.ruta?.punkter ?? []) { lagg(k.rubrik); lagg(k.text); }
+    for (const d of s.delar ?? []) { lagg(d.rubrik); lagg(d.text); for (const k of d.kolumner) lagg(k); for (const r of d.rader) for (const c of r) lagg(c); lagg(d.not); }
+  };
+  sida(p);
+  if (p.baksida) sida(p.baksida);
+  lagg(p.kalla);
+  lagg(p.fot);
+  return ut;
+};
 const avkoda = (s) => s
   .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
   .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)))
@@ -241,8 +264,35 @@ for (const fil of filer) {
     const rad = `${knapp}: ${SAJT}/stodundervisning/${fil}`;
     if (!word.includes(norm(rad))) { console.error(`paritet: ${id}.docx saknar raden "${rad}" (lektionskort ${i + 1}).`); fel++; }
     const knappar = [...html.matchAll(/<a\b[^>]*\bhref="([^"]*)"[^>]*>([\s\S]*?)<\/a>/g)].filter((m) => m[1].split('?')[0] === `/stodundervisning/${fil}` && m[2].replace(/<[^>]+>/g, '').startsWith(knapp));
-    if (knappar.length < 3) { console.error(`paritet: ${id} har ${knappar.length} knappar till ${knapp}; sidan ska ha den i nedladdningsrutan och menyn bredvid Öppna lathunden och vid lektionen i texten (lektionskort ${i + 1}).`); fel++; }
+    if (knappar.length < 4) { console.error(`paritet: ${id} har ${knappar.length} knappar till ${knapp}; sidan ska ha den i nedladdningsrutan och menyn bredvid Öppna lathunden, först i Materialet och vid lektionen i texten (lektionskort ${i + 1}).`); fel++; }
   });
+  // Lektionsbanken (Lektionsbank.astro): vid varje lektion en länk till dess kort, och knappen med alla korten.
+  if (d.lektionsbank) {
+    const lektioner = readdirSync(mapp).filter((f) => f.endsWith('.yaml') && !f.startsWith('_')).map((f) => [f.slice(0, -5), parseYaml(readFileSync(join(mapp, f), 'utf8'))]).filter(([, l]) => l.serie === id && !l.utkast);
+    let medKort = 0;
+    for (const [lid, l] of lektioner) (l.lektionskort ?? []).forEach((_, i) => {
+      medKort++;
+      const fil = `/stodundervisning/${lid}-lektionskort${i > 0 ? `-${i + 1}` : ''}.pdf`;
+      if (!new RegExp(`href="${fil.replace(/[.]/g, '\\.')}(?:\\?[^"]*)?"`).test(html)) { console.error(`paritet: ${id} saknar länken till ${fil} vid lektionen i lektionsbanken.`); fel++; }
+    });
+    if (medKort && !new RegExp(`href="/stodundervisning/${id}-alla-lektionskort\\.pdf(?:\\?[^"]*)?"[^>]*data-skriv-ut-pdf`).test(html)) { console.error(`paritet: ${id} saknar knappen Skriv ut alla lektionskort efter lektionsbanken.`); fel++; }
+  }
+  // Kortet självt står först i Materialet i Word-filen med allt och i planeringsmallarna, och i sin egen Word-fil, vars pdf
+  // knappen öppnar (Niclas 2026-10-17: "var skrivs den ur med Skriv ut allt"). Varje text på kortet ska stå i alla tre.
+  for (const [i] of lektionskort.entries()) {
+    const stam = `${id}-lektionskort${i > 0 ? `-${i + 1}` : ''}`;
+    const data = join(rot, 'src/data/lektionskort', `${stam}.json`);
+    if (!existsSync(data)) { console.error(`paritet: ${id} har lektionskort ${i + 1} men inte dess innehåll, src/data/lektionskort/${stam}.json.`); fel++; continue; }
+    const texter = kortetsTexter(JSON.parse(readFileSync(data, 'utf8')));
+    const filerna = [[`${id}.docx`, word], [`${id}-mallar.docx`, null], [`${stam}.docx`, null]];
+    for (const [namn, given] of filerna) {
+      const fil = join(rot, 'dist/stodundervisning', namn);
+      if (!given && !existsSync(fil)) { console.error(`paritet: ${namn} saknas i dist (lektionskort ${i + 1}).`); fel++; continue; }
+      const text = given ?? await wordtext(fil);
+      const saknas = texter.filter((t) => !text.includes(norm(t)));
+      if (saknas.length) { console.error(`paritet: ${namn} saknar ${saknas.length} av lektionskortets texter (src/data/lektionskort/${stam}.json), först "${saknas[0].slice(0, 60)}".`); fel++; }
+    }
+  }
   // Ett radslut inne i en text (w:t) visar Word som ett mellanslag: raderna som metodens fil har under varandra läses då
   // som en fras (kortet När det skaver i Faktatextsamtal i grupp, granskningen 2026-10-13). En radbrytning ska vara en
   // ny rad i stycket (stycke i src/lib/metoddocx.ts), eller ett mellanrum där texten är en rad, som i sidfoten.

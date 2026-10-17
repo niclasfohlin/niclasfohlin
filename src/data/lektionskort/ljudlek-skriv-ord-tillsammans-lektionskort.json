@@ -1,0 +1,170 @@
+{
+ "design": "strategipapper",
+ "fil": "Lektionskort - Ljudlek - Skriv ord tillsammans",
+ "titel": "Ljudlek: Skriv ord tillsammans",
+ "dokumenttitel": "Ljudlek: Skriv ord tillsammans · Lektionskort",
+ "knapp": "Lektionskort",
+ "infoUtanRuta": true,
+ "info": [
+  "F–2 · 30 minuter · 2–12 elever"
+ ],
+ "fot": "© Niclas Fohlin, niclasfohlin.se, där du skriver ut lektionens material",
+ "ingress": "**Mål:** kunna skriva en bokstav för varje ljud och läsa det som står.",
+ "ruta": {
+  "punkter": [
+   {
+    "rubrik": "En bokstav för varje ljud",
+    "text": "Lägg från vänster och säg ljudet samtidigt."
+   },
+   {
+    "rubrik": "Läs med fingret",
+    "text": "Läs tillbaka med fingret under det som står."
+   },
+   {
+    "rubrik": "Byt en bokstav",
+    "text": "Byt en bokstav, säg var i ordet och läs det nya ordet."
+   },
+   {
+    "rubrik": "Skriv det du hör",
+    "text": "Korten undan. Skriv medan du säger ordet, och läs tillbaka."
+   }
+  ],
+  "storlek": {
+   "rubrik": 23,
+   "text": 20
+  }
+ },
+ "delar": [
+  {
+   "rubrik": "Orden",
+   "text": "Varje rad har kedjor där en bokstav byts: mos, mor, mer.",
+   "kolumner": [
+    "Bytet",
+    "Orden"
+   ],
+   "bredder": [
+    35,
+    65
+   ],
+   "storlek": 20,
+   "rader": [
+    [
+     "Rad 1 · Första bokstaven byts",
+     "sa, la · se, le · mer, ler, ser · vi, ni · mus, lus, hus"
+    ],
+    [
+     "Rad 2 · Sista bokstaven byts",
+     "mos, mor · sa, se · le, la · mål, mås · tal, tar, tak"
+    ],
+    [
+     "Rad 3 · Bokstaven i mitten byts",
+     "mer, mor · sol, sil · vet, vit · mos, mås, mus"
+    ],
+    [
+     "Rad 4 · Blandat",
+     "mos, mor, mer, ser, ler · se, le, la, sa · lat, mat, mot, rot"
+    ],
+    [
+     "Rad 5 · Ord med två stavelser",
+     "lera, mera · lina, mina, mena · vila, visa · läsa, lösa"
+    ],
+    [
+     "Ordjakt",
+     "s, o, l, e: sol, se, le · v, i, s, a: vi, is, sa, vas, visa · t, a, l, e: ta, te, la, le, tal, lat, leta"
+    ]
+   ],
+   "not": "Följ en kedja så långt som gruppens bokstäver räcker.",
+   "tat": true,
+   "namnrad": 17
+  },
+  {
+   "rubrik": "Passet",
+   "kolumner": [
+    "Delen",
+    "Så leder du",
+    "Du säger, till exempel"
+   ],
+   "bredder": [
+    22,
+    43,
+    35
+   ],
+   "storlek": 18,
+   "rader": [
+    [
+     "Före passet",
+     "Gruppens bokstavskort i ett kuvert per par, och dina egna. Ljudrutorna, fyra rutor, per par och på tavlan. Magneter, markörer och en whiteboardtavla per elev. Välj dagens ljud, en bokstav som gruppen övar. Börja i rad 1. Bestäm paren och dagens elever: två eller tre som du lyssnar på i steg 4."
+    ],
+    [
+     "Ljudstart\n0–5 min · alla i kör",
+     "Dagens ljud: visa bokstaven, och alla säger ljudet i spegeln. Sätt ihop fem ord: sola, mosa, lera, rasa, mera. Dela upp fyra: sol, lus, snö, blå.",
+     "Sätt ihop: ”Mmmooosss. Vilket ord blir det?”\nDela upp: ”Mus. Säg ljuden och håll upp ett finger för varje.”"
+    ],
+    [
+     "1 Kedjan på tavlan\n5–9 min · du visar",
+     "Bygg ett ord ur kedjan, läs det och byt en bokstav. Två eller tre ord.",
+     "”Mos. En bokstav för varje ljud: mmm, ooo, sss.”\n”Jag byter /s/ mot /r/ och läser: mooorrr, mor.”"
+    ],
+    [
+     "2 Kedjan i rutorna\n9–15 min · alla",
+     "Fyra ord. Den ena byter en bokstav, den andra läser. Sedan byter de.",
+     "”Gör mor till mer. Vilken bokstav byter ni?”\n”Läs med fingret under: mmmeeerrr.”"
+    ],
+    [
+     "3 Ordjakt\n15–20 min · i par",
+     "Bokstäverna i raden Ordjakt. Den ena bygger ett ord, den andra skriver det hen hör. Sedan byter de.",
+     "”Bygg ett ord medan din kamrat tittar bort.”\n”Du missade ett ljud. Säg det långsamt igen.”"
+    ],
+    [
+     "4 Skriv det du hör\n20–25 min · var och en",
+     "Korten undan. Säg ett ord, ett byte och ett ord till. Alla skriver och läser.",
+     "”Säg ordet långsamt och skriv en bokstav för varje ljud.”\n”Gör mos till mor. Var bytte du?”"
+    ],
+    [
+     "Avslut\n25–30 min · alla",
+     "Var och en svarar. Säg vad du hörde.",
+     "”Säg ett ord från i dag och vad du gjorde med det.”"
+    ],
+    [
+     "Efter passet",
+     "Skriv upp vilka av dagens elever som klarade steg 4. Nästa rad när dagens elever skriver ordet efter bytet och ett ord till rätt, två pass i följd."
+    ]
+   ],
+   "tat": true,
+   "namnrad": 17
+  },
+  {
+   "rubrik": "Lyssna efter",
+   "text": "I alla steg: vänta tre sekunder och fråga ”Vad hör du?” Säg först vad eleven gjorde rätt.",
+   "kolumner": [
+    "Det eleven gör",
+    "Så gör du"
+   ],
+   "bredder": [
+    36,
+    64
+   ],
+   "storlek": 19,
+   "rader": [
+    [
+     "”mr” för mer",
+     "”Du hörde /m/ och /r/. Vad hör du mellan dem? Mmmeeerrr.” Visa ordet sist."
+    ],
+    [
+     "”sol” när det ligger sl",
+     "”Peka och läs det som ligger: sss, lll.”"
+    ],
+    [
+     "”sel” när du säger ”Gör ser till ler”",
+     "”Säg ser och ler. Var låter de olika? I början.” Eleven byter den första."
+    ],
+    [
+     "”slo” för sol",
+     "”Ett ljud i taget, från vänster: sss, ooo, lll.”"
+    ]
+   ],
+   "tat": true,
+   "namnrad": 17
+  }
+ ]
+}

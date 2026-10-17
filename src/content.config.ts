@@ -226,12 +226,15 @@ const stodundervisning = defineCollection({
       efterText: text.refine((v) => tolkaTextplats(v) !== undefined, { error: `efterText är ${TEXTPLATS_FORMER}.` }),
     })).default([]),
     // Lektionskorten (Niclas 2026-10-17, src/lib/lektionskort.ts): ett A4 att ha i handen när läraren leder en lektion som
-    // återkommer, högst tre i en metod. Pdf:en heter <id>-lektionskort.pdf, och -2 och -3 när de är fler, och knappen står
-    // bredvid Öppna lathunden och vid lektionen i texten. namn är lektionens namn, som knappen bär när korten är fler än
-    // ett. efter är platsen vid lektionen, med extrafilmernas ord, och utan den står knappen efter passets tabell.
+    // återkommer, högst tre i en metod. Kortets innehåll ligger i src/data/lektionskort/<id>-lektionskort.json (-2 och -3
+    // när de är fler), och knappen står bredvid Öppna lathunden och vid lektionen i texten, och kortet först i Materialet.
+    // namn är lektionens namn, som knappen bär när korten är fler än ett. efter är platsen vid lektionen, med extrafilmernas
+    // ord, och utan den står knappen efter passets tabell. text är meningen vid kortet i Materialet, om vad kortet har och
+    // hur läraren använder det, i sidan och Word-filen.
     lektionskort: z.array(z.strictObject({
       namn: text.optional(),
       efter: text.refine((v) => tolkaEfter(v) !== undefined, { error: `efter är ${EFTER_FORMER}.` }).optional(),
+      text: text.optional(),
     })).max(HOGST_LEKTIONSKORT, { error: `En metod har högst ${HOGST_LEKTIONSKORT} lektionskort (Niclas 2026-10-17: "Över det är det inte en reproducerande lektion").` }).default([]),
     // Nivåerna i en metod med nivåer (De fyra räknesätten: Bas, Medel och Avancerad, Niclas 2026-10-04), med färgen i hex.
     // Ett led i en listas rubrik som heter som en nivå blir en skylt i nivåns färg före rubriken, på sidan och i Word.
@@ -253,6 +256,9 @@ const stodundervisning = defineCollection({
       grupp: z.string().default('Förmåga'),
       skalRubrik: z.string().default('Skälet till platsen'),
       numrerad: z.boolean().default(true),
+      // Meningen vid knappen som skriver ut alla lektionernas lektionskort på en gång (Lektionsbank.astro), när lektionerna
+      // har kort. Utan den står en mening ur src/lib/lektionskort.ts.
+      lektionskort: z.string().optional(),
     }).optional(),
 
     // Modellen. Ett stycke per rad i listorna; en rad inuti en cell blir en ny rad i cellen.

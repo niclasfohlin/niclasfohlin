@@ -1,26 +1,46 @@
 // Lektionskortet (Niclas 2026-10-17): ett A4 att ha i handen när läraren leder en lektion som återkommer, med samma eller
 // växlande innehåll. "Detta får bli en ny standard. När en metod har en lektion som återupprepas med samma eller växlande
 // innehåll ska det finnas ett lektionskort i metoden. En metod kan ha flera Lektionskort. Men max 3 för en enskild metod.
-// Över det är det inte en reproducerande lektion." Metodriggen gör pdf:en, och sajten visar den som en blå knapp bredvid
-// Öppna lathunden, i nedladdningsrutan, i menyn och på metodens kort i metodbanken, och vid lektionen i texten ("Lektionskortet
-// ska då finnas som blå knapp vid lektionen"). Word-filen har en rad med länken på samma plats i texten (metoddocx.ts). Har
-// metoden fler än ett kort bär knappen lektionens namn, "Lektionskort: Ordpasset" (Niclas: "fler än 1 Lektionskort:
-// lektionsnamn"). Platsen skrivs med extrafilmernas ord (src/lib/film.ts, tolkaEfter), och utan plats står knappen efter
-// passets tabell. Modulen läser inga filer, eftersom webbläsaren bygger Word-filen med samma kod.
+// Över det är det inte en reproducerande lektion." Sajten visar kortet som en blå knapp bredvid Öppna lathunden, i
+// nedladdningsrutan, i menyn och på metodens kort i metodbanken, och vid lektionen i texten ("Lektionskortet ska då finnas
+// som blå knapp vid lektionen"). Word-filen har en rad med länken på samma plats i texten (metoddocx.ts). Har metoden fler
+// än ett kort bär knappen lektionens namn, "Lektionskort: Ordpasset" (Niclas: "fler än 1 Lektionskort: lektionsnamn").
+// Platsen skrivs med extrafilmernas ord (src/lib/film.ts, tolkaEfter), och utan plats står knappen efter passets tabell.
+//
+// Kortet är material (Niclas 2026-10-17: "Info om lektionskortet måste nog också stå i materialet för en metod och dess blå
+// knapp finnas där", och "var skrivs den ur med Skriv ut allt"): det står först i Materialet, på sidan med sin mening och
+// knappen, och i Word-filen med allt och i planeringsmallarna som sina egna sidor. Metodriggen lämnar kortets innehåll,
+// riggens papper.json, som sajten lägger i src/data/lektionskort/<stam>.json (scripts/lektionskortdata.mjs), och sajten
+// ritar kortet i Word med riggens design (src/lib/strategipapper.ts). Knappens pdf är kortets egen Word-fil, <stam>.docx,
+// sparad som pdf av Word (scripts/bankpdf.mjs), så att kortet är samma sidor överallt. I en serie står korten också vid
+// lektionerna i lektionsbanken, med en knapp som skriver ut alla på en gång (Lektionsbank.astro). Modulen läser inga filer,
+// eftersom webbläsaren bygger Word-filen med samma kod; kortens innehåll läser src/lib/lektionskortdata.ts.
 import { passar, tolkaEfter, type FilmPlats } from './film';
 
 export const HOGST_LEKTIONSKORT = 3;
 export const LEKTIONSKORT_PLATS = 'tidsschema';
 // Det som följer på länken i mejlet om en ny metod med lektionskort (src/pages/nytt.json.ts).
 export const LEKTIONSKORT_MEJL = 'ett A4 att ha i handen när du leder lektionen';
+// Meningen vid kortet i Materialet när metodens fil inte har en egen (fältet text).
+export const LEKTIONSKORT_TEXT = 'Lektionskortet är lektionen på ett A4. Skriv ut det och ha det framför dig under passet.';
+// Meningen vid knappen som skriver ut alla kort i en serie, när lektionsbanken inte har en egen (lektionsbank.lektionskort),
+// med seriens ord (src/lib/serie.ts, serieOrd): lektion eller kurs.
+export const lektionskortenText = (ord: { en: string; den: string }) => `Varje ${ord.en} har ett lektionskort, ett A4 med passet. Öppna kortet vid ${ord.den}, eller skriv ut alla på en gång och sätt dem i en pärm.`;
 
-type Kortfalt = { lektionskort?: { namn?: string; efter?: string }[] };
-export interface Lektionskort { lektionskort: true; metod: string; nr: number; namn?: string; knapp: string; fil: string; adress: string; vid?: FilmPlats }
+type Kortfalt = { lektionskort?: { namn?: string; efter?: string; text?: string }[] };
+// stam är namnet utan ändelse som kortets innehåll, Word-fil och pdf delar: <stam>.json i src/data/lektionskort/,
+// /stodundervisning/<stam>.docx och /stodundervisning/<stam>.pdf. rubrik är kortets namn i Materialet, och text meningen
+// under namnet.
+export interface Lektionskort { lektionskort: true; metod: string; nr: number; namn?: string; knapp: string; rubrik: string; text: string; stam: string; fil: string; adress: string; vid?: FilmPlats }
 
+/** Namnet som kortets innehåll, Word-fil och pdf delar: <id>-lektionskort, och -2 och -3 när metoden har fler. */
+export const lektionskortStam = (id: string, nr: number) => `${id}-lektionskort${nr > 1 ? `-${nr}` : ''}`;
 /** Pdf:ens namn i public/stodundervisning/: <id>-lektionskort.pdf, och -2 och -3 när metoden har fler. */
-export const lektionskortFil = (id: string, nr: number) => `${id}-lektionskort${nr > 1 ? `-${nr}` : ''}.pdf`;
+export const lektionskortFil = (id: string, nr: number) => `${lektionskortStam(id, nr)}.pdf`;
+/** Filen med alla lektionskort i en serie, i lektionsbankens ordning: <serie>-alla-lektionskort (.docx och .pdf). */
+export const allaLektionskortStam = (serie: string) => `${serie}-alla-lektionskort`;
 
-/** Metodens lektionskort i fältets ordning, med knappens text och platsen i texten. */
+/** Metodens lektionskort i fältets ordning, med knappens text, namnet och meningen i Materialet och platsen i texten. */
 export function metodensLektionskort(d: Kortfalt, id: string): Lektionskort[] {
   const lista = d.lektionskort ?? [];
   return lista.map((k, i) => ({
@@ -29,6 +49,9 @@ export function metodensLektionskort(d: Kortfalt, id: string): Lektionskort[] {
     nr: i + 1,
     namn: k.namn,
     knapp: lista.length > 1 && k.namn ? `Lektionskort: ${k.namn}` : 'Lektionskort',
+    rubrik: lista.length > 1 && k.namn ? `Lektionskort: ${k.namn}` : 'Lektionskortet',
+    text: k.text ?? LEKTIONSKORT_TEXT,
+    stam: lektionskortStam(id, i + 1),
     fil: lektionskortFil(id, i + 1),
     adress: `/stodundervisning/${lektionskortFil(id, i + 1)}`,
     vid: tolkaEfter(k.efter ?? LEKTIONSKORT_PLATS),
@@ -45,9 +68,13 @@ export function lektionskortLank(k: Lektionskort, titel: string): Record<string,
   return { href: k.adress, target: '_blank', rel: 'noopener', title: `${k.namn ? `${k.namn}: e` : 'E'}tt A4 att ha i handen när du leder lektionen, som pdf`, 'data-goatcounter-click': `utskrift:${k.metod}/lektionskort${k.nr > 1 ? `-${k.nr}` : ''}`, 'data-goatcounter-title': `${titel}: ${k.knapp} som pdf` };
 }
 
-/** Fältets fel, som stoppar bygget (src/content.config.ts): fler än ett kort kräver lektionens namn på varje. */
-export function lektionskortFel(d: Kortfalt): string | undefined {
+/** Fältets fel, som stoppar bygget (src/content.config.ts): fler än ett kort kräver lektionens namn på varje, och kortet
+ *  är material, så metoden behöver ett Materialet (ramar) vars inledning nämner kortet, som den räknar upp det andra
+ *  ("Här finns lektionskortet, rimkorten …"; granskningen 2026-10-17). */
+export function lektionskortFel(d: Kortfalt & { ramar?: { text?: string[] } }): string | undefined {
   const lista = d.lektionskort ?? [];
   if (lista.length > 1 && lista.some((k) => !k.namn?.trim())) return 'Med fler än ett lektionskort behöver varje kort lektionens namn i namn, som knappen bär ("Lektionskort: Ordpasset").';
+  if (lista.length && !d.ramar) return 'Ett lektionskort är material och står först i Materialet, så metoden behöver ramar (METODER.md under Lektionskortet).';
+  if (lista.length && !(d.ramar?.text ?? []).some((t) => /lektionskort/i.test(t))) return 'Materialets inledning (ramar.text) nämner inte lektionskortet. Skriv det i uppräkningen, som "Här finns lektionskortet, rimkorten och bokstavskorten." (METODER.md under Lektionskortet).';
   return undefined;
 }

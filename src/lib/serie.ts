@@ -4,10 +4,13 @@
 // startsidan och utskicket, och ur lektionernas meny. Niclas: lektioner ska kunna läggas till och tas bort enkelt.
 // Inga Node-beroenden: metoddocx.ts använder typerna också i webbläsaren.
 import type { MetodData, MetodPost } from './metod';
+import { allaLektionskortStam, lektionskortenText, metodensLektionskort, type Lektionskort } from './lektionskort';
 
-export interface Lektion { id: string; titel: string; namn: string; formaga: number; tranar: string }
+// lektionskort: lektionens lektionskort (src/lib/lektionskort.ts), som står vid lektionen i banken.
+export interface Lektion { id: string; titel: string; namn: string; formaga: number; tranar: string; lektionskort: Lektionskort[] }
 export interface BankFormaga { nr: number; namn: string; skal?: string; lektioner: Lektion[] }
-export interface Serie { id: string; titel: string; rubrik: string; text?: string; not?: string; formagor: BankFormaga[]; lektioner: Lektion[]; ord: SerieOrd }
+// allaLektionskort: filen med alla lektionernas kort i bankens ordning och meningen vid knappen, när lektionerna har kort.
+export interface Serie { id: string; titel: string; rubrik: string; text?: string; not?: string; formagor: BankFormaga[]; lektioner: Lektion[]; ord: SerieOrd; allaLektionskort?: { stam: string; adress: string; text: string } }
 // Seriens ord, så att en serie av kurser (Texttyper i grupp) inte säger lektion och förmåga: barnet i ental och flertal,
 // bestämd och obestämd form, banken som menyn och kortet nämner den, gruppen (Förmåga, Texttyp), rubriken över skälen i
 // Word och om namnen bär numret. Ljudlek i grupp har förvalen i schemat (src/content.config.ts, lektionsbank).
@@ -48,7 +51,7 @@ export function byggSerier(metoder: MetodPost[]): Map<string, Serie> {
   for (const m of metoder) {
     const bank = m.data.lektionsbank;
     if (!bank) continue;
-    serier.set(m.id, { id: m.id, titel: m.data.titel, rubrik: bank.rubrik, text: bank.text, not: bank.not, formagor: bank.formagor.map((f) => ({ ...f, lektioner: [] })), lektioner: [], ord: serieOrd(bank) });
+    serier.set(m.id, { id: m.id, titel: m.data.titel, rubrik: bank.rubrik, text: bank.text, not: bank.not, formagor: bank.formagor.map((f) => ({ ...f, lektioner: [] })), lektioner: [], ord: serieOrd(bank), allaLektionskort: { stam: allaLektionskortStam(m.id), adress: `/stodundervisning/${allaLektionskortStam(m.id)}.pdf`, text: bank.lektionskort ?? lektionskortenText(serieOrd(bank)) } });
   }
   const fel: string[] = [];
   for (const m of metoder) {
@@ -64,11 +67,16 @@ export function byggSerier(metoder: MetodPost[]): Map<string, Serie> {
       fel.push(`Lektionen "${d.titel}" (${m.id}.yaml) har formaga ${d.formaga}, men lektionsbanken i ${serie.titel} har förmågorna 1–${serie.formagor.length}.`);
       continue;
     }
-    formaga.lektioner.push({ id: m.id, titel: d.titel, namn: lektionsnamn(d.titel), formaga: formaga.nr, tranar: d.tranar ?? '' });
+    formaga.lektioner.push({ id: m.id, titel: d.titel, namn: lektionsnamn(d.titel), formaga: formaga.nr, tranar: d.tranar ?? '', lektionskort: metodensLektionskort(d, m.id) });
   }
   for (const s of serier.values()) {
     for (const f of s.formagor) f.lektioner.sort((a, b) => a.namn.localeCompare(b.namn, 'sv'));
     s.lektioner = s.formagor.flatMap((f) => f.lektioner);
+    // Filen med alla kort finns bara när någon lektion har ett. Har någon lektion ett kort ska alla ha det, som bankens
+    // mening säger ("Varje lektion har ett lektionskort"), och bygget stannar annars med de lektioner som saknar kort.
+    const utanKort = s.lektioner.filter((l) => !l.lektionskort.length);
+    if (utanKort.length === s.lektioner.length) s.allaLektionskort = undefined;
+    else if (utanKort.length) fel.push(`I ${s.titel} har ${s.lektioner.length - utanKort.length} av ${s.lektioner.length} ${s.ord.flera} ett lektionskort, och lektionsbanken säger att varje ${s.ord.en} har ett. Saknas: ${utanKort.map((l) => l.namn).join(', ')} (METODER.md under Lektionskortet).`);
     const iSerien = metoder.filter((m) => m.id === s.id || m.data.serie === s.id);
     fel.push(...okandaLektioner(s, iSerien));
   }

@@ -24,7 +24,7 @@ material:
   - magneter
   - bokstavskorten
   - speglar
-uppdaterad: "2026-10-03"
+uppdaterad: "2026-10-17"
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 6
@@ -300,7 +300,7 @@ grund:
 ramar:
   rubrik: "Materialet"
   text:
-    - "Här finns bildkorten, ett ark för varje rad i Så blir lektionen svårare, och bokstavskorten. Ljudrutorna står i planeringsmallarna. Allt går att kopiera. Laminera ljudrutorna, som eleverna skriver på, och bokstavskorten. Bildkorten laminerar du när de är vikta och limmade."
+    - "Här finns lektionskortet, bildkorten, ett ark för varje rad i Så blir lektionen svårare, och bokstavskorten. Ljudrutorna står i planeringsmallarna. Allt går att kopiera. Laminera ljudrutorna, som eleverna skriver på, och bokstavskorten. Bildkorten laminerar du när de är vikta och limmade."
   ramar:
     - rubrik: "Bildkorten"
       text:
@@ -431,6 +431,8 @@ mallar:
       - "3"
       - "4"
     fot: "Lägg bildkortet i rutan Bild, den första från vänster, med bilden uppåt. Säg ett ljud i taget och flytta en markör samtidigt, från vänster till höger. Dra sedan fingret under rutorna och säg ordet."
+lektionskort:
+  - text: "Lektionskortet är lektionen på ett A4: målet, rörelsen, orden att ta, passet med det du gör och säger, och det du lyssnar efter. Skriv ut det och ha det framför dig under passet."
 film:
   sekunder: 25.02
   beskrivning: "Kamraten säger ordet långsamt. Säg ljuden. Flytta en markör för varje ljud. Dra fingret under och säg ordet. Vänd kortet. Lika många prickar? Nästa kort: ko. K sägs kort. Dra fingret under och säg ordet. Två markörer och två prickar."

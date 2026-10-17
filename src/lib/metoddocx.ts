@@ -10,6 +10,7 @@ import {
 } from 'docx';
 import { centralaVid, lasbarAdress, type Textplats } from './centrala';
 import { lektionskortVid, metodensLektionskort, type Lektionskort } from './lektionskort';
+import { papperFot, papperPunkt, papperSidor, PAPPER_MARGINALER, PAPPER_SIDA, type Papper } from './strategipapper';
 import { bokdelar } from './boklankar';
 import { site } from '../data/site';
 import { arbetsformRad, arEttKort, arProtokoll, arskursText, datumText, ejBryt, etikettOchText, laskortKolumn, laskortRubrik, lathundFakta, lathundForm, metaRad, metodAdress, passOrd, passOversikt, passTextKort, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost, type PassOrd } from './metod';
@@ -91,7 +92,9 @@ type Boksektion = { not: string; niva: string; vad: string; farg: string; liggan
 type Sagosektion = { not: string; bokblad: boolean };
 // Ett blad som en bild över hela den liggande sidan (bildblad()): sidans marginaler i twips, som följer bladets skrivytor.
 type Bladsektion = { top: number; bottom: number; left: number; right: number; staende?: boolean };
-class Sektionsbyte { constructor(readonly kortark: boolean, readonly bok?: Boksektion, readonly saga?: Sagosektion, readonly liggande?: boolean, readonly blad?: Bladsektion) {} }
+// papper: en sida ur ett lektionskort (lektionskortFlod()), riggens strategipapper med dess marginaler, inget sidhuvud och
+// kortets egen sidfot med upphovet.
+class Sektionsbyte { constructor(readonly kortark: boolean, readonly bok?: Boksektion, readonly saga?: Sagosektion, readonly liggande?: boolean, readonly blad?: Bladsektion, readonly papper?: Papper) {} }
 type Flod = (Barn | Sektionsbyte)[];
 // Sidkartan (K-342; Niclas 2026-10-13: "System med att den drar från sidorna eller Yaml kommer aldrig få exakt paritet med
 // pdf. Så bättre med ett system som alltid blir 1:1"). Utskriftsknapparna på en texts, ett problems och en rams sida
@@ -118,7 +121,9 @@ const arBarn = (x: Barn | Sektionsbyte): x is Barn => !(x instanceof Sektionsbyt
 // webbläsaren hämtas den som samma bygge ritade.
 // boktypsnitt: Cinzel och Cinzel Decorative till boksidorna (public/fonts/boksida/), när metoden har lästexter.
 // faktatypsnitt: Anton till faktatexternas rubriker (public/fonts/faktatext/), när metoden har faktatexter.
-export interface MetodResurser { bilder: Map<string, Uint8Array>; elevtypsnitt?: Uint8Array; boktypsnitt?: { cinzel: Uint8Array; dekor: Uint8Array }; faktatypsnitt?: Uint8Array; png?: (svg: Uint8Array, bredd: number, hojd: number) => Uint8Array | undefined }
+// lektionskort: lektionskortens innehåll efter stam (src/lib/lektionskortdata.ts), vid bygget lästa ur src/data/lektionskort/,
+// i webbläsaren ur metoder.json.
+export interface MetodResurser { bilder: Map<string, Uint8Array>; elevtypsnitt?: Uint8Array; boktypsnitt?: { cinzel: Uint8Array; dekor: Uint8Array }; faktatypsnitt?: Uint8Array; lektionskort?: Map<string, Papper>; png?: (svg: Uint8Array, bredd: number, hojd: number) => Uint8Array | undefined }
 let RESURSER: MetodResurser = { bilder: new Map() };
 // Varje bild i Word-filen är en SVG med sin reservbild (Niclas 2026-09-30: i Google Dokument blev bilderna blå rutor).
 // Saknas reservbilden stannar bygget, så att en fil med en tom reservbild aldrig kan laddas upp eller hämtas.
@@ -1586,6 +1591,26 @@ const ockraKant: IBorderOptions = { style: BorderStyle.SINGLE, size: 8, color: S
 // därför över dem, och regelprovet (scripts/wordregler.mjs) prövar dem som alla andra.
 const GOOGLEKLARA = new WeakSet<Table>();
 const googleklar = (t: Table) => { GOOGLEKLARA.add(t); return t; };
+// Lektionskortet (src/lib/lektionskort.ts) som riggen ritar det (src/lib/strategipapper.ts): varje sida i en egen sektion
+// med kortets marginaler och sidfot, och sedan en vanlig sektion igen. Kortets tabeller är riggens, prövade i Word och
+// Google Dokument med wordparitet, och huvudet har en cell över två rader, så googleTabeller hoppar över dem, som över
+// sagobladen; regelprovet prövar dem som alla andra. Saknas kortets innehåll i resurserna stannar bygget, så att en
+// Word-fil aldrig går ut utan kortet.
+function lektionskortFlod(k: Lektionskort): Flod {
+  const papper = RESURSER.lektionskort?.get(k.stam);
+  if (!papper) throw new Error(`Word-filen saknar lektionskortet ${k.stam} (src/data/lektionskort/${k.stam}.json), som src/lib/metodresurser.ts läser vid bygget och sidan hämtar ur metoder.json.`);
+  const ut: Flod = [];
+  for (const sida of papperSidor(papper)) {
+    for (const x of sida) if (x instanceof Table) googleklar(x);
+    // Börjar eller slutar sidan med en tabell står ett stycke på en punkt i kortets Arial där, som dokument() annars lägger
+    // i Calibri (papperPunkt i strategipapper.ts).
+    const forst = sida[0] instanceof Table ? [papperPunkt()] : [];
+    const sist = sida.at(-1) instanceof Table ? [papperPunkt()] : [];
+    ut.push(new Sektionsbyte(false, undefined, undefined, undefined, undefined, papper), ...forst, ...sida, ...sist);
+  }
+  ut.push(new Sektionsbyte(false));
+  return ut;
+}
 const sagoTabell = (w: number, kolumner: number[], rows: TableRow[]) => googleklar(new Table({ width: { size: w, type: WidthType.DXA }, columnWidths: kolumner, layout: TableLayoutType.FIXED, borders: SAGA_UTAN, rows }));
 // En rad att skriva på: en cell med en tunn linje under. Startorden står ljust i början av raden.
 function sagoSkrivrad(w: number, o: { span?: number; vanster?: number; start?: string; size?: number } = {}): TableCell {
@@ -2584,9 +2609,19 @@ function ljudRader(d: MetodData): Paragraph[] {
   return ut;
 }
 
+// En rad med ett namn och en adress på sajten som länk, som lektionskortets rad vid lektionen: "Lektionskort:
+// niclasfohlin.se/stodundervisning/ljudlek-rim-lektionskort.pdf".
+function lankRad(namn: string, adress: string, bas: string): Paragraph {
+  const lank = `${bas.replace(/\/$/, '')}${adress}`;
+  return new Paragraph({ spacing: { before: 0, after: 120 }, children: [
+    textRun({ text: `${namn}: ` }),
+    new ExternalHyperlink({ link: lank, children: [textRun({ text: lank.replace(/^https?:\/\//, ''), color: FARG.huvud, underline: { type: UnderlineType.SINGLE, color: FARG.huvud } })] }),
+  ] });
+}
+
 // Lektionsbanken i den generella metoden (Ljudlek i grupp): förmågorna i ordning med lektionerna och vad eleven tränar,
 // byggd ur lektionerna, som på sidan (Lektionsbank.astro). En förmåga utan lektion står kvar.
-function lektionsbankBarn(serie: SerieKoppling['serie']): Barn[] {
+function lektionsbankBarn(serie: SerieKoppling['serie'], bas: string, material = true): Barn[] {
   const bredder = [2300, 4200, BREDD - 6500];
   const ut: Barn[] = [h2(serie.rubrik)];
   if (serie.text) ut.push(stycke(serie.text, { hallIhop: true }));
@@ -2594,6 +2629,9 @@ function lektionsbankBarn(serie: SerieKoppling['serie']): Barn[] {
   const { ord } = serie;
   const rader = serie.formagor.map((f) => [ord.numrerad ? `${f.nr} · ${f.namn}` : f.namn, f.lektioner.map((l) => `${l.namn}: ${l.tranar}`).join('\n') || `Ingen ${ord.en} ännu`, f.skal ?? '']);
   ut.push(...rubrikTabell([ord.grupp, ord.kolumn, ord.skalRubrik], rader, bredder, { radrubrik: false, hallIhop: rader.length <= 5 }));
+  // Lektionernas lektionskort (src/lib/lektionskort.ts) i en pdf, som knappen efter banken på sidan öppnar. Korten är
+  // material, så filen med bara metoden har inte meningen och raden (med dem blev den en sida längre i Google Dokument).
+  if (serie.allaLektionskort && material) ut.push(stycke(serie.allaLektionskort.text, { fore: 160, hallIhop: true }), lankRad('Alla lektionskort', serie.allaLektionskort.adress, bas));
   if (serie.not) ut.push(...ruta('', serie.not));
   return ut;
 }
@@ -2680,14 +2718,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
   // Lektionskorten (src/lib/lektionskort.ts): knappens namn och adressen som länk vid lektionen, där sidan har knappen,
   // först på platsen, före en film på samma plats, som på sidan.
   const lektionskort = metodensLektionskort(d, post.id);
-  const kortRad = (k: Lektionskort) => {
-    const lank = `${bas.replace(/\/$/, '')}${k.adress}`;
-    return new Paragraph({ spacing: { before: 0, after: 120 }, children: [
-      textRun({ text: `${k.knapp}: ` }),
-      new ExternalHyperlink({ link: lank, children: [textRun({ text: lank.replace(/^https?:\/\//, ''), color: FARG.huvud, underline: { type: UnderlineType.SINGLE, color: FARG.huvud } })] }),
-    ] });
-  };
-  const kortVid = (p: FilmPlats) => lektionskortVid(lektionskort, p).map(kortRad);
+  const kortVid = (p: FilmPlats) => lektionskortVid(lektionskort, p).map((k) => lankRad(k.knapp, k.adress, bas));
   const filmVid = (...platser: FilmPlats[]) => { for (const p of platser) { ut.push(...kortVid(p)); for (const f of filmerVid(filmer, p)) ut.push(...filmBarn(f)); for (const b of paBordetVid(bilderPaBordet, p)) if (!placerade.has(b)) ut.push(...bordsbild(b)); } };
   const efterDel = (rubrik: string, maxHojd?: number) => [...kortVid({ del: rubrik }), ...filmerVid(filmer, { del: rubrik }).flatMap(filmBarn), ...paBordetVid(bilderPaBordet, { del: rubrik }).flatMap((b) => pabordetBarn(b, maxHojd === undefined ? undefined : maxHojd - radantal(`På bordet. ${b.bild.text}`, BREDD, 19) * 235))];
   // De centrala sakerna (src/lib/centrala.ts): namnet och adressen som länk direkt efter texten som nämner saken, där sidan
@@ -2803,7 +2834,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     ut.push(...band(d.urval.krav));
     filmVid({ avsnitt: 'urval' });
   }
-  if (post.serie && !post.serie.lektion) ut.push(...lektionsbankBarn(post.serie.serie));
+  if (post.serie && !post.serie.lektion) ut.push(...lektionsbankBarn(post.serie.serie, bas, o.material));
   for (const t of d.tabeller.filter((x) => x.plats === 'efter-urval')) friTabell(t);
   if (d.hem) {
     ut.push(h2(d.hem.rubrik));
@@ -2998,6 +3029,12 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     }
     if (d.ramar.efter) ut.push(stycke(d.ramar.efter, { farg: FARG.svag }));
     filmVid({ avsnitt: 'ramar' });
+    // Lektionskorten sist i Materialet, på sina egna sidor (src/lib/lektionskort.ts; Niclas 2026-10-17: "var skrivs den ur
+    // med Skriv ut allt"). Först i Materialet, som på sidan, kom kortets sidbrytning mellan inledningen och den första
+    // ramens text, som då stod ensam på en sida: sex av tio filer med allt blev två sidor längre i stället för en
+    // (granskningen 2026-10-17). Här byter Materialet ändå sida. Namnet och meningen står bara på sidan, vid knappen: i
+    // Word står kortet självt.
+    for (const k of lektionskort) ut.push(...lektionskortFlod(k));
   }
   if (d.diplom && (o.material || !MATERIAL.has('diplom'))) {
     ut.push(h2(d.diplom.rubrik));
@@ -3271,6 +3308,9 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
       bladsidor.add(sida);
       sidor.push(sida);
     }
+    // Lektionskorten sist bland materialet, som i filen med allt (lektionskortFlod()). Sidfoten bär upphovet, så korten
+    // får ingen upphovsrad. I filen med allt står de redan i beskrivningen, och en fil ur banken har bara sina ramar.
+    if (!o.bank && !o.baraTommaRamar) for (const k of metodensLektionskort(d, post.id)) { const sida = lektionskortFlod(k); bladsidor.add(sida); sidor.push(sida); }
   }
   // Diplomet bär sin egen rubrik: utan sidans rubrik och metodrad, så att eleven inte får Diplom två gånger (K-040).
   // Diplomet är elevens (riggens docs/elevmaterial.md): texten i elevens typsnitt; kickern står kvar i sitt.
@@ -4146,7 +4186,17 @@ function sidfot(adress: string, bredd: number, liten = false): Footer {
 // kortark: Ljudlekens kort med 1 cm marginal, utan rubrikrad och med lathundens lilla fot, så att arket ryms på sidan.
 // bok: en boksida (lästexten, boksida()) med 1,5 cm marginal, upphovet i sidhuvudet och raden Till läraren, nivåns knapp
 // och sidnumret i sidfoten, som i metodriggen.
-function sektion(barn: Barn[], huvudtext: string, adress: string, o: { liggande?: boolean; smal?: boolean; lathund?: boolean; kortark?: boolean; bok?: Boksektion; saga?: Sagosektion; blad?: Bladsektion } = {}): ISectionOptions {
+function sektion(barn: Barn[], huvudtext: string, adress: string, o: { liggande?: boolean; smal?: boolean; lathund?: boolean; kortark?: boolean; bok?: Boksektion; saga?: Sagosektion; blad?: Bladsektion; papper?: Papper } = {}): ISectionOptions {
+  // En sida ur ett lektionskort (lektionskortFlod()): riggens marginaler, ett tomt sidhuvud, så att sidan inte ärver den
+  // förra sektionens rubrikrad, och kortets sidfot med upphovet, som hos riggen.
+  if (o.papper) {
+    return {
+      properties: { page: { size: { ...PAPPER_SIDA, orientation: PageOrientation.PORTRAIT }, margin: PAPPER_MARGINALER } },
+      headers: { default: new Header({ children: [papperPunkt()] }) },
+      footers: { default: papperFot(o.papper) },
+      children: barn,
+    };
+  }
   // Ett sagoblad: kortarkets marginal på 1 cm, upphovet litet i sidhuvudet, som på boksidan, och rutan Till läraren och
   // sidnumret i sidfoten, eller ingen sidfot på bokens blad (sagoFot). Bokens blad bär bara © Niclas Fohlin ·
   // niclasfohlin.se, så att raden inte ser ut som en stämpel på elevernas omslag (granskningen 2026-10-02, K-186).
@@ -4216,7 +4266,8 @@ function delaSektioner(flod: Flod, huvudtext: string, adress: string, o: { ligga
   let saga: Sagosektion | undefined;
   let liggande = false;
   let blad: Bladsektion | undefined;
-  const klar = () => { if (barn.length) ut.push(sektion(barn, huvudtext, adress, blad ? { blad } : saga ? { saga } : bok ? { bok } : kortark ? { kortark: true } : liggande ? { liggande: true, smal: true } : o)); barn = []; };
+  let papper: Papper | undefined;
+  const klar = () => { if (barn.length) ut.push(sektion(barn, huvudtext, adress, papper ? { papper } : blad ? { blad } : saga ? { saga } : bok ? { bok } : kortark ? { kortark: true } : liggande ? { liggande: true, smal: true } : o)); barn = []; };
   for (const x of flod) {
     if (arBarn(x)) { barn.push(x); continue; }
     klar();
@@ -4225,6 +4276,7 @@ function delaSektioner(flod: Flod, huvudtext: string, adress: string, o: { ligga
     saga = x.saga;
     liggande = !!x.liggande;
     blad = x.blad;
+    papper = x.papper;
   }
   klar();
   if (!ut.length) ut.push(sektion([new Paragraph({})], huvudtext, adress, o));
@@ -4568,6 +4620,19 @@ export function faktatextProvDokument(post: MetodPost, o: { bas: string; last: b
   if (!sektioner.length) sektioner.push(sektion([stycke(`${d.titel} har inga faktatexter.`)], huvud, adress));
   const borjan = texter.map(([ram, f]) => { const b = faktatextensBorjan(f); return { rubrik: ram.rubrik, borjar: b.borjar.slice(0, 80), delar: b.delar.map((t) => t.slice(0, 80)) }; });
   return dokument(`${d.titel}: faktatexterna, prov för sidlåset`, sektioner, typsnittFor([post]), JSON.stringify({ texter: borjan }));
+}
+
+// Lektionskorten för sig (src/lib/lektionskort.ts): ett kort, <stam>.docx, vars pdf är det knappen öppnar, eller alla
+// korten i en serie i lektionsbankens ordning (<serie>-alla-lektionskort.docx). Sidorna är kortets egna, som i Materialet,
+// och dokumentets titel är kortets ("Ljudlek: Rim · Lektionskort"), så att pdf:en bär den.
+export function lektionskortDokument(kort: Lektionskort[], o: { titel?: string; resurser?: MetodResurser }): Document {
+  instans = 0;
+  FRISTAENDE_BLAD = false;
+  RESURSER = o.resurser ?? { bilder: new Map() };
+  if (!kort.length) throw new Error('lektionskortDokument: inga lektionskort.');
+  const forsta = RESURSER.lektionskort?.get(kort[0].stam);
+  const titel = o.titel ?? forsta?.dokumenttitel ?? `${forsta?.titel ?? kort[0].metod} · Lektionskort`;
+  return dokument(titel, kort.flatMap((k) => delaSektioner(lektionskortFlod(k), '', '')));
 }
 
 // Bara mallarna till en metod.

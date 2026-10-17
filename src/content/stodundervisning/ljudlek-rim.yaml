@@ -24,7 +24,7 @@ material:
   - bokstavskorten
   - speglar
   - snabbmallen
-uppdaterad: "2026-10-03"
+uppdaterad: "2026-10-17"
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 1
@@ -313,7 +313,7 @@ grund:
 ramar:
   rubrik: "Materialet"
   text:
-    - "Här finns rimkorten, restkorten och bokstavskorten. Allt går att kopiera. Laminera restkorten och bokstavskorten, och rimkorten när de är vikta och limmade."
+    - "Här finns lektionskortet, rimkorten, restkorten och bokstavskorten. Allt går att kopiera. Laminera restkorten och bokstavskorten, och rimkorten när de är vikta och limmade."
   ramar:
     - rubrik: "Rimkorten"
       text:
@@ -396,6 +396,8 @@ kort:
     - "Restkort"
     - "Bokstavskort"
 mallar: []
+lektionskort:
+  - text: "Lektionskortet är lektionen på ett A4: målet, rörelsen, orden att ta, passet med det du gör och säger, och det du lyssnar efter. Skriv ut det och ha det framför dig under passet."
 film:
   sekunder: 22.21
   beskrivning: "Kamraten säger ordet på ett kort. Leta upp kortet som rimmar. Säg båda orden. Vänd korten. Resten är olika: ol och o. Säg orden igen och leta vidare. Vänd. Samma rest: ol och ol. Säg ett ord som rimmar på varje kort. Ett påhittat ord räknas."

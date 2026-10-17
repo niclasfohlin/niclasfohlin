@@ -33,6 +33,7 @@ utkast: false
 lektionsbank:
   rubrik: "Lektionsbanken: förmågorna och lektionerna"
   text: "Varje lektion tränar en förmåga, och förmågorna har samma nummer som uppgifterna i ljudkollen. Ordningen mellan förmågorna är ett förslag. Eleven klarar en uppgift i ljudkollen med minst tre rätt av fyra, och uppgift 4 med minst åtta av de tio första bokstäverna. Gruppen börjar i den första förmågan där fler än hälften av eleverna inte klarar uppgiften och hoppar över det som den redan kan, och du väljer en lektion för förmågan. Innan ljudkollen är gjord tar gruppen lektionen Första ljudet, med s som dagens ljud. Nya lektioner läggs in under den förmåga de tränar."
+  lektionskort: "Varje lektion har ett lektionskort, ett A4 med målet, rörelsen, orden och passet. Öppna kortet vid lektionen, eller skriv ut alla på en gång och sätt dem i en pärm."
   formagor:
     - nr: 1
       namn: "Rim"

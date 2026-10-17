@@ -25,7 +25,7 @@ material:
   - magneter
   - bokstavskorten
   - bokstavskartan
-uppdaterad: "2026-10-03"
+uppdaterad: "2026-10-17"
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 5
@@ -312,7 +312,7 @@ grund:
 ramar:
   rubrik: "Materialet"
   text:
-    - "Här finns bildkorten, ett ark för var och en av de tre första raderna i Så blir lektionen svårare, och bokstavskorten. Platsrutorna står i planeringsmallarna och bokstavskartan i Ljudlek i grupp. Allt går att kopiera. Laminera bokstavskorten, bokstavskartorna, bildkorten när de är vikta och limmade, och platsrutorna, som eleverna skriver på."
+    - "Här finns lektionskortet, bildkorten, ett ark för var och en av de tre första raderna i Så blir lektionen svårare, och bokstavskorten. Platsrutorna står i planeringsmallarna och bokstavskartan i Ljudlek i grupp. Allt går att kopiera. Laminera bokstavskorten, bokstavskartorna, bildkorten när de är vikta och limmade, och platsrutorna, som eleverna skriver på."
   ramar:
     - rubrik: "Bildkorten"
       text:
@@ -414,6 +414,8 @@ mallar:
       - "Mitten"
       - "Sist"
     fot: "Lägg bildkortet i rutan Bild, med bilden uppåt. Säg ordet långsamt och lägg markören i rutan där ljudet hörs: först, i mitten eller sist. Skriv bokstaven i samma ruta, och torka bort den efter varje kort."
+lektionskort:
+  - text: "Lektionskortet är lektionen på ett A4: målet, rörelsen, orden att ta, passet med det du gör och säger, och det du lyssnar efter. Skriv ut det och ha det framför dig under passet."
 film:
   sekunder: 26.81
   beskrivning: "Kamraten frågar efter ljudet. Säg ordet långsamt och stanna på ljudet. Lägg markören där ljudet hörs. Skriv bokstaven i rutan. Vänd kortet. Stämmer bokstaven? Nästa kort: ljudet i mitten. Vänd kortet. Stämmer bokstaven?"

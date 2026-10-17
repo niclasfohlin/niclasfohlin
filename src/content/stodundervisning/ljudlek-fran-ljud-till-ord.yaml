@@ -26,7 +26,7 @@ material:
   - speglar
   - whiteboardtavlor
   - snabbmallen
-uppdaterad: "2026-10-03"
+uppdaterad: "2026-10-17"
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 8
@@ -327,7 +327,7 @@ grund:
 ramar:
   rubrik: "Materialet"
   text:
-    - "Här finns bokstavskorten. I den här lektionen har varje par en egen sida, utöver de två du skriver ut för hela insatsen. Ljudrutorna står i planeringsmallarna. Allt går att kopiera. Laminera bokstavskorten och ljudrutorna."
+    - "Här finns lektionskortet och bokstavskorten. I den här lektionen har varje par en egen sida, utöver de två du skriver ut för hela insatsen. Ljudrutorna står i planeringsmallarna. Allt går att kopiera. Laminera bokstavskorten och ljudrutorna."
   ramar:
     - rubrik: "Bokstavskorten"
       text:
@@ -378,6 +378,8 @@ mallar:
       - "3"
       - "4"
     fot: "Lägg ett bokstavskort för varje ljud, ett i varje ruta från ruta 1. Peka under det första kortet och dra fingret vidare utan att stanna: sssooolll, t-⁠aaa-⁠k. Skjut ihop korten och läs ordet. Ändra ett kort och läs igen. Rutan Bild står tom i den här lektionen."
+lektionskort:
+  - text: "Lektionskortet är lektionen på ett A4: målet, rörelsen, orden att ta, passet med det du gör och säger, och det du lyssnar efter. Skriv ut det och ha det framför dig under passet."
 film:
   sekunder: 18.34
   beskrivning: "Lägg ett kort för varje ljud. Dra fingret under utan att stanna, och skjut ihop korten. Läraren säger ändringen. Gör ändringen och säg vilket ljud som kom till. Läs det nya ordet."

@@ -12,6 +12,8 @@ import { BOKTYPSNITT_TTF, FAKTATYPSNITT_TTF, harFaktatexter } from './ramform';
 import { harBoktypsnitt, sagoBilder } from './sagoblad';
 import { serieBilder } from './bildserier';
 import { serieantal, serieFil } from './bildserier-bygge';
+import { metodensLektionskort } from './lektionskort';
+import { lasLektionskort } from './lektionskortdata';
 import type { MetodPost } from './metod';
 import type { MetodResurser } from './metoddocx';
 import { reservMatt, reservNyckel, samlaReservbilder } from './reservbild';
@@ -31,6 +33,8 @@ export function lasResurser(poster: MetodPost[]): MetodResurser {
     boktypsnitt: poster.some((p) => harBoktypsnitt(p.data)) ? { cinzel: las(BOKTYPSNITT_TTF.cinzel), dekor: las(BOKTYPSNITT_TTF.dekor) } : undefined,
     // Anton till faktatexternas rubriker (faktatext() i metoddocx.ts), bara när någon metod har faktatexter.
     faktatypsnitt: poster.some((p) => harFaktatexter(p.data)) ? las(FAKTATYPSNITT_TTF) : undefined,
+    // Lektionskorten (src/lib/lektionskortdata.ts), som står först i Materialet och i planeringsmallarna.
+    lektionskort: lasLektionskort(poster.flatMap((p) => metodensLektionskort(p.data, p.id))),
   };
 }
 

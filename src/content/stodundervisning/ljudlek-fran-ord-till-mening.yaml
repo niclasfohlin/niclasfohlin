@@ -316,7 +316,7 @@ grund:
 ramar:
   rubrik: "Materialet"
   text:
-    - "Här finns bokstavskorten och arken med bokstäver att bygga med. Varje par har ett ark med små bokstäver, och två par delar ett ark med stora bokstäver och tecken. Med tolv elever blir det sex ark med små bokstäver och tre med stora. Skriv ut arken på tjockt papper, laminera dem och klipp isär bokstäverna. Klossarna är desamma som i Ord och stavelser, och du behöver fyra per elev och fyra till dig."
+    - "Här finns lektionskortet, bokstavskorten och arken med bokstäver att bygga med. Varje par har ett ark med små bokstäver, och två par delar ett ark med stora bokstäver och tecken. Med tolv elever blir det sex ark med små bokstäver och tre med stora. Skriv ut arken på tjockt papper, laminera dem och klipp isär bokstäverna. Klossarna är desamma som i Ord och stavelser, och du behöver fyra per elev och fyra till dig."
   ramar:
     - rubrik: "Bokstäver att bygga med"
       text:
@@ -373,6 +373,8 @@ kort:
     - "Bokstavskort"
     - "Bokstäver att bygga med"
 mallar: []
+lektionskort:
+  - text: "Lektionskortet är lektionen på ett A4: målet, rörelsen, meningarna att ta, passet med det du gör och säger, och det du lyssnar efter. Skriv ut det och ha det framför dig under passet."
 film:
   sekunder: 29.56
   beskrivning: "Läraren säger: ”Vi ler.” Leo säger meningen igen och lägger en kloss per ord. Läraren säger: ”Bygg ett ord var.” Leo bygger Vi med stort V. Leo lämnar ett fingers mellanrum. Mira bygger ler och lägger punkten. Paret läser från början. Läraren säger: ”Byt ett ord.” Leo byter ler mot ror medan Mira blundar. Mira har inte hört det nya ordet. Mira läser: ”Vi ror.”"

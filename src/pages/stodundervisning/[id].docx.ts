@@ -1,7 +1,7 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { packaWord } from '../../lib/wordpaket';
 import { publicerade } from '../../lib/innehall';
-import { bankDokument, bladDokument, metodDokument, passDokument, ramarDokument, DOCX_TYP } from '../../lib/metoddocx';
+import { bankDokument, bladDokument, lektionskortDokument, metodDokument, passDokument, ramarDokument, DOCX_TYP } from '../../lib/metoddocx';
 import { byggSerier, serieKoppling } from '../../lib/serie';
 import { bankAv, bankfiler } from '../../lib/bank';
 import { metodensNivamaterial, nivafiler } from '../../lib/nivamaterial';
@@ -10,6 +10,8 @@ import { ovrigtfil } from '../../lib/ovrigt';
 import { harMaterial } from '../../lib/material';
 import { harLathund } from '../../lib/metod';
 import { lasResurser, medReservbilder } from '../../lib/metodresurser';
+import { allaLektionskortStam, metodensLektionskort, type Lektionskort } from '../../lib/lektionskort';
+import { lasLektionskort } from '../../lib/lektionskortdata';
 import { site } from '../../data/site';
 
 // /stodundervisning/<id>.docx: allt om metoden i en Word-fil, byggd vid bygget ur samma data som
@@ -28,9 +30,14 @@ import { site } from '../../data/site';
 // Metoden öppnar (Niclas 2026-10-13: ett system för utskriftsknapparna, som alltid blir 1:1; METODER.md under Utskriften).
 // En metod med lathund får /stodundervisning/<id>-lathund-text.docx: passets text för sig (passDokument), vars pdf
 // knappen vid texten på lathundssidan öppnar.
+// Ett lektionskort (src/lib/lektionskort.ts) får /stodundervisning/<id>-lektionskort.docx (-2 och -3 när de är fler), och
+// en serie vars lektioner har kort får alla korten i en fil, /stodundervisning/<serie>-alla-lektionskort.docx
+// (lektionskortDokument). Deras pdf:er är det knapparna öppnar.
 export const getStaticPaths: GetStaticPaths = async () => {
   const metoder = await publicerade('stodundervisning');
   const serier = byggSerier(metoder);
+  // Lektionernas kort i lektionsbankens ordning, per serie.
+  const korten = (serie: string): Lektionskort[] => (serier.get(serie)?.lektioner ?? []).flatMap((l) => { const lektion = metoder.find((x) => x.id === l.id); return lektion ? metodensLektionskort(lektion.data, lektion.id) : []; });
   return metoder.flatMap((m) => {
     const bank = bankAv(m.data);
     const nm = metodensNivamaterial(m.data);
@@ -40,6 +47,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
       { params: { id: m.id }, props: { m: { ...m, serie: serieKoppling(m.id, m.data, serier) } } },
       ...(harMaterial(m.data) ? [{ params: { id: `${m.id}-metoden` }, props: { m: { ...m, serie: serieKoppling(m.id, m.data, serier) }, metoden: true } }] : []),
       ...(harLathund(m.data) ? [{ params: { id: `${m.id}-lathund-text` }, props: { m: { ...m, serie: undefined }, passet: true } }] : []),
+      ...metodensLektionskort(m.data, m.id).map((k) => ({ params: { id: k.stam }, props: { m: { ...m, serie: undefined }, kortlista: [k] } })),
+      ...(m.data.lektionsbank && korten(m.id).length ? [{ params: { id: allaLektionskortStam(m.id) }, props: { m: { ...m, serie: undefined }, kortlista: korten(m.id), korttitel: `${m.data.titel} · Alla lektionskort` } }] : []),
       ...(nm ? nivafiler(m.id, nm).map((f) => ({ params: { id: f.namn }, props: { m: { ...m, serie: undefined }, nivafil: { ramar: f.ramar, rubrik: f.rubrik, huvud: f.niva ? f.niva.niva.namn : 'Alla nivåer' } } })) : []),
       ...(bm ? bladfiler(m.id, bm).map((f) => ({ params: { id: f.namn }, props: { m: { ...m, serie: undefined }, ...(f.slag === 'blad' ? { bladfil: { bilder: f.bilder, rubrik: f.rubrik, huvud: f.huvud } } : { nivafil: { ramar: f.ramar, rubrik: f.rubrik, huvud: f.huvud, blad: 'ifyllda' as const } }) } })) : []),
       ...(ovrigt ? [{ params: { id: ovrigt.namn }, props: { m: { ...m, serie: undefined }, nivafil: { ramar: ovrigt.ramar, rubrik: ovrigt.rubrik, huvud: ovrigt.huvud } } }] : []),
@@ -54,8 +63,11 @@ export const GET: APIRoute = async ({ props }) => {
   const bank = bankfil ? bankAv(props.m.data) : null;
   const nivafil = props.nivafil as { ramar: number[]; rubrik: string; huvud: string; blad?: 'alla' | 'ifyllda' | 'inga' } | undefined;
   const bladfil = props.bladfil as { bilder: number[]; rubrik: string; huvud: string } | undefined;
+  const kortlista = props.kortlista as Lektionskort[] | undefined;
   const buffert = await packaWord(await medReservbilder((png) => (props.passet
     ? passDokument(props.m, { bas: site.url })
+    : kortlista
+    ? lektionskortDokument(kortlista, { titel: props.korttitel as string | undefined, resurser: { bilder: new Map(), lektionskort: lasLektionskort(kortlista), png } })
     : bladfil
     ? bladDokument(props.m, bladfil, { bas: site.url, resurser: { ...resurser, png } })
     : nivafil

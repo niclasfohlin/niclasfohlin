@@ -1,0 +1,162 @@
+{
+ "design": "strategipapper",
+ "fil": "Lektionskort - Ljudlek - Från ljud till ord",
+ "titel": "Ljudlek: Från ljud till ord",
+ "dokumenttitel": "Ljudlek: Från ljud till ord · Lektionskort",
+ "knapp": "Lektionskort",
+ "infoUtanRuta": true,
+ "info": [
+  "F–2 · 30 minuter · 2–12 elever"
+ ],
+ "fot": "© Niclas Fohlin, niclasfohlin.se, där du skriver ut lektionens material",
+ "ingress": "**Mål:** kunna dra ihop ljud till ett ord och byta ett ljud.",
+ "ruta": {
+  "punkter": [
+   {
+    "rubrik": "Ett kort för varje ljud",
+    "text": "Lägg ett kort i varje ljudruta, från vänster."
+   },
+   {
+    "rubrik": "Dra ut och skjut ihop",
+    "text": "Dra fingret under utan att stanna: sssooolll. Skjut ihop korten: sol."
+   },
+   {
+    "rubrik": "Ändra och säg ljudet",
+    "text": "Gör ändringen, säg ljudet som gick eller kom och läs det nya ordet."
+   }
+  ],
+  "storlek": {
+   "rubrik": 23,
+   "text": 20
+  }
+ },
+ "delar": [
+  {
+   "rubrik": "Orden",
+   "text": "Raden under har ord med t, f, å, p, k och d också.",
+   "kolumner": [
+    "Leken",
+    "Orden"
+   ],
+   "bredder": [
+    35,
+    65
+   ],
+   "storlek": 20,
+   "rader": [
+    [
+     "Rad 1 · Sätt ihop, utdraget\nsssooolll: sol",
+     "sol, sola, mos, se, lera, is, vas, vila\nOckså t, f, å, p, k och d: fira, ål, nål, mål, lår, måla"
+    ],
+    [
+     "Rad 2 · Sätt ihop, med paus\n/m/ /o/ /s/: mos. /t/ /a/ /k/: tak",
+     "sol, sola, mos, ler, lera, is\nOckså t, f, å, p, k och d: mat, vit, tal, pil, sak, kål, tak, tid"
+    ],
+    [
+     "Rad 3 · Ta bort ett ljud\nmål utan /m/ blir ål. sola utan /a/ blir sol.",
+     "sola→sol, mosa→mos, lera→ler, mera→mer, ler→le\nOckså t, f, å, p, k och d: vit→vi, mål→ål, nål→ål, sår→år, lår→år, kål→ål, tak→ta, kor→ko"
+    ],
+    [
+     "Rad 4 · Lägg till ett ljud\nål med /n/ först: nål. sol med /a/ sist: sola.",
+     "Samma par som i Ta bort, baklänges: sol→sola, ål→mål."
+    ],
+    [
+     "Rad 5 · Byt ett ljud\nmat blir fat. mål blir mås.",
+     "mos→mor, se→le, ler→mer, lera→mera, mer→mor, vi→ni\nOckså t, f, å, p, k och d: vit→vet, mat→fat→lat, mål→nål, mål→mås, lat→låt, tak→sak, tak→tal"
+    ]
+   ],
+   "not": "Med bara de tio första bokstäverna tar ni bort det sista ljudet med korten och det första muntligt.",
+   "tat": true,
+   "namnrad": 17
+  },
+  {
+   "rubrik": "Passet",
+   "kolumner": [
+    "Delen",
+    "Så leder du",
+    "Du säger, till exempel"
+   ],
+   "bredder": [
+    22,
+    43,
+    35
+   ],
+   "storlek": 18,
+   "rader": [
+    [
+     "Före passet",
+     "Ljudrutorna, fyra rutor, och en sida bokstavskort med gruppens bokstäver per par. Fyra rutor på tavlan, magneter och en whiteboardtavla per elev. Välj dagens ljud, en bokstav som gruppen övar. Börja i rad 1. Bestäm paren och dagens elever: två eller tre som du lyssnar på i steg 4."
+    ],
+    [
+     "Ljudstart\n0–5 min · alla i kör",
+     "Dagens ljud: visa bokstaven, och alla säger ljudet i spegeln. Sätt ihop fem ord: snö, blå, sko, bro, tre. Dela upp fyra: mat, lök, fisk, mask.",
+     "Sätt ihop: ”Mmmooosss. Vilket ord blir det?”\nDela upp: ”Mus. Säg ljuden och håll upp ett finger för varje.”"
+    ],
+    [
+     "1 Ljuden blir ett ord\n5–9 min · du visar",
+     "Tre ord. Lägg korten, dra fingret under och skjut ihop. Visa radens lek.",
+     "”Sssooolll. Jag skjuter ihop korten: sol.”\n”Mål. Jag tar bort /m/ och läser: ål.”"
+    ],
+    [
+     "2 Tänk och säg\n9–15 min · alla",
+     "Fem ord. Säg ljuden. Alla tänker ordet och säger det på ditt tecken.",
+     "”Lyssna: /m/ /o/ /s/. Tänk ordet. Säg!”\n”Säg ål. Lägg till /n/ först.”"
+    ],
+    [
+     "3 Bygg och ändra\n15–20 min · i par",
+     "Den ena bygger och läser ordet, den andra gör radens lek och läser. Sedan byter de.",
+     "”Lägg ett kort i varje ruta och läs ordet.”\n”Ta bort /m/. Vad står kvar?”"
+    ],
+    [
+     "4 Mina ord\n20–25 min · var och en",
+     "Tre ord. Alla skriver ordet och det nya ordet under.",
+     "”/t/ /a/ /k/. Tänk ordet och skriv det.”\n”Ta bort /k/. Skriv det nya ordet under.”"
+    ],
+    [
+     "Avslut\n25–30 min · alla",
+     "Var och en svarar. Säg vad du hörde.",
+     "”Säg ett ord från i dag och vad du gjorde med det.”"
+    ],
+    [
+     "Efter passet",
+     "Skriv upp vilka av dagens elever som klarade steg 4. Nästa rad när dagens elever läser två av tre nya ord utan att stanna, två pass i följd."
+    ]
+   ],
+   "tat": true,
+   "namnrad": 17
+  },
+  {
+   "rubrik": "Lyssna efter",
+   "text": "I alla steg: vänta tre sekunder och fråga ”Vad hör du?” Säg först vad eleven gjorde rätt.",
+   "kolumner": [
+    "Det eleven gör",
+    "Så gör du"
+   ],
+   "bredder": [
+    36,
+    64
+   ],
+   "storlek": 19,
+   "rader": [
+    [
+     "”/s/ /o/ /l/” utan ordet",
+     "Dra ut ljuden, sssooolll, och skjut ihop korten eller dra fingret under ordet."
+    ],
+    [
+     "”tåg” för tak",
+     "”Dra fingret under och läs varje bokstav: t-⁠aaa-⁠k.”"
+    ],
+    [
+     "”må” när du säger ”Ta bort /m/ i mål”",
+     "”Säg mål långsamt. Vilket ljud kommer först? Ta bort just det.”"
+    ],
+    [
+     "”ål”, men vet inte vilket ljud som gick",
+     "”Säg mål och ål. Vilket ljud tog vi bort? /m/.” Ta bort kortet medan ni säger ljudet."
+    ]
+   ],
+   "tat": true,
+   "namnrad": 17
+  }
+ ]
+}

@@ -1,0 +1,162 @@
+{
+ "design": "strategipapper",
+ "fil": "Lektionskort - Ljudlek - Från ord till mening",
+ "titel": "Ljudlek: Från ord till mening",
+ "dokumenttitel": "Ljudlek: Från ord till mening · Lektionskort",
+ "knapp": "Lektionskort",
+ "infoUtanRuta": true,
+ "info": [
+  "F–2 · 30 minuter · 2–12 elever"
+ ],
+ "fot": "© Niclas Fohlin, niclasfohlin.se, där du skriver ut lektionens material",
+ "ingress": "**Mål:** kunna skriva och läsa en kort mening.",
+ "ruta": {
+  "punkter": [
+   {
+    "rubrik": "Säg igen",
+    "text": "Säg meningen igen och lägg en kloss för varje ord."
+   },
+   {
+    "rubrik": "Bygg ett ord i taget",
+    "text": "Stor bokstav först, en bokstav för varje ljud, mellanrum och punkt sist."
+   },
+   {
+    "rubrik": "Läs från början",
+    "text": "Läs från början efter varje ord, med fingret under."
+   },
+   {
+    "rubrik": "Byt ett ord",
+    "text": "Den ena byter tyst ett ord, och kamraten läser."
+   }
+  ],
+  "storlek": {
+   "rubrik": 23,
+   "text": 20
+  }
+ },
+ "delar": [
+  {
+   "rubrik": "Meningarna",
+   "text": "Ta meningar med bokstäver som gruppen har haft.",
+   "kolumner": [
+    "Meningen",
+    "Orden"
+   ],
+   "bredder": [
+    35,
+    65
+   ],
+   "storlek": 20,
+   "rader": [
+    [
+     "Rad 1 · Två ord",
+     "Ola ler. Lisa ror. Vi ler. Ola vilar. Elin målar. Vi åker. Ali syr. Mira läser. Vi äter."
+    ],
+    [
+     "Rad 2 · Tre ord",
+     "Ola ser solen. Elin ser solen. Mira ser mos. Vi ser solen. Ali tar mos. Vi har is. Vi äter mat. Mira läser mera. Elin ser snö. Ola ser Lisa."
+    ],
+    [
+     "Rad 3 · Fyra ord",
+     "Ola ror i solen. Vi vilar i solen. Elin tar mos nu. Mira målar tre hus. Vi äter mat ute. Mira har tre bär. Ali ser tre sälar."
+    ],
+    [
+     "Rad 4 · Egen mening\nOla ser mos.",
+     "Eleven säger en egen mening på två till fyra ord eller byter två ord i en mening ur tabellen Meningarna."
+    ]
+   ],
+   "not": "Säg vad ror och syr betyder. I raden Egen mening skriver du småorden ”jag” och ”och” på tavlan.",
+   "tat": true,
+   "namnrad": 17
+  },
+  {
+   "rubrik": "Passet",
+   "kolumner": [
+    "Delen",
+    "Så leder du",
+    "Du säger, till exempel"
+   ],
+   "bredder": [
+    22,
+    43,
+    35
+   ],
+   "storlek": 18,
+   "rader": [
+    [
+     "Före passet",
+     "Bokstäver att bygga med: de små i en hög per par, de stora och punkterna mellan två par. Skriv dagens stora bokstäver i hörnet av tavlan. Fyra klossar per par och en whiteboardtavla per elev. Välj dagens ljud, en bokstav som gruppen övar. Börja i rad 1. Bestäm paren och dagens elever: två eller tre som du lyssnar på i steg 4."
+    ],
+    [
+     "Ljudstart\n0–5 min · alla i kör",
+     "Dagens ljud: visa bokstaven, och alla säger ljudet i spegeln. Sätt ihop fem ord: fisk, mask, hand, sand, hund. Dela upp fyra: snö, blå, fisk, mask.",
+     "Sätt ihop: ”Mmmooosss. Vilket ord blir det?”\nDela upp: ”Mus. Säg ljuden och håll upp ett finger för varje.”"
+    ],
+    [
+     "1 Meningen på tavlan\n5–9 min · du visar",
+     "Säg en mening, lägg en kloss för varje ord och skriv den på tavlan. Tänk högt.",
+     "”Jag ska skriva: Ola ler.”\n”Hur många ord? Räkna med mig.”"
+    ],
+    [
+     "2 Meningen ur högen\n9–15 min · alla",
+     "Två meningar. Paret säger meningen igen, lägger klossarna och bygger den.",
+     "”Säg den igen och lägg klossarna.”\n”Bygg det första ordet, en bokstav för varje ljud.”"
+    ],
+    [
+     "3 Byt ett ord\n15–20 min · i par",
+     "Den sista meningen ligger kvar. Den ena byter tyst ett ord, den andra läser. Sedan byter de.",
+     "”Byt ett ord tyst medan din kamrat blundar.”\n”Ljuda det nya ordet och läs meningen.”"
+    ],
+    [
+     "4 Skriv meningen\n20–25 min · var och en",
+     "Sudda tavlan men inte hörnet. Säg en ny mening. Alla skriver och läser med fingret.",
+     "”Säg den igen och lägg klossarna.”\n”Skriv ett ord i taget, med mellanrum.”"
+    ],
+    [
+     "Avslut\n25–30 min · alla",
+     "Var och en svarar. Säg vad du hörde.",
+     "”Säg ett ord från i dag och vad du gjorde med det.”"
+    ],
+    [
+     "Efter passet",
+     "Skriv upp vilka av dagens elever som klarade steg 4. Nästa rad när dagens elever skriver en mening själva, två pass i följd."
+    ]
+   ],
+   "tat": true,
+   "namnrad": 17
+  },
+  {
+   "rubrik": "Lyssna efter",
+   "text": "I alla steg: vänta tre sekunder och fråga ”Vad hör du?” Säg först vad eleven gjorde rätt.",
+   "kolumner": [
+    "Det eleven gör",
+    "Så gör du"
+   ],
+   "bredder": [
+    36,
+    64
+   ],
+   "storlek": 19,
+   "rader": [
+    [
+     "Bygger ”Olaler.”",
+     "”Läs från början. Hur många ord?”"
+    ],
+    [
+     "Skriver ”ola ler”",
+     "”Var börjar meningen, och var slutar den?” Peka på hörnet av tavlan om eleven inte hittar den stora bokstaven."
+    ],
+    [
+     "Börjar bygga direkt",
+     "”Vad gör du först?” Säg meningen igen och lägg klossarna tillsammans med eleven."
+    ],
+    [
+     "Läser ”Vi ler” när det ligger Vi ror",
+     "”Läs det som ligger, med fingret under.”"
+    ]
+   ],
+   "tat": true,
+   "namnrad": 17
+  }
+ ]
+}

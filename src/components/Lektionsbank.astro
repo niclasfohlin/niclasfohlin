@@ -4,6 +4,7 @@
 // förmåga utan lektion står kvar, eftersom ljudkollen har uppgiften: läraren ser att lektionen saknas i stället för att
 // förmågan försvinner. Niclas valde formen 2026-09-29 (förslag B: menyn och korten).
 import type { Serie } from '../lib/serie';
+import Lektionskortknapp from './Lektionskortknapp.astro';
 interface Props { serie: Serie }
 const { serie } = Astro.props;
 const versal = (s: string) => (s ? s.charAt(0).toLocaleUpperCase('sv') + s.slice(1) : s);
@@ -14,6 +15,10 @@ const antal = serie.lektioner.length;
 const { ord } = serie;
 // Heter lektionen som förmågan, som kursen Argumenterande text under texttypen Argumenterande text, står bara gruppens ord
 // överst, så att namnet inte står två gånger.
+// Lektionskorten (src/lib/lektionskort.ts) står vid lektionerna, och efter banken en mening och en knapp som öppnar alla
+// korten i en pdf att skriva ut, i bankens ordning (metodriggens docs/lektionskort.md: "I en serie står korten också vid
+// lektionerna i seriens metod, med en knapp som skriver ut alla korten på en gång").
+const alla = serie.allaLektionskort;
 ---
 <section id="lektionsbank" class="m-bank">
   <h2>{serie.rubrik}</h2>
@@ -26,11 +31,20 @@ const { ord } = serie;
           <>
             <h3><a href={`/stodundervisning/${l.id}`}>{l.namn}</a></h3>
             <p>{punkt(versal(l.tranar))}</p>
+            {l.lektionskort.length > 0 && <p class="m-lektionsbank-lektionskort">{l.lektionskort.map((k) => <Lektionskortknapp k={k} titel={l.titel} klass="central-lank" medTitel />)}</p>}
           </>
         ) : <p class="meta">Ingen {ord.en} ännu.</p>}
         {f.skal && <p class="m-lektionsbank-skal">{f.skal}</p>}
       </li>
     )))}
   </ol>
+  {alla && (
+    <div class="m-lektionskorten">
+      <p>{alla.text}</p>
+      {/* En utskriftsknapp som Allt och Metoden (SkrivUtPdf.astro, i nedladdningsrutan): i Chrome och Edge på datorn heter
+          den Skriv ut alla lektionskort och ger utskriftsrutan, och annars öppnar den pdf:en (granskningen 2026-10-17). */}
+      <p class="m-central-knapp"><a class="knapp" href={alla.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-direkt="Skriv ut alla lektionskort" title={`Alla ${ord.de}s lektionskort i en pdf, ett A4 per ${ord.en}`} data-goatcounter-click={`utskrift:${serie.id}/alla-lektionskort`} data-goatcounter-title={`${serie.titel}: alla lektionskort som pdf`}>Alla lektionskort som pdf</a></p>
+    </div>
+  )}
   {serie.not && <div class="m-ruta"><p>{serie.not}</p></div>}
 </section>

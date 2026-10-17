@@ -1,0 +1,162 @@
+{
+ "design": "strategipapper",
+ "fil": "Lektionskort - Ljudlek - Räkna ljud",
+ "titel": "Ljudlek: Räkna ljud",
+ "dokumenttitel": "Ljudlek: Räkna ljud · Lektionskort",
+ "knapp": "Lektionskort",
+ "infoUtanRuta": true,
+ "info": [
+  "F–2 · 30 minuter · 2–12 elever"
+ ],
+ "fot": "© Niclas Fohlin, niclasfohlin.se, där du skriver ut lektionens material",
+ "ingress": "**Mål:** kunna dela upp ett ord i alla sina ljud.",
+ "ruta": {
+  "punkter": [
+   {
+    "rubrik": "En markör för varje ljud",
+    "text": "Säg ett ljud i taget och flytta en markör samtidigt, från vänster."
+   },
+   {
+    "rubrik": "Fingret under",
+    "text": "Dra fingret under rutorna och säg ordet."
+   },
+   {
+    "rubrik": "Vänd kortet",
+    "text": "Lika många prickar som markörer?"
+   }
+  ],
+  "storlek": {
+   "rubrik": 23,
+   "text": 20
+  }
+ },
+ "delar": [
+  {
+   "rubrik": "Orden",
+   "text": "Tolv ord med två till fyra ljud: de sex första till steg 1–⁠3, de sex sista till steg 4.",
+   "kolumner": [
+    "Ordgrupp",
+    "Orden"
+   ],
+   "bredder": [
+    35,
+    65
+   ],
+   "storlek": 20,
+   "rader": [
+    [
+     "Rad 1 · Tre ljud att dra ut\nsol: /s/ /o/ /l/, tre ljud",
+     "sol, ko, myra, mus, räv, svan\nbi, nål, kaka, hus, säl, räka"
+    ],
+    [
+     "Rad 2 · Med klusil\nbåt: /b/ /å/ /t/, tre ljud",
+     "ko, lök, kaka, tåg, öga, stol\nbi, båt, myra, sol, apa, räka"
+    ],
+    [
+     "Rad 3 · Två stavelser\nmyra: /m/ /y/ /r/ /a/, fyra ljud",
+     "öga, ko, myra, apa, kaka, sol\nbi, öra, svan, båt, räka, hus"
+    ],
+    [
+     "Rad 4 · Konsonantmöte först\nsten: /s/ /t/ /e/ /n/, fyra ljud",
+     "sko, ko, sten, öga, stol, apa\nsvan, bi, bröd, båt, träd, räv"
+    ],
+    [
+     "Rad 5 · Konsonantmöte sist\nhund: /h/ /u/ /n/ /d/, fyra ljud",
+     "fisk, ko, sko, mask, apa, hand\nbi, hund, båt, tand, lök, sten"
+    ]
+   ],
+   "not": "Nästa pass byter ni halvor. Säger eleven kossa för ko: ”Kortet heter ko. Säg ko och räkna igen.”",
+   "tat": true,
+   "namnrad": 17
+  },
+  {
+   "rubrik": "Passet",
+   "kolumner": [
+    "Delen",
+    "Så leder du",
+    "Du säger, till exempel"
+   ],
+   "bredder": [
+    22,
+    43,
+    35
+   ],
+   "storlek": 18,
+   "rader": [
+    [
+     "Före passet",
+     "Bildkorten för raden, ett ark per par. Ljudrutorna, fyra rutor, per elev och på tavlan. Magneter, fyra markörer per elev och en spegel per par. Välj dagens ljud, en bokstav som gruppen övar. Börja i rad 1. Bestäm paren och dagens elever: två eller tre som du lyssnar på i steg 4."
+    ],
+    [
+     "Ljudstart\n0–5 min · alla i kör",
+     "Dagens ljud: visa bokstaven, och alla säger ljudet i spegeln. Sätt ihop fem ord: mat, lök, nöt, pil, gås. Dela upp fyra: sol, lus, snö, blå.",
+     "Sätt ihop: ”Mmmooosss. Vilket ord blir det?”\nDela upp: ”Mus. Säg ljuden och håll upp ett finger för varje.”"
+    ],
+    [
+     "1 Ordet på tavlan\n5–9 min · du visar",
+     "Tre kort, med två, tre och fyra ljud. Flytta en magnet för varje ljud och vänd kortet.",
+     "”Båt. Säg efter mig: båt.”\n”Jag flyttar en magnet för varje ljud: /b/, ååå, /t/.”"
+    ],
+    [
+     "2 Fingrarna\n9–15 min · alla",
+     "Tre kort till. Alla säger ljuden, med ett finger för varje.",
+     "”Säg ljuden efter mig: /t/, ååå, /g/.”\n”Nu själva. Myra. Ett finger för varje ljud.”"
+    ],
+    [
+     "3 Säg och lägg\n15–20 min · i par",
+     "Sex kort. Den ena säger ordet, den andra lägger en markör för varje ljud. Sedan byter de.",
+     "”Säg ljudet och flytta markören samtidigt.”\n”Dra fingret under rutorna och säg ordet.”"
+    ],
+    [
+     "4 Mina ord\n20–25 min · var och en",
+     "Tre kort var. Räkna ljuden med markörerna.",
+     "”Du drog ut ordet och hörde ljudet i mitten.”\n”Vilken bokstav står för det ljudet?”"
+    ],
+    [
+     "Avslut\n25–30 min · alla",
+     "Var och en svarar. Säg vad du hörde.",
+     "”Säg ett ord från i dag och vad du gjorde med det.”"
+    ],
+    [
+     "Efter passet",
+     "Skriv upp vilka av dagens elever som klarade steg 4. Nästa rad när dagens elever har två rätt i steg 4, två pass i följd."
+    ]
+   ],
+   "tat": true,
+   "namnrad": 17
+  },
+  {
+   "rubrik": "Lyssna efter",
+   "text": "I alla steg: vänta tre sekunder och fråga ”Vad hör du?” Säg först vad eleven gjorde rätt.",
+   "kolumner": [
+    "Det eleven gör",
+    "Så gör du"
+   ],
+   "bredder": [
+    36,
+    64
+   ],
+   "storlek": 19,
+   "rader": [
+    [
+     "”sol” med en markör, eller ”s-⁠ol” med två",
+     "Dra ut ordet, sssooolll, och flytta en markör för varje ljud medan ni säger det."
+    ],
+    [
+     "”m-⁠t” för mat",
+     "”Du hörde /m/ och /t/. Vad hör du mellan dem? Maaat.”"
+    ],
+    [
+     "”s-⁠e-⁠n” för sten, ”sutol” för stol",
+     "Dra ut det ljud som går att dra ut, utan något ljud emellan: sss-⁠t-⁠eee-⁠nnn."
+    ],
+    [
+     "”/s/ /o/ /l/” och två markörer, eller en i varje ruta",
+     "Ett ljud i taget: säg ljudet och flytta markören samtidigt."
+    ]
+   ],
+   "tat": true,
+   "namnrad": 17
+  }
+ ]
+}

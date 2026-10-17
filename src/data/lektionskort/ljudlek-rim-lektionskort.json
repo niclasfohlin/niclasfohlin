@@ -1,0 +1,162 @@
+{
+ "design": "strategipapper",
+ "fil": "Lektionskort - Ljudlek - Rim",
+ "titel": "Ljudlek: Rim",
+ "dokumenttitel": "Ljudlek: Rim · Lektionskort",
+ "knapp": "Lektionskort",
+ "infoUtanRuta": true,
+ "info": [
+  "F–2 · 30 minuter · 2–12 elever"
+ ],
+ "fot": "© Niclas Fohlin, niclasfohlin.se, där du skriver ut lektionens material",
+ "ingress": "**Mål:** kunna höra rim och byta början av ett ord.",
+ "ruta": {
+  "punkter": [
+   {
+    "rubrik": "Säg orden",
+    "text": "Säg båda orden: sol, stol."
+   },
+   {
+    "rubrik": "Början och resten",
+    "text": "Dela där vokalen börjar: /s/ och ol, /st/ och ol."
+   },
+   {
+    "rubrik": "Samma rest",
+    "text": "Samma rest rimmar. Sol och sko börjar likadant men har olika rest."
+   },
+   {
+    "rubrik": "Byt början",
+    "text": "Byt /h/ mot /m/: mus. Ett påhittat ord räknas."
+   }
+  ],
+  "storlek": {
+   "rubrik": 23,
+   "text": 20
+  }
+ },
+ "delar": [
+  {
+   "rubrik": "Ordparen",
+   "text": "Säg radens åtta par i blandad ordning i steg 2.",
+   "kolumner": [
+    "Raden och leken",
+    "Rimmar",
+    "Rimmar inte"
+   ],
+   "bredder": [
+    34,
+    33,
+    33
+   ],
+   "storlek": 20,
+   "rader": [
+    [
+     "Rad 1 · Rim eller inte\nTummen upp om orden rimmar.",
+     "mus och lus, mål och nål, hand och sand, se och le",
+     "sol och sko, hus och hand, hus och sås, räv och hund"
+    ],
+    [
+     "Rad 2 · Början och resten\nSäg resten i båda orden: us, us.",
+     "sol och stol, ko och bro, hund och rund, sy och ny",
+     "mus och mat, tak och tåg, sol och mål, tak och hus"
+    ],
+    [
+     "Rad 3 · Byt början\nByt början och säg det nya ordet: mus.",
+     "mås och sås, ben och sten, land och tand, hus och mus",
+     "sten och stol, båt och bad, mus och vas, säl och fisk"
+    ]
+   ],
+   "tat": true,
+   "namnrad": 17
+  },
+  {
+   "rubrik": "Passet",
+   "kolumner": [
+    "Delen",
+    "Så leder du",
+    "Du säger, till exempel"
+   ],
+   "bredder": [
+    22,
+    43,
+    35
+   ],
+   "storlek": 18,
+   "rader": [
+    [
+     "Före passet",
+     "Rimkorten, ett ark per par: tolv bildkort med ordet på baksidan. Bokstavskortet för dagens ljud och en spegel per par. Välj dagens ljud, en bokstav som gruppen övar. Börja i rad 1. Bestäm paren och dagens elever: två eller tre som du lyssnar på i steg 4."
+    ],
+    [
+     "Ljudstart\n0–5 min · alla i kör",
+     "Dagens ljud: visa bokstaven, och alla säger ljudet i spegeln. Sätt ihop fem ord: is, ål, se, le, ro. Dela upp fyra: is, ål, sol, lus. Du säger ljuden först.",
+     "Sätt ihop: ”Mmmooosss. Vilket ord blir det?”\nDela upp: ”Mus. Säg ljuden och håll upp ett finger för varje.”"
+    ],
+    [
+     "1 Dela ordet\n5–9 min · du visar",
+     "Visa hus och mus, som rimmar, och hus och hand, som inte gör det. Visa radens lek.",
+     "”Hus. /h/ och us. Mus. /m/ och us. Samma rest: de rimmar.”\n”Hus och hand börjar likadant, men resten är olika: us och and.”"
+    ],
+    [
+     "2 Tummen upp\n9–15 min · alla",
+     "Säg radens åtta par. Tummen upp om orden rimmar. Sist radens lek.",
+     "”Sol, sko. Tummen upp eller ned? Visa nu.”\n”Säg resten i båda: ol, o.”"
+    ],
+    [
+     "3 Rimpar\n15–20 min · i par",
+     "Sol, stol, ko, sko, ben och sten. Den ena säger ett ord, den andra hittar rimmet. Sedan byter de. Du går mellan paren.",
+     "”Sol och sko börjar med samma ljud. Lyssna på resten.”\n”Vänd korten. Ser resten likadan ut?”"
+    ],
+    [
+     "4 Ordfamiljer\n20–25 min · var och en",
+     "Tre kort var av hus, mus, mål, nål, hand och tand. Radens lek.",
+     "”Säg ett ord som rimmar på hus. Ett påhittat går bra.”\n”Säg början och resten: /h/ och us.”"
+    ],
+    [
+     "Avslut\n25–30 min · alla",
+     "Var och en svarar. Säg vad du hörde.",
+     "”Säg ett ord från i dag och vad du gjorde med det.”"
+    ],
+    [
+     "Efter passet",
+     "Skriv upp vilka av dagens elever som klarade steg 4. Med tre pass i veckan tar ni nästa rad varje pass, och med fler pass i veckan när dagens elever klarar steg 4."
+    ]
+   ],
+   "tat": true,
+   "namnrad": 17
+  },
+  {
+   "rubrik": "Lyssna efter",
+   "text": "I alla steg: vänta tre sekunder och fråga ”Vad hör du?” Säg först vad eleven gjorde rätt.",
+   "kolumner": [
+    "Det eleven gör",
+    "Så gör du"
+   ],
+   "bredder": [
+    36,
+    64
+   ],
+   "storlek": 19,
+   "rader": [
+    [
+     "”råtta” som rim på mus",
+     "Lyssna på resten: ”Mus, us. Råtta, åtta. Låter resten likadant?”"
+    ],
+    [
+     "”sko” som rim på sol",
+     "”Sol och sko börjar med samma ljud. Lyssna på resten: ol, o.”"
+    ],
+    [
+     "tummen upp vid hus och sås",
+     "”Hus, us. Sås, ås. Låter resten likadant?”"
+    ],
+    [
+     "”mos” när ni byter /h/ mot /m/ i hus",
+     "”Behåll us. Byt bara /h/: mmm-⁠us.” Visa /h/ i ena handen och us i den andra."
+    ]
+   ],
+   "tat": true,
+   "namnrad": 17
+  }
+ ]
+}

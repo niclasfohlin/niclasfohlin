@@ -1,0 +1,154 @@
+{
+ "design": "strategipapper",
+ "fil": "Lektionskort - Ljudlek - Ord och stavelser",
+ "titel": "Ljudlek: Ord och stavelser",
+ "dokumenttitel": "Ljudlek: Ord och stavelser · Lektionskort",
+ "knapp": "Lektionskort",
+ "infoUtanRuta": true,
+ "info": [
+  "F–2 · 30 minuter · 2–12 elever"
+ ],
+ "fot": "© Niclas Fohlin, niclasfohlin.se, där du skriver ut lektionens material",
+ "ingress": "**Mål:** kunna höra orden i en mening och delarna i ett ord.",
+ "ruta": {
+  "punkter": [
+   {
+    "rubrik": "Säg det",
+    "text": "Säg meningen eller ordet i vanlig takt."
+   },
+   {
+    "rubrik": "En kloss för varje",
+    "text": "Lägg en kloss för varje ord, eller klappa och lägg en för varje del."
+   },
+   {
+    "rubrik": "Räkna och vänd",
+    "text": "Räkna klossarna. Vänd kortet: lika många bågar?"
+   }
+  ],
+  "storlek": {
+   "rubrik": 23,
+   "text": 20
+  }
+ },
+ "delar": [
+  {
+   "rubrik": "Orden",
+   "text": "Gruppen tar en rad i taget.",
+   "kolumner": [
+    "Leken",
+    "Orden"
+   ],
+   "bredder": [
+    35,
+    65
+   ],
+   "storlek": 20,
+   "rader": [
+    [
+     "Rad 1 · Orden i meningen\nEn kloss för varje ord, också småorden.",
+     "Två: Apan hoppar. Fisken simmar. · Tre: Solen är varm. Kaninen äter gräs. · Fyra: Jag ser en ko. Vi har en kanin. · Fem: Apan klättrar upp i trädet. Igelkotten sover under ett träd. · Sex: Apan och jag äter en kaka. Tåget åker in i en tunnel."
+    ],
+    [
+     "Rad 2 · Sammansatta ord\nSäg ordet utan den ena delen: isbjörn utan is.",
+     "is-⁠björn, snö-⁠gubbe, tand-⁠borste, jord-⁠gubbe, fågel-⁠bo, blå-⁠bär, glas-⁠ögon, regn-⁠båge, vatten-⁠melon, brand-⁠man, is-⁠bit, snö-⁠flinga"
+    ],
+    [
+     "Rad 3 · Stavelser\nKlappa och lägg en kloss för varje del.",
+     "sol, a-⁠na-⁠nas, ka-⁠ka, gur-⁠ka, tåg, po-⁠ta-⁠tis, to-⁠mat, i-⁠gel-⁠kott, fisk, ka-⁠nin, nyck-⁠el-⁠pi-⁠ga, he-⁠li-⁠kop-⁠ter"
+    ]
+   ],
+   "not": "I rad 1 säger eleven i steg 3 och 4 en mening om bilden på ett kort, med en kloss för varje ord.",
+   "tat": true,
+   "namnrad": 17
+  },
+  {
+   "rubrik": "Passet",
+   "kolumner": [
+    "Delen",
+    "Så leder du",
+    "Du säger, till exempel"
+   ],
+   "bredder": [
+    22,
+    43,
+    35
+   ],
+   "storlek": 18,
+   "rader": [
+    [
+     "Före passet",
+     "Bildkorten: arket Stavelser och arket Sammansatta ord, med ordet i delar på baksidan. Ett ark per par och ett till dig. Klossar och en spegel per par. Välj dagens ljud, en bokstav som gruppen övar. Börja i rad 1. Bestäm paren och dagens elever: två eller tre som du lyssnar på i steg 4."
+    ],
+    [
+     "Ljudstart\n0–5 min · alla i kör",
+     "Dagens ljud: visa bokstaven, och alla säger ljudet i spegeln. Sätt ihop fem ord: sol, lus, mus, mos, vas. Dela upp fyra: is, ål, sol, lus. Du säger ljuden först.",
+     "Sätt ihop: ”Mmmooosss. Vilket ord blir det?”\nDela upp: ”Mus. Säg ljuden och håll upp ett finger för varje.”"
+    ],
+    [
+     "1 Klossarna\n5–9 min · du visar",
+     "Visa tre exempel ur raden, med en kloss för varje ord eller del.",
+     "”Jag ser en ko. En kloss för varje ord. Fyra ord.”\n”A-⁠na-⁠nas. Jag klappar och lägger en kloss för varje del. Tre delar.”"
+    ],
+    [
+     "2 Säg och räkna\n9–15 min · alla",
+     "Sex meningar eller ord, först med dig och sedan själva. Alla visar klossarna samtidigt.",
+     "”Ka-⁠ka. Klappa med mig.”\n”Nu själva: melon. En kloss för varje del.”"
+    ],
+    [
+     "3 Dela och sätt ihop\n15–20 min · i par",
+     "Sex kort. Den ena säger ordet i delar, den andra lägger klossarna och vänder kortet. Sedan byter de. Du går mellan paren.",
+     "”Säg ordet och klappa: gur-⁠ka.”\n”Vänd kortet. Lika många bågar som klossar?”"
+    ],
+    [
+     "4 Mina ord\n20–25 min · var och en",
+     "Tre kort var. Radens lek.",
+     "”Hur många delar har potatis?”\n”Du räknade också den svaga delen: to-⁠mat.”"
+    ],
+    [
+     "Avslut\n25–30 min · alla",
+     "Var och en svarar. Säg vad du hörde.",
+     "”Säg ett ord från i dag och vad du gjorde med det.”"
+    ],
+    [
+     "Efter passet",
+     "Skriv upp vilka av dagens elever som klarade steg 4. Med tre pass i veckan tar ni en rad per pass, och med fler när nästan alla gör rätt i steg 2."
+    ]
+   ],
+   "tat": true,
+   "namnrad": 17
+  },
+  {
+   "rubrik": "Lyssna efter",
+   "text": "I alla steg: vänta tre sekunder och fråga ”Vad hör du?” Säg först vad eleven gjorde rätt.",
+   "kolumner": [
+    "Det eleven gör",
+    "Så gör du"
+   ],
+   "bredder": [
+    36,
+    64
+   ],
+   "storlek": 19,
+   "rader": [
+    [
+     "”Jag ser en ko” med tre klossar",
+     "”Säg meningen igen och lägg en kloss för varje ord, också för ordet en.”"
+    ],
+    [
+     "”is” när is ska bort ur isbjörn",
+     "”Säg isbjörn. Ta bort is. Vad blir kvar?”"
+    ],
+    [
+     "”tomat” med ett klapp",
+     "Säg ordet i vanlig takt och klappa båda delarna: ”To-⁠mat.”"
+    ],
+    [
+     "”s-⁠o-⁠l” med tre klapp",
+     "”Sol är en del, ett klapp. Ljuden räknar vi i ljudstarten.”"
+    ]
+   ],
+   "tat": true,
+   "namnrad": 17
+  }
+ ]
+}

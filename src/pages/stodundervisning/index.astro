@@ -230,8 +230,8 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
       try {
         const svar = await fetch('/stodundervisning/metoder.json', { cache: 'no-cache' });
         if (!svar.ok) throw new Error(`metoder.json svarade ${svar.status}`);
-        const { metoder } = (await svar.json()) as { metoder: { id: string; data: unknown; bildserier?: Record<string, number> }[] };
-        const poster = ids.map((id) => metoder.find((m) => m.id === id)).filter((m): m is { id: string; data: unknown; bildserier?: Record<string, number> } => Boolean(m));
+        const { metoder } = (await svar.json()) as { metoder: { id: string; data: unknown; bildserier?: Record<string, number>; lektionskort?: Record<string, unknown> }[] };
+        const poster = ids.map((id) => metoder.find((m) => m.id === id)).filter((m): m is { id: string; data: unknown; bildserier?: Record<string, number>; lektionskort?: Record<string, unknown> } => Boolean(m));
         if (poster.length !== ids.length) throw new Error('En vald metod saknas i metoder.json. Sidan och datan kommer från olika byggen.');
         const [{ metodDokument }, { packaWord }, ljud, reserv, ramform, saga, bildserier] = await Promise.all([import('../../lib/metoddocx'), import('../../lib/wordpaket'), import('../../lib/ljudkort'), import('../../lib/reservbild'), import('../../lib/ramform'), import('../../lib/sagoblad'), import('../../lib/bildserier')]);
         // Ljudlekens kort har bilder och elevens typsnitt (src/lib/ljudkort.ts): de hämtas innan filen byggs, som bygget
@@ -249,10 +249,12 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
         const faktatypsnitt = valda.some((p) => ramform.harFaktatexter(p.data)) ? await hamta(ramform.FAKTATYPSNITT_TTF) : undefined;
         // Reservbilderna (src/lib/reservbild.ts): filen byggs först en gång för att se vilka bilder den har, och varje
         // bilds reservbild hämtas som bygget ritade den ur samma SVG, som när filerna byggs vid bygget.
+        // Lektionskortens innehåll (src/lib/lektionskortdata.ts) följer med i metoder.json, efter stam.
+        const lektionskort = new Map(poster.flatMap((p) => Object.entries(p.lektionskort ?? {}))) as NonNullable<Parameters<typeof metodDokument>[1]['resurser']>['lektionskort'];
         const behovet = reserv.samlaReservbilder();
-        metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt, boktypsnitt, faktatypsnitt, png: behovet.png } });
+        metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt, boktypsnitt, faktatypsnitt, lektionskort, png: behovet.png } });
         const png = new Map(await Promise.all([...behovet.behov.keys()].map(async (n) => [n, await hamta(reserv.reservAdress(n))] as const)));
-        const dokument = metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt, boktypsnitt, faktatypsnitt, png: (svg, bredd, hojd) => png.get(reserv.reservNyckel(svg, bredd, hojd)) } });
+        const dokument = metodDokument(valda, { bas, medMallar: medMallarVal, resurser: { bilder, elevtypsnitt, boktypsnitt, faktatypsnitt, lektionskort, png: (svg, bredd, hojd) => png.get(reserv.reservNyckel(svg, bredd, hojd)) } });
         // Packad som vid bygget, med likadana sidhuvuden och sidfötter delade (src/lib/wordpaket.ts, K-151).
         const blob = await packaWord(dokument, 'blob');
         const filnamn = poster.length === 1 ? `${poster[0].id}${medMallarVal ? '' : '-beskrivning'}.docx` : `metoder-niclasfohlin-se${medMallarVal ? '' : '-beskrivningar'}.docx`;

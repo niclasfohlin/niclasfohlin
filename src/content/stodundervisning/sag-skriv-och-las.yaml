@@ -333,7 +333,7 @@ grund:
 ramar:
   rubrik: "Materialet"
   text:
-    - "Här finns bokstavskorten, ordbildskorten, Skrivkollen och sidan Till klassläraren. Skriv ut korten på tjockt papper, laminera dem och klipp isär dem. På sidan Till klassläraren fyller du i de två sista raderna för varje elev."
+    - "Här finns lektionskortet, bokstavskorten, ordbildskorten, Skrivkollen och sidan Till klassläraren. Skriv ut bokstavskorten och ordbildskorten på tjockt papper, laminera dem och klipp isär dem. På sidan Till klassläraren fyller du i de två sista raderna för varje elev."
   ramar:
     - rubrik: "Bokstavskorten"
       text:
@@ -586,6 +586,7 @@ centrala:
     efterText: urval
 lektionskort:
   - efter: tidsschema
+    text: "Lektionskortet är passet på ett A4 med två sidor: målet, orden, passet med det du gör och säger, det du gör när eleven fastnar och på baksidan meningarna att säga. Ha det framför dig under passet."
 film:
   sekunder: 28.72
   beskrivning: "Läraren säger: ”Vi har is.” Säg meningen igen och räkna orden: tre ord. Bygg Vi: ett kort per ljud, stort V först. Ett fingers mellanrum. Bygg nästa ord. Läs från början. Bygg det sista ordet och lägg punkten. Läs hela meningen med fingret under."

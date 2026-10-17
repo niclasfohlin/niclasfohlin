@@ -25,7 +25,7 @@ material:
   - speglar
   - bokstavskartan
   - snabbmallen
-uppdaterad: "2026-10-03"
+uppdaterad: "2026-10-17"
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 4
@@ -319,7 +319,7 @@ grund:
 ramar:
   rubrik: "Materialet"
   text:
-    - "Här finns golvbokstäverna och bokstavskorten. Bokstavskartan står i Ljudlek i grupp. Första gången drar du ett streck under gruppens bokstäver på varje karta, och ni säger vad bilderna heter i kör. Allt går att kopiera. Laminera golvbokstäverna, bokstavskorten och bokstavskartorna, som du drar strecken på."
+    - "Här finns lektionskortet, golvbokstäverna och bokstavskorten. Bokstavskartan står i Ljudlek i grupp. Första gången drar du ett streck under gruppens bokstäver på varje karta, och ni säger vad bilderna heter i kör. Allt går att kopiera. Laminera golvbokstäverna, bokstavskorten och bokstavskartorna, som du drar strecken på."
   ramar:
     - rubrik: "Golvbokstäverna"
       text:
@@ -396,6 +396,8 @@ kort:
     - "Golvbokstäver"
     - "Bokstavskort"
 mallar: []
+lektionskort:
+  - text: "Lektionskortet är lektionen på ett A4: målet, rörelsen, orden att ta, passet med det du gör och säger, och det du lyssnar efter. Skriv ut det och ha det framför dig under passet."
 film:
   sekunder: 16.91
   beskrivning: "Läs ordet: kliv på bokstaven och säg ljudet. Håll ljudet tills foten landar på nästa. Håll ljudet till sista bokstaven och säg ordet. En gång till, utan paus mellan ljuden."

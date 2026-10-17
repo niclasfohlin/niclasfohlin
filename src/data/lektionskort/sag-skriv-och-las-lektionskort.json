@@ -1,0 +1,233 @@
+{
+ "design": "strategipapper",
+ "fil": "Lektionskort - Sag skriv och las",
+ "titel": "Säg, skriv och läs",
+ "dokumenttitel": "Säg, skriv och läs · Lektionskort",
+ "knapp": "Lektionskort",
+ "info": [
+  "F–2 · 30 minuter · 1–4 elever"
+ ],
+ "infoUtanRuta": true,
+ "fot": "© Niclas Fohlin, niclasfohlin.se, där du skriver ut metodens material",
+ "ingress": "**Mål:** kunna skriva det man säger, ord för ord, och läsa det.",
+ "ruta": {
+  "storlek": {
+   "rubrik": 23,
+   "text": 20
+  },
+  "punkter": [
+   {
+    "rubrik": "Säg",
+    "text": "Eleven säger meningen igen och räknar orden på fingrarna."
+   },
+   {
+    "rubrik": "Skriv",
+    "text": "Eleven lägger ett kort för varje ljud från vänster, ord för ord, med ett fingers mellanrum."
+   },
+   {
+    "rubrik": "Läs",
+    "text": "Efter varje ord läser eleven från början, med fingret under det som ligger."
+   }
+  ]
+ },
+ "delar": [
+  {
+   "rubrik": "Orden",
+   "text": "Här står orden till Startorden och vecka 1, från lätt till svårt.",
+   "kolumner": [
+    "Ordgrupp",
+    "Orden"
+   ],
+   "bredder": [
+    24,
+    76
+   ],
+   "storlek": 20,
+   "tat": true,
+   "rader": [
+    [
+     "Två ljud",
+     "ro, se, le, ni, is, vi, så, ål, rå, nu, sy, ny"
+    ],
+    [
+     "Tre ljud att dra ut",
+     "sol, mos, mor, ler, vin, fel, mål, nål, mås, mus, hår, säl, räv"
+    ],
+    [
+     "Tre ljud med klusil",
+     "mat, pil, rep, tak, kål, duk, kul, båt, ben, gul, tåg, nöt, lök"
+    ],
+    [
+     "Två stavelser",
+     "sola, mosa, mera, lila, vila, visa, leta, mata, tala, måla, kaka, duva, hare, läsa"
+    ],
+    [
+     "Konsonantmöte först",
+     "svan, tre, klo, krok, blå, blad, bro, brev, grå, snö, sten, stol, stor, stå, sko, spik, skal"
+    ],
+    [
+     "Konsonantmöte sist",
+     "salt, film, fisk, mask, kalv, sand, vild, vind, land, hand, hals, tält"
+    ]
+   ],
+   "not": "Säg b, d, g, k, p och t korta, utan ett ö efter."
+  },
+  {
+   "rubrik": "Passet",
+   "text": "Korten går tillbaka i högen efter varje ord och mening, utom den sista meningen.",
+   "kolumner": [
+    "Delen",
+    "Så leder du",
+    "Du säger, till exempel"
+   ],
+   "bredder": [
+    22,
+    43,
+    35
+   ],
+   "storlek": 18,
+   "tat": true,
+   "rader": [
+    [
+     "Före passet",
+     "Börja i vecka 1. Mitt på bordet: de små bokstäverna i en hög, och de stora, punkterna och frågetecknen i en liten hög. Varje elev har ett namnkort och en skrivbok. Ordbilderna, ord som inte stavas som de låter, kommer en i veckan: jag, hon, och, det, en och med. Du har en miniwhiteboard."
+    ],
+    [
+     "Startorden\n0–5 min · alla",
+     "Säg ett ord. Alla bygger det och läser med fingret under. Två ord, och sist veckans ordbild.",
+     "”Säg det långsamt. Vad hör du först?”"
+    ],
+    [
+     "Jag visar\n5–9 min · du visar",
+     "Skriv dagens första mening och tänk högt. En gång i veckan glömmer du en bokstav med flit: Lia för Lisa.",
+     "”Jag ska skriva: Vi har is.”\n”Hur många ord är det?”"
+    ],
+    [
+     "Dagens meningar\n9–22 min · alla",
+     "Två eller tre meningar. Alla bygger ord för ord på sin rad. Lyssna på en elev i taget, och skriv sist meningen.",
+     "”Säg den igen. Hur många ord?”\n”Läs från början.”"
+    ],
+    [
+     "Min mening\n22–30 min · var och en",
+     "Eleven byter ett ord och viskar meningen till dig. Grannen läser, och alla skriver den i skrivboken.",
+     "”Kan din granne läsa den?”\n”Nästa gång kan du byta två ord.”"
+    ],
+    [
+     "Efter passet",
+     "Skriv upp vem som tappade ett ord eller ett mellanrum. Ni tar nästa lista på baksidan när ingen gör det, och var och en läser tillbaka det hen har byggt."
+    ]
+   ],
+   "not": "Vecka 1 tar ni ord i stället för meningar i alla delarna, ur Orden ovanför. Från meningarna med fyra ord säger du meningen en gång, och eleven räknar själv."
+  },
+  {
+   "rubrik": "När eleven fastnar",
+   "text": "Vänta tre sekunder och ge minsta stödet först.",
+   "kolumner": [
+    "Det eleven gör",
+    "Så gör du"
+   ],
+   "bredder": [
+    30,
+    70
+   ],
+   "storlek": 19,
+   "tat": true,
+   "rader": [
+    [
+     "mr för mor",
+     "”Du hörde /m/ och /r/. Vad hör du mellan dem?”"
+    ],
+    [
+     "sol när det ligger sl",
+     "”Läs det som ligger, med fingret under.”"
+    ],
+    [
+     "bygger direkt",
+     "”Vad gör du först?” Vänta. Säg meningen igen bara om eleven har glömt den."
+    ],
+    [
+     "Olaler.",
+     "”Läs från början. Hur många ord?”"
+    ],
+    [
+     "”åk” för ”och”",
+     "Visa ordbilden: ”Vad låter inte som det står?”"
+    ],
+    [
+     "”springer”\nett ord som inte går att bygga",
+     "Bekräfta ljuden eleven hör, och skriv ordet på en lapp."
+    ],
+    [
+     "”Hunden.”\nett ord i stället för en mening",
+     "”Vad gjorde hunden?” Kommer eleven inte på något, fråga vad hen gjorde i går."
+    ]
+   ]
+  }
+ ],
+ "baksida": {
+  "titel": "Meningarna",
+  "undertitel": "Ta listorna uppifrån och ned, en lista i taget, och säg varje mening en gång.",
+  "delar": [
+   {
+    "rubrik": "Meningarna att säga",
+    "text": "Säg r tydligt, som i är, har, ser och målar.",
+    "kolumner": [
+     "Listan",
+     "Meningarna"
+    ],
+    "bredder": [
+     25,
+     75
+    ],
+    "storlek": 24,
+    "grupper": [
+     2,
+     2,
+     3,
+     1,
+     1
+    ],
+    "rader": [
+     [
+      "Två ord med ”jag”\nvecka 2 · jag: g hörs inte",
+      "Jag ler.  Jag läser.  Jag åker.  Jag vilar.  Jag målar.  Jag äter."
+     ],
+     [
+      "Två ord\nvecka 2",
+      "Ola ler.  Lisa ror.  Vi åker.  Ali syr.  Mira läser.  Elin målar.  Omar vilar.  Vi äter."
+     ],
+     [
+      "Tre ord med ”hon”\nvecka 3 · hon: kort o, fast det står ett n",
+      "Hon har is.  Hon läser mera.  Hon ser Omar.  Hon tar kaka.  Hon åker båt.  Hon vilar nu."
+     ],
+     [
+      "Tre ord\nvecka 3",
+      "Ola ser Lisa.  Vi har is.  Vi äter mat.  Ali tar mos.  Mira läser mera.  Elin ser snö.  Jag ser Ola.  Jag har mos."
+     ],
+     [
+      "Fyra ord med ”och”\nvecka 4 · och: o som å, ch som k",
+      "Ola och Lisa ler.  Ali och jag läser.  Lisa och Ali åker.  Hon och Omar vilar.  Mira och Elin målar.  Ola och Ali ror.  Elin och jag vilar.  Ali och Mira åker."
+     ],
+     [
+      "Fyra ord\nvecka 4–5",
+      "Vi äter mat ute.  Ola ser Lisa le.  Vi vilar i solen.  Hon ser vita hus.  Jag åker båt nu.  Mira har tre bär.  Ali ser tre sälar.  Elin tar mos nu.  Mira målar tre hus."
+     ],
+     [
+      "Fyra ord med ”det”\nvecka 5 · det: t hörs inte",
+      "Det är mat nu.  Det är snö ute.  Det är fika nu.  Det är is ute.  Det är sol ute.  Det är ny snö.  Det är film nu."
+     ],
+     [
+      "Fem ord med ”en”\nvecka 6 · en: e som ä, och kort",
+      "Vi ser en säl ute.  Ola har en blå duk.  Lisa målar en stor båt.  Jag ser en svan ute.  Det är en stor hare.  Ali ser en grå mås.  Elin ser en röd räv.  Lisa har en blå mask."
+     ],
+     [
+      "Ett ljudstridigt ord\nvecka 7 · med: d hörs inte",
+      "Ola ror med pappa.  Mamma åker båt.  Vi ser sju båtar.  Hon ser fyra hjul.  Det är ljust ute.  Elin vilar med en docka.  Lisa äter ägg.  Mira lagar mat i köket.  Jag åker med mamma.  Ola målar lejon."
+     ]
+    ],
+    "not": "Skriv det ljudstridiga ordet på en lapp, som eleven lägger i raden: pappa, mamma, sju, hjul, ljust, docka, ägg, köket eller lejon. Vecka 7 visar du en egen mening, och i Min mening gör eleven sin egen, med korten eller direkt med pennan. Vecka 8 skriver eleverna egna meningar i stället för listan."
+   }
+  ]
+ },
+ "kalla": "Bygger på metoden Säg, skriv och läs och på boken Skriv! (Fohlin och Wilson, utkommer 2027)."
+}

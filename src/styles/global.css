@@ -566,6 +566,16 @@ button.lank:hover { color: var(--farg-accent); }
 .m-lektionsbank-nr { display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 5px; background: var(--farg-accent); color: #fff; font-size: 0.85rem; letter-spacing: 0; }
 .metod-modell .m-lektionsbank-skal { color: var(--farg-text-svag); font-size: 0.9rem; margin-top: auto; padding-top: 0.25rem; }
 .m-lektionsbank-kort.tom { background: var(--farg-ton-svag); box-shadow: none; }
+/* Lektionskortet vid lektionen i lektionsbanken, som länken på metodens kort i metodbanken, och efter banken meningen och
+   knappen med alla korten (Lektionsbank.astro). */
+.m-lektionsbank-lektionskort { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; }
+.m-lektionsbank-lektionskort .central-lank { font-weight: 600; }
+.m-lektionskorten { margin: 1rem 0 1.25rem; }
+.metod-modell .m-lektionskorten p { margin: 0 0 0.6rem; }
+/* Lektionskortet först i Materialet (Metod.astro): namnet, meningen och knappen. */
+.m-lektionskortet { margin: 1.25rem 0 1.5rem; }
+.metod-modell .m-lektionskortet h3 { margin: 0 0 0.35rem; }
+.metod-modell .m-lektionskortet p { margin: 0 0 0.6rem; }
 /* Seriens kort i metodbanken: lektionerna i bankens ordning bakom en rad som fälls ut. */
 .kort-serie { margin: 0 0 0.9rem; padding: 0.55rem 0.85rem; border: 1px solid var(--farg-kant); border-radius: 8px; font-family: var(--typsnitt-ui); }
 .kort-serie summary { cursor: pointer; font-size: 0.9rem; font-weight: 600; color: var(--farg-accent); }

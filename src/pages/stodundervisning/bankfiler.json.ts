@@ -8,6 +8,9 @@ import { harMaterial } from '../../lib/material';
 import { harLathund } from '../../lib/metod';
 import { nivafilNamn, skrivkortAv } from '../../lib/skrivkort';
 import { aktiviteterAv, kategorifilNamn, kategorinsKort } from '../../lib/aktiviteter';
+import { byggSerier } from '../../lib/serie';
+import { allaLektionskortStam, metodensLektionskort } from '../../lib/lektionskort';
+import { lektionskortetsSidor } from '../../lib/lektionskortdata';
 
 // /stodundervisning/bankfiler.json: bankernas filer (src/lib/bank.ts), som scripts/bankpdf.mjs gör pdf av ur Word-filerna
 // efter bygget. Varje fil har sitt namn och hur många sidor den ska ha: en per enhet med bara enheterna, och med
@@ -29,8 +32,12 @@ import { aktiviteterAv, kategorifilNamn, kategorinsKort } from '../../lib/aktivi
 // som slumpar korten kan skriva ut varje kort som en sida ur Word-filens pdf (scripts/pdfdelar.mjs). Aktivitetskortens
 // filer (src/lib/aktivitetskortform.ts, slag: 'aktivitetskort') likaså, en per kategori, och ett kort som inte ryms på
 // sitt A4 stoppar då skriptet.
+// Lektionskorten (src/lib/lektionskort.ts, slag: 'lektionskort'), ett per fil med så många sidor som kortet har (ett A4),
+// och en serie vars lektioner har kort får alla i en fil (slag: 'lektionskorten'), så att ett kort som inte ryms stoppar
+// skriptet och knapparnas pdf:er är Word-filerna.
 export const GET: APIRoute = async () => {
   const metoder = await publicerade('stodundervisning');
+  const serier = byggSerier(metoder);
   const filer = metoder.flatMap((m) => {
     const nm = metodensNivamaterial(m.data);
     const hela = [
@@ -47,6 +54,9 @@ export const GET: APIRoute = async () => {
     if (skrivkort) nivans.push(...skrivkort.nivaer.map((n) => { const antal = skrivkort.kort.filter((k) => k.niva === n.namn).length; return { metod: m.id, namn: nivafilNamn(m.id, n.namn), rubrik: `Skrivkort: ${n.namn}`, slag: 'skrivkort', minst: antal, hogst: antal, ramar: [] as number[], oversikter: [] as number[] }; }));
     const aktiviteter = aktiviteterAv(m.id);
     if (aktiviteter) nivans.push(...aktiviteter.kategorier.map((k) => { const antal = kategorinsKort(aktiviteter, k.id).length; return { metod: m.id, namn: kategorifilNamn(m.id, k.id), rubrik: `Aktivitetskort: ${k.namn}`, slag: 'aktivitetskort', minst: antal, hogst: antal, ramar: [] as number[], oversikter: [] as number[] }; }));
+    nivans.push(...metodensLektionskort(m.data, m.id).map((k) => { const sidor = lektionskortetsSidor(k); return { metod: m.id, namn: k.stam, rubrik: k.knapp, slag: 'lektionskort', minst: sidor, hogst: sidor, ramar: [] as number[], oversikter: [] as number[] }; }));
+    const lektionernasKort = m.data.lektionsbank ? (serier.get(m.id)?.lektioner ?? []).flatMap((l) => { const lektion = metoder.find((x) => x.id === l.id); return lektion ? metodensLektionskort(lektion.data, lektion.id) : []; }) : [];
+    if (lektionernasKort.length) { const sidor = lektionernasKort.reduce((s, k) => s + lektionskortetsSidor(k), 0); nivans.push({ metod: m.id, namn: allaLektionskortStam(m.id), rubrik: 'Alla lektionskort', slag: 'lektionskorten', minst: sidor, hogst: sidor, ramar: [], oversikter: [] }); }
     const bank = bankAv(m.data);
     if (!bank) return [...hela, ...nivans];
     const fakta = new Set(bank.enheter.filter((e) => e.l.faktatext).map((e) => e.ri));

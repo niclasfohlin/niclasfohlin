@@ -52,13 +52,16 @@ utkast: true
 # centrala:
 #   - id: lasstrategier
 #     efterText: "tabell: Läsfelen och strategierna"
-# Valfritt: lektionskorten (METODER.md under Lektionskortet), högst tre: ett A4 ur metodriggen att ha i handen när
-# läraren leder en lektion som återkommer, i public/stodundervisning/<id>-lektionskort.pdf (-2, -3). Knappen står bredvid
-# Öppna lathunden och vid lektionen, efter platsen efter, med extrafilmernas ord; utan efter efter passets tabell. namn
-# är lektionens namn, som knappen bär när korten är fler än ett ("Lektionskort: Ordpasset").
+# Valfritt: lektionskorten (METODER.md under Lektionskortet), högst tre: ett A4 att ha i handen när läraren leder en
+# lektion som återkommer. Innehållet är metodriggens papper.json i src/data/lektionskort/<id>-lektionskort.json (-2, -3),
+# inlagt med node scripts/lektionskortdata.mjs. Kortet står i Materialet, vars inledning nämner det ("Här finns
+# lektionskortet, …"; schemat stannar annars), och knappen också bredvid Öppna lathunden och vid lektionen, efter
+# platsen efter, med extrafilmernas ord; utan efter efter passets tabell. namn är
+# lektionens namn, som knappen bär när korten är fler än ett ("Lektionskort: Ordpasset"), och text meningen i Materialet.
 # lektionskort:
 #   - namn: Ordpasset
 #     efter: tidsschema
+#     text: "Lektionskortet är ordpasset på ett A4: målet, orden, passet med det du gör och säger, och det du lyssnar efter. Skriv ut det och ha det framför dig under passet."
 #   - namn: Skrivpassen
 #     efter: "tabell: Pass 2 och 3"
 # Valfritt: kursens nivåer (De fyra räknesätten i grupp). Ett led i en räknebladsrubrik som heter som en nivå blir en

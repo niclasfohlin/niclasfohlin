@@ -18,8 +18,9 @@
 //   ingen knapp på sidan skriver ut sidan själv (de gamla märkena data-skriv-ut och data-skriv-ut-blad), och inget skript i
 //   bygget anropar window.print;
 //   varje central sak (src/data/centrala.json) finns i bygget, en pdf bär namnet och upphovet, och den korta adressen
-//   leder dit (netlify.toml), och varje lektionskort som en knapp leder till finns, bär ordet och upphovet och är högst
-//   ett A4. Det prövas varje gång, före sidorna.
+//   leder dit (netlify.toml), och varje lektionskort som en knapp leder till finns, bär ordet och upphovet på varje sida
+//   och är högst ett A4, och varje korts innehåll i src/data/lektionskort/ hör till en metod. Det prövas varje gång, före
+//   sidorna.
 // Att pdf:erna är gjorda av de Word-filer som ligger i bygget prövar scripts/bankpdf.mjs --kontrollera, och delarna klipps
 // ur dem vid varje bygge.
 //
@@ -120,19 +121,22 @@ const textI = (p) => { if (p.text === undefined) p.text = platt(execFileSync('pd
   // Lektionskorten (src/lib/lektionskort.ts, Niclas 2026-10-17): varje knapp till ett kort leder till en pdf i bygget som
   // bär ordet Lektionskort, © Niclas Fohlin och niclasfohlin.se, och varje kort i public/stodundervisning/ har en knapp.
   // Ett kort är högst ett A4 (Niclas 2026-10-17: "Tänker de ska vara max en a4a i framtiden"); Säg, skriv och läs kort
-  // kom före regeln och har en baksida med alla meningar.
+  // kom före regeln och har en baksida med alla meningar. En series fil med alla korten (<serie>-alla-lektionskort.pdf)
+  // har ett kort per sida. Pdf:erna är kortens Word-filer sparade av Word (scripts/bankpdf.mjs), som också prövar att
+  // sidorna är så många som korten.
   {
     const FORE_REGELN = new Set(['sag-skriv-och-las-lektionskort.pdf']);
+    const allaKorten = (f) => /-alla-lektionskort.pdf$/.test(f);
     const lankade = new Set();
     const lasKort = (d) => { for (const e of readdirSync(d, { withFileTypes: true })) { const p = join(d, e.name); if (e.isDirectory()) lasKort(p); else if (e.name === 'index.html') for (const m of readFileSync(p, 'utf8').matchAll(/href="\/stodundervisning\/([a-z0-9-]+-lektionskort(?:-[23])?\.pdf)/g)) lankade.add(m[1]); } };
     lasKort(join(dist, 'stodundervisning'));
     for (const f of lankade) {
       const fil = join(dist, 'stodundervisning', f);
-      if (!existsSync(fil)) { fel.push(`lektionskortet ${f} saknas i bygget; pdf:en från metodriggen läggs i public/stodundervisning/${f}`); continue; }
+      if (!existsSync(fil)) { fel.push(`lektionskortet ${f} saknas i bygget; pdf:en görs ur kortets Word-fil av scripts/bankpdf.mjs (npm run validera)`); continue; }
       const text = execFileSync('pdftotext', ['-enc', 'UTF-8', fil, '-'], { encoding: 'utf8' }).normalize('NFC').replace(/\s+/g, ' ');
       for (const [krav, prov] of [['Lektionskort', text.includes('Lektionskort')], ['© Niclas Fohlin', /©\s*Niclas Fohlin/.test(text)], ['niclasfohlin.se', text.includes('niclasfohlin.se')]]) if (!prov) fel.push(`lektionskortet ${f}: pdf:en saknar "${krav}"`);
       const sidor = Number(execFileSync('pdfinfo', [fil], { encoding: 'utf8' }).match(/Pages:\s+(\d+)/)?.[1] ?? 0);
-      if (sidor > 1 && !FORE_REGELN.has(f)) fel.push(`lektionskortet ${f} har ${sidor} sidor; ett lektionskort är högst ett A4 (METODER.md under Lektionskortet)`);
+      if (sidor > 1 && !FORE_REGELN.has(f) && !allaKorten(f)) fel.push(`lektionskortet ${f} har ${sidor} sidor; ett lektionskort är högst ett A4 (METODER.md under Lektionskortet)`);
       // Varje sida bär upphovet, eftersom ett kort skrivs ut och lamineras en sida i taget (granskningen 2026-10-17, P1:
       // Säg, skriv och läs kort hade upphovet bara på baksidan).
       for (let s = 1; s <= sidor; s++) {
@@ -141,6 +145,17 @@ const textI = (p) => { if (p.text === undefined) p.text = platt(execFileSync('pd
       }
     }
     for (const f of readdirSync(join(rot, 'public', 'stodundervisning')).filter((f) => /-lektionskort(-[23])?\.pdf$/.test(f))) if (!lankade.has(f)) fel.push(`lektionskortet ${f} ligger i public/stodundervisning/ men ingen metod visar det (fältet lektionskort)`);
+    // Ett korts innehåll som ingen metod visar: kortet har tagits bort ur metodens fält, eller metoden har bytt namn.
+    const data = join(rot, 'src', 'data', 'lektionskort');
+    if (existsSync(data)) for (const f of readdirSync(data).filter((f) => f.endsWith('.json'))) if (!lankade.has(f.replace(/\.json$/, '.pdf'))) fel.push(`lektionskortets innehåll src/data/lektionskort/${f} hör inte till någon metod (fältet lektionskort); ta bort filen eller lägg till fältet`);
+  }
+  // En länk till en pdf vars text börjar med Skriv ut är en utskriftsknapp (data-skriv-ut-pdf, SkrivUtPdf.astro), så att en
+  // knapp som heter Skriv ut alltid ger utskriftsrutan där det går (METODER.md under Utskriften). Knappen Skriv ut alla
+  // lektionskort var en vanlig länk som bara öppnade pdf:en (granskningen 2026-10-17). Knappar vars adress sätts av ett
+  // skript (href="#", som på sidorna som tar fram skrivkort och aktiviteter) prövas inte här.
+  {
+    const las = (d) => { for (const e of readdirSync(d, { withFileTypes: true })) { const p = join(d, e.name); if (e.isDirectory()) las(p); else if (e.name === 'index.html') for (const m of readFileSync(p, 'utf8').matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)) { if (!/\bhref="[^"#]*\.pdf(?:\?[^"]*)?"/.test(m[1]) || /data-skriv-ut-pdf/.test(m[1])) continue; if (/^Skriv ut/.test(m[2].replace(/<[^>]+>/g, '').trim()) || /data-direkt="Skriv ut/.test(m[0])) fel.push(`${p.slice(dist.length + 1).replace(/\\/g, '/')}: länken "${m[2].replace(/<[^>]+>/g, '').trim().slice(0, 50)}" heter Skriv ut men är ingen utskriftsknapp (data-skriv-ut-pdf)`); } } };
+    las(join(dist, 'stodundervisning'));
   }
   // Ett blad med fältet google (bladet som Google Formulär, Gruppstärkande aktiviteter 2026-10-16): knappens korta
   // adress leder i netlify.toml till Googles sida för att kopiera ett kalkylark, så att knappen aldrig går till en

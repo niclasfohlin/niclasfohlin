@@ -708,6 +708,17 @@ const meny = [
       {!undersida && (<>
       <h2>{d.ramar.rubrik}</h2>
       {d.ramar.text.map((s) => <p>{s}</p>)}
+      {/* Lektionskorten först i Materialet (src/lib/lektionskort.ts; Niclas 2026-10-17: "Info om lektionskortet måste nog
+          också stå i materialet för en metod och dess blå knapp finnas där"): namnet, meningen om vad kortet har och
+          knappen, direkt efter inledningen, som nämner kortet. I Word-filen med allt står kortet sist i Materialet, på sina
+          egna sidor. */}
+      {lektionskort.map((k) => (
+        <div class="m-lektionskortet">
+          <h3>{k.rubrik}</h3>
+          <p>{k.text}</p>
+          <p class="m-central-knapp m-lektionskortrad"><Lektionskortknapp k={k} titel={d.titel} /></p>
+        </div>
+      ))}
       {elevtypsnitt && (
         <p class="m-efter">{andikaNamnt ? 'Ladda ner Andika' : 'Elevens material står i Andika, ett gratis typsnitt från SIL som är gjort för att vara lätt att läsa. Ladda ner det'} på <a href={ANDIKA_ADRESS}>software.sil.org/andika</a> och använd det när du gör egna kort och blad.</p>
       )}
