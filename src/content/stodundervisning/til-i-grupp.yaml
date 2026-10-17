@@ -22,7 +22,7 @@ material:
   - lässchema
   - böcker på rätt nivå
   - snabbmall och kontrakt
-uppdaterad: 2026-10-17
+uppdaterad: 2026-10-18
 relaterade:
   - laslistor-i-grupp
   - upprepad-lasning
@@ -344,7 +344,7 @@ lathund:
           vad: Eleven läser boken en gång till för en vuxen, cirka tio minuter. Skriver tre favoritmeningar. Den vuxne signerar.
   mall:
     rubrik: Lässchemat och snabbmallen
-    underrad: "Lässchema TIL · följer med i mappen · en rad per dag · Elev: ______________ · Period: ______________"
+    underrad: "Lässchema TIL · följer med i mappen · en rad per dag · skriv ut det ur Materialet, ett A4"
     block:
       - typ: tabell
         rubrik: Lässchema
