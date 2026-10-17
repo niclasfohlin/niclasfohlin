@@ -119,6 +119,16 @@
     ],
     "datum": "2026-10-17"
   },
+  "sag-skriv-och-las": {
+    "kalla": "95419c2b490b1af3",
+    "skalor": [
+      1.35,
+      1.35,
+      1.3,
+      1.35
+    ],
+    "datum": "2026-10-17"
+  },
   "seriesamtal": {
     "kalla": "ed1963e466880e97",
     "skalor": [

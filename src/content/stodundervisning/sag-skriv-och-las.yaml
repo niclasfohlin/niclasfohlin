@@ -1,0 +1,607 @@
+# Metod i stödundervisning. Modellen står i methods/_mall.yaml och docs/modell.md.
+titel: "Säg, skriv och läs"
+undertitel: "Bokstavskort, ord och de första meningarna i liten grupp, för F–2"
+ingress: "Du säger en mening, och eleven säger den igen, bygger den med bokstavskort och läser det hen har byggt. Först bygger gruppen ord, sedan meningar på två till fem ord och sist egna meningar, och eleven skriver också med penna. Insatsen är för elever i F–2 som kan bokstävernas ljud men inte kommer igång med att skriva."
+omrade: "Skrivning"
+arskurs:
+  - "F-3"
+arskursText: "F–2"
+taggar:
+  - "stavning"
+  - "meningsbyggnad"
+  - "intensivtraning"
+format:
+  - "liten grupp"
+  - "enskilt"
+tid: "30 minuter per pass, tre pass i veckan"
+period: "Omkring åtta veckor"
+grupp: "En till fyra elever"
+material:
+  - bokstavskort
+  - ordbildskort
+  - namnkort
+  - elevens skrivbok
+  - miniwhiteboard
+  - skrivkort Bas
+uppdaterad: "2026-10-17"
+publicerad: "2026-10-17"
+relaterade:
+  - "ljudlek-i-grupp"
+  - "ljudlek-skriv-ord-tillsammans"
+  - "kortskrivning-skriv-varje-dag"
+  - "ljudlek-fran-ord-till-mening"
+utkast: false
+inledning:
+  - "Säg, skriv och läs är en insats för elever i F–2 som kan bokstävernas ljud men inte kommer igång med att skriva. Eleven säger ett ord eller en mening, bygger det med lösa bokstavskort och läser det hen har byggt, om och om igen, tills rörelsen sitter och eleven börjar skriva själv. Rörelsen kommer ur boken Skriv! (Fohlin och Wilson, utkommer 2027), där den är kärnan i den första skrivundervisningen."
+  - "Mitt på bordet ligger en hög med bokstavskort, små bokstäver att bygga med, och bredvid den en liten hög med stora bokstäver, punkter och frågetecken. Varje elev bygger på sin rad, på bordet framför sig, och har ett namnkort och en skrivbok. Ordbilderna, vanliga ord som inte stavas som de låter, ligger också på bordet. Du har listorna med orden och meningarna i handen, och en miniwhiteboard där du skriver det du visar."
+  - "Du visar först rörelsen med dagens första mening och tänker högt. Sedan säger du nästa mening ur listan, och eleven säger den igen och räknar orden på fingrarna innan hen bygger. Hen lägger ett kort för varje ljud, ord för ord med ett fingers mellanrum, och läser från början efter varje ord. Korten tar bort det tunga i att forma bokstäverna, så att eleven orkar höra ljuden och hålla kvar meningen. När eleven läser, ser hen om det som ligger är det hen ville säga. Sist i passet byter eleven ett ord, så att meningen blir hens egen, och grannen läser den högt."
+  - "Första veckan bygger gruppen ord. Sedan blir det meningar på två, tre, fyra och fem ord, och ungefär varje vecka kommer en ny ordbild. I vecka 2 kan det låta så här: du säger ”Ola ler.”, alla säger meningen igen och räknar två ord på fingrarna, och var och en bygger Ola, ett fingers mellanrum, ler och punkten. När rörelsen sitter, omkring vecka 3, prövar eleven att skriva sin mening i skrivboken med pennan, och korten finns kvar. Är eleven redo, skriver hen de två sista veckorna egna meningar om något som har hänt eller efter ett skrivkort. När insatsen slutar följer skrivboken med till klassen, där eleven skriver en mening om dagen."
+upplagg:
+  rubrik: "Så fungerar insatsen"
+  text: "Insatsen är för en till fyra elever, 30 minuter tre gånger i veckan i omkring åtta veckor. Varje pass har fyra delar: Startorden, Jag visar, Dagens meningar och Min mening. I varje del gör ni samma rörelse: säga, bygga och läsa från början. Listan växer från ord till meningar på fem ord, och sist skriver eleven egna meningar. När rörelsen sitter prövar eleven att skriva med penna. I varje pass ser du om eleven får med ljuden, orden och mellanrummen. Före insatsen, efter vecka 4 och efter vecka 8 visar Skrivkollen, en kort kartläggning med varje elev, vad eleven skriver på egen hand."
+gruppen:
+  rubrik: "Så sätter du ihop gruppen"
+  text: "Insatsen är för elever i F–2 som kan ljuden till de flesta bokstäverna och kan dela upp och sätta ihop ord med tre ljud, men som inte kommer igång med att skriva. Den som ännu inte kan bokstävernas ljud eller inte hör ljuden i ord börjar i Ljudlek i grupp. Den som har svårt att säga en hel mening behöver också arbeta med det muntliga språket, och i insatsen säger du meningen först, så att hen inte behöver hitta på den. Gruppen är en till fyra elever som skriver på ungefär samma nivå, och en elev ensam går lika bra."
+principer:
+  rubrik: "Tre saker att hålla fast vid"
+  text: "Låt eleven säga meningen igen och räkna orden innan hen bygger, så att meningen finns kvar medan hen skriver. Låt eleven läsa det som ligger, med fingret under: så upptäcker hen själv ett ljud som fattas. Bekräfta först det som stämmer, fråga sedan efter nästa ljud och låt eleven hitta resten."
+passrutin:
+  kallas: delar
+  text: "Passet har samma fyra delar varje gång, och korten går tillbaka i högen efter varje ord och mening, utom den sista meningen. Här står ett pass med meningar. Vecka 1 är det ord i passets alla delar: i Jag visar skriver du ett ord ur dagens ordgrupper i tabellen Orden, i Dagens meningar bygger var och en omkring sex ord ur samma ordgrupper, och i Min mening bygger eleven ett ord hen vill skriva, som grannen läser. Ordbilderna börjar vecka 2. Den som är klar före de andra får fyra kort i blandad ordning, bokstäverna i ett ord ur tabellen Orden. Hen flyttar dem och läser tills hen hittar ett ord. Är gruppen klar före tiden, gör alla det eller läser ur skrivböckerna för varandra."
+  steg:
+    - text: "Var och en bygger två ord, och sist veckans ordbild och en av de förra, som i tabellen Ordbilderna."
+      fas: "Startorden"
+    - text: "Du skriver dagens första mening på miniwhiteboarden och tänker högt. En gång i veckan gör du ett fel med flit."
+      fas: "Jag visar"
+    - text: "Var och en bygger två eller tre meningar ur listan, och den sista ligger kvar."
+      fas: "Dagens meningar"
+    - text: "Eleven byter ett ord i sista meningen, grannen läser den, och sist skriver ni den i skrivboken och jämför med raden."
+      fas: "Min mening"
+  efterPasset: "Du skriver i snabbmallen vilka ljud och ord som var svåra, och om gruppen stannar i steget eller går vidare."
+tidsschema:
+  rubrik: "Ett pass på 30 minuter"
+  text: "Före första passet får varje elev ett namnkort och en skrivbok. Namnkortet är en remsa med elevens namn, lika hög som bokstavskorten, och kamraterna kan lägga in den i sina meningar. Skrivboken är ett skrivhäfte med stödlinjer och elevens namn på, och varje sida får en mening och ett datum."
+  rader:
+    - tid: "Före passet"
+      fas: "Förberedelse"
+      vad: "Lägg högen med bokstavskort och den lilla högen mitt på bordet, eller till varje par när eleverna är fyra. Lägg fram namnkorten, skrivböckerna, ordbilderna och miniwhiteboarden, och skriv dagens ord och meningar i snabbmallen."
+    - tid: "0–5 min"
+      fas: "Startorden"
+      vad: "Säg ordet. ”Säg det långsamt. Vad hör du först?” Alla bygger det från vänster och läser med fingret under. Skriv sist ordet på miniwhiteboarden, och eleverna jämför."
+    - tid: "5–9 min"
+      fas: "Jag visar"
+      vad: "”Jag ska skriva: Vi har is.” Säg meningen två gånger och fråga: ”Hur många ord är det?” Skriv ord för ord med ett fingers mellanrum, och läs från början efter varje ord."
+    - tid: "9–22 min"
+      fas: "Dagens meningar"
+      vad: "Säg meningen. ”Säg den igen. Hur många ord?” Alla bygger ord för ord och läser från början efter varje ord. Lyssna på en i taget. Skriv sist meningen, och eleverna jämför."
+    - tid: "22–30 min"
+      fas: "Min mening"
+      vad: "Eleven bygger sitt nya ord och viskar meningen till dig. ”Kan din granne läsa den?” Ni ser om något fattas. Säg vad som fungerar och ge ett litet tips framåt."
+arbetsform:
+  rubrik: "Arbetsform: enskilt, läraren visar, enskilt igen, i par"
+  text: "Arbetsformen för varje del står i Ett pass på 30 minuter. När gruppen är en enda elev, viskar eleven inte meningen till dig. Du läser raden exakt som den ligger, och sedan säger eleven vad hen ville skriva. En gång i veckan kan klassläraren läsa skrivboken. Vill eleven inte visa sin mening för grannen än, läser du raden i stället."
+  delar:
+    - rubrik: "1. Enskilt"
+      text: "var och en bygger sina ord"
+      faser:
+        - "Startorden"
+    - rubrik: "2. Läraren visar"
+      text: "gruppen säger med och räknar"
+      faser:
+        - "Jag visar"
+    - rubrik: "3. Enskilt igen"
+      text: "var och en bygger meningen"
+      faser:
+        - "Dagens meningar"
+    - rubrik: "4. I par"
+      text: "grannen läser högt"
+      faser:
+        - "Min mening"
+exempel:
+  valt:
+    rubrik: "Gruppen"
+    text: "fyra elever i åk 1, vecka 4, första passet med fyra ord, då ordbilden ”och” kommer. Eleverna är Saga, Noah, Ella och Hugo."
+  text:
+    - "Startorden. Läraren säger stol. Alla säger det långsamt, och var och en bygger. Hugo lägger s, o och l. Läraren säger: ”Du hörde /s/, /o/ och /l/. Säg det långsamt igen. Hör du något mellan /s/ och /o/?” Hugo hör /t/ och lägger in t. Sist lägger läraren fram veckans nya ordbild. Alla bygger den efter kortet och säger vad som inte låter som det står: o låter som å, och ch låter som k. När läraren har vänt kortet, bygger de ordet utan att titta."
+    - "Jag visar. Läraren säger: ”Jag ska skriva: Ola och Lisa ler.” Hen skriver på miniwhiteboarden och tänker högt: ”Fyra ord. Ola, med stort O. Ett finger. Och, ordbilden.” Lisa skriver läraren utan s, med flit, och läser: ”Lia? Vad saknas?” Saga säger /s/."
+    - "Dagens meningar. Den tredje meningen är ”Hon och Omar vilar.” Alla säger den igen och räknar fyra ord på fingrarna. Ella bygger Honoch utan mellanrum. När hon läser från början med fingret under, ser hon att det blev ett ord där hon sa två, och lägger ett finger emellan. Efter tre meningar har alla jämfört sina rader med meningen på miniwhiteboarden."
+    - "Min mening. ”Hon och Omar vilar.” ligger kvar. Noah tar bort ”vilar”, bygger ”läser” och viskar till läraren: ”Hon och Omar läser.” Saga läser Noahs rad högt utan att ha hört meningen, och läraren säger: ”Saga kunde läsa den, för du gjorde mellanrum. Nästa gång kan du byta två ord.” Sist skriver Noah meningen i skrivboken, läser den och jämför med raden."
+    - "Efteråt noterar läraren: Hugo tappar t i konsonantmöten, och Ella glömmer mellanrummet före ”och”. Nästa pass stannar gruppen i samma steg, och i Startorden bygger alla två ord med konsonantmöte."
+fastnar:
+  rubrik: "När eleven fastnar"
+  text: "Vänta tre sekunder och ge minsta möjliga stöd först. Fastnar flera på samma ljud, säg ordet i kör och ta ord med det ljudet i Startorden nästa pass."
+  fragaForst:
+    - "Vad hör du?"
+  trappaText: "Gå uppför stödtrappan i stunden. Ge inte nästa stöd förrän eleven har prövat det förra:"
+  trappa:
+    - "Säg ordet igen, långsamt, och dra fingret under raden medan ni säger det."
+    - "Bekräfta ljuden som stämmer och fråga efter det som fattas: ”Vad hör du mellan /k/ och /l/?”"
+    - "Gör uppgiften mindre: eleven väljer mellan två kort, som e och o."
+    - "Säg bara ljudet som fattas: eee, eller /t/ kort och utan ö."
+    - "Bygg ordet tillsammans, och låt eleven bygga det själv efteråt."
+  motto: "Till sist bygger och läser eleven själv."
+urval:
+  rubrik: "Var hittar du orden och meningarna?"
+  text:
+    - "Orden och meningarna står i tabellerna Orden och Meningarna, i den ordning gruppen tar dem. Alla står också på Lärarkortet, ett A4 med passet och orden på framsidan och meningarna på baksidan. Du hämtar det på metodens sida och laminerar det. Ta listorna uppifrån och hoppa över ett ord med en bokstav som gruppen inte kan än. Räcker inte listan, byter du ett ord i en mening som gruppen redan har haft."
+    - "Skrivkorten till de två sista veckorna finns på sidan Ta fram ett skrivkort, som hör till metoden Kortskrivning: skriv varje dag. Välj nivån Bas, slumpa fram ett kort och visa det på en skärm eller skriv ut det."
+  kravText: "Tre krav gäller ord och meningar du väljer själv:"
+  krav:
+    - rubrik: "Kända ord"
+      text: "Eleven vet vad orden betyder"
+    - rubrik: "Ljudenliga"
+      text: "En bokstav för varje ljud, utom ordbilderna"
+    - rubrik: "Inga provord"
+      text: "Inga ord ur Skrivkollen, ljudkollen eller skolans diktamen, utom småorden"
+tabeller:
+  - rubrik: "Lyssna efter"
+    plats: "efter-fastnar"
+    meny: true
+    text: "Bekräfta först det som stämmer, och låt sedan eleven försöka igen."
+    kolumner:
+      - "Det eleven gör"
+      - "Det som händer"
+      - "Så gör du"
+    rader:
+      - - "mr för mor"
+        - "Vokalen faller bort"
+        - "”Du hörde /m/ och /r/. Vad hör du mellan dem?”"
+      - - "tol för stol"
+        - "Ett ljud i konsonantmötet faller bort"
+        - "”Säg det långsamt. Vad hör du först?”"
+      - - "sdol för stol"
+        - "Eleven hör d efter s"
+        - "”Vi skriver t efter s, fast det låter nästan som d.”"
+      - - "ess för s"
+        - "Eleven säger bokstavens namn"
+        - "”Hur låter den? Sss.”"
+      - - "sol när det ligger sl"
+        - "Eleven läser det hen ville skriva"
+        - "”Läs det som ligger, med fingret under.”"
+      - - "Olaler."
+        - "Orden flyter ihop"
+        - "”Läs från början. Hur många ord?”"
+      - - "ola ler."
+        - "Stor bokstav saknas"
+        - "”Var börjar meningen? Ta en stor bokstav ur den lilla högen.”"
+      - - "”åk” för ”och”"
+        - "Eleven bygger ordbilden som den låter"
+        - "Visa ordbilden: ”Vad låter inte som det står?”"
+      - - "Bygger direkt, eller frågar ”Vad skulle jag skriva?”"
+        - "Eleven har inte sagt meningen igen"
+        - "”Vad gör du först?” Vänta. Minns eleven inte meningen, säg den och räkna orden tillsammans."
+      - - "”Hunden.”"
+        - "Eleven säger ett ord i stället för en mening"
+        - "”Vad gjorde hunden?” Kommer eleven inte på något, fråga vad hen gjorde i går."
+      - - "Vill skriva ”springer”"
+        - "Ordet går inte att bygga ljud för ljud"
+        - "Bekräfta ljuden eleven hör, och skriv ordet på en lapp."
+      - - "Stannar med pennan och frågar hur b ser ut"
+        - "Att forma bokstaven tar all kraft"
+        - "Peka på b i raden. Låt eleven följa det med fingret och sedan skriva det."
+  - rubrik: "Perioden: från ord till egna meningar"
+    plats: "efter-arbetsform"
+    meny: true
+    text: "Gruppen tar nästa steg när ingen elev tappar ett ord eller ett mellanrum, och var och en läser tillbaka det hen har byggt. I första steget, med bara ord, går gruppen vidare när de flesta orden ligger rätt på första försöket två pass i rad. Stegen och veckorna är förslag, och en säker grupp kan ta två steg på en vecka."
+    kolumner:
+      - "Steget"
+      - "Listan"
+      - "Det eleven tar över"
+    rader:
+      - - "Ord, vecka 1"
+        - "Orden, från Två ljud till Konsonantmöte sist, omkring två ordgrupper per pass"
+        - "Eleven bygger ett eget ord i Min mening, och du skriver det i skrivboken"
+      - - "Två ord, vecka 2"
+        - "Två ord med ”jag”, Två ord"
+        - "Eleven byter ett ord, och du skriver meningen i skrivboken"
+      - - "Tre ord, vecka 3"
+        - "Tre ord med ”hon”, Tre ord"
+        - "När rörelsen sitter prövar eleven att skriva med penna. Hen säger varje ord långsamt, skriver det, läser det och jämför med raden"
+      - - "Fyra ord, vecka 4–5"
+        - "Fyra ord med ”och”, Fyra ord, Fyra ord med ”det”"
+        - "Du säger bara meningen, och eleven säger den igen och räknar orden själv. I Min mening byter hen två ord, eller säger en egen mening som börjar som den dikterade"
+      - - "Fem ord, vecka 6"
+        - "Fem ord med ”en”. Två meningar"
+        - "Eleven kan visa i Jag visar, och den som skriver med penna prövar med raden täckt"
+      - - "Ett ljudstridigt ord, vecka 7"
+        - "Ett ljudstridigt ord, på en lapp. Två meningar"
+        - "Eleven gör en egen mening i Min mening, som du i Jag visar. Den som har börjat med pennan skriver den direkt"
+      - - "Egna meningar, vecka 8"
+        - "Egna meningar i stället för listan"
+        - "Eleven skriver egna meningar, och skrivboken går till klassen"
+    not: "Från vecka 7 visar du en egen mening i Jag visar, om något du har gjort eller efter ett skrivkort, och tänker högt medan du väljer den: ”Jag ska skriva: Jag åt is med mamma.” Den som har börjat med pennan skriver sin egen mening direkt i skrivboken: hen säger den igen, räknar orden, skriver ord för ord och läser från början efter varje ord, och korten ligger kvar om hen fastnar på ett ord. Vecka 8 gör var och en egna meningar på samma sätt också i Dagens meningar, med pennan eller med korten. En grupp som inte är redo för egna meningar stannar i sitt steg, och på sidan Till klassläraren skriver du hur långt eleven har kommit."
+  - rubrik: "Orden"
+    plats: "efter-urval"
+    meny: true
+    text: "Här står orden till Startorden, vecka 1 och övningen med fyra kort, från lätt till svårt. Alla är ljudenliga: varje ljud har en bokstav, och varje bokstav låter som den brukar."
+    kolumner:
+      - "Ordgrupp"
+      - "Orden"
+    rader:
+      - - "Två ljud"
+        - "ro, se, le, ni, is, vi, så, ål, rå, nu, sy, ny"
+      - - "Tre ljud att dra ut"
+        - "sol, mos, mor, ler, vin, fel, mål, nål, mås, mus, hår, säl, räv"
+      - - "Tre ljud med klusil"
+        - "mat, pil, rep, tak, kål, duk, kul, båt, ben, gul, tåg, nöt, lök"
+      - - "Två stavelser"
+        - "sola, mosa, mera, lila, vila, visa, leta, mata, tala, måla, kaka, duva, hare, läsa"
+      - - "Konsonantmöte först"
+        - "svan, tre, klo, krok, blå, blad, bro, brev, grå, snö, sten, stol, stor, stå, sko, spik, skal"
+      - - "Konsonantmöte sist"
+        - "salt, film, fisk, mask, kalv, sand, vild, vind, land, hand, hals, tält"
+    not: "Säg vad ett ord betyder första gången, och sätt det i en mening. Säg b, d, g, k, p och t korta, utan ett ö efter. I Startorden tar du ord ur den ordgrupp där eleverna fortfarande fastnar, och första passet ord med två ljud."
+  - rubrik: "Meningarna"
+    plats: "efter-urval"
+    meny: true
+    text: "Här står meningarna du säger, i en eller flera listor för varje steg och i den ordning gruppen tar dem. Alla ord är ljudenliga utom ordbilderna, och i den sista listan har varje mening ett ljudstridigt ord."
+    kolumner:
+      - "Listan"
+      - "Meningarna"
+    rader:
+      - - "Två ord med ”jag”, vecka 2"
+        - "Jag ler. Jag läser. Jag åker. Jag vilar. Jag målar. Jag äter."
+      - - "Två ord, vecka 2"
+        - "Ola ler. Lisa ror. Vi åker. Ali syr. Mira läser. Elin målar. Omar vilar. Vi äter."
+      - - "Tre ord med ”hon”, vecka 3"
+        - "Hon har is. Hon läser mera. Hon ser Omar. Hon tar kaka. Hon åker båt. Hon vilar nu."
+      - - "Tre ord, vecka 3"
+        - "Ola ser Lisa. Vi har is. Vi äter mat. Ali tar mos. Mira läser mera. Elin ser snö. Jag ser Ola. Jag har mos."
+      - - "Fyra ord med ”och”, vecka 4"
+        - "Ola och Lisa ler. Ali och jag läser. Lisa och Ali åker. Hon och Omar vilar. Mira och Elin målar. Ola och Ali ror. Elin och jag vilar. Ali och Mira åker."
+      - - "Fyra ord, vecka 4–5"
+        - "Vi äter mat ute. Ola ser Lisa le. Vi vilar i solen. Hon ser vita hus. Jag åker båt nu. Mira har tre bär. Ali ser tre sälar. Elin tar mos nu. Mira målar tre hus."
+      - - "Fyra ord med ”det”, vecka 5"
+        - "Det är mat nu. Det är snö ute. Det är fika nu. Det är is ute. Det är sol ute. Det är ny snö. Det är film nu."
+      - - "Fem ord med ”en”, vecka 6"
+        - "Vi ser en säl ute. Ola har en blå duk. Lisa målar en stor båt. Jag ser en svan ute. Det är en stor hare. Ali ser en grå mås. Elin ser en röd räv. Lisa har en blå mask."
+      - - "Ett ljudstridigt ord, vecka 7"
+        - "Ola ror med pappa. Mamma åker båt. Vi ser sju båtar. Hon ser fyra hjul. Det är ljust ute. Elin vilar med en docka. Lisa äter ägg. Mira lagar mat i köket. Jag åker med mamma. Ola målar lejon."
+    not: "Säg r tydligt, som i är, har, ser och målar, också när nästa ord börjar med s eller t. Byt gärna ett namn mot ett namn i gruppen: eleven bygger namnet när det stavas som det låter, och annars lägger hen namnkortet i raden. Det ljudstridiga ordet är ett av de här nio: pappa, mamma, sju, hjul, ljust, docka, ägg, köket och lejon. Före passet skriver du det på en lapp till varje elev, med stor bokstav när ordet står först, och eleven lägger lappen i raden och säger vad som inte låter som det står, till exempel att det står två m i mamma."
+  - rubrik: "Ordbilderna"
+    plats: "efter-urval"
+    meny: true
+    text: "Ordbilderna är sex vanliga ord som inte stavas som de låter. Första passet med ordbildens lista bygger eleven två ord i Startorden och sist den nya ordbilden: hen ser ordet, säger det, bygger det och säger vad som inte låter som det står. Sedan vänder du kortet, och eleven bygger ordet utan att titta, eller skriver det längst bak i skrivboken när hen har börjat med pennan. De andra passen ligger korten med ordet nedåt. Eleven bygger veckans ordbild och en av de förra, vänder sedan korten och ser om orden stämmer. I vecka 2 finns ingen av de förra, och då bygger eleven tre ord före veckans ordbild."
+    kolumner:
+      - "Ordbilden"
+      - "Det som inte låter som det står"
+      - "Kommer med listan"
+    rader:
+      - - "jag"
+        - "g hörs inte"
+        - "Två ord med ”jag”"
+      - - "hon"
+        - "o är kort, fast det bara står ett n"
+        - "Tre ord med ”hon”"
+      - - "och"
+        - "o låter som å, och ch låter som k"
+        - "Fyra ord med ”och”"
+      - - "det"
+        - "t hörs inte"
+        - "Fyra ord med ”det”"
+      - - "en"
+        - "e låter som ä och är kort, fast det bara står ett n"
+        - "Fem ord med ”en”"
+      - - "med"
+        - "d hörs inte"
+        - "Ett ljudstridigt ord"
+    not: "Vecka 8 väljer varje elev också ett eget ord som inte stavas som det låter. Du skriver det på en lapp, och eleven lär sig det på samma sätt som de andra, som veckans ordbild."
+uppfoljning:
+  text: "Du ser i varje pass vad eleven bygger och skriver. Visa eleven i hens egna meningar vad hen kan nu."
+  rader:
+    - nar: "Före insatsen"
+      vad: "Gör Skrivkollen: tio ord, två meningar, ordbilderna och en egen mening."
+    - nar: "I passet"
+      vad: "Säger eleven meningen igen själv, får hen med ljuden, orden och mellanrummen, och läser hen det som ligger?"
+    - nar: "Efter vecka 4"
+      vad: "Gör Skrivkollen utan ordbilderna. Får eleven inte fler ljud rätt än före, gör du ljudkollen i Ljudlek i grupp, och eleven fortsätter."
+    - nar: "Efter vecka 8"
+      vad: "Gör Skrivkollen med ordbilderna, och eleven läser första och sista sidan i skrivboken för dig."
+    - nar: "Två veckor efter"
+      vad: "Du och klassläraren läser skrivboken: skriver eleven en mening om dagen?"
+mal:
+  rubrik: "Mål: vad eleven ska kunna efter insatsen"
+  text: "Efter insatsen ska eleven kunna:"
+  punkter:
+    - "säga en mening, säga den igen och räkna orden innan hen skriver"
+    - "skriva ljudenliga ord med en bokstav för varje ljud, i rätt ordning"
+    - "skriva meningar på tre till fem ord med mellanrum, stor bokstav och punkt"
+    - "läsa tillbaka det hen har skrivit och ändra det som inte stämmer"
+    - "skriva de sex ordbilderna utan att titta"
+    - "skriva en egen mening om något hen har varit med om"
+snabbmall:
+  fore:
+    - "Steget och listan"
+    - "Orden och ordbilderna till Startorden"
+    - "Det du visar och det eleverna bygger"
+  efter:
+    - "Svåra ljud och ord, och för vem"
+    - "Det eleverna gjorde själv"
+    - "Nästa pass: samma steg i Perioden eller nästa?"
+checklista:
+  rubrik: "Checklista före insatsen"
+  punkter:
+    - "Skrivit ut, laminerat och klippt bokstavskorten, ett ark med små bokstäver per elev och ett med stora bokstäver och tecken per två elever"
+    - "Skrivit ut, laminerat och klippt ordbildskorten"
+    - "Skaffat en miniwhiteboard och lappar, och en penna per elev"
+    - "Skrivit namnet på ett namnkort och en skrivbok per elev"
+    - "Skrivit ut Lärarkortet på båda sidor och laminerat det"
+    - "Gjort Skrivkollen med varje elev före första passet"
+grund:
+  text: "I studier i de första skolåren stavade, avkodade och skrev elever i riskzonen för läs- och skrivsvårigheter tydligt bättre när de fick bygga ord med lösa bokstäver och skriva dem (Weiser och Mathes, 2011), och att skriva ord gör också att eleverna läser bättre (Graham och Hebert, 2010). I åk 1 var det muntliga språket, arbetsminnet och stavningen det som betydde mest för hur eleverna skrev (Kim och Schatschneider, 2017), och därför säger eleven meningen och räknar orden innan hen bygger. Barn i förskoleklass som skrev de ljud de hörde och fick återkoppling lärde sig läsa fler ord än barn som bara övade på att höra ljuden (Ouellette och Sénéchal, 2008). Elever i åk 1 som skrev orden för hand stavade bättre än de som lade dem med lösa bokstäver (Cunningham och Stanovich, 1990), och därför prövar eleven att skriva med penna så snart rörelsen sitter, omkring vecka 3. Barn i förskoleklass lärde sig bättre att läsa ord som inte stavas som de låter när de skrev dem efter förlagan än när de bara tittade på dem och sa dem (Colenbrander m.fl., 2022)."
+  kallor: "Bygger på Fohlin och Wilson, Skriv! (utkommer 2027), Weiser och Mathes (2011), Graham och Hebert (2010), Kim och Schatschneider (2017), Ouellette och Sénéchal (2008), Cunningham och Stanovich (1990) och Colenbrander m.fl. (2022)."
+ramar:
+  rubrik: "Materialet"
+  text:
+    - "Här finns bokstavskorten, ordbildskorten, Skrivkollen och sidan Till klassläraren. Skriv ut korten på tjockt papper, laminera dem och klipp isär dem. På sidan Till klassläraren fyller du i de två sista raderna för varje elev."
+  ramar:
+    - rubrik: "Bokstavskorten"
+      text:
+        - "Varje elev får ett ark med små bokstäver. Ett ark med stora bokstäver, punkter och frågetecken räcker till två elever, så tre elever behöver två ark. Båda arken har hela alfabetet, och de bokstäver som behövs mest finns flera gånger. Vecka 1 räcker de små. Skolans egna bokstavsbrickor går också bra, om de har små bokstäver och å, ä och ö, och en mening på fem ord ryms framför varje elev."
+      delar:
+        - rubrik: "Till läraren"
+          falt:
+            - rubrik: "Högen"
+              text: "Lägg de små bokstäverna i en hög mitt på bordet och bred ut dem med bokstaven uppåt, så att alla syns. Lägg de stora bokstäverna och tecknen i en liten hög bredvid. Är eleverna fyra, sitter de två och två, och varje par har en hög och en liten hög."
+            - rubrik: "Upp och ner"
+              text: "Visa eleverna att u blir n, b blir q och d blir p när kortet ligger upp och ner."
+            - rubrik: "Saknas en bokstav"
+              text: "Skriv den på en lapp."
+      listor:
+        - rubrik: "Bokstäver att bygga med: små bokstäver"
+          rader:
+            - ["a", "a", "a", "a", "b", "c"]
+            - ["d", "e", "e", "e", "e", "f"]
+            - ["g", "h", "i", "i", "i", "j"]
+            - ["k", "k", "l", "l", "m", "n"]
+            - ["n", "o", "o", "p", "q", "r"]
+            - ["r", "r", "r", "s", "s", "t"]
+            - ["t", "t", "u", "v", "w", "x"]
+            - ["y", "z", "å", "å", "ä", "ö"]
+        - rubrik: "Bokstäver att bygga med: stora bokstäver och tecken"
+          rader:
+            - ["A", "A", "B", "C", "D", "D"]
+            - ["E", "E", "F", "G", "H", "H"]
+            - ["I", "J", "J", "K", "L", "L"]
+            - ["M", "M", "N", "O", "O", "P"]
+            - ["Q", "R", "S", "T", "U", "V"]
+            - ["V", "W", "X", "Y", "Z", "Å"]
+            - ["Ä", "Ö", ".", ".", ".", "."]
+            - [".", ".", ".", ".", "?", "?"]
+    - rubrik: "Ordbildskorten"
+      text:
+        - "Här är sex kort, ett för varje ordbild."
+      delar:
+        - rubrik: "Till läraren"
+          falt:
+            - rubrik: "Så gör du"
+              text: "I Startorden ligger korten med ordet nedåt, utom den nya ordbilden första passet. Eleven bygger ordet, vänder kortet och ser om det stämmer. När gruppen bygger meningar ligger veckans ordbild med ordet uppåt och de förra med ordet nedåt. Hur eleven lär sig en ny ordbild står i tabellen Ordbilderna."
+      listor:
+        - rubrik: "Ordbildskorten att klippa"
+          rader:
+            - ["jag", "hon", "och"]
+            - ["det", "en", "med"]
+    - rubrik: "Skrivkollen"
+      text:
+        - "Skrivkollen visar vad eleven skriver med pennan, utan korten. Du gör den före insatsen, efter vecka 4 och efter vecka 8, med en elev i taget och utanför passen. Den tar omkring en kvart med varje elev. Eleven skriver på ett linjerat papper, och du sparar det med elevens protokoll, ett blad per elev."
+      huvud:
+        - rubrik: "Elevens namn"
+      delar:
+        - rubrik: "Till läraren"
+          falt:
+            - rubrik: "Orden och meningarna"
+              text: "Säg ordet, sätt det i en mening och säg det igen. Säg meningen två gånger, och eleven säger den igen innan hen skriver."
+            - rubrik: "Den egna meningen"
+              text: "Sist skriver eleven en mening om något hen har gjort. Skriv i protokollet hur många ord meningen har och hur många mellanrum som stämmer."
+            - rubrik: "Ljuden"
+              text: "Eleven får ett poäng för varje ljud i rätt ordning, så att sl för sol ger två av tre. I hon och en räknas ljuden, så att hån och än ger full poäng."
+            - rubrik: "Mellanrum och tecken"
+              text: "Eleven får ett poäng för varje mellanrum, stor bokstav och punkt i meningarna, och ett för varje mening som hen läser som den står."
+            - rubrik: "Ordbilderna"
+              text: "Före insatsen och efter vecka 8 får eleven ett poäng för varje ordbild som hen stavar rätt."
+      listor:
+        - rubrik: "Protokollet"
+          kolumner:
+            - "Uppgiften"
+            - "Före"
+            - "Vecka 4"
+            - "Vecka 8"
+          rader:
+            - ["Orden: ljud, av 35", "", "", ""]
+            - ["Meningarna: ljud, av 21", "", "", ""]
+            - ["Mellanrum och tecken, av 10", "", "", ""]
+            - ["Läser meningarna, av 2", "", "", ""]
+            - ["Ordbilderna, av 6, inte vecka 4", "", "", ""]
+            - ["Egen mening: ord och mellanrum", "", "", ""]
+        - rubrik: "Orden att säga"
+          larare: true
+          rader:
+            - ["rik", "bur", "rak", "våt", "frö"]
+            - ["sopa", "bita", "blek", "rast", "kant"]
+        - rubrik: "Meningarna att säga"
+          larare: true
+          rader:
+            - ["Vi ser en hök."]
+            - ["Hon har en tub."]
+        - rubrik: "Ordbilder att säga, före insatsen och efter vecka 8"
+          larare: true
+          rader:
+            - ["jag", "hon", "och", "det", "en", "med"]
+    - rubrik: "Till klassläraren"
+      text:
+        - "Den här sidan följer med elevens skrivbok till klassen när insatsen slutar."
+      huvud:
+        - rubrik: "Elevens namn"
+      delar:
+        - rubrik: "Så fortsätter ni"
+          falt:
+            - rubrik: "Det eleven har tränat"
+              text: "Eleven säger meningen, säger den igen och räknar orden. Sedan säger hen ett ord i taget långsamt, skriver det med mellanrum och läser från början."
+            - rubrik: "Ordbilderna"
+              text: "Eleven har övat på ”jag”, ”hon”, ”och”, ”det”, ”en”, ”med” och ett eget ord, som inte stavas som de låter. De står längst bak i skrivboken."
+            - rubrik: "Varje dag"
+              text: "Låt eleven skriva en mening om dagen i skrivboken, om något som har hänt eller till ett skrivkort Bas. Börjar hen utan att säga meningen, fråga: ”Vad gör du först?”"
+            - rubrik: "Ditt svar"
+              text: "Läs meningen med eleven, säg vad som fungerar och ge ett litet tips framåt, men låt meningen stå."
+            - rubrik: "Eleven gör själv"
+              text: ""
+            - rubrik: "Stödet som fortsätter"
+              text: ""
+kort:
+  listor:
+    - "Bokstäver att bygga med"
+    - "Ordbildskorten"
+lathund:
+  innehall: "Bokstavskort, ord och meningar"
+  metoden:
+    text:
+      - "Eleven säger ett ord eller en mening, bygger det med lösa bokstavskort och läser det hen har byggt. Listan växer från ord till meningar på fem ord, och sist skriver eleven egna meningar. När rörelsen sitter prövar hen att skriva i skrivboken."
+      - "Varje pass har fyra delar: Startorden, Jag visar, Dagens meningar och Min mening, där grannen läser elevens mening högt. Vecka 1 är det bara ord, hela passet."
+    ruta:
+      rubrik: "Tre saker att hålla fast vid"
+      punkter:
+        - fet: "Eleven säger igen och räknar."
+          text: "Meningen finns kvar medan hen bygger."
+        - fet: "Läs det som ligger."
+          text: "Med fingret under hör eleven vad som fattas."
+        - fet: "Bekräfta och fråga vidare."
+          text: "Låt eleven hitta nästa ljud."
+    tabell:
+      rubrik: "De fyra delarna"
+      kolumner:
+        - "Del"
+        - "Exempelfraser"
+      rader:
+        - ["1 · Startorden\nTvå ord, och två ordbilder eller en ny.", "”Säg det långsamt.”\n”Läs det som ligger.”"]
+        - ["2 · Jag visar\nDu skriver och tänker högt.", "”Jag ska skriva: Vi har is.”\n”Hur många ord är det?”"]
+        - ["3 · Dagens meningar\nTvå eller tre meningar ur listan.", "”Säg den igen. Hur många ord?”\n”Läs från början.”"]
+        - ["4 · Min mening\nEleven byter ord, grannen läser.", "”Kan din granne läsa den?”\n”Nästa gång kan du byta två ord.”"]
+  pass:
+    rubrik: "Vi kör ett pass: vecka 4"
+    textRubrik: "Gruppen · fyra elever i åk 1"
+    titel: "Fyra ord och en ny ordbild"
+    text:
+      - "Startorden: Hugo bygger sol för stol och hör /t/ när han säger det långsamt."
+      - "Jag visar: läraren skriver Lisa utan s med flit, och Saga hittar felet."
+      - "Dagens meningar: Ella bygger Honoch, läser från början och lägger ett finger emellan."
+      - "Min mening: Noah byter ”vilar” mot ”läser”, och Saga läser Noahs mening högt."
+      - "Efteråt: Hugo tappar t i konsonantmöten, och Startorden får två sådana ord nästa pass."
+      - "När någon fastnar: säg ordet igen långsamt, bekräfta och fråga vidare, låt eleven välja mellan två kort, säg ljudet som fattas, och bygg ordet tillsammans."
+    forberett:
+      rubrik: "Det jag förberedde"
+      text:
+        - "Valt den nya ordbilden och fyra meningar ur listan Fyra ord med ”och”."
+    klarTidigt: "Eleven gör ett ord av fyra blandade kort, eller ni läser skrivböckerna för varandra."
+    schema:
+      rubrik: "30 minuter, steg för steg"
+      rader:
+        - tid: "Före"
+          fas: "Förberedelse"
+          vad: "Lägg fram högarna, namnkorten, skrivböckerna, ordbilderna, miniwhiteboarden och snabbmallen."
+        - tid: "0–5"
+          fas: "1 · Startorden"
+          vad: "Första passet med ”och”: två ord och den nya ordbilden."
+          fraser:
+            - "Vad hör du först?"
+        - tid: "5–9"
+          fas: "2 · Jag visar"
+          vad: "Du skriver dagens första mening och tänker högt."
+          fraser:
+            - "Lia? Vad saknas?"
+        - tid: "9–22"
+          fas: "3 · Dagens meningar"
+          vad: "Tre meningar: säg, säg igen, räkna, bygg ord för ord och läs från början efter varje ord."
+          fraser:
+            - "Läs från början."
+        - tid: "22–30"
+          fas: "4 · Min mening"
+          vad: "Eleven byter ord, grannen läser, och ni skriver meningen i skrivboken."
+          fraser:
+            - "Saga kunde läsa den, för du gjorde mellanrum."
+  mall:
+    rubrik: "Orden och de första meningarna"
+    underrad: "Alla meningar står på Lärarkortet"
+    block:
+      - typ: "tabell"
+        rubrik: "Orden"
+        kolumner:
+          - "Ordgrupp"
+          - "Orden"
+        rader:
+          - ["Två ljud", "ro, se, le, ni, is, vi, så, ål, rå, nu, sy, ny"]
+          - ["Tre ljud att dra ut", "sol, mos, mor, ler, vin, fel, mål, nål, mås, mus, hår, säl, räv"]
+          - ["Tre ljud med klusil", "mat, pil, rep, tak, kål, duk, kul, båt, ben, gul, tåg, nöt, lök"]
+          - ["Två stavelser", "sola, mosa, mera, lila, vila, visa, leta, mata, tala, måla, kaka, duva, hare, läsa"]
+          - ["Konsonantmöte först", "svan, tre, klo, krok, blå, blad, bro, brev, grå, snö, sten, stol, stor, stå, sko, spik, skal"]
+          - ["Konsonantmöte sist", "salt, film, fisk, mask, kalv, sand, vild, vind, land, hand, hals, tält"]
+      - typ: "tabell"
+        rubrik: "Meningarna"
+        kolumner:
+          - "Listan"
+          - "De fyra första"
+        rader:
+          - ["Två ord med ”jag”, vecka 2", "Jag ler. Jag läser. Jag åker. Jag vilar."]
+          - ["Två ord, vecka 2", "Ola ler. Lisa ror. Vi åker. Ali syr."]
+          - ["Tre ord med ”hon”, vecka 3", "Hon har is. Hon läser mera. Hon ser Omar. Hon tar kaka."]
+          - ["Tre ord, vecka 3", "Ola ser Lisa. Vi har is. Vi äter mat. Ali tar mos."]
+          - ["Fyra ord med ”och”, vecka 4", "Ola och Lisa ler. Ali och jag läser. Lisa och Ali åker. Hon och Omar vilar."]
+          - ["Fyra ord, vecka 4–5", "Vi äter mat ute. Ola ser Lisa le. Vi vilar i solen. Hon ser vita hus."]
+          - ["Fyra ord med ”det”, vecka 5", "Det är mat nu. Det är snö ute. Det är fika nu. Det är is ute."]
+          - ["Fem ord med ”en”, vecka 6", "Vi ser en säl ute. Ola har en blå duk. Lisa målar en stor båt. Jag ser en svan ute."]
+          - ["Ett ljudstridigt ord, vecka 7", "Ola ror med pappa. Mamma åker båt. Vi ser sju båtar. Hon ser fyra hjul."]
+      - typ: "not"
+        text: "Säg b, d, g, k, p och t korta, och r tydligt. Skriv det ljudstridiga ordet på en lapp."
+  material:
+    rubrik: "Vad du behöver för ett pass"
+    kravEtikett: "Krav"
+    var:
+      rubrik: "Var allt finns"
+      punkter:
+        - fet: "Orden och meningarna."
+          text: "I metodens tabeller och på Lärarkortet."
+        - fet: "Bokstavskorten och ordbildskorten."
+          text: "Under Materialet."
+        - fet: "Skrivkort Bas."
+          text: "På sidan Ta fram ett skrivkort."
+    bordet:
+      - "Högen med bokstavskort och den lilla högen"
+      - "Ett namnkort och en skrivbok till varje elev"
+      - "Veckans ordbild och de förra"
+      - "Listorna och snabbmallen"
+      - "Miniwhiteboarden och lappar"
+      - "Pennor, när eleverna skriver själva"
+    varjePass: "Svåra ljud och ord, mellanrummen och steget nästa pass."
+    uppfoljning:
+      - nar: "Före insatsen"
+        vad: "Skrivkollen."
+      - nar: "Efter vecka 4"
+        vad: "Skrivkollen, utan ordbilderna."
+      - nar: "Efter vecka 8"
+        vad: "Skrivkollen, och eleven läser skrivboken för dig."
+      - nar: "Två veckor efter"
+        vad: "Läs skrivboken med klassläraren."
+centrala:
+  - id: skrivkort
+    efterText: urval
+film:
+  sekunder: 28.72
+  beskrivning: "Läraren säger: ”Vi har is.” Säg meningen igen och räkna orden: tre ord. Bygg Vi: ett kort per ljud, stort V först. Ett fingers mellanrum. Bygg nästa ord. Läs från början. Bygg det sista ordet och lägg punkten. Läs hela meningen med fingret under."
+  rubrik: "Så gör eleven"
+  ingress: "Fyra bilder ur filmen om Säg, skriv och läs: eleven säger meningen igen, bygger den ord för ord med ett fingers mellanrum och läser från början. Filmen på metodens sida visar samma sak i rörelse."
+  stillbilder:
+    - text: "Säg: eleven säger meningen igen och räknar orden."
+    - text: "Skriv: eleven bygger det första ordet ur högen."
+    - text: "Läs: eleven läser från början efter varje ord."
+    - text: "Läs: eleven läser hela meningen med fingret under."
+filmer:
+  - nr: 2
+    sekunder: 26.59
+    beskrivning: "Noah byter Ola mot snö i den sista meningen. Han viskar meningen till läraren. Noah säger till läraren: ”Jag ser snö.” Läraren frågar: ”Kan din granne läsa den?” Saga läser Noahs mening högt. Saga läser: ”Jag ser snö.” Noah säger: ”Ja, det står så.” Läraren säger: ”Saga kunde läsa den, för du gjorde mellanrum.” Läraren ger ett litet tips framåt. Läraren säger: ”Nästa gång kan du byta två ord.” Sist skriver Noah meningen i skrivboken. Noah skriver: ”Jag ser snö.”"
+    rubrik: "Min mening: grannen läser högt"
+    ingress: "Fyra bilder ur filmen om Min mening, sist i passet: eleven byter ett ord i den sista meningen, grannen läser den högt, läraren säger vad som fungerade och ger ett tips framåt, och eleven skriver meningen i skrivboken när hen har börjat med pennan. Filmen på metodens sida visar samma sak i rörelse."
+    efter: "tidsschema"
+    stillbilder:
+      - text: "Noah byter Ola mot snö och viskar till läraren."
+      - text: "Saga läser meningen högt, utan att ha hört den."
+      - text: "Läraren säger vad som gick bra och ger ett tips framåt."
+      - text: "Noah skriver meningen i skrivboken."

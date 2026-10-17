@@ -4500,5 +4500,26 @@
     "sidor": 8,
     "kB": 400,
     "datum": "2026-10-17"
+  },
+  "sag-skriv-och-las": {
+    "word": "bb92d7d1ccf468cb5f8c2a1209226dc99ce27c8f6ec20cab7eef1d76711cc39f",
+    "pdf": "bafecbb835a4d3896828c1e7bb6eedaed8a38f12195819c5b604baf7bc00b2dd",
+    "sidor": 23,
+    "kB": 575,
+    "datum": "2026-10-17"
+  },
+  "sag-skriv-och-las-metoden": {
+    "word": "5367cf987b6684eda34ff1991c29b0fb2872cd697769a4d14bc355a330d9d8dd",
+    "pdf": "2e6a5a35947b269263b1cd5f521c8564b4d0cfe60c36e3ccf16d38963151d33c",
+    "sidor": 10,
+    "kB": 458,
+    "datum": "2026-10-17"
+  },
+  "sag-skriv-och-las-lathund-text": {
+    "word": "a38972cb76bc09f768cda8deee1e6008ee7e0dd07ca9bf953218ea68059263d3",
+    "pdf": "4dc745fb57a5ae8d4d386a2371660b9de7d8290052662be718aeedbc0555aa8f",
+    "sidor": 1,
+    "kB": 188,
+    "datum": "2026-10-17"
   }
 }
