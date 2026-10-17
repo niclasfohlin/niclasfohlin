@@ -123,7 +123,7 @@ fastnar:
 urval:
   rubrik: "Var hittar du orden och meningarna?"
   text:
-    - "Orden och meningarna står i tabellerna Orden och Meningarna, i den ordning gruppen tar dem. Alla står också på Lärarkortet, ett A4 med passet och orden på framsidan och meningarna på baksidan. Du hämtar det på metodens sida och laminerar det. Ta listorna uppifrån och hoppa över ett ord med en bokstav som gruppen inte kan än. Räcker inte listan, byter du ett ord i en mening som gruppen redan har haft."
+    - "Orden och meningarna står i tabellerna Orden och Meningarna, i den ordning gruppen tar dem. Alla står också på Lektionskortet, ett A4 med passet och orden på framsidan och meningarna på baksidan. Du hämtar det på metodens sida och laminerar det. Ta listorna uppifrån och hoppa över ett ord med en bokstav som gruppen inte kan än. Räcker inte listan, byter du ett ord i en mening som gruppen redan har haft."
     - "Skrivkorten till de två sista veckorna finns på sidan Ta fram ett skrivkort, som hör till metoden Kortskrivning: skriv varje dag. Välj nivån Bas, slumpa fram ett kort och visa det på en skärm eller skriv ut det."
   kravText: "Tre krav gäller ord och meningar du väljer själv:"
   krav:
@@ -201,10 +201,10 @@ tabeller:
         - "Fyra ord med ”och”, Fyra ord, Fyra ord med ”det”"
         - "Du säger bara meningen, och eleven säger den igen och räknar orden själv. I Min mening byter hen två ord, eller säger en egen mening som börjar som den dikterade"
       - - "Fem ord, vecka 6"
-        - "Fem ord med ”en”. Två meningar"
+        - "Fem ord med ”en”, två meningar per pass"
         - "Eleven kan visa i Jag visar, och den som skriver med penna prövar med raden täckt"
       - - "Ett ljudstridigt ord, vecka 7"
-        - "Ett ljudstridigt ord, på en lapp. Två meningar"
+        - "Ett ljudstridigt ord, på en lapp, två meningar per pass"
         - "Eleven gör en egen mening i Min mening, som du i Jag visar. Den som har börjat med pennan skriver den direkt"
       - - "Egna meningar, vecka 8"
         - "Egna meningar i stället för listan"
@@ -325,7 +325,7 @@ checklista:
     - "Skrivit ut, laminerat och klippt ordbildskorten"
     - "Skaffat en miniwhiteboard och lappar, och en penna per elev"
     - "Skrivit namnet på ett namnkort och en skrivbok per elev"
-    - "Skrivit ut Lärarkortet på båda sidor och laminerat det"
+    - "Skrivit ut Lektionskortet på båda sidor och laminerat det"
     - "Gjort Skrivkollen med varje elev före första passet"
 grund:
   text: "I studier i de första skolåren stavade, avkodade och skrev elever i riskzonen för läs- och skrivsvårigheter tydligt bättre när de fick bygga ord med lösa bokstäver och skriva dem (Weiser och Mathes, 2011), och att skriva ord gör också att eleverna läser bättre (Graham och Hebert, 2010). I åk 1 var det muntliga språket, arbetsminnet och stavningen det som betydde mest för hur eleverna skrev (Kim och Schatschneider, 2017), och därför säger eleven meningen och räknar orden innan hen bygger. Barn i förskoleklass som skrev de ljud de hörde och fick återkoppling lärde sig läsa fler ord än barn som bara övade på att höra ljuden (Ouellette och Sénéchal, 2008). Elever i åk 1 som skrev orden för hand stavade bättre än de som lade dem med lösa bokstäver (Cunningham och Stanovich, 1990), och därför prövar eleven att skriva med penna så snart rörelsen sitter, omkring vecka 3. Barn i förskoleklass lärde sig bättre att läsa ord som inte stavas som de låter när de skrev dem efter förlagan än när de bara tittade på dem och sa dem (Colenbrander m.fl., 2022)."
@@ -401,6 +401,7 @@ ramar:
               text: "Före insatsen och efter vecka 8 får eleven ett poäng för varje ordbild som hen stavar rätt."
       listor:
         - rubrik: "Protokollet"
+          larare: true
           kolumner:
             - "Uppgiften"
             - "Före"
@@ -520,7 +521,7 @@ lathund:
             - "Saga kunde läsa den, för du gjorde mellanrum."
   mall:
     rubrik: "Orden och de första meningarna"
-    underrad: "Alla meningar står på Lärarkortet"
+    underrad: "Alla meningar står på Lektionskortet"
     block:
       - typ: "tabell"
         rubrik: "Orden"
@@ -558,7 +559,7 @@ lathund:
       rubrik: "Var allt finns"
       punkter:
         - fet: "Orden och meningarna."
-          text: "I metodens tabeller och på Lärarkortet."
+          text: "I metodens tabeller och på Lektionskortet."
         - fet: "Bokstavskorten och ordbildskorten."
           text: "Under Materialet."
         - fet: "Skrivkort Bas."
@@ -583,6 +584,8 @@ lathund:
 centrala:
   - id: skrivkort
     efterText: urval
+lektionskort:
+  - efter: tidsschema
 film:
   sekunder: 28.72
   beskrivning: "Läraren säger: ”Vi har is.” Säg meningen igen och räkna orden: tre ord. Bygg Vi: ett kort per ljud, stort V först. Ett fingers mellanrum. Bygg nästa ord. Läs från början. Bygg det sista ordet och lägg punkten. Läs hela meningen med fingret under."
