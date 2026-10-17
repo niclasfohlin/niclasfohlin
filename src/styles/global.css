@@ -1350,6 +1350,9 @@ a.ri-titel, .ri-titel a { color: var(--farg-accent); font-weight: 600; text-deco
 .m-ramfalt dt { font-weight: 700; padding: 0.55rem 0.9rem; background: var(--farg-ton-svag); }
 .m-ramfalt dd { margin: 0; padding: 0.55rem 0.9rem; }
 .m-ramhuvud { border: 1px solid var(--farg-kant); border-radius: 8px; overflow: hidden; margin: 0 0 1rem; font-family: var(--typsnitt-ui); font-size: 0.95rem; }
+/* Ett tomt fält i en ram där andra fält är ifyllda har plats för tre handskrivna rader, som i Word (K-385, Till
+   klassläraren i Säg, skriv och läs). */
+.m-ramfalt > div.m-skrivrader { min-height: 4.5rem; }
 /* Elevens blad (Stapelrutan, Metod.astro): fälten i sina höjder, en rem per cm på skärmen och riktiga cm i utskriften. */
 .m-elevblad .m-ramfalt > div { min-height: calc(var(--hojd) * 1rem); }
 /* Elevens blad i elevens typsnitt (K-130), som i planeringsmallarna. */

@@ -711,7 +711,10 @@ const CM = 567;
 // nya punkt 2): i ett fält med flera rader som inte är kursivt får en rad som börjar med en av etiketterna och ett kolon
 // etiketten i husets blå, så att ögat hittar raden på lärarens sida (Red ut, Lyssna efter, Lockar). Etiketten är inte
 // fet, eftersom fet stil är rubrik.
-function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[], o: { rubrik?: string; skrivrum?: boolean; hojder?: (number | undefined)[]; elevblad?: boolean; hallIhopEfter?: boolean; tat?: boolean; bokmarke?: string; luftEfter?: number; etiketter?: string[] } = {}): Barn[] {
+// skrivrader: ett tomt fält får plats för tre handskrivna rader, i en dels tabell i en ram där andra fält är ifyllda (K-385,
+// riggens förslag 2026-10-17: Eleven gör själv och Stödet som fortsätter i Till klassläraren hade en rad).
+const SKRIVRADER = 1440;
+function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[], o: { rubrik?: string; skrivrum?: boolean; skrivrader?: boolean; hojder?: (number | undefined)[]; elevblad?: boolean; hallIhopEfter?: boolean; tat?: boolean; bokmarke?: string; luftEfter?: number; etiketter?: string[] } = {}): Barn[] {
   const forsta = o.tat ? Math.max(1100, Math.ceil(Math.max(...falt.flatMap((f) => f.rubrik.split(/\s+/)).map((w) => ordBredd(w, 20, { fet: true })))) + 300) : o.elevblad ? 2000 : 2300;
   const bredder = [forsta, BREDD - forsta];
   const rader: TableRow[] = [];
@@ -736,7 +739,7 @@ function ramFaltTabell(falt: { rubrik: string; text: string; kursiv?: boolean }[
       // Etiketterna och namnraden på elevens blad är elevens (riggens docs/elevmaterial.md): i elevens typsnitt, som på sidan.
       cell([stycke(f.rubrik, { fet: true, storlek: o.elevblad ? 24 : 20, efter: 0, hallIhop: !sist, font: o.elevblad ? ELEVTYPSNITT : undefined })], { bredd: bredder[0], fyll: FARG.rand, tat: o.tat }),
       cell(tom ? [stycke('', { efter: 0, hallIhop: !sist })] : linjer.map(linje), { bredd: bredder[1], tat: o.tat }),
-    ], { hojd: hojd ? Math.round(hojd * CM) : tom ? (o.skrivrum ? 900 : 420) : undefined }));
+    ], { hojd: hojd ? Math.round(hojd * CM) : tom ? (o.skrivrum ? 900 : o.skrivrader ? SKRIVRADER : 420) : undefined }));
   });
   return [tabell(rader, bredder), o.luftEfter !== undefined ? luft(o.luftEfter, o.hallIhopEfter) : o.hallIhopEfter ? new Paragraph({ spacing: { before: 0, after: 160 }, keepNext: true }) : avstand()];
 }
@@ -2174,7 +2177,7 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
     const elevensFalt = !!o.blad && !elevsida;
     return [
       ...((ram.lektioner && !(o.paNySida && nr === 0)) || (medBild && nr > 0) ? [new Paragraph({ pageBreakBefore: true, spacing: { before: 0, after: 0, line: 240 }, run: { size: 2, font: 'Calibri' } })] : []),
-      ...ramFaltTabell(del.falt, { rubrik: (korta || ram.listor) && !del.rubrik.includes(ram.rubrik) ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum, hojder: elevensFalt ? del.falt.map((f) => o.blad![f.rubrik]) : undefined, elevblad: elevensFalt, tat: ram.lektioner || o.tat || medBild, bokmarke: ram.lektioner && o.karta ? o.karta.vecka(forstaLed(del.rubrik)) : undefined, luftEfter: rad && !tvaSidor ? VECKANS_LUFT : medBild ? VECKANS_LUFT : ram.oversikt?.bilder ? 60 : undefined, hallIhopEfter: medBild || undefined, etiketter: o.radetiketter }),
+      ...ramFaltTabell(del.falt, { rubrik: (korta || ram.listor) && !del.rubrik.includes(ram.rubrik) ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum, skrivrader: !o.skrivrum && !elevensFalt && !ramArTom(ram), hojder: elevensFalt ? del.falt.map((f) => o.blad![f.rubrik]) : undefined, elevblad: elevensFalt, tat: ram.lektioner || o.tat || medBild, bokmarke: ram.lektioner && o.karta ? o.karta.vecka(forstaLed(del.rubrik)) : undefined, luftEfter: rad && !tvaSidor ? VECKANS_LUFT : medBild ? VECKANS_LUFT : ram.oversikt?.bilder ? 60 : undefined, hallIhopEfter: medBild || undefined, etiketter: o.radetiketter }),
       ...(tvaSidor ? [luft(LUFT_RAD, true, { nySida: true })] : []),
       // Veckans rad ur kartan: talen och bladen för varje nivå, med bladens namn som länkar.
       ...(rad && o.karta?.tabell ? (() => { const k = o.karta!.tabell!.kolumner.slice(1); return rubrikTabell(k, [rad.slice(1)], k.map(() => Math.floor(BREDD / k.length)), { radrubrik: false, hallIhop: true, hallIhopEfter: true, storlek: 19, karta: { ...o.karta!.lankar, vecka: undefined } }); })() : []),

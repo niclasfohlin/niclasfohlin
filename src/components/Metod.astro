@@ -941,7 +941,7 @@ const meny = [
                     <h4>{del.rubrik}{del.rubrik !== ram.rubrik && <span class="m-ramnamn"> · {ram.rubrik}</span>}</h4>
                     <dl class="m-ramfalt">
                       {del.falt.map((f) => (
-                        <div><dt>{f.rubrik}</dt><dd>{f.kursiv ? <em>{linjer(f.text).map((x, j) => <>{j > 0 && <br />}{x}</>)}</em> : linjer(f.text).map((x, j, alla) => { const e = etikettAv(x, alla.length); return <>{j > 0 && <br />}{e ? <><span class="m-radetikett">{e}:</span>{x.slice(e.length + 1)}</> : x}</>; })}</dd></div>
+                        <div class={!f.text.trim() && !ramArTom(ram) ? 'm-skrivrader' : undefined}><dt>{f.rubrik}</dt><dd>{f.kursiv ? <em>{linjer(f.text).map((x, j) => <>{j > 0 && <br />}{x}</>)}</em> : linjer(f.text).map((x, j, alla) => { const e = etikettAv(x, alla.length); return <>{j > 0 && <br />}{e ? <><span class="m-radetikett">{e}:</span>{x.slice(e.length + 1)}</> : x}</>; })}</dd></div>
                       ))}
                     </dl>
                   </div>
