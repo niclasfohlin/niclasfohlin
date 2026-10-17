@@ -104,6 +104,9 @@ function laggIn() {
   const hade = existsSync(metodfil) ? parseDocument(readFileSync(metodfil, 'utf8')) : undefined;
   const dok = parseDocument(readFileSync(kalla, 'utf8'));
   if (dok.errors.length) throw new Error(`${kalla} går inte att läsa som YAML: ${dok.errors[0].message}`);
+  // En metod som är utkast hos riggen byggs ändå: kopian bygger för produktion, och src/lib/innehall.ts tar bort utkast
+  // där, så sidan fanns inte och bygget stannade (riggens förslag 2026-10-17, K-386). Bilderna visar sidan som den blir.
+  if (dok.get('utkast')) dok.delete('utkast');
   const d = dok.toJS();
   const mapp = dirname(kalla);
   mkdirSync(join(stod, id), { recursive: true });
