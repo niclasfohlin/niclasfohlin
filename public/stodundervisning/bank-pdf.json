@@ -3886,11 +3886,11 @@
     "datum": "2026-10-13"
   },
   "fyra-raknesatten": {
-    "word": "b3ff2791eb14be8b04f2853056f8591f0195a4f57267e1d4c29b0ae878c298a3",
-    "pdf": "9bf819a59b157eedb4fcb6dbfd4c4b205c442749943ff34742a8058664694e02",
+    "word": "f5c8fd9672a38d32abae444034a384e54408d4aced0d636b532c6894466d342f",
+    "pdf": "c0cc7eb3398a7f6c51265747a76cdc98596ac45bb6e07039de6aa5dffb5d63ff",
     "sidor": 74,
-    "kB": 971,
-    "datum": "2026-10-13"
+    "kB": 968,
+    "datum": "2026-10-17"
   },
   "fyra-raknesatten-metoden": {
     "word": "642c9d4a6e6cf0a91cce1244029d0f4849ed900347f64ed585ee69ce8ad14c20",
@@ -3900,15 +3900,15 @@
     "datum": "2026-10-13"
   },
   "kompissamtal": {
-    "word": "4492b905db2ae5c1a376faa49bd52f398ab41d904b28d871b1d4db13fbfe73c8",
-    "pdf": "ec663f8e7d3625e52073e5d6184efd751f6f929c1d10bfc1a821c24cb754b674",
-    "sidor": 25,
-    "kB": 620,
+    "word": "fd36d2c4adcc73a1f5b6b1c0601fecc6cae08932abe7b22932929a4c063a0363",
+    "pdf": "626eeae5368d57ca99931b4a062702774857a2d81bb74161a50fb4a6c350eb5c",
+    "sidor": 27,
+    "kB": 677,
     "datum": "2026-10-17"
   },
   "kompissamtal-metoden": {
-    "word": "2120f1f60e2789a7ba78724227bcd8599cc83d7ecf799b585b94ce205d453667",
-    "pdf": "23fb380a8b34cb66c92d5981088f493c15ce90c121c041e19ce003515e2b600c",
+    "word": "7aef2e0e40798f3c2385208645fbd39a0bf831b6f64b690885122aa93a7c9f19",
+    "pdf": "bfd6125bb7640a265f43f8a6591cdefef7e3b102f3b5a8528711046bd3a2268f",
     "sidor": 13,
     "kB": 491,
     "datum": "2026-10-17"
@@ -4082,11 +4082,11 @@
     "datum": "2026-10-17"
   },
   "skrivkurs-berattelseram": {
-    "word": "8199fb5357aaef1f3e00eae5a3261f76ed80e721baee3b388e5d76a5cf3dbbe3",
-    "pdf": "bb9a6a6de9bae8af8a97e1d0662337845458c85c128b4d04e87acd96e718739f",
+    "word": "d70d011665158410564feed833445357d80a1ee6be0516b170b42b2d58c85e7a",
+    "pdf": "3b88a2827450b14326c39abab3582da5bd5b4327b3f082616f7cb3868e0e46fb",
     "sidor": 62,
-    "kB": 1128,
-    "datum": "2026-10-13"
+    "kB": 1131,
+    "datum": "2026-10-17"
   },
   "skrivkurs-berattelseram-metoden": {
     "word": "869f2233443b190ac73479480307da7b000a1128847328fcbea273bd4e93ef01",
@@ -4096,11 +4096,11 @@
     "datum": "2026-10-13"
   },
   "skrivkurs-sagoboken": {
-    "word": "8c3a5adf0e1ec98169e73a3248591f6ad6e04c9e30b6d52a0b9405449792617f",
-    "pdf": "f335cbdf92dcd855df025fa41f27297c04d55fcddafc627e1a8fe92fea5b5a2b",
+    "word": "4d395ff4d2db2a6e89ce38706e3bbb90aa9f76c14c567ba0c14fe65758657bc6",
+    "pdf": "bd21193f57155e50992a7855435f4071588694460aa421eccda2afcda6d1993b",
     "sidor": 105,
     "kB": 2005,
-    "datum": "2026-10-13"
+    "datum": "2026-10-17"
   },
   "skrivkurs-sagoboken-metoden": {
     "word": "d5c9936508e331611a5f4e858c881034d5234ca46952b59c25de77a66d31fb21",
@@ -4110,11 +4110,11 @@
     "datum": "2026-10-13"
   },
   "skrivkurs-vardeskapande": {
-    "word": "f925078fc34029b3f8bcdc7d336b79608c983414960802ddb1f381238da7a284",
-    "pdf": "89e58b7594973fa4cb013b54b3536d7cd1422687c470820e3469f3c89c4fb605",
+    "word": "185fbec2baee45e9a4af13c084ddcb50f78b842c1b26096a82bb817dc05b52cf",
+    "pdf": "9a14c7138966d30410b4d117e94dd74f457b64350c7312fd80d32c1749ba0d1b",
     "sidor": 72,
-    "kB": 1194,
-    "datum": "2026-10-13"
+    "kB": 1191,
+    "datum": "2026-10-17"
   },
   "skrivkurs-vardeskapande-metoden": {
     "word": "9570710a9698297ea0ba3a672cff9e2822669e9a461afc07e30d717f18380f1a",
@@ -4201,8 +4201,8 @@
     "datum": "2026-10-13"
   },
   "til-i-grupp": {
-    "word": "da798ef7fe798639138dc356245fd31ba5091ce9959342accf4a3c0f6b5e5f0c",
-    "pdf": "77c7f0a95bd307c960c9b732cfab88afa0e06ce67ecfd28430ac24b8685bc658",
+    "word": "3498d26a5685c5d4c088fca8e50e8fe3dac8d10da27f5e1078f1ddd7b44fb01d",
+    "pdf": "c4073431b44fcd2f117b228961044127f57b67b24dd9c7ae1a30d3e2d7eff6ef",
     "sidor": 19,
     "kB": 597,
     "datum": "2026-10-17"
@@ -4642,8 +4642,8 @@
     "datum": "2026-10-17"
   },
   "til-i-grupp-metoden": {
-    "word": "a7413e89a29de2e729202b8e65522f9b9b17f5934fb08a2f2632a865f64c01cd",
-    "pdf": "6054c4e0de7f0771b60c9ba01abaadbc8675e6f087984082470a94790bc6f2cf",
+    "word": "beaf9f519541051b7c64e9abf5c364eacc3a60215d2cfb969f882fc3fa38875c",
+    "pdf": "fd77df16f10d3a0a654481f68b59448ee10f96d6e42899eb5c15248011d8e05c",
     "sidor": 8,
     "kB": 429,
     "datum": "2026-10-17"
@@ -4667,6 +4667,13 @@
     "pdf": "05c5f49e555f9361dcf934d979419ecc1d86c7cdf8edf95a629c74628472a355",
     "sidor": 1,
     "kB": 89,
+    "datum": "2026-10-17"
+  },
+  "kompissamtal-lektionskort": {
+    "word": "2580ed7ddf8473890973471b33982ef7c9688dfd94e34b9004f5db1cb3c7fee7",
+    "pdf": "0f97b76cad6cac2735fee43c35f1127bd950132d83bd90b3ead7a2d7249694ea",
+    "sidor": 1,
+    "kB": 88,
     "datum": "2026-10-17"
   }
 }

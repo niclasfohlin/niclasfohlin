@@ -3031,9 +3031,11 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
       // Lärarens sida till ett problem är ett blad: den börjar på en ny sida, med problemet överst och lösningarna efter texten.
       const larare = former.larare(ram);
       // En litteraturlista (en översikt med bilder) börjar också på en ny sida, så att de tio böckerna står på en sida.
-      // Elevens blad med en bild som eleven ser på är ett blad att kopiera, ett A4 hos riggen: det börjar på en ny sida,
-      // och ramen efter likaså, så att inget annat står på elevens blad.
-      const elevsida = (r: Ram | undefined) => !!r && !ramArTom(r) && elevbilderVid(d, r, bilderPaBordet).length > 0;
+      // Elevens blad (d.elevblad) är ett blad att kopiera, ett A4 hos riggen: det börjar på en ny sida, och ramen efter
+      // likaså, så att inget annat står på elevens blad. Förut gällde det bara ett blad med en bild som eleven ser på; Word
+      // höll ihop Lappen hem efter samtalet i Kompissamtal och flyttade den, medan Google Dokument delade den och fick en
+      // sida mer (K-402). En tom ram är en mall i planeringsmallarna och står här bara som en rad.
+      const elevsida = (r: Ram | undefined) => !!r && !ramArTom(r) && !!d.elevblad[r.rubrik];
       const nySida = (!!(ram.serie || ram.ark) || forstEfterVeckorna || !!larare || !!ram.oversikt?.bilder || efterLista || elevsida(ram) || elevsida(ramarna[i - 1])) && !(ut.at(-1) instanceof Sektionsbyte);
       ut.push(ramensRubrik(ram, nySida));
       const serie = ramensSerie(ram, post.id);
