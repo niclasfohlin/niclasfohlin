@@ -874,14 +874,14 @@ const meny = [
             : (
               <div class="m-ramdelar">
                 {ram.lektioner && lage !== 'vecka' && (
-                  <ol class="m-lektionskort m-veckokort" aria-label={(ram.rubrik.split(':')[1] ?? 'delarna').trim().replace(/^\p{Ll}/u, (c) => c.toLocaleUpperCase('sv'))}>
+                  <ol class="m-lektionsbank m-veckokort" aria-label={(ram.rubrik.split(':')[1] ?? 'delarna').trim().replace(/^\p{Ll}/u, (c) => c.toLocaleUpperCase('sv'))}>
                     {ram.delar.map((del, di) => {
                       const [forsta, ...resten] = del.rubrik.split(' · ');
                       // Ett led utan tal (Start · pass 1, Boken · pass 14 och 15) får inget nummer (granskningen 2026-10-10).
                       const nr = forsta.match(/\d+/)?.[0] ?? (resten.length ? '' : String(di + 1));
                       return (
-                        <li class="m-lektionskort-kort">
-                          <p class="m-lektionskort-formaga">{nr && <span class="m-lektionskort-nr" aria-hidden="true">{nr}</span>}<span>{resten.length ? forsta : `Del ${di + 1}`}</span></p>
+                        <li class="m-lektionsbank-kort">
+                          <p class="m-lektionsbank-formaga">{nr && <span class="m-lektionsbank-nr" aria-hidden="true">{nr}</span>}<span>{resten.length ? forsta : `Del ${di + 1}`}</span></p>
                           <h4><a href={`#${delAnkare[ri][di]}`}>{resten.length ? resten.join(' · ') : del.rubrik}</a></h4>
                           {del.falt[0] && <p>{del.falt[0].text}</p>}
                         </li>

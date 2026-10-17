@@ -4445,7 +4445,8 @@ export function metodDokument(poster: MetodPostISerie[], o: { bas: string; medMa
   for (const post of poster) {
     const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
     const flod = metodBarn(post, o.bas, { material: o.medMallar !== false });
-    if (o.baraMetoden) flod.push(stycke(`Materialet, planeringsmallarna och lathunden hör inte till den här filen. De står på ${adress} och i filen Allt om metoden.`, { farg: FARG.svag, storlek: 18, fore: 240 }));
+    // En lektion utan lathund (Ljudlek i grupp) nämner ingen lathund (granskningen 2026-10-17).
+    if (o.baraMetoden) flod.push(stycke(`Materialet${post.data.lathund ? ', planeringsmallarna och lathunden' : ' och planeringsmallarna'} hör inte till den här filen. De står på ${adress} och i filen Allt om metoden.`, { farg: FARG.svag, storlek: 18, fore: 240 }));
     sektioner.push(...delaSektioner(flod, `${post.data.titel} · ${SAJT}`, adress));
     if (o.medMallar) {
       for (const sida of mallBarn(post, o.bas, { baraTommaRamar: true })) sektioner.push(...delaSektioner(sida.barn, `Mall · ${post.data.titel} · ${SAJT}`, adress, { liggande: sida.liggande, smal: sida.liggande }));

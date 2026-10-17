@@ -39,9 +39,10 @@ export function metodensLektionskort(d: Kortfalt, id: string): Lektionskort[] {
 export const lektionskortVid = (kort: Lektionskort[], plats: FilmPlats) => kort.filter((k) => k.vid && passar(k.vid, plats));
 
 /** Länkens attribut: pdf:en öppnas i en ny flik, där läraren skriver ut den eller sparar den, och trycket räknas som en
- *  utskrift i statistiken, som de centrala sakernas pdf:er (DRIFT.md under Besöksstatistik). */
+ *  utskrift i statistiken, som de centrala sakernas pdf:er (DRIFT.md under Besöksstatistik). Titeln säger vad kortet är,
+ *  eftersom knappen står bredvid lathunden (granskningen 2026-10-17). */
 export function lektionskortLank(k: Lektionskort, titel: string): Record<string, string> {
-  return { href: k.adress, target: '_blank', rel: 'noopener', 'data-goatcounter-click': `utskrift:${k.metod}/lektionskort${k.nr > 1 ? `-${k.nr}` : ''}`, 'data-goatcounter-title': `${titel}: ${k.knapp} som pdf` };
+  return { href: k.adress, target: '_blank', rel: 'noopener', title: `${k.namn ? `${k.namn}: e` : 'E'}tt A4 att ha i handen när du leder lektionen, som pdf`, 'data-goatcounter-click': `utskrift:${k.metod}/lektionskort${k.nr > 1 ? `-${k.nr}` : ''}`, 'data-goatcounter-title': `${titel}: ${k.knapp} som pdf` };
 }
 
 /** Fältets fel, som stoppar bygget (src/content.config.ts): fler än ett kort kräver lektionens namn på varje. */

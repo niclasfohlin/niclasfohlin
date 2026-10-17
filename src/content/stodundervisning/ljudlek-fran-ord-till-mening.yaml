@@ -53,16 +53,16 @@ tabeller:
       - "Så gör ni"
     rader:
       - - "Två ord"
-        - "Ola ler."
+        - "Ola ler."
         - "Gruppen börjar här. Meningen har ett mellanrum, stor bokstav först och punkt sist."
       - - "Tre ord"
-        - "Vi ser solen."
+        - "Vi ser solen."
         - "Meningen har två mellanrum. Ordet i mitten är ofta kort, till exempel ser, har eller tar, och eleven glömmer det lätt."
       - - "Fyra ord"
-        - "Vi vilar i solen."
+        - "Vi vilar i solen."
         - "Meningen har tre mellanrum, och eleven har mer att hålla kvar. Säg meningen igen före varje ord, om det behövs."
       - - "Egen mening"
-        - "Ola ser mos."
+        - "Ola ser mos."
         - "Eleven säger en egen mening på två till fyra ord eller byter två ord i en mening ur tabellen Meningarna."
     not: "Meningarna till varje rad står under Meningarna. I raden Egen mening säger alla en egen mening: du säger din och skriver den på tavlan, paret säger sin för dig när du går mellan paren, och sist skriver var och en sin egen. Har den egna meningen ett ord som inte stavas som det låter, till exempel jag eller och, skriver du det på tavlan, och paret bygger det efter tavlan. Säger eleven bara ett ord, som Mira, svarar du: ”Mira. Vad gör Mira?”"
   - rubrik: "Ljudstarten: samma fem minuter varje pass"
@@ -83,7 +83,7 @@ tabeller:
     plats: "efter-steg"
     text: "Bekräfta först det som eleven gjorde rätt, och försök sedan igen tillsammans."
     kolumner:
-      - "Eleven säger"
+      - "Det eleven gör"
       - "Det som händer"
       - "Så gör du"
     rader:
@@ -257,7 +257,7 @@ exempel:
     - "Meningen ur högen. Paren är Alva och Elin, Omar och Noah, Leo och Mira. Läraren säger den andra meningen: ”Ali tar mos.” Alla säger den igen, och varje par lägger tre klossar. Omar bygger Ali. Noah bygger tar men lägger det direkt efter Ali. Omar läser från början: ”Alitar.” Noah lägger ett finger emellan och flyttar tar."
     - "Byt ett ord. Mira byter tyst mos mot mat medan Leo blundar. Leo ljudar mmmaaat och läser: ”Ali tar mat.” Mira säger: ”Ja, det står så.”"
     - "Skriv meningen. Läraren säger en ny mening: ”Vi har is.” Mira skriver alla tre orden med stor bokstav, mellanrum och punkt. Omar skriver ”vi har is.” Läraren frågar: ”Var börjar meningen?” Omar tittar i hörnet av tavlan och byter v mot ett stort V."
-    - "Avslutet. Alva säger: ”Ali. Jag byggde det med stort A.”"
+    - "Avslutet. Alva säger: ”Ali. Jag byggde det med stort A.”"
     - "Efteråt noterar läraren: Mira får med allt, och Omar glömmer den stora bokstaven. Nästa pass tar gruppen samma rad, och dagens elever blir Alva och Leo."
 fastnar:
   rubrik: "När eleven fastnar"
@@ -307,7 +307,7 @@ snabbmall:
     - "Dagens ljud och orden ur Ordbanken"
     - "Paren och dagens elever"
   efter:
-    - "Det dagens elever skrev i steg 4, som olaler för Ola ler"
+    - "Det dagens elever skrev i steg 4, som olaler för Ola ler"
     - "Ord och ljud som fastnade"
     - "Nästa pass: samma rad, nästa rad eller nästa lektion?"
 grund:

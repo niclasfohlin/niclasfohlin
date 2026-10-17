@@ -16,5 +16,5 @@ const { filmer, titel } = Astro.props;
 const kort = filmer.filter((f): f is Lektionskort => 'lektionskort' in f);
 const ovriga = filmer.filter((f): f is MetodFilm | PaBordet => !('lektionskort' in f));
 ---
-{kort.length > 0 && <p class="m-central-knapp m-lektionskort">{kort.map((k) => <Lektionskortknapp k={k} titel={titel} />)}</p>}
+{kort.length > 0 && <p class="m-central-knapp m-lektionskortrad">{kort.map((k) => <Lektionskortknapp k={k} titel={titel} />)}</p>}
 {ovriga.map((f) => ('bild' in f ? <Pabordet b={f} /> : <><Film f={f} titel={titel} /><Filmbilder f={f} /></>))}

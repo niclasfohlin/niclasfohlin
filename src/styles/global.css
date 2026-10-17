@@ -526,7 +526,7 @@ button.lank:hover { color: var(--farg-accent); }
 .metod-nav a:hover { color: var(--farg-accent); }
 .metod-nav a[aria-current="true"] { color: var(--farg-accent); font-weight: 600; }
 /* Länken till lathunden står för sig, före avsnittslistan: den lämnar sidan. */
-.metod-nav .lathund-lank { display: inline-block; font-weight: 700; color: var(--farg-accent); text-decoration: underline; text-underline-offset: 0.15em; margin: 0 0 0.75rem; }
+.metod-nav .lathund-lank { display: inline-block; font-weight: 700; color: var(--farg-accent); text-decoration: underline; text-underline-offset: 0.15em; margin: 0 1.1rem 0.75rem 0; }
 /* De centrala sakerna (src/lib/centrala.ts), som Ta fram ett skrivkort och Lässtrategier, står först i menyn: som lathunden
    lämnar de sidan. Under ingressen och i texten är de blå knappar i en rad. */
 .metod-nav .central-lank { margin-right: 1.1rem; }
@@ -556,16 +556,16 @@ button.lank:hover { color: var(--farg-accent); }
    ljudkollen. Niclas valde formen 2026-09-29: som de andra metoderna, och lektionerna i en rad som fälls ut. */
 .serie-nr { display: inline-flex; align-items: center; justify-content: center; flex: none; min-width: 1.45rem; height: 1.45rem; padding: 0 0.3rem; border-radius: 5px; background: var(--farg-accent-ljus); color: var(--farg-accent); font-family: var(--typsnitt-ui); font-size: 0.78rem; font-weight: 700; line-height: 1; }
 /* Lektionsbanken: en ruta per lektion med förmågan överst. */
-.m-lektionskort { list-style: none; margin: 1.25rem 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 0.75rem; }
-.m-lektionskort-kort { display: flex; flex-direction: column; gap: 0.35rem; background: var(--farg-yta); border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0.9rem 1rem 1rem; box-shadow: var(--skugga); }
-.m-lektionskort-kort:hover { border-color: var(--farg-accent); }
-.metod-modell .m-lektionskort-kort p { margin: 0; }
-.metod-modell .m-lektionskort-kort h3 { margin: 0; font-size: 1.15rem; }
-.m-lektionskort-kort h3 a { color: var(--farg-accent); }
-.m-lektionskort-formaga { display: flex; align-items: center; gap: 0.5rem; font-family: var(--typsnitt-ui); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); }
-.m-lektionskort-nr { display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 5px; background: var(--farg-accent); color: #fff; font-size: 0.85rem; letter-spacing: 0; }
-.metod-modell .m-lektionskort-skal { color: var(--farg-text-svag); font-size: 0.9rem; margin-top: auto; padding-top: 0.25rem; }
-.m-lektionskort-kort.tom { background: var(--farg-ton-svag); box-shadow: none; }
+.m-lektionsbank { list-style: none; margin: 1.25rem 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 0.75rem; }
+.m-lektionsbank-kort { display: flex; flex-direction: column; gap: 0.35rem; background: var(--farg-yta); border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0.9rem 1rem 1rem; box-shadow: var(--skugga); }
+.m-lektionsbank-kort:hover { border-color: var(--farg-accent); }
+.metod-modell .m-lektionsbank-kort p { margin: 0; }
+.metod-modell .m-lektionsbank-kort h3 { margin: 0; font-size: 1.15rem; }
+.m-lektionsbank-kort h3 a { color: var(--farg-accent); }
+.m-lektionsbank-formaga { display: flex; align-items: center; gap: 0.5rem; font-family: var(--typsnitt-ui); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); }
+.m-lektionsbank-nr { display: inline-flex; align-items: center; justify-content: center; width: 1.6rem; height: 1.6rem; border-radius: 5px; background: var(--farg-accent); color: #fff; font-size: 0.85rem; letter-spacing: 0; }
+.metod-modell .m-lektionsbank-skal { color: var(--farg-text-svag); font-size: 0.9rem; margin-top: auto; padding-top: 0.25rem; }
+.m-lektionsbank-kort.tom { background: var(--farg-ton-svag); box-shadow: none; }
 /* Seriens kort i metodbanken: lektionerna i bankens ordning bakom en rad som fälls ut. */
 .kort-serie { margin: 0 0 0.9rem; padding: 0.55rem 0.85rem; border: 1px solid var(--farg-kant); border-radius: 8px; font-family: var(--typsnitt-ui); }
 .kort-serie summary { cursor: pointer; font-size: 0.9rem; font-weight: 600; color: var(--farg-accent); }
@@ -1007,7 +1007,7 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
    kontrasten mot färgen räcker för stor text (vitt på grönt och rött, mörkt på gult). */
 .m-niva { display: inline-block; padding: 0.05em 0.45em; border-radius: 4px; background: var(--niva); color: var(--niva-text); font-size: 1.2rem; font-weight: 700; letter-spacing: 0; text-transform: none; vertical-align: middle; }
 /* Bilderna På bordet (Pabordet.astro): bilden i textens bredd med rubriken över och bildtexten under. Efter en vecka står
-   bilden utan egen rubrik, och bildtexten börjar med På bordet. Veckornas kort är lektionsbankens (m-lektionskort). */
+   bilden utan egen rubrik, och bildtexten börjar med På bordet. Veckornas kort är lektionsbankens (m-lektionsbank). */
 .m-pabordet { margin: 1rem 0 1.5rem; }
 .m-pabordet img { display: block; width: 100%; height: auto; border: 1px solid var(--farg-kant); border-radius: 8px; }
 .m-pabordet-rubrik { font-family: var(--typsnitt-ui); font-weight: 700; margin: 0 0 0.4rem; }
@@ -1624,7 +1624,7 @@ html.js .bara-js { display: inline-block; }
   .m-tabell.fri:not(.stapla) td:first-child { min-width: 6.5rem; }
   .m-lista th.skriv, .m-lista td.skriv { width: 3.2rem; }
   /* Skrivkolumnens rubrik (Vecka 8 i Skrivkollen) ryms i sin kolumn och bryts mellan orden i stället för att skäras av. */
-  .m-lista th.skriv { padding-left: 0.15rem; padding-right: 0.15rem; letter-spacing: 0; }
+  .m-lista th.skriv { padding-left: 0.15rem; padding-right: 0.15rem; letter-spacing: 0; font-size: 0.62rem; }
   .m-lista.larare td { font-size: 1.05rem; }
   .m-mall-svep { display: block; }
   .m-kortlista.korta .m-kort { font-size: 1.6rem; }
@@ -2084,7 +2084,7 @@ html.js .bara-js { display: inline-block; }
   /* Ett protokoll som inte ryms på ett A4 delas: noten på en sida, namnet och tabellerna på nästa (src/lib/ramform.ts). */
   .m-ram.delad .m-lista:has(> .m-ramhuvud) { break-before: page; }
   /* Lektionsbankens kort delas inte mellan sidor, och kartans ram är lika bred som kartan. */
-  .m-lektionskort-kort { break-inside: avoid; }
+  .m-lektionsbank-kort { break-inside: avoid; }
   .m-karta { width: max-content; }
   .bara-js, button.lank, .lh-lank { display: none !important; }
   a { text-decoration: none; color: inherit; }
