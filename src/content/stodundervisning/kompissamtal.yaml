@@ -26,7 +26,7 @@ material:
   - bladet Vår överenskommelse
   - penna och papper
   - lappar hem
-uppdaterad: 2026-10-17
+uppdaterad: 2026-10-03
 publicerad: 2026-10-03
 relaterade: [seriesamtal]
 utkast: false
@@ -239,7 +239,7 @@ passrutin:
   efterPasset: Du fyller i snabbmallen och lapparna hem. Sedan berättar du för klassläraren och för de vuxna på rasten och på fritids vad gruppen har kommit överens om.
 tidsschema:
   rubrik: Ett samtal på 20 minuter
-  text: Förbered dig genom att läsa förra överenskommelsen och rundans mening i tabellen Tre samtal. Schemat har tiderna från och med samtal 2, och tiderna för samtal 1 står direkt under det. Samtalet står också på Lektionskortet, ett A4 att ha framför dig.
+  text: Förbered dig genom att läsa förra överenskommelsen och rundans mening i tabellen Tre samtal. Schemat har tiderna från och med samtal 2, och tiderna för samtal 1 står direkt under det.
   rader:
     - tid: Före passet
       fas: Förberedelse
@@ -419,7 +419,7 @@ grund:
 ramar:
   rubrik: Material att skriva ut
   text:
-    - Lektionskortet är för dig under samtalet. De andra korten är stöd som du tar fram när du ser att någon behöver dem. Samtalet, reglerna och det du modellerar kommer först. Skriv ut korten på A4, en uppsättning till varje grupp, och laminera dem gärna. Klipp bort rutan Till läraren innan du lägger ett kort i en bänk eller sätter upp det på väggen. Skriv också ut kortet Så kan du säga till varje elevs bänk, till väggen i klassrummet och till de vuxna runt gruppen, och ett extra kort Våra samtalsregler till väggen. Till varje samtal skriver du ut ett nytt blad Vår överenskommelse, och till varje elev de två lapparna hem. Kortet Samtalsteknikerna är bara för dig.
+    - Korten är stöd som du tar fram när du ser att någon behöver dem. Samtalet, reglerna och det du modellerar kommer först. Skriv ut korten på A4, en uppsättning till varje grupp, och laminera dem gärna. Klipp bort rutan Till läraren innan du lägger ett kort i en bänk eller sätter upp det på väggen. Skriv också ut kortet Så kan du säga till varje elevs bänk, till väggen i klassrummet och till de vuxna runt gruppen, och ett extra kort Våra samtalsregler till väggen. Till varje samtal skriver du ut ett nytt blad Vår överenskommelse, och till varje elev de två lapparna hem. Kortet Samtalsteknikerna är bara för dig.
   ramar:
     - rubrik: Våra samtalsregler
       text:
@@ -727,8 +727,6 @@ lathund:
       - Papper för förslagen
       - Förra bladet, från och med samtal 2
     varjePass: Samma dag fyller du i snabbmallen och lapparna hem och berättar för de vuxna.
-lektionskort:
-  - text: "Lektionskortet är samtalet på ett A4: målet, de tre samtalen, delarna med det du gör och säger, och det du gör om något händer. Skriv ut det och ha det framför dig under samtalet."
 film:
   sekunder: 29.67
   beskrivning: "Läraren säger: ”Jag känner mig glad när vi leker.” Elsa säger: ”Jag känner mig glad när vi vinner.” Sedan tar den som vill tala talpinnen. Omar säger: ”Elsa skriker alltid fusk!” Läraren speglar och visar kortet. Läraren säger: ”Du blev arg. Stämmer det?” Omar säger till Elsa: ”När du ropar fusk, känner jag mig arg.” Noor säger: ”Jag undrar hur det är för dig, Liam.” Liam säger: ”Jag känner mig ensam när ingen passar.” Gruppen väljer ett förslag. Läraren frågar: ”Kan alla göra det här?” Tummarna går upp, och Elsa skriver på bladet."
