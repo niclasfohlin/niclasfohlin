@@ -34,7 +34,7 @@ import TECKENBREDD from '../data/teckenbredd.json';
 import ANTON_BREDD from '../data/faktatext/anton-bredder.json';
 import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, FORMLUFT, FORMRAD_PT, LIGGANDE_BOK, LIGGANDE_BREDD, PROBLEMLUFT, PROBLEMTITEL_PT, RAMHOJD, TITEL_PT, boksidansMatt, breddPt, losningarMatt, problemMatt, strukturMatt, textparMatt } from './boksida';
 import { bankAv, bankfilensRamar, bankRad, type Bankfil } from './bank';
-import { hemsidansNamn, MATERIAL } from './material';
+import { harMaterial, hemsidansNamn, MATERIAL } from './material';
 import { losningarnasNiva, losningarnasNot, problemformer } from './problemform';
 import { bildMatt, inline, kolumnandelar, omslagAdress, omslagUpphov, OMSLAG_KORT, radensNamn, ramensNiva, talcell } from './litteraturlista';
 
@@ -4510,8 +4510,8 @@ function dokument(titel: string, sektioner: ISectionOptions[], typsnitt: { fonts
 // En eller flera metoder i en fil, med planeringsmallarna och lathunden efter varje metod om medMallar är satt.
 // baraMetoden: filen med bara metoden för en metod (<id>-metoden.docx), som knappen Skriv ut: Metoden öppnar som pdf. Sist
 // står en rad om var materialet finns, eftersom beskrivningen hänvisar till det (granskningen 2026-10-13), och likaså i
-// filen med valda metoder utan mallar, där TIL i grupp hänvisar till kontraktet och lässchemat i Materialet (granskningen
-// 2026-10-17).
+// filen med valda metoder utan mallar för en metod som har material, där TIL i grupp hänvisar till kontraktet och
+// lässchemat i Materialet (granskningen 2026-10-17). En metod utan material (Texttyper i grupp) får ingen rad.
 export function metodDokument(poster: MetodPostISerie[], o: { bas: string; medMallar?: boolean; baraMetoden?: boolean; resurser?: MetodResurser }): Document {
   instans = 0;
   FRISTAENDE_BLAD = false;
@@ -4533,7 +4533,7 @@ export function metodDokument(poster: MetodPostISerie[], o: { bas: string; medMa
     const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
     const flod = metodBarn(post, o.bas, { material: o.medMallar !== false });
     // En lektion utan lathund (Ljudlek i grupp) nämner ingen lathund (granskningen 2026-10-17).
-    if (o.baraMetoden || o.medMallar === false) flod.push(stycke(`Materialet${post.data.lathund ? ', planeringsmallarna och lathunden' : ' och planeringsmallarna'} hör inte till den här filen. De står på ${adress} och i filen Allt om metoden.`, { farg: FARG.svag, storlek: 18, fore: 240 }));
+    if (o.baraMetoden || (o.medMallar === false && harMaterial(post.data))) flod.push(stycke(`Materialet${post.data.lathund ? ', planeringsmallarna och lathunden' : ' och planeringsmallarna'} hör inte till den här filen. De står på ${adress} och i filen Allt om metoden.`, { farg: FARG.svag, storlek: 18, fore: 240 }));
     sektioner.push(...delaSektioner(flod, `${post.data.titel} · ${SAJT}`, adress));
     if (o.medMallar) {
       for (const sida of mallBarn(post, o.bas, { baraTommaRamar: true })) sektioner.push(...delaSektioner(sida.barn, `Mall · ${post.data.titel} · ${SAJT}`, adress, { liggande: sida.liggande, smal: sida.liggande }));

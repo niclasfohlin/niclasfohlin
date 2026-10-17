@@ -225,7 +225,7 @@ if (bilder) {
       // Banken (src/lib/bank.ts, METODER.md under Banken): enheterna med följesidorna står i utskriften av metodens sida och i
       // Word-filen med allt, som andra metoders blad, och prövas nedan där. Den första enhetens sida tas som skärmbild,
       // enhet-desktop.png och enhet-mobil.png, och nivåerna i telefonen som bank-mobil.png.
-      const bankfil = (() => { try { return JSON.parse(readFileSync(join(rot, 'dist/stodundervisning/bankfiler.json'), 'utf8')).find((f) => f.metod === id && !['niva', 'allt', 'metoden', 'lathundtext'].includes(f.slag)); } catch { return undefined; } })();
+      const bankfil = (() => { try { return JSON.parse(readFileSync(join(rot, 'dist/stodundervisning/bankfiler.json'), 'utf8')).find((f) => f.metod === id && !['niva', 'allt', 'metoden', 'lathundtext', 'hemsida', 'lektionskort', 'lektionskorten'].includes(f.slag)); } catch { return undefined; } })();
       if (bankfil) {
         const enheter = readdirSync(join(rot, 'dist/stodundervisning', id), { withFileTypes: true })
           .filter((x) => x.isDirectory() && !['lathund', 'serier'].includes(x.name) && existsSync(join(rot, 'dist/stodundervisning', id, x.name, 'index.html')))

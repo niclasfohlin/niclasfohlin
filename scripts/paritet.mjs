@@ -300,8 +300,12 @@ for (const fil of filer) {
     const sak = d.hem?.[vad];
     if (!sak) continue;
     const stam = `${id}-${vad}`;
-    const knappar = [...html.matchAll(/<a\b[^>]*>/g)].filter((m) => new RegExp(`\\bhref="/stodundervisning/${stam}\\.pdf(?:\\?[^"]*)?"`).test(m[0]) && /\bdata-skriv-ut-pdf\b/.test(m[0]));
-    if (knappar.length < 2) { console.error(`paritet: ${id} har ${knappar.length} utskriftsknappar till ${stam}.pdf; sidan ska ha en i Materialet och en i Hem och skola (hem.${vad}).`); fel++; }
+    // Avsnittet fram till nästa avsnitt: kontraktet och schemat står i Materialet före ramarnas egna avsnitt (Metod.astro).
+    const avsnittet = (sid) => { const i = html.indexOf(`<section id="${sid}"`); if (i < 0) return ''; const j = html.indexOf('<section', i + 1); return html.slice(i, j < 0 ? undefined : j); };
+    for (const [plats, del] of [['Materialet', avsnittet('ramar')], ['Hem och skola', avsnittet('hem')]]) {
+      const knappar = [...del.matchAll(/<a\b[^>]*>/g)].filter((m) => new RegExp(`\\bhref="/stodundervisning/${stam}\\.pdf(?:\\?[^"]*)?"`).test(m[0]) && /\bdata-skriv-ut-pdf\b/.test(m[0]));
+      if (!knappar.length) { console.error(`paritet: ${id} saknar utskriftsknappen till ${stam}.pdf i ${plats} (hem.${vad}).`); fel++; }
+    }
     if (!new RegExp(`href="/stodundervisning/${stam}\\.docx(?:\\?[^"]*)?"`).test(html)) { console.error(`paritet: ${id} saknar raden med ${stam}.docx i nedladdningsrutan (hem.${vad}).`); fel++; }
     const sakensTexter = (vad === 'kontrakt' ? [sak.rubrik ?? 'Kontrakt', sak.inledning, ...sak.ansvar.flatMap((a) => [a.rubrik, a.text]), sak.efter] : [sak.rubrik, sak.text, ...sak.kolumner]).filter(Boolean);
     for (const namn of [`${stam}.docx`, `${id}-mallar.docx`]) {

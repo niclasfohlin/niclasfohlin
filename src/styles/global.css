@@ -694,7 +694,7 @@ button.lank:hover { color: var(--farg-accent); }
 .m-snabbmall .avsnitt th:first-child { border-right: 0; }
 .m-snabbmall td { height: 2.4rem; background: var(--farg-yta); }
 .m-grund { border: 1px solid var(--farg-kant); border-left: 4px solid var(--farg-accent); border-radius: 8px; padding: 0.85rem 1.1rem; margin: 1rem 0 0.5rem; background: var(--farg-yta); }
-/* Kontraktet mellan skola, hem och elev: en inramad ruta med kicker, som mallen i planeringsmallarna. */
+/* Kontraktets text i Materialet (Metod.astro), i en ruta. Kontraktets A4 ritas av kontraktSida i src/lib/metoddocx.ts. */
 .m-kontrakt { border: 1.5px solid var(--farg-text); border-radius: 8px; padding: 0.9rem 1.1rem; margin: 1rem 0 1.25rem; background: var(--farg-yta); }
 .m-kontrakt p { margin: 0 0 0.6em; }
 .m-kontrakt p:last-child { margin-bottom: 0; }
