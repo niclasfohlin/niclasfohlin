@@ -133,6 +133,12 @@ const textI = (p) => { if (p.text === undefined) p.text = platt(execFileSync('pd
       for (const [krav, prov] of [['Lektionskort', text.includes('Lektionskort')], ['© Niclas Fohlin', /©\s*Niclas Fohlin/.test(text)], ['niclasfohlin.se', text.includes('niclasfohlin.se')]]) if (!prov) fel.push(`lektionskortet ${f}: pdf:en saknar "${krav}"`);
       const sidor = Number(execFileSync('pdfinfo', [fil], { encoding: 'utf8' }).match(/Pages:\s+(\d+)/)?.[1] ?? 0);
       if (sidor > 1 && !FORE_REGELN.has(f)) fel.push(`lektionskortet ${f} har ${sidor} sidor; ett lektionskort är högst ett A4 (METODER.md under Lektionskortet)`);
+      // Varje sida bär upphovet, eftersom ett kort skrivs ut och lamineras en sida i taget (granskningen 2026-10-17, P1:
+      // Säg, skriv och läs kort hade upphovet bara på baksidan).
+      for (let s = 1; s <= sidor; s++) {
+        const sida = execFileSync('pdftotext', ['-enc', 'UTF-8', '-f', String(s), '-l', String(s), fil, '-'], { encoding: 'utf8' }).normalize('NFC').replace(/\s+/g, ' ');
+        if (!/©\s*Niclas Fohlin/.test(sida) || !sida.includes('niclasfohlin.se')) fel.push(`lektionskortet ${f}: sidan ${s} saknar © Niclas Fohlin och niclasfohlin.se`);
+      }
     }
     for (const f of readdirSync(join(rot, 'public', 'stodundervisning')).filter((f) => /-lektionskort(-[23])?\.pdf$/.test(f))) if (!lankade.has(f)) fel.push(`lektionskortet ${f} ligger i public/stodundervisning/ men ingen metod visar det (fältet lektionskort)`);
   }

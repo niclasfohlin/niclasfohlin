@@ -180,11 +180,11 @@ Niclas 2026-10-17, när Säg, skriv och läs kom med sitt A4 att laminera: "Dett
 | Del | Så gör sajten |
 |---|---|
 | Fältet | `lektionskort` i metodens fil, högst tre poster (schemat stannar annars). `namn` är lektionens namn och krävs när korten är fler än ett. `efter` är platsen vid lektionen, med extrafilmernas ord (Filmerna nedan), och utan den står knappen efter passets tabell |
-| Filerna | `public/stodundervisning/<id>-lektionskort.pdf`, och `-lektionskort-2.pdf` och `-3.pdf` när korten är fler, ur riggens leverans. Pdf:en bär ordet Lektionskort, © Niclas Fohlin och niclasfohlin.se och har en titel |
+| Filerna | `public/stodundervisning/<id>-lektionskort.pdf`, och `-lektionskort-2.pdf` och `-3.pdf` när korten är fler, ur riggens leverans. Pdf:en bär ordet Lektionskort och en titel, och varje sida bär © Niclas Fohlin och niclasfohlin.se, eftersom kortet skrivs ut och lamineras en sida i taget |
 | Knappen | Samma blå knapp (`Lektionskortknapp.astro`) bredvid Öppna lathunden i nedladdningsrutan och i menyn och på metodens kort i metodbanken, och vid lektionen i texten, först på platsen och före en film där (`Filmruta.astro`). Den heter Lektionskort, och med fler kort "Lektionskort: <namn>". En lektion utan lathund har knappen först i nedladdningsrutan. Ett tryck öppnar pdf:en i en ny flik och räknas som en utskrift, `utskrift:<id>/lektionskort` (`-2`, `-3`) |
 | Word | En rad med knappens namn och adressen som länk på platsen i texten (`kortVid` i `metoddocx.ts`), som de centrala sakernas rad |
 | Mejlet | Mejlet om en ny metod har en rad per kort efter de centrala sakerna: "Lektionskort: ett A4 att ha i handen när du leder lektionen" (`nytt.json.ts`) |
-| Kontrollerna | Schemat stannar på fler än tre kort, på flera kort utan namn och på en plats som inte finns. `scripts/paritet.mjs` stannar när sidan har färre än tre knappar till ett kort eller Word-filen saknar raden. `scripts/utskriftsformat.mjs` stannar när pdf:en saknas i bygget, saknar ordet eller upphovet, har fler än en sida, eller ligger i `public/stodundervisning/` utan att någon metod visar den |
+| Kontrollerna | Schemat stannar på fler än tre kort, på flera kort utan namn och på en plats som inte finns. `scripts/paritet.mjs` stannar när sidan har färre än tre knappar till ett kort eller Word-filen saknar raden. `scripts/utskriftsformat.mjs` stannar när pdf:en saknas i bygget, saknar ordet, saknar upphovet på någon sida, har fler än en sida, eller ligger i `public/stodundervisning/` utan att någon metod visar den |
 
 Ett lektionskort är inte en central sak: det hör till en lektion i en metod, och står därför vid lathunden och lektionen, inte under ingressen.
 
