@@ -2,13 +2,13 @@
 # Underlaget är intaget med registret (intake/ordverkstad-i-grupp/REGISTER.md) och sökningen (sokning.md), och valen
 # står i analys.md. Orden, delningarna och fogarna prövas mot facit i ord.json och SALDO (node build/ord.mjs).
 titel: Ordverkstad i grupp
-undertitel: "Åtta veckors kurs i liten grupp för åk 3–6, där eleverna bygger, läser, stavar och skriver långa ord"
-ingress: "En kurs i åtta veckor för fyra till sex elever i åk 3–6 som läser korta ord men fastnar på långa. Varje vecka läser gruppen en förlaga, pusslar med ordens delar på kort och skriver en egen text till gruppens tidning, byggd som förlagan. Eleverna skriver i par de första fyra veckorna och sedan var för sig."
+undertitel: "Åtta veckors kurs i liten grupp för åk 2–5, där eleverna bygger, läser, stavar och skriver långa ord"
+ingress: "En kurs i åtta veckor för fyra till sex elever i åk 2–5 som läser korta ord men fastnar på långa. Varje vecka läser gruppen en förlaga, pusslar med ordens delar på kort och skriver en egen text till gruppens tidning, byggd som förlagan. Eleverna skriver i par de första fyra veckorna och sedan var för sig."
 omrade: Skrivning
 arskurs:
   - F-3
   - 4-6
-arskursText: åk 3–6
+arskursText: åk 2–5
 taggar:
   - avkodning
   - stavning
@@ -28,7 +28,7 @@ material:
   - skrivplanen
   - tidningens sida
 
-uppdaterad: 2026-10-06
+uppdaterad: 2026-10-17
 publicerad: 2026-10-06
 relaterade:
   - laslistor-i-grupp
@@ -37,7 +37,7 @@ relaterade:
 utkast: false
 
 inledning:
-  - "Ordverkstad i grupp är för elever i åk 3–6 som läser korta ord säkert men fastnar på långa. De gissar efter början av ordet, tappar ändelsen och stavar efter ljudet, och i egna texter väljer de bort de långa orden. I kursen lär de sig hur långa ord är byggda, först av ord som sätts ihop och sedan med ändelser och förstavelser. De delar långa ord för att läsa, stava och förklara dem, och de skriver orden i egna texter till gruppens tidning."
+  - "Ordverkstad i grupp är för elever i åk 2–5 som läser korta ord säkert men fastnar på långa. De gissar efter början av ordet, tappar ändelsen och stavar efter ljudet, och i egna texter väljer de bort de långa orden. I kursen lär de sig hur långa ord är byggda, först av ord som sätts ihop och sedan med ändelser och förstavelser. De delar långa ord för att läsa, stava och förklara dem, och de skriver orden i egna texter till gruppens tidning."
   - "Varje vecka har en förlaga, en kort text full av långa ord, som en artikel om uppfinningar, en platsannons eller en instruktion till en tävling. På bordet ligger förlagan, kortet Ett långt ord och en miniwhiteboard med en whiteboardpenna för varje elev, och i ordpasset ett kuvert med ordkort för varje par. På ordkorten står delarna i veckans ord, som regn och hatt i förlagans regnhatt. Paren pusslar ihop delarna till ord, läser orden och bygger nya, som hattregn, och säger vad orden betyder. På väggen sitter planschen Delarna, där du skriver upp veckans delar när ni börjar en ny vecka."
   - "Eleven tar varje långt ord med samma fyra steg, Dela ordet, En del i taget, Hela ordet och Vad betyder det? Stegen leder eleven genom hela ordet, en del i taget ända till ändelsen, så att hen slutar gissa efter början. Eleven stavar på samma sätt, en del i taget, och skriver varje del som när den står ensam. När eleven förklarar ordet börjar hen bakifrån, eftersom sista ordet i ett sammansatt ord säger vad det är, och ändelsen och förstavelsen ändrar det. En brandbil är en bil, en bilbrand är en brand och en ovän är ingen vän."
   - "Veckan har tre pass om 60 minuter, ett ordpass och två skrivpass. Varje pass börjar med Ordstarten, fem minuter då alla skriver två långa ord på sin miniwhiteboard och tar dem med stegen. I ordpasset läser gruppen förlagan, du visar ett ord med stegen, och paren bygger egna ord med korten. I en diktamen skriver eleverna långa ord en del i taget, ihop."
@@ -50,7 +50,7 @@ upplagg:
 
 gruppen:
   rubrik: Så sätter du ihop gruppen
-  text: "Kursen är för elever i åk 3–6 som läser korta ord säkert men fastnar på långa. De gissar efter början, tappar ändelsen, stavar efter ljudet eller skriver sammansatta ord isär, men de skriver meningar som en vuxen kan läsa. Den som ännu ljudar korta ord bokstav för bokstav eller läser mycket långsamt börjar i TIL i grupp, och i åk 3 kan hen också börja i Läslistor i grupp. Den som läser långa ord rätt men inte förstår texten behöver Textsamtal i grupp. Gruppen har fyra till sex elever med samma behov, i fasta par som kan skriva tillsammans och en trio när eleverna är fem."
+  text: "Kursen är för elever i åk 2–5 som läser korta ord säkert men fastnar på långa. De gissar efter början, tappar ändelsen, stavar efter ljudet eller skriver sammansatta ord isär, men de skriver meningar som en vuxen kan läsa. Den som ännu ljudar korta ord bokstav för bokstav eller läser mycket långsamt börjar i TIL i grupp, och i åk 2–3 kan hen också börja i Läslistor i grupp. Den som läser långa ord rätt men inte förstår texten behöver Textsamtal i grupp. Gruppen har fyra till sex elever med samma behov, i fasta par som kan skriva tillsammans och en trio när eleverna är fem."
 
 principer:
   rubrik: Tre saker att hålla fast vid
@@ -425,7 +425,7 @@ roll:
 urval:
   rubrik: Var hittar du förlagorna och orden?
   text:
-    - "Under Kursens material står veckorna en i taget: först veckans sida, sedan förlagan och ordkorten. Efter vecka 8 står korten och bladen som gäller hela kursen. Tabellen Materialet du behöver säger hur många du skriver ut. Vill du ha fler ord, särskilt i åk 5–6, ta dem ur det gruppen läser i klassen och i ämnena, som -⁠ning i smältning och frysning."
+    - "Under Kursens material står veckorna en i taget: först veckans sida, sedan förlagan och ordkorten. Efter vecka 8 står korten och bladen som gäller hela kursen. Tabellen Materialet du behöver säger hur många du skriver ut. Vill du ha fler ord, särskilt i åk 4–5, ta dem ur det gruppen läser i klassen och i ämnena, som -⁠ning i smältning och frysning."
     - Förlagorna har också ord som eleverna inte har hört, som nyorden och de påhittade yrkena, men delarna i dem känner eleven. Säg ett ovanligt ord högt och i en mening innan gruppen läser det i förlagan, gärna med en bild, särskilt för elever med svenska som andraspråk. Låt paren bygga riktiga ord innan de hittar på egna.
   kravText: "Välj egna ord så att de uppfyller tre krav:"
   krav:
@@ -1258,7 +1258,7 @@ lathund:
   innehall: En förlaga i veckan
   metoden:
     text:
-      - "Kursen är för elever i åk 3–6 som fastnar på långa ord. Gör kartläggningen veckan före kursen. Varje långt ord tas med de fyra stegen här bredvid."
+      - "Kursen är för elever i åk 2–5 som fastnar på långa ord. Gör kartläggningen veckan före kursen. Varje långt ord tas med de fyra stegen här bredvid."
       - "Veckan har ett ordpass och två skrivpass, som står bredvid varandra på sidan Veckans tre pass. I pass 2 gör paret en skrivplan, berättar texten för ett annat par och skriver med Kloka pennan. I pass 3 skriver paret klart och läser för gruppen. Från vecka 5 skriver var och en sin text. Arbetsformen är ordpassets. Ha veckans sida framme."
     ruta:
       rubrik: Tre saker att hålla fast vid
