@@ -4201,11 +4201,11 @@
     "datum": "2026-10-13"
   },
   "til-i-grupp": {
-    "word": "9db7bc429f12bec8e721a7b83126112914a154a2ed01455cb32f5d546bcc4202",
-    "pdf": "979d48d0281ea52a3eeee70267df5dbd099d48c27e4830d07db5781ca06a22d4",
-    "sidor": 17,
-    "kB": 537,
-    "datum": "2026-10-14"
+    "word": "da798ef7fe798639138dc356245fd31ba5091ce9959342accf4a3c0f6b5e5f0c",
+    "pdf": "77c7f0a95bd307c960c9b732cfab88afa0e06ce67ecfd28430ac24b8685bc658",
+    "sidor": 19,
+    "kB": 597,
+    "datum": "2026-10-17"
   },
   "upprepad-lasning": {
     "word": "6b96331dbf6315f28ac20fe30c2a93f0282d275a4f2e070525d39ac040b2ab16",
@@ -4646,6 +4646,34 @@
     "pdf": "500bf6db819f881826ab66c16b01dd57ad312bc7f591f4958c8400f641d60e1d",
     "sidor": 1,
     "kB": 86,
+    "datum": "2026-10-17"
+  },
+  "til-i-grupp-metoden": {
+    "word": "a7413e89a29de2e729202b8e65522f9b9b17f5934fb08a2f2632a865f64c01cd",
+    "pdf": "6054c4e0de7f0771b60c9ba01abaadbc8675e6f087984082470a94790bc6f2cf",
+    "sidor": 8,
+    "kB": 429,
+    "datum": "2026-10-17"
+  },
+  "til-i-grupp-kontrakt": {
+    "word": "d9fb8fec64ead6bbe80b8fb43c09fc34a3a140d753ba823a78ee933290a1a0e0",
+    "pdf": "64c40b60eb93d22ecf324983a95b50eef20cfb906cc3f20a5f1ee1e7f05eaa11",
+    "sidor": 1,
+    "kB": 229,
+    "datum": "2026-10-17"
+  },
+  "til-i-grupp-schema": {
+    "word": "8b375f6017093d147c54d396b9a030889659b5c4336f7ce761e0a8106e7bf79a",
+    "pdf": "5e29a7c192c4bf607d484c41ce78fe047b479c619f618d49935007e71983ee30",
+    "sidor": 1,
+    "kB": 214,
+    "datum": "2026-10-17"
+  },
+  "til-i-grupp-lektionskort": {
+    "word": "d339a32edcedb8c521eea31040d21b4fcf66331fc2bfdab1585158c45e494295",
+    "pdf": "05c5f49e555f9361dcf934d979419ecc1d86c7cdf8edf95a629c74628472a355",
+    "sidor": 1,
+    "kB": 89,
     "datum": "2026-10-17"
   }
 }

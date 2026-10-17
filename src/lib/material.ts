@@ -12,5 +12,15 @@ export type Materialavsnitt = 'ramar' | 'diplom' | 'mallar';
 export const harMaterial = (d: { ramar?: unknown; diplom?: unknown; mallar?: unknown[] }): boolean =>
   (MATERIAL.has('ramar') && !!d.ramar) || (MATERIAL.has('diplom') && !!d.diplom) || (MATERIAL.has('mallar') && (d.mallar?.length ?? 0) > 0);
 
+/** Kontraktets och schemats namn i bestämd form (hem.kontrakt, hem.schema; TIL i grupp), till knapparna, raderna i
+ *  nedladdningsrutan och pdf:ens titel: kontraktet, och schemat böjt ur rubrikens första ord när det slutar på schema,
+ *  som lässchemat ur Lässchema TIL. Ett annat namn går inte att böja säkert (läslogg blir läsloggen, inte läslogget;
+ *  granskningen 2026-10-17), så då står rubriken som den är. */
+export function hemsidansNamn(vad: 'kontrakt' | 'schema', rubrik = ''): string {
+  if (vad === 'kontrakt') return 'kontraktet';
+  const ord = (rubrik.trim().split(/\s+/)[0] || 'schema').toLocaleLowerCase('sv');
+  return /schema$/.test(ord) ? `${ord}t` : rubrik.trim();
+}
+
 /** Attributet data-material på sidan: tomt för ett avsnitt som är material, annars inget. */
 export const materialAttribut = (avsnitt: Materialavsnitt): '' | undefined => (MATERIAL.has(avsnitt) ? '' : undefined);

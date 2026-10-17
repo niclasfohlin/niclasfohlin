@@ -1,0 +1,13 @@
+---
+// Utskriftsknappen till kontraktet eller schemat (hem.kontrakt, hem.schema; TIL i grupp), ett A4 som pdf av sin egen
+// Word-fil (hemsidaDokument i src/lib/metoddocx.ts). Den står i Materialet vid sakens text och i Hem och skola, som
+// lektionskortets knapp står både i Materialet och vid lektionen (granskningen 2026-10-17: Hem och skola sade bara att
+// de står i Materialet). En knapp som ger utskriftsrutan i Chrome och Edge på datorn och annars öppnar pdf:en
+// (SkrivUtPdf.astro).
+import { hemsidansNamn } from '../lib/material';
+interface Props { id: string; titel: string; vad: 'kontrakt' | 'schema'; rubrik: string }
+const { id, titel, vad, rubrik } = Astro.props;
+const namn = hemsidansNamn(vad, rubrik);
+const versalt = (s: string) => s.charAt(0).toLocaleUpperCase('sv') + s.slice(1);
+---
+<a class="knapp" href={`/stodundervisning/${id}-${vad}.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="1" data-direkt={`Skriv ut ${namn}`} title={`${versalt(namn)} på ett A4, som pdf`} data-goatcounter-click={`utskrift:${id}/${vad}`} data-goatcounter-title={`${titel}: ${namn} som pdf`}>{versalt(namn)} som pdf</a>

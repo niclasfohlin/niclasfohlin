@@ -193,7 +193,7 @@ tabeller:
     # lektioner: första cellen börjar med veckans första led ("Vecka 1\nHopp på talraden") och leder dit, och bladens namn
     # i cellerna ("Addition 1 och Subtraktion 1") leder till räknebladen. Varje vecka visar sin rad.
 
-# Hem och skola, för insatser där hemmet gör en del av arbetet. Kontraktet och schemat blir egna sidor i planeringsmallarna.
+# Hem och skola, för insatser där hemmet gör en del av arbetet. Kontraktet och schemat är material och står i Materialet (METODER.md, tabellen över modellens delar, raden Hem och skola).
 hem:
   rubrik: Hem och skola
   text:

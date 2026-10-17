@@ -27,7 +27,7 @@ Schemat i `src/content.config.ts` är strikt: ett okänt fält, en tabellrad med
 | När gruppen fastnar | `fastnar` (fragaForst, trappa, efter, motto) | frågeruta, stödtrappa, motto, `#fastnar` |
 | Lärarens roll: gör och undvik | `roll` (gor, undvik) | två kolumner, `#roll` |
 | Var man hittar texter eller uppgifter, krav | `urval` (text, krav) | `#urval` |
-| Hem och skola: möte med vårdnadshavare, kontrakt, schema att fylla i | `hem` (text, kontrakt med inledning och ansvar, schema med kolumner och antal rader) | `#hem`; kontraktet och schemat som egna sidor i planeringsmallarna |
+| Hem och skola: möte med vårdnadshavare, kontrakt, schema att fylla i | `hem` (text, kontrakt med inledning och ansvar, schema med kolumner och antal rader) | `#hem` för texten. Kontraktet och schemat är material (Niclas 2026-10-17, om TIL i grupp: "kontraktet och lässchemat i sitt material och möjlighet att skriva ut de två på varsin snygg A4a"): de står i Materialet, var och en med en utskriftsknapp till sitt A4 där och en i Hem och skola (`Hemsidaknapp.astro`, prövad i `scripts/paritet.mjs`), en egen Word-fil och pdf (`<id>-kontrakt`, `<id>-schema`, `hemsidaDokument` i `metoddocx.ts`), som egna sidor i Materialet i filen med allt och i planeringsmallarna, och som rader i nedladdningsrutan. Kontraktet har formen av ett vanligt avtal (Niclas 2026-10-17: "Ser lite rörigt ut mot ett normalt kontrakt"; `kontraktSida`). Metoden behöver då ramar, och Materialet får stå utan andra ramar |
 | Progression | `progression` (enhet Vecka eller Pass; rader: vecka, `led` som Jag gör och Vi gör, fokus, roll) | tabell, `#progression` |
 | Uppföljning | `uppfoljning` (rader: nar, vad) | tabell, `#uppfoljning` |
 | Mål | `mal` (punkter) | kryssbar lista, `#mal`, målkollen i mallarna |

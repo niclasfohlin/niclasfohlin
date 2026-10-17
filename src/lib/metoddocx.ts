@@ -34,7 +34,7 @@ import TECKENBREDD from '../data/teckenbredd.json';
 import ANTON_BREDD from '../data/faktatext/anton-bredder.json';
 import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, FORMLUFT, FORMRAD_PT, LIGGANDE_BOK, LIGGANDE_BREDD, PROBLEMLUFT, PROBLEMTITEL_PT, RAMHOJD, TITEL_PT, boksidansMatt, breddPt, losningarMatt, problemMatt, strukturMatt, textparMatt } from './boksida';
 import { bankAv, bankfilensRamar, bankRad, type Bankfil } from './bank';
-import { MATERIAL } from './material';
+import { hemsidansNamn, MATERIAL } from './material';
 import { losningarnasNiva, losningarnasNot, problemformer } from './problemform';
 import { bildMatt, inline, kolumnandelar, omslagAdress, omslagUpphov, OMSLAG_KORT, radensNamn, ramensNiva, talcell } from './litteraturlista';
 
@@ -614,16 +614,71 @@ function skrivrad(etiketter: string[]): Paragraph {
   return new Paragraph({ children: etiketter.map((e, i) => run(`${i > 0 ? '     ' : ''}${e}: ______________________`, { storlek: 20, farg: FARG.svag })), spacing: { before: 80, after: 200 } });
 }
 
-// Kontraktet mellan skola, hem och elev: en inramad ruta med kicker, inledning och var och ens ansvar.
+// Linjer att skriva på med texten under linjen, som i ett avtal: ett fält per kolumn, med en lucka emellan, och en
+// rad linjer per post i rader. Formen är skrivradernas (lhRader): celler utan kant och en linje under, som Word och
+// Google Dokument ritar lika. andelar säger hur bredden delas mellan fälten, och ett fält som är null är tomt, utan linje.
+function avtalslinjer(rader: { falt: (string | null)[]; hojd: number }[], andelar: number[]): Table {
+  const lucka = 450;
+  const fri = BREDD - lucka * (andelar.length - 1);
+  const summa = andelar.reduce((a, b) => a + b, 0);
+  const bredder = andelar.map((a) => Math.floor((fri * a) / summa));
+  bredder[bredder.length - 1] += fri - bredder.reduce((a, b) => a + b, 0);
+  const kolumner = bredder.flatMap((b, i) => (i ? [lucka, b] : [b]));
+  const ingen = { top: INGEN_KANT, bottom: INGEN_KANT, left: INGEN_KANT, right: INGEN_KANT };
+  const rows = rader.flatMap((r) => [
+    rad(kolumner.map((b, j) => cell([], { bredd: b, kanter: j % 2 || r.falt[j / 2] === null ? ingen : { ...ingen, bottom: kant(FARG.text, 6) } })), { hojd: r.hojd }),
+    rad(kolumner.map((b, j) => cell(j % 2 || r.falt[j / 2] === null ? [] : [stycke(r.falt[j / 2] ?? '', { storlek: 18, farg: FARG.svag, efter: 0 })], { bredd: b, kanter: ingen }))),
+  ]);
+  return new Table({ width: { size: BREDD, type: WidthType.DXA }, columnWidths: kolumner, layout: TableLayoutType.FIXED, borders: UTAN_KANTER, rows });
+}
+
+// Kontraktet mellan skola, hem och elev ser ut som ett vanligt avtal (Niclas 2026-10-17: "varsin snygg A4a", och "Ser
+// lite rörigt ut mot ett normalt kontrakt"): parterna och perioden på linjer överst, inledningen och var och ens ansvar
+// som löpande text under egna rubriker, utan ram, och underskrifterna sist: ett datum och en linje för var och en (Niclas
+// samma kväll: "Namnförtydligande behövs inte" och "ett datum när det skrivs under räcker").
+// Sidans rubrik bär kontraktets namn.
 type Kontrakt = NonNullable<NonNullable<MetodData['hem']>['kontrakt']>;
-function kontraktRuta(k: Kontrakt): Barn[] {
-  const barn: Paragraph[] = [
-    stycke(k.rubrik.toUpperCase(), { fet: true, farg: FARG.huvud, storlek: 17, efter: 100 }),
-    stycke(k.inledning, { kursiv: true, storlek: 20 }),
-    ...k.ansvar.map((a) => new Paragraph({ children: [run(`${a.rubrik}. `, { fet: true, storlek: 20 }), ...lopor(a.text, { storlek: 20 })], spacing: { after: 120 } })),
+function kontraktText(k: Kontrakt): Barn[] {
+  return [
+    stycke(k.inledning, { storlek: 24, efter: 320 }),
+    ...k.ansvar.flatMap((a) => [
+      stycke(a.rubrik, { fet: true, storlek: 24, efter: 40, hallIhop: true }),
+      new Paragraph({ children: lopor(a.text, { storlek: 24 }), spacing: { after: 280 } }),
+    ]),
+    ...(k.efter ? [stycke(k.efter, { kursiv: true, storlek: 24, efter: 0 })] : []),
   ];
-  if (k.efter) barn.push(stycke(k.efter, { farg: FARG.svag, storlek: 20, efter: 0 }));
-  return [tabell([rad([cell(barn, { bredd: BREDD, kanter: runt(kant(FARG.text)) })])], [BREDD]), avstand()];
+}
+
+// Kontraktet och schemat (hem.kontrakt och hem.schema, TIL i grupp) är material (Niclas 2026-10-17: "Til borde ju ha
+// kontraktet och lässchemat i sitt material och möjlighet att skriva ut de två på varsin snygg A4a"): var och en är ett
+// A4 med sidans rubrik och metodens namn, i Materialet i filen med allt, i planeringsmallarna och i en egen Word-fil,
+// <id>-kontrakt.docx och <id>-schema.docx, vars pdf knapparna i Materialet och i Hem och skola skriver ut (hemsidaDokument,
+// Hemsidaknapp.astro).
+function sidrubrik(d: MetodData, namn: string): Barn[] {
+  return [
+    new Paragraph({ children: [run(namn)], heading: HeadingLevel.HEADING_1, spacing: { before: 0, after: 40 } }),
+    stycke(`${d.titel} · ${arskursText(d)}`, { kursiv: true, farg: FARG.huvud, storlek: 24, efter: 160 }),
+  ];
+}
+function kontraktSida(d: MetodData): Barn[] {
+  const k = d.hem!.kontrakt!;
+  const roller = ['Lärare', 'Elev', 'Vårdnadshavare'];
+  return [
+    ...sidrubrik(d, k.rubrik),
+    avtalslinjer([{ falt: ['Elev', 'Klass'], hojd: 540 }], [3, 1]),
+    luft(240),
+    avtalslinjer([{ falt: ['Insatsen börjar', 'Insatsen slutar', 'Dagar i veckan'], hojd: 540 }], [1, 1, 1]),
+    luft(480),
+    ...kontraktText(k),
+    stycke('Underskrifter', { fet: true, storlek: 24, fore: 560, efter: 0, hallIhop: true }),
+    avtalslinjer([{ falt: ['Datum', null, null], hojd: 600 }], [1, 1, 1]),
+    luft(120, true),
+    avtalslinjer([{ falt: roller, hojd: 1080 }], [1, 1, 1]),
+  ];
+}
+function schemaSida(d: MetodData): Barn[] {
+  const s = d.hem!.schema!;
+  return [...sidrubrik(d, s.rubrik), ...(s.text ? [stycke(s.text)] : []), avtalslinjer([{ falt: ['Elev', 'Period'], hojd: 480 }], [3, 2]), luft(240), schemaTabell(s)];
 }
 
 // Lässchemat eller ett annat schema att fylla i: rubrikrad och tomma rader att skriva på.
@@ -635,7 +690,7 @@ function schemaTabell(s: Schema): Table {
   const mitten = Math.floor((BREDD - forsta - sista * (n - 2)) / 1);
   const bredder = s.kolumner.map((_, i) => (i === 0 ? forsta : i === 1 ? mitten : sista));
   const huvud = rad(s.kolumner.map((k, i) => cell([stycke(k, { fet: true, farg: FARG.vit, storlek: 20, efter: 0 })], { bredd: bredder[i], fyll: FARG.huvud, kanter: runt(kant(FARG.huvud)) })), { huvud: true });
-  const kropp = Array.from({ length: s.rader }, (_, r) => rad(bredder.map((b) => cell([stycke('', { efter: 0 })], { bredd: b, fyll: r % 2 === 1 ? FARG.rand : undefined, kanter: runt(kant()) })), { hojd: 480 }));
+  const kropp = Array.from({ length: s.rader }, (_, r) => rad(bredder.map((b) => cell([stycke('', { efter: 0 })], { bredd: b, fyll: r % 2 === 1 ? FARG.rand : undefined, kanter: runt(kant()) })), { hojd: 450 }));
   return tabell([huvud, ...kropp], bredder);
 }
 
@@ -2840,8 +2895,6 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     ut.push(h2(d.hem.rubrik));
     for (const s of d.hem.text) ut.push(stycke(s));
     centraltVid({ avsnitt: 'hem' });
-    if (d.hem.kontrakt) ut.push(...kontraktRuta(d.hem.kontrakt));
-    if (d.hem.schema) ut.push(stycke(`${d.hem.schema.rubrik}: ${d.hem.schema.text ? `${d.hem.schema.text} ` : ''}Schemat med ${d.hem.schema.rader} rader att fylla i finns i planeringsmallarna.`, { farg: FARG.svag }));
     filmVid({ avsnitt: 'hem' });
   }
   if (d.progression) {
@@ -3034,6 +3087,8 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     // ramens text, som då stod ensam på en sida: sex av tio filer med allt blev två sidor längre i stället för en
     // (granskningen 2026-10-17). Här byter Materialet ändå sida. Namnet och meningen står bara på sidan, vid knappen: i
     // Word står kortet självt.
+    if (d.hem?.kontrakt) ut.push(new Sektionsbyte(false), ...kontraktSida(d));
+    if (d.hem?.schema) ut.push(new Sektionsbyte(false), ...schemaSida(d));
     for (const k of lektionskort) ut.push(...lektionskortFlod(k));
   }
   if (d.diplom && (o.material || !MATERIAL.has('diplom'))) {
@@ -3079,31 +3134,9 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
       ...bockar(d.checklista.punkter, 1, { hojd: 560 }),
     ]);
   }
-  if (d.hem?.kontrakt && !o.bank) {
-    const k = d.hem.kontrakt;
-    const b = Math.floor(BREDD / 3);
-    const underskrifter = tabell([
-      rad(['Lärare', 'Elev', 'Vårdnadshavare'].map((namn) => cell([stycke(namn, { fet: true, storlek: 20, efter: 0 })], { bredd: b, kanter: runt(kant()) })), { huvud: true }),
-      rad([0, 1, 2].map(() => cell([stycke('', { efter: 0 })], { bredd: b, kanter: runt(kant()) })), { hojd: 1000 }),
-    ], [b, b, b]);
-    sidor.push([
-      ...under(k.rubrik),
-      skrivrad(['Elev', 'Klass']),
-      ...kontraktRuta(k),
-      skrivrad(['Tidsomfång, veckor', 'Från', 'Till']),
-      stycke('Underskrifter', { fet: true, storlek: 20, efter: 60 }),
-      underskrifter,
-    ]);
-  }
-  if (d.hem?.schema && !o.bank) {
-    const s = d.hem.schema;
-    sidor.push([
-      ...under(s.rubrik),
-      ...(s.text ? [stycke(s.text)] : []),
-      skrivrad(['Elev', 'Period']),
-      schemaTabell(s),
-    ]);
-  }
+  // Kontraktet och schemat (kontraktSida, schemaSida): i filen med allt står de redan i Materialet.
+  if (d.hem?.kontrakt && !o.bank && !o.baraTommaRamar) sidor.push(kontraktSida(d));
+  if (d.hem?.schema && !o.bank && !o.baraTommaRamar) sidor.push(schemaSida(d));
   // Har metoden en egen kartläggning (en ram som heter Kartläggning …) hör målkollen ihop med den (K-046).
   const kartlaggning = (d.ramar?.ramar ?? []).some((r) => /^Kartläggning/.test(r.rubrik));
   // Målkollen hänvisar till kartläggningens ruta bara när en ruta där säger vilka uppgifter som prövar vilket mål (ett
@@ -4476,7 +4509,9 @@ function dokument(titel: string, sektioner: ISectionOptions[], typsnitt: { fonts
 
 // En eller flera metoder i en fil, med planeringsmallarna och lathunden efter varje metod om medMallar är satt.
 // baraMetoden: filen med bara metoden för en metod (<id>-metoden.docx), som knappen Skriv ut: Metoden öppnar som pdf. Sist
-// står en rad om var materialet finns, eftersom beskrivningen hänvisar till det (granskningen 2026-10-13).
+// står en rad om var materialet finns, eftersom beskrivningen hänvisar till det (granskningen 2026-10-13), och likaså i
+// filen med valda metoder utan mallar, där TIL i grupp hänvisar till kontraktet och lässchemat i Materialet (granskningen
+// 2026-10-17).
 export function metodDokument(poster: MetodPostISerie[], o: { bas: string; medMallar?: boolean; baraMetoden?: boolean; resurser?: MetodResurser }): Document {
   instans = 0;
   FRISTAENDE_BLAD = false;
@@ -4498,7 +4533,7 @@ export function metodDokument(poster: MetodPostISerie[], o: { bas: string; medMa
     const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
     const flod = metodBarn(post, o.bas, { material: o.medMallar !== false });
     // En lektion utan lathund (Ljudlek i grupp) nämner ingen lathund (granskningen 2026-10-17).
-    if (o.baraMetoden) flod.push(stycke(`Materialet${post.data.lathund ? ', planeringsmallarna och lathunden' : ' och planeringsmallarna'} hör inte till den här filen. De står på ${adress} och i filen Allt om metoden.`, { farg: FARG.svag, storlek: 18, fore: 240 }));
+    if (o.baraMetoden || o.medMallar === false) flod.push(stycke(`Materialet${post.data.lathund ? ', planeringsmallarna och lathunden' : ' och planeringsmallarna'} hör inte till den här filen. De står på ${adress} och i filen Allt om metoden.`, { farg: FARG.svag, storlek: 18, fore: 240 }));
     sektioner.push(...delaSektioner(flod, `${post.data.titel} · ${SAJT}`, adress));
     if (o.medMallar) {
       for (const sida of mallBarn(post, o.bas, { baraTommaRamar: true })) sektioner.push(...delaSektioner(sida.barn, `Mall · ${post.data.titel} · ${SAJT}`, adress, { liggande: sida.liggande, smal: sida.liggande }));
@@ -4620,6 +4655,19 @@ export function faktatextProvDokument(post: MetodPost, o: { bas: string; last: b
   if (!sektioner.length) sektioner.push(sektion([stycke(`${d.titel} har inga faktatexter.`)], huvud, adress));
   const borjan = texter.map(([ram, f]) => { const b = faktatextensBorjan(f); return { rubrik: ram.rubrik, borjar: b.borjar.slice(0, 80), delar: b.delar.map((t) => t.slice(0, 80)) }; });
   return dokument(`${d.titel}: faktatexterna, prov för sidlåset`, sektioner, typsnittFor([post]), JSON.stringify({ texter: borjan }));
+}
+
+// Kontraktet eller schemat för sig (hem.kontrakt, hem.schema): ett A4, <id>-kontrakt.docx och <id>-schema.docx, vars pdf
+// knapparna i Materialet och i Hem och skola skriver ut. Sidfoten bär upphovet och adressen, utan sidnummer, som ett
+// fristående blad.
+export function hemsidaDokument(post: MetodPost, vad: 'kontrakt' | 'schema', o: { bas: string }): Document {
+  instans = 0;
+  FRISTAENDE_BLAD = true;
+  RESURSER = { bilder: new Map() };
+  const d = post.data;
+  const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
+  const namn = hemsidansNamn(vad, d.hem!.schema?.rubrik);
+  return dokument(`${d.titel} · ${namn.charAt(0).toLocaleUpperCase('sv')}${namn.slice(1)}`, [sektion(vad === 'kontrakt' ? kontraktSida(d) : schemaSida(d), `${d.titel} · ${SAJT}`, adress)]);
 }
 
 // Lektionskorten för sig (src/lib/lektionskort.ts): ett kort, <stam>.docx, vars pdf är det knappen öppnar, eller alla

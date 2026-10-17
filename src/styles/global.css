@@ -572,6 +572,9 @@ button.lank:hover { color: var(--farg-accent); }
 .m-lektionsbank-lektionskort .central-lank { font-weight: 600; }
 .m-lektionskorten { margin: 1rem 0 1.25rem; }
 .metod-modell .m-lektionskorten p { margin: 0 0 0.6rem; }
+/* Kontraktet och schemat i Materialet (Metod.astro), som lektionskortet. */
+.m-hemsida { margin: 1.25rem 0 1.5rem; }
+.metod-modell .m-hemsida h3 { margin: 0 0 0.5rem; }
 /* Lektionskortet först i Materialet (Metod.astro): namnet, meningen och knappen. */
 .m-lektionskortet { margin: 1.25rem 0 1.5rem; }
 .metod-modell .m-lektionskortet h3 { margin: 0 0 0.35rem; }
@@ -693,9 +696,9 @@ button.lank:hover { color: var(--farg-accent); }
 .m-grund { border: 1px solid var(--farg-kant); border-left: 4px solid var(--farg-accent); border-radius: 8px; padding: 0.85rem 1.1rem; margin: 1rem 0 0.5rem; background: var(--farg-yta); }
 /* Kontraktet mellan skola, hem och elev: en inramad ruta med kicker, som mallen i planeringsmallarna. */
 .m-kontrakt { border: 1.5px solid var(--farg-text); border-radius: 8px; padding: 0.9rem 1.1rem; margin: 1rem 0 1.25rem; background: var(--farg-yta); }
-.m-kontrakt .kicker { font-family: var(--typsnitt-ui); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-accent); margin: 0 0 0.5em; }
 .m-kontrakt p { margin: 0 0 0.6em; }
 .m-kontrakt p:last-child { margin-bottom: 0; }
+.metod-modell .m-kontrakt h4 { margin: 0.9em 0 0.15em; font-size: 1rem; }
 .m-grund p { margin: 0; }
 /* Ramarna: varje ram har rubrik, inledning, översikt och delar med ett fält per rad. */
 .m-ram { margin: 1.5rem 0 0; }

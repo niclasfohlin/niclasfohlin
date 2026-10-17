@@ -513,7 +513,7 @@ const stodundervisning = defineCollection({
         // del överst i ramen, med delens rubrik och första fält (Fokus), som leder till delen, och ramen står i menyn. I
         // Word börjar varje del på en ny sida, tätare, med sin bild På bordet (pabordet med efter: "del: <rubrik>") under.
         lektioner: z.boolean().optional(),
-      })).min(1),
+      })),
       efter: z.string().optional(),
     }).optional(),
     // Diplom eller intyg att dela ut efter perioden: en sida i planeringsmallarna. En rad som bara
@@ -700,6 +700,10 @@ const stodundervisning = defineCollection({
       if (fel) ctx.addIssue({ code: 'custom', path: ['centrala', i, 'efterText'], message: `${fel}.` });
     });
     // Lektionskorten: lektionens namn när korten är fler än ett, och en plats som finns (src/lib/lektionskort.ts).
+    // Materialet har minst en ram, utom när det har lektionskortet eller kontraktet och schemat ensamma (TIL i grupp), och
+    // kontraktet och schemat är material: de står i Materialet (Niclas 2026-10-17).
+    if (d.ramar && !d.ramar.ramar.length && !d.lektionskort.length && !d.hem?.kontrakt && !d.hem?.schema) ctx.addIssue({ code: 'custom', path: ['ramar', 'ramar'], message: 'Materialet behöver minst en ram, ett lektionskort eller kontraktet och schemat (METODER.md under Lektionskortet, och raden Hem och skola i tabellen över modellens delar).' });
+    if ((d.hem?.kontrakt || d.hem?.schema) && !d.ramar) ctx.addIssue({ code: 'custom', path: ['hem'], message: 'Kontraktet och schemat är material och står i Materialet, så metoden behöver ramar (METODER.md, tabellen över modellens delar, Hem och skola).' });
     const kortFel = lektionskortFel(d);
     if (kortFel) ctx.addIssue({ code: 'custom', path: ['lektionskort'], message: kortFel });
     d.lektionskort.forEach((k, i) => {

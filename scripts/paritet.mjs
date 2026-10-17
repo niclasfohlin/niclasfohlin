@@ -293,6 +293,25 @@ for (const fil of filer) {
       if (saknas.length) { console.error(`paritet: ${namn} saknar ${saknas.length} av lektionskortets texter (src/data/lektionskort/${stam}.json), först "${saknas[0].slice(0, 60)}".`); fel++; }
     }
   }
+  // Kontraktet och schemat (hem.kontrakt, hem.schema; TIL i grupp) är material med var sitt A4 (Niclas 2026-10-17): en
+  // utskriftsknapp i Materialet och en i Hem och skola, raden i nedladdningsrutan, och sakens texter i den egna Word-filen,
+  // vars pdf knapparna öppnar, och i planeringsmallarna (granskningen 2026-10-17).
+  for (const vad of ['kontrakt', 'schema']) {
+    const sak = d.hem?.[vad];
+    if (!sak) continue;
+    const stam = `${id}-${vad}`;
+    const knappar = [...html.matchAll(/<a\b[^>]*>/g)].filter((m) => new RegExp(`\\bhref="/stodundervisning/${stam}\\.pdf(?:\\?[^"]*)?"`).test(m[0]) && /\bdata-skriv-ut-pdf\b/.test(m[0]));
+    if (knappar.length < 2) { console.error(`paritet: ${id} har ${knappar.length} utskriftsknappar till ${stam}.pdf; sidan ska ha en i Materialet och en i Hem och skola (hem.${vad}).`); fel++; }
+    if (!new RegExp(`href="/stodundervisning/${stam}\\.docx(?:\\?[^"]*)?"`).test(html)) { console.error(`paritet: ${id} saknar raden med ${stam}.docx i nedladdningsrutan (hem.${vad}).`); fel++; }
+    const sakensTexter = (vad === 'kontrakt' ? [sak.rubrik ?? 'Kontrakt', sak.inledning, ...sak.ansvar.flatMap((a) => [a.rubrik, a.text]), sak.efter] : [sak.rubrik, sak.text, ...sak.kolumner]).filter(Boolean);
+    for (const namn of [`${stam}.docx`, `${id}-mallar.docx`]) {
+      const fil = join(rot, 'dist/stodundervisning', namn);
+      if (!existsSync(fil)) { console.error(`paritet: ${namn} saknas i dist (hem.${vad}).`); fel++; continue; }
+      const text = await wordtext(fil);
+      const saknas = sakensTexter.filter((t) => !text.includes(norm(t)));
+      if (saknas.length) { console.error(`paritet: ${namn} saknar ${saknas.length} av texterna i hem.${vad}, först "${saknas[0].slice(0, 60)}".`); fel++; }
+    }
+  }
   // Ett radslut inne i en text (w:t) visar Word som ett mellanslag: raderna som metodens fil har under varandra läses då
   // som en fras (kortet När det skaver i Faktatextsamtal i grupp, granskningen 2026-10-13). En radbrytning ska vara en
   // ny rad i stycket (stycke i src/lib/metoddocx.ts), eller ett mellanrum där texten är en rad, som i sidfoten.

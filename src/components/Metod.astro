@@ -57,6 +57,7 @@ import Centralknapp from './Centralknapp.astro';
 import Centralrad from './Centralrad.astro';
 import { centralaVid, metodensCentrala } from '../lib/centrala';
 import Lektionskortknapp from './Lektionskortknapp.astro';
+import Hemsidaknapp from './Hemsidaknapp.astro';
 import { lektionskortVid, metodensLektionskort } from '../lib/lektionskort';
 // "Åk 4–5" hålls ihop i ramarnas rubriker och länkar: hårt mellanslag efter Åk, ordfog efter tankstrecket.
 const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 '));
@@ -600,15 +601,12 @@ const meny = [
       <h2>{d.hem.rubrik}</h2>
       {d.hem.text.map((s) => <p>{s}</p>)}
       <Centralrad saker={centralaVid(d, { avsnitt: 'hem' })} metod={id} titel={d.titel} />
-      {d.hem.kontrakt && (
-        <div class="m-kontrakt">
-          <p class="kicker">{d.hem.kontrakt.rubrik}</p>
-          <p><em>{d.hem.kontrakt.inledning}</em></p>
-          {d.hem.kontrakt.ansvar.map((a) => <p><strong>{a.rubrik}.</strong>{' '}{a.text}</p>)}
-          {d.hem.kontrakt.efter && <p class="m-efter">{d.hem.kontrakt.efter}</p>}
-        </div>
+      {(d.hem.kontrakt || d.hem.schema) && (
+        <p class="m-central-knapp">
+          {d.hem.kontrakt && <Hemsidaknapp id={id} titel={d.titel} vad="kontrakt" rubrik={d.hem.kontrakt.rubrik} />}
+          {d.hem.schema && <Hemsidaknapp id={id} titel={d.titel} vad="schema" rubrik={d.hem.schema.rubrik} />}
+        </p>
       )}
-      {d.hem.schema && <p class="m-efter">{d.hem.schema.rubrik}: {d.hem.schema.text}{d.hem.schema.text && ' '}Schemat med {d.hem.schema.rader} rader att fylla i finns i planeringsmallarna.</p>}
       <Filmruta filmer={vid({ avsnitt: 'hem' })} titel={d.titel} />
     </section>
   )}
@@ -719,6 +717,33 @@ const meny = [
           <p class="m-central-knapp m-lektionskortrad"><Lektionskortknapp k={k} titel={d.titel} /></p>
         </div>
       ))}
+      {/* Kontraktet och schemat (hem.kontrakt, hem.schema, TIL i grupp) är material (Niclas 2026-10-17): här, efter
+          lektionskortet, var och en med en utskriftsknapp till sitt A4, en pdf av sin egen Word-fil (hemsidaDokument). */}
+      {d.hem?.kontrakt && (
+        <div class="m-hemsida" id="kontraktet">
+          <h3>{d.hem.kontrakt.rubrik}</h3>
+          {/* Som kontraktets A4 (kontraktSida i src/lib/metoddocx.ts): inledningen, var och ens ansvar under en egen rubrik och
+              meningen sist i kursiv. */}
+          <div class="m-kontrakt">
+            <p>{d.hem.kontrakt.inledning}</p>
+            {d.hem.kontrakt.ansvar.map((a) => (
+              <>
+                <h4>{a.rubrik}</h4>
+                <p>{a.text}</p>
+              </>
+            ))}
+            {d.hem.kontrakt.efter && <p><em>{d.hem.kontrakt.efter}</em></p>}
+          </div>
+          <p class="m-central-knapp"><Hemsidaknapp id={id} titel={d.titel} vad="kontrakt" rubrik={d.hem.kontrakt.rubrik} /></p>
+        </div>
+      )}
+      {d.hem?.schema && (
+        <div class="m-hemsida" id="schemat">
+          <h3>{d.hem.schema.rubrik}</h3>
+          <p>{d.hem.schema.text}{d.hem.schema.text && ' '}Schemat har {d.hem.schema.rader} rader att fylla i.</p>
+          <p class="m-central-knapp"><Hemsidaknapp id={id} titel={d.titel} vad="schema" rubrik={d.hem.schema.rubrik} /></p>
+        </div>
+      )}
       {elevtypsnitt && (
         <p class="m-efter">{andikaNamnt ? 'Ladda ner Andika' : 'Elevens material står i Andika, ett gratis typsnitt från SIL som är gjort för att vara lätt att läsa. Ladda ner det'} på <a href={ANDIKA_ADRESS}>software.sil.org/andika</a> och använd det när du gör egna kort och blad.</p>
       )}

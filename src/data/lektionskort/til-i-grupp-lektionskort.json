@@ -1,0 +1,167 @@
+{
+ "design": "strategipapper",
+ "fil": "Lektionskort - TIL i grupp",
+ "titel": "TIL i grupp",
+ "dokumenttitel": "TIL i grupp · Lektionskort",
+ "knapp": "Lektionskort",
+ "info": [
+  "F–6 · 20 minuter · 1–4 elever"
+ ],
+ "infoUtanRuta": true,
+ "fot": "© Niclas Fohlin, niclasfohlin.se, där du skriver ut metodens material",
+ "ingress": "**Mål:** kunna läsa en bok på sin nivå med flyt och läsa om meningen vid fel.",
+ "ruta": {
+  "storlek": {
+   "rubrik": 23,
+   "text": 20
+  },
+  "punkter": [
+   {
+    "rubrik": "Läs i skolan",
+    "text": "Eleven läser sin bok för dig, en i taget."
+   },
+   {
+    "rubrik": "Läs hemma",
+    "text": "Samma dag läser eleven boken igen för en vuxen, som skriver sina initialer i lässchemat."
+   },
+   {
+    "rubrik": "Skriv tre",
+    "text": "Eleven skriver tre favoritmeningar ur boken i skrivboken."
+   },
+   {
+    "rubrik": "Läs upp",
+    "text": "Nästa dag läser eleven upp meningarna för gruppen."
+   }
+  ]
+ },
+ "delar": [
+  {
+   "rubrik": "Passet",
+   "text": "Samma bok två gånger samma dag, i skolan och hemma. Det är omläsningen som ger flytet.",
+   "kolumner": [
+    "Delen",
+    "Så leder du",
+    "Du säger, till exempel"
+   ],
+   "bredder": [
+    22,
+    43,
+    35
+   ],
+   "storlek": 18,
+   "tat": true,
+   "rader": [
+    [
+     "Före passet",
+     "Välj en bok till varje elev där hen klarar minst nio ord av tio själv. Bläddra igenom den och välj två eller tre ord att visa. F–2: en ny liten bok varje pass. Åk 3–6: ett kapitel om dagen ur samma kapitelbok, tills den är utläst. Skriv boken i elevens lässchema och lägg den i mappen."
+    ],
+    [
+     "Återkoppla\n0–4 min · var och en",
+     "Varje elev läser upp sina tre meningar från gårdagens bok. Beröm något konkret och signera lässchemat.",
+     "”Läs din första mening för oss.”\n”Varför valde du den?”\n”Du läste ordet direkt, utan att ljuda.”"
+    ],
+    [
+     "Förbered\n4–8 min · en bok i taget",
+     "Bläddra i varje elevs bok, en i taget och kort: titta på bilderna, gissa vad som händer och visa två eller tre ord som kan bli svåra. Kapitelbok: eleven berättar kort om gårdagens kapitel.",
+     "”Vad tror du händer sen?”\n”Här kommer ett långt ord. Vi delar det: fot-⁠boll.”"
+    ],
+    [
+     "Läs\n8–18 min · var och en",
+     "Sitt hos en elev i taget, två till tre minuter var, och lyssna. De andra läser tyst eller viskande, och den som är klar läser boken en gång till.",
+     "”Läs för mig.”\n”Läs meningen från början nu.”"
+    ],
+    [
+     "Avsluta\n18–20 min · alla",
+     "Säg hemuppdraget med samma ord varje dag. Boken, skrivboken och lässchemat ligger i mappen, och mappen går i ryggsäcken.",
+     "”Ikväll läser du boken en gång till för någon hemma. Välj tre meningar du gillar och skriv dem i skrivboken.”"
+    ],
+    [
+     "Efter passet",
+     "Skriv upp om alla hade läst hemma, vem som ska ha en lättare eller svårare bok och vad ni övar nästa gång. Uteblir läsningen hemma flera dagar i rad: ring hem."
+    ]
+   ]
+  },
+  {
+   "rubrik": "När eleven fastnar",
+   "text": "Gå uppifrån, ett steg i taget. När ordet är löst läser eleven meningen från början.",
+   "kolumner": [
+    "Det eleven gör",
+    "Så gör du"
+   ],
+   "bredder": [
+    32,
+    68
+   ],
+   "storlek": 19,
+   "tat": true,
+   "rader": [
+    [
+     "tvekar vid ett ord",
+     "Vänta tre sekunder. Fråga sedan: ”Prova. Vad står det?”"
+    ],
+    [
+     "kommer inte vidare",
+     "Peka på första bokstaven: ”Börja här och ljuda hela ordet.”"
+    ],
+    [
+     "ljudar men hör inte ordet",
+     "Ljuda tillsammans, eller dela ordet: träd-⁠går-⁠den. ”Läs ordet igen som ett helt ord.”"
+    ],
+    [
+     "ordet kommer inte",
+     "Säg ordet."
+    ],
+    [
+     "gissar på slutet av ordet",
+     "Peka: ”Titta på slutet av ordet. Vad står det?”"
+    ],
+    [
+     "fastnar på fler än ett ord av tio",
+     "Boken är för svår. Ta en lättare bok nästa pass."
+    ],
+    [
+     "läser om meningen själv",
+     "Beröm det eleven gjorde: ”Du läste om meningen själv.”"
+    ]
+   ]
+  },
+  {
+   "rubrik": "Veckorna",
+   "text": "Eleven tar över efter hand, och du ger kortare stöd.",
+   "kolumner": [
+    "Veckan",
+    "Eleven",
+    "Du"
+   ],
+   "bredder": [
+    16,
+    44,
+    40
+   ],
+   "storlek": 19,
+   "tat": true,
+   "rader": [
+    [
+     "1–2",
+     "Rutinen sätter sig, i skolan och hemma.",
+     "Du leder Förbered och visar hur man ljudar och läser om."
+    ],
+    [
+     "3–5",
+     "Eleven läser om meningar själv, och böckerna blir svårare när flytet kommer.",
+     "Du väntar längre och frågar i stället för att säga."
+    ],
+    [
+     "6–8",
+     "Eleven bläddrar och gissar i Förbered med kortare stöd, och väljer meningarna hemma själv.",
+     "Du lyssnar efter flyt: orden kommer direkt, och det låter som när man pratar."
+    ],
+    [
+     "9–10 vid behov",
+     "Eleven läser längre böcker, också ur klassens läsning.",
+     "Du ser efter att läsningen följer med till klassrummet."
+    ]
+   ]
+  }
+ ]
+}

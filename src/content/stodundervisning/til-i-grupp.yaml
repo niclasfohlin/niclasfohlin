@@ -14,7 +14,7 @@ taggar:
 format:
   - liten grupp
   - enskilt
-tid: 20 minuter i skolan och 20 hemma per pass, fyra dagar i veckan
+tid: 20 minuter i skolan och 20 hemma per pass, vanligtvis fyra dagar i veckan
 period: Sex till tio veckor
 grupp: En till fyra elever
 material:
@@ -22,7 +22,7 @@ material:
   - lässchema
   - böcker på rätt nivå
   - snabbmall och kontrakt
-uppdaterad: 2026-10-14
+uppdaterad: 2026-10-17
 relaterade:
   - laslistor-i-grupp
   - upprepad-lasning
@@ -35,7 +35,7 @@ inledning:
   - Det här är ett körschema för en lärarledd insats i liten grupp för elever som behöver stöd i avkodning och läsflyt. Insatsen är tidsbegränsad, riktad och har tät uppföljning. Varje pass är 20 minuter i skolan och följer samma rutin. Samma dag läser eleven boken en gång till hemma tillsammans med en vuxen och skriver tre favoritmeningar. Det är den dubbla läsningen, i skolan och hemma, som gör metoden intensiv. Börja med rutinen och tidsschemat nedan. Forskningsgrunden finns kort sammanfattad sist.
 upplagg:
   rubrik: Så fungerar insatsen
-  text: "Insatsen pågår i sex till tio veckor, fyra dagar i veckan, och gruppen har en till fyra elever som behöver stöd i avkodning och läsflyt. I passet på 20 minuter läser eleverna upp gårdagens favoritmeningar, ni gör en bildvandring i dagens böcker, och sedan läser varje elev sin bok på sin nivå medan du lyssnar på en i taget. I åk 3–6 kan det vara ett kapitel om dagen ur en kapitelbok. Samma dag läser eleven texten igen hemma med en vuxen och skriver tre favoritmeningar, cirka 20 minuter. Före och efter perioden läser eleven en kort text högt i en minut, och du jämför antalet rätt lästa ord."
+  text: "Insatsen pågår sex till tio veckor, oftast fyra dagar i veckan, och gruppen har en till fyra elever som behöver stöd i avkodning och läsflyt. I passet på 20 minuter läser eleverna upp gårdagens favoritmeningar, ni gör en bildvandring i dagens böcker, och sedan läser varje elev sin bok på sin nivå medan du lyssnar på en i taget. I åk 3–6 kan det vara ett kapitel om dagen ur en kapitelbok. Samma dag läser eleven texten igen hemma med en vuxen och skriver tre favoritmeningar, cirka 20 minuter. Före och efter perioden läser eleven en kort text högt i en minut, och du jämför antalet rätt lästa ord."
 principer:
   rubrik: Tre saker att hålla fast vid
   text: "Eleven läser samma text två gånger samma dag, först i skolan med dig och sedan hemma med en vuxen. Det är den dubbla läsningen som gör insatsen intensiv. Välj en bok där eleven klarar minst nio ord av tio själv, eftersom det är omläsningen som bygger flytet. Och börja varje pass med gårdagens favoritmeningar, så att eleven märker att läsningen hemma räknas."
@@ -71,7 +71,7 @@ passrutin:
   efter: Passrutinen är kortversionen av passet. Tidsschemat visar när varje del görs, och tabellen efteråt visar vad du som lärare kan säga och göra i varje steg.
 tidsschema:
   rubrik: 20 minuter, steg för steg
-  text: Förbered dig genom att välja bok till varje elev och bläddra igenom den själv. Sedan följer du tidsschemat.
+  text: Förbered dig genom att välja bok till varje elev och bläddra igenom den själv. Sedan följer du tidsschemat. Passet och stödet när eleven fastnar står också på Lektionskortet, ett A4 att ha framför dig.
   rader:
     - tid: Före passet
       fas: Förberedelse
@@ -182,10 +182,10 @@ urval:
       text: Meningar som eleven kan vilja skriva av och läsa upp
 hem:
   text:
-    - "Insatsen bygger på att boken läses en gång till hemma. Boka därför ett kort möte med vårdnadshavarna innan ni börjar. Visa mappen, lässchemat och skrivboken, förklara varför boken ska läsas två gånger och visa hur den vuxne bekräftar läsningen med sina initialer. Säg också hur den vuxne kan hjälpa till vid svåra ord: vänta, ljuda tillsammans, läs meningen om. Kontraktet nedan sammanfattar vad var och en ansvarar för, och lässchemat följer med i mappen. Båda finns i planeringsmallarna och kopieras till varje elev. Om läsningen hemma uteblir flera dagar i rad: ring hem tidigt, innan rutinen hunnit brytas."
+    - "Insatsen bygger på att boken läses en gång till hemma. Boka därför ett kort möte med vårdnadshavarna innan ni börjar. Visa mappen, lässchemat och skrivboken, förklara varför boken ska läsas två gånger och visa hur den vuxne bekräftar läsningen med sina initialer. Säg också hur den vuxne kan hjälpa till vid svåra ord: vänta, ljuda tillsammans, läs meningen om. Kontraktet sammanfattar vad var och en ansvarar för, och lässchemat följer med i mappen. Båda står i Materialet, på varsitt A4 att skriva ut till varje elev. Om läsningen hemma uteblir flera dagar i rad: ring hem tidigt, innan rutinen hunnit brytas."
   kontrakt:
     rubrik: Kontrakt för TIL (Tidig Intensiv Läsning)
-    inledning: "TIL är en insats som stärker elevens läsning genom att samma bok läses två gånger samma dag: i skolan med läraren och hemma med en vuxen. Insatsen pågår fyra dagar i veckan i sex till tio veckor. I elevens plastmapp finns skrivbok, lässchema och dagens text, och mappen följer med hem varje dag."
+    inledning: "TIL är en insats som stärker elevens läsning genom att samma bok läses två gånger samma dag: i skolan med läraren och hemma med en vuxen. Insatsen pågår vanligtvis fyra dagar i veckan i sex till tio veckor. I elevens plastmapp finns skrivbok, lässchema och dagens text, och mappen följer med hem varje dag."
     ansvar:
       - rubrik: Skolans ansvar
         text: Välja bok på rätt nivå och skriva in den i lässchemat. Göra bild- och rubrikvandring och lyssna på eleven när den läser. Ta emot favoritmeningarna varje dag och ge återkoppling.
@@ -252,8 +252,13 @@ checklista:
     - Kontrollerat att bok, skrivbok och lässchema ligger i varje mapp.
     - Påmint mig om att vänta vid svåra ord i stället för att säga dem.
 grund:
-  text: "TIL bygger på fyra saker som var för sig har stöd i läsforskningen och som här sätts ihop till en daglig rutin. Att läsa samma text flera gånger ger flyt (Samuels, 1979). Att läsa högt för en vuxen som lyssnar och ger återkoppling stärker avkodning och flyt mer än tyst läsning på egen hand (National Reading Panel, 2000). Att en vuxen hemma läser tillsammans med barnet och bekräftar läsningen ger många fler lästillfällen och stärker samarbetet mellan hem och skola (Topping, 2017). Och att eleven skriver av meningar ur boken gör att läsning och skrivning stöttar varandra. Det som gör insatsen intensiv är regelbundenheten: fyra dagar i veckan, två läsningar om dagen, samma rutin varje gång."
+  text: "TIL bygger på fyra saker som var för sig har stöd i läsforskningen och som här sätts ihop till en daglig rutin. Att läsa samma text flera gånger ger flyt (Samuels, 1979). Att läsa högt för en vuxen som lyssnar och ger återkoppling stärker avkodning och flyt mer än tyst läsning på egen hand (National Reading Panel, 2000). Att en vuxen hemma läser tillsammans med barnet och bekräftar läsningen ger många fler lästillfällen och stärker samarbetet mellan hem och skola (Topping, 2017). Och att eleven skriver av meningar ur boken gör att läsning och skrivning stöttar varandra. Det som gör insatsen intensiv är regelbundenheten: vanligtvis fyra dagar i veckan, två läsningar om dagen, samma rutin varje gång."
   kallor: Bygger på Samuels (1979), National Reading Panel (2000), Topping (2017) samt Skolverkets material om läsflyt och tidiga insatser på Lärportalen.
+ramar:
+  rubrik: "Materialet"
+  text:
+    - "Här finns lektionskortet, kontraktet och lässchemat. Skriv ut ett kontrakt till varje elev. Lässchemat har en rad för varje dag eleven läser. Skriv ut ett nytt när det är fullt."
+  ramar: []
 lathund:
   innehall: Text, skrivbok och lässchema i mappen hem varje dag
   metoden:
@@ -410,6 +415,8 @@ lathund:
       - Snabbmallen för noteringen efteråt
       - Kontraktet, påskrivet av hem och skola
     varjePass: Hade alla läst hemma, vem byter nivå, vad övas nästa gång?
+lektionskort:
+  - text: "Lektionskortet är passet på ett A4: målet, rutinen från skolan till hemmet och tillbaka, passet med det du gör och säger, det du gör när eleven fastnar och hur veckorna går. Skriv ut det och ha det framför dig under passet."
 film:
   sekunder: 29.75
   beskrivning: "I skolan: eleven läser för läraren. Samma dag går boken hem i mappen. Hemma: eleven läser igen och skriver tre meningar. Den vuxne signerar. Nästa dag i skolan. Läraren berömmer och signerar."
