@@ -2255,6 +2255,7 @@ function ljudBarn(l: { rubrik?: string; rader: string[][] }, form: NonNullable<R
   const kort = kortCeller(l);
   if (form === 'bildkort') return [...arkRubrik(l.rubrik, true), vikkortTabell(kort)];
   if (form === 'bokstavskort') return [...arkRubrik(l.rubrik, false), bokstavskortTabell(kort)];
+  if (form === 'byggkort') return [...arkRubrik(l.rubrik, false), byggkortTabell(kort)];
   if (form === 'bokstavskarta') return [...arkRubrik(l.rubrik, false), bokstavskartaTabell(kartCeller(l))];
   return golvbokstaverBarn(kort);
 }
@@ -2364,6 +2365,25 @@ function bokstavskortTabell(kort: string[]): Table {
     rader.push(new TableRow({ cantSplit: true, height: { value: hojd, rule: HeightRule.EXACT }, children: Array.from({ length: perRad }, (_, j) => rad[j]).map((k) => new TableCell({
       width: { size: w, type: WidthType.DXA }, verticalAlign: VerticalAlign.CENTER, borders: runt(k === undefined ? INGEN : STRECKAD), margins: { top: 0, bottom: 0, left: 80, right: 80 },
       children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, ...radHojd(2200, storlek, ELEVTYPSNITT) }, children: k === undefined ? [] : [elevRun(k, storlek)] })],
+    })) }));
+  }
+  return new Table({ width: { size: w * perRad, type: WidthType.DXA }, columnWidths: Array(perRad).fill(w), layout: TableLayoutType.FIXED, borders: UTAN_KANTER, rows: rader });
+}
+// Bokstäver att bygga med (Säg, skriv och läs, 2026-10-17): små kort som eleven lägger ett ord eller en mening med, sex
+// i bredd och åtta rader, 48 på ett A4, cirka 3,2 × 3,2 cm med streckad kant, som metodriggens B.byggkort. Bokstaven
+// i 60 pt, så att g, j och y ryms med sina nedstaplar, och punkten och frågetecknet lika stora. Raden är 0,9 av kortets
+// höjd, en multipel av Andikas enkla rad, som riggens kortRad, så att Google Dokument ritar korten som Word.
+function byggkortTabell(kort: string[]): Table {
+  const storlek = 120;
+  const perRad = 6;
+  const w = Math.floor(BREDD_KORTARK / perRad);
+  const hojd = Math.round(3.2 * CM);
+  const rader: TableRow[] = [];
+  for (let i = 0; i < kort.length; i += perRad) {
+    const rad = kort.slice(i, i + perRad);
+    rader.push(new TableRow({ cantSplit: true, height: { value: hojd, rule: HeightRule.EXACT }, children: Array.from({ length: perRad }, (_, j) => rad[j]).map((k) => new TableCell({
+      width: { size: w, type: WidthType.DXA }, verticalAlign: VerticalAlign.CENTER, borders: runt(k === undefined ? INGEN : STRECKAD), margins: { top: 0, bottom: 0, left: 60, right: 60 },
+      children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, ...radHojd(Math.round(0.9 * hojd), storlek, ELEVTYPSNITT) }, children: k === undefined ? [] : [elevRun(k, storlek)] })],
     })) }));
   }
   return new Table({ width: { size: w * perRad, type: WidthType.DXA }, columnWidths: Array(perRad).fill(w), layout: TableLayoutType.FIXED, borders: UTAN_KANTER, rows: rader });

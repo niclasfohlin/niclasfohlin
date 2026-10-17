@@ -5,6 +5,9 @@
 //                  prick under varje ljud (en båge under varje del när orden står i delar), att vika med facit bakom
 //   bokstavskort   en kortlista där varje kort är en till tre bokstäver: stora, i elevens typsnitt, utan skrivlinje
 //   golvbokstäver  en kortlista vars rubrik börjar med Golvbokstäver och där varje kort är en bokstav: en per A4
+//   byggkort       en kortlista vars rubrik börjar med Bokstäver att bygga med och där varje kort är en bokstav, en punkt,
+//                  ett frågetecken, ett utropstecken eller ett komma: små kort, sex i bredd och åtta rader, 48 på ett A4,
+//                  så att en mening på fem ord ryms framför eleven (Säg, skriv och läs, 2026-10-17)
 //   bokstavskartan en lista (inte kort) med minst tio celler, var och en en bokstav och ett ord ("a apa"), där de
 //                  flesta orden har en bild: alfabetet på ett A4
 // Elevens typsnitt gäller sedan 2026-09-30 allt elevmaterial i alla metoder (K-130, harElevtypsnitt nedan). Inga
@@ -59,12 +62,15 @@ export const arBildlista = (l: Lista): boolean => !!l.bilder && kortCeller(l).le
 export const bildlistansNamn = (l: Lista): string => (l.rubrik ? (/[?!]$/.test(l.rubrik.trim()) ? `kortet ”${l.rubrik.trim()}”` : `kortet ${l.rubrik}`) : 'korten med bilder');
 const arKortlista = (d: Pick<MetodData, 'kort'>, l: Lista) => (d.kort?.listor ?? []).some((t) => (l.rubrik ?? '').includes(t));
 
-export type Ljudform = 'bildkort' | 'bokstavskort' | 'golvbokstaver' | 'bokstavskarta';
+export type Ljudform = 'bildkort' | 'bokstavskort' | 'byggkort' | 'golvbokstaver' | 'bokstavskarta';
 export function ljudform(d: Pick<MetodData, 'kort'>, l: Lista): Ljudform | undefined {
   const celler = kortCeller(l);
   if (!celler.length) return undefined;
   if (arKortlista(d, l)) {
     if (/^Golvbokst/i.test(l.rubrik ?? '') && celler.every((k) => /^\p{L}$/u.test(k))) return 'golvbokstaver';
+    // Före bokstavskorten: arket med små bokstäver är också en bokstav per kort, men ska vara lika litet som arket med
+    // stora bokstäver och tecken, som metodriggens build/modell.mjs.
+    if (/^Bokstäver att bygga med/i.test(l.rubrik ?? '') && celler.every((k) => /^(\p{L}|[.?!,])$/u.test(k))) return 'byggkort';
     if (celler.every((k) => bildFor(k))) return 'bildkort';
     if (celler.every((k) => /^\p{L}{1,3}$/u.test(k))) return 'bokstavskort';
     return undefined;

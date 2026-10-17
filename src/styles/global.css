@@ -1187,6 +1187,9 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-bokstavskort-kort { display: flex; align-items: center; justify-content: center; aspect-ratio: 47 / 44; border: 1px dashed var(--farg-text-svag); margin: 0 -1px -1px 0; font-family: var(--typsnitt-elev); font-size: 2.6rem; line-height: 1; color: var(--farg-text); }
 .m-bokstavskort.langd-2 .m-bokstavskort-kort { font-size: 2rem; }
 .m-bokstavskort.langd-3 .m-bokstavskort-kort { font-size: 1.5rem; }
+/* Bokstäver att bygga med: små kort, sex i bredd som på arket, också i telefonen. */
+.m-bokstavskort.bygg .m-bokstavskort-ark { grid-template-columns: repeat(6, minmax(0, 1fr)); max-width: 24rem; }
+.m-bokstavskort.bygg .m-bokstavskort-kort { aspect-ratio: 1; font-size: 1.7rem; }
 .m-karta { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid var(--farg-kant); border-left: 1px solid var(--farg-kant); }
 .m-karta-cell { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; padding: 0.5rem 0.25rem; border-right: 1px solid var(--farg-kant); border-bottom: 1px solid var(--farg-kant); text-align: center; min-width: 0; }
 .m-karta-bokstav { font-family: var(--typsnitt-elev); font-size: 1.9rem; line-height: 1.1; color: var(--farg-text); }
@@ -1199,6 +1202,7 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 @media (max-width: 40rem) {
   .m-vikkort-ark { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .m-bokstavskort-ark { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .m-bokstavskort.bygg .m-bokstavskort-ark { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .m-karta-bokstav { font-size: 1.35rem; }
   .m-karta-ord, .m-karta-som { font-size: 0.72rem; }
 }
@@ -1905,7 +1909,8 @@ html.js .bara-js { display: inline-block; }
   .tryck-fot { display: block; position: fixed; bottom: 0; left: 0; right: 0; font-family: var(--typsnitt-ui); font-size: 8.5pt; color: #555; text-align: center; border-top: 1px solid #bbb; padding-top: 3pt; background: #fff; }
   html.marginalrutor .tryck-fot { display: none; }
   /* Kortarken: varje ark på en egen sida med smal marginal, i samma mått som i Word. Vikkorten står två gånger, tre i
-     bredd och åtta rader; bokstavskorten fyra i bredd och sex rader; kartan fem i bredd och sex rader. */
+     bredd och åtta rader; bokstavskorten fyra i bredd och sex rader, bokstäverna att bygga med sex i bredd och åtta
+     rader; kartan fem i bredd och sex rader. */
   .m-vikkort, .m-bokstavskort, .m-bokstavskarta { page: kortark; break-before: page; break-inside: avoid; margin: 0; }
   /* Boksidan på ett eget A4 med Word-sidans mått: ramen 1,5 cm från kanten och lika hög som i Word, texten 1,77 cm
      in från ramens kant, storleken, radavståndet och anfanget ur samma uträkning som Word (src/lib/boksida.ts, satta på
@@ -2063,6 +2068,8 @@ html.js .bara-js { display: inline-block; }
   .m-bokstavskort-kort { height: 44mm; aspect-ratio: auto; border: 0.75pt dashed #777; font-size: 96pt; }
   .m-bokstavskort.langd-2 .m-bokstavskort-kort { font-size: 70pt; }
   .m-bokstavskort.langd-3 .m-bokstavskort-kort { font-size: 50pt; }
+  .m-bokstavskort.bygg .m-bokstavskort-ark { grid-template-columns: repeat(6, 31.6mm); max-width: none; }
+  .m-bokstavskort.bygg .m-bokstavskort-kort { height: 32mm; aspect-ratio: auto; font-size: 60pt; }
   .m-karta { grid-template-columns: repeat(5, 37mm); border-color: #999; }
   .m-karta-cell { height: 43mm; justify-content: center; border-color: #999; padding: 1mm; }
   .m-karta-bokstav { font-size: 32pt; }

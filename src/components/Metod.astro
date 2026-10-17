@@ -794,6 +794,7 @@ const meny = [
                 const ljud = ljudform(d, l);
                 if (ljud === 'bildkort') return <Vikkort rubrik={l.rubrik} rader={l.rader} />;
                 if (ljud === 'bokstavskort') return <Bokstavskort rubrik={l.rubrik} rader={l.rader} />;
+                if (ljud === 'byggkort') return <Bokstavskort rubrik={l.rubrik} rader={l.rader} bygg />;
                 if (ljud === 'golvbokstaver') return <Golvbokstaver rubrik={l.rubrik} rader={l.rader} id={id} titel={d.titel} />;
                 if (ljud === 'bokstavskarta') return <Bokstavskarta rubrik={l.rubrik} rader={l.rader} />;
                 if (arBildlista(l)) return <Bildlista rubrik={l.rubrik} rader={l.rader} />;

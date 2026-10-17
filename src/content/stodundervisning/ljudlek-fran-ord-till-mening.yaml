@@ -1,0 +1,385 @@
+# Metod i stödundervisning. Modellen står i methods/_mall.yaml och docs/modell.md.
+# En lektion i Ljudlek i grupp, skriven i lektionsskelettet: methods/ljudlek-i-grupp/_lektion.yaml. Lektionen är den
+# korta formen av Säg, skriv och läs (Niclas 2026-10-17): passet och att bygga meningar ur en hög mitt på bordet.
+titel: "Ljudlek: Från ord till mening"
+undertitel: "En lektion i Ljudlek i grupp: säga, bygga, skriva och läsa meningar, för F–⁠2"
+ingress: "Eleverna säger en mening efter dig, lägger en kloss för varje ord och bygger den ord för ord med bokstäver ur en hög, med mellanrum, stor bokstav och punkt. Sedan byter den ena i paret ett ord, och den andra läser meningen. Lektionen hör till Ljudlek i grupp och har samma ljudstart och avslut som de andra lektionerna."
+omrade: "Läsning"
+arskurs:
+  - "F-3"
+arskursText: "F–2"
+taggar:
+  - "meningsbyggnad"
+  - "stavning"
+  - "bokstavskunskap"
+  - "fonologisk-medvetenhet"
+  - "intensivtraning"
+format:
+  - "liten grupp"
+  - "par"
+tid: "30 minuter per pass, tre till fem pass i veckan"
+period: "Åtta till tolv pass i följd"
+grupp: "2–12 elever"
+material:
+  - "bokstavskorten"
+  - "speglar"
+  - "bokstäver att bygga med"
+  - "klossar"
+  - "whiteboardtavlor och lappar"
+  - "snabbmallen"
+uppdaterad: "2026-10-17"
+publicerad: "2026-10-17"
+relaterade:
+  - "ljudlek-i-grupp"
+  - "sag-skriv-och-las"
+  - "ljudlek-skriv-ord-tillsammans"
+utkast: false
+serie: "ljudlek-i-grupp"
+formaga: 9
+tranar: "säga korta meningar, bygga och skriva dem med mellanrum, stor bokstav och punkt, och läsa dem"
+inledning:
+  - "I Från ord till mening säger eleverna en mening efter dig, lägger en kloss för varje ord och bygger meningen ord för ord med lösa bokstäver ur en hög mitt på bänken. Lektionen hjälper eleven med det som gör en mening svår att skriva och läsa: eleven glömmer meningen medan hen bygger, orden flyter ihop utan mellanrum, stor bokstav och punkt faller bort, och eleven läser det hen tänkte i stället för det som står."
+  - "Syftet är att eleverna ska kunna säga en kort mening, bygga den med mellanrum, stor bokstav och punkt, och läsa den, så att de kan skriva och läsa sina första meningar själva. Ditt uppdrag är att visa hur du säger, bygger och läser meningen, att låta eleverna säga den igen innan de bygger, och att låta dem läsa det som ligger, också kamratens nya ord."
+  - "Välj Från ord till mening när fler än hälften av eleverna har färre än tre rätt på ljudkollens uppgift 9, där eleven läser fyra påhittade ord. Ljudkollen står i Ljudlek i grupp, och Från ord till mening hör till förmåga 9, Läsa och skriva meningar, i lektionsbanken där."
+upplagg:
+  rubrik: "Så används lektionen"
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Från ord till mening går igenom raderna i Så blir lektionen svårare, oftast i åtta till tolv pass. Ta nästa rad när dagens elever skriver en mening själva med alla ord, mellanrum, stor bokstav och punkt, två pass i följd. Efter den sista raden gör du ljudkollens uppgift 9. Läser fler än hälften alla fyra orden, går gruppen till Säg, skriv och läs eller Läslistor i grupp. Annars tar ni de två sista raderna igen."
+tabeller:
+  - rubrik: "Så blir lektionen svårare"
+    plats: "efter-inledning"
+    kolumner:
+      - "Meningen"
+      - "Så låter det"
+      - "Så gör ni"
+    rader:
+      - - "Två ord"
+        - "Ola ler."
+        - "Gruppen börjar här. Meningen har ett mellanrum, stor bokstav först och punkt sist."
+      - - "Tre ord"
+        - "Vi ser solen."
+        - "Meningen har två mellanrum. Ordet i mitten är ofta kort, till exempel ser, har eller tar, och eleven glömmer det lätt."
+      - - "Fyra ord"
+        - "Vi vilar i solen."
+        - "Meningen har tre mellanrum, och eleven har mer att hålla kvar. Säg meningen igen före varje ord, om det behövs."
+      - - "Egen mening"
+        - "Ola ser mos."
+        - "Eleven säger en egen mening på två till fyra ord eller byter två ord i en mening ur tabellen Meningarna."
+    not: "Meningarna till varje rad står under Meningarna. I raden Egen mening säger alla en egen mening: du säger din och skriver den på tavlan, paret säger sin för dig när du går mellan paren, och sist skriver var och en sin egen. Har den egna meningen ett ord som inte stavas som det låter, till exempel jag eller och, skriver du det på tavlan, och paret bygger det efter tavlan. Säger eleven bara ett ord, som Mira, svarar du: ”Mira. Vad gör Mira?”"
+  - rubrik: "Ljudstarten: samma fem minuter varje pass"
+    plats: "efter-tidsschema"
+    text: "Alla svarar samtidigt. Vänd ansiktet mot eleverna, så att de ser din mun."
+    kolumner:
+      - "Moment"
+      - "Så gör du"
+    rader:
+      - - "Dagens ljud"
+        - "Visa bokstaven och säg ljudet. Alla säger efter, och någon säger ett ord på ljudet. Sist säger alla ljuden för några bokstäver ni har haft."
+      - - "Sätt ihop"
+        - "Dra ut fem ord utan paus, med handen från vänster till höger sett från eleverna. Räkna tyst till tre och knyt handen, så säger alla ordet. Sist säger en av dagens elever ett ord ensam."
+      - - "Dela upp"
+        - "Säg fyra ord med olika många ljud. Alla säger ordet och sedan ljuden, med ett finger för varje, och räknar fingrarna sist. I lektionerna före Räkna ljud i banken säger du ljuden först och gruppen efter."
+    not: "Säg ljudet och inte bokstavens namn, och b, d, g, k, p och t korta och utan ö. Orden tar du ur Ordbanken, och i Dela upp blandar du in ord ur de lättare ordgrupperna, så att orden har olika många ljud. Dagens ljud, dina fraser och ordgrupperna står i Ljudlek i grupp. Gruppen behåller sin ordgrupp från lektion till lektion."
+  - rubrik: "Lyssna efter"
+    plats: "efter-steg"
+    text: "Bekräfta först det som eleven gjorde rätt, och försök sedan igen tillsammans."
+    kolumner:
+      - "Eleven säger"
+      - "Det som händer"
+      - "Så gör du"
+    rader:
+      - - "Bygger ”lr” för ler"
+        - "Vokalen faller bort"
+        - "”Du hörde /l/ och /r/. Vad hör du mellan dem?”"
+      - - "Bygger ”Olaler.”"
+        - "Orden flyter ihop"
+        - "”Läs från början. Hur många ord?”"
+      - - "Skriver ”ola ler”"
+        - "Stor bokstav och punkt saknas"
+        - "”Var börjar meningen, och var slutar den?” Peka på hörnet av tavlan om eleven inte hittar den stora bokstaven."
+      - - "Lägger en kloss för varje ljud i Vi ler"
+        - "Eleven räknar ljuden i stället för orden"
+        - "”Säg meningen igen och lägg en kloss för varje ord: Vi, ler.”"
+      - - "Börjar bygga direkt"
+        - "Eleven har inte sagt meningen igen"
+        - "”Vad gör du först?” Säg meningen igen och lägg klossarna tillsammans med eleven."
+      - - "Läser ”Vi ler” när det ligger Vi ror"
+        - "Eleven läser meningen som låg där före bytet"
+        - "”Läs det som ligger, med fingret under.”"
+  - rubrik: "Varianter"
+    plats: "efter-urval"
+    text: "Byt till en variant i samma steg när gruppen behöver något nytt."
+    kolumner:
+      - "Variant"
+      - "Så gör ni"
+      - "När den passar"
+    rader:
+      - - "Namnmeningar"
+        - "Du säger en mening med ett namn först, och varje par byter det mot ett av sina egna namn, som ”Mira ser solen”. Den som heter så bygger namnet med stor bokstav."
+        - "Steg 2, när namnen stavas som de låter"
+      - - "Meningsväggen"
+        - "Du skriver parens nya meningar på ett papper på väggen, och i slutet av steget läser gruppen dem i kör. Ta ned papperet före steg 4."
+        - "Steg 3, när paren hinner byta många gånger"
+  - rubrik: "Meningarna"
+    plats: "efter-urval"
+    meny: true
+    text: "Här står meningarna till raderna Två ord, Tre ord och Fyra ord, i bokstävernas ordning. Ta de första meningarna som bara har bokstäver som gruppen har haft. En mening med ett namn mitt i, som ”Ola ser Lisa”, står sist i raden. Byt gärna ett namn mot namnet på någon i gruppen, när det stavas som det låter."
+    kolumner:
+      - "Raden"
+      - "Meningarna"
+    rader:
+      - - "Två ord"
+        - "Ola ler. Lisa ror. Vi ler. Ola vilar. Elin målar. Vi åker. Ali syr. Mira läser. Vi äter."
+      - - "Tre ord"
+        - "Ola ser solen. Elin ser solen. Mira ser mos. Vi ser solen. Ali tar mos. Vi har is. Vi äter mat. Mira läser mera. Elin ser snö. Ola ser Lisa."
+      - - "Fyra ord"
+        - "Ola ror i solen. Vi vilar i solen. Elin tar mos nu. Mira målar tre hus. Vi äter mat ute. Mira har tre bär. Ali ser tre sälar."
+    not: "Alla ord är ljudenliga. Säg vad ett ord betyder första gången, som ror och syr. Låt r:et höras, som i har, ser och målar, också när nästa ord börjar med s, t eller l."
+  - rubrik: "Ordbanken"
+    plats: "efter-urval"
+    text: "Här är orden till ljudstarten, i sex ordgrupper från lätt till svårt. Alla ord är ljudenliga, med ett ljud för varje bokstav."
+    kolumner:
+      - "Ordgrupp"
+      - "Orden"
+    rader:
+      - - "Två ljud att dra ut"
+        - "is, ål, se, le, ro, sy, nu, ny, så"
+      - - "Tre ljud att dra ut"
+        - "sol, lus, mus, mos, vas, mål, nål, mås, sås, räv, säl, hår"
+      - - "Med klusil"
+        - "mat, lök, nöt, pil, gås, kål, gul, bad, båt, tåg, duk, tak"
+      - - "Två stavelser"
+        - "sola, mosa, lera, rasa, mera, läsa, måla, leta, vila, bada, baka, kaka"
+      - - "Konsonantmöte först"
+        - "snö, blå, sko, bro, tre, grå, klo, stå, sten, stol, glas, svan, stor, smör"
+      - - "Konsonantmöte sist"
+        - "fisk, mask, hand, sand, hund, vind, land, hals, rund, tält"
+    not: "Orden står i ordning, lättast först. Hur du säger orden och vilka ord som får vänta står under Ordbanken i Ljudlek i grupp."
+principer:
+  rubrik: "Tre saker att hålla fast vid"
+  text: "Låt eleven säga meningen igen och lägga en kloss för varje ord innan hen bygger. Klossarna ligger kvar, så att hen kan peka på dem och säga meningen igen. Eleven bygger ett ord i taget med en bokstav för varje ljud och lämnar ett fingers mellanrum, så att orden inte flyter ihop. Efter varje ord läser hen från början med fingret under, så att hen läser det som ligger och inte det hen tänkte."
+passrutin:
+  text: "Lektionen går i fyra steg, från att du visar till att var och en gör själv."
+  steg:
+    - text: "Du säger meningen, lägger klossarna och skriver den ord för ord på tavlan."
+      fas: "Meningen på tavlan"
+    - text: "Du säger nästa mening, och paren säger den igen, lägger klossarna och bygger den."
+      fas: "Meningen ur högen"
+    - text: "Den ena i paret byter tyst ett ord, och den andra läser den nya meningen."
+      fas: "Byt ett ord"
+    - text: "Var och en skriver en ny mening på sin whiteboardtavla och läser med fingret under."
+      fas: "Skriv meningen"
+  efterPasset: "Du noterar i snabbmallen vilka av dagens elever som i steg 4 fick med alla ord, mellanrum, stor bokstav och punkt, vad som fastnade, och om gruppen tar samma rad, nästa rad eller nästa lektion."
+tidsschema:
+  rubrik: "Ett pass på 30 minuter"
+  text: "Är passet bara 20 minuter blir ljudstarten tre minuter, lektionen 15 och avslutet två. Stegen får då två, fyra, fem och fyra minuter."
+  rader:
+    - tid: "Före passet"
+      fas: "Förberedelse"
+      vad: "Lägg gruppens små bokstäver i en hög per par och de stora mellan två par. Ta fram bokstavskorten, speglarna, klossarna och whiteboardtavlorna. Skriv de stora bokstäverna som dagens meningar behöver bredvid de små i hörnet av tavlan. Fyll i snabbmallen."
+    - tid: "0–5 min"
+      fas: "Ljudstart"
+      vad: "Visa dagens ljud, sätt ihop fem ord och dela upp fyra, som i Ljudstarten. Alla svarar samtidigt."
+    - tid: "5–9 min"
+      fas: "Meningen på tavlan"
+      vad: "Ta en mening ur raden och tänk högt medan du skriver. Gruppen räknar orden med dig."
+    - tid: "9–15 min"
+      fas: "Meningen ur högen"
+      vad: "Paren bygger två meningar, men bara en i raden Fyra ord. Bokstäverna går tillbaka i högen, utom efter den sista. Du går mellan paren."
+    - tid: "15–20 min"
+      fas: "Byt ett ord"
+      vad: "Den sista meningen ligger kvar, och i paret turas de om att byta ett ord tills tiden är slut. Du går mellan paren."
+    - tid: "20–25 min"
+      fas: "Skriv meningen"
+      vad: "Lägg bokstäverna i högen och sudda meningarna på tavlan, men låt hörnet stå. Säg en ny mening ur raden. Du lyssnar på dagens elever."
+    - tid: "25–30 min"
+      fas: "Avslut"
+      vad: "Var och en säger ett ord från dagens lek och vad hen gjorde med det. Du säger kort vad du hörde."
+  efter: "Den som är klar före de andra får fyra bokstäver ur högen som blir ett ord ur Ordbanken, men i blandad ordning. Hen flyttar dem och läser tills hen hittar ett ord."
+steg:
+  rubrik: "Vad du gör och säger i varje steg"
+  text: "Här är lärarens ord, så att du kan säga dem som de står."
+  fraserRubrik: "Exempelfraser"
+  rader:
+    - namn: "Meningen på tavlan"
+      fraga: "Hur många ord har min mening?"
+      gor: "Säg meningen två gånger och lägg en kloss för varje ord. Börja med stor bokstav, skriv ett ord i taget och läs från början. Sätt punkten: ”Nu har jag sagt allt.” Ibland hoppar du över ett mellanrum med flit."
+      fraser:
+        - "Jag ska skriva: Ola ler."
+        - "Hur många ord? Räkna med mig."
+        - "Jag läser från början: Ola ler."
+    - namn: "Meningen ur högen"
+      fraga: "Vilket ord bygger vi nu?"
+      gor: "Säg nästa mening. Alla säger den igen, och paret lägger klossarna. De bygger ett ord var, och den som väntar säger också ljuden. Båda läser från början efter varje ord. Skriv sedan meningen på tavlan, så att paren kan jämföra."
+      fraser:
+        - "Säg den igen och lägg klossarna."
+        - "Bygg det första ordet, en bokstav för varje ljud."
+        - "Läs från början med fingret under."
+    - namn: "Byt ett ord"
+      fraga: "Kan din kamrat läsa den?"
+      gor: "Den ena byter tyst ett ord, helst det sista, medan kamraten blundar. Det nya ordet stavas som det låter. Kamraten ljudar det nya ordet med fingret under och läser meningen högt, och den som bytte säger om det stämmer."
+      fraser:
+        - "Byt ett ord tyst medan din kamrat blundar."
+        - "Ljuda det nya ordet och läs meningen."
+        - "Var det det du ville skriva?"
+    - namn: "Skriv meningen"
+      fraga: "Kan du skriva den själv?"
+      gor: "Säg en ny mening ur raden. Var och en säger den igen, lägger klossarna, skriver meningen på sin whiteboardtavla och läser den med fingret under. Den som inte minns hur en bokstav ser ut letar upp den i högen."
+      fraser:
+        - "Säg den igen och lägg klossarna."
+        - "Skriv ett ord i taget, med mellanrum."
+        - "Läs det du har skrivit, med fingret under."
+arbetsform:
+  rubrik: "Arbetsform: alla i kör, växlande, gemensamt"
+  text: "I ljudstarten svarar alla samtidigt, och i lektionen går ni från att du visar till att var och en gör själv. Paren och trion sätter du ihop som i Ljudlek i grupp."
+  delar:
+    - rubrik: "1. Alla i kör"
+      text: "alla svarar"
+      faser:
+        - "Ljudstart"
+    - rubrik: "2. Växlande"
+      text: "du visar, tillsammans, i par, själv"
+      faser:
+        - "Meningen på tavlan"
+        - "Meningen ur högen"
+        - "Byt ett ord"
+        - "Skriv meningen"
+    - rubrik: "3. Gemensamt"
+      text: "ett ord var"
+      faser:
+        - "Avslut"
+exempel:
+  valt:
+    rubrik: "Gruppen"
+    text: "sex elever i förskoleklass och åk 1, vecka 10, tre pass i veckan. Gruppen gör Från ord till mening för tredje passet i följd, det första i raden Tre ord. Dagens ljud är /h/, och dagens elever är Mira och Omar."
+  text:
+    - "Ljudstarten. Läraren visar h och säger ljudet: ”Hhh.”"
+    - "Meningen på tavlan. Läraren säger: ”Jag ska skriva: Vi ser solen.” Alla räknar orden medan hen lägger tre klossar. Hen skriver Vi och läser det, lämnar ett fingers mellanrum, skriver ser och läser från början: ”Vi ser.” Efter solen sätter hen punkten: ”Nu har jag sagt allt.”"
+    - "Meningen ur högen. Paren är Alva och Elin, Omar och Noah, Leo och Mira. Läraren säger den andra meningen: ”Ali tar mos.” Alla säger den igen, och varje par lägger tre klossar. Omar bygger Ali. Noah bygger tar men lägger det direkt efter Ali. Omar läser från början: ”Alitar.” Noah lägger ett finger emellan och flyttar tar."
+    - "Byt ett ord. Mira byter tyst mos mot mat medan Leo blundar. Leo ljudar mmmaaat och läser: ”Ali tar mat.” Mira säger: ”Ja, det står så.”"
+    - "Skriv meningen. Läraren säger en ny mening: ”Vi har is.” Mira skriver alla tre orden med stor bokstav, mellanrum och punkt. Omar skriver ”vi har is.” Läraren frågar: ”Var börjar meningen?” Omar tittar i hörnet av tavlan och byter v mot ett stort V."
+    - "Avslutet. Alva säger: ”Ali. Jag byggde det med stort A.”"
+    - "Efteråt noterar läraren: Mira får med allt, och Omar glömmer den stora bokstaven. Nästa pass tar gruppen samma rad, och dagens elever blir Alva och Leo."
+fastnar:
+  rubrik: "När eleven fastnar"
+  text: "Vänta tre sekunder och ge minsta möjliga stöd först. Blir det många fel i gruppen, säg ordet i kör, låt sedan några elever säga det ensamma och ta samma ord minst tre gånger."
+  fragaForst:
+    - "Vad hör du?"
+  trappaText: "Gå uppför stödtrappan i stunden. Ge inte nästa stöd förrän eleven har prövat det förra:"
+  trappa:
+    - "Säg ordet igen, långsamt: mmmooosss. Dra fingret under bokstäverna medan ni säger det."
+    - "Visa hur munnen gör. Eleven tittar i spegeln och känner efter: läpparna är ihop vid /m/ och runda vid /o/."
+    - "Gör uppgiften mindre: eleven väljer mellan två bokstäver, som e och o."
+    - "Visa med handen eller med något att flytta: peka på klossen för ordet som eleven bygger, och lägg ett finger mellan orden."
+    - "Säg det tillsammans, och låt eleven säga det själv efteråt: ni säger meningen i kör, och sedan säger eleven den ensam och bygger den igen."
+  motto: "Till sist säger, bygger och läser eleven meningen själv."
+urval:
+  rubrik: "Var hittar du orden och materialet?"
+  text:
+    - "Meningarna du säger står i tabellen Meningarna, och bokstavskorten och arken med bokstäver att bygga med står under Materialet. Orden till ljudstarten står i Ordbanken."
+    - "Egna ord går också bra, utom orden i ljudkollen och i screeningens version B."
+  kravText: "Tre krav gäller egna ord:"
+  krav:
+    - rubrik: "Kända ord"
+      text: "Eleven vet vad ordet betyder"
+    - rubrik: "Ljudenliga"
+      text: "En bokstav för varje ljud, som låter som den brukar"
+    - rubrik: "Gruppens bokstäver"
+      text: "Bara bokstäver som gruppen har haft"
+uppfoljning:
+  text: "Du ser i steg 4 vad eleverna klarar, och ljudkollen var tredje vecka visar samma sak för varje elev. Berätta konkret för eleven vad hen har lärt sig."
+  rader:
+    - nar: "Under passet"
+      vad: "I steg 4 lyssnar du på dagens elever. Säger de meningen igen själva, och får de med alla ord, mellanrum, stor bokstav och punkt? Läser de det som står?"
+    - nar: "Efter varje pass"
+      vad: "I snabbmallen noterar du det dagens elever skrev och det som fastnade."
+    - nar: "Var tredje vecka"
+      vad: "Du gör ljudkollens uppgift 9 om påhittade ord, uppgift 7 om att skriva ord och uppgift 4 om bokstävernas ljud."
+mal:
+  rubrik: "Mål: vad eleven ska kunna efter lektionen"
+  text: "Efter lektionen ska eleven kunna:"
+  punkter:
+    - "säga en mening, säga den igen och lägga en kloss för varje ord"
+    - "bygga och skriva en mening på två till fyra ord, med mellanrum, stor bokstav och punkt"
+    - "läsa tillbaka det som ligger eller står, med fingret under, och läsa ett ord som kamraten har bytt"
+snabbmall:
+  fore:
+    - "Raden och meningarna"
+    - "Dagens ljud och orden ur Ordbanken"
+    - "Paren och dagens elever"
+  efter:
+    - "Det dagens elever skrev i steg 4, som olaler för Ola ler"
+    - "Ord och ljud som fastnade"
+    - "Nästa pass: samma rad, nästa rad eller nästa lektion?"
+grund:
+  text: "I åk 1 betydde det muntliga språket, arbetsminnet och stavningen mest för hur eleverna skrev (Kim och Schatschneider, 2017). Därför säger eleven meningen igen och lägger en kloss för varje ord innan hen bygger. Elever i riskzonen för läs- och skrivsvårigheter stavade och läste bättre när de fick lära sig att skriva ord ljud för ljud (Weiser och Mathes, 2011). Barn i åk 1 gjorde större framsteg i sitt eget skrivande när de skrev en text tillsammans tio minuter om dagen och turades om att hålla pennan (Roth och Guinee, 2011)."
+  kallor: "Bygger på Fohlin och Wilson, Skriv! (utkommer 2027), Kim och Schatschneider (2017), Weiser och Mathes (2011) och Roth och Guinee (2011)."
+ramar:
+  rubrik: "Materialet"
+  text:
+    - "Här finns bokstavskorten och arken med bokstäver att bygga med. Varje par har ett ark med små bokstäver, och två par delar ett ark med stora bokstäver och tecken. Med tolv elever blir det sex ark med små bokstäver och tre med stora. Skriv ut arken på tjockt papper, laminera dem och klipp isär bokstäverna. Klossarna är desamma som i Ord och stavelser, och du behöver fyra per elev och fyra till dig."
+  ramar:
+    - rubrik: "Bokstäver att bygga med"
+      text:
+        - "Arken har hela alfabetet, och de bokstäver som behövs mest finns flera gånger, så att paret kan bygga varje mening i Meningarna ur sin hög."
+      delar:
+        - rubrik: "Till läraren"
+          falt:
+            - rubrik: "Högen"
+              text: "Ta först bort de bokstäver som gruppen inte har haft. Lägg de små bokstäverna i en hög mitt på parets bänk och bred ut dem med bokstaven uppåt, så att alla bokstäver syns. Lägg de stora bokstäverna och tecknen i en liten hög mellan två par. Paret sitter bredvid varandra, så att meningen ligger rättvänd för båda. Saknas en bokstav, skriv den på en lapp."
+            - rubrik: "Upp och ned"
+              text: "Visa eleverna att u blir n och d blir p när bokstaven ligger upp och ned."
+      listor:
+        - rubrik: "Bokstäver att bygga med: små bokstäver"
+          rader:
+            - ["a", "a", "a", "a", "b", "c"]
+            - ["d", "e", "e", "e", "e", "f"]
+            - ["g", "h", "i", "i", "i", "j"]
+            - ["k", "k", "l", "l", "m", "n"]
+            - ["n", "o", "o", "p", "q", "r"]
+            - ["r", "r", "r", "s", "s", "t"]
+            - ["t", "t", "u", "v", "w", "x"]
+            - ["y", "z", "å", "å", "ä", "ö"]
+        - rubrik: "Bokstäver att bygga med: stora bokstäver och tecken"
+          rader:
+            - ["A", "A", "B", "C", "D", "D"]
+            - ["E", "E", "F", "G", "H", "H"]
+            - ["I", "J", "J", "K", "L", "L"]
+            - ["M", "M", "N", "O", "O", "P"]
+            - ["Q", "R", "S", "T", "U", "V"]
+            - ["V", "W", "X", "Y", "Z", "Å"]
+            - ["Ä", "Ö", ".", ".", ".", "."]
+            - [".", ".", ".", ".", "?", "?"]
+    - rubrik: "Bokstavskorten"
+      text:
+        - "Det är samma 24 kort i alla lektioner, i den ordning bokstäverna blir dagens ljud."
+      delar:
+        - rubrik: "Till läraren"
+          falt:
+            - rubrik: "Så gör du"
+              text: "Skriv ut korten på tjockt papper och klipp isär dem. Håll upp kortet för dagens ljud så att alla ser det, och håll det rättvänt, eftersom u blir n och d blir p när kortet vänds upp och ned."
+      listor:
+        - rubrik: "Bokstavskort"
+          rader:
+            - ["s", "o", "l"]
+            - ["a", "r", "m"]
+            - ["e", "n", "i"]
+            - ["v", "t", "f"]
+            - ["å", "p", "k"]
+            - ["d", "u", "b"]
+            - ["g", "h", "y"]
+            - ["ä", "ö", "j"]
+kort:
+  listor:
+    - "Bokstavskort"
+    - "Bokstäver att bygga med"
+mallar: []
+film:
+  sekunder: 29.56
+  beskrivning: "Läraren säger: ”Vi ler.” Leo säger meningen igen och lägger en kloss per ord. Läraren säger: ”Bygg ett ord var.” Leo bygger Vi med stort V. Leo lämnar ett fingers mellanrum. Mira bygger ler och lägger punkten. Paret läser från början. Läraren säger: ”Byt ett ord.” Leo byter ler mot ror medan Mira blundar. Mira har inte hört det nya ordet. Mira läser: ”Vi ror.”"
+  rubrik: "Så gör eleven"
+  ingress: "De fyra bilderna är ur lektionens film, där paret bygger meningen ur högen, byter ett ord och läser den nya meningen. Filmen på metodens sida visar samma sak i rörelse."
+  stillbilder:
+    - text: "Leo lägger klossarna för lärarens mening."
+    - text: "Klossarna ligger kvar, och Leo bygger Vi."
+    - text: "Mira bygger ler, och paret läser från början."
+    - text: "Mira läser ett ord hon inte har hört."

@@ -3956,15 +3956,15 @@
     "datum": "2026-10-17"
   },
   "ljudlek-i-grupp": {
-    "word": "9673a17a9647fc89eccd2218bd0ef344bb3f859beb20f265b25dfbba56b5548c",
-    "pdf": "cf76b9f1bb1ae3d6fa3c76f331debaa9d45edf7c444c517a2fa2f58d8a34b2e5",
+    "word": "71342988d4ee57934e65df3d9a0a5e2836590402d61846e85425f2998d2c925e",
+    "pdf": "135c28005472e255c1aeb382b3d0d57eea37c07a2193a61345c66fc2dca1e3de",
     "sidor": 38,
-    "kB": 655,
+    "kB": 657,
     "datum": "2026-10-17"
   },
   "ljudlek-i-grupp-metoden": {
-    "word": "8a866612efbe7647df00b70031f07a97b3d7c21fe03d55538317696fb1502982",
-    "pdf": "b8acd24f9557eab838aa341aa22d421aa3e8f2c04e7be23f720134e73d814123",
+    "word": "d5577a3ad28bf043ce2ea9a5924d6840cedda2a69615b8be3b021e665b4110ed",
+    "pdf": "332db4c18bc4aa4248b9c0726f2fcf8f2e52dd15c831b4fac9ce365bf6c904bd",
     "sidor": 13,
     "kB": 437,
     "datum": "2026-10-17"
@@ -4486,5 +4486,19 @@
     "sidor": 20,
     "kB": 246,
     "datum": "2026-10-16"
+  },
+  "ljudlek-fran-ord-till-mening": {
+    "word": "7aa80c365f3918ef546e76453f676a99c7f01dc9ee479ae58ed27dc872e0a73c",
+    "pdf": "4d4b7a07cea7d08b8bf428179a5fd7a634a65c62c59e4e6446cff4a680127d87",
+    "sidor": 15,
+    "kB": 439,
+    "datum": "2026-10-17"
+  },
+  "ljudlek-fran-ord-till-mening-metoden": {
+    "word": "6d132cbd57eb297cd8fa8f2bf644bdb84f928d210503a9522157df5dfd5e8249",
+    "pdf": "2ab21c0e9c4a5a7d2a52d7728b12854537ef59cebd7b5bc7fbba485217ed0794",
+    "sidor": 8,
+    "kB": 400,
+    "datum": "2026-10-17"
   }
 }
