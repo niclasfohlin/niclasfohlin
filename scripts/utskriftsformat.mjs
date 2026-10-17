@@ -20,7 +20,8 @@
 //   varje central sak (src/data/centrala.json) finns i bygget, en pdf bär namnet och upphovet, och den korta adressen
 //   leder dit (netlify.toml), och varje lektionskort som en knapp leder till finns, bär ordet och upphovet på varje sida
 //   och är högst ett A4, och varje korts innehåll i src/data/lektionskort/ hör till en metod. Det prövas varje gång, före
-//   sidorna.
+//   sidorna;
+//   ingen sida rullar i sidled i den minsta telefonens bredd, 320 punkter (K-400).
 // Att pdf:erna är gjorda av de Word-filer som ligger i bygget prövar scripts/bankpdf.mjs --kontrollera, och delarna klipps
 // ur dem vid varje bygge.
 //
@@ -226,6 +227,8 @@ async function flik() {
   return {
     oppna: async (url) => { const klar = new Promise((r) => { laddad = r; }); await skicka('Page.navigate', { url }); await Promise.race([klar, vanta(20000)]); },
     kor: async (expression) => (await skicka('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true })).result?.result?.value,
+    telefon: (bredd) => skicka('Emulation.setDeviceMetricsOverride', { width: bredd, height: 800, deviceScaleFactor: 2, mobile: true }),
+    dator: () => skicka('Emulation.clearDeviceMetricsOverride'),
   };
 }
 
@@ -288,6 +291,14 @@ async function prova(f, s) {
       }
     }
   }
+  // I den minsta telefonens bredd, 320 punkter, rullar ingen sida i sidled (K-400: fem metodsidor gjorde det, för adressen
+  // i upphovsraden och för tabellernas längsta ord). Felet nämner det första elementet som sticker ut och inte ligger i en
+  // ruta som rullar själv.
+  await f.telefon(320);
+  await f.oppna(`${bas}${s.adress}`);
+  const bred = await f.kor(`document.fonts.ready.then(() => { const W = document.documentElement.clientWidth; const sw = document.documentElement.scrollWidth; if (sw <= W + 1) return ''; const klipps = (e) => { for (let a = e.parentElement; a && a !== document.body; a = a.parentElement) if (getComputedStyle(a).overflowX !== 'visible') return true; return false; }; for (const e of document.querySelectorAll('body *')) { const r = e.getBoundingClientRect(); if (!r.width || klipps(e)) continue; if ((r.right > W + 1 && e.parentElement.getBoundingClientRect().right <= W + 1) || (r.right <= W + 1 && r.left + e.scrollWidth > W + 1 && getComputedStyle(e).overflowX === 'visible' && ![...e.children].some((c) => c.getBoundingClientRect().right > W + 1 || c.scrollWidth > c.clientWidth + 1))) return sw + ' punkter bred, ' + e.tagName.toLowerCase() + (typeof e.className === 'string' && e.className.trim() ? '.' + e.className.trim().split(/\\s+/).slice(0, 2).join('.') : '') + ' ”' + (e.textContent || '').replace(/\\s+/g, ' ').trim().slice(0, 40) + '”'; } return sw + ' punkter bred'; })`);
+  await f.dator();
+  if (bred) nej(`sidan rullar i sidled i 320 punkters bredd: ${bred} (global.css, K-400)`);
   if (godkand) klara[s.adress] = s.nyckel;
 }
 

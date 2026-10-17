@@ -41,13 +41,17 @@ const perRad = Math.max(8, Math.floor(90 / Math.max(1, kolumner.length)));
 const textrader = rader.reduce((s, r) => s + 1 + Math.max(1, ...r.map((c) => c.split('\n').reduce((a, l) => a + Math.max(1, Math.ceil(l.length / perRad)), 0))), 0);
 const hel = rader.length <= 5 && textrader <= 40;
 // Bladens namn som länkar till räknebladen, i kartan.
+// En kort etikett i första kolumnen eller i rubrikraden (högst 14 tecken, flera ord, som Egen mening och Så låter det)
+// bryts inte på en dator, där kolumnen annars kunde bli smalare än etiketten (K-389, global.css .m-tabell .m-etikett).
+const kort = (t: string) => t.trim().length <= 14 && /\s/.test(t.trim());
+const forsta = (t: string) => (kort(t) ? 'forsta m-etikett' : 'forsta');
 const lankDelar = (x: string) => bladDelar(x, karta!.namn).map((d) => ({ text: d.text.replace(/ (\d+)$/, '\u00a0$1'), href: d.blad ? karta!.blad(d.blad) : undefined }));
 ---
 {/* hel: en kort tabell (högst fem rader, som lästrappan) delas inte mellan sidor i utskriften, som i Word (K-076). */}
 <table class={`m-tabell ${klass} ${hel ? 'hel' : ''} ${karta ? 'karta' : ''}`.replace(/\s+/g, ' ').trim()}>
   {bredder.length > 0 && <colgroup>{bredder.map((b) => <col style={`width:${b}`} />)}</colgroup>}
   <thead>
-    <tr>{kolumner.map((k) => { const n = niva(k); return n ? <th scope="col" class="niva" style={`--niva:#${n.farg};--niva-text:#${skyltText(n.farg)}`}>{k}</th> : <th scope="col">{k}</th>; })}</tr>
+    <tr>{kolumner.map((k) => { const n = niva(k); return n ? <th scope="col" class="niva" style={`--niva:#${n.farg};--niva-text:#${skyltText(n.farg)}`}>{k}</th> : <th scope="col" class={kort(k) ? 'm-etikett' : undefined}>{k}</th>; })}</tr>
   </thead>
   <tbody>
     {rader.map((rad) => arMellanrubrik(rad)
@@ -56,12 +60,12 @@ const lankDelar = (x: string) => bladDelar(x, karta!.namn).map((d) => ({ text: d
       <tr>
         {rad.map((cell, i) => {
           const l = linjer(cell);
-          if (i === 0 && radrubrik) return <th scope="row" data-rubrik={kolumner[i]}><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</th>;
+          if (i === 0 && radrubrik) return <th scope="row" data-rubrik={kolumner[i]}><span class={forsta(l[0])}>{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</th>;
           // En tom cell ritas tom, så att :empty träffar (mattan och bladet på lathundens mallsida).
           if (i === 0 && !cell.trim()) return <td data-rubrik={kolumner[i]}></td>;
-          if (i === 0 && karta?.vecka) { const href = karta.vecka(rad); return <td data-rubrik={kolumner[i]}>{href ? <a class="m-karta-vecka" href={href}><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</a> : <><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</>}</td>; }
-          if (i === 0 && !karta && lank(cell)) return <td data-rubrik={kolumner[i]}><a class="m-tabell-lank" href={lank(cell)}><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</a></td>;
-          if (i === 0 && !karta) return <td data-rubrik={kolumner[i]}><span class="forsta">{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</td>;
+          if (i === 0 && karta?.vecka) { const href = karta.vecka(rad); return <td data-rubrik={kolumner[i]}>{href ? <a class="m-karta-vecka" href={href}><span class={forsta(l[0])}>{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</a> : <><span class={forsta(l[0])}>{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</>}</td>; }
+          if (i === 0 && !karta && lank(cell)) return <td data-rubrik={kolumner[i]}><a class="m-tabell-lank" href={lank(cell)}><span class={forsta(l[0])}>{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</a></td>;
+          if (i === 0 && !karta) return <td data-rubrik={kolumner[i]}><span class={forsta(l[0])}>{l[0]}</span>{l.slice(1).map((x) => <span class="under">{x}</span>)}</td>;
           // Staplad på en smal skärm får nivåns cell sin etikett i nivåns färg, som rubrikraden (global.css, td.niva::before).
           if (karta) { const n = niva(kolumner[i]); return <td data-rubrik={kolumner[i]} class={n ? 'niva' : undefined} style={n ? `--niva:#${n.farg};--niva-text:#${skyltText(n.farg)}` : undefined}>{l.map((x, j) => <>{j > 0 && <br />}{lankDelar(x).map((dd) => (dd.href ? <a href={dd.href}>{dd.text}</a> : dd.text))}</>)}</td>; }
           if (cellank?.(cell)) return <td data-rubrik={kolumner[i]}><a class="m-tabell-lank" href={cellank(cell)}>{l.map((x, j) => <>{j > 0 && <br />}{x}</>)}</a></td>;

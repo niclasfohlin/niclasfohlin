@@ -1400,7 +1400,7 @@ html.js .bara-js { display: inline-block; }
 .lh-ruta > h3 { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.15rem 0.75rem; }
 .lh-ruta > h3 .lh-lank { margin-left: auto; }
 .lh-ruta > h3 .lh-lank button, .lh-ruta > h3 .lh-lank a { color: rgba(255, 255, 255, 0.9); font-size: 0.75rem; }
-.lathund .upphov { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
+.lathund .upphov { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); overflow-wrap: anywhere; }
 .lathund-lank { font-weight: 600; }
 .lh-kicker { font-family: ui-monospace, 'Cascadia Mono', Consolas, 'Liberation Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--farg-text-svag); font-weight: 500; }
 .lh-sida { background: var(--farg-yta); border: 1px solid var(--farg-kant); border-radius: var(--radie); margin: 0 0 2rem; overflow: hidden; font-family: var(--typsnitt-ui); font-size: 0.95rem; line-height: 1.5; box-shadow: var(--skugga); }
@@ -1568,7 +1568,7 @@ html.js .bara-js { display: inline-block; }
 .metod-fot { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--farg-kant); }
 .metod-fot .relaterade h2 { font-size: 1.15rem; margin: 1.25rem 0 0.4em; }
 .metod-fot .relaterade ul { padding-left: 1.2em; margin: 0 0 1em; }
-.metod-fot .upphov { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); }
+.metod-fot .upphov { font-family: var(--typsnitt-ui); font-size: 0.9rem; color: var(--farg-text-svag); overflow-wrap: anywhere; }
 .tryck-fot { display: none; }
 
 @media screen and (max-width: 40rem) {
@@ -1667,6 +1667,20 @@ html.js .bara-js { display: inline-block; }
   .metod-modell { font-size: 1rem; }
   .m-tabell, .m-snabbmall { font-size: 0.9rem; }
   .m-tabell th, .m-tabell td { padding: 0.45rem 0.5rem; }
+}
+
+/* En kort etikett i en tabells första kolumn eller rubrikrad (MetodTabell.astro, klassen m-etikett) bryts inte på en dator, där
+   kolumnen annars blev smalare än etiketten: Egen mening och Så låter det i Ljudlek: Från ord till mening (K-389). I
+   telefonen bryts den som förut, så att tabellen ryms. */
+@media screen and (min-width: 40.01rem) {
+  .m-tabell .m-etikett { white-space: nowrap; }
+}
+
+/* De minsta telefonerna, 320 punkter breda: tabellernas längsta ord och cellernas luft rymdes inte, och sidan rullade i
+   sidled (K-400: tidsschemat i TIL i grupp och tabellen i Gruppstärkande aktiviteter). Texten i tabellerna är där något
+   mindre och luften smalare. scripts/utskriftsformat.mjs stoppar en sida som rullar i sidled i 320 punkters bredd. */
+@media screen and (max-width: 22.4rem) {
+  .m-tabell th, .m-tabell td { padding-left: 0.3rem; padding-right: 0.3rem; font-size: 0.82rem; }
 }
 
 /* Utskrift av en metod: bara metoden, med © Niclas Fohlin och adressen längst ner på varje sida. */
