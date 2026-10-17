@@ -135,8 +135,10 @@ async function preSave(data) {
 }
 
 async function postSave(kommentar, foralder) {
-  // En kommentar som väntar på granskning ändrar inte det läsarna ser; en godkänd gör det.
+  // En kommentar som väntar på granskning ändrar inte det läsarna ser; en godkänd gör det. En väntande märker sin sida,
+  // så att administratören ser den i rutan på sidan (vantandeSidor).
   if (kommentar.status === 'approved') await sidanAndrad(this, kommentar.url);
+  else if (kommentar.status === 'waiting') await markVantande(kommentar.url);
   const titel = rubrik(this, kommentar.url);
   if (!arAdmin(this)) {
     const { amne, text } = mejl.nyKommentar({
@@ -220,6 +222,30 @@ async function kandaSidor(lager) {
   return { sidor: new Set(sidor), fragade: true };
 }
 
+/** Sidorna som har kommentarer som väntar på granskning (lagret "vantande", K-396). Administratören läser en sådan sidas
+ *  lista ur Waline, med de väntande och knappen Godkänn; andra sidor läser hen i rutan som en läsare, ur mellanlagret, så
+ *  att databasen får sova. Saknas listan i Blobs läses den ur databasen och sparas; annars rörs databasen inte. */
+async function vantandeSidor(lager) {
+  const lagrade = await lager.get('vantande', { type: 'json' }).catch(() => undefined);
+  if (Array.isArray(lagrade)) return { sidor: new Set(lagrade), fragade: false };
+  const rader = await getDatabase().sql`SELECT DISTINCT url FROM wl_comment WHERE status = 'waiting' AND url IS NOT NULL`;
+  const sidor = rader.map((r) => r.url);
+  await lager.setJSON('vantande', sidor).catch(() => {});
+  return { sidor: new Set(sidor), fragade: true };
+}
+
+/** En kommentar som väntar på granskning har kommit: sidan läggs till bland de väntande. */
+async function markVantande(url) {
+  if (!url) return;
+  const lager = oppnaLager();
+  try {
+    const { sidor } = await vantandeSidor(lager);
+    if (!sidor.has(url)) await lager.setJSON('vantande', [...sidor, url]);
+  } catch (e) {
+    console.error('kommentarer: sidan med en väntande kommentar sparades inte i Blobs:', e?.message);
+  }
+}
+
 async function sidanAndrad(ctl, url) {
   if (!url) return;
   const lager = oppnaLager();
@@ -229,6 +255,12 @@ async function sidanAndrad(ctl, url) {
     if (antal > 0) sidor.add(url);
     else sidor.delete(url);
     await lager.setJSON('sidor', [...sidor]);
+    // Godkänns, ändras eller tas den sista väntande bort, lämnar sidan de väntande.
+    const vantar = await ctl.modelInstance.count({ url, status: 'waiting' });
+    const { sidor: vantande } = await vantandeSidor(lager);
+    if (vantar > 0) vantande.add(url);
+    else vantande.delete(url);
+    await lager.setJSON('vantande', [...vantande]);
     const { blobs } = await lager.list({ prefix: `lista/${sidnyckel(url)}/` });
     await Promise.all(blobs.map((b) => lager.delete(b.key)));
   } catch (e) {
@@ -355,6 +387,16 @@ function mellanlagra(svar, url) {
   return svar;
 }
 
+/** Svaret till administratören i rutan mellanlagras inte i CDN:et: det ska visa en ny väntande kommentar genast. */
+function privat(svar) {
+  for (const k of Object.keys(svar.multiValueHeaders || {})) {
+    if (/^(cache-control|netlify-)/i.test(k)) delete svar.multiValueHeaders[k];
+  }
+  svar.headers = { ...svar.headers, 'cache-control': 'private, no-store' };
+  for (const k of Object.keys(svar.headers)) if (/^netlify-/i.test(k)) delete svar.headers[k];
+  return svar;
+}
+
 // Netlifys nyare funktionsform (Request in, Response ut), som sajtens andra funktioner. Waline är
 // skriven för Lambdas form, så anropet görs om till en Lambda-händelse och svaret tillbaka.
 export default async (req, context) => {
@@ -435,6 +477,19 @@ async function behandla(event, context) {
 
     const admin = inloggad(event.headers);
     let slag = null;
+    // Rutan på sidorna (src/lib/kommentarer-klient.js) märker sina anrop. Där läser administratören som en läsare (K-396):
+    // vem hen är står i beviset, som bara administratören kan ha, och listan kommer ur mellanlagret när sidan inte har
+    // kommentarer som väntar. Förut vaknade databasen varje gång Niclas öppnade en sida med rutan, omkring en kredit per
+    // gång (40 av 50 krediter 2026-09-20 till 10-17). Panelen (/ui) märker inte sina anrop och frågar Waline som förut.
+    let somLasare = false;
+    if (admin && event.headers['x-kommentar-ruta'] === 'ja' && metod === 'GET') {
+      if (del === '/api/token') return privat(json(200, { errno: 0, errmsg: '', data: { type: 'administrator' } }));
+      if (del === '/api/comment' && q.path && !q.type) {
+        const { sidor: vantande, fragade } = await vantandeSidor(lager);
+        databas = fragade;
+        somLasare = !vantande.has(q.path);
+      }
+    }
     if (!admin) {
       delete event.headers.authorization;
       if (event.multiValueHeaders) delete event.multiValueHeaders.authorization;
@@ -447,6 +502,12 @@ async function behandla(event, context) {
     if (slag === 'inloggning' && (metod === 'POST' || q.email !== undefined)) {
       const epost = String((metod === 'POST' ? lasKropp(event).email : q.email) || '').trim().toLowerCase();
       if (epost !== ADMIN_EPOST) return fel(401, 'Fel e-postadress eller lösenord.');
+    }
+
+    // Vem är jag, utan bevis: ingen. Svaret ges här, som Waline ger det, och kontrollen av tvåstegsinloggningen kräver
+    // adressen, så att inget av anropen väcker databasen för en läsare eller en robot (K-396).
+    if (slag === 'inloggning' && metod === 'GET' && q.email === undefined) {
+      return del === '/api/token' ? json(200, { errno: 0, errmsg: '', data: null }) : fel(400, 'Ange e-postadressen.');
     }
 
     // Inloggningen kan inte gissas i all oändlighet: tio försök i timmen per avsändare, fyrtio för alla.
@@ -467,16 +528,23 @@ async function behandla(event, context) {
       if (problem) return fel(400, problem);
     }
 
-    // Listan för en läsare: ur Blobs om det går, så att databasen får sova.
-    if (slag === 'las') {
+    // Listan för en läsare: ur Blobs om det går, så att databasen får sova. Administratören i rutan får samma lista, men
+    // inte genom CDN:et (privat).
+    if (slag === 'las' || somLasare) {
       const { sidor, fragade } = await kandaSidor(lager);
-      databas = fragade;
+      databas = databas || fragade;
+      const svara = (svar) => (somLasare ? privat(svar) : mellanlagra(svar, q.path));
       if (!sidor.has(q.path)) {
         const storlek = Number(q.pageSize) || 10;
-        return mellanlagra(listsvar({ page: Number(q.page) || 1, totalPages: 0, pageSize: storlek, count: 0, data: [] }), q.path);
+        return svara(listsvar({ page: Number(q.page) || 1, totalPages: 0, pageSize: storlek, count: 0, data: [] }));
       }
       const sparad = await lager.get(listnyckel(q), { type: 'json' }).catch(() => null);
-      if (sparad) return mellanlagra(listsvar(sparad), q.path);
+      if (sparad) return svara(listsvar(sparad));
+      // Finns listan inte sparad frågas Waline som en läsare, så att det som sparas är det läsarna får se.
+      if (somLasare) {
+        delete event.headers.authorization;
+        if (event.multiValueHeaders) delete event.multiValueHeaders.authorization;
+      }
     }
 
     bytIp(event);
@@ -487,10 +555,11 @@ async function behandla(event, context) {
       console.error('kommentarer: Waline svarade', svar.statusCode, String(svar.body).slice(0, 500));
       return fel(svar.statusCode, 'Något gick fel. Försök igen om en stund.');
     }
-    if (slag === 'las' && svar.statusCode === 200) {
+    if ((slag === 'las' || somLasare) && svar.statusCode === 200) {
       const lista = JSON.parse(svar.isBase64Encoded ? Buffer.from(svar.body, 'base64').toString('utf8') : svar.body);
       if (lista.errno === 0 && lista.data) await lager.setJSON(listnyckel(q), lista.data).catch(() => {});
-      mellanlagra(svar, q.path);
+      if (somLasare) privat(svar);
+      else mellanlagra(svar, q.path);
     }
     return svar;
   } catch (e) {

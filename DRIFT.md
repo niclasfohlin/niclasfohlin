@@ -196,7 +196,7 @@ Kommandon: `node scripts/brevo.mjs status`, `doman`, `autentisera`, `kampanjer [
 
 ## Kommentarer
 
-Under varje artikel, bok och metod finns kommentarer, byggda 2026-09-26 på Niclas beställning. De är ett lager som läggs på och tas bort med en enda inställning, och läsare som inte skriver kostar inga krediter.
+Under varje artikel, bok och metod finns kommentarer, byggda 2026-09-26 på Niclas beställning. De är ett lager som läggs på och tas bort med en enda inställning, och läsare som inte skriver kostar inga krediter. Det gör inte heller Niclas när han läser en sida inloggad: rutan märker sina anrop, och då svarar grinden vem han är ur beviset och ger listan ur mellanlagret, så länge sidan inte har kommentarer som väntar på granskning (K-396; förut väckte varje sida han öppnade databasen, 40 av 50 krediter 2026-09-20 till 10-17). Databasen vaknar när någon skriver, när Niclas godkänner, svarar eller tar bort, och i panelen.
 
 | Del | Var | Vad den gör |
 |---|---|---|
@@ -204,12 +204,13 @@ Under varje artikel, bok och metod finns kommentarer, byggda 2026-09-26 på Nicl
 | Klienten | `src/lib/kommentarer-klient.js` och `src/styles/kommentarer.css`, byggda till `/kommentarer/klient.js` av `src/pages/kommentarer/[fil].ts` | hämtas först när läsaren närmar sig rutan; formulär, lista, svar, och Godkänn och Ta bort när Niclas är inloggad |
 | Servern | `netlify/functions/kommentarer.mjs` och `netlify/lib/kommentarer.mjs` | Waline (`@waline/vercel`) bakom en grind: vilka anrop en läsare får göra, robotprovet, taket i krediter, registreringen av administratören, mellanlagringen och mejlen |
 | Databasen | Netlify Database (Postgres), schemat `netlify/database/schema/waline-kommentarer.sql` (utanför migreringsmappen, se Krediterna nedan) | Walines tabeller `wl_comment`, `wl_users`, `wl_counter`. Skapades 2026-09-26, sover efter fem minuter utan anrop |
-| Lagret | Netlify Blobs, lagret `kommentarer` | `sidor` (sidor med godkända kommentarer), `lista/` (sparade listor), `forbrukning-<period>` (kreditmätaren), `admin-finns` (sidan registrera behöver inte fråga databasen), `registrera-senast` och `registrera-mejl` (länkarna), `inloggning/<avsändare>` och `inloggning-alla` (taken för inloggning) |
+| Lagret | Netlify Blobs, lagret `kommentarer` | `sidor` (sidor med godkända kommentarer), `vantande` (sidor med kommentarer som väntar på granskning, där Niclas lista i rutan hämtas ur Waline), `lista/` (sparade listor), `forbrukning-<period>` (kreditmätaren), `admin-finns` (sidan registrera behöver inte fråga databasen), `registrera-senast` och `registrera-mejl` (länkarna), `inloggning/<avsändare>` och `inloggning-alla` (taken för inloggning) |
 | Mejlen | Brevos transaktionsmejl med `BREVO_API_KEY`, avsändare id 2 (nyhetsbrev@niclasfohlin.se), svar till Gmail | ny kommentar till Niclas; svar till den som fick svar, när svaret syns; länken för att bli administratör eller byta lösenord; varning vid 80 procent av taket och när det nås |
 
 | Uppgift | Kommando eller adress |
 |---|---|
 | Läget, kreditmätaren och robotkontrollen | `npm run kommentarer` |
+| Provet för grinden: vilka anrop som väcker databasen, med Blobs, databasen och Waline utbytta | `npm run kommentarer:prov` (`scripts/kommentarprov.mjs`) |
 | Stäng av på hela sajten | `npm run kommentarer -- av` (sätter `KOMMENTARER=av` och bygger om, omkring 15 krediter) |
 | Slå på igen | `npm run kommentarer -- på` |
 | Byt månadens tak | `npm run kommentarer -- tak 80` (förval 50 krediter) |

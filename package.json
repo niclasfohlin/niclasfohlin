@@ -19,6 +19,7 @@
     "delningskort": "node scripts/delningskort.mjs",
     "filmmp4": "node scripts/filmmp4.mjs",
     "kommentarer": "node scripts/kommentarer.mjs",
+    "kommentarer:prov": "node --test --experimental-test-module-mocks scripts/kommentarprov.mjs",
     "ko": "node scripts/ko.mjs",
     "paritet": "node scripts/paritet.mjs",
     "ko:prov": "node scripts/ko.mjs prov",

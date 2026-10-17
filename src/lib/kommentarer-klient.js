@@ -43,6 +43,9 @@ function inloggning() {
 async function anropa(sokvag, init = {}, token) {
   const headers = new Headers(init.headers);
   if (token) headers.set('Authorization', `Bearer ${token}`);
+  // Märket säger att anropet kommer från rutan, där servern låter administratören läsa som en läsare, ur mellanlagret,
+  // utan att väcka databasen (netlify/functions/kommentarer.mjs, K-396).
+  headers.set('x-kommentar-ruta', 'ja');
   try {
     const res = await fetch(API + sokvag, { ...init, headers });
     const svar = await res.json().catch(() => ({}));
