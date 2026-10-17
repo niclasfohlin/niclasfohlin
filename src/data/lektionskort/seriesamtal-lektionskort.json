@@ -1,0 +1,168 @@
+{
+ "design": "strategipapper",
+ "fil": "Lektionskort - Seriesamtal en egen serie",
+ "titel": "Seriesamtal: en egen serie",
+ "dokumenttitel": "Seriesamtal: en egen serie · Lektionskort",
+ "knapp": "Lektionskort",
+ "info": [
+  "F–5 · 30 minuter · 1–4 elever"
+ ],
+ "infoUtanRuta": true,
+ "fot": "© Niclas Fohlin, niclasfohlin.se, där du skriver ut metodens material",
+ "ingress": "**Mål:** kunna se en händelse ovanifrån och göra en plan för nästa gång.",
+ "ruta": {
+  "storlek": {
+   "rubrik": 23,
+   "text": 20
+  },
+  "punkter": [
+   {
+    "rubrik": "Spola tillbaka",
+    "text": "Ägaren berättar från när det var lugnt, en ruta i taget."
+   },
+   {
+    "rubrik": "Tankarna",
+    "text": "Båda personerna får en tankebubbla."
+   },
+   {
+    "rubrik": "Ovanifrån",
+    "text": "Ägaren väljer rutan där någon hade behövt göra annorlunda."
+   },
+   {
+    "rubrik": "Nästa gång",
+    "text": "Ägaren väljer hur det kan bli i stället, och ni ritar det."
+   }
+  ]
+ },
+ "delar": [
+  {
+   "rubrik": "Passet",
+   "text": "Från pass 8 äger en elev serien. Ägaren bestämmer, du rättar inget, och andra heter ”en kompis”.",
+   "kolumner": [
+    "Delen",
+    "Så leder du",
+    "Du säger, till exempel"
+   ],
+   "bredder": [
+    22,
+    43,
+    35
+   ],
+   "storlek": 18,
+   "tat": true,
+   "rader": [
+    [
+     "Dagen före",
+     "Prata fem minuter med ägaren, nästa elev i ordningen från pass 7. Ta händelsen när den är över, hen vill och ingen i gruppen var med. Skriv ut mallen med fyra rutor på A3.",
+     "”Vill du rita något som har hänt dig, eller något som brukar bli svårt? Är det över nu? Får de andra höra det?”\n”Jag bestämmer inte vem som hade rätt.”"
+    ],
+    [
+     "Spaningen\n0–4 min · alla",
+     "Läs gruppens regler på väggen. Var och en säger vad hen har lagt märke till.",
+     "”Vad såg du någon säga eller göra?”\n”Hur gick det med din plan?”"
+    ],
+    [
+     "Spola tillbaka\n4–11 min · ägaren",
+     "Ägaren berättar kort vad som hände. Spola tillbaka till när det var lugnt, ruta 1, och gå fram en ruta i taget till konflikten. Ägaren väljer om du eller hen ritar.",
+     "”Var var du? Vad gjorde du precis innan? Vad ville du då?”"
+    ],
+    [
+     "Tankarna\n11–17 min · alla",
+     "Rita först ägarens tankebubblor, i ruta 1 och där det gick snett. De andra säger vad de undrar, och ägaren väljer tanken i den andra personens bubbla.",
+     "”Vad tänkte du där?”\n”Får vi undra över vad den andra tänkte?”"
+    ],
+    [
+     "Ovanifrån\n17–21 min · alla",
+     "Ägaren berättar hela serien och bestämmer i vilken ruta någon hade behövt göra annorlunda.",
+     "”Vad gjorde du som hen märkte?”\n”I vilken ruta hade någon behövt tänka och göra annorlunda?”"
+    ],
+    [
+     "Nästa gång\n21–27 min · alla",
+     "De andra föreslår, ägaren väljer, och ägaren eller du ritar det på bladet Nästa gång. Det ska vara bra för båda.",
+     "”Hur kan det bli i stället?”\n”Vad kan den andra göra? Vad kan vi vuxna göra?”"
+    ],
+    [
+     "Med mig\n27–30 min · alla",
+     "Var och en säger vad hen tar med sig. Säg något ägaren gjorde bra. Dela ut spanarbladen. Planen blir ägarens uppdrag.",
+     "”Du berättade fast det var svårt.”\n”Lägg märke till en gång när det nästan blev bråk, men det blev inget.”"
+    ],
+    [
+     "Efter passet",
+     "Fyll i bladet Min plan med ägaren, omkring tio minuter, och skriv planen på hens spanarblad."
+    ]
+   ]
+  },
+  {
+   "rubrik": "När eleven inte hittar tanken",
+   "text": "Börja med det som syns. Tanken kommer sedan.",
+   "kolumner": [
+    "Steget",
+    "Så gör du"
+   ],
+   "bredder": [
+    12,
+    88
+   ],
+   "storlek": 19,
+   "tat": true,
+   "rader": [
+    [
+     "1",
+     "Peka på personen i rutan: ”Vad gjorde hen? Vad sa hen?”"
+    ],
+    [
+     "2",
+     "Spegla det eleven sa, och vänta."
+    ],
+    [
+     "3",
+     "Ge två tankar att välja mellan: ”Tänker hon ’Jag vill vara med’ eller ’De vill inte ha mig’?”"
+    ],
+    [
+     "4",
+     "Säg början på meningen: ”Hon tror att …” Eller säg en tanke själv: ”Kan det vara så?”"
+    ]
+   ]
+  },
+  {
+   "rubrik": "Om något händer",
+   "text": "Säg vad eleven gjorde bra i samtalet, och sitt kvar bredvid.",
+   "kolumner": [
+    "Det som händer",
+    "Så gör du"
+   ],
+   "bredder": [
+    34,
+    66
+   ],
+   "storlek": 19,
+   "tat": true,
+   "rader": [
+    [
+     "”Han började!”",
+     "”Då spolar vi tillbaka. Vad hände innan?” Rita hela serien, och stanna i Ovanifrån i rutan där eleven själv gjorde något."
+    ],
+    [
+     "eleven försvarar sig eller skäms",
+     "Peka på rutan och prata om den: ”Titta på ruta 3. Vad händer där?”"
+    ],
+    [
+     "ägaren är sårad eller vill ha straff",
+     "”Vad behöver hända för att det ska bli bra för dig?” Säg att de vuxna tar hand om det som gäller den andra."
+    ],
+    [
+     "ingen äger serien i dag",
+     "Rita något som ska hända och som gruppen väljer, eller ta en av metodens bildserier."
+    ],
+    [
+     "eleven blir upprörd",
+     "Lägg ned pennan och gör en paus. Serien kan vänta till nästa pass."
+    ],
+    [
+     "en elev berättar om en kränkning eller att någon far illa",
+     "Avbryt passet lugnt, prata med eleven för sig och följ skolans rutin."
+    ]
+   ]
+  }
+ ]
+}

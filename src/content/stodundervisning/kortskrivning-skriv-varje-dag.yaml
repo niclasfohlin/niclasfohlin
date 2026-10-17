@@ -25,7 +25,7 @@ material:
   - klocka som alla ser
   - lösa papper
   - blad på väggen
-uppdaterad: 2026-10-14
+uppdaterad: 2026-10-17
 publicerad: 2026-10-14
 relaterade:
   - texttyper-i-grupp
@@ -57,7 +57,7 @@ principer:
 
 tidsschema:
   rubrik: Passet, del för del
-  text: "Skrivtiden börjar på tre minuter, och passet är då omkring tio minuter. Skriver de flesta fortfarande när klockan ringer, lägger du till en minut nästa pass, upp till åtta. Slutar de flesta före klockan, tar du bort en minut, som lägst till tre. Den som vill står över första tanken eller raden. Det allra första passet tar omkring 25 minuter och står i Börja här: de tio första passen."
+  text: "Skrivtiden börjar på tre minuter, och passet är då omkring tio minuter. Skriver de flesta fortfarande när klockan ringer, lägger du till en minut nästa pass, upp till åtta. Slutar de flesta före klockan, tar du bort en minut, som lägst till tre. Den som vill står över första tanken eller raden. Det allra första passet tar omkring 25 minuter och står i Börja här: de tio första passen. Passet och När pennan stannar står också på Lektionskortet, ett A4 att ha framför dig."
   rader:
     - tid: Före passet
       fas: Förberedelse
@@ -237,7 +237,7 @@ grund:
 ramar:
   rubrik: Materialet
   text:
-    - "Här står de tio första passen och vilka kort som hör till dem. Korten finns på sidan Ta fram ett skrivkort. Skrivlistan finns i planeringsmallarna."
+    - "Här står lektionskortet, de tio första passen och vilka kort som hör till dem. Korten finns på sidan Ta fram ett skrivkort. Skrivlistan finns i planeringsmallarna."
   ramar:
     - rubrik: "Börja här: de tio första passen"
       text:
@@ -407,6 +407,8 @@ lathund:
         vad: Vilka som inte började inom en minut, vem som suddade eller frågade om stavningen, hur många som ännu skrev när klockan ringde, och nästa skrivtid.
       - nar: Vecka 6
         vad: Ett pass är Skriv igen, utan kort. Eleven läser en stjärnmärkt text och skriver nytt om samma sak. I Dela säger eleven vad som är nytt.
+lektionskort:
+  - text: "Lektionskortet är passet på ett A4: målet, passet med det du gör och säger, När pennan stannar och de tio första passen. Skriv ut det och ha det framför dig under passet."
 film:
   sekunder: 29.21
   beskrivning: "Läraren visar dagens skrivkort. Läraren säger: ”Skriv vad du tänker när du ser, läser eller tänker på det här.” Hon säger sin egen första mening. Läraren säger: ”Det började med att vattnet sjönk.” Klockan startar. Alla skriver. Maja skriver: ”Kaptenen bor kvar i sitt gamla hus”. Hon stryker över ordet hus. Maja skriver: ”skepp.” Tar det stopp, skriver hon sista ordet igen. Maja skriver: ”Han väntar på vattnet vattnet vattnet”. Klockan ringer. Maja stryker under en rad. Hon läser raden för Elias. Elias säger: ”Berätta mer om kaptenen.”"

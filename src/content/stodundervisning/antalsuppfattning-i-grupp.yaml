@@ -27,7 +27,7 @@ material:
   - talsortsmatta
   - veckans kort
   - sifferkort och tärning
-uppdaterad: 2026-10-03
+uppdaterad: 2026-10-17
 relaterade:
   - problemlosning-i-grupp
   - brakkurs-i-grupp
@@ -115,7 +115,7 @@ passrutin:
   efterPasset: Läraren antecknar kort vem som växlade själv och kunde säga vad som hände, och vad läraren behöver visa igen nästa pass.
 tidsschema:
   rubrik: Ett pass på 30 minuter
-  text: Förbered dig genom att bygga veckans tal med dagens material och säga orden högt. Remsan visar hur de 30 minuterna fördelas och när läraren visar, när alla arbetar gemensamt och när eleverna arbetar i par och enskilt. Paren får längst tid.
+  text: Förbered dig genom att bygga veckans tal med dagens material och säga orden högt. Remsan visar hur de 30 minuterna fördelas och när läraren visar, när alla arbetar gemensamt och när eleverna arbetar i par och enskilt. Paren får längst tid. Passet och veckorna står också på Lektionskortet, ett A4 att ha framför dig.
   rader:
     - tid: Före passet
       fas: Förberedelse
@@ -315,7 +315,7 @@ grund:
 ramar:
   rubrik: Material per årskurs
   text:
-    - Materialet är ordnat efter årskurs, med ett paket för varje talområde. Använd paketet för gruppens årskurs. Först kommer en ruta Till läraren som för varje vecka beskriver vad du visar först och vad du ska lyssna efter. Sedan kommer kartläggningen och veckornas kort, och sist Läxa 1–5 med en ruta Till vårdnadshavaren.
+    - Lektionskortet gäller alla årskurser. Resten av materialet är ordnat efter årskurs, med ett paket för varje talområde. Använd paketet för gruppens årskurs. Först kommer en ruta Till läraren som för varje vecka beskriver vad du visar först och vad du ska lyssna efter. Sedan kommer kartläggningen och veckornas kort, och sist Läxa 1–5 med en ruta Till vårdnadshavaren.
     - "Rutan Till läraren beskriver hur du visar med tiobas. Med brickor och pengar gör du samma sak och säger talsorten: en tiokrona är ett tiotal."
     - Korten är elevmaterial. Kopiera veckans lista, en per par, klipp isär korten och lägg dem i en hög hos varje par. Den som läser ett kort läser det högt, och kamraten bygger. Om en elev inte kan läsa kortet läser kamraten eller läraren det. Har kortet två tal bygger eleven det första på mattan och det andra ovanför, talsort över talsort, och skjuter ned det när kortet säger ”slå ihop”. Vid subtraktion bygger eleven bara det första talet.
     - Talen är valda så att de kräver veckans fokus inom årskursens talområde. Egna kort skriver du efter de tre kraven under Var hittar du materialet och talen?
@@ -929,6 +929,8 @@ lathund:
       - Papper, penna och sifferkort per par
       - Tärning för Klar tidigt
       - Din egen matta och sats
+lektionskort:
+  - text: "Lektionskortet är passet på ett A4: målet, veckorna med det du visar först och lyssnar efter, passet med det du gör och säger, och stödet när eleven fastnar. Skriv ut det och ha det framför dig under passet."
 film:
   sekunder: 25.12
   beskrivning: "Bygg 38: tre tiostavar och åtta ental. Lägg till 5, ett ental i taget. Tio ental: lägg dem bredvid en tiostav. Växla: byt de tio entalen mot tiostaven. Lägg de tre ental som är kvar. Säg vad du har: fyra tiotal och tre ental."

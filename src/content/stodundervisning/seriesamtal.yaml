@@ -30,7 +30,7 @@ material:
   - pärmar
   - whiteboardpennor
   - pinnar och tejp
-uppdaterad: 2026-10-04
+uppdaterad: 2026-10-17
 publicerad: 2026-10-04
 relaterade: [kompissamtal]
 utkast: false
@@ -219,7 +219,7 @@ tabeller:
   - rubrik: Ett pass med en egen serie
     plats: efter-steg
     meny: true
-    text: Från pass 8 äger en elev serien i varje pass. Eleven berättar sin version först, ni spolar tillbaka till när det var lugnt, och de andra lyssnar och säger vad de undrar. Delarna och tiderna är desamma som i ett pass med en bildserie. Allt ritar ni på papper, också tankebubblorna, så att serien finns kvar i elevens pärm.
+    text: Från pass 8 äger en elev serien i varje pass. Eleven berättar sin version först, ni spolar tillbaka till när det var lugnt, och de andra lyssnar och säger vad de undrar. Delarna och tiderna är desamma som i ett pass med en bildserie. Allt ritar ni på papper, också tankebubblorna, så att serien finns kvar i elevens pärm. Passet står också på Lektionskortet, ett A4 att ha framför dig.
     kolumner:
       - Del
       - Så gör du
@@ -646,7 +646,7 @@ grund:
 ramar:
   rubrik: Material att skriva ut
   text:
-    - Före pass 1 skriver du ut lärarens sidor, bildserierna på A3, bubblorna, kortet ”Vad behöver hen?”, kortet Frågor vi ställer till varandra i två exemplar, provbilden och kortet Till de vuxna runt eleven. Till varje pass skriver du ut snabbmallen och ett spanarblad till varje elev. Till pass 2–⁠6 skriver du också ut bladet Nästa gång till varje elev, och till varje egen serie ett blad. Från pass 7 skriver du ut mallarna med fyra och sex rutor, och från pass 8 bladet Min plan. Mer än så behöver du inte.
+    - Före pass 1 skriver du ut lärarens sidor, bildserierna på A3, bubblorna, kortet ”Vad behöver hen?”, kortet Frågor vi ställer till varandra i två exemplar, provbilden och kortet Till de vuxna runt eleven. Till varje pass skriver du ut snabbmallen och ett spanarblad till varje elev. Till pass 2–⁠6 skriver du också ut bladet Nästa gång till varje elev, och till varje egen serie ett blad. Från pass 7 skriver du ut mallarna med fyra och sex rutor, och från pass 8 bladet Min plan och lektionskortet för passet med en egen serie. Mer än så behöver du inte.
     - Bildserierna, bubblorna, de två korten på bordet och bladen är elevernas. Laminera serierna, bubblorna och korten, så att eleverna kan skriva och rita på dem med whiteboardpenna och sudda ut det efteråt. Efter passet tar du ett foto av serien innan du suddar. Vill du att eleverna ska ha serien i sin pärm, skriver du ut en papperskopia till var och en. En egen serie ritar ni på papper, så att den finns kvar. Lärarens sidor, provbildens protokoll och kortet Till de vuxna runt eleven är dina. Klipp bort rutan Till läraren innan du lägger ett kort på bordet. De bildserier ni har gjort och gruppens blad sitter på väggen under perioden, och elevens egna serier ligger i pärmen.
   ramar:
     - rubrik: "Bildserie 1: Fönsterplatsen"
@@ -1217,6 +1217,9 @@ lathund:
       - Talpinnen, spanarbladen och bladet Nästa gång
       - Korten, och mallen när ni ritar en egen serie
       - Elevernas pärmar, lärarens sida och snabbmallen
+lektionskort:
+  - efter: "tabell: Ett pass med en egen serie"
+    text: "Lektionskortet är passet med en egen serie på ett A4: målet, delarna med det du gör och säger, stödet när eleven inte hittar tanken och det du gör om något händer. Skriv ut det och ha det framför dig under passet."
 film:
   sekunder: 28.67
   beskrivning: "Spola tillbaka till ruta 1, när det var lugnt. Du frågar: ”Vad tänker Elias göra med bilden?” Ella säger: ”Han lägger ut den.” Gå framåt en ruta i taget. Du frågar: ”Vad händer i nästa ruta?” Båda personerna får en tankebubbla. Ella, som är Elias, säger: ”Alla ska skratta!” Malik, som är Amir, säger: ”Alla skrattar åt mig.” Se serien ovanifrån. Du frågar: ”I vilken ruta hade Elias behövt göra annorlunda?” Ella säger: ”I ruta 1. Han kunde ha frågat först.”"

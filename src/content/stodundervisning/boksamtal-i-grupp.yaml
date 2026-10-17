@@ -30,7 +30,7 @@ material:
   - ett exemplar av boken per elev
   - bokens tavla
   - post-it och ett frågekort
-uppdaterad: 2026-10-12
+uppdaterad: 2026-10-17
 relaterade:
   - textsamtal-i-grupp
   - faktatextsamtal-i-grupp
@@ -421,7 +421,7 @@ tabeller:
         - ett per elev
         - slutet
 passrutin:
-  text: Passet börjar och slutar vid bokens tavla, och däremellan läser du högt och gruppen samtalar. Den sista delen heter Med mig, efter det ni tar med er till nästa pass. Tabellen visar passet när du leder det själv. Tavlan, post-it-lapparna och samtalet med frågekortet har egna avsnitt efter arbetsformen. Efter exemplet står perioden i tidsordning, från bokvalet till slutet.
+  text: Passet börjar och slutar vid bokens tavla, och däremellan läser du högt och gruppen samtalar. Den sista delen heter Med mig, efter det ni tar med er till nästa pass. Tabellen visar passet när du leder det själv. Tavlan, post-it-lapparna och samtalet med frågekortet har egna avsnitt efter arbetsformen. Efter exemplet står perioden i tidsordning, från bokvalet till slutet. Läspasset står också på Lektionskortet, ett A4 att ha framför dig.
   steg:
     - text: Var och en säger till den bredvid vad som hände förra gången, och en elev berättar för gruppen. Ni läser tavlans frågor utan bock, och alla säger sin gissning till den bredvid.
       fas: Var är vi?
@@ -580,7 +580,7 @@ pabordet:
 ramar:
   rubrik: Böckerna och materialet
   text:
-    - "Först står böckerna, nivå för nivå, sedan materialet, med mallarna Bokens tavla och Läsplanen sist."
+    - "Här finns lektionskortet för läspasset, böckerna nivå för nivå och materialet, med mallarna Bokens tavla och Läsplanen sist."
   ramar:
     # BOKKORTEN
     - rubrik: "Böckerna: Bas, om nivån"
@@ -1035,6 +1035,8 @@ lathund:
       - Bokens tavla på väggen, med samtalsreglerna bredvid, och en penna
       - Läsplanen hos dig
     varjePass: Fotografera tavlan, och skriv i läsplanen vad gruppen sa och vad du tar upp nästa gång.
+lektionskort:
+  - text: "Lektionskortet är läspasset på ett A4: målet, delarna med det du gör och säger, det du gör när samtalet stannar och det eleverna tar över. Skriv ut det och ha det framför dig under passet."
 film:
   sekunder: 29.76
   beskrivning: "Var är vi? Adam berättar. Adam säger: ”De grå herrarna har kommit.” Läraren stannar vid sin post-it. Läraren säger: ”Jag undrar om man kan spara tid.” Elias visar var boken svarar. Elias säger: ”Den grå herren tar bort minnet!” Läraren frågar: ”Hur vet du det?” Elias säger: ”Här står det.” Frågan får en bock. Läraren frågar: ”Har boken svarat?” Sara frågar: ”Kan de ta Momos tid också?”"

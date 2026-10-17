@@ -1,0 +1,162 @@
+{
+ "design": "strategipapper",
+ "fil": "Lektionskort - Chambers boksamtal i grupp",
+ "titel": "Chambers boksamtal i grupp",
+ "dokumenttitel": "Chambers boksamtal i grupp · Lektionskort",
+ "knapp": "Lektionskort",
+ "info": [
+  "Åk 4–9 · 40 minuter · 4–10 elever"
+ ],
+ "infoUtanRuta": true,
+ "fot": "© Niclas Fohlin, niclasfohlin.se, där du skriver ut metodens material",
+ "ingress": "**Mål:** kunna hålla ihop berättelsen och visa var i boken tanken kommer ifrån.",
+ "ruta": {
+  "storlek": {
+   "rubrik": 23,
+   "text": 20
+  },
+  "punkter": [
+   {
+    "rubrik": "Var är vi?",
+    "text": "Eleven berättar vad som hände, med tavlan, och gissar vad som händer nu."
+   },
+   {
+    "rubrik": "Följ med",
+    "text": "Eleven följer med i boken och sätter sin post-it där hen vill säga något."
+   },
+   {
+    "rubrik": "Visa i boken",
+    "text": "Eleven säger sin sak vid sin post-it och visar var det står."
+   },
+   {
+    "rubrik": "Med mig",
+    "text": "Eleven säger dagens rad, och en fråga får en bock när boken har svarat."
+   }
+  ]
+ },
+ "delar": [
+  {
+   "rubrik": "Läspasset",
+   "text": "Från läspass 2. Ont om tid: laget runt, ett ”Hur vet du det?”, dagens rad och bocken.",
+   "kolumner": [
+    "Delen",
+    "Så leder du",
+    "Du säger, till exempel"
+   ],
+   "bredder": [
+    22,
+    43,
+    35
+   ],
+   "storlek": 18,
+   "tat": true,
+   "rader": [
+    [
+     "Före passet",
+     "Läs om dagens sidor, som står i läsplanen. Skriv din post-it där texten blir svår: sidan, Jag undrar, Det står och Jag tror. Ta med en post-it per elev och frågekortet. Tavlan sitter på väggen, med rutorna Det här har hänt, Personerna och Frågorna vi bär med oss."
+    ],
+    [
+     "Var är vi?\n0–5 min · i par, alla",
+     "Var och en säger till den bredvid vad som hände förra gången, och en elev berättar för gruppen. Blir något fel, peka på tavlan. Läs frågorna som boken inte har svarat på än, och alla gissar.",
+     "”Vad hände förra gången?”\n”Vad tror du händer nu?”"
+    ],
+    [
+     "Läs\n5–27 min · du läser",
+     "Dela ut en tom post-it var. Läs högt till dagens stopp, och stanna bara vid din post-it, under en minut. Säg sidnumret när du börjar och efter din post-it.",
+     "”Sätt din post-it där du vill säga något.”\n”Jag undrar … Det står … Jag tror …”\n”Var slutade du förstå?”"
+    ],
+    [
+     "Samtala\n27–36 min · i par, alla",
+     "Lägg fram frågekortet. Alla säger sin sak vid sin post-it, först till den bredvid och sedan laget runt. Ta först det någon inte förstod. Sedan säger två som sa något som hänger ihop mer.",
+     "”Stämde din gissning?”\n”Sa två av er något som hänger ihop?”\n”Hur vet du det? Visa i boken.”"
+    ],
+    [
+     "Med mig\n36–40 min · alla",
+     "Eleverna säger dagens rad, en mening om vad som hände, och vem som är ny. Du skriver på tavlan, bockar av en fråga som fick svar och skriver en ny. Säg vem som berättar nästa gång.",
+     "”Vad hände i dag, i en mening?”\n”Har boken svarat på någon fråga?”\n”Vem var viktigast i dag, och vad hände?”"
+    ],
+    [
+     "Efter passet",
+     "Fotografera tavlan, och skriv i läsplanen vad gruppen sa och vad du tar upp nästa gång."
+    ]
+   ],
+   "not": "Frågekortet, en fråga var: Var det något du gillade? Något du inte gillade? Något du inte förstod eller undrade över? Lade du märke till något mönster eller någon koppling?"
+  },
+  {
+   "rubrik": "När samtalet stannar",
+   "text": "Ge tanketid och ett litet stöd, men inget svar.",
+   "kolumner": [
+    "Det som händer",
+    "Så gör du"
+   ],
+   "bredder": [
+    32,
+    68
+   ],
+   "storlek": 19,
+   "tat": true,
+   "rader": [
+    [
+     "det blir tyst",
+     "Fråga ”Vad fastnade du för?” En elev läser meningen vid sin post-it, eller låter dig läsa."
+    ],
+    [
+     "det är fortfarande tyst",
+     "Gå till tavlan och välj en fråga som gruppen bär med sig."
+    ],
+    [
+     "en elev vill inte säga något",
+     "Hen får säga ”Pass”. ”Jag kommer tillbaka till dig.” Ge hen ordet sist."
+    ],
+    [
+     "eleverna talar bara till dig",
+     "Vänta tre sekunder. Fråga sedan: ”Vem vill bygga vidare på det Noor sa?”"
+    ],
+    [
+     "några få talar mest",
+     "Ge alla ett tomt kort. Den som har sagt sin sak lägger kortet mitt på bordet och talar igen när alla kort ligger där."
+    ]
+   ]
+  },
+  {
+   "rubrik": "Eleverna tar över",
+   "text": "Gå vidare när gruppen klarar steget utan dig. Du läser själv hela boken.",
+   "kolumner": [
+    "Ungefär när",
+    "Eleverna gör nu"
+   ],
+   "bredder": [
+    24,
+    76
+   ],
+   "storlek": 19,
+   "tat": true,
+   "rader": [
+    [
+     "från läspass 2",
+     "En samtalsregel i taget, före Samtala: 1 Allt vi tänker om boken är värt att säga. 2 Vi bygger vidare på det någon sa. 3 Vi bjuder in varandra."
+    ],
+    [
+     "från läspass 3",
+     "Fler än fem: två samtalsgrupper. Du sitter med den ena, och i den andra läser en elev kortet Du som leder."
+    ],
+    [
+     "från läspass 4",
+     "En elev håller pennan vid tavlan: ett namn, ett streck eller bocken, och senare hela raden."
+    ],
+    [
+     "från läspass 5",
+     "Med regel 2 frågar eleverna varandra ”Hur vet du det?” i paret, och du väntar."
+    ],
+    [
+     "från läspass 6",
+     "En elev ställer frågorna i Var är vi? I bokens andra halva: ”Vad har hänt hittills?”"
+    ],
+    [
+     "från läspass 10",
+     "En elev leder laget runt med kortet Du som leder, och senare tråden."
+    ]
+   ]
+  }
+ ]
+}

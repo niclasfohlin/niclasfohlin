@@ -1,0 +1,166 @@
+{
+ "design": "strategipapper",
+ "fil": "Lektionskort - Antalsuppfattning i grupp",
+ "titel": "Antalsuppfattning i grupp",
+ "dokumenttitel": "Antalsuppfattning i grupp · Lektionskort",
+ "knapp": "Lektionskort",
+ "info": [
+  "Åk 1–5 · 30 minuter · 2–6 elever"
+ ],
+ "infoUtanRuta": true,
+ "fot": "© Niclas Fohlin, niclasfohlin.se, där du skriver ut metodens material",
+ "ingress": "**Mål:** kunna bygga ett tal, säga talsorterna och växla tio mot en.",
+ "ruta": {
+  "storlek": {
+   "rubrik": 23,
+   "text": 20
+  },
+  "punkter": [
+   {
+    "rubrik": "Bygg",
+    "text": "Eleven bygger talet på mattan, varje talsort på sin plats."
+   },
+   {
+    "rubrik": "Säg",
+    "text": "Eleven pekar och säger talsorterna: tre tiotal och sex ental."
+   },
+   {
+    "rubrik": "Växla",
+    "text": "Eleven byter själv och säger det: tio ental blir ett tiotal, och tvärtom."
+   }
+  ]
+ },
+ "delar": [
+  {
+   "rubrik": "Veckorna",
+   "text": "Samma fokus och samma kort hela veckan. Pass 1 tiobas, pass 2 talbrickor, pass 3 pengar.",
+   "kolumner": [
+    "Veckan",
+    "Visa först",
+    "Felet att lyssna efter"
+   ],
+   "bredder": [
+    25,
+    43,
+    32
+   ],
+   "storlek": 19,
+   "tat": true,
+   "rader": [
+    [
+     "Vecka 1\nbygga och säga tal",
+     "Bygg 36. Lyft tiostavarna, tre tiotal, och peka på de sex entalen.",
+     "räknar tiostaven som en, så att 36 blir nio"
+    ],
+    [
+     "Vecka 2\nsiffrans plats och nollan",
+     "Bygg 47 och 74. Peka på sjuan i båda: sju ental, sju tiotal. Bygg 60: entalens plats är tom.",
+     "skriver fyrtiosex som 406"
+    ],
+    [
+     "Vecka 3\nlägga till och växla upp",
+     "Bygg 38 och lägg till 5, ett i taget. Tio ental blir en tiostav: 43.",
+     "läser fyra tiotal och tretton ental som 413"
+    ],
+    [
+     "Vecka 4\nta bort och växla ned",
+     "Bygg 42 och ta bort 7. Två ental räcker inte, så du byter en tiostav mot tio ental.",
+     "drar den minsta siffran från den största: 82 − 45 blir 43"
+    ],
+    [
+     "Vecka 5\nfrån material till skrift",
+     "Bygg och skriv varje steg. Pass 1: 40 + 30 = 70, 7 + 6 = 13, 70 + 13 = 83. Pass 2: 38 + 2 + 23 = 63. Pass 3: 52 − 27, växla: 52 = 40 + 12.",
+     "skriver 47 + 36 = 713"
+    ]
+   ],
+   "not": "Talen är för åk 2, och talen för gruppens årskurs står i rutan Till läraren i gruppens paket. Tiobasen är ental och tiostavar, talbrickorna runda brickor med 1, 10 och 100, och talsortsmattan ett ark med en ruta för varje talsort. Med brickor och pengar gör du likadant, med tiobasen bredvid, och säger talsorten: en tiokrona är ett tiotal."
+  },
+  {
+   "rubrik": "Passet",
+   "text": "Du gör först, sedan alla tillsammans, i par, var för sig och alla igen.",
+   "kolumner": [
+    "Delen",
+    "Så leder du",
+    "Du säger, till exempel"
+   ],
+   "bredder": [
+    22,
+    43,
+    35
+   ],
+   "storlek": 18,
+   "tat": true,
+   "rader": [
+    [
+     "Före passet",
+     "Ta fram dagens material, en talsortsmatta per elev och en till dig, och veckans kort. Det första talet står under Visa först, och det andra väljer du ur veckans kort. Bygg båda och säg orden högt."
+    ],
+    [
+     "Första talet\n0–6 min · du visar",
+     "Bygg det första talet långsamt och tänk högt: vad du tar, var du lägger det, vad du lyfter och vad du pekar på.",
+     "”Jag lyfter en tiostav. Den är tio ental som sitter ihop.”"
+    ],
+    [
+     "Samma tal\n6–12 min · alla",
+     "Alla bygger samma tal, ett handgrepp i taget, och säger likadant. Sedan sex till tio ändringar på talet.",
+     "”Hur vet du att det är 36 och inte 63?”\n”Lägg till ett tiotal. Vilket tal blev det?”"
+    ],
+    [
+     "Korten\n12–21 min · i par",
+     "Läs ett kort. En bygger och säger vad hen gör, en kontrollerar, och de byter. Sedan läser paren för varandra. Lyssna efter veckans fel.",
+     "”Bygg 36. Ta bort 12. Vad har ni kvar?”\n”Räcker entalen? Vad gör ni då?”"
+    ],
+    [
+     "Två kort\n21–26 min · var och en",
+     "Varje elev bygger två kort. Lyssna på en i taget medan de bygger det andra.",
+     "”Bygg ditt kort och berätta vad du gör.”\n”Varför fick du växla?”"
+    ],
+    [
+     "Andra talet\n26–30 min · alla",
+     "Bygg det andra talet med hela gruppen. Eleverna visar och säger vad som hände, och du säger veckans fokus i en mening.",
+     "”Vad hände när entalen blev tio?”\n”I dag såg vi att tio ental blir ett tiotal.”"
+    ],
+    [
+     "Efter passet",
+     "Skriv upp vem som växlade själv och kunde säga vad som hände, och vad du visar igen. Efter veckans första pass får eleven läxan, samma slags kort att bygga hemma."
+    ]
+   ]
+  },
+  {
+   "rubrik": "När eleven fastnar",
+   "text": "Fråga först: ”Vad har du byggt? Säg talet.” Visa sedan, och låt eleven göra likadant.",
+   "kolumner": [
+    "Det eleven gör",
+    "Så gör du"
+   ],
+   "bredder": [
+    34,
+    66
+   ],
+   "storlek": 19,
+   "tat": true,
+   "rader": [
+    [
+     "flyttar stavar utan att säga något",
+     "Be eleven peka på varje talsort och säga hur många: tre tiotal, sex ental."
+    ],
+    [
+     "bygger på fel plats",
+     "Be eleven lägga varje sak på sin plats på mattan. Allt har en plats."
+    ],
+    [
+     "ser inte att det blir tio",
+     "Räkna entalen högt tillsammans och stanna vid tio. Lägg dem bredvid en tiostav: lika långa. Eleven byter."
+    ],
+    [
+     "har för få ental att ta bort",
+     "Be eleven lyfta ett tiotal och byta det mot tio ental: ”Ett tiotal blir tio ental.”"
+    ],
+    [
+     "kommer inte vidare",
+     "Gör växlingen själv och säg vad du gör. Gör den sedan med eleven, som säger det."
+    ]
+   ]
+  }
+ ]
+}

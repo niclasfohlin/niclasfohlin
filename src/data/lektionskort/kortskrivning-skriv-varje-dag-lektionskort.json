@@ -1,0 +1,181 @@
+{
+ "design": "strategipapper",
+ "fil": "Lektionskort - Kortskrivning skriv varje dag",
+ "titel": "Kortskrivning: skriv varje dag",
+ "dokumenttitel": "Kortskrivning: skriv varje dag · Lektionskort",
+ "knapp": "Lektionskort",
+ "info": [
+  "Åk 1–9 · 10–15 minuter · 2–8 elever"
+ ],
+ "infoUtanRuta": true,
+ "fot": "© Niclas Fohlin, niclasfohlin.se, där du skriver ut metodens material",
+ "ingress": "**Mål:** kunna börja skriva direkt och skriva utan att stanna.",
+ "ruta": {
+  "storlek": {
+   "rubrik": 23,
+   "text": 20
+  },
+  "punkter": [
+   {
+    "rubrik": "Dagens kort",
+    "text": "Eleven ser dagens kort och hör din första mening."
+   },
+   {
+    "rubrik": "Skriv",
+    "text": "Eleven skriver utan att stanna tills klockan ringer."
+   },
+   {
+    "rubrik": "Skriv vidare",
+    "text": "Eleven stryker över, eller skriver sista ordet igen när det tar stopp."
+   },
+   {
+    "rubrik": "Dela",
+    "text": "Eleven läser en rad för en kamrat, som vill höra mer."
+   }
+  ]
+ },
+ "delar": [
+  {
+   "rubrik": "Passet",
+   "text": "Uppgiften varje dag: ”Skriv vad du tänker när du ser, läser eller tänker på det här.”",
+   "kolumner": [
+    "Delen",
+    "Så leder du",
+    "Du säger, till exempel"
+   ],
+   "bredder": [
+    22,
+    43,
+    35
+   ],
+   "storlek": 18,
+   "tat": true,
+   "rader": [
+    [
+     "Före passet",
+     "Ta fram dagens skrivkort: i pass 1–10 kortet med passets nummer i Börja här, och sedan ett kort från sidan Ta fram ett skrivkort på niclasfohlin.se. Tänk ut din egen första mening. På bordet: skrivböcker, pennor, högen med gruppens kort och lösa papper. Alla ser en klocka."
+    ],
+    [
+     "Dagens kort\n2 min · alla",
+     "Visa kortet, och läs högt om det är ett citat eller en händelse. Säg uppgiften och din egen första mening.",
+     "Till båtarna i öknen: ”Det började med att vattnet sjönk.”"
+    ],
+    [
+     "Skriv\n3–8 min · var och en",
+     "Starta klockan på dagens skrivtid, först tre minuter. Alla skriver utan att stanna, du också den första minuten. När klockan ringer skriver eleverna klart sin mening.",
+     "”Låt inte pennan stanna, även när det är trögt.”\n”Stryk över och skriv vidare.”"
+    ],
+    [
+     "Dela\n5 min · i par eller tre",
+     "Eleverna stryker under en rad och läser den för en kamrat, som säger ”Berätta mer om …”. Den som läste berättar eller skriver en rad till.",
+     "”Den som vill står över.”"
+    ],
+    [
+     "Veckans sista pass\ni Skriv, 2–3 min till",
+     "Säg ”streck” efter tre minuter. Alla drar ett streck efter sitt sista ord och skriver vidare. När klockan ringer räknar eleven orden fram till strecket och skriver antalet i skrivlistan, längst bak i skrivboken."
+    ],
+    [
+     "Efter passet",
+     "Skriv upp vilka som inte började inom en minut, och nästa skrivtid. Skrev de flesta när klockan ringde: en minut till, upp till åtta. Slutade de före: en minut mindre, som lägst tre."
+    ]
+   ]
+  },
+  {
+   "rubrik": "När pennan stannar",
+   "text": "Ingen rättar, och du läser bara det eleven själv visar.",
+   "kolumner": [
+    "Det du ser eller hör",
+    "Så gör du"
+   ],
+   "bredder": [
+    34,
+    66
+   ],
+   "storlek": 19,
+   "tat": true,
+   "rader": [
+    [
+     "”Är det rätt?”",
+     "”Det du skriver är rätt.” Visar eleven sin text, säger du: ”Berätta mer om …”"
+    ],
+    [
+     "har inte börjat efter en minut",
+     "Sätt dig bredvid: ”Vad var din första tanke?” Skriv elevens ord som första rad. ”Det där är dina ord. Fortsätt.” Nästa pass säger du bara: ”Skriv det.”"
+    ],
+    [
+     "har inte skrivit på tre pass",
+     "Fråga var det tar stopp. Idén: välj kort tillsammans. Orden: skriv det eleven säger. Modet: ett löst papper att slänga."
+    ],
+    [
+     "”Hur stavas det?”",
+     "”Skriv det som du hör det, sätt prickar under och skriv vidare.”"
+    ],
+    [
+     "suddar",
+     "”Stryk över och skriv vidare.” En pil får visa vart tanken gick."
+    ],
+    [
+     "”Klar!” efter två rader",
+     "”Skriv ditt sista ord igen tills nästa tanke kommer.”"
+    ],
+    [
+     "”Jag kommer inte på något.”",
+     "”Ta ett kort ur högen, eller skriv om något annat.”"
+    ]
+   ]
+  },
+  {
+   "rubrik": "De tio första passen",
+   "text": "Eleverna säger sin första tanke till en kamrat innan klockan startar.",
+   "kolumner": [
+    "Pass",
+    "En början att låna",
+    "Du säger innan klockan startar"
+   ],
+   "bredder": [
+    10,
+    28,
+    62
+   ],
+   "storlek": 19,
+   "tat": true,
+   "rader": [
+    [
+     "1",
+     "”Jag ser …”",
+     "”Jag är inte ute efter ett visst svar. Det du skriver är rätt.”"
+    ],
+    [
+     "2",
+     "”Jag tänker på …”",
+     "”Det här skrivandet är för att tänka och lära, inte för att rättas.”"
+    ],
+    [
+     "3",
+     "”Det började med att …”",
+     "”Det är själva skrivandet som är viktigt, inte att det blir klart.”"
+    ],
+    [
+     "4",
+     "”Jag undrar …”",
+     "”Vi skriver för att utveckla våra tankar. Det är värt något i sig.”"
+    ],
+    [
+     "5",
+     "”Strax innan …”",
+     "”Vissa texter är bara dina. Ibland delar vi en mening med varandra.”"
+    ],
+    [
+     "6",
+     "”Tänk om …”",
+     "”Skriv och se vart det leder. Låt inte pennan stanna.”"
+    ],
+    [
+     "7–10",
+     "7 ”Om jag var där …” · 8 ”Det påminner mig om …” · 9 ”Nästa dag …” · 10 ”Jag tror att …”"
+    ]
+   ],
+   "not": "Skriv dagens början på bladet på väggen, under de förra, och börja din egen mening med den. I Dela läser du din rad först. Det första passet tar 25 minuter och står i Börja här, under Materialet."
+  }
+ ]
+}

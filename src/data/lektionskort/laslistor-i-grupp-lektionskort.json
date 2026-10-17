@@ -1,0 +1,163 @@
+{
+ "design": "strategipapper",
+ "fil": "Lektionskort - Laslistor i grupp",
+ "titel": "Läslistor i grupp",
+ "dokumenttitel": "Läslistor i grupp · Lektionskort",
+ "knapp": "Lektionskort",
+ "info": [
+  "F–3 · 15 minuter · 1–10 elever"
+ ],
+ "infoUtanRuta": true,
+ "fot": "© Niclas Fohlin, niclasfohlin.se, där du skriver ut metodens material",
+ "ingress": "**Mål:** kunna binda ihop ljuden till ett ord och läsa det med flyt.",
+ "ruta": {
+  "storlek": {
+   "rubrik": 23,
+   "text": 20
+  },
+  "punkter": [
+   {
+    "rubrik": "Modellering",
+    "text": "Eleven lyssnar och följer med när du pekar och ljudar. Hen läser inte än."
+   },
+   {
+    "rubrik": "Körläsning",
+    "text": "Alla läser samma ord tillsammans, i ditt tempo."
+   },
+   {
+    "rubrik": "Parläsning",
+    "text": "En pekar och hjälper, en läser. Efter en genomläsning byter de."
+   }
+  ]
+ },
+ "delar": [
+  {
+   "rubrik": "Listorna",
+   "text": "En lista i veckan eller längre: ni byter först när paren läser orden direkt, utan att ljuda.",
+   "kolumner": [
+    "Listan",
+    "Ord ur listan",
+    "Lyssna efter"
+   ],
+   "bredder": [
+    26,
+    30,
+    44
+   ],
+   "storlek": 19,
+   "tat": true,
+   "rader": [
+    [
+     "Start · vecka 1\nbokstäver och ljud",
+     "s, i, u, o, v, b, l, t",
+     "ljudet /s/ och inte namnet ess, och b och t korta, utan ö efter"
+    ],
+    [
+     "Lista 1 · vecka 2\ntvå ljud",
+     "se, så, sy, is, os, ål",
+     "att ljuden binds ihop: se, och inte /s/ /e/ som två ljud"
+    ],
+    [
+     "Lista 2 · vecka 3\nordfamiljer som rimmar",
+     "sol, pol, sal, dal, bil, fil",
+     "lång vokal, och hela vägen till slutet"
+    ],
+    [
+     "Lista 3 · vecka 4\ntvå stavelser",
+     "sola, laga, tala, baka",
+     "en stavelse i taget: so-⁠la, och inte s-⁠o-⁠l-⁠a"
+    ],
+    [
+     "Lista 4 · vecka 5\nkonsonantmöten",
+     "sten, stol, spik, gris, häst",
+     "att inget ljud tappas: sten och inte sen"
+    ],
+    [
+     "Lista 5 · vecka 6\nordet växer",
+     "sol, solen, solar, lagade",
+     "ändelsen som en helhet: sol-⁠en, och inte s-⁠o-⁠l-⁠e-⁠n"
+    ],
+    [
+     "Lista 6 · vecka 7\nmeningar",
+     "Hunden är glad. Vi har en båt.",
+     "omläsningen med flyt, och rösten ner vid punkt. Är och en läses som helheter."
+    ]
+   ]
+  },
+  {
+   "rubrik": "Passet",
+   "text": "Samma rörelse i varje pass. Tiderna gäller från vecka 4, när boken kommer in.",
+   "kolumner": [
+    "Delen",
+    "Så leder du",
+    "Du säger, till exempel"
+   ],
+   "bredder": [
+    22,
+    43,
+    35
+   ],
+   "storlek": 18,
+   "tat": true,
+   "rader": [
+    [
+     "Före passet",
+     "Börja på den lista där gruppen tappar flytet. Välj fyra till sex ord att visa och dagens kolumn, en av listans tre. Skriv ut veckans lista, en stor att peka i och en till varje par. Bestäm paren, med en trio vid udda antal, och med en elev är du paret. Från vecka 4: ta fram en lättläst bok."
+    ],
+    [
+     "Modellering\n0–2 min · du visar",
+     "Peka och ljuda långsamt från vänster till höger, och bind ihop till ordet. Tänk högt om det svåra. Ta varje ord två gånger.",
+     "”Lyssna när jag ljudar: sss-t-eee-nnn. Sten.”\n”Här är det lätt att tappa ett ljud. Hör ni vilket?”"
+    ],
+    [
+     "Körläsning\n2–4 min · alla",
+     "Peka och läs dagens kolumn tillsammans, långsamt först och sedan en gång till. Vid många fel: visa ordet igen. Måndag: hela listan, och förklara nya ord.",
+     "”Alla tillsammans, i min takt.”\n”Vänta, det ordet tar vi igen.”"
+    ],
+    [
+     "Parläsning\n4–10 min · i par",
+     "Paret läser listan flera gånger och byter roller. Gå runt hela tiden: bekräfta, korrigera och ge stöd. Fredag: eleven läser listan för dig eller en kompis.",
+     "”Läs listan en gång till och byt roller.”\n”Läs om hela ordet från början.”"
+    ],
+    [
+     "Avslutning\n10–15 min · alla",
+     "Visa det som flera behövde stöd i, och alla läser ordet efter dig. Från vecka 4 läser ni i boken: eleverna läser det de kan, och du läser resten.",
+     "”Nästa gång tänker vi på st i början av sten.”\n”Vad tror ni händer sen?”"
+    ],
+    [
+     "Efter passet",
+     "Skriv upp ord och orddelar att repetera, och vem som läser listan med flyt."
+    ]
+   ],
+   "not": "Vecka 1–3 är passet bara listan: modellering 0–3, kör 3–6, par 6–14 och avslutning den sista minuten."
+  },
+  {
+   "rubrik": "Bekräfta, korrigera, ge stöd",
+   "text": "I listan rättar du direkt. I boken väntar du tills meningen är slut.",
+   "kolumner": [
+    "Det eleven gör",
+    "Så gör du"
+   ],
+   "bredder": [
+    30,
+    70
+   ],
+   "storlek": 19,
+   "tat": true,
+   "rader": [
+    [
+     "läser rätt",
+     "Bekräfta och säg vad eleven gjorde: ”Du ljudade hela vägen fram till sista ljudet.”"
+    ],
+    [
+     "läser fel",
+     "Korrigera direkt och kort: säg rätt ljud, och eleven läser om hela ordet från början."
+    ],
+    [
+     "fastnar",
+     "Ge stöd: ljuda tillsammans, täck andra stavelsen eller jämför med ett ord som slutar likadant, som sal och dal."
+    ]
+   ]
+  }
+ ]
+}

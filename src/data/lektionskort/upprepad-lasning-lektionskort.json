@@ -1,0 +1,171 @@
+{
+ "design": "strategipapper",
+ "fil": "Lektionskort - Upprepad lasning",
+ "titel": "Upprepad läsning",
+ "dokumenttitel": "Upprepad läsning · Lektionskort",
+ "knapp": "Lektionskort",
+ "info": [
+  "F–3 · 15 minuter · 1–6 elever"
+ ],
+ "infoUtanRuta": true,
+ "fot": "© Niclas Fohlin, niclasfohlin.se, där du skriver ut metodens material",
+ "ingress": "**Mål:** kunna läsa en text med flyt och lösa ett svårt ord med en strategi.",
+ "ruta": {
+  "storlek": {
+   "rubrik": 23,
+   "text": 20
+  },
+  "punkter": [
+   {
+    "rubrik": "Läs",
+    "text": "Eleven läser texten halvhögt, med fingret under orden."
+   },
+   {
+    "rubrik": "Följ med",
+    "text": "Eleven följer med i texten medan du visar ett svårt ord."
+   },
+   {
+    "rubrik": "Läs igen",
+    "text": "Eleven läser samma text igen, först med dig och sedan själv."
+   },
+   {
+    "rubrik": "Säg strategin",
+    "text": "Eleven säger vad som hjälpte: ”Jag delade ordet.”"
+   }
+  ]
+ },
+ "delar": [
+  {
+   "rubrik": "Passet",
+   "text": "Samma text hela passet, och ingen tidtagning av läsningen.",
+   "kolumner": [
+    "Delen",
+    "Så leder du",
+    "Du säger, till exempel"
+   ],
+   "bredder": [
+    22,
+    43,
+    35
+   ],
+   "storlek": 18,
+   "tat": true,
+   "rader": [
+    [
+     "Före passet",
+     "Läs texten högt och tänk ut ord som eleverna kan fastna på. Välj veckans strategi, två sätt att läsa igen och paren, med den säkrare först. Kopiera veckans läskort, med stöd och utan, till alla. Vid varje plats: strategikortet, med strategierna under Lyssna efter, och gärna ett läsrör."
+    ],
+    [
+     "Första läsningen\n0–3 min · var och en",
+     "Alla läser halvhögt samtidigt, utan stöd. Lyssna på en i taget och skriv upp ord som fastnar hos flera. Läs inte med, och rätta inte.",
+     "Är texten ny: ”Texten handlar om barn vid havet.”\n”Är du klar? Läs texten en gång till.”"
+    ],
+    [
+     "Modellering\n3–6 min · du visar",
+     "Läs texten högt, gärna med stöd, och peka. Stanna vid två eller tre av orden du skrev upp och visa veckans strategi. Läs meningen från början igen.",
+     "”Lyssna när jag säger ljuden utan paus: sss-t-rrr-aaa-nnn-d. Strand. Stranden.”"
+    ],
+    [
+     "Läs igen\n6–14 min · alla, i par",
+     "Minst två omgångar, på två av sätten nedan. Lyssna på varje elev minst en gång och säg vad hen gjorde.",
+     "”Du sa ljuden utan paus och hörde ordet.”\n”Vilken strategi på kortet hjälpte dig?”"
+    ],
+    [
+     "Avslutning\n14–15 min · alla",
+     "Säg först något du har hört. Eleverna säger vilken strategi som hjälpte och vad texten handlar om.",
+     "”Första gången ljudade du ordet stranden med pauser. Nu läste du det direkt.”"
+    ],
+    [
+     "Efter passet",
+     "Skriv upp ord som fastnade och strategin som hjälpte. Ni byter text när den flyter för de flesta och eleverna läser orden också i en annan ordning. Den som läser med flyt tar hem texten."
+    ]
+   ],
+   "not": "Tio minuter: 2, 2, 5 och 1 minut. Fler än fyra elever: lyssna på hälften i en omgång och resten i nästa."
+  },
+  {
+   "rubrik": "Sätt att läsa igen",
+   "text": "Välj två sätt, först ett med dig, som eko eller kör, och sedan ett där de läser själva.",
+   "kolumner": [
+    "Sättet",
+    "Så går det till"
+   ],
+   "bredder": [
+    24,
+    76
+   ],
+   "storlek": 19,
+   "tat": true,
+   "rader": [
+    [
+     "Eko",
+     "Du läser en mening, och eleverna läser den efter dig med fingret under orden."
+    ],
+    [
+     "Kör",
+     "Alla läser texten högt tillsammans i ditt tempo. Vänta in eleverna vid de svåra orden."
+    ],
+    [
+     "Med stöd, sedan utan",
+     "Eleven läser texten med stöd, med bågar under ord som läses i ett svep och bindestreck i långa ord, och sedan samma text utan."
+    ],
+    [
+     "I par",
+     "En läser, en pekar under orden. Fastnar läsaren, väntar kamraten och pekar på strategikortet. Efter en genomläsning byter de. Med en elev är du paret."
+    ],
+    [
+     "Läsröret",
+     "Ett böjt rör från munnen till örat. Alla läser med låg röst och hör sig själva, och du knackar på texten hos den du lyssnar på."
+    ],
+    [
+     "För en ny lyssnare",
+     "Eleverna byter par på din signal och läser texten för en ny kamrat."
+    ]
+   ]
+  },
+  {
+   "rubrik": "Lyssna efter",
+   "text": "Fastnar eleven: fråga ”Vad kan du göra?” och vänta tre sekunder. Läst fel: vänta till punkten.",
+   "kolumner": [
+    "Det eleven gör",
+    "Strategin på strategikortet och så visar du"
+   ],
+   "bredder": [
+    36,
+    64
+   ],
+   "storlek": 19,
+   "tat": true,
+   "rader": [
+    [
+     "”stora” för ”stranden”",
+     "”Läs hela ordet.” För fingret under ordet, hela vägen till slutet."
+    ],
+    [
+     "/t/ /a/ /k/ med pauser",
+     "”Säg ljuden utan paus.” Dra ut s, l, r och vokalerna: sss-ooo-lll, sol. Säg b, d, g, k, p och t kort och dra ut vokalen: taaak, tak."
+    ],
+    [
+     "”huuund”, ett ord som inte finns",
+     "”Låter det som ett ord?” Pröva en kort vokal: hund."
+    ],
+    [
+     "sand … slott, med en paus",
+     "”Dela ordet.” Läs en del i taget, sedan hela ordet: sand-⁠slott, sandslott."
+    ],
+    [
+     "”hund” för ”hundarna”",
+     "”Hitta ordet i ordet.” Ringa in ändelsen: hund-⁠ar-⁠na."
+    ],
+    [
+     "läser vidare fast det blev fel",
+     "Vid punkten: ”Stämde det?” Eleven läser om meningen."
+    ],
+    [
+     "ord för ord, förbi punkten",
+     "”Läs som när du pratar.” Läs meningen först, och eleven läser efter."
+    ]
+   ],
+   "not": "Kommer ordet inte: eleven läser meningen från början, du pekar på strategikortet och visar strategin, och sist säger du ordet."
+  }
+ ]
+}

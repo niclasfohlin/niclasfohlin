@@ -22,7 +22,7 @@ material:
   - bokstavskort
   - en lättläst bok
   - snabbmallen
-uppdaterad: 2026-10-14
+uppdaterad: 2026-10-17
 relaterade:
   - til-i-grupp
   - upprepad-lasning
@@ -98,7 +98,7 @@ passrutin:
   efterPasset: Efter passet noterar du kort vilka ord och orddelar som behöver repeteras. Noteringen i snabbmallen styr nästa pass och när ni byter lista.
 tidsschema:
   rubrik: Ett pass på 15 minuter
-  text: "Förbered dig genom att välja orden du ska modellera. Remsan visar passet från vecka 4, när boken har vuxit in i avslutningen. Vecka 1–3 är passet bara listan: modelleringen tar 0–3 minuter, körläsningen 3–6, parläsningen 6–14 och avslutningen den sista minuten."
+  text: "Förbered dig genom att välja orden du ska modellera. Remsan visar passet från vecka 4, när boken har vuxit in i avslutningen. Vecka 1–3 är passet bara listan: modelleringen tar 0–3 minuter, körläsningen 3–6, parläsningen 6–14 och avslutningen den sista minuten. Passet och listorna står också på Lektionskortet, ett A4 att ha framför dig."
   rader:
     - tid: Före passet
       fas: Förberedelse
@@ -258,7 +258,7 @@ grund:
 ramar:
   rubrik: Läslistorna
   text:
-    - "Sju läslistor som tillsammans bildar en insats på sju veckor, en lista per vecka. Varje lista har orden att läsa och en not om hur ni arbetar med den: vad listan tränar, så gör ni och vad du lyssnar efter. Listorna finns också som egna sidor bland planeringsmallarna, att kopiera till varje par och visa stort för gruppen."
+    - "Här finns lektionskortet och sju läslistor som tillsammans bildar en insats på sju veckor, en lista per vecka. Varje lista har orden att läsa och en not om hur ni arbetar med den: vad listan tränar, så gör ni och vad du lyssnar efter. Listorna finns också som egna sidor bland planeringsmallarna, att kopiera till varje par och visa stort för gruppen."
   ramar:
     - rubrik: Läslista start
       text:
@@ -804,6 +804,8 @@ lathund:
       - En lättläst bok, från vecka 4
       - Snabbmallen för noteringen efteråt
     varjePass: Vilka ord och orddelar behöver repeteras, och vem läser listan med flyt?
+lektionskort:
+  - text: "Lektionskortet är passet på ett A4: målet, listorna med det du lyssnar efter, passet med det du gör och säger, och hur du bekräftar, korrigerar och ger stöd. Skriv ut det och ha det framför dig under passet."
 film:
   sekunder: 19.57
   beskrivning: "Läraren modellerar: ljudar ordet och läser det. Alla körläser kolumnen i lärarens takt. I par: en pekar och en läser. Läser eleven fel, rättar läraren kort. Eleven läser om hela ordet. Sedan byter paret roller."

@@ -22,7 +22,7 @@ material:
   - läsrör
   - lappen hem
   - snabbmallen
-uppdaterad: 2026-10-14
+uppdaterad: 2026-10-17
 relaterade:
   - til-i-grupp
   - laslistor-i-grupp
@@ -229,7 +229,7 @@ passrutin:
   kallas: delar
 tidsschema:
   rubrik: Ett pass på 15 minuter
-  text: "Har ni bara tio minuter blir det två minuter var för första läsningen och modelleringen, fem för Läs igen och en för avslutningen. Då hinner du lyssna på varje elev om gruppen har högst fyra elever."
+  text: "Har ni bara tio minuter blir det två minuter var för första läsningen och modelleringen, fem för Läs igen och en för avslutningen. Då hinner du lyssna på varje elev om gruppen har högst fyra elever. Passet, sätten att läsa igen och läsfelen står också på Lektionskortet, ett A4 att ha framför dig."
   rader:
     - tid: Före passet
       fas: Förberedelse
@@ -395,7 +395,7 @@ grund:
 ramar:
   rubrik: Materialet
   text:
-    - "Här finns strategikortet, en lästräningstext för varje vecka, lappen hem och protokollet för lästrappan. Allt går att kopiera. Varje lästräningstext är en sida med två läskort, ett med stöd och ett med samma text utan stöd."
+    - "Här finns lektionskortet, strategikortet, en lästräningstext för varje vecka, lappen hem och protokollet för lästrappan. Allt går att kopiera. Varje lästräningstext är en sida med två läskort, ett med stöd och ett med samma text utan stöd."
   ramar:
     - rubrik: Strategikortet
       text:
@@ -793,6 +793,8 @@ lathund:
       - Läsrör, om ni har
       - Snabbmallen för noteringen efteråt, ur planeringsmallarna
     varjePass: Vilka ord fastnade, vilken strategi hjälpte, och kan texten gå hem?
+lektionskort:
+  - text: "Lektionskortet är passet på ett A4: målet, passet med det du gör och säger, sätten att läsa igen och läsfelen med strategierna. Skriv ut det och ha det framför dig under passet."
 film:
   sekunder: 23.76
   beskrivning: "Första läsningen: eleven läser halvhögt, och läraren lyssnar. Läraren läser ur texten med stöd och visar strategin. Läs igen i kör med stöd, i lärarens tempo. I par utan stöd: kamraten pekar på strategikortet."
