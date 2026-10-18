@@ -42,9 +42,20 @@ function aktiv(href: string) {
       // Chromium (Chrome, Edge) ritar utskriftens sidfot som marginalruta; andra får .tryck-fot.
       if (navigator.userAgentData) document.documentElement.classList.add('marginalrutor');
     </script>
-    {/* Besöksstatistiken (site.statistik, DRIFT.md under Besöksstatistik): räknar inte på localhost, alltså inte i
-        npm run dev, metodprovet eller delningskorten. Klick på element med data-goatcounter-click räknas som händelser. */}
-    {site.statistik && !dold && <script is:inline async data-goatcounter={site.statistik} src="https://gc.zgo.at/count.js"></script>}
+    {/* Besöksstatistiken (site.statistik, DRIFT.md under Besöksstatistik): skriptet laddas bara på sajtens egen adress,
+        så att samma bygge kan visas lokalt, på datorns adress i telefonen och som utkast hos Netlify utan att räknas.
+        Klick på element med data-goatcounter-click räknas som händelser. */}
+    {site.statistik && !dold && (
+      <script is:inline define:vars={{ statistik: site.statistik }}>
+        if (/^(www\.)?niclasfohlin\.se$/.test(location.hostname)) {
+          const s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://gc.zgo.at/count.js';
+          s.dataset.goatcounter = statistik;
+          document.head.appendChild(s);
+        }
+      </script>
+    )}
     {dold && <meta name="robots" content="noindex, nofollow" />}
     <title>{fullTitel}</title>
     <meta name="description" content={description} />
