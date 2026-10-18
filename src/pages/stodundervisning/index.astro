@@ -4,6 +4,7 @@ import Taggar from '../../components/Taggar.astro';
 import Filval from '../../components/Filval.astro';
 import Metodkort from '../../components/Metodkort.astro';
 import Tackning from '../../components/Tackning.astro';
+import Verktygsruta from '../../components/Verktygsruta.astro';
 import { site } from '../../data/site';
 import { metoderSorterade, taggLabel } from '../../lib/innehall';
 import { harMallar } from '../../lib/metod';
@@ -53,6 +54,11 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
     </form>
   )}
 
+  {/* Rutan Verktyg och Stödmaterial står först, så att den kommer under sorteringen på en smal skärm; på en bred står
+      den i en egen spalt bredvid metoderna (global.css, Rutan Verktyg och Stödmaterial). */}
+  <div class="mb-yta">
+  <Verktygsruta metoder={allaMetoder} />
+  <div class="mb-metoder">
   {metoder.length > 0 && <Tackning metoder={metoder} taggar={(m) => { const serie = serier.get(m.id); return serie ? serieTaggar(serie, allaMetoder) : m.data.taggar; }} />}
 
   {site.omraden.map((omrade) => {
@@ -67,6 +73,8 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
       </section>
     );
   })}
+  </div>
+  </div>
 
   {metoder.length > 0 && (
     <form class="samla" id="samla" aria-label="Ladda ner valda metoder" data-bas={site.url}>
@@ -148,6 +156,8 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
       const frageDel = q.toString();
       history.replaceState(null, '', frageDel ? `?${frageDel}` : location.pathname);
       try { sessionStorage.setItem('metodfilter', frageDel ? `?${frageDel}` : ''); } catch { /* utan lagring */ }
+      // Rutan Verktyg och Stödmaterial (Verktygsruta.astro) visar det som hör till metoderna som syns.
+      document.dispatchEvent(new Event('metodbank:filtrerat'));
     }
 
     const tom = form.querySelector('[data-tom]') as HTMLElement;

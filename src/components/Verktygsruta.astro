@@ -1,0 +1,90 @@
+---
+// Rutan Verktyg och Stödmaterial i metodbanken (Niclas 2026-10-18: "Den kör vi på"; arbetsordern i
+// underlag/prov/verktyg/ARBETSORDER.md). Den listar de centrala sakerna (src/data/centrala.json) under sina rubriker,
+// verktyg och stödmaterial (fältet del), med namnet som metodens blå knapp har, områdets färg som ett streck och
+// områdets namn och årskurserna under. Allt räknas ur metoderna som visar saken: fältet centrala, eller för ett
+// formulär bladet med fältet google. På en bred skärm står rutan bredvid metoderna och följer med när läsaren rullar; på
+// en smalare står den under sorteringen, och i telefonen är delarna infällda bakom sina rubriker med antalet
+// (skriptet nedan, före första målningen, som täckningskartan). Rutan följer sorteringen: den visar det som hör till
+// metoderna som syns (händelsen metodbank:filtrerat från index.astro), och säger till när inget finns för valet.
+import { site } from '../data/site';
+import { CENTRALA, type Central } from '../lib/centrala';
+import type { MetodPost } from '../lib/metod';
+import { arskursSpannet, spannText } from '../lib/tackning';
+interface Props { metoder: MetodPost[] }
+const { metoder } = Astro.props;
+
+// Metoderna som visar en sak. En lektion räknas till sin serie, vars kort står i banken.
+const visar = (c: Central) => metoder.filter((m) => c.slag === 'formular' ? m.data.pabordet?.some((b) => b.google === c.adress) : m.data.centrala?.some((x) => x.id === c.id));
+const DELAR = [
+  { id: 'verktyg', namn: 'Verktyg', tomt: 'Inga verktyg för det du har valt.' },
+  { id: 'stodmaterial', namn: 'Stödmaterial', tomt: 'Inget stödmaterial för det du har valt.' },
+] as const;
+const delar = DELAR.map((del) => ({
+  ...del,
+  saker: CENTRALA.filter((c) => c.del === del.id).map((c) => {
+    const ms = visar(c);
+    const omraden = site.omraden.filter((o) => ms.some((m) => m.data.omrade === o));
+    const spann = ms.map((m) => arskursSpannet(m.data));
+    const sp: [number, number] = [Math.min(...spann.map((s) => s[0])), Math.max(...spann.map((s) => s[1]))];
+    return {
+      c,
+      metoder: [...new Set(ms.map((m) => m.data.serie ?? m.id))],
+      omrade: omraden[0],
+      text: `${omraden.join(' och ')} · ${sp[0] === 0 ? spannText(sp) : `åk ${spannText(sp)}`}`,
+      // En pdf och ett formulär öppnas i en ny flik, som metodens knapp gör (src/lib/centrala.ts, centralLank).
+      ny: c.slag !== 'sida',
+    };
+  }).filter((s) => s.metoder.length > 0),
+})).filter((d) => d.saker.length > 0);
+---
+{delar.length > 0 && (
+  <aside class="vr" aria-label="Verktyg och stödmaterial" data-verktygsruta>
+    {delar.map((del) => (
+      <details class="vr-del" open data-vr-del>
+        <summary><h2 class="vr-rubrik">{del.namn}<span class="vr-antal" data-vr-antal>{` · ${del.saker.length}`}</span></h2></summary>
+        <ul class="vr-lista">
+          {del.saker.map((s) => (
+            <li data-metoder={s.metoder.join(' ')}>
+              <a class="vr-rad" href={s.c.adress} data-omrade={s.omrade} target={s.ny ? '_blank' : undefined} rel={s.ny ? 'noopener' : undefined} data-goatcounter-click={`verktygsruta:${s.c.id}`} data-goatcounter-title={`Metodbanken: ${s.c.namn} ur rutan`}>
+                <span class="vr-namn">{s.c.namn}</span>
+                <span class="vr-meta">{s.text}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="meta vr-tom" data-vr-tom hidden>{del.tomt} <button type="button" data-vr-alla>Visa allt</button></p>
+      </details>
+    ))}
+  </aside>
+)}
+<script is:inline>
+  // Infälld i telefonen före första målningen, som täckningskartan; utan JavaScript är den utfälld.
+  (() => {
+    const r = document.querySelector('[data-verktygsruta]');
+    if (r && window.matchMedia('(max-width: 47.99rem)').matches) for (const d of r.querySelectorAll('[data-vr-del]')) d.open = false;
+  })();
+</script>
+<script>
+  // Rutan visar det som hör till metoderna som syns. Metodens id står i kortets ruta Välj (Metodkort.astro).
+  const ruta = document.querySelector<HTMLElement>('[data-verktygsruta]');
+  if (ruta) {
+    const rader = Array.from(ruta.querySelectorAll<HTMLElement>('li[data-metoder]'));
+    const uppdatera = () => {
+      const synliga = new Set(Array.from(document.querySelectorAll<HTMLElement>('[data-metod]')).filter((k) => !k.hidden).map((k) => k.querySelector<HTMLInputElement>('input[name="valda"]')?.value));
+      for (const r of rader) r.hidden = !(r.dataset.metoder ?? '').split(' ').some((id) => synliga.has(id));
+      for (const del of Array.from(ruta.querySelectorAll<HTMLElement>('[data-vr-del]'))) {
+        const n = Array.from(del.querySelectorAll<HTMLElement>('li[data-metoder]')).filter((r) => !r.hidden).length;
+        del.querySelector('[data-vr-antal]')!.textContent = ` · ${n}`;
+        del.querySelector<HTMLElement>('[data-vr-tom]')!.hidden = n > 0;
+      }
+    };
+    // Visa allt nollställer sorteringen, som knappen när ingen metod matchar.
+    for (const b of Array.from(ruta.querySelectorAll('[data-vr-alla]'))) b.addEventListener('click', () => {
+      const form = document.getElementById('filter') as HTMLFormElement | null;
+      if (form) { form.reset(); form.dispatchEvent(new Event('change')); }
+    });
+    document.addEventListener('metodbank:filtrerat', uppdatera);
+    uppdatera();
+  }
+</script>

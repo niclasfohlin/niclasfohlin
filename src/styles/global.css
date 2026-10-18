@@ -1076,6 +1076,48 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-kartrad .kicker { margin: 0 0 0.35rem; }
 .metod-modell .m-veckokort h4 { margin: 0; font-size: 1.1rem; }
 .m-veckokort h4 a { color: var(--farg-accent); }
+/* Rutan Verktyg och Stödmaterial i metodbanken (Verktygsruta.astro, Niclas 2026-10-18): på en bred skärm i en egen spalt
+   bredvid metoderna, som följer med när läsaren rullar; under den bredden under sorteringen, två delar bredvid varandra på
+   en surfplatta och infällda under varandra i telefonen, i täckningskartans form. Områdets färg som streck och namn i text. */
+.mb-yta { display: grid; gap: 0 2rem; }
+.mb-metoder { min-width: 0; }
+.vr { font-family: var(--typsnitt-ui); margin: 0; }
+.vr-del > summary { list-style: none; cursor: pointer; display: flex; align-items: center; }
+.vr-del > summary::-webkit-details-marker { display: none; }
+.vr-rubrik { margin: 0; font-family: var(--typsnitt-ui); }
+.vr-antal { font-weight: 400; color: var(--farg-text-svag); }
+.vr-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; }
+.vr-rad { --tk: var(--farg-accent); display: block; text-decoration: none; color: var(--farg-text); border-left: 4px solid var(--tk); padding: 0.3rem 0 0.3rem 0.65rem; line-height: 1.3; }
+.vr-rad[data-omrade="Läsning"] { --tk: var(--farg-lasning); }
+.vr-rad[data-omrade="Skrivning"] { --tk: var(--farg-skrivning); }
+.vr-rad[data-omrade="Socialt"] { --tk: var(--farg-socialt); }
+.vr-rad:hover .vr-namn { color: var(--farg-accent); text-decoration: underline; }
+.vr-rad:focus-visible { outline: 2px solid var(--farg-accent); outline-offset: 2px; }
+.vr-namn { display: block; font-weight: 600; }
+.vr-meta { display: block; font-size: 0.82rem; color: var(--farg-text-svag); margin-top: 0.1rem; }
+.vr-tom { margin: 0.25rem 0 0.75rem; font-size: 0.9rem; }
+.vr-tom button { font: inherit; background: none; border: 0; padding: 0; color: var(--farg-accent); text-decoration: underline; cursor: pointer; }
+@media (max-width: 71.99rem) {
+  .vr-del > summary { min-height: 2.75rem; padding: 0.45rem 0.9rem; margin: 0 0 0.35rem; border: 1px solid var(--farg-kant); border-radius: 8px; background: var(--farg-ton-svag); }
+  .vr-del > summary::after { content: ''; flex: none; width: 0.5rem; height: 0.5rem; margin-left: auto; border-right: 2px solid var(--farg-accent); border-bottom: 2px solid var(--farg-accent); transform: translateY(-0.15rem) rotate(45deg); }
+  .vr-del[open] > summary::after { transform: translateY(0.1rem) rotate(-135deg); }
+  .vr-del > summary:hover { background: var(--farg-ton); }
+  .vr-del > summary:focus-visible { outline: 2px solid var(--farg-accent); outline-offset: 2px; }
+  .vr-rubrik { font-size: 1.05rem; font-weight: 700; }
+  .vr-lista { padding: 0.35rem 0 0.9rem; }
+}
+@media (min-width: 48rem) and (max-width: 71.99rem) { .vr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1rem; align-items: start; } }
+@media (min-width: 72rem) {
+  .mb-yta { grid-template-columns: minmax(0, 1fr) 14rem; gap: 0 1.5rem; align-items: start; }
+  .mb-yta > .vr { grid-column: 2; grid-row: 1; position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow: auto; margin-top: 1.25rem; }
+  .mb-yta > .mb-metoder { grid-column: 1; grid-row: 1; }
+  .vr-del + .vr-del { margin-top: 1.25rem; }
+  .vr-del > summary { cursor: default; pointer-events: none; margin: 0 0 0.5rem; }
+  .vr-rubrik { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--farg-text-svag); }
+  .vr-antal { display: none; }
+}
+@media print { .vr { display: none; } }
+
 /* Täckningskartan i metodbanken (Tackning.astro, src/lib/tackning.ts; K-241, Niclas 2026-10-07 valde formen): en
    stapel per metod över årskurserna F till 9 i områdets färg, i en bana per område. Skalan är ett rutnät med tio
    spalter, och stapeln spänner över spalterna --fran+1 till --till+1 (F är 0). Namnet och årskursen står ovanför
