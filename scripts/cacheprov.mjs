@@ -9,6 +9,13 @@
 // Netlifys mönster: * matchar vad som helst, också snedstreck (prövat mot sajten 2026-10-18: /stodundervisning/*.jpg
 // gav ett dygns cache för en bild i en undermapp). Sidorna (html) har Netlifys förval med must-revalidate med avsikt, så
 // att en ändring syns direkt; de och filerna i UTAN_REGEL prövas inte.
+//
+// Sidorna som tar fram kort och poster ur en databas (Ta fram ett skrivkort, en aktivitet, en brainbreak och ett
+// matteproblem) har sin data i en egen fil bredvid sig (src/lib/kortdata.ts), och provet stoppar en sådan sida som är
+// större än HOGST_SIDA: då står datan i sidan igen. Facebook hämtar sidan varje gång länken delas eller förhandsvisas,
+// och okomprimerad (K-410); skrivkortssidan var 287 kB och drog 251 MB på ett dygn 2026-10-16 (DRIFT.md under
+// Krediter). Niclas 2026-10-18: "Se till att du bygger så databasen kommer fram billigt utan en massa krediter i onödan
+// redan från början."
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -30,6 +37,7 @@ const UTAN_REGEL = new Map([
   ['/delning/kort.json', 'förteckningen som scripts/delningskort.mjs läser i bygget'],
 ]);
 const SIDKARTA = /^\/sitemap[-\w]*\.xml$/;
+const HOGST_SIDA = 64 * 1024;
 
 const toml = readFileSync(join(rot, 'netlify.toml'), 'utf8').replace(/\r\n/g, '\n');
 // Ett block i taget, fram till nästa tabell: blocket för "/*" har säkerhetsrubrikerna men ingen Cache-Control, och får
@@ -58,4 +66,12 @@ if (utan.length) {
   console.error(`cacheprov: ${utan.length} av ${provade} filer i dist träffar ingen cacheregel i netlify.toml och skulle få max-age=0:\n  ${[...grupper].map(([k, n]) => `${k} (${n})`).join('\n  ')}\nLägg en [[headers]]-regel för mappen eller filtypen (DRIFT.md under Krediter), eller skriv filen i UTAN_REGEL i scripts/cacheprov.mjs med skälet.`);
   process.exit(1);
 }
-console.log(`cacheprov: alla ${provade} filer i dist som inte är sidor träffar en cacheregel i netlify.toml (${regler.length} regler).`);
+// Sidorna med data i en egen fil: data-kortdata på sidan.
+const databassidor = filer.filter((v) => v.endsWith('.html')).map((v) => ({ v, html: readFileSync(join(dist, v)) })).filter((x) => x.html.includes('data-kortdata='));
+const tunga = databassidor.filter((x) => x.html.length > HOGST_SIDA);
+if (tunga.length) {
+  console.error(`cacheprov: ${tunga.length} sidor som hämtar sin data ur en egen fil är större än ${HOGST_SIDA / 1024} kB:\n  ${tunga.map((x) => `${x.v} (${Math.round(x.html.length / 1024)} kB)`).join('\n  ')}\nDatan ska stå i sidans egen fil (src/lib/kortdata.ts), inte i sidan, som Facebook hämtar okomprimerad varje gång länken delas.`);
+  process.exit(1);
+}
+const vikt = databassidor.map((x) => `${x.v.replace(/^\/stodundervisning\/|\/index\.html$|\.html$/g, '')} ${Math.round(x.html.length / 1024)}`).join(', ');
+console.log(`cacheprov: alla ${provade} filer i dist som inte är sidor träffar en cacheregel i netlify.toml (${regler.length} regler), och sidorna med data i en egen fil är högst ${HOGST_SIDA / 1024} kB (${vikt}).`);
