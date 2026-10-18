@@ -54,10 +54,10 @@ inledning:
   - "Faktatextsamtal i grupp är en lärarledd insats där två till åtta elever i åk 4–9 läser en faktatext i veckan och samtalar om den. Den är för elever som läser orden men behöver stöd i att få ihop texten: de läser vidare fast de har slutat förstå, tar det roligaste för det viktigaste och läser varje avsnitt för sig. Eleven lär sig att stanna när det skaver, att säga det viktigaste i ett avsnitt med egna ord och att se hur en faktatext är byggd."
   - "Varje elev har en egen kopia av veckans text och en penna. Texten ser ut som ett kapitel i en faktabok, med fyra avsnitt, en fördjupning och bilder. På bordet ligger post-it-lappar och gruppens blad Kärnorna, där lapparna sitter mellan passen. Varje par har kortet När det skaver. I modellpasset ligger en tom modell i A3 mitt på bordet: en tankekarta, en tidslinje eller en annan av metodens fem modeller. Du har lärarens sida till texten, som säger var det brukar skava och vad du lyssnar efter."
   - En text tar två pass. I läspasset läser gruppen texten, ett avsnitt i taget. Eleverna stryker under det som skaver, ett ord eller en mening de inte förstår, och ni reder ut det. Sedan säger var och en kärnan, det viktigaste i avsnittet med högst tio ord, till den bredvid, och gruppen skriver sin kärna på en lapp. I modellpasset lägger gruppen lapparna i veckans modell, skriver dit textens ord för sambanden och återger hela texten med egna ord, med modellen framför sig. Varje text har en fråga, som gruppen gissar på före läsningen och svarar på i modellpasset.
-  - "Perioden är åtta veckor. Metoden har tre nivåer, Bas, Medel och Avancerat, och varje nivå har fem texter om ett område: vatten, rymden eller smittor och epidemier. Varje text är byggd på sitt sätt och har sin modell. I vecka 1 visar du hur en läsare gör, och sedan tar eleverna över en bit i taget. I vecka 6–8 läser gruppen klassens texter i SO och NO på samma sätt, med de modeller den redan kan."
+  - "Perioden är åtta veckor. Metoden har tre nivåer, Bas, Medel och Avancerat, och varje nivå har fem texter om ett område: vatten, rymden eller smittor och epidemier. Varje text är byggd på sitt sätt och har sin modell. I vecka 1 visar du hur en läsare gör, och sedan tar eleverna över en bit i taget. I vecka 6–8 läser gruppen klassens texter i SO och NO på samma sätt, med de modeller den redan kan."
 upplagg:
   rubrik: Så fungerar insatsen
-  text: "Två till åtta elever har två pass i veckan i åtta veckor, 40 minuter per pass. Gruppen läser en faktatext i veckan, i ett läspass och ett modellpass. I läspasset läser gruppen ett avsnitt i taget, i fyra steg: Läs, Red ut, Kärnan och Lappen. I modellpasset lägger gruppen post-it-lapparna i en modell och svarar på textens fråga. Vecka 1–5 har nivåns fem texter, och vecka 6–8 klassens texter i SO och NO. Kartläggningen före och efter perioden, lapparna och elevens svar varje vecka visar om eleven hittar kärnan och ser hur texten hänger ihop."
+  text: "Två till åtta elever har två pass i veckan i åtta veckor, 40 minuter per pass. Gruppen läser en faktatext i veckan, i ett läspass och ett modellpass. I läspasset läser gruppen ett avsnitt i taget, i fyra steg: Läs, Red ut, Kärnan och Lappen. I modellpasset lägger gruppen post-it-lapparna i en modell och svarar på textens fråga. Vecka 1–5 har nivåns fem texter, och vecka 6–8 klassens texter i SO och NO. Kartläggningen före och efter perioden, lapparna och elevens svar varje vecka visar om eleven hittar kärnan och ser hur texten hänger ihop."
 gruppen:
   rubrik: Så sätter du ihop gruppen
   text: "Metoden är för elever som avkodar hjälpligt men inte får ihop en faktatext: de läser till slutet och kan inte säga vad den handlade om. Eleven behöver kunna förstå texten när någon läser den högt. Den som avkodar mödosamt kan vara med, eftersom du och kamraten läser högt. Hen tränar avkodningen vid sidan av. Gruppen har två till åtta elever som arbetar i par, och vid ett udda antal arbetar tre tillsammans. Sju eller åtta elever arbetar i två halvor, som det står under Arbetsform. Välj nivå efter elevernas läsning: kartläggningen före perioden visar vilken som passar."
@@ -111,7 +111,7 @@ tabeller:
   - rubrik: "Två pass per text: läspasset och modellpasset"
     plats: efter-inledning
     meny: true
-    text: Tabellen jämför de två passen. Lärarens sida till veckans text följer samma två pass, och klassens texter i vecka 6–8 får ett läspass och ett modellpass på samma sätt.
+    text: Tabellen jämför de två passen. Lärarens sida till veckans text följer samma två pass, och klassens texter i vecka 6–8 får ett läspass och ett modellpass på samma sätt.
     kolumner:
       - Passet
       - Läspasset
@@ -124,15 +124,15 @@ tabeller:
         - "Gissar på textens fråga. Läser fyra avsnitt, ett i taget: Läs, Red ut, Kärnan och Lappen."
         - Lyssnar på fördjupningen, lägger lapparna i modellen, skriver textens ord, återger texten och skriver svaret.
       - - Du visar
-        - "I vecka 1, 2 och 6 tänker du högt i avsnitt 1: var det skaver, och hur du hittar kärnan."
-        - I vecka 1–5 visar du veckans modell med ett exempel om skolan, och i vecka 6 hur du väljer modell.
+        - "I vecka 1, 2 och 6 tänker du högt i avsnitt 1: var det skaver, och hur du hittar kärnan."
+        - I vecka 1–5 visar du veckans modell med ett exempel om skolan, och i vecka 6 hur du väljer modell.
       - - Du frågar
         - ”Var skavde det?” ”Vem eller vad handlar avsnittet om? Vad är det viktigaste om det?”
         - ”Var hör den här lappen hemma?” ”Vilket ord i texten visar hur de hör ihop?”
       - - Efter passet finns
         - fyra post-it-lappar på bladet Kärnorna
         - modellen med lapparna, och ett svar från varje elev
-    not: "Med tre pass i veckan blir perioden drygt fem veckor. Läs då vecka som text: vecka 3 är den tredje texten. Den som var borta i läspasset läser lapparna högt när modellpasset börjar. Faller ett pass bort tar ni det nästa gång."
+    not: "Med tre pass i veckan blir perioden drygt fem veckor. Läs då vecka som text: vecka 3 är den tredje texten. Den som var borta i läspasset läser lapparna högt när modellpasset börjar. Faller ett pass bort tar ni det nästa gång."
   - rubrik: Varför en faktatext blir svår, och vad metoden gör
     plats: efter-inledning
     text: Sex saker gör en faktatext svår för elever som behöver stöd i läsförståelsen. Metoden möter var och en av de sex sakerna på ett bestämt ställe.
@@ -161,7 +161,7 @@ tabeller:
         - Post-it-lapparna sitter kvar på bladet Kärnorna, och modellpasset börjar vid dem.
   - rubrik: Så visar du i läspasset
     plats: efter-tidsschema
-    text: I vecka 1 ser eleverna hur en läsare gör. Du säger högt det du tänker i avsnitt 1, med orden under Tänk högt på lärarens sida, och sedan gör gruppen de andra avsnitten. I vecka 2 visar du en gång till. Från vecka 3 frågar du i stället, tills klassens text kommer i vecka 6.
+    text: I vecka 1 ser eleverna hur en läsare gör. Du säger högt det du tänker i avsnitt 1, med orden under Tänk högt på lärarens sida, och sedan gör gruppen de andra avsnitten. I vecka 2 visar du en gång till. Från vecka 3 frågar du i stället, tills klassens text kommer i vecka 6.
     kolumner:
       - Det du visar
       - Så gör du
@@ -175,11 +175,11 @@ tabeller:
       - - Bilden
         - "Har avsnitt 1 en bild pekar du i den och säger var avsnittet är: ”Här är vi nu.”"
       - - Klassens text
-        - "I vecka 6 tänker du högt i avsnitt 1 igen, om det som är nytt: texten har inga ordförklaringar i marginalen, så ledtråden är bilden, ett ord i fet stil eller meningen efter."
+        - "I vecka 6 tänker du högt i avsnitt 1 igen, om det som är nytt: texten har inga ordförklaringar i marginalen, så ledtråden är bilden, ett ord i fet stil eller meningen efter."
   - rubrik: "Ett avsnitt i fyra steg: Läs, Red ut, Kärnan och Lappen"
     plats: efter-tidsschema
     meny: true
-    text: Avsnitt 1 läser du högt, och det tar omkring sex minuter. I vecka 1, 2 och 6 tänker du högt där. De andra veckorna samlar du gruppen direkt, och gruppen reder ut och säger kärnan utan att paren gör det först. Avsnitten som paren läser har alla samma fyra steg, och ett avsnitt tar omkring åtta minuter. Den som avkodar mödosamt följer med i texten, och kamraten eller du läser. På Avancerat är avsnitten längre. Räkna där med att läsa ett avsnitt till högt från vecka 3, och bestäm före passet vilket.
+    text: Avsnitt 1 läser du högt, och det tar omkring sex minuter. I vecka 1, 2 och 6 tänker du högt där. De andra veckorna samlar du gruppen direkt, och gruppen reder ut och säger kärnan utan att paren gör det först. Avsnitten som paren läser har alla samma fyra steg, och ett avsnitt tar omkring åtta minuter. Den som avkodar mödosamt följer med i texten, och kamraten eller du läser. På Avancerat är avsnitten längre. Räkna där med att läsa ett avsnitt till högt från vecka 3, och bestäm före passet vilket.
     kolumner:
       - Steg
       - Eleverna gör
@@ -246,7 +246,7 @@ tabeller:
       - - Om någon frågar
         - Svar på frågor som eleverna ofta ställer om texten
       - - Modellpasset
-        - "Raderna Fördjupningen, Modellen, Orden, Svaret, Rutan och Samtala: modellen gruppen prövar först i vecka 2–5, var lapparna hör hemma, textens ord för sambanden och ett exempel på hur svaret kan låta"
+        - "Raderna Fördjupningen, Modellen, Orden, Svaret, Rutan och Samtala: modellen gruppen prövar först i vecka 2–5, var lapparna hör hemma, textens ord för sambanden och ett exempel på hur svaret kan låta"
     not: Sidan är ditt stöd för att lyssna och fråga. Gruppen ser den inte, och du läser inte upp den.
   - rubrik: Modellpasset på 40 minuter
     plats: efter-fastnar
@@ -265,8 +265,8 @@ tabeller:
       - - |-
           Modellen
           6–⁠18 min
-        - I vecka 1–5 ser gruppen exemplet om skolan och pekar ut var varje mening står. Sedan flyttar gruppen lapparna till veckans modell, en i taget, och säger varför lappen hör hemma där. Gruppen ger varje plats ett namn.
-        - "I vecka 2–5 lägger du först fram en modell gruppen kan: ”Passar den här? Varför inte?” Läs exemplets text, och återge den sedan ur exemplet. ”Var hör den här lappen hemma? Vad ska platsen heta?” Låt gruppen pröva, också när lappen hamnar fel."
+        - I vecka 1–5 ser gruppen exemplet om skolan och pekar ut var varje mening står. Sedan flyttar gruppen lapparna till veckans modell, en i taget, och säger varför lappen hör hemma där. Gruppen ger varje plats ett namn.
+        - "I vecka 2–5 lägger du först fram en modell gruppen kan: ”Passar den här? Varför inte?” Läs exemplets text, och återge den sedan ur exemplet. ”Var hör den här lappen hemma? Vad ska platsen heta?” Låt gruppen pröva, också när lappen hamnar fel."
       - - |-
           Orden
           18–⁠23 min
@@ -285,7 +285,7 @@ tabeller:
     not: Modellen är ett samtal, inte ett formulär att fylla i. Det viktiga är att gruppen säger varför lappen hör hemma där.
   - rubrik: Så visar du i modellpasset
     plats: efter-fastnar
-    text: I vecka 1–5 är veckans modell ny för gruppen. Du visar den, och sedan lägger gruppen sina egna post-it-lappar. Visningen tar omkring fyra minuter av delen Modellen, och i vecka 2–5 omkring sex, eftersom gruppen då först prövar en modell den kan. Drar delen Modellen över tiden får frågorna om författaren i Samtala vänta.
+    text: I vecka 1–5 är veckans modell ny för gruppen. Du visar den, och sedan lägger gruppen sina egna post-it-lappar. Visningen tar omkring fyra minuter av delen Modellen, och i vecka 2–5 omkring sex, eftersom gruppen då först prövar en modell den kan. Drar delen Modellen över tiden får frågorna om författaren i Samtala vänta.
     kolumner:
       - Det du visar
       - Så gör du
@@ -293,11 +293,11 @@ tabeller:
       - - Veckans modell
         - Du visar exemplet om skolan och läser exemplets text högt, en mening i taget. Den står på modellens sida. Gruppen pekar ut var varje mening står. Sedan återger du texten ur exemplet, medan du pekar. Så ska gruppen sedan återge veckans text.
       - - Den första lappen och det första ordet
-        - I vecka 1 lägger du veckans första lapp och säger varför den hör hemma där och vad platsen ska heta. Sedan lägger gruppen de andra lapparna. I delen Orden letar du upp det första ordet, visar var det står och skriver det i fliken.
+        - I vecka 1 lägger du veckans första lapp och säger varför den hör hemma där och vad platsen ska heta. Sedan lägger gruppen de andra lapparna. I delen Orden letar du upp det första ordet, visar var det står och skriver det i fliken.
       - - En modell gruppen kan
-        - "I vecka 2–5 lägger du först fram en av gruppens sparade modeller: ”Passar den här? Varför inte?” Raden Modellen på lärarens sida säger vilken, med en fråga till. Gruppen säger varför den inte räcker."
+        - "I vecka 2–5 lägger du först fram en av gruppens sparade modeller: ”Passar den här? Varför inte?” Raden Modellen på lärarens sida säger vilken, med en fråga till. Gruppen säger varför den inte räcker."
       - - Valet av modell
-        - "I vecka 6 ligger gruppens fem modeller framme. Du prövar två av modellernas frågor: ”Vad händer, och i vilken ordning? Här finns inget först och sist. Tidslinjen passar inte.” Paren prövar de tre andra, och du säger vilken som passar."
+        - "I vecka 6 ligger gruppens fem modeller framme. Du prövar två av modellernas frågor: ”Vad händer, och i vilken ordning? Här finns inget först och sist. Tidslinjen passar inte.” Paren prövar de tre andra, och du säger vilken som passar."
   - rubrik: "De fem modellerna: en för varje sätt att bygga en text"
     plats: efter-fastnar
     meny: true
@@ -391,7 +391,7 @@ tabeller:
         - Klassens text
         - Klassens text
         - Klassens text
-  - rubrik: "Vecka 6–8: klassens texter"
+  - rubrik: "Vecka 6–8: klassens texter"
     plats: efter-urval
     meny: true
     text: De sista veckorna läser gruppen det klassen läser, så att eleverna använder det de har lärt sig där de behöver det.
@@ -404,13 +404,13 @@ tabeller:
       - - Hur förbereder du den?
         - "Med bladet Egen text, som blir lärarens sida till texten: dela texten i fyra avsnitt, välj orden att reda ut, skriv textens fråga och välj modell. Det tar omkring tjugo minuter."
       - - Hur börjar modellpasset?
-        - En elev läser lapparna. Sedan väljer var och en bland gruppens fem modeller från vecka 1–5 och återger på en minut den modellens text för den bredvid.
+        - En elev läser lapparna. Sedan väljer var och en bland gruppens fem modeller från vecka 1–5 och återger på en minut den modellens text för den bredvid.
       - - Vilken modell?
         - Den som rymmer flest av lapparna. Ditt val står på bladet Egen text. Väljer gruppen en annan, ritar ni den på ett A3.
       - - Hur väljer gruppen?
-        - "I vecka 6 visar du hur du väljer. I vecka 7 och 8 prövar paren med modellernas frågor: de pekar på en modell och visar ett ställe i texten som talar för den."
+        - "I vecka 6 visar du hur du väljer. I vecka 7 och 8 prövar paren med modellernas frågor: de pekar på en modell och visar ett ställe i texten som talar för den."
       - - Vad blir annorlunda?
-        - Klassens text har ingen fördjupning och ingen ruta Visste du att. Gruppen väljer därför själv en detalj och prövar om den är viktig eller intressant. I läspasset tänker du högt i avsnitt 1 i vecka 6, och två elever har jobbkorten från avsnitt 2.
+        - Klassens text har ingen fördjupning och ingen ruta Visste du att. Gruppen väljer därför själv en detalj och prövar om den är viktig eller intressant. I läspasset tänker du högt i avsnitt 1 i vecka 6, och två elever har jobbkorten från avsnitt 2.
     not: När klassen läser texten har gruppen redan läst den. Det ger eleverna ett försprång i lektionen. Läraren i ämnet får ett foto av gruppens modell efter veckan och är välkommen till ett modellpass.
   - rubrik: "Materialet: det du behöver, och när"
     plats: efter-grund
@@ -435,25 +435,25 @@ tabeller:
         - ett per par, gärna inplastat
         - en gång, för hela perioden
       - - Veckans modell
-        - "bladet som lärarens sida eller bladet Egen text säger, på A3. Lägg också fram gruppens sparade modeller: en i vecka 2–5 och alla fem i vecka 6–8"
+        - "bladet som lärarens sida eller bladet Egen text säger, på A3. Lägg också fram gruppens sparade modeller: en i vecka 2–5 och alla fem i vecka 6–8"
         - modellpasset
       - - Modellens sida och exemplet om skolan
         - en av varje, exemplet gärna på A3
-        - före modellpasset, och exemplet i modellpasset i vecka 1–5
+        - före modellpasset, och exemplet i modellpasset i vecka 1–5
       - - Jobbkorten
         - en uppsättning, två om ni är sju eller åtta
-        - från vecka 3
+        - från vecka 3
       - - Bladet Egen text
         - ett per text
-        - vecka 6–8
+        - vecka 6–8
       - - Kartläggningen
         - elevens blad med texten och bilden och protokollet, ett av varje per elev
         - före och efter perioden
-    not: Till vecka 1 skriver du ut nivåns text 1 med lärarens sida, som står före texten, bladet Kärnorna, kortet När det skaver, tankekartans sida med exemplet och bladet, och kartläggningen med Bäverns damm och protokollet. Saknar du A3 ritar du av bladet på ett blädderblocksark. Alla blad går att plasta in. Då sätter gruppen post-it-lapparna på plasten och skriver namnen och orden med whiteboardpenna. Spara modellen med lapparna kvar, eller fotografera den innan ni suddar.
+    not: Till vecka 1 skriver du ut nivåns text 1 med lärarens sida, som står före texten, bladet Kärnorna, kortet När det skaver, tankekartans sida med exemplet och bladet, och kartläggningen med Bäverns damm och protokollet. Saknar du A3 ritar du av bladet på ett blädderblocksark. Alla blad går att plasta in. Då sätter gruppen post-it-lapparna på plasten och skriver namnen och orden med whiteboardpenna. Spara modellen med lapparna kvar, eller fotografera den innan ni suddar.
 exempel:
   valt:
     rubrik: Texten gruppen läser
-    text: Vattenplaneten, den första texten på nivån Bas. Det är vecka 1 och textens läspass.
+    text: Vattenplaneten, den första texten på nivån Bas. Det är vecka 1 och textens läspass.
   text:
     - "Hugo, Amina, Vera och Malik går i åk 5 och har sitt första läspass. Före textens fråga säger läraren vad pennan är till för: ”När du inte förstår ett ord eller en mening skaver det. Stryk under det.”"
     - "Texten ligger nedvänd. Läraren läser textens fråga: ”Om allt vatten på jorden rymdes i hundra hinkar, hur många kunde vi dricka ur?” Var och en säger sin gissning till den bredvid, och läraren skriver gissningarna på bladet Kärnorna: femtio, tjugo, tio och åttio. Sedan vänder alla upp texten och ser på bilderna, och gruppen reder ut orden sötvatten, som inte betyder att vattnet är sött, och grundvatten."
@@ -475,7 +475,7 @@ fastnar:
   motto: Det är författarens jobb att skriva begripligt, inte elevens fel att texten är svår.
 roll:
   rubrik: "Lärarens roll: leda utan att ge svaret"
-  text: "Stötta tänkandet i stället för att ta över det. I samma stund som du ger den färdiga tolkningen slutar eleverna att bygga den själva. Visa hur du själv stannar, undrar och läser om. Eleverna behöver se processen, inte en perfekt läsare. Säg mindre för varje vecka: frågorna du ställde i vecka 1 ställer eleverna i vecka 8."
+  text: "Stötta tänkandet i stället för att ta över det. I samma stund som du ger den färdiga tolkningen slutar eleverna att bygga den själva. Visa hur du själv stannar, undrar och läser om. Eleverna behöver se processen, inte en perfekt läsare. Säg mindre för varje vecka: frågorna du ställde i vecka 1 ställer eleverna i vecka 8."
   gor:
     - Ställ frågor och vänta ut tystnaden.
     - Låt eleverna förklara för varandra.
@@ -492,9 +492,9 @@ roll:
 urval:
   rubrik: Var hittar du texterna och modellerna?
   text:
-    - "Metodens femton texter står bland materialet, fem på varje nivå, och före varje text står lärarens sida. Texterna finns också på sidan Ta fram en faktatext, ordnade efter nivå och tema. Där visar du en text stort och skriver ut de texter du vill ha. Alla texterna har samma delar: en ingress som slutar med textens fråga, rutan Siffran, fyra avsnitt med ord förklarade i marginalen, bilder med avsnittens nummer, en faktaruta, en fördjupning som du läser högt i modellpasset och rutan Visste du att, som gruppen läser sist. Se själv filmerna under Läs mer innan du visar dem. Texterna är skrivna för metoden, och varje uppgift i dem är prövad mot en källa. De är övningstexter och är inte sakgranskade som ett läromedel."
+    - "Metodens femton texter står bland materialet, fem på varje nivå, med lärarens sida före och den ifyllda modellen efter. Texterna finns också på sidan Ta fram en faktatext, ordnade efter nivå och tema. Där visar du en text stort och skriver ut de texter du vill ha. Alla texterna har samma delar: en ingress som slutar med textens fråga, rutan Siffran, fyra avsnitt med ord förklarade i marginalen, bilder med avsnittens nummer, en faktaruta, en fördjupning som du läser högt i modellpasset och rutan Visste du att, som gruppen läser sist. Se filmerna under Läs mer innan du visar dem. Texterna är skrivna för metoden, och varje uppgift är prövad mot en källa. De är övningstexter och är inte sakgranskade som ett läromedel."
     - Varje modell har en sida, ett exempel om skolan och tre blad. Veckans blad skriver du ut på A3 till gruppen. Är ni bara ett par räcker A4, och då skriver paret i fälten, för hand eller på datorn.
-  kravText: "En egen text i vecka 6–8 ska uppfylla tre krav:"
+  kravText: "En egen text i vecka 6–8 ska uppfylla tre krav:"
   krav:
     - rubrik: Tydligt byggd
       text: Det mesta av texten passar en av de fem modellerna
@@ -521,10 +521,10 @@ progression:
       fokus: Gruppen läser klassens text i SO eller NO, som ofta är byggd på flera sätt.
       roll: "Läspasset: du tänker högt i avsnitt 1 igen. Modellpasset: du prövar två av modellernas frågor högt, och paren de tre andra."
     - vecka: 7–8
-      fokus: De två med jobbkorten leder gruppen genom avsnitten som paren läser. Gruppen väljer modell bland sina fem. I vecka 7 väljer den tillsammans med dig, och i vecka 8 väljer paren först. I det sista passet säger var och en vad hen tar med sig från perioden.
+      fokus: De två med jobbkorten leder gruppen genom avsnitten som paren läser. Gruppen väljer modell bland sina fem. I vecka 7 väljer den tillsammans med dig, och i vecka 8 väljer paren först. I det sista passet säger var och en vad hen tar med sig från perioden.
       roll: "Läspasset: du inleder och avslutar passet. Efter varje avsnitt säger du en sak som de två som ledde gjorde. Modellpasset: du lyssnar när gruppen väljer och går in först när något saknas."
 uppfoljning:
-  text: Du behöver veta om passen ger effekt. Kartläggningen står bland materialet. Eleven läser en kort faktatext och gör fyra uppgifter, om det som skaver, kärnan, bilden och hur texten hänger ihop. Kartläggningen har inga poäng. Du jämför det eleven sa och gjorde före perioden med det hen säger och gör efter, och raderna Så kan det låta visar hur skillnaden kan låta. Under perioden har du gruppens lappar och elevens skrivna svar från varje vecka. I passen hör du hur eleven reder ut det som skaver, och i vecka 6–8 hur paren väljer modell.
+  text: Du behöver veta om passen ger effekt. Kartläggningen står bland materialet. Eleven läser en kort faktatext och gör fyra uppgifter, om det som skaver, kärnan, bilden och hur texten hänger ihop. Kartläggningen har inga poäng. Du jämför det eleven sa och gjorde före perioden med det hen säger och gör efter, och raderna Så kan det låta visar hur skillnaden kan låta. Under perioden har du gruppens lappar och elevens skrivna svar från varje vecka. I passen hör du hur eleven reder ut det som skaver, och i vecka 6–8 hur paren väljer modell.
   rader:
     - nar: Före perioden
       vad: Gör kartläggningen före första passet. Den tar omkring en kvart per elev och visar också vilken nivå som passar.
@@ -548,7 +548,7 @@ checklista:
     - Kopierat texten enkelsidigt till varje elev.
     - "Läspasset: pennor, post-it-lappar, kortet När det skaver och bladet Kärnorna på A3."
     - "Modellpasset: veckans modell på A3, exemplet om skolan, elevernas texter och bladet Kärnorna med lapparna."
-    - Bestämt paren, och från vecka 3 vilka som börjar med jobbkorten.
+    - Bestämt paren, och från vecka 3 vilka som börjar med jobbkorten.
 grund:
   text: Metoden bygger på Collaborative Strategic Reading, där elever i små grupper förbereder läsningen, reder ut det som skaver, fångar kärnan och ställer frågor om det de har läst (Klingner och Vaughn, 1996, 1998). I helklass har arbetssättet gett små effekter på läsförståelsen i åk 6–8 (Boardman m.fl., 2015) och ingen säkerställd effekt i en stor studie i åk 5 (Hitchcock m.fl., 2011). I en studie i åk 4–5 syntes ingen effekt för eleverna som helhet, men en tydlig för eleverna med inlärningssvårigheter (Boardman m.fl., 2016). Årskurserna är de amerikanska, där eleverna är omkring ett år yngre än i svensk årskurs med samma nummer. Rutinen för kärnan, strecket under det som skaver och ringen runt vem eller vad kommer ur en amerikansk vägledning för läsinsatser i åk 4–9 (Vaughn m.fl., 2022). Frågorna om författarens val kommer ur Questioning the Author (Beck och McKeown, 2002). Att undervisa om hur faktatexter är byggda, med en grafisk modell, har stöd i två forskningsöversikter (Dexter och Hughes, 2011; Hebert m.fl., 2016), och rådet att ta en struktur i taget kommer ur Roehling m.fl. (2017). Sådan undervisning ger god effekt när den mäts med forskarnas egna prov och liten effekt på allmän läsförståelse, och effekten finns också för elever med inlärningssvårigheter. Eftersom effekten på allmän läsförståelse är liten slutar perioden med klassens texter, där eleverna använder modellerna i sin vanliga läsning.
   kallor: Bygger på Klingner och Vaughn (1996, 1998), Beck och McKeown (2002), Bremer m.fl. (2002), Hitchcock m.fl. (2011), Dexter och Hughes (2011), Meyer och Ray (2011), Boardman m.fl. (2015, 2016), Hebert m.fl. (2016), Roehling m.fl. (2017) och Vaughn m.fl. (2022).
@@ -594,7 +594,7 @@ lathund:
     not: "När det skaver: läs om meningen, leta ledtrådar, dela ordet och fråga en kamrat. Sist förklarar du kort."
   pass:
     rubrik: Läspasset med Vattenplaneten
-    textRubrik: Gruppen · fyra elever i åk 5 · nivån Bas · vecka 1
+    textRubrik: Gruppen · fyra elever i åk 5 · nivån Bas · vecka 1
     titel: Vattenplaneten
     text:
       - "Texten ligger nedvänd. Läraren läser textens fråga: hur många av hundra hinkar vatten kan vi dricka ur? Alla gissar i par: femtio, tjugo, tio och åttio."
@@ -634,7 +634,7 @@ lathund:
           - - 0–6 · Fördjupningen
             - En elev läser lapparna, du läser fördjupningen, och gruppen skriver den femte lappen
           - - 6–18 · Modellen
-            - "Du visar exemplet om skolan (vecka 1–5). Gruppen lägger lapparna: ”Var hör den här lappen hemma?”"
+            - "Du visar exemplet om skolan (vecka 1–5). Gruppen lägger lapparna: ”Var hör den här lappen hemma?”"
           - - 18–23 · Orden
             - "Paren skriver textens ord i flikarna: ”Vilket ord i texten visar det?”"
           - - 23–33 · Svaret
@@ -682,7 +682,7 @@ lathund:
             - Problem och lösning
             - problemet är, en lösning är
       - typ: not
-        text: "I vecka 2–5 prövar gruppen först en modell den kan: ”Passar den här? Varför inte?” I vecka 6–8 börjar passet med att var och en återger en gammal text ur en sparad modell. Klassens text har ingen fördjupning och ingen ruta Visste du att: låt gruppen välja en detalj att pröva."
+        text: "I vecka 2–5 prövar gruppen först en modell den kan: ”Passar den här? Varför inte?” I vecka 6–8 börjar passet med att var och en återger en gammal text ur en sparad modell. Klassens text har ingen fördjupning och ingen ruta Visste du att: låt gruppen välja en detalj att pröva."
   material:
     rubrik: Vad du behöver för ett faktatextsamtal
     kravEtikett: Krav på egen text
@@ -702,7 +702,7 @@ lathund:
       - Kortet När det skaver, ett per par
       - Bladet Kärnorna, på A3
       - "I modellpasset: veckans modell på A3 och exemplet om skolan"
-      - "Gruppens sparade modeller: en i vecka 2–5, alla fem i vecka 6–8"
+      - "Gruppens sparade modeller: en i vecka 2–5, alla fem i vecka 6–8"
     varjePass: Vad strök eleverna under, och hade kärnan med det viktiga?
 pabordet:
   - nr: 10
@@ -725,9 +725,9 @@ pabordet:
     fluent:
       - droppe
   - nr: 13
-    rubrik: "Ett möjligt resultat: Vattenplaneten"
-    text: Tankekartan för texten Vattenplaneten, med en grupps post-it-lappar och textens ord. Er grupps lappar blir andra.
-    efter: "del: Modellpasset: Tankekartan för Vattenplaneten"
+    rubrik: "Blad: Tankekartan för Vattenplaneten"
+    text: Tankekartan, blad 1, för Vattenplaneten, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Bas, text 1, Vattenplaneten"
   - nr: 14
     rubrik: Vattnets väg
     text: En genomskärning som läses från vänster till höger. Ett rör leder från sjön till vattenverket, vidare upp i vattentornet och under gatan till kranen i ett hus. Från huset går avloppet till reningsverket, och en pil leder tillbaka till sjön.
@@ -743,9 +743,9 @@ pabordet:
       - fisk
       - droppe
   - nr: 17
-    rubrik: "Ett möjligt resultat: Från sjö till kran"
-    text: Tidslinjen för texten Från sjö till kran, med en grupps post-it-lappar och textens ord. Er grupps lappar blir andra.
-    efter: "del: Modellpasset: Tidslinjen för Från sjö till kran"
+    rubrik: "Blad: Tidslinjen för Från sjö till kran"
+    text: Tidslinjen, blad 1, för Från sjö till kran, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Bas, text 2, Från sjö till kran"
   - nr: 18
     rubrik: Snöns väg och haglets väg
     text: Två moln bredvid varandra, med en iskristall i båda. I det vänstra växer kristallen till en snöstjärna, och under molnet sitter omkring hundra snöstjärnor ihop i en snöflinga. I det högra, ett högt bymoln med droppar och vindar uppåt, far kristallen ner, upp och ner igen, växer och faller som ett hagelkorn.
@@ -759,9 +759,9 @@ pabordet:
     fluent:
       - äpple
   - nr: 21
-    rubrik: "Ett möjligt resultat: Snö och hagel"
-    text: Venndiagrammet för texten Snö och hagel, med en grupps post-it-lappar och textens ord. Er grupps lappar blir andra.
-    efter: "del: Modellpasset: Venndiagrammet för Snö och hagel"
+    rubrik: "Blad: Venndiagrammet för Snö och hagel"
+    text: Venndiagrammet, blad 1, för Snö och hagel, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Bas, text 3, Snö och hagel"
   - nr: 22
     rubrik: Isberget
     text: Ett isberg i havet, i genomskärning, med vattenytan som ett streck. En liten topp, en tiondel av isberget, sticker upp över ytan. Den stora delen, nio tiondelar, ligger under ytan.
@@ -773,9 +773,9 @@ pabordet:
     fluent:
       - snöflinga
   - nr: 25
-    rubrik: "Ett möjligt resultat: Därför flyter is"
-    text: Kedjan för texten Därför flyter is, med en grupps post-it-lappar och textens ord. Er grupps lappar blir andra.
-    efter: "del: Modellpasset: Kedjan för Därför flyter is"
+    rubrik: "Blad: Kedjan för Därför flyter is"
+    text: Kedjan, blad 1, för Därför flyter is, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Bas, text 4, Därför flyter is"
   - nr: 26
     rubrik: Brunnen i byn
     text: En by i genomskärning. Längst till vänster ligger floden, långt från husen. Mitt bland husen står en pump på en borrad brunn, som går rakt ner genom marken till grundvattnet.
@@ -788,9 +788,9 @@ pabordet:
     text: Tre rader med tio figurer i varje. År 2015 är fem blå och fem vita, år 2024 är sex blå och fyra vita, och på raden för målet år 2030 är alla tio blå. De blå har rent vatten hemma.
     efter: "ram: Bas, text 5: En kran åt alla"
   - nr: 29
-    rubrik: "Ett möjligt resultat: En kran åt alla"
-    text: Problem och lösning för texten En kran åt alla, med en grupps post-it-lappar och textens ord. Er grupps lappar blir andra.
-    efter: "del: Modellpasset: Problem och lösning för En kran åt alla"
+    rubrik: "Blad: Problem och lösning för En kran åt alla"
+    text: Problem och lösning, blad 1, för En kran åt alla, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Bas, text 5, En kran åt alla"
   - nr: 30
     rubrik: Hela familjen
     text: "Solens kant längst till vänster, och sedan planeterna på rad i ordning från solen: fyra små stenplaneter, asteroider mellan Mars och Jupiter och fyra jättar med ringar. Vid planeterna syns några månar som prickar, och ytterst finns en komet och Pluto. Solen och planeterna är ritade i rätt storlek mot varandra, men avstånden stämmer inte."
@@ -808,9 +808,9 @@ pabordet:
     fluent:
       - jordklot
   - nr: 33
-    rubrik: "Ett möjligt resultat: Solens familj"
-    text: Tankekartan för texten Solens familj, med en grupps post-it-lappar och textens ord. Er grupps lappar blir andra.
-    efter: "del: Modellpasset: Tankekartan för Solens familj"
+    rubrik: "Blad: Tankekartan för Solens familj"
+    text: Tankekartan, blad 2, för Solens familj, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Medel, text 1, Solens familj"
   - nr: 34
     rubrik: Från 1957 till 2026
     text: "En tidslinje med ett litet streck för varje år och en pil åt höger. Fem år är markerade: 1957, 1961 och 1969 står tätt till vänster, 2000 långt till höger om dem och 2026 längst till höger. De fyra första har avsnittens nummer, 1 till 4, och 2026 har en tom ring."
@@ -826,9 +826,9 @@ pabordet:
     fluent:
       - jordklot
   - nr: 37
-    rubrik: "Ett möjligt resultat: Vägen ut i rymden"
-    text: Tidslinjen för texten Vägen ut i rymden, med en grupps post-it-lappar och textens ord. Er grupps lappar blir andra.
-    efter: "del: Modellpasset: Tidslinjen för Vägen ut i rymden"
+    rubrik: "Blad: Tidslinjen för Vägen ut i rymden"
+    text: Tidslinjen, blad 2, för Vägen ut i rymden, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Medel, text 2, Vägen ut i rymden"
   - nr: 38
     rubrik: Jorden och Mars i samma skala
     text: Jorden och Mars står bredvid varandra i samma skala, och Mars är drygt hälften så bred som jorden. Under varje klot visar ett streck hur brett det är, ungefär 12 700 kilometer för jorden och ungefär 6 800 för Mars. En linje pekar på vattnet på jorden och en på den torra, röda marken på Mars.
@@ -847,9 +847,9 @@ pabordet:
     text: Två termometrar för Mars. Den vänstra visar den varmaste temperaturen, 20 grader, och den högra den kallaste, ungefär minus 153 grader, långt ner mot botten. Två streckade linjer går över båda, det övre där vatten fryser och det nedre vid jordens köldrekord, minus 89 grader.
     efter: "ram: Medel, text 3: Jorden och Mars"
   - nr: 41
-    rubrik: "Ett möjligt resultat: Jorden och Mars"
-    text: Venndiagrammet för texten Jorden och Mars, med en grupps post-it-lappar och textens ord. Er grupps lappar blir andra.
-    efter: "del: Modellpasset: Venndiagrammet för Jorden och Mars"
+    rubrik: "Blad: Venndiagrammet för Jorden och Mars"
+    text: Venndiagrammet, blad 2, för Jorden och Mars, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Medel, text 3, Jorden och Mars"
   - nr: 42
     rubrik: Jorden runt solen
     text: Solen i mitten och jorden i fyra lägen på sin bana, sedd snett uppifrån, med pilar moturs från juni till september, december och mars. Jordaxeln lutar åt samma håll i alla lägena, så att området kring Nordpolen ligger i ljus i juni och i skugga i december. En punkt strax efter decemberläget visar var jorden är närmast solen, i januari, och en strax efter juniläget var den är längst bort, i juli.
@@ -863,9 +863,9 @@ pabordet:
     fluent:
       - sol
   - nr: 45
-    rubrik: "Ett möjligt resultat: Därför blir det sommar"
-    text: Kedjan för texten Därför blir det sommar, med en grupps post-it-lappar och textens ord. Er grupps lappar blir andra.
-    efter: "del: Modellpasset: Kedjan för Därför blir det sommar"
+    rubrik: "Blad: Kedjan för Därför blir det sommar"
+    text: Kedjan, blad 2, för Därför blir det sommar, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Medel, text 4, Därför blir det sommar"
   - nr: 46
     rubrik: Trängseln runt jorden
     text: Jordklotet med tre banor runt sig och pilar i banornas riktning. I banorna ligger fyrtio prickar, elva ljusa för satelliter som fungerar och tjugonio mörka för skräp. Flest ligger i banan närmast jorden. Bilden gäller slutet av 2024, och avstånden är inte skalenliga.
@@ -883,9 +883,9 @@ pabordet:
     text: Tre små bilder bredvid varandra, med jorden nederst. I den första har en satellit flyttat sig uppåt medan en bit skräp far förbi där den nyss var, och i den andra faller en gammal satellit i en båge från sin bana ner mot jorden. I den tredje håller en farkost i en gammal satellit och drar den ner mot jorden.
     efter: "ram: Medel, text 5: Skräpet runt jorden"
   - nr: 49
-    rubrik: "Ett möjligt resultat: Skräpet runt jorden"
-    text: Problem och lösning för texten Skräpet runt jorden, med en grupps post-it-lappar och textens ord. Er grupps lappar blir andra.
-    efter: "del: Modellpasset: Problem och lösning för Skräpet runt jorden"
+    rubrik: "Blad: Problem och lösning för Skräpet runt jorden"
+    text: Problem och lösning, blad 2, för Skräpet runt jorden, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Medel, text 5, Skräpet runt jorden"
   - nr: 50
     rubrik: Försvaret i fyra lager
     text: Huden i genomskärning vid ett litet sår, som en förenklad modell. Smittämnen tar sig in genom såret, där ätarceller äter upp dem, och i blodkärlet under huden visar pilar att mer blod strömmar dit. I blodet finns antikroppar, en B-cell, en T-cell och två minnesceller.
@@ -895,9 +895,9 @@ pabordet:
     text: En förenklad modell i två delar. Till vänster sitter en antikropp, formad som ett Y, fast på ett smittämne, eftersom antikroppens urtag har samma form som smittämnets taggar. Till höger har ett annat smittämne taggar med en annan form, och där passar samma antikropp inte.
     efter: "ram: Avancerat, text 1: Kroppens försvar"
   - nr: 53
-    rubrik: "Ett möjligt resultat: Kroppens försvar"
-    text: Tankekartan för texten Kroppens försvar, med en grupps post-it-lappar och textens ord. Er grupps lappar blir andra.
-    efter: "del: Modellpasset: Tankekartan för Kroppens försvar"
+    rubrik: "Blad: Tankekartan för Kroppens försvar"
+    text: Tankekartan, blad 2, för Kroppens försvar, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Avancerat, text 1, Kroppens försvar"
   - nr: 54
     rubrik: Ringen runt ett fall
     text: Den som är sjuk står i mitten, röd, och runt om står åtta blå figurer i en ring. De är vaccinerade, och de röda pilarna från den som är sjuk slutar vid ringen. Utanför ringen står tolv vita figurer som inte är vaccinerade, och dit når ingen pil.
@@ -911,9 +911,9 @@ pabordet:
     text: Staplar för hur många som dog i smittkoppor i Sverige varje år från 1774. Två streck visar 1801, den första vaccinationen, och 1816, då vaccinet blev obligatoriskt för barn. Före strecken är många staplar höga, upp till omkring 15 000 döda år 1779, och efter dem är alla låga, högst omkring 4 000 döda år 1874.
     efter: "ram: Avancerat, text 2: Sjukdomen som försvann"
   - nr: 57
-    rubrik: "Ett möjligt resultat: Sjukdomen som försvann"
-    text: Tidslinjen för texten Sjukdomen som försvann, med en grupps post-it-lappar och textens ord. Er grupps lappar blir andra.
-    efter: "del: Modellpasset: Tidslinjen för Sjukdomen som försvann"
+    rubrik: "Blad: Tidslinjen för Sjukdomen som försvann"
+    text: Tidslinjen, blad 2, för Sjukdomen som försvann, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Avancerat, text 2, Sjukdomen som försvann"
   - nr: 58
     rubrik: Bakterien och viruset
     text: En bakterie och ett virus i genomskärning, sida vid sida, som en förenklad modell som inte är skalenlig. Bakterien har en cellvägg runt om, och inuti finns arvsmassa och små delar som bygger nytt. Viruset är mindre och har bara ett skal med arvsmassa i.
@@ -923,9 +923,9 @@ pabordet:
     text: Samma cell i fyra steg, med pilar från vänster till höger, som en förenklad modell som inte är skalenlig. Ett virus tar sig in i cellen, och sedan ligger virusets arvsmassa mitt i cellen. Cellen fylls av nya virus. Till sist går cellen sönder, och virusen lämnar den.
     efter: "ram: Avancerat, text 3: Virus och bakterier"
   - nr: 61
-    rubrik: "Ett möjligt resultat: Virus och bakterier"
-    text: Venndiagrammet för texten Virus och bakterier, med en grupps post-it-lappar och textens ord. Er grupps lappar blir andra.
-    efter: "del: Modellpasset: Venndiagrammet för Virus och bakterier"
+    rubrik: "Blad: Venndiagrammet för Virus och bakterier"
+    text: Venndiagrammet, blad 1, för Virus och bakterier, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Avancerat, text 3, Virus och bakterier"
   - nr: 62
     rubrik: Före, under och efter
     text: Tre rutor med 24 bakterier i varje, förenklat från textens miljarder. I rutan Före är tre mörka och tjugoen ljusa, och i rutan Under, där antibiotikan syns som prickar, är de ljusa bara streckade skal medan de tre mörka är kvar. I rutan Efter är alla mörka, och flera av dem delar sig.
@@ -944,9 +944,9 @@ pabordet:
     text: En avlång skål sedd uppifrån, dubbelt så lång som bred, med nio band tvärs över. Banden är ljusast längst ut och mörkast i mitten. Från båda ändarna har bakterier fyllt de yttersta banden, och vid gränserna längre in sticker runda fläckar av bakterier in i nästa band.
     efter: "ram: Avancerat, text 4: När medicinen sviker"
   - nr: 65
-    rubrik: "Ett möjligt resultat: När medicinen sviker"
-    text: Kedjan för texten När medicinen sviker, med en grupps post-it-lappar och textens ord. Er grupps lappar blir andra.
-    efter: "del: Modellpasset: Kedjan för När medicinen sviker"
+    rubrik: "Blad: Kedjan för När medicinen sviker"
+    text: Kedjan, blad 1, för När medicinen sviker, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Avancerat, text 4, När medicinen sviker"
   - nr: 66
     rubrik: Vägen från obduktionssalen
     text: Tre rum på sjukhuset. En pil går från obduktionssalen till läkarnas klinik, där fler mödrar dog, och mitt på pilen finns en plats för handtvätt i klorlösning. Den kom till i maj 1847. Till barnmorskornas klinik, där färre mödrar dog, går ingen pil.
@@ -963,9 +963,9 @@ pabordet:
       - hand
       - droppe
   - nr: 69
-    rubrik: "Ett möjligt resultat: Gåtan på sjukhuset"
-    text: Problem och lösning för texten Gåtan på sjukhuset, med en grupps post-it-lappar och textens ord. Er grupps lappar blir andra.
-    efter: "del: Modellpasset: Problem och lösning för Gåtan på sjukhuset"
+    rubrik: "Blad: Problem och lösning för Gåtan på sjukhuset"
+    text: Problem och lösning, blad 1, för Gåtan på sjukhuset, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Avancerat, text 5, Gåtan på sjukhuset"
   - nr: 70
     rubrik: "Blad: Tankekartan, exemplet om skolan"
     text: En grupps tankekarta för texten om skolan. Lappen om cyklarna hör inte till någon del.
@@ -1074,11 +1074,145 @@ ramar:
   vidEnheterna:
     - Kärnorna
   text:
-    - Här står metodens texter, nivå för nivå, med lärarens sida före varje text. Sedan kommer modellerna, var och en med en sida, ett exempel och tre blad, och sist bladen och korten.
+    - Här står metodens texter, nivå för nivå, med lärarens sida före varje text och den ifyllda modellen efter. Varje tema börjar med en lärarhandledning, två sidor för den som vill läsa temats texter med hela klassen. Sedan kommer modellerna, var och en med en sida, ett exempel och tre blad, och sist bladen och korten.
   ramar:
+    - rubrik: "Lärarhandledningarna: Så arbetar klassen med en text"
+      text:
+        - Den här sidan står först i varje lärarhandledning.
+      delar:
+        - rubrik: Läslektionen, omkring 40 minuter
+          falt:
+            - rubrik: Före lektionen
+              text: Sätt ihop paren, så att den som läser mödosamt har en kamrat som kan läsa högt.
+            - rubrik: |-
+                Frågan
+                0–⁠5 min
+              text: "Första gången börjar du lektionen så här: ”När du inte förstår ett ord eller en mening skaver det. Stryk under det.” Läs sedan textens fråga medan eleverna har texten nedvänd. Var och en säger sin gissning till den bredvid, och du skriver några på tavlan. Eleverna vänder upp texten, och ni ser på rubriken, bilderna och mellanrubrikerna. Red ut orden före läsningen."
+            - rubrik: |-
+                Läs
+                5–⁠35 min
+              text: Du läser ingressen och avsnitt 1 högt. I de två första texterna tänker du högt där, med orden i raden Tänk högt, och säger kärnan själv och skriver den på ett ark. Paren läser sedan avsnitt 2, 3 och 4, ett i taget. En läser högt och den andra följer med i texten, och båda stryker under det som skaver. Vid nästa avsnitt byter de, men den som läser mödosamt följer med varje gång.
+            - rubrik: Efter varje avsnitt
+              text: "”Var skavde det?” och ”Vad har ni prövat?” Har avsnittet en bild: ”Var i bilden är vi nu?” Sedan säger var och en kärnan till den bredvid: vem eller vad avsnittet handlar om, och det viktigaste om det, med högst tio ord. Paret väljer den kärna som säger mest om hela avsnittet. Två eller tre par säger sin, klassen väljer en, och en elev skriver den på ett A4-ark som du sätter upp. Fråga: ”Hur hänger det ihop med det vi läste innan?” Blir tiden knapp läser du det sista avsnittet högt, och klassen säger kärnan direkt."
+            - rubrik: |-
+                Sist
+                35–⁠40 min
+              text: "En elev läser kärnorna i följd. Fråga: ”Vet vi mer nu?” Var och en säger till den bredvid vad hen nu tror är svaret, och ni jämför med gissningarna. Spara arken till modellektionen."
+        - rubrik: Modellektionen, omkring 40 minuter
+          falt:
+            - rubrik: Före lektionen
+              text: Rita textens modell tom på tavlan. Den ifyllda modellen vid texten visar ett möjligt resultat.
+            - rubrik: |-
+                Kärnorna
+                0–⁠5 min
+              text: Sätt upp arken i textens ordning, och en elev läser dem. Läs fördjupningen högt. Klassen säger fördjupningens kärna, och en elev skriver den på ett nytt ark.
+            - rubrik: |-
+                Modellen
+                5–⁠20 min
+              text: Modellen är ny, så du flyttar själv det första arket och säger varför. Sedan säger klassen var de andra hör hemma och varför, och du flyttar dem. Klassen namnger platserna, och raden Modellen har förslag.
+            - rubrik: |-
+                Orden
+                20–⁠25 min
+              text: Paren letar i texten efter orden som visar hur delarna hör ihop, och du skriver dem i modellen.
+            - rubrik: |-
+                Svaret
+                25–⁠40 min
+              text: "Var och en berättar texten ur modellen för den bredvid, som säger vilken kärna som inte kom med. Sedan skriver var och en två till fyra meningar som svar på textens fråga och läser dem för den bredvid. Raden Lyssna efter säger vad ett svar ska ha med. Saknas något: ”Vilken kärna svarar på det?”"
+        - rubrik: De fem modellerna
+          falt:
+            - rubrik: Tankekartan
+              text: Saken står i mitten, och varje del har ett eget fält.
+            - rubrik: Tidslinjen
+              text: Stegen står i tur och ordning längs en linje.
+            - rubrik: Venndiagrammet
+              text: Varje sak har en ring, och det som gäller båda står där ringarna går in i varandra. Handlar en kärna om en skillnad, gör ni två ark av den, ett i var ring.
+            - rubrik: Kedjan
+              text: Varje led är något som händer, och en pil visar vad det leder till.
+            - rubrik: Problem och lösning
+              text: Problemet och orsaken står till vänster, och lösningen och resultatet till höger.
+        - rubrik: När det skaver
+          falt:
+            - rubrik: Ett sätt i taget
+              text: "Skriv de fyra sätten på ett A4-ark första gången och låt det sitta uppe: läs om meningen och den före och efter; leta efter en ledtråd i marginalen, i bilden eller i ett exempel; dela ordet; fråga en kamrat. Paren prövar ett sätt i taget, uppifrån. Hjälper inget, förklarar du kort, och en elev säger det med egna ord."
+            - rubrik: Inget understruket
+              text: "Peka på ett ställe som brukar skava, som det i raden Det brukar skava, och säg: ”Säg det med egna ord.” Går det inte, har eleven hittat något som skaver, och hen stryker under det."
+            - rubrik: Kärnan håller inte
+              text: "Kan eleven inte säga den: ”Var tappade du tråden?” Är den för lång: ”Vad kan vi stryka och ändå förstå?” Är den en rolig detalj: ”Är det viktigt eller intressant? Peka på meningarna som handlar om det.”"
+            - rubrik: Mer stöd
+              text: Lyssna på några par i varje runda, och läs svaren. Den som inte förstår texten uppläst behöver annat stöd först. Den som förstår den uppläst men efter tre texter inte kan säga en kärna kan behöva Faktatextsamtal i grupp hos en speciallärare, också om hen läser orden mödosamt.
+    - rubrik: "Lärarhandledning: Bas, Vatten"
+      tema: Vatten
+      text:
+        - Temat Vatten har fem faktatexter, som brukar passa i åk 4–5. Varje vecka har klassen en läslektion och en modellektion om veckans text, så temat tar fem veckor. Varje elev har texten, en penna och papper till svaret. Du har tavlan, magneter, A4-ark och en tjock tuschpenna.
+      delar:
+        - rubrik: "1 Vattenplaneten: Tankekartan"
+          falt:
+            - rubrik: Frågan
+              text: Om allt vatten på jorden rymdes i hundra hinkar, hur många kunde vi dricka ur?
+            - rubrik: Ord före
+              text: sötvatten (inte salt, inte sött) · grundvatten (grund är marken, inte grunt)
+            - rubrik: Tänk högt
+              kursiv: true
+              text: "”71 procent av ytan, och nästan allt vatten i haven. Är det samma sak? Jag läser om. Nej: det ena är ytan, det andra är var vattnet finns. Vem eller vad? Havet. Det viktigaste? Där finns nästan allt vatten, och det är salt. Det om törsten är spännande, men det står bara i sista meningen.”"
+            - rubrik: Det brukar skava
+              text: "”en blöt svamp”: grundvattnet fyller små hålrum i marken och är ingen sjö (avsnitt 3)"
+            - rubrik: Modellen
+              text: "havet: ”nästan allt” · isen: ”det mesta” · grundvattnet: ”nästan allt annat” · sjöar och floder: ”kvar blir”. I mitten står jordens vatten. Fördjupningens kärna blir ett femte fält, luften och det levande, med orden ”två ställen till”."
+            - rubrik: Lyssna efter
+              text: knappt en hink · det salta och det frusna går bort · det vi kan dricka finns i marken och i sjöar och floder
+        - rubrik: "2 Från sjö till kran: Tidslinjen"
+          falt:
+            - rubrik: Frågan
+              text: Vad händer med vattnet på vägen från sjön till din kran, och vart tar det vägen efteråt?
+            - rubrik: Ord före
+              text: "renas (görs rent, inte bara klart) · vattenverk (verk: där man gör något) · tryck (vattnet pressar, ingen knapp)"
+            - rubrik: Tänk högt om
+              text: "råvatten: ”Rå, som rå potatis? Jag läser vidare. Det är vatten som ingen har renat än. Vem eller vad? Vattnet. Det viktigaste? Det hämtas ur en sjö eller ur marken och är inte rent än.” (avsnitt 1)"
+            - rubrik: Det brukar skava
+              text: "”Det ger tryck”: ”Det” syftar på vattnet i tornet, som är tungt och pressar nedåt (avsnitt 3)"
+            - rubrik: Modellen
+              text: "råvattnet: ”först” · vattenverket: ”sedan” · tornet och rören: ”efter det” · efter kranen: ”till sist”. Fördjupningens kärna hör till vattenverket, för den visar vad som händer när ett steg i reningen saknas."
+            - rubrik: Lyssna efter
+              text: renas i vattenverket · tornet trycker ut det till kranen · avloppet, reningsverket och naturen igen
+        - rubrik: "3 Snö och hagel: Venndiagrammet"
+          falt:
+            - rubrik: Frågan
+              text: Vad har snö och hagel gemensamt, och vad skiljer dem åt?
+            - rubrik: Ord före
+              text: bymoln (by är en skur, ingen ort) · flytande (rinnande, inte som flyter ovanpå) · iskristall (en pytteliten isbit)
+            - rubrik: Det brukar skava
+              text: "”ändå flytande”: dropparna har inte frusit, fast de är kallare än noll grader (avsnitt 3)"
+            - rubrik: Modellen
+              text: "båda: ”både snö och hagel” · bara snö: ”men sedan blir de olika” · bara hagel: ”däremot”. Kärnan från avsnitt 4 delar ni på två ark, ett för snö och ett för hagel, med orden ”medan” och ”haglet behöver däremot”. Fördjupningens kärna hör till hagel."
+            - rubrik: Lyssna efter
+              text: båda börjar som iskristaller i moln · snön blir flingor, haglet växer i bymoln · snö på vintern, hagel mest vår och sommar
+        - rubrik: "4 Därför flyter is: Kedjan"
+          falt:
+            - rubrik: Frågan
+              text: Fryser en sjö från ytan eller från botten, och varför?
+            - rubrik: Ord före
+              text: ämne (det saker består av, inte skolämne) · stelna (bli fast, inte stel i kroppen) · lättare (lika stor bit väger mindre)
+            - rubrik: Det brukar skava
+              text: "”som tyngst”: vatten är allra tyngst vid fyra grader och sjunker, så botten blir varmast (avsnitt 4)"
+            - rubrik: Modellen
+              text: "lättare: ”därför” · locket: ”det gör att” · under isen: ”eftersom”. Kedjan börjar med mer plats, ur avsnitt 1. Fördjupningens kärna står bredvid kedjan, eftersom den handlar om is men inte är ett led."
+            - rubrik: Lyssna efter
+              text: från ytan · is är lättare och flyter · locket skyddar vattnet under
+        - rubrik: "5 En kran åt alla: Problem och lösning"
+          falt:
+            - rubrik: Frågan
+              text: Varför har inte alla rent vatten hemma, och vad kan man göra åt det?
+            - rubrik: Ord före
+              text: miljard (tusen miljoner, inte en miljon) · rent vatten (går att dricka, inte bara klart) · landsbygd (utanför städerna, inget eget land)
+            - rubrik: Det brukar skava
+              text: på landsbygden har ”sex av tio” rent vatten, men i hela världen saknar ”en av fyra” det (avsnitt 4)
+            - rubrik: Modellen
+              text: "en av fyra: ”problemet är” · smutsigt, långt borta: ”beror oftast på” · brunn, rör, toalett: ”en lösning är” · fler får vatten: ”har lett till”. Fördjupningens kärna visar att problemet kostar tid. Dra ett streck från den till problemet."
+            - rubrik: Lyssna efter
+              text: smutsigt eller långt borta · brunnar, rör, rening och toaletter · fler får vatten, inte alla än
     - rubrik: "Lärarens sida: Bas, text 1, Vattenplaneten"
       text:
-        - Nästan allt vatten på jorden är salt eller fruset, och det vi kan dricka är en mycket liten del. Texten är en beskrivning, och modellen är Tankekartan, blad 1. I vecka 1 tänker du högt i avsnitt 1.
+        - Nästan allt vatten på jorden är salt eller fruset, och det vi kan dricka är en mycket liten del. Texten är en beskrivning, och modellen är Tankekartan, blad 1. I vecka 1 tänker du högt i avsnitt 1.
       delar:
         - rubrik: "Läspasset: de fyra avsnitten"
           falt:
@@ -1127,7 +1261,7 @@ ramar:
                 Lockar: 60 procent, som gäller en kropp. ”Vilka två ställen?”
                 Sambandet: ”på två ställen till”, luften och allt som lever
             - rubrik: Modellen
-              text: "I vecka 1 lägger du den första post-it-lappen och skriver det första ordet. Tankekartan, blad 1. Fälten: havet, isen, grundvattnet, och sjöar och floder. Fråga var fördjupningens lapp hör hemma. Gruppen lägger den på En lapp till, som blir ett femte fält med namnet Luften och det levande."
+              text: "I vecka 1 lägger du den första post-it-lappen och skriver det första ordet. Tankekartan, blad 1. Fälten: havet, isen, grundvattnet, och sjöar och floder. Fråga var fördjupningens lapp hör hemma. Gruppen lägger den på En lapp till, som blir ett femte fält med namnet Luften och det levande."
             - rubrik: Orden
               text: |-
                 nästan allt (havet) · det mesta (isen) · nästan allt annat (grundvattnet) · kvar blir (sjöar och floder)
@@ -1141,6 +1275,7 @@ ramar:
             - rubrik: Samtala
               text: "Varför börjar författaren i rymden? Varför räknar hen i hinkar? Ett svar: det blå lurar oss, och hinkarna visar hur lite av vattnet som går att dricka."
     - rubrik: "Bas, text 1: Vattenplaneten"
+      tema: Vatten
       text:
         - Vatten · text 1 av 5
       delar:
@@ -1232,16 +1367,29 @@ ramar:
               - https://www.smhi.se/kunskapsbanken/hydrologi/sveriges-sjoar
             - - USGS visar vattnets kretslopp i en stor bild, med text på svenska.
               - https://www.usgs.gov/special-topics/water-science-school/science/vattnets-kretslopp-water-cycle-schools-swedish
+    - rubrik: "Modellen: Bas, text 1, Vattenplaneten"
+      tema: Vatten
+      text:
+        - Tankekartan, blad 1, ifylld för Vattenplaneten.
+      delar:
+        - rubrik: Frågan och svaret
+          falt:
+            - rubrik: Textens fråga
+              text: Om allt vatten på jorden rymdes i hundra hinkar, hur många kunde vi dricka ur?
+            - rubrik: Lyssna efter
+              text: knappt en hink · det salta och det frusna går bort · det vi kan dricka finns i marken och i sjöar och floder
+            - rubrik: Så kan svaret låta
+              text: Knappt en. Nästan allt vatten är salt, och det mesta sötvattnet är is. Det vi kan dricka finns i marken och i sjöar och floder.
     - rubrik: "Lärarens sida: Bas, text 2, Från sjö till kran"
       text:
-        - Vattnet hämtas i naturen, renas i vattenverket, trycks ut till kranen och renas en gång till innan det går tillbaka till naturen. Texten är byggd i tidsordning, och modellen är Tidslinjen, blad 1. I vecka 2 tänker du högt i avsnitt 1.
+        - Vattnet hämtas i naturen, renas i vattenverket, trycks ut till kranen och renas en gång till innan det går tillbaka till naturen. Texten är byggd i tidsordning, och modellen är Tidslinjen, blad 1. I vecka 2 tänker du högt i avsnitt 1.
       delar:
         - rubrik: "Läspasset: de fyra avsnitten"
           falt:
             - rubrik: Textens fråga
               text: Vad händer med vattnet på vägen från sjön till din kran, och vart tar det vägen efteråt?
             - rubrik: Ord före läsningen
-              text: "renas (också klart vatten) · vattenverk (verk: där man gör något) · tryck (vattnet pressar, ingen knapp)"
+              text: "renas (görs rent, inte bara klart) · vattenverk (verk: där man gör något) · tryck (vattnet pressar, ingen knapp)"
             - rubrik: Tänk högt
               kursiv: true
               text: "”Råvatten. Rå, som rå potatis? Jag läser vidare: vatten som ingen har renat än. Men det kan se klart ut? Jag läser om. Bakterierna syns inte. Vem eller vad? Vattnet. Det viktigaste? Det hämtas ur en sjö eller ur marken och är inte rent än. Det om badsjön är spännande, men det är en detalj.”"
@@ -1283,7 +1431,7 @@ ramar:
                 Lockar: att alla kokade vattnet. ”Varför kom parasiten ända fram till kranarna?”
                 Sambandet: ”varför varje steg behövs”: stegen i vattenverket, avsnitt 2
             - rubrik: Modellen
-              text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad kommer först här?” Den visar delar men ingen ordning. Ta sedan fram Tidslinjen, blad 1. Gruppen lägger fördjupningens post-it-lapp på En lapp till och kallar platsen Hör till Vattenverket. Lappen visar vad som händer när ett steg i vattenverket saknas."
+              text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad kommer först här?” Den visar delar men ingen ordning. Ta sedan fram Tidslinjen, blad 1. Gruppen lägger fördjupningens post-it-lapp på En lapp till och kallar platsen Hör till vattenverket. Lappen visar vad som händer när ett steg i vattenverket saknas."
             - rubrik: Orden
               text: först (råvattnet) · sedan (vattenverket) · efter det (tornet och rören) · till sist (efter kranen)
             - rubrik: Svaret
@@ -1295,6 +1443,7 @@ ramar:
             - rubrik: Samtala
               text: "Varför börjar varje avsnitt med ett tidsord? Varför berättar författaren om Östersund? Ett svar: tidsorden håller ordning på vattnets väg, och Östersund visar varför inget steg i reningen får saknas."
     - rubrik: "Bas, text 2: Från sjö till kran"
+      tema: Vatten
       text:
         - Vatten · text 2 av 5
       delar:
@@ -1375,9 +1524,22 @@ ramar:
               - https://www.stockholmvattenochavfall.se/globalassets/skolsajten/pdf/ak456/faktablad_vatten4-6.pdf
             - - Bladet om avloppsvatten följer vattnet från toaletten ut i havet.
               - https://www.stockholmvattenochavfall.se/globalassets/skolsajten/pdf/ak456/faktablad_avlopp4-6.pdf
+    - rubrik: "Modellen: Bas, text 2, Från sjö till kran"
+      tema: Vatten
+      text:
+        - Tidslinjen, blad 1, ifylld för Från sjö till kran.
+      delar:
+        - rubrik: Frågan och svaret
+          falt:
+            - rubrik: Textens fråga
+              text: Vad händer med vattnet på vägen från sjön till din kran, och vart tar det vägen efteråt?
+            - rubrik: Lyssna efter
+              text: renas i vattenverket · tornet trycker ut det till kranen · avloppet, reningsverket och naturen igen
+            - rubrik: Så kan svaret låta
+              text: Vattnet hämtas ur sjön och renas i vattenverket. Efter det pumpas det upp i vattentornet och trycks ut till kranen. Till sist rinner det ner i avloppet, renas igen och släpps ut i naturen.
     - rubrik: "Lärarens sida: Bas, text 3, Snö och hagel"
       text:
-        - Snö och hagel börjar båda som iskristaller i moln, men de bildas på olika sätt, ser olika ut och faller på olika årstider. Texten jämför två saker, och modellen är Venndiagrammet, blad 1. I vecka 3 har två elever i taget jobbkorten från avsnitt 2.
+        - Snö och hagel börjar båda som iskristaller i moln, men de bildas på olika sätt, ser olika ut och faller på olika årstider. Texten jämför två saker, och modellen är Venndiagrammet, blad 1. I vecka 3 har två elever i taget jobbkorten från avsnitt 2.
       delar:
         - rubrik: "Läspasset: de fyra avsnitten"
           falt:
@@ -1423,11 +1585,11 @@ ramar:
                 Sambandet: ”än en snöflinga”: haglet jämförs med snön igen
                 Bilden: Kornet från Ramnäs bredvid äpplet, i Så stora kan hagel bli
             - rubrik: Modellen
-              text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad ska stå i mitten?” Texten jämför två saker, och kartan visar inte vad som är lika och olika. Ta sedan fram Venndiagrammet, blad 1. Avsnitt 4 ger två post-it-lappar: i modellpasset delar gruppen avsnittets kärna på två lappar, en för var sak. Gruppen lägger fördjupningens lapp på En lapp till och kallar platsen Hör till hagel."
+              text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad ska stå i mitten?” Texten jämför två saker, och kartan visar inte vad som är lika och olika. Ta sedan fram Venndiagrammet, blad 1. Avsnitt 4 ger två post-it-lappar: i modellpasset delar gruppen avsnittets kärna på två lappar, en för var sak. Gruppen lägger fördjupningens lapp på En lapp till och kallar platsen Hör till hagel."
             - rubrik: Orden
               text: |-
                 både snö och hagel (båda) · men sedan blir de olika (bara snö) · däremot (bara hagel)
-                Utan flik: gruppen skriver ”medan” och ”Haglet behöver däremot” vid lapparna från avsnitt 4.
+                Utan flik: gruppen skriver ”medan” och ”haglet behöver däremot” vid lapparna från avsnitt 4.
             - rubrik: Svaret
               text: |-
                 Lyssna efter: båda börjar som iskristaller i moln · snön blir flingor, haglet växer i bymoln · snö på vintern, hagel mest vår och sommar
@@ -1437,6 +1599,7 @@ ramar:
             - rubrik: Samtala
               text: "Varför börjar författaren med det som är lika? Varför har snö och hagel samma punkter i samma ordning? Ett svar: då syns skillnaderna mitt emot varandra."
     - rubrik: "Bas, text 3: Snö och hagel"
+      tema: Vatten
       text:
         - Vatten · text 3 av 5
       delar:
@@ -1514,9 +1677,22 @@ ramar:
               - https://www.smhi.se/kunskapsbanken/meteorologi/sno/iskristaller-snostjarnor-snoflingor-och-frostrosor
             - - UR Play har en film på tre minuter om hur snöflingor blir till.
               - https://urplay.se/program/225993-visste-du-varje-snoflinga-ar-unik
+    - rubrik: "Modellen: Bas, text 3, Snö och hagel"
+      tema: Vatten
+      text:
+        - Venndiagrammet, blad 1, ifyllt för Snö och hagel.
+      delar:
+        - rubrik: Frågan och svaret
+          falt:
+            - rubrik: Textens fråga
+              text: Vad har snö och hagel gemensamt, och vad skiljer dem åt?
+            - rubrik: Lyssna efter
+              text: båda börjar som iskristaller i moln · snön blir flingor, haglet växer i bymoln · snö på vintern, hagel mest vår och sommar
+            - rubrik: Så kan svaret låta
+              text: Båda är fruset vatten och börjar som iskristaller i ett moln. Snön klumpar ihop sig till flingor och faller på vintern, medan haglet växer i höga bymoln och faller mest på våren och sommaren.
     - rubrik: "Lärarens sida: Bas, text 4, Därför flyter is"
       text:
-        - Vatten tar mer plats när det fryser, och därför flyter isen, lägger sig som ett lock över sjön och skyddar vattnet och djuren under. Texten förklarar orsak och verkan, och modellen är Kedjan, blad 1. I vecka 4 har två elever i taget jobbkorten från avsnitt 2.
+        - Vatten tar mer plats när det fryser, och därför flyter isen, lägger sig som ett lock över sjön och skyddar vattnet och djuren under. Texten förklarar orsak och verkan, och modellen är Kedjan, blad 1. I vecka 4 har två elever i taget jobbkorten från avsnitt 2.
       delar:
         - rubrik: "Läspasset: de fyra avsnitten"
           falt:
@@ -1561,7 +1737,7 @@ ramar:
                 Lockar: över en miljon år. ”Vad finns i isen, och vad visar det?”
                 Sambandet: ”också”: en sak till om is, utanför kedjan
             - rubrik: Modellen
-              text: "Lägg först fram gruppens tidslinje från vecka 2 och fråga: ”Flikarna säger när. Var skriver vi varför?” Den visar när, men inte varför. Ta sedan fram Kedjan, blad 1. Gruppen lägger fördjupningens post-it-lapp på En lapp till, som får namnet Hör inte till kedjan. Lappen handlar om is men är inget led: sjön fryser från ytan också utan isen på Antarktis."
+              text: "Lägg först fram gruppens tidslinje från vecka 2 och fråga: ”Flikarna säger när. Var skriver vi varför?” Den visar när, men inte varför. Ta sedan fram Kedjan, blad 1. Gruppen lägger fördjupningens post-it-lapp på En lapp till, som får namnet Hör inte till kedjan. Lappen handlar om is men är inget led: sjön fryser från ytan också utan isen på Antarktis."
             - rubrik: Orden
               text: därför (lättare) · det gör att (locket) · eftersom (under isen)
             - rubrik: Svaret
@@ -1573,6 +1749,7 @@ ramar:
             - rubrik: Samtala
               text: "Varför börjar svaret i frysen? Varför står isberget med? Ett svar: frysen känner alla till, och isberget visar att isen bara är lite lättare."
     - rubrik: "Bas, text 4: Därför flyter is"
+      tema: Vatten
       text:
         - Vatten · text 4 av 5
       delar:
@@ -1653,9 +1830,22 @@ ramar:
               - https://www.issakerhet.se/fakta-om-is/
             - - Stockholms universitet har bilder på isen som forskarna borrade upp. Texten är för vuxna.
               - https://www.su.se/nyheter/nyhetsartiklar/2026-04-28-12-miljoner-ar-gammal-is-analyseras-nu-i-europa
+    - rubrik: "Modellen: Bas, text 4, Därför flyter is"
+      tema: Vatten
+      text:
+        - Kedjan, blad 1, ifylld för Därför flyter is.
+      delar:
+        - rubrik: Frågan och svaret
+          falt:
+            - rubrik: Textens fråga
+              text: Fryser en sjö från ytan eller från botten, och varför?
+            - rubrik: Lyssna efter
+              text: från ytan · is är lättare och flyter · locket skyddar vattnet under
+            - rubrik: Så kan svaret låta
+              text: Från ytan. Vatten tar mer plats när det fryser, så en liter is väger mindre än en liter vatten, och isen flyter. Den lägger sig överst som ett lock, och därför fryser inte vattnet under.
     - rubrik: "Lärarens sida: Bas, text 5, En kran åt alla"
       text:
-        - En av fyra människor saknar rent vatten hemma, oftast för att vattnet är smutsigt eller långt borta, och brunnar, rör, rening och toaletter gör att fler får det för varje år. Texten har ett problem och en lösning, och modellen är Problem och lösning, blad 1. I vecka 5 har två elever i taget jobbkorten från avsnitt 2, och de två som har dem i avsnitt 4 leder hela avsnittet.
+        - En av fyra människor saknar rent vatten hemma, oftast för att vattnet är smutsigt eller långt borta, och brunnar, rör, rening och toaletter gör att fler får det för varje år. Texten har ett problem och en lösning, och modellen är Problem och lösning, blad 1. I vecka 5 har två elever i taget jobbkorten från avsnitt 2, och de två som har dem i avsnitt 4 leder hela avsnittet.
       delar:
         - rubrik: "Läspasset: de fyra avsnitten"
           falt:
@@ -1700,7 +1890,7 @@ ramar:
                 Lockar: 33 minuter per tur. ”Vem bär vattnet, och vad tas tiden från?”
                 Sambandet: ”Problemet har en sida till”: tillbaka till problemet i avsnitt 1
             - rubrik: Modellen
-              text: "Lägg först fram gruppens kedja från vecka 4 och fråga: ”Var skriver vi det någon gör åt problemet?” Den visar vad som leder till vad, men inte vad någon gör åt problemet. Ta sedan fram Problem och lösning, blad 1. Gruppen lägger fördjupningens post-it-lapp på En lapp till och drar ett streck till problemet. Lappen visar vad problemet kostar: tid, som ibland tas från skolan."
+              text: "Lägg först fram gruppens kedja från vecka 4 och fråga: ”Var skriver vi det någon gör åt problemet?” Den visar vad som leder till vad, men inte vad någon gör åt problemet. Ta sedan fram Problem och lösning, blad 1. Gruppen lägger fördjupningens post-it-lapp på En lapp till och drar ett streck till problemet. Lappen visar vad problemet kostar: tid, som ibland tas från skolan."
             - rubrik: Orden
               text: problemet är (en av fyra) · beror oftast på (smutsigt, långt borta) · en lösning är (brunn, rör, toalett) · har lett till (fler får vatten)
             - rubrik: Svaret
@@ -1712,6 +1902,7 @@ ramar:
             - rubrik: Samtala
               text: "Varför börjar författaren vid din kran? Varför står det att lösningarna är samma som hos dig? Ett svar: för att läsaren ska se att problemet går att lösa."
     - rubrik: "Bas, text 5: En kran åt alla"
+      tema: Vatten
       text:
         - Vatten · text 5 av 5
       delar:
@@ -1788,9 +1979,92 @@ ramar:
               - https://www.stockholmvattenochavfall.se/skolsajten/filmer-om-vatten-avlopp-och-sopor/
             - - UNICEF berättar om vatten och toaletter i världen. Läs med en vuxen.
               - https://unicef.se/fakta/vatten-och-sanitet
+    - rubrik: "Modellen: Bas, text 5, En kran åt alla"
+      tema: Vatten
+      text:
+        - Problem och lösning, blad 1, ifylld för En kran åt alla.
+      delar:
+        - rubrik: Frågan och svaret
+          falt:
+            - rubrik: Textens fråga
+              text: Varför har inte alla rent vatten hemma, och vad kan man göra åt det?
+            - rubrik: Lyssna efter
+              text: smutsigt eller långt borta · brunnar, rör, rening och toaletter · fler får vatten, inte alla än
+            - rubrik: Så kan svaret låta
+              text: En av fyra har inte rent vatten hemma. Vatten finns det ofta, men det är smutsigt eller långt borta. Brunnar, rör, rening och toaletter hjälper, och fler får vatten för varje år.
+    - rubrik: "Lärarhandledning: Medel, Rymden"
+      tema: Rymden
+      text:
+        - Temat Rymden har fem faktatexter, som brukar passa i åk 6–7. Varje vecka har klassen en läslektion och en modellektion om veckans text, så temat tar fem veckor. Varje elev har texten, en penna och papper till svaret. Du har tavlan, magneter, A4-ark och en tjock tuschpenna.
+      delar:
+        - rubrik: "1 Solens familj: Tankekartan"
+          falt:
+            - rubrik: Frågan
+              text: Vilka hör till solens familj, och vilka är flest?
+            - rubrik: Ord före
+              text: omloppsbana (en väg, ingen räls) · dygn (varv runt sig själv) · år (varv runt solen)
+            - rubrik: Tänk högt
+              kursiv: true
+              text: ”Solen håller kvar allt, och ändå går allt runt. Det skaver. Jag läser om. Den drar i planeterna, så de far inte iväg, de går i bana. Vem eller vad? Solen. Det viktigaste? En stjärna i mitten, och allt går runt den. Det om året är spännande, men det är en detalj.”
+            - rubrik: Det brukar skava
+              text: "jorddygn: Venus dygn och år räknas i våra dygn, och där är dygnet längre än året (avsnitt 2)"
+            - rubrik: Modellen
+              text: "solen: ”mitt i familjen” · stenplaneterna: ”närmast solen” · jättarna: ”längre ut” · småfolket: ”flest i familjen”. I mitten står solens familj, och solen är ett av fälten. Fördjupningens kärna, om Pluto, hör till småfolket."
+            - rubrik: Lyssna efter
+              text: solen i mitten · stenplaneterna och jättarna · småfolket är flest
+        - rubrik: "2 Vägen ut i rymden: Tidslinjen"
+          falt:
+            - rubrik: Frågan
+              text: Hur många år tog det från den första satelliten till människan på månen, och vad har hänt sedan dess?
+            - rubrik: Ord före
+              text: kapplöpning (en tävling, ingen springer) · Sovjetunionen (ett land som fanns då)
+            - rubrik: Tänk högt om
+              text: "satellit: ”Är inte en satellit en maskin? Jag läser vidare. En satellit går runt en planet, så månen är också en. Vem eller vad? Sputnik 1. Det viktigaste? Den första som människor byggt.” (avsnitt 1)"
+            - rubrik: Det brukar skava
+              text: "”den pipande bollen”: Sputnik 1, bollen som pep i första avsnittet (avsnitt 3)"
+            - rubrik: Modellen
+              text: "första satelliten: 1957 · första människan: 1961 · månen: 1969 · rymdstationen: 2000 · runt månen: 2026. Skriv tiden mellan stegen: 4, 8 och 31 år. Fördjupningens kärna, resan runt månen, blir steg 5."
+            - rubrik: Lyssna efter
+              text: tolv år, 1957 till 1969 · bor i rymden sedan 2000 · 2026 runt månen, ingen landning
+        - rubrik: "3 Jorden och Mars: Venndiagrammet"
+          falt:
+            - rubrik: Frågan
+              text: Skulle en människa kunna bo på Mars, och vad skiljer Mars från jorden?
+            - rubrik: Ord före
+              text: atmosfär (luften runt planeten, ingen stämning) · flytande (som rinner, inte som flyter) · dygn (ett varv, dag och natt)
+            - rubrik: Det brukar skava
+              text: "täcke: texten liknar luften vid ett täcke som håller kvar värmen (avsnitt 3)"
+            - rubrik: Modellen
+              text: "storlek och plats: ”lika stora är de däremot inte” · dygn och år: ”året är däremot mycket längre” · luft och väder: ”är däremot mycket tunn” · mark och vatten: ”medan det på Mars ligger fruset”. Här ritar du en ruta för varje avsnitt i stället för ringar, och klassen jämför jorden och Mars punkt för punkt. Fördjupningens kärna hör till luft och väder."
+            - rubrik: Lyssna efter
+              text: inte utan hjälp · luften och kylan · vattnet är fruset
+        - rubrik: "4 Därför blir det sommar: Kedjan"
+          falt:
+            - rubrik: Frågan
+              text: När är jorden närmast solen, i januari eller i juli, och vad beror sommaren på?
+            - rubrik: Ord före
+              text: omloppsbana (vägen runt solen, ingen räls) · jordaxel (en tänkt linje, ingen stång) · halvklot (halva jordklotet, norra eller södra)
+            - rubrik: Det brukar skava
+              text: "”inte vickar”: axeln byter aldrig håll (avsnitt 2)"
+            - rubrik: Modellen
+              text: "mot solen: ”eftersom” · mer värme: ”gör att” · längst i norr: ”beror alltså på”. Överst står orsaken, att jorden lutar, med ”beror i stället på att”, och under den de tre följderna. När du flyttar arket från avsnitt 4, säger du att mer värme följer av att vi lutar mot solen. Avståndet står utanför kedjan, med ”kan alltså inte vara orsaken”. Fördjupningens kärna blir den tredje följden."
+            - rubrik: Lyssna efter
+              text: i januari · jorden lutar · högre sol och längre dag
+        - rubrik: "5 Skräpet runt jorden: Problem och lösning"
+          falt:
+            - rubrik: Frågan
+              text: Runt jorden far tiotusentals trasiga satelliter och bitar. Kan de krocka, och går det att städa bort dem?
+            - rubrik: Ord före
+              text: satellit (här en maskin, ingen måne) · bana (vägen runt jorden, ingen räls) · rymdskrot (trasiga saker i bana, inte sopor)
+            - rubrik: Det brukar skava
+              text: "11,7 kilometer i sekunden: i den farten kommer man så långt på en enda sekund (avsnitt 2)"
+            - rubrik: Modellen
+              text: "trånga banor: ”problemet är att” · farten: ”beror på” · väja och städa: ”en lösning är att” · hämta: ”en annan lösning är att”. Fördjupningens kärna blir resultatet, med ”hittills räcker lösningarna inte”. Lösningarna används, men skräpet ökar ändå."
+            - rubrik: Lyssna efter
+              text: ja, krocken 2009 och farten · väja, lämna banan och hämta · räcker inte än
     - rubrik: "Lärarens sida: Medel, text 1, Solens familj"
       text:
-        - "Solens familj är solen i mitten, fyra stenplaneter, fyra jättar och småfolket, som är flest: månar, dvärgplaneter, asteroider och kometer. Texten är en beskrivning, och modellen är Tankekartan, blad 2. I vecka 1 tänker du högt i avsnitt 1."
+        - "Solens familj är solen i mitten, fyra stenplaneter, fyra jättar och småfolket, som är flest: månar, dvärgplaneter, asteroider och kometer. Texten är en beskrivning, och modellen är Tankekartan, blad 2. I vecka 1 tänker du högt i avsnitt 1."
       delar:
         - rubrik: "Läspasset: de fyra avsnitten"
           falt:
@@ -1839,7 +2113,7 @@ ramar:
                 Lockar: 248 år för ett varv. ”Vilket krav klarade Pluto inte?”
                 Sambandet: ”En av dvärgplaneterna”: Pluto hör till småfolket i avsnitt 4
             - rubrik: Modellen
-              text: "I vecka 1 lägger du den första post-it-lappen och skriver det första ordet. Tankekartan, blad 2. Nederst i varje fält har bladet rader med ledtexten Hit hör. Där skriver paren det som hör till delen. Gruppen lägger fördjupningens lapp på En lapp till, som får namnet Hör till småfolket: Pluto är en dvärgplanet."
+              text: "I vecka 1 lägger du den första post-it-lappen och skriver det första ordet. Tankekartan, blad 2. Nederst i varje fält har bladet rader med ledtexten Hit hör. Där skriver paren det som hör till delen. Gruppen lägger fördjupningens lapp på En lapp till, som får namnet Hör till småfolket: Pluto är en dvärgplanet."
             - rubrik: Orden
               text: mitt i familjen (solen) · närmast solen (stenplaneterna) · längre ut (jättarna) · flest i familjen (småfolket)
             - rubrik: Svaret
@@ -1851,6 +2125,7 @@ ramar:
             - rubrik: Samtala
               text: "Varför kallar författaren solsystemet en familj? Varför får Pluto en egen fördjupning? Ett svar: familjen visar att allt hör ihop runt solen, och Pluto visar vad som krävs för att få kallas planet."
     - rubrik: "Medel, text 1: Solens familj"
+      tema: Rymden
       text:
         - Rymden · text 1 av 5
       delar:
@@ -1940,9 +2215,22 @@ ramar:
               - https://www.rymdstyrelsen.se/upptack-rymden/solsystemet/mer-om-solsystemet/vad-ar-en-planet/
             - - UR Play har korta filmer med kul fakta om rymden.
               - https://urplay.se/serie/227506-kul-fakta-rymden
+    - rubrik: "Modellen: Medel, text 1, Solens familj"
+      tema: Rymden
+      text:
+        - Tankekartan, blad 2, ifylld för Solens familj.
+      delar:
+        - rubrik: Frågan och svaret
+          falt:
+            - rubrik: Textens fråga
+              text: Vilka hör till solens familj, och vilka är flest?
+            - rubrik: Lyssna efter
+              text: solen i mitten · stenplaneterna och jättarna · småfolket är flest
+            - rubrik: Så kan svaret låta
+              text: I mitten finns solen, som håller ihop allt. Närmast går fyra stenplaneter, och längre ut fyra jättar. Till familjen hör också månar, dvärgplaneter, asteroider och kometer, och de små är flest.
     - rubrik: "Lärarens sida: Medel, text 2, Vägen ut i rymden"
       text:
-        - På tolv år gick människan från den första satelliten till månen, och sedan dess har hon lärt sig att bo i rymden och börjat resa mot månen igen. Texten är byggd i tidsordning, och modellen är Tidslinjen, blad 2. I vecka 2 tänker du högt i avsnitt 1.
+        - På tolv år gick människan från den första satelliten till månen, och sedan dess har hon lärt sig att bo i rymden och börjat resa mot månen igen. Texten är byggd i tidsordning, och modellen är Tidslinjen, blad 2. I vecka 2 tänker du högt i avsnitt 1.
       delar:
         - rubrik: "Läspasset: de fyra avsnitten"
           falt:
@@ -1991,10 +2279,10 @@ ramar:
                 Lockar: resans tid på minuten. ”Vad gjorde Artemis II, och vad gjorde den inte?”
                 Sambandet: ”26 år efter att astronauter flyttade in”: nästa steg på linjen
             - rubrik: Modellen
-              text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad kommer först här?” Den visar delar men ingen ordning. Ta sedan fram Tidslinjen, blad 2. Gruppen lägger fördjupningens post-it-lapp på En lapp till och drar linjen dit. Resan blir steg 5, nästa steg i samma förlopp."
+              text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad kommer först här?” Den visar delar men ingen ordning. Ta sedan fram Tidslinjen, blad 2. Gruppen lägger fördjupningens post-it-lapp på En lapp till och drar linjen dit. Resan blir steg 5, nästa steg i samma förlopp."
             - rubrik: Orden
               text: |-
-                1957 (första satelliten) · 1961 (första människan) · 1969 (månen) · 2000 (rymdstationen) · år 2026 (steg 5)
+                1957 (första satelliten) · 1961 (första människan) · 1969 (månen) · 2000 (rymdstationen) · 2026 (runt månen)
                 Tiden emellan: 4 år · 8 år · 31 år
             - rubrik: Svaret
               text: |-
@@ -2005,6 +2293,7 @@ ramar:
             - rubrik: Samtala
               text: "Varför står årtalet först i varje avsnitt? Varför slutar texten med en resa där ingen landade? Ett svar: åren visar ordningen och tiden emellan, och slutet visar att vägen fortsätter."
     - rubrik: "Medel, text 2: Vägen ut i rymden"
+      tema: Rymden
       text:
         - Rymden · text 2 av 5
       delar:
@@ -2102,9 +2391,22 @@ ramar:
               - https://www.rymdstyrelsen.se/upptack-rymden/astronauter/rymdstationer/
             - - Rymdstyrelsen berättar om hur Artemis II kom hem. På sidan heter resan Artemis 2.
               - https://www.rymdstyrelsen.se/upptack-rymden/bloggen/2026/04/artemis-2-ar-hemma-igen/
+    - rubrik: "Modellen: Medel, text 2, Vägen ut i rymden"
+      tema: Rymden
+      text:
+        - Tidslinjen, blad 2, ifylld för Vägen ut i rymden.
+      delar:
+        - rubrik: Frågan och svaret
+          falt:
+            - rubrik: Textens fråga
+              text: Hur många år tog det från den första satelliten till människan på månen, och vad har hänt sedan dess?
+            - rubrik: Lyssna efter
+              text: tolv år, 1957 till 1969 · bor i rymden sedan 2000 · 2026 runt månen, ingen landning
+            - rubrik: Så kan svaret låta
+              text: Det tog tolv år, från 1957 till 1969. Sedan år 2000 bor människor på rymdstationen hela tiden. År 2026 flög fyra astronauter runt månen igen, men de landade inte.
     - rubrik: "Lärarens sida: Medel, text 3, Jorden och Mars"
       text:
-        - Jorden och Mars liknar varandra i dygn och årstider men skiljer sig i luft, värme och vatten, det som en människa behöver för att leva. Texten jämför två saker, och modellen är Venndiagrammet, blad 2. I vecka 3 har två elever i taget jobbkorten från avsnitt 2.
+        - Jorden och Mars liknar varandra i dygn och årstider men skiljer sig i luft, värme och vatten, det som en människa behöver för att leva. Texten jämför två saker, och modellen är Venndiagrammet, blad 2. I vecka 3 har två elever i taget jobbkorten från avsnitt 2.
       delar:
         - rubrik: "Läspasset: de fyra avsnitten"
           falt:
@@ -2150,18 +2452,19 @@ ramar:
                 Lockar: hunden och tio timmar. ”Vad visade MOXIE, och varför räcker det inte?”
                 Sambandet: ”luften där går inte att andas”: tillbaka till avsnitt 3
             - rubrik: Modellen
-              text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad ska stå i mitten?” Texten jämför två saker, och kartan visar inte vad som är lika och olika. Ta sedan fram Venndiagrammet, blad 2. Exemplet om skolan har ringar, men det här bladet har inga: varje avsnitt är en punkt, med en ruta för post-it-lappen och en för textens ord. På raderna A och B skriver en grupp som bara är ett par. Gruppen lägger fördjupningens lapp på En lapp till och kallar platsen Hör till luft och väder."
+              text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad ska stå i mitten?” Texten jämför två saker, och kartan visar inte vad som är lika och olika. Ta sedan fram Venndiagrammet, blad 2. Exemplet om skolan har ringar, men det här bladet har inga: varje avsnitt är en punkt, med en ruta för post-it-lappen och en för textens ord. På raderna A och B skriver en grupp som bara är ett par. Gruppen lägger fördjupningens lapp på En lapp till och kallar platsen Hör till luft och väder."
             - rubrik: Orden
               text: lika stora är de däremot inte (storlek och plats) · året är däremot mycket längre (dygn och år) · är däremot mycket tunn (luft och väder) · medan det på Mars ligger fruset (mark och vatten)
             - rubrik: Svaret
               text: |-
                 Lyssna efter: inte utan hjälp · luften och kylan · vattnet är fruset
-                Så kan det låta: ”Inte som på jorden. Dygnet är nästan lika långt, men luften går inte att andas och det är mycket kallt. Vattnet är fruset, så syre och vatten måste man ordna själv.”
+                Så kan det låta: ”Inte utan hjälp. Dygnet är nästan lika långt, men luften går inte att andas, det är mycket kallt och vattnet är fruset. Syre och vatten måste man ordna själv.”
             - rubrik: Rutan
               text: "Visste du att: intressant, för vulkanen ändrar inte svaret."
             - rubrik: Samtala
               text: "Varför tar författaren jorden först i varje avsnitt? Varför slutar texten med en maskin? Ett svar: det kända gör Mars lättare att se, och MOXIE visar att svaret kan ändras."
     - rubrik: "Medel, text 3: Jorden och Mars"
+      tema: Rymden
       text:
         - Rymden · text 3 av 5
       delar:
@@ -2255,9 +2558,22 @@ ramar:
               - https://www.rymdstyrelsen.se/upptack-rymden/solsystemet/
             - - UR Play har en kort film om hur det vore att resa till Mars.
               - https://urplay.se/program/227505-kul-fakta-rymden-resan-till-mars
+    - rubrik: "Modellen: Medel, text 3, Jorden och Mars"
+      tema: Rymden
+      text:
+        - Venndiagrammet, blad 2, ifyllt för Jorden och Mars.
+      delar:
+        - rubrik: Frågan och svaret
+          falt:
+            - rubrik: Textens fråga
+              text: Skulle en människa kunna bo på Mars, och vad skiljer Mars från jorden?
+            - rubrik: Lyssna efter
+              text: inte utan hjälp · luften och kylan · vattnet är fruset
+            - rubrik: Så kan svaret låta
+              text: Inte utan hjälp. Dygnet är nästan lika långt, men luften går inte att andas, det är mycket kallt och vattnet är fruset. Syre och vatten måste man ordna själv.
     - rubrik: "Lärarens sida: Medel, text 4, Därför blir det sommar"
       text:
-        - "Sommaren kommer av att jorden lutar: i juni är norra halvklotet vänt mot solen, solen står högre och lyser längre, och avståndet till solen är inte orsaken. Texten förklarar orsak och verkan, och modellen är Kedjan, blad 2. I vecka 4 har två elever i taget jobbkorten från avsnitt 2."
+        - "Sommaren kommer av att jorden lutar: i juni är norra halvklotet vänt mot solen, solen står högre och lyser längre, och avståndet till solen är inte orsaken. Texten förklarar orsak och verkan, och modellen är Kedjan, blad 2. I vecka 4 har två elever i taget jobbkorten från avsnitt 2."
       delar:
         - rubrik: "Läspasset: de fyra avsnitten"
           falt:
@@ -2304,7 +2620,7 @@ ramar:
                 Sambandet: ”Längst i norr märks lutningen”: samma orsak, större följd
                 Bilden: Juniläget: området kring Nordpolen ligger i ljus hela dygnet
             - rubrik: Modellen
-              text: "Lägg först fram gruppens tidslinje från vecka 2 och fråga: ”Flikarna säger när. Var skriver vi varför?” Den visar när, men inte varför. Ta sedan fram Kedjan, blad 2. Exemplet om skolan är en trappa, men det här bladet är det inte: orsaken står överst, med tre följder bredvid varandra. Post-it-lappen från avsnitt 1 hör hemma på En lapp till, som får namnet Avståndet. Mer värme följer av Mot solen: säg det när gruppen lägger lappen från avsnitt 4. Fördjupningens lapp hör hemma på Följd 3."
+              text: "Lägg först fram gruppens tidslinje från vecka 2 och fråga: ”Flikarna säger när. Var skriver vi varför?” Den visar när, men inte varför. Ta sedan fram Kedjan, blad 2. Exemplet om skolan är en trappa, men det här bladet är det inte: orsaken står överst, med tre följder bredvid varandra. Post-it-lappen från avsnitt 1 hör hemma på En lapp till, som får namnet Avståndet. Mer värme följer av Mot solen: säg det när gruppen lägger lappen från avsnitt 4. Fördjupningens lapp hör hemma på Följd 3."
             - rubrik: Orden
               text: |-
                 eftersom (mot solen) · gör att (mer värme) · beror alltså på (längst i norr)
@@ -2318,6 +2634,7 @@ ramar:
             - rubrik: Samtala
               text: "Varför börjar författaren med en förklaring som är fel? Varför en ficklampa? Ett svar: många tror att avståndet är orsaken, så författaren prövar det först, och ficklampan kan läsaren pröva själv."
     - rubrik: "Medel, text 4: Därför blir det sommar"
+      tema: Rymden
       text:
         - Rymden · text 4 av 5
       delar:
@@ -2398,9 +2715,22 @@ ramar:
               - https://www.smhi.se/kunskapsbanken/meteorologi/solens-upp--och-nedgang/avstandet-mellan-jorden-och-solen
             - - UR Play har en film på en kvart om hur jordaxelns lutning ger årstiderna.
               - https://urplay.se/program/234841-no-naturligtvis-astronomi
+    - rubrik: "Modellen: Medel, text 4, Därför blir det sommar"
+      tema: Rymden
+      text:
+        - Kedjan, blad 2, ifylld för Därför blir det sommar.
+      delar:
+        - rubrik: Frågan och svaret
+          falt:
+            - rubrik: Textens fråga
+              text: När är jorden närmast solen, i januari eller i juli, och vad beror sommaren på?
+            - rubrik: Lyssna efter
+              text: i januari · jorden lutar · högre sol och längre dag
+            - rubrik: Så kan svaret låta
+              text: I januari. Avståndet är alltså inte orsaken till sommaren. Jorden lutar, och i juni lutar norra halvklotet mot solen. Då står solen högre och lyser längre, så det blir varmare.
     - rubrik: "Lärarens sida: Medel, text 5, Skräpet runt jorden"
       text:
-        - Banorna närmast jorden är trånga, och skräpet där far så fort att en liten bit kan förstöra en satellit. Lösningarna, att väja, lämna banan och hämta skräpet, räcker inte än. Texten har ett problem och en lösning, och modellen är Problem och lösning, blad 2. I vecka 5 har två elever i taget jobbkorten från avsnitt 2, och de två som har dem i avsnitt 4 leder hela avsnittet.
+        - Banorna närmast jorden är trånga, och skräpet där far så fort att en liten bit kan förstöra en satellit. Lösningarna, att väja, lämna banan och hämta skräpet, räcker inte än. Texten har ett problem och en lösning, och modellen är Problem och lösning, blad 2. I vecka 5 har två elever i taget jobbkorten från avsnitt 2, och de två som har dem i avsnitt 4 leder hela avsnittet.
       delar:
         - rubrik: "Läspasset: de fyra avsnitten"
           falt:
@@ -2446,20 +2776,21 @@ ramar:
                 Lockar: namnet Kesslersyndromet. ”Vad svarar texten på rubrikens fråga?”
                 Sambandet: ”Hittills räcker lösningarna inte”: vad lösningarna har lett till
             - rubrik: Modellen
-              text: "Lägg först fram gruppens kedja från vecka 4 och fråga: ”Var skriver vi det någon gör åt problemet?” Den visar vad som leder till vad, men inte vad någon gör åt problemet. Ta sedan fram Problem och lösning, blad 2. Gruppen lägger fördjupningens post-it-lapp på En lapp till, som får namnet Resultatet hittills. Lösningarna används, och skräpet ökar ändå. På blad 2 har resultatet ingen egen plats."
+              text: "Lägg först fram gruppens kedja från vecka 4 och fråga: ”Var skriver vi det någon gör åt problemet?” Den visar vad som leder till vad, men inte vad någon gör åt problemet. Ta sedan fram Problem och lösning, blad 2. Gruppen lägger fördjupningens post-it-lapp på En lapp till, som får namnet Resultatet hittills. Lösningarna används, och skräpet ökar ändå. På blad 2 har resultatet ingen egen plats."
             - rubrik: Orden
               text: |-
                 problemet är att (trånga banor) · beror på (farten) · en lösning är att (väja och städa) · en annan lösning är att (hämta)
-                Utan flik: gruppen skriver ”Hittills räcker lösningarna inte” vid En lapp till.
+                Utan flik: gruppen skriver ”hittills räcker lösningarna inte” vid En lapp till.
             - rubrik: Svaret
               text: |-
                 Lyssna efter: ja, krocken 2009 och farten · väja, lämna banan och hämta · räcker inte än
-                Så kan det låta: ”Ja. 2009 krockade två satelliter, och farten gör även små bitar farliga. Satelliter väjer, och en som är klar ska lämna banan inom fem år, och farkoster som hämtar skräp prövas. Det räcker inte än.”
+                Så kan det låta: ”Ja. År 2009 krockade två satelliter, och farten gör även små bitar farliga. Satelliter väjer, ESA:s satelliter som är klara ska lämna de trånga banorna inom fem år, och ingenjörer prövar farkoster som ska hämta skräp. Det räcker inte än.”
             - rubrik: Rutan
               text: "Visste du att: intressant, för svaret håller utan astronauterna, men rutan förklarar varför inget ligger stilla."
             - rubrik: Samtala
               text: "Varför börjar författaren på en motorväg? Varför berättar hen om krocken 2009? Ett svar: alla känner igen en motorväg, och krocken visar att faran är verklig."
     - rubrik: "Medel, text 5: Skräpet runt jorden"
+      tema: Rymden
       text:
         - Rymden · text 5 av 5
       delar:
@@ -2543,9 +2874,92 @@ ramar:
               - https://www.rymdstyrelsen.se/upptack-rymden/bloggen/2018/05/vad-hander-nar-satelliter-krockar
             - - ESA:s rapport från 2025 har talen om skräpet. Sidan är på engelska.
               - https://www.esa.int/Space_Safety/Space_Debris/ESA_Space_Environment_Report_2025
+    - rubrik: "Modellen: Medel, text 5, Skräpet runt jorden"
+      tema: Rymden
+      text:
+        - Problem och lösning, blad 2, ifylld för Skräpet runt jorden.
+      delar:
+        - rubrik: Frågan och svaret
+          falt:
+            - rubrik: Textens fråga
+              text: Runt jorden far tiotusentals trasiga satelliter och bitar. Kan de krocka, och går det att städa bort dem?
+            - rubrik: Lyssna efter
+              text: ja, krocken 2009 och farten · väja, lämna banan och hämta · räcker inte än
+            - rubrik: Så kan svaret låta
+              text: Ja. År 2009 krockade två satelliter, och farten gör även små bitar farliga. Satelliter väjer, ESA:s satelliter som är klara ska lämna de trånga banorna inom fem år, och ingenjörer prövar farkoster som ska hämta skräp. Det räcker inte än.
+    - rubrik: "Lärarhandledning: Avancerat, Smittor"
+      tema: Smittor
+      text:
+        - Temat Smittor har fem faktatexter, som brukar passa i åk 8–9. Varje vecka har klassen en läslektion och en modellektion om veckans text, så temat tar fem veckor. Varje elev har texten, en penna och papper till svaret. Du har tavlan, magneter, A4-ark och en tjock tuschpenna. Avsnitten är långa, så läs gärna ett avsnitt till högt.
+      delar:
+        - rubrik: "1 Kroppens försvar: Tankekartan"
+          falt:
+            - rubrik: Frågan
+              text: "Vem är det som ger dig feber: smittan eller din egen kropp? Och hur försvarar sig kroppen?"
+            - rubrik: Ord före
+              text: smittämne (det som smittar, inte själva sjukdomen) · inflammation (kroppens svar, inte infektion) · cell (kroppens minsta levande del, inget rum)
+            - rubrik: Tänk högt
+              kursiv: true
+              text: ”Hud, tårar, saliv, slem, flimmerhår, magsyra. Det är mycket på en gång, och det skaver. Jag läser om. Vad har de gemensamt? Alla finns där kroppen möter världen utanför. Vem eller vad? Muren. Det viktigaste? Den hindrar smittämnen från att komma in. Det om att man sväljer slemmet är spännande, men det är en detalj.”
+            - rubrik: Det brukar skava
+              text: "”Blir larmet stort”: om larmet blir stort, så höjer kroppen själv värmen (avsnitt 2)"
+            - rubrik: Modellen
+              text: "muren: ”första del” · larmet och ätarna: ”andra del” · specialisterna: ”också” · minnet: ”blir kvar”. I mitten står kroppens försvar. Fördjupningens kärna hör till minnet, för vaccinet bygger minnet i förväg."
+            - rubrik: Lyssna efter
+              text: din egen kropp · febern hör till larmet · ett försvar i fyra delar
+        - rubrik: "2 Sjukdomen som försvann: Tidslinjen"
+          falt:
+            - rubrik: Frågan
+              text: Hur många av människans sjukdomar har vi lyckats utrota helt, och hur gick det till?
+            - rubrik: Ord före
+              text: utrota (ta bort helt) · vaccin (skyddar, botar inte) · koppor (blåsor, inga koppar)
+            - rubrik: Tänk högt om
+              text: "mumierna: ”Minst 3 000 år, och sedan mumier. Hur hänger det ihop? Jag läser om. Jo, utslagen på mumierna tyder på att sjukdomen är så gammal. Vem eller vad? Smittkopporna. Det viktigaste? De dödade människor i tusentals år.” (avsnitt 1)"
+            - rubrik: Det brukar skava
+              text: "”den milda” och ”den farliga”: kokoppor och smittkoppor (avsnitt 2)"
+            - rubrik: Modellen
+              text: "kopporna härjar: ”i minst 3 000 år” · Jenners försök: 1796 · jakten: 1967 · slutet: ”1977 till 1980”. Skriv tiden mellan stegen: tusentals år, 171 år och 10 år fram till 1977. Fördjupningens kärna om vaccinet i Sverige står mellan Jenners försök och jakten."
+            - rubrik: Lyssna efter
+              text: en enda, smittkoppor · vaccinet 1796, och från 1967 en ring av vaccinerade runt varje sjuk · världen fri 1980
+        - rubrik: "3 Virus och bakterier: Venndiagrammet"
+          falt:
+            - rubrik: Frågan
+              text: Hjälper antibiotika mot en förkylning, och varför?
+            - rubrik: Ord före
+              text: antibiotika (en medicin utifrån, ingen antikropp) · virus (ingen liten bakterie) · smittämne (det som smittar och gör sjuk, som virus och en del bakterier)
+            - rubrik: Det brukar skava
+              text: "”det är cellen som gör arbetet”: värdcellen bygger de nya virusen (avsnitt 3)"
+            - rubrik: Modellen
+              text: "mitten: ”båda” · bakterien: ”av de två” · viruset: ”däremot”. Kärnan från avsnitt 4 delar ni på två ark, ett för bakterien och ett för viruset, med orden ”olika behandling” och ”däremot”. Fördjupningens kärna hör till bakterien."
+            - rubrik: Lyssna efter
+              text: "nej · förkylning kommer av virus · byggda olika: antibiotika slår bara mot bakterier"
+        - rubrik: "4 När medicinen sviker: Kedjan"
+          falt:
+            - rubrik: Frågan
+              text: "Vem är det som blir resistent: människan eller bakterien? Och hur går det till?"
+            - rubrik: Ord före
+              text: resistent (tål medicinen, inte immun) · antibiotika (inte mot virus) · infektion (inte inflammation)
+            - rubrik: Det brukar skava
+              text: "urvalet: antibiotikan tar bort de känsliga, och de som redan var tåliga tar över (avsnitt 2)"
+            - rubrik: Modellen
+              text: "urvalet: ”eftersom några tål mer” · spridningen: ”det gör att” · följderna: ”därför”. Skriv ”av en slump” vid slumpen, det första ledet. Fördjupningens kärna visar slumpen och urvalet igen och står bredvid dem."
+            - rubrik: Lyssna efter
+              text: bakterien · slump och urval · kroppen vänjer sig inte
+        - rubrik: "5 Gåtan på sjukhuset: Problem och lösning"
+          falt:
+            - rubrik: Frågan
+              text: Varför dog fler mödrar hos läkarna än hos barnmorskorna, och vad gjorde man åt det?
+            - rubrik: Ord före
+              text: förlösa (hjälpa den som föder, inte föda) · klinik (här en avdelning på sjukhuset) · barnmorska (hjälper till vid förlossningar, ingen läkare)
+            - rubrik: Det brukar skava
+              text: "”Läkare som studenter”: både läkare och studenter (avsnitt 3)"
+            - rubrik: Modellen
+              text: "febern: ”problemet var” · händerna: ”berodde på” · klorlösningen: ”en lösning” · motståndet: ”resultatet var tydligt, men”. Fördjupningens kärna hör till resultatet och står bredvid kärnan om motståndet."
+            - rubrik: Lyssna efter
+              text: från obduktionerna · något osynligt på händerna · klorlösningen tog bort det
     - rubrik: "Lärarens sida: Avancerat, text 1, Kroppens försvar"
       text:
-        - Kroppens försvar har fyra delar, och febern är ett tecken på att försvaret arbetar. Texten är en beskrivning, och modellen är Tankekartan, blad 2. I vecka 1 tänker du högt i avsnitt 1.
+        - Kroppens försvar har fyra delar, och febern är ett tecken på att försvaret arbetar. Texten är en beskrivning, och modellen är Tankekartan, blad 2. I vecka 1 tänker du högt i avsnitt 1.
       delar:
         - rubrik: "Läspasset: de fyra avsnitten"
           falt:
@@ -2593,7 +3007,7 @@ ramar:
                 Lockar: 18 smittade, 154 miljoner. ”Vad gör ett vaccin med försvarets minne?”
                 Sambandet: ”i förväg”: minnet från avsnitt 4, utan sjukdomen
             - rubrik: Modellen
-              text: I vecka 1 lägger du den första post-it-lappen och skriver det första ordet. Tankekartan, blad 2. Nederst i varje fält har bladet rader med ledtexten Hit hör. Där skriver paren det som hör till delen. Gruppen lägger fördjupningens lapp på En lapp till, som får namnet Hör till minnet. Vaccinet bygger samma minne som avsnitt 4 beskriver.
+              text: I vecka 1 lägger du den första post-it-lappen och skriver det första ordet. Tankekartan, blad 2. Nederst i varje fält har bladet rader med ledtexten Hit hör. Där skriver paren det som hör till delen. Gruppen lägger fördjupningens lapp på En lapp till, som får namnet Hör till minnet. Vaccinet bygger samma minne som avsnitt 4 beskriver.
             - rubrik: Orden
               text: första del (muren) · andra del (larmet och ätarna) · också (specialisterna) · blir kvar (minnet)
             - rubrik: Svaret
@@ -2605,6 +3019,7 @@ ramar:
             - rubrik: Samtala
               text: "Varför börjar författaren med din egen feber? Varför kallar författaren delarna mur, larm och minne? Ett svar: med bilder ur vardagen går det att se ett osynligt arbete framför sig."
     - rubrik: "Avancerat, text 1: Kroppens försvar"
+      tema: Smittor
       text:
         - Smittor · text 1 av 5
       delar:
@@ -2685,9 +3100,22 @@ ramar:
               - https://www.1177.se/undersokning-behandling/vaccinationer/sa-fungerar-vaccin/
             - - "1177 berättar om mässling: hur den smittar, hur den känns och hur vaccinet skyddar."
               - https://www.1177.se/sjukdomar--besvar/hud-har-och-naglar/infektioner-pa-huden/massling/
+    - rubrik: "Modellen: Avancerat, text 1, Kroppens försvar"
+      tema: Smittor
+      text:
+        - Tankekartan, blad 2, ifylld för Kroppens försvar.
+      delar:
+        - rubrik: Frågan och svaret
+          falt:
+            - rubrik: Textens fråga
+              text: "Vem är det som ger dig feber: smittan eller din egen kropp? Och hur försvarar sig kroppen?"
+            - rubrik: Lyssna efter
+              text: din egen kropp · febern hör till larmet · ett försvar i fyra delar
+            - rubrik: Så kan svaret låta
+              text: Min egen kropp. När något har tagit sig förbi muren larmar kroppen och höjer värmen. Då arbetar ätarna och specialisterna, och minnet gör att det går fortare nästa gång.
     - rubrik: "Lärarens sida: Avancerat, text 2, Sjukdomen som försvann"
       text:
-        - Smittkoppor dödade människor i minst 3 000 år, tills vaccinet från 1796 och WHO:s jakt från 1967 gjorde världen fri från sjukdomen 1980. Texten är byggd i tidsordning, och modellen är Tidslinjen, blad 2. I vecka 2 tänker du högt i avsnitt 1.
+        - Smittkoppor dödade människor i minst 3 000 år, tills vaccinet från 1796 och WHO:s jakt från 1967 gjorde världen fri från sjukdomen 1980. Texten är byggd i tidsordning, och modellen är Tidslinjen, blad 2. I vecka 2 tänker du högt i avsnitt 1.
       delar:
         - rubrik: "Läspasset: de fyra avsnitten"
           falt:
@@ -2734,20 +3162,21 @@ ramar:
                 Sambandet: ”mellan Jenner och WHO”: mellan steg 2 och 3
                 Bilden: Staplarna före och efter 1801 och 1816
             - rubrik: Modellen
-              text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad kommer först här?” Den visar delar men ingen ordning. Ta sedan fram Tidslinjen, blad 2. Gruppen lägger fördjupningens post-it-lapp på En lapp till, som får namnet I Sverige, och drar ett streck in mellan steg 2 och steg 3. Vaccinationen i Sverige 1801 och 1816 ligger mellan 1796 och 1967, och lappen visar vad vaccinet gjorde i ett land."
+              text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad kommer först här?” Den visar delar men ingen ordning. Ta sedan fram Tidslinjen, blad 2. Gruppen lägger fördjupningens post-it-lapp på En lapp till, som får namnet I Sverige, och drar ett streck in mellan steg 2 och steg 3. Vaccinationen i Sverige 1801 och 1816 ligger mellan 1796 och 1967, och lappen visar vad vaccinet gjorde i ett land."
             - rubrik: Orden
               text: |-
                 i minst 3 000 år (kopporna härjar) · 1796 (Jenners försök) · 1967 (jakten) · 1977 till 1980 (slutet)
-                Tiden emellan: tusentals år · 171 år · 10 år
+                Tiden emellan: tusentals år · 171 år · 10 år fram till 1977
             - rubrik: Svaret
               text: |-
-                Lyssna efter: en enda, smittkoppor · vaccinet 1796 och jakten 1967 · världen fri 1980
-                Så kan det låta: ”En enda, smittkoppor. De fanns i minst 3 000 år. År 1796 kom vaccinet, 1967 började WHO leta upp varje sjuk, och 1980 var världen fri.”
+                Lyssna efter: en enda, smittkoppor · vaccinet 1796, och från 1967 en ring av vaccinerade runt varje sjuk · världen fri 1980
+                Så kan det låta: ”En enda, smittkoppor. De fanns i minst 3 000 år. År 1796 kom vaccinet. Från 1967 letade WHO upp varje sjuk och vaccinerade alla runt omkring, och 1980 var världen fri.”
             - rubrik: Rutan
               text: "Visste du att: intressant, för sjukdomen är utrotad fast viruset finns kvar."
             - rubrik: Samtala
               text: "Varför ger författaren pojken och kocken namn? Varför står årtalen i rubrikerna? Ett svar: människorna gör historien verklig, och årtalen visar ordningen."
     - rubrik: "Avancerat, text 2: Sjukdomen som försvann"
+      tema: Smittor
       text:
         - Smittor · text 2 av 5
       delar:
@@ -2845,9 +3274,22 @@ ramar:
               - https://vaccination-info.europa.eu/sv/om-vacciner/vaccinernas-historia
             - - CDC berättar smittkoppornas historia med bilder, från mumierna till det sista fallet. Sidan är på engelska.
               - https://www.cdc.gov/smallpox/about/history.html
+    - rubrik: "Modellen: Avancerat, text 2, Sjukdomen som försvann"
+      tema: Smittor
+      text:
+        - Tidslinjen, blad 2, ifylld för Sjukdomen som försvann.
+      delar:
+        - rubrik: Frågan och svaret
+          falt:
+            - rubrik: Textens fråga
+              text: Hur många av människans sjukdomar har vi lyckats utrota helt, och hur gick det till?
+            - rubrik: Lyssna efter
+              text: en enda, smittkoppor · vaccinet 1796, och från 1967 en ring av vaccinerade runt varje sjuk · världen fri 1980
+            - rubrik: Så kan svaret låta
+              text: En enda, smittkoppor. De fanns i minst 3 000 år. År 1796 kom vaccinet. Från 1967 letade WHO upp varje sjuk och vaccinerade alla runt omkring, och 1980 var världen fri.
     - rubrik: "Lärarens sida: Avancerat, text 3, Virus och bakterier"
       text:
-        - Bakterier och virus kan ge samma tecken på sjukdom men är byggda och blir fler på olika sätt, och därför hjälper antibiotika bara mot bakterier. Texten jämför två saker, och modellen är Venndiagrammet, blad 1. I vecka 3 har två elever i taget jobbkorten från avsnitt 2.
+        - Bakterier och virus kan ge samma tecken på sjukdom men är byggda och blir fler på olika sätt, och därför hjälper antibiotika bara mot bakterier. Texten jämför två saker, och modellen är Venndiagrammet, blad 1. I vecka 3 har två elever i taget jobbkorten från avsnitt 2.
       delar:
         - rubrik: "Läspasset: de fyra avsnitten"
           falt:
@@ -2893,7 +3335,7 @@ ramar:
                 Lockar: två hekto, en mobiltelefon. ”Vad gör bakterierna som alltid bor på dig?”
                 Sambandet: ”Men långt ifrån alla”: bakterier som inte gör oss sjuka
             - rubrik: Modellen
-              text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad ska stå i mitten?” Texten jämför två saker, och kartan visar inte vad som är lika och olika. Ta sedan fram Venndiagrammet, blad 1. Avsnitt 4 ger två post-it-lappar: i modellpasset delar gruppen avsnittets kärna på två lappar, en för var sak. Gruppen lägger fördjupningens lapp på En lapp till, som får namnet Hör till bakterien. Normalfloran är bakterier, och texten nämner inga nyttiga virus."
+              text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad ska stå i mitten?” Texten jämför två saker, och kartan visar inte vad som är lika och olika. Ta sedan fram Venndiagrammet, blad 1. Avsnitt 4 ger två post-it-lappar: i modellpasset delar gruppen avsnittets kärna på två lappar, en för var sak. Gruppen lägger fördjupningens lapp på En lapp till, som får namnet Hör till bakterien. Normalfloran är bakterier, och texten nämner inga nyttiga virus."
             - rubrik: Orden
               text: |-
                 båda (mitten) · av de två (bakterien) · däremot (viruset)
@@ -2907,6 +3349,7 @@ ramar:
             - rubrik: Samtala
               text: "Varför börjar författaren med tabletterna i badrumsskåpet? Varför tar författaren samma punkter i samma ordning för bakterien och viruset? Ett svar: läsaren känner igen sig, och samma ordning gör skillnaderna lätta att se."
     - rubrik: "Avancerat, text 3: Virus och bakterier"
+      tema: Smittor
       text:
         - Smittor · text 3 av 5
       delar:
@@ -2983,9 +3426,22 @@ ramar:
               - https://www.1177.se/sjukdomar--besvar/infektioner/infektion-och-inflammation/
             - - Folkhälsomyndigheten förklarar vad som händer när bakterier blir motståndskraftiga mot antibiotika.
               - https://www.folkhalsomyndigheten.se/vara-amnesomraden/antibiotika-och-antibiotikaresistens/om-antibiotikaresistens/
+    - rubrik: "Modellen: Avancerat, text 3, Virus och bakterier"
+      tema: Smittor
+      text:
+        - Venndiagrammet, blad 1, ifyllt för Virus och bakterier.
+      delar:
+        - rubrik: Frågan och svaret
+          falt:
+            - rubrik: Textens fråga
+              text: Hjälper antibiotika mot en förkylning, och varför?
+            - rubrik: Lyssna efter
+              text: "nej · förkylning kommer av virus · byggda olika: antibiotika slår bara mot bakterier"
+            - rubrik: Så kan svaret låta
+              text: Nej. En förkylning kommer av virus, och antibiotika slår mot delar som bakterier har och virus saknar. Mot virus gör den ingenting, men den rubbar kroppens egna bakterier.
     - rubrik: "Lärarens sida: Avancerat, text 4, När medicinen sviker"
       text:
-        - Bakterier blir resistenta genom slump och urval, resistensen sprids, och då blir infektioner och operationer farligare. Texten förklarar orsak och verkan, och modellen är Kedjan, blad 1. I vecka 4 har två elever i taget jobbkorten från avsnitt 2.
+        - Bakterier blir resistenta genom slump och urval, resistensen sprids, och då blir infektioner och operationer farligare. Texten förklarar orsak och verkan, och modellen är Kedjan, blad 1. I vecka 4 har två elever i taget jobbkorten från avsnitt 2.
       delar:
         - rubrik: "Läspasset: de fyra avsnitten"
           falt:
@@ -3031,7 +3487,7 @@ ramar:
                 Sambandet: ”Slumpen och urvalet”, alltså avsnitt 1 och 2 i ett försök
                 Bilden: Banden i skålen: starkast i mitten, bakterierna växer inåt
             - rubrik: Modellen
-              text: "Lägg först fram gruppens tidslinje från vecka 2 och fråga: ”Flikarna säger när. Var skriver vi varför?” Den visar när, men inte varför. Ta sedan fram Kedjan, blad 1. Gruppen lägger fördjupningens post-it-lapp på En lapp till, med streck till led 1 och led 2. Försöket visar slumpen och urvalet om och om igen och är inget femte led."
+              text: "Lägg först fram gruppens tidslinje från vecka 2 och fråga: ”Flikarna säger när. Var skriver vi varför?” Den visar när, men inte varför. Ta sedan fram Kedjan, blad 1. Gruppen lägger fördjupningens post-it-lapp på En lapp till, med streck till led 1 och led 2. Försöket visar slumpen och urvalet om och om igen och är inget femte led."
             - rubrik: Orden
               text: |-
                 eftersom några tål mer (urvalet) · det gör att (spridningen) · därför (följderna)
@@ -3045,6 +3501,7 @@ ramar:
             - rubrik: Samtala
               text: "Varför börjar författaren med en ask tabletter? Varför jämför hen bakterierna med lotter? Ett svar: asken är det vi litar på, och lotterna visar att ingen bakterie väljer."
     - rubrik: "Avancerat, text 4: När medicinen sviker"
+      tema: Smittor
       text:
         - Smittor · text 4 av 5
       delar:
@@ -3132,9 +3589,22 @@ ramar:
               - https://www.1177.se/Stockholm/undersokning-behandling/behandling-med-lakemedel/om-lakemedel/fragor-och-svar-om-antibiotika/
             - - Harvard visar filmen från försöket med skålen. Texten är på engelska.
               - https://hms.harvard.edu/news/bugs-screen
+    - rubrik: "Modellen: Avancerat, text 4, När medicinen sviker"
+      tema: Smittor
+      text:
+        - Kedjan, blad 1, ifylld för När medicinen sviker.
+      delar:
+        - rubrik: Frågan och svaret
+          falt:
+            - rubrik: Textens fråga
+              text: "Vem är det som blir resistent: människan eller bakterien? Och hur går det till?"
+            - rubrik: Lyssna efter
+              text: bakterien · slump och urval · kroppen vänjer sig inte
+            - rubrik: Så kan svaret låta
+              text: Det är bakterien. Några bakterier tål mer av en slump, och när antibiotikan dödar de andra tar de tåliga över. Sedan sprids de. Människan blir inte resistent men drabbas ändå.
     - rubrik: "Lärarens sida: Avancerat, text 5, Gåtan på sjukhuset"
       text:
-        - Mödrar dog i barnsängsfeber eftersom läkarna bar med sig smitta från obduktionerna på händerna, handtvätt i klorlösning löste det, och ändå dröjde det innan andra läkare ändrade sig. Texten har ett problem och en lösning, och modellen är Problem och lösning, blad 1. I vecka 5 har två elever i taget jobbkorten från avsnitt 2, och de två som har dem i avsnitt 4 leder hela avsnittet.
+        - Mödrar dog i barnsängsfeber eftersom läkarna bar med sig smitta från obduktionerna på händerna, handtvätt i klorlösning löste det, och ändå dröjde det innan andra läkare ändrade sig. Texten har ett problem och en lösning, och modellen är Problem och lösning, blad 1. I vecka 5 har två elever i taget jobbkorten från avsnitt 2, och de två som har dem i avsnitt 4 leder hela avsnittet.
       delar:
         - rubrik: "Läspasset: de fyra avsnitten"
           falt:
@@ -3179,7 +3649,7 @@ ramar:
                 Sambandet: ”I dag”, alltså resultatet nu och inte på 1840-talet
                 Bilden: Staplarna är spann: från det lägsta till det högsta talet
             - rubrik: Modellen
-              text: "Lägg först fram gruppens kedja från vecka 4 och fråga: ”Var skriver vi det någon gör åt problemet?” Den visar vad som leder till vad, men inte vad någon gör åt problemet. Ta sedan fram Problem och lösning, blad 1. Gruppen lägger fördjupningens post-it-lapp på En lapp till, med ett streck till fältet Resultatet. Där ligger lappen om motståndet. Att färre dog står på lappen från avsnitt 3."
+              text: "Lägg först fram gruppens kedja från vecka 4 och fråga: ”Var skriver vi det någon gör åt problemet?” Den visar vad som leder till vad, men inte vad någon gör åt problemet. Ta sedan fram Problem och lösning, blad 1. Gruppen lägger fördjupningens post-it-lapp på En lapp till, med ett streck till fältet Resultatet. Där ligger lappen om motståndet. Att färre dog står på lappen från avsnitt 3."
             - rubrik: Orden
               text: problemet var (febern) · berodde på (händerna) · en lösning (klorlösningen) · resultatet var tydligt, men (motståndet)
             - rubrik: Svaret
@@ -3191,6 +3661,7 @@ ramar:
             - rubrik: Samtala
               text: "Varför berättar författaren om febern som en gåta? Varför får motståndet ett eget avsnitt? Ett svar: gåtan visar hur någon hittar en orsak, och motståndet visar att ett resultat inte räcker för att bli trodd."
     - rubrik: "Avancerat, text 5: Gåtan på sjukhuset"
+      tema: Smittor
       text:
         - Smittor · text 5 av 5
       delar:
@@ -3270,6 +3741,19 @@ ramar:
               - https://www.1177.se/liv--halsa/sunda-vanor/sa-har-tvattar-du-handerna/
             - - Vårdhandboken visar hur vårdens personal håller händerna rena i dag. Sidan är skriven för vården.
               - https://www.vardhandboken.se/vardhygien-infektioner-och-smittspridning/vardhygien/basala-hygienrutiner/handhygien/
+    - rubrik: "Modellen: Avancerat, text 5, Gåtan på sjukhuset"
+      tema: Smittor
+      text:
+        - Problem och lösning, blad 1, ifylld för Gåtan på sjukhuset.
+      delar:
+        - rubrik: Frågan och svaret
+          falt:
+            - rubrik: Textens fråga
+              text: Varför dog fler mödrar hos läkarna än hos barnmorskorna, och vad gjorde man åt det?
+            - rubrik: Lyssna efter
+              text: från obduktionerna · något osynligt på händerna · klorlösningen tog bort det
+            - rubrik: Så kan svaret låta
+              text: Läkarna kom direkt från obduktioner och bar något osynligt på händerna till kvinnorna. Barnmorskorna gjorde inga obduktioner. När läkarna tvättade händerna i klorlösning dog långt färre.
     - rubrik: "Modellen: Tankekartan"
       text:
         - "Till modellen hör exemplet om skolan och tre blad att skriva ut eller skriva i på dator. Skriv ut veckans blad på A3: lärarens sida säger vilket. Exemplet är en egen bild."
@@ -3496,13 +3980,13 @@ ramar:
         - rubrik: Till läraren
           falt:
             - rubrik: När
-              text: Från vecka 3 har två elever var sitt jobb i läspasset. Den ena håller kortet När det skaver och leder gruppen när ni reder ut det som skaver, och den andra leder gruppen till kärnan. Säg första gången att frågorna på jobbkorten är de som du har ställt i två veckor.
+              text: Från vecka 3 har två elever var sitt jobb i läspasset. Den ena håller kortet När det skaver och leder gruppen när ni reder ut det som skaver, och den andra leder gruppen till kärnan. Säg första gången att frågorna på jobbkorten är de som du har ställt i två veckor.
             - rubrik: Så byts jobben
-              text: Du bestämmer före passet vilka som börjar. De två har jobbkorten från avsnitt 2, och efter varje avsnitt går korten vidare till två andra, så att alla får pröva båda jobben. Så gör ni också med klassens texter i vecka 6–8.
+              text: Du bestämmer före passet vilka som börjar. De två har jobbkorten från avsnitt 2, och efter varje avsnitt går korten vidare till två andra, så att alla får pröva båda jobben. Så gör ni också med klassens texter i vecka 6–8.
             - rubrik: Hela avsnittet
-              text: I vecka 5 leder de två med jobbkorten gruppen genom alla fyra stegen i det sista avsnittet, och i vecka 7–8 i alla avsnitt som paren läser. Den som håller kortet När det skaver börjar avsnittet, och den som leder gruppen till kärnan avslutar det.
+              text: I vecka 5 leder de två med jobbkorten gruppen genom alla fyra stegen i det sista avsnittet, och i vecka 7–8 i alla avsnitt som paren läser. Den som håller kortet När det skaver börjar avsnittet, och den som leder gruppen till kärnan avslutar det.
             - rubrik: Det du gör
-              text: "I vecka 3–4 lyssnar du, frågar och håller tiden. Stannar samtalet pekar du på nästa rad på jobbkortet. Saknar kärnan det viktiga frågar du: ”Var står det?” När de två leder hela avsnittet går du in först när något saknas. Håller kärnan säger du vad den som ledde gjorde."
+              text: "I vecka 3–4 lyssnar du, frågar och håller tiden. Stannar samtalet pekar du på nästa rad på jobbkortet. Saknar kärnan det viktiga frågar du: ”Var står det?” När de två leder hela avsnittet går du in först när något saknas. Håller kärnan säger du vad den som ledde gjorde."
             - rubrik: Utskrift
               text: Skriv ut en uppsättning, eller två om ni är sju eller åtta.
       listor:
@@ -3531,7 +4015,7 @@ ramar:
             - rubrik: 2 Textens fråga
               text: Skriv en fråga som hela texten svarar på och som eleverna kan gissa svaret på innan de har läst.
             - rubrik: 3 Läspasset
-              text: "Välj två eller tre ord att reda ut före läsningen. Till vecka 6 skriver du också det du säger när du tänker högt i avsnitt 1. Fyll sedan i de tre raderna för varje avsnitt: det som kan skava under Red ut, stödord för kärnan under Lyssna efter och detaljen som lätt tar över under Lockar."
+              text: "Välj två eller tre ord att reda ut före läsningen. Till vecka 6 skriver du också det du säger när du tänker högt i avsnitt 1. Fyll sedan i de tre raderna för varje avsnitt: det som kan skava under Red ut, stödord för kärnan under Lyssna efter och detaljen som lätt tar över under Lockar."
             - rubrik: 4 Modellen
               text: Välj den modell som passar det mesta av texten. Modellens fråga i tabellen De fem modellerna hjälper dig att välja. Säg för dig själv en kärna för varje avsnitt, och skriv var kärnorna hör hemma i modellen.
             - rubrik: 5 Orden, svaret och samtalet
@@ -3548,7 +4032,7 @@ ramar:
               text: ""
             - rubrik: Ord före läsningen
               text: ""
-            - rubrik: Tänk högt i avsnitt 1, vecka 6
+            - rubrik: Tänk högt i avsnitt 1, vecka 6
               text: ""
         - rubrik: "Läspasset: avsnitt 1"
           falt:
@@ -3750,7 +4234,7 @@ filmer:
     sekunder: 26.11
     beskrivning: "Modellpasset: gruppen lägger en lapp i taget. Läraren frågar: ”Var hör den här lappen hemma?” Eleven säger: ”Den handlar om isen.” Platsen får ett namn. Läraren frågar: ”Vad ska platsen heta?” Gruppen skriver: ”Isen”. Gruppen letar upp ordet och skriver det i fliken. Läraren frågar: ”Vilket ord i texten visar det?” Gruppen skriver: ”det mesta”. Eleven återger texten, och kamraten pekar. Läraren säger: ”Berätta texten ur modellen.” Eleven säger: ”Nästan allt vatten finns i haven.”"
     rubrik: Post-it-lapparna blir en modell
-    ingress: Fyra bilder ur filmen om modellpasset i vecka 1, där veckans post-it-lappar blir en tankekarta för Vattenplaneten. Filmen följer en lapp genom delarna Modellen och Orden. I passet lägger gruppen alla lapparna innan orden skrivs i flikarna. Filmen på metodens sida visar samma sak i rörelse.
+    ingress: Fyra bilder ur filmen om modellpasset i vecka 1, där veckans post-it-lappar blir en tankekarta för Vattenplaneten. Filmen följer en lapp genom delarna Modellen och Orden. I passet lägger gruppen alla lapparna innan orden skrivs i flikarna. Filmen på metodens sida visar samma sak i rörelse.
     efter: "tabell: Modellpasset på 40 minuter"
     stillbilder:
       - text: Läraren frågar var lappen hör hemma i modellen.
