@@ -26,6 +26,16 @@
   status = 301
 
 [[redirects]]
+  from = "/lastexter"
+  to = "/stodundervisning/textsamtal-i-grupp/texter"
+  status = 301
+
+[[redirects]]
+  from = "/faktatexter"
+  to = "/stodundervisning/faktatextsamtal-i-grupp/texter"
+  status = 301
+
+[[redirects]]
   from = "/skrivkort"
   to = "/stodundervisning/kortskrivning-skriv-varje-dag/skrivkort"
   status = 301

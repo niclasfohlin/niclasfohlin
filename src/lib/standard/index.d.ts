@@ -37,13 +37,14 @@ export interface Post {
   titel: string;
   /** Postens egen första mening. */
   rad: string;
-  /** Innehållstaggens namn, när ämnet har taggar. */
-  tagg?: string;
-  /** Postens egen sida. */
-  sida: string;
-  /** Adressen till postens lösningsförslag på postens sida. */
+  /** Innehållstaggarnas namn, när databasen har taggar: en för ett problem, flera för en text. */
+  taggar?: string[];
+  /** Postens egen sida, när posten står i en metod; en post ur en databas utan metod har ingen. */
+  sida?: string;
+  /** Adressen till postens lösningsförslag: på postens sida, eller, för en post utan sida, postens pdf med lösningsförslaget. */
   losning?: string;
-  bild: { adress: string; alt: string };
+  /** Postens bild, när den har en; lästexterna har ingen. */
+  bild?: { adress: string; alt: string };
   /** Varje slag av utskrift, som post (bara problemet) och med (problemet med lösningsförslaget, eller med lärarens sida i en bank utan lösningsförslag). */
   utskrift: Record<string, PostUtskrift>;
 }

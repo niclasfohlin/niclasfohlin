@@ -19,9 +19,9 @@ Den här mappen är början på modulen som sajten och metodriggen ska dela, som
 |---|---|
 | `slugAv` | Adressens led ur ett namn. En funktion för alla adresser som görs ur namn |
 | `UPPTAGNA_LED` | Leden under en metods adress som metodens egna sidor har |
-| `INNEHALLSTAGGAR`, `innehallstaggar` | Innehållstaggarna per ämne, databasens sista nivå efter nivån och slaget. Matematikens är de fem delarna av det centrala innehållet i Lgr22 |
+| `INNEHALLSTAGGAR`, `innehallstaggar` | Innehållstaggarna per ämne, databasens sista nivå efter nivån och slaget. Matematikens är de fem delarna av det centrala innehållet i Lgr22. En metod med egna slag, som lästexternas slag i Textsamtal i grupp, ger sina taggar själv |
 | `postensRad` | Postens egen första mening, som raden under titeln |
-| `Post`, `PostUtskrift` (typerna) | Postens form: id, nivå, nummer, titel, rad, tagg, sida, lösningsförslag, bild och utskrifter, med var utskrifternas sidor står i källfilerna |
+| `Post`, `PostUtskrift` (typerna) | Postens form: id, nivå, nummer, titel, rad, taggar (en eller flera), sida, lösningsförslag, bild (när posten har en) och utskrifter, med var utskrifternas sidor står i källfilerna |
 | `postFel`, `databasFel` | Kontrollerna, som listor med fel |
 | `hamtplan` | Det billigaste sättet att hämta en listas sidor: posternas egna pdf:er eller källfilen en gång |
 

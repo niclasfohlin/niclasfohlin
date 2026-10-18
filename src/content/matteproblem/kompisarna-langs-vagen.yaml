@@ -1,0 +1,36 @@
+niva: Avancerat
+nr: 12
+titel: Kompisarna längs vägen
+innehallstagg: Taluppfattning
+kalla: Idén kommer ur Känguru 2022, Cadet nr 18.
+problem:
+  text:
+    - Alva, Bilal, Cleo och Dino bor i var sitt hus längs samma raka landsväg. Alva bor 8 km från Cleo, Bilal bor 5 km från Dino, och Bilal bor 2 km från Cleo. Vi vet inte i vilken ordning husen ligger längs vägen.
+  fragor:
+    - Hur långt kan det vara mellan Alva och Dino? Hitta alla avstånd som är möjliga.
+    - Hur vet ni att ni har hittat alla?
+  bild: En rak landsväg, och ovanför den fyra hus i en ruta med namnen Alva, Bilal, Cleo och Dino, med en pil ner mot vägen.
+losningsforslag:
+  svaret: 1, 5, 11 eller 15 km. Bilal har 2 lägen och Dino 2 för varje.
+  kontroll: Ordningen C B D A ger 1 km, D C B A 11, B C D A 5 och D B C A 15.
+  iden: Bilal kan bo till höger eller vänster om Cleo, och Dino till höger eller vänster om Bilal.
+  a:
+    namn: rita på rutpapper
+    text: Eleven ritar på rutpapper med en ruta per km, prövar alla lägen och räknar rutorna.
+    bild: "Lösning A. 1 ruta är 1 km, och Alva står 8 rutor till höger om Cleo. På den första av fyra rader bor Bilal 2 rutor till höger om Cleo och Dino 5 rutor längre åt höger, och det ger 1 km mellan Alva och Dino. Bilal till höger och Dino åt vänster ger 11 km. Bilal 2 till vänster och Dino åt höger ger 5 km. Bilal till vänster och Dino åt vänster ger 15 km. Alva till vänster om Cleo ger samma avstånd, spegelvänt. Svar: 1, 5, 11 eller 15 km."
+  b:
+    namn: plus eller minus
+    text: Eleven går från Alva via Cleo och Bilal till Dino och väljer plus eller minus för varje steg.
+    bild: "Lösning B. Ett träd från Alva till Dino. Alva till Cleo är 8 km. Bilal bor 2 km längre bort från Alva än Cleo eller 2 km närmare: 8 + 2 = 10 eller 8 − 2 = 6. Dino bor 5 km längre bort från Alva än Bilal eller 5 km närmare: 10 + 5 = 15, 10 − 5 = 5, 6 + 5 = 11 och 6 − 5 = 1. Plus betyder bort från Alva och minus mot Alva. 2 · 2 = 4 grenar. Svar: 1, 5, 11 eller 15 km."
+  c:
+    rader:
+      - "Ordning: Alva, Bilal, Cleo, Dino"
+      - 8 − 2 = 6 och 6 + 5 = 11
+      - "Svar: bara 11 km."
+    om: Eleven lägger husen i samma ordning som namnen i texten. Andra ordningar stämmer också och ger andra avstånd.
+    fraga: Hur kan ni pröva om 11 km är det enda möjliga avståndet?
+  fragor:
+    - Hur prövar eleven i lösning A var Bilal och Dino kan bo?
+    - I lösning B står det 8 − 2 = 6. Vad betyder minustecknet där?
+    - Var syns det i båda lösningarna att Bilal och Dino kan bo på ena eller andra sidan?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja om en femte kompis också bodde längs vägen?

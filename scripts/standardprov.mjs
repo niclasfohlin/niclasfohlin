@@ -58,15 +58,19 @@ if (lang.length > 122 || !lang.endsWith(' …')) fel.push(`postensRad kortar int
 // En post i rätt form har inga fel, och fel form ger fel.
 const del = (namn, fil, sidor, byte) => ({ adress: `/stodundervisning/${namn}.pdf?v=0123abcd`, byte, kalla: [{ fil, sidor }] });
 const post = (id, nr, sidor) => ({
-  id, niva: 'Bas', nr, titel: `Problem ${nr}`, rad: 'En mening.', tagg: 'Algebra', sida: `/stodundervisning/metoden/${id}`, losning: `/stodundervisning/metoden/${id}#blad-2`,
+  id, niva: 'Bas', nr, titel: `Problem ${nr}`, rad: 'En mening.', taggar: ['Algebra'], sida: `/stodundervisning/metoden/${id}`, losning: `/stodundervisning/metoden/${id}#blad-2`,
   bild: { adress: '/stodundervisning/metoden-pabordet-1.svg?v=0123abcd', alt: 'En bild.' },
   utskrift: { post: del(`metoden-${id}-problemet`, 'metoden-problem-bas', [nr - 1], 150000), med: del(`metoden-${id}`, 'metoden-problem-bas-med', sidor, 440000) },
 });
 const ratt = [post('bas-1', 1, [1, 2, 3]), post('bas-2', 2, [4, 5, 6])];
 const radFel = databasFel(ratt, matte);
 if (radFel.length) fel.push(`databasFel för poster i rätt form: ${radFel.join('; ')}`);
-if (!postFel({ ...ratt[0], tagg: 'Bråk' }, matte).some((f) => f.includes('innehållstaggen'))) fel.push('postFel släpper en tagg som inte finns');
-if (!postFel({ ...ratt[0], tagg: undefined }, matte).some((f) => f.includes('saknas'))) fel.push('postFel släpper en post utan tagg i ett ämne med taggar');
+if (!postFel({ ...ratt[0], taggar: ['Bråk'] }, matte).some((f) => f.includes('innehållstaggen'))) fel.push('postFel släpper en tagg som inte finns');
+if (!postFel({ ...ratt[0], taggar: ['Algebra', 'Bråk'] }, matte).some((f) => f.includes('"Bråk"'))) fel.push('postFel släpper en andra tagg som inte finns');
+if (!postFel({ ...ratt[0], taggar: undefined }, matte).some((f) => f.includes('saknas'))) fel.push('postFel släpper en post utan tagg i en databas med taggar');
+if (postFel({ ...ratt[0], taggar: ['Algebra', 'Geometri'] }, matte).length) fel.push('postFel stoppar en post med två taggar som finns');
+if (postFel({ ...ratt[0], bild: undefined }, matte).length) fel.push('postFel stoppar en post utan bild, som en lästext');
+if (!postFel({ ...ratt[0], bild: { adress: '/x.svg', alt: '' } }, matte).some((f) => f.includes('textalternativ'))) fel.push('postFel släpper en bild utan textalternativ');
 if (!postFel({ ...ratt[0], id: 'problem' }, matte).length) fel.push('postFel släpper ett id som är ett reserverat led');
 if (!databasFel([ratt[0], ratt[0]], matte).some((f) => f.includes('två gånger'))) fel.push('databasFel släpper ett id som finns två gånger');
 if (!databasFel([ratt[1], ratt[0]], matte).some((f) => f.includes('ordning'))) fel.push('databasFel släpper nummer som inte står i ordning');

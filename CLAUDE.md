@@ -54,6 +54,8 @@ Filer som börjar med `_` läses inte in. `utkast: true` visas lokalt men aldrig
 
 Artiklar är oftast publicerade i Vi Lärare, Göteborgs-Posten eller en annan tidning först. Hur en post görs ur en text, och vad som gäller för hela texten, står i ARBETSSATT.md under Texterna.
 
+Databasens matteproblem, de som inte hör till en metod, står en per fil i `src/content/matteproblem/` och visas på Ta fram ett matteproblem (METODER.md under Ta fram ur en bank).
+
 Stödundervisning är en metodbank, inte en blogg. Varje metod är en YAML-fil efter modellen i `_mall.yaml` och `src/content.config.ts`, med exakt ett område (Matematik, Läsning, Skrivning, Socialt), minst en nivå (F-3, 4-6, 7-9) och taggar för vad den tränar. Ur den filen bygger `src/components/Metod.astro`, `src/lib/metoddocx.ts` och `src/lib/metodpptx.ts` allt läraren får, och allt som laddas ner bär © Niclas Fohlin och niclasfohlin.se.
 
 | Vad läraren får | Adress |
@@ -69,10 +71,11 @@ Stödundervisning är en metodbank, inte en blogg. Varje metod är en YAML-fil e
 | Filmerna som mp4 i en zip-fil | `/stodundervisning/<id>-filmer.zip` |
 | I en metod med en bank av problem eller texter i nivåer: varje problem eller text på en egen sida, med lärarens sida och de andra bladen | `/stodundervisning/<id>/<nivå>-<nummer>` |
 | Bankens blad, per nivå och för alla nivåer, bara problemen eller med lärarens sida och de andra bladen, i Word och pdf | `/stodundervisning/<id>-problem-<nivå>.docx` och `.pdf`, med `-med-lararens-sida` |
+| I en bank av faktatexter: temats lärarhandledning, två A4 på temats sida, före temats texter i lärarens sidor och som egen fil (METODER.md under Banken) | `/stodundervisning/<id>-lararhandledning-<tema>.pdf` och `.docx` |
 | I en metod där ramarna heter efter nivåerna, som litteraturlistorna i boksamtalet: varje nivås material för sig, och alla nivåers, i Word och pdf (METODER.md under Nivåernas material) | `/stodundervisning/<id>-<led>-<nivå>.docx` och `.pdf`, och `-alla` |
 | Lektionskortet, ett A4 att ha i handen när läraren leder en lektion som återkommer, högst tre i en metod, med en blå knapp bredvid Öppna lathunden, vid lektionen och först i Materialet, där Skriv ut: Allt har kortet på sina egna sidor; i en serie alla lektionernas kort i en fil (METODER.md under Lektionskortet) | `/stodundervisning/<id>-lektionskort.pdf` och `.docx`, `-2` och `-3`, och `<serie>-alla-lektionskort.pdf` |
 | I en metod med ett kontrakt och ett schema att fylla i (Hem och skola, som i TIL i grupp): var och en på ett eget A4 i Materialet, med en blå knapp där och i Hem och skola och en rad i nedladdningsrutan (METODER.md, tabellen över modellens delar, raden Hem och skola) | `/stodundervisning/<id>-kontrakt.pdf` och `<id>-schema.pdf`, och `.docx` |
-| Ta fram ett matteproblem: problemen i en metods bank som en databas, efter nivå och innehållstagg, med Visa stort, lösningsförslaget och en lista att skriva ut (METODER.md under Ta fram ur en bank) | `/stodundervisning/<id>/problem`, och den korta `/matteproblem` |
+| Ta fram ett matteproblem, en lästext eller en faktatext: posterna i en metods bank som en databas, efter nivå och tagg, och faktatexterna i sina teman, med Visa stort, följesidan och en lista att skriva ut (METODER.md under Ta fram ur en bank) | `/stodundervisning/<id>/problem` och `/stodundervisning/<id>/texter`, och de korta `/matteproblem`, `/lastexter` och `/faktatexter` |
 | En central sak som metoden visar, egen eller delad med andra metoder: en sida, som Ta fram ett skrivkort, eller en pdf, som Lässtrategier, med en blå knapp under ingressen, i menyn, i texten och på metodens kort (METODER.md under De centrala sakerna) | sakens adress i `src/data/centrala.json`, som `/stodundervisning/lasstrategier.pdf`, och den korta, som `/lasstrategier` |
 
 Modellens delar, lathunden, filmerna, banken, nivåernas material, serier med lektionsbank och kurser i veckor står i METODER.md. Läs den innan du rör en metod eller koden som bygger den.

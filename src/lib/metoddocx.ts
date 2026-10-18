@@ -36,6 +36,8 @@ import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, FORMLUFT, FORMRAD_PT, 
 import { bankAv, bankfilensRamar, bankRad, type Bankfil } from './bank';
 import { harMaterial, hemsidansNamn, MATERIAL } from './material';
 import { losningarnasNiva, losningarnasNot, problemformer, type Losningsforslag } from './problemform';
+import { lararhandledningar, nivansEtikett, texternasEtikett, type HandledningFalt, type Lararhandledning } from './handledning';
+import type { Matteproblemfil } from './matteproblem';
 import { bildMatt, inline, kolumnandelar, omslagAdress, omslagUpphov, OMSLAG_KORT, radensNamn, ramensNiva, talcell } from './litteraturlista';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
@@ -87,7 +89,9 @@ type Barn = Paragraph | Table;
 // fakta: en faktatext (faktatext()) på flera sidor, med boksidans marginal: från textens andra sida ett sidhuvud med
 // huvud (områdets namn och titeln) över en linje i nivåns färg och boksidans sidfot, och på den första bara upphovet.
 // figurer: raden om figurernas upphov, när textens bilder har figurer ur bildbanken.
-type Boksektion = { not: string; niva: string; vad: string; farg: string; liggande?: boolean; fakta?: { huvud: string; figurer?: string } };
+// anton: nivåns knapp i Anton, som under en faktatext, på en sida som hör till faktatexterna utan att vara en
+// (lärarhandledningen, lararhandledningSida()).
+type Boksektion = { not: string; niva: string; vad: string; farg: string; liggande?: boolean; fakta?: { huvud: string; figurer?: string }; anton?: boolean };
 // Ett sagoblad (sagoFlod): rutan Till läraren i sidfoten, eller på bokens blad ingen sidfot och en kortare upphovsrad.
 type Sagosektion = { not: string; bokblad: boolean };
 // Ett blad som en bild över hela den liggande sidan (bildblad()): sidans marginaler i twips, som följer bladets skrivytor.
@@ -853,16 +857,24 @@ const ANFANGTYPSNITT = 'Cinzel Decorative';
 const BOK = { ram: '4B3A2F', rod: '8C2A1E', text: '2B2622', titel: '3A2D24', not: '8A8177', skiljare: 'B9A894', gra: '555555', kort: ['4E7A43', 'A8742A', '6E3450'] };
 const punktStycke = (o: Omit<IParagraphOptions, 'children'> = {}) => new Paragraph({ spacing: { before: 0, after: 0, line: 240 }, run: { size: 2, font: 'Calibri' }, ...o, children: [new TextRun({ text: '', size: 2, font: 'Calibri' })] });
 // Text med **fet** och *kursiv*, som riggens runs().
+// Tecken som elevens typsnitt (Ljudlek Elev, en delmängd av Andika; scripts/elevtypsnitt.py) saknar men som matematikens
+// problem behöver, som gradtecknet i Kaninhagarna och Pinnstjärnan (databasens matteproblem, 2026-10-18). De står i Arial,
+// så att Word och Google Dokument ritar samma tecken. Att lägga dem i delmängden ändrar typsnittet i de 123 Word-filer som
+// bär det och gör om deras pdf:er, 116 MB. scripts/paritet.mjs stannar på de andra tecken som saknas.
+const ELEV_UTANFOR = /([°])/;
+const elevRuns = (o: IRunOptions & { text: string }): TextRun[] =>
+  o.font !== ELEVTYPSNITT || !ELEV_UTANFOR.test(o.text) ? [textRun(o)]
+    : o.text.split(ELEV_UTANFOR).filter(Boolean).map((del) => textRun({ ...o, text: del, ...(ELEV_UTANFOR.test(del) ? { font: 'Arial' } : {}) }));
 function bokRuns(text: string, bas: IRunOptions): TextRun[] {
   const ut: TextRun[] = [];
   const re = /(\*\*[^*]+\*\*|\*[^*]+\*)/g;
   let sist = 0;
   for (const m of text.matchAll(re)) {
-    if (m.index! > sist) ut.push(textRun({ ...bas, text: text.slice(sist, m.index) }));
-    ut.push(m[0].startsWith('**') ? textRun({ ...bas, text: m[0].slice(2, -2), bold: true }) : textRun({ ...bas, text: m[0].slice(1, -1), italics: true }));
+    if (m.index! > sist) ut.push(...elevRuns({ ...bas, text: text.slice(sist, m.index) }));
+    ut.push(...(m[0].startsWith('**') ? elevRuns({ ...bas, text: m[0].slice(2, -2), bold: true }) : elevRuns({ ...bas, text: m[0].slice(1, -1), italics: true })));
     sist = m.index! + m[0].length;
   }
-  if (sist < text.length) ut.push(textRun({ ...bas, text: text.slice(sist) }));
+  if (sist < text.length) ut.push(...elevRuns({ ...bas, text: text.slice(sist) }));
   return ut.length ? ut : [textRun({ ...bas, text: '' })];
 }
 // Knappen med nivån i sidfoten: vit text i Cinzel på nivåns färg, med luft på båda sidor. På kartläggningens blad står
@@ -871,7 +883,7 @@ function bokRuns(text: string, bas: IRunOptions): TextRun[] {
 // bär typsnittet).
 function nivaKnapp(b: Boksektion): TextRun[] {
   if (!b.niva) return [];
-  const knapp = { font: b.fakta ? FAKTATYPSNITT : BOKTYPSNITT, color: 'FFFFFF', shading: { type: ShadingType.CLEAR, fill: b.farg, color: 'auto' } };
+  const knapp = { font: b.fakta || b.anton ? FAKTATYPSNITT : BOKTYPSNITT, color: 'FFFFFF', shading: { type: ShadingType.CLEAR, fill: b.farg, color: 'auto' } };
   const vad = /^kartläggning/i.test(b.vad) ? [] : [new TextRun({ text: '  ·  ', size: 19, ...knapp }), new TextRun({ text: b.vad, size: b.vad.length > 8 ? 15 : 17, ...knapp })];
   return [new TextRun({ text: '  ', size: 19, ...knapp }), new TextRun({ text: b.niva.toUpperCase(), size: 19, ...knapp }), ...vad, new TextRun({ text: '  ', size: 19, ...knapp })];
 }
@@ -1365,6 +1377,52 @@ const faktabyte = (f: Faktatext, o: { farg: string; metod: string; bilder: PaBor
   not: f.not || o.metod, niva: f.niva, vad: f.vad, farg: o.farg,
   fakta: { huvud: [f.etikett.split(' · ')[0].toLocaleUpperCase('sv'), f.titel].filter(Boolean).join('  ·  '), figurer: o.bilder.some((b) => b.bild.fluent?.length) ? 'Figurerna i bilderna: Fluent Emoji, © Microsoft Corporation, MIT-licens.' : undefined },
 });
+// Lärarhandledningen till ett tema (src/lib/handledning.ts; metodriggens leverans 2026-10-18 natt), ett till ett med
+// riggens build-docx.js (lararhandledning): två A4 i en boksektion, med upphovet i sidhuvudet och metodens namn, nivåns
+// knapp i Anton och sidnumret i sidfoten. Sidan 1 har etiketten med nivån, temat i Anton med strecket i nivåns färg,
+// temats ingress och den gemensamma sidans delar, och sidan 2 temats texter, en del per text med numret på nivåns färg och
+// modellen efter titeln. Fälten står i två spalter, namnet till vänster och texten till höger, med en tunn linje mellan
+// raderna, och lärarens text i Arial 9 punkter med 11 punkters radavstånd, som riggens. En rad delas inte, och en rubrik
+// hålls ihop med sin första rad. Riggen prövade sidorna i Word och Google Dokument (48 till 102 punkter luft nederst), och
+// scripts/googleprov.mjs prövar sajtens filer.
+const handledningbyte = (h: Lararhandledning, o: { farg: string; metod: string }) => new Sektionsbyte(false, { not: o.metod, niva: h.niva, vad: 'lärarhandledning', farg: o.farg, anton: true });
+function lararhandledningSida(h: Lararhandledning, farg: string): Barn[] {
+  const inga = { top: FORM_INGEN, bottom: FORM_INGEN, left: FORM_INGEN, right: FORM_INGEN };
+  const tunn = { style: BorderStyle.SINGLE, size: 4, color: FAKTA.linje } as const;
+  const anton = (text: string, size: number, color: string, mer: Partial<IRunOptions> = {}) => textRun({ text, font: FAKTATYPSNITT, size, color, ...mer } as IRunOptions);
+  const etikett = (text: string, fill: string, size = 19) => [anton(`\u00a0\u00a0${text}\u00a0\u00a0`, size, 'FFFFFF', { shading: { type: ShadingType.CLEAR, fill, color: 'auto' } })];
+  const STORLEK = 18, RAD = 220, NAMN = 1750, TEXT = BOKBREDD - NAMN;
+  const arial: IRunOptions = { size: STORLEK, color: FAKTA.text, font: 'Arial' };
+  const stycke = (text: string, kursiv?: boolean) => new Paragraph({ spacing: { before: 0, after: 0, line: RAD }, keepLines: true, children: bokRuns(text, { ...arial, ...(kursiv ? { italics: true } : {}) }) });
+  // En del: rubriken i Anton, i sidan 2 med textens nummer på nivåns färg före och modellen i Arial i nivåns färg efter.
+  const rubrik = (text: string, o: { fore: number; nr?: string; modell?: string; storlek?: number }) => new Paragraph({
+    keepNext: true, keepLines: true, outlineLevel: 2, spacing: { before: o.fore, after: 80, line: 240 },
+    children: [
+      ...(o.nr ? [...etikett(o.nr, farg, 24), anton('\u00a0\u00a0', 24, FAKTA.mork)] : []),
+      anton(text, o.storlek ?? 28, FAKTA.mork),
+      ...(o.modell ? [textRun({ text: `\u00a0\u00a0${o.modell}`, size: 20, color: farg, font: 'Arial', bold: true })] : []),
+    ],
+  });
+  const fcell = (barn: Barn[], w: number, i: number, hoger: number) => new TableCell({ width: { size: w, type: WidthType.DXA }, borders: { ...inga, ...(i ? { top: tunn } : {}) }, margins: { top: 30, bottom: 30, left: 0, right: hoger }, verticalAlign: VerticalAlign.TOP, children: barn });
+  // Fältets namn i fet stil och, på en rad under, minuterna i den grå tonen ("Frågan" och "0–5 min").
+  const namnet = (f: HandledningFalt, sist: boolean) => new Paragraph({ spacing: { before: 0, after: 0, line: RAD }, keepNext: !sist, children: f.rubrik.split('\n').flatMap((r, k) => [...(k ? [new TextRun({ break: 1, size: STORLEK, font: 'Arial' })] : []), textRun({ text: r, bold: !k, size: STORLEK, color: k ? FAKTA.dov : FAKTA.mork, font: 'Arial' })]) });
+  const falten = (falt: HandledningFalt[]) => new Table({
+    width: { size: BOKBREDD, type: WidthType.DXA }, columnWidths: [NAMN, TEXT], layout: TableLayoutType.FIXED, borders: FORM_UTAN,
+    rows: falt.map((f, i) => new TableRow({ cantSplit: true, children: [fcell([namnet(f, i === falt.length - 1)], NAMN, i, 120), fcell(f.text.split('\n').map((t) => stycke(t, f.kursiv)), TEXT, i, 0)] })),
+  });
+  const ut: Barn[] = [];
+  ut.push(new Paragraph({ spacing: { before: 0, after: 90, line: 240 }, children: etikett(nivansEtikett(h), FAKTA.mork) }));
+  ut.push(new Paragraph({ outlineLevel: 1, spacing: { before: 0, after: 40, line: 216 }, children: [anton(h.tema, 56, FAKTA.mork)] }));
+  ut.push(punktStycke({ indent: { left: 0, right: BOKBREDD - 1300 }, spacing: { before: 0, after: 160, line: 240 }, border: { bottom: { style: BorderStyle.SINGLE, size: 48, color: farg, space: 0 } } }));
+  for (const t of h.ingress) ut.push(new Paragraph({ spacing: { before: 0, after: 100, line: 248 }, children: bokRuns(t, { size: 20, color: FAKTA.mork, font: 'Arial' }) }));
+  // Rubrikerna på sidan 1 har lite mindre luft före, så att sidan rymmer Smittors längre ingress (riggen).
+  h.gemensam.forEach((d, i) => ut.push(rubrik(d.rubrik, { fore: i ? 110 : 80 }), falten(d.falt)));
+  ut.push(punktStycke({ pageBreakBefore: true }));
+  ut.push(new Paragraph({ spacing: { before: 0, after: 90, line: 240 }, children: etikett(texternasEtikett(h), FAKTA.mork) }));
+  h.texter.forEach((x, i) => ut.push(rubrik(x.titel, { nr: x.nr, modell: x.modell, storlek: 30, fore: i ? 110 : 40 }), falten(x.falt)));
+  ut.push(punktStycke());
+  return ut;
+}
 // Sidlåset (src/data/sidlas.json, mätt av scripts/sidlas.mjs i npm run validera; förebilden är metodriggens
 // build/sidlas.mjs, Niclas 2026-10-07 om Google-provets obs: "Men granska detta med Obs och lös det då"). En faktatext
 // flödar över sidorna, och Word och Google Dokument bryter inte sidan på samma ställe: Word håller ihop en rubrik med sin
@@ -3058,9 +3116,17 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     let efterVeckorna = false;
     const ramensRubrik = (ram: Ram, nySida = false) => new Paragraph({ children: [run(ram.rubrik)], heading: HeadingLevel.HEADING_3, keepNext: true, pageBreakBefore: nySida || undefined, spacing: { before: 240, after: 80 } });
     const faktasidor = faktatexter(ramarna);
+    const handledningar = lararhandledningar(ramarna);
     // En ram, där den står. ram är ramen som den ritas: en ram vars listor står vid veckorna ritas utan dem.
     const enRam = (i: number, ram: Ram): void => {
       efterElevsida = false;
+      // Temats lärarhandledning: två A4 i en egen sektion (lararhandledningSida()).
+      const hl = handledningar.get(i);
+      if (hl) {
+        const farg = nivansFarg(d.nivaer, { niva: hl.niva, nivaNr: bank?.nivaer.find((n) => n.namn === hl.niva)?.nivaNr ?? 0 });
+        ut.push(handledningbyte(hl, { farg, metod: d.titel }), ...lararhandledningSida(hl, farg), new Sektionsbyte(false));
+        return;
+      }
       // En faktatext (faktatextAv i src/lib/ramform.ts) är sidor i en faktabok, i en egen sektion, med bilderna På bordet
       // på sina platser i texten (faktatext()). En bild vid ramen som ingen plats nämner står efter texten.
       const fakta = faktasidor.get(ram);
@@ -3310,6 +3376,7 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
     const former = problemformer(ramarna, paBordet);
     const bank = bankAv(d);
     const faktasidor = faktatexter(ramarna);
+    const handledningar = lararhandledningar(ramarna);
     // Ramens blad (bildblad()), var och ett på ett eget liggande A4 efter ramens sidor, i bildernas ordning. I filen med
     // allt står de redan i beskrivningen, efter sin ram.
     const adress = metodAdress(bas, post.id).replace(/^https?:\/\//, '');
@@ -3337,6 +3404,16 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
         ut.push(sida);
         const ovriga = efter.filter((b) => !arBlad(b));
         if (ovriga.length) ut.push(ovriga.flatMap((b) => bordet(b)));
+        return ut;
+      }
+      // Temats lärarhandledning (lararhandledningSida()), två A4. I filen med allt står den redan i beskrivningen.
+      const hl = handledningar.get(i);
+      if (hl) {
+        if (o.baraTommaRamar) return ut;
+        const farg = nivansFarg(d.nivaer, { niva: hl.niva, nivaNr: bank?.nivaer.find((n) => n.namn === hl.niva)?.nivaNr ?? 0 });
+        const sida: Flod = [handledningbyte(hl, { farg, metod: d.titel }), ...lararhandledningSida(hl, farg)];
+        bladsidor.add(sida);
+        ut.push(sida);
         return ut;
       }
       // Problemens blad (src/lib/problemform.ts): lösningsförslaget, bladet Två lösningar på ett liggande A4 och problemets
@@ -4720,6 +4797,25 @@ export function bankDokument(post: MetodPost, fil: Pick<Bankfil, 'niva' | 'medFo
   const karta: Sidpost[] = [];
   const sektioner = sidor.flatMap((sida) => { const s = delaSektioner(sida.barn, huvud, adress); karta.push({ ...sida.vad, s: s.length }); return s; });
   return dokument(`${post.data.titel}: ${fil.rubrik}`, sektioner, typsnittFor([post]), undefined, karta);
+}
+
+// Ta fram ett matteproblems filer (src/lib/matteproblem.ts, K-425): nivåns alla problem, metodens och databasens, i numrets
+// ordning, med problemets sida och, i filen med lösningsförslagen, lösningsförslaget efter. Sidorna ritas av samma kod som
+// i metodens filer (problemsida(), losningsforslagSida()), så att ett problem ur databasen ser ut som ett ur metoden.
+// Kartan säger var posterna står: ram är postens plats i filen gånger två, och lösningsförslaget ett mer. post är metoden
+// som problemen hör till, för sidhuvudet och typsnitten.
+export function matteproblemDokument(post: MetodPost, fil: Matteproblemfil, o: { bas: string; resurser?: MetodResurser }): Document {
+  instans = 0;
+  FRISTAENDE_BLAD = true;
+  RESURSER = o.resurser ?? { bilder: new Map() };
+  const adress = `${metodAdress(o.bas, post.id).replace(/^https?:\/\//, '')}/problem`;
+  const huvud = `${fil.niva} · Matteproblem · ${SAJT}`;
+  const karta: Sidpost[] = [];
+  const sektioner = fil.poster.flatMap((p, i) => [
+    { flod: [problembyte(p.l), ...problemsida(p.l, p.bild)] as Flod, vad: { ram: 2 * i } },
+    ...(fil.med ? [{ flod: [losningsforslagbyte(p.lf), ...losningsforslagSida(p.lf)] as Flod, vad: { ram: 2 * i + 1 } }] : []),
+  ]).flatMap((sida) => { const s = delaSektioner(sida.flod, huvud, adress); karta.push({ ...sida.vad, s: s.length }); return s; });
+  return dokument(`Matteproblem: ${fil.rubrik}`, sektioner, typsnittFor([post]), undefined, karta);
 }
 
 // En fil med bara de här ramarna, ett blad per sida som i planeringsmallarna: en nivås material eller alla nivåers

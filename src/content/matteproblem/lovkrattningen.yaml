@@ -1,0 +1,36 @@
+niva: Medel
+nr: 20
+titel: Lövkrattningen
+innehallstagg: Samband och förändring
+kalla: Idén kommer ur Nämnaren 2025:3, Problemavdelningen, nr 4483.
+problem:
+  text:
+    - Klassen ska kratta ihop löven på gräsmattan vid skolan. Om 6 elever krattar, blir de klara med hela gräsmattan på 12 minuter. Alla elever krattar lika fort.
+  fragor:
+    - Hur lång tid tar det om 4 elever krattar hela gräsmattan?
+    - Hur många elever behövs för att bli klara på 9 minuter?
+  bild: En gräsmatta med löv och en hög med löv, en kratta och en klocka.
+losningsforslag:
+  svaret: 4 elever behöver 18 minuter, och 8 elever blir klara på 9 minuter.
+  kontroll: 6 · 12 = 72, 4 · 18 = 72 och 8 · 9 = 72 minuter för en elev ensam.
+  iden: Arbetet är detsamma, så hälften så många elever behöver dubbelt så lång tid.
+  a:
+    namn: gå via två elever
+    text: Eleven går från 6 elever till 2, som behöver 3 gånger så lång tid, och sedan till 4 och 8.
+    bild: Lösning A, gå via två elever. Tabellen har kolumnerna elever och minuter, och raderna är 6 och 12, 2 och 36, 4 och 18, och sist 8 och 9. De två sista raderna är inringade. Vid pilarna mellan raderna står delat med 3 och gånger 3, gånger 2 och delat med 2, och gånger 2 och delat med 2. Bredvid står att en tredjedel så många elever behöver 3 gånger tiden, 3 · 12 = 36, och att dubbelt så många elever behöver halva tiden, 36 / 2 = 18 och 18 / 2 = 9.
+  b:
+    namn: rita arbetet som rutor
+    text: Eleven ritar arbetet som 6 · 12 = 72 rutor, en för varje elev och minut, och lägger rutorna i nya rader.
+    bild: "Lösning B, rita arbetet som rutor. Ett rutnät med 6 rader och 12 kolumner är arbetet för 6 elever i 12 minuter, 6 · 12 = 72 rutor, och en ruta är en elev som krattar i en minut. Under står samma 72 rutor i 4 rader: 72 / 4 = 18 minuter, och i 9 kolumner: 72 / 9 = 8 elever."
+  c:
+    rader:
+      - 12 / 6 = 2 minuter per elev
+      - 4 · 2 = 8 minuter
+      - "Svar: 4 elever tar 8 minuter."
+    om: Eleven låter tiden växa med antalet elever, men fler elever blir klara fortare.
+    fraga: Vad ger uträkningen i lösning C för en elev som krattar ensam?
+  fragor:
+    - Varför går eleven i lösning A via 2 elever, och hur ändras tiden i varje steg?
+    - Varför har eleven i lösning B alltid 72 rutor, hur många elever det än är?
+    - Var syns det i båda lösningarna att färre elever behöver längre tid?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja för 5 elever, och varför?

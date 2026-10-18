@@ -1,0 +1,37 @@
+niva: Medel
+nr: 16
+titel: Hemlig kompis
+innehallstagg: Sannolikhet och statistik
+kalla: Idén kommer ur Känguru 2024, Benjamin nr 20.
+problem:
+  text:
+    - Ali, Bea och Cem ska dra hemlig kompis. De lägger tre lappar med sina namn i en mössa och drar en lapp var utan att titta. När alla har dragit, tittar de. Har någon sitt eget namn, drar alla om.
+  fragor:
+    - Hur många av dem kan få sitt eget namn i samma dragning? Hitta alla antal som går.
+    - Hur stor är chansen att de slipper dra om?
+  bild: Tre lappar med namnen Ali, Bea och Cem åker ner i en mössa. Bredvid står Ali, Bea och Cem, och var och en har en lapp med ett frågetecken.
+losningsforslag:
+  svaret: 0, 1 eller 3 egna namn. Chansen att slippa dra om är 1/3.
+  kontroll: "En dragning ger 3 egna, tre ger 1 och två ger 0: 1 + 3 + 2 = 6."
+  iden: Lapparna kan hamna på 6 lika troliga sätt, och eleven räknar chansen bland dem.
+  a:
+    namn: lista alla dragningar
+    text: Eleven skriver alla sätt som lapparna kan hamna på, i ordning, och räknar de egna namnen i varje.
+    bild: "Lösning A, lista alla dragningar. Tabellen har kolumnerna Ali får, Bea får, Cem får och egna, och de egna namnen är understrukna. Raderna är Ali, Bea, Cem med 3 egna, Ali, Cem, Bea med 1, Bea, Ali, Cem med 1, Bea, Cem, Ali med 0, Cem, Ali, Bea med 0 och Cem, Bea, Ali med 1. Bredvid står 3 egna: 1 sätt, 2 egna: 0 sätt, 1 eget: 3 sätt och 0 egna: 2 sätt, och 1 + 0 + 3 + 2 = 6. Sist står att ingen får sitt eget i 2/6 = 1/3."
+  b:
+    namn: tänka antal för antal
+    text: Eleven räknar 3 · 2 · 1 = 6 sätt och tänker ut hur många av dem som ger varje antal.
+    bild: "Lösning B, tänka antal för antal. Överst står att Ali kan få 3 olika, Bea 2 och Cem 1, så 3 · 2 · 1 = 6 sätt. Sedan står 3 egna: 1 sätt. 2 egna: då är den sista lappen den tredjes egen, och då blir det 3, så exakt 2 går inte. 1 eget: välj vem, 3 sätt, och de två andra har varandras lappar. 0 egna: 6 − 1 − 3 = 2 sätt. Sist står att ingen får sitt eget i 2/6 = 1/3."
+  c:
+    rader:
+      - "Var och en: chansen 1/3"
+      - 1/3 + 1/3 + 1/3 = 1
+      - Någon får alltid sitt eget.
+      - "Svar: minst en. Chansen är 0."
+    om: Eleven lägger ihop chanserna, men flera kan få sitt eget samtidigt, och ibland ingen.
+    fraga: Hur kan ni pröva elevens svar med tre lappar?
+  fragor:
+    - Hur ser eleven i lösning A till att varje dragning kommer med precis en gång?
+    - Varför kan det i lösning B aldrig bli exakt två egna namn?
+    - Var syns det i båda lösningarna att 2 av de 6 sätten ger 0 egna namn?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja om de var fyra, och varför?

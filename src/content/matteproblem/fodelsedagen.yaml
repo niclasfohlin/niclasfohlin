@@ -1,0 +1,37 @@
+niva: Bas
+nr: 12
+titel: Födelsedagen
+innehallstagg: Samband och förändring
+kalla: Idén kommer ur Känguru 2026, Ecolier nr 7.
+problem:
+  text:
+    - Leo och hans katt Sixten fyller år samma dag. I dag fyller Leo 10 år och Sixten 4 år.
+  fragor:
+    - Om hur många år är Leo dubbelt så gammal som Sixten?
+    - För hur många år sedan var Leo tre gånger så gammal som Sixten?
+  bild: Två tårtor på ett bord, en stor för Leo och en liten för Sixten, med katten bredvid och texten Grattis på födelsedagen. Under står en tidslinje med i dag i mitten, för … år sedan till vänster och om … år till höger.
+losningsforslag:
+  svaret: Om 2 år, när Leo är 12. För 1 år sedan, när Leo var 9.
+  kontroll: 10 + 2 = 2 · (4 + 2) = 12, och 10 − 1 = 3 · (4 − 1) = 9.
+  iden: Varje år blir både Leo och Sixten ett år äldre, så Leo är alltid 6 år äldre.
+  a:
+    namn: ett år i taget
+    text: Eleven skriver åldrarna i en tabell, ett år i taget framåt och bakåt, och prövar varje rad.
+    bild: "Lösning A, ett år i taget. En tabell med Leos och Sixtens ålder: för 1 år sedan 9 och 3, i dag 10 och 4, om 1 år 11 och 5, om 2 år 12 och 6. Bredvid står 9 = 3 · 3 och 12 = 2 · 6, med bockar. På varje rad är båda ett år äldre. Svar: om 2 år och för 1 år sedan."
+  b:
+    namn: skillnaden i staplar
+    text: Eleven ritar Leos stapel 6 år längre än Sixtens. Biten är en Sixtenstapel vid dubbelt och två vid tre gånger.
+    bild: "Lösning B, skillnaden i staplar. Leo är alltid 10 − 4 = 6 år äldre. Dubbelt så gammal: Leos stapel är Sixtens stapel och en lika lång bit till, som är 6 år. Sixten ska vara 6, och 6 − 4 = 2, alltså om 2 år. Tre gånger så gammal: Leos stapel är tre Sixtenstaplar, och de två sista är 6 år tillsammans. 6 / 2 = 3, Sixten ska vara 3, och 4 − 3 = 1, alltså för 1 år sedan. Kontroll: 12 = 2 · 6 och 9 = 3 · 3."
+  c:
+    rader:
+      - "Dubbelt så gammal:"
+      - 2 · 10 = 20
+      - 20 − 10 = 10
+      - "Svar: om 10 år."
+    om: Eleven tar Leos ålder i dag gånger 2, men Leos ålder ska jämföras med Sixtens.
+    fraga: Hur gammal är Sixten i elevens svar?
+  fragor:
+    - Vad ändras från rad till rad i lösning A, och vad ändras inte?
+    - Varför är Leos stapel 6 år längre än Sixtens i lösning B?
+    - Var syns det i båda lösningarna att Leo alltid är 6 år äldre?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja om skillnaden var 30 år, och varför?

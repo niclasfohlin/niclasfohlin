@@ -1,0 +1,36 @@
+niva: Bas
+nr: 13
+titel: Sandlådan
+innehallstagg: Geometri
+kalla: Idén kommer ur nrich, Growing Rectangles.
+problem:
+  text:
+    - Skolans sandlåda är 3 meter lång och 2 meter bred, med en träkant runt om. Skolan ska bygga en ny sandlåda som är dubbelt så lång och dubbelt så bred.
+  fragor:
+    - Hur många gånger så lång blir träkanten? Hur många gånger så stor blir ytan?
+    - Vad blir svaren om den nya sandlådan i stället är tre gånger så lång och tre gånger så bred?
+  bild: En rektangulär sandlåda sedd uppifrån, med en träkant runt om, sand och en hink och en spade i lådan.
+losningsforslag:
+  svaret: Kanten blir 2 och 3 gånger så lång, ytan 4 och 9 gånger så stor.
+  kontroll: 24 = 4 · 6 och 54 = 9 · 6 m². 20 = 2 · 10 och 30 = 3 · 10 m.
+  iden: Kanten är en längd och växer som sidorna, men ytan växer på längden och på bredden.
+  a:
+    namn: rita på rutpapper
+    text: Eleven ritar lådorna på rutpapper, en ruta per kvadratmeter, och räknar rutor och meter runt om.
+    bild: "Lösning A, rita på rutpapper. En ruta är 1 m · 1 m. Den gamla lådan är 3 · 2 rutor, 6 rutor och kant 10 m. Dubbelt är 6 · 4 rutor, 24 rutor och kant 20 m. Tre gånger är 9 · 6 rutor, 54 rutor och kant 30 m. Bredvid: ytan 24 / 6 = 4 och 54 / 6 = 9, kanten 20 / 10 = 2 och 30 / 10 = 3."
+  b:
+    namn: dela i gamla lådor
+    text: Eleven delar den nya lådan i gamla lådor, 2 på längden och 2 på bredden, och räknar 2 · 2 = 4.
+    bild: "Lösning B, dela i gamla lådor. Lådan med dubbelt så långa sidor är delad i 2 på längden och 2 på bredden: 2 · 2 = 4 gamla lådor, och kanten 2 · 10 = 20 m. Lådan med tre gånger så långa sidor är delad i 3 på längden och 3 på bredden: 3 · 3 = 9 gamla lådor, och kanten 3 · 10 = 30 m. Kanten växer som sidorna, men ytan växer både på längden och på bredden."
+  c:
+    rader:
+      - "Kant: 2 · 10 = 20 m"
+      - "Yta: 2 · 6 = 12 m²"
+      - "Svar: allt 2 och 3 gånger."
+    om: Eleven tror att ytan växer lika mycket som sidorna, men både längden och bredden växer.
+    fraga: Hur bred blir en sandlåda som är 6 m lång och har ytan 12 m²?
+  fragor:
+    - Hur räknar eleven ut ytan och kanten i lösning A?
+    - Varför ryms det 2 · 2 = 4 gamla lådor i den nya lådan i lösning B?
+    - Var syns det i båda lösningarna att ytan växer både på längden och på bredden?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja med tio gånger så långa sidor, och varför?

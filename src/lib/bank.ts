@@ -29,25 +29,37 @@
 //
 // Postens följesida (Niclas 2026-10-18 om Ta fram ett matteproblem: "Tänkte mer att det är problemets A4a och dess
 // lösningsförslag"): den följesida som hör till enheten när den tas fram ur databasen (src/lib/tafram.ts), problemets
-// lösningsförslag. Banken får då en fil per nivå med enheterna och den följesidan, som Ta fram skriver ut. En ram vars
-// rubrik är följesidans namn i bestämd form plural och en rubrik, som "Lösningsförslagen: Visa och jämför lösningar"
-// (metodriggens TILL-SAJTEN 2026-10-18), är en ruta som ritas på varje sådan följesida och aldrig för sig
-// (src/lib/problemform.ts): den hör till banken, så att den varken står bland ramarna eller i materialets lista.
+// lösningsförslag eller, i en bank utan lösningsförslag, textens lärarsida. Banken får en fil per nivå med enheterna och
+// den följesidan, som Ta fram skriver ut, när enheterna har fler följesidor än den; annars är filen med följesidorna
+// redan den. Är följesidan Lärarens sida får den ingen egen fil, eftersom filen med alla följesidor heter efter den
+// (-med-lararens-sida), och Ta fram skriver då ut enheten med alla sina följesidor. En ram vars rubrik är lösningsförslagens namn i bestämd form plural och en rubrik, som "Lösningsförslagen:
+// Visa och jämför lösningar" (metodriggens TILL-SAJTEN 2026-10-18), är en ruta som ritas på varje lösningsförslag och
+// aldrig för sig (src/lib/problemform.ts): den hör till banken, så att den varken står bland ramarna eller i materialets
+// lista.
+//
+// Temats lärarhandledning (src/lib/handledning.ts, Faktatextsamtal i grupp): ramen "Lärarhandledning: <nivå>, <tema>" hör
+// till banken och står före temats första text, i filerna med följesidorna eller bara följesidorna och i filen med allt,
+// som hos metodriggen ("Varje tema börjar med en lärarhandledning"). Den gemensamma sidan, "Lärarhandledningarna:
+// <rubrik>", ritas på varje handledning och aldrig för sig, som rutan på lösningsförslagen. Ingen av dem står bland
+// ramarna eller i materialets lista, och temats sida ([id]/texter/[tema].astro) visar handledningen.
 //
 // Inga Node-beroenden: Word-filen av flera metoder byggs i webbläsaren med samma regel.
 import { enhetstexter, type Enhetstext } from './ramform';
+import { arHandledningarna, HANDLEDNING } from './handledning';
 import { slugAv, UPPTAGNA_LED } from './standard/index.js';
 
-type Ram = Parameters<typeof enhetstexter>[0][number];
+// tema: faktatextens tema (src/lib/handledning.ts), som metodens schema har på ramen.
+type Ram = Parameters<typeof enhetstexter>[0][number] & { tema?: string };
 type Metod = { ramar?: { ramar: Ram[] } };
 
 /** Färre enheter än så står kvar på metodens sida, som förut. */
 export const BANK_MINST = 10;
 
-/** Enhetens ord ur vad ("problem 1", "text 1"): ett problem, problemet, problem, problemen. Ett nytt ord läggs till här. */
-const ORD: Record<string, { en: string; bestamd: string; flera: string; alla: string }> = {
-  problem: { en: 'problem', bestamd: 'problemet', flera: 'problem', alla: 'problemen' },
-  text: { en: 'text', bestamd: 'texten', flera: 'texter', alla: 'texterna' },
+/** Enhetens ord ur vad ("problem 1", "text 1"): ett problem, problemet, problem, problemen, och artikeln. Ett nytt ord
+ *  läggs till här. */
+const ORD: Record<string, { en: string; bestamd: string; flera: string; alla: string; artikel: 'en' | 'ett' }> = {
+  problem: { en: 'problem', bestamd: 'problemet', flera: 'problem', alla: 'problemen', artikel: 'ett' },
+  text: { en: 'text', bestamd: 'texten', flera: 'texter', alla: 'texterna', artikel: 'en' },
 };
 
 export interface Bankenhet {
@@ -64,24 +76,32 @@ export interface Bankenhet {
   efter: number[];
   /** Postens följesida, problemets lösningsförslag, bland följesidorna (POSTENS_FOLJESIDOR). */
   post?: number;
+  /** Temats lärarhandledning, som står före enheten: den första texten i ett tema med handledning. */
+  handledning?: number;
+  /** Temat, ur ramens fält tema eller faktatextens etikett ("Vatten · text 1 av 5"). */
+  tema?: string;
 }
 export interface Bankniva { namn: string; nivaNr: number; slug: string; oversikt?: number; enheter: Bankenhet[] }
-// Följesidorna som hör till enheten i databasen, med namnet i bestämd form plural och i en mening: "Lösningsförslag",
-// "Lösningsförslagen", "lösningsförslaget". En ny läggs till här.
-const POSTENS_FOLJESIDOR: Record<string, { alla: string; bestamd: string }> = { 'Lösningsförslag': { alla: 'Lösningsförslagen', bestamd: 'lösningsförslaget' } };
+// Följesidorna som kan höra till enheten i databasen, i den ordning de väljs, med namnet i bestämd form plural och i en
+// mening: "Lösningsförslag", "Lösningsförslagen", "lösningsförslaget". harRuta: en ram med det pluralt bestämda namnet är
+// en ruta som ritas på varje sådan sida. En ny läggs till här.
+const POSTENS_FOLJESIDOR: Record<string, { alla: string; bestamd: string; harRuta?: boolean }> = {
+  'Lösningsförslag': { alla: 'Lösningsförslagen', bestamd: 'lösningsförslaget', harRuta: true },
+  'Lärarens sida': { alla: 'Lärarens sidor', bestamd: 'lärarens sida' },
+};
 export interface Bank {
-  ord: { en: string; bestamd: string; flera: string; alla: string; slug: string };
+  ord: { en: string; bestamd: string; flera: string; alla: string; artikel: 'en' | 'ett'; slug: string };
   /** Följesidornas namn i den ordning de först kommer: Lärarens sida, Två lösningar, Lösningsförslag. */
   foljesidor: string[];
   /** Postens följesida (POSTENS_FOLJESIDOR) när varje enhet har den: namnet, som Lösningsförslag, i bestämd form plural
    * och i en mening, och rutan som ritas på varje sådan sida. */
-  post?: { namn: string; alla: string; bestamd: string; slug: string; ruta?: number };
+  post?: { namn: string; alla: string; bestamd: string; slug: string; ruta?: number; egenFil: boolean };
   /** Följesidorna står i egna filer, och ingen fil har enheterna med följesidorna: en bank där varje enhet är en faktatext. */
   sidorForSig: boolean;
   nivaer: Bankniva[];
   enheter: Bankenhet[];
-  /** Ramarna som står på enheternas sidor och på metodens sida bara i utskriften: enheterna och följesidorna, och rutan
-   * som ritas på postens följesidor. */
+  /** Ramarna som står på enheternas sidor och på metodens sida bara i utskriften: enheterna och följesidorna, rutan som
+   * ritas på postens följesidor, och temanas lärarhandledningar med deras gemensamma sida. */
   ramar: Set<number>;
   /** Nivåernas översikter, som står på metodens sida i bankens nivåer. */
   oversikter: Set<number>;
@@ -106,7 +126,8 @@ export function bankAv(d: Metod): Bank | null {
     const m = l.vad.match(/^(\S+) (\d+)$/);
     if (m) ordet ??= m[1].toLowerCase();
     if (!nivaer.has(l.niva)) nivaer.set(l.niva, { namn: l.niva, nivaNr: l.nivaNr, slug: slugAv(l.niva), enheter: [] });
-    const e: Bankenhet = { ri, l, nr: m ? Number(m[2]) : undefined, slug: `${slugAv(l.niva)}-${m ? m[2] : slugAv(l.vad)}`, fore: [], efter: [] };
+    const tema = ram.tema ?? (l.faktatext?.etikett.includes(' · ') ? l.faktatext.etikett.split(' · ')[0] : undefined);
+    const e: Bankenhet = { ri, l, nr: m ? Number(m[2]) : undefined, slug: `${slugAv(l.niva)}-${m ? m[2] : slugAv(l.vad)}`, fore: [], efter: [], ...(tema ? { tema } : {}) };
     nivaer.get(l.niva)!.enheter.push(e);
     enheter.push(e);
     nycklar.set(`${l.niva}, ${l.vad}, ${l.titel}`, e);
@@ -115,26 +136,38 @@ export function bankAv(d: Metod): Bank | null {
   const bankramar = new Set(enheter.map((e) => e.ri));
   const oversikter = new Set<number>();
   const rutor = new Map<string, number>();
+  const handledningar: number[] = [];
   ramar.forEach((ram, ri) => {
     if (bankramar.has(ri)) return;
+    if (arHandledningarna(ram)) { handledningar.push(ri); return; }
+    const hl = ram.rubrik.match(HANDLEDNING);
+    if (hl) {
+      const tema = ram.tema ?? hl[2];
+      const forst = enheter.find((e) => e.l.niva === hl[1] && e.tema === tema);
+      if (!forst) throw new Error(`Banken: ${ram.rubrik} hör till temat ${tema} på nivån ${hl[1]}, men ingen text på nivån har det temat (src/lib/bank.ts).`);
+      forst.handledning = ri;
+      handledningar.push(ri);
+      return;
+    }
     const sidor = ram.rubrik.match(/^Lärarens sidor: (.+)$/);
     if (sidor && nivaer.has(sidor[1]) && nivaer.get(sidor[1])!.oversikt === undefined) { nivaer.get(sidor[1])!.oversikt = ri; oversikter.add(ri); return; }
     const m = ram.rubrik.match(/^([^:]+): (.+)$/);
-    const ruta = m && Object.entries(POSTENS_FOLJESIDOR).find(([, x]) => x.alla === m[1]);
+    const ruta = m && Object.entries(POSTENS_FOLJESIDOR).find(([, x]) => x.harRuta && x.alla === m[1]);
     if (ruta && !rutor.has(ruta[0])) { rutor.set(ruta[0], ri); return; }
     const e = m && nycklar.get(m[2]);
     if (!e) return;
     (ri < e.ri ? e.fore : e.efter).push(ri);
-    if (POSTENS_FOLJESIDOR[m[1]] && e.post === undefined) e.post = ri;
     if (!foljesidor.includes(m[1])) foljesidor.push(m[1]);
     bankramar.add(ri);
   });
   if (!foljesidor.length) return null;
-  // Postens följesida gäller banken när varje enhet har den; annars skrivs enheten ut ensam ur databasen.
-  const postNamn = foljesidor.find((n) => POSTENS_FOLJESIDOR[n] && enheter.every((e) => e.post !== undefined && ramar[e.post].rubrik.startsWith(`${n}: `)));
-  const post = postNamn ? { namn: postNamn, ...POSTENS_FOLJESIDOR[postNamn], slug: slugAv(postNamn), ...(rutor.has(postNamn) ? { ruta: rutor.get(postNamn) } : {}) } : undefined;
-  if (!post) for (const e of enheter) delete e.post;
-  for (const ri of rutor.values()) bankramar.add(ri);
+  // Postens följesida är den första i POSTENS_FOLJESIDOR som varje enhet har; har ingen enhet den skrivs enheten ut ensam
+  // ur databasen.
+  const sidaAv = (e: Bankenhet, n: string) => [...e.fore, ...e.efter].find((ri) => ramar[ri].rubrik.startsWith(`${n}: `));
+  const postNamn = Object.keys(POSTENS_FOLJESIDOR).find((n) => foljesidor.includes(n) && enheter.every((e) => sidaAv(e, n) !== undefined));
+  if (postNamn) for (const e of enheter) e.post = sidaAv(e, postNamn);
+  const post = postNamn ? { namn: postNamn, alla: POSTENS_FOLJESIDOR[postNamn].alla, bestamd: POSTENS_FOLJESIDOR[postNamn].bestamd, slug: slugAv(postNamn), ...(rutor.has(postNamn) ? { ruta: rutor.get(postNamn) } : {}), egenFil: foljesidor.length > 1 && postNamn !== 'Lärarens sida' } : undefined;
+  for (const ri of [...rutor.values(), ...handledningar]) bankramar.add(ri);
   const ord = ORD[ordet ?? ''];
   if (!ord) throw new Error(`Banken: enheterna heter "${ordet ?? enheter[0].l.vad}", som src/lib/bank.ts inte har ord för. Lägg till ordet i ORD (ett problem, problemet, problem, problemen).`);
   const slugar = new Set<string>();
@@ -183,7 +216,7 @@ export function bankfiler(id: string, b: Bank): Bankfil[] {
   // Ordningen är den som en enhets blad hämtas ur (src/lib/utskrift.ts): problemet ur filen med bara problemen,
   // lösningsförslaget ur filen med lösningsförslagen och de andra följesidorna ur filen med alla.
   for (const niva of [undefined, ...b.nivaer]) {
-    for (const medFoljesidor of [false, ...(b.post ? ['post' as const] : []), true]) {
+    for (const medFoljesidor of [false, ...(b.post?.egenFil ? ['post' as const] : []), true]) {
       const namn = `${id}-${b.ord.slug}-${niva ? niva.slug : 'alla'}${medFoljesidor === 'post' ? `-med-${b.post!.slug}` : medFoljesidor ? '-med-lararens-sida' : ''}`;
       const vad = medFoljesidor === 'post' ? `${b.ord.alla} med ${b.post!.alla.toLowerCase()}` : medFoljesidor ? `${b.ord.alla} med ${foljeText(b)}` : `bara ${b.ord.alla}`;
       ut.push({ namn, niva, medFoljesidor, rubrik: `${niva ? niva.namn : 'Alla nivåer'}: ${vad}` });
@@ -193,11 +226,16 @@ export function bankfiler(id: string, b: Bank): Bankfil[] {
 }
 
 /** Ramarna i en fil ur banken, i ordning: per nivå översikten och sedan enhet för enhet med följesidorna runt, bara
- * följesidorna, eller enheten och postens följesida. */
+ * följesidorna, eller enheten och postens följesida. Ett temas lärarhandledning står före temats första enhet i filerna
+ * med följesidorna. */
 export function bankfilensRamar(b: Bank, f: Pick<Bankfil, 'niva' | 'medFoljesidor'>): number[] {
+  const larare = f.medFoljesidor === true || f.medFoljesidor === 'bara';
   return (f.niva ? [f.niva] : b.nivaer).flatMap((n) => [
-    ...((f.medFoljesidor === true || f.medFoljesidor === 'bara') && n.oversikt !== undefined ? [n.oversikt] : []),
-    ...n.enheter.flatMap((e) => (f.medFoljesidor === 'bara' ? [...e.fore, ...e.efter] : f.medFoljesidor === 'post' ? [e.ri, ...(e.post !== undefined ? [e.post] : [])] : f.medFoljesidor ? [...e.fore, e.ri, ...e.efter] : [e.ri])),
+    ...(larare && n.oversikt !== undefined ? [n.oversikt] : []),
+    ...n.enheter.flatMap((e) => [
+      ...(larare && e.handledning !== undefined ? [e.handledning] : []),
+      ...(f.medFoljesidor === 'bara' ? [...e.fore, ...e.efter] : f.medFoljesidor === 'post' ? [e.ri, ...(e.post !== undefined ? [e.post] : [])] : f.medFoljesidor ? [...e.fore, e.ri, ...e.efter] : [e.ri]),
+    ]),
   ]);
 }
 

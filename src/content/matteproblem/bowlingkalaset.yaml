@@ -1,0 +1,36 @@
+niva: Medel
+nr: 14
+titel: Bowlingkalaset
+innehallstagg: Samband och förändring
+kalla: Idén kommer ur Problembanken åk 7–9, problem 12.
+problem:
+  text:
+    - Isak ska ha kalas och bowla. Hallen i stan tar 100 kr per person och inget mer. Ett kalas i hallen vid sjön kostar 300 kr för kalasrummet och sedan 70 kr per person. Priset per person gäller alla som bowlar, också Isak.
+  fragor:
+    - Vilken hall är billigast?
+    - Ge Isak ett råd som passar hur många de än blir.
+  bild: Två bowlinghallar med var sin tom prisskylt, Bowling i stan och Bowling vid sjön, och käglor och ett klot vid varje. Vid hallen vid sjön står också ett litet hus, kalasrummet.
+losningsforslag:
+  svaret: "Under 10 personer: i stan. Över 10: vid sjön. Är de 10 kostar båda lika."
+  kontroll: "9 personer: 900 < 930. 10: 1 000 och 1 000. 11: 1 100 > 1 070."
+  iden: Hallen vid sjön börjar 300 kr dyrare men blir 30 kr billigare för varje person.
+  a:
+    namn: två personer i taget
+    text: Eleven räknar båda priserna för 2, 4, 6 och fler personer, tills de är lika.
+    bild: "Lösning A, två personer i taget. Tabellen har kolumnerna personer, i stan, vid sjön och billigast: 2 ger 200 och 440 kr, 4 ger 400 och 580, 6 ger 600 och 720, 8 ger 800 och 860, 10 ger 1 000 och 1 000, lika, och 12 ger 1 200 och 1 140. Bredvid står uträkningen för 8 personer: 8 · 100 = 800 och 300 + 8 · 70 = 860. Under tabellen står rådet: i stan om de är färre än 10, lika om de är 10 och vid sjön om de är fler."
+  b:
+    namn: ta igen 300 kr
+    text: Eleven ser att hallen vid sjön tar igen 30 kr per person och delar 300 med 30.
+    bild: "Lösning B, ta igen 300 kr. Hallen vid sjön börjar 300 kr dyrare och blir 100 − 70 = 30 kr billigare för varje person, så 300 / 30 = 10 personer. Då kostar båda 1 000 kr: 10 · 100 = 1 000 och 300 + 10 · 70 = 1 000. Bredvid står en graf med två linjer, i stan från 0 kr och vid sjön från 300 kr, som möts vid 10 personer och 1 000 kr."
+  c:
+    rader:
+      - "Per person: stan 100, sjön 70"
+      - 70 kr är mindre än 100 kr.
+      - "Svar: Vid sjön är billigast."
+    om: Eleven jämför bara priset per person och glömmer de 300 kr för kalasrummet.
+    fraga: Vad kostar ett kalas med 4 personer i de två hallarna?
+  fragor:
+    - Var i tabellen ser eleven i lösning A att hallen vid sjön blir billigare?
+    - Varför delar eleven i lösning B 300 med 30?
+    - Var syns det i båda lösningarna att skillnaden mellan hallarna krymper för varje person som kommer till?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja om kalasrummet kostade 500 kr, och varför?

@@ -8,7 +8,7 @@ import Pabordet from '../../../components/Pabordet.astro';
 import SkrivUtPdf from '../../../components/SkrivUtPdf.astro';
 import { publicerade } from '../../../lib/innehall';
 import { bankAv, enhetAdress, grannar, nivaFarger, type Bankenhet } from '../../../lib/bank';
-import { bladKort, bladpar, bladsidaAdress, gruppId, harExempel, ledFlera, ledSida, metodensBladmaterial, type Bladrad } from '../../../lib/bladmaterial';
+import { bladKort, bladpar, bladsidaAdress, enhetensBlad, gruppId, harExempel, ledFlera, ledSida, metodensBladmaterial, type Bladrad } from '../../../lib/bladmaterial';
 import { arIfylltBlad, arStaendeBlad, metodensPaBordet, type PaBordet } from '../../../lib/pabordet';
 import { metodAdress, UPPHOV } from '../../../lib/metod';
 import { enhetensUtskrifter, radensUtskrifter, utskriftAdress, vidEnheterna, type VidEnheten } from '../../../lib/utskrift';
@@ -122,19 +122,13 @@ if (givenRad && bm) {
     fotEtikett: `Fler ${bank.ord.flera} på nivån ${niva.namn}`, upphov: `${niva.namn}, ${e.l.vad}`, vid: vidEnheterna(d, m.id),
   };
   for (const v of vy.vid) vy.nav.push({ id: `vid-${v.ri + 1}`, namn: v.rubrik });
-  const raderna = par.filter((p) => p.enhet === e.ri).map((p) => p.rad);
   // Följesidan säger vilket av ramens blad som hör till enheten ("modellen är Tankekartan, blad 1"). Då står bladet på
   // enhetens sida, under ramarnas led som rubrik, Modellen, med en knapp som skriver ut bara bladet och en rad som leder
   // till ramens sida (Niclas 2026-10-13: "Visst bör en sida hänvisa till sin modell?", och "Eller ha modellen för under
   // sin sida också under rubriken Modellen?"). Det är samma regel som att veckans material står vid veckan. Säger
-  // följesidan inget blad, eller hör flera ramar till enheten, blir det en rad med länkar till ramarnas sidor.
-  const foljetext = [...e.fore, ...e.efter].flatMap((ri) => ramarna[ri].text ?? []).join(' ');
-  const bladet = (x: Bladrad) => {
-    const nr = foljetext.match(new RegExp(`${x.namn.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}, blad (\\d+)`))?.[1];
-    const b = nr ? x.blad.find((y) => bladKort(x, y) === `Blad ${nr}`) : undefined;
-    return b && nr ? { rad: x, b, nr } : undefined;
-  };
-  const funnet = raderna.length === 1 ? bladet(raderna[0]) : undefined;
+  // följesidan inget blad, eller hör flera ramar till enheten, blir det en rad med länkar till ramarnas sidor. Regeln står
+  // i enhetensBlad (src/lib/bladmaterial.ts), som Ta fram en faktatext också läser.
+  const { raderna, blad: funnet } = bm ? enhetensBlad(d, bm, e, par) : { raderna: [] as Bladrad[], blad: undefined };
   if (bm && funnet) {
     vy.blad = { ...funnet, led: bm.led, sida: ledSida(bm), exempel: harExempel(bm), pdf: utskriftAdress(radensUtskrifter(d, m.id, bm, funnet.rad).blad.get(funnet.b.bild.nr)!) };
     vy.nav.push({ id: 'enhetens-blad', namn: bm.led });

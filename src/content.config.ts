@@ -438,6 +438,11 @@ const stodundervisning = defineCollection({
         innehallstagg: z.string().superRefine((t, ctx) => {
           if (!Object.values(INNEHALLSTAGGAR).some((xs) => xs.some((x) => x.namn === t))) ctx.addIssue({ code: 'custom', message: `Innehållstaggen "${t}" finns inte i standarden. Taggarna i matematik: ${INNEHALLSTAGGAR.Matematik.map((x) => x.namn).join(', ')} (src/lib/standard/index.js).` });
         }).optional(),
+        // Temat som en faktatext hör till (Faktatextsamtal i grupp, metodriggens leverans 2026-10-18 natt, samma fält i riggens
+        // schema): fem texter på en nivå är ett tema, som Vatten, och temat har en lärarhandledning, ramen "Lärarhandledning:
+        // <nivå>, <tema>" (src/lib/handledning.ts). Texten, dess modell och handledningen bär fältet, och Ta fram en
+        // faktatext läser temat där i stället för ur etiketten "Vatten · text 1 av 5" (src/lib/tafram.ts).
+        tema: text.optional(),
         // En litteraturlista (Chambers boksamtal i grupp, Niclas 2026-10-10, metodriggens TILL-SAJTEN 2026-10-12): bilder är en
         // bild per rad, bokens omslag, i en smal första kolumn utan rubrik, med sökvägen i metodens mapp
         // (public/stodundervisning/<id>/, som omslag/bas-01.jpg). bredder är kolumnernas relativa bredd, med bildens kolumn
@@ -842,4 +847,29 @@ const stodundervisning = defineCollection({
   }),
 });
 
-export const collections = { artiklar, bocker, stodundervisning };
+// Databasens matteproblem (K-425, src/lib/matteproblem.ts): en post per problem, som metodriggen gör
+// (out/databas/matteproblem, formen i riggens FRAN-SAJTEN, Nytt 2026-10-18 kväll). Sidan Ta fram ett matteproblem visar
+// posterna efter metodens tio på varje nivå, med nummer 11 och uppåt. Posten är problemet och lösningsförslaget och inget
+// mer; rutan Visa och jämför lösningar och nivåernas färger är metodens. Filnamnet är postens id, och bilderna heter
+// /stodundervisning/matteproblem/<id>-problem.svg, -a.svg och -b.svg.
+const losning = z.strictObject({ namn: text, text, bild: text });
+const matteproblem = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.yaml', base: './src/content/matteproblem' }),
+  schema: z.strictObject({
+    niva: z.enum(['Bas', 'Medel', 'Avancerat']),
+    nr: z.number().int().min(11).max(99),
+    titel: text,
+    innehallstagg: z.enum(INNEHALLSTAGGAR.Matematik.map((t) => t.namn) as [string, ...string[]]),
+    // Källan, i sidfoten: "Idén kommer ur …". Saknas när problemet är riggens eget.
+    kalla: text.optional(),
+    problem: z.strictObject({ text: z.array(text).min(1), fragor: z.array(text).min(1), bild: text }),
+    losningsforslag: z.strictObject({
+      svaret: text, kontroll: text, iden: text, a: losning, b: losning,
+      // Tankevurpan: elevens rader med svaret sist, vad felet är, och frågan som hjälper eleverna att hitta det.
+      c: z.strictObject({ rader: z.array(text).min(1).max(4), om: text, fraga: text }),
+      fragor: z.array(text).min(1),
+    }),
+  }),
+});
+
+export const collections = { artiklar, bocker, stodundervisning, matteproblem };

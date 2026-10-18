@@ -1,0 +1,37 @@
+niva: Medel
+nr: 19
+titel: Minigolfen
+innehallstagg: Algebra
+kalla: Idén kommer ur Nämnaren 2025:2, Problemavdelningen, nr 4477.
+problem:
+  text:
+    - Ali spelar minigolf. På varje bana slår han från 1 till 9 slag, och han får 10 minus antalet slag i poäng för banan. Med 3 slag får han alltså 10 − 3 = 7 poäng. Sammanlagt slog Ali 20 slag och fick 30 poäng. Mira spelar på samma sätt.
+  fragor:
+    - Hur många banor spelade Ali?
+    - Kan Mira få 35 poäng på 15 slag? Och på 20 slag? Visa hur ni vet.
+  bild: En bana för minigolf med ett hinder i mitten, ett hål med en flagga, en boll och en klubba.
+losningsforslag:
+  svaret: Ali spelade 5 banor. Mira kan få 35 poäng på 15 slag, inte på 20.
+  kontroll: "Ali: 20 + 30 = 5 · 10. Mira: 15 + 35 = 5 · 10, men 20 + 35 = 5,5 · 10."
+  iden: Antalet banor avgör summan av slag och poäng, hur Ali än slår.
+  a:
+    namn: pröva med egna slag
+    text: Eleven fördelar 20 slag på 4 och 5 banor och ser att 5 banor ger 30 poäng på flera sätt.
+    bild: "Lösning A, pröva med egna slag. 4 banor: 5 + 5 + 5 + 5 = 20 slag ger 5 + 5 + 5 + 5 = 20 poäng, för få. 5 banor: 4 + 4 + 4 + 4 + 4 = 20 slag ger 6 + 6 + 6 + 6 + 6 = 30 poäng, och andra slag, 2 + 3 + 4 + 5 + 6 = 20, ger också 8 + 7 + 6 + 5 + 4 = 30 poäng. Mira med 15 slag: 5 · 3 = 15 och 5 · 7 = 35. Mira med 20 slag: 5 banor ger 30 poäng och 6 banor 40. Sist står svaret: 5 banor, och Mira kan på 15 slag men inte på 20."
+  b:
+    namn: slag plus poäng
+    text: Eleven ser att slag och poäng blir 10 på varje bana och delar summan för alla banor med 10.
+    bild: "Lösning B, slag plus poäng. En bana är ritad som 10 rutor, 3 grå för slagen och 7 vita för poängen: 3 + 7 = 10. Under står Ali: 20 + 30 = 50 och 50 / 10 = 5 banor. Mira med 15 slag: 15 + 35 = 50 och 50 / 10 = 5 banor, så det går. Mira med 20 slag: 20 + 35 = 55 och 55 / 10 = 5,5, så det går inte. Under Ali står ekvationen 10 · n − 20 = 30 för n banor, och 10 · n = 50, så n = 5. Sist står att det blir 5 banor hur Ali än slår."
+  c:
+    rader:
+      - Varje bana ger 10 poäng.
+      - "Ali: 30 / 10 = 3 banor"
+      - "Mira: 35 / 10 = 3,5, går inte"
+      - "Svar: 3 banor. Mira kan inte."
+    om: Eleven ger varje bana 10 poäng, men varje slag kostar en poäng.
+    fraga: Hur många poäng får Ali på 3 banor om han slår 20 slag?
+  fragor:
+    - Hur väljer eleven slagen i lösning A, och varför prövar hen andra antal slag på 5 banor?
+    - Hur vet eleven i lösning B att slag och poäng blir 10 tillsammans på varje bana?
+    - Var syns det i båda lösningarna att det inte spelar någon roll hur Ali slår?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja för 100 slag och 150 poäng, och varför?

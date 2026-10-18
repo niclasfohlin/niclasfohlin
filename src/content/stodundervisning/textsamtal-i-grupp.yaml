@@ -29,7 +29,7 @@ material:
   - ledtrådsbladet
   - lyssningsbladet
   - kartläggningen
-uppdaterad: 2026-10-03
+uppdaterad: 2026-10-18
 relaterade:
   - boksamtal-i-grupp
   - faktatextsamtal-i-grupp
@@ -37,6 +37,9 @@ relaterade:
   - laslistor-i-grupp
   - ordverkstad-i-grupp
 utkast: false
+centrala:
+  - id: lastexter
+    efterText: urval
 inledning:
   - Textsamtal i grupp lär eleverna att läsa mellan raderna genom att samtala om texter. När människor samtalar blir tänkandet synligt. När en elev säger ”Jag tror att hon vill att de ska stanna, för det står att hon vinkade lite till”, hör de andra hur en läsare tänker, och de kan pröva tanken, bygga vidare på den eller vända den åt ett nytt håll. Eleverna tänker högt, prövar idéer också utanför frågorna och tänker i nya riktningar.
   - Det som samtalet handlar om står ofta inte utskrivet, som hur någon känner sig, varför hen gör som hen gör, var de är eller vad någon egentligen menar. Den som läser mellan raderna märker att något inte står, letar ledtrådar i texten och lägger till det hen redan vet. Det kallas att göra en inferens, och det är det metoden tränar.
@@ -586,7 +589,7 @@ roll:
 urval:
   rubrik: Var hittar du texterna?
   text:
-    - Metodens texter står under Materialet. Varje nivå, Lättläst, Mellan och Avancerad, har femton texter, och varje text står på ett eget blad med frågorna under. Översikten under Lärarens sidor visar vad eleven listar ut i varje text, frågornas slag, svårigheten och om texten har en vändning. Varje text har en egen sida med stoppet, hur du kan tänka högt och två öppna frågor. Välj den text som passar veckans tankesteg. Texterna räcker till ungefär fem veckors pass, och du fyller på med texter ur serien eller egna. Två texter på nivån Avancerad, Kvart i åtta och Samma sak, handlar om en förälder som har det svårt, så ta dem inte samma vecka.
+    - Metodens texter står under Materialet. Varje nivå, Lättläst, Mellan och Avancerad, har femton texter, och varje text står på ett eget blad med frågorna under. Översikten under Lärarens sidor visar vad eleven listar ut i varje text, frågornas slag, svårigheten och om texten har en vändning. Varje text har en egen sida med stoppet, hur du kan tänka högt och två öppna frågor. Välj den text som passar veckans tankesteg. Texterna finns också på sidan Ta fram en lästext. Där väljer du nivå och slag, visar en text i taget stort och skriver ut de texter du vill ha. Texterna räcker till ungefär fem veckors pass, och du fyller på med texter ur serien eller egna. Två texter på nivån Avancerad, Kvart i åtta och Samma sak, handlar om en förälder som har det svårt, så ta dem inte samma vecka.
     - Sedan tar du texter ur serien Mellan raderna av Monica Karlsson och Liselotte Ståhl (Studentlitteratur). Serien består av fyra böcker med kopieringsunderlag. Efter nivån Lättläst passar Mellan raderna lättläst och sedan Vad står det mellan raderna? Efter Mellan passar Mycket mer mellan raderna, och efter Avancerad passar Mellan raderna avancerad. Facit finns hos förlaget eller i boken. Böckernas frågor står utan rubriker. Sortera dem i på, mellan och bortom raderna innan passet, och bestäm stoppet. Skriv sedan hur du tänker högt, med tankestegen och ledtrådar som står före stoppet, och två öppna frågor, som under Lärarens sidor. Byt till en svårare text eller bok när eleverna klarar slutsatsen med mindre stöd. Du kan också skriva egna texter, som tabellen Så skriver du en egen text visar.
   kravText: "Välj en text per pass som uppfyller tre krav:"
   krav:

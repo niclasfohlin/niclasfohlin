@@ -47,7 +47,8 @@ export function enhetensUtskrifter(d: MetodData, id: string, bank: Bank, e: Bank
   return {
     alla: { namn: `${id}-${e.slug}`, titel, delar: bladen.map((ri) => ({ pdf: hel?.namn ?? fil(ri), ram: ri })) },
     ramar: new Map(bladen.map((ri) => [ri, { namn: `${id}-${e.slug}-${slugAv(namn(ri))}`, titel: `${titel}: ${namn(ri).toLowerCase()}`, delar: [{ pdf: fil(ri), ram: ri }] }])),
-    ...(bank.post && e.post !== undefined ? { post: { namn: `${id}-${e.slug}-med-${bank.post.slug}`, titel: `${titel}, med ${bank.post.bestamd}`, delar: [e.ri, e.post].map((ri) => ({ pdf: postfil?.namn ?? fil(ri), ram: ri })) } } : {}),
+    // Har enheten bara postens följesida är det enhetens alla sidor, och då står de i en pdf (alla).
+    ...(bank.post && e.post !== undefined && bank.post.egenFil ? { post: { namn: `${id}-${e.slug}-med-${bank.post.slug}`, titel: `${titel}, med ${bank.post.bestamd}`, delar: bladen.filter((ri) => ri === e.ri || ri === e.post).map((ri) => ({ pdf: postfil?.namn ?? fil(ri), ram: ri })) } } : {}),
   };
 }
 

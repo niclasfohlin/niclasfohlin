@@ -38,6 +38,13 @@ export function lasResurser(poster: MetodPost[]): MetodResurser {
   };
 }
 
+/** Resurserna med fler bilder ur public/, som databasens matteproblem (src/lib/matteproblem.ts), som inte står i någon
+ *  metods fil. */
+export function medBilder(r: MetodResurser, adresser: string[]): MetodResurser {
+  for (const a of adresser) if (!r.bilder.has(a)) r.bilder.set(a, las(a));
+  return r;
+}
+
 // Ritaren läser inga typsnitt från datorn, bara Reservbild (scripts/reservtypsnitt.py), så att reservbilden blir
 // likadan på Windows och på Netlify. Stillbildernas "IBM Plex Sans, Segoe UI, Arial, sans-serif" blir sans-serif.
 const TYPSNITT = join(process.cwd(), 'src/data/typsnitt/Reservbild-Regular.ttf');

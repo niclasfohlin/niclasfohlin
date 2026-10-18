@@ -364,6 +364,11 @@ for (const fil of filer) {
   const rutansText = rutansRamar.map(([i]) => new RegExp(`^ramar\\.ramar\\.${i}\\.text\\.`));
   const rutansRubrik = new Map(rutansRamar.map(([i, r]) => [`ramar.ramar.${i}.rubrik`, norm(String(r.rubrik).replace(/^Lösningsförslagen: /, ''))]));
   const lfRubrik = new Map((d.ramar?.ramar ?? []).flatMap((r, i) => { const m = String(r.rubrik).match(/^Lösningsförslag: ([^,]+), (problem \d+), (.+)$/); return m ? [[`ramar.ramar.${i}.rubrik`, [norm(`${m[1]} ${m[2]}`), norm(m[3])]]] : []; }));
+  // Lärarhandledningarna (src/lib/handledning.ts, K-434). Den gemensamma ramen, "Lärarhandledningarna: <rubrik>", ritas
+  // på varje handledning, och dess rubrik och text säger det till den som läser metodens fil: de står varken i Word eller
+  // i utskriften. En handlednings rubrik står i två delar: etiketten med nivån ("BAS · LÄRARHANDLEDNING") och temat.
+  const gemensamText = (d.ramar?.ramar ?? []).flatMap((r, i) => (/^Lärarhandledningarna: /.test(String(r.rubrik)) ? [new RegExp(`^ramar\\.ramar\\.${i}\\.(rubrik$|text\\.)`)] : []));
+  const hlRubrik = new Map((d.ramar?.ramar ?? []).flatMap((r, i) => { const m = String(r.rubrik).match(/^Lärarhandledning: ([^,]+), (.+)$/); return m ? [[`ramar.ramar.${i}.rubrik`, [norm(`${m[1]} lärarhandledning`), norm(r.tema ?? m[2])]]] : []; }));
   // Faktatextens bilder (på platsen "Bild: <namn>" i texten), bladen (rubriken börjar med "Blad: ", src/lib/pabordet.ts)
   // och bilden som eleven ser på (elev i src/data/pabordet.json) står utan rubriken På bordet, som problemens bilder:
   // rubriken och texten står i textalternativet, och de prövas där.
@@ -401,7 +406,7 @@ for (const fil of filer) {
   for (const { vag, text } of texter(d, '', [])) {
     const ri = vag.match(/^ramar\.ramar\.(\d+)\./);
     if (!ram(ri ? Number(ri[1]) : -1)) continue;
-    if (lastextRader.some((r) => r.test(vag)) || rutansText.some((r) => r.test(vag)) || utanUtskrift.has(vag)) continue;
+    if (lastextRader.some((r) => r.test(vag)) || rutansText.some((r) => r.test(vag)) || gemensamText.some((r) => r.test(vag)) || utanUtskrift.has(vag)) continue;
     // Strukturens bild prövas ovan, i textalternativet.
     const pb = vag.match(/^pabordet\.(\d+)\.(rubrik|text)$/);
     if (pb && (strukturBilder.has(d.pabordet[Number(pb[1])].nr) || problemBilder.has(d.pabordet[Number(pb[1])].nr))) continue;
@@ -423,8 +428,8 @@ for (const fil of filer) {
       provade++;
       continue;
     }
-    if (losningsRubrik.has(vag) || lfRubrik.has(vag)) {
-      const delar = losningsRubrik.get(vag) ?? lfRubrik.get(vag);
+    if (losningsRubrik.has(vag) || lfRubrik.has(vag) || hlRubrik.has(vag)) {
+      const delar = losningsRubrik.get(vag) ?? lfRubrik.get(vag) ?? hlRubrik.get(vag);
       if (!delar.every((x) => word.includes(x)) || !delar.every((x) => utskrift.includes(x))) ut.push(`    ${vag}: bladets titel eller nivå saknas i ${[!delar.every((x) => word.includes(x)) && 'Word-filerna', !delar.every((x) => utskrift.includes(x)) && 'utskriften'].filter(Boolean).join(' och ')}`);
       provade++;
       continue;
@@ -452,7 +457,10 @@ for (const fil of filer) {
   const bankfil = bankfilerna.length ? { namn: bankfilerna.map((f) => f.namn).join(' och '), oversikter: bankfilerna.flatMap((f) => f.oversikter ?? []), ramar: bankfilerna.flatMap((f) => f.ramar ?? []) } : undefined;
   if (bankfil) {
     const mappen = join(rot, 'dist/stodundervisning', id);
-    const enhetsHtml = readdirSync(mappen, { withFileTypes: true }).filter((x) => x.isDirectory() && !['lathund', 'serier'].includes(x.name) && existsSync(join(mappen, x.name, 'index.html'))).map((x) => readFileSync(join(mappen, x.name, 'index.html'), 'utf8')).join('\n');
+    // Enheternas sidor, och sidorna under dem: temanas sidor på Ta fram en faktatext (texter/<tema>), där lärarhandledningen
+    // står.
+    const sidor = readdirSync(mappen, { withFileTypes: true }).filter((x) => x.isDirectory() && !['lathund', 'serier'].includes(x.name)).flatMap((x) => [join(mappen, x.name), ...readdirSync(join(mappen, x.name), { withFileTypes: true }).filter((y) => y.isDirectory()).map((y) => join(mappen, x.name, y.name))]);
+    const enhetsHtml = sidor.filter((x) => existsSync(join(x, 'index.html'))).map((x) => readFileSync(join(x, 'index.html'), 'utf8')).join('\n');
     const bxmlDelar = [];
     const bdelar = [];
     for (const f of bankfilerna) {

@@ -9,9 +9,13 @@
 // utskriften av allt: på skärmen finns de på enheternas sidor, och utskriften har allt, som Word-filen med
 // allt (Niclas 2026-10-10: "Om skriv ut hela beskrivningen i alla är verkligen att skriva ut allt bör denna också vara
 // det"). I utskriften står nivån utfälld, utan länkar och filer.
+// Ett tema med lärarhandledning (src/lib/handledning.ts) har en rad före nivåns filer: temats sida, där handledningen
+// står, och handledningens filer.
 import MetodTabell from './MetodTabell.astro';
 import Bankfiler from './Bankfiler.astro';
-import { enhetAdress, enhetICell, type Bank, type Bankniva } from '../lib/bank';
+import Filval from './Filval.astro';
+import { enhetAdress, enhetICell, slugAv, type Bank, type Bankniva } from '../lib/bank';
+import { handledningensFil } from '../lib/handledning';
 import { ejBryt } from '../lib/metod';
 import type { MetodData } from '../lib/metod';
 interface Props { d: MetodData; id: string; bank: Bank; niva: Bankniva; farger: Record<string, string>; ankare: (ri: number) => string; friKlass: (t: { kolumner: string[]; rader: string[][] }) => string }
@@ -22,6 +26,7 @@ const repliker = (s: string) => s.split(/(”[^”]*”)/).filter(Boolean).map((
 const antal = (k: number) => `${k === 1 ? 'ett' : k} ${k === 1 ? bank.ord.en : bank.ord.flera}`;
 const ram = n.oversikt !== undefined ? ramarna[n.oversikt] : undefined;
 const numrerade = n.enheter.filter((e) => e.nr !== undefined).length;
+const teman = n.enheter.filter((e) => e.handledning !== undefined && e.tema).map((e) => ({ tema: e.tema!, fil: handledningensFil(id, { tema: e.tema! }), sida: `/stodundervisning/${id}/${bank.ord.slug}/${slugAv(e.tema!)}` }));
 ---
 <details class:list={['bank-niva', { 'utan-utskrift': !ram }]} id={ram ? `ram-${n.oversikt! + 1}` : `niva-${n.slug}`} style={`--niva: ${farger[n.namn]}`}>
   <summary>
@@ -56,6 +61,12 @@ const numrerade = n.enheter.filter((e) => e.nr !== undefined).length;
     {ram?.oversikt && n.enheter.some((e) => !ram.oversikt!.rader.some((r) => enhetICell(n, r[0] ?? '') === e)) && (
       <p class="m-efter bank-fler">Fler på nivån: {n.enheter.filter((e) => !ram.oversikt!.rader.some((r) => enhetICell(n, r[0] ?? '') === e)).map((e, i) => <>{i > 0 && ', '}<a href={enhetAdress(id, e)}>{e.l.titel}</a></>)}</p>
     )}
+    {teman.map((x) => (
+      <div class="bank-filer bank-handledning">
+        <p class="bank-filer-rubrik">Lärarhandledning: <a href={`${x.sida}#lararhandledning`}>{x.tema}</a></p>
+        <ul class="filrader bankfiler-niva"><li><span class="filrubrik">Två sidor för hela klassen</span> <Filval fil={`/stodundervisning/${x.fil}`} namn={x.fil} rubrik={`Lärarhandledning: ${x.tema}`} statistik={`${d.titel}: lärarhandledningen till ${x.tema}`} pdf pdfTitel="Ladda ner som pdf" utanDrive liten /></li></ul>
+      </div>
+    ))}
     <div class="bank-filer">
       <p class="bank-filer-rubrik">{n.namn} att skriva ut</p>
       <Bankfiler id={id} titel={d.titel} bank={bank} niva={n} farger={farger} />

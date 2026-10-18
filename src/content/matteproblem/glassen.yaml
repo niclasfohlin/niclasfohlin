@@ -1,0 +1,37 @@
+niva: Bas
+nr: 11
+titel: Glassen
+innehallstagg: Sannolikhet och statistik
+kalla: Idén kommer ur Känguru 2023, Ecolier nr 19.
+problem:
+  text:
+    - Barnen på fritids får en glass var. Varje barn väljer strut eller bägare, och en kula choklad eller en kula jordgubb. 7 barn väljer strut och 5 barn väljer bägare. 8 barn väljer choklad.
+  fragor:
+    - Hur många barn väljer jordgubb?
+    - Hur många barn kan ha valt choklad i strut? Hitta alla möjliga antal.
+  bild: En strut och en bägare med en glasskula var, och två glasskulor, en med choklad och en med jordgubb.
+losningsforslag:
+  svaret: "4 barn väljer jordgubb. Choklad i strut: 3, 4, 5, 6 eller 7 barn."
+  kontroll: "8 + 4 = 12 = 7 + 5. Choklad i strut + bägare: 3 + 5 = 8 och 7 + 1 = 8."
+  iden: "Varje barn hör till två grupper: strut eller bägare, och choklad eller jordgubb."
+  a:
+    namn: rita och byta kulor
+    text: Eleven ritar 12 glassar med 8 chokladkulor och byter kulor mellan strut och bägare, en chokladkula i taget.
+    bild: "Lösning A, rita och byta kulor. Eleven ritar 7 strutar och 5 bägare, och de 8 fyllda kulorna är choklad. Först har alla 7 strutar och en bägare choklad: 7 i strut. Eleven byter en chokladkula i strut mot en jordgubbskula i bägare, en i taget. Sist har 3 strutar och alla 5 bägare choklad: 3 i strut. Jordgubb: 12 − 8 = 4 barn. Choklad i strut: 7, 6, 5, 4 eller 3."
+  b:
+    namn: korstabell med summor
+    text: Eleven för in summorna i en korstabell. Med bara 5 bägare hamnar minst 8 − 5 = 3 chokladkulor i strut.
+    bild: "Lösning B, korstabell med summor. Raderna är strut, bägare och alla, och kolumnerna choklad, jordgubb och alla. Strut 3 och 4, alla 7. Bägare 5 och 0, alla 5. Alla 8, 4 och 12. Bredvid: 7 + 5 = 12 barn och 12 − 8 = 4 jordgubb. Under: strut med choklad högst 7, bägare med choklad högst 5, så strut med choklad minst 8 − 5 = 3. Svar: 3, 4, 5, 6 eller 7."
+  c:
+    rader:
+      - "Jordgubb: 12 − 8 = 4 barn"
+      - 7 strutar, så choklad i strut
+      - kan vara 0, 1, 2 … eller 7.
+      - "Svar: 4 barn, och 0 till 7."
+    om: Eleven glömmer att bägarna bara är 5. Med färre än 3 i strut räcker bägarna inte till all choklad.
+    fraga: Var hamnar de 8 chokladkulorna om 1 strut har choklad?
+  fragor:
+    - Hur byter eleven kulor i lösning A, och varför stannar hen vid 3?
+    - Varför räknar eleven 8 − 5 i lösning B?
+    - Var syns det i båda lösningarna att varje barn hör till två grupper?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja om hela skolan fick glass, och varför?

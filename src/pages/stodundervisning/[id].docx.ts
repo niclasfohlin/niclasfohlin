@@ -1,15 +1,17 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { packaWord } from '../../lib/wordpaket';
-import { publicerade } from '../../lib/innehall';
-import { bankDokument, bladDokument, hemsidaDokument, lektionskortDokument, metodDokument, passDokument, ramarDokument, DOCX_TYP } from '../../lib/metoddocx';
+import { matteproblemenPaSidan, publicerade } from '../../lib/innehall';
+import { matteproblemfiler, type Matteproblemfil } from '../../lib/matteproblem';
+import { bankDokument, bladDokument, hemsidaDokument, lektionskortDokument, matteproblemDokument, metodDokument, passDokument, ramarDokument, DOCX_TYP } from '../../lib/metoddocx';
 import { byggSerier, serieKoppling } from '../../lib/serie';
 import { bankAv, bankfiler } from '../../lib/bank';
+import { handledningensFil, lararhandledningar } from '../../lib/handledning';
 import { metodensNivamaterial, nivafiler } from '../../lib/nivamaterial';
 import { bladfiler, metodensBladmaterial } from '../../lib/bladmaterial';
 import { ovrigtfil } from '../../lib/ovrigt';
 import { harMaterial } from '../../lib/material';
 import { harLathund } from '../../lib/metod';
-import { lasResurser, medReservbilder } from '../../lib/metodresurser';
+import { lasResurser, medBilder, medReservbilder } from '../../lib/metodresurser';
 import { allaLektionskortStam, metodensLektionskort, type Lektionskort } from '../../lib/lektionskort';
 import { lasLektionskort } from '../../lib/lektionskortdata';
 import { site } from '../../data/site';
@@ -35,12 +37,18 @@ import { site } from '../../data/site';
 // (lektionskortDokument). Deras pdf:er är det knapparna öppnar.
 // Kontraktet och schemat (hem.kontrakt, hem.schema, TIL i grupp) får /stodundervisning/<id>-kontrakt.docx och
 // <id>-schema.docx, ett A4 var (hemsidaDokument), vars pdf:er utskriftsknapparna i Materialet och i Hem och skola öppnar.
+// Ta fram ett matteproblems filer (src/lib/matteproblem.ts) är /stodundervisning/matteproblem-<nivå>.docx och
+// -med-losningsforslag.docx: nivåns alla problem, metodens och databasens (matteproblemDokument).
+// Ett temas lärarhandledning (src/lib/handledning.ts) är /stodundervisning/<id>-lararhandledning-<tema>.docx, två A4
+// (ramarDokument med handledningens ram).
 export const getStaticPaths: GetStaticPaths = async () => {
   const metoder = await publicerade('stodundervisning');
+  const mp = await matteproblemenPaSidan();
+  const matteproblemens = mp ? matteproblemfiler(mp.alla).map((f) => ({ params: { id: f.namn }, props: { m: { ...mp.metod, serie: undefined }, matteproblemfil: f } })) : [];
   const serier = byggSerier(metoder);
   // Lektionernas kort i lektionsbankens ordning, per serie.
   const korten = (serie: string): Lektionskort[] => (serier.get(serie)?.lektioner ?? []).flatMap((l) => { const lektion = metoder.find((x) => x.id === l.id); return lektion ? metodensLektionskort(lektion.data, lektion.id) : []; });
-  return metoder.flatMap((m) => {
+  return [...matteproblemens, ...metoder.flatMap((m) => {
     const bank = bankAv(m.data);
     const nm = metodensNivamaterial(m.data);
     const bm = metodensBladmaterial(m.data, m.id);
@@ -57,8 +65,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
       ...(bm ? bladfiler(m.id, bm).map((f) => ({ params: { id: f.namn }, props: { m: { ...m, serie: undefined }, ...(f.slag === 'blad' ? { bladfil: { bilder: f.bilder, rubrik: f.rubrik, huvud: f.huvud } } : { nivafil: { ramar: f.ramar, rubrik: f.rubrik, huvud: f.huvud, blad: 'ifyllda' as const } }) } })) : []),
       ...(ovrigt ? [{ params: { id: ovrigt.namn }, props: { m: { ...m, serie: undefined }, nivafil: { ramar: ovrigt.ramar, rubrik: ovrigt.rubrik, huvud: ovrigt.huvud } } }] : []),
       ...(bank ? bankfiler(m.id, bank).map((f) => ({ params: { id: f.namn }, props: { m: { ...m, serie: undefined }, bankfil: { niva: f.niva?.namn, medFoljesidor: f.medFoljesidor, rubrik: f.rubrik } } })) : []),
+      ...[...lararhandledningar(m.data.ramar?.ramar ?? []).values()].map((h) => ({ params: { id: handledningensFil(m.id, h) }, props: { m: { ...m, serie: undefined }, nivafil: { ramar: [h.ri], rubrik: `Lärarhandledning: ${h.tema}`, huvud: h.niva } } })),
     ];
-  });
+  })];
 };
 
 export const GET: APIRoute = async ({ props }) => {
@@ -68,7 +77,11 @@ export const GET: APIRoute = async ({ props }) => {
   const nivafil = props.nivafil as { ramar: number[]; rubrik: string; huvud: string; blad?: 'alla' | 'ifyllda' | 'inga' } | undefined;
   const bladfil = props.bladfil as { bilder: number[]; rubrik: string; huvud: string } | undefined;
   const kortlista = props.kortlista as Lektionskort[] | undefined;
-  const buffert = await packaWord(await medReservbilder((png) => (props.passet
+  const matteproblemfil = props.matteproblemfil as Matteproblemfil | undefined;
+  if (matteproblemfil) medBilder(resurser, matteproblemfil.poster.flatMap((p) => [p.bild.adress, ...p.lf.losningar.map((l) => l.bild.adress)]));
+  const buffert = await packaWord(await medReservbilder((png) => (matteproblemfil
+    ? matteproblemDokument(props.m, matteproblemfil, { bas: site.url, resurser: { ...resurser, png } })
+    : props.passet
     ? passDokument(props.m, { bas: site.url })
     : props.hemsida
     ? hemsidaDokument(props.m, props.hemsida as 'kontrakt' | 'schema', { bas: site.url })

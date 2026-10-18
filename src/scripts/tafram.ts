@@ -1,17 +1,20 @@
 // Ta fram ur en bank i webbläsaren (src/components/TaFram.astro, src/lib/tafram.ts). Raderna står i sidan; datafilen med
 // texterna och utskrifterna hämtas i bakgrunden när sidan är klar och väntas in vid Visa stort och utskriften, så att
-// sidan går att använda direkt. Listan att skriva ut och slumpen är desamma som på Ta fram en aktivitet: en bock på
-// varje post, listan bredvid på en bred skärm och i en rad längst ned i telefonen, och en post kommer inte fram igen
-// förrän urvalets alla har varit framme. Det som sparas i webbläsaren: nivån, taggen, det som har visats och listan.
-// Lösningsförslaget i Visa stort ritas av samma funktion som på problemets sida i metoden (src/lib/losningsforslag.ts).
-import { dra, el, lagring } from './kortbanken';
+// sidan går att använda direkt. Listan att skriva ut är densamma som på Ta fram en aktivitet: en bock på varje post, och
+// listan bredvid på en bred skärm och i en rad längst ned i telefonen. Läraren bläddrar och väljer själv; sidan tar inte
+// fram någon post på måfå (Niclas 2026-10-18: "Man får bläddra bland dem och sortera sedan välja"). Det som sparas i
+// webbläsaren: nivån, taggen och listan. Lösningsförslaget i Visa stort ritas av samma funktion som på problemets sida i
+// metoden (src/lib/losningsforslag.ts).
+import { el, lagring } from './kortbanken';
 import { ettkortLank, flerakortKnapp } from './pdfutskrift';
 import { hamtplan, type PostUtskrift } from '../lib/standard/index.js';
 import { losningsforslagHtml, losningsstegen, losningsstegHtml, type LosningsforslagVy } from '../lib/losningsforslag';
 
 // Lösningsförslaget står i datafilen utan problemet, som posten redan har, och rutan står en gång (taFramData).
 type Lf = Omit<LosningsforslagVy, 'problem' | 'ruta'>;
-type Post = { id: string; niva: string; nivaSlug: string; nr: number; titel: string; tagg?: string; sida: string; losning?: string; bild: { adress: string; alt: string }; stycken: string[]; fragor: string[]; utskrift: { post: PostUtskrift; med: PostUtskrift }; losningsforslag?: Lf };
+type Post = { id: string; niva: string; nivaSlug: string; nr: number; titel: string; taggar?: string[]; sida?: string; losning?: string; bild?: { adress: string; alt: string }; stycken: string[]; fragor: string[]; utskrift: { post: PostUtskrift; med: PostUtskrift }; losningsforslag?: Lf; html?: string; modell?: Modell };
+// Faktatextens modell (src/lib/tafram.ts, TaFramPost.modell): bladet att visa bredvid texten och skriva ut.
+type Modell = { namn: string; blad: string; sida: string; bild: { adress: string; alt: string }; bildMatt: { bredd: number; hojd: number }; utskrift: PostUtskrift };
 type Data = { poster: Post[]; filer: Record<string, { adress: string; byte: number }>; nivaer: { namn: string; slug: string; farg: string; antal: number }[]; losningsruta?: LosningsforslagVy['ruta'] };
 
 const sida = document.querySelector<HTMLElement>('.tafram')!;
@@ -41,12 +44,16 @@ const nivaer = [...sida.querySelectorAll<HTMLElement>('.tf-niva')];
 const rader = [...sida.querySelectorAll<HTMLLIElement>('.tf-post')];
 const rad = new Map(rader.map((r) => [r.id, r]));
 const nivaAv = (r: HTMLElement) => r.closest<HTMLElement>('.tf-niva')!;
-const namnAv = (id: string) => { const r = rad.get(id)!; return { nr: r.dataset.nr!, titel: r.dataset.titel!, niva: nivaAv(r).dataset.nivanamn!, farg: nivaAv(r).style.getPropertyValue('--niva') }; };
+// Numret och titeln står i radens rubrik (TaFramRad.astro): numret i .tf-nr och titeln efter det.
+const rubrikAv = (r: HTMLElement) => { const h = r.querySelector('.tf-titel')!; const nr = h.querySelector('.tf-nr')!.textContent!.trim(); return { nr, titel: h.textContent!.trim().slice(nr.length).trim() }; };
+const namnAv = (id: string) => { const r = rad.get(id)!; return { ...rubrikAv(r), niva: nivaAv(r).dataset.nivanamn!, farg: nivaAv(r).style.getPropertyValue('--niva') }; };
 const nivaKnappar = [...sida.querySelectorAll<HTMLButtonElement>('.tf-val .sk-niva')];
 const taggKnappar = [...sida.querySelectorAll<HTMLButtonElement>('.tf-val .tf-tagg')];
+// En post kan ha flera taggar, som en lästexts två slag: raden bär dem i data-taggar.
+const harTagg = (r: HTMLElement, tagg: string) => (r.dataset.taggar ?? '').split(' ').includes(tagg);
 
-type Sparat = { niva?: string; tagg: string; sedda: string[]; bockade: string[] };
-const { varde: sparat, spara } = lagring<Sparat>(`tafram:${metod}/${led}`, { tagg: '', sedda: [], bockade: [] });
+type Sparat = { niva?: string; tagg: string; bockade: string[] };
+const { varde: sparat, spara } = lagring<Sparat>(`tafram:${metod}/${led}`, { tagg: '', bockade: [] });
 sparat.bockade = sparat.bockade.filter((id) => rad.has(id));
 // Nivån är en av nivåerna eller alla (Niclas 2026-10-18: "Vill ha en Alla också i nivån").
 const giltigNiva = (n?: string) => n === 'alla' || nivaer.some((x) => x.dataset.niva === n);
@@ -59,35 +66,38 @@ for (const r of rader) {
   const bock = el('button', 'tf-bock') as HTMLButtonElement;
   bock.type = 'button';
   bock.setAttribute('aria-pressed', 'false');
-  bock.setAttribute('aria-label', `${r.dataset.titel} i listan att skriva ut`);
+  bock.setAttribute('aria-label', `${rubrikAv(r).titel} i listan att skriva ut`);
   bock.innerHTML = BOCK;
   r.append(bock);
 }
 
-// Taggen i varje rad blir en knapp som visar nivåns poster med samma tagg, som taggen på brainbreakkortet.
-for (const t of sida.querySelectorAll<HTMLElement>('.tf-radtagg')) {
-  const b = el('button', 'tf-radtagg', t.textContent ?? '') as HTMLButtonElement;
+// Taggarna i varje rad blir knappar som visar nivåns poster med samma tagg, som taggen på brainbreakkortet, i taggens färg.
+for (const r of rader) [...r.querySelectorAll<HTMLElement>('.tf-radtagg')].forEach((t, i) => {
+  const b = el('button', t.className, t.textContent ?? '') as HTMLButtonElement;
   b.type = 'button';
-  b.dataset.tagg = t.dataset.tagg;
+  // Chipen står i samma ordning som radens taggar (data-taggar).
+  b.dataset.tagg = (r.dataset.taggar ?? '').split(' ')[i];
   b.title = `Visa ${ord.alla} i ${t.textContent} på nivån`;
   b.addEventListener('click', () => { valjTagg(b.dataset.tagg!); $('tf-poster').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); });
   t.replaceWith(b);
-}
+});
 
 function visa() {
   const alla = sparat.niva === 'alla';
   const iNivan = (r: HTMLElement) => alla || nivaAv(r).dataset.niva === sparat.niva;
-  const finns = (tagg: string) => rader.some((r) => iNivan(r) && r.dataset.tagg === tagg);
+  const finns = (tagg: string) => rader.some((r) => iNivan(r) && harTagg(r, tagg));
   if (sparat.tagg && !finns(sparat.tagg)) sparat.tagg = '';
   let synliga = 0;
-  for (const r of rader) { const med = iNivan(r) && (!sparat.tagg || r.dataset.tagg === sparat.tagg); r.hidden = !med; if (med) synliga++; }
+  for (const r of rader) { const med = iNivan(r) && (!sparat.tagg || harTagg(r, sparat.tagg)); r.hidden = !med; if (med) synliga++; }
+  // Ett tema syns när någon av dess texter syns.
+  for (const tema of sida.querySelectorAll<HTMLElement>('.tf-tema')) tema.hidden = ![...tema.querySelectorAll<HTMLElement>('.tf-post')].some((r) => !r.hidden);
   // En nivå syns när den är vald, eller med Alla när den har poster som syns; med Alla står rubrikerna kvar.
   for (const n of nivaer) n.hidden = alla ? !rader.some((r) => !r.hidden && nivaAv(r) === n) : n.dataset.niva !== sparat.niva;
   sida.classList.toggle('tf-alla', alla);
   for (const b of nivaKnappar) { const pa = b.dataset.niva === sparat.niva; b.setAttribute('aria-pressed', String(pa)); b.classList.toggle('senast', pa); }
   for (const b of taggKnappar) {
     const t = b.dataset.tagg!;
-    const n = rader.filter((r) => iNivan(r) && (!t || r.dataset.tagg === t)).length;
+    const n = rader.filter((r) => iNivan(r) && (!t || harTagg(r, t))).length;
     b.querySelector('[data-antal]')!.textContent = String(n);
     b.hidden = !!t && n === 0;
     b.setAttribute('aria-pressed', String(t === sparat.tagg));
@@ -138,7 +148,7 @@ function visaBockar() {
     visaKnapp.type = 'button';
     visaKnapp.append(el('span', 'ak-nr', `${p.niva} ${p.nr}`), ` · ${p.titel}`);
     visaKnapp.title = `Visa ${p.titel} stort`;
-    visaKnapp.addEventListener('click', () => { stang(); void visaStort(id, false); });
+    visaKnapp.addEventListener('click', () => { stang(); void visaStort(id); });
     const bort = el('button', 'ak-valt-bort', '×') as HTMLButtonElement;
     bort.type = 'button';
     bort.setAttribute('aria-label', `Ta bort ${p.titel} ur listan`);
@@ -202,27 +212,52 @@ let stortPost: Post | undefined;
 let losningsruta: LosningsforslagVy['ruta'] | undefined;
 // Bladet ur posten: problemet, bilden och frågorna står i posten, och rutan en gång i datafilen.
 const bladet = (p: Post): LosningsforslagVy => ({ ...p.losningsforslag!, problem: { stycken: p.stycken, fragor: p.fragor, bild: p.bild }, ruta: losningsruta ?? { rubrik: '', punkter: [] } });
+// Det som visas bredvid posten: lösningsförslaget till ett problem, eller modellen till en faktatext (K-434; Niclas
+// 2026-10-18 natt: "En text i fakta ska ha sin modell likt problem har sin lösning").
+const harBredvid = (p?: Post) => !!(p?.losningsforslag || p?.modell);
+const bredvidNamn = (p?: Post) => (p?.modell && !p.losningsforslag ? 'modellen' : foljeEn);
+function modellFigur(m: Modell): HTMLElement {
+  const fig = el('figure', 'tf-modell');
+  const img = document.createElement('img');
+  img.src = m.bild.adress;
+  img.alt = m.bild.alt;
+  img.width = m.bildMatt.bredd;
+  img.height = m.bildMatt.hojd;
+  const text = el('figcaption');
+  const sidan = el('a', 'tf-modell-sida', `${m.namn}, ${m.blad.charAt(0).toLowerCase()}${m.blad.slice(1)}`) as HTMLAnchorElement;
+  sidan.href = m.sida;
+  const skrivut = el('a', 'knapp sekundar', 'Skriv ut modellen') as HTMLAnchorElement;
+  skrivut.href = m.utskrift.adress;
+  skrivut.target = '_blank';
+  skrivut.rel = 'noopener';
+  skrivut.addEventListener('click', () => raknaHandelse(`utskrift:${metod}/${led}:modell`, `${titel}: utskrift av en modell`));
+  text.append(sidan, skrivut);
+  fig.append(img, text);
+  return fig;
+}
 // I stegen A, B, A och B och C finns ingen utskrift som är det som syns, så knappen står bara vid problemet
 // (granskningen 2026-10-18: samma steg skrev ut olika material beroende på vad som visades före).
 function skrivutLank() {
   const skrivut = $<HTMLAnchorElement>('tf-stort-skrivut');
   if (!stortPost || steg > 0) { skrivut.hidden = true; return; }
-  const med = !losningYta.hidden;
+  // Med lösningsförslaget skrivs det ut med problemet; modellen har sin egen knapp i rutan bredvid.
+  const med = !losningYta.hidden && !!stortPost.losningsforslag;
   skrivut.href = (med ? stortPost.utskrift.med : stortPost.utskrift.post).adress;
   skrivut.textContent = med ? `Skriv ut ${ord.bestamd} och ${foljeEn}` : `Skriv ut ${ord.bestamd}`;
   skrivut.hidden = false;
 }
 function visaLosning(pa: boolean) {
-  const lf = stortPost?.losningsforslag;
-  const visas = pa && !!lf;
-  if (visas && losningYta.dataset.id !== stortPost!.id) {
-    losningYta.innerHTML = losningsforslagHtml(bladet(stortPost!), { farg: namnAv(stortPost!.id).farg, rubrik: 'h2', utanProblem: true });
-    losningYta.dataset.id = stortPost!.id;
+  const p = stortPost;
+  const visas = pa && harBredvid(p);
+  if (visas && losningYta.dataset.id !== p!.id) {
+    if (p!.losningsforslag) losningYta.innerHTML = losningsforslagHtml(bladet(p!), { farg: namnAv(p!.id).farg, rubrik: 'h2', utanProblem: true });
+    else losningYta.replaceChildren(modellFigur(p!.modell!));
+    losningYta.dataset.id = p!.id;
   }
   losningYta.hidden = !visas;
   dialog.classList.toggle('med-losning', visas);
   losningKnapp.setAttribute('aria-pressed', String(visas));
-  losningKnapp.textContent = visas ? `Dölj ${foljeEn}` : `Visa ${foljeEn}`;
+  losningKnapp.textContent = `${visas ? 'Dölj' : 'Visa'} ${bredvidNamn(p)}`;
   skrivutLank();
 }
 // Stegen på helskärm (Niclas 2026-10-18, med metodriggens ordning): problemet, lösning A, lösning B, A och B, och C.
@@ -247,21 +282,38 @@ function visaSteg(n: number) {
     visning.innerHTML = losningsstegHtml(lf!, steg);
     if (!stegRaknade) { stegRaknade = true; raknaHandelse(`${led}:${metod}:losningarna`, `${titel}: lösningarna på helskärm`); }
   } else visning.replaceChildren();
-  losningKnapp.hidden = !lf || iSteg;
+  losningKnapp.hidden = !harBredvid(stortPost) || iSteg;
   skrivutLank();
   dialog.scrollTop = 0;
 }
 for (const b of stegKnappar) b.addEventListener('click', () => visaSteg(Number(b.dataset.steg)));
-// Piltangenterna och en bläddrares knappar (Page Up och Page Down) byter steg, som i en presentation.
+// Piltangenterna och en bläddrares knappar (Page Up och Page Down) byter steg, som i en presentation, och utan steg byter
+// de post.
 dialog.addEventListener('keydown', (e) => {
-  if (!stortPost?.losningsforslag || e.altKey || e.ctrlKey || e.metaKey) return;
+  if (!stortPost || e.altKey || e.ctrlKey || e.metaKey) return;
   const fram = e.key === 'ArrowRight' || e.key === 'PageDown';
   const bak = e.key === 'ArrowLeft' || e.key === 'PageUp';
   if (!fram && !bak) return;
   e.preventDefault();
+  if (!stortPost.losningsforslag) { bladdra(fram ? 1 : -1); return; }
   visaSteg(steg + (fram ? 1 : -1));
   stegKnappar[steg]?.focus();
 });
+// Bläddra: förra och nästa post bland raderna som syns, i radernas ordning, med det som visas bredvid kvar.
+const synligaRader = () => rader.filter((r) => !r.hidden && !nivaAv(r).hidden);
+function bladdra(steget: 1 | -1) {
+  const synliga = synligaRader();
+  const nasta = synliga[synliga.findIndex((r) => r.id === stortId) + steget];
+  if (nasta) void visaStort(nasta.id, !losningYta.hidden);
+}
+function visaBladdra() {
+  const synliga = synligaRader();
+  const i = synliga.findIndex((r) => r.id === stortId);
+  $<HTMLButtonElement>('tf-forra').disabled = i <= 0;
+  $<HTMLButtonElement>('tf-nasta').disabled = i < 0 || i >= synliga.length - 1;
+}
+$('tf-forra').addEventListener('click', () => bladdra(-1));
+$('tf-nasta').addEventListener('click', () => bladdra(1));
 
 losningKnapp.addEventListener('click', () => {
   const pa = !!losningYta.hidden;
@@ -272,25 +324,41 @@ losningKnapp.addEventListener('click', () => {
   if (!matchMedia('(min-width: 64rem)').matches) losningYta.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
 });
 
-async function visaStort(id: string, franTaFram: boolean, medLosning = false) {
+async function visaStort(id: string, medLosning = false) {
   const r = rad.get(id)!;
   const p = namnAv(id);
   stortId = id;
+  visaBladdra();
   const oppna = !dialog.open;
   if (oppna) franFokus = document.activeElement as HTMLElement | null;
-  const antal = rader.filter((x) => nivaAv(x) === nivaAv(r)).length;
-  const tagg = r.dataset.tagg ? r.querySelector('.tf-radtagg')?.textContent : '';
-  $('tf-stort-etikett').textContent = `${p.niva} · ${ord.en} ${p.nr} av ${antal}${tagg ? ` · ${tagg}` : ''}`;
+  // Numret av nivåns poster, eller av temats när posten står i ett tema.
+  const tema = r.dataset.tema;
+  const antal = rader.filter((x) => nivaAv(x) === nivaAv(r) && x.dataset.tema === tema).length;
+  const taggar = [...r.querySelectorAll('.tf-radtagg')].map((x) => x.textContent).join(' · ');
+  $('tf-stort-etikett').textContent = `${p.niva}${tema ? ` · ${tema}` : ''} · ${ord.en} ${p.nr} av ${antal}${taggar ? ` · ${taggar}` : ''}`;
   $('tf-stort-etikett').style.setProperty('--niva', p.farg);
   $('tf-stort-sida').style.setProperty('--bok-niva', p.farg);
   $('tf-stort-titel').textContent = p.titel;
+  // Bilden är radens, när posten har en; en lästext står utan, och texten får då hela bredden.
   const bild = $<HTMLImageElement>('tf-stort-bild');
-  bild.src = r.querySelector<HTMLImageElement>('.tf-bild')!.getAttribute('src')!;
+  const radbild = r.querySelector<HTMLImageElement>('.tf-bild');
+  $('tf-stort-bildrad').hidden = !radbild;
+  dialog.classList.toggle('utan-bild', !radbild);
+  if (radbild) bild.src = radbild.getAttribute('src')!; else bild.removeAttribute('src');
   bild.alt = '';
   $('tf-stort-text').replaceChildren(el('p', 'tf-stort-vantar', 'Hämtar …'));
   $('tf-stort-fraga').replaceChildren();
-  $('tf-stort-nasta').hidden = !franTaFram;
-  $<HTMLAnchorElement>('tf-stort-sidan').href = r.querySelector<HTMLAnchorElement>('.tf-sidlank')!.href;
+  // En faktatext står i sin egen form (Faktatext.astro), som datafilen har ritat; annars problemets form.
+  const fakta = r.dataset.fakta !== undefined;
+  const faktaYta = $('tf-stort-fakta');
+  $('tf-stort-sida').hidden = fakta;
+  faktaYta.hidden = !fakta;
+  if (fakta) faktaYta.replaceChildren(el('p', 'tf-stort-vantar', 'Hämtar …'));
+  // Posten i metoden, när den står där; ett problem ur databasen har ingen sida.
+  const sidlank = r.querySelector<HTMLAnchorElement>('.tf-sidlank');
+  const stortSidan = $<HTMLAnchorElement>('tf-stort-sidan');
+  stortSidan.hidden = !sidlank;
+  if (sidlank) stortSidan.href = sidlank.href;
   // Lösningsförslaget står dolt tills läraren trycker, också när ett nytt problem visas i samma ruta, och rutan börjar
   // vid problemet.
   stortPost = undefined;
@@ -308,7 +376,14 @@ async function visaStort(id: string, franTaFram: boolean, medLosning = false) {
   try { d = await data(); } catch { $('tf-stort-text').replaceChildren(el('p', undefined, 'Det gick inte att hämta. Ladda om sidan, eller öppna sidan med knappen nedanför.')); return; }
   if (stortId !== id) return;
   const post = d.poster.find((x) => x.id === id)!;
-  bild.alt = post.bild.alt;
+  if (fakta) {
+    faktaYta.innerHTML = post.html ?? '';
+    stortPost = post;
+    visaSteg(0);
+    visaLosning(medLosning);
+    return;
+  }
+  bild.alt = post.bild?.alt ?? '';
   $('tf-stort-text').replaceChildren(...post.stycken.map((s) => { const e = el('p'); s.split('\n').forEach((rd, i) => { if (i) e.append(document.createElement('br')); e.append(rd); }); return e; }));
   const fraga = $('tf-stort-fraga');
   fraga.replaceChildren(el('p', 'problemsida-fraga-rubrik', post.fragor.length > 1 ? 'Frågorna' : 'Frågan'));
@@ -336,36 +411,37 @@ dialog.addEventListener('close', () => {
 ettkortLank($<HTMLAnchorElement>('tf-stort-skrivut'));
 for (const r of rader) {
   const visaKnapp = r.querySelector<HTMLButtonElement>('.tf-visa')!;
-  const oppna = () => { raknaHandelse(`${led}:${metod}:visa-stort`, `${titel}: Visa stort`); void visaStort(r.id, false); };
+  const oppna = () => { raknaHandelse(`${led}:${metod}:visa-stort`, `${titel}: Visa stort`); void visaStort(r.id); };
   visaKnapp.addEventListener('click', oppna);
-  r.querySelector('.tf-bild')!.addEventListener('click', oppna);
+  r.querySelector('.tf-bild')?.addEventListener('click', oppna);
   // Länken Lösningsförslag leder utan JavaScript till bladet på problemets sida i metoden; med JavaScript öppnar den
-  // rutan med problemet och lösningsförslaget.
-  r.querySelector('.tf-losning')?.addEventListener('click', (e) => {
+  // rutan med problemet och lösningsförslaget. Lärarens sida till en lästext leder alltid till sidan i metoden.
+  if (r.dataset.lf !== undefined) r.querySelector('.tf-losning')?.addEventListener('click', (e) => {
     const m = e as MouseEvent;
     if (m.ctrlKey || m.metaKey || m.shiftKey || m.button !== 0) return;
     e.preventDefault();
-    raknaHandelse(`${led}:${metod}:losningsforslag`, `${titel}: Lösningsförslag i Visa stort`);
-    void visaStort(r.id, false, true);
+    // En länk till en pdf har sitt namn i statistiken (data-goatcounter-click), som GoatCounter räknar själv.
+    if (!(e.currentTarget as HTMLElement).hasAttribute('data-goatcounter-click')) raknaHandelse(`${led}:${metod}:losningsforslag`, `${titel}: Lösningsförslag i Visa stort`);
+    void visaStort(r.id, true);
+  });
+  // Länken Modellen leder utan JavaScript till modellens sida; med JavaScript visar den texten och modellen bredvid.
+  if (r.dataset.modell !== undefined) r.querySelector('.tf-modell-lank')?.addEventListener('click', (e) => {
+    const m = e as MouseEvent;
+    if (m.ctrlKey || m.metaKey || m.shiftKey || m.button !== 0) return;
+    e.preventDefault();
+    raknaHandelse(`${led}:${metod}:modell`, `${titel}: Modellen i Visa stort`);
+    void visaStort(r.id, true);
   });
 }
-
-// ---------- Ta fram ett ----------
-// Ett av de poster som syns, inte ett som står i listan, och inte samma igen förrän urvalets alla har varit framme.
-function taFram() {
-  const urval = rader.filter((r) => !r.hidden && !bockad(r.id)).map((r) => ({ id: r.id }));
-  if (!urval.length) {
-    $('tf-tom').hidden = false;
-    $('tf-tom').textContent = `Alla ${ord.flera} som syns står i listan att skriva ut. Ta bort ett ur listan, eller välj en annan nivå eller tagg.`;
-    return;
-  }
-  const r = dra(urval, 1, sparat.sedda);
-  sparat.sedda = r.sedda;
+// Lägg temats texter i listan (TaFram.astro, temats rubrik): alla temats poster, i ordning, utan dubbletter.
+for (const b of sida.querySelectorAll<HTMLButtonElement>('.tf-tema-lista')) b.addEventListener('click', () => {
+  const ids = (b.dataset.poster ?? '').split(' ').filter((id) => rad.has(id));
+  for (const id of ids) if (!bockad(id)) sparat.bockade.push(id);
   spara();
-  void visaStort(r.valda[0].id, true);
-}
-$('tf-tafram').addEventListener('click', taFram);
-$('tf-stort-nasta').addEventListener('click', taFram);
+  visaBockar();
+  $('tf-valda-not').textContent = `Temats ${ids.length} ${ord.flera} står i listan att skriva ut.`;
+  window.setTimeout(() => { $('tf-valda-not').textContent = ''; }, 6000);
+});
 
 // ---------- Adressen ----------
 // #bas och #bas/geometri är nivån och taggen, #bas-3 är ett problem, och #lista=bas-1,bas-3 är en lista från en annan

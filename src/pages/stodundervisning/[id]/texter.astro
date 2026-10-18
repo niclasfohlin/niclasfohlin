@@ -1,0 +1,16 @@
+---
+// /stodundervisning/<id>/texter: Ta fram en lästext (Textsamtal i grupp) och Ta fram en faktatext (Faktatextsamtal i
+// grupp), texterna i metodens bank som en databas att välja ur efter nivå och tagg, och faktatexterna i sina teman
+// (src/lib/tafram.ts, src/components/TaFram.astro; de korta adresserna /lastexter och /faktatexter).
+import TaFram from '../../../components/TaFram.astro';
+import { publicerade } from '../../../lib/innehall';
+import { harTaFram, taFramAv } from '../../../lib/tafram';
+
+export async function getStaticPaths() {
+  return (await publicerade('stodundervisning')).filter((m) => harTaFram(m, 'texter')).map((m) => ({ params: { id: m.id }, props: { m } }));
+}
+
+const t = await taFramAv(Astro.props.m);
+---
+
+<TaFram t={t} />

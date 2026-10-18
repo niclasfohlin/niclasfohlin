@@ -1,0 +1,36 @@
+niva: Avancerat
+nr: 14
+titel: Popcornskålen
+innehallstagg: Taluppfattning
+kalla: Idén kommer ur Problembanken åk 7–9, problem 6.
+problem:
+  text:
+    - Elin, Hugo och Amir har filmkväll med en stor skål popcorn. Ensam äter Elin upp en sådan skål på 15 minuter, Hugo på 30 och Amir på 20 minuter. Var och en äter i samma takt hela tiden.
+  fragor:
+    - Hur lång tid tar det för Elin och Hugo att äta upp en skål ihop?
+    - Och för alla tre ihop?
+  bild: Tre kompisar, Elin, Hugo och Amir, sitter i en soffa. Framför dem står en skål popcorn på ett bord, och på väggen hänger en klocka.
+losningsforslag:
+  svaret: Elin och Hugo 10 minuter, alla tre 6 minuter och 40 sekunder.
+  kontroll: "10 min: 2/3 + 1/3 = 1. 400 s: 4/9 + 2/9 + 3/9 = 1."
+  iden: Det som var och en äter på samma tid går att lägga ihop.
+  a:
+    namn: skålar på en timme
+    text: Eleven räknar hur många skålar var och en hinner äta på 60 minuter och lägger ihop dem.
+    bild: "Lösning A. En tabell: Elin äter en skål på 15 min och hinner 60 / 15 = 4 skålar på 60 minuter, Hugo 60 / 30 = 2 och Amir 60 / 20 = 3. Elin och Hugo: 4 + 2 = 6 skålar på 60 min, så 60 / 6 = 10 min för en skål. Alla tre: 4 + 2 + 3 = 9 skålar på 60 min. 60 min = 3 600 s och 3 600 / 9 = 400 s, alltså 6 min 40 s för en skål."
+  b:
+    namn: en ekvation för tiden
+    text: Eleven kallar tiden t och skriver hur stor del av skålen var och en äter på t minuter.
+    bild: "Lösning B. t är tiden i minuter. På t minuter äter Elin t/15 av skålen, Hugo t/30 och Amir t/20. Elin och Hugo: t/15 + t/30 = 1, gånger 30 ger 2t + t = 30, så 3t = 30 och t = 10 min. Alla tre: t/15 + t/30 + t/20 = 1, gånger 60 ger 4t + 2t + 3t = 60, så 9t = 60 och t = 60 / 9 = 20 / 3 min, alltså 6 min 40 s. Kontroll: 10/15 + 10/30 = 2/3 + 1/3 = 1 skål."
+  c:
+    rader:
+      - (15 + 30) / 2 = 22,5
+      - (15 + 30 + 20) / 3 är cirka 21,7
+      - "Svar: 22,5 min och 21,7 min."
+    om: Eleven tar medelvärdet av tiderna. Elin och Hugo blir klara fortare ihop än Elin ensam.
+    fraga: Hur många skålar hinner Elin äta ensam på elevens 22,5 minuter?
+  fragor:
+    - Varför räknar eleven i lösning A med 60 minuter?
+    - Vad betyder t/15 i ekvationen i lösning B?
+    - Var lägger eleverna i båda lösningarna ihop det som var och en äter?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja om en fjärde kompis åt en skål på 12 minuter?

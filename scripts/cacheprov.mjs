@@ -38,6 +38,13 @@ const UTAN_REGEL = new Map([
 ]);
 const SIDKARTA = /^\/sitemap[-\w]*\.xml$/;
 const HOGST_SIDA = 64 * 1024;
+// En Ta fram-sida är också en lista över databasens poster, en rad per post (TaFramRad.astro), som läsaren ser utan
+// JavaScript, och den växer med databasen (Niclas 2026-10-18: verktygen ska vara skalbara). Provet räknar därför sidan
+// utan raderna mot HOGST_SIDA och varje rad för sig mot HOGST_RAD: en rad med data i sig blir större än så. Raderna var
+// omkring 0,8 kB med 60 matteproblem och 1,1 till 1,2 kB med faktatexterna, som har en länk till (Modellen) och en längre
+// rad ur lärarens sida; varje länk bär postens titel i sitt namn, så att en skärmläsare vet vilken post den gäller.
+const HOGST_RAD = 1280;
+const RAD = /<li class="tf-post[\s\S]*?<\/li>/g;
 
 const toml = readFileSync(join(rot, 'netlify.toml'), 'utf8').replace(/\r\n/g, '\n');
 // Ett block i taget, fram till nästa tabell: blocket för "/*" har säkerhetsrubrikerna men ingen Cache-Control, och får
@@ -74,10 +81,16 @@ if (utan.length) {
 const allaFiler = new Set(filer);
 const databassidor = filer.filter((v) => v.endsWith('.html')).map((v) => ({ v, html: readFileSync(join(dist, v)) }))
   .filter((x) => x.html.includes('data-kortdata=') || allaFiler.has(`${x.v.replace(/\/index\.html$/, '')}.json`));
-const tunga = databassidor.filter((x) => x.html.length > HOGST_SIDA);
+for (const x of databassidor) {
+  const rader = [...x.html.toString('utf8').matchAll(RAD)].map((m) => Buffer.byteLength(m[0]));
+  x.rader = rader.length;
+  x.utan = x.html.length - rader.reduce((a, b) => a + b, 0);
+  x.storstaRad = Math.max(0, ...rader);
+}
+const tunga = databassidor.filter((x) => x.utan > HOGST_SIDA || x.storstaRad > HOGST_RAD);
 if (tunga.length) {
-  console.error(`cacheprov: ${tunga.length} sidor som hämtar sin data ur en egen fil är större än ${HOGST_SIDA / 1024} kB:\n  ${tunga.map((x) => `${x.v} (${Math.round(x.html.length / 1024)} kB)`).join('\n  ')}\nDatan ska stå i sidans egen fil (src/lib/kortdata.ts), inte i sidan, som Facebook hämtar okomprimerad varje gång länken delas.`);
+  console.error(`cacheprov: ${tunga.length} sidor som hämtar sin data ur en egen fil är för stora (högst ${HOGST_SIDA / 1024} kB utan postraderna och ${HOGST_RAD / 1024} kB per rad):\n  ${tunga.map((x) => `${x.v} (${Math.round(x.utan / 1024)} kB utan raderna${x.rader ? `, största raden ${x.storstaRad} byte` : ''})`).join('\n  ')}\nDatan ska stå i sidans egen fil (src/lib/kortdata.ts), inte i sidan, som Facebook hämtar okomprimerad varje gång länken delas.`);
   process.exit(1);
 }
-const vikt = databassidor.map((x) => `${x.v.replace(/^\/stodundervisning\/|\/index\.html$|\.html$/g, '')} ${Math.round(x.html.length / 1024)}`).join(', ');
-console.log(`cacheprov: alla ${provade} filer i dist som inte är sidor träffar en cacheregel i netlify.toml (${regler.length} regler), och sidorna med data i en egen fil är högst ${HOGST_SIDA / 1024} kB (${vikt}).`);
+const vikt = databassidor.map((x) => `${x.v.replace(/^\/stodundervisning\/|\/index\.html$|\.html$/g, '')} ${Math.round(x.utan / 1024)}${x.rader ? ` + ${x.rader} rader` : ''}`).join(', ');
+console.log(`cacheprov: alla ${provade} filer i dist som inte är sidor träffar en cacheregel i netlify.toml (${regler.length} regler), och sidorna med data i en egen fil är högst ${HOGST_SIDA / 1024} kB utan postraderna, och raderna högst ${HOGST_RAD / 1024} kB var (${vikt}).`);

@@ -1,0 +1,35 @@
+---
+// Lärarhandledningen till ett tema (src/lib/handledning.ts) på temats sida och, i utskriften, på metodens sida, i samma
+// form som Word-filens två A4 (lararhandledningSida i metoddocx.ts) och metodriggens förlaga: etiketten på en mörk platta,
+// temat som rubrik i Anton med det korta strecket i nivåns färg och ingressen, och sedan den gemensamma sidans delar och
+// temats texter, var och en med sina fält i två spalter. Lärarens text står i läsarens eget typsnitt, som resten av
+// sajten. rubrik: nivån på temats rubrik, h2 på temats sida och h3 bland bankens nivåer.
+import { nivansEtikett, texternasEtikett, type Lararhandledning } from '../lib/handledning';
+interface Props { h: Lararhandledning; farg: string; id?: string; rubrik?: 'h2' | 'h3' }
+const { h, farg, id, rubrik = 'h2' } = Astro.props;
+const Rubrik = rubrik;
+const Del = rubrik === 'h2' ? 'h3' : 'h4';
+const rader = (t: string) => t.split('\n');
+---
+<section class="hl" id={id} style={`--hl-niva: ${farg}`} aria-label={`Lärarhandledning: ${h.tema}`}>
+  <div class="hl-sida">
+    <p class="hl-etikett"><span>{nivansEtikett(h)}</span></p>
+    <Rubrik class="hl-titel">{h.tema}</Rubrik>
+    {h.ingress.map((t) => <p class="hl-ingress">{t}</p>)}
+    {h.gemensam.map((d) => (
+      <>
+        <Del class="hl-del">{d.rubrik}</Del>
+        <dl class="hl-falt">{d.falt.map((f) => <div><dt>{rader(f.rubrik).map((r, i) => (i ? <span class="hl-tid">{r}</span> : r))}</dt><dd class={f.kursiv ? 'hl-kursiv' : undefined}>{rader(f.text).map((r, i) => <>{i > 0 && <br />}{r}</>)}</dd></div>)}</dl>
+      </>
+    ))}
+  </div>
+  <div class="hl-sida">
+    <p class="hl-etikett"><span>{texternasEtikett(h)}</span></p>
+    {h.texter.map((x) => (
+      <>
+        <Del class="hl-text">{x.nr && <><span class="hl-nr">{x.nr}</span>{' '}</>}{x.titel}{x.modell && <>{' '}<span class="hl-modell">{x.modell}</span></>}</Del>
+        <dl class="hl-falt">{x.falt.map((f) => <div><dt>{rader(f.rubrik).map((r, i) => (i ? <span class="hl-tid">{r}</span> : r))}</dt><dd class={f.kursiv ? 'hl-kursiv' : undefined}>{rader(f.text).map((r, i) => <>{i > 0 && <br />}{r}</>)}</dd></div>)}</dl>
+      </>
+    ))}
+  </div>
+</section>

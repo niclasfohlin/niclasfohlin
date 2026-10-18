@@ -1,0 +1,36 @@
+niva: Avancerat
+nr: 11
+titel: Pyramidspelet
+innehallstagg: Algebra
+kalla: Idén kommer ur nrich, Number Pyramids.
+problem:
+  text:
+    - Mobilspelet Pyramiden har fyra rader med rutor, som på bilden. Man drar talen 1, 2, 3 och 4 till var sin ruta i den nedersta raden, i vilken ordning man vill. Varje ruta ovanför får summan av de två talen under den. Talet överst är poängen.
+  fragor:
+    - Vilka poäng kan man få? Hitta alla.
+    - Hur ska talen stå för att ge flest poäng? Förklara varför.
+  bild: "En mobil med spelet Pyramiden: en tom pyramid av rutor, med fyra rutor i den nedersta raden och en ruta överst, och under pyramiden fyra knappar med talen 1, 2, 3 och 4."
+losningsforslag:
+  svaret: 16, 18, 20, 22 eller 24 poäng. Flest, 24, med 3 och 4 i mitten.
+  kontroll: 1 3 4 2 ger 4 7 6, sedan 11 och 13 och sist 24. 3 1 2 4 ger 16.
+  iden: Talen i mitten räknas tre gånger och talen ytterst en gång, så paret i mitten avgör poängen.
+  a:
+    namn: byta plats på talen
+    text: Eleven räknar ut några pyramider, ser att bara paret i mitten avgör poängen och prövar alla sex par.
+    bild: "Lösning A. Pyramiden med 2, 1, 3 och 4 i botten ger 3, 4 och 7, sedan 7 och 11, och överst 18. Med 4, 1, 3 och 2 blir det 5, 4 och 5, sedan 9 och 9, och också 18: att byta plats ytterst eller i mitten ändrar inte poängen. Att byta plats på 1 och 4 ger 2, 4, 3 och 1, sedan 6, 7 och 4, sedan 13 och 11, och 24: paret i mitten avgör poängen. En tabell har alla sex par i mitten: 1 och 2 ger 16, 1 och 3 ger 18, 1 och 4 ger 20, 2 och 3 ger 20, 2 och 4 ger 22, och 3 och 4 ger 24, som är inringat."
+  b:
+    namn: poängen med bokstäver
+    text: Eleven kallar talen a, b, c och d och räknar fram poängen a + 3b + 3c + d.
+    bild: "Lösning B. Pyramiden med a, b, c och d i botten. Raden ovanför är a + b, b + c och c + d, sedan a + 2b + c och b + 2c + d, och överst a + 3b + 3c + d. Under botten står 1 gång, 3 gånger, 3 gånger och 1 gång. a + b + c + d = 1 + 2 + 3 + 4 = 10, så poängen är 10 + 2 · (b + c). b + c kan vara 3, 4, 5, 6 eller 7, och poängen 16, 18, 20, 22 eller 24. Flest: 10 + 2 · 7 = 24, med 3 och 4 i mitten."
+  c:
+    rader:
+      - 1 2 3 4 → 3 5 7 → 8 12 → 20
+      - 4 3 2 1 ger också 20.
+      - "Svar: alltid 20 poäng."
+    om: Eleven prövar bara talen i storleksordning, framlänges och baklänges. Många andra ordningar ger andra poäng.
+    fraga: Hur kan ni pröva elevens svar i spelet?
+  fragor:
+    - Vad upptäcker eleven i lösning A när hen byter plats på talen ytterst?
+    - Varför kan eleven i lösning B skriva poängen som 10 + 2 · (b + c)?
+    - Var syns det i båda lösningarna att bara paret i mitten avgör poängen?
+    - Vilken lösning liknar er egen? Vilken väljer ni med talen 1 till 5 och fem rader?

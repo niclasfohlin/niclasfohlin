@@ -1,0 +1,37 @@
+niva: Medel
+nr: 17
+titel: Bubbelvätskan
+innehallstagg: Samband och förändring
+kalla: Idén kommer ur Problembanken åk 7–9, problem 14, Felblandad saft.
+problem:
+  text:
+    - Receptet på bubbelvätska är 1 del diskmedel och 3 delar vatten. Sara har blandat 1 dl diskmedel med 9 dl vatten, och Leo 3 dl diskmedel med 5 dl vatten. Ingen vill hälla bort något, och båda vill hälla i så lite som möjligt.
+  fragor:
+    - Hur mycket diskmedel ska Sara hälla i för att det ska bli som i receptet?
+    - Blev Leos blandning rätt? Om inte, vad ska han hälla i, och hur mycket?
+  bild: En kanna med streck på sidan, en flaska diskmedel och en pinne med en ring som det kommer såpbubblor ur.
+losningsforslag:
+  svaret: Sara häller i 2 dl diskmedel. Leo blandade fel och häller i 4 dl vatten.
+  kontroll: "Båda får 3 dl diskmedel och 9 dl vatten: 9 = 3 · 3."
+  iden: I receptet går det 3 dl vatten på varje dl diskmedel, hur mycket man än blandar.
+  a:
+    namn: bygga upp receptet
+    text: Eleven tar receptet gånger 2, 3 och 4 i en tabell och letar upp rätt rad.
+    bild: "Lösning A, bygga upp receptet. Tabellen har kolumnerna diskmedel och vatten: 1 och 3 är receptet, 2 och 6 dubbelt, 3 och 9 tre gånger och 4 och 12 fyra gånger. Raden 3 och 9 är inringad. Bredvid står att Sara har 9 dl vatten, som är raden 3 och 9, och 3 − 1 = 2 dl diskmedel till. Leo har 3 dl diskmedel, som också är raden 3 och 9, och 9 − 5 = 4 dl vatten till."
+  b:
+    namn: rita grupper av rutor
+    text: Eleven ritar varje dl som en ruta och ger varje dl diskmedel en grupp med 3 dl vatten.
+    bild: "Lösning B, rita grupper av rutor. En grå ruta är 1 dl diskmedel och en vit ruta 1 dl vatten, och streckade rutor hälls i. Saras 9 vita rutor bildar tre grupper om 3, och varje grupp får en grå ruta: 9 / 3 = 3 och 3 − 1 = 2 dl diskmedel till. Leos 3 grå rutor får 3 vita var: 3 · 3 = 9 och 9 − 5 = 4 dl vatten till. Under står att båda får 3 dl diskmedel och 9 dl vatten."
+  c:
+    rader:
+      - "Receptet: 3 − 1 = 2 mer vatten"
+      - "Sara: 9 − 2 = 7 dl, 6 dl till"
+      - "Leo: 5 − 3 = 2, det stämmer"
+      - "Svar: Sara 6 dl, Leo inget."
+    om: Eleven räknar med skillnaden, men i receptet är vattnet 3 gånger så mycket som diskmedlet.
+    fraga: Hur mycket vatten ger elevens sätt till 10 dl diskmedel?
+  fragor:
+    - Hur väljer eleven rad i tabellen i lösning A, för Sara och för Leo?
+    - Varför delar eleven i lösning B Saras vatten med 3, men tar Leos diskmedel gånger 3?
+    - Var syns det i båda lösningarna att varje dl diskmedel behöver 3 dl vatten?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja om Sara hade 30 dl vatten, och varför?

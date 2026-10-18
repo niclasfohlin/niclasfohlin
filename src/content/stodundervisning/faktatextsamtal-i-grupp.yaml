@@ -22,7 +22,7 @@ material:
   - fem modeller med blad
   - post-it-lappar
   - pennor
-uppdaterad: 2026-10-13
+uppdaterad: 2026-10-18
 relaterade:
   - boksamtal-i-grupp
   - problemlosning-i-grupp
@@ -44,6 +44,9 @@ nivaer:
     farg: A8742A
   - namn: Avancerat
     farg: "6E3450"
+centrala:
+  - id: faktatexter
+    efterText: urval
 elevblad:
   "Text 1: Bäverns damm": {}
   "Text 2: Björnens vinter": {}
@@ -489,7 +492,7 @@ roll:
 urval:
   rubrik: Var hittar du texterna och modellerna?
   text:
-    - "Metodens femton texter står bland materialet, fem på varje nivå, och före varje text står lärarens sida. Alla texterna har samma delar: en ingress som slutar med textens fråga, rutan Siffran, fyra avsnitt med ord förklarade i marginalen, bilder med avsnittens nummer, en faktaruta, en fördjupning som du läser högt i modellpasset och rutan Visste du att, som gruppen läser sist. Se själv filmerna under Läs mer innan du visar dem. Texterna är skrivna för metoden, och varje uppgift i dem är prövad mot en källa. De är övningstexter och är inte sakgranskade som ett läromedel."
+    - "Metodens femton texter står bland materialet, fem på varje nivå, och före varje text står lärarens sida. Texterna finns också på sidan Ta fram en faktatext, ordnade efter nivå och tema. Där visar du en text stort och skriver ut de texter du vill ha. Alla texterna har samma delar: en ingress som slutar med textens fråga, rutan Siffran, fyra avsnitt med ord förklarade i marginalen, bilder med avsnittens nummer, en faktaruta, en fördjupning som du läser högt i modellpasset och rutan Visste du att, som gruppen läser sist. Se själv filmerna under Läs mer innan du visar dem. Texterna är skrivna för metoden, och varje uppgift i dem är prövad mot en källa. De är övningstexter och är inte sakgranskade som ett läromedel."
     - Varje modell har en sida, ett exempel om skolan och tre blad. Veckans blad skriver du ut på A3 till gruppen. Är ni bara ett par räcker A4, och då skriver paret i fälten, för hand eller på datorn.
   kravText: "En egen text i vecka 6–8 ska uppfylla tre krav:"
   krav:

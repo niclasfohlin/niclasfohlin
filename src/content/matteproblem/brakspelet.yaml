@@ -1,0 +1,36 @@
+niva: Avancerat
+nr: 19
+titel: Bråkspelet
+innehallstagg: Taluppfattning
+kalla: Idén kommer ur Nämnaren 2025:1, Problemavdelningen, nr 4469.
+problem:
+  text:
+    - I Bråkspelet lägger man fyra av sina sex kort i rutorna, ett i varje ruta, så att det blir två bråk som läggs ihop. Den som får summan närmast 1 vinner, men exakt 1 räknas inte. Korten får inte vändas upp och ner. Saga har korten 1, 3, 4, 5, 6 och 7.
+  fragor:
+    - Hur ska Saga lägga korten för att komma närmast 1?
+    - Hur vet ni att inget annat sätt kommer närmare?
+  bild: Sagas sex kort med talen 1, 3, 4, 5, 6 och 7, och ett streck under sexan. Under korten två tomma bråk med ett plustecken emellan och en ruta för varje kort.
+losningsforslag:
+  svaret: "5/6 + 1/7 = 41/42. Närmare går inte: nämnarnas produkt är högst 6 · 7 = 42."
+  kontroll: 5/6 + 1/7 = 35/42 + 6/42 = 41/42 = 1 − 1/42.
+  iden: Avståndet till 1 kan skrivas med nämnarnas produkt som nämnare.
+  a:
+    namn: fylla luckan till 1
+    text: Eleven tar ett bråk nära 1 och fyller luckan med ett bråk av korten som är kvar.
+    bild: "Lösning A, fylla luckan till 1. En tabell med kolumnerna ”nära 1”, ”saknas”, ”fyll med” och ”från 1”. 3/4 saknar 1/4, och 1/5 ger 1/20 från 1. 4/5 saknar 1/5, och 1/6 ger 1/30. 5/6 saknar 1/6, och 1/7 ger 1/42. 6/7 saknar 1/7, men 7 är redan lagt, och 1/5 ger 2/35 över. 5/7 saknar 2/7, och 1/4 ger 1/28. Under tabellen: 1/6 − 1/7 = 7/42 − 6/42 = 1/42. Av de fem försöken ligger 5/6 + 1/7 = 41/42 närmast 1. Kan något annat sätt komma närmare?"
+  b:
+    namn: räkna med gemensam nämnare
+    text: Eleven ser att nämnarnas produkt är högst 6 · 7 = 42 och söker 41/42 eller 43/42.
+    bild: "Lösning B, räkna med gemensam nämnare. Summan a/b + c/d kan skrivas med nämnaren b · d. Är summan inte 1, ligger den minst 1/(b · d) från 1. Störst är 6 · 7 = 42, alltså minst 1/42, och andra par ger högst 5 · 7 = 35, alltså minst 1/35. Med 6 och 7: 7 · 5 + 6 · 1 = 41, och 5/6 + 1/7 = 35/42 + 6/42 = 41/42. Under ett streck: 43/42 går inte med korten 1, 3, 4 och 5, så ingen annan summa kommer lika nära."
+  c:
+    rader:
+      - 7 + 3 = 10 och 6 + 5 = 11
+      - 10/11 är bara 1/11 från 1.
+      - "Svar: 7/6 + 3/5."
+    om: Eleven lägger ihop täljarna för sig och nämnarna för sig.
+    fraga: Ungefär hur stor är elevens summa 7/6 + 3/5?
+  fragor:
+    - Hur väljer eleven i lösning A vilket bråk som ska fylla luckan?
+    - Varför räcker det för eleven i lösning B att pröva nämnarna 6 och 7?
+    - Var syns nämnarnas produkt i avståndet till 1 i båda lösningarna?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja med korten 1 till 9, och varför?

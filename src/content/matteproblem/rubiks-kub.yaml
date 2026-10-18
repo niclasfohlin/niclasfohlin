@@ -1,0 +1,37 @@
+niva: Avancerat
+nr: 20
+titel: Rubiks kub
+innehallstagg: Geometri
+kalla: Idén kommer ur nrich, Painted Cube.
+problem:
+  text:
+    - Tänk er en Rubiks kub som är byggd av 27 små kuber, 3 åt varje håll. Varje sida av den stora kuben har sin färg, så en liten kub har färg på de sidor som syns utåt.
+  fragor:
+    - Hur många små kuber har färg på 3 sidor, på 2, på 1 och på 0 sidor?
+    - Hur blir det om kuben är 10 små kuber åt varje håll?
+  bild: En stor kub med rutnät på de tre sidor som syns. En liten kub i ett hörn är lyft ur och står bredvid, så att hålet syns.
+losningsforslag:
+  svaret: "27 kuber: 8, 12, 6 och 1. 1 000 kuber: 8, 96, 384 och 512."
+  kontroll: 8 + 12 + 6 + 1 = 27 och 8 + 96 + 384 + 512 = 1 000.
+  iden: Var en liten kub sitter avgör hur många sidor med färg den har.
+  a:
+    namn: räkna lager för lager
+    text: Eleven skriver i varje ruta hur många sidor med färg den lilla kuben har och lägger ihop lagren.
+    bild: "Lösning A, räkna lager för lager. Tre rutnät, överst, mitten och underst. Överst och underst står 3 i hörnen, 2 på kanterna och 1 i mittrutan. I mittenlagret står 2 i hörnen, 1 på kanterna och 0 i mittrutan. 3 sidor: 4 + 4 = 8. 2 sidor: 4 + 4 + 4 = 12. 1 sida: 1 + 4 + 1 = 6. 0 sidor: 1. Med 10 åt varje håll har varje lager 4 hörnrutor, 4 · 8 = 32 rutor längs kanten och 8 · 8 = 64 inne. En tabell lägger ihop överst och underst och de 8 lagren i mitten: 8, 96, 384 och 512."
+  b:
+    namn: räkna hörn och kanter
+    text: Eleven räknar kuberna i hörnen, på kanterna, mitt på sidorna och inuti, med 10 − 2 = 8 per kant.
+    bild: "Lösning B, räkna hörn och kanter. En tabell med platsen, sidorna med färg och antalen. Hörn, 3 sidor: 8 och 8. Kanter, 2 sidor: 12 · 1 = 12 och 12 · 8 = 96. Mitt på sidorna, 1 sida: 6 · 1 = 6 och 6 · 8 · 8 = 384. Inuti, 0 sidor: 1 och 8 · 8 · 8 = 512. Alla: 27 och 1 000. Under tabellen: en kant har 10 − 2 = 8 kuber mellan hörnen, och 8 + 96 + 384 + 512 = 1 000."
+  c:
+    rader:
+      - "6 sidor med 4 hörn: 6 · 4 = 24"
+      - "6 sidor med 4 kanter: 6 · 4 = 24"
+      - 6 · 1 = 6 mitt på, 1 inuti
+      - "Svar: 24, 24, 6 och 1."
+    om: Eleven räknar sida för sida, så hörnkuberna räknas tre gånger och kantkuberna två gånger.
+    fraga: Hur många små kuber blir det i allt med elevens svar?
+  fragor:
+    - Vad skriver eleven i rutorna i lösning A, och hur lägger hen ihop lagren?
+    - Varför räknar eleven i lösning B med 10 − 2 = 8 kuber längs en kant?
+    - Var syns hörnen, kanterna och mitten på sidorna i båda lösningarna?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja för en kub som är 100 åt varje håll?

@@ -72,18 +72,50 @@ export const harExempel = (bm: Bladmaterial) => bm.rader.some((r) => r.blad.some
  * modell i tabellen Texterna, vecka för vecka (Faktatextsamtal i grupp). En cell är en enhet när den är precis en enhets
  * titel, och en ram när den är ramens namn, med eller utan ett nummer före, som länkarna i tabellen (cellLank i
  * Metod.astro). Textens sida leder så till veckans modell och modellens sida till sina texter (granskningen 2026-10-13:
- * lärarens sida sa "modellen är Tankekartan, blad 1" som ren text, och läraren fick gå tillbaka till metodens sida). */
+ * lärarens sida sa "modellen är Tankekartan, blad 1" som ren text, och läraren fick gå tillbaka till metodens sida).
+ * I en tabell som parar texter och modeller ska varje rad med en modell ha en text i varje kolumn där andra rader har
+ * texter, och titeln ska vara en enda enhets: en felstavad eller dubbel titel gav förut en rad utan länk och utan blad,
+ * och inget fel (K-415). */
 export function bladpar(d: MetodData, bm: Bladmaterial): { enhet: number; rad: Bladrad }[] {
   const bank = bankAv(d);
   if (!bank) return [];
   const par: { enhet: number; rad: Bladrad }[] = [];
-  for (const t of d.tabeller ?? []) for (const r of t.rader) {
-    const celler = r.map((c) => String(c ?? '').replace(/\s+/g, ' ').trim());
-    const enheter = celler.flatMap((c) => { const x = bank.enheter.filter((e) => e.l.titel === c); return x.length === 1 ? [x[0].ri] : []; });
-    const rader = celler.flatMap((c) => { const x = bm.rader.find((y) => y.namn === c.replace(/^\d+\.? /, '')); return x ? [x] : []; });
-    for (const enhet of enheter) for (const rad of rader) if (!par.some((p) => p.enhet === enhet && p.rad === rad)) par.push({ enhet, rad });
+  const traffar = (c: string) => bank.enheter.filter((e) => e.l.titel === c);
+  const modell = (c: string) => bm.rader.find((y) => y.namn === c.replace(/^\d+\.? /, ''));
+  for (const t of d.tabeller ?? []) {
+    const rader = t.rader.map((r) => r.map((c) => String(c ?? '').replace(/\s+/g, ' ').trim()));
+    // Kolumnerna med texter: där en rad med en modell har en enhets titel.
+    const kolumner = new Set<number>();
+    for (const r of rader) if (r.some((c) => modell(c))) r.forEach((c, k) => { if (traffar(c).length) kolumner.add(k); });
+    for (const r of rader) {
+      if (!r.some((c) => modell(c))) continue;
+      for (const k of kolumner) {
+        const x = traffar(r[k] ?? '');
+        if (x.length !== 1) throw new Error(`${d.titel}: i tabellen "${t.rubrik ?? ''}" står "${r[k] ?? ''}" där en text ska stå, men ${x.length ? `${x.length} texter heter så` : 'ingen text i banken heter så'}, så raden kan inte leda till texten och dess modell (src/lib/bladmaterial.ts, bladpar).`);
+      }
+    }
+    for (const celler of rader) {
+      const enheter = celler.flatMap((c) => { const x = traffar(c); return x.length === 1 ? [x[0].ri] : []; });
+      const modeller = celler.flatMap((c) => { const x = modell(c); return x ? [x] : []; });
+      for (const enhet of enheter) for (const rad of modeller) if (!par.some((p) => p.enhet === enhet && p.rad === rad)) par.push({ enhet, rad });
+    }
   }
   return par;
+}
+
+/** Bladet ur en ram med blad som hör till en enhet (Faktatextsamtal i grupp: textens modell): enheten och ramen står på
+ *  samma rad i en fri tabell (bladpar), och enhetens följesidor säger vilket blad ("modellen är Tankekartan, blad 1").
+ *  raderna är ramarna som hör till enheten, och bladet finns när de är en och följesidorna säger bladet. Textens sida
+ *  ([enhet].astro) och Ta fram en faktatext (src/lib/tafram.ts) läser det härifrån. */
+export function enhetensBlad(d: MetodData, bm: Bladmaterial, e: { ri: number; fore: number[]; efter: number[] }, par = bladpar(d, bm)): { raderna: Bladrad[]; blad?: { rad: Bladrad; b: PaBordet; nr: string } } {
+  const ramar = d.ramar?.ramar ?? [];
+  const raderna = par.filter((x) => x.enhet === e.ri).map((x) => x.rad);
+  if (raderna.length !== 1) return { raderna };
+  const rad = raderna[0];
+  const foljetext = [...e.fore, ...e.efter].flatMap((ri) => ramar[ri].text ?? []).join(' ');
+  const nr = foljetext.match(new RegExp(`${rad.namn.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}, blad (\\d+)`))?.[1];
+  const b = nr ? rad.blad.find((y) => bladKort(rad, y) === `Blad ${nr}`) : undefined;
+  return { raderna, ...(b && nr ? { blad: { rad, b, nr } } : {}) };
 }
 
 export interface Bladfil { namn: string; rad?: Bladrad; slag: 'blad' | 'sidor'; rubrik: string; huvud: string; ramar: number[]; bilder: number[]; minst: number; hogst: number }

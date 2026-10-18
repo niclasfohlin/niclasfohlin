@@ -1,0 +1,36 @@
+niva: Medel
+nr: 13
+titel: Pappersasken
+innehallstagg: Geometri
+kalla: Idén kommer ur Känguru 2025, Benjamin nr 17.
+problem:
+  text:
+    - Selma ska vika en ask av ett kvadratiskt papper. Hon klipper bort en lika stor kvadrat i varje hörn, och kvar blir ett kors. De fyra bitarna har tillsammans arean 36 cm², och korset har arean 64 cm².
+  fragor:
+    - Hur lång är kanten runt korset innan Selma viker det?
+    - Hur ändras kanten om Selma klipper större hörn ur samma papper och får ett kors kvar?
+  bild: Ett kvadratiskt papper med en streckad kvadrat i varje hörn och en sax. En pil går till korset som blir kvar, och en pil till den öppna asken som korset viks till. Bilden har inga mått.
+losningsforslag:
+  svaret: 40 cm. Med större hörn ändras kanten inte, så länge ett kors blir kvar.
+  kontroll: 8 · 3 + 4 · 4 = 40 = 4 · 10.
+  iden: Ett bortklippt hörn ändrar var kanten går, men inte hur lång den är.
+  a:
+    namn: räkna ut alla mått
+    text: Eleven får sidorna ur areorna, lägger ihop alla sträckor och prövar större hörn.
+    bild: "Lösning A, alla mått. Korset är ritat med armens bredd 4 cm och sträckorna i hörnen 3 cm. Papperet är 36 + 64 = 100 cm², så sidan är 10 cm, eftersom 10 · 10 = 100. Ett hörn är 36 / 4 = 9 cm², så dess sida är 3 cm. Armens bredd är 10 − 3 − 3 = 4 cm. Runt korset: 8 · 3 + 4 · 4 = 40 cm. Med hörn på 4 cm blir armens bredd 10 − 4 − 4 = 2 cm, och kanten 8 · 4 + 4 · 2 = 32 + 8 = 40 cm, lika lång."
+  b:
+    namn: flytta ut hörnens kanter
+    text: Eleven flyttar ut sträckorna i hörnen till papperets kant och får sidan ur 36 + 64 = 100.
+    bild: "Lösning B, kanterna flyttas ut. Korset är ritat inuti papperets streckade kant, och i varje hörn visar en pil att hörnets två kanter kan flyttas ut till papperets kant. Papperet är 36 + 64 = 100 cm², och sidan är 10 cm, eftersom 10 · 10 = 100. Runt korset: 4 · 10 = 40 cm. Med större hörn flyttas kanterna ut på samma sätt, så kanten är 40 cm så länge det blir ett kors."
+  c:
+    rader:
+      - "Papperet: 4 · 10 = 40 cm"
+      - Hörnen tar 4 · (3 + 3) = 24 cm
+      - "Svar: 40 − 24 = 16 cm"
+    om: Eleven drar bort kanten som Selma klipper bort men glömmer de nya sträckorna.
+    fraga: Vad ger elevens sätt med hörn på 4 cm, och hur långt blir det runt det korset?
+  fragor:
+    - Hur får eleven i lösning A sidorna ur areorna?
+    - Varför blir kanten runt korset lika lång som papperets, när eleven i lösning B flyttar ut sträckorna i hörnen?
+    - Var syns det i båda lösningarna att större hörn inte gör kanten kortare?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja om hörnen var 2 cm, och varför?

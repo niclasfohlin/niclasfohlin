@@ -32,7 +32,8 @@ export const UPPTAGNA_LED = Object.freeze(['lathund', 'serier', 'skrivkort', 'ak
  * läroplanen och tagga dem", och "Rimligt många taggar. Men stora centrala delar av ämnet för problem"). Problemlösning,
  * kursplanens sjätte del, är ingen tagg, eftersom alla poster är problem. namn står på sidan och i metodens fil (fältet
  * innehallstagg på postens ram), och lgr22 är kursplanens rubrik. Ett nytt ämne får sina taggar här när dess databas
- * kommer.
+ * kommer. En databas vars metod har sina egna slag, som lästexternas slag i Textsamtal i grupp (det eleven listar ut
+ * mellan raderna), tar taggarna ur metoden i stället (src/lib/tafram.ts), så att de står på ett ställe.
  * @type {Readonly<Record<string, readonly { namn: string, lgr22: string }[]>>}
  */
 export const INNEHALLSTAGGAR = Object.freeze({
@@ -72,15 +73,17 @@ export function postensRad(stycke, langst = 120) {
 /**
  * En post ur en databas, i den form som sidan, datafilen och listan att skriva ut använder.
  * @typedef {object} Post
- * @property {string} id adressens led ur nivån och numret, som bas-1
+ * @property {string} id adressens led ur nivån och numret, som bas-1, eller, för en post ur en databas utan metod, ur
+ *   titeln, som glassen
  * @property {string} niva nivåns namn, som Bas
  * @property {number} nr numret på nivån, från 1
  * @property {string} titel
  * @property {string} rad postens egen första mening (postensRad)
- * @property {string} [tagg] innehållstaggens namn, när ämnet har taggar
- * @property {string} sida postens egen sida
- * @property {string} [losning] adressen till postens lösningsförslag på postens sida, som /stodundervisning/<metod>/bas-1#blad-12
- * @property {{ adress: string, alt: string }} bild
+ * @property {string[]} [taggar] innehållstaggarnas namn, när databasen har taggar: en för ett problem, flera för en text
+ * @property {string} [sida] postens egen sida, när posten står i en metod (en post ur en databas utan metod har ingen)
+ * @property {string} [losning] adressen till postens lösningsförslag: på postens sida, som
+ *   /stodundervisning/<metod>/bas-1#blad-12, eller, för en post utan sida, postens pdf med lösningsförslaget
+ * @property {{ adress: string, alt: string }} [bild] postens bild, när posten har en (lästexterna har ingen)
  * @property {Record<string, PostUtskrift>} utskrift varje slag av utskrift, som post (bara problemet) och med (problemet med lösningsförslaget, eller med lärarens sida i en bank utan lösningsförslag)
  */
 /**
@@ -96,8 +99,8 @@ const ID = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const PDF = /^\/stodundervisning\/[\w.-]+\.pdf\?v=[0-9a-f]{8}$/;
 
 /**
- * Felen i en post, som en lista. taggar är ämnets innehållstaggar (innehallstaggar): har ämnet taggar ska posten ha en av
- * dem, och har det inga ska den inte ha någon.
+ * Felen i en post, som en lista. taggar är databasens innehållstaggar (innehallstaggar, eller metodens egna slag): har
+ * databasen taggar ska posten ha minst en och bara sådana, och har den inga ska posten inte ha någon.
  * @param {Post} p
  * @param {{ namn: string }[]} taggar
  * @returns {string[]}
@@ -111,11 +114,13 @@ export function postFel(p, taggar) {
   if (!Number.isInteger(p.nr) || p.nr < 1) fel.push(`${vem}: numret ska vara ett heltal från 1`);
   if (!p.titel) fel.push(`${vem}: titeln saknas`);
   if (!p.rad) fel.push(`${vem}: raden saknas (postens första mening)`);
-  if (taggar.length && !taggar.some((t) => t.namn === p.tagg)) fel.push(`${vem}: innehållstaggen ${p.tagg ? `"${p.tagg}" finns inte` : 'saknas'}; den ska vara en av ${taggar.map((t) => t.namn).join(', ')} (fältet innehallstagg på postens ram)`);
-  if (!taggar.length && p.tagg) fel.push(`${vem}: har innehållstaggen "${p.tagg}", men ämnet har inga taggar i standarden (INNEHALLSTAGGAR)`);
-  if (!/^\/stodundervisning\/[a-z0-9-]+\/[a-z0-9-]+$/.test(p.sida ?? '')) fel.push(`${vem}: sidan "${p.sida}" är inte en adress under /stodundervisning/<metod>/`);
-  if (!/\.(svg|png|jpg)(\?v=[0-9a-f]{8})?$/.test(p.bild?.adress ?? '') || !p.bild?.alt) fel.push(`${vem}: bilden eller dess textalternativ saknas`);
-  if (p.losning !== undefined && !p.losning.startsWith(`${p.sida}#`)) fel.push(`${vem}: lösningsförslaget "${p.losning}" står inte på postens sida`);
+  const egna = p.taggar ?? [];
+  if (taggar.length && !egna.length) fel.push(`${vem}: innehållstaggen saknas; den ska vara en av ${taggar.map((t) => t.namn).join(', ')} (fältet innehallstagg på postens ram, eller metodens slag)`);
+  for (const t of egna) if (taggar.length && !taggar.some((x) => x.namn === t)) fel.push(`${vem}: innehållstaggen "${t}" finns inte; den ska vara en av ${taggar.map((x) => x.namn).join(', ')}`);
+  if (!taggar.length && egna.length) fel.push(`${vem}: har innehållstaggen "${egna[0]}", men databasen har inga taggar (INNEHALLSTAGGAR eller metodens slag)`);
+  if (p.sida !== undefined && !/^\/stodundervisning\/[a-z0-9-]+\/[a-z0-9-]+$/.test(p.sida)) fel.push(`${vem}: sidan "${p.sida}" är inte en adress under /stodundervisning/<metod>/`);
+  if (p.bild !== undefined && (!/\.(svg|png|jpg)(\?v=[0-9a-f]{8})?$/.test(p.bild.adress ?? '') || !p.bild.alt)) fel.push(`${vem}: bildens adress eller textalternativ saknas`);
+  if (p.losning !== undefined && (p.sida !== undefined ? !p.losning.startsWith(`${p.sida}#`) : !PDF.test(p.losning))) fel.push(`${vem}: lösningsförslaget "${p.losning}" står ${p.sida !== undefined ? 'inte på postens sida' : 'inte i en pdf med version, som en post utan sida ska ha'}`);
   for (const [slag, u] of Object.entries(p.utskrift ?? {})) {
     if (!PDF.test(u.adress)) fel.push(`${vem}: utskriften ${slag} har adressen "${u.adress}", som inte är en pdf med version`);
     if (!(u.byte > 0)) fel.push(`${vem}: utskriften ${slag} har ingen storlek`);

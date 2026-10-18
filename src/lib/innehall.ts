@@ -2,11 +2,21 @@ import { getCollection, type CollectionEntry, type CollectionKey } from 'astro:c
 import taggarData from '../data/taggar.json';
 import publikationerData from '../data/publikationer.json';
 import { arLektion, byggSerier, serieUppdaterad } from './serie';
+import { bankAv } from './bank';
+import { matteproblemen, type Matteproblem } from './matteproblem';
 
-// Utkast visas i utvecklingsläge men aldrig i produktionsbygget.
+// Utkast visas i utvecklingsläge men aldrig i produktionsbygget. Databasens matteproblem har inget utkastläge.
 export async function publicerade<K extends CollectionKey>(samling: K): Promise<CollectionEntry<K>[]> {
   const alla = await getCollection(samling);
-  return import.meta.env.PROD ? alla.filter((post) => !post.data.utkast) : alla;
+  return import.meta.env.PROD ? alla.filter((post) => !('utkast' in post.data && post.data.utkast)) : alla;
+}
+
+// Ta fram ett matteproblems alla problem (src/lib/matteproblem.ts): metoden vars bank är problem, med databasens poster i
+// src/content/matteproblem/ efter metodens på varje nivå. undefined när ingen publicerad metod har en bank med problem.
+export async function matteproblemenPaSidan(): Promise<{ metod: CollectionEntry<'stodundervisning'>; alla: Matteproblem[] } | undefined> {
+  const metod = (await publicerade('stodundervisning')).find((m) => bankAv(m.data)?.ord.slug === 'problem');
+  if (!metod) return undefined;
+  return { metod, alla: matteproblemen(metod, (await getCollection('matteproblem')).map((e) => ({ id: e.id, data: e.data }))) };
 }
 
 export async function artiklarSorterade() {

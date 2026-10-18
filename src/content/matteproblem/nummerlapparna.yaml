@@ -1,0 +1,37 @@
+niva: Bas
+nr: 14
+titel: Nummerlapparna
+innehallstagg: Taluppfattning
+kalla: Idén kommer ur Skolverkets Problembank för årskurs 4–6, Billys bok.
+problem:
+  text:
+    - "Till skolloppet gör Noah en nummerlapp till varje löpare: 1, 2, 3 och så vidare. Nummerlappen 12 har två siffror, 1 och 2. Sammanlagt skriver Noah 57 siffror."
+  fragor:
+    - Hur många nummerlappar gör Noah?
+    - Om det kommer fler löpare, kan det då bli exakt 100 siffror på alla lapparna tillsammans? Hur vet ni det?
+  bild: En nummerlapp med talet 12 och orden två siffror, och en hög med tomma nummerlappar, en till varje löpare.
+losningsforslag:
+  svaret: 33 nummerlappar. Exakt 100 siffror går inte, för antalet hoppar från 99 till 101.
+  kontroll: 9 + 24 = 33 och 9 + 24 · 2 = 57. 9 + 45 · 2 = 99 och 9 + 46 · 2 = 101.
+  iden: Lapparna 1 till 9 har en siffra var, och lapparna 10 till 99 har två.
+  a:
+    namn: räkna tiotal för tiotal
+    text: Eleven räknar siffrorna tiotal för tiotal till 49 och lägger sedan till 2 för varje lapp, tills det blir 57.
+    bild: "Lösning A, räkna tiotal för tiotal. En tabell med lappar, nya siffror och siffror ihop. 1–9: 9 · 1 = 9, ihop 9. 10–19: 10 · 2 = 20, ihop 29. 20–29: 10 · 2 = 20, ihop 49. 30–33: 4 · 2 = 8, ihop 57. Bredvid räknar eleven vidare för fler löpare: lapparna 1–49 ger 89 siffror, 1–54 ger 99 och 1–55 ger 101. Antalet siffror växer med 2 i taget och hoppar över 100. Svar: 33 nummerlappar, och exakt 100 siffror går inte."
+  b:
+    namn: dra bort de ensiffriga
+    text: "Eleven drar bort de 9 siffrorna på lapparna 1 till 9 och delar resten med 2: 48 / 2 = 24."
+    bild: "Lösning B, dra bort de ensiffriga. Lappen 7 har 1 siffra och lappen 23 har 2 siffror. Lapparna 1 till 9 har 9 siffror. 57 − 9 = 48 siffror kvar. 48 / 2 = 24 lappar med 2 siffror. 9 + 24 = 33 nummerlappar. Kontroll: 9 + 24 · 2 = 57. För 100 siffror: 100 − 9 = 91, och 91 / 2 = 45 rest 1. En siffra blir över, så det går inte."
+  c:
+    rader:
+      - Varje lapp har 2 siffror.
+      - 57 / 2 = 28 rest 1
+      - 100 / 2 = 50
+      - "Svar: 28 lappar, och 100 går."
+    om: Eleven räknar med två siffror på varje lapp och bortser från resten. Lapparna 1 till 9 har bara en siffra.
+    fraga: Hur många siffror skriver Noah på 28 lappar?
+  fragor:
+    - Varför ger varje tiotal i lösning A 20 siffror till?
+    - Varför drar eleven i lösning B bort 9 innan hen delar med 2?
+    - Var syns det i båda lösningarna att lapparna 1 till 9 har en siffra var?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja med 189 siffror, och varför?

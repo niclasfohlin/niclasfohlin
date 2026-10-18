@@ -1,9 +1,9 @@
 // Ta fram ur en bank (Niclas 2026-10-18: "Problemen i matte borde vara en databas och kunna hämtas likt ex aktiviteter
 // men utifrån sina nivåer", och "Allt är ju att du skapar en slags standard för en databas"; byggplanen och skälen i
 // underlag/prov/verktyg/PLAN-3.md och ARBETSORDER.md). Bankens enheter (src/lib/bank.ts) är databasens poster, i
-// standardens form (src/lib/standard/, Post), och sidan Ta fram ett matteproblem ([id]/problem.astro med
-// src/components/TaFram.astro) väljer ur dem efter nivå och innehållstagg. Inget flyttas ur metoden: problemen står kvar
-// i metodens fil, och en ny post där kommer med på sidan i nästa bygge.
+// standardens form (src/lib/standard/, Post), och sidorna Ta fram ett matteproblem ([id]/problem.astro) och Ta fram en
+// lästext ([id]/texter.astro), med src/components/TaFram.astro, väljer ur dem efter nivå och tagg. Inget flyttas ur
+// metoden: posterna står kvar i metodens fil, och en ny post där kommer med på sidan i nästa bygge.
 //
 // Billigt från början (Niclas samma dag: "Se till att du bygger så databasen kommer fram billigt utan en massa krediter i
 // onödan redan från början"): sidan och datafilen är filer ur samma bygge, utan funktioner. Raderna står i sidan, och
@@ -17,14 +17,19 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { PDFDict, PDFDocument, PDFName, PDFRawStream, PDFRef } from 'pdf-lib';
-import type { CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import { bankAv, enhetAdress, nivaFarger, type Bank, type Bankenhet } from './bank';
-import { enhetensUtskrifter, utskriftAdress, type Utskrift } from './utskrift';
-import { bildensAlt, metodensPaBordet } from './pabordet';
+import { enhetensUtskrifter, radensUtskrifter, utskriftAdress, type Utskrift } from './utskrift';
+import { bladpar, bladRubrik, bladsidaAdress, enhetensBlad, metodensBladmaterial } from './bladmaterial';
+import { bildensAlt, metodensPaBordet, paBordetVid, type PaBordet } from './pabordet';
+import type { Faktatext } from './ramform';
+import { sidlasFor } from './sidlas';
 import { losningsforslagVy, problemformer } from './problemform';
 import type { LosningsforslagVy } from './losningsforslag';
 import { centralAv } from './centrala';
-import { databasFel, innehallstaggar, postensRad, type Post, type PostUtskrift } from './standard/index.js';
+import { matteproblemen, matteproblemetsUtskrifter, type Matteproblem } from './matteproblem';
+import { handledningensFil, lararhandledningar } from './handledning';
+import { databasFel, innehallstaggar, postensRad, slugAv, type Post, type PostUtskrift } from './standard/index.js';
 
 type Metod = CollectionEntry<'stodundervisning'>;
 type Karta = { ram?: number; bild?: number; fran: number; till: number }[];
@@ -99,15 +104,31 @@ async function postUtskrift(u: Utskrift): Promise<PostUtskrift> {
 export interface TaFramPost extends Post {
   nivaSlug: string;
   farg: string;
-  taggId?: string;
-  /** Bilden utan version, som sidan skriver och scripts/filversion.mjs ger version. */
-  bildFil: string;
-  /** Problemet och frågorna för Visa stort. */
+  /** Taggarnas id, som raden och sidans knappar bär. */
+  taggIds: string[];
+  /** Bilden utan version, som sidan skriver och scripts/filversion.mjs ger version, och dess mått, när posten har en. */
+  bildFil?: string;
+  bildMatt?: { bredd: number; hojd: number };
+  /** Texten och frågorna för Visa stort. */
   stycken: string[];
   fragor: string[];
   /** Lösningsförslaget för Visa stort (src/lib/losningsforslag.ts), när banken har det. */
   losningsforslag?: LosningsforslagVy;
+  /** En faktatexts tema, etikettens första led ("Vatten · text 1 av 5"), och texten för Visa stort som Faktatext.astro
+   *  ritar den (src/lib/taframdata.ts): texten, ramens rubrik, bilderna vid ramen och sidlåset. */
+  tema?: string;
+  fakta?: { f: Faktatext; rubrik: string; bilder: PaBordet[]; las: number[] };
+  /** Faktatextens modell (Niclas 2026-10-18 natt: "En text i fakta ska ha sin modell likt problem har sin lösning, en
+   *  ifylld och en tom att skriva ut"): modellens namn, bladet som lärarens sida säger ("Tankekartan, blad 1"),
+   *  modellens sida, bladets bild och dess utskrift (enhetensBlad i src/lib/bladmaterial.ts). Den ifyllda modellen gör
+   *  metodriggen (K-434). */
+  modell?: { namn: string; blad: string; sida: string; bild: { adress: string; alt: string }; bildMatt: { bredd: number; hojd: number }; utskrift: PostUtskrift };
 }
+/** Ett tema (faktatexterna): namnet, temats sida ([id]/texter/[tema].astro), texterna i ordning och, när temat har en,
+ *  lärarhandledningens fil (src/lib/handledning.ts), Word och pdf utan ändelse. */
+export interface TaFramTema { namn: string; slug: string; adress: string; poster: TaFramPost[]; handledning?: string }
+/** En tagg på sidan: namnet, förklaringen (knappens title), färgen 1–7 (--tagg-1 i global.css) och antalet poster. */
+export interface TaFramTagg { id: string; namn: string; om: string; farg: number; antal: number }
 export interface TaFram {
   metod: string;
   titel: string;
@@ -122,18 +143,87 @@ export interface TaFram {
    *  "lärarens sida och Två lösningar". foljeEn är detsamma för en post: lösningsförslaget. */
   folje: string;
   foljeEn: string;
-  nivaer: { namn: string; slug: string; farg: string; poster: TaFramPost[]; filer: { bara: Fil; med?: Fil } }[];
-  taggar: { id: string; namn: string; lgr22: string; antal: number }[];
+  /** Länken vid varje post till dess följesida: Lösningsförslag, som öppnar Visa stort med bladet, eller Lärarens sida,
+   *  som leder till sidan bland postens sidor i metoden. */
+  losningNamn: string;
+  /** Nivåerna med sina poster, och i en bank med teman (faktatexterna) temana i ordning, och nivåns två filer: bara
+   *  posterna, och posterna med följesidorna eller, där de står i egna filer (forSig), bara följesidorna. */
+  nivaer: { namn: string; slug: string; farg: string; poster: TaFramPost[]; teman?: TaFramTema[]; filer: { bara: Fil; med?: Fil } }[];
+  /** Följesidorna står i egna filer (sidorForSig i src/lib/bank.ts): faktatexterna och lärarens sidor. */
+  forSig: boolean;
+  taggar: TaFramTagg[];
+  /** Vad taggarna är: valets etikett (Innehåll, Slag), en mening till ingressen och en till raden längst ned på sidan. */
+  taggText: { etikett: string; ingress: string; kalla: string };
   poster: TaFramPost[];
   /** Källfilerna som listan kan hämta i stället för posternas egna pdf:er. */
   filer: Record<string, Fil>;
 }
 export interface Fil { namn: string; adress: string; byte: number }
 
+/** Taggarnas färger (--tagg-1 till --tagg-7 i global.css), skilda från nivåernas (Niclas 2026-10-18: "Skulle önska att de
+ *  olika taggarna fick varsin färg. Inte samma färg som nivåerna"). En tagg har sin färg efter sin plats bland
+ *  databasens taggar, också när en annan tagg saknar poster, så att färgen inte byter tagg. */
+export const TAGGFARGER = 7;
+
 /** Bankens led i adressen: problem, texter. Ta fram-sidorna har sina led bland de reserverade (UPPTAGNA_LED). */
 export const taFramLed = (b: Bank) => b.ord.slug;
-/** Metoderna med en bank vars Ta fram-sida är led, som problem. */
-export const harTaFram = (m: Metod, led: string) => bankAv(m.data)?.ord.slug === led;
+/** Databasens namn i registret (src/data/centrala.json): problemen, lästexterna och faktatexterna, där texterna och
+ *  lärarens sidor står i egna filer och texterna hör till teman (Niclas 2026-10-18: "Kanske nivå. Sedan tema. Sedan
+ *  enskilda texterna"). */
+export const taFramSlag = (b: Bank) => (b.ord.slug === 'problem' ? 'matteproblem' : b.ord.slug === 'texter' ? (b.sidorForSig ? 'faktatexter' : 'lastexter') : undefined);
+/** Metoderna med en bank vars Ta fram-sida är led, som problem eller texter. */
+export const harTaFram = (m: Metod, led: string) => { const b = bankAv(m.data); return !!b && b.ord.slug === led && !!taFramSlag(b); };
+
+type Ram = NonNullable<Metod['data']['ramar']>['ramar'][number];
+// Metodens egna slag (Textsamtal i grupp, tabellen "Slagen: det eleven listar ut") är lästexternas taggar, med metodens
+// förklaring, så att de står på ett ställe. En texts slag står på dess lärarsida, i frågornas namn ("Fråga 2 · mellan
+// raderna, Vem, syftning").
+const metodensSlag = (d: Metod['data']) => {
+  const t = (d.tabeller ?? []).find((x) => /^Slagen\b/.test(x.rubrik ?? ''));
+  return t?.rader.map((r) => ({ id: slugAv(String(r[0])), namn: String(r[0]), om: `${String(r[0])}: eleven listar ut ${String(r[1] ?? '')}` }));
+};
+// Faktatexternas byggnad (Faktatextsamtal i grupp, tabellen "De fem modellerna: en för varje sätt att bygga en text"):
+// varje sätt har sin modell, och textens modell står på dess lärarsida ("Texten jämför två saker, och modellen är
+// Venndiagrammet"). Taggen är sättets namn, det ord lärare söker på, med metodens förklaring och modellens fråga.
+const BYGGNAD: Record<string, string> = { Tankekartan: 'Beskrivning', Tidslinjen: 'Tidsordning', Venndiagrammet: 'Jämförelse', Kedjan: 'Orsak och verkan', 'Problem och lösning': 'Problem och lösning' };
+const metodensModeller = (d: Metod['data']) => {
+  const t = (d.tabeller ?? []).find((x) => /^De fem modellerna\b/.test(x.rubrik ?? ''));
+  const k = t?.kolumner?.indexOf('Modellen') ?? -1;
+  if (!t || k < 0) return undefined;
+  return t.rader.map((r) => {
+    const modell = String(r[k]);
+    const namn = BYGGNAD[modell] ?? modell;
+    return { id: slugAv(namn), namn, modell, om: `Texten ${String(r[0])}, och modellen är ${modell}: ${String(r[k + 1] ?? '')}` };
+  });
+};
+const textensModell = (ram: Ram) => (ram.text ?? []).join(' ').match(/modellen är ([^,.]+)/)?.[1]?.trim();
+const textensSlag = (ram: Ram) =>
+  [...new Set(ram.delar.flatMap((del) => del.falt.map((f) => f.rubrik.match(/^Fråga \d+ · mellan raderna, ([^,]+)/)?.[1]?.trim()).filter((x): x is string => !!x)))];
+const lararsidan = (ramar: Ram[], e: Bankenhet) => [...e.fore, ...e.efter].find((ri) => /^Lärarens sida:/.test(ramar[ri].rubrik));
+/** Databasens taggar med förklaring och färg: metodens egna slag (lästexterna), sätten att bygga en text (faktatexterna)
+ *  eller kursplanens delar i metodens ämne (problemen). */
+const databasensTaggar = (d: Metod['data']) =>
+  (metodensSlag(d) ?? metodensModeller(d)?.map(({ id, namn, om }) => ({ id, namn, om })) ?? innehallstaggar(d.omrade).map((t) => ({ id: t.id, namn: t.namn, om: `${t.lgr22}, en del av det centrala innehållet i kursplanen i ${d.omrade.toLowerCase()}` })))
+    .map((t, i) => ({ ...t, farg: (i % TAGGFARGER) + 1 }));
+/** En enhets taggar: textens slag eller byggnad ur dess lärarsida, eller problemets innehållstagg. */
+const enhetensTaggar = (d: Metod['data'], e: Bankenhet): string[] => {
+  const ramar = d.ramar!.ramar;
+  const ls = lararsidan(ramar, e);
+  if (metodensSlag(d)) return ls !== undefined ? textensSlag(ramar[ls]) : [];
+  const modeller = metodensModeller(d);
+  if (modeller) { const modell = ls !== undefined ? textensModell(ramar[ls]) : undefined; const x = modeller.find((y) => y.modell === modell); return x ? [x.namn] : []; }
+  const t = ramar[e.ri].innehallstagg;
+  return t ? [t] : [];
+};
+// Nivåns översikt (Lärarens sidor: Lättläst) säger vad varje text handlar om, i kolumnen Handlar om. Den raden står på
+// postens rad, där ett problem har sin första mening.
+const handlarOm = (ramar: Ram[], oversikt: number | undefined, nr: number | undefined) => {
+  const o = oversikt !== undefined ? ramar[oversikt].oversikt : undefined;
+  const k = o?.kolumner.indexOf('Handlar om') ?? -1;
+  if (!o || k < 0 || nr === undefined) return undefined;
+  const rad = o.rader.find((r) => new RegExp(`^${nr}\\.\\s`).test(String(r[0])));
+  return rad ? String(rad[k]) : undefined;
+};
 
 const fil = (namn: string): Fil => {
   if (!PDF_FINNS(namn)) { vantande = true; return { namn, adress: `/stodundervisning/${namn}.pdf?v=00000000`, byte: 1 }; }
@@ -155,69 +245,140 @@ async function bygg(m: Metod): Promise<TaFram> {
   if (!bank) throw new Error(`Ta fram: ${d.titel} har ingen bank (src/lib/bank.ts).`);
   const led = taFramLed(bank);
   const adress = `/stodundervisning/${m.id}/${led}`;
-  const c = centralAv(led === 'problem' ? 'matteproblem' : led);
+  const slag = taFramSlag(bank);
+  const c = slag ? centralAv(slag) : undefined;
   const farger = nivaFarger(d, bank);
   const ramar = d.ramar!.ramar;
-  const former = problemformer(ramar, metodensPaBordet(d, m.id));
-  const taggar = innehallstaggar(d.omrade);
+  const bilder = metodensPaBordet(d, m.id);
+  const former = problemformer(ramar, bilder);
+  const egnaSlag = !!metodensSlag(d);
+  const modeller = !!metodensModeller(d);
+  // Modellernas blad (src/lib/bladmaterial.ts), när metoden har dem: textens modell på Ta fram en faktatext.
+  const bm = metodensBladmaterial(d, m.id);
+  const par = bm ? bladpar(d, bm) : [];
+  const taggar = databasensTaggar(d);
   const post = async (e: Bankenhet): Promise<TaFramPost> => {
     const ram = ramar[e.ri];
-    const bild = former.bild(ram);
-    if (!bild) throw new Error(`Ta fram: ${ram.rubrik} har ingen bild På bordet (src/lib/problemform.ts).`);
+    // Problemets bild, eller faktatextens första bild, som raden visar.
+    const faktabilder = e.l.faktatext ? paBordetVid(bilder, { ram: ram.rubrik }) : [];
+    const bild = former.bild(ram) ?? faktabilder[0];
+    if (!bild && slag === 'matteproblem') throw new Error(`Ta fram: ${ram.rubrik} har ingen bild På bordet (src/lib/problemform.ts).`);
     const u = enhetensUtskrifter(d, m.id, bank, e);
-    const tagg = ram.innehallstagg;
-    const t = taggar.find((x) => x.namn === tagg);
+    const postensTaggar = enhetensTaggar(d, e);
+    const lararsida = lararsidan(ramar, e);
     const stycken = e.l.lastext?.stycken ?? [];
+    const niva = bank.nivaer.find((n) => n.enheter.includes(e))!;
     // Lösningsförslaget (Niclas 2026-10-18: "utan att missa att de finns"): bladet Lösningsförslag när metoden har det
     // (metodriggens blad, K-423), annars Lärarens sida, där de två lösningarna står. Ankaret är bladets på postens sida.
-    const losningsblad = [...e.fore, ...e.efter].find((ri) => /^Lösningsförslag:/.test(ramar[ri].rubrik)) ?? [...e.fore, ...e.efter].find((ri) => /^Lärarens sida:/.test(ramar[ri].rubrik));
+    const losningsblad = [...e.fore, ...e.efter].find((ri) => /^Lösningsförslag:/.test(ramar[ri].rubrik)) ?? lararsida;
     // Bladet självt för Visa stort, med bildernas adresser med version, som sidans.
     const lf = e.post !== undefined ? former.losningsforslag(ramar[e.post]) : undefined;
+    // Postens rad: vad lästexten handlar om (översikten), vad faktatexten säger (lärarens sida börjar med det) eller
+    // problemets första mening.
+    const rad = handlarOm(ramar, niva.oversikt, e.nr) ?? (e.l.faktatext && lararsida !== undefined ? postensRad(ramar[lararsida].text?.[0] ?? '') : postensRad(stycken[0] ?? ''));
     return {
-      id: e.slug, niva: e.l.niva, nr: e.nr ?? 0, titel: e.l.titel, rad: postensRad(stycken[0] ?? ''), ...(tagg ? { tagg } : {}),
-      sida: enhetAdress(m.id, e), ...(losningsblad !== undefined ? { losning: `${enhetAdress(m.id, e)}#blad-${losningsblad + 1}` } : {}), bild: { adress: medVersion(bild.adress), alt: bildensAlt(bild) },
+      id: e.slug, niva: e.l.niva, nr: e.nr ?? 0, titel: e.l.titel, rad, ...(postensTaggar.length ? { taggar: postensTaggar } : {}),
+      sida: enhetAdress(m.id, e), ...(losningsblad !== undefined ? { losning: `${enhetAdress(m.id, e)}#blad-${losningsblad + 1}` } : {}),
+      ...(bild ? { bild: { adress: medVersion(bild.adress), alt: bildensAlt(bild) }, bildFil: bild.adress, bildMatt: bild.matt } : {}),
       utskrift: { post: await postUtskrift(u.ramar.get(e.ri)!), med: await postUtskrift(u.post ?? u.alla) },
-      nivaSlug: bank.nivaer.find((n) => n.enheter.includes(e))!.slug, farg: farger[e.l.niva], ...(t ? { taggId: t.id } : {}),
-      bildFil: bild.adress, stycken, fragor: (e.l.lastext?.fragor ?? []).map((f) => f.replace(/^\d+\.\s*/, '')),
+      nivaSlug: niva.slug, farg: farger[e.l.niva],
+      taggIds: postensTaggar.map((t) => taggar.find((x) => x.namn === t)?.id ?? slugAv(t)),
+      stycken, fragor: (e.l.lastext?.fragor ?? []).map((f) => f.replace(/^\d+\.\s*/, '')),
       ...(lf ? { losningsforslag: losningsforslagVy(lf, (b) => ({ adress: medVersion(b.adress), alt: bildensAlt(b) })) } : {}),
+      ...(e.l.faktatext ? { ...(e.tema ? { tema: e.tema } : {}), fakta: { f: e.l.faktatext, rubrik: ram.rubrik, bilder: faktabilder, las: sidlasFor(m.id, ram.rubrik) } } : {}),
+      ...(await modellen(e)),
     };
   };
+  // Faktatextens modell: bladet som lärarens sida säger, med bladets utskrift ur modellens filer.
+  const modellen = async (e: Bankenhet): Promise<Pick<TaFramPost, 'modell'>> => {
+    const x = bm && e.l.faktatext ? enhetensBlad(d, bm, e, par).blad : undefined;
+    if (!bm || !x) return {};
+    const u = radensUtskrifter(d, m.id, bm, x.rad).blad.get(x.b.bild.nr);
+    if (!u) return {};
+    return { modell: { namn: x.rad.namn, blad: bladRubrik(x.rad, x.b), sida: bladsidaAdress(m.id, x.rad), bild: { adress: medVersion(x.b.adress), alt: bildensAlt(x.b) }, bildMatt: x.b.matt, utskrift: await postUtskrift(u) } };
+  };
+  // Ta fram ett matteproblem: metodens problem och databasens (src/lib/matteproblem.ts), med utskrifterna ur sidans egna
+  // filer, en per nivå med nivåns alla problem. Databasens problem har ingen sida i metoden, och länken till
+  // lösningsförslaget är då dess pdf, som Visa stort öppnar i stället när sidan har JavaScript.
+  const strip = (f: string) => f.replace(/^\d+\.\s*/, '');
+  const problemPost = async (alla: Matteproblem[], p: Matteproblem): Promise<TaFramPost> => {
+    const u = matteproblemetsUtskrifter(alla, p);
+    const utskrift = { post: await postUtskrift(u.post), med: await postUtskrift(u.med) };
+    const e = p.enhet;
+    const blad = e && [...e.fore, ...e.efter].find((ri) => /^Lösningsförslag:/.test(ramar[ri].rubrik));
+    return {
+      id: p.id, niva: p.niva, nr: p.nr, titel: p.titel, rad: postensRad(p.l.stycken[0] ?? ''), ...(p.tagg ? { taggar: [p.tagg] } : {}),
+      ...(e ? { sida: enhetAdress(m.id, e), ...(blad !== undefined ? { losning: `${enhetAdress(m.id, e)}#blad-${blad + 1}` } : {}) } : { losning: utskrift.med.adress }),
+      bild: { adress: medVersion(p.bild.adress), alt: bildensAlt(p.bild) }, bildFil: p.bild.adress, bildMatt: p.bild.matt,
+      utskrift, nivaSlug: bank.nivaer.find((n) => n.namn === p.niva)!.slug, farg: farger[p.niva],
+      taggIds: p.tagg ? [taggar.find((x) => x.namn === p.tagg)?.id ?? slugAv(p.tagg)] : [],
+      stycken: p.l.stycken, fragor: p.l.fragor.map(strip),
+      losningsforslag: losningsforslagVy(p.lf, (b) => ({ adress: medVersion(b.adress), alt: bildensAlt(b) })),
+    };
+  };
+  // Kartläggningens texter (utan nummer, som "Kartläggning före: Bland vagnarna") är elevens prov före och efter
+  // perioden och står inte bland posterna: läst i förväg säger de inget om vad eleven har lärt sig.
   const poster: TaFramPost[] = [];
-  for (const e of bank.enheter) poster.push(await post(e));
+  if (slag === 'matteproblem') {
+    const alla = matteproblemen(m, (await getCollection('matteproblem')).map((x) => ({ id: x.id, data: x.data })));
+    for (const p of alla) poster.push(await problemPost(alla, p));
+  } else for (const e of bank.enheter.filter((x) => x.nr !== undefined)) poster.push(await post(e));
   const fel = databasFel(poster, taggar);
   if (fel.length && !vantande) throw new Error(`Ta fram (${d.titel}): ${fel.length} fel i databasen:\n  ${fel.join('\n  ')}`);
   // Källfilerna som posternas sidor står i, och nivåns två filer att skriva ut hela nivån (bankfiler i src/lib/bank.ts).
   const filer: Record<string, Fil> = {};
   for (const p of poster) for (const u of Object.values(p.utskrift)) for (const k of u.kalla) filer[k.fil] ??= fil(k.fil);
-  const nivaer = bank.nivaer.map((n) => {
+  // Temana med lärarhandledning (src/lib/handledning.ts).
+  const handledda = new Set([...lararhandledningar(ramar).values()].map((h) => h.tema));
+  const nivaer = bank.nivaer.filter((n) => poster.some((p) => p.nivaSlug === n.slug)).map((n) => {
     const egna = poster.filter((p) => p.nivaSlug === n.slug);
+    // Nivåns filer: den med bara posterna, och den andra som posternas följesidor står i (med följesidorna, eller bara
+    // följesidorna där de står för sig).
     const bara = egna[0].utskrift.post.kalla[0].fil;
-    const med = egna[0].utskrift.med.kalla[0].fil;
-    return { namn: n.namn, slug: n.slug, farg: farger[n.namn], poster: egna, filer: { bara: filer[bara], ...(med !== bara ? { med: filer[med] } : {}) } };
+    const med = egna[0].utskrift.med.kalla.map((k) => k.fil).find((f) => f !== bara);
+    // Temana i den ordning texterna står, när posterna har teman.
+    const teman = egna.some((p) => p.tema) ? [...new Set(egna.map((p) => p.tema ?? ''))].map((namn) => ({ namn, slug: slugAv(namn), adress: `${adress}/${slugAv(namn)}`, poster: egna.filter((p) => (p.tema ?? '') === namn), ...(handledda.has(namn) ? { handledning: handledningensFil(m.id, { tema: namn }) } : {}) })) : undefined;
+    return { namn: n.namn, slug: n.slug, farg: farger[n.namn], poster: egna, ...(teman ? { teman } : {}), filer: { bara: filer[bara], ...(med ? { med: filer[med] } : {}) } };
   });
+  const medPoster = taggar.map((t) => ({ ...t, antal: poster.filter((p) => p.taggar?.includes(t.namn)).length })).filter((t) => t.antal > 0);
+  // Två taggar som exempel i ingressen: lästexternas slag är namn, och faktatexternas strukturer vanliga ord.
+  const exempel = medPoster.slice(0, 2).map((t) => (modeller ? t.namn.toLowerCase() : t.namn)).join(' eller ');
   return {
     metod: m.id, titel: d.titel, omrade: d.omrade, namn: c?.namn ?? `Ta fram ett ${bank.ord.en}`, adress, ...(c?.kort ? { kort: c.kort } : {}), led,
     ord: bank.ord,
     ...(bank.post
       ? { folje: bank.post.alla.toLowerCase(), foljeEn: bank.post.bestamd }
       : (() => { const f = bank.foljesidor.map((n) => (/^Lärarens sida$/i.test(n) ? n.toLowerCase() : n)).join(' och '); return { folje: f, foljeEn: f }; })()),
-    nivaer, taggar: taggar.map((t) => ({ ...t, antal: poster.filter((p) => p.tagg === t.namn).length })).filter((t) => t.antal > 0),
+    losningNamn: !bank.post || bank.post.namn === 'Lösningsförslag' ? 'Lösningsförslag' : bank.post.namn,
+    nivaer, forSig: bank.sidorForSig, taggar: medPoster,
+    taggText: egnaSlag
+      ? { etikett: 'Slag', ingress: ` Taggarna säger vad eleven ska lista ut mellan raderna, som ${exempel}. Tryck på en tagg för att se ${bank.ord.alla} med det slaget.`, kalla: ' Taggarna är metodens slag av frågor mellan raderna, ur tabellen Slagen: det eleven listar ut.' }
+      : modeller
+        ? { etikett: 'Struktur', ingress: ` Varje tema har en text av varje struktur, som ${exempel}, och varje struktur har sin modell. Tryck på en struktur för att se ${bank.ord.alla} som är byggda så.`, kalla: ' Taggarna är de fem sätten att bygga en text, ur tabellen De fem modellerna.' }
+        : { etikett: 'Innehåll', ingress: ` Tryck på en tagg för att se ${bank.ord.alla} i en del av ${d.omrade.toLowerCase()}en.`, kalla: ` Taggarna är delarna av det centrala innehållet i kursplanen i ${d.omrade.toLowerCase()} (Skolverket, Lgr22).` },
     poster, filer,
   };
 }
 
-/** Det som delningskortet ritar för några poster (src/pages/delning/tafram/[namn].astro): titeln, nivån, texten, frågorna
- *  och bilden, utan utskrifterna, så att kortet inte behöver läsa pdf:erna. */
+/** Det som delningskortet ritar för några poster (src/pages/delning/tafram/[namn].astro): titeln, nivån, texten, frågorna,
+ *  taggarna och bilden, utan utskrifterna, så att kortet inte behöver läsa pdf:erna. */
 export function taFramKortposter(m: Metod, ids: string[]) {
   const d = m.data;
   const bank = bankAv(d)!;
   const farger = nivaFarger(d, bank);
   const ramar = d.ramar!.ramar;
-  const former = problemformer(ramar, metodensPaBordet(d, m.id));
+  const bilder = metodensPaBordet(d, m.id);
+  const former = problemformer(ramar, bilder);
+  const taggar = databasensTaggar(d);
   return ids.map((id) => {
     const e = bank.enheter.find((x) => x.slug === id);
     if (!e) throw new Error(`Ta fram: ${d.titel} har ingen post ${id} att rita på delningskortet (src/lib/delningskort.ts, TAFRAMENS_POSTER).`);
-    return { id, titel: e.l.titel, niva: e.l.niva, nr: e.nr ?? 0, farg: farger[e.l.niva], tagg: ramar[e.ri].innehallstagg ?? '', stycken: e.l.lastext?.stycken ?? [], fragor: (e.l.lastext?.fragor ?? []).map((f) => f.replace(/^\d+\.\s*/, '')), bild: former.bild(ramar[e.ri])?.adress ?? '' };
+    return {
+      id, titel: e.l.titel, niva: e.l.niva, nr: e.nr ?? 0, farg: farger[e.l.niva], en: bank.ord.en,
+      taggar: enhetensTaggar(d, e).map((namn) => ({ namn, farg: taggar.find((x) => x.namn === namn)?.farg ?? 1 })),
+      stycken: e.l.lastext?.stycken ?? e.l.faktatext?.ingress ?? [], fragor: (e.l.lastext?.fragor ?? []).map((f) => f.replace(/^\d+\.\s*/, '')),
+      bild: (former.bild(ramar[e.ri]) ?? (e.l.faktatext ? paBordetVid(bilder, { ram: ramar[e.ri].rubrik })[0] : undefined))?.adress ?? '',
+    };
   });
 }
 
@@ -226,7 +387,8 @@ export function taFramKortposter(m: Metod, ids: string[]) {
  *  (losningsruta); webbläsaren sätter ihop bladet (src/scripts/tafram.ts). */
 export const taFramData = (t: TaFram) => ({
   poster: t.poster.map((p) => ({
-    id: p.id, niva: p.niva, nivaSlug: p.nivaSlug, nr: p.nr, titel: p.titel, ...(p.tagg ? { tagg: p.tagg } : {}), sida: p.sida, ...(p.losning ? { losning: p.losning } : {}), bild: p.bild, stycken: p.stycken, fragor: p.fragor, utskrift: p.utskrift,
+    id: p.id, niva: p.niva, nivaSlug: p.nivaSlug, nr: p.nr, titel: p.titel, ...(p.taggar ? { taggar: p.taggar } : {}), sida: p.sida, ...(p.losning ? { losning: p.losning } : {}), ...(p.bild ? { bild: p.bild } : {}), stycken: p.stycken, fragor: p.fragor, utskrift: p.utskrift,
+    ...(p.modell ? { modell: p.modell } : {}),
     ...(p.losningsforslag ? { losningsforslag: (({ problem: _p, ruta: _r, ...lf }) => lf)(p.losningsforslag) } : {}),
   })),
   ...(t.poster.find((p) => p.losningsforslag) ? { losningsruta: t.poster.find((p) => p.losningsforslag)!.losningsforslag!.ruta } : {}),

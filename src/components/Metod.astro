@@ -27,6 +27,8 @@ import Bank from './Bank.astro';
 import Nivarad from './Nivarad.astro';
 import Problemsida from './Problemsida.astro';
 import Losningsforslag from './Losningsforslag.astro';
+import Lararhandledning from './Lararhandledning.astro';
+import { lararhandledningar } from '../lib/handledning';
 import { bankAv, bankRad, enhetAdress, nivaFarger, BOKNIVA, type Bankenhet } from '../lib/bank';
 import { losningarnasNiva, losningarnasNot, problemformer } from '../lib/problemform';
 import { filmerVid, grundUpphov, metodensFilmer, stegDelar, type FilmPlats } from '../lib/film';
@@ -273,7 +275,9 @@ if (sistaVeckan >= 0 && punkter[sistaVeckan + 1]) punkter[sistaVeckan + 1].helaK
 // allt och i bankens fil med alla nivåer. På skärmen står bara nivåernas översikter, och enheterna på egna sidor; i
 // utskriften av allt står de (Niclas 2026-10-10: "Om skriv ut hela beskrivningen i alla är verkligen att skriva ut allt bör
 // denna också vara det?"), och utskriften Metoden har dem inte, eftersom Materialet är material (data-material nedan).
-const bankPunkter = new Map<string, Punkt[]>(banken && !undersida ? banken.nivaer.map((n) => [n.namn, n.enheter.flatMap((e) => [...e.fore, e.ri, ...e.efter]).map((ri) => ({ ram: ramarna[ri], ri }))]) : []);
+// Ett temas lärarhandledning (src/lib/handledning.ts) står före temats första text, som i Word-filen med allt.
+const bankPunkter = new Map<string, Punkt[]>(banken && !undersida ? banken.nivaer.map((n) => [n.namn, n.enheter.flatMap((e) => [...(e.handledning !== undefined ? [e.handledning] : []), ...e.fore, e.ri, ...e.efter]).map((ri) => ({ ram: ramarna[ri], ri }))]) : []);
+const handledningar = lararhandledningar(ramarna);
 // Gamla länkar till en enhet eller en följesida på metodens sida (#ram-12, #lararens-sida, #bas-problem-1) leder till
 // enhetens sida, till bladet (Bank.astro).
 const bankLankar = banken && !undersida ? Object.fromEntries(banken.enheter.flatMap((e) => [...e.fore, e.ri, ...e.efter].flatMap((ri, k) => {
@@ -765,7 +769,10 @@ const meny = [
         const losning = former.losningar(ram)?.bilder ?? [];
         const larare = former.larare(ram);
         const problemet = larare && { stycken: larare.l.stycken, fragor: larare.l.fragor, bilder: larare.bilder, namn: larare.namn };
-        const innehall = lf ? (<>
+        const hl = handledningar.get(ri);
+        const innehall = hl ? (
+        <Lararhandledning h={hl} id={`ram-${ri + 1}`} farg={bankFarger[hl.niva] ?? '#17324d'} rubrik="h3" />
+      ) : lf ? (<>
         <Losningsforslag lf={lf} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={bankFarger[lf.niva] ?? BOKNIVA[lf.nivaNr] ?? '#4b3a2f'} />
         <Filmruta filmer={[...filmerVid(filmer, { ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
       </>) : pbild ? (<>

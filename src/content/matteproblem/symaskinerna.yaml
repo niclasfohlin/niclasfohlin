@@ -1,0 +1,37 @@
+niva: Bas
+nr: 17
+titel: Symaskinerna
+innehallstagg: Taluppfattning
+kalla: Idén kommer ur Känguru 2017, Ecolier nr 15.
+problem:
+  text:
+    - I slöjdsalen fungerar bara två symaskiner. Fem elever ska sy klart sina påsar. En behöver maskinen i 40 minuter, och de andra i 15, 35, 10 och 45 minuter. Den som börjar vid en maskin syr klart där, innan nästa tar över.
+  fragor:
+    - Hur kort tid kan det ta tills alla fem har sytt klart?
+    - Hur kort tid kan det ta om tre maskiner fungerar?
+  bild: Två symaskiner står på ett bord, och under dem ligger fem påsar som ska sys klart.
+losningsforslag:
+  svaret: "Två maskiner: 75 min, 40 + 35 och 45 + 15 + 10. Tre maskiner: 50 min."
+  kontroll: "75 + 70 = 145 och 45 + 50 + 50 = 145: alla påsar är med."
+  iden: Den maskin som blir klar sist bestämmer tiden, så maskinerna ska bli klara så nära varandra som möjligt.
+  a:
+    namn: pröva och flytta påsar
+    text: Eleven flyttar påsar tills maskinernas tider skiljer 5 minuter, 70 och 75, och ser att lika tider inte går.
+    bild: "Lösning A, pröva och flytta påsar. En tabell med maskin 1, maskin 2 och när båda är klara. 45 + 40 = 85 och 35 + 15 + 10 = 60 ger 85 minuter. 45 + 35 = 80 och 40 + 15 + 10 = 65 ger 80. 45 + 15 + 10 = 70 och 40 + 35 = 75 ger 75. Den maskin som blir klar sist bestämmer. 70 och 75 skiljer bara 5 minuter, och lika går inte, för 145 är udda. Med tre maskiner: 45, 40 + 10 = 50 och 35 + 15 = 50, klart efter 50 minuter."
+  b:
+    namn: räkna vad de hinner
+    text: Eleven ser att två maskiner på 70 minuter bara hinner 140 minuters sömnad, och prövar 75.
+    bild: "Lösning B, räkna vad de hinner. Alla påsar tar 40 + 15 + 35 + 10 + 45 = 145 minuter. På 70 minuter hinner två maskiner sy 2 · 70 = 140 minuter, och det räcker inte. Tiderna slutar på 0 eller 5, så nästa tid är 75: 40 + 35 = 75 och 45 + 15 + 10 = 70. På 45 minuter hinner tre maskiner sy 3 · 45 = 135 minuter, och det räcker inte. På 50 minuter: 45, 40 + 10 = 50 och 35 + 15 = 50."
+  c:
+    rader:
+      - "Allt: 145 min. 145 / 2 = 72,5"
+      - 145 / 3 = 48 rest 1
+      - 1 min = 60 s, 60 / 3 = 20
+      - "Svar: 72,5 min och 48 min 20 s"
+    om: Eleven delar tiden lika, som om en påse kunde sys på flera maskiner.
+    fraga: Vilka påsar syr varje maskin i elevens svar?
+  fragor:
+    - Varför flyttar eleven påsar mellan maskinerna i lösning A?
+    - Varför räknar eleven i lösning B 2 · 70, och vad betyder 140?
+    - Var syns det i båda lösningarna att den maskin som blir klar sist bestämmer tiden?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja med tio elever, och varför?

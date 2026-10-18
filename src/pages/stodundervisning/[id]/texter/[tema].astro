@@ -1,0 +1,83 @@
+---
+// /stodundervisning/<id>/texter/<tema>: ett temas sida på Ta fram en faktatext (K-434; Niclas 2026-10-18 natt: "Temat får
+// sin lärarhandledning. Man måste kunna se eller enkelt navigera så alla texter för temat syns i dess sida"). Överst
+// temats texter i ordning, var och en med texten, lärarens sida och modellen, och knapparna som skriver ut dem, och sedan
+// temats lärarhandledning, när metoden har den (ramen "Lärarhandledning: <nivå>, <tema>", src/lib/handledning.ts), med
+// knappen som skriver ut dess två sidor och Word-filen. Knappen i huvudet leder dit. Hela temat skrivs ut genom listan på
+// Ta fram en faktatext, som öppnas med temats texter i sig (#lista=…). Delningskortet är Ta fram en faktatexts
+// (närmaste överordnade sida, src/lib/delningskort.ts).
+import Base from '../../../../layouts/Base.astro';
+import Lararhandledning from '../../../../components/Lararhandledning.astro';
+import Filval from '../../../../components/Filval.astro';
+import SkrivUtPdf from '../../../../components/SkrivUtPdf.astro';
+import { handledningenTill, handledningensFil, type Lararhandledning as Handledning } from '../../../../lib/handledning';
+import { UPPHOV, metodAdress } from '../../../../lib/metod';
+import { publicerade } from '../../../../lib/innehall';
+import { harTaFram, taFramAv, type TaFram, type TaFramTema } from '../../../../lib/tafram';
+import { site } from '../../../../data/site';
+
+export async function getStaticPaths() {
+  const ut = [];
+  for (const m of (await publicerade('stodundervisning')).filter((x) => harTaFram(x, 'texter'))) {
+    const t = await taFramAv(m);
+    for (const n of t.nivaer) for (const tema of n.teman ?? []) ut.push({ params: { id: m.id, tema: tema.slug }, props: { t, niva: n.namn, farg: n.farg, tema, h: handledningenTill(m.data.ramar?.ramar ?? [], tema.namn) } });
+  }
+  return ut;
+}
+
+const { t, niva, farg, tema, h } = Astro.props as { t: TaFram; niva: string; farg: string; tema: TaFramTema; h?: Handledning };
+const hlFil = h ? handledningensFil(t.metod, h) : undefined;
+const versal = (s: string) => s.charAt(0).toLocaleUpperCase('sv') + s.slice(1);
+const TAL = ['', 'en', 'två', 'tre', 'fyra', 'fem', 'sex', 'sju', 'åtta', 'nio', 'tio'];
+const antal = tema.poster.length;
+const byggnad = tema.poster.map((p) => (p.taggar ?? [])[0]?.toLowerCase()).filter(Boolean);
+const lista = (xs: string[]) => (xs.length > 1 ? `${xs.slice(0, -1).join(', ')} och ${xs.at(-1)}` : xs[0] ?? '');
+const adress = `${metodAdress(site.url, t.metod).replace(/^https?:\/\//, '')}/${t.led}/${tema.slug}`;
+// Alla temats texter i listan att skriva ut på Ta fram en faktatext (src/scripts/tafram.ts läser #lista=).
+const listan = `${t.adress}#lista=${tema.poster.map((p) => p.id).join(',')}`;
+---
+
+<Base title={`${tema.namn}: ${t.namn}`} description={`Temat ${tema.namn} i ${t.titel}: ${TAL[antal] ?? antal} faktatexter på nivån ${niva}, var och en med sin modell${byggnad.length ? ` (${lista(byggnad)})` : ''}, att läsa, visa och skriva ut.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
+  <article class="tema-sida" style={`--niva:${farg}`}>
+    <header class="sk-huvud">
+      <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${t.metod}`}>{t.titel}</a> · <a href={t.adress}>{versal(t.ord.flera)}</a> · {tema.namn}</p>
+      <p class="tema-kicker"><span class="tema-niva">{niva}</span> Tema med {TAL[antal] ?? antal} {t.ord.flera}</p>
+      <h1>{tema.namn}</h1>
+      <p class="ingress">Temats {TAL[antal] ?? antal} {t.ord.flera} är byggda på var sitt sätt{byggnad.length ? `: ${lista(byggnad)}` : ''}. Varje text har sin modell, och lärarens sida säger hur gruppen läser den.</p>
+      <p class="tema-atgarder"><a class="knapp" href={listan}>Skriv ut temats {t.ord.flera}</a>{h && <>{' '}<a class="knapp sekundar" href="#lararhandledning">Lärarhandledningen</a></>}{' '}<a class="knapp sekundar" href={t.adress + `#${t.nivaer.find((n) => n.namn === niva)?.slug ?? ''}`}>Alla {t.ord.flera} på nivån {niva}</a></p>
+    </header>
+
+    <ol class="tema-texter">
+      {tema.poster.map((p) => (
+        <li class="tema-text">
+          {p.bildFil && <img class="tema-bild" src={p.bildFil} alt="" width={p.bildMatt?.bredd} height={p.bildMatt?.hojd} loading="lazy" decoding="async" />}
+          <div class="tema-text-text">
+            <h2 class="tema-titel"><span class="tf-nr">{p.nr}</span> <a href={p.sida}>{p.titel}</a></h2>
+            <p class="tema-byggnad">{(p.taggar ?? []).join(' · ')}{p.modell && ` · ${p.modell.namn}, ${p.modell.blad.charAt(0).toLowerCase()}${p.modell.blad.slice(1)}`}</p>
+            <p class="tf-rad">{p.rad}</p>
+            <p class="tema-lankar">
+              <a href={p.sida}>Texten</a>
+              {p.losning && <a href={p.losning}>{t.losningNamn}</a>}
+              {p.modell && <a href={p.modell.sida}>Modellen</a>}
+              <a href={p.utskrift.post.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="6" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:tema`} data-goatcounter-title={`${t.titel}: ${tema.namn}, utskrift av ${p.titel}`}><span data-direkt="Skriv ut texten">Texten som pdf</span><span class="visually-hidden">: {p.titel}</span></a>
+              {p.modell && <a href={p.modell.utskrift.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande data-sidor-hogst="1" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:modell`} data-goatcounter-title={`${t.titel}: ${tema.namn}, utskrift av modellen till ${p.titel}`}><span data-direkt="Skriv ut modellen">Modellen som pdf</span><span class="visually-hidden">: {p.titel}</span></a>}
+            </p>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    {h && hlFil && (
+      <section class="tema-handledning" id="lararhandledning" aria-labelledby="tema-hl-rubrik">
+        <h2 id="tema-hl-rubrik">Lärarhandledning</h2>
+        <p>Två sidor för den som läser temats {t.ord.flera} med hela klassen: hur klassen arbetar med en text i två lektioner, och vad varje text behöver.</p>
+        <p class="tema-atgarder"><a class="knapp" href={`/stodundervisning/${hlFil}.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="2" data-direkt="Skriv ut lärarhandledningen" data-goatcounter-click={`utskrift:${t.metod}/${hlFil.slice(t.metod.length + 1)}`} data-goatcounter-title={`${t.titel}: lärarhandledningen till ${tema.namn} som pdf`}>Lärarhandledningen som pdf</a>{' '}<Filval fil={`/stodundervisning/${hlFil}`} namn={hlFil} rubrik={`Lärarhandledning: ${tema.namn}`} statistik={`${t.titel}: lärarhandledningen till ${tema.namn}`} utanDrive liten /></p>
+        <Lararhandledning h={h} farg={farg} rubrik="h3" />
+      </section>
+    )}
+
+    <p class="upphov">{UPPHOV}. {versal(t.ord.alla)} i <a href={`/stodundervisning/${t.metod}`}>{t.titel}</a>.</p>
+  </article>
+</Base>
+
+<SkrivUtPdf />

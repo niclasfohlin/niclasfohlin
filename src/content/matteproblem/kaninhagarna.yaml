@@ -1,0 +1,37 @@
+niva: Medel
+nr: 18
+titel: Kaninhagarna
+innehallstagg: Geometri
+kalla: Idén kommer ur Problembanken åk 7–9, problem 10, Vinkelsumma.
+problem:
+  text:
+    - Saga bygger hagar till kaninerna av raka staketbitar, och inga hörn pekar inåt. Hon undrar hur stor summan av vinklarna inne i hagens hörn blir. Hon vet att vinkelsumman i en triangel är 180°.
+  fragor:
+    - Hur stor är vinkelsumman i en hage med 4 hörn, i en med 5 och i en med 6?
+    - Hur stor blir den med 10 hörn? Hitta en regel för alla antal hörn.
+  bild: Tre kaninhagar av raka staketbitar, med 4, 5 och 6 hörn och en stolpe i varje hörn. I varje hörn finns en båge för vinkeln inne i hagen, och i hagen i mitten sitter en kanin.
+losningsforslag:
+  svaret: 360°, 540°, 720° och 1 440°. Regeln är (antal hörn − 2) · 180°.
+  kontroll: "Regeln ger triangelns 180°: (3 − 2) · 180 = 180."
+  iden: Varje hage går att dela i trianglar med 180° var, och varje nytt hörn ger en triangel till.
+  a:
+    namn: dela från ett hörn
+    text: Eleven drar streck från ett hörn till de andra hörnen och räknar trianglarna, som alltid är 2 färre än hörnen.
+    bild: Lösning A, dela från ett hörn. Överst står tre hagar med 4, 5 och 6 hörn, och i varje hage går streck från ett hörn till de andra hörnen, så att hagarna delas i 2, 3 och 4 trianglar. Tabellen har kolumnerna hörn, trianglar och summa, och raderna är 4, 2 och 360°, sedan 5, 3 och 540°, sedan 6, 4 och 720° och sist 10, 8 och 1 440°. Bredvid står att trianglarna alltid är 2 färre än hörnen, att 10 hörn ger 8 trianglar och 8 · 180 = 1 440, och regeln (hörn − 2) · 180°.
+  b:
+    namn: dela från en punkt
+    text: Eleven drar streck från en punkt inne i hagen till varje hörn och tar bort de 360° runt punkten.
+    bild: "Lösning B, dela från en punkt. En hage med 5 hörn har en punkt inne i hagen, med streck till alla fem hörnen, och en blå ring runt punkten med 360°. Bredvid står 5 trianglar: 5 · 180 = 900, runt punkten 360, och 900 − 360 = 540. Under står 4 hörn: 4 · 180 − 360 = 360, 6 hörn: 6 · 180 − 360 = 720 och 10 hörn: 10 · 180 − 360 = 1 440, och regeln hörn · 180° − 360°."
+  c:
+    rader:
+      - 5 hörn ger 540°.
+      - 540 / 5 = 108° per hörn
+      - 10 · 108 = 1 080
+      - "Svar: 1 080°, regel hörn · 108°"
+    om: Eleven tror att varje hörn ger 108°, men varje nytt hörn ger 180° till summan.
+    fraga: Vad ger elevens regel för en hage med 4 hörn?
+  fragor:
+    - Varför får eleven i lösning A 2 trianglar färre än hörnen i varje hage?
+    - Varför tar eleven i lösning B bort 360° från trianglarnas summa?
+    - Var syns det i båda lösningarna att ett hörn till ger 180° mer?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja för en hage med 100 hörn, och varför?

@@ -1,9 +1,9 @@
 ---
-// Mallen för delningskortet till Ta fram ett matteproblem, 1200 × 630 (Niclas 2026-10-14: en sida att dela får en egen
-// delningsbild i en egen mall). Den har delningskortens form (src/pages/delning/kort/[namn].astro), med titeln till
-// vänster, och till höger tre av bankens problem, ett ur varje nivå, i en solfjäder och i problemets egen form, boksidan
-// (Problemsida.astro), med nivåns knapp och taggen. Problemen står i TAFRAMENS_POSTER i src/lib/delningskort.ts, som räknar
-// in mallen bara i det här kortet. Sidan finns bara för att scripts/delningskort.mjs ska fotografera den; den länkas inte
+// Mallen för delningskorten till Ta fram ett matteproblem och Ta fram en lästext, 1200 × 630 (Niclas 2026-10-14: en sida
+// att dela får en egen delningsbild i en egen mall). Den har delningskortens form (src/pages/delning/kort/[namn].astro),
+// med titeln till vänster, och till höger tre av bankens poster, en ur varje nivå, i en solfjäder och i problemets egen
+// form, boksidan (Problemsida.astro), med nivåns knapp och taggarna i sina färger. En lästext står utan bild, med sina
+// rader. Posterna står i TAFRAMENS_POSTER i src/lib/delningskort.ts, som räknar in mallen bara i de här korten. Sidan finns bara för att scripts/delningskort.mjs ska fotografera den; den länkas inte
 // och indexeras inte.
 import '../../../styles/global.css';
 import { site } from '../../../data/site';
@@ -58,7 +58,11 @@ const storlek = n <= 18 ? 76 : n <= 36 ? 62 : 52;
       .dk-sida .problemsida-fraga-rubrik { font-size: 9.5px; margin: 0 0 1px; }
       .dk-sida .problemsida-fraga p { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
       .dk-fotrad { display: flex; justify-content: space-between; align-items: center; gap: 6px; font-family: var(--typsnitt-ui); font-size: 9.5px; }
-      .dk-tagg { padding: 1px 7px; border: 1px solid var(--farg-kant); border-radius: 999px; color: var(--farg-text); font-weight: 600; white-space: nowrap; }
+      .dk-taggar { display: flex; gap: 3px; min-width: 0; overflow: hidden; }
+      .dk-tagg { padding: 1px 7px; border: 1px solid color-mix(in srgb, var(--tagg) 55%, white); border-radius: 999px; background: color-mix(in srgb, var(--tagg) 10%, white); color: color-mix(in srgb, var(--tagg) 82%, black); font-weight: 600; white-space: nowrap; }
+      /* En lästext utan bild: textens rader som de står, så långt sidan räcker. */
+      .dk-sida.utan-bild .problemsida-text { flex: 1; min-height: 0; overflow: hidden; }
+      .dk-sida.utan-bild .problemsida-text p { white-space: pre-line; -webkit-line-clamp: 11; }
       .dk-nivaknapp { font-family: 'Cinzel', serif; font-size: 9.5px; color: #fff; background: var(--bok-niva); padding: 1px 7px; white-space: nowrap; }
     </style>
   </head>
@@ -81,16 +85,18 @@ const storlek = n <= 18 ? 76 : n <= 36 ? 62 : 52;
       </div>
       <div class="dk-korten">
         {poster.map((p) => (
-          <section class="dk-sida boksida problemsida" style={`--bok-niva: ${p.farg}`}>
+          <section class={p.bild ? 'dk-sida boksida problemsida' : 'dk-sida boksida problemsida utan-bild'} style={`--bok-niva: ${p.farg}`}>
             <div class="boksida-ram">
               <h2 class="boksida-titel">{p.titel}</h2>
               <div class="problemsida-text"><p>{p.stycken[0]}</p></div>
-              <p class="problemsida-bild"><img src={p.bild} alt="" /></p>
-              <div class="problemsida-fraga">
-                <p class="problemsida-fraga-rubrik">{p.fragor.length > 1 ? 'Frågorna' : 'Frågan'}</p>
-                <p>{p.fragor[0]}</p>
-              </div>
-              <p class="dk-fotrad">{p.tagg ? <span class="dk-tagg">{p.tagg}</span> : <span></span>}<span class="dk-nivaknapp">{p.niva.toUpperCase()} · problem {p.nr}</span></p>
+              {p.bild && <p class="problemsida-bild"><img src={p.bild} alt="" /></p>}
+              {p.fragor.length > 0 && (
+                <div class="problemsida-fraga">
+                  <p class="problemsida-fraga-rubrik">{p.fragor.length > 1 ? 'Frågorna' : 'Frågan'}</p>
+                  <p>{p.fragor[0]}</p>
+                </div>
+              )}
+              <p class="dk-fotrad"><span class="dk-taggar">{p.taggar.map((t) => <span class="dk-tagg" style={`--tagg: var(--tagg-${t.farg})`}>{t.namn}</span>)}</span><span class="dk-nivaknapp">{p.niva.toUpperCase()} · {p.en} {p.nr}</span></p>
             </div>
           </section>
         ))}

@@ -1,0 +1,37 @@
+niva: Avancerat
+nr: 18
+titel: Prickarna i programmet
+innehallstagg: Algebra
+kalla: Idén kommer ur Känguru 2022, Cadet nr 22.
+problem:
+  text:
+    - Lo gör ett program som ritar prickar på en rak linje. När hon trycker på en tangent, ritar programmet en ny prick mitt i varje mellanrum mellan prickarna. Hon trycker fyra gånger, och då står det 225 prickar på linjen.
+  fragor:
+    - Hur många prickar stod på linjen innan Lo tryckte första gången?
+    - Kan det stå 320 prickar efter fyra tryck? Visa hur ni vet.
+  bild: "Ett exempel på ett tryck, i ett fönster på datorn: en linje med fyra prickar före trycket, och samma linje efter, med tre nya ofyllda prickar mitt emellan. Under fönstret en tangent."
+losningsforslag:
+  svaret: "15 prickar. 320 går inte: baklänges blir det 160,5 prickar."
+  kontroll: 15, 29, 57, 113 och 225, och 320 + 1 = 321 är udda.
+  iden: Ett tryck sätter en ny prick i varje mellanrum, och det finns ett mellanrum färre än prickar.
+  a:
+    namn: räkna baklänges
+    text: Eleven ser i ett litet exempel att det blir dubbelt så många minus 1 och räknar baklänges.
+    bild: "Lösning A, räkna baklänges. Eleven prövar: 3 prickar blir 5, och 5 blir 9, dubbelt så många minus 1. Baklänges är det plus 1 och delat med 2: 225 + 1 = 226 och 226 / 2 = 113, 113 + 1 = 114 och 114 / 2 = 57, 57 + 1 = 58 och 58 / 2 = 29, 29 + 1 = 30 och 30 / 2 = 15. Under ett streck: 320 + 1 = 321 och 321 / 2 = 160,5, inget helt antal prickar, så 320 går inte."
+  b:
+    namn: teckna en ekvation
+    text: Eleven tecknar antalet efter varje tryck och löser ekvationen 16n − 15 = 225.
+    bild: "Lösning B, teckna en ekvation. Från början n prickar, med n − 1 mellanrum. Efter ett tryck n + n − 1 = 2n − 1, efter två 2(2n − 1) − 1 = 4n − 3, efter tre 8n − 7 och efter fyra 16n − 15. 16n − 15 = 225 ger 16n = 240 och n = 240 / 16 = 15. Under ett streck: 16n − 15 = 320 ger 16n = 335, och 335 / 16 är inget heltal, så 320 går inte."
+  c:
+    rader:
+      - "Fyra tryck: 2 · 2 · 2 · 2 = 16"
+      - 225 / 16 är ungefär 14.
+      - 320 / 16 = 20 prickar
+      - "Svar: 14 prickar, och 320 går."
+    om: Eleven tror att antalet fördubblas vid varje tryck, men det blir dubbelt så många minus 1.
+    fraga: Hur många prickar blir 14 prickar efter fyra tryck?
+  fragor:
+    - Varför lägger eleven i lösning A till 1 och delar med 2 i varje steg?
+    - Hur kommer eleven i lösning B fram till 16n − 15?
+    - Var syns det i båda lösningarna att ett tryck ger dubbelt så många minus 1?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja om Lo tryckte tio gånger, och varför?

@@ -1,0 +1,36 @@
+niva: Bas
+nr: 18
+titel: Sniglarna
+innehallstagg: Samband och förändring
+kalla: Idén kommer ur Skolverkets Problembank för årskurs 4–6, Växter.
+problem:
+  text:
+    - Två sniglar kryper rakt uppför en vägg. Sigge sitter 20 cm över marken och kryper 3 cm uppåt varje minut. Molly sitter 10 cm över marken och kryper 5 cm uppåt varje minut. De börjar samtidigt.
+  fragor:
+    - Efter hur många minuter sitter sniglarna lika högt, och hur högt?
+    - Efter hur många minuter sitter Molly 10 cm högre än Sigge?
+  bild: En vägg där två sniglar kryper uppåt. Sigge sitter högre upp och Molly längre ner, och en pil över varje snigel visar att de kryper uppåt.
+losningsforslag:
+  svaret: Lika högt efter 5 minuter, 35 cm upp. Molly 10 cm högre efter 10 minuter.
+  kontroll: 20 + 15 = 10 + 25 = 35 och 10 + 50 = 20 + 30 + 10.
+  iden: Skillnaden i höjd ändras med 2 cm varje minut, eftersom Molly kryper 2 cm mer än Sigge.
+  a:
+    namn: skriva höjden varje minut
+    text: Eleven skriver var sniglarna sitter varje minut och lägger till 3 cm för Sigge och 5 cm för Molly.
+    bild: "Lösning A, skriva höjden varje minut. Två tabeller med minut, Sigge och Molly. Minut 0: 20 och 10. Minut 1: 23 och 15. Minut 2: 26 och 20. Minut 3: 29 och 25. Minut 4: 32 och 30. Minut 5: 35 och 35, lika högt. Minut 6: 38 och 40, minut 7: 41 och 45, minut 8: 44 och 50, minut 9: 47 och 55 och minut 10: 50 och 60, där Molly sitter 60 − 50 = 10 cm högre."
+  b:
+    namn: följa skillnaden i höjd
+    text: Eleven ser att skillnaden ändras med 2 cm varje minut och delar 10 cm och 20 cm med 2.
+    bild: "Lösning B, följa skillnaden i höjd. Sigge sitter 20 − 10 = 10 cm högre, och Molly kommer 5 − 3 = 2 cm närmare varje minut. På en tidslinje från 0 till 10 minuter står skillnaden: 10, 8, 6, 4, 2, 0 och sedan 2, 4, 6, 8 och 10 med Molly högre. 10 / 2 = 5 minuter, och 20 + 5 · 3 = 35 = 10 + 5 · 5. Skillnaden ändras 10 + 10 = 20 cm tills Molly sitter 10 cm högre, så 20 / 2 = 10 minuter, när Sigge sitter på 50 cm och Molly på 60 cm."
+  c:
+    rader:
+      - 3 + 5 = 8 cm per minut
+      - 10 / 8 = 1,25 och 20 / 8 = 2,5
+      - "Svar: 1,25 och 2,5 minuter."
+    om: Eleven lägger ihop farterna, fast sniglarna kryper åt samma håll.
+    fraga: Hur högt sitter båda sniglarna efter 1,25 minuter?
+  fragor:
+    - Hur får eleven nästa rad i tabellen i lösning A?
+    - Varför delar eleven i lösning B 10 med 2?
+    - Var syns det i båda lösningarna att Molly kryper 2 cm mer än Sigge varje minut?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja om Sigge började 50 cm upp, och varför?

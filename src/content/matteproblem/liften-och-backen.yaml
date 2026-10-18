@@ -1,0 +1,36 @@
+niva: Avancerat
+nr: 17
+titel: Liften och backen
+innehallstagg: Samband och förändring
+kalla: Idén kommer ur Känguru 2023, Cadet nr 18, och nrich, An Average Average Speed.
+problem:
+  text:
+    - På sportlovet åker Ella skidor. Liften upp är 2 km lång och går i 10 km/h. Det är ingen kö. Backen ner är också 2 km, och Ella åker ner i 40 km/h.
+  fragor:
+    - Vilken medelhastighet har Ella för en hel tur, upp och ner?
+    - Kan medelhastigheten bli 20 km/h om Ella åker fortare ner?
+  bild: Ett berg med en lift som går rakt upp från dalen till toppen, och bredvid en böjd backe ner, med en skidåkare.
+losningsforslag:
+  svaret: 16 km/h. 20 km/h går inte, för då får turen bara ta liftens 12 minuter.
+  kontroll: 4 km på 12 + 3 = 15 min ger 16 km/h, och 4 km i 20 km/h tar 12 min.
+  iden: Medelhastigheten är hela sträckan delad med hela tiden, och liften tar fyra gånger så lång tid som backen.
+  a:
+    namn: räkna ut minuterna
+    text: Eleven räknar ut minuterna, 12 + 3 = 15, och ser hur långt Ella kommer på en timme.
+    bild: "Lösning A, räkna ut minuterna. Liften: 60 / 10 = 6 minuter per km, och 2 km tar 2 · 6 = 12 minuter. Backen: 60 / 40 = 1,5 minuter per km, och 2 km tar 2 · 1,5 = 3 minuter. Hela turen: 4 km på 12 + 3 = 15 minuter. 15 · 4 = 60 minuter och 4 · 4 = 16 km, alltså 16 km/h. Under ett streck: med 20 km/h får 4 km ta 60 / 20 · 4 = 12 minuter, och liften tar redan 12 minuter."
+  b:
+    namn: väga farterna efter tiden
+    text: Eleven ser att liften tar fyra gånger så lång tid som backen och väger farterna efter det.
+    bild: "Lösning B, väga farterna efter tiden. Ella åker 40 / 10 = 4 gånger så fort i backen som i liften, så liften tar 4 gånger så lång tid. Tiden är fem lika långa delar: fyra delar med 10 km/h och en del med 40 km/h. 4 · 10 + 40 = 80 och 80 / 5 = 16 km/h. Under ett streck: tar backen nästan 0 minuter, kommer Ella dubbelt så långt som liften på lite mer än liftens tid, och det blir under 2 · 10 = 20 km/h."
+  c:
+    rader:
+      - Liften 10 km/h, backen 40 km/h
+      - (10 + 40) / 2 = 25
+      - "Svar: 25 km/h."
+    om: Eleven räknar som om Ella åkte lika länge i liften som i backen.
+    fraga: Hur lång tid tar en tur med elevens medelhastighet?
+  fragor:
+    - Hur räknar eleven i lösning A ut minuterna i liften och i backen?
+    - Varför delar eleven i lösning B tiden i fem lika delar?
+    - Var syns det i båda lösningarna att liften tar fyra gånger så lång tid som backen?
+    - Vilken lösning liknar er egen? Vilken visar bäst varför 20 km/h inte går?

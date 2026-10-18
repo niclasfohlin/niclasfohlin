@@ -1,0 +1,36 @@
+niva: Avancerat
+nr: 15
+titel: Pinnstjärnan
+innehallstagg: Geometri
+kalla: Idén kommer ur Nämnaren 2024:2, Nilsson, ”Dialoger om problemlösning”.
+problem:
+  text:
+    - Nora limmar ihop fem raka pinnar till en stjärna med fem spetsar, som på bilden. Varje pinne går genom två av spetsarna. Vinklarna i spetsarna blir inte lika stora, och kompisarnas stjärnor ser lite olika ut.
+  fragor:
+    - Hur stor är summan av vinklarna i de fem spetsarna?
+    - Rita av stjärnan på papper. Undersök vinkelsumman genom att mäta vinklarna eller klippa ut spetsarna. Förklara sedan varför den blir densamma i alla sådana stjärnor.
+  bild: Fem raka pinnar som bildar en stjärna med fem spetsar av olika storlek. Vinkeln i varje spets är markerad med en båge.
+losningsforslag:
+  svaret: 180°, i alla stjärnor av fem raka pinnar.
+  kontroll: "En regelbunden stjärna har 36° i varje spets: 5 · 36° = 180°."
+  iden: Spetsarnas vinklar går att flytta ihop utan att de ändras.
+  a:
+    namn: mäta och klippa
+    text: Eleven mäter vinklarna i spetsarna och får summan ungefär 180°. De klippta spetsarna fyller en rak vinkel, 180°.
+    bild: "Lösning A. Eleven har ritat av stjärnan på papper och mätt spetsarna med gradskiva: 53°, 26°, 37°, 35° och 29°. 53 + 26 + 37 + 35 + 29 = 180°. En mätning kan bli någon grad fel. Till höger ligger de fem avklippta spetsarna intill varandra, med hörnen i samma punkt, och de fyller en rak vinkel, 180°. Summan: 180°."
+  b:
+    namn: vinklarna i en triangel
+    text: Eleven samlar spetsarnas vinklar i en triangel med yttervinkelsatsen, och triangelns vinkelsumma är 180°.
+    bild: Lösning B. Stjärnan med spetsarna a, b, c, d och e. Pinnen från e till b skär pinnarna från a i P och Q. I den blå triangeln c P e är yttervinkeln vid P lika stor som c + e, och i den streckade triangeln b Q d är yttervinkeln vid Q lika stor som b + d. Den grå triangeln a P Q har vinklarna a, c + e och b + d, så a + (c + e) + (b + d) = 180°.
+  c:
+    rader:
+      - Spetsarna går ett varv runt.
+      - Ett varv är 360°.
+      - "Svar: 360°."
+    om: Eleven tror att spetsarna tillsammans går ett helt varv runt stjärnans mitt, som vinklar runt en punkt gör.
+    fraga: Vilken summa får ni när ni mäter vinklarna i stjärnans fem spetsar?
+  fragor:
+    - Hur får eleven i lösning A fram summan, och hur säker kan hen vara på den?
+    - Varför är yttervinkeln vid P lika stor som c + e i lösning B?
+    - Var syns det i båda lösningarna att spetsarnas vinklar går att flytta ihop?
+    - Vilken lösning liknar er egen? Vilken visar att det gäller i alla stjärnor, och varför?

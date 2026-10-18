@@ -1,33 +1,38 @@
 ---
-// Ta fram ur en bank (src/lib/tafram.ts): sidan som väljer ur en metods bank efter nivå och innehållstagg, som Ta fram ett
-// matteproblem ([id]/problem.astro). Gemensam för bankerna, så att Ta fram en lästext och Ta fram en faktatext
-// (testversion 2) blir samma sida. Formen är den Niclas fick se 2026-10-18 (underlag/prov/verktyg/bilder/tafram-B-*.png):
+// Ta fram ur en bank (src/lib/tafram.ts): sidan som väljer ur en metods bank efter nivå och tagg, som Ta fram ett
+// matteproblem ([id]/problem.astro), Ta fram en lästext och Ta fram en faktatext ([id]/texter.astro). Gemensam för
+// bankerna, så att de blir samma sida. Formen är den Niclas fick se 2026-10-18 (underlag/prov/verktyg/bilder/
+// tafram-B-*.png), och en bank med teman, som faktatexterna, har dem mellan nivån och texterna (Niclas samma kväll:
+// "Kanske nivå. Sedan tema. Sedan enskilda texterna"):
 //
-//   Valet      Nivåknapparna Bas, Medel och Avancerat, innehållstaggarna (Niclas 2026-10-18: "en innehållstag likt
-//              brainbreaks har") och Ta fram ett, som väljer ett av de problem som syns och visar det stort.
-//   Raderna    Nivåns problem i ordning (metoden: "Börja med metodens tio problem på nivån, i ordning, ett per pass"), med
-//              nivåns färg, numret, titeln, problemets första mening, bilden, taggen, Visa stort, problemets sida och en
-//              liten bock som lägger problemet i listan att skriva ut, som på Ta fram en aktivitet.
-//   Visa stort Problemet och frågorna stort, utan klocka (Niclas: "Båda dessa ska ju inte ha klocka"), i problemets egen
-//              form (Problemsida.astro). Esc stänger. Knappen Lösningsförslag visar bladet (src/lib/losningsforslag.ts)
+//   Valet      Nivåknapparna och taggarna (Niclas 2026-10-18: "en innehållstag likt brainbreaks har"), var tagg i sin färg,
+//              skild från nivåernas (Niclas samma kväll: "Då syns de bättre på kortet och när man ska välja"). Läraren
+//              bläddrar och väljer själv (Niclas samma kväll om knappen Ta fram ett, som tog fram en post på måfå:
+//              "Man får bläddra bland dem och sortera sedan välja").
+//   Raderna    Nivåns poster i ordning (metoden: "Börja med metodens tio problem på nivån, i ordning, ett per pass"), i
+//              temana när banken har teman, var och en i TaFramRad.astro, och en liten bock som lägger posten i listan
+//              att skriva ut, som på Ta fram en aktivitet.
+//   Visa stort Posten och frågorna stort, utan klocka (Niclas: "Båda dessa ska ju inte ha klocka"), i problemets egen
+//              form (Problemsida.astro), eller faktatexten i sin egen form (Faktatext.astro). Esc stänger. Knappen Lösningsförslag visar bladet (src/lib/losningsforslag.ts)
 //              bredvid problemet på en bred skärm och under det i telefonen (Niclas 2026-10-18: "Synas brevid varandra
 //              när man trycker på problemet i pc och under varandra i mobil?"), först när läraren trycker, eftersom
 //              projektorn står inför eleverna. Utskriften är det som syns: problemet, eller problemet och lösningsförslaget.
 //   Listan     Bredvid raderna på en bred skärm och i en rad längst ned i telefonen, som på Ta fram en aktivitet, med två
-//              utskrifter: bara problemen, och problemen med lösningsförslagen (Niclas samma dag: "problemets A4a och dess
+//              utskrifter: bara posterna, och posterna med följesidorna (Niclas samma dag: "problemets A4a och dess
 //              lösningsförslag"). Sidan säger storleken innan.
 //
-// Utan JavaScript står alla nivåer under varandra med problemens sidor och nivåernas filer. Bocken, som bara finns med
+// Utan JavaScript står alla nivåer under varandra med posternas sidor och nivåernas filer. Bocken, som bara finns med
 // JavaScript, ritas av skriptet i en kolumn som har sin bredd från början, så att sidan som Facebook hämtar okomprimerad
-// är liten (scripts/cacheprov.mjs) och inget flyttar sig. Statistiken: utskrifterna
-// som utskrift:<metod>/<led> och :med, Visa stort, Lösningsförslag och Ta fram ett som händelser (DRIFT.md under
-// Besöksstatistik).
+// är liten (scripts/cacheprov.mjs) och inget flyttar sig. Statistiken: utskrifterna som utskrift:<metod>/<led> och :med,
+// Visa stort och Lösningsförslag som händelser (DRIFT.md under Besöksstatistik).
 import Base from '../layouts/Base.astro';
 import Delning from './Delning.astro';
+import TaFramRad from './TaFramRad.astro';
 import { UPPHOV, metodAdress } from '../lib/metod';
 import { delningPa } from '../lib/delning';
 import { kortdataAdress } from '../lib/kortdata';
-import { taFramData, type TaFram } from '../lib/tafram';
+import type { TaFram } from '../lib/tafram';
+import { taFramDatafil } from '../lib/taframdata';
 import { PABORDET_MATT } from '../lib/pabordet';
 import { LOSNINGSSTEG } from '../lib/losningsforslag';
 import { site } from '../data/site';
@@ -36,18 +41,28 @@ const { t } = Astro.props;
 const versal = (s: string) => s.charAt(0).toLocaleUpperCase('sv') + s.slice(1);
 const mb = (byte: number) => `${(byte / 1048576).toLocaleString('sv-SE', { maximumFractionDigits: 1, minimumFractionDigits: 1 })} MB`;
 const antal = t.poster.length;
-const kortdata = kortdataAdress(t.adress, taFramData(t));
+const kortdata = kortdataAdress(t.adress, await taFramDatafil(t));
 const adress = `${metodAdress(site.url, t.metod).replace(/^https?:\/\//, '')}/${t.led}`;
 const kort = t.kort ? `${site.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}${t.kort}` : adress;
 const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7 3.7 7.3-8"/></svg>';
+// Taggens färg ur designsystemet (klassen tagg-1 till tagg-7 i global.css).
+const taggKlass = (id: string) => `tf-tagg tagg-${t.taggar.find((x) => x.id === id)?.farg ?? 1}`;
+// Nivåns teman, eller nivåns poster: ett tema eller flera.
+const teman = Math.max(0, ...t.nivaer.map((n) => n.teman?.length ?? 0));
+const borjan = teman ? `Välj nivå, så ser du nivåns ${teman > 1 ? 'teman' : 'tema'} med ${t.ord.alla} i ordning, eller Alla.` : `Välj nivå, så ser du nivåns ${t.ord.flera} i ordning, eller Alla.`;
+// Nivåns två filer: bara posterna och med följesidorna, eller, där följesidorna står för sig, posterna och följesidorna.
+const medNamn = t.forSig ? t.folje : `med ${t.folje}`;
+const baraNamn = t.forSig ? t.ord.alla : `bara ${t.ord.alla}`;
+// Ett problem, det; en text, den.
+const den = t.ord.artikel === 'ett' ? 'det' : 'den';
 ---
 
-<Base title={`${t.namn}: ${t.titel}`} description={`Välj nivå och innehåll bland ${antal} ${t.ord.flera} i ${t.titel}, se dem i ordning eller ta fram ett, visa det stort och skriv ut dem du vill ha, med eller utan ${t.folje}.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
+<Base title={`${t.namn}: ${t.titel}`} description={`Välj nivå och ${t.taggar.length ? 'tagg' : 'innehåll'} bland ${antal} ${t.ord.flera} i ${t.titel}, se dem i ordning, visa ett stort och skriv ut dem du vill ha, med eller utan ${t.folje}.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
   <article class="tafram" data-metod={t.metod} data-titel={t.titel} data-led={t.led} data-kortdata={kortdata} data-en={t.ord.en} data-flera={t.ord.flera} data-alla={t.ord.alla} data-bestamd={t.ord.bestamd} data-folje={t.folje} data-folje-en={t.foljeEn}>
     <header class="sk-huvud">
       <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${t.metod}`}>{t.titel}</a> · {versal(t.ord.flera)}</p>
       <h1>{t.namn}</h1>
-      <p class="ingress">Välj nivå, så ser du nivåns {t.ord.flera} i ordning, eller Alla.{t.taggar.length > 0 && ` Tryck på en tagg för att se ${t.ord.alla} i en del av ${t.omrade.toLowerCase()}en.`} Ta fram ett väljer ett av dem åt dig, på måfå. Tryck på bocken på de {t.ord.flera} du vill ha, så hamnar de i listan att skriva ut.</p>
+      <p class="ingress">{borjan}{t.taggar.length > 0 && t.taggText.ingress} Tryck på bocken på de {t.ord.flera} du vill ha, så hamnar de i listan att skriva ut.</p>
     </header>
 
     {/* Före raderna: nivån och taggen ur adressen eller webbläsarens minne, så att sidan ritas med rätt nivå och med valet
@@ -66,7 +81,7 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
         if (!niva) niva = giltiga.indexOf(sparat.niva) >= 0 ? sparat.niva : tfNivaer[0];
         if (tfTaggar.indexOf(tagg) < 0) tagg = '';
         var css = '.tf-val{display:flex!important}.tf-valda{display:block!important}' + (niva === 'alla' ? '' : '.tf-niva:not([data-niva="' + niva + '"]){display:none}');
-        if (tagg) css += '.tf-post:not([data-tagg="' + tagg + '"]){display:none}';
+        if (tagg) css += '.tf-post:not([data-taggar~="' + tagg + '"]){display:none}.tf-tema:not(:has([data-taggar~="' + tagg + '"])){display:none}';
         // Med Alla står nivåernas rubriker kvar, så att läraren ser var en nivå börjar.
         if (niva === 'alla') document.currentScript.parentElement.classList.add('tf-alla');
         var stil = document.createElement('style');
@@ -88,14 +103,13 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
       </div>
       {t.taggar.length > 0 && (
         <div class="sk-valrad tf-taggrad" role="group" aria-labelledby="tf-tagg-etikett">
-          <span class="sk-etikett" id="tf-tagg-etikett">Innehåll</span>
+          <span class="sk-etikett" id="tf-tagg-etikett">{t.taggText.etikett}</span>
           <div class="tf-taggar">
-            <button type="button" class="tf-tagg" data-tagg="" aria-pressed="true">Alla <span class="tf-tagg-antal" data-antal></span></button>
-            {t.taggar.map((x) => <button type="button" class="tf-tagg" data-tagg={x.id} title={`Kursplanen i ${t.omrade.toLowerCase()}: ${x.lgr22}`} aria-pressed="false">{x.namn} <span class="tf-tagg-antal" data-antal></span></button>)}
+            <button type="button" class="tf-tagg tf-tagg-alla" data-tagg="" aria-pressed="true">Alla <span class="tf-tagg-antal" data-antal></span></button>
+            {t.taggar.map((x) => <button type="button" class={taggKlass(x.id)} data-tagg={x.id} title={x.om} aria-pressed="false">{x.namn} <span class="tf-tagg-antal" data-antal></span></button>)}
           </div>
         </div>
       )}
-      <button type="button" class="knapp tf-tafram" id="tf-tafram" data-goatcounter-click={`${t.led}:${t.metod}:ta-fram`} data-goatcounter-title={`${t.titel}: ${t.namn}, Ta fram ett`}>Ta fram ett</button>
     </div>
 
     <div class="tf-yta">
@@ -103,27 +117,19 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
         {t.nivaer.map((n) => (
           <section class="tf-niva" data-niva={n.slug} data-nivanamn={n.namn} style={`--niva:${n.farg}`} aria-labelledby={`tf-niva-${n.slug}`}>
             <h2 class="tf-niva-rubrik" id={`tf-niva-${n.slug}`}>{n.namn} <span class="tf-niva-antal">{n.poster.length} {t.ord.flera}</span></h2>
-            <ol class="tf-lista">
-              {n.poster.map((p) => (
-                <li class="tf-post" id={p.id} data-tagg={p.taggId} data-nr={p.nr} data-titel={p.titel}>
-                  <img class="tf-bild" src={p.bildFil} alt="" width={PABORDET_MATT.bredd} height={PABORDET_MATT.hojd} loading="lazy" decoding="async" />
-                  <div class="tf-text">
-                    <h3 class="tf-titel"><span class="tf-nr">{p.nr}</span> {p.titel}</h3>
-                    <p class="tf-rad">{p.rad}</p>
-                    <p class="tf-lankar">
-                      <button type="button" class="tf-visa">Visa stort<span class="visually-hidden">: {p.titel}</span></button>
-                      {p.losning && <a class="tf-losning" href={p.losning}>Lösningsförslag<span class="visually-hidden">: {p.titel}</span></a>}
-                      <a class="tf-sidlank" href={p.sida}>I metoden<span class="visually-hidden">: {p.titel} i {t.titel}</span></a>
-                      {p.tagg && <span class="tf-radtagg" data-tagg={p.taggId}>{p.tagg}</span>}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-            {/* Hela nivån i en fil, som är billigare än nivåns problem var för sig (K-424). */}
+            {n.teman ? n.teman.map((tema) => (
+              <section class="tf-tema" aria-labelledby={`tf-tema-${n.slug}-${tema.poster[0].id}`}>
+                <h3 class="tf-tema-rubrik" id={`tf-tema-${n.slug}-${tema.poster[0].id}`}><a href={tema.adress}>{tema.namn}</a> <span class="tf-niva-antal">{n.namn} · {tema.poster.length} {t.ord.flera}</span></h3>
+                <p class="tf-tema-lankar"><a href={tema.adress}>Temats sida</a>{tema.handledning && <>{' · '}<a href={`${tema.adress}#lararhandledning`}>Lärarhandledningen</a></>}<span data-js hidden>{' · '}<button type="button" class="tf-tema-lista" data-poster={tema.poster.map((p) => p.id).join(' ')}>Lägg temats {t.ord.flera} i listan</button></span></p>
+                <ol class="tf-lista">{tema.poster.map((p) => <TaFramRad t={t} p={p} rubrik="h4" />)}</ol>
+              </section>
+            )) : (
+              <ol class="tf-lista">{n.poster.map((p) => <TaFramRad t={t} p={p} rubrik="h3" />)}</ol>
+            )}
+            {/* Hela nivån i en fil, som är billigare än nivåns poster var för sig (K-424). */}
             <p class="tf-nivafiler"><span class="tf-nivafiler-rubrik">Hela nivån {n.namn}:</span>{' '}
-              <a href={n.filer.bara.adress} target="_blank" rel="noopener" data-goatcounter-click={`fil:${n.filer.bara.namn}.pdf`} data-goatcounter-title={`${t.titel}: ${n.namn}, bara ${t.ord.alla} som pdf`}>bara {t.ord.alla}, pdf {mb(n.filer.bara.byte)}</a>
-              {n.filer.med && <>{' · '}<a href={n.filer.med.adress} target="_blank" rel="noopener" data-goatcounter-click={`fil:${n.filer.med.namn}.pdf`} data-goatcounter-title={`${t.titel}: ${n.namn}, ${t.ord.alla} med ${t.folje} som pdf`}>med {t.folje}, pdf {mb(n.filer.med.byte)}</a></>}
+              <a href={n.filer.bara.adress} target="_blank" rel="noopener" data-goatcounter-click={`fil:${n.filer.bara.namn}.pdf`} data-goatcounter-title={`${t.titel}: ${n.namn}, ${baraNamn} som pdf`}>{baraNamn}, pdf {mb(n.filer.bara.byte)}</a>
+              {n.filer.med && <>{' · '}<a href={n.filer.med.adress} target="_blank" rel="noopener" data-goatcounter-click={`fil:${n.filer.med.namn}.pdf`} data-goatcounter-title={`${t.titel}: ${n.namn}, ${t.forSig ? t.folje : `${t.ord.alla} med ${t.folje}`} som pdf`}>{medNamn}, pdf {mb(n.filer.med.byte)}</a></>}
             </p>
           </section>
         ))}
@@ -136,7 +142,7 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
         </button>
         <div class="ak-valda-innehall" id="tf-valda-innehall">
           <h2 class="ak-valda-rubrik" id="tf-valda-rubrik" tabindex="-1">Att skriva ut <span class="ak-valda-antal">0</span></h2>
-          <p class="ak-valda-tom" id="tf-valda-tom">Listan är tom. Tryck på bocken vid ett {t.ord.en}, så hamnar det här.</p>
+          <p class="ak-valda-tom" id="tf-valda-tom">Listan är tom. Tryck på bocken vid {t.ord.artikel} {t.ord.en}, så hamnar {den} här.</p>
           <ol class="ak-valda-lista" id="tf-valda-lista"></ol>
           <div class="sk-atgarder ak-valda-knappar">
             <a class="knapp" id="tf-skrivut" href="#" data-goatcounter-click={`utskrift:${t.metod}/${t.led}`} data-goatcounter-title={`${t.titel}: utskrift av listans ${t.ord.flera}`}>Skriv ut {t.ord.alla}</a>
@@ -150,11 +156,14 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
       </aside>
     </div>
 
-    {/* Visa stort: problemet i sin egen form (Problemsida.astro), ritat ur datafilen, och lösningsförslaget bredvid när
-        läraren trycker på Lösningsförslag. */}
+    {/* Visa stort: posten i problemets egen form (Problemsida.astro), ritad ur datafilen, och lösningsförslaget bredvid
+        när läraren trycker på Lösningsförslag. */}
     <dialog class="tf-stort" id="tf-stort" aria-labelledby="tf-stort-titel">
       <div class="tf-stort-huvud">
         <p class="tf-stort-etikett" id="tf-stort-etikett"></p>
+        {/* Bläddra bland posterna som syns, i radernas ordning (K-434; Niclas 2026-10-18 natt: "Man måste kunna se eller
+            enkelt navigera så alla texter för temat syns"). */}
+        <div class="tf-bladdra"><button type="button" id="tf-forra" aria-label={`Förra ${t.ord.en}`}>‹</button><button type="button" id="tf-nasta" aria-label={`Nästa ${t.ord.en}`}>›</button></div>
         <button type="button" class="tf-stang" id="tf-stang" aria-label="Stäng">×</button>
       </div>
       {/* Stegen på helskärm (src/lib/losningsforslag.ts, losningsstegHtml): problemet, A, B, A och B, och C. Pilarna och
@@ -168,22 +177,23 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
           <div class="boksida-ram">
             <h2 class="boksida-titel" id="tf-stort-titel"></h2>
             <div class="problemsida-text" id="tf-stort-text"></div>
-            <p class="problemsida-bild"><img id="tf-stort-bild" alt="" width={PABORDET_MATT.bredd} height={PABORDET_MATT.hojd} /></p>
+            <p class="problemsida-bild" id="tf-stort-bildrad"><img id="tf-stort-bild" alt="" width={PABORDET_MATT.bredd} height={PABORDET_MATT.hojd} /></p>
             <div class="problemsida-fraga" id="tf-stort-fraga"></div>
           </div>
         </section>
+        {/* En faktatext i sin egen form, ritad i datafilen av Faktatext.astro (src/lib/taframdata.ts). */}
+        <div class="tf-stort-fakta" id="tf-stort-fakta" hidden></div>
         <div class="tf-stort-lf" id="tf-stort-lf" tabindex="-1" hidden></div>
       </div>
       <div class="tf-stort-knappar">
         <button type="button" class="knapp sekundar tf-stort-bock" id="tf-stort-bock" aria-pressed="false"><span set:html={BOCK} /> <span id="tf-stort-bock-text">Lägg i listan</span></button>
-        <button type="button" class="knapp sekundar" id="tf-stort-nasta" hidden>Ta fram ett till</button>
         <button type="button" class="knapp sekundar" id="tf-stort-losning" aria-pressed="false" aria-controls="tf-stort-lf" hidden>Visa {t.foljeEn}</button>
         <a class="knapp sekundar" id="tf-stort-sidan" href="#">{versal(t.ord.bestamd)} i metoden</a>
-        <a class="knapp sekundar" id="tf-stort-skrivut" href="#" target="_blank" rel="noopener" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:ett`} data-goatcounter-title={`${t.titel}: utskrift av ett ${t.ord.en}`}>Skriv ut {t.ord.bestamd}</a>
+        <a class="knapp sekundar" id="tf-stort-skrivut" href="#" target="_blank" rel="noopener" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:ett`} data-goatcounter-title={`${t.titel}: utskrift av ${t.ord.artikel} ${t.ord.en}`}>Skriv ut {t.ord.bestamd}</a>
       </div>
     </dialog>
 
-    <p class="upphov">{UPPHOV}. {versal(t.ord.alla)} i <a href={`/stodundervisning/${t.metod}`}>{t.titel}</a>: {antal} {t.ord.flera}, {t.nivaer.map((n) => `${n.poster.length} på nivån ${n.namn}`).join(', ')}.{t.taggar.length > 0 && ` Taggarna är delarna av det centrala innehållet i kursplanen i ${t.omrade.toLowerCase()} (Skolverket, Lgr22).`} Sidans korta adress är {kort}.</p>
+    <p class="upphov">{UPPHOV}. {versal(t.ord.alla)} i <a href={`/stodundervisning/${t.metod}`}>{t.titel}</a>: {antal} {t.ord.flera}, {t.nivaer.map((n) => `${n.poster.length} på nivån ${n.namn}`).join(', ')}.{t.taggar.length > 0 && t.taggText.kalla} Sidans korta adress är {kort}.</p>
 
     {delningPa && <Delning sida={t.adress} titel={`${t.namn}: ${t.titel}`} medKort />}
   </article>

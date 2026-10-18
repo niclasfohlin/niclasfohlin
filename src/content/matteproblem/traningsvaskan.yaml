@@ -1,0 +1,35 @@
+niva: Medel
+nr: 15
+titel: Träningsväskan
+innehallstagg: Algebra
+kalla: Idén kommer ur Hagland, Hedrén och Taflin (2005), Köpa böcker.
+problem:
+  text:
+    - "Wilma köper tre saker till sin träningsväska: en fotboll, ett par benskydd och en vattenflaska. Hon betalar 500 kr för allt. Bollen kostar 90 kr mer än vattenflaskan. Bollen och vattenflaskan kostar tillsammans 160 kr mer än benskydden."
+  fragor:
+    - Vad kostar varje sak?
+  bild: En skylt med ordet Sportaffären, och under den en disk med en fotboll, ett par benskydd och en vattenflaska. Framför varje sak ligger en tom prislapp, och sakernas namn står under disken.
+losningsforslag:
+  svaret: Benskydden kostar 170 kr, bollen 210 kr och vattenflaskan 120 kr.
+  kontroll: 170 + 210 + 120 = 500, 210 − 120 = 90 och 210 + 120 − 170 = 160.
+  iden: Jämförelserna binder ihop priserna, så när ett pris är känt är alla kända.
+  a:
+    namn: gissa flaskans pris
+    text: Eleven gissar flaskans pris, räknar ut de andra och gissar igen tills allt blir 500 kr.
+    bild: "Lösning A, gissa flaskans pris. Tabellen har kolumnerna flaska, boll, benskydd och allt. Den första raden är 100, 190, 130 och 420 kr, den andra 110, 200, 150 och 460 kr och den tredje 120, 210, 170 och 500 kr, som stämmer. Bredvid står uträkningen av raden med 100: 100 + 90 = 190 för bollen, 190 + 100 − 160 = 130 för benskydden och 100 + 190 + 130 = 420. Under tabellen står att allt blir 40 kr dyrare när flaskan blir 10 kr dyrare, och sist flaskan 120 kr, bollen 210 kr och benskydden 170 kr."
+  b:
+    namn: ta bort skillnaden först
+    text: "Eleven ritar staplar och gör samma sak två gånger: tar bort skillnaden från summan och halverar resten."
+    bild: "Lösning B, staplar. Benskyddens stapel och en lika lång stapel med 160 kr till är tillsammans 500 kr. Utan de 160 kr blir det två lika staplar: (500 − 160) / 2 = 170 kr för benskydden, och 170 + 160 = 330 kr för bollen och flaskan. Flaskans stapel och en lika lång med 90 kr till är 330 kr: (330 − 90) / 2 = 120 kr för flaskan, och 120 + 90 = 210 kr för bollen. Kontroll: 170 + 210 + 120 = 500."
+  c:
+    rader:
+      - Boll 90 kr, flaska 160 − 90 = 70
+      - "Benskydd: 500 − 160 = 340 kr"
+      - "Svar: 340, 90 och 70 kr"
+    om: Eleven läser ”90 kr mer” och ”160 kr mer” som priser, fast de är skillnader mellan priser.
+    fraga: Hur mycket mer än benskydden kostar bollen och flaskan i elevens svar?
+  fragor:
+    - Hur mycket ändras summan i lösning A, när eleven gissar 10 kr mer för flaskan?
+    - Varför tar eleven i lösning B bort 160 kr innan hen delar med 2?
+    - Var använder båda lösningarna att bollen kostar 90 kr mer än flaskan?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja om priserna hade ören, och varför?

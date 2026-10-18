@@ -1,0 +1,36 @@
+niva: Bas
+nr: 19
+titel: Konerna
+innehallstagg: Geometri
+kalla: Idén kommer ur Känguru 2023, Ecolier nr 17.
+problem:
+  text:
+    - På idrotten ska klassen springa 10, 20, 30, 40, 50 och 60 meter. Banan är 60 meter från startlinjen till mållinjen. Läraren ställer två koner längs banan, och de står kvar. Klassen springer varje sträcka rakt mellan två av linjerna och konerna, utan att vända.
+  fragor:
+    - Var kan läraren ställa konerna? Hitta alla sätt.
+    - Går det om banan är 70 meter och klassen också springer 70 meter?
+  bild: En rak löparbana med en startlinje till vänster och en mållinje till höger. Under banan står två koner som läraren ska ställa ut.
+losningsforslag:
+  svaret: 10 och 40 m från start, eller 20 och 50 m. 70 m går inte.
+  kontroll: Båda ger 10, 20, 30, 40, 50 och 60 m, en gång var.
+  iden: Varje längd är avståndet mellan två platser, och ingen längd får komma två gånger.
+  a:
+    namn: pröva alla par
+    text: Eleven prövar konerna på alla tio par av platser och skriver vilka längder som saknas.
+    bild: "Lösning A, pröva alla par. Två tabeller med alla tio par av platser för konerna och längderna som saknas. 10 och 20: 30 saknas. 10 och 30: 40. 10 och 40: inget saknas. 10 och 50: 20 och 30. 20 och 30: 50. 20 och 40: 10, 30 och 50. 20 och 50: inget saknas. 30 och 40: 50. 30 och 50: 40. 40 och 50: 30. Två sätt fungerar: 10 och 40, eller 20 och 50. Med en bana på 70 m ger inget av de 15 paren alla sju längder."
+  b:
+    namn: räkna sträckorna
+    text: Eleven räknar sex sträckor och ser att 50 m kräver en kon 10 m från start eller mål.
+    bild: "Lösning B, räkna sträckorna. Banan med start vid 0, koner vid 10 och 40 och mål vid 60, och de sex sträckorna som streck under: 10, 30 och 20 mellan grannarna, 40, 50 och 60. 4 platser ger 3 + 2 + 1 = 6 sträckor, så alla ska vara olika. 50 m går från start till en kon vid 50, eller från en kon vid 10 till mål. Med en kon vid 50 hamnar den andra vid 20 m, och med en kon vid 10 hamnar den vid 40 m. Med 70 m behövs 7 längder, men det finns bara 6 sträckor."
+  c:
+    rader:
+      - "Kon vid 10 m: 10 och 50 m."
+      - "Kon vid 40 m: 40, 30 och 20 m."
+      - "Svar: konerna vid 10 och 40 m."
+    om: "Elevens sätt stämmer, men det finns ett till: konerna vid 20 och 50 m."
+    fraga: Var står elevens koner, räknat från mållinjen?
+  fragor:
+    - Hur vet eleven i lösning A att alla par är prövade?
+    - Varför säger eleven i lösning B att en kon måste stå 10 m från start eller mål?
+    - Var syns det i båda lösningarna att ingen längd får komma två gånger?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja med tre koner, och varför?

@@ -1,0 +1,36 @@
+niva: Bas
+nr: 16
+titel: Studsmattan
+innehallstagg: Sannolikhet och statistik
+kalla: Idén kommer ur Känguru 2023, Ecolier nr 5.
+problem:
+  text:
+    - Maja, Adam och Leo hoppar studsmatta. Tidtagaruret mäter rastens 12 minuter, och från minut 1 till 5 är det 4 minuter.
+    - Maja hoppar från minut 1 till 5 och från 6 till 9. Adam hoppar från 2 till 6 och från 7 till 12. Leo hoppar från 0 till 3, från 5 till 8 och från 10 till 12.
+  fragor:
+    - Hur många minuter hoppar exakt två barn samtidigt?
+  bild: En studsmatta där Maja och Adam hoppar, medan Leo står bredvid och väntar. Uppe till höger finns ett tidtagarur.
+losningsforslag:
+  svaret: Exakt två barn hoppar i 8 minuter.
+  kontroll: "Minuterna med ett, tre och två barn: 2 + 2 + 8 = 12."
+  iden: Exakt två barn hoppar när två barns tider går över varandra och det tredje barnet inte hoppar.
+  a:
+    namn: räkna minut för minut
+    text: Eleven ritar barnens tider som staplar och skriver antalet barn under varje minut.
+    bild: "Lösning A, räkna minut för minut. Majas, Adams och Leos tider står som staplar längs en tidslinje från 0 till 12. Under tidslinjen står antalet barn minut för minut: 1, 2, 3, 2, 2, 2, 2, 3, 2, 1, 2 och 2. De åtta tvåorna är ringade: 8 minuter."
+  b:
+    namn: par för par
+    text: Eleven räknar minuterna för varje par barn och drar bort minuterna med alla tre en gång för varje par.
+    bild: "Lösning B, par för par. En remsa med rastens 12 minuter för varje par. Maja och Adam hoppar samtidigt 2–5 och 7–9, 3 + 2 = 5 minuter. Maja och Leo 1–3 och 6–8, 2 + 2 = 4. Adam och Leo 2–3, 5–6, 7–8 och 10–12, 1 + 1 + 1 + 2 = 5. Alla par: 5 + 4 + 5 = 14. Under minuterna 2–3 och 7–8 hoppar alla tre, och de är grå i alla tre remsorna, så 14 − 3 · 2 = 8 minuter med två barn."
+  c:
+    rader:
+      - "Två hoppar: 1–9 och 10–12"
+      - 9 − 1 = 8 och 12 − 10 = 2
+      - "Svar: 8 + 2 = 10 minuter."
+    om: Eleven tar med de 2 minuterna då alla tre hoppar, men frågan gäller exakt två barn.
+    fraga: Hur många barn hoppar i var och en av elevens 10 minuter?
+  fragor:
+    - Vad skriver eleven under tidslinjen i lösning A, och varför ringar hen in tvåorna?
+    - Varför drar eleven i lösning B bort 3 · 2 minuter?
+    - Var syns minuterna med tre barn i båda lösningarna?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja för en rast på 60 minuter, och varför?

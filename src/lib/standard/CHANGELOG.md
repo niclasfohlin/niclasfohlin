@@ -1,5 +1,17 @@
 # Ändringar i standarden
 
+## 0.4.0, 2026-10-18
+
+- `Post.sida` är valfri: en post ur en databas utan metod, som databasens matteproblem (sajtens K-425), har ingen egen sida. Finns sidan prövas den som förut.
+- `Post.losning` för en post utan sida är postens pdf med lösningsförslaget, med version. En post med sida har lösningsförslaget på sidan, som förut.
+- `Post.id` kan vara ur titeln, som `glassen`, för en post utan metod. Formen är densamma: a–z, 0–9 och bindestreck, och inget upptaget led.
+
+## 0.3.0, 2026-10-18
+
+- `Post.taggar` i stället för `Post.tagg`: en post kan ha flera innehållstaggar, som en lästext har två slag av frågor mellan raderna (Ta fram en lästext, sajtens K-419). `postFel` kräver minst en tagg när databasen har taggar och bara sådana.
+- `Post.bild` är valfri: lästexterna har inga bilder. Finns bilden prövas adressen och textalternativet som förut.
+- Taggarna kan vara metodens egna slag i stället för ämnets (INNEHALLSTAGGAR), när metoden har en tabell över dem; sajten läser dem ur metoden.
+
 ## 0.2.1, 2026-10-18
 
 - `Post.utskrift`: slaget `med` är problemet med lösningsförslaget när banken har lösningsförslag (metodriggens blad, sajtens K-423), och med lärarens sida annars. Formen är densamma; bara beskrivningen ändras.

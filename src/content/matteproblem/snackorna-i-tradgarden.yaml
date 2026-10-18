@@ -1,0 +1,37 @@
+niva: Avancerat
+nr: 13
+titel: Snäckorna i trädgården
+innehallstagg: Sannolikhet och statistik
+kalla: Idén kommer ur NCM:s Strävorna 9D, Räkna abborrar.
+problem:
+  text:
+    - En klass vill veta hur många snäckor det finns i skolans trädgård. Eleverna samlar 27 snäckor, målar en prick på skalet och släpper ut dem igen. Två dagar senare, när snäckorna har blandat sig, samlar eleverna 50 snäckor. Av dem har 10 en prick.
+  fragor:
+    - Ungefär hur många snäckor finns det i trädgården?
+    - Vad blir svaret om 9 av de 50 har en prick?
+  bild: En trädgård med växter, en sten och tre snäckor. En snäcka har en prick på skalet, och en annan har ingen prick.
+losningsforslag:
+  svaret: Ungefär 135 snäckor. Om 9 av de 50 har en prick blir det ungefär 150.
+  kontroll: 27/135 = 10/50 = 1/5 och 27/150 = 9/50.
+  iden: Andelen med prick är ungefär lika stor bland de 50 som bland alla snäckor i trädgården.
+  a:
+    namn: bygga upp 27
+    text: Eleven börjar tabellen med att 10 av 50 har prick och bygger upp 27 som 20 + 5 + 2.
+    bild: "Lösning A. En tabell med kolumnerna ”med prick” och ”alla”: 10 och 50, 20 och 100 (båda gånger 2), 5 och 25 (båda delat med 2), 2 och 10 (båda delat med 5), och 27 och 135, som är inringat. Bredvid: 27 = 20 + 5 + 2, så alla är 100 + 25 + 10 = 135. Om 9 av 50 har prick är 27 = 3 · 9, så alla är 3 · 50 = 150. Svar: ungefär 135 snäckor, och ungefär 150 med 9 prickar."
+  b:
+    namn: andelen med prick
+    text: Eleven antar att andelen med prick är ungefär densamma i trädgården som bland de 50.
+    bild: "Lösning B. 10 av 50 har prick: 10 / 50 = 1/5. Vi uppskattar att ungefär 1/5 av alla snäckor har prick. En stapel i fem lika delar, där en del är de 27 med prick. Alla är ungefär 5 · 27 = 135. Med 9 prickar uppskattar vi andelen till 9/50, och alla är ungefär 27 · 50 / 9 = 150. Kontroll: 27 / 135 = 1/5 och 27 / 150 = 9/50."
+  c:
+    rader:
+      - 50 − 10 = 40 utan prick
+      - 40 / 10 = 4, och 27 · 4 = 108
+      - "Med 9: 27 / 9 = 3, 3 · 41 = 123"
+      - "Svar: 108 och 123 snäckor."
+    om: Eleven räknar bara ut snäckorna utan prick och glömmer de 27 med prick.
+    fraga: Om det bara finns 108 snäckor, hur stor del av dem har en prick?
+  fragor:
+    - Hur bygger eleven i lösning A upp 27 med prick i tabellen?
+    - Varför kan eleven i lösning B säga att 27 är ungefär en femtedel av alla?
+    - Var syns det i båda lösningarna att ungefär var femte snäcka har en prick?
+    - Vilken lösning liknar er egen? Vad måste gälla för snäckorna för att svaret ska bli rimligt?

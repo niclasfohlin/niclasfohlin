@@ -7,7 +7,27 @@
     "adress": "/stodundervisning/problemlosning-i-grupp/problem",
     "kort": "/matteproblem",
     "metod": "problemlosning-i-grupp",
-    "mejl": "välj nivå och innehåll bland metodens trettio problem, visa ett stort och skriv ut dem du vill ha"
+    "mejl": "välj nivå och innehåll bland sextio problem med lösningsförslag, visa ett stort och skriv ut dem du vill ha"
+  },
+  {
+    "id": "lastexter",
+    "namn": "Ta fram en lästext",
+    "slag": "sida",
+    "del": "verktyg",
+    "adress": "/stodundervisning/textsamtal-i-grupp/texter",
+    "kort": "/lastexter",
+    "metod": "textsamtal-i-grupp",
+    "mejl": "välj nivå och slag bland metodens fyrtiofem texter, visa en stort och skriv ut dem du vill ha"
+  },
+  {
+    "id": "faktatexter",
+    "namn": "Ta fram en faktatext",
+    "slag": "sida",
+    "del": "verktyg",
+    "adress": "/stodundervisning/faktatextsamtal-i-grupp/texter",
+    "kort": "/faktatexter",
+    "metod": "faktatextsamtal-i-grupp",
+    "mejl": "välj nivå och tema bland metodens femton faktatexter, visa en stort och skriv ut dem du vill ha"
   },
   {
     "id": "skrivkort",

@@ -1,0 +1,36 @@
+niva: Medel
+nr: 11
+titel: Spelbrickorna
+innehallstagg: Sannolikhet och statistik
+kalla: Idén kommer ur Känguru 2023, Benjamin nr 16.
+problem:
+  text:
+    - I klassens eget brädspel kastar man tre brickor i stället för en tärning. Varje bricka har ett tal på varje sida. Den första brickan har 1 och 4, den andra 2 och 5 och den tredje 3 och 6. Varje sida hamnar uppåt lika ofta. Man lägger ihop talen som hamnar uppåt och går lika många steg.
+  fragor:
+    - Hur många olika summor kan man få?
+    - Vilken eller vilka summor är vanligast, och hur stor är chansen för var och en av dem?
+  bild: "Tre runda brickor, var och en ritad två gånger med en vändpil emellan: 1 och 4, 2 och 5, 3 och 6. Under dem en bit av spelplanen med en pjäs vid start."
+losningsforslag:
+  svaret: "4 summor: 6, 9, 12 och 15. Vanligast: 9 och 12, 3 av 8 var."
+  kontroll: 6, 9, 12 och 15 kommer på 1, 3, 3 och 1 sätt, och 1 + 3 + 3 + 1 = 8.
+  iden: De åtta sätten att landa är lika vanliga, men flera av dem ger samma summa.
+  a:
+    namn: skriv alla åtta sätt
+    text: Eleven skriver alla åtta sätt som brickorna kan landa på och räknar hur ofta varje summa kommer.
+    bild: Lösning A, alla åtta sätt som brickorna kan landa på. Tabellen har kolumnerna bricka 1, bricka 2, bricka 3 och summa. Summan 6 kommer av 1, 2, 3. Summan 9 kommer av 4, 2, 3, av 1, 5, 3 och av 1, 2, 6. Summan 12 kommer av 4, 5, 3, av 4, 2, 6 och av 1, 5, 6. Summan 15 kommer av 4, 5, 6. Bredvid står att 6 kommer på 1 sätt, 9 på 3, 12 på 3 och 15 på 1, alltså 4 olika summor, och att 9 och 12 är vanligast, med 3 av 8 sätt var.
+  b:
+    namn: räkna de stora talen
+    text: Eleven lägger till 3 för varje stort tal uppåt och räknar på hur många sätt varje summa kan komma.
+    bild: "Lösning B, 3 till för varje stort tal. Med alla små tal uppåt blir summan 1 + 2 + 3 = 6, och ett stort tal ger 3 till, eftersom 4 − 1, 5 − 2 och 6 − 3 är 3. Tabellen: inget stort tal ger 6 på 1 sätt, ett ger 6 + 3 = 9 på 3 sätt, två ger 6 + 6 = 12 på 3 sätt och tre ger 6 + 9 = 15 på 1 sätt. Med ett stort tal kan vilken som helst av de tre brickorna visa det stora talet, och med två kan vilken som helst visa det lilla. 1 + 3 + 3 + 1 = 8 sätt, och 9 och 12 är vanligast, med 3 av 8 sätt var."
+  c:
+    rader:
+      - Det kan bli 6, 9, 12 eller 15.
+      - 4 summor, lika stor chans.
+      - "Svar: ingen, alla 1 av 4."
+    om: Eleven tror att de fyra summorna är lika vanliga, fast de kommer på olika många sätt.
+    fraga: Hur kan ni pröva elevens andra rad med brickorna?
+  fragor:
+    - Hur vet eleven i lösning A att listan har alla sätt?
+    - Varför lägger eleven i lösning B till 3 för varje bricka med det stora talet uppåt?
+    - Var syns det i båda lösningarna att flera sätt att landa ger samma summa?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja med fem brickor, och varför?

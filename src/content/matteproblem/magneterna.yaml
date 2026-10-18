@@ -1,0 +1,37 @@
+niva: Medel
+nr: 12
+titel: Magneterna
+innehallstagg: Algebra
+kalla: Idén kommer ur Känguru 2022, Benjamin nr 21.
+problem:
+  text:
+    - På kylskåpet sitter fem magneter med talen 2, 3, 4, 5 och 6. Där sitter också en lapp med fyra tomma rutor. Mellan rutorna står plus, minus och lika med. Moa sätter en magnet i varje ruta, så att likheten stämmer. En magnet blir över.
+  fragor:
+    - Vilka tal kan stå efter likhetstecknet? Hitta alla.
+    - Vilka magneter kan bli över?
+  bild: "Ett kylskåp med fem magneter, som har talen 2, 3, 4, 5 och 6. Under dem sitter en lapp med fyra tomma rutor: ruta plus ruta minus ruta lika med ruta."
+losningsforslag:
+  svaret: Alla fem kan stå efter likhetstecknet. Bara 2, 4 eller 6 kan bli över.
+  kontroll: 2 + 5 = 3 + 4, 2 + 6 = 3 + 5, 3 + 6 = 4 + 5. 20 − 3, 20 − 5 är udda.
+  iden: Likheten stämmer när de två första talen tillsammans är lika mycket som de två sista.
+  a:
+    namn: pröva tal för tal
+    text: Eleven sätter tal för tal efter likhetstecknet och prövar sedan alla par med 3 eller 5 över.
+    bild: "Lösning A, tal för tal efter likhetstecknet. Tabellen har kolumnerna efter =, likheten och över: 3 + 5 − 6 = 2 med 4 över, 2 + 5 − 4 = 3 med 6 över, 3 + 6 − 5 = 4 med 2 över, 2 + 6 − 3 = 5 med 4 över och 3 + 5 − 2 = 6 med 4 över. Bredvid står att alla fem kan stå efter likhetstecknet, och kontrollen med plus: 3 + 5 = 6 + 2, så de två första är lika mycket som de två sista. Över blev 2, 4 och 6. Under tabellen prövar eleven alla sätt att dela de fyra magneterna i två par. Med 3 över: 2 + 4 och 5 + 6, 2 + 5 och 4 + 6, 2 + 6 och 4 + 5, och inget par är lika. Med 5 över: 2 + 3 och 4 + 6, 2 + 4 och 3 + 6, 2 + 6 och 3 + 4, och inget par är lika."
+  b:
+    namn: par med samma summa
+    text: Eleven gör två par med samma summa och ser att de fyra magneterna tillsammans måste bli ett jämnt tal.
+    bild: "Lösning B, par med samma summa. 2 + 5 − 3 = 4 är samma som 2 + 5 = 3 + 4. Det går på tre sätt att göra två par med samma summa: 2 + 5 = 3 + 4 med 6 över, 2 + 6 = 3 + 5 med 4 över och 3 + 6 = 4 + 5 med 2 över. Alla fem tal finns i ett par, så alla kan stå efter likhetstecknet. Till höger står att två lika summor tillsammans blir ett jämnt tal, och att 2 + 3 + 4 + 5 + 6 = 20. Utan 3 blir det 20 − 3 = 17 och utan 5 blir det 20 − 5 = 15, och båda är udda, så 3 och 5 kan inte bli över."
+  c:
+    rader:
+      - 3 + 5 − 6 = 2 och 2 + 5 − 4 = 3
+      - 2 + 5 − 3 = 4 och 2 + 6 − 3 = 5
+      - Minus gör mindre, så inte 6.
+      - "Svar: 2, 3, 4 och 5 efter =."
+    om: Eleven tror att en uträkning med minus inte kan ge det största talet, och prövar aldrig 6 efter likhetstecknet.
+    fraga: Hur kan ni pröva elevens tredje rad med magneterna?
+  fragor:
+    - Hur vet eleven i lösning A att 3 och 5 aldrig kan bli över?
+    - Varför kan eleven i lösning B skriva om likheten till två par?
+    - Var syns det i båda lösningarna att två par har samma summa?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja med fler magneter, och varför?

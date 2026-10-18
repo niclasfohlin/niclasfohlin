@@ -1,0 +1,36 @@
+niva: Bas
+nr: 15
+titel: Godisaskarna
+innehallstagg: Geometri
+kalla: Idén kommer ur nrich, Multilink Cubes.
+problem:
+  text:
+    - En godisbutik packar 12 kolor i varje ask. Kolorna är lika stora kuber och fyller asken helt, i ett eller flera lager. Asken är ett rätblock. Två askar som är likadana när man vänder på den ena räknas som samma ask.
+  fragor:
+    - Hur många olika askar kan butiken göra? Hitta alla.
+    - Hur vet ni att ni har hittat alla?
+  bild: En kola som är en liten kub, ett rätblock av kolor i två lager och en figur av kolor som inte är ett rätblock, ett L.
+losningsforslag:
+  svaret: "4 askar: 1 · 1 · 12, 1 · 2 · 6, 1 · 3 · 4 och 2 · 2 · 3."
+  kontroll: 1 · 1 · 12 = 1 · 2 · 6 = 1 · 3 · 4 = 2 · 2 · 3 = 12 kolor.
+  iden: Askens tre mått ger 12 när man multiplicerar dem, och en vänd ask har samma tre mått.
+  a:
+    namn: bygga och vända
+    text: Eleven bygger askar av 12 kuber, skriver måtten och vänder varje ny ask för att se om den redan finns.
+    bild: "Lösning A, bygga och vända. Eleven bygger med 12 kuber och skriver 1 · 1 · 12, 1 · 2 · 6, 1 · 3 · 4 och 2 · 2 · 3, med bockar. Bredvid står asken 2 · 2 · 3 ritad stående, och samma ask liggande, 3 · 2 · 2, med en pil och ordet vänd: det är samma ask. 4 olika askar. Varje ny ask vänds för att se om den redan finns."
+  b:
+    namn: minsta måttet först
+    text: Eleven letar först askar med minsta måttet 1 och sedan 2. Med minsta måttet 3 blir det minst 27 kolor.
+    bild: "Lösning B, minsta måttet först. Minsta måttet 1: 12 = 1 · 12 = 2 · 6 = 3 · 4, alltså 1 · 1 · 12, 1 · 2 · 6 och 1 · 3 · 4. Minsta måttet 2: 12 / 2 = 6 = 2 · 3, alltså bara 2 · 2 · 3, för 2 · 1 · 6 är samma ask som 1 · 2 · 6. Minsta måttet 3: 3 · 3 · 3 = 27, och 27 är mer än 12, så eleven slutar leta. Svar: 4 olika askar."
+  c:
+    rader:
+      - "Kolorna i ett lager:"
+      - 12 = 1 · 12 = 2 · 6 = 3 · 4
+      - "Svar: 3 olika askar."
+    om: Eleven lägger alla kolor i ett lager, men asken kan ha flera lager.
+    fraga: Hur kan ni pröva elevens svar med 12 kuber?
+  fragor:
+    - Varför vänder eleven varje ny ask i lösning A?
+    - Varför slutar eleven i lösning B när minsta måttet är 3?
+    - Var syns det i båda lösningarna att en vänd ask har samma tre mått?
+    - Vilken lösning liknar er egen? Vilken skulle ni välja med 24 kolor, och varför?

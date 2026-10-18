@@ -1,0 +1,29 @@
+---
+// En post på en Ta fram-sida (TaFram.astro): nivåns färg, bilden när posten har en, numret, titeln, postens rad,
+// taggarna i sina färger, Visa stort, postens följesida och postens sida i metoden, när posten står i metoden (ett
+// problem ur databasen, src/lib/matteproblem.ts, har ingen). Bocken ritas av skriptet (src/scripts/tafram.ts). Rubriken
+// är h3 under nivån, och h4 när posten står i ett tema. Raden är så kort den kan vara, eftersom sidan växer med varje
+// post och Facebook hämtar den okomprimerad (scripts/cacheprov.mjs): skriptet läser numret och titeln ur rubriken och
+// taggarnas id ur data-taggar, i chipens ordning, och knapparnas namn står i aria-label.
+import type { TaFram, TaFramPost } from '../lib/tafram';
+import { PABORDET_MATT } from '../lib/pabordet';
+interface Props { t: TaFram; p: TaFramPost; rubrik: 'h3' | 'h4' }
+const { t, p, rubrik: Rubrik } = Astro.props;
+// Taggens färg ur designsystemet (klassen tagg-1 till tagg-7 i global.css).
+const taggKlass = (id: string) => `tf-radtagg tagg-${t.taggar.find((x) => x.id === id)?.farg ?? 1}`;
+const taggNamn = (id: string) => t.taggar.find((x) => x.id === id)?.namn ?? id;
+---
+<li class={p.bildFil ? 'tf-post' : 'tf-post utan-bild'} id={p.id} data-taggar={p.taggIds.join(' ')} data-tema={p.tema} data-lf={p.losningsforslag ? '' : undefined} data-fakta={p.fakta ? '' : undefined} data-modell={p.modell ? '' : undefined}>
+  {p.bildFil && <img class="tf-bild" src={p.bildFil} alt="" width={p.bildMatt?.bredd ?? PABORDET_MATT.bredd} height={p.bildMatt?.hojd ?? PABORDET_MATT.hojd} loading="lazy" decoding="async" />}
+  <div class="tf-text">
+    <Rubrik class="tf-titel"><span class="tf-nr">{p.nr}</span> {p.titel}</Rubrik>
+    <p class="tf-rad">{p.rad}</p>
+    <p class="tf-lankar">
+      <button type="button" class="tf-visa" aria-label={`Visa stort: ${p.titel}`}>Visa stort</button>
+      {p.modell && <a class="tf-modell-lank" href={p.modell.sida} aria-label={`Modellen: ${p.titel}`}>Modellen</a>}
+      {p.losning && <a class="tf-losning" href={p.losning} aria-label={`${t.losningNamn}: ${p.titel}`} data-goatcounter-click={p.sida ? undefined : `${t.led}:${t.metod}:losningsforslag`} data-goatcounter-title={p.sida ? undefined : `${t.titel}: Lösningsförslag i Visa stort`}>{t.losningNamn}</a>}
+      {p.sida && <a class="tf-sidlank" href={p.sida} aria-label={`${p.titel} i metoden`}>I metoden</a>}
+      {p.taggIds.map((id) => <span class={taggKlass(id)}>{taggNamn(id)}</span>)}
+    </p>
+  </div>
+</li>
