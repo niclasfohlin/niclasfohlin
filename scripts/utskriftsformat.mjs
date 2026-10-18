@@ -8,7 +8,8 @@
 // (scripts/bankpdf.mjs, scripts/pdfdelar.mjs). Stående och liggande, sidornas brytning och texten är därför Word-filens.
 // Det här skriptet prövar det som återstår: att varje knapp leder till en pdf som finns och är den som knappen säger.
 //
-// Varje metodsida, varje enhets och rams sida och varje lathundssida öppnas i Chrome, och så prövas:
+// Varje metodsida, varje enhets och rams sida, varje lathundssida och Ta fram-sidorna med temanas sidor öppnas i Chrome,
+// med allt som går att fälla ut utfällt och Alla bland nivåerna, och så prövas:
 //   varje länk med data-skriv-ut-pdf leder till en pdf i dist, med minst en sida;
 //   en knapp som säger att bladet ligger (data-liggande) ger bara liggande sidor, och en knapp som säger hur många sidor
 //   den högst är (data-sidor-hogst) ger inte fler;
@@ -58,17 +59,23 @@ const harPoppler = (() => { try { execFileSync('pdfinfo', ['-v'], { stdio: 'igno
 if (!chrome || !harPoppler) { console.log(`utskriftsformat: obs, ${!chrome ? 'Chrome' : 'Poppler (pdfinfo)'} saknas, utskriftsknapparna är inte prövade`); process.exit(0); }
 if (!existsSync(join(dist, 'stodundervisning'))) { console.error('utskriftsformat: dist saknas. Kör npm run validera, som bygger först.'); process.exit(1); }
 
-// Sidorna: varje metods sida, dess undersidor (enheterna, ramarna med blad) och lathundssidan.
+// Sidorna: varje metods sida, dess undersidor (enheterna, ramarna med blad, Ta fram-sidorna) och lathundssidan, och
+// undersidornas egna sidor, som temanas sidor under Ta fram en faktatext (texter/<tema>; Codex-granskningen 2026-10-18
+// natt: provet gick bara ett led ned).
 const metodMapp = join(dist, 'stodundervisning');
 const metoder = readdirSync(metodMapp, { withFileTypes: true })
   .filter((x) => x.isDirectory() && existsSync(join(metodMapp, x.name, 'index.html')) && existsSync(join(metodMapp, `${x.name}.docx`)))
   .map((x) => x.name)
   .filter((id) => !valda.length || valda.includes(id));
+const undersidor = (id, vag, djup) => readdirSync(join(metodMapp, vag), { withFileTypes: true })
+  .filter((x) => x.isDirectory())
+  .flatMap((x) => [
+    ...(existsSync(join(metodMapp, vag, x.name, 'index.html')) ? [{ id, adress: `/stodundervisning/${vag}/${x.name}`, metodsida: false }] : []),
+    ...(djup > 1 ? undersidor(id, `${vag}/${x.name}`, djup - 1) : []),
+  ]);
 const sidor = metoder.flatMap((id) => [
   { id, adress: `/stodundervisning/${id}`, metodsida: true },
-  ...readdirSync(join(metodMapp, id), { withFileTypes: true })
-    .filter((x) => x.isDirectory() && existsSync(join(metodMapp, id, x.name, 'index.html')))
-    .map((x) => ({ id, adress: `/stodundervisning/${id}/${x.name}`, metodsida: false })),
+  ...undersidor(id, id, 2),
 ]);
 
 // Inget skript i bygget skriver ut sidan: den enda utskriften är pdf:ens, ur ramen som SkrivUtPdf.astro lägger dit
@@ -242,6 +249,9 @@ const klara = {};
 let knappar = 0;
 async function prova(f, s) {
   await f.oppna(`${bas}${s.adress}`);
+  // Allt som läsaren kan fälla ut eller välja står framme när knapparna läses: Alla bland nivåerna på en Ta fram-sida och
+  // varje details, så att också andra nivåers och stängda temans utskrifter prövas (Codex-granskningen 2026-10-18 natt).
+  await f.kor(`(() => { document.querySelector('.tf-val .sk-niva[data-niva="alla"]')?.click(); document.querySelectorAll('details').forEach((x) => { x.open = true; }); return true; })()`);
   let godkand = true;
   const nej = (text) => { godkand = false; fel.push(`${s.adress}: ${text}`); };
   // Knapparna som läsaren ser dem: länkarna till pdf:erna, och de gamla knapparna som skrev ut sidan.
@@ -303,7 +313,7 @@ async function prova(f, s) {
   for (const bredd of [320, 360]) {
   await f.telefon(bredd);
   await f.oppna(`${bas}${s.adress}`);
-  const bred = await f.kor(`document.fonts.ready.then(() => { document.querySelectorAll('details').forEach((x) => { x.open = true; }); const W = document.documentElement.clientWidth; const sw = document.documentElement.scrollWidth; if (sw <= W + 1) return ''; const klipps = (e) => { for (let a = e.parentElement; a && a !== document.body; a = a.parentElement) if (getComputedStyle(a).overflowX !== 'visible') return true; return false; }; for (const e of document.querySelectorAll('body *')) { const r = e.getBoundingClientRect(); if (!r.width || klipps(e)) continue; if ((r.right > W + 1 && e.parentElement.getBoundingClientRect().right <= W + 1) || (r.right <= W + 1 && r.left + e.scrollWidth > W + 1 && getComputedStyle(e).overflowX === 'visible' && ![...e.children].some((c) => c.getBoundingClientRect().right > W + 1 || c.scrollWidth > c.clientWidth + 1))) return sw + ' punkter bred, ' + e.tagName.toLowerCase() + (typeof e.className === 'string' && e.className.trim() ? '.' + e.className.trim().split(/\\s+/).slice(0, 2).join('.') : '') + ' ”' + (e.textContent || '').replace(/\\s+/g, ' ').trim().slice(0, 40) + '”'; } return sw + ' punkter bred'; })`);
+  const bred = await f.kor(`document.fonts.ready.then(() => { document.querySelector('.tf-val .sk-niva[data-niva="alla"]')?.click(); document.querySelectorAll('details').forEach((x) => { x.open = true; }); const W = document.documentElement.clientWidth; const sw = document.documentElement.scrollWidth; if (sw <= W + 1) return ''; const klipps = (e) => { for (let a = e.parentElement; a && a !== document.body; a = a.parentElement) if (getComputedStyle(a).overflowX !== 'visible') return true; return false; }; for (const e of document.querySelectorAll('body *')) { const r = e.getBoundingClientRect(); if (!r.width || klipps(e)) continue; if ((r.right > W + 1 && e.parentElement.getBoundingClientRect().right <= W + 1) || (r.right <= W + 1 && r.left + e.scrollWidth > W + 1 && getComputedStyle(e).overflowX === 'visible' && ![...e.children].some((c) => c.getBoundingClientRect().right > W + 1 || c.scrollWidth > c.clientWidth + 1))) return sw + ' punkter bred, ' + e.tagName.toLowerCase() + (typeof e.className === 'string' && e.className.trim() ? '.' + e.className.trim().split(/\\s+/).slice(0, 2).join('.') : '') + ' ”' + (e.textContent || '').replace(/\\s+/g, ' ').trim().slice(0, 40) + '”'; } return sw + ' punkter bred'; })`);
   await f.dator();
   if (bred === undefined) nej(`provet i ${bredd} punkters bredd fick inget svar från sidan`);
   else if (bred) nej(`sidan rullar i sidled i ${bredd} punkters bredd: ${bred} (global.css, K-400)`);

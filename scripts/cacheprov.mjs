@@ -40,9 +40,10 @@ const SIDKARTA = /^\/sitemap[-\w]*\.xml$/;
 const HOGST_SIDA = 64 * 1024;
 // En Ta fram-sida är också en lista över databasens poster, en rad per post (TaFramRad.astro), som läsaren ser utan
 // JavaScript, och den växer med databasen (Niclas 2026-10-18: verktygen ska vara skalbara). Provet räknar därför sidan
-// utan raderna mot HOGST_SIDA och varje rad för sig mot HOGST_RAD: en rad med data i sig blir större än så. Raderna var
-// omkring 0,8 kB med 60 matteproblem och 1,1 till 1,2 kB med faktatexterna, som har en länk till (Modellen) och en längre
-// rad ur lärarens sida; varje länk bär postens titel i sitt namn, så att en skärmläsare vet vilken post den gäller.
+// utan raderna mot HOGST_SIDA och varje rad för sig mot HOGST_RAD: en rad med data i sig blir större än så. Raderna är
+// upp till 1,05 kB med matteproblemen, som har bilden, Lösningsförslag och I metoden, och omkring 0,8 kB med texterna
+// (2026-10-19, efter att textsidorna fick bara texterna); varje länk bär postens titel i sitt namn, så att en skärmläsare
+// vet vilken post den gäller.
 const HOGST_RAD = 1280;
 const RAD = /<li class="tf-post[\s\S]*?<\/li>/g;
 

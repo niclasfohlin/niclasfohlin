@@ -27,11 +27,14 @@ const antal = (k: number) => `${k === 1 ? 'ett' : k} ${k === 1 ? bank.ord.en : b
 const ram = n.oversikt !== undefined ? ramarna[n.oversikt] : undefined;
 const numrerade = n.enheter.filter((e) => e.nr !== undefined).length;
 const teman = n.enheter.filter((e) => e.handledning !== undefined && e.tema).map((e) => ({ tema: e.tema!, fil: handledningensFil(id, { tema: e.tema! }), sida: `/stodundervisning/${id}/${bank.ord.slug}/${slugAv(e.tema!)}` }));
+// Nivåns teman står i raden, så att läraren som söker ett tema fäller ut rätt nivå (designgranskningen 2026-10-18 natt:
+// nivåerna hette bara "Bas 5 texter", och Smittor syntes först när Avancerat var utfälld).
+const temanamn = [...new Set(n.enheter.map((e) => e.tema).filter((x): x is string => !!x))];
 ---
 <details class:list={['bank-niva', { 'utan-utskrift': !ram }]} id={ram ? `ram-${n.oversikt! + 1}` : `niva-${n.slug}`} style={`--niva: ${farger[n.namn]}`}>
   <summary>
     <span class="bank-nivanamn">{n.namn}</span>
-    <span class="bank-antal">{antal(numrerade || n.enheter.length)}{numrerade && numrerade < n.enheter.length ? (n.enheter.every((e) => e.nr !== undefined || /^kartläggning/i.test(e.l.vad)) ? ` och ${n.enheter.length - numrerade} för kartläggningen` : ` och ${n.enheter.length - numrerade} till`) : ''}</span>
+    <span class="bank-antal">{temanamn.length > 0 && `${temanamn.join(', ')} · `}{antal(numrerade || n.enheter.length)}{numrerade && numrerade < n.enheter.length ? (n.enheter.every((e) => e.nr !== undefined || /^kartläggning/i.test(e.l.vad)) ? ` och ${n.enheter.length - numrerade} för kartläggningen` : ` och ${n.enheter.length - numrerade} till`) : ''}</span>
   </summary>
   <div class="bank-innehall">
     {ram ? (

@@ -2285,7 +2285,7 @@ html.js .bara-js { display: inline-block; }
    bredvid på en bred skärm, som på Ta fram en aktivitet (listans stilar ovan). Utan JavaScript står nivåerna under
    varandra med sina rubriker; med JavaScript visas en nivå i taget, och rubriken finns kvar för skärmläsaren. */
 /* Taggarnas färger (Niclas 2026-10-18: "Skulle önska att de olika taggarna fick varsin färg. Inte samma färg som
-   nivåerna. Då syns de bättre på kortet och när man ska välja"): blå, petrol, tegel, violett, oliv, magenta och marinblå,
+   nivåerna. Då syns de bättre på kortet och när man ska välja"): blå, petrol, tegel, violett, oliv, magenta och brun (den sjunde var marinblå och liknade Alla, designgranskningen 2026-10-18 natt),
    skilda från nivåernas grön, ockra och plommon (BOKNIVA i src/lib/bank.ts), med minst 14 i färgavstånd (CIEDE2000) till
    dem och till varandra, utan grått, som såg avstängt ut (designgranskningen 2026-10-18 natt), och mörka nog för vit text,
    minst 5,6:1. En
@@ -2321,7 +2321,7 @@ html.js .bara-js { display: inline-block; }
 .tafram { --tf-val-h: 0px; }
 .tafram #tf-poster { scroll-margin-top: calc(var(--tf-val-h) + 0.75rem); }
 @media (min-width: 60rem) { .tafram .ak-valda { top: calc(var(--tf-val-h) + 1rem); } }
-@media (min-width: 60rem) { .tf-yta { grid-template-columns: minmax(0, 1fr) 17.5rem; } }
+@media (min-width: 60rem) { .tf-js .tf-yta { grid-template-columns: minmax(0, 1fr) 17.5rem; } }
 .tf-poster { min-width: 0; }
 .tf-niva-rubrik { display: flex; align-items: center; gap: 0.6rem; margin: 1.75rem 0 0.6rem; font-size: 1.2rem; }
 .tf-niva-rubrik::before { content: ''; flex: none; width: 0.85rem; height: 0.85rem; border-radius: 3px; background: var(--niva); }
@@ -2383,12 +2383,22 @@ button.tf-radtagg:hover { border-color: var(--tagg, var(--farg-accent)); backgro
    på Ta fram ett matteproblem, och i telefonen i två lika breda spalter. */
 .tf-metodrad { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; }
 .tf-metodrad .knapp { justify-content: center; text-align: center; }
+/* På datorn står knapparna längst till höger, så att de inte läses som en nivå till (designgranskningen 2026-10-18 natt). */
+@media (min-width: 48rem) { .tf-metodrad { margin-left: auto; } }
 @media (max-width: 30rem) { .tf-metodrad { width: 100%; } .tf-metodrad .knapp { flex: 1 1 0; padding-left: 0.6rem; padding-right: 0.6rem; } }
-/* Sidorna med texter: taggarna först och Visa stort till höger, och titeln leder till texten. */
+/* Sidorna med texter: taggarna först och Visa stort till höger, och titeln leder till texten. Taggen är inget val där, så
+   den har ingen kant och ser inte ut som matteproblemens tagg, som går att trycka på (designgranskningen 2026-10-18 natt:
+   den såg ut som en knapp och gjorde inget). */
 .tf-bara .tf-radtaggar { order: -1; }
 .tf-bara .tf-visa { margin-left: auto; }
+.tf-bara .tf-radtagg { border-color: transparent; }
 .tf-titellank { color: inherit; text-decoration: none; }
 .tf-titellank:hover { text-decoration: underline; text-decoration-color: var(--farg-accent); text-underline-offset: 0.15em; }
+/* Utan JavaScript är titeln vägen till texten, och den ser ut som en länk; listan finns inte, så raderna får hela bredden. */
+html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-color: var(--farg-accent); text-underline-offset: 0.15em; }
+/* En post i adressen (#bas-3) markeras en stund, så att den som öppnar en delad länk ser vilken som menas. */
+.tf-post { transition: background-color 0.6s; }
+.tf-post.tf-markerad, .tf-tema .tf-lista > .tf-post.tf-markerad { background: color-mix(in srgb, var(--farg-accent) 12%, white); }
 /* I telefonen står bocken bredvid titeln, och raden och länkarna får hela bredden under den, så att posten blir låg. Nivåerna
    står tre i bredd. */
 @media (max-width: 30rem) {
@@ -2408,7 +2418,11 @@ button.tf-radtagg:hover { border-color: var(--tagg, var(--farg-accent)); backgro
   .tf-tagg { padding: 0.25rem 0.75rem; font-size: 0.9rem; }
   .tf-tema-knappar .knapp { flex: 1 1 0; padding-left: 0.6rem; padding-right: 0.6rem; }
   .tf-tema-innehall { padding: 0.6rem 0.6rem 0.2rem; }
+  /* Titelns rad har bockens höjd innan skriptet ritar bocken, så att raden inte flyttar sig (designgranskningen 2026-10-18
+     natt: 5 punkter i 390). */
+  .tf-js .tf-post { grid-template-rows: minmax(2.05rem, auto) auto auto; }
 }
+@media (max-width: 22rem) { .tf-tema-knappar .knapp { flex-basis: 100%; } }
 /* Visa stort: problemet i sin egen form (boksidan) stort på skärmen och projektorn, utan klocka. Esc stänger. */
 .tf-stort { width: min(94vw, 80rem); max-width: none; max-height: 94vh; padding: 0; border: 0; border-radius: 8px; background: var(--farg-yta); color: var(--farg-text); box-shadow: 0 12px 40px rgb(0 0 0 / 0.3); }
 .tf-stort::backdrop { background: rgb(20 18 16 / 0.6); }
@@ -2447,6 +2461,14 @@ button.tf-radtagg:hover { border-color: var(--tagg, var(--farg-accent)); backgro
 .tema-lankar { display: flex; flex-wrap: wrap; gap: 0 1rem; margin: 0.25rem 0 0; font-size: 0.92rem; }
 .tema-lankar a { display: inline-flex; align-items: center; min-height: 2.75rem; }
 .tema-utskrifter { margin-top: 0; padding-top: 0.15rem; border-top: 1px solid var(--farg-kant); }
+.tema-etikett { display: inline-flex; align-items: center; min-height: 2.75rem; font-weight: 600; color: var(--farg-text-svag); }
+@media (max-width: 30rem) {
+  /* Temats knappar i två lika breda spalter, med temats utskrift över dem (designgranskningen 2026-10-18 natt). */
+  .sk-huvud .tema-atgarder { display: grid; grid-template-columns: 1fr 1fr; }
+  .sk-huvud .tema-atgarder > .knapp:first-child { grid-column: 1 / -1; }
+  .sk-huvud .tema-atgarder .knapp { justify-content: center; text-align: center; }
+  .tema-handledning .tema-atgarder .filval { width: auto; }
+}
 /* Bilden är den ifyllda modellen och leder dit den står på textens sida; länken Modellen bredvid gör detsamma för den som
    använder tangentbord eller skärmläsare. */
 .tema-bildlank { display: block; }
@@ -2502,6 +2524,13 @@ button.tf-radtagg:hover { border-color: var(--tagg, var(--farg-accent)); backgro
   .tf-titel { font-size: 1rem; }
 }
 @media (max-width: 34rem) { .tf-stort-sida { margin: 0.75rem; } .tf-stort-knappar { padding: 0.6rem 0.75rem; } .tf-stort-knappar .knapp { flex-basis: 9rem; } }
+/* I den minsta telefonen står knapparna två och två, så att texten syns (designgranskningen 2026-10-18 natt: en per rad i
+   320 punkter, 222 av 602). Etikettens nivå syns av färgrutan, och temat står kvar. */
+@media (max-width: 22rem) { .tf-stort-knappar .knapp { flex-basis: 7.5rem; padding-left: 0.5rem; padding-right: 0.5rem; font-size: 0.9rem; } }
+@media (max-width: 30rem) { .tf-etikett-niva { display: none; } }
+/* Modellens namn på en rad, och bytet och utskrifterna som en knappgrupp i lika breda knappar. */
+.tf-modell figcaption .tf-modell-sida { flex-basis: 100%; }
+.tf-modell figcaption .knapp { flex: 1 1 9rem; justify-content: center; text-align: center; }
 /* På en bred skärm, som en projektor, står bilden till höger om texten och frågorna, så att allt ryms på en skärm. */
 @media (min-width: 60rem) and (min-aspect-ratio: 4 / 3) {
   .tf-stort-sida .boksida-ram { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); grid-template-areas: "titel titel" "text bild" "fraga bild"; column-gap: 2rem; align-items: start; }

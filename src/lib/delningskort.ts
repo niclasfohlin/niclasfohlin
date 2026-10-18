@@ -162,8 +162,10 @@ export function allaKort(): Promise<Kort[]> {
         lagg({ sida: `/stodundervisning/${m.id}/${bank.ord.slug}`, typ: 'tafram', etikett: `Lästexter · ${arskursText(m.data)}`, titel: centralAv(slag)?.namn ?? 'Ta fram en lästext', undertitel: `${texter} texter på ${TAL[bank.nivaer.length] ?? bank.nivaer.length} nivåer med frågor mellan raderna, att visa stort och skriva ut`, bild: portratt, farg: FARG[m.data.omrade] ?? '--farg-accent', tafram: { metod: m.id, poster: TAFRAMENS_POSTER[slag] } });
       }
       if (bank && slag === 'faktatexter') {
-        const teman = new Set(bank.enheter.map((e) => e.l.faktatext?.etikett.split(' · ')[0]).filter(Boolean)).size;
-        lagg({ sida: `/stodundervisning/${m.id}/${bank.ord.slug}`, typ: 'tafram', etikett: `Faktatexter · ${arskursText(m.data)}`, titel: centralAv(slag)?.namn ?? 'Ta fram en faktatext', undertitel: `${bank.enheter.length} faktatexter i ${TAL[teman] ?? teman} teman, var och en med sin modell, att visa stort och skriva ut`, bild: portratt, farg: FARG[m.data.omrade] ?? '--farg-accent', tafram: { metod: m.id, poster: TAFRAMENS_POSTER[slag] } });
+        // Temana som sidan har dem (bankens tema, där ramens fält tema går före etiketten; Codex-granskningen 2026-10-18 natt).
+        const texter = bank.enheter.filter((e) => e.nr !== undefined);
+        const teman = new Set(texter.map((e) => e.tema).filter(Boolean)).size;
+        lagg({ sida: `/stodundervisning/${m.id}/${bank.ord.slug}`, typ: 'tafram', etikett: `Faktatexter · ${arskursText(m.data)}`, titel: centralAv(slag)?.namn ?? 'Ta fram en faktatext', undertitel: `${texter.length} faktatexter i ${TAL[teman] ?? teman} teman, var och en med sin modell, att visa stort och skriva ut`, bild: portratt, farg: FARG[m.data.omrade] ?? '--farg-accent', tafram: { metod: m.id, poster: TAFRAMENS_POSTER[slag] } });
       }
       const bb = brainbreaksAv(m.id);
       if (bb) lagg({ sida: brainbreaksAdress(m.id), typ: 'brainbreaks', etikett: `Brainbreaks · ${arskursText(m.data)}`, titel: centralAv('brainbreaks')?.namn ?? 'Ta fram en brainbreak', undertitel: `${bb.kort.length} brainbreaks, sex i taget, stora på skärmen med en klocka och musik`, bild: portratt, farg: FARG[m.data.omrade] ?? '--farg-accent', kortbank: { slag: 'brainbreaks', metod: m.id, kort: delningensBrainbreaks(bb) } });

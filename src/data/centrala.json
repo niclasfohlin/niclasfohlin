@@ -17,7 +17,7 @@
     "adress": "/stodundervisning/textsamtal-i-grupp/texter",
     "kort": "/lastexter",
     "metod": "textsamtal-i-grupp",
-    "mejl": "välj nivå och slag bland metodens fyrtiofem texter, visa en stort och skriv ut dem du vill ha"
+    "mejl": "välj nivå bland metodens lästexter, visa en text stort och skriv ut dem du vill ha"
   },
   {
     "id": "faktatexter",
@@ -27,7 +27,7 @@
     "adress": "/stodundervisning/faktatextsamtal-i-grupp/texter",
     "kort": "/faktatexter",
     "metod": "faktatextsamtal-i-grupp",
-    "mejl": "välj nivå och tema bland metodens femton faktatexter, visa en stort och skriv ut dem du vill ha"
+    "mejl": "välj nivå och tema bland metodens faktatexter, visa en text stort och skriv ut dem du vill ha"
   },
   {
     "id": "skrivkort",

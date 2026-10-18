@@ -267,11 +267,21 @@ export const bankRad = (b: Bank, adress: string) => {
   return `${alla} finns också i egna filer, en för varje nivå och en för alla nivåer: bara ${b.ord.alla}, eller ${b.ord.alla} med ${foljeText(b)}. Filerna finns på ${adress}, och varje ${b.ord.en} har en egen sida där.`;
 };
 
-/** Förra och nästa enhet på samma nivå. */
+/** Förra och nästa enhet på samma nivå, och i en bank med teman i samma tema (designgranskningen 2026-10-18 natt: med ett
+ *  andra tema på en nivå gick förra och nästa över temats gräns). */
 export function grannar(b: Bank, e: Bankenhet): { forra?: Bankenhet; nasta?: Bankenhet; niva: Bankniva; plats: number } {
   const niva = b.nivaer.find((n) => n.enheter.includes(e))!;
-  const i = niva.enheter.indexOf(e);
-  return { forra: niva.enheter[i - 1], nasta: niva.enheter[i + 1], niva, plats: i + 1 };
+  const rad = e.tema ? niva.enheter.filter((x) => x.tema === e.tema) : niva.enheter;
+  const i = rad.indexOf(e);
+  return { forra: rad[i - 1], nasta: rad[i + 1], niva, plats: i + 1 };
+}
+
+/** Enhetens nummer och hur många de är: i temat när enheten har ett, som Ta fram en faktatext räknar (temaNr i
+ *  src/lib/tafram.ts) och texten själv säger ("Vatten · text 1 av 5"), annars på nivån. */
+export function enhetensPlats(b: Bank, e: Bankenhet): { nr?: number; antal: number } {
+  const niva = b.nivaer.find((n) => n.enheter.includes(e))!;
+  const numrerade = niva.enheter.filter((x) => x.nr !== undefined && (!e.tema || x.tema === e.tema));
+  return { nr: e.nr === undefined ? undefined : e.tema ? numrerade.indexOf(e) + 1 : e.nr, antal: numrerade.length };
 }
 
 /** Boksidornas nivåfärger, i den ordning nivåerna först kommer (grön, ockra, plommon), som Metod.astro och Word. */

@@ -32,7 +32,10 @@ const hlFil = h ? handledningensFil(t.metod, h) : undefined;
 const versal = (s: string) => s.charAt(0).toLocaleUpperCase('sv') + s.slice(1);
 const TAL = ['', 'en', 'två', 'tre', 'fyra', 'fem', 'sex', 'sju', 'åtta', 'nio', 'tio'];
 const antal = tema.poster.length;
-const byggnad = tema.poster.map((p) => (p.taggar ?? [])[0]?.toLowerCase()).filter(Boolean);
+const byggnad = tema.poster.map((p) => (p.taggar ?? [])[0]?.toLowerCase()).filter((x): x is string => !!x);
+// Meningen om att texterna är byggda på var sitt sätt står bara när de är det (designgranskningen 2026-10-18 natt: ett nytt
+// tema med två jämförelser skulle göra den fel).
+const varSitt = byggnad.length === antal && new Set(byggnad).size === antal;
 // En uppräkning av strukturerna. Två av namnen har själva "och", så det sista ledet binds med samt (designgranskningen
 // 2026-10-18 natt: "orsak och verkan och problem och lösning" gick inte att läsa).
 const lista = (xs: string[]) => (xs.length > 1 ? `${xs.slice(0, -1).join(', ')} ${xs.some((x) => / och /.test(x)) ? 'samt' : 'och'} ${xs.at(-1)}` : xs[0] ?? '');
@@ -46,13 +49,13 @@ const tillTaFram = `${t.adress}#${nivaSlug}/${tema.slug}`;
 const delen = (titel: string) => (h?.texter.some((x) => x.titel === titel) ? `#hl-${slugAv(titel)}` : undefined);
 ---
 
-<Base title={`${tema.namn}: ${t.namn}`} description={`Temat ${tema.namn} i ${t.titel}: ${TAL[antal] ?? antal} faktatexter på nivån ${niva}, var och en med sin modell${byggnad.length ? ` (${lista(byggnad)})` : ''}, att läsa, visa och skriva ut.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
+<Base title={`${tema.namn}: ${t.namn}`} description={`Temat ${tema.namn} i ${t.titel}: ${TAL[antal] ?? antal} faktatexter på nivån ${niva}, var och en med sin modell${byggnad.length ? ` (${lista([...new Set(byggnad)])})` : ''}, att läsa, visa och skriva ut.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
   <article class="tema-sida" style={`--niva:${farg}`}>
     <header class="sk-huvud">
       <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${t.metod}`}>{t.titel}</a> · <a href={tillTaFram}>{t.namn}</a> · {tema.namn}</p>
       <p class="tema-kicker"><span class="tema-niva">{niva}</span> Tema med {TAL[antal] ?? antal} {t.ord.flera}</p>
       <h1>{tema.namn}</h1>
-      <p class="ingress">Temats {TAL[antal] ?? antal} {t.ord.flera} är byggda på var sitt sätt{byggnad.length ? `: ${lista(byggnad)}` : ''}. Varje text har sin modell{tema.poster.some((p) => p.modell?.ifylld) ? ', ifylld och tom' : ''}, och lärarens sida säger hur en liten grupp läser den.{h && ' Lärarhandledningen efter texterna säger hur hela klassen läser temat.'}</p>
+      <p class="ingress">{varSitt && `Temats ${TAL[antal] ?? antal} ${t.ord.flera} är byggda på var sitt sätt: ${lista(byggnad)}. `}Varje text har sin modell{tema.poster.some((p) => p.modell?.ifylld) ? ', ifylld och tom' : ''}, och lärarens sida säger hur en liten grupp läser den.{h && ' Lärarhandledningen efter texterna säger hur hela klassen läser temat.'}</p>
       <p class="tema-atgarder">{tema.utskrift
         ? <a class="knapp" href={tema.utskrift.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst={String(6 * antal)} data-goatcounter-click={`utskrift:${t.metod}/${t.led}/${tema.slug}`} data-goatcounter-title={`${t.titel}: ${tema.namn}, utskrift av temats ${t.ord.flera}`}><span data-direkt={`Skriv ut temats ${t.ord.flera}`}>Temats {t.ord.flera} som pdf</span></a>
         : <a class="knapp" href={listan}>Temats {t.ord.flera} i listan</a>}{h && <>{' '}<a class="knapp sekundar" href="#lararhandledning">Lärarhandledning</a></>}{' '}<a class="knapp sekundar" href={tillTaFram}>{t.namn}</a></p>
@@ -65,21 +68,23 @@ const delen = (titel: string) => (h?.texter.some((x) => x.titel === titel) ? `#h
               natt); annars textens första bild. */}
           {(() => { const b = p.modell?.ifylld ?? p.modell; return b ? <a class="tema-bildlank" href={p.modell?.ifylld?.sida ?? (p.sida ? `${p.sida}#enhetens-blad` : p.modell!.sida)} tabindex="-1" aria-hidden="true"><img class="tema-bild" src={b.bild.adress} alt="" width={b.bildMatt.bredd} height={b.bildMatt.hojd} loading="lazy" decoding="async" /></a> : p.bildFil && <img class="tema-bild" src={p.bildFil} alt="" width={p.bildMatt?.bredd} height={p.bildMatt?.hojd} loading="lazy" decoding="async" />; })()}
           <div class="tema-text-text">
-            <h2 class="tema-titel"><span class="tf-nr">{p.temaNr ?? p.nr}</span> <a href={p.sida}>{p.titel}</a></h2>
+            <h2 class="tema-titel"><span class="tf-nr">{p.temaNr ?? p.nr}</span> <a href={p.textAdress ?? p.sida}>{p.titel}</a></h2>
             <p class="tema-byggnad">{(p.taggar ?? []).join(' · ')}{p.modell && ` · ${p.modell.namn}, ${p.modell.blad.charAt(0).toLowerCase()}${p.modell.blad.slice(1)}`}</p>
             <p class="tf-rad">{p.rad}</p>
+            {/* Det som visas: lärarens sida, modellen och textens del i handledningen. Titeln leder till texten. */}
             <p class="tema-lankar">
-              <a href={p.sida}>Texten</a>
-              {p.losning && <a href={p.losning}>{t.losningNamn}</a>}
-              {p.modell && <a href={p.modell.ifylld?.sida ?? (p.sida ? `${p.sida}#enhetens-blad` : p.modell.sida)}>Modellen</a>}
-              {delen(p.titel) && <a href={delen(p.titel)}>I lärarhandledningen<span class="visually-hidden">: {p.titel}</span></a>}
+              {p.losning && <a href={p.losning}>{t.losningNamn}<span class="visually-hidden">: {p.titel}</span></a>}
+              {p.modell && <a href={p.modell.ifylld?.sida ?? (p.sida ? `${p.sida}#enhetens-blad` : p.modell.sida)}>Modellen<span class="visually-hidden">: {p.titel}</span></a>}
+              {delen(p.titel) && <a href={delen(p.titel)}>Handledningen<span class="visually-hidden">: {p.titel}</span></a>}
             </p>
-            {/* Utskrifterna på en egen rad, så att det som visas och det som skrivs ut står var för sig (designgranskningen
-                2026-10-18 natt: sex länkar i tre rader i telefonen). */}
-            <p class="tema-lankar tema-utskrifter">
-              <a href={p.utskrift.post.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="6" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:tema`} data-goatcounter-title={`${t.titel}: ${tema.namn}, utskrift av ${p.titel}`}><span data-direkt="Skriv ut texten">Texten som pdf</span><span class="visually-hidden">: {p.titel}</span></a>
-              {p.modell?.ifylld && <a href={p.modell.ifylld.utskrift.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande data-sidor-hogst="1" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:ifylld-modell`} data-goatcounter-title={`${t.titel}: ${tema.namn}, utskrift av den ifyllda modellen till ${p.titel}`}><span data-direkt="Skriv ut den ifyllda modellen">Ifylld modell som pdf</span><span class="visually-hidden">: {p.titel}</span></a>}
-              {p.modell && <a href={p.modell.utskrift.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande data-sidor-hogst="1" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:modell`} data-goatcounter-title={`${t.titel}: ${tema.namn}, utskrift av den tomma modellen till ${p.titel}`}><span data-direkt={p.modell.ifylld ? 'Skriv ut den tomma modellen' : 'Skriv ut modellen'}>{p.modell.ifylld ? 'Tom modell som pdf' : 'Modellen som pdf'}</span><span class="visually-hidden">: {p.titel}</span></a>}
+            {/* Utskrifterna på en egen rad, så att det som visas och det som skrivs ut står var för sig, med en etikett som
+                säger Pdf, eller Skriv ut där knapparna ger utskriftsrutan (SkrivUtPdf.astro), och korta namn, så att raden ryms
+                i telefonen (designgranskningen 2026-10-18 natt: sex länkar i fyra rader). */}
+            <p class="tema-lankar tema-utskrifter" role="group" aria-labelledby={`pdf-${p.id}`}>
+              <span class="tema-etikett" id={`pdf-${p.id}`} data-direkt="Skriv ut:">Pdf:</span>
+              <a href={p.utskrift.post.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="6" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:tema`} data-goatcounter-title={`${t.titel}: ${tema.namn}, utskrift av ${p.titel}`}><span>Texten</span><span class="visually-hidden">: {p.titel}</span></a>
+              {p.modell?.ifylld && <a href={p.modell.ifylld.utskrift.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande data-sidor-hogst="1" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:ifylld-modell`} data-goatcounter-title={`${t.titel}: ${tema.namn}, utskrift av den ifyllda modellen till ${p.titel}`}><span>Ifylld modell</span><span class="visually-hidden">: {p.titel}</span></a>}
+              {p.modell && <a href={p.modell.utskrift.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande data-sidor-hogst="1" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:modell`} data-goatcounter-title={`${t.titel}: ${tema.namn}, utskrift av den tomma modellen till ${p.titel}`}><span>{p.modell.ifylld ? 'Tom modell' : 'Modellen'}</span><span class="visually-hidden">: {p.titel}</span></a>}
             </p>
           </div>
         </li>

@@ -33,6 +33,12 @@ const forSig = sida.dataset.forsig !== undefined;
 const bara = sida.dataset.bara !== undefined;
 const taggVal = sida.dataset.taggval !== undefined;
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
+// En utskriftsknapp heter "Skriv ut …" där den skriver ut direkt (Chromium på datorn, ettkortLank och flerakortKnapp) och
+// "… som pdf" där den öppnar pdf:en, som sajtens andra utskriftsknappar (SkrivUtPdf.astro; Codex-granskningen 2026-10-18
+// natt).
+const direkt = kanSkrivaUtPdf();
+const versalt = (s: string) => `${s.charAt(0).toLocaleUpperCase('sv')}${s.slice(1)}`;
+const utskriftsnamn = (vad: string) => (direkt ? `Skriv ut ${vad}` : `${versalt(vad)} som pdf`);
 const raknaHandelse = (path: string, title: string) => (window as { goatcounter?: { count: (v: object) => void } }).goatcounter?.count({ path, title, event: true });
 
 document.documentElement.classList.add('tf-js');
@@ -106,6 +112,9 @@ const utfallt = (n: HTMLElement) => {
   return teman.length === 1 ? teman[0].dataset.tema! : '';
 };
 const temaAv = (r: HTMLElement) => r.closest<HTMLDetailsElement>('.tf-tema');
+// En nivå med ett enda tema visar det utfällt varje gång sidan öppnas; det läraren fällde ihop gäller bara nivåer med flera
+// teman (designgranskningen 2026-10-18 natt: ett ensamt tema som stod stängt visade bara en rad).
+for (const n of nivaer) if (temanPa(n).length === 1) delete sparat.teman[n.dataset.niva!];
 
 function visa() {
   const alla = sparat.niva === 'alla';
@@ -214,8 +223,10 @@ function visaBockar() {
   const skrivutMed = document.getElementById('tf-skrivut-med');
   for (const k of [$('tf-skrivut'), skrivutMed]) k?.setAttribute('aria-disabled', String(n === 0));
   // Ental när listan har en post (designgranskningen 2026-10-18 natt).
-  $('tf-skrivut').textContent = `Skriv ut ${n === 1 ? ord.bestamd : ord.alla}`;
-  if (skrivutMed) skrivutMed.textContent = forSig ? `Skriv ut ${n === 1 ? foljeEn : folje}` : `Skriv ut med ${n === 1 ? foljeEn : folje}`;
+  // "Skriv ut" där knappen ger utskriftsrutan och "… som pdf" där den öppnar pdf:en, som i Visa stort (designgranskningen
+  // 2026-10-18 natt).
+  $('tf-skrivut').textContent = utskriftsnamn(n === 1 ? ord.bestamd : ord.alla);
+  if (skrivutMed) skrivutMed.textContent = forSig ? utskriftsnamn(n === 1 ? foljeEn : folje) : direkt ? `Skriv ut med ${n === 1 ? foljeEn : folje}` : `${versalt(n === 1 ? ord.bestamd : ord.alla)} med ${n === 1 ? foljeEn : folje} som pdf`;
   $('tf-tomlista').hidden = n === 0;
   $('tf-kopiera').hidden = n === 0;
   if (lofte) data().then(visaStorlek).catch(() => {}); else visaStorlek();
@@ -327,10 +338,7 @@ function modellFigur(m: Modell): HTMLElement {
 }
 // I stegen A, B, A och B och C finns ingen utskrift som är det som syns, så knappen står bara vid problemet
 // (granskningen 2026-10-18: samma steg skrev ut olika material beroende på vad som visades före).
-// En utskriftsknapp i rutan heter "Skriv ut …" där den skriver ut direkt (Chromium på datorn, ettkortLank) och "… som pdf"
-// där den öppnar pdf:en, som sajtens andra utskriftsknappar (SkrivUtPdf.astro; Codex-granskningen 2026-10-18 natt).
-const direkt = kanSkrivaUtPdf();
-const utskriftsnamn = (vad: string) => (direkt ? `Skriv ut ${vad}` : `${vad.charAt(0).toLocaleUpperCase('sv')}${vad.slice(1)} som pdf`);
+// Knapparnas namn ger utskriftsnamn, överst i skriptet.
 // Knappen som skriver ut posten med följesidan finns bara där sidan har följesidorna (Ta fram ett matteproblem).
 const stortSkrivutMed = document.getElementById('tf-stort-skrivut-med') as HTMLAnchorElement | null;
 function skrivutLank() {
@@ -446,7 +454,12 @@ async function visaStort(id: string, medLosning = false) {
   const antal = rader.filter((x) => nivaAv(x) === nivaAv(r) && x.dataset.tema === tema).length;
   const taggar = [...r.querySelectorAll('.tf-radtagg')].map((x) => x.textContent).join(' · ');
   // "text 3 av 5" bryts inte (designgranskningen 2026-10-18 natt: "text 3 av" och "5" stod på var sin rad i telefonen).
-  $('tf-stort-etikett').textContent = `${p.niva}${tema ? ` · ${tema}` : ''} · ${ord.en} ${p.nr} av ${antal}${taggar ? ` · ${taggar}` : ''}`;
+  // I telefonen står etiketten utan nivån när posten har ett tema: färgrutan visar nivån (designgranskningen 2026-10-18 natt:
+  // etiketten stod på tre rader).
+  const etikett = $('tf-stort-etikett');
+  const resten = `${tema ? `${tema} · ` : ''}${ord.en} ${p.nr} av ${antal}${taggar ? ` · ${taggar}` : ''}`;
+  if (tema) { const nivan = document.createElement('span'); nivan.className = 'tf-etikett-niva'; nivan.textContent = `${p.niva} · `; etikett.replaceChildren(nivan, resten); }
+  else etikett.textContent = `${p.niva} · ${resten}`;
   $('tf-stort-etikett').style.setProperty('--niva', p.farg);
   $('tf-stort-sida').style.setProperty('--bok-niva', p.farg);
   $('tf-stort-titel').textContent = p.titel;
@@ -575,6 +588,10 @@ function lasAdressen() {
     sparat.tagg = '';
     const tema = temaAv(r);
     if (tema) sparat.teman[sparat.niva!] = tema.dataset.tema!;
+  } else if (nivaer.some((n) => hash.startsWith(`${n.dataset.niva}-`))) {
+    // En post som inte längre finns (#bas-99): dess nivå, som skriptet före raderna väljer.
+    sparat.niva = nivaer.find((n) => hash.startsWith(`${n.dataset.niva}-`))!.dataset.niva;
+    sparat.tagg = '';
   } else {
     const [niva, andra] = hash.split('/');
     if (giltigNiva(niva)) {
@@ -591,7 +608,14 @@ function lasAdressen() {
   // En lista från adressen eller minnet behöver datan för storleken.
   if (sparat.bockade.length) forsta();
   // Ett problem i adressen står kvar i den, så att en omladdning visar samma problem.
-  if (rad.has(hash)) { history.replaceState(null, '', `#${hash}`); rad.get(hash)!.scrollIntoView({ block: 'center' }); }
+  if (rad.has(hash)) {
+    history.replaceState(null, '', `#${hash}`);
+    const r = rad.get(hash)!;
+    r.scrollIntoView({ block: 'center' });
+    // En kort markering, så att den som öppnar en delad länk ser vilken post som menas (designgranskningen 2026-10-18 natt).
+    r.classList.add('tf-markerad');
+    window.setTimeout(() => r.classList.remove('tf-markerad'), 2500);
+  }
 }
 lasAdressen();
 window.addEventListener('hashchange', lasAdressen);
