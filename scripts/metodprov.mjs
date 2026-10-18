@@ -249,6 +249,26 @@ if (bilder) {
           inteEn.length ? nej(`${var_}: ${inteEn.length} av ${tva.length} blad Två lösningar står inte hela på ett blad (${inteEn.slice(0, 3).join('; ')}${inteEn.length > 3 ? ' …' : ''})`) : ok(`${var_}: ${tva.length} blad Två lösningar, ett helt blad var`);
         }
       }
+      // Lösningsförslagen (src/lib/problemform.ts, K-423; Niclas 2026-10-18: "De ska alltid vara en A4a var"): titeln, svaret
+      // och rutans sista punkt på exakt ett blad, i båda. Titeln står också på problemets sida, lärarens sida och Två
+      // lösningar, men svaret och rutan bara på lösningsförslaget.
+      const lfRamar = (metod.ramar?.ramar ?? []).filter((r) => /^Lösningsförslag: [^,]+, problem \d+, .+$/.test(String(r.rubrik)));
+      const lfRuta = (metod.ramar?.ramar ?? []).find((r) => /^Lösningsförslagen: /.test(String(r.rubrik)));
+      if (lfRamar.length && lfRuta) {
+        const norm = (s) => String(s).normalize('NFC').toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
+        const sistaPunkt = norm(lfRuta.delar?.[0]?.falt?.at(-1)?.text ?? '');
+        const nycklar = lfRamar.map((r) => {
+          const titel = String(r.rubrik).replace(/^Lösningsförslag: [^,]+, problem \d+, /, '');
+          const svaret = r.delar?.find((x) => x.rubrik === 'Svaret')?.falt?.find((f) => f.rubrik === 'Svaret')?.text ?? '';
+          return { rubrik: r.rubrik, delar: [norm(titel), norm(svaret), sistaPunkt] };
+        });
+        for (const [sidor, var_] of [[(() => { try { return tryckSidor(); } catch { return undefined; } })(), tryckNamn], [wordSidor, wordNamn]]) {
+          if (!sidor) continue;
+          const ns = sidor.map(norm);
+          const inteEn = nycklar.filter((k) => ns.filter((s) => k.delar.every((x) => s.includes(x))).length !== 1).map((k) => k.rubrik);
+          inteEn.length ? nej(`${var_}: ${inteEn.length} av ${lfRamar.length} lösningsförslag står inte hela på ett blad (${inteEn.slice(0, 3).join('; ')}${inteEn.length > 3 ? ' …' : ''})`) : ok(`${var_}: ${lfRamar.length} lösningsförslag, ett helt blad var`);
+        }
+      }
       if (metod.film) {
         const sista = metod.film.stillbilder[3].text;
         const sida1 = (pdf) => execFileSync('pdftotext', ['-enc', 'UTF-8', '-f', '1', '-l', '1', pdf, '-'], { encoding: 'utf8' }).replace(/\s+/g, ' ');

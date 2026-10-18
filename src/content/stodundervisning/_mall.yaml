@@ -79,6 +79,11 @@ utkast: true
 # I en ram som är en enhet i banken ("Bas, problem 1: Äpplena"): innehallstagg: <en av ämnets taggar>, som Algebra. Matematikens
 #   taggar är Lgr22:s fem delar: Taluppfattning, Algebra, Geometri, Sannolikhet och statistik, Samband och förändring
 #   (src/lib/standard/, METODER.md under Ta fram ur en bank). Sidan Ta fram ett matteproblem visar taggen och väljer ur den.
+# Ett lösningsförslag till ett problem i banken är en ram "Lösningsförslag: <nivå>, problem <n>, <titel>" efter problemets
+#   Två lösningar: källan som text, delen Svaret med fälten Svaret, Kontroll och Idén, och delen Lösningarna med "Lösning A:
+#   <namn>" och "Lösning B: <namn>", och gärna "Lösning C: tankevurpa" (elevens rader) och "Om lösning C" (lärarens rader,
+#   med frågan sist). Rutan om att visa och jämföra lösningar står en gång, som ramen "Lösningsförslagen: <rubrik>" med
+#   punkterna som fält, och ritas på varje lösningsförslag (METODER.md, tabellen över formerna, raden Lösningsförslaget).
 
 # Serier (Ljudlek i grupp): en generell metod med en lektionsbank och lektioner som är egna metoder. En ny lektion är en
 # ny fil med de tre fälten nedan: den syns i banken, i metodbanken och i seriens meny utan att den generella metoden

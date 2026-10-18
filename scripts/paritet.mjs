@@ -48,7 +48,7 @@ const UNDANTAG = [
   { vag: /^mallar\.\d+\.text$/, word: false, skal: 'mallens text är till läraren och står bara på sidan' },
   { vag: /^mallar\.\d+\.underrad$/, utskrift: false, skal: 'raden ritas som fält med skrivlinjer på sidan' },
   { vag: /^ramar\.ramar\.\d+\.(serie|ark)$/, word: false, utskrift: false, skal: 'bildseriens och arkets id i metodens scenfil; rutorna står som bilder (src/lib/bildserier.ts)' },
-  { vag: /^ramar\.ramar\.\d+\.innehallstagg$/, word: false, utskrift: false, skal: 'databasens innehållstagg, som Ta fram-sidan visar och väljer ur (src/lib/tafram.ts); elevens blad har den inte, och metodriggens lösningsblad visar den när det kommer (K-423)' },
+  { vag: /^ramar\.ramar\.\d+\.innehallstagg$/, word: false, utskrift: false, skal: 'databasens innehållstagg, som Ta fram-sidan visar och väljer ur (src/lib/tafram.ts) och lösningsförslaget har över titeln; elevens blad har den inte' },
   { vag: /^ramar\.ramar\.\d+\.oversikt\.bilder\.\d+$/, word: false, utskrift: false, skal: 'litteraturlistans omslag, filens sökväg; bilden står i listans första kolumn (src/lib/litteraturlista.ts)' },
   { vag: /^mallar\.\d+\.etiketter\.\d+$/, word: false, utskrift: false, skal: 'seriemallens namn på rutorna står i rutornas bilder, i elevens typsnitt (src/lib/serieritning.js)' },
 ];
@@ -356,6 +356,14 @@ for (const fil of filer) {
   const tvaLosningar = new Map((d.ramar?.ramar ?? []).flatMap((r, i) => (/^Två lösningar: /.test(r.rubrik) && arTextpar(r) && (d.pabordet ?? []).filter((b) => b.efter === `ram: ${r.rubrik}`).length === 2 ? [[i, r]] : [])));
   const problemRamar = new Set((d.ramar?.ramar ?? []).filter((r) => { const m = arLastext(r) && String(r.rubrik).match(/^([^,:]+), ([^:]+): (.+)$/); return !!m && /^problem(\s|$)/i.test(m[2]); }).map((r) => `ram: ${r.rubrik}`));
   const problemBilder = new Set((d.pabordet ?? []).filter((b) => problemRamar.has(b.efter) || [...tvaLosningar.values()].some((r) => b.efter === `ram: ${r.rubrik}`)).map((b) => b.nr));
+  // Lösningsförslagen (src/lib/problemform.ts, K-423). Rutans ram, "Lösningsförslagen: <rubrik>", ritas på varje
+  // lösningsförslag med rubriken efter kolonet, och ramens text säger det till den som läser metodens fil: den står varken
+  // i Word eller i utskriften. Lösningsförslagets rubrik står i två delar, som bladet Två lösningars: titeln överst och
+  // nivån och vad i sidfotens knapp.
+  const rutansRamar = (d.ramar?.ramar ?? []).flatMap((r, i) => (/^Lösningsförslagen: /.test(String(r.rubrik)) ? [[i, r]] : []));
+  const rutansText = rutansRamar.map(([i]) => new RegExp(`^ramar\\.ramar\\.${i}\\.text\\.`));
+  const rutansRubrik = new Map(rutansRamar.map(([i, r]) => [`ramar.ramar.${i}.rubrik`, norm(String(r.rubrik).replace(/^Lösningsförslagen: /, ''))]));
+  const lfRubrik = new Map((d.ramar?.ramar ?? []).flatMap((r, i) => { const m = String(r.rubrik).match(/^Lösningsförslag: ([^,]+), (problem \d+), (.+)$/); return m ? [[`ramar.ramar.${i}.rubrik`, [norm(`${m[1]} ${m[2]}`), norm(m[3])]]] : []; }));
   // Faktatextens bilder (på platsen "Bild: <namn>" i texten), bladen (rubriken börjar med "Blad: ", src/lib/pabordet.ts)
   // och bilden som eleven ser på (elev i src/data/pabordet.json) står utan rubriken På bordet, som problemens bilder:
   // rubriken och texten står i textalternativet, och de prövas där.
@@ -393,7 +401,7 @@ for (const fil of filer) {
   for (const { vag, text } of texter(d, '', [])) {
     const ri = vag.match(/^ramar\.ramar\.(\d+)\./);
     if (!ram(ri ? Number(ri[1]) : -1)) continue;
-    if (lastextRader.some((r) => r.test(vag)) || utanUtskrift.has(vag)) continue;
+    if (lastextRader.some((r) => r.test(vag)) || rutansText.some((r) => r.test(vag)) || utanUtskrift.has(vag)) continue;
     // Strukturens bild prövas ovan, i textalternativet.
     const pb = vag.match(/^pabordet\.(\d+)\.(rubrik|text)$/);
     if (pb && (strukturBilder.has(d.pabordet[Number(pb[1])].nr) || problemBilder.has(d.pabordet[Number(pb[1])].nr))) continue;
@@ -409,8 +417,14 @@ for (const fil of filer) {
       provade++;
       continue;
     }
-    if (losningsRubrik.has(vag)) {
-      const delar = losningsRubrik.get(vag);
+    if (rutansRubrik.has(vag)) {
+      const n = rutansRubrik.get(vag);
+      if (!word.includes(n) || !utskrift.includes(n)) ut.push(`    ${vag}: rutans rubrik saknas på lösningsförslagen i ${[!word.includes(n) && 'Word-filerna', !utskrift.includes(n) && 'utskriften'].filter(Boolean).join(' och ')}`);
+      provade++;
+      continue;
+    }
+    if (losningsRubrik.has(vag) || lfRubrik.has(vag)) {
+      const delar = losningsRubrik.get(vag) ?? lfRubrik.get(vag);
       if (!delar.every((x) => word.includes(x)) || !delar.every((x) => utskrift.includes(x))) ut.push(`    ${vag}: bladets titel eller nivå saknas i ${[!delar.every((x) => word.includes(x)) && 'Word-filerna', !delar.every((x) => utskrift.includes(x)) && 'utskriften'].filter(Boolean).join(' och ')}`);
       provade++;
       continue;

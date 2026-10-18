@@ -1,0 +1,13 @@
+---
+// Lösningsförslaget till ett problem (src/lib/problemform.ts; metodriggens TILL-SAJTEN 2026-10-18) på problemets sida i
+// metoden och i utskriften av metodens sida. Bladet ritas av samma funktion som Visa stort på Ta fram ett matteproblem
+// (src/lib/losningsforslag.ts), i Word-bladets form (losningsforslagSida i src/lib/metoddocx.ts). Bilderna leder till
+// svg-filen, så att de går att se stora i telefonen (K-296).
+import { losningsforslagHtml } from '../lib/losningsforslag';
+import { losningsforslagVy, type Losningsforslag } from '../lib/problemform';
+import { bildensAlt } from '../lib/pabordet';
+interface Props { lf: Losningsforslag; id: string; ankare?: string; farg: string }
+const { lf, id, ankare, farg } = Astro.props;
+const html = losningsforslagHtml(losningsforslagVy(lf, (b) => ({ adress: b.adress, alt: bildensAlt(b) })), { id, ankare, farg });
+---
+<Fragment set:html={html} />

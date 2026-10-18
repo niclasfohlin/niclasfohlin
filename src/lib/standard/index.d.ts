@@ -44,7 +44,7 @@ export interface Post {
   /** Adressen till postens lösningsförslag på postens sida. */
   losning?: string;
   bild: { adress: string; alt: string };
-  /** Varje slag av utskrift, som post (bara problemet) och med (med lärarens sida). */
+  /** Varje slag av utskrift, som post (bara problemet) och med (problemet med lösningsförslaget, eller med lärarens sida i en bank utan lösningsförslag). */
   utskrift: Record<string, PostUtskrift>;
 }
 

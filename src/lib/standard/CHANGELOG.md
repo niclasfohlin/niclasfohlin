@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.2.1, 2026-10-18
+
+- `Post.utskrift`: slaget `med` är problemet med lösningsförslaget när banken har lösningsförslag (metodriggens blad, sajtens K-423), och med lärarens sida annars. Formen är densamma; bara beskrivningen ändras.
+
 ## 0.2.0, 2026-10-18
 
 - `INNEHALLSTAGGAR` och `innehallstaggar`: innehållstaggarna, databasens sista nivå efter nivån och slaget (Niclas 2026-10-18). Matematikens fem ur Lgr22.

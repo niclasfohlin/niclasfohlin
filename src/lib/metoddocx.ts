@@ -32,10 +32,10 @@ import WORDSKALOR from '../data/lathund-word.json';
 import { sidlasFor } from './sidlas';
 import TECKENBREDD from '../data/teckenbredd.json';
 import ANTON_BREDD from '../data/faktatext/anton-bredder.json';
-import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, FORMLUFT, FORMRAD_PT, LIGGANDE_BOK, LIGGANDE_BREDD, PROBLEMLUFT, PROBLEMTITEL_PT, RAMHOJD, TITEL_PT, boksidansMatt, breddPt, losningarMatt, problemMatt, strukturMatt, textparMatt } from './boksida';
+import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, FORMLUFT, FORMRAD_PT, LF_LUFT, LIGGANDE_BOK, LIGGANDE_BREDD, PROBLEMLUFT, PROBLEMTITEL_PT, RAMHOJD, TITEL_PT, boksidansMatt, breddPt, losningarMatt, losningsforslagMatt, problemMatt, strukturMatt, textparMatt } from './boksida';
 import { bankAv, bankfilensRamar, bankRad, type Bankfil } from './bank';
 import { harMaterial, hemsidansNamn, MATERIAL } from './material';
-import { losningarnasNiva, losningarnasNot, problemformer } from './problemform';
+import { losningarnasNiva, losningarnasNot, problemformer, type Losningsforslag } from './problemform';
 import { bildMatt, inline, kolumnandelar, omslagAdress, omslagUpphov, OMSLAG_KORT, radensNamn, ramensNiva, talcell } from './litteraturlista';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
@@ -1220,6 +1220,107 @@ function bildpar(bilder: PaBordet[], namn: string[]): Barn[] {
   const tom = new TableCell({ width: { size: mellan, type: WidthType.DXA }, borders: ingen, children: [new Paragraph({ spacing: { after: 0 } })] });
   return [new Table({ width: { size: BREDD, type: WidthType.DXA }, columnWidths: [w, mellan, BREDD - w - mellan], layout: TableLayoutType.FIXED,
     borders: { ...ingen, insideHorizontal: INGEN, insideVertical: INGEN }, rows: [new TableRow({ cantSplit: true, children: [bildCell(0), tom, bildCell(1)] })] }), avstand(120)];
+}
+// Lösningsförslaget till ett problem (src/lib/problemform.ts; metodriggens TILL-SAJTEN 2026-10-18), ett till ett med
+// riggens build-docx.js (losningsforslag), som Niclas granskade samma kväll ("De ser bra ut."): ett A4 för läraren i
+// problemets form, med den dubbla ramen, titeln i Cinzel med den röda linjen och nivåns knapp i sidfoten. Överst
+// "Lösningsförslag · <innehållstagg>", sedan problemet i en ruta med tunn kant (texten och frågan i elevens typsnitt i 9
+// punkter, bilden till höger och svaret och kontrollen under), idén i en mening, lösning A och B bredvid varandra med
+// namnet över bilden och meningen under, lösning C med tankevurpan i elevens rader i blått och lärarens rader bredvid,
+// frågorna om tankarna bakom och rutan om att visa och jämföra lösningar. Problemet och elevens rader står i elevens
+// typsnitt och lärarens text i Arial. Bildernas storlek väljs av losningsforslagMatt (src/lib/boksida.ts). Till skillnad
+// från riggen står innehållet i en rad utan satt höjd, och en tom rad under det fyller ramen till sidans fot: en tabell i
+// en cell i en rad med satt höjd ritar Google högre (wordparitet, REGLER.md), och regelprovet stoppar den.
+const losningsforslagbyte = (lf: Losningsforslag) => new Sektionsbyte(false, { not: lf.kalla, niva: lf.niva, vad: `${lf.vad} · lösningsförslag`, farg: BOK.kort[lf.nivaNr] ?? BOK.ram });
+function losningsforslagSida(lf: Losningsforslag): Barn[] {
+  const matt = losningsforslagMatt(lf);
+  if (!matt.ryms) throw new Error(`Lösningsförslaget ”${lf.titel}” (${lf.niva}, ${lf.vad}) ryms inte på ett A4, inte ens med lösningarnas bilder i 80 procent. Korta problemet, lösning C eller frågorna (src/lib/boksida.ts, losningsforslagMatt).`);
+  const { skala, helB, textW, bildW, spaltW, mellan, cW, titelH, innehallH } = matt;
+  const inreBredd = BOKBREDD - 2 * DUBBEL_GLAPP;
+  const luftI = LF_LUFT - DUBBEL_GLAPP;
+  type Kanter = Record<'top' | 'bottom' | 'left' | 'right', IBorderOptions>;
+  const inga: Kanter = { top: FORM_INGEN, bottom: FORM_INGEN, left: FORM_INGEN, right: FORM_INGEN };
+  const tunn = FORM_SKILJARE;
+  const mitt = (bredd: number) => ({ left: Math.round((inreBredd - bredd) / 2), right: Math.round((inreBredd - bredd) / 2) });
+  const rod = { style: BorderStyle.SINGLE, size: 6, color: BOK.rod, space: 0 } as const;
+  const lar: IRunOptions = { font: 'Arial', size: 19, color: BOK.text };
+  // Frågorna och rutan står i 9 punkter, så att lösningarna får platsen.
+  const lar9: IRunOptions = { ...lar, size: 18 };
+  const elev: IRunOptions = { size: 20, color: BOK.text, font: ELEVTYPSNITT };
+  // Problemet står redan på problemets sida, så här står det mindre, i 9 punkter (Niclas 2026-10-18 till riggen: "Ska
+  // kunna läsas, men kan försöka optimera ner dess storlek så lösningarna får mer plats").
+  const problemStil: IRunOptions = { size: 18, color: BOK.text, font: ELEVTYPSNITT };
+  const etikett = (text: string, o: { mitt?: boolean; efter?: number } = {}) => new Paragraph({ alignment: o.mitt ? AlignmentType.CENTER : AlignmentType.LEFT, keepNext: true, spacing: { before: 0, after: o.efter ?? 60, line: 240 },
+    children: [new TextRun({ text, font: BOKTYPSNITT, size: 22, color: BOK.rod })] });
+  const stycke = (text: string, o: { mitt?: boolean; fore?: number; efter?: number; line?: number; foreText?: string } = {}) => new Paragraph({ alignment: o.mitt ? AlignmentType.CENTER : AlignmentType.LEFT, spacing: { before: o.fore ?? 0, after: o.efter ?? 60, line: o.line ?? 250 },
+    children: [...(o.foreText ? [new TextRun({ text: o.foreText, ...lar, bold: true })] : []), ...formRuns(text, lar)] });
+  const bild = (b: PaBordet, w: number) => { const h = Math.round((w * b.matt.hojd) / b.matt.bredd); return bildRun(b.adress, Math.round(((w / 20) * 4) / 3), bildensAlt(b), Math.round(((h / 20) * 4) / 3)); };
+  const cell = (barn: Barn[], o: { w: number; kanter: Kanter; mar?: typeof FORM_NOLL; mitt?: boolean }) => new TableCell({ width: { size: o.w, type: WidthType.DXA }, borders: o.kanter, margins: o.mar ?? FORM_NOLL, verticalAlign: o.mitt ? VerticalAlign.CENTER : VerticalAlign.TOP, children: barn });
+  const tabell = (bredder: number[], celler: TableCell[]) => new Table({ width: { size: helB, type: WidthType.DXA }, columnWidths: bredder, layout: TableLayoutType.FIXED, borders: FORM_UTAN, rows: [new TableRow({ cantSplit: true, children: celler })] });
+  // Huvudet: Lösningsförslag och innehållstaggen över titeln, och den röda dubbla linjen under.
+  const huvud = [
+    new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 170, after: 0, line: 240 }, children: [new TextRun({ text: ['Lösningsförslag', lf.tagg].filter(Boolean).join('  ·  '), font: BOKTYPSNITT, size: 22, color: BOK.rod })] }),
+    new Paragraph({ alignment: AlignmentType.CENTER, outlineLevel: 1, indent: { left: luftI, right: luftI }, spacing: { before: 40, after: 60, line: 240 }, children: [new TextRun({ text: lf.titel, font: BOKTYPSNITT, size: 52, color: BOK.titel })] }),
+    punktStycke({ indent: mitt(2000), spacing: { before: 0, after: 0, line: 240 }, border: { bottom: rod } }),
+    punktStycke({ indent: mitt(1970), spacing: { before: 0, after: 170, line: 147 }, border: { bottom: rod } }),
+  ];
+  // Problemet i en ruta med tunn kant: texten och frågan till vänster, problemets bild till höger, svaret och kontrollen under.
+  const pb = lf.problem.bild;
+  const problemet = tabell(pb ? [textW, bildW] : [helB], [
+    cell([
+      etikett('Problemet', { efter: 40 }),
+      ...lf.problem.stycken.map((t) => new Paragraph({ spacing: { before: 0, after: 40, line: 230 }, children: formRuns(t, problemStil) })),
+      ...lf.problem.fragor.map((t) => new Paragraph({ spacing: { before: 0, after: 40, line: 230 }, children: formRuns(t, { ...problemStil, bold: true }) })),
+      stycke(lf.svaret, { foreText: 'Svaret: ', fore: 40, efter: 0 }),
+      ...(lf.kontroll ? [stycke(lf.kontroll, { foreText: 'Kontroll: ', efter: 0 })] : []),
+    ], { w: pb ? textW : helB, kanter: { top: tunn, bottom: tunn, left: tunn, right: pb ? FORM_INGEN : tunn }, mar: { top: 110, bottom: 110, left: 180, right: 120 } }),
+    ...(pb ? [cell([new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0 }, children: [bild(pb, bildW - 180)] })], { w: bildW, kanter: { top: tunn, bottom: tunn, left: FORM_INGEN, right: tunn }, mar: { top: 60, bottom: 60, left: 60, right: 120 }, mitt: true })] : []),
+  ]);
+  // Idén i en mening, mitt på sidan under problemet.
+  const iden = new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 110, after: 110, line: 245 }, children: [new TextRun({ text: 'Idén:  ', font: BOKTYPSNITT, size: 22, color: BOK.rod }), ...formRuns(lf.iden, { ...lar, italics: true })] });
+  // Lösning A och B bredvid varandra: namnet efter idén över bilden, och en mening om hur eleven tänkte under.
+  const losning = (k: number) => cell([
+    etikett(lf.losningar[k].namn, { mitt: true, efter: 40 }),
+    new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 60 }, children: [bild(lf.losningar[k].bild, Math.round(spaltW * skala))] }),
+    stycke(lf.losningar[k].text, { mitt: true, efter: 0, line: 240 }),
+  ], { w: k ? helB - spaltW - mellan : spaltW, kanter: inga });
+  const losningarna = tabell([spaltW, mellan, helB - spaltW - mellan], [losning(0), cell([punktStycke()], { w: mellan, kanter: inga }), losning(1)]);
+  // Lösning C: en lösning med en tankevurpa, i elevens typsnitt som om den vore skriven för hand, och lärarens rader om den.
+  const c = lf.c;
+  const losningC = c ? tabell([cW, helB - cW], [
+    cell([etikett(c.namn, { efter: 40 }), ...c.rader.map((rad) => new Paragraph({ spacing: { before: 0, after: 0, line: 235 }, children: formRuns(rad, { ...elev, color: '2E4A7A' }) }))],
+      { w: cW, kanter: { top: tunn, bottom: tunn, left: tunn, right: tunn }, mar: { top: 80, bottom: 80, left: 160, right: 140 } }),
+    cell(c.larare.map((rad, j) => stycke(rad, { efter: j < c.larare.length - 1 ? 40 : 0, line: 245 })), { w: helB - cW, kanter: inga, mar: { top: 100, bottom: 60, left: 220, right: 0 }, mitt: true }),
+  ]) : null;
+  // Frågorna om tankarna bakom, numrerade.
+  const fragor = lf.fragor.map((t, i) => new Paragraph({ indent: { left: 360, hanging: 360 }, tabStops: [{ type: TabStopType.LEFT, position: 360 }], keepLines: true,
+    spacing: { before: 0, after: i < lf.fragor.length - 1 ? 30 : 0, line: 240 }, children: [new TextRun({ text: `${i + 1}.`, ...lar9, color: BOK.rod }), new TextRun({ children: [new Tab()], ...lar9 }), ...formRuns(t, lar9)] }));
+  // Rutan om att visa och jämföra lösningar, densamma på alla blad, med ett kort namn i fet stil först i varje punkt.
+  const kant = { style: BorderStyle.SINGLE, size: 8, color: BOK.rod } as const;
+  const rutan = tabell([helB], [cell([
+    etikett(lf.ruta.rubrik, { efter: 40 }),
+    ...lf.ruta.punkter.map((p, i) => new Paragraph({ indent: { left: 240, hanging: 240 }, tabStops: [{ type: TabStopType.LEFT, position: 240 }], keepLines: true,
+      spacing: { before: 0, after: i < lf.ruta.punkter.length - 1 ? 30 : 0, line: 235 },
+      children: [new TextRun({ text: '•', ...lar9, color: BOK.rod }), new TextRun({ children: [new Tab()], ...lar9 }), ...(p.namn ? [new TextRun({ text: `${p.namn}. `, ...lar9, bold: true })] : []), ...formRuns(p.text, lar9)] })),
+  ], { w: helB, kanter: { top: kant, bottom: kant, left: kant, right: kant }, mar: { top: 100, bottom: 100, left: 200, right: 200 } })]);
+  const luftMellan = (efter: number) => punktStycke({ spacing: { before: 0, after: efter, line: 240 } });
+  // Ramen fyller sidan som riggens: innehållets höjd är räknad med 300 twips luft (losningsforslagMatt), och raden under
+  // innehållet tar det som blir över.
+  const restH = Math.floor(Math.max(0, RAMHOJD - titelH - (innehallH - 300) - 450) / 15) * 15;
+  const sidan = new Table({
+    width: { size: inreBredd, type: WidthType.DXA }, columnWidths: [inreBredd], layout: TableLayoutType.FIXED, borders: FORM_UTAN,
+    rows: [
+      new TableRow({ children: [formCell(huvud, { bredd: inreBredd, kanter: { top: FORM_RAM, left: FORM_RAM, right: FORM_RAM, bottom: FORM_INGEN } })] }),
+      new TableRow({ children: [formCell([
+        problemet, iden, losningarna, luftMellan(140),
+        ...(losningC ? [losningC, luftMellan(140)] : []),
+        etikett('Frågor om tankarna bakom', { efter: 50 }), ...fragor, luftMellan(160),
+        rutan, luftMellan(0),
+      ], { bredd: inreBredd, kanter: { top: FORM_INGEN, left: FORM_RAM, right: FORM_RAM, bottom: FORM_INGEN }, marginaler: { top: 0, bottom: 0, left: luftI, right: luftI } })] }),
+      new TableRow({ height: { value: restH, rule: HeightRule.ATLEAST }, children: [formCell([punktStycke()], { bredd: inreBredd, kanter: { top: FORM_INGEN, left: FORM_RAM, right: FORM_RAM, bottom: FORM_RAM } })] }),
+    ],
+  });
+  return [punktStycke(), dubbelRam(BOKBREDD, FORM_RAM, () => sidan)];
 }
 
 // ---------------------------------------------------------------- faktatexten
@@ -2973,6 +3074,14 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
         filmVid({ ram: ram.rubrik });
         return;
       }
+      // Lösningsförslaget: ett A4 för läraren i problemets form (losningsforslagSida()).
+      const lf = former.losningsforslag(ram);
+      if (lf) {
+        ut.push(losningsforslagbyte(lf), ...losningsforslagSida(lf), new Sektionsbyte(false));
+        ut.push(...kortVid({ ram: ram.rubrik }));
+        for (const f of filmerVid(filmer, { ram: ram.rubrik })) ut.push(...filmBarn(f));
+        return;
+      }
       // Två lösningar: elevens blad på ett liggande A4, utan lärarens sida före (tvaLosningar()).
       const los = former.losningar(ram);
       if (los) {
@@ -3232,8 +3341,16 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
         if (ovriga.length) ut.push(ovriga.flatMap((b) => bordet(b)));
         return ut;
       }
-      // Problemens blad (src/lib/problemform.ts): bladet Två lösningar på ett liggande A4 och problemets sida. I filen med
-      // allt står de redan i beskrivningen.
+      // Problemens blad (src/lib/problemform.ts): lösningsförslaget, bladet Två lösningar på ett liggande A4 och problemets
+      // sida. I filen med allt står de redan i beskrivningen.
+      const lf = former.losningsforslag(ram);
+      if (lf) {
+        if (o.baraTommaRamar) return ut;
+        const sida: Flod = [losningsforslagbyte(lf), ...losningsforslagSida(lf)];
+        bladsidor.add(sida);
+        ut.push(sida);
+        return ut;
+      }
       const los = former.losningar(ram);
       if (los) {
         if (o.baraTommaRamar) return ut;

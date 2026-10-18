@@ -14,14 +14,15 @@
 //
 // Byggets kod: läser filer och pdf:er. Webbläsaren läser bara datafilen.
 import { createHash } from 'node:crypto';
-import { readFileSync, statSync } from 'node:fs';
+import { existsSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { PDFDict, PDFDocument, PDFName, PDFRawStream, PDFRef } from 'pdf-lib';
 import type { CollectionEntry } from 'astro:content';
 import { bankAv, enhetAdress, nivaFarger, type Bank, type Bankenhet } from './bank';
 import { enhetensUtskrifter, utskriftAdress, type Utskrift } from './utskrift';
 import { bildensAlt, metodensPaBordet } from './pabordet';
-import { problemformer } from './problemform';
+import { losningsforslagVy, problemformer } from './problemform';
+import type { LosningsforslagVy } from './losningsforslag';
 import { centralAv } from './centrala';
 import { databasFel, innehallstaggar, postensRad, type Post, type PostUtskrift } from './standard/index.js';
 
@@ -31,6 +32,12 @@ type Karta = { ram?: number; bild?: number; fran: number; till: number }[];
 const PUBLIC = join(process.cwd(), 'public');
 const MANIFEST = JSON.parse(readFileSync(join(PUBLIC, 'stodundervisning', 'bank-pdf.json'), 'utf8')) as Record<string, { pdf: string; sidor: number; karta?: Karta }>;
 const sha8 = (s: string | Buffer) => createHash('sha256').update(s).digest('hex').slice(0, 8);
+// Bygget före pdf:erna: npm run validera bygger först och gör sedan pdf:erna ur Word-filerna (scripts/bankpdf.mjs). En ny
+// bankfil, eller en vars ramar har flyttat, har då ännu ingen pdf eller karta i bank-pdf.json. Utskriften står då som
+// väntande i datafilen (vantar), och bankpdf.mjs bygger om sajten när pdf:erna finns. Netlify bygger aldrig så:
+// bankpdf.mjs --kontrollera stannar på en datafil som väntar.
+let vantande = false;
+const PDF_FINNS = (fil: string) => existsSync(join(PUBLIC, 'stodundervisning', `${fil}.pdf`));
 
 /** En fil under public/ med samma version som scripts/filversion.mjs sätter i sidornas länkar, så att sidan och datafilen
  *  hämtar samma adress och webbläsaren sparar den en gång. */
@@ -46,6 +53,7 @@ export function medVersion(adress: string): string {
 const vikter = new Map<string, Promise<{ byte: number; typsnitt: number; sidor: number }>>();
 function kallvikt(fil: string) {
   if (!vikter.has(fil)) vikter.set(fil, (async () => {
+    if (!PDF_FINNS(fil)) { vantande = true; return { byte: 2, typsnitt: 1, sidor: 1 }; }
     const bytes = readFileSync(join(PUBLIC, 'stodundervisning', `${fil}.pdf`));
     const doc = await PDFDocument.load(bytes, { updateMetadata: false });
     const sedda = new Set<string>();
@@ -70,16 +78,15 @@ async function postUtskrift(u: Utskrift): Promise<PostUtskrift> {
   const kalla: { fil: string; sidor: number[] }[] = [];
   for (const del of u.delar) {
     const karta = MANIFEST[del.pdf]?.karta;
-    if (!karta) throw new Error(`Ta fram: ${del.pdf}.pdf har ingen karta över sina sidor i bank-pdf.json. Kör npm run validera.`);
-    const sidor = karta.filter((k) => (del.bild !== undefined ? k.bild === del.bild : k.ram === del.ram && k.bild === undefined))
+    const sidor = (karta ?? []).filter((k) => (del.bild !== undefined ? k.bild === del.bild : k.ram === del.ram && k.bild === undefined))
       .flatMap((k) => Array.from({ length: k.till - k.fran + 1 }, (_, n) => k.fran - 1 + n));
-    if (!sidor.length) throw new Error(`Ta fram: ${u.namn}.pdf ska ha ramen ${del.ram} ur ${del.pdf}.pdf, men kartan har den inte. Kör npm run validera.`);
+    if (!sidor.length) { vantande = true; sidor.push(0); }
     const sist = kalla.at(-1);
     if (sist && sist.fil === del.pdf) sist.sidor.push(...sidor); else kalla.push({ fil: del.pdf, sidor });
   }
   // Delen klipps först efter bygget (scripts/pdfdelar.mjs), så dess version är källfilernas och sidornas: samma källa
   // och samma sidor ger samma del.
-  const version = sha8(JSON.stringify(kalla.map((k) => [MANIFEST[k.fil].pdf, k.sidor])));
+  const version = sha8(JSON.stringify(kalla.map((k) => [MANIFEST[k.fil]?.pdf ?? 'vantar', k.sidor])));
   let byte = 0;
   for (const k of kalla) {
     const v = await kallvikt(k.fil);
@@ -98,6 +105,8 @@ export interface TaFramPost extends Post {
   /** Problemet och frågorna för Visa stort. */
   stycken: string[];
   fragor: string[];
+  /** Lösningsförslaget för Visa stort (src/lib/losningsforslag.ts), när banken har det. */
+  losningsforslag?: LosningsforslagVy;
 }
 export interface TaFram {
   metod: string;
@@ -109,8 +118,10 @@ export interface TaFram {
   kort?: string;
   led: string;
   ord: Bank['ord'];
-  /** Följesidorna i en rad, som "lärarens sida och Två lösningar". */
+  /** Det som listan skriver ut med posterna: lösningsförslagen, eller följesidorna i en rad i en bank utan dem, som
+   *  "lärarens sida och Två lösningar". foljeEn är detsamma för en post: lösningsförslaget. */
   folje: string;
+  foljeEn: string;
   nivaer: { namn: string; slug: string; farg: string; poster: TaFramPost[]; filer: { bara: Fil; med?: Fil } }[];
   taggar: { id: string; namn: string; lgr22: string; antal: number }[];
   poster: TaFramPost[];
@@ -124,7 +135,10 @@ export const taFramLed = (b: Bank) => b.ord.slug;
 /** Metoderna med en bank vars Ta fram-sida är led, som problem. */
 export const harTaFram = (m: Metod, led: string) => bankAv(m.data)?.ord.slug === led;
 
-const fil = (namn: string): Fil => ({ namn, adress: medVersion(`/stodundervisning/${namn}.pdf`), byte: statSync(join(PUBLIC, 'stodundervisning', `${namn}.pdf`)).size });
+const fil = (namn: string): Fil => {
+  if (!PDF_FINNS(namn)) { vantande = true; return { namn, adress: `/stodundervisning/${namn}.pdf?v=00000000`, byte: 1 }; }
+  return { namn, adress: medVersion(`/stodundervisning/${namn}.pdf`), byte: statSync(join(PUBLIC, 'stodundervisning', `${namn}.pdf`)).size };
+};
 
 // En gång per metodfil: sidan och datafilen läser samma databas i bygget, och en ändrad metodfil i npm run dev är en ny
 // post och byggs om.
@@ -157,18 +171,21 @@ async function bygg(m: Metod): Promise<TaFram> {
     // Lösningsförslaget (Niclas 2026-10-18: "utan att missa att de finns"): bladet Lösningsförslag när metoden har det
     // (metodriggens blad, K-423), annars Lärarens sida, där de två lösningarna står. Ankaret är bladets på postens sida.
     const losningsblad = [...e.fore, ...e.efter].find((ri) => /^Lösningsförslag:/.test(ramar[ri].rubrik)) ?? [...e.fore, ...e.efter].find((ri) => /^Lärarens sida:/.test(ramar[ri].rubrik));
+    // Bladet självt för Visa stort, med bildernas adresser med version, som sidans.
+    const lf = e.post !== undefined ? former.losningsforslag(ramar[e.post]) : undefined;
     return {
       id: e.slug, niva: e.l.niva, nr: e.nr ?? 0, titel: e.l.titel, rad: postensRad(stycken[0] ?? ''), ...(tagg ? { tagg } : {}),
       sida: enhetAdress(m.id, e), ...(losningsblad !== undefined ? { losning: `${enhetAdress(m.id, e)}#blad-${losningsblad + 1}` } : {}), bild: { adress: medVersion(bild.adress), alt: bildensAlt(bild) },
-      utskrift: { post: await postUtskrift(u.ramar.get(e.ri)!), med: await postUtskrift(u.alla) },
+      utskrift: { post: await postUtskrift(u.ramar.get(e.ri)!), med: await postUtskrift(u.post ?? u.alla) },
       nivaSlug: bank.nivaer.find((n) => n.enheter.includes(e))!.slug, farg: farger[e.l.niva], ...(t ? { taggId: t.id } : {}),
       bildFil: bild.adress, stycken, fragor: (e.l.lastext?.fragor ?? []).map((f) => f.replace(/^\d+\.\s*/, '')),
+      ...(lf ? { losningsforslag: losningsforslagVy(lf, (b) => ({ adress: medVersion(b.adress), alt: bildensAlt(b) })) } : {}),
     };
   };
   const poster: TaFramPost[] = [];
   for (const e of bank.enheter) poster.push(await post(e));
   const fel = databasFel(poster, taggar);
-  if (fel.length) throw new Error(`Ta fram (${d.titel}): ${fel.length} fel i databasen:\n  ${fel.join('\n  ')}`);
+  if (fel.length && !vantande) throw new Error(`Ta fram (${d.titel}): ${fel.length} fel i databasen:\n  ${fel.join('\n  ')}`);
   // Källfilerna som posternas sidor står i, och nivåns två filer att skriva ut hela nivån (bankfiler i src/lib/bank.ts).
   const filer: Record<string, Fil> = {};
   for (const p of poster) for (const u of Object.values(p.utskrift)) for (const k of u.kalla) filer[k.fil] ??= fil(k.fil);
@@ -180,7 +197,10 @@ async function bygg(m: Metod): Promise<TaFram> {
   });
   return {
     metod: m.id, titel: d.titel, omrade: d.omrade, namn: c?.namn ?? `Ta fram ett ${bank.ord.en}`, adress, ...(c?.kort ? { kort: c.kort } : {}), led,
-    ord: bank.ord, folje: bank.foljesidor.map((n) => (/^Lärarens sida$/i.test(n) ? n.toLowerCase() : n)).join(' och '),
+    ord: bank.ord,
+    ...(bank.post
+      ? { folje: bank.post.alla.toLowerCase(), foljeEn: bank.post.bestamd }
+      : (() => { const f = bank.foljesidor.map((n) => (/^Lärarens sida$/i.test(n) ? n.toLowerCase() : n)).join(' och '); return { folje: f, foljeEn: f }; })()),
     nivaer, taggar: taggar.map((t) => ({ ...t, antal: poster.filter((p) => p.tagg === t.namn).length })).filter((t) => t.antal > 0),
     poster, filer,
   };
@@ -203,7 +223,8 @@ export function taFramKortposter(m: Metod, ids: string[]) {
 
 /** Datafilen bredvid sidan: det som Visa stort och listan att skriva ut behöver, utan det som redan står i sidan. */
 export const taFramData = (t: TaFram) => ({
-  poster: t.poster.map((p) => ({ id: p.id, niva: p.niva, nivaSlug: p.nivaSlug, nr: p.nr, titel: p.titel, ...(p.tagg ? { tagg: p.tagg } : {}), sida: p.sida, ...(p.losning ? { losning: p.losning } : {}), bild: p.bild, stycken: p.stycken, fragor: p.fragor, utskrift: p.utskrift })),
+  poster: t.poster.map((p) => ({ id: p.id, niva: p.niva, nivaSlug: p.nivaSlug, nr: p.nr, titel: p.titel, ...(p.tagg ? { tagg: p.tagg } : {}), sida: p.sida, ...(p.losning ? { losning: p.losning } : {}), bild: p.bild, stycken: p.stycken, fragor: p.fragor, utskrift: p.utskrift, ...(p.losningsforslag ? { losningsforslag: p.losningsforslag } : {}) })),
   filer: Object.fromEntries(Object.entries(t.filer).map(([k, f]) => [k, { adress: f.adress, byte: f.byte }])),
   nivaer: t.nivaer.map((n) => ({ namn: n.namn, slug: n.slug, farg: n.farg, antal: n.poster.length })),
+  ...(vantande ? { vantar: true } : {}),
 });

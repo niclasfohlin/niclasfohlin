@@ -253,6 +253,61 @@ export function problemMatt(l: { titel: string; stycken: string[]; fragor: strin
   return alla.find((f) => f.ryms) ?? alla[alla.length - 1];
 }
 
+// Lösningsförslaget (src/lib/problemform.ts; metodriggens TILL-SAJTEN 2026-10-18, Formen och måtten; riggens
+// build-docx.js, losningsforslag): ett A4 för läraren i problemets form, med texten 560 twips från ramen. Höjden räknas i
+// förväg med Andikas bredder och enkla rader i Word och Google, och lösningarnas bilder står i hela spaltens bredd, eller i
+// 94, 88 eller 80 procent när bladet annars inte ryms. Mindre blir de inte, eftersom texten i bilderna då blir mindre än 5
+// punkter, och ryms bladet inte ens då stannar bygget. Ramen får växa 150 twips ned mot sidfoten, som hos riggen (mätt på
+// de 30 bladen 2026-10-18). Uträkningen är riggens, rad för rad, så att bladet blir detsamma hos sajten och riggen.
+export const LF_LUFT = 560;
+const ARIAL_RAD = 1.15;
+export interface Losningsforslagmatt {
+  /** Lösningarnas bilder: andelen av spaltens bredd. */
+  skala: number;
+  /** Bredderna i twips innanför ramen och luften: hela, problemets text och bild, en lösnings spalt och avståndet mellan
+   *  spalterna, och lösning C:s ruta. */
+  helB: number; textW: number; bildW: number; spaltW: number; mellan: number; cW: number;
+  /** Höjderna i twips: titeln med raden över och linjen under, och innehållet under den med bilderna i skala. */
+  titelH: number; innehallH: number;
+  ryms: boolean;
+}
+export function losningsforslagMatt(lf: {
+  problem: { stycken: string[]; fragor: string[]; bild?: { matt: { bredd: number; hojd: number } } };
+  svaret: string; kontroll: string; iden: string;
+  losningar: { namn: string; text: string; bild: { matt: { bredd: number; hojd: number } } }[];
+  c?: { rader: string[]; larare: string[] }; fragor: string[]; ruta: { punkter: { namn: string; text: string }[] };
+}): Losningsforslagmatt {
+  const helB = INRE - 2 * (LF_LUFT - 30);
+  const pb = lf.problem.bild?.matt;
+  const bildW = pb ? Math.round(helB * 0.27) : 0;
+  const textW = helB - bildW;
+  const mellan = 280, spaltW = Math.floor((helB - mellan) / 2);
+  const cW = Math.round(helB * 0.5);
+  const pt = (tw: number) => tw / 20;
+  const radElev = BOKRAD.Andika * 10 * 20 * 235 / 240, radProblem = BOKRAD.Andika * 9 * 20 * 230 / 240;
+  const radLar = (line: number) => ARIAL_RAD * 9.5 * 20 * line / 240, radLar9 = (line: number) => ARIAL_RAD * 9 * 20 * line / 240;
+  const rader = (t: string, bredd: number, storlek = 10) => String(t).split('\n').reduce((n, rad) => n + antalRader(rad, pt(bredd), storlek), 0);
+  const etikettH = Math.ceil(BOKRAD.Cinzel * 11 * 20);
+  const problemH = Math.max(
+    etikettH + 40 + lf.problem.stycken.reduce((h, t) => h + rader(t, textW - 300, 9) * radProblem + 40, 0) + lf.problem.fragor.reduce((h, t) => h + rader(t, textW - 300, 9) * radProblem + 40, 0)
+      + 40 + rader(`Svaret: ${lf.svaret}`, textW - 300) * radLar(250) + (lf.kontroll ? rader(`Kontroll: ${lf.kontroll}`, textW - 300) * radLar(250) : 0),
+    pb ? ((bildW - 180) * pb.hojd) / pb.bredd : 0) + 220;
+  const idenH = 220 + rader(`Idén: ${lf.iden}`, helB) * radLar(245);
+  // Lösningens namn i Cinzel kan bli två rader i spalten, som "Lösning A: smörgåsarna i tredjedelar".
+  const namnRader = Math.max(...lf.losningar.map((l) => Math.ceil(breddPt(String(l.namn), 11, CINZEL_BREDD) / pt(spaltW))));
+  const lb = lf.losningar[0].bild.matt;
+  const losningarH = (skala: number) => etikettH * namnRader + 40 + (spaltW * skala * lb.hojd) / lb.bredd + 60 + Math.max(...lf.losningar.map((l) => rader(l.text, spaltW))) * radLar(240);
+  const cH = lf.c ? Math.max(etikettH + 40 + rader(lf.c.rader.join('\n'), cW - 300) * radElev, rader(lf.c.larare.join('\n'), helB - cW - 220) * radLar(245)) + 160 + 140 : 0;
+  const fragorH = etikettH + 50 + lf.fragor.reduce((h, t) => h + rader(t, helB - 360, 9) * radLar9(240) + 30, 0) + 160;
+  const rutanH = Math.ceil(BOKRAD.Cinzel * 11 * 20) + 40 + lf.ruta.punkter.reduce((h, p) => h + rader(`${p.namn}. ${p.text}`, helB - 640, 9) * radLar9(235) + 30, 0) + 200;
+  const titelH0 = 170 + etikettH + 40 + Math.ceil(BOKRAD.Cinzel * 26 * 20) + 60 + 24 + 45 + 170;
+  const tillgang = RAMHOJD - titelH0 - 450 + 150;
+  const behov = (sk: number) => problemH + idenH + losningarH(sk) + 140 + cH + fragorH + rutanH + 300;
+  const skala = [1, 0.94, 0.88, 0.8].find((sk) => behov(sk) <= tillgang);
+  const titelH = 220 + etikettH + 40 + Math.ceil(BOKRAD.Cinzel * 26 * 20) + 60 + 24 + 45 + 200;
+  return { skala: skala ?? 0.8, helB, textW, bildW, spaltW, mellan, cW, titelH, innehallH: Math.ceil(behov(skala ?? 0.8)), ryms: !!skala };
+}
+
 // Två lösningar (Det nya punkt 2; riggens tvalosningar): elevens blad på ett liggande A4 med boksidans ram, titeln, raden
 // till eleven, de två ritade lösningarna i var sin spalt med namnet överst och frågorna under. Sidan har 720 twips marginal
 // och 900 nedtill, för sidfoten, som riggens liggande boksektion.

@@ -34,7 +34,11 @@
 //
 // Kräver Word (scripts/word-jobb.ps1), Python med pikepdf (pip install pikepdf) och Poppler (pdfinfo, pdftotext) när en
 // pdf ska göras. Alla filer görs i en Word-körning, och bara en Word-körning åt gången.
-import { copyFileSync, existsSync, mkdirSync, readFileSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';
+//
+// Ta fram-sidornas datafiler (src/lib/tafram.ts) säger var varje posts sidor står i de här pdf:erna, och de byggs före
+// pdf:erna. När en pdf eller en karta är ny bygger skriptet därför om sajten, så att datafilerna får de nya sidorna
+// (en datafil som byggdes utan dem säger vantar). --kontrollera stannar på en datafil som väntar.
+import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
@@ -55,6 +59,19 @@ if (!existsSync(lista)) { console.error('bankpdf: dist/stodundervisning/bankfile
 const filer = JSON.parse(readFileSync(lista, 'utf8'));
 const lasManifest = () => { try { return JSON.parse(readFileSync(manifestFil, 'utf8')); } catch { return {}; } };
 const sha = (b) => createHash('sha256').update(b).digest('hex');
+// Ta fram-sidornas datafiler i dist (dist/stodundervisning/<metod>/<led>.json med poster och utskrifter), och de som väntar
+// på pdf:erna.
+const taFramData = () => (existsSync(dist) ? readdirSync(dist, { withFileTypes: true }).filter((x) => x.isDirectory()).flatMap((x) => readdirSync(join(dist, x.name)).filter((f) => f.endsWith('.json')).map((f) => join(dist, x.name, f))) : [])
+  .filter((f) => { const t = readFileSync(f, 'utf8'); return t.includes('"poster"') && t.includes('"utskrift"'); });
+const vantande = () => taFramData().filter((f) => /"vantar":\s*true/.test(readFileSync(f, 'utf8')));
+// Bygget görs om när pdf:erna eller kartorna har ändrats och sajten har en Ta fram-sida.
+const byggOm = () => {
+  if (!taFramData().length) return;
+  console.log('Ta fram-sidornas datafiler byggs om med de nya pdf:erna (astro build) …');
+  execFileSync('npx', ['astro', 'build'], { cwd: rot, stdio: 'inherit', shell: true, timeout: 1800000 });
+  const kvar = vantande();
+  if (kvar.length) { console.error(`bankpdf: ${kvar.length} datafiler väntar fortfarande på pdf:er efter bygget (${kvar.map((f) => f.slice(rot.length + 1)).join(', ')}).`); process.exit(1); }
+};
 
 // Typsnitten som Word-filerna bäddar in: ändras de (ett nytt tecken i elevens typsnitt) ändras pdf:en.
 const TYPSNITT = ['public/fonts/ljudlek-elev/LjudlekElev-Regular.ttf', 'public/fonts/boksida/Cinzel-dokument.ttf', 'public/fonts/boksida/CinzelDecorative-dokument.ttf'];
@@ -124,6 +141,7 @@ if (kontrollera) {
     }
   }
   for (const f of overblivna()) fel.push(`${f}: överbliven, ingen bank har filen (ta bort filen och raden i manifestet)`);
+  for (const f of vantande()) fel.push(`${f.slice(rot.length + 1)}: Ta fram-sidans datafil väntar på pdf:er som inte fanns när den byggdes`);
   if (fel.length) { console.error(`Bankens pdf:er:\n  ${fel.join('\n  ')}\nKör: npm run validera (eller node scripts/bankpdf.mjs efter ett bygge)`); process.exit(1); }
   console.log(`Bankens pdf:er finns och är aktuella (${filer.length} filer).`);
   process.exit(0);
@@ -163,7 +181,12 @@ for (const f of filer) {
   if (ny) { manifest[f.namn].karta = ny; omskrivna += 1; } else utanKarta.push(f);
 }
 if (omskrivna) console.log(`Kartans ramar och blad är omskrivna efter Word-filernas sidkarta i ${omskrivna} filer (sidorna är desamma).`);
-if (!att.length && !utanKarta.length) { writeFileSync(manifestFil, JSON.stringify(manifest, null, 2) + '\n'); console.log(`Pdf:erna ur Word är aktuella (${filer.length} filer).`); process.exit(0); }
+if (!att.length && !utanKarta.length) {
+  writeFileSync(manifestFil, JSON.stringify(manifest, null, 2) + '\n');
+  console.log(`Pdf:erna ur Word är aktuella (${filer.length} filer).`);
+  if (omskrivna || vantande().length) byggOm();
+  process.exit(0);
+}
 if (att.length) console.log(`Gör pdf ur Word för ${att.map((f) => f.namn).join(', ')} …`);
 if (utanKarta.length) console.log(`Läser var ramarna står i ${utanKarta.length} filer som redan har sin pdf …`);
 const tmp = join(tmpdir(), `bankpdf-${process.pid}`);
@@ -225,5 +248,6 @@ writeFileSync(manifestFil, JSON.stringify(manifest, null, 2) + '\n');
 // En ny pdf fanns inte när bygget satte filernas version i länkarna (scripts/filversion.mjs): länkarna till den får sin
 // version nu, i dist. Nästa bygge sätter den av sig själv.
 if (existsSync(dist)) { const { sattVersioner } = await import('./filversion.mjs'); sattVersioner(join(rot, 'dist')); }
+if (!fel) byggOm();
 console.log(fel ? `\n${fel} fel.` : '\nAllt ok. Committa pdf-filerna och bank-pdf.json tillsammans med ändringen.');
 process.exit(fel ? 1 : 0);

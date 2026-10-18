@@ -860,6 +860,53 @@ button.lank:hover { color: var(--farg-accent); }
 .m-bildpar figure { margin: 0; }
 .m-bildpar figcaption { font-family: var(--typsnitt-ui); font-size: 0.85rem; color: var(--farg-text-svag); margin: 0 0 0.3rem; }
 @media (min-width: 34rem) { .m-bildpar { grid-template-columns: 1fr 1fr; } }
+/* Lösningsförslaget (src/lib/losningsforslag.ts, Losningsforslag.astro): ett A4 för läraren i problemets form, som i Word
+   (losningsforslagSida i metoddocx.ts) och i metodriggens förlaga: etiketten och titeln, problemet i en ruta med bilden
+   bredvid, idén, lösning A och B bredvid varandra, lösning C med lärarens rader och rutan om att visa och jämföra
+   lösningar. Lärarens text står i Arial, som i Word, och problemet och elevens rader i elevens typsnitt. I telefonen står
+   delarna under varandra. */
+/* Bladet får textens hela bredd, så att lösningarnas bilder går att läsa bredvid varandra. */
+.boksida.lf { max-width: 46rem; }
+.lf .boksida-ram { padding-left: 1.5rem; padding-right: 1.5rem; }
+.lf-etikett { font-family: 'Cinzel', serif; color: var(--bok-rod); text-align: center; font-size: 0.85rem; line-height: 1.35; margin: 0 0 0.15rem; }
+.lf .boksida-titel { margin-bottom: 1rem; }
+.lf-rubrik { font-family: 'Cinzel', serif; font-weight: 400; color: var(--bok-rod); font-size: 0.95rem; line-height: 1.35; margin: 0 0 0.3rem; }
+.lf-problem, .lf-iden, .lf-losning-text, .lf-c-larare, .lf-fragor, .lf-ruta { font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; }
+.lf-problem { display: grid; grid-template-columns: minmax(0, 1fr); border: 1px solid var(--bok-skiljare); margin: 0 0 0.8rem; }
+.lf-problem-text { padding: 0.6rem 0.8rem; }
+.lf-problem p { margin: 0 0 0.3rem; }
+.lf-problem .lf-problem-text > :last-child { margin-bottom: 0; }
+.lf-elev { font-family: var(--typsnitt-elev); font-size: 1rem; line-height: 1.5; }
+.lf-fraga { font-weight: 700; }
+.lf-svar { font-size: 0.95rem; line-height: 1.45; }
+.lf-problem .lf-forsta { margin-top: 0.5rem; }
+.lf-problem .lf-problem-bild { margin: 0; padding: 0 0.8rem 0.6rem; }
+.lf-problem-bild img, .lf-losning-bild img { display: block; width: 100%; height: auto; }
+.lf-iden { text-align: center; font-size: 0.95rem; line-height: 1.45; margin: 0 0 0.9rem; }
+.lf-iden .lf-rubrik { display: inline; margin-right: 0.3em; }
+.lf-losningar { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; margin: 0 0 1rem; }
+.lf-losning .lf-rubrik { text-align: center; }
+.lf-losning-bild { margin: 0 auto 0.4rem; max-width: var(--lf-skala, 100%); }
+.lf-losning-text { text-align: center; font-size: 0.95rem; line-height: 1.4; margin: 0; }
+.lf-c { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.6rem; margin: 0 0 1rem; }
+.lf-c-elev { border: 1px solid var(--bok-skiljare); padding: 0.5rem 0.8rem; }
+.lf-hand { font-family: var(--typsnitt-elev); color: #2e4a7a; font-size: 1.05rem; line-height: 1.5; margin: 0; }
+.lf-c-larare { font-size: 0.95rem; line-height: 1.45; align-self: center; }
+.lf-c-larare p { margin: 0 0 0.3rem; }
+.lf-c-larare p:last-child { margin-bottom: 0; }
+.lf-fragor { list-style: none; margin: 0 0 1rem; padding: 0; font-size: 0.92rem; line-height: 1.45; }
+.lf-fragor li { display: grid; grid-template-columns: 1.6em 1fr; margin: 0 0 0.2rem; }
+.lf-nr { color: var(--bok-rod); }
+.lf-ruta { border: 1px solid var(--bok-rod); padding: 0.6rem 0.9rem; font-size: 0.92rem; line-height: 1.45; }
+.lf-ruta ul { margin: 0; padding: 0 0 0 1.1em; }
+.lf-ruta li { margin: 0 0 0.2rem; }
+.lf-ruta li::marker { color: var(--bok-rod); }
+@media (min-width: 34rem) {
+  .lf-problem { grid-template-columns: minmax(0, 1fr) 27%; }
+  .lf-problem .lf-problem-bild { align-self: center; padding: 0.4rem 0.8rem 0.4rem 0.2rem; }
+  .lf-losningar { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 1rem; }
+  .lf-c { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 1.1rem; }
+}
 /* Banken (src/lib/bank.ts, Bank.astro): en nivå per rad som fälls ut, med nivåns färg i kanten, översikten med länkar till
    enheternas sidor och nivåns filer sist. */
 .bank { display: flex; flex-direction: column; gap: 0.6rem; margin: 1rem 0 1.75rem; }
@@ -2099,6 +2146,38 @@ html.js .bara-js { display: inline-block; }
   .textpar.losningar .formsida-rubrik { font-size: 12pt; margin: 3pt 0 6pt; }
   .textpar.losningar .formsida-rubrik::before { margin-bottom: 12pt; }
   .textpar.losningar .boksida-fragor li { margin: 0 0 4pt; }
+  /* Lösningsförslaget på ett eget A4, som i Word: texten 9,4 mm in från ramens kant (560 twips, src/lib/boksida.ts LF_LUFT),
+     etiketten och rubrikerna i Cinzel 11 punkter och titeln i 26, problemet i Andika 9 punkter, lärarens text i Arial 9,5
+     och 9 punkter, och lösningarnas bilder i Word-bladets andel av spalten (--lf-skala, losningsforslagMatt). */
+  .boksida.lf { max-width: none; }
+  .lf .boksida-ram { padding: 0 9.4mm; }
+  .lf-etikett { font-size: 11pt; line-height: 1.348; margin: 8.5pt 0 0; }
+  .lf .boksida-titel { font-size: 26pt; margin: 2pt 0 0; }
+  .lf .boksida-titel::after { margin-bottom: 8.5pt; }
+  .lf-rubrik { font-size: 11pt; line-height: 1.348; margin: 0 0 3pt; }
+  .lf-problem { grid-template-columns: minmax(0, 1fr) 27%; border-width: 0.5pt; margin: 0; break-inside: avoid; }
+  .lf-problem-text { padding: 5.5pt 6pt 5.5pt 9pt; }
+  .lf-problem p { margin: 0 0 2pt; }
+  .lf-elev { font-size: 9pt; line-height: 1.544; }
+  .lf-svar { font-size: 9.5pt; line-height: 1.198; }
+  .lf-problem .lf-forsta { margin-top: 2pt; }
+  .lf-problem .lf-problem-bild { align-self: center; padding: 3pt 6pt 3pt 3pt; }
+  .lf-iden { font-size: 9.5pt; line-height: 1.174; margin: 5.5pt 0; }
+  .lf-losningar { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 14pt; margin: 0 0 7pt; break-inside: avoid; }
+  .lf-losning .lf-rubrik { margin-bottom: 2pt; }
+  .lf-losning-bild { margin: 0 auto 3pt; }
+  .lf-losning-text { font-size: 9.5pt; line-height: 1.15; }
+  .lf-c { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0; margin: 0 0 7pt; break-inside: avoid; }
+  .lf-c-elev { border-width: 0.5pt; padding: 4pt 7pt 4pt 8pt; }
+  .lf-hand { font-size: 10pt; line-height: 1.578; }
+  .lf-c-larare { font-size: 9.5pt; line-height: 1.174; padding: 5pt 0 3pt 11pt; }
+  .lf-c-larare p { margin: 0 0 2pt; }
+  .lf-fragor-rubrik { margin-bottom: 2.5pt; }
+  .lf-fragor { font-size: 9pt; line-height: 1.15; margin: 0 0 8pt; }
+  .lf-fragor li { grid-template-columns: 18pt 1fr; margin: 0 0 1.5pt; }
+  .lf-ruta { border-width: 1pt; padding: 5pt 10pt; font-size: 9pt; line-height: 1.126; break-inside: avoid; }
+  .lf-ruta ul { padding-left: 12pt; }
+  .lf-ruta li { margin: 0 0 1.5pt; }
   /* Lärarens sida till ett problem: problemet i en tät ruta och lösningarna bredvid varandra, så att bladet ryms på ett A4. */
   .m-problemruta { font-size: 9pt; line-height: 1.35; padding: 5pt 8pt; margin: 0 0 6pt; }
   .m-problemruta .kicker { font-size: 8pt; margin: 0 0 2pt; }
@@ -2271,7 +2350,7 @@ button.tf-radtagg:hover { border-color: var(--farg-accent); color: var(--farg-ac
 .tf-stang { width: 2.75rem; height: 2.75rem; border: 0; border-radius: 6px; background: none; color: var(--farg-text); font: 400 2rem/1 var(--typsnitt-ui); cursor: pointer; }
 .tf-stang:hover { background: var(--farg-ton-svag); }
 .tf-stort-sida { max-width: none; margin: 1.25rem; }
-.tf-stort .boksida-titel { font-size: clamp(1.9rem, 3.4vw, 2.9rem); }
+.tf-stort-sida .boksida-titel { font-size: clamp(1.9rem, 3.4vw, 2.9rem); }
 .tf-stort .problemsida-text, .tf-stort .problemsida-fraga { font-size: clamp(1.15rem, 1.9vw, 2.2rem); }
 .tf-stort .problemsida-fraga-rubrik { font-size: clamp(1rem, 1.6vw, 1.35rem); }
 /* Bilden får högst 38 procent av skärmens höjd, så att problemet, bilden och frågorna ryms på en skärm eller projektor. */
@@ -2289,12 +2368,28 @@ button.tf-radtagg:hover { border-color: var(--farg-accent); color: var(--farg-ac
 @media (max-width: 34rem) { .tf-stort-sida { margin: 0.75rem; } .tf-stort-knappar { padding: 0.6rem 0.75rem; } .tf-stort-knappar .knapp { flex-basis: 9rem; } }
 /* På en bred skärm, som en projektor, står bilden till höger om texten och frågorna, så att allt ryms på en skärm. */
 @media (min-width: 60rem) and (min-aspect-ratio: 4 / 3) {
-  .tf-stort .boksida-ram { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); grid-template-areas: "titel titel" "text bild" "fraga bild"; column-gap: 2rem; align-items: start; }
-  .tf-stort .boksida-titel { grid-area: titel; }
+  .tf-stort-sida .boksida-ram { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); grid-template-areas: "titel titel" "text bild" "fraga bild"; column-gap: 2rem; align-items: start; }
+  .tf-stort-sida .boksida-titel { grid-area: titel; }
   .tf-stort .problemsida-text { grid-area: text; }
   .tf-stort .problemsida-bild { grid-area: bild; align-self: center; margin: 0; max-width: none; }
   .tf-stort .problemsida-bild img { max-height: 58vh; }
   .tf-stort .problemsida-fraga { grid-area: fraga; margin: 0.5rem 0 0; }
+}
+/* Lösningsförslaget i Visa stort (src/lib/losningsforslag.ts; Niclas 2026-10-18: "Synas brevid varandra när man trycker på
+   problemet i pc och under varandra i mobil?"): det visas när läraren trycker, och står under problemet i telefonen och
+   bredvid det på en bred skärm. Bredvid bladet står problemet i boksidans vanliga form, med bilden under texten. */
+.tf-stort-lf { margin: 0 1.25rem 1.25rem; }
+.tf-stort-lf:focus { outline: none; }
+.tf-stort-lf .lf { max-width: none; }
+@media (max-width: 34rem) { .tf-stort-lf { margin: 0 0.75rem 0.75rem; } }
+@media (min-width: 64rem) {
+  .tf-stort.med-losning .tf-stort-sidor { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+  .tf-stort.med-losning .tf-stort-lf { margin: 1.25rem 1.25rem 1.25rem 0; }
+  .tf-stort.med-losning .tf-stort-sida .boksida-ram { display: block; }
+  .tf-stort.med-losning .tf-stort-sida .boksida-titel { font-size: 1.9rem; }
+  .tf-stort.med-losning .problemsida-text, .tf-stort.med-losning .problemsida-fraga { font-size: 1.15rem; }
+  .tf-stort.med-losning .problemsida-bild { max-width: 100%; margin: 0.75rem auto; }
+  .tf-stort.med-losning .problemsida-bild img { max-height: 32vh; }
 }
 @media print {
   .tafram .tf-val, .tafram .tf-valda, .tafram .tf-bock, .tafram .tf-visa, .tafram .tf-stort { display: none; }

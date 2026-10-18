@@ -81,7 +81,7 @@ export function postensRad(stycke, langst = 120) {
  * @property {string} sida postens egen sida
  * @property {string} [losning] adressen till postens lösningsförslag på postens sida, som /stodundervisning/<metod>/bas-1#blad-12
  * @property {{ adress: string, alt: string }} bild
- * @property {Record<string, PostUtskrift>} utskrift varje slag av utskrift, som post (bara problemet) och med (med lärarens sida)
+ * @property {Record<string, PostUtskrift>} utskrift varje slag av utskrift, som post (bara problemet) och med (problemet med lösningsförslaget, eller med lärarens sida i en bank utan lösningsförslag)
  */
 /**
  * Ett slag av utskrift för en post: postens egen pdf och var dess sidor står i källfilerna, så att listan kan hämta

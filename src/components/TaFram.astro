@@ -9,14 +9,19 @@
 //              nivåns färg, numret, titeln, problemets första mening, bilden, taggen, Visa stort, problemets sida och en
 //              liten bock som lägger problemet i listan att skriva ut, som på Ta fram en aktivitet.
 //   Visa stort Problemet och frågorna stort, utan klocka (Niclas: "Båda dessa ska ju inte ha klocka"), i problemets egen
-//              form (Problemsida.astro). Esc stänger.
+//              form (Problemsida.astro). Esc stänger. Knappen Lösningsförslag visar bladet (src/lib/losningsforslag.ts)
+//              bredvid problemet på en bred skärm och under det i telefonen (Niclas 2026-10-18: "Synas brevid varandra
+//              när man trycker på problemet i pc och under varandra i mobil?"), först när läraren trycker, eftersom
+//              projektorn står inför eleverna. Utskriften är det som syns: problemet, eller problemet och lösningsförslaget.
 //   Listan     Bredvid raderna på en bred skärm och i en rad längst ned i telefonen, som på Ta fram en aktivitet, med två
-//              utskrifter: bara problemen, och problemen med lärarens sida och Två lösningar. Sidan säger storleken innan.
+//              utskrifter: bara problemen, och problemen med lösningsförslagen (Niclas samma dag: "problemets A4a och dess
+//              lösningsförslag"). Sidan säger storleken innan.
 //
 // Utan JavaScript står alla nivåer under varandra med problemens sidor och nivåernas filer. Bocken, som bara finns med
 // JavaScript, ritas av skriptet i en kolumn som har sin bredd från början, så att sidan som Facebook hämtar okomprimerad
 // är liten (scripts/cacheprov.mjs) och inget flyttar sig. Statistiken: utskrifterna
-// som utskrift:<metod>/<led> och :lararens, Visa stort och Ta fram ett som händelser (DRIFT.md under Besöksstatistik).
+// som utskrift:<metod>/<led> och :med, Visa stort, Lösningsförslag och Ta fram ett som händelser (DRIFT.md under
+// Besöksstatistik).
 import Base from '../layouts/Base.astro';
 import Delning from './Delning.astro';
 import { UPPHOV, metodAdress } from '../lib/metod';
@@ -37,7 +42,7 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
 ---
 
 <Base title={`${t.namn}: ${t.titel}`} description={`Välj nivå och innehåll bland ${antal} ${t.ord.flera} i ${t.titel}, se dem i ordning eller ta fram ett, visa det stort och skriv ut dem du vill ha, med eller utan ${t.folje}.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
-  <article class="tafram" data-metod={t.metod} data-titel={t.titel} data-led={t.led} data-kortdata={kortdata} data-en={t.ord.en} data-flera={t.ord.flera} data-alla={t.ord.alla} data-folje={t.folje}>
+  <article class="tafram" data-metod={t.metod} data-titel={t.titel} data-led={t.led} data-kortdata={kortdata} data-en={t.ord.en} data-flera={t.ord.flera} data-alla={t.ord.alla} data-bestamd={t.ord.bestamd} data-folje={t.folje} data-folje-en={t.foljeEn}>
     <header class="sk-huvud">
       <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${t.metod}`}>{t.titel}</a> · {versal(t.ord.flera)}</p>
       <h1>{t.namn}</h1>
@@ -134,7 +139,7 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
           <ol class="ak-valda-lista" id="tf-valda-lista"></ol>
           <div class="sk-atgarder ak-valda-knappar">
             <a class="knapp" id="tf-skrivut" href="#" data-goatcounter-click={`utskrift:${t.metod}/${t.led}`} data-goatcounter-title={`${t.titel}: utskrift av listans ${t.ord.flera}`}>Skriv ut {t.ord.alla}</a>
-            <a class="knapp sekundar" id="tf-skrivut-med" href="#" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:lararens`} data-goatcounter-title={`${t.titel}: utskrift av listans ${t.ord.flera} med ${t.folje}`}>Skriv ut med {t.folje}</a>
+            <a class="knapp sekundar" id="tf-skrivut-med" href="#" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:med`} data-goatcounter-title={`${t.titel}: utskrift av listans ${t.ord.flera} med ${t.folje}`}>Skriv ut med {t.folje}</a>
             <button type="button" class="knapp sekundar" id="tf-kopiera" data-goatcounter-click={`${t.led}:${t.metod}:lank`} data-goatcounter-title={`${t.titel}: listans länk kopierad`}>Kopiera listans länk</button>
             <button type="button" class="knapp sekundar" id="tf-tomlista">Töm listan</button>
           </div>
@@ -144,24 +149,28 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
       </aside>
     </div>
 
-    {/* Visa stort: problemet i sin egen form (Problemsida.astro), ritat ur datafilen. */}
+    {/* Visa stort: problemet i sin egen form (Problemsida.astro), ritat ur datafilen, och lösningsförslaget bredvid när
+        läraren trycker på Lösningsförslag. */}
     <dialog class="tf-stort" id="tf-stort" aria-labelledby="tf-stort-titel">
       <div class="tf-stort-huvud">
         <p class="tf-stort-etikett" id="tf-stort-etikett"></p>
         <button type="button" class="tf-stang" id="tf-stang" aria-label="Stäng">×</button>
       </div>
-      <section class="boksida problemsida tf-stort-sida" id="tf-stort-sida">
-        <div class="boksida-ram">
-          <h2 class="boksida-titel" id="tf-stort-titel"></h2>
-          <div class="problemsida-text" id="tf-stort-text"></div>
-          <p class="problemsida-bild"><img id="tf-stort-bild" alt="" width={PABORDET_MATT.bredd} height={PABORDET_MATT.hojd} /></p>
-          <div class="problemsida-fraga" id="tf-stort-fraga"></div>
-        </div>
-      </section>
+      <div class="tf-stort-sidor">
+        <section class="boksida problemsida tf-stort-sida" id="tf-stort-sida">
+          <div class="boksida-ram">
+            <h2 class="boksida-titel" id="tf-stort-titel"></h2>
+            <div class="problemsida-text" id="tf-stort-text"></div>
+            <p class="problemsida-bild"><img id="tf-stort-bild" alt="" width={PABORDET_MATT.bredd} height={PABORDET_MATT.hojd} /></p>
+            <div class="problemsida-fraga" id="tf-stort-fraga"></div>
+          </div>
+        </section>
+        <div class="tf-stort-lf" id="tf-stort-lf" tabindex="-1" hidden></div>
+      </div>
       <div class="tf-stort-knappar">
         <button type="button" class="knapp sekundar tf-stort-bock" id="tf-stort-bock" aria-pressed="false"><span set:html={BOCK} /> <span id="tf-stort-bock-text">Lägg i listan</span></button>
         <button type="button" class="knapp sekundar" id="tf-stort-nasta" hidden>Ta fram ett till</button>
-        <a class="knapp sekundar" id="tf-stort-losning" href="#">Lösningsförslag</a>
+        <button type="button" class="knapp sekundar" id="tf-stort-losning" aria-pressed="false" aria-controls="tf-stort-lf" hidden>Visa {t.foljeEn}</button>
         <a class="knapp sekundar" id="tf-stort-sidan" href="#">{versal(t.ord.bestamd)} i metoden</a>
         <a class="knapp sekundar" id="tf-stort-skrivut" href="#" target="_blank" rel="noopener" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:ett`} data-goatcounter-title={`${t.titel}: utskrift av ett ${t.ord.en}`}>Skriv ut {t.ord.bestamd}</a>
       </div>

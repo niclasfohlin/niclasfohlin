@@ -3,20 +3,23 @@
 // sidan går att använda direkt. Listan att skriva ut och slumpen är desamma som på Ta fram en aktivitet: en bock på
 // varje post, listan bredvid på en bred skärm och i en rad längst ned i telefonen, och en post kommer inte fram igen
 // förrän urvalets alla har varit framme. Det som sparas i webbläsaren: nivån, taggen, det som har visats och listan.
+// Lösningsförslaget i Visa stort ritas av samma funktion som på problemets sida i metoden (src/lib/losningsforslag.ts).
 import { dra, el, lagring } from './kortbanken';
 import { ettkortLank, flerakortKnapp } from './pdfutskrift';
 import { hamtplan, type PostUtskrift } from '../lib/standard/index.js';
+import { losningsforslagHtml, type LosningsforslagVy } from '../lib/losningsforslag';
 
-type Post = { id: string; niva: string; nivaSlug: string; nr: number; titel: string; tagg?: string; sida: string; losning?: string; bild: { adress: string; alt: string }; stycken: string[]; fragor: string[]; utskrift: { post: PostUtskrift; med: PostUtskrift } };
+type Post = { id: string; niva: string; nivaSlug: string; nr: number; titel: string; tagg?: string; sida: string; losning?: string; bild: { adress: string; alt: string }; stycken: string[]; fragor: string[]; utskrift: { post: PostUtskrift; med: PostUtskrift }; losningsforslag?: LosningsforslagVy };
 type Data = { poster: Post[]; filer: Record<string, { adress: string; byte: number }>; nivaer: { namn: string; slug: string; farg: string; antal: number }[] };
 
 const sida = document.querySelector<HTMLElement>('.tafram')!;
 const metod = sida.dataset.metod!;
 const led = sida.dataset.led!;
 const titel = sida.dataset.titel!;
-// Bankens ord och följesidorna, som problem och lärarens sida och Två lösningar (src/lib/bank.ts).
-const ord = { en: sida.dataset.en!, flera: sida.dataset.flera!, alla: sida.dataset.alla! };
+// Bankens ord och det som skrivs ut med posterna, som problem och lösningsförslagen (src/lib/bank.ts, src/lib/tafram.ts).
+const ord = { en: sida.dataset.en!, flera: sida.dataset.flera!, alla: sida.dataset.alla!, bestamd: sida.dataset.bestamd! };
 const folje = sida.dataset.folje!;
+const foljeEn = sida.dataset.foljeEn!;
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const raknaHandelse = (path: string, title: string) => (window as { goatcounter?: { count: (v: object) => void } }).goatcounter?.count({ path, title, event: true });
 
@@ -189,7 +192,42 @@ const visaStortBock = () => {
   stortBock.setAttribute('aria-pressed', String(pa));
   $('tf-stort-bock-text').textContent = pa ? 'I listan' : 'Lägg i listan';
 };
-async function visaStort(id: string, franTaFram: boolean) {
+// Lösningsförslaget i rutan (Niclas 2026-10-18: "Synas brevid varandra när man trycker på problemet i pc och under
+// varandra i mobil?"): bredvid problemet på en bred skärm, under det i telefonen. Utskriften i rutan är det som syns.
+const losningKnapp = $<HTMLButtonElement>('tf-stort-losning');
+const losningYta = $('tf-stort-lf');
+let stortPost: Post | undefined;
+function skrivutLank() {
+  const skrivut = $<HTMLAnchorElement>('tf-stort-skrivut');
+  if (!stortPost) { skrivut.hidden = true; return; }
+  const med = !losningYta.hidden;
+  skrivut.href = (med ? stortPost.utskrift.med : stortPost.utskrift.post).adress;
+  skrivut.textContent = med ? `Skriv ut ${ord.bestamd} och ${foljeEn}` : `Skriv ut ${ord.bestamd}`;
+  skrivut.hidden = false;
+}
+function visaLosning(pa: boolean) {
+  const lf = stortPost?.losningsforslag;
+  const visas = pa && !!lf;
+  if (visas && losningYta.dataset.id !== stortPost!.id) {
+    losningYta.innerHTML = losningsforslagHtml(lf!, { farg: namnAv(stortPost!.id).farg, rubrik: 'h2' });
+    losningYta.dataset.id = stortPost!.id;
+  }
+  losningYta.hidden = !visas;
+  dialog.classList.toggle('med-losning', visas);
+  losningKnapp.setAttribute('aria-pressed', String(visas));
+  losningKnapp.textContent = visas ? `Dölj ${foljeEn}` : `Visa ${foljeEn}`;
+  skrivutLank();
+}
+losningKnapp.addEventListener('click', () => {
+  const pa = !!losningYta.hidden;
+  visaLosning(pa);
+  if (!pa) return;
+  raknaHandelse(`${led}:${metod}:losningsforslag`, `${titel}: Lösningsförslag i Visa stort`);
+  // I telefonen står bladet under problemet: rutan rullar dit.
+  if (!matchMedia('(min-width: 64rem)').matches) losningYta.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+});
+
+async function visaStort(id: string, franTaFram: boolean, medLosning = false) {
   const r = rad.get(id)!;
   const p = namnAv(id);
   stortId = id;
@@ -208,10 +246,10 @@ async function visaStort(id: string, franTaFram: boolean) {
   $('tf-stort-fraga').replaceChildren();
   $('tf-stort-nasta').hidden = !franTaFram;
   $<HTMLAnchorElement>('tf-stort-sidan').href = r.querySelector<HTMLAnchorElement>('.tf-sidlank')!.href;
-  const losningsLank = r.querySelector<HTMLAnchorElement>('.tf-losning');
-  const losning = $<HTMLAnchorElement>('tf-stort-losning');
-  losning.hidden = !losningsLank;
-  if (losningsLank) losning.href = losningsLank.href;
+  // Lösningsförslaget står dolt tills läraren trycker, också när ett nytt problem visas i samma ruta.
+  stortPost = undefined;
+  losningKnapp.hidden = true;
+  visaLosning(false);
   const skrivut = $<HTMLAnchorElement>('tf-stort-skrivut');
   skrivut.hidden = true;
   visaStortBock();
@@ -231,8 +269,10 @@ async function visaStort(id: string, franTaFram: boolean) {
     post.fragor.forEach((f, i) => { const li = el('li'); li.append(el('span', 'boksida-nr', `${i + 1}.`), el('span', undefined, f)); ol.append(li); });
     fraga.append(ol);
   } else fraga.append(el('p', undefined, post.fragor[0] ?? ''));
-  skrivut.href = post.utskrift.post.adress;
-  skrivut.hidden = false;
+  stortPost = post;
+  losningKnapp.hidden = !post.losningsforslag;
+  visaLosning(medLosning);
+  if (medLosning && post.losningsforslag && !matchMedia('(min-width: 64rem)').matches) losningYta.scrollIntoView({ block: 'start' });
 }
 stortBock.addEventListener('click', () => { if (stortId) { bocka(stortId, !bockad(stortId)); visaStortBock(); } });
 $('tf-stang').addEventListener('click', () => dialog.close());
@@ -250,6 +290,15 @@ for (const r of rader) {
   const oppna = () => { raknaHandelse(`${led}:${metod}:visa-stort`, `${titel}: Visa stort`); void visaStort(r.id, false); };
   visaKnapp.addEventListener('click', oppna);
   r.querySelector('.tf-bild')!.addEventListener('click', oppna);
+  // Länken Lösningsförslag leder utan JavaScript till bladet på problemets sida i metoden; med JavaScript öppnar den
+  // rutan med problemet och lösningsförslaget.
+  r.querySelector('.tf-losning')?.addEventListener('click', (e) => {
+    const m = e as MouseEvent;
+    if (m.ctrlKey || m.metaKey || m.shiftKey || m.button !== 0) return;
+    e.preventDefault();
+    raknaHandelse(`${led}:${metod}:losningsforslag`, `${titel}: Lösningsförslag i Visa stort`);
+    void visaStort(r.id, false, true);
+  });
 }
 
 // ---------- Ta fram ett ----------

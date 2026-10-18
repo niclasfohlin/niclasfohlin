@@ -26,6 +26,7 @@ import Litteraturlista from './Litteraturlista.astro';
 import Bank from './Bank.astro';
 import Nivarad from './Nivarad.astro';
 import Problemsida from './Problemsida.astro';
+import Losningsforslag from './Losningsforslag.astro';
 import { bankAv, bankRad, enhetAdress, nivaFarger, BOKNIVA, type Bankenhet } from '../lib/bank';
 import { losningarnasNiva, losningarnasNot, problemformer } from '../lib/problemform';
 import { filmerVid, grundUpphov, metodensFilmer, stegDelar, type FilmPlats } from '../lib/film';
@@ -760,10 +761,14 @@ const meny = [
       const rita = (punkt: Punkt) => {
         const { ram, ri, lage, vecka, lista, efter, par, helaKursen } = punkt;
         const pbild = former.bild(ram);
+        const lf = former.losningsforslag(ram);
         const losning = former.losningar(ram)?.bilder ?? [];
         const larare = former.larare(ram);
         const problemet = larare && { stycken: larare.l.stycken, fragor: larare.l.fragor, bilder: larare.bilder, namn: larare.namn };
-        const innehall = pbild ? (<>
+        const innehall = lf ? (<>
+        <Losningsforslag lf={lf} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={bankFarger[lf.niva] ?? BOKNIVA[lf.nivaNr] ?? '#4b3a2f'} />
+        <Filmruta filmer={[...filmerVid(filmer, { ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
+      </>) : pbild ? (<>
         <Problemsida l={boksidor.get(ram)!} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={bankFarger[boksidor.get(ram)!.niva] ?? BOKNIVA[boksidor.get(ram)!.nivaNr] ?? '#4b3a2f'} bild={pbild} />
         <Filmruta filmer={[...filmerVid(filmer, { ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
       </>) : par && losning.length === 2 ? (<>
@@ -1027,8 +1032,9 @@ const meny = [
         }
         if (!enhet) return innehall;
         const namn = bladetsNamn(ram, ri);
-        // I en mening står lärarens sida och problemet med liten bokstav, och ett blad med eget namn (Två lösningar) som det heter.
-        const iMening = ri === enhet.ri || /^Lärarens sida$/i.test(namn) ? namn.toLowerCase() : namn;
+        // I en mening står lärarens sida, problemet och lösningsförslaget med liten bokstav, och ett blad med eget namn (Två
+        // lösningar) som det heter.
+        const iMening = banken?.post && namn === banken.post.namn ? banken.post.bestamd : ri === enhet.ri || /^Lärarens sida$/i.test(namn) ? namn.toLowerCase() : namn;
         // En faktatext är två till sex sidor, och lärarens sida till den en eller två: knappen säger det, så att provet av
         // utskriften inte kräver en sida (scripts/utskriftsformat.mjs).
         const sidorHogst = enhet.l.faktatext ? (ri === enhet.ri ? 6 : 2) : undefined;

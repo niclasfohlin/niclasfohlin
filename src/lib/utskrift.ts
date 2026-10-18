@@ -25,8 +25,9 @@ type Ram = NonNullable<MetodData['ramar']>['ramar'][number];
 /** Bladets namn på en enhets sida: enheten heter som bankens ord (texten, problemet), en följesida som ledet före kolon. */
 export const enhetsbladNamn = (bank: Bank, e: Bankenhet, ramar: Ram[], ri: number) => (ri === e.ri ? bank.ord.bestamd : ramar[ri].rubrik.split(':')[0]);
 
-/** En enhets utskrifter: alla enhetens sidor i en pdf, och varje ram för sig. */
-export function enhetensUtskrifter(d: MetodData, id: string, bank: Bank, e: Bankenhet): { alla: Utskrift; ramar: Map<number, Utskrift> } {
+/** En enhets utskrifter: alla enhetens sidor i en pdf, varje ram för sig och, när banken har postens följesida (src/lib/
+ * bank.ts), enheten med den, som problemet med lösningsförslaget, som Ta fram skriver ut. */
+export function enhetensUtskrifter(d: MetodData, id: string, bank: Bank, e: Bankenhet): { alla: Utskrift; ramar: Map<number, Utskrift>; post?: Utskrift } {
   const ramarna = d.ramar!.ramar;
   // Enheten och ramen jämförs på sitt namn i adressen: sidan och komponenten har var sin bank och var sitt bladmaterial.
   const niva = bank.nivaer.find((n) => n.enheter.some((x) => x.slug === e.slug))!;
@@ -41,9 +42,12 @@ export function enhetensUtskrifter(d: MetodData, id: string, bank: Bank, e: Bank
   const hel = filer.find((x) => bladen.every((ri) => x.ramar.includes(ri)));
   const namn = (ri: number) => enhetsbladNamn(bank, e, ramarna, ri);
   const titel = `${d.titel}: ${e.l.niva}, ${e.l.vad}, ${e.l.titel}`;
+  // Enheten med postens följesida, ur filen med båda (bankfiler, 'post').
+  const postfil = e.post !== undefined ? filer.find((x) => x.ramar.includes(e.ri) && x.ramar.includes(e.post!)) : undefined;
   return {
     alla: { namn: `${id}-${e.slug}`, titel, delar: bladen.map((ri) => ({ pdf: hel?.namn ?? fil(ri), ram: ri })) },
     ramar: new Map(bladen.map((ri) => [ri, { namn: `${id}-${e.slug}-${slugAv(namn(ri))}`, titel: `${titel}: ${namn(ri).toLowerCase()}`, delar: [{ pdf: fil(ri), ram: ri }] }])),
+    ...(bank.post && e.post !== undefined ? { post: { namn: `${id}-${e.slug}-med-${bank.post.slug}`, titel: `${titel}, med ${bank.post.bestamd}`, delar: [e.ri, e.post].map((ri) => ({ pdf: postfil?.namn ?? fil(ri), ram: ri })) } } : {}),
   };
 }
 
@@ -102,7 +106,7 @@ export function metodensUtskrifter(d: MetodData, id: string): Utskrift[] {
   if (harLathund(d)) lagg(lathundensMall(d, id));
   for (const v of vidEnheterna(d, id)) lagg(v.utskrift);
   const bank = bankAv(d);
-  if (bank) for (const e of bank.enheter) { const u = enhetensUtskrifter(d, id, bank, e); lagg(u.alla); for (const x of u.ramar.values()) lagg(x); }
+  if (bank) for (const e of bank.enheter) { const u = enhetensUtskrifter(d, id, bank, e); lagg(u.alla); for (const x of u.ramar.values()) lagg(x); if (u.post) lagg(u.post); }
   const bm = metodensBladmaterial(d, id);
   if (bm) for (const rad of bm.rader) { const u = radensUtskrifter(d, id, bm, rad); lagg(u.alla); lagg(u.sidan); for (const x of u.blad.values()) lagg(x); }
   return [...ut.values()];
