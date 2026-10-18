@@ -184,7 +184,10 @@ async function jamfor() {
 function rent() {
   const ref = varde('--ref', 'HEAD');
   const NODE = '22.12.0';
-  const hitta = kor('npx', ['-y', `node@${NODE}`, '-e', 'console.log(process.execPath + "|" + process.version)'], { shell: true });
+  // Uttrycket står i en fil: citattecken i ett -e-argument går sönder i Windows skal.
+  const visa = join(arbete, 'visa-node.cjs');
+  writeFileSync(visa, "console.log(process.execPath + '|' + process.version);\n");
+  const hitta = kor('npx', ['-y', `node@${NODE}`, `"${visa}"`], { shell: true });
   const [nodeExe, version] = (hitta.stdout || '').trim().split('\n').pop().split('|');
   if (hitta.status !== 0 || version !== `v${NODE}`) throw new Error(`Node ${NODE} gick inte att hämta med npx:\n${hitta.stderr}`);
   const npmCli = join(dirname(process.execPath), 'node_modules', 'npm', 'bin', 'npm-cli.js');
