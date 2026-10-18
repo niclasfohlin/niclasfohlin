@@ -6,6 +6,9 @@
 import ANFANG from '../data/boksida/anfang.json';
 import ANDIKA_BREDD from '../data/boksida/andika-bredder.json';
 import CINZEL_BREDD from '../data/boksida/cinzel-bredder.json';
+import ARIAL_BREDD from '../data/boksida/arial-bredder.json';
+import ARIAL_FET_BREDD from '../data/boksida/arial-fet-bredder.json';
+import ARIAL_KURSIV_BREDD from '../data/boksida/arial-kursiv-bredder.json';
 import type { Lastext } from './ramform';
 
 // Sidan i twips: A4 med 1,5 cm marginal runt om, och ramens höjd minus stycket på en punkt före ramen, sektionens sista
@@ -255,20 +258,36 @@ export function problemMatt(l: { titel: string; stycken: string[]; fragor: strin
 
 // Lösningsförslaget (src/lib/problemform.ts; metodriggens TILL-SAJTEN 2026-10-18, Formen och måtten; riggens
 // build-docx.js, losningsforslag): ett A4 för läraren i problemets form, med texten 560 twips från ramen. Höjden räknas i
-// förväg med Andikas bredder och enkla rader i Word och Google, och lösningarnas bilder står i hela spaltens bredd, eller i
-// 94, 88 eller 80 procent när bladet annars inte ryms. Mindre blir de inte, eftersom texten i bilderna då blir mindre än 5
-// punkter, och ryms bladet inte ens då stannar bygget. Ramen får växa 150 twips ned mot sidfoten, som hos riggen (mätt på
-// de 30 bladen 2026-10-18). Uträkningen är riggens, rad för rad, så att bladet blir detsamma hos sajten och riggen.
+// förväg med enkla rader i Word och Google, och lösningarnas bilder står i hela spaltens bredd, eller i 94, 88 eller 80
+// procent när bladet annars inte ryms. Mindre blir de inte, eftersom texten i bilderna då blir mindre än 5 punkter, och
+// ryms bladet inte ens då stannar bygget. Uppställningen är riggens. Raderna räknas med varje typsnitts egna bredder:
+// Andika för problemet och elevens rader, Arial för lärarens text och Cinzel för rubrikerna. Riggens uträkning räknade
+// också Arial med Andikas bredder, som är bredare, och missade med upp till två rader åt båda hållen: ramens fot stod
+// mellan 728 och 779 punkter i Word, och Staketet fick en andra sida i Google (googleprov 2026-10-18, K-431).
 export const LF_LUFT = 560;
 const ARIAL_RAD = 1.15;
+// Ramen slutar så här långt ovanför sidans fot i Word, eftersom Google Dokument ritar bladet längre: varje tabell i en
+// cell ett stycke på tre punkter högre (wordparitet, REGLER.md), och bladet har fyra. Mätt 2026-10-18 på de 30 bladen:
+// ramens fot stod 16,5 till 19,5 punkter lägre i Google än i Word där raderna bröts lika, och i Google rymdes en fot på
+// 792 punkter men inte en på 797. Med 300 twips står foten på 766 punkter i Word och högst 786 i Google. Ett blad ryms
+// bara när innehållet ryms ovanför den luften, så att ramens fot står lika långt ned på alla. Riggen har 600 med sin
+// uträkning, som räknar Arial med Andikas bredder.
+export const LF_GOOGLE_LUFT = 300;
+// Arial och Andikas vanliga snitt har samma bredder i Word och Google Dokument (raderna mätta i båda pdf:erna 2026-10-18
+// skilde högst 0,2 punkter). Andikas feta gör Word själv ur det vanliga, med det vanligas bredder, medan Google har Andikas
+// feta, som är 5,7 procent bredare: Staketets första fråga var 314 punkter i en spalt på 317 och bröts i Google men inte i
+// Word. Fet Andika räknas därför 6 procent bredare, så att raderna räknas som i Google, där de är fler. Spalterna räknas
+// två promille smalare, för avrundningen.
+const LF_SPALT = 0.998, ANDIKA_FET = 1.06;
 export interface Losningsforslagmatt {
   /** Lösningarnas bilder: andelen av spaltens bredd. */
   skala: number;
   /** Bredderna i twips innanför ramen och luften: hela, problemets text och bild, en lösnings spalt och avståndet mellan
    *  spalterna, och lösning C:s ruta. */
   helB: number; textW: number; bildW: number; spaltW: number; mellan: number; cW: number;
-  /** Höjderna i twips: titeln med raden över och linjen under, och innehållet under den med bilderna i skala. */
-  titelH: number; innehallH: number;
+  /** Höjderna i twips: titeln med raden över och linjen under, innehållet under den med bilderna i skala, och raden under
+   *  innehållet som fyller ramen ned till LF_GOOGLE_LUFT ovanför sidans fot. */
+  titelH: number; innehallH: number; restH: number;
   ryms: boolean;
 }
 export function losningsforslagMatt(lf: {
@@ -283,29 +302,49 @@ export function losningsforslagMatt(lf: {
   const textW = helB - bildW;
   const mellan = 280, spaltW = Math.floor((helB - mellan) / 2);
   const cW = Math.round(helB * 0.5);
-  const pt = (tw: number) => tw / 20;
   const radElev = BOKRAD.Andika * 10 * 20 * 235 / 240, radProblem = BOKRAD.Andika * 9 * 20 * 230 / 240;
   const radLar = (line: number) => ARIAL_RAD * 9.5 * 20 * line / 240, radLar9 = (line: number) => ARIAL_RAD * 9 * 20 * line / 240;
-  const rader = (t: string, bredd: number, storlek = 10) => String(t).split('\n').reduce((n, rad) => n + antalRader(rad, pt(bredd), storlek), 0);
+  // Raderna en text tar i en spalt som är bredd twips bred, i storleken pt med typsnittets bredder (tabell, gånger faktor
+  // för fet stil). fore är en början i en annan stil på första raden, i punkter: "Svaret: " i fet Arial, "Idén:" i Cinzel.
+  // Raderna i texten (\n) är egna stycken.
+  const rader = (t: string, bredd: number, pt: number, tabell: Record<string, number>, o: { fore?: number; faktor?: number } = {}) => {
+    const b = (bredd / 20) * LF_SPALT;
+    let n = 0;
+    String(t).split('\n').forEach((seg, i) => {
+      let rad = '';
+      let fore = i === 0 ? o.fore ?? 0 : 0;
+      for (const ord of seg.split(' ')) {
+        const prov = rad ? `${rad} ${ord}` : ord;
+        if (rad && fore + breddPt(utanMarkering(prov), pt, tabell) * (o.faktor ?? 1) > b) { n++; rad = ord; fore = 0; } else rad = prov;
+      }
+      n++;
+    });
+    return n;
+  };
+  const andika = (t: string, bredd: number, pt: number, fet = false) => rader(t, bredd, pt, ANDIKA_BREDD, { faktor: fet ? ANDIKA_FET : 1 });
+  const arial = (t: string, bredd: number, pt: number, o: { fet?: string; kursiv?: boolean } = {}) =>
+    rader(t, bredd, pt, o.kursiv ? ARIAL_KURSIV_BREDD : ARIAL_BREDD, { fore: o.fet ? breddPt(o.fet, pt, ARIAL_FET_BREDD) : 0 });
   const etikettH = Math.ceil(BOKRAD.Cinzel * 11 * 20);
   const problemH = Math.max(
-    etikettH + 40 + lf.problem.stycken.reduce((h, t) => h + rader(t, textW - 300, 9) * radProblem + 40, 0) + lf.problem.fragor.reduce((h, t) => h + rader(t, textW - 300, 9) * radProblem + 40, 0)
-      + 40 + rader(`Svaret: ${lf.svaret}`, textW - 300) * radLar(250) + (lf.kontroll ? rader(`Kontroll: ${lf.kontroll}`, textW - 300) * radLar(250) : 0),
+    etikettH + 40 + lf.problem.stycken.reduce((h, t) => h + andika(t, textW - 300, 9) * radProblem + 40, 0) + lf.problem.fragor.reduce((h, t) => h + andika(t, textW - 300, 9, true) * radProblem + 40, 0)
+      + 40 + arial(lf.svaret, textW - 300, 9.5, { fet: 'Svaret: ' }) * radLar(250) + (lf.kontroll ? arial(lf.kontroll, textW - 300, 9.5, { fet: 'Kontroll: ' }) * radLar(250) : 0),
     pb ? ((bildW - 180) * pb.hojd) / pb.bredd : 0) + 220;
-  const idenH = 220 + rader(`Idén: ${lf.iden}`, helB) * radLar(245);
+  const idenH = 220 + rader(lf.iden, helB, 9.5, ARIAL_KURSIV_BREDD, { fore: breddPt('Idén:  ', 11, CINZEL_BREDD) }) * radLar(245);
   // Lösningens namn i Cinzel kan bli två rader i spalten, som "Lösning A: smörgåsarna i tredjedelar".
-  const namnRader = Math.max(...lf.losningar.map((l) => Math.ceil(breddPt(String(l.namn), 11, CINZEL_BREDD) / pt(spaltW))));
-  const lb = lf.losningar[0].bild.matt;
-  const losningarH = (skala: number) => etikettH * namnRader + 40 + (spaltW * skala * lb.hojd) / lb.bredd + 60 + Math.max(...lf.losningar.map((l) => rader(l.text, spaltW))) * radLar(240);
-  const cH = lf.c ? Math.max(etikettH + 40 + rader(lf.c.rader.join('\n'), cW - 300) * radElev, rader(lf.c.larare.join('\n'), helB - cW - 220) * radLar(245)) + 160 + 140 : 0;
-  const fragorH = etikettH + 50 + lf.fragor.reduce((h, t) => h + rader(t, helB - 360, 9) * radLar9(240) + 30, 0) + 160;
-  const rutanH = Math.ceil(BOKRAD.Cinzel * 11 * 20) + 40 + lf.ruta.punkter.reduce((h, p) => h + rader(`${p.namn}. ${p.text}`, helB - 640, 9) * radLar9(235) + 30, 0) + 200;
-  const titelH0 = 170 + etikettH + 40 + Math.ceil(BOKRAD.Cinzel * 26 * 20) + 60 + 24 + 45 + 170;
-  const tillgang = RAMHOJD - titelH0 - 450 + 150;
+  const namnRader = Math.max(...lf.losningar.map((l) => rader(String(l.namn), spaltW, 11, CINZEL_BREDD)));
+  // Den högsta av de två bilderna, som båda står i spaltens bredd gånger skala.
+  const bildH = (skala: number) => Math.max(...lf.losningar.map((l) => (Math.round(spaltW * skala) * l.bild.matt.hojd) / l.bild.matt.bredd));
+  const losningarH = (skala: number) => etikettH * namnRader + 40 + bildH(skala) + 60 + Math.max(...lf.losningar.map((l) => arial(l.text, spaltW, 9.5))) * radLar(240);
+  const cH = lf.c ? Math.max(etikettH + 40 + rader(lf.c.rader.join('\n'), cW - 300, 10, ANDIKA_BREDD) * radElev, arial(lf.c.larare.join('\n'), helB - cW - 220, 9.5) * radLar(245)) + 160 + 140 : 0;
+  const fragorH = etikettH + 50 + lf.fragor.reduce((h, t) => h + arial(t, helB - 360, 9) * radLar9(240) + 30, 0) + 160;
+  const rutanH = Math.ceil(BOKRAD.Cinzel * 11 * 20) + 40 + lf.ruta.punkter.reduce((h, p) => h + arial(p.text, helB - 640, 9, p.namn ? { fet: `${p.namn}. ` } : {}) * radLar9(235) + 30, 0) + 200;
   const behov = (sk: number) => problemH + idenH + losningarH(sk) + 140 + cH + fragorH + rutanH + 300;
-  const skala = [1, 0.94, 0.88, 0.8].find((sk) => behov(sk) <= tillgang);
   const titelH = 220 + etikettH + 40 + Math.ceil(BOKRAD.Cinzel * 26 * 20) + 60 + 24 + 45 + 200;
-  return { skala: skala ?? 0.8, helB, textW, bildW, spaltW, mellan, cW, titelH, innehallH: Math.ceil(behov(skala ?? 0.8)), ryms: !!skala };
+  // Raden under innehållet: det som blir över av ramen, utom LF_GOOGLE_LUFT. Innehållets höjd är räknad med 300 twips luft.
+  const rest = (sk: number) => RAMHOJD - titelH - (behov(sk) - 300) - 450 - LF_GOOGLE_LUFT;
+  const skala = [1, 0.94, 0.88, 0.8].find((sk) => rest(sk) >= 0);
+  const sk = skala ?? 0.8;
+  return { skala: sk, helB, textW, bildW, spaltW, mellan, cW, titelH, innehallH: Math.ceil(behov(sk)), restH: Math.floor(Math.max(0, rest(sk)) / 15) * 15, ryms: !!skala };
 }
 
 // Två lösningar (Det nya punkt 2; riggens tvalosningar): elevens blad på ett liggande A4 med boksidans ram, titeln, raden

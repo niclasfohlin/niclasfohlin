@@ -1235,7 +1235,7 @@ const losningsforslagbyte = (lf: Losningsforslag) => new Sektionsbyte(false, { n
 function losningsforslagSida(lf: Losningsforslag): Barn[] {
   const matt = losningsforslagMatt(lf);
   if (!matt.ryms) throw new Error(`Lösningsförslaget ”${lf.titel}” (${lf.niva}, ${lf.vad}) ryms inte på ett A4, inte ens med lösningarnas bilder i 80 procent. Korta problemet, lösning C eller frågorna (src/lib/boksida.ts, losningsforslagMatt).`);
-  const { skala, helB, textW, bildW, spaltW, mellan, cW, titelH, innehallH } = matt;
+  const { skala, helB, textW, bildW, spaltW, mellan, cW, restH } = matt;
   const inreBredd = BOKBREDD - 2 * DUBBEL_GLAPP;
   const luftI = LF_LUFT - DUBBEL_GLAPP;
   type Kanter = Record<'top' | 'bottom' | 'left' | 'right', IBorderOptions>;
@@ -1304,15 +1304,7 @@ function losningsforslagSida(lf: Losningsforslag): Barn[] {
       children: [new TextRun({ text: '•', ...lar9, color: BOK.rod }), new TextRun({ children: [new Tab()], ...lar9 }), ...(p.namn ? [new TextRun({ text: `${p.namn}. `, ...lar9, bold: true })] : []), ...formRuns(p.text, lar9)] })),
   ], { w: helB, kanter: { top: kant, bottom: kant, left: kant, right: kant }, mar: { top: 100, bottom: 100, left: 200, right: 200 } })]);
   const luftMellan = (efter: number) => punktStycke({ spacing: { before: 0, after: efter, line: 240 } });
-  // Ramen fyller sidan som riggens: innehållets höjd är räknad med 300 twips luft (losningsforslagMatt), och raden under
-  // innehållet tar det som blir över, utom GOOGLE_LUFT. Google Dokument ritar varje tabell i en cell med ett stycke på tre
-  // punkter mer (wordparitet, REGLER.md), och bladet har fyra: med hela restens höjd slutade ramen 16,5 till 17,3 punkter
-  // längre ned i Google än i Word, och tio av trettio blad fick en andra sida med bara sidfoten (googleprov 2026-10-18,
-  // mätt på sju blad). Med 360 twips mindre spillde ett blad, Staketet, där en rad bryts annorlunda i Google och ramen
-  // slutade 32 punkter lägre än i Word. 600 twips täcker det med marginal; riggen kom fram till samma (build-docx.js,
-  // GOOGLE_LUFT). Ramens fot står därför olika långt ned på bladen (K-429).
-  const GOOGLE_LUFT = 600;
-  const restH = Math.floor(Math.max(0, RAMHOJD - titelH - (innehallH - 300) - 450 - GOOGLE_LUFT) / 15) * 15;
+  // Raden under innehållet fyller ramen ned till LF_GOOGLE_LUFT ovanför sidans fot (losningsforslagMatt, src/lib/boksida.ts).
   const sidan = new Table({
     width: { size: inreBredd, type: WidthType.DXA }, columnWidths: [inreBredd], layout: TableLayoutType.FIXED, borders: FORM_UTAN,
     rows: [
