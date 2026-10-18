@@ -19,7 +19,7 @@ import { join } from 'node:path';
 import { PDFDict, PDFDocument, PDFName, PDFRawStream, PDFRef } from 'pdf-lib';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { arBladsida, bankAv, enhetAdress, foljeFlera, foljeText, nivaFarger, type Bank, type Bankenhet } from './bank';
-import { enhetensUtskrifter, radensUtskrifter, utskriftAdress, type Utskrift } from './utskrift';
+import { enhetensUtskrifter, radensUtskrifter, utskriftAdress, temanasUtskrifter, type Utskrift } from './utskrift';
 import { bladpar, bladRubrik, bladsidaAdress, enhetensBlad, metodensBladmaterial } from './bladmaterial';
 import { bildensAlt, bladVid, metodensPaBordet, paBordetVid, type PaBordet } from './pabordet';
 import type { Faktatext } from './ramform';
@@ -126,7 +126,7 @@ export interface TaFramPost extends Post {
 }
 /** Ett tema (faktatexterna): namnet, temats sida ([id]/texter/[tema].astro), texterna i ordning och, när temat har en,
  *  lärarhandledningens fil (src/lib/handledning.ts), Word och pdf utan ändelse. */
-export interface TaFramTema { namn: string; slug: string; adress: string; poster: TaFramPost[]; handledning?: string }
+export interface TaFramTema { namn: string; slug: string; adress: string; poster: TaFramPost[]; handledning?: string; utskrift?: PostUtskrift }
 /** En tagg på sidan: namnet, förklaringen (knappens title), färgen 1–7 (--tagg-1 i global.css) och antalet poster. */
 export interface TaFramTagg { id: string; namn: string; om: string; farg: number; antal: number }
 export interface TaFram {
@@ -280,7 +280,8 @@ async function bygg(m: Metod): Promise<TaFram> {
       id: e.slug, niva: e.l.niva, nr: e.nr ?? 0, titel: e.l.titel, rad, ...(postensTaggar.length ? { taggar: postensTaggar } : {}),
       sida: enhetAdress(m.id, e), ...(losningsblad !== undefined ? { losning: `${enhetAdress(m.id, e)}#blad-${losningsblad + 1}` } : {}),
       ...(bild ? { bild: { adress: medVersion(bild.adress), alt: bildensAlt(bild) }, bildFil: bild.adress, bildMatt: bild.matt } : {}),
-      utskrift: { post: await postUtskrift(u.ramar.get(e.ri)!), med: await postUtskrift(u.post ?? u.alla) },
+      // Där följesidorna står i egna filer skriver listan ut dem för sig, utan texten (enhetensUtskrifter, folje).
+      utskrift: { post: await postUtskrift(u.ramar.get(e.ri)!), med: await postUtskrift(u.folje ?? u.post ?? u.alla) },
       nivaSlug: niva.slug, farg: farger[e.l.niva],
       taggIds: postensTaggar.map((t) => taggar.find((x) => x.namn === t)?.id ?? slugAv(t)),
       stycken, fragor: (e.l.lastext?.fragor ?? []).map((f) => f.replace(/^\d+\.\s*/, '')),
@@ -334,8 +335,10 @@ async function bygg(m: Metod): Promise<TaFram> {
   // Källfilerna som posternas sidor står i, och nivåns två filer att skriva ut hela nivån (bankfiler i src/lib/bank.ts).
   const filer: Record<string, Fil> = {};
   for (const p of poster) for (const u of Object.values(p.utskrift)) for (const k of u.kalla) filer[k.fil] ??= fil(k.fil);
-  // Temana med lärarhandledning (src/lib/handledning.ts).
+  // Temana med lärarhandledning (src/lib/handledning.ts), och temats texter i en pdf (temanasUtskrifter).
   const handledda = new Set([...lararhandledningar(ramar).values()].map((h) => h.tema));
+  const temanasPdf = new Map<string, PostUtskrift>();
+  for (const [tema, u] of temanasUtskrifter(d, m.id, bank)) temanasPdf.set(tema, await postUtskrift(u));
   const nivaer = bank.nivaer.filter((n) => poster.some((p) => p.nivaSlug === n.slug)).map((n) => {
     const egna = poster.filter((p) => p.nivaSlug === n.slug);
     // Nivåns filer: den med bara posterna, och den andra som posternas följesidor står i (med följesidorna, eller bara
@@ -343,7 +346,7 @@ async function bygg(m: Metod): Promise<TaFram> {
     const bara = egna[0].utskrift.post.kalla[0].fil;
     const med = egna[0].utskrift.med.kalla.map((k) => k.fil).find((f) => f !== bara);
     // Temana i den ordning texterna står, när posterna har teman.
-    const teman = egna.some((p) => p.tema) ? [...new Set(egna.map((p) => p.tema ?? ''))].map((namn) => ({ namn, slug: slugAv(namn), adress: `${adress}/${slugAv(namn)}`, poster: egna.filter((p) => (p.tema ?? '') === namn), ...(handledda.has(namn) ? { handledning: handledningensFil(m.id, { tema: namn }) } : {}) })) : undefined;
+    const teman = egna.some((p) => p.tema) ? [...new Set(egna.map((p) => p.tema ?? ''))].map((namn) => ({ namn, slug: slugAv(namn), adress: `${adress}/${slugAv(namn)}`, poster: egna.filter((p) => (p.tema ?? '') === namn), ...(handledda.has(namn) ? { handledning: handledningensFil(m.id, { tema: namn }) } : {}), ...(temanasPdf.has(namn) ? { utskrift: temanasPdf.get(namn) } : {}) })) : undefined;
     return { namn: n.namn, slug: n.slug, farg: farger[n.namn], poster: egna, ...(teman ? { teman } : {}), filer: { bara: filer[bara], ...(med ? { med: filer[med] } : {}) } };
   });
   const medPoster = taggar.map((t) => ({ ...t, antal: poster.filter((p) => p.taggar?.includes(t.namn)).length })).filter((t) => t.antal > 0);

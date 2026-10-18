@@ -58,9 +58,9 @@ const den = t.ord.artikel === 'ett' ? 'det' : 'den';
 ---
 
 <Base title={`${t.namn}: ${t.titel}`} description={`Välj nivå och ${t.taggar.length ? 'tagg' : 'innehåll'} bland ${antal} ${t.ord.flera} i ${t.titel}, se dem i ordning, visa ett stort och skriv ut dem du vill ha, med eller utan ${t.folje}.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
-  <article class="tafram" data-metod={t.metod} data-titel={t.titel} data-led={t.led} data-kortdata={kortdata} data-en={t.ord.en} data-flera={t.ord.flera} data-alla={t.ord.alla} data-bestamd={t.ord.bestamd} data-folje={t.folje} data-folje-en={t.foljeEn}>
+  <article class="tafram" data-metod={t.metod} data-titel={t.titel} data-led={t.led} data-kortdata={kortdata} data-en={t.ord.en} data-flera={t.ord.flera} data-alla={t.ord.alla} data-bestamd={t.ord.bestamd} data-folje={t.folje} data-folje-en={t.foljeEn} data-forsig={t.forSig ? '' : undefined}>
     <header class="sk-huvud">
-      <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${t.metod}`}>{t.titel}</a> · {versal(t.ord.flera)}</p>
+      <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${t.metod}`}>{t.titel}</a> · {t.namn}</p>
       <h1>{t.namn}</h1>
       <p class="ingress">{borjan}{t.taggar.length > 0 && t.taggText.ingress} Tryck på bocken på de {t.ord.flera} du vill ha, så hamnar de i listan att skriva ut.</p>
     </header>
@@ -146,7 +146,7 @@ const den = t.ord.artikel === 'ett' ? 'det' : 'den';
           <ol class="ak-valda-lista" id="tf-valda-lista"></ol>
           <div class="sk-atgarder ak-valda-knappar">
             <a class="knapp" id="tf-skrivut" href="#" data-goatcounter-click={`utskrift:${t.metod}/${t.led}`} data-goatcounter-title={`${t.titel}: utskrift av listans ${t.ord.flera}`}>Skriv ut {t.ord.alla}</a>
-            <a class="knapp sekundar" id="tf-skrivut-med" href="#" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:med`} data-goatcounter-title={`${t.titel}: utskrift av listans ${t.ord.flera} med ${t.folje}`}>Skriv ut med {t.folje}</a>
+            <a class="knapp sekundar" id="tf-skrivut-med" href="#" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:med`} data-goatcounter-title={t.forSig ? `${t.titel}: utskrift av ${t.folje} till listans ${t.ord.flera}` : `${t.titel}: utskrift av listans ${t.ord.flera} med ${t.folje}`}>{t.forSig ? `Skriv ut ${t.folje}` : `Skriv ut med ${t.folje}`}</a>
             <button type="button" class="knapp sekundar" id="tf-kopiera" data-goatcounter-click={`${t.led}:${t.metod}:lank`} data-goatcounter-title={`${t.titel}: listans länk kopierad`}>Kopiera listans länk</button>
             <button type="button" class="knapp sekundar" id="tf-tomlista">Töm listan</button>
           </div>
@@ -190,6 +190,9 @@ const den = t.ord.artikel === 'ett' ? 'det' : 'den';
         <button type="button" class="knapp sekundar" id="tf-stort-losning" aria-pressed="false" aria-controls="tf-stort-lf" hidden>Visa {t.foljeEn}</button>
         <a class="knapp sekundar" id="tf-stort-sidan" href="#">{versal(t.ord.bestamd)} i metoden</a>
         <a class="knapp sekundar" id="tf-stort-skrivut" href="#" target="_blank" rel="noopener" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:ett`} data-goatcounter-title={`${t.titel}: utskrift av ${t.ord.artikel} ${t.ord.en}`}>Skriv ut {t.ord.bestamd}</a>
+        {/* En post utan lösningsförslag skrivs också ut med följesidan, eller följesidorna för sig där de står i egna filer
+            (designgranskningen 2026-10-18 natt). */}
+        <a class="knapp sekundar" id="tf-stort-skrivut-med" href="#" target="_blank" rel="noopener" hidden data-goatcounter-click={`utskrift:${t.metod}/${t.led}:ett-med`} data-goatcounter-title={`${t.titel}: utskrift av ${t.foljeEn} till ${t.ord.artikel} ${t.ord.en}`}>{t.forSig ? `Skriv ut ${t.foljeEn}` : `Skriv ut med ${t.foljeEn}`}</a>
       </div>
     </dialog>
 

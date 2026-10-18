@@ -7,7 +7,7 @@
 // src/pages/stodundervisning/utskrifter.json.ts), så att en knapp aldrig kan leda till en fil som inte görs.
 // Inga Node-beroenden.
 import type { MetodData } from './metod';
-import { bankAv, bankfiler, bankfilensRamar, slugAv, foljesidansNamn, type Bank, type Bankenhet } from './bank';
+import { bankAv, bankfiler, bankfilensRamar, slugAv, foljesidansNamn, foljeFlera, type Bank, type Bankenhet } from './bank';
 import { harLathund } from './metod';
 import { ovrigtfil } from './ovrigt';
 import { bladNamn, bladVid, metodensPaBordet } from './pabordet';
@@ -27,7 +27,7 @@ export const enhetsbladNamn = (bank: Bank, e: Bankenhet, ramar: Ram[], ri: numbe
 
 /** En enhets utskrifter: alla enhetens sidor i en pdf, varje ram för sig och, när banken har postens följesida (src/lib/
  * bank.ts), enheten med den, som problemet med lösningsförslaget, som Ta fram skriver ut. */
-export function enhetensUtskrifter(d: MetodData, id: string, bank: Bank, e: Bankenhet): { alla: Utskrift; ramar: Map<number, Utskrift>; post?: Utskrift } {
+export function enhetensUtskrifter(d: MetodData, id: string, bank: Bank, e: Bankenhet): { alla: Utskrift; ramar: Map<number, Utskrift>; post?: Utskrift; folje?: Utskrift } {
   const ramarna = d.ramar!.ramar;
   // Enheten och ramen jämförs på sitt namn i adressen: sidan och komponenten har var sin bank och var sitt bladmaterial.
   const niva = bank.nivaer.find((n) => n.enheter.some((x) => x.slug === e.slug))!;
@@ -47,6 +47,9 @@ export function enhetensUtskrifter(d: MetodData, id: string, bank: Bank, e: Bank
   return {
     alla: { namn: `${id}-${e.slug}`, titel, delar: bladen.map((ri) => ({ pdf: hel?.namn ?? fil(ri), ram: ri })) },
     ramar: new Map(bladen.map((ri) => [ri, { namn: `${id}-${e.slug}-${slugAv(namn(ri))}`, titel: `${titel}: ${namn(ri).toLowerCase()}`, delar: [{ pdf: fil(ri), ram: ri }] }])),
+    // I en bank där följesidorna står i egna filer (faktatexterna) skriver Ta fram ut dem för sig, ur nivåns fil med
+    // följesidorna, så att texterna går att kopiera utan lärarens sidor (designgranskningen 2026-10-18 natt).
+    ...(bank.sidorForSig ? { folje: { namn: `${id}-${e.slug}-${slugAv(foljeFlera(bank))}`, titel: `${titel}: ${foljeFlera(bank).toLowerCase()}`, delar: [...e.fore, ...e.efter].map((ri) => ({ pdf: fil(ri), ram: ri })) } } : {}),
     // Har enheten bara postens följesida är det enhetens alla sidor, och då står de i en pdf (alla).
     ...(bank.post && e.post !== undefined && bank.post.egenFil ? { post: { namn: `${id}-${e.slug}-med-${bank.post.slug}`, titel: `${titel}, med ${bank.post.bestamd}`, delar: bladen.filter((ri) => ri === e.ri || ri === e.post).map((ri) => ({ pdf: postfil?.namn ?? fil(ri), ram: ri })) } } : {}),
   };
@@ -97,6 +100,23 @@ export function vidEnheterna(d: MetodData, id: string): VidEnheten[] {
 export const lathundensMall = (d: Pick<MetodData, 'titel'>, id: string): Utskrift => ({ namn: `${id}-lathund-mall`, titel: `Lathund: ${d.titel}, mallen`, delar: [{ pdf: `${id}-lathund`, sida: 3 }] });
 
 /** Alla pdf:er som metodens knappar leder till och som klipps ur de hela filerna, var och en en gång. */
+/** Ett temas texter i en pdf, som temats sida skriver ut ([id]/texter/[tema].astro; designgranskningen 2026-10-18 natt:
+ *  knappen Skriv ut temats texter ska skriva ut): temats texter i ordning, ur nivåns fil med bara texterna. Kartläggningens
+ *  texter, utan nummer, står inte med, som på Ta fram en faktatext. */
+export function temanasUtskrifter(d: MetodData, id: string, bank: Bank): Map<string, Utskrift> {
+  const ut = new Map<string, Utskrift>();
+  for (const e of bank.enheter) {
+    if (!e.tema || e.nr === undefined) continue;
+    const niva = bank.nivaer.find((n) => n.enheter.includes(e))!;
+    const fil = bankfiler(id, bank).find((f) => f.niva?.slug === niva.slug && f.medFoljesidor === false);
+    if (!fil) throw new Error(`${d.titel}: nivån ${niva.namn} har ingen fil med bara ${bank.ord.alla}, så temat ${e.tema} har ingen pdf (src/lib/utskrift.ts).`);
+    const u = ut.get(e.tema) ?? { namn: `${id}-${slugAv(e.tema)}-${bank.ord.slug}`, titel: `${d.titel}: ${e.tema}, ${bank.ord.alla}`, delar: [] };
+    u.delar.push({ pdf: fil.namn, ram: e.ri });
+    ut.set(e.tema, u);
+  }
+  return ut;
+}
+
 export function metodensUtskrifter(d: MetodData, id: string): Utskrift[] {
   const ut = new Map<string, Utskrift>();
   const lagg = (u: Utskrift) => {
@@ -107,7 +127,8 @@ export function metodensUtskrifter(d: MetodData, id: string): Utskrift[] {
   if (harLathund(d)) lagg(lathundensMall(d, id));
   for (const v of vidEnheterna(d, id)) lagg(v.utskrift);
   const bank = bankAv(d);
-  if (bank) for (const e of bank.enheter) { const u = enhetensUtskrifter(d, id, bank, e); lagg(u.alla); for (const x of u.ramar.values()) lagg(x); if (u.post) lagg(u.post); }
+  if (bank) for (const e of bank.enheter) { const u = enhetensUtskrifter(d, id, bank, e); lagg(u.alla); for (const x of u.ramar.values()) lagg(x); if (u.post) lagg(u.post); if (u.folje) lagg(u.folje); }
+  if (bank) for (const u of temanasUtskrifter(d, id, bank).values()) lagg(u);
   const bm = metodensBladmaterial(d, id);
   if (bm) for (const rad of bm.rader) { const u = radensUtskrifter(d, id, bm, rad); lagg(u.alla); lagg(u.sidan); for (const x of u.blad.values()) lagg(x); }
   return [...ut.values()];

@@ -40,17 +40,21 @@ const listan = `${t.adress}#lista=${tema.poster.map((p) => p.id).join(',')}`;
 <Base title={`${tema.namn}: ${t.namn}`} description={`Temat ${tema.namn} i ${t.titel}: ${TAL[antal] ?? antal} faktatexter på nivån ${niva}, var och en med sin modell${byggnad.length ? ` (${lista(byggnad)})` : ''}, att läsa, visa och skriva ut.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
   <article class="tema-sida" style={`--niva:${farg}`}>
     <header class="sk-huvud">
-      <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${t.metod}`}>{t.titel}</a> · <a href={t.adress}>{versal(t.ord.flera)}</a> · {tema.namn}</p>
+      <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${t.metod}`}>{t.titel}</a> · <a href={t.adress}>{t.namn}</a> · {tema.namn}</p>
       <p class="tema-kicker"><span class="tema-niva">{niva}</span> Tema med {TAL[antal] ?? antal} {t.ord.flera}</p>
       <h1>{tema.namn}</h1>
       <p class="ingress">Temats {TAL[antal] ?? antal} {t.ord.flera} är byggda på var sitt sätt{byggnad.length ? `: ${lista(byggnad)}` : ''}. Varje text har sin modell{tema.poster.some((p) => p.modell?.ifylld) ? ', ifylld och tom' : ''}, och lärarens sida säger hur en liten grupp läser den.{h && ' Lärarhandledningen efter texterna säger hur hela klassen läser temat.'}</p>
-      <p class="tema-atgarder"><a class="knapp" href={listan}>Skriv ut temats {t.ord.flera}</a>{h && <>{' '}<a class="knapp sekundar" href="#lararhandledning">Lärarhandledningen</a></>}{' '}<a class="knapp sekundar" href={t.adress + `#${t.nivaer.find((n) => n.namn === niva)?.slug ?? ''}`}>Alla {t.ord.flera} på nivån {niva}</a></p>
+      <p class="tema-atgarder">{tema.utskrift
+        ? <a class="knapp" href={tema.utskrift.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst={String(6 * antal)} data-goatcounter-click={`utskrift:${t.metod}/${t.led}/${tema.slug}`} data-goatcounter-title={`${t.titel}: ${tema.namn}, utskrift av temats ${t.ord.flera}`}><span data-direkt={`Skriv ut temats ${t.ord.flera}`}>Temats {t.ord.flera} som pdf</span></a>
+        : <a class="knapp" href={listan}>Temats {t.ord.flera} i listan</a>}{h && <>{' '}<a class="knapp sekundar" href="#lararhandledning">Lärarhandledningen</a></>}{' '}<a class="knapp sekundar" href={t.adress + `#${t.nivaer.find((n) => n.namn === niva)?.slug ?? ''}`}>Alla {t.ord.flera} på nivån {niva}</a></p>
     </header>
 
     <ol class="tema-texter">
       {tema.poster.map((p) => (
         <li class="tema-text">
-          {p.bildFil && <img class="tema-bild" src={p.bildFil} alt="" width={p.bildMatt?.bredd} height={p.bildMatt?.hojd} loading="lazy" decoding="async" />}
+          {/* Modellen, den ifyllda när den finns, så att temats texter syns med sina modeller (designgranskningen 2026-10-18
+              natt); annars textens första bild. */}
+          {(() => { const b = p.modell?.ifylld ?? p.modell; return b ? <img class="tema-bild" src={b.bild.adress} alt="" width={b.bildMatt.bredd} height={b.bildMatt.hojd} loading="lazy" decoding="async" /> : p.bildFil && <img class="tema-bild" src={p.bildFil} alt="" width={p.bildMatt?.bredd} height={p.bildMatt?.hojd} loading="lazy" decoding="async" />; })()}
           <div class="tema-text-text">
             <h2 class="tema-titel"><span class="tf-nr">{p.nr}</span> <a href={p.sida}>{p.titel}</a></h2>
             <p class="tema-byggnad">{(p.taggar ?? []).join(' · ')}{p.modell && ` · ${p.modell.namn}, ${p.modell.blad.charAt(0).toLowerCase()}${p.modell.blad.slice(1)}`}</p>

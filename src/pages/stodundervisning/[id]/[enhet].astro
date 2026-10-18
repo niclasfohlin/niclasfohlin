@@ -7,7 +7,7 @@ import Bladfiler from '../../../components/Bladfiler.astro';
 import Pabordet from '../../../components/Pabordet.astro';
 import SkrivUtPdf from '../../../components/SkrivUtPdf.astro';
 import { publicerade } from '../../../lib/innehall';
-import { bankAv, enhetAdress, grannar, nivaFarger, arBladsida, foljesidansNamn, type Bankenhet } from '../../../lib/bank';
+import { bankAv, enhetAdress, grannar, nivaFarger, arBladsida, foljesidansNamn, slugAv, type Bankenhet } from '../../../lib/bank';
 import { bladKort, bladpar, bladsidaAdress, enhetensBlad, gruppId, harExempel, ledFlera, ledSida, metodensBladmaterial, type Bladrad } from '../../../lib/bladmaterial';
 import { arIfylltBlad, arStaendeBlad, metodensPaBordet, type PaBordet } from '../../../lib/pabordet';
 import { metodAdress, UPPHOV } from '../../../lib/metod';
@@ -63,6 +63,8 @@ interface Vy {
   blad?: { rad: Bladrad; b: PaBordet; nr: string; led: string; sida: string; exempel: boolean; pdf: string };
   /** Ramarna som hör till varje enhet (ramar.vidEnheterna, src/lib/utskrift.ts), som bladet Kärnorna till varje text. */
   vid: VidEnheten[];
+  /** Temats sida på Ta fram en faktatext, när enheten hör till ett tema (designgranskningen 2026-10-18 natt). */
+  tema?: { namn: string; adress: string };
 }
 let vy: Vy;
 let enhet: Bankenhet | undefined;
@@ -122,6 +124,7 @@ if (givenRad && bm) {
     fotEtikett: `Fler ${bank.ord.flera} på nivån ${niva.namn}`, upphov: `${niva.namn}, ${e.l.vad}`, vid: vidEnheterna(d, m.id),
   };
   for (const v of vy.vid) vy.nav.push({ id: `vid-${v.ri + 1}`, namn: v.rubrik });
+  if (e.tema && e.nr !== undefined && e.l.faktatext) vy.tema = { namn: e.tema, adress: `/stodundervisning/${m.id}/${bank.ord.slug}/${slugAv(e.tema)}` };
   // Följesidan säger vilket av ramens blad som hör till enheten ("modellen är Tankekartan, blad 1"). Då står bladet på
   // enhetens sida, under ramarnas led som rubrik, Modellen, med en knapp som skriver ut bara bladet och en rad som leder
   // till ramens sida (Niclas 2026-10-13: "Visst bör en sida hänvisa till sin modell?", och "Eller ha modellen för under
@@ -147,7 +150,7 @@ const figurer = metodensPaBordet(d, m.id).some((b) => b.bild.fluent?.length && s
   <article class="metod enhet" style={`--niva: ${vy.farg}`}>
     <EjBryt><Boklankar>
     <header class="enhet-huvud">
-      <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${m.id}`}>{d.titel}</a> · <a href={vy.tillbaka.adress}>{vy.tillbaka.namn}</a></p>
+      <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${m.id}`}>{d.titel}</a> · <a href={vy.tillbaka.adress}>{vy.tillbaka.namn}</a>{vy.tema && <>{' · '}<a href={vy.tema.adress}>{vy.tema.namn}</a></>}</p>
       <p class="enhet-kicker"><span class="enhet-niva">{vy.skylt}</span> {vy.kicker}</p>
       <h1>{vy.titel}</h1>
       <nav class="enhet-blad-nav" aria-label="Sidorna">

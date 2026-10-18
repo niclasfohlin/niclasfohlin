@@ -23,7 +23,7 @@ const taggNamn = (id: string) => t.taggar.find((x) => x.id === id)?.namn ?? id;
       {p.modell && <a class="tf-modell-lank" href={p.sida ? `${p.sida}#enhetens-blad` : p.modell.sida} aria-label={`Modellen: ${p.titel}`}>Modellen</a>}
       {p.losning && <a class="tf-losning" href={p.losning} aria-label={`${t.losningNamn}: ${p.titel}`} data-goatcounter-click={p.sida ? undefined : `${t.led}:${t.metod}:losningsforslag`} data-goatcounter-title={p.sida ? undefined : `${t.titel}: Lösningsförslag i Visa stort`}>{t.losningNamn}</a>}
       {p.sida && <a class="tf-sidlank" href={p.sida} aria-label={`${p.titel} i metoden`}>I metoden</a>}
-      {p.taggIds.map((id) => <span class={taggKlass(id)}>{taggNamn(id)}</span>)}
+      {p.taggIds.length > 0 && <span class="tf-radtaggar">{p.taggIds.map((id) => <span class={taggKlass(id)}>{taggNamn(id)}</span>)}</span>}
     </p>
   </div>
 </li>

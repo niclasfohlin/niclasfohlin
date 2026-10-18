@@ -2285,11 +2285,13 @@ html.js .bara-js { display: inline-block; }
    bredvid på en bred skärm, som på Ta fram en aktivitet (listans stilar ovan). Utan JavaScript står nivåerna under
    varandra med sina rubriker; med JavaScript visas en nivå i taget, och rubriken finns kvar för skärmläsaren. */
 /* Taggarnas färger (Niclas 2026-10-18: "Skulle önska att de olika taggarna fick varsin färg. Inte samma färg som
-   nivåerna. Då syns de bättre på kortet och när man ska välja"): blå, petrol, tegel, violett, skiffer, hallon och kol,
-   skilda från nivåernas grön, ockra och plommon (BOKNIVA i src/lib/bank.ts) och mörka nog för vit text, minst 4,9:1. En
+   nivåerna. Då syns de bättre på kortet och när man ska välja"): blå, petrol, tegel, violett, oliv, magenta och marinblå,
+   skilda från nivåernas grön, ockra och plommon (BOKNIVA i src/lib/bank.ts), med minst 14 i färgavstånd (CIEDE2000) till
+   dem och till varandra, utan grått, som såg avstängt ut (designgranskningen 2026-10-18 natt), och mörka nog för vit text,
+   minst 5,6:1. En
    tagg har sin färg efter sin plats bland databasens taggar (src/lib/tafram.ts, TAGGFARGER). Delningskortet för Ta fram
    läser dem också (src/lib/delningskort.ts). */
-:root { --tagg-1: #2a62a8; --tagg-2: #1b7a72; --tagg-3: #b8432c; --tagg-4: #6046a8; --tagg-5: #4f6070; --tagg-6: #c03c78; --tagg-7: #33373b; }
+:root { --tagg-1: #2a62a8; --tagg-2: #1b7a72; --tagg-3: #b8432c; --tagg-4: #6046a8; --tagg-5: #6b6b00; --tagg-6: #b5179e; --tagg-7: #1d3557; }
 .tagg-1 { --tagg: var(--tagg-1); } .tagg-2 { --tagg: var(--tagg-2); } .tagg-3 { --tagg: var(--tagg-3); } .tagg-4 { --tagg: var(--tagg-4); } .tagg-5 { --tagg: var(--tagg-5); } .tagg-6 { --tagg: var(--tagg-6); } .tagg-7 { --tagg: var(--tagg-7); }
 .tf-taggrad { flex: 1 1 100%; }
 /* Alla bland nivåerna har ingen egen färg: textens. */
@@ -2300,6 +2302,8 @@ html.js .bara-js { display: inline-block; }
 .tf-tagg { min-height: 2.75rem; padding: 0.3rem 0.85rem; border: 1.5px solid var(--farg-kant); border-radius: 999px; background: var(--farg-yta); color: var(--farg-text); font: 600 0.95rem/1.2 var(--typsnitt-ui); cursor: pointer; }
 .tf-tagg:hover { border-color: var(--farg-accent); }
 .tf-tagg[aria-pressed="true"] { background: var(--farg-accent); border-color: var(--farg-accent); color: #fff; }
+/* Alla bland taggarna har textens färg, som Alla bland nivåerna, så att den inte liknar den blå taggen. */
+.tf-tagg.tf-tagg-alla[aria-pressed="true"] { background: var(--farg-text); border-color: var(--farg-text); }
 /* En tagg i sin färg: ljus ton med kant och text i taggens färg, och vald i hel färg. Alla har ingen egen färg. */
 .tf-tagg:is(.tagg-1, .tagg-2, .tagg-3, .tagg-4, .tagg-5, .tagg-6, .tagg-7) { border-color: color-mix(in srgb, var(--tagg) 55%, white); background: color-mix(in srgb, var(--tagg) 10%, white); color: color-mix(in srgb, var(--tagg) 82%, black); }
 .tf-tagg:is(.tagg-1, .tagg-2, .tagg-3, .tagg-4, .tagg-5, .tagg-6, .tagg-7):hover { border-color: var(--tagg); }
@@ -2308,7 +2312,13 @@ html.js .bara-js { display: inline-block; }
 .tf-tagg-antal:empty { display: none; }
 .tf-yta { display: grid; gap: 1.25rem; align-items: start; }
 /* Under 60 rem står listan att skriva ut i en rad längst ned (stilarna för listan på Ta fram en aktivitet). */
-@media (max-width: 59.99rem) { .tafram { padding-bottom: 4rem; } }
+/* Listans rad står fast nederst i telefonen: luften står efter sidfoten, så att raden inte täcker den. */
+@media (max-width: 59.99rem) { body:has(.tafram) { padding-bottom: 3.5rem; } }
+/* Valet står kvar överst från 48 rem: listans början och listan att skriva ut räknar med dess höjd, --tf-val-h, som skriptet
+   mäter (designgranskningen 2026-10-18 natt). */
+.tafram { --tf-val-h: 0px; }
+.tafram #tf-poster { scroll-margin-top: calc(var(--tf-val-h) + 0.75rem); }
+@media (min-width: 60rem) { .tafram .ak-valda { top: calc(var(--tf-val-h) + 1rem); } }
 @media (min-width: 60rem) { .tf-yta { grid-template-columns: minmax(0, 1fr) 17.5rem; } }
 .tf-poster { min-width: 0; }
 .tf-niva-rubrik { display: flex; align-items: center; gap: 0.6rem; margin: 1.75rem 0 0.6rem; font-size: 1.2rem; }
@@ -2329,7 +2339,8 @@ html.js .bara-js { display: inline-block; }
 .tf-js .tf-visa { display: inline-flex; }
 .tf-visa:hover { color: var(--farg-accent); }
 .tf-radtagg { display: inline-flex; align-items: center; min-height: 1.75rem; padding: 0.05rem 0.65rem; border: 1px solid color-mix(in srgb, var(--tagg, var(--farg-text-svag)) 55%, white); border-radius: 999px; background: color-mix(in srgb, var(--tagg, var(--farg-text-svag)) 10%, white); color: color-mix(in srgb, var(--tagg, var(--farg-text)) 82%, black); font: 600 0.8rem/1.2 var(--typsnitt-ui); }
-.tf-lankar .tf-radtagg + .tf-radtagg { margin-left: -0.6rem; }
+/* Taggarna står tätare än länkarna, i en egen grupp, så att en tagg som bryts till en ny rad börjar vid textens kant. */
+.tf-radtaggar { display: inline-flex; flex-wrap: wrap; gap: 0.35rem 0.4rem; }
 button.tf-radtagg { position: relative; cursor: pointer; }
 /* Tryckytan är 44 punkter hög, som bocken på Ta fram en aktivitet, utan att taggen ser större ut. */
 button.tf-radtagg::before { content: ''; position: absolute; inset: calc((1.75rem - 2.75rem) / 2) -0.15rem; }
@@ -2359,6 +2370,9 @@ button.tf-radtagg:hover { border-color: var(--tagg, var(--farg-accent)); backgro
   .tf-lankar { grid-area: lankar; gap: 0 0.9rem; }
   .tf-bock { grid-area: bock; margin: -0.35rem 0 -0.35rem; }
   .tf-post.utan-bild { grid-template-columns: minmax(0, 1fr) 2.75rem; grid-template-areas: "titel bock" "rad rad" "lankar lankar"; padding-left: 0.75rem; }
+  /* En faktatexts första bild är ett brett diagram som inte går att läsa så litet: i telefonen står raden utan bild. */
+  .tf-post[data-fakta] { grid-template-columns: minmax(0, 1fr) 2.75rem; grid-template-areas: "titel bock" "rad rad" "lankar lankar"; padding-left: 0.75rem; }
+  .tf-post[data-fakta] .tf-bild { display: none; }
   .tf-val .sk-nivaknappar { grid-template-columns: 1fr 1fr; }
   .tf-val .sk-niva { min-width: 0; padding-right: 0.5rem; }
   .tf-tagg { padding: 0.25rem 0.75rem; font-size: 0.9rem; }
@@ -2375,6 +2389,8 @@ button.tf-radtagg:hover { border-color: var(--tagg, var(--farg-accent)); backgro
 .tf-stort-sida .boksida-titel { font-size: clamp(1.9rem, 3.4vw, 2.9rem); }
 .tf-stort .problemsida-text, .tf-stort .problemsida-fraga { font-size: clamp(1.15rem, 1.9vw, 2.2rem); }
 .tf-stort .problemsida-fraga-rubrik { font-size: clamp(1rem, 1.6vw, 1.35rem); }
+/* En lästext står utan bild och är längre än ett problem: mindre text, så att texten och frågorna ryms på projektorn. */
+.tf-stort.utan-bild .problemsida-text, .tf-stort.utan-bild .problemsida-fraga { font-size: clamp(1.1rem, 1.35vw, 1.6rem); }
 /* Bilden får högst 38 procent av skärmens höjd, så att problemet, bilden och frågorna ryms på en skärm eller projektor. */
 .tf-stort .problemsida-bild { max-width: min(100%, 46rem); margin: 0.75rem auto; }
 .tf-stort .problemsida-bild img { width: auto; max-width: 100%; max-height: 38vh; margin: 0 auto; }
@@ -2402,7 +2418,7 @@ button.tf-radtagg:hover { border-color: var(--tagg, var(--farg-accent)); backgro
 .tema-byggnad { margin: 0.15rem 0 0; font-size: 0.9rem; font-weight: 600; color: var(--farg-text-svag); }
 .tema-lankar { display: flex; flex-wrap: wrap; gap: 0 1rem; margin: 0.25rem 0 0; font-size: 0.92rem; }
 .tema-lankar a { display: inline-flex; align-items: center; min-height: 2.75rem; }
-@media (max-width: 30rem) { .tema-text { grid-template-columns: 5rem minmax(0, 1fr); gap: 0 0.65rem; padding: 0.6rem; } }
+@media (max-width: 30rem) { .tema-text { grid-template-columns: minmax(0, 1fr); gap: 0 0.65rem; padding: 0.6rem; } .tema-bild { display: none; } }
 /* Lärarhandledningen till ett tema (Lararhandledning.astro, K-434): som Word-filens två A4 och metodriggens förlaga, med
    etiketten på en mörk platta, temat i Anton med strecket i nivåns färg, och fälten i två spalter med en tunn linje
    mellan raderna. Faktatexternas färger och typsnitt (--fakta-*), så att handledningen och texterna hör ihop. I
@@ -2437,8 +2453,13 @@ button.tf-radtagg:hover { border-color: var(--tagg, var(--farg-accent)); backgro
 .tf-stort-fakta { margin: 1.25rem; }
 .tf-stort-fakta .faktatext { margin: 0 auto; }
 @media (min-width: 60rem) { .tf-stort-fakta .faktatext { zoom: 1.25; } .tf-stort.med-losning .tf-stort-fakta .faktatext { zoom: 1; } }
+/* Utskriftens fot hör inte till skärmen och projektorn. */
+.tf-stort-fakta .boksida-fot { display: none; }
+/* Modellen bredvid texten står kvar medan texten rullar, och bilden leder till bladet i full storlek. */
+.tf-stort-lf .tf-modell { position: sticky; top: 3.75rem; }
+.tf-modell-stor { display: block; cursor: zoom-in; }
 .tf-stort-knappar { position: sticky; bottom: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.75rem 1.25rem; border-top: 1px solid var(--farg-kant); background: var(--farg-yta); font-family: var(--typsnitt-ui); }
-.tf-stort-knappar .knapp { flex: 1 1 11rem; }
+.tf-stort-knappar .knapp { flex: 1 1 11rem; justify-content: center; text-align: center; }
 .tf-stort-bock { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; }
 .tf-stort-bock svg { width: 1.3rem; height: 1.3rem; }
 @media (max-width: 22rem) {

@@ -26,6 +26,8 @@ const titel = sida.dataset.titel!;
 const ord = { en: sida.dataset.en!, flera: sida.dataset.flera!, alla: sida.dataset.alla!, bestamd: sida.dataset.bestamd! };
 const folje = sida.dataset.folje!;
 const foljeEn = sida.dataset.foljeEn!;
+// Följesidorna står i egna filer (faktatexterna): listan skriver ut dem för sig, utan texterna.
+const forSig = sida.dataset.forsig !== undefined;
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const raknaHandelse = (path: string, title: string) => (window as { goatcounter?: { count: (v: object) => void } }).goatcounter?.count({ path, title, event: true });
 
@@ -107,8 +109,15 @@ function visa() {
   history.replaceState(null, '', `#${sparat.niva}${sparat.tagg ? `/${sparat.tagg}` : ''}`);
   spara();
 }
-function valjTagg(tagg: string) { sparat.tagg = tagg; visa(); }
-for (const b of nivaKnappar) b.addEventListener('click', () => { sparat.niva = b.dataset.niva; visa(); });
+// Valet står kvar överst från 48 rem (global.css, .sk-val). Dess höjd står i --tf-val-h, som listans början och listan att
+// skriva ut räknar med, så att den första träffen inte hamnar under valet (designgranskningen 2026-10-18 natt). Byter
+// läraren nivå eller tagg när listans början ligger ovanför valet, rullar sidan dit.
+const valet = sida.querySelector<HTMLElement>('.tf-val');
+const valetsHojd = () => (valet && getComputedStyle(valet).position === 'sticky' ? valet.offsetHeight : 0);
+if (valet) new ResizeObserver(() => sida.style.setProperty('--tf-val-h', `${valetsHojd()}px`)).observe(valet);
+const tillListan = () => { const poster = $('tf-poster'); if (poster.getBoundingClientRect().top < valetsHojd()) poster.scrollIntoView({ block: 'start' }); };
+function valjTagg(tagg: string) { sparat.tagg = tagg; visa(); tillListan(); }
+for (const b of nivaKnappar) b.addEventListener('click', () => { sparat.niva = b.dataset.niva; visa(); tillListan(); });
 for (const b of taggKnappar) b.addEventListener('click', () => valjTagg(b.dataset.tagg!));
 
 // ---------- Listan att skriva ut ----------
@@ -165,6 +174,9 @@ function visaBockar() {
   }));
   valda.classList.toggle('har-kort', n > 0);
   for (const id of ['tf-skrivut', 'tf-skrivut-med']) $(id).setAttribute('aria-disabled', String(n === 0));
+  // Ental när listan har en post (designgranskningen 2026-10-18 natt).
+  $('tf-skrivut').textContent = `Skriv ut ${n === 1 ? ord.bestamd : ord.alla}`;
+  $('tf-skrivut-med').textContent = forSig ? `Skriv ut ${n === 1 ? foljeEn : folje}` : `Skriv ut med ${n === 1 ? foljeEn : folje}`;
   $('tf-tomlista').hidden = n === 0;
   $('tf-kopiera').hidden = n === 0;
   if (lofte) data().then(visaStorlek).catch(() => {}); else visaStorlek();
@@ -179,7 +191,9 @@ function visaStorlek(d?: Data) {
   const not = $('tf-storlek');
   const n = sparat.bockade.length;
   if (!n || !d) { not.textContent = ''; return; }
-  not.textContent = `${n} ${n === 1 ? ord.en : ord.flera}, omkring ${mb(planFor(d, 'post').byte)}, eller ${mb(planFor(d, 'med').byte)} med ${folje}.`;
+  not.textContent = forSig
+    ? `${n} ${n === 1 ? ord.en : ord.flera}, omkring ${mb(planFor(d, 'post').byte)}. ${folje.charAt(0).toLocaleUpperCase('sv')}${folje.slice(1)}: omkring ${mb(planFor(d, 'med').byte)}.`
+    : `${n} ${n === 1 ? ord.en : ord.flera}, omkring ${mb(planFor(d, 'post').byte)}, eller ${mb(planFor(d, 'med').byte)} med ${folje}.`;
 }
 
 // Listans länk: sidans adress med posterna i listan, som öppnar samma lista i en annan webbläsare.
@@ -191,7 +205,7 @@ $('tf-kopiera').addEventListener('click', async () => {
 });
 
 // Utskriften: listans poster i listans ordning, bara posterna eller med följesidorna.
-const listansTitel = (med: boolean) => `${titel}${med ? `, med ${folje}` : ''}: ${sparat.bockade.map((id) => namnAv(id).titel).join(', ')}`;
+const listansTitel = (med: boolean) => `${titel}${med ? (forSig ? `, ${folje}` : `, med ${folje}`) : ''}: ${sparat.bockade.map((id) => namnAv(id).titel).join(', ')}`;
 flerakortKnapp($('tf-skrivut'), async () => ({ plan: planFor(await data(), 'post'), titel: listansTitel(false) }), 'Hämtar …');
 flerakortKnapp($('tf-skrivut-med'), async () => ({ plan: planFor(await data(), 'med'), titel: listansTitel(true) }), 'Hämtar …');
 
@@ -252,20 +266,33 @@ function modellFigur(m: Modell): HTMLElement {
     byt.addEventListener('click', () => { ifylld = !ifylld; visa(ifylld); if (ifylld) raknaHandelse(`${led}:${metod}:ifylld-modell`, `${titel}: den ifyllda modellen i Visa stort`); });
   }
   visa(false);
+  // Bilden leder till bladet i full storlek, i en ny flik, för projektorn.
+  const stor = el('a', 'tf-modell-stor') as HTMLAnchorElement;
+  stor.target = '_blank';
+  stor.rel = 'noopener';
+  stor.title = 'Modellen i full storlek';
+  const folj = () => { stor.href = img.src; };
+  folj();
+  if (byt) byt.addEventListener('click', folj);
+  stor.append(img);
   text.append(sidan, ...(byt ? [byt] : []), ...(m.ifylld ? [knapp('Skriv ut den tomma', m.utskrift, 'modell'), knapp('Skriv ut den ifyllda', m.ifylld.utskrift, 'ifylld-modell')] : [knapp('Skriv ut modellen', m.utskrift, 'modell')]));
-  fig.append(img, text);
+  fig.append(stor, text);
   return fig;
 }
 // I stegen A, B, A och B och C finns ingen utskrift som är det som syns, så knappen står bara vid problemet
 // (granskningen 2026-10-18: samma steg skrev ut olika material beroende på vad som visades före).
 function skrivutLank() {
   const skrivut = $<HTMLAnchorElement>('tf-stort-skrivut');
-  if (!stortPost || steg > 0) { skrivut.hidden = true; return; }
+  if (!stortPost || steg > 0) { skrivut.hidden = true; $('tf-stort-skrivut-med').hidden = true; return; }
   // Med lösningsförslaget skrivs det ut med problemet; modellen har sin egen knapp i rutan bredvid.
   const med = !losningYta.hidden && !!stortPost.losningsforslag;
   skrivut.href = (med ? stortPost.utskrift.med : stortPost.utskrift.post).adress;
   skrivut.textContent = med ? `Skriv ut ${ord.bestamd} och ${foljeEn}` : `Skriv ut ${ord.bestamd}`;
   skrivut.hidden = false;
+  // En post utan lösningsförslag: också med följesidan, eller följesidorna för sig (designgranskningen 2026-10-18 natt).
+  const skrivutMed = $<HTMLAnchorElement>('tf-stort-skrivut-med');
+  skrivutMed.hidden = !!stortPost.losningsforslag;
+  if (!stortPost.losningsforslag) skrivutMed.href = stortPost.utskrift.med.adress;
 }
 function visaLosning(pa: boolean) {
   const p = stortPost;
@@ -320,12 +347,14 @@ dialog.addEventListener('keydown', (e) => {
   visaSteg(steg + (fram ? 1 : -1));
   stegKnappar[steg]?.focus();
 });
-// Bläddra: förra och nästa post bland raderna som syns, i radernas ordning, med det som visas bredvid kvar.
+// Bläddra: förra och nästa post bland raderna som syns, i radernas ordning. Modellen bredvid en faktatext står kvar, den
+// tomma, men ett lösningsförslag aldrig: rutan står ofta på projektorn, och nästa problems svar ska visas först när läraren
+// trycker (designgranskningen 2026-10-18 natt).
 const synligaRader = () => rader.filter((r) => !r.hidden && !nivaAv(r).hidden);
 function bladdra(steget: 1 | -1) {
   const synliga = synligaRader();
   const nasta = synliga[synliga.findIndex((r) => r.id === stortId) + steget];
-  if (nasta) void visaStort(nasta.id, !losningYta.hidden);
+  if (nasta) void visaStort(nasta.id, !losningYta.hidden && !stortPost?.losningsforslag);
 }
 function visaBladdra() {
   const synliga = synligaRader();
