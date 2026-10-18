@@ -393,7 +393,7 @@ pabordet:
     efter: "ram: Bas, problem 1: Äpplena"
   - nr: 2
     rubrik: Bas, problem 1 · Lösning A
-    text: "Lösning A, en tabell. Med 2 ur varje påse hade påsarna 3, 4, 5 och 5 äpplen från början, 17 ihop, för få. Med 3 ur varje blir det 21, och med 4 ur varje 25, som stämmer. Summan växer med 4 från rad till rad. Under tabellen står uträkningen av sista raden: 5 + 6 + 7 + 7 = 25."
+    text: "Lösning A, pröva och förbättra. Med 2 ur varje påse hade påsarna 3, 4, 5 och 5 äpplen från början, 17 ihop, för få. Med 3 ur varje blir det 21, och med 4 ur varje 25, som stämmer. I kolumnen ihop blir det 4 äpplen fler för varje rad. Under tabellen står uträkningen av sista raden: 5 + 6 + 7 + 7 = 25."
     efter: "ram: Två lösningar: Bas, problem 1, Äpplena"
   - nr: 3
     rubrik: Bas, problem 1 · Lösning B
@@ -405,7 +405,7 @@ pabordet:
     efter: "ram: Bas, problem 2: Fiskebodarna"
   - nr: 5
     rubrik: Bas, problem 2 · Lösning A
-    text: Lösning A, en tabell. 1 bod har 5 stickor, 2 bodar 9 och 3 bodar 13. Varje ny bod tar 4 stickor till, och tabellen fortsätter i två spalter till 20 bodar. 6 bodar ger 25 stickor och 20 bodar 81 stickor, och de raderna är inringade.
+    text: Lösning A, att fortsätta tabellen. 1 bod har 5 stickor, 2 bodar 9 och 3 bodar 13. Varje ny bod tar 4 stickor till, och tabellen fortsätter i två spalter till 20 bodar. 6 bodar ger 25 stickor och 20 bodar 81 stickor, och de raderna är inringade.
     efter: "ram: Två lösningar: Bas, problem 2, Fiskebodarna"
   - nr: 6
     rubrik: Bas, problem 2 · Lösning B
@@ -429,11 +429,11 @@ pabordet:
     efter: "ram: Bas, problem 4: Chokladbollarna"
   - nr: 11
     rubrik: Bas, problem 4 · Lösning A
-    text: "Lösning A, en tabell. Raden för 20 bollar är receptet. Raden för 10 bollar är hälften: 2 dl, 1 dl, 50 g och 1 msk. Raden för 30 bollar är 20 och 10 ihop: 6 dl havregryn, 3 dl socker, 150 g smör och 3 msk kakao. Under tabellen står uträkningen för havregrynet: 4 / 2 = 2 dl och 4 + 2 = 6 dl."
+    text: "Lösning A, att lägga till hälften. Raden för 20 bollar är receptet. Raden för 10 bollar är hälften: 2 dl, 1 dl, 50 g och 1 msk. Raden för 30 bollar är 20 och 10 ihop: 6 dl havregryn, 3 dl socker, 150 g smör och 3 msk kakao. Under tabellen står uträkningen för havregrynet: 4 / 2 = 2 dl och 4 + 2 = 6 dl."
     efter: "ram: Två lösningar: Bas, problem 4, Chokladbollarna"
   - nr: 12
     rubrik: Bas, problem 4 · Lösning B
-    text: "Lösning B, en sats för 10 bollar, tre gånger. Halva receptet är en sats för 10 bollar: 2 dl havregryn, 1 dl socker, 50 g smör och 1 msk kakao. 30 bollar är 3 satser: 3 · 2 = 6 dl havregryn, 3 · 1 = 3 dl socker, 3 · 50 = 150 g smör och 3 · 1 = 3 msk kakao. Kontroll: 2 · 2 = 4 dl till 20 bollar, som receptet."
+    text: "Lösning B, receptet 1,5 gånger. 30 / 20 = 1,5, så 30 bollar är 1,5 gånger så många som 20. Eleven tar varje mått gånger 1,5: 1,5 · 4 = 6 dl havregryn, 1,5 · 2 = 3 dl socker, 1,5 · 100 = 150 g smör och 1,5 · 2 = 3 msk kakao. Kontroll per boll: 6 / 30 = 4 / 20. Till vänster står två tallinjer, för bollarna och för havregrynet, och båda har samma pil, märkt · 1,5."
     efter: "ram: Två lösningar: Bas, problem 4, Chokladbollarna"
   - nr: 13
     rubrik: Bas, problem 5 · Ljusstakarna
@@ -441,7 +441,7 @@ pabordet:
     efter: "ram: Bas, problem 5: Ljusstakarna"
   - nr: 14
     rubrik: Bas, problem 5 · Lösning A
-    text: "Lösning A, en tabell. Tabellen har kolumnerna femarmade, sjuarmade och ljus ihop. 29 och 0 ger 145, för få. 19 och 10 ger 165. 9 och 20 ger 185, nästan. 8 och 21 ger 187, som stämmer. Bredvid står uträkningen av andra raden: 19 · 5 = 95, 10 · 7 = 70 och 95 + 70 = 165."
+    text: "Lösning A, att byta tio i taget. Tabellen har kolumnerna femarmade, sjuarmade och ljus ihop. 29 och 0 ger 145, för få. 19 och 10 ger 165. 9 och 20 ger 185, nästan. 8 och 21 ger 187, som stämmer. Bredvid står uträkningen av andra raden: 19 · 5 = 95, 10 · 7 = 70 och 95 + 70 = 165."
     efter: "ram: Två lösningar: Bas, problem 5, Ljusstakarna"
   - nr: 15
     rubrik: Bas, problem 5 · Lösning B
@@ -477,7 +477,7 @@ pabordet:
     efter: "ram: Bas, problem 8: Tärningarna"
   - nr: 23
     rubrik: Bas, problem 8 · Lösning A
-    text: "Lösning A, att kasta och sätta streck. Eleven kastar 36 gånger och sätter ett streck ovanför summan varje gång. Summan 7 får flest streck, sju stycken. Summorna 2, 11 och 12 får bara ett streck var. Kontroll: strecken är 1 + 2 + 4 + 3 + 5 + 7 + 5 + 4 + 3 + 1 + 1 = 36, lika många som kasten."
+    text: "Lösning A, att kasta och sätta streck. Eleven kastar 36 gånger och sätter ett streck ovanför summan varje gång. Här fick summan 7 flest streck, sju stycken, men med 36 nya kast kan 6 eller 8 få flest. Summorna 2, 11 och 12 fick bara ett streck var. Kontroll: strecken är 1 + 2 + 4 + 3 + 5 + 7 + 5 + 4 + 3 + 1 + 1 = 36, lika många som kasten."
     efter: "ram: Två lösningar: Bas, problem 8, Tärningarna"
   - nr: 24
     rubrik: Bas, problem 8 · Lösning B
@@ -489,7 +489,7 @@ pabordet:
     efter: "ram: Bas, problem 9: Parken"
   - nr: 26
     rubrik: Bas, problem 9 · Lösning A
-    text: "Lösning A, en tabell. Först omkretsen: 50 + 50 + 50 + 50 = 200 m och 100 + 50 + 100 + 50 = 300 m. Sedan står hur många meter var och en har gått efter varje varv. Nora: 200, 400 och 600. Elias: 300, 600 och 900. Båda har gått 600 m, Nora efter 3 varv och Elias efter 2, och 600 är inringat hos båda."
+    text: "Lösning A, meter efter varje varv. Först omkretsen: 50 + 50 + 50 + 50 = 200 m och 100 + 50 + 100 + 50 = 300 m. Sedan står hur många meter var och en har gått efter varje varv. Nora: 200, 400 och 600. Elias: 300, 600 och 900. Båda har gått 600 m, Nora efter 3 varv och Elias efter 2, och 600 är inringat hos båda."
     efter: "ram: Två lösningar: Bas, problem 9, Parken"
   - nr: 27
     rubrik: Bas, problem 9 · Lösning B
@@ -525,7 +525,7 @@ pabordet:
     efter: "ram: Medel, problem 2: Borden"
   - nr: 35
     rubrik: Medel, problem 2 · Lösning A
-    text: "Lösning A, en tabell. Tabellen har bord och personer: 1 och 6, 2 och 10, 3 och 14, 4 och 18 och 5 och 22, med +4 mellan raderna. Bredvid står att det är 9 steg med +4 från 1 till 10 bord, och 6 + 9 · 4 = 42."
+    text: Lösning A, att räkna steg om 4. I tabellen ger 1 bord 6 personer, 2 bord 10, 3 bord 14, 4 bord 18 och 5 bord 22, med +4 mellan raderna. Bredvid står att det är 9 steg med +4 från 1 till 10 bord, och 6 + 9 · 4 = 42.
     efter: "ram: Två lösningar: Medel, problem 2, Borden"
   - nr: 36
     rubrik: Medel, problem 2 · Lösning B
@@ -537,11 +537,11 @@ pabordet:
     efter: "ram: Medel, problem 3: Kulpåsarna"
   - nr: 38
     rubrik: Medel, problem 3 · Lösning A
-    text: "Lösning A, andelen blå. Tabellen har kolumnerna påse, blå, alla kulor och andel blå. Påse A har 20 av 100, alltså 20 %, påse B 10 av 40, alltså 25 %, och påse C 5 av 50, alltså 10 %. Raden B är inringad. Bredvid står uträkningen för påse B: 30 + 10 = 40, 10 / 40 = 1/4 och 1/4 = 25/100."
+    text: "Lösning A, andelen blå. Tabellen har kolumnerna påse, blå, alla kulor och andel blå. Påse A har 20 blå av 100, alltså 20 %, påse B har 10 av 40, alltså 25 %, och påse C har 2 av 20, alltså 10 %. Raden B är inringad. Bredvid står uträkningen för påse B: 30 + 10 = 40, 10 / 40 = 1/4 och 1/4 = 25/100."
     efter: "ram: Två lösningar: Medel, problem 3, Kulpåsarna"
   - nr: 39
     rubrik: Medel, problem 3 · Lösning B
-    text: "Lösning B, röda på varje blå. För varje påse är en blå kula ritad med de röda som hör till den: A 80 / 20 = 4, B 30 / 10 = 3 och C 45 / 5 = 9. Färre röda på varje blå ger större chans, så påse B är bäst."
+    text: "Lösning B, röda på varje blå. För varje påse är en blå kula ritad med de röda som hör till den: 80 / 20 = 4 i påse A, 30 / 10 = 3 i påse B och 18 / 2 = 9 i påse C. Färre röda på varje blå ger större chans, så påse B är bäst."
     efter: "ram: Två lösningar: Medel, problem 3, Kulpåsarna"
   - nr: 40
     rubrik: Medel, problem 4 · Bollbytet
@@ -549,7 +549,7 @@ pabordet:
     efter: "ram: Medel, problem 4: Bollbytet"
   - nr: 41
     rubrik: Medel, problem 4 · Lösning A
-    text: "Lösning A, en tabell. Tabellen har kolumnerna till tennis, kvar, tennis och pingis, och golfbollarna till tennis går från 0 till 24, 3 i taget. Raderna där det som är kvar är udda går inte. Bredvid står raden med 6: 6 / 3 = 2 och 2 · 5 = 10 tennis, 20 / 2 = 10 och 10 · 7 = 70 pingis."
+    text: "Lösning A, att pröva tre i taget. Tabellen har kolumnerna till tennis, kvar, tennis och pingis, och golfbollarna till tennis går från 0 till 24, 3 i taget. Raderna där det som är kvar är udda går inte. Bredvid står raden med 6: 6 / 3 = 2 och 2 · 5 = 10 tennis, 20 / 2 = 10 och 10 · 7 = 70 pingis."
     efter: "ram: Två lösningar: Medel, problem 4, Bollbytet"
   - nr: 42
     rubrik: Medel, problem 4 · Lösning B
@@ -573,7 +573,7 @@ pabordet:
     efter: "ram: Medel, problem 6: Skolan"
   - nr: 47
     rubrik: Medel, problem 6 · Lösning A
-    text: "Lösning A, en tabell. Tabellen har kolumnerna elever, 1/3, 20 % och går. 330, 345 och 360 går och är inringade, och 340 och 350 går inte. Bredvid står uträkningen för 345: 345 / 3 = 115, 10 % är 34,5 och 2 · 34,5 = 69. Under står att raderna som går ligger 15 isär: 315, 330, 345, 360, 375 och 390."
+    text: "Lösning A, att pröva 1/3 och 20 %. Tabellen har kolumnerna elever, 1/3, 20 % och går. 320 och 325 går inte, och 330, 345 och 360 går och är inringade. Bredvid står uträkningen för 345: 345 / 3 = 115, 10 % är 34,5 och 2 · 34,5 = 69. Under står att antalen som går ligger 15 isär: 315, 330, 345, 360, 375 och 390."
     efter: "ram: Två lösningar: Medel, problem 6, Skolan"
   - nr: 48
     rubrik: Medel, problem 6 · Lösning B
@@ -585,7 +585,7 @@ pabordet:
     efter: "ram: Medel, problem 7: Samlarbilderna"
   - nr: 50
     rubrik: Medel, problem 7 · Lösning A
-    text: Lösning A, pröva och förbättra. Tre rader har fem tal i rutor. 15, 15, 20, 20, 40 ger summan 110, men 15 är också typvärde. 10, 20, 20, 20, 40 och 14, 16, 20, 20, 40 går, med summan 110 och 110 / 5 = 22.
+    text: Lösning A, pröva och förbättra. Tre rader har fem tal i rutor. 10, 15, 20, 25, 40 ger summan 110, men inget tal står två gånger, så det finns inget typvärde. 10, 20, 20, 20, 40 och 14, 16, 20, 20, 40 går, med summan 110 och 110 / 5 = 22.
     efter: "ram: Två lösningar: Medel, problem 7, Samlarbilderna"
   - nr: 51
     rubrik: Medel, problem 7 · Lösning B
@@ -601,7 +601,7 @@ pabordet:
     efter: "ram: Två lösningar: Medel, problem 8, Klädaffären"
   - nr: 54
     rubrik: Medel, problem 8 · Lösning B
-    text: "Lösning B, ett pris i kronor. Eleven väljer att en keps kostar 10 kr. Då kostar en tröja 3 · 10 / 2 = 15 kr, en kjol 8 · 15 / 3 = 40 kr och en hatt 5 · 40 / 2 = 100 kr. Tabellen har köpen: Ali 3 · 100 = 300, Bea 7 · 40 = 280, Cleo 18 · 15 = 270 och Dan 29 · 10 = 290."
+    text: "Lösning B, ett påhittat pris. Eleven väljer att en keps kostar 10 kr. Då kostar en tröja 3 · 10 / 2 = 15 kr, en kjol 8 · 15 / 3 = 40 kr och en hatt 5 · 40 / 2 = 100 kr. Tabellen har köpen: Ali 3 · 100 = 300, Bea 7 · 40 = 280, Cleo 18 · 15 = 270 och Dan 29 · 10 = 290."
     efter: "ram: Två lösningar: Medel, problem 8, Klädaffären"
   - nr: 55
     rubrik: Medel, problem 9 · Pantpengarna
@@ -613,7 +613,7 @@ pabordet:
     efter: "ram: Två lösningar: Medel, problem 9, Pantpengarna"
   - nr: 57
     rubrik: Medel, problem 9 · Lösning B
-    text: "Lösning B, pröva och förbättra i en tabell. Tabellen har kolumnerna början, Saga, Leo, Mira och kvar. 30 går inte, 81 ger 24 kvar och 54 ger 16 kvar. 16 är dubbelt så mycket som 8, så eleven prövar hälften, 54 / 2 = 27, som ger 9, 6 och 4 kr, och 8 kr kvar. Bredvid står uträkningen för 27: 27 / 3 = 9, 27 − 9 = 18, 18 / 3 = 6, 18 − 6 = 12, 12 / 3 = 4 och 12 − 4 = 8."
+    text: "Lösning B, pröva och förbättra i en tabell. Tabellen har kolumnerna början, Saga, Leo, Mira och kvar. 30 går inte, och 81 ger 24 kvar. 24 är tre gånger så mycket som 8, så eleven prövar en tredjedel av 81, alltså 81 / 3 = 27. Då får Saga 9 kr, Leo 6 kr och Mira 4 kr, och 8 kr blir kvar. Bredvid står uträkningen för 27: 27 / 3 = 9, 27 − 9 = 18, 18 / 3 = 6, 18 − 6 = 12, 12 / 3 = 4 och 12 − 4 = 8."
     efter: "ram: Två lösningar: Medel, problem 9, Pantpengarna"
   - nr: 58
     rubrik: Medel, problem 10 · Smörgåsarna
@@ -633,11 +633,11 @@ pabordet:
     efter: "ram: Avancerat, problem 1: Cykelförrådet"
   - nr: 62
     rubrik: Avancerat, problem 1 · Lösning A
-    text: "Lösning A, en tabell. 11 tvåhjulingar och 0 trehjulingar ger 22 hjul, för få. 9 och 2 ger 24. 7 och 4 ger 26. 6 och 5 ger 27, som stämmer. Bredvid står uträkningen av raden 7 och 4: 7 · 2 = 14, 4 · 3 = 12 och 14 + 12 = 26."
+    text: "Lösning A, att byta ut tvåhjulingar. 11 tvåhjulingar och 0 trehjulingar ger 22 hjul, för få. 9 och 2 ger 24. 7 och 4 ger 26. 6 och 5 ger 27, som stämmer. Bredvid står uträkningen av raden 7 och 4: 7 · 2 = 14, 4 · 3 = 12 och 14 + 12 = 26."
     efter: "ram: Två lösningar: Avancerat, problem 1, Cykelförrådet"
   - nr: 63
     rubrik: Avancerat, problem 1 · Lösning B
-    text: "Lösning B, en ekvation. x är antalet trehjulingar och 11 − x antalet tvåhjulingar. 3x + 2(11 − x) = 27 blir 3x + 22 − 2x = 27 och x + 22 = 27, där 2 · 11 = 22 är hjulen om alla har två. Då är x = 27 − 22 = 5 trehjulingar, och 11 − 5 = 6 tvåhjulingar. Kontroll: 5 · 3 + 6 · 2 = 15 + 12 = 27."
+    text: "Lösning B, att kalla trehjulingarna x. Antalet trehjulingar är x, och antalet tvåhjulingar är 11 − x. 3x + 2(11 − x) = 27 blir 3x + 22 − 2x = 27 och x + 22 = 27, där 2 · 11 = 22 är hjulen om alla har två. Då är x = 27 − 22 = 5 trehjulingar, och 11 − 5 = 6 tvåhjulingar. Kontroll: 5 · 3 + 6 · 2 = 15 + 12 = 27."
     efter: "ram: Två lösningar: Avancerat, problem 1, Cykelförrådet"
   - nr: 64
     rubrik: Avancerat, problem 2 · Glasstapeln
@@ -645,11 +645,11 @@ pabordet:
     efter: "ram: Avancerat, problem 2: Glasstapeln"
   - nr: 65
     rubrik: Avancerat, problem 2 · Lösning A
-    text: "Lösning A, en tabell. Från 2 till 8 glas är 8 − 2 = 6 glas mer och 42 − 18 = 24 cm mer, och 24 / 6 = 4 cm per glas. Tabellen växer med 4: 3 glas 22 cm, 4 glas 26, 5 glas 30, 6 glas 34, som ryms, och 7 glas 38, för högt."
+    text: "Lösning A, ett glas i taget. Från 2 till 8 glas är 8 − 2 = 6 glas mer och 42 − 18 = 24 cm mer, och 24 / 6 = 4 cm per glas. Höjden växer med 4 cm för varje rad: 3 glas 22 cm, 4 glas 26, 5 glas 30, 6 glas 34, som ryms, och 7 glas 38, för högt."
     efter: "ram: Två lösningar: Avancerat, problem 2, Glasstapeln"
   - nr: 66
     rubrik: Avancerat, problem 2 · Lösning B
-    text: "Lösning B, en ekvation. Varje glas ger (42 − 18) / 6 = 4 cm till, så stapeln är foten och en kant på 4 cm för varje glas. Foten är 18 − 2 · 4 = 10 cm, och n glas är 10 + 4n cm. 10 + 4n = 36 ger n = 26 / 4 = 6,5. Ett halvt glas går inte, så 6 glas. Kontroll: 10 + 4 · 6 = 34 och 10 + 4 · 7 = 38. Till vänster är en stapel med 3 glas ritad: 10 + 3 · 4 = 22."
+    text: "Lösning B, uttrycket 10 + 4n. Varje glas ger (42 − 18) / 6 = 4 cm till, så stapeln är ett glas utan kant och en kant på 4 cm för varje glas. Glaset utan kanten är 18 − 2 · 4 = 10 cm, och n glas är 10 + 4n cm. 10 + 4n = 36 ger n = 26 / 4 = 6,5. Ett halvt glas går inte, så 6 glas. Kontroll: 10 + 4 · 6 = 34 och 10 + 4 · 7 = 38. Till vänster är en stapel med 3 glas ritad: 10 + 3 · 4 = 22."
     efter: "ram: Två lösningar: Avancerat, problem 2, Glasstapeln"
   - nr: 67
     rubrik: Avancerat, problem 3 · Stenplattorna
@@ -657,7 +657,7 @@ pabordet:
     efter: "ram: Avancerat, problem 3: Stenplattorna"
   - nr: 68
     rubrik: Avancerat, problem 3 · Lösning A
-    text: "Lösning A, en tabell. Eleven ritar figur 4 och för in figur 1 till 5 i tabellen: ljusa 1, 4, 9, 16 och 25 och mörka 8, 12, 16, 20 och 24, fyra fler varje gång. Figur 10: 10 · 10 = 100 ljusa och 24 + 5 · 4 = 44 mörka. Ur tabellen ser eleven att 4 · 1 + 4 = 8 och 4 · 2 + 4 = 12, så figur n har n · n ljusa och 4n + 4 mörka."
+    text: "Lösning A, figur för figur. Eleven ritar figur 4 och för in figur 1 till 5 i tabellen: ljusa 1, 4, 9, 16 och 25 och mörka 8, 12, 16, 20 och 24, fyra fler varje gång. Figur 10: 10 · 10 = 100 ljusa och 24 + 5 · 4 = 44 mörka. Ur tabellen ser eleven att 4 · 1 + 4 = 8 och 4 · 2 + 4 = 12, så figur n har n · n ljusa och 4n + 4 mörka."
     efter: "ram: Två lösningar: Avancerat, problem 3, Stenplattorna"
   - nr: 69
     rubrik: Avancerat, problem 3 · Lösning B
@@ -669,7 +669,7 @@ pabordet:
     efter: "ram: Avancerat, problem 4: Udda eller jämnt"
   - nr: 71
     rubrik: Avancerat, problem 4 · Lösning A
-    text: Lösning A, en lista. Listan har alla tio par med summan, från 2 + 3 till 5 + 6. Jämn summa blir det med 2 + 4, 2 + 6, 4 + 6 och 3 + 5, som är inringade. 4 par ger jämn summa och 6 udda, tillsammans 10 par. Spelet är inte rättvist.
+    text: Lösning A, att lista alla tio par. Listan har varje par med sin summa, från 2 + 3 till 5 + 6. Jämn summa blir det med 2 + 4, 2 + 6, 4 + 6 och 3 + 5, som är inringade. 4 par ger jämn summa och 6 udda, tillsammans 10 par. Spelet är inte rättvist.
     efter: "ram: Två lösningar: Avancerat, problem 4, Udda eller jämnt"
   - nr: 72
     rubrik: Avancerat, problem 4 · Lösning B
@@ -693,11 +693,11 @@ pabordet:
     efter: "ram: Avancerat, problem 6: Skålarna"
   - nr: 77
     rubrik: Avancerat, problem 6 · Lösning A
-    text: "Lösning A, en tabell. Medelvärdet nu: röd 40 / 5 = 8 och blå 20 / 4 = 5. Eleven prövar att flytta varje boll. Bollen 3 gör den röda större, 9,25, men den blå mindre, 4,6. Bollen 7 ger röd 33 / 4 = 8,25 och blå 27 / 5 = 5,4, båda större. Bollarna 9, 10 och 11 gör den röda mindre. Bredvid står uträkningen för bollen 7."
+    text: "Lösning A, att pröva varje boll. Medelvärdet nu: röd 40 / 5 = 8 och blå 20 / 4 = 5. Eleven prövar att flytta varje boll. Bollen 3 gör medelvärdet i den röda större, 9,25, men i den blå mindre, 4,6. Bollen 7 ger röd 33 / 4 = 8,25 och blå 27 / 5 = 5,4, båda större. Bollarna 9, 10 och 11 gör medelvärdet i den röda mindre. Bredvid står uträkningen för bollen 7."
     efter: "ram: Två lösningar: Avancerat, problem 6, Skålarna"
   - nr: 78
     rubrik: Avancerat, problem 6 · Lösning B
-    text: "Lösning B, ett resonemang. Bollarna står på två tallinjer, med medelvärdena 8 och 5 utmärkta som balanspunkter. Tar man bort en boll under 8 ur den röda skålen, blir medelvärdet där större. Lägger man en boll över 5 i den blå, blir medelvärdet där större. Bollen ska ligga mellan 5 och 8, och bara 7 gör det. Kontroll: 33 / 4 = 8,25 och 27 / 5 = 5,4."
+    text: "Lösning B, medelvärdet som balanspunkt. Bollarna står på två tallinjer, med medelvärdena 8 och 5 utmärkta som balanspunkter. Tar man bort en boll under 8 ur den röda skålen, blir medelvärdet där större. Lägger man en boll över 5 i den blå, blir medelvärdet där större. Bollen ska ligga mellan 5 och 8, och bara 7 gör det. Kontroll: 33 / 4 = 8,25 och 27 / 5 = 5,4."
     efter: "ram: Två lösningar: Avancerat, problem 6, Skålarna"
   - nr: 79
     rubrik: Avancerat, problem 7 · Kvadraten
@@ -709,7 +709,7 @@ pabordet:
     efter: "ram: Två lösningar: Avancerat, problem 7, Kvadraten"
   - nr: 81
     rubrik: Avancerat, problem 7 · Lösning B
-    text: "Lösning B, ett resonemang. Den stora kvadratens sida är en lång och en kort sida. Omkretsen är två långa och två korta, 40 cm. En lång och en kort är hälften: 40 / 2 = 20 cm. Arean är 20 · 20 = 400 cm². Kontroll med 15 och 5: 15 + 5 + 15 + 5 = 40 och 15 + 5 = 20."
+    text: "Lösning B, halva omkretsen. Den stora kvadratens sida är en lång och en kort sida. Rektangelns omkrets är två långa och två korta sidor, 40 cm. En lång och en kort är hälften: 40 / 2 = 20 cm. Arean är 20 · 20 = 400 cm². Kontroll med 15 och 5: 15 + 5 + 15 + 5 = 40 och 15 + 5 = 20."
     efter: "ram: Två lösningar: Avancerat, problem 7, Kvadraten"
   - nr: 82
     rubrik: Avancerat, problem 8 · De lutande kvadraterna
@@ -721,7 +721,7 @@ pabordet:
     efter: "ram: Två lösningar: Avancerat, problem 8, De lutande kvadraterna"
   - nr: 84
     rubrik: Avancerat, problem 8 · Lösning B
-    text: "Lösning B, en tabell och ett mönster. Tabellen har arean för flera kvadrater: 1 och 1 steg ger 2, 2 och 1 ger 5, 3 och 1 ger 10, 2 och 2 ger 8. Arean är a² + b², där a är stegen åt höger och b stegen uppåt. 3 och 2 steg: 3² + 2² = 9 + 4 = 13. Kontroll: kvadraten 2 och 1 är 1 + 4 · 1 = 5 rutor, och 2² + 1² = 5."
+    text: "Lösning B, att dela upp kvadraterna. Till höger är kvadraten med 2 och 1 steg delad i fyra trianglar och en liten kvadrat: 1 + 4 · 1 = 5 rutor. Tabellen har arean för flera kvadrater, räknad på samma sätt: 1 och 1 steg ger 2, 2 och 1 ger 5, 3 och 1 ger 10, 2 och 2 ger 8. Arean är a² + b², där a är stegen åt höger och b stegen uppåt. 3 och 2 steg: 3² + 2² = 9 + 4 = 13. Kontroll: 2² + 1² = 5, som rutorna."
     efter: "ram: Två lösningar: Avancerat, problem 8, De lutande kvadraterna"
   - nr: 85
     rubrik: Avancerat, problem 9 · Staketet
@@ -729,7 +729,7 @@ pabordet:
     efter: "ram: Avancerat, problem 9: Staketet"
   - nr: 86
     rubrik: Avancerat, problem 9 · Lösning A
-    text: "Lösning A, två tabeller. Med staket runt om är bredden och längden ihop 30 m. 15 och 15 ger 225 m², och med bredden 14 eller 16 blir arean 224. Mot väggen är två bredder och en längd 60 m. 15 och 30 ger 450, och 14 och 32 eller 16 och 28 ger 448. Kontroll: 15 + 30 + 15 = 60."
+    text: "Lösning A, att pröva olika bredder. Med staket runt om är bredden och längden ihop 30 m. 15 och 15 ger 225 m², och med bredden 14 eller 16 blir arean 224. Mot väggen är två bredder och en längd 60 m. 15 och 30 ger 450, och 14 och 32 eller 16 och 28 ger 448. Kontroll: 15 + 30 + 15 = 60."
     efter: "ram: Två lösningar: Avancerat, problem 9, Staketet"
   - nr: 87
     rubrik: Avancerat, problem 9 · Lösning B
@@ -741,7 +741,7 @@ pabordet:
     efter: "ram: Avancerat, problem 10: Alla summor"
   - nr: 89
     rubrik: Avancerat, problem 10 · Lösning A
-    text: "Lösning A, en lista. Sätten för 4 ordnade efter hur många tal summan har: 4, sedan 3 + 1, 1 + 3 och 2 + 2, sedan 2 + 1 + 1, 1 + 2 + 1 och 1 + 1 + 2, och sist 1 + 1 + 1 + 1. 1 + 3 + 3 + 1 = 8 sätt. Talen 1 till 5 ger 1, 2, 4, 8 och 16 sätt. Antalet fördubblas, och för 10 blir det 16 · 2 · 2 · 2 · 2 · 2 = 512."
+    text: "Lösning A, att ordna efter antalet tal. Sätten för 4 ordnade efter hur många tal summan har: 4, sedan 3 + 1, 1 + 3 och 2 + 2, sedan 2 + 1 + 1, 1 + 2 + 1 och 1 + 1 + 2, och sist 1 + 1 + 1 + 1. 1 + 3 + 3 + 1 = 8 sätt. Talen 1 till 5 ger 1, 2, 4, 8 och 16 sätt. Antalet fördubblas, och för 10 blir det 16 · 2 · 2 · 2 · 2 · 2 = 512."
     efter: "ram: Två lösningar: Avancerat, problem 10, Alla summor"
   - nr: 90
     rubrik: Avancerat, problem 10 · Lösning B
@@ -763,7 +763,7 @@ ramar:
             - rubrik: Två sätt
               text: Visa två lösningar bredvid varandra, A och B eller två elevers. Börja med det vanligaste, och täck det andra tills det första är förklarat.
             - rubrik: Tankevurpan
-              text: Visa lösning C som en elevs på en annan skola, så att ingen i gruppen äger felet. Låt eleverna hitta tankevurpan, och ställ frågan bredvid C om de kör fast.
+              text: Säg att lösning C kommer från en annan skola, så att ingen i gruppen känner sig utpekad. Låt eleverna hitta tankevurpan, och ställ frågan bredvid C när de kör fast.
             - rubrik: Tankarna bakom
               text: Låt eleverna förklara med egna ord. Säg rätt eller fel först när gruppen har prövat svaret mot problemet.
             - rubrik: Det gemensamma
@@ -793,7 +793,7 @@ ramar:
           - - 4. Chokladbollarna
             - proportionalitet
             - "Gör en tabell: 10, 20 och 30 bollar"
-            - "Börja med mindre tal: 10 bollar tre gånger"
+            - Ta varje mått gånger 1,5
           - - 5. Ljusstakarna
             - två okända tal
             - Pröva och förbättra i en tabell
@@ -852,7 +852,7 @@ ramar:
                 Mindre: 13 äpplen, och 1, 2, 1 och 1 kvar (2 ur varje).
                 Större: Kan det ha funnits 27 äpplen från början? (Nej: (27 − 9) / 4 går inte jämnt ut) Vilka antal äpplen går, om 1, 2, 3 och 3 blir kvar? (13, 17, 21 och så vidare)
             - rubrik: Jämför
-              text: Det Elsa tar ur påsarna är fyra lika delar. I A växer summan med 4 från rad till rad, och i B delar eleven 16 i fyra lika delar.
+              text: Det Elsa tar ur påsarna är fyra lika delar. I A blir alla äpplen från början 4 fler för varje rad, och B delar 16 i fyra lika delar.
             - rubrik: Fel eller osäker
               text: |-
                 Ni säger att svaret är 9. Hur kan ni kontrollera att det svarar på frågan?
@@ -888,11 +888,11 @@ ramar:
             - Lösning A
             - Lösning B
           rader:
-            - - En tabell. Med 2 ur varje påse hade påsarna 3, 4, 5 och 5 äpplen från början, 17 ihop, för få. Med 3 ur varje blir det 21, och med 4 ur varje 5 + 6 + 7 + 7 = 25. Summan växer med 4 från rad till rad.
+            - - Pröva och förbättra. Med 2 ur varje påse hade påsarna 3, 4, 5 och 5 äpplen från början, 17 ihop, för få. Med 3 ur varje blir det 21, och med 4 ur varje 5 + 6 + 7 + 7 = 25. Alla äpplen från början blir 4 fler för varje rad.
               - "Räkna baklänges. Kvar är 1 + 2 + 3 + 3 = 9 äpplen. Elsa tog 25 − 9 = 16 äpplen. De delas i fyra lika delar: 16 / 4 = 4 ur varje påse. Kontroll: 5 + 6 + 7 + 7 = 25."
         - rubrik: Frågorna
           rader:
-            - - Vad ändrar eleven i lösning A från rad till rad, och vad händer med summan?
+            - - Vad ändrar eleven i lösning A från rad till rad, och vad händer med alla äpplen från början?
             - - Varför räknar eleven i lösning B först de äpplen som är kvar?
             - - Var syns det i båda lösningarna att det Elsa tog är fyra lika delar?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja med 10 påsar och 100 äpplen, och varför?
@@ -910,9 +910,9 @@ ramar:
               text: Det Elsa tar ur påsarna är fyra lika delar.
         - rubrik: Lösningarna
           falt:
-            - rubrik: "Lösning A: en tabell"
-              text: Eleven prövar 2, 3 och 4 ur varje påse och ser att summan växer med 4 från rad till rad.
-            - rubrik: "Lösning B: att räkna baklänges"
+            - rubrik: "Lösning A: pröva och förbättra"
+              text: Eleven prövar 2, 3 och 4 ur varje påse, och alla äpplen från början blir 4 fler för varje rad.
+            - rubrik: "Lösning B: räkna baklänges"
               text: Eleven räknar först de 9 äpplen som är kvar och delar de 16 som Elsa tog i fyra lika delar.
             - rubrik: "Lösning C: tankevurpa"
               text: |-
@@ -921,8 +921,8 @@ ramar:
                 Svar: Elsa tog 16 ur varje påse.
             - rubrik: Om lösning C
               text: |-
-                16 är alla äpplen som Elsa tog ur de fyra påsarna, och den andra frågan saknar svar.
-                Fråga: ”Är 16 äpplen ur en påse eller ur alla fyra?”
+                16 är alla äpplen som Elsa tog, och den andra frågan saknar svar.
+                Fråga: ”Hur många äpplen hade påsarna från början, om Elsa tog 16 ur varje?”
     - rubrik: "Lärarens sida: Bas, problem 2, Fiskebodarna"
       text:
         - "Problemet handlar om ett mönster som växer, där varje ny bod tar fyra stickor till. Svaret är 25 stickor till 6 bodar och 81 till 20 bodar. Eleverna bygger, för in i en tabell och beskriver mönstret med ord. Material: tändstickor eller glasspinnar, 30 per par. Idén kommer ur NCM:s Strävorna 4B/5B, Fiskebodar."
@@ -986,7 +986,7 @@ ramar:
             - Lösning A
             - Lösning B
           rader:
-            - - "En tabell. 1 bod har 5 stickor, 2 bodar 9 och 3 bodar 13. Varje ny bod tar 4 stickor till. Tabellen fortsätter: 6 bodar ger 25 stickor, 10 bodar 41 och 20 bodar 81."
+            - - Fortsätt tabellen. 1 bod har 5 stickor, 2 bodar 9 och 3 bodar 13. Varje ny bod tar 4 stickor till, så 6 bodar ger 25 stickor, 10 bodar 41 och 20 bodar 81.
               - "Se strukturen. Den första väggen är 1 sticka, och varje bod tar 4 stickor till: golvet, taket av två stickor och väggen till höger. 6 bodar: 1 + 6 · 4 = 25. 20 bodar: 1 + 20 · 4 = 81. Kontroll: 3 bodar ger 1 + 3 · 4 = 13, som på bilden."
         - rubrik: Frågorna
           rader:
@@ -1008,9 +1008,9 @@ ramar:
               text: Varje ny bod tar 4 stickor till, eftersom den delar en vägg med boden före.
         - rubrik: Lösningarna
           falt:
-            - rubrik: "Lösning A: en tabell"
+            - rubrik: "Lösning A: fortsätta tabellen"
               text: Eleven räknar stickorna till 1, 2 och 3 bodar och fortsätter tabellen med 4 till för varje bod.
-            - rubrik: "Lösning B: att se strukturen"
+            - rubrik: "Lösning B: se strukturen"
               text: "Eleven ser den första väggen för sig och 4 stickor för varje bod: golvet, taket och väggen till höger."
             - rubrik: "Lösning C: tankevurpa"
               text: |-
@@ -1049,7 +1049,7 @@ ramar:
                 Mindre: Faten har 1, 2 och 3 kex, och brickan 6 (4 var).
                 Större: Ett fjärde barn kommer med 5 kex på sitt fat. Hur många får var och en från brickan nu? (Alla har 8: 5, 4, 3 och 3 från brickan)
             - rubrik: Jämför
-              text: Den som har minst får mest från brickan, så att alla har 9. I A syns det i staplarna, och i B i uträkningarna 9 − 3, 9 − 4 och 9 − 5.
+              text: Barnen delar alla 27 kex lika, och var och en får det som fattas till 9. I A syns det i staplarna, och B räknar 9 − 3, 9 − 4 och 9 − 5.
             - rubrik: Fel eller osäker
               text: |-
                 Ni säger att alla får 5 från brickan. Hur kan ni kontrollera att det stämmer med problemet?
@@ -1091,7 +1091,7 @@ ramar:
           rader:
             - - Varför ger eleven i lösning A först kex till Omar och Saga?
             - - Varför räknar eleven i lösning B alla kexen, också de på faten?
-            - - Var syns det i båda lösningarna att den som har minst får mest från brickan?
+            - - Var syns det i båda lösningarna att var och en får det som fattas till 9?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja med 10 barn, och varför?
     - rubrik: "Lösningsförslag: Bas, problem 3, Kexen"
       text:
@@ -1104,12 +1104,12 @@ ramar:
             - rubrik: Kontroll
               text: 3 + 6 = 9, 4 + 5 = 9 och 5 + 4 = 9, och 6 + 5 + 4 = 15.
             - rubrik: Idén
-              text: Den som har minst får mest från brickan, så att alla har 9.
+              text: Barnen delar alla 27 kex lika, och var och en får det som fattas till 9.
         - rubrik: Lösningarna
           falt:
-            - rubrik: "Lösning A: att jämna ut"
+            - rubrik: "Lösning A: jämna ut"
               text: Eleven ger först Omar 2 och Saga 1, så att alla har 5, och delar sedan resten lika.
-            - rubrik: "Lösning B: att räkna alla kex"
+            - rubrik: "Lösning B: räkna alla kex"
               text: Eleven lägger ihop alla 27 kex, delar med 3 och räknar hur många var och en saknar till 9.
             - rubrik: "Lösning C: tankevurpa"
               text: |-
@@ -1118,11 +1118,11 @@ ramar:
                 Svar: Alla får 5 från brickan.
             - rubrik: Om lösning C
               text: |-
-                Då har Omar 3 + 5 = 8 kex och Liam 5 + 5 = 10, så de har olika många.
-                Fråga: ”Ska alla få lika många, eller ha lika många till slut?”
+                Eleven delar kexen på brickan lika, men barnen ska ha lika många kex till slut.
+                Fråga: ”Hur många kex har Omar och Liam till slut med elevens svar?”
     - rubrik: "Lärarens sida: Bas, problem 4, Chokladbollarna"
       text:
-        - "Problemet handlar om proportionalitet: fler bollar kräver mer av allt, i samma förhållande. Svaret är 6 dl havregryn, 3 dl socker, 150 g smör och 3 msk kakao. Eleverna halverar receptet och lägger ihop, eller tar halva receptet tre gånger. Idén kommer ur Skolverkets Problembank för årskurs 4–6, Chokladbollar."
+        - "Problemet handlar om proportionalitet: fler bollar kräver mer av allt, i samma förhållande. Svaret är 6 dl havregryn, 3 dl socker, 150 g smör och 3 msk kakao. Eleverna lägger till halva receptet, eller tar varje mått gånger 1,5. Idén kommer ur Skolverkets Problembank för årskurs 4–6, Chokladbollar."
       delar:
         - rubrik: I passet
           falt:
@@ -1135,7 +1135,7 @@ ramar:
             - rubrik: Ord och tal
               text: "Visa receptkortet och reda ut vad dl, g och msk betyder. Fråga: Vad räknar 20 och 30?"
             - rubrik: Förutse
-              text: Eleverna gör en tabell med 10 bollar, tar halva receptet tre gånger eller räknar per boll. Någon lägger till 1 på varje mått och får 5 dl havregryn.
+              text: Eleverna halverar receptet, tar allt gånger 1,5 eller räknar per boll. Någon lägger till 10 på varje mått, eftersom 30 är 10 fler än 20.
             - rubrik: Kör de fast
               text: |-
                 Föreslå: Prova ett enklare problem med färre bollar.
@@ -1147,10 +1147,10 @@ ramar:
                 Mindre: Bara havregrynet, 2 dl till 10 bollar. Hur mycket till 15 bollar? (3 dl)
                 Större: Hur mycket behövs till 50 bollar? (10 dl havregryn, 5 dl socker, 250 g smör och 5 msk kakao) Hur många bollar räcker 1 kg smör till? (200)
             - rubrik: Jämför
-              text: Varje 10 bollar kräver en sats, alltså halva receptet. I A lägger eleven en sats till receptet för 20, och i B tar eleven satsen tre gånger.
+              text: 30 bollar kräver receptet en och en halv gång. I A lägger eleven till halva receptet, och i B tar eleven varje mått gånger 1,5.
             - rubrik: Fel eller osäker
               text: |-
-                Ni säger att det blir 5 dl havregryn, en dl till. Hur kan ni kontrollera att det stämmer med problemet?
+                Ni säger 14 dl havregryn, eftersom 30 är 10 fler än 20. Hur kan ni kontrollera det mot receptet?
                 ”Är svaret 6 dl havregryn?” Hur kan ni kontrollera att det svarar på frågan?
     - rubrik: "Bas, problem 4: Chokladbollarna"
       innehallstagg: Samband och förändring
@@ -1182,13 +1182,13 @@ ramar:
             - Lösning A
             - Lösning B
           rader:
-            - - "En tabell. Först halva receptet, till 10 bollar: 2 dl, 1 dl, 50 g och 1 msk. Raden för 30 är raderna för 20 och 10 ihop: 4 + 2 = 6 dl havregryn, 2 + 1 = 3 dl socker, 100 + 50 = 150 g smör och 2 + 1 = 3 msk kakao."
-              - "En sats för 10 bollar, tre gånger. Halva receptet är en sats för 10 bollar. 30 bollar är 3 satser: 3 · 2 = 6 dl havregryn, 3 · 1 = 3 dl socker, 3 · 50 = 150 g smör och 3 · 1 = 3 msk kakao. Kontroll: 2 · 2 = 4 dl till 20 bollar."
+            - - "Lägg till hälften. Först halva receptet, till 10 bollar: 2 dl, 1 dl, 50 g och 1 msk. Raden för 30 är raderna för 20 och 10 ihop: 4 + 2 = 6 dl havregryn, 2 + 1 = 3 dl socker, 100 + 50 = 150 g smör och 2 + 1 = 3 msk kakao."
+              - "Receptet 1,5 gånger. 30 / 20 = 1,5, så eleven tar varje mått gånger 1,5: 1,5 · 4 = 6 dl havregryn, 1,5 · 2 = 3 dl socker, 1,5 · 100 = 150 g smör och 1,5 · 2 = 3 msk kakao. Kontroll per boll: 6 / 30 = 4 / 20."
         - rubrik: Frågorna
           rader:
             - - Hur får eleven i lösning A raden för 30 bollar?
-            - - Varför tar eleven i lösning B varje mått gånger 3?
-            - - Var syns satsen för 10 bollar i båda lösningarna?
+            - - Varför tar eleven i lösning B varje mått gånger 1,5?
+            - - Var syns det i båda lösningarna att 30 bollar kräver receptet en och en halv gång?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja för 70 bollar, och varför?
     - rubrik: "Lösningsförslag: Bas, problem 4, Chokladbollarna"
       text:
@@ -1199,25 +1199,25 @@ ramar:
             - rubrik: Svaret
               text: 6 dl havregryn, 3 dl socker, 150 g smör och 3 msk kakao.
             - rubrik: Kontroll
-              text: 30 / 20 = 1,5 och 1,5 · 4 = 6, 1,5 · 2 = 3, 1,5 · 100 = 150.
+              text: "Per boll: 6 / 30 = 4 / 20, 3 / 30 = 2 / 20 och 150 / 30 = 100 / 20."
             - rubrik: Idén
-              text: Varje 10 bollar kräver en sats, alltså halva receptet, och 30 bollar är tre satser.
+              text: 30 bollar kräver receptet en och en halv gång.
         - rubrik: Lösningarna
           falt:
-            - rubrik: "Lösning A: en tabell"
+            - rubrik: "Lösning A: lägga till hälften"
               text: Eleven halverar receptet till 10 bollar och lägger ihop raderna för 20 och 10 bollar.
-            - rubrik: "Lösning B: en sats, tre gånger"
-              text: Eleven ser halva receptet som en sats för 10 bollar och tar varje mått gånger 3.
+            - rubrik: "Lösning B: receptet 1,5 gånger"
+              text: Eleven ser att 30 bollar är 1,5 gånger så många som 20 och tar varje mått gånger 1,5.
             - rubrik: "Lösning C: tankevurpa"
               text: |-
-                10 bollar till: 1 till av allt
-                4 + 1 = 5 och 2 + 1 = 3
-                100 + 1 = 101
-                Svar: 5 dl, 3 dl, 101 g, 3 msk
+                30 bollar är 10 fler än 20.
+                4 + 10 = 14 och 2 + 10 = 12
+                100 + 10 = 110
+                Svar: 14, 12, 110 och 12.
             - rubrik: Om lösning C
               text: |-
-                Socker och kakao blir rätt av en slump. 10 bollar kräver 2 dl havregryn och 50 g smör.
-                Fråga: ”Varför blir socker rätt men havregryn fel?”
+                Eleven lägger till 10 på varje mått. Bollarna blir 1,5 gånger så många, och måtten ska bli 1,5 gånger så stora.
+                Fråga: ”Vad ger elevens sätt för 10 bollar?”
     - rubrik: "Lärarens sida: Bas, problem 5, Ljusstakarna"
       text:
         - Problemet handlar om två okända tal som hänger ihop, antalet femarmade och antalet sjuarmade. Svaret är 8 femarmade och 21 sjuarmade. Eleverna räknar med multiplikation och addition i flera steg och ser att varje byte från femarmad till sjuarmad ger två ljus till. Problemet kommer ur Lithner m.fl. (2025).
@@ -1280,7 +1280,7 @@ ramar:
             - Lösning A
             - Lösning B
           rader:
-            - - "En tabell med femarmade och sjuarmade. 29 och 0 ger 145 ljus, för få. 19 och 10 ger 165. 9 och 20 ger 185, nästan. 8 och 21 ger 187. Andra raden: 19 · 5 = 95, 10 · 7 = 70 och 95 + 70 = 165."
+            - - "Byt tio i taget i en tabell med femarmade och sjuarmade. 29 och 0 ger 145 ljus, för få. 19 och 10 ger 165. 9 och 20 ger 185, nästan. 8 och 21 ger 187. Andra raden: 19 · 5 = 95, 10 · 7 = 70 och 95 + 70 = 165."
               - "Tänk dig att alla 29 är femarmade. Då blir det 29 · 5 = 145 ljus. Det saknas 187 − 145 = 42 ljus. En sjuarmad har två ljus till, så 42 / 2 = 21 sjuarmade, och 29 − 21 = 8 femarmade. Kontroll: 8 · 5 + 21 · 7 = 40 + 147 = 187."
         - rubrik: Frågorna
           rader:
@@ -1302,8 +1302,8 @@ ramar:
               text: "Två okända tal som hänger ihop: en sjuarmad har två ljus mer än en femarmad."
         - rubrik: Lösningarna
           falt:
-            - rubrik: "Lösning A: en tabell"
-              text: Eleven prövar i en tabell och byter tio stakar i taget, tills ljusen blir 187.
+            - rubrik: "Lösning A: byta tio i taget"
+              text: Eleven prövar i en tabell och byter först tio stakar i taget och sedan en, tills ljusen blir 187.
             - rubrik: "Lösning B: alla är femarmade"
               text: Eleven tänker sig att alla 29 är femarmade och delar de 42 ljus som saknas med 2.
             - rubrik: "Lösning C: tankevurpa"
@@ -1575,7 +1575,7 @@ ramar:
             - Lösning A
             - Lösning B
           rader:
-            - - "Kasta och sätt streck. Eleven kastar 36 gånger och sätter ett streck vid summan varje gång. I elevens 36 kast får summan 7 flest streck, sju stycken, och 2, 11 och 12 bara ett var. Kontroll: strecken är 36, lika många som kasten."
+            - - "Kasta och sätt streck. Eleven kastar 36 gånger och sätter ett streck vid summan varje gång. Här fick 7 flest streck, sju stycken, men med 36 nya kast kan 6 eller 8 få flest. Kontroll: strecken är 36, lika många som kasten."
               - En tabell med alla 36 möjliga utfall. Den vita tärningen står till vänster och den grå överst, och det blir 6 · 6 = 36 rutor. 7 står sex gånger, i en sned rad. 6 och 8 står fem gånger var, och 2 och 12 bara en gång.
         - rubrik: Frågorna
           rader:
@@ -1598,7 +1598,7 @@ ramar:
         - rubrik: Lösningarna
           falt:
             - rubrik: "Lösning A: kasta och sätta streck"
-              text: Eleven kastar 36 gånger och sätter ett streck vid summan, och 7 får flest streck.
+              text: Eleven kastar 36 gånger. Här fick 7 flest streck, men med 36 nya kast kan 6 eller 8 få flest.
             - rubrik: "Lösning B: alla möjliga utfall"
               text: Eleven skriver summorna i en tabell med den vita och den grå tärningen, och 7 står sex gånger.
             - rubrik: "Lösning C: tankevurpa"
@@ -1609,8 +1609,8 @@ ramar:
                 Svar: 6, 7 och 8 lika vanliga.
             - rubrik: Om lösning C
               text: |-
-                3 + 4 och 4 + 3 är olika kast med en vit och en grå tärning, så 7 går på 6 sätt.
-                Fråga: ”Är 3 + 4 och 4 + 3 samma kast?”
+                3 + 4 och 4 + 3 är olika kast, så 7 går på 6 sätt.
+                Fråga: ”Hur kan ni pröva elevens svar med en vit och en grå tärning?”
     - rubrik: "Lärarens sida: Bas, problem 9, Parken"
       text:
         - Problemet handlar om omkrets och om när två varv av olika längd går jämnt ut, vilket är idén bakom gemensamma multiplar. Parkerna är 200 m och 300 m runt. De möts i A efter 600 m, när Nora har gått 3 varv och Elias 2. Eleverna räknar omkretsen och hoppar på tallinjer. Idén kommer ur Känguru 2022, Ecolier nr 22.
@@ -1674,7 +1674,7 @@ ramar:
             - Lösning A
             - Lösning B
           rader:
-            - - "En tabell. Först omkretsen: 50 + 50 + 50 + 50 = 200 m och 100 + 50 + 100 + 50 = 300 m. Sedan hur långt de har gått efter varje varv. Nora: 200, 400, 600. Elias: 300, 600. Båda har gått 600 m, Nora efter 3 varv och Elias efter 2."
+            - - "Meter efter varje varv. Först omkretsen: 50 + 50 + 50 + 50 = 200 m och 100 + 50 + 100 + 50 = 300 m. Sedan hur långt de har gått efter varje varv. Nora: 200, 400, 600. Elias: 300, 600. Båda har gått 600 m, Nora efter 3 varv och Elias efter 2."
               - "Hopp på tallinjer. Omkretsen: 4 · 50 = 200 m och 2 · 100 + 2 · 50 = 300 m. Nora hoppar 200 m i taget och Elias 300 m. 600 är det första talet där båda landar. Nora: 600 / 200 = 3 varv. Elias: 600 / 300 = 2 varv."
         - rubrik: Frågorna
           rader:
@@ -1696,7 +1696,7 @@ ramar:
               text: De möts i punkten A när båda har gått hela varv och lika långt.
         - rubrik: Lösningarna
           falt:
-            - rubrik: "Lösning A: en tabell"
+            - rubrik: "Lösning A: meter efter varje varv"
               text: Eleven skriver hur långt var och en har gått efter varje varv, tills samma tal står hos båda.
             - rubrik: "Lösning B: hopp på tallinjer"
               text: Eleven hoppar 200 m och 300 m i taget på två tallinjer och letar efter första talet där båda landar.
@@ -1709,7 +1709,7 @@ ramar:
             - rubrik: Om lösning C
               text: |-
                 Omkretsen stämmer, men 2 varv är bara Elias varv. Nora har gått 600 / 200 = 3 varv.
-                Fråga: ”Vems varv är 2, och vad saknas i svaret?”
+                Fråga: ”Var är Elias när Nora har gått 2 varv?”
     - rubrik: "Lärarens sida: Bas, problem 10, Vågen"
       text:
         - "Problemet handlar om likheter: tre okända vikter som hänger ihop två och två. Svaret är 270 g, och rektangeln väger 170 g, cirkeln 30 g och triangeln 70 g. Eleverna lägger ihop och jämför vägningar, och ser att varje kloss står på två vågar. Idén kommer ur Känguru 2024, Ecolier nr 19."
@@ -1795,9 +1795,9 @@ ramar:
               text: "Tre okända vikter som hänger ihop: varje kloss står på två vågar."
         - rubrik: Lösningarna
           falt:
-            - rubrik: "Lösning A: att lägga ihop vågarna"
+            - rubrik: "Lösning A: lägga ihop vågarna"
               text: Eleven lägger ihop alla tre vågarna, 540 g, och delar med 2 eftersom varje kloss är med två gånger.
-            - rubrik: "Lösning B: att jämföra vågarna"
+            - rubrik: "Lösning B: jämföra vågarna"
               text: Eleven jämför de två vågarna med cirkeln och ser att rektangeln väger 100 g mer än triangeln.
             - rubrik: "Lösning C: tankevurpa"
               text: |-
@@ -1880,7 +1880,7 @@ ramar:
             - rubrik: Ord och tal
               text: "Reda ut likbent, ben och bas med bilden, och visa den som inte går ihop. Fråga: Vad räknar 12? Är 3, 3, 2 och 2, 3, 3 olika?"
             - rubrik: Förutse
-              text: Paren lägger och ritar pinnar, gör en lista utan ordning eller en tabell efter benen. Någon räknar 2, 2, 4, fast den blir platt.
+              text: Paren lägger och ritar pinnar, gör en lista utan ordning eller en tabell efter benen. Någon räknar med platta trianglar, som 2, 2, 4.
             - rubrik: Kör de fast
               text: |-
                 Föreslå: Lägg en triangel och skriv upp sidorna.
@@ -1950,19 +1950,20 @@ ramar:
               text: Basen är kortare än benen tillsammans, och pinnarna är högst 12.
         - rubrik: Lösningarna
           falt:
-            - rubrik: "Lösning A: att bygga och sortera"
+            - rubrik: "Lösning A: bygga och sortera"
               text: Eleven lägger trianglar, ritar dem som går ihop och sorterar dem efter benen från 1 till 5.
             - rubrik: "Lösning B: en lista efter benen"
               text: Eleven skriver villkoren först och räknar för varje ben vilka baser som går.
             - rubrik: "Lösning C: tankevurpa"
               text: |-
-                Ben 2: bas 1, 2, 3 eller 4
-                1 + 4 + 5 + 4 + 2 = 16
-                Svar: 16 likbenta trianglar.
+                Ben 1: bas 1, 2. Ben 2: bas 1–4
+                Ben 3: bas 1–6. Ben 4: bas 1–4
+                Ben 5: bas 1, 2. Det blir 18.
+                Svar: 18 likbenta trianglar.
             - rubrik: Om lösning C
               text: |-
-                Med ben 2 räknar eleven basen 4, men 2 + 2 = 4, så triangeln blir platt.
-                Fråga: ”Vilken triangel i lösningen går inte att lägga?”
+                Eleven räknar med platta trianglar, som 3, 3, 6, där basen är lika lång som benen tillsammans.
+                Fråga: ”Hur ser 3, 3, 6 ut när ni lägger den?”
     - rubrik: "Lärarens sida: Medel, problem 2, Borden"
       text:
         - Problemet handlar om ett mönster som växer lika mycket för varje bord. Vid 10 bord får 42 personer plats, och vid n bord 4 · n + 2. Eleverna ser mönstret i en tabell och i bilden och skriver en regel med ord eller med n. Idén kommer ur Nämnaren 2025:2, problem 4476.
@@ -2026,7 +2027,7 @@ ramar:
             - Lösning A
             - Lösning B
           rader:
-            - - "En tabell. 1 bord ger 6, 2 bord 10, 3 bord 14 och 4 bord 18. Det blir 4 till för varje bord. Från 1 till 10 bord är det 9 steg: 6 + 9 · 4 = 42. Regeln i ord: 6, och sedan 4 till för varje nytt bord."
+            - - "Räkna steg om 4. 1 bord ger 6, 2 bord 10, 3 bord 14 och 4 bord 18. Det blir 4 till för varje bord. Från 1 till 10 bord är det 9 steg: 6 + 9 · 4 = 42. Regeln i ord: 6, och sedan 4 till för varje nytt bord."
               - "Räkna platserna i bilden. Varje bord har fyra platser, två uppe och två nere. Till det kommer en plats i varje ände. 10 bord: 4 · 10 + 2 = 42. Regel: 4 · n + 2. Kontroll med 3 bord: 4 · 3 + 2 = 14, som i bilden."
         - rubrik: Frågorna
           rader:
@@ -2048,9 +2049,9 @@ ramar:
               text: Varje nytt bord ger fyra platser till, två uppe och två nere.
         - rubrik: Lösningarna
           falt:
-            - rubrik: "Lösning A: en tabell"
+            - rubrik: "Lösning A: räkna steg om 4"
               text: Eleven ser att det blir 4 personer till för varje bord och räknar 9 steg från 6.
-            - rubrik: "Lösning B: att räkna platserna"
+            - rubrik: "Lösning B: räkna platserna"
               text: Eleven ser fyra platser vid varje bord och en plats i varje ände, och skriver 4 · n + 2.
             - rubrik: "Lösning C: tankevurpa"
               text: |-
@@ -2064,7 +2065,7 @@ ramar:
                 Fråga: ”Hur kan ni kontrollera 44 med en ritning?”
     - rubrik: "Lärarens sida: Medel, problem 3, Kulpåsarna"
       text:
-        - Problemet handlar om chans som en andel av alla kulor. Svaret är påse B, där 1/4 av kulorna är blå. Eleverna jämför andelar som bråk eller procent, eller röda mot blå, och ser att flest blå inte ger störst chans. Idén kommer ur Problembanken åk 7–9, problem 11, Kulpåsen.
+        - Problemet handlar om chans som en andel av alla kulor. Svaret är påse B, där 1/4 av kulorna är blå. Eleverna jämför andelar som bråk eller procent, eller röda mot blå, och ser att flest blå eller färst röda inte ger störst chans. Idén kommer ur Problembanken åk 7–9, problem 11, Kulpåsen.
       delar:
         - rubrik: I passet
           falt:
@@ -2077,7 +2078,7 @@ ramar:
             - rubrik: Ord och tal
               text: "Visa bilden. Fråga: Vad betyder chans? Vad räknar 20 i påse A, och hur många kulor finns det i den?"
             - rubrik: Förutse
-              text: Bråk eller procent av alla kulor, röda mot blå, eller kulor som ritas. Några väljer påse A, för den har flest blå.
+              text: Bråk eller procent av alla kulor, röda mot blå, eller kulor som ritas. Några väljer påse A, som har flest blå, eller C, som har färst röda.
             - rubrik: Kör de fast
               text: |-
                 Föreslå: Gör en tabell med det ni vet om varje påse.
@@ -2086,14 +2087,14 @@ ramar:
               text: Räkna hur stor del av alla kulor som är blå. Det ger bort lösningen.
             - rubrik: Mindre och större
               text: |-
-                Mindre: Påse A har 8 röda och 2 blå, påse B 3 och 1, och påse C 9 och 1 (påse B).
-                Större: Hur många blå måste ni lägga i påse C för att den ska ge samma chans som påse B? (10, så att 15 av 60 är blå)
+                Mindre: Påse A har 12 röda och 3 blå, påse B 6 och 2, och påse C 4 och 1 (påse B).
+                Större: Hur många blå måste ni lägga i påse C för att den ska ge samma chans som påse B? (4, så att 6 av 24 är blå)
             - rubrik: Jämför
-              text: Chansen beror på hur många röda det finns för varje blå. I A räknar eleven andelen av alla, i B röda på varje blå, och båda ger påse B.
+              text: Chansen beror på hur stor del av kulorna som är blå. A räknar andelen, och i B betyder 3 röda på varje blå att 1 av 4 är blå.
             - rubrik: Fel eller osäker
               text: |-
                 Ni säger att påse A är bäst, för den har flest blå. Hur kan ni kontrollera det mot problemet?
-                Ni säger att påse B är bäst, för den har minst röda. Hur vet ni att det räcker?
+                Ni säger att påse C är bäst, för den har färst röda. Hur kan ni kontrollera det mot problemet?
     - rubrik: "Medel, problem 3: Kulpåsarna"
       innehallstagg: Sannolikhet och statistik
       text:
@@ -2106,7 +2107,7 @@ ramar:
       listor:
         - rubrik: Kulpåsarna
           rader:
-            - - I tre påsar finns röda och blå kulor. Påse A har 80 röda och 20 blå. Påse B har 30 röda och 10 blå. Påse C har 45 röda och 5 blå. Du tar en kula ur en påse utan att titta.
+            - - I tre påsar finns röda och blå kulor. Påse A har 80 röda och 20 blå. Påse B har 30 röda och 10 blå. Påse C har 18 röda och 2 blå. Du tar en kula ur en påse utan att titta.
         - rubrik: Frågorna
           rader:
             - - Vilken påse ger störst chans att få en blå kula, och varför?
@@ -2124,8 +2125,8 @@ ramar:
             - Lösning A
             - Lösning B
           rader:
-            - - "Hur stor del av kulorna är blå? Påse A: 20 av 100, alltså 20 %. Påse B: 10 av 40, alltså 1/4 eller 25 %. Påse C: 5 av 50, alltså 10 %. Påse B har störst andel blå. För påse B räknade eleven 30 + 10 = 40 och 10 / 40 = 1/4 = 25/100."
-              - "Röda på varje blå. Påse A: 80 / 20 = 4, alltså 4 röda på varje blå. Påse B: 30 / 10 = 3 röda på varje blå. Påse C: 45 / 5 = 9 röda på varje blå. Färre röda på varje blå ger större chans. Påse B är bäst."
+            - - "Hur stor del av kulorna är blå? Påse A: 20 av 100, alltså 20 %. Påse B: 10 av 40, alltså 1/4 eller 25 %. Påse C: 2 av 20, alltså 10 %. Påse B har störst andel blå. För påse B räknade eleven 30 + 10 = 40 och 10 / 40 = 1/4 = 25/100."
+              - "Röda på varje blå. Påse A: 80 / 20 = 4, alltså 4 röda på varje blå. Påse B: 30 / 10 = 3 röda på varje blå. Påse C: 18 / 2 = 9 röda på varje blå. Färre röda på varje blå ger större chans. Påse B är bäst."
         - rubrik: Frågorna
           rader:
             - - Vad räknar eleven ut för varje påse i lösning A?
@@ -2141,24 +2142,24 @@ ramar:
             - rubrik: Svaret
               text: Påse B, där 1/4 av kulorna är blå.
             - rubrik: Kontroll
-              text: 20 / 100 = 1/5, 10 / 40 = 1/4 och 5 / 50 = 1/10, och 1/4 är störst.
+              text: 20 / 100 = 1/5, 10 / 40 = 1/4 och 2 / 20 = 1/10, och 1/4 är störst.
             - rubrik: Idén
-              text: Chansen beror på hur många röda det finns för varje blå.
+              text: Chansen beror på hur stor del av kulorna i påsen som är blå.
         - rubrik: Lösningarna
           falt:
             - rubrik: "Lösning A: andelen blå"
               text: Eleven räknar i procent hur stor del av alla kulor i varje påse som är blå.
             - rubrik: "Lösning B: röda på varje blå"
-              text: Eleven räknar hur många röda kulor det finns på varje blå och väljer påsen med färst röda.
+              text: Eleven räknar hur många röda kulor det finns på varje blå och väljer påsen med färst röda på varje blå.
             - rubrik: "Lösning C: tankevurpa"
               text: |-
-                A har 20 blå, B 10 och C 5.
+                A har 20 blå, B 10 och C 2.
                 20 är flest.
                 Svar: Påse A, den har flest blå.
             - rubrik: Om lösning C
               text: |-
                 Påse A har flest blå men också flest röda, och bara 1/5 av kulorna är blå.
-                Fråga: ”Spelar det någon roll hur många röda det finns?”
+                Fråga: ”Vilken påse skulle eleven välja, om påse A hade 1 000 röda?”
     - rubrik: "Lärarens sida: Medel, problem 4, Bollbytet"
       text:
         - "Problemet har flera svar, och båda bytena ska gå jämnt ut. Omar kan få 0, 10, 20, 30 eller 40 tennisbollar, med 91, 70, 49, 28 eller 7 pingisbollar. Eleverna arbetar systematiskt med multiplikation och division, så att inget svar saknas. Material: klossar eller kuber, 26 per par. Idén kommer ur Hagland, Hedrén och Taflin (2005)."
@@ -2174,7 +2175,7 @@ ramar:
             - rubrik: Ord och tal
               text: "Peka på bilden vid ordet byta. Fråga: Vad räknar 3, och vad räknar 5? Får Omar ta bara pingisbollar? Ja, det är ett av fem sätt."
             - rubrik: Förutse
-              text: En tabell, bollar som ritas, eller alla till pingis först. Några hittar ett svar och slutar.
+              text: En tabell, bollar som ritas, eller alla till pingis först. Några hittar ett svar och slutar, och andra svarar med antalet byten.
             - rubrik: Kör de fast
               text: |-
                 Föreslå: Välj hur många golfbollar Omar byter mot tennisbollar. Hur många blir kvar till pingis?
@@ -2189,7 +2190,7 @@ ramar:
               text: Två treor är sex, och det som blir kvar ska gå att dela med 2. I A syns det i varannan rad, och i B när eleven flyttar 6 golfbollar.
             - rubrik: Fel eller osäker
               text: |-
-                Ni säger att det går att byta 9 golfbollar mot tennisbollar. Hur kan ni kontrollera det mot problemet?
+                Ni säger 2 tennisbollar och 10 pingisbollar. Hur kan ni kontrollera det mot problemet?
                 ”Är det alla sätt?” Hur kan ni kontrollera att inget saknas?
     - rubrik: "Medel, problem 4: Bollbytet"
       innehallstagg: Taluppfattning
@@ -2222,7 +2223,7 @@ ramar:
             - Lösning A
             - Lösning B
           rader:
-            - - "En tabell med golfbollarna till tennis: 0, 3, 6 och så vidare. Det som blir kvar ska gå att dela med 2, och det går i varannan rad. Raden med 6: 6 / 3 = 2 och 2 · 5 = 10 tennis, 20 / 2 = 10 och 10 · 7 = 70 pingis. Fem sätt."
+            - - "Pröva golfbollar till tennis, tre i taget: 0, 3, 6 och så vidare. Det som blir kvar ska gå att dela med 2, och det går i varannan rad. Raden med 6: 6 / 3 = 2 och 2 · 5 = 10 tennis, 20 / 2 = 10 och 10 · 7 = 70 pingis. Fem sätt."
               - "Alla till pingis först: 26 / 2 = 13 och 13 · 7 = 91. Sedan går 6 golfbollar i taget till tennis, så att tre tvåor blir två treor. Det ger 21 pingis färre och 10 tennis fler. Pingis: 91, 70, 49, 28 och 7. Tennis: 0, 10, 20, 30 och 40."
         - rubrik: Frågorna
           rader:
@@ -2237,27 +2238,27 @@ ramar:
         - rubrik: Svaret
           falt:
             - rubrik: Svaret
-              text: 5 sätt om Omar får ta bara en sort, 4 om han måste ha båda.
+              text: 0, 10, 20, 30 eller 40 tennisbollar, med 91, 70, 49, 28 eller 7 pingisbollar.
             - rubrik: Kontroll
-              text: 0 tennis och 91 pingis, 10 och 70, 20 och 49, 30 och 28, 40 och 7.
+              text: "Tennis + pingis: 0 + 26, 6 + 20, 12 + 14, 18 + 8, 24 + 2 golfbollar."
             - rubrik: Idén
               text: Golfbollarna till tennis går i treor och resten i tvåor, så sätten skiljer sig med 6 golfbollar.
         - rubrik: Lösningarna
           falt:
-            - rubrik: "Lösning A: en tabell"
+            - rubrik: "Lösning A: pröva tre i taget"
               text: Eleven prövar 0, 3, 6 och fler golfbollar till tennis, och resten går att dela med 2 i varannan rad.
             - rubrik: "Lösning B: alla till pingis först"
               text: Eleven byter alla mot pingis och flyttar sedan 6 golfbollar i taget från pingis till tennis.
             - rubrik: "Lösning C: tankevurpa"
               text: |-
-                9 / 3 = 3 och 3 · 5 = 15
-                26 − 9 = 17, 17 / 2 = 8 rest 1
-                8 · 7 = 56
-                Svar: 15 tennis och 56 pingis.
+                6 + 20 = 26 golfbollar
+                Tennis: 6 / 3 = 2
+                Pingis: 20 / 2 = 10
+                Svar: 2 tennis och 10 pingis.
             - rubrik: Om lösning C
               text: |-
-                En golfboll blir kvar, men Omar vill byta bort alla. 26 − 9 = 17 är udda.
-                Fråga: ”Vilka antal till tennis går jämnt ut?”
+                Eleven svarar med antalet byten. Varje byte ger 5 tennisbollar eller 7 pingisbollar: 2 · 5 = 10 och 10 · 7 = 70.
+                Fråga: ”Hur många tennisbollar ger 6 golfbollar?”
     - rubrik: "Lärarens sida: Medel, problem 5, Tangrammet"
       text:
         - "Area som delar av en helhet. De stora trianglarna är 100 cm² var, den mellanstora, kvadraten och parallellogrammet 50 cm² och de små 25 cm². Eleverna lägger bitarna på varandra och ser att olika former kan ha samma area. Material: ett tangram per par, eller en kopia av bilden och en sax. Idén kommer ur Hagland, Hedrén och Taflin (2005)."
@@ -2355,7 +2356,7 @@ ramar:
             - rubrik: Om lösning C
               text: |-
                 Eleven delar som om alla sju bitar vore lika stora, men fyra små täcker en stor triangel.
-                Fråga: ”Är bitarna lika stora? Hur kan ni pröva det?”
+                Fråga: ”Hur kan ni pröva 57 cm² med bitarna?”
     - rubrik: "Lärarens sida: Medel, problem 6, Skolan"
       text:
         - Problemet handlar om bråk, procent och delbarhet. Skolan kan ha 315, 330, 345, 360, 375 eller 390 elever, alltså ett antal som går att dela med 15. Eleverna prövar antal, ser att 20 % är 1/5 och letar efter alla svar. Idén kommer ur Hagland, Hedrén och Taflin (2005).
@@ -2419,7 +2420,7 @@ ramar:
             - Lösning A
             - Lösning B
           rader:
-            - - "Pröva i en tabell. 330 går: 1/3 är 110 och 20 % är 66. 340 går inte: 340 / 3 = 113 rest 1. 345 och 360 går. 20 % av 345: 10 % är 34,5 och 2 · 34,5 = 69. Svaren ligger 15 isär: 315, 330, 345, 360, 375 och 390."
+            - - "Pröva 1/3 och 20 % av olika antal. 320 och 325 går inte: 320 / 3 = 106 rest 2 och 325 / 3 = 108 rest 1. 330 går: 1/3 är 110 och 20 % är 66. 345 och 360 går också. Svaren ligger 15 isär: 315, 330, 345, 360, 375 och 390."
               - "1/3 kräver att antalet går att dela med 3. 20 % är 1/5 och kräver att det går att dela med 5. Då går det att dela med 15. 300 / 15 = 20, men 300 är för få. 15-hopp från 300: 315, 330, 345, 360, 375 och 390."
         - rubrik: Frågorna
           rader:
@@ -2441,7 +2442,7 @@ ramar:
               text: 1/3 och 20 % går jämnt ut när antalet går att dela med 3 och med 5.
         - rubrik: Lösningarna
           falt:
-            - rubrik: "Lösning A: en tabell"
+            - rubrik: "Lösning A: pröva 1/3 och 20 %"
               text: Eleven prövar antal i en tabell och ser att de som går ligger 15 isär.
             - rubrik: "Lösning B: resonemang och tallinje"
               text: Eleven ser att antalet ska gå att dela med 3 och 5, alltså med 15, och hoppar 15 i taget.
@@ -2479,7 +2480,7 @@ ramar:
             - rubrik: Mindre och större
               text: |-
                 Mindre: Den som har flest har 8, medelvärdet är 5, och medianen och typvärdet är 4 (3 svar).
-                Större: Hitta alla svar, om alla har minst en bild. Hur vet ni att ni har alla? (14 svar, ordnade efter var det andra 20 står)
+                Större: Hitta alla svar, om alla fem har minst en bild och bara 20 är typvärde. Hur vet ni att ni har alla? (14 svar, efter var det andra 20 står)
             - rubrik: Jämför
               text: Summan är 5 · 22 = 110, och 20 står minst två gånger. A prövar och räknar summan, och B börjar med de tal som måste stå.
             - rubrik: Fel eller osäker
@@ -2517,7 +2518,7 @@ ramar:
             - Lösning A
             - Lösning B
           rader:
-            - - "Pröva fem tal i ordning. 15, 15, 20, 20 och 40 ger summan 110, men då är 15 också typvärde. 10, 20, 20, 20 och 40 går: 10 + 20 + 20 + 20 + 40 = 110, och 110 / 5 = 22. 14, 16, 20, 20 och 40 går också."
+            - - "Pröva fem tal i storleksordning. 10, 15, 20, 25 och 40 ger summan 110, men inget tal står två gånger, så det finns inget typvärde. 10, 20, 20, 20 och 40 går: 10 + 20 + 20 + 20 + 40 = 110, och 110 / 5 = 22. 14, 16, 20, 20 och 40 går också."
               - 20 står i mitten och 40 sist. Summan är 5 · 22 = 110, och 110 − 20 − 40 = 50 är kvar. Typvärdet kräver ett 20 till. På fjärde platsen ger det 30 till två rutor, som 10 och 20 eller 14 och 16. På andra platsen går till exempel 5 och 25.
         - rubrik: Frågorna
           rader:
@@ -2532,7 +2533,7 @@ ramar:
         - rubrik: Svaret
           falt:
             - rubrik: Svaret
-              text: Till exempel 10, 20, 20, 20 och 40. Har alla minst en bild, finns 14.
+              text: Har alla minst en bild, finns det 14 svar, som 10, 20, 20, 20, 40.
             - rubrik: Kontroll
               text: 10 + 20 + 20 + 20 + 40 = 110 = 5 · 22, medianen 20 och typvärdet 20.
             - rubrik: Idén
@@ -2540,9 +2541,9 @@ ramar:
         - rubrik: Lösningarna
           falt:
             - rubrik: "Lösning A: pröva och förbättra"
-              text: Eleven prövar fem tal i ordning med summan 110 och ändrar dem tills typvärdet bara är 20.
+              text: Eleven prövar fem tal i storleksordning med summan 110 och ändrar dem tills typvärdet är 20.
             - rubrik: "Lösning B: det som måste stå"
-              text: Eleven skriver först 20 i mitten och 40 sist, och de 50 som är kvar ska ha ett 20 till.
+              text: Eleven sätter 20 i mitten och 40 sist. De tre andra blir 50, och ett av dem måste vara 20.
             - rubrik: "Lösning C: tankevurpa"
               text: |-
                 15 + 15 + 20 + 20 + 40 = 110
@@ -2582,7 +2583,7 @@ ramar:
               text: Vi räknar om allt till samma enhet. En hatt är 10 kepsar i A och 100 kr i B, alltså 10 kepsar i båda. Lyft fram att enheten går att välja.
             - rubrik: Fel eller osäker
               text: |-
-                Ni säger att Dan betalar mest, för han köper flest saker. Hur kan ni kontrollera det mot problemet?
+                Ni säger att en kjol kostar som 8 tröjor. Hur kan ni kontrollera det mot problemet?
                 ”Är ordningen rätt?” Hur kan ni kontrollera den på ett annat sätt?
     - rubrik: "Medel, problem 8: Klädaffären"
       innehallstagg: Samband och förändring
@@ -2640,17 +2641,18 @@ ramar:
           falt:
             - rubrik: "Lösning A: allt i kepsar"
               text: Eleven går igenom likheterna steg för steg och räknar om tröjor, kjolar och hattar till kepsar.
-            - rubrik: "Lösning B: ett pris i kronor"
+            - rubrik: "Lösning B: ett påhittat pris"
               text: Eleven bestämmer att en keps kostar 10 kr och räknar ut priset på de andra sakerna.
             - rubrik: "Lösning C: tankevurpa"
               text: |-
-                Ali 3, Bea 7, Cleo 18, Dan 29
-                Dan köper flest saker.
-                Svar: Dan, Cleo, Bea och Ali.
+                1 kjol = 8 tröjor = 12 kepsar
+                1 hatt = 5 · 12 / 2 = 30 kepsar
+                Ali 90, Bea 84, Dan 29, Cleo 27
+                Svar: Ali, Bea, Dan och Cleo.
             - rubrik: Om lösning C
               text: |-
-                Antalet saker säger inget om priset: en hatt kostar som 10 kepsar.
-                Fråga: ”Hur kan ni jämföra köpen, när sakerna kostar olika?”
+                Eleven läser 3 kjolar som en kjol. En kjol kostar som 4 kepsar, och en hatt som 10.
+                Fråga: ”Vad kostar 3 kjolar i kepsar med elevens priser?”
     - rubrik: "Lärarens sida: Medel, problem 9, Pantpengarna"
       text:
         - Problemet handlar om bråk av det som finns kvar och om att räkna baklänges. Från början fanns 27 kr, och Saga tog 9 kr, Leo 6 kr och Mira 4 kr. Eleverna ser att 8 kr är 2/3 av det Mira hittade i asken och går bakåt ett steg i taget. Idén kommer ur Hagland, Hedrén och Taflin (2005).
@@ -2715,11 +2717,11 @@ ramar:
             - Lösning B
           rader:
             - - "Baklänges med staplar. Mira tog 1/3, så 8 kr är 2/3 av det hon hittade. 8 / 2 = 4, och Mira hittade 3 · 4 = 12 kr. Leo lämnade också 2/3 kvar: 12 / 2 = 6 och 3 · 6 = 18. Saga gjorde likadant: 18 / 2 = 9 och 3 · 9 = 27 kr."
-              - "Pröva och förbättra i en tabell. 30 går inte: Leo kan inte ta 1/3 av 20 kr i hela kronor. 81 ger 24 kr kvar, för mycket. 54 ger 16 kr kvar, dubbelt så mycket som 8 kr. Hälften, 27, ger 9, 6 och 4 kr, och 8 kr kvar."
+              - "Pröva och förbättra i en tabell. 30 går inte: Leo kan inte ta 1/3 av 20 kr i hela kronor. 81 ger 24 kr kvar, tre gånger 8 kr. Med 81 / 3 = 27 kr tar syskonen 9, 6 och 4 kr, och 8 kr blir kvar."
         - rubrik: Frågorna
           rader:
             - - Varför börjar eleven i lösning A med den nedersta stapeln?
-            - - Varför prövar eleven 27 efter 54 i lösning B?
+            - - Varför prövar eleven 27 efter 81 i lösning B?
             - - Var syns det i båda lösningarna att 2/3 blir kvar varje gång?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja med fem syskon, och varför?
     - rubrik: "Lösningsförslag: Medel, problem 9, Pantpengarna"
@@ -2739,7 +2741,7 @@ ramar:
             - rubrik: "Lösning A: baklänges med staplar"
               text: Eleven ser att de 8 kr som blir kvar är två tredjedelar och går bakåt stapel för stapel.
             - rubrik: "Lösning B: pröva och förbättra"
-              text: Eleven prövar belopp i en tabell, ser att 54 kr ger 16 kr kvar och prövar hälften.
+              text: Eleven prövar belopp i en tabell. 81 ger 24 kr kvar, tre gånger 8, så eleven prövar 81 / 3 = 27.
             - rubrik: "Lösning C: tankevurpa"
               text: |-
                 Mira tog 8 kr: 3 · 8 = 24
@@ -2760,7 +2762,7 @@ ramar:
               text: Frågan, talen 2, 3 och 25, och orden ”lika mycket” och ”rättvist”.
             - rubrik: Lyft ut
               text: |-
-                Vi vet: Elsa har 2 smörgåsar och Jonas 3, alla äter lika mycket, och Kim betalar 25 kr.
+                Vi vet: Elsas 2 och Jonas 3 smörgåsar är lika stora, alla äter lika mycket, och Kim betalar 25 kr.
                 Vi ska ta reda på: hur mycket Elsa och Jonas ska få.
             - rubrik: Ord och tal
               text: "Fråga: Vad betyder rättvist här? Betalar Kim för smörgåsarna Elsa och Jonas hade med sig, eller för det han äter?"
@@ -2794,7 +2796,7 @@ ramar:
       listor:
         - rubrik: Smörgåsarna
           rader:
-            - - Elsa, Jonas och Kim är på utflykt. Elsa har med sig 2 smörgåsar och Jonas har 3. Kim har glömt sin matsäck. De delar de fem smörgåsarna så att alla tre äter lika mycket. Sedan ger Kim 25 kr till Elsa och Jonas för det han har ätit.
+            - - Elsa, Jonas och Kim är på utflykt. Elsa har med sig 2 smörgåsar och Jonas har 3. Smörgåsarna är lika stora. Kim har glömt sin matsäck. De delar de fem smörgåsarna så att alla tre äter lika mycket. Sedan ger Kim 25 kr till Elsa och Jonas för det han har ätit.
         - rubrik: Frågorna
           rader:
             - - Hur ska Elsa och Jonas dela de 25 kronorna, så att det blir rättvist?
@@ -2831,7 +2833,7 @@ ramar:
             - rubrik: Kontroll
               text: Elsa ger 2 − 5/3 = 1/3 och Jonas 3 − 5/3 = 4/3, och 5 + 4 · 5 = 25.
             - rubrik: Idén
-              text: "Kim betalar för det han får av var och en: 1/3 av Elsa och 4/3 av Jonas."
+              text: "Kim betalar för det han får av var och en: 1/3 smörgås av Elsa och 4/3 av Jonas."
         - rubrik: Lösningarna
           falt:
             - rubrik: "Lösning A: smörgåsarna i tredjedelar"
@@ -2865,7 +2867,7 @@ ramar:
           - - 2. Glasstapeln
             - ett linjärt samband
             - "Gör en tabell: 4 cm per glas"
-            - "Skriv ett uttryck: foten och 4 cm per glas"
+            - "Skriv ett uttryck: 10 + 4n"
           - - 3. Stenplattorna
             - mönster med n · n och 4n + 4
             - "Gör en tabell: rita och räkna figurerna"
@@ -2967,8 +2969,8 @@ ramar:
             - Lösning A
             - Lösning B
           rader:
-            - - "En tabell. 11 tvåhjulingar och 0 trehjulingar ger 22 hjul, för få. 9 och 2 ger 24. 7 och 4 ger 26. 6 och 5 ger 27, som stämmer. Så räknade eleven raden 7 och 4: 7 · 2 = 14, 4 · 3 = 12 och 14 + 12 = 26."
-              - "En ekvation. x är antalet trehjulingar och 11 − x antalet tvåhjulingar. 3x + 2(11 − x) = 27 blir 3x + 22 − 2x = 27 och x + 22 = 27, där 22 är hjulen om alla har två. x = 27 − 22 = 5 trehjulingar, och 11 − 5 = 6 tvåhjulingar. Kontroll: 5 · 3 + 6 · 2 = 27."
+            - - "Byt ut tvåhjulingar mot trehjulingar. 11 tvåhjulingar och 0 trehjulingar ger 22 hjul, för få. 9 och 2 ger 24. 7 och 4 ger 26. 6 och 5 ger 27, som stämmer. Så räknade eleven raden 7 och 4: 7 · 2 = 14, 4 · 3 = 12 och 14 + 12 = 26."
+              - "Kalla trehjulingarna x. Då är 11 − x antalet tvåhjulingar. 3x + 2(11 − x) = 27 blir 3x + 22 − 2x = 27 och x + 22 = 27, där 22 är hjulen om alla har två. x = 27 − 22 = 5 trehjulingar, och 11 − 5 = 6 tvåhjulingar. Kontroll: 5 · 3 + 6 · 2 = 27."
         - rubrik: Frågorna
           rader:
             - - Vad gör eleven i lösning A från rad till rad?
@@ -2989,9 +2991,9 @@ ramar:
               text: "Två okända tal som hänger ihop: en trehjuling har ett hjul mer än en tvåhjuling."
         - rubrik: Lösningarna
           falt:
-            - rubrik: "Lösning A: en tabell"
+            - rubrik: "Lösning A: byta ut tvåhjulingar"
               text: Eleven prövar i en tabell och byter tvåhjulingar mot trehjulingar, tills hjulen blir 27.
-            - rubrik: "Lösning B: en ekvation"
+            - rubrik: "Lösning B: kalla trehjulingarna x"
               text: Eleven kallar trehjulingarna x och tvåhjulingarna 11 − x och löser 3x + 2(11 − x) = 27.
             - rubrik: "Lösning C: tankevurpa"
               text: |-
@@ -3023,13 +3025,13 @@ ramar:
                 Föreslå: Gör en tabell med antal glas och höjd.
                 Efter några försök: Berätta vad ni har gjort! Ni sa att 6 glas till gav 24 cm till. Försök använda det!
             - rubrik: Säg inte
-              text: Varje glas ger 4 cm till, och foten är 10 cm. Det ger bort lösningen.
+              text: Varje glas ger 4 cm till, och glaset utan kanten är 10 cm. Det ger bort lösningen.
             - rubrik: Mindre och större
               text: |-
                 Mindre: 2 glas är 18 cm, 3 glas är 22 cm och det är 32 cm mellan hyllorna (5 glas, 30 cm).
                 Större: Hur hög är en stapel med 20 glas? (90 cm) Hur många glas ryms under 1 m? (22)
             - rubrik: Jämför
-              text: Varje glas ger 4 cm till. I A växer höjden med 4 cm per rad, och i B är det 4n. Lyft fram att foten, 10 cm, inte växer.
+              text: Varje glas ger 4 cm till, och de första 10 cm räknas bara en gång. I A växer höjden med 4 cm per rad, och i B är höjden 10 + 4n.
             - rubrik: Fel eller osäker
               text: |-
                 Ni säger att 9 glas får plats. Hur kan ni kontrollera att det stämmer med problemet?
@@ -3064,8 +3066,8 @@ ramar:
             - Lösning A
             - Lösning B
           rader:
-            - - En tabell. Från 2 till 8 glas är 8 − 2 = 6 glas mer och 42 − 18 = 24 cm mer, och 24 / 6 = 4 cm per glas. 3 glas 22 cm, 4 glas 26, 5 glas 30, 6 glas 34, som ryms, och 7 glas 38, för högt.
-              - "En ekvation. Varje glas ger (42 − 18) / 6 = 4 cm till, och foten är 18 − 2 · 4 = 10 cm. n glas är 10 + 4n cm. 10 + 4n = 36 ger n = 26 / 4 = 6,5. Det blir 6 hela glas. Kontroll: 10 + 4 · 6 = 34 och 10 + 4 · 7 = 38."
+            - - Ett glas i taget. Från 2 till 8 glas är 8 − 2 = 6 glas mer och 42 − 18 = 24 cm mer, och 24 / 6 = 4 cm per glas. 3 glas 22 cm, 4 glas 26, 5 glas 30, 6 glas 34, som ryms, och 7 glas 38, för högt.
+              - "Uttrycket 10 + 4n, där n är antalet glas. Varje glas ger (42 − 18) / 6 = 4 cm till, och glaset utan kanten är 18 − 2 · 4 = 10 cm. 10 + 4n = 36 ger n = 26 / 4 = 6,5, alltså 6 hela glas. Kontroll: 10 + 4 · 6 = 34 och 10 + 4 · 7 = 38."
         - rubrik: Frågorna
           rader:
             - - Vad gör eleven i lösning A från rad till rad?
@@ -3083,12 +3085,12 @@ ramar:
             - rubrik: Kontroll
               text: 10 + 4 · 2 = 18, 10 + 4 · 8 = 42, och 6 glas är 34 cm och 7 glas 38.
             - rubrik: Idén
-              text: Varje glas ger 4 cm till, men foten på 10 cm växer inte.
+              text: Varje glas ger 4 cm till, och de första 10 cm räknas bara en gång.
         - rubrik: Lösningarna
           falt:
-            - rubrik: "Lösning A: en tabell"
+            - rubrik: "Lösning A: ett glas i taget"
               text: Eleven räknar ut att varje glas ger 4 cm till och fortsätter tabellen tills stapeln blir för hög.
-            - rubrik: "Lösning B: en ekvation"
+            - rubrik: "Lösning B: uttrycket 10 + 4n"
               text: Eleven skriver höjden som 10 + 4n, löser 10 + 4n = 36 och väljer 6 hela glas.
             - rubrik: "Lösning C: tankevurpa"
               text: |-
@@ -3098,8 +3100,8 @@ ramar:
                 Svar: 4 glas.
             - rubrik: Om lösning C
               text: |-
-                Glasen står i varandra. Med 9 cm per glas blir 8 glas 8 · 9 = 72 cm, men stapeln är 42 cm.
-                Fråga: ”Hur mycket högre blir stapeln per glas?”
+                Glasen står i varandra, så stapeln växer 4 cm per glas. De första 10 cm räknas bara en gång.
+                Fråga: ”Hur hög blir stapeln med 8 glas i elevens lösning?”
     - rubrik: "Lärarens sida: Avancerat, problem 3, Stenplattorna"
       text:
         - "Ett mönster som växer: figur n har n² ljusa plattor och 4n + 4 mörka. Figur 5 har 25 ljusa och 24 mörka, och figur 10 har 100 och 44. Eleverna går från en tabell till en regel och ser figuren på två sätt. Material: rutat papper eller brickor. Idén kommer ur Hagland, Hedrén och Taflin (2005) och Lithner m.fl. (2025)."
@@ -3163,7 +3165,7 @@ ramar:
             - Lösning A
             - Lösning B
           rader:
-            - - "En tabell för figur 1 till 5: ljusa 1, 4, 9, 16, 25 och mörka 8, 12, 16, 20, 24, fyra fler varje gång. Figur 10: 10 · 10 = 100 ljusa och 24 + 5 · 4 = 44 mörka. Mörka: 4 · 1 + 4 = 8, så figur n har n · n och 4n + 4."
+            - - "Figur för figur i en tabell: ljusa 1, 4, 9, 16, 25 och mörka 8, 12, 16, 20, 24, fyra fler varje gång. Figur 10: 10 · 10 = 100 ljusa och 24 + 5 · 4 = 44 mörka. Mörka: 4 · 1 + 4 = 8, så figur n har n · n och 4n + 4."
               - "Se strukturen. I figur 4 är de ljusa en kvadrat med sidan 4, och i figur n med sidan n: n². De mörka är fyra sidor med n och fyra hörn: 4n + 4. Figur 5 har 25 och 24, och figur 10 har 10² = 100 och 4 · 10 + 4 = 44."
         - rubrik: Frågorna
           rader:
@@ -3185,7 +3187,7 @@ ramar:
               text: De ljusa är en kvadrat med sidan n, och de mörka ökar med 4, en på varje sida.
         - rubrik: Lösningarna
           falt:
-            - rubrik: "Lösning A: en tabell"
+            - rubrik: "Lösning A: figur för figur"
               text: Eleven ritar figur 4, för in figur 1 till 5 i en tabell och ser regeln i talen.
             - rubrik: "Lösning B: se strukturen"
               text: Eleven ser de ljusa som en kvadrat med sidan n och de mörka som fyra sidor och fyra hörn.
@@ -3198,7 +3200,7 @@ ramar:
             - rubrik: Om lösning C
               text: |-
                 Med dubbla sidan blir de ljusa fyra gånger så många, 10 · 10 = 100, och de mörka blir 44.
-                Fråga: ”Stämmer dubbelt så många för figur 1 och 2?”
+                Fråga: ”Vad ger elevens sätt för figur 2, och vad visar bilden?”
     - rubrik: "Lärarens sida: Avancerat, problem 4, Udda eller jämnt"
       text:
         - "Sannolikhet med alla utfall: av 10 möjliga par ger 4 en jämn summa och 6 en udda. Spelet är inte rättvist, och chansen att vinna med jämn summa är 4 av 10. Eleverna listar systematiskt och resonerar med udda och jämnt. Material: fem lappar med talen 2 till 6 i en påse. Idén kommer ur nrich, Odds and Evens."
@@ -3261,7 +3263,7 @@ ramar:
             - Lösning A
             - Lösning B
           rader:
-            - - En lista. Eleven skriver alla tio par med summan, från 2 + 3 till 5 + 6. Jämn summa blir det med 2 + 4, 2 + 6, 4 + 6 och 3 + 5. 4 par ger jämn summa och 6 udda, tillsammans 10 par. Spelet är inte rättvist.
+            - - Lista alla par. Eleven skriver alla tio par med summan, från 2 + 3 till 5 + 6. Jämn summa blir det med 2 + 4, 2 + 6, 4 + 6 och 3 + 5. 4 par ger jämn summa och 6 udda, tillsammans 10 par. Spelet är inte rättvist.
               - "Jämnt + jämnt och udda + udda blir jämnt, och jämnt + udda blir udda. Kulorna 2, 4 och 6 är jämna, och 3 och 5 udda. En av varje: 3 · 2 = 6 par. Två jämna: 3. Två udda: 1. Jämn summa: 3 + 1 = 4 par, inte rättvist. Kontroll: 3 + 1 + 6 = 10."
         - rubrik: Frågorna
           rader:
@@ -3283,7 +3285,7 @@ ramar:
               text: Jämn summa kommer från två jämna eller två udda kulor.
         - rubrik: Lösningarna
           falt:
-            - rubrik: "Lösning A: en lista"
+            - rubrik: "Lösning A: lista alla tio par"
               text: Eleven skriver alla tio par i ordning med summan och ringar in de fyra jämna.
             - rubrik: "Lösning B: udda och jämnt"
               text: Eleven delar kulorna i jämna och udda och räknar hur många par det blir av varje slag.
@@ -3295,7 +3297,7 @@ ramar:
                 Svar: Jämnt vinner oftare.
             - rubrik: Om lösning C
               text: |-
-                Samma kula kan inte dras två gånger, som 2 + 2, och 2 + 4 och 4 + 2 är samma par.
+                Fem rutor har samma kula två gånger, som 2 + 2, och jämn summa. Utan dem är 8 av 20 jämna.
                 Fråga: ”Vilka par i tabellen går inte att dra?”
     - rubrik: "Lärarens sida: Avancerat, problem 5, Svamparna"
       text:
@@ -3457,8 +3459,8 @@ ramar:
             - Lösning A
             - Lösning B
           rader:
-            - - "En tabell. Medelvärdet nu: röd 40 / 5 = 8 och blå 20 / 4 = 5. Eleven prövar att flytta varje boll. Bollen 3 ger röd 9,25 men blå 4,6. Bollen 7 ger röd 33 / 4 = 8,25 och blå 27 / 5 = 5,4, båda större. Bollarna 9, 10 och 11 gör den röda mindre."
-              - "Ett resonemang. Medelvärdena är 8 och 5. En boll under 8 som tas bort höjer medelvärdet i röd. En boll över 5 som läggs till höjer det i blå. Bollen ska ligga mellan 5 och 8, och bara 7 gör det. Kontroll: 33 / 4 = 8,25 och 27 / 5 = 5,4."
+            - - "Pröva varje boll. Medelvärdet nu: röd 40 / 5 = 8 och blå 20 / 4 = 5. Bollen 3 ger röd 9,25 men blå 4,6. Bollen 7 ger röd 33 / 4 = 8,25 och blå 27 / 5 = 5,4, båda större. Bollarna 9, 10 och 11 gör medelvärdet i den röda mindre."
+              - "Medelvärdet som balanspunkt. Medelvärdena är 8 och 5. En boll under 8 som tas bort höjer medelvärdet i röd. En boll över 5 som läggs till höjer det i blå. Bollen ska ligga mellan 5 och 8, och bara 7 gör det. Kontroll: 33 / 4 = 8,25 och 27 / 5 = 5,4."
         - rubrik: Frågorna
           rader:
             - - Vad gör eleven i lösning A med varje boll?
@@ -3479,19 +3481,20 @@ ramar:
               text: "Medelvärdet är en balanspunkt: bollen ska vara under det röda medelvärdet och över det blå."
         - rubrik: Lösningarna
           falt:
-            - rubrik: "Lösning A: en tabell"
+            - rubrik: "Lösning A: pröva varje boll"
               text: Eleven räknar medelvärdena och prövar att flytta varje boll, och bara 7 gör båda större.
-            - rubrik: "Lösning B: ett resonemang"
+            - rubrik: "Lösning B: medelvärdet som balanspunkt"
               text: Eleven ser medelvärdena som balanspunkter och letar efter en boll mellan 5 och 8.
             - rubrik: "Lösning C: tankevurpa"
               text: |-
                 Röd utan 3: 37 / 4 = 9,25
-                9,25 är mer än 8.
+                Blå med 3: 23 / 4 = 5,75
+                Båda blir större.
                 Svar: Bollen 3.
             - rubrik: Om lösning C
               text: |-
-                Den röda blir större, men eleven prövar inte den blå: 23 / 5 = 4,6 är mindre än 5.
-                Fråga: ”Vilken skål har eleven glömt att pröva?”
+                Eleven delar summan i den blå med 4, men där ligger 5 bollar: 23 / 5 = 4,6, mindre än 5.
+                Fråga: ”Hur många bollar ligger i den blå i elevens svar?”
     - rubrik: "Lärarens sida: Avancerat, problem 7, Kvadraten"
       text:
         - "Problemet handlar om ett samband mellan omkrets och area. Den stora kvadratens sida är rektangelns långa sida plus den korta, alltså halva rektangelns omkrets. Svaret är 400 cm², vilken rektangel det än är. Eleverna prövar med tal och generaliserar. Material: rutat papper och fyra likadana rektanglar av papper. Idén kommer ur Nämnaren 2014:4, Problemavdelningen nr 4123."
@@ -3555,7 +3558,7 @@ ramar:
             - Lösning B
           rader:
             - - Olika rektanglar. En rektangel med sidorna 15 och 5 cm har omkretsen 15 + 5 + 15 + 5 = 40, och den stora kvadratens sida blir 15 + 5 = 20. 12 och 8 ger också 20, och 18 och 2 också. Arean blir 20 · 20 = 400 cm² varje gång.
-              - "Ett resonemang. Den stora kvadratens sida är en lång och en kort sida. Omkretsen är två långa och två korta, 40 cm. En lång och en kort är hälften: 40 / 2 = 20 cm. Arean är 20 · 20 = 400 cm². Kontroll med 15 och 5: 15 + 5 = 20."
+              - "Halva omkretsen. Den stora kvadratens sida är en lång och en kort sida. Rektangelns omkrets är två långa och två korta sidor, 40 cm. En lång och en kort är hälften: 40 / 2 = 20 cm. Arean är 20 · 20 = 400 cm². Kontroll med 15 och 5: 15 + 5 = 20."
         - rubrik: Frågorna
           rader:
             - - Vad prövar eleven i lösning A, och vad händer med den stora kvadratens sida?
@@ -3578,7 +3581,7 @@ ramar:
           falt:
             - rubrik: "Lösning A: olika rektanglar"
               text: Eleven prövar rektanglar med omkretsen 40 cm och ser att den stora kvadratens sida blir 20 varje gång.
-            - rubrik: "Lösning B: ett resonemang"
+            - rubrik: "Lösning B: halva omkretsen"
               text: Eleven ser att den stora kvadratens sida, en lång och en kort, är halva omkretsen.
             - rubrik: "Lösning C: tankevurpa"
               text: |-
@@ -3617,7 +3620,7 @@ ramar:
                 Mindre: Sidan går 1 steg åt höger och 1 uppåt (2 rutor).
                 Större: Vilka areor kan en kvadrat på prickpapper ha? (a² + b², som 1, 2, 4, 5, 8, 9, 10 och 13) Går det att rita en med arean 3? (Nej)
             - rubrik: Jämför
-              text: Arean är a² + b², där a och b är stegen. I A är ramen minus trianglarna 25 − 12 = 13, och i B 3² + 2² = 9 + 4 = 13. Lyft fram Pythagoras sats.
+              text: Arean räknas genom att dela upp kvadraten, eller ramen runt den. A ger 25 − 12 = 13, och B ser a² + b² i tabellen. Lyft fram Pythagoras sats.
             - rubrik: Fel eller osäker
               text: |-
                 Ni säger att arean är 9 rutor. Hur kan ni kontrollera att det stämmer med bilden?
@@ -3654,7 +3657,7 @@ ramar:
             - Lösning B
           rader:
             - - "En ram. Kvadraten med 2 och 1 steg får en ram på 3 · 3 = 9. I hörnen sitter fyra trianglar på 2 · 1 / 2 = 1 ruta var, och 9 − 4 = 5. Med 3 och 2 steg: ramen 5 · 5 = 25, trianglarna 4 · 3 · 2 / 2 = 12, och 25 − 12 = 13."
-              - "En tabell. Arean för flera kvadrater: 1 och 1 steg ger 2, 2 och 1 ger 5, 3 och 1 ger 10, 2 och 2 ger 8. Arean är stegen i kvadrat lagda ihop, a² + b². 3 och 2 steg: 3² + 2² = 9 + 4 = 13. Kontroll: 2² + 1² = 5."
+              - "Dela upp kvadraterna i fyra trianglar och en liten kvadrat. 2 och 1 steg: 1 + 4 · 1 = 5. I tabellen: 1 och 1 steg ger 2, 3 och 1 ger 10, 2 och 2 ger 8. Arean är a² + b². 3 och 2 steg: 3² + 2² = 9 + 4 = 13."
         - rubrik: Frågorna
           rader:
             - - Vad gör eleven i lösning A med ramen och trianglarna?
@@ -3672,13 +3675,13 @@ ramar:
             - rubrik: Kontroll
               text: 3 · 3 − 4 · 2 · 1 / 2 = 5 och 5 · 5 − 4 · 3 · 2 / 2 = 13 = 3² + 2².
             - rubrik: Idén
-              text: Arean är a² + b², där a och b är stegen åt höger och uppåt.
+              text: Arean räknas i rutor genom att dela den lutande kvadraten, eller ramen runt den, i trianglar och kvadrater.
         - rubrik: Lösningarna
           falt:
             - rubrik: "Lösning A: en ram"
               text: Eleven ritar en kvadrat runt den som lutar och tar bort de fyra trianglarna i hörnen.
-            - rubrik: "Lösning B: tabell och mönster"
-              text: Eleven räknar arean för flera kvadrater i en tabell och ser att den är a² + b².
+            - rubrik: "Lösning B: dela upp kvadraterna"
+              text: Eleven delar kvadraterna i fyra trianglar och en liten kvadrat, för in areorna i en tabell och ser a² + b².
             - rubrik: "Lösning C: tankevurpa"
               text: |-
                 Sidan: 2 + 1 = 3 steg
@@ -3751,7 +3754,7 @@ ramar:
             - Lösning A
             - Lösning B
           rader:
-            - - Två tabeller. Runt om är bredden och längden tillsammans 30 m. 15 och 15 ger 225 m², och 14 och 16 ger 224. Mot väggen är två bredder och en längd 60 m. 15 och 30 ger 450, och 14 och 32 eller 16 och 28 ger 448.
+            - - Pröva olika bredder. Runt om är bredden och längden tillsammans 30 m. 15 och 15 ger 225 m², och 14 och 16 ger 224. Mot väggen är två bredder och en längd 60 m. 15 och 30 ger 450, och 14 och 32 eller 16 och 28 ger 448.
               - "Ett uttryck och en graf. Arean b · (30 − b) är lika stor för b och 30 − b, så toppen ligger mitt emellan: 15 · 15 = 225 m². 14 · 16 = 224 och 13 · 17 = 221 är mindre. Mot väggen är arean b · (60 − 2b), dubbelt så stor, med toppen 15 · 30 = 450."
         - rubrik: Frågorna
           rader:
@@ -3766,14 +3769,14 @@ ramar:
         - rubrik: Svaret
           falt:
             - rubrik: Svaret
-              text: Runt om 15 · 15 = 225 m², och mot väggen 15 · 30 = 450 m².
+              text: Runt om 15 · 15 = 225 m². Mot väggen 15 · 30 = 450 m², 30 längs väggen.
             - rubrik: Kontroll
-              text: 4 · 15 = 60 och 2 · 15 + 30 = 60, och 14 · 16 = 224 och 16 · 28 = 448.
+              text: "Staketet: 4 · 15 = 60, och mot väggen 2 · 15 + 30 = 60."
             - rubrik: Idén
               text: Arean blir störst i mitten, där talen i tabellen vänder.
         - rubrik: Lösningarna
           falt:
-            - rubrik: "Lösning A: två tabeller"
+            - rubrik: "Lösning A: pröva olika bredder"
               text: Eleven prövar bredder i två tabeller och ser att arean minskar på båda sidor om 15 m.
             - rubrik: "Lösning B: uttryck och graf"
               text: Eleven skriver arean som b · (30 − b) och ser i grafen att den är störst vid 15.
@@ -3850,7 +3853,7 @@ ramar:
             - Lösning A
             - Lösning B
           rader:
-            - - En lista i ordning efter hur många tal summan har. För 4 blir det 1 + 3 + 3 + 1 = 8 sätt. Talen 1 till 5 ger 1, 2, 4, 8 och 16 sätt i en tabell. Antalet fördubblas, och för 10 blir det 16 · 2 · 2 · 2 · 2 · 2 = 512.
+            - - Lista sätten efter hur många tal summan har. För 4 blir det 1 + 3 + 3 + 1 = 8 sätt. Talen 1 till 5 ger 1, 2, 4, 8 och 16 sätt i en tabell. Antalet fördubblas, och för 10 blir det 16 · 2 · 2 · 2 · 2 · 2 = 512.
               - "Klossar på rad. 4 klossar har tre luckor, och varje lucka får en avdelare eller inte: 2 · 2 · 2 = 8 sätt. 5 klossar har fyra luckor: 16 sätt. 10 klossar har 9 luckor: 2 · 2 · 2 · 2 · 2 · 2 · 2 · 2 · 2 = 512. Kontroll: 3 ger 2 · 2 = 4 sätt."
         - rubrik: Frågorna
           rader:
@@ -3872,7 +3875,7 @@ ramar:
               text: Antalet sätt fördubblas när talet ökar med 1.
         - rubrik: Lösningarna
           falt:
-            - rubrik: "Lösning A: en lista"
+            - rubrik: "Lösning A: ordna efter antalet tal"
               text: Eleven listar sätten ordnade efter hur många tal summan har och ser att antalet fördubblas.
             - rubrik: "Lösning B: klossar på rad"
               text: Eleven lägger klossar på rad och ser att varje lucka mellan dem får en avdelare eller inte.

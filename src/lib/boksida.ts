@@ -279,6 +279,10 @@ export const LF_GOOGLE_LUFT = 300;
 // Word. Fet Andika räknas därför 6 procent bredare, så att raderna räknas som i Google, där de är fler. Spalterna räknas
 // två promille smalare, för avrundningen.
 const LF_SPALT = 0.998, ANDIKA_FET = 1.06;
+// Ett blad som inte ryms ovanför LF_GOOGLE_LUFT med de minsta bilderna får gå högst 60 twips (3 punkter) in i den: ramens
+// fot står då högst 769 punkter ned i Word och 789 i Google, där 792 rymdes. Klädaffären efter riggens rättelser
+// 2026-10-18 gick 46 twips in.
+const LF_TOLERANS = 60;
 export interface Losningsforslagmatt {
   /** Lösningarnas bilder: andelen av spaltens bredd. */
   skala: number;
@@ -342,7 +346,7 @@ export function losningsforslagMatt(lf: {
   const titelH = 220 + etikettH + 40 + Math.ceil(BOKRAD.Cinzel * 26 * 20) + 60 + 24 + 45 + 200;
   // Raden under innehållet: det som blir över av ramen, utom LF_GOOGLE_LUFT. Innehållets höjd är räknad med 300 twips luft.
   const rest = (sk: number) => RAMHOJD - titelH - (behov(sk) - 300) - 450 - LF_GOOGLE_LUFT;
-  const skala = [1, 0.94, 0.88, 0.8].find((sk) => rest(sk) >= 0);
+  const skala = [1, 0.94, 0.88, 0.8].find((sk) => rest(sk) >= 0) ?? (rest(0.8) >= -LF_TOLERANS ? 0.8 : undefined);
   const sk = skala ?? 0.8;
   return { skala: sk, helB, textW, bildW, spaltW, mellan, cW, titelH, innehallH: Math.ceil(behov(sk)), restH: Math.floor(Math.max(0, rest(sk)) / 15) * 15, ryms: !!skala };
 }
