@@ -29,7 +29,7 @@ import Problemsida from './Problemsida.astro';
 import Losningsforslag from './Losningsforslag.astro';
 import Lararhandledning from './Lararhandledning.astro';
 import { lararhandledningar } from '../lib/handledning';
-import { bankAv, bankRad, enhetAdress, nivaFarger, BOKNIVA, type Bankenhet } from '../lib/bank';
+import { arBladsida, bankAv, bankRad, enhetAdress, foljesidansNamn, nivaFarger, BOKNIVA, type Bankenhet } from '../lib/bank';
 import { losningarnasNiva, losningarnasNot, problemformer } from '../lib/problemform';
 import { filmerVid, grundUpphov, metodensFilmer, stegDelar, type FilmPlats } from '../lib/film';
 import type { SerieKoppling } from '../lib/serie';
@@ -297,7 +297,7 @@ for (const p of [...punkter, ...[...bankPunkter.values()].flat()]) {
 }
 // Bladets namn på en enhets sida: enheten heter som sitt ord (Problemet, Texten) och en följesida som sitt namn (Lärarens
 // sida, Två lösningar).
-const bladetsNamn = (ram: SerieRam, ri: number) => (enhet && ri === enhet.ri && banken ? banken.ord.bestamd.charAt(0).toLocaleUpperCase('sv') + banken.ord.bestamd.slice(1) : ram.rubrik.split(':')[0]);
+const bladetsNamn = (ram: SerieRam, ri: number) => (enhet && ri === enhet.ri && banken ? banken.ord.bestamd.charAt(0).toLocaleUpperCase('sv') + banken.ord.bestamd.slice(1) : foljesidansNamn(ram));
 // En kooperativ struktur (strukturAv) är en sida (Struktur.astro) med den första bilden På bordet som hör till ramen; fler
 // bilder till ramen (bild A och bild B i Lika och olika) står efter sidan, som i Word.
 const strukturer = new Map<SerieRam, StrukturForm>(ramarna.flatMap((r) => { const s = strukturAv(r); return s ? [[r, s] as [SerieRam, StrukturForm]] : []; }));
@@ -770,7 +770,11 @@ const meny = [
         const larare = former.larare(ram);
         const problemet = larare && { stycken: larare.l.stycken, fragor: larare.l.fragor, bilder: larare.bilder, namn: larare.namn };
         const hl = handledningar.get(ri);
-        const innehall = hl ? (
+        // Textens modell, ifylld (arBladsida i src/lib/bank.ts): bladet, som i Word.
+        const sidblad = arBladsida(ram) ? bladVid(bilderPaBordet, ram.rubrik)[0] : undefined;
+        const innehall = sidblad ? (
+        <div class="m-ram m-bladsida" id={`ram-${ri + 1}`}><Pabordet b={sidblad} utanRubrik /></div>
+      ) : hl ? (
         <Lararhandledning h={hl} id={`ram-${ri + 1}`} farg={bankFarger[hl.niva] ?? '#17324d'} rubrik="h3" />
       ) : lf ? (<>
         <Losningsforslag lf={lf} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={bankFarger[lf.niva] ?? BOKNIVA[lf.nivaNr] ?? '#4b3a2f'} />
@@ -1041,17 +1045,17 @@ const meny = [
         const namn = bladetsNamn(ram, ri);
         // I en mening står lärarens sida, problemet och lösningsförslaget med liten bokstav, och ett blad med eget namn (Två
         // lösningar) som det heter.
-        const iMening = banken?.post && namn === banken.post.namn ? banken.post.bestamd : ri === enhet.ri || /^Lärarens sida$/i.test(namn) ? namn.toLowerCase() : namn;
+        const iMening = banken?.post && namn === banken.post.namn ? banken.post.bestamd : ri === enhet.ri || /^Lärarens sida$/i.test(namn) || arBladsida(ram) ? namn.toLowerCase() : namn;
         // En faktatext är två till sex sidor, och lärarens sida till den en eller två: knappen säger det, så att provet av
         // utskriften inte kräver en sida (scripts/utskriftsformat.mjs).
-        const sidorHogst = enhet.l.faktatext ? (ri === enhet.ri ? 6 : 2) : undefined;
+        const sidorHogst = arBladsida(ram) ? 1 : enhet.l.faktatext ? (ri === enhet.ri ? 6 : 2) : undefined;
         // Knappen öppnar pdf:en som klipps ur nivåns fil (src/lib/utskrift.ts, SkrivUtPdf.astro).
         const pdf = enhetensUtskrifter(d, id, banken!, enhet).ramar.get(ri)!;
         return (
           <div class="enhet-blad" data-blad={`ram-${ri + 1}`} id={`blad-${ri + 1}`}>
             <div class="enhet-bladhuvud">
               <h2>{namn}</h2>
-              <a class="knapp sekundar liten" href={utskriftAdress(pdf)} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst={sidorHogst ?? 1} data-direkt={`Skriv ut ${iMening}`} data-goatcounter-click={`utskrift:${id}/${enhet.slug}`} data-goatcounter-title={`${d.titel}: ${enhet.l.niva}, ${enhet.l.vad}, ${iMening}`}>{namn} som pdf</a>
+              <a class="knapp sekundar liten" href={utskriftAdress(pdf)} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande={arBladsida(ram) ? '' : undefined} data-sidor-hogst={sidorHogst ?? 1} data-direkt={`Skriv ut ${iMening}`} data-goatcounter-click={`utskrift:${id}/${enhet.slug}`} data-goatcounter-title={`${d.titel}: ${enhet.l.niva}, ${enhet.l.vad}, ${iMening}`}>{namn} som pdf</a>
             </div>
             {innehall}
           </div>

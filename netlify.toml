@@ -30,6 +30,48 @@
   to = "/stodundervisning/textsamtal-i-grupp/texter"
   status = 301
 
+# Filerna med lärarens sidor i Faktatextsamtal i grupp heter sedan K-434 Lärarens sidor och modellerna, eftersom textens
+# ifyllda modell står efter varje text (METODER.md under Banken). Gamla länkar och sparade adresser leder dit.
+[[redirects]]
+  from = "/stodundervisning/faktatextsamtal-i-grupp-lararens-sidor-alla.pdf"
+  to = "/stodundervisning/faktatextsamtal-i-grupp-lararens-sidor-och-modellerna-alla.pdf"
+  status = 301
+
+[[redirects]]
+  from = "/stodundervisning/faktatextsamtal-i-grupp-lararens-sidor-alla.docx"
+  to = "/stodundervisning/faktatextsamtal-i-grupp-lararens-sidor-och-modellerna-alla.docx"
+  status = 301
+
+[[redirects]]
+  from = "/stodundervisning/faktatextsamtal-i-grupp-lararens-sidor-bas.pdf"
+  to = "/stodundervisning/faktatextsamtal-i-grupp-lararens-sidor-och-modellerna-bas.pdf"
+  status = 301
+
+[[redirects]]
+  from = "/stodundervisning/faktatextsamtal-i-grupp-lararens-sidor-bas.docx"
+  to = "/stodundervisning/faktatextsamtal-i-grupp-lararens-sidor-och-modellerna-bas.docx"
+  status = 301
+
+[[redirects]]
+  from = "/stodundervisning/faktatextsamtal-i-grupp-lararens-sidor-medel.pdf"
+  to = "/stodundervisning/faktatextsamtal-i-grupp-lararens-sidor-och-modellerna-medel.pdf"
+  status = 301
+
+[[redirects]]
+  from = "/stodundervisning/faktatextsamtal-i-grupp-lararens-sidor-medel.docx"
+  to = "/stodundervisning/faktatextsamtal-i-grupp-lararens-sidor-och-modellerna-medel.docx"
+  status = 301
+
+[[redirects]]
+  from = "/stodundervisning/faktatextsamtal-i-grupp-lararens-sidor-avancerat.pdf"
+  to = "/stodundervisning/faktatextsamtal-i-grupp-lararens-sidor-och-modellerna-avancerat.pdf"
+  status = 301
+
+[[redirects]]
+  from = "/stodundervisning/faktatextsamtal-i-grupp-lararens-sidor-avancerat.docx"
+  to = "/stodundervisning/faktatextsamtal-i-grupp-lararens-sidor-och-modellerna-avancerat.docx"
+  status = 301
+
 [[redirects]]
   from = "/faktatexter"
   to = "/stodundervisning/faktatextsamtal-i-grupp/texter"

@@ -186,12 +186,24 @@ export const enhetNamn = (e: Bankenhet) => `${e.l.niva}, ${e.l.vad}: ${e.l.titel
 /** Följesidornas namn i en rad: "lärarens sida, Två lösningar och lösningsförslaget". Lärarens sida och lösningsförslaget
  * är vanliga ord, de andra namn på blad. */
 export const foljeText = (b: Bank) => {
-  const ord = b.foljesidor.map((n) => (/^Lärarens sida$/i.test(n) ? n.toLowerCase() : POSTENS_FOLJESIDOR[n]?.bestamd ?? n));
+  const ord = b.foljesidor.map((n) => (/^Lärarens sida$/i.test(n) || n in BLADSIDOR ? n.toLowerCase() : POSTENS_FOLJESIDOR[n]?.bestamd ?? n));
   return ord.length > 1 ? `${ord.slice(0, -1).join(', ')} och ${ord[ord.length - 1]}` : ord[0];
 };
 
 // Följesidornas namn i flertal, som filen med bara följesidorna heter efter. Ett nytt namn läggs till här.
-const FOLJE_FLERA: Record<string, string> = { 'Lärarens sida': 'Lärarens sidor', 'Lösningsförslag': 'Lösningsförslag' };
+const FOLJE_FLERA: Record<string, string> = { 'Lärarens sida': 'Lärarens sidor', 'Lösningsförslag': 'Lösningsförslag', Modellen: 'Modellerna' };
+// Följesidor som är sitt blad (K-434, Faktatextsamtal i grupp: textens modell, ifylld, metodriggens leverans 2026-10-18
+// natt): ramen "Modellen: <nivå>, text <n>, <titel>" ritas bara som bladet efter den, på en liggande sida, som hos
+// riggen, och ramens text och delar (frågan och ett svar ur lärarens sida) är till den som läser metodens fil. Ett nytt
+// namn läggs till här.
+// Namnet är följesidans på enhetens sida, i dess meny och i knapparna, så att den inte heter som bladet ur ramen med blad
+// som står på samma sida (metodriggens läsning av sidorna 2026-10-18 natt: två avsnitt hette Modellen).
+const BLADSIDOR: Record<string, string> = { Modellen: 'Den ifyllda modellen' };
+/** En följesida som är sitt blad. */
+export const arBladsida = (ram: { rubrik: string }) => { const m = ram.rubrik.match(/^([^:]+): [^,]+, [^,]+ \d+, ./); return !!m && m[1] in BLADSIDOR; };
+/** Följesidans namn på enhetens sida, i dess meny och i knapparna: namnet före kolon, och för en följesida som är sitt
+ *  blad namnet i BLADSIDOR ("Den ifyllda modellen"). */
+export const foljesidansNamn = (ram: { rubrik: string }) => { const n = ram.rubrik.split(':')[0]; return arBladsida(ram) ? BLADSIDOR[n] : n; };
 /** Följesidorna i flertal, som kolumnen och filen heter: "Lärarens sidor". */
 export const foljeFlera = (b: Bank) => {
   const ord = b.foljesidor.map((n) => { const f = FOLJE_FLERA[n]; if (!f) throw new Error(`Banken: följesidan "${n}" har inget namn i flertal i src/lib/bank.ts. Lägg till det i FOLJE_FLERA (Lärarens sida: Lärarens sidor).`); return f; });

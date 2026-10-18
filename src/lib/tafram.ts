@@ -18,10 +18,10 @@ import { existsSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { PDFDict, PDFDocument, PDFName, PDFRawStream, PDFRef } from 'pdf-lib';
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { bankAv, enhetAdress, nivaFarger, type Bank, type Bankenhet } from './bank';
+import { arBladsida, bankAv, enhetAdress, foljeFlera, foljeText, nivaFarger, type Bank, type Bankenhet } from './bank';
 import { enhetensUtskrifter, radensUtskrifter, utskriftAdress, type Utskrift } from './utskrift';
 import { bladpar, bladRubrik, bladsidaAdress, enhetensBlad, metodensBladmaterial } from './bladmaterial';
-import { bildensAlt, metodensPaBordet, paBordetVid, type PaBordet } from './pabordet';
+import { bildensAlt, bladVid, metodensPaBordet, paBordetVid, type PaBordet } from './pabordet';
 import type { Faktatext } from './ramform';
 import { sidlasFor } from './sidlas';
 import { losningsforslagVy, problemformer } from './problemform';
@@ -120,9 +120,9 @@ export interface TaFramPost extends Post {
   fakta?: { f: Faktatext; rubrik: string; bilder: PaBordet[]; las: number[] };
   /** Faktatextens modell (Niclas 2026-10-18 natt: "En text i fakta ska ha sin modell likt problem har sin lösning, en
    *  ifylld och en tom att skriva ut"): modellens namn, bladet som lärarens sida säger ("Tankekartan, blad 1"),
-   *  modellens sida, bladets bild och dess utskrift (enhetensBlad i src/lib/bladmaterial.ts). Den ifyllda modellen gör
-   *  metodriggen (K-434). */
-  modell?: { namn: string; blad: string; sida: string; bild: { adress: string; alt: string }; bildMatt: { bredd: number; hojd: number }; utskrift: PostUtskrift };
+   *  modellens sida, bladets bild och dess utskrift (enhetensBlad i src/lib/bladmaterial.ts), och den ifyllda modellen,
+   *  textens följesida Modellen (arBladsida i src/lib/bank.ts), med sin plats på textens sida, bilden och utskriften. */
+  modell?: { namn: string; blad: string; sida: string; bild: { adress: string; alt: string }; bildMatt: { bredd: number; hojd: number }; utskrift: PostUtskrift; ifylld?: { sida: string; bild: { adress: string; alt: string }; bildMatt: { bredd: number; hojd: number }; utskrift: PostUtskrift } };
 }
 /** Ett tema (faktatexterna): namnet, temats sida ([id]/texter/[tema].astro), texterna i ordning och, när temat har en,
  *  lärarhandledningens fil (src/lib/handledning.ts), Word och pdf utan ändelse. */
@@ -295,7 +295,13 @@ async function bygg(m: Metod): Promise<TaFram> {
     if (!bm || !x) return {};
     const u = radensUtskrifter(d, m.id, bm, x.rad).blad.get(x.b.bild.nr);
     if (!u) return {};
-    return { modell: { namn: x.rad.namn, blad: bladRubrik(x.rad, x.b), sida: bladsidaAdress(m.id, x.rad), bild: { adress: medVersion(x.b.adress), alt: bildensAlt(x.b) }, bildMatt: x.b.matt, utskrift: await postUtskrift(u) } };
+    // Den ifyllda modellen: bladet efter textens följesida Modellen, med utskriften ur nivåns fil.
+    const fri = e.efter.find((ri) => arBladsida(ramar[ri]));
+    const fb = fri !== undefined ? bladVid(bilder, ramar[fri].rubrik)[0] : undefined;
+    const fu = fri !== undefined ? enhetensUtskrifter(d, m.id, bank, e).ramar.get(fri) : undefined;
+    if (fri !== undefined && (!fb || !fu)) throw new Error(`Ta fram: ${ramar[fri].rubrik} har inget blad, så den ifyllda modellen saknas (src/lib/tafram.ts).`);
+    const ifylld = fb && fu ? { sida: `${enhetAdress(m.id, e)}#blad-${fri! + 1}`, bild: { adress: medVersion(fb.adress), alt: bildensAlt(fb) }, bildMatt: fb.matt, utskrift: await postUtskrift(fu) } : undefined;
+    return { modell: { namn: x.rad.namn, blad: bladRubrik(x.rad, x.b), sida: bladsidaAdress(m.id, x.rad), bild: { adress: medVersion(x.b.adress), alt: bildensAlt(x.b) }, bildMatt: x.b.matt, utskrift: await postUtskrift(u), ...(ifylld ? { ifylld } : {}) } };
   };
   // Ta fram ett matteproblem: metodens problem och databasens (src/lib/matteproblem.ts), med utskrifterna ur sidans egna
   // filer, en per nivå med nivåns alla problem. Databasens problem har ingen sida i metoden, och länken till
@@ -346,7 +352,11 @@ async function bygg(m: Metod): Promise<TaFram> {
   return {
     metod: m.id, titel: d.titel, omrade: d.omrade, namn: c?.namn ?? `Ta fram ett ${bank.ord.en}`, adress, ...(c?.kort ? { kort: c.kort } : {}), led,
     ord: bank.ord,
-    ...(bank.post
+    // Där följesidorna står i egna filer (faktatexterna) skriver listan ut alla, lärarens sida och den ifyllda modellen, och
+    // säger det; annars postens följesida, lösningsförslaget.
+    ...(bank.sidorForSig
+      ? { folje: foljeFlera(bank).toLowerCase(), foljeEn: foljeText(bank) }
+      : bank.post
       ? { folje: bank.post.alla.toLowerCase(), foljeEn: bank.post.bestamd }
       : (() => { const f = bank.foljesidor.map((n) => (/^Lärarens sida$/i.test(n) ? n.toLowerCase() : n)).join(' och '); return { folje: f, foljeEn: f }; })()),
     losningNamn: !bank.post || bank.post.namn === 'Lösningsförslag' ? 'Lösningsförslag' : bank.post.namn,

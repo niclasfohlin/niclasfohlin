@@ -14,7 +14,8 @@ import { losningsforslagHtml, losningsstegen, losningsstegHtml, type Losningsfor
 type Lf = Omit<LosningsforslagVy, 'problem' | 'ruta'>;
 type Post = { id: string; niva: string; nivaSlug: string; nr: number; titel: string; taggar?: string[]; sida?: string; losning?: string; bild?: { adress: string; alt: string }; stycken: string[]; fragor: string[]; utskrift: { post: PostUtskrift; med: PostUtskrift }; losningsforslag?: Lf; html?: string; modell?: Modell };
 // Faktatextens modell (src/lib/tafram.ts, TaFramPost.modell): bladet att visa bredvid texten och skriva ut.
-type Modell = { namn: string; blad: string; sida: string; bild: { adress: string; alt: string }; bildMatt: { bredd: number; hojd: number }; utskrift: PostUtskrift };
+type Bladbild = { adress: string; alt: string };
+type Modell = { namn: string; blad: string; sida: string; bild: Bladbild; bildMatt: { bredd: number; hojd: number }; utskrift: PostUtskrift; ifylld?: { sida: string; bild: Bladbild; bildMatt: { bredd: number; hojd: number }; utskrift: PostUtskrift } };
 type Data = { poster: Post[]; filer: Record<string, { adress: string; byte: number }>; nivaer: { namn: string; slug: string; farg: string; antal: number }[]; losningsruta?: LosningsforslagVy['ruta'] };
 
 const sida = document.querySelector<HTMLElement>('.tafram')!;
@@ -216,22 +217,42 @@ const bladet = (p: Post): LosningsforslagVy => ({ ...p.losningsforslag!, problem
 // 2026-10-18 natt: "En text i fakta ska ha sin modell likt problem har sin lösning").
 const harBredvid = (p?: Post) => !!(p?.losningsforslag || p?.modell);
 const bredvidNamn = (p?: Post) => (p?.modell && !p.losningsforslag ? 'modellen' : foljeEn);
+// Modellen bredvid texten: den tomma först, eftersom den ifyllda är ett möjligt resultat av modellektionen och rutan ofta
+// står på projektorn inför klassen (metodriggens läsning av sidorna 2026-10-18 natt), och en knapp som byter till den
+// ifyllda och tillbaka. Under bilden står modellens namn och blad och vilken som syns, som leder till modellens sida, och en
+// knapp för var och en som skriver ut den (Niclas 2026-10-18 natt: "en ifylld och en tom att skriva ut").
 function modellFigur(m: Modell): HTMLElement {
   const fig = el('figure', 'tf-modell');
   const img = document.createElement('img');
-  img.src = m.bild.adress;
-  img.alt = m.bild.alt;
-  img.width = m.bildMatt.bredd;
-  img.height = m.bildMatt.hojd;
   const text = el('figcaption');
-  const sidan = el('a', 'tf-modell-sida', `${m.namn}, ${m.blad.charAt(0).toLowerCase()}${m.blad.slice(1)}`) as HTMLAnchorElement;
+  const sidan = el('a', 'tf-modell-sida') as HTMLAnchorElement;
   sidan.href = m.sida;
-  const skrivut = el('a', 'knapp sekundar', 'Skriv ut modellen') as HTMLAnchorElement;
-  skrivut.href = m.utskrift.adress;
-  skrivut.target = '_blank';
-  skrivut.rel = 'noopener';
-  skrivut.addEventListener('click', () => raknaHandelse(`utskrift:${metod}/${led}:modell`, `${titel}: utskrift av en modell`));
-  text.append(sidan, skrivut);
+  const namn = `${m.namn}, ${m.blad.charAt(0).toLowerCase()}${m.blad.slice(1)}`;
+  const knapp = (namn: string, u: PostUtskrift, vad: string) => {
+    const a = el('a', 'knapp sekundar', namn) as HTMLAnchorElement;
+    a.href = u.adress;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.addEventListener('click', () => raknaHandelse(`utskrift:${metod}/${led}:${vad}`, `${titel}: utskrift av ${vad === 'modell' ? 'en tom modell' : 'en ifylld modell'}`));
+    return a;
+  };
+  const byt = m.ifylld ? el('button', 'knapp sekundar tf-modell-byt') as HTMLButtonElement : undefined;
+  const visa = (ifylld: boolean) => {
+    const b = ifylld && m.ifylld ? m.ifylld : m;
+    img.src = b.bild.adress;
+    img.alt = b.bild.alt;
+    img.width = b.bildMatt.bredd;
+    img.height = b.bildMatt.hojd;
+    sidan.textContent = m.ifylld ? `${namn}, ${ifylld ? 'ifylld' : 'tom'}` : namn;
+    if (byt) byt.textContent = ifylld ? 'Visa den tomma' : 'Visa den ifyllda';
+  };
+  let ifylld = false;
+  if (byt) {
+    byt.type = 'button';
+    byt.addEventListener('click', () => { ifylld = !ifylld; visa(ifylld); if (ifylld) raknaHandelse(`${led}:${metod}:ifylld-modell`, `${titel}: den ifyllda modellen i Visa stort`); });
+  }
+  visa(false);
+  text.append(sidan, ...(byt ? [byt] : []), ...(m.ifylld ? [knapp('Skriv ut den tomma', m.utskrift, 'modell'), knapp('Skriv ut den ifyllda', m.ifylld.utskrift, 'ifylld-modell')] : [knapp('Skriv ut modellen', m.utskrift, 'modell')]));
   fig.append(img, text);
   return fig;
 }

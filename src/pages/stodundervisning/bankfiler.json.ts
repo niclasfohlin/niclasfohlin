@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { matteproblemenPaSidan, publicerade } from '../../lib/innehall';
 import { DATABAS, matteproblemfiler } from '../../lib/matteproblem';
-import { bankAv, bankfiler, bankfilensRamar } from '../../lib/bank';
+import { arBladsida, bankAv, bankfiler, bankfilensRamar } from '../../lib/bank';
 import { handledningensFil, lararhandledningar } from '../../lib/handledning';
 import { metodensNivamaterial, nivafiler } from '../../lib/nivamaterial';
 import { bladfiler, metodensBladmaterial } from '../../lib/bladmaterial';
@@ -74,7 +74,8 @@ export const GET: APIRoute = async () => {
     if (!bank) return [...hela, ...nivans];
     const fakta = new Set(bank.enheter.filter((e) => e.l.faktatext).map((e) => e.ri));
     const vidFakta = new Set(bank.enheter.filter((e) => e.l.faktatext).flatMap((e) => [...e.fore, ...e.efter]));
-    const sidor = (ri: number): [number, number] => (fakta.has(ri) ? [2, 6] : vidFakta.has(ri) ? [1, 2] : handledningar.has(ri) ? [2, 2] : bank.oversikter.has(ri) ? [1, 2] : [1, 1]);
+    const ramarna = m.data.ramar?.ramar ?? [];
+    const sidor = (ri: number): [number, number] => (fakta.has(ri) ? [2, 6] : arBladsida(ramarna[ri]) ? [1, 1] : vidFakta.has(ri) ? [1, 2] : handledningar.has(ri) ? [2, 2] : bank.oversikter.has(ri) ? [1, 2] : [1, 1]);
     return [...hela, ...nivans, ...bankfiler(m.id, bank).map((f) => {
       const ramar = bankfilensRamar(bank, f);
       return { metod: m.id, namn: f.namn, rubrik: f.rubrik, minst: ramar.reduce((s, ri) => s + sidor(ri)[0], 0), hogst: ramar.reduce((s, ri) => s + sidor(ri)[1], 0), ramar, oversikter: ramar.filter((ri) => bank.oversikter.has(ri)) };

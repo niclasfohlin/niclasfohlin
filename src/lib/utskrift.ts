@@ -7,7 +7,7 @@
 // src/pages/stodundervisning/utskrifter.json.ts), så att en knapp aldrig kan leda till en fil som inte görs.
 // Inga Node-beroenden.
 import type { MetodData } from './metod';
-import { bankAv, bankfiler, bankfilensRamar, slugAv, type Bank, type Bankenhet } from './bank';
+import { bankAv, bankfiler, bankfilensRamar, slugAv, foljesidansNamn, type Bank, type Bankenhet } from './bank';
 import { harLathund } from './metod';
 import { ovrigtfil } from './ovrigt';
 import { bladNamn, bladVid, metodensPaBordet } from './pabordet';
@@ -23,7 +23,7 @@ export const utskriftAdress = (u: Pick<Utskrift, 'namn'>) => `/stodundervisning/
 
 type Ram = NonNullable<MetodData['ramar']>['ramar'][number];
 /** Bladets namn på en enhets sida: enheten heter som bankens ord (texten, problemet), en följesida som ledet före kolon. */
-export const enhetsbladNamn = (bank: Bank, e: Bankenhet, ramar: Ram[], ri: number) => (ri === e.ri ? bank.ord.bestamd : ramar[ri].rubrik.split(':')[0]);
+export const enhetsbladNamn = (bank: Bank, e: Bankenhet, ramar: Ram[], ri: number) => (ri === e.ri ? bank.ord.bestamd : foljesidansNamn(ramar[ri]));
 
 /** En enhets utskrifter: alla enhetens sidor i en pdf, varje ram för sig och, när banken har postens följesida (src/lib/
  * bank.ts), enheten med den, som problemet med lösningsförslaget, som Ta fram skriver ut. */

@@ -33,7 +33,7 @@ import { sidlasFor } from './sidlas';
 import TECKENBREDD from '../data/teckenbredd.json';
 import ANTON_BREDD from '../data/faktatext/anton-bredder.json';
 import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, FORMLUFT, FORMRAD_PT, LF_LUFT, LIGGANDE_BOK, LIGGANDE_BREDD, PROBLEMLUFT, PROBLEMTITEL_PT, RAMHOJD, TITEL_PT, boksidansMatt, breddPt, losningarMatt, losningsforslagMatt, problemMatt, strukturMatt, textparMatt } from './boksida';
-import { bankAv, bankfilensRamar, bankRad, type Bankfil } from './bank';
+import { arBladsida, bankAv, bankfilensRamar, bankRad, type Bankfil } from './bank';
 import { harMaterial, hemsidansNamn, MATERIAL } from './material';
 import { losningarnasNiva, losningarnasNot, problemformer, type Losningsforslag } from './problemform';
 import { lararhandledningar, nivansEtikett, texternasEtikett, type HandledningFalt, type Lararhandledning } from './handledning';
@@ -3120,6 +3120,9 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     // En ram, där den står. ram är ramen som den ritas: en ram vars listor står vid veckorna ritas utan dem.
     const enRam = (i: number, ram: Ram): void => {
       efterElevsida = false;
+      // Textens modell, ifylld (arBladsida i src/lib/bank.ts): bara bladet efter ramen, på en liggande sida, som hos
+      // metodriggen.
+      if (arBladsida(ram)) { filmVid({ ram: ram.rubrik }); return; }
       // Temats lärarhandledning: två A4 i en egen sektion (lararhandledningSida()).
       const hl = handledningar.get(i);
       if (hl) {
@@ -3380,7 +3383,7 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
     // Ramens blad (bildblad()), var och ett på ett eget liggande A4 efter ramens sidor, i bildernas ordning. I filen med
     // allt står de redan i beskrivningen, efter sin ram.
     const adress = metodAdress(bas, post.id).replace(/^https?:\/\//, '');
-    const ramensBlad = (i: number, ram: Ram): Flod[] => (o.baraTommaRamar ? [] : bladVid(paBordet, ram.rubrik).filter((b) => bladIUrval(b, o.blad)).map((b) => { const sida = bladFlod(b, adress); bladsidor.add(sida); SIDANS_VAD.set(sida, { ram: i, bild: b.bild.nr }); return sida; }));
+    const ramensBlad = (i: number, ram: Ram): Flod[] => (o.baraTommaRamar || arBladsida(ram) ? [] : bladVid(paBordet, ram.rubrik).filter((b) => bladIUrval(b, o.blad)).map((b) => { const sida = bladFlod(b, adress); bladsidor.add(sida); SIDANS_VAD.set(sida, { ram: i, bild: b.bild.nr }); return sida; }));
     // En rams sidor i planeringsmallarna, i ordning, med ramens blad sist. ram är ramen som den ritas: en ram vars listor
     // står vid veckorna ritas utan dem.
     const ramensSidor = (i: number, ram: Ram): Flod[] => {
@@ -3404,6 +3407,16 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
         ut.push(sida);
         const ovriga = efter.filter((b) => !arBlad(b));
         if (ovriga.length) ut.push(ovriga.flatMap((b) => bordet(b)));
+        return ut;
+      }
+      // Textens modell, ifylld (arBladsida i src/lib/bank.ts): ramen är sitt blad, på en liggande sida, som hos
+      // metodriggen, och bladet står inte en gång till efter ramen (ramensBlad).
+      const sidblad = arBladsida(ram) ? bladVid(paBordet, ram.rubrik)[0] : undefined;
+      if (sidblad) {
+        if (o.baraTommaRamar) return ut;
+        const sida = bladFlod(sidblad, adress);
+        bladsidor.add(sida);
+        ut.push(sida);
         return ut;
       }
       // Temats lärarhandledning (lararhandledningSida()), två A4. I filen med allt står den redan i beskrivningen.

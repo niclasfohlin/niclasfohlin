@@ -7,7 +7,7 @@ import Bladfiler from '../../../components/Bladfiler.astro';
 import Pabordet from '../../../components/Pabordet.astro';
 import SkrivUtPdf from '../../../components/SkrivUtPdf.astro';
 import { publicerade } from '../../../lib/innehall';
-import { bankAv, enhetAdress, grannar, nivaFarger, type Bankenhet } from '../../../lib/bank';
+import { bankAv, enhetAdress, grannar, nivaFarger, arBladsida, foljesidansNamn, type Bankenhet } from '../../../lib/bank';
 import { bladKort, bladpar, bladsidaAdress, enhetensBlad, gruppId, harExempel, ledFlera, ledSida, metodensBladmaterial, type Bladrad } from '../../../lib/bladmaterial';
 import { arIfylltBlad, arStaendeBlad, metodensPaBordet, type PaBordet } from '../../../lib/pabordet';
 import { metodAdress, UPPHOV } from '../../../lib/metod';
@@ -100,10 +100,10 @@ if (givenRad && bm) {
   enhet = e;
   const { forra, nasta, niva } = grannar(bank, e);
   const bladen = [...e.fore, e.ri, ...e.efter];
-  const bladNamn = (ri: number) => (ri === e.ri ? versal(bank.ord.bestamd) : ramarna[ri].rubrik.split(':')[0]);
+  const bladNamn = (ri: number) => (ri === e.ri ? versal(bank.ord.bestamd) : foljesidansNamn(ramarna[ri]));
   // En faktatext är flera sidor, och lärarens sida till den två: där säger knappen vad som skrivs ut (lärarens sida och
   // texten), eftersom "båda sidorna" skulle läsas som två papper.
-  const iMening = (ri: number) => (ri === e.ri || /^Lärarens sida$/i.test(bladNamn(ri)) ? bladNamn(ri).toLowerCase() : bladNamn(ri));
+  const iMening = (ri: number) => (ri === e.ri || /^Lärarens sida$/i.test(bladNamn(ri)) || arBladsida(ramarna[ri]) ? bladNamn(ri).toLowerCase() : bladNamn(ri));
   const allaBlad = e.l.faktatext && bladen.length > 1
     ? `${bladen.slice(0, -1).map(iMening).join(', ')} och ${iMening(bladen[bladen.length - 1])}`
     : bladen.length === 1 ? 'sidan' : bladen.length === 2 ? 'båda sidorna' : `alla ${['', 'en', 'två', 'tre', 'fyra', 'fem'][bladen.length] ?? bladen.length} sidorna`;
@@ -130,8 +130,10 @@ if (givenRad && bm) {
   // i enhetensBlad (src/lib/bladmaterial.ts), som Ta fram en faktatext också läser.
   const { raderna, blad: funnet } = bm ? enhetensBlad(d, bm, e, par) : { raderna: [] as Bladrad[], blad: undefined };
   if (bm && funnet) {
-    vy.blad = { ...funnet, led: bm.led, sida: ledSida(bm), exempel: harExempel(bm), pdf: utskriftAdress(radensUtskrifter(d, m.id, bm, funnet.rad).blad.get(funnet.b.bild.nr)!) };
-    vy.nav.push({ id: 'enhetens-blad', namn: bm.led });
+    // Står den ifyllda modellen också på sidan (arBladsida i src/lib/bank.ts), heter bladet Den tomma modellen.
+    const led = e.efter.some((ri) => arBladsida(ramarna[ri])) ? `Den tomma ${bm.led.toLowerCase()}` : bm.led;
+    vy.blad = { ...funnet, led, sida: ledSida(bm), exempel: harExempel(bm), pdf: utskriftAdress(radensUtskrifter(d, m.id, bm, funnet.rad).blad.get(funnet.b.bild.nr)!) };
+    vy.nav.push({ id: 'enhetens-blad', namn: led });
   } else if (bm && raderna.length) vy.hor = { etikett: bm.led, lankar: raderna.map((x) => ({ adress: bladsidaAdress(m.id, x), namn: x.namn })) };
 }
 const adress = `${metodensAdress}/${vy.slug}`;

@@ -43,7 +43,7 @@ const listan = `${t.adress}#lista=${tema.poster.map((p) => p.id).join(',')}`;
       <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${t.metod}`}>{t.titel}</a> · <a href={t.adress}>{versal(t.ord.flera)}</a> · {tema.namn}</p>
       <p class="tema-kicker"><span class="tema-niva">{niva}</span> Tema med {TAL[antal] ?? antal} {t.ord.flera}</p>
       <h1>{tema.namn}</h1>
-      <p class="ingress">Temats {TAL[antal] ?? antal} {t.ord.flera} är byggda på var sitt sätt{byggnad.length ? `: ${lista(byggnad)}` : ''}. Varje text har sin modell, och lärarens sida säger hur gruppen läser den.</p>
+      <p class="ingress">Temats {TAL[antal] ?? antal} {t.ord.flera} är byggda på var sitt sätt{byggnad.length ? `: ${lista(byggnad)}` : ''}. Varje text har sin modell{tema.poster.some((p) => p.modell?.ifylld) ? ', ifylld och tom' : ''}, och lärarens sida säger hur en liten grupp läser den.{h && ' Lärarhandledningen efter texterna säger hur hela klassen läser temat.'}</p>
       <p class="tema-atgarder"><a class="knapp" href={listan}>Skriv ut temats {t.ord.flera}</a>{h && <>{' '}<a class="knapp sekundar" href="#lararhandledning">Lärarhandledningen</a></>}{' '}<a class="knapp sekundar" href={t.adress + `#${t.nivaer.find((n) => n.namn === niva)?.slug ?? ''}`}>Alla {t.ord.flera} på nivån {niva}</a></p>
     </header>
 
@@ -58,9 +58,10 @@ const listan = `${t.adress}#lista=${tema.poster.map((p) => p.id).join(',')}`;
             <p class="tema-lankar">
               <a href={p.sida}>Texten</a>
               {p.losning && <a href={p.losning}>{t.losningNamn}</a>}
-              {p.modell && <a href={p.modell.sida}>Modellen</a>}
+              {p.modell && <a href={p.sida ? `${p.sida}#enhetens-blad` : p.modell.sida}>Modellen</a>}
               <a href={p.utskrift.post.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="6" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:tema`} data-goatcounter-title={`${t.titel}: ${tema.namn}, utskrift av ${p.titel}`}><span data-direkt="Skriv ut texten">Texten som pdf</span><span class="visually-hidden">: {p.titel}</span></a>
-              {p.modell && <a href={p.modell.utskrift.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande data-sidor-hogst="1" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:modell`} data-goatcounter-title={`${t.titel}: ${tema.namn}, utskrift av modellen till ${p.titel}`}><span data-direkt="Skriv ut modellen">Modellen som pdf</span><span class="visually-hidden">: {p.titel}</span></a>}
+              {p.modell?.ifylld && <a href={p.modell.ifylld.utskrift.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande data-sidor-hogst="1" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:ifylld-modell`} data-goatcounter-title={`${t.titel}: ${tema.namn}, utskrift av den ifyllda modellen till ${p.titel}`}><span data-direkt="Skriv ut den ifyllda modellen">Ifylld modell som pdf</span><span class="visually-hidden">: {p.titel}</span></a>}
+              {p.modell && <a href={p.modell.utskrift.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande data-sidor-hogst="1" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:modell`} data-goatcounter-title={`${t.titel}: ${tema.namn}, utskrift av den tomma modellen till ${p.titel}`}><span data-direkt={p.modell.ifylld ? 'Skriv ut den tomma modellen' : 'Skriv ut modellen'}>{p.modell.ifylld ? 'Tom modell som pdf' : 'Modellen som pdf'}</span><span class="visually-hidden">: {p.titel}</span></a>}
             </p>
           </div>
         </li>

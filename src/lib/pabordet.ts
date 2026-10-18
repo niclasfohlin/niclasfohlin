@@ -38,8 +38,9 @@ const BLAD = /^Blad: (.+)$/;
 export const arBlad = (b: PaBordet) => BLAD.test(b.bild.rubrik);
 /** Bladets namn utan "Blad: ": "Tankekartan 1: fyra delar". */
 export const bladNamn = (b: PaBordet) => b.bild.rubrik.match(BLAD)?.[1] ?? b.bild.rubrik;
-/** Ett ifyllt blad, som exemplet om skolan. */
-export const arIfylltBlad = (b: PaBordet) => arBlad(b) && /, exemplet\b/.test(bladNamn(b));
+/** Ett ifyllt blad: exemplet om skolan, eller textens modell, bladet efter en enhets följesida "<namn>: <nivå>, <vad>,
+ *  <titel>" (Faktatextsamtal i grupp, ramen Modellen: Bas, text 1, Vattenplaneten; src/lib/bank.ts, arBladsida). */
+export const arIfylltBlad = (b: PaBordet) => arBlad(b) && (/, exemplet\b/.test(bladNamn(b)) || /^ram: [^:]+: [^,]+, [^,]+ \d+, ./.test(b.bild.efter ?? ''));
 /** Ett stående blad, högre än brett (Vår grupp i Gruppstärkande aktiviteter, 2026-10-16), står på ett stående A4. */
 export const arStaendeBlad = (b: PaBordet) => arBlad(b) && b.matt.hojd > b.matt.bredd;
 /** Ramens blad, i bildernas ordning. */

@@ -368,6 +368,11 @@ for (const fil of filer) {
   // på varje handledning, och dess rubrik och text säger det till den som läser metodens fil: de står varken i Word eller
   // i utskriften. En handlednings rubrik står i två delar: etiketten med nivån ("BAS · LÄRARHANDLEDNING") och temat.
   const gemensamText = (d.ramar?.ramar ?? []).flatMap((r, i) => (/^Lärarhandledningarna: /.test(String(r.rubrik)) ? [new RegExp(`^ramar\\.ramar\\.${i}\\.(rubrik$|text\\.)`)] : []));
+  // Textens modell, ifylld (arBladsida i src/lib/bank.ts): ramen "Modellen: <nivå>, text <n>, <titel>" ritas bara som
+  // bladet efter den, som hos metodriggen. Ramens rubrik, text och delar (frågan, vad svaret har med och ett svar ur
+  // lärarens sida) står varken i Word eller i utskriften, och bladets rubrik och text prövas i textalternativet, som andra
+  // blad.
+  const bladsidor = (d.ramar?.ramar ?? []).flatMap((r, i) => (/^Modellen: [^,]+, [^,]+ \d+, ./.test(String(r.rubrik)) ? [new RegExp(`^ramar\\.ramar\\.${i}\\.`)] : []));
   const hlRubrik = new Map((d.ramar?.ramar ?? []).flatMap((r, i) => { const m = String(r.rubrik).match(/^Lärarhandledning: ([^,]+), (.+)$/); return m ? [[`ramar.ramar.${i}.rubrik`, [norm(`${m[1]} lärarhandledning`), norm(r.tema ?? m[2])]]] : []; }));
   // Faktatextens bilder (på platsen "Bild: <namn>" i texten), bladen (rubriken börjar med "Blad: ", src/lib/pabordet.ts)
   // och bilden som eleven ser på (elev i src/data/pabordet.json) står utan rubriken På bordet, som problemens bilder:
@@ -406,7 +411,7 @@ for (const fil of filer) {
   for (const { vag, text } of texter(d, '', [])) {
     const ri = vag.match(/^ramar\.ramar\.(\d+)\./);
     if (!ram(ri ? Number(ri[1]) : -1)) continue;
-    if (lastextRader.some((r) => r.test(vag)) || rutansText.some((r) => r.test(vag)) || gemensamText.some((r) => r.test(vag)) || utanUtskrift.has(vag)) continue;
+    if (lastextRader.some((r) => r.test(vag)) || rutansText.some((r) => r.test(vag)) || gemensamText.some((r) => r.test(vag)) || bladsidor.some((r) => r.test(vag)) || utanUtskrift.has(vag)) continue;
     // Strukturens bild prövas ovan, i textalternativet.
     const pb = vag.match(/^pabordet\.(\d+)\.(rubrik|text)$/);
     if (pb && (strukturBilder.has(d.pabordet[Number(pb[1])].nr) || problemBilder.has(d.pabordet[Number(pb[1])].nr))) continue;
