@@ -170,7 +170,9 @@ async function jamfor() {
   // Första skillnaden i en oväntad textfil, så att den går att förstå utan att öppna kopiorna.
   for (const vag of lista.ovantat.slice(0, 5)) {
     if (!TEXT.has(extname(vag).toLowerCase())) continue;
-    const [x, y] = [readFileSync(join(a.kopia, 'dist', vag), 'utf8'), readFileSync(join(b.kopia, 'dist', vag), 'utf8')].map((t) => t.replace(BYGGDA_LANKAR, '$1?v='));
+    // Samma regler som jämförelsen, så att det som visas är den skillnad som finns kvar.
+    const norm = (t) => { let u = t.replace(BYGGDA_LANKAR, '$1?v='); for (const r of regler) if (r.byt && new RegExp(r.filer).test(vag)) for (const [fran, till] of r.byt) u = u.replace(new RegExp(fran, 'g'), till); return u; };
+    const [x, y] = [readFileSync(join(a.kopia, 'dist', vag), 'utf8'), readFileSync(join(b.kopia, 'dist', vag), 'utf8')].map(norm);
     let i = 0; while (i < x.length && x[i] === y[i]) i++;
     console.log(`\n${vag}, första skillnaden vid tecken ${i}:\n  före:  ${JSON.stringify(x.slice(Math.max(0, i - 60), i + 100))}\n  efter: ${JSON.stringify(y.slice(Math.max(0, i - 60), i + 100))}`);
   }
