@@ -18,7 +18,9 @@
 //   { "vad": "statistiken laddas bara på sajten", "filer": "\\.html$", "byt": [["<regex>", "<ersättning>"]] }
 //       byt körs på båda sidor före jämförelsen, så att resten av filen ändå ska vara lika;
 //   { "vad": "...", "filer": "<regex>", "fritt": true }  filen får skilja hur som helst;
-//   { "vad": "...", "filer": "<regex>", "borttagen": true }  filen får försvinna.
+//   { "vad": "...", "filer": "<regex>", "borttagen": true }  filen får försvinna;
+//   { "vad": "...", "filer": "<regex>", "ny": true }  filen får vara ny. En ny fil utan regel är oväntad, så att en
+//       fil som inte skulle finnas syns (granskningen 2026-10-18).
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { existsSync, lstatSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, symlinkSync, unlinkSync, writeFileSync } from 'node:fs';
@@ -154,12 +156,13 @@ async function jamfor() {
   const [ma, mb] = [await manifest(join(a.kopia, 'dist'), regler), await manifest(join(b.kopia, 'dist'), regler)];
   const regelFor = (vag, nyckel) => regler.find((r) => r[nyckel] && new RegExp(r.filer).test(vag));
   const lista = { oforandrat: [], forvantat: [], nytt: [], borttaget: [], ovantat: [] };
+  // En ny fil är väntad när en regel säger ny (eller fritt, som gäller filens innehåll vilket det än är), annars oväntad.
   for (const [vag, s] of ma) {
     if (!mb.has(vag)) (regelFor(vag, 'borttagen') ? lista.forvantat : lista.borttaget).push(vag);
     else if (mb.get(vag) === s) lista.oforandrat.push(vag);
     else (regelFor(vag, 'fritt') ? lista.forvantat : lista.ovantat).push(vag);
   }
-  for (const vag of mb.keys()) if (!ma.has(vag)) lista.nytt.push(vag);
+  for (const vag of mb.keys()) if (!ma.has(vag)) (regelFor(vag, 'ny') || regelFor(vag, 'fritt') ? lista.nytt : lista.ovantat).push(vag);
   console.log(`\nJämförelse ${fore} (${a.sha}, bygget ${ta} s) mot ${efter} (${b.sha}, bygget ${tb} s): ${ma.size} filer före, ${mb.size} efter.`);
   console.log(`  oförändrat ${lista.oforandrat.length}, väntat ${lista.forvantat.length}, nytt ${lista.nytt.length}, borttaget ${lista.borttaget.length}, oväntat ${lista.ovantat.length}`);
   const visa = (rubrik, l) => { if (l.length) console.log(`\n${rubrik} (${l.length}):\n  ${l.slice(0, 40).join('\n  ')}${l.length > 40 ? `\n  … och ${l.length - 40} till` : ''}`); };
@@ -169,6 +172,7 @@ async function jamfor() {
   visa('Oväntat', lista.ovantat);
   // Första skillnaden i en oväntad textfil, så att den går att förstå utan att öppna kopiorna.
   for (const vag of lista.ovantat.slice(0, 5)) {
+    if (!ma.has(vag)) { console.log(`\n${vag}: ny fil utan regel i --vantat.`); continue; }
     if (!TEXT.has(extname(vag).toLowerCase())) continue;
     // Samma regler som jämförelsen, så att det som visas är den skillnad som finns kvar.
     const norm = (t) => { let u = t.replace(BYGGDA_LANKAR, '$1?v='); for (const r of regler) if (r.byt && new RegExp(r.filer).test(vag)) for (const [fran, till] of r.byt) u = u.replace(new RegExp(fran, 'g'), till); return u; };

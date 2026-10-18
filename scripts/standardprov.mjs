@@ -10,10 +10,19 @@ const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const mapp = join(rot, 'src', 'lib', 'standard');
 const fel = [];
 
+// Det en fil importerar: import x from 'y', export … from 'y', import 'y' (utan from) och import('y'), med kommentarerna
+// bortplockade (granskningen 2026-10-18: de två sista släpptes förut igenom).
+const importer = (text) => {
+  const kod = text.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/.*$/gm, '$1');
+  return [...kod.matchAll(/(?:import|export)\s[^'";]*?from\s+['"]([^'"]+)['"]|\bimport\s+['"]([^'"]+)['"]|\bimport\(\s*['"`]([^'"`]+)['"`]\s*\)/g)].map((m) => m[1] ?? m[2] ?? m[3]).filter(Boolean);
+};
+// Provet av provet: varje sätt att importera hittas, och en kommentar räknas inte.
+const provImporter = [["import fs from 'node:fs';", 'node:fs'], ["import 'node:fs';", 'node:fs'], ["const x = await import('node:fs');", 'node:fs'], ["export { a } from 'astro:content';", 'astro:content'], ["import * as d from '../data/site';", '../data/site'], ["// import 'node:fs'", undefined], ['/* import("node:fs") */', undefined]];
+for (const [kod, vantat] of provImporter) if (importer(kod)[0] !== vantat) fel.push(`importkontrollen ger ${JSON.stringify(importer(kod))} för ${kod}, inte ${vantat ?? 'ingenting'}`);
+
 for (const f of readdirSync(mapp).filter((x) => /\.(js|d\.ts)$/.test(x))) {
   const text = readFileSync(join(mapp, f), 'utf8');
-  for (const [, kalla] of text.matchAll(/(?:import|export)\s[^'"]*?from\s+['"]([^'"]+)['"]|import\(\s*['"]([^'"]+)['"]\s*\)/g)) {
-    if (!kalla) continue;
+  for (const kalla of importer(text)) {
     if (/^(astro:|node:)/.test(kalla)) fel.push(`${f}: importerar ${kalla}; standarden ska gå att köra utan Astro och Node`);
     else if (kalla.startsWith('../') || /\/data\/|\.json$/.test(kalla)) fel.push(`${f}: importerar ${kalla}; det sajten vet ges som argument, och koden utanför mappen hör inte till standarden`);
     else if (!kalla.startsWith('./')) fel.push(`${f}: importerar paketet ${kalla}; ett beroende i standarden beslutas och skrivs i REGLER.md först`);

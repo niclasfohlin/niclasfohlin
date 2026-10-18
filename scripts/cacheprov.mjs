@@ -45,6 +45,8 @@ const toml = readFileSync(join(rot, 'netlify.toml'), 'utf8').replace(/\r\n/g, '\
 const regler = toml.split(/^\[\[headers\]\]\s*$/m).slice(1).map((b) => b.split(/^\[\[(?!headers\.)/m)[0])
   .map((b) => ({ monster: b.match(/^\s*for\s*=\s*"([^"]+)"/m)?.[1], varde: b.match(/^\s*Cache-Control\s*=\s*"([^"]+)"/m)?.[1] }))
   .filter((r) => r.monster && r.varde)
+  // En regel som inte cachar (max-age=0, no-store) räknas inte: filen hämtas då på nytt varje gång, som utan regel.
+  .filter((r) => !/no-store/.test(r.varde) && (Number(r.varde.match(/max-age=(\d+)/)?.[1] ?? 0) > 0 || /immutable/.test(r.varde)))
   .map((r) => ({ ...r, re: new RegExp(`^${r.monster.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*')}$`) }));
 if (!regler.length) { console.error('cacheprov: hittar inga cacheregler i netlify.toml.'); process.exit(1); }
 
@@ -67,7 +69,11 @@ if (utan.length) {
   process.exit(1);
 }
 // Sidorna med data i en egen fil: data-kortdata på sidan.
-const databassidor = filer.filter((v) => v.endsWith('.html')).map((v) => ({ v, html: readFileSync(join(dist, v)) })).filter((x) => x.html.includes('data-kortdata='));
+// Sidorna med data i en egen fil: en sida med en datafil bredvid sig (<sida>/index.html och <sida>.json, src/lib/kortdata.ts)
+// eller med attributet data-kortdata, så att provet hittar sidan också om attributet försvinner.
+const allaFiler = new Set(filer);
+const databassidor = filer.filter((v) => v.endsWith('.html')).map((v) => ({ v, html: readFileSync(join(dist, v)) }))
+  .filter((x) => x.html.includes('data-kortdata=') || allaFiler.has(`${x.v.replace(/\/index\.html$/, '')}.json`));
 const tunga = databassidor.filter((x) => x.html.length > HOGST_SIDA);
 if (tunga.length) {
   console.error(`cacheprov: ${tunga.length} sidor som hämtar sin data ur en egen fil är större än ${HOGST_SIDA / 1024} kB:\n  ${tunga.map((x) => `${x.v} (${Math.round(x.html.length / 1024)} kB)`).join('\n  ')}\nDatan ska stå i sidans egen fil (src/lib/kortdata.ts), inte i sidan, som Facebook hämtar okomprimerad varje gång länken delas.`);
