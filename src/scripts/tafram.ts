@@ -6,7 +6,7 @@
 // webbläsaren: nivån, taggen och listan. Lösningsförslaget i Visa stort ritas av samma funktion som på problemets sida i
 // metoden (src/lib/losningsforslag.ts).
 import { el, lagring } from './kortbanken';
-import { ettkortLank, flerakortKnapp } from './pdfutskrift';
+import { ettkortLank, flerakortKnapp, kanSkrivaUtPdf } from './pdfutskrift';
 import { hamtplan, type PostUtskrift } from '../lib/standard/index.js';
 import { losningsforslagHtml, losningsstegen, losningsstegHtml, type LosningsforslagVy } from '../lib/losningsforslag';
 
@@ -248,6 +248,7 @@ function modellFigur(m: Modell): HTMLElement {
     a.target = '_blank';
     a.rel = 'noopener';
     a.addEventListener('click', () => raknaHandelse(`utskrift:${metod}/${led}:${vad}`, `${titel}: utskrift av ${vad === 'modell' ? 'en tom modell' : 'en ifylld modell'}`));
+    ettkortLank(a);
     return a;
   };
   const byt = m.ifylld ? el('button', 'knapp sekundar tf-modell-byt') as HTMLButtonElement : undefined;
@@ -275,24 +276,28 @@ function modellFigur(m: Modell): HTMLElement {
   folj();
   if (byt) byt.addEventListener('click', folj);
   stor.append(img);
-  text.append(sidan, ...(byt ? [byt] : []), ...(m.ifylld ? [knapp('Skriv ut den tomma', m.utskrift, 'modell'), knapp('Skriv ut den ifyllda', m.ifylld.utskrift, 'ifylld-modell')] : [knapp('Skriv ut modellen', m.utskrift, 'modell')]));
+  text.append(sidan, ...(byt ? [byt] : []), ...(m.ifylld ? [knapp(utskriftsnamn('den tomma'), m.utskrift, 'modell'), knapp(utskriftsnamn('den ifyllda'), m.ifylld.utskrift, 'ifylld-modell')] : [knapp(utskriftsnamn('modellen'), m.utskrift, 'modell')]));
   fig.append(stor, text);
   return fig;
 }
 // I stegen A, B, A och B och C finns ingen utskrift som är det som syns, så knappen står bara vid problemet
 // (granskningen 2026-10-18: samma steg skrev ut olika material beroende på vad som visades före).
+// En utskriftsknapp i rutan heter "Skriv ut …" där den skriver ut direkt (Chromium på datorn, ettkortLank) och "… som pdf"
+// där den öppnar pdf:en, som sajtens andra utskriftsknappar (SkrivUtPdf.astro; Codex-granskningen 2026-10-18 natt).
+const direkt = kanSkrivaUtPdf();
+const utskriftsnamn = (vad: string) => (direkt ? `Skriv ut ${vad}` : `${vad.charAt(0).toLocaleUpperCase('sv')}${vad.slice(1)} som pdf`);
 function skrivutLank() {
   const skrivut = $<HTMLAnchorElement>('tf-stort-skrivut');
   if (!stortPost || steg > 0) { skrivut.hidden = true; $('tf-stort-skrivut-med').hidden = true; return; }
   // Med lösningsförslaget skrivs det ut med problemet; modellen har sin egen knapp i rutan bredvid.
   const med = !losningYta.hidden && !!stortPost.losningsforslag;
   skrivut.href = (med ? stortPost.utskrift.med : stortPost.utskrift.post).adress;
-  skrivut.textContent = med ? `Skriv ut ${ord.bestamd} och ${foljeEn}` : `Skriv ut ${ord.bestamd}`;
+  skrivut.textContent = utskriftsnamn(med ? `${ord.bestamd} och ${foljeEn}` : ord.bestamd);
   skrivut.hidden = false;
   // En post utan lösningsförslag: också med följesidan, eller följesidorna för sig (designgranskningen 2026-10-18 natt).
   const skrivutMed = $<HTMLAnchorElement>('tf-stort-skrivut-med');
   skrivutMed.hidden = !!stortPost.losningsforslag;
-  if (!stortPost.losningsforslag) skrivutMed.href = stortPost.utskrift.med.adress;
+  if (!stortPost.losningsforslag) { skrivutMed.href = stortPost.utskrift.med.adress; skrivutMed.textContent = forSig ? utskriftsnamn(foljeEn) : direkt ? `Skriv ut med ${foljeEn}` : `${ord.bestamd.charAt(0).toLocaleUpperCase('sv')}${ord.bestamd.slice(1)} med ${foljeEn} som pdf`; }
 }
 function visaLosning(pa: boolean) {
   const p = stortPost;
@@ -381,6 +386,9 @@ async function visaStort(id: string, medLosning = false) {
   visaBladdra();
   const oppna = !dialog.open;
   if (oppna) franFokus = document.activeElement as HTMLElement | null;
+  // Rutan som öppnas på nytt ritar det som står bredvid på nytt, så att modellen börjar med den tomma (Codex-granskningen
+  // 2026-10-18 natt: den ifyllda stod kvar när läraren stängde och öppnade samma text igen).
+  if (oppna) delete losningYta.dataset.id;
   // Numret av nivåns poster, eller av temats när posten står i ett tema.
   const tema = r.dataset.tema;
   const antal = rader.filter((x) => nivaAv(x) === nivaAv(r) && x.dataset.tema === tema).length;
@@ -423,7 +431,7 @@ async function visaStort(id: string, medLosning = false) {
   if (oppna) dialog.showModal();
   dialog.scrollTop = 0;
   let d: Data;
-  try { d = await data(); } catch { $('tf-stort-text').replaceChildren(el('p', undefined, 'Det gick inte att hämta. Ladda om sidan, eller öppna sidan med knappen nedanför.')); return; }
+  try { d = await data(); } catch { (fakta ? faktaYta : $('tf-stort-text')).replaceChildren(el('p', 'tf-stort-vantar', 'Det gick inte att hämta. Ladda om sidan, eller öppna sidan med knappen nedanför.')); return; }
   if (stortId !== id) return;
   const post = d.poster.find((x) => x.id === id)!;
   if (fakta) {
@@ -459,6 +467,7 @@ dialog.addEventListener('close', () => {
   else (listrad.offsetParent ? listrad : $('tf-valda-rubrik')).focus();
 });
 ettkortLank($<HTMLAnchorElement>('tf-stort-skrivut'));
+ettkortLank($<HTMLAnchorElement>('tf-stort-skrivut-med'));
 for (const r of rader) {
   const visaKnapp = r.querySelector<HTMLButtonElement>('.tf-visa')!;
   const oppna = () => { raknaHandelse(`${led}:${metod}:visa-stort`, `${titel}: Visa stort`); void visaStort(r.id); };

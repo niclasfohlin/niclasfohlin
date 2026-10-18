@@ -292,7 +292,11 @@ async function bygg(m: Metod): Promise<TaFram> {
   };
   // Faktatextens modell: bladet som lärarens sida säger, med bladets utskrift ur modellens filer.
   const modellen = async (e: Bankenhet): Promise<Pick<TaFramPost, 'modell'>> => {
-    const x = bm && e.l.faktatext ? enhetensBlad(d, bm, e, par).blad : undefined;
+    const funnet = bm && e.l.faktatext ? enhetensBlad(d, bm, e, par) : undefined;
+    // En faktatext har en modell: står den inte i tabellen som parar texter och modeller, eller säger lärarens sida inget
+    // blad som finns, stannar bygget, i stället för att länken Modellen försvinner (Codex-granskningen 2026-10-18 natt).
+    if (funnet && (funnet.raderna.length !== 1 || !funnet.blad)) throw new Error(`Ta fram: ${e.l.niva}, ${e.l.vad}: ${e.l.titel} ${funnet.raderna.length !== 1 ? `står med ${funnet.raderna.length} modeller i tabellen som parar texter och modeller` : `hör till ${funnet.raderna[0].namn}, men lärarens sida säger inget blad som finns ("${funnet.raderna[0].namn}, blad <nummer>")`} (src/lib/bladmaterial.ts, enhetensBlad).`);
+    const x = funnet?.blad;
     if (!bm || !x) return {};
     const u = radensUtskrifter(d, m.id, bm, x.rad).blad.get(x.b.bild.nr);
     if (!u) return {};

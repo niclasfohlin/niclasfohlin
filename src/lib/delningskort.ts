@@ -15,7 +15,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { site } from '../data/site';
-import { publicerade, publikationNamn, typLabel } from './innehall';
+import { publicerade, publikationNamn, typLabel, matteproblemenPaSidan } from './innehall';
 import { arskursText, kortFakta, type MetodPost } from './metod';
 import { arskursSpannet, SKALA, spannText, type Spann } from './tackning';
 import { delningensKort, kortData, skrivkortAdress, skrivkortAv } from './skrivkort';
@@ -153,7 +153,9 @@ export function allaKort(): Promise<Kort[]> {
       const slag = bank ? taFramSlag(bank) : undefined;
       if (bank && slag === 'matteproblem') {
         const delar = new Set(bank.enheter.map((e) => m.data.ramar!.ramar[e.ri].innehallstagg).filter(Boolean)).size;
-        lagg({ sida: `/stodundervisning/${m.id}/${bank.ord.slug}`, typ: 'tafram', etikett: `Matteproblem · ${arskursText(m.data)}`, titel: centralAv(slag)?.namn ?? 'Ta fram ett matteproblem', undertitel: `${bank.enheter.length} problem på ${TAL[bank.nivaer.length] ?? bank.nivaer.length} nivåer${delar ? ` och i kursplanens ${TAL[delar] ?? delar} delar` : ''}, att visa stort och skriva ut`, bild: portratt, farg: FARG[m.data.omrade] ?? '--farg-accent', tafram: { metod: m.id, poster: TAFRAMENS_POSTER[slag] } });
+        // Sidan har metodens och databasens problem (src/lib/matteproblem.ts).
+        const antal = (await matteproblemenPaSidan())?.alla.length ?? bank.enheter.length;
+        lagg({ sida: `/stodundervisning/${m.id}/${bank.ord.slug}`, typ: 'tafram', etikett: `Matteproblem · ${arskursText(m.data)}`, titel: centralAv(slag)?.namn ?? 'Ta fram ett matteproblem', undertitel: `${antal} problem på ${TAL[bank.nivaer.length] ?? bank.nivaer.length} nivåer${delar ? ` och i kursplanens ${TAL[delar] ?? delar} delar` : ''}, att visa stort och skriva ut`, bild: portratt, farg: FARG[m.data.omrade] ?? '--farg-accent', tafram: { metod: m.id, poster: TAFRAMENS_POSTER[slag] } });
       }
       if (bank && slag === 'lastexter') {
         const texter = bank.enheter.filter((e) => e.nr !== undefined).length;

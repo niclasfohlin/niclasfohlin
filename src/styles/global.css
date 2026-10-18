@@ -2305,10 +2305,12 @@ html.js .bara-js { display: inline-block; }
 /* Alla bland taggarna har textens färg, som Alla bland nivåerna, så att den inte liknar den blå taggen. */
 .tf-tagg.tf-tagg-alla[aria-pressed="true"] { background: var(--farg-text); border-color: var(--farg-text); }
 /* En tagg i sin färg: ljus ton med kant och text i taggens färg, och vald i hel färg. Alla har ingen egen färg. */
-.tf-tagg:is(.tagg-1, .tagg-2, .tagg-3, .tagg-4, .tagg-5, .tagg-6, .tagg-7) { border-color: color-mix(in srgb, var(--tagg) 55%, white); background: color-mix(in srgb, var(--tagg) 10%, white); color: color-mix(in srgb, var(--tagg) 82%, black); }
+/* Kanten är 75 procent taggens färg, minst 3,2:1 mot vitt, så att knappens kant syns (Codex-granskningen 2026-10-18 natt:
+   med 55 procent var sex av sju under 3:1). */
+.tf-tagg:is(.tagg-1, .tagg-2, .tagg-3, .tagg-4, .tagg-5, .tagg-6, .tagg-7) { border-color: color-mix(in srgb, var(--tagg) 75%, white); background: color-mix(in srgb, var(--tagg) 10%, white); color: color-mix(in srgb, var(--tagg) 82%, black); }
 .tf-tagg:is(.tagg-1, .tagg-2, .tagg-3, .tagg-4, .tagg-5, .tagg-6, .tagg-7):hover { border-color: var(--tagg); }
 .tf-tagg:is(.tagg-1, .tagg-2, .tagg-3, .tagg-4, .tagg-5, .tagg-6, .tagg-7)[aria-pressed="true"] { background: var(--tagg); border-color: var(--tagg); color: #fff; }
-.tf-tagg-antal { font-weight: 400; opacity: 0.85; }
+.tf-tagg-antal { font-weight: 400; }
 .tf-tagg-antal:empty { display: none; }
 .tf-yta { display: grid; gap: 1.25rem; align-items: start; }
 /* Under 60 rem står listan att skriva ut i en rad längst ned (stilarna för listan på Ta fram en aktivitet). */
@@ -2338,7 +2340,7 @@ html.js .bara-js { display: inline-block; }
 .tf-visa { display: none; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-decoration: underline; text-decoration-color: var(--farg-accent); text-underline-offset: 0.15em; cursor: pointer; }
 .tf-js .tf-visa { display: inline-flex; }
 .tf-visa:hover { color: var(--farg-accent); }
-.tf-radtagg { display: inline-flex; align-items: center; min-height: 1.75rem; padding: 0.05rem 0.65rem; border: 1px solid color-mix(in srgb, var(--tagg, var(--farg-text-svag)) 55%, white); border-radius: 999px; background: color-mix(in srgb, var(--tagg, var(--farg-text-svag)) 10%, white); color: color-mix(in srgb, var(--tagg, var(--farg-text)) 82%, black); font: 600 0.8rem/1.2 var(--typsnitt-ui); }
+.tf-radtagg { display: inline-flex; align-items: center; min-height: 1.75rem; padding: 0.05rem 0.65rem; border: 1px solid color-mix(in srgb, var(--tagg, var(--farg-text-svag)) 75%, white); border-radius: 999px; background: color-mix(in srgb, var(--tagg, var(--farg-text-svag)) 10%, white); color: color-mix(in srgb, var(--tagg, var(--farg-text)) 82%, black); font: 600 0.8rem/1.2 var(--typsnitt-ui); }
 /* Taggarna står tätare än länkarna, i en egen grupp, så att en tagg som bryts till en ny rad börjar vid textens kant. */
 .tf-radtaggar { display: inline-flex; flex-wrap: wrap; gap: 0.35rem 0.4rem; }
 button.tf-radtagg { position: relative; cursor: pointer; }

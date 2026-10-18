@@ -87,6 +87,11 @@ export function matteproblemen(metod: Metod, databas: { id: string; data: Mattep
   for (let i = 1; i < alla.length; i++) if (alla[i].nivaNr === alla[i - 1].nivaNr && alla[i].nr === alla[i - 1].nr) throw new Error(`Matteproblemen: ${alla[i - 1].titel} och ${alla[i].titel} har båda nummer ${alla[i].nr} på nivån ${alla[i].niva}.`);
   const ids = new Set<string>();
   for (const p of alla) { if (ids.has(p.id)) throw new Error(`Matteproblemen: två problem har id ${p.id}.`); ids.add(p.id); }
+  // En posts pdf heter matteproblem-<id> och matteproblem-<id>-med-losningsforslag, och nivåns filer matteproblem-<nivå>
+  // och -med-losningsforslag: ett id som heter som en nivå skulle skriva över nivåns pdf (Codex-granskningen 2026-10-18
+  // natt).
+  const nivaernas = new Set(nivaer.flatMap((n) => [slugAv(n), `${slugAv(n)}-med-losningsforslag`]));
+  for (const p of alla) if (nivaernas.has(p.id) || nivaernas.has(`${p.id}-med-losningsforslag`)) throw new Error(`Matteproblemen: id "${p.id}" ger samma filnamn som en nivås fil (${DATABAS}-${p.id}). Ge problemet ett annat id.`);
   return alla;
 }
 
