@@ -21,6 +21,11 @@
 # som läraren kan skriva på tavlan. scripts/utskriftsformat.mjs prövar att varje kort adress i registret står här och
 # leder till sakens adress.
 [[redirects]]
+  from = "/matteproblem"
+  to = "/stodundervisning/problemlosning-i-grupp/problem"
+  status = 301
+
+[[redirects]]
   from = "/skrivkort"
   to = "/stodundervisning/kortskrivning-skriv-varje-dag/skrivkort"
   status = 301

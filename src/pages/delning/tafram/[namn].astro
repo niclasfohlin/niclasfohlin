@@ -1,0 +1,105 @@
+---
+// Mallen för delningskortet till Ta fram ett matteproblem, 1200 × 630 (Niclas 2026-10-14: en sida att dela får en egen
+// delningsbild i en egen mall). Den har delningskortens form (src/pages/delning/kort/[namn].astro), med titeln till
+// vänster, och till höger tre av bankens problem, ett ur varje nivå, i en solfjäder och i problemets egen form, boksidan
+// (Problemsida.astro), med nivåns knapp och taggen. Problemen står i TAFRAMENS_POSTER i src/lib/delningskort.ts, som räknar
+// in mallen bara i det här kortet. Sidan finns bara för att scripts/delningskort.mjs ska fotografera den; den länkas inte
+// och indexeras inte.
+import '../../../styles/global.css';
+import { site } from '../../../data/site';
+import { allaKort, type Kort } from '../../../lib/delningskort';
+import { publicerade } from '../../../lib/innehall';
+import { taFramKortposter } from '../../../lib/tafram';
+
+export async function getStaticPaths() {
+  return (await allaKort()).filter((kort) => kort.tafram).map((kort) => ({ params: { namn: kort.namn }, props: { kort } }));
+}
+
+const { kort } = Astro.props as { kort: Kort };
+const m = (await publicerade('stodundervisning')).find((x) => x.id === kort.tafram!.metod)!;
+const poster = taFramKortposter(m, kort.tafram!.poster);
+const n = kort.titel.length;
+const storlek = n <= 18 ? 76 : n <= 36 ? 62 : 52;
+---
+
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>{kort.titel}</title>
+    <style>
+      html, body { margin: 0; padding: 0; background: #fff; }
+      .dk { display: flex; width: 1200px; height: 630px; overflow: hidden; background: var(--farg-yta); color: var(--farg-text); font-family: var(--typsnitt-rubrik); }
+      .dk-streck { flex: none; width: 18px; background: var(--dk-farg); }
+      .dk-text { flex: 1; min-width: 0; display: flex; flex-direction: column; padding: 56px 56px 56px 64px; }
+      .dk-etikett { margin: 0 0 26px; max-width: none; font-size: 24px; line-height: 1.25; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--dk-farg); }
+      .dk-titel { margin: 0; max-width: none; font-size: var(--dk-storlek); line-height: 1.06; font-weight: 800; letter-spacing: -0.015em; color: var(--farg-text); text-wrap: balance; }
+      .dk-under { margin: 22px 0 0; max-width: none; font-size: 32px; line-height: 1.3; font-weight: 500; color: var(--farg-text-svag); text-wrap: pretty; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+      .dk-innehall { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-bottom: 16px; }
+      .dk-fot { flex: none; display: flex; align-items: center; gap: 18px; }
+      .dk-fot img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; object-position: top; border: 2px solid var(--farg-kant); }
+      .dk-namn { font-size: 27px; line-height: 1.2; font-weight: 700; }
+      .dk-adress { font-size: 23px; line-height: 1.3; color: var(--farg-text-svag); }
+      .dk-korten { position: relative; flex: none; width: 620px; overflow: hidden; background: var(--farg-ton); }
+      /* Ett problem som en liten boksida, A4:ans proportioner, med boksidans ram, titel, text, bild och frågans ruta. */
+      .dk-sida { position: absolute; top: 120px; width: 262px; height: 370px; box-sizing: border-box; padding: 9px; background: #fff; box-shadow: 0 14px 34px rgba(20, 32, 43, 0.24); overflow: hidden; }
+      .dk-sida:nth-child(1) { left: 18px; transform: rotate(-7deg); }
+      .dk-sida:nth-child(2) { left: 178px; top: 70px; z-index: 2; }
+      .dk-sida:nth-child(3) { left: 338px; transform: rotate(7deg); }
+      .dk-sida .boksida-ram { height: 100%; box-sizing: border-box; padding: 10px 14px; border-width: 3px; overflow: hidden; display: flex; flex-direction: column; }
+      .dk-sida .boksida-titel { font-size: 19px; margin: 0 0 7px; }
+      .dk-sida .boksida-titel::after { width: 30px; margin-top: 3px; border-bottom-width: 2px; }
+      .dk-sida .problemsida-text { font-size: 11.5px; line-height: 1.45; }
+      .dk-sida .problemsida-text p { margin: 0 0 4px; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+      .dk-sida .problemsida-bild { flex: 1; min-height: 0; margin: 4px 0; max-width: none; display: flex; align-items: center; justify-content: center; }
+      .dk-sida .problemsida-bild img { max-height: 100%; width: auto; max-width: 100%; }
+      .dk-sida .problemsida-fraga { margin: 4px 2px 6px; padding: 5px 7px; font-size: 10.5px; line-height: 1.35; }
+      .dk-sida .problemsida-fraga-rubrik { font-size: 9.5px; margin: 0 0 1px; }
+      .dk-sida .problemsida-fraga p { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+      .dk-fotrad { display: flex; justify-content: space-between; align-items: center; gap: 6px; font-family: var(--typsnitt-ui); font-size: 9.5px; }
+      .dk-tagg { padding: 1px 7px; border: 1px solid var(--farg-kant); border-radius: 999px; color: var(--farg-text); font-weight: 600; white-space: nowrap; }
+      .dk-nivaknapp { font-family: 'Cinzel', serif; font-size: 9.5px; color: #fff; background: var(--bok-niva); padding: 1px 7px; white-space: nowrap; }
+    </style>
+  </head>
+  <body>
+    <div class="dk" style={`--dk-farg: var(${kort.farg}); --dk-storlek: ${storlek}px`}>
+      <div class="dk-streck"></div>
+      <div class="dk-text">
+        <div class="dk-innehall">
+          {kort.etikett && <p class="dk-etikett">{kort.etikett}</p>}
+          <h1 class="dk-titel">{kort.titel}</h1>
+          {kort.undertitel && <p class="dk-under">{kort.undertitel}</p>}
+        </div>
+        <div class="dk-fot">
+          <img src={site.portratt} alt="" />
+          <div>
+            <div class="dk-namn">{site.namn}</div>
+            <div class="dk-adress">niclasfohlin.se</div>
+          </div>
+        </div>
+      </div>
+      <div class="dk-korten">
+        {poster.map((p) => (
+          <section class="dk-sida boksida problemsida" style={`--bok-niva: ${p.farg}`}>
+            <div class="boksida-ram">
+              <h2 class="boksida-titel">{p.titel}</h2>
+              <div class="problemsida-text"><p>{p.stycken[0]}</p></div>
+              <p class="problemsida-bild"><img src={p.bild} alt="" /></p>
+              <div class="problemsida-fraga">
+                <p class="problemsida-fraga-rubrik">{p.fragor.length > 1 ? 'Frågorna' : 'Frågan'}</p>
+                <p>{p.fragor[0]}</p>
+              </div>
+              <p class="dk-fotrad">{p.tagg ? <span class="dk-tagg">{p.tagg}</span> : <span></span>}<span class="dk-nivaknapp">{p.niva.toUpperCase()} · problem {p.nr}</span></p>
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+    <script>
+      // scripts/delningskort.mjs väntar på dkKlar, så att typsnitten och bilderna är inne innan kortet fotograferas.
+      (window as Window & { dkKlar?: Promise<unknown> }).dkKlar = document.fonts.ready
+        .then(() => Promise.all([...document.images].map((i) => (i.complete ? 1 : new Promise((r) => { i.onload = i.onerror = r; })))));
+    </script>
+  </body>
+</html>

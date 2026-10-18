@@ -11,6 +11,7 @@ import { HOGST_LEKTIONSKORT, LEKTIONSKORT_PLATS, lektionskortFel } from './lib/l
 import { forstaLed, radensDel } from './lib/karta';
 import { veckofel } from './lib/veckomaterial';
 import { arskursFel } from './lib/tackning';
+import { INNEHALLSTAGGAR } from './lib/standard/index.js';
 
 // Registren är den enda sanningen om vilka taggar och publikationer som finns.
 // Ett okänt värde stoppar bygget med ett tydligt besked om vad som ska göras.
@@ -429,6 +430,14 @@ const stodundervisning = defineCollection({
       ramar: z.array(z.strictObject({
         rubrik: text,
         text: stycken,
+        // Innehållstaggen på en post i metodens bank, som ett problem (Niclas 2026-10-18: "en innehållstag likt brainbreaks
+        // har", "stora centrala delar av ämnet för problem"): en av ämnets taggar i standarden (src/lib/standard/,
+        // INNEHALLSTAGGAR), för matematiken de fem delarna av det centrala innehållet i Lgr22. Sidan Ta fram ett
+        // matteproblem visar den i postens rad och väljer ur den (src/lib/tafram.ts), och där stannar bygget om en post saknar
+        // den.
+        innehallstagg: z.string().superRefine((t, ctx) => {
+          if (!Object.values(INNEHALLSTAGGAR).some((xs) => xs.some((x) => x.namn === t))) ctx.addIssue({ code: 'custom', message: `Innehållstaggen "${t}" finns inte i standarden. Taggarna i matematik: ${INNEHALLSTAGGAR.Matematik.map((x) => x.namn).join(', ')} (src/lib/standard/index.js).` });
+        }).optional(),
         // En litteraturlista (Chambers boksamtal i grupp, Niclas 2026-10-10, metodriggens TILL-SAJTEN 2026-10-12): bilder är en
         // bild per rad, bokens omslag, i en smal första kolumn utan rubrik, med sökvägen i metodens mapp
         // (public/stodundervisning/<id>/, som omslag/bas-01.jpg). bredder är kolumnernas relativa bredd, med bildens kolumn

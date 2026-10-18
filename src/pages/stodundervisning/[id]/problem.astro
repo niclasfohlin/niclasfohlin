@@ -1,0 +1,15 @@
+---
+// /stodundervisning/<id>/problem: Ta fram ett matteproblem, problemen i metodens bank som en databas att välja ur efter
+// nivå och innehållstagg (src/lib/tafram.ts, src/components/TaFram.astro; den korta adressen /matteproblem).
+import TaFram from '../../../components/TaFram.astro';
+import { publicerade } from '../../../lib/innehall';
+import { harTaFram, taFramAv } from '../../../lib/tafram';
+
+export async function getStaticPaths() {
+  return (await publicerade('stodundervisning')).filter((m) => harTaFram(m, 'problem')).map((m) => ({ params: { id: m.id }, props: { m } }));
+}
+
+const t = await taFramAv(Astro.props.m);
+---
+
+<TaFram t={t} />

@@ -5,7 +5,7 @@ import { allaKort } from '../../lib/delningskort';
 export async function GET() {
   // Sidan som slumpar skrivkort har en egen mall (src/pages/delning/skrivkort/[namn].astro), och så har sidorna som
   // slumpar aktivitetskort och brainbreaks (src/pages/delning/aktiviteter/ och brainbreaks/) och metodbanken
-  // (src/pages/delning/metodbank/).
-  const kort = (await allaKort()).map(({ sida, namn, fil, skrivkort, kortbank, metodbank }) => ({ sida, namn, fil, mall: skrivkort ? `/delning/skrivkort/${namn}` : kortbank ? `/delning/${kortbank.slag}/${namn}` : metodbank ? `/delning/metodbank/${namn}` : `/delning/kort/${namn}` }));
+  // (src/pages/delning/metodbank/), och Ta fram ett matteproblem (src/pages/delning/tafram/).
+  const kort = (await allaKort()).map(({ sida, namn, fil, skrivkort, kortbank, metodbank, tafram }) => ({ sida, namn, fil, mall: skrivkort ? `/delning/skrivkort/${namn}` : kortbank ? `/delning/${kortbank.slag}/${namn}` : metodbank ? `/delning/metodbank/${namn}` : tafram ? `/delning/tafram/${namn}` : `/delning/kort/${namn}` }));
   return new Response(JSON.stringify(kort, null, 1) + '\n', { headers: { 'Content-Type': 'application/json; charset=utf-8' } });
 }

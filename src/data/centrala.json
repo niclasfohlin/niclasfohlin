@@ -1,5 +1,15 @@
 [
   {
+    "id": "matteproblem",
+    "namn": "Ta fram ett matteproblem",
+    "slag": "sida",
+    "del": "verktyg",
+    "adress": "/stodundervisning/problemlosning-i-grupp/problem",
+    "kort": "/matteproblem",
+    "metod": "problemlosning-i-grupp",
+    "mejl": "välj nivå och innehåll bland metodens trettio problem, visa ett stort och skriv ut dem du vill ha"
+  },
+  {
     "id": "skrivkort",
     "namn": "Ta fram ett skrivkort",
     "slag": "sida",

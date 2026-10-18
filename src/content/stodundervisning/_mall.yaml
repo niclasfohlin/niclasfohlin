@@ -76,6 +76,9 @@ utkast: true
 # I ramar (under rubrik och text): ovrigt: <metodens namn på det material som inte är bankens enheter eller ramar med blad,
 #   som Bladen och korten>, så får det en egen fil. vidEnheterna: [<ramens rubrik>, …] är ramarna som hör till varje enhet i
 #   banken, som bladet Kärnorna till varje text: de står då också på varje enhets sida, med egen knapp.
+# I en ram som är en enhet i banken ("Bas, problem 1: Äpplena"): innehallstagg: <en av ämnets taggar>, som Algebra. Matematikens
+#   taggar är Lgr22:s fem delar: Taluppfattning, Algebra, Geometri, Sannolikhet och statistik, Samband och förändring
+#   (src/lib/standard/, METODER.md under Ta fram ur en bank). Sidan Ta fram ett matteproblem visar taggen och väljer ur den.
 
 # Serier (Ljudlek i grupp): en generell metod med en lektionsbank och lektioner som är egna metoder. En ny lektion är en
 # ny fil med de tre fälten nedan: den syns i banken, i metodbanken och i seriens meny utan att den generella metoden

@@ -48,6 +48,7 @@ const UNDANTAG = [
   { vag: /^mallar\.\d+\.text$/, word: false, skal: 'mallens text är till läraren och står bara på sidan' },
   { vag: /^mallar\.\d+\.underrad$/, utskrift: false, skal: 'raden ritas som fält med skrivlinjer på sidan' },
   { vag: /^ramar\.ramar\.\d+\.(serie|ark)$/, word: false, utskrift: false, skal: 'bildseriens och arkets id i metodens scenfil; rutorna står som bilder (src/lib/bildserier.ts)' },
+  { vag: /^ramar\.ramar\.\d+\.innehallstagg$/, word: false, utskrift: false, skal: 'databasens innehållstagg, som Ta fram-sidan visar och väljer ur (src/lib/tafram.ts); elevens blad har den inte, och metodriggens lösningsblad visar den när det kommer (K-423)' },
   { vag: /^ramar\.ramar\.\d+\.oversikt\.bilder\.\d+$/, word: false, utskrift: false, skal: 'litteraturlistans omslag, filens sökväg; bilden står i listans första kolumn (src/lib/litteraturlista.ts)' },
   { vag: /^mallar\.\d+\.etiketter\.\d+$/, word: false, utskrift: false, skal: 'seriemallens namn på rutorna står i rutornas bilder, i elevens typsnitt (src/lib/serieritning.js)' },
 ];

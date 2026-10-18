@@ -12,6 +12,8 @@
 // /brainbreaks). Aktivitetskorten finns också i Word, en fil per kategori med ett kort per sida
 // (src/lib/aktivitetskortform.ts), och utskriften av ett kort på sidan är kortets sida ur kategorins pdf, som Word har
 // gjort (METODER.md under Utskriften). Ett korts id och nummer ändras aldrig.
+// Word-filernas pdf:er och deras kontrollsummor (scripts/bankpdf.mjs), för kortens pdf-adresser med version (K-411).
+import BANKPDF from '../../public/stodundervisning/bank-pdf.json';
 
 export interface Aktivitetskategori { id: string; namn: string; farg: string }
 export interface Aktivitet {
@@ -145,11 +147,15 @@ export const platsText = (p: string) => ({ inne: 'Inne', ute: 'Ute', 'inne eller
 // Ett urval är korten i den ordningen, som de tre på sidornas delningskort; utan urval alla kort.
 const urvalet = <T extends { id: string }>(kort: T[], urval?: string[]) => (urval ? urval.map((id) => kort.find((k) => k.id === id)).filter((k): k is T => Boolean(k)) : kort);
 
+// Kortets pdf klipps ur kategorins pdf efter bygget, så dess version är kategorifilens (K-411): samma fil ger samma kort,
+// och ett ändrat kort ger en ny adress, så att webbläsaren aldrig ger ett äldre kort än sidan.
+const kortVersion = (id: string, kategori: string) => { const v = (BANKPDF as Record<string, { pdf?: string }>)[kategorifilNamn(id, kategori)]?.pdf; return v ? `?v=${v.slice(0, 8)}` : ''; };
+
 /** Det som webbläsaren ritar aktivitetskorten ur (src/scripts/kortbanken.ts). */
 export function aktiviteterData(id: string, b: Aktivitetsbank, urval?: string[]) {
   return {
     kategorier: b.kategorier.map((k) => ({ id: k.id, namn: k.namn, farg: `#${k.farg}` })),
-    kort: urvalet(b.kort, urval).map((k) => ({ ...k, plats: platsText(k.plats), bild: kortbildAdress(id, k.bild), pdf: `/stodundervisning/${aktivitetPdfNamn(id, k.id)}.pdf` })),
+    kort: urvalet(b.kort, urval).map((k) => ({ ...k, plats: platsText(k.plats), bild: kortbildAdress(id, k.bild), pdf: `/stodundervisning/${aktivitetPdfNamn(id, k.id)}.pdf${kortVersion(id, k.kategori)}` })),
   };
 }
 

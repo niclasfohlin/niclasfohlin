@@ -21,6 +21,8 @@ import { arskursSpannet, SKALA, spannText, type Spann } from './tackning';
 import { delningensKort, kortData, skrivkortAdress, skrivkortAv } from './skrivkort';
 import { aktiviteterAdress, aktiviteterAv, aktiviteterData, brainbreaksAdress, brainbreaksAv, brainbreaksData, delningensAktiviteter, delningensBrainbreaks } from './aktiviteter';
 import { centralAv } from './centrala';
+import { bankAv } from './bank';
+import { taFramKortposter } from './tafram';
 
 export const MALL = 'src/pages/delning/kort/[namn].astro';
 // Kortet för sidan som slumpar skrivkort har en egen mall, som bara räknas in i det kortet, och så har korten för
@@ -32,14 +34,19 @@ export const KORTBANKSMALL = { aktiviteter: 'src/pages/delning/aktiviteter/[namn
 // i kartans ordning. Metoderna i trappan visar tre av de fyra områdena; de byts när Niclas vill, och bygget stannar om
 // en av dem inte längre är publicerad.
 export const METODBANKSMALL = 'src/pages/delning/metodbank/[namn].astro';
+// Sidan Ta fram ett matteproblem har en egen mall med tre av bankens problem i en solfjäder, ett ur varje nivå, i sin egen
+// form (boksidan). Problemen byts när Niclas vill; finns ett inte längre stannar bygget.
+export const TAFRAMSMALL = 'src/pages/delning/tafram/[namn].astro';
+export const TAFRAMENS_POSTER = ['bas-7', 'medel-5', 'avancerat-8'];
 export const METODBANKENS_METODER = ['fyra-raknesatten', 'laslistor-i-grupp', 'ordverkstad-i-grupp'];
 // Raden under titeln, utan antalet metoder (Niclas 2026-10-18: "Antal uppdaterad ju löpande", och "Metoder i eller
 // metoder för").
 const METODBANKENS_RAD = 'Metoder i matematik, läsning, skrivning och socialt samspel';
 // Metodbankens kort är bara text och färgade ytor och sparas som PNG med palett: 41 kB, mot 89 kB som JPEG, utan skillnad
 // som syns förstorad (2026-10-18). Kortet ska delas många gånger, och varje tjänst som visar länken hämtar bilden.
-// Kort med foton och teckningar, som skrivkorten, blir sämre och större i en palett och är JPEG.
-const PNG: Kort['typ'][] = ['metodbank'];
+// Kort med foton och teckningar, som skrivkorten, blir sämre och större i en palett och är JPEG. Kortet för Ta fram ett
+// matteproblem har text, streckbilder och ytor och blir också mindre i en palett: 57 kB mot 113 kB (2026-10-18).
+const PNG: Kort['typ'][] = ['metodbank', 'tafram'];
 // Avsnitten i global.css som korten på de egna mallarna ritas med. Aktivitetskorten och brainbreakkorten läser
 // skrivkortens färger, så deras kort räknar in båda avsnitten; skrivkortens kort bara sitt eget.
 const SKRIVKORTSSTIL = '/* Skrivkorten och sidan som slumpar dem';
@@ -50,7 +57,7 @@ const VERSION = 1;
 export interface Kort {
   sida: string; // sidans adress, t.ex. /stodundervisning/brakkurs-i-grupp
   namn: string; // filnamnets början, t.ex. stodundervisning-brakkurs-i-grupp
-  typ: 'start' | 'om' | 'avsnitt' | 'metodbank' | 'artikel' | 'bok' | 'metod' | 'skrivkort' | 'aktiviteter' | 'brainbreaks';
+  typ: 'start' | 'om' | 'avsnitt' | 'metodbank' | 'artikel' | 'bok' | 'metod' | 'skrivkort' | 'aktiviteter' | 'brainbreaks' | 'tafram';
   etikett: string; // raden över titeln, tom på huvudsidorna
   titel: string;
   undertitel: string;
@@ -63,6 +70,8 @@ export interface Kort {
   kortbank?: { slag: keyof typeof KORTBANKSMALL; metod: string; kort: string[] };
   /** Metodbanken: kartans skala och rader och metodkorten i trappan, med det som syns av dem. */
   metodbank?: { skala: string[]; rader: { omrade: string; titel: string; spann: Spann }[]; metoder: { id: string; titel: string; omrade: string; fakta: { rubrik: string; text: string }[]; ingress: string }[] };
+  /** Ta fram ur en bank: metoden och posterna som står på kortet (src/lib/tafram.ts). */
+  tafram?: { metod: string; poster: string[] };
 }
 
 // Små tal med bokstäver, som i sajtens texter.
@@ -136,6 +145,13 @@ export function allaKort(): Promise<Kort[]> {
       // en sida att dela får en egen delningsbild i en egen mall).
       const ak = aktiviteterAv(m.id);
       if (ak) lagg({ sida: aktiviteterAdress(m.id), typ: 'aktiviteter', etikett: `Aktivitetskort · ${arskursText(m.data)}`, titel: centralAv('aktiviteter')?.namn ?? 'Ta fram en aktivitet', undertitel: `${ak.kort.length} aktiviteter i ${TAL[ak.kategorier.length] ?? ak.kategorier.length} kategorier, sex i taget, att samla i en lista och skriva ut`, bild: portratt, farg: FARG[m.data.omrade] ?? '--farg-accent', kortbank: { slag: 'aktiviteter', metod: m.id, kort: delningensAktiviteter(ak) } });
+      // Sidan Ta fram ett matteproblem har ett kort med tre av problemen (Niclas 2026-10-14: en sida att dela får en egen
+      // delningsbild i en egen mall).
+      const bank = bankAv(m.data);
+      if (bank?.ord.slug === 'problem') {
+        const delar = new Set(bank.enheter.map((e) => m.data.ramar!.ramar[e.ri].innehallstagg).filter(Boolean)).size;
+        lagg({ sida: `/stodundervisning/${m.id}/problem`, typ: 'tafram', etikett: `Matteproblem · ${arskursText(m.data)}`, titel: centralAv('matteproblem')?.namn ?? 'Ta fram ett matteproblem', undertitel: `${bank.enheter.length} problem på ${TAL[bank.nivaer.length] ?? bank.nivaer.length} nivåer${delar ? ` och i kursplanens ${TAL[delar] ?? delar} delar` : ''}, att visa stort och skriva ut`, bild: portratt, farg: FARG[m.data.omrade] ?? '--farg-accent', tafram: { metod: m.id, poster: TAFRAMENS_POSTER } });
+      }
       const bb = brainbreaksAv(m.id);
       if (bb) lagg({ sida: brainbreaksAdress(m.id), typ: 'brainbreaks', etikett: `Brainbreaks · ${arskursText(m.data)}`, titel: centralAv('brainbreaks')?.namn ?? 'Ta fram en brainbreak', undertitel: `${bb.kort.length} brainbreaks, sex i taget, stora på skärmen med en klocka och musik`, bild: portratt, farg: FARG[m.data.omrade] ?? '--farg-accent', kortbank: { slag: 'brainbreaks', metod: m.id, kort: delningensBrainbreaks(bb) } });
     }
@@ -155,10 +171,11 @@ export function allaKort(): Promise<Kort[]> {
         ...Object.values(data.bilder).map((b) => bildSumma(b.stor.replace(/^\//, '')))].join('|');
     };
     // Aktivitetskorten och brainbreakkorten ritas med sidornas kod och form (src/scripts/kortbanken.ts och avsnitten om
-    // skrivkorten och korten i global.css), med korten och deras bilder.
+    // skrivkorten och korten i global.css), med korten och deras bilder. Kortens pdf-adresser ritas inte och räknas inte
+    // in, så att en ny pdf inte ritar om kortet (K-411).
     const kortbankSumma = (s: NonNullable<Kort['kortbank']>) => {
       const data = s.slag === 'aktiviteter' ? aktiviteterData(s.metod, aktiviteterAv(s.metod)!, s.kort) : brainbreaksData(s.metod, brainbreaksAv(s.metod)!, s.kort);
-      return [las(KORTBANKSMALL[s.slag]).toString('utf8').replace(/\r\n/g, '\n'), las('src/scripts/kortbanken.ts').toString('utf8').replace(/\r\n/g, '\n'), css.slice(css.indexOf(SKRIVKORTSSTIL)), JSON.stringify(data),
+      return [las(KORTBANKSMALL[s.slag]).toString('utf8').replace(/\r\n/g, '\n'), las('src/scripts/kortbanken.ts').toString('utf8').replace(/\r\n/g, '\n'), css.slice(css.indexOf(SKRIVKORTSSTIL)), JSON.stringify(data, (nyckel, varde) => (nyckel === 'pdf' ? undefined : varde)),
         ...data.kort.map((k) => bildSumma(k.bild.replace(/^\//, '')))].join('|');
     };
     // Metodbankens kort ritas med bankens eget metodkort (src/components/Metodkort.astro) och dess stilar i global.css:
@@ -169,6 +186,11 @@ export function allaKort(): Promise<Kort[]> {
       if (a < 0 || b < 0) throw new Error(`Delningskorten: hittar inte "${fran.trim()}" följt av "${till.trim()}" i global.css; rätta stycket i src/lib/delningskort.ts.`);
       return css.slice(a, b);
     };
+    // Ta fram-kortets problem ritas i boksidans form (avsnittet om boksidan i global.css), med texterna och bilderna.
+    const taframSumma = (t: NonNullable<Kort['tafram']>) => {
+      const poster = taFramKortposter(metoder.find((m) => m.id === t.metod)!, t.poster);
+      return [las(TAFRAMSMALL).toString('utf8').replace(/\r\n/g, '\n'), stycke('/* Boksidan (Boksida.astro)', '/* Två lösningar (Textpar.astro'), JSON.stringify(poster), ...poster.map((p) => bildSumma(p.bild.replace(/^\//, '')))].join('|');
+    };
     const metodbankSumma = () => {
       const mall = las(METODBANKSMALL).toString('utf8').replace(/\r\n/g, '\n');
       const kortet = las('src/components/Metodkort.astro').toString('utf8').replace(/\r\n/g, '\n');
@@ -177,7 +199,7 @@ export function allaKort(): Promise<Kort[]> {
     };
     return utan.map((k) => {
       const h = createHash('sha256');
-      for (const del of [...gemensamt, designsystem(k.farg), JSON.stringify(k), bildSumma(k.bild), bildSumma(portratt), ...(k.skrivkort ? [skrivkortSumma(k.skrivkort)] : []), ...(k.kortbank ? [kortbankSumma(k.kortbank)] : []), ...(k.metodbank ? [metodbankSumma()] : [])]) h.update(del);
+      for (const del of [...gemensamt, designsystem(k.farg), JSON.stringify(k), bildSumma(k.bild), bildSumma(portratt), ...(k.skrivkort ? [skrivkortSumma(k.skrivkort)] : []), ...(k.kortbank ? [kortbankSumma(k.kortbank)] : []), ...(k.metodbank ? [metodbankSumma()] : []), ...(k.tafram ? [taframSumma(k.tafram)] : [])]) h.update(del);
       return { ...k, fil: `/delning/${k.namn}-${h.digest('hex').slice(0, 10)}.${PNG.includes(k.typ) ? 'png' : 'jpg'}` };
     });
   })();

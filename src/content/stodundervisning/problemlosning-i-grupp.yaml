@@ -29,7 +29,7 @@ material:
   - bladen Vår lösning och Två lösningar
   - konkret material
   - kortet Våra sätt
-uppdaterad: 2026-10-10
+uppdaterad: 2026-10-18
 relaterade:
   - fyra-raknesatten
   - antalsuppfattning-i-grupp
@@ -40,6 +40,9 @@ nivaer:
   - { namn: Bas, farg: "4E7A43" }
   - { namn: Medel, farg: "A8742A" }
   - { namn: Avancerat, farg: "6E3450" }
+centrala:
+  - id: matteproblem
+    efterText: urval
 inledning:
   - Problemlösning i grupp är en lärarledd insats för två till åtta elever i åk 4–9 som behöver stöd i att läsa, tolka och lösa matematiska problem i text. Varje pass har ett problem. På bordet ligger problemets sida med en svartvit bild och kortet Våra sätt, som har sätt att lösa problem och frågor som paren ställer sig. Innan någon räknar visar paren problemet med en bild, en tabell eller en tallinje på bladet Vår lösning eller en miniwhiteboard, eller så bygger de det med material.
   - "Passet är ett samtal i fem delar: Förstå, Planera, Lösa, Jämföra och Avsluta. I Förstå läser läraren problemet högt, paren berättar det för varandra, och gruppen ringar in frågan och säger vad den vet och vad den ska ta reda på. I Planera föreslår gruppen sätt att visa problemet, och i Lösa prövar paren olika sätt medan läraren går runt och frågar i stället för att visa. I Jämföra lägger läraren fram bladet Två lösningar, med två färdiga lösningar på samma problem. Gruppen ser vad som är lika i dem, och sedan lägger ett eller två par sina lösningar bredvid. I Avsluta sätter gruppen en bock på kortet Våra sätt vid det sätt som fungerade. Skillnaden mot vanligt grupparbete är att läraren leder, modellerar och stöttar. Att modellera är att tänka högt om hur man tar sig an problemet, som ”Jag vill rita det här för att se det framför mig”."
@@ -311,7 +314,7 @@ roll:
 urval:
   rubrik: Var hittar du problemen?
   text:
-    - Gör kartläggningen före på den nivå som ligger närmast elevernas årskurs, och välj sedan nivå efter vad kartläggningen visar. Börja med metodens tio problem på nivån, i ordning, ett per pass. De står under Problemen och räcker till de första tre till fem veckorna, med tre eller två pass i veckan. Kör gruppen fast på samma sak två pass i rad, tar ni ett problem som liknar det förra innan ni går vidare. När gruppen har löst de tio med lite stöd, kan den ta nästa nivå, om den kan räkna talen där.
+    - Gör kartläggningen före på den nivå som ligger närmast elevernas årskurs, och välj sedan nivå efter vad kartläggningen visar. Börja med metodens tio problem på nivån, i ordning, ett per pass. De står under Problemen och räcker till de första tre till fem veckorna, med tre eller två pass i veckan. Problemen finns också på sidan Ta fram ett matteproblem, där du väljer nivå och innehåll, visar ett problem stort och skriver ut dem du vill ha. Kör gruppen fast på samma sak två pass i rad, tar ni ett problem som liknar det förra innan ni går vidare. När gruppen har löst de tio med lite stöd, kan den ta nästa nivå, om den kan räkna talen där.
     - Sedan väljer du problem i läromedlets problemlösningsavsnitt, i Skolverkets två problembanker för åk 4–6 och åk 7–9 på Lärportalen, i Nämnarens Problemavdelning och bland Kängurutävlingens tidigare problem, med lösningar och materialet Arbeta vidare, på NCM:s webbplats. Ta först problem som liknar något av de tio. Ett problem är en uppgift där eleven inte direkt vet hur den ska lösas (Skolverket, 2022). Varje problem du väljer förbereder du på bladet Lärarens sida för ett eget problem.
   kravText: "Välj ett problem per pass som är rikt men avgränsat och uppfyller tre krav:"
   krav:
@@ -839,6 +842,7 @@ ramar:
                 Ni säger att svaret är 9. Hur kan ni kontrollera att det svarar på frågan?
                 Ni säger att påsarna hade lika många från början. Hur kan ni kontrollera det mot problemet?
     - rubrik: "Bas, problem 1: Äpplena"
+      innehallstagg: Taluppfattning
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -909,6 +913,7 @@ ramar:
                 Ni säger att det blir 30 stickor. Hur kan ni kontrollera att det stämmer med problemet?
                 Ni säger att 20 bodar tar dubbelt så många som 10. Hur kan ni kontrollera det med 2 och 4 bodar?
     - rubrik: "Bas, problem 2: Fiskebodarna"
+      innehallstagg: Algebra
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -979,6 +984,7 @@ ramar:
                 Ni säger att alla får 5 från brickan. Hur kan ni kontrollera att det stämmer med problemet?
                 ”Är svaret 9 kex från brickan?” Hur kan ni kontrollera att det svarar på frågan?
     - rubrik: "Bas, problem 3: Kexen"
+      innehallstagg: Taluppfattning
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -1049,6 +1055,7 @@ ramar:
                 Ni säger att det blir 5 dl havregryn, en dl till. Hur kan ni kontrollera att det stämmer med problemet?
                 ”Är svaret 6 dl havregryn?” Hur kan ni kontrollera att det svarar på frågan?
     - rubrik: "Bas, problem 4: Chokladbollarna"
+      innehallstagg: Samband och förändring
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -1118,6 +1125,7 @@ ramar:
                 En elev svarade 26 sjuarmade och 1 femarmad. Hur kan ni kontrollera det mot problemet?
                 ”Är svaret 187?” Hur kan ni kontrollera att det svarar på frågan?
     - rubrik: "Bas, problem 5: Ljusstakarna"
+      innehallstagg: Algebra
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -1187,6 +1195,7 @@ ramar:
                 Ni säger att det blir 13 kuber. Hur kan ni kontrollera att det stämmer med problemet?
                 Ni säger 4 · 10 = 40 kuber till tornet som är 5 högt. Hur kan ni kontrollera det med tornet ni har byggt?
     - rubrik: "Bas, problem 6: Tornet"
+      innehallstagg: Geometri
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -1257,6 +1266,7 @@ ramar:
                 Ni säger att det blir 12 matcher. Hur kan ni kontrollera att det stämmer med problemet?
                 Ni säger att ni har alla 15. Hur kan ni kontrollera att ingen match saknas?
     - rubrik: "Bas, problem 7: Matcherna"
+      innehallstagg: Sannolikhet och statistik
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -1327,6 +1337,7 @@ ramar:
                 Ni säger att 6, 7 och 8 går på 3 sätt var. Hur kan ni kontrollera det med en vit och en grå tärning?
                 ”Är 7 rätt?” Hur kan ni kontrollera det mot problemet?
     - rubrik: "Bas, problem 8: Tärningarna"
+      innehallstagg: Sannolikhet och statistik
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -1397,6 +1408,7 @@ ramar:
                 Ni säger att Noras park är 50 m runt. Hur kan ni kontrollera att det stämmer med problemet?
                 ”Är svaret 2 varv?” Hur kan ni kontrollera att det svarar på frågan?
     - rubrik: "Bas, problem 9: Parken"
+      innehallstagg: Geometri
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -1467,6 +1479,7 @@ ramar:
                 Ni säger att alla tre väger 540 g. Hur kan ni kontrollera att det stämmer med problemet?
                 ”Väger cirkeln 30 g?” Hur kan ni kontrollera det på alla tre vågarna?
     - rubrik: "Bas, problem 10: Vågen"
+      innehallstagg: Algebra
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -1594,6 +1607,7 @@ ramar:
                 Ni säger att 3, 3, 2 och 2, 3, 3 är två trianglar. Hur kan ni kontrollera det med pinnarna?
                 ”Är det alla nu?” Hur kan ni kontrollera att ingen saknas?
     - rubrik: "Medel, problem 1: Glasspinnarna"
+      innehallstagg: Geometri
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -1664,6 +1678,7 @@ ramar:
                 Ni säger att 10 bord ger dubbelt så många som 5 bord, alltså 44. Hur kan ni kontrollera det mot bilden?
                 ”Stämmer regeln?” Hur kan ni kontrollera den med 3 bord?
     - rubrik: "Medel, problem 2: Borden"
+      innehallstagg: Algebra
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -1734,6 +1749,7 @@ ramar:
                 Ni säger att påse A är bäst, för den har flest blå. Hur kan ni kontrollera det mot problemet?
                 Ni säger att påse B är bäst, för den har minst röda. Hur vet ni att det räcker?
     - rubrik: "Medel, problem 3: Kulpåsarna"
+      innehallstagg: Sannolikhet och statistik
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -1803,6 +1819,7 @@ ramar:
                 Ni säger att det går att byta 9 golfbollar mot tennisbollar. Hur kan ni kontrollera det mot problemet?
                 ”Är det alla sätt?” Hur kan ni kontrollera att inget saknas?
     - rubrik: "Medel, problem 4: Bollbytet"
+      innehallstagg: Taluppfattning
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -1873,6 +1890,7 @@ ramar:
                 Ni säger att kvadraten är större än parallellogrammet. Hur kan ni kontrollera det med bitarna?
                 ”Blir summan 400?” Hur kan ni kontrollera att alla sju bitar är med?
     - rubrik: "Medel, problem 5: Tangrammet"
+      innehallstagg: Geometri
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -1943,6 +1961,7 @@ ramar:
                 Ni säger att 350 går. Hur kan ni kontrollera det mot problemet?
                 Ni har ett svar. Hur kan ni kontrollera om det finns fler?
     - rubrik: "Medel, problem 6: Skolan"
+      innehallstagg: Taluppfattning
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -2013,6 +2032,7 @@ ramar:
                 Ni säger att 15, 15, 20, 20 och 40 går. Hur kan ni kontrollera typvärdet mot problemet?
                 ”Är medianen 20?” Hur kan ni kontrollera det?
     - rubrik: "Medel, problem 7: Samlarbilderna"
+      innehallstagg: Sannolikhet och statistik
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -2083,6 +2103,7 @@ ramar:
                 Ni säger att Dan betalar mest, för han köper flest saker. Hur kan ni kontrollera det mot problemet?
                 ”Är ordningen rätt?” Hur kan ni kontrollera den på ett annat sätt?
     - rubrik: "Medel, problem 8: Klädaffären"
+      innehallstagg: Algebra
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -2154,6 +2175,7 @@ ramar:
                 Ni säger att Mira tog 8 kr. Hur kan ni kontrollera det mot problemet?
                 ”Är det 27 kr?” Hur kan ni kontrollera att det blir 8 kr kvar?
     - rubrik: "Medel, problem 9: Pantpengarna"
+      innehallstagg: Taluppfattning
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -2224,6 +2246,7 @@ ramar:
                 Ni säger att Elsa ska ha 10 kr. Hur kan ni kontrollera det mot det hon gav Kim?
                 ”Är 5 och 20 kr rättvist?” Hur kan ni kontrollera det?
     - rubrik: "Medel, problem 10: Smörgåsarna"
+      innehallstagg: Taluppfattning
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -2350,6 +2373,7 @@ ramar:
                 Ni säger att 9 trehjulingar ger 27 hjul. Hur kan ni kontrollera att det stämmer med problemet?
                 Ni säger att x = 5. Vad räknar x, och svarar det på frågan?
     - rubrik: "Avancerat, problem 1: Cykelförrådet"
+      innehallstagg: Algebra
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -2419,6 +2443,7 @@ ramar:
                 Ni säger att 9 glas får plats. Hur kan ni kontrollera att det stämmer med problemet?
                 Ni säger att det blir 6,5 glas. Hur kan ni kontrollera att det svarar på frågan?
     - rubrik: "Avancerat, problem 2: Glasstapeln"
+      innehallstagg: Samband och förändring
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -2488,6 +2513,7 @@ ramar:
                 Ni säger att figur 10 har 48 mörka. Hur kan ni kontrollera att det stämmer med bilden?
                 ”Är regeln rätt?” Hur kan ni pröva den på figur 1, 2 och 3?
     - rubrik: "Avancerat, problem 3: Stenplattorna"
+      innehallstagg: Algebra
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -2558,6 +2584,7 @@ ramar:
                 Ni säger att det finns 25 par. Hur kan ni kontrollera att det stämmer med problemet?
                 Hur vet ni att ni har alla par?
     - rubrik: "Avancerat, problem 4: Udda eller jämnt"
+      innehallstagg: Sannolikhet och statistik
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -2627,6 +2654,7 @@ ramar:
                 Ni säger att vikten minskar med 60 %. Hur kan ni kontrollera att det stämmer med problemet?
                 ”Är 25 g svaret?” Hur kan ni kontrollera att det svarar på frågan?
     - rubrik: "Avancerat, problem 5: Svamparna"
+      innehallstagg: Samband och förändring
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -2696,6 +2724,7 @@ ramar:
                 Ni säger att 3 ska flyttas. Hur kan ni kontrollera att det stämmer med problemet?
                 Ni delar summan i den blå med 4. Hur många bollar ligger i den blå nu?
     - rubrik: "Avancerat, problem 6: Skålarna"
+      innehallstagg: Sannolikhet och statistik
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -2765,6 +2794,7 @@ ramar:
                 Ni säger att arean är 4 · 75 = 300 cm². Hur kan ni kontrollera att det stämmer med bilden?
                 ”Gäller svaret för alla rektanglar?” Hur kan ni pröva det?
     - rubrik: "Avancerat, problem 7: Kvadraten"
+      innehallstagg: Geometri
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -2834,6 +2864,7 @@ ramar:
                 Ni säger att arean är 9 rutor. Hur kan ni kontrollera att det stämmer med bilden?
                 ”Är regeln rätt?” Hur kan ni pröva den på en ny kvadrat?
     - rubrik: "Avancerat, problem 8: De lutande kvadraterna"
+      innehallstagg: Geometri
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -2904,6 +2935,7 @@ ramar:
                 Ni säger att en kvadrat med sidan 20 m är bäst mot väggen. Hur kan ni kontrollera att det stämmer med problemet?
                 ”Är 15 m svaret?” Vilka är måtten, och hur stor blir hagen?
     - rubrik: "Avancerat, problem 9: Staketet"
+      innehallstagg: Geometri
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
@@ -2974,6 +3006,7 @@ ramar:
                 Ni säger att 4 kan skrivas på 5 sätt. Hur kan ni kontrollera att det stämmer med problemet?
                 Hur vet ni att ni har alla sätt?
     - rubrik: "Avancerat, problem 10: Alla summor"
+      innehallstagg: Sannolikhet och statistik
       text:
         - Läs problemet och visa hur ni löser det.
       delar:

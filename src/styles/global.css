@@ -2196,6 +2196,104 @@ html.js .bara-js { display: inline-block; }
   .m-lista.elev:has(tr > td:nth-child(3)) td { font-size: 1.05rem; padding: 0.4rem 0.45rem; }
 }
 
+/* Ta fram ur en bank (TaFram.astro, Ta fram ett matteproblem): nivåns poster som rader med nivåns färg, bilden, numret,
+   titeln, den första meningen, taggen och bocken, och listan att skriva ut bredvid på en bred skärm, som på Ta fram en
+   aktivitet (listans stilar ovan). Utan JavaScript står nivåerna under varandra med sina rubriker; med JavaScript visas en
+   nivå i taget, och rubriken finns kvar för skärmläsaren. */
+.tf-taggrad { flex: 1 1 100%; }
+.tf-val .sk-niva[aria-pressed="true"] { background: var(--niva); border-color: var(--niva); color: #fff; }
+.tf-taggar { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tf-tagg { min-height: 2.75rem; padding: 0.3rem 0.85rem; border: 1.5px solid var(--farg-kant); border-radius: 999px; background: var(--farg-yta); color: var(--farg-text); font: 600 0.95rem/1.2 var(--typsnitt-ui); cursor: pointer; }
+.tf-tagg:hover { border-color: var(--farg-accent); }
+.tf-tagg[aria-pressed="true"] { background: var(--farg-accent); border-color: var(--farg-accent); color: #fff; }
+.tf-tagg-antal { font-weight: 400; opacity: 0.85; }
+.tf-tagg-antal:empty { display: none; }
+@media (min-width: 48rem) { .tf-tafram { margin-left: auto; } }
+.tf-yta { display: grid; gap: 1.25rem; align-items: start; }
+/* Under 60 rem står listan att skriva ut i en rad längst ned (stilarna för listan på Ta fram en aktivitet). */
+@media (max-width: 59.99rem) { .tafram { padding-bottom: 4rem; } }
+@media (min-width: 60rem) { .tf-yta { grid-template-columns: minmax(0, 1fr) 17.5rem; } }
+.tf-poster { min-width: 0; }
+.tf-niva-rubrik { display: flex; align-items: center; gap: 0.6rem; margin: 1.75rem 0 0.6rem; font-size: 1.2rem; }
+.tf-niva-rubrik::before { content: ''; flex: none; width: 0.85rem; height: 0.85rem; border-radius: 3px; background: var(--niva); }
+.tf-niva-antal { font-size: 0.85rem; font-weight: 400; color: var(--farg-text-svag); }
+.tf-js .tf-niva-rubrik { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.tf-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+.tf-post { display: grid; grid-template-columns: 8rem minmax(0, 1fr) auto; align-items: center; gap: 0 1rem; padding: 0.55rem 0.6rem 0.55rem 0.55rem; border: 1px solid var(--farg-kant); border-left: 6px solid var(--niva); border-radius: 6px; background: var(--farg-yta); font-family: var(--typsnitt-ui); }
+.tf-post.vald { border-color: var(--farg-accent); border-left-color: var(--niva); box-shadow: 0 0 0 1px var(--farg-accent); }
+.tf-bild { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; padding-right: 0.6rem; border-right: 1px solid var(--farg-kant); }
+.tf-js .tf-bild { cursor: zoom-in; }
+.tf-titel { margin: 0; font-size: 1.05rem; line-height: 1.3; }
+.tf-nr { margin-right: 0.15rem; }
+.tf-rad { margin: 0.15rem 0 0.1rem; font-size: 0.95rem; line-height: 1.4; }
+.tf-lankar { display: flex; flex-wrap: wrap; align-items: center; gap: 0 1rem; margin: 0; font-size: 0.92rem; }
+.tf-lankar a, .tf-visa { display: inline-flex; align-items: center; min-height: 2.75rem; }
+.tf-visa { padding: 0; border: 0; background: none; color: inherit; font: inherit; text-decoration: underline; text-decoration-color: var(--farg-accent); text-underline-offset: 0.15em; cursor: pointer; }
+.tf-visa:hover { color: var(--farg-accent); }
+.tf-radtagg { display: inline-flex; align-items: center; min-height: 1.75rem; padding: 0.05rem 0.65rem; border: 1px solid var(--farg-kant); border-radius: 999px; background: var(--farg-ton-svag); color: var(--farg-text); font: 600 0.8rem/1.2 var(--typsnitt-ui); }
+button.tf-radtagg { cursor: pointer; }
+button.tf-radtagg:hover { border-color: var(--farg-accent); color: var(--farg-accent); }
+.tf-bock { position: relative; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; padding: 0; border: 0; background: none; cursor: pointer; }
+.tf-bock svg, .tf-stort-bock svg { width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 1.5px solid color-mix(in srgb, var(--sk-text) 32%, white); background: #fff; fill: none; stroke: color-mix(in srgb, var(--sk-text) 38%, white); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.tf-bock:hover svg { border-color: var(--farg-accent); stroke: var(--farg-accent); }
+.tf-bock[aria-pressed="true"] svg, .tf-stort-bock[aria-pressed="true"] svg { background: var(--farg-accent); border-color: var(--farg-accent); stroke: #fff; }
+.tf-bock:focus-visible { outline: none; }
+.tf-bock:focus-visible svg { outline: 3px solid var(--farg-accent); outline-offset: 2px; }
+.tf-nivafiler { margin: 0.75rem 0 0; font-family: var(--typsnitt-ui); font-size: 0.92rem; color: var(--farg-text-svag); }
+.tf-nivafiler-rubrik { font-weight: 700; color: var(--farg-text); }
+.tf-tom { margin: 1rem 0; }
+/* I telefonen står bocken bredvid titeln, och raden och länkarna får hela bredden under den, så att posten blir låg. Nivåerna
+   står tre i bredd. */
+@media (max-width: 30rem) {
+  .tf-post { grid-template-columns: 4.75rem minmax(0, 1fr) auto; grid-template-areas: "bild titel bock" "bild rad rad" "bild lankar lankar"; gap: 0 0.65rem; align-items: start; padding: 0.5rem 0.25rem 0.35rem 0.5rem; }
+  .tf-text { display: contents; }
+  .tf-bild { grid-area: bild; align-self: center; padding-right: 0.4rem; }
+  .tf-titel { grid-area: titel; align-self: center; }
+  .tf-rad { grid-area: rad; }
+  .tf-lankar { grid-area: lankar; gap: 0 0.9rem; }
+  .tf-lankar a, .tf-visa { min-height: 2.5rem; }
+  .tf-bock { grid-area: bock; margin: -0.35rem 0 -0.35rem; }
+  .tf-val .sk-nivaknappar { grid-template-columns: repeat(auto-fit, minmax(6.4rem, 1fr)); }
+  .tf-val .sk-niva { min-width: 0; padding-right: 0.5rem; }
+  .tf-tagg { min-height: 2.5rem; padding: 0.25rem 0.75rem; font-size: 0.9rem; }
+}
+/* Visa stort: problemet i sin egen form (boksidan) stort på skärmen och projektorn, utan klocka. Esc stänger. */
+.tf-stort { width: min(94vw, 62rem); max-width: none; max-height: 94vh; padding: 0; border: 0; border-radius: 8px; background: var(--farg-yta); color: var(--farg-text); box-shadow: 0 12px 40px rgb(0 0 0 / 0.3); }
+.tf-stort::backdrop { background: rgb(20 18 16 / 0.6); }
+.tf-stort-huvud { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.35rem 0.5rem 0.35rem 1.25rem; border-bottom: 1px solid var(--farg-kant); background: var(--farg-yta); }
+.tf-stort-etikett { display: flex; align-items: center; gap: 0.5rem; margin: 0; font: 600 0.95rem/1.3 var(--typsnitt-ui); }
+.tf-stort-etikett::before { content: ''; flex: none; width: 0.85rem; height: 0.85rem; border-radius: 3px; background: var(--niva, var(--farg-accent)); }
+.tf-stang { width: 2.75rem; height: 2.75rem; border: 0; border-radius: 6px; background: none; color: var(--farg-text); font: 400 2rem/1 var(--typsnitt-ui); cursor: pointer; }
+.tf-stang:hover { background: var(--farg-ton-svag); }
+.tf-stort-sida { max-width: none; margin: 1.25rem; }
+.tf-stort .boksida-titel { font-size: clamp(1.9rem, 3.4vw, 2.9rem); }
+.tf-stort .problemsida-text, .tf-stort .problemsida-fraga { font-size: clamp(1.15rem, 1.8vw, 1.7rem); }
+.tf-stort .problemsida-fraga-rubrik { font-size: clamp(1rem, 1.6vw, 1.35rem); }
+/* Bilden får högst 38 procent av skärmens höjd, så att problemet, bilden och frågorna ryms på en skärm eller projektor. */
+.tf-stort .problemsida-bild { max-width: min(100%, 46rem); margin: 0.75rem auto; }
+.tf-stort .problemsida-bild img { width: auto; max-width: 100%; max-height: 38vh; margin: 0 auto; }
+.tf-stort-vantar { color: var(--farg-text-svag); }
+.tf-stort-knappar { position: sticky; bottom: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.75rem 1.25rem; border-top: 1px solid var(--farg-kant); background: var(--farg-yta); font-family: var(--typsnitt-ui); }
+.tf-stort-knappar .knapp { flex: 1 1 11rem; }
+.tf-stort-bock { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; }
+.tf-stort-bock svg { width: 1.3rem; height: 1.3rem; }
+@media (max-width: 34rem) { .tf-stort-sida { margin: 0.75rem; } .tf-stort-knappar { padding: 0.6rem 0.75rem; } .tf-stort-knappar .knapp { flex-basis: 9rem; } }
+/* På en bred skärm, som en projektor, står bilden till höger om texten och frågorna, så att allt ryms på en skärm. */
+@media (min-width: 60rem) and (min-aspect-ratio: 4 / 3) {
+  .tf-stort .boksida-ram { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); grid-template-areas: "titel titel" "text bild" "fraga bild"; column-gap: 2rem; align-items: start; }
+  .tf-stort .boksida-titel { grid-area: titel; }
+  .tf-stort .problemsida-text { grid-area: text; }
+  .tf-stort .problemsida-bild { grid-area: bild; align-self: center; margin: 0; max-width: none; }
+  .tf-stort .problemsida-bild img { max-height: 58vh; }
+  .tf-stort .problemsida-fraga { grid-area: fraga; margin: 0.5rem 0 0; }
+}
+@media print {
+  .tafram .tf-val, .tafram .tf-valda, .tafram .tf-bock, .tafram .tf-visa, .tafram .tf-stort { display: none; }
+  .tafram .tf-yta { display: block; }
+  .tafram .tf-niva[hidden] { display: block; }
+  .tafram .tf-post { break-inside: avoid; }
+}
+
 /* Skrivkorten och sidan som slumpar dem (Kortskrivning: skriv varje dag, src/pages/stodundervisning/[id]/skrivkort.astro;
    Niclas 2026-10-14). Kortet har skrivkortens form ur metodriggen (build/skrivkortform.js), som Word-filen har den
    (src/lib/skrivkortform.ts): en ram i nivåns färg, fotot i 3:2 överst, texten i elevens typsnitt, årtalet och
