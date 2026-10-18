@@ -43,7 +43,9 @@ const taggKnappar = [...sida.querySelectorAll<HTMLButtonElement>('.tf-val .tf-ta
 type Sparat = { niva?: string; tagg: string; sedda: string[]; bockade: string[] };
 const { varde: sparat, spara } = lagring<Sparat>(`tafram:${metod}/${led}`, { tagg: '', sedda: [], bockade: [] });
 sparat.bockade = sparat.bockade.filter((id) => rad.has(id));
-if (!nivaer.some((n) => n.dataset.niva === sparat.niva)) sparat.niva = nivaer[0].dataset.niva;
+// Nivån är en av nivåerna eller alla (Niclas 2026-10-18: "Vill ha en Alla också i nivån").
+const giltigNiva = (n?: string) => n === 'alla' || nivaer.some((x) => x.dataset.niva === n);
+if (!giltigNiva(sparat.niva)) sparat.niva = nivaer[0].dataset.niva;
 
 // Bocken i varje rad: den finns bara med JavaScript och ritas här, inte i sidan, i en kolumn som har sin bredd från
 // början. Visa stort står i sidan och visas med klassen tf-js, som skriptet före raderna sätter.
@@ -68,12 +70,15 @@ for (const t of sida.querySelectorAll<HTMLElement>('.tf-radtagg')) {
 }
 
 function visa() {
-  const iNivan = (r: HTMLElement) => nivaAv(r).dataset.niva === sparat.niva;
+  const alla = sparat.niva === 'alla';
+  const iNivan = (r: HTMLElement) => alla || nivaAv(r).dataset.niva === sparat.niva;
   const finns = (tagg: string) => rader.some((r) => iNivan(r) && r.dataset.tagg === tagg);
   if (sparat.tagg && !finns(sparat.tagg)) sparat.tagg = '';
-  for (const n of nivaer) n.hidden = n.dataset.niva !== sparat.niva;
   let synliga = 0;
   for (const r of rader) { const med = iNivan(r) && (!sparat.tagg || r.dataset.tagg === sparat.tagg); r.hidden = !med; if (med) synliga++; }
+  // En nivå syns när den är vald, eller med Alla när den har poster som syns; med Alla står rubrikerna kvar.
+  for (const n of nivaer) n.hidden = alla ? !rader.some((r) => !r.hidden && nivaAv(r) === n) : n.dataset.niva !== sparat.niva;
+  sida.classList.toggle('tf-alla', alla);
   for (const b of nivaKnappar) { const pa = b.dataset.niva === sparat.niva; b.setAttribute('aria-pressed', String(pa)); b.classList.toggle('senast', pa); }
   for (const b of taggKnappar) {
     const t = b.dataset.tagg!;
@@ -284,7 +289,7 @@ function lasAdressen() {
     sparat.tagg = '';
   } else {
     const [niva, tagg] = hash.split('/');
-    if (nivaer.some((n) => n.dataset.niva === niva)) { sparat.niva = niva; sparat.tagg = tagg ?? ''; }
+    if (giltigNiva(niva)) { sparat.niva = niva; sparat.tagg = tagg ?? ''; }
   }
   visa();
   visaBockar();

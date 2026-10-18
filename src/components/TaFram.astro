@@ -41,7 +41,7 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
     <header class="sk-huvud">
       <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${t.metod}`}>{t.titel}</a> · {versal(t.ord.flera)}</p>
       <h1>{t.namn}</h1>
-      <p class="ingress">Välj nivå, så ser du nivåns {t.ord.flera} i ordning.{t.taggar.length > 0 && ` Tryck på en tagg för att se ${t.ord.alla} i en del av ${t.omrade.toLowerCase()}en.`} Ta fram ett väljer ett av dem åt dig, på måfå. Tryck på bocken på de {t.ord.flera} du vill ha, så hamnar de i listan att skriva ut.</p>
+      <p class="ingress">Välj nivå, så ser du nivåns {t.ord.flera} i ordning, eller Alla.{t.taggar.length > 0 && ` Tryck på en tagg för att se ${t.ord.alla} i en del av ${t.omrade.toLowerCase()}en.`} Ta fram ett väljer ett av dem åt dig, på måfå. Tryck på bocken på de {t.ord.flera} du vill ha, så hamnar de i listan att skriva ut.</p>
     </header>
 
     {/* Före raderna: nivån och taggen ur adressen eller webbläsarens minne, så att sidan ritas med rätt nivå och med valet
@@ -54,12 +54,15 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
         var delar = hash.split('/');
         var sparat = {};
         try { sparat = JSON.parse(localStorage.getItem(tfNyckel) || '{}') || {}; } catch (e) { /* utan lagring */ }
-        var niva = tfNivaer.indexOf(delar[0]) >= 0 ? delar[0] : tfNivaer.filter(function (n) { return delar[0].indexOf(n + '-') === 0; })[0];
+        var giltiga = ['alla'].concat(tfNivaer);
+        var niva = giltiga.indexOf(delar[0]) >= 0 ? delar[0] : tfNivaer.filter(function (n) { return delar[0].indexOf(n + '-') === 0; })[0];
         var tagg = niva && delar[0] === niva ? delar[1] || '' : niva ? '' : sparat.tagg || '';
-        if (!niva) niva = tfNivaer.indexOf(sparat.niva) >= 0 ? sparat.niva : tfNivaer[0];
+        if (!niva) niva = giltiga.indexOf(sparat.niva) >= 0 ? sparat.niva : tfNivaer[0];
         if (tfTaggar.indexOf(tagg) < 0) tagg = '';
-        var css = '.tf-val{display:flex!important}.tf-valda{display:block!important}.tf-niva:not([data-niva="' + niva + '"]){display:none}';
-        if (tagg) css += '.tf-niva[data-niva="' + niva + '"] .tf-post:not([data-tagg="' + tagg + '"]){display:none}';
+        var css = '.tf-val{display:flex!important}.tf-valda{display:block!important}' + (niva === 'alla' ? '' : '.tf-niva:not([data-niva="' + niva + '"]){display:none}');
+        if (tagg) css += '.tf-post:not([data-tagg="' + tagg + '"]){display:none}';
+        // Med Alla står nivåernas rubriker kvar, så att läraren ser var en nivå börjar.
+        if (niva === 'alla') document.currentScript.parentElement.classList.add('tf-alla');
         var stil = document.createElement('style');
         stil.id = 'tf-tidig';
         stil.textContent = css;
@@ -73,6 +76,7 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
       <div class="sk-valrad" role="group" aria-labelledby="tf-niva-etikett">
         <span class="sk-etikett" id="tf-niva-etikett">Nivå</span>
         <div class="sk-nivaknappar">
+          <button type="button" class="sk-niva tf-alla-knapp" data-niva="alla" aria-pressed="false">Alla</button>
           {t.nivaer.map((n) => <button type="button" class="sk-niva" data-niva={n.slug} style={`--niva:${n.farg}`} aria-pressed="false">{n.namn}</button>)}
         </div>
       </div>
@@ -103,7 +107,7 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
                     <p class="tf-lankar">
                       <button type="button" class="tf-visa">Visa stort<span class="visually-hidden">: {p.titel}</span></button>
                       {p.losning && <a class="tf-losning" href={p.losning}>Lösningsförslag<span class="visually-hidden">: {p.titel}</span></a>}
-                      <a class="tf-sidlank" href={p.sida}>{versal(t.ord.bestamd)}s sida<span class="visually-hidden">: {p.titel}</span></a>
+                      <a class="tf-sidlank" href={p.sida}>I metoden<span class="visually-hidden">: {p.titel} i {t.titel}</span></a>
                       {p.tagg && <span class="tf-radtagg" data-tagg={p.taggId}>{p.tagg}</span>}
                     </p>
                   </div>
@@ -158,7 +162,7 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
         <button type="button" class="knapp sekundar tf-stort-bock" id="tf-stort-bock" aria-pressed="false"><span set:html={BOCK} /> <span id="tf-stort-bock-text">Lägg i listan</span></button>
         <button type="button" class="knapp sekundar" id="tf-stort-nasta" hidden>Ta fram ett till</button>
         <a class="knapp sekundar" id="tf-stort-losning" href="#">Lösningsförslag</a>
-        <a class="knapp sekundar" id="tf-stort-sidan" href="#">{versal(t.ord.bestamd)}s sida</a>
+        <a class="knapp sekundar" id="tf-stort-sidan" href="#">{versal(t.ord.bestamd)} i metoden</a>
         <a class="knapp sekundar" id="tf-stort-skrivut" href="#" target="_blank" rel="noopener" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:ett`} data-goatcounter-title={`${t.titel}: utskrift av ett ${t.ord.en}`}>Skriv ut {t.ord.bestamd}</a>
       </div>
     </dialog>

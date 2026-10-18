@@ -2201,6 +2201,8 @@ html.js .bara-js { display: inline-block; }
    aktivitet (listans stilar ovan). Utan JavaScript står nivåerna under varandra med sina rubriker; med JavaScript visas en
    nivå i taget, och rubriken finns kvar för skärmläsaren. */
 .tf-taggrad { flex: 1 1 100%; }
+/* Alla bland nivåerna har ingen egen färg: textens. */
+.tf-alla-knapp { --niva: var(--farg-text); }
 /* Vald nivå i hel färg, en mörkare ton av nivåns, så att den vita texten har minst 4,5:1 (Medel, #a8742a, gav 4,04). */
 .tf-val .sk-niva[aria-pressed="true"] { background: color-mix(in srgb, var(--niva) 78%, #000); border-color: color-mix(in srgb, var(--niva) 78%, #000); color: #fff; }
 .tf-taggar { display: flex; flex-wrap: wrap; gap: 0.4rem; }
@@ -2218,7 +2220,7 @@ html.js .bara-js { display: inline-block; }
 .tf-niva-rubrik { display: flex; align-items: center; gap: 0.6rem; margin: 1.75rem 0 0.6rem; font-size: 1.2rem; }
 .tf-niva-rubrik::before { content: ''; flex: none; width: 0.85rem; height: 0.85rem; border-radius: 3px; background: var(--niva); }
 .tf-niva-antal { font-size: 0.85rem; font-weight: 400; color: var(--farg-text-svag); }
-.tf-js .tf-niva-rubrik { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.tf-js .tafram:not(.tf-alla) .tf-niva-rubrik { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .tf-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
 .tf-post { display: grid; grid-template-columns: 8rem minmax(0, 1fr) 2.75rem; align-items: center; gap: 0 1rem; padding: 0.55rem 0.6rem 0.55rem 0.55rem; border: 1px solid var(--farg-kant); border-left: 6px solid var(--niva); border-radius: 6px; background: var(--farg-yta); font-family: var(--typsnitt-ui); }
 .tf-post.vald { border-color: var(--farg-accent); border-left-color: var(--niva); box-shadow: 0 0 0 1px var(--farg-accent); }
@@ -2256,7 +2258,7 @@ button.tf-radtagg:hover { border-color: var(--farg-accent); color: var(--farg-ac
   .tf-rad { grid-area: rad; }
   .tf-lankar { grid-area: lankar; gap: 0 0.9rem; }
   .tf-bock { grid-area: bock; margin: -0.35rem 0 -0.35rem; }
-  .tf-val .sk-nivaknappar { grid-template-columns: repeat(auto-fit, minmax(6.4rem, 1fr)); }
+  .tf-val .sk-nivaknappar { grid-template-columns: 1fr 1fr; }
   .tf-val .sk-niva { min-width: 0; padding-right: 0.5rem; }
   .tf-tagg { padding: 0.25rem 0.75rem; font-size: 0.9rem; }
 }
