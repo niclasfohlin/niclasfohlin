@@ -15,9 +15,9 @@ losningsforslag:
   kontroll: 6, 9, 12 och 15 kommer på 1, 3, 3 och 1 sätt, och 1 + 3 + 3 + 1 = 8.
   iden: De åtta sätten att landa är lika vanliga, men flera av dem ger samma summa.
   a:
-    namn: skriv alla åtta sätt
-    text: Eleven skriver alla åtta sätt som brickorna kan landa på och räknar hur ofta varje summa kommer.
-    bild: Lösning A, alla åtta sätt som brickorna kan landa på. Tabellen har kolumnerna bricka 1, bricka 2, bricka 3 och summa. Summan 6 kommer av 1, 2, 3. Summan 9 kommer av 4, 2, 3, av 1, 5, 3 och av 1, 2, 6. Summan 12 kommer av 4, 5, 3, av 4, 2, 6 och av 1, 5, 6. Summan 15 kommer av 4, 5, 6. Bredvid står att 6 kommer på 1 sätt, 9 på 3, 12 på 3 och 15 på 1, alltså 4 olika summor, och att 9 och 12 är vanligast, med 3 av 8 sätt var.
+    namn: skriva alla åtta sätt
+    text: Eleven skriver alla åtta sätt, bricka för bricka, och räknar hur ofta varje summa kommer.
+    bild: "Lösning A, alla åtta sätt som brickorna kan landa på. Tabellen har kolumnerna bricka 1, bricka 2, bricka 3 och summa, och raderna står i ordning, först de fyra med 1 på bricka 1 och sedan de fyra med 4: 1, 2, 3 ger 6; 1, 2, 6 ger 9; 1, 5, 3 ger 9; 1, 5, 6 ger 12; 4, 2, 3 ger 9; 4, 2, 6 ger 12; 4, 5, 3 ger 12; och 4, 5, 6 ger 15. Bredvid står att 6 kommer på 1 sätt, 9 på 3, 12 på 3 och 15 på 1, att det finns 2 · 2 · 2 = 8 sätt, att det blir 4 olika summor och att 9 och 12 är vanligast, med 3 av 8 sätt var."
   b:
     namn: räkna de stora talen
     text: Eleven lägger till 3 för varje stort tal uppåt och räknar på hur många sätt varje summa kan komma.
@@ -28,7 +28,7 @@ losningsforslag:
       - 4 summor, lika stor chans.
       - "Svar: ingen, alla 1 av 4."
     om: Eleven tror att de fyra summorna är lika vanliga, fast de kommer på olika många sätt.
-    fraga: Hur kan ni pröva elevens andra rad med brickorna?
+    fraga: Hur kan ni pröva elevens svar med brickorna i problemets bild?
   fragor:
     - Hur vet eleven i lösning A att listan har alla sätt?
     - Varför lägger eleven i lösning B till 3 för varje bricka med det stora talet uppåt?

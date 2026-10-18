@@ -29,7 +29,7 @@ losningsforslag:
       - Minus gör mindre, så inte 6.
       - "Svar: 2, 3, 4 och 5 efter =."
     om: Eleven tror att en uträkning med minus inte kan ge det största talet, och prövar aldrig 6 efter likhetstecknet.
-    fraga: Hur kan ni pröva elevens tredje rad med magneterna?
+    fraga: Vilka likheter kan börja med 4 + 5?
   fragor:
     - Hur vet eleven i lösning A att 3 och 5 aldrig kan bli över?
     - Varför kan eleven i lösning B skriva om likheten till två par?

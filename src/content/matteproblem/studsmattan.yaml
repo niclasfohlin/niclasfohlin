@@ -20,8 +20,8 @@ losningsforslag:
     bild: "Lösning A, räkna minut för minut. Majas, Adams och Leos tider står som staplar längs en tidslinje från 0 till 12. Under tidslinjen står antalet barn minut för minut: 1, 2, 3, 2, 2, 2, 2, 3, 2, 1, 2 och 2. De åtta tvåorna är ringade: 8 minuter."
   b:
     namn: par för par
-    text: Eleven räknar minuterna för varje par barn och drar bort minuterna med alla tre en gång för varje par.
-    bild: "Lösning B, par för par. En remsa med rastens 12 minuter för varje par. Maja och Adam hoppar samtidigt 2–5 och 7–9, 3 + 2 = 5 minuter. Maja och Leo 1–3 och 6–8, 2 + 2 = 4. Adam och Leo 2–3, 5–6, 7–8 och 10–12, 1 + 1 + 1 + 2 = 5. Alla par: 5 + 4 + 5 = 14. Under minuterna 2–3 och 7–8 hoppar alla tre, och de är grå i alla tre remsorna, så 14 − 3 · 2 = 8 minuter med två barn."
+    text: "Eleven räknar för varje par de minuter då bara de två hoppar: 3 + 2 + 3 = 8."
+    bild: "Lösning B, par för par. En remsa med rastens 12 minuter för varje par. Minuterna då bara de två i paret hoppar är blå, och minuterna 2–3 och 7–8, då alla tre hoppar, är grå. Maja och Adam: 3–5 och 8–9, 3 minuter. Maja och Leo: 1–2 och 6–7, 2 minuter. Adam och Leo: 5–6 och 10–12, 3 minuter. Eleven räknar inte de grå minuterna. 3 + 2 + 3 = 8 minuter med två barn."
   c:
     rader:
       - "Två hoppar: 1–9 och 10–12"
@@ -31,6 +31,6 @@ losningsforslag:
     fraga: Hur många barn hoppar i var och en av elevens 10 minuter?
   fragor:
     - Vad skriver eleven under tidslinjen i lösning A, och varför ringar hen in tvåorna?
-    - Varför drar eleven i lösning B bort 3 · 2 minuter?
+    - Varför räknar eleven i lösning B inte de grå minuterna?
     - Var syns minuterna med tre barn i båda lösningarna?
     - Vilken lösning liknar er egen? Vilken skulle ni välja för en rast på 60 minuter, och varför?

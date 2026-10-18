@@ -13,7 +13,7 @@ problem:
 losningsforslag:
   svaret: 0, 1 eller 3 egna namn. Chansen att slippa dra om är 1/3.
   kontroll: "En dragning ger 3 egna, tre ger 1 och två ger 0: 1 + 3 + 2 = 6."
-  iden: Lapparna kan hamna på 6 lika troliga sätt, och eleven räknar chansen bland dem.
+  iden: Lapparna hamnar på 6 lika troliga sätt. Om två har sitt eget namn, har alla tre det.
   a:
     namn: lista alla dragningar
     text: Eleven skriver alla sätt som lapparna kan hamna på, i ordning, och räknar de egna namnen i varje.
@@ -27,8 +27,8 @@ losningsforslag:
       - "Var och en: chansen 1/3"
       - 1/3 + 1/3 + 1/3 = 1
       - Någon får alltid sitt eget.
-      - "Svar: minst en. Chansen är 0."
-    om: Eleven lägger ihop chanserna, men flera kan få sitt eget samtidigt, och ibland ingen.
+      - "Svar: 1, 2 eller 3. Chansen 0."
+    om: Eleven lägger ihop chanserna, men alla tre kan få sitt eget samtidigt, och ibland får ingen det. Exakt två går inte.
     fraga: Hur kan ni pröva elevens svar med tre lappar?
   fragor:
     - Hur ser eleven i lösning A till att varje dragning kommer med precis en gång?

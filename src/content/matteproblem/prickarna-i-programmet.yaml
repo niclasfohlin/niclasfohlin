@@ -1,5 +1,5 @@
 niva: Avancerat
-nr: 18
+nr: 19
 titel: Prickarna i programmet
 innehallstagg: Algebra
 kalla: Idén kommer ur Känguru 2022, Cadet nr 22.
@@ -12,7 +12,7 @@ problem:
   bild: "Ett exempel på ett tryck, i ett fönster på datorn: en linje med fyra prickar före trycket, och samma linje efter, med tre nya ofyllda prickar mitt emellan. Under fönstret en tangent."
 losningsforslag:
   svaret: "15 prickar. 320 går inte: baklänges blir det 160,5 prickar."
-  kontroll: 15, 29, 57, 113 och 225, och 320 + 1 = 321 är udda.
+  kontroll: "15, 29, 57, 113 och 225. Efter ett tryck är antalet udda: 2n − 1."
   iden: Ett tryck sätter en ny prick i varje mellanrum, och det finns ett mellanrum färre än prickar.
   a:
     namn: räkna baklänges

@@ -1,5 +1,5 @@
 niva: Avancerat
-nr: 15
+nr: 16
 titel: Pinnstjärnan
 innehallstagg: Geometri
 kalla: Idén kommer ur Nämnaren 2024:2, Nilsson, ”Dialoger om problemlösning”.
@@ -13,7 +13,7 @@ problem:
 losningsforslag:
   svaret: 180°, i alla stjärnor av fem raka pinnar.
   kontroll: "En regelbunden stjärna har 36° i varje spets: 5 · 36° = 180°."
-  iden: Spetsarnas vinklar går att flytta ihop utan att de ändras.
+  iden: Spetsarnas vinklar går att samla på en rak linje eller i en triangel, och båda ger 180°.
   a:
     namn: mäta och klippa
     text: Eleven mäter vinklarna i spetsarna och får summan ungefär 180°. De klippta spetsarna fyller en rak vinkel, 180°.
@@ -24,13 +24,13 @@ losningsforslag:
     bild: Lösning B. Stjärnan med spetsarna a, b, c, d och e. Pinnen från e till b skär pinnarna från a i P och Q. I den blå triangeln c P e är yttervinkeln vid P lika stor som c + e, och i den streckade triangeln b Q d är yttervinkeln vid Q lika stor som b + d. Den grå triangeln a P Q har vinklarna a, c + e och b + d, så a + (c + e) + (b + d) = 180°.
   c:
     rader:
-      - Spetsarna går ett varv runt.
-      - Ett varv är 360°.
-      - "Svar: 360°."
-    om: Eleven tror att spetsarna tillsammans går ett helt varv runt stjärnans mitt, som vinklar runt en punkt gör.
-    fraga: Vilken summa får ni när ni mäter vinklarna i stjärnans fem spetsar?
+      - 5 spetsar, som en femhörning
+      - (5 − 2) · 180° = 540°
+      - "Svar: 540°."
+    om: Eleven räknar spetsarna som hörnen i en femhörning, men 540° är vinkelsumman i femhörningen mitt i stjärnan.
+    fraga: Hur stor blir en spets i genomsnitt med elevens svar?
   fragor:
     - Hur får eleven i lösning A fram summan, och hur säker kan hen vara på den?
     - Varför är yttervinkeln vid P lika stor som c + e i lösning B?
-    - Var syns det i båda lösningarna att spetsarnas vinklar går att flytta ihop?
+    - Var samlar eleverna spetsarnas vinklar i båda lösningarna?
     - Vilken lösning liknar er egen? Vilken visar att det gäller i alla stjärnor, och varför?

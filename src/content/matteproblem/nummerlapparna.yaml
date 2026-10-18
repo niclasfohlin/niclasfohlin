@@ -16,7 +16,7 @@ losningsforslag:
   iden: Lapparna 1 till 9 har en siffra var, och lapparna 10 till 99 har två.
   a:
     namn: räkna tiotal för tiotal
-    text: Eleven räknar siffrorna tiotal för tiotal till 49 och lägger sedan till 2 för varje lapp, tills det blir 57.
+    text: Eleven räknar siffrorna tiotal för tiotal. Lapparna 1 till 29 har 49 siffror, och varje lapp till ger 2.
     bild: "Lösning A, räkna tiotal för tiotal. En tabell med lappar, nya siffror och siffror ihop. 1–9: 9 · 1 = 9, ihop 9. 10–19: 10 · 2 = 20, ihop 29. 20–29: 10 · 2 = 20, ihop 49. 30–33: 4 · 2 = 8, ihop 57. Bredvid räknar eleven vidare för fler löpare: lapparna 1–49 ger 89 siffror, 1–54 ger 99 och 1–55 ger 101. Antalet siffror växer med 2 i taget och hoppar över 100. Svar: 33 nummerlappar, och exakt 100 siffror går inte."
   b:
     namn: dra bort de ensiffriga

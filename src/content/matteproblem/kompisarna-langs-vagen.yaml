@@ -20,15 +20,16 @@ losningsforslag:
     bild: "Lösning A. 1 ruta är 1 km, och Alva står 8 rutor till höger om Cleo. På den första av fyra rader bor Bilal 2 rutor till höger om Cleo och Dino 5 rutor längre åt höger, och det ger 1 km mellan Alva och Dino. Bilal till höger och Dino åt vänster ger 11 km. Bilal 2 till vänster och Dino åt höger ger 5 km. Bilal till vänster och Dino åt vänster ger 15 km. Alva till vänster om Cleo ger samma avstånd, spegelvänt. Svar: 1, 5, 11 eller 15 km."
   b:
     namn: plus eller minus
-    text: Eleven går från Alva via Cleo och Bilal till Dino och väljer plus eller minus för varje steg.
+    text: Eleven går från Alva via Cleo och Bilal till Dino och väljer plus eller minus för de två sista sträckorna.
     bild: "Lösning B. Ett träd från Alva till Dino. Alva till Cleo är 8 km. Bilal bor 2 km längre bort från Alva än Cleo eller 2 km närmare: 8 + 2 = 10 eller 8 − 2 = 6. Dino bor 5 km längre bort från Alva än Bilal eller 5 km närmare: 10 + 5 = 15, 10 − 5 = 5, 6 + 5 = 11 och 6 − 5 = 1. Plus betyder bort från Alva och minus mot Alva. 2 · 2 = 4 grenar. Svar: 1, 5, 11 eller 15 km."
   c:
     rader:
-      - "Ordning: Alva, Bilal, Cleo, Dino"
-      - 8 − 2 = 6 och 6 + 5 = 11
-      - "Svar: bara 11 km."
-    om: Eleven lägger husen i samma ordning som namnen i texten. Andra ordningar stämmer också och ger andra avstånd.
-    fraga: Hur kan ni pröva om 11 km är det enda möjliga avståndet?
+      - Bilal bor mellan Cleo och Alva.
+      - "Dino närmare Alva: 8 − 2 − 5 = 1"
+      - "Dino längre bort: 8 − 2 + 5 = 11"
+      - "Svar: bara 1 eller 11 km."
+    om: Eleven låter Dino bo på båda sidor om Bilal, men Bilal bara på en sida om Cleo.
+    fraga: Hur långt kan det vara mellan Alva och Bilal?
   fragor:
     - Hur prövar eleven i lösning A var Bilal och Dino kan bo?
     - I lösning B står det 8 − 2 = 6. Vad betyder minustecknet där?

@@ -12,7 +12,7 @@ problem:
   bild: Tre kaninhagar av raka staketbitar, med 4, 5 och 6 hörn och en stolpe i varje hörn. I varje hörn finns en båge för vinkeln inne i hagen, och i hagen i mitten sitter en kanin.
 losningsforslag:
   svaret: 360°, 540°, 720° och 1 440°. Regeln är (antal hörn − 2) · 180°.
-  kontroll: "Regeln ger triangelns 180°: (3 − 2) · 180 = 180."
+  kontroll: "En rektangel: 4 · 90 = 360 = (4 − 2) · 180 = 4 · 180 − 360."
   iden: Varje hage går att dela i trianglar med 180° var, och varje nytt hörn ger en triangel till.
   a:
     namn: dela från ett hörn
@@ -25,11 +25,11 @@ losningsforslag:
   c:
     rader:
       - 5 hörn ger 540°.
-      - 540 / 5 = 108° per hörn
-      - 10 · 108 = 1 080
+      - "10 hörn är dubbelt så många:"
+      - 2 · 540 = 1 080
       - "Svar: 1 080°, regel hörn · 108°"
-    om: Eleven tror att varje hörn ger 108°, men varje nytt hörn ger 180° till summan.
-    fraga: Vad ger elevens regel för en hage med 4 hörn?
+    om: Eleven tror att dubbelt så många hörn ger dubbelt så stor summa, men varje nytt hörn ger 180° till.
+    fraga: Triangeln har 180°. Vad ger elevens sätt för 6 hörn?
   fragor:
     - Varför får eleven i lösning A 2 trianglar färre än hörnen i varje hage?
     - Varför tar eleven i lösning B bort 360° från trianglarnas summa?

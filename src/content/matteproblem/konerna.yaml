@@ -5,10 +5,10 @@ innehallstagg: Geometri
 kalla: Idén kommer ur Känguru 2023, Ecolier nr 17.
 problem:
   text:
-    - På idrotten ska klassen springa 10, 20, 30, 40, 50 och 60 meter. Banan är 60 meter från startlinjen till mållinjen. Läraren ställer två koner längs banan, och de står kvar. Klassen springer varje sträcka rakt mellan två av linjerna och konerna, utan att vända.
+    - På idrotten ska klassen springa 10, 20, 30, 40, 50 och 60 meter. Banan är 60 meter från startlinjen till mållinjen. Läraren ställer två koner längs banan, och de står kvar. Klassen springer rakt fram, utan att vända. Varje gång startar och stannar den vid startlinjen, en kon eller mållinjen.
   fragor:
     - Var kan läraren ställa konerna? Hitta alla sätt.
-    - Går det om banan är 70 meter och klassen också springer 70 meter?
+    - Går det om banan är 70 meter och klassen också springer 70 meter? Hur vet ni det?
   bild: En rak löparbana med en startlinje till vänster och en mållinje till höger. Under banan står två koner som läraren ska ställa ut.
 losningsforslag:
   svaret: 10 och 40 m från start, eller 20 och 50 m. 70 m går inte.
@@ -24,11 +24,12 @@ losningsforslag:
     bild: "Lösning B, räkna sträckorna. Banan med start vid 0, koner vid 10 och 40 och mål vid 60, och de sex sträckorna som streck under: 10, 30 och 20 mellan grannarna, 40, 50 och 60. 4 platser ger 3 + 2 + 1 = 6 sträckor, så alla ska vara olika. 50 m går från start till en kon vid 50, eller från en kon vid 10 till mål. Med en kon vid 50 hamnar den andra vid 20 m, och med en kon vid 10 hamnar den vid 40 m. Med 70 m behövs 7 längder, men det finns bara 6 sträckor."
   c:
     rader:
-      - "Kon vid 10 m: 10 och 50 m."
-      - "Kon vid 40 m: 40, 30 och 20 m."
-      - "Svar: konerna vid 10 och 40 m."
-    om: "Elevens sätt stämmer, men det finns ett till: konerna vid 20 och 50 m."
-    fraga: Var står elevens koner, räknat från mållinjen?
+      - "70 m: bitarna 10, 20 och 40."
+      - 10 + 20 = 30, 20 + 40 = 60
+      - 10 + 40 = 50, 10 + 20 + 40 = 70
+      - "Svar: ja, koner vid 10 och 30 m."
+    om: Eleven lägger ihop bitarna 10 och 40, men de ligger inte bredvid varandra, så ingen sträcka är 50 m.
+    fraga: Var startar och stannar klassen när den springer 50 m?
   fragor:
     - Hur vet eleven i lösning A att alla par är prövade?
     - Varför säger eleven i lösning B att en kon måste stå 10 m från start eller mål?

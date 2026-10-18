@@ -1,5 +1,5 @@
 niva: Avancerat
-nr: 16
+nr: 17
 titel: Stegtävlingen
 innehallstagg: Taluppfattning
 kalla: Idén kommer ur Nämnaren 2014:3, Problemavdelningen, nr 4119.
@@ -10,17 +10,17 @@ problem:
     - Hur många dagar kan det ta för klassen att gå ett varv runt jorden?
   bild: Till vänster en stegräknare och två fotspår med ett mått för ett steg. Till höger jorden, med fotspår längs ekvatorn och en pil för ett varv.
 losningsforslag:
-  svaret: "Omkring 230–485 dagar. Med 8 000 steg om dagen på 60 cm: drygt 333 dagar."
-  kontroll: 120 · 333 = 39 960 och 120 · 334 = 40 080 km.
-  iden: Antalet dagar är sträckan delad med en dags sträcka, båda i km.
+  svaret: Omkring 230–485 dagar, om eleverna tar 6 000–10 000 steg om dagen på 55–⁠70 cm.
+  kontroll: 10 000 steg på 70 cm ger 228,6 dagar, och 6 000 steg på 55 cm 484,8.
+  iden: Antalet dagar är varvet delat med klassens sträcka på en dag, när båda står i samma enhet.
   a:
     namn: börja med en elev
     text: Eleven antar 8 000 steg på 60 cm, räknar ut en elevs dagssträcka i km och multiplicerar med 25.
     bild: "Lösning A, börja med en elev. Eleven väljer 8 000 steg om dagen och 60 cm per steg. En elev: 8 000 · 60 = 480 000 cm, som är 4 800 m eller 4,8 km. Klassen: 25 · 4,8 = 120 km om dagen. Ett varv: 40 000 / 120 ≈ 333 dagar. Kontroll: 120 · 333 = 39 960 och 120 · 334 = 40 080."
   b:
-    namn: dela varvet lika
-    text: Eleven delar varvet lika på de 25 eleverna och räknar hur många dagar en elev behöver för sin del.
-    bild: "Lösning B, dela varvet lika. Med samma antaganden: 40 000 / 25 = 1 600 km för varje elev. En elev går 8 000 · 60 = 480 000 cm, alltså 4,8 km, om dagen. 1 600 / 4,8 ≈ 333 dagar. Under ett streck: med 10 000 steg om dagen går en elev 6 km, och 1 600 / 6 ≈ 267 dagar."
+    namn: räkna i steg
+    text: Eleven räknar ut hur många steg ett varv är och delar med klassens steg på en dag.
+    bild: "Lösning B, räkna i steg. Eleven väljer samma antaganden som i lösning A: 8 000 steg om dagen och 60 cm per steg. Ett varv är 40 000 km = 4 000 000 000 cm, och 4 000 000 000 / 60 ≈ 66 666 667 steg. Klassen tar 25 · 8 000 = 200 000 steg om dagen, och 66 666 667 / 200 000 ≈ 333 dagar. Under ett streck: med 10 000 steg var tar klassen 250 000 steg om dagen, och ett varv tar ungefär 267 dagar."
   c:
     rader:
       - "En elev: 8 000 · 60 = 480 000 cm"
@@ -31,6 +31,6 @@ losningsforslag:
     fraga: Hur långt går en elev på en dag enligt räkningen?
   fragor:
     - Hur får eleven i lösning A fram hur långt klassen går på en dag?
-    - Varför delar eleven i lösning B först 40 000 km med 25?
+    - Varför räknar eleven i lösning B om varvet till steg?
     - Var i båda lösningarna delar eleverna en sträcka med en dags sträcka?
     - Vilken lösning liknar er egen? Vilken skulle ni välja om hela skolan var med, och varför?

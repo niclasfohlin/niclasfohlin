@@ -21,7 +21,7 @@ losningsforslag:
   b:
     namn: dela i gamla lådor
     text: Eleven delar den nya lådan i gamla lådor, 2 på längden och 2 på bredden, och räknar 2 · 2 = 4.
-    bild: "Lösning B, dela i gamla lådor. Lådan med dubbelt så långa sidor är delad i 2 på längden och 2 på bredden: 2 · 2 = 4 gamla lådor, och kanten 2 · 10 = 20 m. Lådan med tre gånger så långa sidor är delad i 3 på längden och 3 på bredden: 3 · 3 = 9 gamla lådor, och kanten 3 · 10 = 30 m. Kanten växer som sidorna, men ytan växer både på längden och på bredden."
+    bild: "Lösning B, dela i gamla lådor. Lådan med dubbelt så långa sidor är delad i 2 på längden och 2 på bredden: 2 · 2 = 4 gamla lådor, och kanten 2 · (3 + 2 + 3 + 2) = 2 · 10 = 20 m. Lådan med tre gånger så långa sidor är delad i 3 på längden och 3 på bredden: 3 · 3 = 9 gamla lådor, och kanten 3 · 10 = 30 m. Kanten växer som sidorna, men ytan växer både på längden och på bredden."
   c:
     rader:
       - "Kant: 2 · 10 = 20 m"

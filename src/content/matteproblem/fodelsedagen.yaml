@@ -20,16 +20,16 @@ losningsforslag:
     bild: "Lösning A, ett år i taget. En tabell med Leos och Sixtens ålder: för 1 år sedan 9 och 3, i dag 10 och 4, om 1 år 11 och 5, om 2 år 12 och 6. Bredvid står 9 = 3 · 3 och 12 = 2 · 6, med bockar. På varje rad är båda ett år äldre. Svar: om 2 år och för 1 år sedan."
   b:
     namn: skillnaden i staplar
-    text: Eleven ritar Leos stapel 6 år längre än Sixtens. Biten är en Sixtenstapel vid dubbelt och två vid tre gånger.
+    text: Eleven ritar Leos stapel 6 år längre än Sixtens och fyller de 6 åren med en eller två Sixtenstaplar.
     bild: "Lösning B, skillnaden i staplar. Leo är alltid 10 − 4 = 6 år äldre. Dubbelt så gammal: Leos stapel är Sixtens stapel och en lika lång bit till, som är 6 år. Sixten ska vara 6, och 6 − 4 = 2, alltså om 2 år. Tre gånger så gammal: Leos stapel är tre Sixtenstaplar, och de två sista är 6 år tillsammans. 6 / 2 = 3, Sixten ska vara 3, och 4 − 3 = 1, alltså för 1 år sedan. Kontroll: 12 = 2 · 6 och 9 = 3 · 3."
   c:
     rader:
-      - "Dubbelt så gammal:"
-      - 2 · 10 = 20
-      - 20 − 10 = 10
-      - "Svar: om 10 år."
-    om: Eleven tar Leos ålder i dag gånger 2, men Leos ålder ska jämföras med Sixtens.
-    fraga: Hur gammal är Sixten i elevens svar?
+      - "Dubbelt så gammal som Sixten:"
+      - 10 / 2 = 5
+      - Sixten är 5 om 1 år.
+      - "Svar: om 1 år."
+    om: Eleven låter Sixten bli ett år äldre men glömmer att Leo också blir det.
+    fraga: Hur gammal är Leo när Sixten är 5?
   fragor:
     - Vad ändras från rad till rad i lösning A, och vad ändras inte?
     - Varför är Leos stapel 6 år längre än Sixtens i lösning B?

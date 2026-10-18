@@ -5,7 +5,7 @@ innehallstagg: Algebra
 kalla: Idén kommer ur Nämnaren 2025:2, Problemavdelningen, nr 4477.
 problem:
   text:
-    - Ali spelar minigolf. På varje bana slår han från 1 till 9 slag, och han får 10 minus antalet slag i poäng för banan. Med 3 slag får han alltså 10 − 3 = 7 poäng. Sammanlagt slog Ali 20 slag och fick 30 poäng. Mira spelar på samma sätt.
+    - Ali spelar minigolf. På varje bana slår han från 1 till 9 slag, och poängen för banan är 10 minus antalet slag. Med 3 slag får han alltså 10 − 3 = 7 poäng. Sammanlagt slog Ali 20 slag och fick 30 poäng. Mira spelar på samma sätt.
   fragor:
     - Hur många banor spelade Ali?
     - Kan Mira få 35 poäng på 15 slag? Och på 20 slag? Visa hur ni vet.

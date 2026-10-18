@@ -24,10 +24,10 @@ losningsforslag:
     bild: "Lösning B, räkna vad de hinner. Alla påsar tar 40 + 15 + 35 + 10 + 45 = 145 minuter. På 70 minuter hinner två maskiner sy 2 · 70 = 140 minuter, och det räcker inte. Tiderna slutar på 0 eller 5, så nästa tid är 75: 40 + 35 = 75 och 45 + 15 + 10 = 70. På 45 minuter hinner tre maskiner sy 3 · 45 = 135 minuter, och det räcker inte. På 50 minuter: 45, 40 + 10 = 50 och 35 + 15 = 50."
   c:
     rader:
-      - "Allt: 145 min. 145 / 2 = 72,5"
-      - 145 / 3 = 48 rest 1
-      - 1 min = 60 s, 60 / 3 = 20
-      - "Svar: 72,5 min och 48 min 20 s"
+      - Allt tar 145 min.
+      - 145 / 2 = 72 rest 1, alltså 73
+      - 145 / 3 = 48 rest 1, alltså 49
+      - "Svar: 73 min och 49 min."
     om: Eleven delar tiden lika, som om en påse kunde sys på flera maskiner.
     fraga: Vilka påsar syr varje maskin i elevens svar?
   fragor:

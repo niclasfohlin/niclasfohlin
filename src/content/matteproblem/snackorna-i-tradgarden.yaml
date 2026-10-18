@@ -9,7 +9,7 @@ problem:
   fragor:
     - Ungefär hur många snäckor finns det i trädgården?
     - Vad blir svaret om 9 av de 50 har en prick?
-  bild: En trädgård med växter, en sten och tre snäckor. En snäcka har en prick på skalet, och en annan har ingen prick.
+  bild: En trädgård med växter, en sten och tre snäckor. En snäcka har en prick på skalet, och de två andra har ingen.
 losningsforslag:
   svaret: Ungefär 135 snäckor. Om 9 av de 50 har en prick blir det ungefär 150.
   kontroll: 27/135 = 10/50 = 1/5 och 27/150 = 9/50.
@@ -17,7 +17,7 @@ losningsforslag:
   a:
     namn: bygga upp 27
     text: Eleven börjar tabellen med att 10 av 50 har prick och bygger upp 27 som 20 + 5 + 2.
-    bild: "Lösning A. En tabell med kolumnerna ”med prick” och ”alla”: 10 och 50, 20 och 100 (båda gånger 2), 5 och 25 (båda delat med 2), 2 och 10 (båda delat med 5), och 27 och 135, som är inringat. Bredvid: 27 = 20 + 5 + 2, så alla är 100 + 25 + 10 = 135. Om 9 av 50 har prick är 27 = 3 · 9, så alla är 3 · 50 = 150. Svar: ungefär 135 snäckor, och ungefär 150 med 9 prickar."
+    bild: "Lösning A. En tabell med kolumnerna ”med prick” och ”alla”. Första raden är 10 och 50, och eleven räknar ut de andra ur den: gånger 2 ger 20 och 100, delat med 2 ger 5 och 25, och delat med 5 ger 2 och 10. Raden 27 och 135 är inringad. Bredvid: 27 = 20 + 5 + 2, så alla är 100 + 25 + 10 = 135. Om 9 av 50 har prick är 27 = 3 · 9, så alla är 3 · 50 = 150. Svar: ungefär 135 snäckor, och ungefär 150 med 9 prickar."
   b:
     namn: andelen med prick
     text: Eleven antar att andelen med prick är ungefär densamma i trädgården som bland de 50.
