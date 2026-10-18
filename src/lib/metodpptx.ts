@@ -182,6 +182,9 @@ export async function lathundPptx(m: CollectionEntry<'stodundervisning'>, o: { b
     console.log(`  ${m.id}: lathunden i A4 med ${Math.round(vald * 100)} procent av teckengraden`);
   }
   for (const v of valt.varningar) console.warn(`  ! ${m.id}${format === 'A4' ? ' (A4)' : ''}: ${v}`);
+  // En underrad som inte ryms i bandet bryts, och linjen under bandet skär igenom den andra raden (TIL i grupp 2026-10-18).
+  const band = valt.varningar.find((v) => v.startsWith('bild 3: underraden'));
+  if (band) throw new Error(`${m.id}${format === 'A4' ? ' (A4)' : ''}: ${band}`);
   // Filen komprimeras: okomprimerad vägde lathunden 235 kB, komprimerad 32 kB (K-243, mätt på Ordverkstad i grupp).
   const buffert = (await valt.pres.write({ outputType: 'nodebuffer', compression: true })) as Buffer;
   return valt.filmer.length ? filmbildensUppspelning(buffert, 1, valt.filmer, m.data.uppdaterad ?? m.data.publicerad) : buffert;
@@ -508,7 +511,9 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
     rect(s, 0, 0.66, W, 0.44, BAND); rect(s, 0, 1.08, W, 0.02, INK);
     txt(s, b.bandVanster ?? '', 0.21, 0.76, 7.2, 0.25, { mono: true, size: 12, color: GREY });
     // Underraden står på en rad i bandet, och en längre bryts och klipps av bandet (riggens varning för sagoboken
-    // 2026-10-02, K-168). Consolas är 0,55 gånger graden bred.
+    // 2026-10-02, K-168). Consolas är 0,55 gånger graden bred: 78 tecken i 16:9 och 68 i A4 i full storlek. En för lång
+    // underrad stoppar bygget i den storlek som väljs (lathundPptx): TIL i grupps rad hade 89 tecken, varningen fanns i båda
+    // formaten och släpptes därför igenom i A4, och linjen under bandet skar igenom den andra raden (riggen 2026-10-18).
     const bandTecken = Math.floor(7.2 * sx * 72 / (12 * grad * 0.55));
     if ((b.bandVanster ?? '').length > bandTecken) varna(`bild 3: underraden har ${b.bandVanster.length} tecken, och bandet rymmer ${bandTecken}: korta lathund.mall.underrad`);
     txt(s, b.bandHoger ?? '', 6.6, 0.76, 6.5, 0.25, { mono: true, size: 12, color: GREY, align: 'right' });

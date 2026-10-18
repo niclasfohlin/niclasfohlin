@@ -344,7 +344,7 @@ lathund:
           vad: Eleven läser boken en gång till för en vuxen, cirka tio minuter. Skriver tre favoritmeningar. Den vuxne signerar.
   mall:
     rubrik: Lässchemat och snabbmallen
-    underrad: "Lässchema TIL · följer med i mappen · en rad per dag · skriv ut det ur Materialet, ett A4"
+    underrad: "Lässchema TIL · följer med i mappen · skriv ut det ur Materialet"
     block:
       - typ: tabell
         rubrik: Lässchema
