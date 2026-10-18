@@ -26,12 +26,15 @@ material:
   - blädderblock
   - skylt och diplom
   - häftapparat
-uppdaterad: 2026-10-09
+uppdaterad: 2026-10-18
 relaterade:
   - skrivkurs-vardeskapande
   - skrivkurs-sagoboken
   - ordverkstad-i-grupp
 utkast: false
+centrala:
+  - id: skrivstrategier
+    efterText: "tabell: Det du ser, och det du gör"
 inledning:
   - "Skrivkurs: gemensam berättelseram är en kurs för fyra till tio elever i åk 3–6. Alla följer samma ram i sex delar, men var och en skriver sin egen bok, med egna personer, platser och händelser. Ramen säger i sex korta stycken vad som händer, till exempel att huvudpersonen går in i en skog som är annorlunda. Hur skogen är annorlunda bestämmer eleven. Två ramar är färdiga, Den magiska skogen och Hunden som försvann, och en tredje gör du med gruppen. Boken är till ett yngre barn."
   - "På bordet ligger elevens bok, där eleven skriver dagens del på en sida med en ruta att rita i. Där ligger också bladet Min ram, där eleven skriver sina val för varje del, och bladet Mitt mål. Kortet Berätta, med frågorna kamraten ställer, ligger mellan två elever. På tavlan står ramen, och på blädderblocket skriver du din egen bok i samma ram, en del i taget."
@@ -136,7 +139,7 @@ tabeller:
         - "Eleven säger sitt mål och läser delen. Kamraten säger var hen var med, vad hen undrar och om målet hördes. Eleven ändrar där kamraten undrade och skriver ett nytt mål."
   - rubrik: Det du ser, och det du gör
     plats: efter-fastnar
-    text: "Det här brukar hända i kursen, och så gör du."
+    text: "Det här brukar hända i kursen, och så gör du. Skrivstrategier är ett A4 på kursens sida att ha i handen under skrivtiden. Där står fler strategier för texten och läsaren."
     kolumner:
       - Det du ser
       - Det du gör

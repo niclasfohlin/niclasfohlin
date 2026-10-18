@@ -36,7 +36,7 @@ material:
   - pappersremsor och gem
   - veckans texter
 
-uppdaterad: 2026-10-10
+uppdaterad: 2026-10-18
 publicerad: 2026-10-09
 relaterade: []
 utkast: false
@@ -44,6 +44,9 @@ serie: texttyper-i-grupp
 formaga: 4
 tranar: "skriva så att läsaren kan göra något själv, genom att säga vad det går ut på och vad som behövs, ta ett steg i taget och säga hur och var"
 
+centrala:
+  - id: skrivstrategier
+    efterText: "tabell: Det du ser, och det du gör"
 inledning:
   - "Texttyp: Instruerande text är en kurs för elever i åk 4–7 som behöver stöd i att skriva. När de skriver en instruktion hoppar de ofta över steg som de själva gör utan att tänka, och stegen säger vad läsaren ska göra men inte hur. När de läser sin text tycker de att den är klar, för de vet ju hur man gör. I kursen lär de sig skriva så att en läsare kan göra något själv utan att fråga. En instruerande text lär läsaren att göra något, och den lyckas när läsaren kommer hela vägen: hen vet vad det går ut på och vad som behövs, gör ett steg i taget, vet hur och var och ser att det blev rätt. Kursen har två slags texter. Det första slaget lär läsaren göra en flygare av papper, och det andra lär läsaren ett spel."
   - "På tavlan står tre rader om läsaren: Vem läser? Vad vill vi? När får vi svar? På bordet ligger lappar, bladet Planen, kortet Läsarens frågor, papper och en pärm som går att ställa upp. Lapparna är små papperslappar, som du klipper ur arket Lapparna. På den första lappen skriver eleverna vad läsaren ska kunna efteråt. Är läsaren Lova i 4B, kan det stå ”Lova ska kunna göra en helikopter”. På var och en av de andra skriver de ett steg, med verbet först: ”Klipp ett snitt”. Vid varje lapp prövar de om läsaren kan göra steget utan att fråga, och svaret tar de ur det de vet om läsaren, som det hen sa på mötet i pass 2. Det läsaren redan vet, som hur man klipper eller hur en tärning ser ut, lägger de i rutan Åt sidan på bladet Planen. Ett steg som läsaren ska göra ligger kvar, också när hen kan det. Minst en lapp hamnar åt sidan, och den som lägger den säger varför. De andra lapparna lägger de på Planen i den ordning läsaren gör stegen."
@@ -191,7 +194,7 @@ tabeller:
     not: "Du frågar läsarnas lärare före pass 2, helst en vecka före kursen (se Var hittar du texterna och läsarna?). Kan klassen inte komma i pass 2, träffar eleven sin läsare på en rast före pass 3, med bladet Läsaren. Hur du tar bort stödet står i Texttyper i grupp."
   - rubrik: Det du ser, och det du gör
     plats: efter-fastnar
-    text: "Här står det som brukar hända i just den här kursen. Stödtrappan för när en elev fastnar, och det du gör och undviker som lärare, står i Texttyper i grupp. Där står också det du gör under Skriv, i tabellerna Skrivstödet och Eleven som har svårt att få ned texten."
+    text: "Här står det som brukar hända i just den här kursen. Stödtrappan för när en elev fastnar, och det du gör och undviker som lärare, står i Texttyper i grupp. Där står också det du gör under Skriv, i tabellerna Skrivstödet och Eleven som har svårt att få ned texten. Skrivstrategier är ett A4 på kursens sida att ha i handen under skrivtiden."
     kolumner:
       - Det du ser
       - Det du gör

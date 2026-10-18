@@ -27,12 +27,15 @@ material:
   - Mina drag och Kortet till skribenten
   - fotona eller kartan
   - diplom
-uppdaterad: 2026-10-09
+uppdaterad: 2026-10-18
 relaterade:
   - skrivkurs-berattelseram
   - texttyper-i-grupp
   - kortskrivning-skriv-varje-dag
 utkast: false
+centrala:
+  - id: skrivstrategier
+    efterText: "tabell: Det du ser och det du gör"
 inledning:
   - "Skrivkurs: värdeskapande skrivande är en kurs där fyra till tio elever i åk 4–9 skriver för en verklig läsare. Gruppen gör ett av två projekt. I Skattjakten skriver varje elev inbjudan, ledtråden, uppdraget och berättelsen i skattkistan till ett lag med yngre barn. I Guideboken skriver varje elev ett uppslag om ett ställe i närområdet, till dem som är nya på skolan. Texterna är korta, och de ska fungera: laget ska hitta platsen, och den nya ska hitta vägen."
   - "På bordet ligger veckans mentortext, en kopia per par, och kortet Frågebanken. I två av veckorna ligger där också två korta texter som gör samma sak olika bra. Eleven skriver i skrivboken och renskriver på det som läsaren får: ett kort, en inbjudan, en berättelse eller ett uppslag. Bladet Mina drag och Kortet till skribenten ligger i elevens mapp. På tavlan står mentortexten stor, och där skriver du din egen text."
@@ -149,7 +152,7 @@ tabeller:
         - "Skriv klart, renskriv eller gå klart promenaden. Efter jakten eller besöket läser ni läsarens svar och tar frågorna på sidan Dagen."
   - rubrik: Det du ser och det du gör
     plats: efter-fastnar
-    text: "Så här kan det se ut medan eleverna skriver, och så gör du."
+    text: "Så här kan det se ut medan eleverna skriver, och så gör du. Skrivstrategier är ett A4 på kursens sida att ha i handen under skrivtiden."
     kolumner:
       - Det du ser
       - Det du gör

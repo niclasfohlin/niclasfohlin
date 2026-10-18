@@ -33,7 +33,7 @@ material:
   - "veckans texter"
   - "ett lakan och två ficklampor"
 
-uppdaterad: 2026-10-10
+uppdaterad: 2026-10-18
 publicerad: 2026-10-09
 relaterade: []
 utkast: false
@@ -41,6 +41,9 @@ serie: texttyper-i-grupp
 formaga: 2
 tranar: "berätta så att läsaren är med, genom att välja det läsaren vill vara med om, visa hur det känns och stanna kvar i det som händer"
 
+centrala:
+  - id: skrivstrategier
+    efterText: "tabell: Det du ser, och det du gör"
 inledning:
   - "Texttyp: Berättande text är en kurs för elever i åk 4–7 som behöver stöd i att skriva. När de skriver en berättelse räknar de ofta upp det som händer, från morgon till kväll. Det som skulle bli spännande är över på en mening, och läsaren får inte veta hur det känns. I kursen lär de sig berätta för en läsare. En berättande text låter läsaren vara med om något, och den lyckas när läsaren får veta vem det handlar om och var, vad som händer, hur det känns och hur det går. Kursen har två berättelser, två läsare och samma fyra steg. Den första berättelsen går till en yngre elev som eleverna har intervjuat, och den andra är en spökberättelse till lyssnarna på en spökläsning."
   - "På tavlan står tre rader: Vem läser? Vad vill vi? När får vi svar? Vid den tredje står när läsaren får höra berättelsen och svarar. På bordet ligger lappar, bladet Planen, kortet Läsarens frågor och bladet Intervjun. Lapparna är remsor av papper, som du klipper ur arket Lapparna. På den första lappen skriver eleverna vad de vill att läsaren ska känna. Är läsaren Vera, sju år, kan det stå ”Vera ska skratta”. På var och en av de andra skriver de något som händer, med några ord: ”Påsen rör på sig”. Sedan lägger de lapparna på bladet Planen. Vid varje lapp frågar de sig om läsaren vill vara med om det. De lägger minst en lapp åt sidan, och den som gör det säger varför. De lappar som ligger kvar lägger de i ordning, och det är planen för berättelsen."
@@ -188,7 +191,7 @@ tabeller:
     not: "De yngre eleverna går i en klass på skolan, och du ber deras lärare om två saker före kursen: intervjun och läsbesöket. Avsnittet Var hittar du texterna och läsarna? säger hur du gör. Hur stödet tas bort vecka för vecka står i Texttyper i grupp, under Så tas stödet bort."
   - rubrik: Det du ser, och det du gör
     plats: efter-fastnar
-    text: "Här står det som brukar hända i just den här kursen. Stödtrappan för när en elev fastnar, och det du gör och undviker som lärare, står i Texttyper i grupp. Där står också det du gör under Skriv, i tabellerna Skrivstödet och Eleven som har svårt att få ned texten."
+    text: "Här står det som brukar hända i just den här kursen. Stödtrappan för när en elev fastnar, och det du gör och undviker som lärare, står i Texttyper i grupp. Där står också det du gör under Skriv, i tabellerna Skrivstödet och Eleven som har svårt att få ned texten. Skrivstrategier är ett A4 på kursens sida att ha i handen under skrivtiden."
     kolumner:
       - Det du ser
       - Det du gör

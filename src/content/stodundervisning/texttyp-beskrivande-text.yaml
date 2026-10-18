@@ -33,7 +33,7 @@ material:
   - veckans texter
   - brevpapper och kuvert
 
-uppdaterad: 2026-10-10
+uppdaterad: 2026-10-18
 publicerad: 2026-10-09
 relaterade: []
 utkast: false
@@ -41,6 +41,9 @@ serie: texttyper-i-grupp
 formaga: 3
 tranar: "beskriva något så att läsaren ser det framför sig, genom att ge helheten först, säga vad det liknar och säga vad som skiljer det från annat"
 
+centrala:
+  - id: skrivstrategier
+    efterText: "tabell: Det du ser, och det du gör"
 inledning:
   - "Texttyp: Beskrivande text är en kurs för elever i åk 4–7 som behöver stöd i att skriva. När de beskriver något räknar de ofta upp det de ser, i en ordning som kunde vara vilken som helst och med ord som stor och fin. De tror att läsaren redan vet hur det ser ut, och läsaren får aldrig helheten. I kursen lär de sig beskriva något för en läsare som inte har sett det. En beskrivande text låter läsaren se hur något är, och den lyckas när läsaren ser det framför sig: vad det är och var, vad det liknar, vad hen ser först och sedan, och vad som skiljer det från annat. Kursen har två slags texter, två slags läsare och samma fyra steg. Det första slaget är en beskrivning till ett yngre barn som undrar hur det ser ut där de äldre går och vad de gör där, och det andra är brev till någon i elevens liv."
   - "På tavlan står tre rader: Vem läser? Vad vill vi? När får vi svar? På bordet ligger lappar, bladet Planen, kortet Läsarens frågor och bladet Barnets frågor, där barnet har ritat hur hen tror att det ser ut. Lapparna är små papperslappar, som du klipper ur arket Lapparna. På den första lappen skriver eleverna vad läsaren ska se. Är läsaren Noor, åtta år, kan det stå ”Noor ska se slöjdsalen framför sig”. På var och en av de andra skriver de en del av det läsaren ska se, med några ord: ”Väggen med verktygen”. Vid varje lapp frågar de sig om läsaren redan vet det, och svaret tar de ur det barnet sa och ritade. Det läsaren redan vet lägger de i rutan Åt sidan på bladet Planen. Minst en lapp hamnar där, och den som lägger den säger varför. De andra lapparna lägger de på Planen i den ordning läsaren ska se dem."
@@ -188,7 +191,7 @@ tabeller:
     not: "Läsarna i vecka 1 till 3 är yngre barn, och du bokar deras klass före pass 2, helst en vecka före kursen (se Var hittar du texterna och läsarna?). Hur du tar bort stödet står i Texttyper i grupp."
   - rubrik: Det du ser, och det du gör
     plats: efter-fastnar
-    text: "Här står det som brukar hända i just den här kursen. Stödtrappan för när en elev fastnar, och det du gör och undviker som lärare, står i Texttyper i grupp. Där står också det du gör under Skriv, i tabellerna Skrivstödet och Eleven som har svårt att få ned texten."
+    text: "Här står det som brukar hända i just den här kursen. Stödtrappan för när en elev fastnar, och det du gör och undviker som lärare, står i Texttyper i grupp. Där står också det du gör under Skriv, i tabellerna Skrivstödet och Eleven som har svårt att få ned texten. Skrivstrategier är ett A4 på kursens sida att ha i handen under skrivtiden."
     kolumner:
       - Det du ser
       - Det du gör

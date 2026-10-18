@@ -23,7 +23,7 @@ material:
   - elevens skrivbok
   - miniwhiteboard
   - skrivkort Bas
-uppdaterad: "2026-10-17"
+uppdaterad: "2026-10-18"
 publicerad: "2026-10-17"
 relaterade:
   - "ljudlek-i-grupp"
@@ -137,7 +137,7 @@ tabeller:
   - rubrik: "Lyssna efter"
     plats: "efter-fastnar"
     meny: true
-    text: "Bekräfta först det som stämmer, och låt sedan eleven försöka igen."
+    text: "Bekräfta först det som stämmer, och låt sedan eleven försöka igen. Skrivstrategier är ett A4 på metodens sida. Där står strategierna för ordet och meningen, och fler för när eleven skriver texter."
     kolumner:
       - "Det eleven gör"
       - "Det som händer"
@@ -584,6 +584,8 @@ lathund:
 centrala:
   - id: skrivkort
     efterText: urval
+  - id: skrivstrategier
+    efterText: "tabell: Lyssna efter"
 lektionskort:
   - efter: tidsschema
     text: "Lektionskortet är passet på ett A4 med två sidor: målet, orden, passet med det du gör och säger, det du gör när eleven fastnar och på baksidan meningarna att säga. Ha det framför dig under passet."

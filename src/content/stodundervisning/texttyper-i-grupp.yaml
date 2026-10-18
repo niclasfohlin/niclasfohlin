@@ -29,7 +29,7 @@ material:
   - lappar
   - en mapp per elev
 
-uppdaterad: 2026-10-09
+uppdaterad: 2026-10-18
 publicerad: 2026-10-09
 relaterade:
   - skrivkurs-vardeskapande
@@ -58,6 +58,9 @@ lektionsbank:
       skal: "Texten lär läsaren att göra något själv. Läsaren undrar vad det går ut på, vad hen behöver, hur hen gör och hur hen vet att det blev rätt."
   not: "En text gör oftast flera saker. I en argumenterande text behöver eleven också förklara och ge exempel, och det kan hen bygga vidare på i nästa kurs. Börja därför en ny kurs med att eleven läser sitt sista mål och säger vad hen känner igen i den nya texten, som avsnittet om återkopplingen säger. Att förklara tränas inne i kurserna och har ingen egen kurs."
 
+centrala:
+  - id: skrivstrategier
+    efterText: fastnar
 inledning:
   - "Texttyper i grupp är skrivkurser för elever i åk 4–7 som behöver stöd i att skriva. Eleverna skriver ofta korta texter utan plan. De börjar skriva direkt, skriver ned det de kommer på, en sak i taget, och slutar när det tar emot. I kurserna lär de sig planera och skriva en text som gör något för en läsare: övertygar, berättar, beskriver eller instruerar. Varje kurs gäller en texttyp och tar sex veckor."
   - "På tavlan står tre rader om läsaren: Vem läser? Vad vill vi? När får vi svar? På bordet ligger lappar, kursens kort med det läsaren brukar undra och en mapp för varje elev. Lapparna är små bitar papper som du klipper ur arket Lapparna i kursen. På dem skriver eleverna det som ska med i texten, en sak på varje lapp, med några ord. Sedan lägger de åt sidan det läsaren inte behöver och lägger resten i ordning. När en kamrat är läsare har hen kortet och frågar med hjälp av det."
@@ -330,7 +333,7 @@ exempel:
 
 fastnar:
   rubrik: När eleven fastnar
-  text: "Eleven fastnar oftast för att hen har tappat bort läsaren. Börja därför med läsaren, och ge sedan minsta möjliga stöd. Den som börjar skriva direkt, utan plan, får först berätta texten för en läsare som frågar, och det eleven svarar blir lapparna."
+  text: "Eleven fastnar oftast för att hen har tappat bort läsaren. Börja därför med läsaren, och ge sedan minsta möjliga stöd. Den som börjar skriva direkt, utan plan, får först berätta texten för en läsare som frågar, och det eleven svarar blir lapparna. Skrivstrategier är ett A4 att ha i handen under skrivtiden. Det finns på metodens sida och på varje kurs sida."
   fragaForst:
     - Vem ska läsa det här?
     - Vad behöver den personen veta då?

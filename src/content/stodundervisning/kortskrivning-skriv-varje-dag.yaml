@@ -25,7 +25,7 @@ material:
   - klocka som alla ser
   - lösa papper
   - blad på väggen
-uppdaterad: 2026-10-17
+uppdaterad: 2026-10-18
 publicerad: 2026-10-14
 relaterade:
   - texttyper-i-grupp
@@ -35,6 +35,8 @@ utkast: false
 centrala:
   - id: skrivkort
     efterText: urval
+  - id: skrivstrategier
+    efterText: "tabell: När pennan stannar"
 nivaer:
   - { namn: Bas, farg: "4E7A43" }
   - { namn: Medel, farg: "A8742A" }
@@ -87,6 +89,7 @@ tabeller:
   - rubrik: När pennan stannar
     plats: efter-tidsschema
     meny: true
+    text: "Här står det du ser när pennan stannar, och vad du gör och säger då. Skrivstrategier är ett A4 på metodens sida. Där står fler sätt att komma igång och skriva vidare, under Berätta först och Skriv vidare."
     kolumner:
       - Det du ser eller hör
       - Det du gör och säger

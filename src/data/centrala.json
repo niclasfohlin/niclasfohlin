@@ -19,6 +19,15 @@
     "mejl": "ett A4 att ha i handen under passet, med strategierna för ordet, meningen och rösten och för förståelsen"
   },
   {
+    "id": "skrivstrategier",
+    "namn": "Skrivstrategier",
+    "slag": "pdf",
+    "del": "stodmaterial",
+    "adress": "/stodundervisning/skrivstrategier.pdf",
+    "kort": "/skrivstrategier",
+    "mejl": "ett A4 att ha i handen under skrivtiden, med strategierna för ordet och meningen och för texten och läsaren"
+  },
+  {
     "id": "aktiviteter",
     "namn": "Ta fram en aktivitet",
     "slag": "sida",

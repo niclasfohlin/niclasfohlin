@@ -32,7 +32,7 @@ material:
   - diagrammet Mina texter
   - en mapp per elev
 
-uppdaterad: 2026-10-10
+uppdaterad: 2026-10-18
 publicerad: 2026-10-09
 relaterade: []
 utkast: false
@@ -40,6 +40,9 @@ serie: texttyper-i-grupp
 formaga: 1
 tranar: "övertyga en läsare, genom att välja skäl som läsaren bryr sig om, förklara dem och säga vad läsaren ska göra"
 
+centrala:
+  - id: skrivstrategier
+    efterText: "tabell: Det du ser, och det du gör"
 inledning:
   - "Texttyp: Argumenterande text är en kurs för elever i åk 4–7 som behöver stöd i att skriva. De har ofta en åsikt och ett par skäl, men de förklarar inte skälen och skriver inget slut, och texten blir kort. I kursen lär de sig övertyga en läsare. En argumenterande text vill få någon att hålla med eller göra något, och den lyckas när läsaren får veta vad skribenten vill, varför och vad läsaren själv ska göra."
   - "På tavlan står tre rader: Vem läser? Vad vill vi? När får vi svar? Vid den tredje står när svaret kommer. På bordet ligger lappar, bladet Planen och kortet Läsarens frågor. Lapparna är remsor av papper, som du skriver ut på arket Lapparna, bland mallarna, och klipper isär. På den första lappen skriver eleverna vad de vill, och på var och en av de andra ett skäl, alltså ett argument, med några ord: ”Fler hinner låna.” Sedan lägger de lapparna på bladet Planen. Vid varje lapp frågar de sig om läsaren bryr sig om det skälet. De lägger minst en lapp åt sidan, och den som gör det säger varför. De lappar som ligger kvar lägger de i ordning, och det är planen för texten."
@@ -187,7 +190,7 @@ tabeller:
     not: "Kursens läsare är en vuxen på skolan. Avsnittet Var hittar du texterna och läsaren? säger hur du ber hen vara läsare. Hur stödet tas bort vecka för vecka står i Texttyper i grupp, under Så tas stödet bort."
   - rubrik: Det du ser, och det du gör
     plats: efter-fastnar
-    text: "Här står det som brukar hända i just den här kursen. Stödtrappan för när en elev fastnar, och det du gör och undviker som lärare, står i Texttyper i grupp. Där står också det du gör under Skriv, i tabellerna Skrivstödet och Eleven som har svårt att få ned texten."
+    text: "Här står det som brukar hända i just den här kursen. Stödtrappan för när en elev fastnar, och det du gör och undviker som lärare, står i Texttyper i grupp. Där står också det du gör under Skriv, i tabellerna Skrivstödet och Eleven som har svårt att få ned texten. Skrivstrategier är ett A4 på kursens sida att ha i handen under skrivtiden."
     kolumner:
       - Det du ser
       - Det du gör

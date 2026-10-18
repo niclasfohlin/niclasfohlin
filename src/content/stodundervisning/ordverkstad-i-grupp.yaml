@@ -28,7 +28,7 @@ material:
   - skrivplanen
   - tidningens sida
 
-uppdaterad: 2026-10-17
+uppdaterad: 2026-10-18
 publicerad: 2026-10-06
 relaterade:
   - laslistor-i-grupp
@@ -36,6 +36,9 @@ relaterade:
   - skrivkurs-berattelseram
 utkast: false
 
+centrala:
+  - id: skrivstrategier
+    efterText: "tabell: När eleven fastnar i skrivandet"
 inledning:
   - "Ordverkstad i grupp är för elever i åk 2–5 som läser korta ord säkert men fastnar på långa. De gissar efter början av ordet, tappar ändelsen och stavar efter ljudet, och i egna texter väljer de bort de långa orden. I kursen lär de sig hur långa ord är byggda, först av ord som sätts ihop och sedan med ändelser och förstavelser. De delar långa ord för att läsa, stava och förklara dem, och de skriver orden i egna texter till gruppens tidning."
   - "Varje vecka har en förlaga, en kort text full av långa ord, som en artikel om uppfinningar, en platsannons eller en instruktion till en tävling. På bordet ligger förlagan, kortet Ett långt ord och en miniwhiteboard med en whiteboardpenna för varje elev, och i ordpasset ett kuvert med ordkort för varje par. På ordkorten står delarna i veckans ord, som regn och hatt i förlagans regnhatt. Paren pusslar ihop delarna till ord, läser orden och bygger nya, som hattregn, och säger vad orden betyder. På väggen sitter planschen Delarna, där du skriver upp veckans delar när ni börjar en ny vecka."
@@ -272,7 +275,7 @@ tabeller:
         - "”Vad vill ni veta mer om?”\n”Vad var bäst i texten?”\n”Vilket långt ord hörde ni?”"
   - rubrik: När eleven fastnar i skrivandet
     plats: efter-fastnar
-    text: "Här står det som oftast händer i skrivpassen, och vad du gör då."
+    text: "Här står det som oftast händer i skrivpassen, och vad du gör då. Skrivstrategier är ett A4 på metodens sida att ha i handen i skrivpassen. Där står fler strategier, från att dela ett långt ord till att pröva texten på en läsare."
     kolumner:
       - Det du ser
       - Det du gör
