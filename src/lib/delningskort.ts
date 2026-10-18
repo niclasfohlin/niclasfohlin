@@ -16,7 +16,8 @@ import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { site } from '../data/site';
 import { publicerade, publikationNamn, typLabel } from './innehall';
-import { arskursText } from './metod';
+import { arskursText, kortFakta, type MetodPost } from './metod';
+import { arskursSpannet, SKALA, spannText, type Spann } from './tackning';
 import { delningensKort, kortData, skrivkortAdress, skrivkortAv } from './skrivkort';
 import { aktiviteterAdress, aktiviteterAv, aktiviteterData, brainbreaksAdress, brainbreaksAv, brainbreaksData, delningensAktiviteter, delningensBrainbreaks } from './aktiviteter';
 import { centralAv } from './centrala';
@@ -26,6 +27,19 @@ export const MALL = 'src/pages/delning/kort/[namn].astro';
 // sidorna som slumpar aktivitetskort och brainbreaks.
 export const SKRIVKORTSMALL = 'src/pages/delning/skrivkort/[namn].astro';
 export const KORTBANKSMALL = { aktiviteter: 'src/pages/delning/aktiviteter/[namn].astro', brainbreaks: 'src/pages/delning/brainbreaks/[namn].astro' } as const;
+// Metodbankens kort (/stodundervisning) har också en egen mall: en bit av täckningskartan och tre av bankens metodkort i
+// en trappa (Niclas 2026-10-18 valde förslaget bland tre: "Kör E"). Kartans rader är den första metoden i varje område,
+// i kartans ordning. Metoderna i trappan visar tre av de fyra områdena; de byts när Niclas vill, och bygget stannar om
+// en av dem inte längre är publicerad.
+export const METODBANKSMALL = 'src/pages/delning/metodbank/[namn].astro';
+export const METODBANKENS_METODER = ['fyra-raknesatten', 'laslistor-i-grupp', 'ordverkstad-i-grupp'];
+// Raden under titeln, utan antalet metoder (Niclas 2026-10-18: "Antal uppdaterad ju löpande", och "Metoder i eller
+// metoder för").
+const METODBANKENS_RAD = 'Metoder i matematik, läsning, skrivning och socialt samspel';
+// Metodbankens kort är bara text och färgade ytor och sparas som PNG med palett: 41 kB, mot 89 kB som JPEG, utan skillnad
+// som syns förstorad (2026-10-18). Kortet ska delas många gånger, och varje tjänst som visar länken hämtar bilden.
+// Kort med foton och teckningar, som skrivkorten, blir sämre och större i en palett och är JPEG.
+const PNG: Kort['typ'][] = ['metodbank'];
 // Avsnitten i global.css som korten på de egna mallarna ritas med. Aktivitetskorten och brainbreakkorten läser
 // skrivkortens färger, så deras kort räknar in båda avsnitten; skrivkortens kort bara sitt eget.
 const SKRIVKORTSSTIL = '/* Skrivkorten och sidan som slumpar dem';
@@ -36,17 +50,19 @@ const VERSION = 1;
 export interface Kort {
   sida: string; // sidans adress, t.ex. /stodundervisning/brakkurs-i-grupp
   namn: string; // filnamnets början, t.ex. stodundervisning-brakkurs-i-grupp
-  typ: 'start' | 'om' | 'avsnitt' | 'artikel' | 'bok' | 'metod' | 'skrivkort' | 'aktiviteter' | 'brainbreaks';
+  typ: 'start' | 'om' | 'avsnitt' | 'metodbank' | 'artikel' | 'bok' | 'metod' | 'skrivkort' | 'aktiviteter' | 'brainbreaks';
   etikett: string; // raden över titeln, tom på huvudsidorna
   titel: string;
   undertitel: string;
   bild: string; // porträttet, eller bokens omslag
   farg: string; // designsystemets variabel för strecket och raden över titeln
-  fil: string; // /delning/<namn>-<kontrollsumma>.jpg
+  fil: string; // /delning/<namn>-<kontrollsumma>.jpg, eller .png för metodbankens kort (PNG nedan)
   /** Sidan som slumpar skrivkort: metoden och korten som står på kortet (src/lib/skrivkort.ts, delningensKort). */
   skrivkort?: { metod: string; kort: string[] };
   /** Sidorna som slumpar aktivitetskort och brainbreaks: metoden och korten som står på kortet (src/lib/aktiviteter.ts). */
   kortbank?: { slag: keyof typeof KORTBANKSMALL; metod: string; kort: string[] };
+  /** Metodbanken: kartans skala och rader och metodkorten i trappan, med det som syns av dem. */
+  metodbank?: { skala: string[]; rader: { omrade: string; titel: string; spann: Spann }[]; metoder: { id: string; titel: string; omrade: string; fakta: { rubrik: string; text: string }[]; ingress: string }[] };
 }
 
 // Små tal med bokstäver, som i sajtens texter.
@@ -61,14 +77,14 @@ const las = (sokvag: string) => readFileSync(join(process.cwd(), sokvag));
 // ett nytt område inte ritar om alla kort (Socialt 2026-10-03 hade annars ritat om 103 kort).
 const GRUNDFARGER = ['--farg-accent', '--farg-lasning', '--farg-skrivning'];
 let designVarden: Map<string, string> | undefined;
-function designsystem(farg: string): string {
+function designsystem(farg: string, mall = las(MALL).toString('utf8')): string {
   if (!designVarden) {
     const css = las('src/styles/global.css').toString('utf8').replace(/\r\n/g, '\n');
     const start = css.indexOf(':root {');
     designVarden = new Map([...css.slice(start, css.indexOf('\n}', start)).matchAll(/(--[\w-]+):\s*([^;]+);/g)].map((m) => [m[1], m[2].trim()]));
   }
   const varden = designVarden;
-  const lasta = new Set([...las(MALL).toString('utf8').matchAll(/var\((--[\w-]+)\)/g)].map((m) => m[1]).concat(GRUNDFARGER, farg));
+  const lasta = new Set([...mall.matchAll(/var\((--[\w-]+)\)/g)].map((m) => m[1]).concat(GRUNDFARGER, farg));
   return [...lasta].filter((v) => varden.has(v)).sort().map((v) => `${v}: ${varden.get(v)}`).join('\n');
 }
 
@@ -89,12 +105,14 @@ export function allaKort(): Promise<Kort[]> {
     const utan: Omit<Kort, 'fil'>[] = [];
     const lagg = (k: Omit<Kort, 'fil' | 'namn'>) => utan.push({ ...k, namn: k.sida === '/' ? 'start' : k.sida.slice(1).replace(/\//g, '-') });
     const portratt = site.portratt;
+    const metoder = await publicerade('stodundervisning');
 
     lagg({ sida: '/', typ: 'start', etikett: '', titel: site.namn, undertitel: site.rad, bild: portratt, farg: '--farg-accent' });
     for (const [nyckel, s] of Object.entries(site.sidor)) {
       // Om-sidan har porträttet till höger och därmed en smal spalt: där står raden under namnet i stället för beskrivningen.
       const om = nyckel === 'om';
-      lagg({ sida: `/${nyckel}`, typ: om ? 'om' : 'avsnitt', etikett: '', titel: s.titel, undertitel: om ? site.rad : forstaMeningen(s.beskrivning), bild: portratt, farg: '--farg-accent' });
+      if (nyckel === 'stodundervisning') lagg({ sida: `/${nyckel}`, typ: 'metodbank', ...metodbanken(metoder), titel: s.titel, undertitel: METODBANKENS_RAD, bild: portratt, farg: '--farg-accent' });
+      else lagg({ sida: `/${nyckel}`, typ: om ? 'om' : 'avsnitt', etikett: '', titel: s.titel, undertitel: om ? site.rad : forstaMeningen(s.beskrivning), bild: portratt, farg: '--farg-accent' });
     }
     for (const a of await publicerade('artiklar')) {
       const ar = a.data.datum.getFullYear();
@@ -107,7 +125,7 @@ export function allaKort(): Promise<Kort[]> {
       const etikett = ['Bok', b.data.forlag, b.data.utgivningsar].filter(Boolean).join(' · ');
       lagg({ sida: `/bocker/${b.id}`, typ: 'bok', etikett, titel, undertitel, bild: b.data.omslag ?? portratt, farg: '--farg-accent' });
     }
-    for (const m of await publicerade('stodundervisning')) {
+    for (const m of metoder) {
       const [titel, undertitel] = dela(m.data.titel);
       lagg({ sida: `/stodundervisning/${m.id}`, typ: 'metod', etikett: `Stödundervisning · ${m.data.omrade} · ${arskursText(m.data)}`, titel, undertitel: undertitel || m.data.undertitel || '', bild: portratt, farg: FARG[m.data.omrade] ?? '--farg-accent' });
       // Sidan som slumpar skrivkort har ett eget kort med tre skrivkort och klockan (Niclas 2026-10-14: "en direktlänk
@@ -143,13 +161,50 @@ export function allaKort(): Promise<Kort[]> {
       return [las(KORTBANKSMALL[s.slag]).toString('utf8').replace(/\r\n/g, '\n'), las('src/scripts/kortbanken.ts').toString('utf8').replace(/\r\n/g, '\n'), css.slice(css.indexOf(SKRIVKORTSSTIL)), JSON.stringify(data),
         ...data.kort.map((k) => bildSumma(k.bild.replace(/^\//, '')))].join('|');
     };
+    // Metodbankens kort ritas med bankens eget metodkort (src/components/Metodkort.astro) och dess stilar i global.css:
+    // grundreglerna för text och länkar, kortets ram och avsnittet om metodbankens kort. Bara de räknas in, så att kortet
+    // inte ritas om varje gång något annat i global.css ändras.
+    const stycke = (fran: string, till: string) => {
+      const a = css.indexOf(fran), b = css.indexOf(till, a + 1);
+      if (a < 0 || b < 0) throw new Error(`Delningskorten: hittar inte "${fran.trim()}" följt av "${till.trim()}" i global.css; rätta stycket i src/lib/delningskort.ts.`);
+      return css.slice(a, b);
+    };
+    const metodbankSumma = () => {
+      const mall = las(METODBANKSMALL).toString('utf8').replace(/\r\n/g, '\n');
+      const kortet = las('src/components/Metodkort.astro').toString('utf8').replace(/\r\n/g, '\n');
+      const stil = [stycke('\n* { box-sizing', '\n.hopp-lank'), stycke('\n.kort {', '\n.meta {'), stycke('/* Metodbanken: korten', '\n.samla {')].join('|');
+      return [mall, kortet, stil, designsystem('--farg-accent', mall + stil)].join('|');
+    };
     return utan.map((k) => {
       const h = createHash('sha256');
-      for (const del of [...gemensamt, designsystem(k.farg), JSON.stringify(k), bildSumma(k.bild), bildSumma(portratt), ...(k.skrivkort ? [skrivkortSumma(k.skrivkort)] : []), ...(k.kortbank ? [kortbankSumma(k.kortbank)] : [])]) h.update(del);
-      return { ...k, fil: `/delning/${k.namn}-${h.digest('hex').slice(0, 10)}.jpg` };
+      for (const del of [...gemensamt, designsystem(k.farg), JSON.stringify(k), bildSumma(k.bild), bildSumma(portratt), ...(k.skrivkort ? [skrivkortSumma(k.skrivkort)] : []), ...(k.kortbank ? [kortbankSumma(k.kortbank)] : []), ...(k.metodbank ? [metodbankSumma()] : [])]) h.update(del);
+      return { ...k, fil: `/delning/${k.namn}-${h.digest('hex').slice(0, 10)}.${PNG.includes(k.typ) ? 'png' : 'jpg'}` };
     });
   })();
   return alla;
+}
+
+// Metodbankens kort: raden över titeln, kartans rader och metodkorten i trappan, ur metoderna. Kartan har samma ordning
+// som täckningskartan (src/components/Tackning.astro): det som börjar tidigast först, sedan det kortaste, sedan namnet.
+function metodbanken(alla: MetodPost[]): Pick<Kort, 'etikett' | 'metodbank'> {
+  const huvud = alla.filter((m) => !m.data.serie);
+  const rader = huvud.map((m) => ({ m, sp: arskursSpannet(m.data) }));
+  const ordning = (a: (typeof rader)[number], b: (typeof rader)[number]) => a.sp[0] - b.sp[0] || (a.sp[1] - a.sp[0]) - (b.sp[1] - b.sp[0]) || a.m.data.titel.localeCompare(b.m.data.titel, 'sv');
+  const forsta = site.omraden.map((o) => rader.filter((r) => r.m.data.omrade === o).sort(ordning)[0]).filter(Boolean);
+  const valda = METODBANKENS_METODER.map((id) => {
+    const m = huvud.find((x) => x.id === id);
+    if (!m) throw new Error(`Metodbankens delningskort: metoden ${id} är inte publicerad. Byt den i METODBANKENS_METODER i src/lib/delningskort.ts.`);
+    return m;
+  });
+  const fran = Math.min(...rader.map((r) => r.sp[0])), till = Math.max(...rader.map((r) => r.sp[1]));
+  return {
+    etikett: `Metodbank · ${spannText([fran, till])}`,
+    metodbank: {
+      skala: SKALA,
+      rader: forsta.map(({ m, sp }) => ({ omrade: m.data.omrade, titel: dela(m.data.titel)[0], spann: sp })),
+      metoder: valda.map((m) => ({ id: m.id, titel: m.data.titel, omrade: m.data.omrade, fakta: kortFakta(m.data), ingress: m.data.ingress })),
+    },
+  };
 }
 
 // Kortet för en sida: sidans eget, annars närmaste överordnade sidas, annars startsidans.

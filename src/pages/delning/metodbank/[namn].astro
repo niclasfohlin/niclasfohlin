@@ -1,0 +1,107 @@
+---
+// Mallen för metodbankens delningskort, 1200 × 630 (Niclas 2026-10-18 valde förslaget bland tre: "Kör E"). Den har
+// delningskortens form (src/pages/delning/kort/[namn].astro) med titeln överst. Under titeln står en bit av
+// täckningskartan med den första metoden i varje område, i kartans form (src/components/Tackning.astro) men större. Till
+// höger om staplarna står tre av bankens metodkort i en trappa, så att varje titel syns och det främsta visar
+// faktaremsan och början av ingressen. Korten ritas med bankens eget kort (src/components/Metodkort.astro), så att bilden
+// visar korten som de ser ut, och de står till höger om staplarnas slut, så att ingen stapel ser längre ut än den är.
+// Vad som står på kortet räknas ut i src/lib/delningskort.ts (metodbanken och METODBANKENS_METODER), och mallen räknas bara
+// in i det kortet. Sidan finns bara för att scripts/delningskort.mjs ska fotografera den; den länkas inte och indexeras inte.
+import '../../../styles/global.css';
+import { site } from '../../../data/site';
+import { allaKort, type Kort } from '../../../lib/delningskort';
+import { publicerade } from '../../../lib/innehall';
+import { ejBryt } from '../../../lib/metod';
+import { spannText, type Spann } from '../../../lib/tackning';
+import Metodkort from '../../../components/Metodkort.astro';
+
+export async function getStaticPaths() {
+  return (await allaKort()).filter((kort) => kort.metodbank).map((kort) => ({ params: { namn: kort.namn }, props: { kort } }));
+}
+
+const { kort } = Astro.props as { kort: Kort };
+const { skala, rader, metoder } = kort.metodbank!;
+const poster = await publicerade('stodundervisning');
+const korten = metoder.map((m) => poster.find((p) => p.id === m.id)!);
+// Områdets färg och dess ljusa ton, som märkena i kartan och på korten.
+const FARG: Record<string, string> = { Matematik: '--farg-accent', Läsning: '--farg-lasning', Skrivning: '--farg-skrivning', Socialt: '--farg-socialt' };
+const ak = (sp: Spann) => (sp[0] === 0 ? spannText(sp) : `åk ${spannText(sp)}`);
+---
+
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>{kort.titel}</title>
+    <style>
+      html, body { margin: 0; padding: 0; background: #fff; }
+      .dk { position: relative; display: flex; width: 1200px; height: 630px; overflow: hidden; background: var(--farg-yta); color: var(--farg-text); font-family: var(--typsnitt-rubrik); }
+      .dk-streck { flex: none; width: 18px; background: var(--farg-accent); }
+      /* Textens spalt går från 125 till 1089 punkter. */
+      .dk-text { flex: 1; min-width: 0; display: flex; flex-direction: column; padding: 46px 111px 0 107px; }
+      .dk-etikett { margin: 0 0 18px; font-size: 22px; line-height: 1.25; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--farg-accent); }
+      .dk-titel { margin: 0; font-size: 72px; font-weight: 800; letter-spacing: -0.015em; line-height: 1.04; color: var(--farg-text); }
+      .dk-under { margin: 12px 0 0; font-size: 28px; font-weight: 500; line-height: 1.3; color: var(--farg-text-svag); }
+      .dk-fot { position: absolute; right: 60px; top: 40px; display: flex; align-items: center; gap: 16px; }
+      .dk-fot img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: top; border: 2px solid var(--farg-kant); }
+      .dk-namn { font-size: 22px; line-height: 1.2; font-weight: 700; }
+      .dk-adress { font-size: 19px; line-height: 1.3; color: var(--farg-text-svag); }
+
+      /* Kartan, i täckningskartans form (Tackning.astro, global.css .tk) men större. */
+      .karta { --luft: 14px; --text: 18px; --stapel: 14px; margin-top: 22px; font-family: var(--typsnitt-ui); }
+      .karta .skala { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); align-items: center; }
+      .karta .axel { border-bottom: 1px solid var(--farg-kant); padding: 0 0 6px var(--luft); margin-bottom: 4px; }
+      .karta .axel span { text-align: center; font-size: 17px; font-weight: 700; color: var(--farg-text-svag); }
+      .karta .bana { border-left: 5px solid var(--tk); padding: 4px 0 4px 9px; margin-top: 6px; }
+      .karta .rad .skala { grid-template-rows: auto var(--stapel); row-gap: 3px; padding: 4px 0; background-image: repeating-linear-gradient(to right, transparent 0, transparent calc(10% - 1px), var(--farg-kant) calc(10% - 1px), var(--farg-kant) 10%); background-size: 100% 60%; background-repeat: no-repeat; background-position: 0 100%; }
+      .karta .etikett { grid-column: calc(var(--etikett) + 1) / -1; grid-row: 1; font-size: var(--text); font-weight: 600; color: var(--farg-accent); line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .karta .ak { font-size: calc(var(--text) * 0.86); font-weight: 400; color: var(--farg-text-svag); }
+      .karta .stapel { grid-column: calc(var(--fran) + 1) / calc(var(--till) + 2); grid-row: 2; height: var(--stapel); border-radius: 4px; background: var(--tk); }
+      .karta .amne { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 8px; border-radius: 6px; background: var(--tk-ljus); color: var(--tk); }
+
+      /* Bankens kort i en trappa till höger om staplarna: varje titel syns, och det främsta klipps av kortets kant. */
+      .trappa { position: absolute; left: 712px; top: 270px; width: 476px; height: 360px; }
+      .bild { position: absolute; width: 400px; height: 340px; overflow: hidden; border-radius: 10px; background: var(--farg-yta); box-shadow: 0 12px 30px rgba(20, 32, 43, 0.2), 0 0 0 1px var(--farg-kant); }
+      .bild > .skala-in { width: 430px; transform: scale(0.93); transform-origin: top left; }
+      .bild .metodkort { margin: 0; border: 0; box-shadow: none; }
+      .b1 { left: 26px; top: 4px; transform: rotate(-2deg); }
+      .b2 { left: 40px; top: 70px; transform: rotate(-0.5deg); }
+      .b3 { left: 54px; top: 136px; transform: rotate(1.2deg); }
+    </style>
+  </head>
+  <body>
+    <div class="dk">
+      <div class="dk-streck"></div>
+      <div class="dk-text">
+        <p class="dk-etikett">{kort.etikett}</p>
+        <h1 class="dk-titel">{kort.titel}</h1>
+        <p class="dk-under">{kort.undertitel}</p>
+        <div class="karta">
+          <div class="axel"><div class="skala">{skala.map((x) => <span>{x}</span>)}</div></div>
+          {rader.map((r) => (
+            <div class="bana" style={`--tk: var(${FARG[r.omrade]}); --tk-ljus: var(${FARG[r.omrade]}-ljus)`}>
+              <span class="amne">{r.omrade}</span>
+              <div class="rad" style={`--fran:${r.spann[0]};--till:${r.spann[1]};--etikett:${Math.min(r.spann[0], 4)}`}>
+                <div class="skala">
+                  <span class="etikett">{ejBryt(r.titel)} <span class="ak">{ak(r.spann)}</span></span>
+                  <span class="stapel"></span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="dk-fot">
+        <img src={site.portratt} alt="" />
+        <div>
+          <div class="dk-namn">{site.namn}</div>
+          <div class="dk-adress">niclasfohlin.se{kort.sida}</div>
+        </div>
+      </div>
+      <div class="trappa">
+        {korten.map((m, i) => <div class={`bild b${i + 1}`}><div class="skala-in"><Metodkort m={m} /></div></div>)}
+      </div>
+    </div>
+  </body>
+</html>

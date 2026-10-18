@@ -38,7 +38,7 @@ if (kontrollera) {
 mkdirSync(publik, { recursive: true });
 const behovs = new Set(kort.map(fil));
 // Ersatta kort sparas för redan delade inlägg (K-053); de räknas bara, så att det syns om mappen växer.
-const gamla = readdirSync(publik).filter((f) => f.endsWith('.jpg') && !behovs.has(f));
+const gamla = readdirSync(publik).filter((f) => /\.(jpg|png)$/.test(f) && !behovs.has(f));
 const saknas = kort.filter((k) => !existsSync(join(publik, fil(k))));
 if (saknas.length === 0) {
   console.log(`Delningskorten är aktuella för ${kort.length} sidor${gamla.length ? `; ${gamla.length} ersatta kort sparas för redan delade inlägg` : ''}.`);
@@ -100,11 +100,14 @@ try {
       if (rader > 3) throw new Error(`titeln "${k.titel}" behöver ${rader} rader på kortet; högst tre ryms. Korta titeln, eller sänk storleken för långa titlar i src/pages/delning/kort/[namn].astro`);
       const bild = await skicka('Page.captureScreenshot', { format: 'png', clip: { x: 0, y: 0, width: 1200, height: 630, scale: 1 } });
       if (!bild.result?.data) throw new Error('ingen bild');
-      const jpg = await sharp(Buffer.from(bild.result.data, 'base64')).jpeg({ quality: 82, mozjpeg: true, chromaSubsampling: '4:4:4' }).toBuffer();
-      const m = await sharp(jpg).metadata();
+      // Ett kort som bara är text och färgade ytor (metodbankens) blir en PNG med palett, hälften så stor som en JPEG och
+      // lika skarp; de andra blir JPEG (src/lib/delningskort.ts, PNG).
+      const skarm = sharp(Buffer.from(bild.result.data, 'base64'));
+      const kodad = await (k.fil.endsWith('.png') ? skarm.png({ palette: true, quality: 90, effort: 10, compressionLevel: 9 }) : skarm.jpeg({ quality: 82, mozjpeg: true, chromaSubsampling: '4:4:4' })).toBuffer();
+      const m = await sharp(kodad).metadata();
       if (m.width !== 1200 || m.height !== 630) throw new Error(`kortet blev ${m.width} × ${m.height}`);
-      writeFileSync(join(publik, fil(k)), jpg);
-      if (existsSync(byggd)) writeFileSync(join(byggd, fil(k)), jpg);
+      writeFileSync(join(publik, fil(k)), kodad);
+      if (existsSync(byggd)) writeFileSync(join(byggd, fil(k)), kodad);
     } catch (e) {
       fel++;
       console.log(`  FEL  ${k.sida}: ${e.message}`);
