@@ -20,7 +20,7 @@ const folje = sida.dataset.folje!;
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const raknaHandelse = (path: string, title: string) => (window as { goatcounter?: { count: (v: object) => void } }).goatcounter?.count({ path, title, event: true });
 
-sida.classList.add('tf-js');
+document.documentElement.classList.add('tf-js');
 for (const x of sida.querySelectorAll<HTMLElement>('[data-js]')) x.hidden = false;
 
 // ---------- Datafilen ----------
@@ -43,13 +43,10 @@ const { varde: sparat, spara } = lagring<Sparat>(`tafram:${metod}/${led}`, { tag
 sparat.bockade = sparat.bockade.filter((id) => rad.has(id));
 if (!nivaer.some((n) => n.dataset.niva === sparat.niva)) sparat.niva = nivaer[0].dataset.niva;
 
-// Visa stort och bocken i varje rad: de finns bara med JavaScript och ritas här, inte i sidan.
+// Bocken i varje rad: den finns bara med JavaScript och ritas här, inte i sidan, i en kolumn som har sin bredd från
+// början. Visa stort står i sidan och visas med klassen tf-js, som skriptet före raderna sätter.
 const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7 3.7 7.3-8"/></svg>';
 for (const r of rader) {
-  const visa = el('button', 'tf-visa', 'Visa stort') as HTMLButtonElement;
-  visa.type = 'button';
-  visa.append(el('span', 'visually-hidden', `: ${r.dataset.titel}`));
-  r.querySelector('.tf-lankar')!.prepend(visa);
   const bock = el('button', 'tf-bock') as HTMLButtonElement;
   bock.type = 'button';
   bock.setAttribute('aria-pressed', 'false');

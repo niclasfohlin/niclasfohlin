@@ -13,8 +13,9 @@
 //   Listan     Bredvid raderna på en bred skärm och i en rad längst ned i telefonen, som på Ta fram en aktivitet, med två
 //              utskrifter: bara problemen, och problemen med lärarens sida och Två lösningar. Sidan säger storleken innan.
 //
-// Utan JavaScript står alla nivåer under varandra med problemens sidor och nivåernas filer. Bocken och Visa stort, som bara
-// finns med JavaScript, ritas av skriptet, så att sidan som Facebook hämtar okomprimerad är liten (scripts/cacheprov.mjs). Statistiken: utskrifterna
+// Utan JavaScript står alla nivåer under varandra med problemens sidor och nivåernas filer. Bocken, som bara finns med
+// JavaScript, ritas av skriptet i en kolumn som har sin bredd från början, så att sidan som Facebook hämtar okomprimerad
+// är liten (scripts/cacheprov.mjs) och inget flyttar sig. Statistiken: utskrifterna
 // som utskrift:<metod>/<led> och :lararens, Visa stort och Ta fram ett som händelser (DRIFT.md under Besöksstatistik).
 import Base from '../layouts/Base.astro';
 import Delning from './Delning.astro';
@@ -42,6 +43,27 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
       <h1>{t.namn}</h1>
       <p class="ingress">Välj nivå, så ser du nivåns {t.ord.flera} i ordning.{t.taggar.length > 0 && ` Tryck på en tagg för att se ${t.ord.alla} i en del av ${t.omrade.toLowerCase()}en.`} Ta fram ett väljer ett av dem åt dig. Tryck på bocken på de {t.ord.flera} du vill ha, så hamnar de i listan att skriva ut.</p>
     </header>
+
+    {/* Före raderna: nivån och taggen ur adressen eller webbläsarens minne, så att sidan ritas med rätt nivå och med valet
+        och listan från början, utan att något flyttar sig när sidans skript har laddats (Lighthouse: CLS). Samma regler som
+        i src/scripts/tafram.ts. */}
+    <script is:inline define:vars={{ tfNyckel: `tafram:${t.metod}/${t.led}`, tfNivaer: t.nivaer.map((n) => n.slug), tfTaggar: t.taggar.map((x) => x.id) }}>
+      (function () {
+        var delar = decodeURIComponent(location.hash.slice(1)).split('/');
+        var sparat = {};
+        try { sparat = JSON.parse(localStorage.getItem(tfNyckel) || '{}') || {}; } catch (e) { /* utan lagring */ }
+        var niva = tfNivaer.indexOf(delar[0]) >= 0 ? delar[0] : tfNivaer.filter(function (n) { return delar[0].indexOf(n + '-') === 0; })[0];
+        var tagg = niva && delar[0] === niva ? delar[1] || '' : niva ? '' : sparat.tagg || '';
+        if (!niva) niva = tfNivaer.indexOf(sparat.niva) >= 0 ? sparat.niva : tfNivaer[0];
+        if (tfTaggar.indexOf(tagg) < 0) tagg = '';
+        var css = '.tf-val{display:flex!important}.tf-valda{display:block!important}.tf-niva:not([data-niva="' + niva + '"]){display:none}';
+        if (tagg) css += '.tf-niva[data-niva="' + niva + '"] .tf-post:not([data-tagg="' + tagg + '"]){display:none}';
+        var stil = document.createElement('style');
+        stil.textContent = css;
+        document.head.appendChild(stil);
+        document.documentElement.classList.add('tf-js');
+      })();
+    </script>
 
     {/* Valet: bara med JavaScript. */}
     <div class="sk-val tf-val" data-js hidden>
@@ -76,6 +98,7 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
                     <h3 class="tf-titel"><span class="tf-nr">{p.nr}</span> {p.titel}</h3>
                     <p class="tf-rad">{p.rad}</p>
                     <p class="tf-lankar">
+                      <button type="button" class="tf-visa">Visa stort<span class="visually-hidden">: {p.titel}</span></button>
                       {p.losning && <a class="tf-losning" href={p.losning}>Lösningsförslag<span class="visually-hidden">: {p.titel}</span></a>}
                       <a class="tf-sidlank" href={p.sida}>{versal(t.ord.bestamd)}s sida<span class="visually-hidden">: {p.titel}</span></a>
                       {p.tagg && <span class="tf-radtagg" data-tagg={p.taggId}>{p.tagg}</span>}
