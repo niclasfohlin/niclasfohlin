@@ -41,7 +41,7 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
     <header class="sk-huvud">
       <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${t.metod}`}>{t.titel}</a> · {versal(t.ord.flera)}</p>
       <h1>{t.namn}</h1>
-      <p class="ingress">Välj nivå, så ser du nivåns {t.ord.flera} i ordning.{t.taggar.length > 0 && ` Tryck på en tagg för att se ${t.ord.alla} i en del av ${t.omrade.toLowerCase()}en.`} Ta fram ett väljer ett av dem åt dig. Tryck på bocken på de {t.ord.flera} du vill ha, så hamnar de i listan att skriva ut.</p>
+      <p class="ingress">Välj nivå, så ser du nivåns {t.ord.flera} i ordning.{t.taggar.length > 0 && ` Tryck på en tagg för att se ${t.ord.alla} i en del av ${t.omrade.toLowerCase()}en.`} Ta fram ett väljer ett av dem åt dig, på måfå. Tryck på bocken på de {t.ord.flera} du vill ha, så hamnar de i listan att skriva ut.</p>
     </header>
 
     {/* Före raderna: nivån och taggen ur adressen eller webbläsarens minne, så att sidan ritas med rätt nivå och med valet
@@ -49,7 +49,9 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
         i src/scripts/tafram.ts. */}
     <script is:inline define:vars={{ tfNyckel: `tafram:${t.metod}/${t.led}`, tfNivaer: t.nivaer.map((n) => n.slug), tfTaggar: t.taggar.map((x) => x.id) }}>
       (function () {
-        var delar = decodeURIComponent(location.hash.slice(1)).split('/');
+        var hash = location.hash.slice(1);
+        try { hash = decodeURIComponent(hash); } catch (e) { /* en trasig adress */ }
+        var delar = hash.split('/');
         var sparat = {};
         try { sparat = JSON.parse(localStorage.getItem(tfNyckel) || '{}') || {}; } catch (e) { /* utan lagring */ }
         var niva = tfNivaer.indexOf(delar[0]) >= 0 ? delar[0] : tfNivaer.filter(function (n) { return delar[0].indexOf(n + '-') === 0; })[0];
@@ -59,6 +61,7 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
         var css = '.tf-val{display:flex!important}.tf-valda{display:block!important}.tf-niva:not([data-niva="' + niva + '"]){display:none}';
         if (tagg) css += '.tf-niva[data-niva="' + niva + '"] .tf-post:not([data-tagg="' + tagg + '"]){display:none}';
         var stil = document.createElement('style');
+        stil.id = 'tf-tidig';
         stil.textContent = css;
         document.head.appendChild(stil);
         document.documentElement.classList.add('tf-js');
@@ -127,7 +130,7 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
           <ol class="ak-valda-lista" id="tf-valda-lista"></ol>
           <div class="sk-atgarder ak-valda-knappar">
             <a class="knapp" id="tf-skrivut" href="#" data-goatcounter-click={`utskrift:${t.metod}/${t.led}`} data-goatcounter-title={`${t.titel}: utskrift av listans ${t.ord.flera}`}>Skriv ut {t.ord.alla}</a>
-            <a class="knapp sekundar" id="tf-skrivut-med" href="#" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:lararens`} data-goatcounter-title={`${t.titel}: utskrift av listans ${t.ord.flera} med ${t.folje}`}>Med {t.folje}</a>
+            <a class="knapp sekundar" id="tf-skrivut-med" href="#" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:lararens`} data-goatcounter-title={`${t.titel}: utskrift av listans ${t.ord.flera} med ${t.folje}`}>Skriv ut med {t.folje}</a>
             <button type="button" class="knapp sekundar" id="tf-kopiera" data-goatcounter-click={`${t.led}:${t.metod}:lank`} data-goatcounter-title={`${t.titel}: listans länk kopierad`}>Kopiera listans länk</button>
             <button type="button" class="knapp sekundar" id="tf-tomlista">Töm listan</button>
           </div>

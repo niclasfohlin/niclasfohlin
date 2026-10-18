@@ -86,5 +86,9 @@ const delar = DELAR.map((del) => ({
     });
     document.addEventListener('metodbank:filtrerat', uppdatera);
     uppdatera();
+    // På en bred skärm går rubrikerna inte att trycka på (global.css), så delarna fälls ut när en smal sida blir bred,
+    // som när läraren vrider plattan eller drar ut fönstret.
+    const bred = window.matchMedia('(min-width: 72rem)');
+    bred.addEventListener('change', () => { if (bred.matches) for (const d of Array.from(ruta.querySelectorAll<HTMLDetailsElement>('[data-vr-del]'))) d.open = true; });
   }
 </script>

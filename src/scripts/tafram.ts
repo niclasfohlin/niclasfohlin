@@ -26,8 +26,10 @@ for (const x of sida.querySelectorAll<HTMLElement>('[data-js]')) x.hidden = fals
 // ---------- Datafilen ----------
 let lofte: Promise<Data> | undefined;
 const data = () => (lofte ??= fetch(sida.dataset.kortdata!).then((s) => { if (!s.ok) throw new Error(`svaret ${s.status}`); return s.json() as Promise<Data>; }).catch((fel) => { lofte = undefined; throw fel; }));
-const narSidanAr = (gor: () => void) => (typeof requestIdleCallback === 'function' ? requestIdleCallback(gor, { timeout: 3000 }) : setTimeout(gor, 1500));
-narSidanAr(() => { data().then(visaStorlek).catch(() => {}); });
+// Den som bara tittar hämtar den inte: den hämtas vid första tryck eller tangent på sidan, så att Visa stort och
+// utskriften brukar ha den när de behöver den.
+const forsta = () => { data().then(visaStorlek).catch(() => {}); };
+for (const h of ['pointerdown', 'keydown']) sida.addEventListener(h, forsta, { once: true, passive: true });
 
 // ---------- Raderna ----------
 const nivaer = [...sida.querySelectorAll<HTMLElement>('.tf-niva')];
@@ -146,7 +148,7 @@ function visaBockar() {
   $('tf-kopiera').hidden = n === 0;
   if (lofte) data().then(visaStorlek).catch(() => {}); else visaStorlek();
 }
-$('tf-tomlista').addEventListener('click', () => { sparat.bockade = []; spara(); visaBockar(); });
+$('tf-tomlista').addEventListener('click', () => { sparat.bockade = []; spara(); visaBockar(); (listrad.offsetParent ? listrad : $('tf-valda-rubrik')).focus(); });
 
 // Storleken innan utskriften (granskningen 2026-10-18: säg storleken först), ur hämtplanen: posternas egna pdf:er eller
 // källfilen en gång, det som är minst.
@@ -186,7 +188,8 @@ async function visaStort(id: string, franTaFram: boolean) {
   const r = rad.get(id)!;
   const p = namnAv(id);
   stortId = id;
-  if (!dialog.open) { franFokus = document.activeElement as HTMLElement | null; dialog.showModal(); }
+  const oppna = !dialog.open;
+  if (oppna) franFokus = document.activeElement as HTMLElement | null;
   const antal = rader.filter((x) => nivaAv(x) === nivaAv(r)).length;
   const tagg = r.dataset.tagg ? r.querySelector('.tf-radtagg')?.textContent : '';
   $('tf-stort-etikett').textContent = `${p.niva} · ${ord.en} ${p.nr} av ${antal}${tagg ? ` · ${tagg}` : ''}`;
@@ -207,6 +210,8 @@ async function visaStort(id: string, franTaFram: boolean) {
   const skrivut = $<HTMLAnchorElement>('tf-stort-skrivut');
   skrivut.hidden = true;
   visaStortBock();
+  // Namnet och etiketten står där innan rutan öppnas, så att skärmläsaren läser rätt problem.
+  if (oppna) dialog.showModal();
   dialog.scrollTop = 0;
   let d: Data;
   try { d = await data(); } catch { $('tf-stort-text').replaceChildren(el('p', undefined, 'Det gick inte att hämta. Ladda om sidan, eller öppna sidan med knappen nedanför.')); return; }
@@ -227,7 +232,13 @@ async function visaStort(id: string, franTaFram: boolean) {
 stortBock.addEventListener('click', () => { if (stortId) { bocka(stortId, !bockad(stortId)); visaStortBock(); } });
 $('tf-stang').addEventListener('click', () => dialog.close());
 dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
-dialog.addEventListener('close', () => { stortId = undefined; franFokus?.focus(); });
+// Fokus går tillbaka dit läraren var, eller till listan när knappen inte längre finns eller syns (listan ritas om när
+// bocken ändras, och i telefonen fälls den ihop när ett problem visas).
+dialog.addEventListener('close', () => {
+  stortId = undefined;
+  if (franFokus?.isConnected && franFokus.offsetParent !== null) franFokus.focus();
+  else (listrad.offsetParent ? listrad : $('tf-valda-rubrik')).focus();
+});
 ettkortLank($<HTMLAnchorElement>('tf-stort-skrivut'));
 for (const r of rader) {
   const visaKnapp = r.querySelector<HTMLButtonElement>('.tf-visa')!;
@@ -255,9 +266,11 @@ $('tf-stort-nasta').addEventListener('click', taFram);
 
 // ---------- Adressen ----------
 // #bas och #bas/geometri är nivån och taggen, #bas-3 är ett problem, och #lista=bas-1,bas-3 är en lista från en annan
-// enhet: den blir listan att skriva ut, och sidan säger till när den ersätter en annan lista.
-(() => {
-  const hash = decodeURIComponent(location.hash.slice(1));
+// enhet: den blir listan att skriva ut, och sidan säger till när den ersätter en annan lista. Adressen läses när sidan
+// öppnas och när den ändras (hashchange); sidans egna ändringar av adressen ger ingen sådan händelse.
+function lasAdressen() {
+  let hash = location.hash.slice(1);
+  try { hash = decodeURIComponent(hash); } catch { /* en trasig adress läses som den står */ }
   const fran = hash.match(/^lista=(.*)$/);
   if (fran) {
     const nya = [...new Set(fran[1].split(',').filter((id) => rad.has(id)))];
@@ -275,5 +288,12 @@ $('tf-stort-nasta').addEventListener('click', taFram);
   }
   visa();
   visaBockar();
-  if (rad.has(hash)) rad.get(hash)!.scrollIntoView({ block: 'center' });
-})();
+  // En lista från adressen eller minnet behöver datan för storleken.
+  if (sparat.bockade.length) forsta();
+  // Ett problem i adressen står kvar i den, så att en omladdning visar samma problem.
+  if (rad.has(hash)) { history.replaceState(null, '', `#${hash}`); rad.get(hash)!.scrollIntoView({ block: 'center' }); }
+}
+lasAdressen();
+window.addEventListener('hashchange', lasAdressen);
+// Startstilen (skriptet före raderna i TaFram.astro) har gjort sitt: nu bär nivåerna och raderna hidden själva.
+document.getElementById('tf-tidig')?.remove();

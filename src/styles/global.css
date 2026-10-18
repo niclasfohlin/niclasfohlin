@@ -2201,7 +2201,8 @@ html.js .bara-js { display: inline-block; }
    aktivitet (listans stilar ovan). Utan JavaScript står nivåerna under varandra med sina rubriker; med JavaScript visas en
    nivå i taget, och rubriken finns kvar för skärmläsaren. */
 .tf-taggrad { flex: 1 1 100%; }
-.tf-val .sk-niva[aria-pressed="true"] { background: var(--niva); border-color: var(--niva); color: #fff; }
+/* Vald nivå i hel färg, en mörkare ton av nivåns, så att den vita texten har minst 4,5:1 (Medel, #a8742a, gav 4,04). */
+.tf-val .sk-niva[aria-pressed="true"] { background: color-mix(in srgb, var(--niva) 78%, #000); border-color: color-mix(in srgb, var(--niva) 78%, #000); color: #fff; }
 .tf-taggar { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .tf-tagg { min-height: 2.75rem; padding: 0.3rem 0.85rem; border: 1.5px solid var(--farg-kant); border-radius: 999px; background: var(--farg-yta); color: var(--farg-text); font: 600 0.95rem/1.2 var(--typsnitt-ui); cursor: pointer; }
 .tf-tagg:hover { border-color: var(--farg-accent); }
@@ -2223,7 +2224,7 @@ html.js .bara-js { display: inline-block; }
 .tf-post.vald { border-color: var(--farg-accent); border-left-color: var(--niva); box-shadow: 0 0 0 1px var(--farg-accent); }
 .tf-bild { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; padding-right: 0.6rem; border-right: 1px solid var(--farg-kant); }
 .tf-js .tf-bild { cursor: zoom-in; }
-.tf-titel { margin: 0; font-size: 1.05rem; line-height: 1.3; }
+.tf-titel { margin: 0; font-size: 1.05rem; line-height: 1.3; hyphens: auto; }
 .tf-nr { margin-right: 0.15rem; }
 .tf-rad { margin: 0.15rem 0 0.1rem; font-size: 0.95rem; line-height: 1.4; }
 .tf-lankar { display: flex; flex-wrap: wrap; align-items: center; gap: 0 1rem; margin: 0; font-size: 0.92rem; }
@@ -2232,7 +2233,9 @@ html.js .bara-js { display: inline-block; }
 .tf-js .tf-visa { display: inline-flex; }
 .tf-visa:hover { color: var(--farg-accent); }
 .tf-radtagg { display: inline-flex; align-items: center; min-height: 1.75rem; padding: 0.05rem 0.65rem; border: 1px solid var(--farg-kant); border-radius: 999px; background: var(--farg-ton-svag); color: var(--farg-text); font: 600 0.8rem/1.2 var(--typsnitt-ui); }
-button.tf-radtagg { cursor: pointer; }
+button.tf-radtagg { position: relative; cursor: pointer; }
+/* Tryckytan är 44 punkter hög, som bocken på Ta fram en aktivitet, utan att taggen ser större ut. */
+button.tf-radtagg::before { content: ''; position: absolute; inset: calc((1.75rem - 2.75rem) / 2) -0.15rem; }
 button.tf-radtagg:hover { border-color: var(--farg-accent); color: var(--farg-accent); }
 .tf-bock { position: relative; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; padding: 0; border: 0; background: none; cursor: pointer; }
 .tf-bock svg, .tf-stort-bock svg { width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 1.5px solid color-mix(in srgb, var(--sk-text) 32%, white); background: #fff; fill: none; stroke: color-mix(in srgb, var(--sk-text) 38%, white); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
@@ -2252,11 +2255,10 @@ button.tf-radtagg:hover { border-color: var(--farg-accent); color: var(--farg-ac
   .tf-titel { grid-area: titel; align-self: center; }
   .tf-rad { grid-area: rad; }
   .tf-lankar { grid-area: lankar; gap: 0 0.9rem; }
-  .tf-lankar a, .tf-visa { min-height: 2.5rem; }
   .tf-bock { grid-area: bock; margin: -0.35rem 0 -0.35rem; }
   .tf-val .sk-nivaknappar { grid-template-columns: repeat(auto-fit, minmax(6.4rem, 1fr)); }
   .tf-val .sk-niva { min-width: 0; padding-right: 0.5rem; }
-  .tf-tagg { min-height: 2.5rem; padding: 0.25rem 0.75rem; font-size: 0.9rem; }
+  .tf-tagg { padding: 0.25rem 0.75rem; font-size: 0.9rem; }
 }
 /* Visa stort: problemet i sin egen form (boksidan) stort på skärmen och projektorn, utan klocka. Esc stänger. */
 .tf-stort { width: min(94vw, 80rem); max-width: none; max-height: 94vh; padding: 0; border: 0; border-radius: 8px; background: var(--farg-yta); color: var(--farg-text); box-shadow: 0 12px 40px rgb(0 0 0 / 0.3); }
@@ -2278,6 +2280,10 @@ button.tf-radtagg:hover { border-color: var(--farg-accent); color: var(--farg-ac
 .tf-stort-knappar .knapp { flex: 1 1 11rem; }
 .tf-stort-bock { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; }
 .tf-stort-bock svg { width: 1.3rem; height: 1.3rem; }
+@media (max-width: 22rem) {
+  .tf-post { grid-template-columns: 3.5rem minmax(0, 1fr) 2.75rem; }
+  .tf-titel { font-size: 1rem; }
+}
 @media (max-width: 34rem) { .tf-stort-sida { margin: 0.75rem; } .tf-stort-knappar { padding: 0.6rem 0.75rem; } .tf-stort-knappar .knapp { flex-basis: 9rem; } }
 /* På en bred skärm, som en projektor, står bilden till höger om texten och frågorna, så att allt ryms på en skärm. */
 @media (min-width: 60rem) and (min-aspect-ratio: 4 / 3) {

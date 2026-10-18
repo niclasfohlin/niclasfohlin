@@ -186,10 +186,12 @@ export function allaKort(): Promise<Kort[]> {
       if (a < 0 || b < 0) throw new Error(`Delningskorten: hittar inte "${fran.trim()}" följt av "${till.trim()}" i global.css; rätta stycket i src/lib/delningskort.ts.`);
       return css.slice(a, b);
     };
-    // Ta fram-kortets problem ritas i boksidans form (avsnittet om boksidan i global.css), med texterna och bilderna.
+    // Ta fram-kortets problem ritas i boksidans form (avsnittet om boksidan i global.css och boksidans färger), med det
+    // som står på kortet: titeln, nivån, numret, taggen, första stycket, första frågan och bilden, inte resten av texten.
+    const bokfarger = css.match(/:root \{ --bok-[^}]*\}/)?.[0] ?? '';
     const taframSumma = (t: NonNullable<Kort['tafram']>) => {
-      const poster = taFramKortposter(metoder.find((m) => m.id === t.metod)!, t.poster);
-      return [las(TAFRAMSMALL).toString('utf8').replace(/\r\n/g, '\n'), stycke('/* Boksidan (Boksida.astro)', '/* Två lösningar (Textpar.astro'), JSON.stringify(poster), ...poster.map((p) => bildSumma(p.bild.replace(/^\//, '')))].join('|');
+      const poster = taFramKortposter(metoder.find((m) => m.id === t.metod)!, t.poster).map((p) => ({ titel: p.titel, niva: p.niva, nr: p.nr, farg: p.farg, tagg: p.tagg, stycke: p.stycken[0] ?? '', fraga: p.fragor[0] ?? '', fragor: p.fragor.length > 1, bild: p.bild }));
+      return [las(TAFRAMSMALL).toString('utf8').replace(/\r\n/g, '\n'), stycke('/* Boksidan (Boksida.astro)', '/* Två lösningar (Textpar.astro'), bokfarger, JSON.stringify(poster), ...poster.map((p) => bildSumma(p.bild.replace(/^\//, '')))].join('|');
     };
     const metodbankSumma = () => {
       const mall = las(METODBANKSMALL).toString('utf8').replace(/\r\n/g, '\n');
