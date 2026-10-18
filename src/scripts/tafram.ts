@@ -3,8 +3,8 @@
 // sidan går att använda direkt. Listan att skriva ut är densamma som på Ta fram en aktivitet: en bock på varje post, och
 // listan bredvid på en bred skärm och i en rad längst ned i telefonen. Läraren bläddrar och väljer själv; sidan tar inte
 // fram någon post på måfå (Niclas 2026-10-18: "Man får bläddra bland dem och sortera sedan välja"). Det som sparas i
-// webbläsaren: nivån, taggen och listan. Lösningsförslaget i Visa stort ritas av samma funktion som på problemets sida i
-// metoden (src/lib/losningsforslag.ts).
+// webbläsaren: nivån, taggen, det tema som står utfällt på varje nivå och listan. Lösningsförslaget i Visa stort ritas av
+// samma funktion som på problemets sida i metoden (src/lib/losningsforslag.ts).
 import { el, lagring } from './kortbanken';
 import { ettkortLank, flerakortKnapp, kanSkrivaUtPdf } from './pdfutskrift';
 import { hamtplan, type PostUtskrift } from '../lib/standard/index.js';
@@ -28,6 +28,10 @@ const folje = sida.dataset.folje!;
 const foljeEn = sida.dataset.foljeEn!;
 // Följesidorna står i egna filer (faktatexterna): listan skriver ut dem för sig, utan texterna.
 const forSig = sida.dataset.forsig !== undefined;
+// Sidan har bara texterna (TaFram.baraTexter i src/lib/tafram.ts): listan skriver ut texterna, och lärarens sida nås från
+// Visa stort. Taggarna är ett val bara när de delar nivån (taggVal); i en bank med teman står de på kortet.
+const bara = sida.dataset.bara !== undefined;
+const taggVal = sida.dataset.taggval !== undefined;
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const raknaHandelse = (path: string, title: string) => (window as { goatcounter?: { count: (v: object) => void } }).goatcounter?.count({ path, title, event: true });
 
@@ -49,15 +53,19 @@ const rad = new Map(rader.map((r) => [r.id, r]));
 const nivaAv = (r: HTMLElement) => r.closest<HTMLElement>('.tf-niva')!;
 // Numret och titeln står i radens rubrik (TaFramRad.astro): numret i .tf-nr och titeln efter det.
 const rubrikAv = (r: HTMLElement) => { const h = r.querySelector('.tf-titel')!; const nr = h.querySelector('.tf-nr')!.textContent!.trim(); return { nr, titel: h.textContent!.trim().slice(nr.length).trim() }; };
-const namnAv = (id: string) => { const r = rad.get(id)!; return { ...rubrikAv(r), niva: nivaAv(r).dataset.nivanamn!, farg: nivaAv(r).style.getPropertyValue('--niva') }; };
+// En text i ett tema heter efter temat i listan ("Rymden 2"), eftersom numret är dess plats i temat.
+const namnAv = (id: string) => { const r = rad.get(id)!; return { ...rubrikAv(r), niva: nivaAv(r).dataset.nivanamn!, tema: r.dataset.tema, farg: nivaAv(r).style.getPropertyValue('--niva') }; };
 const nivaKnappar = [...sida.querySelectorAll<HTMLButtonElement>('.tf-val .sk-niva')];
 const taggKnappar = [...sida.querySelectorAll<HTMLButtonElement>('.tf-val .tf-tagg')];
 // En post kan ha flera taggar, som en lästexts två slag: raden bär dem i data-taggar.
 const harTagg = (r: HTMLElement, tagg: string) => (r.dataset.taggar ?? '').split(' ').includes(tagg);
 
-type Sparat = { niva?: string; tagg: string; bockade: string[] };
-const { varde: sparat, spara } = lagring<Sparat>(`tafram:${metod}/${led}`, { tagg: '', bockade: [] });
+// teman: det tema som står utfällt på varje nivå, där '' är alla stängda och en nivå utan värde visar sitt enda tema.
+type Sparat = { niva?: string; tagg: string; teman: Record<string, string>; bockade: string[] };
+const { varde: sparat, spara } = lagring<Sparat>(`tafram:${metod}/${led}`, { tagg: '', teman: {}, bockade: [] });
 sparat.bockade = sparat.bockade.filter((id) => rad.has(id));
+if (typeof sparat.teman !== 'object' || !sparat.teman) sparat.teman = {};
+if (!taggVal) sparat.tagg = '';
 // Nivån är en av nivåerna eller alla (Niclas 2026-10-18: "Vill ha en Alla också i nivån").
 const giltigNiva = (n?: string) => n === 'alla' || nivaer.some((x) => x.dataset.niva === n);
 if (!giltigNiva(sparat.niva)) sparat.niva = nivaer[0].dataset.niva;
@@ -74,8 +82,9 @@ for (const r of rader) {
   r.append(bock);
 }
 
-// Taggarna i varje rad blir knappar som visar nivåns poster med samma tagg, som taggen på brainbreakkortet, i taggens färg.
-for (const r of rader) [...r.querySelectorAll<HTMLElement>('.tf-radtagg')].forEach((t, i) => {
+// Taggarna i varje rad blir knappar som visar nivåns poster med samma tagg, som taggen på brainbreakkortet, i taggens färg,
+// när taggarna är ett val.
+if (taggVal) for (const r of rader) [...r.querySelectorAll<HTMLElement>('.tf-radtagg')].forEach((t, i) => {
   const b = el('button', t.className, t.textContent ?? '') as HTMLButtonElement;
   b.type = 'button';
   // Chipen står i samma ordning som radens taggar (data-taggar).
@@ -85,6 +94,19 @@ for (const r of rader) [...r.querySelectorAll<HTMLElement>('.tf-radtagg')].forEa
   t.replaceWith(b);
 });
 
+// Temana (en bank med teman, som faktatexterna): nivåns teman som rader som fälls ut, ett åt gången (TaFram.astro). Det
+// utfällda temat på en nivå är det läraren hade sist, eller nivåns enda tema; annars står alla stängda, som en
+// innehållsförteckning. Samma regel som skriptet före raderna i TaFram.astro.
+const temaRader = [...sida.querySelectorAll<HTMLDetailsElement>('.tf-tema')];
+const temanPa = (n: HTMLElement) => temaRader.filter((d) => nivaAv(d) === n);
+const utfallt = (n: HTMLElement) => {
+  const teman = temanPa(n);
+  const s = sparat.teman[n.dataset.niva!];
+  if (typeof s === 'string' && (s === '' || teman.some((d) => d.dataset.tema === s))) return s;
+  return teman.length === 1 ? teman[0].dataset.tema! : '';
+};
+const temaAv = (r: HTMLElement) => r.closest<HTMLDetailsElement>('.tf-tema');
+
 function visa() {
   const alla = sparat.niva === 'alla';
   const iNivan = (r: HTMLElement) => alla || nivaAv(r).dataset.niva === sparat.niva;
@@ -92,8 +114,11 @@ function visa() {
   if (sparat.tagg && !finns(sparat.tagg)) sparat.tagg = '';
   let synliga = 0;
   for (const r of rader) { const med = iNivan(r) && (!sparat.tagg || harTagg(r, sparat.tagg)); r.hidden = !med; if (med) synliga++; }
-  // Ett tema syns när någon av dess texter syns.
-  for (const tema of sida.querySelectorAll<HTMLElement>('.tf-tema')) tema.hidden = ![...tema.querySelectorAll<HTMLElement>('.tf-post')].some((r) => !r.hidden);
+  // Ett tema syns när någon av dess texter syns, och står utfällt när det är nivåns utfällda.
+  for (const tema of temaRader) {
+    tema.hidden = ![...tema.querySelectorAll<HTMLElement>('.tf-post')].some((r) => !r.hidden);
+    tema.open = tema.dataset.tema === utfallt(nivaAv(tema));
+  }
   // En nivå syns när den är vald, eller med Alla när den har poster som syns; med Alla står rubrikerna kvar.
   for (const n of nivaer) n.hidden = alla ? !rader.some((r) => !r.hidden && nivaAv(r) === n) : n.dataset.niva !== sparat.niva;
   sida.classList.toggle('tf-alla', alla);
@@ -106,9 +131,21 @@ function visa() {
     b.setAttribute('aria-pressed', String(t === sparat.tagg));
   }
   $('tf-tom').hidden = synliga > 0;
-  history.replaceState(null, '', `#${sparat.niva}${sparat.tagg ? `/${sparat.tagg}` : ''}`);
+  // Adressen: nivån, och nivåns utfällda tema eller taggen (#medel/rymden, #bas/geometri).
+  const niva = nivaer.find((n) => n.dataset.niva === sparat.niva);
+  const tema = niva ? utfallt(niva) : '';
+  history.replaceState(null, '', `#${sparat.niva}${tema ? `/${tema}` : sparat.tagg ? `/${sparat.tagg}` : ''}`);
   spara();
 }
+// Ett tryck på temats rad fäller ut det och fäller ihop nivåns andra, och raden rullar upp under valet, så att temats
+// texter syns. Utan JavaScript fäller raden ut och ihop sig själv.
+for (const d of temaRader) d.querySelector('summary')!.addEventListener('click', (e) => {
+  e.preventDefault();
+  const oppna = !d.open;
+  sparat.teman[nivaAv(d).dataset.niva!] = oppna ? d.dataset.tema! : '';
+  visa();
+  if (oppna) d.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+});
 // Valet står kvar överst från 48 rem (global.css, .sk-val). Dess höjd står i --tf-val-h, som listans början och listan att
 // skriva ut räknar med, så att den första träffen inte hamnar under valet (designgranskningen 2026-10-18 natt). Byter
 // läraren nivå eller tagg när listans början ligger ovanför valet, rullar sidan dit.
@@ -156,7 +193,7 @@ function visaBockar() {
     li.style.setProperty('--kat', p.farg);
     const visaKnapp = el('button', 'ak-valt-namn') as HTMLButtonElement;
     visaKnapp.type = 'button';
-    visaKnapp.append(el('span', 'ak-nr', `${p.niva} ${p.nr}`), ` · ${p.titel}`);
+    visaKnapp.append(el('span', 'ak-nr', `${p.tema ?? p.niva} ${p.nr}`), ` · ${p.titel}`);
     visaKnapp.title = `Visa ${p.titel} stort`;
     visaKnapp.addEventListener('click', () => { stang(); void visaStort(id); });
     const bort = el('button', 'ak-valt-bort', '×') as HTMLButtonElement;
@@ -173,10 +210,12 @@ function visaBockar() {
     return li;
   }));
   valda.classList.toggle('har-kort', n > 0);
-  for (const id of ['tf-skrivut', 'tf-skrivut-med']) $(id).setAttribute('aria-disabled', String(n === 0));
+  // Listans andra utskrift, med följesidorna, finns bara där sidan har dem (Ta fram ett matteproblem).
+  const skrivutMed = document.getElementById('tf-skrivut-med');
+  for (const k of [$('tf-skrivut'), skrivutMed]) k?.setAttribute('aria-disabled', String(n === 0));
   // Ental när listan har en post (designgranskningen 2026-10-18 natt).
   $('tf-skrivut').textContent = `Skriv ut ${n === 1 ? ord.bestamd : ord.alla}`;
-  $('tf-skrivut-med').textContent = forSig ? `Skriv ut ${n === 1 ? foljeEn : folje}` : `Skriv ut med ${n === 1 ? foljeEn : folje}`;
+  if (skrivutMed) skrivutMed.textContent = forSig ? `Skriv ut ${n === 1 ? foljeEn : folje}` : `Skriv ut med ${n === 1 ? foljeEn : folje}`;
   $('tf-tomlista').hidden = n === 0;
   $('tf-kopiera').hidden = n === 0;
   if (lofte) data().then(visaStorlek).catch(() => {}); else visaStorlek();
@@ -191,7 +230,9 @@ function visaStorlek(d?: Data) {
   const not = $('tf-storlek');
   const n = sparat.bockade.length;
   if (!n || !d) { not.textContent = ''; return; }
-  not.textContent = forSig
+  not.textContent = bara
+    ? `${n} ${n === 1 ? ord.en : ord.flera}, omkring ${mb(planFor(d, 'post').byte)}.`
+    : forSig
     ? `${n} ${n === 1 ? ord.en : ord.flera}, omkring ${mb(planFor(d, 'post').byte)}. ${folje.charAt(0).toLocaleUpperCase('sv')}${folje.slice(1)}: omkring ${mb(planFor(d, 'med').byte)}.`
     : `${n} ${n === 1 ? ord.en : ord.flera}, omkring ${mb(planFor(d, 'post').byte)}, eller ${mb(planFor(d, 'med').byte)} med ${folje}.`;
 }
@@ -207,7 +248,8 @@ $('tf-kopiera').addEventListener('click', async () => {
 // Utskriften: listans poster i listans ordning, bara posterna eller med följesidorna.
 const listansTitel = (med: boolean) => `${titel}${med ? (forSig ? `, ${folje}` : `, med ${folje}`) : ''}: ${sparat.bockade.map((id) => namnAv(id).titel).join(', ')}`;
 flerakortKnapp($('tf-skrivut'), async () => ({ plan: planFor(await data(), 'post'), titel: listansTitel(false) }), 'Hämtar …');
-flerakortKnapp($('tf-skrivut-med'), async () => ({ plan: planFor(await data(), 'med'), titel: listansTitel(true) }), 'Hämtar …');
+const skrivutMedKnapp = document.getElementById('tf-skrivut-med');
+if (skrivutMedKnapp) flerakortKnapp(skrivutMedKnapp, async () => ({ plan: planFor(await data(), 'med'), titel: listansTitel(true) }), 'Hämtar …');
 
 // ---------- Visa stort ----------
 const dialog = $<HTMLDialogElement>('tf-stort');
@@ -259,6 +301,9 @@ function modellFigur(m: Modell): HTMLElement {
     img.width = b.bildMatt.bredd;
     img.height = b.bildMatt.hojd;
     sidan.textContent = m.ifylld ? `${namn}, ${ifylld ? 'ifylld' : 'tom'}` : namn;
+    // Den ifyllda leder till sin plats på textens sida, den tomma till modellens sida (designgranskningen 2026-10-18 natt:
+    // namnet sa ifylld men ledde till modellens allmänna sida, där texten inte finns).
+    sidan.href = ifylld && m.ifylld ? m.ifylld.sida : m.sida;
     if (byt) byt.textContent = ifylld ? 'Visa den tomma' : 'Visa den ifyllda';
   };
   let ifylld = false;
@@ -286,16 +331,19 @@ function modellFigur(m: Modell): HTMLElement {
 // där den öppnar pdf:en, som sajtens andra utskriftsknappar (SkrivUtPdf.astro; Codex-granskningen 2026-10-18 natt).
 const direkt = kanSkrivaUtPdf();
 const utskriftsnamn = (vad: string) => (direkt ? `Skriv ut ${vad}` : `${vad.charAt(0).toLocaleUpperCase('sv')}${vad.slice(1)} som pdf`);
+// Knappen som skriver ut posten med följesidan finns bara där sidan har följesidorna (Ta fram ett matteproblem).
+const stortSkrivutMed = document.getElementById('tf-stort-skrivut-med') as HTMLAnchorElement | null;
 function skrivutLank() {
   const skrivut = $<HTMLAnchorElement>('tf-stort-skrivut');
-  if (!stortPost || steg > 0) { skrivut.hidden = true; $('tf-stort-skrivut-med').hidden = true; return; }
+  if (!stortPost || steg > 0) { skrivut.hidden = true; if (stortSkrivutMed) stortSkrivutMed.hidden = true; return; }
   // Med lösningsförslaget skrivs det ut med problemet; modellen har sin egen knapp i rutan bredvid.
   const med = !losningYta.hidden && !!stortPost.losningsforslag;
   skrivut.href = (med ? stortPost.utskrift.med : stortPost.utskrift.post).adress;
   skrivut.textContent = utskriftsnamn(med ? `${ord.bestamd} och ${foljeEn}` : ord.bestamd);
   skrivut.hidden = false;
   // En post utan lösningsförslag: också med följesidan, eller följesidorna för sig (designgranskningen 2026-10-18 natt).
-  const skrivutMed = $<HTMLAnchorElement>('tf-stort-skrivut-med');
+  const skrivutMed = stortSkrivutMed;
+  if (!skrivutMed) return;
   skrivutMed.hidden = !!stortPost.losningsforslag;
   if (!stortPost.losningsforslag) { skrivutMed.href = stortPost.utskrift.med.adress; skrivutMed.textContent = forSig ? utskriftsnamn(foljeEn) : direkt ? `Skriv ut med ${foljeEn}` : `${ord.bestamd.charAt(0).toLocaleUpperCase('sv')}${ord.bestamd.slice(1)} med ${foljeEn} som pdf`; }
 }
@@ -352,10 +400,14 @@ dialog.addEventListener('keydown', (e) => {
   visaSteg(steg + (fram ? 1 : -1));
   stegKnappar[steg]?.focus();
 });
-// Bläddra: förra och nästa post bland raderna som syns, i radernas ordning. Modellen bredvid en faktatext står kvar, den
-// tomma, men ett lösningsförslag aldrig: rutan står ofta på projektorn, och nästa problems svar ska visas först när läraren
-// trycker (designgranskningen 2026-10-18 natt).
-const synligaRader = () => rader.filter((r) => !r.hidden && !nivaAv(r).hidden);
+// Bläddra: förra och nästa post bland raderna som syns, i radernas ordning, och en text i ett tema bland temats texter
+// (formgivarnas förslag 2026-10-18 natt). Modellen bredvid en faktatext står kvar, den tomma, men ett lösningsförslag
+// aldrig: rutan står ofta på projektorn, och nästa problems svar ska visas först när läraren trycker (designgranskningen
+// 2026-10-18 natt).
+const synligaRader = () => {
+  const tema = stortId ? temaAv(rad.get(stortId)!) : null;
+  return tema ? rader.filter((r) => temaAv(r) === tema) : rader.filter((r) => !r.hidden && !nivaAv(r).hidden);
+};
 function bladdra(steget: 1 | -1) {
   const synliga = synligaRader();
   const nasta = synliga[synliga.findIndex((r) => r.id === stortId) + steget];
@@ -393,7 +445,8 @@ async function visaStort(id: string, medLosning = false) {
   const tema = r.dataset.tema;
   const antal = rader.filter((x) => nivaAv(x) === nivaAv(r) && x.dataset.tema === tema).length;
   const taggar = [...r.querySelectorAll('.tf-radtagg')].map((x) => x.textContent).join(' · ');
-  $('tf-stort-etikett').textContent = `${p.niva}${tema ? ` · ${tema}` : ''} · ${ord.en} ${p.nr} av ${antal}${taggar ? ` · ${taggar}` : ''}`;
+  // "text 3 av 5" bryts inte (designgranskningen 2026-10-18 natt: "text 3 av" och "5" stod på var sin rad i telefonen).
+  $('tf-stort-etikett').textContent = `${p.niva}${tema ? ` · ${tema}` : ''} · ${ord.en} ${p.nr} av ${antal}${taggar ? ` · ${taggar}` : ''}`;
   $('tf-stort-etikett').style.setProperty('--niva', p.farg);
   $('tf-stort-sida').style.setProperty('--bok-niva', p.farg);
   $('tf-stort-titel').textContent = p.titel;
@@ -412,11 +465,11 @@ async function visaStort(id: string, medLosning = false) {
   $('tf-stort-sida').hidden = fakta;
   faktaYta.hidden = !fakta;
   if (fakta) faktaYta.replaceChildren(el('p', 'tf-stort-vantar', 'Hämtar …'));
-  // Posten i metoden, när den står där; ett problem ur databasen har ingen sida.
-  const sidlank = r.querySelector<HTMLAnchorElement>('.tf-sidlank');
+  // Posten i metoden, när den står där; ett problem ur databasen har ingen sida. På sidorna med texter: lärarens sida.
+  const sidan = bara ? r.dataset.larare : r.querySelector<HTMLAnchorElement>('.tf-sidlank')?.href;
   const stortSidan = $<HTMLAnchorElement>('tf-stort-sidan');
-  stortSidan.hidden = !sidlank;
-  if (sidlank) stortSidan.href = sidlank.href;
+  stortSidan.hidden = !sidan;
+  if (sidan) stortSidan.href = sidan;
   // Lösningsförslaget står dolt tills läraren trycker, också när ett nytt problem visas i samma ruta, och rutan börjar
   // vid problemet.
   stortPost = undefined;
@@ -467,12 +520,20 @@ dialog.addEventListener('close', () => {
   else (listrad.offsetParent ? listrad : $('tf-valda-rubrik')).focus();
 });
 ettkortLank($<HTMLAnchorElement>('tf-stort-skrivut'));
-ettkortLank($<HTMLAnchorElement>('tf-stort-skrivut-med'));
+if (stortSkrivutMed) ettkortLank(stortSkrivutMed);
 for (const r of rader) {
   const visaKnapp = r.querySelector<HTMLButtonElement>('.tf-visa')!;
   const oppna = () => { raknaHandelse(`${led}:${metod}:visa-stort`, `${titel}: Visa stort`); void visaStort(r.id); };
   visaKnapp.addEventListener('click', oppna);
   r.querySelector('.tf-bild')?.addEventListener('click', oppna);
+  // Titeln leder utan JavaScript till textens sida; med JavaScript visar den texten stort, och med en tangent nedtryckt
+  // öppnar den sidan som länken säger.
+  r.querySelector('.tf-titellank')?.addEventListener('click', (e) => {
+    const m = e as MouseEvent;
+    if (m.ctrlKey || m.metaKey || m.shiftKey || m.button !== 0) return;
+    e.preventDefault();
+    oppna();
+  });
   // Länken Lösningsförslag leder utan JavaScript till bladet på problemets sida i metoden; med JavaScript öppnar den
   // rutan med problemet och lösningsförslaget. Lärarens sida till en lästext leder alltid till sidan i metoden.
   if (r.dataset.lf !== undefined) r.querySelector('.tf-losning')?.addEventListener('click', (e) => {
@@ -492,20 +553,11 @@ for (const r of rader) {
     void visaStort(r.id, true);
   });
 }
-// Lägg temats texter i listan (TaFram.astro, temats rubrik): alla temats poster, i ordning, utan dubbletter.
-for (const b of sida.querySelectorAll<HTMLButtonElement>('.tf-tema-lista')) b.addEventListener('click', () => {
-  const ids = (b.dataset.poster ?? '').split(' ').filter((id) => rad.has(id));
-  for (const id of ids) if (!bockad(id)) sparat.bockade.push(id);
-  spara();
-  visaBockar();
-  $('tf-valda-not').textContent = `Temats ${ids.length} ${ord.flera} står i listan att skriva ut.`;
-  window.setTimeout(() => { $('tf-valda-not').textContent = ''; }, 6000);
-});
-
 // ---------- Adressen ----------
-// #bas och #bas/geometri är nivån och taggen, #bas-3 är ett problem, och #lista=bas-1,bas-3 är en lista från en annan
-// enhet: den blir listan att skriva ut, och sidan säger till när den ersätter en annan lista. Adressen läses när sidan
-// öppnas och när den ändras (hashchange); sidans egna ändringar av adressen ger ingen sådan händelse.
+// #bas och #bas/geometri är nivån och taggen, #medel/rymden nivån och temat, #bas-3 är ett problem eller en text, vars
+// tema fälls ut, och #lista=bas-1,bas-3 är en lista från en annan enhet: den blir listan att skriva ut, och sidan säger
+// till när den ersätter en annan lista. Adressen läses när sidan öppnas och när den ändras (hashchange); sidans egna
+// ändringar av adressen ger ingen sådan händelse.
 function lasAdressen() {
   let hash = location.hash.slice(1);
   try { hash = decodeURIComponent(hash); } catch { /* en trasig adress läses som den står */ }
@@ -518,11 +570,21 @@ function lasAdressen() {
     valda.dataset.oppen = 'true';
     listrad.setAttribute('aria-expanded', 'true');
   } else if (rad.has(hash)) {
-    sparat.niva = nivaAv(rad.get(hash)!).dataset.niva;
+    const r = rad.get(hash)!;
+    sparat.niva = nivaAv(r).dataset.niva;
     sparat.tagg = '';
+    const tema = temaAv(r);
+    if (tema) sparat.teman[sparat.niva!] = tema.dataset.tema!;
   } else {
-    const [niva, tagg] = hash.split('/');
-    if (giltigNiva(niva)) { sparat.niva = niva; sparat.tagg = tagg ?? ''; }
+    const [niva, andra] = hash.split('/');
+    if (giltigNiva(niva)) {
+      sparat.niva = niva;
+      // Det andra ledet är nivåns tema i en bank med teman, och annars taggen.
+      const n = nivaer.find((x) => x.dataset.niva === niva);
+      const tema = n && andra ? temanPa(n).find((d) => d.dataset.tema === andra) : undefined;
+      if (tema) sparat.teman[niva] = andra;
+      else sparat.tagg = taggVal ? andra ?? '' : '';
+    }
   }
   visa();
   visaBockar();

@@ -3,10 +3,13 @@
 // form som Word-filens två A4 (lararhandledningSida i metoddocx.ts) och metodriggens förlaga: etiketten på en mörk platta,
 // temat som rubrik i Anton med det korta strecket i nivåns färg och ingressen, och sedan den gemensamma sidans delar och
 // temats texter, var och en med sina fält i två spalter. Lärarens text står i läsarens eget typsnitt, som resten av
-// sajten. rubrik: nivån på temats rubrik, h2 på temats sida och h3 bland bankens nivåer.
+// sajten. rubrik: nivån på temats rubrik, h2 på temats sida och h3 bland bankens nivåer. ankare: på temats sida har varje
+// texts del ett ankare (<ankare>-<titel>), som textens rad leder till (designgranskningen 2026-10-18 natt: läraren som i
+// vecka 3 vill läsa delen om text 3 rullade förbi den gemensamma sidan och text 1 och 2).
 import { nivansEtikett, texternasEtikett, type Lararhandledning } from '../lib/handledning';
-interface Props { h: Lararhandledning; farg: string; id?: string; rubrik?: 'h2' | 'h3' }
-const { h, farg, id, rubrik = 'h2' } = Astro.props;
+import { slugAv } from '../lib/standard/index.js';
+interface Props { h: Lararhandledning; farg: string; id?: string; rubrik?: 'h2' | 'h3'; ankare?: string }
+const { h, farg, id, rubrik = 'h2', ankare } = Astro.props;
 const Rubrik = rubrik;
 const Del = rubrik === 'h2' ? 'h3' : 'h4';
 const rader = (t: string) => t.split('\n');
@@ -27,7 +30,7 @@ const rader = (t: string) => t.split('\n');
     <p class="hl-etikett"><span>{texternasEtikett(h)}</span></p>
     {h.texter.map((x) => (
       <>
-        <Del class="hl-text">{x.nr && <><span class="hl-nr">{x.nr}</span>{' '}</>}{x.titel}{x.modell && <>{' '}<span class="hl-modell">{x.modell}</span></>}</Del>
+        <Del class="hl-text" id={ankare ? `${ankare}-${slugAv(x.titel)}` : undefined}>{x.nr && <><span class="hl-nr">{x.nr}</span>{' '}</>}{x.titel}{x.modell && <>{' '}<span class="hl-modell">{x.modell}</span></>}</Del>
         <dl class="hl-falt">{x.falt.map((f) => <div><dt>{rader(f.rubrik).map((r, i) => (i ? <span class="hl-tid">{r}</span> : r))}</dt><dd class={f.kursiv ? 'hl-kursiv' : undefined}>{rader(f.text).map((r, i) => <>{i > 0 && <br />}{r}</>)}</dd></div>)}</dl>
       </>
     ))}

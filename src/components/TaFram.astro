@@ -5,28 +5,34 @@
 // tafram-B-*.png), och en bank med teman, som faktatexterna, har dem mellan nivån och texterna (Niclas samma kväll:
 // "Kanske nivå. Sedan tema. Sedan enskilda texterna"):
 //
-//   Valet      Nivåknapparna och taggarna (Niclas 2026-10-18: "en innehållstag likt brainbreaks har"), var tagg i sin färg,
-//              skild från nivåernas (Niclas samma kväll: "Då syns de bättre på kortet och när man ska välja"). Läraren
-//              bläddrar och väljer själv (Niclas samma kväll om knappen Ta fram ett, som tog fram en post på måfå:
-//              "Man får bläddra bland dem och sortera sedan välja").
+//   Valet      Nivåknapparna och, när taggarna delar nivån, taggarna (Niclas 2026-10-18: "en innehållstag likt brainbreaks
+//              har"), var tagg i sin färg, skild från nivåernas (Niclas samma kväll: "Då syns de bättre på kortet och när
+//              man ska välja"). Läraren bläddrar och väljer själv (Niclas samma kväll om knappen Ta fram ett, som tog fram
+//              en post på måfå: "Man får bläddra bland dem och sortera sedan välja").
+//   Temana     I en bank med teman står nivåns teman som rader i nivåns färg som fälls ut, som nivåerna i metodens bank,
+//              ett öppet åt gången (Niclas 2026-10-18 natt: "Du ska kunna säg lägga in 3 nya teman och enkelt hitta ...
+//              Mer struktur och mindre plottrigt helst. Och att nya teman enkelt kan läggas in"; formgivarnas förslag i
+//              underlag/prov/verktyg/granskning/ide-*.md). Ett nytt tema i metodens fil blir en rad till. Temats rad har
+//              temats texter som pdf och lärarhandledningen, och varje text sin struktur som tagg.
 //   Raderna    Nivåns poster i ordning (metoden: "Börja med metodens tio problem på nivån, i ordning, ett per pass"), i
 //              temana när banken har teman, var och en i TaFramRad.astro, och en liten bock som lägger posten i listan
-//              att skriva ut, som på Ta fram en aktivitet.
+//              att skriva ut, som på Ta fram en aktivitet. På sidorna med texter står bara texten (baraTexter).
 //   Visa stort Posten och frågorna stort, utan klocka (Niclas: "Båda dessa ska ju inte ha klocka"), i problemets egen
 //              form (Problemsida.astro), eller faktatexten i sin egen form (Faktatext.astro). Esc stänger. Knappen Lösningsförslag visar bladet (src/lib/losningsforslag.ts)
 //              bredvid problemet på en bred skärm och under det i telefonen (Niclas 2026-10-18: "Synas brevid varandra
 //              när man trycker på problemet i pc och under varandra i mobil?"), först när läraren trycker, eftersom
 //              projektorn står inför eleverna. Utskriften är det som syns: problemet, eller problemet och lösningsförslaget.
-//   Listan     Bredvid raderna på en bred skärm och i en rad längst ned i telefonen, som på Ta fram en aktivitet, med två
-//              utskrifter: bara posterna, och posterna med följesidorna (Niclas samma dag: "problemets A4a och dess
-//              lösningsförslag"). Sidan säger storleken innan.
+//   Listan     Bredvid raderna på en bred skärm och i en rad längst ned i telefonen, som på Ta fram en aktivitet. Problemen
+//              skrivs ut bara problemen eller med lösningsförslagen (Niclas samma dag: "problemets A4a och dess
+//              lösningsförslag"), och texterna som texter. Sidan säger storleken innan.
 //
-// Utan JavaScript står alla nivåer under varandra med posternas sidor och nivåernas filer. Bocken, som bara finns med
-// JavaScript, ritas av skriptet i en kolumn som har sin bredd från början, så att sidan som Facebook hämtar okomprimerad
-// är liten (scripts/cacheprov.mjs) och inget flyttar sig. Statistiken: utskrifterna som utskrift:<metod>/<led> och :med,
-// Visa stort och Lösningsförslag som händelser (DRIFT.md under Besöksstatistik).
+// Utan JavaScript står alla nivåer under varandra med posternas sidor, nivåernas filer och temana utfällda. Bocken, som
+// bara finns med JavaScript, ritas av skriptet i en kolumn som har sin bredd från början, så att sidan som Facebook
+// hämtar okomprimerad är liten (scripts/cacheprov.mjs) och inget flyttar sig. Statistiken: utskrifterna som
+// utskrift:<metod>/<led> och :med, Visa stort och Lösningsförslag som händelser (DRIFT.md under Besöksstatistik).
 import Base from '../layouts/Base.astro';
 import Delning from './Delning.astro';
+import SkrivUtPdf from './SkrivUtPdf.astro';
 import TaFramRad from './TaFramRad.astro';
 import { UPPHOV, metodAdress } from '../lib/metod';
 import { delningPa } from '../lib/delning';
@@ -49,26 +55,31 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
 const taggKlass = (id: string) => `tf-tagg tagg-${t.taggar.find((x) => x.id === id)?.farg ?? 1}`;
 // Nivåns teman, eller nivåns poster: ett tema eller flera.
 const teman = Math.max(0, ...t.nivaer.map((n) => n.teman?.length ?? 0));
-const borjan = teman ? `Välj nivå, så ser du nivåns ${teman > 1 ? 'teman' : 'tema'} med ${t.ord.alla} i ordning, eller Alla.` : `Välj nivå, så ser du nivåns ${t.ord.flera} i ordning, eller Alla.`;
-// Nivåns två filer: bara posterna och med följesidorna, eller, där följesidorna står för sig, posterna och följesidorna.
+const borjan = teman > 1 ? `Välj nivå och tema, så ser du temats ${t.ord.flera} i ordning.` : teman ? `Välj nivå, så ser du nivåns tema med ${t.ord.alla} i ordning, eller Alla.` : `Välj nivå, så ser du nivåns ${t.ord.flera} i ordning, eller Alla.`;
+// Valet i sidans beskrivning: nivån och temat, nivån och taggen, eller bara nivån.
+const valet = teman ? 'tema' : t.taggVal ? 'tagg' : '';
+// Nivåns två filer: bara posterna och med följesidorna. På sidorna med texter står bara texterna.
+const baraNamn = t.baraTexter ? t.ord.alla : t.forSig ? t.ord.alla : `bara ${t.ord.alla}`;
 const medNamn = t.forSig ? t.folje : `med ${t.folje}`;
-const baraNamn = t.forSig ? t.ord.alla : `bara ${t.ord.alla}`;
 // Ett problem, det; en text, den.
 const den = t.ord.artikel === 'ett' ? 'det' : 'den';
+// Temana per nivå, som skriptet före raderna läser.
+const temaslugs = Object.fromEntries(t.nivaer.map((n) => [n.slug, (n.teman ?? []).map((x) => x.slug)]));
 ---
 
-<Base title={`${t.namn}: ${t.titel}`} description={`Välj nivå och ${t.taggar.length ? 'tagg' : 'innehåll'} bland ${antal} ${t.ord.flera} i ${t.titel}, se dem i ordning, visa ett stort och skriv ut dem du vill ha, med eller utan ${t.folje}.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
-  <article class="tafram" data-metod={t.metod} data-titel={t.titel} data-led={t.led} data-kortdata={kortdata} data-en={t.ord.en} data-flera={t.ord.flera} data-alla={t.ord.alla} data-bestamd={t.ord.bestamd} data-folje={t.folje} data-folje-en={t.foljeEn} data-forsig={t.forSig ? '' : undefined}>
+<Base title={`${t.namn}: ${t.titel}`} description={`Välj nivå${valet ? ` och ${valet}` : ''} bland ${antal} ${t.ord.flera} i ${t.titel}, se dem i ordning, visa ${t.ord.artikel} stort och skriv ut dem du vill ha${t.baraTexter ? '' : `, med eller utan ${t.folje}`}.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
+  <article class:list={['tafram', { 'tf-bara': t.baraTexter }]} data-metod={t.metod} data-titel={t.titel} data-led={t.led} data-kortdata={kortdata} data-en={t.ord.en} data-flera={t.ord.flera} data-alla={t.ord.alla} data-bestamd={t.ord.bestamd} data-folje={t.folje} data-folje-en={t.foljeEn} data-forsig={t.forSig ? '' : undefined} data-bara={t.baraTexter ? '' : undefined} data-taggval={t.taggVal ? '' : undefined}>
     <header class="sk-huvud">
       <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${t.metod}`}>{t.titel}</a> · {t.namn}</p>
       <h1>{t.namn}</h1>
       <p class="ingress">{borjan}{t.taggar.length > 0 && t.taggText.ingress} Tryck på bocken på de {t.ord.flera} du vill ha, så hamnar de i listan att skriva ut.</p>
     </header>
 
-    {/* Före raderna: nivån och taggen ur adressen eller webbläsarens minne, så att sidan ritas med rätt nivå och med valet
-        och listan från början, utan att något flyttar sig när sidans skript har laddats (Lighthouse: CLS). Samma regler som
-        i src/scripts/tafram.ts. */}
-    <script is:inline define:vars={{ tfNyckel: `tafram:${t.metod}/${t.led}`, tfNivaer: t.nivaer.map((n) => n.slug), tfTaggar: t.taggar.map((x) => x.id) }}>
+    {/* Före raderna: nivån, taggen och temana ur adressen eller webbläsarens minne, så att sidan ritas med rätt nivå, rätt
+        tema utfällt och med valet och listan från början, utan att något flyttar sig när sidans skript har laddats
+        (Lighthouse: CLS). Temana står utfällda i sidan, för den som läser utan JavaScript, och de som ska stå stängda
+        göms här med stil tills skriptet har stängt dem. Samma regler som i src/scripts/tafram.ts. */}
+    <script is:inline define:vars={{ tfNyckel: `tafram:${t.metod}/${t.led}`, tfNivaer: t.nivaer.map((n) => n.slug), tfTaggar: t.taggVal ? t.taggar.map((x) => x.id) : [], tfTeman: temaslugs }}>
       (function () {
         var hash = location.hash.slice(1);
         try { hash = decodeURIComponent(hash); } catch (e) { /* en trasig adress */ }
@@ -77,11 +88,23 @@ const den = t.ord.artikel === 'ett' ? 'det' : 'den';
         try { sparat = JSON.parse(localStorage.getItem(tfNyckel) || '{}') || {}; } catch (e) { /* utan lagring */ }
         var giltiga = ['alla'].concat(tfNivaer);
         var niva = giltiga.indexOf(delar[0]) >= 0 ? delar[0] : tfNivaer.filter(function (n) { return delar[0].indexOf(n + '-') === 0; })[0];
-        var tagg = niva && delar[0] === niva ? delar[1] || '' : niva ? '' : sparat.tagg || '';
+        // En post i adressen (#bas-3): dess nivå, och dess tema utfällt.
+        var post = niva && delar[0] !== niva ? delar[0] : '';
+        var andra = niva && delar[0] === niva ? delar[1] || '' : '';
+        var tagg = niva ? andra : sparat.tagg || '';
         if (!niva) niva = giltiga.indexOf(sparat.niva) >= 0 ? sparat.niva : tfNivaer[0];
         if (tfTaggar.indexOf(tagg) < 0) tagg = '';
-        var css = '.tf-val{display:flex!important}.tf-valda{display:block!important}' + (niva === 'alla' ? '' : '.tf-niva:not([data-niva="' + niva + '"]){display:none}');
+        var css = '.tf-val{display:flex!important}.tf-val>[data-js]{display:flex!important}.tf-valda{display:block!important}' + (niva === 'alla' ? '' : '.tf-niva:not([data-niva="' + niva + '"]){display:none}');
         if (tagg) css += '.tf-post:not([data-taggar~="' + tagg + '"]){display:none}.tf-tema:not(:has([data-taggar~="' + tagg + '"])){display:none}';
+        // Temana: nivåns tema ur adressen, det läraren hade utfällt sist, eller nivåns enda tema; annars står alla stängda.
+        var sparade = sparat.teman || {};
+        for (var n in tfTeman) {
+          var lista = tfTeman[n];
+          if (!lista.length) continue;
+          var vald = n === niva && lista.indexOf(andra) >= 0 ? andra : typeof sparade[n] === 'string' && (sparade[n] === '' || lista.indexOf(sparade[n]) >= 0) ? sparade[n] : lista.length === 1 ? lista[0] : '';
+          var stangda = '.tf-niva[data-niva="' + n + '"] .tf-tema' + (post && n === niva ? ':not(:has([id="' + post + '"]))' : vald ? ':not([data-tema="' + vald + '"])' : '');
+          css += stangda + '>.tf-tema-innehall{display:none}' + stangda + '>summary{border-bottom-color:transparent}' + stangda + '>summary::after{transform:translateY(-0.15rem) rotate(45deg)}';
+        }
         // Med Alla står nivåernas rubriker kvar, så att läraren ser var en nivå börjar.
         if (niva === 'alla') document.currentScript.parentElement.classList.add('tf-alla');
         var stil = document.createElement('style');
@@ -92,16 +115,20 @@ const den = t.ord.artikel === 'ett' ? 'det' : 'den';
       })();
     </script>
 
-    {/* Valet: bara med JavaScript. */}
-    <div class="sk-val tf-val" data-js hidden>
-      <div class="sk-valrad" role="group" aria-labelledby="tf-niva-etikett">
+    {/* Valet: nivåknapparna och taggarna, bara med JavaScript. På sidorna med texter står en knapp till metoden och, när
+        banken har en, en till lärarhandledningen där taggarna står som val på Ta fram ett matteproblem (Niclas 2026-10-18
+        natt: "Kan bara [vara] länk till metoden och länk till lärarhandledning på en knapp där istället", och "Knapp till
+        metoden Textsamtal i grupp och knapp till Lärarhandledning"). De står där också utan JavaScript. Lärarens sidor och
+        modellerna finns i metoden. */}
+    <div class="sk-val tf-val" data-js={t.baraTexter ? undefined : ''} hidden={!t.baraTexter}>
+      <div class="sk-valrad" role="group" aria-labelledby="tf-niva-etikett" data-js={t.baraTexter ? '' : undefined} hidden={t.baraTexter}>
         <span class="sk-etikett" id="tf-niva-etikett">Nivå</span>
         <div class="sk-nivaknappar">
           <button type="button" class="sk-niva tf-alla-knapp" data-niva="alla" aria-pressed="false">Alla</button>
           {t.nivaer.map((n) => <button type="button" class="sk-niva" data-niva={n.slug} style={`--niva:${n.farg}`} aria-pressed="false">{n.namn}</button>)}
         </div>
       </div>
-      {t.taggar.length > 0 && (
+      {t.taggVal && (
         <div class="sk-valrad tf-taggrad" role="group" aria-labelledby="tf-tagg-etikett">
           <span class="sk-etikett" id="tf-tagg-etikett">{t.taggText.etikett}</span>
           <div class="tf-taggar">
@@ -110,26 +137,42 @@ const den = t.ord.artikel === 'ett' ? 'det' : 'den';
           </div>
         </div>
       )}
+      {t.baraTexter && (
+        <p class="tf-metodrad">
+          <a class="knapp sekundar" href={`/stodundervisning/${t.metod}`}>{t.titel}</a>
+          {t.handledning && <a class="knapp sekundar" href={t.handledning}>Lärarhandledning</a>}
+        </p>
+      )}
     </div>
 
     <div class="tf-yta">
       <div class="tf-poster" id="tf-poster">
         {t.nivaer.map((n) => (
           <section class="tf-niva" data-niva={n.slug} data-nivanamn={n.namn} style={`--niva:${n.farg}`} aria-labelledby={`tf-niva-${n.slug}`}>
-            <h2 class="tf-niva-rubrik" id={`tf-niva-${n.slug}`}>{n.namn} <span class="tf-niva-antal">{n.poster.length} {t.ord.flera}</span></h2>
-            {n.teman ? n.teman.map((tema) => (
-              <section class="tf-tema" aria-labelledby={`tf-tema-${n.slug}-${tema.poster[0].id}`}>
-                <h3 class="tf-tema-rubrik" id={`tf-tema-${n.slug}-${tema.poster[0].id}`}><a href={tema.adress}>{tema.namn}</a> <span class="tf-niva-antal">{n.namn} · {tema.poster.length} {t.ord.flera}</span></h3>
-                <p class="tf-tema-lankar"><a href={tema.adress}>Temats sida</a>{tema.handledning && <>{' · '}<a href={`${tema.adress}#lararhandledning`}>Lärarhandledningen</a></>}<span data-js hidden>{' · '}<button type="button" class="tf-tema-lista" data-poster={tema.poster.map((p) => p.id).join(' ')}>Lägg temats {t.ord.flera} i listan</button></span></p>
-                <ol class="tf-lista">{tema.poster.map((p) => <TaFramRad t={t} p={p} rubrik="h4" />)}</ol>
-              </section>
-            )) : (
+            <h2 class="tf-niva-rubrik" id={`tf-niva-${n.slug}`}>{n.namn}{!n.teman && <>{' '}<span class="tf-niva-antal">{n.poster.length} {t.ord.flera}</span></>}</h2>
+            {n.teman ? (
+              <div class="tf-teman">
+                <p class="sk-etikett tf-teman-etikett">{n.teman.length > 1 ? `Teman på nivån ${n.namn}` : `Tema på nivån ${n.namn}`}</p>
+                {n.teman.map((tema) => (
+                  <details class="tf-tema" data-tema={tema.slug} open>
+                    <summary><h3 class="tf-tema-rubrik">{tema.namn}</h3> <span class="tf-tema-antal">{tema.poster.length} {t.ord.flera}</span></summary>
+                    <div class="tf-tema-innehall">
+                      <p class="tf-tema-knappar">
+                        {tema.utskrift && <a class="knapp sekundar" href={tema.utskrift.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst={String(6 * tema.poster.length)} data-goatcounter-click={`utskrift:${t.metod}/${t.led}/${tema.slug}`} data-goatcounter-title={`${t.titel}: ${tema.namn}, utskrift av temats ${t.ord.flera}`}><span data-direkt={`Skriv ut temats ${t.ord.flera}`}>Temats {t.ord.flera} som pdf</span></a>}
+                        <a class="knapp sekundar" href={tema.handledning ? `${tema.adress}#lararhandledning` : tema.adress}>{tema.handledning ? 'Lärarhandledning' : 'Temats sida'}<span class="visually-hidden">: {tema.namn}</span></a>
+                      </p>
+                      <ol class="tf-lista">{tema.poster.map((p) => <TaFramRad t={t} p={p} rubrik="h4" />)}</ol>
+                    </div>
+                  </details>
+                ))}
+              </div>
+            ) : (
               <ol class="tf-lista">{n.poster.map((p) => <TaFramRad t={t} p={p} rubrik="h3" />)}</ol>
             )}
             {/* Hela nivån i en fil, som är billigare än nivåns poster var för sig (K-424). */}
             <p class="tf-nivafiler"><span class="tf-nivafiler-rubrik">Hela nivån {n.namn}:</span>{' '}
               <a href={n.filer.bara.adress} target="_blank" rel="noopener" data-goatcounter-click={`fil:${n.filer.bara.namn}.pdf`} data-goatcounter-title={`${t.titel}: ${n.namn}, ${baraNamn} som pdf`}>{baraNamn}, pdf {mb(n.filer.bara.byte)}</a>
-              {n.filer.med && <>{' · '}<a href={n.filer.med.adress} target="_blank" rel="noopener" data-goatcounter-click={`fil:${n.filer.med.namn}.pdf`} data-goatcounter-title={`${t.titel}: ${n.namn}, ${t.forSig ? t.folje : `${t.ord.alla} med ${t.folje}`} som pdf`}>{medNamn}, pdf {mb(n.filer.med.byte)}</a></>}
+              {!t.baraTexter && n.filer.med && <>{' · '}<a href={n.filer.med.adress} target="_blank" rel="noopener" data-goatcounter-click={`fil:${n.filer.med.namn}.pdf`} data-goatcounter-title={`${t.titel}: ${n.namn}, ${t.forSig ? t.folje : `${t.ord.alla} med ${t.folje}`} som pdf`}>{medNamn}, pdf {mb(n.filer.med.byte)}</a></>}
             </p>
           </section>
         ))}
@@ -146,7 +189,7 @@ const den = t.ord.artikel === 'ett' ? 'det' : 'den';
           <ol class="ak-valda-lista" id="tf-valda-lista"></ol>
           <div class="sk-atgarder ak-valda-knappar">
             <a class="knapp" id="tf-skrivut" href="#" data-goatcounter-click={`utskrift:${t.metod}/${t.led}`} data-goatcounter-title={`${t.titel}: utskrift av listans ${t.ord.flera}`}>Skriv ut {t.ord.alla}</a>
-            <a class="knapp sekundar" id="tf-skrivut-med" href="#" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:med`} data-goatcounter-title={t.forSig ? `${t.titel}: utskrift av ${t.folje} till listans ${t.ord.flera}` : `${t.titel}: utskrift av listans ${t.ord.flera} med ${t.folje}`}>{t.forSig ? `Skriv ut ${t.folje}` : `Skriv ut med ${t.folje}`}</a>
+            {!t.baraTexter && <a class="knapp sekundar" id="tf-skrivut-med" href="#" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:med`} data-goatcounter-title={t.forSig ? `${t.titel}: utskrift av ${t.folje} till listans ${t.ord.flera}` : `${t.titel}: utskrift av listans ${t.ord.flera} med ${t.folje}`}>{t.forSig ? `Skriv ut ${t.folje}` : `Skriv ut med ${t.folje}`}</a>}
             <button type="button" class="knapp sekundar" id="tf-kopiera" data-goatcounter-click={`${t.led}:${t.metod}:lank`} data-goatcounter-title={`${t.titel}: listans länk kopierad`}>Kopiera listans länk</button>
             <button type="button" class="knapp sekundar" id="tf-tomlista">Töm listan</button>
           </div>
@@ -161,8 +204,8 @@ const den = t.ord.artikel === 'ett' ? 'det' : 'den';
     <dialog class="tf-stort" id="tf-stort" aria-labelledby="tf-stort-titel">
       <div class="tf-stort-huvud">
         <p class="tf-stort-etikett" id="tf-stort-etikett"></p>
-        {/* Bläddra bland posterna som syns, i radernas ordning (K-434; Niclas 2026-10-18 natt: "Man måste kunna se eller
-            enkelt navigera så alla texter för temat syns"). */}
+        {/* Bläddra bland posterna som syns, i radernas ordning, och i en bank med teman bland temats texter (K-434; Niclas
+            2026-10-18 natt: "Man måste kunna se eller enkelt navigera så alla texter för temat syns"). */}
         <div class="tf-bladdra"><button type="button" id="tf-forra" aria-label={`Förra ${t.ord.en}`}>‹</button><button type="button" id="tf-nasta" aria-label={`Nästa ${t.ord.en}`}>›</button></div>
         <button type="button" class="tf-stang" id="tf-stang" aria-label="Stäng">×</button>
       </div>
@@ -188,11 +231,11 @@ const den = t.ord.artikel === 'ett' ? 'det' : 'den';
       <div class="tf-stort-knappar">
         <button type="button" class="knapp sekundar tf-stort-bock" id="tf-stort-bock" aria-pressed="false"><span set:html={BOCK} /> <span id="tf-stort-bock-text">Lägg i listan</span></button>
         <button type="button" class="knapp sekundar" id="tf-stort-losning" aria-pressed="false" aria-controls="tf-stort-lf" hidden>Visa {t.foljeEn}</button>
-        <a class="knapp sekundar" id="tf-stort-sidan" href="#">{versal(t.ord.bestamd)} i metoden</a>
+        {/* Postens sida i metoden, och på sidorna med texter lärarens sida, den enda vägen dit från sidan. */}
+        <a class="knapp sekundar" id="tf-stort-sidan" href="#">{t.baraTexter ? 'Lärarens sida' : `${versal(t.ord.bestamd)} i metoden`}</a>
         <a class="knapp sekundar" id="tf-stort-skrivut" href="#" target="_blank" rel="noopener" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:ett`} data-goatcounter-title={`${t.titel}: utskrift av ${t.ord.artikel} ${t.ord.en}`}>Skriv ut {t.ord.bestamd}</a>
-        {/* En post utan lösningsförslag skrivs också ut med följesidan, eller följesidorna för sig där de står i egna filer
-            (designgranskningen 2026-10-18 natt). */}
-        <a class="knapp sekundar" id="tf-stort-skrivut-med" href="#" target="_blank" rel="noopener" hidden data-goatcounter-click={`utskrift:${t.metod}/${t.led}:ett-med`} data-goatcounter-title={`${t.titel}: utskrift av ${t.foljeEn} till ${t.ord.artikel} ${t.ord.en}`}>{t.forSig ? `Skriv ut ${t.foljeEn}` : `Skriv ut med ${t.foljeEn}`}</a>
+        {/* Ett problem utan lösningsförslag skrivs också ut med följesidan (designgranskningen 2026-10-18 natt). */}
+        {!t.baraTexter && <a class="knapp sekundar" id="tf-stort-skrivut-med" href="#" target="_blank" rel="noopener" hidden data-goatcounter-click={`utskrift:${t.metod}/${t.led}:ett-med`} data-goatcounter-title={`${t.titel}: utskrift av ${t.foljeEn} till ${t.ord.artikel} ${t.ord.en}`}>{t.forSig ? `Skriv ut ${t.foljeEn}` : `Skriv ut med ${t.foljeEn}`}</a>}
       </div>
     </dialog>
 
@@ -201,6 +244,8 @@ const den = t.ord.artikel === 'ett' ? 'det' : 'den';
     {delningPa && <Delning sida={t.adress} titel={`${t.namn}: ${t.titel}`} medKort />}
   </article>
 </Base>
+
+<SkrivUtPdf />
 
 <script>
   import '../scripts/tafram';

@@ -117,6 +117,9 @@ export interface TaFramPost extends Post {
   /** En faktatexts tema, etikettens första led ("Vatten · text 1 av 5"), och texten för Visa stort som Faktatext.astro
    *  ritar den (src/lib/taframdata.ts): texten, ramens rubrik, bilderna vid ramen och sidlåset. */
   tema?: string;
+  /** Textens plats i temat, som kortet och Visa stort visar ("Rymden · text 2 av 5"): ett andra tema på en nivå har
+   *  texterna 6 till 10 i metoden (adressen bas-6), men 1 till 5 i temat. */
+  temaNr?: number;
   fakta?: { f: Faktatext; rubrik: string; bilder: PaBordet[]; las: number[] };
   /** Faktatextens modell (Niclas 2026-10-18 natt: "En text i fakta ska ha sin modell likt problem har sin lösning, en
    *  ifylld och en tom att skriva ut"): modellens namn, bladet som lärarens sida säger ("Tankekartan, blad 1"),
@@ -151,6 +154,19 @@ export interface TaFram {
   nivaer: { namn: string; slug: string; farg: string; poster: TaFramPost[]; teman?: TaFramTema[]; filer: { bara: Fil; med?: Fil } }[];
   /** Följesidorna står i egna filer (sidorForSig i src/lib/bank.ts): faktatexterna och lärarens sidor. */
   forSig: boolean;
+  /** Sidan har bara texterna (Ta fram en lästext och Ta fram en faktatext; Niclas 2026-10-18 natt: "Funderar på om denna
+   *  sida med texter bara ska ha texterna. Så för de hitta det andra via metoden som har lärarsidor mm"): kortet har Visa
+   *  stort och taggarna, listan och nivån skriver ut texterna, och lärarens sida nås från Visa stort. Ta fram ett
+   *  matteproblem har kvar lösningsförslagen vid kortet och i listan (Niclas samma dag: "utan att missa att de finns"). */
+  baraTexter: boolean;
+  /** Taggarna är ett val på Ta fram ett matteproblem, där innehållet delar nivån (Niclas 2026-10-18: "en innehållstag likt
+   *  brainbreaks har"). På sidorna med texter står taggen bara på kortet: faktatexternas struktur, eftersom varje tema har
+   *  en text av varje (formgivarnas förslag 2026-10-18 natt, underlag/prov/verktyg/granskning/ide-*.md), och lästexternas
+   *  slag (Niclas samma natt: "Slagen kan ju vara som taggar för innehållet men inte för att välja. Tar bort en del plotter
+   *  om de inte finns för att välja ut texter"). */
+  taggVal: boolean;
+  /** Lärarhandledningen till hela banken, när metoden har en (lästexterna): sidan där den står att läsa och skriva ut. */
+  handledning?: string;
   taggar: TaFramTagg[];
   /** Vad taggarna är: valets etikett (Innehåll, Slag), en mening till ingressen och en till raden längst ned på sidan. */
   taggText: { etikett: string; ingress: string; kalla: string };
@@ -351,8 +367,16 @@ async function bygg(m: Metod): Promise<TaFram> {
     const med = egna[0].utskrift.med.kalla.map((k) => k.fil).find((f) => f !== bara);
     // Temana i den ordning texterna står, när posterna har teman.
     const teman = egna.some((p) => p.tema) ? [...new Set(egna.map((p) => p.tema ?? ''))].map((namn) => ({ namn, slug: slugAv(namn), adress: `${adress}/${slugAv(namn)}`, poster: egna.filter((p) => (p.tema ?? '') === namn), ...(handledda.has(namn) ? { handledning: handledningensFil(m.id, { tema: namn }) } : {}), ...(temanasPdf.has(namn) ? { utskrift: temanasPdf.get(namn) } : {}) })) : undefined;
+    for (const tema of teman ?? []) tema.poster.forEach((p, i) => { p.temaNr = i + 1; });
     return { namn: n.namn, slug: n.slug, farg: farger[n.namn], poster: egna, ...(teman ? { teman } : {}), filer: { bara: filer[bara], ...(med ? { med: filer[med] } : {}) } };
   });
+  // Ett tema heter något som inget annat tema i metoden heter: temats sida, dess lärarhandledning och dess fil heter efter
+  // namnet utan nivån (/texter/<tema>, <id>-lararhandledning-<tema>), så två nivåer med samma tema skulle dela adress.
+  const allaTeman = nivaer.flatMap((n) => (n.teman ?? []).map((x) => ({ niva: n.namn, namn: x.namn, slug: x.slug })));
+  for (const x of allaTeman) {
+    const samma = allaTeman.filter((y) => y.slug === x.slug);
+    if (samma.length > 1) throw new Error(`Ta fram (${d.titel}): temat ${x.namn} står på nivåerna ${samma.map((y) => y.niva).join(' och ')}. Ett tema har ett namn som inget annat tema i metoden har, eftersom temats sida, lärarhandledningen och filerna heter efter namnet (${adress}/${x.slug}, ${m.id}-lararhandledning-${x.slug}). Ge temat ett eget namn i metodens fil.`);
+  }
   const medPoster = taggar.map((t) => ({ ...t, antal: poster.filter((p) => p.taggar?.includes(t.namn)).length })).filter((t) => t.antal > 0);
   // Två taggar som exempel i ingressen: lästexternas slag är namn, och faktatexternas strukturer vanliga ord.
   const exempel = medPoster.slice(0, 2).map((t) => (modeller ? t.namn.toLowerCase() : t.namn)).join(' eller ');
@@ -367,11 +391,11 @@ async function bygg(m: Metod): Promise<TaFram> {
       ? { folje: bank.post.alla.toLowerCase(), foljeEn: bank.post.bestamd }
       : (() => { const f = bank.foljesidor.map((n) => (/^Lärarens sida$/i.test(n) ? n.toLowerCase() : n)).join(' och '); return { folje: f, foljeEn: f }; })()),
     losningNamn: !bank.post || bank.post.namn === 'Lösningsförslag' ? 'Lösningsförslag' : bank.post.namn,
-    nivaer, forSig: bank.sidorForSig, taggar: medPoster,
+    nivaer, forSig: bank.sidorForSig, baraTexter: led === 'texter', taggVal: medPoster.length > 0 && led !== 'texter', taggar: medPoster,
     taggText: egnaSlag
-      ? { etikett: 'Slag', ingress: ` Taggarna säger vad eleven ska lista ut mellan raderna, som ${exempel}. Tryck på en tagg för att se ${bank.ord.alla} med det slaget.`, kalla: ' Taggarna är metodens slag av frågor mellan raderna, ur tabellen Slagen: det eleven listar ut.' }
+      ? { etikett: 'Slag', ingress: ` Taggarna vid texten säger vad eleven ska lista ut mellan raderna, som ${exempel}.`, kalla: ' Taggarna är metodens slag av frågor mellan raderna, ur tabellen Slagen: det eleven listar ut.' }
       : modeller
-        ? { etikett: 'Struktur', ingress: ` Varje tema har en text av varje struktur, som ${exempel}, och varje struktur har sin modell. Tryck på en struktur för att se ${bank.ord.alla} som är byggda så.`, kalla: ' Taggarna är de fem sätten att bygga en text, ur tabellen De fem modellerna.' }
+        ? { etikett: 'Struktur', ingress: ` Varje tema har en text av varje struktur, som ${exempel}, och strukturen står vid texten.`, kalla: ' Strukturen på varje text är ett av de fem sätten att bygga en text, ur tabellen De fem modellerna, och varje sätt har sin modell.' }
         : { etikett: 'Innehåll', ingress: ` Tryck på en tagg för att se ${bank.ord.alla} i en del av ${d.omrade.toLowerCase()}en.`, kalla: ` Taggarna är delarna av det centrala innehållet i kursplanen i ${d.omrade.toLowerCase()} (Skolverket, Lgr22).` },
     poster, filer,
   };

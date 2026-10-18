@@ -2291,7 +2291,7 @@ html.js .bara-js { display: inline-block; }
    minst 5,6:1. En
    tagg har sin färg efter sin plats bland databasens taggar (src/lib/tafram.ts, TAGGFARGER). Delningskortet för Ta fram
    läser dem också (src/lib/delningskort.ts). */
-:root { --tagg-1: #2a62a8; --tagg-2: #1b7a72; --tagg-3: #b8432c; --tagg-4: #6046a8; --tagg-5: #6b6b00; --tagg-6: #b5179e; --tagg-7: #1d3557; }
+:root { --tagg-1: #2a62a8; --tagg-2: #1b7a72; --tagg-3: #b8432c; --tagg-4: #6046a8; --tagg-5: #6b6b00; --tagg-6: #b5179e; --tagg-7: #6d4c41; }
 .tagg-1 { --tagg: var(--tagg-1); } .tagg-2 { --tagg: var(--tagg-2); } .tagg-3 { --tagg: var(--tagg-3); } .tagg-4 { --tagg: var(--tagg-4); } .tagg-5 { --tagg: var(--tagg-5); } .tagg-6 { --tagg: var(--tagg-6); } .tagg-7 { --tagg: var(--tagg-7); }
 .tf-taggrad { flex: 1 1 100%; }
 /* Alla bland nivåerna har ingen egen färg: textens. */
@@ -2358,9 +2358,37 @@ button.tf-radtagg:hover { border-color: var(--tagg, var(--farg-accent)); backgro
 .tf-tom { margin: 1rem 0; }
 /* En post utan bild, som en lästext: texten börjar vid nivåns kant. */
 .tf-post.utan-bild { grid-template-columns: minmax(0, 1fr) 2.75rem; padding-left: 0.9rem; }
-/* Ett tema (faktatexterna): namnet med nivån och antalet över temats texter. */
-.tf-tema-rubrik { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 0.6rem; margin: 1.5rem 0 0.6rem; font-size: 1.15rem; }
-.tf-tema:first-of-type .tf-tema-rubrik { margin-top: 0.75rem; }
+/* Temana (faktatexterna): nivåns teman som rader i nivåns färg som fälls ut, som nivåerna i metodens bank (.bank-niva), och
+   i det utfällda temat dess två knappar och texterna som tunna rader med en linje emellan (formgivarnas förslag 2026-10-18
+   natt, underlag/prov/verktyg/granskning/ide-opus.md). Skriptet före raderna i TaFram.astro stänger de teman som ska stå
+   stängda med samma regler, tills sidans skript har gjort det, så pilen och linjen under raden ritas av båda. */
+.tf-teman { display: grid; gap: 0.6rem; }
+.tf-teman-etikett { margin: 0.25rem 0 0; }
+.tf-tema { border: 1px solid var(--farg-kant); border-left: 6px solid var(--niva); border-radius: 8px; background: var(--farg-yta); scroll-margin-top: calc(var(--tf-val-h) + 0.75rem); }
+.tf-tema > summary { list-style: none; display: flex; align-items: baseline; gap: 0.75rem; min-height: 2.75rem; padding: 0.7rem 1rem; border-bottom: 1px solid transparent; border-radius: 0 7px 0 0; cursor: pointer; font-family: var(--typsnitt-ui); }
+.tf-tema > summary::-webkit-details-marker { display: none; }
+.tf-tema > summary::after { content: ''; flex: none; margin-left: auto; width: 0.55rem; height: 0.55rem; border-right: 2px solid var(--farg-text-svag); border-bottom: 2px solid var(--farg-text-svag); transform: translateY(-0.15rem) rotate(45deg); align-self: center; }
+.tf-tema[open] > summary { border-bottom-color: var(--farg-kant); }
+.tf-tema[open] > summary::after { transform: translateY(0.1rem) rotate(-135deg); }
+.tf-tema > summary:hover { background: color-mix(in srgb, var(--niva) 7%, white); }
+.tf-tema-rubrik { margin: 0; font-size: 1.15rem; line-height: 1.3; color: color-mix(in srgb, var(--niva) 85%, #000); }
+.tf-tema-antal { font-size: 0.95rem; color: var(--farg-text-svag); white-space: nowrap; }
+.tf-tema-innehall { padding: 0.75rem 0.75rem 0.25rem; }
+.tf-tema-knappar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 0.6rem; }
+.tf-tema-knappar .knapp { justify-content: center; text-align: center; }
+.tf-tema .tf-lista { gap: 0; }
+.tf-tema .tf-lista > .tf-post { border: 0; border-top: 1px solid var(--farg-kant); border-radius: 0; padding: 0.6rem 0 0.4rem 0.25rem; background: none; }
+.tf-tema .tf-lista > .tf-post.vald { box-shadow: none; background: color-mix(in srgb, var(--farg-accent) 7%, white); }
+/* Sidorna med texter: knapparna till metoden och lärarhandledningen står i valet efter nivåerna, där taggarna står som val
+   på Ta fram ett matteproblem, och i telefonen i två lika breda spalter. */
+.tf-metodrad { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; }
+.tf-metodrad .knapp { justify-content: center; text-align: center; }
+@media (max-width: 30rem) { .tf-metodrad { width: 100%; } .tf-metodrad .knapp { flex: 1 1 0; padding-left: 0.6rem; padding-right: 0.6rem; } }
+/* Sidorna med texter: taggarna först och Visa stort till höger, och titeln leder till texten. */
+.tf-bara .tf-radtaggar { order: -1; }
+.tf-bara .tf-visa { margin-left: auto; }
+.tf-titellank { color: inherit; text-decoration: none; }
+.tf-titellank:hover { text-decoration: underline; text-decoration-color: var(--farg-accent); text-underline-offset: 0.15em; }
 /* I telefonen står bocken bredvid titeln, och raden och länkarna får hela bredden under den, så att posten blir låg. Nivåerna
    står tre i bredd. */
 @media (max-width: 30rem) {
@@ -2378,6 +2406,8 @@ button.tf-radtagg:hover { border-color: var(--tagg, var(--farg-accent)); backgro
   .tf-val .sk-nivaknappar { grid-template-columns: 1fr 1fr; }
   .tf-val .sk-niva { min-width: 0; padding-right: 0.5rem; }
   .tf-tagg { padding: 0.25rem 0.75rem; font-size: 0.9rem; }
+  .tf-tema-knappar .knapp { flex: 1 1 0; padding-left: 0.6rem; padding-right: 0.6rem; }
+  .tf-tema-innehall { padding: 0.6rem 0.6rem 0.2rem; }
 }
 /* Visa stort: problemet i sin egen form (boksidan) stort på skärmen och projektorn, utan klocka. Esc stänger. */
 .tf-stort { width: min(94vw, 80rem); max-width: none; max-height: 94vh; padding: 0; border: 0; border-radius: 8px; background: var(--farg-yta); color: var(--farg-text); box-shadow: 0 12px 40px rgb(0 0 0 / 0.3); }
@@ -2392,7 +2422,7 @@ button.tf-radtagg:hover { border-color: var(--tagg, var(--farg-accent)); backgro
 .tf-stort .problemsida-text, .tf-stort .problemsida-fraga { font-size: clamp(1.15rem, 1.9vw, 2.2rem); }
 .tf-stort .problemsida-fraga-rubrik { font-size: clamp(1rem, 1.6vw, 1.35rem); }
 /* En lästext står utan bild och är längre än ett problem: mindre text, så att texten och frågorna ryms på projektorn. */
-.tf-stort.utan-bild .problemsida-text, .tf-stort.utan-bild .problemsida-fraga { font-size: clamp(1.1rem, 1.35vw, 1.6rem); }
+.tf-stort.utan-bild .problemsida-text, .tf-stort.utan-bild .problemsida-fraga { font-size: clamp(1.1rem, 1.35vw, 1.4rem); }
 /* Bilden får högst 38 procent av skärmens höjd, så att problemet, bilden och frågorna ryms på en skärm eller projektor. */
 .tf-stort .problemsida-bild { max-width: min(100%, 46rem); margin: 0.75rem auto; }
 .tf-stort .problemsida-bild img { width: auto; max-width: 100%; max-height: 38vh; margin: 0 auto; }
@@ -2401,12 +2431,8 @@ button.tf-radtagg:hover { border-color: var(--tagg, var(--farg-accent)); backgro
    modellens sida och knappen som skriver ut bladet. */
 .tf-modell { margin: 0; }
 .tf-modell img { display: block; width: 100%; height: auto; border: 1px solid var(--farg-kant); background: #fff; }
-.tf-modell figcaption { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 1rem; margin-top: 0.75rem; font-family: var(--typsnitt-ui); }
+.tf-modell figcaption { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; margin-top: 0.75rem; font-family: var(--typsnitt-ui); }
 .tf-modell-sida { font-weight: 600; }
-/* Temats rubrik leder till temats sida, och raden under har sidan och knappen som lägger temats texter i listan. */
-.tf-tema-rubrik a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
-.tf-tema-lankar { margin: -0.35rem 0 0.6rem; font-family: var(--typsnitt-ui); font-size: 0.92rem; }
-.tf-tema-lista { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0; border: 0; background: none; color: var(--farg-accent); font: inherit; text-decoration: underline; text-underline-offset: 0.15em; cursor: pointer; }
 /* Temats sida ([id]/texter/[tema].astro, K-434): nivåns skylt, rubriken och knapparna, och temats texter som rader med
    nivåns färg, bilden, numret, titeln, strukturen och modellen, textens rad och länkarna. */
 .tema-kicker { display: flex; align-items: center; gap: 0.6rem; margin: 0 0 0.25rem; font: 600 0.95rem/1.3 var(--typsnitt-ui); color: var(--farg-text-svag); }
@@ -2420,7 +2446,11 @@ button.tf-radtagg:hover { border-color: var(--tagg, var(--farg-accent)); backgro
 .tema-byggnad { margin: 0.15rem 0 0; font-size: 0.9rem; font-weight: 600; color: var(--farg-text-svag); }
 .tema-lankar { display: flex; flex-wrap: wrap; gap: 0 1rem; margin: 0.25rem 0 0; font-size: 0.92rem; }
 .tema-lankar a { display: inline-flex; align-items: center; min-height: 2.75rem; }
-@media (max-width: 30rem) { .tema-text { grid-template-columns: minmax(0, 1fr); gap: 0 0.65rem; padding: 0.6rem; } .tema-bild { display: none; } }
+.tema-utskrifter { margin-top: 0; padding-top: 0.15rem; border-top: 1px solid var(--farg-kant); }
+/* Bilden är den ifyllda modellen och leder dit den står på textens sida; länken Modellen bredvid gör detsamma för den som
+   använder tangentbord eller skärmläsare. */
+.tema-bildlank { display: block; }
+@media (max-width: 30rem) { .tema-text { grid-template-columns: minmax(0, 1fr); gap: 0 0.65rem; padding: 0.6rem; } .tema-bild, .tema-bildlank { display: none; } }
 /* Lärarhandledningen till ett tema (Lararhandledning.astro, K-434): som Word-filens två A4 och metodriggens förlaga, med
    etiketten på en mörk platta, temat i Anton med strecket i nivåns färg, och fälten i två spalter med en tunn linje
    mellan raderna. Faktatexternas färger och typsnitt (--fakta-*), så att handledningen och texterna hör ihop. I
@@ -2446,6 +2476,9 @@ button.tf-radtagg:hover { border-color: var(--tagg, var(--farg-accent)); backgro
 @media print { .hl { break-before: page; } .hl-sida + .hl-sida { break-before: page; margin-top: 0; padding-top: 0; border-top: 0; } }
 .tema-handledning { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--farg-kant); }
 .tema-handledning > .hl { margin-top: 1rem; }
+.tema-handledning .hl-text { scroll-margin-top: 1rem; }
+.tema-efter-hl { margin-top: 1.5rem; }
+.tema-texter { scroll-margin-top: 1rem; }
 /* Bläddra i Visa stort: förra och nästa post bland dem som syns. */
 .tf-bladdra { display: flex; gap: 0.25rem; margin-left: auto; }
 .tf-bladdra button { width: 2.75rem; height: 2.75rem; border: 1px solid var(--farg-kant); border-radius: 6px; background: var(--farg-yta); color: var(--farg-text); font: 600 1.4rem/1 var(--typsnitt-ui); cursor: pointer; }
@@ -2516,7 +2549,7 @@ button.tf-radtagg:hover { border-color: var(--tagg, var(--farg-accent)); backgro
 @media (max-width: 34rem) { .tf-stort-lf { margin: 0 0.75rem 0.75rem; } }
 @media (min-width: 64rem) {
   .tf-stort.med-losning .tf-stort-sidor { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
-  .tf-stort.med-losning .tf-stort-lf { margin: 1.25rem 1.25rem 1.25rem 0; }
+  .tf-stort.med-losning .tf-stort-lf { margin: 1.25rem 1.25rem 1.25rem 0; align-self: stretch; }
   .tf-stort.med-losning .tf-stort-sida .boksida-ram { display: block; }
   .tf-stort.med-losning .tf-stort-sida .boksida-titel { font-size: 1.9rem; }
   .tf-stort.med-losning .problemsida-text, .tf-stort.med-losning .problemsida-fraga { font-size: 1.15rem; }

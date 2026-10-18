@@ -60,7 +60,7 @@ interface Vy {
    * src/lib/bladmaterial.ts). */
   hor?: { etikett: string; lankar: Lank[] };
   /** Enhetens blad ur en ram med blad: veckans blad på textens sida, under ramarnas led som rubrik (Modellen). */
-  blad?: { rad: Bladrad; b: PaBordet; nr: string; led: string; sida: string; exempel: boolean; pdf: string };
+  blad?: { rad: Bladrad; b: PaBordet; nr: string; led: string; tom: boolean; sida: string; exempel: boolean; pdf: string };
   /** Ramarna som hör till varje enhet (ramar.vidEnheterna, src/lib/utskrift.ts), som bladet Kärnorna till varje text. */
   vid: VidEnheten[];
   /** Temats sida på Ta fram en faktatext, när enheten hör till ett tema (designgranskningen 2026-10-18 natt). */
@@ -134,8 +134,11 @@ if (givenRad && bm) {
   const { raderna, blad: funnet } = bm ? enhetensBlad(d, bm, e, par) : { raderna: [] as Bladrad[], blad: undefined };
   if (bm && funnet) {
     // Står den ifyllda modellen också på sidan (arBladsida i src/lib/bank.ts), heter bladet Den tomma modellen.
-    const led = e.efter.some((ri) => arBladsida(ramarna[ri])) ? `Den tomma ${bm.led.toLowerCase()}` : bm.led;
-    vy.blad = { ...funnet, led, sida: ledSida(bm), exempel: harExempel(bm), pdf: utskriftAdress(radensUtskrifter(d, m.id, bm, funnet.rad).blad.get(funnet.b.bild.nr)!) };
+    // Knappen heter då också så (designgranskningen 2026-10-18 natt: den ifyllda hade "Skriv ut den ifyllda modellen" och
+    // den tomma "Skriv ut bladet").
+    const tom = e.efter.some((ri) => arBladsida(ramarna[ri]));
+    const led = tom ? `Den tomma ${bm.led.toLowerCase()}` : bm.led;
+    vy.blad = { ...funnet, led, tom, sida: ledSida(bm), exempel: harExempel(bm), pdf: utskriftAdress(radensUtskrifter(d, m.id, bm, funnet.rad).blad.get(funnet.b.bild.nr)!) };
     vy.nav.push({ id: 'enhetens-blad', namn: led });
   } else if (bm && raderna.length) vy.hor = { etikett: bm.led, lankar: raderna.map((x) => ({ adress: bladsidaAdress(m.id, x), namn: x.namn })) };
 }
@@ -179,7 +182,7 @@ const figurer = metodensPaBordet(d, m.id).some((b) => b.bild.fluent?.length && s
       <div slot="efter-bladen" class="enhet-blad" id="enhetens-blad">
         <div class="enhet-bladhuvud">
           <h2>{vy.blad.led}</h2>
-          <a class="knapp sekundar liten" href={vy.blad.pdf} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande={arStaendeBlad(vy.blad.b) ? undefined : ''} data-sidor-hogst="1" data-goatcounter-click={`utskrift:${m.id}/${vy.slug}`} data-goatcounter-title={`${vy.statistik}, bladet`}><span data-direkt="Skriv ut bladet">Bladet som pdf</span><span class="visually-hidden">: {vy.blad.rad.namn}, blad {vy.blad.nr}</span></a>
+          <a class="knapp sekundar liten" href={vy.blad.pdf} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande={arStaendeBlad(vy.blad.b) ? undefined : ''} data-sidor-hogst="1" data-goatcounter-click={`utskrift:${m.id}/${vy.slug}`} data-goatcounter-title={`${vy.statistik}, bladet`}><span data-direkt={vy.blad.tom ? `Skriv ut ${vy.blad.led.toLowerCase()}` : 'Skriv ut bladet'}>{vy.blad.tom ? `${vy.blad.led} som pdf` : 'Bladet som pdf'}</span><span class="visually-hidden">: {vy.blad.rad.namn}, blad {vy.blad.nr}</span></a>
         </div>
         <p class="enhet-bladtext">{vy.blad.rad.namn}, blad {vy.blad.nr}. {vy.blad.sida}{vy.blad.exempel ? ', exemplet' : ''} och de andra bladen står på sidan <a href={bladsidaAdress(m.id, vy.blad.rad)}>{vy.blad.rad.namn}</a>.</p>
         <Pabordet b={vy.blad.b} utanRubrik />
