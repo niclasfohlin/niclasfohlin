@@ -161,8 +161,9 @@ Niclas 2026-10-14, när Lässtrategier kom från metodriggen: "Jag tänker att d
 |---|---|
 | `id` | Sakens id, som metodfilen använder |
 | `namn` | Knappens text, som Ta fram ett skrivkort och Lässtrategier |
-| `slag` | `sida`: ett tryck går till sidan. `pdf`: ett tryck öppnar pdf:en i en ny flik, där läraren skriver ut den eller sparar den |
-| `adress` | Sidan, eller pdf:en, som ligger i `public/stodundervisning/` och har adressen `/stodundervisning/<namn>.pdf` |
+| `slag` | `sida`: ett tryck går till sidan. `pdf`: ett tryck öppnar pdf:en i en ny flik, där läraren skriver ut den eller sparar den. `formular`: en kort adress till Googles sida för att kopiera ett formulär och dess sammanställning (Vår grupp); det visas av bladet med fältet `google` och har inga blå knappar |
+| `del` | Rubriken i rutan i metodbanken: `verktyg`, det läraren tar fram under lektionen, eller `stodmaterial`, det läraren har till hands (Niclas 2026-10-18) |
+| `adress` | Sidan, pdf:en, som ligger i `public/stodundervisning/` och har adressen `/stodundervisning/<namn>.pdf`, eller formulärets korta adress |
 | `kort` | Valfri kort adress, som `/skrivkort` och `/lasstrategier`. Den står i Word-filen, och en rad i `netlify.toml` leder den till `adress` |
 | `metod` | Metoden som saken hör till, när den inte är gemensam. Den metoden måste visa saken |
 | `mejl` | Det som följer på länken i mejlet om en ny metod som visar saken |

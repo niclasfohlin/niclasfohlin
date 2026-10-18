@@ -19,6 +19,7 @@ import { arIfylltBlad, bladNamn, bladVid, metodensPaBordet, type PaBordet } from
 import type { MetodData } from './metod';
 import { bankAv } from './bank';
 import { metodensNivamaterial } from './nivamaterial';
+import { slugAv, UPPTAGNA_LED } from './standard/index.js';
 
 type Ram = { rubrik: string };
 /** En ram med blad: ramens plats, namnet efter ledet (Tankekartan), bladen i bildernas ordning och hur många som är tomma. */
@@ -26,7 +27,8 @@ export interface Bladrad { ri: number; namn: string; slug: string; blad: PaBorde
 /** Metodens ramar med blad: ledet före kolon (Modellen), raderna och alla ramarna. */
 export interface Bladmaterial { led: string; rader: Bladrad[]; ramar: Set<number>; forst: number }
 
-const slug = (s: string) => s.toLowerCase().replace(/å|ä/g, 'a').replace(/ö/g, 'o').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+// Adressens led ur standarden (src/lib/standard/), samma för alla adresser ur namn (K-416).
+const slug = slugAv;
 
 // Ledets former, som raden, tabellen i nedladdningsrutan, filerna och ramens sida heter efter: Modellen blir Modellerna,
 // modeller och Modellens sida. Ett nytt led läggs till här.
@@ -111,7 +113,7 @@ export function metodensBladmaterial(d: MetodData, id: string): Bladmaterial | u
   const nm = metodensNivamaterial(d);
   const bm = bladmaterial(d.ramar.ramar, metodensPaBordet(d, id), (ri) => (!!bank && (bank.ramar.has(ri) || bank.oversikter.has(ri))) || !!nm?.ramar.has(ri));
   // Ramens sida har ramens namn som adress, och den får inte krocka med en enhets sida i banken eller metodens andra sidor.
-  const upptagna = new Set(['lathund', 'serier', 'skrivkort', 'aktiviteter', 'brainbreaks', 'kort', ...(bank?.enheter.map((e) => e.slug) ?? [])]);
+  const upptagna = new Set([...UPPTAGNA_LED, ...(bank?.enheter.map((e) => e.slug) ?? [])]);
   for (const r of bm?.rader ?? []) {
     if (!r.slug || upptagna.has(r.slug)) throw new Error(`${d.titel}: ramen "${bm!.led}: ${r.namn}" får adressen ${r.slug}, som en annan sida redan har. Ge ramen ett annat namn.`);
     upptagna.add(r.slug);

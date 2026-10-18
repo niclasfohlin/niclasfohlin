@@ -43,6 +43,7 @@ Windows 11, Node 24 lokalt (Netlify bygger med 22.12), Git Bash som skal i Claud
 | `npx lighthouse` | npm | mätning mot `astro preview --port 4322` |
 | `node scripts/provbygge.mjs jamfor [--fore main] [--efter HEAD] [--vantat <fil>]` | repot, git | bevisar att en ändring bara ändrar det den ska: bygger två commits i tillfälliga kopior som Netlify gör (`npm run build`, radsluten som i git) och jämför hela dist fil för fil, Word, PowerPoint och zip utan tidsstämplarna. Det som ska ändras står i förväg i `--vantat`; oväntat eller borttaget stoppar. Rapporten i `underlag/prov/provbygge/` |
 | `node scripts/provbygge.mjs rent [--ref HEAD]` | repot, git, npx | bygger en ren kopia med `npm ci` och `npm run build` under Node 22.12, som hos Netlify; Node 22.12 hämtas som npm-paketet `node@22.12.0` (omkring 30 MB) i npx:s cache |
+| `node scripts/standardprov.mjs` | repot | stoppar en import av `astro:`, `node:`, sajtens data eller kod utanför mappen i standarden för databaser och mallar (`src/lib/standard/`, REGLER.md där) och prövar funktionernas svar; körs tidigt i `npm run validera` |
 | `node scripts/cacheprov.mjs` | repot | stoppar en fil i dist som inte är en sida och inte träffar en cacheregel i `netlify.toml`; körs sist i `npm run validera` (se Krediter, Cachen och filernas version) |
 | `node scripts/utkast.mjs [--namn verktyg]` | repot, Netlify CLI | laddar upp dist som utkast på en fast adress; se Netlify nedan |
 

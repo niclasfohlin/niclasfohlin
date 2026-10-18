@@ -11,12 +11,14 @@ import { bankAv } from './bank';
 import { metodensBladmaterial } from './bladmaterial';
 import { metodensNivamaterial } from './nivamaterial';
 import { bladVid, metodensPaBordet } from './pabordet';
+import { slugAv } from './standard/index.js';
 
 /** Filen med det övriga materialet: namnet (adressen utan ändelse), metodens ord för materialet, ramarna och hur många
  * sidor filen ska ha, minst och högst. */
 export interface Ovrigtfil { namn: string; rubrik: string; huvud: string; ramar: number[]; minst: number; hogst: number }
 
-const slug = (s: string) => s.toLowerCase().replace(/å|ä/g, 'a').replace(/ö/g, 'o').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+// Adressens led ur standarden (src/lib/standard/), samma för alla adresser ur namn (K-416).
+const slug = slugAv;
 
 export function ovrigtfil(d: MetodData, id: string): Ovrigtfil | undefined {
   const namn = d.ramar?.ovrigt;

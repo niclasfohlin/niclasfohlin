@@ -113,6 +113,10 @@ const textI = (p) => { if (p.text === undefined) p.text = platt(execFileSync('pd
         const text = execFileSync('pdftotext', ['-enc', 'UTF-8', fil, '-'], { encoding: 'utf8' }).normalize('NFC').replace(/\s+/g, ' ');
         for (const [krav, prov] of [[c.namn, text.includes(c.namn)], ['© Niclas Fohlin', /©\s*Niclas Fohlin/.test(text)], ['niclasfohlin.se', text.includes('niclasfohlin.se')]]) if (!prov) fel.push(`${c.id}: pdf:en saknar "${krav}"`);
       }
+    } else if (c.slag === 'formular') {
+      // Ett formulär är en kort adress till Googles sida för att kopiera det (302), som bladets knapp.
+      const o = omleder.get(c.adress);
+      if (!o || o.status !== 302 || !/^https:\/\/docs\.google\.com\/.+\/copy$/.test(o.till)) fel.push(`${c.id}: netlify.toml leder inte ${c.adress} med 302 till Googles sida för att kopiera`);
     } else if (!existsSync(join(dist, c.adress, 'index.html'))) fel.push(`${c.id}: sidan ${c.adress} finns inte i bygget`);
     if (c.kort) {
       const o = omleder.get(c.kort);

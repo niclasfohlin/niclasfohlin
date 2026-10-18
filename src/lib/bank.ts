@@ -29,6 +29,7 @@
 //
 // Inga Node-beroenden: Word-filen av flera metoder byggs i webbläsaren med samma regel.
 import { enhetstexter, type Enhetstext } from './ramform';
+import { slugAv, UPPTAGNA_LED } from './standard/index.js';
 
 type Ram = Parameters<typeof enhetstexter>[0][number];
 type Metod = { ramar?: { ramar: Ram[] } };
@@ -70,9 +71,10 @@ export interface Bank {
   oversikter: Set<number>;
 }
 
-export const slugAv = (s: string) => s.toLowerCase().replace(/[åä]/g, 'a').replace(/ö/g, 'o').replace(/[éè]/g, 'e').replace(/ü/g, 'u').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+// Adressens led och de reserverade leden kommer ur standarden (src/lib/standard/), som alla adresser ur namn använder.
+export { slugAv };
 // Adressens sista led får inte krocka med metodens andra sidor under /stodundervisning/<id>/.
-const UPPTAGNA = new Set(['lathund', 'serier', 'skrivkort', 'aktiviteter', 'brainbreaks', 'kort']);
+const UPPTAGNA = new Set(UPPTAGNA_LED);
 
 export function bankAv(d: Metod): Bank | null {
   const ramar = d.ramar?.ramar ?? [];

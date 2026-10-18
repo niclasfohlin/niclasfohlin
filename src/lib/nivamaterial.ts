@@ -9,6 +9,7 @@
 import type { Niva } from './nivaer';
 import { veckomaterial } from './veckomaterial';
 import { bankAv } from './bank';
+import { slugAv } from './standard/index.js';
 
 type Ram = { rubrik: string; oversikt?: { rader: string[][] } };
 /** En nivå: nivån med sin färg, ramarnas index i filens ordning, antalet rader i nivåns översikter (böckerna) och
@@ -18,7 +19,8 @@ export interface Nivarad { niva: Niva; slug: string; ramar: number[]; antal: num
 /** Nivåernas material: ledet före kolon (Böckerna), ordet för det som räknas (böcker), nivåerna och alla ramarna. */
 export interface Nivamaterial { led: string; enhet?: string; nivaer: Nivarad[]; ramar: Set<number>; forst: number }
 
-const slug = (s: string) => s.toLowerCase().replace(/å|ä/g, 'a').replace(/ö/g, 'o').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+// Adressens led ur standarden (src/lib/standard/), samma för alla adresser ur namn (K-416).
+const slug = slugAv;
 // Ordet för det nivån har, ur ledet i bestämd form flertal: Böckerna blir böcker och Problemen problem. Ett led som inte
 // slutar så ger inget ord, och då står bara talet.
 const enhetAv = (led: string): string | undefined => {

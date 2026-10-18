@@ -8,13 +8,19 @@
 // och mejlet om en ny metod har en rad med länken (nytt.json.ts). En ny sak är en post i registret och raderna i
 // metodfilerna, utan ny kod. scripts/utskriftsformat.mjs prövar efter bygget att varje sak finns och att den korta adressen
 // leder dit. Modulen läser inga filer, eftersom webbläsaren bygger Word-filen med samma kod (metoddocx.ts).
+//
+// Varje sak hör till en del i rutan i metodbanken (Verktygsruta.astro, Niclas 2026-10-18): verktyg, det läraren tar fram
+// under lektionen, eller stödmaterial, det läraren har till hands. Ett formulär, som Vår grupp, är ett tredje slag: en
+// kort adress som leder till Googles sida för att kopiera formuläret och sammanställningen (netlify.toml, 302). Det visas
+// av bladet i metoden som har fältet google med samma adress (Pabordet.astro), med bladets egen knapp och utan de blå
+// knapparna, så att det inte blir två knappar för samma sak.
 import data from '../data/centrala.json';
 import { sammaRubrik } from './film';
 
-/** En post i registret. adress är sidan, eller pdf:en under /stodundervisning/. kort är en kort adress som Netlify leder
- *  till adress (netlify.toml) och som står i Word-filen. metod är metoden som saken hör till, när den inte är gemensam.
- *  mejl är det som följer på länken i mejlet om en ny metod. */
-export type Central = { id: string; namn: string; slag: 'sida' | 'pdf'; adress: string; kort?: string; metod?: string; mejl: string };
+/** En post i registret. adress är sidan, pdf:en under /stodundervisning/ eller formulärets korta adress. kort är en kort
+ *  adress som Netlify leder till adress (netlify.toml) och som står i Word-filen. metod är metoden som saken hör till, när
+ *  den inte är gemensam. del är rutans rubrik i metodbanken. mejl är det som följer på länken i mejlet om en ny metod. */
+export type Central = { id: string; namn: string; slag: 'sida' | 'pdf' | 'formular'; del: 'verktyg' | 'stodmaterial'; adress: string; kort?: string; metod?: string; mejl: string };
 export const CENTRALA = data as Central[];
 export const centralAv = (id: string) => CENTRALA.find((c) => c.id === id);
 
@@ -26,7 +32,9 @@ export function registerFel(): string[] {
     if (!/^[a-z0-9-]+$/.test(c.id ?? '')) fel.push(`${vem}: id skrivs med a-z, 0-9 och bindestreck.`);
     if (CENTRALA.findIndex((x) => x.id === c.id) !== i) fel.push(`${vem}: id finns redan.`);
     if (!c.namn?.trim()) fel.push(`${vem}: namn är knappens text och saknas.`);
-    if (c.slag !== 'sida' && c.slag !== 'pdf') fel.push(`${vem}: slag är sida eller pdf.`);
+    if (c.slag !== 'sida' && c.slag !== 'pdf' && c.slag !== 'formular') fel.push(`${vem}: slag är sida, pdf eller formular.`);
+    if (c.del !== 'verktyg' && c.del !== 'stodmaterial') fel.push(`${vem}: del är verktyg eller stodmaterial, rubriken i rutan i metodbanken.`);
+    if (c.slag === 'formular' && (!/^\/[a-z0-9-]+$/.test(c.adress ?? '') || c.kort !== undefined || !c.metod)) fel.push(`${vem}: ett formulär har den korta adressen som adress (som /vargrupp, utan kort) och metoden vars blad har fältet google.`);
     if (c.slag === 'pdf' && !/^\/stodundervisning\/[a-z0-9-]+\.pdf$/.test(c.adress ?? '')) fel.push(`${vem}: en pdf ligger i public/stodundervisning/ och har adressen /stodundervisning/<namn>.pdf.`);
     if (c.slag === 'sida' && !/^\/[a-z0-9/-]+$/.test(c.adress ?? '')) fel.push(`${vem}: en sidas adress börjar med / och har inget filnamn.`);
     if (c.kort !== undefined && !/^\/[a-z0-9-]+$/.test(c.kort)) fel.push(`${vem}: kort är en adress med ett led, som /skrivkort.`);
@@ -56,6 +64,7 @@ export function tolkaTextplats(efter: string): Textplats | undefined {
 }
 
 type MetodForText = {
+  pabordet?: { google?: string }[];
   inledning?: string[];
   tabeller?: { rubrik: string; text?: string }[];
   fastnar?: { text: string };
@@ -99,12 +108,22 @@ export const centralaVid = (d: MetodForText, plats: Textplats): Central[] => (d.
  *  andra utskrifter i statistiken (DRIFT.md under Besöksstatistik). En sida räknas som sida. */
 export function centralLank(c: Central, metod: string, titel: string): Record<string, string> {
   if (c.slag === 'sida') return { href: c.adress };
+  // Ett formulär räknas som bladets knapp Kopiera formuläret och sammanställningen (Pabordet.astro).
+  if (c.slag === 'formular') return { href: c.adress, target: '_blank', rel: 'noopener', 'data-goatcounter-click': `google:${c.id}`, 'data-goatcounter-title': `${titel}: ${c.namn}, formuläret kopierat` };
   return { href: c.adress, target: '_blank', rel: 'noopener', 'data-goatcounter-click': `utskrift:${metod}/${c.id}`, 'data-goatcounter-title': `${titel}: ${c.namn} som pdf` };
 }
 
 /** Metoderna som en sak hör till men inte visar, och saker som ingen metod visar: fel som stoppar bygget ([id].astro). */
 export function provaCentrala(metoder: { id: string; data: MetodForText }[]): void {
   const fel = CENTRALA.flatMap((c) => {
+    // Ett formulär visas av bladet med fältet google, inte av fältet centrala.
+    if (c.slag === 'formular') {
+      const m = metoder.find((x) => x.id === c.metod);
+      if (!m) return [`src/data/centrala.json: ${c.id} hör till ${c.metod}, som inte finns bland de publicerade metoderna.`];
+      if (!m.data.pabordet?.some((b) => b.google === c.adress)) return [`${c.metod} har inget blad med google: ${c.adress}, som visar formuläret ${c.id}.`];
+      if (metoder.some((x) => x.data.centrala?.some((y) => y.id === c.id))) return [`${c.id} är ett formulär och visas av bladets knapp; ta bort det ur fältet centrala.`];
+      return [];
+    }
     if (c.metod) {
       const m = metoder.find((x) => x.id === c.metod);
       if (!m) return [`src/data/centrala.json: ${c.id} hör till ${c.metod}, som inte finns bland de publicerade metoderna.`];

@@ -3,6 +3,7 @@
     "id": "skrivkort",
     "namn": "Ta fram ett skrivkort",
     "slag": "sida",
+    "del": "verktyg",
     "adress": "/stodundervisning/kortskrivning-skriv-varje-dag/skrivkort",
     "kort": "/skrivkort",
     "metod": "kortskrivning-skriv-varje-dag",
@@ -12,6 +13,7 @@
     "id": "lasstrategier",
     "namn": "Lässtrategier",
     "slag": "pdf",
+    "del": "stodmaterial",
     "adress": "/stodundervisning/lasstrategier.pdf",
     "kort": "/lasstrategier",
     "mejl": "ett A4 att ha i handen under passet, med strategierna för ordet, meningen och rösten och för förståelsen"
@@ -20,6 +22,7 @@
     "id": "aktiviteter",
     "namn": "Ta fram en aktivitet",
     "slag": "sida",
+    "del": "verktyg",
     "adress": "/stodundervisning/gruppstarkande-aktiviteter/aktiviteter",
     "kort": "/gruppstarkande",
     "metod": "gruppstarkande-aktiviteter",
@@ -29,9 +32,19 @@
     "id": "brainbreaks",
     "namn": "Ta fram en brainbreak",
     "slag": "sida",
+    "del": "verktyg",
     "adress": "/stodundervisning/gruppstarkande-aktiviteter/brainbreaks",
     "kort": "/brainbreaks",
     "metod": "gruppstarkande-aktiviteter",
     "mejl": "slumpa fram sex brainbreaks ur alla eller en av fem kategorier, välj en och visa den stort med klockan och musiken"
+  },
+  {
+    "id": "vargrupp",
+    "namn": "Vår grupp",
+    "slag": "formular",
+    "del": "stodmaterial",
+    "adress": "/vargrupp",
+    "metod": "gruppstarkande-aktiviteter",
+    "mejl": "kopiera formuläret och sammanställningen, skicka formuläret till eleverna och se gruppens snitt vid varje tillfälle"
   }
 ]
