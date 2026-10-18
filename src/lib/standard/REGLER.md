@@ -19,7 +19,12 @@ Den här mappen är början på modulen som sajten och metodriggen ska dela, som
 |---|---|
 | `slugAv` | Adressens led ur ett namn. En funktion för alla adresser som görs ur namn |
 | `UPPTAGNA_LED` | Leden under en metods adress som metodens egna sidor har |
+| `INNEHALLSTAGGAR`, `innehallstaggar` | Innehållstaggarna per ämne, databasens sista nivå efter nivån och slaget. Matematikens är de fem delarna av det centrala innehållet i Lgr22 |
+| `postensRad` | Postens egen första mening, som raden under titeln |
+| `Post`, `PostUtskrift` (typerna) | Postens form: id, nivå, nummer, titel, rad, tagg, sida, lösningsförslag, bild och utskrifter, med var utskrifternas sidor står i källfilerna |
+| `postFel`, `databasFel` | Kontrollerna, som listor med fel |
+| `hamtplan` | Det billigaste sättet att hämta en listas sidor: posternas egna pdf:er eller källfilen en gång |
 
 ## Det som kommer
 
-Postens form för Ta fram-sidorna (id, grupp, nummer, titel, första raden, bild, sida och pdf-delarna med version), och kontrollerna för den, när Ta fram ett matteproblem byggs. Sedan, i etapp 2, databasen som egen fil, omvandlingen mellan riggens ramar och posterna åt båda hållen, mallarnas register och steget att lyfta ut en mall ur en metod. Före etapp 2 för sajten och riggen ett samtal om modulen.
+Lösningsförslaget som eget blad (metodriggens ram `Lösningsförslag: <nivå>, problem <nummer>, <titel>`, K-423) och texternas och faktatexternas databaser (testversion 2). Sedan, i etapp 2, databasen som egen fil, omvandlingen mellan riggens ramar och posterna åt båda hållen, mallarnas register och steget att lyfta ut en mall ur en metod. Före etapp 2 för sajten och riggen ett samtal om modulen.
