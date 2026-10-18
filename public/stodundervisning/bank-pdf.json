@@ -1,1176 +1,1094 @@
 {
   "problemlosning-i-grupp-problem-alla": {
-    "word": "b1cf691e23966ab7b8bcdcca1da8fea3ae8065cdd6ea8f5d32261cd7c63ebcf1",
-    "pdf": "cf0f38f284502f9c68378636f10794374f4f70a206a0f56513619e89474809ed",
+    "word": "27b621990254ca05f9ab9703542cf7303db89f00ac48bf350347aa6e0079b87c",
+    "pdf": "41102c5fb71008e1bd7977d2d5bd21523d6b736a4f21c6979079ba6fdce84978",
     "sidor": 30,
     "kB": 330,
-    "datum": "2026-10-13",
+    "datum": "2026-10-18",
     "karta": [
       {
-        "ram": 2,
+        "ram": 3,
         "fran": 1,
         "till": 1
       },
       {
-        "ram": 5,
+        "ram": 7,
         "fran": 2,
         "till": 2
       },
       {
-        "ram": 8,
+        "ram": 11,
         "fran": 3,
         "till": 3
       },
       {
-        "ram": 11,
+        "ram": 15,
         "fran": 4,
         "till": 4
       },
       {
-        "ram": 14,
+        "ram": 19,
         "fran": 5,
         "till": 5
       },
       {
-        "ram": 17,
+        "ram": 23,
         "fran": 6,
         "till": 6
       },
       {
-        "ram": 20,
+        "ram": 27,
         "fran": 7,
         "till": 7
       },
       {
-        "ram": 23,
+        "ram": 31,
         "fran": 8,
         "till": 8
       },
       {
-        "ram": 26,
+        "ram": 35,
         "fran": 9,
         "till": 9
       },
       {
-        "ram": 29,
+        "ram": 39,
         "fran": 10,
         "till": 10
       },
       {
-        "ram": 33,
+        "ram": 44,
         "fran": 11,
         "till": 11
       },
       {
-        "ram": 36,
+        "ram": 48,
         "fran": 12,
         "till": 12
       },
       {
-        "ram": 39,
+        "ram": 52,
         "fran": 13,
         "till": 13
       },
       {
-        "ram": 42,
+        "ram": 56,
         "fran": 14,
         "till": 14
       },
       {
-        "ram": 45,
+        "ram": 60,
         "fran": 15,
         "till": 15
       },
       {
-        "ram": 48,
+        "ram": 64,
         "fran": 16,
         "till": 16
       },
       {
-        "ram": 51,
+        "ram": 68,
         "fran": 17,
         "till": 17
       },
       {
-        "ram": 54,
+        "ram": 72,
         "fran": 18,
         "till": 18
       },
       {
-        "ram": 57,
+        "ram": 76,
         "fran": 19,
         "till": 19
       },
       {
-        "ram": 60,
+        "ram": 80,
         "fran": 20,
         "till": 20
       },
       {
-        "ram": 64,
+        "ram": 85,
         "fran": 21,
         "till": 21
       },
       {
-        "ram": 67,
+        "ram": 89,
         "fran": 22,
         "till": 22
       },
       {
-        "ram": 70,
+        "ram": 93,
         "fran": 23,
         "till": 23
       },
       {
-        "ram": 73,
+        "ram": 97,
         "fran": 24,
         "till": 24
       },
       {
-        "ram": 76,
+        "ram": 101,
         "fran": 25,
         "till": 25
       },
       {
-        "ram": 79,
+        "ram": 105,
         "fran": 26,
         "till": 26
       },
       {
-        "ram": 82,
+        "ram": 109,
         "fran": 27,
         "till": 27
       },
       {
-        "ram": 85,
+        "ram": 113,
         "fran": 28,
         "till": 28
       },
       {
-        "ram": 88,
+        "ram": 117,
         "fran": 29,
         "till": 29
       },
       {
-        "ram": 91,
+        "ram": 121,
         "fran": 30,
         "till": 30
       }
     ]
   },
   "problemlosning-i-grupp-problem-alla-med-lararens-sida": {
-    "word": "735778c14a73b335d92db3a189eb3532bafa9379a2ca69247b504346ddef5f7b",
-    "pdf": "a13e4682128661e298da1c0d939378de1eaba3ba61d431b77b980d7fecb887c3",
-    "sidor": 93,
-    "kB": 2978,
-    "datum": "2026-10-13",
+    "word": "2e757eb0351a68182590e526f7328dedd4ffccf0d22f0c580ed8649ca9303ba2",
+    "pdf": "d3a60a8f1a1b222c375d2c83e1e252bd2c95a36a025abdb8e10253493da9d35b",
+    "sidor": 123,
+    "kB": 3286,
+    "datum": "2026-10-18",
     "karta": [
       {
-        "ram": 0,
+        "ram": 1,
         "fran": 1,
         "till": 1
       },
       {
-        "ram": 1,
+        "ram": 2,
         "fran": 2,
         "till": 2
       },
       {
-        "ram": 2,
+        "ram": 3,
         "fran": 3,
         "till": 3
       },
       {
-        "ram": 3,
+        "ram": 4,
         "fran": 4,
         "till": 4
       },
       {
-        "ram": 4,
+        "ram": 5,
         "fran": 5,
         "till": 5
       },
       {
-        "ram": 5,
+        "ram": 6,
         "fran": 6,
         "till": 6
       },
       {
-        "ram": 6,
+        "ram": 7,
         "fran": 7,
         "till": 7
       },
       {
-        "ram": 7,
+        "ram": 8,
         "fran": 8,
         "till": 8
       },
       {
-        "ram": 8,
+        "ram": 9,
         "fran": 9,
         "till": 9
       },
       {
-        "ram": 9,
+        "ram": 10,
         "fran": 10,
         "till": 10
       },
       {
-        "ram": 10,
+        "ram": 11,
         "fran": 11,
         "till": 11
       },
       {
-        "ram": 11,
+        "ram": 12,
         "fran": 12,
         "till": 12
       },
       {
-        "ram": 12,
+        "ram": 13,
         "fran": 13,
         "till": 13
       },
       {
-        "ram": 13,
+        "ram": 14,
         "fran": 14,
         "till": 14
       },
       {
-        "ram": 14,
+        "ram": 15,
         "fran": 15,
         "till": 15
       },
       {
-        "ram": 15,
+        "ram": 16,
         "fran": 16,
         "till": 16
       },
       {
-        "ram": 16,
+        "ram": 17,
         "fran": 17,
         "till": 17
       },
       {
-        "ram": 17,
+        "ram": 18,
         "fran": 18,
         "till": 18
       },
       {
-        "ram": 18,
+        "ram": 19,
         "fran": 19,
         "till": 19
       },
       {
-        "ram": 19,
+        "ram": 20,
         "fran": 20,
         "till": 20
       },
       {
-        "ram": 20,
+        "ram": 21,
         "fran": 21,
         "till": 21
       },
       {
-        "ram": 21,
+        "ram": 22,
         "fran": 22,
         "till": 22
       },
       {
-        "ram": 22,
+        "ram": 23,
         "fran": 23,
         "till": 23
       },
       {
-        "ram": 23,
+        "ram": 24,
         "fran": 24,
         "till": 24
       },
       {
-        "ram": 24,
+        "ram": 25,
         "fran": 25,
         "till": 25
       },
       {
-        "ram": 25,
+        "ram": 26,
         "fran": 26,
         "till": 26
       },
       {
-        "ram": 26,
+        "ram": 27,
         "fran": 27,
         "till": 27
       },
       {
-        "ram": 27,
+        "ram": 28,
         "fran": 28,
         "till": 28
       },
       {
-        "ram": 28,
+        "ram": 29,
         "fran": 29,
         "till": 29
       },
       {
-        "ram": 29,
+        "ram": 30,
         "fran": 30,
         "till": 30
       },
       {
-        "ram": 30,
+        "ram": 31,
         "fran": 31,
         "till": 31
       },
       {
-        "ram": 31,
+        "ram": 32,
         "fran": 32,
         "till": 32
       },
       {
-        "ram": 32,
+        "ram": 33,
         "fran": 33,
         "till": 33
       },
       {
-        "ram": 33,
+        "ram": 34,
         "fran": 34,
         "till": 34
       },
       {
-        "ram": 34,
+        "ram": 35,
         "fran": 35,
         "till": 35
       },
       {
-        "ram": 35,
+        "ram": 36,
         "fran": 36,
         "till": 36
       },
       {
-        "ram": 36,
+        "ram": 37,
         "fran": 37,
         "till": 37
       },
       {
-        "ram": 37,
+        "ram": 38,
         "fran": 38,
         "till": 38
       },
       {
-        "ram": 38,
+        "ram": 39,
         "fran": 39,
         "till": 39
       },
       {
-        "ram": 39,
+        "ram": 40,
         "fran": 40,
         "till": 40
       },
       {
-        "ram": 40,
+        "ram": 41,
         "fran": 41,
         "till": 41
       },
       {
-        "ram": 41,
+        "ram": 42,
         "fran": 42,
         "till": 42
       },
       {
-        "ram": 42,
+        "ram": 43,
         "fran": 43,
         "till": 43
       },
       {
-        "ram": 43,
+        "ram": 44,
         "fran": 44,
         "till": 44
       },
       {
-        "ram": 44,
+        "ram": 45,
         "fran": 45,
         "till": 45
       },
       {
-        "ram": 45,
+        "ram": 46,
         "fran": 46,
         "till": 46
       },
       {
-        "ram": 46,
+        "ram": 47,
         "fran": 47,
         "till": 47
       },
       {
-        "ram": 47,
+        "ram": 48,
         "fran": 48,
         "till": 48
       },
       {
-        "ram": 48,
+        "ram": 49,
         "fran": 49,
         "till": 49
       },
       {
-        "ram": 49,
+        "ram": 50,
         "fran": 50,
         "till": 50
       },
       {
-        "ram": 50,
+        "ram": 51,
         "fran": 51,
         "till": 51
       },
       {
-        "ram": 51,
+        "ram": 52,
         "fran": 52,
         "till": 52
       },
       {
-        "ram": 52,
+        "ram": 53,
         "fran": 53,
         "till": 53
       },
       {
-        "ram": 53,
+        "ram": 54,
         "fran": 54,
         "till": 54
       },
       {
-        "ram": 54,
+        "ram": 55,
         "fran": 55,
         "till": 55
       },
       {
-        "ram": 55,
+        "ram": 56,
         "fran": 56,
         "till": 56
       },
       {
-        "ram": 56,
+        "ram": 57,
         "fran": 57,
         "till": 57
       },
       {
-        "ram": 57,
+        "ram": 58,
         "fran": 58,
         "till": 58
       },
       {
-        "ram": 58,
+        "ram": 59,
         "fran": 59,
         "till": 59
       },
       {
-        "ram": 59,
+        "ram": 60,
         "fran": 60,
         "till": 60
       },
       {
-        "ram": 60,
+        "ram": 61,
         "fran": 61,
         "till": 61
       },
       {
-        "ram": 61,
+        "ram": 62,
         "fran": 62,
         "till": 62
       },
       {
-        "ram": 62,
+        "ram": 63,
         "fran": 63,
         "till": 63
       },
       {
-        "ram": 63,
+        "ram": 64,
         "fran": 64,
         "till": 64
       },
       {
-        "ram": 64,
+        "ram": 65,
         "fran": 65,
         "till": 65
       },
       {
-        "ram": 65,
+        "ram": 66,
         "fran": 66,
         "till": 66
       },
       {
-        "ram": 66,
+        "ram": 67,
         "fran": 67,
         "till": 67
       },
       {
-        "ram": 67,
+        "ram": 68,
         "fran": 68,
         "till": 68
       },
       {
-        "ram": 68,
+        "ram": 69,
         "fran": 69,
         "till": 69
       },
       {
-        "ram": 69,
+        "ram": 70,
         "fran": 70,
         "till": 70
       },
       {
-        "ram": 70,
+        "ram": 71,
         "fran": 71,
         "till": 71
       },
       {
-        "ram": 71,
+        "ram": 72,
         "fran": 72,
         "till": 72
       },
       {
-        "ram": 72,
+        "ram": 73,
         "fran": 73,
         "till": 73
       },
       {
-        "ram": 73,
+        "ram": 74,
         "fran": 74,
         "till": 74
       },
       {
-        "ram": 74,
+        "ram": 75,
         "fran": 75,
         "till": 75
       },
       {
-        "ram": 75,
+        "ram": 76,
         "fran": 76,
         "till": 76
       },
       {
-        "ram": 76,
+        "ram": 77,
         "fran": 77,
         "till": 77
       },
       {
-        "ram": 77,
+        "ram": 78,
         "fran": 78,
         "till": 78
       },
       {
-        "ram": 78,
+        "ram": 79,
         "fran": 79,
         "till": 79
       },
       {
-        "ram": 79,
+        "ram": 80,
         "fran": 80,
         "till": 80
       },
       {
-        "ram": 80,
+        "ram": 81,
         "fran": 81,
         "till": 81
       },
       {
-        "ram": 81,
+        "ram": 82,
         "fran": 82,
         "till": 82
       },
       {
-        "ram": 82,
+        "ram": 83,
         "fran": 83,
         "till": 83
       },
       {
-        "ram": 83,
+        "ram": 84,
         "fran": 84,
         "till": 84
       },
       {
-        "ram": 84,
+        "ram": 85,
         "fran": 85,
         "till": 85
       },
       {
-        "ram": 85,
+        "ram": 86,
         "fran": 86,
         "till": 86
       },
       {
-        "ram": 86,
+        "ram": 87,
         "fran": 87,
         "till": 87
       },
       {
-        "ram": 87,
+        "ram": 88,
         "fran": 88,
         "till": 88
       },
       {
-        "ram": 88,
+        "ram": 89,
         "fran": 89,
         "till": 89
       },
       {
-        "ram": 89,
+        "ram": 90,
         "fran": 90,
         "till": 90
       },
       {
-        "ram": 90,
+        "ram": 91,
         "fran": 91,
         "till": 91
       },
       {
-        "ram": 91,
+        "ram": 92,
         "fran": 92,
         "till": 92
       },
       {
-        "ram": 92,
+        "ram": 93,
         "fran": 93,
         "till": 93
+      },
+      {
+        "ram": 94,
+        "fran": 94,
+        "till": 94
+      },
+      {
+        "ram": 95,
+        "fran": 95,
+        "till": 95
+      },
+      {
+        "ram": 96,
+        "fran": 96,
+        "till": 96
+      },
+      {
+        "ram": 97,
+        "fran": 97,
+        "till": 97
+      },
+      {
+        "ram": 98,
+        "fran": 98,
+        "till": 98
+      },
+      {
+        "ram": 99,
+        "fran": 99,
+        "till": 99
+      },
+      {
+        "ram": 100,
+        "fran": 100,
+        "till": 100
+      },
+      {
+        "ram": 101,
+        "fran": 101,
+        "till": 101
+      },
+      {
+        "ram": 102,
+        "fran": 102,
+        "till": 102
+      },
+      {
+        "ram": 103,
+        "fran": 103,
+        "till": 103
+      },
+      {
+        "ram": 104,
+        "fran": 104,
+        "till": 104
+      },
+      {
+        "ram": 105,
+        "fran": 105,
+        "till": 105
+      },
+      {
+        "ram": 106,
+        "fran": 106,
+        "till": 106
+      },
+      {
+        "ram": 107,
+        "fran": 107,
+        "till": 107
+      },
+      {
+        "ram": 108,
+        "fran": 108,
+        "till": 108
+      },
+      {
+        "ram": 109,
+        "fran": 109,
+        "till": 109
+      },
+      {
+        "ram": 110,
+        "fran": 110,
+        "till": 110
+      },
+      {
+        "ram": 111,
+        "fran": 111,
+        "till": 111
+      },
+      {
+        "ram": 112,
+        "fran": 112,
+        "till": 112
+      },
+      {
+        "ram": 113,
+        "fran": 113,
+        "till": 113
+      },
+      {
+        "ram": 114,
+        "fran": 114,
+        "till": 114
+      },
+      {
+        "ram": 115,
+        "fran": 115,
+        "till": 115
+      },
+      {
+        "ram": 116,
+        "fran": 116,
+        "till": 116
+      },
+      {
+        "ram": 117,
+        "fran": 117,
+        "till": 117
+      },
+      {
+        "ram": 118,
+        "fran": 118,
+        "till": 118
+      },
+      {
+        "ram": 119,
+        "fran": 119,
+        "till": 119
+      },
+      {
+        "ram": 120,
+        "fran": 120,
+        "till": 120
+      },
+      {
+        "ram": 121,
+        "fran": 121,
+        "till": 121
+      },
+      {
+        "ram": 122,
+        "fran": 122,
+        "till": 122
+      },
+      {
+        "ram": 123,
+        "fran": 123,
+        "till": 123
       }
     ]
   },
   "problemlosning-i-grupp-problem-bas": {
-    "word": "c1b8cdcb436f776d95e3b268c071ff635ef4d463385d914101c373d80e82d5e4",
-    "pdf": "cd0eb8a7df91ef084d27171fca46a98e12547b40900db1e4611010c4e2c8d593",
+    "word": "876ff4d2ac9522de159ed2a542a83ccec6880aae45866e3b969bd2fd6ed72852",
+    "pdf": "b5175bb2aed2cee9cea08bce8c0617ce359316d64fbe153cf490783448e2b661",
     "sidor": 10,
     "kB": 200,
-    "datum": "2026-10-13",
+    "datum": "2026-10-18",
     "karta": [
       {
-        "ram": 2,
+        "ram": 3,
         "fran": 1,
         "till": 1
       },
       {
-        "ram": 5,
+        "ram": 7,
         "fran": 2,
         "till": 2
       },
       {
-        "ram": 8,
+        "ram": 11,
         "fran": 3,
         "till": 3
       },
       {
-        "ram": 11,
+        "ram": 15,
         "fran": 4,
         "till": 4
       },
       {
-        "ram": 14,
+        "ram": 19,
         "fran": 5,
         "till": 5
       },
       {
-        "ram": 17,
+        "ram": 23,
         "fran": 6,
         "till": 6
       },
       {
-        "ram": 20,
+        "ram": 27,
         "fran": 7,
         "till": 7
       },
       {
-        "ram": 23,
+        "ram": 31,
         "fran": 8,
         "till": 8
       },
       {
-        "ram": 26,
+        "ram": 35,
         "fran": 9,
         "till": 9
       },
       {
-        "ram": 29,
+        "ram": 39,
         "fran": 10,
         "till": 10
       }
     ]
   },
   "problemlosning-i-grupp-problem-bas-med-lararens-sida": {
-    "word": "467d82aac4c3b7f4971babb3023af9380208cdbd8706f7cbe015076ec84ebf9d",
-    "pdf": "711312c714872088e2ff7b154f8191b6cb7cc9254c779327cd8e85d4e869e35b",
-    "sidor": 31,
-    "kB": 1175,
-    "datum": "2026-10-13",
+    "word": "9170773e87482035b0bb467c6b891bebff60285299364a4299a84981953a9a77",
+    "pdf": "9ced3aaf9fa7ea4a306d023af4db72619b28c7015c08699d6845cea91ae7ebf1",
+    "sidor": 41,
+    "kB": 1319,
+    "datum": "2026-10-18",
     "karta": [
       {
-        "ram": 0,
+        "ram": 1,
         "fran": 1,
         "till": 1
       },
       {
-        "ram": 1,
+        "ram": 2,
         "fran": 2,
         "till": 2
       },
       {
-        "ram": 2,
+        "ram": 3,
         "fran": 3,
         "till": 3
       },
       {
-        "ram": 3,
+        "ram": 4,
         "fran": 4,
         "till": 4
       },
       {
-        "ram": 4,
+        "ram": 5,
         "fran": 5,
         "till": 5
       },
       {
-        "ram": 5,
+        "ram": 6,
         "fran": 6,
         "till": 6
       },
       {
-        "ram": 6,
+        "ram": 7,
         "fran": 7,
         "till": 7
       },
       {
-        "ram": 7,
+        "ram": 8,
         "fran": 8,
         "till": 8
       },
       {
-        "ram": 8,
+        "ram": 9,
         "fran": 9,
         "till": 9
       },
       {
-        "ram": 9,
+        "ram": 10,
         "fran": 10,
         "till": 10
       },
       {
-        "ram": 10,
+        "ram": 11,
         "fran": 11,
         "till": 11
       },
       {
-        "ram": 11,
+        "ram": 12,
         "fran": 12,
         "till": 12
       },
       {
-        "ram": 12,
+        "ram": 13,
         "fran": 13,
         "till": 13
       },
       {
-        "ram": 13,
+        "ram": 14,
         "fran": 14,
         "till": 14
       },
       {
-        "ram": 14,
+        "ram": 15,
         "fran": 15,
         "till": 15
       },
       {
-        "ram": 15,
+        "ram": 16,
         "fran": 16,
         "till": 16
       },
       {
-        "ram": 16,
+        "ram": 17,
         "fran": 17,
         "till": 17
       },
       {
-        "ram": 17,
+        "ram": 18,
         "fran": 18,
         "till": 18
       },
       {
-        "ram": 18,
+        "ram": 19,
         "fran": 19,
         "till": 19
       },
       {
-        "ram": 19,
+        "ram": 20,
         "fran": 20,
         "till": 20
       },
       {
-        "ram": 20,
+        "ram": 21,
         "fran": 21,
         "till": 21
       },
       {
-        "ram": 21,
+        "ram": 22,
         "fran": 22,
         "till": 22
       },
       {
-        "ram": 22,
+        "ram": 23,
         "fran": 23,
         "till": 23
       },
       {
-        "ram": 23,
+        "ram": 24,
         "fran": 24,
         "till": 24
       },
       {
-        "ram": 24,
+        "ram": 25,
         "fran": 25,
         "till": 25
       },
       {
-        "ram": 25,
+        "ram": 26,
         "fran": 26,
         "till": 26
       },
       {
-        "ram": 26,
+        "ram": 27,
         "fran": 27,
         "till": 27
       },
       {
-        "ram": 27,
+        "ram": 28,
         "fran": 28,
         "till": 28
       },
       {
-        "ram": 28,
+        "ram": 29,
         "fran": 29,
         "till": 29
       },
       {
-        "ram": 29,
+        "ram": 30,
         "fran": 30,
         "till": 30
       },
       {
-        "ram": 30,
+        "ram": 31,
         "fran": 31,
         "till": 31
+      },
+      {
+        "ram": 32,
+        "fran": 32,
+        "till": 32
+      },
+      {
+        "ram": 33,
+        "fran": 33,
+        "till": 33
+      },
+      {
+        "ram": 34,
+        "fran": 34,
+        "till": 34
+      },
+      {
+        "ram": 35,
+        "fran": 35,
+        "till": 35
+      },
+      {
+        "ram": 36,
+        "fran": 36,
+        "till": 36
+      },
+      {
+        "ram": 37,
+        "fran": 37,
+        "till": 37
+      },
+      {
+        "ram": 38,
+        "fran": 38,
+        "till": 38
+      },
+      {
+        "ram": 39,
+        "fran": 39,
+        "till": 39
+      },
+      {
+        "ram": 40,
+        "fran": 40,
+        "till": 40
+      },
+      {
+        "ram": 41,
+        "fran": 41,
+        "till": 41
       }
     ]
   },
   "problemlosning-i-grupp-problem-medel": {
-    "word": "e4e3a44010fd463901917ea5f6f8e67c1750a691e5368d121c207dffc4cb517e",
-    "pdf": "f730e5ac476359e1c21aeedddd46acc1bee13a1bc6fdbbf4acde49502ac4e8c4",
+    "word": "4892f70f6fd2dbb394a6ef841261e3da2c9af633c6530d4ca8d8f9068493007d",
+    "pdf": "37d913d1126c11ce4d8a6e31e2952a0459a9994c7f7d689c28611397ade3ed8f",
     "sidor": 10,
-    "kB": 202,
-    "datum": "2026-10-13",
+    "kB": 201,
+    "datum": "2026-10-18",
     "karta": [
-      {
-        "ram": 33,
-        "fran": 1,
-        "till": 1
-      },
-      {
-        "ram": 36,
-        "fran": 2,
-        "till": 2
-      },
-      {
-        "ram": 39,
-        "fran": 3,
-        "till": 3
-      },
-      {
-        "ram": 42,
-        "fran": 4,
-        "till": 4
-      },
-      {
-        "ram": 45,
-        "fran": 5,
-        "till": 5
-      },
-      {
-        "ram": 48,
-        "fran": 6,
-        "till": 6
-      },
-      {
-        "ram": 51,
-        "fran": 7,
-        "till": 7
-      },
-      {
-        "ram": 54,
-        "fran": 8,
-        "till": 8
-      },
-      {
-        "ram": 57,
-        "fran": 9,
-        "till": 9
-      },
-      {
-        "ram": 60,
-        "fran": 10,
-        "till": 10
-      }
-    ]
-  },
-  "problemlosning-i-grupp-problem-medel-med-lararens-sida": {
-    "word": "eb4c3a26bb339fac6b2f47e33d86949caf08204b6126f3b5c8772ee8ab211610",
-    "pdf": "cf59d9856fd8f8b24899f494f5dce0d00238fbd059c8ee68d1adcb4e3acb9597",
-    "sidor": 31,
-    "kB": 1257,
-    "datum": "2026-10-13",
-    "karta": [
-      {
-        "ram": 31,
-        "fran": 1,
-        "till": 1
-      },
-      {
-        "ram": 32,
-        "fran": 2,
-        "till": 2
-      },
-      {
-        "ram": 33,
-        "fran": 3,
-        "till": 3
-      },
-      {
-        "ram": 34,
-        "fran": 4,
-        "till": 4
-      },
-      {
-        "ram": 35,
-        "fran": 5,
-        "till": 5
-      },
-      {
-        "ram": 36,
-        "fran": 6,
-        "till": 6
-      },
-      {
-        "ram": 37,
-        "fran": 7,
-        "till": 7
-      },
-      {
-        "ram": 38,
-        "fran": 8,
-        "till": 8
-      },
-      {
-        "ram": 39,
-        "fran": 9,
-        "till": 9
-      },
-      {
-        "ram": 40,
-        "fran": 10,
-        "till": 10
-      },
-      {
-        "ram": 41,
-        "fran": 11,
-        "till": 11
-      },
-      {
-        "ram": 42,
-        "fran": 12,
-        "till": 12
-      },
-      {
-        "ram": 43,
-        "fran": 13,
-        "till": 13
-      },
       {
         "ram": 44,
-        "fran": 14,
-        "till": 14
-      },
-      {
-        "ram": 45,
-        "fran": 15,
-        "till": 15
-      },
-      {
-        "ram": 46,
-        "fran": 16,
-        "till": 16
-      },
-      {
-        "ram": 47,
-        "fran": 17,
-        "till": 17
+        "fran": 1,
+        "till": 1
       },
       {
         "ram": 48,
-        "fran": 18,
-        "till": 18
-      },
-      {
-        "ram": 49,
-        "fran": 19,
-        "till": 19
-      },
-      {
-        "ram": 50,
-        "fran": 20,
-        "till": 20
-      },
-      {
-        "ram": 51,
-        "fran": 21,
-        "till": 21
+        "fran": 2,
+        "till": 2
       },
       {
         "ram": 52,
-        "fran": 22,
-        "till": 22
-      },
-      {
-        "ram": 53,
-        "fran": 23,
-        "till": 23
-      },
-      {
-        "ram": 54,
-        "fran": 24,
-        "till": 24
-      },
-      {
-        "ram": 55,
-        "fran": 25,
-        "till": 25
+        "fran": 3,
+        "till": 3
       },
       {
         "ram": 56,
-        "fran": 26,
-        "till": 26
-      },
-      {
-        "ram": 57,
-        "fran": 27,
-        "till": 27
-      },
-      {
-        "ram": 58,
-        "fran": 28,
-        "till": 28
-      },
-      {
-        "ram": 59,
-        "fran": 29,
-        "till": 29
+        "fran": 4,
+        "till": 4
       },
       {
         "ram": 60,
-        "fran": 30,
-        "till": 30
-      },
-      {
-        "ram": 61,
-        "fran": 31,
-        "till": 31
-      }
-    ]
-  },
-  "problemlosning-i-grupp-problem-avancerat": {
-    "word": "01753a1050fb6b5a1106705ce0c82625857d0bd9ee3fb1a7b87aa674e9e5bee2",
-    "pdf": "8316195c3f2014760b6abd804a8256269760dc18e9c0fc896f23044e74ccd6b0",
-    "sidor": 10,
-    "kB": 205,
-    "datum": "2026-10-13",
-    "karta": [
-      {
-        "ram": 64,
-        "fran": 1,
-        "till": 1
-      },
-      {
-        "ram": 67,
-        "fran": 2,
-        "till": 2
-      },
-      {
-        "ram": 70,
-        "fran": 3,
-        "till": 3
-      },
-      {
-        "ram": 73,
-        "fran": 4,
-        "till": 4
-      },
-      {
-        "ram": 76,
         "fran": 5,
         "till": 5
       },
       {
-        "ram": 79,
-        "fran": 6,
-        "till": 6
-      },
-      {
-        "ram": 82,
-        "fran": 7,
-        "till": 7
-      },
-      {
-        "ram": 85,
-        "fran": 8,
-        "till": 8
-      },
-      {
-        "ram": 88,
-        "fran": 9,
-        "till": 9
-      },
-      {
-        "ram": 91,
-        "fran": 10,
-        "till": 10
-      }
-    ]
-  },
-  "problemlosning-i-grupp-problem-avancerat-med-lararens-sida": {
-    "word": "0abb7055017ce0ebb9bcaf3d4ae2cf04625d7b74ae3dc8d45580e384b826ff37",
-    "pdf": "185582271ab98d42cc93b4c53c4041c1553b99d0a1bf2872d20d7f215f61ab4c",
-    "sidor": 31,
-    "kB": 1235,
-    "datum": "2026-10-13",
-    "karta": [
-      {
-        "ram": 62,
-        "fran": 1,
-        "till": 1
-      },
-      {
-        "ram": 63,
-        "fran": 2,
-        "till": 2
-      },
-      {
         "ram": 64,
-        "fran": 3,
-        "till": 3
-      },
-      {
-        "ram": 65,
-        "fran": 4,
-        "till": 4
-      },
-      {
-        "ram": 66,
-        "fran": 5,
-        "till": 5
-      },
-      {
-        "ram": 67,
         "fran": 6,
         "till": 6
       },
@@ -1180,124 +1098,506 @@
         "till": 7
       },
       {
-        "ram": 69,
+        "ram": 72,
         "fran": 8,
         "till": 8
       },
       {
-        "ram": 70,
+        "ram": 76,
         "fran": 9,
         "till": 9
       },
       {
-        "ram": 71,
+        "ram": 80,
+        "fran": 10,
+        "till": 10
+      }
+    ]
+  },
+  "problemlosning-i-grupp-problem-medel-med-lararens-sida": {
+    "word": "f32eedc4d472ed5737d9169068a6eeecd88640c5f43a8ac8350975fe60923239",
+    "pdf": "1d13c62a9cd138fea2db131ce0e3632d8895cafbd02799d5b5c40b4a8bbae947",
+    "sidor": 41,
+    "kB": 1402,
+    "datum": "2026-10-18",
+    "karta": [
+      {
+        "ram": 42,
+        "fran": 1,
+        "till": 1
+      },
+      {
+        "ram": 43,
+        "fran": 2,
+        "till": 2
+      },
+      {
+        "ram": 44,
+        "fran": 3,
+        "till": 3
+      },
+      {
+        "ram": 45,
+        "fran": 4,
+        "till": 4
+      },
+      {
+        "ram": 46,
+        "fran": 5,
+        "till": 5
+      },
+      {
+        "ram": 47,
+        "fran": 6,
+        "till": 6
+      },
+      {
+        "ram": 48,
+        "fran": 7,
+        "till": 7
+      },
+      {
+        "ram": 49,
+        "fran": 8,
+        "till": 8
+      },
+      {
+        "ram": 50,
+        "fran": 9,
+        "till": 9
+      },
+      {
+        "ram": 51,
         "fran": 10,
         "till": 10
       },
       {
-        "ram": 72,
+        "ram": 52,
         "fran": 11,
         "till": 11
       },
       {
-        "ram": 73,
+        "ram": 53,
         "fran": 12,
         "till": 12
       },
       {
-        "ram": 74,
+        "ram": 54,
         "fran": 13,
         "till": 13
       },
       {
-        "ram": 75,
+        "ram": 55,
         "fran": 14,
         "till": 14
       },
       {
-        "ram": 76,
+        "ram": 56,
         "fran": 15,
         "till": 15
       },
       {
-        "ram": 77,
+        "ram": 57,
         "fran": 16,
         "till": 16
       },
       {
-        "ram": 78,
+        "ram": 58,
         "fran": 17,
         "till": 17
       },
       {
-        "ram": 79,
+        "ram": 59,
         "fran": 18,
         "till": 18
       },
       {
-        "ram": 80,
+        "ram": 60,
         "fran": 19,
         "till": 19
       },
       {
-        "ram": 81,
+        "ram": 61,
         "fran": 20,
         "till": 20
       },
       {
-        "ram": 82,
+        "ram": 62,
         "fran": 21,
         "till": 21
       },
       {
-        "ram": 83,
+        "ram": 63,
         "fran": 22,
         "till": 22
       },
       {
-        "ram": 84,
+        "ram": 64,
         "fran": 23,
         "till": 23
       },
       {
-        "ram": 85,
+        "ram": 65,
         "fran": 24,
         "till": 24
       },
       {
-        "ram": 86,
+        "ram": 66,
         "fran": 25,
         "till": 25
       },
       {
-        "ram": 87,
+        "ram": 67,
         "fran": 26,
         "till": 26
       },
       {
-        "ram": 88,
+        "ram": 68,
         "fran": 27,
         "till": 27
       },
       {
-        "ram": 89,
+        "ram": 69,
         "fran": 28,
         "till": 28
       },
       {
-        "ram": 90,
+        "ram": 70,
         "fran": 29,
         "till": 29
       },
       {
-        "ram": 91,
+        "ram": 71,
         "fran": 30,
         "till": 30
       },
       {
-        "ram": 92,
+        "ram": 72,
         "fran": 31,
         "till": 31
+      },
+      {
+        "ram": 73,
+        "fran": 32,
+        "till": 32
+      },
+      {
+        "ram": 74,
+        "fran": 33,
+        "till": 33
+      },
+      {
+        "ram": 75,
+        "fran": 34,
+        "till": 34
+      },
+      {
+        "ram": 76,
+        "fran": 35,
+        "till": 35
+      },
+      {
+        "ram": 77,
+        "fran": 36,
+        "till": 36
+      },
+      {
+        "ram": 78,
+        "fran": 37,
+        "till": 37
+      },
+      {
+        "ram": 79,
+        "fran": 38,
+        "till": 38
+      },
+      {
+        "ram": 80,
+        "fran": 39,
+        "till": 39
+      },
+      {
+        "ram": 81,
+        "fran": 40,
+        "till": 40
+      },
+      {
+        "ram": 82,
+        "fran": 41,
+        "till": 41
+      }
+    ]
+  },
+  "problemlosning-i-grupp-problem-avancerat": {
+    "word": "3045e2276689a5ef99395e8fb80be5fabb9f8342e5fabffa933fab9e369e6f06",
+    "pdf": "96e6c8d3eb4106f81ec3d1a4c05195e5073b001be264014adafe2dcc27cebf02",
+    "sidor": 10,
+    "kB": 205,
+    "datum": "2026-10-18",
+    "karta": [
+      {
+        "ram": 85,
+        "fran": 1,
+        "till": 1
+      },
+      {
+        "ram": 89,
+        "fran": 2,
+        "till": 2
+      },
+      {
+        "ram": 93,
+        "fran": 3,
+        "till": 3
+      },
+      {
+        "ram": 97,
+        "fran": 4,
+        "till": 4
+      },
+      {
+        "ram": 101,
+        "fran": 5,
+        "till": 5
+      },
+      {
+        "ram": 105,
+        "fran": 6,
+        "till": 6
+      },
+      {
+        "ram": 109,
+        "fran": 7,
+        "till": 7
+      },
+      {
+        "ram": 113,
+        "fran": 8,
+        "till": 8
+      },
+      {
+        "ram": 117,
+        "fran": 9,
+        "till": 9
+      },
+      {
+        "ram": 121,
+        "fran": 10,
+        "till": 10
+      }
+    ]
+  },
+  "problemlosning-i-grupp-problem-avancerat-med-lararens-sida": {
+    "word": "1483e8fce1a6c88c1184d8840491f24a8989659bf7442aca2b458730dc6a69d4",
+    "pdf": "8dd987202dda83d1c32c34ea8590e4b752904c87393555093f2d05f8a56df294",
+    "sidor": 41,
+    "kB": 1381,
+    "datum": "2026-10-18",
+    "karta": [
+      {
+        "ram": 83,
+        "fran": 1,
+        "till": 1
+      },
+      {
+        "ram": 84,
+        "fran": 2,
+        "till": 2
+      },
+      {
+        "ram": 85,
+        "fran": 3,
+        "till": 3
+      },
+      {
+        "ram": 86,
+        "fran": 4,
+        "till": 4
+      },
+      {
+        "ram": 87,
+        "fran": 5,
+        "till": 5
+      },
+      {
+        "ram": 88,
+        "fran": 6,
+        "till": 6
+      },
+      {
+        "ram": 89,
+        "fran": 7,
+        "till": 7
+      },
+      {
+        "ram": 90,
+        "fran": 8,
+        "till": 8
+      },
+      {
+        "ram": 91,
+        "fran": 9,
+        "till": 9
+      },
+      {
+        "ram": 92,
+        "fran": 10,
+        "till": 10
+      },
+      {
+        "ram": 93,
+        "fran": 11,
+        "till": 11
+      },
+      {
+        "ram": 94,
+        "fran": 12,
+        "till": 12
+      },
+      {
+        "ram": 95,
+        "fran": 13,
+        "till": 13
+      },
+      {
+        "ram": 96,
+        "fran": 14,
+        "till": 14
+      },
+      {
+        "ram": 97,
+        "fran": 15,
+        "till": 15
+      },
+      {
+        "ram": 98,
+        "fran": 16,
+        "till": 16
+      },
+      {
+        "ram": 99,
+        "fran": 17,
+        "till": 17
+      },
+      {
+        "ram": 100,
+        "fran": 18,
+        "till": 18
+      },
+      {
+        "ram": 101,
+        "fran": 19,
+        "till": 19
+      },
+      {
+        "ram": 102,
+        "fran": 20,
+        "till": 20
+      },
+      {
+        "ram": 103,
+        "fran": 21,
+        "till": 21
+      },
+      {
+        "ram": 104,
+        "fran": 22,
+        "till": 22
+      },
+      {
+        "ram": 105,
+        "fran": 23,
+        "till": 23
+      },
+      {
+        "ram": 106,
+        "fran": 24,
+        "till": 24
+      },
+      {
+        "ram": 107,
+        "fran": 25,
+        "till": 25
+      },
+      {
+        "ram": 108,
+        "fran": 26,
+        "till": 26
+      },
+      {
+        "ram": 109,
+        "fran": 27,
+        "till": 27
+      },
+      {
+        "ram": 110,
+        "fran": 28,
+        "till": 28
+      },
+      {
+        "ram": 111,
+        "fran": 29,
+        "till": 29
+      },
+      {
+        "ram": 112,
+        "fran": 30,
+        "till": 30
+      },
+      {
+        "ram": 113,
+        "fran": 31,
+        "till": 31
+      },
+      {
+        "ram": 114,
+        "fran": 32,
+        "till": 32
+      },
+      {
+        "ram": 115,
+        "fran": 33,
+        "till": 33
+      },
+      {
+        "ram": 116,
+        "fran": 34,
+        "till": 34
+      },
+      {
+        "ram": 117,
+        "fran": 35,
+        "till": 35
+      },
+      {
+        "ram": 118,
+        "fran": 36,
+        "till": 36
+      },
+      {
+        "ram": 119,
+        "fran": 37,
+        "till": 37
+      },
+      {
+        "ram": 120,
+        "fran": 38,
+        "till": 38
+      },
+      {
+        "ram": 121,
+        "fran": 39,
+        "till": 39
+      },
+      {
+        "ram": 122,
+        "fran": 40,
+        "till": 40
+      },
+      {
+        "ram": 123,
+        "fran": 41,
+        "till": 41
       }
     ]
   },
@@ -4054,17 +4354,17 @@
     "datum": "2026-10-18"
   },
   "problemlosning-i-grupp": {
-    "word": "81c41de09c7298b64e35bc9cd6632634db7850b96981102724dac659176ce167",
-    "pdf": "8394ae5cf8db3c759f2a272c7ac40b3bc094df0cb2839cd69b3b440e91ee8206",
-    "sidor": 130,
-    "kB": 3428,
+    "word": "ce510a4a78293f008db0b578958d6c51785efb9c3f0d273cadf7bf56da0044a4",
+    "pdf": "66463f7711721e21e1be2f344a098fa3c1db133117fbe63eed2e4b1991a43237",
+    "sidor": 160,
+    "kB": 3715,
     "datum": "2026-10-18"
   },
   "problemlosning-i-grupp-metoden": {
-    "word": "eb5d08335fc9d7b1403504e24135493e27ee44d8a28be5a46863dc9d8305983e",
-    "pdf": "cec8c62733e7fa0a14cdd7cca1ae758387adf521df8e656ae81cc729ca0aa6d0",
+    "word": "5d6595cc18ce0e2b2e5ac682993f95dea004ec9a69b200aa6879e99cb9ddf6d4",
+    "pdf": "8ad776e0f335c79af03f754988639b0ecaf53435c9ab2cf5cafb697b0e2b8700",
     "sidor": 11,
-    "kB": 558,
+    "kB": 559,
     "datum": "2026-10-18"
   },
   "seriesamtal": {
@@ -4675,5 +4975,641 @@
     "sidor": 1,
     "kB": 88,
     "datum": "2026-10-17"
+  },
+  "problemlosning-i-grupp-problem-alla-med-losningsforslag": {
+    "word": "c3d2aee216f01bdd6b36bb566d9a1eef3dd81ab5c82e4d70c6f2e5ecd2c075da",
+    "pdf": "acc1fd5ba3b69910f51660d8538db3249776161b5f588c4eb7d92d7964ac24fc",
+    "sidor": 60,
+    "kB": 1677,
+    "datum": "2026-10-18",
+    "karta": [
+      {
+        "ram": 3,
+        "fran": 1,
+        "till": 1
+      },
+      {
+        "ram": 5,
+        "fran": 2,
+        "till": 2
+      },
+      {
+        "ram": 7,
+        "fran": 3,
+        "till": 3
+      },
+      {
+        "ram": 9,
+        "fran": 4,
+        "till": 4
+      },
+      {
+        "ram": 11,
+        "fran": 5,
+        "till": 5
+      },
+      {
+        "ram": 13,
+        "fran": 6,
+        "till": 6
+      },
+      {
+        "ram": 15,
+        "fran": 7,
+        "till": 7
+      },
+      {
+        "ram": 17,
+        "fran": 8,
+        "till": 8
+      },
+      {
+        "ram": 19,
+        "fran": 9,
+        "till": 9
+      },
+      {
+        "ram": 21,
+        "fran": 10,
+        "till": 10
+      },
+      {
+        "ram": 23,
+        "fran": 11,
+        "till": 11
+      },
+      {
+        "ram": 25,
+        "fran": 12,
+        "till": 12
+      },
+      {
+        "ram": 27,
+        "fran": 13,
+        "till": 13
+      },
+      {
+        "ram": 29,
+        "fran": 14,
+        "till": 14
+      },
+      {
+        "ram": 31,
+        "fran": 15,
+        "till": 15
+      },
+      {
+        "ram": 33,
+        "fran": 16,
+        "till": 16
+      },
+      {
+        "ram": 35,
+        "fran": 17,
+        "till": 17
+      },
+      {
+        "ram": 37,
+        "fran": 18,
+        "till": 18
+      },
+      {
+        "ram": 39,
+        "fran": 19,
+        "till": 19
+      },
+      {
+        "ram": 41,
+        "fran": 20,
+        "till": 20
+      },
+      {
+        "ram": 44,
+        "fran": 21,
+        "till": 21
+      },
+      {
+        "ram": 46,
+        "fran": 22,
+        "till": 22
+      },
+      {
+        "ram": 48,
+        "fran": 23,
+        "till": 23
+      },
+      {
+        "ram": 50,
+        "fran": 24,
+        "till": 24
+      },
+      {
+        "ram": 52,
+        "fran": 25,
+        "till": 25
+      },
+      {
+        "ram": 54,
+        "fran": 26,
+        "till": 26
+      },
+      {
+        "ram": 56,
+        "fran": 27,
+        "till": 27
+      },
+      {
+        "ram": 58,
+        "fran": 28,
+        "till": 28
+      },
+      {
+        "ram": 60,
+        "fran": 29,
+        "till": 29
+      },
+      {
+        "ram": 62,
+        "fran": 30,
+        "till": 30
+      },
+      {
+        "ram": 64,
+        "fran": 31,
+        "till": 31
+      },
+      {
+        "ram": 66,
+        "fran": 32,
+        "till": 32
+      },
+      {
+        "ram": 68,
+        "fran": 33,
+        "till": 33
+      },
+      {
+        "ram": 70,
+        "fran": 34,
+        "till": 34
+      },
+      {
+        "ram": 72,
+        "fran": 35,
+        "till": 35
+      },
+      {
+        "ram": 74,
+        "fran": 36,
+        "till": 36
+      },
+      {
+        "ram": 76,
+        "fran": 37,
+        "till": 37
+      },
+      {
+        "ram": 78,
+        "fran": 38,
+        "till": 38
+      },
+      {
+        "ram": 80,
+        "fran": 39,
+        "till": 39
+      },
+      {
+        "ram": 82,
+        "fran": 40,
+        "till": 40
+      },
+      {
+        "ram": 85,
+        "fran": 41,
+        "till": 41
+      },
+      {
+        "ram": 87,
+        "fran": 42,
+        "till": 42
+      },
+      {
+        "ram": 89,
+        "fran": 43,
+        "till": 43
+      },
+      {
+        "ram": 91,
+        "fran": 44,
+        "till": 44
+      },
+      {
+        "ram": 93,
+        "fran": 45,
+        "till": 45
+      },
+      {
+        "ram": 95,
+        "fran": 46,
+        "till": 46
+      },
+      {
+        "ram": 97,
+        "fran": 47,
+        "till": 47
+      },
+      {
+        "ram": 99,
+        "fran": 48,
+        "till": 48
+      },
+      {
+        "ram": 101,
+        "fran": 49,
+        "till": 49
+      },
+      {
+        "ram": 103,
+        "fran": 50,
+        "till": 50
+      },
+      {
+        "ram": 105,
+        "fran": 51,
+        "till": 51
+      },
+      {
+        "ram": 107,
+        "fran": 52,
+        "till": 52
+      },
+      {
+        "ram": 109,
+        "fran": 53,
+        "till": 53
+      },
+      {
+        "ram": 111,
+        "fran": 54,
+        "till": 54
+      },
+      {
+        "ram": 113,
+        "fran": 55,
+        "till": 55
+      },
+      {
+        "ram": 115,
+        "fran": 56,
+        "till": 56
+      },
+      {
+        "ram": 117,
+        "fran": 57,
+        "till": 57
+      },
+      {
+        "ram": 119,
+        "fran": 58,
+        "till": 58
+      },
+      {
+        "ram": 121,
+        "fran": 59,
+        "till": 59
+      },
+      {
+        "ram": 123,
+        "fran": 60,
+        "till": 60
+      }
+    ]
+  },
+  "problemlosning-i-grupp-problem-bas-med-losningsforslag": {
+    "word": "b219e314213aa82bc9869533d939db6b891c3a53408994ca03997e60ca20c698",
+    "pdf": "70c89a5c78fe15b62c2f907cad1f756b9a8e2599604215243168a1044ecc6934",
+    "sidor": 20,
+    "kB": 668,
+    "datum": "2026-10-18",
+    "karta": [
+      {
+        "ram": 3,
+        "fran": 1,
+        "till": 1
+      },
+      {
+        "ram": 5,
+        "fran": 2,
+        "till": 2
+      },
+      {
+        "ram": 7,
+        "fran": 3,
+        "till": 3
+      },
+      {
+        "ram": 9,
+        "fran": 4,
+        "till": 4
+      },
+      {
+        "ram": 11,
+        "fran": 5,
+        "till": 5
+      },
+      {
+        "ram": 13,
+        "fran": 6,
+        "till": 6
+      },
+      {
+        "ram": 15,
+        "fran": 7,
+        "till": 7
+      },
+      {
+        "ram": 17,
+        "fran": 8,
+        "till": 8
+      },
+      {
+        "ram": 19,
+        "fran": 9,
+        "till": 9
+      },
+      {
+        "ram": 21,
+        "fran": 10,
+        "till": 10
+      },
+      {
+        "ram": 23,
+        "fran": 11,
+        "till": 11
+      },
+      {
+        "ram": 25,
+        "fran": 12,
+        "till": 12
+      },
+      {
+        "ram": 27,
+        "fran": 13,
+        "till": 13
+      },
+      {
+        "ram": 29,
+        "fran": 14,
+        "till": 14
+      },
+      {
+        "ram": 31,
+        "fran": 15,
+        "till": 15
+      },
+      {
+        "ram": 33,
+        "fran": 16,
+        "till": 16
+      },
+      {
+        "ram": 35,
+        "fran": 17,
+        "till": 17
+      },
+      {
+        "ram": 37,
+        "fran": 18,
+        "till": 18
+      },
+      {
+        "ram": 39,
+        "fran": 19,
+        "till": 19
+      },
+      {
+        "ram": 41,
+        "fran": 20,
+        "till": 20
+      }
+    ]
+  },
+  "problemlosning-i-grupp-problem-medel-med-losningsforslag": {
+    "word": "26f11792b32c21ca8bf8104f4e76fc9f436f2689337b8a27c2c582399ce7e6f7",
+    "pdf": "aea1d8d8819e3b5c7584519e9a523bb63a4d8e8feed7414c84adc3663473db91",
+    "sidor": 20,
+    "kB": 714,
+    "datum": "2026-10-18",
+    "karta": [
+      {
+        "ram": 44,
+        "fran": 1,
+        "till": 1
+      },
+      {
+        "ram": 46,
+        "fran": 2,
+        "till": 2
+      },
+      {
+        "ram": 48,
+        "fran": 3,
+        "till": 3
+      },
+      {
+        "ram": 50,
+        "fran": 4,
+        "till": 4
+      },
+      {
+        "ram": 52,
+        "fran": 5,
+        "till": 5
+      },
+      {
+        "ram": 54,
+        "fran": 6,
+        "till": 6
+      },
+      {
+        "ram": 56,
+        "fran": 7,
+        "till": 7
+      },
+      {
+        "ram": 58,
+        "fran": 8,
+        "till": 8
+      },
+      {
+        "ram": 60,
+        "fran": 9,
+        "till": 9
+      },
+      {
+        "ram": 62,
+        "fran": 10,
+        "till": 10
+      },
+      {
+        "ram": 64,
+        "fran": 11,
+        "till": 11
+      },
+      {
+        "ram": 66,
+        "fran": 12,
+        "till": 12
+      },
+      {
+        "ram": 68,
+        "fran": 13,
+        "till": 13
+      },
+      {
+        "ram": 70,
+        "fran": 14,
+        "till": 14
+      },
+      {
+        "ram": 72,
+        "fran": 15,
+        "till": 15
+      },
+      {
+        "ram": 74,
+        "fran": 16,
+        "till": 16
+      },
+      {
+        "ram": 76,
+        "fran": 17,
+        "till": 17
+      },
+      {
+        "ram": 78,
+        "fran": 18,
+        "till": 18
+      },
+      {
+        "ram": 80,
+        "fran": 19,
+        "till": 19
+      },
+      {
+        "ram": 82,
+        "fran": 20,
+        "till": 20
+      }
+    ]
+  },
+  "problemlosning-i-grupp-problem-avancerat-med-losningsforslag": {
+    "word": "9e9aef431e7f837a23b078890d11c9af02ad93161ed352b1f33f2144564097cc",
+    "pdf": "c13766b97869055fe89213909a04d647e67606d6d0c57372142c352fbf203867",
+    "sidor": 20,
+    "kB": 704,
+    "datum": "2026-10-18",
+    "karta": [
+      {
+        "ram": 85,
+        "fran": 1,
+        "till": 1
+      },
+      {
+        "ram": 87,
+        "fran": 2,
+        "till": 2
+      },
+      {
+        "ram": 89,
+        "fran": 3,
+        "till": 3
+      },
+      {
+        "ram": 91,
+        "fran": 4,
+        "till": 4
+      },
+      {
+        "ram": 93,
+        "fran": 5,
+        "till": 5
+      },
+      {
+        "ram": 95,
+        "fran": 6,
+        "till": 6
+      },
+      {
+        "ram": 97,
+        "fran": 7,
+        "till": 7
+      },
+      {
+        "ram": 99,
+        "fran": 8,
+        "till": 8
+      },
+      {
+        "ram": 101,
+        "fran": 9,
+        "till": 9
+      },
+      {
+        "ram": 103,
+        "fran": 10,
+        "till": 10
+      },
+      {
+        "ram": 105,
+        "fran": 11,
+        "till": 11
+      },
+      {
+        "ram": 107,
+        "fran": 12,
+        "till": 12
+      },
+      {
+        "ram": 109,
+        "fran": 13,
+        "till": 13
+      },
+      {
+        "ram": 111,
+        "fran": 14,
+        "till": 14
+      },
+      {
+        "ram": 113,
+        "fran": 15,
+        "till": 15
+      },
+      {
+        "ram": 115,
+        "fran": 16,
+        "till": 16
+      },
+      {
+        "ram": 117,
+        "fran": 17,
+        "till": 17
+      },
+      {
+        "ram": 119,
+        "fran": 18,
+        "till": 18
+      },
+      {
+        "ram": 121,
+        "fran": 19,
+        "till": 19
+      },
+      {
+        "ram": 123,
+        "fran": 20,
+        "till": 20
+      }
+    ]
   }
 }

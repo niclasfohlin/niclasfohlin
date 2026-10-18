@@ -275,7 +275,7 @@ exempel:
     rubrik: Ljusstakarna, Bas, problem 5
     text: På ett slott finns 29 ljusstakar. Några av dem har plats för fem ljus, och några har plats för sju ljus. Sammanlagt behövs 187 ljus. Hur många ljusstakar finns det av varje sort?
   text:
-    - "Ebba, Ali, Noor och Elias går i åk 5 och arbetar på nivån Bas, och det är vecka 2. Läraren vet att eleverna kan fastna i vad de två okända sakerna är. Hen läser problemet högt och pekar på bilden med den femarmade och den sjuarmade staken. Paren berättar problemet för varandra, och sedan berättar Ebba för gruppen: ”Två sorters stakar, 187 ljus. Hur många av varje?” Läraren frågar: ”Hur många stakar är det?” Ebba tittar i texten: ”29.” Gruppen ringar in frågan, och läraren skriver på tavlan: vi vet att det finns 29 ljusstakar och att det behövs 187 ljus, och vi ska ta reda på hur många som har fem ljus och hur många som har sju ljus."
+    - "Ebba, Ali, Noor och Elias går i åk 5 och arbetar på nivån Bas, och det är vecka 2. Läraren vet att eleverna kan fastna i vad de två okända sakerna är. Hen läser problemet högt och pekar på bilden med den femarmade och den sjuarmade staken. Paren berättar problemet för varandra, och sedan berättar Ebba för gruppen: ”Två sorters stakar, 187 ljus. Hur många av varje?” Läraren frågar: ”Hur många stakar är det?” Ebba tittar i texten: ”29.” Gruppen ringar in frågan, och läraren skriver på tavlan: vi vet att det finns 29 ljusstakar och att det behövs 187 ljus, och vi ska ta reda på hur många som har fem ljus och hur många som har sju ljus."
     - "Sedan stannar läraren gruppen innan någon börjar räkna. ”Hur kan vi visa problemet så att vi ser det framför oss?” Eleverna tittar på kortet Våra sätt. Ebba och Ali vill pröva i en tabell, och Noor och Elias vill rita stakarna. Läraren väljer inte åt dem, men hjälper dem i gång: ”En tabell kan vara bra när vi behöver pröva olika antal. Vad kan rubrikerna vara?” Paren gissar hur många sjuarmade det är, och läraren skriver gissningarna under Vi tror."
     - "Paren skriver av tavlan och prövar. Ebba och Ali har prövat 10 sjuarmade, som gav 165 ljus, och 19 sjuarmade, som gav 183, och säger att det inte går. Läraren frågar: ”Vad har ni gjort hittills?” och sedan ”Varför gjorde ni så?” När paret har berättat säger läraren: ”Ni sa att 10 sjuarmade gav 165 ljus och 19 gav 183. Försök använda det!” Sedan går hen till Noor och Elias, som har ritat 29 stakar med fem ljus i varje. Halvvägs säger läraren två sätt som hen har sett, och paren byter penna."
     - "Efter knappt en kvart i par samlar läraren gruppen. Varje par får bladet Två lösningar med lösning B under ett papper, och gruppen säger vad eleven i lösning A gör från rad till rad. Sedan visar läraren lösning B, där eleven har tänkt: ”Om alla vore femarmade skulle det bli för få ljus.” Läraren frågar: ”Var syns det i båda lösningarna att en sjuarmad har två ljus mer än en femarmad?” Ebba och Ali visar sin tabell, som liknar A, och Noor och Elias sin teckning, som liknar B. Gruppen ser om gissningarna stämde. Sist skriver läraren ett svar från en annan grupp på tavlan, 26 sjuarmade och 1 femarmad, och Elias räknar: ”Bara 27 stakar.” Noor säger idén: ”Varje sjuarmad ger två ljus till, i tabellen och i teckningen.”"
@@ -750,11 +750,27 @@ pabordet:
 ramar:
   rubrik: Problemen
   text:
-    - "Problemen står nivå för nivå, och varje nivå börjar med en översikt över de tio problemen. Varje problem har tre sidor: lärarens sida, problemets sida med bilden och bladet Två lösningar. Sist står bladet Vår lösning, kortet Våra sätt och kartläggningen."
+    - "Problemen står nivå för nivå, och varje nivå börjar med en översikt över de tio problemen. Varje problem har lärarens sida, problemets sida med bilden, bladet Två lösningar och ett lösningsförslag, ett A4 som går att använda överallt där problemet används. Sist står bladet Vår lösning, kortet Våra sätt och kartläggningen."
   ramar:
+    - rubrik: "Lösningsförslagen: Visa och jämför lösningar"
+      text:
+        - Rutan står på varje lösningsförslag.
+      delar:
+        - rubrik: Rutan
+          falt:
+            - rubrik: Först
+              text: "Låt eleverna lösa problemet på sitt sätt. Fråga innan du visar: ”Hur tänkte ni?”"
+            - rubrik: Två sätt
+              text: Visa två lösningar bredvid varandra, A och B eller två elevers. Börja med det vanligaste, och täck det andra tills det första är förklarat.
+            - rubrik: Tankevurpan
+              text: Visa lösning C som en elevs på en annan skola, så att ingen i gruppen äger felet. Låt eleverna hitta tankevurpan, och ställ frågan bredvid C om de kör fast.
+            - rubrik: Tankarna bakom
+              text: Låt eleverna förklara med egna ord. Säg rätt eller fel först när gruppen har prövat svaret mot problemet.
+            - rubrik: Det gemensamma
+              text: Avsluta med det som är lika i lösningarna, idén, så att eleverna kan använda den igen.
     - rubrik: "Lärarens sidor: Bas"
       text:
-        - Här står de tio problemen på nivån Bas, som ligger nära åk 4–5, i den ordning gruppen tar dem.
+        - Här står de tio problemen på nivån Bas, som ligger nära åk 4–5, i den ordning gruppen tar dem. Varje problem har lärarens sida, problemets sida, bladet Två lösningar och ett lösningsförslag.
       oversikt:
         kolumner:
           - Problemet
@@ -848,8 +864,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Äpplena
           rader:
@@ -880,6 +896,33 @@ ramar:
             - - Varför räknar eleven i lösning B först de äpplen som är kvar?
             - - Var syns det i båda lösningarna att det Elsa tog är fyra lika delar?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja med 10 påsar och 100 äpplen, och varför?
+    - rubrik: "Lösningsförslag: Bas, problem 1, Äpplena"
+      text:
+        - Idén kommer ur Känguru 2026, Ecolier nr 11.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: 4 äpplen ur varje påse. Påsarna hade 5, 6, 7 och 7 äpplen.
+            - rubrik: Kontroll
+              text: 5 + 6 + 7 + 7 = 25, och 5 − 4 = 1, 6 − 4 = 2, 7 − 4 = 3.
+            - rubrik: Idén
+              text: Det Elsa tar ur påsarna är fyra lika delar.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: en tabell"
+              text: Eleven prövar 2, 3 och 4 ur varje påse och ser att summan växer med 4 från rad till rad.
+            - rubrik: "Lösning B: att räkna baklänges"
+              text: Eleven räknar först de 9 äpplen som är kvar och delar de 16 som Elsa tog i fyra lika delar.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                1 + 2 + 3 + 3 = 9
+                25 − 9 = 16
+                Svar: Elsa tog 16 ur varje påse.
+            - rubrik: Om lösning C
+              text: |-
+                16 är alla äpplen som Elsa tog ur de fyra påsarna, och den andra frågan saknar svar.
+                Fråga: ”Är 16 äpplen ur en påse eller ur alla fyra?”
     - rubrik: "Lärarens sida: Bas, problem 2, Fiskebodarna"
       text:
         - "Problemet handlar om ett mönster som växer, där varje ny bod tar fyra stickor till. Svaret är 25 stickor till 6 bodar och 81 till 20 bodar. Eleverna bygger, för in i en tabell och beskriver mönstret med ord. Material: tändstickor eller glasspinnar, 30 per par. Idén kommer ur NCM:s Strävorna 4B/5B, Fiskebodar."
@@ -919,8 +962,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Fiskebodarna
           rader:
@@ -951,6 +994,34 @@ ramar:
             - - Varför börjar eleven i lösning B med 1 sticka?
             - - Var syns det i båda lösningarna att varje ny bod tar 4 stickor till?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja för 99 bodar, och varför?
+    - rubrik: "Lösningsförslag: Bas, problem 2, Fiskebodarna"
+      text:
+        - Idén kommer ur NCM:s Strävorna 4B/5B, Fiskebodar.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: 25 stickor till 6 bodar och 81 stickor till 20 bodar.
+            - rubrik: Kontroll
+              text: 6 · 5 − 5 = 25 och 20 · 5 − 19 = 81, där 5 och 19 väggar delas.
+            - rubrik: Idén
+              text: Varje ny bod tar 4 stickor till, eftersom den delar en vägg med boden före.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: en tabell"
+              text: Eleven räknar stickorna till 1, 2 och 3 bodar och fortsätter tabellen med 4 till för varje bod.
+            - rubrik: "Lösning B: att se strukturen"
+              text: "Eleven ser den första väggen för sig och 4 stickor för varje bod: golvet, taket och väggen till höger."
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                En bod har 5 stickor.
+                6 · 5 = 30
+                20 · 5 = 100
+                Svar: 30 och 100 stickor.
+            - rubrik: Om lösning C
+              text: |-
+                Eleven glömmer att två bodar delar en vägg. Bilden med 3 bodar har 13 stickor, och 3 · 5 = 15.
+                Fråga: ”Var räknar eleven för många stickor?”
     - rubrik: "Lärarens sida: Bas, problem 3, Kexen"
       text:
         - "Problemet handlar om att dela lika när delarna är olika stora från början. Det är idén bakom medelvärdet. Svaret är 9 kex var, och från brickan får Omar 6, Saga 5 och Liam 4. Eleverna lägger ihop, delar lika och jämnar ut. Material: kuber eller kex, 32 per par. Idén kommer ur Känguru 2025, Ecolier nr 11."
@@ -990,8 +1061,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Kexen
           rader:
@@ -1022,6 +1093,33 @@ ramar:
             - - Varför räknar eleven i lösning B alla kexen, också de på faten?
             - - Var syns det i båda lösningarna att den som har minst får mest från brickan?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja med 10 barn, och varför?
+    - rubrik: "Lösningsförslag: Bas, problem 3, Kexen"
+      text:
+        - Idén kommer ur Känguru 2025, Ecolier nr 11.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: 9 kex var. Från brickan får Omar 6, Saga 5 och Liam 4.
+            - rubrik: Kontroll
+              text: 3 + 6 = 9, 4 + 5 = 9 och 5 + 4 = 9, och 6 + 5 + 4 = 15.
+            - rubrik: Idén
+              text: Den som har minst får mest från brickan, så att alla har 9.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: att jämna ut"
+              text: Eleven ger först Omar 2 och Saga 1, så att alla har 5, och delar sedan resten lika.
+            - rubrik: "Lösning B: att räkna alla kex"
+              text: Eleven lägger ihop alla 27 kex, delar med 3 och räknar hur många var och en saknar till 9.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                Brickan har 15 kex.
+                15 / 3 = 5
+                Svar: Alla får 5 från brickan.
+            - rubrik: Om lösning C
+              text: |-
+                Då har Omar 3 + 5 = 8 kex och Liam 5 + 5 = 10, så de har olika många.
+                Fråga: ”Ska alla få lika många, eller ha lika många till slut?”
     - rubrik: "Lärarens sida: Bas, problem 4, Chokladbollarna"
       text:
         - "Problemet handlar om proportionalitet: fler bollar kräver mer av allt, i samma förhållande. Svaret är 6 dl havregryn, 3 dl socker, 150 g smör och 3 msk kakao. Eleverna halverar receptet och lägger ihop, eller tar halva receptet tre gånger. Idén kommer ur Skolverkets Problembank för årskurs 4–6, Chokladbollar."
@@ -1061,8 +1159,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Chokladbollarna
           rader:
@@ -1092,6 +1190,34 @@ ramar:
             - - Varför tar eleven i lösning B varje mått gånger 3?
             - - Var syns satsen för 10 bollar i båda lösningarna?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja för 70 bollar, och varför?
+    - rubrik: "Lösningsförslag: Bas, problem 4, Chokladbollarna"
+      text:
+        - Idén kommer ur Skolverkets Problembank för årskurs 4–6, Chokladbollar.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: 6 dl havregryn, 3 dl socker, 150 g smör och 3 msk kakao.
+            - rubrik: Kontroll
+              text: 30 / 20 = 1,5 och 1,5 · 4 = 6, 1,5 · 2 = 3, 1,5 · 100 = 150.
+            - rubrik: Idén
+              text: Varje 10 bollar kräver en sats, alltså halva receptet, och 30 bollar är tre satser.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: en tabell"
+              text: Eleven halverar receptet till 10 bollar och lägger ihop raderna för 20 och 10 bollar.
+            - rubrik: "Lösning B: en sats, tre gånger"
+              text: Eleven ser halva receptet som en sats för 10 bollar och tar varje mått gånger 3.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                10 bollar till: 1 till av allt
+                4 + 1 = 5 och 2 + 1 = 3
+                100 + 1 = 101
+                Svar: 5 dl, 3 dl, 101 g, 3 msk
+            - rubrik: Om lösning C
+              text: |-
+                Socker och kakao blir rätt av en slump. 10 bollar kräver 2 dl havregryn och 50 g smör.
+                Fråga: ”Varför blir socker rätt men havregryn fel?”
     - rubrik: "Lärarens sida: Bas, problem 5, Ljusstakarna"
       text:
         - Problemet handlar om två okända tal som hänger ihop, antalet femarmade och antalet sjuarmade. Svaret är 8 femarmade och 21 sjuarmade. Eleverna räknar med multiplikation och addition i flera steg och ser att varje byte från femarmad till sjuarmad ger två ljus till. Problemet kommer ur Lithner m.fl. (2025).
@@ -1131,8 +1257,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Ljusstakarna
           rader:
@@ -1162,6 +1288,33 @@ ramar:
             - - Varför räknar eleven i lösning B 187 − 145?
             - - Var syns det i båda lösningarna att en sjuarmad har två ljus mer än en femarmad?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja om det var många fler stakar, och varför?
+    - rubrik: "Lösningsförslag: Bas, problem 5, Ljusstakarna"
+      text:
+        - Problemet kommer ur Lithner m.fl. (2025).
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: 8 femarmade och 21 sjuarmade.
+            - rubrik: Kontroll
+              text: 8 · 5 + 21 · 7 = 40 + 147 = 187, och 8 + 21 = 29.
+            - rubrik: Idén
+              text: "Två okända tal som hänger ihop: en sjuarmad har två ljus mer än en femarmad."
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: en tabell"
+              text: Eleven prövar i en tabell och byter tio stakar i taget, tills ljusen blir 187.
+            - rubrik: "Lösning B: alla är femarmade"
+              text: Eleven tänker sig att alla 29 är femarmade och delar de 42 ljus som saknas med 2.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                26 · 7 = 182
+                182 + 5 = 187
+                Svar: 26 sjuarmade, 1 femarmad.
+            - rubrik: Om lösning C
+              text: |-
+                Stämmer med ljusen men inte med stakarna: 26 + 1 = 27, och det ska vara 29.
+                Fråga: ”Hur många stakar blir det i elevens svar?”
     - rubrik: "Lärarens sida: Bas, problem 6, Tornet"
       text:
         - "Problemet handlar om att dela upp en figur av kuber, och om ett mönster som växer. Svaret är 28 kuber, och 45 när tornet är 5 kuber högt. Eleverna bygger, räknar lager för lager och ser en stolpe och fyra lika trappor. Material: multilinkkuber, 45 per par. Idén kommer ur Hagland, Hedrén och Taflin (2005) och Nämnaren 2024:2."
@@ -1195,14 +1348,14 @@ ramar:
                 Ni säger att det blir 13 kuber. Hur kan ni kontrollera att det stämmer med problemet?
                 Ni säger 4 · 10 = 40 kuber till tornet som är 5 högt. Hur kan ni kontrollera det med tornet ni har byggt?
     - rubrik: "Bas, problem 6: Tornet"
-      innehallstagg: Geometri
+      innehallstagg: Algebra
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Tornet
           rader:
@@ -1233,6 +1386,34 @@ ramar:
             - - Varför räknar eleven i lösning B en trappa och tar den fyra gånger?
             - - Var syns det i båda lösningarna att de fyra trapporna är lika?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja för ett torn som är 10 kuber högt, och varför?
+    - rubrik: "Lösningsförslag: Bas, problem 6, Tornet"
+      text:
+        - Idén kommer ur Hagland, Hedrén och Taflin (2005) och Nämnaren 2024:2.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: 28 kuber, och 45 kuber när tornet är 5 kuber högt.
+            - rubrik: Kontroll
+              text: "Stolpe och trappor: 4 + 4 · (1 + 2 + 3) = 28 och 5 + 4 · 10 = 45."
+            - rubrik: Idén
+              text: De fyra trapporna är lika, så varje lager har 4 kuber mer än lagret ovanför.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: lager för lager"
+              text: Eleven räknar lagren uppifrån, 1, 5, 9 och 13 kuber, och ser att varje lager har 4 kuber mer.
+            - rubrik: "Lösning B: stolpen och fyra trappor"
+              text: Eleven räknar stolpen för sig och en trappa, och tar trappan fyra gånger.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                1 + 2 + 3 = 6 och 4 · 6 = 24
+                1 + 2 + 3 + 4 = 10
+                4 · 10 = 40
+                Svar: 24 och 40 kuber.
+            - rubrik: Om lösning C
+              text: |-
+                Fyra trappor stämmer, men stolpen i mitten saknas: 24 + 4 = 28 och 40 + 5 = 45.
+                Fråga: ”Vilka kuber har eleven inte räknat?”
     - rubrik: "Lärarens sida: Bas, problem 7, Matcherna"
       text:
         - "Problemet handlar om kombinatorik: hur många par som går att bilda av några lag. Svaret är 6 matcher med 4 lag och 15 matcher med 6 lag. Eleverna listar i ordning, ritar och ser att samma match inte ska räknas två gånger. Idén kommer ur Skolverkets Problembank för årskurs 4–6, Bandy."
@@ -1272,8 +1453,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Matcherna
           rader:
@@ -1304,6 +1485,33 @@ ramar:
             - - Varför delar eleven i lösning B 30 med 2?
             - - Var syns det i båda lösningarna att lag A mot lag B och B mot A är samma match?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja med 10 lag, och varför?
+    - rubrik: "Lösningsförslag: Bas, problem 7, Matcherna"
+      text:
+        - Idén kommer ur Skolverkets Problembank för årskurs 4–6, Bandy.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: 6 matcher med 4 lag och 15 matcher med 6 lag.
+            - rubrik: Kontroll
+              text: AB, AC, AD, BC, BD och CD är 6 matcher, och 6 · 5 / 2 = 15.
+            - rubrik: Idén
+              text: Varje match är ett par lag, som bara räknas en gång.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: en lista i ordning"
+              text: Eleven listar lag A:s matcher först, sedan B:s nya, och får en match mindre för varje lag.
+            - rubrik: "Lösning B: prickar och streck"
+              text: Eleven drar 5 streck från varje lag och delar 30 med 2, eftersom varje streck räknas två gånger.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                Med 4 lag spelar varje lag 3.
+                4 · 3 = 12 och 6 · 5 = 30
+                Svar: 12 och 30 matcher.
+            - rubrik: Om lösning C
+              text: |-
+                Varje match är räknad två gånger, som A mot B och B mot A, och de är samma match.
+                Fråga: ”Hur kan ni kontrollera 12 med en lista?”
     - rubrik: "Lärarens sida: Bas, problem 8, Tärningarna"
       text:
         - "Problemet handlar om chans: varför vissa summor kommer oftare än andra. Svaret är 7, som kommer i 6 av 36 utfall. Eleverna kastar, för streck och listar alla utfall, och ser att 3 + 4 och 4 + 3 är olika. Material: två tärningar i olika färg per par. Idén kommer ur Skolverkets Problembank för årskurs 4–6, Tärningar, och nrich."
@@ -1343,8 +1551,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Tärningarna
           rader:
@@ -1375,6 +1583,34 @@ ramar:
             - - Varför står både 3 + 4 och 4 + 3 i tabellen i lösning B?
             - - Var syns det i båda lösningarna att 7 är vanligast, och vilken visar varför?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja med tre tärningar, och varför?
+    - rubrik: "Lösningsförslag: Bas, problem 8, Tärningarna"
+      text:
+        - Idén kommer ur Skolverkets Problembank för årskurs 4–6, Tärningar, och nrich.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: 7, som kommer i 6 av 36 utfall. En tabell med alla utfall visar det.
+            - rubrik: Kontroll
+              text: Av 6 · 6 = 36 utfall ger 6 summan 7, och 5 var ger summorna 6 och 8.
+            - rubrik: Idén
+              text: Summan 7 kan bli på flest sätt, i 6 av de 36 utfallen.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: kasta och sätta streck"
+              text: Eleven kastar 36 gånger och sätter ett streck vid summan, och 7 får flest streck.
+            - rubrik: "Lösning B: alla möjliga utfall"
+              text: Eleven skriver summorna i en tabell med den vita och den grå tärningen, och 7 står sex gånger.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                7 = 1 + 6 = 2 + 5 = 3 + 4
+                6 = 1 + 5 = 2 + 4 = 3 + 3
+                8 = 2 + 6 = 3 + 5 = 4 + 4
+                Svar: 6, 7 och 8 lika vanliga.
+            - rubrik: Om lösning C
+              text: |-
+                3 + 4 och 4 + 3 är olika kast med en vit och en grå tärning, så 7 går på 6 sätt.
+                Fråga: ”Är 3 + 4 och 4 + 3 samma kast?”
     - rubrik: "Lärarens sida: Bas, problem 9, Parken"
       text:
         - Problemet handlar om omkrets och om när två varv av olika längd går jämnt ut, vilket är idén bakom gemensamma multiplar. Parkerna är 200 m och 300 m runt. De möts i A efter 600 m, när Nora har gått 3 varv och Elias 2. Eleverna räknar omkretsen och hoppar på tallinjer. Idén kommer ur Känguru 2022, Ecolier nr 22.
@@ -1414,8 +1650,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Parken
           rader:
@@ -1446,6 +1682,34 @@ ramar:
             - - Varför letar eleven i lösning B efter det första talet där båda landar?
             - - Var syns 600 m i båda lösningarna, och varför möts de i A just då?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja om parkerna var 400 m och 600 m runt, och varför?
+    - rubrik: "Lösningsförslag: Bas, problem 9, Parken"
+      text:
+        - Idén kommer ur Känguru 2022, Ecolier nr 22.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: Parkerna är 200 m och 300 m runt. Nora går 3 varv och Elias 2.
+            - rubrik: Kontroll
+              text: 4 · 50 = 200, 2 · 100 + 2 · 50 = 300, och 3 · 200 = 2 · 300 = 600.
+            - rubrik: Idén
+              text: De möts i punkten A när båda har gått hela varv och lika långt.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: en tabell"
+              text: Eleven skriver hur långt var och en har gått efter varje varv, tills samma tal står hos båda.
+            - rubrik: "Lösning B: hopp på tallinjer"
+              text: Eleven hoppar 200 m och 300 m i taget på två tallinjer och letar efter första talet där båda landar.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                Nora: 4 · 50 = 200 m
+                Elias: 2 · 100 + 2 · 50 = 300 m
+                2 · 300 = 600
+                Svar: 200 m, 300 m och 2 varv.
+            - rubrik: Om lösning C
+              text: |-
+                Omkretsen stämmer, men 2 varv är bara Elias varv. Nora har gått 600 / 200 = 3 varv.
+                Fråga: ”Vems varv är 2, och vad saknas i svaret?”
     - rubrik: "Lärarens sida: Bas, problem 10, Vågen"
       text:
         - "Problemet handlar om likheter: tre okända vikter som hänger ihop två och två. Svaret är 270 g, och rektangeln väger 170 g, cirkeln 30 g och triangeln 70 g. Eleverna lägger ihop och jämför vägningar, och ser att varje kloss står på två vågar. Idén kommer ur Känguru 2024, Ecolier nr 19."
@@ -1485,8 +1749,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Vågen
           rader:
@@ -1517,9 +1781,36 @@ ramar:
             - - Varför räknar eleven i lösning B 200 − 100?
             - - Var syns det i båda lösningarna att varje kloss står på två vågar?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja med fyra klossar, och varför?
+    - rubrik: "Lösningsförslag: Bas, problem 10, Vågen"
+      text:
+        - Idén kommer ur Känguru 2024, Ecolier nr 19.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: 270 g. Rektangeln väger 170 g, cirkeln 30 g och triangeln 70 g.
+            - rubrik: Kontroll
+              text: 170 + 30 = 200, 70 + 30 = 100, 170 + 70 = 240 och 170 + 30 + 70 = 270.
+            - rubrik: Idén
+              text: "Tre okända vikter som hänger ihop: varje kloss står på två vågar."
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: att lägga ihop vågarna"
+              text: Eleven lägger ihop alla tre vågarna, 540 g, och delar med 2 eftersom varje kloss är med två gånger.
+            - rubrik: "Lösning B: att jämföra vågarna"
+              text: Eleven jämför de två vågarna med cirkeln och ser att rektangeln väger 100 g mer än triangeln.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                Vågarna: 200, 100 och 240 g
+                200 + 100 + 240 = 540
+                Svar: Alla tre väger 540 g.
+            - rubrik: Om lösning C
+              text: |-
+                Varje kloss står på två vågar, så 540 g är alla tre klossarna två gånger.
+                Fråga: ”Hur kan ni kontrollera 540 g mot vågarna?”
     - rubrik: "Lärarens sidor: Medel"
       text:
-        - Här står de tio problemen på nivån Medel, som ligger nära åk 6–7, i den ordning gruppen tar dem. Varje problem har lärarens sida, problemets sida och bladet Två lösningar.
+        - Här står de tio problemen på nivån Medel, som ligger nära åk 6–7, i den ordning gruppen tar dem. Varje problem har lärarens sida, problemets sida, bladet Två lösningar och ett lösningsförslag.
       oversikt:
         kolumner:
           - Problemet
@@ -1613,12 +1904,12 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Glasspinnarna
           rader:
-            - - Lisa har 12 glasspinnar som är lika långa. Hon lägger likbenta trianglar på bordet, en i taget, och behöver inte använda alla pinnar. Varje sida är en eller flera hela pinnar. En liksidig triangel räknas också som likbent.
+            - - Lisa har 12 glasspinnar som är lika långa. Hon lägger likbenta trianglar på bordet, en i taget, och behöver inte använda alla pinnar. Varje sida är en eller flera hela pinnar. En liksidig triangel räknas också som likbent. Trianglar med samma form men olika storlek räknas som olika.
         - rubrik: Frågorna
           rader:
             - - Hur många olika likbenta trianglar kan Lisa lägga?
@@ -1645,6 +1936,33 @@ ramar:
             - - Varför skriver eleven i lösning B att basen är högst 4 när benen är 4?
             - - Var syns det i båda lösningarna att basen måste vara kortare än benen tillsammans?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja med 30 pinnar, och varför?
+    - rubrik: "Lösningsförslag: Medel, problem 1, Glasspinnarna"
+      text:
+        - Idén kommer ur Nämnaren 2025:4, problem 4490.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: 15 likbenta trianglar, varav fyra liksidiga. En lista efter benen visar att ingen saknas.
+            - rubrik: Kontroll
+              text: Benen 1 till 5 ger 1 + 3 + 5 + 4 + 2 = 15, och ben 6 ger ingen bas.
+            - rubrik: Idén
+              text: Basen är kortare än benen tillsammans, och pinnarna är högst 12.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: att bygga och sortera"
+              text: Eleven lägger trianglar, ritar dem som går ihop och sorterar dem efter benen från 1 till 5.
+            - rubrik: "Lösning B: en lista efter benen"
+              text: Eleven skriver villkoren först och räknar för varje ben vilka baser som går.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                Ben 2: bas 1, 2, 3 eller 4
+                1 + 4 + 5 + 4 + 2 = 16
+                Svar: 16 likbenta trianglar.
+            - rubrik: Om lösning C
+              text: |-
+                Med ben 2 räknar eleven basen 4, men 2 + 2 = 4, så triangeln blir platt.
+                Fråga: ”Vilken triangel i lösningen går inte att lägga?”
     - rubrik: "Lärarens sida: Medel, problem 2, Borden"
       text:
         - Problemet handlar om ett mönster som växer lika mycket för varje bord. Vid 10 bord får 42 personer plats, och vid n bord 4 · n + 2. Eleverna ser mönstret i en tabell och i bilden och skriver en regel med ord eller med n. Idén kommer ur Nämnaren 2025:2, problem 4476.
@@ -1684,8 +2002,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Borden
           rader:
@@ -1716,6 +2034,34 @@ ramar:
             - - Varför lägger eleven i lösning B till 2 efter 4 · 10?
             - - Var syns det i båda lösningarna att varje nytt bord ger fyra platser till?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja för 100 bord, och varför?
+    - rubrik: "Lösningsförslag: Medel, problem 2, Borden"
+      text:
+        - Idén kommer ur Nämnaren 2025:2, problem 4476.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: 42 personer vid 10 bord, och 4 · n + 2 vid n bord.
+            - rubrik: Kontroll
+              text: 4 · 1 + 2 = 6 och 4 · 2 + 2 = 10 som i bilden, och 4 · 10 + 2 = 42.
+            - rubrik: Idén
+              text: Varje nytt bord ger fyra platser till, två uppe och två nere.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: en tabell"
+              text: Eleven ser att det blir 4 personer till för varje bord och räknar 9 steg från 6.
+            - rubrik: "Lösning B: att räkna platserna"
+              text: Eleven ser fyra platser vid varje bord och en plats i varje ände, och skriver 4 · n + 2.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                6, 10, 14, 18, 22
+                5 bord ger 22 personer.
+                10 bord: 2 · 22 = 44
+                Svar: 44 personer.
+            - rubrik: Om lösning C
+              text: |-
+                Två rader med 5 bord har fyra ändar, men en rad med 10 bord har två: 44 − 2 = 42.
+                Fråga: ”Hur kan ni kontrollera 44 med en ritning?”
     - rubrik: "Lärarens sida: Medel, problem 3, Kulpåsarna"
       text:
         - Problemet handlar om chans som en andel av alla kulor. Svaret är påse B, där 1/4 av kulorna är blå. Eleverna jämför andelar som bråk eller procent, eller röda mot blå, och ser att flest blå inte ger störst chans. Idén kommer ur Problembanken åk 7–9, problem 11, Kulpåsen.
@@ -1755,8 +2101,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Kulpåsarna
           rader:
@@ -1786,6 +2132,33 @@ ramar:
             - - Varför delar eleven i lösning B de röda med de blå?
             - - Var syns det i båda lösningarna att påse B är bäst, fast påse A har fler blå?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja om talen inte gick att dela jämnt, och varför?
+    - rubrik: "Lösningsförslag: Medel, problem 3, Kulpåsarna"
+      text:
+        - Idén kommer ur Problembanken åk 7–9, problem 11, Kulpåsen.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: Påse B, där 1/4 av kulorna är blå.
+            - rubrik: Kontroll
+              text: 20 / 100 = 1/5, 10 / 40 = 1/4 och 5 / 50 = 1/10, och 1/4 är störst.
+            - rubrik: Idén
+              text: Chansen beror på hur många röda det finns för varje blå.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: andelen blå"
+              text: Eleven räknar i procent hur stor del av alla kulor i varje påse som är blå.
+            - rubrik: "Lösning B: röda på varje blå"
+              text: Eleven räknar hur många röda kulor det finns på varje blå och väljer påsen med färst röda.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                A har 20 blå, B 10 och C 5.
+                20 är flest.
+                Svar: Påse A, den har flest blå.
+            - rubrik: Om lösning C
+              text: |-
+                Påse A har flest blå men också flest röda, och bara 1/5 av kulorna är blå.
+                Fråga: ”Spelar det någon roll hur många röda det finns?”
     - rubrik: "Lärarens sida: Medel, problem 4, Bollbytet"
       text:
         - "Problemet har flera svar, och båda bytena ska gå jämnt ut. Omar kan få 0, 10, 20, 30 eller 40 tennisbollar, med 91, 70, 49, 28 eller 7 pingisbollar. Eleverna arbetar systematiskt med multiplikation och division, så att inget svar saknas. Material: klossar eller kuber, 26 per par. Idén kommer ur Hagland, Hedrén och Taflin (2005)."
@@ -1799,7 +2172,7 @@ ramar:
                 Vi vet: 3 golfbollar ger 5 tennisbollar, 2 golfbollar ger 7 pingisbollar, Omar byter alla 26.
                 Vi ska ta reda på: hur många av varje, och alla sätt.
             - rubrik: Ord och tal
-              text: "Peka på bilden vid ordet byta. Fråga: Vad räknar 3, och vad räknar 5? Får Omar ta bara pingisbollar?"
+              text: "Peka på bilden vid ordet byta. Fråga: Vad räknar 3, och vad räknar 5? Får Omar ta bara pingisbollar? Ja, det är ett av fem sätt."
             - rubrik: Förutse
               text: En tabell, bollar som ritas, eller alla till pingis först. Några hittar ett svar och slutar.
             - rubrik: Kör de fast
@@ -1825,8 +2198,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Bollbytet
           rader:
@@ -1857,6 +2230,34 @@ ramar:
             - - Varför flyttar eleven i lösning B 6 golfbollar i taget från pingis till tennis?
             - - Var syns det i båda lösningarna att golfbollarna till tennis ökar med 6 åt gången?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja med 100 golfbollar, och varför?
+    - rubrik: "Lösningsförslag: Medel, problem 4, Bollbytet"
+      text:
+        - Idén kommer ur Hagland, Hedrén och Taflin (2005).
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: 5 sätt om Omar får ta bara en sort, 4 om han måste ha båda.
+            - rubrik: Kontroll
+              text: 0 tennis och 91 pingis, 10 och 70, 20 och 49, 30 och 28, 40 och 7.
+            - rubrik: Idén
+              text: Golfbollarna till tennis går i treor och resten i tvåor, så sätten skiljer sig med 6 golfbollar.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: en tabell"
+              text: Eleven prövar 0, 3, 6 och fler golfbollar till tennis, och resten går att dela med 2 i varannan rad.
+            - rubrik: "Lösning B: alla till pingis först"
+              text: Eleven byter alla mot pingis och flyttar sedan 6 golfbollar i taget från pingis till tennis.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                9 / 3 = 3 och 3 · 5 = 15
+                26 − 9 = 17, 17 / 2 = 8 rest 1
+                8 · 7 = 56
+                Svar: 15 tennis och 56 pingis.
+            - rubrik: Om lösning C
+              text: |-
+                En golfboll blir kvar, men Omar vill byta bort alla. 26 − 9 = 17 är udda.
+                Fråga: ”Vilka antal till tennis går jämnt ut?”
     - rubrik: "Lärarens sida: Medel, problem 5, Tangrammet"
       text:
         - "Area som delar av en helhet. De stora trianglarna är 100 cm² var, den mellanstora, kvadraten och parallellogrammet 50 cm² och de små 25 cm². Eleverna lägger bitarna på varandra och ser att olika former kan ha samma area. Material: ett tangram per par, eller en kopia av bilden och en sax. Idén kommer ur Hagland, Hedrén och Taflin (2005)."
@@ -1896,8 +2297,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Tangrammet
           rader:
@@ -1928,6 +2329,33 @@ ramar:
             - - Varför delar eleven i lösning B 400 med 16?
             - - Var syns det i båda lösningarna att kvadraten och parallellogrammet har samma area?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja om hela tangrammet var 1 000 cm², och varför?
+    - rubrik: "Lösningsförslag: Medel, problem 5, Tangrammet"
+      text:
+        - Idén kommer ur Hagland, Hedrén och Taflin (2005).
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: De stora trianglarna är 100 cm², de små 25 och de tre andra 50 var.
+            - rubrik: Kontroll
+              text: 2 · 100 + 3 · 50 + 2 · 25 = 400 för alla sju bitarna.
+            - rubrik: Idén
+              text: Kvadraten, parallellogrammet och den mellanstora triangeln är två små trianglar var, så olika former kan ha samma area.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: bitarna på varandra"
+              text: Eleven lägger bitarna på varandra och halverar, från en stor triangel på 100 cm² till en liten.
+            - rubrik: "Lösning B: 16 små trianglar"
+              text: Eleven delar hela kvadraten i 16 små trianglar och räknar hur många som ryms i varje bit.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                Tangrammet har 7 bitar.
+                400 / 7 = 57 rest 1
+                Svar: Ungefär 57 cm² var.
+            - rubrik: Om lösning C
+              text: |-
+                Eleven delar som om alla sju bitar vore lika stora, men fyra små täcker en stor triangel.
+                Fråga: ”Är bitarna lika stora? Hur kan ni pröva det?”
     - rubrik: "Lärarens sida: Medel, problem 6, Skolan"
       text:
         - Problemet handlar om bråk, procent och delbarhet. Skolan kan ha 315, 330, 345, 360, 375 eller 390 elever, alltså ett antal som går att dela med 15. Eleverna prövar antal, ser att 20 % är 1/5 och letar efter alla svar. Idén kommer ur Hagland, Hedrén och Taflin (2005).
@@ -1967,8 +2395,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Skolan
           rader:
@@ -1999,6 +2427,33 @@ ramar:
             - - Varför hoppar eleven 15 i taget i lösning B?
             - - Var syns det i båda lösningarna att svaren ligger 15 isär?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja om skolan hade mellan 300 och 3 000 elever, och varför?
+    - rubrik: "Lösningsförslag: Medel, problem 6, Skolan"
+      text:
+        - Idén kommer ur Hagland, Hedrén och Taflin (2005).
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: 315, 330, 345, 360, 375 eller 390 elever, som alla går att dela med 15.
+            - rubrik: Kontroll
+              text: 1/3 av 315 = 105, 20 % av 315 = 63, och 300 och 405 är utanför.
+            - rubrik: Idén
+              text: 1/3 och 20 % går jämnt ut när antalet går att dela med 3 och med 5.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: en tabell"
+              text: Eleven prövar antal i en tabell och ser att de som går ligger 15 isär.
+            - rubrik: "Lösning B: resonemang och tallinje"
+              text: Eleven ser att antalet ska gå att dela med 3 och 5, alltså med 15, och hoppar 15 i taget.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                Mitt emellan 300 och 400: 350
+                20 % av 350 = 70
+                Svar: 350 elever.
+            - rubrik: Om lösning C
+              text: |-
+                20 % stämmer, men 1/3 av 350 går inte jämnt ut: 350 / 3 = 116 rest 2.
+                Fråga: ”Hur kan ni pröva 350 mot hela problemet?”
     - rubrik: "Lärarens sida: Medel, problem 7, Samlarbilderna"
       text:
         - Problemet handlar om medelvärde, median och typvärde och har flera svar. Ett svar är 10, 20, 20, 20 och 40, och det finns 14 svar om alla har minst en bild. Eleverna använder att summan är 5 · 22 = 110 och ordnar talen. Idén kommer ur Hagland, Hedrén och Taflin (2005).
@@ -2038,8 +2493,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Samlarbilderna
           rader:
@@ -2070,6 +2525,33 @@ ramar:
             - - Varför räknar eleven i lösning B 110 − 20 − 40?
             - - Var syns det i båda lösningarna att summan måste vara 110?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja för att hitta alla svar, och varför?
+    - rubrik: "Lösningsförslag: Medel, problem 7, Samlarbilderna"
+      text:
+        - Idén kommer ur Hagland, Hedrén och Taflin (2005).
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: Till exempel 10, 20, 20, 20 och 40. Har alla minst en bild, finns 14.
+            - rubrik: Kontroll
+              text: 10 + 20 + 20 + 20 + 40 = 110 = 5 · 22, medianen 20 och typvärdet 20.
+            - rubrik: Idén
+              text: Summan är 5 · 22 = 110, och 20 står minst två gånger.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: pröva och förbättra"
+              text: Eleven prövar fem tal i ordning med summan 110 och ändrar dem tills typvärdet bara är 20.
+            - rubrik: "Lösning B: det som måste stå"
+              text: Eleven skriver först 20 i mitten och 40 sist, och de 50 som är kvar ska ha ett 20 till.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                15 + 15 + 20 + 20 + 40 = 110
+                110 / 5 = 22
+                Svar: 15, 15, 20, 20 och 40.
+            - rubrik: Om lösning C
+              text: |-
+                Summan, medianen och 40 stämmer, men 15 och 20 står två gånger var, så typvärdet är inte bara 20.
+                Fråga: ”Vilket villkor har eleven inte prövat?”
     - rubrik: "Lärarens sida: Medel, problem 8, Klädaffären"
       text:
         - Problemet handlar om likheter i en kedja. Ali betalar mest och Cleo minst, och ordningen är Ali, Dan, Bea och Cleo. Eleverna räknar med proportioner i flera steg och väljer en enhet som de räknar om allt till, kepsar eller kronor. Idén kommer ur Känguru 2023, Benjamin nr 24.
@@ -2103,14 +2585,14 @@ ramar:
                 Ni säger att Dan betalar mest, för han köper flest saker. Hur kan ni kontrollera det mot problemet?
                 ”Är ordningen rätt?” Hur kan ni kontrollera den på ett annat sätt?
     - rubrik: "Medel, problem 8: Klädaffären"
-      innehallstagg: Algebra
+      innehallstagg: Samband och förändring
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Klädaffären
           rader:
@@ -2142,6 +2624,33 @@ ramar:
             - - Varför får eleven i lösning B välja att en keps kostar 10 kr?
             - - Var syns det i båda lösningarna att en hatt kostar som tio kepsar?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja om en sak till kom med, och varför?
+    - rubrik: "Lösningsförslag: Medel, problem 8, Klädaffären"
+      text:
+        - Idén kommer ur Känguru 2023, Benjamin nr 24.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: "Ali betalar mest. Från dyrast: Ali, Dan, Bea och Cleo."
+            - rubrik: Kontroll
+              text: Ali 3 · 10 = 30, Dan 29, Bea 7 · 4 = 28, Cleo 18 · 1,5 = 27 kepsar.
+            - rubrik: Idén
+              text: Alla priser går att räkna om till samma enhet, och enheten går att välja.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: allt i kepsar"
+              text: Eleven går igenom likheterna steg för steg och räknar om tröjor, kjolar och hattar till kepsar.
+            - rubrik: "Lösning B: ett pris i kronor"
+              text: Eleven bestämmer att en keps kostar 10 kr och räknar ut priset på de andra sakerna.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                Ali 3, Bea 7, Cleo 18, Dan 29
+                Dan köper flest saker.
+                Svar: Dan, Cleo, Bea och Ali.
+            - rubrik: Om lösning C
+              text: |-
+                Antalet saker säger inget om priset: en hatt kostar som 10 kepsar.
+                Fråga: ”Hur kan ni jämföra köpen, när sakerna kostar olika?”
     - rubrik: "Lärarens sida: Medel, problem 9, Pantpengarna"
       text:
         - Problemet handlar om bråk av det som finns kvar och om att räkna baklänges. Från början fanns 27 kr, och Saga tog 9 kr, Leo 6 kr och Mira 4 kr. Eleverna ser att 8 kr är 2/3 av det Mira hittade i asken och går bakåt ett steg i taget. Idén kommer ur Hagland, Hedrén och Taflin (2005).
@@ -2181,8 +2690,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Pantpengarna
           rader:
@@ -2213,6 +2722,34 @@ ramar:
             - - Varför prövar eleven 27 efter 54 i lösning B?
             - - Var syns det i båda lösningarna att 2/3 blir kvar varje gång?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja med fem syskon, och varför?
+    - rubrik: "Lösningsförslag: Medel, problem 9, Pantpengarna"
+      text:
+        - Idén kommer ur Hagland, Hedrén och Taflin (2005).
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: 27 kr. Saga tog 9 kr, Leo 6 kr och Mira 4 kr.
+            - rubrik: Kontroll
+              text: 27 − 9 = 18, 18 − 6 = 12, 12 − 4 = 8, och var och en tar 1/3.
+            - rubrik: Idén
+              text: Varje gång blir 2/3 kvar, och 8 kr är 2/3 av det som Mira hittade.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: baklänges med staplar"
+              text: Eleven ser att de 8 kr som blir kvar är två tredjedelar och går bakåt stapel för stapel.
+            - rubrik: "Lösning B: pröva och förbättra"
+              text: Eleven prövar belopp i en tabell, ser att 54 kr ger 16 kr kvar och prövar hälften.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                Mira tog 8 kr: 3 · 8 = 24
+                Leo: 24 / 2 · 3 = 36
+                Saga: 36 / 2 · 3 = 54
+                Svar: 54 kr från början.
+            - rubrik: Om lösning C
+              text: |-
+                Eleven läser 8 kr som Miras del, men 8 kr blev kvar i asken. Med 54 kr blir 16 kr kvar.
+                Fråga: ”Vad är 8 kr i problemet?”
     - rubrik: "Lärarens sida: Medel, problem 10, Smörgåsarna"
       text:
         - "Problemet handlar om bråk och rättvis delning. Smörgåsarna är lika stora, och Kim betalar för det han får av var och en. Elsa ska få 5 kr och Jonas 20 kr, eftersom Elsa ger Kim 1/3 smörgås och Jonas 4/3. Material: fem pappersrektanglar per par att vika i tredjedelar. Idén kommer ur Nyman, Säfström och Taflin i Nämnaren 2016:3."
@@ -2252,8 +2789,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Smörgåsarna
           rader:
@@ -2283,9 +2820,37 @@ ramar:
             - - Varför räknar eleven i lösning B 2 − 5/3?
             - - Var syns det i båda lösningarna att Jonas ger fyra gånger så mycket som Elsa?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja med fyra personer, och varför?
+    - rubrik: "Lösningsförslag: Medel, problem 10, Smörgåsarna"
+      text:
+        - Idén kommer ur Nyman, Säfström och Taflin i Nämnaren 2016:3.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: Elsa ska få 5 kr och Jonas 20 kr.
+            - rubrik: Kontroll
+              text: Elsa ger 2 − 5/3 = 1/3 och Jonas 3 − 5/3 = 4/3, och 5 + 4 · 5 = 25.
+            - rubrik: Idén
+              text: "Kim betalar för det han får av var och en: 1/3 av Elsa och 4/3 av Jonas."
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: smörgåsarna i tredjedelar"
+              text: Eleven delar smörgåsarna i tredjedelar och räknar hur många tredjedelar Kim får av Elsa och av Jonas.
+            - rubrik: "Lösning B: räkna med bråk"
+              text: Eleven räknar ut att var och en äter 5/3 smörgås och drar det från Elsas 2 och Jonas 3.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                25 / 5 = 5 kr per smörgås
+                Elsa: 2 · 5 = 10 kr
+                Jonas: 3 · 5 = 15 kr
+                Svar: Elsa 10 kr, Jonas 15 kr.
+            - rubrik: Om lösning C
+              text: |-
+                Kim betalar för det han äter. Elsa åt själv 5/3 och gav Kim bara 1/3 smörgås.
+                Fråga: ”Vad betalar Kim för, och vem gav honom mest?”
     - rubrik: "Lärarens sidor: Avancerat"
       text:
-        - Här står de tio problemen på nivån Avancerat, som ligger nära åk 8–9, i den ordning gruppen tar dem. Varje problem har lärarens sida, problemets sida och bladet Två lösningar.
+        - Här står de tio problemen på nivån Avancerat, som ligger nära åk 8–9, i den ordning gruppen tar dem. Varje problem har lärarens sida, problemets sida, bladet Två lösningar och ett lösningsförslag.
       oversikt:
         kolumner:
           - Problemet
@@ -2379,8 +2944,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Cykelförrådet
           rader:
@@ -2410,6 +2975,33 @@ ramar:
             - - Varför skriver eleven i lösning B 11 − x för tvåhjulingarna?
             - - Var syns det i båda lösningarna att en trehjuling har ett hjul mer än en tvåhjuling?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja med 110 cyklar och 270 hjul, och varför?
+    - rubrik: "Lösningsförslag: Avancerat, problem 1, Cykelförrådet"
+      text:
+        - Idén kommer ur Problembanken åk 7–9, problem 8.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: 6 tvåhjulingar och 5 trehjulingar.
+            - rubrik: Kontroll
+              text: 6 · 2 + 5 · 3 = 12 + 15 = 27, och 6 + 5 = 11.
+            - rubrik: Idén
+              text: "Två okända tal som hänger ihop: en trehjuling har ett hjul mer än en tvåhjuling."
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: en tabell"
+              text: Eleven prövar i en tabell och byter tvåhjulingar mot trehjulingar, tills hjulen blir 27.
+            - rubrik: "Lösning B: en ekvation"
+              text: Eleven kallar trehjulingarna x och tvåhjulingarna 11 − x och löser 3x + 2(11 − x) = 27.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                Om alla är trehjulingar:
+                27 / 3 = 9
+                Svar: 9 trehjulingar.
+            - rubrik: Om lösning C
+              text: |-
+                Hjulen stämmer, men det blir bara 9 cyklar, och det ska vara 11.
+                Fråga: ”Vilket villkor i problemet har eleven glömt?”
     - rubrik: "Lärarens sida: Avancerat, problem 2, Glasstapeln"
       text:
         - "Ett linjärt samband: varje glas ger lika mycket till, men höjden är inte proportionell mot antalet glas. Svaret är 6 glas, en stapel på 34 cm. Eleverna tecknar ett uttryck, 10 + 4n, ur en tabell eller en bild och löser en ekvation. Material: muggar som går att stapla, och en linjal. Idén kommer ur Känguru 2022, Cadet nr 10."
@@ -2449,8 +3041,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Glasstapeln
           rader:
@@ -2480,6 +3072,34 @@ ramar:
             - - Varför räknar eleven i lösning B 18 − 2 · 4?
             - - Var syns det i båda lösningarna att varje glas ger 4 cm till?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja om hyllorna var 2 m isär, och varför?
+    - rubrik: "Lösningsförslag: Avancerat, problem 2, Glasstapeln"
+      text:
+        - Idén kommer ur Känguru 2022, Cadet nr 10.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: 6 glas. Stapeln blir 34 cm hög.
+            - rubrik: Kontroll
+              text: 10 + 4 · 2 = 18, 10 + 4 · 8 = 42, och 6 glas är 34 cm och 7 glas 38.
+            - rubrik: Idén
+              text: Varje glas ger 4 cm till, men foten på 10 cm växer inte.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: en tabell"
+              text: Eleven räknar ut att varje glas ger 4 cm till och fortsätter tabellen tills stapeln blir för hög.
+            - rubrik: "Lösning B: en ekvation"
+              text: Eleven skriver höjden som 10 + 4n, löser 10 + 4n = 36 och väljer 6 hela glas.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                2 glas är 18 cm.
+                18 / 2 = 9 cm per glas
+                36 / 9 = 4
+                Svar: 4 glas.
+            - rubrik: Om lösning C
+              text: |-
+                Glasen står i varandra. Med 9 cm per glas blir 8 glas 8 · 9 = 72 cm, men stapeln är 42 cm.
+                Fråga: ”Hur mycket högre blir stapeln per glas?”
     - rubrik: "Lärarens sida: Avancerat, problem 3, Stenplattorna"
       text:
         - "Ett mönster som växer: figur n har n² ljusa plattor och 4n + 4 mörka. Figur 5 har 25 ljusa och 24 mörka, och figur 10 har 100 och 44. Eleverna går från en tabell till en regel och ser figuren på två sätt. Material: rutat papper eller brickor. Idén kommer ur Hagland, Hedrén och Taflin (2005) och Lithner m.fl. (2025)."
@@ -2519,8 +3139,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Stenplattorna
           rader:
@@ -2551,6 +3171,34 @@ ramar:
             - - Varför delar eleven i lösning B de mörka i fyra sidor och fyra hörn?
             - - Var syns det i båda lösningarna att de mörka blir fyra fler för varje figur?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja för figur 100, och varför?
+    - rubrik: "Lösningsförslag: Avancerat, problem 3, Stenplattorna"
+      text:
+        - Idén kommer ur Hagland, Hedrén och Taflin (2005) och Lithner m.fl. (2025).
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: "Figur 5: 25 ljusa, 24 mörka. Figur 10: 100, 44. Figur n: n², 4n + 4."
+            - rubrik: Kontroll
+              text: 5² = 25 och 7² − 5² = 24, 10² = 100 och 12² − 10² = 44.
+            - rubrik: Idén
+              text: De ljusa är en kvadrat med sidan n, och de mörka ökar med 4, en på varje sida.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: en tabell"
+              text: Eleven ritar figur 4, för in figur 1 till 5 i en tabell och ser regeln i talen.
+            - rubrik: "Lösning B: se strukturen"
+              text: Eleven ser de ljusa som en kvadrat med sidan n och de mörka som fyra sidor och fyra hörn.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                Figur 5: 25 ljusa och 24 mörka
+                Figur 10 är dubbelt så stor.
+                2 · 25 = 50 och 2 · 24 = 48
+                Svar: 50 ljusa och 48 mörka.
+            - rubrik: Om lösning C
+              text: |-
+                Med dubbla sidan blir de ljusa fyra gånger så många, 10 · 10 = 100, och de mörka blir 44.
+                Fråga: ”Stämmer dubbelt så många för figur 1 och 2?”
     - rubrik: "Lärarens sida: Avancerat, problem 4, Udda eller jämnt"
       text:
         - "Sannolikhet med alla utfall: av 10 möjliga par ger 4 en jämn summa och 6 en udda. Spelet är inte rättvist, och chansen att vinna med jämn summa är 4 av 10. Eleverna listar systematiskt och resonerar med udda och jämnt. Material: fem lappar med talen 2 till 6 i en påse. Idén kommer ur nrich, Odds and Evens."
@@ -2590,8 +3238,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Udda eller jämnt
           rader:
@@ -2621,6 +3269,34 @@ ramar:
             - - Varför räknar eleven i lösning B 3 · 2 för en kula av varje slag?
             - - Var syns de fyra paren med jämn summa i båda lösningarna?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja med 20 kulor, och varför?
+    - rubrik: "Lösningsförslag: Avancerat, problem 4, Udda eller jämnt"
+      text:
+        - Idén kommer ur nrich, Odds and Evens.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: "Nej, spelet är inte rättvist: 4 av 10 par ger jämn summa och 6 udda."
+            - rubrik: Kontroll
+              text: 2 + 4, 2 + 6, 4 + 6 och 3 + 5 är jämna, och (5 · 4) / 2 = 10 par.
+            - rubrik: Idén
+              text: Jämn summa kommer från två jämna eller två udda kulor.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: en lista"
+              text: Eleven skriver alla tio par i ordning med summan och ringar in de fyra jämna.
+            - rubrik: "Lösning B: udda och jämnt"
+              text: Eleven delar kulorna i jämna och udda och räknar hur många par det blir av varje slag.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                En tabell med 5 · 5 = 25 rutor
+                Jämn summa i 13 rutor
+                Udda summa i 12 rutor
+                Svar: Jämnt vinner oftare.
+            - rubrik: Om lösning C
+              text: |-
+                Samma kula kan inte dras två gånger, som 2 + 2, och 2 + 4 och 4 + 2 är samma par.
+                Fråga: ”Vilka par i tabellen går inte att dra?”
     - rubrik: "Lärarens sida: Avancerat, problem 5, Svamparna"
       text:
         - "Problemet handlar om procent av en helhet som ändras, medan det torra i svamparna väger lika mycket. Vikten minskar med 75 %, så att en fjärdedel är kvar. Eleverna väljer en vikt att räkna med och följer det torra, med tal eller staplar. Material: rutat papper. Idén kommer ur Känguru 2024, Cadet nr 16."
@@ -2660,8 +3336,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Svamparna
           rader:
@@ -2691,6 +3367,34 @@ ramar:
             - - Varför är det 4 torra rutor i båda staplarna i lösning B?
             - - Var syns det i båda lösningarna att det torra väger lika mycket före och efter?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja om svamparna var 90 % vatten, och varför?
+    - rubrik: "Lösningsförslag: Avancerat, problem 5, Svamparna"
+      text:
+        - Idén kommer ur Känguru 2024, Cadet nr 16.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: Vikten minskar med 75 %, så att en fjärdedel är kvar.
+            - rubrik: Kontroll
+              text: "100 g blir 25 g: 20 g torrt och 5 g vatten, och 5 av 25 är 20 %."
+            - rubrik: Idén
+              text: Det torra väger lika mycket före och efter, och procenten räknas på olika helheter.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: börja med 100 g"
+              text: Eleven tänker sig 100 g färska svampar och följer de 20 g torrt, som blir 80 % av de torkade.
+            - rubrik: "Lösning B: staplar med rutor"
+              text: Eleven ritar de färska som 20 rutor med 4 torra, och de 4 torra blir 80 % av de torkade.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                Vatten före: 80 %
+                Vatten efter: 20 %
+                80 − 20 = 60
+                Svar: Vikten minskar med 60 %.
+            - rubrik: Om lösning C
+              text: |-
+                80 % och 20 % räknas på olika helheter. Av 100 g blir 25 g kvar, och vikten minskar med 75 %.
+                Fråga: ”80 % av vad, och 20 % av vad?”
     - rubrik: "Lärarens sida: Avancerat, problem 6, Skålarna"
       text:
         - "Problemet handlar om medelvärdet som balanspunkt. En boll som är mindre än medelvärdet höjer det när den tas bort, och en som är större höjer det när den läggs till. Svaret är bollen 7. Eleverna prövar i en tabell och resonerar om medelvärdet. Material: lappar med bollarnas tal, i två högar. Idén kommer ur Känguru 2025, Cadet nr 17."
@@ -2730,8 +3434,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Skålarna
           rader:
@@ -2761,6 +3465,33 @@ ramar:
             - - Varför ska bollen i lösning B vara mindre än 8 och större än 5?
             - - Var syns det i båda lösningarna att bollen ska ligga mellan de två medelvärdena?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja med 50 bollar i varje skål, och varför?
+    - rubrik: "Lösningsförslag: Avancerat, problem 6, Skålarna"
+      text:
+        - Idén kommer ur Känguru 2025, Cadet nr 17.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: Bollen 7. Medelvärdena blir 8,25 och 5,4.
+            - rubrik: Kontroll
+              text: Röd 8 blir 33 / 4 = 8,25, och blå 5 blir 27 / 5 = 5,4.
+            - rubrik: Idén
+              text: "Medelvärdet är en balanspunkt: bollen ska vara under det röda medelvärdet och över det blå."
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: en tabell"
+              text: Eleven räknar medelvärdena och prövar att flytta varje boll, och bara 7 gör båda större.
+            - rubrik: "Lösning B: ett resonemang"
+              text: Eleven ser medelvärdena som balanspunkter och letar efter en boll mellan 5 och 8.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                Röd utan 3: 37 / 4 = 9,25
+                9,25 är mer än 8.
+                Svar: Bollen 3.
+            - rubrik: Om lösning C
+              text: |-
+                Den röda blir större, men eleven prövar inte den blå: 23 / 5 = 4,6 är mindre än 5.
+                Fråga: ”Vilken skål har eleven glömt att pröva?”
     - rubrik: "Lärarens sida: Avancerat, problem 7, Kvadraten"
       text:
         - "Problemet handlar om ett samband mellan omkrets och area. Den stora kvadratens sida är rektangelns långa sida plus den korta, alltså halva rektangelns omkrets. Svaret är 400 cm², vilken rektangel det än är. Eleverna prövar med tal och generaliserar. Material: rutat papper och fyra likadana rektanglar av papper. Idén kommer ur Nämnaren 2014:4, Problemavdelningen nr 4123."
@@ -2800,8 +3531,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Kvadraten
           rader:
@@ -2831,6 +3562,34 @@ ramar:
             - - Varför delar eleven i lösning B omkretsen med 2?
             - - Var syns det i båda lösningarna att den stora kvadratens sida är 20 cm?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja om omkretsen var 46 cm, och varför?
+    - rubrik: "Lösningsförslag: Avancerat, problem 7, Kvadraten"
+      text:
+        - Idén kommer ur Nämnaren 2014:4, Problemavdelningen nr 4123.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: 400 cm², vilken rektangel det än är.
+            - rubrik: Kontroll
+              text: 15 + 5 + 15 + 5 = 40, och 4 · 15 · 5 + 10 · 10 = 400 = 20 · 20.
+            - rubrik: Idén
+              text: Den stora kvadratens sida är en lång och en kort sida, alltså halva omkretsen.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: olika rektanglar"
+              text: Eleven prövar rektanglar med omkretsen 40 cm och ser att den stora kvadratens sida blir 20 varje gång.
+            - rubrik: "Lösning B: ett resonemang"
+              text: Eleven ser att den stora kvadratens sida, en lång och en kort, är halva omkretsen.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                15 + 5 + 15 + 5 = 40
+                15 · 5 = 75
+                4 · 75 = 300
+                Svar: 300 cm².
+            - rubrik: Om lösning C
+              text: |-
+                Eleven räknar bara rektanglarna. Den lilla kvadraten i mitten är 10 · 10 = 100 cm² till.
+                Fråga: ”Vilken del av bilden har eleven inte räknat?”
     - rubrik: "Lärarens sida: Avancerat, problem 8, De lutande kvadraterna"
       text:
         - "Problemet leder från area på prickpapper till Pythagoras sats. En kvadrat vars sida går a steg åt höger och b steg uppåt har arean a² + b². Kvadraten med 2 och 1 steg har arean 5, och den med 3 och 2 steg har 13. Eleverna ramar in, räknar och generaliserar. Material: prickpapper och linjal. Idén kommer ur nrich, Tilted Squares."
@@ -2870,8 +3629,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: De lutande kvadraterna
           rader:
@@ -2902,6 +3661,33 @@ ramar:
             - - Hur ser eleven i lösning B regeln i tabellen?
             - - Var syns det i båda lösningarna att kvadraten med 3 och 2 steg har arean 13?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja med 7 och 4 steg, och varför?
+    - rubrik: "Lösningsförslag: Avancerat, problem 8, De lutande kvadraterna"
+      text:
+        - Idén kommer ur nrich, Tilted Squares.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: 5 rutor. Med 3 och 2 steg blir det 13, och arean är a² + b².
+            - rubrik: Kontroll
+              text: 3 · 3 − 4 · 2 · 1 / 2 = 5 och 5 · 5 − 4 · 3 · 2 / 2 = 13 = 3² + 2².
+            - rubrik: Idén
+              text: Arean är a² + b², där a och b är stegen åt höger och uppåt.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: en ram"
+              text: Eleven ritar en kvadrat runt den som lutar och tar bort de fyra trianglarna i hörnen.
+            - rubrik: "Lösning B: tabell och mönster"
+              text: Eleven räknar arean för flera kvadrater i en tabell och ser att den är a² + b².
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                Sidan: 2 + 1 = 3 steg
+                3 · 3 = 9
+                Svar: 9 rutor.
+            - rubrik: Om lösning C
+              text: |-
+                Sidan lutar och är kortare än 3 steg. 3 · 3 = 9 är ramen runt kvadraten, med trianglarna i hörnen.
+                Fråga: ”Vad räknar 3 · 3 = 9 på bilden?”
     - rubrik: "Lärarens sida: Avancerat, problem 9, Staketet"
       text:
         - "Problemet handlar om största arean med 60 m staket. Hagen blir störst som en kvadrat, 15 · 15 = 225 m², och mot en vägg 15 · 30 = 450 m². Eleverna ritar, gör en tabell och ser arean som en funktion. Material: rutat papper och ett snöre på 60 cm. Idén kommer ur Problembanken åk 7–9, problem 9."
@@ -2935,14 +3721,14 @@ ramar:
                 Ni säger att en kvadrat med sidan 20 m är bäst mot väggen. Hur kan ni kontrollera att det stämmer med problemet?
                 ”Är 15 m svaret?” Vilka är måtten, och hur stor blir hagen?
     - rubrik: "Avancerat, problem 9: Staketet"
-      innehallstagg: Geometri
+      innehallstagg: Samband och förändring
       text:
         - Läs problemet och visa hur ni löser det.
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Staketet
           rader:
@@ -2973,6 +3759,34 @@ ramar:
             - - Varför är arean mot väggen dubbelt så stor som runt om i lösning B?
             - - Var syns det i båda lösningarna att arean är störst när bredden är 15 m?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja med 50 m staket, och varför?
+    - rubrik: "Lösningsförslag: Avancerat, problem 9, Staketet"
+      text:
+        - Idén kommer ur Problembanken åk 7–9, problem 9.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: Runt om 15 · 15 = 225 m², och mot väggen 15 · 30 = 450 m².
+            - rubrik: Kontroll
+              text: 4 · 15 = 60 och 2 · 15 + 30 = 60, och 14 · 16 = 224 och 16 · 28 = 448.
+            - rubrik: Idén
+              text: Arean blir störst i mitten, där talen i tabellen vänder.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: två tabeller"
+              text: Eleven prövar bredder i två tabeller och ser att arean minskar på båda sidor om 15 m.
+            - rubrik: "Lösning B: uttryck och graf"
+              text: Eleven skriver arean som b · (30 − b) och ser i grafen att den är störst vid 15.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                Runt om: 15 · 15 = 225
+                Mot väggen: 20 + 20 + 20 = 60
+                20 · 20 = 400
+                Svar: 225 m² och 400 m².
+            - rubrik: Om lösning C
+              text: |-
+                Runt om stämmer, men kvadraten är inte störst mot väggen: 15 · 30 = 450 m² är mer.
+                Fråga: ”Hur kan ni pröva om 20 och 20 m är bäst?”
     - rubrik: "Lärarens sida: Avancerat, problem 10, Alla summor"
       text:
         - "Problemet handlar om kombinatorik och leder till potenser. Talet 4 kan skrivas som en summa på 8 sätt, 5 på 16 och 10 på 512, när ordningen räknas. Antalet fördubblas, och talet n ger 2 upphöjt till (n − 1). Eleverna listar systematiskt och förklarar mönstret med klossar. Material: tio klossar eller kuber. Idén kommer ur Problembanken åk 7–9, problem 15."
@@ -3012,8 +3826,8 @@ ramar:
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Lärarens sida
-              text: Den står före problemet, och bladet Två lösningar efter.
+            - rubrik: Hör till
+              text: Lärarens sida, bladet Två lösningar och lösningsförslaget.
       listor:
         - rubrik: Alla summor
           rader:
@@ -3044,6 +3858,33 @@ ramar:
             - - Varför ger varje lucka två val i lösning B?
             - - Var syns det i båda lösningarna att antalet fördubblas?
             - - Vilken lösning liknar er egen? Vilken skulle ni välja för talet 20, och varför?
+    - rubrik: "Lösningsförslag: Avancerat, problem 10, Alla summor"
+      text:
+        - Idén kommer ur Problembanken åk 7–9, problem 15.
+      delar:
+        - rubrik: Svaret
+          falt:
+            - rubrik: Svaret
+              text: 4 på 8 sätt, 5 på 16 och 10 på 512, eftersom antalet fördubblas.
+            - rubrik: Kontroll
+              text: 1 + 3 + 3 + 1 = 8 och 1 + 4 + 6 + 4 + 1 = 16, och 16 · 32 = 512.
+            - rubrik: Idén
+              text: Antalet sätt fördubblas när talet ökar med 1.
+        - rubrik: Lösningarna
+          falt:
+            - rubrik: "Lösning A: en lista"
+              text: Eleven listar sätten ordnade efter hur många tal summan har och ser att antalet fördubblas.
+            - rubrik: "Lösning B: klossar på rad"
+              text: Eleven lägger klossar på rad och ser att varje lucka mellan dem får en avdelare eller inte.
+            - rubrik: "Lösning C: tankevurpa"
+              text: |-
+                4, 3 + 1, 2 + 2
+                2 + 1 + 1, 1 + 1 + 1 + 1
+                Svar: 4 kan skrivas på 5 sätt.
+            - rubrik: Om lösning C
+              text: |-
+                Ordningen räknas, så 1 + 3, 1 + 2 + 1 och 1 + 1 + 2 saknas: 5 + 3 = 8.
+                Fråga: ”Hur visar problemet att ordningen räknas?”
     - rubrik: Vår lösning
       text:
         - Skriv det ni vet och det ni ska ta reda på. Visa problemet i den stora rutan, och skriv ert svar och hur ni kontrollerade det.
@@ -3067,7 +3908,7 @@ ramar:
         - rubrik: Till läraren
           falt:
             - rubrik: Så gör du
-              text: Gruppen har ett laminerat kort. I Planera väljer paren ett sätt, och i Avsluta bockar gruppen för sättet som hjälpte, med whiteboardpenna. I vecka 1–2 tänker du högt med frågorna, och från vecka 3 ställer paren dem till varandra.
+              text: Gruppen har ett laminerat kort. I Planera väljer paren ett sätt, och i Avsluta bockar gruppen för sättet som hjälpte, med whiteboardpenna. I vecka 1–2 tänker du högt med frågorna, och från vecka 3 ställer paren dem till varandra.
       listor:
         - rubrik: Våra sätt att lösa problem
           rader:
