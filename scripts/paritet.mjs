@@ -373,7 +373,9 @@ for (const fil of filer) {
   // lärarens sida) står varken i Word eller i utskriften, och bladets rubrik och text prövas i textalternativet, som andra
   // blad.
   const bladsidor = (d.ramar?.ramar ?? []).flatMap((r, i) => (/^Modellen: [^,]+, [^,]+ \d+, ./.test(String(r.rubrik)) ? [new RegExp(`^ramar\\.ramar\\.${i}\\.`)] : []));
-  const hlRubrik = new Map((d.ramar?.ramar ?? []).flatMap((r, i) => { const m = String(r.rubrik).match(/^Lärarhandledning: ([^,]+), (.+)$/); return m ? [[`ramar.ramar.${i}.rubrik`, [norm(`${m[1]} lärarhandledning`), norm(r.tema ?? m[2])]]] : []; }));
+  // Lästexternas lärarhandledning, "Lärarhandledningen: <titel>" (bokhandledningen i src/lib/handledning.ts, K-439): också
+  // i två delar, etiketten ("TEXTSAMTAL I GRUPP · LÄRARHANDLEDNING") och titeln.
+  const hlRubrik = new Map((d.ramar?.ramar ?? []).flatMap((r, i) => { const m = String(r.rubrik).match(/^Lärarhandledning: ([^,]+), (.+)$/); const b = String(r.rubrik).match(/^Lärarhandledningen: (.+)$/); return m ? [[`ramar.ramar.${i}.rubrik`, [norm(`${m[1]} lärarhandledning`), norm(r.tema ?? m[2])]]] : b ? [[`ramar.ramar.${i}.rubrik`, [norm('lärarhandledning'), norm(b[1])]]] : []; }));
   // Faktatextens bilder (på platsen "Bild: <namn>" i texten), bladen (rubriken börjar med "Blad: ", src/lib/pabordet.ts)
   // och bilden som eleven ser på (elev i src/data/pabordet.json) står utan rubriken På bordet, som problemens bilder:
   // rubriken och texten står i textalternativet, och de prövas där.

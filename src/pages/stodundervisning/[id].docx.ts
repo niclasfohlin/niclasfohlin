@@ -5,7 +5,7 @@ import { matteproblemfiler, type Matteproblemfil } from '../../lib/matteproblem'
 import { bankDokument, bladDokument, hemsidaDokument, lektionskortDokument, matteproblemDokument, metodDokument, passDokument, ramarDokument, DOCX_TYP } from '../../lib/metoddocx';
 import { byggSerier, serieKoppling } from '../../lib/serie';
 import { bankAv, bankfiler } from '../../lib/bank';
-import { handledningensFil, lararhandledningar } from '../../lib/handledning';
+import { bokhandledningen, bokhandledningensFil, handledningensFil, lararhandledningar } from '../../lib/handledning';
 import { metodensNivamaterial, nivafiler } from '../../lib/nivamaterial';
 import { bladfiler, metodensBladmaterial } from '../../lib/bladmaterial';
 import { ovrigtfil } from '../../lib/ovrigt';
@@ -66,6 +66,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
       ...(ovrigt ? [{ params: { id: ovrigt.namn }, props: { m: { ...m, serie: undefined }, nivafil: { ramar: ovrigt.ramar, rubrik: ovrigt.rubrik, huvud: ovrigt.huvud } } }] : []),
       ...(bank ? bankfiler(m.id, bank).map((f) => ({ params: { id: f.namn }, props: { m: { ...m, serie: undefined }, bankfil: { niva: f.niva?.namn, medFoljesidor: f.medFoljesidor, rubrik: f.rubrik } } })) : []),
       ...[...lararhandledningar(m.data.ramar?.ramar ?? []).values()].map((h) => ({ params: { id: handledningensFil(m.id, h) }, props: { m: { ...m, serie: undefined }, nivafil: { ramar: [h.ri], rubrik: `Lärarhandledning: ${h.tema}`, huvud: h.niva } } })),
+      // Lästexternas lärarhandledning (src/lib/handledning.ts, bokhandledningen), två A4 i en egen fil.
+      ...(() => { const h = bokhandledningen(m.data.ramar?.ramar ?? []); return h ? [{ params: { id: bokhandledningensFil(m.id) }, props: { m: { ...m, serie: undefined }, nivafil: { ramar: [h.ri], rubrik: `Lärarhandledning: ${h.titel}`, huvud: 'Lärarhandledning' } } }] : []; })(),
     ];
   })];
 };

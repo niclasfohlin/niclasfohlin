@@ -1,0 +1,74 @@
+---
+// Lästexternas lärarhandledning (src/lib/handledning.ts, bokhandledningen; Textsamtal i grupp) på dess sida
+// ([id]/texter/lararhandledning.astro) och, i utskriften, på metodens sida, i samma form som Word-filens två A4
+// (bokhandledningSida i metoddocx.ts) och metodriggens förlaga: etiketten i Cinzel, titeln med den röda dubbla linjen och
+// ingressen, lärarens listor som band (en cell per kolumn) och som tabell (lektionens steg med numret som en röd knapp),
+// delarna med fältets namn till vänster och texten till höger, och tavlan, elevens listor i elevens typsnitt i en ruta
+// med boksidans bruna linje, efter den andra delens fält. Delen Till läraren står sist, som i sidfoten i Word. Det som
+// står inom ”” är det läraren eller eleven säger högt och står i kursiv. I telefonen står bandens celler och tabellens
+// kolumner under varandra med kolumnens namn som etikett. rubrik: titelns nivå, h1 på handledningens sida och h3 bland
+// bankens nivåer.
+import type { Bokhandledning } from '../lib/handledning';
+interface Props { h: Bokhandledning; metod: string; id?: string; rubrik?: 'h1' | 'h2' | 'h3' }
+const { h, metod, id, rubrik = 'h2' } = Astro.props;
+const Rubrik = rubrik;
+const Del = rubrik === 'h1' ? 'h2' : rubrik === 'h2' ? 'h3' : 'h4';
+// Det som står inom citattecken, det som sägs högt, i kursiv.
+const sagt = (text: string) => String(text).split(/(”[^”]*”)/).filter((x) => x !== '').map((x) => ({ text: x, sagt: /^”/.test(x) }));
+const rader = (text: string) => String(text ?? '').split('\n');
+// Lektionens steg: ett nummer först blir en knapp, och raden efter radbrytningen har minuterna och vem som arbetar.
+const steg = (text: string) => { const [forsta, ...under] = rader(text); const m = forsta.match(/^(\d+)\s+(.+)$/); return { nr: m?.[1], namn: m ? m[2] : forsta, under }; };
+---
+<section class="bh" id={id} aria-label={`Lärarhandledning: ${h.titel}`}>
+  <div class="bh-sida">
+    <p class="bh-etikett">{metod} · Lärarhandledning</p>
+    <Rubrik class="bh-titel">{h.titel}</Rubrik>
+    {h.ingress.map((t, i) => <p class:list={['bh-ingress', { 'bh-ingress-not': i > 0 }]}>{sagt(t).map((x) => (x.sagt ? <em>{x.text}</em> : x.text))}</p>)}
+    {/* Handledningens sida lägger knapparna som skriver ut den här, under ingressen. */}
+    <slot name="efter-ingress" />
+    {h.lararlistor.map((l) => (
+      <>
+        <Del class="bh-rubrik">{l.rubrik}</Del>
+        {l.rader.length === 1 ? (
+          <div class="bh-band" style={`--n:${l.kolumner.length}`}>
+            {l.kolumner.map((k, i) => (
+              <div class="bh-cell">
+                <p class="bh-namn">{k}</p>
+                {rader(l.rader[0][i] ?? '').map((t) => <p>{sagt(t).map((x) => (x.sagt ? <em>{x.text}</em> : x.text))}</p>)}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <table class="bh-tabell">
+            <thead><tr>{l.kolumner.map((k) => <th scope="col">{k}</th>)}</tr></thead>
+            <tbody>
+              {l.rader.map((r) => (
+                <tr>
+                  {r.map((c, i) => (i === 0 ? (() => { const s = steg(c); return <th scope="row">{s.nr && <span class="bh-knapp">{s.nr}</span>}<span class="bh-steg">{s.namn}</span>{s.under.map((u) => <span class="bh-under">{u}</span>)}</th>; })() : (
+                    <td data-kolumn={l.kolumner[i]}>{rader(c).map((t) => <p>{sagt(t).map((x) => (x.sagt ? <em>{x.text}</em> : x.text))}</p>)}</td>
+                  )))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </>
+    ))}
+    <Del class="bh-rubrik">{h.delar[0].rubrik}</Del>
+    <dl class="bh-falt">{h.delar[0].falt.map((f) => <div><dt>{rader(f.rubrik).map((r, k) => (k ? <span class="bh-tid">{r}</span> : sagt(r).map((x) => (x.sagt ? <em>{x.text}</em> : x.text))))}</dt><dd class={f.kursiv ? 'bh-kursiv' : undefined}>{rader(f.text).map((t, j) => <>{j > 0 && <br />}{sagt(t).map((x) => (x.sagt ? <em>{x.text}</em> : x.text))}</>)}</dd></div>)}</dl>
+  </div>
+  <div class="bh-sida">
+    {h.delar.slice(1).map((d, i) => (
+      <>
+        <Del class="bh-rubrik">{d.rubrik}</Del>
+        <dl class="bh-falt">{d.falt.map((f) => <div><dt>{rader(f.rubrik).map((r, k) => (k ? <span class="bh-tid">{r}</span> : sagt(r).map((x) => (x.sagt ? <em>{x.text}</em> : x.text))))}</dt><dd class={f.kursiv ? 'bh-kursiv' : undefined}>{rader(f.text).map((t, j) => <>{j > 0 && <br />}{sagt(t).map((x) => (x.sagt ? <em>{x.text}</em> : x.text))}</>)}</dd></div>)}</dl>
+        {i === 0 && h.tavlan.length > 0 && (
+          <div class="bh-tavla" style={`--n:${h.tavlan.length}`}>
+            {h.tavlan.map((sp) => <div class="bh-spalt"><p class="bh-namn">{sp.namn}</p>{sp.rader.map((t) => <p class="bh-elev">{t}</p>)}</div>)}
+          </div>
+        )}
+      </>
+    ))}
+    {h.fot && <p class="bh-fot">{h.fot}</p>}
+  </div>
+</section>

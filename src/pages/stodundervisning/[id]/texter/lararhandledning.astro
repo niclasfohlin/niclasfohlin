@@ -1,0 +1,48 @@
+---
+// /stodundervisning/<id>/texter/lararhandledning: lästexternas lärarhandledning (K-439; Niclas 2026-10-18 natt: "två
+// sidors A4a med hur man kan arbeta med dessa texter ... enklare om man bara vill ladda ner texter och köra", och "Knapp
+// till metoden Textsamtal i grupp och knapp till Lärarhandledning"). Ta fram en lästext har knappen Lärarhandledning, och
+// den leder hit. Sidan har handledningen att läsa i telefonen (Bokhandledning.astro, samma form som Word-filens två A4),
+// knappen som skriver ut den och Word-filen, före och efter handledningen, och vägen tillbaka till texterna.
+// Delningskortet är Ta fram en lästexts (närmaste överordnade sida, src/lib/delningskort.ts).
+import Base from '../../../../layouts/Base.astro';
+import Bokhandledning from '../../../../components/Bokhandledning.astro';
+import Filval from '../../../../components/Filval.astro';
+import SkrivUtPdf from '../../../../components/SkrivUtPdf.astro';
+import { bokhandledningen, bokhandledningensFil, type Bokhandledning as Handledning } from '../../../../lib/handledning';
+import { UPPHOV, metodAdress } from '../../../../lib/metod';
+import { publicerade } from '../../../../lib/innehall';
+import { harTaFram, taFramAv, type TaFram } from '../../../../lib/tafram';
+import { site } from '../../../../data/site';
+
+export async function getStaticPaths() {
+  const ut = [];
+  for (const m of (await publicerade('stodundervisning')).filter((x) => harTaFram(x, 'texter'))) {
+    const h = bokhandledningen(m.data.ramar?.ramar ?? []);
+    if (h) ut.push({ params: { id: m.id }, props: { t: await taFramAv(m), h } });
+  }
+  return ut;
+}
+
+const { t, h } = Astro.props as { t: TaFram; h: Handledning };
+const fil = bokhandledningensFil(t.metod);
+const adress = `${metodAdress(site.url, t.metod).replace(/^https?:\/\//, '')}/${t.led}/lararhandledning`;
+const skrivUt = (klass: string) => ({ class: klass, href: `/stodundervisning/${fil}.pdf`, target: '_blank', rel: 'noopener', 'data-skriv-ut-pdf': '', 'data-sidor-hogst': '2', 'data-goatcounter-click': `utskrift:${t.metod}/lararhandledning`, 'data-goatcounter-title': `${t.titel}: lärarhandledningen till ${t.ord.alla} som pdf` });
+---
+
+<Base title={`Lärarhandledning: ${h.titel} · ${t.titel}`} description={`Lärarhandledningen till ${t.ord.alla} i ${t.titel}: två sidor om hur hela klassen eller en grupp läser en text tillsammans, i par, med stoppet, frågorna och samtalet. Att läsa och skriva ut.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
+  <article class="bh-sidan">
+    <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${t.metod}`}>{t.titel}</a> · <a href={t.adress}>{t.namn}</a> · Lärarhandledning</p>
+
+    <Bokhandledning h={h} metod={t.titel} rubrik="h1">
+      <p class="tema-atgarder bh-knappar" slot="efter-ingress"><a {...skrivUt('knapp')}><span data-direkt="Skriv ut lärarhandledningen">Lärarhandledningen som pdf</span></a>{' '}<Filval fil={`/stodundervisning/${fil}`} namn={fil} rubrik={`Lärarhandledning: ${h.titel}`} statistik={`${t.titel}: lärarhandledningen till ${t.ord.alla}`} utanDrive liten />{' '}<a class="knapp sekundar" href={t.adress}>{t.namn}</a></p>
+    </Bokhandledning>
+
+    {/* Efter handledningen: utskriften igen, och vägen tillbaka till texterna. */}
+    <p class="tema-atgarder tema-efter-hl"><a {...skrivUt('knapp')}><span data-direkt="Skriv ut lärarhandledningen">Lärarhandledningen som pdf</span></a>{' '}<a class="knapp sekundar" href={t.adress}>Till texterna</a></p>
+
+    <p class="upphov">{UPPHOV}. Lärarhandledningen till {t.ord.alla} i <a href={`/stodundervisning/${t.metod}`}>{t.titel}</a>.</p>
+  </article>
+</Base>
+
+<SkrivUtPdf />

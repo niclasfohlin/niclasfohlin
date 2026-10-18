@@ -36,7 +36,7 @@ import { ANFANG_MULTIPEL, BOKBREDD, BOKLUFT, BOKMARGINAL, FORMLUFT, FORMRAD_PT, 
 import { arBladsida, bankAv, bankfilensRamar, bankRad, type Bankfil } from './bank';
 import { harMaterial, hemsidansNamn, MATERIAL } from './material';
 import { losningarnasNiva, losningarnasNot, problemformer, type Losningsforslag } from './problemform';
-import { lararhandledningar, nivansEtikett, texternasEtikett, type HandledningFalt, type Lararhandledning } from './handledning';
+import { bokhandledningen, lararhandledningar, nivansEtikett, texternasEtikett, type Bokhandledning, type HandledningFalt, type Lararhandledning } from './handledning';
 import type { Matteproblemfil } from './matteproblem';
 import { bildMatt, inline, kolumnandelar, omslagAdress, omslagUpphov, OMSLAG_KORT, radensNamn, ramensNiva, talcell } from './litteraturlista';
 
@@ -1421,6 +1421,116 @@ function lararhandledningSida(h: Lararhandledning, farg: string): Barn[] {
   ut.push(new Paragraph({ spacing: { before: 0, after: 90, line: 240 }, children: etikett(texternasEtikett(h), FAKTA.mork) }));
   h.texter.forEach((x, i) => ut.push(rubrik(x.titel, { nr: x.nr, modell: x.modell, storlek: 30, fore: i ? 110 : 40 }), falten(x.falt)));
   ut.push(punktStycke());
+  return ut;
+}
+// Lästexternas lärarhandledning (src/lib/handledning.ts, Textsamtal i grupp; metodriggens leverans 2026-10-19 natt), ett
+// till ett med riggens build-docx.js (bokhandledning) och måtten i riggens TILL-SAJTEN: två A4 i lästexternas familj,
+// boksidans typsnitt och färger utan ramen runt sidan, som är elevens. Allt är tabeller och stycken, så att Word och Google
+// Dokument ritar samma sak. Sidan 1 är lektionen i handen: etiketten, titeln i Cinzel med den röda dubbla linjen och
+// ingressen, lärarens listor (en rad blir ett band med en cell per kolumn, flera rader en tabell med kolumnernas namn
+// överst och stegets nummer som en röd knapp) och den första delen. Sidan 2 är det som kommer före och efter: de andra
+// delarna, med tavlan (elevens listor i elevens typsnitt i en ruta med boksidans bruna linje) efter den första, och en kort
+// linje sist. Delen Till läraren står i sidfoten med sidnumret (bokFot). Det som står inom ”” är det läraren eller eleven
+// säger högt och står i kursiv. Riggen prövade sidorna i Word och Google Dokument (40 punkter luft nederst eller mer), och
+// scripts/googleprov.mjs prövar sajtens filer.
+const bokhandledningbyte = (h: Bokhandledning) => new Sektionsbyte(false, { not: h.fot, niva: '', vad: 'lärarhandledning', farg: BOK.ram });
+function bokhandledningSida(h: Bokhandledning, metod: string): Barn[] {
+  const ingen = FORM_INGEN;
+  const inga = { top: ingen, bottom: ingen, left: ingen, right: ingen };
+  const tunn = { style: BorderStyle.SINGLE, size: 4, color: BOK.skiljare } as const;
+  const rod = { style: BorderStyle.SINGLE, size: 6, color: BOK.rod, space: 0 } as const;
+  const brun = { style: BorderStyle.SINGLE, size: 12, color: BOK.ram } as const;
+  const TWB = BOKBREDD;
+  const cinzel = (text: string, size: number, color: string) => textRun({ text, font: BOKTYPSNITT, size, color });
+  const mitt = (bredd: number) => ({ left: Math.round((TWB - bredd) / 2), right: Math.round((TWB - bredd) / 2) });
+  const STORLEK = 18, RAD = 228, MAR = 40;
+  // Ett stycke där det som står inom citattecken är kursivt: det läraren eller eleven säger högt.
+  const sagt = (text: string, o: { size?: number; color?: string; bold?: boolean; kursiv?: boolean } = {}) =>
+    String(text).split(/(”[^”]*”)/).filter((x) => x !== '').map((x) => textRun({ text: x, size: o.size ?? STORLEK, color: o.color ?? BOK.text, font: 'Arial', ...(o.bold ? { bold: true } : {}), ...(/^”/.test(x) || o.kursiv ? { italics: true } : {}) }));
+  const stycke = (text: string, o: { size?: number; color?: string; kursiv?: boolean; efter?: number; center?: boolean } = {}) => new Paragraph({ spacing: { before: 0, after: o.efter ?? 0, line: RAD }, keepLines: true, ...(o.center ? { alignment: AlignmentType.CENTER } : {}), children: sagt(text, o) });
+  const etikett = (text: string, o: { size?: number; efter?: number; center?: boolean } = {}) => new Paragraph({ keepNext: true, keepLines: true, spacing: { before: 0, after: o.efter ?? 40, line: 240 }, ...(o.center ? { alignment: AlignmentType.CENTER } : {}), children: [cinzel(String(text).toLocaleUpperCase('sv'), o.size ?? 15, BOK.rod)] });
+  const rubrik = (text: string, fore: number) => new Paragraph({ keepNext: true, keepLines: true, outlineLevel: 2, spacing: { before: fore, after: 70, line: 240 },
+    border: { bottom: { style: BorderStyle.SINGLE, size: 4, color: BOK.skiljare, space: 2 } }, children: [cinzel(text, 23, BOK.titel)] });
+  const knapp = (nr: string) => [textRun({ text: `\u00a0${nr}\u00a0`, font: BOKTYPSNITT, size: 17, color: 'FFFFFF', shading: { type: ShadingType.CLEAR, fill: BOK.rod, color: 'auto' } }), textRun({ text: '\u00a0\u00a0', size: STORLEK, font: 'Arial' })];
+  const hcell = (barn: Barn[], o: { w: number; borders: object; mar: { top: number; bottom: number; left: number; right: number } }) => new TableCell({ width: { size: o.w, type: WidthType.DXA }, borders: o.borders, margins: o.mar, verticalAlign: VerticalAlign.TOP, children: barn.length ? barn : [new Paragraph({ spacing: { after: 0 } })] });
+  // En del: fältets namn till vänster och texten till höger, med en tunn linje mellan raderna.
+  const NAMN = 2300, TEXT = TWB - NAMN;
+  const falten = (falt: HandledningFalt[]) => new Table({
+    width: { size: TWB, type: WidthType.DXA }, columnWidths: [NAMN, TEXT], layout: TableLayoutType.FIXED, borders: FORM_UTAN,
+    rows: falt.map((f, i) => new TableRow({ cantSplit: true, children: [
+      hcell([new Paragraph({ spacing: { before: 0, after: 0, line: RAD }, keepNext: i < falt.length - 1, children: f.rubrik.split('\n').flatMap((r, k) => [...(k ? [new TextRun({ break: 1, size: STORLEK, font: 'Arial' })] : []), ...sagt(r, { bold: !k, color: k ? BOK.not : BOK.titel })]) })],
+        { w: NAMN, borders: { ...inga, ...(i ? { top: tunn } : {}) }, mar: { top: MAR, bottom: MAR, left: 0, right: 120 } }),
+      hcell(f.text.split('\n').map((t) => stycke(t, { kursiv: f.kursiv })), { w: TEXT, borders: { ...inga, ...(i ? { top: tunn } : {}) }, mar: { top: MAR, bottom: MAR, left: 0, right: 0 } }),
+    ] })),
+  });
+  // En lista med en rad: ett band med en cell per kolumn, kolumnens namn som etikett överst och texten under, med tunna
+  // linjer mellan cellerna och över och under bandet.
+  const band = (l: Bokhandledning['lararlistor'][number]) => {
+    const n = l.kolumner.length, w = Math.floor(TWB / n), bredder = l.kolumner.map((_, i) => (i === n - 1 ? TWB - w * (n - 1) : w));
+    const r = l.rader[0] ?? [];
+    return new Table({
+      width: { size: TWB, type: WidthType.DXA }, columnWidths: bredder, layout: TableLayoutType.FIXED, borders: FORM_UTAN,
+      rows: [new TableRow({ cantSplit: true, children: l.kolumner.map((k, i) => hcell([etikett(k, { size: 14, efter: 30 }), ...String(r[i] ?? '').split('\n').map((t) => stycke(t))],
+        { w: bredder[i], borders: { top: tunn, bottom: tunn, left: i ? tunn : ingen, right: ingen }, mar: { top: 50, bottom: 60, left: i ? 90 : 0, right: 90 } })) })],
+    });
+  };
+  // En lista med flera rader: kolumnernas namn i en rad överst och raderna med en tunn linje emellan. Den första kolumnen
+  // är stegets namn: ett nummer först blir en knapp, och raden efter radbrytningen, med minuterna, står i rubrikernas bruna
+  // färg.
+  const tabellen = (l: Bokhandledning['lararlistor'][number]) => {
+    const n = l.kolumner.length;
+    const forsta = n === 4 ? 1474 : Math.round(TWB / n);
+    const resten = Math.floor((TWB - forsta) / (n - 1));
+    const bredder = l.kolumner.map((_, i) => (i === 0 ? forsta : i === n - 1 ? TWB - forsta - resten * (n - 2) : resten));
+    const huvud = new TableRow({ cantSplit: true, tableHeader: true, children: l.kolumner.map((k, i) => hcell([etikett(k, { size: 14, efter: 0 })],
+      { w: bredder[i], borders: { ...inga, bottom: tunn }, mar: { top: 20, bottom: 40, left: i ? 90 : 0, right: 90 } })) });
+    const steg = (text: string) => {
+      const [forstaRaden, ...under] = String(text).split('\n');
+      const m = forstaRaden.match(/^(\d+)\s+(.+)$/);
+      return [new Paragraph({ spacing: { before: 0, after: 0, line: RAD }, keepNext: true, children: [...(m ? knapp(m[1]) : []), ...sagt(m ? m[2] : forstaRaden, { bold: true, color: BOK.titel })] }),
+        ...under.map((t) => stycke(t, { color: BOK.titel, size: 17 }))];
+    };
+    return new Table({
+      width: { size: TWB, type: WidthType.DXA }, columnWidths: bredder, layout: TableLayoutType.FIXED, borders: FORM_UTAN,
+      rows: [huvud, ...l.rader.map((r, ri) => new TableRow({ cantSplit: true, children: r.map((c, i) => hcell(i === 0 ? steg(c) : String(c ?? '').split('\n').map((t) => stycke(t)),
+        { w: bredder[i], borders: { ...inga, ...(ri ? { top: tunn } : {}) }, mar: { top: 55, bottom: 55, left: i ? 90 : 0, right: 90 } })) }))],
+    });
+  };
+  // Elevens listor i en ruta med boksidans bruna linje, en spalt per kolumn, i elevens typsnitt: det som läraren skriver
+  // på tavlan.
+  const tavlan = (spalter: Bokhandledning['tavlan']) => {
+    const inre = TWB - 2 * DUBBEL_GLAPP;
+    const w = Math.floor(inre / spalter.length), bredder = spalter.map((_, i) => (i === spalter.length - 1 ? inre - w * (spalter.length - 1) : w));
+    const elev: IRunOptions = { size: 21, color: BOK.text, font: ELEVTYPSNITT };
+    return new Table({
+      width: { size: TWB, type: WidthType.DXA }, columnWidths: [TWB], layout: TableLayoutType.FIXED, borders: FORM_UTAN,
+      rows: [new TableRow({ cantSplit: true, children: [new TableCell({
+        width: { size: TWB, type: WidthType.DXA }, borders: { top: brun, bottom: brun, left: brun, right: brun },
+        margins: { top: 80, bottom: 80, left: DUBBEL_GLAPP, right: DUBBEL_GLAPP },
+        children: [hjalpStycke(), new Table({
+          width: { size: inre, type: WidthType.DXA }, columnWidths: bredder, layout: TableLayoutType.FIXED, borders: FORM_UTAN,
+          rows: [new TableRow({ cantSplit: true, children: spalter.map((sp, i) => hcell([etikett(sp.namn, { size: 15, efter: 40 }), ...sp.rader.map((t) => new Paragraph({ spacing: { before: 0, after: 20, line: 250 }, keepLines: true, children: elevRuns({ text: String(t ?? ''), ...elev }) }))],
+            { w: bredder[i], borders: { ...inga, ...(i ? { left: tunn } : {}) }, mar: { top: 40, bottom: 40, left: 160, right: 120 } })) })],
+        }), hjalpStycke()],
+      })] })],
+    });
+  };
+  const ut: Barn[] = [];
+  // Sidan 1: huvudet, ingressen, lärarens listor och den första delen.
+  ut.push(etikett(`${metod} · Lärarhandledning`, { center: true, size: 16, efter: 60 }));
+  ut.push(new Paragraph({ alignment: AlignmentType.CENTER, outlineLevel: 1, keepNext: true, spacing: { before: 0, after: 60, line: 240 }, children: [cinzel(h.titel, 52, BOK.titel)] }));
+  ut.push(punktStycke({ indent: mitt(2000), keepNext: true, spacing: { before: 0, after: 0, line: 240 }, border: { bottom: rod } }));
+  ut.push(punktStycke({ indent: mitt(1970), keepNext: true, spacing: { before: 0, after: 140, line: 147 }, border: { bottom: rod } }));
+  h.ingress.forEach((t, i) => ut.push(new Paragraph({ alignment: AlignmentType.CENTER, keepNext: true, spacing: { before: 0, after: i ? 140 : 40, line: 260 }, children: sagt(t, i ? { color: BOK.not } : { size: 22 }) })));
+  h.lararlistor.forEach((l, i) => { ut.push(rubrik(l.rubrik, i ? 160 : 40)); ut.push(l.rader.length === 1 ? band(l) : tabellen(l)); });
+  ut.push(rubrik(h.delar[0].rubrik, 160), falten(h.delar[0].falt));
+  // Sidan 2: de andra delarna, med tavlan efter den första.
+  ut.push(punktStycke({ pageBreakBefore: true }));
+  h.delar.slice(1).forEach((del, i) => {
+    ut.push(rubrik(del.rubrik, i ? 160 : 0), falten(del.falt));
+    if (i === 0 && h.tavlan.length) ut.push(punktStycke({ spacing: { before: 0, after: 80, line: 240 } }), tavlan(h.tavlan));
+  });
+  ut.push(punktStycke({ indent: mitt(1200), spacing: { before: 120, after: 0, line: 240 }, border: { bottom: tunn } }));
   return ut;
 }
 // Sidlåset (src/data/sidlas.json, mätt av scripts/sidlas.mjs i npm run validera; förebilden är metodriggens
@@ -3117,6 +3227,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     const ramensRubrik = (ram: Ram, nySida = false) => new Paragraph({ children: [run(ram.rubrik)], heading: HeadingLevel.HEADING_3, keepNext: true, pageBreakBefore: nySida || undefined, spacing: { before: 240, after: 80 } });
     const faktasidor = faktatexter(ramarna);
     const handledningar = lararhandledningar(ramarna);
+    const bokhl = bokhandledningen(ramarna);
     // En ram, där den står. ram är ramen som den ritas: en ram vars listor står vid veckorna ritas utan dem.
     const enRam = (i: number, ram: Ram): void => {
       efterElevsida = false;
@@ -3128,6 +3239,11 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
       if (hl) {
         const farg = nivansFarg(d.nivaer, { niva: hl.niva, nivaNr: bank?.nivaer.find((n) => n.namn === hl.niva)?.nivaNr ?? 0 });
         ut.push(handledningbyte(hl, { farg, metod: d.titel }), ...lararhandledningSida(hl, farg), new Sektionsbyte(false));
+        return;
+      }
+      // Lästexternas lärarhandledning: två A4 i en egen boksektion (bokhandledningSida()).
+      if (bokhl?.ri === i) {
+        ut.push(bokhandledningbyte(bokhl), ...bokhandledningSida(bokhl, d.titel), new Sektionsbyte(false));
         return;
       }
       // En faktatext (faktatextAv i src/lib/ramform.ts) är sidor i en faktabok, i en egen sektion, med bilderna På bordet
@@ -3380,6 +3496,7 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
     const bank = bankAv(d);
     const faktasidor = faktatexter(ramarna);
     const handledningar = lararhandledningar(ramarna);
+    const bokhl = bokhandledningen(ramarna);
     // Ramens blad (bildblad()), var och ett på ett eget liggande A4 efter ramens sidor, i bildernas ordning. I filen med
     // allt står de redan i beskrivningen, efter sin ram.
     const adress = metodAdress(bas, post.id).replace(/^https?:\/\//, '');
@@ -3425,6 +3542,14 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
         if (o.baraTommaRamar) return ut;
         const farg = nivansFarg(d.nivaer, { niva: hl.niva, nivaNr: bank?.nivaer.find((n) => n.namn === hl.niva)?.nivaNr ?? 0 });
         const sida: Flod = [handledningbyte(hl, { farg, metod: d.titel }), ...lararhandledningSida(hl, farg)];
+        bladsidor.add(sida);
+        ut.push(sida);
+        return ut;
+      }
+      // Lästexternas lärarhandledning (bokhandledningSida()), två A4. I filen med allt står den redan i beskrivningen.
+      if (bokhl?.ri === i) {
+        if (o.baraTommaRamar) return ut;
+        const sida: Flod = [bokhandledningbyte(bokhl), ...bokhandledningSida(bokhl, d.titel)];
         bladsidor.add(sida);
         ut.push(sida);
         return ut;

@@ -412,6 +412,8 @@ async function bygg(m: Metod): Promise<TaFram> {
       : (() => { const f = bank.foljesidor.map((n) => (/^Lärarens sida$/i.test(n) ? n.toLowerCase() : n)).join(' och '); return { folje: f, foljeEn: f }; })()),
     losningNamn: !bank.post || bank.post.namn === 'Lösningsförslag' ? 'Lösningsförslag' : bank.post.namn,
     nivaer, forSig: bank.sidorForSig, baraTexter: led === 'texter', taggVal: medPoster.length > 0 && led !== 'texter', taggar: medPoster,
+    // Lästexternas lärarhandledning har en egen sida under Ta fram ([id]/texter/lararhandledning.astro).
+    ...(bank.handledning !== undefined ? { handledning: `${adress}/lararhandledning` } : {}),
     taggText: egnaSlag
       ? { etikett: 'Slag', ingress: ` Taggen vid texten säger vad eleven ska lista ut mellan raderna.`, kalla: ' Taggarna är metodens slag av frågor mellan raderna, ur tabellen Slagen: det eleven listar ut.' }
       : modeller

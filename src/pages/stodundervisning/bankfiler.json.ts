@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { matteproblemenPaSidan, publicerade } from '../../lib/innehall';
 import { DATABAS, matteproblemfiler } from '../../lib/matteproblem';
 import { arBladsida, bankAv, bankfiler, bankfilensRamar } from '../../lib/bank';
-import { handledningensFil, lararhandledningar } from '../../lib/handledning';
+import { bokhandledningen, bokhandledningensFil, handledningensFil, lararhandledningar } from '../../lib/handledning';
 import { metodensNivamaterial, nivafiler } from '../../lib/nivamaterial';
 import { bladfiler, metodensBladmaterial } from '../../lib/bladmaterial';
 import { ovrigtfil } from '../../lib/ovrigt';
@@ -71,11 +71,17 @@ export const GET: APIRoute = async () => {
     const bank = bankAv(m.data);
     const handledningar = lararhandledningar(m.data.ramar?.ramar ?? []);
     nivans.push(...[...handledningar.values()].map((h) => ({ metod: m.id, namn: handledningensFil(m.id, h), rubrik: `Lärarhandledning: ${h.tema}`, slag: 'handledning', minst: 2, hogst: 2, ramar: [h.ri], oversikter: [] as number[] })));
+    // Lästexternas lärarhandledning: två A4, som temanas.
+    const bokhl = bokhandledningen(m.data.ramar?.ramar ?? []);
+    if (bokhl) nivans.push({ metod: m.id, namn: bokhandledningensFil(m.id), rubrik: `Lärarhandledning: ${bokhl.titel}`, slag: 'handledning', minst: 2, hogst: 2, ramar: [bokhl.ri], oversikter: [] });
     if (!bank) return [...hela, ...nivans];
     const fakta = new Set(bank.enheter.filter((e) => e.l.faktatext).map((e) => e.ri));
     const vidFakta = new Set(bank.enheter.filter((e) => e.l.faktatext).flatMap((e) => [...e.fore, ...e.efter]));
     const ramarna = m.data.ramar?.ramar ?? [];
-    const sidor = (ri: number): [number, number] => (fakta.has(ri) ? [2, 6] : arBladsida(ramarna[ri]) ? [1, 1] : vidFakta.has(ri) ? [1, 2] : handledningar.has(ri) ? [2, 2] : bank.oversikter.has(ri) ? [1, 2] : [1, 1]);
+    // En nivås översikt är en tabell med en rad per enhet, omkring tio rader på en sida: med tjugofem lästexter på nivån och
+    // kartläggningens två är den tre sidor (2026-10-19).
+    const oversiktensSidor = (ri: number) => Math.max(2, Math.ceil((ramarna[ri].oversikt?.rader.length ?? 0) / 10));
+    const sidor = (ri: number): [number, number] => (fakta.has(ri) ? [2, 6] : arBladsida(ramarna[ri]) ? [1, 1] : vidFakta.has(ri) ? [1, 2] : handledningar.has(ri) || bokhl?.ri === ri ? [2, 2] : bank.oversikter.has(ri) ? [1, oversiktensSidor(ri)] : [1, 1]);
     return [...hela, ...nivans, ...bankfiler(m.id, bank).map((f) => {
       const ramar = bankfilensRamar(bank, f);
       return { metod: m.id, namn: f.namn, rubrik: f.rubrik, minst: ramar.reduce((s, ri) => s + sidor(ri)[0], 0), hogst: ramar.reduce((s, ri) => s + sidor(ri)[1], 0), ramar, oversikter: ramar.filter((ri) => bank.oversikter.has(ri)) };

@@ -72,3 +72,50 @@ export const texternasEtikett = (h: Lararhandledning) => `${h.tema} · ${TAL[h.t
 export const nivansEtikett = (h: Lararhandledning) => `${h.niva} · Lärarhandledning`.toLocaleUpperCase('sv');
 /** Handledningens fil, Word och pdf: <id>-lararhandledning-<tema>. */
 export const handledningensFil = (id: string, h: Pick<Lararhandledning, 'tema'>) => `${id}-lararhandledning-${slugAv(h.tema)}`;
+
+// Lärarhandledningen till en metods lästexter (K-439; Textsamtal i grupp, metodriggens leverans 2026-10-19 natt). Niclas
+// 2026-10-18 natt: "två sidors A4a med hur man kan arbeta med dessa texter. Dvs en generell lärarhandledning för
+// Textsamtal i helklass eller grupper med dessa ... enklare om man bara vill ladda ner texter och köra. Dels upp i par. Läs.
+// Diskutera mm. Och i en enkel snygg design". Ramen "Lärarhandledningen: <titel>" står en gång, före bankens första nivå,
+// i lästexternas familj: sidan 1 är lektionen i handen (lärarens listor som band och tabell, och den första delen), sidan
+// 2 det som kommer före och efter (de andra delarna, med tavlan, elevens listor, efter den första av dem). Delen Till
+// läraren står i sidfoten och inte på sidan. Word (bokhandledningSida i metoddocx.ts, ett till ett med riggens
+// build-docx.js, bokhandledning), handledningens sida ([id]/texter/lararhandledning.astro) och metodens utskrift
+// (Bokhandledning.astro) ritar den ur samma form.
+export interface Bokhandledning {
+  /** Ramens plats bland metodens ramar och titeln efter kolonet. */
+  ri: number; titel: string;
+  /** Ingressen: målet och raden om texten, tiden och klassen. */
+  ingress: string[];
+  /** Lärarens listor på sidan 1, i ordning: en rad blir ett band, flera rader en tabell. */
+  lararlistor: { rubrik: string; kolumner: string[]; rader: string[][] }[];
+  /** Elevens listor, tavlan på sidan 2: en spalt per kolumn, eller per lista utan kolumner. */
+  tavlan: { namn: string; rader: string[] }[];
+  /** Delarna utom Till läraren: den första på sidan 1, de andra på sidan 2. */
+  delar: HandledningDel[];
+  /** Delen Till läraren, som står i sidfoten. */
+  fot: string;
+}
+export const BOKHANDLEDNING = /^Lärarhandledningen: (.+)$/;
+export const arBokhandledning = (ram: { rubrik: string }) => BOKHANDLEDNING.test(ram.rubrik);
+
+/** Lärarhandledningen till metodens lästexter, när metoden har en. Stoppar bygget när ramen står två gånger, när en av
+ *  lärarens listor saknar kolumner, och när delarna är färre än två (sidan 2 börjar med den andra). */
+export function bokhandledningen(ramar: Ram[]): Bokhandledning | undefined {
+  const ri = ramar.findIndex(arBokhandledning);
+  if (ri < 0) return undefined;
+  const ram = ramar[ri];
+  if (ramar.filter(arBokhandledning).length > 1) throw new Error(`${ram.rubrik}: metoden har två ramar som heter "Lärarhandledningen: …", men lästexterna har en lärarhandledning (src/lib/handledning.ts).`);
+  const listor = ram.listor ?? [];
+  const lararlistor = listor.filter((l) => l.larare).map((l) => {
+    if (!l.kolumner?.length || !l.rubrik) throw new Error(`${ram.rubrik}: lärarens lista ${l.rubrik ?? '(utan rubrik)'} behöver en rubrik och kolumner, som blir bandets eller tabellens etiketter (src/lib/handledning.ts).`);
+    return { rubrik: l.rubrik, kolumner: l.kolumner, rader: l.rader };
+  });
+  const tavlan = listor.filter((l) => !l.larare).flatMap((l) => (l.kolumner?.length ? l.kolumner.map((k, i) => ({ namn: k, rader: l.rader.map((r) => r[i] ?? '') })) : [{ namn: l.rubrik ?? '', rader: l.rader.map((r) => r[0] ?? '') }]));
+  const delar = ram.delar.filter((d) => d.rubrik !== 'Till läraren').map((d) => ({ rubrik: d.rubrik, falt: falten(d.falt) }));
+  if (delar.length < 2) throw new Error(`${ram.rubrik}: handledningen behöver minst två delar, eftersom sidan 2 börjar med den andra (src/lib/handledning.ts).`);
+  const fot = (ram.delar.find((d) => d.rubrik === 'Till läraren')?.falt ?? []).map((f) => f.text ?? '').join(' ');
+  return { ri, titel: ram.rubrik.match(BOKHANDLEDNING)![1], ingress: ram.text ?? [], lararlistor, tavlan, delar, fot };
+}
+/** Lästexternas lärarhandledning som fil, Word och pdf: <id>-lararhandledning. */
+export const bokhandledningensFil = (id: string) => `${id}-lararhandledning`;

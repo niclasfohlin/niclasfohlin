@@ -28,7 +28,8 @@ import Nivarad from './Nivarad.astro';
 import Problemsida from './Problemsida.astro';
 import Losningsforslag from './Losningsforslag.astro';
 import Lararhandledning from './Lararhandledning.astro';
-import { lararhandledningar } from '../lib/handledning';
+import Bokhandledning from './Bokhandledning.astro';
+import { bokhandledningen, bokhandledningensFil, lararhandledningar } from '../lib/handledning';
 import { arBladsida, bankAv, bankRad, enhetAdress, foljesidansNamn, nivaFarger, BOKNIVA, type Bankenhet } from '../lib/bank';
 import { losningarnasNiva, losningarnasNot, problemformer } from '../lib/problemform';
 import { filmerVid, grundUpphov, metodensFilmer, stegDelar, type FilmPlats } from '../lib/film';
@@ -276,8 +277,11 @@ if (sistaVeckan >= 0 && punkter[sistaVeckan + 1]) punkter[sistaVeckan + 1].helaK
 // utskriften av allt står de (Niclas 2026-10-10: "Om skriv ut hela beskrivningen i alla är verkligen att skriva ut allt bör
 // denna också vara det?"), och utskriften Metoden har dem inte, eftersom Materialet är material (data-material nedan).
 // Ett temas lärarhandledning (src/lib/handledning.ts) står före temats första text, som i Word-filen med allt.
-const bankPunkter = new Map<string, Punkt[]>(banken && !undersida ? banken.nivaer.map((n) => [n.namn, n.enheter.flatMap((e) => [...(e.handledning !== undefined ? [e.handledning] : []), ...e.fore, e.ri, ...e.efter]).map((ri) => ({ ram: ramarna[ri], ri }))]) : []);
+// Lästexternas lärarhandledning står först i bankens första nivå, i utskriften, som först i Word-filen med allt
+// (bankfilensRamar i src/lib/bank.ts).
+const bankPunkter = new Map<string, Punkt[]>(banken && !undersida ? banken.nivaer.map((n, ni) => [n.namn, [...(ni === 0 && banken.handledning !== undefined ? [banken.handledning] : []), ...n.enheter.flatMap((e) => [...(e.handledning !== undefined ? [e.handledning] : []), ...e.fore, e.ri, ...e.efter])].map((ri) => ({ ram: ramarna[ri], ri }))]) : []);
 const handledningar = lararhandledningar(ramarna);
+const bokhl = bokhandledningen(ramarna);
 // Gamla länkar till en enhet eller en följesida på metodens sida (#ram-12, #lararens-sida, #bas-problem-1) leder till
 // enhetens sida, till bladet (Bank.astro).
 const bankLankar = banken && !undersida ? Object.fromEntries(banken.enheter.flatMap((e) => [...e.fore, e.ri, ...e.efter].flatMap((ri, k) => {
@@ -770,12 +774,15 @@ const meny = [
         const larare = former.larare(ram);
         const problemet = larare && { stycken: larare.l.stycken, fragor: larare.l.fragor, bilder: larare.bilder, namn: larare.namn };
         const hl = handledningar.get(ri);
+        const bhl = bokhl?.ri === ri ? bokhl : undefined;
         // Textens modell, ifylld (arBladsida i src/lib/bank.ts): bladet, som i Word.
         const sidblad = arBladsida(ram) ? bladVid(bilderPaBordet, ram.rubrik)[0] : undefined;
         const innehall = sidblad ? (
         <div class="m-ram m-bladsida" id={`ram-${ri + 1}`}><Pabordet b={sidblad} utanRubrik /></div>
       ) : hl ? (
         <Lararhandledning h={hl} id={`ram-${ri + 1}`} farg={bankFarger[hl.niva] ?? '#17324d'} rubrik="h3" />
+      ) : bhl ? (
+        <Bokhandledning h={bhl} metod={d.titel} id={`ram-${ri + 1}`} rubrik="h3" />
       ) : lf ? (<>
         <Losningsforslag lf={lf} id={`ram-${ri + 1}`} ankare={ramAnkare[ri]} farg={bankFarger[lf.niva] ?? BOKNIVA[lf.nivaNr] ?? '#4b3a2f'} />
         <Filmruta filmer={[...filmerVid(filmer, { ram: ram.rubrik }), ...(efter ? vid({ ram: efter }) : [])]} titel={d.titel} />
@@ -1067,6 +1074,13 @@ const meny = [
         {banken && !undersida && (
           <div class="bank" data-bank data-lankar={JSON.stringify(bankLankar)}>
             <p class="m-efter bank-rad">{bankRad(banken, metodAdress(site.url, id).replace(/^https?:\/\//, ''))}</p>
+            {/* Lästexternas lärarhandledning: en rad före nivåerna, med handledningens sida och filer (K-439). */}
+            {bokhl && (
+              <div class="bank-filer bank-handledning bank-allman">
+                <p class="bank-filer-rubrik">Lärarhandledning: <a href={`/stodundervisning/${id}/${banken.ord.slug}/lararhandledning`}>{bokhl.titel}</a></p>
+                <ul class="filrader bankfiler-niva"><li><span class="filrubrik">Två sidor för hela klassen</span> <Filval fil={`/stodundervisning/${bokhandledningensFil(id)}`} namn={bokhandledningensFil(id)} rubrik={`Lärarhandledning: ${bokhl.titel}`} statistik={`${d.titel}: lärarhandledningen till ${banken.ord.alla}`} pdf pdfTitel="Ladda ner som pdf" utanDrive liten /></li></ul>
+              </div>
+            )}
             {banken.nivaer.map((n) => <Bank d={d} id={id} bank={banken} niva={n} farger={bankFarger} ankare={(i) => ramAnkare[i]} friKlass={friKlass}>{bankPunkter.get(n.namn)!.map(rita)}</Bank>)}
           </div>
         )}

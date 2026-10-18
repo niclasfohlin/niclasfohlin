@@ -2501,6 +2501,64 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
 .tema-handledning .hl-text { scroll-margin-top: 1rem; }
 .tema-efter-hl { margin-top: 1.5rem; }
 .tema-texter { scroll-margin-top: 1rem; }
+/* Lästexternas lärarhandledning (Bokhandledning.astro, K-439): som Word-filens två A4 och metodriggens förlaga, i
+   lästexternas familj: etiketterna och rubrikerna i Cinzel i boksidans färger, lärarens text i läsarens typsnitt och det
+   som sägs högt i kursiv, banden och lektionens tabell med tunna linjer, delarna i två spalter, och tavlan i elevens
+   typsnitt i en ruta med boksidans bruna linje. I telefonen står bandens celler, tabellens kolumner och tavlans spalter
+   under varandra, med kolumnens namn som etikett. I utskriften börjar sidan 2 på ett nytt blad, som i Word. */
+.bh { max-width: 52rem; margin: 0.5rem 0 1.5rem; color: var(--bok-text); }
+.bh-sida + .bh-sida { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--bok-skiljare); }
+.bh-etikett { margin: 0 0 0.3rem; text-align: center; font: 400 0.8rem/1.3 'Cinzel', serif; letter-spacing: 0.04em; text-transform: uppercase; color: var(--bok-rod); }
+.bh-titel { margin: 0 0 0.6rem; text-align: center; font: 400 clamp(1.7rem, 4.5vw, 2.4rem)/1.15 'Cinzel', serif; color: var(--bok-titel); }
+.bh-titel::after { content: ''; display: block; width: 3.5rem; margin: 0.45rem auto 0; border-bottom: 3px double var(--bok-rod); }
+.bh-ingress { margin: 0 0 0.25rem; text-align: center; }
+.bh-ingress-not { margin-bottom: 0.9rem; color: var(--bok-not-skarm); font-size: 0.9rem; }
+.bh-knappar { justify-content: center; margin: 0.5rem 0 1rem; }
+.bh-knappar .filval { width: auto; }
+.bh-rubrik { margin: 1.4rem 0 0.4rem; padding-bottom: 0.15rem; border-bottom: 1px solid var(--bok-skiljare); font: 400 1.15rem/1.25 'Cinzel', serif; color: var(--bok-titel); }
+.bh-namn { margin: 0 0 0.2rem; font: 400 0.72rem/1.3 'Cinzel', serif; letter-spacing: 0.04em; text-transform: uppercase; color: var(--bok-rod); }
+.bh-band { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); border-top: 1px solid var(--bok-skiljare); border-bottom: 1px solid var(--bok-skiljare); }
+.bh-cell { padding: 0.3rem 0.5rem 0.4rem; font-size: 0.92rem; line-height: 1.4; }
+.bh-cell:first-child { padding-left: 0; }
+.bh-cell + .bh-cell { border-left: 1px solid var(--bok-skiljare); }
+.bh-cell p { margin: 0; }
+.bh-tabell { width: 100%; border-collapse: collapse; font-size: 0.92rem; line-height: 1.4; }
+.bh-tabell thead th { padding: 0.15rem 0.5rem 0.3rem 0; border-bottom: 1px solid var(--bok-skiljare); text-align: left; font: 400 0.72rem/1.3 'Cinzel', serif; letter-spacing: 0.04em; text-transform: uppercase; color: var(--bok-rod); }
+.bh-tabell tbody th, .bh-tabell td { padding: 0.35rem 0.5rem 0.35rem 0; vertical-align: top; text-align: left; font-weight: 400; }
+.bh-tabell tbody th { width: 8.5rem; }
+.bh-tabell tbody tr + tr > * { border-top: 1px solid var(--bok-skiljare); }
+.bh-tabell td p { margin: 0; }
+.bh-knapp { display: inline-block; min-width: 1.4em; margin-right: 0.4rem; padding: 0 0.3em; background: var(--bok-rod); color: #fff; text-align: center; font: 400 0.8rem/1.5 'Cinzel', serif; }
+.bh-steg { font-weight: 700; color: var(--bok-titel); }
+.bh-under { display: block; font-size: 0.85rem; color: var(--bok-titel); }
+.bh-falt { margin: 0; }
+.bh-falt > div { display: grid; grid-template-columns: 10rem minmax(0, 1fr); gap: 0 1rem; padding: 0.3rem 0; border-top: 1px solid var(--bok-skiljare); font-size: 0.95rem; line-height: 1.45; }
+.bh-falt > div:first-child { border-top: 0; }
+.bh-falt dt { font-weight: 700; color: var(--bok-titel); }
+.bh-tid { display: block; font-weight: 400; color: var(--bok-not-skarm); }
+.bh-falt dd { margin: 0; }
+.bh-kursiv { font-style: italic; }
+.bh-tavla { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); margin: 0.75rem 0 0; padding: 0.5rem 0; border: 2px solid var(--bok-ram); background: #fff; }
+.bh-spalt { padding: 0.2rem 0.6rem 0.2rem 0.75rem; }
+.bh-spalt + .bh-spalt { border-left: 1px solid var(--bok-skiljare); }
+.bh-elev { margin: 0 0 0.1rem; font-family: var(--typsnitt-elev); font-size: 1.05rem; line-height: 1.4; }
+.bh-fot { margin: 1.5rem 0 0; color: var(--bok-not-skarm); font-size: 0.8rem; }
+@media (max-width: 40rem) {
+  .bh-band, .bh-tavla { grid-template-columns: minmax(0, 1fr); }
+  .bh-cell { padding-left: 0; }
+  .bh-cell + .bh-cell, .bh-spalt + .bh-spalt { border-left: 0; border-top: 1px solid var(--bok-skiljare); }
+  .bh-tabell, .bh-tabell tbody, .bh-tabell tr, .bh-tabell tbody th, .bh-tabell td { display: block; width: auto; }
+  .bh-tabell thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .bh-tabell tbody tr { padding: 0.4rem 0; }
+  .bh-tabell tbody tr + tr { border-top: 1px solid var(--bok-skiljare); }
+  .bh-tabell tbody tr + tr > * { border-top: 0; }
+  .bh-tabell td { padding: 0.15rem 0; }
+  .bh-tabell td::before { content: attr(data-kolumn); display: block; font: 400 0.7rem/1.3 'Cinzel', serif; letter-spacing: 0.04em; text-transform: uppercase; color: var(--bok-rod); }
+  .bh-falt > div { grid-template-columns: minmax(0, 1fr); }
+}
+@media print { .bh-sida + .bh-sida { break-before: page; margin-top: 0; padding-top: 0; border-top: 0; } .bh-knappar { display: none; } }
+/* Lästexternas lärarhandledning i metodens bank: raden före nivåerna, som temanas rader i nivåerna. */
+.bank-allman { margin: 0 0 0.25rem; padding-top: 0; border-top: 0; }
 /* Bläddra i Visa stort: förra och nästa post bland dem som syns. */
 .tf-bladdra { display: flex; gap: 0.25rem; margin-left: auto; }
 .tf-bladdra button { width: 2.75rem; height: 2.75rem; border: 1px solid var(--farg-kant); border-radius: 6px; background: var(--farg-yta); color: var(--farg-text); font: 600 1.4rem/1 var(--typsnitt-ui); cursor: pointer; }

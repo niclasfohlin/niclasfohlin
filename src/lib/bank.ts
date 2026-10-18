@@ -43,9 +43,13 @@
 // <rubrik>", ritas på varje handledning och aldrig för sig, som rutan på lösningsförslagen. Ingen av dem står bland
 // ramarna eller i materialets lista, och temats sida ([id]/texter/[tema].astro) visar handledningen.
 //
+// Lästexternas lärarhandledning (src/lib/handledning.ts, Textsamtal i grupp): ramen "Lärarhandledningen: <titel>" hör
+// till banken och står först i filen med alla nivåer och följesidorna, och därmed i filen med allt, före den första
+// nivån, som hos metodriggen. Den har en egen fil och en egen sida ([id]/texter/lararhandledning.astro).
+//
 // Inga Node-beroenden: Word-filen av flera metoder byggs i webbläsaren med samma regel.
 import { enhetstexter, type Enhetstext } from './ramform';
-import { arHandledningarna, HANDLEDNING } from './handledning';
+import { arBokhandledning, arHandledningarna, HANDLEDNING } from './handledning';
 import { slugAv, UPPTAGNA_LED } from './standard/index.js';
 
 // tema: faktatextens tema (src/lib/handledning.ts), som metodens schema har på ramen.
@@ -98,6 +102,8 @@ export interface Bank {
   post?: { namn: string; alla: string; bestamd: string; slug: string; ruta?: number; egenFil: boolean };
   /** Följesidorna står i egna filer, och ingen fil har enheterna med följesidorna: en bank där varje enhet är en faktatext. */
   sidorForSig: boolean;
+  /** Lästexternas lärarhandledning, ramen "Lärarhandledningen: <titel>", när banken har en. */
+  handledning?: number;
   nivaer: Bankniva[];
   enheter: Bankenhet[];
   /** Ramarna som står på enheternas sidor och på metodens sida bara i utskriften: enheterna och följesidorna, rutan som
@@ -137,9 +143,11 @@ export function bankAv(d: Metod): Bank | null {
   const oversikter = new Set<number>();
   const rutor = new Map<string, number>();
   const handledningar: number[] = [];
+  let allman: number | undefined;
   ramar.forEach((ram, ri) => {
     if (bankramar.has(ri)) return;
     if (arHandledningarna(ram)) { handledningar.push(ri); return; }
+    if (arBokhandledning(ram)) { allman = ri; handledningar.push(ri); return; }
     const hl = ram.rubrik.match(HANDLEDNING);
     if (hl) {
       const tema = ram.tema ?? hl[2];
@@ -175,7 +183,7 @@ export function bankAv(d: Metod): Bank | null {
     if (UPPTAGNA.has(e.slug) || slugar.has(e.slug)) throw new Error(`Banken: två enheter, eller en enhet och en annan sida, får adressen ${e.slug} (${ramar[e.ri].rubrik}). Ge nivån eller numret ett annat namn.`);
     slugar.add(e.slug);
   }
-  return { ord: { ...ord, slug: slugAv(ord.flera) }, foljesidor, ...(post ? { post } : {}), sidorForSig: enheter.every((e) => !!e.l.faktatext), nivaer: [...nivaer.values()], enheter, ramar: bankramar, oversikter };
+  return { ord: { ...ord, slug: slugAv(ord.flera) }, foljesidor, ...(post ? { post } : {}), sidorForSig: enheter.every((e) => !!e.l.faktatext), ...(allman !== undefined ? { handledning: allman } : {}), nivaer: [...nivaer.values()], enheter, ramar: bankramar, oversikter };
 }
 
 /** Enhetens sida. */
@@ -239,16 +247,16 @@ export function bankfiler(id: string, b: Bank): Bankfil[] {
 
 /** Ramarna i en fil ur banken, i ordning: per nivå översikten och sedan enhet för enhet med följesidorna runt, bara
  * följesidorna, eller enheten och postens följesida. Ett temas lärarhandledning står före temats första enhet i filerna
- * med följesidorna. */
+ * med följesidorna, och lästexternas lärarhandledning först i filen med alla nivåer och följesidorna. */
 export function bankfilensRamar(b: Bank, f: Pick<Bankfil, 'niva' | 'medFoljesidor'>): number[] {
   const larare = f.medFoljesidor === true || f.medFoljesidor === 'bara';
-  return (f.niva ? [f.niva] : b.nivaer).flatMap((n) => [
+  return [...(larare && !f.niva && b.handledning !== undefined ? [b.handledning] : []), ...(f.niva ? [f.niva] : b.nivaer).flatMap((n) => [
     ...(larare && n.oversikt !== undefined ? [n.oversikt] : []),
     ...n.enheter.flatMap((e) => [
       ...(larare && e.handledning !== undefined ? [e.handledning] : []),
       ...(f.medFoljesidor === 'bara' ? [...e.fore, ...e.efter] : f.medFoljesidor === 'post' ? [e.ri, ...(e.post !== undefined ? [e.post] : [])] : f.medFoljesidor ? [...e.fore, e.ri, ...e.efter] : [e.ri]),
     ]),
-  ]);
+  ])];
 }
 
 /** Enheten som en cell i nivåns översikt pekar på: "1. Äpplena", "Kartläggning före: Bland vagnarna" eller titeln. */
