@@ -28,33 +28,47 @@ const esc = (s: string) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'
 const inline = (s: string) => String(s).split('\n').map((rad) => esc(rad).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>').replace(/\*([^*]+)\*/g, '<em>$1</em>')).join('<br>');
 const bildHtml = (b: LfBild, klass: string) => `<p class="${klass}"><a href="${esc(b.adress)}" class="bild-lank" title="Öppna bilden i full storlek"><img src="${esc(b.adress)}" alt="${esc(b.alt)}" width="960" height="540" loading="lazy" decoding="async" data-utskriftsbild></a></p>`;
 
-/** Bladet som HTML. id och ankare är sektionens och titelns id, farg nivåns färg och rubrik titelns rubriknivå. */
-export function losningsforslagHtml(v: LosningsforslagVy, o: { id?: string; ankare?: string; farg: string; rubrik?: 'h2' | 'h3' }): string {
+/** Bladet som HTML. id och ankare är sektionens och titelns id, farg nivåns färg och rubrik titelns rubriknivå; bladets
+ *  egna rubriker (Problemet, lösningarnas namn, Frågor om tankarna bakom och rutan) står en nivå under. utanProblem är
+ *  bladet bredvid problemet i Visa stort (Niclas 2026-10-18: "när det är brevid problemet behövs ju inte problemet igen
+ *  att visas", och "Då blir Iden... Först i visningsläget"): idén först, och svaret och kontrollen, som annars står i
+ *  problemets ruta, i en egen ruta under. Utskriften och problemets sida i metoden har hela A4:et. */
+export function losningsforslagHtml(v: LosningsforslagVy, o: { id?: string; ankare?: string; farg: string; rubrik?: 'h2' | 'h3'; utanProblem?: boolean }): string {
   const h = o.rubrik ?? 'h3';
+  const u = h === 'h2' ? 'h3' : 'h4';
+  const rubrik = (text: string, klass = '') => `<${u} class="lf-rubrik${klass}">${esc(text)}</${u}>`;
+  const svaret = [
+    `<p class="lf-svar lf-forsta"><strong>Svaret:</strong> ${inline(v.svaret)}</p>`,
+    ...(v.kontroll ? [`<p class="lf-svar"><strong>Kontroll:</strong> ${inline(v.kontroll)}</p>`] : []),
+  ];
+  const iden = `<p class="lf-iden"><span class="lf-rubrik">Idén:</span> <em>${inline(v.iden)}</em></p>`;
   const delar = [
     `<p class="lf-etikett">${esc(['Lösningsförslag', v.tagg].filter(Boolean).join(' · '))}</p>`,
     `<${h} class="boksida-titel"${o.ankare ? ` id="${esc(o.ankare)}"` : ''}><span class="visually-hidden">Lösningsförslag: ${esc(v.niva)}, ${esc(v.vad)}: </span>${esc(v.titel)}</${h}>`,
-    '<div class="lf-problem">',
-    '<div class="lf-problem-text">',
-    '<p class="lf-rubrik">Problemet</p>',
-    ...v.problem.stycken.map((t) => `<p class="lf-elev">${inline(t)}</p>`),
-    ...v.problem.fragor.map((t) => `<p class="lf-elev lf-fraga">${inline(t)}</p>`),
-    `<p class="lf-svar lf-forsta"><strong>Svaret:</strong> ${inline(v.svaret)}</p>`,
-    ...(v.kontroll ? [`<p class="lf-svar"><strong>Kontroll:</strong> ${inline(v.kontroll)}</p>`] : []),
-    '</div>',
-    ...(v.problem.bild ? [bildHtml(v.problem.bild, 'lf-problem-bild')] : []),
-    '</div>',
-    `<p class="lf-iden"><span class="lf-rubrik">Idén:</span> <em>${inline(v.iden)}</em></p>`,
+    ...(o.utanProblem
+      ? [iden, `<div class="lf-svarsruta">${svaret.join('')}</div>`]
+      : [
+        '<div class="lf-problem">',
+        '<div class="lf-problem-text">',
+        rubrik('Problemet'),
+        ...v.problem.stycken.map((t) => `<p class="lf-elev">${inline(t)}</p>`),
+        ...v.problem.fragor.map((t) => `<p class="lf-elev lf-fraga">${inline(t)}</p>`),
+        ...svaret,
+        '</div>',
+        ...(v.problem.bild ? [bildHtml(v.problem.bild, 'lf-problem-bild')] : []),
+        '</div>',
+        iden,
+      ]),
     '<div class="lf-losningar">',
-    ...v.losningar.map((l) => `<div class="lf-losning"><p class="lf-rubrik">${esc(l.namn)}</p>${bildHtml(l.bild, 'lf-losning-bild')}<p class="lf-losning-text">${inline(l.text)}</p></div>`),
+    ...v.losningar.map((l) => `<div class="lf-losning">${rubrik(l.namn)}${bildHtml(l.bild, 'lf-losning-bild')}<p class="lf-losning-text">${inline(l.text)}</p></div>`),
     '</div>',
-    ...(v.c ? [`<div class="lf-c"><div class="lf-c-elev"><p class="lf-rubrik">${esc(v.c.namn)}</p><p class="lf-hand">${v.c.rader.map(inline).join('<br>')}</p></div><div class="lf-c-larare">${v.c.larare.map((r) => `<p>${inline(r)}</p>`).join('')}</div></div>`] : []),
-    '<p class="lf-rubrik lf-fragor-rubrik">Frågor om tankarna bakom</p>',
+    ...(v.c ? [`<div class="lf-c"><div class="lf-c-elev">${rubrik(v.c.namn)}<p class="lf-hand">${v.c.rader.map(inline).join('<br>')}</p></div><div class="lf-c-larare">${v.c.larare.map((r) => `<p>${inline(r)}</p>`).join('')}</div></div>`] : []),
+    rubrik('Frågor om tankarna bakom', ' lf-fragor-rubrik'),
     `<ol class="lf-fragor">${v.fragor.map((f, i) => `<li><span class="lf-nr">${i + 1}.</span><span>${inline(f)}</span></li>`).join('')}</ol>`,
-    `<div class="lf-ruta"><p class="lf-rubrik">${esc(v.ruta.rubrik)}</p><ul>${v.ruta.punkter.map((p) => `<li>${p.namn ? `<strong>${esc(p.namn)}.</strong> ` : ''}${inline(p.text)}</li>`).join('')}</ul></div>`,
+    `<div class="lf-ruta">${rubrik(v.ruta.rubrik)}<ul>${v.ruta.punkter.map((p) => `<li>${p.namn ? `<strong>${esc(p.namn)}.</strong> ` : ''}${inline(p.text)}</li>`).join('')}</ul></div>`,
   ];
   const stil = `--bok-niva: ${esc(o.farg)}; --lf-skala: ${Math.round(v.skala * 100)}%`;
-  return `<section class="m-ram boksida lf"${o.id ? ` id="${esc(o.id)}"` : ''} style="${stil}"><div class="boksida-ram">${delar.join('')}</div><p class="boksida-fot"><span>${inline(v.kalla)}</span> <span class="boksida-knapp">${esc(v.niva.toUpperCase())} · ${esc(v.vad)} · lösningsförslag</span></p></section>`;
+  return `<section class="m-ram boksida lf${o.utanProblem ? ' lf-utan-problem' : ''}"${o.id ? ` id="${esc(o.id)}"` : ''} style="${stil}"><div class="boksida-ram">${delar.join('')}</div><p class="boksida-fot"><span>${inline(v.kalla)}</span> <span class="boksida-knapp">${esc(v.niva.toUpperCase())} · ${esc(v.vad)} · lösningsförslag</span></p></section>`;
 }
 
 // Lösningarna på helskärm i Visa stort (Niclas 2026-10-18: "tycker du varje problem också BARA ska ha de tre

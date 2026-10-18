@@ -202,9 +202,11 @@ let stortPost: Post | undefined;
 let losningsruta: LosningsforslagVy['ruta'] | undefined;
 // Bladet ur posten: problemet, bilden och frågorna står i posten, och rutan en gång i datafilen.
 const bladet = (p: Post): LosningsforslagVy => ({ ...p.losningsforslag!, problem: { stycken: p.stycken, fragor: p.fragor, bild: p.bild }, ruta: losningsruta ?? { rubrik: '', punkter: [] } });
+// I stegen A, B, A och B och C finns ingen utskrift som är det som syns, så knappen står bara vid problemet
+// (granskningen 2026-10-18: samma steg skrev ut olika material beroende på vad som visades före).
 function skrivutLank() {
   const skrivut = $<HTMLAnchorElement>('tf-stort-skrivut');
-  if (!stortPost) { skrivut.hidden = true; return; }
+  if (!stortPost || steg > 0) { skrivut.hidden = true; return; }
   const med = !losningYta.hidden;
   skrivut.href = (med ? stortPost.utskrift.med : stortPost.utskrift.post).adress;
   skrivut.textContent = med ? `Skriv ut ${ord.bestamd} och ${foljeEn}` : `Skriv ut ${ord.bestamd}`;
@@ -214,7 +216,7 @@ function visaLosning(pa: boolean) {
   const lf = stortPost?.losningsforslag;
   const visas = pa && !!lf;
   if (visas && losningYta.dataset.id !== stortPost!.id) {
-    losningYta.innerHTML = losningsforslagHtml(bladet(stortPost!), { farg: namnAv(stortPost!.id).farg, rubrik: 'h2' });
+    losningYta.innerHTML = losningsforslagHtml(bladet(stortPost!), { farg: namnAv(stortPost!.id).farg, rubrik: 'h2', utanProblem: true });
     losningYta.dataset.id = stortPost!.id;
   }
   losningYta.hidden = !visas;
@@ -246,6 +248,7 @@ function visaSteg(n: number) {
     if (!stegRaknade) { stegRaknade = true; raknaHandelse(`${led}:${metod}:losningarna`, `${titel}: lösningarna på helskärm`); }
   } else visning.replaceChildren();
   losningKnapp.hidden = !lf || iSteg;
+  skrivutLank();
   dialog.scrollTop = 0;
 }
 for (const b of stegKnappar) b.addEventListener('click', () => visaSteg(Number(b.dataset.steg)));

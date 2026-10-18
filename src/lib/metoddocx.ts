@@ -1305,8 +1305,14 @@ function losningsforslagSida(lf: Losningsforslag): Barn[] {
   ], { w: helB, kanter: { top: kant, bottom: kant, left: kant, right: kant }, mar: { top: 100, bottom: 100, left: 200, right: 200 } })]);
   const luftMellan = (efter: number) => punktStycke({ spacing: { before: 0, after: efter, line: 240 } });
   // Ramen fyller sidan som riggens: innehållets höjd är räknad med 300 twips luft (losningsforslagMatt), och raden under
-  // innehållet tar det som blir över.
-  const restH = Math.floor(Math.max(0, RAMHOJD - titelH - (innehallH - 300) - 450) / 15) * 15;
+  // innehållet tar det som blir över, utom GOOGLE_LUFT. Google Dokument ritar varje tabell i en cell med ett stycke på tre
+  // punkter mer (wordparitet, REGLER.md), och bladet har fyra: med hela restens höjd slutade ramen 16,5 till 17,3 punkter
+  // längre ned i Google än i Word, och tio av trettio blad fick en andra sida med bara sidfoten (googleprov 2026-10-18,
+  // mätt på sju blad). Med 360 twips mindre spillde ett blad, Staketet, där en rad bryts annorlunda i Google och ramen
+  // slutade 32 punkter lägre än i Word. 600 twips täcker det med marginal; riggen kom fram till samma (build-docx.js,
+  // GOOGLE_LUFT). Ramens fot står därför olika långt ned på bladen (K-429).
+  const GOOGLE_LUFT = 600;
+  const restH = Math.floor(Math.max(0, RAMHOJD - titelH - (innehallH - 300) - 450 - GOOGLE_LUFT) / 15) * 15;
   const sidan = new Table({
     width: { size: inreBredd, type: WidthType.DXA }, columnWidths: [inreBredd], layout: TableLayoutType.FIXED, borders: FORM_UTAN,
     rows: [

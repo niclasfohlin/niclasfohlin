@@ -889,6 +889,11 @@ button.lank:hover { color: var(--farg-accent); }
 .lf-losning-bild { margin: 0 auto 0.4rem; max-width: var(--lf-skala, 100%); }
 .lf-losning-text { text-align: center; font-size: 0.95rem; line-height: 1.4; margin: 0; }
 .lf-c { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.6rem; margin: 0 0 1rem; }
+/* Bredvid problemet i Visa stort står idén först och svaret och kontrollen i en egen ruta under den. */
+.lf-svarsruta { border: 1px solid var(--bok-skiljare); padding: 0.6rem 0.8rem; margin: 0 0 1rem; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; }
+.lf-svarsruta p { margin: 0 0 0.3rem; }
+.lf-svarsruta p:last-child { margin-bottom: 0; }
+.lf-svarsruta .lf-forsta { margin-top: 0; }
 .lf-c-elev { border: 1px solid var(--bok-skiljare); padding: 0.5rem 0.8rem; }
 .lf-hand { font-family: var(--typsnitt-elev); color: #2e4a7a; font-size: 1.05rem; line-height: 1.5; margin: 0; }
 .lf-c-larare { font-size: 0.95rem; line-height: 1.45; align-self: center; }
