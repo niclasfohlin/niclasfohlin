@@ -221,9 +221,15 @@ export function taFramKortposter(m: Metod, ids: string[]) {
   });
 }
 
-/** Datafilen bredvid sidan: det som Visa stort och listan att skriva ut behöver, utan det som redan står i sidan. */
+/** Datafilen bredvid sidan: det som Visa stort och listan att skriva ut behöver, utan det som redan står i sidan. Ett
+ *  lösningsförslag står utan problemet, som posten redan har, och rutan, som är densamma på alla, står en gång
+ *  (losningsruta); webbläsaren sätter ihop bladet (src/scripts/tafram.ts). */
 export const taFramData = (t: TaFram) => ({
-  poster: t.poster.map((p) => ({ id: p.id, niva: p.niva, nivaSlug: p.nivaSlug, nr: p.nr, titel: p.titel, ...(p.tagg ? { tagg: p.tagg } : {}), sida: p.sida, ...(p.losning ? { losning: p.losning } : {}), bild: p.bild, stycken: p.stycken, fragor: p.fragor, utskrift: p.utskrift, ...(p.losningsforslag ? { losningsforslag: p.losningsforslag } : {}) })),
+  poster: t.poster.map((p) => ({
+    id: p.id, niva: p.niva, nivaSlug: p.nivaSlug, nr: p.nr, titel: p.titel, ...(p.tagg ? { tagg: p.tagg } : {}), sida: p.sida, ...(p.losning ? { losning: p.losning } : {}), bild: p.bild, stycken: p.stycken, fragor: p.fragor, utskrift: p.utskrift,
+    ...(p.losningsforslag ? { losningsforslag: (({ problem: _p, ruta: _r, ...lf }) => lf)(p.losningsforslag) } : {}),
+  })),
+  ...(t.poster.find((p) => p.losningsforslag) ? { losningsruta: t.poster.find((p) => p.losningsforslag)!.losningsforslag!.ruta } : {}),
   filer: Object.fromEntries(Object.entries(t.filer).map(([k, f]) => [k, { adress: f.adress, byte: f.byte }])),
   nivaer: t.nivaer.map((n) => ({ namn: n.namn, slug: n.slug, farg: n.farg, antal: n.poster.length })),
   ...(vantande ? { vantar: true } : {}),

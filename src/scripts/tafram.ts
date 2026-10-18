@@ -7,10 +7,12 @@
 import { dra, el, lagring } from './kortbanken';
 import { ettkortLank, flerakortKnapp } from './pdfutskrift';
 import { hamtplan, type PostUtskrift } from '../lib/standard/index.js';
-import { losningsforslagHtml, type LosningsforslagVy } from '../lib/losningsforslag';
+import { losningsforslagHtml, losningsstegen, losningsstegHtml, type LosningsforslagVy } from '../lib/losningsforslag';
 
-type Post = { id: string; niva: string; nivaSlug: string; nr: number; titel: string; tagg?: string; sida: string; losning?: string; bild: { adress: string; alt: string }; stycken: string[]; fragor: string[]; utskrift: { post: PostUtskrift; med: PostUtskrift }; losningsforslag?: LosningsforslagVy };
-type Data = { poster: Post[]; filer: Record<string, { adress: string; byte: number }>; nivaer: { namn: string; slug: string; farg: string; antal: number }[] };
+// Lösningsförslaget står i datafilen utan problemet, som posten redan har, och rutan står en gång (taFramData).
+type Lf = Omit<LosningsforslagVy, 'problem' | 'ruta'>;
+type Post = { id: string; niva: string; nivaSlug: string; nr: number; titel: string; tagg?: string; sida: string; losning?: string; bild: { adress: string; alt: string }; stycken: string[]; fragor: string[]; utskrift: { post: PostUtskrift; med: PostUtskrift }; losningsforslag?: Lf };
+type Data = { poster: Post[]; filer: Record<string, { adress: string; byte: number }>; nivaer: { namn: string; slug: string; farg: string; antal: number }[]; losningsruta?: LosningsforslagVy['ruta'] };
 
 const sida = document.querySelector<HTMLElement>('.tafram')!;
 const metod = sida.dataset.metod!;
@@ -197,6 +199,9 @@ const visaStortBock = () => {
 const losningKnapp = $<HTMLButtonElement>('tf-stort-losning');
 const losningYta = $('tf-stort-lf');
 let stortPost: Post | undefined;
+let losningsruta: LosningsforslagVy['ruta'] | undefined;
+// Bladet ur posten: problemet, bilden och frågorna står i posten, och rutan en gång i datafilen.
+const bladet = (p: Post): LosningsforslagVy => ({ ...p.losningsforslag!, problem: { stycken: p.stycken, fragor: p.fragor, bild: p.bild }, ruta: losningsruta ?? { rubrik: '', punkter: [] } });
 function skrivutLank() {
   const skrivut = $<HTMLAnchorElement>('tf-stort-skrivut');
   if (!stortPost) { skrivut.hidden = true; return; }
@@ -209,7 +214,7 @@ function visaLosning(pa: boolean) {
   const lf = stortPost?.losningsforslag;
   const visas = pa && !!lf;
   if (visas && losningYta.dataset.id !== stortPost!.id) {
-    losningYta.innerHTML = losningsforslagHtml(lf!, { farg: namnAv(stortPost!.id).farg, rubrik: 'h2' });
+    losningYta.innerHTML = losningsforslagHtml(bladet(stortPost!), { farg: namnAv(stortPost!.id).farg, rubrik: 'h2' });
     losningYta.dataset.id = stortPost!.id;
   }
   losningYta.hidden = !visas;
@@ -218,6 +223,43 @@ function visaLosning(pa: boolean) {
   losningKnapp.textContent = visas ? `Dölj ${foljeEn}` : `Visa ${foljeEn}`;
   skrivutLank();
 }
+// Stegen på helskärm (Niclas 2026-10-18, med metodriggens ordning): problemet, lösning A, lösning B, A och B, och C.
+// Steget Problemet är rutan som den är; de andra står i ytan tf-visning, och lärarens blad står bara vid problemet.
+const stegRad = $('tf-steg');
+const stegKnappar = [...stegRad.querySelectorAll<HTMLButtonElement>('button')];
+const visning = $('tf-visning');
+const sidorna = $('tf-stort-sidor');
+let steg = 0;
+let stegRaknade = false;
+const antalSteg = () => (stortPost?.losningsforslag ? losningsstegen(stortPost.losningsforslag).length : 1);
+function visaSteg(n: number) {
+  const lf = stortPost?.losningsforslag;
+  steg = lf ? Math.max(0, Math.min(n, antalSteg() - 1)) : 0;
+  stegRad.hidden = !lf;
+  dialog.classList.toggle('med-steg', !!lf);
+  stegKnappar.forEach((b, i) => { b.hidden = !lf || i >= antalSteg(); if (i === steg) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); });
+  const iSteg = steg > 0 && !!lf;
+  sidorna.hidden = iSteg;
+  visning.hidden = !iSteg;
+  if (iSteg) {
+    visning.innerHTML = losningsstegHtml(lf!, steg);
+    if (!stegRaknade) { stegRaknade = true; raknaHandelse(`${led}:${metod}:losningarna`, `${titel}: lösningarna på helskärm`); }
+  } else visning.replaceChildren();
+  losningKnapp.hidden = !lf || iSteg;
+  dialog.scrollTop = 0;
+}
+for (const b of stegKnappar) b.addEventListener('click', () => visaSteg(Number(b.dataset.steg)));
+// Piltangenterna och en bläddrares knappar (Page Up och Page Down) byter steg, som i en presentation.
+dialog.addEventListener('keydown', (e) => {
+  if (!stortPost?.losningsforslag || e.altKey || e.ctrlKey || e.metaKey) return;
+  const fram = e.key === 'ArrowRight' || e.key === 'PageDown';
+  const bak = e.key === 'ArrowLeft' || e.key === 'PageUp';
+  if (!fram && !bak) return;
+  e.preventDefault();
+  visaSteg(steg + (fram ? 1 : -1));
+  stegKnappar[steg]?.focus();
+});
+
 losningKnapp.addEventListener('click', () => {
   const pa = !!losningYta.hidden;
   visaLosning(pa);
@@ -246,10 +288,13 @@ async function visaStort(id: string, franTaFram: boolean, medLosning = false) {
   $('tf-stort-fraga').replaceChildren();
   $('tf-stort-nasta').hidden = !franTaFram;
   $<HTMLAnchorElement>('tf-stort-sidan').href = r.querySelector<HTMLAnchorElement>('.tf-sidlank')!.href;
-  // Lösningsförslaget står dolt tills läraren trycker, också när ett nytt problem visas i samma ruta.
+  // Lösningsförslaget står dolt tills läraren trycker, också när ett nytt problem visas i samma ruta, och rutan börjar
+  // vid problemet.
   stortPost = undefined;
+  stegRaknade = false;
   losningKnapp.hidden = true;
   visaLosning(false);
+  visaSteg(0);
   const skrivut = $<HTMLAnchorElement>('tf-stort-skrivut');
   skrivut.hidden = true;
   visaStortBock();
@@ -270,7 +315,8 @@ async function visaStort(id: string, franTaFram: boolean, medLosning = false) {
     fraga.append(ol);
   } else fraga.append(el('p', undefined, post.fragor[0] ?? ''));
   stortPost = post;
-  losningKnapp.hidden = !post.losningsforslag;
+  losningsruta = d.losningsruta;
+  visaSteg(0);
   visaLosning(medLosning);
   if (medLosning && post.losningsforslag && !matchMedia('(min-width: 64rem)').matches) losningYta.scrollIntoView({ block: 'start' });
 }

@@ -10,6 +10,8 @@
 //   node scripts/skarmbild.mjs <url> <ut.png> --js "<uttryck>"   Kör ett uttryck i sidan först, som att fälla ut en nivå
 //                                                              (document.querySelector('details').open = true)
 //   node scripts/skarmbild.mjs <url> <ut.png> --fran <väljare>  Börja bilden vid elementet, med --hojd som höjd
+//   node scripts/skarmbild.mjs <url> <ut.png> --js "<uttryck>" --vanta 2000   Vänta så många millisekunder efter
+//                                                              uttrycket, som när det hämtar en datafil och ritar en ruta
 //
 // En sida som är högre än 6 000 punkter sparas i delar, <ut>-1.png, <ut>-2.png och så vidare, var och en högst
 // 6 000 punkter hög: Chrome ritar inte hela ytan på en gång, och nederdelen blev annars vit (K-037).
@@ -21,7 +23,7 @@ import { existsSync, writeFileSync } from 'node:fs';
 
 const args = process.argv.slice(2);
 // Värdena efter --bredd, --hojd, --js och --fran är inte adressen eller filen.
-const [url, ut] = args.filter((a, i) => !a.startsWith('--') && !['--bredd', '--hojd', '--js', '--fran'].includes(args[i - 1]));
+const [url, ut] = args.filter((a, i) => !a.startsWith('--') && !['--bredd', '--hojd', '--js', '--fran', '--vanta'].includes(args[i - 1]));
 if (!url || !ut) {
   console.error('Ange url och utfil: node scripts/skarmbild.mjs <url> <ut.png> [--mobil] [--bredd <px>]');
   process.exit(1);
@@ -32,6 +34,7 @@ const bredd = args.includes('--bredd') ? Number(args[args.indexOf('--bredd') + 1
 const maxHojd = args.includes('--hojd') ? Number(args[args.indexOf('--hojd') + 1]) : Infinity;
 const js = args.includes('--js') ? args[args.indexOf('--js') + 1] : undefined;
 const fran = args.includes('--fran') ? args[args.indexOf('--fran') + 1] : undefined;
+const vantaEfter = args.includes('--vanta') ? Number(args[args.indexOf('--vanta') + 1]) : 400;
 const dpr = mobil ? 2 : 1;
 // Sidor högre än DEL punkter tas i avsnitt och sparas som <ut>-1.png, <ut>-2.png … (K-037).
 const DEL = 6000;
@@ -75,7 +78,7 @@ try {
   for (let i = 0; i < 80 && !handelser.includes('Page.loadEventFired'); i++) await vanta(100);
   await vanta(400);
   const utvardera = async (expression) => (await skicka('Runtime.evaluate', { expression, returnByValue: true })).result.result.value;
-  if (js) { await utvardera(js); await vanta(400); }
+  if (js) { await utvardera(js); await vanta(vantaEfter); }
   const topp = fran ? Math.max(0, Math.floor(await utvardera(`(() => { const e = document.querySelector(${JSON.stringify(fran)}); return e ? e.getBoundingClientRect().top + scrollY - 12 : 0; })()`))) : 0;
   const hojd = Math.min(maxHojd, await utvardera('Math.ceil(Math.max(document.documentElement.scrollHeight, document.body.scrollHeight))') - topp);
   const bredast = await utvardera('Math.ceil(document.documentElement.scrollWidth)');

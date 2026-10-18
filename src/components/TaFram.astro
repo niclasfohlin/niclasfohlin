@@ -29,6 +29,7 @@ import { delningPa } from '../lib/delning';
 import { kortdataAdress } from '../lib/kortdata';
 import { taFramData, type TaFram } from '../lib/tafram';
 import { PABORDET_MATT } from '../lib/pabordet';
+import { LOSNINGSSTEG } from '../lib/losningsforslag';
 import { site } from '../data/site';
 interface Props { t: TaFram }
 const { t } = Astro.props;
@@ -156,7 +157,13 @@ const BOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 12.5l3.7
         <p class="tf-stort-etikett" id="tf-stort-etikett"></p>
         <button type="button" class="tf-stang" id="tf-stang" aria-label="Stäng">×</button>
       </div>
-      <div class="tf-stort-sidor">
+      {/* Stegen på helskärm (src/lib/losningsforslag.ts, losningsstegHtml): problemet, A, B, A och B, och C. Pilarna och
+          bläddrarens knappar byter steg. */}
+      <nav class="tf-steg" id="tf-steg" aria-label="Visa" hidden>
+        {LOSNINGSSTEG.map((namn, i) => <button type="button" data-steg={i} aria-current={i === 0 ? 'step' : undefined}>{namn}</button>)}
+      </nav>
+      <div class="tf-visning" id="tf-visning" hidden></div>
+      <div class="tf-stort-sidor" id="tf-stort-sidor">
         <section class="boksida problemsida tf-stort-sida" id="tf-stort-sida">
           <div class="boksida-ram">
             <h2 class="boksida-titel" id="tf-stort-titel"></h2>

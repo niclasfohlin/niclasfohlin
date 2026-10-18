@@ -56,3 +56,20 @@ export function losningsforslagHtml(v: LosningsforslagVy, o: { id?: string; anka
   const stil = `--bok-niva: ${esc(o.farg)}; --lf-skala: ${Math.round(v.skala * 100)}%`;
   return `<section class="m-ram boksida lf"${o.id ? ` id="${esc(o.id)}"` : ''} style="${stil}"><div class="boksida-ram">${delar.join('')}</div><p class="boksida-fot"><span>${inline(v.kalla)}</span> <span class="boksida-knapp">${esc(v.niva.toUpperCase())} · ${esc(v.vad)} · lösningsförslag</span></p></section>`;
 }
+
+// Lösningarna på helskärm i Visa stort (Niclas 2026-10-18: "tycker du varje problem också BARA ska ha de tre
+// lösningsförslagen A, B och C efter varandra lite större för att kunna visa på helskärm?", med metodriggens ordning):
+// problemet, lösning A ensam, lösning B ensam, A och B bredvid varandra för jämförelsen, och lösning C ensam i elevens
+// handstil, utan lärarens rader och frågan, så att det är läraren som frågar. Det är rutans gång: visa två sätt, ett i
+// taget, och sedan tankevurpan som en elevs på en annan skola. Lösningarnas meningar står inte här, eftersom eleverna
+// förklarar dem med egna ord. Steget Problemet ritar Visa stort själv.
+export const LOSNINGSSTEG = ['Problemet', 'Lösning A', 'Lösning B', 'A och B', 'Lösning C'];
+/** Stegen som finns för ett lösningsförslag: Lösning C bara när det har en tankevurpa. */
+export const losningsstegen = (v: Pick<LosningsforslagVy, 'c'>) => LOSNINGSSTEG.slice(0, v.c ? 5 : 4);
+export function losningsstegHtml(v: Pick<LosningsforslagVy, 'losningar' | 'c'>, steg: number): string {
+  const losning = (l: LosningsforslagVy['losningar'][number]) => `<figure class="lfv-losning"><figcaption class="lf-rubrik">${esc(l.namn)}</figcaption><img src="${esc(l.bild.adress)}" alt="${esc(l.bild.alt)}" width="960" height="540"></figure>`;
+  if (steg === 1 || steg === 2) return `<div class="lfv lfv-en">${losning(v.losningar[steg - 1])}</div>`;
+  if (steg === 3) return `<div class="lfv lfv-tva">${v.losningar.map(losning).join('')}</div>`;
+  if (steg === 4 && v.c) return `<div class="lfv lfv-c"><p class="lf-rubrik">${esc(v.c.namn)}</p><p class="lfv-hand">${v.c.rader.map(inline).join('<br>')}</p></div>`;
+  return '';
+}
