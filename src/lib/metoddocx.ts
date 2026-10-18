@@ -2939,6 +2939,9 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     filmVid({ avsnitt: 'grund' });
   }
   for (const t of d.tabeller.filter((x) => x.plats === 'efter-grund')) friTabell(t);
+  // Var den sista ramen elevens blad, börjar det som följer på en ny sida, så att inget annat står på bladet: läxan i De fyra
+  // räknesätten i grupp kopieras dubbelsidigt och hade rubriken Kursintyg på baksidan (granskningen 2026-10-18).
+  let efterElevsida = false;
   if (d.ramar && (o.material || !MATERIAL.has('ramar'))) {
     ut.push(h2(d.ramar.rubrik));
     for (const s of d.ramar.text) ut.push(stycke(s));
@@ -2958,6 +2961,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     const faktasidor = faktatexter(ramarna);
     // En ram, där den står. ram är ramen som den ritas: en ram vars listor står vid veckorna ritas utan dem.
     const enRam = (i: number, ram: Ram): void => {
+      efterElevsida = false;
       // En faktatext (faktatextAv i src/lib/ramform.ts) är sidor i en faktabok, i en egen sektion, med bilderna På bordet
       // på sina platser i texten (faktatext()). En bild vid ramen som ingen plats nämner står efter texten.
       const fakta = faktasidor.get(ram);
@@ -3053,6 +3057,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
       else ut.push(...ramBarn(ram, { ...ramVal(ram), ensamRuta: serie.ensam }));
       ut.push(...serie.efter);
       filmVid({ ram: ram.rubrik });
+      efterElevsida = elevsida(ram);
     };
     // Veckans material (src/lib/veckomaterial.ts, Niclas 2026-10-06: "Man måste leta omkring för att hitta vecka 2 på 3
     // ställen"): i en kurs med veckor står det material som nämner en enda vecka direkt efter veckans sida, i filens
@@ -3085,7 +3090,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
       filmVid({ ram: ram.rubrik });
       efterVeckorna = true;
     }
-    if (d.ramar.efter) ut.push(stycke(d.ramar.efter, { farg: FARG.svag }));
+    if (d.ramar.efter) { ut.push(stycke(d.ramar.efter, { farg: FARG.svag, nySida: efterElevsida || undefined })); efterElevsida = false; }
     filmVid({ avsnitt: 'ramar' });
     // Lektionskorten sist i Materialet, på sina egna sidor (src/lib/lektionskort.ts; Niclas 2026-10-17: "var skrivs den ur
     // med Skriv ut allt"). Först i Materialet, som på sidan, kom kortets sidbrytning mellan inledningen och den första
@@ -3095,8 +3100,10 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     if (d.hem?.kontrakt) ut.push(new Sektionsbyte(false), ...kontraktSida(d));
     if (d.hem?.schema) ut.push(new Sektionsbyte(false), ...schemaSida(d));
     for (const k of lektionskort) ut.push(...lektionskortFlod(k));
+    if (d.hem?.kontrakt || d.hem?.schema || lektionskort.length) efterElevsida = false;
   }
   if (d.diplom && (o.material || !MATERIAL.has('diplom'))) {
+    if (efterElevsida) ut.push(luft(LUFT_RAD, true, { nySida: true }));
     ut.push(h2(d.diplom.rubrik));
     ut.push(stycke('Diplomet finns som egen sida i planeringsmallarna.', { farg: FARG.svag }));
   }

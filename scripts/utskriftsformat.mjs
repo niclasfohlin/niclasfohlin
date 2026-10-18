@@ -291,14 +291,19 @@ async function prova(f, s) {
       }
     }
   }
-  // I den minsta telefonens bredd, 320 punkter, rullar ingen sida i sidled (K-400: fem metodsidor gjorde det, för adressen
-  // i upphovsraden och för tabellernas längsta ord). Felet nämner det första elementet som sticker ut och inte ligger i en
-  // ruta som rullar själv.
-  await f.telefon(320);
+  // I den minsta telefonens bredd, 320 punkter, och i 360, den vanligaste smala, rullar ingen sida i sidled (K-400: fem
+  // metodsidor gjorde det, för adressen i upphovsraden och för tabellernas längsta ord; tabellernas mindre text gäller bara
+  // under 359 punkter). Det som är hopfällt öppnas först, så att bankens nivåer och de långa listorna också mäts. Felet
+  // nämner det första elementet som sticker ut och inte ligger i en ruta som rullar själv; ett uttryck som inte svarar är
+  // också ett fel (granskningen 2026-10-18).
+  for (const bredd of [320, 360]) {
+  await f.telefon(bredd);
   await f.oppna(`${bas}${s.adress}`);
-  const bred = await f.kor(`document.fonts.ready.then(() => { const W = document.documentElement.clientWidth; const sw = document.documentElement.scrollWidth; if (sw <= W + 1) return ''; const klipps = (e) => { for (let a = e.parentElement; a && a !== document.body; a = a.parentElement) if (getComputedStyle(a).overflowX !== 'visible') return true; return false; }; for (const e of document.querySelectorAll('body *')) { const r = e.getBoundingClientRect(); if (!r.width || klipps(e)) continue; if ((r.right > W + 1 && e.parentElement.getBoundingClientRect().right <= W + 1) || (r.right <= W + 1 && r.left + e.scrollWidth > W + 1 && getComputedStyle(e).overflowX === 'visible' && ![...e.children].some((c) => c.getBoundingClientRect().right > W + 1 || c.scrollWidth > c.clientWidth + 1))) return sw + ' punkter bred, ' + e.tagName.toLowerCase() + (typeof e.className === 'string' && e.className.trim() ? '.' + e.className.trim().split(/\\s+/).slice(0, 2).join('.') : '') + ' ”' + (e.textContent || '').replace(/\\s+/g, ' ').trim().slice(0, 40) + '”'; } return sw + ' punkter bred'; })`);
+  const bred = await f.kor(`document.fonts.ready.then(() => { document.querySelectorAll('details').forEach((x) => { x.open = true; }); const W = document.documentElement.clientWidth; const sw = document.documentElement.scrollWidth; if (sw <= W + 1) return ''; const klipps = (e) => { for (let a = e.parentElement; a && a !== document.body; a = a.parentElement) if (getComputedStyle(a).overflowX !== 'visible') return true; return false; }; for (const e of document.querySelectorAll('body *')) { const r = e.getBoundingClientRect(); if (!r.width || klipps(e)) continue; if ((r.right > W + 1 && e.parentElement.getBoundingClientRect().right <= W + 1) || (r.right <= W + 1 && r.left + e.scrollWidth > W + 1 && getComputedStyle(e).overflowX === 'visible' && ![...e.children].some((c) => c.getBoundingClientRect().right > W + 1 || c.scrollWidth > c.clientWidth + 1))) return sw + ' punkter bred, ' + e.tagName.toLowerCase() + (typeof e.className === 'string' && e.className.trim() ? '.' + e.className.trim().split(/\\s+/).slice(0, 2).join('.') : '') + ' ”' + (e.textContent || '').replace(/\\s+/g, ' ').trim().slice(0, 40) + '”'; } return sw + ' punkter bred'; })`);
   await f.dator();
-  if (bred) nej(`sidan rullar i sidled i 320 punkters bredd: ${bred} (global.css, K-400)`);
+  if (bred === undefined) nej(`provet i ${bredd} punkters bredd fick inget svar från sidan`);
+  else if (bred) nej(`sidan rullar i sidled i ${bredd} punkters bredd: ${bred} (global.css, K-400)`);
+  }
   if (godkand) klara[s.adress] = s.nyckel;
 }
 

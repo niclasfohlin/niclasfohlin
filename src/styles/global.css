@@ -1681,7 +1681,7 @@ html.js .bara-js { display: inline-block; }
 
 /* De minsta telefonerna, 320 punkter breda: tabellernas längsta ord och cellernas luft rymdes inte, och sidan rullade i
    sidled (K-400: tidsschemat i TIL i grupp och tabellen i Gruppstärkande aktiviteter). Texten i tabellerna är där något
-   mindre och luften smalare. scripts/utskriftsformat.mjs stoppar en sida som rullar i sidled i 320 punkters bredd. */
+   mindre och luften smalare. scripts/utskriftsformat.mjs stoppar en sida som rullar i sidled i 320 eller 360 punkters bredd. */
 @media screen and (max-width: 22.4rem) {
   .m-tabell th, .m-tabell td { padding-left: 0.3rem; padding-right: 0.3rem; font-size: 0.82rem; }
 }
