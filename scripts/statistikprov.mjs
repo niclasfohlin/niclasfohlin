@@ -79,7 +79,8 @@ async function forvantat() {
     const tot = await api('/stats/total', [['start', iso(start)], ['end', iso(slut)]]);
     const hits = [];
     const sedda = new Set();
-    for (let i = 0; i < 5; i++) {
+    // Som sidan: tills GoatCounter säger att inget mer finns, högst 20 omgångar (allaHits i src/pages/statistik.astro).
+    for (let i = 0; i < 20; i++) {
       const s = await api('/stats/hits', [['start', iso(start)], ['end', iso(slut)], ['limit', 100], ...(sedda.size ? [['exclude_paths', [...sedda].join(',')]] : [])]);
       const nya = (s.hits ?? []).filter((h) => !sedda.has(h.path_id));
       nya.forEach((h) => { sedda.add(h.path_id); hits.push(h); });

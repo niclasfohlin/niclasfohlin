@@ -195,23 +195,26 @@ const metodnamn = Object.fromEntries((await publicerade('stodundervisning')).map
         return json;
       }
     }
-    // Sidorna och händelserna i perioden, 100 i taget (GoatCounters största limit, api.json), högst 500. De som redan
-    // hämtats skickas som en kommaseparerad exclude_paths: GoatCounter läser bara det första värdet om parametern
-    // upprepas, och då kom samma 100 tillbaka fem gånger och räknades dubbelt (K-095). En sida som redan finns
-    // räknas aldrig igen, och hämtningen slutar när en omgång inte ger något nytt.
+    // Sidorna och händelserna i perioden, 100 i taget (GoatCounters största limit, api.json), tills GoatCounter säger att
+    // inget mer finns, högst 20 omgångar (2 000). De som redan hämtats skickas som en kommaseparerad exclude_paths:
+    // GoatCounter läser bara det första värdet om parametern upprepas, och då kom samma 100 tillbaka fem gånger och
+    // räknades dubbelt (K-095). En sida som redan finns räknas aldrig igen, och hämtningen slutar när en omgång inte ger
+    // något nytt. Nedladdningarna och delningarna räknas ur listan, så en lista som inte är hel säger sidan (hela), i
+    // stället för att visa för låga tal som hela (Codex-granskningen 2026-10-19: högst 500 tappade det som kom efter).
     async function allaHits(t: { start: string; end: string }, aktuell: () => boolean) {
       const ut: Hit[] = [];
       const sedda = new Set<number>();
-      for (let i = 0; i < 5; i++) {
+      let hela = false;
+      for (let i = 0; i < 20; i++) {
         const svar = await hamta('/api/v0/stats/hits', { ...t, limit: 100, ...(sedda.size ? { exclude_paths: [...sedda].join(',') } : {}) }, aktuell);
         const nya = ((svar.hits ?? []) as Hit[]).filter((h) => !sedda.has(h.path_id));
         for (const h of nya) {
           sedda.add(h.path_id);
           ut.push(h);
         }
-        if (!svar.more || nya.length === 0) break;
+        if (!svar.more || nya.length === 0) { hela = true; break; }
       }
-      return ut;
+      return { hits: ut, hela };
     }
 
     // Sidans titel utan sajtens namn; händelsernas titlar är redan "Upprepad läsning: lathunden som pdf".
@@ -458,7 +461,7 @@ const metodnamn = Object.fromEntries((await publicerade('stodundervisning')).map
       status.textContent = 'Hämtar …';
       try {
         const t = tider(period);
-        const [hits, total] = await Promise.all([allaHits(t, aktuell), hamta('/api/v0/stats/total', t, aktuell)]);
+        const [{ hits, hela }, total] = await Promise.all([allaHits(t, aktuell), hamta('/api/v0/stats/total', t, aktuell)]);
         if (denna !== korning) return;
         const { rader: k, delade, nedladdade } = kategorier(hits);
         const handelser = total.total_events ?? 0;
@@ -505,7 +508,7 @@ const metodnamn = Object.fromEntries((await publicerade('stodundervisning')).map
         ]);
         if (denna !== korning) return;
         const nu = new Date();
-        status.textContent = `Hämtat ${nu.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}.`;
+        status.textContent = `Hämtat ${nu.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' })}.${hela ? '' : ' Perioden har fler än 2 000 sidor och händelser, och bara de 2 000 första är med, så nedladdningarna, delningarna och listorna är för låga.'}`;
       } catch (e) {
         if (denna !== korning) return;
         if (e instanceof NyckelFel) { visaForm('Nyckeln fungerar inte. Skapa en ny med rätten Read statistics och klistra in den.'); return; }
