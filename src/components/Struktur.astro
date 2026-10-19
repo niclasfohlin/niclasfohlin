@@ -32,7 +32,8 @@ const rader = (t: string) => t.split('\n').map(delar);
   <div class="boksida-ram">
     <h3 id={ankare} class="boksida-titel"><span class="visually-hidden">Strukturen, {s.vid}: </span>{s.titel}</h3>
     {s.text && <p class="formsida-rad">{rader(s.text).map((r, j) => <>{j > 0 && <br />}{r.map((x) => (x.fet ? <strong>{x.text}</strong> : x.kursiv ? <em>{x.text}</em> : x.text))}</>)}</p>}
-    {bild && <p class="struktur-bild"><img src={bild.adress} alt={bildensAlt(bild)} width={PABORDET_MATT.bredd} height={PABORDET_MATT.hojd} loading="lazy" decoding="async" data-utskriftsbild /></p>}
+    {/* Bilden leder till svg-filen, så att pratbubblorna går att läsa stora i telefonen (granskningen av Högläsning i par 2026-10-20). */}
+    {bild && <p class="struktur-bild"><a href={bild.adress} class="bild-lank" title="Öppna bilden i full storlek"><img src={bild.adress} alt={bildensAlt(bild)} width={PABORDET_MATT.bredd} height={PABORDET_MATT.hojd} loading="lazy" decoding="async" data-utskriftsbild /></a></p>}
     <p class="formsida-rubrik">Så gör ni</p>
     <ol class="boksida-fragor struktur-steg">
       {s.steg.map((x, i) => <li><span class="boksida-nr">{i + 1}.</span><span>{rader(x).map((r, j) => <>{j > 0 && <br />}{r.map((x) => (x.fet ? <strong>{x.text}</strong> : x.kursiv ? <em>{x.text}</em> : x.text))}</>)}</span></li>)}

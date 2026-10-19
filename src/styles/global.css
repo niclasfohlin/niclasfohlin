@@ -865,11 +865,16 @@ button.lank:hover { color: var(--farg-accent); }
 @media screen {
   .boksida-fot { font-size: 0.9rem; line-height: 1.45; margin-bottom: 1.5rem; }
   .boksida-knapp { margin-left: auto; }
+  /* Metodsidans regel för stycken i ett avsnitt (.metod-modell section > p) slog ut luften ovan, så att nivåns etikett
+     under en provtext stod närmare nästa text än sin egen (granskningen av Högläsning i par i telefonen 2026-10-20). */
+  .metod-modell p.boksida-fot { margin: 0.4rem 0 1.5rem; }
+  /* Strukturens rad är lärarens instruktion för att leda den (tid, byte, udda antal) och står i textens färg. */
+  .struktur > .boksida-fot { color: var(--farg-text); }
 }
 /* Inget ensamt ord sist i en rubrik på skärmen ("…vecka 4: Till" / "laget", "SAMMA" / "PLATS"; granskningen av
    skrivkurserna i telefonen 2026-10-10). Utskriften behåller sina rader, som A4-sidornas mått räknar med. */
 @media screen {
-  .metod-text :is(h2, h3, h4), .boksida-titel { text-wrap: balance; }
+  .metod-text :is(h2, h3, h4), .boksida-titel, .lathund-huvud h1 { text-wrap: balance; }
 }
 @media (max-width: 40rem) {
   .boksida-ram { padding: 1rem 1.1rem 1.25rem; }
@@ -1603,6 +1608,9 @@ html.js .bara-js { display: inline-block; }
 .lh-ruta-kropp { padding: 0.6rem 0.8rem 0.2rem; }
 .lh-ruta .lh-titel { font-weight: 700; font-size: 1.05rem; }
 .lh-ruta > ul { margin: 0.5rem 0.8rem 0.7rem; padding: 0; list-style: none; }
+/* Rensa kryssen i checklistans ruta på lathundssidan står i linje med punkterna, inte på rutans kant (granskningen av
+   Högläsning i par i telefonen 2026-10-20). */
+.lh-ruta > .m-rensa { margin: -0.4rem 0.8rem 0.7rem; }
 /* En kort textruta, som ett problem att läsa högt, står större (passTextKort i metod.ts). */
 .lh-ruta.lh-kort .lh-ruta-kropp { font-size: 1.2rem; line-height: 1.45; }
 /* Lärarens repliker under textrutan, som pratbubblor (lathund.pass.repliker). Pekaren är en vriden ruta i bubblans kant. */

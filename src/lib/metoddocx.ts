@@ -2417,7 +2417,8 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
   const elevsida = !!o.elevbilder?.length && !!ram.listor?.length;
   // Elevens blad med listor som ryms på ett A4 (elevbladRyms i src/lib/ramform.ts, Läsarens förberedelse i Högläsning i
   // par) står likadant: listorna tätt i 13 punkter och rubrikerna utan ramens namn, också i planeringsmallarna, så att
-  // bladet är ett A4 att kopiera per elev, som hos riggen.
+  // bladet är ett A4 att kopiera per elev, som hos riggen. Stycket efter bladets sista tabell är den minsta luften,
+  // eftersom nästa ram börjar på en ny sida: Google Dokument flyttade annars det tomma stycket till en egen sida.
   const egetBlad = !elevsida && !!o.blad && elevbladRyms(ram, o.blad);
   const ettBlad = elevsida || egetBlad;
   // Ramens text hänger ihop med det som följer, utom när veckorna börjar på en ny sida: Google Dokument flyttade då
@@ -2470,7 +2471,7 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
     const elevensFalt = !!o.blad && !elevsida;
     return [
       ...((ram.lektioner && !(o.paNySida && nr === 0)) || (medBild && nr > 0) ? [new Paragraph({ pageBreakBefore: true, spacing: { before: 0, after: 0, line: 240 }, run: { size: 2, font: 'Calibri' } })] : []),
-      ...ramFaltTabell(del.falt, { rubrik: (korta || ram.listor) && !egetBlad && !del.rubrik.includes(ram.rubrik) ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum, skrivrader: !o.skrivrum && !elevensFalt && !ramArTom(ram), hojder: elevensFalt ? del.falt.map((f) => o.blad![f.rubrik]) : undefined, elevblad: elevensFalt, tat: ram.lektioner || o.tat || medBild, bokmarke: ram.lektioner && o.karta ? o.karta.vecka(forstaLed(del.rubrik)) : undefined, luftEfter: rad && !tvaSidor ? VECKANS_LUFT : medBild ? VECKANS_LUFT : ram.oversikt?.bilder ? 60 : undefined, hallIhopEfter: medBild || undefined, etiketter: o.radetiketter }),
+      ...ramFaltTabell(del.falt, { rubrik: (korta || ram.listor) && !egetBlad && !del.rubrik.includes(ram.rubrik) ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum, skrivrader: !o.skrivrum && !elevensFalt && !ramArTom(ram), hojder: elevensFalt ? del.falt.map((f) => o.blad![f.rubrik]) : undefined, elevblad: elevensFalt, tat: ram.lektioner || o.tat || medBild, bokmarke: ram.lektioner && o.karta ? o.karta.vecka(forstaLed(del.rubrik)) : undefined, luftEfter: rad && !tvaSidor ? VECKANS_LUFT : medBild ? VECKANS_LUFT : ram.oversikt?.bilder ? 60 : egetBlad && nr === delar.length - 1 ? LUFT_RAD : undefined, hallIhopEfter: medBild || undefined, etiketter: o.radetiketter }),
       ...(tvaSidor ? [luft(LUFT_RAD, true, { nySida: true })] : []),
       // Veckans rad ur kartan: talen och bladen för varje nivå, med bladens namn som länkar.
       ...(rad && o.karta?.tabell ? (() => { const k = o.karta!.tabell!.kolumner.slice(1); return rubrikTabell(k, [rad.slice(1)], k.map(() => Math.floor(BREDD / k.length)), { radrubrik: false, hallIhop: true, hallIhopEfter: true, storlek: 19, karta: { ...o.karta!.lankar, vecka: undefined } }); })() : []),

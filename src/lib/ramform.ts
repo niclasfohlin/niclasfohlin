@@ -183,7 +183,7 @@ export function strukturAv(ram: FormRam): Struktur | null {
   const not = ram.delar.filter((del) => /^Till läraren$/i.test(del.rubrik.trim())).flatMap((del) => del.falt.map((f) => `${f.rubrik}: ${f.text}`)).join(' ');
   return {
     vid: m[1].trim(), titel: m[2].trim(), steg: steg.rader.map((r) => String(r[0] ?? '').replace(/^\d+\.\s*/, '')),
-    rutaRubrik: ruta.rubrik ?? '', ruta: ruta.rader.map((r) => String(r[0] ?? '')), text: ram.text?.[0] ?? '', not: not ? `Till läraren: ${not}` : '',
+    rutaRubrik: ruta.rubrik ?? '', ruta: ruta.rader.map((r) => String(r[0] ?? '')), text: ram.text?.[0] ?? '', not: not ? `Till läraren · ${not}` : '',
   };
 }
 
