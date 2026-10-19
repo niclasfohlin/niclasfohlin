@@ -18,7 +18,7 @@ import { brakDelar, delnamn, kortInfo, lage, STANDARD_NAMNARE, talrutansMatt, ty
 import { andikaBredd, bagSvg, utanStod } from './lasflyt';
 import { platsISerien, type MetodPostISerie, type SerieKoppling } from './serie';
 import { ANDIKA_ADRESS, ELEVTYPSNITT, VIK_TEXT, arBildlista, bildFor as bildForOrd, bildlistansNamn, harElevtypsnitt, kartCeller, kortCeller, ljudenheter, ljudform, arDelark, type KartCell } from './ljudkort';
-import { arElevensBlad, FAKTAORD, faktatexter, harFaktatexter, harFragor, lastexter, protokollDelas, strukturAv, textlangd, textparAv, textparLarare, arTextparLista, type Faktadel, type Faktatext, type Lastext, type Struktur, type Textpar } from './ramform';
+import { arElevensBlad, elevbladRyms, FAKTAORD, faktatexter, harFaktatexter, harFragor, lastexter, protokollDelas, strukturAv, textlangd, textparAv, textparLarare, arTextparLista, type Faktadel, type Faktatext, type Lastext, type Struktur, type Textpar } from './ramform';
 import { filmerVid, grundUpphov, huvudfilm, metodensFilmer, stegDelar, stillbilder, STILLBILD_MATT, type FilmPlats, type MetodFilm } from './film';
 import { reservNyckel } from './reservbild';
 import { arkAdress, mallEtiketter, mallRutor as mallRutorAdresser, rutansText, serieAdress, svgMatt } from './bildserier';
@@ -2415,6 +2415,11 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
   // TILL-SAJTEN 2026-10-13, Det nya punkt 6): det eleven läser står i 13 punkter, som hos riggen, så att texten, bilden
   // och rutan ryms på ett A4, och listornas rubriker står utan ramens namn, eftersom bladet är elevens.
   const elevsida = !!o.elevbilder?.length && !!ram.listor?.length;
+  // Elevens blad med listor som ryms på ett A4 (elevbladRyms i src/lib/ramform.ts, Läsarens förberedelse i Högläsning i
+  // par) står likadant: listorna tätt i 13 punkter och rubrikerna utan ramens namn, också i planeringsmallarna, så att
+  // bladet är ett A4 att kopiera per elev, som hos riggen.
+  const egetBlad = !elevsida && !!o.blad && elevbladRyms(ram, o.blad);
+  const ettBlad = elevsida || egetBlad;
   // Ramens text hänger ihop med det som följer, utom när veckorna börjar på en ny sida: Google Dokument flyttade då
   // texten till en egen sida före den första veckan, eftersom den hängde ihop med sidbrytningen (Word bortser från det).
   if (!enVecka) for (const s of ram.text) ut.push(stycke(s, { hallIhop: !ram.lektioner || undefined }));
@@ -2465,7 +2470,7 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
     const elevensFalt = !!o.blad && !elevsida;
     return [
       ...((ram.lektioner && !(o.paNySida && nr === 0)) || (medBild && nr > 0) ? [new Paragraph({ pageBreakBefore: true, spacing: { before: 0, after: 0, line: 240 }, run: { size: 2, font: 'Calibri' } })] : []),
-      ...ramFaltTabell(del.falt, { rubrik: (korta || ram.listor) && !del.rubrik.includes(ram.rubrik) ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum, skrivrader: !o.skrivrum && !elevensFalt && !ramArTom(ram), hojder: elevensFalt ? del.falt.map((f) => o.blad![f.rubrik]) : undefined, elevblad: elevensFalt, tat: ram.lektioner || o.tat || medBild, bokmarke: ram.lektioner && o.karta ? o.karta.vecka(forstaLed(del.rubrik)) : undefined, luftEfter: rad && !tvaSidor ? VECKANS_LUFT : medBild ? VECKANS_LUFT : ram.oversikt?.bilder ? 60 : undefined, hallIhopEfter: medBild || undefined, etiketter: o.radetiketter }),
+      ...ramFaltTabell(del.falt, { rubrik: (korta || ram.listor) && !egetBlad && !del.rubrik.includes(ram.rubrik) ? `${del.rubrik} · ${ram.rubrik}` : del.rubrik, skrivrum: o.skrivrum, skrivrader: !o.skrivrum && !elevensFalt && !ramArTom(ram), hojder: elevensFalt ? del.falt.map((f) => o.blad![f.rubrik]) : undefined, elevblad: elevensFalt, tat: ram.lektioner || o.tat || medBild, bokmarke: ram.lektioner && o.karta ? o.karta.vecka(forstaLed(del.rubrik)) : undefined, luftEfter: rad && !tvaSidor ? VECKANS_LUFT : medBild ? VECKANS_LUFT : ram.oversikt?.bilder ? 60 : undefined, hallIhopEfter: medBild || undefined, etiketter: o.radetiketter }),
       ...(tvaSidor ? [luft(LUFT_RAD, true, { nySida: true })] : []),
       // Veckans rad ur kartan: talen och bladen för varje nivå, med bladens namn som länkar.
       ...(rad && o.karta?.tabell ? (() => { const k = o.karta!.tabell!.kolumner.slice(1); return rubrikTabell(k, [rad.slice(1)], k.map(() => Math.floor(BREDD / k.length)), { radrubrik: false, hallIhop: true, hallIhopEfter: true, storlek: 19, karta: { ...o.karta!.lankar, vecka: undefined } }); })() : []),
@@ -2484,7 +2489,7 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
   // rader) sätts ett steg mindre så att listorna, noten och upphovet ryms på en sida och ingen
   // ensam rad hamnar på en sida för sig.
   const radantal = (ram.listor ?? []).reduce((a, l) => a + l.rader.length, 0);
-  const storlek = o.stor && !elevsida ? (radantal > 12 ? 28 : 32) : 26;
+  const storlek = o.stor && !ettBlad ? (radantal > 12 ? 28 : 32) : 26;
   // I elevkopian får listorna bryta sida mellan sig, men den sista håller ihop med lärarnoten efter,
   // så att noten och upphovet aldrig står ensamma på en sida. I beskrivningen hålls listorna ihop.
   // En lästräningstext blir två läskort på en egen sida (K-063), och en ensam kort lista ett kort i 20 pt (K-062).
@@ -2498,7 +2503,7 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
     if (stodKolumn !== undefined) return [...efterBlad, ...laskortBarn(l, stodKolumn)];
     if (arBildlista(l)) return [...efterBlad, ...bildlistaBarn(l)];
     const ettKort = arEttKort(alla, l);
-    return [...efterBlad, ...elevlista({ ...l, rubrik: !o.stor && !elevsida && l.rubrik && !namngerRamen(l.rubrik) ? `${l.rubrik} · ${ram.rubrik}` : l.rubrik }, { storlek: ettKort ? 40 : storlek, luft: ettKort, hallIhopEfter: elevsida || (o.stor ? i === alla.length - 1 : i < alla.length - 1), brak: o.brak, elev: o.elev && !l.larare, tat: elevsida || undefined })];
+    return [...efterBlad, ...elevlista({ ...l, rubrik: !o.stor && !ettBlad && l.rubrik && !namngerRamen(l.rubrik) ? `${l.rubrik} · ${ram.rubrik}` : l.rubrik }, { storlek: ettKort ? 40 : storlek, luft: ettKort, hallIhopEfter: ettBlad || (o.stor ? i === alla.length - 1 : i < alla.length - 1), brak: o.brak, elev: o.elev && !l.larare, tat: ettBlad || undefined })];
   });
   // Berättartärningarna (src/lib/sagoblad.ts, tarningTabell): lärarens ruta först, sedan varje tärning på ett eget A4 med
   // smal marginal, som ett kors att klippa, vika och limma, både i beskrivningen och i planeringsmallarna.
@@ -2562,7 +2567,10 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
   const rakneblad = (ram.listor ?? []).some((l) => l.rakneblad);
   // Elevens blad med en bild som eleven ser på: det eleven läser, bilden och sist rutan Till läraren, som hos riggen.
   if (elevsida) { ut.push(...huvud(), ...listor(), ...o.elevbilder!, ...noter()); return ut; }
-  if (ram.listor) ut.push(...(o.stor && !protokoll && !rakneblad ? [...huvud(), ...listor(), ...noter()] : [...noter(), ...delas, ...huvud(), ...listor()]));
+  // Elevens blad med listor (o.blad) har elevens ordning också i filen med allt: namnraden och listorna först och fälten
+  // efter, som på sidan och i planeringsmallarna (METODER.md, Elevens blad med listor). Läsarens förberedelse i
+  // Högläsning i par fick annars fälten och Till läraren på en sida och namnet och stegen på nästa (2026-10-19).
+  if (ram.listor) ut.push(...((o.stor || o.blad) && !protokoll && !rakneblad ? [...huvud(), ...listor(), ...noter()] : [...noter(), ...delas, ...huvud(), ...listor()]));
   else ut.push(...noter(o.veckor === 'inga' ? [] : enVecka ? [ram.delar[o.veckor as number]] : ram.delar));
   return ut;
 }
@@ -3451,11 +3459,16 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
     // passnummer, och tillfället står i rubriken efter inför (läsbarhetsgranskningen av Kompissamtal 2026-10-03).
     const tillfalle = d.checklista.rubrik.match(/(?:inför|före) (.+)$/i)?.[1]?.trim();
     const enGang = tillfalle && !/^(passet|varje pass|ett pass)$/i.test(tillfalle) ? tillfalle : undefined;
+    // En rubrik utan tillfälle och utan pass (Checklista i Högläsning i par, där punkterna gäller före vecka 1, varje vecka
+    // och före vecka 6, riggens TILL-SAJTEN 2026-10-19) har sina tider i punkterna och inget passnummer.
+    const egnaTider = !tillfalle && !/pass/i.test(d.checklista.rubrik);
     sidor.push([
       ...under(d.checklista.rubrik),
       ...(enGang
         ? [stycke(`Bocka av före ${enGang}. Det som inte är gjort görs innan ${/kursen/i.test(enGang) ? 'kursen börjar' : 'eleverna kommer'}.`), skrivrad(['Datum'])]
-        : [stycke('Bocka av inför varje pass. Det som inte är gjort görs innan eleverna kommer.'), skrivrad(['Datum', 'Pass nr'])]),
+        : egnaTider
+          ? [stycke('Varje punkt säger när den ska vara gjord. Bocka av det som är klart.')]
+          : [stycke('Bocka av inför varje pass. Det som inte är gjort görs innan eleverna kommer.'), skrivrad(['Datum', 'Pass nr'])]),
       ...bockar(d.checklista.punkter, 1, { hojd: 560 }),
     ]);
   }

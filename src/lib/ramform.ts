@@ -228,3 +228,20 @@ export function protokollDelas(ram: Ram): boolean {
   const rader = listor.reduce((a, l) => a + l.rader.length + (l.kolumner ? 1 : 0) + 1, 0);
   return (tecken / 95) * 0.5 + rader * 0.75 > 22;
 }
+
+// Ryms elevens blad med listor (en ram med höjder i elevblad) på ett A4 med listorna tätt i beskrivningens storlek? Då
+// är bladet ett A4 att kopiera per elev också i planeringsmallarna, som hos metodriggen: Läsarens förberedelse i
+// Högläsning i par delades annars med stegen på en sida och fälten på nästa (2026-10-19). Kartläggningen i Problemlösning
+// i grupp, med problemet på en sida och svaren på nästa, ryms inte och står stort som förut. Höjden räknas grovt, som i
+// protokollDelas: ramens text en rad om 95 tecken på 0,5 cm, en rad i huvudet 1 cm, en listrad om 75 tecken 0,6 cm och
+// 0,3 cm luft per rad, fälten i sina höjder och delens rubrik 0,8 cm, och en sida har omkring 22 cm för ramen.
+export function elevbladRyms(ram: Ram & { text: string[] }, hojder: Record<string, number>): boolean {
+  const listor = ram.listor ?? [];
+  if (!listor.length) return false;
+  const rader = (s: string, per: number) => Math.max(1, Math.ceil(s.length / per));
+  const text = ram.text.reduce((a: number, s: string) => a + rader(s, 95) * 0.5, 1.2);
+  const huvud = ram.huvud?.length ?? 0;
+  const lista = listor.reduce((a, l) => a + 0.6 + l.rader.reduce((b, r) => b + rader(r.join(' '), 75) * 0.6 + 0.3, 0), 0);
+  const delar = ram.delar.reduce((a, d) => a + 0.8 + d.falt.reduce((b, f) => b + (hojder[f.rubrik] ?? rader(`${f.rubrik} ${f.text}`, 110) * 0.5), 0), 0);
+  return text + huvud + lista + delar <= 22;
+}
