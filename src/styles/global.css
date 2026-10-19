@@ -328,11 +328,23 @@ form.prenumerera button:hover { background: var(--farg-accent-mork); }
 /* Metodbanken: korten och raden för att ladda ner flera metoder i en fil.
    Kortet: titel med ämnesmärke, faktaremsa (årskurs, grupp, pass, hur ofta), ingress, taggar, handlingar. */
 .metodkort .kort-topp { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; }
+/* Kortet: en svag ton och en kant upptill och till vänster i områdets färg, så att det ser lite upphöjt ut. Vid hovring,
+   fokus och tryck lyfts det ett par punkter och får en skugga i områdets färg nedåt höger, i stället för kanten runt om
+   som andra kort får. */
+.metodkort { background: color-mix(in srgb, var(--amnefarg) 4%, white); border: 1px solid color-mix(in srgb, var(--amnefarg) 22%, white); border-top: 3px solid var(--amnefarg); border-left: 3px solid var(--amnefarg); transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.metodkort .kort-fakta { background: rgba(255, 255, 255, 0.8); }
+.metodkort:hover, .metodkort:focus-within, .metodkort:active { border-color: color-mix(in srgb, var(--amnefarg) 22%, white); border-top-color: var(--amnefarg); border-left-color: var(--amnefarg); transform: translate(-2px, -2px); box-shadow: 4px 4px 0 color-mix(in srgb, var(--amnefarg) 30%, white), 0 8px 18px rgba(20, 32, 43, 0.1); }
+@media (prefers-reduced-motion: reduce) { .metodkort { transition: none; } .metodkort:hover, .metodkort:focus-within, .metodkort:active { transform: none; } }
 .metodkort .kort-topp h3 { margin: 0; }
 .amne { flex: none; font-family: var(--typsnitt-ui); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.3rem 0.55rem; border-radius: 6px; margin-top: 0.15rem; background: var(--farg-accent-ljus); color: var(--farg-accent); }
-.amne[data-amne="Läsning"] { background: var(--farg-lasning-ljus); color: var(--farg-lasning); }
-.amne[data-amne="Skrivning"] { background: var(--farg-skrivning-ljus); color: var(--farg-skrivning); }
-.amne[data-amne="Socialt"] { background: var(--farg-socialt-ljus); color: var(--farg-socialt); }
+/* Områdenas färg på metodkorten och etiketten (K-464, Niclas 2026-10-19: "Kan inte metoden ha en svag ton av ämnet den
+   har ... så att de särskiljer lite bättre", "Border uppe och vänster så de ser lite 3D ut och i färgen för ämnet", och om
+   etiketten "lite tydligare"). Etiketten med data-amne, på korten och i täckningskartan; delningskortens mall har sin egen. */
+.metodkort, .amne[data-amne] { --amnefarg: var(--farg-accent); }
+.metodkort[data-omrade="Läsning"], .amne[data-amne="Läsning"] { --amnefarg: var(--farg-lasning); }
+.metodkort[data-omrade="Skrivning"], .amne[data-amne="Skrivning"] { --amnefarg: var(--farg-skrivning); }
+.metodkort[data-omrade="Socialt"], .amne[data-amne="Socialt"] { --amnefarg: var(--farg-socialt); }
+.amne[data-amne] { background: color-mix(in srgb, var(--amnefarg) 16%, white); color: var(--amnefarg); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amnefarg) 55%, white); }
 .kort-fakta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem 1rem; margin: 0.75rem 0 0.9rem; padding: 0.7rem 0.9rem; background: var(--farg-ton); border-radius: 8px; font-family: var(--typsnitt-ui); font-size: 0.9rem; }
 .kort-fakta div { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; }
 .kort-fakta dt { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); }
@@ -342,7 +354,7 @@ form.prenumerera button:hover { background: var(--farg-accent-mork); }
 .metodkort .valj { display: none; }
 html.js .metodkort .valj { margin-left: auto; display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 600; cursor: pointer; }
 .metodkort .valj input { accent-color: var(--farg-accent); width: 1.1rem; height: 1.1rem; margin: 0; }
-.metodkort.vald { border-color: var(--farg-accent); box-shadow: 0 0 0 2px var(--farg-accent-ljus); }
+.metodkort.vald { border-color: var(--amnefarg); box-shadow: 0 0 0 2px color-mix(in srgb, var(--amnefarg) 30%, white); }
 .samla { display: none; }
 html.js .samla {
   position: sticky; bottom: 0.75rem; z-index: 5;
