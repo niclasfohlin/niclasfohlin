@@ -347,7 +347,9 @@ form.prenumerera button:hover { background: var(--farg-accent-mork); }
 .amne[data-amne] { background: color-mix(in srgb, var(--amnefarg) 16%, white); color: var(--amnefarg); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--amnefarg) 55%, white); }
 .kort-fakta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem 1rem; margin: 0.75rem 0 0.9rem; padding: 0.7rem 0.9rem; background: var(--farg-ton); border-radius: 8px; font-family: var(--typsnitt-ui); font-size: 0.9rem; }
 .kort-fakta div { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; }
-.kort-fakta dt { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); }
+.kort-fakta dt { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--farg-text-svag); }
+/* Rutans sex uppgifter i fast form (K-465) ryms på en rad var från 360 punkter: mindre luft i rutan på smala skärmar. */
+@media (max-width: 24rem) { .kort-fakta { padding: 0.6rem 0.7rem; gap: 0.5rem 0.75rem; } }
 .kort-fakta dd { margin: 0; font-weight: 600; }
 .metodkort .ingress { margin: 0 0 0.75rem; }
 .metodkort .kort-rad { font-family: var(--typsnitt-ui); font-size: 0.9rem; margin: 0.5rem 0 0; display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; align-items: center; }

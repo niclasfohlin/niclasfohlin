@@ -128,19 +128,6 @@ export function lathundFakta(d: MetodData): { rubrik: string; text: string }[] {
 
 // Faktaremsan på metodkortet i metodbanken: årskurs, grupp, passlängd och hur ofta, ur samma
 // fält som lathundens faktarutor, så att kortet aldrig säger emot metoden.
-export function kortFakta(d: MetodData): { rubrik: string; text: string }[] {
-  // Tiden skrivs "20 minuter per pass, två till tre pass i veckan" (se _mall.yaml). Saknas " per pass"
-  // går den inte att dela säkert och visas då hel under Tid.
-  const [passlangd, ...rest] = (d.tid ?? '').split(/ per pass,?\s*/);
-  const tid = rest.length > 0
-    ? [{ rubrik: 'Pass', text: versal(passlangd.trim()) }, { rubrik: 'Hur ofta', text: versal(rest.join(' ').trim()) }]
-    : [{ rubrik: 'Tid', text: d.tid ?? '' }];
-  return [
-    { rubrik: 'Årskurs', text: arskursText(d).replace(/^åk\s*/, '') },
-    { rubrik: 'Grupp', text: d.grupp ?? '' },
-    ...tid,
-  ].filter((f) => f.text);
-}
 
 // Arbetsformen som en rad: "Gemensamt (läraren leder) → i par (eleverna prövar) → gemensamt igen (…)".
 export function arbetsformRad(d: MetodData): string {

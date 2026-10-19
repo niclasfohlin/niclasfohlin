@@ -12,6 +12,7 @@ import { forstaLed, radensDel } from './lib/karta';
 import { veckofel } from './lib/veckomaterial';
 import { arskursFel } from './lib/tackning';
 import { metodensTaggfel } from './lib/upplagg';
+import { faktaFel } from './lib/kortfakta';
 import { INNEHALLSTAGGAR } from './lib/standard/index.js';
 
 // Registren är den enda sanningen om vilka taggar och publikationer som finns.
@@ -683,6 +684,8 @@ const stodundervisning = defineCollection({
     if (akFel) ctx.addIssue({ code: 'custom', path: ['arskursText'], message: akFel });
     // Taggarnas slag, och Intensivträning och Lektionsupplägg mot faktarutans tid (K-463, src/lib/upplagg.ts).
     for (const fel of metodensTaggfel(d)) ctx.addIssue({ code: 'custom', path: ['taggar'], message: fel });
+    // Faktarutans grupp, tid och period läses i fast form för metodbankens kort (K-465, src/lib/kortfakta.ts).
+    for (const fel of faktaFel(d)) ctx.addIssue({ code: 'custom', path: ['grupp'], message: fel });
     // En lektion har serie, formaga och tranar tillsammans, och ingen egen lektionsbank. Att serien och förmågan finns
     // prövas i src/lib/serie.ts, där alla metoder är kända.
     const lektionsfalt = [d.serie, d.formaga, d.tranar].filter((x) => x !== undefined).length;

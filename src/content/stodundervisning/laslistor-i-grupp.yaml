@@ -6,7 +6,6 @@ ingress: Ett körschema för 15-minuterspass i liten grupp där läraren modelle
 omrade: Läsning
 arskurs:
   - F-3
-arskursText: F–3, främst F–2
 taggar:
   - avkodning
   - bokstavskunskap
@@ -23,7 +22,7 @@ material:
   - bokstavskort
   - en lättläst bok
   - snabbmallen
-uppdaterad: 2026-10-17
+uppdaterad: 2026-10-19
 relaterade:
   - til-i-grupp
   - upprepad-lasning

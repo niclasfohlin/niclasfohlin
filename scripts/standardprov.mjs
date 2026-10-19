@@ -29,7 +29,7 @@ for (const f of readdirSync(mapp).filter((x) => /\.(js|d\.ts)$/.test(x))) {
   }
 }
 
-const { slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg } = await import(pathToFileURL(join(mapp, 'index.js')).href);
+const { slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm } = await import(pathToFileURL(join(mapp, 'index.js')).href);
 const fall = [
   ['Två lösningar', 'tva-losningar'], ['Lärarens sida', 'lararens-sida'], ['Bas', 'bas'], ['Problem och lösning', 'problem-och-losning'],
   ['Café Über', 'cafe-uber'], ['  –Äpple, år 3–  ', 'apple-ar-3'], ['Venndiagrammet', 'venndiagrammet'], ['Ö', 'o'],
@@ -125,5 +125,15 @@ const upplaggFall = [
 ];
 for (const [tid, vantat] of upplaggFall) if (mojligaUpplagg(tid).join(',') !== vantat) fel.push(`mojligaUpplagg("${tid}") ger ${mojligaUpplagg(tid).join(',') || 'inget'}, inte ${vantat}`);
 
+// Metodkortets ruta i fast form (K-465): metodernas egna formuleringar.
+const faktaFall = [
+  [{ grupp: 'Två till sex elever', tid: '30 minuter per pass, tre pass i veckan', period: 'Fem veckor' }, '2–6 elever|30 min|3 pass/vecka|5 veckor'],
+  [{ grupp: 'Från fyra elever till en hel klass', tid: '10–40 minuter per pass, en eller två gånger i veckan', period: 'Tolv veckor eller mer, så länge gruppen behöver det' }, '4 elever–klass|10–40 min|1–2 pass/vecka|12+ veckor'],
+  [{ grupp: '2–12 elever', tid: '60 minuter per pass, två pass i veckan och ett tredje när det går', period: 'Högst en vecka, tre till fem pass' }, '2–12 elever|60 min|2–3 pass/vecka|högst 1 vecka'],
+  [{ grupp: 'En till fyra elever', tid: '20 minuter i skolan och 20 hemma per pass, vanligtvis fyra dagar i veckan', period: 'Sex veckor för varje kurs' }, '1–4 elever|20 min + 20 hemma|4 pass/vecka|6 veckor per kurs'],
+  [{ grupp: 'Två till åtta elever, eller en hel klass', tid: '10–15 minuter per pass, varje dag eller minst tre gånger i veckan', period: 'Åtta till tolv pass i följd' }, '2–8 elever|10–15 min|3–5 pass/vecka|8–12 pass'],
+];
+for (const [d, vantat] of faktaFall) { const f = Object.values(faktaIFastForm(d)).join('|'); if (f !== vantat) fel.push(`faktaIFastForm(${JSON.stringify(d)}) ger ${f}, inte ${vantat}`); }
+
 if (fel.length) { console.error(`standardprov: ${fel.length} fel i src/lib/standard/:\n  ${fel.join('\n  ')}`); process.exit(1); }
-console.log(`standardprov: standarden (src/lib/standard/) importerar inget utanför sig själv, och slugAv, UPPTAGNA_LED, innehållstaggarna, postens rad och fel och hämtplanen, spärren mot fasta antal, hänvisningarna till Fohlin och uppläggen ur faktarutans tid svarar rätt.`);
+console.log(`standardprov: standarden (src/lib/standard/) importerar inget utanför sig själv, och slugAv, UPPTAGNA_LED, innehållstaggarna, postens rad och fel och hämtplanen, spärren mot fasta antal, hänvisningarna till Fohlin, uppläggen ur faktarutans tid och kortets ruta i fast form svarar rätt.`);

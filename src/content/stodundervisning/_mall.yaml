@@ -21,16 +21,18 @@ omrade: Läsning
 arskurs: ["4-6", "7-9"]
 # Valfritt: årskursen som läsaren ser när nivåerna inte säger det exakt, t.ex. åk 3–6.
 # arskursText: åk 3–6
-# Skrivs som "åk 3–6" eller "F–2": täckningskartan i metodbanken ritar stapeln ur texten, och bygget stannar om den inte
-# går att läsa eller rör andra nivåer än arskurs.
+# Skrivs som "åk 3–6" eller "F–2", bara spannet och inget tillägg som "främst F–2": täckningskartan och metodkortet
+# visar det, och bygget stannar om det inte går att läsa eller rör andra nivåer än arskurs.
 # id från src/data/taggar.json. Återanvänd före att lägga till. Minst en förmåga och inget ämne (slag i registret), och
 # exakt ett upplägg: intensivtraning, lektionsupplagg eller aterkommande-pass, efter tid nedan (ARBETSSATT.md under
 # Innehåll).
 taggar: ["lasforstaelse"]
 # Valfritt antal av: enskilt, par, liten grupp, helklass
 format: ["liten grupp", "par"]
-# Faktarutan, fritext. Skriv tid som "<passlängd> per pass, <hur ofta>": metodkortet och lathundens
-# faktarutor delar texten vid " per pass" och visar passlängd och frekvens var för sig.
+# Faktarutan, i metodens ord. Skriv tid som "<passlängd> per pass, <hur ofta> i veckan", period i veckor och grupp i
+# antal elever: metodbankens kort läser dem i fast form ("30 min", "2–3 pass/vecka", "6–8 veckor", "3–8 elever",
+# src/lib/kortfakta.ts), och bygget stannar om ett fält inte går att läsa så. Lathundens faktarutor delar tiden vid
+# " per pass" och visar passlängd och frekvens var för sig.
 tid: 20 minuter per pass, två till tre pass i veckan
 period: Sex till åtta veckor
 grupp: Tre till åtta elever

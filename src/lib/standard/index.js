@@ -355,3 +355,67 @@ export function mojligaUpplagg(tid) {
   if (minuter !== undefined && perVecka !== undefined && minuter <= ATERKOMMANDE_MINUTER && perVecka <= ATERKOMMANDE_DAGAR) ut.push(ATERKOMMANDE);
   return ut;
 }
+
+/**
+ * Metodens fakta i fast form (sajtens K-465; Niclas 2026-10-19: "Skulle vilja ha en bättre standard på dessa för alla ...
+ * att det står tydligt och lika", och om "F-3 mest F-2": "sådant funkar inte riktigt i en databas som växer. Behöver
+ * tydlighet"). Faktarutans fält är text i metodens egna ord; här läses de som tal, så att metodbankens kort visar dem lika
+ * för alla metoder: "2–6 elever", "30 min", "3–5 pass/vecka", "6–8 veckor". Ett fält som inte går att läsa ger null, och
+ * sajten stoppar då metoden.
+ */
+const FAKTATAL = { en: 1, ett: 1, två: 2, tre: 3, fyra: 4, fem: 5, sex: 6, sju: 7, åtta: 8, nio: 9, tio: 10, elva: 11, tolv: 12, tretton: 13, fjorton: 14, femton: 15, sexton: 16, tjugo: 20 };
+const faktatal = (x) => (/^\d+$/.test(x) ? Number(x) : FAKTATAL[x]);
+const FAKTAORD = String.raw`(\d+|${Object.keys(FAKTATAL).join('|')})`;
+const ORDNINGSTAL = { andra: 2, tredje: 3, fjärde: 4, femte: 5 };
+const spann = (a, b) => (b !== undefined && b !== a ? `${a}–${b}` : `${a}`);
+
+/** Gruppens storlek: det minsta och största antalet elever, och om gruppen kan vara en hel klass. @param {string} grupp @returns {{ min: number, max?: number, klass: boolean } | null} */
+export function gruppensElever(grupp) {
+  const t = String(grupp ?? '').toLowerCase();
+  const m = t.match(new RegExp(String.raw`(?<![\p{L}\d])${FAKTAORD}(?:\s*(?:till|–|-)\s*${FAKTAORD})?\s+elever`, 'u'));
+  if (!m) return null;
+  const min = faktatal(m[1]);
+  const max = m[2] !== undefined ? faktatal(m[2]) : undefined;
+  return { min, ...(max !== undefined ? { max } : {}), klass: /hel klass|helklass/.test(t) };
+}
+
+/** Hur ofta, som ett spann: det minsta och största antalet pass i veckan. @param {string} tid @returns {{ min: number, max: number } | null} */
+export function tidensVeckotakt(tid) {
+  const t = String(tid ?? '').toLowerCase();
+  const lag = [], hog = [];
+  if (/varje (?:dag|vardag|skoldag)|dagligen/.test(t)) { lag.push(5); hog.push(5); }
+  if (/varannan dag/.test(t)) { lag.push(2); hog.push(3); }
+  for (const m of t.matchAll(GANGER)) { lag.push(tidtal(m[1])); hog.push(tidtal(m[2] ?? m[1])); }
+  const extra = t.match(/och (?:ett|en) (andra|tredje|fjärde|femte) när det går/);
+  if (extra) hog.push(ORDNINGSTAL[extra[1]]);
+  return lag.length ? { min: Math.min(...lag), max: Math.max(...hog) } : null;
+}
+
+/** Perioden i veckor, eller i pass för en lektion i en serie, och om den kan bli längre. @param {string} period @returns {{ min: number, max?: number, enhet: 'veckor' | 'pass', mer: boolean, perKurs: boolean } | null} */
+export function periodensLangd(period) {
+  const t = String(period ?? '').toLowerCase();
+  const m = t.match(new RegExp(String.raw`(?<![\p{L}\d])${FAKTAORD}(?:\s*(?:till|–|-)\s*${FAKTAORD})?\s+(veckor|vecka|pass)`, 'u'));
+  if (!m) return null;
+  const max = m[2] !== undefined ? faktatal(m[2]) : undefined;
+  return { min: faktatal(m[1]), ...(max !== undefined ? { max } : {}), enhet: m[3] === 'pass' ? 'pass' : 'veckor', mer: /eller mer|så länge/.test(t), hogst: /högst/.test(t.slice(0, m.index + m[0].length)), perKurs: /varje kurs|per kurs/.test(t) };
+}
+
+/**
+ * Metodkortets fakta i fast form, ur faktarutans fält: grupp ("2–6 elever", "4 elever–klass"), pass ("30 min", "20 min +
+ * 20 hemma"), hur ofta ("3–5 pass/vecka") och period ("6–8 veckor", "12+ veckor", "6 veckor per kurs"). Ett fält som inte
+ * går att läsa är null.
+ * @param {{ grupp?: string, tid?: string, period?: string }} d
+ */
+export function faktaIFastForm(d) {
+  const g = gruppensElever(d.grupp);
+  const grupp = g ? (g.klass && g.max === undefined ? `${g.min} elever–klass` : `${spann(g.min, g.max)} elever`) : null;
+  const m = tidensMatt(d.tid ?? '');
+  const hemma = String(d.tid ?? '').match(/och (\d+) hemma/);
+  const pass = m.minst !== undefined ? `${spann(m.minst, m.minuter)} min${hemma ? ` + ${hemma[1]} hemma` : ''}` : null;
+  const v = tidensVeckotakt(d.tid);
+  const ofta = v ? `${spann(v.min, v.max)} pass/vecka` : null;
+  const p = periodensLangd(d.period);
+  const enhet = p && p.enhet === 'veckor' && p.min === 1 && p.max === undefined ? 'vecka' : p?.enhet;
+  const period = p ? `${p.hogst ? 'högst ' : ''}${spann(p.min, p.max)}${p.mer ? '+' : ''} ${enhet}${p.perKurs ? ' per kurs' : ''}` : null;
+  return { grupp, pass, ofta, period };
+}

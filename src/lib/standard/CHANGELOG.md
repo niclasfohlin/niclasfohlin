@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.8.0, 2026-10-19
+
+- `faktaIFastForm`, `gruppensElever`, `tidensVeckotakt` och `periodensLangd`: faktarutans grupp, tid och period i fast form för metodbankens kort, "2–6 elever", "30 min", "3–5 pass/vecka", "6–8 veckor" (sajtens K-465). Niclas: "Skulle vilja ha en bättre standard på dessa för alla ... att det står tydligt och lika". Ett fält som inte går att läsa ger null, och sajten stoppar metoden.
+
 ## 0.7.0, 2026-10-19
 
 - `tidensMatt`, `arIntensiv`, `arLektioner` och `mojligaUpplagg`, med uppläggens taggar och gränser: metodens upplägg ur faktarutans tid, så att sajten och riggen prövar samma sak (sajtens K-463). En metod har exakt ett upplägg, `intensivtraning` (högst 30 minuter, 3–5 dagar i veckan), `lektionsupplagg` (minst 30 minuter, alltid vid 40 eller mer) eller `aterkommande-pass` (högst 40 minuter, en eller två gånger i veckan); där tiden rymmer två avgör innehållet. Niclas: "Intensivträning är något som sker 30min eller kortare 3-5 dagar i veckan för att höja en förmåga".

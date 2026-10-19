@@ -43,6 +43,9 @@ export const nivaerISpannet = ([fran, till]: Spann): string[] => Object.entries(
 export function arskursFel(d: Arskurs): string | undefined {
   if (d.arskursText !== undefined && !d.arskursText.trim()) return 'arskursText är tom. Ta bort fältet, eller skriv årskursen som "åk 3–6" eller "F–2".';
   if (d.arskursText && !spannITexten(d.arskursText)) return `arskursText "${d.arskursText}" går inte att läsa som ett spann. Skriv årskursen som "åk 3–6" eller "F–2"; täckningskartan i metodbanken ritar stapeln ur den.`;
+  // Bara spannet, inget tillägg som "främst F–2" (K-465; Niclas 2026-10-19: "sådant funkar inte riktigt i en databas som
+  // växer. Behöver tydlighet", och "Inga otydligheter"). Det som gäller en del av spannet står i metodens text.
+  if (d.arskursText && !/^(?:åk\s*)?(?:F|\d)(?:\s*[–-]\s*\d)?$/i.test(d.arskursText.trim())) return `arskursText "${d.arskursText}" ska bara vara ett spann, som "åk 3–6" eller "F–2", utan tillägg. Skriv det som gäller en del av spannet i metodens text.`;
   const sp = arskursSpannet(d);
   const ror = nivaerISpannet(sp);
   const nivaer: readonly string[] = d.arskurs;

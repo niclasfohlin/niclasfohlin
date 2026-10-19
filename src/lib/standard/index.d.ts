@@ -87,3 +87,12 @@ export declare function arIntensiv(tid: string | undefined): boolean;
 export declare function arLektioner(tid: string | undefined): boolean;
 /** Vilka upplägg tiden rymmer. Intensivträning utesluter de andra. */
 export declare function mojligaUpplagg(tid: string | undefined): string[];
+
+/** Gruppens storlek ur faktarutans grupp: minst och högst antal elever, och om gruppen kan vara en hel klass. */
+export declare function gruppensElever(grupp: string | undefined): { min: number; max?: number; klass: boolean } | null;
+/** Hur ofta, som ett spann av pass i veckan. */
+export declare function tidensVeckotakt(tid: string | undefined): { min: number; max: number } | null;
+/** Perioden i veckor, eller i pass för en lektion i en serie. */
+export declare function periodensLangd(period: string | undefined): { min: number; max?: number; enhet: 'veckor' | 'pass'; mer: boolean; hogst: boolean; perKurs: boolean } | null;
+/** Metodkortets fakta i fast form: grupp, pass, hur ofta och period; null för ett fält som inte går att läsa. */
+export declare function faktaIFastForm(d: { grupp?: string; tid?: string; period?: string }): { grupp: string | null; pass: string | null; ofta: string | null; period: string | null };
