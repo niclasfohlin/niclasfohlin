@@ -7,6 +7,7 @@ import { centralAv, lasbarAdress } from '../../../lib/centrala';
 import { kortdataAdress } from '../../../lib/kortdata';
 import Delning from '../../../components/Delning.astro';
 import Klocka from '../../../components/Klocka.astro';
+import TillMetoden from '../../../components/TillMetoden.astro';
 import { delningPa } from '../../../lib/delning';
 import { site } from '../../../data/site';
 
@@ -75,6 +76,7 @@ const kortdata = kortdataAdress(brainbreaksAdress(m.id), brainbreaksData(m.id, b
           {b.kategorier.map((k) => <button type="button" class="sk-niva" data-kategori={k.id} style={`--niva:#${k.farg}`}>{k.namn}</button>)}
         </div>
       </div>
+      <TillMetoden metod={m.id} titel={d.titel} verktyg={namn} handelse={`brainbreaks:${m.id}:metoden`} />
     </div>
 
     <div class="sk-scen" id="bb-scen" data-lage="tom">

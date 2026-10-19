@@ -7,7 +7,7 @@
 // src/pages/stodundervisning/utskrifter.json.ts), så att en knapp aldrig kan leda till en fil som inte görs.
 // Inga Node-beroenden.
 import type { MetodData } from './metod';
-import { bankAv, bankfiler, bankfilensRamar, slugAv, foljesidansNamn, foljeFlera, type Bank, type Bankenhet } from './bank';
+import { bankAv, bankfiler, bankfilensRamar, slugAv, foljesidansNamn, type Bank, type Bankenhet } from './bank';
 import { harLathund } from './metod';
 import { ovrigtfil } from './ovrigt';
 import { bladNamn, bladVid, metodensPaBordet } from './pabordet';
@@ -25,9 +25,10 @@ type Ram = NonNullable<MetodData['ramar']>['ramar'][number];
 /** Bladets namn på en enhets sida: enheten heter som bankens ord (texten, problemet), en följesida som ledet före kolon. */
 export const enhetsbladNamn = (bank: Bank, e: Bankenhet, ramar: Ram[], ri: number) => (ri === e.ri ? bank.ord.bestamd : foljesidansNamn(ramar[ri]));
 
-/** En enhets utskrifter: alla enhetens sidor i en pdf, varje ram för sig och, när banken har postens följesida (src/lib/
- * bank.ts), enheten med den, som problemet med lösningsförslaget, som Ta fram skriver ut. */
-export function enhetensUtskrifter(d: MetodData, id: string, bank: Bank, e: Bankenhet): { alla: Utskrift; ramar: Map<number, Utskrift>; post?: Utskrift; folje?: Utskrift } {
+/** En enhets utskrifter: alla enhetens sidor i en pdf, och varje ram för sig. Ta fram ett matteproblem skriver ut
+ * problemet med lösningsförslaget ur databasens egna filer (src/lib/matteproblem.ts), och sidorna med texter bara
+ * texten (K-441). */
+export function enhetensUtskrifter(d: MetodData, id: string, bank: Bank, e: Bankenhet): { alla: Utskrift; ramar: Map<number, Utskrift> } {
   const ramarna = d.ramar!.ramar;
   // Enheten och ramen jämförs på sitt namn i adressen: sidan och komponenten har var sin bank och var sitt bladmaterial.
   const niva = bank.nivaer.find((n) => n.enheter.some((x) => x.slug === e.slug))!;
@@ -42,16 +43,9 @@ export function enhetensUtskrifter(d: MetodData, id: string, bank: Bank, e: Bank
   const hel = filer.find((x) => bladen.every((ri) => x.ramar.includes(ri)));
   const namn = (ri: number) => enhetsbladNamn(bank, e, ramarna, ri);
   const titel = `${d.titel}: ${e.l.niva}, ${e.l.vad}, ${e.l.titel}`;
-  // Enheten med postens följesida, ur filen med båda (bankfiler, 'post').
-  const postfil = e.post !== undefined ? filer.find((x) => x.ramar.includes(e.ri) && x.ramar.includes(e.post!)) : undefined;
   return {
     alla: { namn: `${id}-${e.slug}`, titel, delar: bladen.map((ri) => ({ pdf: hel?.namn ?? fil(ri), ram: ri })) },
     ramar: new Map(bladen.map((ri) => [ri, { namn: `${id}-${e.slug}-${slugAv(namn(ri))}`, titel: `${titel}: ${namn(ri).toLowerCase()}`, delar: [{ pdf: fil(ri), ram: ri }] }])),
-    // I en bank där följesidorna står i egna filer (faktatexterna) skriver Ta fram ut dem för sig, ur nivåns fil med
-    // följesidorna, så att texterna går att kopiera utan lärarens sidor (designgranskningen 2026-10-18 natt).
-    ...(bank.sidorForSig ? { folje: { namn: `${id}-${e.slug}-${slugAv(foljeFlera(bank))}`, titel: `${titel}: ${foljeFlera(bank).toLowerCase()}`, delar: [...e.fore, ...e.efter].map((ri) => ({ pdf: fil(ri), ram: ri })) } } : {}),
-    // Har enheten bara postens följesida är det enhetens alla sidor, och då står de i en pdf (alla).
-    ...(bank.post && e.post !== undefined && bank.post.egenFil ? { post: { namn: `${id}-${e.slug}-med-${bank.post.slug}`, titel: `${titel}, med ${bank.post.bestamd}`, delar: bladen.filter((ri) => ri === e.ri || ri === e.post).map((ri) => ({ pdf: postfil?.namn ?? fil(ri), ram: ri })) } } : {}),
   };
 }
 
@@ -127,7 +121,7 @@ export function metodensUtskrifter(d: MetodData, id: string): Utskrift[] {
   if (harLathund(d)) lagg(lathundensMall(d, id));
   for (const v of vidEnheterna(d, id)) lagg(v.utskrift);
   const bank = bankAv(d);
-  if (bank) for (const e of bank.enheter) { const u = enhetensUtskrifter(d, id, bank, e); lagg(u.alla); for (const x of u.ramar.values()) lagg(x); if (u.post) lagg(u.post); if (u.folje) lagg(u.folje); }
+  if (bank) for (const e of bank.enheter) { const u = enhetensUtskrifter(d, id, bank, e); lagg(u.alla); for (const x of u.ramar.values()) lagg(x); }
   if (bank) for (const u of temanasUtskrifter(d, id, bank).values()) lagg(u);
   const bm = metodensBladmaterial(d, id);
   if (bm) for (const rad of bm.rader) { const u = radensUtskrifter(d, id, bm, rad); lagg(u.alla); lagg(u.sidan); for (const x of u.blad.values()) lagg(x); }

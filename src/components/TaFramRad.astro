@@ -18,7 +18,7 @@ const taggKlass = (id: string) => `tf-radtagg tagg-${t.taggar.find((x) => x.id =
 const taggNamn = (id: string) => t.taggar.find((x) => x.id === id)?.namn ?? id;
 const bild = !t.baraTexter && p.bildFil;
 ---
-<li class={bild ? 'tf-post' : 'tf-post utan-bild'} id={p.id} data-taggar={p.taggIds.join(' ')} data-tema={p.tema} data-lf={p.losningsforslag ? '' : undefined} data-fakta={p.fakta ? '' : undefined} data-modell={p.modell ? '' : undefined} data-larare={t.baraTexter ? p.losning : undefined}>
+<li class={bild ? 'tf-post' : 'tf-post utan-bild'} id={p.id} data-taggar={p.taggIds.join(' ')} data-tema={p.tema} data-lf={p.losningsforslag ? '' : undefined} data-fakta={p.fakta ? '' : undefined} data-larare={t.baraTexter ? p.losning : undefined}>
   {bild && <img class="tf-bild" src={p.bildFil} alt="" width={p.bildMatt?.bredd ?? PABORDET_MATT.bredd} height={p.bildMatt?.hojd ?? PABORDET_MATT.hojd} loading="lazy" decoding="async" />}
   <div class="tf-text">
     <Rubrik class="tf-titel"><span class="tf-nr">{p.temaNr ?? p.nr}</span> {t.baraTexter && p.sida ? <a class="tf-titellank" href={p.textAdress ?? p.sida}>{p.titel}</a> : p.titel}</Rubrik>

@@ -7,6 +7,7 @@ import { centralAv, lasbarAdress } from '../../../lib/centrala';
 import { kortdataAdress } from '../../../lib/kortdata';
 import Delning from '../../../components/Delning.astro';
 import Klocka from '../../../components/Klocka.astro';
+import TillMetoden from '../../../components/TillMetoden.astro';
 import Filval from '../../../components/Filval.astro';
 import { delningPa } from '../../../lib/delning';
 import { site } from '../../../data/site';
@@ -75,6 +76,7 @@ const kortdata = kortdataAdress(aktiviteterAdress(m.id), aktiviteterData(m.id, b
           <button type="button" class="sk-antal" data-antal="6" aria-pressed="true">Sex kort</button>
         </div>
       </div>
+      <TillMetoden metod={m.id} titel={d.titel} verktyg={namn} handelse={`aktiviteter:${m.id}:metoden`} />
       <div class="sk-valrad" role="group" aria-labelledby="ak-kat-etikett">
         <span class="sk-etikett" id="ak-kat-etikett">Slumpa ur</span>
         <div class="sk-nivaknappar ak-kategorier">

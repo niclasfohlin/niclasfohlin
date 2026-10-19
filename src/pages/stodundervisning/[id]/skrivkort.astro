@@ -6,6 +6,7 @@ import { kortAdress, kortData, kortPdfNamn, skrivkortAv, skrivkortAdress, SKRIVK
 import { kortdataAdress } from '../../../lib/kortdata';
 import Delning from '../../../components/Delning.astro';
 import Klocka from '../../../components/Klocka.astro';
+import TillMetoden from '../../../components/TillMetoden.astro';
 import { delningPa } from '../../../lib/delning';
 import { site } from '../../../data/site';
 
@@ -77,6 +78,7 @@ const antal = (niva: string) => b.kort.filter((k) => k.niva === niva).length;
           ))}
         </div>
       </div>
+      <TillMetoden metod={m.id} titel={d.titel} verktyg={SKRIVKORT_LANK} handelse={`skrivkort:${m.id}:metoden`} />
     </div>
 
     <div class="sk-scen" id="sk-scen" data-lage="tom">

@@ -86,7 +86,10 @@ async function forvantat() {
       if (!s.more || !nya.length) break;
     }
     const dela = hits.filter((h) => h.path.startsWith('dela:')).reduce((a, h) => a + h.count, 0);
-    ut[namn] = [tot.total - tot.total_events, tot.total_events - dela, dela];
+    // Nedladdningarna är filerna och utskrifterna, som sidan räknar dem (kategorier i src/pages/statistik.astro), inte
+    // knapparna i verktygen (granskningen av statistiken 2026-10-19).
+    const ned = hits.filter((h) => h.event && (/^(utskrift|fil:)/.test(h.path) || /\.(pdf|docx|pptx)$/i.test(h.path))).reduce((a, h) => a + h.count, 0);
+    ut[namn] = [tot.total - tot.total_events, ned, dela];
   }
   return ut;
 }

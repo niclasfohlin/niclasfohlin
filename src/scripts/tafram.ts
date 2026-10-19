@@ -10,13 +10,15 @@ import { ettkortLank, flerakortKnapp, kanSkrivaUtPdf } from './pdfutskrift';
 import { hamtplan, type PostUtskrift } from '../lib/standard/index.js';
 import { losningsforslagHtml, losningsstegen, losningsstegHtml, type LosningsforslagVy } from '../lib/losningsforslag';
 
-// Lösningsförslaget står i datafilen utan problemet, som posten redan har, och rutan står en gång (taFramData).
+// Lösningsförslaget står i datafilen utan problemet, som posten redan har, och rutan står en gång (taFramData). Numret,
+// titeln, nivån och taggarna läses ur raden (namnAv), inte ur datafilen. Utskriften med följesidorna (med) har bara
+// posterna på Ta fram ett matteproblem.
 type Lf = Omit<LosningsforslagVy, 'problem' | 'ruta'>;
-type Post = { id: string; niva: string; nivaSlug: string; nr: number; titel: string; taggar?: string[]; sida?: string; losning?: string; bild?: { adress: string; alt: string }; stycken: string[]; fragor: string[]; utskrift: { post: PostUtskrift; med: PostUtskrift }; losningsforslag?: Lf; html?: string; modell?: Modell };
+type Post = { id: string; bild?: { adress: string; alt: string }; stycken: string[]; fragor: string[]; utskrift: { post: PostUtskrift; med?: PostUtskrift }; losningsforslag?: Lf; html?: string; modell?: Modell };
 // Faktatextens modell (src/lib/tafram.ts, TaFramPost.modell): bladet att visa bredvid texten och skriva ut.
 type Bladbild = { adress: string; alt: string };
 type Modell = { namn: string; blad: string; sida: string; bild: Bladbild; bildMatt: { bredd: number; hojd: number }; utskrift: PostUtskrift; ifylld?: { sida: string; bild: Bladbild; bildMatt: { bredd: number; hojd: number }; utskrift: PostUtskrift } };
-type Data = { poster: Post[]; filer: Record<string, { adress: string; byte: number }>; nivaer: { namn: string; slug: string; farg: string; antal: number }[]; losningsruta?: LosningsforslagVy['ruta'] };
+type Data = { poster: Post[]; filer: Record<string, { adress: string; byte: number }>; losningsruta?: LosningsforslagVy['ruta'] };
 
 const sida = document.querySelector<HTMLElement>('.tafram')!;
 const metod = sida.dataset.metod!;
@@ -26,8 +28,6 @@ const titel = sida.dataset.titel!;
 const ord = { en: sida.dataset.en!, flera: sida.dataset.flera!, alla: sida.dataset.alla!, bestamd: sida.dataset.bestamd! };
 const folje = sida.dataset.folje!;
 const foljeEn = sida.dataset.foljeEn!;
-// Följesidorna står i egna filer (faktatexterna): listan skriver ut dem för sig, utan texterna.
-const forSig = sida.dataset.forsig !== undefined;
 // Sidan har bara texterna (TaFram.baraTexter i src/lib/tafram.ts): listan skriver ut texterna, och lärarens sida nås från
 // Visa stort. Taggarna är ett val bara när de delar nivån (taggVal); i en bank med teman står de på kortet.
 const bara = sida.dataset.bara !== undefined;
@@ -226,7 +226,7 @@ function visaBockar() {
   // "Skriv ut" där knappen ger utskriftsrutan och "… som pdf" där den öppnar pdf:en, som i Visa stort (designgranskningen
   // 2026-10-18 natt).
   $('tf-skrivut').textContent = utskriftsnamn(n === 1 ? ord.bestamd : ord.alla);
-  if (skrivutMed) skrivutMed.textContent = forSig ? utskriftsnamn(n === 1 ? foljeEn : folje) : direkt ? `Skriv ut med ${n === 1 ? foljeEn : folje}` : `${versalt(n === 1 ? ord.bestamd : ord.alla)} med ${n === 1 ? foljeEn : folje} som pdf`;
+  if (skrivutMed) skrivutMed.textContent = direkt ? `Skriv ut med ${n === 1 ? foljeEn : folje}` : `${versalt(n === 1 ? ord.bestamd : ord.alla)} med ${n === 1 ? foljeEn : folje} som pdf`;
   $('tf-tomlista').hidden = n === 0;
   $('tf-kopiera').hidden = n === 0;
   if (lofte) data().then(visaStorlek).catch(() => {}); else visaStorlek();
@@ -236,15 +236,13 @@ $('tf-tomlista').addEventListener('click', () => { sparat.bockade = []; spara();
 // Storleken innan utskriften (granskningen 2026-10-18: säg storleken först), ur hämtplanen: posternas egna pdf:er eller
 // källfilen en gång, det som är minst.
 const mb = (byte: number) => `${(byte / 1048576).toLocaleString('sv-SE', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} MB`;
-const planFor = (d: Data, slag: 'post' | 'med') => hamtplan(sparat.bockade.map((id) => ({ id, u: d.poster.find((p) => p.id === id)!.utskrift[slag] })), d.filer);
+const planFor = (d: Data, slag: 'post' | 'med') => hamtplan(sparat.bockade.map((id) => ({ id, u: d.poster.find((p) => p.id === id)!.utskrift[slag]! })), d.filer);
 function visaStorlek(d?: Data) {
   const not = $('tf-storlek');
   const n = sparat.bockade.length;
   if (!n || !d) { not.textContent = ''; return; }
   not.textContent = bara
     ? `${n} ${n === 1 ? ord.en : ord.flera}, omkring ${mb(planFor(d, 'post').byte)}.`
-    : forSig
-    ? `${n} ${n === 1 ? ord.en : ord.flera}, omkring ${mb(planFor(d, 'post').byte)}. ${folje.charAt(0).toLocaleUpperCase('sv')}${folje.slice(1)}: omkring ${mb(planFor(d, 'med').byte)}.`
     : `${n} ${n === 1 ? ord.en : ord.flera}, omkring ${mb(planFor(d, 'post').byte)}, eller ${mb(planFor(d, 'med').byte)} med ${folje}.`;
 }
 
@@ -257,10 +255,14 @@ $('tf-kopiera').addEventListener('click', async () => {
 });
 
 // Utskriften: listans poster i listans ordning, bara posterna eller med följesidorna.
-const listansTitel = (med: boolean) => `${titel}${med ? (forSig ? `, ${folje}` : `, med ${folje}`) : ''}: ${sparat.bockade.map((id) => namnAv(id).titel).join(', ')}`;
-flerakortKnapp($('tf-skrivut'), async () => ({ plan: planFor(await data(), 'post'), titel: listansTitel(false) }), 'Hämtar …');
+const listansTitel = (med: boolean) => `${titel}${med ? `, med ${folje}` : ''}: ${sparat.bockade.map((id) => namnAv(id).titel).join(', ')}`;
+// Listans utskrift räknas när den görs (data-rakna), inte vid varje tryck: knappen gör inget när listan är tom eller medan
+// den hämtar, och GoatCounters egen räkning av data-goatcounter-click räknade de trycken också (granskningen av
+// statistiken 2026-10-19).
+const raknaKnapp = (k: HTMLElement) => raknaHandelse(k.dataset.rakna!, k.dataset.raknaTitel!);
+flerakortKnapp($('tf-skrivut'), async () => { raknaKnapp($('tf-skrivut')); return { plan: planFor(await data(), 'post'), titel: listansTitel(false) }; }, 'Hämtar …');
 const skrivutMedKnapp = document.getElementById('tf-skrivut-med');
-if (skrivutMedKnapp) flerakortKnapp(skrivutMedKnapp, async () => ({ plan: planFor(await data(), 'med'), titel: listansTitel(true) }), 'Hämtar …');
+if (skrivutMedKnapp) flerakortKnapp(skrivutMedKnapp, async () => { raknaKnapp(skrivutMedKnapp); return { plan: planFor(await data(), 'med'), titel: listansTitel(true) }; }, 'Hämtar …');
 
 // ---------- Visa stort ----------
 const dialog = $<HTMLDialogElement>('tf-stort');
@@ -341,19 +343,26 @@ function modellFigur(m: Modell): HTMLElement {
 // Knapparnas namn ger utskriftsnamn, överst i skriptet.
 // Knappen som skriver ut posten med följesidan finns bara där sidan har följesidorna (Ta fram ett matteproblem).
 const stortSkrivutMed = document.getElementById('tf-stort-skrivut-med') as HTMLAnchorElement | null;
+// Namnet i statistiken följer det som skrivs ut: med lösningsförslaget räknas utskriften som knappen bredvid (:ett-med),
+// inte som ett problem (granskningen av statistiken 2026-10-19). count.js läser namnet när knappen trycks.
+const ettHandelse = (() => { const k = $<HTMLAnchorElement>('tf-stort-skrivut'); return { namn: k.dataset.goatcounterClick!, titel: k.dataset.goatcounterTitle! }; })();
 function skrivutLank() {
   const skrivut = $<HTMLAnchorElement>('tf-stort-skrivut');
   if (!stortPost || steg > 0) { skrivut.hidden = true; if (stortSkrivutMed) stortSkrivutMed.hidden = true; return; }
   // Med lösningsförslaget skrivs det ut med problemet; modellen har sin egen knapp i rutan bredvid.
   const med = !losningYta.hidden && !!stortPost.losningsforslag;
-  skrivut.href = (med ? stortPost.utskrift.med : stortPost.utskrift.post).adress;
+  skrivut.href = (med ? stortPost.utskrift.med! : stortPost.utskrift.post).adress;
+  const handelse = med && stortSkrivutMed ? { namn: stortSkrivutMed.dataset.goatcounterClick!, titel: stortSkrivutMed.dataset.goatcounterTitle! } : ettHandelse;
+  skrivut.dataset.goatcounterClick = handelse.namn;
+  skrivut.dataset.goatcounterTitle = handelse.titel;
   skrivut.textContent = utskriftsnamn(med ? `${ord.bestamd} och ${foljeEn}` : ord.bestamd);
   skrivut.hidden = false;
   // En post utan lösningsförslag: också med följesidan, eller följesidorna för sig (designgranskningen 2026-10-18 natt).
   const skrivutMed = stortSkrivutMed;
   if (!skrivutMed) return;
-  skrivutMed.hidden = !!stortPost.losningsforslag;
-  if (!stortPost.losningsforslag) { skrivutMed.href = stortPost.utskrift.med.adress; skrivutMed.textContent = forSig ? utskriftsnamn(foljeEn) : direkt ? `Skriv ut med ${foljeEn}` : `${ord.bestamd.charAt(0).toLocaleUpperCase('sv')}${ord.bestamd.slice(1)} med ${foljeEn} som pdf`; }
+  const medFolje = stortPost.losningsforslag ? undefined : stortPost.utskrift.med;
+  skrivutMed.hidden = !medFolje;
+  if (medFolje) { skrivutMed.href = medFolje.adress; skrivutMed.textContent = direkt ? `Skriv ut med ${foljeEn}` : `${versalt(ord.bestamd)} med ${foljeEn} som pdf`; }
 }
 function visaLosning(pa: boolean) {
   const p = stortPost;
@@ -434,7 +443,9 @@ losningKnapp.addEventListener('click', () => {
   const pa = !!losningYta.hidden;
   visaLosning(pa);
   if (!pa) return;
-  raknaHandelse(`${led}:${metod}:losningsforslag`, `${titel}: Lösningsförslag i Visa stort`);
+  // Knappen visar lösningsförslaget, eller faktatextens modell, och räknas som det den visar.
+  if (stortPost?.losningsforslag) raknaHandelse(`${led}:${metod}:losningsforslag`, `${titel}: Lösningsförslag i Visa stort`);
+  else raknaHandelse(`${led}:${metod}:modell`, `${titel}: Modellen i Visa stort`);
   // I telefonen står bladet under problemet: rutan rullar dit.
   if (!matchMedia('(min-width: 64rem)').matches) losningYta.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
 });
@@ -555,14 +566,6 @@ for (const r of rader) {
     e.preventDefault();
     // En länk till en pdf har sitt namn i statistiken (data-goatcounter-click), som GoatCounter räknar själv.
     if (!(e.currentTarget as HTMLElement).hasAttribute('data-goatcounter-click')) raknaHandelse(`${led}:${metod}:losningsforslag`, `${titel}: Lösningsförslag i Visa stort`);
-    void visaStort(r.id, true);
-  });
-  // Länken Modellen leder utan JavaScript till modellens sida; med JavaScript visar den texten och modellen bredvid.
-  if (r.dataset.modell !== undefined) r.querySelector('.tf-modell-lank')?.addEventListener('click', (e) => {
-    const m = e as MouseEvent;
-    if (m.ctrlKey || m.metaKey || m.shiftKey || m.button !== 0) return;
-    e.preventDefault();
-    raknaHandelse(`${led}:${metod}:modell`, `${titel}: Modellen i Visa stort`);
     void visaStort(r.id, true);
   });
 }

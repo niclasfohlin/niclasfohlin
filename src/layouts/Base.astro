@@ -53,6 +53,16 @@ function aktiv(href: string) {
           s.src = 'https://gc.zgo.at/count.js';
           s.dataset.goatcounter = statistik;
           document.head.appendChild(s);
+          // count.js binder knapparna med data-goatcounter-click en gång, när det körs: står en knapp längre ned än sidan
+          // hunnit läsas då, eller ritar sidan den senare, räknas den här i stället. Det som count.js har bundit
+          // (data-goatcounter-bound) hoppas över, så att inget räknas två gånger (granskningen av statistiken 2026-10-19).
+          const rakna = (e) => {
+            const el = e.target instanceof Element ? e.target.closest('[data-goatcounter-click]') : null;
+            if (!el || el.dataset.goatcounterBound) return;
+            window.goatcounter?.count?.({ event: true, path: el.dataset.goatcounterClick, title: el.dataset.goatcounterTitle || el.title || '' });
+          };
+          document.addEventListener('click', rakna);
+          document.addEventListener('auxclick', rakna);
         }
       </script>
     )}

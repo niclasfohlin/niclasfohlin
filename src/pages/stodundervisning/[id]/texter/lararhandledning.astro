@@ -1,10 +1,11 @@
 ---
 // /stodundervisning/<id>/texter/lararhandledning: lästexternas lärarhandledning (K-439; Niclas 2026-10-18 natt: "två
 // sidors A4a med hur man kan arbeta med dessa texter ... enklare om man bara vill ladda ner texter och köra", och "Knapp
-// till metoden Textsamtal i grupp och knapp till Lärarhandledning"). Ta fram en lästext har knappen Lärarhandledning, och
-// den leder hit. Sidan har handledningen att läsa i telefonen (Bokhandledning.astro, samma form som Word-filens två A4),
-// knappen som skriver ut den och Word-filen, före och efter handledningen, och vägen tillbaka till texterna.
-// Delningskortet är Ta fram en lästexts (närmaste överordnade sida, src/lib/delningskort.ts).
+// till metoden Textsamtal i grupp och knapp till Lärarhandledning"). Metoden leder hit; knappen Lärarhandledning på Ta
+// fram en lästext öppnar pdf:en (Niclas 2026-10-19: "på verktygssidan ska det vara enkelt. Led till färdig pdf"). Sidan
+// har handledningen att läsa i telefonen (Bokhandledning.astro, samma form som Word-filens två A4), knappen som skriver ut
+// den och Word-filen, före och efter handledningen, och vägen tillbaka till texterna. Delningskortet är sidans eget, med
+// handledningens titel (src/lib/delningskort.ts).
 import Base from '../../../../layouts/Base.astro';
 import Bokhandledning from '../../../../components/Bokhandledning.astro';
 import Filval from '../../../../components/Filval.astro';

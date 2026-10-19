@@ -23,6 +23,8 @@ import { aktiviteterAdress, aktiviteterAv, aktiviteterData, brainbreaksAdress, b
 import { centralAv } from './centrala';
 import { bankAv } from './bank';
 import { taFramKortposter, taFramSlag } from './tafram';
+import { bokhandledningen } from './handledning';
+import { slugAv } from './standard/index.js';
 
 export const MALL = 'src/pages/delning/kort/[namn].astro';
 // Kortet för sidan som slumpar skrivkort har en egen mall, som bara räknas in i det kortet, och så har korten för
@@ -34,10 +36,10 @@ export const KORTBANKSMALL = { aktiviteter: 'src/pages/delning/aktiviteter/[namn
 // i kartans ordning. Metoderna i trappan visar tre av de fyra områdena; de byts när Niclas vill, och bygget stannar om
 // en av dem inte längre är publicerad.
 export const METODBANKSMALL = 'src/pages/delning/metodbank/[namn].astro';
-// Sidorna Ta fram ett matteproblem och Ta fram en lästext har en egen mall med tre av bankens poster i en solfjäder, en ur
-// varje nivå, i problemets form (boksidan). Posterna byts när Niclas vill; finns en inte längre stannar bygget. Lästexterna
-// är tre enkla texter som inte är känsliga (översikterna under Lärarens sidor i Textsamtal i grupp), och faktatexterna
-// en ur varje tema, med sin första bild.
+// Sidorna Ta fram ett matteproblem, en lästext och en faktatext har en egen mall med tre av bankens poster i en solfjäder,
+// en ur varje nivå, i problemets form (boksidan). Posterna byts när Niclas vill; finns en inte längre stannar bygget.
+// Lästexterna är tre enkla texter som inte är känsliga (översikterna under Lärarens sidor i Textsamtal i grupp), och
+// faktatexterna en ur varje tema, med sin första bild. Varje temas sida har samma mall med tre av temats texter.
 export const TAFRAMSMALL = 'src/pages/delning/tafram/[namn].astro';
 export const TAFRAMENS_POSTER: Record<string, string[]> = { matteproblem: ['bas-7', 'medel-5', 'avancerat-8'], lastexter: ['lattlast-1', 'mellan-3', 'avancerad-3'], faktatexter: ['bas-1', 'medel-3', 'avancerat-3'] };
 export const METODBANKENS_METODER = ['fyra-raknesatten', 'laslistor-i-grupp', 'ordverkstad-i-grupp'];
@@ -59,7 +61,7 @@ const VERSION = 1;
 export interface Kort {
   sida: string; // sidans adress, t.ex. /stodundervisning/brakkurs-i-grupp
   namn: string; // filnamnets början, t.ex. stodundervisning-brakkurs-i-grupp
-  typ: 'start' | 'om' | 'avsnitt' | 'metodbank' | 'artikel' | 'bok' | 'metod' | 'skrivkort' | 'aktiviteter' | 'brainbreaks' | 'tafram';
+  typ: 'start' | 'om' | 'avsnitt' | 'metodbank' | 'artikel' | 'bok' | 'metod' | 'handledning' | 'skrivkort' | 'aktiviteter' | 'brainbreaks' | 'tafram';
   etikett: string; // raden över titeln, tom på huvudsidorna
   titel: string;
   undertitel: string;
@@ -160,12 +162,27 @@ export function allaKort(): Promise<Kort[]> {
       if (bank && slag === 'lastexter') {
         const texter = bank.enheter.filter((e) => e.nr !== undefined).length;
         lagg({ sida: `/stodundervisning/${m.id}/${bank.ord.slug}`, typ: 'tafram', etikett: `Lästexter · ${arskursText(m.data)}`, titel: centralAv(slag)?.namn ?? 'Ta fram en lästext', undertitel: `${texter} texter på ${TAL[bank.nivaer.length] ?? bank.nivaer.length} nivåer med frågor mellan raderna, att visa stort och skriva ut`, bild: portratt, farg: FARG[m.data.omrade] ?? '--farg-accent', tafram: { metod: m.id, poster: TAFRAMENS_POSTER[slag] } });
+        // Lärarhandledningens sida har ett eget kort med handledningens titel, så att den som delar handledningen inte visar
+        // Ta fram en lästext (K-444; Niclas 2026-10-19: "Att alla har en bra dela bild"). Raden under titeln är sidans.
+        const h = bokhandledningen(m.data.ramar?.ramar ?? []);
+        if (h) lagg({ sida: `/stodundervisning/${m.id}/${bank.ord.slug}/lararhandledning`, typ: 'handledning', etikett: `Lärarhandledning · ${arskursText(m.data)}`, titel: h.titel, undertitel: 'Två sidor om hur hela klassen eller en grupp läser en text tillsammans, i par, med stoppet, frågorna och samtalet', bild: portratt, farg: FARG[m.data.omrade] ?? '--farg-accent' });
       }
       if (bank && slag === 'faktatexter') {
         // Temana som sidan har dem (bankens tema, där ramens fält tema går före etiketten; Codex-granskningen 2026-10-18 natt).
         const texter = bank.enheter.filter((e) => e.nr !== undefined);
         const teman = new Set(texter.map((e) => e.tema).filter(Boolean)).size;
         lagg({ sida: `/stodundervisning/${m.id}/${bank.ord.slug}`, typ: 'tafram', etikett: `Faktatexter · ${arskursText(m.data)}`, titel: centralAv(slag)?.namn ?? 'Ta fram en faktatext', undertitel: `${texter.length} faktatexter i ${TAL[teman] ?? teman} teman, var och en med sin modell, att visa stort och skriva ut`, bild: portratt, farg: FARG[m.data.omrade] ?? '--farg-accent', tafram: { metod: m.id, poster: TAFRAMENS_POSTER[slag] } });
+        // Varje temas sida har ett eget kort med temats namn och tre av dess texter, den första, den mittersta och den sista,
+        // så att den som delar ett tema visar det temat (K-444; Niclas 2026-10-19: "Att alla har en bra dela bild"). Ett nytt
+        // tema får sitt kort av sig självt. Temats namn är unikt i banken, och adressen är temats sida ([id]/texter/[tema]).
+        for (const tema of new Set(texter.map((e) => e.tema).filter((x): x is string => !!x))) {
+          const egna = texter.filter((e) => e.tema === tema);
+          const valda = [...new Set([0, Math.floor((egna.length - 1) / 2), egna.length - 1])].map((i) => egna[i].slug);
+          const handledd = egna.some((e) => e.handledning !== undefined);
+          // Raden under titeln ryms på tre rader (kortets gräns): "Fem faktatexter med sina modeller och temats lärarhandledning".
+          const tal = TAL[egna.length] ?? String(egna.length);
+          lagg({ sida: `/stodundervisning/${m.id}/${bank.ord.slug}/${slugAv(tema)}`, typ: 'tafram', etikett: `Faktatexter · ${egna[0].l.niva} · ${arskursText(m.data)}`, titel: tema, undertitel: `${tal.charAt(0).toLocaleUpperCase('sv')}${tal.slice(1)} faktatexter med sina modeller${handledd ? ' och temats lärarhandledning' : ', att visa stort och skriva ut'}`, bild: portratt, farg: FARG[m.data.omrade] ?? '--farg-accent', tafram: { metod: m.id, poster: valda } });
+        }
       }
       const bb = brainbreaksAv(m.id);
       if (bb) lagg({ sida: brainbreaksAdress(m.id), typ: 'brainbreaks', etikett: `Brainbreaks · ${arskursText(m.data)}`, titel: centralAv('brainbreaks')?.namn ?? 'Ta fram en brainbreak', undertitel: `${bb.kort.length} brainbreaks, sex i taget, stora på skärmen med en klocka och musik`, bild: portratt, farg: FARG[m.data.omrade] ?? '--farg-accent', kortbank: { slag: 'brainbreaks', metod: m.id, kort: delningensBrainbreaks(bb) } });
@@ -202,12 +219,12 @@ export function allaKort(): Promise<Kort[]> {
       return css.slice(a, b);
     };
     // Ta fram-kortets poster ritas i boksidans form (avsnittet om boksidan i global.css och boksidans färger), med det
-    // som står på kortet: titeln, nivån, numret, taggarna i sina färger, första stycket, första frågan och bilden, inte
-    // resten av texten.
+    // som står på kortet: titeln, nivån, numret, taggarna i sina färger, första stycket och bilden eller, utan bild, hela
+    // texten, och första frågan.
     const bokfarger = css.match(/:root \{ --bok-[^}]*\}/)?.[0] ?? '';
     const taggfarger = css.match(/:root \{ --tagg-[^}]*\}/)?.[0] ?? '';
     const taframSumma = (t: NonNullable<Kort['tafram']>) => {
-      const poster = taFramKortposter(metoder.find((m) => m.id === t.metod)!, t.poster).map((p) => ({ titel: p.titel, niva: p.niva, nr: p.nr, en: p.en, farg: p.farg, taggar: p.taggar, stycke: p.stycken[0] ?? '', fraga: p.fragor[0] ?? '', fragor: p.fragor.length > 1, bild: p.bild }));
+      const poster = taFramKortposter(metoder.find((m) => m.id === t.metod)!, t.poster).map((p) => ({ titel: p.titel, niva: p.niva, nr: p.nr, en: p.en, farg: p.farg, taggar: p.taggar, stycken: p.stycken, fraga: p.fragor[0] ?? '', fragor: p.fragor.length > 1, bild: p.bild }));
       return [las(TAFRAMSMALL).toString('utf8').replace(/\r\n/g, '\n'), stycke('/* Boksidan (Boksida.astro)', '/* Två lösningar (Textpar.astro'), bokfarger, taggfarger, JSON.stringify(poster), ...poster.filter((p) => p.bild).map((p) => bildSumma(p.bild.replace(/^\//, '')))].join('|');
     };
     const metodbankSumma = () => {

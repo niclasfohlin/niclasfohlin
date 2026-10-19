@@ -1,12 +1,13 @@
 ---
 // /stodundervisning/<id>/texter/<tema>: ett temas sida på Ta fram en faktatext (K-434; Niclas 2026-10-18 natt: "Temat får
 // sin lärarhandledning. Man måste kunna se eller enkelt navigera så alla texter för temat syns i dess sida"). Det är
-// lärarens sida för temat: Ta fram en faktatext har bara texterna, och temats rad där leder hit. Överst knappen som skriver
+// lärarens sida för temat: Ta fram en faktatext har bara texterna, och metoden leder hit (temats rad på Ta fram öppnar
+// lärarhandledningens pdf, Niclas 2026-10-19). Överst knappen som skriver
 // ut temats texter (temanasUtskrifter i src/lib/utskrift.ts), och temats texter i ordning, var och en med texten, lärarens
 // sida, modellen ifylld och tom, knapparna som skriver ut dem och en länk till textens del i lärarhandledningen. Sedan
 // temats lärarhandledning, när metoden har den (ramen "Lärarhandledning: <nivå>, <tema>", src/lib/handledning.ts), med
-// knappen som skriver ut dess två sidor och Word-filen, före och efter den. Delningskortet är Ta fram en faktatexts
-// (närmaste överordnade sida, src/lib/delningskort.ts).
+// knappen som skriver ut dess två sidor och Word-filen, före och efter den. Delningskortet är temats eget, med tre av
+// temats texter (src/lib/delningskort.ts).
 import Base from '../../../../layouts/Base.astro';
 import Lararhandledning from '../../../../components/Lararhandledning.astro';
 import Filval from '../../../../components/Filval.astro';
@@ -82,9 +83,9 @@ const delen = (titel: string) => (h?.texter.some((x) => x.titel === titel) ? `#h
                 i telefonen (designgranskningen 2026-10-18 natt: sex länkar i fyra rader). */}
             <p class="tema-lankar tema-utskrifter" role="group" aria-labelledby={`pdf-${p.id}`}>
               <span class="tema-etikett" id={`pdf-${p.id}`} data-direkt="Skriv ut:">Pdf:</span>
-              <a href={p.utskrift.post.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="6" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:tema`} data-goatcounter-title={`${t.titel}: ${tema.namn}, utskrift av ${p.titel}`}><span>Texten</span><span class="visually-hidden">: {p.titel}</span></a>
-              {p.modell?.ifylld && <a href={p.modell.ifylld.utskrift.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande data-sidor-hogst="1" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:ifylld-modell`} data-goatcounter-title={`${t.titel}: ${tema.namn}, utskrift av den ifyllda modellen till ${p.titel}`}><span>Ifylld modell</span><span class="visually-hidden">: {p.titel}</span></a>}
-              {p.modell && <a href={p.modell.utskrift.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande data-sidor-hogst="1" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:modell`} data-goatcounter-title={`${t.titel}: ${tema.namn}, utskrift av den tomma modellen till ${p.titel}`}><span>{p.modell.ifylld ? 'Tom modell' : 'Modellen'}</span><span class="visually-hidden">: {p.titel}</span></a>}
+              <a href={p.utskrift.post.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="6" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:tema`} data-goatcounter-title={`${t.titel}: utskrift av en text på temats sida`}><span>Texten</span><span class="visually-hidden">: {p.titel}</span></a>
+              {p.modell?.ifylld && <a href={p.modell.ifylld.utskrift.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande data-sidor-hogst="1" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:ifylld-modell`} data-goatcounter-title={`${t.titel}: utskrift av en ifylld modell`}><span>Ifylld modell</span><span class="visually-hidden">: {p.titel}</span></a>}
+              {p.modell && <a href={p.modell.utskrift.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande data-sidor-hogst="1" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:modell`} data-goatcounter-title={`${t.titel}: utskrift av en tom modell`}><span>{p.modell.ifylld ? 'Tom modell' : 'Modellen'}</span><span class="visually-hidden">: {p.titel}</span></a>}
             </p>
           </div>
         </li>

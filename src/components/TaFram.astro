@@ -34,6 +34,7 @@ import Base from '../layouts/Base.astro';
 import Delning from './Delning.astro';
 import SkrivUtPdf from './SkrivUtPdf.astro';
 import TaFramRad from './TaFramRad.astro';
+import TillMetoden from './TillMetoden.astro';
 import { UPPHOV, metodAdress } from '../lib/metod';
 import { delningPa } from '../lib/delning';
 import { kortdataAdress } from '../lib/kortdata';
@@ -62,8 +63,8 @@ const bocken = t.baraTexter ? ` Bocken lägger ${t.ord.bestamd} i listan att skr
 // Valet i sidans beskrivning: nivån och temat, nivån och taggen, eller bara nivån.
 const valet = teman ? 'tema' : t.taggVal ? 'tagg' : '';
 // Nivåns två filer: bara posterna och med följesidorna. På sidorna med texter står bara texterna.
-const baraNamn = t.baraTexter ? t.ord.alla : t.forSig ? t.ord.alla : `bara ${t.ord.alla}`;
-const medNamn = t.forSig ? t.folje : `med ${t.folje}`;
+const baraNamn = t.baraTexter ? t.ord.alla : `bara ${t.ord.alla}`;
+const medNamn = `med ${t.folje}`;
 // Ett problem, det; en text, den.
 const den = t.ord.artikel === 'ett' ? 'det' : 'den';
 // Temana per nivå, som skriptet före raderna läser.
@@ -71,7 +72,7 @@ const temaslugs = Object.fromEntries(t.nivaer.map((n) => [n.slug, (n.teman ?? []
 ---
 
 <Base title={`${t.namn}: ${t.titel}`} description={`Välj nivå${valet ? ` och ${valet}` : ''} bland ${antal} ${t.ord.flera} i ${t.titel}, se dem i ordning, visa ${t.ord.artikel} ${t.ord.en} stort och skriv ut dem du vill ha${t.baraTexter ? '' : `, med eller utan ${t.folje}`}.`} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
-  <article class:list={['tafram', { 'tf-bara': t.baraTexter }]} data-metod={t.metod} data-titel={t.titel} data-led={t.led} data-kortdata={kortdata} data-en={t.ord.en} data-flera={t.ord.flera} data-alla={t.ord.alla} data-bestamd={t.ord.bestamd} data-folje={t.folje} data-folje-en={t.foljeEn} data-forsig={t.forSig ? '' : undefined} data-bara={t.baraTexter ? '' : undefined} data-taggval={t.taggVal ? '' : undefined}>
+  <article class:list={['tafram', { 'tf-bara': t.baraTexter }]} data-metod={t.metod} data-titel={t.titel} data-led={t.led} data-kortdata={kortdata} data-en={t.ord.en} data-flera={t.ord.flera} data-alla={t.ord.alla} data-bestamd={t.ord.bestamd} data-folje={t.folje} data-folje-en={t.foljeEn} data-bara={t.baraTexter ? '' : undefined} data-taggval={t.taggVal ? '' : undefined}>
     <header class="sk-huvud">
       <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${t.metod}`}>{t.titel}</a> · {t.namn}</p>
       <h1>{t.namn}</h1>
@@ -122,33 +123,32 @@ const temaslugs = Object.fromEntries(t.nivaer.map((n) => [n.slug, (n.teman ?? []
       })();
     </script>
 
-    {/* Valet: nivåknapparna och taggarna, bara med JavaScript. På sidorna med texter står en knapp till metoden och, när
-        banken har en, en till lärarhandledningen där taggarna står som val på Ta fram ett matteproblem (Niclas 2026-10-18
-        natt: "Kan bara [vara] länk till metoden och länk till lärarhandledning på en knapp där istället", och "Knapp till
-        metoden Textsamtal i grupp och knapp till Lärarhandledning"). De står där också utan JavaScript. Lärarens sidor och
-        modellerna finns i metoden. */}
-    <div class="sk-val tf-val" data-js={t.baraTexter ? undefined : ''} hidden={!t.baraTexter}>
-      <div class="sk-valrad" role="group" aria-labelledby="tf-niva-etikett" data-js={t.baraTexter ? '' : undefined} hidden={t.baraTexter}>
+    {/* Valet: nivåknapparna och taggarna, bara med JavaScript, och knappen Till metoden, som finns på alla verktygssidor
+        och också utan JavaScript (TillMetoden.astro; Niclas 2026-10-19): på datorn till höger om nivåerna, i telefonen
+        sist. På sidorna med texter står taggarna inte som val, och bredvid knappen till metoden står, när banken har en,
+        en till lärarhandledningen (Niclas 2026-10-18 natt: "Knapp till metoden Textsamtal i grupp och knapp till
+        Lärarhandledning"). Lärarens sidor och modellerna finns i metoden. Lärarhandledningen öppnar sin pdf, och temats rad likaså (Niclas 2026-10-19: "på
+        verktygssidan ska det vara enkelt. Led till färdig pdf för dem"); sidorna där de står att läsa nås från metoden.
+        Namnet i statistiken är detsamma som pdf-knappens på handledningens sida, så att trycken räknas ihop. */}
+    <div class="sk-val tf-val">
+      <div class="sk-valrad" role="group" aria-labelledby="tf-niva-etikett" data-js hidden>
         <span class="sk-etikett" id="tf-niva-etikett">Nivå</span>
         <div class="sk-nivaknappar">
           <button type="button" class="sk-niva tf-alla-knapp" data-niva="alla" aria-pressed="false">Alla</button>
           {t.nivaer.map((n) => <button type="button" class="sk-niva" data-niva={n.slug} style={`--niva:${n.farg}`} aria-pressed="false">{n.namn}</button>)}
         </div>
       </div>
+      <TillMetoden metod={t.metod} titel={t.titel} verktyg={t.namn} handelse={`${t.led}:${t.metod}:metoden`}>
+          {t.handledning && <a class="knapp sekundar" href={`/stodundervisning/${t.handledning}.pdf`} target="_blank" rel="noopener" data-goatcounter-click={`utskrift:${t.metod}/lararhandledning`} data-goatcounter-title={`${t.titel}: lärarhandledningen till ${t.ord.alla} som pdf`}>Lärarhandledning<span class="visually-hidden">, pdf</span></a>}
+      </TillMetoden>
       {t.taggVal && (
-        <div class="sk-valrad tf-taggrad" role="group" aria-labelledby="tf-tagg-etikett">
+        <div class="sk-valrad tf-taggrad" role="group" aria-labelledby="tf-tagg-etikett" data-js hidden>
           <span class="sk-etikett" id="tf-tagg-etikett">{t.taggText.etikett}</span>
           <div class="tf-taggar">
             <button type="button" class="tf-tagg tf-tagg-alla" data-tagg="" aria-pressed="true">Alla <span class="tf-tagg-antal" data-antal></span></button>
             {t.taggar.map((x) => <button type="button" class={taggKlass(x.id)} data-tagg={x.id} title={x.om} aria-pressed="false">{x.namn} <span class="tf-tagg-antal" data-antal></span></button>)}
           </div>
         </div>
-      )}
-      {t.baraTexter && (
-        <p class="tf-metodrad">
-          <a class="knapp sekundar" href={`/stodundervisning/${t.metod}`}>Metoden: {t.titel}</a>
-          {t.handledning && <a class="knapp sekundar" href={t.handledning}>Lärarhandledning</a>}
-        </p>
       )}
     </div>
 
@@ -166,7 +166,9 @@ const temaslugs = Object.fromEntries(t.nivaer.map((n) => [n.slug, (n.teman ?? []
                     <div class="tf-tema-innehall">
                       <p class="tf-tema-knappar">
                         {tema.utskrift && <a class="knapp sekundar" href={tema.utskrift.adress} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst={String(6 * tema.poster.length)} data-goatcounter-click={`utskrift:${t.metod}/${t.led}/${tema.slug}`} data-goatcounter-title={`${t.titel}: ${tema.namn}, utskrift av temats ${t.ord.flera}`}><span data-direkt="Skriv ut temat">Temat som pdf</span><span class="visually-hidden">: {tema.namn}</span></a>}
-                        <a class="knapp sekundar" href={tema.handledning ? `${tema.adress}#lararhandledning` : tema.adress}>{tema.handledning ? 'Lärarhandledning' : 'Temats sida'}<span class="visually-hidden">: {tema.namn}</span></a>
+                        {tema.handledning
+                          ? <a class="knapp sekundar" href={`/stodundervisning/${tema.handledning}.pdf`} target="_blank" rel="noopener" data-goatcounter-click={`utskrift:${t.metod}/${tema.handledning.slice(t.metod.length + 1)}`} data-goatcounter-title={`${t.titel}: lärarhandledningen till ${tema.namn} som pdf`}>Lärarhandledning<span class="visually-hidden">: {tema.namn}, pdf</span></a>
+                          : <a class="knapp sekundar" href={tema.adress}>Temats sida<span class="visually-hidden">: {tema.namn}</span></a>}
                       </p>
                       <ol class="tf-lista">{tema.poster.map((p) => <TaFramRad t={t} p={p} rubrik="h4" />)}</ol>
                     </div>
@@ -180,7 +182,7 @@ const temaslugs = Object.fromEntries(t.nivaer.map((n) => [n.slug, (n.teman ?? []
                 som är samma sidor (designgranskningen 2026-10-18 natt: två knappar gjorde samma sak). */}
             {(n.teman?.length ?? 0) !== 1 && <p class="tf-nivafiler"><span class="tf-nivafiler-rubrik">Hela nivån {n.namn}:</span>{' '}
               <a href={n.filer.bara.adress} target="_blank" rel="noopener" data-goatcounter-click={`fil:${n.filer.bara.namn}.pdf`} data-goatcounter-title={`${t.titel}: ${n.namn}, ${baraNamn} som pdf`}>{baraNamn}, pdf {mb(n.filer.bara.byte)}</a>
-              {!t.baraTexter && n.filer.med && <>{' · '}<a href={n.filer.med.adress} target="_blank" rel="noopener" data-goatcounter-click={`fil:${n.filer.med.namn}.pdf`} data-goatcounter-title={`${t.titel}: ${n.namn}, ${t.forSig ? t.folje : `${t.ord.alla} med ${t.folje}`} som pdf`}>{medNamn}, pdf {mb(n.filer.med.byte)}</a></>}
+              {!t.baraTexter && n.filer.med && <>{' · '}<a href={n.filer.med.adress} target="_blank" rel="noopener" data-goatcounter-click={`fil:${n.filer.med.namn}.pdf`} data-goatcounter-title={`${t.titel}: ${n.namn}, ${t.ord.alla} med ${t.folje} som pdf`}>{medNamn}, pdf {mb(n.filer.med.byte)}</a></>}
             </p>}
           </section>
         ))}
@@ -196,8 +198,8 @@ const temaslugs = Object.fromEntries(t.nivaer.map((n) => [n.slug, (n.teman ?? []
           <p class="ak-valda-tom" id="tf-valda-tom">Listan är tom. Tryck på bocken vid {t.ord.artikel} {t.ord.en}, så hamnar {den} här.</p>
           <ol class="ak-valda-lista" id="tf-valda-lista"></ol>
           <div class="sk-atgarder ak-valda-knappar">
-            <a class="knapp" id="tf-skrivut" href="#" data-goatcounter-click={`utskrift:${t.metod}/${t.led}`} data-goatcounter-title={`${t.titel}: utskrift av listans ${t.ord.flera}`}>Skriv ut {t.ord.alla}</a>
-            {!t.baraTexter && <a class="knapp sekundar" id="tf-skrivut-med" href="#" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:med`} data-goatcounter-title={t.forSig ? `${t.titel}: utskrift av ${t.folje} till listans ${t.ord.flera}` : `${t.titel}: utskrift av listans ${t.ord.flera} med ${t.folje}`}>{t.forSig ? `Skriv ut ${t.folje}` : `Skriv ut med ${t.folje}`}</a>}
+            <a class="knapp" id="tf-skrivut" href="#" data-rakna={`utskrift:${t.metod}/${t.led}`} data-rakna-titel={`${t.titel}: utskrift av listans ${t.ord.flera}`}>Skriv ut {t.ord.alla}</a>
+            {!t.baraTexter && <a class="knapp sekundar" id="tf-skrivut-med" href="#" data-rakna={`utskrift:${t.metod}/${t.led}:med`} data-rakna-titel={`${t.titel}: utskrift av listans ${t.ord.flera} med ${t.folje}`}>Skriv ut med {t.folje}</a>}
             <button type="button" class="knapp sekundar" id="tf-kopiera" hidden data-goatcounter-click={`${t.led}:${t.metod}:lank`} data-goatcounter-title={`${t.titel}: listans länk kopierad`}>Kopiera listans länk</button>
             <button type="button" class="knapp sekundar" id="tf-tomlista" hidden>Töm listan</button>
           </div>
@@ -243,7 +245,7 @@ const temaslugs = Object.fromEntries(t.nivaer.map((n) => [n.slug, (n.teman ?? []
         <a class="knapp sekundar" id="tf-stort-sidan" href="#">{t.baraTexter ? 'Lärarens sida' : `${versal(t.ord.bestamd)} i metoden`}</a>
         <a class="knapp sekundar" id="tf-stort-skrivut" href="#" target="_blank" rel="noopener" data-goatcounter-click={`utskrift:${t.metod}/${t.led}:ett`} data-goatcounter-title={`${t.titel}: utskrift av ${t.ord.artikel} ${t.ord.en}`}>Skriv ut {t.ord.bestamd}</a>
         {/* Ett problem utan lösningsförslag skrivs också ut med följesidan (designgranskningen 2026-10-18 natt). */}
-        {!t.baraTexter && <a class="knapp sekundar" id="tf-stort-skrivut-med" href="#" target="_blank" rel="noopener" hidden data-goatcounter-click={`utskrift:${t.metod}/${t.led}:ett-med`} data-goatcounter-title={`${t.titel}: utskrift av ${t.foljeEn} till ${t.ord.artikel} ${t.ord.en}`}>{t.forSig ? `Skriv ut ${t.foljeEn}` : `Skriv ut med ${t.foljeEn}`}</a>}
+        {!t.baraTexter && <a class="knapp sekundar" id="tf-stort-skrivut-med" href="#" target="_blank" rel="noopener" hidden data-goatcounter-click={`utskrift:${t.metod}/${t.led}:ett-med`} data-goatcounter-title={`${t.titel}: utskrift av ${t.ord.artikel} ${t.ord.en} med ${t.foljeEn}`}>Skriv ut med {t.foljeEn}</a>}
       </div>
     </dialog>
 

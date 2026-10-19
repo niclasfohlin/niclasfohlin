@@ -31,7 +31,6 @@ export interface Lararhandledning {
 
 export const HANDLEDNING = /^Lärarhandledning: ([^,]+), (.+)$/;
 export const HANDLEDNINGARNA = /^Lärarhandledningarna: /;
-export const arHandledning = (ram: { rubrik: string }) => HANDLEDNING.test(ram.rubrik);
 export const arHandledningarna = (ram: { rubrik: string }) => HANDLEDNINGARNA.test(ram.rubrik);
 
 const falten = (falt: { rubrik: string; text?: string; kursiv?: boolean }[]): HandledningFalt[] => falt.map((f) => ({ rubrik: f.rubrik, text: f.text ?? '', ...(f.kursiv ? { kursiv: true } : {}) }));

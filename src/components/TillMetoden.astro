@@ -1,0 +1,12 @@
+---
+// Knappen Till metoden på verktygssidorna, så att läraren kan läsa på om metoden (Niclas 2026-10-19: "de ska ha en Till
+// metoden knapp så man kan läsa på sig mer"): Ta fram ett matteproblem, en lästext och en faktatext (TaFram.astro) och
+// Ta fram ett skrivkort, en aktivitet och en brainbreak. Den står i valet, på datorn längst till höger på valets första
+// rad (sidan sätter den efter den första raden när de andra inte ryms bredvid), i telefonen sist och en spalt bred, och
+// bredvid den det som skickas in, som lärarhandledningens pdf på Ta fram en lästext. Den syns också utan JavaScript.
+// Metodens namn står för en skärmläsare, och trycket räknas i statistiken (handelse, som
+// "texter:textsamtal-i-grupp:metoden"), så att det syns om knappen används.
+interface Props { metod: string; titel: string; verktyg: string; handelse: string }
+const { metod, titel, verktyg, handelse } = Astro.props;
+---
+<p class="tf-metodrad"><a class="knapp sekundar" href={`/stodundervisning/${metod}`} data-goatcounter-click={handelse} data-goatcounter-title={`${titel}: till metoden från ${verktyg}`}>Till metoden<span class="visually-hidden">: {titel}</span></a><slot /></p>

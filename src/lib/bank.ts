@@ -99,7 +99,7 @@ export interface Bank {
   foljesidor: string[];
   /** Postens följesida (POSTENS_FOLJESIDOR) när varje enhet har den: namnet, som Lösningsförslag, i bestämd form plural
    * och i en mening, och rutan som ritas på varje sådan sida. */
-  post?: { namn: string; alla: string; bestamd: string; slug: string; ruta?: number; egenFil: boolean };
+  post?: { namn: string; alla: string; bestamd: string; slug: string; ruta?: number };
   /** Följesidorna står i egna filer, och ingen fil har enheterna med följesidorna: en bank där varje enhet är en faktatext. */
   sidorForSig: boolean;
   /** Lästexternas lärarhandledning, ramen "Lärarhandledningen: <titel>", när banken har en. */
@@ -174,7 +174,7 @@ export function bankAv(d: Metod): Bank | null {
   const sidaAv = (e: Bankenhet, n: string) => [...e.fore, ...e.efter].find((ri) => ramar[ri].rubrik.startsWith(`${n}: `));
   const postNamn = Object.keys(POSTENS_FOLJESIDOR).find((n) => foljesidor.includes(n) && enheter.every((e) => sidaAv(e, n) !== undefined));
   if (postNamn) for (const e of enheter) e.post = sidaAv(e, postNamn);
-  const post = postNamn ? { namn: postNamn, alla: POSTENS_FOLJESIDOR[postNamn].alla, bestamd: POSTENS_FOLJESIDOR[postNamn].bestamd, slug: slugAv(postNamn), ...(rutor.has(postNamn) ? { ruta: rutor.get(postNamn) } : {}), egenFil: foljesidor.length > 1 && postNamn !== 'Lärarens sida' } : undefined;
+  const post = postNamn ? { namn: postNamn, alla: POSTENS_FOLJESIDOR[postNamn].alla, bestamd: POSTENS_FOLJESIDOR[postNamn].bestamd, slug: slugAv(postNamn), ...(rutor.has(postNamn) ? { ruta: rutor.get(postNamn) } : {}) } : undefined;
   for (const ri of [...rutor.values(), ...handledningar]) bankramar.add(ri);
   const ord = ORD[ordet ?? ''];
   if (!ord) throw new Error(`Banken: enheterna heter "${ordet ?? enheter[0].l.vad}", som src/lib/bank.ts inte har ord för. Lägg till ordet i ORD (ett problem, problemet, problem, problemen).`);
@@ -217,11 +217,10 @@ export const foljeFlera = (b: Bank) => {
   const ord = b.foljesidor.map((n) => { const f = FOLJE_FLERA[n]; if (!f) throw new Error(`Banken: följesidan "${n}" har inget namn i flertal i src/lib/bank.ts. Lägg till det i FOLJE_FLERA (Lärarens sida: Lärarens sidor).`); return f; });
   return ord.length > 1 ? `${ord.slice(0, -1).join(', ')} och ${ord[ord.length - 1].toLowerCase()}` : ord[0];
 };
-/** En fil ur banken: en nivå eller alla, med bara enheterna (false), med följesidorna (true), med bara följesidorna
- * ('bara', i en bank där följesidorna står för sig) eller med enheterna och postens följesida ('post', problemen med
- * lösningsförslagen). Den sista är Ta fram-sidans (src/lib/tafram.ts): metodens nedladdningsruta har de två första slagen,
- * och filen med följesidorna har lösningsförslagen i sig (Bankfiler.astro). */
-export interface Bankfil { namn: string; niva?: Bankniva; medFoljesidor: boolean | 'bara' | 'post'; rubrik: string }
+/** En fil ur banken: en nivå eller alla, med bara enheterna (false), med följesidorna (true) eller med bara följesidorna
+ * ('bara', i en bank där följesidorna står för sig). Filen med följesidorna har lösningsförslagen i sig (Bankfiler.astro).
+ * Ta fram ett matteproblem har egna filer med problemen och lösningsförslagen (src/lib/matteproblem.ts). */
+export interface Bankfil { namn: string; niva?: Bankniva; medFoljesidor: boolean | 'bara'; rubrik: string }
 export function bankfiler(id: string, b: Bank): Bankfil[] {
   const ut: Bankfil[] = [];
   if (b.sidorForSig) {
@@ -233,12 +232,12 @@ export function bankfiler(id: string, b: Bank): Bankfil[] {
     }
     return ut;
   }
-  // Ordningen är den som en enhets blad hämtas ur (src/lib/utskrift.ts): problemet ur filen med bara problemen,
-  // lösningsförslaget ur filen med lösningsförslagen och de andra följesidorna ur filen med alla.
+  // Ordningen är den som en enhets blad hämtas ur (src/lib/utskrift.ts): problemet ur filen med bara problemen och
+  // följesidorna ur filen med alla.
   for (const niva of [undefined, ...b.nivaer]) {
-    for (const medFoljesidor of [false, ...(b.post?.egenFil ? ['post' as const] : []), true]) {
-      const namn = `${id}-${b.ord.slug}-${niva ? niva.slug : 'alla'}${medFoljesidor === 'post' ? `-med-${b.post!.slug}` : medFoljesidor ? '-med-lararens-sida' : ''}`;
-      const vad = medFoljesidor === 'post' ? `${b.ord.alla} med ${b.post!.alla.toLowerCase()}` : medFoljesidor ? `${b.ord.alla} med ${foljeText(b)}` : `bara ${b.ord.alla}`;
+    for (const medFoljesidor of [false, true]) {
+      const namn = `${id}-${b.ord.slug}-${niva ? niva.slug : 'alla'}${medFoljesidor ? '-med-lararens-sida' : ''}`;
+      const vad = medFoljesidor ? `${b.ord.alla} med ${foljeText(b)}` : `bara ${b.ord.alla}`;
       ut.push({ namn, niva, medFoljesidor, rubrik: `${niva ? niva.namn : 'Alla nivåer'}: ${vad}` });
     }
   }
@@ -254,7 +253,7 @@ export function bankfilensRamar(b: Bank, f: Pick<Bankfil, 'niva' | 'medFoljesido
     ...(larare && n.oversikt !== undefined ? [n.oversikt] : []),
     ...n.enheter.flatMap((e) => [
       ...(larare && e.handledning !== undefined ? [e.handledning] : []),
-      ...(f.medFoljesidor === 'bara' ? [...e.fore, ...e.efter] : f.medFoljesidor === 'post' ? [e.ri, ...(e.post !== undefined ? [e.post] : [])] : f.medFoljesidor ? [...e.fore, e.ri, ...e.efter] : [e.ri]),
+      ...(f.medFoljesidor === 'bara' ? [...e.fore, ...e.efter] : f.medFoljesidor ? [...e.fore, e.ri, ...e.efter] : [e.ri]),
     ]),
   ])];
 }

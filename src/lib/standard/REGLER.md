@@ -27,4 +27,4 @@ Den här mappen är början på modulen som sajten och metodriggen ska dela, som
 
 ## Det som kommer
 
-Lösningsförslaget som eget blad (metodriggens ram `Lösningsförslag: <nivå>, problem <nummer>, <titel>`, K-423) och texternas och faktatexternas databaser (testversion 2). Sedan, i etapp 2, databasen som egen fil, omvandlingen mellan riggens ramar och posterna åt båda hållen, mallarnas register och steget att lyfta ut en mall ur en metod. Före etapp 2 för sajten och riggen ett samtal om modulen.
+Lösningsförslaget som eget blad (K-423) och texternas och faktatexternas databaser är gjorda i testversion 2. Sedan, i etapp 2, databasen som egen fil, omvandlingen mellan riggens ramar och posterna åt båda hållen, mallarnas register och steget att lyfta ut en mall ur en metod. Före etapp 2 för sajten och riggen ett samtal om modulen.

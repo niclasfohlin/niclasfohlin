@@ -7,11 +7,15 @@
 // har ingen egen data, länkas inte från menyn, har noindex, står utanför sitemap och räknas inte själv (Base, dold).
 import Base from '../layouts/Base.astro';
 import { site } from '../data/site';
+import { publicerade } from '../lib/innehall';
 const bas = (site.statistik ?? '').replace(/\/count$/, '');
+// Metodernas namn, så att en metod heter rätt också när bara dess undersidor eller verktyg har besök i perioden
+// (granskningen av statistiken 2026-10-19: temats sida heter "Vatten: Ta fram en faktatext", utan metodens namn).
+const metodnamn = Object.fromEntries((await publicerade('stodundervisning')).map((m) => [m.id, m.data.titel]));
 ---
 
 <Base title="Statistik" description="Besök, nedladdningar och delningar på niclasfohlin.se." dold>
-  <article class="statistik" id="statistik" data-bas={bas}>
+  <article class="statistik" id="statistik" data-bas={bas} data-metoder={JSON.stringify(metodnamn)}>
     <h1>Statistik</h1>
     <p class="ingress">Besökare, nedladdningar och delningar ur GoatCounter, ordnade som sajten: metoderna, filerna, delningarna, artiklarna och böckerna. Nedladdningarna räknar också utskrifterna, och en delning räknas när någon trycker på en knapp i raden Dela, också om hen sedan avbryter.</p>
 
@@ -62,6 +66,9 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
       <section class="stat-kategori" data-kategori="utskrifter" data-topp="3">
         <h2>Utskrifterna</h2>
       </section>
+      <section class="stat-kategori" data-kategori="verktyg" data-topp="5">
+        <h2>Knapparna i verktygen</h2>
+      </section>
       <section class="stat-kategori" data-kategori="ovriga" data-topp="5">
         <h2>Övriga sidor</h2>
       </section>
@@ -81,10 +88,12 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
   <script>
     import { CENTRALA } from '../lib/centrala';
     type Hit = { path: string; path_id: number; title: string; event: boolean; count: number };
-    type Rad = { namn: string; under?: string; antal: number };
+    // syns: raden står med fast antalet är 0, som en metod vars verktyg eller undersidor har besök men inte metodsidan.
+    type Rad = { namn: string; under?: string; antal: number; syns?: boolean };
 
     const rot = document.getElementById('statistik') as HTMLElement;
     const bas = rot.dataset.bas ?? '';
+    const METODNAMN: Record<string, string> = JSON.parse(rot.dataset.metoder ?? '{}');
     const form = rot.querySelector('[data-nyckel]') as HTMLFormElement;
     const vy = rot.querySelector('[data-vy]') as HTMLElement;
     const status = rot.querySelector('[data-status]') as HTMLElement;
@@ -218,10 +227,12 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
       const filer = new Map<string, Rad>();
       const delningar = new Map<string, { namn: string; antal: number; kanaler: Map<string, number> }>();
       let delade = 0;
-      const k: Record<string, Rad[]> = { artiklar: [], bocker: [], utskrifter: [], ovriga: [] };
+      const k: Record<string, Rad[]> = { artiklar: [], bocker: [], utskrifter: [], verktyg: [], ovriga: [] };
+      // Nedladdningarna: filerna och utskrifterna, inte knapparna i verktygen (granskningen av statistiken 2026-10-19).
+      let nedladdade = 0;
       const metod = (id: string) => {
         let x = metoder.get(id);
-        if (!x) { x = { namn: id, sida: 0, lathund: 0, enheter: 0, centrala: new Map() }; metoder.set(id, x); }
+        if (!x) { x = { namn: METODNAMN[id] ?? id, sida: 0, lathund: 0, enheter: 0, centrala: new Map() }; metoder.set(id, x); }
         return x;
       };
       for (const h of hits) {
@@ -238,7 +249,7 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
             delade += h.count;
             continue;
           }
-          if (/^utskrift/.test(h.path)) { k.utskrifter.push({ namn: titel || h.path, antal: h.count }); continue; }
+          if (/^utskrift/.test(h.path)) { k.utskrifter.push({ namn: titel || h.path, antal: h.count }); nedladdade += h.count; continue; }
           // Filerna hette först bara filnamnet (upprepad-lasning-lathund.pdf, drive-…); de slås ihop med fil:-namnen.
           const nyckelFil = h.path.replace(/^fil:/, '').replace(/^drive-/, 'drive:');
           if (/^fil:/.test(h.path) || /\.(pdf|docx|pptx)$/i.test(h.path)) {
@@ -246,9 +257,12 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
             rad.antal += h.count;
             if (titel.includes(':') || !rad.namn) rad.namn = titel || nyckelFil;
             filer.set(nyckelFil, rad);
+            nedladdade += h.count;
             continue;
           }
-          k.ovriga.push({ namn: titel || h.path, under: h.path, antal: h.count });
+          // Det som är kvar är knapparna i verktygen och metodbankens ruta: Visa stort, lösningsförslaget, modellen,
+          // helskärmen, klockan, musiken, listans länk, Till metoden och rutan Verktyg och Stödmaterial.
+          k.verktyg.push({ namn: titel || h.path, under: h.path, antal: h.count });
           continue;
         }
         let m = h.path.match(/^\/stodundervisning\/([^/]+)$/);
@@ -258,8 +272,9 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
         const central = CENTRALA_SIDOR.get(h.path);
         if (central) { const x = metod(central.metod!); x.centrala.set(central.namn, (x.centrala.get(central.namn) ?? 0) + h.count); continue; }
         // Ett problems eller en texts egen sida i en bank (src/lib/bank.ts), "Äpplena · Bas, problem 1 · Problemlösning i
-        // grupp": räknas under metoden, som lathunden.
-        m = h.path.match(/^\/stodundervisning\/([^/]+)\/([^/]+)$/);
+        // grupp", och sidorna under ett verktyg, som temats sida och lärarhandledningen (/<id>/texter/vatten): räknas
+        // under metoden, som lathunden.
+        m = h.path.match(/^\/stodundervisning\/([^/.]+)\/(.+)$/);
         if (m) { const x = metod(m[1]); x.enheter += h.count; if (x.namn === m[1] && titel) x.namn = titel.split(' · ').at(-1) ?? x.namn; continue; }
         if (/^\/artiklar\/[^/]+$/.test(h.path)) { k.artiklar.push({ namn: titel || h.path, antal: h.count }); continue; }
         if (/^\/bocker\/[^/]+$/.test(h.path)) { k.bocker.push({ namn: titel || h.path, antal: h.count }); continue; }
@@ -268,7 +283,7 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
       // En metod rankas efter besöken på metodsidan; lathundens och undersidornas besök står under namnet.
       const metodRader: Rad[] = [...metoder.values()].map((x) => {
         const fler = [x.lathund && `${x.lathund} på lathunden`, ...[...x.centrala].map(([namn, n]) => `${n} på ${namn}`), x.enheter && `${x.enheter} på undersidorna`].filter(Boolean);
-        return { namn: x.namn, under: fler.length ? `och ${fler.join(', ')}` : undefined, antal: x.sida };
+        return { namn: x.namn, under: fler.length ? `och ${fler.join(', ')}` : undefined, antal: x.sida, syns: fler.length > 0 };
       });
       const delRader: Rad[] = [...delningar.values()].map((x) => ({
         namn: x.namn,
@@ -279,7 +294,7 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
       const perKanal = new Map<string, number>();
       for (const x of delningar.values()) for (const [kanal, n] of x.kanaler) perKanal.set(kanal, (perKanal.get(kanal) ?? 0) + n);
       const kanalRader: Rad[] = [...perKanal].map(([kanal, n]) => ({ namn: KANAL[kanal] ?? kanal, antal: n }));
-      return { rader: { metoder: metodRader, filer: [...filer.values()], delningar: delRader, kanaler: kanalRader, ...k }, delade };
+      return { rader: { metoder: metodRader, filer: [...filer.values()], delningar: delRader, kanaler: kanalRader, ...k }, delade, nedladdade };
     }
 
     function lista(rader: Rad[], klass: string) {
@@ -315,7 +330,7 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
       const sektion = rot.querySelector(`[data-kategori="${namn}"]`) as HTMLElement;
       const topp = Number(sektion.dataset.topp) || 3;
       for (const el of [...sektion.children]) if (el.tagName !== 'H2') el.remove();
-      const sorterade = rader.filter((r) => r.antal > 0).sort((a, b) => b.antal - a.antal || a.namn.localeCompare(b.namn, 'sv'));
+      const sorterade = rader.filter((r) => r.antal > 0 || r.syns).sort((a, b) => b.antal - a.antal || a.namn.localeCompare(b.namn, 'sv'));
       if (!sorterade.length) {
         const p = document.createElement('p');
         p.className = 'meta';
@@ -445,7 +460,7 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
         const t = tider(period);
         const [hits, total] = await Promise.all([allaHits(t, aktuell), hamta('/api/v0/stats/total', t, aktuell)]);
         if (denna !== korning) return;
-        const { rader: k, delade } = kategorier(hits);
+        const { rader: k, delade, nedladdade } = kategorier(hits);
         const handelser = total.total_events ?? 0;
         // Överst tre rutor, som i WordPress: talet stort och ordet under (Niclas 2026-09-29).
         const ruta = (tal: number, ord: string) => {
@@ -460,7 +475,7 @@ const bas = (site.statistik ?? '').replace(/\/count$/, '');
         };
         summa.replaceChildren(
           ruta((total.total ?? 0) - handelser, 'besökare'),
-          ruta(Math.max(0, handelser - delade), 'nedladdningar'),
+          ruta(nedladdade, 'nedladdningar'),
           ruta(delade, 'delningar'),
         );
         for (const [namn, rader] of Object.entries(k)) visaKategori(namn, rader);

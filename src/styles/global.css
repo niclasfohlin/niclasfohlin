@@ -2280,7 +2280,7 @@ html.js .bara-js { display: inline-block; }
   .m-lista.elev:has(tr > td:nth-child(3)) td { font-size: 1.05rem; padding: 0.4rem 0.45rem; }
 }
 
-/* Ta fram ur en bank (TaFram.astro, Ta fram ett matteproblem och Ta fram en lästext): nivåns poster som rader med
+/* Ta fram ur en bank (TaFram.astro, Ta fram ett matteproblem, en lästext och en faktatext): nivåns poster som rader med
    nivåns färg, bilden när posten har en, numret, titeln, postens rad, taggarna och bocken, och listan att skriva ut
    bredvid på en bred skärm, som på Ta fram en aktivitet (listans stilar ovan). Utan JavaScript står nivåerna under
    varandra med sina rubriker; med JavaScript visas en nivå i taget, och rubriken finns kvar för skärmläsaren. */
@@ -2379,13 +2379,16 @@ button.tf-radtagg:hover { border-color: var(--tagg, var(--farg-accent)); backgro
 .tf-tema .tf-lista { gap: 0; }
 .tf-tema .tf-lista > .tf-post { border: 0; border-top: 1px solid var(--farg-kant); border-radius: 0; padding: 0.6rem 0 0.4rem 0.25rem; background: none; }
 .tf-tema .tf-lista > .tf-post.vald { box-shadow: none; background: color-mix(in srgb, var(--farg-accent) 7%, white); }
-/* Sidorna med texter: knapparna till metoden och lärarhandledningen står i valet efter nivåerna, där taggarna står som val
-   på Ta fram ett matteproblem, och i telefonen i två lika breda spalter. */
+/* Verktygssidorna: knappen Till metoden står sist i valet (TillMetoden.astro), på sidorna med texter med knappen till
+   lärarhandledningen bredvid, och i telefonen i två lika breda spalter. */
 .tf-metodrad { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; }
 .tf-metodrad .knapp { justify-content: center; text-align: center; }
 /* På datorn står knapparna längst till höger, så att de inte läses som en nivå till (designgranskningen 2026-10-18 natt). */
 @media (min-width: 48rem) { .tf-metodrad { margin-left: auto; } }
-@media (max-width: 30rem) { .tf-metodrad { width: 100%; } .tf-metodrad .knapp { flex: 1 1 0; padding-left: 0.6rem; padding-right: 0.6rem; } }
+/* I telefonen står knapparna sist i valet, i två lika breda spalter, och en ensam knapp en spalt bred, så att den inte ser
+   ut som valets viktigaste knapp. */
+@media (max-width: 47.99rem) { .tf-metodrad { order: 1; } }
+@media (max-width: 30rem) { .tf-metodrad { width: 100%; } .tf-metodrad .knapp { flex: 1 1 0; padding-left: 0.6rem; padding-right: 0.6rem; } .tf-metodrad .knapp:only-child { flex: 0 1 calc(50% - 0.25rem); } }
 /* Sidorna med texter: taggarna först och Visa stort till höger, och titeln leder till texten. Taggen är inget val där, så
    den har ingen kant och ser inte ut som matteproblemens tagg, som går att trycka på (designgranskningen 2026-10-18 natt:
    den såg ut som en knapp och gjorde inget). */
@@ -2410,9 +2413,6 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
   .tf-lankar { grid-area: lankar; gap: 0 0.9rem; }
   .tf-bock { grid-area: bock; margin: -0.35rem 0 -0.35rem; }
   .tf-post.utan-bild { grid-template-columns: minmax(0, 1fr) 2.75rem; grid-template-areas: "titel bock" "rad rad" "lankar lankar"; padding-left: 0.75rem; }
-  /* En faktatexts första bild är ett brett diagram som inte går att läsa så litet: i telefonen står raden utan bild. */
-  .tf-post[data-fakta] { grid-template-columns: minmax(0, 1fr) 2.75rem; grid-template-areas: "titel bock" "rad rad" "lankar lankar"; padding-left: 0.75rem; }
-  .tf-post[data-fakta] .tf-bild { display: none; }
   .tf-val .sk-nivaknappar { grid-template-columns: 1fr 1fr; }
   .tf-val .sk-niva { min-width: 0; padding-right: 0.5rem; }
   .tf-tagg { padding: 0.25rem 0.75rem; font-size: 0.9rem; }
