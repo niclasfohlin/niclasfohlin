@@ -52,11 +52,14 @@ const fragor = harFragor({ kolumner, rader }) ? rader.map((r) => (r[1] ?? '').tr
       <div class="m-fragorna"><p class="visually-hidden">Frågorna, som läraren läser upp:</p>{fragor.map((f) => <p>{f}</p>)}</div>
     </div>
   ) : (
+    <>
+    {schema && kolumner && <p class="m-lista-dra">Tabellen har {n} kolumner. Dra den åt sidan för att se alla.</p>}
     <table>
       {kolumner && <thead><tr>{kolumner.map((k, i) => <th scope="col" class={skriv[i] ? 'skriv' : undefined}>{k}</th>)}</tr></thead>}
       <tbody>
         {rader.map((r, ri) => <tr>{r.map((c, i) => <td class={skriv[i] ? 'skriv' : undefined}>{numrerad && i === 0 && <span class="m-lista-nr">{ri + 1}.</span>}<Brak text={pil(c)} stapla={brak} /></td>)}</tr>)}
       </tbody>
     </table>
+    </>
   )}
 </div>

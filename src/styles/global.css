@@ -1102,6 +1102,12 @@ a.bankfiler-niva-namn { display: inline-block; padding: 0.4rem 0; color: inherit
   .m-lista.schema { overflow-x: auto; }
   .m-lista.schema table { min-width: 44rem; }
 }
+/* Raden som säger att schemat har fler kolumner än skärmen visar: Lyssnarprotokollet i Högläsning i par visade fyra av åtta
+   kolumner, och inget visade att tabellen går att dra (riggens läsning i telefonbredd 2026-10-19). Bara där schemat rullar. */
+.m-lista-dra { display: none; }
+@media screen and (max-width: 40rem) {
+  .m-lista-dra { display: block; position: sticky; left: 0; font-family: var(--typsnitt-ui); font-size: 0.85rem; color: var(--farg-text-svag); margin: 0 0 0.35rem; }
+}
 /* Skrivkolumner (kartläggningens Före och Efter, Elevlista.astro): smala, med en kant mot texten och rubriken i mitten. */
 .m-lista th.skriv, .m-lista td.skriv { width: 4.5rem; text-align: center; border-left: 1px solid var(--farg-kant); }
 /* Bråk i elevmaterialet står staplade, som i läroböckerna (Brak.astro): siffrorna i full storlek och i textens typsnitt. */

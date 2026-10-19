@@ -36,7 +36,15 @@ const visade: (typeof poster[number] | { typ: 'etikett'; namn: string })[] = pos
 // "Åk 4–5" hålls ihop, som i ramarnas rubriker, och ett tal sist står kvar med ordet före ("Lördag klockan 14").
 const hel = (s: string) => ejBryt(s.replace(/(Åk|åk) (?=\d)/g, '$1 ')).replace(/ (\d{1,4})$/, ' $1');
 // Nivåns antal är dess numrerade texter, som metodens text räknar dem ("femton texter"), och alla rader om ingen är numrerad.
-const antal = (rader: Indexrad[]) => { const n = rader.filter((r) => /^\d+$/.test(r.etikett ?? '')).length || rader.length; return n === 1 ? 'en text' : `${n} texter`; };
+// Är ingen numrerad och alla samma slags text, räknas de med sitt eget ord: Högläsning i pars provtexter stod som "Åk 2–3 ·
+// en text", och ordet provtext syntes inte (riggens läsning i telefonbredd 2026-10-19).
+const antal = (rader: Indexrad[]) => {
+  const numrerade = rader.filter((r) => /^\d+$/.test(r.etikett ?? '')).length;
+  const slag = new Set(rader.map((r) => (r.etikett ?? '').toLowerCase()));
+  const ord = !numrerade && slag.size === 1 && /text$/.test([...slag][0]) ? [...slag][0] : 'text';
+  const n = numrerade || rader.length;
+  return n === 1 ? `en ${ord}` : `${n} ${ord}er`;
+};
 const arNummer = (s?: string) => !!s && /^\d+$/.test(s);
 // En länk till en ram, till en vecka i den eller till en lista i den.
 const mal = (l: Ramlank) => `#${(l.del !== undefined ? ankare?.del(l.nr, l.del) : l.lista !== undefined ? ankare?.lista(l.nr, l.lista) : undefined) ?? `ram-${l.nr}`}`;
