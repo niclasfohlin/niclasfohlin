@@ -27,7 +27,7 @@ const ROT = 'CLAUDE.md';
 
 // Innehållsmappar: filerna i dem har krok genom mappen. Mallarna (_mall.*) prövas ändå en och en.
 const INNEHALL = [
-  'src/content/artiklar/', 'src/content/bocker/', 'src/content/stodundervisning/', 'src/content/matteproblem/',
+  'src/content/artiklar/', 'src/content/bocker/', 'src/content/stodundervisning/', 'src/content/matteproblem/', 'src/content/faktateman/',
   'public/stodundervisning/', 'public/bildbank/', 'public/delning/', 'public/images/', 'public/fonts/',
   'underlag/texter/', 'utskick/', 'src/data/bildserier/', 'src/data/skrivkort/', 'src/data/aktiviteter/',
   'src/data/brainbreaks/', 'src/data/lektionskort/',

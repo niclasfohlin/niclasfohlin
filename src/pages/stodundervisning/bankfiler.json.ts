@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { matteproblemenPaSidan, publicerade } from '../../lib/innehall';
 import { DATABAS, matteproblemfiler } from '../../lib/matteproblem';
 import { arBladsida, bankAv, bankfiler, bankfilensRamar } from '../../lib/bank';
+import { medDatabaserna } from '../../lib/faktateman';
 import { bokhandledningen, bokhandledningensFil, handledningensFil, lararhandledningar } from '../../lib/handledning';
 import { metodensNivamaterial, nivafiler } from '../../lib/nivamaterial';
 import { bladfiler, metodensBladmaterial } from '../../lib/bladmaterial';
@@ -41,8 +42,10 @@ import { lektionskortetsSidor } from '../../lib/lektionskortdata';
 // ett A4 per problem, eller två med lösningsförslaget.
 // Ett temas lärarhandledning (src/lib/handledning.ts) är två sidor, i bankens filer med följesidorna och i en egen fil per
 // tema (slag: 'handledning'), vars pdf temats sida skriver ut.
+// Bankens filer och temanas handledningar står med databasens teman (src/lib/faktateman.ts), som Word-filerna.
 export const GET: APIRoute = async () => {
   const metoder = await publicerade('stodundervisning');
+  const medDatabasen = new Map((await medDatabaserna(metoder)).map((x) => [x.id, x]));
   const mp = await matteproblemenPaSidan();
   const matteproblemens = mp ? matteproblemfiler(mp.alla).map((f) => ({ metod: DATABAS, namn: f.namn, rubrik: `Matteproblem: ${f.rubrik}`, slag: 'matteproblem', minst: f.poster.length * (f.med ? 2 : 1), hogst: f.poster.length * (f.med ? 2 : 1), ramar: [] as number[], oversikter: [] as number[] })) : [];
   const serier = byggSerier(metoder);
@@ -68,8 +71,9 @@ export const GET: APIRoute = async () => {
     nivans.push(...metodensLektionskort(m.data, m.id).map((k) => { const sidor = lektionskortetsSidor(k); return { metod: m.id, namn: k.stam, rubrik: k.knapp, slag: 'lektionskort', minst: sidor, hogst: sidor, ramar: [] as number[], oversikter: [] as number[] }; }));
     const lektionernasKort = m.data.lektionsbank ? (serier.get(m.id)?.lektioner ?? []).flatMap((l) => { const lektion = metoder.find((x) => x.id === l.id); return lektion ? metodensLektionskort(lektion.data, lektion.id) : []; }) : [];
     if (lektionernasKort.length) { const sidor = lektionernasKort.reduce((s, k) => s + lektionskortetsSidor(k), 0); nivans.push({ metod: m.id, namn: allaLektionskortStam(m.id), rubrik: 'Alla lektionskort', slag: 'lektionskorten', minst: sidor, hogst: sidor, ramar: [], oversikter: [] }); }
-    const bank = bankAv(m.data);
-    const handledningar = lararhandledningar(m.data.ramar?.ramar ?? []);
+    const md = medDatabasen.get(m.id)!.data;
+    const bank = bankAv(md);
+    const handledningar = lararhandledningar(md.ramar?.ramar ?? []);
     nivans.push(...[...handledningar.values()].map((h) => ({ metod: m.id, namn: handledningensFil(m.id, h), rubrik: `Lärarhandledning: ${h.tema}`, slag: 'handledning', minst: 2, hogst: 2, ramar: [h.ri], oversikter: [] as number[] })));
     // Lästexternas lärarhandledning: två A4, som temanas.
     const bokhl = bokhandledningen(m.data.ramar?.ramar ?? []);
@@ -77,14 +81,18 @@ export const GET: APIRoute = async () => {
     if (!bank) return [...hela, ...nivans];
     const fakta = new Set(bank.enheter.filter((e) => e.l.faktatext).map((e) => e.ri));
     const vidFakta = new Set(bank.enheter.filter((e) => e.l.faktatext).flatMap((e) => [...e.fore, ...e.efter]));
-    const ramarna = m.data.ramar?.ramar ?? [];
+    const ramarna = md.ramar?.ramar ?? [];
     // En nivås översikt är en tabell med en rad per enhet, omkring tio rader på en sida: med tjugofem lästexter på nivån och
     // kartläggningens två är den tre sidor (2026-10-19).
     const oversiktensSidor = (ri: number) => Math.max(2, Math.ceil((ramarna[ri].oversikt?.rader.length ?? 0) / 10));
     const sidor = (ri: number): [number, number] => (fakta.has(ri) ? [2, 6] : arBladsida(ramarna[ri]) ? [1, 1] : vidFakta.has(ri) ? [1, 2] : handledningar.has(ri) || bokhl?.ri === ri ? [2, 2] : bank.oversikter.has(ri) ? [1, oversiktensSidor(ri)] : [1, 1]);
-    return [...hela, ...nivans, ...bankfiler(m.id, bank).map((f) => {
-      const ramar = bankfilensRamar(bank, f);
-      return { metod: m.id, namn: f.namn, rubrik: f.rubrik, minst: ramar.reduce((s, ri) => s + sidor(ri)[0], 0), hogst: ramar.reduce((s, ri) => s + sidor(ri)[1], 0), ramar, oversikter: ramar.filter((ri) => bank.oversikter.has(ri)) };
+    // Metodens egna filer ur metodens bank, och med databasens teman också databasens filer, en per nivå (databas: true;
+    // bankfiler i src/lib/bank.ts). Ramarnas nummer är desamma i båda, eftersom temana står efter metodens ramar.
+    const egen = bankAv(m.data);
+    const filerna = [...(egen ? bankfiler(m.id, egen).map((f) => ({ f, b: egen })) : []), ...(bank.databas ? bankfiler(m.id, bank).map((f) => ({ f, b: bank })) : [])];
+    return [...hela, ...nivans, ...filerna.map(({ f, b }) => {
+      const ramar = bankfilensRamar(b, f);
+      return { metod: m.id, namn: f.namn, rubrik: f.rubrik, minst: ramar.reduce((s, ri) => s + sidor(ri)[0], 0), hogst: ramar.reduce((s, ri) => s + sidor(ri)[1], 0), ramar, oversikter: ramar.filter((ri) => b.oversikter.has(ri)), ...(b.databas ? { databas: true } : {}) };
     })];
   });
   return new Response(JSON.stringify([...filer, ...matteproblemens], null, 1), { headers: { 'Content-Type': 'application/json; charset=utf-8' } });

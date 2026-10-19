@@ -16,6 +16,7 @@ import { handledningenTill, handledningensFil, type Lararhandledning as Handledn
 import { UPPHOV, metodAdress } from '../../../../lib/metod';
 import { publicerade } from '../../../../lib/innehall';
 import { harTaFram, taFramAv, type TaFram, type TaFramTema } from '../../../../lib/tafram';
+import { medDatabasen } from '../../../../lib/faktateman';
 import { slugAv } from '../../../../lib/standard/index.js';
 import { site } from '../../../../data/site';
 
@@ -23,7 +24,9 @@ export async function getStaticPaths() {
   const ut = [];
   for (const m of (await publicerade('stodundervisning')).filter((x) => harTaFram(x, 'texter'))) {
     const t = await taFramAv(m);
-    for (const n of t.nivaer) for (const tema of n.teman ?? []) ut.push({ params: { id: m.id, tema: tema.slug }, props: { t, niva: n.namn, farg: n.farg, tema, h: handledningenTill(m.data.ramar?.ramar ?? [], tema.namn) } });
+    // Handledningen ur metoden med databasens teman (src/lib/faktateman.ts), som Ta fram läser.
+    const ramar = (await medDatabasen(m)).data.ramar?.ramar ?? [];
+    for (const n of t.nivaer) for (const tema of n.teman ?? []) ut.push({ params: { id: m.id, tema: tema.slug }, props: { t, niva: n.namn, farg: n.farg, tema, h: handledningenTill(ramar, tema.namn) } });
   }
   return ut;
 }

@@ -54,7 +54,8 @@ import { slugAv, UPPTAGNA_LED } from './standard/index.js';
 
 // tema: faktatextens tema (src/lib/handledning.ts), som metodens schema har på ramen.
 type Ram = Parameters<typeof enhetstexter>[0][number] & { tema?: string };
-type Metod = { ramar?: { ramar: Ram[] } };
+// databas: satt på metoden med databasens teman (src/lib/faktatemaihop.js, medTemana).
+type Metod = { ramar?: { ramar: Ram[]; databas?: string } };
 
 /** Färre enheter än så står kvar på metodens sida, som förut. */
 export const BANK_MINST = 10;
@@ -111,6 +112,9 @@ export interface Bank {
   ramar: Set<number>;
   /** Nivåernas översikter, som står på metodens sida i bankens nivåer. */
   oversikter: Set<number>;
+  /** Databasens namn, när banken har databasens teman (src/lib/faktateman.ts): då är filerna databasens egna, en per nivå
+   *  med namnet först (faktatexter-bas), och metodens egna filer står kvar med metodens poster (bankfiler nedan). */
+  databas?: string;
 }
 
 // Adressens led och de reserverade leden kommer ur standarden (src/lib/standard/), som alla adresser ur namn använder.
@@ -183,7 +187,7 @@ export function bankAv(d: Metod): Bank | null {
     if (UPPTAGNA.has(e.slug) || slugar.has(e.slug)) throw new Error(`Banken: två enheter, eller en enhet och en annan sida, får adressen ${e.slug} (${ramar[e.ri].rubrik}). Ge nivån eller numret ett annat namn.`);
     slugar.add(e.slug);
   }
-  return { ord: { ...ord, slug: slugAv(ord.flera) }, foljesidor, ...(post ? { post } : {}), sidorForSig: enheter.every((e) => !!e.l.faktatext), ...(allman !== undefined ? { handledning: allman } : {}), nivaer: [...nivaer.values()], enheter, ramar: bankramar, oversikter };
+  return { ord: { ...ord, slug: slugAv(ord.flera) }, foljesidor, ...(post ? { post } : {}), sidorForSig: enheter.every((e) => !!e.l.faktatext), ...(allman !== undefined ? { handledning: allman } : {}), nivaer: [...nivaer.values()], enheter, ramar: bankramar, oversikter, ...(d.ramar?.databas ? { databas: d.ramar.databas } : {}) };
 }
 
 /** Enhetens sida. */
@@ -219,10 +223,22 @@ export const foljeFlera = (b: Bank) => {
 };
 /** En fil ur banken: en nivå eller alla, med bara enheterna (false), med följesidorna (true) eller med bara följesidorna
  * ('bara', i en bank där följesidorna står för sig). Filen med följesidorna har lösningsförslagen i sig (Bankfiler.astro).
- * Ta fram ett matteproblem har egna filer med problemen och lösningsförslagen (src/lib/matteproblem.ts). */
+ * Ta fram ett matteproblem har egna filer med problemen och lösningsförslagen (src/lib/matteproblem.ts).
+ * En bank med databasens teman (b.databas) har databasens egna filer, en per nivå och utan en för alla nivåer, som Ta fram
+ * och temanas och textens sidor skriver ut ur: faktatexter-bas med texterna och faktatexter-bas-<följesidorna> (METODER.md
+ * under Ta fram ur en bank, raden Databasens faktatexter). Metodens sida och dess filer har metodens egna, med metodens
+ * poster, så att metodens filer inte växer med databasen. */
 export interface Bankfil { namn: string; niva?: Bankniva; medFoljesidor: boolean | 'bara'; rubrik: string }
 export function bankfiler(id: string, b: Bank): Bankfil[] {
   const ut: Bankfil[] = [];
+  if (b.databas) {
+    const sidor = b.sidorForSig ? foljeFlera(b) : `med ${foljeText(b)}`;
+    for (const niva of b.nivaer) {
+      ut.push({ namn: `${b.databas}-${niva.slug}`, niva, medFoljesidor: false, rubrik: `${niva.namn}: ${b.ord.alla}` });
+      ut.push({ namn: `${b.databas}-${niva.slug}-${slugAv(sidor)}`, niva, medFoljesidor: b.sidorForSig ? 'bara' : true, rubrik: `${niva.namn}: ${b.sidorForSig ? sidor.toLowerCase() : `${b.ord.alla} ${sidor}`}` });
+    }
+    return ut;
+  }
   if (b.sidorForSig) {
     const sidor = foljeFlera(b);
     for (const niva of [undefined, ...b.nivaer]) {

@@ -50,6 +50,7 @@ import { fileURLToPath } from 'node:url';
 import JSZip from 'jszip';
 import { parse as parseYaml } from 'yaml';
 import { wordPdfSync } from 'wordparitet';
+import { lasTeman, medTemana } from '../src/lib/faktatemaihop.js';
 
 const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
@@ -70,10 +71,13 @@ const NYCKEL = 28; // så många bokstäver av det en del börjar med jämförs 
 // stannar om provfilen har en text som inte är en sådan ram, så att de två inte kan glida isär utan att det syns.
 const kanVaraFaktatext = (ram) => (ram.listor ?? []).length >= 3 && (ram.listor ?? []).some((l) => /^Fakta: ./.test(l.rubrik ?? '') || l.rubrik === 'Visste du att …');
 
+// Metoderna med databasens teman (src/content/faktateman/, src/lib/faktatemaihop.js), som provfilen har dem: temanas
+// texter mäts med metodens, och ett nytt tema gör om metodens mätning.
 const katalog = join(rot, 'src', 'content', 'stodundervisning');
+const teman = await lasTeman(join(rot, 'src', 'content', 'faktateman'), parseYaml);
 const metoder = readdirSync(katalog)
   .filter((f) => f.endsWith('.yaml') && !f.startsWith('_'))
-  .map((f) => ({ id: f.replace(/\.yaml$/, ''), data: parseYaml(readFileSync(join(katalog, f), 'utf8')) }))
+  .map((f) => { const id = f.replace(/\.yaml$/, ''); return { id, data: medTemana(parseYaml(readFileSync(join(katalog, f), 'utf8')), teman.filter((t) => t.data.metod === id)) }; })
   .filter((m) => !m.data.utkast && (m.data.ramar?.ramar ?? []).some(kanVaraFaktatext));
 const manifestFil = join(rot, 'src', 'data', 'sidlas.json');
 

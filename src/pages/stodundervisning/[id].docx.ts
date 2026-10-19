@@ -5,6 +5,7 @@ import { matteproblemfiler, type Matteproblemfil } from '../../lib/matteproblem'
 import { bankDokument, bladDokument, hemsidaDokument, lektionskortDokument, matteproblemDokument, metodDokument, passDokument, ramarDokument, DOCX_TYP } from '../../lib/metoddocx';
 import { byggSerier, serieKoppling } from '../../lib/serie';
 import { bankAv, bankfiler } from '../../lib/bank';
+import { medDatabaserna } from '../../lib/faktateman';
 import { bokhandledningen, bokhandledningensFil, handledningensFil, lararhandledningar } from '../../lib/handledning';
 import { metodensNivamaterial, nivafiler } from '../../lib/nivamaterial';
 import { bladfiler, metodensBladmaterial } from '../../lib/bladmaterial';
@@ -41,15 +42,21 @@ import { site } from '../../data/site';
 // -med-losningsforslag.docx: nivåns alla problem, metodens och databasens (matteproblemDokument).
 // Ett temas lärarhandledning (src/lib/handledning.ts) är /stodundervisning/<id>-lararhandledning-<tema>.docx, två A4
 // (ramarDokument med handledningens ram).
+// Med databasens teman (src/lib/faktateman.ts) får banken också databasens egna filer, en per nivå, som tar med varje nytt
+// tema av sig själva (faktatexter-bas, bankfiler i src/lib/bank.ts), och temanas handledningar läser temana. Metodens
+// egna filer, bankens filer på metodens sida, filen med allt och den med bara metoden, läser metoden utan dem.
 export const getStaticPaths: GetStaticPaths = async () => {
   const metoder = await publicerade('stodundervisning');
+  const medDatabasen = new Map((await medDatabaserna(metoder)).map((x) => [x.id, x]));
   const mp = await matteproblemenPaSidan();
   const matteproblemens = mp ? matteproblemfiler(mp.alla).map((f) => ({ params: { id: f.namn }, props: { m: { ...mp.metod, serie: undefined }, matteproblemfil: f } })) : [];
   const serier = byggSerier(metoder);
   // Lektionernas kort i lektionsbankens ordning, per serie.
   const korten = (serie: string): Lektionskort[] => (serier.get(serie)?.lektioner ?? []).flatMap((l) => { const lektion = metoder.find((x) => x.id === l.id); return lektion ? metodensLektionskort(lektion.data, lektion.id) : []; });
   return [...matteproblemens, ...metoder.flatMap((m) => {
+    const md = medDatabasen.get(m.id)!;
     const bank = bankAv(m.data);
+    const databasen = md === m ? null : bankAv(md.data);
     const nm = metodensNivamaterial(m.data);
     const bm = metodensBladmaterial(m.data, m.id);
     const ovrigt = ovrigtfil(m.data, m.id);
@@ -65,7 +72,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
       ...(bm ? bladfiler(m.id, bm).map((f) => ({ params: { id: f.namn }, props: { m: { ...m, serie: undefined }, ...(f.slag === 'blad' ? { bladfil: { bilder: f.bilder, rubrik: f.rubrik, huvud: f.huvud } } : { nivafil: { ramar: f.ramar, rubrik: f.rubrik, huvud: f.huvud, blad: 'ifyllda' as const } }) } })) : []),
       ...(ovrigt ? [{ params: { id: ovrigt.namn }, props: { m: { ...m, serie: undefined }, nivafil: { ramar: ovrigt.ramar, rubrik: ovrigt.rubrik, huvud: ovrigt.huvud } } }] : []),
       ...(bank ? bankfiler(m.id, bank).map((f) => ({ params: { id: f.namn }, props: { m: { ...m, serie: undefined }, bankfil: { niva: f.niva?.namn, medFoljesidor: f.medFoljesidor, rubrik: f.rubrik } } })) : []),
-      ...[...lararhandledningar(m.data.ramar?.ramar ?? []).values()].map((h) => ({ params: { id: handledningensFil(m.id, h) }, props: { m: { ...m, serie: undefined }, nivafil: { ramar: [h.ri], rubrik: `Lärarhandledning: ${h.tema}`, huvud: h.niva } } })),
+      ...(databasen?.databas ? bankfiler(m.id, databasen).map((f) => ({ params: { id: f.namn }, props: { m: { ...md, serie: undefined }, bankfil: { niva: f.niva?.namn, medFoljesidor: f.medFoljesidor, rubrik: f.rubrik } } })) : []),
+      ...[...lararhandledningar(md.data.ramar?.ramar ?? []).values()].map((h) => ({ params: { id: handledningensFil(m.id, h) }, props: { m: { ...md, serie: undefined }, nivafil: { ramar: [h.ri], rubrik: `Lärarhandledning: ${h.tema}`, huvud: h.niva } } })),
       // Lästexternas lärarhandledning (src/lib/handledning.ts, bokhandledningen), två A4 i en egen fil.
       ...(() => { const h = bokhandledningen(m.data.ramar?.ramar ?? []); return h ? [{ params: { id: bokhandledningensFil(m.id) }, props: { m: { ...m, serie: undefined }, nivafil: { ramar: [h.ri], rubrik: `Lärarhandledning: ${h.titel}`, huvud: 'Lärarhandledning' } } }] : []; })(),
     ];

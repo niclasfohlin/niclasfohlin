@@ -7,6 +7,7 @@ import Bladfiler from '../../../components/Bladfiler.astro';
 import Pabordet from '../../../components/Pabordet.astro';
 import SkrivUtPdf from '../../../components/SkrivUtPdf.astro';
 import { publicerade } from '../../../lib/innehall';
+import { medDatabaserna } from '../../../lib/faktateman';
 import { bankAv, enhetAdress, enhetensPlats, grannar, nivaFarger, arBladsida, foljesidansNamn, slugAv, type Bankenhet } from '../../../lib/bank';
 import { bladKort, bladpar, bladsidaAdress, enhetensBlad, gruppId, harExempel, ledFlera, ledSida, metodensBladmaterial, type Bladrad } from '../../../lib/bladmaterial';
 import { arIfylltBlad, arStaendeBlad, metodensPaBordet, type PaBordet } from '../../../lib/pabordet';
@@ -26,19 +27,24 @@ import { site } from '../../../data/site';
 // Modellens sida, och sedan varje blad för sig, exemplet och de tomma bladen, med en knapp som skriver ut bara det
 // bladet: veckans blad på A3 med ett tryck. Sist står ramens filer, och sidan leder till förra och nästa ram och
 // tillbaka till raden på metodens sida.
+// Sidorna läser metoden med databasens teman (src/lib/faktateman.ts), så att en text ur databasen får sin sida som
+// metodens egna, och en modells sida leder till alla texter som har den modellen. En text ur databasen står inte på
+// metodens sida, så dess väg tillbaka till nivån går till Ta fram, där nivåns alla texter står.
 export async function getStaticPaths() {
-  const metoder = await publicerade('stodundervisning');
-  return metoder.flatMap((m) => {
+  const egna = await publicerade('stodundervisning');
+  const metoder = await medDatabaserna(egna);
+  return metoder.flatMap((m, i) => {
     const bank = bankAv(m.data);
     const bm = metodensBladmaterial(m.data, m.id);
+    const metodens = egna[i].data.ramar?.ramar.length ?? 0;
     return [
-      ...(bank ? bank.enheter.map((e) => ({ params: { id: m.id, enhet: e.slug }, props: { m, e } })) : []),
+      ...(bank ? bank.enheter.map((e) => ({ params: { id: m.id, enhet: e.slug }, props: { m, e, iDatabasen: e.ri >= metodens } })) : []),
       ...(bm ? bm.rader.map((rad) => ({ params: { id: m.id, enhet: rad.slug }, props: { m, rad } })) : []),
     ];
   });
 }
 
-const { m, e: given, rad: givenRad } = Astro.props as { m: Awaited<ReturnType<typeof publicerade<'stodundervisning'>>>[number]; e?: Bankenhet; rad?: Bladrad };
+const { m, e: given, rad: givenRad, iDatabasen } = Astro.props as { m: Awaited<ReturnType<typeof publicerade<'stodundervisning'>>>[number]; e?: Bankenhet; rad?: Bladrad; iDatabasen?: boolean };
 const d = m.data;
 const versal = (s: string) => s.charAt(0).toLocaleUpperCase('sv') + s.slice(1);
 const metodensAdress = metodAdress(site.url, m.id).replace(/^https?:\/\//, '');
@@ -117,7 +123,7 @@ if (givenRad && bm) {
   vy = {
     slug: e.slug, farg: nivaFarger(d, bank)[niva.namn], titel: e.l.titel, sidtitel: `${e.l.titel} · ${niva.namn}, ${e.l.vad} · ${d.titel}`,
     beskrivning: `${niva.namn}, ${e.l.vad} i ${d.titel}: ${kortad(forsta)}`,
-    tillbaka: { adress: `/stodundervisning/${m.id}#${niva.oversikt !== undefined ? `ram-${niva.oversikt + 1}` : `niva-${niva.slug}`}`, namn: niva.namn }, allaText: `Alla ${bank.ord.alla} på nivån ${niva.namn}`,
+    tillbaka: { adress: iDatabasen ? `/stodundervisning/${m.id}/${bank.ord.slug}#${niva.slug}` : `/stodundervisning/${m.id}#${niva.oversikt !== undefined ? `ram-${niva.oversikt + 1}` : `niva-${niva.slug}`}`, namn: niva.namn }, allaText: `Alla ${bank.ord.alla} på nivån ${niva.namn}`,
     skylt: niva.namn, kicker: plats.nr !== undefined ? `${versal(bank.ord.en)} ${plats.nr} av ${plats.antal}` : versal(e.l.vad),
     nav: bladen.map((ri) => ({ id: `blad-${ri + 1}`, namn: bladNamn(ri) })),
     allaBlad, allaPdf: utskriftAdress(enhetensUtskrifter(d, m.id, bank, e).alla), statistik: `${d.titel}: ${niva.namn}, ${e.l.vad}`,

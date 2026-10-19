@@ -11,13 +11,15 @@ import { site } from '../../../data/site';
 import { allaKort, type Kort } from '../../../lib/delningskort';
 import { publicerade } from '../../../lib/innehall';
 import { taFramKortposter } from '../../../lib/tafram';
+import { medDatabasen } from '../../../lib/faktateman';
 
 export async function getStaticPaths() {
   return (await allaKort()).filter((kort) => kort.tafram).map((kort) => ({ params: { namn: kort.namn }, props: { kort } }));
 }
 
 const { kort } = Astro.props as { kort: Kort };
-const m = (await publicerade('stodundervisning')).find((x) => x.id === kort.tafram!.metod)!;
+// Metoden med databasens teman (src/lib/faktateman.ts), så att ett tema ur databasen får sitt kort.
+const m = await medDatabasen((await publicerade('stodundervisning')).find((x) => x.id === kort.tafram!.metod)!);
 const poster = taFramKortposter(m, kort.tafram!.poster);
 const n = kort.titel.length;
 const storlek = n <= 18 ? 76 : n <= 36 ? 62 : 52;

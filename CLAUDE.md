@@ -54,7 +54,7 @@ Filer som börjar med `_` läses inte in. `utkast: true` visas lokalt men aldrig
 
 Artiklar är oftast publicerade i Vi Lärare, Göteborgs-Posten eller en annan tidning först. Hur en post görs ur en text, och vad som gäller för hela texten, står i ARBETSSATT.md under Texterna.
 
-Databasens matteproblem, de som inte hör till en metod, står en per fil i `src/content/matteproblem/` och visas på Ta fram ett matteproblem (METODER.md under Ta fram ur en bank).
+Databasens matteproblem, de som inte hör till en metod, står en per fil i `src/content/matteproblem/` och visas på Ta fram ett matteproblem, och databasens faktatexter står ett tema per fil i `src/content/faktateman/` och visas på Ta fram en faktatext (METODER.md under Ta fram ur en bank).
 
 Stödundervisning är en metodbank, inte en blogg. Varje metod är en YAML-fil efter modellen i `_mall.yaml` och `src/content.config.ts`, med exakt ett område (Matematik, Läsning, Skrivning, Socialt), minst en nivå (F-3, 4-6, 7-9) och taggar för vad den tränar. Ur den filen bygger `src/components/Metod.astro`, `src/lib/metoddocx.ts` och `src/lib/metodpptx.ts` allt läraren får, och allt som laddas ner bär © Niclas Fohlin och niclasfohlin.se.
 

@@ -1,6 +1,7 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { packaWord } from '../../../lib/wordpaket';
 import { publicerade } from '../../../lib/innehall';
+import { medDatabaserna } from '../../../lib/faktateman';
 import { faktatextProvDokument, DOCX_TYP } from '../../../lib/metoddocx';
 import { lasResurser, medReservbilder } from '../../../lib/metodresurser';
 import { site } from '../../../data/site';
@@ -15,7 +16,8 @@ import { site } from '../../../data/site';
 export const getStaticPaths: GetStaticPaths = async () => {
   if (process.env.SIDLAS_PROV !== '1' && !import.meta.env.DEV) return [];
   const valda = process.env.SIDLAS_PROV_IDS?.split(',').filter(Boolean);
-  const metoder = (await publicerade('stodundervisning')).filter((m) => !valda || valda.includes(m.id));
+  // Metoderna med databasens teman (src/lib/faktateman.ts): temanas texter mäts med metodens, som scripts/sidlas.mjs räknar.
+  const metoder = (await medDatabaserna(await publicerade('stodundervisning'))).filter((m) => !valda || valda.includes(m.id));
   return metoder.flatMap((m) => [false, true].map((last) => ({ params: { fil: `${m.id}${last ? '--last' : ''}` }, props: { m, last } })));
 };
 

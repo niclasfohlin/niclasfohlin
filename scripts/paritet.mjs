@@ -26,6 +26,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse as parseYaml } from 'yaml';
 import JSZip from 'jszip';
+import { lasTeman, medTemana } from '../src/lib/faktatemaihop.js';
 
 const rot = join(dirname(fileURLToPath(import.meta.url)), '..');
 const MINST = 25;
@@ -224,13 +225,18 @@ const bilddata = existsSync(join(rot, 'src/data/pabordet.json')) ? JSON.parse(re
 // Bankernas filer, ur bygget (src/pages/stodundervisning/bankfiler.json.ts).
 const bankfiler = existsSync(join(rot, 'dist/stodundervisning/bankfiler.json')) ? JSON.parse(readFileSync(join(rot, 'dist/stodundervisning/bankfiler.json'), 'utf8')) : [];
 const mapp = join(rot, 'src/content/stodundervisning');
+const teman = await lasTeman(join(rot, 'src/content/faktateman'), parseYaml);
 const valda = process.argv.slice(2);
 const filer = readdirSync(mapp).filter((f) => f.endsWith('.yaml') && !f.startsWith('_')).filter((f) => !valda.length || valda.includes(f.slice(0, -5)));
 let fel = 0;
 let provade = 0;
 for (const fil of filer) {
   const id = fil.slice(0, -5);
-  const d = parseYaml(readFileSync(join(mapp, fil), 'utf8'));
+  // Metoden med databasens teman (src/lib/faktatemaihop.js), som databasens filer och enheternas sidor har dem: temanas
+  // texter prövas där. Metodens sida och filen med allt har dem inte och prövas mot metodens egen fil (egen). Temanas
+  // ramar och bilder står efter metodens, så ramarnas och bildernas nummer är desamma i båda.
+  const egen = parseYaml(readFileSync(join(mapp, fil), 'utf8'));
+  const d = medTemana(egen, teman.filter((t) => t.data.metod === id));
   if (d.utkast) continue;
   const sida = join(rot, 'dist/stodundervisning', id, 'index.html');
   const docx = join(rot, 'dist/stodundervisning', `${id}.docx`);
@@ -396,7 +402,7 @@ for (const fil of filer) {
   // Texterna och bildernas textalternativ prövas mot en Word-fil och en utskrift: metodens sida mot Word-filen med allt, och
   // i en bank också enheternas sidor mot bankens fil med alla nivåer och följesidorna (nedan). ram väljer ramarna.
   const ramAv = (efter) => (d.ramar?.ramar ?? []).findIndex((r) => `ram: ${r.rubrik}` === efter);
-  const provaTexter = ({ word, utskrift, altWord, altSida, ram = () => true }) => {
+  const provaTexter = ({ word, utskrift, altWord, altSida, ram = () => true, kalla = d }) => {
   const ut = [];
   for (const nr of problemBilder) {
     const b = d.pabordet.find((x) => x.nr === nr);
@@ -414,7 +420,7 @@ for (const fil of filer) {
     const alt = norm(`På bordet: ${b.rubrik} ${b.text}`);
     if (!altWord.has(alt) || !altSida.has(alt)) ut.push(`    bilden På bordet ${nr} (${b.rubrik}) på strukturens sida: textalternativet med rubriken och bildtexten saknas i ${[!altWord.has(alt) && 'Word-filen', !altSida.has(alt) && 'sidan'].filter(Boolean).join(' och ')}`);
   }
-  for (const { vag, text } of texter(d, '', [])) {
+  for (const { vag, text } of texter(kalla, '', [])) {
     const ri = vag.match(/^ramar\.ramar\.(\d+)\./);
     if (!ram(ri ? Number(ri[1]) : -1)) continue;
     if (lastextRader.some((r) => r.test(vag)) || rutansText.some((r) => r.test(vag)) || gemensamText.some((r) => r.test(vag)) || bladsidor.some((r) => r.test(vag)) || utanUtskrift.has(vag)) continue;
@@ -461,14 +467,15 @@ for (const fil of filer) {
   // länkar till enheternas sidor, och Skriv ut: Allt skriver ut Word-filens pdf. De prövas mot enheternas sidor och bankens
   // fil nedan.
   const bankensRamar = new Set(bankfiler.filter((f) => f.metod === id && !f.slag).flatMap((f) => (f.ramar ?? []).filter((ri) => !(f.oversikter ?? []).includes(ri))));
-  saknas.push(...provaTexter({ word, utskrift, altWord, altSida, ram: (ri) => !bankensRamar.has(ri) && !bladensRamar.has(ri) }));
+  saknas.push(...provaTexter({ word, utskrift, altWord, altSida, ram: (ri) => !bankensRamar.has(ri) && !bladensRamar.has(ri), kalla: egen }));
   // Banken (src/lib/bank.ts): enheternas egna sidor och bankens filer byggs på andra vägar än metodens sida och filen med
   // allt (Metod.astro med enhet, mallBarn i metoddocx.ts), så bankens texter prövas där också, med bankens fil med alla
   // nivåer och följesidorna som Word-fil (granskningen 2026-10-10). I en bank där följesidorna står i egna filer
   // (sidorForSig i bank.ts, faktatexterna) prövas filerna med alla nivåer tillsammans: texterna och lärarens sidor.
   const bankens = bankfiler.filter((f) => f.metod === id && !f.slag);
   const medSidor = bankens.find((f) => /-alla-med-lararens-sida$/.test(f.namn));
-  const bankfilerna = medSidor ? [medSidor] : bankens.filter((f) => /-alla$/.test(f.namn));
+  // Databasens filer, en per nivå (databas i bankfiler.json), har temanas texter, och prövas med metodens.
+  const bankfilerna = [...(medSidor ? [medSidor] : bankens.filter((f) => !f.databas && /-alla$/.test(f.namn))), ...bankens.filter((f) => f.databas)];
   const bankfil = bankfilerna.length ? { namn: bankfilerna.map((f) => f.namn).join(' och '), oversikter: bankfilerna.flatMap((f) => f.oversikter ?? []), ramar: bankfilerna.flatMap((f) => f.ramar ?? []) } : undefined;
   if (bankfil) {
     const mappen = join(rot, 'dist/stodundervisning', id);
@@ -540,7 +547,7 @@ for (const fil of filer) {
   // Bilderna På bordet (src/lib/pabordet.ts) prövas som filmerna: bilden står i samma avsnitt och efter samma text ur
   // metodens fil i Word-filen och i utskriften. Bilden hittas genom sin rubrik och bildtext, som följer varandra i båda
   // (bilden själv är ingen text); efter en vecka står bara bildtexten, som börjar med På bordet.
-  for (const b of d.pabordet ?? []) {
+  for (const b of egen.pabordet ?? []) {
     if (strukturBilder.has(b.nr) || problemBilder.has(b.nr)) continue;
     const namn = `bilden På bordet ${b.nr} (${b.rubrik})`;
     const nyckel = norm(`På bordet ${/^del:/.test(b.efter ?? '') ? '' : b.rubrik} ${b.text}`);

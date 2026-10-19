@@ -29,6 +29,7 @@ import type { LosningsforslagVy } from './losningsforslag';
 import { centralAv } from './centrala';
 import { matteproblemen, matteproblemetsUtskrifter, type Matteproblem } from './matteproblem';
 import { bokhandledningensFil, handledningensFil, lararhandledningar } from './handledning';
+import { medDatabasen } from './faktateman';
 import { databasFel, innehallstaggar, postensRad, slugAv, type Post, type PostUtskrift } from './standard/index.js';
 
 type Metod = CollectionEntry<'stodundervisning'>;
@@ -252,9 +253,10 @@ const fil = (namn: string): Fil => {
 // En gång per metodfil: sidan och datafilen läser samma databas i bygget, och en ändrad metodfil i npm run dev är en ny
 // post och byggs om.
 const cache = new WeakMap<object, Promise<TaFram>>();
-/** Databasen ur metodens bank. Stoppar bygget med standardens fel (databasFel) när en post inte håller formen. */
+/** Databasen ur metodens bank, med databasens teman (src/lib/faktateman.ts). Stoppar bygget med standardens fel
+ *  (databasFel) när en post inte håller formen. */
 export function taFramAv(m: Metod): Promise<TaFram> {
-  if (!cache.has(m.data)) cache.set(m.data, bygg(m));
+  if (!cache.has(m.data)) cache.set(m.data, medDatabasen(m).then(bygg));
   return cache.get(m.data)!;
 }
 

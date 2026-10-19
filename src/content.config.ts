@@ -142,9 +142,21 @@ const rubrikTabell = z.strictObject({ rubrik: text, kolumner: z.array(text).min(
     if (rad.length !== tabell.kolumner.length) ctx.addIssue({ code: 'custom', path: ['rader', i], message: `Raden ska ha ${tabell.kolumner.length} celler, lika många som rubrikerna.` });
   });
 });
-const stodundervisning = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.yaml', base: './src/content/stodundervisning' }),
-  schema: z.strictObject({
+// Citattecknen och "åk" i varje text i en fil, i metodens och i databasens teman (kommentaren vid anropet i metodens
+// schema säger varför).
+type Ctx = { addIssue: (i: { code: 'custom'; path: (string | number)[]; message: string }) => void };
+const citat = (ctx: Ctx, x: unknown, sti: (string | number)[]): void => {
+  if (typeof x === 'string') {
+    for (const stycke of x.split('\n')) if ((stycke.match(/”/g) ?? []).length % 2) ctx.addIssue({ code: 'custom', path: sti, message: `Citattecknen ” går inte jämnt ut i stycket "${stycke.length > 90 ? `${stycke.slice(0, 90)}…` : stycke}": ett saknas eller är för mycket.` });
+    const ak = x.match(/(?<!\p{L})[åÅ]k (?=\d)/u);
+    if (ak) ctx.addIssue({ code: 'custom', path: sti, message: `Skriv "åk" och siffran efter med hårt mellanslag (U+00A0), så att raden inte bryts mellan dem: "…${x.slice(Math.max(0, ak.index! - 30), ak.index! + 12)}…".` });
+  } else if (Array.isArray(x)) x.forEach((y, i) => citat(ctx, y, [...sti, i]));
+  else if (x && typeof x === 'object') for (const [k, v] of Object.entries(x)) citat(ctx, v, [...sti, k]);
+};
+
+// En metods fält. Databasens faktatexter (faktateman nedan) lånar ramarna, bilderna och tabellerna härifrån, så att ett
+// tema har exakt samma form som i metodens fil.
+const metodensFalt = z.strictObject({
     titel: text,
     // Raden under rubriken, t.ex. "Lärarledd problemlösning i liten grupp för åk 4–9".
     undertitel: z.string().optional(),
@@ -661,7 +673,10 @@ const stodundervisning = defineCollection({
         uppfoljning: z.array(z.strictObject({ nar: text, vad: text })).min(1).optional(),
       }),
     }).optional(),
-  }).superRefine((d, ctx) => {
+  });
+const stodundervisning = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.yaml', base: './src/content/stodundervisning' }),
+  schema: metodensFalt.superRefine((d, ctx) => {
     // Täckningskartan (K-241): årskurstexten ska gå att läsa som ett spann och stämma med nivåerna.
     const akFel = arskursFel(d);
     if (akFel) ctx.addIssue({ code: 'custom', path: ['arskursText'], message: akFel });
@@ -818,15 +833,7 @@ const stodundervisning = defineCollection({
     // 2026-10-02: musens saga i pass 1 saknade sitt avslutande citattecken, och en mening i tidsschemat hade ett för mycket).
     // "åk" och siffran efter står ihop med ett hårt mellanslag, så att raden aldrig bryts mellan dem, som metodriggens
     // build/tecken.mjs skriver dem (K-188: de äldre metoderna hade vanligt mellanslag på 58 ställen, de nyare hårt).
-    const citat = (x: unknown, sti: (string | number)[]): void => {
-      if (typeof x === 'string') {
-        for (const stycke of x.split('\n')) if ((stycke.match(/”/g) ?? []).length % 2) ctx.addIssue({ code: 'custom', path: sti, message: `Citattecknen ” går inte jämnt ut i stycket "${stycke.length > 90 ? `${stycke.slice(0, 90)}…` : stycke}": ett saknas eller är för mycket.` });
-        const ak = x.match(/(?<!\p{L})[åÅ]k (?=\d)/u);
-        if (ak) ctx.addIssue({ code: 'custom', path: sti, message: `Skriv "åk" och siffran efter med hårt mellanslag (U+00A0), så att raden inte bryts mellan dem: "…${x.slice(Math.max(0, ak.index! - 30), ak.index! + 12)}…".` });
-      } else if (Array.isArray(x)) x.forEach((y, i) => citat(y, [...sti, i]));
-      else if (x && typeof x === 'object') for (const [k, v] of Object.entries(x)) citat(v, [...sti, k]);
-    };
-    citat(d, []);
+    citat(ctx, d, []);
     // Sagoformens bilder finns i bildbanken, och kortbilder nämner ramens egna listor, annars saknas rundeln på bladet.
     const iBildbanken = (ord: string) => !!(bildbankData as { ord: Record<string, string> }).ord[ord.trim().toLowerCase()];
     // En lista med bilder har en bild till varje ord, annars står ordet utan sitt ansikte.
@@ -873,4 +880,37 @@ const matteproblem = defineCollection({
   }),
 });
 
-export const collections = { artiklar, bocker, stodundervisning, matteproblem };
+// Databasens faktatexter (K-435, src/lib/faktateman.ts; Niclas 2026-10-19: "det rimligen inte borde vara läggas till i
+// metoden mer än att Fler faktatexter finns... Och att första omgången faktatexter blir som ett 'exempel' på hur man
+// arbetar"): ett tema per fil, med temats lärarhandledning och för varje text lärarens sida, texten och den ifyllda
+// modellen, i exakt samma form som ramarna i metodens fil, temats bilder På bordet och en tabell som parar texterna med
+// modellerna. Sajten lägger ihop metodens bank och temana för Ta fram, temats sida, textens sida och nivåernas filer, men
+// inte för metodens sida och dess Word-fil med allt. Formen står i METODER.md under Ta fram ur en bank, raden Databasens
+// faktatexter, och intaget är scripts/faktateman.mjs.
+const metodensRamar = metodensFalt.shape.ramar.unwrap().shape.ramar;
+const faktateman = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.yaml', base: './src/content/faktateman' }),
+  schema: z.strictObject({
+    metod: text,
+    tema: text,
+    niva: z.enum(['Bas', 'Medel', 'Avancerat']),
+    ramar: metodensRamar.min(1),
+    pabordet: metodensFalt.shape.pabordet,
+    tabeller: metodensFalt.shape.tabeller,
+  }).superRefine((t, ctx) => {
+    const rubriker = new Set(t.ramar.map((r) => r.rubrik));
+    t.ramar.forEach((r, i) => {
+      if (r.tema !== undefined && r.tema !== t.tema) ctx.addIssue({ code: 'custom', path: ['ramar', i, 'tema'], message: `Ramen har temat ${r.tema}, men filen är temat ${t.tema}.` });
+      const niva = r.rubrik.match(/^(?:Lärarhandledning|Lärarens sida|Modellen): ([^,]+),|^([^,:]+), text \d+:/);
+      if (niva && (niva[1] ?? niva[2]) !== t.niva) ctx.addIssue({ code: 'custom', path: ['ramar', i, 'rubrik'], message: `Ramen står på nivån ${niva[1] ?? niva[2]}, men temat på ${t.niva}.` });
+    });
+    if (!t.ramar.some((r) => r.rubrik === `Lärarhandledning: ${t.niva}, ${t.tema}`)) ctx.addIssue({ code: 'custom', path: ['ramar'], message: `Temat har ingen lärarhandledning: ramen "Lärarhandledning: ${t.niva}, ${t.tema}" saknas.` });
+    t.pabordet.forEach((b, i) => {
+      const ram = b.efter.match(/^ram: (.+)$/);
+      if (!ram || !rubriker.has(ram[1])) ctx.addIssue({ code: 'custom', path: ['pabordet', i, 'efter'], message: ram ? `Bilden ${b.nr} står efter ramen "${ram[1]}", som inte finns i temats fil.` : `Bilden ${b.nr} står efter "${b.efter}". En bild i ett tema står efter en ram i temats fil: "ram: <rubrik>".` });
+    });
+    citat(ctx, t, []);
+  }),
+});
+
+export const collections = { artiklar, bocker, stodundervisning, matteproblem, faktateman };

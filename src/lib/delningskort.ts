@@ -16,6 +16,7 @@ import { join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { site } from '../data/site';
 import { publicerade, publikationNamn, typLabel, matteproblemenPaSidan } from './innehall';
+import { medDatabaserna } from './faktateman';
 import { arskursText, kortFakta, type MetodPost } from './metod';
 import { arskursSpannet, SKALA, spannText, type Spann } from './tackning';
 import { delningensKort, kortData, skrivkortAdress, skrivkortAv } from './skrivkort';
@@ -118,7 +119,8 @@ export function allaKort(): Promise<Kort[]> {
     const utan: Omit<Kort, 'fil'>[] = [];
     const lagg = (k: Omit<Kort, 'fil' | 'namn'>) => utan.push({ ...k, namn: k.sida === '/' ? 'start' : k.sida.slice(1).replace(/\//g, '-') });
     const portratt = site.portratt;
-    const metoder = await publicerade('stodundervisning');
+    // Metoderna med databasens teman (src/lib/faktateman.ts), som Ta fram-sidorna och temanas sidor har dem.
+    const metoder = await medDatabaserna(await publicerade('stodundervisning'));
 
     lagg({ sida: '/', typ: 'start', etikett: '', titel: site.namn, undertitel: site.rad, bild: portratt, farg: '--farg-accent' });
     for (const [nyckel, s] of Object.entries(site.sidor)) {
