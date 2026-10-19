@@ -1202,6 +1202,10 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
    en surfplatta och infällda under varandra i telefonen, i täckningskartans form. Områdets färg som streck och namn i text. */
 .mb-yta { display: grid; gap: 0 2rem; }
 .mb-metoder { min-width: 0; }
+/* Metodkorten behöver mer bredd än andra kort: rutan med sex uppgifter i fast form och titeln bredvid områdets etikett
+   (K-465). Med rutan Verktyg bredvid blev det tre smala spalter på datorn, där värdena bröts på två rader och titlarna
+   mitt i ord; nu två breda. */
+.mb-metoder .rutnat { grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); }
 .vr { font-family: var(--typsnitt-ui); margin: 0; }
 .vr-del > summary { list-style: none; cursor: pointer; display: flex; align-items: center; }
 .vr-del > summary::-webkit-details-marker { display: none; }
