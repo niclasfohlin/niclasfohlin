@@ -1,0 +1,526 @@
+# Metod i stödundervisning. Modellen står i src/content.config.ts och mallen i _mall.yaml.
+titel: Högläsning i par
+undertitel: "Fem strategier för att läsa högt för en lyssnare, i åtta veckor för åk 2–5"
+ingress: "Klassen läser högt i par tre till fem dagar i veckan och lär sig fem strategier för att läsa så att den som lyssnar förstår och känner det texten säger. Paret läser vidare i en bok som de har valt tillsammans, och de åtta veckorna slutar med att eleverna läser för yngre barn eller för någon hemma."
+omrade: Läsning
+arskurs: ["F-3", "4-6"]
+arskursText: åk 2–5
+taggar: [lasflyt, lasforstaelse, lasframjande, kooperativt-larande, intensivtraning]
+format: [helklass, par, liten grupp]
+tid: 20 minuter per pass, tre till fem pass i veckan
+period: Åtta veckor
+grupp: En klass, eller en grupp om minst fyra elever
+material:
+  - en bok till varje par
+  - post-it-lappar
+  - affischen med strategierna
+  - bilderböcker till de yngre
+uppdaterad: 2026-10-19
+publicerad: 2026-10-19
+relaterade: [upprepad-lasning, til-i-grupp, textsamtal-i-grupp]
+utkast: false
+centrala:
+  - id: utveckla-hoglasning
+    efterText: "tabell: De fem strategierna"
+  - id: lasstrategier
+    efterText: "tabell: Balansen"
+pabordet:
+  - nr: 1
+    rubrik: "Strukturen · Berätta mera!"
+    text: "Amina läser sitt ställe för Hugo, som säger vad han förstod och vad rösten gjorde. De som har handen uppe letar efter en ny lyssnare."
+    efter: "ram: Strukturen, extra träning: Berätta mera!"
+    fluent: [flicka-2, pojke-2, pojke, flicka, hand]
+  - nr: 2
+    rubrik: "Strukturen · Speed-dating"
+    text: "Rad A och rad B sitter mitt emot varandra, och kamraterna i ett par sitter i samma rad. Amina läser sitt ställe för Hugo, som svarar. Sedan flyttar rad B en stol åt höger."
+    efter: "ram: Strukturen, extra träning: Speed-dating"
+    fluent: [flicka-2, pojke, pojke-2, flicka]
+  - nr: 3
+    rubrik: "Blad: Affischen"
+    text: "Affischen sitter på väggen. Överst frågar den vad som händer och hur det känns, sedan kommer de fem strategierna med var sin bild, sitt tecken och elevens fråga, och sist lyssnarens två meningar."
+    efter: "ram: Affischen: fem sätt att läsa för en lyssnare"
+    fluent: [stjärna, oppen-bok, tänka, förvånad, säga, nyckel, sköldpadda, öra]
+
+inledning:
+  - "Högläsning i par är en lässatsning för hela klassen i åk 2–5, där eleverna läser högt för varandra tre till fem dagar i veckan under åtta veckor. Målet är att varje elev läser så att den som lyssnar förstår och känner det texten säger, och till det har eleverna fem strategier för rösten. Med Tankepausen pausar eleven där en ny tanke börjar, och med Frågan och utropet hör lyssnaren om någon säger, undrar eller ropar. Med Repliken läser eleven det någon säger med personens känsla, med Det viktiga ordet säger hen ett ord lite tydligare än orden runt det, och med Lyssnarens takt läser hen lugnt, så att lyssnaren hänger med. Metoden är en egen variant, inspirerad av lågstadieläraren Malin Rosendahls HögläsningsRally, där eleverna läser kort, ofta och för varandra."
+  - "Eleverna läser i par, och paret håller ihop alla åtta veckor. På bänken ligger parets bok med en post-it-lapp där de slutade förra gången. De har valt boken tillsammans och läser vidare i den i varje pass. På väggen sitter affischen med de fem strategierna och lyssnarens två meningar, som kamraten säger efter varje läsning."
+  - "Varje pass går från innehållet till rösten. Först berättar paret för varandra vad som hände förra gången och svarar på din fråga om boken. Sedan visar du på ett ställe på tavlan hur en strategi får lyssnaren att förstå det texten säger, och klassen läser stället efter dig. Paren läser vidare i sin bok, en sida var. Lyssnaren säger sina två meningar, vad hen förstod och vad rösten gjorde, och läsaren hör om rösten fick fram det hen ville säga. Medan paren läser lyssnar du på några par, och sist säger du till klassen vad du hörde."
+  - "Vecka 1–5 har var sin strategi, och de tidigare följer med. I vecka 3 visar du Repliken på ett ställe du väljer, till exempel i en kort berättelse där Lisa hör det knacka på dörren: ska hennes ”Vem är det?” låta glad eller rädd? Sedan hittar paren repliker i sin egen bok. Redan i vecka 1 vet eleverna att de ska läsa för en yngre klass på skolan. I vecka 6 träffar varje elev sin yngre lyssnare och väljer en bilderbok till hen, och i vecka 8 läser eleverna för de yngre eller hemma."
+
+upplagg:
+  rubrik: Så fungerar insatsen
+  text: "Klassen läser högt i par i åtta veckor, tre till fem pass om 20 minuter i veckan. Det går också med en grupp om minst fyra elever. Passet har fyra delar: Texten, Visa, Läs för en lyssnare och Återkoppling. I vecka 1–5 har varje vecka en av de fem strategierna, och paret läser vidare i sin bok, så att texten är ny i varje pass. I vecka 6 och 7 förbereder eleverna var sin bilderbok till de yngre, och i vecka 8 läser de för dem eller för någon hemma. I vecka 1 och vecka 8 läser varje elev provtexten för dig, och du fyller i lyssnarprotokollet."
+gruppen:
+  rubrik: Så sätter du ihop gruppen
+  text: "Högläsning i par är för hela klassen i åk 2–5. Mest hjälper den elever som läser orden rätt men ord för ord, platt eller fort, och elever som inte vågar läsa högt. Den som läser fel på fler än 5 ord av 100 i en lätt bok tränar avkodningen vid sidan av, till exempel i Upprepad läsning i åk 2–3 och TIL i grupp i åk 4–5. Varje par är två elever som läser ungefär lika säkert, och tabellen Paren säger hur du sätter ihop dem. I en grupp om fyra till åtta elever lyssnar du på alla par i varje pass."
+principer:
+  rubrik: Tre saker att hålla fast vid
+  text: "Innehållet kommer först: varje pass börjar med vad texten säger, och eleverna läser utan klocka, så att rösten för fram det i lyssnarens takt. Alla läser samtidigt, i kör eller i par, och ingen läser i tur och ordning inför klassen. Lyssnaren svarar med två meningar: vad hen förstod och vad rösten gjorde."
+
+tabeller:
+  - rubrik: "Balansen: innehållet och rösten"
+    plats: efter-inledning
+    meny: true
+    text: "Högläsning i par tränar två saker på en gång: att förstå vad texten säger och att läsa så att lyssnaren förstår det. Innehållet kommer först, och rösten är till för innehållet. Tränar klassen bara rösten, blir läsningen en uppvisning eller en tävling i fart, och pratar den bara om texten, blir det ingen högläsning. Tabellen visar hur det låter när balansen tippar över, och vad du gör då. När avkodningen tar all kraft hjälper Lässtrategier, ett A4 till dig på metodens sida."
+    kolumner: [Det du hör, Det som har hänt, Så gör du]
+    rader:
+      - ["Paret läser fort för att hinna längre i boken", "Farten har tagit över", "”Vad hände? Läs så att din lyssnare hinner förstå.”"]
+      - ["Rösten är glad fast texten är sorglig", "Rösten följer inte texten", "Fråga hur personen känner sig, och låt eleven pröva att läsa så på nästa ställe"]
+      - ["Lyssnaren säger bara ”Bra!”", "Lyssnaren säger inget om texten", "Be om båda meningarna, och fråga: ”Var hörde du det?”"]
+      - ["Paret pratar så länge att de inte hinner läsa", "Samtalet tar lästiden", "Säg: ”En fråga, och sedan läser ni.”"]
+      - ["Eleven läser rätt men platt och vet inte vad texten handlar om", "Avkodningen tar all kraft, eller så förstår eleven inte ett ord eller ett samband", "Prata om vad som händer och vad orden betyder, och läs nästa stycke för eleven"]
+  - rubrik: De fem strategierna
+    plats: efter-inledning
+    meny: true
+    text: "Strategierna står i samma ordning på affischen. Under Fråga dig står den fråga som eleven ställer sig om hur det ska låta, och oftast finns svaret i det texten säger. Stödmaterialet Utveckla högläsning är ett A4 på metodens sida med strategierna, tecknen och dina ord. Läs det när du förbereder Visa."
+    kolumner: [Strategin, Fråga dig, Så visar du, Lyssna efter]
+    rader:
+      - ["1 · Tankepausen\n/ kort paus, // lång paus\nDär en ny tanke börjar, längre vid punkten och före det spännande. I en dikt också vid radslutet", "Var börjar en ny tanke?", "Läs ”Lisa smög fram och öppnade. Där satt en liten hund.” först utan paus vid punkten och sedan med, och fråga vad pausen gjorde", "Paus inne i en fras eller vid radslutet i en berättelse, eller en lång paus vid varje komma"]
+      - ["2 · Frågan och utropet\nring runt ? och !\nRösten visar om någon säger, undrar eller ropar", "Säger hen något, undrar hen eller ropar hen?", "Läs ”Mamma kommer.”, ”Kommer mamma?” och ”Mamma kommer!” Vad är skillnaden?", "Alla meningar låter likadant, eller rösten går rakt upp vid varje frågetecken"]
+      - ["3 · Repliken\nruta runt det som sägs\nSom personen känner sig, och sedan berättarens röst igen", "Vem säger det, och hur känns det?", "Läs repliken med två känslor, låt klassen välja den som passar texten, och fråga: ”Var pratar hon, och var berättar jag?”", "Repliken och ”sa hon” i samma ton"]
+      - ["4 · Det viktiga ordet\nstreck under\nLite tydligare än orden runt det", "Vilket ord är viktigast?", "Betona olika ord i ”Det var inte min cykel”, och fråga vad meningen betyder då", "Alla ord lika starka, eller betoning som inte passar det eleven vill säga"]
+      - ["5 · Lyssnarens takt\n~ långsamt vid det viktiga\nLugnt och så högt att lyssnaren hör", "Hänger lyssnaren med?", "Läs ett stycke för fort och sedan i lyssnarens takt, och titta upp vid en lång paus", "Eleven läser fort och tappar ord, läser för tyst eller tittar bara i boken"]
+    not: "Med ”Jag hörde att du …” säger lyssnaren vad rösten gjorde på ett ställe, gärna med veckans strategi: ”Jag hörde att du pausade före ’Där satt’.” En svensk fråga börjar ofta på en lite högre ton och faller mot slutet, så säg ”läs så att det låter som en fråga” och inte att rösten ska gå upp. Ringen runt frågetecknet visar eleven frågan innan meningen börjar."
+  - rubrik: Det första passet
+    plats: efter-tidsschema
+    meny: true
+    kolumner: [Delen, Tid, Så gör du]
+    rader:
+      - ["Ramarna och paren", "0–⁠5 min", "Berätta om de åtta veckorna och läsningen för de yngre, visa affischen och säg vilka som läser ihop. Var och en i paret berättar om en bok hen minns."]
+      - ["Visa parläsningen", "5–⁠9 min", "En elev läser för dig. Var först en lyssnare som rättar direkt och bara säger ”Bra!”, och sedan en som följer med, väntar och svarar."]
+      - ["Boken", "9–⁠17 min", "Framför varje par ligger två eller tre böcker som du har valt efter parets nivå. Paret läser bara baksidan eller första sidan för varandra och väljer en bok."]
+      - ["Avslutning", "17–⁠20 min", "Några par säger vilken bok de valde och varför, och alla sätter en lapp i sin bok."]
+    not: "Tankepausen börjar i passet efter. Hinner paren inte välja, väljer de klart i början av nästa pass."
+  - rubrik: "Paren: samma kamrat och samma bok"
+    plats: efter-tidsschema
+    meny: true
+    text: "Ordna klassen efter hur säkert eleverna läser, och sätt ihop två som ligger nära varandra och trivs ihop, men inte de två som läser minst säkert. Paret håller ihop alla åtta veckor, och fungerar ett par inte, ger du dem nya kamrater. Hos dagens par lyssnar du också på samspelet: följer lyssnaren med i boken, väntar hen, och säger svaret något om just den sidan?"
+    kolumner: [Delen, Så gör paret]
+    rader:
+      - ["Starten", "Paret ger varandra en high five och berättar vad som hände förra gången."]
+      - ["Läsningen", "Paret sitter bredvid varandra med boken mellan sig och läser en sida var, eller ett stycke var i åk 2–3. Lyssnaren följer med i boken."]
+      - ["Svaret", "Efter varje tur säger lyssnaren ”Jag förstod att …” och ”Jag hörde att du …” om ett ställe på sidan."]
+      - ["Ett svårt ord", "Lyssnaren räknar tyst till fyra och säger sedan ordet, eller ljudar det tillsammans med läsaren."]
+      - ["Slutet", "Paret sätter en lapp där de slutar, säger vad de tror händer sedan och tackar varandra."]
+      - ["En kamrat är borta", "Den som är kvar blir den tredje i ett par i närheten, och parets bok väntar."]
+    not: "Vid udda antal blir ett par tre, helst bland dem som läser säkrast, och de tre turas om. Den som läser härnäst säger lyssnarens två meningar. Är en kamrat borta, berättar paret som tar emot gästen först vad som har hänt i deras bok. Passar inget par, läser eleven för dig. Är kamraten borta länge, sätter du ihop ett nytt par."
+  - rubrik: Tips att plocka ur
+    plats: efter-fastnar
+    meny: true
+    text: "Basen är passets fyra delar och parets rutin. Ta till ett tips i taget, när det passar klassen."
+    kolumner: [När, Tipset]
+    rader:
+      - ["Någon läser fel på många ord", "Paret läser i kör, eller väljer en lättare bok."]
+      - ["Paret kan inte läsa ett ord, eller förstår det inte", "Kan paret läsa men inte förstå ordet, gissar de först ur meningen. Annars sätter de en lapp vid ordet, som du tar upp i Återkoppling."]
+      - ["Någon är orolig för att läsa högt", "Paret läser i kör, och eleven knackar på bordet när hen vill läsa själv. I Berätta mera! går eleven runt med sin kamrat, och de läser i kör."]
+      - ["Lyssnaren kommer inte på vad hen ska säga", "Låt lyssnaren först peka på stället, och lägg en lapp med de två meningarna på bänken."]
+      - ["Ett par behöver dig mer", "Låt paret vara med i två av grupperna, så att du hör det oftare."]
+      - ["Paret har kommit in i rutinen", "Läsaren svarar lyssnaren: ”Det var det jag ville.” eller ”På nästa sida ska jag …”"]
+      - ["Någon vill läsa för klassen", "I Återkoppling läser den som vill ett ställe ur parets bok för klassen."]
+      - ["Klassen behöver träna en strategi extra", "Gör Berätta mera! eller Speed-dating med en kort text i stället för Läs för en lyssnare."]
+      - ["Paret har läst ut sin bok", "Paret berättar om boken för ett annat par i delen Texten, innan de väljer en ny."]
+  - rubrik: Åk 2–3 och åk 4–5
+    plats: efter-urval
+    meny: true
+    kolumner: [Det som skiljer, Åk 2–3, Åk 4–5]
+    rader:
+      - ["Böckerna", "Sagor, fabler och lättlästa kapitelböcker med bilder", "Kapitelböcker"]
+      - ["Strategierna", "I vecka 4 och 5 visar du strategin kort, och läsaren väljer ett ställe för en paus, en fråga eller en replik", "I vecka 4 och 5 visar du strategin som vanligt, och läsaren väljer bland alla strategier hittills"]
+      - ["De yngre lyssnarna", "Förskoleklassen eller åk 1", "Åk 1 eller åk 2"]
+  - rubrik: "Läsningen för de yngre: vecka 6–8"
+    plats: efter-urval
+    meny: true
+    text: "Boka en yngre klass före vecka 1: mötet i början av vecka 6 och läsningen i vecka 8 är var sitt pass hos de yngre. Finns inga yngre elever på skolan, kan ni besöka en förskola, och annars läser eleven för någon hemma eller en vuxen på skolan. Varje elev läser en bilderbok för ett eller två barn, och två elever som vill kan läsa en bok ihop. Boken är kort och lätt: den tar omkring fem minuter att läsa, och eleven läser första uppslaget för sin kamrat nästan utan fel. Resten av vecka 6 och 7 vilar parets bok. I delen Texten berättar eleverna för sin kamrat om sin lyssnare och sin bok, och i vecka 7 prövar de sin fråga till lyssnaren på kamraten. I Visa visar du hur du förbereder ett uppslag ur en egen bilderbok: du skriver på en post-it-lapp vad som händer och hur du läser där, och läser sedan uppslaget som för ett yngre barn. I vecka 7 säger klassen var lappen ska sitta. I Läs för en lyssnare gör eleverna det som står för veckan i tabellen. Resten av vecka 8 läser paret vidare i sin bok, och i Visa tar du den strategi som många behöver."
+    kolumner: [När, Det eleverna gör]
+    rader:
+      - ["Vecka 6", "Träffar sin lyssnare, frågar vad hen tycker om, väljer en bilderbok till hen och börjar läsa den för sin kamrat. Går mötet inte att ordna, skriver de yngres lärare vad varje barn tycker om."]
+      - ["Vecka 7", "Sätter lappar i boken och tänker ut en fråga till sin lyssnare, med bladet Läsarens förberedelse. Läser boken för sin kamrat, som bara tittar på bilderna."]
+      - ["Vecka 8", "Visar framsidan, läser boken för sin lyssnare och ställer sin fråga. Berättar sedan för sin kamrat vad lyssnaren svarade."]
+      - ["Hemma", "Kan läsa boken för någon hemma, eller i telefon för någon i släkten. Lyssnaren säger sina två meningar eller skriver dem på lappen hem."]
+      - ["Efter vecka 8", "Kan läsa för de yngre fler gånger, med en ny bok och bladet Läsarens förberedelse, för att utveckla och befästa det de har lärt sig."]
+
+passrutin:
+  text: "Varje pass har samma fyra delar och bygger på en fråga och en strategi. I Texten ställer du en fråga om förståelsen, om texten och jag eller om texten och världen, och i Visa visar du veckans strategi. Varför den ordningen? Eleven behöver förstå texten för att ge den rätt röst, och lyssnarens svar visar om rösten förde fram det texten säger."
+  steg:
+    - { text: "Paren berättar vad som hände förra gången och svarar på dagens fråga.", fas: Texten }
+    - { text: "Du visar veckans strategi på ett ställe på tavlan.", fas: Visa }
+    - { text: "Paren läser vidare i sin bok, en sida var.", fas: Läs för en lyssnare }
+    - { text: "Du säger vad du hörde.", fas: Återkoppling }
+  efterPasset: Skriv på klasslistan vad du hörde hos dagens par och vad varje elev ska pröva.
+  kallas: delar
+tidsschema:
+  rubrik: Ett pass på 20 minuter
+  text: "Före vecka 1 delar du in paren i grupper om högst fyra par, och i varje pass lyssnar du på en grupp: dagens par. Är ni fyra till åtta elever, är alla par en grupp, och du lyssnar på dem i varje pass. Passet, strategierna och vad du lyssnar efter står också på Lektionskortet, ett A4 att ha framför dig."
+  rader:
+    - { tid: Före passet, fas: Förberedelse, vad: "Välj ett ställe på två till fyra meningar där veckans strategi behövs, ur boken du läser högt för klassen eller ur en kort text, och visa det stort på tavlan." }
+    - { tid: 0–⁠3 min, fas: Texten, vad: "Paren ger varandra en high five och berättar vad som hände förra gången. Ställ dagens fråga, som ”Hur tror ni att huvudpersonen känner sig nu?”, och paren svarar varandra." }
+    - { tid: 3–⁠6 min, fas: Visa, vad: "Fråga vad som händer på stället, skriv ett ord om det i marginalen och sätt veckans tecken. Läs stället utan strategin och sedan med den, och tänk högt om varför du läser så. Klassen läser efter dig." }
+    - { tid: 6–⁠18 min, fas: Läs för en lyssnare, vad: "Paren läser vidare i sin bok med veckans strategi, en sida var eller ett stycke var i åk 2–3, och lyssnaren säger sina två meningar efter varje tur. Lyssna omkring tre minuter på vart och ett av dagens par." }
+    - { tid: 18–⁠20 min, fas: Återkoppling, vad: "Säg en sak du hörde om texten och en om rösten." }
+  efter: "Det allra första passet står i tabellen Det första passet."
+steg:
+  rubrik: Vad du gör och säger i varje del
+  text: "Det du visar och säger för varje strategi står i tabellen De fem strategierna."
+  rader:
+    - namn: Texten
+      fraga: Vad säger texten?
+      gor: "Välj en fråga som passar parens olika böcker."
+      fraser:
+        - Hur tror ni att huvudpersonen känner sig nu?
+        - Har du varit med om något liknande?
+        - Kan det här hända på riktigt?
+    - namn: Visa
+      fraga: Hur ska det låta, så att lyssnaren förstår?
+      gor: "Fråga vad som händer, skriv ordet och sätt tecknet. Läs utan och med strategin, och tänk högt med strategins fråga."
+      fraser:
+        - Hur känns det för Lisa här?
+        - Lyssna när jag läser det utan paus. Och nu med.
+        - Vad förstod ni bättre nu?
+    - namn: Läs för en lyssnare
+      fraga: Vad förstod lyssnaren?
+      gor: "Lyssna på dagens par. Säg vad du förstod, vad i rösten som gjorde det och en sak att pröva i nästa tur."
+      fraser:
+        - Säg först vad du förstod.
+        - Jag förstod att han var rädd, för att du viskade.
+        - Vänta, så hittar kamraten ordet.
+    - namn: Återkoppling
+      fraga: Vad tar vi med oss?
+      gor: "Börja med det du hörde många göra."
+      fraser:
+        - Många pausade före det spännande, och då blev det spännande.
+arbetsform:
+  rubrik: "Arbetsform: i par, läraren visar, i par igen, gemensamt"
+  text: "Kamraterna i ett par sitter bredvid varandra på sina platser, och mellan passen ligger parets bok i en back i rummet. Alla läser samtidigt, och ingen läser ensam inför klassen om hen inte vill."
+  delar:
+    - { rubrik: 1. I par, text: "paren pratar om sin bok", faser: [Texten] }
+    - { rubrik: 2. Läraren visar, text: alla läser efter dig, faser: [Visa] }
+    - { rubrik: 3. I par igen, text: "en läser, en svarar", faser: [Läs för en lyssnare] }
+    - { rubrik: 4. Gemensamt, text: du säger vad du hörde, faser: [Återkoppling] }
+exempel:
+  valt:
+    rubrik: Klassen
+    text: "Det är andra passet i vecka 3, i en åk 3 med 24 elever, och veckans strategi är Repliken. Paren har läst ihop i två veckor. Amina och Malik läser en bok om Max, som bor på en gård. I dag lyssnar läraren på fyra par: Amina och Malik, Hugo och Wilma och två par till."
+  text:
+    - "Passet börjar i paren. Amina och Malik ger varandra en high five, och Malik berättar: ”Max hörde något i ladan, och där slutade vi.” Läraren frågar: ”Hur tror ni att huvudpersonen känner sig nu?” Amina tror att Max är rädd men nyfiken."
+    - "På tavlan står början av berättelsen Hunden vid dörren: ”Det knackade på dörren. Lisa satt alldeles stilla. – Vem är det? viskade hon. Ingen svarade.” Läraren frågar: ”Hur känns det för Lisa här?” Wilma säger: ”Hon är rädd. Hon sitter helt stilla.” Läraren skriver rädd i marginalen, ritar en ruta runt repliken och läser den glatt och högt. Klassen skrattar, och läraren frågar: ”Lät det som att Lisa var rädd?” ”Nej!” ropar alla. Läraren läser den igen, lågt och långsamt, och tänker högt: ”Hon viskar, för hon vill inte att den utanför ska höra henne.” Klassen läser efter läraren."
+    - "Paren läser vidare i sina böcker, ett stycke var. Amina kommer till en replik och viskar: ”Är det någon där?” Malik säger: ”Jag förstod att Max var rädd. Jag hörde att du viskade.” Hugo läser en ledsen replik lika glatt som resten. Läraren frågar: ”Hur känns det för honom här?” ”Ledsen”, säger Hugo, och nästa replik läser han långsammare och lägre."
+    - "I återkopplingen säger läraren: ”Många av er hittade repliker i er bok och läste dem med personens känsla, och då förstod lyssnaren hur det kändes.” Efteråt skriver läraren på klasslistan: Hugo prövar att titta efter replikerna först, och Amina att viska där det är spännande."
+roll:
+  rubrik: "Lärarens roll: visa, lyssna och säg vad du hörde"
+  text: "Du visar hur en god läsare för fram det texten säger: du läser först, med inlevelse, och tänker högt om varför. Sedan lyssnar du på paren och säger vad du förstod och vad rösten gjorde."
+  gor:
+    - Läs själv först, och tänk högt om innehållet och rösten.
+    - Lyssna på läsningen och samspelet i dagens par.
+    - Säg vad du förstod, vad i rösten som gjorde det och en sak att pröva.
+  undvik:
+    - Att låta klassen läsa i tur och ordning.
+    - Att ta tid på läsningen eller säga ”fortare”.
+    - Att bara säga ”Bra!”
+    - Att låta rösten bli en uppvisning som inte passar texten.
+urval:
+  rubrik: Var hittar du texterna?
+  text:
+    - "Paret läser en bok som de två väljer tillsammans ur en back som du ställer fram eller i skolbiblioteket. Välj böckerna i backen efter parens nivå, och gärna så att de hör till något som klassen arbetar med, som ett tema, en författare eller ett ämne. När paret har läst ut boken, väljer de en ny. Har skolan en bok i klassuppsättning, kan de par som klarar kravet Rätt nivå läsa den, varje par i sin takt, och då kan du visa strategin i samma bok."
+    - "Till strukturerna väljer du en text med flera ställen där strategin behövs, som en dikt, en artikel ur 8 Sidor eller ett stycke ur boken du läser högt. Kopiera den med stor stil, luft mellan raderna och bred marginal, en till varje elev. En dikt ur Tid för poesi eller En bro av poesi får du kopiera enligt skolans kopieringsavtal, och Litteraturbankens Skola har dikter som är fria att kopiera."
+  kravText: "Välj böcker som uppfyller tre krav:"
+  krav:
+    - { rubrik: Rätt nivå, text: Båda i paret läser fel på högst 5 ord av 100 i boken }
+    - { rubrik: Något att säga, text: Innehåll som väcker en känsla eller en tanke }
+    - { rubrik: Röster, text: "Repliker, frågor och utrop, där strategierna behövs" }
+hem:
+  rubrik: Hem och skola
+  text:
+    - "Lappen hem skickar du med i vecka 1 och en ny i vecka 8. Läsningen hemma är frivillig. Eleven läser en egen bok för någon som säger lyssnarens två meningar."
+progression:
+  text: "Vecka 1–5 har var sin strategi, och de tidigare är med i allt eleverna läser. I veckans första pass visar du den nya strategin med visningen i tabellen De fem strategierna. Då får Visa fem minuter och Läs för en lyssnare tio, och du hinner höra tre av dagens par. I vecka 1 visar du Tankepausen i passet efter det allra första, och där är klassen din lyssnare: några säger lyssnarens två meningar om din läsning, och du frågar ”Var hörde du det?” tills någon visar var i texten. Från vecka 4 säger klassen var tecknet ska stå på tavlan. I paret tittar läsaren då tyst igenom det hen ska läsa, väljer ett ställe där en strategi behövs och pekar på det innan hen läser, och lyssnarens ”Jag hörde att du …” gäller det stället. I åk 2–3 visar du strategin kort i vecka 4 och 5."
+  rader:
+    - { vecka: "1", led: Jag gör, fokus: Tankepausen, roll: "I det första passet sätter du i gång paren. Sedan visar du Tankepausen, och klassen är din lyssnare" }
+    - { vecka: "2", led: Jag gör, fokus: Frågan och utropet, roll: "Du visar, och paren läser frågorna och utropen i sin bok" }
+    - { vecka: "3", led: Vi gör, fokus: Repliken, roll: "Klassen väljer hur repliken ska låta, och paren läser replikerna i sin bok" }
+    - { vecka: "4", led: Vi gör, fokus: Det viktiga ordet, roll: "Klassen väljer ordet på tavlan, och läsaren pekar ut ett ställe innan hen läser" }
+    - { vecka: "5", led: Vi gör, fokus: Lyssnarens takt, roll: "Klassen väljer var du läser långsamt, och läsaren tittar upp på sin lyssnare vid de långa pauserna" }
+    - { vecka: "6", led: Du gör, fokus: Boken till lyssnaren, roll: "Eleverna träffar sin lyssnare och väljer en bilderbok, och du visar hur du förbereder din" }
+    - { vecka: "7", led: Du gör, fokus: Alla fem strategierna, roll: "Klassen säger var lappen ska sitta i din bok, och eleverna förbereder sin och läser den för kamraten" }
+    - { vecka: "8", led: Du gör, fokus: Läsningen för de yngre, roll: "Eleverna läser för de yngre eller hemma" }
+uppfoljning:
+  text: "Lyssna på några elever om dagen med provtexten i vecka 1 och 8, till exempel när klassen läser tyst. Varje elev tar omkring fyra minuter. Efter vecka 8 jämför du protokollen och bestämmer med eleven vad hen tränar vidare."
+  rader:
+    - { nar: Vecka 1, vad: "Eleven läser provtexten tyst och säger vad den handlar om. Säg sedan: ”Läs den högt så att jag förstår och känner det texten säger.” Spela in hela läsningen, och fyll i protokollet." }
+    - { nar: Varje pass, vad: "Lyssna på dagens par, och skriv på klasslistan vad du hörde och vad varje elev ska pröva. Nästa gång du hör paret börjar du där, och det som många behöver tar du upp i nästa pass." }
+    - { nar: Vecka 8, vad: "Eleven läser samma provtext, och du spelar in och fyller i protokollet för vecka 8. Spela sedan upp 20 sekunder från vecka 1, och låt eleven säga vad hen hör nu." }
+mal:
+  text: "Efter de åtta veckorna ska eleven oftare än förut:"
+  punkter:
+    - Säga vad en text handlar om och hur den ska låta, så att lyssnaren förstår
+    - Pausa där en ny tanke börjar, och läsa frågor, utrop och repliker så att de låter som de är menade
+    - Läsa i lugn takt och säga det viktiga ordet lite tydligare, så att lyssnaren hänger med
+    - Våga läsa högt för en ny lyssnare
+checklista:
+  rubrik: Checklista
+  punkter:
+    - "Före vecka 1: bokat en yngre klass, satt ihop paren, delat dem i grupper om högst fyra och valt två eller tre böcker per par. Skrivit ut affischen på A3 och kopierat lappen hem, provtexterna och protokollen, och ordnat något att spela in med."
+    - Valt ett ställe till varje pass i veckan.
+    - "Före vecka 6: lånat omkring två korta bilderböcker per elev och kopierat Läsarens förberedelse."
+grund:
+  text: "Att läsa olika texter ger liknande resultat som att läsa samma text flera gånger, om eleverna läser lika mycket (Kuhn och Stahl, 2003; Hudson m.fl., 2020). Rösten och läsförståelsen hänger ihop, och förståelsen kan hjälpa eleven att välja hur det ska låta (Wolters m.fl., 2022; Godde m.fl., 2020). Bland 30 elever i åk 3 som läste på eller över årskursnivå mindes de som ombads läsa för innehållets skull mer än de som ombads läsa fort (O’Shea och Sindelar, 1984). Kamratlärande i par ger mest när paren har fått träning och följer en fast form (Topping, 2000; Evidence for Learning, 2021). I jämförande studier gav turläsning inför klassen sämre resultat än gemensam läsning efter lärarens förebild (Kuhn och Stahl, 2003)."
+  kallor: "Bygger på Kuhn och Stahl (2003), Hudson m.fl. (2020), Wolters m.fl. (2022), Godde m.fl. (2020), O’Shea och Sindelar (1984), Topping (2000, 2014), Evidence for Learning (2021), Duran m.fl. (2019), Meisinger m.fl. (2004), Hautala m.fl. (2023), Young och Nageldinger (2014), Huhtamäki (2015), Horne och Roll (2021) och Fohlin och Wilson (2025)."
+
+ramar:
+  rubrik: Materialet
+  text:
+    - "Här finns lektionskortet, affischen, de två strukturerna, Läsarens förberedelse, lappen hem, provtexterna och lyssnarprotokollet. Affischen sitter på väggen alla åtta veckor och får gärna sitta kvar efteråt, så att den påminner både dig och eleverna om strategierna när ni läser högt. Strukturerna visar du på tavlan när klassen tränar en strategi extra."
+  ramar:
+    - rubrik: "Affischen: fem sätt att läsa för en lyssnare"
+      text:
+        - Läs så att den som lyssnar förstår och känner det texten säger.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Affischen, text: "Skriv ut bladet Affischen på A3, eller förstora det till 141 procent i kopiatorn. Sätt upp affischen där alla ser den, och peka på den i Visa och i Återkoppling." }
+    - rubrik: "Strukturen, extra träning: Berätta mera!"
+      text:
+        - Läs ditt ställe för många lyssnare. Varje ny lyssnare hör din läsning för första gången.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Extra träning, text: "När du vill att klassen ska träna en strategi extra, gör ni strukturen i omkring tolv minuter i stället för delen Läs för en lyssnare. Välj en kort text med flera ställen där strategin behövs, och kopiera den till varje elev. Säg vilken strategi eleverna tränar, och visa den här sidan på tavlan. Du är en av lyssnarna. Första gången blir det rörigt, så håll övningen kort och gör om den en annan dag." }
+      listor:
+        - rubrik: Så gör ni
+          rader:
+            - ["Välj ett ställe på två till fyra meningar i texten, och sätt tecknet för strategin."]
+            - ["Läs stället tyst. Gå sedan runt i rummet med texten, och sträck upp handen."]
+            - ["Möt någon som har handen uppe och hör till ett annat par, och ge varandra en high five."]
+            - ["Säg varför du valde stället, och läs det."]
+            - ["Lyssnaren säger: ”Jag förstod att …” och ”Jag hörde att du …”."]
+            - ["Byt roller, så att hen läser för dig."]
+            - ["Säg tack, sträck upp handen och hitta en ny lyssnare."]
+            - ["När läraren säger stopp, berättar några vilket ställe de minns bäst."]
+        - rubrik: Så tränar ni högläsning
+          rader:
+            - ["Bli lite bättre på strategin för varje ny lyssnare, och lyssna efter den när den andra läser för dig."]
+    - rubrik: "Strukturen, extra träning: Speed-dating"
+      text:
+        - Sitt i två rader mitt emot varandra. Läs, lyssna och byt stol.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Extra träning, text: "När du vill att klassen ska träna en strategi extra, gör ni strukturen i stället för delen Läs för en lyssnare. Kopiera en kort text till varje elev, ställ stolarna i två rader mitt emot varandra och visa den här sidan på tavlan. Säg vilken strategi eleverna tränar, och säg byt efter omkring två minuter, när de flesta har läst och svarat. Vid udda antal sitter du på den lediga stolen." }
+      listor:
+        - rubrik: Så gör ni
+          rader:
+            - ["Välj ett ställe på två till fyra meningar i texten, och sätt tecknet för strategin."]
+            - ["Sätt dig i samma rad som din kamrat, mitt emot någon i den andra raden."]
+            - ["Den i rad A läser sitt ställe först."]
+            - ["Lyssnaren säger: ”Jag förstod att …” och ”Jag hörde att du …”."]
+            - ["Nu läser den i rad B, och den i rad A svarar."]
+            - ["När läraren säger byt flyttar rad B en stol åt höger, och den som sitter längst till höger går till stolen längst till vänster."]
+            - ["Nu läser den i rad A för sin nya lyssnare, och ni gör som förut."]
+            - ["Sist säger några vilket ställe de minns bäst."]
+        - rubrik: Så tränar ni högläsning
+          rader:
+            - ["Säg varför du valde stället innan du läser, så vet lyssnaren vad hen ska lyssna efter."]
+    - rubrik: "Läsarens förberedelse: inför läsningen för de yngre"
+      text:
+        - Gör steg 1–4 i vecka 6 och 7. Steg 5 gör du hos din lyssnare, och då har du bladet med dig.
+      huvud:
+        - { rubrik: Namn }
+      delar:
+        - rubrik: Min läsning
+          falt:
+            - { rubrik: Min lyssnare och vad hen tycker om, text: "" }
+            - { rubrik: Boken, text: "" }
+            - { rubrik: Min fråga, text: "" }
+            - { rubrik: Svaret på min fråga, text: "" }
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Vecka 6–8, text: "Kopiera bladet till varje elev. Eleven fyller i raden Min lyssnare när hen träffar de yngre i vecka 6, och den sista efter läsningen i vecka 8." }
+      listor:
+        - rubrik: Så förbereder du dig
+          rader:
+            - ["1. Läs boken tyst. Vad händer, och hur känns det?"]
+            - ["2. Sätt post-it-lappar på tre till fem ställen i boken. Skriv på varje lapp vad som händer och hur du läser där, som paus, viska eller långsamt."]
+            - ["3. Läs boken för din kamrat, som bara tittar på bilderna och sedan säger lyssnarens två meningar."]
+            - ["4. Tänk ut en fråga att ställa till din lyssnare efteråt."]
+            - ["5. Visa framsidan för din lyssnare och fråga ”Vad tror du händer?” Läs sedan boken, och ställ din fråga. Skriv svaret på bladet efteråt."]
+    - rubrik: Lappen hem
+      text:
+        - Lappen går hem i vecka 1, och en ny i vecka 8, när eleverna kan läsa sin bilderbok för någon hemma.
+      huvud:
+        - { rubrik: Namn }
+      delar:
+        - rubrik: Till vårdnadshavaren
+          falt:
+            - { rubrik: Högläsning i par, text: "I åtta veckor läser klassen högt i par ur en bok som paret har valt. Eleverna lär sig läsa så att den som lyssnar förstår och känner det texten säger. Ibland kan ditt barn läsa högt för dig ur en egen bok." }
+            - { rubrik: När du lyssnar, text: "Lyssna utan att rätta, och vänta en stund om ditt barn fastnar på ett ord. Säg sedan vad du förstod och vad du hörde att rösten gjorde, till exempel: ”Jag förstod att Lisa var rädd. Jag hörde att du viskade.”" }
+            - { rubrik: Ett annat språk hemma, text: "Talar ni ett annat språk hemma, kan ditt barn först berätta på det språket vad texten handlar om." }
+            - { rubrik: Vecka 8, text: "De åtta veckorna slutar med att eleverna läser en bilderbok för yngre elever. Ditt barn kan också läsa boken för dig eller för någon i släkten, och det går bra i telefon. Skriv gärna dina två meningar i tabellen under." }
+      listor:
+        - rubrik: Lyssnarens två meningar
+          kolumner: [Datum och text, Jag förstod att, Jag hörde att du]
+          rader:
+            - ["", "", ""]
+            - ["", "", ""]
+            - ["", "", ""]
+            - ["", "", ""]
+    - rubrik: "Åk 2–3, provtext: Var är mössan?"
+      text:
+        - Läs texten tyst. Säg vad den handlar om, och läs den sedan högt för din lärare.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Vecka 1 och vecka 8, text: "Eleven läser texten tyst och säger vad den handlar om. Sedan läser hen hela texten högt för dig. Spela in läsningen, och fyll i protokollet." }
+      listor:
+        - rubrik: Var är mössan?
+          rader:
+            - ["I dag var mössan borta."]
+            - ["Elsa letade under sängen, i lådan och bakom dörren."]
+            - ["– Har du sett min mössa? frågade hon pappa."]
+            - ["– Nej, sa pappa. Har du tittat i väskan?"]
+            - ["Elsa öppnade väskan. Där låg böcker, pennor och en banan."]
+            - ["Men ingen mössa."]
+            - ["Då såg hon katten. Katten låg i korgen och sov på något rött."]
+            - ["– Där är den ju! ropade Elsa."]
+        - rubrik: Frågorna
+          rader:
+            - ["Vad handlar texten om?"]
+    - rubrik: "Åk 4–5, provtext: Källaren"
+      text:
+        - Läs texten tyst. Säg vad den handlar om, och läs den sedan högt för din lärare.
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Vecka 1 och vecka 8, text: "Eleven läser texten tyst och säger vad den handlar om. Sedan läser hen hela texten högt för dig. Spela in läsningen, och fyll i protokollet." }
+      listor:
+        - rubrik: Källaren
+          rader:
+            - ["I går bad mormor Adam hämta en burk sylt i källaren."]
+            - ["– Det tar bara en minut, sa hon."]
+            - ["Adam tände lampan och gick nerför trappan. Det luktade fukt, gammalt trä och potatis."]
+            - ["Plötsligt slocknade lampan."]
+            - ["Adam stod alldeles stilla. Han hörde sitt eget hjärta, och någonstans i mörkret rasslade det."]
+            - ["– Vem är där? viskade han."]
+            - ["Inget svar. Rasslet kom närmare, och något strök mot hans ben."]
+            - ["– Hjälp! skrek Adam och sprang uppför trappan."]
+            - ["I köket satt mormor och log. Efter Adam kom katten Sotis."]
+            - ["– Var det inte du som skulle hämta sylten? frågade mormor."]
+        - rubrik: Frågorna
+          rader:
+            - ["Vad handlar texten om?"]
+    - rubrik: "Lyssnarprotokollet: före och efter"
+      text:
+        - "Fyll i protokollet i vecka 1 och i vecka 8, och skriv vecka och datum överst. För varje strategi skriver du 1 om eleven inte använder den än, 2 om hen gör det på något ställe och 3 om hen gör det på de flesta ställena. Kunde eleven säga vad texten handlar om? Skriv ja, delvis eller nej under Förstod, och under Orden hur många ord eleven läste fel. Fler än 3 fel i åk 2–3 och fler än 4 fel i åk 4–5 är fler än 5 av 100, och då lyssnar du på eleven i parets bok. Läser eleven fel på fler än 5 ord av 100 där också, väljer paret en lättare bok, och eleven tränar avkodningen vid sidan av. På baksidan skriver du elevens svar på ”Hur känns det att läsa högt för någon?”, och i vecka 8 också det eleven säger om inspelningen. Inspelningarna raderar du efter skolans rutin när perioden är slut."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: Före och efter, text: "Ett blad har 14 rader, så kopiera två blad till en klass i vecka 1 och två i vecka 8. Fyll i dem medan eleven läser provtexten eller direkt efter." }
+      listor:
+        - rubrik: Lyssnarprotokollet
+          larare: true
+          kolumner: [Elev, Förstod, Pausen, "? och !", Repliken, Viktiga ordet, Takten, Orden]
+          rader:
+            - ["", "", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", "", ""]
+            - ["", "", "", "", "", "", "", ""]
+
+lathund:
+  innehall: Nästa del av parets bok
+  metoden:
+    text:
+      - "I åtta veckor läser klassen högt i par, i pass om 20 minuter. Varje pass har fyra delar: Texten, Visa, Läs för en lyssnare och Återkoppling. Vecka 1–5 har var sin av de fem strategierna."
+      - "Paret håller ihop alla åtta veckor och läser vidare i en bok som de har valt tillsammans. I varje pass lyssnar du på dagens par, som är högst fyra par i en klass och alla par i en liten grupp. I vecka 6 och 7 förbereder eleverna var sin bilderbok, och i vecka 8 läser de den för yngre elever eller någon hemma."
+    ruta:
+      rubrik: Tre saker att hålla fast vid
+      punkter:
+        - { fet: Innehållet först., text: "Varje pass börjar med vad texten säger, och rösten ska föra fram det." }
+        - { fet: Alla läser samtidigt., text: "De läser i kör eller i par. Ingen läser i tur och ordning inför klassen." }
+        - { fet: Lyssnaren svarar med två meningar., text: "Vad hen förstod och vad rösten gjorde." }
+    tabell:
+      rubrik: Passets fyra delar
+      kolumner: [Del, Exempelfraser]
+      rader:
+        - ["1 · Texten\nVad säger texten?", "”Berätta vad som hände förra gången.”\n”Hur tror ni att huvudpersonen känner sig nu?”"]
+        - ["2 · Visa\nHur ska det låta, så att lyssnaren förstår?", "”Lyssna när jag läser det utan paus. Och nu med.”\n”Vad förstod ni bättre nu?”"]
+        - ["3 · Läs för en lyssnare\nVad förstod lyssnaren?", "”Säg först vad du förstod.”\n”Jag förstod att han var rädd, för att du viskade.”"]
+        - ["4 · Återkoppling\nVad tar vi med oss?", "”Många pausade före det spännande, och då blev det spännande.”"]
+    not: "Eleverna läser utan klocka och i lyssnarens takt."
+  pass:
+    rubrik: "Vi kör ett pass i åk 3: Repliken, vecka 3"
+    textRubrik: Stället du visar på tavlan
+    titel: Hunden vid dörren
+    text:
+      - "Det knackade på dörren. Lisa satt alldeles stilla."
+      - "– Vem är det? viskade hon."
+      - "Ingen svarade."
+    repliker:
+      - Hur känns det för Lisa här?
+      - Säg först vad du förstod.
+    forberett:
+      rubrik: Det jag förberett
+      text:
+        - "Början av Hunden vid dörren står stort på tavlan, med repliken att visa. Paren har böcker och lappar framme, och dagens par är fyra."
+    schema:
+      rubrik: 20 minuter, steg för steg
+      rader:
+        - { tid: Före, fas: Förberedelse, vad: "Välj stället och visa det stort på tavlan." }
+        - { tid: 0–⁠3, fas: 1 · Texten, vad: "Paren gör high five och berättar om förra gången. De svarar varandra på dagens fråga.", fraser: [Hur tror ni att huvudpersonen känner sig nu?] }
+        - { tid: 3–⁠6, fas: 2 · Visa, vad: "Skriv ordet i marginalen, sätt tecknet, läs utan och med strategin. Alla läser efter dig.", fraser: ["Lät det som att Lisa var rädd?"] }
+        - { tid: 6–⁠18, fas: 3 · Läs för en lyssnare, vad: "Paren läser vidare, ett stycke var, svarar varandra och sätter en lapp där de slutar. Du lyssnar på dagens par.", fraser: ["Hur känns det för honom här?"] }
+        - { tid: 18–⁠20, fas: 4 · Återkoppling, vad: "En sak om texten och en om rösten.", fraser: ["Många läste replikerna med personens känsla, och då förstod lyssnaren hur det kändes."] }
+  mall:
+    rubrik: De fem strategierna
+    underrad: Läs så att lyssnaren förstår och känner det texten säger
+    block:
+      - typ: tabell
+        rubrik: Fråga först vad som händer, och sedan hur det ska låta
+        kolumner: [Strategin, Tecknet, Fråga dig]
+        rader:
+          - ["1 · Tankepausen", "/ kort paus, // lång paus", "Var börjar en ny tanke?"]
+          - ["2 · Frågan och utropet", "ring runt ? och !", "Säger hen något, undrar hen eller ropar hen?"]
+          - ["3 · Repliken", "ruta runt det som sägs", "Vem säger det, och hur känns det?"]
+          - ["4 · Det viktiga ordet", "streck under", "Vilket ord är viktigast?"]
+          - ["5 · Lyssnarens takt", "~ långsamt vid det viktiga", "Hänger lyssnaren med?"]
+      - { typ: not, text: "Lyssnarens två meningar: ”Jag förstod att …” och ”Jag hörde att du …”" }
+  material:
+    rubrik: Vad du behöver för ett pass
+    kravEtikett: Bokkrav
+    var:
+      rubrik: Var texterna finns
+      punkter:
+        - { fet: Parets bok., text: Paret väljer den ur din back eller i biblioteket. }
+        - { fet: Stället du visar., text: "Ur högläsningsboken eller en kort text." }
+        - { fet: Strukturerna., text: "En dikt eller en artikel ur 8 Sidor." }
+        - { fet: Materialet., text: "Lektionskortet, affischen, strukturerna, Läsarens förberedelse, lappen hem, provtexterna och protokollet, i Materialet." }
+    bordet:
+      - Parets bok, med en lapp där paret slutade
+      - Affischen på väggen
+      - Stället du visar, stort på tavlan
+
+lektionskort:
+  - text: "Lektionskortet är passet på ett A4: målet, de fem strategierna med tecknen och elevens frågor, passet med det du gör och säger, och Lyssna efter. Skriv ut det och ha det framför dig under passet."
+elevblad:
+  "Läsarens förberedelse: inför läsningen för de yngre":
+    Min lyssnare och vad hen tycker om: 2.5
+    Boken: 1.2
+    Min fråga: 2.5
+    Svaret på min fråga: 2.5
+film:
+  sekunder: 29.29
+  beskrivning: "Först: vad säger texten? Läraren frågar: ”Hur känns det för Lisa här?” Wilma säger: ”Hon är rädd.” Sedan: hur ska det låta? Läraren skriver: ”rädd”. Läraren säger: ”Inte glatt. Hon är rädd, så jag viskar: Vem är det?” Klassen läser efter läraren. Läraren säger: ”Läs efter mig.” Alla läser: ”Vem är det?” Amina och Malik läser om Max. Amina viskar: ”Är det någon där?” Lyssnaren säger sina två meningar. Malik säger: ”Jag förstod att Max var rädd. Jag hörde att du viskade.”"
+  rubrik: "Från texten till rösten"
+  ingress: "Fyra bilder ur filmen om ett pass. Läraren frågar hur Lisa känner sig i berättelsen på tavlan, skriver ordet rädd i marginalen, ritar en ruta runt repliken och viskar den. Klassen läser repliken efter läraren. Sedan läser paren vidare i sin bok, och Amina viskar en replik för Malik, som säger vad han förstod och vad rösten gjorde. Filmen på metodens sida visar samma sak i rörelse."
+  stillbilder:
+    - text: "Läraren frågar hur Lisa känner sig. Wilma svarar."
+    - text: "Läraren skriver ordet rädd och ramar in repliken."
+    - text: "Klassen läser repliken efter läraren."
+    - text: "Malik säger vad han förstod och vad rösten gjorde."

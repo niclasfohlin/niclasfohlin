@@ -1,0 +1,181 @@
+{
+ "design": "strategipapper",
+ "fil": "Lektionskort - Hoglasning i par",
+ "titel": "Högläsning i par",
+ "dokumenttitel": "Högläsning i par · Lektionskort",
+ "knapp": "Lektionskort",
+ "info": [
+  "Åk 2–5 · 20 min · klass eller grupp"
+ ],
+ "infoUtanRuta": true,
+ "fot": "© Niclas Fohlin, niclasfohlin.se, där du skriver ut metodens material",
+ "ingress": "**Mål:** kunna läsa högt så att lyssnaren förstår det texten säger.",
+ "ruta": {
+  "storlek": {
+   "rubrik": 23,
+   "text": 20
+  },
+  "punkter": [
+   {
+    "rubrik": "Förstå",
+    "text": "Vad händer, och hur känns det?"
+   },
+   {
+    "rubrik": "Bestäm",
+    "text": "Hur ska det låta med veckans strategi?"
+   },
+   {
+    "rubrik": "Läs",
+    "text": "Läs vidare i boken för din kamrat."
+   },
+   {
+    "rubrik": "Svara",
+    "text": "”Jag förstod att …” ”Jag hörde att du …”"
+   }
+  ]
+ },
+ "delar": [
+  {
+   "rubrik": "De fem strategierna",
+   "text": "Vecka 1–5 har en strategi var, och de tidigare följer med. Vecka 6–7 har alla fem.",
+   "kolumner": [
+    "Strategin",
+    "Fråga dig",
+    "Så visar du"
+   ],
+   "bredder": [
+    24,
+    28,
+    48
+   ],
+   "storlek": 18,
+   "tat": true,
+   "rader": [
+    [
+     "1 · Tankepausen\n/ kort paus, // lång paus",
+     "Var börjar en ny tanke?",
+     "Läs utan paus och med, och fråga vad pausen gjorde."
+    ],
+    [
+     "2 · Frågan och utropet\nring runt ? och !",
+     "Säger hen något, undrar hen eller ropar hen?",
+     "Läs ”Mamma kommer.” ”Kommer mamma?” ”Mamma kommer!” Frågan börjar på en lite högre ton."
+    ],
+    [
+     "3 · Repliken\nruta runt det som sägs",
+     "Vem säger det, och hur känns det?",
+     "Läs repliken med två känslor, och låt klassen välja den som passar texten."
+    ],
+    [
+     "4 · Det viktiga ordet\nstreck under",
+     "Vilket ord är viktigast?",
+     "Betona olika ord i ”Det var inte min cykel”, och fråga vad meningen betyder då."
+    ],
+    [
+     "5 · Lyssnarens takt\n~ långsamt vid det viktiga",
+     "Hänger lyssnaren med?",
+     "Läs för fort och sedan i lyssnarens takt. Titta upp vid en lång paus."
+    ]
+   ]
+  },
+  {
+   "rubrik": "Passet",
+   "text": "Rutorna överst är det eleven gör. Alla läser samtidigt, och ingen läser i tur och ordning.",
+   "kolumner": [
+    "Delen",
+    "Så leder du",
+    "Du säger, till exempel"
+   ],
+   "bredder": [
+    21,
+    45,
+    34
+   ],
+   "storlek": 18,
+   "tat": true,
+   "rader": [
+    [
+     "Före passet",
+     "Välj två till fyra meningar där veckans strategi behövs, och visa dem stort på tavlan. Dagens par är högst fyra par i en klass, och alla par i en liten grupp. Det allra första passet står i metoden."
+    ],
+    [
+     "Texten\n0–3 min · i par",
+     "Paren ger varandra en high five och berättar vad som hände förra gången. Ställ dagens fråga, och paren svarar varandra.",
+     "”Hur tror ni att huvudpersonen känner sig nu?”\n”Har du varit med om något liknande?”\n”Kan det här hända på riktigt?”"
+    ],
+    [
+     "Visa\n3–6 min · du visar",
+     "Fråga vad som händer, skriv ett ord om det i marginalen på tavlan, till exempel rädd, och sätt tecknet. Läs utan och med strategin, och tänk högt. Alla läser efter dig. Från vecka 4 säger klassen var tecknet ska stå.",
+     "”Vad förstod ni bättre nu?”"
+    ],
+    [
+     "Läs för en lyssnare\n6–18 min · i par",
+     "Paren läser vidare, en sida var eller ett stycke i åk 2–3, och lyssnaren säger två meningar efter varje tur. Från vecka 4 pekar läsaren först ut ett ställe. Lyssna på dagens par, omkring tre minuter vid varje.",
+     "”Säg först vad du förstod.”\n”Jag förstod att han var rädd, för att du viskade.”\n”Sätt en post-it-lapp där ni slutar.”"
+    ],
+    [
+     "Återkoppling\n18–20 min · alla",
+     "Säg en sak du hörde om texten och en om rösten.",
+     "”Många pausade före det spännande, och då blev det spännande.”"
+    ],
+    [
+     "Efter passet",
+     "Skriv på klasslistan vad du hörde och vad varje elev ska pröva."
+    ]
+   ]
+  },
+  {
+   "rubrik": "Lyssna efter",
+   "text": "Säg vad du förstod och vad i rösten som gjorde det.",
+   "kolumner": [
+    "",
+    "Det du hör",
+    "Så gör du"
+   ],
+   "bredder": [
+    15,
+    37,
+    48
+   ],
+   "storlek": 18,
+   "tat": true,
+   "rader": [
+    [
+     "Farten",
+     "Paret läser fort för att hinna längre.",
+     "”Vad hände? Läs så att din lyssnare hinner förstå.”"
+    ],
+    [
+     "Rösten",
+     "Platt, eller en röst som inte passar texten.",
+     "Fråga vad som händer och hur det känns, och låt eleven pröva det på nästa ställe."
+    ],
+    [
+     "Pausen",
+     "Paus inne i en fras, eller en lång paus vid varje komma.",
+     "”Var börjar en ny tanke?” Läs meningen för eleven, och låt hen läsa efter."
+    ],
+    [
+     "Frågan",
+     "Frågan låter som resten, eller rösten går upp vid varje ?",
+     "”Läs så att det låter som en fråga.”"
+    ],
+    [
+     "Betoningen",
+     "Alla ord lika starka, eller betoning som inte passar meningen.",
+     "”Vilket ord är viktigast här?” Låt eleven läsa meningen med betoningen där."
+    ],
+    [
+     "Lyssnaren",
+     "Lyssnaren säger bara ”Bra!” eller rättar direkt.",
+     "Be om båda meningarna. Påminn om att räkna till fyra."
+    ],
+    [
+     "Oron",
+     "Eleven vill inte läsa.",
+     "Paret läser i kör, och eleven knackar när hen vill läsa själv."
+    ]
+   ]
+  }
+ ]
+}

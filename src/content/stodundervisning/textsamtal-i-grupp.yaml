@@ -37,6 +37,7 @@ relaterade:
   - upprepad-lasning
   - laslistor-i-grupp
   - ordverkstad-i-grupp
+  - hoglasning-i-par
 utkast: false
 centrala:
   - id: lastexter

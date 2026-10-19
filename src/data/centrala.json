@@ -58,6 +58,15 @@
     "mejl": "ett A4 att ha i handen under skrivtiden, med strategierna för ordet och meningen och för texten och läsaren"
   },
   {
+    "id": "utveckla-hoglasning",
+    "namn": "Utveckla högläsning",
+    "slag": "pdf",
+    "del": "stodmaterial",
+    "adress": "/stodundervisning/utveckla-hoglasning.pdf",
+    "kort": "/utveckla-hoglasning",
+    "mejl": "ett A4 för läraren, med de fem strategierna för högläsning, tecknen och frågorna om innehållet"
+  },
+  {
     "id": "aktiviteter",
     "namn": "Ta fram en aktivitet",
     "slag": "sida",

@@ -7646,5 +7646,33 @@
         "till": 34
       }
     ]
+  },
+  "hoglasning-i-par": {
+    "word": "18477241d72d2a60b326fecf925ea02110112627210a7b172fe0eed19d28f14c",
+    "pdf": "184254e587a93300ef74ac2c937fb1826625d9f1e7d94e2dea1a1c1c107deb98",
+    "sidor": 27,
+    "kB": 750,
+    "datum": "2026-10-19"
+  },
+  "hoglasning-i-par-metoden": {
+    "word": "f8482143ec50bf8199b35446fe5cbcaab89146c24d2da9b3a0c5dc1d75a20a37",
+    "pdf": "ca8245c1c6cedbe164324efbaea2371aeb6a47b06714a090bbb19cea23aa9b5a",
+    "sidor": 11,
+    "kB": 420,
+    "datum": "2026-10-19"
+  },
+  "hoglasning-i-par-lathund-text": {
+    "word": "f20d884c11750d0f15121f98ea8aabe603afa05753afb118845e7d326abbe7fb",
+    "pdf": "51982a02d0dfd2d9bdd7600e6d8edcc3c9309cacb08f694c1f95b2b8e672911c",
+    "sidor": 1,
+    "kB": 153,
+    "datum": "2026-10-19"
+  },
+  "hoglasning-i-par-lektionskort": {
+    "word": "2afd8ce95be768be6b260abe6aa4639e800b4fc73fe868ba825272217fcd9ec6",
+    "pdf": "b6a205f2835b1539387771ee0b9e80d443183092b28b7678f147d8056668b203",
+    "sidor": 1,
+    "kB": 89,
+    "datum": "2026-10-19"
   }
 }

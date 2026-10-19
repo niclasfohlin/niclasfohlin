@@ -93,6 +93,11 @@
   status = 301
 
 [[redirects]]
+  from = "/utveckla-hoglasning"
+  to = "/stodundervisning/utveckla-hoglasning.pdf"
+  status = 301
+
+[[redirects]]
   from = "/gruppstarkande"
   to = "/stodundervisning/gruppstarkande-aktiviteter/aktiviteter"
   status = 301
