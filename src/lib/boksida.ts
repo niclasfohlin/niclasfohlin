@@ -121,7 +121,10 @@ export function boksidansMatt(l: Lastext): Boksidesmatt {
   const forsok = (line: number): Boksidesmatt => {
     const radPt = BOKRAD.Andika * pt * line / 240;
     const storPt = Math.round((0.8645 * pt + radPt) / (ANFANG_MULTIPEL * 0.976));
-    const kolW = nedBildpunkt(((m?.[1] ? 0.3 : 0) + (anfangBredd[m?.[2]?.toUpperCase() ?? ''] ?? 0.8)) * 1.04 * storPt * 20) + 120;
+    // Ett citattecken före bokstaven tar sin bredd ur anfang.json och lite till, som hos metodriggen (build-docx.js,
+    // 2026-10-19): med 0,3 bröt Google Dokument raden efter citattecknet, så att bokstaven hamnade under det och bladet blev
+    // två sidor (Benen på ryggen och Skeden, Textsamtal i grupp).
+    const kolW = nedBildpunkt(((m?.[1] ? (anfangBredd[m[1]] ?? 0.34) + 0.12 : 0) + (anfangBredd[m?.[2]?.toUpperCase() ?? ''] ?? 0.8)) * 1.04 * storPt * 20) + 120;
     const spalt = (BOKBREDD - luft - kolW - luft) / 20 * 0.965;
     // På Lättläst står en mening per rad. En mening som inte ryms bredvid anfanget delas vid en frasgräns.
     let forsta = forsta0;
