@@ -4863,8 +4863,8 @@
     "datum": "2026-10-19"
   },
   "boksamtal-i-grupp": {
-    "word": "66ac7fd1589fbfe781d3dcc024c3ee03d1294faf0e8b14ad7b5d50fdef060cd6",
-    "pdf": "a251347cf778c4f1e6b7f766a56665bd635bd6e9d962111e31ef849403984319",
+    "word": "c2f9f8102ab6bb3caefaef1b2629f4aa7ab28ae7546fa0399d252b187cbc5248",
+    "pdf": "5c9d9cfb7a8c81d0a1cfc2fd9e3ec981ed02e2dd4fcfe39e98fc6c780ceb6a40",
     "sidor": 46,
     "kB": 1150,
     "datum": "2026-10-19"
@@ -5101,8 +5101,8 @@
     "datum": "2026-10-19"
   },
   "skrivkurs-berattelseram": {
-    "word": "6edd96c0ba5966f4b275223c91fd2e9873e38ebfcb426a7111930e850881d1e5",
-    "pdf": "b8433ab5b55e93fc09e0567beb50aa64bb43949ae25905f0c259416796fbe4c1",
+    "word": "375700813451f06b8e0b8d8178a6f99fe7d31823d303222240fc2fc0ed19b203",
+    "pdf": "94740609b0282b9a7e0b882e0e7a1defef66599e19f6be6b641ae4db9bd5fe3d",
     "sidor": 62,
     "kB": 1129,
     "datum": "2026-10-19"
@@ -5115,10 +5115,10 @@
     "datum": "2026-10-19"
   },
   "skrivkurs-sagoboken": {
-    "word": "b51b8473a20d937eaa23bcdec4c8bed3065d20d3d061268a49b50c4df5bf44b1",
-    "pdf": "3beab0e5854ec81246e655dcdd5ad0d8a89c614f7b7c1d05959c136dddf2a68f",
+    "word": "10986e07dee28b92ae853550e51167ac870c34c5d9d5941a574b4920b70c1f2c",
+    "pdf": "9cdafd77bc6ccc42217f68a4517d57304df23b883a2aace488ce226e3391b40b",
     "sidor": 105,
-    "kB": 2005,
+    "kB": 2001,
     "datum": "2026-10-19"
   },
   "skrivkurs-sagoboken-metoden": {
@@ -5129,10 +5129,10 @@
     "datum": "2026-10-19"
   },
   "skrivkurs-vardeskapande": {
-    "word": "8db92365a8f6abc8acd19677d6bac778d32d12613383c659a6ead129f2397ce5",
-    "pdf": "a463b47cf20899a264bd9b8b05a180dedf0c4bec360a60cd91417091f1303801",
+    "word": "6edf9efd1b4e9de7bf9408dcab25b712d5641f58f32d8c4bbad3606be915ab5f",
+    "pdf": "b54dc1badea879ab274eee6be98b11bbdaa16b4a579a3156ac01e5f040a3e52f",
     "sidor": 72,
-    "kB": 1194,
+    "kB": 1192,
     "datum": "2026-10-19"
   },
   "skrivkurs-vardeskapande-metoden": {
@@ -5157,8 +5157,8 @@
     "datum": "2026-10-19"
   },
   "texttyp-argumenterande-text": {
-    "word": "a0a9d9e89b23b6305bde5dd2c9233bc6aee7dc792b10913c986a37e920c20ec8",
-    "pdf": "a7e30bba3bfde2e0d5566436e5bbdcdf4ed81ffd15ad47fbae9c4dcfd7bd3aea",
+    "word": "ace1b20a17004172bb631ce28cc51a23abe0ec6896879394e21032eb5062302b",
+    "pdf": "8ab8a8d614a820fe39a475d724cfc655eae30aaf272602ed0229cd1842d28901",
     "sidor": 46,
     "kB": 928,
     "datum": "2026-10-19"
@@ -5171,10 +5171,10 @@
     "datum": "2026-10-19"
   },
   "texttyp-berattande-text": {
-    "word": "ebcfbb12ed86254048f55cfebdfb748719f4e3d46c3c2c276fa2f8f7cf98702d",
-    "pdf": "117e7e56c54bbbe4cc6dae241e90e9ca38b5476c59b4ca4cf1655a9c3dec7558",
+    "word": "153446b8a4530ccc61e9075c6d45153aded0cecb8fd90fd7ad13d4000552cca2",
+    "pdf": "c4fca098a935c866e913fdcc2c906528b81df72dde2af40c755f71e477db6923",
     "sidor": 65,
-    "kB": 1362,
+    "kB": 1359,
     "datum": "2026-10-19"
   },
   "texttyp-berattande-text-metoden": {
@@ -5185,10 +5185,10 @@
     "datum": "2026-10-19"
   },
   "texttyp-beskrivande-text": {
-    "word": "7dce6a44ae1f9742934256730bda1551b1c2575aced8463b198e4adcbee62478",
-    "pdf": "67c209196e3552a17bef767630cfbed6b0489ac2ac8bb8581279be10fbd35759",
+    "word": "6bb1b738c146f811882753f98e77c0a5e3148995d90d22faf49de6f3b50b6240",
+    "pdf": "03f8b561322c5ce65a82c8080b3f32cf3499397ce6c9cbf3cde8a9ec9c3a915d",
     "sidor": 54,
-    "kB": 1004,
+    "kB": 1002,
     "datum": "2026-10-19"
   },
   "texttyp-beskrivande-text-metoden": {
@@ -5199,10 +5199,10 @@
     "datum": "2026-10-19"
   },
   "texttyp-instruerande-text": {
-    "word": "b634d25de7011bf599f041f4ea43d9dd1c9f8cbecc2fb628c3b9174dfd179730",
-    "pdf": "3b1ed92a31011d4e38df43957b4acb2a4ab56ca4ed16c3fc1b3cf871e05b3443",
+    "word": "52d4e211d097744bf19125d0be74dbc1b9c1d28f42711ce38c9c7051ff5bd446",
+    "pdf": "e281dc2c86c84d7f6e33059e2b5fb9ebc221e32107fa52ecd822cebb57068e41",
     "sidor": 57,
-    "kB": 1024,
+    "kB": 1021,
     "datum": "2026-10-19"
   },
   "texttyp-instruerande-text-metoden": {
@@ -7648,17 +7648,17 @@
     ]
   },
   "hoglasning-i-par": {
-    "word": "13825c6b5a2de1a83b73bb7a1120f9ebe33091d263e82ebec74868f63fbf1488",
-    "pdf": "169e5919f557fbbf20ee1168df886fce083580ed219948be22432805988558df",
+    "word": "9ab8cd285acb8a11e7c0a4867fcee0839b493bdb44a8b69ae0c06ae8430908e4",
+    "pdf": "2519119855a41141a3bccc367b2d9607a581da6926688a1f7e15a2865ed14801",
     "sidor": 26,
-    "kB": 750,
+    "kB": 754,
     "datum": "2026-10-19"
   },
   "hoglasning-i-par-metoden": {
-    "word": "096265c269fb6ae3ea783621b5b08c34073206cda6f3d8cb2ff3a51072b5de3f",
-    "pdf": "05a7d9763344b6a53999a553107a75d9b86965076f1c4002788555f82d6171f7",
+    "word": "a776e6f47c890c86ee2792c94663298a73484ffcfa296c62c97b269be8d69b85",
+    "pdf": "90cee44f0ddbf552be8a2571f9e8950f69fd552e4c849941b69a5639f42e0dca",
     "sidor": 11,
-    "kB": 421,
+    "kB": 420,
     "datum": "2026-10-19"
   },
   "hoglasning-i-par-lathund-text": {

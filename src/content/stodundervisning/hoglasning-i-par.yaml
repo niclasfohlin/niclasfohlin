@@ -1,7 +1,7 @@
 # Metod i stödundervisning. Modellen står i src/content.config.ts och mallen i _mall.yaml.
 titel: Högläsning i par
 undertitel: "Fem strategier för att läsa högt för en lyssnare, i åtta veckor för åk 2–5"
-ingress: "Klassen läser högt i par tre till fem dagar i veckan och lär sig fem strategier för att läsa så att den som lyssnar förstår och känner det texten säger. Paret läser vidare i en bok som de har valt tillsammans, och de åtta veckorna slutar med att eleverna läser för yngre barn eller för någon hemma."
+ingress: "Klassen läser högt i par tre till fem dagar i veckan. Eleverna lär sig fem strategier för att läsa så att den som lyssnar förstår och känner det texten säger. Paret läser vidare i en bok som de har valt tillsammans. De åtta veckorna slutar med att eleverna läser för yngre barn eller för någon hemma."
 omrade: Läsning
 arskurs: ["F-3", "4-6"]
 arskursText: åk 2–5
@@ -457,6 +457,7 @@ lathund:
   pass:
     rubrik: "Vi kör ett pass i åk 3: Repliken, vecka 3"
     textRubrik: Stället du visar på tavlan
+    utskrift: Skriv ut stället
     titel: Hunden vid dörren
     text:
       - "Det knackade på dörren. Lisa satt alldeles stilla."
