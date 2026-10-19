@@ -14,13 +14,14 @@ arskurs:
   - 7-9
 arskursText: åk 4–7
 taggar:
-  - skrivstrategier
   - textstruktur
+  - skrivstrategier
   - formativ-bedomning
-  - intensivtraning
+  - lektionsupplagg
 format:
   - liten grupp
   - par
+  - helklass
 tid: 60 minuter per pass, två pass i veckan
 period: Sex veckor
 grupp: Två till tio elever
@@ -32,7 +33,7 @@ material:
   - diagrammet Mina texter
   - en mapp per elev
 
-uppdaterad: 2026-10-18
+uppdaterad: 2026-10-19
 publicerad: 2026-10-09
 relaterade: []
 utkast: false

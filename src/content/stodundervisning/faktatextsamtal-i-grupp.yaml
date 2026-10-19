@@ -11,9 +11,11 @@ taggar:
   - textsamtal
   - ordforrad
   - textstruktur
+  - lektionsupplagg
 format:
   - liten grupp
   - par
+  - helklass
 tid: 40 minuter per pass, två pass i veckan
 period: Åtta veckor
 grupp: Två till åtta elever

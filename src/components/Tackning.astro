@@ -9,6 +9,7 @@
 import { site } from '../data/site';
 import type { MetodPost } from '../lib/metod';
 import { ejBryt } from '../lib/metod';
+import { kanGorasIKlass } from '../lib/upplagg';
 import { arskursSpannet, SKALA, spannText, taktDelar } from '../lib/tackning';
 interface Props { metoder: MetodPost[]; taggar: (m: MetodPost) => string[] }
 const { metoder, taggar } = Astro.props;
@@ -28,7 +29,7 @@ const etikettKolumn = (sp: [number, number]) => Math.min(sp[0], 5);
       <p class="tk-banenamn"><span class="amne" data-amne={b.o}>{b.o}</span></p>
       <ul class="tk-rader">
         {b.rader.map(({ m, sp, takt }) => (
-          <li data-karta data-omrade={m.data.omrade} data-arskurs={m.data.arskurs.join(' ')} data-taggar={taggar(m).join(' ')}>
+          <li data-karta data-omrade={m.data.omrade} data-arskurs={m.data.arskurs.join(' ')} data-taggar={taggar(m).join(' ')} data-klass={kanGorasIKlass(m.data) ? 'klass' : 'grupp'}>
             <a class="tk-rad" href={`/stodundervisning/${m.id}`} style={`--fran:${sp[0]};--till:${sp[1]};--etikett:${etikettKolumn(sp)}`}>
               <span class="tk-skala">
                 <span class="tk-etikett">{ejBryt(m.data.titel)}{' '}<span class="tk-ak">{sp[0] === 0 ? <><span class="visually-hidden">årskurs </span>{spannText(sp)}</> : `åk ${spannText(sp)}`}</span></span>

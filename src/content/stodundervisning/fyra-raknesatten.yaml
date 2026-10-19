@@ -15,10 +15,11 @@ taggar:
   - positionssystemet
   - huvudrakning
   - taluppfattning
-  - intensivtraning
+  - lektionsupplagg
 format:
   - liten grupp
   - par
+  - helklass
 tid: 60 minuter per pass, två till tre pass i veckan
 period: Åtta veckor
 grupp: Två till tio elever
@@ -27,7 +28,7 @@ material:
   - multilink
   - räknemattan och talrutan
   - övningsblad
-uppdaterad: 2026-10-07
+uppdaterad: 2026-10-19
 publicerad: 2026-10-04
 relaterade:
   - antalsuppfattning-i-grupp

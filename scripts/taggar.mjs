@@ -119,7 +119,7 @@ function lista() {
     console.log(`\n${omrade}`);
     for (const t of lista) {
       const n = antal.get(t.id) ?? 0;
-      console.log(`  ${t.id.padEnd(26)} ${String(n).padStart(3)}  ${t.label}${t.alias.length ? `  (alias: ${t.alias.join(', ')})` : ''}`);
+      console.log(`  ${t.id.padEnd(26)} ${String(n).padStart(3)}  ${t.label} [${t.slag}]${t.alias.length ? `  (alias: ${t.alias.join(', ')})` : ''}`);
     }
   }
   const okanda = [...antal.keys()].filter((t) => !taggIds.has(t));
@@ -259,6 +259,13 @@ function nyaTaggarFel() {
   }
   return fel;
 }
+// Varje tagg har ett slag (K-463, Niclas 2026-10-19: "bättre stringens för taggarna och vad som tränas"): förmåga, det
+// eleven tränar; upplägg, hur insatsen går till över veckorna; arbetssätt, ett sätt att arbeta i passet; ämne, det
+// artiklar och böcker handlar om. Vad det betyder för metoderna prövar schemat (src/lib/upplagg.ts).
+const SLAG = ['förmåga', 'upplägg', 'arbetssätt', 'ämne'];
+function slagFel() {
+  return taggar.filter((t) => !SLAG.includes(t.slag)).map((t) => `src/data/taggar.json: taggen "${t.id}" har slag "${t.slag ?? ''}". Skriv slag: förmåga (det eleven tränar), upplägg (hur insatsen går till över veckorna), arbetssätt (ett sätt att arbeta i passet) eller ämne (det artiklar och böcker handlar om).`);
+}
 function ordKrockar() {
   const agare = new Map();
   for (const t of taggar) for (const o of new Set([t.label, ...t.alias].map((x) => x.toLowerCase()))) agare.set(o, [...(agare.get(o) ?? []), t.id]);
@@ -267,7 +274,7 @@ function ordKrockar() {
 
 if (args[0] === '--kontrollera') {
   const filer = args[1] ? [resolve(args[1])] : innehallsfiler();
-  const fel = [...filer.flatMap(kontrolleraFil), ...(args[1] ? [] : [...ordKrockar(), ...nyaTaggarFel(), ...oprovadePoster(filer)])];
+  const fel = [...filer.flatMap(kontrolleraFil), ...(args[1] ? [] : [...slagFel(), ...ordKrockar(), ...nyaTaggarFel(), ...oprovadePoster(filer)])];
   if (fel.length) {
     console.error(fel.join('\n'));
     process.exit(1);

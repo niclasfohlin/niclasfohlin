@@ -14,13 +14,14 @@ import { metodensLektionskort } from '../lib/lektionskort';
 import { metodensCentrala } from '../lib/centrala';
 import type { MetodPost } from '../lib/metod';
 import type { Serie } from '../lib/serie';
+import { kanGorasIKlass } from '../lib/upplagg';
 interface Props { m: MetodPost; valj?: boolean; serie?: Serie; taggar?: string[] }
 const { m, valj = false, serie, taggar = m.data.taggar } = Astro.props;
 const lektioner = serie?.lektioner ?? [];
 const ord = serie?.ord;
 const antal = lektioner.length === 1 ? `En ${ord?.en ?? 'lektion'}` : `${lektioner.length} ${ord?.flera ?? 'lektioner'}`;
 ---
-<article class={`kort metodkort${serie ? ' seriekort' : ''}`} data-metod data-omrade={m.data.omrade} data-arskurs={m.data.arskurs.join(' ')} data-taggar={taggar.join(' ')}>
+<article class={`kort metodkort${serie ? ' seriekort' : ''}`} data-metod data-omrade={m.data.omrade} data-arskurs={m.data.arskurs.join(' ')} data-taggar={taggar.join(' ')} data-klass={kanGorasIKlass(m.data) ? 'klass' : 'grupp'}>
   <div class="kort-topp">
     <h3><a href={`/stodundervisning/${m.id}`}>{m.data.titel}</a></h3>
     <span class="amne" data-amne={m.data.omrade}>{m.data.omrade}</span>

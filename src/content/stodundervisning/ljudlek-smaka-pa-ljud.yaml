@@ -8,10 +8,9 @@ arskurs:
   - "F-3"
 arskursText: "F–2"
 taggar:
-  - "fonologisk-medvetenhet"
-  - "bokstavskunskap"
-  - "lasinlarning"
-  - "intensivtraning"
+  - fonologisk-medvetenhet
+  - bokstavskunskap
+  - intensivtraning
 format:
   - "liten grupp"
   - "par"

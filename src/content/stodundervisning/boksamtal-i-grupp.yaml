@@ -21,8 +21,10 @@ taggar:
   - lasforstaelse
   - textsamtal
   - lasframjande
+  - lektionsupplagg
 format:
   - liten grupp
+  - helklass
 tid: 40 minuter per pass, två till tre pass i veckan
 period: Fem till tio veckor, en bok
 grupp: Fyra till tio elever
@@ -30,7 +32,7 @@ material:
   - ett exemplar av boken per elev
   - bokens tavla
   - post-it och ett frågekort
-uppdaterad: 2026-10-17
+uppdaterad: 2026-10-19
 relaterade:
   - textsamtal-i-grupp
   - faktatextsamtal-i-grupp

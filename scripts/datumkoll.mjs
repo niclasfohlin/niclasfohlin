@@ -21,8 +21,9 @@ import { parse as parseYaml } from 'yaml';
 
 const rot = join(dirname(fileURLToPath(import.meta.url)), '..');
 const MAPP = 'src/content/stodundervisning';
-// Fält som inte är metodens innehåll (samma som sajtens fält i scripts/metoddiff.mjs).
-const INTE_INNEHALL = new Set(['uppdaterad', 'publicerad', 'relaterade', 'utkast']);
+// Fält som inte är metodens innehåll: sajtens fält i scripts/metoddiff.mjs, och taggarna, som sorterar metoden i
+// metodbanken och inte är något läraren läser i den (K-463: 22 metoder fick nya taggar utan att något i dem ändrades).
+const INTE_INNEHALL = new Set(['uppdaterad', 'publicerad', 'relaterade', 'utkast', 'taggar']);
 const kontrollera = process.argv.includes('--kontrollera');
 
 // Dagens datum i svensk tid, som YYYY-MM-DD.

@@ -11,6 +11,7 @@ import { HOGST_LEKTIONSKORT, LEKTIONSKORT_PLATS, lektionskortFel } from './lib/l
 import { forstaLed, radensDel } from './lib/karta';
 import { veckofel } from './lib/veckomaterial';
 import { arskursFel } from './lib/tackning';
+import { metodensTaggfel } from './lib/upplagg';
 import { INNEHALLSTAGGAR } from './lib/standard/index.js';
 
 // Registren är den enda sanningen om vilka taggar och publikationer som finns.
@@ -680,6 +681,8 @@ const stodundervisning = defineCollection({
     // Täckningskartan (K-241): årskurstexten ska gå att läsa som ett spann och stämma med nivåerna.
     const akFel = arskursFel(d);
     if (akFel) ctx.addIssue({ code: 'custom', path: ['arskursText'], message: akFel });
+    // Taggarnas slag, och Intensivträning och Lektionsupplägg mot faktarutans tid (K-463, src/lib/upplagg.ts).
+    for (const fel of metodensTaggfel(d)) ctx.addIssue({ code: 'custom', path: ['taggar'], message: fel });
     // En lektion har serie, formaga och tranar tillsammans, och ingen egen lektionsbank. Att serien och förmågan finns
     // prövas i src/lib/serie.ts, där alla metoder är kända.
     const lektionsfalt = [d.serie, d.formaga, d.tranar].filter((x) => x !== undefined).length;

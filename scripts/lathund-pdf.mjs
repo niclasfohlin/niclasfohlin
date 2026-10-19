@@ -58,8 +58,9 @@ const gemensamHash = hashAv([`pdf ur pptx i A4, pptxgenjs ${pptxgenjs}`, ...geme
 // överst eller en ny länk till en annan metod inte gör om lathunden (Niclas 2026-10-03: "Varför ändras lathunden av
 // datumet?"). Lathundens kod (metodpptx.ts och lathundBarn i metoddocx.ts) läser inga av fälten; läser den ett av dem
 // en dag, ändras koden och därmed den gemensamma delen, och alla lathundar görs om.
-// film och filmer står bara på filmbilden i 16:9-filen, aldrig i pdf:en (K-242).
-const INTE_I_LATHUNDEN = ['uppdaterad', 'publicerad', 'relaterade', 'utkast', 'upplagg', 'gruppen', 'principer', 'film', 'filmer'];
+// film och filmer står bara på filmbilden i 16:9-filen, aldrig i pdf:en (K-242). Taggarna och format står inte i
+// lathunden (K-463).
+const INTE_I_LATHUNDEN = ['uppdaterad', 'publicerad', 'relaterade', 'utkast', 'upplagg', 'gruppen', 'principer', 'film', 'filmer', 'taggar', 'format'];
 const metodKalla = (m) => { const d = { ...m.data }; for (const k of INTE_I_LATHUNDEN) delete d[k]; return Buffer.from(JSON.stringify(d)); };
 const kallHash = (m) => hashAv([gemensamHash, metodKalla(m)]);
 const filHash = (p) => hashAv([readFileSync(p)]);

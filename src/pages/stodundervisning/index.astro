@@ -9,14 +9,19 @@ import { site } from '../../data/site';
 import { metoderSorterade, taggLabel } from '../../lib/innehall';
 import { harMallar } from '../../lib/metod';
 import { byggSerier, arLektion, serieTaggar } from '../../lib/serie';
+import { taggensSlag } from '../../lib/upplagg';
 // En lektion står i sin serie och inte som eget kort (src/lib/serie.ts): seriens kort visar lektionerna och filtreras
 // på allt serien tränar.
 const allaMetoder = await metoderSorterade();
 const serier = byggSerier(allaMetoder);
 const metoder = allaMetoder.filter((m) => !arLektion(m.data));
 
-// Bara taggar som någon metod använder, i bokstavsordning efter etiketten läsaren ser.
+// Bara taggar som någon metod använder, i bokstavsordning efter etiketten läsaren ser. Tränar har förmågorna, det eleven
+// tränar, och Upplägg hur insatsen går till, Intensivträning eller Lektionsupplägg; Klass eller grupp läser fältet format
+// (K-463, src/lib/upplagg.ts).
 const taggarIBruk = [...new Set(allaMetoder.flatMap((m) => m.data.taggar))].sort((a, b) => taggLabel(a).localeCompare(taggLabel(b), 'sv'));
+const formagorIBruk = taggarIBruk.filter((t) => taggensSlag(t) === 'förmåga');
+const upplaggIBruk = taggarIBruk.filter((t) => taggensSlag(t) === 'upplägg');
 // Bara årskursnivåer som någon metod har, så att filtret inte erbjuder tomma val.
 const arskurserIBruk = site.arskurser.filter((a) => metoder.some((m) => m.data.arskurs.includes(a)));
 const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.filter((m) => m.data.omrade === o).length]));
@@ -46,7 +51,22 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
         <label for="filter-tagg">Tränar</label>
         <select id="filter-tagg" name="tagg">
           <option value="">Allt</option>
-          {taggarIBruk.map((t) => <option value={t}>{taggLabel(t)}</option>)}
+          {formagorIBruk.map((t) => <option value={t}>{taggLabel(t)}</option>)}
+        </select>
+      </div>
+      <fieldset>
+        <legend>Klass eller grupp</legend>
+        <div class="val">
+          <label><input type="radio" name="klass" value="" checked /> Alla</label>
+          <label><input type="radio" name="klass" value="klass" /> Kan göras i klass</label>
+          <label><input type="radio" name="klass" value="grupp" /> Bara i grupp</label>
+        </div>
+      </fieldset>
+      <div class="tagg-val">
+        <label for="filter-upplagg">Upplägg</label>
+        <select id="filter-upplagg" name="upplagg">
+          <option value="">Alla</option>
+          {upplaggIBruk.map((t) => <option value={t}>{taggLabel(t)}</option>)}
         </select>
       </div>
       <p class="meta" aria-live="polite" data-antal>{metoder.length === 1 ? '1 metod' : `${metoder.length} metoder`}</p>
@@ -109,7 +129,8 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
   // Filtrering utan ramverk. Utan JavaScript visas alla metoder; formuläret, urvalsrutorna och
   // raden för samlad nedladdning visas bara när html har klassen js (sätts i Base.astro före
   // första målningen, så att inget hoppar när sidan laddas).
-  // Valet speglas i adressen (?omrade=Läsning&arskurs=F-3&tagg=lasflyt) så att en filtrerad vy går att länka.
+  // Valet speglas i adressen (?omrade=Läsning&arskurs=F-3&tagg=lasflyt&upplagg=intensivtraning&klass=klass) så att en
+  // filtrerad vy går att länka.
   const form = document.getElementById('filter') as HTMLFormElement | null;
   if (form) {
     const kort = Array.from(document.querySelectorAll<HTMLElement>('[data-metod]'));
@@ -119,7 +140,7 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
     const karta = document.querySelector<HTMLElement>('[data-tackning]');
     const sektioner = Array.from(document.querySelectorAll<HTMLElement>('[data-omrade-sektion]'));
     const antal = form.querySelector('[data-antal]') as HTMLElement;
-    const namn = ['omrade', 'arskurs', 'tagg'] as const;
+    const namn = ['omrade', 'arskurs', 'klass', 'tagg', 'upplagg'] as const;
 
     const parametrar = new URLSearchParams(location.search);
     for (const n of namn) {
@@ -135,7 +156,9 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
       const passar = (k: HTMLElement) =>
         (!val.omrade || k.dataset.omrade === val.omrade) &&
         (!val.arskurs || (k.dataset.arskurs ?? '').split(' ').includes(val.arskurs)) &&
-        (!val.tagg || (k.dataset.taggar ?? '').split(' ').includes(val.tagg));
+        (!val.tagg || (k.dataset.taggar ?? '').split(' ').includes(val.tagg)) &&
+        (!val.upplagg || (k.dataset.taggar ?? '').split(' ').includes(val.upplagg)) &&
+        (!val.klass || k.dataset.klass === val.klass);
       let synliga = 0;
       for (const k of kort) {
         k.hidden = !passar(k);

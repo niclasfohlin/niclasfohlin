@@ -13,10 +13,11 @@ taggar:
   - avkodning
   - stavning
   - ordforrad
-  - intensivtraning
+  - lektionsupplagg
 format:
   - liten grupp
   - par
+  - helklass
 tid: 60 minuter per pass, tre pass i veckan
 period: Åtta veckor
 grupp: Fyra till sex elever
@@ -28,7 +29,7 @@ material:
   - skrivplanen
   - tidningens sida
 
-uppdaterad: 2026-10-18
+uppdaterad: 2026-10-19
 publicerad: 2026-10-06
 relaterade:
   - laslistor-i-grupp
