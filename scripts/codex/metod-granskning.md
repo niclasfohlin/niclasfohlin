@@ -17,7 +17,7 @@ Filer:
 - Koden som bygger allt: src/content.config.ts (schemat), src/components/Metod.astro, src/components/MetodTabell.astro, src/components/Lathund.astro, src/components/Nedladdning.astro, src/lib/metoddocx.ts, src/lib/metod.ts, src/styles/global.css (skärm under .m-* och .lh-*, utskrift under @media print).
 - Förebilderna: src/content/stodundervisning/problemlosning-i-grupp.yaml (passöversikt, tavla, tabeller efter fastnar och grund), boksamtal-i-grupp.yaml, faktatextsamtal-i-grupp.yaml, til-i-grupp.yaml (hem, kontrakt, schema), skrivkurs-berattelseram.yaml (ramar, diplom, arskursText), och deras byggda sidor i dist/stodundervisning/.
 
-Granska sex saker.
+Granska sju saker.
 
 1. Paritet i innehåll. Finns varje del i underlaget med i YAML-filen (rubriker, stycken, tabellrader, exempelfraser, listor, siffror)? Finns varje del i YAML-filen på sidan, i Word-filen med allt, i mallarna och i lathunden? Är tabellerna kompletta, cell för cell? Stämmer elevantal, passlängd, frekvens och period överallt: faktarutan, texten, lathundens faktarutor, Word-filens framsida? Har något ändrats i Niclas text utöver de avsiktliga ändringarna? Citera det som saknas eller avviker, med fil och plats.
 
@@ -31,7 +31,9 @@ Granska sex saker.
 
 6. Filmerna. Varje metod har en huvudfilm direkt efter faktarutan och kan ha en eller två extrafilmer (fälten film och filmer, METODER.md under Filmerna). Stämmer bildtexterna och filmens beskrivning med metodens text, ord för ord där de säger samma sak? Står varje extrafilm vid momentet den förklarar, på sidan, i utskriften och i Word, eller hade ett annat ställe (ett visst steg, en viss tabell) passat bättre? Står huvudfilmens fyra bilder på sidan 1 i Word och i utskriften? Lathundens PowerPoint börjar med bilden Filmerna, och lathundssidan med en spelare (METODER.md under Filmerna som mp4): säger filmens namn och de fyra bildtexterna under filmen vad filmen visar, också för den som inte har sett den, och är omslagsbilden ett färdigt läge i filmen och inte en tom eller nollställd scen?
 
-Särskilda frågor och avgränsningen för den här granskningen (läs dem före allt annat ovan; de går före de sex punkterna där de säger något annat):
+7. Metoden i databasen. Säger taggarna det metoden tränar (förmågorna), har den rätt upplägg för sina pass, och stämmer klass eller grupp (fältet format) med de tre frågorna och ett belägg ur passet (ARBETSSATT.md under Innehåll, styckena som börjar "Varje tagg har ett slag")? Saknas en förmåga som ingressen eller passet tränar, eller står en som metoden bara nämner? Står årskurs, grupp, tid och period så att metodbankens kort visar dem rätt och lika med de andra korten? Är varje hänvisning till ett verktyg eller till Niclas böcker skriven så att den blir en länk (STIL.md under Hänvisningar)?
+
+Särskilda frågor och avgränsningen för den här granskningen (läs dem före allt annat ovan; de går före de sju punkterna där de säger något annat):
 
 {{fragor}}
 
