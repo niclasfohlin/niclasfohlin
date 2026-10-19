@@ -12,17 +12,20 @@
 //
 //   node scripts/pabordetdata.mjs <riggens out/<slug>>            kopierar bilderna och skriver metodens post
 //   node scripts/pabordetdata.mjs <riggens out/<slug>> --databas  databasens bilder, ur databas/pabordet.json
+//   … --databas --lista <pabordet.json>                         databasens bilder ur paketets bilder/ (K-454), där
+//                                                                svg-filerna står bredvid listan
 //   node scripts/pabordetdata.mjs <riggens out/<slug>> --prova    säger bara vad som skulle göras
 import { copyFileSync, existsSync, readFileSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 import { parse as parseYaml } from 'yaml';
 import { lasTeman } from '../src/lib/faktatemaihop.js';
 
 const args = process.argv.slice(2);
-const mapp = args.find((a) => !a.startsWith('--'));
+const listaArg = args.indexOf('--lista');
+const mapp = args.find((a, i) => !a.startsWith('--') && !(listaArg >= 0 && i === listaArg + 1));
 const prova = args.includes('--prova');
 const databas = args.includes('--databas');
-const listan = databas ? join(mapp ?? '', 'databas', 'pabordet.json') : join(mapp ?? '', 'pabordet.json');
+const listan = listaArg >= 0 ? args[listaArg + 1] : databas ? join(mapp ?? '', 'databas', 'pabordet.json') : join(mapp ?? '', 'pabordet.json');
 if (!mapp || !existsSync(listan)) {
   console.error(`Ange riggens mapp med ${databas ? 'databas/pabordet.json' : 'pabordet.json'}: node scripts/pabordetdata.mjs C:/metodrigg/out/<slug> [--databas] [--prova]`);
   process.exit(1);
@@ -37,15 +40,21 @@ const temanas = new Set((await lasTeman('src/content/faktateman', parseYaml)).fi
 const forut = data[slug] ?? {};
 const post = databas ? { ...forut } : Object.fromEntries(Object.entries(forut).filter(([nr]) => temanas.has(nr)));
 let kopierade = 0;
+let nyaBilder = 0;
 let hoppade = 0;
 for (const b of rigg.bilder) {
   if (!databas && temanas.has(String(b.nr))) { hoppade++; continue; }
   delete post[b.nr];
   // Svg-filerna står i metodens mapp hos riggen, databasens också i databas/, som går först i en databasleverans.
-  const fran = (databas ? [join(mapp, 'databas', b.fil), join(mapp, b.fil)] : [join(mapp, b.fil)]).find((f) => existsSync(f)) ?? join(mapp, b.fil);
+  const fran = (databas ? [join(dirname(listan), b.fil), join(mapp, 'databas', b.fil), join(mapp, b.fil)] : [join(mapp, b.fil)]).find((f) => existsSync(f)) ?? join(mapp, b.fil);
   if (!existsSync(fran)) { console.error(`FEL  bild ${b.nr}: filen ${b.fil} saknas i ${mapp}.`); process.exit(1); }
-  if (!prova) copyFileSync(fran, `public/stodundervisning/${slug}-pabordet-${b.nr}.svg`);
+  // En bild som redan stämmer, utan radslut, skrivs inte om (git checkar ut svg-filerna med CRLF på Windows).
+  const dit = `public/stodundervisning/${slug}-pabordet-${b.nr}.svg`;
+  const utanCR = (f) => readFileSync(f, 'latin1').replace(/\r\n/g, '\n');
+  const ny = !(existsSync(dit) && utanCR(dit) === utanCR(fran));
+  if (!prova && ny) copyFileSync(fran, dit);
   kopierade++;
+  if (ny) nyaBilder++;
   const x = {};
   if (b.bredd !== FORVAL.bredd || b.hojd !== FORVAL.hojd) { x.bredd = b.bredd; x.hojd = b.hojd; }
   if (b.ytor?.length) x.ytor = b.ytor.map((y) => ({ namn: y.namn, x: y.x, y: y.y, b: y.b, h: y.h, ...(y.lage ? { lage: y.lage } : {}), ...(y.mitt ? { mitt: true } : {}) }));
@@ -61,6 +70,7 @@ if (overblivna.length) console.log(`obs  ${slug}: bilderna ${overblivna.join(', 
 if (hoppade) console.log(`     ${slug}: ${hoppade} bilder hör till databasens teman och hoppades över; de kommer med temats leverans (scripts/faktateman.mjs).`);
 // En post per rad och bild, så att en ändring syns som en rad i git.
 const text = `{\n${Object.keys(data).sort().map((id) => `  ${JSON.stringify(id)}: {\n${Object.entries(data[id]).map(([nr, x]) => `    ${JSON.stringify(nr)}: ${JSON.stringify(x)}`).join(',\n')}\n  }`).join(',\n')}\n}\n`;
-if (!prova) writeFileSync(DATAFIL, text);
+// Filen skrivs bara när innehållet ändras, utan radslut (git checkar ut den med CRLF på Windows).
+if (!prova && (!existsSync(DATAFIL) || readFileSync(DATAFIL, 'utf8').replace(/\r\n/g, '\n') !== text)) writeFileSync(DATAFIL, text);
 const antal = (f) => Object.values(post).filter(f).length;
-console.log(`${prova ? 'prov ' : 'ok   '}${slug}${databas ? ', databasen' : ''}: ${kopierade} bilder${prova ? ' skulle kopieras' : ' kopierade'}, ${antal((x) => x.bredd)} med egna mått, ${antal((x) => x.ytor)} blad med skrivytor, ${antal((x) => x.elev)} som eleven ser på, ${antal((x) => x.skala)} med skala.`);
+console.log(`${prova ? 'prov ' : 'ok   '}${slug}${databas ? ', databasen' : ''}: ${kopierade} bilder, ${nyaBilder} nya eller ändrade${prova ? ' (inget kopierat)' : ''}, ${antal((x) => x.bredd)} med egna mått, ${antal((x) => x.ytor)} blad med skrivytor, ${antal((x) => x.elev)} som eleven ser på, ${antal((x) => x.skala)} med skala.`);

@@ -32,7 +32,10 @@ for (const id of poster) for (const vad of ['problem', 'a', 'b']) if (!bilder.in
 for (const b of bilder) if (!poster.includes(b.replace(/-(problem|a|b)\.svg$/, ''))) fel.push(`bilden ${b} har ingen post`);
 if (fel.length) { console.error(`FEL  ${fel.length} fel i leveransen, inget kopierat:\n  ${fel.join('\n  ')}`); process.exit(1); }
 
-const lika = (a, b) => existsSync(b) && readFileSync(a).equals(readFileSync(b));
+// Textfiler jämförs utan radslut: git checkar ut dem med CRLF på Windows, och riggen skriver LF (2026-10-19 räknades
+// annars alla 30 poster som ändrade fast innehållet var detsamma).
+const utanCR = (b) => Buffer.from(b.toString('latin1').replace(/\r\n/g, '\n'), 'latin1');
+const lika = (a, b) => existsSync(b) && (/\.(yaml|svg)$/.test(a) ? utanCR(readFileSync(a)).equals(utanCR(readFileSync(b))) : readFileSync(a).equals(readFileSync(b)));
 let nya = 0, andrade = 0, samma = 0;
 if (!prova) { mkdirSync(POSTER, { recursive: true }); mkdirSync(BILDER, { recursive: true }); }
 for (const [fran, till] of [...poster.map((id) => [join(mapp, 'poster', `${id}.yaml`), join(POSTER, `${id}.yaml`)]), ...bilder.map((b) => [join(mapp, 'bilder', b), join(BILDER, b)])]) {
