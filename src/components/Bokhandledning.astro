@@ -55,13 +55,13 @@ const steg = (text: string) => { const [forsta, ...under] = rader(text); const m
       </>
     ))}
     <Del class="bh-rubrik">{h.delar[0].rubrik}</Del>
-    <dl class="bh-falt">{h.delar[0].falt.map((f) => <div><dt>{rader(f.rubrik).map((r, k) => (k ? <span class="bh-tid">{r}</span> : sagt(r).map((x) => (x.sagt ? <em>{x.text}</em> : x.text))))}</dt><dd class={f.kursiv ? 'bh-kursiv' : undefined}>{rader(f.text).map((t, j) => <>{j > 0 && <br />}{sagt(t).map((x) => (x.sagt ? <em>{x.text}</em> : x.text))}</>)}</dd></div>)}</dl>
+    <dl class="bh-falt">{h.delar[0].falt.map((f) => <div><dt>{rader(f.rubrik).map((r, k) => { const delar = sagt(r).map((x) => (x.sagt ? <em>{x.text}</em> : x.text)); return k ? <span class="bh-tid">{delar}</span> : delar; })}</dt><dd class={f.kursiv ? 'bh-kursiv' : undefined}>{rader(f.text).map((t, j) => <>{j > 0 && <br />}{sagt(t).map((x) => (x.sagt ? <em>{x.text}</em> : x.text))}</>)}</dd></div>)}</dl>
   </div>
   <div class="bh-sida">
     {h.delar.slice(1).map((d, i) => (
       <>
         <Del class="bh-rubrik">{d.rubrik}</Del>
-        <dl class="bh-falt">{d.falt.map((f) => <div><dt>{rader(f.rubrik).map((r, k) => (k ? <span class="bh-tid">{r}</span> : sagt(r).map((x) => (x.sagt ? <em>{x.text}</em> : x.text))))}</dt><dd class={f.kursiv ? 'bh-kursiv' : undefined}>{rader(f.text).map((t, j) => <>{j > 0 && <br />}{sagt(t).map((x) => (x.sagt ? <em>{x.text}</em> : x.text))}</>)}</dd></div>)}</dl>
+        <dl class="bh-falt">{d.falt.map((f) => <div><dt>{rader(f.rubrik).map((r, k) => { const delar = sagt(r).map((x) => (x.sagt ? <em>{x.text}</em> : x.text)); return k ? <span class="bh-tid">{delar}</span> : delar; })}</dt><dd class={f.kursiv ? 'bh-kursiv' : undefined}>{rader(f.text).map((t, j) => <>{j > 0 && <br />}{sagt(t).map((x) => (x.sagt ? <em>{x.text}</em> : x.text))}</>)}</dd></div>)}</dl>
         {i === 0 && h.tavlan.length > 0 && (
           <div class="bh-tavla" style={`--n:${h.tavlan.length}`}>
             {h.tavlan.map((sp) => <div class="bh-spalt"><p class="bh-namn">{sp.namn}</p>{sp.rader.map((t) => <p class="bh-elev">{t}</p>)}</div>)}

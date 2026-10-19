@@ -91,7 +91,8 @@ type Barn = Paragraph | Table;
 // figurer: raden om figurernas upphov, när textens bilder har figurer ur bildbanken.
 // anton: nivåns knapp i Anton, som under en faktatext, på en sida som hör till faktatexterna utan att vara en
 // (lärarhandledningen, lararhandledningSida()).
-type Boksektion = { not: string; niva: string; vad: string; farg: string; liggande?: boolean; fakta?: { huvud: string; figurer?: string }; anton?: boolean };
+// flersidig: sektionen är flera sidor (en lärarhandledning), som räknar sina sidor också i en fil med fristående blad.
+type Boksektion = { not: string; niva: string; vad: string; farg: string; liggande?: boolean; fakta?: { huvud: string; figurer?: string }; anton?: boolean; flersidig?: boolean };
 // Ett sagoblad (sagoFlod): rutan Till läraren i sidfoten, eller på bokens blad ingen sidfot och en kortare upphovsrad.
 type Sagosektion = { not: string; bokblad: boolean };
 // Ett blad som en bild över hela den liggande sidan (bildblad()): sidans marginaler i twips, som följer bladets skrivytor.
@@ -887,8 +888,12 @@ function nivaKnapp(b: Boksektion): TextRun[] {
   const vad = /^kartläggning/i.test(b.vad) ? [] : [new TextRun({ text: '  ·  ', size: 19, ...knapp }), new TextRun({ text: b.vad, size: b.vad.length > 8 ? 15 : 17, ...knapp })];
   return [new TextRun({ text: '  ', size: 19, ...knapp }), new TextRun({ text: b.niva.toUpperCase(), size: 19, ...knapp }), ...vad, new TextRun({ text: '  ', size: 19, ...knapp })];
 }
-// Sidfoten på en boksida: raden Till läraren till vänster, och nivåns knapp och sidnumret till höger, som i riggen.
+// Sidfoten på en boksida: raden Till läraren till vänster, och nivåns knapp och sidnumret till höger, som i riggen. I en
+// fil med fristående blad (FRISTAENDE_BLAD) börjar varje text om på 1, och ett blad på en sida, som en lästext eller ett
+// problem, står där utan sidnummer: varje sida i nivåns fil sa annars "s. 1" (Niclas 2026-10-19: "något är fel på
+// sidnumeringen"), och knappen säger redan nivån och numret. En faktatext och en lärarhandledning räknar sina sidor.
 function bokFot(b: Boksektion): Footer {
+  const sidnr = !FRISTAENDE_BLAD || !!b.fakta || !!b.flersidig;
   return new Footer({ children: [new Paragraph({
     tabStops: [{ type: TabStopType.RIGHT, position: b.liggande ? LIGGANDE_BREDD : BOKBREDD }],
     spacing: { after: 0 },
@@ -896,9 +901,11 @@ function bokFot(b: Boksektion): Footer {
       new TextRun({ text: b.not, size: b.not.length > 75 ? 13 : 15, color: BOK.not, font: 'Arial' }),
       new TextRun({ children: [new Tab()], size: 18, font: 'Arial' }),
       ...nivaKnapp(b),
-      new TextRun({ text: '   ', size: 18, font: 'Arial' }),
-      new TextRun({ text: 's. ', size: 18, color: BOK.gra, font: 'Arial' }), // hårt mellanslag: s. och sidnumret på samma rad
-      new TextRun({ children: [PageNumber.CURRENT], size: 18, color: BOK.gra, font: 'Arial' }),
+      ...(sidnr ? [
+        new TextRun({ text: '   ', size: 18, font: 'Arial' }),
+        new TextRun({ text: 's. ', size: 18, color: BOK.gra, font: 'Arial' }), // hårt mellanslag: s. och sidnumret på samma rad
+        new TextRun({ children: [PageNumber.CURRENT], size: 18, color: BOK.gra, font: 'Arial' }),
+      ] : []),
     ],
   })] });
 }
@@ -1385,7 +1392,7 @@ const faktabyte = (f: Faktatext, o: { farg: string; metod: string; bilder: PaBor
 // raderna, och lärarens text i Arial 9 punkter med 11 punkters radavstånd, som riggens. En rad delas inte, och en rubrik
 // hålls ihop med sin första rad. Riggen prövade sidorna i Word och Google Dokument (48 till 102 punkter luft nederst), och
 // scripts/googleprov.mjs prövar sajtens filer.
-const handledningbyte = (h: Lararhandledning, o: { farg: string; metod: string }) => new Sektionsbyte(false, { not: o.metod, niva: h.niva, vad: 'lärarhandledning', farg: o.farg, anton: true });
+const handledningbyte = (h: Lararhandledning, o: { farg: string; metod: string }) => new Sektionsbyte(false, { not: o.metod, niva: h.niva, vad: 'lärarhandledning', farg: o.farg, anton: true, flersidig: true });
 function lararhandledningSida(h: Lararhandledning, farg: string): Barn[] {
   const inga = { top: FORM_INGEN, bottom: FORM_INGEN, left: FORM_INGEN, right: FORM_INGEN };
   const tunn = { style: BorderStyle.SINGLE, size: 4, color: FAKTA.linje } as const;
@@ -1433,7 +1440,7 @@ function lararhandledningSida(h: Lararhandledning, farg: string): Barn[] {
 // linje sist. Delen Till läraren står i sidfoten med sidnumret (bokFot). Det som står inom ”” är det läraren eller eleven
 // säger högt och står i kursiv. Riggen prövade sidorna i Word och Google Dokument (40 punkter luft nederst eller mer), och
 // scripts/googleprov.mjs prövar sajtens filer.
-const bokhandledningbyte = (h: Bokhandledning) => new Sektionsbyte(false, { not: h.fot, niva: '', vad: 'lärarhandledning', farg: BOK.ram });
+const bokhandledningbyte = (h: Bokhandledning) => new Sektionsbyte(false, { not: h.fot, niva: '', vad: 'lärarhandledning', farg: BOK.ram, flersidig: true });
 function bokhandledningSida(h: Bokhandledning, metod: string): Barn[] {
   const ingen = FORM_INGEN;
   const inga = { top: ingen, bottom: ingen, left: ingen, right: ingen };
@@ -1455,24 +1462,27 @@ function bokhandledningSida(h: Bokhandledning, metod: string): Barn[] {
   const hcell = (barn: Barn[], o: { w: number; borders: object; mar: { top: number; bottom: number; left: number; right: number } }) => new TableCell({ width: { size: o.w, type: WidthType.DXA }, borders: o.borders, margins: o.mar, verticalAlign: VerticalAlign.TOP, children: barn.length ? barn : [new Paragraph({ spacing: { after: 0 } })] });
   // En del: fältets namn till vänster och texten till höger, med en tunn linje mellan raderna.
   const NAMN = 2300, TEXT = TWB - NAMN;
-  const falten = (falt: HandledningFalt[]) => new Table({
+  // Tabellerna är riggens, med riggens marginaler, prövade i Word och Google Dokument med 40 punkter luft nederst på varje
+  // sida: googleTabeller hoppar över dem (googleklar), som över lektionskortet (Codex-granskningen 2026-10-19: med
+  // justeringen till hela bildpunkter blev luften 33 punkter).
+  const falten = (falt: HandledningFalt[]) => googleklar(new Table({
     width: { size: TWB, type: WidthType.DXA }, columnWidths: [NAMN, TEXT], layout: TableLayoutType.FIXED, borders: FORM_UTAN,
     rows: falt.map((f, i) => new TableRow({ cantSplit: true, children: [
       hcell([new Paragraph({ spacing: { before: 0, after: 0, line: RAD }, keepNext: i < falt.length - 1, children: f.rubrik.split('\n').flatMap((r, k) => [...(k ? [new TextRun({ break: 1, size: STORLEK, font: 'Arial' })] : []), ...sagt(r, { bold: !k, color: k ? BOK.not : BOK.titel })]) })],
         { w: NAMN, borders: { ...inga, ...(i ? { top: tunn } : {}) }, mar: { top: MAR, bottom: MAR, left: 0, right: 120 } }),
       hcell(f.text.split('\n').map((t) => stycke(t, { kursiv: f.kursiv })), { w: TEXT, borders: { ...inga, ...(i ? { top: tunn } : {}) }, mar: { top: MAR, bottom: MAR, left: 0, right: 0 } }),
     ] })),
-  });
+  }));
   // En lista med en rad: ett band med en cell per kolumn, kolumnens namn som etikett överst och texten under, med tunna
   // linjer mellan cellerna och över och under bandet.
   const band = (l: Bokhandledning['lararlistor'][number]) => {
     const n = l.kolumner.length, w = Math.floor(TWB / n), bredder = l.kolumner.map((_, i) => (i === n - 1 ? TWB - w * (n - 1) : w));
     const r = l.rader[0] ?? [];
-    return new Table({
+    return googleklar(new Table({
       width: { size: TWB, type: WidthType.DXA }, columnWidths: bredder, layout: TableLayoutType.FIXED, borders: FORM_UTAN,
       rows: [new TableRow({ cantSplit: true, children: l.kolumner.map((k, i) => hcell([etikett(k, { size: 14, efter: 30 }), ...String(r[i] ?? '').split('\n').map((t) => stycke(t))],
         { w: bredder[i], borders: { top: tunn, bottom: tunn, left: i ? tunn : ingen, right: ingen }, mar: { top: 50, bottom: 60, left: i ? 90 : 0, right: 90 } })) })],
-    });
+    }));
   };
   // En lista med flera rader: kolumnernas namn i en rad överst och raderna med en tunn linje emellan. Den första kolumnen
   // är stegets namn: ett nummer först blir en knapp, och raden efter radbrytningen, med minuterna, står i rubrikernas bruna
@@ -1490,11 +1500,11 @@ function bokhandledningSida(h: Bokhandledning, metod: string): Barn[] {
       return [new Paragraph({ spacing: { before: 0, after: 0, line: RAD }, keepNext: true, children: [...(m ? knapp(m[1]) : []), ...sagt(m ? m[2] : forstaRaden, { bold: true, color: BOK.titel })] }),
         ...under.map((t) => stycke(t, { color: BOK.titel, size: 17 }))];
     };
-    return new Table({
+    return googleklar(new Table({
       width: { size: TWB, type: WidthType.DXA }, columnWidths: bredder, layout: TableLayoutType.FIXED, borders: FORM_UTAN,
       rows: [huvud, ...l.rader.map((r, ri) => new TableRow({ cantSplit: true, children: r.map((c, i) => hcell(i === 0 ? steg(c) : String(c ?? '').split('\n').map((t) => stycke(t)),
         { w: bredder[i], borders: { ...inga, ...(ri ? { top: tunn } : {}) }, mar: { top: 55, bottom: 55, left: i ? 90 : 0, right: 90 } })) }))],
-    });
+    }));
   };
   // Elevens listor i en ruta med boksidans bruna linje, en spalt per kolumn, i elevens typsnitt: det som läraren skriver
   // på tavlan.
@@ -1502,7 +1512,7 @@ function bokhandledningSida(h: Bokhandledning, metod: string): Barn[] {
     const inre = TWB - 2 * DUBBEL_GLAPP;
     const w = Math.floor(inre / spalter.length), bredder = spalter.map((_, i) => (i === spalter.length - 1 ? inre - w * (spalter.length - 1) : w));
     const elev: IRunOptions = { size: 21, color: BOK.text, font: ELEVTYPSNITT };
-    return new Table({
+    return googleklar(new Table({
       width: { size: TWB, type: WidthType.DXA }, columnWidths: [TWB], layout: TableLayoutType.FIXED, borders: FORM_UTAN,
       rows: [new TableRow({ cantSplit: true, children: [new TableCell({
         width: { size: TWB, type: WidthType.DXA }, borders: { top: brun, bottom: brun, left: brun, right: brun },
@@ -1513,7 +1523,7 @@ function bokhandledningSida(h: Bokhandledning, metod: string): Barn[] {
             { w: bredder[i], borders: { ...inga, ...(i ? { left: tunn } : {}) }, mar: { top: 40, bottom: 40, left: 160, right: 120 } })) })],
         }), hjalpStycke()],
       })] })],
-    });
+    }));
   };
   const ut: Barn[] = [];
   // Sidan 1: huvudet, ingressen, lärarens listor och den första delen.

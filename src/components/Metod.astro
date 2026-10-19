@@ -277,9 +277,7 @@ if (sistaVeckan >= 0 && punkter[sistaVeckan + 1]) punkter[sistaVeckan + 1].helaK
 // utskriften av allt står de (Niclas 2026-10-10: "Om skriv ut hela beskrivningen i alla är verkligen att skriva ut allt bör
 // denna också vara det?"), och utskriften Metoden har dem inte, eftersom Materialet är material (data-material nedan).
 // Ett temas lärarhandledning (src/lib/handledning.ts) står före temats första text, som i Word-filen med allt.
-// Lästexternas lärarhandledning står först i bankens första nivå, i utskriften, som först i Word-filen med allt
-// (bankfilensRamar i src/lib/bank.ts).
-const bankPunkter = new Map<string, Punkt[]>(banken && !undersida ? banken.nivaer.map((n, ni) => [n.namn, [...(ni === 0 && banken.handledning !== undefined ? [banken.handledning] : []), ...n.enheter.flatMap((e) => [...(e.handledning !== undefined ? [e.handledning] : []), ...e.fore, e.ri, ...e.efter])].map((ri) => ({ ram: ramarna[ri], ri }))]) : []);
+const bankPunkter = new Map<string, Punkt[]>(banken && !undersida ? banken.nivaer.map((n) => [n.namn, n.enheter.flatMap((e) => [...(e.handledning !== undefined ? [e.handledning] : []), ...e.fore, e.ri, ...e.efter]).map((ri) => ({ ram: ramarna[ri], ri }))]) : []);
 const handledningar = lararhandledningar(ramarna);
 const bokhl = bokhandledningen(ramarna);
 // Gamla länkar till en enhet eller en följesida på metodens sida (#ram-12, #lararens-sida, #bas-problem-1) leder till
@@ -1081,6 +1079,10 @@ const meny = [
                 <ul class="filrader bankfiler-niva"><li><span class="filrubrik">Två sidor för hela klassen</span> <Filval fil={`/stodundervisning/${bokhandledningensFil(id)}`} namn={bokhandledningensFil(id)} rubrik={`Lärarhandledning: ${bokhl.titel}`} statistik={`${d.titel}: lärarhandledningen till ${banken.ord.alla}`} pdf pdfTitel="Ladda ner som pdf" utanDrive liten /></li></ul>
               </div>
             )}
+            {/* Handledningen själv, bara i utskriften: först, före den första nivåns översikt, som i Word-filen med allt
+                (bankfilensRamar i src/lib/bank.ts; Codex-granskningen 2026-10-19: i bankens första nivå stod den efter
+                översikten). */}
+            {bokhl && <div class="bank-utskrift">{rita({ ram: ramarna[bokhl.ri], ri: bokhl.ri })}</div>}
             {banken.nivaer.map((n) => <Bank d={d} id={id} bank={banken} niva={n} farger={bankFarger} ankare={(i) => ramAnkare[i]} friKlass={friKlass}>{bankPunkter.get(n.namn)!.map(rita)}</Bank>)}
           </div>
         )}
