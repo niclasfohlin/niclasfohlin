@@ -7,7 +7,7 @@
 # node build/texter.mjs textsamtal-i-grupp --yaml, mellan markörerna för texterna i ramarna.
 titel: Textsamtal i grupp
 undertitel: Lärarledd insats i liten grupp där eleverna samtalar om korta texter och lär sig läsa mellan raderna, för åk 2–9
-ingress: Eleverna lär sig läsa mellan raderna genom att samtala om korta texter. De säger vad de tror och visar sin ledtråd, bygger vidare på varandras tankar och prövar nya idéer mot texten. De har varit med om olika saker och får därför svara olika. Metoden har tre nivåer, och på varje nivå finns tjugofem texter med frågor.
+ingress: Eleverna lär sig läsa mellan raderna genom att samtala om korta texter. De säger vad de tror och visar sin ledtråd, bygger vidare på varandras tankar och prövar nya idéer mot texten. De har varit med om olika saker och får därför svara olika. Metoden har tre nivåer, och på varje nivå finns texter med frågor.
 omrade: Läsning
 arskurs:
   - F-3
@@ -46,7 +46,7 @@ inledning:
   - Det finns inga rätta eller fel tankar. Ni prövar varje tanke mot texten, och ibland ändrar eleven sin tanke när nästa mening visar något nytt. Eleverna har varit med om olika saker och ser därför olika saker i en text. Den som har sovit borta en vecka känner igen hemlängtan, och den som har en katt vet var katter kan gömma sig. Två svar kan skilja sig och ändå båda stämma med texten, och det är okej. Du ställer frågor som du inte själv har svaret på, och du berömmer en ny idé som håller mot texten.
   - Du gör tre saker. Du tänker högt när du läser, så att eleverna hör ditt inre samtal. Du leder samtalet och lämnar över tänkandet till gruppen under veckan. Och du lyssnar på vad eleverna säger, så att du kan börja nästa vecka i det de behöver.
   - Varje vecka är en cykel med tre pass och en ny text i varje pass. I pass 1 läser du högt, stannar och tänker högt, och eleverna tänker med och säger sin tanke till en kamrat. I pass 2 tänker ni tillsammans. Vid stoppet samtalar eleverna i par, och sedan samtalar hela gruppen. I pass 3 läser eleverna själva eller i par och samtalar om frågorna medan du frågar ”Hur vet du det?” och lyssnar. Det du hör i pass 3 avgör vad du visar i nästa veckas pass 1, och så gör ni sex till åtta cykler.
-  - Metoden har tre nivåer, Lättläst, Mellan och Avancerad, och på varje nivå tjugofem texter med frågor och två texter för kartläggningen före och efter. Tjugo av texterna, sex eller sju på varje nivå, är skrivna i en känd författares stil, som Astrid Lindgrens, Tove Janssons eller J.R.R. Tolkiens. Välj nivå efter gruppen, och blanda gärna nivåerna. Texterna räcker till ungefär åtta veckors pass. Vill du ha fler texter, tar du dem ur serien Mellan raderna eller skriver egna, som det står i avsnittet om var du hittar texterna.
+  - Metoden har tre nivåer, Lättläst, Mellan och Avancerad, och på varje nivå texter med frågor och två texter för kartläggningen före och efter. Tjugo av texterna, sex eller sju på varje nivå, är skrivna i en känd författares stil, som Astrid Lindgrens, Tove Janssons eller J.R.R. Tolkiens. Välj nivå efter gruppen, och blanda gärna nivåerna. Texterna räcker till ungefär åtta veckors pass. Vill du ha fler texter, tar du dem ur serien Mellan raderna eller skriver egna, som det står i avsnittet om var du hittar texterna.
 upplagg:
   rubrik: Så fungerar insatsen
   text: "Insatsen pågår i sex till åtta veckor med tre pass på cirka 30 minuter i veckan, och gruppen har två till åtta elever. Varje pass har en ny text, som alla i gruppen läser och samtalar om. Veckans tre pass hänger ihop: i pass 1 stannar du och tänker högt, i pass 2 samtalar eleverna i par vid stoppet och sedan i gruppen, och i pass 3 tänker eleverna mer själva medan du lyssnar. Efter pass 3 läser du lyssningsbladet och ledtrådsbladen och väljer vad du visar i nästa veckas pass 1. Före första passet och efter det sista gör varje elev kartläggningen enskilt med dig, och du jämför poängen."
@@ -589,7 +589,7 @@ roll:
 urval:
   rubrik: Var hittar du texterna?
   text:
-    - Metodens texter står under Materialet. Varje nivå, Lättläst, Mellan och Avancerad, har tjugofem texter, och varje text står på ett eget blad med frågorna under. Översikten under Lärarens sidor visar vad eleven listar ut i varje text, frågornas slag, svårigheten och om texten har en vändning. Varje text har en egen sida med stoppet, hur du kan tänka högt och två öppna frågor. Välj den text som passar veckans tankesteg. Texterna finns också på sidan Ta fram en lästext. Där väljer du nivå, visar en text i taget stort och skriver ut de texter du vill ha, och där finns lärarhandledningen till texterna. Tjugo av texterna, sex eller sju på varje nivå, är skrivna i en känd författares stil, och lärarens sida säger vems stil det är och vilken bok gruppen kan läsa vidare i. Texterna räcker till ungefär åtta veckors pass. Två texter på nivån Avancerad, Kvart i åtta och Samma sak, handlar om en förälder som har det svårt, så ta dem inte samma vecka.
+    - Metodens texter står under Materialet. Varje nivå, Lättläst, Mellan och Avancerad, har sina texter, och varje text står på ett eget blad med frågorna under. Översikten under Lärarens sidor visar vad eleven listar ut i varje text, frågornas slag, svårigheten och om texten har en vändning. Varje text har en egen sida med stoppet, hur du kan tänka högt och två öppna frågor. Välj den text som passar veckans tankesteg. Texterna finns också på sidan Ta fram en lästext. Där väljer du nivå, visar en text i taget stort och skriver ut de texter du vill ha, och där finns lärarhandledningen till texterna. Tjugo av texterna, sex eller sju på varje nivå, är skrivna i en känd författares stil, och lärarens sida säger vems stil det är och vilken bok gruppen kan läsa vidare i. Texterna räcker till ungefär åtta veckors pass. Två texter på nivån Avancerad, Kvart i åtta och Samma sak, handlar om en förälder som har det svårt, så ta dem inte samma vecka.
     - Vill du ha fler texter, tar du dem ur serien Mellan raderna av Monica Karlsson och Liselotte Ståhl (Studentlitteratur). Serien består av fyra böcker med kopieringsunderlag. Efter nivån Lättläst passar Mellan raderna lättläst och sedan Vad står det mellan raderna? Efter Mellan passar Mycket mer mellan raderna, och efter Avancerad passar Mellan raderna avancerad. Facit finns hos förlaget eller i boken. Böckernas frågor står utan rubriker. Sortera dem i på, mellan och bortom raderna innan passet, och bestäm stoppet. Skriv sedan hur du tänker högt, med tankestegen och ledtrådar som står före stoppet, och två öppna frågor, som under Lärarens sidor. Byt till en svårare text eller bok när eleverna klarar slutsatsen med mindre stöd. Du kan också skriva egna texter, som tabellen Så skriver du en egen text visar.
   kravText: "Välj en text per pass som uppfyller tre krav:"
   krav:
@@ -885,7 +885,7 @@ ramar:
             - { rubrik: "Stämmer det?", text: "”Stämmer det med resten? Jag läser vidare: ’Mormor torkar sig snabbt om munnen.’ Ja, nu tror jag att mormor tog dem själv.”" }
         - rubrik: "Välj text"
           falt:
-            - { rubrik: "Nivåerna", text: "Lättläst, Mellan och Avancerad har tjugofem texter var. Välj nivå efter hur eleverna läser. När du läser högt kan klassen ta en svårare nivå. De tre första texterna på varje nivå hör till de lättaste." }
+            - { rubrik: "Nivåerna", text: "Lättläst, Mellan och Avancerad har var sina texter. Välj nivå efter hur eleverna läser. När du läser högt kan klassen ta en svårare nivå. De tre första texterna på varje nivå hör till de lättaste." }
             - { rubrik: "Slagen", text: "Slagen står som taggar på texterna och säger vad eleven listar ut: Känsla, Vem (också vem ”hon” syftar på), Var och när, Varför, Före och efter, Det som menas (vad någon egentligen menar) och Ordet (vad ett ord betyder just här). Börja med Känsla och Vem." }
             - { rubrik: "Stilarna", text: "Sex eller sju texter på varje nivå är skrivna i en känd författares stil. Lärarens sida säger vilken författare, hur du läser texten högt och vilken bok klassen kan läsa vidare i." }
             - { rubrik: "Känsliga texter", text: "Några texter rör något som kan vara svårt för en elev, och då har lärarens sida raden Känsligt. Läs raden, och välj en annan text om texten kan komma för nära någon i klassen." }
@@ -941,7 +941,7 @@ ramar:
             - ["Vi får ändra oss."]
     - rubrik: "Lärarens sidor: Lättläst"
       text:
-        - "Här är de tjugofem texterna på nivån Lättläst och kartläggningens två. Tabellen visar vad varje text handlar om, vad eleven ska lista ut, vilka slags frågor mellan raderna texten har, hur svår den är och om den har en vändning eller är känslig. Efter tabellen har varje text en egen sida med det du behöver i passet: det som står mellan raderna, var du stannar, vad du säger när du tänker högt, svaren och två öppna frågor till samtalet. Frågorna står på elevens blad, så ha din kopia bredvid."
+        - "Här är texterna på nivån Lättläst och kartläggningens två. Tabellen visar vad varje text handlar om, vad eleven ska lista ut, vilka slags frågor mellan raderna texten har, hur svår den är och om den har en vändning eller är känslig. Efter tabellen har varje text en egen sida med det du behöver i passet: det som står mellan raderna, var du stannar, vad du säger när du tänker högt, svaren och två öppna frågor till samtalet. Frågorna står på elevens blad, så ha din kopia bredvid."
       oversikt:
         kolumner: [Texten, Handlar om, Eleven listar ut, Frågornas slag, Svårighet]
         rader:
@@ -1855,7 +1855,7 @@ ramar:
             - ["4. Vad hade du gjort i Viggos ställe?\nVarför?"]
     - rubrik: "Lärarens sidor: Mellan"
       text:
-        - "Här är de tjugofem texterna på nivån Mellan och kartläggningens två. Tabellen visar vad varje text handlar om, vad eleven ska lista ut, vilka slags frågor mellan raderna texten har, hur svår den är och om den har en vändning eller är känslig. Efter tabellen har varje text en egen sida med det du behöver i passet: det som står mellan raderna, var du stannar, vad du säger när du tänker högt, svaren och två öppna frågor till samtalet. Frågorna står på elevens blad, så ha din kopia bredvid."
+        - "Här är texterna på nivån Mellan och kartläggningens två. Tabellen visar vad varje text handlar om, vad eleven ska lista ut, vilka slags frågor mellan raderna texten har, hur svår den är och om den har en vändning eller är känslig. Efter tabellen har varje text en egen sida med det du behöver i passet: det som står mellan raderna, var du stannar, vad du säger när du tänker högt, svaren och två öppna frågor till samtalet. Frågorna står på elevens blad, så ha din kopia bredvid."
       oversikt:
         kolumner: [Texten, Handlar om, Eleven listar ut, Frågornas slag, Svårighet]
         rader:
@@ -2846,7 +2846,7 @@ ramar:
             - ["4. Fröken viskar att det är två minuter kvar. Vad hade du sagt till Elin? Varför?"]
     - rubrik: "Lärarens sidor: Avancerad"
       text:
-        - "Här är de tjugofem texterna på nivån Avancerad och kartläggningens två. Tabellen visar vad varje text handlar om, vad eleven ska lista ut, vilka slags frågor mellan raderna texten har, hur svår den är och om den har en vändning eller är känslig. Efter tabellen har varje text en egen sida med det du behöver i passet: det som står mellan raderna, var du stannar, vad du säger när du tänker högt, svaren och två öppna frågor till samtalet. Frågorna står på elevens blad, så ha din kopia bredvid."
+        - "Här är texterna på nivån Avancerad och kartläggningens två. Tabellen visar vad varje text handlar om, vad eleven ska lista ut, vilka slags frågor mellan raderna texten har, hur svår den är och om den har en vändning eller är känslig. Efter tabellen har varje text en egen sida med det du behöver i passet: det som står mellan raderna, var du stannar, vad du säger när du tänker högt, svaren och två öppna frågor till samtalet. Frågorna står på elevens blad, så ha din kopia bredvid."
       oversikt:
         kolumner: [Texten, Handlar om, Eleven listar ut, Frågornas slag, Svårighet]
         rader:
@@ -4036,7 +4036,7 @@ lathund:
       rubrik: Var texterna och bladen finns
       punkter:
         - fet: Metodens texter.
-          text: Tjugofem texter på varje nivå, kartläggningens två och startmeningarna står under Materialet på metodens sida. Svaren, frågornas slag och de öppna frågorna står på lärarsidan till varje text.
+          text: Texterna på varje nivå, kartläggningens två och startmeningarna står under Materialet på metodens sida. Svaren, frågornas slag och de öppna frågorna står på lärarsidan till varje text.
         - fet: Serien Mellan raderna.
           text: Serien har fyra böcker hos Studentlitteratur, och en eller två passar efter varje nivå.
         - fet: Egna texter.

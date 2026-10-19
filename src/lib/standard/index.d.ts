@@ -60,3 +60,6 @@ export declare function hamtplan(
   lista: { id: string; u: PostUtskrift }[],
   filer: Record<string, { adress: string; byte: number }>,
 ): { hamta: { adress: string; byte: number }[]; sidor: { adress: string; index: number[] | null }[]; byte: number };
+
+/** De fasta antalen av en databas poster (från fem) och grupper (från två) i en text, som "tjugofem texter", "fem på varje nivå" eller "tre teman". */
+export declare function fastaAntal(text: string, ord: string[], grupper?: string[]): string[];

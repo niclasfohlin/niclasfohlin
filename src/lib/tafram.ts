@@ -154,7 +154,7 @@ export interface TaFram {
   losningNamn: string;
   /** Nivåerna med sina poster, och i en bank med teman (faktatexterna) temana i ordning, och nivåns filer: bara posterna,
    *  och på Ta fram ett matteproblem posterna med lösningsförslagen. */
-  nivaer: { namn: string; slug: string; farg: string; poster: TaFramPost[]; teman?: TaFramTema[]; filer: { bara: Fil; med?: Fil } }[];
+  nivaer: { namn: string; slug: string; farg: string; poster: TaFramPost[]; teman?: TaFramTema[]; filer: { bara: Fil; med?: Fil }; kartlaggning: boolean }[];
   /** Sidan har bara texterna (Ta fram en lästext och Ta fram en faktatext; Niclas 2026-10-18 natt: "Funderar på om denna
    *  sida med texter bara ska ha texterna. Så för de hitta det andra via metoden som har lärarsidor mm"): kortet har Visa
    *  stort och taggarna, listan och nivån skriver ut texterna, och lärarens sida nås från Visa stort. Ta fram ett
@@ -376,7 +376,10 @@ async function bygg(m: Metod): Promise<TaFram> {
     if (utan.length) throw new Error(`Ta fram (${d.titel}): ${utan.map((p) => `${p.niva}, text ${p.nr}: ${p.titel}`).join('; ')} har inget tema, men andra texter på nivån har det. Ge ramen fältet tema, med ett namn som temats sida och filer kan heta efter (src/lib/bank.ts, src/lib/handledning.ts).`);
     const teman = egna.some((p) => p.tema) ? [...new Set(egna.map((p) => p.tema ?? ''))].map((namn) => ({ namn, slug: slugAv(namn), adress: `${adress}/${slugAv(namn)}`, poster: egna.filter((p) => (p.tema ?? '') === namn), ...(handledda.has(namn) ? { handledning: handledningensFil(m.id, { tema: namn }) } : {}), ...(temanasPdf.has(namn) ? { utskrift: temanasPdf.get(namn) } : {}) })) : undefined;
     for (const tema of teman ?? []) tema.poster.forEach((p, i) => { p.temaNr = i + 1; });
-    return { namn: n.namn, slug: n.slug, farg: farger[n.namn], poster: egna, ...(teman ? { teman } : {}), filer: { bara: filer[bara], ...(med ? { med: filer[med] } : {}) } };
+    // Nivåns fil har också kartläggningens texter, som inte är poster (de har inget nummer), och länken säger det
+    // (inventeringen 2026-10-19: nivån sade 25 texter och filen hade 27).
+    const kartlaggning = !!bank.nivaer.find((x) => x.slug === n.slug)?.enheter.some((e) => e.nr === undefined && /^Kartläggning/i.test(e.l.vad));
+    return { namn: n.namn, slug: n.slug, farg: farger[n.namn], poster: egna, ...(teman ? { teman } : {}), filer: { bara: filer[bara], ...(med ? { med: filer[med] } : {}) }, kartlaggning };
   });
   // Ett tema heter något som inget annat tema i metoden heter: temats sida, dess lärarhandledning och dess fil heter efter
   // namnet utan nivån (/texter/<tema>, <id>-lararhandledning-<tema>), så två nivåer med samma tema skulle dela adress.

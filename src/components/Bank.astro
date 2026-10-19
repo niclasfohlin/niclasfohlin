@@ -5,10 +5,9 @@
 // Niclas 2026-10-01: det som listar många saker på en gång fälls ut). I nivån står dess översikt, ramen Lärarens sidor:
 // <nivå>, med texten, tabellen och rutorna, där enhetens namn i första kolumnen leder till enhetens sida, och sist
 // nivåns filer. Saknar nivån översikt står enheterna som en numrerad lista med länkar.
-// Efter nivån står dess enheter med följesidorna (sloten, ritade av Metod.astro som på enheternas sidor), bara i
-// utskriften av allt: på skärmen finns de på enheternas sidor, och utskriften har allt, som Word-filen med
-// allt (Niclas 2026-10-10: "Om skriv ut hela beskrivningen i alla är verkligen att skriva ut allt bör denna också vara
-// det"). I utskriften står nivån utfälld, utan länkar och filer.
+// Enheterna med följesidorna står på sina egna sidor och i Word-filerna, inte efter nivån: knapparna skriver ut
+// Word-filernas pdf, och metodsidan växer inte med banken (K-428, Niclas 2026-10-19). I webbläsarens egen utskrift står
+// nivån utfälld, utan länkar och filer.
 // Ett tema med lärarhandledning (src/lib/handledning.ts) har en rad före nivåns filer: temats sida, där handledningen
 // står, och handledningens filer.
 import MetodTabell from './MetodTabell.astro';
@@ -76,7 +75,6 @@ const temanamn = [...new Set(n.enheter.map((e) => e.tema).filter((x): x is strin
     </div>
   </div>
 </details>
-{Astro.slots.has('default') && <div class="bank-utskrift"><slot /></div>}
 
 <script>
   // En gammal länk till en enhet eller en följesida på metodens sida (#ram-12) leder till enhetens sida, där bladet står

@@ -30,7 +30,7 @@
     "datum": "2026-10-19"
   },
   "faktatextsamtal-i-grupp": {
-    "kalla": "bd4efddd83a8dd8e",
+    "kalla": "123c6be0fce744e4",
     "skalor": [
       1.35,
       1.35,
@@ -50,7 +50,7 @@
     "datum": "2026-10-19"
   },
   "gruppstarkande-aktiviteter": {
-    "kalla": "c00b123ca1d7f7b5",
+    "kalla": "08feff95aaec02db",
     "skalor": [
       1.05,
       1.35,
@@ -70,7 +70,7 @@
     "datum": "2026-10-19"
   },
   "kortskrivning-skriv-varje-dag": {
-    "kalla": "1ae5bcc9bb06c106",
+    "kalla": "dea29c6d1e930f59",
     "skalor": [
       1.1,
       1.35,
@@ -110,7 +110,7 @@
     "datum": "2026-10-19"
   },
   "problemlosning-i-grupp": {
-    "kalla": "6cbc669ee556d08e",
+    "kalla": "986d90102446586a",
     "skalor": [
       1.25,
       1.35,
@@ -170,7 +170,7 @@
     "datum": "2026-10-19"
   },
   "textsamtal-i-grupp": {
-    "kalla": "e2ad03ef830112c4",
+    "kalla": "8410db013702ccad",
     "skalor": [
       1.25,
       1.3,

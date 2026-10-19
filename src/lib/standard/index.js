@@ -174,3 +174,47 @@ export function hamtplan(lista, filer) {
   const ut = [...hamta].map(([adress, byte]) => ({ adress, byte }));
   return { hamta: ut, sidor, byte: ut.reduce((s, x) => s + x.byte, 0) };
 }
+
+// ---------- Fasta antal i en text (sajtens K-450) ----------
+// En metods text står också i dess Word-filer, pdf:er och lathund, som görs om när texten ändras. Ett antal av en
+// databas poster i texten, som "tjugofem texter", slutar stämma när databasen växer och skulle göra om filerna varje gång
+// (Niclas 2026-10-19: "Försök hålla antal och annat ur lathundar och filer. Eftersom det inte blir bra skalbarhet").
+// fastaAntal hittar sådana antal, så att den som har databasen kan stanna på dem; texten säger i stället var posterna
+// finns, och sidorna som räknar dem visar talen.
+
+const ENTAL = ['noll', 'ett', 'två', 'tre', 'fyra', 'fem', 'sex', 'sju', 'åtta', 'nio', 'tio', 'elva', 'tolv', 'tretton', 'fjorton', 'femton', 'sexton', 'sjutton', 'arton', 'nitton'];
+const TIOTAL = ['', '', 'tjugo', 'trettio', 'fyrtio', 'femtio', 'sextio', 'sjuttio', 'åttio', 'nittio'];
+
+const TALET = '(?:\\d+|två|tre|fyra|fem|sex|sju|åtta|nio|tio|elva|tolv|tretton|fjorton|femton|sexton|sjutton|arton|nitton|(?:tjugo|trettio|fyrtio|femtio|sextio|sjuttio|åttio|nittio)(?:en|ett|två|tre|fyra|fem|sex|sju|åtta|nio)?)';
+
+/** Ett tal ur texten, med siffror eller i ord ("tjugofem"). */
+function talAv(s) {
+  if (/^\d+$/.test(s)) return Number(s);
+  const t = s.toLowerCase();
+  const tio = TIOTAL.findIndex((x) => x && t.startsWith(x));
+  if (tio > 0) return tio * 10 + Math.max(0, ENTAL.indexOf(t.slice(TIOTAL[tio].length)), ['en', 'ett'].includes(t.slice(TIOTAL[tio].length)) ? 1 : 0);
+  return ENTAL.indexOf(t);
+}
+
+/**
+ * De fasta antalen av en databas poster i en text, som "tjugofem texter", "trettio nya problem" eller "fem på varje
+ * nivå": de slutar stämma när databasen växer, så den som har databasen stannar på dem. ord är
+ * postens substantiv i obestämd och bestämd form ("texter", "texterna"), och de räknas från fem: mindre tal är för det
+ * mesta metodens egna ("två eller tre texter i veckan"). grupper är det som posterna står i ("teman", "kategorier"), och
+ * de räknas från två. Ett tal i ett spann ("vecka 6–8") räknas inte.
+ * @param {string} text
+ * @param {string[]} ord
+ * @param {string[]} [grupper]
+ * @returns {string[]}
+ */
+export function fastaAntal(text, ord, grupper = []) {
+  const fore = '(?<![\\p{L}\\d–-])', efter = '(?![\\p{L}\\d])';
+  const lista = (o) => o.map((x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+  // "fem på varje nivå" står utan substantiv och gäller posterna, så den formen prövas bara med dem.
+  const traff = (subst, minst, perGrupp) => {
+    if (!subst.length) return [];
+    const re = new RegExp(`${fore}(${TALET})(?:\\s+(?!på${efter})\\p{L}+)?\\s+(?:${lista(subst)})${efter}${perGrupp ? `|${fore}(${TALET})\\s+på\\s+(?:varje|var och en av)\\s+(?:nivå|nivåerna|tema|temana)${efter}` : ''}`, 'giu');
+    return [...text.matchAll(re)].filter((m) => talAv(m[1] ?? m[2]) >= minst).map((m) => m[0]);
+  };
+  return [...traff(ord, 5, true), ...traff(grupper, 2, false)];
+}

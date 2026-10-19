@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.5.0, 2026-10-19
+
+- `fastaAntal`: de fasta antalen av en databas poster (från fem) och grupper (från två) i en text, som "tjugofem texter", "fem på varje nivå" eller "tre teman" (sajtens K-450). Niclas: "Hela tanken är att databaserna ska kunna växa och allt då hänger med utan att du måste kontrollera varenda liten text i metoderna", och "Försök hålla antal och annat ur lathundar och filer. Eftersom det inte blir bra skalbarhet". Texten säger var posterna finns, och sidorna som räknar dem visar talen; sajten och riggen stannar på ett fast antal.
+
 ## 0.4.0, 2026-10-18
 
 - `Post.sida` är valfri: en post ur en databas utan metod, som databasens matteproblem (sajtens K-425), har ingen egen sida. Finns sidan prövas den som förut.

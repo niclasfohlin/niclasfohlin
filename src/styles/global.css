@@ -936,7 +936,7 @@ button.lank:hover { color: var(--farg-accent); }
 .bank-lista { list-style: none; margin: 0.5rem 0; padding-left: 0; }
 .bank-lista a { display: inline-block; padding: 0.35rem 0; }
 .bank-rad { display: none; }
-/* Nivåns enheter med följesidorna står bara i utskriften; på skärmen står de på enheternas sidor (Bank.astro). */
+/* Bladmaterialets ramar står bara i utskriften; på skärmen står de på bladens sidor (Bladgrupp.astro). */
 .bank-utskrift { display: none; }
 .bank-filer { margin: 1.25rem 0 0; padding: 0.75rem 0 0; border-top: 1px solid var(--farg-kant); font-family: var(--typsnitt-ui); font-size: 0.95rem; }
 /* En rams egna filer sist på ramens sida ([id]/[enhet].astro). */
@@ -2201,8 +2201,8 @@ html.js .bara-js { display: inline-block; }
   .bank-niva.utan-utskrift { display: none; }
   .bank[data-bladrader] { margin-top: 0; }
   .bank-rad { display: block; }
-  /* Utskriften av hela beskrivningen har nivåernas enheter med följesidorna, var och en på sitt blad (Bank.astro). Banken
-     står som block, så att bladen bryter sidor och får sina sidformat (@page bokliggande) som på enheternas sidor. */
+  /* Utskriften av hela beskrivningen har bladmaterialets ramar, var och en på sitt blad (Bladgrupp.astro). Banken står som
+     block, så att bladen bryter sidor och får sina sidformat (@page bokliggande) som på bladens sidor. */
   .bank { display: block; }
   .bank-utskrift { display: block; }
   /* Nivåerna står utfällda också när utskriften görs utan skript (Bank.astro fäller ut dem vid beforeprint). */

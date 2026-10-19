@@ -3,7 +3,7 @@
 # gruppstarkande-aktiviteter) och bladen Lärarens skattning och Vår grupp i pabordet.yaml (build/blad/).
 titel: Gruppstärkande aktiviteter
 undertitel: Aktiviteter där alla behövs, och en grupp som du följer vecka för vecka, för F–9
-ingress: "En eller två gånger i veckan gör en klass eller en mindre grupp en aktivitet där alla behövs och ingen åker ut, och du leder den i fem delar. Varje vecka skattar du hur gruppen mår och samarbetar, och varannan vecka svarar eleverna på ett blad och samtalar om gruppen. Aktiviteterna finns på 100 kort i fem kategorier."
+ingress: "En eller två gånger i veckan gör en klass eller en mindre grupp en aktivitet där alla behövs och ingen åker ut, och du leder den i fem delar. Varje vecka skattar du hur gruppen mår och samarbetar, och varannan vecka svarar eleverna på ett blad och samtalar om gruppen. Aktiviteterna står på kort, ordnade i kategorier."
 omrade: Socialt
 arskurs:
   - F-3
@@ -26,7 +26,7 @@ material:
   - Lärarens skattning
   - bladet Vår grupp
   - frågekort och meningar att avsluta
-uppdaterad: 2026-10-16
+uppdaterad: 2026-10-19
 publicerad: 2026-10-16
 centrala:
   - id: aktiviteter
@@ -52,7 +52,7 @@ inledning:
   - Gruppstärkande aktiviteter är lekar, utmaningar, samtal och byggen där gruppen bara kan lyckas tillsammans. Metoden passar en hel klass och en särskild undervisningsgrupp med minst fyra elever. Den behövs mest när gruppen är ny, när några står utanför eller när samarbetet går trögt.
   - "Metoden har två delar. Den första är aktiviteten, som du leder i fem delar. Du förklarar aktiviteten och modellerar ett beteende som gruppen behöver, till exempel att fråga ”Får jag ta din hand?” Sedan genomför ni aktiviteten, och du är med och säger högt vad någon gör för gruppen. Efteråt ställer du kortets fråga och säger vad eleverna gjorde för varandra, och sist tackar de varandra."
   - "Den andra delen är gruppen över tid. Ni gör en eller två aktiviteter i veckan, och varje vecka skattar du hur gruppen mår och samarbetar och sätter ett kryss i diagrammet Lärarens skattning. Varannan vecka fyller eleverna i bladet Vår grupp, och du leder en gruppreflektion som slutar i två meningar: ”Detta gör vi bra. Detta ska vi bli bättre på.” I aktiviteterna veckorna efter modellerar du det gruppen ska bli bättre på."
-  - "Du väljer aktiviteterna ur 100 aktivitetskort i fem kategorier: Lära känna varandra, Trygghet och gemenskap, Samarbetsutmaningar, Gemensamma mål och Skapa och bygga. De första veckorna väljer du ur de två första. Kortet är ett A4 som du har i handen eller visar på skärmen, och stegen på kortet följer de fem delarna. De 80 brainbreakkorten är korta rörelsepauser för en grupp som har suttit länge, och på skärmen har de en klocka och musik. Korten finns på sajtens sidor Ta fram en aktivitet och Ta fram en brainbreak, som du når från metodens sida."
+  - "Du väljer aktiviteterna ur aktivitetskorten, som är ordnade i kategorierna Lära känna varandra, Trygghet och gemenskap, Samarbetsutmaningar, Gemensamma mål och Skapa och bygga. De första veckorna väljer du ur de två första. Kortet är ett A4 som du har i handen eller visar på skärmen, och stegen på kortet följer de fem delarna. Brainbreakkorten är korta rörelsepauser för en grupp som har suttit länge, och på skärmen har de en klocka och musik. Korten finns på sajtens sidor Ta fram en aktivitet och Ta fram en brainbreak, som du når från metodens sida."
   - Efter metodens två delar står vad forskningen säger om samarbete och gemenskap, vad som gör en aktivitet gruppstärkande, hur du gör om en lek till samarbete, din roll när gruppen ska bli en grupp, vad du gör när det inte går som tänkt och fler frågor efter en aktivitet. Sist står Materialet med Lärarens skattning och Gruppreflektion.
 upplagg:
   rubrik: Så fungerar insatsen
@@ -110,7 +110,7 @@ tabeller:
         - Ni gör aktiviteten tillsammans. Säger kortet färre elever än ni är, delar ni er i två grupper. Säger kortet att grupperna visar varandra sina lösningar, visar ni dem för en annan grupp på skolan eller prövar igen.
       - - De yngsta
         - "Välj korta aktiviteter, och visa varje steg innan eleverna gör det. Låt tacket vara en enda mening, som ”Tack, Ali, för att du höll i repet.”"
-  - rubrik: De fem kategorierna
+  - rubrik: Kategorierna
     plats: efter-urval
     meny: true
     kolumner:
@@ -277,8 +277,8 @@ tabeller:
 urval:
   rubrik: Var hittar du aktivitetskorten och brainbreakkorten?
   text:
-    - Aktivitetskorten ligger på sidan Ta fram en aktivitet, som har 20 kort i var och en av de fem kategorierna. Välj om du vill se ett kort eller sex, och tryck på en kategori. Varje tryck ger nya kort. Tryck på bocken i hörnet på de kort du vill ha, så hamnar de i listan att skriva ut. Slumpa igen, lägg till fler och skriv ut listan. Kortet är ett A4 med rubrikerna Så gör ni, Material och Att tänka på. Tiden på kortet gäller alla fem delarna, och kortet säger om eleverna rör vid varandra. En aktivitet som tar mer än 30 minuter, till exempel hälften av dem i Skapa och bygga, delar ni upp på två pass, och båda passen slutar med återkopplingen och tacket. Gör gärna samma aktivitet flera gånger, eftersom gruppen samarbetar bättre i en aktivitet som den känner igen. Spara de kort som gruppen har gjort och vill göra igen.
-    - "Brainbreakkorten ligger på sidan Ta fram en brainbreak, som har 80 kort i fem kategorier: Rörelse, Dans & rytm, Lek, Hjärngympa och Lugn. Sidan slumpar fram sex ur alla eller ur en kategori, och gruppen väljer ett. Kortet visas stort med en klocka som är ställd på kortets minuter, och du kan sätta på glad och peppig musik, dansmusik och modern musik eller lugn och avslappnad musik från sidans radio. Du startar klockan och är själv med, och du avslutar genom att räcka upp handen och säga stopp. Ska gruppen orka mer efteråt, gör ni två eller tre pigga brainbreaks i rad och sist en lugn, så att pausen blir omkring tio minuter."
+    - Aktivitetskorten ligger på sidan Ta fram en aktivitet, ordnade i kategorier. Välj om du vill se ett kort eller sex, och tryck på en kategori. Varje tryck ger nya kort. Tryck på bocken i hörnet på de kort du vill ha, så hamnar de i listan att skriva ut. Slumpa igen, lägg till fler och skriv ut listan. Kortet är ett A4 med rubrikerna Så gör ni, Material och Att tänka på. Tiden på kortet gäller alla fem delarna, och kortet säger om eleverna rör vid varandra. En aktivitet som tar mer än 30 minuter, till exempel hälften av dem i Skapa och bygga, delar ni upp på två pass, och båda passen slutar med återkopplingen och tacket. Gör gärna samma aktivitet flera gånger, eftersom gruppen samarbetar bättre i en aktivitet som den känner igen. Spara de kort som gruppen har gjort och vill göra igen.
+    - "Brainbreakkorten ligger på sidan Ta fram en brainbreak, ordnade i kategorierna Rörelse, Dans & rytm, Lek, Hjärngympa och Lugn. Sidan slumpar fram sex ur alla eller ur en kategori, och gruppen väljer ett. Kortet visas stort med en klocka som är ställd på kortets minuter, och du kan sätta på glad och peppig musik, dansmusik och modern musik eller lugn och avslappnad musik från sidans radio. Du startar klockan och är själv med, och du avslutar genom att räcka upp handen och säga stopp. Ska gruppen orka mer efteråt, gör ni två eller tre pigga brainbreaks i rad och sist en lugn, så att pausen blir omkring tio minuter."
   kravText: "En aktivitet som du väljer, eller gör själv, ska klara fyra krav:"
   krav:
     - rubrik: Alla behövs
@@ -429,7 +429,7 @@ lathund:
   innehall: En aktivitet i fem delar
   metoden:
     text:
-      - En eller två gånger i veckan gör gruppen en aktivitet där alla behövs och ingen åker ut. Du väljer den ur 100 kort.
+      - En eller två gånger i veckan gör gruppen en aktivitet där alla behövs och ingen åker ut. Du väljer den på sidan Ta fram en aktivitet.
       - Varannan vecka fyller eleverna i bladet Vår grupp, och du leder en gruppreflektion. I veckorna efter modellerar du det gruppen ska bli bättre på. Varje vecka skattar du i Lärarens skattning hur gruppen mår och samarbetar.
     ruta:
       rubrik: Tre saker att hålla fast vid
@@ -522,9 +522,9 @@ lathund:
       rubrik: Var materialet finns
       punkter:
         - fet: Aktivitetskorten.
-          text: Sidan Ta fram en aktivitet har 100 kort i fem kategorier.
+          text: Sidan Ta fram en aktivitet har korten, ordnade i kategorier.
         - fet: Brainbreakkorten.
-          text: Sidan Ta fram en brainbreak har 80 kort, en klocka och musik.
+          text: Sidan Ta fram en brainbreak har korten, en klocka och musik.
         - fet: Lärarens skattning och Gruppreflektion.
           text: Under Materialet på metodens sida, med bladet Vår grupp och frågekorten.
     bordet:

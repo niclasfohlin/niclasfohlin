@@ -12,8 +12,9 @@
 // (filmen, menyerna, nedladdningsrutan) inte. Korta texter prövas inte, eftersom formen gör om dem: etiketter, numrerade
 // rubriker i remsan, fasernas namn.
 //
-// En metod med en bank (src/lib/bank.ts) prövas som de andra: utskriften av metodens sida och Word-filen med allt har båda
-// enheterna med följesidorna, nivå för nivå (banken lägger bara till sidor och filer). Problemens bilder (problemets
+// En metod med en bank (src/lib/bank.ts): metodens sida har nivåernas översikter, och enheterna med följesidorna står på
+// sina egna sidor (K-428), så bankens texter prövas mot enheternas sidor och bankens fil med alla nivåer, och resten av
+// metoden mot metodens sida och Word-filen med allt. Problemens bilder (problemets
 // sida, Två lösningar och lösningarna på lärarens sida, src/lib/problemform.ts) står utan rubrik och bildtext och prövas
 // som strukturens bild, i textalternativet, och lösningarna i ord är bildernas textalternativ på bladet Två lösningar.
 //
@@ -368,6 +369,9 @@ for (const fil of filer) {
   // på varje handledning, och dess rubrik och text säger det till den som läser metodens fil: de står varken i Word eller
   // i utskriften. En handlednings rubrik står i två delar: etiketten med nivån ("BAS · LÄRARHANDLEDNING") och temat.
   const gemensamText = (d.ramar?.ramar ?? []).flatMap((r, i) => (/^Lärarhandledningarna: /.test(String(r.rubrik)) ? [new RegExp(`^ramar\\.ramar\\.${i}\\.(rubrik$|text\\.)`)] : []));
+  // Rutan och den gemensamma ramen ritas på bankens blad, lösningsförslagen och handledningarna, och prövas därför med
+  // bankens texter, mot enheternas och temanas sidor (nedan), inte mot metodens sida (K-428).
+  const bladensRamar = new Set((d.ramar?.ramar ?? []).flatMap((r, i) => (/^(Lösningsförslagen|Lärarhandledningarna): /.test(String(r.rubrik)) ? [i] : [])));
   // Textens modell, ifylld (arBladsida i src/lib/bank.ts): ramen "Modellen: <nivå>, text <n>, <titel>" ritas bara som
   // bladet efter den, som hos metodriggen. Ramens rubrik, text och delar (frågan, vad svaret har med och ett svar ur
   // lärarens sida) står varken i Word eller i utskriften, och bladets rubrik och text prövas i textalternativet, som andra
@@ -453,7 +457,11 @@ for (const fil of filer) {
   }
   return ut;
   };
-  saknas.push(...provaTexter({ word, utskrift, altWord, altSida }));
+  // Bankens ramar, utom nivåernas översikter, står inte på metodens sida (K-428, 2026-10-19): sidan har översikterna och
+  // länkar till enheternas sidor, och Skriv ut: Allt skriver ut Word-filens pdf. De prövas mot enheternas sidor och bankens
+  // fil nedan.
+  const bankensRamar = new Set(bankfiler.filter((f) => f.metod === id && !f.slag).flatMap((f) => (f.ramar ?? []).filter((ri) => !(f.oversikter ?? []).includes(ri))));
+  saknas.push(...provaTexter({ word, utskrift, altWord, altSida, ram: (ri) => !bankensRamar.has(ri) && !bladensRamar.has(ri) }));
   // Banken (src/lib/bank.ts): enheternas egna sidor och bankens filer byggs på andra vägar än metodens sida och filen med
   // allt (Metod.astro med enhet, mallBarn i metoddocx.ts), så bankens texter prövas där också, med bankens fil med alla
   // nivåer och följesidorna som Word-fil (granskningen 2026-10-10). I en bank där följesidorna står i egna filer
@@ -485,7 +493,7 @@ for (const fil of filer) {
       utskrift: norm(utskriftstext(enhetsHtml).text),
       altWord: new Set([...bxml.matchAll(/\bdescr="([^"]*)"/g)].map((m) => norm(avkoda(m[1])))),
       altSida: new Set([...enhetsHtml.matchAll(/\balt="([^"]*)"/g)].map((m) => norm(avkoda(m[1])))),
-      ram: (ri) => iBanken.has(ri),
+      ram: (ri) => iBanken.has(ri) || bladensRamar.has(ri),
     }).map((x) => `${x}\n      (i bankens fil ${bankfil.namn}.docx och enheternas sidor)`));
   }
   // Filmernas plats (src/lib/film.ts): varje film står i samma avsnitt och efter samma text ur metodens fil i Word-filen

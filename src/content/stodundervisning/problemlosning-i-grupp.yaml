@@ -10,7 +10,7 @@
 # kartläggningens blad med problemet och uppgifterna som listor.
 titel: Problemlösning i grupp
 undertitel: Lärarledd problemlösning och läsförståelse i liten grupp för åk 4–9, med rika problem på tre nivåer
-ingress: Ett körschema för 30-minuterspass i liten grupp, där eleverna läser, tolkar och löser matematiska problem i text. Läraren leder och frågar i stället för att visa lösningen, och gruppen jämför två sätt att lösa varje problem. Metoden har tio problem på var och en av tre nivåer.
+ingress: Ett körschema för 30-minuterspass i liten grupp, där eleverna läser, tolkar och löser matematiska problem i text. Läraren leder och frågar i stället för att visa lösningen, och gruppen jämför två sätt att lösa varje problem. Metoden har problem på tre nivåer.
 omrade: Matematik
 arskurs:
   - 4-6
@@ -46,10 +46,10 @@ centrala:
 inledning:
   - Problemlösning i grupp är en lärarledd insats för två till åtta elever i åk 4–9 som behöver stöd i att läsa, tolka och lösa matematiska problem i text. Varje pass har ett problem. På bordet ligger problemets sida med en svartvit bild och kortet Våra sätt, som har sätt att lösa problem och frågor som paren ställer sig. Innan någon räknar visar paren problemet med en bild, en tabell eller en tallinje på bladet Vår lösning eller en miniwhiteboard, eller så bygger de det med material.
   - "Passet är ett samtal i fem delar: Förstå, Planera, Lösa, Jämföra och Avsluta. I Förstå läser läraren problemet högt, paren berättar det för varandra, och gruppen ringar in frågan och säger vad den vet och vad den ska ta reda på. I Planera föreslår gruppen sätt att visa problemet, och i Lösa prövar paren olika sätt medan läraren går runt och frågar i stället för att visa. I Jämföra lägger läraren fram bladet Två lösningar, med två färdiga lösningar på samma problem. Gruppen ser vad som är lika i dem, och sedan lägger ett eller två par sina lösningar bredvid. I Avsluta sätter gruppen en bock på kortet Våra sätt vid det sätt som fungerade. Skillnaden mot vanligt grupparbete är att läraren leder, modellerar och stöttar. Att modellera är att tänka högt om hur man tar sig an problemet, som ”Jag vill rita det här för att se det framför mig”."
-  - Metoden har tio problem på var och en av tre nivåer, Bas nära åk 4–5, Medel nära åk 6–7 och Avancerat nära åk 8–9. Till varje problem finns lärarens sida och bladet Två lösningar. Lärarens sida säger vad gruppen ringar in och lyfter ut, vad du säger när paret kör fast och vad svaret är. De tio problemen räcker till de första tre till fem veckorna, och sedan väljer du problem ur källorna och förbereder dem på samma sätt. Över veckorna tar eleverna över allt mer av arbetet, från att du tänker högt till att de leder delar av passet själva och använder sätten i klassens matematik.
+  - Metoden har problem på tre nivåer, Bas nära åk 4–5, Medel nära åk 6–7 och Avancerat nära åk 8–9. Till varje problem finns lärarens sida och bladet Två lösningar. Lärarens sida säger vad gruppen ringar in och lyfter ut, vad du säger när paret kör fast och vad svaret är. Metodens problem på nivån räcker till de första tre till fem veckorna. Fler problem finns på sidan Ta fram ett matteproblem, och du kan också välja problem ur källorna och förbereda dem på samma sätt. Över veckorna tar eleverna över allt mer av arbetet, från att du tänker högt till att de leder delar av passet själva och använder sätten i klassens matematik.
 upplagg:
   rubrik: Så fungerar insatsen
-  text: "Två till åtta elever träffas två till tre gånger i veckan i sex till åtta veckor, 30 minuter per pass. Varje pass har ett problem och fem delar: Förstå, Planera, Lösa, Jämföra och Avsluta. Gruppen förstår problemet och föreslår sätt att visa det innan någon räknar, paren prövar, och i Jämföra lägger gruppen sina lösningar bredvid bladet Två lösningar. Metoden har tio problem på var och en av nivåerna Bas, Medel och Avancerat, med en sida för läraren till varje. Kartläggningen före och efter visar om eleven kan återberätta problemet, visa det, lösa det och pröva ett svar."
+  text: "Två till åtta elever träffas två till tre gånger i veckan i sex till åtta veckor, 30 minuter per pass. Varje pass har ett problem och fem delar: Förstå, Planera, Lösa, Jämföra och Avsluta. Gruppen förstår problemet och föreslår sätt att visa det innan någon räknar, paren prövar, och i Jämföra lägger gruppen sina lösningar bredvid bladet Två lösningar. Metoden har problem på nivåerna Bas, Medel och Avancerat, med en sida för läraren till varje. Kartläggningen före och efter visar om eleven kan återberätta problemet, visa det, lösa det och pröva ett svar."
 gruppen:
   rubrik: Så sätter du ihop gruppen
   text: Metoden är för elever som kan läsa ett problem med stöd och räkna talen i det, men som räknar med talen utan att se situationen, kör fast eller bara har ett sätt. Den som ännu inte löser textuppgifter i ett och två steg börjar med De fyra räknesätten i grupp. Förstår eleven inte problemet när du läser det högt, går du igenom ord, begrepp och sammanhang före passet, och den som inte kan läsa texten själv får den uppläst. Gruppen har två till åtta elever på samma nivå, som du väljer efter vad de kan läsa och räkna, oavsett årskurs. Eleverna arbetar i fasta par, och vid ett udda antal i en trio.
@@ -170,7 +170,7 @@ tabeller:
       - - |-
           Rika problem
           (Hagland, Hedrén och Taflin, 2005)
-        - De trettio problemen följer sju kriterier för ett rikt problem, som att det går att lösa på flera sätt.
+        - Problemen följer sju kriterier för ett rikt problem, som att det går att lösa på flera sätt.
       - - |-
           Vägledning om problemlösning i åk 4–8
           (Woodward m.fl., 2012)
@@ -314,7 +314,7 @@ roll:
 urval:
   rubrik: Var hittar du problemen?
   text:
-    - Gör kartläggningen före på den nivå som ligger närmast elevernas årskurs, och välj sedan nivå efter vad kartläggningen visar. Börja med metodens tio problem på nivån, i ordning, ett per pass. De står under Problemen och räcker till de första tre till fem veckorna, med tre eller två pass i veckan. Problemen finns också på sidan Ta fram ett matteproblem. Där väljer du nivå och innehåll, visar ett problem i taget stort och skriver ut de problem du vill ha. Kör gruppen fast på samma sak två pass i rad, tar ni ett problem som liknar det förra innan ni går vidare. När gruppen har löst de tio med lite stöd, kan den ta nästa nivå, om den kan räkna talen där.
+    - Gör kartläggningen före på den nivå som ligger närmast elevernas årskurs, och välj sedan nivå efter vad kartläggningen visar. Börja med metodens problem på nivån, i ordning, ett per pass. De står under Problemen och räcker till de första tre till fem veckorna, med tre eller två pass i veckan. Problemen finns också på sidan Ta fram ett matteproblem, och där finns fler. Där väljer du nivå och innehåll, visar ett problem i taget stort och skriver ut de problem du vill ha. Kör gruppen fast på samma sak två pass i rad, tar ni ett problem som liknar det förra innan ni går vidare. När gruppen har löst nivåns problem med lite stöd, kan den ta nästa nivå, om den kan räkna talen där.
     - Sedan väljer du problem i läromedlets problemlösningsavsnitt, i Skolverkets två problembanker för åk 4–6 och åk 7–9 på Lärportalen, i Nämnarens Problemavdelning och bland Kängurutävlingens tidigare problem, med lösningar och materialet Arbeta vidare, på NCM:s webbplats. Ta först problem som liknar något av de tio. Ett problem är en uppgift där eleven inte direkt vet hur den ska lösas (Skolverket, 2022). Varje problem du väljer förbereder du på bladet Lärarens sida för ett eget problem.
   kravText: "Välj ett problem per pass som är rikt men avgränsat och uppfyller tre krav:"
   krav:
@@ -333,7 +333,7 @@ progression:
       roll: Läraren tänker högt med kortets frågor, som ”Jag frågar mig vad vi ska ta reda på.”
     - vecka: 3–4
       led: Vi gör
-      fokus: "Fler av de tio problemen. Paren ställer kortets frågor till varandra, och du lyssnar. En elev läser problemet högt och leder Förstå."
+      fokus: "Fler av metodens problem. Paren ställer kortets frågor till varandra, och du lyssnar. En elev läser problemet högt och leder Förstå."
       roll: Läraren ger kortare stöd och frågar mer.
     - vecka: 5–6
       led: Ni gör tillsammans
@@ -750,7 +750,7 @@ pabordet:
 ramar:
   rubrik: Problemen
   text:
-    - "Problemen står nivå för nivå, och varje nivå börjar med en översikt över de tio problemen. Varje problem har lärarens sida, problemets sida med bilden, bladet Två lösningar och ett lösningsförslag, ett A4 som går att använda överallt där problemet används. Sist står bladet Vår lösning, kortet Våra sätt och kartläggningen."
+    - "Problemen står nivå för nivå, och varje nivå börjar med en översikt över nivåns problem. Varje problem har lärarens sida, problemets sida med bilden, bladet Två lösningar och ett lösningsförslag, ett A4 som går att använda överallt där problemet används. Sist står bladet Vår lösning, kortet Våra sätt och kartläggningen. Fler problem finns på sidan Ta fram ett matteproblem."
   ramar:
     - rubrik: "Lösningsförslagen: Visa och jämför lösningar"
       text:
@@ -770,7 +770,7 @@ ramar:
               text: Avsluta med det som är lika i lösningarna, idén, så att eleverna kan använda den igen.
     - rubrik: "Lärarens sidor: Bas"
       text:
-        - Här står de tio problemen på nivån Bas, som ligger nära åk 4–5, i den ordning gruppen tar dem. Varje problem har lärarens sida, problemets sida, bladet Två lösningar och ett lösningsförslag.
+        - Här står problemen på nivån Bas, som ligger nära åk 4–5, i den ordning gruppen tar dem. Varje problem har lärarens sida, problemets sida, bladet Två lösningar och ett lösningsförslag.
       oversikt:
         kolumner:
           - Problemet
@@ -1810,7 +1810,7 @@ ramar:
                 Fråga: ”Hur kan ni kontrollera 540 g mot vågarna?”
     - rubrik: "Lärarens sidor: Medel"
       text:
-        - Här står de tio problemen på nivån Medel, som ligger nära åk 6–7, i den ordning gruppen tar dem. Varje problem har lärarens sida, problemets sida, bladet Två lösningar och ett lösningsförslag.
+        - Här står problemen på nivån Medel, som ligger nära åk 6–7, i den ordning gruppen tar dem. Varje problem har lärarens sida, problemets sida, bladet Två lösningar och ett lösningsförslag.
       oversikt:
         kolumner:
           - Problemet
@@ -2852,7 +2852,7 @@ ramar:
                 Fråga: ”Vad betalar Kim för, och vem gav honom mest?”
     - rubrik: "Lärarens sidor: Avancerat"
       text:
-        - Här står de tio problemen på nivån Avancerat, som ligger nära åk 8–9, i den ordning gruppen tar dem. Varje problem har lärarens sida, problemets sida, bladet Två lösningar och ett lösningsförslag.
+        - Här står problemen på nivån Avancerat, som ligger nära åk 8–9, i den ordning gruppen tar dem. Varje problem har lärarens sida, problemets sida, bladet Två lösningar och ett lösningsförslag.
       oversikt:
         kolumner:
           - Problemet
@@ -4237,7 +4237,7 @@ lathund:
   innehall: Ett problem per pass
   metoden:
     text:
-      - Insatsen är lärarledd problemlösning i liten grupp för elever i åk 4–9 som behöver stöd i att läsa, tolka och lösa problem i text. Metoden har tio problem per nivå, Bas, Medel och Avancerat, med en sida för läraren till varje.
+      - Insatsen är lärarledd problemlösning i liten grupp för elever i åk 4–9 som behöver stöd i att läsa, tolka och lösa problem i text. Metoden har problem på tre nivåer, Bas, Medel och Avancerat, med en sida för läraren till varje.
       - Skillnaden mot vanligt grupparbete är att läraren modellerar och frågar. Läraren leder processen, men äger inte lösningen. Gruppen jämför två sätt i varje pass, och över perioden tar eleverna över mer, från att läraren tänker högt till att var och en börjar själv.
     ruta:
       rubrik: "När paret kör fast: stödtrappan"

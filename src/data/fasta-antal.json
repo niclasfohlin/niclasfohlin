@@ -1,0 +1,30 @@
+{
+  "textsamtal-i-grupp": [
+    {
+      "fras": "Tjugo av texterna, sex eller sju på varje nivå, är skrivna i en känd författares stil",
+      "skal": "Antalet texter i en författares stil, inte databasens storlek. Metodriggen skriver om meningen när den lägger till texter i en författares stil."
+    },
+    {
+      "fras": "Sex eller sju texter på varje nivå är skrivna i en känd författares stil",
+      "skal": "Samma antal i lärarhandledningen till lästexterna, och samma skäl."
+    }
+  ],
+  "kortskrivning-skriv-varje-dag": [
+    {
+      "fras": "Varje nivå har tio kort",
+      "skal": "Börja här: tio kort per nivå till de tio första passen. De hör till metoden och inte till skrivkortens databas."
+    },
+    {
+      "fras": "De tio korten är ett förslag",
+      "skal": "Börja här, samma skäl."
+    },
+    {
+      "fras": "ett eller tio nya kort",
+      "skal": "Valet på sidan Ta fram ett skrivkort: ett kort eller tio."
+    },
+    {
+      "fras": "Tio kort per nivå som förslag till de tio första passen",
+      "skal": "Börja här i lathunden, samma skäl."
+    }
+  ]
+}

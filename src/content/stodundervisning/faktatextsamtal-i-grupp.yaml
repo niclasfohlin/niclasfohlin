@@ -1,7 +1,7 @@
 # Samlad av samla.mjs ur delar/, texter/, modeller/, material/ och pabordet/. Ändra där, inte här.
 titel: Faktatextsamtal i grupp
 undertitel: Ett avsnitt i taget och en modell för hela texten, för åk 4–9
-ingress: En liten grupp i åk 4–9 läser en faktatext i veckan, ett avsnitt i taget. Eleverna reder ut det som skaver i texten, säger kärnan i varje avsnitt med högst tio ord och lägger kärnorna i en modell som visar hur texten är byggd. Metoden har femton faktatexter i tre nivåer och fem modeller med blad.
+ingress: En liten grupp i åk 4–9 läser en faktatext i veckan, ett avsnitt i taget. Eleverna reder ut det som skaver i texten, säger kärnan i varje avsnitt med högst tio ord och lägger kärnorna i en modell som visar hur texten är byggd. Metoden har faktatexter i teman på tre nivåer och fem modeller med blad.
 omrade: Läsning
 arskurs:
   - 4-6
@@ -18,7 +18,7 @@ tid: 40 minuter per pass, två pass i veckan
 period: Åtta veckor
 grupp: Två till åtta elever
 material:
-  - femton faktatexter
+  - faktatexter i teman
   - fem modeller med blad
   - post-it-lappar
   - pennor
@@ -54,10 +54,10 @@ inledning:
   - "Faktatextsamtal i grupp är en lärarledd insats där två till åtta elever i åk 4–9 läser en faktatext i veckan och samtalar om den. Den är för elever som läser orden men behöver stöd i att få ihop texten: de läser vidare fast de har slutat förstå, tar det roligaste för det viktigaste och läser varje avsnitt för sig. Eleven lär sig att stanna när det skaver, att säga det viktigaste i ett avsnitt med egna ord och att se hur en faktatext är byggd."
   - "Varje elev har en egen kopia av veckans text och en penna. Texten ser ut som ett kapitel i en faktabok, med fyra avsnitt, en fördjupning och bilder. På bordet ligger post-it-lappar och gruppens blad Kärnorna, där lapparna sitter mellan passen. Varje par har kortet När det skaver. I modellpasset ligger en tom modell i A3 mitt på bordet: en tankekarta, en tidslinje eller en annan av metodens fem modeller. Du har lärarens sida till texten, som säger var det brukar skava och vad du lyssnar efter."
   - En text tar två pass. I läspasset läser gruppen texten, ett avsnitt i taget. Eleverna stryker under det som skaver, ett ord eller en mening de inte förstår, och ni reder ut det. Sedan säger var och en kärnan, det viktigaste i avsnittet med högst tio ord, till den bredvid, och gruppen skriver sin kärna på en lapp. I modellpasset lägger gruppen lapparna i veckans modell, skriver dit textens ord för sambanden och återger hela texten med egna ord, med modellen framför sig. Varje text har en fråga, som gruppen gissar på före läsningen och svarar på i modellpasset.
-  - "Perioden är åtta veckor. Metoden har tre nivåer, Bas, Medel och Avancerat, och varje nivå har fem texter om ett område: vatten, rymden eller smittor och epidemier. Varje text är byggd på sitt sätt och har sin modell. I vecka 1 visar du hur en läsare gör, och sedan tar eleverna över en bit i taget. I vecka 6–8 läser gruppen klassens texter i SO och NO på samma sätt, med de modeller den redan kan."
+  - "Perioden är åtta veckor. Metoden har tre nivåer, Bas, Medel och Avancerat, och varje nivå har texter om ett område: vatten, rymden eller smittor och epidemier. Varje text är byggd på sitt sätt och har sin modell. I vecka 1 visar du hur en läsare gör, och sedan tar eleverna över en bit i taget. I vecka 6–8 läser gruppen klassens texter i SO och NO på samma sätt, med de modeller den redan kan."
 upplagg:
   rubrik: Så fungerar insatsen
-  text: "Två till åtta elever har två pass i veckan i åtta veckor, 40 minuter per pass. Gruppen läser en faktatext i veckan, i ett läspass och ett modellpass. I läspasset läser gruppen ett avsnitt i taget, i fyra steg: Läs, Red ut, Kärnan och Lappen. I modellpasset lägger gruppen post-it-lapparna i en modell och svarar på textens fråga. Vecka 1–5 har nivåns fem texter, och vecka 6–8 klassens texter i SO och NO. Kartläggningen före och efter perioden, lapparna och elevens svar varje vecka visar om eleven hittar kärnan och ser hur texten hänger ihop."
+  text: "Två till åtta elever har två pass i veckan i åtta veckor, 40 minuter per pass. Gruppen läser en faktatext i veckan, i ett läspass och ett modellpass. I läspasset läser gruppen ett avsnitt i taget, i fyra steg: Läs, Red ut, Kärnan och Lappen. I modellpasset lägger gruppen post-it-lapparna i en modell och svarar på textens fråga. Vecka 1–5 har ett temas texter, en i veckan, och vecka 6–8 klassens texter i SO och NO. Kartläggningen före och efter perioden, lapparna och elevens svar varje vecka visar om eleven hittar kärnan och ser hur texten hänger ihop."
 gruppen:
   rubrik: Så sätter du ihop gruppen
   text: "Metoden är för elever som avkodar hjälpligt men inte får ihop en faktatext: de läser till slutet och kan inte säga vad den handlade om. Eleven behöver kunna förstå texten när någon läser den högt. Den som avkodar mödosamt kan vara med, eftersom du och kamraten läser högt. Hen tränar avkodningen vid sidan av. Gruppen har två till åtta elever som arbetar i par, och vid ett udda antal arbetar tre tillsammans. Sju eller åtta elever arbetar i två halvor, som det står under Arbetsform. Välj nivå efter elevernas läsning: kartläggningen före perioden visar vilken som passar."
@@ -492,7 +492,7 @@ roll:
 urval:
   rubrik: Var hittar du texterna och modellerna?
   text:
-    - "Metodens femton texter står bland materialet, fem på varje nivå, med lärarens sida före och den ifyllda modellen efter. Texterna finns också på sidan Ta fram en faktatext, ordnade efter nivå och tema. Där visar du en text stort och skriver ut de texter du vill ha. Alla texterna har samma delar: en ingress som slutar med textens fråga, rutan Siffran, fyra avsnitt med ord förklarade i marginalen, bilder med avsnittens nummer, en faktaruta, en fördjupning som du läser högt i modellpasset och rutan Visste du att, som gruppen läser sist. Se filmerna under Läs mer innan du visar dem. Texterna är skrivna för metoden, och varje uppgift är prövad mot en källa. De är övningstexter och är inte sakgranskade som ett läromedel."
+    - "Metodens texter står bland materialet, i teman på varje nivå, med lärarens sida före och den ifyllda modellen efter. Texterna finns också på sidan Ta fram en faktatext, ordnade efter nivå och tema. Där visar du en text stort och skriver ut de texter du vill ha. Alla texterna har samma delar: en ingress som slutar med textens fråga, rutan Siffran, fyra avsnitt med ord förklarade i marginalen, bilder med avsnittens nummer, en faktaruta, en fördjupning som du läser högt i modellpasset och rutan Visste du att, som gruppen läser sist. Se filmerna under Läs mer innan du visar dem. Texterna är skrivna för metoden, och varje uppgift är prövad mot en källa. De är övningstexter och är inte sakgranskade som ett läromedel."
     - Varje modell har en sida, ett exempel om skolan och tre blad. Veckans blad skriver du ut på A3 till gruppen. Är ni bara ett par räcker A4, och då skriver paret i fälten, för hand eller på datorn.
   kravText: "En egen text i vecka 6–8 ska uppfylla tre krav:"
   krav:
@@ -690,7 +690,7 @@ lathund:
       rubrik: Var materialet finns
       punkter:
         - fet: Texterna.
-          text: Femton texter i tre nivåer, med lärarens sida före varje.
+          text: Texterna i tre nivåer, med lärarens sida före varje.
         - fet: Modellerna.
           text: Fem modeller, med ett exempel och tre blad var.
         - fet: Bladen och korten.
@@ -1143,7 +1143,7 @@ ramar:
     - rubrik: "Lärarhandledning: Bas, Vatten"
       tema: Vatten
       text:
-        - Temat Vatten har fem faktatexter, som brukar passa i åk 4–5. Varje vecka har klassen en läslektion och en modellektion om veckans text, så temat tar fem veckor. Varje elev har texten, en penna och papper till svaret. Du har tavlan, magneter, A4-ark och en tjock tuschpenna.
+        - Temat Vatten har en faktatext för var och en av de fem strukturerna, som brukar passa i åk 4–5. Varje vecka har klassen en läslektion och en modellektion om veckans text, så temat tar fem veckor. Varje elev har texten, en penna och papper till svaret. Du har tavlan, magneter, A4-ark och en tjock tuschpenna.
       delar:
         - rubrik: "1 Vattenplaneten: Tankekartan"
           falt:
@@ -1995,7 +1995,7 @@ ramar:
     - rubrik: "Lärarhandledning: Medel, Rymden"
       tema: Rymden
       text:
-        - Temat Rymden har fem faktatexter, som brukar passa i åk 6–7. Varje vecka har klassen en läslektion och en modellektion om veckans text, så temat tar fem veckor. Varje elev har texten, en penna och papper till svaret. Du har tavlan, magneter, A4-ark och en tjock tuschpenna.
+        - Temat Rymden har en faktatext för var och en av de fem strukturerna, som brukar passa i åk 6–7. Varje vecka har klassen en läslektion och en modellektion om veckans text, så temat tar fem veckor. Varje elev har texten, en penna och papper till svaret. Du har tavlan, magneter, A4-ark och en tjock tuschpenna.
       delar:
         - rubrik: "1 Solens familj: Tankekartan"
           falt:
@@ -2890,7 +2890,7 @@ ramar:
     - rubrik: "Lärarhandledning: Avancerat, Smittor"
       tema: Smittor
       text:
-        - Temat Smittor har fem faktatexter, som brukar passa i åk 8–9. Varje vecka har klassen en läslektion och en modellektion om veckans text, så temat tar fem veckor. Varje elev har texten, en penna och papper till svaret. Du har tavlan, magneter, A4-ark och en tjock tuschpenna. Avsnitten är långa, så läs gärna ett avsnitt till högt.
+        - Temat Smittor har en faktatext för var och en av de fem strukturerna, som brukar passa i åk 8–9. Varje vecka har klassen en läslektion och en modellektion om veckans text, så temat tar fem veckor. Varje elev har texten, en penna och papper till svaret. Du har tavlan, magneter, A4-ark och en tjock tuschpenna. Avsnitten är långa, så läs gärna ett avsnitt till högt.
       delar:
         - rubrik: "1 Kroppens försvar: Tankekartan"
           falt:

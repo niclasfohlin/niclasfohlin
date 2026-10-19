@@ -16,6 +16,10 @@
 // knapparna, så att det inte blir två knappar för samma sak.
 import data from '../data/centrala.json';
 import { sammaRubrik } from './film';
+import { fastaAntal } from './standard/index.js';
+
+// Databasernas substantiv, som provet av fasta antal i registret letar efter (fastaAntal i standarden).
+const DATABASENS_ORD = ['problem', 'problemen', 'texter', 'texterna', 'lästexter', 'faktatexter', 'skrivkort', 'kort', 'korten', 'aktiviteter', 'aktivitetskort', 'brainbreaks'];
 
 /** En post i registret. adress är sidan, pdf:en under /stodundervisning/ eller formulärets korta adress. kort är en kort
  *  adress som Netlify leder till adress (netlify.toml) och som står i Word-filen. metod är metoden som saken hör till, när
@@ -39,6 +43,8 @@ export function registerFel(): string[] {
     if (c.slag === 'sida' && !/^\/[a-z0-9/-]+$/.test(c.adress ?? '')) fel.push(`${vem}: en sidas adress börjar med / och har inget filnamn.`);
     if (c.kort !== undefined && !/^\/[a-z0-9-]+$/.test(c.kort)) fel.push(`${vem}: kort är en adress med ett led, som /skrivkort.`);
     if (!c.mejl?.trim()) fel.push(`${vem}: mejl är det som följer på länken i mejlet om en ny metod och saknas.`);
+    // Registret säger inte hur stora databaserna är: talen står på sidorna, som räknar dem (METODER.md under Antalen, K-450).
+    for (const t of fastaAntal(`${c.namn ?? ''} ${c.mejl ?? ''}`, DATABASENS_ORD, ['teman', 'kategorier'])) fel.push(`${vem}: "${t}" är ett fast antal av en databas poster och slutar stämma när databasen växer. Skriv utan antal.`);
   });
   return fel;
 }

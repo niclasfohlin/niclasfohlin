@@ -15,7 +15,7 @@ Den här filen säger vad sajten är, vad du får göra och var allt annat står
 | STIL.md | Hur text skrivs på sajten, i kod-kommentarer och i rapporter till Niclas |
 | KONCEPT.md | Vad sajten ska bli och varför |
 | DRIFT.md | Plattformarna: vad som finns hos GitHub, Netlify, Brevo och Loopia, var inloggningarna ligger, kommandon som fungerar, vad man gör när något är rött; krediterna och trafiken; besöksstatistiken i GoatCounter; delningskorten, delningsraden och bildernas mått; kommentarerna; krokarna; sessionerna och meddelandena till metodriggen |
-| METODER.md | Hur en metod tas emot och görs om: modellen, mappningen från kompendium till YAML, lathunden, textreglerna, kontrollerna, Codex-granskningen, metodriggen utanför repot, serier och lektionsbanker (Ljudlek i grupp), kurser i veckor och veckans material (Ordverkstad i grupp), filmerna, Word och Google Dokument |
+| METODER.md | Hur en metod tas emot och görs om: modellen, mappningen från kompendium till YAML, antalen och databaserna, lathunden, textreglerna, kontrollerna, Codex-granskningen, metodriggen utanför repot, serier och lektionsbanker (Ljudlek i grupp), kurser i veckor och veckans material (Ordverkstad i grupp), filmerna, Word och Google Dokument |
 | wordparitet (`C:/wordparitet`, `node_modules/wordparitet/REGLER.md`) | Word och Google Dokument: reglerna med skäl och mätningar, regelprovet, mätbänken och jämförelserna, i en modul som sajten och metodriggen delar och båda bygger ut (K-158). Hur en ny regel läggs dit står i METODER.md under Word och Google Dokument |
 | UPPSTART.md | Hur drift, konton och behörigheter sattes upp från början |
 | KO.md | Kön. `node scripts/ko.mjs lista` visar den, `/natt` arbetar igenom den |

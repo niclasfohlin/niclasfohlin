@@ -2,7 +2,7 @@
 # biblioteket i skrivkort/ (node build/skrivkort.mjs kortskrivning-skriv-varje-dag).
 titel: "Kortskrivning: skriv varje dag"
 undertitel: Tio minuter med dagens skrivkort och fem att dela, för åk 1–9
-ingress: "Varje dag skriver gruppen eller klassen utifrån dagens skrivkort: en bild som sätter igång en berättelse, eller ett citat. Den som vill läser sedan en rad för en kamrat. Ingen rättar, och inget kan bli fel. Dagens kort slumpar du fram ur 330 skrivkort, och det visas stort med en klocka som alla ser."
+ingress: "Varje dag skriver gruppen eller klassen utifrån dagens skrivkort: en bild som sätter igång en berättelse, eller ett citat. Den som vill läser sedan en rad för en kamrat. Ingen rättar, och inget kan bli fel. Dagens kort slumpar du fram ur skrivkorten, och det visas stort med en klocka som alla ser."
 omrade: Skrivning
 arskurs:
   - F-3
@@ -25,7 +25,7 @@ material:
   - klocka som alla ser
   - lösa papper
   - blad på väggen
-uppdaterad: 2026-10-18
+uppdaterad: 2026-10-19
 publicerad: 2026-10-14
 relaterade:
   - texttyper-i-grupp
@@ -173,7 +173,7 @@ tabeller:
 urval:
   rubrik: Var hittar du skrivkorten?
   text:
-    - "Skrivkorten ligger på sidan Ta fram ett skrivkort, med 110 kort på var och en av nivåerna Bas, Medel och Avancerat, ungefär åk 1–3, 4–6 och 7–9. På Bas är varje kort en bild: något ur sagans värld, något knasigt eller något att undra över. På Medel är två av tre kort bilder eller händelser med foto, och resten är citat ur sagor och dikter. På Avancerat är hälften bilder och händelser, hälften dikter och citat. Välj ett kort eller tio och tryck på en nivå. Varje tryck ger nya kort. Kortet visas stort med en klocka bredvid, som du ställer på skrivtiden och som ringer när tiden är slut, och korten går att skriva ut."
+    - "Skrivkorten ligger på sidan Ta fram ett skrivkort, med kort på var och en av nivåerna Bas, Medel och Avancerat, ungefär åk 1–3, 4–6 och 7–9. På Bas är varje kort en bild: något ur sagans värld, något knasigt eller något att undra över. På Medel är två av tre kort bilder eller händelser med foto, och resten är citat ur sagor och dikter. På Avancerat är hälften bilder och händelser, hälften dikter och citat. Välj ett kort eller tio och tryck på en nivå. Varje tryck ger nya kort. Kortet visas stort med en klocka bredvid, som du ställer på skrivtiden och som ringer när tiden är slut, och korten går att skriva ut."
     - Korten är inte märkta som lättsamma eller allvarliga, och inget tungt är bortvalt. Välj nivå efter eleverna och hur vuxet kortet ska vara, inte efter årskursen, och se på kortet före passet.
   kravText: "Gör du ett eget kort, till exempel ur dagens lektion, eller låter eleverna göra ett, ska det klara tre krav:"
   krav:
@@ -390,7 +390,7 @@ lathund:
       rubrik: Var materialet finns
       punkter:
         - fet: Skrivkorten.
-          text: 110 kort på var och en av nivåerna Bas, Medel och Avancerat, på sidan Ta fram ett skrivkort, som du når från metodens sida.
+          text: Korten på nivåerna Bas, Medel och Avancerat, på sidan Ta fram ett skrivkort, som du når från metodens sida.
         - fet: Börja här.
           text: Tio kort per nivå som förslag till de tio första passen, under Materialet på metodens sida, med en början att låna.
         - fet: Skrivlistan.

@@ -4,11 +4,25 @@ import publikationerData from '../data/publikationer.json';
 import { arLektion, byggSerier, serieUppdaterad } from './serie';
 import { bankAv } from './bank';
 import { matteproblemen, type Matteproblem } from './matteproblem';
+import { metodensFastaAntal } from './antal';
 
 // Utkast visas i utvecklingsläge men aldrig i produktionsbygget. Databasens matteproblem har inget utkastläge.
+// En metods text, som också står i dess Word-filer och lathund, säger inte hur många poster en databas har: ett fast
+// antal stoppar bygget (src/lib/antal.ts, METODER.md under Antalen och databaserna, K-450).
 export async function publicerade<K extends CollectionKey>(samling: K): Promise<CollectionEntry<K>[]> {
   const alla = await getCollection(samling);
-  return import.meta.env.PROD ? alla.filter((post) => !('utkast' in post.data && post.data.utkast)) : alla;
+  const synliga = import.meta.env.PROD ? alla.filter((post) => !('utkast' in post.data && post.data.utkast)) : alla;
+  if (samling === 'stodundervisning') for (const m of synliga as CollectionEntry<'stodundervisning'>[]) provaAntal(m);
+  return synliga;
+}
+
+// En metod prövas en gång per bygge, och i utvecklingsläget igen när filen har ändrats (nytt data).
+const provade = new WeakSet<object>();
+function provaAntal(m: CollectionEntry<'stodundervisning'>) {
+  if (provade.has(m.data)) return;
+  const fel = metodensFastaAntal(m);
+  if (fel.length) throw new Error(`${m.data.titel}: ${fel.length} fasta antal av databasens poster, som slutar stämma när databasen växer och skulle göra om Word-filerna, pdf:erna och lathunden varje gång:\n  ${fel.join('\n  ')}\nSkriv utan antal och säg var posterna finns (METODER.md under Antalen och databaserna). Är talet en del av metoden och inte databasens storlek, skriv frasen med sitt skäl i src/data/fasta-antal.json.`);
+  provade.add(m.data);
 }
 
 // Ta fram ett matteproblems alla problem (src/lib/matteproblem.ts): metoden vars bank är problem, med databasens poster i

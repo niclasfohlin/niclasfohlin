@@ -24,6 +24,7 @@ Den här mappen är början på modulen som sajten och metodriggen ska dela, som
 | `Post`, `PostUtskrift` (typerna) | Postens form: id, nivå, nummer, titel, rad, taggar (en eller flera), sida, lösningsförslag, bild (när posten har en) och utskrifter, med var utskrifternas sidor står i källfilerna |
 | `postFel`, `databasFel` | Kontrollerna, som listor med fel |
 | `hamtplan` | Det billigaste sättet att hämta en listas sidor: posternas egna pdf:er eller källfilen en gång |
+| `fastaAntal` | Spärren: de fasta antalen av en databas poster (från fem) och grupper (från två) i en text, som "tjugofem texter" eller "tre teman". De slutar stämma när databasen växer, och eftersom texten också står i Word-filerna, pdf:erna och lathunden skulle de göra om dem varje gång. Texten säger var posterna finns, och sidorna visar talen. Reglerna står i sajtens METODER.md under Antalen och databaserna |
 
 ## Det som kommer
 

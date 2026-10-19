@@ -272,12 +272,6 @@ else ramarna.forEach((ram, ri) => {
 // Det som gäller hela kursen börjar på en ny sida i utskriften, som i Word, också när den sista veckans material är en
 // hel ram (Inbjudan till läsaren i Skrivkurs: sagoboken; granskningen 2026-10-10).
 if (sistaVeckan >= 0 && punkter[sistaVeckan + 1]) punkter[sistaVeckan + 1].helaKursen = true;
-// Bankens enheter på metodens sida: varje nivå med sina enheter och följesidor i bankens ordning, som i Word-filen med
-// allt och i bankens fil med alla nivåer. På skärmen står bara nivåernas översikter, och enheterna på egna sidor; i
-// utskriften av allt står de (Niclas 2026-10-10: "Om skriv ut hela beskrivningen i alla är verkligen att skriva ut allt bör
-// denna också vara det?"), och utskriften Metoden har dem inte, eftersom Materialet är material (data-material nedan).
-// Ett temas lärarhandledning (src/lib/handledning.ts) står före temats första text, som i Word-filen med allt.
-const bankPunkter = new Map<string, Punkt[]>(banken && !undersida ? banken.nivaer.map((n) => [n.namn, n.enheter.flatMap((e) => [...(e.handledning !== undefined ? [e.handledning] : []), ...e.fore, e.ri, ...e.efter]).map((ri) => ({ ram: ramarna[ri], ri }))]) : []);
 const handledningar = lararhandledningar(ramarna);
 const bokhl = bokhandledningen(ramarna);
 // Gamla länkar till en enhet eller en följesida på metodens sida (#ram-12, #lararens-sida, #bas-problem-1) leder till
@@ -292,7 +286,7 @@ const bankLankar = banken && !undersida ? Object.fromEntries(banken.enheter.flat
 // med bilden (Problemsida.astro), bladet Två lösningar med de ritade lösningarna och utan lärarens sida före (Textpar.astro
 // med bilder), och lärarens sida med problemet i en ruta överst och lösningarna efter texten. Samma regler som i Word.
 const former = problemformer(ramarna, bilderPaBordet);
-for (const p of [...punkter, ...[...bankPunkter.values()].flat()]) {
+for (const p of punkter) {
   const par = p.lage ? null : textparAv(p.ram);
   if (par && former.losningar(p.ram)) p.par = par;
   else if (par) { p.par = par; p.ram = textparLarare(p.ram); }
@@ -1079,11 +1073,10 @@ const meny = [
                 <ul class="filrader bankfiler-niva"><li><span class="filrubrik">Två sidor för hela klassen</span> <Filval fil={`/stodundervisning/${bokhandledningensFil(id)}`} namn={bokhandledningensFil(id)} rubrik={`Lärarhandledning: ${bokhl.titel}`} statistik={`${d.titel}: lärarhandledningen till ${banken.ord.alla}`} pdf pdfTitel="Ladda ner som pdf" utanDrive liten /></li></ul>
               </div>
             )}
-            {/* Handledningen själv, bara i utskriften: först, före den första nivåns översikt, som i Word-filen med allt
-                (bankfilensRamar i src/lib/bank.ts; Codex-granskningen 2026-10-19: i bankens första nivå stod den efter
-                översikten). */}
-            {bokhl && <div class="bank-utskrift">{rita({ ram: ramarna[bokhl.ri], ri: bokhl.ri })}</div>}
-            {banken.nivaer.map((n) => <Bank d={d} id={id} bank={banken} niva={n} farger={bankFarger} ankare={(i) => ramAnkare[i]} friKlass={friKlass}>{bankPunkter.get(n.namn)!.map(rita)}</Bank>)}
+            {/* Nivåerna med översikten och filerna. Enheterna med följesidorna och lärarhandledningen står på sina egna sidor
+                och i Word-filerna, inte här: knapparna skriver ut Word-filernas pdf, och metodsidan växer inte med banken
+                (K-428; Niclas 2026-10-19 sa ja till att webbläsarens egen utskrift av metodsidan är utan bankens blad). */}
+            {banken.nivaer.map((n) => <Bank d={d} id={id} bank={banken} niva={n} farger={bankFarger} ankare={(i) => ramAnkare[i]} friKlass={friKlass} />)}
           </div>
         )}
         {/* Nivåernas material (Nivarad.astro): en rad per nivå i nivåns färg, med nivåns ramar i. Står nivåerna först i

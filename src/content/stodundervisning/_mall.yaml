@@ -8,6 +8,8 @@
 # jämnt ut i ett stycke (en radbrytning \n börjar ett nytt).
 # "åk" och siffran efter skrivs med hårt mellanslag (U+00A0), som i undertiteln nedan, så att raden inte kan brytas
 # mellan dem: bygget stannar på "åk" med vanligt mellanslag före en siffra.
+# Texten och lathunden säger inte hur många poster en databas har (problem, texter, teman, kort), utan vad som finns och
+# var: sidorna visar talen, och bygget stannar på ett fast antal (METODER.md under Antalen och databaserna).
 
 titel: Metodens namn
 # Raden under rubriken: vad metoden är och för vem.

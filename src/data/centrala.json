@@ -7,7 +7,7 @@
     "adress": "/stodundervisning/problemlosning-i-grupp/problem",
     "kort": "/matteproblem",
     "metod": "problemlosning-i-grupp",
-    "mejl": "välj nivå och innehåll bland sextio problem med lösningsförslag, visa ett stort och skriv ut dem du vill ha"
+    "mejl": "välj nivå och innehåll bland problemen med lösningsförslag, visa ett stort och skriv ut dem du vill ha"
   },
   {
     "id": "lastexter",
@@ -65,7 +65,7 @@
     "adress": "/stodundervisning/gruppstarkande-aktiviteter/aktiviteter",
     "kort": "/gruppstarkande",
     "metod": "gruppstarkande-aktiviteter",
-    "mejl": "slumpa fram ett aktivitetskort eller sex ur hundra i fem kategorier, samla dem du vill ha i en lista och skriv ut dem"
+    "mejl": "slumpa fram ett aktivitetskort eller sex ur alla eller en kategori, samla dem du vill ha i en lista och skriv ut dem"
   },
   {
     "id": "brainbreaks",
@@ -75,7 +75,7 @@
     "adress": "/stodundervisning/gruppstarkande-aktiviteter/brainbreaks",
     "kort": "/brainbreaks",
     "metod": "gruppstarkande-aktiviteter",
-    "mejl": "slumpa fram sex brainbreaks ur alla eller en av fem kategorier, välj en och visa den stort med klockan och musiken"
+    "mejl": "slumpa fram brainbreaks, sex i taget, ur alla eller en kategori, välj en och visa den stort med klockan och musiken"
   },
   {
     "id": "vargrupp",

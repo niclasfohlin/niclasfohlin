@@ -29,7 +29,7 @@ for (const f of readdirSync(mapp).filter((x) => /\.(js|d\.ts)$/.test(x))) {
   }
 }
 
-const { slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan } = await import(pathToFileURL(join(mapp, 'index.js')).href);
+const { slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal } = await import(pathToFileURL(join(mapp, 'index.js')).href);
 const fall = [
   ['Två lösningar', 'tva-losningar'], ['Lärarens sida', 'lararens-sida'], ['Bas', 'bas'], ['Problem och lösning', 'problem-och-losning'],
   ['Café Über', 'cafe-uber'], ['  –Äpple, år 3–  ', 'apple-ar-3'], ['Venndiagrammet', 'venndiagrammet'], ['Ö', 'o'],
@@ -84,5 +84,11 @@ if (tva.hamta.length !== 1 || tva.hamta[0].adress !== filer['metoden-problem-bas
 const med = hamtplan(ratt.map((p) => ({ id: p.id, u: p.utskrift.med })), filer);
 if (med.hamta.length !== 2 || med.byte !== 880000) fel.push(`hamtplan hämtar inte posternas egna pdf:er när de är mindre än källfilen: ${JSON.stringify(med)}`);
 
+// Spärren mot fasta antal av en databas poster (K-450).
+const ord = ['texter', 'texterna', 'problem', 'problemen'];
+const traffar = [['på varje nivå tjugofem texter med frågor', 1], ['fem på varje nivå', 1], ['trettio nya problem', 1], ['tre teman', 1],
+  ['två eller tre texter i veckan', 0], ['vecka 6–8 klassens texter', 0], ['Läs en text', 0]];
+for (const [t, n] of traffar) { const f = fastaAntal(t, ord, ['teman']); if (f.length !== n) fel.push(`fastaAntal("${t}") ger ${JSON.stringify(f)}`); }
+
 if (fel.length) { console.error(`standardprov: ${fel.length} fel i src/lib/standard/:\n  ${fel.join('\n  ')}`); process.exit(1); }
-console.log(`standardprov: standarden (src/lib/standard/) importerar inget utanför sig själv, och slugAv, UPPTAGNA_LED, innehållstaggarna, postens rad och fel och hämtplanen svarar rätt.`);
+console.log(`standardprov: standarden (src/lib/standard/) importerar inget utanför sig själv, och slugAv, UPPTAGNA_LED, innehållstaggarna, postens rad och fel och hämtplanen och spärren mot fasta antal svarar rätt.`);

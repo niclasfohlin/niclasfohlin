@@ -181,7 +181,7 @@ const temaslugs = Object.fromEntries(t.nivaer.map((n) => [n.slug, (n.teman ?? []
             {/* Hela nivån i en fil, som är billigare än nivåns poster var för sig (K-424). En nivå med ett tema har temats fil,
                 som är samma sidor (designgranskningen 2026-10-18 natt: två knappar gjorde samma sak). */}
             {(n.teman?.length ?? 0) !== 1 && <p class="tf-nivafiler"><span class="tf-nivafiler-rubrik">Hela nivån {n.namn}:</span>{' '}
-              <a href={n.filer.bara.adress} target="_blank" rel="noopener" data-goatcounter-click={`fil:${n.filer.bara.namn}.pdf`} data-goatcounter-title={`${t.titel}: ${n.namn}, ${baraNamn} som pdf`}>{baraNamn}, pdf {mb(n.filer.bara.byte)}</a>
+              <a href={n.filer.bara.adress} target="_blank" rel="noopener" data-goatcounter-click={`fil:${n.filer.bara.namn}.pdf`} data-goatcounter-title={`${t.titel}: ${n.namn}, ${baraNamn} som pdf`}>{baraNamn}{n.kartlaggning ? ' och kartläggningen' : ''}, pdf {mb(n.filer.bara.byte)}</a>
               {!t.baraTexter && n.filer.med && <>{' · '}<a href={n.filer.med.adress} target="_blank" rel="noopener" data-goatcounter-click={`fil:${n.filer.med.namn}.pdf`} data-goatcounter-title={`${t.titel}: ${n.namn}, ${t.ord.alla} med ${t.folje} som pdf`}>{medNamn}, pdf {mb(n.filer.med.byte)}</a></>}
             </p>}
           </section>
