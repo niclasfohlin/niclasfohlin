@@ -12,10 +12,22 @@
 // Allt ur en källa utan drift (Niclas 2026-09-27): npm run validera kör --vid-behov, som mäter just de metoder som
 // är ändrade och tar bort överblivna; bygget på Netlify kör --kontrollera och stannar om en inaktuell mätning pushats.
 //
+// Mätningen nycklas i två steg (K-462; Niclas 2026-10-19: "Du får gärna försöka fixa så denna validering i framtiden görs
+// snabbare om det går"). Kontrollsumman (kalla) säger utan bygge om metoden eller koden har ändrats. Har den det byggs
+// provfilerna, och deras innehåll (scripts/wordinnehall.mjs, utan det som skiftar mellan byggen) jämförs med innehållet
+// när metoden mättes (innehall), tillsammans med mätningen själv (word-provsidor.ps1, google.mjs och MATNING här). Är
+// provfilerna desamma ger Word och Google samma storlekar, och bara kontrollsumman skrivs om; Word och Google mäter bara
+// de metoder vars lathund verkligen ser annorlunda ut. Förut mättes alla lathundar om, över en timme, vid varje ändring
+// i Word-koden, också en som bara lade länkar i metodernas löptext.
+//
 //   node scripts/lathund-word.mjs                 alla metoder med lathund
 //   node scripts/lathund-word.mjs <id> [<id>…]    bara de angivna
 //   node scripts/lathund-word.mjs --vid-behov     bara de som saknas eller är inaktuella (körs i npm run validera)
 //   node scripts/lathund-word.mjs --kontrollera   stanna om en mätning saknas, är inaktuell eller överbliven
+//   node scripts/lathund-word.mjs --fro           skriv provfilernas innehåll till mätningar som saknar det, utan Word, så
+//                                                 att nästa ändring i koden jämförs med dem. Bara i en utcheckning där
+//                                                 koden, metoderna och mätningarna är som i HEAD och mätningarna gäller
+//                                                 HEAD (skriptet själv får vara nyare); annars stannar det
 //
 // Kräver Word och Google-inloggningen (DRIFT.md under Google Drive-knappen) när en metod ska mätas.
 
@@ -26,11 +38,14 @@ import { createHash } from 'node:crypto';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse as parseYaml } from 'yaml';
+import JSZip from 'jszip';
+import { wordinnehall } from './wordinnehall.mjs';
 
 const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 const kontrollera = args.includes('--kontrollera');
 const vidBehov = args.includes('--vid-behov');
+const fro = args.includes('--fro');
 const valda = args.filter((a) => !a.startsWith('--'));
 
 const katalog = join(rot, 'src', 'content', 'stodundervisning');
@@ -54,6 +69,10 @@ const gemensamHash = hashAv([`word-lathund, docx ${docxVersion}`, ...gemensamma.
 const INTE_I_LATHUNDEN = ['uppdaterad', 'publicerad', 'relaterade', 'utkast', 'upplagg', 'gruppen', 'principer'];
 const metodKalla = (m) => { const d = { ...m.data }; for (const k of INTE_I_LATHUNDEN) delete d[k]; return Buffer.from(JSON.stringify(d)); };
 const kallHash = (m) => hashAv([gemensamHash, metodKalla(m)]);
+// Det som avgör storlekarna när provfilerna är desamma: sättet att mäta. Ändras stegen här (marginalen, Google-provet),
+// räknas MATNING upp, så att alla lathundar mäts om.
+const MATNING = 1;
+const matHash = hashAv([`mätning ${MATNING}`, lasKalla(join(rot, 'scripts', 'word-provsidor.ps1')), lasKalla(join(rot, 'scripts', 'google.mjs'))]);
 const lasManifest = () => { try { return JSON.parse(readFileSync(manifestFil, 'utf8')); } catch { return {}; } };
 const skrivManifest = (manifest) => {
   const sorterad = Object.fromEntries(Object.keys(manifest).sort().map((k) => [k, manifest[k]]));
@@ -84,7 +103,19 @@ const manifest = lasManifest();
 const publicerade = new Set(metoder.map((m) => m.id));
 let bortagna = 0;
 for (const id of Object.keys(manifest)) if (!publicerade.has(id)) { delete manifest[id]; bortagna++; }
-const lista = vidBehov
+if (fro) {
+  // Provfilerna som byggs nu ska vara de som mättes: koden, metoderna och mätningarna som i HEAD, och mätningarna
+  // aktuella för HEAD:s kod, räknat med HEAD:s version av det här skriptet.
+  const git = (a) => execFileSync('git', a, { cwd: rot, encoding: 'utf8', maxBuffer: 1 << 26 });
+  const andrade = git(['status', '--porcelain', '--', 'src', 'scripts']).split('\n').filter(Boolean).filter((r) => !/scripts\/lathund-word\.mjs$/.test(r));
+  if (andrade.length) { console.error(`--fro vill ha en utcheckning som HEAD, men det här är ändrat:\n  ${andrade.join('\n  ')}`); process.exit(1); }
+  const iHead = hashAv([`word-lathund, docx ${docxVersion}`, ...gemensamma.map((f) => (f === 'scripts/lathund-word.mjs' ? Buffer.from(git(['show', `HEAD:${f}`]).replace(/\r\n/g, '\n')) : existsSync(join(rot, f)) ? lasKalla(join(rot, f)) : Buffer.from(`saknas:${f}`)))]);
+  const inaktuella = metoder.filter((m) => manifest[m.id]?.kalla !== hashAv([iHead, metodKalla(m)]) || !giltig(manifest[m.id]));
+  if (inaktuella.length) { console.error(`--fro: mätningen gäller inte HEAD för ${inaktuella.map((m) => m.id).join(', ')}`); process.exit(1); }
+}
+const lista = fro
+  ? metoder.filter((m) => !manifest[m.id].innehall)
+  : vidBehov
   ? metoder.filter((m) => manifest[m.id]?.kalla !== kallHash(m) || !giltig(manifest[m.id]))
   : valda.length > 0 ? metoder.filter((m) => valda.includes(m.id)) : metoder;
 if (lista.length === 0) {
@@ -92,12 +123,46 @@ if (lista.length === 0) {
   console.log(`Word-lathundens storlekar är aktuella för ${metoder.length} metoder.`);
   process.exit(0);
 }
-console.log(`Mäter Word-lathunden i Word för ${lista.map((m) => m.id).join(', ')} …`);
+console.log(`Bygger Word-lathundens provfiler för ${lista.map((m) => m.id).join(', ')} …`);
 execSync('npx astro build', { cwd: rot, stdio: 'ignore', env: { ...process.env, LATHUND_WORDPROV: '1', LATHUND_WORDPROV_IDS: lista.map((m) => m.id).join(',') } });
 const provMapp = join(rot, 'dist', 'utskrift', 'word');
 let fel = 0;
 try {
   if (!existsSync(provMapp)) throw new Error('provfilerna saknas i dist/utskrift/word');
+  // Provfilernas innehåll per metod: varje sida i varje steg, utan det som skiftar mellan byggen (bildernas löpnummer,
+  // datumet, radsluten), så att samma lathund ger samma summa.
+  // Word lägger också ut sidan efter inställningarna och typsnitten i filen, som wordinnehall inte räknar.
+  const provfiler = (id) => readdirSync(provMapp).filter((f) => f.startsWith(`${id}--`) && f.endsWith('.docx')).sort();
+  const ovrigt = async (data) => {
+    const zip = await JSZip.loadAsync(data);
+    const namn = Object.keys(zip.files).filter((n) => /^word\/(settings\.xml|fontTable\.xml|theme\/|fonts\/)/.test(n) && !zip.files[n].dir).sort();
+    return createHash('sha256').update((await Promise.all(namn.map(async (n) => `${n}:${createHash('sha256').update(await zip.file(n).async('nodebuffer')).digest('hex')}`))).join('\n')).digest('hex');
+  };
+  const innehall = new Map();
+  for (const m of lista) {
+    const delar = [];
+    for (const f of provfiler(m.id)) {
+      const data = readFileSync(join(provMapp, f));
+      delar.push(`${f}:${await wordinnehall(data, '', { allt: true })}:${await ovrigt(data)}`);
+    }
+    innehall.set(m.id, hashAv([matHash, ...delar.map((d) => Buffer.from(d))]));
+  }
+  if (fro) {
+    for (const m of lista) manifest[m.id] = { ...manifest[m.id], innehall: innehall.get(m.id) };
+    console.log(`  ok   provfilernas innehåll skrivet för ${lista.length} metoder, utan Word.`);
+    lista.length = 0;
+  }
+  // Metoderna vars provfiler är desamma som när de mättes: bara kontrollsumman skrivs om, och deras provfiler tas bort
+  // innan Word mäter de andra.
+  const samma = lista.filter((m) => manifest[m.id]?.innehall === innehall.get(m.id) && giltig(manifest[m.id]));
+  for (const m of samma) {
+    manifest[m.id] = { ...manifest[m.id], kalla: kallHash(m) };
+    for (const f of readdirSync(provMapp).filter((x) => x.startsWith(`${m.id}--`))) rmSync(join(provMapp, f));
+  }
+  if (samma.length) console.log(`  ok   ${samma.length} lathundar ser likadana ut som när de mättes och mäts inte om: ${samma.map((m) => m.id).join(', ')}`);
+  lista.splice(0, lista.length, ...lista.filter((m) => !samma.includes(m)));
+  if (lista.length) console.log(`Mäter Word-lathunden i Word och Google för ${lista.map((m) => m.id).join(', ')} …`);
+  if (lista.length) {
   // Stegen som finns för varje sida, i procent.
   const steg = {};
   for (const f of readdirSync(provMapp)) {
@@ -150,8 +215,9 @@ try {
       console.log(`  FEL  ${m.id}: sida ${rymsInte.join(' och ')} i Word-lathunden ryms inte på en sida i Google Dokument ens i minsta storleken; korta texten eller rätta formen (METODER.md, Word och Google Dokument)`);
       continue;
     }
-    manifest[m.id] = { kalla: kallHash(m), skalor, datum: new Date().toISOString().slice(0, 10) };
+    manifest[m.id] = { kalla: kallHash(m), innehall: innehall.get(m.id), skalor, datum: new Date().toISOString().slice(0, 10) };
     console.log(`  ok   ${m.id}: ${skalor.map((s) => `${Math.round(s * 100)} %`).join(' · ')}${google.length ? ` (Google: ${google.join(', ')})` : ''}`);
+  }
   }
 } catch (e) {
   fel++;
