@@ -4,8 +4,8 @@
 # läsbarhet och språk). Besluten står i metodriggens analys.md. Korten att klippa,
 # elevens blad och mallarna (bråkplanket och tallinjerna) står under kort, elevblad och mallar före lathunden.
 titel: "Bråkkurs i grupp: förstå, räkna och tänka i bråk"
-undertitel: Fem veckors intensiv kurs i liten grupp, från material till tallinje och räkning, för åk 4–6
-ingress: En intensiv kurs i fem veckor för två till tio elever i åk 4–6 som behöver stöd i att förstå bråk. Varje vecka går från material till tallinje och räkning. Läraren visar först och säger vad hen gör, och sedan gör gruppen likadant tillsammans, i par och var för sig.
+undertitel: Fem veckors kurs i liten grupp, från material till tallinje och räkning, för åk 4–6
+ingress: En kurs i fem veckor för två till tio elever i åk 4–6 som behöver stöd i att förstå bråk. Varje vecka går från material till tallinje och räkning. Läraren visar först och säger vad hen gör, och sedan gör gruppen likadant tillsammans, i par och var för sig.
 omrade: Matematik
 arskurs:
   - 4-6
@@ -767,7 +767,7 @@ lathund:
   innehall: Ett fokus i veckan
   metoden:
     text:
-      - En intensiv kurs i fem veckor för två till tio elever i åk 4–6 som behöver stöd i att förstå bråk. Före första passet gör du kartläggningen.
+      - En kurs i fem veckor för två till tio elever i åk 4–6 som behöver stöd i att förstå bråk. Före första passet gör du kartläggningen.
       - "Veckorna: lika delar, bråk på tallinjen, likvärdiga bråk, addera och subtrahera, bråk av antal. Varje vecka har en mening som gruppen säger och sätter upp på väggen."
     ruta:
       rubrik: Tre saker att hålla fast vid
