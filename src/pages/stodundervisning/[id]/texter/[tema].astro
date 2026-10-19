@@ -8,6 +8,7 @@
 // temats lärarhandledning, när metoden har den (ramen "Lärarhandledning: <nivå>, <tema>", src/lib/handledning.ts), med
 // knappen som skriver ut dess två sidor och Word-filen, före och efter den. Delningskortet är temats eget, med tre av
 // temats texter (src/lib/delningskort.ts).
+import Boklankar from '../../../../components/Boklankar.astro';
 import Base from '../../../../layouts/Base.astro';
 import Lararhandledning from '../../../../components/Lararhandledning.astro';
 import Filval from '../../../../components/Filval.astro';
@@ -100,7 +101,7 @@ const delen = (titel: string) => (h?.texter.some((x) => x.titel === titel) ? `#h
         <h2 id="tema-hl-rubrik">Lärarhandledning</h2>
         <p>Två sidor för den som läser temats {t.ord.flera} med hela klassen: hur klassen arbetar med en text i två lektioner, och vad varje text behöver.</p>
         <p class="tema-atgarder"><a class="knapp" href={`/stodundervisning/${hlFil}.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="2" data-direkt="Skriv ut lärarhandledningen" data-goatcounter-click={`utskrift:${t.metod}/${hlFil.slice(t.metod.length + 1)}`} data-goatcounter-title={`${t.titel}: lärarhandledningen till ${tema.namn} som pdf`}>Lärarhandledningen som pdf</a>{' '}<Filval fil={`/stodundervisning/${hlFil}`} namn={hlFil} rubrik={`Lärarhandledning: ${tema.namn}`} statistik={`${t.titel}: lärarhandledningen till ${tema.namn}`} utanDrive liten /></p>
-        <Lararhandledning h={h} farg={farg} rubrik="h3" ankare="hl" />
+        <Boklankar metod={t.metod} titel={t.titel} knappar={false}><Lararhandledning h={h} farg={farg} rubrik="h3" ankare="hl" /></Boklankar>
         {/* Efter handledningen: utskriften igen, och vägen tillbaka till texterna (designgranskningen 2026-10-18 natt: i
             telefonen är handledningen nio skärmar, och knappen stod bara före den). */}
         <p class="tema-atgarder tema-efter-hl"><a class="knapp" href={`/stodundervisning/${hlFil}.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="2" data-direkt="Skriv ut lärarhandledningen" data-goatcounter-click={`utskrift:${t.metod}/${hlFil.slice(t.metod.length + 1)}`} data-goatcounter-title={`${t.titel}: lärarhandledningen till ${tema.namn} som pdf`}>Lärarhandledningen som pdf</a>{' '}<a class="knapp sekundar" href="#tema-texter">Till temats {t.ord.flera}</a></p>

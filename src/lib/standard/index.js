@@ -218,3 +218,65 @@ export function fastaAntal(text, ord, grupper = []) {
   };
   return [...traff(ord, 5, true), ...traff(grupper, 2, false)];
 }
+
+/**
+ * Hänvisningarna till Niclas Fohlins böcker i en text, så att den som ritar texten kan göra dem till länkar (sajtens
+ * K-459; Niclas 2026-10-19: "Vill även att ALLA där det står Fohlin eller hänvisas till Fohlin är länk till boken den
+ * hänvisar till"). Tre former: i en parentes, som "(Fohlin och Wilson, 2023)" och en av flera, som "(Pearson och
+ * Gallagher, 1983; Fohlin och Wilson, 2025)"; med året i parentes efter, som "Fohlin och Wilson (2025)"; och i en
+ * källförteckning, med titeln mellan, som "Fohlin och Wilson, Skriv! (utkommer 2027)". "utkommer" före året betyder att
+ * boken inte är utgiven. Varje hänvisning har sin plats i texten (start och slut, det som blir länken), medförfattarnas
+ * efternamn, om det står "m.fl.", året och titeln när den står i hänvisningen. Vilken bok det är avgör den som har
+ * böckerna (sajtens src/lib/boklankar.ts).
+ * @param {string} text
+ * @returns {{ start: number, slut: number, text: string, medforfattare: string[], mfl: boolean, ar: number, utkommer: boolean, titel?: string }[]}
+ */
+export function fohlinHanvisningar(text) {
+  const ut = [];
+  // Författarna: Fohlin först, ensam, med "m.fl." eller med fler efter ("Fohlin och Wilson", "Fohlin, Fohlin och
+  // Wilson", där Lisa Fohlin är medförfattare), eller sist av två ("Wilson och Fohlin"). "&" står som &amp; i HTML.
+  const NAMN = String.raw`[\p{Lu}][\p{L}-]+`;
+  const OCH = String.raw`\s+(?:och|&(?:amp;)?)\s+`;
+  const FORF = String.raw`(?:Fohlin(?:(?:,\s+${NAMN})*${OCH}${NAMN}|\s+m\.\s?fl\.)?|${NAMN}${OCH}Fohlin)`;
+  const AR = String.raw`(utkommer\s+)?((?:19|20)\d\d)[a-z]?`;
+  const mfl = (s) => /m\.\s?fl\./.test(s);
+  // Medförfattarna är namnen utom ett Fohlin, i ordning.
+  const medforfattare = (forf) => {
+    if (mfl(forf)) return [];
+    const namn = forf.split(new RegExp(String.raw`\s*,\s*|${OCH}`, 'u')).map((n) => n.trim()).filter(Boolean);
+    namn.splice(namn.indexOf('Fohlin'), 1);
+    return namn;
+  };
+  // I en parentes, en eller flera hänvisningar åtskilda av semikolon, med "se" eller "jfr" före och sidan efter, som
+  // "(se Fohlin och Wilson, 2023, s. 45)". Länken är författarna och året.
+  const iParentes = new RegExp(String.raw`^(\s*(?:(?:se(?:\s+även|\s+t\.\s?ex\.)?|jfr)\s+)?)(${FORF})\s*,\s*${AR}(?:\s*,\s*(?:s|sid|kap)\.\s*\d+(?:\s*[–-]\s*\d+)?(?:\s*ff?\.)?)?\s*$`, 'u');
+  const paren = [];
+  for (const m of text.matchAll(/\(([^()]*)\)/g)) {
+    paren.push([m.index, m.index + m[0].length]);
+    let pos = m.index + 1;
+    // Semikolon skiljer hänvisningarna, utom i ett tecken i HTML (&amp;).
+    for (const del of m[1].split(/(?<!&[a-z]+);/)) {
+      const d = del.match(iParentes);
+      if (d) {
+        const start = pos + d[1].length;
+        const arSlut = del.indexOf(d[4], d[1].length + d[2].length) + d[4].length;
+        const slut = pos + arSlut + (del.slice(arSlut).match(/^[a-z]/) ? 1 : 0);
+        ut.push({ start, slut, text: text.slice(start, slut), medforfattare: medforfattare(d[2]), mfl: mfl(d[2]), ar: Number(d[4]), utkommer: Boolean(d[3]) });
+      }
+      pos += del.length + 1;
+    }
+  }
+  // Med året i parentes efter, och med titeln mellan i en källförteckning. Titeln går inte över ett meningsslut (punkt och
+  // stor bokstav); utrop står i titlar ("Skriv!", "LÄS! Nycklar …").
+  const efter = new RegExp(String.raw`(?<![\p{L}])(${FORF})(?:,\s*((?:[^()\n;.]|\.(?!\s+[\p{Lu}])){1,140}?))?\s*\(${AR}\)`, 'gu');
+  for (const m of text.matchAll(efter)) {
+    const start = m.index;
+    if (paren.some(([a, b]) => start > a && start < b)) continue;
+    // "Lisa Fohlin" och "Niclas Fohlin" är personer, inte hänvisningar.
+    if (/(?:Niclas|Lisa)\s+$/.test(text.slice(Math.max(0, start - 8), start))) continue;
+    const slut = start + m[0].length;
+    const titel = m[0].slice(m[1].length).match(/^,\s*([\s\S]*?)\s*\([^()]*\)$/)?.[1];
+    ut.push({ start, slut, text: m[0], medforfattare: medforfattare(m[1]), mfl: mfl(m[1]), ar: Number(m[4]), utkommer: Boolean(m[3]), ...(titel ? { titel } : {}) });
+  }
+  return ut.sort((a, b) => a.start - b.start);
+}

@@ -5,10 +5,15 @@ import { arLektion, byggSerier, serieUppdaterad } from './serie';
 import { bankAv } from './bank';
 import { matteproblemen, type Matteproblem } from './matteproblem';
 import { metodensFastaAntal } from './antal';
+import { hanvisningsFel } from './boklankar';
+import { metodensLektionskort } from './lektionskort';
+import { lasLektionskort } from './lektionskortdata';
 
 // Utkast visas i utvecklingsläge men aldrig i produktionsbygget. Databasens matteproblem har inget utkastläge.
 // En metods text, som också står i dess Word-filer och lathund, säger inte hur många poster en databas har: ett fast
-// antal stoppar bygget (src/lib/antal.ts, METODER.md under Antalen och databaserna, K-450).
+// antal stoppar bygget (src/lib/antal.ts, METODER.md under Antalen och databaserna, K-450). En hänvisning till Fohlin som
+// inte leder till en bok, och ett verktyg som inte finns, stoppar det också, i metodens fil och i dess lektionskort
+// (src/lib/boklankar.ts, STIL.md under Hänvisningar, K-460).
 export async function publicerade<K extends CollectionKey>(samling: K): Promise<CollectionEntry<K>[]> {
   const alla = await getCollection(samling);
   const synliga = import.meta.env.PROD ? alla.filter((post) => !('utkast' in post.data && post.data.utkast)) : alla;
@@ -20,9 +25,19 @@ export async function publicerade<K extends CollectionKey>(samling: K): Promise<
 const provade = new WeakSet<object>();
 function provaAntal(m: CollectionEntry<'stodundervisning'>) {
   if (provade.has(m.data)) return;
+  const lankar = [...hanvisningarnasFel(m.data), ...[...lasLektionskort(metodensLektionskort(m.data, m.id))].flatMap(([stam, papper]) => hanvisningarnasFel(papper, `src/data/lektionskort/${stam}.json`))];
+  if (lankar.length) throw new Error(`${m.data.titel}: ${lankar.length} hänvisningar kan inte bli länkar:\n  ${lankar.join('\n  ')}\nReglerna står i STIL.md under Hänvisningar.`);
   const fel = metodensFastaAntal(m);
   if (fel.length) throw new Error(`${m.data.titel}: ${fel.length} fasta antal av databasens poster, som slutar stämma när databasen växer och skulle göra om Word-filerna, pdf:erna och lathunden varje gång:\n  ${fel.join('\n  ')}\nSkriv utan antal och säg var posterna finns (METODER.md under Antalen och databaserna). Är talet en del av metoden och inte databasens storlek, skriv frasen med sitt skäl i src/data/fasta-antal.json.`);
   provade.add(m.data);
+}
+
+// Hänvisningarnas fel i varje text i metodens fil, med fältets väg.
+function hanvisningarnasFel(x: unknown, vag = ''): string[] {
+  if (typeof x === 'string') return hanvisningsFel(x).map((f) => `${vag}: ${f}`);
+  if (Array.isArray(x)) return x.flatMap((y, i) => hanvisningarnasFel(y, `${vag}.${i}`));
+  if (x && typeof x === 'object' && !(x instanceof Date)) return Object.entries(x).flatMap(([k, v]) => hanvisningarnasFel(v, vag ? `${vag}.${k}` : k));
+  return [];
 }
 
 // Ta fram ett matteproblems alla problem (src/lib/matteproblem.ts): metoden vars bank är problem, med databasens poster i

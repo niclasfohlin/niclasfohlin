@@ -1,4 +1,5 @@
 ---
+import Boklankar from '../../../components/Boklankar.astro';
 import Base from '../../../layouts/Base.astro';
 import Lathund from '../../../components/Lathund.astro';
 import SkrivUtPdf from '../../../components/SkrivUtPdf.astro';
@@ -53,7 +54,7 @@ const lektionskort = metodensLektionskort(d, m.id);
       </nav>
     </header>
     {filmer.length > 0 && <Filmspelare filmer={filmer} id={m.id} titel={d.titel} />}
-    <Lathund d={d} id={m.id} />
+    <Boklankar metod={m.id} titel={d.titel} knappar={false}><Lathund d={d} id={m.id} /></Boklankar>
     <p class="upphov">{UPPHOV}. Lathund till {d.titel}{d.uppdaterad && `, uppdaterad ${datumText(d.uppdaterad)}`}. {adress}{filmer.length > 0 && `. ${FILM_UPPHOV}`}</p>
   </article>
   <div class="tryck-fot" aria-hidden="true">{UPPHOV} · {adress}</div>

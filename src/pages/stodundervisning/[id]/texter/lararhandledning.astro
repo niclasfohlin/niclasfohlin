@@ -6,6 +6,7 @@
 // har handledningen att läsa i telefonen (Bokhandledning.astro, samma form som Word-filens två A4), knappen som skriver ut
 // den och Word-filen, före och efter handledningen, och vägen tillbaka till texterna. Delningskortet är sidans eget, med
 // handledningens titel (src/lib/delningskort.ts).
+import Boklankar from '../../../../components/Boklankar.astro';
 import Base from '../../../../layouts/Base.astro';
 import Bokhandledning from '../../../../components/Bokhandledning.astro';
 import Filval from '../../../../components/Filval.astro';
@@ -35,9 +36,9 @@ const skrivUt = (klass: string) => ({ class: klass, href: `/stodundervisning/${f
   <article class="bh-sidan">
     <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${t.metod}`}>{t.titel}</a> · <a href={t.adress}>{t.namn}</a> · Lärarhandledning</p>
 
-    <Bokhandledning h={h} metod={t.titel} rubrik="h1">
+    <Boklankar metod={t.metod} titel={t.titel} knappar={false}><Bokhandledning h={h} metod={t.titel} rubrik="h1">
       <p class="tema-atgarder bh-knappar" slot="efter-ingress"><a {...skrivUt('knapp')}><span data-direkt="Skriv ut lärarhandledningen">Lärarhandledningen som pdf</span></a>{' '}<Filval fil={`/stodundervisning/${fil}`} namn={fil} rubrik={`Lärarhandledning: ${h.titel}`} statistik={`${t.titel}: lärarhandledningen till ${t.ord.alla}`} utanDrive liten />{' '}<a class="knapp sekundar" href={t.adress}>{t.namn}</a></p>
-    </Bokhandledning>
+    </Bokhandledning></Boklankar>
 
     {/* Efter handledningen: utskriften igen, och vägen tillbaka till texterna. */}
     <p class="tema-atgarder tema-efter-hl"><a {...skrivUt('knapp')}><span data-direkt="Skriv ut lärarhandledningen">Lärarhandledningen som pdf</span></a>{' '}<a class="knapp sekundar" href={t.adress}>Till texterna</a></p>

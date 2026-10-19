@@ -5,7 +5,13 @@
 // (Niclas 2026-10-17: "var skrivs den ur med Skriv ut allt"), så att utskriften och knappens pdf är samma kort. Ändrar
 // riggen sin byggsten, gör samma ändring här och jämför med riggens pdf (METODER.md under Lektionskortet).
 // Inga Node-beroenden: metoddocx.ts körs också i webbläsaren.
-import { AlignmentType, BorderStyle, Footer, NoBreakHyphen, Paragraph, ShadingType, Table, TableCell, TableRow, TextRun, VerticalAlign, WidthType, type IBorderOptions } from 'docx';
+//
+// Hänvisningarna i kortets text blir länkar som i metodens andra filer (src/lib/boklankar.ts, STIL.md under Hänvisningar;
+// granskningen 2026-10-19, P2): ett verktyg, en bok och en hänvisning till Fohlin, blå och understrukna. Riggens kort har
+// inga länkar; formen är densamma.
+import { AlignmentType, BorderStyle, ExternalHyperlink, Footer, NoBreakHyphen, Paragraph, ShadingType, Table, TableCell, TableRow, TextRun, UnderlineType, VerticalAlign, WidthType, type IBorderOptions } from 'docx';
+import { delensAdress, hanvisningsdelar } from './boklankar';
+import { site } from '../data/site';
 
 /** En del: ett mörkblått band med rubriken och en rad, kolumnernas namn och raderna. */
 export interface PapperDel {
@@ -67,7 +73,8 @@ type Barn = Paragraph | Table;
 
 // Bindestreck följt av ordfog (U+2060) håller ihop ett exempelord, som sss-ooo-lll, och blir Words hårda bindestreck.
 const HARD = '-⁠';
-function run(o: { text: string; font?: string; size?: number; color?: string; italics?: boolean; bold?: boolean }): TextRun {
+type RunVal = { font?: string; size?: number; color?: string; italics?: boolean; bold?: boolean; underline?: { type: (typeof UnderlineType)[keyof typeof UnderlineType]; color?: string } };
+function run(o: RunVal & { text: string }): TextRun {
   const t = String(o.text ?? '');
   if (!t.includes(HARD)) return new TextRun(o);
   const children: (NoBreakHyphen | string)[] = [];
@@ -75,9 +82,20 @@ function run(o: { text: string; font?: string; size?: number; color?: string; it
   const { text: _text, ...rest } = o;
   return new TextRun({ ...rest, children });
 }
-// **fet** i texten
-function runs(text: string, base: { font?: string; size?: number; color?: string; italics?: boolean; bold?: boolean }): TextRun[] {
-  return String(text).split(/(\*\*[^*]+\*\*)/).filter(Boolean).map((d) => (d.startsWith('**') ? run({ ...base, text: d.slice(2, -2), bold: true }) : run({ ...base, text: d })));
+// **fet** i texten, och hänvisningarna som länkar utom i rubrikerna (lankar: false).
+function runs(text: string, base: RunVal, lankar = true): (TextRun | ExternalHyperlink)[] {
+  return String(text).split(/(\*\*[^*]+\*\*)/).filter(Boolean).flatMap((d) => {
+    const fet = d.startsWith('**');
+    const t = fet ? d.slice(2, -2) : d;
+    const val = fet ? { ...base, bold: true } : base;
+    if (!lankar) return [run({ ...val, text: t })];
+    return hanvisningsdelar(t).map((del) => {
+      const lank = delensAdress(del, site.url);
+      return lank
+        ? new ExternalHyperlink({ link: lank, children: [run({ ...val, text: del.text, color: BLUE, underline: { type: UnderlineType.SINGLE, color: BLUE } })] })
+        : run({ ...val, text: del.text });
+    });
+  });
 }
 type PO = { before?: number; after?: number; line?: number; keepNext?: boolean; size?: number; color?: string; italics?: boolean; bold?: boolean };
 const p = (text: string, o: PO = {}) => new Paragraph({ spacing: { before: o.before ?? 0, after: o.after ?? 0, line: o.line ?? 240 }, keepNext: o.keepNext, run: MARKE, children: runs(text, { font: FONT, size: o.size ?? 19, color: o.color ?? INK, italics: o.italics, bold: o.bold }) });
@@ -128,7 +146,7 @@ function del(d: PapperDel): Barn[] {
     shading: { type: ShadingType.CLEAR, fill: NAVY, color: 'auto' },
     borders: { top: kant(NAVY), bottom: kant(NAVY), left: kant(NAVY), right: kant(NAVY) },
     children: [new Paragraph({ spacing: { before: 0, after: 0, line: 240 }, keepNext: true, run: MARKE, children: [
-      ...runs(d.rubrik, { font: FONT, size: 23, bold: true, color: VIT }),
+      ...runs(d.rubrik, { font: FONT, size: 23, bold: true, color: VIT }, false),
       ...(d.text ? [run({ text: `   ${d.text}`, font: FONT, size: 18, color: 'DCE8F5' })] : []),
     ] })],
   })] });
@@ -154,7 +172,7 @@ function del(d: PapperDel): Barn[] {
 function huvud(s: PapperSida): Table {
   const wInfo = Math.round(TW * 0.3);
   const wTitel = TW - wInfo;
-  const mitt = (children: TextRun[]) => new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 240 }, run: MARKE, children });
+  const mitt = (children: (TextRun | ExternalHyperlink)[]) => new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 0, after: 0, line: 240 }, run: MARKE, children });
   const ruta = (children: Paragraph[], fill: string, borders: Kanter) => new TableCell({
     width: { size: wInfo, type: WidthType.DXA }, verticalAlign: VerticalAlign.CENTER, margins: { top: 45, bottom: 45, left: 110, right: 110 },
     shading: { type: ShadingType.CLEAR, fill, color: 'auto' }, borders, children,

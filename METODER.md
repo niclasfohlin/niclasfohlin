@@ -177,6 +177,8 @@ Metodbanken har en ruta med två rubriker, Verktyg och Stödmaterial, där varje
 
 En ny sak är en post i registret, filen eller sidan och raderna i metodfilerna, utan ny kod. En ny plats i texten läggs till i `TEXTAVSNITT` i `src/lib/centrala.ts`, i `Metod.astro` och i `metoddocx.ts` i samma commit.
 
+En sak i registret som en metods text nämner blir en länk, och ibland en knapp, av sig själv, också en ny sak (K-458). Reglerna står i STIL.md under Hänvisningar, och koden i `src/lib/boklankar.ts`.
+
 ### Lektionskortet: ett A4 att ha i handen vid lektionen
 
 Niclas 2026-10-17, när Säg, skriv och läs kom med sitt A4 att laminera: "Detta får bli en ny standard. När en metod har en lektion som återupprepas med samma eller växlande innehåll ska det finnas ett lektionskort i metoden. En metod kan ha flera Lektionskort. Men max 3 för en enskild metod. Över det är det inte en reproducerande lektion." Och om var det står: "Lektionskortet ska då finnas som blå knapp vid lektionen. Blå [knappar] bredvid [lathunden] (fler än 1 Lektionskort: lektionsnamn)." Kortet hette först Lärarens lathund, och Niclas ville ha ett namn som inte blandas ihop med metodens lathund. Det är högst ett A4 ("Tänker de ska vara max en a4a i framtiden"); Säg, skriv och läs kort kom före regeln och har en baksida med alla meningar.

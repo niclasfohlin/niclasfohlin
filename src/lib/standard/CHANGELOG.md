@@ -1,5 +1,13 @@
 # Ändringar i standarden
 
+## 0.6.1, 2026-10-19
+
+- `fohlinHanvisningar` läser fler former (granskningen samma dag): Fohlin sist av två ("Wilson och Fohlin (2025)"), Lisa Fohlin som medförfattare ("Fohlin, Fohlin och Wilson (2020)"), "se" eller "jfr" före och sidan efter i en parentes ("(se Fohlin och Wilson, 2023, s. 45)", länken är författarna och året) och "&" som "&amp;" i HTML. Titeln i en källförteckning går inte över ett meningsslut. `medforfattare` är alla namn utom ett Fohlin.
+
+## 0.6.0, 2026-10-19
+
+- `fohlinHanvisningar`: hänvisningarna till Niclas Fohlins böcker i en text, i en parentes ("(Fohlin och Wilson, 2023)"), med året efter ("Fohlin och Wilson (2025)") och i en källförteckning ("Fohlin och Wilson, Skriv! (utkommer 2027)"), med platsen, medförfattarna, året och titeln, så att sajten och riggen gör dem till länkar till boken (sajtens K-459). Niclas: "Vill även att ALLA där det står Fohlin eller hänvisas till Fohlin är länk till boken den hänvisar till. Fohlin 2027 ska hänvisas till generella https://niclasfohlin.se/bocker sidan".
+
 ## 0.5.0, 2026-10-19
 
 - `fastaAntal`: de fasta antalen av en databas poster (från fem) och grupper (från två) i en text, som "tjugofem texter", "fem på varje nivå" eller "tre teman" (sajtens K-450). Niclas: "Hela tanken är att databaserna ska kunna växa och allt då hänger med utan att du måste kontrollera varenda liten text i metoderna", och "Försök hålla antal och annat ur lathundar och filer. Eftersom det inte blir bra skalbarhet". Texten säger var posterna finns, och sidorna som räknar dem visar talen; sajten och riggen stannar på ett fast antal.

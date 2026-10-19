@@ -11,7 +11,7 @@ import {
 import { centralaVid, lasbarAdress, type Textplats } from './centrala';
 import { lektionskortVid, metodensLektionskort, type Lektionskort } from './lektionskort';
 import { papperFot, papperPunkt, papperSidor, PAPPER_MARGINALER, PAPPER_SIDA, type Papper } from './strategipapper';
-import { bokdelar } from './boklankar';
+import { delensAdress, hanvisningsdelar, type Del } from './boklankar';
 import { site } from '../data/site';
 import { arbetsformRad, arEttKort, arProtokoll, arskursText, datumText, ejBryt, etikettOchText, laskortKolumn, laskortRubrik, lathundFakta, lathundForm, metaRad, metodAdress, passOrd, passOversikt, passTextKort, ramArTom, stegTexter, SAJT, UPPHOV, type MetodData, type MetodPost, type PassOrd } from './metod';
 import { brakDelar, delnamn, kortInfo, lage, STANDARD_NAMNARE, talrutansMatt, type KortInfo, type Mall } from './brak';
@@ -181,14 +181,22 @@ function run(text: string, o: StyckeVal = {}): TextRun {
   const val: IRunOptions = { text, italics: o.kursiv, bold: o.fet, color: o.farg, size: storl(o.storlek), allCaps: o.versaler, font: o.font ?? ELEVFONT, underline: o.understruken ? { type: UnderlineType.SINGLE, color: o.farg } : undefined };
   return new TextRun(hardaStreck(val));
 }
-// Niclas böcker blir länkar till bokens sida på sajten där de nämns (src/lib/boklankar.ts, K-362), blå och understrukna
-// som länkarna i litteraturlistan. Det gäller texten i styckena, cellerna, rutorna och listorna, och inte rubrikerna,
-// som på sidan.
-function lopor(text: string, o: StyckeVal = {}): (TextRun | ExternalHyperlink)[] {
-  return bokdelar(text).map((d) => (d.adress
-    ? new ExternalHyperlink({ link: `${site.url}${d.adress}`, children: [run(d.text, { ...o, farg: FARG.huvud, understruken: true })] })
-    : run(d.text, o)));
+// Hänvisningarna blir länkar där de står (src/lib/boklankar.ts, STIL.md under Hänvisningar), blå och understrukna som
+// länkarna i litteraturlistan: Niclas böcker och hänvisningarna till dem till bokens sida på sajten (K-362, K-459),
+// verktygen till sin korta adress (K-458) och en adress på sajten som står som text dit. Det gäller texten i styckena,
+// cellerna, rutorna och listorna, och inte rubrikerna, som på sidan. lankLopor gör det för text med egna löpor, som
+// lathundens punkter, lärarhandledningarnas fält och lektionskortet (granskningen 2026-10-19, P2).
+const lankensAdress = (d: Del) => delensAdress(d, site.url);
+export function lankLopor<T extends TextRun>(text: string, gor: (t: string, lank: boolean) => T): (T | ExternalHyperlink)[] {
+  return hanvisningsdelar(text).map((d) => {
+    const lank = lankensAdress(d);
+    return lank ? new ExternalHyperlink({ link: lank, children: [gor(d.text, true)] }) : gor(d.text, false);
+  });
 }
+function lopor(text: string, o: StyckeVal = {}): (TextRun | ExternalHyperlink)[] {
+  return lankLopor(text, (t, lank) => run(t, lank ? { ...o, farg: FARG.huvud, understruken: true } : o));
+}
+const lankfarg = { color: FARG.huvud, underline: { type: UnderlineType.SINGLE, color: FARG.huvud } };
 // En text som löpor, där en radbrytning i texten (\n) är en ny rad i stycket: Word visar annars radslutet som ett
 // mellanslag (granskningen 2026-10-13, P1; scripts/paritet.mjs stannar på ett radslut inne i en text).
 function radRuns(text: string, o: StyckeVal = {}): (TextRun | ExternalHyperlink)[] {
@@ -898,7 +906,10 @@ function bokFot(b: Boksektion): Footer {
     tabStops: [{ type: TabStopType.RIGHT, position: b.liggande ? LIGGANDE_BREDD : BOKBREDD }],
     spacing: { after: 0 },
     children: [
-      new TextRun({ text: b.not, size: b.not.length > 75 ? 13 : 15, color: BOK.not, font: 'Arial' }),
+      // Lärarhandledningens del Till läraren står här och får sina länkar; de andra bladens rad är metodens namn och adress.
+      ...(b.vad === 'lärarhandledning'
+        ? lankLopor(b.not, (t, lank) => new TextRun({ text: t, size: b.not.length > 75 ? 13 : 15, color: BOK.not, font: 'Arial', ...(lank ? lankfarg : {}) }))
+        : [new TextRun({ text: b.not, size: b.not.length > 75 ? 13 : 15, color: BOK.not, font: 'Arial' })]),
       new TextRun({ children: [new Tab()], size: 18, font: 'Arial' }),
       ...nivaKnapp(b),
       ...(sidnr ? [
@@ -1453,7 +1464,7 @@ function bokhandledningSida(h: Bokhandledning, metod: string): Barn[] {
   const STORLEK = 18, RAD = 228, MAR = 40;
   // Ett stycke där det som står inom citattecken är kursivt: det läraren eller eleven säger högt.
   const sagt = (text: string, o: { size?: number; color?: string; bold?: boolean; kursiv?: boolean } = {}) =>
-    String(text).split(/(”[^”]*”)/).filter((x) => x !== '').map((x) => textRun({ text: x, size: o.size ?? STORLEK, color: o.color ?? BOK.text, font: 'Arial', ...(o.bold ? { bold: true } : {}), ...(/^”/.test(x) || o.kursiv ? { italics: true } : {}) }));
+    String(text).split(/(”[^”]*”)/).filter((x) => x !== '').flatMap((x) => lankLopor(x, (t, lank) => textRun({ text: t, size: o.size ?? STORLEK, color: o.color ?? BOK.text, font: 'Arial', ...(o.bold ? { bold: true } : {}), ...(/^”/.test(x) || o.kursiv ? { italics: true } : {}), ...(lank ? lankfarg : {}) })));
   const stycke = (text: string, o: { size?: number; color?: string; kursiv?: boolean; efter?: number; center?: boolean } = {}) => new Paragraph({ spacing: { before: 0, after: o.efter ?? 0, line: RAD }, keepLines: true, ...(o.center ? { alignment: AlignmentType.CENTER } : {}), children: sagt(text, o) });
   const etikett = (text: string, o: { size?: number; efter?: number; center?: boolean } = {}) => new Paragraph({ keepNext: true, keepLines: true, spacing: { before: 0, after: o.efter ?? 40, line: 240 }, ...(o.center ? { alignment: AlignmentType.CENTER } : {}), children: [cinzel(String(text).toLocaleUpperCase('sv'), o.size ?? 15, BOK.rod)] });
   const rubrik = (text: string, fore: number) => new Paragraph({ keepNext: true, keepLines: true, outlineLevel: 2, spacing: { before: fore, after: 70, line: 240 },
@@ -4373,7 +4384,7 @@ function lhSpalter(vanster: () => Barn[], hoger: () => Barn[]): Barn[] {
   })];
 }
 const punktStycken = (punkter: { fet?: string; text?: string }[], storlek = 20) => punkter.map((p, i, alla) => new Paragraph({
-  children: [...(p.fet ? [textRun({ text: p.fet, bold: true, size: storlek })] : []), ...(p.text ? [textRun({ text: `${p.fet ? ' ' : ''}${p.text}`, size: storlek })] : [])],
+  children: [...(p.fet ? [textRun({ text: p.fet, bold: true, size: storlek })] : []), ...(p.text ? lankLopor(`${p.fet ? ' ' : ''}${p.text}`, (t, lank) => textRun({ text: t, size: storlek, ...(lank ? lankfarg : {}) })) : [])],
   spacing: { after: i === alla.length - 1 ? 0 : 60 },
 }));
 

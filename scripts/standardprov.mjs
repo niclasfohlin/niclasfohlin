@@ -29,7 +29,7 @@ for (const f of readdirSync(mapp).filter((x) => /\.(js|d\.ts)$/.test(x))) {
   }
 }
 
-const { slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal } = await import(pathToFileURL(join(mapp, 'index.js')).href);
+const { slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar } = await import(pathToFileURL(join(mapp, 'index.js')).href);
 const fall = [
   ['Två lösningar', 'tva-losningar'], ['Lärarens sida', 'lararens-sida'], ['Bas', 'bas'], ['Problem och lösning', 'problem-och-losning'],
   ['Café Über', 'cafe-uber'], ['  –Äpple, år 3–  ', 'apple-ar-3'], ['Venndiagrammet', 'venndiagrammet'], ['Ö', 'o'],
@@ -90,5 +90,29 @@ const traffar = [['på varje nivå tjugofem texter med frågor', 1], ['fem på v
   ['två eller tre texter i veckan', 0], ['vecka 6–8 klassens texter', 0], ['Läs en text', 0]];
 for (const [t, n] of traffar) { const f = fastaAntal(t, ord, ['teman']); if (f.length !== n) fel.push(`fastaAntal("${t}") ger ${JSON.stringify(f)}`); }
 
+// Hänvisningarna till Niclas Fohlins böcker (K-459): formerna som metoderna har, och det som inte är en hänvisning.
+const hanv = [
+  ['Gruppstärkande ledarskap (Fohlin och Wilson, 2023).', [['Fohlin och Wilson, 2023', 2023, false]]],
+  ['(Pearson och Gallagher, 1983; Fohlin och Wilson, 2025)', [['Fohlin och Wilson, 2025', 2025, false]]],
+  ['Fohlin och Wilson (2025) visar', [['Fohlin och Wilson (2025)', 2025, false]]],
+  ['Fohlin och Wilson, Skriv! (utkommer 2027)', [['Fohlin och Wilson, Skriv! (utkommer 2027)', 2027, true]]],
+  ['Fohlin m.fl., Grundbok i kooperativt lärande (2017)', [['Fohlin m.fl., Grundbok i kooperativt lärande (2017)', 2017, false]]],
+  ['© Niclas Fohlin, niclasfohlin.se', []],
+  ['Lisa Fohlin (2020)', []],
+  // Granskningen 2026-10-19: Fohlin efter en annan, Lisa Fohlin som medförfattare, "se" före och sidan efter, & i HTML,
+  // och en källförteckning där titeln inte får gå över ett meningsslut.
+  ['Wilson och Fohlin (2025) visar.', [['Wilson och Fohlin (2025)', 2025, false]]],
+  ['(Fohlin, Fohlin och Wilson, 2020)', [['Fohlin, Fohlin och Wilson, 2020', 2020, false]]],
+  ['(se Fohlin och Wilson, 2023, s. 45)', [['Fohlin och Wilson, 2023', 2023, false]]],
+  ['(Fohlin &amp; Wilson, 2023; Fohlin, 2026)', [['Fohlin &amp; Wilson, 2023', 2023, false], ['Fohlin, 2026', 2026, false]]],
+  ['Fohlin och Wilson. Elbow (1973) visar.', []],
+];
+for (const [t, vantat] of hanv) {
+  const f = fohlinHanvisningar(t).map((h) => [h.text, h.ar, h.utkommer]);
+  if (JSON.stringify(f) !== JSON.stringify(vantat)) fel.push(`fohlinHanvisningar("${t}") ger ${JSON.stringify(f)}`);
+}
+const lisa = fohlinHanvisningar('Fohlin, Fohlin och Wilson (2020)')[0]?.medforfattare;
+if (JSON.stringify(lisa) !== '["Fohlin","Wilson"]') fel.push(`fohlinHanvisningar läser medförfattarna i "Fohlin, Fohlin och Wilson (2020)" som ${JSON.stringify(lisa)}`);
+
 if (fel.length) { console.error(`standardprov: ${fel.length} fel i src/lib/standard/:\n  ${fel.join('\n  ')}`); process.exit(1); }
-console.log(`standardprov: standarden (src/lib/standard/) importerar inget utanför sig själv, och slugAv, UPPTAGNA_LED, innehållstaggarna, postens rad och fel och hämtplanen och spärren mot fasta antal svarar rätt.`);
+console.log(`standardprov: standarden (src/lib/standard/) importerar inget utanför sig själv, och slugAv, UPPTAGNA_LED, innehållstaggarna, postens rad och fel och hämtplanen, spärren mot fasta antal och hänvisningarna till Fohlin svarar rätt.`);

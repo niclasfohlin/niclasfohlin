@@ -119,6 +119,14 @@ export function centralLank(c: Central, metod: string, titel: string): Record<st
   return { href: c.adress, target: '_blank', rel: 'noopener', 'data-goatcounter-click': `utskrift:${metod}/${c.id}`, 'data-goatcounter-title': `${titel}: ${c.namn} som pdf` };
 }
 
+const skyddad = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+/** Knappen till en central sak som HTML: Centralknapp.astro ritar den, och länkningen i texten (src/lib/boklankar.ts)
+ *  lägger den efter ett stycke som skickar läsaren till saken, så att knappen ser likadan ut överallt. */
+export function centralKnappHtml(c: Central, metod: string, titel: string, klass = 'knapp', medTitel = false): string {
+  const attr = Object.entries(centralLank(c, metod, titel)).map(([k, v]) => ` ${k}="${skyddad(v)}"`).join('');
+  return `<a class="${skyddad(klass)}"${attr}>${skyddad(c.namn)}${medTitel ? `<span class="visually-hidden">: ${skyddad(titel)}</span>` : ''}${c.slag === 'pdf' ? '<span class="visually-hidden">, pdf</span>' : ''}</a>`;
+}
+
 /** Metoderna som en sak hör till men inte visar, och saker som ingen metod visar: fel som stoppar bygget ([id].astro). */
 export function provaCentrala(metoder: { id: string; data: MetodForText }[]): void {
   const fel = CENTRALA.flatMap((c) => {

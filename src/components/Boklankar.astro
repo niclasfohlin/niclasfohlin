@@ -1,10 +1,16 @@
 ---
-// Niclas böcker blir länkar till bokens sida där de nämns i metodens text (K-362, src/lib/boklankar.ts): innehållet
-// ritas till html, och titlarna i texten mellan taggarna får länken, utom i länkar, knappar och rubriker. Metodens sida
-// och en enhets sida går igenom den, som genom EjBryt. Word-filen får samma länkar i metoddocx.ts.
+// Hänvisningarna blir länkar där de står i metodens text (src/lib/boklankar.ts, STIL.md under Hänvisningar): Niclas
+// böcker och hänvisningarna till dem (K-362, K-459), verktygen och adresserna på sajten (K-458). Innehållet ritas till
+// html, och texten mellan taggarna får länkarna, utom i länkar, knappar och rubriker; ett stycke som skickar läsaren till
+// ett verktyg får verktygets knapp efter sig. Metodens sida, en enhets sida, lathundens sida och lärarhandledningarnas
+// sidor går igenom den. metod och titel är metodens id och namn, för statistiken. knappar={false} på en sida som är
+// samma blad som en pdf (lathunden, lärarhandledningarna): där blir namnen länkar men ingen knapp läggs in, så att bladen
+// är desamma som i pdf:en, PowerPoint och Word (granskningen 2026-10-19, P1). Word-filen får samma länkar i metoddocx.ts.
 import { lankaBocker } from '../lib/boklankar';
+interface Props { metod?: string; titel?: string; knappar?: boolean }
+const { metod, titel, knappar = true } = Astro.props;
 
 const html = await Astro.slots.render('default');
 ---
 
-<Fragment set:html={lankaBocker(html)} />
+<Fragment set:html={lankaBocker(html, { metod, titel, knappar })} />

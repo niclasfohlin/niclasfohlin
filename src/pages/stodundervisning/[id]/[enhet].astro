@@ -158,7 +158,7 @@ const figurer = metodensPaBordet(d, m.id).some((b) => b.bild.fluent?.length && s
 
 <Base title={vy.sidtitel} description={vy.beskrivning} typ="article" tryckText={`${UPPHOV} · ${adress}`}>
   <article class="metod enhet" style={`--niva: ${vy.farg}`}>
-    <EjBryt><Boklankar>
+    <EjBryt><Boklankar metod={m.id} titel={d.titel}>
     <header class="enhet-huvud">
       <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={`/stodundervisning/${m.id}`}>{d.titel}</a> · <a href={vy.tillbaka.adress}>{vy.tillbaka.namn}</a>{vy.tema && <>{' · '}<a href={vy.tema.adress}>{vy.tema.namn}</a></>}</p>
       <p class="enhet-kicker"><span class="enhet-niva">{vy.skylt}</span> {vy.kicker}</p>

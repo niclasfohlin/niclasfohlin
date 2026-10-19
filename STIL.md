@@ -22,6 +22,21 @@ Forskning refereras som parentescitat: (Författare, årtal). En källa som inte
 
 När en text bemöter en motståndare: erkänn först det som är rimligt i motpartens position, kritisera sedan.
 
+## Hänvisningar
+
+En hänvisning till en sida som sajten har är en länk dit (Niclas 2026-10-19: "Känns konstigt att inte hänvisa direkt till en sida när sajten faktiskt har den ... En hänvisning till ett verktyg ska leda till länken. Samma med hänvisning till Fohlin böcker"). Sajten gör länkarna själv, på sidan och i Word-filerna, också i lathunden, lärarhandledningarna och lektionskorten (`src/lib/boklankar.ts`), om texten skrivs så här:
+
+| Hänvisningen | Så skrivs den | Den leder till |
+|---|---|---|
+| Ett verktyg eller ett stödmaterial | Med namnet som i registret (`src/data/centrala.json`): "Fler problem finns på sidan Ta fram ett matteproblem." | Verktyget. Ett stycke i metodens löptext som säger "sidan", "sidor" eller "sidorna" före namnet får verktygets knapp efter sig, en gång i avsnittet. Lathunden och lärarhandledningarna får länken men ingen knapp, så att bladen är desamma som i pdf:en |
+| En av Niclas böcker | Med titeln: "Boken Gruppstärkande ledarskap beskriver" | Bokens sida |
+| En hänvisning till Fohlin | Som parentescitat, "(Fohlin och Wilson, 2025)", eller "Fohlin och Wilson (2025)", också "(se Fohlin och Wilson, 2025, s. 45)" och "Wilson och Fohlin (2025)". Har flera böcker samma år och medförfattare, som tre böcker 2023, står titeln direkt före parentesen: "Gruppstärkande ledarskap (Fohlin och Wilson, 2023)" | Bokens sida, ur titeln eller året och medförfattarna |
+| En artikel där Niclas är medförfattare | Med förste författaren och året: "(Klang m.fl., 2020)". Artikeln står i listan i `src/lib/boklankar.ts` | Artikelns sida hos tidskriften |
+| En bok som inte är utgiven | Med "utkommer" före året: "(Fohlin och Wilson, utkommer 2027)" | Sidan med alla böcker, niclasfohlin.se/bocker |
+| En adress på sajten | Med sökvägen: "niclasfohlin.se/lastexter" | Adressen |
+
+Bygget stannar på en hänvisning till Fohlin som kan gälla flera böcker eller en bok som inte finns på sajten, och på "sidan Ta fram …" när ingen sådan sida finns.
+
 ## Ingresser
 
 Två till fyra meningar, minst 40 och högst 320 tecken; schemat stoppar annars. Egen text som säger vad texten hävdar och varför den skrevs. Aldrig originalets ingress i omskriven form. Ingressen ska fungera ensam i ett kort på startsidan och i ett nyhetsbrev.
