@@ -69,6 +69,9 @@ const metodnamn = Object.fromEntries((await publicerade('stodundervisning')).map
       <section class="stat-kategori" data-kategori="verktyg" data-topp="5">
         <h2>Knapparna i verktygen</h2>
       </section>
+      <section class="stat-kategori" data-kategori="filter" data-topp="5">
+        <h2>Valen i metodbanken</h2>
+      </section>
       <section class="stat-kategori" data-kategori="ovriga" data-topp="5">
         <h2>Övriga sidor</h2>
       </section>
@@ -230,7 +233,7 @@ const metodnamn = Object.fromEntries((await publicerade('stodundervisning')).map
       const filer = new Map<string, Rad>();
       const delningar = new Map<string, { namn: string; antal: number; kanaler: Map<string, number> }>();
       let delade = 0;
-      const k: Record<string, Rad[]> = { artiklar: [], bocker: [], utskrifter: [], verktyg: [], ovriga: [] };
+      const k: Record<string, Rad[]> = { artiklar: [], bocker: [], utskrifter: [], verktyg: [], filter: [], ovriga: [] };
       // Nedladdningarna: filerna och utskrifterna, inte knapparna i verktygen (granskningen av statistiken 2026-10-19).
       let nedladdade = 0;
       const metod = (id: string) => {
@@ -263,6 +266,8 @@ const metodnamn = Object.fromEntries((await publicerade('stodundervisning')).map
             nedladdade += h.count;
             continue;
           }
+          // Valen i metodbankens formulär (K-463): vad lärarna väljer, Tränar Läsflyt eller Upplägg Intensivträning.
+          if (/^filter:/.test(h.path)) { k.filter.push({ namn: (titel || h.path).replace(/^Metodbanken:\s*/, ''), under: h.path, antal: h.count }); continue; }
           // Det som är kvar är knapparna i verktygen och metodbankens ruta: Visa stort, lösningsförslaget, modellen,
           // helskärmen, klockan, musiken, listans länk, Till metoden och rutan Verktyg och Stödmaterial.
           k.verktyg.push({ namn: titel || h.path, under: h.path, antal: h.count });

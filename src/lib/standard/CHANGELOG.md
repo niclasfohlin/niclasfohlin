@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.7.0, 2026-10-19
+
+- `tidensMatt`, `arIntensiv`, `arLektioner` och `mojligaUpplagg`, med uppläggens taggar och gränser: metodens upplägg ur faktarutans tid, så att sajten och riggen prövar samma sak (sajtens K-463). En metod har exakt ett upplägg, `intensivtraning` (högst 30 minuter, 3–5 dagar i veckan), `lektionsupplagg` (minst 30 minuter, alltid vid 40 eller mer) eller `aterkommande-pass` (högst 40 minuter, en eller två gånger i veckan); där tiden rymmer två avgör innehållet. Niclas: "Intensivträning är något som sker 30min eller kortare 3-5 dagar i veckan för att höja en förmåga".
+
 ## 0.6.1, 2026-10-19
 
 - `fohlinHanvisningar` läser fler former (granskningen samma dag): Fohlin sist av två ("Wilson och Fohlin (2025)"), Lisa Fohlin som medförfattare ("Fohlin, Fohlin och Wilson (2020)"), "se" eller "jfr" före och sidan efter i en parentes ("(se Fohlin och Wilson, 2023, s. 45)", länken är författarna och året) och "&" som "&amp;" i HTML. Titeln i en källförteckning går inte över ett meningsslut. `medforfattare` är alla namn utom ett Fohlin.

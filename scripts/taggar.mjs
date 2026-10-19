@@ -7,7 +7,9 @@
 //   node scripts/taggar.mjs --sok läsflyt   Slå upp om ett ord är en tagg eller ett alias
 //   node scripts/taggar.mjs --forslag konflikthantering [fler id]   Lista poster vars text nämner taggens namn eller
 //                                           alias men saknar taggen, för att pröva en ny tagg mot det som redan finns
-//   node scripts/taggar.mjs --post src/content/artiklar/x.md   Lista taggar vars ord står i posten men som saknas
+//   node scripts/taggar.mjs --post src/content/artiklar/x.md   Lista taggar vars ord står i posten men som saknas; för en
+//                                                              metod också taggarnas slag, upplägget som tiden rymmer och
+//                                                              de tre frågorna om klass eller grupp med citat ur metoden
 //
 // Reglerna står i ARBETSSATT.md under Innehåll; här står dem skriptet håller (Niclas 2026-10-03): en post har minst två och högst fem taggar. En ny tagg prövas alltid mot alla
 // befintliga artiklar, böcker och metoder med --forslag: träffarna är kandidater, och den som lägger till taggen läser
@@ -25,6 +27,7 @@ import { execFileSync } from 'node:child_process';
 import { join, relative, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse as parseYaml } from 'yaml';
+import { mojligaUpplagg } from '../src/lib/standard/index.js';
 
 const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const taggar = JSON.parse(readFileSync(join(rot, 'src/data/taggar.json'), 'utf8')).taggar;
@@ -186,7 +189,7 @@ function oprovadePoster(filer) {
     const fm = frontmatter(fil);
     if (!fm || fm._fel || fm.utkast) return [];
     const f = forslagForPost(fil);
-    return [`${vag}: ny post. Pröva taggarna innan den kommer ut: ${f.length ? `registret föreslår ${f.slice(0, 8).map(visaForslag).join('; ')}` : 'inga andra taggar i registret nämns i posten'}. Läs posten, välj ${MINST} till ${HOGST} taggar (node scripts/taggar.mjs --post ${vag}), och skriv "${vag}": "<datum>" under poster i src/data/taggprov.json.`];
+    return [`${vag}: ny post. Pröva taggarna${/stodundervisning\/[^/]+\.yaml$/.test(vag) ? ', upplägget och klass eller grupp' : ''} innan den kommer ut: ${f.length ? `registret föreslår ${f.slice(0, 8).map(visaForslag).join('; ')}` : 'inga andra taggar i registret nämns i posten'}. Läs posten, välj ${MINST} till ${HOGST} taggar (node scripts/taggar.mjs --post ${vag}), och skriv "${vag}": "<datum>" under poster i src/data/taggprov.json.`];
   });
 }
 
@@ -200,6 +203,26 @@ if (args[0] === '--post') {
   console.log(f.length
     ? `Taggar vars ord står i posten men som saknas, flest träffar först. Läs och avgör; en tagg ska säga vad posten handlar om:\n${f.map((x) => `  ${String(x.summa).padStart(3)}  ${visaForslag(x)}`).join('\n')}`
     : 'Inga andra taggar i registret nämns i posten.');
+  // En metod (K-463; Niclas 2026-10-19: "Se till att nya görs rätt också i hur du lägger in dem. Så det är en del av
+  // processen för nya metoder"): taggarnas slag, upplägget som faktarutans tid rymmer, och de tre frågorna om klass eller
+  // grupp med det metoden själv säger. Schemat stoppar slag och upplägg; klass eller grupp avgörs här och skrivs i format.
+  if (/stodundervisning\/[^/]+\.yaml$/.test(postVag(fil))) {
+    const slag = (id) => taggar.find((x) => x.id === id)?.slag ?? 'okänd';
+    console.log(`\nSlagen: ${egna.map((t) => `${t} (${slag(t)})`).join(', ') || 'inga'}. En metod har minst en förmåga, exakt ett upplägg och inget ämne.`);
+    const mojliga = mojligaUpplagg(fm.tid);
+    const upplagg = egna.filter((t) => slag(t) === 'upplägg');
+    console.log(`Upplägget: faktarutans tid, "${fm.tid ?? 'saknas'}", rymmer ${mojliga.join(' eller ') || 'inget upplägg'}; metoden har ${upplagg.join(', ') || 'inget'}.${mojliga.length > 1 ? ' Tiden rymmer två: lektioner med något att lära ut är lektionsupplagg, gruppens egna samtal och aktiviteter aterkommande-pass.' : ''}`);
+    const text = readFileSync(fil, 'utf8').replace(/\s+/g, ' ');
+    const citat = (re) => {
+      const ut = [...text.matchAll(re)].slice(0, 3).map((m) => `"…${text.slice(Math.max(0, m.index - 70), m.index + m[0].length + 50).trim()}…"`);
+      return ut.length ? `\n       ${ut.join('\n       ')}` : ' Inget i texten.';
+    };
+    const klass = Array.isArray(fm.format) && fm.format.includes('helklass');
+    console.log(`Klass eller grupp: format har ${klass ? 'helklass (kan göras i klass)' : 'inte helklass (bara i grupp)'}. Svara på frågorna med det metoden säger (ARBETSSATT.md under Innehåll):`);
+    console.log(`  1. Bygger passets kärna på att läraren hör eller ser varje elevs svar och ger stöd direkt? Ja ger bara grupp.${citat(/lyssna[r]? på (?:en|varje|några|dagens)|en i taget|i kör|hör och ser/gi)}`);
+    console.log(`  2. Bygger samtalen på elevernas egna konflikter eller upplevelser? Ja ger bara grupp.${citat(/konflikt|det som hänt|egna upplevelser|det som skaver/gi)}`);
+    console.log(`  3. Annars: kan alla göra passets kärna samtidigt i par eller grupper medan läraren leder och går runt? Ja ger helklass.${citat(/hela klassen|helklass|hel klass|går runt/gi)}`);
+  }
   process.exit(0);
 }
 

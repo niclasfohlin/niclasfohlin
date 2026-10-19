@@ -52,41 +52,41 @@ const metoderText = (n: number) => (n === 1 ? '1 metod' : `${n} metoder`);
         ))}
         <p class="mbf-ruta mbf-antal"><span class="mbf-namn">Visar</span><span class="mbf-varde"><span aria-live="polite" data-antal>{metoderText(metoder.length)}</span><span data-rensa-rad hidden> · <button type="button" class="mbf-rensa" data-rensa-filter>Rensa</button></span></span></p>
       </div>
-      <p class="mbf-upplagg" data-upplagg-not hidden></p>
       <fieldset class="mbf-panel" id="mbf-omrade" data-panel="omrade" hidden>
         <legend class="visually-hidden">Område</legend>
-        <label class="mbf-knapp" data-goatcounter-click="filter:omrade:alla" data-goatcounter-title="Metodbanken: Område Alla"><input type="radio" name="omrade" value="" checked /><span data-text>Alla</span> <small data-n>{antalMed('omrade', '')}</small></label>
-        {site.omraden.map((o) => <label class="mbf-knapp" data-amne={o} data-goatcounter-click={`filter:omrade:${o}`} data-goatcounter-title={`Metodbanken: Område ${o}`}><input type="radio" name="omrade" value={o} disabled={antalMed('omrade', o) === 0} /><span data-text>{o}</span> <small data-n>{antalMed('omrade', o)}</small></label>)}
+        <label class="mbf-knapp"><input type="radio" name="omrade" value="" checked /><span data-text>Alla</span> <small data-n>{antalMed('omrade', '')}</small></label>
+        {site.omraden.map((o) => <label class="mbf-knapp" data-amne={o}><input type="radio" name="omrade" value={o} disabled={antalMed('omrade', o) === 0} /><span data-text>{o}</span> <small data-n>{antalMed('omrade', o)}</small></label>)}
       </fieldset>
       <fieldset class="mbf-panel" id="mbf-arskurs" data-panel="arskurs" hidden>
         <legend class="visually-hidden">Årskurs</legend>
-        <label class="mbf-knapp" data-goatcounter-click="filter:arskurs:alla" data-goatcounter-title="Metodbanken: Årskurs Alla"><input type="radio" name="arskurs" value="" checked /><span data-text>Alla</span> <small data-n>{antalMed('arskurs', '')}</small></label>
-        {arskurserIBruk.map((a) => <label class="mbf-knapp" data-goatcounter-click={`filter:arskurs:${a}`} data-goatcounter-title={`Metodbanken: Årskurs ${a}`}><input type="radio" name="arskurs" value={a} /><span data-text>{a}</span> <small data-n>{antalMed('arskurs', a)}</small></label>)}
+        <label class="mbf-knapp"><input type="radio" name="arskurs" value="" checked /><span data-text>Alla</span> <small data-n>{antalMed('arskurs', '')}</small></label>
+        {arskurserIBruk.map((a) => <label class="mbf-knapp"><input type="radio" name="arskurs" value={a} /><span data-text>{a}</span> <small data-n>{antalMed('arskurs', a)}</small></label>)}
       </fieldset>
       <fieldset class="mbf-panel" id="mbf-tagg" data-panel="tagg" hidden>
         <legend class="visually-hidden">Tränar</legend>
-        <label class="mbf-knapp" data-goatcounter-click="filter:tagg:allt" data-goatcounter-title="Metodbanken: Tränar Allt"><input type="radio" name="tagg" value="" checked /><span data-text>Allt</span> <small data-n>{antalMed('tagg', '')}</small></label>
+        <label class="mbf-knapp"><input type="radio" name="tagg" value="" checked /><span data-text>Allt</span> <small data-n>{antalMed('tagg', '')}</small></label>
         {formagegrupper.map((g) => (
           <div class="mbf-grupp" data-grupp>
             <p class="mbf-gruppnamn" data-amne={g.o}>{g.o}</p>
-            {g.taggar.map((t) => <label class="mbf-knapp" data-goatcounter-click={`filter:tagg:${t}`} data-goatcounter-title={`Metodbanken: Tränar ${taggLabel(t)}`}><input type="radio" name="tagg" value={t} /><span data-text>{taggLabel(t)}</span> <small data-n>{antalMed('tagg', t)}</small></label>)}
+            {g.taggar.map((t) => <label class="mbf-knapp"><input type="radio" name="tagg" value={t} /><span data-text>{taggLabel(t)}</span> <small data-n>{antalMed('tagg', t)}</small></label>)}
           </div>
         ))}
       </fieldset>
       <fieldset class="mbf-panel" id="mbf-upplagg" data-panel="upplagg" hidden>
         <legend class="visually-hidden">Upplägg</legend>
-        <label class="mbf-knapp" data-goatcounter-click="filter:upplagg:alla" data-goatcounter-title="Metodbanken: Upplägg Alla"><input type="radio" name="upplagg" value="" checked /><span data-text>Alla</span> <small data-n>{antalMed('upplagg', '')}</small></label>
-        {upplaggIBruk.map((t) => <label class="mbf-knapp" data-forklaring={beskrivning[t]} data-goatcounter-click={`filter:upplagg:${t}`} data-goatcounter-title={`Metodbanken: Upplägg ${taggLabel(t)}`}><input type="radio" name="upplagg" value={t} /><span data-text>{taggLabel(t)}</span> <small data-n>{antalMed('upplagg', t)}</small></label>)}
+        <label class="mbf-knapp"><input type="radio" name="upplagg" value="" checked /><span data-text>Alla</span> <small data-n>{antalMed('upplagg', '')}</small></label>
+        {upplaggIBruk.map((t) => <label class="mbf-knapp" data-forklaring={beskrivning[t]}><input type="radio" name="upplagg" value={t} /><span data-text>{taggLabel(t)}</span> <small data-n>{antalMed('upplagg', t)}</small></label>)}
         <dl class="mbf-forklaringar">
           {upplaggIBruk.map((t) => <div><dt>{taggLabel(t)}</dt><dd>{beskrivning[t]}</dd></div>)}
         </dl>
       </fieldset>
       <fieldset class="mbf-panel" id="mbf-klass" data-panel="klass" hidden>
         <legend class="visually-hidden">Klass eller grupp</legend>
-        <label class="mbf-knapp" data-goatcounter-click="filter:klass:alla" data-goatcounter-title="Metodbanken: Klass eller grupp Alla"><input type="radio" name="klass" value="" checked /><span data-text>Alla</span> <small data-n>{antalMed('klass', '')}</small></label>
-        <label class="mbf-knapp" data-goatcounter-click="filter:klass:klass" data-goatcounter-title="Metodbanken: Kan göras i klass"><input type="radio" name="klass" value="klass" /><span data-text>Kan göras i klass</span> <small data-n>{antalMed('klass', 'klass')}</small></label>
-        <label class="mbf-knapp" data-goatcounter-click="filter:klass:grupp" data-goatcounter-title="Metodbanken: Bara i grupp"><input type="radio" name="klass" value="grupp" /><span data-text>Bara i grupp</span> <small data-n>{antalMed('klass', 'grupp')}</small></label>
+        <label class="mbf-knapp"><input type="radio" name="klass" value="" checked /><span data-text>Alla</span> <small data-n>{antalMed('klass', '')}</small></label>
+        <label class="mbf-knapp"><input type="radio" name="klass" value="klass" /><span data-text>Kan göras i klass</span> <small data-n>{antalMed('klass', 'klass')}</small></label>
+        <label class="mbf-knapp"><input type="radio" name="klass" value="grupp" /><span data-text>Bara i grupp</span> <small data-n>{antalMed('klass', 'grupp')}</small></label>
       </fieldset>
+      <p class="mbf-upplagg" data-upplagg-not hidden></p>
       <p class="mbf-tom" data-tom hidden>Ingen metod matchar dina val. <button type="button" data-rensa-filter>Visa alla metoder</button></p>
     </form>
   )}
@@ -168,7 +168,13 @@ const metoderText = (n: number) => (n === 1 ? '1 metod' : `${n} metoder`);
       for (const r of rutor) r.setAttribute('aria-expanded', String(r.dataset.ruta === falt));
       for (const p of paneler) p.hidden = p.dataset.panel !== falt;
     }
-    for (const r of rutor) r.addEventListener('click', () => oppna(r.getAttribute('aria-expanded') === 'true' ? null : r.dataset.ruta ?? null));
+    // Öppnas en ruta med tangentbordet (klicket har detail 0) går fokus till det valda i panelen, som står efter alla
+    // rutorna i formuläret.
+    for (const r of rutor) r.addEventListener('click', (h) => {
+      const falt = r.getAttribute('aria-expanded') === 'true' ? null : r.dataset.ruta ?? null;
+      oppna(falt);
+      if (falt && h.detail === 0) form!.querySelector<HTMLInputElement>(`input[name="${falt}"]:checked`)?.focus();
+    });
     form.addEventListener('keydown', (h) => {
       if (h.key !== 'Escape') return;
       const oppen = rutor.find((r) => r.getAttribute('aria-expanded') === 'true');
@@ -267,8 +273,18 @@ const metoderText = (n: number) => (n === 1 ? '1 metod' : `${n} metoder`);
     }
 
     const tom = form.querySelector('[data-tom]') as HTMLElement;
-    for (const b of form.querySelectorAll('[data-rensa-filter]')) b.addEventListener('click', () => { form!.reset(); oppna(null); filtrera(); });
+    // Rensa döljer sig själv, så fokus går till den första rutan.
+    for (const b of form.querySelectorAll('[data-rensa-filter]')) b.addEventListener('click', () => { form!.reset(); oppna(null); filtrera(); rutor[0]?.focus(); });
     form.addEventListener('change', filtrera);
+    // Statistiken: ett val räknas en gång, här, och inte på etiketten, där klicket och webbläsarens klick på
+    // radioknappen räknades var för sig (granskningen 2026-10-19). Statistiksidan har en egen rad för valen.
+    form.addEventListener('change', (h) => {
+      const r = h.target as HTMLInputElement;
+      if (r.type !== 'radio') return;
+      const fraga = rutor.find((x) => x.dataset.ruta === r.name)?.querySelector('.mbf-namn')?.textContent ?? r.name;
+      const text = r.closest('label')?.querySelector('[data-text]')?.textContent ?? r.value;
+      (window as unknown as { goatcounter?: { count?: (o: object) => void } }).goatcounter?.count?.({ event: true, path: `filter:${r.name}:${r.value || 'alla'}`, title: `Metodbanken: ${fraga} ${text}` });
+    });
     filtrera();
   }
 

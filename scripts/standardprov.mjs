@@ -29,7 +29,7 @@ for (const f of readdirSync(mapp).filter((x) => /\.(js|d\.ts)$/.test(x))) {
   }
 }
 
-const { slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar } = await import(pathToFileURL(join(mapp, 'index.js')).href);
+const { slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg } = await import(pathToFileURL(join(mapp, 'index.js')).href);
 const fall = [
   ['Två lösningar', 'tva-losningar'], ['Lärarens sida', 'lararens-sida'], ['Bas', 'bas'], ['Problem och lösning', 'problem-och-losning'],
   ['Café Über', 'cafe-uber'], ['  –Äpple, år 3–  ', 'apple-ar-3'], ['Venndiagrammet', 'venndiagrammet'], ['Ö', 'o'],
@@ -114,5 +114,16 @@ for (const [t, vantat] of hanv) {
 const lisa = fohlinHanvisningar('Fohlin, Fohlin och Wilson (2020)')[0]?.medforfattare;
 if (JSON.stringify(lisa) !== '["Fohlin","Wilson"]') fel.push(`fohlinHanvisningar läser medförfattarna i "Fohlin, Fohlin och Wilson (2020)" som ${JSON.stringify(lisa)}`);
 
+// Uppläggen ur faktarutans tid (K-463): metodernas former, och de svåra formuleringarna ur granskningen.
+const upplaggFall = [
+  ['30 minuter per pass, tre till fem pass i veckan', 'intensivtraning'], ['10–15 minuter per pass, varje dag eller minst tre gånger i veckan', 'intensivtraning'],
+  ['20 minuter i skolan och 20 hemma per pass, vanligtvis fyra dagar i veckan', 'intensivtraning'], ['60 minuter per pass, två pass i veckan', 'lektionsupplagg'],
+  ['30 minuter per pass, två till tre pass i veckan', 'lektionsupplagg,aterkommande-pass'], ['Cirka 20 minuter per pass, ett samtal i veckan', 'aterkommande-pass'],
+  ['10–40 minuter per pass, en eller två gånger i veckan', 'aterkommande-pass'], ['45 minuter en gång i veckan', 'lektionsupplagg'],
+  ['30 minuter tre gånger i veckan', 'intensivtraning'], ['10 till 40 minuter per pass, en eller två gånger i veckan', 'aterkommande-pass'],
+  ['15 minuter dagligen', 'intensivtraning'], ['60 min per pass, två pass i veckan', 'lektionsupplagg'], ['20 minuter per pass, under sex veckor med tre pass i veckan', 'intensivtraning'],
+];
+for (const [tid, vantat] of upplaggFall) if (mojligaUpplagg(tid).join(',') !== vantat) fel.push(`mojligaUpplagg("${tid}") ger ${mojligaUpplagg(tid).join(',') || 'inget'}, inte ${vantat}`);
+
 if (fel.length) { console.error(`standardprov: ${fel.length} fel i src/lib/standard/:\n  ${fel.join('\n  ')}`); process.exit(1); }
-console.log(`standardprov: standarden (src/lib/standard/) importerar inget utanför sig själv, och slugAv, UPPTAGNA_LED, innehållstaggarna, postens rad och fel och hämtplanen, spärren mot fasta antal och hänvisningarna till Fohlin svarar rätt.`);
+console.log(`standardprov: standarden (src/lib/standard/) importerar inget utanför sig själv, och slugAv, UPPTAGNA_LED, innehållstaggarna, postens rad och fel och hämtplanen, spärren mot fasta antal, hänvisningarna till Fohlin och uppläggen ur faktarutans tid svarar rätt.`);

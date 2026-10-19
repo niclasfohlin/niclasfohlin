@@ -18,72 +18,18 @@
 // Om metoden kan göras i klass står i fältet format (helklass), som faktarutan visar; en metod utan helklass görs bara i
 // grupp. Reglerna står i ARBETSSATT.md under Innehåll.
 import taggarData from '../data/taggar.json';
+// Tolkningen av tiden och uppläggens gränser står i standarden, som metodriggen också läser (src/lib/standard/).
+import { ATERKOMMANDE, ATERKOMMANDE_MINUTER, INTENSIV, INTENSIV_DAGAR, INTENSIV_MINUTER, LEKTION_MINST, LEKTIONER, mojligaUpplagg } from './standard/index.js';
+export { ATERKOMMANDE, ATERKOMMANDE_DAGAR, ATERKOMMANDE_MINUTER, INTENSIV, INTENSIV_DAGAR, INTENSIV_MINUTER, LEKTION_MINST, LEKTION_MINUTER, LEKTIONER, arIntensiv, arLektioner, mojligaUpplagg, tidensMatt } from './standard/index.js';
 
 export type Slag = 'förmåga' | 'upplägg' | 'arbetssätt' | 'ämne';
 export const SLAG: Slag[] = ['förmåga', 'upplägg', 'arbetssätt', 'ämne'];
 const slagAv = new Map<string, Slag>(taggarData.taggar.map((t) => [t.id, t.slag as Slag]));
 export const taggensSlag = (id: string): Slag | undefined => slagAv.get(id);
 
-export const INTENSIV = 'intensivtraning';
-export const LEKTIONER = 'lektionsupplagg';
-export const ATERKOMMANDE = 'aterkommande-pass';
-export const INTENSIV_MINUTER = 30;
-export const INTENSIV_DAGAR = [3, 5] as const;
-export const LEKTION_MINST = 30;
-export const LEKTION_MINUTER = 40;
-export const ATERKOMMANDE_MINUTER = 40;
-export const ATERKOMMANDE_DAGAR = 2;
-
-const TAL: Record<string, number> = { en: 1, ett: 1, två: 2, tre: 3, fyra: 4, fem: 5, sex: 6, sju: 7 };
-
-/**
- * Passets längd och hur ofta, ur faktarutans tid ("30 minuter per pass, tre till fem pass i veckan"): det kortaste och
- * det längsta passet i minuter, och det minsta antalet dagar i veckan som texten anger. "varje dag" är fem. Ett värde
- * som inte går att läsa är undefined.
- */
-export function tidensMatt(tid: string): { minst?: number; minuter?: number; perVecka?: number } {
-  const t = tid.toLowerCase();
-  const min = t.match(/(\d+)(?:\s*[–-]\s*(\d+))?\s*minuter/);
-  const minst = min ? Number(min[1]) : undefined;
-  const minuter = min ? Number(min[2] ?? min[1]) : undefined;
-  const ganger: number[] = [];
-  if (/varje dag/.test(t)) ganger.push(5);
-  for (const del of t.split(/,|\boch\b/)) {
-    if (!/i veckan/.test(del)) continue;
-    // Gränserna är Unicode, eftersom \b inte ser å som en bokstav ("två" lästes förbi och "tre" blev talet).
-    const forsta = del.match(/(?<![\p{L}\d])(\d+|en|ett|två|tre|fyra|fem|sex|sju)(?![\p{L}\d])/u);
-    if (forsta) ganger.push(/^\d+$/.test(forsta[1]) ? Number(forsta[1]) : TAL[forsta[1]]);
-  }
-  return { minst, minuter, perVecka: ganger.length ? Math.min(...ganger) : undefined };
-}
-
-/** Är faktarutans tid intensivträning: pass på högst 30 minuter, tre till fem dagar i veckan? */
-export function arIntensiv(tid: string | undefined): boolean {
-  if (!tid) return false;
-  const { minuter, perVecka } = tidensMatt(tid);
-  return minuter !== undefined && perVecka !== undefined && minuter <= INTENSIV_MINUTER && perVecka >= INTENSIV_DAGAR[0] && perVecka <= INTENSIV_DAGAR[1];
-}
-
-/** Måste faktarutans tid vara ett lektionsupplägg: pass på minst 40 minuter? */
-export function arLektioner(tid: string | undefined): boolean {
-  if (!tid) return false;
-  const { minst } = tidensMatt(tid);
-  return minst !== undefined && minst >= LEKTION_MINUTER;
-}
-
-/** Vilka upplägg faktarutans tid rymmer. Intensivträning utesluter de andra. */
-export function mojligaUpplagg(tid: string | undefined): string[] {
-  if (arIntensiv(tid)) return [INTENSIV];
-  if (arLektioner(tid)) return [LEKTIONER];
-  const { minst, minuter, perVecka } = tidensMatt(tid ?? '');
-  const ut: string[] = [];
-  if (minst !== undefined && minst >= LEKTION_MINST) ut.push(LEKTIONER);
-  if (minuter !== undefined && perVecka !== undefined && minuter <= ATERKOMMANDE_MINUTER && perVecka <= ATERKOMMANDE_DAGAR) ut.push(ATERKOMMANDE);
-  return ut;
-}
 const KRAV: Record<string, string> = {
   [INTENSIV]: `pass på högst ${INTENSIV_MINUTER} minuter, ${INTENSIV_DAGAR[0]} till ${INTENSIV_DAGAR[1]} dagar i veckan`,
-  [LEKTIONER]: `pass på minst ${LEKTION_MINST} minuter, och minst ${LEKTION_MINUTER} minuter när passen är så långa`,
+  [LEKTIONER]: `pass på minst ${LEKTION_MINST} minuter som inte är intensivträning`,
   [ATERKOMMANDE]: `pass på högst ${ATERKOMMANDE_MINUTER} minuter, en eller två gånger i veckan`,
 };
 
@@ -98,7 +44,8 @@ export function metodensTaggfel(d: { taggar: string[]; tid?: string }): string[]
   const tid = d.tid ?? 'inte ifylld';
   const upplagg = d.taggar.filter((t) => taggensSlag(t) === 'upplägg');
   const mojliga = mojligaUpplagg(d.tid);
-  if (upplagg.length !== 1) fel.push(`Metoden har ${upplagg.length ? `${upplagg.length} upplägg (${upplagg.join(', ')})` : 'inget upplägg'}. Den har exakt ett: ${[INTENSIV, LEKTIONER, ATERKOMMANDE].join(', ')}${mojliga.length ? `, och faktarutans tid, "${tid}", rymmer ${mojliga.join(' eller ')}` : ''}.`);
+  if (!d.tid) fel.push('Faktarutans tid saknas, och upplägget prövas mot den. Skriv tiden som "<passets längd> per pass, <hur ofta> i veckan".');
+  if (upplagg.length !== 1) fel.push(`Metoden har ${upplagg.length ? `${upplagg.length} upplägg (${upplagg.join(', ')})` : 'inget upplägg'}. Den ska ha exakt ett: ${[INTENSIV, LEKTIONER, ATERKOMMANDE].join(', ')}${mojliga.length ? `, och faktarutans tid, "${tid}", rymmer ${mojliga.join(' eller ')}` : ''}.`);
   for (const u of upplagg) if (!mojliga.includes(u)) fel.push(`Taggen ${u} kräver ${KRAV[u] ?? 'ett annat upplägg'}, och faktarutans tid är "${tid}". ${mojliga.length ? `Tiden rymmer ${mojliga.join(' eller ')}.` : 'Skriv tiden som metoden är.'}`);
   return fel;
 }

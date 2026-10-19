@@ -68,3 +68,22 @@ export declare function fastaAntal(text: string, ord: string[], grupper?: string
 export interface FohlinHanvisning { start: number; slut: number; text: string; medforfattare: string[]; mfl: boolean; ar: number; utkommer: boolean; titel?: string }
 /** Hänvisningarna till Niclas Fohlins böcker i en text: i en parentes ("(Fohlin och Wilson, 2023)"), med året efter ("Fohlin och Wilson (2025)") och i en källförteckning ("Fohlin och Wilson, Skriv! (utkommer 2027)"). */
 export declare function fohlinHanvisningar(text: string): FohlinHanvisning[];
+
+/** Uppläggens taggar och gränser (sajtens K-463). */
+export declare const INTENSIV: 'intensivtraning';
+export declare const LEKTIONER: 'lektionsupplagg';
+export declare const ATERKOMMANDE: 'aterkommande-pass';
+export declare const INTENSIV_MINUTER: number;
+export declare const INTENSIV_DAGAR: readonly [number, number];
+export declare const LEKTION_MINST: number;
+export declare const LEKTION_MINUTER: number;
+export declare const ATERKOMMANDE_MINUTER: number;
+export declare const ATERKOMMANDE_DAGAR: number;
+/** Passets längd i minuter, det kortaste och det längsta, och det minsta antalet dagar i veckan, ur faktarutans tid. */
+export declare function tidensMatt(tid: string): { minst?: number; minuter?: number; perVecka?: number };
+/** Är tiden intensivträning: pass på högst 30 minuter, tre till fem dagar i veckan? */
+export declare function arIntensiv(tid: string | undefined): boolean;
+/** Måste tiden vara ett lektionsupplägg: pass på minst 40 minuter? */
+export declare function arLektioner(tid: string | undefined): boolean;
+/** Vilka upplägg tiden rymmer. Intensivträning utesluter de andra. */
+export declare function mojligaUpplagg(tid: string | undefined): string[];

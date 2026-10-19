@@ -280,3 +280,78 @@ export function fohlinHanvisningar(text) {
   }
   return ut.sort((a, b) => a.start - b.start);
 }
+
+/**
+ * Metodens upplägg ur faktarutans tid (sajtens K-463; Niclas 2026-10-19: "Intensivträning är något som sker 30min eller
+ * kortare 3-5 dagar i veckan för att höja en förmåga", "Problemlösning har väl lektioner i sig som man upprepar?", och om
+ * de sociala metoderna: "De är inte intensivträning och inte riktigt lektioner"). En metod har exakt ett upplägg:
+ * intensivtraning, pass på högst 30 minuter tre till fem dagar i veckan; lektionsupplagg, planerade lektioner med pass på
+ * minst 30 minuter, alltid när passen är 40 minuter eller mer; aterkommande-pass, pass på högst 40 minuter en eller två
+ * gånger i veckan. Där tiden rymmer två avgör innehållet. Sajten stoppar en metod vars upplägg tiden inte rymmer.
+ */
+export const INTENSIV = 'intensivtraning';
+export const LEKTIONER = 'lektionsupplagg';
+export const ATERKOMMANDE = 'aterkommande-pass';
+export const INTENSIV_MINUTER = 30;
+export const INTENSIV_DAGAR = [3, 5];
+export const LEKTION_MINST = 30;
+export const LEKTION_MINUTER = 40;
+export const ATERKOMMANDE_MINUTER = 40;
+export const ATERKOMMANDE_DAGAR = 2;
+
+const TIDTAL = { en: 1, ett: 1, två: 2, tre: 3, fyra: 4, fem: 5, sex: 6, sju: 7 };
+const tidtal = (x) => (/^\d+$/.test(x) ? Number(x) : TIDTAL[x]);
+// Gränserna är Unicode, eftersom \b inte ser å som en bokstav ("två" lästes förbi och "tre" blev talet).
+const TIDORD = String.raw`(\d+|en|ett|två|tre|fyra|fem|sex|sju)`;
+const TIDFORE = String.raw`(?<![\p{L}\d])`;
+const TIDEFTER = String.raw`(?![\p{L}\d])`;
+const MINUTER = new RegExp(String.raw`${TIDFORE}(\d+)(?:\s*(?:[–—−-]|till)\s*(\d+))?\s*(?:minuter|min)${TIDEFTER}`, 'u');
+// Hur ofta: talet närmast före pass, gånger, dagar, samtal eller träffar i veckan, och med ett spann det lägsta ("tre till
+// fem pass i veckan" är tre). Ett tal i ett annat led, som minuterna eller veckorna, räknas inte.
+const GANGER = new RegExp(String.raw`${TIDFORE}${TIDORD}(?:\s+(?:till|eller)\s+${TIDORD})?\s+(?:pass|gånger|gång|ggr|dagar|dag|samtal|träffar|träff)\s*(?:i|per|\/)\s*veckan?${TIDEFTER}`, 'gu');
+
+/**
+ * Passets längd och hur ofta, ur faktarutans tid ("30 minuter per pass, tre till fem pass i veckan"): det kortaste och
+ * det längsta passet i minuter, och det minsta antalet dagar i veckan som texten anger. "varje dag" och "dagligen" är
+ * fem, "varannan dag" två. Ett värde som inte går att läsa saknas.
+ * @param {string} tid
+ * @returns {{ minst?: number, minuter?: number, perVecka?: number }}
+ */
+export function tidensMatt(tid) {
+  const t = String(tid ?? '').toLowerCase();
+  const min = t.match(MINUTER);
+  const ord = t.match(/(?<![\p{L}])(en halvtimme|en kvart|en timme)(?![\p{L}])/u)?.[1];
+  const fast = ord ? { 'en halvtimme': 30, 'en kvart': 15, 'en timme': 60 }[ord] : undefined;
+  const minst = min ? Number(min[1]) : fast;
+  const minuter = min ? Number(min[2] ?? min[1]) : fast;
+  const ganger = [];
+  if (/varje (?:dag|vardag|skoldag)|dagligen/.test(t)) ganger.push(5);
+  if (/varannan dag/.test(t)) ganger.push(2);
+  for (const m of t.matchAll(GANGER)) ganger.push(tidtal(m[1]));
+  return { minst, minuter, perVecka: ganger.length ? Math.min(...ganger) : undefined };
+}
+
+/** Är faktarutans tid intensivträning: pass på högst 30 minuter, tre till fem dagar i veckan? @param {string | undefined} tid */
+export function arIntensiv(tid) {
+  if (!tid) return false;
+  const { minuter, perVecka } = tidensMatt(tid);
+  return minuter !== undefined && perVecka !== undefined && minuter <= INTENSIV_MINUTER && perVecka >= INTENSIV_DAGAR[0] && perVecka <= INTENSIV_DAGAR[1];
+}
+
+/** Måste faktarutans tid vara ett lektionsupplägg: pass på minst 40 minuter? @param {string | undefined} tid */
+export function arLektioner(tid) {
+  if (!tid) return false;
+  const { minst } = tidensMatt(tid);
+  return minst !== undefined && minst >= LEKTION_MINUTER;
+}
+
+/** Vilka upplägg faktarutans tid rymmer. Intensivträning utesluter de andra. @param {string | undefined} tid @returns {string[]} */
+export function mojligaUpplagg(tid) {
+  if (arIntensiv(tid)) return [INTENSIV];
+  if (arLektioner(tid)) return [LEKTIONER];
+  const { minst, minuter, perVecka } = tidensMatt(tid ?? '');
+  const ut = [];
+  if (minst !== undefined && minst >= LEKTION_MINST) ut.push(LEKTIONER);
+  if (minuter !== undefined && perVecka !== undefined && minuter <= ATERKOMMANDE_MINUTER && perVecka <= ATERKOMMANDE_DAGAR) ut.push(ATERKOMMANDE);
+  return ut;
+}

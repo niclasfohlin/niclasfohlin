@@ -25,6 +25,7 @@ Den här mappen är början på modulen som sajten och metodriggen ska dela, som
 | `postFel`, `databasFel` | Kontrollerna, som listor med fel |
 | `hamtplan` | Det billigaste sättet att hämta en listas sidor: posternas egna pdf:er eller källfilen en gång |
 | `fohlinHanvisningar` | Hänvisningarna till Niclas Fohlins böcker i en text, med platsen, medförfattarna, året och titeln, så att den som ritar texten gör dem till länkar: till bokens sida när boken finns, och till sajtens sida med alla böcker (`/bocker`) när den inte är utgiven. Vilken bok det är avgör sajten ur böckernas år och medförfattare. Reglerna står i sajtens STIL.md under Hänvisningar |
+| `tidensMatt`, `mojligaUpplagg` | Metodens upplägg ur faktarutans tid: passets längd och hur ofta, och vilka av de tre uppläggen tiden rymmer (Intensivträning, Lektionsupplägg, Återkommande pass). En metod har exakt ett. Reglerna står i sajtens ARBETSSATT.md under Innehåll |
 | `fastaAntal` | Spärren: de fasta antalen av en databas poster (från fem) och grupper (från två) i en text, som "tjugofem texter" eller "tre teman". De slutar stämma när databasen växer, och eftersom texten också står i Word-filerna, pdf:erna och lathunden skulle de göra om dem varje gång. Texten säger var posterna finns, och sidorna visar talen. Reglerna står i sajtens METODER.md under Antalen och databaserna |
 
 ## Det som kommer
