@@ -45,7 +45,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import JSZip from 'jszip';
-import { wordinnehall } from './wordinnehall.mjs';
+import { wordPdfensSumma } from './wordinnehall.mjs';
 
 const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
@@ -73,20 +73,9 @@ const byggOm = () => {
   if (kvar.length) { console.error(`bankpdf: ${kvar.length} datafiler väntar fortfarande på pdf:er efter bygget (${kvar.map((f) => f.slice(rot.length + 1)).join(', ')}).`); process.exit(1); }
 };
 
-// Typsnitten som Word-filerna bäddar in: ändras de (ett nytt tecken i elevens typsnitt) ändras pdf:en.
-const TYPSNITT = ['public/fonts/ljudlek-elev/LjudlekElev-Regular.ttf', 'public/fonts/boksida/Cinzel-dokument.ttf', 'public/fonts/boksida/CinzelDecorative-dokument.ttf'];
-const typsnittHash = sha(TYPSNITT.map((f) => (existsSync(join(rot, f)) ? sha(readFileSync(join(rot, f))) : `saknas:${f}`)).join('|'));
-// Word-filens innehåll som kontrollsumma (scripts/wordinnehall.mjs, som googleprov.mjs delar): text, tabeller och former,
-// sidhuvuden och sidfötter, bildernas svg och fotona, utan id, löpnummer, radslut och reservbilder.
-// Faktatexternas Anton (public/fonts/faktatext/) räknas bara för en Word-fil som bär typsnittet, så att de pdf:er som
-// gjordes innan typsnittet fanns behåller sina summor och inte görs om (Faktatextsamtal i grupp, 2026-10-13).
-const ANTON = 'public/fonts/faktatext/Anton-dokument.ttf';
-const antonHash = existsSync(join(rot, ANTON)) ? sha(readFileSync(join(rot, ANTON))) : `saknas:${ANTON}`;
-const innehallHash = async (docx) => {
-  const data = readFileSync(docx);
-  const typsnitt = await (await JSZip.loadAsync(data)).file('word/fontTable.xml')?.async('string') ?? '';
-  return wordinnehall(data, /w:name="Anton"/.test(typsnitt) ? `${typsnittHash}|${antonHash}` : typsnittHash);
-};
+// Word-filens innehåll och typsnitten som kontrollsumma (wordPdfensSumma i scripts/wordinnehall.mjs, som googleprov.mjs
+// läser för att se om pdf:en här är Words pdf av just den Word-filen).
+const innehallHash = (docx) => wordPdfensSumma(readFileSync(docx), rot);
 const pdfFor = (namn) => join(pdfMapp, `${namn}.pdf`);
 // Word-filens sidkarta (egenskapen sidkarta i docProps/custom.xml): ramarna och bladen i filens ordning, med antalet
 // avsnitt var. En fil utan egenskapen har ingen karta (filen med allt, lathunden).
