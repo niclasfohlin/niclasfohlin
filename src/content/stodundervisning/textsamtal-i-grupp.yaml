@@ -7,7 +7,7 @@
 # node build/texter.mjs textsamtal-i-grupp --yaml, mellan markörerna för texterna i ramarna.
 titel: Textsamtal i grupp
 undertitel: Lärarledd insats i liten grupp där eleverna samtalar om korta texter och lär sig läsa mellan raderna, för åk 2–9
-ingress: Eleverna lär sig läsa mellan raderna genom att samtala om korta texter. De säger vad de tror och visar sin ledtråd, bygger vidare på varandras tankar och prövar nya idéer mot texten. De har varit med om olika saker och får därför svara olika. Metoden har tre nivåer, och på varje nivå finns femton texter med frågor.
+ingress: Eleverna lär sig läsa mellan raderna genom att samtala om korta texter. De säger vad de tror och visar sin ledtråd, bygger vidare på varandras tankar och prövar nya idéer mot texten. De har varit med om olika saker och får därför svara olika. Metoden har tre nivåer, och på varje nivå finns tjugofem texter med frågor.
 omrade: Läsning
 arskurs:
   - F-3
@@ -29,7 +29,7 @@ material:
   - ledtrådsbladet
   - lyssningsbladet
   - kartläggningen
-uppdaterad: 2026-10-18
+uppdaterad: 2026-10-19
 relaterade:
   - boksamtal-i-grupp
   - faktatextsamtal-i-grupp
@@ -46,7 +46,7 @@ inledning:
   - Det finns inga rätta eller fel tankar. Ni prövar varje tanke mot texten, och ibland ändrar eleven sin tanke när nästa mening visar något nytt. Eleverna har varit med om olika saker och ser därför olika saker i en text. Den som har sovit borta en vecka känner igen hemlängtan, och den som har en katt vet var katter kan gömma sig. Två svar kan skilja sig och ändå båda stämma med texten, och det är okej. Du ställer frågor som du inte själv har svaret på, och du berömmer en ny idé som håller mot texten.
   - Du gör tre saker. Du tänker högt när du läser, så att eleverna hör ditt inre samtal. Du leder samtalet och lämnar över tänkandet till gruppen under veckan. Och du lyssnar på vad eleverna säger, så att du kan börja nästa vecka i det de behöver.
   - Varje vecka är en cykel med tre pass och en ny text i varje pass. I pass 1 läser du högt, stannar och tänker högt, och eleverna tänker med och säger sin tanke till en kamrat. I pass 2 tänker ni tillsammans. Vid stoppet samtalar eleverna i par, och sedan samtalar hela gruppen. I pass 3 läser eleverna själva eller i par och samtalar om frågorna medan du frågar ”Hur vet du det?” och lyssnar. Det du hör i pass 3 avgör vad du visar i nästa veckas pass 1, och så gör ni sex till åtta cykler.
-  - Metoden har tre nivåer, Lättläst, Mellan och Avancerad, och på varje nivå femton texter med frågor och två texter för kartläggningen före och efter. Välj nivå efter gruppen, och blanda gärna nivåerna. Texterna räcker till ungefär fem veckors pass. Sedan tar du texter ur serien Mellan raderna eller skriver egna, som det står i avsnittet om var du hittar texterna.
+  - Metoden har tre nivåer, Lättläst, Mellan och Avancerad, och på varje nivå tjugofem texter med frågor och två texter för kartläggningen före och efter. Tjugo av texterna, sex eller sju på varje nivå, är skrivna i en känd författares stil, som Astrid Lindgrens, Tove Janssons eller J.R.R. Tolkiens. Välj nivå efter gruppen, och blanda gärna nivåerna. Texterna räcker till ungefär åtta veckors pass. Vill du ha fler texter, tar du dem ur serien Mellan raderna eller skriver egna, som det står i avsnittet om var du hittar texterna.
 upplagg:
   rubrik: Så fungerar insatsen
   text: "Insatsen pågår i sex till åtta veckor med tre pass på cirka 30 minuter i veckan, och gruppen har två till åtta elever. Varje pass har en ny text, som alla i gruppen läser och samtalar om. Veckans tre pass hänger ihop: i pass 1 stannar du och tänker högt, i pass 2 samtalar eleverna i par vid stoppet och sedan i gruppen, och i pass 3 tänker eleverna mer själva medan du lyssnar. Efter pass 3 läser du lyssningsbladet och ledtrådsbladen och väljer vad du visar i nästa veckas pass 1. Före första passet och efter det sista gör varje elev kartläggningen enskilt med dig, och du jämför poängen."
@@ -589,8 +589,8 @@ roll:
 urval:
   rubrik: Var hittar du texterna?
   text:
-    - Metodens texter står under Materialet. Varje nivå, Lättläst, Mellan och Avancerad, har femton texter, och varje text står på ett eget blad med frågorna under. Översikten under Lärarens sidor visar vad eleven listar ut i varje text, frågornas slag, svårigheten och om texten har en vändning. Varje text har en egen sida med stoppet, hur du kan tänka högt och två öppna frågor. Välj den text som passar veckans tankesteg. Texterna finns också på sidan Ta fram en lästext. Där väljer du nivå och slag, visar en text i taget stort och skriver ut de texter du vill ha. Texterna räcker till ungefär fem veckors pass, och du fyller på med texter ur serien eller egna. Två texter på nivån Avancerad, Kvart i åtta och Samma sak, handlar om en förälder som har det svårt, så ta dem inte samma vecka.
-    - Sedan tar du texter ur serien Mellan raderna av Monica Karlsson och Liselotte Ståhl (Studentlitteratur). Serien består av fyra böcker med kopieringsunderlag. Efter nivån Lättläst passar Mellan raderna lättläst och sedan Vad står det mellan raderna? Efter Mellan passar Mycket mer mellan raderna, och efter Avancerad passar Mellan raderna avancerad. Facit finns hos förlaget eller i boken. Böckernas frågor står utan rubriker. Sortera dem i på, mellan och bortom raderna innan passet, och bestäm stoppet. Skriv sedan hur du tänker högt, med tankestegen och ledtrådar som står före stoppet, och två öppna frågor, som under Lärarens sidor. Byt till en svårare text eller bok när eleverna klarar slutsatsen med mindre stöd. Du kan också skriva egna texter, som tabellen Så skriver du en egen text visar.
+    - Metodens texter står under Materialet. Varje nivå, Lättläst, Mellan och Avancerad, har tjugofem texter, och varje text står på ett eget blad med frågorna under. Översikten under Lärarens sidor visar vad eleven listar ut i varje text, frågornas slag, svårigheten och om texten har en vändning. Varje text har en egen sida med stoppet, hur du kan tänka högt och två öppna frågor. Välj den text som passar veckans tankesteg. Texterna finns också på sidan Ta fram en lästext. Där väljer du nivå, visar en text i taget stort och skriver ut de texter du vill ha, och där finns lärarhandledningen till texterna. Tjugo av texterna, sex eller sju på varje nivå, är skrivna i en känd författares stil, och lärarens sida säger vems stil det är och vilken bok gruppen kan läsa vidare i. Texterna räcker till ungefär åtta veckors pass. Två texter på nivån Avancerad, Kvart i åtta och Samma sak, handlar om en förälder som har det svårt, så ta dem inte samma vecka.
+    - Vill du ha fler texter, tar du dem ur serien Mellan raderna av Monica Karlsson och Liselotte Ståhl (Studentlitteratur). Serien består av fyra böcker med kopieringsunderlag. Efter nivån Lättläst passar Mellan raderna lättläst och sedan Vad står det mellan raderna? Efter Mellan passar Mycket mer mellan raderna, och efter Avancerad passar Mellan raderna avancerad. Facit finns hos förlaget eller i boken. Böckernas frågor står utan rubriker. Sortera dem i på, mellan och bortom raderna innan passet, och bestäm stoppet. Skriv sedan hur du tänker högt, med tankestegen och ledtrådar som står före stoppet, och två öppna frågor, som under Lärarens sidor. Byt till en svårare text eller bok när eleverna klarar slutsatsen med mindre stöd. Du kan också skriva egna texter, som tabellen Så skriver du en egen text visar.
   kravText: "Välj en text per pass som uppfyller tre krav:"
   krav:
     - rubrik: Lagom nivå
@@ -612,10 +612,10 @@ progression:
       fokus: Ni övar att slå ihop flera ledtrådar med slaget Före och efter. Samtalsdraget är att bygga vidare med ”Jag håller med, och”. På nivån Avancerad tar du Samma sak en annan vecka än Kvart i åtta
       roll: Du visar två ledtrådar som bara tillsammans ger svaret
     - vecka: 4–5
-      fokus: Ni övar Stämmer det? och slaget Det som menas, med metodens texter med det slaget och texter ur serien Mellan raderna eller egna. Samtalsdragen är att tänka annorlunda och att pröva en ny riktning med ”Tänk om”
+      fokus: Ni övar Stämmer det? och slaget Det som menas i metodens texter med det slaget. Samtalsdragen är att tänka annorlunda och att pröva en ny riktning med ”Tänk om”
       roll: Du tänker högt kortare. I pass 2 säger en elev varför ni stannar, innan paren samtalar
     - vecka: 6–8
-      fokus: Ni övar slaget Ordet, med texter ur serien eller egna och en sida ur elevens egen bänkbok. Eleverna leder parsamtalet själva, väljer samtalsdrag ur kortet och ställer egna frågor om texten
+      fokus: Ni övar slaget Ordet i metodens texter med det slaget och på en sida ur elevens egen bänkbok. Eleverna leder parsamtalet själva, väljer samtalsdrag ur kortet och ställer egna frågor om texten
       roll: En elev tänker högt vid stoppet i pass 2, och eleverna leder gruppens samtal efter paren. Du följer upp om eleverna stannar själva
 uppfoljning:
   text: Följ effekten varje vecka med lyssningsbladet, och gör kartläggningen före och efter med två lika svåra texter. Kartläggningen är inget samtal. Den mäter om eleven på egen hand drar en slutsats som texten stöder och visar ledtråden, och i passen ger du inga poäng.
@@ -853,9 +853,95 @@ ramar:
             - ["22. Skåpen var tomma, sängen var bäddad och på köksbordet låg en lapp med nyckeln ovanpå.", "Före och efter: någon har flyttat eller rest iväg och lämnat nyckeln"]
             - ["23. Det låg krossat glas på golvet i hallen, och katten gömde sig under soffan.", "Före och efter: något har just fallit och gått sönder och skrämt katten"]
             - ["24. ”Ja, visst, det var en intressant idé”, sa läraren och bläddrade vidare till nästa uppsats.", "Det som menas: läraren tycker inte att idén var bra men säger det artigt"]
+    - rubrik: "Lärarhandledningen: Läs mellan raderna tillsammans"
+      text:
+        - "Målet: eleverna listar ut det som inte står utskrivet och visar var i texten de ser det."
+        - "En text · omkring 40 minuter · hela klassen i par"
+      delar:
+        - rubrik: "När samtalet stannar"
+          falt:
+            - { rubrik: "Det blir tyst", text: "Vänta. Tystnad betyder ofta att eleven tänker. Låt eleven säga sin tanke till kamraten först." }
+            - { rubrik: "En tanke utan ledtråd", text: "”Var i texten ser du det?” Peka sedan på en ledtråd och fråga vad den kan betyda." }
+            - { rubrik: "”Det står inte”", text: "”Vad vet du sedan innan?” Läs meningen före och efter igen, och fråga vad eleven ser framför sig." }
+            - { rubrik: "En tanke håller inte", text: "Pröva den mot texten: ”Stämmer det med resten?” En tanke håller när den har en ledtråd och inget i texten säger emot den. Eleven får ändra sig." }
+            - { rubrik: "”Är det rätt?”", text: "”Jag säger sist vad jag tror. Först vill jag höra er.” Säg sedan din tanke och din ledtråd." }
+            - { rubrik: "Samma elever talar", text: "Fråga ett par i stället för den som räcker upp handen, och be en tyst elev säga vad kamraten sa." }
+            - { rubrik: "Ett par är klart", text: "Paret letar efter en ledtråd som ingen har nämnt, eller skriver en egen fråga till texten." }
+            - { rubrik: "Paret har ett annat språk", text: "Paret får prata på sitt språk och säga tanken på svenska. Det räcker att eleven pekar på ledtråden." }
+        - rubrik: "Före lektionen"
+          falt:
+            - { rubrik: "Texten", text: "Välj en text på sidan Ta fram en lästext, och skriv ut en till varje elev. Läs den, och svara själv på frågorna med en ledtråd till varje. Eleverna svarar i samtalet och stryker under ledtrådarna." }
+            - { rubrik: "Stoppet", text: "Lärarens sida säger var du stannar och hur du tänker högt. Den har också frågan Före läsningen, svaren och två öppna frågor till klassen som du inte har svaret på. Utan sidan väljer du själv ett stopp, där något saknas eller inte passar, och tänker högt om en av frågorna i mitten." }
+            - { rubrik: "Paren", text: "Sätt inte ihop två som pratar mycket. Ge den tysta en tålmodig kamrat, och den som lär sig svenska gärna en med samma modersmål. Bestäm A och B, byt par varje vecka, och gör en trio om en blir över." }
+            - { rubrik: "Tavlan", text: "Skriv av rutan på tavlan. Eleven gör klart meningen efter varje fras under Jag säger." }
+        - rubrik: "Ett exempel: Den tomma plåten, Lättläst, text 7"
+          falt:
+            - { rubrik: "Före läsningen", text: "”Vad händer ofta med något gott som ligger framme?”" }
+            - { rubrik: "Stanna", text: "Du stannar efter ”Lillebror sover i soffan, och hans händer är rena” och säger ”Vänta, här står inte vem som tog bullarna.”" }
+            - { rubrik: "Se det framför dig", text: "”Jag ser framför mig en tom plåt och en lillebror som sover i soffan.”" }
+            - { rubrik: "Det står", text: "”Det står ’Strösockret ligger ända fram till mormors stol’, och det står ’hans händer är rena’.”" }
+            - { rubrik: "Jag vet", text: "”Jag vet att den som äter bullar får kladdiga fingrar, och att man sätter sig där man äter.”" }
+            - { rubrik: "Alltså tror jag", text: "”Alltså tror jag att det inte var lillebror.”" }
+            - { rubrik: "Stämmer det?", text: "”Stämmer det med resten? Jag läser vidare: ’Mormor torkar sig snabbt om munnen.’ Ja, nu tror jag att mormor tog dem själv.”" }
+        - rubrik: "Välj text"
+          falt:
+            - { rubrik: "Nivåerna", text: "Lättläst, Mellan och Avancerad har tjugofem texter var. Välj nivå efter hur eleverna läser. När du läser högt kan klassen ta en svårare nivå. De tre första texterna på varje nivå hör till de lättaste." }
+            - { rubrik: "Slagen", text: "Slagen står som taggar på texterna och säger vad eleven listar ut: Känsla, Vem (också vem ”hon” syftar på), Var och när, Varför, Före och efter, Det som menas (vad någon egentligen menar) och Ordet (vad ett ord betyder just här). Börja med Känsla och Vem." }
+            - { rubrik: "Stilarna", text: "Sex eller sju texter på varje nivå är skrivna i en känd författares stil. Lärarens sida säger vilken författare, hur du läser texten högt och vilken bok klassen kan läsa vidare i." }
+            - { rubrik: "Känsliga texter", text: "Några texter rör något som kan vara svårt för en elev, och då har lärarens sida raden Känsligt. Läs raden, och välj en annan text om texten kan komma för nära någon i klassen." }
+        - rubrik: "Över tid"
+          falt:
+            - { rubrik: "Första gången", text: "Säg samtalsreglerna tillsammans i Starta och fråga vad de betyder. Visa med en elev hur paren pratar, innan de tar frågorna: du säger ”Jag tror att”, eleven frågar ”Hur vet du det?”, och du visar ledtråden. Ta gärna exemplets text, eller en av de tre första på nivån." }
+            - { rubrik: "Gång för gång", text: "Ta två eller tre texter i veckan, och lyssna på paren. Gissar många utan ledtråd, visar du Det står nästa gång. Säger de ”Det står inte”, visar du Jag vet, och ser de inte vad som saknas, visar du Stanna. När paren klarar stoppet läser de själva och sätter ett frågetecken där något saknas." }
+            - { rubrik: "Grupper om fyra", text: "I steget Klassen tar paren i gruppen varje fråga först, och sedan säger var och en sin tanke och sin ledtråd i en runda. Den som inte är redo säger ”Pass” och får ordet sist. Du går runt och lyssnar." }
+            - { rubrik: "Mer stöd", text: "Gissar en elev fortfarande utan ledtråd efter några veckor, eller säger inget i paret, tala med specialläraren. Eleven kan behöva metoden Textsamtal i grupp, tre pass i veckan i en liten grupp." }
+        - rubrik: "Till läraren"
+          falt:
+            - { rubrik: "Var allt finns", text: "Texterna finns på sidan Ta fram en lästext, niclasfohlin.se/lastexter. Lärarens sida till varje text når du där från Visa stort." }
+      listor:
+        - rubrik: "Så tänker du högt vid stoppet"
+          larare: true
+          kolumner: ["Stanna", "Se det framför dig", "Det står", "Jag vet", "Alltså tror jag", "Stämmer det?"]
+          rader:
+            - ["”Vänta, här står inte allt.”", "”Jag ser framför mig” och det du ser och hör", "”Det står” och två ledtrådar ur texten", "”Jag vet att” och det du vet om sådant", "”Alltså tror jag att” och din tanke", "”Stämmer det med resten?” Läs vidare och pröva"]
+        - rubrik: "Så pratar paret"
+          larare: true
+          kolumner: ["Tänk själv", "A säger", "B frågar", "Byt", "Till klassen"]
+          rader:
+            - ["Alla tänker tyst i tio sekunder.", "”Jag tror att” och sin tanke.", "”Hur vet du det?” A svarar ”för det står” med ledtråden och stryker under den.", "B säger sin tanke, och A frågar. Vid nästa fråga börjar B. I en trio bygger C vidare.", "Du frågar gärna en tyst elev i ett par du hörde: ”Vad sa din kamrat?”"]
+        - rubrik: "Frågorna under texten"
+          larare: true
+          kolumner: ["Fråga 1 · på raderna", "Frågorna i mitten · mellan raderna", "Sista frågan · bortom raderna"]
+          rader:
+            - ["Svaret står i texten med nästan samma ord. Ta den snabbt, för den ger en ledtråd till frågorna efter.", "Eleven listar ut svaret och visar ledtråden. Här lägger ni mest tid.", "Eleven tänker vidare med texten som grund, och olika svar med olika skäl är välkomna."]
+        - rubrik: "En lektion med en text"
+          larare: true
+          kolumner: ["Steget", "Du gör", "Du säger", "Eleverna"]
+          rader:
+            - ["1 Starta\n0–5 min · i par", "Säg titeln och fråga om något eleverna behöver veta, som frågan Före läsningen. Förklara ett ord, men inget som ger svaret.", "”Vad vet ni om sådant? Säg det till din kamrat.”", "Säger sin tanke till kamraten."]
+            - ["2 Läs\n5–12 min · du läser", "Läs högt och stanna en gång. Tänk högt, låt paren prata och läs sedan klart.", "”Tänk själv en stund.”\n”Vem tänker annorlunda? Säg det till din kamrat.”", "Följer med, sätter ett frågetecken vid stoppet och stryker under ledtrådarna med dig."]
+            - ["3 Paren\n12–22 min · i par", "Säg vilka frågor paren tar. Gå runt och lyssna, och säg inget om vad som är rätt.", "”Står svaret i texten, eller listar vi ut det?”\n”Visa var det står.”", "Tar fråga 1 snabbt och sedan frågorna i mitten. De går fort igenom frågan du tänkte högt om."]
+            - ["4 Klassen\n22–35 min · alla", "Ta två frågor i mitten ordentligt, och låt två svar stå när texten stöder båda. Sist tar paren och sedan klassen den sista frågan.", "”Vad sa din kamrat?”\n”Stämmer det med resten?”\n”Vad undrar ni nu?”", "Svarar, lyssnar och letar upp ledtråden i sin text."]
+            - ["5 Avsluta\n35–40 min · i par", "Lyssna på några par, och säg vad du hörde som hjälpte samtalet.", "”Vad kom du fram till, och vilken ledtråd hjälpte?”", "Säger det till kamraten, och två säger det till klassen."]
+        - rubrik: "Så pratar vi om texten"
+          kolumner: ["Jag säger", "Jag frågar"]
+          rader:
+            - ["Jag tror att", "Vad tror du?"]
+            - ["för det står", "Hur vet du det?"]
+            - ["Jag har varit med om", "Kan du säga mer?"]
+            - ["Jag håller med, och", "Vad vill du lägga till?"]
+            - ["Jag tänker annorlunda", "Kan det vara något annat?"]
+            - ["Tänk om", "Stämmer det med texten?"]
+        - rubrik: "Samtalsreglerna"
+          rader:
+            - ["Vi säger vad vi tror."]
+            - ["Vi visar var det står."]
+            - ["Vi bygger vidare på varandra."]
+            - ["Vi får tänka olika."]
+            - ["Vi får ändra oss."]
     - rubrik: "Lärarens sidor: Lättläst"
       text:
-        - "Här är de femton texterna på nivån Lättläst och kartläggningens två. Tabellen visar vad varje text handlar om, vad eleven ska lista ut, vilka slags frågor mellan raderna texten har, hur svår den är och om den har en vändning eller är känslig. Efter tabellen har varje text en egen sida med det du behöver i passet: det som står mellan raderna, var du stannar, vad du säger när du tänker högt, svaren och två öppna frågor till samtalet. Frågorna står på elevens blad, så ha din kopia bredvid."
+        - "Här är de tjugofem texterna på nivån Lättläst och kartläggningens två. Tabellen visar vad varje text handlar om, vad eleven ska lista ut, vilka slags frågor mellan raderna texten har, hur svår den är och om den har en vändning eller är känslig. Efter tabellen har varje text en egen sida med det du behöver i passet: det som står mellan raderna, var du stannar, vad du säger när du tänker högt, svaren och två öppna frågor till samtalet. Frågorna står på elevens blad, så ha din kopia bredvid."
       oversikt:
         kolumner: [Texten, Handlar om, Eleven listar ut, Frågornas slag, Svårighet]
         rader:
@@ -874,14 +960,24 @@ ramar:
           - ["13. Listan", "Jonna och jag-berättaren vid en lista på dörren till gympasalen.", "hur någon känner sig", "Känsla, Varför", "3, svår"]
           - ["14. Ny regel", "Yara skriver i sin dagbok om en kväll hemma med pappa.", "vad som hände innan, eller vad som händer sedan", "Före och efter, Det som menas", "3, svår"]
           - ["15. Hassans jacka", "En dagbokssida en kväll, dagen före en utflykt.", "vad som hände innan, eller vad som händer sedan", "Före och efter (två frågor)", "3, svår"]
+          - ["16. Strax", "Vilja och pappa hemma, när Vilja vill gå ut. I Gunilla Bergströms stil.", "vad någon egentligen menar", "Det som menas, Känsla", "1, enkel"]
+          - ["17. Inte än", "Lova och moster väntar i en kö.", "var och när det händer", "Var och när, Känsla", "1, enkel"]
+          - ["18. Benen på ryggen", "Valter och morfar i hallen hemma.", "vad ett ord betyder just här", "Ordet, Känsla", "1, enkel"]
+          - ["19. Skeden", "Grävlingen och skatan i skogen. I Jon Klassens stil.", "vem någon är", "Vem, Det som menas", "2, medel"]
+          - ["20. Tackfisken", "Einar och hans katt i köket på en liten gård. I Sven Nordqvists stil.", "varför något händer, eller vad någon vill", "Före och efter, Varför", "2, medel"]
+          - ["21. Längst in i frysen", "Lappar på kylskåpet hemma hos Nadia och Idris.", "vad någon egentligen menar", "Vem (syftning), Det som menas", "2, medel"]
+          - ["22. Hinken", "Sorken och igelkotten en dag när de ska bada. I Arnold Lobels stil.", "hur någon känner sig", "Känsla, Varför", "2, medel"]
+          - ["23. Det kan jag lova", "Berättaren, Märta och pappa en dag på en gård. I Astrid Lindgrens stil.", "vad som hände innan, eller vad som händer sedan", "Före och efter, Det som menas", "2, medel"]
+          - ["24. Över häcken", "Molly och grannen vid häcken mellan deras trädgårdar. I Roald Dahls stil.", "vad ett ord betyder just här", "Ordet, Varför", "3, svår"]
+          - ["25. Ingen såg", "Ett barn skriver i sin dagbok om en dag i parken.", "vad som hände innan, eller vad som händer sedan", "Varför, Före och efter", "3, svår, vändning, känslig"]
           - ["Kartläggning före: Bland vagnarna", "Alva på ett stort ställe med mycket folk.", "hur någon känner sig", "Känsla, Var och när", "före insatsen"]
           - ["Kartläggning efter: Bilden till mormor", "Viggo på ett annat stort ställe med mycket folk.", "hur någon känner sig", "Känsla, Var och när", "efter insatsen"]
       delar:
         - rubrik: Så väljer du text
           falt:
-            - { rubrik: "Veckans slag", text: "Välj en text med frågor av veckans slag, som progressionen visar: Känsla och Vem i vecka 1, Var och när och Varför i vecka 2, Före och efter i vecka 3, Det som menas i vecka 4–5 och Ordet i vecka 6–8. Metodens texter räcker till ungefär fem veckors pass. Texterna till resten av veckorna, också till Ordet i vecka 6–8, tar du ur serien Mellan raderna eller skriver själv." }
+            - { rubrik: "Veckans slag", text: "Välj en text med frågor av veckans slag, som progressionen visar: Känsla och Vem i vecka 1, Var och när och Varför i vecka 2, Före och efter i vecka 3, Det som menas i vecka 4–5 och Ordet i vecka 6–8. Metodens texter räcker till ungefär åtta veckors pass. Varje nivå har fyra texter med slaget Ordet, så i vecka 6–8 tar ni också en sida ur elevens egen bänkbok. Vill du ha fler texter, tar du dem ur serien Mellan raderna eller skriver egna." }
             - { rubrik: "Svårigheten", text: "Börja med svårighet 1, och ta 2 eller 3 när gruppen klarar slutsatsen med mindre stöd. En text med vändning får eleverna att tänka om mot slutet. En känslig text har en rad om det på sin sida. Läs raden före passet, och ta inte två texter om samma slags svåra sak samma vecka." }
-            - { rubrik: "Nivåerna", text: "Välj nivå efter gruppen, och blanda gärna, till exempel en text på Lättläst när ni övar ett nytt tankesteg och en på Mellan när det sitter. Läser äldre elever på Lättläst, börja med Handskarna i vecka 1, fast den har svårighet 2, och ta Den nya luggen och Högst upp när veckans slag passar. Ta gärna en text från Mellan i pass 1 och 2, när du läser högt." }
+            - { rubrik: "Nivåerna", text: "Välj nivå efter gruppen, och blanda gärna, till exempel en text på Lättläst när ni övar ett nytt tankesteg och en på Mellan när det sitter. Läser äldre elever på Lättläst, börja med Handskarna i vecka 1, fast den har svårighet 2, och ta Den nya luggen och Högst upp när veckans slag passar. Av texterna 16–25 passar fyra också äldre elever: Skeden, Längst in i frysen, Över häcken och Ingen såg. Ta gärna en text från Mellan i pass 1 och 2, när du läser högt." }
     - rubrik: "Lärarens sida: Lättläst, text 1, Staketet"
       text:
         - "Det som står mellan raderna: Amina vill vara med i leken men törs inte säga ja, så hon svarar att hon inte kan. När hon väl är med glömmer hon allt annat. Först längtar hon och är osäker, och sedan blir hon glad."
@@ -1111,6 +1207,164 @@ ramar:
             - { rubrik: "Fråga 4 · bortom raderna", text: "Ett svar kan vara att eleven berättar för Hassan i förväg, eller att hen lämnar tillbaka jackan och hoppas att ingen ser fläcken. Ett bra svar nämner fläcken, utflykten eller Hassan, och ger ett eget skäl." }
             - { rubrik: "Öppna frågor", text: "”Berättaren fick låna jackan i går. Vad tror ni att Hassan sa när han lånade ut den?”; ”Berättaren svarade ’Tack för lånet!’ Varför tror ni att hen inte sa som det var?”" }
             - { rubrik: "Om eleven fastnar", text: "Peka på ”Fläcken på ärmen är lila, precis som saften jag drack”." }
+    - rubrik: "Lärarens sida: Lättläst, text 16, Strax"
+      text:
+        - "Det som står mellan raderna: Pappas strax betyder när han är klar med cykeln, och det dröjer länge. Till sist ger Vilja honom samma ord tillbaka."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Stilen", text: "I Gunilla Bergströms stil, som i böckerna om Alfons Åberg: presens och korta meningar, och barnet vänder på det pappa säger. Läs torrt och sakligt, utan att överdriva känslorna. Läs vidare: God natt, Alfons Åberg." }
+            - { rubrik: "Före läsningen", text: "Vad gör man medan man väntar på att någon ska bli klar?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”Hon tar på dem igen.” Något är konstigt: varför tar Vilja av sig stövlarna och sedan på dem igen?" }
+            - { rubrik: "Tänka högt · fråga 2, Det som menas", text: "”Vänta, här står inte hur länge strax är. Jag ser framför mig Vilja med stövlarna på, och pappa som lagar sin cykel. Det står ’Han lagar cykeln’, och det står ’Hon tar på dem igen’. Jag vet att man tar av och på saker när man har väntat länge. Alltså tror jag att strax betyder när pappa är klar med cykeln, och det tar tid. Stämmer det? Jag läser vidare. Pappa säger ’Snart’ och letar efter en skruv. Ja, det stämmer.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Han lagar cykeln." }
+            - { rubrik: "Fråga 2 · mellan raderna, Det som menas", text: "Ledtrådarna: ”Han lagar cykeln”; ”Hon tar på dem igen”; ”Han letar efter en skruv”; ”Till slut”.\nSvar som texten stöder: att de går först när pappa är klar med cykeln, och att det tar lång tid. Eleverna får säga olika lång tid när de visar en ledtråd som ”Han letar efter en skruv” eller ”Till slut”.\nEn tanke att pröva: ”Att de ska gå om en minut.” Eleven tar ordet som det låter, men Vilja hinner börja rita.\nFråga tillbaka: ”Vad gör pappa medan Vilja väntar?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Känsla", text: "Ledtrådarna: ”’Är det strax nu?’”; ”Vilja ligger och ritar”; ”’Strax’, säger hon”.\nSvar som texten stöder: sur eller besviken efter den långa väntan; nöjd och road, för att hon ger pappa hans eget ord; eller lugn och upptagen, för att hon vill rita klart, som pappa ville laga klart cykeln. Alla håller när eleven visar en ledtråd.\nEn tanke att pröva: ”Trött, för hon ligger ner.” Det bygger bara på en ledtråd och missar vems ord hon säger.\nFråga tillbaka: ”Vem sa ’Strax’ först?”" }
+            - { rubrik: "Fråga 4 · bortom raderna", text: "Ett svar kan vara att pappa gjorde rätt, för cykeln behövde lagas, eller att han gjorde fel, för Vilja fick vänta utan att veta hur länge. Ett bra svar nämner något som pappa eller Vilja gör, och ger ett eget skäl." }
+            - { rubrik: "Öppna frågor", text: "”Vilja har stövlarna på. Vart tror ni att hon vill gå?”; ”Vad tror ni att pappa tänker när Vilja säger ’Strax’?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”Hon tar på dem igen”. Förklara gärna att strax betyder om en liten stund." }
+    - rubrik: "Lärarens sida: Lättläst, text 17, Inte än"
+      text:
+        - "Det som står mellan raderna: Lova och moster står i kön till en berg-och-dalbana på ett tivoli. Lova är både rädd och pirrig."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Före läsningen", text: "Vilka platser kan man känna igen bara på lukten?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”Högt uppe skriker några, och sedan skrattar de.” Något är konstigt: varför skriker någon och skrattar sedan?" }
+            - { rubrik: "Tänka högt · fråga 2, Var och när", text: "”Vänta, här står inte var Lova är. Jag ser framför mig lampor som blinkar, och jag hör folk som skriker högt uppe. Det står ’Det luktar sockervadd och popcorn’, och det står ’Högt uppe skriker några, och sedan skrattar de’. Jag vet att det finns sockervadd på ett tivoli, och att man skriker och skrattar i en snabb karusell. Alltså tror jag att Lova är på ett tivoli. Stämmer det med resten? Jag läser vidare. Vagnarna susar förbi. Ja, det stämmer.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Biljetten." }
+            - { rubrik: "Fråga 2 · mellan raderna, Var och när", text: "Ledtrådarna: ”Det luktar sockervadd och popcorn”; ”Lampor blinkar i rött och gult”; ”Högt uppe skriker några”; ”vagnarna susar förbi”.\nSvar som texten stöder: på ett tivoli eller en marknad med karuseller, i kön till en berg-och-dalbana.\nEn tanke att pröva: ”På bio, för det luktar popcorn.” Eleven bygger på en enda ledtråd, och på bio susar inga vagnar förbi.\nFråga tillbaka: ”Vad susar förbi när Lova tittar upp?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Känsla", text: "Ledtrådarna: ”håller hårt i biljetten”; ”Vi kan gå ur kön om du vill”; ”Inte än”.\nSvar som texten stöder: rädd eller nervös, för hon håller hårt och moster säger att de kan gå, eller pirrig och förväntansfull, för hon stannar kvar i kön. Båda håller när eleven visar en ledtråd, och de kan gälla samtidigt.\nEn tanke att pröva: ”Glad, för det är roligt där.” Det bygger på vad eleven själv tycker. Pekar eleven på ”Inte än”, går ”glad” bra.\nFråga tillbaka: ”Varför tror du att moster säger att de kan gå?” Säger en elev att det inte står rädd, fråga: ”När håller du själv hårt i något?”" }
+            - { rubrik: "Fråga 4 · bortom raderna", text: "Ett svar kan vara att stanna och åka, för Lova har biljetten och säger ”Inte än”, eller att gå ur kön, för det kan också vara modigt att säga nej. Ett bra svar nämner något Lova gör eller säger och ger ett eget skäl." }
+            - { rubrik: "Öppna frågor", text: "”Moster säger ’Vi kan gå ur kön om du vill’. Kan det vara moster som vill gå? Finns det fler sätt det kan vara?”; ”Vad tror ni att Lova gör när det blir hennes tur?”" }
+            - { rubrik: "Om eleven fastnar", text: "Vid fråga 2 pekar du på ”Högt uppe skriker några, och sedan skrattar de”. Vid fråga 3 pekar du på ”håller hårt i biljetten”." }
+    - rubrik: "Lärarens sida: Lättläst, text 18, Benen på ryggen"
+      text:
+        - "Det som står mellan raderna: Att lägga benen på ryggen betyder att springa fort, men Valter tar orden som de står. Morfar är både stressad och road."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Före läsningen", text: "Har du någon gång missförstått något som någon sa?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”Valter lägger sig på magen på hallmattan.” Något passar inte: bussen går snart, och Valter lägger sig ner." }
+            - { rubrik: "Tänka högt · fråga 2, Ordet", text: "”Vänta, här står inte vad ’lägga benen på ryggen’ betyder. Jag ser framför mig en hall där morfar ropar och Valter lägger sig på mattan. Det står ’Bussen går om två minuter’, och det står ’Nu får du lägga benen på ryggen’. Jag vet att man måste skynda sig när bussen snart går. Alltså tror jag att morfar menar att Valter ska springa fort. Stämmer det med resten? Jag läser vidare. Morfar drar upp honom, och de springer mot bussen. Ja, det stämmer.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Om två minuter." }
+            - { rubrik: "Fråga 2 · mellan raderna, Ordet", text: "Ledtrådarna: ”Bussen går om två minuter!”; ”Morfar drar upp honom”; ”de springer mot bussen”.\nSvar som texten stöder: att Valter ska springa fort eller skynda sig. Nämn gärna ordet uttryck.\nEn tanke att pröva: ”Att han ska lägga sig ner och böja benen.” Eleven gör som Valter och tar orden som de står, men morfar vill hinna till bussen.\nFråga tillbaka: ”Vad gör Valter och morfar på slutet?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Känsla", text: "Ledtrådarna: ”Bussen går om två minuter!”; ”Morfar suckar och skrattar på samma gång”; ”Morfar drar upp honom”.\nSvar som texten stöder: stressad eller otålig, för bussen går snart och han suckar, eller road, för han skrattar. Båda håller när eleven visar en ledtråd, och de kan gälla samtidigt.\nEn tanke att pröva: ”Arg på Valter.” Eleven bygger på suckandet och glömmer skrattet.\nFråga tillbaka: ”Varför suckar morfar, och varför skrattar han?”" }
+            - { rubrik: "Fråga 4 · bortom raderna", text: "Ett svar kan vara att det var dumt, för Valter förstod inte, eller att det var bra, för morfar skrattar och nu kan Valter uttrycket. Ett bra svar nämner bussen eller det Valter gör och ger ett eget skäl." }
+            - { rubrik: "Öppna frågor", text: "”Valter säger ’Jag är för stel’. Skojar han, eller tror han att man ska göra så? Kan det vara på något annat sätt?”; ”De springer mot bussen. Vad tror ni att Valter tänker när han springer?”" }
+            - { rubrik: "Om eleven fastnar", text: "Vid fråga 2 pekar du på ”Bussen går om två minuter!” och sedan på ”de springer mot bussen”. Visa gärna hur man suckar och stönar." }
+    - rubrik: "Lärarens sida: Lättläst, text 19, Skeden"
+      text:
+        - "Det som står mellan raderna: Skatan har hittat grävlingens sked, och den ligger i hennes träd. Hon säger för mycket när hon nekar."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Stilen", text: "I Jon Klassens stil, som i Jag vill ha min hatt: korta repliker utan känslor, och den som nekar säger för mycket. Läs torrt och allvarligt, med en paus före sista meningen. Läs vidare: Jag vill ha min hatt." }
+            - { rubrik: "Före läsningen", text: "Vad gör man om man har tappat något?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”’Det har jag inte frågat’, säger grävlingen.” Något är konstigt: skatan säger nej innan någon har frågat." }
+            - { rubrik: "Tänka högt · fråga 2, Vem", text: "”Vänta, här är något konstigt. Ingen har frågat skatan. Jag ser framför mig en grävling som har tappat sin sked och en skata som svarar fort. Det står ’Jag har tappat min sked’, och det står ’Jag har inte tagit den’. Jag vet att den som säger nej innan någon har frågat ofta vet något. Alltså tror jag att skatan har skeden. Stämmer det? Jag läser vidare. Högt uppe i skatans träd glittrar något. Ja, det stämmer.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Högt uppe i skatans träd." }
+            - { rubrik: "Fråga 2 · mellan raderna, Vem", text: "Ledtrådarna: ”’Jag har inte tagit den’”; ”’Det har jag inte frågat’”; ”Högt uppe i skatans träd glittrar något”.\nSvar som texten stöder: skatan, och skeden ligger i hennes träd.\nEn tanke att pröva: ”Ingen, för skatan har inte tagit den.” Eleven tror på skatans ord och missar det som glittrar i hennes träd.\nFråga tillbaka: ”I vems träd glittrar det?” Säger en elev att det kan vara något annat som glittrar, har hen rätt. Fråga: ”Vad har grävlingen tappat, och vad kan glittra?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Det som menas", text: "Ledtrådarna: ”’Jag har inte tagit den’”; ”’Den som hittar något får ha det’”. Skatan byter ord, från ”tagit” till ”hittar”.\nSvar som texten stöder: att hon råkar avslöja att hon har hittat skeden, att hon menar att skeden är hennes nu, eftersom hon hittade den, eller att hon hittade skeden och alltså inte har tagit den. Alla håller när eleven visar en ledtråd.\nEn tanke att pröva: ”Hon säger bara en regel.” Ingen har frågat om regler, så det är konstigt att hon säger den just nu.\nFråga tillbaka: ”Varför säger hon det just nu?”" }
+            - { rubrik: "Fråga 4 · bortom raderna", text: "Ett svar kan vara att grävlingen ska ha den, för det är hans sked, eller att skatan får ha den, för hon hittade den. Ett bra svar nämner något som någon säger, och ger ett eget skäl." }
+            - { rubrik: "Öppna frågor", text: "”Vad skulle ni vilja fråga skatan, om ni fick?”; ”Vad tror ni att grävlingen tänker göra under trädet?”" }
+            - { rubrik: "Om eleven fastnar", text: "Vid fråga 2 pekar du på ”Högt uppe i skatans träd glittrar något”. Vid fråga 3 pekar du på ”’Jag har inte tagit den’”. Förklara gärna att en skata är en svartvit fågel." }
+    - rubrik: "Lärarens sida: Lättläst, text 20, Tackfisken"
+      text:
+        - "Det som står mellan raderna: Katten hjälper till för att han vill få något, en fisk eller en fisketur med Einar."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Stilen", text: "I Sven Nordqvists stil, som i böckerna om Pettson och Findus: mycket dialog, och katten har en plan som mannen anar. Läs katten ivrigt och Einar långsamt och torrt. Läs vidare: Pannkakstårtan." }
+            - { rubrik: "Före läsningen", text: "Vilka sysslor finns det på en liten gård?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”’Är du sjuk?’” Något är konstigt: varför frågar Einar om katten är sjuk? Säger en elev att katten är sjuk, fråga: ”Vem frågar, och när frågar man så?”" }
+            - { rubrik: "Tänka högt · fråga 3, Varför", text: "”Vänta, varför frågar Einar om katten är sjuk? Jag ser framför mig en katt som sopar och en man som tittar upp från kaffet. Det står ’Katten sopar köket och bär in ved’, och det står ’Är du sjuk?’ Jag vet att den som gör mer än vanligt ofta vill ha något. Alltså tror jag att katten inte brukar hjälpa till, och att han vill ha något. Stämmer det? Jag läser vidare. Han ställer fiskespöet framför Einars stövlar. Ja, det har nog med fiske att göra.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Framför Einars stövlar." }
+            - { rubrik: "Fråga 2 · mellan raderna, Före och efter", text: "Ledtrådarna: ”Han ställer fiskespöet framför Einars stövlar”; ”’En snäll katt borde få en tackfisk’”.\nSvar som texten stöder: Einar, för spöet står vid hans stövlar, eller Einar och katten tillsammans, för katten vill följa med och fiska. En tackfisk är en fisk som katten vill få som tack. Båda håller när eleven visar en ledtråd.\nEn tanke att pröva: ”Katten, för katter fångar fisk.” Då hade katten inte ställt spöet framför Einar.\nFråga tillbaka: ”Framför vems stövlar står spöet?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Varför", text: "Ledtrådarna: ”’Är du sjuk?’”; ”Han ställer fiskespöet framför Einars stövlar”; ”tackfisk”.\nSvar som texten stöder: att han vill få en fisk att äta, eller att han vill att Einar ska ta med honom och fiska. Båda håller när eleven visar en ledtråd.\nEn tanke att pröva: ”För att han är snäll.” Einar frågar om han är sjuk, så katten brukar inte vara så här.\nFråga tillbaka: ”Vad frågar Einar katten?”" }
+            - { rubrik: "Fråga 4 · bortom raderna", text: "Ett svar kan vara att Einar ska ge katten en fisk, för katten har hjälpt till, eller att han inte ska det, för katten var snäll bara för att få något. Ett bra svar nämner något som katten gör, och ger ett eget skäl." }
+            - { rubrik: "Öppna frågor", text: "”Einar frågar ’Är du sjuk?’ Vad tror ni att katten brukar göra en vanlig dag?”; ”Katten hämtar äggen i hönshuset. Vad tror ni att hönsen tycker om en så hjälpsam katt?”" }
+            - { rubrik: "Om eleven fastnar", text: "Vid fråga 2 pekar du på ”framför Einars stövlar”. Vid fråga 3 pekar du på ”’Är du sjuk?’”. Förklara gärna att ved är trä som man eldar med." }
+    - rubrik: "Lärarens sida: Lättläst, text 21, Längst in i frysen"
+      text:
+        - "Det som står mellan raderna: Idris frågar vilken glass Nadia menar, men den rosa fläcken på hans lapp tyder på att han har ätit glassen. ”Hon” är farmor."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Läs högt", text: "Säg ”Nadia skriver” eller ”Idris skriver” före varje lapp, och läs deras lappar med olika röster." }
+            - { rubrik: "Före läsningen", text: "Vad kan man skriva på en lapp som man sätter på ett kylskåp?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”Hon sa att glassen var till den som diskar.” Något är konstigt: först frågar Idris vilken glass, och sedan vill han ha den." }
+            - { rubrik: "Tänka högt · fråga 3, Det som menas", text: "”Vänta, här passar något inte. Jag ser lapparna på kylskåpet framför mig. Det står ’Vilken glass?’, och sedan står det ’Hon sa att glassen var till den som diskar’. Först frågar Idris vilken glass, och sedan vill han ha den. Jag vet att man frågar när man inte vet vilken sak någon menar. Alltså kan Idris fråga på riktigt. Stämmer det med resten? Jag läser vidare. ’Varför har din lapp en rosa fläck?’ Jordgubbsglass är rosa. Nu tror jag att han redan har ätit den och bara låtsas.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Rosa." }
+            - { rubrik: "Fråga 2 · mellan raderna, Vem, syftning", text: "Ledtrådarna: ”Jordgubbsglassen från farmor”; ”Hon sa att glassen var till den som diskar”.\nSvar som texten stöder: farmor.\nEn tanke att pröva: ”Nadia.” Idris skriver till Nadia, och då kallar han henne inte hon.\nFråga tillbaka: ”Vem kommer glassen från?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Det som menas", text: "Ledtrådarna: ”Vilken glass?”; ”Jordgubbsglassen från farmor”; ”rosa fläck”.\nSvar som texten stöder: Idris låtsas att han inte vet, för att dölja att han redan har ätit glassen, eller han frågar på riktigt, eftersom Nadia sedan säger vilken glass hon menar. Den rosa fläcken talar för det första. Båda håller när eleven visar en ledtråd.\nEn tanke att pröva: ”Idris har inget med glassen att göra.” Den rosa fläcken på hans lapp talar emot det.\nFråga tillbaka: ”Vad kan den rosa fläcken på Idris lapp vara?” Säger en elev att fläcken kan komma från något annat, som en penna, stämmer det, för det står inte. Fråga: ”Vilken färg har jordgubbsglass?”" }
+            - { rubrik: "Fråga 4 · bortom raderna", text: "Ett svar kan vara att Nadia har rätt, för hon säger att glassen är hennes och hon har diskat i två dagar, eller att Idris har rätt, om han också har diskat. Ett bra svar nämner en lapp och ger ett eget skäl." }
+            - { rubrik: "Öppna frågor", text: "”Glassen låg längst in i frysen. Vem tror ni lade den där, och varför? Finns det fler sätt det kan vara?”; ”Varför tror ni att Nadia och Idris skriver lappar i stället för att prata?”" }
+            - { rubrik: "Om eleven fastnar", text: "Vid fråga 2 pekar du på ”Jordgubbsglassen från farmor”. Vid fråga 3 pekar du på ”rosa fläck”." }
+    - rubrik: "Lärarens sida: Lättläst, text 22, Hinken"
+      text:
+        - "Det som står mellan raderna: Sorken vill bada men säger att det går bra och att han inte tycker om vatten. Igelkotten tar med badet till honom."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Stilen", text: "I Arnold Lobels stil, som i Bror Groda och Bror Padda: korta meningar i dåtid, och vänskapen syns i det vännerna gör. Läs lugnt och varmt. Läs vidare: Bror Groda och Bror Padda." }
+            - { rubrik: "Före läsningen", text: "Hur kan man göra något roligt när man har ont i foten?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”Sorken hade redan handduken runt halsen.” Ord och handling säger olika: sorken säger att han inte tycker om vatten men har handduken på sig." }
+            - { rubrik: "Tänka högt · fråga 2, Känsla", text: "”Vänta, här stämmer något inte. Jag ser framför mig en sork med ont i tassen och en handduk runt halsen. Det står ’Jag tycker ändå inte om vatten’, och det står ’Sorken hade redan handduken runt halsen’. Jag vet att man tar handduken när man ska bada. Alltså tror jag att sorken vill bada, och att han är besviken fast han säger att det går bra. Stämmer det? Jag läser vidare. Sist sitter de länge med tassarna i hinken. Ja, han ville nog bada hela tiden.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "En handduk." }
+            - { rubrik: "Fråga 2 · mellan raderna, Känsla", text: "Ledtrådarna: ”kunde inte gå långt”; ”’Jag tycker ändå inte om vatten’”; ”Sorken hade redan handduken runt halsen”.\nSvar som texten stöder: besviken eller ledsen, för han ville bada. Ge gärna eleverna de orden.\nEn tanke att pröva: ”Glad, för han säger att det går bra.” Eleven tror på orden och missar handduken.\nFråga tillbaka: ”Varför har man en handduk runt halsen?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Varför", text: "Ledtrådarna: ”Sorken hade redan handduken runt halsen”; ”en hink med vatten från sjön”; ”med tassarna i hinken”.\nSvar som texten stöder: att han förstod att sorken ville bada och tog med badet till honom, eller att det inte var roligt att bada ensam, eller att den onda tassen skulle få kallt vatten. Alla håller när eleven visar en ledtråd.\nEn tanke att pröva: ”Han hade glömt något hemma.” Han kommer tillbaka med vatten från sjön, så han har varit där.\nFråga tillbaka: ”Vad gör de med hinken till sist?”" }
+            - { rubrik: "Fråga 4 · bortom raderna", text: "Ett svar kan vara att sorken gjorde rätt, för igelkotten skulle få bada, eller att han borde ha sagt som det var, för en vän vill veta. Ett bra svar nämner handduken eller hinken, och ger ett eget skäl." }
+            - { rubrik: "Öppna frågor", text: "”Vad tänker igelkotten när han går ensam mot sjön, tror ni?”; ”Det står ’Snart kom han tillbaka’. Badade igelkotten i sjön, tror ni? Vad i texten får er att tro det?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”Sorken hade redan handduken runt halsen”. Förklara gärna att en sork är ett litet djur som liknar en mus." }
+    - rubrik: "Lärarens sida: Lättläst, text 23, Det kan jag lova"
+      text:
+        - "Det som står mellan raderna: Märta och berättaren har lekt i höet, fast det är förbjudet, och berättaren lovar motsatsen. Pappa förstår det och hämtar två krattor åt dem."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Stilen", text: "I Astrid Lindgrens stil, som i Alla vi barn i Bullerbyn: ett barn berättar med utrop och egen logik, och avslöjar mer än hen tror. Läs ivrigt och stolt, som ett barn som lovar. Läs vidare: Alla vi barn i Bullerbyn." }
+            - { rubrik: "Före läsningen", text: "Vad finns i en lada på en gård, och hur känns det att ta i hö?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”Det var konstigt att det kliade så i strumporna.” Något är konstigt: berättaren förstår inte, eller låtsas inte förstå, varför det kliar." }
+            - { rubrik: "Tänka högt · fråga 2, Före och efter", text: "”Vänta, berättaren lovar väldigt mycket. Jag ser framför mig två barn i en lada, och ett av dem lovar att de har lekt lugnt. Det står ’Nästan inte’ om höet, och det står ’kliade så i strumporna’. Jag vet att hö sticks och kryper in i strumpor och kläder. Alltså tror jag att de har lekt i höet, kanske hoppat i det. Stämmer det? Jag läser vidare. Pappa plockar ett strå ur Märtas hår. Ja, det stämmer.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Två krattor." }
+            - { rubrik: "Fråga 2 · mellan raderna, Före och efter", text: "Ledtrådarna: ”Vi rörde inte ens höet. Nästan inte.”; ”kliade så i strumporna”; ”ett strå ur Märtas hår”.\nSvar som texten stöder: de har lekt i höet, kanske hoppat i det, och det är nog det som är förbjudet.\nEn tanke att pröva: ”De lekte lugnt, det står ju.” Eleven tror på berättaren och missar ”Nästan inte”.\nFråga tillbaka: ”Varför kliar det i strumporna?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Det som menas", text: "Ledtrådarna: ”Pappa tittade länge på oss”; ”Han plockade ett strå ur Märtas hår”; ”Sedan hämtade han två krattor åt oss”.\nSvar som texten stöder: att han förstår vad de har gjort och att de ska kratta ihop höet. Han kan vara lite arg, för han tittar länge och säger bara ”Jaha”, eller tycka att det är lite roligt, för han skäller inte. Båda håller när eleven visar en ledtråd.\nEn tanke att pröva: ”Att han tror på berättaren.” Då hade han inte hämtat två krattor.\nFråga tillbaka: ”Vad gör man med en kratta i en lada?”" }
+            - { rubrik: "Fråga 4 · bortom raderna", text: "Ett svar kan vara att säga som det var, för pappa har redan sett strået, eller att bara säga ”Nästan inte”, för pappa skäller inte. Ett bra svar nämner något pappa gör och ger ett eget skäl." }
+            - { rubrik: "Öppna frågor", text: "”Märta säger ingenting i texten. Vad tror ni att hon tänker när pappa plockar strået?”; ”Pappa hämtar två krattor. Vad tror ni att Märta och berättaren gör när de har krattat klart?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”Nästan inte”. Förklara gärna att hö är torkat gräs, och att en kratta har ett långt skaft och tänder som drar ihop hö och löv." }
+    - rubrik: "Lärarens sida: Lättläst, text 24, Över häcken"
+      text:
+        - "Det som står mellan raderna: Snappfingrig betyder att man snabbt tar det som inte är ens eget, och grannen låser själv in Mollys fiskboll."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Stilen", text: "I Roald Dahls stil, som i Matilda: en berättare som talar till läsaren, och ett påhittat ord. Läs med förtjusning i rösten. Läs vidare: Matilda." }
+            - { rubrik: "Före läsningen", text: "Hur kan man förstå ett ord man aldrig har hört?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”Så Molly tejpade ihop en boll av gammal fisk.” Något är konstigt: varför gör någon en boll av fisk?" }
+            - { rubrik: "Tänka högt · fråga 3, Varför", text: "”Vänta, varför en boll av fisk? Jag ser framför mig en tejpad fisk som luktar illa. Det står ’Hon hade låst in fyrtiosju av barnens bollar’, och det står ’Så Molly tejpade ihop en boll av gammal fisk’. Jag vet att gammal fisk luktar värre när den ligger instängd. Alltså tror jag att Molly vill att grannen ska ta bollen och låsa in den. Stämmer det med resten? Jag läser vidare. Grannen låser in den, och solen skiner på skjulet. Ja, det stämmer.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Fyrtiosju." }
+            - { rubrik: "Fråga 2 · mellan raderna, Ordet", text: "Ledtrådarna: ”Hon hade låst in fyrtiosju av barnens bollar”; ”Grannen ryckte åt sig den”; ”Nu är den min”.\nSvar som texten stöder: att grannen snabbt tar det som inte är hennes och behåller det. Ge gärna orden girig och tjuvaktig.\nEn tanke att pröva: ”Att hon har långa fingrar.” Eleven gissar ur ordets delar, men texten visar vad hon gör med bollarna.\nFråga tillbaka: ”Vad gör grannen med barnens bollar?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Varför", text: "Ledtrådarna: ”fyrtiosju av barnens bollar”; ”väste hon och låste”; ”Behåll den”; ”solen sken på skjulet”.\nSvar som texten stöder: Molly vill hämnas, låta fisken ruttna och stinka i det låsta skjulet när solen skiner, få grannen att sluta ta barnens bollar, eller låta stanken tvinga grannen att öppna skjulet, så att bollarna kommer ut. Alla håller när eleven visar en ledtråd.\nEn tanke att pröva: ”Så att grannen inte ska vilja ta den.” Grannen tar den ju och säger ”Nu är den min”.\nFråga tillbaka: ”Var hamnar fiskbollen till sist, och hur är vädret?”" }
+            - { rubrik: "Fråga 4 · bortom raderna", text: "Ett svar kan vara att det var rättvist, för grannen hade tagit fyrtiosju bollar, eller att det var fel, för Molly kunde ha bett en vuxen om hjälp. Ett bra svar nämner vad grannen har gjort och ger ett eget skäl." }
+            - { rubrik: "Öppna frågor", text: "”Vad tror ni att grannen gör när hon öppnar skjulet?”; ”Grannen säger ’Nu är den min’. Varför tror ni att hon vill ha barnens bollar?”" }
+            - { rubrik: "Om eleven fastnar", text: "Vid fråga 2 pekar du på ”Hon hade låst in fyrtiosju av barnens bollar”. Vid fråga 3 pekar du på ”solen sken på skjulet”. Förklara gärna att ett skjul är ett litet förråd, och att en häck är en rad av buskar." }
+    - rubrik: "Lärarens sida: Lättläst, text 25, Ingen såg"
+      text:
+        - "Det som står mellan raderna: Berättaren gömmer en hundralapp som troligen är Eltons, för han satt på samma bänk och grät i går."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Känsligt", text: "Låt samtalet handla om berättaren, och fråga inte om eleverna själva har hittat eller tagit pengar." }
+            - { rubrik: "Före läsningen", text: "Vad kan man göra om man hittar något på marken?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”Den låg under bänken vid gungorna, lite blöt.” Något är konstigt: varför är lappen blöt?" }
+            - { rubrik: "Tänka högt · fråga 3, Före och efter", text: "”Vänta, varför är hundralappen blöt? Jag ser framför mig en blöt lapp under en bänk vid gungorna. Det står ’en hundralapp i parken’, och det står ’lite blöt’. Jag vet att marken blir blöt på natten. Alltså tror jag att någon tappade den och att den har legat där över natten. Stämmer det med resten? Jag läser vidare. I går satt Elton på samma bänk och grät. Först trodde jag att det var vem som helst, men nu tror jag att det var Elton.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Godis." }
+            - { rubrik: "Fråga 2 · mellan raderna, Varför", text: "Ledtrådarna: ”Ingen såg när jag tog den”; ”Nu ligger den i en strumpa i byrån”; ”I morgon ska jag köpa godis för alltihop”.\nSvar som texten stöder: för att gömma den, eftersom berättaren anar att pengarna är någon annans, eller för att spara den till godisköpet. Båda håller när eleven visar en ledtråd.\nEn tanke att pröva: ”För att hen inte har någon plånbok.” Det är en gissning som ingen ledtråd stöder.\nFråga tillbaka: ”Vad skriver berättaren före strumpan?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Före och efter", text: "Ledtrådarna: ”under bänken vid gungorna, lite blöt”; ”I går satt Elton på samma bänk och grät”.\nSvar som texten stöder: att någon tappade den, troligen Elton, som satt på samma bänk och grät i går. Texten säger inte att han tappade den, så ”kanske Elton” är ett bra svar.\nEn tanke att pröva: ”Någon slängde den.” Ingen ledtråd säger det, och sista meningen pekar mot Elton.\nFråga tillbaka: ”Vem satt på samma bänk i går, och vad gjorde han?”" }
+            - { rubrik: "Fråga 4 · bortom raderna", text: "Ett svar kan vara att fråga Elton, för han grät på samma bänk, eller att lämna pengarna till en vuxen, för det går inte att veta säkert att de är hans. Ett bra svar nämner Elton eller bänken och ger ett eget skäl. Säger en elev att berättaren ska behålla den, för att hittat är hittat, ta det som en tanke att pröva: ”Vad i texten talar för det, och vad talar emot?”" }
+            - { rubrik: "Öppna frågor", text: "”Berättaren skriver om Elton sist. Förstår hen själv varför han grät? Grät han kanske för något annat?”; ”Berättaren skriver ’Ingen såg när jag tog den’. Varför tror ni att hen skriver det i sin dagbok?”" }
+            - { rubrik: "Om eleven fastnar", text: "Vid fråga 2 pekar du på ”Ingen såg när jag tog den”. Vid fråga 3 pekar du på ”samma bänk”. Förklara gärna att en hundralapp är en sedel som är värd hundra kronor." }
     - rubrik: "Lärarens sida: Lättläst, kartläggning före, Bland vagnarna"
       text:
         - "Det som står mellan raderna: Alva har kommit bort från sin mamma och är rädd. Hon är i en stor affär."
@@ -1412,6 +1666,176 @@ ramar:
             - ["2. Vad har hänt med Hassans jacka\nmedan berättaren har haft den?\nHur vet du det?"]
             - ["3. Vad händer troligen\nnär Hassan får tillbaka jackan?\nHur vet du det?"]
             - ["4. Vad hade du gjort i berättarens ställe?\nVarför?"]
+    - rubrik: "Lättläst, text 16: Strax"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Lättläst, text 16." }
+      listor:
+        - rubrik: "Strax"
+          rader:
+            - ["Vilja har stövlarna på.\n”Går vi nu?” frågar hon.\n”Strax”, säger pappa.\nHan lagar cykeln.\nVilja tar av sig stövlarna.\nHon tar på dem igen.\n”Är det strax nu?” frågar Vilja.\n”Snart”, säger pappa.\nHan letar efter en skruv.\nTill slut tvättar pappa händerna och ropar: ”Kom!”\nVilja ligger och ritar.\n”Strax”, säger hon."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Vad gör pappa när han säger ”Strax”?"]
+            - ["2. Hur länge är pappas ”Strax”?\nHur vet du det?"]
+            - ["3. Hur känner sig Vilja när hon säger ”Strax”?\nHur vet du det?"]
+            - ["4. Pappa säger ”Strax” till Vilja.\nGör han rätt?\nVarför?"]
+    - rubrik: "Lättläst, text 17: Inte än"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Lättläst, text 17." }
+      listor:
+        - rubrik: "Inte än"
+          rader:
+            - ["Det luktar sockervadd och popcorn.\nLampor blinkar i rött och gult.\nHögt uppe skriker några, och sedan skrattar de.\nKön går framåt, och Lova håller hårt i biljetten.\n”Vi kan gå ur kön om du vill”, säger moster.\nLova tittar upp när vagnarna susar förbi.\n”Inte än”, säger Lova."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Vad håller Lova hårt i?"]
+            - ["2. Var är Lova och moster?\nHur vet du det?"]
+            - ["3. Hur känner sig Lova i kön?\nHur vet du det?"]
+            - ["4. Moster säger att de kan gå ur kön.\nVad hade du gjort i Lovas ställe?\nVarför?"]
+    - rubrik: "Lättläst, text 18: Benen på ryggen"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Lättläst, text 18." }
+      listor:
+        - rubrik: "Benen på ryggen"
+          rader:
+            - ["”Bussen går om två minuter!” ropar morfar.\n”Nu får du lägga benen på ryggen, Valter.”\nValter lägger sig på magen på hallmattan.\nHan böjer benen och sträcker fötterna mot ryggen.\n”Det går inte. Jag är för stel”, stönar han.\nMorfar suckar och skrattar på samma gång.\nMorfar drar upp honom, och de springer mot bussen."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. När går bussen?"]
+            - ["2. Vad menar morfar med ”lägga benen på ryggen”?\nHur vet du det?"]
+            - ["3. Morfar suckar och skrattar på samma gång.\nVad känner han då?\nHur vet du det?"]
+            - ["4. Bussen går snart.\nVar det dumt eller bra\natt morfar sa ”lägga benen på ryggen” just då?\nVarför?"]
+    - rubrik: "Lättläst, text 19: Skeden"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Lättläst, text 19." }
+      listor:
+        - rubrik: "Skeden"
+          rader:
+            - ["”Jag har tappat min sked”, säger grävlingen.\n”Jag har inte tagit den”, säger skatan.\n”Det har jag inte frågat”, säger grävlingen.\n”Den som hittar något får ha det”, säger skatan.\nHögt uppe i skatans träd glittrar något.\nGrävlingen sätter sig under trädet.\nHan har gott om tid."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Var glittrar något?"]
+            - ["2. Vem har grävlingens sked nu?\nHur vet du det?"]
+            - ["3. Vad menar skatan\nmed ”Den som hittar något får ha det”?\nHur vet du det?"]
+            - ["4. Vem ska ha skeden nu, tycker du?\nVarför?"]
+    - rubrik: "Lättläst, text 20: Tackfisken"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Lättläst, text 20." }
+      listor:
+        - rubrik: "Tackfisken"
+          rader:
+            - ["Katten sopar köket och bär in ved.\nHan hämtar till och med äggen i hönshuset.\nEinar tittar upp från kaffet.\n”Är du sjuk?”\n”Jag är bara snäll”, säger katten. ”Hela dagen.”\nHan ställer fiskespöet framför Einars stövlar.\n”En snäll katt borde få en tackfisk”, säger han."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Var ställer katten fiskespöet?"]
+            - ["2. Vem ska fånga tackfisken?\nHur vet du det?"]
+            - ["3. Varför hjälper katten till så mycket?\nHur vet du det?"]
+            - ["4. Ska Einar ge katten en tackfisk?\nVarför?"]
+    - rubrik: "Lättläst, text 21: Längst in i frysen"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Lättläst, text 21." }
+      listor:
+        - rubrik: "Längst in i frysen"
+          rader:
+            - ["Glassen längst in i frysen är min! /Nadia\nVilken glass? /Idris\nJordgubbsglassen från farmor. /Nadia\nHon sa att glassen var till den som diskar. /Idris\nJag har diskat i två dagar. /Nadia\nVarför har din lapp en rosa fläck? /Nadia"]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Vilken färg har fläcken?"]
+            - ["2. Vem är ”hon” i Idris lapp?\nHur vet du det?"]
+            - ["3. Vad menar Idris med sin första lapp?\nHur vet du det?"]
+            - ["4. Vem tycker du har rätt till glassen,\nNadia eller Idris?\nVarför?"]
+    - rubrik: "Lättläst, text 22: Hinken"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Lättläst, text 22." }
+      listor:
+        - rubrik: "Hinken"
+          rader:
+            - ["Sorken hade ont i tassen och kunde inte gå långt.\n”Bada du”, sa han till igelkotten. ”Det går bra.”\n”Jag tycker ändå inte om vatten”, sa sorken.\nSorken hade redan handduken runt halsen.\nIgelkotten gick.\nSnart kom han tillbaka.\nHan bar en hink med vatten från sjön.\nSedan satt de länge med tassarna i hinken."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Vad hade sorken runt halsen?"]
+            - ["2. Hur kände sig sorken när han sa ”Det går bra”?\nHur vet du det?"]
+            - ["3. Varför kom igelkotten tillbaka med en hink?\nHur vet du det?"]
+            - ["4. Gjorde sorken rätt när han sa ”Det går bra”?\nVarför?"]
+    - rubrik: "Lättläst, text 23: Det kan jag lova"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Lättläst, text 23." }
+      listor:
+        - rubrik: "Det kan jag lova"
+          rader:
+            - ["Märta och jag gjorde inget förbjudet i dag.\nDet kan jag lova!\nVi lekte bara lugnt i ladan.\nVi rörde inte ens höet.\nNästan inte.\nDet var konstigt att det kliade så i strumporna.\nPappa tittade länge på oss.\n”Jaha”, sa han.\nHan plockade ett strå ur Märtas hår.\nSedan hämtade han två krattor åt oss."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Vad hämtade pappa åt Märta och berättaren?"]
+            - ["2. Vad gjorde Märta\noch berättaren egentligen i ladan?\nHur vet du det?"]
+            - ["3. Vad menade pappa när han sa ”Jaha”?\nHur vet du det?"]
+            - ["4. Pappa plockade ett strå ur Märtas hår.\nVad hade du sagt till pappa i berättarens ställe?\nVarför?"]
+    - rubrik: "Lättläst, text 24: Över häcken"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Lättläst, text 24." }
+      listor:
+        - rubrik: "Över häcken"
+          rader:
+            - ["Nu ska ni få höra om den snappfingriga grannen.\nHon hade låst in fyrtiosju av barnens bollar.\nSå Molly tejpade ihop en boll av gammal fisk.\nHon sköt den högt över häcken.\nGrannen ryckte åt sig den och sprang till skjulet.\n”Nu är den min”, väste hon och låste.\n”Behåll den”, sa Molly, och solen sken på skjulet."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Hur många bollar hade grannen låst in?"]
+            - ["2. Vad betyder ”snappfingriga” i texten?\nHur vet du det?"]
+            - ["3. Varför gör Molly en boll av gammal fisk?\nHur vet du det?"]
+            - ["4. Var det rättvist, det Molly gjorde mot grannen?\nVarför?"]
+    - rubrik: "Lättläst, text 25: Ingen såg"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Lättläst, text 25." }
+      listor:
+        - rubrik: "Ingen såg"
+          rader:
+            - ["I dag hittade jag en hundralapp i parken.\nDen låg under bänken vid gungorna, lite blöt.\nIngen såg när jag tog den.\nNu ligger den i en strumpa i byrån.\nI morgon ska jag köpa godis för alltihop.\nI går satt Elton på samma bänk och grät."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Vad ska berättaren köpa i morgon?"]
+            - ["2. Varför lägger berättaren\nhundralappen i en strumpa?\nHur vet du det?"]
+            - ["3. Hur hamnade hundralappen under bänken?\nHur vet du det?"]
+            - ["4. Vad borde berättaren göra med hundralappen nu?\nVarför?"]
     - rubrik: "Lättläst, kartläggning efter: Bilden till mormor"
       text:
         - "Läs texten och svara på frågorna."
@@ -1431,7 +1855,7 @@ ramar:
             - ["4. Vad hade du gjort i Viggos ställe?\nVarför?"]
     - rubrik: "Lärarens sidor: Mellan"
       text:
-        - "Här är de femton texterna på nivån Mellan och kartläggningens två. Tabellen visar vad varje text handlar om, vad eleven ska lista ut, vilka slags frågor mellan raderna texten har, hur svår den är och om den har en vändning eller är känslig. Efter tabellen har varje text en egen sida med det du behöver i passet: det som står mellan raderna, var du stannar, vad du säger när du tänker högt, svaren och två öppna frågor till samtalet. Frågorna står på elevens blad, så ha din kopia bredvid."
+        - "Här är de tjugofem texterna på nivån Mellan och kartläggningens två. Tabellen visar vad varje text handlar om, vad eleven ska lista ut, vilka slags frågor mellan raderna texten har, hur svår den är och om den har en vändning eller är känslig. Efter tabellen har varje text en egen sida med det du behöver i passet: det som står mellan raderna, var du stannar, vad du säger när du tänker högt, svaren och två öppna frågor till samtalet. Frågorna står på elevens blad, så ha din kopia bredvid."
       oversikt:
         kolumner: [Texten, Handlar om, Eleven listar ut, Frågornas slag, Svårighet]
         rader:
@@ -1450,12 +1874,22 @@ ramar:
           - ["13. Skollopp", "En elev som skriver i sin dagbok två kvällar i rad.", "varför något händer, eller vad någon vill", "Före och efter, Varför (två frågor)", "3, svår, vändning, känslig"]
           - ["14. En runda", "Vincent hemma och ute i kvarteret en förmiddag.", "varför något händer, eller vad någon vill", "Varför, Känsla", "3, svår, känslig"]
           - ["15. Någon har varit här", "Ruben hemma en kväll med storasyster och mamma.", "vad som hände innan, eller vad som händer sedan", "Det som menas, Varför, Före och efter", "3, svår, vändning"]
+          - ["16. Den trötta hästen", "Karin från torpet vid sjön och en bonde på hans gård, förr i tiden. I Selma Lagerlöfs stil.", "var och när det händer", "Var och när, Varför", "1, enkel"]
+          - ["17. Klonk", "Anton och Iris bland borden på en parkering, och en tant bakom ett av borden.", "vem någon är, eller vem ett ord syftar på", "Var och när, Vem (syftning), Varför", "1, enkel"]
+          - ["18. Trappsteget", "Tekla på ett trappsteg utanför porten efter skolan. I Kate DiCamillos stil.", "hur någon känner sig", "Vem (syftning), Känsla, Varför", "1, enkel"]
+          - ["19. Biljetten", "Jeb och två kompisar en sommardag i en liten stad vid en flod, förr i tiden. I Mark Twains stil.", "varför något händer, eller vad någon vill", "Det som menas, Varför (två frågor)", "2, medel"]
+          - ["20. Koppen med guldkant", "Saker i ett gammalt skåp, och en söndag när prästen kommer på besök. I H.C. Andersens stil.", "vad någon egentligen menar", "Varför, Det som menas", "2, medel"]
+          - ["21. Tändstickorna", "Jakob, kusinen Hawa och farmor vid ett köksbord en söndag.", "vad ett ord betyder just här", "Ordet, Det som menas (två frågor)", "2, medel"]
+          - ["22. Rena händer", "Berättaren och Mehdi hemma hos grannen Rut, som har ett piano. I Ulf Starks stil.", "varför något händer, eller vad någon vill", "Före och efter, Varför", "2, medel"]
+          - ["23. Fönstret på andra sidan", "Berättaren och Selin vid ett köksfönster under en vecka. I Antoine de Saint-Exupérys stil.", "varför något händer, eller vad någon vill", "Ordet, Varför (två frågor)", "3, svår"]
+          - ["24. Till skäret", "Frans och mormor vid en brygga i skärgården en blåsig dag. I Tove Janssons stil.", "vad någon egentligen menar", "Känsla, Det som menas (två frågor)", "3, svår"]
+          - ["25. Ditt rum", "Yasin skriver ett brev till sin storebror.", "vad som hände innan, eller vad som händer sedan", "Före och efter, Ordet, Känsla", "3, svår, vändning, känslig"]
           - ["Kartläggning före: Fem minuter", "Oskar och hans tränare en stund innan något tar slut.", "hur någon känner sig", "Känsla, Var och när", "före insatsen"]
           - ["Kartläggning efter: Två minuter", "Elin och fröken en stund före något som ska börja.", "hur någon känner sig", "Känsla, Var och när", "efter insatsen"]
       delar:
         - rubrik: Så väljer du text
           falt:
-            - { rubrik: "Veckans slag", text: "Välj en text med frågor av veckans slag, som progressionen visar: Känsla och Vem i vecka 1, Var och när och Varför i vecka 2, Före och efter i vecka 3, Det som menas i vecka 4–5 och Ordet i vecka 6–8. Metodens texter räcker till ungefär fem veckors pass. Texterna till resten av veckorna, också till Ordet i vecka 6–8, tar du ur serien Mellan raderna eller skriver själv." }
+            - { rubrik: "Veckans slag", text: "Välj en text med frågor av veckans slag, som progressionen visar: Känsla och Vem i vecka 1, Var och när och Varför i vecka 2, Före och efter i vecka 3, Det som menas i vecka 4–5 och Ordet i vecka 6–8. Metodens texter räcker till ungefär åtta veckors pass. Varje nivå har fyra texter med slaget Ordet, så i vecka 6–8 tar ni också en sida ur elevens egen bänkbok. Vill du ha fler texter, tar du dem ur serien Mellan raderna eller skriver egna." }
             - { rubrik: "Svårigheten", text: "Börja med svårighet 1, och ta 2 eller 3 när gruppen klarar slutsatsen med mindre stöd. En text med vändning får eleverna att tänka om mot slutet. En känslig text har en rad om det på sin sida. Läs raden före passet, och ta inte två texter om samma slags svåra sak samma vecka." }
             - { rubrik: "Nivåerna", text: "Välj nivå efter gruppen, och blanda gärna, till exempel en text på Lättläst när ni övar ett nytt tankesteg och en på Mellan när det sitter." }
     - rubrik: "Lärarens sida: Mellan, text 1, Längst bak"
@@ -1699,6 +2133,171 @@ ramar:
             - { rubrik: "Fråga 5 · bortom raderna", text: "Ett svar kan vara att han säger till Emelie vad han tror, eller att han väntar och ser. Ett bra svar nämner något ur texten och ger ett eget skäl." }
             - { rubrik: "Öppna frågor", text: "”Vad tror ni att Ruben säger till Emelie på morgonen?”; ”Varför tror ni att Ruben inte ber om en utklädnad?”" }
             - { rubrik: "Om eleven fastnar", text: "Peka på ”Skölden är klar”." }
+    - rubrik: "Lärarens sida: Mellan, text 16, Den trötta hästen"
+      text:
+        - "Det som står mellan raderna: Det är sommar, och åskan är på väg, så torpets hö förstörs om det ligger kvar. Varför bonden hjälper till går att läsa på flera sätt."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Stilen", text: "I Selma Lagerlöfs stil, som i Nils Holgerssons underbara resa genom Sverige: en sägen som börjar ”Det berättas”, och en natur som lever. Läs lugnt, som vid en brasa. Läs vidare: Nils Holgerssons underbara resa genom Sverige." }
+            - { rubrik: "Före läsningen", text: "Vad gör man med tvätt som hänger ute när det börjar mullra? Förklara först orden torp, ett litet hus på landet, och lada, ett hus där man har hö." }
+            - { rubrik: "Stoppet", text: "Stanna efter ”Bakom skogen hade det börjat mullra, och svalorna flög lågt över ängen.” Något är konstigt: varför har Karin så bråttom?" }
+            - { rubrik: "Tänka högt · fråga 2, Var och när", text: "”Vänta, här står inte när på året det är. Jag ser framför mig en flicka som springer barfota uppför en backe medan det mullrar bakom skogen. Det står ’barfota’, och det står ’redan full av torrt hö’. Jag vet att man går barfota när det är varmt, och att man tar in höet på sommaren. Alltså tror jag att det är sommar. Stämmer det? Jag läser vidare. Deras hö ligger kvar på ängen. Ja, det stämmer, och nu förstår jag varför hon har bråttom.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Den står och äter i lugn och ro, och den lyfter huvudet när den hör Karins röst." }
+            - { rubrik: "Fråga 2 · mellan raderna, Var och när", text: "Ledtrådarna: ”redan full av torrt hö”; ”barfota”; ”deras hö låg kvar på ängen”.\nSvar som texten stöder: sommar, när höet ska in.\nEn tanke att pröva: ”Vinter, det står ju.” Karin talar om vintern som kommer, men hon är barfota och höet ligger ute på ängen.\nFråga tillbaka: ”När går man barfota, och när tar man in hö?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Varför", text: "Ledtrådarna: ”stod hästen redan vid Karins vagn”; ”de första tunga dropparna föll”; ”stod länge med hästens rep i handen”.\nSvar som texten stöder: han skäms, för nu syns det att hästen inte var trött, eller han förstår att Karin behöver hjälp, eller han ser att regnet förstör höet. Alla håller när eleven visar en ledtråd.\nEn tanke att pröva: ”För att höet är hans.” Hans eget hö ligger redan inne, och det är Karins som ligger kvar.\nFråga tillbaka: ”Vems hö ligger kvar på ängen, och var ligger bondens hö?”" }
+            - { rubrik: "Fråga 4 · bortom raderna", text: "Ett svar kan vara att han har blivit snäll, eftersom han hjälper till i regnet, eller att han bara blev rädd eller skämdes. Ett bra svar tar ställning och visar på något bonden gör." }
+            - { rubrik: "Öppna frågor", text: "”Hästen lyfte huvudet när den hörde Karin. Vad tror ni att den tänkte?”; ”Vad säger Karin när bonden börjar lasta?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”barfota”." }
+    - rubrik: "Lärarens sida: Mellan, text 17, Klonk"
+      text:
+        - "Det som står mellan raderna: Iris betalar halva, och hjälmen har fastnat förut."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Före läsningen", text: "Vad kan hända när man provar något innan man har köpt det?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”Iris tittade på tanten, och sedan tog hon något ur fickan och lade det på bordet.” Något är konstigt: två personer kan vara ”hon”." }
+            - { rubrik: "Tänka högt · fråga 3, Vem, syftning", text: "”Vänta, vem är ’hon’? Jag ser framför mig Iris och tanten vid bordet. Det står ’en tjugolapp var i fickan’, och det står ’tog hon något ur fickan’. Jag vet att det är den som köper som tar fram pengar. Alltså tror jag att hon är Iris och att det är hennes tjugolapp. Stämmer det? Jag läser vidare. ’Halva’, säger hon, och tanten stoppar sedeln i sin väska. Ja, det stämmer.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "En tjugolapp var." }
+            - { rubrik: "Fråga 2 · mellan raderna, Var och när", text: "Ledtrådarna: ”full av bord med gamla tallrikar”; ”en cykel utan sadel”; ”allt i lådan kostade fem kronor”.\nSvar som texten stöder: en loppis.\nEn tanke att pröva: ”En affär.” En affär kan sälja begagnat, men här står borden på en parkering.\nFråga tillbaka: ”Vad ligger på borden?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Vem, syftning", text: "Ledtrådarna: ”en tjugolapp var i fickan”; ”för fyrtio kronor”; ”Halva”.\nSvar som texten stöder: Iris, med sin tjugolapp.\nEn tanke att pröva: ”Tanten, hon står precis före.” Men tanten säljer, och hon stoppar sedeln i sin väska.\nFråga tillbaka: ”Vad är hälften av fyrtio?”" }
+            - { rubrik: "Fråga 4 · mellan raderna, Varför", text: "Ledtrådarna: ”tog fram en flaska matolja under bordet”; ”Lugn, det här brukar hjälpa.”; ”Prova du, den passar säkert”.\nSvar som texten stöder: hon vill få loss hjälmen och har gjort det förut, eller hon vet att hjälmen fastnar, och därför sa hon att den passar. Båda håller när eleven visar en ledtråd.\nEn tanke att pröva: ”Hon ska laga mat.” Oljan kommer fram just när hjälmen sitter fast.\nFråga tillbaka: ”Vad menar tanten med ’brukar’?”" }
+            - { rubrik: "Fråga 5 · bortom raderna", text: "Ett svar kan vara att Anton betalar, eftersom han tryckte ner hjälmen, att Iris betalar, eftersom hon sa åt honom att prova, eller att tanten inte borde ta betalt, eftersom hon sa att den passar och hade oljan redo. Ett bra svar tar ställning och visar ett skäl i texten." }
+            - { rubrik: "Öppna frågor", text: "”Iris fnissar åt Anton i hjälmen. Hur tror ni att Anton tar det?”; ”Allt i lådan kostade fem kronor. Varför tror ni att hjälmen kostar fyrtio?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”en tjugolapp var i fickan”." }
+    - rubrik: "Lärarens sida: Mellan, text 18, Trappsteget"
+      text:
+        - "Det som står mellan raderna: Tekla vill visa att hon inte behöver någon, men hon är ensam."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Stilen", text: "I Kate DiCamillos stil, som i Edward Tulanes fantastiska resa: en berättare som talar till läsaren, och en lista. Läs varmt. Läs vidare: Edward Tulanes fantastiska resa." }
+            - { rubrik: "Före läsningen", text: "När sparar man något för säkerhets skull?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”’Det var inte det jag frågade’, sa mannen.” Något är konstigt: mannen och Tekla pratar om olika saker." }
+            - { rubrik: "Tänka högt · fråga 3, Känsla", text: "”Vänta, mannen säger att Tekla inte svarade på det han frågade. Jag ser framför mig Tekla på trappsteget. Det står ’en nyckel i ett snöre runt halsen’, och Tekla säger ’Jag behöver ingen hund’. Jag vet att man har nyckeln runt halsen när ingen är hemma, och att den som säger nej fast ingen har frågat tänker på just det. Alltså tror jag att Tekla är ensam. Stämmer det? Jag läser vidare. Hon sitter kvar. Ja, det stämmer.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Hon sparar den i fickan." }
+            - { rubrik: "Fråga 2 · mellan raderna, Vem, syftning", text: "Ledtrådarna: ”stor och grå och luktade som en blöt matta”; ”lade sig över hennes gympaskor utan att fråga”.\nSvar som texten stöder: hunden Baron. Också en gammal man kan vara ”stor och grå”, men en man lägger sig inte på någons skor.\nEn tanke att pröva: ”Den gamla mannen.” Mannen står i porten.\nFråga tillbaka: ”Vem ligger på skorna?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Känsla", text: "Ledtrådarna: ”en nyckel i ett snöre runt halsen”; ”för säkerhets skull”; ”Jag behöver ingen hund”.\nSvar som texten stöder: ensam eller längtande, fast hon inte visar det, eller trotsig och försiktig.\nEn tanke att pröva: ”Bra, det räckte ju.” Det säger berättaren, men Tekla svarar på något som ingen frågade.\nFråga tillbaka: ”Vad frågade mannen?”" }
+            - { rubrik: "Fråga 4 · mellan raderna, Varför", text: "Ledtrådarna: ”Baron såg nöjd ut”; ”medan mannen berättade om tre sorters regn”.\nSvar som texten stöder: en till Baron eller mannen, eller i hopp om att de kommer igen. Alla håller när eleven visar en ledtråd.\nEn tanke att pröva: ”Hon ville äta mer själv.” Hon åt ju bara hälften förut och sparade resten.\nFråga tillbaka: ”Vart tog halva smörgåsen vägen?”" }
+            - { rubrik: "Fråga 5 · bortom raderna", text: "Snäll, för han skämtar och vill ha Tekla som sällskap, eller lite elak, för han rättar henne. Ett bra svar har skäl i texten." }
+            - { rubrik: "Öppna frågor", text: "”Varför säger mannen att han pratar för mycket?”; ”Vad säger Tekla nästa dag?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”hälften sparade hon i fickan”." }
+    - rubrik: "Lärarens sida: Mellan, text 19, Biljetten"
+      text:
+        - "Det som står mellan raderna: Jeb vill slippa tre timmar i kyrkan och får kompisarna att betala för biljetten."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Stilen", text: "I Mark Twains stil, som i Tom Sawyers äventyr: en berättare som genomskådar knepet, och överdrifter. Läs med ett litet leende. Läs vidare: Tom Sawyers äventyr." }
+            - { rubrik: "Före läsningen", text: "Vilka saker kan barn byta med varandra? Förklara först ordet faster: pappas syster." }
+            - { rubrik: "Stoppet", text: "Stanna efter ”När kyrkklockan slog sju satt Jeb på bryggan vid floden med fötterna i vattnet.” Något passar inte: då skulle han vara i kyrkan." }
+            - { rubrik: "Tänka högt · fråga 4, Varför", text: "”Vänta, klockan sju skulle Jeb sitta i kyrkan. Jag ser framför mig Jeb på bryggan. Det står ’från klockan sju till tio’, och det står ’Jeb hade aldrig suttit still länge nog’. Jag vet att tre timmar är länge att sitta still. Alltså tror jag att Jeb sålde biljetten för att slippa kyrkan. Stämmer det? Jag läser vidare. Jeb hör sången på långt håll och tycker att den aldrig har låtit så vackert. Ja, det stämmer.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "En präst skulle tala från sju till tio." }
+            - { rubrik: "Fråga 2 · mellan raderna, Det som menas", text: "Ledtrådarna: ”höll Jeb upp biljetten mot solen som om den var av guld”; ”Inte ens för en sköldpadda”.\nSvar som texten stöder: att de ska vilja köpa den.\nEn tanke att pröva: ”Att de ska gå, för han vill behålla den.” Men han håller upp den så att de ser den.\nFråga tillbaka: ”Vad gör Jeb med biljetten?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Varför", text: "Ledtrådarna: ”som om den var av guld”; ”Amos tittade på Eli”.\nSvar som texten stöder: Amos tror att biljetten är något fint, eller han vill inte att Eli ska få den. Båda håller när eleven visar en ledtråd.\nEn tanke att pröva: ”Han vill gå till kyrkan.” Amos tar inte fram sina saker förrän han har sett Eli bjuda.\nFråga tillbaka: ”Vem tittar Amos på innan han tar fram sina saker?”" }
+            - { rubrik: "Fråga 4 · mellan raderna, Varför", text: "Ledtrådarna: ”från klockan sju till tio”; ”Jeb hade aldrig suttit still länge nog”; ”satt Jeb på bryggan vid floden”.\nSvar som texten stöder: han vill slippa kyrkan och får saker på köpet.\nEn tanke att pröva: ”Han ville ha sköldpaddan.” Sista stycket visar att han helst är långt från kyrkan.\nFråga tillbaka: ”Var är Jeb klockan sju?”" }
+            - { rubrik: "Fråga 5 · bortom raderna", text: "Smart, eftersom ingen tvingades och Jeb slapp sitta still, eller fult, eftersom Amos betalade för tre timmars stillasittande, Eli gav bort sin sköldpadda utan att få något och fastern betalade för en biljett som Jeb aldrig använde. Ett bra svar tar ställning och nämner en detalj ur texten." }
+            - { rubrik: "Öppna frågor", text: "”Hur kom sköldpaddan med i bytet?”; ”Vad tänker Amos efter två timmar i kyrkan?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”från klockan sju till tio”." }
+    - rubrik: "Lärarens sida: Mellan, text 20, Koppen med guldkant"
+      text:
+        - "Det som står mellan raderna: Koppen har en spricka och läcker, och därför är hon rädd för att bli använd. Hon gömmer sprickan och låtsas vara för fin, och den vanliga muggen är den som gör nytta."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Stilen", text: "I H.C. Andersens stil, som i Stoppnålen: saker som pratar och tycker att de är fina, och en berättare som ler åt dem. Läs lite högtidligt, med glimten i ögat. Läs vidare: Den ståndaktige tennsoldaten." }
+            - { rubrik: "Före läsningen", text: "Varför står de finaste kopparna ofta i ett skåp och används sällan?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”Efter en stund växte en brun fläck på duken, alldeles vid koppens fot.” Något är konstigt: varifrån kommer fläcken? Säger någon att flickan spillde, fråga: ”När kom fläcken, och var började den?”" }
+            - { rubrik: "Tänka högt · fråga 2, Varför", text: "”Vänta, en fläck vid koppens fot? Jag ser framför mig den vita duken och en brun fläck som växer. Det står ’alltid med samma sida ut mot rummet’, och det står ’Jag tycker inte om varmt vatten’. Jag vet att en kopp som läcker har en spricka någonstans. Alltså tror jag att koppen har en spricka på andra sidan, som hon vill gömma. Stämmer det? Jag läser vidare. Hon ställs tillbaka med samma sida ut som förut. Ja, det stämmer.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Alldeles vid koppens fot." }
+            - { rubrik: "Fråga 2 · mellan raderna, Varför", text: "Ledtrådarna: ”alltid med samma sida ut mot rummet”; ”Jag tycker inte om varmt vatten”; ”en brun fläck på duken, alldeles vid koppens fot”.\nSvar som texten stöder: hon har en skada på andra sidan, till exempel en spricka, och vill inte att någon ska se den. Att hon vill visa sin fina sida håller som en början, och då frågar du vad den andra sidan döljer.\nEn tanke att pröva: ”För att guldet ska synas.” Det förklarar varken fläcken eller ”varmt vatten”.\nFråga tillbaka: ”Varifrån kommer fläcken, och vad säger den om koppen?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Det som menas", text: "Ledtrådarna: ”Äntligen”; ”med samma sida ut som förut”; ”Där är det lugnast för den som är fin”.\nSvar som texten stöder: hon skäms och låtsas att hon själv vill stå där, eller hon är lättad över att slippa visas igen. Båda håller när eleven visar en ledtråd.\nEn tanke att pröva: ”Hon står helst där för att hon är fin, det står ju.” Hon viskade ju ”Äntligen” när hon ställdes fram.\nFråga tillbaka: ”Vad viskade koppen på duken?”" }
+            - { rubrik: "Fråga 4 · bortom raderna", text: "Ett svar kan vara att koppen är finast, för hon är av porslin med guld, eller att muggen är finast, för den gör nytta. Ett bra svar säger vad fin betyder för eleven." }
+            - { rubrik: "Öppna frågor", text: "”Muggen svarade inte. Vad tror ni att den tänkte?”; ”Koppen säger att en greve drack ur henne. Hände det, eller kan det ha varit på något annat sätt?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”en brun fläck på duken”." }
+    - rubrik: "Lärarens sida: Mellan, text 21, Tändstickorna"
+      text:
+        - "Det som står mellan raderna: Farmor fuskar för Jakobs skull. Hon räknar fel med flit och visar sina kort, så att han vinner, troligen för att göra honom glad."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Före läsningen", text: "Vad kan man satsa när man spelar kort hemma? Förklara först ordet summa: det man får när man lägger ihop tal." }
+            - { rubrik: "Stoppet", text: "Stanna efter ”’Elva’, sa Hawa.” Något är konstigt: en mattelärare räknar fel." }
+            - { rubrik: "Tänka högt · fråga 2, Ordet", text: "”Vänta, här räknar någon fel. Jag ser framför mig farmor vid köksbordet och Jakobs sexa och femma. Det står ’hade varit mattelärare i fyrtio år’, och det står ’Sex och fem blir tolv’. Jag vet att en mattelärare kan räkna ut sex och fem, så hon räknar fel med flit. Alltså tror jag att fuska betyder att farmor hjälper Jakob att vinna. Stämmer det? Jag läser vidare. Efter en halvtimme har Jakob tjugo tändstickor och farmor två. Ja, det stämmer.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Mattelärare." }
+            - { rubrik: "Fråga 2 · mellan raderna, Ordet", text: "Ledtrådarna: ”hade varit mattelärare i fyrtio år”; ”Sex och fem blir tolv”; ”Jakob tjugo tändstickor och farmor två”.\nSvar som texten stöder: att farmor bryter mot reglerna så att Jakob vinner.\nEn tanke att pröva: ”Att hon fuskar för att vinna själv.” Men det är Jakob som får tändstickorna, och farmor har bara två kvar.\nFråga tillbaka: ”Vem vinner när farmor fuskar?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Det som menas", text: "Ledtrådarna: ”höll dem ännu lägre”; ”jag sa ju att jag skulle fuska”.\nSvar som texten stöder: att det är bra och att Jakob får titta, för hon vill att han ska se korten.\nEn tanke att pröva: ”Att hon inte visste att han såg.” Men hon håller korten ännu lägre efteråt.\nFråga tillbaka: ”Vad gör farmor med korten sedan?”" }
+            - { rubrik: "Fråga 4 · mellan raderna, Det som menas", text: "Ledtrådarna: ”Elva”; ”lade ner sina kort på bordet”; ”sköt alla tändstickorna över till Jakob”.\nSvar som texten stöder: att farmor bryter mot reglerna och att spelet ska gå rätt till, eller att Hawa också vill få hjälp och vinna någon gång. Båda håller när eleven visar en ledtråd.\nEn tanke att pröva: ”Att Jakob fuskar.” Men det är farmor som räknar fel och visar korten.\nFråga tillbaka: ”Vem är det som fuskar?”" }
+            - { rubrik: "Fråga 5 · bortom raderna", text: "Ja, eftersom Jakob skrattar för första gången på hela dagen, eller nej, eftersom Hawa förlorar fast hon räknar rätt. Ett bra svar tar ställning och nämner Jakob eller Hawa." }
+            - { rubrik: "Öppna frågor", text: "”Jakob har knappt sagt någonting sedan han kom. Vad tror ni att farmor har märkt?”; ”Farmor blinkar när hon säger att hon tänker fuska. Vem tror ni att hon blinkar åt?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”Sex och fem blir tolv”." }
+    - rubrik: "Lärarens sida: Mellan, text 22, Rena händer"
+      text:
+        - "Det som står mellan raderna: Berättaren kan inte spela. Mehdi spiller saften på sig så att vännen slipper spela, och på vägen hem ger han vännen en utväg. Berättaren tror kanske att det var en olycka."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Stilen", text: "I Ulf Starks stil, som i Kan du vissla Johanna: ett barn som berättar mer än det förstår, och allvar och skratt i samma scen. Läs torrt. Läs vidare: Kan du vissla Johanna." }
+            - { rubrik: "Före läsningen", text: "Varför kan det vara svårt att säga att man inte kan något?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”Sedan tittade han på saftglaset.” Något är konstigt: varför tittar Mehdi på glaset just nu?" }
+            - { rubrik: "Tänka högt · fråga 2, Före och efter", text: "”Vänta, varför tittar Mehdi på glaset just nu? Jag ser framför mig berättaren vid pianot och Rut som väntar. Det står ’ett glas röd saft’, och det står ’Sedan tittade han på saftglaset’. Jag vet att röd saft nära vita tangenter kan sluta illa. Alltså tror jag att något kommer att hända med saften. Stämmer det? Jag läser vidare. Mehdis tröja hänger rosa och blöt, och pianolocket är stängt. Ja, saften hamnade på Mehdi.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Ett glas röd saft." }
+            - { rubrik: "Fråga 2 · mellan raderna, Före och efter", text: "Ledtrådarna: ”ett glas röd saft”; ”hans egen hängde rosa och blöt över en köksstol”; ”Pianolocket var stängt”.\nSvar som texten stöder: saften hamnade på Mehdi, och berättaren behövde aldrig spela. Säger en elev att det inte står, stämmer det, men tröjan och pianolocket visar vad som hände.\nEn tanke att pröva: ”Berättaren spelade för Rut.” Pianolocket är stängt, och Mehdis tröja hänger rosa och blöt.\nFråga tillbaka: ”Varför har Mehdi på sig Ruts tröja?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Varför", text: "Ledtrådarna: ”Han tittade på mina händer en lång stund”; ”Sedan tittade han på saftglaset”; ”Man kanske måste öva några år först”.\nSvar som texten stöder: han har förstått att berättaren inte kan spela och ger vännen en utväg, eller han vill på ett snällt sätt visa att han vet. Båda håller när eleven visar en ledtråd.\nEn tanke att pröva: ”För att svåra stycken är svåra.” Det upprepar bara det Mehdi säger.\nFråga tillbaka: ”Vad tittade Mehdi på precis innan?”" }
+            - { rubrik: "Fråga 4 · bortom raderna", text: "Ett svar kan vara att säga sanningen eller spela för Rut. Ett bra svar säger vad det betyder för henne." }
+            - { rubrik: "Öppna frågor", text: "”Vad tror ni att Rut förstår?”; ”Berättaren säger att Mehdi är klumpig. Vet berättaren varför Mehdi spillde? Vad i texten får er att tro det?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”hängde rosa och blöt”." }
+    - rubrik: "Lärarens sida: Mellan, text 23, Fönstret på andra sidan"
+      text:
+        - "Det som står mellan raderna: Selin och damen är vänner genom fönstret, och Selin blir orolig när fönstret är mörkt. Vinkandet betyder mycket för den ensamma damen, och till sist förstår berättaren det."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Stilen", text: "I Antoine de Saint-Exupérys stil, som i Lille prinsen: en vuxen som erkänner att vuxna missar mycket, och ett barn som frågar igen. Läs lugnt. Läs vidare: Lille prinsen." }
+            - { rubrik: "Före läsningen", text: "Vad kan man se från ett köksfönster en kväll?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”Hon frågade en tredje gång och tog sedan på sig skorna.” Något upprepas: Selin frågar tre gånger." }
+            - { rubrik: "Tänka högt · fråga 3, Varför", text: "”Vänta, nu tar Selin på sig skorna. Jag ser framför mig ett mörkt fönster på andra sidan gården. Det står ’Varje kväll klockan åtta’, och det står ’Varför är det mörkt i mitt fönster?’ Jag vet att man blir orolig när något som alltid händer inte händer. Alltså tror jag att Selin vill gå dit och se hur damen har det. Stämmer det? Jag läser vidare. De knackar länge hos damen. Ja, det stämmer.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Hon vinkade mot ett fönster på andra sidan gården." }
+            - { rubrik: "Fråga 2 · mellan raderna, Ordet", text: "Ledtrådarna: ”Det är någon annans lägenhet”; ”en gammal dam vinkade tillbaka”; ”Varför är det mörkt i mitt fönster?”\nSvar som texten stöder: fönstret där hennes vän bor.\nEn tanke att pröva: ”Att hon äger fönstret.” Hon vinkar till damen där.\nFråga tillbaka: ”Vem bor bakom fönstret?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Varför", text: "Ledtrådarna: ”Varje kväll klockan åtta”; ”Varför är det mörkt i mitt fönster?”; ”frågade en tredje gång”.\nSvar som texten stöder: hon vill se om damen har det bra.\nEn tanke att pröva: ”Hon vill gå ut och leka.” Det är kväll, och hon har frågat om fönstret tre gånger.\nFråga tillbaka: ”Vad frågar Selin om?”" }
+            - { rubrik: "Fråga 4 · mellan raderna, Varför", text: "Ledtrådarna: ”Jag trodde inte att någon skulle sakna den”; ”fast Selin redan sov”; ”Jag vinkade”.\nSvar som texten stöder: berättaren har förstått att vinkandet betyder mycket för damen, eller vill se att lampan lyser. Båda håller när eleven visar en ledtråd.\nEn tanke att pröva: ”Berättaren vinkar åt Selin.” Hon sover redan.\nFråga tillbaka: ”Vem vinkar tillbaka?”" }
+            - { rubrik: "Fråga 5 · bortom raderna", text: "Selin, som såg att fönstret var mörkt och frågade tills någon lyssnade, eller berättaren, som gick dit och skruvade i en ny lampa. Ett bra svar tar ställning och visar på något personen gör." }
+            - { rubrik: "Öppna frågor", text: "”Hur tror ni att vinkandet började?”; ”Vad tänkte damen på torsdagen?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”Varför är det mörkt i mitt fönster?”" }
+    - rubrik: "Lärarens sida: Mellan, text 24, Till skäret"
+      text:
+        - "Det som står mellan raderna: Mormor låter Frans bestämma men är orolig och håller utkik."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Stilen", text: "I Tove Janssons stil, som i Sommarboken: envisa repliker och det osagda. Läs torrt. Läs vidare: Sommarboken." }
+            - { rubrik: "Före läsningen", text: "Vad behöver man tänka på innan man ror ut ensam i en liten båt? Förklara först ordet skär: en liten ö av sten ute i havet." }
+            - { rubrik: "Stoppet", text: "Stanna efter ”Flytvästen låg redan i båten, fast han inte hade lagt den där.” Något är konstigt: vem har lagt den där?" }
+            - { rubrik: "Tänka högt · fråga 3, Det som menas", text: "”Vänta, någon har lagt västen i båten. Jag ser framför mig Frans på bryggan och det mörka vattnet. Det står ’Gör som du vill’, och det står ’Flytvästen låg redan i båten’. Jag vet att man lägger fram en flytväst åt någon man är rädd om. Alltså tror jag att mormor menar ja, men är orolig. Stämmer det? Jag läser vidare. Fisken ligger kvar i hinken, halvt rensad. Ja, det stämmer.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Flytvästen." }
+            - { rubrik: "Fråga 2 · mellan raderna, Känsla", text: "Ledtrådarna: ”Frans väntade, men hon sa ingenting mer”; ”Han stod länge på bryggan”; ”utan att knyta upp repet”.\nSvar som texten stöder: osäker, rädd eller besviken över att inget gräl blev av. De håller när eleven visar en ledtråd.\nEn tanke att pröva: ”Glad, för han fick ja.” Han står länge och knyter aldrig upp repet.\nFråga tillbaka: ”Vad gör Frans när han sitter i båten?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Det som menas", text: "Ledtrådarna: ”Flytvästen låg redan i båten”; ”fisken låg kvar i hinken, halvt rensad”.\nSvar som texten stöder: att han får välja, fast hon är rädd om honom.\nEn tanke att pröva: ”Att hon är sur.” Hon har lagt flytvästen i båten och lämnat fisken halvt rensad.\nFråga tillbaka: ”Varför ligger fisken kvar i hinken?”" }
+            - { rubrik: "Fråga 4 · mellan raderna, Det som menas", text: "Ledtrådarna: ”Kikaren låg i hennes knä”; ”Då vet jag när jag ska sitta här”.\nSvar som texten stöder: att hon ska hålla utkik efter Frans när han ror, fast hon säger något annat.\nEn tanke att pröva: ”Hon tycker om fåglar.” Det kan hon göra också, men hon vill sitta där just när Frans ror.\nFråga tillbaka: ”När ska mormor sitta på klippan?”" }
+            - { rubrik: "Fråga 5 · bortom raderna", text: "Frans bestämmer, eller mormor styr utan att säga nej. Ett bra svar har skäl i texten." }
+            - { rubrik: "Öppna frågor", text: "”Mormor tog med kikaren till klippan. Vad tror ni att hon hade gjort om Frans hade rott ut?”; ”Frans hade alla skälen färdiga för ett gräl. Varför tror ni att det aldrig blev något gräl?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”Då vet jag när jag ska sitta här”. Förklara gärna att man ser långt med en kikare." }
+    - rubrik: "Lärarens sida: Mellan, text 25, Ditt rum"
+      text:
+        - "Det som står mellan raderna: Yasin saknar sin bror, som har flyttat."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Känsligt", text: "Några elever kan ha syskon eller föräldrar som har flyttat. Låt samtalet handla om Yasin, och fråga inte vem som känner igen sig." }
+            - { rubrik: "Före läsningen", text: "Hur märker man i ett brev vad den som skriver egentligen tycker?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”Jag säger att jag lånar det.” Något är konstigt: man lånar inte sitt eget rum." }
+            - { rubrik: "Tänka högt · fråga 3, Ordet", text: "”Vänta, han lånar sitt eget rum? Mamma säger ju att det är hans. Jag ser framför mig broderns affischer på väggen. Det står ’inte har hunnit ta ner dem’, och det står ’det har jag inte hunnit heller’. Jag vet att man inte ändrar något i ett rum som man bara lånar. Alltså tror jag att lånar betyder att rummet fortfarande är broderns. Stämmer det? Jag läser vidare. Brodern får sängen på jullovet. Ja, det stämmer.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Han har inte hunnit ta ner dem." }
+            - { rubrik: "Fråga 2 · mellan raderna, Före och efter", text: "Ledtrådarna: ”Nu har jag ditt rum”; ”Kommer du hem på jullovet?”; ”Det luktar fortfarande din deodorant”.\nSvar som texten stöder: storebror har nyss flyttat hemifrån, och Yasin har fått hans rum.\nEn tanke att pröva: ”Storebror är bortrest en vecka.” Då skulle mamma inte säga att rummet är Yasins nu.\nFråga tillbaka: ”Vad säger mamma om rummet?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Ordet", text: "Ledtrådarna: ”Mamma säger att det är mitt rum nu”; ”inte har hunnit ta ner dem”; ”Då får du sängen”.\nSvar som texten stöder: att rummet fortfarande är broderns och att Yasin håller det åt honom, eller att rummet inte känns som hans eget än. Båda håller när eleven visar en ledtråd.\nEn tanke att pröva: ”Att han ska lämna tillbaka det till mamma.” Han vill att brodern ska få sängen.\nFråga tillbaka: ”Vem ska få sängen?”" }
+            - { rubrik: "Fråga 4 · mellan raderna, Känsla", text: "Ledtrådarna: ”det gör jag ju varje natt ändå”; ”för jag har räknat”; ”inte har hunnit ta ner dem”.\nSvar som texten stöder: nej, han saknar sin bror och håller rummet åt honom, eller både glad och ledsen på samma gång.\nEn tanke att pröva: ”Ja, det är dubbelt så stort, det skriver han.” Men han sover inte ens i sängen.\nFråga tillbaka: ”Var sover Yasin på nätterna?”" }
+            - { rubrik: "Fråga 5 · bortom raderna", text: "Ett svar kan vara att brodern förstår att Yasin saknar honom, eller att han bara tror att Yasin skryter. Ett bra svar visar vilka ord brodern lägger märke till." }
+            - { rubrik: "Öppna frågor", text: "”Mamma tjatar om att Yasin ska vädra. Vad tror ni att mamma anar?”; ”Vad tror ni att storebror skriver tillbaka?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”det gör jag ju varje natt ändå”." }
     - rubrik: "Lärarens sida: Mellan, kartläggning före, Fem minuter"
       text:
         - "Det som står mellan raderna: Oskar är otålig och vill in på planen, men kanske också orolig för att inte få spela. Han är i en idrottshall nära slutet av en match."
@@ -2030,6 +2629,202 @@ ramar:
             - ["3. Varför svarar Emelie nej när Ruben frågar om hon har varit i hans rum? Vad i texten får dig att tro det?"]
             - ["4. Vad förstår du i slutet som Ruben inte förstår? Hur vet du det?"]
             - ["5. Ruben somnar med ryggen mot väggen så att Emelie inte ska kunna ta något mer. Vad hade du gjort i hans ställe? Varför?"]
+    - rubrik: "Mellan, text 16: Den trötta hästen"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Mellan, text 16." }
+      listor:
+        - rubrik: "Den trötta hästen"
+          rader:
+            - ["Det berättas att det i Värmland bodde en bonde som var så snål att han jagade bort sparvarna från gården. Hans lada var redan full av torrt hö. En eftermiddag kom Karin från det lilla torpet vid sjön springande uppför backen, barfota och andfådd. Bakom skogen hade det börjat mullra, och svalorna flög lågt över ängen."]
+            - ["Hon frågade om hon fick låna hästen en timme, för deras hö låg kvar på ängen, och det var kons mat i vinter. Bonden tittade mot stallet. Där stod hästen och åt i lugn och ro, och den lyfte huvudet när den hörde Karins röst, för de var gamla vänner.\n”Hästen är trött”, sa bonden."]
+            - ["Karin sprang hem, men då hände något underligt. Det blev stilla, som om skogen höll andan. Sedan small det, och hästen sparkade upp stalldörren och sprang nerför backen. När bonden kom ner till torpet stod hästen redan vid Karins vagn. Himlen var svart, och de första tunga dropparna föll. Bonden stod länge med hästens rep i handen. Sedan tog han en högaffel och började lasta. Det berättas att han aldrig mer sa att en häst var trött."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Vad gör hästen när bonden tittar mot stallet?"]
+            - ["2. Vilken tid på året är det? Hur vet du det?"]
+            - ["3. Varför börjar bonden lasta Karins hö? Vad i texten får dig att tro det?"]
+            - ["4. Bonden säger aldrig mer att en häst är trött. Har han blivit snäll på riktigt? Varför?"]
+    - rubrik: "Mellan, text 17: Klonk"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Mellan, text 17." }
+      listor:
+        - rubrik: "Klonk"
+          rader:
+            - ["Parkeringen bakom skolan var full av bord med gamla tallrikar, böcker med bruna kanter och en cykel utan sadel. Någon ropade att allt i lådan kostade fem kronor. Anton och Iris gick från bord till bord med en tjugolapp var i fickan."]
+            - ["”Den där måste du prova”, sa Iris och lyfte en riddarhjälm av plåt ur lådan.\n”Prova du, den passar säkert”, sa tanten bakom bordet och nickade.\nAnton tryckte ner hjälmen över huvudet, och det sa klonk.\n”Hur ser jag ut?” Rösten lät som om den kom ur en plåtburk.\n”Som en riddare”, sa Iris och fnissade, ”fast en liten riddare.”\nAnton drog och drog, men hjälmen satt fast.\n”Då är den såld”, sa tanten, ”för fyrtio kronor.”\n”Men det var hon som sa att jag skulle prova!” ropade Anton och pekade åt fel håll, på en golvlampa med fransar.\nIris tittade på tanten, och sedan tog hon något ur fickan och lade det på bordet.\n”Halva”, sa hon, ”och resten betalar han.”\nTanten stoppade sedeln i sin väska och tog fram en flaska matolja under bordet. ”Lugn, det här brukar hjälpa.”"]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Vad hade Anton och Iris i fickan?"]
+            - ["2. Vad är det för slags ställe som Anton och Iris är på? Hur vet du det?"]
+            - ["3. Det står att ”hon” tar något ur fickan och lägger det på bordet. Vem är hon? Hur vet du det?"]
+            - ["4. Varför har tanten en flaska matolja under bordet? Vad i texten får dig att tro det?"]
+            - ["5. Vem borde betala för hjälmen? Varför?"]
+    - rubrik: "Mellan, text 18: Trappsteget"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Mellan, text 18." }
+      listor:
+        - rubrik: "Trappsteget"
+          rader:
+            - ["Om Tekla ska du veta en sak: hon behövde ingen. Hon hade en nyckel i ett snöre runt halsen, en blå ryggsäck och ett eget trappsteg utanför porten. Det räckte. Varje eftermiddag satt hon på trappsteget och åt sin smörgås, men hälften sparade hon i fickan, för säkerhets skull."]
+            - ["Den fjärde dagen kom han. Han var stor och grå och luktade som en blöt matta, och han lade sig över hennes gympaskor utan att fråga.\n”Han heter Baron”, sa en gammal man i tofflor som stod i porten. ”Får han ligga kvar en stund? Han har bara mig, och jag pratar för mycket om väder.”\n”Jag behöver ingen hund”, sa Tekla.\n”Det var inte det jag frågade”, sa mannen."]
+            - ["Du kanske tror att Tekla gick in då, men det gjorde hon inte. Hon satt kvar medan mannen berättade om tre sorters regn, och Baron låg kvar på hennes fötter. Jag vet inte vart den halva smörgåsen i fickan tog vägen, men Baron såg nöjd ut. Nästa dag hade Tekla två smörgåsar i ryggsäcken."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Vad gör Tekla med hälften av smörgåsen?"]
+            - ["2. Vem är ”han” som kommer den fjärde dagen? Titta bara på orden före hans namn. Vad i texten får dig att tro det?"]
+            - ["3. Hur känner sig Tekla de första dagarna på trappsteget? Vad i texten får dig att tro det?"]
+            - ["4. Varför har Tekla två smörgåsar i ryggsäcken nästa dag? Vad i texten får dig att tro det?"]
+            - ["5. Mannen sa ”Det var inte det jag frågade.” Var han snäll eller lite elak mot Tekla? Varför?"]
+    - rubrik: "Mellan, text 19: Biljetten"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Mellan, text 19." }
+      listor:
+        - rubrik: "Biljetten"
+          rader:
+            - ["Fastern sa alltid att en pojke blir snäll av att sitta still. Jeb hade aldrig suttit still länge nog för att ta reda på det. Nu hade hon köpt en biljett åt honom för tio cent. På biljetten stod det att en präst skulle tala i kyrkan från klockan sju till tio."]
+            - ["När Amos och Eli kom barfota nerför gatan, höll Jeb upp biljetten mot solen som om den var av guld.\n”Jag skulle aldrig sälja den”, sa han. ”Inte ens för en sköldpadda.”\nEli höll fram en liten sköldpadda i sin hatt. Amos tittade på Eli och tog fram en kam och en pilspets.\nJeb suckade djupt, som en man som måste sälja sin enda ko. Amos fick biljetten, och Jeb fick kammen, pilspetsen och sköldpaddan. Hur sköldpaddan kom med i bytet kunde ingen av dem förklara."]
+            - ["När kyrkklockan slog sju satt Jeb på bryggan vid floden med fötterna i vattnet. Sången från kyrkan hördes över vattnet, och Jeb tyckte att den aldrig hade låtit så vackert. Det kunde bero på att han aldrig hade hört den på så långt håll."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Vad stod det på biljetten?"]
+            - ["2. Vad vill Jeb att Amos och Eli ska göra när han säger ”Jag skulle aldrig sälja den”? Hur vet du det?"]
+            - ["3. Varför tar Amos fram sin kam och sin pilspets? Vad i texten får dig att tro det?"]
+            - ["4. Varför säljer Jeb biljetten? Hur vet du det?"]
+            - ["5. Var det smart eller fult av Jeb att sälja biljetten på det sättet? Varför?"]
+    - rubrik: "Mellan, text 20: Koppen med guldkant"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Mellan, text 20." }
+      listor:
+        - rubrik: "Koppen med guldkant"
+          rader:
+            - ["I det gamla skåpet bredvid kakelugnen stod en kopp av fint porslin med guldkant. ”En gång drack en greve ur mig”, sa koppen varje kväll. ”Han sa att han aldrig hade sett något så vackert.” För varje kväll blev greven lite finare. Bredvid henne stod en tjock brun mugg. Den användes varje morgon, och koppen höll sig en bit ifrån den, för vardag kan smitta."]
+            - ["Koppen stod alltid med samma sida ut mot rummet. ”Jag tycker inte om varmt vatten”, sa hon. ”Det är för vanliga koppar.” En söndag kom prästen på besök, och flickan i huset ställde fram den fina koppen på den vita duken. ”Äntligen”, viskade koppen. Flickan hällde upp kaffe. Efter en stund växte en brun fläck på duken, alldeles vid koppens fot."]
+            - ["Prästen fick dricka ur muggen i stället, och han sa att kaffet var gott. Koppen ställdes tillbaka längst in i skåpet, med samma sida ut som förut. ”Där står jag helst”, sa hon. ”Där är det lugnast för den som är fin.” Muggen svarade inte, för den stod kvar hos prästen och höll hans kaffe varmt."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Var på duken växer den bruna fläcken?"]
+            - ["2. Varför står koppen alltid med samma sida ut mot rummet? Vad i texten får dig att tro det?"]
+            - ["3. Vad menar koppen när hon säger ”Där står jag helst”? Hur vet du det?"]
+            - ["4. Vem är finast, koppen eller muggen? Varför?"]
+    - rubrik: "Mellan, text 21: Tändstickorna"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Mellan, text 21." }
+      listor:
+        - rubrik: "Tändstickorna"
+          rader:
+            - ["Farmor hade varit mattelärare i fyrtio år. Hon räknade fortfarande ut allt i huvudet, också vad maten kostade innan kassan hann pipa. Varje söndag spelade hon kort med Jakob och kusinen Hawa vid köksbordet. De satsade tändstickor, och den som fick högst summa på sina två kort tog alla tändstickorna. Jakob hade knappt sagt någonting sedan han kom."]
+            - ["”Akta er nu, för i dag tänker jag fuska”, sa farmor och blinkade.\nHawa fick elva och farmor nio. Jakob vände sina kort, en sexa och en femma.\n”Sex och fem blir tolv, så då vinner Jakob”, sa farmor.\n”Elva”, sa Hawa.\n”Tolv”, sa farmor bestämt och sköt alla tändstickorna över till Jakob.\nI nästa runda höll farmor sina kort så lågt att Jakob kunde se vartenda ett.\n”Farmor, jag ser dina kort”, sa Jakob.\n”Jaså, gör du det”, sa farmor och höll dem ännu lägre.\n”Det är orättvist!” sa Hawa och lade ner sina kort på bordet.\n”Ja”, sa farmor, ”jag sa ju att jag skulle fuska.”"]
+            - ["Efter en halvtimme hade Jakob tjugo tändstickor och farmor två, och då skrattade Jakob för första gången på hela dagen."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Vad hade farmor varit i fyrtio år?"]
+            - ["2. Farmor säger att hon tänker fuska. Vad betyder ”fuska” när farmor säger det? Hur vet du det?"]
+            - ["3. Farmor säger ”Jaså, gör du det” och håller korten ännu lägre. Vad menar hon? Vad i texten får dig att tro det?"]
+            - ["4. Hawa säger ”Det är orättvist!” Vad menar hon? Hur vet du det?"]
+            - ["5. Gjorde farmor rätt när hon fuskade? Varför?"]
+    - rubrik: "Mellan, text 22: Rena händer"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Mellan, text 22." }
+      listor:
+        - rubrik: "Rena händer"
+          rader:
+            - ["Jag har aldrig sagt att jag spelar piano bra. Jag sa till Mehdi att jag spelade lite piano, mest svåra stycken. Det är en stor skillnad. Men Mehdi berättade det för sin granne Rut, och Rut har ett piano och en massa regler. Man tar av sig skorna, man tvättar händerna, och man rör inte pianot förrän man har ätit en bulle. Nu satt jag på hennes pall med rena händer och bullsmulor på tröjan."]
+            - ["”Varsågod”, sa Rut och knäppte händerna. ”Ingen har spelat på det sedan min man levde.”\nJag lyfte händerna över tangenterna. Tangenterna var väldigt vita, och det fanns väldigt många. Mehdi stod bredvid med ett glas röd saft. Han tittade på mina händer en lång stund. Sedan tittade han på saftglaset."]
+            - ["En kvart senare satt vi i Ruts kök igen. Mehdi hade på sig en av Ruts tröjor, och hans egen hängde rosa och blöt över en köksstol. Pianolocket var stängt. På vägen hem sa Mehdi: ”Svåra stycken är nog svåra. Man kanske måste öva några år först.”\n”Minst”, sa jag. Mehdi är faktiskt klok ibland, fast han är så klumpig."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Vad har Mehdi i handen när berättaren sitter vid pianot?"]
+            - ["2. Vad hände under den kvart som texten hoppar över? Hur vet du det?"]
+            - ["3. Varför säger Mehdi att man kanske måste öva några år först? Vad i texten får dig att tro det?"]
+            - ["4. Rut säger att ingen har spelat på pianot sedan hennes man levde. Vad borde berättaren göra nu? Varför?"]
+    - rubrik: "Mellan, text 23: Fönstret på andra sidan"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Mellan, text 23." }
+      listor:
+        - rubrik: "Fönstret på andra sidan"
+          rader:
+            - ["Vuxna ser ett fönster och tänker på gardiner. Jag var likadan den veckan jag var barnvakt åt Selin. Varje kväll klockan åtta vinkade hon från köksfönstret mot ett fönster på andra sidan gården. Där tändes en lampa, och en gammal dam vinkade tillbaka.\n”Det där är mitt fönster”, sa Selin.\n”Det är någon annans lägenhet”, sa jag.\n”Det är mitt fönster”, sa hon igen, som om jag inte hade hört."]
+            - ["På torsdagen var fönstret mörkt.\n”Varför är det mörkt i mitt fönster?” frågade Selin.\nJag sa att damen hade lagt sig. Selin frågade igen, och jag sa att damen kanske var bortrest. Jag skulle diska och betala räkningar, och sådant tycker vuxna är viktigt. Hon frågade en tredje gång och tog sedan på sig skorna."]
+            - ["Vi fick knacka länge innan damen öppnade. Lampan i hennes fönster hade gått sönder, och hon nådde inte upp. Jag skruvade i en ny.\n”Jag trodde inte att någon skulle sakna den”, sa hon och tittade på Selin.\nTillbaka i köket ställde jag mig vid fönstret fast Selin redan sov, och där borta lyste lampan. Jag vinkade, och någon vinkade tillbaka."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Vad gjorde Selin varje kväll klockan åtta?"]
+            - ["2. Selin säger ”Det där är mitt fönster”. Vad menar hon med ”mitt”? Hur vet du det?"]
+            - ["3. Varför tar Selin på sig skorna? Vad i texten får dig att tro det?"]
+            - ["4. Varför ställer sig berättaren vid fönstret fast Selin redan sover? Hur vet du det?"]
+            - ["5. Vem gjorde mest för damen, Selin eller berättaren? Varför?"]
+    - rubrik: "Mellan, text 24: Till skäret"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Mellan, text 24." }
+      listor:
+        - rubrik: "Till skäret"
+          rader:
+            - ["Frans hade bestämt sig redan vid frukosten, och han hade alla skälen färdiga för ett gräl.\n”Jag ror ut till skäret alldeles ensam”, sa han.\nMormor satt på en stol vid trappan och rensade abborre med den gamla fiskkniven.\n”Gör som du vill”, sa hon.\nFrans väntade, men hon sa ingenting mer, och måsarna skrek över bryggan."]
+            - ["Han stod länge på bryggan. Vattnet var mörkare ute vid skäret än i viken, och vinden drog mörka streck över ytan. Flytvästen låg redan i båten, fast han inte hade lagt den där.\n”Det blåser”, ropade han upp mot trappan.\n”Lite”, sa mormor utan att titta upp.\n”Från fel håll”, sa Frans.\n”Det gör det ofta”, sa mormor.\nFrans satte sig i båten och väntade utan att knyta upp repet."]
+            - ["När han kom upp igen hade mormor flyttat sin stol till klippan, där man ser ut till skäret. Kikaren låg i hennes knä, och fisken låg kvar i hinken, halvt rensad.\n”Jag ror i morgon när vinden har vänt”, sa Frans.\n”Det är bra”, sa mormor. ”Då vet jag när jag ska sitta här och titta på fåglarna.”"]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Vad låg redan i båten?"]
+            - ["2. Hur känner sig Frans när han står på bryggan? Hur vet du det?"]
+            - ["3. Vad menar mormor när hon säger ”Gör som du vill”? Vad i texten får dig att tro det?"]
+            - ["4. Mormor säger att hon ska sitta på klippan och titta på fåglarna. Vad menar hon? Vad i texten får dig att tro det?"]
+            - ["5. Vem bestämmer om Frans ska ro, Frans eller mormor? Varför?"]
+    - rubrik: "Mellan, text 25: Ditt rum"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Mellan, text 25." }
+      listor:
+        - rubrik: "Ditt rum"
+          rader:
+            - ["Hej storebror!\nNu har jag ditt rum, och det är dubbelt så stort som mitt gamla och har ett fönster mot gården. Du sa alltid att jag aldrig skulle få komma in här, men nu bor jag här, så det så."]
+            - ["Det finns några saker som du borde veta. Elementet klickar ungefär trehundra gånger varje natt, och det vet jag, för jag har räknat. Dina affischer sitter kvar på väggen, eftersom jag inte har hunnit ta ner dem. Det luktar fortfarande din deodorant, och mamma tjatar om att jag ska vädra, men det har jag inte hunnit heller."]
+            - ["Mamma säger att det är mitt rum nu. Jag säger att jag lånar det.\nHälsningar Yasin\nPS Kommer du hem på jullovet? Då får du sängen. Jag kan sova på madrassen på golvet, det gör jag ju varje natt ändå."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Varför sitter storebrors affischer kvar, enligt Yasin?"]
+            - ["2. Vad har hänt innan Yasin skriver brevet? Hur vet du det?"]
+            - ["3. Yasin säger att han ”lånar” rummet. Vad menar han med det? Vad i texten får dig att tro det?"]
+            - ["4. I början skriver Yasin som om han är glad över rummet. Är han det? Hur vet du det?"]
+            - ["5. Vad tror du att storebror förstår när han läser brevet? Varför?"]
     - rubrik: "Mellan, kartläggning efter: Två minuter"
       text:
         - "Läs texten och svara på frågorna."
@@ -2051,7 +2846,7 @@ ramar:
             - ["4. Fröken viskar att det är två minuter kvar. Vad hade du sagt till Elin? Varför?"]
     - rubrik: "Lärarens sidor: Avancerad"
       text:
-        - "Här är de femton texterna på nivån Avancerad och kartläggningens två. Tabellen visar vad varje text handlar om, vad eleven ska lista ut, vilka slags frågor mellan raderna texten har, hur svår den är och om den har en vändning eller är känslig. Efter tabellen har varje text en egen sida med det du behöver i passet: det som står mellan raderna, var du stannar, vad du säger när du tänker högt, svaren och två öppna frågor till samtalet. Frågorna står på elevens blad, så ha din kopia bredvid."
+        - "Här är de tjugofem texterna på nivån Avancerad och kartläggningens två. Tabellen visar vad varje text handlar om, vad eleven ska lista ut, vilka slags frågor mellan raderna texten har, hur svår den är och om den har en vändning eller är känslig. Efter tabellen har varje text en egen sida med det du behöver i passet: det som står mellan raderna, var du stannar, vad du säger när du tänker högt, svaren och två öppna frågor till samtalet. Frågorna står på elevens blad, så ha din kopia bredvid."
       oversikt:
         kolumner: [Texten, Handlar om, Eleven listar ut, Frågornas slag, Svårighet]
         rader:
@@ -2070,14 +2865,24 @@ ramar:
           - ["13. Fyrtio minuter", "Berättaren en lördag i en idrottshall, med många föräldrar på plats.", "vem någon är", "Vem, Känsla, Det som menas", "3, svår, vändning"]
           - ["14. Nästa fredag", "Jonatan och Minna skriver till varandra under tre dagar.", "vad som hände innan, eller vad som händer sedan", "Varför (två frågor), Före och efter", "3, svår, känslig"]
           - ["15. Fyra toner", "Joel skriver ett brev till grannen i lägenheten intill.", "varför något händer, eller vad någon vill", "Varför (två frågor), Känsla", "3, svår, vändning"]
+          - ["16. Fröken Lanes ärende", "Berättaren och Hollis får besök sent en kväll. I Arthur Conan Doyles stil.", "vem någon är", "Var och när, Vem, Känsla", "1, enkel"]
+          - ["17. Tio i elva", "Lejla på prao i ett restaurangkök före lunch.", "vad ett ord betyder just här", "Känsla, Ordet, Det som menas", "1, enkel"]
+          - ["18. Stenhuset", "Pim från tuvfolket knackar på hos en jätte en regnig kväll. I J.R.R. Tolkiens stil.", "vad någon egentligen menar", "Varför, Det som menas (två frågor)", "2, medel"]
+          - ["19. I hallen", "Hjälparen i Elviras hem en dag när två flickor ur klassen kommer på besök. I Kazuo Ishiguros stil.", "hur någon känner sig", "Det som menas, Känsla, Varför", "2, medel, känslig"]
+          - ["20. Språnget", "Omid, Aylin och några andra barn den dag då Aylin kommer. I Ray Bradburys stil.", "var och när det händer", "Var och när, Känsla, Varför", "2, medel"]
+          - ["21. Kaktus", "Bea, Nellie och Dawit skriver till varandra en kväll.", "vad ett ord betyder just här", "Ordet, Varför, Det som menas", "2, medel"]
+          - ["22. Springan", "Asta i sitt rum i en gammal lägenhet som hon och mamma nyss har flyttat till. I Maria Gripes stil.", "vad som hände innan, eller vad som händer sedan", "Före och efter, Vem, Varför", "3, svår, vändning, känslig"]
+          - ["23. Molnet", "Tiri och trollkarlen på en ö där det inte har regnat sedan våren. I Ursula K. Le Guins stil.", "varför något händer, eller vad någon vill", "Ordet, Varför (två frågor)", "3, svår"]
+          - ["24. I gryningen", "En pappa och hans son ror ut för att fiska en tidig morgon. I Ernest Hemingways stil.", "vad som hände innan, eller vad som händer sedan", "Före och efter, Känsla, Det som menas", "3, svår"]
+          - ["25. Det gröna", "Adrian hos farmor i hennes kök en eftermiddag.", "varför något händer, eller vad någon vill", "Det som menas, Varför (två frågor)", "3, svår, vändning, känslig"]
           - ["Kartläggning före: Lappen", "Amira väntar på ett möte en fredagseftermiddag.", "hur någon känner sig", "Känsla, Var och när", "före insatsen"]
           - ["Kartläggning efter: Mejlet", "Mira väntar på att något ska börja en tisdagskväll.", "hur någon känner sig", "Känsla, Var och när", "efter insatsen"]
       delar:
         - rubrik: Så väljer du text
           falt:
-            - { rubrik: "Veckans slag", text: "Välj en text med frågor av veckans slag, som progressionen visar: Känsla och Vem i vecka 1, Var och när och Varför i vecka 2, Före och efter i vecka 3, Det som menas i vecka 4–5 och Ordet i vecka 6–8. Metodens texter räcker till ungefär fem veckors pass. Texterna till resten av veckorna, också till Ordet i vecka 6–8, tar du ur serien Mellan raderna eller skriver själv." }
+            - { rubrik: "Veckans slag", text: "Välj en text med frågor av veckans slag, som progressionen visar: Känsla och Vem i vecka 1, Var och när och Varför i vecka 2, Före och efter i vecka 3, Det som menas i vecka 4–5 och Ordet i vecka 6–8. Metodens texter räcker till ungefär åtta veckors pass. Varje nivå har fyra texter med slaget Ordet, så i vecka 6–8 tar ni också en sida ur elevens egen bänkbok. Vill du ha fler texter, tar du dem ur serien Mellan raderna eller skriver egna." }
             - { rubrik: "Svårigheten", text: "Börja med svårighet 1, och ta 2 eller 3 när gruppen klarar slutsatsen med mindre stöd. En text med vändning får eleverna att tänka om mot slutet. En känslig text har en rad om det på sin sida. Läs raden före passet, och ta inte två texter om samma slags svåra sak samma vecka." }
-            - { rubrik: "Nivåerna", text: "Välj nivå efter gruppen, och blanda gärna, till exempel en text på Lättläst när ni övar ett nytt tankesteg och en på Mellan när det sitter." }
+            - { rubrik: "Nivåerna", text: "Välj nivå efter gruppen, och blanda gärna, till exempel en text på Mellan när ni övar ett nytt tankesteg och en på Avancerad när det sitter." }
     - rubrik: "Lärarens sida: Avancerad, text 1, Kassan"
       text:
         - "Det som står mellan raderna: Två barn hade bara 31 kronor, men Hugo gav dem glass för 50. Chefen förstår och väntar ut honom."
@@ -2091,7 +2896,7 @@ ramar:
             - { rubrik: "Fråga 1 · på raderna", text: "25 kronor." }
             - { rubrik: "Fråga 2 · mellan raderna, Varför", text: "Ledtrådarna: ”tittade på mynten och sedan på de röda ansiktena”; ”gjorde kulorna extra stora”.\nSvar som texten stöder: han tycker synd om barnen eller vill ge dem glass. Båda håller när eleven visar en ledtråd.\nEn tanke att pröva: ”De bad om det.” De bad bara om två glassar.\nFråga tillbaka: ”Vad tittar Hugo på först?”" }
             - { rubrik: "Fråga 3 · mellan raderna, Varför", text: "Ledtrådarna: ”Trettio, trettioett.”; ”På displayen stod det 50.”\nSvar som texten stöder: barnen betalade 31 kronor för glass som kostar 50, och Hugo bjöd på resten.\nEn tanke att pröva: ”Hugo tog pengarna.” Han lägger dit en egen tjugolapp.\nFråga tillbaka: ”Vad visade displayen?”" }
-            - { rubrik: "Fråga 4 · mellan raderna, Det som menas", text: "Ledtrådarna: ”Kassan har stämt varje kväll sedan juni”; ”tittade på skylten och sedan på honom”.\nSvar som texten stöder: hon tror inte på honom och väntar på sanningen.\nEn tanke att pröva: ”Hon tror honom.” Hon påminner om att kassan har stämt.\nFråga tillbaka: ”Vad tittar chefen på?”" }
+            - { rubrik: "Fråga 4 · mellan raderna, Det som menas", text: "Ledtrådarna: ”Kassan har stämt varje kväll sedan juni”; ”tittade på skylten och sedan på honom”.\nSvar som texten stöder: hon anar sanningen och väntar.\nEn tanke att pröva: ”Hon tror honom.” Hon påminner honom om kassan.\nFråga tillbaka: ”Vad tittar chefen på?”" }
             - { rubrik: "Fråga 5 · mellan raderna, Känsla", text: "Ledtrådarna: ”Han torkade av disken, som redan var ren”; ”Hugo sa inget”.\nSvar som texten stöder: skamsen eller orolig.\nEn tanke att pröva: ”Lugn, han står ju och städar.” Disken var redan ren.\nFråga tillbaka: ”Varför torkar han en disk som redan är ren?”" }
             - { rubrik: "Fråga 6 · bortom raderna", text: "Ett bra svar pekar på texten och ger ett eget skäl." }
             - { rubrik: "Öppna frågor", text: "”Vad får Hugo att säga ’Det var jag’ just då?”; ”Vad tror ni att chefen tänker när hon ger honom kronan?”" }
@@ -2107,9 +2912,9 @@ ramar:
             - { rubrik: "Stoppet", text: "Stanna efter ”Ingen, jag menade ingen särskild.” Någon ändrar sig: han tar tillbaka frågan." }
             - { rubrik: "Tänka högt · fråga 4, Det som menas", text: "”Vänta, han säger att han älskar fisk, men det stämmer knappast. Jag ser framför mig hur han sväljer hårt. Det står ’fisk smakade gammal badsvamp’ och ’Ingen, jag menade ingen särskild’. Jag vet att man låtsas tycka om något för att imponera. Alltså tror jag att Emil äter fisk för att imponera på någon. Stämmer det med resten? Jag läser vidare. Hans tallrik är nästan full när han går. Det stämmer.”", kursiv: true }
             - { rubrik: "Fråga 1 · på raderna", text: "Gammal badsvamp." }
-            - { rubrik: "Fråga 2 · mellan raderna, Vem, syftning", text: "Ledtrådarna: ”bredvid salladsbaren satt Wilma”; ”vred huvudet en bit”.\nSvar som texten stöder: Wilma.\nEn tanke att pröva: ”Stella.” Stella frågar ”Vem då”, så hon är inte den han menar.\nFråga tillbaka: ”Åt vilket håll tittar Emil, och vem sitter där?”" }
-            - { rubrik: "Fråga 3 · mellan raderna, Varför", text: "Ledtrådarna: ”svalde hårt”; ”fisk smakade gammal badsvamp”.\nSvar som texten stöder: han sköljer ner fisken eller är nervös. Båda håller när eleven visar en ledtråd.\nEn tanke att pröva: ”Han är törstig.” Han dricker efter tuggorna och sväljer hårt.\nFråga tillbaka: ”Vad sa Emil förra året om hur fisk smakar?”" }
-            - { rubrik: "Fråga 4 · mellan raderna, Det som menas", text: "Ledtrådarna: ”på hennes bricka stod fiskgratäng”; ”du brukar alltid sitta vid fönstret”.\nSvar som texten stöder: att han är kär i Wilma.\nEn tanke att pröva: ”Att han tycker om fisk.” Stella minns att han sa att fisk smakade badsvamp.\nFråga tillbaka: ”Vad åt Wilma, och var brukar Emil sitta?”" }
+            - { rubrik: "Fråga 2 · mellan raderna, Vem, syftning", text: "Ledtrådarna: ”bredvid salladsbaren satt Wilma”; ”vred huvudet en bit”.\nSvar som texten stöder: Wilma.\nEn tanke att pröva: ”Stella.” Stella frågar ”Vem då”, så det är inte hon.\nFråga tillbaka: ”Åt vilket håll tittar Emil, och vem sitter där?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Varför", text: "Ledtrådarna: ”svalde hårt”; ”fisk smakade gammal badsvamp”.\nSvar som texten stöder: han sköljer ner fisken eller är nervös. Båda håller när eleven visar en ledtråd.\nEn tanke att pröva: ”Han är törstig.” Han dricker efter tuggorna.\nFråga tillbaka: ”Vad sa Emil förra året om hur fisk smakar?”" }
+            - { rubrik: "Fråga 4 · mellan raderna, Det som menas", text: "Ledtrådarna: ”på hennes bricka stod fiskgratäng”; ”du brukar alltid sitta vid fönstret”.\nSvar som texten stöder: att han är kär i Wilma.\nEn tanke att pröva: ”Att han tycker om fisk.” Stella minns vad han sa om fisk.\nFråga tillbaka: ”Vad åt Wilma, och var brukar Emil sitta?”" }
             - { rubrik: "Fråga 5 · mellan raderna, Känsla", text: "Ledtrådarna: ”fast hans tallrik var nästan full”; ”utan att se sig om”.\nSvar som texten stöder: nervös, hoppfull eller generad.\nEn tanke att pröva: ”Mätt, för han har ätit klart.” Hans tallrik är nästan full.\nFråga tillbaka: ”Hur mycket fisk ligger kvar på tallriken?”" }
             - { rubrik: "Fråga 6 · bortom raderna", text: "Ett bra svar tar med att Emil aldrig sa det rakt ut." }
             - { rubrik: "Öppna frågor", text: "”Emil viskar ’Vad sa hon egentligen?’ Vad tror ni att hon har sagt?”; ”Stella säger ’Nej då, ät din fisk.’ Vad tror ni att hon menar?”" }
@@ -2206,13 +3011,13 @@ ramar:
         - rubrik: I passet
           falt:
             - { rubrik: "Känsligt", text: "Texten kan beröra en elev med en sjuk förälder eller mycket ansvar hemma. Pressa inte fram ett namn på sjukdomen, och ta ett enskilt samtal om någon blir tyst. Ta inte texterna Samma sak och Kvart i åtta samma vecka." }
-            - { rubrik: "Före läsningen", text: "Vad behöver någon göra hemma varje dag för att vardagen ska fungera?" }
+            - { rubrik: "Före läsningen", text: "Vad behöver någon i familjen göra hemma varje dag?" }
             - { rubrik: "Stoppet", text: "Stanna efter ”Jag sa att det var fusk, men hon sa att det var samma sak.” Något är konstigt: vad är samma sak?" }
             - { rubrik: "Tänka högt · fråga 5, Före och efter", text: "”Vänta, här står inte vad som har hänt. Det står ’Förut brukade hon dansa runt i köket’ och ’mammas stora, runda bokstäver’. Jag vet att en förälder brukar göra sådant. Alltså tror jag att något har hänt med mamma, och Noor har tagit över. Stämmer det med resten? Jag läser vidare. Noor tvättar, dammsuger och hinner inget annat. Det stämmer.”", kursiv: true }
             - { rubrik: "Fråga 1 · på raderna", text: "Berättarens läxlapp." }
-            - { rubrik: "Fråga 2 · mellan raderna, Var och när", text: "Ledtrådarna: ”mammas stängda dörr”; ”brickan från lunchen”.\nSvar som texten stöder: i sitt rum.\nEn tanke att pröva: ”Hon är på jobbet.” Noor ställer maten utanför hennes dörr.\nFråga tillbaka: ”Var ställer Noor maten?”" }
+            - { rubrik: "Fråga 2 · mellan raderna, Var och när", text: "Ledtrådarna: ”mammas stängda dörr”; ”brickan från lunchen”.\nSvar som texten stöder: i sitt rum.\nEn tanke att pröva: ”Hon är på jobbet.” Maten står vid hennes dörr.\nFråga tillbaka: ”Var ställer Noor maten?”" }
             - { rubrik: "Fråga 3 · mellan raderna, Det som menas", text: "Ledtrådarna: ”med mammas stora, runda bokstäver”; ”mamma vilar”.\nSvar som texten stöder: att det blir lika rätt, eftersom mamma inte orkar.\nEn tanke att pröva: ”Att det är fusk.” Fusk är berättarens ord.\nFråga tillbaka: ”Vem brukar skriva under?”" }
-            - { rubrik: "Fråga 4 · mellan raderna, Känsla", text: "Ledtrådarna: ”med ögonen nästan stängda”; ”för första gången på hela dagen”.\nSvar som texten stöder: trött, ensam eller lättad över att få sätta sig.\nEn tanke att pröva: ”Arg, för hon svarar kort.” Hon viker strumpor halvsovande.\nFråga tillbaka: ”När sätter sig Noor ner?”" }
+            - { rubrik: "Fråga 4 · mellan raderna, Känsla", text: "Ledtrådarna: ”med ögonen nästan stängda”; ”för första gången på hela dagen”.\nSvar som texten stöder: trött, ensam eller lättad över att få sätta sig.\nEn tanke att pröva: ”Arg, för hon svarar kort.” Hon somnar nästan.\nFråga tillbaka: ”När sätter sig Noor ner?”" }
             - { rubrik: "Fråga 5 · mellan raderna, Före och efter", text: "Ledtrådarna: ”Förut brukade hon dansa”; ”Hon har vilat hela veckan”.\nSvar som texten stöder: mamma är sjuk eller mår dåligt, och Noor har tagit över. Båda håller när eleven visar en ledtråd.\nEn tanke att pröva: ”Inget, hon är tråkig.” Mamma har vilat hela veckan.\nFråga tillbaka: ”Vad gör Noor som mamma gjorde förut?”" }
             - { rubrik: "Fråga 6 · bortom raderna", text: "Ett bra svar tar med vad berättaren gör." }
             - { rubrik: "Öppna frågor", text: "”Noor säger ’Jag hinner inte.’ Vad tror ni att hon helst hade velat göra?”; ”Noors mobil surrar tills hon vänder den nedåt. Vem kan det vara?”" }
@@ -2331,6 +3136,177 @@ ramar:
             - { rubrik: "Fråga 5 · bortom raderna", text: "Ett svar kan vara att knacka på, eftersom man då får svar direkt, eller att skriva brev, eftersom det är lättare att skriva det som är svårt att säga. Ett bra svar tar med kuvertet och ger ett eget skäl." }
             - { rubrik: "Öppna frågor", text: "”Vad tror ni att grannen gör när hen har läst brevet?”; ”I måndags var det tyst i 4B, och i tisdags också. Vad tror ni har hänt?”" }
             - { rubrik: "Om eleven fastnar", text: "Peka på ”I måndags var det tyst. I tisdags också.”" }
+    - rubrik: "Lärarens sida: Avancerad, text 16, Fröken Lanes ärende"
+      text:
+        - "Det som står mellan raderna: Väninnan är fröken Lane själv. Bara Hollis förstår det."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Stilen", text: "I Arthur Conan Doyles stil, som i berättelserna om Sherlock Holmes: vännen berättar, och detektiven läser detaljer. Läs lugnt. Läs vidare: Sherlock Holmes äventyr." }
+            - { rubrik: "Före läsningen", text: "Vad gör en detektiv?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”Hon har inte sovit sedan dess, och på fredag kommer frun hem.” Något är konstigt: hon kommer själv, och ena handen är i fickan." }
+            - { rubrik: "Tänka högt · fråga 3, Vem", text: "”Vänta, varför kommer hon själv för en väninnas skull? Jag ser henne framför mig med ena handen i fickan. Det står ’Hon plockade upp bitarna med bara händerna’, och det står ’Hon har inte sovit sedan dess’. Jag vet att den som skurit sig kan gömma handen. Alltså tror jag att väninnan kan vara fröken Lane själv. Stämmer det? Jag läser vidare. Hon har en näsduk runt fingret. Ja, det stämmer.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Den vänstra." }
+            - { rubrik: "Fråga 2 · mellan raderna, Var och när", text: "Ledtrådarna: ”gaslyktorna”; ”en häst förbi med en droska”; ”brasan”.\nSvar som texten stöder: för länge sedan, innan bilarna var vanliga.\nEn tanke att pröva: ”I vår tid, de läser ju tidningen.” Gaslyktor och droskor är mycket ovanliga på gatorna i dag.\nFråga tillbaka: ”Hur lyser gatorna?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Vem", text: "Ledtrådarna: ”med bara händerna”; ”Runt pekfingret satt en näsduk”; ”Fröken Lane stoppade snabbt handen i fickan igen”; ”Jag vet ingenting om någon väninna”.\nSvar som texten stöder: fröken Lane själv.\nEn tanke att pröva: ”En annan flicka i huset.” Det är fröken Lane som har såret. Eller ”Hollis känner inte väninnan.” Han menar att det inte finns någon väninna.\nFråga tillbaka: ”Vem har Hollis sett ett sår på?”" }
+            - { rubrik: "Fråga 4 · mellan raderna, Känsla", text: "Ledtrådarna: ”stoppade snabbt handen i fickan igen”; ”Hon tackade två gånger”.\nSvar som texten stöder: generad, eller lättad och tacksam. Båda håller med en ledtråd.\nEn tanke att pröva: ”Arg på Hollis.” Hon tackar honom." }
+            - { rubrik: "Fråga 5 · bortom raderna", text: "Bra, eftersom han hjälper henne, eller obehagligt, eftersom ingen kan ha en hemlighet för honom. Ett bra svar tar med något Hollis ser." }
+            - { rubrik: "Öppna frågor", text: "”Vad tror ni att fröken Lane gör på fredag?”; ”Varför tror ni att berättaren aldrig förstår vad Hollis menade?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på näsduken. Förklara gärna att väninna är ett ord från förr för en vän som är kvinna, och att en droska är en vagn som en häst drar." }
+    - rubrik: "Lärarens sida: Avancerad, text 17, Tio i elva"
+      text:
+        - "Det som står mellan raderna: Att ha is i magen betyder att hålla sig lugn när det är bråttom. Lejla tar uttrycket bokstavligt, och Henry visar betydelsen."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Före läsningen", text: "Har du någon gång missförstått vad någon menade? Vad hände?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”’Du är nog den första som har gjort det på riktigt’, sa han.” Något är konstigt." }
+            - { rubrik: "Tänka högt · fråga 3, Ordet", text: "”Vänta, varför skrattar Henry? Jag ser Lejla framför mig vid frysen. Det står ’Nu gäller det att ha is i magen’, och det står ’Du är nog den första som har gjort det på riktigt’. Jag vet att ett uttryck kan betyda något annat än orden säger. Alltså tror jag att Henry inte menade riktig is. Stämmer det? Jag läser vidare. Henry vänder fiskbitarna en i taget. Nu tror jag att det betyder att vara lugn.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Tre." }
+            - { rubrik: "Fråga 2 · mellan raderna, Känsla", text: "Ledtrådarna: ”Lejla stod still en sekund”; ”öppnade hon frysen”; ”tuggade i sig dem en i taget”.\nSvar som texten stöder: förvirrad, osäker, nervös eller ivrig att göra rätt.\nEn tanke att pröva: ”Hon är törstig.” Hon tar isen direkt efter Henrys ord.\nFråga tillbaka: ”Vad gör Lejla direkt efter att Henry har gått?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Ordet", text: "Ledtrådarna: ”Nu gäller det att ha is i magen”; ”som om han hade hela eftermiddagen på sig”; ”Hon skar långsammare”.\nSvar som texten stöder: att vara lugn när det är mycket att göra.\nEn tanke att pröva: ”Att äta is.” Det är vad Lejla tror först, och Henry skrattar åt det. Den som kan uttrycket behöver också visa en ledtråd.\nFråga tillbaka: ”Var i texten ser vi att det betyder så i köket?”" }
+            - { rubrik: "Fråga 4 · mellan raderna, Det som menas", text: "Ledtrådarna: ”ett helt fotbollslag”; ”Ha is i magen”; ”Henry log ned i stekpannan”.\nSvar som texten stöder: hon skämtar om sitt misstag, eller hon vill hjälpa servitrisen att bli lugn, eller hon visar Henry att hon har förstått uttrycket. Alla håller med en ledtråd.\nEn tanke att pröva: ”Servitrisen var törstig.” Lejla säger samma ord som Henry.\nFråga tillbaka: ”Vem har sagt ’Ha is i magen’ förut?”" }
+            - { rubrik: "Fråga 5 · bortom raderna", text: "Ett svar kan vara att Henry borde ha förklarat, så att Lejla slapp äta is, eller att hon lärde sig mer av att titta. Ett bra svar tar med något Henry gör." }
+            - { rubrik: "Öppna frågor", text: "”Lejla skrattar fast hon inte vet åt vad. Varför gör hon det, och finns det fler sätt det kan vara?”; ”Vad tror ni att Henry tänker när han ler?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”som om han hade hela eftermiddagen på sig”." }
+    - rubrik: "Lärarens sida: Avancerad, text 18, Stenhuset"
+      text:
+        - "Det som står mellan raderna: Jätten tänker äta upp Pim och vill veta om någon saknar honom. Pim förstår och ljuger."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Stilen", text: "I J.R.R. Tolkiens stil, som i Hobbiten: en berättare som talar till läsaren och ett artigt hot. Läs torrt. Läs vidare: Hobbiten." }
+            - { rubrik: "Före läsningen", text: "Vad brukar hända i sagor när någon går vilse och knackar på en okänd dörr?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”’Det blåser in annars’, förklarade han.” Något är konstigt." }
+            - { rubrik: "Tänka högt · fråga 2, Varför", text: "”Vänta. Han låser två gånger för att det blåser? Jag ser framför mig en jätte som bugar och sedan vrider om nyckeln. Det står ’vred om nyckeln två gånger’ och ’Det blåser in annars’. Jag vet att en stängd dörr räcker mot blåsten. Man låser mot människor, och här finns bara Pim. Alltså tror jag att han inte vill att Pim ska gå. Stämmer det? Jag läser vidare. Vattnet i grytan har just börjat koka. Något är fel här.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "En." }
+            - { rubrik: "Fråga 2 · mellan raderna, Varför", text: "Ledtrådarna: ”vred om nyckeln två gånger”; ”Det blåser in annars”; ”Då ska jag inte hålla dig kvar”.\nSvar som texten stöder: så att Pim inte ska kunna gå därifrån.\nEn tanke att pröva: ”För att det blåser, det säger han ju.” En stängd dörr håller blåsten ute, men han låser två gånger.\nFråga tillbaka: ”Behöver man låsa för att hålla blåsten ute?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Det som menas", text: "Ledtrådarna: ”en gryta som var stor nog att bada i”; ”vattnet hade just börjat koka”; ”På bordet stod en enda tallrik”.\nSvar som texten stöder: han vill veta om någon skulle sakna Pim om han åt upp honom.\nEn tanke att pröva: ”Han är nyfiken på Pims släkt.” Då hade han dukat för två.\nFråga tillbaka: ”Vad tittar Pim på innan han svarar?”" }
+            - { rubrik: "Fråga 4 · mellan raderna, Det som menas", text: "Ledtrådarna: ”Jätten tittade länge mot fönstret”; ”Vilken stor släkt för ett så litet folk”.\nSvar som texten stöder: ja, han blir rädd, eller nej, han ser lögnen. Båda håller med en ledtråd.\nEn tanke att pröva: ”Han släpper Pim för att han är snäll.” Han låste dörren och dukade bara för en.\nFråga tillbaka: ”Vad gör jätten innan han skrattar?”" }
+            - { rubrik: "Fråga 5 · bortom raderna", text: "Ett eget svar, som att släkten väntar utanför eller att man har en smittsam sjukdom. Ett bra svar säger varför jätten skulle tro på det, med något som jätten gör i texten." }
+            - { rubrik: "Öppna frågor", text: "”Jätten ger Pim en bit sockerkaka för vägen. Varför tror ni att han gör det?”; ”Vad tror ni att Pim berättar hemma om jätten?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”en enda tallrik”. Förklara gärna att vrida om nyckeln är att låsa." }
+    - rubrik: "Lärarens sida: Avancerad, text 19, I hallen"
+      text:
+        - "Det som står mellan raderna: Berättaren är en hjälpare i familjen, troligen en maskin, som förstår mindre än läsaren. Esme och Ylva driver med Elvira, som blir sårad."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Känsligt", text: "Texten handlar om att bli hånad. Låt samtalet handla om personerna i texten." }
+            - { rubrik: "Stilen", text: "I Kazuo Ishiguros stil, som i Klara och solen: en lugn, artig berättare som återger mer än den förstår. Läs sakligt. Läs vidare: Klara och solen." }
+            - { rubrik: "Före läsningen", text: "Vad kan man se på människor, utöver det de säger?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”’Har du sytt den själv? Vad modigt.’” Något är konstigt." }
+            - { rubrik: "Tänka högt · fråga 2, Det som menas", text: "”Vänta, modigt att ha en tröja? Jag ser framför mig Ylva som böjer sig fram mot stjärnan som Elvira har sytt. Det står ’Så litet och gulligt’ om hemmet, och nu ’Vad modigt’ om tröjan. Jag vet att man kan säga något som låter snällt och mena att det är fånigt. Alltså tror jag att Ylva driver med Elvira. Stämmer det? Jag läser vidare. De skrattar, fast ingen har sagt något roligt. Ja, det stämmer.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Att det var bra att Elvira äntligen hade fått vänner." }
+            - { rubrik: "Fråga 2 · mellan raderna, Det som menas", text: "Ledtrådarna: ”Så litet och gulligt”; ”Vad modigt”; ”skrattade, fast ingen hade sagt något roligt”.\nSvar som texten stöder: Ylva menar att tröjan är fånig.\nEn tanke att pröva: ”Hon tycker att det är modigt att sy.” Då hade de inte tittat på varandra och skrattat.\nFråga tillbaka: ”Vad gör flickorna sedan?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Känsla", text: "Ledtrådarna: ”drog hon av sig tröjan, fast den inte var smutsig”; ”Jag har lite ont i huvudet”; ”Jag stannar hemma”.\nSvar som texten stöder: sårad eller ledsen.\nEn tanke att pröva: ”Sjuk, hon har ju ont i huvudet.” Hon kan ha ont och vara ledsen samtidigt.\nFråga tillbaka: ”Vad gör hon med tröjan efter besöket?”" }
+            - { rubrik: "Fråga 4 · mellan raderna, Varför", text: "Ledtrådarna: ”så bra att Elvira äntligen hade fått vänner”; ”Jag har lite ont i huvudet”.\nSvar som texten stöder: hon vill inte göra mamma ledsen, eller hon skäms. Båda håller med en ledtråd.\nEn tanke att pröva: ”Mamma blir arg om hon stannar hemma.” Det står inget om att mamma blir arg.\nFråga tillbaka: ”Vad sa mamma vid frukosten?”" }
+            - { rubrik: "Fråga 5 · bortom raderna", text: "Berätta för mamma, som kan hjälpa, eller göra som Elvira bad. Ett bra svar tar med det Elvira bad om och vad hjälparen gör med tröjan." }
+            - { rubrik: "Öppna frågor", text: "”Vad tänkte Elvira framför spegeln?”; ”Varför kom Esme och Ylva?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”skrattade, fast ingen hade sagt något roligt”." }
+    - rubrik: "Lärarens sida: Avancerad, text 20, Språnget"
+      text:
+        - "Det som står mellan raderna: Barnen bor på en rymdstation och ser en blå och vit värld genom fönstret. Aylin är ny, och Omid hämtar henne snabbt eftersom han själv har hängt där."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Stilen", text: "I Ray Bradburys stil, som i hans noveller om framtiden: ljud och dofter, och vardagsord om det främmande. Läs långsamt och drömskt. Läs vidare: Fahrenheit 451." }
+            - { rubrik: "Före läsningen", text: "Vad brukar en grupp göra när någon ny kommer?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”Där inne fanns inget upp och inget ned.” Något är konstigt: rummet har inget golv." }
+            - { rubrik: "Tänka högt · fråga 2, Var och när", text: "”Vänta, här står inte var de är. Jag ser framför mig en rund hall med väggar som är mjuka som täcken. Det står ’Barnen hängde i det runda fönstret’, och det står ’Där inne fanns inget upp och inget ned’. Jag vet att man svävar i rymden. Alltså tror jag att de bor på en rymdstation. Stämmer det? Jag läser vidare. Genom fönstret rullar en blå och vit värld förbi. Ja, det stämmer.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Räcket." }
+            - { rubrik: "Fråga 2 · mellan raderna, Var och när", text: "Ledtrådarna: ”också när hon åt”; ”inget upp och inget ned”; ”en blå och vit värld”.\nSvar som texten stöder: på en rymdstation.\nEn tanke att pröva: ”Under vattnet.” Fisken är en liknelse, och genom fönstret syns moln.\nFråga tillbaka: ”Vad syns genom fönstret?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Känsla", text: "Ledtrådarna: ”med armarna ute”; ”Barnens skratt fyllde hallen”; ”slutade sparka med benen”.\nSvar som texten stöder: rädd, ensam och generad, eller stilla och förundrad när hon ser världen. Båda håller med en ledtråd.\nEn tanke att pröva: ”Glad, barnen skrattar ju.” De skrattar åt henne.\nFråga tillbaka: ”Vad gör Aylin när hon ser världen?”" }
+            - { rubrik: "Fråga 4 · mellan raderna, Varför", text: "Ledtrådarna: ”sin första vecka”; ”som var äldst”; ”Han var hos henne innan någon hade hunnit sluta skratta”.\nSvar som texten stöder: han vet själv hur det är att hänga där som ny, eller han känner ansvar som äldst. Båda håller med en ledtråd.\nEn tanke att pröva: ”Han vill visa sig duktig.” Det står inget om att han vill synas.\nFråga tillbaka: ”Vad hände Omid själv, sin första vecka?”" }
+            - { rubrik: "Fråga 5 · bortom raderna", text: "Bra, eftersom alla har gjort det, eller dåligt, eftersom den nya blir utskrattad. Ett bra svar tar med något Aylin eller Omid gör." }
+            - { rubrik: "Öppna frågor", text: "”Varför tror ni att den som skrev texten aldrig säger var barnen bor?”; ”Aylin slutar sparka när hon ser världen. Vad tror ni att hon tänker på?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”Där inne fanns inget upp och inget ned”." }
+    - rubrik: "Lärarens sida: Avancerad, text 21, Kaktus"
+      text:
+        - "Det som står mellan raderna: Kaktus byter betydelse, och Bea trivs."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Läs högt", text: "Läs namnet och klockslaget lugnt före varje meddelande, så att eleverna hinner följa med på sitt blad." }
+            - { rubrik: "Före läsningen", text: "Vilka ord betyder något eget bland kompisar?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”NEJ, vänta, inte kaktus, glöm att jag skrev det.” Någon ändrar sig." }
+            - { rubrik: "Tänka högt · fråga 3, Varför", text: "”Vänta, hon tog tillbaka kaktus efter en minut. Varför då? Jag ser framför mig Bea vid bordet hos grannarna. Det står ’Ringer om en minut’, och det står ’NEJ, vänta, inte kaktus’. Jag vet att man kan ändra sig om något bra händer. Alltså tror jag att något hände just då. Stämmer det? Jag läser vidare. En fisk heter Kaktus. Ja, kanske skrev hon om den, och inte om ordet.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "21.52." }
+            - { rubrik: "Fråga 2 · mellan raderna, Ordet", text: "Ledtrådarna: ”kom ihåg ordet”; ”Ett ord, så ringer vi”; ”Ringer om en minut”.\nSvar som texten stöder: ett hemligt ord för att bli räddad.\nEn tanke att pröva: ”En växt.” Ingen pratar om växter." }
+            - { rubrik: "Fråga 3 · mellan raderna, Varför", text: "Ledtrådarna: ”NEJ, vänta, inte kaktus”; ”Gabriel har en fisk som heter Kaktus”; ”Kanske.”\nSvar som texten stöder: hon ville bli räddad men ändrade sig, eller menade fisken. Båda håller med en ledtråd.\nEn tanke att pröva: ”Hon hade tråkigt hela kvällen.” Hon vill tillbaka på torsdag." }
+            - { rubrik: "Fråga 4 · mellan raderna, Det som menas", text: "Ledtrådarna: ”klockan är snart tio”; ”den äter ur handen, och jag fick mata den”; ”Vem är du, och vad har du gjort med Bea?”; ”någon måste ju mata Kaktus”.\nSvar som texten stöder: att hon vill dit igen för att hon trivdes, kanske tack vare Gabriel, eller för att hon blev förtjust i fisken. Fisken är skälet hon ger.\nEn tanke att pröva: ”Fisken behöver mat.” Gabriel kan mata sin egen fisk.\nFråga tillbaka: ”Vem bor med fisken?”" }
+            - { rubrik: "Fråga 5 · bortom raderna", text: "Ja, för kompisarna hade retats, eller nej, för kompisar ska få veta och de ville hjälpa henne. Ett bra svar tar med något som Nellie eller Dawit skriver." }
+            - { rubrik: "Öppna frågor", text: "”Vad tror ni att kaktus betyder från och med nu?”; ”Vad tror ni att Gabriel vet om ordet kaktus?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”Ett ord, så ringer vi”. Frågar eleven vad ”Vem är du, och vad har du gjort med Bea?” betyder, fråga tillbaka: ”Vad har Bea skrivit just innan?”" }
+    - rubrik: "Lärarens sida: Avancerad, text 22, Springan"
+      text:
+        - "Det som står mellan raderna: Flera före Asta har varit med om samma sak, och Asta, som är ensam, välkomnar det nu."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Känsligt", text: "Elever som har flyttat eller är nya i skolan kan känna igen sig i Asta. Den som vill får berätta, men låt samtalet handla om Asta." }
+            - { rubrik: "Stilen", text: "I Maria Gripes stil, som i Agnes Cecilia: ett gammalt hus och något från förr. Läs lugnt. Läs vidare: Agnes Cecilia, som finns som lättläst bok." }
+            - { rubrik: "Före läsningen", text: "Vad kan man höra i ett gammalt hus?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”Jag hade inte vaknat, fast jag sover lätt.” Något är konstigt." }
+            - { rubrik: "Tänka högt · fråga 3, Vem", text: "”Vänta, vem stänger fönstret? Jag ser framför mig en bok på golvet och ett stängt fönster. Det står ’fönstret var stängt’, och det står ’Jag hade inte vaknat, fast jag sover lätt’. Jag vet att man vaknar av steg i rummet. Alltså tror jag att något stänger det mycket tyst. Stämmer det? Jag läser vidare. Fönstret skakar i blåsten, men på lappen står ’Tack, Dagny.’ Det kan vara blåsten eller Dagny.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Tre." }
+            - { rubrik: "Fråga 2 · mellan raderna, Före och efter", text: "Ledtrådarna: ”en gulnad lapp”; ”varje rad var skriven med en egen handstil”; ”Det stämmer.”\nSvar som texten stöder: flera före Asta skrev till varandra och till Dagny om samma sak.\nEn tanke att pröva: ”Någon har gömt en lapp till Asta.” Lappen är gulnad och har tre handstilar.\nFråga tillbaka: ”Hur många hade skrivit på lappen före Asta?” Säger eleven att Dagny bodde där, håller det. Fråga sedan: ”Vilka mer har bott i rummet?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Vem", text: "Ledtrådarna: ”DAGNY 1921”; ”Tack, Dagny”; ”fönstret skakar när det blåser”; ”regnar det alltid”; ”Jag hade inte vaknat, fast jag sover lätt”.\nSvar som texten stöder: Dagny eller blåsten. Båda håller.\nEn tanke att pröva: ”Mamma.” Mamma säger att hon inte rör fönstret.\nFråga tillbaka: ”Vad säger mamma?”" }
+            - { rubrik: "Fråga 4 · mellan raderna, Varför", text: "Ledtrådarna: ”ställde jag en bok i springan”; ”Låt springan vara”; ”öppnar jag fönstret lite mer än vanligt”.\nSvar som texten stöder: nu välkomnar hon det, kanske av ensamhet.\nEn tanke att pröva: ”Hon vill ha mer luft.” Det skälet finns redan i början.\nFråga tillbaka: ”Vad är nytt när Asta har läst lappen?”" }
+            - { rubrik: "Fråga 5 · bortom raderna", text: "Öppna, för att det verkar snällt, eller stänga, för att det är kusligt. Ett bra svar tar med något ur lappen." }
+            - { rubrik: "Öppna frågor", text: "”Vad tror ni att Asta skrev på den fjärde raden?”; ”Vad skulle mamma säga om lappen?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”en egen handstil”. När du läser titeln förklarar du att en springa är ett smalt mellanrum när fönstret står lite öppet." }
+    - rubrik: "Lärarens sida: Avancerad, text 23, Molnet"
+      text:
+        - "Det som står mellan raderna: Tiri låter bli att kalla molnet, för då blir den andra ön utan regn. Trollkarlen säger inget, men brödbiten visar att han har sett hennes val."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Stilen", text: "I Ursula K. Le Guins stil, som i Trollkarlen från Övärlden: få ord och en tyst lärare. Läs långsamt. Läs vidare: Trollkarlen från Övärlden." }
+            - { rubrik: "Före läsningen", text: "Vad händer med djur när det inte regnar på länge?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”’Lyssna’, sa han bara.” Något är konstigt." }
+            - { rubrik: "Tänka högt · fråga 2, Ordet", text: "”Vänta, lyssna på vad? Jag ser framför mig trollkarlen som lagar sitt nät utan att titta upp. Det står ’mest fick hon vänta och lyssna’, och nu säger han bara ’Lyssna’. Jag vet att en lärare ibland säger lite för att eleven ska tänka själv. Alltså tror jag att lyssna här betyder att märka allt omkring sig innan man gör något. Stämmer det? Jag läser vidare. Hon hör getterna, vinden och en hund långt borta. Ja, det stämmer.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Mot den andra ön." }
+            - { rubrik: "Fråga 2 · mellan raderna, Ordet", text: "Ledtrådarna: ”mest fick hon vänta och lyssna”; ”Hon stod länge så”; ”en hund som skällde på den andra ön”.\nSvar som texten stöder: att märka allt innan man gör något, eller att höra att det finns liv på den andra ön, som också behöver regnet. Båda håller med en ledtråd.\nEn tanke att pröva: ”Att höra vad han säger.” Han säger ingenting mer.\nFråga tillbaka: ”Vad hör Tiri?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Varför", text: "Ledtrådarna: ”Det drev sakta mot den andra ön”; ”där gräset var lika gult som här”; ”Sedan stängde hon munnen”.\nSvar som texten stöder: om hon kallar molnet hit, får den andra ön inget regn, och där behöver de det lika mycket.\nEn tanke att pröva: ”Hon har glömt namnet.” Hon kunde namnet och öppnade munnen. Eller ”Man säger det aldrig i onödan.” Getterna är törstiga, så det vore inte i onödan.\nFråga tillbaka: ”Vart är molnet på väg, och vem bor där?”" }
+            - { rubrik: "Fråga 4 · mellan raderna, Varför", text: "Ledtrådarna: ”Hon stod länge så”; ”gick efter hinkarna”; ”en extra brödbit åt henne”.\nSvar som texten stöder: han är stolt över hennes val, eller han tröstar henne. Båda håller med en ledtråd.\nEn tanke att pröva: ”Han hade bröd över.” Brödet kommer efter valet.\nFråga tillbaka: ”När lägger han fram brödet?”" }
+            - { rubrik: "Fråga 5 · bortom raderna", text: "Ja, för den andra ön behöver regnet lika mycket och molnet var på väg dit, eller nej, för hennes egna getter och brunnen kommer först. Ett bra svar tar med något från båda öarna." }
+            - { rubrik: "Öppna frågor", text: "”Vad tror ni att Tiri gör om torkan fortsätter?”; ”Det står att molnens namn inte är vanliga ord. Vad kan ett sant namn vara?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”där gräset var lika gult som här”." }
+    - rubrik: "Lärarens sida: Avancerad, text 24, I gryningen"
+      text:
+        - "Det som står mellan raderna: Båten har kört på stenen i natt, men vem som styrde sägs inte."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Stilen", text: "I Ernest Hemingways stil, som i Den gamle och havet: korta repliker, och det viktigaste sägs aldrig. Läs lugnt, med pauser. Läs vidare: Den gamle och havet." }
+            - { rubrik: "Före läsningen", text: "Vad är viktigt när man åker båt?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”Pojken hade alltid vetat var stenen låg.” Något är konstigt." }
+            - { rubrik: "Tänka högt · fråga 2, Före och efter", text: "”Vänta, ingen av dem tittar på stenen. Jag ser framför mig den blå båten vid stenen. Det står ’propellern var böjd’, och det står ’hade stenen en rand av blå färg’. Jag vet att en båt kan få en böjd propeller och lämna färg om den kör på en sten. Alltså tror jag att båten körde på stenen i natt. Stämmer det? Jag läser vidare. Pappan säger ’Det var tjock dimma i natt’. Det stämmer.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Blåbärssaft." }
+            - { rubrik: "Fråga 2 · mellan raderna, Före och efter", text: "Ledtrådarna: ”propellern var böjd”; ”den blå båten”; ”en rand av blå färg”; ”Det var tjock dimma i natt”.\nSvar som texten stöder: att båten körde på stenen i natt. Vem som styrde sägs inte, och eleverna kan tänka olika, men pojkens skam och pappans tröst pekar på pojken.\nEn tanke att pröva: ”Motorn gick sönder av sig själv.” Det förklarar inte den blå randen på stenen.\nFråga tillbaka: ”Var syns blått?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Känsla", text: "Ledtrådarna: ”Pojken tittade inte på motorn”; ”Det var pappans tur att ro”; ”Jag kan ro hela vägen”.\nSvar som texten stöder: han skäms eller ångrar sig.\nEn tanke att pröva: ”Glad, han tycker om att ro.” Han ror fast det är pappans tur och tittar bort från motorn.\nFråga tillbaka: ”Vems tur var det att ro?”" }
+            - { rubrik: "Fråga 4 · mellan raderna, Det som menas", text: "Ledtrådarna: ”I sådan dimma ser man ingenting”; ”kaffe i två plåtmuggar”; ”handen på pojkens axel”; ”Pappan tittade länge på honom”.\nSvar som texten stöder: att det inte var pojkens fel, eller att det hade kunnat hända vem som helst, också pappan. Båda håller med en ledtråd.\nEn tanke att pröva: ”Han pratar om vädret.” Dimman var i natt, och han nämner stenarna.\nFråga tillbaka: ”Vilken sten?”" }
+            - { rubrik: "Fråga 5 · bortom raderna", text: "Ja, pojken behöver ord, eller nej, handen räcker. Ett bra svar tar med något pappan gör." }
+            - { rubrik: "Öppna frågor", text: "”Vad tänkte pappan i natt?”; ”Vad vill pojken säga?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”blå färg”. Förklara gärna att propellern är det som snurrar under motorn och driver båten framåt." }
+    - rubrik: "Lärarens sida: Avancerad, text 25, Det gröna"
+      text:
+        - "Det som står mellan raderna: Farmor låtsas glömma så att Adrian ska komma tillbaka."
+      delar:
+        - rubrik: I passet
+          falt:
+            - { rubrik: "Känsligt", text: "Någon i gruppen kan ha en äldre släkting som glömmer. Texten säger inget om en sjukdom, och samtalet behöver inte göra det. Låt det handla om farmor och Adrian." }
+            - { rubrik: "Före läsningen", text: "Vad är svårt med en ny mobil för en äldre person?" }
+            - { rubrik: "Stoppet", text: "Stanna efter ”Det måste ha varit telefonen själv.” Ord och handling säger olika." }
+            - { rubrik: "Tänka högt · fråga 4, Varför", text: "”Vänta, det här passar inte ihop. Jag ser framför mig farmor med blocket. Det står ’Jag har så dåligt minne nu för tiden’, och det står ’i söndags ringde du ju till mig’. Jag vet att en telefon inte ringer själv. Alltså undrar jag om farmor verkligen glömmer så mycket som hon säger. Stämmer det? Jag läser vidare. När Adrian har gått trycker hon snabbt med tummen. Ja, nu förstår jag: hon kan ringa.”", kursiv: true }
+            - { rubrik: "Fråga 1 · på raderna", text: "Till stranden." }
+            - { rubrik: "Fråga 2 · mellan raderna, Det som menas", text: "Ledtrådarna: ”en äppelkaka som räcker till sex personer”; ”Det säger du varje gång”.\nSvar som texten stöder: hon bakar så att Adrian stannar.\nEn tanke att pröva: ”Hon bakade för mycket av misstag.” Det händer varje gång, säger Adrian.\nFråga tillbaka: ”Hur ofta säger farmor så?”" }
+            - { rubrik: "Fråga 3 · mellan raderna, Varför", text: "Ledtrådarna: ”lägger den med skärmen nedåt”; ”där har jag varit förut”; ”han låter den ligga”.\nSvar som texten stöder: han vill hellre vara hos farmor, eller vill inte att hon känner sig i vägen. Båda håller med en ledtråd.\nEn tanke att pröva: ”Han är osams med kompisarna.” Det står inget om bråk.\nFråga tillbaka: ”Vad svarar Adrian när farmor säger ’Gå du, vännen’?”" }
+            - { rubrik: "Fråga 4 · mellan raderna, Varför", text: "Ledtrådarna: ”i söndags ringde du ju till mig”; ”trycker snabbt med tummen”; ”jag har inte lärt mig än”.\nSvar som texten stöder: hon kan ringa och låtsas glömma, så att Adrian kommer.\nEn tanke att pröva: ”Farmor lärde sig till slut.” Hon ringde redan i söndags. Eller ”Hon säger ju att hon inte har lärt sig.” Hon säger det med telefonen mot örat.\nFråga tillbaka: ”Vad gör farmor medan hon säger det?”" }
+            - { rubrik: "Fråga 5 · bortom raderna", text: "Ett svar kan vara att stanna, för farmor har bakat och väntar, eller att gå, för farmor säger ”Gå du”. Ett bra svar tar med något ur texten." }
+            - { rubrik: "Öppna frågor", text: "”Adrian säger ’i söndags ringde du ju till mig’. Vad tror ni att han tänker då?”; ”Vad tror ni att Adrian och farmor skulle säga om de var ärliga?”" }
+            - { rubrik: "Om eleven fastnar", text: "Peka på ”i söndags ringde du ju till mig”." }
     - rubrik: "Lärarens sida: Avancerad, kartläggning före, Lappen"
       text:
         - "Det som står mellan raderna: Amira är nervös men bestämd inför ett samtal och väntar i ett bageri en fredagseftermiddag."
@@ -2678,6 +3654,206 @@ ramar:
             - ["3. Hur känner sig Joel när det är tyst i 4B? Hur vet du det?"]
             - ["4. Vad förstår du i slutet som du inte förstod i början? Hur vet du det?"]
             - ["5. Joel skriver ett brev i stället för att knacka på dörren. Vad hade du gjort i hans ställe? Varför?"]
+    - rubrik: "Avancerad, text 16: Fröken Lanes ärende"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Avancerad, text 16." }
+      listor:
+        - rubrik: "Fröken Lanes ärende"
+          rader:
+            - ["Det var en av de kvällar då dimman låg så tät över staden att gaslyktorna bara syntes som gula fläckar. Hollis hade suttit tyst vid brasan i två timmar, och jag hade läst samma sida i tidningen fyra gånger. Strax efter nio klapprade en häst förbi med en droska, och snart hörde vi snabba steg i trappan. En ung kvinna kom in. Under den grå kappan hade hon ett vitt förkläde, och vänster hand höll hon gömd i fickan."]
+            - ["”Jag heter Lane, och jag kommer för en väninnas skull”, sa hon. ”Hon arbetar som jag, hos en fin familj. I tisdags tappade hon fruns finaste skål, och den gick i hundra bitar. Hon plockade upp bitarna med bara händerna och gömde dem under sin säng. Hon har inte sovit sedan dess, och på fredag kommer frun hem.”\nMedan hon talade tog hon upp vänster hand ur fickan och strök håret ur pannan. Runt pekfingret satt en näsduk med en liten röd fläck."]
+            - ["Hollis hämtade en liten burk ur skåpet. ”Hundra bitar kan ingen laga”, sa han. ”Men frun märker det ändå, och hon blir mindre arg på den som berättar själv. Ge er väninna den här salvan. Ett sår från porslin ska inte sitta under en smutsig näsduk.” Fröken Lane stoppade snabbt handen i fickan igen. Hon tackade två gånger och var borta innan jag hann resa mig. Senare frågade jag Hollis hur han kunde veta att väninnan hade skurit sig. ”Jag vet ingenting om någon väninna”, sa han. Jag förstår fortfarande inte vad han menade."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Vilken hand håller fröken Lane gömd i fickan?"]
+            - ["2. Händer berättelsen i vår tid eller för länge sedan? Vad i texten får dig att tro det?"]
+            - ["3. Vem är väninnan som fröken Lane berättar om? Vad i texten får dig att tro det?"]
+            - ["4. Hur känner sig fröken Lane när hon går? Hur vet du det?"]
+            - ["5. Hollis lägger märke till små saker hos dem som kommer till honom. Är det en bra förmåga eller något obehagligt? Varför?"]
+    - rubrik: "Avancerad, text 17: Tio i elva"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Avancerad, text 17." }
+      listor:
+        - rubrik: "Tio i elva"
+          rader:
+            - ["Klockan var tio i elva, och om tio minuter skulle restaurangen öppna. I köket fräste löken i stora pannor, ugnarna brummade och någon ropade efter fler tallrikar. Lejla hade prao och hade fått skära gurka. Skivorna blev tjocka och tunna om vartannat, och två gånger tappade hon kniven på golvet. Kocken Henry tittade på henne över grytorna.\n”Nu gäller det att ha is i magen”, sa han och gick ut i kylrummet."]
+            - ["Lejla stod still en sekund. Sedan öppnade hon frysen, tog tre isbitar och tuggade i sig dem en i taget. Det knastrade i hela huvudet, och det gjorde ont i tänderna. När Henry kom tillbaka frågade han vad hon gjorde vid frysen.\n”Jag har is i magen nu”, sa Lejla. ”Tre bitar.”\nHenry skrattade så att han fick hålla sig i diskbänken, och Lejla skrattade också, fast hon inte visste åt vad.\n”Du är nog den första som har gjort det på riktigt”, sa han."]
+            - ["Så kom de första gästerna, och lapparna med beställningar blev fler och fler, tio, femton, tjugo. Pannorna fräste, och någon tappade en tallrik i diskrummet. Henry vände fiskbitarna en i taget, som om han hade hela eftermiddagen på sig. Lejla tittade på honom en lång stund. Hon skar långsammare, och nu blev alla gurkskivor lika tunna. Klockan ett kom servitrisen inspringande och ropade att ett helt fotbollslag just hade kommit in. Lejla fyllde ett glas med is och räckte henne det.\n”Ha is i magen”, sa Lejla.\nHenry log ned i stekpannan."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Hur många isbitar tuggar Lejla i sig?"]
+            - ["2. Hur känner sig Lejla när Henry har gått ut i kylrummet? Hur vet du det?"]
+            - ["3. Vad betyder ”ha is i magen” i den här berättelsen? Vad i texten får dig att tro det?"]
+            - ["4. Varför ger Lejla servitrisen ett glas med is? Hur vet du det?"]
+            - ["5. Henry förklarar aldrig vad han menar. Borde han ha gjort det? Varför?"]
+    - rubrik: "Avancerad, text 18: Stenhuset"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Avancerad, text 18." }
+      listor:
+        - rubrik: "Stenhuset"
+          rader:
+            - ["Nu ska ni veta att det sällan är klokt att knacka på en dörr som är tre gånger så hög som man själv. Det visste Pim. Han tillhörde tuvfolket, ett litet folk som bor i tuvorna på ängarna och nästan aldrig går längre bort än till närmaste bäck. Men han hade gått vilse i skogen, och regnet hade letat sig in genom kappan, så han knackade ändå."]
+            - ["Dörren öppnades av en jätte i röd väst. ”Så trevligt”, sa han och bugade artigt. ”Stig på, stig på, jag får så sällan gäster.” Han hängde Pims kappa på tork vid elden och vred om nyckeln två gånger. ”Det blåser in annars”, förklarade han. Över elden hängde en gryta som var stor nog att bada i, och vattnet hade just börjat koka. På bordet stod en enda tallrik, och den var mycket stor."]
+            - ["”Säg mig”, sa jätten och satte sig mittemot Pim, ”hur många vet att du är här i kväll?”\nPim tittade på tallriken, och sedan tittade han på grytan.\n”Femtio”, sa han. ”Hela min släkt väntar vid stenbron och vet vilken dörr jag knackade på, och min farmor tycker inte om att vänta.”\nNu ska ni veta att Pims farmor satt hemma och stickade strumpor, och att ingen visste vart han hade gått.\nJätten tittade länge mot fönstret, och sedan skrattade han så att tallriken skallrade.\n”Femtio!” sa han. ”Vilken stor släkt för ett så litet folk. Då ska jag inte hålla dig kvar.”\nHan låste upp dörren och gav Pim en bit sockerkaka för vägen."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Hur många tallrikar står på bordet?"]
+            - ["2. Varför vrider jätten om nyckeln två gånger? Hur vet du det?"]
+            - ["3. Vad menar jätten när han frågar hur många som vet att Pim är där? Vad i texten får dig att tro det?"]
+            - ["4. Tror jätten på det Pim säger? Hur vet du det?"]
+            - ["5. Pim svarar ”Femtio”, fast ingen vet var han är. Vad hade du svarat i Pims ställe? Varför?"]
+    - rubrik: "Avancerad, text 19: I hallen"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Avancerad, text 19." }
+      listor:
+        - rubrik: "I hallen"
+          rader:
+            - ["Elvira hade bett mig att stanna i köket när hennes nya vänner kom. Jag är familjens hjälpare och behöver inte äta, men jag tycker om köket, så jag torkade dricksglas som redan var torra. Jag lade märke till att Elvira bytte tröja tre gånger framför spegeln. Den sista var gul, med en stjärna som hon hade sytt på själv kvällen innan. Hennes mamma hade sagt vid frukosten att det var så bra att Elvira äntligen hade fått vänner i nya klassen."]
+            - ["Flickorna hette Esme och Ylva, och de sa många vänliga saker. ”Vad mysigt det är här”, sa Esme. ”Så litet och gulligt.” Ylva böjde sig fram och tittade på stjärnan. ”Har du sytt den själv? Vad modigt.” Sedan tittade de på varandra och skrattade, fast ingen hade sagt något roligt. Jag tänkte att de måste tycka mycket om Elvira, eftersom de log hela tiden."]
+            - ["”Vi går före”, sa Ylva i dörren. ”Kom sen, om du hinner.”\nNär de hade gått stod Elvira kvar i hallen. Sedan drog hon av sig tröjan, fast den inte var smutsig, och vek ihop den mycket noggrant.\n”Jag har lite ont i huvudet”, sa hon. ”Jag stannar hemma.”\nJag frågade om jag skulle hämta en tablett, men hon ville inte ha någon. Hon bad mig att inte säga något till mamma. Jag tänkte att det var bäst att göra som hon sa. Men jag lade tröjan överst i lådan, så att den skulle vara lätt att hitta nästa gång."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Vad hade Elviras mamma sagt vid frukosten?"]
+            - ["2. Vad menar Ylva när hon säger ”Vad modigt”? Vad i texten får dig att tro det?"]
+            - ["3. Hur känner sig Elvira när hon viker ihop tröjan? Hur vet du det?"]
+            - ["4. Varför vill Elvira att hjälparen inte ska säga något till mamma? Hur vet du det?"]
+            - ["5. Hjälparen tänker att det är bäst att göra som Elvira säger. Vad borde hjälparen göra? Varför?"]
+    - rubrik: "Avancerad, text 20: Språnget"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Avancerad, text 20." }
+      listor:
+        - rubrik: "Språnget"
+          rader:
+            - ["Skeppet gled in genom mörkret som en fisk av silver genom svart vatten, tyst, tyst, med alla sina små lampor tända. Barnen hängde i det runda fönstret och tryckte näsorna mot glaset tills det blev imma. Luften i korridoren luktade metall och apelsiner, som den alltid gjorde. Med skeppet kom en flicka som hette Aylin. Hon hade en randig mössa och en ryggsäck som var nästan lika stor som hon själv. Hon höll sig i räcket med ena handen, hela tiden, också när hon åt."]
+            - ["”Nu ska du göra språnget”, sa Omid, som var äldst. Han tog med henne till den stora hallen. Den var rund och tom, och väggarna var mjuka som täcken. Där inne fanns inget upp och inget ned. Man tog sats mot en vägg och flög tvärs över hallen utan att röra vid något. Den som sköt ifrån för svagt drev långsamt genom hallen och snurrade sakta, sakta, tills någon kom och hämtade en. Omid hade själv hängt där en gång, sin första vecka, för fyra år sedan."]
+            - ["Aylin släppte räcket. Hon flög som en kastad vante, snett och för långsamt, och drev sakta genom hallen med armarna ute. Barnens skratt fyllde hallen. Genom det stora fönstret rullade en blå och vit värld förbi, med hav och moln, långsamt, långsamt. Aylin tittade på den och slutade sparka med benen. Då tog Omid sats. Han var hos henne innan någon hade hunnit sluta skratta."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Vad håller sig Aylin i, också när hon äter?"]
+            - ["2. Var bor barnen? Vad i texten får dig att tro det?"]
+            - ["3. Hur känner sig Aylin när hon svävar genom hallen? Hur vet du det?"]
+            - ["4. Varför är Omid så snabb att hämta Aylin? Vad i texten får dig att tro det?"]
+            - ["5. Omid säger till Aylin att hon ska göra språnget. Är det ett bra sätt att ta emot den som är ny? Varför?"]
+    - rubrik: "Avancerad, text 21: Kaktus"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Avancerad, text 21." }
+      listor:
+        - rubrik: "Kaktus"
+          rader:
+            - ["Bea 17.58: Nu åker vi till nya grannarna, och mamma säger att jag ska vara trevlig hela middagen, alltså i TRE timmar!\nNellie 17.59: Du överlever, och kom ihåg ordet om det blir för jobbigt.\nDawit 17.59: Ett ord, så ringer vi och säger att din hamster har rymt genom ventilationen.\nBea 18.00: Jag har ingen hamster.\nDawit 18.00: Det vet inte grannarna.\nBea 18.01: Okej, kaktus."]
+            - ["Bea 18.47: Deras son Gabriel har ett akvarium som tar upp en hel vägg, och han har pratat om fiskarna i fyrtio minuter utan att andas.\nNellie 18.48: Stackars dig, jag skrattar så att jag gråter.\nBea 19.15: Kaktus.\nDawit 19.15: Ringer om en minut, håll ut!\nBea 19.16: NEJ, vänta, inte kaktus, glöm att jag skrev det.\nNellie 19.17: Vad händer egentligen???\nBea 20.04: Visste ni att de flesta fiskar sover med öppna ögon, eftersom de inte har några ögonlock?\nDawit 20.05: Vem är du, och vad har du gjort med Bea?"]
+            - ["Bea 21.52: Hemma nu.\nNellie 21.52: Tre timmar, sa du, och klockan är snart tio.\nBea 21.53: Gabriel har en fisk som heter Kaktus, den äter ur handen, och jag fick mata den.\nDawit 21.53: Så du skrev kaktus om en fisk?\nBea 21.54: Kanske.\nNellie 21.55: Ska du tillbaka dit någon gång?\nBea 21.56: På torsdag, någon måste ju mata Kaktus.\nDawit 21.57: Jaså, Kaktus, alltså."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Hur dags skriver Bea att hon är hemma?"]
+            - ["2. Vad betyder ordet kaktus för Bea, Nellie och Dawit klockan 18.01? Vad i texten får dig att tro det?"]
+            - ["3. Varför skriver Bea ”Kaktus” klockan 19.15? Hur vet du det?"]
+            - ["4. Vad menar Bea med ”någon måste ju mata Kaktus”? Vad i texten får dig att tro det?"]
+            - ["5. Dawit frågar om Bea skrev kaktus om en fisk, och Bea svarar ”Kanske”. Hade du svarat dina kompisar likadant? Varför?"]
+    - rubrik: "Avancerad, text 22: Springan"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Avancerad, text 22." }
+      listor:
+        - rubrik: "Springan"
+          rader:
+            - ["Första veckan i den gamla lägenheten trodde jag att det var mamma som stängde mitt fönster om nätterna. Jag lämnar alltid en smal springa öppen, för jag kan inte sova när luften står still. ”Asta, jag rör inte ditt fönster”, sa mamma vid frukosten utan att titta upp från telefonen. På kvällen ställde jag en bok i springan, så att ingen skulle kunna stänga."]
+            - ["På morgonen låg boken på golvet, och fönstret var stängt. Jag hade inte vaknat, fast jag sover lätt. Sedan dess har jag lagt märke till en sak. Fönstret stängs bara vissa nätter, och de nätterna regnar det alltid innan morgonen. Huset är över hundra år gammalt, och fönstret skakar när det blåser. Men i fönsterkarmen, längst ner där färgen har flagnat, har någon skrapat in ett namn med något vasst: DAGNY 1921."]
+            - ["I går lossnade botten i byrålådan, och under den låg en gulnad lapp. Där stod tre rader, och varje rad var skriven med en egen handstil.\n”Var inte rädd. Hon stänger bara när det ska regna.”\n”Det stämmer. Låt springan vara.”\n”Tack, Dagny. Du är snäll.”\nMamma kommer hem sent nu, och i den nya skolan känner jag ingen än. Jag har inte berättat om lappen för henne. Men i kväll har jag skrivit en fjärde rad, och nu öppnar jag fönstret lite mer än vanligt."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Hur många olika handstilar fanns det på lappen när Asta hittade den?"]
+            - ["2. Vad hade hänt i rummet innan Asta flyttade in? Hur vet du det?"]
+            - ["3. Vem eller vad stänger fönstret om nätterna? Vad i texten får dig att tro det?"]
+            - ["4. Varför öppnar Asta fönstret lite mer än vanligt i kväll? Hur vet du det?"]
+            - ["5. Vad hade du gjort i Astas ställe? Varför?"]
+    - rubrik: "Avancerad, text 23: Molnet"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Avancerad, text 23." }
+      listor:
+        - rubrik: "Molnet"
+          rader:
+            - ["Det hade inte regnat på ön sedan våren. Gräset på sluttningarna var gult och knastrade under fötterna, och getterna stod vid den tomma bäcken och väntade. I går hade den minsta geten lagt sig ner och inte orkat resa sig. Varje morgon bar Tiri vatten till dem från brunnen, två hinkar i taget, och varje morgon fick hon sänka hinken lite djupare."]
+            - ["Tiri bodde hos trollkarlen och lärde sig av honom. Han sa sällan mycket, och mest fick hon vänta och lyssna. I vintras hade han lärt henne molnens namn. Det är inga vanliga ord. Den som säger ett molns sanna namn kan kalla molnet till sig, och därför säger man det aldrig i onödan. Nu låg ett grått moln över havet i väster, tungt av regn, men det räckte bara till en ö. Det drev sakta mot den andra ön, där röken steg från husen och där gräset var lika gult som här. Tiri kunde namnet, och hon öppnade munnen. Hon såg på trollkarlen. Han satt på en sten och lagade ett nät, och han såg inte upp. ”Lyssna”, sa han bara."]
+            - ["Hon lyssnade. Hon hörde getterna och vinden i det torra gräset, och långt borta över vattnet hörde hon en hund som skällde på den andra ön. Hon stod länge så. Sedan stängde hon munnen och gick efter hinkarna. Trollkarlen sa ingenting. Men när hon kom tillbaka med vattnet hade han lagt en extra brödbit åt henne på stenen."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Vart driver molnet?"]
+            - ["2. Vad betyder ”Lyssna” när trollkarlen säger det? Hur vet du det?"]
+            - ["3. Varför säger Tiri inte molnets namn? Vad i texten får dig att tro det?"]
+            - ["4. Varför lägger trollkarlen fram en extra brödbit åt Tiri? Hur vet du det?"]
+            - ["5. Tiris getter är törstiga. Gjorde Tiri rätt när hon lät bli att säga namnet? Varför?"]
+    - rubrik: "Avancerad, text 24: I gryningen"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Avancerad, text 24." }
+      listor:
+        - rubrik: "I gryningen"
+          rader:
+            - ["De gick ner till bryggan i gryningen, och pappan bar årorna och pojken bar fiskespöna. Motorn låg på bryggan där pappan hade lagt den i natt, och propellern var böjd. Pojken tittade inte på motorn. Han tog årorna från pappan, lade dem i den blå båten och började ro. Det var pappans tur att ro, men pappan satte sig längst bak och sa ingenting. Pappan hade fortfarande samma tröja som i går."]
+            - ["”Ror jag för fort?” sa pojken.\n”Nej”, sa pappan.\n”Jag kan ro hela vägen”, sa pojken.\n”Jag vet”, sa pappan.\nDe rodde förbi den stora stenen som stack upp ur vattnet, och ingen av dem tittade på den. Längst ner, precis vid vattenytan, hade stenen en rand av blå färg. Pojken hade alltid vetat var stenen låg."]
+            - ["På en liten ö gjorde pappan upp eld och kokade kaffe. Förut hade pojken alltid fått blåbärssaft, men nu hällde pappan upp kaffe i två plåtmuggar och räckte honom den ena.\n”Det var tjock dimma i natt”, sa pappan.\n”Ja”, sa pojken.\n”I sådan dimma ser man ingenting”, sa pappan. ”Inte ens stenarna.”\nPojken höll plåtmuggen med båda händerna och sa ingenting. Pappan tittade länge på honom, och sedan lade han handen på pojkens axel en kort stund och tittade ut över vattnet igen."]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Vad hade pojken alltid fått att dricka förut?"]
+            - ["2. Vad hade hänt innan de gick ner till bryggan? Vad i texten får dig att tro det?"]
+            - ["3. Hur känner sig pojken när han ror? Hur vet du det?"]
+            - ["4. Vad menar pappan när han säger ”Inte ens stenarna”? Hur vet du det?"]
+            - ["5. Pappan säger nästan ingenting. Hade det varit bättre om han hade sagt mer? Varför?"]
+    - rubrik: "Avancerad, text 25: Det gröna"
+      text:
+        - "Läs texten och svara på frågorna."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - { rubrik: "Svaren", text: "Lärarens sida för Avancerad, text 25." }
+      listor:
+        - rubrik: "Det gröna"
+          rader:
+            - ["(Farmors kök en tisdagseftermiddag. Det luktar äpplen och kanel. Adrian sitter vid bordet med farmors nya mobiltelefon i handen.)\nAdrian: Okej, en gång till. När du vill ringa trycker du på det gröna.\nFarmor: Det gröna, vänta, jag skriver upp det.\n(Farmor skriver i ett litet block. Samma två ord står på varje blad.)\nAdrian: Farmor, du har skrivit det förut.\nFarmor: Jag har så dåligt minne nu för tiden.\nAdrian: Men i söndags ringde du ju till mig, så hur gick det till?\nFarmor: Det måste ha varit telefonen själv."]
+            - ["(Adrians mobil plingar. Han läser och lägger den med skärmen nedåt på bordet.)\nFarmor: Är det dina kompisar? Gå du, vännen, vi tar det nästa tisdag.\nAdrian: De ska bara till stranden, och där har jag varit förut.\n(Farmor ställer fram en äppelkaka som räcker till sex personer.)\nFarmor: Den blev visst för stor för en.\nAdrian: Det säger du varje gång.\n(Adrian tar en stor bit. Mobilen plingar igen, och han låter den ligga.)"]
+            - ["Adrian: Nästa tisdag, då. Det gröna är för att ringa.\nFarmor: Det gröna, ja, jag ska försöka komma ihåg det.\n(Dörren går igen. Farmor tar telefonen, trycker snabbt med tummen och håller den mot örat.)\nFarmor: Hej, Majken. Ja, han var här i dag igen, och nej, jag har inte lärt mig än.\n(Farmor skrattar och skär en bit äppelkaka till sig själv.)"]
+        - rubrik: Frågorna
+          rader:
+            - ["1. Vart ska Adrians kompisar?"]
+            - ["2. Vad menar farmor med ”Den blev visst för stor för en”? Hur vet du det?"]
+            - ["3. Varför låter Adrian mobilen ligga? Vad i texten får dig att tro det?"]
+            - ["4. Vad förstår du i slutet som du inte förstod i början? Hur vet du det?"]
+            - ["5. Mobilen plingar två gånger. Vad hade du gjort i Adrians ställe? Varför?"]
     - rubrik: "Avancerad, kartläggning efter: Mejlet"
       text:
         - "Läs texten och svara på frågorna."
@@ -2860,7 +4036,7 @@ lathund:
       rubrik: Var texterna och bladen finns
       punkter:
         - fet: Metodens texter.
-          text: Femton texter på varje nivå, kartläggningens två och startmeningarna står under Materialet på metodens sida. Svaren, frågornas slag och de öppna frågorna står på lärarsidan till varje text.
+          text: Tjugofem texter på varje nivå, kartläggningens två och startmeningarna står under Materialet på metodens sida. Svaren, frågornas slag och de öppna frågorna står på lärarsidan till varje text.
         - fet: Serien Mellan raderna.
           text: Serien har fyra böcker hos Studentlitteratur, och en eller två passar efter varje nivå.
         - fet: Egna texter.
