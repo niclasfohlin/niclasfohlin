@@ -363,6 +363,61 @@ html.js .samla {
 .samla-alla { font-family: var(--typsnitt-ui); font-size: 0.9rem; margin: 1rem 0 0; }
 .filter .tom { grid-column: 1 / -1; margin: 0; }
 .filter .tom button { font: inherit; background: none; border: 0; padding: 0; color: var(--farg-accent); text-decoration: underline; cursor: pointer; }
+/* Rutan Välj nederst syns först när en metod är vald (K-463: på telefonen låg den över korten fast inget var valt). */
+html.js .samla:not(.har-valda) { display: none; }
+
+/* Metodbankens formulär (K-463, Niclas valde A 2026-10-19): fem rutor i faktaremsans form som visar vad som är valt och en
+   sjätte med antalet, två i rad på telefonen och sex på datorn. En ruta fäller ut sina val under remsan som knappar med
+   antalet metoder; radioknapparna ligger under knapparna. Visas bara med JavaScript, som filtret i artikelarkivet. */
+.mbf { display: none; }
+html.js .mbf { display: block; font-family: var(--typsnitt-ui); margin: 1.5rem 0; }
+.mbf-rutor { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--farg-kant); border-radius: var(--radie); background: var(--farg-yta); overflow: hidden; }
+@media (min-width: 56rem) { .mbf-rutor { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+.mbf-ruta { display: flex; flex-direction: column; align-items: flex-start; gap: 0.1rem; min-width: 0; margin: 0; padding: 0.55rem 0.8rem; border: 0; border-right: 1px solid var(--farg-kant); border-bottom: 1px solid var(--farg-kant); background: none; font: inherit; color: inherit; text-align: left; }
+.mbf-ruta:nth-child(2n) { border-right: 0; }
+.mbf-ruta:nth-last-child(-n + 2) { border-bottom: 0; }
+@media (min-width: 56rem) { .mbf-ruta, .mbf-ruta:nth-child(2n) { border-right: 1px solid var(--farg-kant); border-bottom: 0; } .mbf-ruta:last-child { border-right: 0; } }
+button.mbf-ruta { cursor: pointer; }
+button.mbf-ruta:hover { background: var(--farg-ton-svag); }
+button.mbf-ruta:focus-visible { outline: 2px solid var(--farg-accent); outline-offset: -2px; }
+.mbf-namn { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--farg-text-svag); }
+.mbf-varde { font-size: 1rem; font-weight: 600; color: var(--farg-accent); overflow-wrap: break-word; hyphens: auto; }
+/* Det längsta värdet, Lektionsupplägg, ryms på en rad i en halv ruta också i 320 punkter; pilen bryts för sig. */
+@media (max-width: 22.5rem) { .mbf-ruta { padding: 0.5rem 0.65rem; } .mbf-varde { font-size: 0.92rem; } }
+.mbf-pil { display: inline-block; width: 0.45rem; height: 0.45rem; margin-left: 0.15rem; border-right: 2px solid var(--farg-text-svag); border-bottom: 2px solid var(--farg-text-svag); transform: translateY(-0.2rem) rotate(45deg); }
+.mbf-ruta[aria-expanded="true"] .mbf-pil { transform: translateY(0.05rem) rotate(-135deg); }
+.mbf-ruta.valt { background: var(--farg-accent-ljus); }
+.mbf-ruta[aria-expanded="true"] { background: var(--farg-ton); box-shadow: inset 0 -3px 0 var(--farg-accent); }
+.mbf-antal .mbf-varde { font-weight: 400; color: var(--farg-text); }
+.mbf-rensa { font: inherit; background: none; border: 0; padding: 0; color: var(--farg-accent); text-decoration: underline; cursor: pointer; }
+.mbf-upplagg { margin: 0.5rem 0 0; font-size: 0.9rem; color: var(--farg-text-svag); }
+.mbf-panel { margin: 0; padding: 0.75rem 0.75rem 0.35rem; border: 1px solid var(--farg-kant); border-top: 0; border-radius: 0 0 var(--radie) var(--radie); background: var(--farg-ton); min-width: 0; }
+.mbf-knapp { position: relative; display: inline-flex; align-items: baseline; gap: 0.3rem; margin: 0 0.35rem 0.45rem 0; padding: 0.45rem 0.75rem; border: 1px solid var(--farg-kant); border-radius: 999px; background: var(--farg-yta); font-size: 0.95rem; line-height: 1.25; cursor: pointer; }
+.mbf-knapp input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+.mbf-knapp small { font-size: 0.78rem; color: var(--farg-text-svag); }
+.mbf-knapp:hover { border-color: var(--farg-accent); }
+.mbf-knapp:has(input:checked) { background: var(--farg-accent); border-color: var(--farg-accent); color: #fff; font-weight: 600; }
+.mbf-knapp:has(input:checked) small { color: #dce6f3; }
+.mbf-knapp:has(input:focus-visible) { outline: 2px solid var(--farg-accent); outline-offset: 2px; }
+.mbf-knapp.noll { color: var(--farg-text-svag); border-style: dashed; cursor: default; opacity: 0.75; }
+.mbf-knapp.noll:hover { border-color: var(--farg-kant); }
+.mbf-knapp[data-amne="Läsning"]:not(:has(input:checked)) { border-color: color-mix(in srgb, var(--farg-lasning) 35%, white); }
+.mbf-knapp[data-amne="Skrivning"]:not(:has(input:checked)) { border-color: color-mix(in srgb, var(--farg-skrivning) 35%, white); }
+.mbf-knapp[data-amne="Socialt"]:not(:has(input:checked)) { border-color: color-mix(in srgb, var(--farg-socialt) 35%, white); }
+.mbf-knapp[data-amne="Matematik"]:not(:has(input:checked)) { border-color: color-mix(in srgb, var(--farg-accent) 35%, white); }
+.mbf-grupp { margin: 0.25rem 0 0; }
+.mbf-gruppnamn { margin: 0 0 0.3rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--farg-accent); }
+.mbf-gruppnamn[data-amne="Läsning"] { color: var(--farg-lasning); }
+.mbf-gruppnamn[data-amne="Skrivning"] { color: var(--farg-skrivning); }
+.mbf-gruppnamn[data-amne="Socialt"] { color: var(--farg-socialt); }
+.mbf-gruppnamn[data-amne="Allmänt"] { color: var(--farg-text-svag); }
+.mbf-forklaringar { margin: 0.2rem 0 0.4rem; font-size: 0.85rem; color: var(--farg-text-svag); }
+.mbf-forklaringar div { margin: 0 0 0.2rem; }
+.mbf-forklaringar dt { display: inline; font-weight: 600; color: var(--farg-text); }
+.mbf-forklaringar dt::after { content: ": "; }
+.mbf-forklaringar dd { display: inline; margin: 0; }
+.mbf-tom { margin: 0.6rem 0 0; }
+.mbf-tom button { font: inherit; background: none; border: 0; padding: 0; color: var(--farg-accent); text-decoration: underline; cursor: pointer; }
 
 /* Metodsidan: huvud, faktaruta och nedladdning, sedan modellen med kompendiets designelement.
    Samma element finns i docx-filen (src/lib/metoddocx.ts). */
@@ -1788,7 +1843,7 @@ html.js .bara-js { display: inline-block; }
     @bottom-center { content: var(--tryck-text, ''); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; font-size: 8.5pt; color: #555; }
   }
   body { background: #fff; color: #000; font-size: 10.5pt; line-height: 1.45; }
-  .sidhuvud, .sidfot, .hopp-lank, .nedladdning, .filter, .samla, .metod-fot .relaterade, .metod-fot .taggar, .valj, .kommentarer, .delning, .serie-meny, .serie-fot { display: none !important; }
+  .sidhuvud, .sidfot, .hopp-lank, .nedladdning, .filter, .mbf, .samla, .metod-fot .relaterade, .metod-fot .taggar, .valj, .kommentarer, .delning, .serie-meny, .serie-fot { display: none !important; }
   .innehall { max-width: none; padding: 0; }
   .metod { max-width: none; }
   /* Bara rubriken och faktarutan (och filmens stillbilder, nedan) har en rad i utskriften: delningen och nedladdningen är

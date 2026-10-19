@@ -9,7 +9,8 @@ import { site } from '../../data/site';
 import { metoderSorterade, taggLabel } from '../../lib/innehall';
 import { harMallar } from '../../lib/metod';
 import { byggSerier, arLektion, serieTaggar } from '../../lib/serie';
-import { taggensSlag } from '../../lib/upplagg';
+import { kanGorasIKlass, taggensSlag } from '../../lib/upplagg';
+import taggarData from '../../data/taggar.json';
 // En lektion står i sin serie och inte som eget kort (src/lib/serie.ts): seriens kort visar lektionerna och filtreras
 // på allt serien tränar.
 const allaMetoder = await metoderSorterade();
@@ -24,7 +25,19 @@ const formagorIBruk = taggarIBruk.filter((t) => taggensSlag(t) === 'förmåga');
 const upplaggIBruk = taggarIBruk.filter((t) => taggensSlag(t) === 'upplägg');
 // Bara årskursnivåer som någon metod har, så att filtret inte erbjuder tomma val.
 const arskurserIBruk = site.arskurser.filter((a) => metoder.some((m) => m.data.arskurs.includes(a)));
-const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.filter((m) => m.data.omrade === o).length]));
+
+// Formuläret (Niclas valde A 2026-10-19, ur skisserna i underlag/prov/taggar/design/): fem rutor som visar vad som är
+// valt, Område, Årskurs, Tränar, Upplägg och Klass eller grupp, och en sjätte med antalet. Ett tryck på en ruta fäller ut
+// dess val som knappar med antalet metoder, ett val i taget, och ett val fäller ihop dem igen. Under knapparna ligger
+// formulärets radioknappar, så att adressen (?omrade=Läsning&tagg=lasflyt) och filtreringen fungerar som förut. Tränar
+// står i grupper efter förmågans område, och Upplägg säger vad varje upplägg är, också i en rad under rutorna när ett
+// är valt. Antalen räknas här för sidan utan val och i skriptet nedan när valen ändras, ur korten.
+const beskrivning = Object.fromEntries(taggarData.taggar.map((t) => [t.id, t.beskrivning]));
+const omradeAv = Object.fromEntries(taggarData.taggar.map((t) => [t.id, t.omrade]));
+const korten = metoder.map((m) => { const serie = serier.get(m.id); return { omrade: m.data.omrade, arskurs: m.data.arskurs as string[], taggar: serie ? serieTaggar(serie, allaMetoder) : m.data.taggar, klass: kanGorasIKlass(m.data) ? 'klass' : 'grupp' }; });
+const antalMed = (falt: 'omrade' | 'arskurs' | 'tagg' | 'upplagg' | 'klass', varde: string) => korten.filter((k) => !varde || (falt === 'omrade' ? k.omrade === varde : falt === 'arskurs' ? k.arskurs.includes(varde) : falt === 'klass' ? k.klass === varde : k.taggar.includes(varde))).length;
+const formagegrupper = [...site.omraden, 'Allmänt'].map((o) => ({ o, taggar: formagorIBruk.filter((t) => (omradeAv[t] ?? 'Allmänt') === o) })).filter((g) => g.taggar.length);
+const metoderText = (n: number) => (n === 1 ? '1 metod' : `${n} metoder`);
 ---
 
 <Base title={site.sidor.stodundervisning.titel} description={site.sidor.stodundervisning.beskrivning} tryckText="© Niclas Fohlin · niclasfohlin.se/stodundervisning">
@@ -32,45 +45,49 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
   <p class="text">Konkreta metoder att använda i morgon. Varje metod har ett körschema, exempelfraser, snabbmall och checklista, en lathund på fyra sidor, och går att ladda ner som Word-fil eller skriva ut. Markera flera metoder för att få dem i en fil.</p>
 
   {metoder.length > 0 && (
-    <form class="filter" id="filter" aria-label="Filtrera metoder">
-      <fieldset>
-        <legend>Område</legend>
-        <div class="val">
-          <label><input type="radio" name="omrade" value="" checked /> Alla</label>
-          {site.omraden.map((o) => <label class={antalPerOmrade[o] === 0 ? 'tomt' : undefined}><input type="radio" name="omrade" value={o} disabled={antalPerOmrade[o] === 0} /> {o} <span class="meta">{antalPerOmrade[o] === 0 ? '(kommer)' : `(${antalPerOmrade[o]})`}</span></label>)}
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>Årskurs</legend>
-        <div class="val">
-          <label><input type="radio" name="arskurs" value="" checked /> Alla</label>
-          {arskurserIBruk.map((a) => <label><input type="radio" name="arskurs" value={a} /> {a}</label>)}
-        </div>
-      </fieldset>
-      <div class="tagg-val">
-        <label for="filter-tagg">Tränar</label>
-        <select id="filter-tagg" name="tagg">
-          <option value="">Allt</option>
-          {formagorIBruk.map((t) => <option value={t}>{taggLabel(t)}</option>)}
-        </select>
+    <form class="mbf" id="filter" aria-label="Filtrera metoder">
+      <div class="mbf-rutor">
+        {([['omrade', 'Område', 'Alla'], ['arskurs', 'Årskurs', 'Alla'], ['tagg', 'Tränar', 'Allt'], ['upplagg', 'Upplägg', 'Alla'], ['klass', 'Klass eller grupp', 'Alla']] as const).map(([falt, namn, alla]) => (
+          <button type="button" class="mbf-ruta" data-ruta={falt} aria-expanded="false" aria-controls={`mbf-${falt}`}><span class="mbf-namn">{namn}</span><span class="mbf-varde"><span data-varde={falt}>{alla}</span>{" "}<span class="mbf-pil" aria-hidden="true"></span></span></button>
+        ))}
+        <p class="mbf-ruta mbf-antal"><span class="mbf-namn">Visar</span><span class="mbf-varde"><span aria-live="polite" data-antal>{metoderText(metoder.length)}</span><span data-rensa-rad hidden> · <button type="button" class="mbf-rensa" data-rensa-filter>Rensa</button></span></span></p>
       </div>
-      <fieldset>
-        <legend>Klass eller grupp</legend>
-        <div class="val">
-          <label><input type="radio" name="klass" value="" checked /> Alla</label>
-          <label><input type="radio" name="klass" value="klass" /> Kan göras i klass</label>
-          <label><input type="radio" name="klass" value="grupp" /> Bara i grupp</label>
-        </div>
+      <p class="mbf-upplagg" data-upplagg-not hidden></p>
+      <fieldset class="mbf-panel" id="mbf-omrade" data-panel="omrade" hidden>
+        <legend class="visually-hidden">Område</legend>
+        <label class="mbf-knapp" data-goatcounter-click="filter:omrade:alla" data-goatcounter-title="Metodbanken: Område Alla"><input type="radio" name="omrade" value="" checked /><span data-text>Alla</span> <small data-n>{antalMed('omrade', '')}</small></label>
+        {site.omraden.map((o) => <label class="mbf-knapp" data-amne={o} data-goatcounter-click={`filter:omrade:${o}`} data-goatcounter-title={`Metodbanken: Område ${o}`}><input type="radio" name="omrade" value={o} disabled={antalMed('omrade', o) === 0} /><span data-text>{o}</span> <small data-n>{antalMed('omrade', o)}</small></label>)}
       </fieldset>
-      <div class="tagg-val">
-        <label for="filter-upplagg">Upplägg</label>
-        <select id="filter-upplagg" name="upplagg">
-          <option value="">Alla</option>
-          {upplaggIBruk.map((t) => <option value={t}>{taggLabel(t)}</option>)}
-        </select>
-      </div>
-      <p class="meta" aria-live="polite" data-antal>{metoder.length === 1 ? '1 metod' : `${metoder.length} metoder`}</p>
-      <p class="meta tom" data-tom hidden>Ingen metod matchar dina val. <button type="button" data-rensa-filter>Visa alla metoder</button></p>
+      <fieldset class="mbf-panel" id="mbf-arskurs" data-panel="arskurs" hidden>
+        <legend class="visually-hidden">Årskurs</legend>
+        <label class="mbf-knapp" data-goatcounter-click="filter:arskurs:alla" data-goatcounter-title="Metodbanken: Årskurs Alla"><input type="radio" name="arskurs" value="" checked /><span data-text>Alla</span> <small data-n>{antalMed('arskurs', '')}</small></label>
+        {arskurserIBruk.map((a) => <label class="mbf-knapp" data-goatcounter-click={`filter:arskurs:${a}`} data-goatcounter-title={`Metodbanken: Årskurs ${a}`}><input type="radio" name="arskurs" value={a} /><span data-text>{a}</span> <small data-n>{antalMed('arskurs', a)}</small></label>)}
+      </fieldset>
+      <fieldset class="mbf-panel" id="mbf-tagg" data-panel="tagg" hidden>
+        <legend class="visually-hidden">Tränar</legend>
+        <label class="mbf-knapp" data-goatcounter-click="filter:tagg:allt" data-goatcounter-title="Metodbanken: Tränar Allt"><input type="radio" name="tagg" value="" checked /><span data-text>Allt</span> <small data-n>{antalMed('tagg', '')}</small></label>
+        {formagegrupper.map((g) => (
+          <div class="mbf-grupp" data-grupp>
+            <p class="mbf-gruppnamn" data-amne={g.o}>{g.o}</p>
+            {g.taggar.map((t) => <label class="mbf-knapp" data-goatcounter-click={`filter:tagg:${t}`} data-goatcounter-title={`Metodbanken: Tränar ${taggLabel(t)}`}><input type="radio" name="tagg" value={t} /><span data-text>{taggLabel(t)}</span> <small data-n>{antalMed('tagg', t)}</small></label>)}
+          </div>
+        ))}
+      </fieldset>
+      <fieldset class="mbf-panel" id="mbf-upplagg" data-panel="upplagg" hidden>
+        <legend class="visually-hidden">Upplägg</legend>
+        <label class="mbf-knapp" data-goatcounter-click="filter:upplagg:alla" data-goatcounter-title="Metodbanken: Upplägg Alla"><input type="radio" name="upplagg" value="" checked /><span data-text>Alla</span> <small data-n>{antalMed('upplagg', '')}</small></label>
+        {upplaggIBruk.map((t) => <label class="mbf-knapp" data-forklaring={beskrivning[t]} data-goatcounter-click={`filter:upplagg:${t}`} data-goatcounter-title={`Metodbanken: Upplägg ${taggLabel(t)}`}><input type="radio" name="upplagg" value={t} /><span data-text>{taggLabel(t)}</span> <small data-n>{antalMed('upplagg', t)}</small></label>)}
+        <dl class="mbf-forklaringar">
+          {upplaggIBruk.map((t) => <div><dt>{taggLabel(t)}</dt><dd>{beskrivning[t]}</dd></div>)}
+        </dl>
+      </fieldset>
+      <fieldset class="mbf-panel" id="mbf-klass" data-panel="klass" hidden>
+        <legend class="visually-hidden">Klass eller grupp</legend>
+        <label class="mbf-knapp" data-goatcounter-click="filter:klass:alla" data-goatcounter-title="Metodbanken: Klass eller grupp Alla"><input type="radio" name="klass" value="" checked /><span data-text>Alla</span> <small data-n>{antalMed('klass', '')}</small></label>
+        <label class="mbf-knapp" data-goatcounter-click="filter:klass:klass" data-goatcounter-title="Metodbanken: Kan göras i klass"><input type="radio" name="klass" value="klass" /><span data-text>Kan göras i klass</span> <small data-n>{antalMed('klass', 'klass')}</small></label>
+        <label class="mbf-knapp" data-goatcounter-click="filter:klass:grupp" data-goatcounter-title="Metodbanken: Bara i grupp"><input type="radio" name="klass" value="grupp" /><span data-text>Bara i grupp</span> <small data-n>{antalMed('klass', 'grupp')}</small></label>
+      </fieldset>
+      <p class="mbf-tom" data-tom hidden>Ingen metod matchar dina val. <button type="button" data-rensa-filter>Visa alla metoder</button></p>
     </form>
   )}
 
@@ -141,12 +158,77 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
     const sektioner = Array.from(document.querySelectorAll<HTMLElement>('[data-omrade-sektion]'));
     const antal = form.querySelector('[data-antal]') as HTMLElement;
     const namn = ['omrade', 'arskurs', 'klass', 'tagg', 'upplagg'] as const;
+    const rutor = Array.from(form.querySelectorAll<HTMLButtonElement>('[data-ruta]'));
+    const paneler = Array.from(form.querySelectorAll<HTMLElement>('[data-panel]'));
+    const radioknappar = Array.from(form.querySelectorAll<HTMLInputElement>('input[type="radio"]'));
+    const upplaggNot = form.querySelector('[data-upplagg-not]') as HTMLElement;
+    const rensaRad = form.querySelector('[data-rensa-rad]') as HTMLElement;
+    // En ruta fäller ut sina val och fäller ihop de andra; samma ruta igen, Escape eller ett val fäller ihop.
+    function oppna(falt: string | null) {
+      for (const r of rutor) r.setAttribute('aria-expanded', String(r.dataset.ruta === falt));
+      for (const p of paneler) p.hidden = p.dataset.panel !== falt;
+    }
+    for (const r of rutor) r.addEventListener('click', () => oppna(r.getAttribute('aria-expanded') === 'true' ? null : r.dataset.ruta ?? null));
+    form.addEventListener('keydown', (h) => {
+      if (h.key !== 'Escape') return;
+      const oppen = rutor.find((r) => r.getAttribute('aria-expanded') === 'true');
+      if (oppen) { oppna(null); oppen.focus(); }
+    });
+    // Ett tryck eller klick på en knapp väljer och fäller ihop. Med tangentbordet byter piltangenterna val utan att
+    // fälla ihop (deras klick har detail 0), och Enter fäller ihop.
+    for (const p of paneler) {
+      p.addEventListener('click', (h) => {
+        const knapp = (h.target as HTMLElement).closest('label');
+        if (h.detail === 0 || !knapp || knapp.querySelector('input')?.disabled) return;
+        window.setTimeout(() => stang(p), 0);
+      });
+      p.addEventListener('keydown', (h) => { if (h.key === 'Enter' && (h.target as HTMLElement).matches('input')) { h.preventDefault(); stang(p); } });
+    }
+    function stang(p: HTMLElement) {
+      oppna(null);
+      rutor.find((r) => r.dataset.ruta === p.dataset.panel)?.focus();
+    }
+    const egenskaper = (k: HTMLElement) => ({ omrade: k.dataset.omrade ?? '', arskurs: (k.dataset.arskurs ?? '').split(' '), taggar: (k.dataset.taggar ?? '').split(' '), klass: k.dataset.klass ?? '' });
+    const kortensData = () => Array.from(document.querySelectorAll<HTMLElement>('[data-metod]')).map(egenskaper);
+    const passarVal = (k: ReturnType<typeof egenskaper>, val: Record<string, string>) =>
+      (!val.omrade || k.omrade === val.omrade) && (!val.arskurs || k.arskurs.includes(val.arskurs)) && (!val.tagg || k.taggar.includes(val.tagg)) &&
+      (!val.upplagg || k.taggar.includes(val.upplagg)) && (!val.klass || k.klass === val.klass);
+    // Rutornas värden, knapparnas antal och raden om upplägget, efter valen. Ett val som inte ger någon metod går inte
+    // att göra; i Tränar döljs förmågor utan metoder när ett område är valt, så att listan blir områdets.
+    function visaVal(val: Record<string, string>) {
+      const data = kortensData();
+      for (const r of radioknappar) {
+        const n = data.filter((k) => passarVal(k, { ...val, [r.name]: r.value })).length;
+        const knapp = r.closest('label') as HTMLElement;
+        (knapp.querySelector('[data-n]') as HTMLElement).textContent = String(n);
+        const tomt = n === 0 && !r.checked;
+        r.disabled = tomt;
+        knapp.classList.toggle('noll', tomt);
+        if (r.name === 'tagg' && r.value) knapp.hidden = tomt && Boolean(val.omrade);
+      }
+      for (const g of form!.querySelectorAll<HTMLElement>('[data-grupp]')) g.hidden = !g.querySelector('label:not([hidden])');
+      for (const r of rutor) {
+        const vald = radioknappar.find((x) => x.name === r.dataset.ruta && x.checked);
+        const text = vald?.closest('label')?.querySelector('[data-text]')?.textContent ?? '';
+        (r.querySelector('[data-varde]') as HTMLElement).textContent = text;
+        r.classList.toggle('valt', Boolean(vald?.value));
+      }
+      const upplagg = radioknappar.find((x) => x.name === 'upplagg' && x.checked && x.value);
+      const forklaring = upplagg?.closest('label')?.getAttribute('data-forklaring');
+      upplaggNot.hidden = !forklaring;
+      upplaggNot.textContent = forklaring ? `${upplagg?.closest('label')?.querySelector('[data-text]')?.textContent}: ${forklaring}` : '';
+      rensaRad.hidden = !namn.some((n) => val[n]);
+    }
 
     const parametrar = new URLSearchParams(location.search);
     for (const n of namn) {
       const v = parametrar.get(n);
-      const falt = form.elements.namedItem(n) as RadioNodeList | HTMLSelectElement | null;
-      if (v && falt) falt.value = v;
+      const falt = form.elements.namedItem(n) as RadioNodeList | null;
+      // Ett värde som inte finns längre (en gammal länk) lämnar Alla valt. Intensivträning stod under Tränar till
+      // 2026-10-19, så en gammal länk ?tagg=intensivtraning väljer upplägget.
+      const upplagg = form.elements.namedItem('upplagg') as RadioNodeList | null;
+      if (n === 'tagg' && v && upplagg && radioknappar.some((r) => r.name === 'upplagg' && r.value === v)) upplagg.value = v;
+      else if (v && falt && radioknappar.some((r) => r.name === n && r.value === v)) falt.value = v;
     }
 
     function filtrera() {
@@ -174,6 +256,7 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
       }
       antal.textContent = synliga === 1 ? '1 metod' : `${synliga} metoder`;
       tom.hidden = synliga > 0;
+      visaVal(val);
       const q = new URLSearchParams();
       for (const n of namn) if (val[n]) q.set(n, val[n]);
       const frageDel = q.toString();
@@ -184,7 +267,7 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
     }
 
     const tom = form.querySelector('[data-tom]') as HTMLElement;
-    form.querySelector('[data-rensa-filter]')?.addEventListener('click', () => { form!.reset(); filtrera(); });
+    for (const b of form.querySelectorAll('[data-rensa-filter]')) b.addEventListener('click', () => { form!.reset(); oppna(null); filtrera(); });
     form.addEventListener('change', filtrera);
     filtrera();
   }
@@ -214,6 +297,8 @@ const antalPerOmrade = Object.fromEntries(site.omraden.map((o) => [o, metoder.fi
       const markerade = boxar.filter((b) => b.checked);
       const n = markerade.length;
       knapp.disabled = bygger || n === 0;
+      // Rutan ligger fast nederst bara när en metod är vald, så att den inte står över korten i onödan (K-463).
+      samla!.classList.toggle('har-valda', n > 0 || bygger || Boolean(status.textContent));
       rensa.hidden = n === 0;
       const namn = markerade.map((b) => b.closest('[data-metod]')?.querySelector('h3')?.textContent?.trim()).filter(Boolean);
       valda.textContent = n === 0 ? 'Inga metoder valda' : `${n === 1 ? '1 metod vald' : `${n} metoder valda`}: ${namn.join(', ')}`;

@@ -23,9 +23,9 @@ arskurs: ["4-6", "7-9"]
 # arskursText: åk 3–6
 # Skrivs som "åk 3–6" eller "F–2": täckningskartan i metodbanken ritar stapeln ur texten, och bygget stannar om den inte
 # går att läsa eller rör andra nivåer än arskurs.
-# id från src/data/taggar.json. Återanvänd före att lägga till. Minst en förmåga och inget ämne (slag i registret),
-# intensivtraning när tid nedan är pass på högst 30 minuter tre till fem dagar i veckan, och lektionsupplagg när passen
-# är minst 40 minuter (ARBETSSATT.md under Innehåll).
+# id från src/data/taggar.json. Återanvänd före att lägga till. Minst en förmåga och inget ämne (slag i registret), och
+# exakt ett upplägg: intensivtraning, lektionsupplagg eller aterkommande-pass, efter tid nedan (ARBETSSATT.md under
+# Innehåll).
 taggar: ["lasforstaelse"]
 # Valfritt antal av: enskilt, par, liten grupp, helklass
 format: ["liten grupp", "par"]
