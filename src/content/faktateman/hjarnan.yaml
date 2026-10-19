@@ -1,0 +1,930 @@
+# Temat Hjärnan på nivån Avancerat i Faktatextsamtal i grupp, en post i sajtens databas över faktatexter
+# (src/content/faktateman/). Riggen samlar filen med methods/faktatextsamtal-i-grupp/samla.mjs.
+metod: faktatextsamtal-i-grupp
+tema: Hjärnan
+niva: Avancerat
+ramar:
+  - rubrik: "Lärarhandledning: Avancerat, Hjärnan"
+    tema: Hjärnan
+    text:
+      - Temat Hjärnan har en faktatext för var och en av de fem strukturerna, som brukar passa i åk 8–9. Varje vecka har klassen en läslektion och en modellektion om veckans text, så temat tar fem veckor. Varje elev har texten, en penna och papper till svaret. Du har tavlan, magneter, A4-ark och en tjock tuschpenna. Läs ett avsnitt till högt.
+    delar:
+      - rubrik: "1 Hjärnans karta: Tankekartan"
+        falt:
+          - rubrik: Frågan
+            text: Använder vi bara tio procent av hjärnan, och vad gör hjärnans olika delar?
+          - rubrik: Ord före
+            text: bark (hjärnans yttre lager, inte trädets) · nervcell (en levande cell, inget rum) · signal (ett meddelande mellan celler, ingen mobilsignal)
+          - rubrik: Tänk högt
+            kursiv: true
+            text: ”Hjärnbarken. Bark, som på ett träd? Jag läser vidare. Det yttre lagret, ytterst på storhjärnan. Vem eller vad? Storhjärnan och barken. Det viktigaste? Barken tar emot intryck från sinnena och styr rörelser. Att pannlobens främre del mognar sent är spännande, men det är en detalj.”
+          - rubrik: Det brukar skava
+            text: "”går den över i ryggmärgen”: hjärnstammen fortsätter nedåt som ryggmärgen, och signalerna går genom båda (avsnitt 3)"
+          - rubrik: Modellen
+            text: "storhjärnan: ”den största delen” · lillhjärnan: ”också” · hjärnstammen: ”kvar blir” · nervcellerna: ”i alla tre”. I mitten står hjärnan. Fördjupningens kärna, räkningen av nervcellerna, hör till nervcellerna och är ingen femte del."
+          - rubrik: Lyssna efter
+            text: nej, hela hjärnan arbetar · varje del har ett jobb · 2 procent av vikten, 20 procent av syret
+      - rubrik: "2 Hjärnans nattskift: Tidslinjen"
+        falt:
+          - rubrik: Frågan
+            text: Sover du lika djupt hela natten, och vad händer i hjärnan medan du sover?
+          - rubrik: Ord före
+            text: djup (svår att väcka, inte bättre) · cykel (en runda som börjar om) · hjärnvåg (en kurva ur mätningen, inget hav)
+          - rubrik: Tänk högt om
+            text: "ytlig: ”Ytlig, som vattenytan? Jag läser vidare. Här betyder det att jag vaknar lätt, och djup blir motsatsen: svår att väcka. Vem eller vad? Insomningen. Det viktigaste? Den är kort, och sömnen är ytlig.” (avsnitt 1)"
+          - rubrik: Det brukar skava
+            text: "”något oväntat”: du sover, men på mätningen liknar hjärnan en vaken hjärna (avsnitt 4)"
+          - rubrik: Modellen
+            text: "insomningen: ”först” · bassömnen: ”sedan” · djupsömnen: ”efter det” · drömsömnen: ”till sist”. Fördjupningens kärna om städningen hos möss står bredvid tidslinjen, för den är inget steg i natten."
+          - rubrik: Lyssna efter
+            text: "nej, natten går i cykler · djupast i djupsömnen, mest tidigt · drömsömnen: hjärnan aktiv som vaken"
+      - rubrik: "3 Två slags minne: Venndiagrammet"
+        falt:
+          - rubrik: Frågan
+            text: Varför kan ett namn försvinna på några sekunder medan en låt sitter kvar i flera år, och vad har de två minnena gemensamt?
+          - rubrik: Ord före
+            text: minne (nätverk av nervceller, ingen hårddisk) · arbetsminne (inget minne av ett arbete) · hippocampus (behövs för nya minnen av händelser)
+          - rubrik: Det brukar skava
+            text: "”Själva minnet”: minnet finns i nätverket i hjärnbarken, och hippocampus behövs när det bildas (avsnitt 3)"
+          - rubrik: Modellen
+            text: "båda: ”båda” · arbetsminnet: ”av de två” · långtidsminnet: ”till skillnad från”. Arbetsminnets och långtidsminnets ringar får två ark var: ett om hur mycket och hur länge, och ett om hur de glömmer. Fördjupningens kärna, H.M., hör till långtidsminnet, för hans arbetsminne fungerade."
+          - rubrik: Lyssna efter
+            text: "arbetsminnet: få saker, ofta sekunder · långtidsminnet: det som upprepas · båda: nätverk av nervceller"
+      - rubrik: "4 Natten bygger minnet: Kedjan"
+        falt:
+          - rubrik: Frågan
+            text: Lönar det sig att plugga hela natten före ett prov, och vad gör sömnen med det du har lärt dig?
+          - rubrik: Ord före
+            text: minne (nätverk av nervceller, ingen hårddisk) · hjärnbarken (hjärnans yttre lager, ingen trädbark) · djupsömn (svår att väcka, inte bättre sömn)
+          - rubrik: Det brukar skava
+            text: "”i samma ordning”: nervcellerna arbetar på natten i samma ordning som när råttan lärde sig (avsnitt 2)"
+          - rubrik: Modellen
+            text: "natten: ”eftersom” · hållbart: ”det gör att” · minns mer: ”därför”. Kedjan börjar med ”först”: det nya är bräckligt. Fördjupningens kärna, försöket med för lite sömn, står bredvid kedjan med ett streck till led 4, för den visar vad som händer utan sömn."
+          - rubrik: Lyssna efter
+            text: först bräckligt · troligen hållbart i djupsömnen · utan sömn sämre
+      - rubrik: "5 Klockan i tonåren: Problem och lösning"
+        falt:
+          - rubrik: Frågan
+            text: Är tonåringar trötta på morgonen för att de är lata, och vad händer när skolan börjar senare?
+          - rubrik: Ord före
+            text: klocka (kroppens inre klocka, ingen väckarklocka) · hormon (ett ämne i kroppen, inga känslor) · eleven i mitten (mitt i raden, inget genomsnitt)
+          - rubrik: Det brukar skava
+            text: "”inte märkbart senare”: eleverna somnade ungefär som förut, men vaknade senare (avsnitt 4)"
+          - rubrik: Modellen
+            text: "för lite sömn: ”problemet är” · inre klockan: ”beror delvis på” · senare start: ”en lösning är” · mer sömn: ”resultatet var”. Fördjupningens kärna hör till resultatet och säger hur säkert det är: Seattle visar vad som hände, men inte säkert varför."
+          - rubrik: Lyssna efter
+            text: den inre klockan · melatoninet senare · mer sömn i Seattle
+  - rubrik: "Lärarens sida: Avancerat, text 6, Hjärnans karta"
+    text:
+      - Hjärnan har tre delar med var sitt jobb, och i alla tre arbetar nervceller, så hjärnan gör av med omkring 20 procent av syret, fast den väger 2 procent av kroppen. Texten är en beskrivning, och modellen är Tankekartan, blad 2. I vecka 1 tänker du högt i avsnitt 1.
+    delar:
+      - rubrik: "Läspasset: de fyra avsnitten"
+        falt:
+          - rubrik: Textens fråga
+            text: Använder vi bara tio procent av hjärnan, och vad gör hjärnans olika delar?
+          - rubrik: Ord före läsningen
+            text: bark (hjärnans yttre lager, inte trädets) · nervcell (en levande cell, inget rum) · signal (ett meddelande mellan celler, ingen mobilsignal)
+          - rubrik: Tänk högt
+            kursiv: true
+            text: ”Hjärnbarken. Bark, som på ett träd? Jag läser vidare. Det yttre lagret, ytterst på storhjärnan. Vem eller vad? Storhjärnan och barken. Det viktigaste? Barken tar emot intryck från sinnena och styr rörelser. Att pannlobens främre del mognar sent är spännande, men det är en detalj.”
+          - rubrik: 1 Storhjärnan och barken
+            text: |-
+              Red ut: ”med viljan”: rörelser du själv väljer · mognar: blir färdig
+              Lyssna efter: storhjärnan med barken · fyra lober · syn, hörsel, känsel, rörelser
+              Lockar: främre pannloben mognar sent. ”Vad tar barkens fyra lober emot, och vad styr pannloben?”
+              Bilden: Siffran 1: de fyra loberna, uppkallade efter huvudets delar
+          - rubrik: 2 Lillhjärnan
+            text: |-
+              Red ut: ”där bakhuvudet möter nacken”: längst bak, nertill · jämn: utan ryck
+              Lyssna efter: balansen · jämna rörelser
+              Lockar: sparken mot bollen. ”Vilka två saker är lillhjärnan viktig för?”
+              Sambandet: ”också en mindre del”: en del till, utöver storhjärnan
+              Bilden: Siffran 2: lillhjärnan längst bak, under storhjärnan
+          - rubrik: 3 Hjärnstammen
+            text: |-
+              Red ut: ”som en stam”: bara en bild för namnet · ”går den över i”: fortsätter som
+              Lyssna efter: andning och hjärtslag · vägen till ryggmärgen
+              Lockar: något vasst under foten. ”Vad styr hjärnstammen, och vart leder den?”
+              Sambandet: ”Kvar blir”: den sista av de tre platserna
+              Bilden: Siffran 3: hjärnstammen, som går över i ryggmärgen
+          - rubrik: 4 Ett nät av nervceller
+            text: |-
+              Red ut: utskott: en del som sticker ut · ”gör av med”: förbrukar
+              Lyssna efter: 2 procent av vikten · 20 procent av syret · nervceller i alla delar
+              Lockar: synapsen där signalen går över. ”Varför tar hjärnan så mycket syre, fast den väger lite?”
+              Sambandet: ”i alla tre”: det som arbetar på alla platserna
+              Bilden: Signalen genom nervcellen och vidare till nästa
+          - rubrik: Om någon frågar
+            text: Finns det höger- och vänsterhjärnade människor? Nej. I en studie av hjärnorna hos 1 011 personer dominerade ingen halva. Halvorna samarbetar. Tror vuxna på tio procent? Ja, nästan hälften av de brittiska lärarna i en studie gjorde det. Har kvinnor lika många nervceller? Räkningen 2009 gällde män, så det säger den inte.
+      - rubrik: "Modellpasset: Tankekartan för Hjärnans karta"
+        falt:
+          - rubrik: Fördjupningen
+            text: |-
+              Red ut: ”i genomsnitt”: talens summa delad med fyra · kärna: en liten del inne i cellen
+              Lyssna efter: 100 miljarder utan källa · hjärnan löstes upp · 86 miljarder
+              Lockar: hjärnan som soppa. ”Hur räknade forskarna nervcellerna, och vad blev svaret?”
+              Sambandet: ”hur många nervceller nätet har”: nätet i avsnitt 4, räknat
+              Bilden: Kärnan i nervcellen: det forskarna räknade
+          - rubrik: Modellen
+            text: Ta fram Tankekartan, blad 2. I vecka 1 lägger du den första post-it-lappen och skriver det första ordet. Nederst i varje fält har bladet rader med ledtexten Hit hör. Där skriver paren det som hör till delen. Gruppen lägger fördjupningens lapp på En lapp till, som får namnet Hör till nervcellerna. Lappen gäller nervcellerna i avsnitt 4 och är ingen femte del av hjärnan.
+          - rubrik: Orden
+            text: den största delen (storhjärnan) · också (lillhjärnan) · kvar blir (hjärnstammen) · i alla tre (nervcellerna)
+          - rubrik: Svaret
+            text: |-
+              Lyssna efter: nej, hela hjärnan arbetar · varje del har ett jobb · 2 procent av vikten, 20 procent av syret
+              Så kan det låta: ”Nej. Varje del har ett jobb: barken tar emot det vi ser, hör och känner, lillhjärnan sköter balansen och hjärnstammen andningen. Hjärnan väger 2 procent men tar 20 procent av syret, för alla delar arbetar.”
+          - rubrik: Rutan
+            text: "Visste du att: intressant, för svaret håller utan lillhjärnans många nervceller."
+          - rubrik: Samtala
+            text: "Varför berättar författaren hur forskarna fick veta det? Varför börjar texten vid bakhuvudet? Ett svar: talet blir lättare att lita på, och handen gör kartan till något du känner."
+  - rubrik: "Avancerat, text 6: Hjärnans karta"
+    tema: Hjärnan
+    text:
+      - Hjärnan · text 1 av 5
+    delar:
+      - rubrik: Till läraren
+        falt:
+          - rubrik: Hör till
+            text: Lärarens sida till texten.
+    listor:
+      - rubrik: Hjärnans karta
+        rader:
+          - - Lägg handen på bakhuvudet. Precis innanför handen tar hjärnan emot det som dina ögon ser. Andra delar av hjärnan håller dig i balans eller sköter andningen. Ändå har många hört att det mesta av hjärnan står oanvänt. Använder vi bara tio procent av hjärnan, och vad gör hjärnans olika delar?
+      - rubrik: Siffran
+        rader:
+          - - 86 miljarder
+            - nervceller hade hjärnan hos vuxna män i genomsnitt, enligt en räkning från 2009.
+      - rubrik: "Bild: Hjärnan från sidan"
+        rader:
+          - - Hjärnan från sidan. Loberna har namn efter platsen på huvudet. Siffrorna är avsnittens nummer.
+      - rubrik: Storhjärnan och barken
+        rader:
+          - - Den största delen av hjärnan är storhjärnan. Den tar emot det du ser, hör och känner, och den styr dina rörelser. Storhjärnan är delad i en vänster och en höger halva, som hänger ihop på mitten. Halvorna samarbetar mycket, men de har delvis olika uppgifter.
+          - - "Ytterst på storhjärnan sitter **hjärnbarken**. Namnet passar, för precis som barken på ett träd är den det yttre lagret. Barken på varje halva delas in i fyra stora områden som kallas lober, och de har fått namn efter var de sitter: vid pannan, hjässan, tinningen och nacken. I pannloben styrs de rörelser som du gör med viljan. Hjässloben tar emot känsel och smak, tinningloben hörsel och lukt, och nackloben synen."
+          - - Den främre delen av pannloben, precis bakom pannan, är en av de sista delarna av hjärnan som mognar. Den mognar alltså fortfarande i tonåren, och hela hjärnan är färdigutvecklad först i mitten eller slutet av 20-årsåldern.
+      - rubrik: Ord i texten
+        rader:
+          - - hjärnbarken
+            - det yttre lagret av storhjärnan
+      - rubrik: Lillhjärnan
+        rader:
+          - - "Under storhjärnans bakre del, där bakhuvudet möter nacken, finns också en mindre del. Den heter lillhjärnan, och namnet passar, för bredvid storhjärnan är den liten. Ändå har lillhjärnan ett stort jobb: balansen och rörelserna."
+          - - Tänk på vad som händer när du sparkar på en boll. Sparken börjar i pannloben, där hjärnan styr de rörelser du gör med viljan. Lillhjärnan hjälper till så att rörelsen blir jämn och foten träffar rätt. Samtidigt måste du stå kvar på det andra benet utan att ramla, och för balansen är lillhjärnan också viktig. Samma sak gäller när du cyklar, dansar eller går i en trappa.
+          - - Hur viktig lillhjärnan är märks när den inte fungerar. Den som har fått en skada i lillhjärnan kan få svårt att hålla balansen och att gå, och rörelserna kan bli ryckiga.
+      - rubrik: Hjärnstammen
+        rader:
+          - - Kvar blir hjärnstammen, den del av hjärnan som sitter längst ner, under storhjärnan och framför lillhjärnan. Hjärnstammen styr andningen och hur fort hjärtat slår. Du andas och hjärtat slår medan du läser, springer och sover, och hjärnstammen styr båda också när du tänker på något annat.
+          - - Namnet passar här också, för hjärnstammen sitter som en stam under storhjärnan, och nedåt går den över i **ryggmärgen**. Genom hjärnstammen och ryggmärgen går signaler mellan hjärnan och resten av kroppen. En signal är i biologin ett meddelande från en cell till en annan.
+          - - När du tar ett steg går en signal från pannloben ner genom hjärnstammen och ryggmärgen till musklerna i benet. Trampar du på något vasst går en signal åt andra hållet, från foten upp till hjärnan, och först då känner du att det gör ont.
+      - rubrik: Ord i texten
+        rader:
+          - - ryggmärgen
+            - nervsträngen inne i ryggraden
+      - rubrik: Ett nät av nervceller
+        rader:
+          - - Storhjärnan, lillhjärnan och hjärnstammen är tre platser i hjärnan, men i alla tre arbetar samma slags celler, **nervceller**. En nervcell har korta utskott som tar emot signaler och ett långt utskott som skickar dem vidare. Där en nervcell möter nästa cell finns en **synaps**, och där går signalen över. Så hänger nervcellerna ihop i ett nät genom hela hjärnan.
+          - - Det sägs ofta att vi bara använder tio procent av hjärnan. Det stämmer inte. Hjärnan väger omkring 2 procent av kroppen och gör ändå av med omkring 20 procent av kroppens syre. Så mycket syre skulle inte behövas om det mesta av hjärnan stod stilla. Nervcellerna gör av med största delen av hjärnans syre när de arbetar, och de gör av med nästan lika mycket när du vilar som när du tänker hårt. Varje del på hjärnans karta har dessutom ett jobb. Vi använder alltså hela hjärnan, både när vi är vakna och när vi sover.
+      - rubrik: Ord i texten
+        rader:
+          - - nervcell
+            - en cell som tar emot och skickar signaler
+          - - synaps
+            - platsen där en nervcell möter en annan cell
+      - rubrik: "Bild: En nervcell"
+        rader:
+          - - En nervcell. Signalen kommer in genom de korta utskotten och går ut genom det långa till nästa cell.
+      - rubrik: "Fakta: Hjärnan och syret"
+        rader:
+          - - Hjärnans vikt
+            - knappt 1,5 kilo hos en vuxen
+          - - Andel av kroppens vikt
+            - omkring 2 procent
+          - - Andel av kroppens syre
+            - omkring 20 procent
+          - - Syret när du vilar
+            - nästan lika mycket som när du tänker hårt
+      - rubrik: "Fördjupning: Hjärnsoppan"
+        rader:
+          - - Länge gick det inte att säga hur många nervceller nätet har. I många böcker stod det 100 miljarder, men ingen kunde säga var talet kom ifrån. Ingen hade räknat alla nervcellerna i en hel hjärna, och att räkna miljarder små celler en och en går inte.
+          - - År 2005 visade två forskare, Herculano-Houzel och Lent, ett annat sätt. De prövade det på hjärnor från råttor och löste upp hjärnvävnaden i en vätska tills den blev en jämn soppa. Cellerna gick sönder, men cellernas kärnor fanns kvar och flöt runt i soppan. Forskarna färgade kärnorna, så att de kunde se vilka som kom från nervceller, och räknade dem i små prover av soppan. Sedan räknade de ut hur många kärnor hela soppan hade. Svaret kom på ett dygn.
+          - - År 2009 räknade en grupp forskare nervcellerna i fyra hjärnor från vuxna män på samma sätt. Hjärnorna hade inte exakt lika många, men i genomsnitt hade de 86 miljarder nervceller, omkring 14 miljarder färre än i böckerna. Räkningen gällde vuxna män, så en annan hjärna kan ha något fler eller färre. Talet 86 miljarder är alltså räknat, och det ersatte ett tal som ingen hade räknat.
+      - rubrik: Visste du att …
+        rader:
+          - - Fyra av fem
+            - nervceller i hjärnan sitter i lillhjärnan, fast den bara väger omkring en tiondel av hjärnan. Vilken del hade du gissat på?
+      - rubrik: Läs mer
+        rader:
+          - - 1177 visar hjärnans delar och vad loberna, lillhjärnan och hjärnstammen gör.
+            - https://www.1177.se/liv--halsa/sa-fungerar-kroppen/sa-fungerar-hjarnan/
+          - - 1177 förklarar hur nervcellerna skickar signaler mellan hjärnan och kroppen.
+            - https://www.1177.se/liv--halsa/sa-fungerar-kroppen/hjarna-ryggmarg-och-nerver/
+          - - Hjärnfonden går igenom vanliga myter om hjärnan, också den om tio procent.
+            - https://www.hjarnfonden.se/om-hjarnan/anatomi-och-fakta/neuromyter/
+  - rubrik: "Modellen: Avancerat, text 6, Hjärnans karta"
+    tema: Hjärnan
+    text:
+      - Tankekartan, blad 2, ifylld för Hjärnans karta.
+    delar:
+      - rubrik: Frågan och svaret
+        falt:
+          - rubrik: Textens fråga
+            text: Använder vi bara tio procent av hjärnan, och vad gör hjärnans olika delar?
+          - rubrik: Lyssna efter
+            text: nej, hela hjärnan arbetar · varje del har ett jobb · 2 procent av vikten, 20 procent av syret
+          - rubrik: Så kan svaret låta
+            text: "Nej. Varje del har ett jobb: barken tar emot det vi ser, hör och känner, lillhjärnan sköter balansen och hjärnstammen andningen. Hjärnan väger 2 procent men tar 20 procent av syret, för alla delar arbetar."
+  - rubrik: "Lärarens sida: Avancerat, text 7, Hjärnans nattskift"
+    text:
+      - Sömnen går oftast fyra till sex rundor per natt genom fyra faser, djupsömnen kommer mest tidigt, och i drömsömnen är hjärnan aktiv. Texten är byggd i tidsordning, och modellen är Tidslinjen, blad 1. I vecka 2 tänker du högt i avsnitt 1.
+    delar:
+      - rubrik: "Läspasset: de fyra avsnitten"
+        falt:
+          - rubrik: Textens fråga
+            text: Sover du lika djupt hela natten, och vad händer i hjärnan medan du sover?
+          - rubrik: Ord före läsningen
+            text: djup (svår att väcka, inte bättre) · cykel (en runda som börjar om) · hjärnvåg (en kurva ur mätningen, inget hav)
+          - rubrik: Tänk högt
+            kursiv: true
+            text: "”Ytlig sömn. Ytlig, som vattenytan? Jag läser vidare. Här betyder det att jag vaknar lätt, och djup blir motsatsen: svår att väcka. Vem eller vad? Insomningen. Det viktigaste? Den är kort, och sömnen är ytlig. Elektroderna visar hur vi vet, men de är inget steg i natten.”"
+          - rubrik: 1 Insomningen
+            text: |-
+              Red ut: ”skiljer sig från”: är annorlunda än · aktiviteten: det nervcellerna gör
+              Lyssna efter: kort · ytlig: vaknar lätt
+              Lockar: elektroder i hårbotten. ”Vad betyder ytlig, och hur lång är insomningen?”
+              Bilden: Vågorna vid siffran 1, jämförda med vaken
+          - rubrik: 2 Bassömnen
+            text: |-
+              Red ut: ”något svalare”: lite kallare · utbrott: något som kommer plötsligt
+              Lyssna efter: sover på riktigt · andning och puls ner · ungefär hälften
+              Lockar: korta utbrott. ”Vilken fas har natten mest av?”
+              Sambandet: ”Sedan”: nästa fas efter insomningen
+              Bilden: Vågorna vid siffran 2, med de korta utbrotten
+          - rubrik: 3 Djupsömnen
+            text: |-
+              Red ut: ”som lägst”: lägst under hela natten · frisätts: släpps ut i blodet
+              Lyssna efter: svårast att väcka · långsamma vågor · mest tidigt på natten
+              Lockar: tillväxthormonet. ”Vad betyder djup, och när kommer djupsömnen mest?”
+              Sambandet: ”Efter det”: fasen efter bassömnen
+              Bilden: De långsamma vågorna vid siffran 3
+          - rubrik: 4 Drömsömnen
+            text: |-
+              Red ut: ”oväntat”: fast du sover, liknar hjärnan en vaken hjärna · perioderna: stunderna med drömsömn
+              Lyssna efter: hjärnan aktiv som vaken · musklerna slappa · börjar om
+              Lockar: snabba ögonrörelser. ”Vad händer när drömsömnen är slut?”
+              Sambandet: ”Till sist”: den sista fasen innan sömnen börjar om
+              Bilden: Trappan: djupsömnen tidigt, drömsömnen längre mot morgonen
+          - rubrik: Om någon frågar
+            text: "Stängs hjärnan av när man sover? Nej, och det vet nästan alla: i en studie svarade 1 procent av de vuxna fel. Är djupsömn bättre? Djup betyder svår att väcka. Hjärnfonden kallar den viktigast, men enligt 1177 behövs alla faserna. Hur lång är en cykel exakt? 1177 skriver ungefär 90 minuter, Hjärnfonden 90–120 och en amerikansk myndighet 80–100."
+      - rubrik: "Modellpasset: Tidslinjen för Hjärnans nattskift"
+        falt:
+          - rubrik: Fördjupningen
+            text: |-
+              Red ut: avfallsämne: något hjärnan behöver bli av med · ”det motsatta”: långsammare i stället för snabbare
+              Lyssna efter: möss · 2013: snabbare · 2024: långsammare
+              Lockar: färgämnet. ”Vad visade mätningen 2013, och vad visade mätningen 2024?”
+              Sambandet: ”medan den sover”: textens fråga om hjärnan i sömnen
+          - rubrik: Modellen
+            text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad kommer först här?” Den visar delar men ingen ordning. Ta sedan fram Tidslinjen, blad 1. Gruppen lägger fördjupningens post-it-lapp på En lapp till, som får namnet ”Städar hjärnan?”, och drar inget streck. Försöken gäller sömnen hos möss och är inget steg i natten."
+          - rubrik: Orden
+            text: först (insomningen) · sedan (bassömnen) · efter det (djupsömnen) · till sist (drömsömnen)
+          - rubrik: Svaret
+            text: |-
+              Lyssna efter: nej, natten går i cykler · djupast i djupsömnen, mest tidigt · drömsömnen: hjärnan aktiv som vaken
+              Så kan det låta: ”Nej. Natten går i cykler: insomning, bassömn, djupsömn och drömsömn, där hjärnan är aktiv som vaken. Sedan börjar sömnen om, och djupsömnen kommer mest tidigt på natten.”
+          - rubrik: Rutan
+            text: "Visste du att: intressant, för svaret om djupet och cyklerna håller utan musklerna."
+          - rubrik: Samtala
+            text: "Varför berättar författaren hur forskarna fick veta det? Varför börjar texten med väckarklockan? Ett svar: mätningarna gör det osynliga synligt, och väckarklockan är den del av natten du minns."
+  - rubrik: "Avancerat, text 7: Hjärnans nattskift"
+    tema: Hjärnan
+    text:
+      - Hjärnan · text 2 av 5
+    delar:
+      - rubrik: Till läraren
+        falt:
+          - rubrik: Hör till
+            text: Lärarens sida till texten.
+    listor:
+      - rubrik: Hjärnans nattskift
+        rader:
+          - - Klockan är elva, och du somnar. Nästa sak du märker är väckarklockan, och natten känns som ett hål utan tid. Men i hjärnan har det hänt mycket. Sover du lika djupt hela natten, och vad händer i hjärnan medan du sover?
+      - rubrik: Siffran
+        rader:
+          - - 4–6
+            - gånger brukar sömnen gå en runda genom sina faser under en natt.
+      - rubrik: Insomningen
+        rader:
+          - - Först kommer insomningen, den första av sömnens fyra faser. En fas är här en del av sömnen som skiljer sig från de andra delarna, både i kroppen och på en mätning. I insomningen är sömnen ytlig, och ytlig betyder här att du vaknar lätt. Ett ljud eller en knuff kan räcka för att du ska vakna. Musklerna slappnar av, och ibland rycker det till i dem. Insomningen är kort och står för omkring 5 procent av sömnen.
+          - - Att sömnen har faser vet forskarna, eftersom den går att mäta. Med små **elektroder** fästa i hårbotten mäter forskare och läkare aktiviteten i hjärnans nervceller, cellerna som tar emot och skickar signaler. Mätningen kallas EEG och kan göras när du sover. Den ritas som kurvor, **hjärnvågor**, och vågorna ändrar form från fas till fas.
+      - rubrik: Ord i texten
+        rader:
+          - - elektroder
+            - små mätare som fästs mot huvudet
+          - - hjärnvåg
+            - en kurva ur mätningen av hjärnans aktivitet
+      - rubrik: "Bild: Hjärnvågor"
+        rader:
+          - - Hjärnvågor. Så kan mätningen se ut. Vågorna är förenklade.
+      - rubrik: Bassömnen
+        rader:
+          - - Sedan går du över i bassömnen, och nu sover du på riktigt. Andningen blir lugnare och pulsen går ner, alltså slår hjärtat lite långsammare. Kroppen blir något svalare, ögonen slutar röra sig och musklerna slappnar av ännu mer.
+          - - På mätningen syns skillnaden mot insomningen. Hjärnvågorna blir långsammare, men ibland kommer korta utbrott av snabbare aktivitet. Det är på sådana mönster som forskarna ser vilken fas du är i, och mönstren visar att hjärnan arbetar också nu.
+          - - Bassömnen är den fas som natten har mest av. Den står för ungefär hälften av sömnen, så om du sover åtta timmar är omkring fyra av dem bassömn. Bas betyder här det som något vilar på, och namnet passar en fas som tar så stor del av natten. Ändå är bassömnen inte djupast. Den djupaste sömnen kommer i nästa fas.
+      - rubrik: Djupsömnen
+        rader:
+          - - Efter det kommer djupsömnen, den sömn där du är svårast att väcka. Ordet djup säger alltså hur svårt det är att väcka dig. Det betyder inte att djupsömnen är bättre än de tre andra faserna. Andningen och pulsen är nu som lägst under natten. Djupsömnen står för ungefär 15 procent av sömnen, och den kommer mest i början av natten. Sover du åtta timmar blir det drygt en timme djupsömn.
+          - - Djupsömnen kallas också sömnen med långsamma vågor. Namnet kommer från mönstret som syns när hjärnans aktivitet mäts, för då blir hjärnvågorna långsamma.
+          - - Under djupsömnen bygger kroppen upp sig, och det märks på kroppens hormoner. I biologin är ett hormon ett ämne som kroppen gör och som påverkar andra organ. Nu frisätts tillväxthormon, och tillverkningen av stresshormonet kortisol är som lägst.
+      - rubrik: Drömsömnen
+        rader:
+          - - Till sist kommer drömsömnen, och då händer något oväntat. Ögonen rör sig snabbt bakom ögonlocken, och när hjärnans aktivitet mäts, liknar den en vaken hjärnas aktivitet. Hjärnan stängs alltså inte av när du sover. Samtidigt slappnar musklerna av. Det är i drömsömnen som du drömmer mest, och den kallas också REM-sömn, efter de engelska orden för snabba ögonrörelser.
+          - - När drömsömnen är slut har sömnen gått en runda genom faserna. En sådan runda tar omkring en och en halv timme och kallas en cykel. I biologin betyder cykel en runda som börjar om. En natt har oftast fyra till sex cykler.
+          - - Cyklerna är inte likadana. Tidigt på natten är djupsömnen som längst, och mot morgonen blir perioderna med drömsömn längre. Efter varje drömsömn börjar sömnen om med en ny cykel, tills du vaknar.
+      - rubrik: "Bild: En natt som en trappa"
+        rader:
+          - - En natt som en trappa. En tänkt natt med fem cykler, mest djupsömn tidigt och mest drömsömn mot morgonen. Siffrorna är avsnittens nummer.
+      - rubrik: "Fakta: Natten i tal"
+        rader:
+          - - Insomningen
+            - omkring 5 procent av sömnen
+          - - Bassömnen
+            - ungefär hälften av sömnen
+          - - Djupsömnen
+            - ungefär 15 procent, mest tidigt på natten
+          - - Drömsömnen
+            - längre perioder mot morgonen
+          - - En cykel
+            - omkring en och en halv timme
+      - rubrik: "Fördjupning: Städar hjärnan på natten?"
+        rader:
+          - - Hos möss har forskare försökt mäta om hjärnan städar bort avfall medan den sover, och om det går fortare än när den är vaken. Svaren går isär.
+          - - År 2013 jämförde forskare vid University of Rochester i USA sovande och vakna möss. Hos de sovande var utrymmet mellan hjärnans celler 60 procent större. Forskarna sprutade också in ett avfallsämne i hjärnan på 54 möss, ett ämne som kan skada hjärnan om det samlas. Hos de sovande mössen fördes det bort dubbelt så fort som hos de vakna. Forskarna förklarade det med att vätska sköljer genom det större utrymmet och tar med sig avfallet. De drog slutsatsen att hjärnan städar när den sover. Svenska Hjärnfonden skriver att hjärnans städning kommer i gång när vi sover.
+          - - År 2024 mätte forskare vid Imperial College i London på ett annat sätt. De sprutade in ett färgämne i hjärnan på åtta möss och gjorde en direkt mätning av hur fort det fördes bort, både när mössen var vakna och när de sov. När de sov fördes färgämnet bort ungefär 30 procent långsammare. Med det nya sättet att mäta blev svaret alltså det motsatta.
+          - - Ingen av mätningarna är gjord på människor. Det är två mätningar på möss som säger olika, och frågan om hjärnan städar på natten är ännu inte avgjord.
+      - rubrik: Visste du att …
+        rader:
+          - - Förlamade
+            - blir musklerna i armar och ben under drömsömnen, och därför gör du inte det du drömmer. Vad kunde annars hända?
+      - rubrik: Läs mer
+        rader:
+          - - Hjärnfonden beskriver sömnens fyra faser och vad som händer i var och en.
+            - https://www.hjarnfonden.se/hjarnhalsa/somn/somnens-stadier/
+          - - 1177 förklarar med text och film hur sömnen går i cykler genom faserna.
+            - https://www.1177.se/liv--halsa/stresshantering-och-somn/somnen-ar-viktig-for-din-halsa/
+          - - 1177 förklarar hur en EEG går till, också när mätningen görs medan du sover.
+            - https://www.1177.se/undersokning-behandling/undersokningar-och-provtagning/provtagning-och-matningar/matningar/eeg--elektroencefalografi/
+  - rubrik: "Modellen: Avancerat, text 7, Hjärnans nattskift"
+    tema: Hjärnan
+    text:
+      - Tidslinjen, blad 1, ifylld för Hjärnans nattskift.
+    delar:
+      - rubrik: Frågan och svaret
+        falt:
+          - rubrik: Textens fråga
+            text: Sover du lika djupt hela natten, och vad händer i hjärnan medan du sover?
+          - rubrik: Lyssna efter
+            text: "nej, natten går i cykler · djupast i djupsömnen, mest tidigt · drömsömnen: hjärnan aktiv som vaken"
+          - rubrik: Så kan svaret låta
+            text: "Nej. Natten går i cykler: insomning, bassömn, djupsömn och drömsömn, där hjärnan är aktiv som vaken. Sedan börjar sömnen om, och djupsömnen kommer mest tidigt på natten."
+  - rubrik: "Lärarens sida: Avancerat, text 8, Två slags minne"
+    text:
+      - Arbetsminnet och långtidsminnet finns båda i nätverk av nervceller, men arbetsminnet håller några få saker, ofta i sekunder, medan långtidsminnet behåller det som upprepas, ibland hela livet. Texten jämför två saker, och modellen är Venndiagrammet, blad 1. I vecka 3 har två elever i taget jobbkorten från avsnitt 2.
+    delar:
+      - rubrik: "Läspasset: de fyra avsnitten"
+        falt:
+          - rubrik: Textens fråga
+            text: Varför kan ett namn försvinna på några sekunder medan en låt sitter kvar i flera år, och vad har de två minnena gemensamt?
+          - rubrik: Ord före läsningen
+            text: minne (nätverk av nervceller, ingen hårddisk) · arbetsminne (inget minne av ett arbete) · hippocampus (behövs för nya minnen av händelser)
+          - rubrik: 1 Båda är minne
+            text: |-
+              Red ut: ”tagit in”: sett, hört eller läst · spritt: på flera ställen
+              Lyssna efter: båda är minne · nätverk av nervceller · båda behövs
+              Lockar: meningen du läser just nu. ”Var i hjärnan finns ett minne?”
+          - rubrik: 2 Arbetsminnet
+            text: |-
+              Red ut: huvudräkning: räkna utan papper · ”tappa tråden”: inte hänga med
+              Lyssna efter: det du tänker på · tre till fem saker · ofta några sekunder
+              Lockar: koden med sex siffror. ”Hur mycket rymmer arbetsminnet, och hur länge?”
+              Sambandet: ”det mindre av de två”: arbetsminnet ställs mot långtidsminnet
+              Bilden: Siffran 2: arbetsminnet, dit det nya kommer in
+          - rubrik: 3 Långtidsminnet
+            text: |-
+              Red ut: ”Själva minnet”: nätverket i hjärnbarken, inte hippocampus · tinningen: sidan av huvudet vid ögat
+              Lyssna efter: minuter till hela livet · händelser, fakta, färdigheter · hippocampus
+              Lockar: din senaste födelsedag. ”Vilka tre slag av långtidsminnen nämner texten?”
+              Sambandet: ”Till skillnad från arbetsminnet”: det andra minnet ställs mot det första
+              Bilden: Hippocampus på båda sidor, vid siffran 3
+          - rubrik: 4 Så glömmer de
+            text: |-
+              Red ut: ”mer hållbart”: glöms inte lika lätt · ”sprida ut”: dela upp på flera tillfällen
+              Lyssna efter: arbetsminnet tappar · långtidsminnet behåller · upprepning
+              Lockar: låten du har sjungit. ”Vad gör att något stannar i långtidsminnet?”
+              Sambandet: ”Medan”: de två minnena ställs mot varandra
+              Bilden: Pilen med upprepning från arbetsminnet till långtidsminnet
+          - rubrik: Om någon frågar
+            text: "Finns det visuella och auditiva elever? Undervisning efter lärstilar saknar stöd i forskningen. Varför både sju och tre till fem? År 1956 sa Miller sju, och Cowan säger tre till fem. Är arbetsminnet korttidsminnet? Nästan: det är korttidsminnet när du tänker med det. Är spegelteckningen ett tredje minne? Nej, en färdighet i långtidsminnet. Den visade att långtidsminnet har flera slag."
+      - rubrik: "Modellpasset: Venndiagrammet för Två slags minne"
+        falt:
+          - rubrik: Fördjupningen
+            text: |-
+              Red ut: ”fastnade”: blev kvar · ”tresiffrigt tal”: ett tal som 382
+              Lyssna efter: en enda människa · talet i 15 minuter · glömde det han var med om
+              Lockar: stjärnan i spegeln. ”Vad kunde H.M. göra, och vad kunde han inte?”
+              Sambandet: ”de två minnena”: avsnitt 2 och 3 hos en människa
+          - rubrik: Modellen
+            text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad ska stå i mitten?” Texten jämför två saker, och kartan visar inte vad som är lika och olika. Ta sedan fram Venndiagrammet, blad 1. Avsnitt 4 ger två post-it-lappar: i modellpasset delar gruppen avsnittets kärna på två lappar, en för var sida. Gruppen lägger fördjupningens lapp på En lapp till, som får namnet Hör till långtidsminnet. H.M:s arbetsminne fungerade, men nästan inga nya händelser fastnade i långtidsminnet."
+          - rubrik: Orden
+            text: |-
+              båda (båda) · av de två (arbetsminnet) · till skillnad från (långtidsminnet)
+              Utan flik: gruppen skriver ”medan” och ”behåller däremot” vid lapparna från avsnitt 4.
+          - rubrik: Svaret
+            text: |-
+              Lyssna efter: arbetsminnet: få saker, ofta sekunder · långtidsminnet: det som upprepas · båda: nätverk av nervceller
+              Så kan det låta: ”Namnet fanns bara i arbetsminnet, som håller få saker, ofta bara i sekunder, och tappar dem när något nytt kommer. Låten har jag upprepat, så den sitter i långtidsminnet. Båda finns i nätverk av nervceller.”
+          - rubrik: Rutan
+            text: "Visste du att: intressant, för svaret håller utan att veta hur hjärnan skars."
+          - rubrik: Samtala
+            text: "Varför berättar författaren hur forskarna fick veta det? Varför börjar texten med ett namn som försvinner? Ett svar: H.M. gör de två minnena synliga, och de flesta har själva glömt ett namn."
+  - rubrik: "Avancerat, text 8: Två slags minne"
+    tema: Hjärnan
+    text:
+      - Hjärnan · text 3 av 5
+    delar:
+      - rubrik: Till läraren
+        falt:
+          - rubrik: Hör till
+            text: Lärarens sida till texten.
+    listor:
+      - rubrik: Två slags minne
+        rader:
+          - - En ny elev säger sitt namn, och tio sekunder senare är det borta. Ändå kan du orden till en låt som du inte har hört på flera år. Det beror på två slags minne. Varför kan ett namn försvinna på några sekunder medan en låt sitter kvar i flera år, och vad har de två minnena gemensamt?
+      - rubrik: Siffran
+        rader:
+          - - 3–5
+            - saker ryms i arbetsminnet på en gång hos unga vuxna, enligt en forskare år 2010.
+      - rubrik: Båda är minne
+        rader:
+          - - "Arbetsminnet och långtidsminnet är två slags minne. Båda håller information som du har tagit in, och du behöver båda för att lära dig. När du läser den här meningen håller arbetsminnet kvar orden i början tills du har kommit till slutet. Samtidigt vet du vad orden betyder, och det kommer ur långtidsminnet. När du lär dig något nytt i skolan arbetar de två tillsammans: arbetsminnet tar emot det nya, och långtidsminnet håller kvar det du kan sedan förut."
+          - - Många tänker sig minnet som en hårddisk, där varje sak du minns ligger på en egen plats. Så fungerar det inte i hjärnan. Där finns ett minne i ett nätverk av **nervceller** som hör ihop, spritt över flera delar av hjärnan. Det gäller båda minnena, och när du minns något blir nätverket aktivt igen. Men de skiljer sig åt i hur mycket de rymmer och hur länge.
+      - rubrik: Ord i texten
+        rader:
+          - - nervcell
+            - en cell som tar emot och skickar signaler
+      - rubrik: Arbetsminnet
+        rader:
+          - - Arbetsminnet är det mindre av de två. Det är minnet för det du tänker på just nu, som talen i en huvudräkning, en fråga du ska svara på eller vägen som någon just har beskrivit för dig. Arbetsminnet är kopplat till **hjärnbarken** längst fram i hjärnan, bakom pannan.
+          - - Arbetsminnet rymmer bara några få saker på en gång. Hos unga vuxna är det tre till fem saker, enligt forskaren Cowan. Sakerna stannar där ofta bara några sekunder. Ska du komma ihåg en kod med sex siffror medan någon pratar med dig, märker du snart hur lite som ryms.
+          - - Därför är det lätt att tappa tråden när mycket händer på en gång, till exempel när någon ger flera instruktioner i rad medan du tänker på något annat. Det kan hända vem som helst, för arbetsminnet är litet också hos vuxna. Den som tappar tråden kan ha fått för mycket att hålla i huvudet samtidigt.
+      - rubrik: Ord i texten
+        rader:
+          - - hjärnbarken
+            - det yttre lagret av storhjärnan
+      - rubrik: Långtidsminnet
+        rader:
+          - - Till skillnad från arbetsminnet rymmer långtidsminnet flera slag av minnen, bland annat händelser, fakta och färdigheter. Händelser är det du har varit med om, som din senaste födelsedag eller första skoldagen. Fakta är det du vet, som vad din bästa kompis heter. Färdigheter är det du kan göra, som att cykla, knyta skorna eller spela ett instrument.
+          - - Långtidsminnet rymmer också mycket mer än arbetsminnet, och det kan hålla kvar något från några minuter till hela livet. Något som du var med om i förskolan kan alltså finnas kvar när du är gammal.
+          - - En del av hjärnan har en särskild roll i långtidsminnet. Hippocampus sitter djupt inne i tinningloben och behövs när nya minnen av händelser och fakta bildas. Det finns en tinninglob innanför tinningen på var sida av huvudet, och i var och en finns en hippocampus. Själva minnet finns sedan i ett nätverk av nervceller i hjärnbarken.
+      - rubrik: "Bild: Hippocampus på båda sidor"
+        rader:
+          - - Hippocampus på båda sidor. De sitter djupt inne i tinningloberna, en på var sida av hjärnan. Siffran är avsnittets nummer.
+      - rubrik: Så glömmer de
+        rader:
+          - - Medan arbetsminnet lätt tappar sina saker när något nytt kommer in, kan långtidsminnet behålla något i många år. Namnet på den nya eleven försvann just så. Du lyssnade på nästa sak, arbetsminnet fylldes med den, och namnet fanns inte kvar.
+          - - Långtidsminnet behåller däremot det som upprepas och används. Du glömmer snabbt det nya som inte kommer tillbaka, men när du upprepar något blir nätverket aktivt igen, och minnet blir mer hållbart. Ett minne som har varit aktivt många gånger är därför lättare att minnas nästa gång. Det hjälper också att sprida ut upprepningen över flera tillfällen.
+          - - Låten har du hört och sjungit med i många gånger, kanske under flera veckor, och därför sitter den kvar. Det du upprepar vid flera tillfällen kan alltså bli ett minne som stannar i långtidsminnet. Upprepning är en bro mellan de två minnena.
+      - rubrik: "Bild: Från sinnena till långtidsminnet"
+        rader:
+          - - Från sinnena till långtidsminnet. Det du upprepar kan stanna i långtidsminnet, och mycket av det andra glöms. Siffrorna är avsnittens nummer.
+      - rubrik: "Fakta: Två minnen i tal"
+        rader:
+          - - Tiden i arbetsminnet
+            - ofta bara några sekunder
+          - - Tiden i långtidsminnet
+            - från några minuter till hela livet
+          - - Arbetsminnet enligt Miller år 1956
+            - omkring sju saker
+          - - Arbetsminnet enligt Cowan år 2010
+            - tre till fem saker hos unga vuxna
+      - rubrik: "Fördjupning: Mannen som inte kunde minnas nytt"
+        rader:
+          - - Att de två minnena är olika syns tydligt hos en enda människa. Forskarna kallade honom H.M. År 1953, när han var 27 år, opererades han för svår epilepsi, en sjukdom som ger anfall. Läkarna tog bort delar av tinningloberna på båda sidor av hjärnan, bland annat den främre delen av hippocampus.
+          - - Efter operationen glömde H.M. det han var med om nästan lika fort som det hände, men han var lika intelligent som förut. Forskarna gav honom ett tresiffrigt tal att komma ihåg. Så länge han upprepade det för sig själv kunde han hålla det i huvudet i upp till 15 minuter. Men när han tänkte på något annat var allt borta, också att han hade fått ett tal. Hans arbetsminne fungerade alltså, men talet fastnade inte i långtidsminnet. Upprepningen räckte inte, eftersom hippocampus behövs när nya minnen av händelser och fakta bildas.
+          - - En ny färdighet kunde han ändå lära sig. Forskarna lät honom rita längs kanten på en stjärna när han bara såg sin hand och stjärnan i en spegel. Han lärde sig det på tio försök, och färdigheten fanns kvar under de tre dagar som han övade. Men han mindes inte att han hade gjort uppgiften förut.
+          - - "H.M. dog 2008, 82 år gammal, och först då blev hans namn känt: Henry Molaison. Belägget kommer alltså från en enda människa, men hos honom syns textens två minnen var för sig."
+      - rubrik: Visste du att …
+        rader:
+          - - Över 2 000
+            - tunna skivor skars ur H.M:s hjärna efter hans död, under 53 timmar i sträck, och det sändes direkt på webben. Vad tror du att forskarna ville se?
+      - rubrik: Läs mer
+        rader:
+          - - Hjärnfonden berättar hur hjärnan förändras under skolåren, och hur arbetsminnet växer under hela barndomen.
+            - https://www.hjarnfonden.se/2019/11/sa-utvecklas-hjarnan-hos-skolbarnet/
+          - - Forskning & Framsteg berättar vad forskarna fann när de undersökte H.M:s hjärna efter hans död.
+            - https://fof.se/artikel/h-ms-hjarna-kartlagd/
+          - - MIT intervjuar Suzanne Corkin, som forskade om H.M. och hans hjärna. Texten är på engelska.
+            - https://news.mit.edu/2009/3q-corkin
+  - rubrik: "Modellen: Avancerat, text 8, Två slags minne"
+    tema: Hjärnan
+    text:
+      - Venndiagrammet, blad 1, ifyllt för Två slags minne.
+    delar:
+      - rubrik: Frågan och svaret
+        falt:
+          - rubrik: Textens fråga
+            text: Varför kan ett namn försvinna på några sekunder medan en låt sitter kvar i flera år, och vad har de två minnena gemensamt?
+          - rubrik: Lyssna efter
+            text: "arbetsminnet: få saker, ofta sekunder · långtidsminnet: det som upprepas · båda: nätverk av nervceller"
+          - rubrik: Så kan svaret låta
+            text: Namnet fanns bara i arbetsminnet, som håller få saker, ofta bara i sekunder, och tappar dem när något nytt kommer. Låten har jag upprepat, så den sitter i långtidsminnet. Båda finns i nätverk av nervceller.
+  - rubrik: "Lärarens sida: Avancerat, text 9, Natten bygger minnet"
+    text:
+      - Det nya är först bräckligt, i djupsömnen arbetar troligen samma nervceller som på dagen, så att minnet blir hållbart i hjärnbarken, och därför minns den som har sovit mer. Texten förklarar orsak och verkan, och modellen är Kedjan, blad 1. I vecka 4 har två elever i taget jobbkorten från avsnitt 2.
+    delar:
+      - rubrik: "Läspasset: de fyra avsnitten"
+        falt:
+          - rubrik: Textens fråga
+            text: Lönar det sig att plugga hela natten före ett prov, och vad gör sömnen med det du har lärt dig?
+          - rubrik: Ord före läsningen
+            text: minne (nätverk av nervceller, ingen hårddisk) · hjärnbarken (hjärnans yttre lager, ingen trädbark) · djupsömn (svår att väcka, inte bättre sömn)
+          - rubrik: 1 Bräckligt
+            text: |-
+              Red ut: glosa: ord på ett annat språk · ”går förlorat”: försvinner
+              Lyssna efter: nytt minne · bräckligt · glöms fortast
+              Lockar: hippocampus innanför tinningen. ”Vad händer med det nya de första timmarna?”
+              Bilden: Dagen: ett nytt nätverk av nervceller, och hippocampus
+          - rubrik: 2 Samma nervceller
+            text: |-
+              Red ut: ”om och om igen”: många gånger · ”i samma ordning”: som när råttan var vaken
+              Lyssna efter: djupsömnen · aktiva igen · samma ordning
+              Lockar: försöken med råttor. ”När blir dagens minnen aktiva igen?”
+              Sambandet: ”Eftersom det nya är bräckligt”, alltså avsnitt 1
+              Bilden: Natten: samma nervceller arbetar igen i djupsömnen
+          - rubrik: 3 Hållbart
+            text: |-
+              Red ut: ”tar hjärnbarken över”: får huvudrollen för minnet · hållbart: finns kvar länge
+              Lyssna efter: hjärnbarken · finns kvar länge · knyts till det du vet
+              Lockar: begreppet i biologi kopplat till kroppen. ”Vilka två delar arbetar tillsammans i djupsömnen?”
+              Sambandet: ”Det gör att”, alltså följden av natten i avsnitt 2
+              Bilden: Pilen från hippocampus till hjärnbarken
+          - rubrik: 4 Minns mer
+            text: |-
+              Red ut: ”kom emellan”: hände mellan läsningen och provet · deltagare: de som var med
+              Lyssna efter: minns mer · en vaken natt · hippocampus mindre aktiv
+              Lockar: nonsensstavelser år 1924. ”Vad hände med hippocampus efter en vaken natt?”
+              Sambandet: ”Därför”, alltså för att minnet har blivit hållbart
+              Bilden: Morgonen: mer kvar efter en natt med sömn
+          - rubrik: Om någon frågar
+            text: Hjälper det att plugga lite varje dag? Ja, att repetera vid flera tillfällen gör minnet mer hållbart. Hur länge behöver en tonåring på 13–17 år sova? 8–10 timmar, enligt Folkhälsomyndigheten. Är minnet som en hårddisk? Nej, minnen finns i nätverk av nervceller.
+      - rubrik: "Modellpasset: Kedjan för Natten bygger minnet"
+        falt:
+          - rubrik: Fördjupningen
+            text: |-
+              Red ut: internatskola: skola där eleverna också bor · uppmärksamhet: att hålla tanken vid en sak
+              Lyssna efter: fem eller nio timmar · sämre uppmärksamhet · två nätter räckte inte
+              Lockar: internatskolan efter skolårets slut. ”Vad hände efter två nätter med nio timmar?”
+              Sambandet: ”vad för lite sömn gör”, alltså led 4 i ett försök
+              Bilden: Remsorna: samma början, olika nätter i mitten, samma slut
+          - rubrik: Modellen
+            text: "Lägg först fram gruppens tidslinje från vecka 2 och fråga: ”Flikarna säger när. Var skriver vi varför?” Den visar när, men inte varför. Ta sedan fram Kedjan, blad 1. Gruppen lägger fördjupningens post-it-lapp på En lapp till, med ett streck till led 4. Försöket visar vad för lite sömn gör, alltså led 4, och är inget femte led."
+          - rubrik: Orden
+            text: |-
+              eftersom (natten) · det gör att (hållbart) · därför (minns mer)
+              Utan flik: gruppen skriver ”först” i led 1.
+          - rubrik: Svaret
+            text: |-
+              Lyssna efter: först bräckligt · troligen hållbart i djupsömnen · utan sömn sämre
+              Så kan det låta: ”Nej, troligen inte. Det nya är bräckligt. I djupsömnen arbetar troligen samma nervceller igen, och minnet blir hållbart i hjärnbarken. Utan sömn lär man sig sämre och minns mindre.”
+          - rubrik: Rutan
+            text: "Visste du att: intressant, för svaret håller utan farten, men den gör natten lättare att föreställa sig."
+          - rubrik: Samtala
+            text: "Varför berättar författaren hur forskarna fick veta det? Varför börjar texten kvällen före ett prov? Ett svar: lottade grupper visar att sömnen gjorde skillnaden, och provet gör frågan till läsarens egen."
+  - rubrik: "Avancerat, text 9: Natten bygger minnet"
+    tema: Hjärnan
+    text:
+      - Hjärnan · text 4 av 5
+    delar:
+      - rubrik: Till läraren
+        falt:
+          - rubrik: Hör till
+            text: Lärarens sida till texten.
+    listor:
+      - rubrik: Natten bygger minnet
+        rader:
+          - - Det är kväll, och i morgon är det prov. Boken ligger uppslagen, och du har mycket kvar. Ska du sova nu eller läsa vidare in på natten? Svaret hänger på vad som händer i hjärnan medan du sover. Lönar det sig att plugga hela natten före ett prov, och vad gör sömnen med det du har lärt dig?
+      - rubrik: Siffran
+        rader:
+          - - 5 timmar
+            - i sängen per natt, i sju nätter, fick den ena gruppen i ett försök med 56 tonåringar.
+      - rubrik: Det nya är bräckligt
+        rader:
+          - - Under en skoldag möter du mycket nytt, som ett begrepp i biologi, ett årtal i historia eller en glosa i spanska. När du lär dig något av det blir en grupp **nervceller** aktiva tillsammans, och signalerna mellan dem knyter ihop cellerna till ett nätverk. Ett minne finns i ett sådant nätverk av nervceller, och det glöms snabbt om nätverket inte blir aktivt igen.
+          - - I början har hippocampus en stor roll. Hippocampus sitter djupt inne i tinningloben och behövs när nya minnen av händelser och fakta bildas. Det finns en tinninglob innanför tinningen på var sida av huvudet, och i var och en finns en hippocampus. Det du lär dig under dagen är först bräckligt. Bräckligt betyder här att minnet lätt går förlorat, och det nya glöms fortast under de första timmarna. En glosa som du läste på morgonen kan vara borta på kvällen, om du inte har tänkt på den sedan.
+      - rubrik: Ord i texten
+        rader:
+          - - nervcell
+            - en cell som tar emot och skickar signaler
+      - rubrik: Samma nervceller igen
+        rader:
+          - - Eftersom det nya är bräckligt får natten efter dagen stor betydelse för vad som blir kvar. Sömnen går i cykler, och i biologin betyder cykel en runda som börjar om. Varje cykel har flera faser, alltså delar av sömnen som skiljer sig från varandra. En natt har oftast fyra till sex cykler. En av faserna är **djupsömnen**, och mest djupsömn får du under den första delen av natten. I djupsömnen blir dagens nya minnen troligen aktiva igen, om och om igen.
+          - - Forskare har sett hur det går till i försök med råttor. När en råtta lärde sig något arbetade en grupp nervceller. När råttan sedan låg i djupsömn arbetade samma nervceller igen. De gjorde det dessutom i samma ordning som när råttan var vaken. Försöken med människor i avsnitt 4 pekar åt samma håll. Hjärnan arbetar alltså troligen vidare med dagens minnen medan du sover, och det som var bräckligt får en chans att bli kvar.
+      - rubrik: Ord i texten
+        rader:
+          - - djupsömn
+            - den sömn där du är svårast att väcka
+      - rubrik: "Bild: Dag, natt och morgon"
+        rader:
+          - - Dag, natt och morgon. Så blir ett minne från dagen troligen hållbart under natten. Siffrorna är avsnittens nummer.
+      - rubrik: Minnet blir hållbart
+        rader:
+          - - Det gör att minnet blir hållbart, alltså att det finns kvar länge och inte glöms lika lätt. Under djupsömnen arbetar hippocampus och **hjärnbarken** tillsammans, och efter hand tar hjärnbarken över minnet. Där blir det nya en del av nätverk som redan finns, och det kopplas till det du redan kan. Ett nytt begrepp i biologi kan till exempel kopplas till det du redan vet om kroppen.
+          - - "Så kan det du lärde dig under dagen stanna länge i långtidsminnet. Långtidsminnet är det minne där något kan finnas kvar från några minuter till hela livet. Det som var bräckligt på kvällen kan alltså vara mer hållbart på morgonen, efter en natt med djupsömn. Natten gör två saker med minnet: den gör det mer hållbart, och den knyter det till sådant du redan vet."
+      - rubrik: Ord i texten
+        rader:
+          - - hjärnbarken
+            - det yttre lagret av storhjärnan
+      - rubrik: Därför minns du mer
+        rader:
+          - - Därför minns du mer av det du har lärt dig om du har sovit efteråt, och det har forskare vetat länge. Redan år 1885 märkte forskaren Ebbinghaus att man glömde mindre när sömn kom emellan. År 1924 gjorde forskarna Jenkins och Dallenbach ett tidigt försök med bara två deltagare. Deltagarna fick lära sig nonsensstavelser, alltså stavelser som inte betyder något. Efter en, två, fyra eller åtta timmars sömn mindes de mer än efter lika många vakna timmar.
+          - - Utan sömn kan det i stället bli svårare att bilda nya minnen. I en studie från 2007 fick en grupp deltagare vara vakna en hel natt, och dagen efter skulle de lära sig något nytt. Då var hippocampus mindre aktiv än hos deltagare som hade sovit som vanligt. De som hade vakat mindes efteråt sämre av det nya. Resultatet kommer ur en enda studie, men det pekar åt samma håll som de äldre försöken.
+      - rubrik: "Fördjupning: Försöket på internatskolan"
+        rader:
+          - - Det sägs ofta att man kan sova ikapp på en helg. För att se vad för lite sömn gör med tonåringar gjorde forskare ett försök på en internatskola, efter att skolåret var slut. Där deltog 56 friska tonåringar mellan 15 och 19 år. De lottades till två grupper, och det betyder att slumpen avgjorde vem som hamnade i vilken grupp. De tre första nätterna fick båda grupperna vara nio timmar i sängen. De sju nätterna därefter fick den ena gruppen fem timmar i sängen per natt och den andra nio. Tre gånger om dagen gjorde deltagarna prov på bland annat uppmärksamhet och arbetsminne, alltså minnet för det du tänker på just nu.
+          - - I gruppen med fem timmar blev uppmärksamheten sämre och sämre, och arbetsminnet blev också sämre. Deltagarna blev sömnigare, och humöret sjönk. De tre sista nätterna fick båda grupperna nio timmar i sängen igen. Efter två sådana nätter var uppmärksamheten och sömnigheten ännu inte tillbaka där de var från början. Arbetsminnet och humöret var däremot tillbaka redan efter en natt.
+          - - Två nätter är ungefär en helg, och i försöket räckte de inte för att få tillbaka allt. Grupperna var lottade, och därför var det sömnen som skilde dem åt.
+      - rubrik: "Fakta: Sju korta nätter"
+        rader:
+          - - Deltagarna
+            - 56 friska tonåringar, 15 till 19 år
+          - - Grupperna
+            - två, lottade
+          - - Först
+            - 3 nätter med 9 timmar i sängen
+          - - Sedan
+            - 7 nätter med 5 eller 9 timmar i sängen
+          - - Efteråt
+            - 3 nätter med 9 timmar i sängen igen
+          - - Proven
+            - tre gånger om dagen
+      - rubrik: "Bild: Två grupper, sju nätter"
+        rader:
+          - - Två grupper, sju nätter. Varje ruta är en natt i försöket, och talet i rutan är timmarna i sängen.
+      - rubrik: Visste du att …
+        rader:
+          - - 10–20 gånger
+            - snabbare arbetade samma nervceller i samma ordning när råttorna sedan låg i djupsömn än när de var vakna. Hade du gissat att det gick fortare eller långsammare?
+      - rubrik: Läs mer
+        rader:
+          - - Hjärnfonden berättar hur sömnen påverkar minnet och inlärningen.
+            - https://www.hjarnfonden.se/hjarnan-alskar-somn/
+          - - UMO, för unga mellan 13 och 25 år, berättar vad som händer i kroppen, hjärnan och minnet när du sover.
+            - https://www.umo.se/ma-bra/somn-och-trotthet/somn/
+          - - Hjärnfonden förklarar hur minnet fungerar och varför vi glömmer.
+            - https://www.hjarnfonden.se/om-hjarnan/minnet/
+  - rubrik: "Modellen: Avancerat, text 9, Natten bygger minnet"
+    tema: Hjärnan
+    text:
+      - Kedjan, blad 1, ifylld för Natten bygger minnet.
+    delar:
+      - rubrik: Frågan och svaret
+        falt:
+          - rubrik: Textens fråga
+            text: Lönar det sig att plugga hela natten före ett prov, och vad gör sömnen med det du har lärt dig?
+          - rubrik: Lyssna efter
+            text: först bräckligt · troligen hållbart i djupsömnen · utan sömn sämre
+          - rubrik: Så kan svaret låta
+            text: Nej, troligen inte. Det nya är bräckligt. I djupsömnen arbetar troligen samma nervceller igen, och minnet blir hållbart i hjärnbarken. Utan sömn lär man sig sämre och minns mindre.
+  - rubrik: "Lärarens sida: Avancerat, text 10, Klockan i tonåren"
+    text:
+      - Många tonåringar sover för lite på skoldagar, delvis för att den inre klockan går senare i tonåren, och när skolorna i Seattle började senare sov eleverna längre. Texten har ett problem och en lösning, och modellen är Problem och lösning, blad 1. I vecka 5 har två elever i taget jobbkorten från avsnitt 2, och de två som har dem i avsnitt 4 leder hela avsnittet.
+    delar:
+      - rubrik: "Läspasset: de fyra avsnitten"
+        falt:
+          - rubrik: Textens fråga
+            text: Är tonåringar trötta på morgonen för att de är lata, och vad händer när skolan börjar senare?
+          - rubrik: Ord före läsningen
+            text: klocka (kroppens inre klocka, ingen väckarklocka) · hormon (ett ämne i kroppen, inga känslor) · eleven i mitten (mitt i raden, inget genomsnitt)
+          - rubrik: 1 Problemet
+            text: |-
+              Red ut: rekommenderar: råder · ”hantera känslor”: klara av det man känner
+              Lyssna efter: 46 procent · mindre än rekommenderat · skoldagar
+              Lockar: längre sömn på helgerna. ”Hur många sov mindre än åtta timmar?”
+          - rubrik: 2 Orsaken
+            text: |-
+              Red ut: ”släpper hjärnan ut”: gör och sänder ut · ”kommer igång”: börjar verka
+              Lyssna efter: den inre klockan · sömnig senare på kvällen · ingen lathet
+              Lockar: melatoninet som finns kvar på morgonen. ”Vad händer med melatoninet i tonåren?”
+              Sambandet: ”beror delvis på”, alltså en del av orsaken
+              Bilden: Kroppens klocka har flyttats, skolans står kvar
+          - rubrik: 3 Lösningen
+            text: |-
+              Red ut: läsåret 2016/17: hösten 2016 till sommaren 2017 · anser: tycker, efter vad de vet
+              Lyssna efter: senare skolstart · nästan en timme · skolans klocka flyttas
+              Lockar: rektorn bestämmer. ”När började skolorna i Seattle, före och efter?”
+              Sambandet: ”En lösning är”, alltså ett svar på orsaken
+          - rubrik: 4 Resultatet
+            text: |-
+              Red ut: ”märkbart”: så tydligt att forskarna kan lita på det · frånvarande: borta från lektionen
+              Lyssna efter: längre sömn · mindre sömniga · betygen osäkra
+              Lockar: betygen i biologi. ”Hur mycket längre sov eleven i mitten?”
+              Sambandet: ”Resultatet var”, alltså vad som hände efter ändringen
+              Bilden: Staplarna 2016 och 2017, och linjen vid åtta timmar
+          - rubrik: Om någon frågar
+            text: "Är det inte mobilen? Klockan förklarar inte allt: umgänge, skolkrav och skärmtid kan också skjuta läggdags senare, enligt KI. Folkhälsomyndigheten råder: undvik skärmar minst 30–60 minuter före läggdags, och lämna mobilen utanför sovrummet. Hjälper lektioner om sömn? Det är oklart: i studierna var effekterna små eller motstridiga, enligt SBU. Gäller det alla tonåringar? Nej, men hos många ligger sömnen senare."
+      - rubrik: "Modellpasset: Problem och lösning för Klockan i tonåren"
+        falt:
+          - rubrik: Fördjupningen
+            text: |-
+              Red ut: ”utvalda”: bara några av klasserna · ”vanliga scheman”: den gamla starttiden
+              Lyssna efter: ingen grupp att jämföra med · samband, inte orsak · Sverige prövar nu
+              Lockar: tre gymnasieskolor i Stockholms län. ”Varför kan Seattlestudien inte säkert visa orsaken?”
+              Sambandet: ”Seattlestudien visar”, alltså resultatet i avsnitt 4
+          - rubrik: Modellen
+            text: "Lägg först fram gruppens kedja från vecka 4 och fråga: ”Var skriver vi det någon gör åt problemet?” Den visar vad som leder till vad, men inte vad någon gör åt problemet. Ta sedan fram Problem och lösning, blad 1. Gruppen lägger fördjupningens post-it-lapp på En lapp till, med ett streck till fältet Resultatet. Lappen säger hur säkert resultatet är och är ingen ny lösning."
+          - rubrik: Orden
+            text: problemet är (för lite sömn) · beror delvis på (inre klockan) · en lösning är (senare start) · resultatet var (mer sömn)
+          - rubrik: Svaret
+            text: |-
+              Lyssna efter: den inre klockan · melatoninet senare · mer sömn i Seattle
+              Så kan det låta: ”Nej. I tonåren kommer melatoninet senare, så kroppens klocka går senare än skolans. När skolorna i Seattle började 8.45 sov eleven i mitten 34 minuter mer, och eleverna var mindre sömniga.”
+          - rubrik: Rutan
+            text: "Visste du att: viktig, eftersom talet visar att klockorna krockar för nästan alla eleverna."
+          - rubrik: Samtala
+            text: "Varför berättar författaren hur forskarna fick veta det? Varför står ordet lata i frågan? Ett svar: utan jämförelse vet vi inte säkert vad som orsakade vad, och texten motsäger att de är lata."
+  - rubrik: "Avancerat, text 10: Klockan i tonåren"
+    tema: Hjärnan
+    text:
+      - Hjärnan · text 5 av 5
+    delar:
+      - rubrik: Till läraren
+        falt:
+          - rubrik: Hör till
+            text: Lärarens sida till texten.
+    listor:
+      - rubrik: Klockan i tonåren
+        rader:
+          - - Väckarklockan ringer, det är mörkt ute och första lektionen börjar om en timme. Kroppen känns tung, och tankarna går trögt. Forskare har undersökt varför tonåringar ofta har det så, och vad som händer när skolan ändrar sina tider. Är tonåringar trötta på morgonen för att de är lata, och vad händer när skolan börjar senare?
+      - rubrik: Siffran
+        rader:
+          - - 46 procent
+            - av 8 449 elever i årskurs 7–9 i Stockholms län sov mindre än åtta timmar på skoldagar åren 2016 till 2018.
+      - rubrik: För lite sömn
+        rader:
+          - - Problemet är att många tonåringar sover mindre än de behöver på skoldagar. I sina råd från 2026 rekommenderar Folkhälsomyndigheten 8 till 10 timmars sömn per natt för den som är mellan 13 och 17 år. Enligt myndigheten gör god sömn det lättare att koncentrera sig och att hantera känslor.
+          - - Hur många som sover för lite har forskare mätt med en **enkät** i Stockholms län. Den besvarades åren 2016 till 2018 av 8 449 högstadieelever på 116 skolor. Nästan hälften av eleverna, 46 procent, sov mindre än åtta timmar på skoldagar, och 18 procent sov mindre än sju timmar. Åtta timmar är den nedre gränsen i Folkhälsomyndighetens råd, så de här eleverna sov mindre än vad myndigheten rekommenderar för deras ålder. På helgerna sov eleverna längre. Sömnen var alltså kortast just de dagar då eleverna skulle till skolan.
+      - rubrik: Ord i texten
+        rader:
+          - - enkät
+            - frågor som många människor svarar på
+      - rubrik: Klockan går senare
+        rader:
+          - - Att sömnen blir för kort beror delvis på kroppens inre klocka. Den inre klockan är kroppens eget sätt att följa dygnet, och den gör att du blir sömnig på kvällen och pigg på morgonen. När det blir kväll släpper hjärnan ut melatonin, ett **hormon** som gör dig sömnig.
+          - - Ibland sägs det att tonåringar är trötta på morgonen för att de är lata. Det stämmer dåligt med det forskarna har mätt. I tonåren släpper hjärnan ut melatonin senare på kvällen, och det som väcker hjärnan kommer igång senare på morgonen. Melatoninet finns också kvar längre in på morgonen. Hos många tonåringar ligger sömnen därför senare.
+          - - Skolans klocka följer däremot inte med när kroppens klocka går senare, och skolan börjar lika tidigt som förut. Då blir natten kort för den som inte kan somna tidigare.
+      - rubrik: Ord i texten
+        rader:
+          - - hormon
+            - ett ämne kroppen gör, som påverkar andra organ
+      - rubrik: "Bild: Två klockor"
+        rader:
+          - - Två klockor. Kroppens klocka går senare i tonåren, men skolans klocka går som förut. Siffran är avsnittets nummer.
+      - rubrik: Senare skolstart
+        rader:
+          - - En lösning är att låta skolan börja senare, så att skolans klocka kommer närmare kroppens. Det har prövats i Seattle i USA. Där började skolorna i studien klockan 7.50 på morgonen, och från läsåret 2016/17 började de i stället klockan 8.45. Starten flyttades alltså nästan en timme. En amerikansk förening för sömnmedicin rekommenderade 2017 att högstadier och gymnasier börjar klockan 8.30 eller senare, och Seattles nya tid var senare än så.
+          - - Forskare följde elever på två av skolorna för att se vad som hände. Det var inte självklart att eleverna skulle sova mer. De kunde i stället lägga sig senare och vakna lika trötta som förut.
+          - - I Sverige är det rektorn som bestämmer när skoldagen börjar. Enligt Karolinska institutet anser experter att elever från årskurs 7 helst inte bör börja före klockan 9. Lösningen är alltså något som skolan kan ändra för alla elever på en gång.
+      - rubrik: Resultatet i Seattle
+        rader:
+          - - Resultatet var att eleverna sov längre. Eleverna i studien bar ett armband som mätte sömnen i två veckor, en grupp våren före ändringen och en annan våren efter. Om alla eleverna ställer sig på en rad efter hur länge de sov, är eleven i mitten den som står mitt i raden. Våren 2016 sov eleven i mitten 6 timmar och 50 minuter, och våren 2017 sov eleven i mitten 7 timmar och 24 minuter. Det är 34 minuter mer, men fortfarande mindre än åtta timmar.
+          - - Eleverna vaknade senare men somnade inte märkbart senare, och de var mindre sömniga än förut. Betygen i biologi blev också högre, men forskarna skriver själva att det är svårt att säga om den längre sömnen var orsaken till det. På den ena skolan var eleverna mer sällan sena eller frånvarande på första lektionen. På den andra syntes ingen skillnad.
+      - rubrik: "Bild: Sömnen i Seattle"
+        rader:
+          - - Sömnen i Seattle. Staplarna visar sömnen för eleven i mitten före och efter ändringen. Den streckade linjen visar åtta timmar.
+      - rubrik: "Fördjupning: Det en studie kan visa"
+        rader:
+          - - Seattlestudien visar att eleverna sov längre efter ändringen. Forskarna mätte sömnen med armband hos 94 elever våren 2016 och 84 elever våren 2017, men det var olika elever de två åren. Det fanns dessutom ingen grupp att jämföra med, alltså elever som hade kvar den gamla tiden. Utan en sådan grupp går det inte att veta säkert vad skillnaden berodde på, eftersom något annat också kan ha skilt de två åren åt.
+          - - Enkäten i Stockholms län är ett annat slags studie. Den är stor, med 8 449 elever, men varje elev svarade en enda gång. Då kan den visa att två saker hänger ihop, som sömnen och hur eleverna mår. Den kan däremot inte visa vilken av sakerna som orsakar den andra, och det skriver forskarna bakom enkäten själva.
+          - - "Nu prövas en senare start också i Sverige. Sedan läsåret 2025/26 börjar utvalda klasser på tre gymnasieskolor i Stockholms län tidigast klockan 9, och de jämförs med klasser som har sina vanliga scheman. Där finns alltså en grupp att jämföra med, men svaret är inte klart än. Seattlestudien mätte en förändring utan grupp att jämföra med: den visar vad som hände, men inte säkert varför."
+      - rubrik: "Fakta: Seattle före och efter"
+        rader:
+          - - Skolstart
+            - 7.50 före, 8.45 efter
+          - - Sömn för eleven i mitten
+            - 6 timmar 50 minuter före, 7 timmar 24 minuter efter
+          - - Skillnad
+            - 34 minuter mer sömn
+          - - Sömnighet
+            - lägre efter än före
+          - - Mätningen
+            - två veckor våren 2016 och två veckor våren 2017
+      - rubrik: Visste du att …
+        rader:
+          - - 93 av 100
+            - elever i enkäten i Stockholms län skulle vakna medan kroppen fortfarande var inställd på natt, om skolan började klockan 8. Vilken tid börjar din första lektion?
+      - rubrik: Läs mer
+        rader:
+          - - UMO skriver för unga mellan 13 och 25 år om sömn och varför den behövs.
+            - https://www.umo.se/ma-bra/somn-och-trotthet/somn/
+          - - Folkhälsomyndigheten berättar hur mycket barn och unga behöver sova.
+            - https://www.folkhalsomyndigheten.se/vara-amnesomraden/psykisk-halsa/forebyggande-och-framjande-arbete-inom-psykisk-halsa/god-somn-for-barn-och-unga/
+          - - 1177 förklarar vad hormoner är, och hur melatoninet gör dig sömnig.
+            - https://www.1177.se/liv--halsa/sa-fungerar-kroppen/hormonsystemet/
+  - rubrik: "Modellen: Avancerat, text 10, Klockan i tonåren"
+    tema: Hjärnan
+    text:
+      - Problem och lösning, blad 1, ifylld för Klockan i tonåren.
+    delar:
+      - rubrik: Frågan och svaret
+        falt:
+          - rubrik: Textens fråga
+            text: Är tonåringar trötta på morgonen för att de är lata, och vad händer när skolan börjar senare?
+          - rubrik: Lyssna efter
+            text: den inre klockan · melatoninet senare · mer sömn i Seattle
+          - rubrik: Så kan svaret låta
+            text: Nej. I tonåren kommer melatoninet senare, så kroppens klocka går senare än skolans. När skolorna i Seattle började 8.45 sov eleven i mitten 34 minuter mer, och eleverna var mindre sömniga.
+pabordet:
+  - nr: 150
+    rubrik: Hjärnan från sidan
+    text: "Hjärnan sedd från vänster sida, med pannan åt vänster. Storhjärnans vänstra halva har fyra lober i var sin färg: pannloben fram, hjässloben överst, tinningloben nertill och nackloben längst bak. Lillhjärnan sitter bakom och under storhjärnan, och hjärnstammen går rakt ner och över i ryggmärgen."
+    efter: "ram: Avancerat, text 6: Hjärnans karta"
+  - nr: 151
+    rubrik: En nervcell
+    text: En nervcell, ritad stor. Till vänster har den korta utskott, inne i cellen sitter kärnan, och till höger går ett långt utskott fram till nästa nervcell. En orange linje med pilar visar hur signalen går in genom ett kort utskott, genom cellen, ut i det långa och över synapsen till nästa nervcell.
+    efter: "ram: Avancerat, text 6: Hjärnans karta"
+  - nr: 153
+    rubrik: "Blad: Tankekartan för Hjärnans karta"
+    text: Tankekartan, blad 2, för Hjärnans karta, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Avancerat, text 6, Hjärnans karta"
+  - nr: 154
+    rubrik: Hjärnvågor
+    text: "Fem kurvor under varandra: vaken överst, sedan insomningen, bassömnen, djupsömnen och drömsömnen. Bassömnens kurva har två korta utbrott av snabba vågor, djupsömnens vågor är långa och långsamma, och drömsömnens kurva liknar den översta."
+    efter: "ram: Avancerat, text 7: Hjärnans nattskift"
+  - nr: 155
+    rubrik: En natt som en trappa
+    text: En tänkt natt från kvällen till morgonen, ritad som en trappa med fem lika långa cykler. Ju längre ner, desto svårare att väcka. Tidigt på natten är perioderna med djupsömn längst, och mot morgonen blir perioderna med drömsömn längre. Drömsömnen har en egen rad och färg.
+    efter: "ram: Avancerat, text 7: Hjärnans nattskift"
+    fluent:
+      - måne
+      - sol
+  - nr: 157
+    rubrik: "Blad: Tidslinjen för Hjärnans nattskift"
+    text: Tidslinjen, blad 1, för Hjärnans nattskift, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Avancerat, text 7, Hjärnans nattskift"
+  - nr: 158
+    rubrik: Hippocampus på båda sidor
+    text: Hjärnan två gånger, till vänster sedd från sidan och till höger sedd framifrån. Tinningloben är grön och sitter nertill, och hippocampus är en liten blå del djupt inne i den. Framifrån syns en hippocampus på var sida.
+    efter: "ram: Avancerat, text 8: Två slags minne"
+  - nr: 159
+    rubrik: Från sinnena till långtidsminnet
+    text: "En väg från vänster till höger: ett öga och ett öra för sinnena, en liten ruta för arbetsminnet med fyra saker och en stor ruta för långtidsminnet med ett nätverk av nervceller. Två saker faller ut ur arbetsminnet och glöms. En sak upprepas, som pilen runt den visar, och blir en del av nätverket i långtidsminnet."
+    efter: "ram: Avancerat, text 8: Två slags minne"
+    fluent:
+      - öga
+      - öra
+  - nr: 161
+    rubrik: "Blad: Venndiagrammet för Två slags minne"
+    text: Venndiagrammet, blad 1, för Två slags minne, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Avancerat, text 8, Två slags minne"
+  - nr: 162
+    rubrik: Dag, natt och morgon
+    text: Fyra rutor från vänster till höger med samma hjärna från sidan, där hjärnbarken är det yttre lagret och hippocampus ligger djupt inne. På dagen lyser ett litet nytt nätverk av nervceller svagt vid hippocampus, och på natten lyser samma nätverk om och om igen. Sedan går en pil från hippocampus till hjärnbarken, där nätverket sitter ihop med andra nätverk, och på morgonen syns nätverket tydligt i hjärnbarken.
+    efter: "ram: Avancerat, text 9: Natten bygger minnet"
+    fluent:
+      - sol
+      - måne
+  - nr: 163
+    rubrik: Två grupper, sju nätter
+    text: Två remsor med en ruta för varje natt i försöket, en remsa för varje lottad grupp. Båda börjar med tre nätter med 9 timmar i sängen och slutar med tre nätter med 9 timmar, men emellan har den övre remsan sju nätter med 5 timmar och den nedre sju nätter med 9. Under den övre remsans näst sista ruta står att uppmärksamheten ännu inte var tillbaka efter två nätter.
+    efter: "ram: Avancerat, text 9: Natten bygger minnet"
+  - nr: 165
+    rubrik: "Blad: Kedjan för Natten bygger minnet"
+    text: Kedjan, blad 1, för Natten bygger minnet, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Avancerat, text 9, Natten bygger minnet"
+  - nr: 166
+    rubrik: Två klockor
+    text: Två klockor bredvid varandra. Kroppens klocka är dygnet som en skiva, där natten är mörk och dagen ljus. En streckad linje visar var natten låg förut, och pilar från den visar att natten flyttar sig senare i tonåren. Melatoninet kommer senare på kvällen, och kroppen vaknar senare på morgonen. Skolans klocka visar 8.00, som förut.
+    efter: "ram: Avancerat, text 10: Klockan i tonåren"
+  - nr: 167
+    rubrik: Sömnen i Seattle
+    text: "Två liggande staplar för hur länge eleven i mitten sov per natt i Seattle: 6 timmar 50 minuter våren 2016 och 7 timmar 24 minuter våren 2017. Skillnaden, 34 minuter, är markerad. En streckad linje vid åtta timmar visar att båda staplarna slutar före den."
+    efter: "ram: Avancerat, text 10: Klockan i tonåren"
+  - nr: 169
+    rubrik: "Blad: Problem och lösning för Klockan i tonåren"
+    text: Problem och lösning, blad 1, för Klockan i tonåren, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Avancerat, text 10, Klockan i tonåren"
+tabeller:
+  - rubrik: Hjärnan
+    kolumner:
+      - Vecka och modell
+      - Avancerat
+    rader:
+      - - 1 Tankekartan
+        - Hjärnans karta
+      - - 2 Tidslinjen
+        - Hjärnans nattskift
+      - - 3 Venndiagrammet
+        - Två slags minne
+      - - 4 Kedjan
+        - Natten bygger minnet
+      - - 5 Problem och lösning
+        - Klockan i tonåren

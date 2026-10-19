@@ -22,7 +22,7 @@ material:
   - fem modeller med blad
   - post-it-lappar
   - pennor
-uppdaterad: 2026-10-18
+uppdaterad: 2026-10-19
 relaterade:
   - boksamtal-i-grupp
   - problemlosning-i-grupp
@@ -132,7 +132,7 @@ tabeller:
       - - Efter passet finns
         - fyra post-it-lappar på bladet Kärnorna
         - modellen med lapparna, och ett svar från varje elev
-    not: "Med tre pass i veckan blir perioden drygt fem veckor. Läs då vecka som text: vecka 3 är den tredje texten. Den som var borta i läspasset läser lapparna högt när modellpasset börjar. Faller ett pass bort tar ni det nästa gång."
+    not: "Med tre pass i veckan blir perioden drygt fem veckor. Läs då vecka som text: vecka 3 är temats tredje text. Den som var borta i läspasset läser lapparna högt när modellpasset börjar. Faller ett pass bort tar ni det nästa gång."
   - rubrik: Varför en faktatext blir svår, och vad metoden gör
     plats: efter-inledning
     text: Sex saker gör en faktatext svår för elever som behöver stöd i läsförståelsen. Metoden möter var och en av de sex sakerna på ett bestämt ställe.
@@ -222,7 +222,7 @@ tabeller:
     not: Gruppens kärna behöver inte likna stödorden på lärarens sida. Handlar den om hela avsnittet, och har den med de flesta av stödorden, håller den.
   - rubrik: "Lärarens sida: det du har i handen"
     plats: efter-arbetsform
-    text: Till varje text finns lärarens sida, ett stöd till dig på högst två A4. Den följer textens två pass. Avsnittens rader har korta namn, de som platserna får i modellen.
+    text: Till varje text finns lärarens sida, ett stöd till dig på högst två A4. Den följer textens två pass. Avsnittens rader har numret och ett kort namn.
     kolumner:
       - Raden
       - Det den ger dig
@@ -232,7 +232,7 @@ tabeller:
       - - Ord före läsningen
         - Två eller tre ord att reda ut först, och det eleverna lätt tar fel på
       - - Tänk högt
-        - Dina ord när du visar avsnitt 1, i text 1 och 2
+        - Dina ord när du visar avsnitt 1 i vecka 1 och 2
       - - Red ut
         - Det som brukar skava i avsnittet
       - - Lyssna efter
@@ -449,7 +449,7 @@ tabeller:
       - - Kartläggningen
         - elevens blad med texten och bilden och protokollet, ett av varje per elev
         - före och efter perioden
-    not: Till vecka 1 skriver du ut nivåns text 1 med lärarens sida, som står före texten, bladet Kärnorna, kortet När det skaver, tankekartans sida med exemplet och bladet, och kartläggningen med Bäverns damm och protokollet. Saknar du A3 ritar du av bladet på ett blädderblocksark. Alla blad går att plasta in. Då sätter gruppen post-it-lapparna på plasten och skriver namnen och orden med whiteboardpenna. Spara modellen med lapparna kvar, eller fotografera den innan ni suddar.
+    not: "Till vecka 1 skriver du ut temats första text med lärarens sida, bladet Kärnorna, kortet När det skaver, tankekartans sida med exemplet och bladet, och kartläggningen med Bäverns damm och protokollet. Bladen är liggande A4: välj A3 när du skriver ut, eller förstora till 141 procent i kopiatorn. Saknar du A3 ritar du av bladet på ett blädderblocksark. Alla blad går att plasta in. Då sätter gruppen post-it-lapparna på plasten och skriver namnen och orden med whiteboardpenna. Spara modellen med lapparna kvar, eller fotografera den innan ni suddar."
 exempel:
   valt:
     rubrik: Texten gruppen läser
@@ -492,7 +492,7 @@ roll:
 urval:
   rubrik: Var hittar du texterna och modellerna?
   text:
-    - "Metodens texter står bland materialet, i teman på varje nivå, med lärarens sida före och den ifyllda modellen efter. Texterna finns också på sidan Ta fram en faktatext, ordnade efter nivå och tema. Där visar du en text stort och skriver ut de texter du vill ha. Alla texterna har samma delar: en ingress som slutar med textens fråga, rutan Siffran, fyra avsnitt med ord förklarade i marginalen, bilder med avsnittens nummer, en faktaruta, en fördjupning som du läser högt i modellpasset och rutan Visste du att, som gruppen läser sist. Se filmerna under Läs mer innan du visar dem. Texterna är skrivna för metoden, och varje uppgift är prövad mot en källa. De är övningstexter och är inte sakgranskade som ett läromedel."
+    - "Metodens texter står bland materialet, i teman på varje nivå, med lärarens sida före och den ifyllda modellen efter. Texterna finns också på sidan Ta fram en faktatext, ordnade efter nivå och tema, och där finns fler faktatexter i andra teman. Där visar du en text stort och skriver ut de texter du vill ha. Alla texterna har samma delar: en ingress som slutar med textens fråga, rutan Siffran, fyra avsnitt med ord förklarade i marginalen, bilder med avsnittens nummer, en faktaruta, en fördjupning som du läser högt i modellpasset och rutan Visste du att, som gruppen läser sist. Se filmerna under Läs mer innan du visar dem. Texterna är skrivna för metoden, och varje uppgift är prövad mot en källa. De är övningstexter och är inte sakgranskade som ett läromedel."
     - Varje modell har en sida, ett exempel om skolan och tre blad. Veckans blad skriver du ut på A3 till gruppen. Är ni bara ett par räcker A4, och då skriver paret i fälten, för hand eller på datorn.
   kravText: "En egen text i vecka 6–8 ska uppfylla tre krav:"
   krav:
@@ -531,7 +531,7 @@ uppfoljning:
     - nar: Varje vecka
       vad: Spara gruppens modell och elevernas svar på textens fråga. Är svaret ordnat som modellen, eller är det en lista?
     - nar: Efter åtta veckor
-      vad: Gör kartläggningen igen med text 2 och jämför före och efter i protokollet. Klarar eleven klassens texter med mindre stöd, och vad fortsätter läraren i ämnet med?
+      vad: Gör kartläggningen igen med Björnens vinter och jämför före och efter i protokollet. Klarar eleven klassens texter med mindre stöd, och vad fortsätter läraren i ämnet med?
 mal:
   punkter:
     - Stanna och säga var det skaver
@@ -1293,7 +1293,7 @@ ramar:
               - av jordens yta är täckt av vatten.
         - rubrik: "Bild: Jorden och allt dess vatten"
           rader:
-            - - Den lilla blå bollen är allt vatten på jorden. Den är 1 385 kilometer bred. Det är lite kortare än Sverige är långt.
+            - - Jorden och allt dess vatten. Den lilla blå bollen är allt vatten på jorden. Den är 1 385 kilometer bred, lite kortare än Sverige är långt.
         - rubrik: Havet har nästan allt vatten
           rader:
             - - Snurra på en jordglob och sätt ner fingret. Oftast hamnar det i blått. Vatten täcker 71 **procent** av jordens yta. Det är mer än två tredjedelar.
@@ -1327,7 +1327,7 @@ ramar:
               - ett hål i marken där man hämtar upp vatten
         - rubrik: "Bild: Vatten i marken"
           rader:
-            - - Så ser marken ut inuti. Under den streckade linjen är alla hålrum fyllda med vatten.
+            - - Vatten i marken. Under den streckade linjen är alla hålrum fyllda med vatten.
         - rubrik: Vattnet du ser
           rader:
             - - Kvar blir sjöarna och floderna. Det är det vattnet vi ser varje dag. Vi badar i det, och många städer hämtar sitt dricksvatten där. Därför är det lätt att tro att det finns mycket av det.
@@ -1346,7 +1346,7 @@ ramar:
               - en halv tesked
         - rubrik: "Bild: Hundra hinkar"
           rader:
-            - - Ungefär så här blir det om man häller allt vatten på jorden i hundra hinkar. Siffrorna är avsnittens nummer.
+            - - Hundra hinkar. Ungefär så blir det om man häller allt vatten på jorden i hinkarna. Siffrorna är avsnittens nummer.
         - rubrik: "Fördjupning: Vatten i luften, och i dig"
           rader:
             - - Lite vatten finns på två ställen till. Det ena är luften. Där svävar vattnet som moln och som **ånga**. Av de hundra hinkarna skulle allt vatten i luften ändå inte fylla en matsked.
@@ -1461,7 +1461,7 @@ ramar:
               - Ungefär så mycket vatten använde en person i Sverige hemma varje dygn år 2022. Det är fjorton hinkar på tio liter.
         - rubrik: "Bild: Vattnets väg"
           rader:
-            - - Följ vattnet från sjön till kranen och tillbaka. Siffrorna är avsnittens nummer.
+            - - Vattnets väg. Följ vattnet från sjön till kranen och tillbaka. Siffrorna är avsnittens nummer.
         - rubrik: Ur sjön eller ur marken
           rader:
             - - Först hämtas vattnet i naturen. Många städer tar det ur en sjö. Kanske är det samma sjö som du badar i. Andra orter pumpar upp grundvatten ur marken.
@@ -1482,7 +1482,7 @@ ramar:
               - smuts klumpas ihop så att den sjunker
         - rubrik: "Bild: Inne i vattenverket"
           rader:
-            - - Vattnet går från vänster till höger. Titta på klumparna som sjunker och på sanden som vattnet rinner igenom.
+            - - Inne i vattenverket. Vattnet går från vänster till höger. Titta på klumparna som sjunker och på sanden som vattnet rinner igenom.
         - rubrik: Tornet och rören
           rader:
             - - Efter det pumpas dricksvattnet ofta upp i ett vattentorn. Många har sett ett sådant torn utan att veta vad det är. Där uppe står vattnet högre än hustaken.
@@ -1585,7 +1585,7 @@ ramar:
                 Sambandet: ”än en snöflinga”: haglet jämförs med snön igen
                 Bilden: Kornet från Ramnäs bredvid äpplet, i Så stora kan hagel bli
             - rubrik: Modellen
-              text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad ska stå i mitten?” Texten jämför två saker, och kartan visar inte vad som är lika och olika. Ta sedan fram Venndiagrammet, blad 1. Avsnitt 4 ger två post-it-lappar: i modellpasset delar gruppen avsnittets kärna på två lappar, en för var sak. Gruppen lägger fördjupningens lapp på En lapp till och kallar platsen Hör till hagel."
+              text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad ska stå i mitten?” Texten jämför två saker, och kartan visar inte vad som är lika och olika. Ta sedan fram Venndiagrammet, blad 1. Avsnitt 4 ger två post-it-lappar: i modellpasset delar gruppen avsnittets kärna på två lappar, en för var sida. Gruppen lägger fördjupningens lapp på En lapp till och kallar platsen Hör till hagel."
             - rubrik: Orden
               text: |-
                 både snö och hagel (båda) · men sedan blir de olika (bara snö) · däremot (bara hagel)
@@ -1626,7 +1626,7 @@ ramar:
               - en pytteliten bit is, oftast med sex kanter
         - rubrik: "Bild: Snöns väg och haglets väg"
           rader:
-            - - Båda börjar som en iskristall. Till vänster blir den början till en snöflinga. Till höger virvlar den runt i bymolnet och blir ett hagelkorn.
+            - - Snöns väg och haglets väg. Båda börjar som en iskristall. Till vänster blir den början till en snöflinga. Till höger virvlar den runt i bymolnet och blir ett hagelkorn.
         - rubrik: Så blir det snö
           rader:
             - - Men sedan blir de olika. Snö blir det när iskristallen växer till en liten **snöstjärna**. Den ser ut som en stjärna av is. Ibland landar en ensam snöstjärna på din vante.
@@ -1660,7 +1660,7 @@ ramar:
               - korn större än fem millimeter. Ovanligt i Sverige, kommer oftast vid kraftig åska
         - rubrik: "Bild: Så stora kan hagel bli"
           rader:
-            - - Kornet från Ramnäs var 7 centimeter åt ena hållet och 8 åt det andra. Kornen i Näshulta var omkring 5 centimeter. Bilden är förminskad.
+            - - Så stora kan hagel bli. Kornet från Ramnäs var 7 centimeter åt ena hållet och 8 åt det andra. Kornen i Näshulta var omkring 5 centimeter. Bilden är förminskad.
         - rubrik: "Fördjupning: De största hagelkornen"
           rader:
             - - Ett hagelkorn kan bli mycket tyngre än en snöflinga. Korn som är större än fem millimeter kallas ishagel. De är ovanliga i Sverige och kommer oftast när åskan är kraftig. Då är vindarna i molnet starka nog att bära tunga korn.
@@ -1789,7 +1789,7 @@ ramar:
               - en av tio lika stora delar
         - rubrik: "Bild: Isberget"
           rader:
-            - - Ett isberg i havet. Ungefär en tiondel sticker upp över ytan. Resten ligger under.
+            - - Isberget. Det flyter i havet. Ungefär en tiondel sticker upp över ytan. Resten ligger under.
         - rubrik: Sjön får ett lock
           rader:
             - - Is flyter, och det gör att den blir kvar överst när en sjö fryser. Den första isen bildas vid ytan, där vattnet möter den kalla luften. Den sjunker inte. Snart täcker den hela sjön som ett lock.
@@ -1797,7 +1797,7 @@ ramar:
             - - Locket gör nytta. Det skyddar vattnet under mot kylan, ungefär som ett täcke.
         - rubrik: "Bild: Sjön under isen"
           rader:
-            - - En sjö på vintern, sedd från sidan, så att du ser under isen. Siffrorna är avsnittens nummer.
+            - - Sjön under isen. Du ser sjön från sidan på vintern, också under isen. Siffrorna är avsnittens nummer.
         - rubrik: Livet under isen
           rader:
             - - Eftersom isen ligger som ett lock fryser inte vattnet längre ner. Under isen är sjön fortfarande en sjö.
@@ -1953,7 +1953,7 @@ ramar:
               - trakterna utanför städerna
         - rubrik: "Bild: Brunnen i byn"
           rader:
-            - - En by, sedd från sidan, så att du ser ner i marken. Pumpen hämtar upp grundvattnet, nära husen. Siffrorna är avsnittens nummer.
+            - - Brunnen i byn. Du ser byn från sidan, ända ner i marken. Pumpen nära husen hämtar upp grundvattnet. Siffrorna är avsnittens nummer.
         - rubrik: Fler får vatten varje år
           rader:
             - - Lösningarna har lett till att fler får rent vatten för varje år. År 2015 hade fem av tio människor på världens landsbygd rent vatten hemma. År 2024 var det sex av tio.
@@ -1961,7 +1961,7 @@ ramar:
             - - Lösningarna finns, och de fungerar. Nu gäller det att de når fram till alla.
         - rubrik: "Bild: Rent vatten på landsbygden"
           rader:
-            - - Varje rad är tio människor på landsbygden. De blå har rent vatten hemma. Målet för år 2030 är att alla ska vara blå.
+            - - Rent vatten på landsbygden. Varje rad är tio människor. De blå har rent vatten hemma. Målet för år 2030 är att alla ska vara blå.
         - rubrik: "Fördjupning: Vem bär vattnet?"
           rader:
             - - Problemet har en sida till. Där vattnet ligger långt borta måste någon gå och hämta det. Oftast är det kvinnor och flickor som bär hem vattnet. Så är det i de flesta länder som har räknat. En flicka i din ålder kan vara en av dem.
@@ -2113,7 +2113,7 @@ ramar:
                 Lockar: 248 år för ett varv. ”Vilket krav klarade Pluto inte?”
                 Sambandet: ”En av dvärgplaneterna”: Pluto hör till småfolket i avsnitt 4
             - rubrik: Modellen
-              text: "I vecka 1 lägger du den första post-it-lappen och skriver det första ordet. Tankekartan, blad 2. Nederst i varje fält har bladet rader med ledtexten Hit hör. Där skriver paren det som hör till delen. Gruppen lägger fördjupningens lapp på En lapp till, som får namnet Hör till småfolket: Pluto är en dvärgplanet."
+              text: "Ta fram Tankekartan, blad 2. I vecka 1 lägger du den första post-it-lappen och skriver det första ordet. Nederst i varje fält har bladet rader med ledtexten Hit hör. Där skriver paren det som hör till delen. Gruppen lägger fördjupningens lapp på En lapp till, som får namnet Hör till småfolket: Pluto är en dvärgplanet."
             - rubrik: Orden
               text: mitt i familjen (solen) · närmast solen (stenplaneterna) · längre ut (jättarna) · flest i familjen (småfolket)
             - rubrik: Svaret
@@ -2143,7 +2143,7 @@ ramar:
               - planeter går runt solen.
         - rubrik: "Bild: Hela familjen"
           rader:
-            - - Här är solens familj. Siffrorna är avsnittens nummer. Solen och planeterna har rätt storlek jämfört med varandra. I verkligheten står de inte alls så tätt.
+            - - Hela familjen. Siffrorna är avsnittens nummer. Solen och planeterna har rätt storlek jämfört med varandra. I verkligheten står de inte alls så tätt.
         - rubrik: En stjärna i mitten
           rader:
             - - Mitt i familjen står solen. Den är en stjärna, precis som stjärnorna du ser på natthimlen. Den ser bara så mycket större ut eftersom den ligger så mycket närmare oss.
@@ -2164,7 +2164,7 @@ ramar:
               - ett dygn på jorden, 24 timmar
         - rubrik: "Bild: Ett dygn och ett år"
           rader:
-            - - "Den korta pilen är ett dygn: jorden snurrar ett varv runt sig själv. Den långa pilen är ett år: jorden går ett varv runt solen."
+            - - "Ett dygn och ett år. Den korta pilen är ett dygn: jorden snurrar ett varv runt sig själv. Den långa pilen är ett år: jorden går ett varv runt solen."
         - rubrik: Jättarna
           rader:
             - - Längre ut går fyra planeter av ett helt annat slag. De heter Jupiter, Saturnus, Uranus och Neptunus, och de är jättar jämfört med stenplaneterna. Störst är Jupiter, som är elva gånger så bred som jorden. Om jorden vore en vindruva, skulle Jupiter vara en basketboll.
@@ -2176,7 +2176,7 @@ ramar:
               - en rund kropp, som en boll
         - rubrik: "Bild: Vindruvan och basketbollen"
           rader:
-            - - Elva jordklot på rad når tvärs över Jupiter. Vindruvan är lika liten bredvid basketbollen som jorden är bredvid Jupiter.
+            - - Vindruvan och basketbollen. Elva jordklot på rad når tvärs över Jupiter. Vindruvan är lika liten bredvid basketbollen som jorden är bredvid Jupiter.
         - rubrik: Småfolket
           rader:
             - - Flest i familjen är ändå de små, och de är av flera slag. Dit hör månarna, som går i bana runt en planet i stället för runt solen. Jorden har en enda måne, men jättarna har desto fler. I mars 2025 hade **astronomer** hittat 274 månar bara runt Saturnus.
@@ -2311,7 +2311,7 @@ ramar:
               - bred var den första satelliten, Sputnik 1.
         - rubrik: "Bild: Från 1957 till 2026"
           rader:
-            - - Åren i texten står på en linje, med rätt avstånd mellan dem. Siffrorna 1 till 4 är avsnittens nummer.
+            - - Från 1957 till 2026. Åren i texten står på en linje, med rätt avstånd mellan dem. Siffrorna 1 till 4 är avsnittens nummer.
         - rubrik: "1957: en pipande boll"
           rader:
             - - År 1957 hade jorden en enda **satellit**, och det var månen. En satellit är något som går runt en planet, varv efter varv. Den 4 oktober fick månen sällskap. Då sköt Sovjetunionen upp Sputnik 1, den första satelliten som människor hade byggt.
@@ -2325,7 +2325,7 @@ ramar:
               - en tävling om att komma först
         - rubrik: "Bild: Sputnik 1 och basketbollen"
           rader:
-            - - Sputnik 1 var 58 centimeter bred. Det är mer än dubbelt så brett som en basketboll.
+            - - Sputnik 1 och basketbollen. Sputnik 1 var 58 centimeter bred. Det är mer än dubbelt så brett som en basketboll.
         - rubrik: "1961: den första människan"
           rader:
             - - År 1961, fyra år efter Sputnik, tog Sovjetunionen nästa steg i kapplöpningen. Maskiner hade klarat resan runt jorden, och hundar hade kommit levande hem. Därför var det nu dags att pröva med en människa.
@@ -2378,7 +2378,7 @@ ramar:
               - något man reser i, till exempel ett rymdskepp
         - rubrik: "Bild: Runt månen och hem"
           rader:
-            - - Artemis II flög från jorden, runt månen och hem igen, utan att landa. I bilden är avståndet hoptryckt.
+            - - Runt månen och hem. Artemis II flög från jorden, runt månen och hem igen, utan att landa. I bilden är avståndet hoptryckt.
         - rubrik: Visste du att …
           rader:
             - - 16 varv
@@ -2482,7 +2482,7 @@ ramar:
               - är ett dygn på Mars, nästan som på jorden.
         - rubrik: "Bild: Jorden och Mars i samma skala"
           rader:
-            - - Jorden och Mars är ritade i samma skala. Bara storleken stämmer. I verkligheten är avståndet mellan dem mycket större.
+            - - Jorden och Mars i samma skala. Bara storleken stämmer. I verkligheten är avståndet mellan dem mycket större.
         - rubrik: Två grannar
           rader:
             - - Jorden och Mars är grannar i rymden, och på flera sätt liknar de varandra. Båda är stenplaneter, med fast mark att stå på, och båda går runt solen. Jorden är den tredje planeten räknat från solen, medan Mars är den fjärde och går längre ut.
@@ -2499,7 +2499,7 @@ ramar:
               - ett dygn på jorden, 24 timmar
         - rubrik: "Bild: Ett varv runt solen"
           rader:
-            - - Jorden hinner nästan två varv runt solen medan Mars går ett. Solen och planeterna är ritade för stora jämfört med banorna.
+            - - Ett varv runt solen. Jorden hinner nästan två varv runt solen medan Mars går ett. Solen och planeterna är ritade för stora jämfört med banorna.
         - rubrik: Luft och väder
           rader:
             - - Runt båda planeterna finns ett lager av gas som kallas **atmosfär**. Jordens atmosfär är luften som vi andas varje dag. Den är tät och innehåller **syre**, och den håller kvar solens värme som ett täcke.
@@ -2513,7 +2513,7 @@ ramar:
               - den gas i luften som vi behöver andas
         - rubrik: "Bild: Från 20 till minus 153 grader"
           rader:
-            - - Termometrarna visar temperaturen på Mars, från den varmaste till den kallaste. Vid det övre strecket fryser vatten till is. Det nedre är jordens köldrekord.
+            - - Från 20 till minus 153 grader. Termometrarna visar temperaturen på Mars, från den varmaste till den kallaste. Vid det övre strecket fryser vatten till is. Det nedre är jordens köldrekord.
         - rubrik: Mark och vatten
           rader:
             - - Marken ser också olika ut på de två planeterna. På jorden täcker vatten 71 procent av ytan, i hav, sjöar och floder. På Mars kan **flytande** vatten däremot inte ligga kvar på ytan, och marken är torr och röd.
@@ -2674,7 +2674,7 @@ ramar:
               - den tänkta linje som jorden snurrar runt
         - rubrik: "Bild: Jorden runt solen"
           rader:
-            - - Jorden i fyra lägen under ett år. Axeln pekar åt samma håll hela varvet. Bilden visar inte rätt storlekar och avstånd. Siffrorna är avsnittens nummer.
+            - - Jorden runt solen. Under året syns jorden i fyra lägen. Axeln pekar åt samma håll hela varvet. Bilden visar inte rätt storlekar och avstånd. Siffrorna är avsnittens nummer.
         - rubrik: Mot solen i juni
           rader:
             - - Eftersom axeln pekar åt samma håll turas jordens två **halvklot** om att vara vända mot solen. I juni lutar det norra halvklotet, där Sverige ligger, mot solen. Ett halvt varv senare, i december, lutar det i stället bort från solen.
@@ -2691,7 +2691,7 @@ ramar:
             - - Dessutom lyser sommarsolen under fler timmar varje dag. Marken får alltså både starkare ljus och ljus under längre tid. Därför blir det varmare, och därför blir det sommar.
         - rubrik: "Bild: Rakt och snett"
           rader:
-            - - Samma ljus träffar marken rakt och snett. Den sneda strålen sprids ut över en större yta, och varje bit mark får mindre ljus.
+            - - Rakt och snett. Samma ljus träffar marken på två sätt. Den sneda strålen sprids ut över en större yta, och varje bit mark får mindre ljus.
         - rubrik: "Fördjupning: Vid polcirkeln"
           rader:
             - - Längst i norr märks lutningen allra mest. Där ligger **polcirkeln**, som korsar norra Sverige. Vid midsommar lutar jorden så mycket mot solen att solen inte går ner norr om polcirkeln. Vid midnatt sjunker den mot **horisonten**, och sedan stiger den igen. Det kallas midnattssol, och då är det ljust nog att läsa utomhus mitt i natten.
@@ -2808,7 +2808,7 @@ ramar:
               - föremål i bana runt jorden följdes från marken i slutet av 2024.
         - rubrik: "Bild: Trängseln runt jorden"
           rader:
-            - - "Varje prick är tusen föremål som följdes 2024: elva ljusa för satelliter som fungerar, tjugonio mörka för skräp. Bilden visar inte rätt storlekar och avstånd."
+            - - "Trängseln runt jorden. Varje prick är tusen föremål som följdes 2024: elva ljusa för satelliter som fungerar, tjugonio mörka för skräp. Bilden visar inte rätt storlekar och avstånd."
         - rubrik: Trångt runt jorden
           rader:
             - - En satellit är en maskin som går runt jorden i en bana, varv efter varv. Satelliter hjälper oss med väderprognoser, kartan i mobilen och mycket annat. Men när en satellit slutar fungera kan den bli kvar där uppe i många år. Raketdelar och trasiga bitar kan också bli kvar. Allt det skräpet kallas rymdskrot.
@@ -2831,7 +2831,7 @@ ramar:
             - - Krocken gjorde två satelliter till mer än 2 300 bitar som går att följa. Varje bit far vidare i sin bana och kan träffa något annat.
         - rubrik: "Bild: Krocken 2009"
           rader:
-            - - Två banor korsar varandra 776 kilometer över Sibirien. Efter krocken far mer än 2 300 bitar vidare längs banorna. Bilden visar inte rätt avstånd.
+            - - Krocken 2009. Två banor korsar varandra 776 kilometer över Sibirien. Efter krocken far mer än 2 300 bitar vidare längs banorna. Bilden visar inte rätt avstånd.
         - rubrik: Väja och städa efter sig
           rader:
             - - En lösning är att **väja**. Skräp som följs från marken går att se i förväg. När en bit ser ut att komma för nära styrs satelliten undan, och skräpet far förbi. Men bara satelliter som fungerar kan väja, och bara för skräp som någon följer.
@@ -2852,7 +2852,7 @@ ramar:
               - fordon, här sådana som flyger i rymden
         - rubrik: "Bild: Tre sätt att slippa krockar"
           rader:
-            - - Satelliten väjer för skräpet. Den gamla satelliten faller ner mot jorden. Farkosten hämtar den som inte går att styra. Siffrorna är avsnittens nummer.
+            - - Tre sätt att slippa krockar. Satelliten väjer för skräpet. Den gamla satelliten faller ner mot jorden. Farkosten hämtar den satellit som inte går att styra. Siffrorna är avsnittens nummer.
         - rubrik: "Fördjupning: Räcker det?"
           rader:
             - - Hittills räcker lösningarna inte. Forskarna är överens om att skräpet skulle fortsätta att öka även om ingen sköt upp en enda satellit till. Det som redan finns där uppe krockar nämligen och går sönder, och då kommer nya bitar fortare än de gamla hinner falla ner.
@@ -2890,7 +2890,7 @@ ramar:
     - rubrik: "Lärarhandledning: Avancerat, Smittor"
       tema: Smittor
       text:
-        - Temat Smittor har en faktatext för var och en av de fem strukturerna, som brukar passa i åk 8–9. Varje vecka har klassen en läslektion och en modellektion om veckans text, så temat tar fem veckor. Varje elev har texten, en penna och papper till svaret. Du har tavlan, magneter, A4-ark och en tjock tuschpenna. Avsnitten är långa, så läs gärna ett avsnitt till högt.
+        - Temat Smittor har en faktatext för var och en av de fem strukturerna, som brukar passa i åk 8–9. Varje vecka har klassen en läslektion och en modellektion om veckans text, så temat tar fem veckor. Varje elev har texten, en penna och papper till svaret. Du har tavlan, magneter, A4-ark och en tjock tuschpenna. Läs ett avsnitt till högt.
       delar:
         - rubrik: "1 Kroppens försvar: Tankekartan"
           falt:
@@ -3007,7 +3007,7 @@ ramar:
                 Lockar: 18 smittade, 154 miljoner. ”Vad gör ett vaccin med försvarets minne?”
                 Sambandet: ”i förväg”: minnet från avsnitt 4, utan sjukdomen
             - rubrik: Modellen
-              text: I vecka 1 lägger du den första post-it-lappen och skriver det första ordet. Tankekartan, blad 2. Nederst i varje fält har bladet rader med ledtexten Hit hör. Där skriver paren det som hör till delen. Gruppen lägger fördjupningens lapp på En lapp till, som får namnet Hör till minnet. Vaccinet bygger samma minne som avsnitt 4 beskriver.
+              text: Ta fram Tankekartan, blad 2. I vecka 1 lägger du den första post-it-lappen och skriver det första ordet. Nederst i varje fält har bladet rader med ledtexten Hit hör. Där skriver paren det som hör till delen. Gruppen lägger fördjupningens lapp på En lapp till, som får namnet Hör till minnet. Vaccinet bygger samma minne som avsnitt 4 beskriver.
             - rubrik: Orden
               text: första del (muren) · andra del (larmet och ätarna) · också (specialisterna) · blir kvar (minnet)
             - rubrik: Svaret
@@ -3037,7 +3037,7 @@ ramar:
               - liv har räddats av vaccin på 50 år, enligt en beräkning från WHO år 2024.
         - rubrik: "Bild: Försvaret i fyra lager"
           rader:
-            - - Huden i genomskärning vid ett litet sår. Siffrorna är avsnittens nummer och visar var varje del av försvaret arbetar.
+            - - Försvaret i fyra lager. Bilden visar huden i genomskärning vid ett litet sår. Siffrorna är avsnittens nummer och visar var varje del av försvaret arbetar.
         - rubrik: Muren runt kroppen
           rader:
             - - Kroppens skydd mot smitta kallas immunförsvaret, och dess första del är en mur. Det som syns av muren är huden, ett skyddande lager som hindrar **smittämnen** från att komma in i kroppen.
@@ -3077,7 +3077,7 @@ ramar:
               - medicin utifrån, mot bakterier
         - rubrik: "Bild: Antikroppen passar som en nyckel"
           rader:
-            - - En antikropp passar på ett bestämt kännetecken hos smittämnet, som en nyckel i sitt lås. På smittämnen utan det kännetecknet fastnar den inte.
+            - - Antikroppen passar som en nyckel. Den passar på ett bestämt kännetecken hos smittämnet, som nyckeln i sitt lås. På smittämnen utan det kännetecknet fastnar den inte.
         - rubrik: Försvarets minne
           rader:
             - - När infektionen är över har några av specialisterna förvandlats till minnesceller. De blir kvar i kroppen, långt efter att du har blivit frisk. De är försvarets fjärde del, och de kan finnas där i många år, ibland hela livet.
@@ -3223,7 +3223,7 @@ ramar:
               - leta upp de sjuka och dem de träffat
         - rubrik: "Bild: Ringen runt ett fall"
           rader:
-            - - Den sjuke står i mitten. Alla i närheten har fått vaccin, så viruset kommer inte vidare. Så gjorde WHO från 1967.
+            - - Ringen runt ett fall. Den sjuke står i mitten. Alla i närheten har fått vaccin, så viruset kommer inte vidare. Så gjorde WHO från 1967.
         - rubrik: "1977 till 1980: slutet"
           rader:
             - - Tio år senare, 1977, hittade hälsoarbetarna det sista naturliga **fallet**. Ali Maow Maalin var kock på ett sjukhus i Merca i Somalia. Han blev den sista människan som fick smittkoppor på naturlig väg, och han blev frisk. Smittan hade gått från människa till människa i minst 3 000 år, och nu tog den slut.
@@ -3237,7 +3237,7 @@ ramar:
               - lokal där forskare gör försök
         - rubrik: "Bild: De sista fallen"
           rader:
-            - - Det sista naturliga fallet kom i Merca i Somalia 1977. Den sista som dog smittades i England 1978.
+            - - De sista fallen. Det sista naturliga fallet kom i Merca i Somalia 1977. Den sista som dog smittades i England 1978.
         - rubrik: "Fördjupning: Prästerna som räknade de döda"
           rader:
             - - Vad vaccinet gjorde under åren mellan Jenner och WHO går att se i Sverige. Redan 1749 började prästerna räkna hur många som dog i varje församling och skriva upp vad de dog av. Siffrorna räknades ihop för hela landet. Därför vet vi hur många svenskar som dog i smittkoppor, år för år, redan innan det fanns något vaccin.
@@ -3261,7 +3261,7 @@ ramar:
               - "Den sista stora epidemin: 940 av en miljon invånare dör."
         - rubrik: "Bild: Döda i smittkoppor i Sverige"
           rader:
-            - - Så många dog i smittkoppor i Sverige varje år. Strecken visar 1801, då vaccinet kom, och 1816, då det blev obligatoriskt.
+            - - Döda i smittkoppor i Sverige. Så många dog varje år. Strecken visar 1801, då vaccinet kom, och 1816, då det blev obligatoriskt.
         - rubrik: Visste du att …
           rader:
             - - 2 laboratorier
@@ -3335,7 +3335,7 @@ ramar:
                 Lockar: två hekto, en mobiltelefon. ”Vad gör bakterierna som alltid bor på dig?”
                 Sambandet: ”Men långt ifrån alla”: bakterier som inte gör oss sjuka
             - rubrik: Modellen
-              text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad ska stå i mitten?” Texten jämför två saker, och kartan visar inte vad som är lika och olika. Ta sedan fram Venndiagrammet, blad 1. Avsnitt 4 ger två post-it-lappar: i modellpasset delar gruppen avsnittets kärna på två lappar, en för var sak. Gruppen lägger fördjupningens lapp på En lapp till, som får namnet Hör till bakterien. Normalfloran är bakterier, och texten nämner inga nyttiga virus."
+              text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad ska stå i mitten?” Texten jämför två saker, och kartan visar inte vad som är lika och olika. Ta sedan fram Venndiagrammet, blad 1. Avsnitt 4 ger två post-it-lappar: i modellpasset delar gruppen avsnittets kärna på två lappar, en för var sida. Gruppen lägger fördjupningens lapp på En lapp till, som får namnet Hör till bakterien. Normalfloran är bakterier, och texten nämner inga nyttiga virus."
             - rubrik: Orden
               text: |-
                 båda (mitten) · av de två (bakterien) · däremot (viruset)
@@ -3372,7 +3372,7 @@ ramar:
             - - Därför blandar många ihop dem. Men där tar likheterna slut. En bakterie och ett virus är byggda på olika sätt och blir fler på olika sätt, och det avgör vilken hjälp som finns. Ibland behöver läkaren ta ett prov för att veta vilket smittämne det är.
         - rubrik: "Bild: Bakterien och viruset"
           rader:
-            - - Bilden visar en bakterie och ett virus i genomskärning. I verkligheten är viruset mycket mindre än i bilden. Siffrorna är avsnittens nummer.
+            - - Bakterien och viruset. Bilden visar båda i genomskärning. I verkligheten är viruset mycket mindre än i bilden. Siffrorna är avsnittens nummer.
         - rubrik: Bakterien klarar sig själv
           rader:
             - - Av de två är det bakterien som är en hel levande varelse, fast den består av en enda cell. Innanför **cellväggen** finns allt den behöver, både **arvsmassa** och egna delar som tar upp näring och bygger nytt. Bakterien klarar sig alltså själv, så länge den har näring.
@@ -3395,7 +3395,7 @@ ramar:
               - cell som ett virus har tagit över
         - rubrik: "Bild: Så blir virus fler"
           rader:
-            - - Virus blir fler i fyra steg. Cellen som viruset har tagit sig in i gör hela arbetet.
+            - - Så blir virus fler. Det sker i fyra steg, och cellen som viruset har tagit sig in i gör hela arbetet.
         - rubrik: Olika byggda, olika behandling
           rader:
             - - Eftersom bakterien och viruset är så olika byggda kräver de olika behandling. Mot bakterier finns antibiotika, en medicin som slår mot delar av bakterien, till exempel cellväggen. Kroppens celler saknar de delarna eller har dem byggda på ett annat sätt, och därför skadas bakterierna men sällan du.
@@ -3541,7 +3541,7 @@ ramar:
               - tål ett läkemedel som brukar döda bakterier
         - rubrik: "Bild: Före, under och efter"
           rader:
-            - - Samma bakterier före, under och efter antibiotikan. De mörka tål mer än de ljusa. Siffrorna är avsnittens nummer.
+            - - Före, under och efter. Bilden visar samma bakterier tre gånger, och de mörka tål mer antibiotika än de ljusa. Siffrorna är avsnittens nummer.
         - rubrik: Spridningen går två vägar
           rader:
             - - Bakterier sprids, och det gör att de resistenta inte stannar där de uppstod. Spridningen går två vägar.
@@ -3549,7 +3549,7 @@ ramar:
             - - Den andra vägen går mellan människor. Bakterier följer med på händerna, och den som bär på resistenta bakterier kan lämna dem vidare till andra utan att själv vara sjuk. Sedan bär människor, djur och livsmedel bakterierna mellan länder och över hela världen. En resistent bakterie som uppstod i ett land kan därför dyka upp i ett helt annat, hos en människa som aldrig har tagit just den antibiotikan. Så blir en mutation i en enda bakterie till slut ett problem för många.
         - rubrik: "Bild: Två vägar"
           rader:
-            - - Resistensen sprids från bakterie till bakterie, och med människor, djur och livsmedel över världen.
+            - - Två vägar. Resistensen sprids från bakterie till bakterie, och med människor, djur och livsmedel över världen.
         - rubrik: Följderna i vården
           rader:
             - - Därför blir vanliga infektioner svårare att bota. När bakterierna är resistenta biter den vanliga antibiotikan inte längre, och en infektion som förr var lätt att bota kan bli farlig igen.
@@ -3576,7 +3576,7 @@ ramar:
               - 1 000 gånger den första dosen
         - rubrik: "Bild: Skålen med banden"
           rader:
-            - - Ytterst finns ingen antibiotika, sedan en liten dos som blir tio gånger starkare för varje band mot mitten. Bakterierna växer inåt från båda ändarna.
+            - - Skålen med banden. Ytterst finns ingen antibiotika, sedan en liten dos som blir tio gånger starkare för varje band mot mitten. Bakterierna växer inåt från båda ändarna.
         - rubrik: Visste du att …
           rader:
             - - 100 000
@@ -3714,7 +3714,7 @@ ramar:
               - vatten blandat med klor
         - rubrik: "Bild: Vägen från obduktionssalen"
           rader:
-            - - Läkarna och studenterna gick från obduktionssalen till kvinnorna. Från maj 1847 tvättade de händerna i klorlösning på vägen. Siffrorna är avsnittens nummer.
+            - - Vägen från obduktionssalen. Läkarna och studenterna gick från obduktionssalen till kvinnorna. Från maj 1847 tvättade de händerna i klorlösning på vägen. Siffrorna är avsnittens nummer.
         - rubrik: Motståndet mot det osynliga
           rader:
             - - Resultatet var tydligt, men det dröjde ändå innan andra läkare ändrade sig. Handtvätten hade fungerat på kliniken i Wien, och färre mödrar dog där än förut. En upptäckt slår dock inte igenom bara för att den är gjord.
@@ -3728,7 +3728,7 @@ ramar:
             - - "Semmelweis fick alltså rätt. På dagens sjukhus har arbetet med att hindra smitta ett eget namn, vårdhygien, och rena händer är en självklar del av det. Lösningen från maj 1847 gäller fortfarande: få bort det som ingen ser, innan det hinner vidare."
         - rubrik: "Bild: Handtvätt i dag"
           rader:
-            - - Så mycket minskar sjukdom och frånvaro när människor får lära sig att tvätta händerna med tvål. Staplarna går från det lägsta till det högsta talet.
+            - - Handtvätt i dag. Så mycket minskar sjukdom och frånvaro när människor får lära sig tvätta händerna med tvål. Varje stapel går från det lägsta till det högsta talet.
         - rubrik: Visste du att …
           rader:
             - - 1 biljon

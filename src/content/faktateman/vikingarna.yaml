@@ -1,0 +1,901 @@
+# Temat Vikingarna på nivån Bas i Faktatextsamtal i grupp, en post i sajtens databas över faktatexter
+# (src/content/faktateman/). Riggen samlar filen med methods/faktatextsamtal-i-grupp/samla.mjs.
+metod: faktatextsamtal-i-grupp
+tema: Vikingarna
+niva: Bas
+ramar:
+  - rubrik: "Lärarhandledning: Bas, Vikingarna"
+    tema: Vikingarna
+    text:
+      - Temat Vikingarna har en faktatext för var och en av de fem strukturerna, som brukar passa i åk 4–5. Varje vecka har klassen en läslektion och en modellektion om veckans text, så temat tar fem veckor. Varje elev har texten, en penna och papper till svaret. Du har tavlan, magneter, A4-ark och en tjock tuschpenna.
+    delar:
+      - rubrik: "1 Vikingaskeppet: Tankekartan"
+        falt:
+          - rubrik: Frågan
+            text: Hur var ett vikingaskepp byggt, och varför klarade det långa resor över havet?
+          - rubrik: Ord före
+            text: köl (stocken längst ner, ingen kyl) · styrbord (höger sida, inget köksbord) · årsring (en ring i träet per år)
+          - rubrik: Tänk högt
+            kursiv: true
+            text: "”Kölen. Låter som kyl, men det är något annat. Jag läser vidare: en lång stock av ek längst ner. Som en ryggrad? Jag tittar på bilden vid siffran 1. Vem eller vad? Kölen. Det viktigaste? Den är ryggraden, och allt byggs fast på den. Det om yxan är spännande, men det är en detalj.”"
+          - rubrik: Det brukar skava
+            text: "”men det gjorde roddarna”: det var roddarna som tröttnade, och vinden tröttnade aldrig (avsnitt 3)"
+          - rubrik: Modellen
+            text: "kölen: ”längst ner” · plankorna: ”från kölen och uppåt” · seglet: ”högt över plankorna” · årorna och styråran: ”kvar blir”. I mitten står vikingaskeppet. Fördjupningens kärna gäller hela skeppet och blir ett femte fält, Hur vi vet det. Årsringarna visar var skeppet byggdes, och kopian hur det seglade."
+          - rubrik: Lyssna efter
+            text: köl och plankor, lätt och starkt · seglet tog det över havet · åror när vinden saknades
+      - rubrik: "2 Ristat i sten: Tidslinjen"
+        falt:
+          - rubrik: Frågan
+            text: Hur blev en runsten till, och varför står den ofta vid en väg och inte vid en grav?
+          - rubrik: Ord före
+            text: efter (här till minne av den döde) · rista (hugga in, inte rita) · runor (nordbornas bokstäver)
+          - rubrik: Tänk högt om
+            text: "efter: ”Lät resa stenen efter sin son. Efter att sonen dog? Jag läser vidare: efter betyder här till minne av. Vem eller vad? Släkten. Det viktigaste? De lät resa en sten till minne, ingen gravsten.” (avsnitt 1)"
+          - rubrik: Det brukar skava
+            text: "”Efter det”: i avsnitt 1 betydde efter till minne av, men här är det ett tidsord: när texten är uppritad (avsnitt 3)"
+          - rubrik: Modellen
+            text: "någon dör: ”först” · ristaren ritar: ”sedan” · ristaren hugger: ”efter det” · vid vägen: ”till sist”. Fördjupningens kärna hör till steg 1, för Rökstenen visar varför en sten restes. Svaret behöver steg 1 och steg 4: stenen var ingen gravsten, och den stod vid vägen där många såg den."
+          - rubrik: Lyssna efter
+            text: till minne av den döde, ingen gravsten · ritas, huggs och målas · vid vägen såg många den
+      - rubrik: "3 Västerut och österut: Venndiagrammet"
+        falt:
+          - rubrik: Frågan
+            text: Vad skilde resorna västerut från resorna österut, och åt vilket håll for de flesta från dagens Sverige?
+          - rubrik: Ord före
+            text: viking (den som reste, inget folk) · Miklagård (en stad, ingen bondgård) · plundra (ta saker med våld, inte köpa)
+          - rubrik: Det brukar skava
+            text: "”De från dagens Sverige”: människor som bodde där Sverige ligger i dag, för landet fanns inte än (avsnitt 4)"
+          - rubrik: Modellen
+            text: "båda: ”både” · bara västerut: ”men vägarna var olika” · bara österut: ”medan”. Platserna bara västerut och bara österut får två ark var, om vägen och om vilka som for. Fördjupningens kärna, lejonet vid Aten, hör till österut, där väringarna fanns."
+          - rubrik: Lyssna efter
+            text: "båda: nordbor på resa · västerut över havet, österut längs floder · dagens Sverige mest österut"
+      - rubrik: "4 Skatten i åkern: Kedjan"
+        falt:
+          - rubrik: Frågan
+            text: Hur kom så mycket silver från ett rike långt bort till Gotland, och varför blev det kvar i jorden?
+          - rubrik: Ord före
+            text: skatt (gömt silver, inte det man betalar) · handel (byta varor mot silver)
+          - rubrik: Det brukar skava
+            text: "”värt så mycket som det vägde”: det var vikten som räknades, och inte om silvret var ett mynt eller en armring (avsnitt 3)"
+          - rubrik: Modellen
+            text: "handeln: ”därför” · vägt silver: ”det gjorde att” · gömt i jorden: ”eftersom”. Det första ledet har inget ord, för kedjan börjar där. Fördjupningens kärna hör till led 4 och står sist i svaret: ingen vet säkert varför silvret blev kvar."
+          - rubrik: Lyssna efter
+            text: silver från kalifatet · handel längs floderna, vägt på Gotland · gömt och kvar, ingen vet varför
+      - rubrik: "5 Vikingarnas spår: Problem och lösning"
+        falt:
+          - rubrik: Frågan
+            text: Hur kan vi veta något om vikingarna när de inte skrev några böcker, och hur säkert är det vi vet?
+          - rubrik: Ord före
+            text: källa (spår från förr, ingen vattenkälla) · spår (det som finns kvar, inga fotspår) · troligen (forskarna tror, men vet inte säkert)
+          - rubrik: Det brukar skava
+            text: "”vad vikingarna skrev på”: trä, som har ruttnat, och sten, som står kvar (avsnitt 2)"
+          - rubrik: Modellen
+            text: "inga böcker: ”problemet är” · trä ruttnar: ”beror på” · spåren: ”en lösning är” · vet och tror: ”har lett till”. Fördjupningens kärna hör till resultatet och visar det i ett exempel: att det var en kvinna vet vi, men om hon var krigare är en tolkning."
+          - rubrik: Lyssna efter
+            text: inga böcker, runorna i trä har ruttnat · spår i marken, texter och mätningar · en del vet vi, en del tror forskarna
+  - rubrik: "Lärarens sida: Bas, text 6, Vikingaskeppet"
+    text:
+      - Vikingaskeppet hade en köl, plankor som överlappade, ett segel och åror med en styråra, och tillsammans gjorde delarna att skeppet klarade långa resor. Texten är en beskrivning, och modellen är Tankekartan, blad 1. I vecka 1 tänker du högt i avsnitt 1.
+    delar:
+      - rubrik: "Läspasset: de fyra avsnitten"
+        falt:
+          - rubrik: Textens fråga
+            text: Hur var ett vikingaskepp byggt, och varför klarade det långa resor över havet?
+          - rubrik: Ord före läsningen
+            text: köl (stocken längst ner, ingen kyl) · styrbord (höger sida, inget köksbord) · årsring (en ring i träet per år)
+          - rubrik: Tänk högt
+            kursiv: true
+            text: "”Kölen. Låter som kyl, men det är något annat. Jag läser vidare: en lång stock av ek längst ner. Som en ryggrad? Jag tittar på bilden vid siffran 1. Vem eller vad? Kölen. Det viktigaste? Den är ryggraden, och allt byggs fast på den. Det om yxan är spännande, men det är en detalj.”"
+          - rubrik: 1 Kölen
+            text: |-
+              Red ut: ”smidig” (böjer sig utan att gå sönder) · ”Den” i andra stycket: kölen
+              Lyssna efter: längst ner · stock av ek · allt byggs på den
+              Lockar: yxan, det viktigaste verktyget. ”Var låg kölen, och vad var den gjord av?”
+              Bilden: Kölen längst ner i Skeppets delar, vid siffran 1
+          - rubrik: 2 Plankorna
+            text: |-
+              Red ut: ”överlappade” (låg en bit över varandra) · ”bord” (plankorna i skeppets sida)
+              Lyssna efter: plankor som överlappar · nitar och spant · lätt och starkt
+              Lockar: ull med tjära. ”Vad gjorde skeppet både lätt och starkt?”
+              Sambandet: ”Från kölen och uppåt”: sidorna byggs på kölen
+              Bilden: Plankorna och spanten i Skeppets delar, vid siffran 2
+          - rubrik: 3 Seglet
+            text: |-
+              Red ut: ”tänja sig” (töjas ut lite) · ”det gjorde roddarna”: roddarna tröttnade
+              Lyssna efter: stort fyrkantigt segel · långt över öppet hav
+              Lockar: lin eller ull. ”Varför behövdes seglet på långa resor?”
+              Sambandet: ”Högt över plankorna”: seglet sitter ovanför sidorna
+              Bilden: Masten och seglet i Skeppets delar, vid siffran 3
+          - rubrik: 4 Årorna och styråran
+            text: |-
+              Red ut: ”Kvar blir”: de delar som är kvar · ”framåt” (åt det håll skeppet åker)
+              Lyssna efter: åror när vinden saknas · styråran på höger sida · styrbord
+              Lockar: ordet används än i dag. ”Varför heter höger sida styrbord?”
+              Sambandet: ”Kvar blir”: de sista delarna av skeppet
+              Bilden: Styråran längst bak till höger, i Skeppet uppifrån
+          - rubrik: Om någon frågar
+            text: Hur stort var seglet? Kopians linsegel är 112 kvadratmeter. Vad gick åt till kopian? 14 ekar bara till plankorna, 8 000 järnnitar och 600 liter tjära. Säger inte SO-rummet att det längsta är 28 meter? Jo, men museet i Roskilde skriver upp mot 37,4 meter. Varför troligen 78 roddare? Avståndet mellan spanten ger plats för 39 par åror.
+      - rubrik: "Modellpasset: Tankekartan för Vikingaskeppet"
+        falt:
+          - rubrik: Fördjupningen
+            text: |-
+              Red ut: ”årsring” (en ring i träet för varje år) · ”kopia” (ett nytt skepp byggt likadant)
+              Lyssna efter: årsringarna visar Dublin · kopian seglade dit · hur skeppet klarade havet
+              Lockar: kopians namn, Havhingsten. ”Hur vet forskarna var skeppet byggdes?”
+              Sambandet: ”Också själva träet berättar”: träet i skeppets delar
+          - rubrik: Modellen
+            text: "Ta fram Tankekartan, blad 1. I vecka 1 lägger du den första post-it-lappen och skriver det första ordet. Gruppen lägger fördjupningens lapp på En lapp till och kallar platsen Hur vi vet det. Lappen gäller hela skeppet: den säger hur forskarna vet var det byggdes och hur det seglade."
+          - rubrik: Orden
+            text: längst ner (kölen) · från kölen och uppåt (plankorna) · högt över plankorna (seglet) · kvar blir (årorna och styråran)
+          - rubrik: Svaret
+            text: |-
+              Lyssna efter: köl och plankor, lätt och starkt · seglet tog det över havet · åror när vinden saknades
+              Så kan det låta: ”Skeppet hade plankor som överlappade och en lång köl av ek, så det blev lätt och starkt. Seglet tog det över havet. Årorna hjälpte när vinden saknades, och styråran styrde.”
+          - rubrik: Rutan
+            text: "Visste du att: intressant, för svaret håller utan det längsta skeppet."
+          - rubrik: Samtala
+            text: "Varför jämför författaren kölen med en ryggrad och spanten med revben? Varför berättar texten om kopian? Ett svar: kroppen går att se framför sig, och kopian visar hur vi vet att skeppet klarade havet."
+  - rubrik: "Bas, text 6: Vikingaskeppet"
+    tema: Vikingarna
+    text:
+      - Vikingarna · text 1 av 5
+    delar:
+      - rubrik: Till läraren
+        falt:
+          - rubrik: Hör till
+            text: Lärarens sida till texten.
+    listor:
+      - rubrik: Vikingaskeppet
+        rader:
+          - - I Roskildefjorden i Danmark hittade forskare ett vikingaskepp. Det kallas Skuldelev 2. Bara omkring en fjärdedel av skeppet finns kvar. Ändå vet forskarna hur det var byggt. Hur var ett vikingaskepp byggt, och varför klarade det långa resor över havet?
+      - rubrik: Siffran
+        rader:
+          - - 60 åror
+            - Så många åror fanns på Skuldelev 2. Det var 30 på varje sida.
+      - rubrik: "Bild: Skeppets delar"
+        rader:
+          - - Skeppets delar. Siffrorna är avsnittens nummer.
+      - rubrik: Kölen längst ner
+        rader:
+          - - Längst ner i skeppet låg **kölen**. Den var en lång och kraftig stock av ek. Kölen gick från skeppets ena ände till den andra, som en ryggrad.
+          - - Bygget började med kölen. Resten av skeppet byggdes sedan fast på den. Därför måste kölen vara stark. Den måste också vara smidig och kunna böja sig lite.
+          - - Skeppsbyggarna formade kölen med yxor. Yxan var deras viktigaste verktyg.
+      - rubrik: Ord i texten
+        rader:
+          - - köl
+            - stocken längst ner som skeppet byggs på
+      - rubrik: Plankor som överlappar
+        rader:
+          - - Från kölen och uppåt byggdes skeppets sidor av ekplankor. Plankorna lades så att de överlappade varandra en bit, som takpannor på ett tak. Plankorna i skeppets sida kallas bord.
+          - - Plankorna sattes ihop med nitar av järn. Mellan plankorna lade skeppsbyggarna ull med tjära, så att vattnet inte kom in.
+          - - Inuti satt spant, ett slags revben av trä. De gjorde skeppet styvt. Plankorna, nitarna och spanten hjälptes åt, och så blev skeppet både lätt och starkt.
+      - rubrik: Masten och seglet
+        rader:
+          - - Högt över plankorna hängde också ett stort, fyrkantigt segel. Det satt på masten, en hög stång som stod upp ur skeppet.
+          - - Seglet var oftast vävt av lin eller av ull. Ett segel av lin var lätt och starkt. Ett segel av ull var tyngre men kunde tänja sig mer.
+          - - Med seglet kunde skeppet ta sig långt över öppet hav. Vinden tröttnade aldrig, men det gjorde roddarna.
+      - rubrik: Årorna och styråran
+        rader:
+          - - Kvar blir årorna och styråran. Årorna satt längs skeppets sidor. När vinden saknades, rodde männen skeppet framåt. Skuldelev 2 var ett krigsskepp, byggt för fart. Vikingarna hade också tunga lastskepp för varor. Lastskeppen drevs fram av segel i stället för av åror.
+          - - Längst bak på skeppets högra sida satt styråran. Det var en stor åra som skeppet styrdes med. Därför heter höger sida **styrbord**. Det betyder sidan med styråran.
+          - - Styrbord är höger sida när du står i skeppet och tittar framåt. Ordet styrbord används på båtar än i dag.
+      - rubrik: Ord i texten
+        rader:
+          - - styrbord
+            - höger sida på ett skepp, sett framåt
+      - rubrik: "Bild: Skeppet uppifrån"
+        rader:
+          - - Skeppet uppifrån. Styråran sitter längst bak på höger sida, styrbord. Vänster sida heter babord.
+      - rubrik: "Fakta: Skuldelev 2 i tal"
+        rader:
+          - - Längd
+            - omkring 30 meter
+          - - Bredd
+            - 3,8 meter. Skeppet var nästan åtta gånger så långt som det var brett.
+          - - Besättning
+            - 65 till 70 man
+          - - Fart
+            - med segel i snitt 11 till 15 kilometer i timmen, och som mest 24 till 31 kilometer i timmen
+      - rubrik: "Fördjupning: Kopian som seglade till Dublin"
+        rader:
+          - - Också själva träet berättar något. Ett träd får en ny årsring varje år. Ett bra år blir ringen bred, och ett dåligt år blir den smal. Ekar som växer nära varandra får liknande mönster. Mönstret i Skuldelev 2 liknar mönstret i ekar nära Dublin på Irland. Skeppet byggdes alltså där, omkring år 1042. Det är nästan 1 000 år sedan.
+          - - Forskarna ville veta hur skeppet seglade. Därför byggde museet i Roskilde en kopia, Havhingsten. Åren 2007 och 2008 seglade kopian från Roskilde till Dublin och tillbaka. Resan lärde forskarna mer om hur skeppet klarade öppet hav.
+      - rubrik: Visste du att …
+        rader:
+          - - omkring 37 meter
+            - långt var Roskilde 6, det längsta vikingaskepp som har hittats. Troligen satt 78 man vid årorna. Hur många klasser som din skulle det behövas?
+      - rubrik: Läs mer
+        rader:
+          - - SO-rummet har en text för mellanstadiet om vikingarnas skepp och sjömän.
+            - https://www.so-rummet.se/fakta-artiklar/vikingarna-var-skickliga-sjoman-och-skeppsbyggare
+          - - För årskurs 4–6 har UR ett program på en kvart om vikingabåten.
+            - https://urplay.se/program/240335-vilken-historia-vikingatiden-vikingabaten
+          - - Vikingaskeppsmuseet i Roskilde visar Havhingsten, kopian som seglade till Dublin. Sidan är på danska, men bilderna går att titta på.
+            - https://www.vikingeskibsmuseet.dk/besoeg/udstillinger/de-fem-rekonstruktioner/havhingsten-fra-glendalough-skuldelev-2
+  - rubrik: "Modellen: Bas, text 6, Vikingaskeppet"
+    tema: Vikingarna
+    text:
+      - Tankekartan, blad 1, ifylld för Vikingaskeppet.
+    delar:
+      - rubrik: Frågan och svaret
+        falt:
+          - rubrik: Textens fråga
+            text: Hur var ett vikingaskepp byggt, och varför klarade det långa resor över havet?
+          - rubrik: Lyssna efter
+            text: köl och plankor, lätt och starkt · seglet tog det över havet · åror när vinden saknades
+          - rubrik: Så kan svaret låta
+            text: Skeppet hade plankor som överlappade och en lång köl av ek, så det blev lätt och starkt. Seglet tog det över havet. Årorna hjälpte när vinden saknades, och styråran styrde.
+  - rubrik: "Lärarens sida: Bas, text 7, Ristat i sten"
+    text:
+      - "En runsten blev till i fyra steg: någon dog, ristaren ritade, ristaren högg runorna, och stenen målades och stod oftast vid en väg där många såg den. Texten är byggd i tidsordning, och modellen är Tidslinjen, blad 1. I vecka 2 tänker du högt i avsnitt 1."
+    delar:
+      - rubrik: "Läspasset: de fyra avsnitten"
+        falt:
+          - rubrik: Textens fråga
+            text: Hur blev en runsten till, och varför står den ofta vid en väg och inte vid en grav?
+          - rubrik: Ord före läsningen
+            text: efter (här till minne av den döde) · rista (hugga in, inte rita) · runor (nordbornas bokstäver)
+          - rubrik: Tänk högt
+            kursiv: true
+            text: "”Lät resa stenen efter sin son. Efter? Efter att sonen dog? Jag läser vidare: efter betyder här till minne av. Då går det ihop. Vem eller vad? Släkten. Det viktigaste? De lät resa en sten till minne, ingen gravsten. Det om Gullög är spännande, men det är en detalj.”"
+          - rubrik: 1 Någon dör
+            text: |-
+              Red ut: ”efter” (till minne av) · ”det vet vi”: att den döde kunde ligga långt borta
+              Lyssna efter: någon i släkten dör · till minne av · ingen gravsten
+              Lockar: Gullög, en ovanlig mor. ”Varför lät släkten resa en sten?”
+          - rubrik: 2 Ristaren ritar
+            text: |-
+              Red ut: ”rista” (hugga in, inte rita) · ”Så gör”: ritar innan han hugger
+              Lyssna efter: rista runor · ritar upp texten · troligen, som en stenhuggare i dag
+              Lockar: slingan som en orm. ”Varför tror forskarna att ristaren ritade innan hen högg?”
+              Sambandet: ”Sedan tog en ristare över”: efter släktens beslut
+              Bilden: Den första stenen, med slingan ritad, vid siffran 2
+          - rubrik: 3 Ristaren hugger
+            text: |-
+              Red ut: ”Efter det”: här ett tidsord · ”tecken för tecken” (en runa i taget)
+              Lyssna efter: runorna huggs ut · mejsel och hammare · forskare tror
+              Lockar: Öpirs 50 stenar. ”Vad tror forskarna om verktygen, och varför?”
+              Sambandet: ”Efter det”: när texten är uppritad
+              Bilden: Den huggna stenen, vid siffran 3
+          - rubrik: 4 Målad vid vägen
+            text: |-
+              Red ut: ”där folk möttes” (för att bestämma saker) · ”Där stod också”: på stenen
+              Lyssna efter: målas · står vid en väg · många ser den
+              Lockar: färgerna. ”Varför stod stenen där många gick förbi?”
+              Sambandet: ”Till sist”: när runorna är huggna
+              Bilden: Den målade stenen och stenen vid vägen, vid siffran 4
+          - rubrik: Om någon frågar
+            text: "Vad hette runraden? Futharken. Den hade 16 olika runor. Vad står det mer på stenarna? Ibland en bön: Gud hjälpe hans ande. Fanns det fler färger? En sten i Spånga har cinnober, en röd färg som kom från andra länder. Var dog Gripsholmsstenens män? Söderut i Särkland, som kan ha legat nära Bagdad."
+      - rubrik: "Modellpasset: Tidslinjen för Ristat i sten"
+        falt:
+          - rubrik: Fördjupningen
+            text: |-
+              Red ut: ”läser den på olika sätt” (förstår den olika)
+              Lyssna efter: längsta runtexten · en far sörjer · forskarna läser olika
+              Lockar: rädsla för kyla och mörker. ”Varför är forskarna inte överens om Rökstenen?”
+              Sambandet: ”sörjer en far sin döde son”: varför stenen restes
+          - rubrik: Modellen
+            text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad kommer först här?” Den visar delar men ingen ordning. Ta sedan fram Tidslinjen, blad 1. Gruppen lägger fördjupningens post-it-lapp på En lapp till och kallar platsen Hör till steg 1. Rökstenen visar varför en sten restes: en far sörjde sin son."
+          - rubrik: Orden
+            text: först (någon dör) · sedan (ristaren ritar) · efter det (ristaren hugger) · till sist (vid vägen)
+          - rubrik: Svaret
+            text: |-
+              Lyssna efter: till minne av den döde, ingen gravsten · ritas, huggs och målas · vid vägen såg många den
+              Så kan det låta: ”Runstenen var ingen gravsten. Släkten lät göra den till minne av någon som hade dött. Ristaren ritade troligen först och högg sedan runorna. Stenen målades och stod ofta vid en väg, där många såg den.”
+          - rubrik: Rutan
+            text: "Visste du att: intressant, för svaret håller utan Jarlabanke, men han visar varför stenen stod vid vägen."
+          - rubrik: Samtala
+            text: "Var skriver författaren ”troligen”, och vad bygger det på? Var säger texten vad vi vet? Ett svar: ritningen bygger på stenhuggare i dag, verktygen på spåren i runorna, och det vi vet står på stenarna."
+  - rubrik: "Bas, text 7: Ristat i sten"
+    tema: Vikingarna
+    text:
+      - Vikingarna · text 2 av 5
+    delar:
+      - rubrik: Till läraren
+        falt:
+          - rubrik: Hör till
+            text: Lärarens sida till texten.
+    listor:
+      - rubrik: Ristat i sten
+        rader:
+          - - Kanske står det en runsten nära din skola. Tecknen på den höggs in för omkring 1 000 år sedan. Hur blev en runsten till, och varför står den ofta vid en väg och inte vid en grav?
+      - rubrik: Siffran
+        rader:
+          - - Omkring 2 500
+            - runstenar har hittats i Sverige. Om du tittade på en om dagen, skulle det ta nästan sju år.
+      - rubrik: "Bild: Från sten till runsten"
+        rader:
+          - - Från sten till runsten. Stenen ritas, huggs och målas. Till sist står den vid vägen. Siffrorna är avsnittens nummer.
+      - rubrik: Någon dör
+        rader:
+          - - Först dog någon i släkten, kanske en son som aldrig kom hem. Släkten ville resa en sten till minne av honom, alltså ställa upp den.
+          - - Många tänker sig att den döde ligger begravd under runstenen. Men runstenen var ingen gravsten. Den döde kunde ligga långt borta, och det vet vi från stenarnas egna texter. Gripsholmsstenen berättar om män som dog långt söderut.
+          - - Ofta står det att någon ”lät resa stenen efter” sin son. Efter betyder här till minne av. En mor som hette Gullög lät göra en sten efter sin dotter. Att en mor gjorde det ensam var mycket ovanligt.
+      - rubrik: Ristaren ritar
+        rader:
+          - - Sedan tog en ristare över. Ristaren skulle **rista** in en text i stenen, alltså hugga in den. Tecknen kallas **runor**. Det var bokstäverna som nordborna, människorna i Norden, skrev med.
+          - - Runorna skulle stå i en lång slinga, som ofta liknar en orm. Troligen ritade ristaren först upp hela texten på stenen.
+          - - Så gör en stenhuggare som hugger nya runstenar i dag. Han ritar med kol och krita innan han hugger.
+      - rubrik: Ord i texten
+        rader:
+          - - rista
+            - hugga eller skära in tecken
+          - - runor
+            - nordbornas bokstäver
+      - rubrik: Ristaren hugger
+        rader:
+          - - Efter det högg ristaren ut runorna, tecken för tecken. Troligen användes mejsel och hammare. Det tror forskare som har studerat spåren i runorna.
+          - - Ibland skrev ristaren sitt eget namn på stenen. En av ristarna hette Öpir och ristade fler än 50 stenar. Det var Öpir som ristade Gullögs sten.
+          - - Många stenar fick också ett kors, för många nordbor hade blivit kristna.
+      - rubrik: Målad vid vägen
+        rader:
+          - - Till sist målades stenen i olika färger. Det röda gjordes av järn eller bly och det svarta av sot. På en del stenar finns spår av vitt, gult och blått.
+          - - Stenen stod där många kunde se den. Oftast stod den vid en väg. Andra stenar stod vid en bro eller där folk möttes för att bestämma saker.
+          - - Den som gick förbi kunde se vem stenen var rest till minne av. Där stod också vem som hade rest den.
+      - rubrik: "Bild: Runstenar i Sverige"
+        rader:
+          - - Runstenar i Sverige. Ungefär hälften av dem finns i Uppland.
+      - rubrik: "Fakta: Runstenarna i tal"
+        rader:
+          - - Omkring 1 300
+            - finns i Uppland. Det är ungefär hälften av alla runstenar i Sverige.
+          - - Drygt 100 år
+            - Under den tiden restes de flesta runstenar, från slutet av 900-talet till början av 1100-talet.
+          - - "16"
+            - runor fanns i den runrad som ristarna skrev med.
+      - rubrik: "Fördjupning: Rökstenens text"
+        rader:
+          - - Rökstenen i Östergötland restes omkring år 800, för mer än 1 200 år sedan. Den har den längsta runtext som har hittats, med över 700 runor. På stenen sörjer en far sin döde son.
+          - - Resten av texten är svår att förstå, och forskarna läser den på olika sätt. I mer än hundra år trodde många forskare att den handlade om krig. År 2020 skrev fyra forskare att den handlar om rädsla för kyla och mörker. Några år senare höll en annan forskare inte med. Ingen vet säkert än.
+      - rubrik: Visste du att …
+        rader:
+          - - 6 runstenar
+            - reste Jarlabanke till minne av sig själv medan han levde, fyra av dem vid sin bro. Vad skulle du vilja att det stod om dig?
+      - rubrik: Läs mer
+        rader:
+          - - SO-rummet berättar om runorna och runstenarna, för mellanstadiet.
+            - https://www.so-rummet.se/fakta-artiklar/runorna-nordbornas-skriftsprak
+          - - Riksantikvarieämbetets Runskola berättar hur runorna ristades i trä och höggs i sten, och om ristare som skrev sitt namn.
+            - https://www.raa.se/kulturarv/runor-och-runstenar/runskolan/skriva-och-lasa-runor/
+          - - Riksantikvarieämbetet visar runstenarna landskap för landskap. Kanske finns det en nära dig.
+            - https://www.raa.se/kulturarv/runor-och-runstenar/runstenar-i-sverige/
+  - rubrik: "Modellen: Bas, text 7, Ristat i sten"
+    tema: Vikingarna
+    text:
+      - Tidslinjen, blad 1, ifylld för Ristat i sten.
+    delar:
+      - rubrik: Frågan och svaret
+        falt:
+          - rubrik: Textens fråga
+            text: Hur blev en runsten till, och varför står den ofta vid en väg och inte vid en grav?
+          - rubrik: Lyssna efter
+            text: till minne av den döde, ingen gravsten · ritas, huggs och målas · vid vägen såg många den
+          - rubrik: Så kan svaret låta
+            text: Runstenen var ingen gravsten. Släkten lät göra den till minne av någon som hade dött. Ristaren ritade troligen först och högg sedan runorna. Stenen målades och stod ofta vid en väg, där många såg den.
+  - rubrik: "Lärarens sida: Bas, text 8, Västerut och österut"
+    text:
+      - Nordborna for västerut över havet och österut längs floderna, och de från dagens Sverige for mest österut. Texten jämför två saker, och modellen är Venndiagrammet, blad 1. I vecka 3 har två elever i taget jobbkorten från avsnitt 2.
+    delar:
+      - rubrik: "Läspasset: de fyra avsnitten"
+        falt:
+          - rubrik: Textens fråga
+            text: Vad skilde resorna västerut från resorna österut, och åt vilket håll for de flesta från dagens Sverige?
+          - rubrik: Ord före läsningen
+            text: viking (den som reste, inget folk) · Miklagård (en stad, ingen bondgård) · plundra (ta saker med våld, inte köpa)
+          - rubrik: 1 Lika åt båda hållen
+            text: |-
+              Red ut: ”i viking” (ute på en resa) · ”dagens Sverige”: där Sverige ligger i dag
+              Lyssna efter: från Norden · på resa, inget folk · varor och strid
+              Lockar: runstenar om resor åt båda hållen. ”Vad var lika för båda vägarna?”
+              Bilden: Norden, där pilarna börjar, vid siffran 1
+          - rubrik: 2 Över Nordsjön
+            text: |-
+              Red ut: ”vikingatidens början” (när vikingatiden började) · ”Andra”: andra vikingar
+              Lyssna efter: Nordsjön, öppet hav · plundra kloster · Island och Grönland
+              Lockar: Lindisfarne år 793. ”Vad gjorde vikingarna som for västerut?”
+              Sambandet: ”Men vägarna var olika”: nu kommer skillnaderna
+              Bilden: Pilarna västerut över havet, vid siffran 2
+          - rubrik: 3 Längs floderna
+            text: |-
+              Red ut: ”i dag heter Istanbul”: samma stad · ”prövat vägen” (åkt samma väg)
+              Lyssna efter: Östersjön och floderna · Miklagård, i dag Istanbul · silver och väringar
+              Lockar: båten som drogs på land. ”Hur kom vikingarna fram till Miklagård?”
+              Sambandet: ”Medan”: österut ställs mot västerut
+              Bilden: Pilen österut längs floderna, vid siffran 3
+          - rubrik: 4 DNA visar vägen
+            text: |-
+              Red ut: ”DNA” (det vi ärver av föräldrarna) · ”De från”: människorna som kom därifrån
+              Lyssna efter: DNA från 442 människor · Danmark och Norge västerut · dagens Sverige österut
+              Lockar: brunt hår. ”Åt vilket håll for de flesta från dagens Sverige?”
+              Sambandet: ”Vägarna skilde sig också”: en skillnad till
+              Bilden: Där pilarna börjar: dagens Danmark, Norge och Sverige
+          - rubrik: Om någon frågar
+            text: Vilket anfall kom före Lindisfarne? År 789 kom tre skepp med nordbor till Wessex i England. Vilken väg tog Krampmacken? Från Gotland via floderna Wisla och Donau. Hur kom lejonet till Venedig? Venetianerna tog det som krigsbyte år 1687. Hur vet vi året 1021? Forskarna räknade årsringarna från en händelse i rymden år 993.
+      - rubrik: "Modellpasset: Venndiagrammet för Västerut och österut"
+        falt:
+          - rubrik: Fördjupningen
+            text: |-
+              Red ut: ”Helmings män”: en grupp väringar · ”nämligen”: här kommer skälet
+              Lyssna efter: runor på ett lejon · troligen väringar · spår av resan österut
+              Lockar: lejonet står i Venedig. ”Varför tror forskarna att väringar ristade runorna?”
+              Sambandet: ”väringar”: kejsarens soldater från avsnitt 3
+          - rubrik: Modellen
+            text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad ska stå i mitten?” Texten jämför två saker, och kartan visar inte vad som är lika och olika. Ta sedan fram Venndiagrammet, blad 1. Avsnitt 4 ger två post-it-lappar: i modellpasset delar gruppen avsnittets kärna på två lappar, en för var sida. Gruppen lägger fördjupningens lapp på En lapp till och kallar platsen Hör till österut. Lejonet är ett spår av väringarna, som fanns i kejsarens rike österut."
+          - rubrik: Orden
+            text: |-
+              både (båda) · men vägarna var olika (bara västerut) · medan (bara österut)
+              Utan flik: gruppen skriver ”vägarna skilde sig också” och ”däremot” vid lapparna från avsnitt 4.
+          - rubrik: Svaret
+            text: |-
+              Lyssna efter: båda: nordbor på resa · västerut över havet, österut längs floder · dagens Sverige mest österut
+              Så kan det låta: ”Båda var nordbor på resa för att byta varor eller strida. Västerut seglade de över havet till kloster och nya hem. Österut for de längs floderna till Miklagård. De flesta från dagens Sverige for österut.”
+          - rubrik: Rutan
+            text: "Visste du att: intressant, för svaret håller utan Amerika, men träden visar hur långt västerut de nådde."
+          - rubrik: Samtala
+            text: "Varför tar författaren upp samma saker för båda vägarna: vart, hur och varför? Varför kommer DNA sist? Ett svar: då syns skillnaderna, och DNA svarar på frågans andra del."
+  - rubrik: "Bas, text 8: Västerut och österut"
+    tema: Vikingarna
+    text:
+      - Vikingarna · text 3 av 5
+    delar:
+      - rubrik: Till läraren
+        falt:
+          - rubrik: Hör till
+            text: Lärarens sida till texten.
+    listor:
+      - rubrik: Västerut och österut
+        rader:
+          - - Lägg fingret på Norden på en karta. Därifrån for vikingarna åt två håll, västerut och österut. For betyder här reste. Vad skilde resorna västerut från resorna österut, och åt vilket håll for de flesta från dagens Sverige?
+      - rubrik: Siffran
+        rader:
+          - - "442"
+            - människor, de flesta från vikingatiden, undersöktes i en stor studie år 2020. Forskarna tog prov från tänder och ben.
+      - rubrik: "Bild: Två vägar ut"
+        rader:
+          - - Två vägar ut. Pilarna visar vart vikingarna for. Länderna har dagens namn. Siffrorna är avsnittens nummer. Kartan är förenklad och lite utdragen på bredden.
+      - rubrik: Lika åt båda hållen
+        rader:
+          - - Både de som for västerut och de som for österut kom från Norden. Båda reste i skepp och båtar med segel och åror, för att byta varor och för att strida.
+          - - Många tänker sig att vikingarna var ett eget folk, kanske svenskar. Men att vara i viking betydde att vara ute på en sådan resa. Sverige fanns inte som land än. Därför står det ”dagens Sverige” i den här texten.
+          - - Runstenar här hemma berättar om män som reste åt båda hållen.
+      - rubrik: Över Nordsjön
+        rader:
+          - - Men vägarna var olika. Västerut seglade vikingarna över Nordsjön, ett stort och öppet hav. På andra sidan låg England med sina **kloster**, hus där munkar bodde och bad till Gud.
+          - - Dit kom vikingar för att **plundra**. År 793 anföll de klostret Lindisfarne, för mer än 1 200 år sedan. Det vet vi bland annat från ett brev som skrevs efter anfallet. Det var inte det första anfallet, men det brukar räknas som vikingatidens början.
+          - - Andra seglade ännu längre västerut. De byggde nya hem på Island och Grönland.
+      - rubrik: Ord i texten
+        rader:
+          - - kloster
+            - hus där munkar bor och ber
+          - - plundra
+            - ta andras saker med våld
+      - rubrik: Längs floderna
+        rader:
+          - - Medan andra seglade västerut över havet, for många österut över Östersjön och vidare längs stora floder. Vägen ledde ända till Miklagård, som i dag heter Istanbul. Där bodde kejsaren, som styrde ett stort rike.
+          - - På vägen sålde många varor, och mycket silver kom österifrån till Norden. En del blev **väringar**, soldater som vaktade kejsaren.
+          - - En kopia av en liten vikingabåt från Gotland har prövat vägen. Den heter Krampmacken och kom till Istanbul. På vissa sträckor fick besättningen dra båten på land.
+      - rubrik: Ord i texten
+        rader:
+          - - väring
+            - nordbo som var soldat åt kejsaren
+      - rubrik: "Bild: Hav och flod"
+        rader:
+          - - Hav och flod. Till vänster seglar skeppet över havet. Till höger drar besättningen båten på land.
+      - rubrik: DNA visar vägen
+        rader:
+          - - Vägarna skilde sig också i vilka som for. Det kan forskarna se med hjälp av **DNA**.
+          - - Forskarna undersökte DNA från 442 människor, de flesta från vikingatiden. DNA i en grav visar varifrån den dödes släkt kom. Studien visar att de från dagens Danmark mest for till England. De från dagens Norge for till Irland, Skottland, Island och Grönland. Alla de vägarna gick västerut.
+          - - De från dagens Sverige for däremot mest österut, till Baltikum på andra sidan Östersjön. Studien visar också att många vikingar hade brunt hår.
+      - rubrik: Ord i texten
+        rader:
+          - - DNA
+            - det i kroppen som vi ärver
+      - rubrik: "Fakta: Två vägar"
+        rader:
+          - - Västerut
+            - över havet till England, Irland, Island och Grönland
+          - - Österut
+            - över Östersjön och längs floderna, ända till Miklagård
+          - - När
+            - under vikingatiden, omkring år 800 till 1050. Forskarna säger lite olika år.
+      - rubrik: "Fördjupning: Lejonet med runor"
+        rader:
+          - - I Venedig i Italien står ett lejon av marmor som är över tre meter högt. Förr stod det i Pireus, hamnen vid Aten i dagens Grekland. Där högg nordbor in runor på lejonets sidor, för omkring 1 000 år sedan.
+          - - Forskarna tror att det var väringar som ristade. Runorna nämner nämligen Helmings män, och de var väringar. I dag har marmorn skador, och en del av runorna går inte att läsa. Lejonet är ändå ett spår av en resa österut.
+      - rubrik: Visste du att …
+        rader:
+          - - "1021"
+            - fällde vikingar träd i Amerika, och vi vet exakt vilket år. Hur många år sedan är det?
+      - rubrik: Läs mer
+        rader:
+          - - Historiska museet berättar om Krampmacken och resan från Gotland till Istanbul.
+            - https://historiska.se/krampmacken
+          - - Historiska museet visar lejonet från Pireus och berättar om runorna på det.
+            - https://historiska.se/utforska-historien/kunskapsbank/runlejonet-fran-pireus/
+          - - Riksantikvarieämbetet visar runstenar om resor till andra länder.
+            - https://www.raa.se/kulturarv/runor-och-runstenar/runskolan/runstenar-och-andra-lander/
+  - rubrik: "Modellen: Bas, text 8, Västerut och österut"
+    tema: Vikingarna
+    text:
+      - Venndiagrammet, blad 1, ifyllt för Västerut och österut.
+    delar:
+      - rubrik: Frågan och svaret
+        falt:
+          - rubrik: Textens fråga
+            text: Vad skilde resorna västerut från resorna österut, och åt vilket håll for de flesta från dagens Sverige?
+          - rubrik: Lyssna efter
+            text: "båda: nordbor på resa · västerut över havet, österut längs floder · dagens Sverige mest österut"
+          - rubrik: Så kan svaret låta
+            text: Båda var nordbor på resa för att byta varor eller strida. Västerut seglade de över havet till kloster och nya hem. Österut for de längs floderna till Miklagård. De flesta från dagens Sverige for österut.
+  - rubrik: "Lärarens sida: Bas, text 9, Skatten i åkern"
+    text:
+      - Kalifatet långt bort hade mycket silver. Nordborna fick det genom handel längs floderna, och på Gotland vägdes det. Mycket grävdes ner och blev kvar, och ingen vet säkert varför. Texten förklarar orsak och verkan, och modellen är Kedjan, blad 1. I vecka 4 har två elever i taget jobbkorten från avsnitt 2.
+    delar:
+      - rubrik: "Läspasset: de fyra avsnitten"
+        falt:
+          - rubrik: Textens fråga
+            text: Hur kom så mycket silver från ett rike långt bort till Gotland, och varför blev det kvar i jorden?
+          - rubrik: Ord före läsningen
+            text: skatt (gömt silver, inte det man betalar) · handel (byta varor mot silver)
+          - rubrik: 1 Silver från långt bort
+            text: |-
+              Red ut: kalifat, i marginalen · ”Sådana mynt”: mynt av silver
+              Lyssna efter: ett rike långt bort · mycket silver · mynt
+              Lockar: myntet från år 740. ”Var gjordes mynten, och av vad?”
+              Bilden: Kalifatet på kartan Silvrets väg, vid siffran 1
+          - rubrik: 2 Handel längs floderna
+            text: |-
+              Red ut: ”till fånga”: fångat dem · träl, i marginalen
+              Lyssna efter: handel längs floderna · pälsar och trälar · fick silver
+              Lockar: att vikingarna stal silvret. ”Vad fick nordborna silvret för?”
+              Sambandet: ”därför”: silvret i kalifatet lockade
+              Bilden: Pilarna längs floderna: varor åt ena hållet, silver tillbaka
+          - rubrik: 3 Silvret vägdes
+            text: |-
+              Red ut: ”värt så mycket som det vägde”: tyngre, mer värt · ”lagom mycket”: rätt mängd
+              Lyssna efter: till Gotland · vägdes · hackades sönder
+              Lockar: vackra armringar i bitar. ”Varför hackade man sönder silvret?”
+              Sambandet: ”Det gjorde att”: handeln förde silvret till Gotland
+              Bilden: Gotland på kartan, vid siffran 3
+          - rubrik: 4 Silvret i jorden
+            text: |-
+              Red ut: ”Eftersom” först: orsaken före följden · ”hämtades aldrig”: ingen grävde upp det
+              Lyssna efter: gömdes i jorden · hämtades aldrig · skatter än i dag
+              Lockar: säckar av tyg under golvet. ”Varför hittar man skatter på Gotland än i dag?”
+              Sambandet: ”Eftersom”: silvret var värdefullt och gömdes
+              Bilden: Spillingsskatten, 67 paket, och den lilla vanliga skatten
+          - rubrik: Om någon frågar
+            text: Vad hette mynten? Dirhamer. Kom nordborna ända till kalifatet? Mest mötte de muslimska köpmän vid floderna Volga och Don. Hur många mynt fanns i Spillingsskatten? Omkring 14 300, de flesta från kalifatet. Vilken skatt var Sveriges största förut? Burgeskatten, 10,4 kilo.
+      - rubrik: "Modellpasset: Kedjan för Skatten i åkern"
+        falt:
+          - rubrik: Fördjupningen
+            text: |-
+              Red ut: ”då eller senare”: inte före 870-talet · ”Kanske”: en av forskarnas förklaringar
+              Lyssna efter: ingen vet säkert · det yngsta myntet · flera förklaringar
+              Lockar: Ynglingasagan och livet efter döden. ”Vad vet forskarna, och vad tror de?”
+              Sambandet: ”Ingen vet säkert”: varför silvret i avsnitt 4 blev kvar
+          - rubrik: Modellen
+            text: "Lägg först fram gruppens tidslinje från vecka 2 och fråga: ”Flikarna säger när. Var skriver vi varför?” Den visar när, men inte varför. Ta sedan fram Kedjan, blad 1. Gruppen lägger fördjupningens post-it-lapp på En lapp till, kallar platsen Förklaringarna och drar ett streck till led 4. Led 4 säger att silvret blev kvar. Fördjupningen säger att ingen vet säkert varför, och det är svarets sista led."
+          - rubrik: Orden
+            text: därför (handeln) · det gjorde att (vägt silver) · eftersom (gömt i jorden)
+          - rubrik: Svaret
+            text: |-
+              Lyssna efter: silver från kalifatet · handel längs floderna, vägt på Gotland · gömt och kvar, ingen vet varför
+              Så kan det låta: ”Kalifatet hade mycket silver. Nordborna sålde varor längs floderna och fick silver, som kom till Gotland och vägdes. Eftersom silvret var värdefullt, grävde många ner det. Mycket blev kvar, och ingen vet säkert varför.”
+          - rubrik: Rutan
+            text: "Visste du att: intressant, för svaret håller utan tv-teamet på åkern."
+          - rubrik: Samtala
+            text: "Var skriver författaren vad forskarna tror, och varför där? Varför börjar texten med ett mynt? Ett svar: där spåren inte räcker, om trälarna och silvret som blev kvar. Ett mynt går att känna i handen."
+  - rubrik: "Bas, text 9: Skatten i åkern"
+    tema: Vikingarna
+    text:
+      - Vikingarna · text 4 av 5
+    delar:
+      - rubrik: Till läraren
+        falt:
+          - rubrik: Hör till
+            text: Lärarens sida till texten.
+    listor:
+      - rubrik: Skatten i åkern
+        rader:
+          - - Under en åker på Gotland låg tusentals silvermynt. Skatt betyder här silver som någon har gömt i jorden. Hur kom så mycket silver från ett rike långt bort till Gotland, och varför blev det kvar i jorden?
+      - rubrik: Siffran
+        rader:
+          - - 67 kilo
+            - silver låg i Spillingsskatten. Den kom fram ur en åker på Gotland år 1999.
+      - rubrik: Silver från långt bort
+        rader:
+          - - Tänk dig ett mynt av silver i din hand. Det väger ungefär tre gram, så du känner det knappt. Sådana mynt gjordes i **kalifatet**, ett rike långt bort.
+          - - I kalifatet fanns mycket silver, och där gjordes många mynt. Ett mynt på Historiska museet gjordes omkring år 740 i dagens Irak. Det är nästan 1 300 år sedan.
+          - - De flesta mynten i den stora skatten i åkern kom från kalifatet.
+      - rubrik: Ord i texten
+        rader:
+          - - kalifat
+            - ett rike där ledaren kallades kalif
+      - rubrik: "Bild: Silvrets väg"
+        rader:
+          - - Silvrets väg. Följ silvret från kalifatet längs floderna till Gotland. Kartan är förenklad, och Gotland är förstorad. Siffrorna är avsnittens nummer.
+      - rubrik: Handel längs floderna
+        rader:
+          - - Silvret lockade, och därför reste många nordbor österut. De for över Östersjön och sedan längs floderna. Där bytte de varor mot silver. Ett sådant byte kallas handel.
+          - - Nordborna sålde pälsar, och de sålde **trälar**. De hade tagit många av trälarna till fånga när de plundrade. Forskarna tror att en del av silvret var betalning för trälar.
+          - - Det är lätt att tänka sig att vikingarna stal silvret. Men mycket av det fick de genom handel, som betalning för det de sålde.
+      - rubrik: Ord i texten
+        rader:
+          - - träl
+            - en människa som ägdes av en annan
+      - rubrik: Silvret vägdes
+        rader:
+          - - Det gjorde att mycket silver kom till Gotland, en ö i Östersjön. Där fanns silvret som mynt, armringar och bitar.
+          - - Silvret var värt så mycket som det vägde. Det spelade ingen roll om det var ett mynt eller en armring. En tyngre bit var värd mer än en lättare.
+          - - Därför hackade man sönder silvret i mindre bitar. Man hackade till och med sönder vackra armringar. Bitarna vägdes, så att man betalade lagom mycket silver.
+      - rubrik: Silvret i jorden
+        rader:
+          - - Eftersom silvret var så värdefullt, gömde många det i jorden. Det var vanligt att gömma sina värdesaker.
+          - - Men mycket av silvret hämtades aldrig, och ingen vet säkert varför. Det blev kvar i jorden. Därför hittar man skatter på Gotland än i dag. Fler än 700 silverskatter har hittats på ön.
+          - - Den största av dem heter Spillingsskatten. Den låg under golvet i ett stort hus, troligen i säckar av tyg. I dag är platsen en åker.
+      - rubrik: "Bild: Skatterna i kilopaket"
+        rader:
+          - - Skatterna i kilopaket. Varje paket väger ett kilo. Spillingsskatten är 67 paket, och en vanlig skatt är en fjärdedel av ett paket. Siffrorna är avsnittens nummer.
+      - rubrik: "Fakta: Silvret i gram och kilo"
+        rader:
+          - - Ett mynt
+            - ungefär 3 gram
+          - - En vanlig skatt på Gotland
+            - 200 till 300 gram, ungefär en fjärdedel av ett kilo
+          - - Spillingsskatten
+            - 67 kilo silver, lika mycket som 67 paket socker på ett kilo
+          - - Silverskatter på Gotland
+            - fler än 700
+      - rubrik: "Fördjupning: Varför blev silvret kvar?"
+        rader:
+          - - Ingen vet säkert varför så många skatter aldrig hämtades. Men forskarna vet en del. Det yngsta myntet i Spillingsskatten är från 870-talet, för mer än 1 100 år sedan. Därför vet de att skatten grävdes ner då eller senare.
+          - - Forskarna har flera förklaringar. Kanske gömde ägaren silvret för att spara det och kunde sedan inte hämta det. Kanske handlade det om religion. Enligt en gammal berättelse, Ynglingasagan, fick den döde ha med sig sitt nedgrävda silver till livet efter döden.
+      - rubrik: Visste du att …
+        rader:
+          - - Strax efter
+            - att ett tv-team hade filmat på åkern och åkt därifrån, kom den första skatten fram. Hur tror du att tv-teamet kände sig?
+      - rubrik: Läs mer
+        rader:
+          - - Historiska museet berättar om Spillingsskatten och om dagen då den hittades.
+            - https://historiska.se/utforska-historien/kunskapsbank/varldens-storsta-vikingatida-skatt/
+          - - Gotlands museum visar silverskatterna i utställningen Skattkammaren.
+            - https://www.gotlandsmuseum.se/utstallning/skattkammaren/
+          - - Historiska museet har bilder på föremål ur Gotlands gömda silverskatter.
+            - https://vikingar.historiska.se/objects.php?showcase=60479fe5-6817-470f-b941-ffcf45aff182&e=&l=sv
+  - rubrik: "Modellen: Bas, text 9, Skatten i åkern"
+    tema: Vikingarna
+    text:
+      - Kedjan, blad 1, ifylld för Skatten i åkern.
+    delar:
+      - rubrik: Frågan och svaret
+        falt:
+          - rubrik: Textens fråga
+            text: Hur kom så mycket silver från ett rike långt bort till Gotland, och varför blev det kvar i jorden?
+          - rubrik: Lyssna efter
+            text: silver från kalifatet · handel längs floderna, vägt på Gotland · gömt och kvar, ingen vet varför
+          - rubrik: Så kan svaret låta
+            text: Kalifatet hade mycket silver. Nordborna sålde varor längs floderna och fick silver, som kom till Gotland och vägdes. Eftersom silvret var värdefullt, grävde många ner det. Mycket blev kvar, och ingen vet säkert varför.
+  - rubrik: "Lärarens sida: Bas, text 10, Vikingarnas spår"
+    text:
+      - Vikingarna skrev inga böcker, och det mesta de ristade i trä har ruttnat. Forskarna läser därför spåren i marken, det som skrevs och nya mätningar. En del vet vi, och annat tror forskarna. Texten har ett problem och en lösning, och modellen är Problem och lösning, blad 1. I vecka 5 har två elever i taget jobbkorten från avsnitt 2, och de två som har dem i avsnitt 4 leder hela avsnittet.
+    delar:
+      - rubrik: "Läspasset: de fyra avsnitten"
+        falt:
+          - rubrik: Textens fråga
+            text: Hur kan vi veta något om vikingarna när de inte skrev några böcker, och hur säkert är det vi vet?
+          - rubrik: Ord före läsningen
+            text: källa (spår från förr, ingen vattenkälla) · spår (det som finns kvar, inga fotspår) · troligen (forskarna tror, men vet inte säkert)
+          - rubrik: 1 Inga böcker
+            text: |-
+              Red ut: ”någon sådan bok”: där en viking berättar · källa: förklaras i texten
+              Lyssna efter: inga böcker · hur de levde
+              Lockar: källan där vatten kommer upp. ”Vilken bok finns inte?”
+          - rubrik: 2 Trä ruttnar
+            text: |-
+              Red ut: ”vad vikingarna skrev på”: trä och sten · ”till minne av vem”: den döde
+              Lyssna efter: runor i trä · har ruttnat · korta texter på sten
+              Lockar: Jarlabankes stenar om sig själv. ”Varför finns så lite av vikingarnas skrift kvar?”
+              Sambandet: ”Problemet beror på”: varför det inte finns någon sådan bok
+              Bilden: Pinnen som har ruttnat och runstenen som står kvar
+          - rubrik: 3 Forskarna läser spåren
+            text: |-
+              Red ut: arkeolog, i marginalen · ”En annan sorts”: ett andra slags spår
+              Lyssna efter: spår i marken · det som skrevs · nya sätt att mäta
+              Lockar: DNA från 442 människor. ”Vilka tre sorters spår läser forskarna?”
+              Sambandet: ”En lösning är”: svaret på att skriften saknas
+              Bilden: Siffran 3 vid graven, skatten och nedre raden i Vikingatiden och forskningen
+          - rubrik: 4 Vad vi vet och tror
+            text: |-
+              Red ut: ”for sällan eller aldrig i väg”: stannade oftast hemma · ”troligen eller kanske”: inte säkert
+              Lyssna efter: de flesta var bönder · en del tror forskarna · troligen
+              Lockar: krigare som slogs hela tiden. ”När skriver forskarna troligen?”
+              Sambandet: ”har lett till”: det som spåren har gett
+              Bilden: Vikingatiden och forskningen, med vikingatiden till vänster och ny kunskap till höger
+          - rubrik: Om någon frågar
+            text: Finns det inga sagor? Jo, men de skrevs ner på Island, tidigast på 1200-talet. Hur många gravar på Birka är utgrävda? Omkring 1 100. Visste ingen förut att det var en kvinna? En benanalys på 1970-talet sa det, men ingen visste säkert att benen hörde till graven. Vem skrev brevet om Lindisfarne? Alcuin, som bodde långt därifrån.
+      - rubrik: "Modellpasset: Problem och lösning för Vikingarnas spår"
+        falt:
+          - rubrik: Fördjupningen
+            text: |-
+              Red ut: Birka: en handelsplats, i Siffran · ”Det vet vi nu”: DNA är säkert
+              Lyssna efter: vapen i graven · DNA: en kvinna · krigare är osäkert
+              Lockar: två hästar och spelpjäser. ”Vad vet vi om graven, och vad tror forskarna?”
+              Sambandet: ”både det vi vet och det forskarna tror”: resultatet i avsnitt 4
+          - rubrik: Modellen
+            text: "Lägg först fram gruppens kedja från vecka 4 och fråga: ”Var skriver vi det någon gör åt problemet?” Den visar vad som leder till vad, men inte vad någon gör åt problemet. Ta sedan fram Problem och lösning, blad 1. Gruppen lägger fördjupningens post-it-lapp på En lapp till, kallar platsen Graven Bj 581 och drar ett streck till resultatet. Graven är ett exempel på resultatet: att det var en kvinna vet vi, men om hon var krigare är en tolkning."
+          - rubrik: Orden
+            text: problemet är (inga böcker) · beror på (trä ruttnar) · en lösning är (spåren) · har lett till (vet och tror)
+          - rubrik: Svaret
+            text: |-
+              Lyssna efter: inga böcker, runorna i trä har ruttnat · spår i marken, texter och mätningar · en del vet vi, en del tror forskarna
+              Så kan det låta: ”Vikingarna skrev inga böcker, och runorna i trä har ruttnat. Forskarna läser spåren: fynd, runstenar och DNA. En del vet vi, som att de flesta var bönder, och en del tror forskarna.”
+          - rubrik: Rutan
+            text: "Visste du att: intressant, för svaret håller utan hornen, men rutan visar hur en myt blev till."
+          - rubrik: Samtala
+            text: "Var skriver författaren ”vi vet”, och var ”forskarna tror”? Varför handlar fördjupningen om graven Bj 581? Ett svar: graven visar båda, för DNA är säkert, men att hon var krigare är en tolkning."
+  - rubrik: "Bas, text 10: Vikingarnas spår"
+    tema: Vikingarna
+    text:
+      - Vikingarna · text 5 av 5
+    delar:
+      - rubrik: Till läraren
+        falt:
+          - rubrik: Hör till
+            text: Lärarens sida till texten.
+    listor:
+      - rubrik: Vikingarnas spår
+        rader:
+          - - Du har läst om ett skepp, en runsten, två vägar och en skatt. Ingen av dagens forskare var där. Hur kan vi veta något om vikingarna när de inte skrev några böcker, och hur säkert är det vi vet?
+      - rubrik: Siffran
+        rader:
+          - - Över 3 000
+            - gravar är kända på Birka, en handelsplats på vikingatiden. En av dem kallas Bj 581.
+      - rubrik: Inga böcker
+        rader:
+          - - Tänk dig att du vill veta hur vikingarna levde. Du letar efter en bok där en viking berättar om sitt liv. Problemet är att det inte finns någon sådan bok. Vikingarna skrev inga böcker om hur de levde.
+          - - Forskarna måste leta efter andra källor. En källa är här ett spår från förr, som berättar något. Du känner kanske igen ordet från vatten. Då är en källa ett ställe där vatten kommer upp ur marken. Ur en källa om förr kommer kunskap.
+      - rubrik: Trä ruttnar
+        rader:
+          - - Problemet beror på vad vikingarna skrev på. De ristade runor, oftast i trä, och träet har ruttnat. Texterna försvann med det.
+          - - Många runstenar står kvar, eftersom sten inte ruttnar. Omkring 2 500 har hittats i dagens Sverige. Men texterna på dem är oftast korta. De säger vem som lät resa stenen och till minne av vem. Jarlabanke lät till och med resa stenar till minne av sig själv, medan han levde.
+      - rubrik: "Bild: Spåren i marken"
+        rader:
+          - - Spåren i marken. Runstenen, graven och skatten finns kvar. Pinnen av trä med runor har ruttnat bort. Siffrorna är avsnittens nummer.
+      - rubrik: Forskarna läser spåren
+        rader:
+          - - En lösning är att läsa spåren efter vikingarna. En sorts spår finns i marken. Där letar en **arkeolog** efter det som finns kvar. Spillingsskatten berättar om handeln österut.
+          - - En annan sorts spår är det som skrevs. Runstenarna berättar om döda och om resor. Andra folk skrev också om vikingarna. Efter anfallet på Lindisfarne år 793, för mer än 1 200 år sedan, skrev en man ett brev om det.
+          - - En tredje sorts spår får forskarna genom att mäta på nya sätt. Årsringarna i skeppets trä visar var Skuldelev 2 byggdes. DNA från 442 människor visar vart vikingarna reste.
+      - rubrik: Ord i texten
+        rader:
+          - - arkeolog
+            - forskare som gräver fram spår från förr
+      - rubrik: "Fakta: Spåren och vad de berättar"
+        rader:
+          - - Runsten
+            - vem som dog, och ibland vart hen hade rest
+          - - Grav
+            - vad den döde fick med sig i graven
+          - - Fynd i marken
+            - vad människor ägde, som silvret i Spillingsskatten
+          - - Andras texter
+            - vad andra folk berättade, som om anfallet på Lindisfarne
+          - - DNA
+            - om den döde var man eller kvinna, och var släkten kom ifrån
+      - rubrik: Vad vi vet och tror
+        rader:
+          - - Spåren har lett till att vi vet mycket om vikingarna, men inte allt. En del vet vi, och en del tror forskarna.
+          - - Många tänker sig att alla vikingar var krigare som slogs hela tiden. Men spåren visar att de flesta människor på vikingatiden var bönder. De arbetade på sina gårdar och for sällan eller aldrig i väg. Bara en del av dem for ut i viking.
+          - - Annat vet ingen säkert, till exempel varför Spillingsskatten blev kvar i jorden. När spåren inte räcker, skriver forskarna ord som troligen eller kanske. Då vet läsaren att forskarna tror, men inte vet säkert.
+      - rubrik: "Bild: Vikingatiden och forskningen"
+        rader:
+          - - Vikingatiden och forskningen. Den övre raden är vikingatiden, omkring 800 till 1050. Den nedre visar när forskarna fick veta något nytt.
+      - rubrik: "Fördjupning: Vem låg i graven Bj 581?"
+        rader:
+          - - Graven Bj 581 på Birka visar både det vi vet och det forskarna tror. I graven låg en människa med svärd, yxa, spjut, pilar och två sköldar. Där låg också två hästar och pjäser till ett brädspel. Länge trodde forskarna att det var en manlig krigare.
+          - - Med DNA från skelettet visade forskare år 2017 att det var en kvinna. Det vet vi nu.
+          - - Forskarna som undersökte graven frågade sig om vapnen betydde att hon var krigare. De har prövat andra svar, men tror att hon var det. Saken har diskuterats mycket.
+      - rubrik: Visste du att …
+        rader:
+          - - 0 hjälmar
+            - med horn från vikingatiden har hittats. Hornen kom till på 1800-talet, bland annat i dräkter till en opera. Var har du sett en viking med horn?
+      - rubrik: Läs mer
+        rader:
+          - - SO-rummet har en text för mellanstadiet om källorna och spåren efter vikingatiden.
+            - https://www.so-rummet.se/fakta-artiklar/kallor-och-spar-efter-vikingatiden
+          - - Historiska museet berättar om Birkaflickan och andra barn på vikingatiden.
+            - https://historiska.se/utforska-historien/kunskapsbank/birkaflickan-och-andra-barn-under-vikingatiden/
+          - - UR förklarar vikingatiden i en film på elva minuter, på teckenspråk med svensk text.
+            - https://urplay.se/program/236915-vi-forklarar-historia-vikingatiden
+  - rubrik: "Modellen: Bas, text 10, Vikingarnas spår"
+    tema: Vikingarna
+    text:
+      - Problem och lösning, blad 1, ifylld för Vikingarnas spår.
+    delar:
+      - rubrik: Frågan och svaret
+        falt:
+          - rubrik: Textens fråga
+            text: Hur kan vi veta något om vikingarna när de inte skrev några böcker, och hur säkert är det vi vet?
+          - rubrik: Lyssna efter
+            text: inga böcker, runorna i trä har ruttnat · spår i marken, texter och mätningar · en del vet vi, en del tror forskarna
+          - rubrik: Så kan svaret låta
+            text: "Vikingarna skrev inga böcker, och runorna i trä har ruttnat. Forskarna läser spåren: fynd, runstenar och DNA. En del vet vi, som att de flesta var bönder, och en del tror forskarna."
+pabordet:
+  - nr: 110
+    rubrik: Skeppets delar
+    text: "Ett vikingaskepp sett från sidan, med masten och ett fyrkantigt segel, plankor i rader och en mörk köl längs botten från ände till ände. Längst bak sitter styråran. Till höger syns skeppet i genomskärning framifrån: plankorna ligger en bit över varandra med nitar igenom, och på insidan går ett spant."
+    efter: "ram: Bas, text 6: Vikingaskeppet"
+  - nr: 111
+    rubrik: Skeppet uppifrån
+    text: Skeppet sett ovanifrån på vattnet, långt och smalt, med 30 åror på varje sida och en pil framåt. Styråran sitter längst bak på höger sida, som heter styrbord, och vänster sida heter babord. Skeppet är ritat i skala, och det var omkring 30 meter långt och 3,8 meter brett.
+    efter: "ram: Bas, text 6: Vikingaskeppet"
+  - nr: 113
+    rubrik: "Blad: Tankekartan för Vikingaskeppet"
+    text: Tankekartan, blad 1, för Vikingaskeppet, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Bas, text 6, Vikingaskeppet"
+  - nr: 114
+    rubrik: Från sten till runsten
+    text: Samma sten fyra gånger i rad. På den första är slingan och runorna ritade med tunna streck, på den andra är de huggna i stenen, och på den tredje är slingan målad röd och runorna svarta. På den fjärde står den målade stenen vid en väg, och en människa går förbi.
+    efter: "ram: Bas, text 7: Ristat i sten"
+  - nr: 115
+    rubrik: Runstenar i Sverige
+    text: "En karta över Sverige där Uppland är rött. Bredvid kartan står två staplar i samma skala: omkring 2 500 runstenar i hela Sverige och omkring 1 300 i Uppland. Upplands stapel når lite förbi hälften av Sveriges."
+    efter: "ram: Bas, text 7: Ristat i sten"
+  - nr: 117
+    rubrik: "Blad: Tidslinjen för Ristat i sten"
+    text: Tidslinjen, blad 1, för Ristat i sten, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Bas, text 7, Ristat i sten"
+  - nr: 118
+    rubrik: Två vägar ut
+    text: En karta från Grönland i väster till Svarta havet i öster, med Norden nära mitten. Röda pilar går över havet från dagens Danmark till England och från dagens Norge till Irland, Island och Grönland. En röd pil går från dagens Sverige över Östersjön och längs floderna till Miklagård vid Svarta havet.
+    efter: "ram: Bas, text 8: Västerut och österut"
+  - nr: 119
+    rubrik: Hav och flod
+    text: Två bilder bredvid varandra. Till vänster seglar ett vikingaskepp med ett stort segel över havet. Till höger drar tre figurer en liten båt med åror över land, mellan två vatten.
+    efter: "ram: Bas, text 8: Västerut och österut"
+  - nr: 121
+    rubrik: "Blad: Venndiagrammet för Västerut och österut"
+    text: Venndiagrammet, blad 1, för Västerut och österut, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Bas, text 8, Västerut och österut"
+  - nr: 122
+    rubrik: Silvrets väg
+    text: En karta från Gotland i Östersjön till kalifatet långt bort i sydost. En ljus pil för silvret går från kalifatet över Kaspiska havet, längs floderna och genom Finska viken till Gotland. En brun pil för varorna går åt andra hållet, från Gotland längs floderna, som går mellan pilarna.
+    efter: "ram: Bas, text 9: Skatten i åkern"
+  - nr: 123
+    rubrik: Skatterna i kilopaket
+    text: Till vänster står 67 likadana paket i fyra rader. Tillsammans är de Spillingsskatten, och varje paket är ett kilo silver. Till höger står ett paket på ett kilo, en vanlig skatt, som fyller en fjärdedel av ett paket, och ett mynt, som bara är en liten prick.
+    efter: "ram: Bas, text 9: Skatten i åkern"
+  - nr: 125
+    rubrik: "Blad: Kedjan för Skatten i åkern"
+    text: Kedjan, blad 1, för Skatten i åkern, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Bas, text 9, Skatten i åkern"
+  - nr: 126
+    rubrik: Spåren i marken
+    text: Marken i genomskärning, med en runsten ovan jord. Under jorden ligger en grav med ett svärd, en sköld och en yxa, och en hög med silvermynt och armringar. En pinne av trä med runor syns bara som en streckad kontur med några smulor, för den har ruttnat.
+    efter: "ram: Bas, text 10: Vikingarnas spår"
+  - nr: 127
+    rubrik: Vikingatiden och forskningen
+    text: "En tidslinje i skala, som börjar omkring år 700 och slutar med i dag längst till höger. Den övre raden har vikingatiden, omkring 800 till 1050, med anfallet på Lindisfarne år 793 och skeppet Skuldelev 2, byggt omkring 1042. Den nedre raden har tre punkter tätt ihop nära i dag: Spillingsskatten år 1999, DNA i graven Bj 581 år 2017 och DNA från 442 människor år 2020."
+    efter: "ram: Bas, text 10: Vikingarnas spår"
+  - nr: 129
+    rubrik: "Blad: Problem och lösning för Vikingarnas spår"
+    text: Problem och lösning, blad 1, för Vikingarnas spår, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Bas, text 10, Vikingarnas spår"
+tabeller:
+  - rubrik: Vikingarna
+    kolumner:
+      - Vecka och modell
+      - Bas
+    rader:
+      - - 1 Tankekartan
+        - Vikingaskeppet
+      - - 2 Tidslinjen
+        - Ristat i sten
+      - - 3 Venndiagrammet
+        - Västerut och österut
+      - - 4 Kedjan
+        - Skatten i åkern
+      - - 5 Problem och lösning
+        - Vikingarnas spår

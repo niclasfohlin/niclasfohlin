@@ -1,0 +1,938 @@
+# Temat Vulkaner och jordbävningar på nivån Medel i Faktatextsamtal i grupp, en post i sajtens databas över faktatexter
+# (src/content/faktateman/). Riggen samlar filen med methods/faktatextsamtal-i-grupp/samla.mjs.
+metod: faktatextsamtal-i-grupp
+tema: Vulkaner och jordbävningar
+niva: Medel
+ramar:
+  - rubrik: "Lärarhandledning: Medel, Vulkaner och jordbävningar"
+    tema: Vulkaner och jordbävningar
+    text:
+      - Temat Vulkaner och jordbävningar har en faktatext för var och en av de fem strukturerna, som brukar passa i åk 6–7. Varje vecka har klassen en läslektion och en modellektion om veckans text, så temat tar fem veckor. Varje elev har texten, en penna och papper till svaret. Du har tavlan, magneter, A4-ark och en tjock tuschpenna.
+    delar:
+      - rubrik: "1 Under dina fötter: Tankekartan"
+        falt:
+          - rubrik: Frågan
+            text: Vad finns mellan dig och jordens mitt, och är det mesta där nere flytande?
+          - rubrik: Ord före
+            text: skorpa (av berg, inget bröd) · mantel (ett lager berg, ingen kappa) · platta (jättebit av skorpan och berget under)
+          - rubrik: Tänk högt
+            kursiv: true
+            text: "”Ytterst ligger jordens skorpa …” Skorpa, som på ett bröd? Det skaver. Jag läser vidare: här är skorpan av hårt berg. Vem eller vad? Skorpan. Det viktigaste? Ytterst finns ett tunt skal av berg. Skorpan under Sverige är spännande, men det är en detalj."
+          - rubrik: Det brukar skava
+            text: "”formbart”: berget i manteln är så varmt att det kan röra sig långsamt, men det är inte flytande (avsnitt 2)"
+          - rubrik: Modellen
+            text: "skorpan: ”ytterst” · manteln: ”under skorpan” · yttre kärnan: ”under manteln” · inre kärnan: ”längst in”. I mitten står jordens inre. Fördjupningens kärna, om Inge Lehmann, hör till den inre kärnan och visar hur forskarna vet att jordens mitt är fast."
+          - rubrik: Lyssna efter
+            text: fyra lager · mest fast berg och järn · yttre kärnan flytande
+      - rubrik: "2 Pompejis sista dygn: Tidslinjen"
+        falt:
+          - rubrik: Frågan
+            text: Vad hände timme för timme när Vesuvius fick utbrott, och var det lavan som var farligast?
+          - rubrik: Ord före
+            text: pimpsten (som i badrummet, men från vulkanen) · glödhett moln (het aska och gas, inget regnmoln) · Plinius (två män med samma namn)
+          - rubrik: Tänk högt om
+            text: "han: ”När han gav sig av, valde Plinius att stanna hemma och studera. Han, vem är det? Jag läser meningen före. Det är amiralen. Vem eller vad? Ett moln ur Vesuvius. Det viktigaste? Strax efter tolv steg ett jättemoln upp.” (avsnitt 1)"
+          - rubrik: Det brukar skava
+            text: "”Pimpsten är lava”: stelnad lava som föll från himlen, och ingen lava rann över staden (avsnitt 2)"
+          - rubrik: Modellen
+            text: "molnet: strax efter kl. 12 · stenregnet: omkring kl. 13 · natten: omkring kl. 1 · morgonen: omkring kl. 7. Skriv tiden mellan stegen: omkring en timme, tolv timmar och sex timmar. Fördjupningens kärna om datumet står vid steg 1, för fördjupningen frågar vilken dag dygnet började."
+          - rubrik: Lyssna efter
+            text: moln, sten, natt och morgon · tak som rasade · glödheta moln, ingen rinnande lava
+      - rubrik: "3 Lugn eller explosiv: Venndiagrammet"
+        falt:
+          - rubrik: Frågan
+            text: Varför är en del vulkaner breda och lugna och andra branta och explosiva, och vilken sort är farligast?
+          - rubrik: Ord före
+            text: magma (smält berg, innan det kommer upp) · seg (trögflytande, inte trött) · kisel (ett ämne, inga småstenar)
+          - rubrik: Det brukar skava
+            text: "”Ju mer kisel, desto segare”: mer kisel gör lavan segare, och mindre kisel gör den tunnare (avsnitt 2)"
+          - rubrik: Modellen
+            text: "formen: ”formen är däremot mycket olika” · lavan: ”lavan i St. Helens är däremot seg” · gasen: ”medan den tunna magman släpper ut sin gas” · faran: ”hotar också människor på olika sätt”. Här ritar du en ruta för varje avsnitt i stället för ringar, och klassen jämför Hawaii och St. Helens punkt för punkt. Fördjupningens kärna hör till gasen, på St. Helens sida."
+          - rubrik: Lyssna efter
+            text: kisel gör lavan seg · gasen fastnar och spränger · explosiva farligast
+      - rubrik: "4 Vågen som kom: Kedjan"
+        falt:
+          - rubrik: Frågan
+            text: Hur kan ett skalv under havet döda människor på en strand tusentals kilometer bort?
+          - rubrik: Ord före
+            text: tsunami (kallas också flodvåg, men ingen flod) · spänning (berget trycks och dras, inget spännande) · platta (jättebit av skorpan och berget under)
+          - rubrik: Det brukar skava
+            text: "”Det gör att”: att havsbottnen ryckte till lyfter vattnet (avsnitt 3)"
+          - rubrik: Modellen
+            text: "skalvet: ”därför” · havet lyfts: ”det gör att” · vågen växer: ”när”. Det första ledet har inget ord, för kedjan börjar där. Fördjupningens kärna, om Tilly Smith, är ingen följd. Den står bredvid kedjan med ett streck till led 4."
+          - rubrik: Lyssna efter
+            text: plattorna fastnar, berget brister · vattnet lyfts, en låg och snabb våg · vid kusten bromsas den och växer
+      - rubrik: "5 Skalvsäkra hus: Problem och lösning"
+        falt:
+          - rubrik: Frågan
+            text: Varför dog så många fler i Haiti än i Chile, och hur kan ett hus klara ett skalv?
+          - rubrik: Ord före
+            text: magnitud (skalvets energi, mycket mer per steg) · isolator (stötdämpare, ingen isolering mot kyla) · byggregel (hur hus ska byggas, inget spel)
+          - rubrik: Det brukar skava
+            text: "”hur nära och djupt det börjar”: därför kan ett större skalv skaka svagare (avsnitt 2)"
+          - rubrik: Modellen
+            text: "husen rasar: ”problemet är” · sårbar plats: ”beror också på” · byggregler: ”en lösning är att” · isolatorer: ”en annan lösning är att”. Fördjupningens kärna är resultatet i Chile och står bredvid lösning 1, med ”långt färre”. Den säger också att vågen var en annan fara."
+          - rubrik: Lyssna efter
+            text: "Haitis hus tålde inte skalv · Chile: regler och svagare skakning · byggregler och isolatorer"
+  - rubrik: "Lärarens sida: Medel, text 6, Under dina fötter"
+    text:
+      - Av jordens fyra lager, skorpan, manteln, den yttre och den inre kärnan, är bara den yttre kärnan flytande. Texten är en beskrivning, och modellen är Tankekartan, blad 2. I vecka 1 tänker du högt i avsnitt 1.
+    delar:
+      - rubrik: "Läspasset: de fyra avsnitten"
+        falt:
+          - rubrik: Textens fråga
+            text: Vad finns mellan dig och jordens mitt, och är det mesta där nere flytande?
+          - rubrik: Ord före läsningen
+            text: skorpa (av berg, inget bröd) · mantel (ett lager berg, ingen kappa) · platta (jättebit av skorpan och berget under)
+          - rubrik: Tänk högt
+            kursiv: true
+            text: "”Ytterst ligger jordens skorpa …” Skorpa, som på ett bröd? Det skaver. Jag läser vidare: här är skorpan av hårt berg. Vem eller vad? Skorpan. Det viktigaste? Ytterst finns ett tunt skal av berg. Skorpan under Sverige är spännande, men det är en detalj."
+          - rubrik: 1 Ett tunt skal
+            text: |-
+              Red ut: skorpa: berg, inget bröd · plattor: skorpan och berget under, i marginalen
+              Lyssna efter: ytterst · hårt berg · tunn som ett skal
+              Lockar: skorpan under Sverige. ”Hur tjock är skorpan jämfört med hela jorden?”
+              Bilden: Det tunna strecket runt jorden, vid siffran 1
+          - rubrik: 2 Fast berg som rör sig
+            text: |-
+              Red ut: mantel: ett lager berg · formbart: mjukt men inte flytande
+              Lyssna efter: tjockast · fast berg, inget lavahav · rör sig långsamt
+              Lockar: naglarna som växer. ”Finns det ett hav av lava under skorpan?”
+              Sambandet: ”Under skorpan”: nästa lager inåt
+              Bilden: Skorpan i förstoring: pilen på plattan
+          - rubrik: 3 Flytande järn
+            text: |-
+              Red ut: kärna, i marginalen: två lager · ägget slutar stämma: gulan är fast
+              Lyssna efter: yttre kärnan · smält järn · enda flytande lagret
+              Lockar: magnetfältet. ”Var slutar ägget att stämma, och varför?”
+              Sambandet: ”Under manteln”: nästa lager inåt, kärnan
+              Bilden: Det tjocka flytande lagret vid siffran 3
+          - rubrik: 4 Fast trots hettan
+            text: |-
+              Red ut: tryck: allt ovanpå pressar · av ett helt annat skäl: inte kokt
+              Lyssna efter: inre kärnan · hetast · fast av trycket
+              Lockar: hetast i hela jorden. ”Varför är den hetaste delen fast?”
+              Sambandet: ”Längst in”: det innersta lagret
+              Bilden: Den lilla mitten vid siffran 4
+          - rubrik: Om någon frågar
+            text: Hur varmt är det i mitten? Flera tusen grader. Källorna säger 4 000 till nära 6 000. Kommer lavan från kärnan? Nej. Berget smälter på vissa platser i manteln och skorpan. Blir det varmare längre ner? Ja, omkring 25 grader per kilometer de första kilometrarna. Hur länge tar det att gå till mitten? 160 dagar, åtta timmar om dagen.
+      - rubrik: "Modellpasset: Tankekartan för Under dina fötter"
+        falt:
+          - rubrik: Fördjupningen
+            text: |-
+              Red ut: skalv: jordbävning · erkännande: att andra godtar upptäckten
+              Lyssna efter: Inge Lehmann · skalvens kurvor · fast inre kärna
+              Lockar: 104 år gammal. ”Hur kunde Lehmann veta något om kärnan?”
+              Sambandet: ”att den inre kärnan är fast”: belägget för avsnitt 4
+          - rubrik: Modellen
+            text: Ta fram Tankekartan, blad 2. I vecka 1 lägger du den första post-it-lappen och skriver det första ordet. Nederst i varje fält har bladet rader med ledtexten Hit hör. Där skriver paren det som hör till delen. Gruppen lägger fördjupningens lapp på En lapp till, som får namnet Hör till den inre kärnan. Fördjupningen berättar hur forskarna vet det som avsnitt 4 säger om den inre kärnan.
+          - rubrik: Orden
+            text: ytterst (skorpan) · under skorpan (manteln) · under manteln (yttre kärnan) · längst in (inre kärnan)
+          - rubrik: Svaret
+            text: |-
+              Lyssna efter: fyra lager · mest fast berg och järn · yttre kärnan flytande
+              Så kan det låta: ”Mellan mig och mitten finns skorpan, manteln, den yttre kärnan och den inre kärnan. Nej, det mesta är fast. Bara den yttre kärnan är flytande. Där är järnet smält.”
+          - rubrik: Rutan
+            text: "Visste du att: intressant, för svaret om lagren håller utan borrhålet."
+          - rubrik: Samtala
+            text: "Varför börjar texten med ett ägg? Varför går texten utifrån och in? Ett svar: ägget gör lagren lätta att se, och texten går lager för lager, som kniven genom ägget."
+  - rubrik: "Medel, text 6: Under dina fötter"
+    tema: Vulkaner och jordbävningar
+    text:
+      - Vulkaner och jordbävningar · text 1 av 5
+    delar:
+      - rubrik: Till läraren
+        falt:
+          - rubrik: Hör till
+            text: Lärarens sida till texten.
+    listor:
+      - rubrik: Under dina fötter
+        rader:
+          - - Skär ett hårdkokt ägg på mitten. Ytterst ser du ett tunt skal, sedan vitan och i mitten gulan. Jorden är också byggd i lager, men ingen har kunnat skära itu den och titta. Vad finns mellan dig och jordens mitt, och är det mesta där nere flytande?
+      - rubrik: Siffran
+        rader:
+          - - 6 400 km
+            - är det ungefär rakt ner till jordens mitt.
+      - rubrik: "Bild: Jorden i genomskärning"
+        rader:
+          - - Jorden i genomskärning. Lagren har rätt tjocklek jämfört med varandra, men skorpan är ännu tunnare än strecket. Siffrorna är avsnittens nummer.
+      - rubrik: Ett tunt skal
+        rader:
+          - - Ytterst ligger jordens **skorpa**, och det är på den du står. Ordet kan få dig att tänka på ett bröd, men den här skorpan är av hårt berg. Under gräset, sanden och havet finns berget överallt.
+          - - Skorpan är olika tjock på olika ställen. Under haven är den bara 5 till 10 kilometer tjock, och under land är den oftast 30 till 70 kilometer. Under Sverige är den vanligen 40 till 50 kilometer tjock.
+          - - Det låter mycket, men jämfört med hela jorden är skorpan som ett tunt skal. Den är också hård och kan spricka, precis som skalet på ett ägg. Skorpan och det hårda berget närmast under den är spruckna i stora bitar som kallas **plattor**.
+      - rubrik: Ord i texten
+        rader:
+          - - skorpa
+            - jordens yttersta lager, av hårt berg
+          - - plattor
+            - stora bitar av skorpan och berget under
+      - rubrik: Fast berg som rör sig
+        rader:
+          - - Under skorpan ligger **manteln**. Den är också av berg och är jordens tjockaste lager, omkring 2 900 kilometer tjockt. I ägget är manteln vitan.
+          - - Många tror att det finns ett hav av glödande lava under skorpan. Det låter rimligt, eftersom lava väller upp ur vulkanerna. Men manteln är till största delen fast berg. Berget smälter bara på vissa platser, och det är därifrån lavan kommer.
+          - - En bit ner i manteln är berget ändå så varmt att det är mjukt och **formbart**. Det rör sig mycket långsamt, och plattorna ovanpå glider 2 till 12 centimeter om året. Det är ungefär lika fort som dina naglar växer.
+      - rubrik: Ord i texten
+        rader:
+          - - mantel
+            - lagret av berg under skorpan
+          - - formbart
+            - går att forma utan att gå sönder
+      - rubrik: "Bild: Skorpan i förstoring"
+        rader:
+          - - Skorpan i förstoring. Plattorna glider några centimeter om året på det mjuka berget under dem. Siffrorna är avsnittens nummer.
+      - rubrik: Flytande järn
+        rader:
+          - - Under manteln, nästan 3 000 kilometer ner, börjar jordens **kärna**. Den har två lager och består troligen mest av järn med lite nickel. Där kärnan börjar är det omkring 4 000 grader varmt. Så hett är det att järnet i det yttre lagret har smält. Den yttre kärnan, omkring 2 200 kilometer tjock, är alltså flytande.
+          - - Här slutar ägget att stämma. I ett hårdkokt ägg är gulan fast ända in till mitten. Jordens kärna har däremot ett flytande lager runt en fast mitt. Av jordens fyra lager är den yttre kärnan det enda som är flytande.
+          - - Det är också i den yttre kärnan som jordens **magnetfält** uppstår, när det flytande järnet strömmar.
+      - rubrik: Ord i texten
+        rader:
+          - - kärna
+            - jordens innersta del
+          - - magnetfält
+            - en osynlig magnetisk kraft runt jorden
+      - rubrik: Fast trots hettan
+        rader:
+          - - Längst in, i jordens mitt, ligger den inre kärnan. Den är ett klot, troligen mest av järn, och från mitten ut till kanten är det omkring 1 200 kilometer. Här är det hetast i hela jorden, ännu varmare än där kärnan börjar.
+          - - Ändå är den inre kärnan fast. Det beror på **trycket**. Ovanpå den ligger skorpan, manteln och den yttre kärnan. Allt det berget och järnet trycker på från alla håll. Trycket är så stort att järnet inte smälter, trots hettan.
+          - - Gulan i ett ägg blir fast när den kokas. Den inre kärnan är däremot fast av ett helt annat skäl, nämligen trycket från allt som ligger ovanpå den.
+      - rubrik: Ord i texten
+        rader:
+          - - tryck
+            - kraft som pressar på något
+      - rubrik: "Fakta: Jordens fyra lager"
+        rader:
+          - - Skorpan
+            - 5–70 km tjock, fast berg
+          - - Manteln
+            - omkring 2 900 km tjock, mest fast berg
+          - - Yttre kärnan
+            - omkring 2 200 km tjock, flytande järn
+          - - Inre kärnan
+            - omkring 1 200 km till mitten, fast järn
+      - rubrik: "Fördjupning: Hon som läste skalven"
+        rader:
+          - - Ingen människa har varit nere i jordens kärna. Ändå vet forskarna att den inre kärnan är fast. Det vet de tack vare **skalv**, alltså jordbävningar.
+          - - När berget skakar vid ett stort skalv, går skakningarna som vågor genom hela jorden, ungefär som ringar på vattnet när du kastar i en sten. Vågorna böjer av och studsar när de når ett nytt lager. Mätare långt bort ritar dem som kurvor. Inge Lehmann var en dansk forskare som läste sådana kurvor. Forskarna trodde då att kärnan var flytande rakt igenom. Men i kurvorna såg hon att en del vågor böjde av inne i kärnan, som om de mötte ännu en gräns.
+          - - År 1936 föreslog hon att kärnan har en fast del längst in. Det dröjde länge innan hon fick erkännande för sin upptäckt. I dag vet forskarna att hon hade rätt. Inge Lehmann blev 104 år gammal.
+      - rubrik: Ord i texten
+        rader:
+          - - skalv
+            - när berget skakar, en jordbävning
+      - rubrik: Visste du att …
+        rader:
+          - - drygt 12 km
+            - djupt är det djupaste hål som människor har borrat. Det är inte ens en tredjedel av skorpans tjocklek under Sverige. Hur många dagar skulle det ta att gå 6 400 kilometer till jordens mitt?
+      - rubrik: Läs mer
+        rader:
+          - - Sveriges geologiska undersökning, SGU, förklarar jordens lager och hur tjock skorpan är under Sverige.
+            - https://www.sgu.se/om-geologi/jordklotets-uppbyggnad/
+          - - Naturhistoriska riksmuseet går djupare in i lagren. Sidan är skriven för vuxna.
+            - https://www.nrm.se/fakta-om-naturen/jorden-geologi/jordklotet-och-jordskorpan/jordklotets-byggnad
+          - - Svenska nationella seismiska nätet berättar om skalven i Sverige, där mätarna hittar minst ett skalv varje dag.
+            - https://www.uu.se/forskning/svenska-nationella-seismiska-natet/jordbavningar
+  - rubrik: "Modellen: Medel, text 6, Under dina fötter"
+    tema: Vulkaner och jordbävningar
+    text:
+      - Tankekartan, blad 2, ifylld för Under dina fötter.
+    delar:
+      - rubrik: Frågan och svaret
+        falt:
+          - rubrik: Textens fråga
+            text: Vad finns mellan dig och jordens mitt, och är det mesta där nere flytande?
+          - rubrik: Lyssna efter
+            text: fyra lager · mest fast berg och järn · yttre kärnan flytande
+          - rubrik: Så kan svaret låta
+            text: Mellan mig och mitten finns skorpan, manteln, den yttre kärnan och den inre kärnan. Nej, det mesta är fast. Bara den yttre kärnan är flytande. Där är järnet smält.
+  - rubrik: "Lärarens sida: Medel, text 7, Pompejis sista dygn"
+    text:
+      - År 79 begravde Vesuvius Pompeji på mindre än ett dygn, först under pimpsten och sist under glödheta moln, och det som dödade var tak som rasade och de glödheta molnen. Texten är byggd i tidsordning, och modellen är Tidslinjen, blad 2. I vecka 2 tänker du högt i avsnitt 1.
+    delar:
+      - rubrik: "Läspasset: de fyra avsnitten"
+        falt:
+          - rubrik: Textens fråga
+            text: Vad hände timme för timme när Vesuvius fick utbrott, och var det lavan som var farligast?
+          - rubrik: Ord före läsningen
+            text: pimpsten (som i badrummet, men från vulkanen) · glödhett moln (het aska och gas, inget regnmoln) · Plinius (två män med samma namn)
+          - rubrik: Tänk högt
+            kursiv: true
+            text: "”När han gav sig av, valde Plinius att stanna hemma och studera.” Han, vem är det? Det skaver. Jag läser meningen före: det är amiralen. Vem eller vad? Ett moln ur Vesuvius. Det viktigaste? Strax efter tolv steg ett jättemoln upp. Skakningarna dagarna före är spännande, men de är en detalj."
+          - rubrik: 1 Ett moln som en pinje
+            text: |-
+              Red ut: pinjeträd: ett träd, säger ordet själv · han: amiralen, se meningen före
+              Lyssna efter: strax efter tolv · jättemoln · ur Vesuvius
+              Lockar: skakningarna dagarna före. ”Vad såg Plinius, och när?”
+              Bilden: Strecket vid kl. 12. Misenum och Vesuvius på kartan
+          - rubrik: 2 Det regnar sten
+            text: |-
+              Red ut: pimpsten: stelnad lava som föll · i metervis: flera meter
+              Lyssna efter: pimpsten i timmar · tunga tak · taken rasade
+              Lockar: 15 centimeter i timmen. ”Varför rasade taken, när pimpsten är lätt?”
+              Sambandet: ”Omkring klockan 13, en timme senare”: efter molnet
+              Bilden: Stapeln som börjar växa vid kl. 13
+          - rubrik: 3 Natten
+            text: |-
+              Red ut: glödhett moln: het aska och gas · föll ihop: pelaren rasade
+              Lyssna efter: klockan ett · glödhett moln · Herculaneum
+              Lockar: Plinius läser en bok. ”Vad hände mitt i natten?”
+              Sambandet: ”Omkring klockan ett på natten, tolv timmar senare”: sedan stenregnet började
+              Bilden: Strecket vid kl. 1, och Herculaneum på kartan
+          - rubrik: 4 Morgonen
+            text: |-
+              Red ut: strax efter: kort efter klockan sju · två andra saker: taken och molnen
+              Lyssna efter: klockan sju · glödheta moln · ingen rinnande lava
+              Lockar: mörkare än en natt utan måne. ”Vad dödade människorna i Pompeji?”
+              Sambandet: ”Omkring klockan sju på morgonen, sex timmar senare”: molnet når till sist Pompeji
+              Bilden: Stapeln vid kl. 7, högre än figuren
+          - rubrik: Om någon frågar
+            text: Hur många dog? Ingen vet säkert. Arkeologerna har hittat drygt 1 000 döda i Pompeji, och fler kan ligga kvar. Vad hände med amiralen? Han dog under utbrottet. Enligt Plinius hittades han när det blev ljust igen. Finns benen kvar i gipsfigurerna? Ja, ofta finns skelettet kvar. Hur blev det hål i askan? Askan hårdnade runt kroppen, som sedan förmultnade.
+      - rubrik: "Modellpasset: Tidslinjen för Pompejis sista dygn"
+        falt:
+          - rubrik: Fördjupningen
+            text: |-
+              Red ut: motsvarar: betyder samma dag som · kol: svart av bränt trä
+              Lyssna efter: 24 augusti i brevet · kolraden 2018 · kolet satt kvar
+              Lockar: tio månader på en vägg. ”Varför är forskarna inte överens om datumet?”
+              Sambandet: ”I Plinius brev”: tillbaka till ögonvittnet i avsnitt 1
+          - rubrik: Modellen
+            text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad kommer först här?” Den visar delar men ingen ordning. Ta sedan fram Tidslinjen, blad 2. Gruppen lägger fördjupningens post-it-lapp på En lapp till och drar ett streck till steg 1. Fördjupningen frågar vilken dag dygnet började, och dagen hör till det första steget."
+          - rubrik: Orden
+            text: |-
+              strax efter kl. 12 (molnet) · omkring kl. 13 (stenregnet) · omkring kl. 1 (natten) · omkring kl. 7 (morgonen)
+              Tiden emellan: omkring en timme · omkring tolv timmar · omkring sex timmar
+              Utan flik: gruppen skriver ”vet ingen säkert” vid En lapp till.
+          - rubrik: Svaret
+            text: |-
+              Lyssna efter: moln, sten, natt och morgon · tak som rasade · glödheta moln, ingen rinnande lava
+              Så kan det låta: ”Vid tolv steg ett moln upp, och sedan regnade pimpsten i timmar. På natten kom glödheta moln, och på morgonen nådde de Pompeji. Det farligaste var tak som rasade och glödheta moln.”
+          - rubrik: Rutan
+            text: "Visste du att: intressant, för tidslinjen och svaret håller utan gipsfigurerna."
+          - rubrik: Samtala
+            text: "Varför står klockslaget först i varje avsnitt? Varför berättar texten om Plinius? Ett svar: klockslagen visar ordningen, och Plinius är ögonvittnet som gör att vi vet."
+  - rubrik: "Medel, text 7: Pompejis sista dygn"
+    tema: Vulkaner och jordbävningar
+    text:
+      - Vulkaner och jordbävningar · text 2 av 5
+    delar:
+      - rubrik: Till läraren
+        falt:
+          - rubrik: Hör till
+            text: Lärarens sida till texten.
+    listor:
+      - rubrik: Pompejis sista dygn
+        rader:
+          - - En dag år 79 var Pompeji en stad full av liv nära berget Vesuvius. Mindre än ett dygn senare låg staden begravd. En 17-åring såg utbrottet och skrev om det. Vad hände timme för timme när Vesuvius fick utbrott, och var det lavan som var farligast?
+      - rubrik: Siffran
+        rader:
+          - - 3 meter
+            - Ungefär så mycket pimpsten låg på gatorna i Pompeji efter en eftermiddag och en natt av stenregn.
+      - rubrik: "Bild: Dygnet i Pompeji"
+        rader:
+          - - Dygnet i Pompeji. Stapeln visar hur högt pimpstenen låg på gatorna, timme för timme. Siffrorna är avsnittens nummer.
+      - rubrik: Ett moln som en pinje
+        rader:
+          - - Strax efter klockan tolv på dagen steg ett jättelikt moln upp ur Vesuvius. Det syntes ända till staden Misenum, på andra sidan **bukten**. Där fanns Plinius, som var 17 år. Molnet liknade mest av allt ett pinjeträd, skrev Plinius. Det steg upp som en lång, hög stam och bredde sedan ut sig i grenar.
+          - - I Misenum fanns också den äldre Plinius. Han ledde **flottan**, och därför kallar vi honom amiralen. När han gav sig av, valde Plinius att stanna hemma och studera.
+          - - Plinius skrev senare två brev om dygnet. I det ena berättar han att marken hade skakat lätt i många dagar före utbrottet.
+      - rubrik: Ord i texten
+        rader:
+          - - bukt
+            - del av havet som går in i land
+          - - flotta
+            - många krigsskepp som hör ihop
+      - rubrik: Det regnar sten
+        rader:
+          - - Omkring klockan 13, en timme senare, började det regna sten över Pompeji. Molnpelaren över Vesuvius växte till mer än 20 kilometers höjd, och den var full av aska och pimpsten. Pimpsten är lava som har stelnat full av gasbubblor, och därför är den lätt. Den föll som regn och rann inte.
+          - - Stenen föll timme efter timme. På öppna platser växte lagret med omkring 15 centimeter i timmen. Framåt kvällen låg det omkring en meter sten på marken.
+          - - En enda pimpsten är lätt, men när stenen låg i metervis på taken blev den tung. Till slut orkade vissa tak inte bära tyngden, och de rasade. En del av dem som hade sökt skydd inomhus dog när taken föll in.
+      - rubrik: Natten
+        rader:
+          - - Omkring klockan ett på natten, tolv timmar senare, förändrades utbrottet. Delar av den höga molnpelaren föll ihop, och ett glödhett moln rusade nerför berget. Vanliga moln består av små vattendroppar eller iskristaller. Det här molnet var av het aska och gas, och det vällde fram längs marken.
+          - - Det första glödheta molnet nådde staden Herculaneum, och efter det kom fler. I Pompeji föll stenen fortfarande, och husen började skaka av jordskalv.
+          - - Samma natt skakade marken också i Misenum, på andra sidan bukten. Skalven blev så kraftiga att Plinius och hans mamma satte sig ute på gården. Där bad Plinius om en bok och läste i den, som om han var helt lugn. Det berättar han själv i breven.
+      - rubrik: "Bild: Bukten och berget"
+        rader:
+          - - Bukten och berget. Plinius såg utbrottet från Misenum, på andra sidan Neapelbukten. Siffrorna är avsnittens nummer.
+      - rubrik: Morgonen
+        rader:
+          - - Omkring klockan sju på morgonen, sex timmar senare, nådde ett glödhett moln Pompeji. Då låg pimpstenen omkring 3 meter hög på gatorna, högre än en vuxen människa. Strax efter kom fler moln, och de nådde människor både på gatorna och inne i husen.
+          - - "Många tror att människorna i Pompeji dog i rinnande lava. Det är lätt att tro, eftersom Vesuvius är en vulkan. Men det var framför allt två andra saker som dödade: tak och väggar som rasade, och sist de glödheta molnen. De flesta döda som **arkeologerna** har hittat låg i askan från molnen."
+          - - Samma morgon flydde Plinius och hans mamma från Misenum. Ute på vägen blev det mörkare än en natt utan måne, men båda klarade sig.
+      - rubrik: Ord i texten
+        rader:
+          - - arkeologer
+            - forskare som gräver fram spår från förr
+      - rubrik: "Fakta: Stenregnet i tal"
+        rader:
+          - - Molnpelarens höjd
+            - mer än 20 kilometer
+          - - Pimpsten varje timme
+            - omkring 15 centimeter
+          - - Pimpsten på kvällen
+            - omkring 1 meter
+          - - Pimpsten på morgonen
+            - omkring 3 meter
+      - rubrik: "Fördjupning: Augusti eller oktober?"
+        rader:
+          - - I Plinius brev står det att utbrottet började den 24 augusti. Det datumet står fortfarande i en del faktatexter.
+          - - År 2018 grävde arkeologerna fram en rad som någon hade skrivit med kol på en vägg i Pompeji. Raden börjar med ett datum som motsvarar den 17 oktober. Skrift med kol håller inte länge, menade arkeologerna, så raden skrevs troligen hösten år 79. Då kan staden inte ha legat begravd sedan augusti, och därför trodde de att utbrottet kom den 24 oktober.
+          - - Men senare prövade forskare att skriva med kol på väggar i Pompeji. Skriften satt kvar i mer än tio månader, så raden kan också ha skrivits året före utbrottet. Forskarna är fortfarande inte överens, och vilket datum som är rätt vet ingen säkert.
+      - rubrik: Visste du att …
+        rader:
+          - - omkring 100
+            - gipsfigurer har arkeologerna gjort i Pompeji genom att fylla hålrum i askan med gips. Hur kan ett hål i askan visa hur en människa såg ut för nästan 2 000 år sedan?
+      - rubrik: Läs mer
+        rader:
+          - - SO-rummet har lätta fakta om Pompeji. Där står oktober. Där står också att lava begravde staden, och det säger den här texten emot.
+            - https://so-rummet.se/fakta-artiklar/latta-fakta-om-pompeji
+          - - Unga Fakta berättar om kända vulkanutbrott. Där står augusti för Pompeji, så jämför gärna med SO-rummet.
+            - https://www.ungafakta.se/vulkaner/kanda/
+          - - Naturhistoriska riksmuseet förklarar vulkaner och berättar kort om Pompeji. Sidan är skriven för vuxna.
+            - https://www.nrm.se/fakta-om-naturen/jorden-geologi/vulkaner-och-jordbavningar/vulkaner-och-vulkanism
+  - rubrik: "Modellen: Medel, text 7, Pompejis sista dygn"
+    tema: Vulkaner och jordbävningar
+    text:
+      - Tidslinjen, blad 2, ifylld för Pompejis sista dygn.
+    delar:
+      - rubrik: Frågan och svaret
+        falt:
+          - rubrik: Textens fråga
+            text: Vad hände timme för timme när Vesuvius fick utbrott, och var det lavan som var farligast?
+          - rubrik: Lyssna efter
+            text: moln, sten, natt och morgon · tak som rasade · glödheta moln, ingen rinnande lava
+          - rubrik: Så kan svaret låta
+            text: Vid tolv steg ett moln upp, och sedan regnade pimpsten i timmar. På natten kom glödheta moln, och på morgonen nådde de Pompeji. Det farligaste var tak som rasade och glödheta moln.
+  - rubrik: "Lärarens sida: Medel, text 8, Lugn eller explosiv"
+    text:
+      - Vulkanerna på Hawaii och Mount St. Helens får båda sin magma från djupet, men i St. Helens gör mer kisel magman och lavan seg, så att gasen fastnar och berget blir brant, explosivt och farligare för människor. Texten jämför två saker, och modellen är Venndiagrammet, blad 2. I vecka 3 har två elever i taget jobbkorten från avsnitt 2.
+    delar:
+      - rubrik: "Läspasset: de fyra avsnitten"
+        falt:
+          - rubrik: Textens fråga
+            text: Varför är en del vulkaner breda och lugna och andra branta och explosiva, och vilken sort är farligast?
+          - rubrik: Ord före läsningen
+            text: magma (smält berg, innan det kommer upp) · seg (trögflytande, inte trött) · kisel (ett ämne, inga småstenar)
+          - rubrik: 1 Bred eller brant
+            text: |-
+              Red ut: magma och lava: samma sak, olika ställen · kon: formad som en strut
+              Lyssna efter: båda av magma · svaga sluttningar · brant kon
+              Lockar: 17 kilometer hög räknad från foten. ”Vad är lika, och hur skiljer sig formen?”
+              Bilden: De två bergen bredvid varandra i Bred och brant
+          - rubrik: 2 Tunn eller seg lava
+            text: |-
+              Red ut: kisel i marginalen, kiseldioxid i meningen efter · ju mer, desto: mer kisel, segare lava
+              Lyssna efter: kisel · tunn eller seg · rinner långt
+              Lockar: det vanligaste ämnet i berget. ”Vad gör kislet med lavan?”
+              Sambandet: ”Lavan skiljer sig också åt”: från formen till lavan
+              Bilden: Den tunna lavan långt ut, den sega vid toppen
+          - rubrik: 3 Bubblorna avgör
+            text: |-
+              Red ut: gasbubblor: bubblor av vattenånga · sliter sönder: spränger magman i bitar
+              Lyssna efter: gasbubblor · fastnar i seg magma · trycket spränger
+              Lockar: den skakade läskflaskan. ”Varför exploderar St. Helens men sällan vulkanerna på Hawaii?”
+              Sambandet: ”Medan den tunna magman släpper ut sin gas”: från lavan till gasen
+              Bilden: Bubblorna som går ut, och bubblorna som fastnar
+          - rubrik: 4 Farligast
+            text: |-
+              Red ut: där den rinner fram: där lavan når · en sådan explosiv vulkan: som St. Helens
+              Lyssna efter: hinner oftast gå undan · aska långt bort · Vesuvius samma sort
+              Lockar: runt jorden på 15 dagar. ”Vilken sort hotar människor mest, och varför?”
+              Sambandet: ”hotar också människor på olika sätt”: från gasen till faran
+          - rubrik: Om någon frågar
+            text: Finns det vulkaner i Sverige? Inga aktiva. De senast aktiva fanns i Skåne för drygt 100 miljoner år sedan. Hur ofta får Island vulkanutbrott? I genomsnitt vart femte år. När hade Mauna Loa utbrott senast? Det senaste började den 27 november 2022, enligt USGS hösten 2026. Varnar en vulkan före ett utbrott? Ofta kommer det fler skalv än vanligt.
+      - rubrik: "Modellpasset: Venndiagrammet för Lugn eller explosiv"
+        falt:
+          - rubrik: Fördjupningen
+            text: |-
+              Red ut: svälla ut: bukta ut som en bula · jätteskred: bergssidan gled ner
+              Lyssna efter: skalv och bula · skredet släppte trycket · gasen sprängde
+              Lockar: en meter om dagen. ”Varför exploderade berget just när sidan rasade?”
+              Sambandet: ”höll trycket på magman”: flaskan i avsnitt 3
+          - rubrik: Modellen
+            text: "Lägg först fram gruppens tankekarta från vecka 1 och fråga: ”Vad ska stå i mitten?” Texten jämför två saker, och kartan visar inte vad som är lika och olika. Ta sedan fram Venndiagrammet, blad 2. Exemplet om skolan har ringar, men det här bladet har inga: varje avsnitt är en punkt, med en ruta för post-it-lappen och en för textens ord. På raderna A och B skriver en grupp som bara är ett par. Gruppen lägger fördjupningens lapp på En lapp till och kallar platsen Hör till gasen. I fördjupningen händer det som avsnitt 3 säger: instängd gas spränger när trycket släpper."
+          - rubrik: Orden
+            text: formen är däremot mycket olika (formen) · lavan i St. Helens är däremot seg (lavan) · medan den tunna magman släpper ut sin gas (gasen) · hotar också människor på olika sätt (faran)
+          - rubrik: Svaret
+            text: |-
+              Lyssna efter: kisel gör lavan seg · gasen fastnar och spränger · explosiva farligast
+              Så kan det låta: ”Mer kisel gör lavan seg. Tunn lava rinner långt och bygger breda berg, och seg lava bygger branta. Gasen smiter ur tunn magma men spränger den sega. De explosiva är farligast: glödheta moln kan döda.”
+          - rubrik: Rutan
+            text: "Visste du att: intressant, för svaret om vulkanernas sorter håller utan flygen."
+          - rubrik: Samtala
+            text: "Varför tar texten Hawaii först i varje avsnitt? Varför slutar den med St. Helens 1980? Ett svar: samma ordning gör skillnaden lätt att se, och 1980 visar flaskan som öppnas."
+  - rubrik: "Medel, text 8: Lugn eller explosiv"
+    tema: Vulkaner och jordbävningar
+    text:
+      - Vulkaner och jordbävningar · text 3 av 5
+    delar:
+      - rubrik: Till läraren
+        falt:
+          - rubrik: Hör till
+            text: Lärarens sida till texten.
+    listor:
+      - rubrik: Lugn eller explosiv
+        rader:
+          - - Vulkaner kan bete sig mycket olika. På Hawaii väller lavan ut och rinner nerför berget. Mount St. Helens exploderade i stället år 1980. Varför är en del vulkaner breda och lugna och andra branta och explosiva, och vilken sort är farligast?
+      - rubrik: Siffran
+        rader:
+          - - 17 km
+            - hög är Mauna Loa på Hawaii, räknad från sin fot långt under havsytan.
+      - rubrik: "Bild: Bred och brant"
+        rader:
+          - - Bred och brant. Till vänster en sköldvulkan som på Hawaii, till höger en stratovulkan som Mount St. Helens. Höjderna är inte i skala.
+      - rubrik: Bred eller brant
+        rader:
+          - - Både vulkanerna på Hawaii och Mount St. Helens har byggts upp av magma som har kommit upp ur djupet. Magma är smält berg under jorden. När magman väller ut ur vulkanen kallas den lava. Det är alltså samma sak på två olika ställen.
+          - - Formen är däremot mycket olika. Vulkanerna på Hawaii är breda och har svaga sluttningar. De kallas sköldvulkaner, eftersom de från sidan liknar en krigares sköld. Mauna Loa på Hawaii är en sådan. Räknad från sin fot är den omkring 17 kilometer hög, och den täcker ungefär halva ön Hawaii.
+          - - Mount St. Helens är i stället en brant kon, byggd av lager på lager av lava och aska. En sådan vulkan kallas stratovulkan.
+      - rubrik: Tunn eller seg lava
+        rader:
+          - - Lavan skiljer sig också åt mellan vulkanerna. Det beror till stor del på hur mycket **kisel** den innehåller. I lavan sitter kislet ihop med syre och bildar ämnet kiseldioxid. Det är det vanligaste ämnet i jordens berg. Lavan från Kilauea på Hawaii har omkring 52 procent kiseldioxid, medan lavan från Mount St. Helens år 1980 hade omkring 64 procent.
+          - - Ju mer kisel, desto segare blir lavan. Lavan på Hawaii är tunn och rinner lätt. Den hinner rinna långt innan den **stelnar**, och därför blir berget brett med svaga sluttningar.
+          - - Lavan i St. Helens är däremot seg och trög. Den rinner inte långt innan den stelnar, och berget blir brant. Utbrott efter utbrott lägger nya lager ovanpå de gamla.
+      - rubrik: Ord i texten
+        rader:
+          - - kisel
+            - ett ämne i berget som gör lavan seg
+          - - stelnar
+            - blir hård när den svalnar
+      - rubrik: Bubblorna avgör
+        rader:
+          - - Medan den tunna magman släpper ut sin gas, håller den sega magman kvar gasen. Det är gasen som får en vulkan att explodera. Djupt nere finns vatten löst i magman. När magman stiger, blir vattnet till gasbubblor.
+          - - Magman i Kilauea har omkring 0,5 procent vatten, medan magman i St. Helens år 1980 hade omkring 4 procent, alltså åtta gånger så mycket. Mer vatten ger mer gas. I den tunna magman på Hawaii stiger bubblorna lätt upp och försvinner ut i luften. Därför blir utbrotten oftast lugna.
+          - - I den sega magman fastnar bubblorna däremot. Trycket växer, som i en skakad läskflaska. När trycket till sist släpper, sliter gasen sönder magman till aska och **pimpsten**, sådan som föll över Pompeji år 79.
+      - rubrik: Ord i texten
+        rader:
+          - - pimpsten
+            - lätt sten full av små hål
+      - rubrik: "Bild: Bubblorna i magman"
+        rader:
+          - - Bubblorna i magman. I tunn magma går bubblorna lugnt ut. I seg magma fastnar de, och trycket växer som i en skakad läskflaska.
+      - rubrik: Farligast
+        rader:
+          - - De två sorterna av vulkaner hotar också människor på olika sätt. På Hawaii rinner lavan längs marken. Den kan förstöra hus och vägar där den rinner fram, men den rör sig oftast så långsamt att människor hinner gå undan. Därför dör sällan någon av lavan.
+          - - En explosiv vulkan som St. Helens slungar däremot ut aska och pimpsten högt upp i luften. Askan kan färdas mycket långt. Askmolnet från utbrottet 1980 gick tvärs över USA på tre dagar och runt jorden på 15 dagar.
+          - - Vesuvius i Italien, som begravde Pompeji år 79, är en sådan explosiv vulkan. Glödheta moln av het aska och gas dödade människor i staden. Därför är de explosiva vulkanerna farligast för människor.
+      - rubrik: "Fakta: Två slags vulkaner"
+        rader:
+          - - Namnet
+            - "Hawaii: sköldvulkan. St. Helens: stratovulkan"
+          - - Formen
+            - "Hawaii: bred, med svaga sluttningar. St. Helens: brant"
+          - - Kiseldioxid i lavan
+            - "Kilauea: 52 procent. St. Helens 1980: 64 procent"
+          - - Vatten i magman
+            - "Kilauea: 0,5 procent. St. Helens 1980: 4 procent"
+          - - Exempel
+            - "Sköldvulkaner: Mauna Loa och Kilauea. Stratovulkaner: St. Helens och Vesuvius"
+      - rubrik: "Fördjupning: Den 18 maj 1980"
+        rader:
+          - - Våren 1980 började Mount St. Helens att röra på sig. Från mitten av mars kom små skalv under berget. Sedan började bergets norra sida svälla ut med mer än en meter om dagen. Magma trängde upp inne i berget och tryckte på.
+          - - Den 18 maj klockan 8.32 kom ett skalv. Då rasade den uppsvällda sidan och toppen i ett jätteskred, där en hel bergssida gled ner på en gång. Plötsligt fanns inget kvar som höll trycket på magman. Gasen i magman sprängde berget åt sidan, som när korken åker av en skakad läskflaska.
+          - - Askan steg mer än 24 kilometer upp i luften på mindre än en kvart. Utbrottet förstörde skog på 600 kvadratkilometer. Det visade vad instängd gas kan göra med ett berg.
+      - rubrik: Visste du att …
+        rader:
+          - - Eyjafjallajökull
+            - heter vulkanen på Island vars aska stoppade nästan alla flyg i Sverige den 17 och 18 april 2010. Hur hade du tagit dig hem om alla flyg stod still?
+      - rubrik: Läs mer
+        rader:
+          - - Svenska nationella seismiska nätet berättar om vulkaner, också på Island och i Sverige för länge sedan.
+            - https://www.uu.se/forskning/svenska-nationella-seismiska-natet/vulkaner
+          - - Unga Fakta visar olika sorters vulkaner, med sköldvulkaner som på Hawaii och stratovulkaner som Vesuvius.
+            - https://www.ungafakta.se/vulkaner/olika/
+          - - USGS visar fotografier av sidan som svällde ut, askmolnet och skogen som föll när Mount St. Helens fick utbrott 1980. Texten är på engelska.
+            - https://www.usgs.gov/volcanoes/mount-st.-helens/science/1980-cataclysmic-eruption
+  - rubrik: "Modellen: Medel, text 8, Lugn eller explosiv"
+    tema: Vulkaner och jordbävningar
+    text:
+      - Venndiagrammet, blad 2, ifyllt för Lugn eller explosiv.
+    delar:
+      - rubrik: Frågan och svaret
+        falt:
+          - rubrik: Textens fråga
+            text: Varför är en del vulkaner breda och lugna och andra branta och explosiva, och vilken sort är farligast?
+          - rubrik: Lyssna efter
+            text: kisel gör lavan seg · gasen fastnar och spränger · explosiva farligast
+          - rubrik: Så kan svaret låta
+            text: "Mer kisel gör lavan seg. Tunn lava rinner långt och bygger breda berg, och seg lava bygger branta. Gasen smiter ur tunn magma men spränger den sega. De explosiva är farligast: glödheta moln kan döda."
+  - rubrik: "Lärarens sida: Medel, text 9, Vågen som kom"
+    text:
+      - Plattor som fastnar bygger upp spänning tills berget brister, havsbottnen lyfter vattnet, och på havet är vågen låg och snabb tills den bromsas vid kusten och växer. Texten förklarar orsak och verkan, och modellen är Kedjan, blad 1. I vecka 4 har två elever i taget jobbkorten från avsnitt 2.
+    delar:
+      - rubrik: "Läspasset: de fyra avsnitten"
+        falt:
+          - rubrik: Textens fråga
+            text: Hur kan ett skalv under havet döda människor på en strand tusentals kilometer bort?
+          - rubrik: Ord före läsningen
+            text: tsunami (kallas också flodvåg, men ingen flod) · spänning (berget trycks och dras, inget spännande) · platta (jättebit av skorpan och berget under)
+          - rubrik: 1 Plattorna fastnar
+            text: |-
+              Red ut: haka i: fastna i varandra · linjalen: berget som böjs
+              Lyssna efter: plattorna fastnar · spänning i berget · år efter år
+              Lockar: naglarna som växer. ”Vad händer när plattorna fastnar men fortsätter röra sig?”
+              Bilden: Vid siffran 1 hakar plattornas kanter i varandra
+          - rubrik: 2 Berget brister
+            text: |-
+              Red ut: magnitud, i marginalen · ”Så gick det till”: samma sak hände 2004
+              Lyssna efter: berget brister · skalv under havet · havsbottnen rycker till
+              Lockar: annandag jul och 9,1. ”Varför ryckte också havsbottnen till, enligt sista meningen?”
+              Sambandet: ”därför brister berget”: spänningen från avsnitt 1 blir för stor
+              Bilden: Vid siffran 2 brister berget, och havsbottnen rycker till
+          - rubrik: 3 Havet lyfts
+            text: |-
+              Red ut: ”Det” i första meningen: att havsbottnen ryckte till · buktar uppåt: blir som en kulle
+              Lyssna efter: vattnet lyfts · låg och snabb våg · allt vatten rör sig
+              Lockar: lika fort som ett jetplan. ”Hur hög är vågen ute på djupt hav?”
+              Sambandet: ”Det gör att”: havsbottnen sätter vattnet i rörelse
+              Bilden: Vid siffran 3 är vågen låg, under 1 meter
+          - rubrik: 4 Vågen växer
+            text: |-
+              Red ut: grunt, i marginalen · ”väller in”: strömmar in med kraft
+              Lyssna efter: grunt vatten · bromsas och växer · in över land
+              Lockar: botten som syns. ”Vad händer med vågen när havet blir grunt?”
+              Sambandet: ”När vågen når grunt vatten”: vågen från avsnitt 3 når kusten
+              Bilden: Vid siffran 4 står vattnet högt. På kartan: kusterna runt havet
+          - rubrik: Om någon frågar
+            text: Dog det svenskar? Ja, 543 svenskar omkom. Kan skalv komma av vädret? Nej, de flesta skalv börjar flera kilometer ner i berget, dit regnvattnet inte lätt når. Har det kommit fler stora tsunamier? Ja, till exempel i Japan 2011. Där nådde vattnet som högst nära 40 meter över havet.
+      - rubrik: "Modellpasset: Kedjan för Vågen som kom"
+        falt:
+          - rubrik: Fördjupningen
+            text: |-
+              Red ut: tecknen: det som visar att en tsunami kommer · ”sägs ha”: så berättas det
+              Lyssna efter: Tilly kände igen tecknen · havet drar sig undan · upp på en höjd
+              Lockar: hundra som klarade sig. ”Vad ska man göra om havet drar sig undan?”
+              Sambandet: ”kände igen tecknen”: tecknen vid stranden i avsnitt 4
+              Bilden: Thailand på kartan, där Tilly var
+          - rubrik: Modellen
+            text: "Lägg först fram gruppens tidslinje från vecka 2 och fråga: ”Flikarna säger när. Var skriver vi varför?” Den visar när, men inte varför. Ta sedan fram Kedjan, blad 1. Gruppen lägger fördjupningens post-it-lapp på En lapp till, som får namnet Tecknen, och drar ett streck till led 4. Tilly kände igen det som händer i led 4, när havet drar sig undan. Lappen är ingen följd i kedjan."
+          - rubrik: Orden
+            text: |-
+              därför (skalvet) · det gör att (havet lyfts) · när (vågen växer)
+              Utan flik: gruppen skriver ”kände igen tecknen” vid En lapp till.
+          - rubrik: Svaret
+            text: |-
+              Lyssna efter: plattorna fastnar, berget brister · vattnet lyfts, en låg och snabb våg · vid kusten bromsas den och växer
+              Så kan det låta: ”Plattorna fastnar, och spänningen växer tills berget brister. Havsbottnen rycker till och lyfter vattnet. På havet är vågen låg och snabb, och vid kusten bromsas den och blir högre. Vattnet stiger snabbt upp över stranden.”
+          - rubrik: Rutan
+            text: "Visste du att: intressant, för svaret håller utan Plinius, men rutan visar Tillys tecken."
+          - rubrik: Samtala
+            text: "Varför börjar författaren med en våg som knappt märks? Varför slutar texten med Tilly Smith? Ett svar: den låga vågen är gåtan, och Tilly visar att den som vet kan hinna undan."
+  - rubrik: "Medel, text 9: Vågen som kom"
+    tema: Vulkaner och jordbävningar
+    text:
+      - Vulkaner och jordbävningar · text 4 av 5
+    delar:
+      - rubrik: Till läraren
+        falt:
+          - rubrik: Hör till
+            text: Lärarens sida till texten.
+    listor:
+      - rubrik: Vågen som kom
+        rader:
+          - - Den 26 december 2004 färdades en våg ut över Indiska oceanen. Långt ute på havet märktes den knappt. Ändå slog den samma dag in över stränder i flera länder runt havet. Hur kan ett skalv under havet döda människor på en strand tusentals kilometer bort?
+      - rubrik: Siffran
+        rader:
+          - - 1 meter
+            - Högre än så är en tsunami sällan ute på djupt hav.
+      - rubrik: "Bild: Från skalv till våg"
+        rader:
+          - - Från skalv till våg. Siffrorna är avsnittens nummer. Bilden visar inte rätt storlekar.
+      - rubrik: Plattorna fastnar
+        rader:
+          - - Jordens yttersta lager, skorpan, är av hårt berg. Skorpan och berget närmast under den är spruckna i stora bitar som kallas plattor. Plattorna rör sig hela tiden, några centimeter om året. Det är ungefär lika fort som naglarna växer på dina fingrar.
+          - - Där två plattor möts kan kanterna haka i varandra och fastna. Plattorna fortsätter ändå att röra sig, och berget vid gränsen trycks och dras. Det kallas spänning, och ordet betyder här något annat än i en spännande film. Tänk på en linjal som du böjer mer och mer.
+          - - Under Indiska oceanen hade två plattor fastnat i varandra på det sättet, och spänningen i berget växte år efter år.
+      - rubrik: Berget brister
+        rader:
+          - - Till sist blir spänningen för stor, och därför brister berget. Plattorna rycker till och flyttar sig på en gång, ungefär som när en linjal knäcks om du böjer den för mycket. Då skakar marken. Det kallas en jordbävning eller ett jordskalv, eller bara ett skalv. De flesta skalv börjar flera kilometer ner i berget.
+          - - Så gick det till den 26 december 2004, på annandag jul. Klockan var strax före åtta på morgonen vid ön Sumatra. Skalvet började 30 kilometer ner, och det hade **magnituden** 9,1. Det är ett av de största skalv som har mätts sedan år 1900. Skalvet skedde under havet, så också havsbottnen ryckte till.
+      - rubrik: Ord i texten
+        rader:
+          - - magnitud
+            - mått på hur mycket energi ett skalv frigör
+      - rubrik: Havet lyfts
+        rader:
+          - - Det gör att också vattnet ovanför havsbottnen lyfts. Havsytan buktar uppåt, och därifrån färdas vågor ut över havet åt olika håll. En sådan våg kallas tsunami.
+          - - Många tror att en tsunami är en jättevåg ute på havet, som en våg att surfa på. Det låter rimligt. Men på djupt vatten är vågen sällan högre än en meter, och den märks knappt. Den färdas däremot ungefär lika fort som ett jetplan.
+          - - När vinden gör vågor, rör de bara vattnet närmast ytan. En tsunami rör allt vatten, från ytan ända ner till botten. Den flyttar alltså mycket mer vatten än vindens vågor.
+      - rubrik: Vågen växer
+        rader:
+          - - När vågen når **grunt** vatten nära kusten bromsas den, och det börjar längst fram. Vattnet bakom hinner då ikapp, och vattnet vid kusten blir högre. Oftast ser det ut som om havet stiger mycket snabbt och väller in över stranden och långt upp på land. Det är därför vågen blir farlig först nära land. Ibland drar sig havet undan från stranden innan vågen kommer, så att botten syns.
+          - - En tsunami kommer som flera vågor efter varandra, och den första är inte alltid störst. Tsunamin år 2004 nådde kuster runt Indiska oceanen, från Thailand och Sri Lanka ända bort till Somalia, mer än 5 000 kilometer från skalvet.
+          - - Mer än 220 000 människor dog eller försvann. Bland dem fanns turister från många länder, också från Sverige.
+      - rubrik: Ord i texten
+        rader:
+          - - grunt
+            - inte djupt, botten är nära
+      - rubrik: "Bild: Indiska oceanen 2004"
+        rader:
+          - - Indiska oceanen 2004. Stjärnan är skalvet. Vågen nådde kuster runt havet, ända till Somalia, mer än 5 000 kilometer bort. Kartan är förenklad.
+      - rubrik: "Fakta: Så högt upp på land nådde vattnet år 2004"
+        rader:
+          - - Aceh på Sumatra
+            - 51 meter över havet
+          - - Thailand
+            - 5–20 meter över havet
+          - - Somalia, mer än 5 000 kilometer bort
+            - nästan 10 meter över havet
+      - rubrik: "Fördjupning: Flickan som kände igen tecknen"
+        rader:
+          - - Den 26 december 2004 var tioåriga Tilly Smith på en strand i Thailand. Två veckor före resan dit hade hon läst om tsunamier på geografin i skolan. På lektionen hade hon fått lära sig vilka tecken som visar att en tsunami kan vara på väg.
+          - - Den dagen såg Tilly att havet ändrades, och hon kände igen tecknen från lektionen. Hon varnade sina föräldrar, men först trodde de henne inte. Tilly gav sig inte, och familjen bad de andra på stranden att gå därifrån. Omkring hundra människor sägs ha klarat sig tack vare henne.
+          - - Det Tilly hade lärt sig gäller än i dag. Drar sig havet plötsligt undan ska man genast gå upp på en höjd eller långt in på land. Man ska inte vänta på en varning. Efter den första vågen kan fler komma.
+      - rubrik: Visste du att …
+        rader:
+          - - År 79
+            - såg den 17-årige Plinius havet dra sig undan vid Neapelbukten medan vulkanen Vesuvius hade utbrott, som om skalven tryckte bort vattnet. Vad skulle du göra om du såg havet dra sig undan?
+      - rubrik: Läs mer
+        rader:
+          - - Svenska nationella seismiska nätet förklarar hur en tsunami börjar och sprids.
+            - https://www.uu.se/forskning/svenska-nationella-seismiska-natet/tsunamier
+          - - Naturhistoriska riksmuseet berättar om tsunamier, också den i Japan 2011. Sidan är skriven för vuxna.
+            - https://www.nrm.se/fakta-om-naturen/jorden-geologi/vulkaner-och-jordbavningar/tsunamis
+          - - SMHI förklarar varför vågen växer nära land och vad du gör om havet plötsligt drar sig undan.
+            - https://www.smhi.se/kunskapsbanken/oceanografi/vagor/tsunami
+  - rubrik: "Modellen: Medel, text 9, Vågen som kom"
+    tema: Vulkaner och jordbävningar
+    text:
+      - Kedjan, blad 1, ifylld för Vågen som kom.
+    delar:
+      - rubrik: Frågan och svaret
+        falt:
+          - rubrik: Textens fråga
+            text: Hur kan ett skalv under havet döda människor på en strand tusentals kilometer bort?
+          - rubrik: Lyssna efter
+            text: plattorna fastnar, berget brister · vattnet lyfts, en låg och snabb våg · vid kusten bromsas den och växer
+          - rubrik: Så kan svaret låta
+            text: Plattorna fastnar, och spänningen växer tills berget brister. Havsbottnen rycker till och lyfter vattnet. På havet är vågen låg och snabb, och vid kusten bromsas den och blir högre. Vattnet stiger snabbt upp över stranden.
+  - rubrik: "Lärarens sida: Medel, text 10, Skalvsäkra hus"
+    text:
+      - Det är husen som rasar och skadar människorna i ett skalv, och hus som byggs efter stränga regler eller står på isolatorer kan klara skakningen. Texten har ett problem och en lösning, och modellen är Problem och lösning, blad 2. I vecka 5 har två elever i taget jobbkorten från avsnitt 2, och de två som har dem i avsnitt 4 leder hela avsnittet.
+    delar:
+      - rubrik: "Läspasset: de fyra avsnitten"
+        falt:
+          - rubrik: Textens fråga
+            text: Varför dog så många fler i Haiti än i Chile, och hur kan ett hus klara ett skalv?
+          - rubrik: Ord före läsningen
+            text: magnitud (skalvets energi, mycket mer per steg) · isolator (stötdämpare, ingen isolering mot kyla) · byggregel (hur hus ska byggas, inget spel)
+          - rubrik: 1 Det är husen som rasar
+            text: |-
+              Red ut: ”Ungefär så”: bordet är marken, tornet huset · ”det” i ”inne i det”: huset
+              Lyssna efter: skakningen fäller husen · människorna i husen skadas
+              Lockar: tornet av klossar. ”Vad är problemet, enligt sista stycket?”
+          - rubrik: 2 Haiti 2010
+            text: |-
+              Red ut: ”nära och djupt”: var skalvet börjar · ”följderna”: det som hände efter skalvet
+              Lyssna efter: kraftig skakning · hus som inte tålde skalv · många på liten yta
+              Lockar: kanske mer än 200 000 döda. ”Vilka tre saker gjorde skalvet så farligt?”
+              Sambandet: ”beror också på husen”: varför så många dog i Haiti
+              Bilden: Rutan för Haiti, vid siffran 2: en enda liten ruta
+          - rubrik: 3 Regler för hus
+            text: |-
+              Red ut: förebygga, i marginalen · ”för sent att bygga om”: när marken skakar finns ingen tid
+              Lyssna efter: byggregler · huset står kvar · reglerna följs
+              Lockar: hus med sprickor. ”Vad kan byggreglerna säga, enligt andra stycket?”
+              Sambandet: ”En lösning är att”: från orsaken till det man gör
+          - rubrik: 4 Hus på stötdämpare
+            text: |-
+              Red ut: stötdämpare, i marginalen · ”den” i ”under den”: skateboarden
+              Lyssna efter: isolatorer som stötdämpare · tar upp rörelsen · sjukhuset klarade sig
+              Lockar: skateboarden på mattan. ”Vad gör isolatorerna när marken skakar?”
+              Sambandet: ”En annan lösning är att”: lösning 2, huset skakar inte med
+              Bilden: Vid siffran 4 rör sig marken mycket och huset lite
+          - rubrik: Om någon frågar
+            text: Hur många dog i Haiti? Ingen vet säkert. Regeringen sa 316 000, och andra har räknat fram färre än 100 000. Drabbas fattiga länder hårdare? Ja, skriver Skolverket, för husen där är mindre robusta. Har Sverige haft stora skalv? När isen smälte för omkring 10 000 år sedan kom skalv upp till magnitud 8. Kosteröskalvet 1904 hade 5,4.
+      - rubrik: "Modellpasset: Problem och lösning för Skalvsäkra hus"
+        falt:
+          - rubrik: Fördjupningen
+            text: |-
+              Red ut: ”helt steg”: till exempel från 7 till 8 · USGS: en myndighet i USA
+              Lyssna efter: mer än 500 gånger energin · färre döda, två skäl · tsunamin dödade många
+              Lockar: 32 gånger per steg. ”Vilka två skäl ger USGS?”
+              Sambandet: ”Vad reglerna kan göra”: resultatet av lösning 1. ”svagare än i Haiti”: jämför avsnitt 2
+              Bilden: Rutorna: en för Haiti, mer än 500 för Chile
+          - rubrik: Modellen
+            text: "Lägg först fram gruppens kedja från vecka 4 och fråga: ”Var skriver vi det någon gör åt problemet?” Den visar vad som leder till vad, men inte vad någon gör åt problemet. Ta sedan fram Problem och lösning, blad 2. Gruppen lägger fördjupningens post-it-lapp på En lapp till, som får namnet Resultatet, och drar ett streck till lösning 1. Chile visar vad lösning 1 ledde till, och att vågen var en annan fara. På blad 2 har resultatet ingen egen plats."
+          - rubrik: Orden
+            text: |-
+              problemet är (husen rasar) · beror också på (sårbar plats) · en lösning är att (byggregler) · en annan lösning är att (isolatorer)
+              Utan flik: gruppen skriver ”långt färre” vid En lapp till.
+          - rubrik: Svaret
+            text: |-
+              Lyssna efter: Haitis hus tålde inte skalv · Chile: regler och svagare skakning · byggregler och isolatorer
+              Så kan det låta: ”I Haiti rasade hus som inte var byggda för skalv. I Chile var skalvet större, men byggregler och svagare skakning hjälpte. Ett hus kan klara skalv om det byggs efter regler eller står på isolatorer.”
+          - rubrik: Rutan
+            text: "Visste du att: intressant, för svaret håller utan skalven i Sverige."
+          - rubrik: Samtala
+            text: "Varför börjar författaren med ett torn av klossar? Varför kommer Chile sist? Ett svar: tornet visar att det är husen som rasar, och Chile visar vad reglerna kan göra."
+  - rubrik: "Medel, text 10: Skalvsäkra hus"
+    tema: Vulkaner och jordbävningar
+    text:
+      - Vulkaner och jordbävningar · text 5 av 5
+    delar:
+      - rubrik: Till läraren
+        falt:
+          - rubrik: Hör till
+            text: Lärarens sida till texten.
+    listor:
+      - rubrik: Skalvsäkra hus
+        rader:
+          - - I januari 2010 kom ett jordskalv i Haiti, och drygt sex veckor senare ett i Chile. Skalvet i Chile var mycket större, men det var i Haiti som flest dog. Varför dog så många fler i Haiti än i Chile, och hur kan ett hus klara ett skalv?
+      - rubrik: Siffran
+        rader:
+          - - Mer än 500
+            - gånger så mycket energi frigjorde skalvet i Chile som skalvet i Haiti år 2010.
+      - rubrik: "Bild: Energin i två skalv"
+        rader:
+          - - Energin i två skalv. En ruta är energin i skalvet i Haiti, och skalvet i Chile hade mer än 500 sådana. Siffran är avsnittets nummer.
+      - rubrik: Det är husen som rasar
+        rader:
+          - - Bygg ett högt torn av klossar på ett bord och skaka bordet. Bordet står kvar, men tornet rasar, eftersom inget håller ihop klossarna. Ungefär så går det till i ett jordskalv.
+          - - I ett jordskalv är det skakningen som gör de flesta skadorna. Hus som inte tål skakningen kan spricka och rasa. Ett hus är mycket tyngre än klossar, och när det rasar skadas människorna inne i det. Många som dör i jordskalv dör för att husen är dåligt byggda.
+          - - Problemet är alltså husen. En plats där ett skalv kan skada många människor kallas sårbar. Ingen kan stoppa ett skalv, men det går att göra en plats mindre sårbar.
+      - rubrik: Haiti 2010
+        rader:
+          - - Hur många som dör i ett skalv beror på skalvets storlek. Det beror också på husen och på hur tätt människor bor. Det syntes i Haiti den 12 januari 2010. Då kom ett skalv med **magnituden** 7,0.
+          - - Tre saker gjorde skalvet så farligt. Skakningen var kraftig. Hur hårt marken skakar beror både på skalvets storlek och på hur nära och djupt det börjar. Skalvet i Haiti började omkring 25 kilometer från huvudstaden Port-au-Prince. Många hus var inte byggda för att klara skalv, och de rasade. Dessutom bodde många människor tätt, alltså många på en liten yta.
+          - - Ingen vet säkert hur många som dog. Det var tiotusentals, kanske mer än 200 000. Haiti var en sårbar plats, och därför blev följderna så svåra.
+      - rubrik: Ord i texten
+        rader:
+          - - magnitud
+            - mått på hur mycket energi ett skalv frigör
+      - rubrik: Regler för hus
+        rader:
+          - - En lösning är att bygga husen så att de klarar skakningen. Därför finns det byggregler. Reglerna säger hur ett hus ska byggas för att stå kvar när marken skakar.
+          - - Reglerna kan till exempel säga hur starka väggarna ska vara och hur väggar, golv och tak ska sitta ihop. Ett hus som är byggt så kan få sprickor och andra skador, men det ska inte rasa över dem som är inne.
+          - - Byggregler är ett sätt att **förebygga** olyckor. Med reglerna är husen redo innan skalvet kommer, för när marken väl skakar är det för sent att bygga om. Men reglerna måste också följas. I Haiti var reglerna gamla och användes sällan. I Chile fanns det stränga byggregler år 2010.
+      - rubrik: Ord i texten
+        rader:
+          - - förebygga
+            - göra något i förväg, innan det händer
+      - rubrik: Hus på stötdämpare
+        rader:
+          - - En annan lösning är att låta marken skaka under huset, utan att huset följer med lika mycket. Då ställs huset på isolatorer. De sitter mellan huset och marken och fungerar som **stötdämpare**. När marken rör sig fram och tillbaka tar isolatorerna upp en stor del av rörelsen.
+          - - Det är som att stå på en skateboard medan någon drar en matta fram och tillbaka under den. Mattan åker fram och tillbaka, men du rör dig mycket mindre.
+          - - Ett sjukhus i Los Angeles i USA står på 149 isolatorer. Där kom år 1994 ett skalv med magnituden 6,7. Isolatorerna minskade då rörelsen med omkring två tredjedelar innan den nådde huset. Sjukhuset fick inga skador.
+      - rubrik: Ord i texten
+        rader:
+          - - stötdämpare
+            - del som tar emot och dämpar stötar
+      - rubrik: "Bild: Hus på isolatorer"
+        rader:
+          - - Hus på isolatorer. Marken skakar fram och tillbaka, och isolatorerna tar upp en stor del av rörelsen. Siffran är avsnittets nummer.
+      - rubrik: "Fördjupning: Chile 2010"
+        rader:
+          - - Vad reglerna kan göra syntes i Chile den 27 februari 2010. Där kom ett skalv med magnituden 8,8. Det är lätt att tro att det bara är lite mer än Haitis 7,0, för talen ligger nära varandra. Men varje helt steg på skalan betyder ungefär 32 gånger mer energi. Två steg betyder 32 gånger 32, alltså omkring 1 000 gånger. Från 7,0 till 8,8 är nästan två steg, och skalvet i Chile frigjorde mer än 500 gånger så mycket energi som skalvet i Haiti.
+          - - Ändå dog under tusen människor i Chile, långt färre än i Haiti. Den amerikanska myndigheten USGS ger två skäl. Chile hade stränga byggregler, och den starkaste skakningen var svagare än i Haiti.
+          - - Många av dem som dog i Chile dog i en tsunami, en våg som skalvet satte igång. Reglerna hjälpte alltså mot skakningen, men vattnet var en annan fara.
+      - rubrik: "Fakta: Haiti och Chile 2010"
+        rader:
+          - - Datum
+            - Haiti 12 januari och Chile 27 februari
+          - - Magnitud
+            - Haiti 7,0 och Chile 8,8
+          - - Döda
+            - Haiti kanske mer än 200 000 och Chile under tusen
+      - rubrik: Visste du att …
+        rader:
+          - - Minst ett
+            - jordskalv sker varje dag i Sverige, men bara tio till tjugo om året känns. Spänningen i berget kommer från plattgränsen mitt i Atlanten. Var i Sverige kom de senaste skalven?
+      - rubrik: Läs mer
+        rader:
+          - - Svenska nationella seismiska nätet har en karta över de senaste skalven i och nära Sverige.
+            - https://www.uu.se/forskning/svenska-nationella-seismiska-natet/skalvkartor/analyserade-skalv
+          - - Svenska nationella seismiska nätet berättar om de största skalven i Sverige, som Kosteröskalvet 1904.
+            - https://www.uu.se/forskning/svenska-nationella-seismiska-natet/jordbavningar/stora-svenska-skalv
+          - - Svenska nationella seismiska nätet svarar på vanliga frågor om jordskalv, till exempel hur skalven gör skada.
+            - https://www.uu.se/forskning/svenska-nationella-seismiska-natet/jordbavningar/vanliga-fragor
+  - rubrik: "Modellen: Medel, text 10, Skalvsäkra hus"
+    tema: Vulkaner och jordbävningar
+    text:
+      - Problem och lösning, blad 2, ifylld för Skalvsäkra hus.
+    delar:
+      - rubrik: Frågan och svaret
+        falt:
+          - rubrik: Textens fråga
+            text: Varför dog så många fler i Haiti än i Chile, och hur kan ett hus klara ett skalv?
+          - rubrik: Lyssna efter
+            text: "Haitis hus tålde inte skalv · Chile: regler och svagare skakning · byggregler och isolatorer"
+          - rubrik: Så kan svaret låta
+            text: I Haiti rasade hus som inte var byggda för skalv. I Chile var skalvet större, men byggregler och svagare skakning hjälpte. Ett hus kan klara skalv om det byggs efter regler eller står på isolatorer.
+pabordet:
+  - nr: 130
+    rubrik: Jorden i genomskärning
+    text: Halva jordklotet i genomskärning, med lagren i rätt tjocklek jämfört med varandra. Ytterst är skorpan bara ett tunt streck. Sedan kommer manteln, som är tjockast, och den yttre kärnan, som är flytande. Innerst är den lilla inre kärnan, som är fast. En pil från ytan till mitten visar 6 400 km.
+    efter: "ram: Medel, text 6: Under dina fötter"
+  - nr: 131
+    rubrik: Skorpan i förstoring
+    text: En bit av marken i genomskärning, förstorad. Överst ligger två tjocka plattor med en spricka mellan sig. Varje platta är skorpan och hårt berg under den, och under plattorna finns mjukt berg. En pil på den ena plattan visar att den glider 2–⁠12 cm om året.
+    efter: "ram: Medel, text 6: Under dina fötter"
+  - nr: 133
+    rubrik: "Blad: Tankekartan för Under dina fötter"
+    text: Tankekartan, blad 2, för Under dina fötter, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Medel, text 6, Under dina fötter"
+  - nr: 134
+    rubrik: Dygnet i Pompeji
+    text: En tidslinje från klockan tolv på dagen till sju på morgonen. Strax efter tolv steg ett moln som en pinje upp, från klockan 13 växer en stapel av pimpsten timme för timme, och klockan ett på natten for ett glödhett moln mot Herculaneum. Klockan sju nådde ett glödhett moln Pompeji, och då var pimpstenen omkring 3 meter hög, högre än en vuxen.
+    efter: "ram: Medel, text 7: Pompejis sista dygn"
+  - nr: 135
+    rubrik: Bukten och berget
+    text: En förenklad karta över Neapelbukten. Misenum ligger på buktens västra udde, och därifrån såg Plinius molnet över Vesuvius på andra sidan bukten. Herculaneum ligger vid kusten väster om berget och Pompeji sydost om det.
+    efter: "ram: Medel, text 7: Pompejis sista dygn"
+  - nr: 137
+    rubrik: "Blad: Tidslinjen för Pompejis sista dygn"
+    text: Tidslinjen, blad 2, för Pompejis sista dygn, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Medel, text 7, Pompejis sista dygn"
+  - nr: 138
+    rubrik: Bred och brant
+    text: Två vulkaner i genomskärning, med magma under båda. Höjderna är inte i skala. Till vänster står en sköldvulkan som på Hawaii, bred och låg, och tunn lava har runnit långt ut på marken. Till höger står en stratovulkan som St. Helens, brant och byggd av lager, och seg lava ligger kvar vid toppen.
+    efter: "ram: Medel, text 8: Lugn eller explosiv"
+  - nr: 139
+    rubrik: Bubblorna i magman
+    text: "I en öppen läskflaska med tunn magma, som på Hawaii, stiger några få bubblor och går ut i luften. I en flaska med seg magma, som i St. Helens, sitter åtta gånger så många bubblor fast under korken, och trycket växer. Till höger syns samma flaska igen: korken åker av, och gasen sliter sönder magman till aska."
+    efter: "ram: Medel, text 8: Lugn eller explosiv"
+  - nr: 141
+    rubrik: "Blad: Venndiagrammet för Lugn eller explosiv"
+    text: Venndiagrammet, blad 2, för Lugn eller explosiv, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Medel, text 8, Lugn eller explosiv"
+  - nr: 142
+    rubrik: Från skalv till våg
+    text: Havet och berget under det i genomskärning. Till vänster har två plattor hakat i varandra, och där brister berget i ett skalv, så att havsbottnen rycker till och havsytan buktar upp. En låg våg färdas ut över djupt vatten, och vid kusten, där havet är grunt, står vattnet högt och väller in över stranden.
+    efter: "ram: Medel, text 9: Vågen som kom"
+  - nr: 143
+    rubrik: Indiska oceanen 2004
+    text: En förenklad karta över Indiska oceanen, med Somalia till vänster, Indien och Sri Lanka i mitten och Thailand och Sumatra till höger. En stjärna utanför Sumatras nordvästkust är skalvet. Pilar från stjärnan visar hur vågen färdas ut åt olika håll över havet, till Thailand, till Sri Lanka och ända till Somalia, mer än 5 000 kilometer bort.
+    efter: "ram: Medel, text 9: Vågen som kom"
+  - nr: 145
+    rubrik: "Blad: Kedjan för Vågen som kom"
+    text: Kedjan, blad 1, för Vågen som kom, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Medel, text 9, Vågen som kom"
+  - nr: 146
+    rubrik: Energin i två skalv
+    text: Till vänster står skalvet i Haiti 2010, magnitud 7,0, med en liten ruta för energin. Till höger står skalvet i Chile 2010, magnitud 8,8, med 500 lika stora rutor i fem block om hundra. Skalvet i Chile frigjorde mer än 500 gånger så mycket energi.
+    efter: "ram: Medel, text 10: Skalvsäkra hus"
+  - nr: 147
+    rubrik: Hus på isolatorer
+    text: Ett hus sett från sidan står på en rad isolatorer ovanpå marken. En lång pil i marken visar att marken skakar fram och tillbaka. En pil över huset, en tredjedel så lång, visar att huset rör sig mindre.
+    efter: "ram: Medel, text 10: Skalvsäkra hus"
+  - nr: 149
+    rubrik: "Blad: Problem och lösning för Skalvsäkra hus"
+    text: Problem och lösning, blad 2, för Skalvsäkra hus, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    efter: "ram: Modellen: Medel, text 10, Skalvsäkra hus"
+tabeller:
+  - rubrik: Vulkaner och jordbävningar
+    kolumner:
+      - Vecka och modell
+      - Medel
+    rader:
+      - - 1 Tankekartan
+        - Under dina fötter
+      - - 2 Tidslinjen
+        - Pompejis sista dygn
+      - - 3 Venndiagrammet
+        - Lugn eller explosiv
+      - - 4 Kedjan
+        - Vågen som kom
+      - - 5 Problem och lösning
+        - Skalvsäkra hus

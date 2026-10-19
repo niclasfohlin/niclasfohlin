@@ -1,6 +1,6 @@
 {
   "faktatextsamtal-i-grupp": {
-    "kalla": "f9e38336167d2ce8",
+    "kalla": "3e6104c14127dbd0",
     "datum": "2026-10-19",
     "las": {
       "Bas, text 1: Vattenplaneten": [
@@ -50,12 +50,71 @@
         8
       ],
       "Avancerat, text 4: När medicinen sviker": [
-        6
+        6,
+        7
       ],
       "Avancerat, text 5: Gåtan på sjukhuset": [
         1,
         7
-      ]
+      ],
+      "Bas, text 6: Vikingaskeppet": [
+        5,
+        8
+      ],
+      "Bas, text 7: Ristat i sten": [
+        2,
+        5,
+        9
+      ],
+      "Bas, text 8: Västerut och österut": [
+        2,
+        5,
+        8
+      ],
+      "Bas, text 9: Skatten i åkern": [
+        5,
+        9
+      ],
+      "Bas, text 10: Vikingarnas spår": [
+        2,
+        7
+      ],
+      "Medel, text 6: Under dina fötter": [
+        2,
+        5,
+        7
+      ],
+      "Medel, text 7: Pompejis sista dygn": [
+        2,
+        4
+      ],
+      "Medel, text 8: Lugn eller explosiv": [
+        2,
+        4
+      ],
+      "Medel, text 9: Vågen som kom": [
+        2
+      ],
+      "Medel, text 10: Skalvsäkra hus": [
+        2,
+        7
+      ],
+      "Avancerat, text 6: Hjärnans karta": [
+        7,
+        9
+      ],
+      "Avancerat, text 7: Hjärnans nattskift": [
+        2,
+        4,
+        7,
+        9
+      ],
+      "Avancerat, text 8: Två slags minne": [
+        3,
+        5
+      ],
+      "Avancerat, text 9: Natten bygger minnet": [],
+      "Avancerat, text 10: Klockan i tonåren": []
     }
   }
 }

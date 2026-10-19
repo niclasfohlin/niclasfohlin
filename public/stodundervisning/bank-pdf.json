@@ -4663,11 +4663,11 @@
     ]
   },
   "faktatextsamtal-i-grupp-texter-alla": {
-    "word": "3be2d162d6be8bfd663ede239fd3cf655369b49b8b0fe43607e446bad231a137",
-    "pdf": "edb55153ed60e35a20b42bf81b7cc11e5a49ac19e195c88851f9507e0cf16e98",
+    "word": "a80625b4e497f44846a8e9cf7b9247710f0ba8f7d5204354cdc61c8585b78582",
+    "pdf": "db186adfd3e5f9207c22bbaaf2a2fbc20ef4d18ee1df29adee862307083b9f08",
     "sidor": 60,
-    "kB": 778,
-    "datum": "2026-10-13",
+    "kB": 779,
+    "datum": "2026-10-19",
     "karta": [
       {
         "ram": 3,
@@ -4747,11 +4747,11 @@
     ]
   },
   "faktatextsamtal-i-grupp-texter-bas": {
-    "word": "5912ace9b8c0087a916fca7740abb325e97a1b5c98dedd3cb2e27402bcb4a178",
-    "pdf": "62c5b1fd3b10899aae36334128b91c3f15948d8d0890e4ceff33dfa07d10829a",
+    "word": "68785b0793f6ba8af2b699c52d181ea981c8873a18a91b25bfd3645a9ce168bd",
+    "pdf": "ddb2636d5ee256cd8f2fd05ec71e6ddaa7fb1cc3f4072fb9e1662a85613b8754",
     "sidor": 15,
     "kB": 308,
-    "datum": "2026-10-13",
+    "datum": "2026-10-19",
     "karta": [
       {
         "ram": 3,
@@ -4781,11 +4781,11 @@
     ]
   },
   "faktatextsamtal-i-grupp-texter-medel": {
-    "word": "71d1dc552e52adb37d6aaf7fd3697b92d434552abc0a712c8a1a7b458d357452",
-    "pdf": "6f70a0578b2d2b308d5ce598537c271c7aad4554782139a4c6e3891f51eccead",
+    "word": "88a2e77916b2c3a239f48c39434a71212aba662e4fca8ed2f05a35258006a479",
+    "pdf": "7bda7bbc8168b39ebbec68affd11ea93c5a419c53a06ccc430b1452e2e11a249",
     "sidor": 20,
-    "kB": 343,
-    "datum": "2026-10-13",
+    "kB": 344,
+    "datum": "2026-10-19",
     "karta": [
       {
         "ram": 19,
@@ -4815,11 +4815,11 @@
     ]
   },
   "faktatextsamtal-i-grupp-texter-avancerat": {
-    "word": "e1651c773e8a375ab4606fea3d22a3040405c73a552dafda3e2df8190d283706",
-    "pdf": "78dbf65c87d1aedeeb2677013f33a73a78e71508e06a5ad35ffe67edc3e6c789",
+    "word": "f7372f02a56e3e811de5368f98800c44136b1ef3b7db6eee21d9b16f085ee9ca",
+    "pdf": "4e52e27c6378fc8c52ec1237beed5a686191a4f2a5ab213cc21b6367421c2c67",
     "sidor": 25,
     "kB": 382,
-    "datum": "2026-10-13",
+    "datum": "2026-10-19",
     "karta": [
       {
         "ram": 35,
@@ -4891,15 +4891,15 @@
     "datum": "2026-10-13"
   },
   "faktatextsamtal-i-grupp": {
-    "word": "c91a0ff719a70868048bc313e632329901340546e7beb23c8bef6fae562028d6",
-    "pdf": "cf70428f7d8e743e4dbb80ec5d8e14cb56160ba5933fe349d0fb7b7bc9653c95",
+    "word": "703379ea97a983e0593620e2a6cdb57eedf322754db47a3eecc4c25ea11e8d97",
+    "pdf": "57b76051acbd58bbe9b8f6d287d3ab43c5fb2d12f9aa8fb8f37a7a7088de8341",
     "sidor": 171,
-    "kB": 3176,
+    "kB": 3177,
     "datum": "2026-10-19"
   },
   "faktatextsamtal-i-grupp-metoden": {
-    "word": "a118e9fc3daba103e3469de74d655c7fa57688eb9469668ca0674a062bd070b2",
-    "pdf": "4b11ec1fd9f6634f9c115357f4e1521d978eb88c717f1ed37038ad8292c96b0a",
+    "word": "58cf05fc89937889160a73e300a6b7a3290e20c01f43e8ec97d248351a8e088f",
+    "pdf": "3a0bccbac1d9a1cc2e368b481dc0be66fa5e3383483bf77bd683039c789998ce",
     "sidor": 15,
     "kB": 581,
     "datum": "2026-10-19"
@@ -5073,17 +5073,17 @@
     "datum": "2026-10-18"
   },
   "problemlosning-i-grupp": {
-    "word": "92a0786365f918674b9822d08f6bbbc69332320a18c7958b7f99003ed68988d0",
-    "pdf": "969f3665f42aa8b8385a98d577d892edfa0b50c131f66cf88c114aaa619392ba",
+    "word": "979caecad233c95b57c0a6a17d17bacc552ed4ab7aaa0413062a9fc0719e75f5",
+    "pdf": "2eeab2afc064e87a33561ae4a5981b5e9e391b705d7e124d365bcc1b07ddcf2d",
     "sidor": 160,
-    "kB": 3730,
+    "kB": 3724,
     "datum": "2026-10-19"
   },
   "problemlosning-i-grupp-metoden": {
-    "word": "6c3255876d48a32154750c1f6a31feb41b4b33b6b319ba0a6b0cf377958f43b8",
-    "pdf": "4007b6bf42da28c6a30a035ef70a83aaa7debc20a655f358737740449494256d",
+    "word": "9d22d06d9fc9d890e48aa0211443dac615c6bf3a408e2f564a665e27b6003703",
+    "pdf": "02ee4fd34699f7926f8e88e43febcf69054c9c2841edbc938078d169bffeb6c5",
     "sidor": 11,
-    "kB": 558,
+    "kB": 559,
     "datum": "2026-10-19"
   },
   "seriesamtal": {
@@ -6678,10 +6678,10 @@
     ]
   },
   "faktatextsamtal-i-grupp-lararhandledning-smittor": {
-    "word": "f5e5743b505aeab6b1774c2e88332ae7a12535d5ba473726f95fc8231d74b48d",
-    "pdf": "7d3a00da75de0ea78a3ee4c0a396a75d2d6bc66e3feff4e228518b99b9bc566b",
+    "word": "cc67b8672aca0c81820c7496bc6aa3385170249460141297dbb39511fa952ae4",
+    "pdf": "c2915ccabeccade746faa1b3a7e4fb3fd5c16a1cbc93cd708f88db0c40f3df46",
     "sidor": 2,
-    "kB": 200,
+    "kB": 199,
     "datum": "2026-10-19",
     "karta": [
       {
@@ -6692,10 +6692,10 @@
     ]
   },
   "faktatextsamtal-i-grupp-lararens-sidor-och-modellerna-alla": {
-    "word": "2aa1f9ff426b96d9c8745d622e71c39ded259d616ae31acb90a378d5c4e9f64a",
-    "pdf": "4ceffc89f0276f8f97f9c68dd3af03a8f5b9580222acc1982843c69692922393",
+    "word": "bf14a59fbc858ae05e92fdca302eb0a595b42ec55a54b052a5e57cf426e48c90",
+    "pdf": "4192da569ecc4688d6639a0a14145fb0f0ad030819d1f83cf4ef5036169f4354",
     "sidor": 51,
-    "kB": 1583,
+    "kB": 1581,
     "datum": "2026-10-19",
     "karta": [
       {
@@ -6866,8 +6866,8 @@
     ]
   },
   "faktatextsamtal-i-grupp-lararens-sidor-och-modellerna-bas": {
-    "word": "2cbba41bff5e0b1aa1f1e5e678c639d5f5178ab496b0af1cf1a1a412e3dd06ac",
-    "pdf": "31d61df91671560e80b99d6c7ac72f637da28d8d9f75244f64716252f2d65591",
+    "word": "de76a730c0dce60e7988df03aaf44cbd1d43f08774869bbc49b1da14f2f76945",
+    "pdf": "122807df399bb794c9e2a45d126c2903eb8b7fae2f47983d29142dd3acbd972c",
     "sidor": 17,
     "kB": 732,
     "datum": "2026-10-19",
@@ -6930,10 +6930,10 @@
     ]
   },
   "faktatextsamtal-i-grupp-lararens-sidor-och-modellerna-medel": {
-    "word": "fecd7b318ebc32a88680e3eeebacd48785f74e036c1f964dbc44e962803704b9",
-    "pdf": "b68464e90e7bd025010e2622bdabb482c94b72ea99571a2ef2f700891028f481",
+    "word": "ec5bc5dc13c2d5ea0b2fdf06f1672fb2d52bbee00eb63f23e54e0f10e8dfd3c0",
+    "pdf": "9d7e7c802c42acf7b5c8ba99be5feae540bd0432806183d2b702af13d017c6a6",
     "sidor": 17,
-    "kB": 822,
+    "kB": 821,
     "datum": "2026-10-19",
     "karta": [
       {
@@ -6994,8 +6994,8 @@
     ]
   },
   "faktatextsamtal-i-grupp-lararens-sidor-och-modellerna-avancerat": {
-    "word": "c01562814958712546978e676cd8be6ede82671e033dca63ea9a4f05474a489b",
-    "pdf": "5fa21fd710b2e118711f5ab57f92b93fd58599092ffd21f8fa14074c8f9bc007",
+    "word": "d73a013d3db6296a5bda4e9079486961a6248d24bd2db51ea74e55ab03ad5971",
+    "pdf": "a5ce55b02df05df2fc92e693e15afabe0ac58189b640e5dedea75b921268b8e4",
     "sidor": 17,
     "kB": 786,
     "datum": "2026-10-19",
@@ -7068,6 +7068,582 @@
         "ram": 4,
         "fran": 1,
         "till": 2
+      }
+    ]
+  },
+  "faktatextsamtal-i-grupp-lararhandledning-vikingarna": {
+    "word": "fd7b1e76c3a028facda01a5b0766bb6b7f19427d434f3cd7ce1d2422223ce883",
+    "pdf": "acb2f635902617cdeeb4b794bfcc5ff22bf766c8efa7ae2130971cc72df42317",
+    "sidor": 2,
+    "kB": 198,
+    "datum": "2026-10-19",
+    "karta": [
+      {
+        "ram": 63,
+        "fran": 1,
+        "till": 2
+      }
+    ]
+  },
+  "faktatextsamtal-i-grupp-lararhandledning-vulkaner-och-jordbavningar": {
+    "word": "74377570b4844dbe7ced76de61d3a21362da2c25fb632f8351007bda2210fc7d",
+    "pdf": "b468de961ac1a2acc0724fcb21e4d7a805bd576dc16b9475ea8f402b8487df03",
+    "sidor": 2,
+    "kB": 200,
+    "datum": "2026-10-19",
+    "karta": [
+      {
+        "ram": 79,
+        "fran": 1,
+        "till": 2
+      }
+    ]
+  },
+  "faktatextsamtal-i-grupp-lararhandledning-hjarnan": {
+    "word": "93d0d67e52896fa29716fc75d66ab9ba2f48a5d4abbaa6c4368d2eae41acaf59",
+    "pdf": "c10976aad2f299ee8a42c0978450b693becb0f0ffac5f2d3d7763009cf5d9171",
+    "sidor": 2,
+    "kB": 199,
+    "datum": "2026-10-19",
+    "karta": [
+      {
+        "ram": 95,
+        "fran": 1,
+        "till": 2
+      }
+    ]
+  },
+  "faktatexter-bas": {
+    "word": "628c01afd230fff4ecadfdd846139afe858eed9e9ba794b54614a03615600d2a",
+    "pdf": "0b4d252957f248938b1421fa85873b967394c2c77912434b7900f898a1b9ae41",
+    "sidor": 35,
+    "kB": 494,
+    "datum": "2026-10-19",
+    "karta": [
+      {
+        "ram": 3,
+        "fran": 1,
+        "till": 3
+      },
+      {
+        "ram": 6,
+        "fran": 4,
+        "till": 6
+      },
+      {
+        "ram": 9,
+        "fran": 7,
+        "till": 9
+      },
+      {
+        "ram": 12,
+        "fran": 10,
+        "till": 12
+      },
+      {
+        "ram": 15,
+        "fran": 13,
+        "till": 15
+      },
+      {
+        "ram": 65,
+        "fran": 16,
+        "till": 19
+      },
+      {
+        "ram": 68,
+        "fran": 20,
+        "till": 23
+      },
+      {
+        "ram": 71,
+        "fran": 24,
+        "till": 27
+      },
+      {
+        "ram": 74,
+        "fran": 28,
+        "till": 31
+      },
+      {
+        "ram": 77,
+        "fran": 32,
+        "till": 35
+      }
+    ]
+  },
+  "faktatexter-bas-lararens-sidor-och-modellerna": {
+    "word": "7ea9bee63ca208728ef0b3cd7f7d4c3655843e9e42f7274e7c33c7ece7962861",
+    "pdf": "fe8b6e8f7f82d21e53fb56b7dbf01838d95784cc8eecc805f97a1598b9fd63ea",
+    "sidor": 34,
+    "kB": 1101,
+    "datum": "2026-10-19",
+    "karta": [
+      {
+        "ram": 1,
+        "fran": 1,
+        "till": 2
+      },
+      {
+        "ram": 2,
+        "fran": 3,
+        "till": 4
+      },
+      {
+        "ram": 4,
+        "fran": 5,
+        "till": 5
+      },
+      {
+        "ram": 5,
+        "fran": 6,
+        "till": 7
+      },
+      {
+        "ram": 7,
+        "fran": 8,
+        "till": 8
+      },
+      {
+        "ram": 8,
+        "fran": 9,
+        "till": 10
+      },
+      {
+        "ram": 10,
+        "fran": 11,
+        "till": 11
+      },
+      {
+        "ram": 11,
+        "fran": 12,
+        "till": 13
+      },
+      {
+        "ram": 13,
+        "fran": 14,
+        "till": 14
+      },
+      {
+        "ram": 14,
+        "fran": 15,
+        "till": 16
+      },
+      {
+        "ram": 16,
+        "fran": 17,
+        "till": 17
+      },
+      {
+        "ram": 63,
+        "fran": 18,
+        "till": 19
+      },
+      {
+        "ram": 64,
+        "fran": 20,
+        "till": 21
+      },
+      {
+        "ram": 66,
+        "fran": 22,
+        "till": 22
+      },
+      {
+        "ram": 67,
+        "fran": 23,
+        "till": 24
+      },
+      {
+        "ram": 69,
+        "fran": 25,
+        "till": 25
+      },
+      {
+        "ram": 70,
+        "fran": 26,
+        "till": 27
+      },
+      {
+        "ram": 72,
+        "fran": 28,
+        "till": 28
+      },
+      {
+        "ram": 73,
+        "fran": 29,
+        "till": 30
+      },
+      {
+        "ram": 75,
+        "fran": 31,
+        "till": 31
+      },
+      {
+        "ram": 76,
+        "fran": 32,
+        "till": 33
+      },
+      {
+        "ram": 78,
+        "fran": 34,
+        "till": 34
+      }
+    ]
+  },
+  "faktatexter-medel": {
+    "word": "0b9929cd04e7af93d152ebab0371bb3adea8a83a05b78b61c05608847bdaf1d5",
+    "pdf": "8f4d4e5ff2a96de74412848da6392b2b5b5d334f603db353d4efa1235d27cef3",
+    "sidor": 40,
+    "kB": 513,
+    "datum": "2026-10-19",
+    "karta": [
+      {
+        "ram": 19,
+        "fran": 1,
+        "till": 4
+      },
+      {
+        "ram": 22,
+        "fran": 5,
+        "till": 8
+      },
+      {
+        "ram": 25,
+        "fran": 9,
+        "till": 12
+      },
+      {
+        "ram": 28,
+        "fran": 13,
+        "till": 16
+      },
+      {
+        "ram": 31,
+        "fran": 17,
+        "till": 20
+      },
+      {
+        "ram": 81,
+        "fran": 21,
+        "till": 24
+      },
+      {
+        "ram": 84,
+        "fran": 25,
+        "till": 28
+      },
+      {
+        "ram": 87,
+        "fran": 29,
+        "till": 32
+      },
+      {
+        "ram": 90,
+        "fran": 33,
+        "till": 36
+      },
+      {
+        "ram": 93,
+        "fran": 37,
+        "till": 40
+      }
+    ]
+  },
+  "faktatexter-medel-lararens-sidor-och-modellerna": {
+    "word": "f26586df55ff24d9d118805e834d944c781e108b43874f154b83e34fd5f3b14a",
+    "pdf": "dc93d00810aa68df228ce5c1921cca42ac168203c260cc9b2fdcaa0a5504dccc",
+    "sidor": 34,
+    "kB": 1258,
+    "datum": "2026-10-19",
+    "karta": [
+      {
+        "ram": 17,
+        "fran": 1,
+        "till": 2
+      },
+      {
+        "ram": 18,
+        "fran": 3,
+        "till": 4
+      },
+      {
+        "ram": 20,
+        "fran": 5,
+        "till": 5
+      },
+      {
+        "ram": 21,
+        "fran": 6,
+        "till": 7
+      },
+      {
+        "ram": 23,
+        "fran": 8,
+        "till": 8
+      },
+      {
+        "ram": 24,
+        "fran": 9,
+        "till": 10
+      },
+      {
+        "ram": 26,
+        "fran": 11,
+        "till": 11
+      },
+      {
+        "ram": 27,
+        "fran": 12,
+        "till": 13
+      },
+      {
+        "ram": 29,
+        "fran": 14,
+        "till": 14
+      },
+      {
+        "ram": 30,
+        "fran": 15,
+        "till": 16
+      },
+      {
+        "ram": 32,
+        "fran": 17,
+        "till": 17
+      },
+      {
+        "ram": 79,
+        "fran": 18,
+        "till": 19
+      },
+      {
+        "ram": 80,
+        "fran": 20,
+        "till": 21
+      },
+      {
+        "ram": 82,
+        "fran": 22,
+        "till": 22
+      },
+      {
+        "ram": 83,
+        "fran": 23,
+        "till": 24
+      },
+      {
+        "ram": 85,
+        "fran": 25,
+        "till": 25
+      },
+      {
+        "ram": 86,
+        "fran": 26,
+        "till": 27
+      },
+      {
+        "ram": 88,
+        "fran": 28,
+        "till": 28
+      },
+      {
+        "ram": 89,
+        "fran": 29,
+        "till": 30
+      },
+      {
+        "ram": 91,
+        "fran": 31,
+        "till": 31
+      },
+      {
+        "ram": 92,
+        "fran": 32,
+        "till": 33
+      },
+      {
+        "ram": 94,
+        "fran": 34,
+        "till": 34
+      }
+    ]
+  },
+  "faktatexter-avancerat": {
+    "word": "00af3e98ae5184c7e9b888aa9150dc581f62b0c52c50ab475777b419cf269997",
+    "pdf": "3859e2fee709fb68a52d3a5ad88451e45e0b0321e58320e2b6827bd456c51bac",
+    "sidor": 48,
+    "kB": 595,
+    "datum": "2026-10-19",
+    "karta": [
+      {
+        "ram": 35,
+        "fran": 1,
+        "till": 5
+      },
+      {
+        "ram": 38,
+        "fran": 6,
+        "till": 10
+      },
+      {
+        "ram": 41,
+        "fran": 11,
+        "till": 15
+      },
+      {
+        "ram": 44,
+        "fran": 16,
+        "till": 20
+      },
+      {
+        "ram": 47,
+        "fran": 21,
+        "till": 25
+      },
+      {
+        "ram": 97,
+        "fran": 26,
+        "till": 30
+      },
+      {
+        "ram": 100,
+        "fran": 31,
+        "till": 35
+      },
+      {
+        "ram": 103,
+        "fran": 36,
+        "till": 40
+      },
+      {
+        "ram": 106,
+        "fran": 41,
+        "till": 44
+      },
+      {
+        "ram": 109,
+        "fran": 45,
+        "till": 48
+      }
+    ]
+  },
+  "faktatexter-avancerat-lararens-sidor-och-modellerna": {
+    "word": "b8dd8c1fc5eb0fbd027e27a9e2080b7e6e2ddb0c9dfd717fbdf9895efbf76584",
+    "pdf": "c1854d354fe2936d8ff6de36c72f007f9dcf5e103f5be0abed9f05f2eec0ce7e",
+    "sidor": 34,
+    "kB": 1178,
+    "datum": "2026-10-19",
+    "karta": [
+      {
+        "ram": 33,
+        "fran": 1,
+        "till": 2
+      },
+      {
+        "ram": 34,
+        "fran": 3,
+        "till": 4
+      },
+      {
+        "ram": 36,
+        "fran": 5,
+        "till": 5
+      },
+      {
+        "ram": 37,
+        "fran": 6,
+        "till": 7
+      },
+      {
+        "ram": 39,
+        "fran": 8,
+        "till": 8
+      },
+      {
+        "ram": 40,
+        "fran": 9,
+        "till": 10
+      },
+      {
+        "ram": 42,
+        "fran": 11,
+        "till": 11
+      },
+      {
+        "ram": 43,
+        "fran": 12,
+        "till": 13
+      },
+      {
+        "ram": 45,
+        "fran": 14,
+        "till": 14
+      },
+      {
+        "ram": 46,
+        "fran": 15,
+        "till": 16
+      },
+      {
+        "ram": 48,
+        "fran": 17,
+        "till": 17
+      },
+      {
+        "ram": 95,
+        "fran": 18,
+        "till": 19
+      },
+      {
+        "ram": 96,
+        "fran": 20,
+        "till": 21
+      },
+      {
+        "ram": 98,
+        "fran": 22,
+        "till": 22
+      },
+      {
+        "ram": 99,
+        "fran": 23,
+        "till": 24
+      },
+      {
+        "ram": 101,
+        "fran": 25,
+        "till": 25
+      },
+      {
+        "ram": 102,
+        "fran": 26,
+        "till": 27
+      },
+      {
+        "ram": 104,
+        "fran": 28,
+        "till": 28
+      },
+      {
+        "ram": 105,
+        "fran": 29,
+        "till": 30
+      },
+      {
+        "ram": 107,
+        "fran": 31,
+        "till": 31
+      },
+      {
+        "ram": 108,
+        "fran": 32,
+        "till": 33
+      },
+      {
+        "ram": 110,
+        "fran": 34,
+        "till": 34
       }
     ]
   }
