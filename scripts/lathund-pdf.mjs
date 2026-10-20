@@ -164,8 +164,9 @@ try {
   }
 } finally {
   try { rmSync(tmp, { recursive: true, force: true }); } catch { /* PowerPoint släpper filerna strax */ }
-  // A4-filerna är bara förlagor till pdf:en och ska aldrig publiceras.
-  try { rmSync(a4Mapp, { recursive: true, force: true }); } catch { /* finns inte */ }
+  // A4-filerna är bara förlagor till pdf:en och ska aldrig publiceras. Bara de tas bort: Word-lathundens och sidlåsets
+  // provfiler står i samma bygge (scripts/validera.mjs, K-484), och valideringen tar bort dem när de är lästa.
+  try { rmSync(join(a4Mapp, 'lathund'), { recursive: true, force: true }); } catch { /* finns inte */ }
 }
 const publicerade = new Set(metoder.map((m) => m.id));
 for (const id of Object.keys(manifest)) if (!publicerade.has(id)) delete manifest[id];
