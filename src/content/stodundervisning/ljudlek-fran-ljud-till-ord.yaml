@@ -25,7 +25,7 @@ material:
   - speglar
   - whiteboardtavlor
   - snabbmallen
-uppdaterad: "2026-10-17"
+uppdaterad: 2026-10-20
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 8
@@ -36,7 +36,7 @@ inledning:
   - "Välj Från ljud till ord när fler än hälften av eleverna har färre än tre rätt av fyra på ljudkollens uppgift 8, sätta ihop och byta. Ljudkollen är den korta kartläggningen med nio uppgifter som du gör med varje elev före insatsen och var tredje vecka. Den står i Ljudlek i grupp, och Från ljud till ord hör till förmåga 8, Sätta ihop och byta, i lektionsbanken där."
 upplagg:
   rubrik: "Så används lektionen"
-  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Från ljud till ord går igenom raderna i Så blir lektionen svårare, oftast i sex till femton pass. Ta nästa rad när dagens elever läser minst två av de tre nya orden i steg 4 utan att stanna och säger vilket ljud som ändrades, två pass i följd. Efter sista raden gör ni hela ljudkollen, som visar vad gruppen gör sedan."
+  text: "Passet har samma ram i alla lektioner: fem minuter ljudstart, 20 minuter lektion i fyra steg och fem minuter avslut. Ljudlek i grupp beskriver gruppen, dagens elever och ljudkollen. Från ljud till ord går igenom raderna i Så blir lektionen svårare, oftast i sex till femton pass. Ta nästa rad när dagens elever läser minst två av de tre nya orden i steg 4 utan att stanna och säger vilket ljud som ändrades, två pass i följd. Efter sista raden gör du hela ljudkollen, som visar vad gruppen gör sedan."
 tabeller:
   - rubrik: "Så blir lektionen svårare"
     plats: "efter-inledning"
@@ -176,14 +176,14 @@ passrutin:
       fas: "Bygg och ändra"
     - text: "Var och en skriver ordet och det nya ordet, och du lyssnar på dagens elever."
       fas: "Mina ord"
-  efterPasset: "Du noterar i snabbmallen vilka av dagens elever som satte ihop och ändrade orden, vad som fastnade, och om gruppen tar samma rad, nästa rad eller nästa lektion."
+  efterPasset: "Du noterar i snabbmallen vilka av dagens elever som satte ihop och ändrade orden, var de fastnade, och om gruppen tar samma rad, nästa rad eller nästa lektion."
 tidsschema:
   rubrik: "Ett pass på 30 minuter"
   text: "Är passet bara 20 minuter blir ljudstarten tre minuter, lektionen 15 och avslutet två. Stegen får då två, fyra, fem och fyra minuter."
   rader:
     - tid: "Före passet"
       fas: "Förberedelse"
-      vad: "Ta fram ljudrutorna, speglarna, magneterna, whiteboardtavlorna och bokstavskorten, en klippt sida per par med gruppens bokstäver. Rita fyra rutor på tavlan. Välj orden ur Orden att ändra och Ordbanken, och skriv dem, paren och dagens elever i snabbmallen."
+      vad: "Ta fram ljudrutorna, speglarna, magneterna, whiteboardtavlorna och bokstavskorten, en klippt sida per par med gruppens bokstäver. Rita fyra rutor på tavlan. Välj orden ur Orden att ändra och Ordbanken. Skriv raden, dagens ljud och dagens elever i snabbmallen."
     - tid: "0–5 min"
       fas: "Ljudstart"
       vad: "Visa dagens ljud, sätt ihop fem ord och dela upp fyra, som i Ljudstarten. Alla svarar samtidigt."
@@ -299,7 +299,7 @@ uppfoljning:
     - nar: "Under passet"
       vad: "I steg 4 lyssnar du på dagens elever: läser eleven ordet utan att stanna, och säger hen vilket ljud som ändrades?"
     - nar: "Efter varje pass"
-      vad: "I snabbmallen noterar du dagens elever och det som fastnade."
+      vad: "I snabbmallen noterar du dagens elever och var de fastnade."
     - nar: "Var tredje vecka"
       vad: "Du gör ljudkollens uppgift 8 om att sätta ihop och byta, uppgift 9 om nya ord och uppgift 4 om bokstävernas ljud."
 mal:
@@ -312,14 +312,20 @@ mal:
     - "byta ett ljud och säga vilket ljud som gick och vilket som kom"
     - "läsa det nya ordet med bokstäverna"
 snabbmall:
-  fore:
-    - "Raden och orden"
-    - "Dagens ljud och orden ur Ordbanken"
-    - "Paren och dagens elever"
-  efter:
-    - "Vilka av dagens elever satte ihop och ändrade orden?"
-    - "Ord och ljud som fastnade"
-    - "Nästa pass: samma rad, nästa rad eller nästa lektion?"
+  text: Bladet gäller veckans tre till fem pass. Raden är gruppens rad i tabellen Så blir lektionen svårare. Under Nästa gång skriver du samma rad, nästa rad eller nästa lektion, och de första veckorna kryssar du det som ska med.
+  pass: 5
+  period: veckan
+  fore: raden, dagens ljud och dagens elever
+  foreHjalp: "Vid varje namn: det du lyssnar efter."
+  efter: det dagens elever sa och gjorde i steg 4, och var de fastnade
+  ska:
+    - Vi läste utan paus och sköt ihop korten.
+    - När vi ändrade ett ljud, sa vi vilket det var.
+    - Eleverna läste varje nytt ord med fingret under.
+  sist:
+    - Det här gör eleverna själva nu som de inte gjorde förut
+    - Jag tar med mig in i nästa vecka
+  not: Ta nästa rad när dagens elever läser minst två av de tre nya orden i steg 4 utan att stanna och säger vilket ljud som ändrades, två pass i följd. Efter sista raden gör du hela ljudkollen, som visar vad gruppen gör sedan.
 grund:
   text: "Barn som drog ut ljuden utan paus läste fler nya ord än barn som stannade mellan ljuden (Gonzalez-⁠Frey och Ehri, 2021). Fonemträning med bokstäver gav nästan dubbelt så stor effekt på läsningen som träning utan bokstäver (National Reading Panel, 2000), och att bygga ord och byta en bokstav i taget gav bättre avkodning (McCandliss m.fl., 2003, i Brady, 2020)."
   kallor: "Bygger på Brady (2020), Gonzalez-⁠Frey och Ehri (2021) och National Reading Panel (2000)."

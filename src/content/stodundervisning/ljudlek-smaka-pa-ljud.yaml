@@ -24,7 +24,7 @@ material:
   - magneter
   - bokstavskorten
   - bokstavskartan
-uppdaterad: "2026-10-17"
+uppdaterad: 2026-10-20
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 5
@@ -162,14 +162,14 @@ passrutin:
       fas: "Fråga och svara"
     - text: "Var och en skriver bokstaven för ljudet i sina tre ord, och du lyssnar på dagens elever."
       fas: "Mina ord"
-  efterPasset: "Du noterar i snabbmallen vilka av dagens elever som sa rätt ljud och skrev eller visade rätt bokstav i rätt ruta, vad som fastnade, och om gruppen tar samma rad, nästa rad eller nästa lektion."
+  efterPasset: "Du noterar i snabbmallen vilka av dagens elever som sa rätt ljud och skrev eller visade rätt bokstav i rätt ruta, var de fastnade, och om gruppen tar samma rad, nästa rad eller nästa lektion."
 tidsschema:
   rubrik: "Ett pass på 30 minuter"
   text: "Är passet bara 20 minuter blir ljudstarten tre minuter, lektionen 15 och avslutet två. Stegen får då två, fyra, fem och fyra minuter."
   rader:
     - tid: "Före passet"
       fas: "Förberedelse"
-      vad: "Ta fram platsrutorna, markörerna, pennorna, trasorna, bokstavskartorna, bokstavskorten, speglarna och arket för gruppens rad, ett per par och ett till dig. Rita platsrutorna på tavlan. Välj orden till ljudstarten ur Ordbanken, och skriv dem, paren och dagens elever i snabbmallen."
+      vad: "Ta fram platsrutorna, markörerna, pennorna, trasorna, bokstavskartorna, bokstavskorten, speglarna och arket för gruppens rad, ett per par och ett till dig. Rita platsrutorna på tavlan. Välj orden till ljudstarten ur Ordbanken. Skriv raden, dagens ljud och dagens elever i snabbmallen."
     - tid: "0–5 min"
       fas: "Ljudstart"
       vad: "Visa dagens ljud, sätt ihop fem ord och dela upp fyra, som i Ljudstarten. Alla svarar samtidigt."
@@ -285,7 +285,7 @@ uppfoljning:
     - nar: "Under passet"
       vad: "I steg 4 lyssnar du på dagens elever: säger eleven bara ljudet, och skriver eller visar hen rätt bokstav i rätt ruta?"
     - nar: "Efter varje pass"
-      vad: "I snabbmallen noterar du dagens elever och det som fastnade."
+      vad: "I snabbmallen noterar du dagens elever och var de fastnade."
     - nar: "Var tredje vecka"
       vad: "Du gör ljudkollens uppgift 5 om sist och i mitten, uppgift 6 om att dela upp och uppgift 4 om bokstävernas ljud."
 mal:
@@ -297,14 +297,20 @@ mal:
     - "säga var ett ljud hörs: först, i mitten eller sist"
     - "skriva eller visa bokstaven för ljudet i rätt ruta"
 snabbmall:
-  fore:
-    - "Raden och arket"
-    - "Dagens ljud och orden ur Ordbanken"
-    - "Paren och dagens elever"
-  efter:
-    - "Vilka av dagens elever sa rätt ljud och skrev eller visade rätt bokstav i rätt ruta?"
-    - "Ord och ljud som fastnade"
-    - "Nästa pass: samma rad, nästa rad eller nästa lektion?"
+  text: Bladet gäller veckans tre till fem pass. Raden är gruppens rad i tabellen Så blir lektionen svårare. Under Nästa gång skriver du samma rad, nästa rad eller nästa lektion, och de första veckorna kryssar du det som ska med.
+  pass: 5
+  period: veckan
+  fore: raden, dagens ljud och dagens elever
+  foreHjalp: "Vid varje namn: det du lyssnar efter."
+  efter: det dagens elever sa och gjorde i steg 4, och var de fastnade
+  ska:
+    - Vi sa ordet långsamt och stannade på ljudet.
+    - Vi blandade korten, så att ingen kunde gissa.
+    - Vi skrev bokstaven i rutan där ljudet hördes.
+  sist:
+    - Det här gör eleverna själva nu som de inte gjorde förut
+    - Jag tar med mig in i nästa vecka
+  not: Ta nästa rad när dagens elever säger rätt ljud och skriver eller visar rätt bokstav i rätt ruta på minst två av sina kort i steg 4, två pass i följd. Efter sista raden går gruppen till nästa förmåga.
 grund:
   text: "Det första ljudet är lättast att höra, det sista svårare och ljudet i mitten svårast. Holländska sexåringar hade 69, 60 och 45 procent rätt, i den ordningen (de Graaff m.fl., 2008). Nybörjare kopplar först bokstäver till det första och det sista ljudet och missar vokalen (Ehri, 2014). Undervisningen ger mest när eleverna arbetar med bokstäverna, i små grupper och med en eller två färdigheter i taget (National Reading Panel, 2000; Foorman m.fl., 2016)."
   kallor: "Bygger på de Graaff m.fl. (2008), Ehri (2014), Foorman m.fl. (2016) och National Reading Panel (2000)."

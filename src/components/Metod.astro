@@ -51,6 +51,7 @@ import { ovrigtfil } from '../lib/ovrigt';
 import { sidlasFor } from '../lib/sidlas';
 import { enhetensUtskrifter, radensUtskrifter, utskriftAdress } from '../lib/utskrift';
 import Bladgrupp from './Bladgrupp.astro';
+import Snabbmall from './Snabbmall.astro';
 import Filval from './Filval.astro';
 import Pabordet from './Pabordet.astro';
 import { bladNamn, delensRad, kartan, metodensBlad, radensDel } from '../lib/karta';
@@ -654,18 +655,7 @@ const meny = [
     <section id="snabbmall">
       <h2>{d.snabbmall.rubrik}</h2>
       {d.snabbmall.text && <p>{d.snabbmall.text}</p>}
-      <table class="m-snabbmall">
-        <caption>SNABBMALL · {d.titel}</caption>
-        <colgroup><col style="width:38%" /><col style="width:62%" /></colgroup>
-        <tbody>
-          <tr class="avsnitt"><th scope="col">Före passet</th><th scope="col"><span class="visually-hidden">Att fylla i</span></th></tr>
-          {d.snabbmall.fore.map((f) => <tr><th scope="row">{f}</th><td></td></tr>)}
-        </tbody>
-        <tbody>
-          <tr class="avsnitt"><th scope="col">Efter passet: kort notering</th><th scope="col"><span class="visually-hidden">Att fylla i</span></th></tr>
-          {d.snabbmall.efter.map((f) => <tr><th scope="row">{f}</th><td></td></tr>)}
-        </tbody>
-      </table>
+      <Snabbmall sm={d.snabbmall} titel={d.titel} id={id} />
     </section>
   )}
   {/* Efter avsnittet, som i Word: avsnittet hålls ihop i utskriften, filmen för sig. */}

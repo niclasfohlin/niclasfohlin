@@ -17,6 +17,7 @@
 // ut i full storlek i stället för 85 procent. Textuppskattningen räknar med den verkliga bredden, så att tabeller
 // och rutor fördelar höjden rätt också i A4.
 import { readFileSync } from 'node:fs';
+import { snabbFalt } from './snabbmall';
 import PptxGenJS from 'pptxgenjs';
 import type { CollectionEntry } from 'astro:content';
 import { FILM_UPPHOV, filmNamn, metodensFilmer } from './film';
@@ -97,7 +98,8 @@ function bilder(d: MetodData) {
   const delar = (l.mall.underrad ?? '').split(' · ');
   const hoger = delar.filter((x) => /_{3,}/.test(x));
   const vanster = delar.filter((x) => !/_{3,}/.test(x));
-  const block: any[] = l.mall.block.map((x) => (x.typ === 'snabbmall' ? { typ: 'snabbmall', rubrik: `SNABBMALL · ${d.titel}`, fore: d.snabbmall!.fore, efter: d.snabbmall!.efter } : x));
+  // Snabbmallens Före och Efter, med kolumnernas namn (snabbFalt i src/lib/snabbmall.ts, som riggens lathund).
+  const block: any[] = l.mall.block.map((x) => (x.typ === 'snabbmall' ? { typ: 'snabbmall', rubrik: `SNABBMALL · ${d.titel}`, ...snabbFalt(d.snabbmall!) } : x));
   let bild3: any = { titel: l.mall.rubrik, bandVanster: versaler(vanster.join(' · ')), bandHoger: versaler(hoger.join('  ')), anteckning: `${d.titel}, mallen som används under passet.` };
   const tomTabell = block.find((x) => x.typ === 'tabell' && x.rader.every((r: string[]) => r.every((c) => !c.trim())));
   const snabb = block.find((x) => x.typ === 'snabbmall');

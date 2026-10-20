@@ -319,14 +319,20 @@ mal:
     - Addera och subtrahera bråk med samma nämnare, eller där den ena nämnaren går jämnt upp i den andra, och uppskatta svaret först
     - Räkna ut en del av ett antal, och hitta det hela när en del är känd
 snabbmall:
-  fore:
-    - Vecka, fokus och pass (1, 2 eller 3)
-    - Det första bråket och vad jag säger
-    - Det sista bråket till Veckans mening
-  efter:
-    - Vem kunde säga vad nämnaren och täljaren betyder?
-    - Vem gjorde veckans vanliga fel?
-    - Vad visar jag igen nästa pass?
+  text: Bladet gäller veckans pass 1 och 2, och pass 3 när det går. Före passet skriver du vad eleverna ska se och säga i dag. Efter passet skriver du det du hörde och vad du visar igen, och de första veckorna kryssar du det som ska med. Sist i veckan läser du bladet.
+  pass: 3
+  period: veckan
+  fore: det eleverna ska se och säga i dag
+  foreHjalp: Skriv också felet du lyssnar efter, och hos vem.
+  efter: det jag hörde och såg, med elevens ord
+  ska:
+    - Vi sa bråken i ord, som tre fjärdedelar.
+    - Jag frågade efter det hela innan eleven svarade.
+    - När någon fastnade gick vi tillbaka till materialet.
+  sist:
+    - Det här visar och säger eleverna nu som de inte gjorde förut
+    - Jag tar med mig in i nästa vecka
+  not: Det du visar först, veckans mening och felet du lyssnar efter står i veckans ruta Till läraren under Kursens material, där kartläggningen står först.
 checklista:
   punkter:
     - Tagit fram dagens material och bladet Bråket på fyra sätt, som finns i planeringsmallarna.

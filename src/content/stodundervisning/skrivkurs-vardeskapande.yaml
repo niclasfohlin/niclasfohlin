@@ -29,7 +29,7 @@ material:
   - Mina drag och Kortet till skribenten
   - fotona eller kartan
   - diplom
-uppdaterad: 2026-10-19
+uppdaterad: 2026-10-20
 relaterade:
   - skrivkurs-berattelseram
   - texttyper-i-grupp
@@ -338,15 +338,20 @@ mal:
     - Se var läsaren stannar, och ändra
     - Bearbeta en text tills den är klar för läsaren
 snabbmall:
-  fore:
-    - Datum, projekt, vecka och dag 1 eller dag 2
-    - Veckans text, skrivhandling och skrivdrag
-    - Mentortexten, de två texterna och den smala frågan
-    - Min text på tavlan och dagens uppgift
-  efter:
-    - Vem använde draget, och vem behöver stöd?
-    - "Två sätt dag 2: vad skrev många, och vad fattades?"
-    - Vad är kvar till mötet med läsaren?
+  text: Bladet gäller veckans dag 1, dag 2 och ett tredje pass om ni har det. Före passet skriver du vad eleverna ska lära sig i dag, och efter passet det du såg. De första veckorna kryssar du det som ska med. Sist i veckan läser du bladet och elevernas rader på Mina drag.
+  pass: 3
+  period: veckan
+  fore: det eleverna ska lära sig i dag
+  foreHjalp: "Dag 1: draget. Dag 2: det som fattades i många texter."
+  efter: vem som använde draget och var läsaren stannade
+  ska:
+    - Jag pekade på en mening och ställde en smal fråga om draget.
+    - Det jag skrev åt eleverna var ordagrant det de sa.
+    - Varje text fick en läsare, och eleverna hann ändra efter läsaren.
+  sist:
+    - Det här gör eleverna nu som de inte gjorde förut
+    - Jag tar med mig in i nästa vecka
+  not: "Efter dag 2 skriver du under Nästa gång också vad som är kvar till mötet med läsaren. I veckorna med Ditt svar skriver du efter dag 1 en lapp i varje text: en fråga som läsaren skulle ställa."
 checklista:
   punkter:
     - Läst veckans sida och vet när läsarna kommer.

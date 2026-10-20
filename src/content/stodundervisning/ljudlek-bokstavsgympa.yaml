@@ -24,7 +24,7 @@ material:
   - speglar
   - bokstavskartan
   - snabbmallen
-uppdaterad: "2026-10-17"
+uppdaterad: 2026-10-20
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 4
@@ -169,14 +169,14 @@ passrutin:
       fas: "Peka och säg"
     - text: "Dagens elever läser ett ord var på golvet, och de andra pekar på sin karta."
       fas: "Läs på golvet"
-  efterPasset: "Du noterar i snabbmallen vilka av dagens elever som läste ordet utan paus, vad som fastnade, och om gruppen tar samma rad, nästa rad eller nästa lektion."
+  efterPasset: "Du noterar i snabbmallen vilka av dagens elever som läste ordet utan paus, var de fastnade, och om gruppen tar samma rad, nästa rad eller nästa lektion."
 tidsschema:
   rubrik: "Ett pass på 30 minuter"
   text: "Är passet bara 20 minuter blir ljudstarten tre minuter, lektionen 15 och avslutet två. Stegen får då två, fyra, fem och fyra minuter."
   rader:
     - tid: "Före passet"
       fas: "Förberedelse"
-      vad: "Lägg gruppens golvbokstäver i en följd vid sidan om, och dra ett streck under dagens ljud på kartorna när det är nytt. Ta fram bokstavskorten och speglarna. Välj ord ur Orden att gå och ord till ljudstarten ur Ordbanken. Skriv dem, paren och dagens elever i snabbmallen."
+      vad: "Lägg gruppens golvbokstäver i en följd vid sidan om, och dra ett streck under dagens ljud på kartorna när det är nytt. Ta fram bokstavskorten och speglarna. Välj ord ur Orden att gå och ord till ljudstarten ur Ordbanken. Skriv raden, dagens ljud och dagens elever i snabbmallen."
     - tid: "0–5 min"
       fas: "Ljudstart"
       vad: "Visa dagens ljud, sätt ihop fem ord och dela upp fyra, som i Ljudstarten. Alla svarar samtidigt."
@@ -292,7 +292,7 @@ uppfoljning:
     - nar: "Under passet"
       vad: "I steg 4 lyssnar du på dagens elever: säger eleven ljudet och inte namnet, och håller hen ljuden utan paus?"
     - nar: "Efter varje pass"
-      vad: "I snabbmallen noterar du dagens elever och det som fastnade. Stryk ringen på elevens blad från ljudkollen när hen kan ljudet."
+      vad: "I snabbmallen noterar du dagens elever och var de fastnade. Stryk ringen på elevens blad från ljudkollen när hen kan ljudet."
     - nar: "Var tredje vecka"
       vad: "Du gör ljudkollens uppgift 4 om bokstävernas ljud och uppgift 5 om sist och i mitten."
 mal:
@@ -304,14 +304,20 @@ mal:
     - "hålla ljuden ihop och läsa ett ord med två till fyra bokstäver som gruppen har haft"
     - "läsa från vänster till höger, också när ordet har ett konsonantmöte först"
 snabbmall:
-  fore:
-    - "Raden och orden att gå"
-    - "Dagens ljud och orden ur Ordbanken"
-    - "Paren och dagens elever"
-  efter:
-    - "Vilka av dagens elever läste utan paus?"
-    - "Ord och ljud som fastnade"
-    - "Nästa pass: samma rad, nästa rad eller nästa lektion?"
+  text: Bladet gäller veckans tre till fem pass. Raden är gruppens rad i tabellen Så blir lektionen svårare. Under Nästa gång skriver du samma rad, nästa rad eller nästa lektion, och de första veckorna kryssar du det som ska med.
+  pass: 5
+  period: veckan
+  fore: raden, dagens ljud och dagens elever
+  foreHjalp: "Vid varje namn: det du lyssnar efter."
+  efter: det dagens elever sa och gjorde i steg 4, och var de fastnade
+  ska:
+    - Vi sa ljudet och inte bokstavens namn.
+    - Vi höll ljudet tills foten landade på nästa.
+    - Jag sa inte ordet innan eleven hade läst det.
+  sist:
+    - Det här gör eleverna själva nu som de inte gjorde förut
+    - Jag tar med mig in i nästa vecka
+  not: Ta nästa rad när dagens elever läser orden utan paus två pass i följd och nästa rad har fyra ord med gruppens bokstäver. Gruppen går till nästa förmåga efter raden Med klusil, eller tidigare om ljudkollen visar det.
 grund:
   text: "Tydlig undervisning i bokstävernas ljud ihop med ljuden i ord har starkt forskningsstöd, särskilt i små grupper (Foorman m.fl., 2016; Piasta och Wagner, 2010). När eleverna övade bokstäverna för sig blev läsningen bara lite bättre (Piasta och Wagner, 2010). En rörelse med hela kroppen till varje ljud lärde barnen fler ljud än vanlig undervisning, men de läste inte ord bättre (Damsgaard m.fl., 2022). Att hålla ljuden ihop utan paus gav bättre avkodning (Gonzalez-⁠Frey och Ehri, 2021)."
   kallor: "Bygger på Damsgaard m.fl. (2022), Foorman m.fl. (2016), Gonzalez-⁠Frey och Ehri (2021) och Piasta och Wagner (2010)."

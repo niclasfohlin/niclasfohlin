@@ -171,14 +171,14 @@ passrutin:
       fas: "Byt ett ord"
     - text: "Var och en skriver en ny mening på sin whiteboardtavla och läser med fingret under."
       fas: "Skriv meningen"
-  efterPasset: "Du noterar i snabbmallen vilka av dagens elever som i steg 4 fick med alla ord, mellanrum, stor bokstav och punkt, vad som fastnade, och om gruppen tar samma rad, nästa rad eller nästa lektion."
+  efterPasset: "Du noterar i snabbmallen vilka av dagens elever som i steg 4 fick med alla ord, mellanrum, stor bokstav och punkt, var de fastnade, och om gruppen tar samma rad, nästa rad eller nästa lektion."
 tidsschema:
   rubrik: "Ett pass på 30 minuter"
   text: "Är passet bara 20 minuter blir ljudstarten tre minuter, lektionen 15 och avslutet två. Stegen får då två, fyra, fem och fyra minuter."
   rader:
     - tid: "Före passet"
       fas: "Förberedelse"
-      vad: "Lägg gruppens små bokstäver i en hög per par och de stora mellan två par. Ta fram bokstavskorten, speglarna, klossarna och whiteboardtavlorna. Skriv de stora bokstäverna som dagens meningar behöver bredvid de små i hörnet av tavlan. Fyll i snabbmallen."
+      vad: "Lägg gruppens små bokstäver i en hög per par och de stora mellan två par. Ta fram bokstavskorten, speglarna, klossarna och whiteboardtavlorna. Skriv de stora bokstäverna som dagens meningar behöver bredvid de små i hörnet av tavlan. Skriv raden, dagens ljud och dagens elever i snabbmallen."
     - tid: "0–5 min"
       fas: "Ljudstart"
       vad: "Visa dagens ljud, sätt ihop fem ord och dela upp fyra, som i Ljudstarten. Alla svarar samtidigt."
@@ -294,7 +294,7 @@ uppfoljning:
     - nar: "Under passet"
       vad: "I steg 4 lyssnar du på dagens elever. Säger de meningen igen själva, och får de med alla ord, mellanrum, stor bokstav och punkt? Läser de det som står?"
     - nar: "Efter varje pass"
-      vad: "I snabbmallen noterar du det dagens elever skrev och det som fastnade."
+      vad: "I snabbmallen noterar du det dagens elever skrev och var de fastnade."
     - nar: "Var tredje vecka"
       vad: "Du gör ljudkollens uppgift 9 om påhittade ord, uppgift 7 om att skriva ord och uppgift 4 om bokstävernas ljud."
 mal:
@@ -305,14 +305,20 @@ mal:
     - "bygga och skriva en mening på två till fyra ord, med mellanrum, stor bokstav och punkt"
     - "läsa tillbaka det som ligger eller står, med fingret under, och läsa ett ord som kamraten har bytt"
 snabbmall:
-  fore:
-    - "Raden och meningarna"
-    - "Dagens ljud och orden ur Ordbanken"
-    - "Paren och dagens elever"
-  efter:
-    - "Det dagens elever skrev i steg 4, som olaler för Ola ler"
-    - "Ord och ljud som fastnade"
-    - "Nästa pass: samma rad, nästa rad eller nästa lektion?"
+  text: Bladet gäller veckans tre till fem pass. Raden är gruppens rad i tabellen Så blir lektionen svårare. Under Nästa gång skriver du samma rad, nästa rad eller nästa lektion, och de första veckorna kryssar du det som ska med.
+  pass: 5
+  period: veckan
+  fore: raden, dagens ljud och dagens elever
+  foreHjalp: "Vid varje namn: det du lyssnar efter."
+  efter: det dagens elever sa och gjorde i steg 4, och var de fastnade
+  ska:
+    - Vi sa meningen igen och lade en kloss per ord.
+    - Vi lämnade ett fingers mellanrum mellan orden.
+    - Efter varje ord läste vi från början.
+  sist:
+    - Det här gör eleverna själva nu som de inte gjorde förut
+    - Jag tar med mig in i nästa vecka
+  not: Ta nästa rad när dagens elever skriver en mening själva med alla ord, mellanrum, stor bokstav och punkt, två pass i följd. Efter sista raden visar ljudkollens uppgift 9 vad gruppen gör sedan.
 grund:
   text: "I åk 1 betydde det muntliga språket, arbetsminnet och stavningen mest för hur eleverna skrev (Kim och Schatschneider, 2017). Därför säger eleven meningen igen och lägger en kloss för varje ord innan hen bygger. Elever i riskzonen för läs- och skrivsvårigheter stavade och läste bättre när de fick lära sig att skriva ord ljud för ljud (Weiser och Mathes, 2011). Barn i åk 1 gjorde större framsteg i sitt eget skrivande när de skrev en text tillsammans tio minuter om dagen och turades om att hålla pennan (Roth och Guinee, 2011)."
   kallor: "Bygger på Fohlin och Wilson, Skriv! (utkommer 2027), Kim och Schatschneider (2017), Weiser och Mathes (2011) och Roth och Guinee (2011)."

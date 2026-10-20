@@ -468,10 +468,10 @@ passrutin:
       fas: Samtala om texten
     - text: Var och en säger vad hen kom fram till och hur, med sin ledtråd, och vad en kamrat sa som fick hen att tänka nytt.
       fas: Avsluta
-  efterPasset: Skriv en kort notering efter pass 1 och 2 på raden Pass 1 och 2 i Veckans cykel. I pass 3 fyller du i lyssningsbladet, och efter pass 3 resten av Veckans cykel.
+  efterPasset: Efter varje pass skriver du på passets rad i Veckans cykel det eleverna sa och vad som händer nästa gång. I pass 3 fyller du i lyssningsbladet, och efter pass 3 skriver du vad du visar nästa vecka.
 tidsschema:
   rubrik: 30 minuter, del för del
-  text: Läs Veckans cykel från förra veckan innan du förbereder passet. Sedan följer du tidsschemat.
+  text: Läs förra passets rad i Veckans cykel innan du förbereder passet, och före pass 1 förra veckans blad. Sedan följer du tidsschemat.
   rader:
     - tid: Före passet
       fas: Förberedelse
@@ -644,7 +644,7 @@ uppfoljning:
     - nar: Före insatsen
       vad: Varje elev gör kartläggningens text före, enskilt med dig, på fem till åtta minuter. Läs texten högt först på Lättläst och för den som avkodar mödosamt.
     - nar: Varje vecka
-      vad: Du läser lyssningsbladet och frågetecknen i pass 3, också vem som byggde vidare. Nästa vecka visar du Det står om eleverna gissar utan ledtråd, Jag vet om de bara letar efter ord och Stanna om de läser förbi stoppet.
+      vad: Du läser lyssningsbladet och frågetecknen i pass 3, också vem som byggde vidare. Nästa vecka visar du ett tankesteg efter det du hörde. Gissar eleverna utan ledtråd, visar du Det står. Letar de bara efter ord, visar du Jag vet. Läser de förbi stoppet, visar du Stanna.
     - nar: Efter sex till åtta veckor
       vad: Varje elev gör kartläggningens text efter, som är lika svår. Jämför poängen med kartläggningen före, och lyssningsbladen med vecka 1 och 2. Se också om eleven sätter frågetecken i sin bänkbok.
 mal:
@@ -661,18 +661,22 @@ mal:
     - Börja läsa mellan raderna i sin egen läsning
 snabbmall:
   rubrik: Veckans cykel
-  text: "En halv sida att fylla i. Delen Före passet fyller du i före pass 1, och delen Efter passet efter pass 1, 2 och 3. Det du hör i pass 3 bestämmer vad du visar nästa vecka."
-  fore:
-    - Det jag hörde förra veckan
-    - Tankesteget jag visar i pass 1
-    - Samtalsdraget vi övar
-    - Slaget och texterna i pass 1, 2 och 3
-    - Startmeningarna och paren
-  efter:
-    - "Pass 1 och 2: vem som byggde vidare, och vem som var tyst"
-    - "Pass 3: det flest elever gjorde, ur lyssningsbladet"
-    - "Klarade eleverna slutsatsen, och med hur mycket stöd?"
+  text: Bladet gäller veckans tre pass. Före och efter passet skriver du på passets rad, och efter pass 3 också det flest elever gjorde enligt lyssningsbladet. De första veckorna kryssar du det som ska med. Det du hör i pass 3 bestämmer vad du visar nästa vecka.
+  pass: 3
+  period: veckan
+  overst:
+    - Tankesteget jag visar i pass 1 ________________ och samtalsdraget
+  fore: det eleverna ska lära sig i dag
+  foreHjalp: Det de listar ut i texten och ur vilka ledtrådar.
+  efter: det eleverna sa, vem som byggde vidare och vem som var tyst
+  ska:
+    - I pass 1 tänkte jag högt hela vägen, och sedan tog eleverna över.
+    - Alla sa en tanke innan någon pratade en tredje gång.
+    - Jag frågade ”Hur vet du det?” också när jag höll med.
+  sist:
+    - Det här gör eleverna nu själva eller med mindre stöd
     - Nästa vecka visar jag
+  not: Gissar eleverna utan ledtråd, visar du Det står. Letar de bara efter ord, visar du Jag vet. Läser de förbi stoppet, visar du Stanna. Vecka 1 visar du Det står, Jag vet, Alltså tror jag och samtalskortets två första rader.
 checklista:
   punkter:
     - Valt tankesteg och samtalsdrag ur Veckans cykel.
@@ -3875,7 +3879,7 @@ mallar:
       - Steget som saknades
     rader: 8
     underrad: "Vecka: ____ · Text och fråga: ______________________"
-    text: Fyll i bladet i pass 3. Skriv det eleven sa med elevens egna ord och vilken ledtråd hen pekade på, med ett h efter om den kom med din hjälp. Skriv också när en elev bygger vidare på en kamrat eller tänker annorlunda. I sista kolumnen skriver du det tankesteg som saknades. Efter pass 3 läser du bladet och väljer vad du visar nästa vecka.
+    text: Fyll i bladet i pass 3. Skriv det eleven sa med elevens egna ord och vilken ledtråd hen pekade på, med ett h efter om den kom med din hjälp. Skriv också när en elev bygger vidare på en kamrat eller tänker annorlunda. I sista kolumnen skriver du det tankesteg som saknades. Efter pass 3 läser du bladet och skriver i Veckans cykel vad du visar nästa vecka.
   - rubrik: Kartläggningens protokoll
     typ: rutnat
     kolumner:
@@ -3969,7 +3973,7 @@ lathund:
             - Vem tänker annorlunda?
         - tid: 26–30
           fas: 5 · Avsluta
-          vad: Var och en säger en slutsats, en ledtråd och vad kamraten sa, i par när ni är fler än fyra. Efteråt skriver du en kort notering i Veckans cykel, och efter pass 3 fyller du i resten av mallen.
+          vad: Var och en säger en slutsats, en ledtråd och vad kamraten sa, i par när ni är fler än fyra. Efteråt skriver du på passets rad i Veckans cykel, och efter pass 3 vad du visar nästa vecka.
   mall:
     rubrik: Korten vid bordet
     underrad: "Lärarens översikt · elevens kort står stort under Materialet"
@@ -4033,7 +4037,7 @@ lathund:
       - Ledtrådsbladet i pass 2 och 3
       - Lyssningsbladet i pass 3
       - Tavla för startmeningen
-    varjePass: Du skriver en kort notering i Veckans cykel efter varje pass.
+    varjePass: Du skriver på passets rad i Veckans cykel före och efter varje pass.
 film:
   sekunder: 29.94
   beskrivning: "I pass 1 stannar läraren vid stoppet. Läraren säger: ”Vänta, här står inte vem som tog bullarna.” Läraren stryker under två ledtrådar. Läraren säger: ”Det står mormors stol, och hans händer är rena. Jag vet att den som äter bullar får kladdiga fingrar, och att man sätter sig där man äter. Alltså tror jag att det inte var lillebror.” Läraren läser vidare. Eleven säger: ”Jag tror att det var mormor! Hon torkar munnen.”"

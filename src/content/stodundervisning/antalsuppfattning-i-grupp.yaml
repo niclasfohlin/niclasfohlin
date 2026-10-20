@@ -394,14 +394,22 @@ mal:
     - Räkna talsort för talsort och skriva det som skriftlig huvudräkning
     - "Åk 4–5: bygga decimaltal och visa negativa tal på tallinjen"
 snabbmall:
-  fore:
-    - "Vecka, fokus och pass: tiobas, talbrickor eller pengar"
-    - Det jag visar först och vad jag säger
-    - Korten paren och eleverna får
-  efter:
-    - Vem växlade själv och kunde säga vad som hände?
-    - Vem byggde på fel plats eller läste fel?
-    - Vad behöver jag visa igen nästa pass?
+  text: Bladet gäller veckans tre pass. Före passet skriver du det eleverna ska se i dag. Efter passet skriver du vem som växlade själv och sa vad som hände, och vad du visar igen. De första veckorna kryssar du det som ska med, och sist i veckan läser du bladet.
+  pass: 3
+  period: veckan
+  overst:
+    - Felet att lyssna efter
+  fore: det eleverna ska se i dag
+  foreHjalp: "De två talen, och meningen som börjar ”I dag såg vi att”."
+  efter: vem som växlade själv och sa vad som hände
+  ska:
+    - Jag byggde först och sa vad jag gjorde innan eleverna byggde.
+    - Eleverna växlade själva och sa det, också när jag hade visat igen.
+    - Vi höll oss till veckans fokus, och sist sa vi det i en mening.
+  sist:
+    - Det här bygger, växlar och säger eleverna nu själva
+    - Jag tar med mig in i nästa vecka
+  not: Felet står under Lyssna efter i rutan Till läraren, i gruppens paket. I pass 1 visar eleverna en uppgift ur förra veckans läxa, och efter passet får de veckans läxa.
 checklista:
   punkter:
     - "Tagit fram dagens material: tiobas, talbrickor eller pengar."

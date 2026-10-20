@@ -757,6 +757,52 @@ button.lank:hover { color: var(--farg-accent); }
 .m-bockar.tva li:nth-child(4n+3), .m-bockar.tva li:nth-child(4n+4) { background: var(--farg-ton-svag); }
 .m-rensa { font-family: var(--typsnitt-ui); font-size: 0.85rem; color: var(--farg-text-svag); margin: -0.75rem 0 1.25rem; }
 .m-snabbmall th { font-weight: 700; }
+/* Snabbmallen på metodens sida (Snabbmall.astro, K-487): bladet på höjden, med Words band, rubriker och ordning. Passens
+   rad står en gång, och kolumnerna och rutorna staplas i telefonen; från 40rem står de bredvid varandra som i Word.
+   .m-snabbmall ovan är lathundens block. */
+.m-snabb { margin: 1rem 0 0; border: 1px solid var(--farg-kant); font-family: var(--typsnitt-ui); font-size: 0.95rem; line-height: 1.45; }
+.m-snabb p { margin: 0; }
+.m-snabb-band { padding: 0.5rem 0.75rem; background: var(--farg-accent); color: #fff; font-weight: 700; }
+.m-snabb-overst { padding: 0.4rem 0.75rem 0.5rem; color: var(--farg-text-svag); font-size: 0.875rem; }
+.m-snabb-overst .falt { display: inline-block; margin-right: 1.5rem; }
+.m-snabb-linje { font-style: normal; display: inline-block; width: 4.5rem; height: 1em; border-bottom: 1px solid currentColor; vertical-align: baseline; }
+.m-snabb-linje.lang { width: 8rem; }
+.m-snabb-avsnitt { padding: 0.45rem 0.75rem; background: var(--farg-accent-ljus); color: var(--farg-accent); font-weight: 700; border-top: 1px solid var(--farg-kant); }
+.m-snabb-hjalp { font-weight: 400; color: var(--farg-text-svag); font-size: 0.875rem; }
+.m-snabb-avsnitt .m-snabb-hjalp { margin-left: 0.35rem; }
+.m-snabb-kol, .m-snabb-ska { list-style: none; margin: 0; padding: 0; }
+.m-snabb-kol li, .m-snabb-ska li { padding: 0.5rem 0.75rem; border-top: 1px solid var(--farg-kant); }
+.m-snabb-kol .rubrik { font-weight: 700; color: var(--farg-accent); }
+.m-snabb-kol .fore-hjalp { display: block; }
+.m-snabb-kol .tal .m-snabb-hjalp { display: inline; }
+.m-snabb-kol .tal .m-snabb-hjalp::before { content: "· "; }
+.m-snabb-kol .rad { display: none; }
+.m-snabb-ruta { display: inline-block; flex: none; width: 0.8rem; height: 0.8rem; border: 1.5px solid var(--farg-accent); border-radius: 2px; }
+.m-snabb-ska .rutor { display: flex; flex-wrap: wrap; gap: 0.35rem 0.95rem; margin-top: 0.3rem; font-size: 0.8rem; color: var(--farg-text-svag); }
+.m-snabb-ska .rutor > span { display: inline-flex; align-items: center; gap: 0.3rem; }
+.m-snabb-ska .rutor b { font-weight: 400; }
+.m-snabb-ska-huvud { display: none; }
+.m-snabb-sist { display: grid; }
+.m-snabb-sist p { padding: 0.5rem 0.75rem; border-top: 1px solid var(--farg-kant); font-weight: 700; }
+.m-snabb-pil::before { content: "→ "; color: var(--farg-accent); }
+.m-snabb-not { font-family: var(--typsnitt-ui); font-size: 0.875rem; color: var(--farg-text-svag); margin: 0.4rem 0 0.5rem; }
+@media (min-width: 40rem) {
+  .m-snabb-kol { display: grid; grid-template-columns: 4.5rem 1fr 1.3fr 0.7fr; grid-template-rows: auto minmax(3.2rem, auto); }
+  .m-snabb-kol li { display: grid; grid-row: span 2; grid-template-rows: subgrid; padding: 0; border-left: 1px solid var(--farg-kant); }
+  .m-snabb-kol li:first-child { border-left: 0; }
+  .m-snabb-kol li > span:first-child { padding: 0.5rem 0.75rem; }
+  .m-snabb-kol .tal { display: none; }
+  .m-snabb-kol .rad { display: block; padding: 0.35rem 0.75rem; border-top: 1px solid var(--farg-kant); }
+  .m-snabb-kol .rad .m-snabb-hjalp { display: block; }
+  .m-snabb-ska-huvud, .m-snabb-ska li { display: grid; grid-template-columns: minmax(0, 1fr) repeat(var(--pass), 2.75rem); align-items: center; }
+  .m-snabb-ska-huvud { padding: 0.35rem 0.75rem; border-top: 1px solid var(--farg-kant); font-weight: 700; color: var(--farg-accent); }
+  .m-snabb-ska-huvud span + span, .m-snabb-ska .rutor > span { justify-self: center; }
+  .m-snabb-ska .rutor { display: contents; }
+  .m-snabb-ska .rutor b { display: none; }
+  .m-snabb-sist { grid-template-columns: 1fr 1fr; }
+  .m-snabb-sist p { min-height: 3.6rem; }
+  .m-snabb-sist p + p { border-left: 1px solid var(--farg-kant); }
+}
 .m-snabbmall caption { caption-side: top; text-align: left; background: var(--farg-accent); color: #fff; font-weight: 700; padding: 0.55rem 0.7rem; border: 1px solid var(--farg-accent); }
 .m-snabbmall .avsnitt th { background: var(--farg-accent-ljus); color: var(--farg-accent); }
 .m-snabbmall .avsnitt th + th { border-left: 0; }

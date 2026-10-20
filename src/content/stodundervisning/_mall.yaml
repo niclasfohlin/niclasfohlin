@@ -240,12 +240,23 @@ uppfoljning:
 mal:
   punkter:
     - Vad eleven ska kunna göra efter insatsen.
+# Snabbmallen som ramverk (K-487, src/lib/snabbmall.ts, riggens docs/snabbmall.md): ett blad för veckans pass.
 snabbmall:
-  text: En halv sida att fylla i före och efter varje pass.
-  fore:
-    - Fält att fylla i före passet
-  efter:
-    - Fält att fylla i efter passet
+  text: Bladet gäller veckans fyra pass. Före passet skriver du vad eleverna ska lära sig i dag. Efter passet skriver du det du såg och vad ni gör nästa gång, och de första veckorna kryssar du det som ska med. Sist i veckan läser du bladet.
+  pass: 4                  # passraderna på bladet, 3 till 6, efter metodens rytm
+  period: veckan           # veckan, två veckor, tre veckor eller fyra veckor
+  # overst: [Raden överst, som skrivs en gång per blad]   # valfri, högst två
+  fore: det eleverna ska lära sig i dag                    # med metodens ord
+  foreHjalp: "Det du lyssnar efter hos var och en."        # valfri, grå under Före
+  efter: det jag såg, med elevens ord
+  ska:                     # tre saker som ska med i varje pass, ur Tre saker att hålla fast vid och rollen, i dåtid, en rad var (högst cirka 65 tecken med tre pass, 55 med fyra, 48 med fem)
+    - Vi gjorde det första som ska med.
+    - Jag gjorde det andra.
+    - Eleverna gjorde det tredje.
+  sist:
+    - Det här gör eleverna nu som de inte gjorde förut
+    - Jag tar med mig in i nästa vecka
+  # not: Det läraren behöver veta om bladet, högst två rader.
 checklista:
   punkter:
     - Vad som ska vara gjort inför passet.

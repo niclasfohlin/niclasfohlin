@@ -8,6 +8,7 @@ import { BAGE, ordgrupper, utanStod } from './lib/lasflyt';
 import { EFTER_FORMER, HOGST_EXTRAFILMER, platsFel, tolkaEfter } from './lib/film';
 import { centralAv, registerFel, textplatsFel, tolkaTextplats, TEXTPLATS_FORMER } from './lib/centrala';
 import { HOGST_LEKTIONSKORT, LEKTIONSKORT_PLATS, lektionskortFel } from './lib/lektionskort';
+import { SNABB_PERIODER } from './lib/snabbmall';
 import { forstaLed, radensDel } from './lib/karta';
 import { veckofel } from './lib/veckomaterial';
 import { arskursFel } from './lib/tackning';
@@ -411,11 +412,22 @@ const metodensFalt = z.strictObject({
       text: z.string().default('Efter perioden ska eleven oftare kunna:'),
       punkter: z.array(z.string()).min(1),
     }).optional(),
+    // Snabbmallen som ramverk (metodriggen 2026-10-20, K-487, src/lib/snabbmall.ts): ett blad för veckans pass, eller två
+    // till fyra veckors, med en rad per pass (fore och efter är kolumnernas namn), tre saker som ska med i varje pass att
+    // kryssa (ska) och två rutor sist (sist). overst är högst två rader att fylla i en gång per blad. Den gamla formen,
+    // med listor med fält före och efter passet, finns inte längre.
     snabbmall: z.strictObject({
       rubrik: z.string().default('Snabbmall'),
-      text: z.string().optional(),
-      fore: z.array(z.string()).min(1),
-      efter: z.array(z.string()).min(1),
+      text: text.optional(),
+      pass: z.number().int().min(3, 'Bladet har 3 till 6 pass.').max(6, 'Bladet har 3 till 6 pass.'),
+      period: z.enum(SNABB_PERIODER).default('veckan'),
+      overst: z.array(text).max(2, 'Högst två rader överst.').optional(),
+      fore: text,
+      foreHjalp: text.optional(),
+      efter: text,
+      ska: z.array(text).length(3, 'Tre saker ska med i varje pass (ska).'),
+      sist: z.array(text).length(2, 'Två rutor sist (sist).'),
+      not: text.optional(),
     }).optional(),
     checklista: z.strictObject({
       rubrik: z.string().default('Checklista inför passet'),

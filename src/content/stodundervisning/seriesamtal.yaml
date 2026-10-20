@@ -116,7 +116,7 @@ tabeller:
   - rubrik: "Samtalsteknikerna: vad du gör och hur det låter"
     plats: efter-steg
     meny: true
-    text: Med de här åtta teknikerna leder du samtalet i passets alla delar. De fyra första håller kvar samtalet vid bilden och vid elevens egna tankar. De fyra sista får eleverna att tala med varandra, så att samtalet går runt bordet. Du använder dem från pass 1 och övar särskilt på två i taget, i den ordning de står i tabellen. Gå vidare till två nya varje vecka. Bara tekniken Fråga varandra börjar senare, i pass 4. Skriv i snabbmallen hur det gick med de två teknikerna du övar på. Använd tankeord, till exempel tror, vet, vill, märker, menar, råkar, undrar och minns. En kort version står på lathundens sida 3.
+    text: Med de här åtta teknikerna leder du samtalet i passets alla delar. De fyra första håller kvar samtalet vid bilden och vid elevens egna tankar. De fyra sista får eleverna att tala med varandra, så att samtalet går runt bordet. Du använder dem från pass 1 och övar särskilt på två i taget, i den ordning de står i tabellen. Gå vidare till två nya varje vecka. Bara tekniken Fråga varandra börjar senare, i pass 4. Skriv teknikerna överst i snabbmallen, och efter två veckor hur det gick med dem. Använd tankeord, till exempel tror, vet, vill, märker, menar, råkar, undrar och minns. En kort version står på lathundens sida 3.
     kolumner:
       - Teknik
       - Så gör du
@@ -434,7 +434,7 @@ passrutin:
   efterPasset: Du fyller i snabbmallen och lägger elevernas blad i pärmarna. Efter ett pass med en egen serie frågar du ägaren vilken vuxen hen vill visa planen för. Visar en egen serie att något runt eleven behöver ändras, tar du det vidare till klassläraren eller elevhälsan, om eleven säger ja.
 tidsschema:
   rubrik: Ett pass på 30 minuter
-  text: Tabellen gäller ett pass med en bildserie, pass 2–⁠6. Läs snabbmallen från förra passet och lärarens sida för dagens serie. Lärarens sida har berättelsen och säger var ni stannar. Det du kan säga står under Passets sex delar. De andra passen har egna tabeller, som står efter Samtalsteknikerna.
+  text: Tabellen gäller ett pass med en bildserie, pass 2–⁠6. Läs förra passets rad i snabbmallen och lärarens sida för dagens serie, och skriv vad eleverna ska få syn på i dag under Före. Lärarens sida har berättelsen och säger var ni stannar. Det du kan säga står under Passets sex delar. De andra passen har egna tabeller, som står efter Samtalsteknikerna.
   rader:
     - tid: Före passet
       fas: Förberedelse
@@ -634,18 +634,23 @@ mal:
     - Säga vad hen själv gjorde och hur det påverkade den andra
     - Säga när någon hade behövt göra annorlunda, och komma på ett sätt som fungerar för båda
 snabbmall:
-  text: Fyll i den före och efter varje pass. Det du skriver efteråt styr nästa pass.
-  fore:
-    - Dagens serie och vem som äger den
-    - Förra planen och spanaruppdragen
-    - Vem som är vilken person, och vem som är detektiv
-  efter:
-    - Vem som sa vad som kunde hända i en bildserie, innan vi visade nästa ruta
-    - Vem som kom på en tanke till eller sa vad den andra ville, utan att jag frågade
-    - Vem som hittade rutan där någon hade behövt göra annorlunda
-    - Vem som sa vad hen själv gjorde och hur det blev för den andra
-    - Det eleverna tog med sig, planen och vem som får veta den
-    - Hur det gick med teknikerna jag övar på
+  text: Bladet gäller fyra pass på två veckor. Före passet skriver du vad eleverna ska få syn på i dag, och efter passet vem som sa vad och vad du gör i nästa pass. De första veckorna kryssar du det som ska med. Efter två veckor läser du bladet, gärna med den som handleder dig.
+  pass: 4
+  period: två veckor
+  overst:
+    - Första veckan övar jag på teknikerna ______________ och
+    - Andra veckan övar jag på teknikerna ______________ och
+  fore: det eleverna ska få syn på i dag
+  foreHjalp: "I en bildserie: tumregeln på lärarens sida, med dina ord."
+  efter: vem som sa vad som kunde hända, och vem som hittade rutan där någon hade behövt göra annorlunda
+  ska:
+    - Vi stannade och frågade vad som händer i nästa ruta.
+    - Jag varken rättade eleverna eller sa vem som hade rätt.
+    - Vi såg serien ovanifrån och ritade ett nytt slut.
+  sist:
+    - Det här säger eleverna nu som de inte sa förut
+    - Det jag tar med mig, och hur det gick med teknikerna
+  not: Du övar på två tekniker i veckan, i den ordning de står på lathundens sida 3.
 checklista:
   rubrik: Checklista inför pass 1
   punkter:
@@ -660,7 +665,7 @@ grund:
 ramar:
   rubrik: Material att skriva ut
   text:
-    - Före pass 1 skriver du ut lärarens sidor, bildserierna på A3, bubblorna, kortet ”Vad behöver hen?”, bladet med de två korten Frågor vi ställer till varandra, provbilden och kortet Till de vuxna runt eleven. Till varje pass skriver du ut snabbmallen och ett spanarblad till varje elev. Till pass 2–⁠6 skriver du också ut bladet Nästa gång till varje elev, och till varje egen serie ett blad. Från pass 7 skriver du ut mallarna med fyra och sex rutor, och från pass 8 bladet Min plan och lektionskortet för passet med en egen serie. Mer än så behöver du inte.
+    - Före pass 1 skriver du ut lärarens sidor, bildserierna på A3, bubblorna, kortet ”Vad behöver hen?”, bladet med de två korten Frågor vi ställer till varandra, provbilden och kortet Till de vuxna runt eleven. Till varje pass skriver du ut ett spanarblad till varje elev, och varannan vecka snabbmallen. Till pass 2–⁠6 skriver du också ut bladet Nästa gång till varje elev, och till varje egen serie ett blad. Från pass 7 skriver du ut mallarna med fyra och sex rutor, och från pass 8 bladet Min plan och lektionskortet för passet med en egen serie. Mer än så behöver du inte.
     - Bildserierna, bubblorna, korten på bordet och bladen är elevernas. Laminera serierna och bubblorna, så att eleverna kan skriva och rita på dem med whiteboardpenna och sudda ut det efteråt. Efter passet tar du ett foto av serien innan du suddar. Vill du att eleverna ska ha serien i sin pärm, skriver du ut en papperskopia till var och en. En egen serie ritar ni på papper, så att den finns kvar. Lärarens sidor, provbildens protokoll och kortet Till de vuxna runt eleven är dina. De bildserier ni har gjort och gruppens blad sitter på väggen under perioden, och elevens egna serier ligger i pärmen.
   ramar:
     - rubrik: "Bildserie 1: Fönsterplatsen"
@@ -1206,7 +1211,7 @@ lathund:
         - fet: Bladen.
           text: Skriv ut spanarbladet till varje pass, och bladet Nästa gång, mallarna och Min plan när ni behöver dem.
         - fet: Provbilden, protokollet och snabbmallen.
-          text: De står i planeringsmallarna. Skriv ut snabbmallen till varje pass.
+          text: De står i planeringsmallarna. Skriv ut snabbmallen varannan vecka.
     bordet:
       - Dagens bildserie på A3, med rutorna 2–⁠4 täckta
       - Bubblorna och whiteboardpennor i en färg per elev

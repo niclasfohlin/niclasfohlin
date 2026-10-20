@@ -22,6 +22,7 @@ import { arElevensBlad, elevbladRyms, FAKTAORD, faktatexter, harFaktatexter, har
 import { filmerVid, grundUpphov, huvudfilm, metodensFilmer, stegDelar, stillbilder, STILLBILD_MATT, type FilmPlats, type MetodFilm } from './film';
 import { reservNyckel } from './reservbild';
 import { arkAdress, mallEtiketter, mallRutor as mallRutorAdresser, rutansText, serieAdress, svgMatt } from './bildserier';
+import { SNABB, snabbFalt, snabbRadHojd, snabbSist, snabbVeckorna, type Snabbmall } from './snabbmall';
 import { arBlad, arIfylltBlad, arStaendeBlad, bildensAlt, bladVid, iDel, metodensPaBordet, PABORDET_MATT, paBordetVid, type Bladyta, type PaBordet } from './pabordet';
 import { listansNiva, skyltText, type Niva } from './nivaer';
 import { bladDelar, bladNamn, delensRad, forstaLed, kartan, metodensBlad, radensDel, wordId } from './karta';
@@ -621,6 +622,49 @@ function snabbmallTabell(titel: string, fore: string[], efter: string[], o: { sk
     avsnitt('Efter passet: kort notering', FARG.ljus, FARG.huvud),
     ...efter.map((f, i) => falt(f, i === efter.length - 1)),
   ], bredder), avstand()];
+}
+// Snabbmallen som ramverk (K-487), ett till ett med metodriggens B.snabbvecka: bladet börjar på en ny sida och har bara
+// vanliga tabeller, så att Word och Google ritar det lika. Den första har bandet, raden för veckan och eleverna med raderna
+// överst och en rad per pass med Före, Efter och Nästa gång, den andra de tre sakerna som ska med, med en ruta per pass att
+// kryssa, och den tredje två rutor sist. Allt hålls ihop, så att bladet står på en sida (riggens sidprov, 2026-10-20: 56–82
+// pt luft under sista raden i alla 22 metoder). Rutan att kryssa är □, som i checklistorna.
+function snabbvecka(titel: string, sm: Snabbmall): Barn[] {
+  const n = sm.pass;
+  const b1 = [11, 29, 40].map((x) => Math.round((x / 100) * BREDD));
+  b1.push(BREDD - b1[0] - b1[1] - b1[2]);
+  const gra = (t: string, o: StyckeVal = {}) => stycke(t, { storlek: 18, farg: FARG.svag, efter: 0, hallIhop: true, ...o });
+  const fet = (t: string, farg: string = FARG.huvud) => stycke(t, { fet: true, farg, storlek: 20, efter: 0, hallIhop: true });
+  const tom = () => stycke('', { efter: 0, hallIhop: true });
+  const band = (text: string, span: number, hjalp?: string) => cell([new Paragraph({ keepNext: true, spacing: { after: 0 }, children: [run(text, { fet: true, farg: FARG.huvud, storlek: 20 }), ...(hjalp ? [run(`   ${hjalp}`, { farg: FARG.svag, storlek: 18 })] : [])] })], { bredd: BREDD, span, fyll: FARG.ljus });
+  const passen = tabell([
+    rad([cell([fet(`SNABBMALL · ${titel}`, FARG.vit)], { bredd: BREDD, span: 4, fyll: FARG.huvud, kanter: runt(kant(FARG.huvud)) })]),
+    rad([cell([gra(`${snabbVeckorna(sm)}          ${SNABB.eleverna} ________________________________________________`), ...(sm.overst ?? []).map((t) => gra(`${t} ______________________________`, { fore: 60 }))], { bredd: BREDD, span: 4 })]),
+    rad([band(SNABB.passen, 4)]),
+    rad([
+      cell([fet(SNABB.pass)], { bredd: b1[0], fyll: FARG.rand }),
+      cell([fet(`Före: ${sm.fore}`), ...(sm.foreHjalp ? [gra(sm.foreHjalp, { fore: 20 })] : [])], { bredd: b1[1], fyll: FARG.rand }),
+      cell([fet(`Efter: ${sm.efter}`)], { bredd: b1[2], fyll: FARG.rand }),
+      cell([fet(SNABB.nasta)], { bredd: b1[3], fyll: FARG.rand }),
+    ], { huvud: true }),
+    ...Array.from({ length: n }, (_, i) => rad([
+      cell([fet(String(i + 1), FARG.text), gra(SNABB.datum)], { bredd: b1[0] }),
+      cell([tom()], { bredd: b1[1] }), cell([tom()], { bredd: b1[2] }), cell([tom()], { bredd: b1[3] }),
+    ], { hojd: snabbRadHojd(n) })),
+  ], b1);
+  const bPass = Math.round(BREDD * 0.1);
+  const b2 = [BREDD - bPass * n, ...Array<number>(n).fill(bPass)];
+  const ska = tabell([
+    rad([band(SNABB.ska, n + 1, SNABB.skaHjalp)]),
+    rad([cell([fet(SNABB.pass)], { bredd: b2[0], fyll: FARG.rand }), ...Array.from({ length: n }, (_, i) => cell([fet(String(i + 1))], { bredd: bPass, fyll: FARG.rand }))]),
+    ...sm.ska.map((t) => rad([cell([stycke(t, { storlek: 20, efter: 0, hallIhop: true })], { bredd: b2[0] }), ...Array.from({ length: n }, () => cell([stycke('□', { storlek: 22, farg: FARG.huvud, efter: 0, hallIhop: true })], { bredd: bPass }))])),
+  ], b2);
+  const halv = Math.round(BREDD / 2);
+  const sist = tabell([
+    rad([band(snabbSist(sm), 2, SNABB.sistHjalp)]),
+    rad([cell([fet(sm.sist[0], FARG.text)], { bredd: halv }), cell([stycke(`→ ${sm.sist[1]}`, { fet: true, farg: FARG.text, storlek: 20, efter: 0, hallIhop: !!sm.not })], { bredd: BREDD - halv })], { hojd: 900 }),
+  ], [halv, BREDD - halv]);
+  const mellan = () => new Paragraph({ keepNext: true, spacing: { before: 0, after: 160 } });
+  return [passen, mellan(), ska, mellan(), sist, ...(sm.not ? [stycke(sm.not, { storlek: 18, farg: FARG.svag, fore: 40, efter: 0 })] : []), avstand()];
 }
 function grundRuta(text: string): Barn[] {
   return [tabell([rad([cell([stycke(text, { storlek: 20, efter: 0 })], { bredd: BREDD, kanter: runt(kant(FARG.huvud, 8)) })])], [BREDD]), avstand(80)];
@@ -3246,9 +3290,10 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     filmVid({ avsnitt: 'mal' });
   }
   if (d.snabbmall) {
-    ut.push(h2(d.snabbmall.rubrik));
+    // Bladet börjar på en ny sida, med rubriken och texten, som hos riggen, så att det står på en sida (snabbvecka).
+    ut.push(new Paragraph({ children: [run(d.snabbmall.rubrik)], heading: HeadingLevel.HEADING_2, keepNext: true, pageBreakBefore: true, spacing: { before: 0, after: 100 } }));
     if (d.snabbmall.text) ut.push(stycke(d.snabbmall.text, { hallIhop: true }));
-    ut.push(...snabbmallTabell(d.titel, d.snabbmall.fore, d.snabbmall.efter));
+    ut.push(...snabbvecka(d.titel, d.snabbmall));
     filmVid({ avsnitt: 'snabbmall' });
   }
   if (d.checklista) {
@@ -3479,9 +3524,8 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
   if (d.snabbmall && !o.bank) {
     sidor.push([
       ...under('Snabbmall'),
-      ...(d.snabbmall.text ? [stycke(d.snabbmall.text)] : []),
-      skrivrad(['Datum', 'Pass nr', 'Grupp']),
-      ...snabbmallTabell(d.titel, d.snabbmall.fore, d.snabbmall.efter, { skrivrum: true }),
+      ...(d.snabbmall.text ? [stycke(d.snabbmall.text, { hallIhop: true })] : []),
+      ...snabbvecka(d.titel, d.snabbmall),
     ]);
   }
   if (d.checklista && !o.bank) {
@@ -4550,7 +4594,7 @@ function lathundBarn(post: MetodPost, o: { niva1?: boolean; skalor?: number[]; b
         tomSmala();
         mall.push(...tavlaBarn(b));
       } else if (b.typ === 'snabbmall' && d.snabbmall) {
-        const sm = d.snabbmall;
+        const sm = snabbFalt(d.snabbmall);
         smala.push({ vikt: sm.fore.length + sm.efter.length + 3, f: () => snabbmallTabell(d.titel, sm.fore, sm.efter, { skrivrum: true, hojd: Math.round(640 * SKALA) }) });
       } else if (b.typ === 'tabell' && matta) {
         tomSmala();
@@ -5112,6 +5156,18 @@ export function lektionskortDokument(kort: Lektionskort[], o: { titel?: string; 
 }
 
 // Bara mallarna till en metod.
+// Snabbmallen ensam (K-487): sidan ur Mallarna, för knappen Skriv ut bladet under bladet på metodens sida
+// (Snabbmall.astro). Bladet är först bland mallarna (mallBarn), och scripts/bankpdf.mjs prövar att det är en sida.
+export function snabbmallDokument(post: MetodPost, o: { bas: string; resurser?: MetodResurser }): Document {
+  instans = 0;
+  FRISTAENDE_BLAD = false;
+  RESURSER = o.resurser ?? { bilder: new Map() };
+  if (!post.data.snabbmall) throw new Error(`${post.data.titel} har ingen snabbmall.`);
+  const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
+  const sida = mallBarn(post, o.bas)[0];
+  const sektioner = delaSektioner(sida.barn, `Mall · ${post.data.titel} · ${SAJT}`, adress, {});
+  return dokument(`Snabbmall · ${post.data.titel}`, sektioner, typsnittFor([post]));
+}
 export function mallDokument(post: MetodPost, o: { bas: string; resurser?: MetodResurser }): Document {
   instans = 0;
   FRISTAENDE_BLAD = false;

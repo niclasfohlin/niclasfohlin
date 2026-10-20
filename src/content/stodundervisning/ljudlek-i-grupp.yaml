@@ -278,7 +278,7 @@ passrutin:
       fas: Lektionen
     - text: "Var och en säger ett ord från dagens lek, och du säger vad du hörde."
       fas: Avslut
-  efterPasset: "Du noterar i snabbmallen vilka av dagens elever som klarade steg 4 själva, vilka ljud och ord som fastnade, och om gruppen tar samma lektion igen eller nästa."
+  efterPasset: "Du noterar i snabbmallen vad dagens elever sa och gjorde i steg 4, vilka ljud och ord de fastnade på, och om gruppen tar samma rad, nästa rad eller nästa lektion."
   kallas: delar
 tidsschema:
   rubrik: Ett pass på 30 minuter
@@ -286,7 +286,7 @@ tidsschema:
   rader:
     - tid: Före passet
       fas: Förberedelse
-      vad: "Välj orden ur Ordbanken och ta fram bokstavskortet för dagens ljud och några som gruppen har haft. Lägg lektionens material vid varje plats, och en spegel per par. Bestäm paren och dagens elever, och skriv dem i snabbmallen."
+      vad: "Välj orden ur Ordbanken och ta fram bokstavskortet för dagens ljud och några som gruppen har haft. Lägg lektionens material vid varje plats, och en spegel per par. Bestäm paren och skriv dagens elever i snabbmallen."
     - tid: 0–5 min
       fas: Ljudstart
       vad: "Visa dagens ljud, sätt ihop fem ord och dela upp fyra ord. Alla svarar samtidigt, och en av dagens elever sätter ihop ett ord ensam. Lyssna efter bokstavsnamn, pauser mellan ljuden och ett ö efter klusilerna."
@@ -409,20 +409,26 @@ mal:
     - byta ett ljud i ett ord och säga det nya ordet
     - läsa korta ljudenliga ord och påhittade ord
 snabbmall:
-  fore:
-    - "Lektionen, raden och vilket pass i raden"
-    - Dagens ljud och orden ur Ordbanken
-    - Paren och dagens elever
-  efter:
-    - Vilka av dagens elever klarade steg 4 själva?
-    - Ljud och ord som fastnade
-    - "Nästa pass: samma lektion eller nästa?"
+  text: Bladet gäller veckans tre till fem pass. Raden är gruppens rad i lektionens tabell Så blir lektionen svårare. Under Nästa gång skriver du samma rad, nästa rad eller nästa lektion, och de första veckorna kryssar du det som ska med.
+  pass: 5
+  period: veckan
+  fore: lektionen, raden och dagens ljud
+  foreHjalp: "Dagens elever: det du lyssnar efter hos var och en."
+  efter: det dagens elever sa och gjorde i steg 4, och var de fastnade
+  ska:
+    - Jag visade först och tänkte högt.
+    - Vi sa ljuden och inte bokstävernas namn.
+    - Vi satte ihop ord utan paus mellan ljuden.
+  sist:
+    - Det här gör eleverna själva nu som de inte gjorde förut
+    - Jag tar med mig in i nästa vecka
+  not: Dela antalet elever med antalet pass i veckan och avrunda uppåt, så får du antalet dagens elever. Tolv elever och tre pass blir fyra per pass. Varje lektion säger när gruppen tar nästa rad.
 checklista:
   punkter:
     - Valt lektionen och orden ur Ordbanken.
     - Tagit fram kortet för dagens ljud och några ni har haft.
     - Lagt fram lektionens sidor med passet och stegen, materialet och en spegel per par.
-    - Skrivit paren och dagens elever i snabbmallen.
+    - Bestämt paren och skrivit dagens elever i snabbmallen.
 grund:
   text: "Nybörjare i läsningen behöver upptäcka att orden består av ljud och att bokstäverna står för ljuden (Castles, Rastle och Nation, 2018). Förmågan att höra ljuden och kunskapen om bokstävernas ljud förutsäger den tidiga läsningen (Hulme m.fl., 2012). Undervisning i att höra, dela upp och sätta ihop ljuden hjälper, allra mest dem som har kommit kortast, och effekten på läsningen blir nästan dubbelt så stor när bokstäverna finns med (Ehri m.fl., 2001; National Reading Panel, 2000). En eller två förmågor åt gången ger mest, och att sätta ihop och dela upp är kärnan (National Reading Panel, 2000). Nybörjare får lättare ihop ordet när ljuden dras ut utan paus (Gonzalez-⁠Frey och Ehri, 2021), och i svenska studier gav stöd med munnen och spegeln bättre avkodning (Fälth, Gustafson och Svensson, 2017; Fälth, Svensson och Ström, 2020). Bornholmsmodellens språklekar i förskoleklass stärker förmågan att höra ljuden, och träningen ger mest när läraren gör kopplingen till bokstäverna tydlig (National Reading Panel, 2000; Wolff, 2017)."
   kallor: "Bygger på Castles, Rastle och Nation (2018), Hulme m.fl. (2012), Ehri m.fl. (2001), National Reading Panel (2000), Gonzalez-⁠Frey och Ehri (2021), Fälth, Gustafson och Svensson (2017), Fälth, Svensson och Ström (2020) och Wolff (2017)."
@@ -765,7 +771,7 @@ lathund:
           vad: "Steg 1 du visar, 2 tillsammans, 3 i par, 4 var för sig. Du lyssnar på dagens elever."
         - tid: 25–30
           fas: 3 · Avslut
-          vad: "Ett ord var, och vad du hörde. Nästa pass: samma lektion eller nästa?"
+          vad: "Ett ord var, och vad du hörde. Nästa gång: samma rad, nästa rad eller nästa lektion?"
   mall:
     rubrik: Ljudstarten
     underrad: "Samma fem minuter varje pass · orden ur Ordbanken"
@@ -819,8 +825,8 @@ lathund:
       - Bokstavskartan, till den som behöver den
       - En spegel per par
       - Lektionens material
-      - Snabbmallen, med paren och dagens elever
-    varjePass: "Vem klarade steg 4 själv, vad fastnade, och samma lektion eller nästa?"
+      - Snabbmallen, med dagens elever
+    varjePass: "Vad gjorde dagens elever i steg 4, var fastnade de? Samma rad, nästa rad eller nästa lektion?"
 film:
   titel: "Ljudstarten i Ljudlek i grupp"
   sekunder: 27.87

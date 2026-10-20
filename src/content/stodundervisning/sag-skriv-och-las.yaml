@@ -65,7 +65,7 @@ tidsschema:
   rader:
     - tid: "Före passet"
       fas: "Förberedelse"
-      vad: "Lägg högen med bokstavskort och den lilla högen mitt på bordet, eller till varje par när eleverna är fyra. Lägg fram namnkorten, skrivböckerna, ordbilderna och miniwhiteboarden, och skriv dagens ord och meningar i snabbmallen."
+      vad: "Lägg högen med bokstavskort och den lilla högen mitt på bordet, eller till varje par när eleverna är fyra. Lägg fram namnkorten, skrivböckerna, ordbilderna och miniwhiteboarden. Skriv i snabbmallen steget och det du lyssnar efter hos var och en."
     - tid: "0–5 min"
       fas: "Startorden"
       vad: "Säg ordet. ”Säg det långsamt. Vad hör du först?” Alla bygger det från vänster och läser med fingret under. Skriv sist ordet på miniwhiteboarden, och eleverna jämför."
@@ -311,14 +311,20 @@ mal:
     - "skriva de sex ordbilderna utan att titta"
     - "skriva en egen mening om något hen har varit med om"
 snabbmall:
-  fore:
-    - "Steget och listan"
-    - "Orden och ordbilderna till Startorden"
-    - "Det du visar och det eleverna bygger"
-  efter:
-    - "Svåra ljud och ord, och för vem"
-    - "Det eleverna gjorde själv"
-    - "Nästa pass: samma steg i Perioden eller nästa?"
+  text: Bladet gäller veckans tre pass. Före passet skriver du vad eleverna ska lära sig i dag. Efter passet skriver du det du såg, och steget och orden till Startorden nästa gång. De första tre veckorna kryssar du det som ska med.
+  pass: 3
+  period: veckan
+  fore: det eleverna ska lära sig i dag
+  foreHjalp: Steget, och det du lyssnar efter hos var och en.
+  efter: det jag såg, till exempel tol för stol
+  ska:
+    - Varje elev sa ordet eller meningen igen innan hen byggde.
+    - Eleverna läste det som låg, med fingret under.
+    - "Jag bekräftade först det som stämde och frågade: ”Vad hör du?”"
+  sist:
+    - Det här gör eleverna själva nu som de inte gjorde förut
+    - Jag tar med mig in i nästa vecka
+  not: Gruppen tar nästa steg när ingen tappar ett ord eller ett mellanrum och alla läser tillbaka det de har byggt. I första steget, med bara ord, går gruppen vidare när de flesta orden ligger rätt på första försöket två pass i rad.
 checklista:
   rubrik: "Checklista före insatsen"
   punkter:

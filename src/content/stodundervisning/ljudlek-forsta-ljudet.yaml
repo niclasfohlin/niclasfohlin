@@ -24,7 +24,7 @@ material:
   - whiteboardtavlor
   - bokstavskartan
   - snabbmallen
-uppdaterad: "2026-10-17"
+uppdaterad: 2026-10-20
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 3
@@ -151,14 +151,14 @@ passrutin:
       fas: "Sortera"
     - text: "Var och en skriver bokstaven för första ljudet, säger ljudet igen och vänder kortet."
       fas: "Skriv första ljudet"
-  efterPasset: "Du noterar i snabbmallen vilka av dagens elever som sa första ljudet och visade rätt bokstav, vad som fastnade, och om gruppen tar samma rad, nästa rad eller nästa lektion."
+  efterPasset: "Du noterar i snabbmallen vilka av dagens elever som sa första ljudet och visade rätt bokstav, var de fastnade, och om gruppen tar samma rad, nästa rad eller nästa lektion."
 tidsschema:
   rubrik: "Ett pass på 30 minuter"
   text: "Är passet bara 20 minuter blir ljudstarten tre minuter, lektionen 15 och avslutet två. Stegen får då två, fyra, fem och fyra minuter."
   rader:
     - tid: "Före passet"
       fas: "Förberedelse"
-      vad: "Ta fram arken, bokstavskorten, bokstavskartan och speglarna, och en tavla, en penna och en trasa per elev. Med fler än sex elever skriver du arkets bokstäver på varje tavla. Välj orden till ljudstarten ur Ordbanken och två ord till steg 4, och skriv dem, paren och dagens elever i snabbmallen."
+      vad: "Ta fram arken, bokstavskorten, bokstavskartan och speglarna, och en tavla, en penna och en trasa per elev. Med fler än sex elever skriver du arkets bokstäver på varje tavla. Välj orden till ljudstarten ur Ordbanken och två ord till steg 4. Skriv raden, dagens ljud och dagens elever i snabbmallen."
     - tid: "0–5 min"
       fas: "Ljudstart"
       vad: "Visa dagens ljud, sätt ihop fem ord och dela upp fyra, som i Ljudstarten. Alla svarar samtidigt."
@@ -274,7 +274,7 @@ uppfoljning:
     - nar: "Under passet"
       vad: "I steg 4 lyssnar du på dagens elever: säger eleven bara det första ljudet och inte bokstavens namn, och visar hen rätt bokstav?"
     - nar: "Efter varje pass"
-      vad: "I snabbmallen noterar du dagens elever och det som fastnade."
+      vad: "I snabbmallen noterar du dagens elever och var de fastnade."
     - nar: "Var tredje vecka"
       vad: "Du gör ljudkollens uppgift 3 om första ljudet och uppgift 4 om bokstävernas ljud."
 mal:
@@ -286,14 +286,20 @@ mal:
     - "skriva eller visa bokstaven för det första ljudet"
     - "höra det första ljudet också när ordet börjar med ett konsonantmöte, som i sten"
 snabbmall:
-  fore:
-    - "Raden, arkets ljud och de sex korten i steg 4"
-    - "Dagens ljud och orden ur Ordbanken"
-    - "Paren och dagens elever"
-  efter:
-    - "Vilka av dagens elever sa första ljudet och visade rätt bokstav?"
-    - "Ord och ljud som fastnade"
-    - "Nästa pass: samma rad, nästa rad eller nästa lektion?"
+  text: Bladet gäller veckans tre till fem pass. Raden är gruppens rad i tabellen Så blir lektionen svårare. Under Nästa gång skriver du samma rad, nästa rad eller nästa lektion, och de första veckorna kryssar du det som ska med.
+  pass: 5
+  period: veckan
+  fore: raden, dagens ljud och dagens elever
+  foreHjalp: "Vid varje namn: det du lyssnar efter."
+  efter: det dagens elever sa och gjorde i steg 4, och var de fastnade
+  ska:
+    - Vi sa ljudet och inte bokstavens namn.
+    - Vi blandade korten, så att ingen kunde gissa.
+    - Vi visade bokstaven varje gång.
+  sist:
+    - Det här gör eleverna själva nu som de inte gjorde förut
+    - Jag tar med mig in i nästa vecka
+  not: Ta nästa rad när dagens elever säger första ljudet och visar rätt bokstav i minst fyra av sina fem ord i steg 4, två pass i följd. I trion räcker tre av fyra. Efter sista raden går gruppen till nästa förmåga.
 grund:
   text: "Övningar i att höra när ord börjar likadant var lättare att genomföra än övningar i att dela upp ord, och flera barn förde över insikten till ljud som de inte hade övat (Byrne och Fielding-⁠Barnsley, 1990, i Murray, 1994). Undervisningen ger mer när bokstäverna är med och grupperna är små (National Reading Panel, 2000). Att se och känna hur munnen formar ljudet hjälpte eleverna att föra över ljudträningen till läsningen (Castiglioni-⁠Spalten och Ehri, 2003; Fälth m.fl., 2017)."
   kallor: "Bygger på Byrne och Fielding-⁠Barnsley (1990), Castiglioni-⁠Spalten och Ehri (2003), Fälth m.fl. (2017), Murray (1994) och National Reading Panel (2000)."

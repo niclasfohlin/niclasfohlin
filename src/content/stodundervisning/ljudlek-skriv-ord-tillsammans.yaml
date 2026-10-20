@@ -26,7 +26,7 @@ material:
   - whiteboardtavlor
   - magneter
   - snabbmallen
-uppdaterad: "2026-10-17"
+uppdaterad: 2026-10-20
 relaterade:
   - sag-skriv-och-las
 utkast: false
@@ -184,14 +184,14 @@ passrutin:
       fas: "Ordjakt"
     - text: "Var och en skriver tre ord, ett av dem efter ett byte, och läser tillbaka."
       fas: "Skriv det du hör"
-  efterPasset: "Du noterar i snabbmallen vilka av dagens elever som skrev ordet efter bytet och minst ett av de två andra orden rätt i steg 4, vad som fastnade, och om gruppen tar samma rad, nästa rad eller nästa lektion."
+  efterPasset: "Du noterar i snabbmallen vilka av dagens elever som skrev ordet efter bytet och minst ett av de två andra orden rätt i steg 4, var de fastnade, och om gruppen tar samma rad, nästa rad eller nästa lektion."
 tidsschema:
   rubrik: "Ett pass på 30 minuter"
   text: "Är passet bara 20 minuter blir ljudstarten tre minuter, lektionen 15 och avslutet två. Stegen får då två, fyra, fem och fyra minuter."
   rader:
     - tid: "Före passet"
       fas: "Förberedelse"
-      vad: "Lägg gruppens bokstäver i ett kuvert per par, och ta fram dina kort, magneterna, ljudrutorna, markörerna, whiteboardtavlorna, bokstavskartan och speglarna. Rita fyra rutor på tavlan. Välj kedjorna, bokstäverna till Ordjakt och orden till ljudstarten, och skriv dem, paren och dagens elever i snabbmallen."
+      vad: "Lägg gruppens bokstäver i ett kuvert per par, och ta fram dina kort, magneterna, ljudrutorna, markörerna, whiteboardtavlorna, bokstavskartan och speglarna. Rita fyra rutor på tavlan. Välj kedjorna, bokstäverna till Ordjakt och orden till ljudstarten. Skriv raden, dagens ljud och dagens elever i snabbmallen."
     - tid: "0–5 min"
       fas: "Ljudstart"
       vad: "Visa dagens ljud, sätt ihop fem ord och dela upp fyra, som i Ljudstarten. Alla svarar samtidigt."
@@ -307,7 +307,7 @@ uppfoljning:
     - nar: "Under passet"
       vad: "I steg 4 lyssnar du på dagens elever. Har varje ljud en bokstav, i rätt ordning? Byter eleven rätt bokstav? Läser hen det som står?"
     - nar: "Efter varje pass"
-      vad: "I snabbmallen noterar du det dagens elever skrev och det som fastnade."
+      vad: "I snabbmallen noterar du det dagens elever skrev och var de fastnade."
     - nar: "Var tredje vecka"
       vad: "Du gör ljudkollens uppgift 7 om att skriva ord, uppgift 8 om att sätta ihop och byta och uppgift 4 om bokstävernas ljud."
 mal:
@@ -318,14 +318,20 @@ mal:
     - "läsa tillbaka det som ligger eller står, med fingret under"
     - "byta en bokstav, läsa det nya ordet och säga var i ordet hen bytte"
 snabbmall:
-  fore:
-    - "Raden, kedjorna och bokstäverna till Ordjakt"
-    - "Dagens ljud och orden ur Ordbanken"
-    - "Paren och dagens elever"
-  efter:
-    - "Det dagens elever skrev i steg 4, som mr för mer"
-    - "Ord och ljud som fastnade"
-    - "Nästa pass: samma rad, nästa rad eller nästa lektion?"
+  text: Bladet gäller veckans tre till fem pass. Raden är gruppens rad i tabellen Så blir lektionen svårare. Under Nästa gång skriver du samma rad, nästa rad eller nästa lektion, och de första veckorna kryssar du det som ska med.
+  pass: 5
+  period: veckan
+  fore: raden, dagens ljud och dagens elever
+  foreHjalp: "Vid varje namn: det du lyssnar efter."
+  efter: det dagens elever sa och gjorde i steg 4, och var de fastnade
+  ska:
+    - Vi skrev en bokstav per ljud och läste tillbaka.
+    - Vi bytte en bokstav i taget och sa var i ordet.
+    - Den som skrev såg inte ordet förrän efteråt.
+  sist:
+    - Det här gör eleverna själva nu som de inte gjorde förut
+    - Jag tar med mig in i nästa vecka
+  not: Ta nästa rad när dagens elever skriver ordet efter bytet och minst ett av de två andra orden rätt i steg 4, två pass i följd. Efter sista raden går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen.
 grund:
   text: "Att bygga ord med bokstavskort och byta en bokstav i taget gav bättre avkodning hos elever som behövde stöd (McCandliss m.fl., 2003). Barn som skrev de ljud de hörde och fick återkoppling lärde sig läsa fler nya ord än barn som bara övade ljuden (Ouellette och Sénéchal, 2008; Sénéchal m.fl., 2012). Att öva ljuden och bokstäverna tillsammans har starkt stöd (Foorman m.fl., 2016)."
   kallor: "Bygger på Foorman m.fl. (2016), McCandliss m.fl. (2003), Ouellette och Sénéchal (2008) och Sénéchal m.fl. (2012)."

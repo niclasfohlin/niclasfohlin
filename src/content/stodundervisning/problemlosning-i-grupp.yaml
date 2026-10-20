@@ -190,7 +190,7 @@ passrutin:
       fas: Jämföra
     - text: Läraren sätter ord på sättet som fungerade, och gruppen bockar för det på kortet Våra sätt.
       fas: Avsluta
-  efterPasset: Läraren skriver en kort notering om vad eleverna klarade med stöd.
+  efterPasset: Läraren skriver i snabbmallen det hen såg, och vem som behövde vilket stöd.
   kallas: delar
 tidsschema:
   rubrik: Ett pass på 30 minuter
@@ -363,19 +363,22 @@ mal:
     - Jämföra två sätt och säga vad som är lika
     - Kontrollera om svaret är rimligt
 snabbmall:
-  rubrik: Lärarens sida för ett eget problem
-  text: Bladet fyller du i när du förbereder ett eget problem, och det har samma fält som lärarens sidor till metodens problem. Efter passet fyller du i de två sista raderna.
-  fore:
-    - Problemet och svaret
-    - Ringa in, lyfta ut och reda ut ord och tal
-    - "Förutse: sätt som eleverna kan välja"
-    - "Kör de fast och Säg inte: det jag säger, och ledtråden som skulle ta över tänkandet"
-    - "Mindre och större: mindre tal och en större fråga"
-    - "Jämför: lösning A och B, och det som är lika"
-    - "Fel eller osäker: ett vanligt fel"
-  efter:
-    - Vad kunde varje elev återberätta, visa, jämföra och kontrollera, och med vilket stöd?
-    - Vad tar ni upp nästa gång?
+  text: Bladet gäller veckans två eller tre pass. Före passet skriver du idén eleverna ska ta med sig. Efter passet skriver du det du såg och nästa problem, och de första veckorna kryssar du det som ska med. Sist i veckan läser du bladet.
+  pass: 3
+  period: veckan
+  overst:
+    - Nivån och ledet (Jag gör, Vi gör, Ni gör tillsammans, Du gör själv)
+  fore: idén eleverna ska ta med sig
+  foreHjalp: Problemet, och idén ur Jämför på lärarens sida.
+  efter: det jag såg, och vem som behövde vilket stöd
+  ska:
+    - Paren berättade problemet för varandra innan någon räknade.
+    - När ett par körde fast frågade jag först vad det hade gjort.
+    - "Gruppen jämförde två lösningar och sa idén: det som var lika."
+  sist:
+    - Det här klarar eleverna nu med mindre stöd än förut
+    - "Jag tar med mig in i nästa vecka: samma led eller nästa?"
+  not: Nästa gång tar ni nästa problem, eller ett som liknar det förra om gruppen har kört fast på samma sak två pass i rad. Byt led när raderna visar att gruppen klarar ledet med lite stöd.
 checklista:
   punkter:
     - Läst lärarens sida och löst problemet själv på båda sätten.
@@ -787,7 +790,7 @@ pabordet:
 ramar:
   rubrik: Problemen
   text:
-    - "Problemen står nivå för nivå, och varje nivå börjar med en översikt över nivåns problem. Varje problem har lärarens sida, problemets sida med bilden, bladet Två lösningar och ett lösningsförslag, ett A4 som går att använda överallt där problemet används. Sist står bladet Vår lösning, kortet Våra sätt och kartläggningen. Fler problem finns på sidan Ta fram ett matteproblem."
+    - "Problemen står nivå för nivå, och varje nivå börjar med en översikt över nivåns problem. Varje problem har lärarens sida, problemets sida med bilden, bladet Två lösningar och ett lösningsförslag, ett A4 som går att använda överallt där problemet används. Efter nivåerna står Lärarens sida för ett eget problem, och sist bladet Vår lösning, kortet Våra sätt och kartläggningen. Fler problem finns på sidan Ta fram ett matteproblem."
   ramar:
     - rubrik: "Lösningsförslagen: Visa och jämför lösningar"
       text:
@@ -3925,6 +3928,19 @@ ramar:
               text: |-
                 Ordningen räknas, så 1 + 3, 1 + 2 + 1 och 1 + 1 + 2 saknas: 5 + 3 = 8.
                 Fråga: ”Hur visar problemet att ordningen räknas?”
+    - rubrik: Lärarens sida för ett eget problem
+      text:
+        - Bladet fyller du i när du förbereder ett eget problem, och det har samma fält som lärarens sidor till metodens problem.
+      delar:
+        - rubrik: Före passet
+          falt:
+            - rubrik: Problemet och svaret
+            - rubrik: Ringa in · Lyft ut · Ord och tal
+            - rubrik: "Förutse: sätt som eleverna kan välja"
+            - rubrik: "Kör de fast och Säg inte: det jag säger, och ledtråden som ger bort lösningen"
+            - rubrik: "Mindre och större: mindre tal och en större fråga"
+            - rubrik: "Jämför: lösning A och B, och det som är lika"
+            - rubrik: "Fel eller osäker: ett vanligt fel"
     - rubrik: Vår lösning
       text:
         - I varje pass visar och löser paret problemet på bladet.
@@ -4264,7 +4280,7 @@ lathund:
           text: på Lärportalen.
         - fet: Nämnarens Problemavdelning
           text: och Kängurutävlingens tidigare problem med lösningar på NCM:s webbplats.
-      efter: Ett problem är en uppgift där eleven inte direkt vet hur den ska lösas. Ett eget problem förbereder du på Lärarens sida för ett eget problem i planeringsmallarna.
+      efter: Ett problem är en uppgift där eleven inte direkt vet hur den ska lösas. Ett eget problem förbereder du på Lärarens sida för ett eget problem, som står efter problemen.
     bordet:
       - Problemets sida och en penna per par
       - Bladet Vår lösning eller miniwhiteboards

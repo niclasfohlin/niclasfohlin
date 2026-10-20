@@ -237,15 +237,20 @@ mal:
     - Välja och skriva tre meningar ur en bok
     - Ta ansvar för mappen och läsningen hemma
 snabbmall:
-  text: En halv sida att fylla i före och efter varje pass, särskilt de första två veckorna. Håll det enkelt. Det är regelbundenheten, och att komma tillbaka igen nästa dag, som gör skillnad.
-  fore:
-    - Elev och bok (nivå)
-    - Ord att visa i bildvandringen
-    - Vem lyssnar jag på först?
-  efter:
-    - Hade alla läst och skrivit hemma?
-    - Vem behöver byta nivå?
-    - Vad ska övas nästa gång?
+  text: Bladet gäller veckans fyra pass. Före passet skriver du vad eleverna ska lära sig i dag. Efter passet skriver du det du såg och vad ni gör nästa gång, och de första veckorna kryssar du det som ska med. Sist i veckan läser du bladet.
+  pass: 4
+  period: veckan
+  fore: det eleverna ska lära sig i dag
+  foreHjalp: "Det du lyssnar efter hos var och en."
+  efter: det jag såg, med elevens ord
+  ska:
+    - Vi började med favoritmeningarna hemifrån.
+    - Varje elev klarade minst nio ord av tio i sin bok.
+    - Jag väntade vid ett svårt ord i stället för att säga det.
+  sist:
+    - Det här gör eleverna nu som de inte gjorde förut
+    - Jag tar med mig in i nästa vecka
+  not: Vecka 1 börjar utan favoritmeningar. Boken och den vuxnes initialer står i lässchemat. Uteblir läsningen hemma flera dagar i rad, ring hem tidigt.
 checklista:
   punkter:
     - Valt en bok på rätt nivå till varje elev och bläddrat igenom den.
@@ -415,7 +420,7 @@ lathund:
       - "Dagens text: bok eller kapitel, på rätt nivå"
       - Skrivbok till varje elev
       - Lässchema med dagens text inskriven
-      - Snabbmallen för noteringen efteråt
+      - Snabbmallen för veckans pass
       - Kontraktet, påskrivet av hem och skola
     varjePass: Hade alla läst hemma, vem byter nivå, vad övas nästa gång?
 lektionskort:

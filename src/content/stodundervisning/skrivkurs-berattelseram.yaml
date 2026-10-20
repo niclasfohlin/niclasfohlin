@@ -304,13 +304,20 @@ mal:
     - Visa en känsla utan att nämna den
     - Låna ett grepp av en kamrat utan att låna innehållet
 snabbmall:
-  text: "Snabbmallen är en halv sida som du fyller i före och efter varje introduktionspass. Håll det enkelt. Det du skriver efteråt styr nästa pass: vilka två versioner du visar, och vem som behöver berätta för dig innan hen skriver."
-  fore:
-    - Paren i Berätta
-  efter:
-    - Vem kom igång, vem behövde berätta två gånger?
-    - Frågan jag ställde över axeln, och till vem
-    - Mina två versioner till fortsättningspasset
+  text: "Bladet gäller två delar i ramen: pass 2–5, 6–9 eller 10–13. Skriv passets nummer vid Datum. Före passet skriver du vad eleverna ska lära sig i dag. Efter passet skriver du det du läste och hörde och vad du gör nästa gång. De första veckorna kryssar du det som ska med."
+  pass: 4
+  period: två veckor
+  fore: det eleverna ska lära sig i dag
+  foreHjalp: Delens fokus, med dina ord.
+  efter: det jag läste och hörde, med elevens ord
+  ska:
+    - Alla berättade sin del för en kamrat innan de skrev.
+    - Den som lånade ett grepp behöll sitt eget innehåll.
+    - Jag frågade över axeln och rättade ingen stavning.
+  sist:
+    - Grepp som eleverna använder nu utan att jag påminner
+    - Jag tar med mig till nästa del
+  not: Rad 1 och 3 är introduktionspass. Efter dem läser du början på allas delar. Under Nästa gång skriver du vad dina två versioner ska visa och vem som behöver berätta för dig innan hen skriver.
 checklista:
   rubrik: Före kursen
   punkter:
@@ -625,7 +632,7 @@ ramar:
             - rubrik: Starterna runt bordet
               text: "Det här gör ni först i pass 13, som texten över fortsättningspassets tabell säger. Eleven väljer om hen ändrar sin början."
             - rubrik: Frågan över axeln
-              text: "Det här gör du under Skriv i varje pass, som passets tabell och film 2 visar. Ställ en enda fråga, och eleven väljer om svaret ska med. I introduktionspasset skriver du frågan i snabbmallen."
+              text: "Det här gör du under Skriv i varje pass, som passets tabell och film 2 visar. Ställ en enda fråga, och eleven väljer om svaret ska med. Kryssa frågan i snabbmallen de första veckorna."
             - rubrik: Två sätt i era texter
               text: "Det här gör ni i varje fortsättningspass, med de två versioner du skriver efter introduktionspasset. Ingen elevs mening blir den första versionen, och den andra bygger du på en elevs text bara när eleven har sagt ja."
             - rubrik: Galleriet

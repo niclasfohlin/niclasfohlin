@@ -4,6 +4,7 @@
 // Faktarutorna, kraven, checklistan, snabbmallen och uppföljningen hämtas ur metoden så att
 // lathunden aldrig säger emot den. Samma fyra sidor finns i Word-filen (src/lib/metoddocx.ts).
 import MetodTabell from './MetodTabell.astro';
+import { snabbFalt } from '../lib/snabbmall';
 import Elevlista from './Elevlista.astro';
 import Tavla from './Tavla.astro';
 import type { MetodData } from '../lib/metod';
@@ -137,11 +138,11 @@ const kortBredd = (i: number) => `${((kortVikter[i] / kortVikter.reduce((a, v) =
               <colgroup><col style="width:38%" /><col style="width:62%" /></colgroup>
               <tbody>
                 <tr class="avsnitt"><th scope="col">Före passet</th><th scope="col"><span class="visually-hidden">Att fylla i</span></th></tr>
-                {d.snabbmall.fore.map((f) => <tr><th scope="row">{f}</th><td></td></tr>)}
+                {snabbFalt(d.snabbmall).fore.map((f) => <tr><th scope="row">{f}</th><td></td></tr>)}
               </tbody>
               <tbody>
                 <tr class="avsnitt"><th scope="col">Efter passet: kort notering</th><th scope="col"><span class="visually-hidden">Att fylla i</span></th></tr>
-                {d.snabbmall.efter.map((f) => <tr><th scope="row">{f}</th><td></td></tr>)}
+                {snabbFalt(d.snabbmall).efter.map((f) => <tr><th scope="row">{f}</th><td></td></tr>)}
               </tbody>
             </table>
           );

@@ -23,7 +23,7 @@ material:
   - magneter
   - bokstavskorten
   - speglar
-uppdaterad: "2026-10-17"
+uppdaterad: 2026-10-20
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 6
@@ -150,14 +150,14 @@ passrutin:
       fas: "Säg och lägg"
     - text: "Var och en räknar ljuden i sina ord, och du lyssnar på dagens elever."
       fas: "Mina ord"
-  efterPasset: "Du noterar i snabbmallen vilka av dagens elever som lade rätt antal markörer och sa ljuden själva, vad som fastnade, och om gruppen tar samma rad, nästa rad eller nästa lektion."
+  efterPasset: "Du noterar i snabbmallen vilka av dagens elever som lade rätt antal markörer och sa ljuden själva, var de fastnade, och om gruppen tar samma rad, nästa rad eller nästa lektion."
 tidsschema:
   rubrik: "Ett pass på 30 minuter"
   text: "Är passet bara 20 minuter blir ljudstarten tre minuter, lektionen 15 och avslutet två. Stegen får då två, fyra, fem och fyra minuter."
   rader:
     - tid: "Före passet"
       fas: "Förberedelse"
-      vad: "Ta fram arken för gruppens rad, bokstavskorten, ljudrutorna, markörerna, pennorna och speglarna. Rita fem rutor på tavlan, som ljudrutorna: en bildruta och fyra rutor för ljuden. Välj orden till ljudstarten ur Ordbanken, och skriv dem, paren och dagens elever i snabbmallen."
+      vad: "Ta fram arken för gruppens rad, bokstavskorten, ljudrutorna, markörerna, pennorna och speglarna. Rita fem rutor på tavlan, som ljudrutorna: en bildruta och fyra rutor för ljuden. Välj orden till ljudstarten ur Ordbanken. Skriv raden, dagens ljud och dagens elever i snabbmallen."
     - tid: "0–5 min"
       fas: "Ljudstart"
       vad: "Visa dagens ljud, sätt ihop fem ord och dela upp fyra, som i Ljudstarten. Alla svarar samtidigt."
@@ -273,7 +273,7 @@ uppfoljning:
     - nar: "Under passet"
       vad: "I steg 4 lyssnar du på dagens elever: säger eleven ljuden i ordning, och flyttar hen en markör medan hen säger varje ljud?"
     - nar: "Efter varje pass"
-      vad: "I snabbmallen noterar du dagens elever och det som fastnade."
+      vad: "I snabbmallen noterar du dagens elever och var de fastnade."
     - nar: "Var tredje vecka"
       vad: "Du gör ljudkollens uppgift 6 om att dela upp, uppgift 7 om att skriva ord och uppgift 4 om bokstävernas ljud."
 mal:
@@ -285,14 +285,20 @@ mal:
     - "dela upp ord med konsonantmöte först och sist"
     - "skriva bokstäverna i rutorna och läsa tillbaka ordet, när hen kan bokstäverna i ordet"
 snabbmall:
-  fore:
-    - "Raden, arket och de sex korten i steg 4"
-    - "Dagens ljud och orden ur Ordbanken"
-    - "Paren och dagens elever"
-  efter:
-    - "Vilka av dagens elever lade rätt antal markörer och sa ljuden själva?"
-    - "Ord och ljud som fastnade"
-    - "Nästa pass: samma rad, nästa rad eller nästa lektion?"
+  text: Bladet gäller veckans tre till fem pass. Raden är gruppens rad i tabellen Så blir lektionen svårare. Under Nästa gång skriver du samma rad, nästa rad eller nästa lektion, och de första veckorna kryssar du det som ska med.
+  pass: 5
+  period: veckan
+  fore: raden, dagens ljud och dagens elever
+  foreHjalp: "Vid varje namn: det du lyssnar efter."
+  efter: det dagens elever sa och gjorde i steg 4, och var de fastnade
+  ska:
+    - Vi flyttade en markör medan vi sa varje ljud.
+    - Jag arbetade från vänster sett från eleverna.
+    - Vi tog ord med två, tre och fyra ljud.
+  sist:
+    - Det här gör eleverna själva nu som de inte gjorde förut
+    - Jag tar med mig in i nästa vecka
+  not: Ta nästa rad när dagens elever lägger rätt antal markörer och säger ljuden i minst två av sina ord i steg 4, två pass i följd. Efter sista raden går gruppen till nästa förmåga där fler än hälften inte klarar uppgiften i ljudkollen.
 grund:
   text: "Att dela upp ord i ljud och sätta ihop ljud till ord är kärnan i fonemmedvetenheten, och undervisningen ger mest i små grupper och med bokstäver (Ehri m.fl., 2001; National Reading Panel, 2000). Barn som flyttade en markör för varje ljud medan de sa det, och samtidigt lärde sig bokstävernas ljud, läste och stavade bättre (Ball och Blachman, 1991). Barn hör stavelser långt före ljuden (Liberman m.fl., 1974), och med bokstäver i rutorna kopplar eleven ljuden till bokstäverna (Foorman m.fl., 2016)."
   kallor: "Bygger på Ball och Blachman (1991), Ehri m.fl. (2001), Foorman m.fl. (2016), Liberman m.fl. (1974) och National Reading Panel (2000)."

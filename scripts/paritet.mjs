@@ -43,6 +43,7 @@ const UNDANTAG = [
   { vag: /^(film|filmer\.\d+)\.(titel|beskrivning)$/, word: false, utskrift: false, skal: 'filmens namn och textalternativ på skärmen; stillbildernas texter prövas' },
   { vag: /^filmer\.\d+\.efter$/, word: false, utskrift: false, skal: 'filmens plats; platsen prövas nedan' },
   { vag: /^pabordet\.\d+\.efter$/, word: false, utskrift: false, skal: 'bildens plats; platsen prövas nedan, som filmernas' },
+  { vag: /^snabbmall\.(pass|period)$/, word: false, utskrift: false, skal: 'snabbmallens form: antalet passrader och veckorna, som bladet ritar som rader och band (src/lib/snabbmall.ts)' },
   { vag: /^pabordet\.\d+\.alt$/, word: false, utskrift: false, skal: 'bildens textalternativ (STIL.md under Bildtexter); det prövas nedan, i bildens alt på sidan och i Word' },
   { vag: /^centrala\.\d+\.(id|efterText)$/, word: false, utskrift: false, skal: 'den centrala sakens id och plats; sidan och Word-filen sätter knappen och länken på platsen med samma kod (src/lib/centrala.ts)' },
   { vag: /^lektionskort\.\d+\.efter$/, word: false, utskrift: false, skal: 'lektionskortets plats; sidan och Word-filen sätter knappen och länken på platsen med samma kod (src/lib/lektionskort.ts)' },

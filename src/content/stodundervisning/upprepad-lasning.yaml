@@ -237,7 +237,7 @@ passrutin:
       fas: Läs igen
     - text: "Ni avslutar med frågan: vad lärde vi oss av att läsa samma text flera gånger? Eleverna säger vilken strategi som hjälpte."
       fas: Avslutning
-  efterPasset: Efter passet gör du en kort notering om vilka ord som fastnade, vilken strategi som hjälpte och om texten flyter och kan gå hem.
+  efterPasset: Efter passet skriver du i snabbmallen vilka ord som fastnade och vilken strategi som hjälpte, och om ni byter text och vem som tar hem den.
   kallas: delar
 tidsschema:
   rubrik: Ett pass på 15 minuter
@@ -374,7 +374,7 @@ uppfoljning:
     - nar: Före insatsen
       vad: Eleven läser en kort, ny text för dig. Fyll i protokollet Lästrappan före och efter.
     - nar: Varje vecka
-      vad: "Skriv trappsteget i snabbmallen när eleven läser en ny text första gången. Står eleven kvar på samma steg i två veckor, byt veckans strategi eller ta en lättare text."
+      vad: "Skriv trappsteget överst i snabbmallen när eleven läser en ny text första gången. Står eleven kvar på samma steg i två veckor, byt veckans strategi eller ta en lättare text."
     - nar: Efter sex till åtta veckor
       vad: "Eleven läser en ny text som är lika lång och på samma nivå. Fyll i protokollet igen och jämför med starten. Berätta för eleven vad du har hört."
 mal:
@@ -385,21 +385,30 @@ mal:
     - Märka när det inte stämmer och rätta sig själv
     - Läsa en text som när man pratar och berätta vad den handlar om
 snabbmall:
-  fore:
-    - Dagens text och veckans strategi
-    - Ord som eleverna kan fastna på
-    - "Hur ni läser igen, och paren"
-  efter:
-    - Ord som fastnade, och strategin som hjälpte
-    - Flyter texten? Går den hem?
-    - Trappsteget för dem du lyssnade på
+  text: Bladet gäller veckans pass. Före passet skriver du hur ni läser igen. Efter passet skriver du det du hörde hos varje elev, och om ni byter text nästa gång och vem som tar hem den.
+  pass: 5
+  period: veckan
+  overst:
+    - Veckans text och strategi
+    - Trappstegen när texten är ny, i namnens ordning
+  fore: hur ni läser samma text igen
+  foreHjalp: Och ord de kan fastna på.
+  efter: ord som fastnade och strategin som hjälpte
+  ska:
+    - Jag lyssnade först och visade det jag hörde.
+    - Vi läste texten igen i minst två omgångar.
+    - Varje elev sa vilken strategi som hjälpte.
+  sist:
+    - Det här läser eleverna nu som de inte läste förut
+    - Nästa veckas text och strategi, och varför
+  not: "Trappstegen: 1 gissar, 2 ljudar med pauser, 3 ljudar ihop, 4 läser i delar, 5 läser med flyt. Står en elev kvar på samma steg i två veckor, byt veckans strategi eller ta en lättare text."
 checklista:
   punkter:
     - Valt texten och läst den högt själv.
     - Kopierat texten till varje elev och till mig.
     - Lagt ett strategikort vid varje plats, och gärna ett läsrör.
     - "Bestämt hur eleverna ska läsa igen, och vilka som blir par."
-    - Lagt fram snabbmallen för noteringen efteråt.
+    - Fyllt i Före i snabbmallen.
     - "Kopierat lappen hem, om eleven ska ta med sig texten."
 grund:
   text: "Att läsa samma text flera gånger med en vuxen som lyssnar och ger återkoppling stärker ordläsningen och flytet (National Reading Panel, 2000; Therrien och Kubina, 2006). Två till fyra läsningar per pass räcker, gärna från eko och kör till par, och effekten blir störst när eleven får lyssna på texten innan hen läser den igen (Therrien, Gormley och Kubina, 2006; Kuhn, 2020; Lee och Yoon, 2017). Den amerikanska lärarguiden från IES rekommenderar att läraren väntar, ber eleven läsa om meningen och ger en strategi, och säger ordet först när det inte går att ljuda (Foorman m.fl., 2016). Att säga ljuden utan paus hjälper nybörjare att läsa nya ord (Gonzalez-Frey och Ehri, 2021), och undervisning om orddelar stärker avkodningen (Goodwin och Ahn, 2013). Upprepad läsning kompletterar strukturerad undervisning om ljud och bokstäver, och den undervisningen har starkast stöd vid dyslexi (SBU, 2014)."
@@ -786,7 +795,7 @@ lathund:
       - Texten, en kopia per elev och en till dig
       - Strategikortet vid varje plats
       - Läsrör, om ni har
-      - Snabbmallen för noteringen efteråt, ur planeringsmallarna
+      - Snabbmallen för veckans pass, ur planeringsmallarna
     varjePass: Vilka ord fastnade, vilken strategi hjälpte, och kan texten gå hem?
 lektionskort:
   - text: "Lektionskortet är passet på ett A4: målet, passet med det du gör och säger, sätten att läsa igen och läsfelen med strategierna. Skriv ut det och ha det framför dig under passet."

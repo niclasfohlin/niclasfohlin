@@ -1,0 +1,46 @@
+---
+// Snabbmallen på metodens sida (K-487): bladet på höjden, med Words band, rubriker och ordning, så att läraren känner igen
+// pappret (formgivarnas förslag 2026-10-20, Opus B och Sonnet 2, underlag/prov/snabbmall-2026-10-20/). Passens rad står en
+// gång, "1–4 · Datum", i stället för tomma rader, och kolumnerna staplas i telefonen. Rutorna att kryssa är ritade och går
+// inte att trycka på, eftersom bladet fylls i på papper. Direkt under bladet står knappen Skriv ut bladet och filvalet med
+// Word-filen, som under riggens blad (Pabordet.astro), ur filen med bara snabbmallen (<id>-snabbmall). De fasta orden står i
+// src/lib/snabbmall.ts, så att sidan säger samma sak som Word.
+import { SNABB, snabbSist, type Snabbmall } from '../lib/snabbmall';
+import Filval from './Filval.astro';
+interface Props { sm: Snabbmall; titel: string; id: string }
+const { sm, titel, id } = Astro.props;
+const namn = `${id}-snabbmall`;
+const passen = Array.from({ length: sm.pass }, (_, i) => i + 1);
+const spann = `1–${sm.pass}`;
+// En rad med understreck att skriva på blir en linje, som på pappret.
+const delar = (t: string) => t.split(/(_{3,})/).filter(Boolean);
+const veckor = sm.period === 'veckan' ? [] : [sm.period === 'två veckor' ? 'och' : 'till'];
+---
+<div class="m-snabb">
+  <p class="m-snabb-band">SNABBMALL · {titel}</p>
+  <div class="m-snabb-overst">
+    <p><span class="falt">Vecka <i class="m-snabb-linje"></i>{veckor.map((o) => <>{' '}{o} <i class="m-snabb-linje"></i></>)}</span>{' '}<span class="falt">{SNABB.eleverna} <i class="m-snabb-linje lang"></i></span></p>
+    {(sm.overst ?? []).map((t) => <p>{delar(t).map((d) => (/^_+$/.test(d) ? <i class="m-snabb-linje"></i> : d))} <i class="m-snabb-linje lang"></i></p>)}
+  </div>
+  <p class="m-snabb-avsnitt">{SNABB.passen}</p>
+  <ul class="m-snabb-kol">
+    <li><span><span class="rubrik">{SNABB.pass}</span> <span class="tal">{spann} <span class="m-snabb-hjalp">{SNABB.datum}</span></span></span><span class="rad" aria-hidden="true">{spann} <span class="m-snabb-hjalp">{SNABB.datum}</span></span></li>
+    <li><span><span class="rubrik">Före: {sm.fore}</span>{sm.foreHjalp && <> <span class="m-snabb-hjalp fore-hjalp">{sm.foreHjalp}</span></>}</span><span class="rad" aria-hidden="true"></span></li>
+    <li><span><span class="rubrik">Efter: {sm.efter}</span></span><span class="rad" aria-hidden="true"></span></li>
+    <li><span><span class="rubrik">{SNABB.nasta}</span></span><span class="rad" aria-hidden="true"></span></li>
+  </ul>
+  <p class="m-snabb-avsnitt">{SNABB.ska} <span class="m-snabb-hjalp">{SNABB.skaHjalp}</span></p>
+  <div style={`--pass: ${sm.pass}`}>
+    <div class="m-snabb-ska-huvud" aria-hidden="true"><span>{SNABB.pass}</span>{passen.map((p) => <span>{p}</span>)}</div>
+    <ul class="m-snabb-ska">
+      {sm.ska.map((t) => <li><span>{t}</span><span class="rutor" aria-hidden="true">{passen.map((p) => <span><b>{p}</b><span class="m-snabb-ruta"></span></span>)}</span></li>)}
+    </ul>
+  </div>
+  <p class="m-snabb-avsnitt">{snabbSist(sm)} <span class="m-snabb-hjalp">{SNABB.sistHjalp}</span></p>
+  <div class="m-snabb-sist"><p>{sm.sist[0]}</p><p class="m-snabb-pil">{sm.sist[1]}</p></div>
+</div>
+{sm.not && <p class="m-snabb-not">{sm.not}</p>}
+<p class="m-blad-filer">
+  <a class="knapp sekundar liten" href={`/stodundervisning/${namn}.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="1" data-goatcounter-click={`utskrift:${namn}`} data-goatcounter-title={`${titel}: Snabbmall, bladet`}><span data-direkt="Skriv ut bladet">Bladet som pdf</span><span class="visually-hidden">: Snabbmall</span></a>
+  <Filval fil={`/stodundervisning/${namn}`} namn={namn} rubrik="Snabbmallen" statistik={`${titel}: Snabbmall`} liten />
+</p>
