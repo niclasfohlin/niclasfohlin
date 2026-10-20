@@ -627,7 +627,8 @@ function snabbmallTabell(titel: string, fore: string[], efter: string[], o: { sk
 // vanliga tabeller, så att Word och Google ritar det lika. Den första har bandet, raden för veckan och eleverna med raderna
 // överst och en rad per pass med Före, Efter och Nästa gång, den andra de tre sakerna som ska med, med en ruta per pass att
 // kryssa, och den tredje två rutor sist. Allt hålls ihop, så att bladet står på en sida (riggens sidprov, 2026-10-20: 56–82
-// pt luft under sista raden i alla 22 metoder). Rutan att kryssa är □, som i checklistorna.
+// pt luft under sista raden i alla 22 metoder) och flyttar som en helhet till nästa sida när det inte ryms där det står.
+// Rutan att kryssa är □, som i checklistorna.
 function snabbvecka(titel: string, sm: Snabbmall): Barn[] {
   const n = sm.pass;
   const b1 = [11, 29, 40].map((x) => Math.round((x / 100) * BREDD));
@@ -3290,8 +3291,10 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     filmVid({ avsnitt: 'mal' });
   }
   if (d.snabbmall) {
-    // Bladet börjar på en ny sida, med rubriken och texten, som hos riggen, så att det står på en sida (snabbvecka).
-    ut.push(new Paragraph({ children: [run(d.snabbmall.rubrik)], heading: HeadingLevel.HEADING_2, keepNext: true, pageBreakBefore: true, spacing: { before: 0, after: 100 } }));
+    // Rubriken, texten och bladet hålls ihop, så att bladet står på en sida och flyttar till nästa när det inte ryms.
+    // En tvingad sidbrytning före rubriken gjorde texten före till ett block som Google ritade en sida längre än Word,
+    // med en tom sida i Läslistor i grupp (googleprov 2026-10-20, K-487).
+    ut.push(new Paragraph({ children: [run(d.snabbmall.rubrik)], heading: HeadingLevel.HEADING_2, keepNext: true, spacing: { before: 320, after: 100 } }));
     if (d.snabbmall.text) ut.push(stycke(d.snabbmall.text, { hallIhop: true }));
     ut.push(...snabbvecka(d.titel, d.snabbmall));
     filmVid({ avsnitt: 'snabbmall' });
