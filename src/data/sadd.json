@@ -1,0 +1,73 @@
+{
+  "_kommentar": "Såddprovet (Niclas 2026-10-20): ett delat stödmaterial sås bara i de metoder där det stöder en central del av metoden och det eleverna tränar. tranar är förmågornas taggar som saken är gjord för, karna orden (reguljära uttryck) för det eleverna gör i passet, provad datumet för bedömningen, ja metoderna som ska visa saken med platsen och skälet, och nej kandidaterna som inte ska, med skälet. fore: saken såddes före provet och prövas bara åt ena hållet. Kör node scripts/saddprov.mjs <id>; regeln står i METODER.md under De centrala sakerna.",
+  "saker": {
+    "lasstrategier": {
+      "tranar": [
+        "avkodning",
+        "lasflyt"
+      ],
+      "karna": [
+        "\\bläs(?:er|a)?\\b[^.]{0,30}\\bhögt\\b",
+        "\\bljuda",
+        "\\bavkod"
+      ],
+      "provad": "2026-10-14",
+      "fore": "Sådd med riggens leverans 2026-10-14 (K-357), före såddprovet",
+      "ja": {
+        "til-i-grupp": "Riggens leverans 2026-10-14",
+        "upprepad-lasning": "Riggens leverans 2026-10-14",
+        "laslistor-i-grupp": "Riggens leverans 2026-10-14",
+        "hoglasning-i-par": "Riggens leverans 2026-10-19: efter tabellen Balansen, när avkodningen tar all kraft"
+      },
+      "nej": {}
+    },
+    "skrivstrategier": {
+      "tranar": [
+        "skrivflyt",
+        "skrivstrategier",
+        "textstruktur",
+        "meningsbyggnad",
+        "stavning"
+      ],
+      "karna": [
+        "\\bskriv(?:er|a)?\\b"
+      ],
+      "provad": "2026-10-18",
+      "fore": "Sådd med riggens leverans 2026-10-18 (K-417), före såddprovet",
+      "ja": {
+        "kortskrivning-skriv-varje-dag": "Riggens leverans 2026-10-18",
+        "ordverkstad-i-grupp": "Riggens leverans 2026-10-18",
+        "sag-skriv-och-las": "Riggens leverans 2026-10-18",
+        "skrivkurs-berattelseram": "Riggens leverans 2026-10-18",
+        "skrivkurs-sagoboken": "Riggens leverans 2026-10-18",
+        "skrivkurs-vardeskapande": "Riggens leverans 2026-10-18",
+        "texttyp-argumenterande-text": "Riggens leverans 2026-10-18",
+        "texttyp-berattande-text": "Riggens leverans 2026-10-18",
+        "texttyp-beskrivande-text": "Riggens leverans 2026-10-18",
+        "texttyp-instruerande-text": "Riggens leverans 2026-10-18",
+        "texttyper-i-grupp": "Riggens leverans 2026-10-18"
+      },
+      "nej": {}
+    },
+    "utveckla-hoglasning": {
+      "tranar": [
+        "lasflyt"
+      ],
+      "karna": [
+        "\\bläs(?:er|a|er upp)?\\b[^.]{0,40}\\bhögt\\b",
+        "\\bhögt för\\b",
+        "\\bi kör\\b",
+        "\\blyssnar(?:e|en)?\\b[^.]{0,40}\\bläs"
+      ],
+      "provad": "2026-10-20",
+      "ja": {
+        "hoglasning-i-par": "Metodens eget stödmaterial, efter tabellen De fem strategierna",
+        "upprepad-lasning": "Efter texten före tabellen Lästrappan: läsningen med flyt och röst är metodens mål, lästrappans översta steg är när rösten går upp och ner, och ett av sätten att läsa igen är repliker som lästeater. Bladet ger läraren strategierna för rösten när eleven har nått dit",
+        "til-i-grupp": "I avsnittet Hem och skola (hem), eller där metoden säger att eleven läser för andra: eleven läser favoritmeningarna högt för gruppen i varje pass och boken för en vuxen hemma samma dag. Niclas 2026-10-20: \"Tycker TIL i grupp för då läser eleven för andra konkret\""
+      },
+      "nej": {
+        "laslistor-i-grupp": "Passets kärna är ord och listor som eleverna läser i kör, och rösten vid punkt är en liten del. Lässtrategier täcker ordet och meningen. Niclas 2026-10-20: \"Läslistor nej\""
+      }
+    }
+  }
+}

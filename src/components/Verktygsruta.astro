@@ -10,7 +10,7 @@
 import { site } from '../data/site';
 import { CENTRALA, type Central } from '../lib/centrala';
 import type { MetodPost } from '../lib/metod';
-import { arskursSpannet, spannText } from '../lib/tackning';
+import { arskursSpannet, spannITexten, spannText } from '../lib/tackning';
 interface Props { metoder: MetodPost[] }
 const { metoder } = Astro.props;
 
@@ -25,7 +25,9 @@ const delar = DELAR.map((del) => ({
   saker: CENTRALA.filter((c) => c.del === del.id).map((c) => {
     const ms = visar(c);
     const omraden = site.omraden.filter((o) => ms.some((m) => m.data.omrade === o));
-    const spann = ms.map((m) => arskursSpannet(m.data));
+    // En delad sak med eget spann (fältet arskurs, src/lib/centrala.ts) visar det, också där metoderna är färre.
+    const egen = c.arskurs ? spannITexten(c.arskurs) : undefined;
+    const spann = [...ms.map((m) => arskursSpannet(m.data)), ...(egen ? [egen] : [])];
     const sp: [number, number] = [Math.min(...spann.map((s) => s[0])), Math.max(...spann.map((s) => s[1]))];
     return {
       c,
