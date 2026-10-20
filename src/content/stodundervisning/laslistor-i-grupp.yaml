@@ -36,35 +36,43 @@ centrala:
 pabordet:
   - nr: 1
     rubrik: "Blad: Läslista start"
-    text: "Elevens läslista har bokstäverna i två listor bredvid varandra, varje bokstav i en ruta: den första i den ordning gruppen lär sig dem och den andra blandad, med några stora bokstäver. Gruppen läser uppifrån och ned, kolumn för kolumn."
+    text: "Listan i vecka 1. Eleven säger bokstavens ljud och inte namnet. Kopiera listan till varje par och visa den stort på tavlan när du modellerar."
+    alt: "Elevens läslista har bokstäverna i två listor bredvid varandra, varje bokstav i en ruta: den första i den ordning gruppen lär sig dem och den andra blandad, med några stora bokstäver. Gruppen läser uppifrån och ned, kolumn för kolumn."
     efter: "ram: Läslista start"
   - nr: 2
     rubrik: "Blad: Läslista 1"
-    text: "Elevens läslista har ord med två ljud i tre kolumner, varje ord i en ruta, och kolumnernas namn små ovanför: Konsonant + vokal över de två första och Vokal + konsonant över den tredje. Gruppen läser uppifrån och ned, kolumn för kolumn."
+    text: "Listan i vecka 2. Eleven binder ihop två ljud till ett ord. Kopiera listan till varje par och visa den stort på tavlan när du modellerar."
+    alt: "Elevens läslista har ord med två ljud i tre kolumner, varje ord i en ruta, och kolumnernas namn små ovanför: Konsonant + vokal över de två första och Vokal + konsonant över den tredje. Gruppen läser uppifrån och ned, kolumn för kolumn."
     efter: "ram: Läslista 1: KV och VK"
   - nr: 3
     rubrik: "Blad: Läslista 2"
-    text: "Elevens läslista har ord med tre ljud i ordfamiljer i tre kolumner, varje ord i en ruta, och kolumnernas namn små ovanför: -ol · -al · -il, -at · -os · -us, -en · -ur · -ål. Gruppen läser uppifrån och ned, familj för familj."
+    text: "Listan i vecka 3. Gruppen läser en ordfamilj i taget, där bara första ljudet byts. Kopiera listan till varje par och visa den stort på tavlan när du modellerar."
+    alt: "Elevens läslista har ord med tre ljud i ordfamiljer i tre kolumner, varje ord i en ruta, och kolumnernas namn små ovanför: -ol · -al · -il, -at · -os · -us, -en · -ur · -ål. Gruppen läser uppifrån och ned, familj för familj."
     efter: "ram: Läslista 2: KVK i ordfamiljer"
   - nr: 4
     rubrik: "Blad: Läslista 3"
-    text: "Elevens läslista har ord med två stavelser i tre kolumner, varje ord i en ruta, och kolumnernas namn små ovanför: ”Från KVK till KVKV”, ”Nya ord” och ”Ord med e, o och y”. Gruppen läser uppifrån och ned, kolumn för kolumn."
+    text: "Listan i vecka 4. Eleven läser ord i två stavelser, en stavelse i taget. Kopiera listan till varje par och visa den stort på tavlan när du modellerar."
+    alt: "Elevens läslista har ord med två stavelser i tre kolumner, varje ord i en ruta, och kolumnernas namn små ovanför: ”Från KVK till KVKV”, ”Nya ord” och ”Ord med e, o och y”. Gruppen läser uppifrån och ned, kolumn för kolumn."
     efter: "ram: Läslista 3: KVKV, två stavelser"
   - nr: 5
     rubrik: "Blad: Läslista 4"
-    text: "Elevens läslista har ord med två konsonanter i följd i tre kolumner, varje ord i en ruta, och kolumnernas namn små ovanför: ”Möte först” över de två första och ”Möte sist, kort vokal” över den tredje. Gruppen läser uppifrån och ned, kolumn för kolumn."
+    text: "Listan i vecka 5. Lyssna efter om eleven tappar eller lägger till ett ljud i konsonantmötet, som när hen läser sen i stället för sten. Kopiera listan till varje par och visa den stort på tavlan när du modellerar."
+    alt: "Elevens läslista har ord med två konsonanter i följd i tre kolumner, varje ord i en ruta, och kolumnernas namn små ovanför: ”Möte först” över de två första och ”Möte sist, kort vokal” över den tredje. Gruppen läser uppifrån och ned, kolumn för kolumn."
     efter: "ram: Läslista 4: konsonantmöten"
   - nr: 6
     rubrik: "Blad: Läslista 5, sida 1"
-    text: "Elevens läslista, sidan 1: substantiven i kolumnerna ”Grundord”, ”Med -en eller -an” och ”Med -ar eller -or”, sist sex sammansatta ord. Gruppen läser rad för rad, så att ordet växer."
+    text: "Första sidan av listan i vecka 6. Du ringar in ändelsen och frågar vad som hände med ordet, som i solen och solar. Kopiera båda sidorna till varje par, gärna dubbelsidigt."
+    alt: "Elevens läslista, sidan 1: substantiven i kolumnerna ”Grundord”, ”Med -en eller -an” och ”Med -ar eller -or”, sist sex sammansatta ord. Gruppen läser rad för rad, så att ordet växer."
     efter: "ram: Läslista 5: ordet växer"
   - nr: 7
     rubrik: "Blad: Läslista 5, sida 2"
-    text: "Elevens läslista, sidan 2: verben i kolumnerna ”Grundform”, ”Nu: -ar eller -er” och ”Då: -ade eller -te”, sist de fyra första meningarna, en per rad."
+    text: "Andra sidan av listan i vecka 6. Kopiera båda sidorna till varje par, gärna dubbelsidigt."
+    alt: "Elevens läslista, sidan 2: verben i kolumnerna ”Grundform”, ”Nu: -ar eller -er” och ”Då: -ade eller -te”, sist de fyra första meningarna, en per rad."
     efter: "ram: Läslista 5: ordet växer"
   - nr: 8
     rubrik: "Blad: Läslista 6"
-    text: "Elevens läslista: tolv meningar, en per rad, från de kortaste till de längsta, och under dem en ruta med texten om Sara och hunden, en mening per rad: Sara har en hund. Hunden är stor och glad. Sara och hunden leker i sanden. Nu vilar de i solen. Det är en fin dag."
+    text: "Listan i vecka 7. Gruppen läser varje mening två gånger och pratar om vad den betyder. Kopiera listan till varje par och visa den stort på tavlan när du modellerar."
+    alt: "Elevens läslista: tolv meningar, en per rad, från de kortaste till de längsta, och under dem en ruta med texten om Sara och hunden, en mening per rad: Sara har en hund. Hunden är stor och glad. Sara och hunden leker i sanden. Nu vilar de i solen. Det är en fin dag."
     efter: "ram: Läslista 6: meningar"
 inledning:
   - "Läslistor utvecklar elevernas avkodningsförmåga genom strukturerad och upprepad läsning. Arbetet med en lista följer alltid samma rörelse: läraren modellerar, gruppen körläser och eleverna läser i par. Rörelsen går från mest till minst stöd, och det är rörelsen som är metoden. Listan i sig utvecklar ingen avkodning."

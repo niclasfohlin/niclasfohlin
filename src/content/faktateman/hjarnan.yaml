@@ -853,7 +853,8 @@ pabordet:
     efter: "ram: Avancerat, text 6: Hjärnans karta"
   - nr: 153
     rubrik: "Blad: Tankekartan för Hjärnans karta"
-    text: Tankekartan, blad 2, för Hjärnans karta, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Tankekartan, blad 2, för Hjärnans karta, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Avancerat, text 6, Hjärnans karta"
   - nr: 154
     rubrik: Hjärnvågor
@@ -868,7 +869,8 @@ pabordet:
       - sol
   - nr: 157
     rubrik: "Blad: Tidslinjen för Hjärnans nattskift"
-    text: Tidslinjen, blad 1, för Hjärnans nattskift, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Tidslinjen, blad 1, för Hjärnans nattskift, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Avancerat, text 7, Hjärnans nattskift"
   - nr: 158
     rubrik: Hippocampus på båda sidor
@@ -883,7 +885,8 @@ pabordet:
       - öra
   - nr: 161
     rubrik: "Blad: Venndiagrammet för Två slags minne"
-    text: Venndiagrammet, blad 1, för Två slags minne, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Venndiagrammet, blad 1, för Två slags minne, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Avancerat, text 8, Två slags minne"
   - nr: 162
     rubrik: Dag, natt och morgon
@@ -898,7 +901,8 @@ pabordet:
     efter: "ram: Avancerat, text 9: Natten bygger minnet"
   - nr: 165
     rubrik: "Blad: Kedjan för Natten bygger minnet"
-    text: Kedjan, blad 1, för Natten bygger minnet, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Kedjan, blad 1, för Natten bygger minnet, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Avancerat, text 9, Natten bygger minnet"
   - nr: 166
     rubrik: Två klockor
@@ -910,7 +914,8 @@ pabordet:
     efter: "ram: Avancerat, text 10: Klockan i tonåren"
   - nr: 169
     rubrik: "Blad: Problem och lösning för Klockan i tonåren"
-    text: Problem och lösning, blad 1, för Klockan i tonåren, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Problem och lösning, blad 1, för Klockan i tonåren, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Avancerat, text 10, Klockan i tonåren"
 tabeller:
   - rubrik: Hjärnan

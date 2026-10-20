@@ -751,31 +751,38 @@ pabordet:
     efter: "ram: Två lösningar: Avancerat, problem 10, Alla summor"
   - nr: 100
     rubrik: "Blad: Vår lösning"
-    text: "Parets blad i varje pass har raderna för namnen och problemet och fem rutor i den ordning paret arbetar: Vi vet, Vi ska ta reda på, Så visar vi problemet, Vårt svar och Så kontrollerade vi. Den tredje rutan är störst, och där visar paret problemet med en bild, en tabell eller en tallinje."
+    text: "Kopiera ett blad per par före varje pass. I Lösa prövar paren olika sätt på bladet, och bland bladen väljer du lösningar till Jämföra. Spara bladen, för de visar hur paren tänker."
+    alt: "Parets blad i varje pass har raderna för namnen och problemet och fem rutor i den ordning paret arbetar: Vi vet, Vi ska ta reda på, Så visar vi problemet, Vårt svar och Så kontrollerade vi. Den tredje rutan är störst, och där visar paret problemet med en bild, en tabell eller en tallinje."
     efter: "ram: Vår lösning"
   - nr: 101
     rubrik: "Blad: Kartläggning före, Bas"
-    text: "Överst på elevens blad står problemet: ”I en klass är det 26 elever. Det är 4 fler flickor än pojkar. Hur många pojkar är det i klassen?” Under det står de fem uppgifterna med var sin yta: en rad att berätta med egna ord, två rutor bredvid varandra att visa och lösa problemet, två rader att pröva en annan elevs lösning och en rad om vad eleven gör när hen inte vet hur hen ska börja."
+    text: "Gör kartläggningen före första passet, på nivån närmast elevernas årskurs, och räkna med tio minuter per elev eller par. Täck uppgift 4 med ett papper tills eleven har löst uppgift 3. Eleven får svara muntligt på uppgift 1 och 5."
+    alt: "Överst på elevens blad står problemet: ”I en klass är det 26 elever. Det är 4 fler flickor än pojkar. Hur många pojkar är det i klassen?” Under det står de fem uppgifterna med var sin yta: en rad att berätta med egna ord, två rutor bredvid varandra att visa och lösa problemet, två rader att pröva en annan elevs lösning och en rad om vad eleven gör när hen inte vet hur hen ska börja."
     efter: "ram: Kartläggning före: Bas"
   - nr: 102
     rubrik: "Blad: Kartläggning efter, Bas"
-    text: "Överst på elevens blad står problemet: ”Två lag har tillsammans 34 spelare. Det ena laget har 6 fler spelare än det andra. Hur många spelare har det mindre laget?” Under det står de fem uppgifterna med var sin yta: en rad att berätta med egna ord, två rutor bredvid varandra att visa och lösa problemet, två rader att pröva en annan elevs lösning och en rad om vad eleven gör när hen inte vet hur hen ska börja."
+    text: "Gör kartläggningen efter sex till åtta veckor och jämför de två protokollen. Täck uppgift 4 med ett papper tills eleven har löst uppgift 3. Eleven får svara muntligt på uppgift 1 och 5."
+    alt: "Överst på elevens blad står problemet: ”Två lag har tillsammans 34 spelare. Det ena laget har 6 fler spelare än det andra. Hur många spelare har det mindre laget?” Under det står de fem uppgifterna med var sin yta: en rad att berätta med egna ord, två rutor bredvid varandra att visa och lösa problemet, två rader att pröva en annan elevs lösning och en rad om vad eleven gör när hen inte vet hur hen ska börja."
     efter: "ram: Kartläggning efter: Bas"
   - nr: 103
     rubrik: "Blad: Kartläggning före, Medel"
-    text: "Överst på elevens blad står problemet: ”En tröja kostar 20 % mer än en mössa. Tillsammans kostar de 330 kr. Vad kostar mössan?” Under det står de fem uppgifterna med var sin yta: en rad att berätta med egna ord, två rutor bredvid varandra att visa och lösa problemet, två rader att pröva en annan elevs lösning och en rad om vad eleven gör när hen inte vet hur hen ska börja."
+    text: "Gör kartläggningen före första passet, på nivån närmast elevernas årskurs, och räkna med tio minuter per elev eller par. Täck uppgift 4 med ett papper tills eleven har löst uppgift 3. Eleven får svara muntligt på uppgift 1 och 5."
+    alt: "Överst på elevens blad står problemet: ”En tröja kostar 20 % mer än en mössa. Tillsammans kostar de 330 kr. Vad kostar mössan?” Under det står de fem uppgifterna med var sin yta: en rad att berätta med egna ord, två rutor bredvid varandra att visa och lösa problemet, två rader att pröva en annan elevs lösning och en rad om vad eleven gör när hen inte vet hur hen ska börja."
     efter: "ram: Kartläggning före: Medel"
   - nr: 104
     rubrik: "Blad: Kartläggning efter, Medel"
-    text: "Överst på elevens blad står problemet: ”En hjälm kostar 25 % mer än ett lås. Tillsammans kostar de 360 kr. Vad kostar låset?” Under det står de fem uppgifterna med var sin yta: en rad att berätta med egna ord, två rutor bredvid varandra att visa och lösa problemet, två rader att pröva en annan elevs lösning och en rad om vad eleven gör när hen inte vet hur hen ska börja."
+    text: "Gör kartläggningen efter sex till åtta veckor och jämför de två protokollen. Täck uppgift 4 med ett papper tills eleven har löst uppgift 3. Eleven får svara muntligt på uppgift 1 och 5."
+    alt: "Överst på elevens blad står problemet: ”En hjälm kostar 25 % mer än ett lås. Tillsammans kostar de 360 kr. Vad kostar låset?” Under det står de fem uppgifterna med var sin yta: en rad att berätta med egna ord, två rutor bredvid varandra att visa och lösa problemet, två rader att pröva en annan elevs lösning och en rad om vad eleven gör när hen inte vet hur hen ska börja."
     efter: "ram: Kartläggning efter: Medel"
   - nr: 105
     rubrik: "Blad: Kartläggning före, Avancerat"
-    text: "Överst på elevens blad står problemet: ”En rektangel har omkretsen 34 cm. Den ena sidan är 5 cm längre än den andra. Vilken area har rektangeln?” Under det står de fem uppgifterna med var sin yta: en rad att berätta med egna ord, två rutor bredvid varandra att visa och lösa problemet, två rader att pröva en annan elevs lösning och en rad om vad eleven gör när hen inte vet hur hen ska börja."
+    text: "Gör kartläggningen före första passet, på nivån närmast elevernas årskurs, och räkna med tio minuter per elev eller par. Täck uppgift 4 med ett papper tills eleven har löst uppgift 3. Eleven får svara muntligt på uppgift 1 och 5."
+    alt: "Överst på elevens blad står problemet: ”En rektangel har omkretsen 34 cm. Den ena sidan är 5 cm längre än den andra. Vilken area har rektangeln?” Under det står de fem uppgifterna med var sin yta: en rad att berätta med egna ord, två rutor bredvid varandra att visa och lösa problemet, två rader att pröva en annan elevs lösning och en rad om vad eleven gör när hen inte vet hur hen ska börja."
     efter: "ram: Kartläggning före: Avancerat"
   - nr: 106
     rubrik: "Blad: Kartläggning efter, Avancerat"
-    text: "Överst på elevens blad står problemet: ”En rektangel har omkretsen 46 cm. Den ena sidan är 7 cm längre än den andra. Vilken area har rektangeln?” Under det står de fem uppgifterna med var sin yta: en rad att berätta med egna ord, två rutor bredvid varandra att visa och lösa problemet, två rader att pröva en annan elevs lösning och en rad om vad eleven gör när hen inte vet hur hen ska börja."
+    text: "Gör kartläggningen efter sex till åtta veckor och jämför de två protokollen. Täck uppgift 4 med ett papper tills eleven har löst uppgift 3. Eleven får svara muntligt på uppgift 1 och 5."
+    alt: "Överst på elevens blad står problemet: ”En rektangel har omkretsen 46 cm. Den ena sidan är 7 cm längre än den andra. Vilken area har rektangeln?” Under det står de fem uppgifterna med var sin yta: en rad att berätta med egna ord, två rutor bredvid varandra att visa och lösa problemet, två rader att pröva en annan elevs lösning och en rad om vad eleven gör när hen inte vet hur hen ska börja."
     efter: "ram: Kartläggning efter: Avancerat"
 ramar:
   rubrik: Problemen

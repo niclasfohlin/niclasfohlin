@@ -1220,7 +1220,8 @@ pabordet:
     fluent: ["oppen-bok", "stjärna", "pojke", "flicka-2", "flicka", "pojke-2"]
   - nr: 10
     rubrik: "Blad: Skylten"
-    text: "Skylten har ordet Skrivkursen överst och rubriken ”Skriv en egen bok”, en bild av en öppen bok och meningen ”En skrivkurs där vi skriver en hel bok var.” Sedan kommer tre rader med var sin bild: ”Boken skriver du till ett yngre barn.”, ”Vi träffas 15 gånger och skriver en del i taget.” och ”Sist läser du boken för barnet. Du får behålla den.” Nederst står ”Vill du vara med?” och två rader att skriva på, Prata med och Vi börjar."
+    text: "Sätt upp skylten i varje klass där du presenterar kursen, och visa den igen i pass 1. Skriv ditt namn och första kursdagen på raderna, i Word-filen före utskriften eller för hand efteråt. Skriv ut en i färg till varje klass, gärna på A3."
+    alt: "Skylten har ordet Skrivkursen överst och rubriken ”Skriv en egen bok”, en bild av en öppen bok och meningen ”En skrivkurs där vi skriver en hel bok var.” Sedan kommer tre rader med var sin bild: ”Boken skriver du till ett yngre barn.”, ”Vi träffas 15 gånger och skriver en del i taget.” och ”Sist läser du boken för barnet. Du får behålla den.” Nederst står ”Vill du vara med?” och två rader att skriva på, Prata med och Vi börjar."
     efter: "ram: Skylten, start: Skriv en egen bok"
     fluent: [oppen-bok, barn, skrivhand, present]
 lathund:

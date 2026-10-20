@@ -833,7 +833,8 @@ pabordet:
     efter: "ram: Bas, text 6: Vikingaskeppet"
   - nr: 113
     rubrik: "Blad: Tankekartan för Vikingaskeppet"
-    text: Tankekartan, blad 1, för Vikingaskeppet, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Tankekartan, blad 1, för Vikingaskeppet, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Bas, text 6, Vikingaskeppet"
   - nr: 114
     rubrik: Från sten till runsten
@@ -845,7 +846,8 @@ pabordet:
     efter: "ram: Bas, text 7: Ristat i sten"
   - nr: 117
     rubrik: "Blad: Tidslinjen för Ristat i sten"
-    text: Tidslinjen, blad 1, för Ristat i sten, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Tidslinjen, blad 1, för Ristat i sten, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Bas, text 7, Ristat i sten"
   - nr: 118
     rubrik: Två vägar ut
@@ -857,7 +859,8 @@ pabordet:
     efter: "ram: Bas, text 8: Västerut och österut"
   - nr: 121
     rubrik: "Blad: Venndiagrammet för Västerut och österut"
-    text: Venndiagrammet, blad 1, för Västerut och österut, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Venndiagrammet, blad 1, för Västerut och österut, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Bas, text 8, Västerut och österut"
   - nr: 122
     rubrik: Silvrets väg
@@ -869,7 +872,8 @@ pabordet:
     efter: "ram: Bas, text 9: Skatten i åkern"
   - nr: 125
     rubrik: "Blad: Kedjan för Skatten i åkern"
-    text: Kedjan, blad 1, för Skatten i åkern, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Kedjan, blad 1, för Skatten i åkern, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Bas, text 9, Skatten i åkern"
   - nr: 126
     rubrik: Spåren i marken
@@ -881,7 +885,8 @@ pabordet:
     efter: "ram: Bas, text 10: Vikingarnas spår"
   - nr: 129
     rubrik: "Blad: Problem och lösning för Vikingarnas spår"
-    text: Problem och lösning, blad 1, för Vikingarnas spår, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Problem och lösning, blad 1, för Vikingarnas spår, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Bas, text 10, Vikingarnas spår"
 tabeller:
   - rubrik: Vikingarna

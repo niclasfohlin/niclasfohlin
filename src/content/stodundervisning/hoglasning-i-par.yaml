@@ -37,12 +37,14 @@ pabordet:
     fluent: [flicka-2, pojke, pojke-2, flicka]
   - nr: 3
     rubrik: "Blad: Affischen"
-    text: "Affischen sitter på väggen. Överst frågar den vad som händer och hur det känns, sedan kommer de fem strategierna med var sin bild, sitt tecken och elevens fråga, och sist lyssnarens två meningar."
+    text: "Affischen sitter där alla ser den, och du pekar på den i Visa och i Återkoppling. Skriv ut den på A3, eller förstora den till 141 procent i kopiatorn."
+    alt: "Affischen sitter på väggen. Överst frågar den vad som händer och hur det känns, sedan kommer de fem strategierna med var sin bild, sitt tecken och elevens fråga, och sist lyssnarens två meningar."
     efter: "ram: Affischen: fem sätt att läsa för en lyssnare"
     fluent: [stjärna, oppen-bok, tänka, förvånad, säga, nyckel, sköldpadda, öra]
   - nr: 4
     rubrik: "Blad: Läsarens förberedelse"
-    text: "Elevens blad inför läsningen för de yngre har raderna för namnet och boken och under dem en ruta för lyssnaren och vad hen tycker om. Sedan kommer de fem stegen: att läsa boken tyst, att sätta post-it-lappar på tre till fem ställen, att läsa boken för kamraten, att tänka ut en fråga till lyssnaren och att läsa boken för lyssnaren och ställa frågan. Under steg 4 står rutan Min fråga och under steg 5 rutan Svaret på min fråga."
+    text: "Ett blad per elev i vecka 6–⁠8. I vecka 6 fyller eleven i rutan om lyssnaren när hen träffar de yngre. I vecka 6 och 7 gör hen steg 1–⁠4, och i vecka 8 tar hen med bladet när hen läser för lyssnaren."
+    alt: "Elevens blad inför läsningen för de yngre har raderna för namnet och boken och under dem en ruta för lyssnaren och vad hen tycker om. Sedan kommer de fem stegen: att läsa boken tyst, att sätta post-it-lappar på tre till fem ställen, att läsa boken för kamraten, att tänka ut en fråga till lyssnaren och att läsa boken för lyssnaren och ställa frågan. Under steg 4 står rutan Min fråga och under steg 5 rutan Svaret på min fråga."
     efter: "ram: Läsarens förberedelse: inför läsningen för de yngre"
 
 inledning:

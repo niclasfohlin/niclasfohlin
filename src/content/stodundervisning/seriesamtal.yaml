@@ -38,12 +38,14 @@ utkast: false
 pabordet:
   - nr: 1
     rubrik: "Blad: Frågor vi ställer till varandra"
-    text: "Bladet har två likadana kort att klippa isär, ett till varje sida av bordet. Kortet Frågor vi ställer till varandra har sex frågor i var sin pratbubbla: Vad får dig att tro det? Kan hen ha tänkt något annat? Vad ville hen? Vad behöver hen? Hur kändes det för hen? Tänker du som jag?"
+    text: "Från pass 4 ligger ett kort på varje sida av bordet. En elev läser en fråga och ställer den till en kamrat, och i F–⁠2 läser du frågan åt eleven. Klipp isär bladets två kort och laminera dem."
+    alt: "Bladet har två likadana kort att klippa isär, ett till varje sida av bordet. Kortet Frågor vi ställer till varandra har sex frågor i var sin pratbubbla: Vad får dig att tro det? Kan hen ha tänkt något annat? Vad ville hen? Vad behöver hen? Hur kändes det för hen? Tänker du som jag?"
     efter: "ram: Frågor vi ställer till varandra"
     fluent: [sax]
   - nr: 2
     rubrik: "Blad: Vad behöver hen?"
-    text: "Kortet ”Vad behöver hen?” har frågan i en tankebubbla och nio behov i var sin ruta, med en bild över varje: vara med, få vara i fred, få bestämma, hinna klart, ha roligt, få det rättvist, bli hörd, göra rätt och må bra."
+    text: "Kortet ligger bredvid bildserien hela passet, och ni använder det i delen Tankarna. Eleven pekar på ett behov, och ni säger en mening om personen i serien. Skriv ut kortet på A4 och laminera det."
+    alt: "Kortet ”Vad behöver hen?” har frågan i en tankebubbla och nio behov i var sin ruta, med en bild över varje: vara med, få vara i fred, få bestämma, hinna klart, ha roligt, få det rättvist, bli hörd, göra rätt och må bra."
     efter: "ram: Vad behöver hen?"
     fluent: ["vara med", "få vara i fred", "få bestämma", "hinna klart", "ha roligt", "få det rättvist", "bli hörd", "göra rätt", "må bra"]
 inledning:

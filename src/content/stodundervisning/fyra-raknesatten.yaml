@@ -28,7 +28,7 @@ material:
   - multilink
   - räknemattan och talrutan
   - övningsblad
-uppdaterad: 2026-10-19
+uppdaterad: 2026-10-20
 publicerad: 2026-10-04
 relaterade:
   - antalsuppfattning-i-grupp
@@ -993,35 +993,43 @@ pabordet:
     efter: "tabell: Materialet du behöver"
   - nr: 1
     rubrik: "Vecka 1 · Hopp på talraden"
-    text: "58 + 27 som hopp. 27 dras isär med sifferkorten till 20 och 7, och tiotalen hoppas först och sedan entalen via 80. Åt andra hållet hoppar 85 − 27 bakåt med samma delar, tiotalen först till 65 och sedan entalen via 60."
+    text: "Så ser det ut efter Genomgången och Åt andra hållet i veckans första pass på nivån Medel. När gruppen är säker hoppar ni tjugo på en gång."
+    alt: "58 + 27 som hopp. 27 dras isär med sifferkorten till 20 och 7, och tiotalen hoppas först och sedan entalen via 80. Åt andra hållet hoppar 85 − 27 bakåt med samma delar, tiotalen först till 65 och sedan entalen via 60."
     efter: "del: Vecka 1 · Hopp på talraden"
   - nr: 2
     rubrik: "Vecka 2 · Tio ental blir ett tiotal"
-    text: "Räknemattans två ark, för tiotal och ental, efter 85 − 28. 57 är kvar ovanför linjen, och 28 som togs bort ligger under. På tavlan står 57 + 28 med minnessiffran och åt andra hållet 85 − 28 med den strukna åttan och den lilla tian. Sifferkorten visar femton ental som tiokortet och femkortet."
+    text: "Så ser det ut efter Genomgången och Åt andra hållet i veckans första pass på nivån Medel. Du gör det första handgreppet i Åt andra hållet, och paren gör resten."
+    alt: "Räknemattans två ark, för tiotal och ental, efter 85 − 28. 57 är kvar ovanför linjen, och 28 som togs bort ligger under. På tavlan står 57 + 28 med minnessiffran och åt andra hållet 85 − 28 med den strukna åttan och den lilla tian. Sifferkorten visar femton ental som tiokortet och femkortet."
     efter: "del: Vecka 2 · Tio ental blir ett tiotal"
   - nr: 3
     rubrik: "Vecka 3 · Hundratal och två växlingar"
-    text: "386 + 457 ritad med rutor, streck och prickar, 457 under 386. Läraren ringar in tio prickar, som blir ett streck, och tio streck, som blir en ruta, så att det blir 843. Sifferkorten visar 843 på varandra och isär. På tavlan står uppgiften med två minnessiffror och åt andra hållet 843 − 457 med två växlingar."
+    text: "Så ser det ut efter Genomgången och Åt andra hållet i veckans första pass på nivån Medel. Du ritar uppgiften och lägger summan med sifferkorten, och sedan räknar gruppen åt andra hållet med dig."
+    alt: "386 + 457 ritad med rutor, streck och prickar, 457 under 386. Läraren ringar in tio prickar, som blir ett streck, och tio streck, som blir en ruta, så att det blir 843. Sifferkorten visar 843 på varandra och isär. På tavlan står uppgiften med två minnessiffror och åt andra hållet 843 − 457 med två växlingar."
     efter: "del: Vecka 3 · Hundratal och två växlingar"
   - nr: 4
     rubrik: "Vecka 4 · Över nollan och välj sätt"
-    text: "Räknemattans tre ark efter 600 − 247, med 353 kvar ovanför linjen och 247 under. Sifferkortet visar att 600 är ett enda kort, utan lösa tiotal eller ental att ta från. På tavlan står hundratalet växlat till nio tiotal och tio ental, åt andra hållet 353 + 247 = 600 med två minnessiffror och 701 − 698 räknad uppåt på talraden."
+    text: "Så ser det ut efter Genomgången och Åt andra hållet i veckans första pass på nivån Medel. Talraden för tal som ligger nära varandra visar du först i pass 2."
+    alt: "Räknemattans tre ark efter 600 − 247, med 353 kvar ovanför linjen och 247 under. Sifferkortet visar att 600 är ett enda kort, utan lösa tiotal eller ental att ta från. På tavlan står hundratalet växlat till nio tiotal och tio ental, åt andra hållet 353 + 247 = 600 med två minnessiffror och 701 − 698 räknad uppåt på talraden."
     efter: "del: Vecka 4 · Över nollan och välj sätt"
   - nr: 5
     rubrik: "Vecka 5 · Rektangeln"
-    text: "Fyra rader med sex kuber, isärbrutna i två och två rader, och samma rektangel byggd på två sätt i divisionen. På talrutan är rektangeln ritad från hörnet, med 24 i hörnrutan och de fyra uträkningarna bredvid."
+    text: "Så ligger kuberna efter Genomgången och Åt andra hållet i veckans första pass på nivån Medel. Rektangeln på talrutan ritar ni i pass 2."
+    alt: "Fyra rader med sex kuber, isärbrutna i två och två rader, och samma rektangel byggd på två sätt i divisionen. På talrutan är rektangeln ritad från hörnet, med 24 i hörnrutan och de fyra uträkningarna bredvid."
     efter: "del: Vecka 5 · Rektangeln"
   - nr: 6
     rubrik: "Vecka 6 · Rektangeln med tiotal"
-    text: "Tre rader med 24, två tiotorn och fyra lösa kuber i varje rad, och 24 draget isär med sifferkorten till 20 och 4. På tavlan står rektangeln delad vid tiotalet, 3 · 24 = 60 + 12 = 72, och 72/3 = 60/3 + 12/3. Den tomma rektangeln för 72/3 står på en tavla bredvid, där den andra sidan blir 20 + 4."
+    text: "Kuberna och sifferkorten är från veckans första pass på nivån Medel. Rektangeln på talrutan och den tomma rektangeln ritar du i pass 2, och då skriver du också uträkningarna."
+    alt: "Tre rader med 24, två tiotorn och fyra lösa kuber i varje rad, och 24 draget isär med sifferkorten till 20 och 4. På tavlan står rektangeln delad vid tiotalet, 3 · 24 = 60 + 12 = 72, och 72/3 = 60/3 + 12/3. Den tomma rektangeln för 72/3 står på en tavla bredvid, där den andra sidan blir 20 + 4."
     efter: "del: Vecka 6 · Rektangeln med tiotal"
   - nr: 7
     rubrik: "Vecka 7 · Kort multiplikation och kort division"
-    text: "Tre rader med 26. Av de arton lösa kuberna blir tio ett tiotorn och åtta är kvar, och minnessiffran står för det nya tiotornet. På tavlan står den korta multiplikationen 3 · 26, delarna i samma ordning som i den korta formen, och den korta divisionen 78/3, där den lilla ettan står för tornet som bröts isär."
+    text: "Så ser det ut efter Genomgången och Åt andra hållet i veckans första pass på nivån Medel. På nivån Bas räknar ni samma tal med rektangeln, utan den korta formen."
+    alt: "Tre rader med 26. Av de arton lösa kuberna blir tio ett tiotorn och åtta är kvar, och minnessiffran står för det nya tiotornet. På tavlan står den korta multiplikationen 3 · 26, delarna i samma ordning som i den korta formen, och den korta divisionen 78/3, där den lilla ettan står för tornet som bröts isär."
     efter: "del: Vecka 7 · Kort multiplikation och kort division"
   - nr: 8
     rubrik: "Vecka 8 · Nollan och resten i textuppgifter"
-    text: "83 kuber i fyra rader med tre kuber över. På tavlan står 83/4 = 20 rest 3 och 4 · 20 + 3 = 83, 176/4 och två textuppgifter med 74/8, där frågan avgör svaret: 10 bussar behövs, men bara 9 glassar."
+    text: "Kuberna och 83/4 är från veckans första pass på nivån Medel. I pass 2 visar du 176/4 och textuppgifterna."
+    alt: "83 kuber i fyra rader med tre kuber över. På tavlan står 83/4 = 20 rest 3 och 4 · 20 + 3 = 83, 176/4 och två textuppgifter med 74/8, där frågan avgör svaret: 10 bussar behövs, men bara 9 glassar."
     efter: "del: Vecka 8 · Nollan och resten i textuppgifter"
   - nr: 9
     rubrik: "Läxan · ett ifyllt blad"

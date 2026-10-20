@@ -725,7 +725,8 @@ pabordet:
       - droppe
   - nr: 13
     rubrik: "Blad: Tankekartan för Vattenplaneten"
-    text: Tankekartan, blad 1, för Vattenplaneten, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Tankekartan, blad 1, för Vattenplaneten, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Bas, text 1, Vattenplaneten"
   - nr: 14
     rubrik: Vattnets väg
@@ -743,7 +744,8 @@ pabordet:
       - droppe
   - nr: 17
     rubrik: "Blad: Tidslinjen för Från sjö till kran"
-    text: Tidslinjen, blad 1, för Från sjö till kran, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Tidslinjen, blad 1, för Från sjö till kran, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Bas, text 2, Från sjö till kran"
   - nr: 18
     rubrik: Snöns väg och haglets väg
@@ -759,7 +761,8 @@ pabordet:
       - äpple
   - nr: 21
     rubrik: "Blad: Venndiagrammet för Snö och hagel"
-    text: Venndiagrammet, blad 1, för Snö och hagel, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Venndiagrammet, blad 1, för Snö och hagel, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Bas, text 3, Snö och hagel"
   - nr: 22
     rubrik: Isberget
@@ -773,7 +776,8 @@ pabordet:
       - snöflinga
   - nr: 25
     rubrik: "Blad: Kedjan för Därför flyter is"
-    text: Kedjan, blad 1, för Därför flyter is, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Kedjan, blad 1, för Därför flyter is, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Bas, text 4, Därför flyter is"
   - nr: 26
     rubrik: Brunnen i byn
@@ -788,7 +792,8 @@ pabordet:
     efter: "ram: Bas, text 5: En kran åt alla"
   - nr: 29
     rubrik: "Blad: Problem och lösning för En kran åt alla"
-    text: Problem och lösning, blad 1, för En kran åt alla, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Problem och lösning, blad 1, för En kran åt alla, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Bas, text 5, En kran åt alla"
   - nr: 30
     rubrik: Hela familjen
@@ -808,7 +813,8 @@ pabordet:
       - jordklot
   - nr: 33
     rubrik: "Blad: Tankekartan för Solens familj"
-    text: Tankekartan, blad 2, för Solens familj, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Tankekartan, blad 2, för Solens familj, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Medel, text 1, Solens familj"
   - nr: 34
     rubrik: Från 1957 till 2026
@@ -826,7 +832,8 @@ pabordet:
       - jordklot
   - nr: 37
     rubrik: "Blad: Tidslinjen för Vägen ut i rymden"
-    text: Tidslinjen, blad 2, för Vägen ut i rymden, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Tidslinjen, blad 2, för Vägen ut i rymden, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Medel, text 2, Vägen ut i rymden"
   - nr: 38
     rubrik: Jorden och Mars i samma skala
@@ -847,7 +854,8 @@ pabordet:
     efter: "ram: Medel, text 3: Jorden och Mars"
   - nr: 41
     rubrik: "Blad: Venndiagrammet för Jorden och Mars"
-    text: Venndiagrammet, blad 2, för Jorden och Mars, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Venndiagrammet, blad 2, för Jorden och Mars, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Medel, text 3, Jorden och Mars"
   - nr: 42
     rubrik: Jorden runt solen
@@ -863,7 +871,8 @@ pabordet:
       - sol
   - nr: 45
     rubrik: "Blad: Kedjan för Därför blir det sommar"
-    text: Kedjan, blad 2, för Därför blir det sommar, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Kedjan, blad 2, för Därför blir det sommar, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Medel, text 4, Därför blir det sommar"
   - nr: 46
     rubrik: Trängseln runt jorden
@@ -883,7 +892,8 @@ pabordet:
     efter: "ram: Medel, text 5: Skräpet runt jorden"
   - nr: 49
     rubrik: "Blad: Problem och lösning för Skräpet runt jorden"
-    text: Problem och lösning, blad 2, för Skräpet runt jorden, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Problem och lösning, blad 2, för Skräpet runt jorden, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Medel, text 5, Skräpet runt jorden"
   - nr: 50
     rubrik: Försvaret i fyra lager
@@ -895,7 +905,8 @@ pabordet:
     efter: "ram: Avancerat, text 1: Kroppens försvar"
   - nr: 53
     rubrik: "Blad: Tankekartan för Kroppens försvar"
-    text: Tankekartan, blad 2, för Kroppens försvar, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Tankekartan, blad 2, för Kroppens försvar, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Avancerat, text 1, Kroppens försvar"
   - nr: 54
     rubrik: Ringen runt ett fall
@@ -911,7 +922,8 @@ pabordet:
     efter: "ram: Avancerat, text 2: Sjukdomen som försvann"
   - nr: 57
     rubrik: "Blad: Tidslinjen för Sjukdomen som försvann"
-    text: Tidslinjen, blad 2, för Sjukdomen som försvann, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Tidslinjen, blad 2, för Sjukdomen som försvann, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Avancerat, text 2, Sjukdomen som försvann"
   - nr: 58
     rubrik: Bakterien och viruset
@@ -923,7 +935,8 @@ pabordet:
     efter: "ram: Avancerat, text 3: Virus och bakterier"
   - nr: 61
     rubrik: "Blad: Venndiagrammet för Virus och bakterier"
-    text: Venndiagrammet, blad 1, för Virus och bakterier, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Venndiagrammet, blad 1, för Virus och bakterier, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Avancerat, text 3, Virus och bakterier"
   - nr: 62
     rubrik: Före, under och efter
@@ -944,7 +957,8 @@ pabordet:
     efter: "ram: Avancerat, text 4: När medicinen sviker"
   - nr: 65
     rubrik: "Blad: Kedjan för När medicinen sviker"
-    text: Kedjan, blad 1, för När medicinen sviker, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Kedjan, blad 1, för När medicinen sviker, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Avancerat, text 4, När medicinen sviker"
   - nr: 66
     rubrik: Vägen från obduktionssalen
@@ -963,91 +977,113 @@ pabordet:
       - droppe
   - nr: 69
     rubrik: "Blad: Problem och lösning för Gåtan på sjukhuset"
-    text: Problem och lösning, blad 1, för Gåtan på sjukhuset, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Problem och lösning, blad 1, för Gåtan på sjukhuset, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Avancerat, text 5, Gåtan på sjukhuset"
   - nr: 70
     rubrik: "Blad: Tankekartan, exemplet om skolan"
-    text: En grupps tankekarta för texten om skolan. Lappen om cyklarna hör inte till någon del.
+    text: Visa exemplet, gärna utskrivet på A3, i modellpasset den vecka modellen är ny. Läs exemplets text högt från modellens sida, och låt gruppen peka ut var varje mening står. Sist återger du texten ur exemplet, så som gruppen ska återge veckans text.
+    alt: En grupps tankekarta för texten om skolan. Lappen om cyklarna hör inte till någon del.
     efter: "ram: Modellen: Tankekartan"
   - nr: 71
     rubrik: "Blad: Tankekartan 1: fyra delar"
-    text: Tankekartan att skriva ut, med fyra fält, en flik för textens ord på varje streck och en plats för en lapp till.
+    text: Gruppen lägger post-it-lapparna här i modellpasset, när det står blad 1 på lärarens sida eller bladet Egen text. Skriv ut bladet på A3, eller på A4 om ni bara är ett par. Spara det med lapparna kvar, för gruppen prövar sina sparade modeller igen.
+    alt: Tankekartan att skriva ut, med fyra fält, en flik för textens ord på varje streck och en plats för en lapp till.
     efter: "ram: Modellen: Tankekartan"
   - nr: 72
     rubrik: "Blad: Tankekartan 2: delar med egna delar"
-    text: Tankekartan att skriva ut, med fyra fält. Nederst i varje fält har bladet rader med ledtexten Hit hör. Där skriver paren det som hör till delen.
+    text: Gruppen lägger post-it-lapparna här i modellpasset, när det står blad 2 på lärarens sida eller bladet Egen text. Skriv ut bladet på A3, eller på A4 om ni bara är ett par. Spara det med lapparna kvar, för gruppen prövar sina sparade modeller igen.
+    alt: Tankekartan att skriva ut, med fyra fält. Nederst i varje fält har bladet rader med ledtexten Hit hör. Där skriver paren det som hör till delen.
     efter: "ram: Modellen: Tankekartan"
   - nr: 73
     rubrik: "Blad: Tankekartan 3: sex delar"
-    text: Tankekartan att skriva ut, med sex fält och en flik för textens ord på varje streck.
+    text: Gruppen lägger post-it-lapparna här i modellpasset, när det står blad 3 på lärarens sida eller bladet Egen text. Skriv ut bladet på A3, eller på A4 om ni bara är ett par. Spara det med lapparna kvar, för gruppen prövar sina sparade modeller igen.
+    alt: Tankekartan att skriva ut, med sex fält och en flik för textens ord på varje streck.
     efter: "ram: Modellen: Tankekartan"
   - nr: 74
     rubrik: "Blad: Tidslinjen, exemplet om skolan"
-    text: En grupps tidslinje för texten om skoldagen. Lappen om borden är inget steg i dagen.
+    text: Visa exemplet, gärna utskrivet på A3, i modellpasset den vecka modellen är ny. Läs exemplets text högt från modellens sida, och låt gruppen peka ut var varje mening står. Sist återger du texten ur exemplet, så som gruppen ska återge veckans text.
+    alt: En grupps tidslinje för texten om skoldagen. Lappen om borden är inget steg i dagen.
     efter: "ram: Modellen: Tidslinjen"
   - nr: 75
     rubrik: "Blad: Tidslinjen 1: fyra steg"
-    text: Tidslinjen att skriva ut, med fyra steg längs linjen, en flik för textens tidsord vid varje steg och en plats för en lapp till.
+    text: Gruppen lägger post-it-lapparna här i modellpasset, när det står blad 1 på lärarens sida eller bladet Egen text. Skriv ut bladet på A3, eller på A4 om ni bara är ett par. Spara det med lapparna kvar, för gruppen prövar sina sparade modeller igen.
+    alt: Tidslinjen att skriva ut, med fyra steg längs linjen, en flik för textens tidsord vid varje steg och en plats för en lapp till.
     efter: "ram: Modellen: Tidslinjen"
   - nr: 76
     rubrik: "Blad: Tidslinjen 2: årtal och tiden emellan"
-    text: Tidslinjen att skriva ut, med en flik för årtalet vid varje steg, över linjen en flik för tiden mellan stegen och en plats för en lapp till.
+    text: Gruppen lägger post-it-lapparna här i modellpasset, när det står blad 2 på lärarens sida eller bladet Egen text. Skriv ut bladet på A3, eller på A4 om ni bara är ett par. Spara det med lapparna kvar, för gruppen prövar sina sparade modeller igen.
+    alt: Tidslinjen att skriva ut, med en flik för årtalet vid varje steg, över linjen en flik för tiden mellan stegen och en plats för en lapp till.
     efter: "ram: Modellen: Tidslinjen"
   - nr: 77
     rubrik: "Blad: Tidslinjen 3: sex steg"
-    text: Tidslinjen att skriva ut, med sex steg, vartannat över linjen och vartannat under, och en plats för en lapp till.
+    text: Gruppen lägger post-it-lapparna här i modellpasset, när det står blad 3 på lärarens sida eller bladet Egen text. Skriv ut bladet på A3, eller på A4 om ni bara är ett par. Spara det med lapparna kvar, för gruppen prövar sina sparade modeller igen.
+    alt: Tidslinjen att skriva ut, med sex steg, vartannat över linjen och vartannat under, och en plats för en lapp till.
     efter: "ram: Modellen: Tidslinjen"
   - nr: 78
     rubrik: "Blad: Venndiagrammet, exemplet om skolan"
-    text: En grupps venndiagram för texten om matsalen och idrottshallen. Lappen om vaktmästaren hör inte till jämförelsen.
+    text: Visa exemplet, gärna utskrivet på A3, i modellpasset den vecka modellen är ny. Läs exemplets text högt från modellens sida, och låt gruppen peka ut var varje mening står. Sist återger du texten ur exemplet, så som gruppen ska återge veckans text.
+    alt: En grupps venndiagram för texten om matsalen och idrottshallen. Lappen om vaktmästaren hör inte till jämförelsen.
     efter: "ram: Modellen: Venndiagrammet"
   - nr: 79
     rubrik: "Blad: Venndiagrammet 1: två ringar"
-    text: Venndiagrammet att skriva ut, med två ringar som går in i varandra, en flik för textens ord på varje plats och en plats för en lapp till.
+    text: Gruppen lägger post-it-lapparna här i modellpasset, när det står blad 1 på lärarens sida eller bladet Egen text. Skriv ut bladet på A3, eller på A4 om ni bara är ett par. Spara det med lapparna kvar, för gruppen prövar sina sparade modeller igen.
+    alt: Venndiagrammet att skriva ut, med två ringar som går in i varandra, en flik för textens ord på varje plats och en plats för en lapp till.
     efter: "ram: Modellen: Venndiagrammet"
   - nr: 80
     rubrik: "Blad: Venndiagrammet 2: punkt för punkt"
-    text: Venndiagrammet att skriva ut för en text som tar en punkt i taget, med fyra punkter och i varje punkt plats för avsnittets lapp, textens ord och det texten säger om var och en av sakerna.
+    text: Gruppen lägger post-it-lapparna här i modellpasset, när det står blad 2 på lärarens sida eller bladet Egen text. Skriv ut bladet på A3, eller på A4 om ni bara är ett par. Spara det med lapparna kvar, för gruppen prövar sina sparade modeller igen.
+    alt: Venndiagrammet att skriva ut för en text som tar en punkt i taget, med fyra punkter och i varje punkt plats för avsnittets lapp, textens ord och det texten säger om var och en av sakerna.
     efter: "ram: Modellen: Venndiagrammet"
   - nr: 81
     rubrik: "Blad: Venndiagrammet 3: lika och olika"
-    text: Venndiagrammet att skriva ut för en text som först tar det som är lika och sedan det som är olika, med fältet Lika och fältet Olika, som har en halva för var sak.
+    text: Gruppen lägger post-it-lapparna här i modellpasset, när det står blad 3 på lärarens sida eller bladet Egen text. Skriv ut bladet på A3, eller på A4 om ni bara är ett par. Spara det med lapparna kvar, för gruppen prövar sina sparade modeller igen.
+    alt: Venndiagrammet att skriva ut för en text som först tar det som är lika och sedan det som är olika, med fältet Lika och fältet Olika, som har en halva för var sak.
     efter: "ram: Modellen: Venndiagrammet"
   - nr: 82
     rubrik: "Blad: Kedjan, exemplet om skolan"
-    text: En grupps kedja för texten om en regnig dag. Lappen om att korridoren målades om hör inte till kedjan.
+    text: Visa exemplet, gärna utskrivet på A3, i modellpasset den vecka modellen är ny. Läs exemplets text högt från modellens sida, och låt gruppen peka ut var varje mening står. Sist återger du texten ur exemplet, så som gruppen ska återge veckans text.
+    alt: En grupps kedja för texten om en regnig dag. Lappen om att korridoren målades om hör inte till kedjan.
     efter: "ram: Modellen: Kedjan"
   - nr: 83
     rubrik: "Blad: Kedjan 1: fyra led"
-    text: Kedjan att skriva ut, med fyra led som en trappa, en flik för textens ord på varje pil och en plats för en lapp till.
+    text: Gruppen lägger post-it-lapparna här i modellpasset, när det står blad 1 på lärarens sida eller bladet Egen text. Skriv ut bladet på A3, eller på A4 om ni bara är ett par. Spara det med lapparna kvar, för gruppen prövar sina sparade modeller igen.
+    alt: Kedjan att skriva ut, med fyra led som en trappa, en flik för textens ord på varje pil och en plats för en lapp till.
     efter: "ram: Modellen: Kedjan"
   - nr: 84
     rubrik: "Blad: Kedjan 2: en orsak och flera följder"
-    text: Kedjan att skriva ut, med en orsak överst och tre följder under, och en flik för textens ord på pilen till varje följd.
+    text: Gruppen lägger post-it-lapparna här i modellpasset, när det står blad 2 på lärarens sida eller bladet Egen text. Skriv ut bladet på A3, eller på A4 om ni bara är ett par. Spara det med lapparna kvar, för gruppen prövar sina sparade modeller igen.
+    alt: Kedjan att skriva ut, med en orsak överst och tre följder under, och en flik för textens ord på pilen till varje följd.
     efter: "ram: Modellen: Kedjan"
   - nr: 85
     rubrik: "Blad: Kedjan 3: flera orsaker och en följd"
-    text: Kedjan att skriva ut, med tre orsaker överst och en följd under, och en flik för textens ord på pilen från varje orsak.
+    text: Gruppen lägger post-it-lapparna här i modellpasset, när det står blad 3 på lärarens sida eller bladet Egen text. Skriv ut bladet på A3, eller på A4 om ni bara är ett par. Spara det med lapparna kvar, för gruppen prövar sina sparade modeller igen.
+    alt: Kedjan att skriva ut, med tre orsaker överst och en följd under, och en flik för textens ord på pilen från varje orsak.
     efter: "ram: Modellen: Kedjan"
   - nr: 86
     rubrik: "Blad: Problem och lösning, exemplet om skolan"
-    text: En grupps modell för texten om matkön. Lappen om pannkakorna hör inte till någon plats.
+    text: Visa exemplet, gärna utskrivet på A3, i modellpasset den vecka modellen är ny. Läs exemplets text högt från modellens sida, och låt gruppen peka ut var varje mening står. Sist återger du texten ur exemplet, så som gruppen ska återge veckans text.
+    alt: En grupps modell för texten om matkön. Lappen om pannkakorna hör inte till någon plats.
     efter: "ram: Modellen: Problem och lösning"
   - nr: 87
     rubrik: "Blad: Problem och lösning 1: ett problem och en lösning"
-    text: Bladet Problem och lösning att skriva ut, med Problemet och Orsaken på den ena sidan, Lösningen och Resultatet på den andra, en flik för textens ord vid varje pil och en plats för en lapp till.
+    text: Gruppen lägger post-it-lapparna här i modellpasset, när det står blad 1 på lärarens sida eller bladet Egen text. Skriv ut bladet på A3, eller på A4 om ni bara är ett par. Spara det med lapparna kvar, för gruppen prövar sina sparade modeller igen.
+    alt: Bladet Problem och lösning att skriva ut, med Problemet och Orsaken på den ena sidan, Lösningen och Resultatet på den andra, en flik för textens ord vid varje pil och en plats för en lapp till.
     efter: "ram: Modellen: Problem och lösning"
   - nr: 88
     rubrik: "Blad: Problem och lösning 2: ett problem och flera lösningar"
-    text: Bladet Problem och lösning att skriva ut, med Problemet och Orsaken på den ena sidan och två lösningar på den andra. Resultatet får platsen En lapp till.
+    text: Gruppen lägger post-it-lapparna här i modellpasset, när det står blad 2 på lärarens sida eller bladet Egen text. Skriv ut bladet på A3, eller på A4 om ni bara är ett par. Spara det med lapparna kvar, för gruppen prövar sina sparade modeller igen.
+    alt: Bladet Problem och lösning att skriva ut, med Problemet och Orsaken på den ena sidan och två lösningar på den andra. Resultatet får platsen En lapp till.
     efter: "ram: Modellen: Problem och lösning"
   - nr: 89
     rubrik: "Blad: Problem och lösning 3: orsaker, följder och lösningar"
-    text: Bladet Problem och lösning att skriva ut, med Orsakerna, Problemet och Följderna på rad, Lösningarna under Problemet och en plats för en lapp till.
+    text: Gruppen lägger post-it-lapparna här i modellpasset, när det står blad 3 på lärarens sida eller bladet Egen text. Skriv ut bladet på A3, eller på A4 om ni bara är ett par. Spara det med lapparna kvar, för gruppen prövar sina sparade modeller igen.
+    alt: Bladet Problem och lösning att skriva ut, med Orsakerna, Problemet och Följderna på rad, Lösningarna under Problemet och en plats för en lapp till.
     efter: "ram: Modellen: Problem och lösning"
   - nr: 90
     rubrik: "Blad: Kärnorna"
-    text: Bladet Kärnorna att skriva ut, med raden för textens namn, textens fråga, rutan Vi tror och fem platser för lappar i textens ordning.
+    text: Bladet ligger på bordet i läspasset, och du sparar det med lapparna kvar till modellpasset. Skriv ut ett blad per text på A3, så att post-it-lapparna ryms. Är ni bara ett par räcker A4, och då skriver ni kärnorna direkt på bladet.
+    alt: Bladet Kärnorna att skriva ut, med raden för textens namn, textens fråga, rutan Vi tror och fem platser för lappar i textens ordning.
     efter: "ram: Kärnorna"
   - nr: 91
     rubrik: Kärnorna efter läspasset
@@ -1055,25 +1091,29 @@ pabordet:
     efter: exempel
   - nr: 94
     rubrik: "Blad: När det skaver"
-    text: "Två likadana kort att klippa isär, ett till varje par. Kortet När det skaver har raden Pröva ett sätt i taget. Sedan kommer fyra sätt med en pil emellan, i den ordning paret prövar dem: Läs om (meningen, den före och efter), Leta efter en ledtråd (marginalen, bilden, ett exempel), Dela ordet (vatten + torn) och Fråga en kamrat (”Vad tror du?”)."
+    text: I läspassen har varje par kortet mellan sig. Ett blad räcker till två par under hela perioden. Klipp isär korten och plasta gärna in dem.
+    alt: "Två likadana kort att klippa isär, ett till varje par. Kortet När det skaver har raden Pröva ett sätt i taget. Sedan kommer fyra sätt med en pil emellan, i den ordning paret prövar dem: Läs om (meningen, den före och efter), Leta efter en ledtråd (marginalen, bilden, ett exempel), Dela ordet (vatten + torn) och Fråga en kamrat (”Vad tror du?”)."
     efter: "ram: När det skaver"
     fluent:
       - sax
   - nr: 95
     rubrik: "Blad: Jobbkorten"
-    text: "Bladet har de två jobbkorten att klippa isär. På det första, Du håller kortet När det skaver, står ”Stryk under det som skaver” vid steget Läs. Vid steget Red ut står ”Var skavde det?”, ”Vad har vi prövat?” och ”Läs nästa sätt på kortet”. På det andra, Du leder gruppen till kärnan, står fem rader vid steget Kärnan: ”Vem eller vad handlar det om?”, ”Vad är det viktigaste om det?”, ”Säg kärnan till den bredvid”, ”Vilken gäller hela avsnittet?” och ”Har den högst tio ord? Räkna”. Vid steget Lappen står ”Hur hänger lapparna ihop?”"
+    text: Från vecka 3 har två elever var sitt jobbkort i läspasset, och efter varje avsnitt går korten vidare till två andra. Skriv ut ett blad, eller två när sju eller åtta elever arbetar i två halvor. Klipp isär korten och plasta gärna in dem.
+    alt: "Bladet har de två jobbkorten att klippa isär. På det första, Du håller kortet När det skaver, står ”Stryk under det som skaver” vid steget Läs. Vid steget Red ut står ”Var skavde det?”, ”Vad har vi prövat?” och ”Läs nästa sätt på kortet”. På det andra, Du leder gruppen till kärnan, står fem rader vid steget Kärnan: ”Vem eller vad handlar det om?”, ”Vad är det viktigaste om det?”, ”Säg kärnan till den bredvid”, ”Vilken gäller hela avsnittet?” och ”Har den högst tio ord? Räkna”. Vid steget Lappen står ”Hur hänger lapparna ihop?”"
     efter: "ram: Jobbkorten"
     fluent:
       - sax
   - nr: 96
     rubrik: "Blad: Text 1: Bäverns damm"
-    text: "Eleven läser bladet Text 1, Bäverns damm, i kartläggningen före perioden. Bladet har en rad för namnet, och under rubriken står två rader till eleven: ”Läs meningarna först” och ”Läs sedan texten med en penna i handen, ett avsnitt i taget”. Under dem står de fyra meningarna om Samir, i en ruta med frågan om något är konstigt. Sedan kommer texten i två avsnitt, En damm i bäcken och Ingången under vattnet. Sist står bilden av bäverns damm och hydda, sedda från sidan, med orden Damm, Hydda och Ingång."
+    text: Eleven läser bladet i kartläggningen före perioden. Skriv ut ett blad per elev, enkelsidigt, så att baksidan är tom när du vänder det i uppgift 4. Spara bladet, så att du kan jämföra det eleven strök under före och efter.
+    alt: "Eleven läser bladet Text 1, Bäverns damm, i kartläggningen före perioden. Bladet har en rad för namnet, och under rubriken står två rader till eleven: ”Läs meningarna först” och ”Läs sedan texten med en penna i handen, ett avsnitt i taget”. Under dem står de fyra meningarna om Samir, i en ruta med frågan om något är konstigt. Sedan kommer texten i två avsnitt, En damm i bäcken och Ingången under vattnet. Sist står bilden av bäverns damm och hydda, sedda från sidan, med orden Damm, Hydda och Ingång."
     efter: "ram: Text 1: Bäverns damm"
     fluent:
       - bäver
   - nr: 97
     rubrik: "Blad: Text 2: Björnens vinter"
-    text: "Eleven läser bladet Text 2, Björnens vinter, i kartläggningen efter åtta veckor. Bladet har en rad för namnet, och under rubriken står två rader till eleven: ”Läs meningarna först” och ”Läs sedan texten med en penna i handen, ett avsnitt i taget”. Under dem står de fyra meningarna om Elsa, i en ruta med frågan om något är konstigt. Sedan kommer texten i två avsnitt, Bär hela hösten och Vintern i idet. Sist står bilden av björnen på hösten och på vintern, med orden Bär, Myrstack och Ide."
+    text: Eleven läser bladet i kartläggningen efter åtta veckor. Skriv ut ett blad per elev, enkelsidigt, så att baksidan är tom när du vänder det i uppgift 4. Spara bladet, så att du kan jämföra det eleven strök under före och efter.
+    alt: "Eleven läser bladet Text 2, Björnens vinter, i kartläggningen efter åtta veckor. Bladet har en rad för namnet, och under rubriken står två rader till eleven: ”Läs meningarna först” och ”Läs sedan texten med en penna i handen, ett avsnitt i taget”. Under dem står de fyra meningarna om Elsa, i en ruta med frågan om något är konstigt. Sedan kommer texten i två avsnitt, Bär hela hösten och Vintern i idet. Sist står bilden av björnen på hösten och på vintern, med orden Bär, Myrstack och Ide."
     efter: "ram: Text 2: Björnens vinter"
     fluent:
       - björn

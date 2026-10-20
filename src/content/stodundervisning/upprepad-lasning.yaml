@@ -38,7 +38,8 @@ centrala:
 pabordet:
   - nr: 1
     rubrik: "Blad: Strategikortet"
-    text: "Två likadana strategikort att klippa isär, ett till bordet och ett att ta med hem. Kortet heter Mina lässtrategier och har en rad för namnet och sju strategier med var sin bild och hur man gör: Läs hela ordet (Peka under ordet), Säg ljuden utan paus (sss-ooo-lll → sol), Låter det som ett ord? (huuund? → hund), Dela ordet (ba-nan och last-bil), Hitta ordet i ordet (hund-ar-na och sol-en), Stämde det? (Läs meningen igen) och Läs som när du pratar (Stanna vid punkten)."
+    text: "Ett blad per elev, med ett kort till bordet och ett att ta med hem. När eleven fastnar på ett ord pekar den som stöttar på kortet innan någon säger ordet. Skriv elevens namn på båda, klipp isär korten och laminera gärna kortet till bordet."
+    alt: "Två likadana strategikort att klippa isär, ett till bordet och ett att ta med hem. Kortet heter Mina lässtrategier och har en rad för namnet och sju strategier med var sin bild och hur man gör: Läs hela ordet (Peka under ordet), Säg ljuden utan paus (sss-ooo-lll → sol), Låter det som ett ord? (huuund? → hund), Dela ordet (ba-nan och last-bil), Hitta ordet i ordet (hund-ar-na och sol-en), Stämde det? (Läs meningen igen) och Läs som när du pratar (Stanna vid punkten)."
     efter: "ram: Strategikortet"
     fluent: [sax, pekfinger, orm, öra, pusselbit, förstoringsglas, frågetecken, säga]
 inledning:

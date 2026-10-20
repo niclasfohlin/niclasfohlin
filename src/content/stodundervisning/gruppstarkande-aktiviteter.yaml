@@ -40,26 +40,31 @@ utkast: false
 pabordet:
   - nr: 1
     rubrik: "Blad: Lärarens skattning"
-    text: Diagrammet att skriva ut, med skattningen 1–10 uppåt och veckorna 1–12 åt höger, vad skattningarna betyder och en rad för det gruppen ska bli bättre på.
+    text: "Skriv ut diagrammet när ni börjar, och ett nytt efter vecka 12. Varje vecka sätter du ett kryss, gärna efter veckans sista pass, och drar ett streck från förra veckans. Efter gruppreflektionen skriver du nederst det gruppen ska bli bättre på."
+    alt: Diagrammet att skriva ut, med skattningen 1–10 uppåt och veckorna 1–12 åt höger, vad skattningarna betyder och en rad för det gruppen ska bli bättre på.
     efter: "ram: Lärarens skattning"
   - nr: 2
     rubrik: "Blad: Vår grupp"
-    text: Elevens blad att skriva ut. Eleven ringar in ett svar från 1 till 5 på sex påståenden, tre om gruppen och tre om sig själv, och skriver på raderna det hen vill säga om gruppen.
+    text: "Ett blad per elev i gruppreflektionen varannan vecka, från vecka 2. Ingen ser grannens blad, och ingen behöver berätta vad hen skrev. Samla in bladen, och efteråt läser du först de blad där någon har ringat in 1 eller 2 på påstående 4, 5 eller 6."
+    alt: Elevens blad att skriva ut. Eleven ringar in ett svar från 1 till 5 på sex påståenden, tre om gruppen och tre om sig själv, och skriver på raderna det hen vill säga om gruppen.
     efter: "ram: Gruppreflektion"
     google: /vargrupp
   - nr: 3
     rubrik: "Blad: Frågekort"
-    text: "Tolv frågekort att klippa isär, med bandet Frågekort och en bild till varje fråga: Vad gillar du att göra på fritiden? Vilken mat gillar du? Vilket djur skulle du vilja vara för en dag? Vad är du bra på? Vad tycker du om att göra på loven? Vilken bok, film eller serie tycker du om? Vad skulle du vilja lära dig? Var tycker du om att vara? Vad gör dig glad? Vilken superkraft skulle du välja? Vad gör du helst på helgen? Vad skulle du göra om du fick bestämma allt en hel dag?"
+    text: "Frågorna passar till aktiviteterna Berätta mera, Inre och yttre cirkel, Speed-dejting med tärning, ”Vilka är vi?” och ”Fråga, fråga, byt!” Skriv ut så att varje elev får ett kort, klipp isär och laminera gärna."
+    alt: "Tolv frågekort att klippa isär, med bandet Frågekort och en bild till varje fråga: Vad gillar du att göra på fritiden? Vilken mat gillar du? Vilket djur skulle du vilja vara för en dag? Vad är du bra på? Vad tycker du om att göra på loven? Vilken bok, film eller serie tycker du om? Vad skulle du vilja lära dig? Var tycker du om att vara? Vad gör dig glad? Vilken superkraft skulle du välja? Vad gör du helst på helgen? Vad skulle du göra om du fick bestämma allt en hel dag?"
     efter: "ram: Frågekort och meningar att avsluta"
     fluent: [sax, boll, mat, lejon, bli stark, ö, böcker, glödlampa, karta, nöjd, trollstav, ha roligt, krona]
   - nr: 4
     rubrik: "Blad: Meningar att avsluta"
-    text: "Tolv meningar att klippa isär, med bandet Avsluta meningen och en bild till varje mening: ”Jag blir glad när …”, ”Jag är bra på …”, ”En sak jag vill lära mig är …”, ”Min favoritplats är …”, ”Om jag fick bestämma allt en hel dag skulle jag …”, ”Jag skrattar när …”, ”En bra kompis är någon som …”, ”Något jag är stolt över är …”, ”Om jag kunde resa vart som helst skulle jag åka till …”, ”Det bästa med vår grupp är …”, ”Jag tycker om när någon …” och ”På helgen tycker jag om att …”."
+    text: "Meningarna hör till aktiviteten Oavslutade meningar. Skriv ut ett blad till varje grupp, klipp isär korten och laminera dem gärna, så kan ni använda dem många gånger. Lägg två meningar per elev i gruppens hög."
+    alt: "Tolv meningar att klippa isär, med bandet Avsluta meningen och en bild till varje mening: ”Jag blir glad när …”, ”Jag är bra på …”, ”En sak jag vill lära mig är …”, ”Min favoritplats är …”, ”Om jag fick bestämma allt en hel dag skulle jag …”, ”Jag skrattar när …”, ”En bra kompis är någon som …”, ”Något jag är stolt över är …”, ”Om jag kunde resa vart som helst skulle jag åka till …”, ”Det bästa med vår grupp är …”, ”Jag tycker om när någon …” och ”På helgen tycker jag om att …”."
     efter: "ram: Frågekort och meningar att avsluta"
     fluent: [sax, nöjd, bli stark, glödlampa, karta, krona, glad, vän, stolt, jordklot, vara med, känna, ha roligt]
   - nr: 5
     rubrik: "Blad: Egna frågekort och meningar"
-    text: "Tomma kort för egna frågor och meningar, att klippa isär: sex med bandet Frågekort och sex med bandet Avsluta meningen."
+    text: "Här skriver du frågor och meningar som passar just din grupp, i Word-filen före utskriften eller för hand efteråt. Klipp isär korten och laminera dem gärna, som de andra."
+    alt: "Tomma kort för egna frågor och meningar, att klippa isär: sex med bandet Frågekort och sex med bandet Avsluta meningen."
     efter: "ram: Frågekort och meningar att avsluta"
     fluent: [sax]
 

@@ -33,17 +33,20 @@ utkast: false
 pabordet:
   - nr: 1
     rubrik: "Blad: Våra samtalsregler"
-    text: "Kortet Våra samtalsregler har talpinnen under rubriken och de fyra reglerna numrerade: 1. En i taget. Den som har talpinnen talar. Bilden är en pratbubbla över talpinnen. 2. Vi lyssnar på varandra. Vi tittar mot den som talar. Bilden är ett öra. 3. Inga sänkningar. Inget elakt med ord eller miner. Bilden är ett ansikte som himlar med ögonen, under ett förbudsmärke. 4. Vi får stå över. Talpinnen kommer tillbaka. Bilden är två pilar som går runt talpinnen."
+    text: "Ta fram kortet när ni går igenom reglerna i samtal 1 och när gruppen behöver påminnas. Skriv ut det på A4 till bordet, eller på A3 till väggen."
+    alt: "Kortet Våra samtalsregler har talpinnen under rubriken och de fyra reglerna numrerade: 1. En i taget. Den som har talpinnen talar. Bilden är en pratbubbla över talpinnen. 2. Vi lyssnar på varandra. Vi tittar mot den som talar. Bilden är ett öra. 3. Inga sänkningar. Inget elakt med ord eller miner. Bilden är ett ansikte som himlar med ögonen, under ett förbudsmärke. 4. Vi får stå över. Talpinnen kommer tillbaka. Bilden är två pilar som går runt talpinnen."
     efter: "ram: Våra samtalsregler"
     fluent: [säga, öra, himla]
   - nr: 2
     rubrik: "Blad: Så kan du säga"
-    text: "Bladet har två likadana kort att klippa isär. Kortet Så kan du säga har de åtta startorden två och två, med en bild vid varje par: en tankebubbla vid ”Jag tänker att ___” och ”Jag tror att ___”, ett hjärta vid ”Jag känner mig ___ när ___” och ”När du ___, känner jag mig ___”, ett öra vid ”Jag undrar ___” och ”Jag förstår ___, och jag ___”, och en tumme upp vid ”Jag såg att du ___” och ”Tack för ___”."
+    text: "Ta fram kortet när en elev behöver se startorden. Ett blad ger två kort att klippa isär och laminera, och varje elev kan ha ett i bänken. Ge också klassläraren och de vuxna på rasten och fritids var sitt, så att de kan peka på kortet när det skaver."
+    alt: "Bladet har två likadana kort att klippa isär. Kortet Så kan du säga har de åtta startorden två och två, med en bild vid varje par: en tankebubbla vid ”Jag tänker att ___” och ”Jag tror att ___”, ett hjärta vid ”Jag känner mig ___ när ___” och ”När du ___, känner jag mig ___”, ett öra vid ”Jag undrar ___” och ”Jag förstår ___, och jag ___”, och en tumme upp vid ”Jag såg att du ___” och ”Tack för ___”."
     efter: "ram: Så kan du säga"
     fluent: [sax, säga, tänka, känna, öra, tumme-upp]
   - nr: 3
     rubrik: "Blad: Peka på känslan"
-    text: "Kortet Peka på känslan har ett ansikte över varje ord. Överst på gult står glad, lugn, trygg, stolt, tacksam och nöjd, och nederst på blått ledsen, arg, rädd, orolig, besviken och ensam."
+    text: "Ta fram kortet när en elev inte riktigt vet hur hen känner sig. Eleven pekar på en känsla, och ni säger hela meningen tillsammans, som ”Jag känner mig orolig.” Skriv ut kortet på A4 och laminera det gärna."
+    alt: "Kortet Peka på känslan har ett ansikte över varje ord. Överst på gult står glad, lugn, trygg, stolt, tacksam och nöjd, och nederst på blått ledsen, arg, rädd, orolig, besviken och ensam."
     efter: "ram: Peka på känslan"
     fluent: [glad, lugn, trygg, stolt, tacksam, nöjd, ledsen, arg, rädd, orolig, besviken, ensam]
 inledning:

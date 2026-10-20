@@ -45,17 +45,20 @@ centrala:
 pabordet:
   - nr: 1
     rubrik: "Blad: Samtalsreglerna"
-    text: "Affischen Samtalsreglerna har raden Så samtalar vi och de fem reglerna med var sin bild: Vi säger vad vi tror. Vi visar var det står. Vi bygger vidare på varandra. Vi får tänka olika. Vi får ändra oss."
+    text: "Ni säger reglerna tillsammans i Starten i vecka 1. Välj gärna en regel före samtalet och titta tillbaka på den i Avsluta. Skriv ut affischen på A3, eller förminska A4-bladet till 71 procent och klipp ut ett kort i A5 till varje elev."
+    alt: "Affischen Samtalsreglerna har raden Så samtalar vi och de fem reglerna med var sin bild: Vi säger vad vi tror. Vi visar var det står. Vi bygger vidare på varandra. Vi får tänka olika. Vi får ändra oss."
     efter: "ram: Samtalsreglerna"
     fluent: [säga, oppen-bok, pekfinger, tegelsten, tänka]
   - nr: 2
     rubrik: "Blad: Tankekortet"
-    text: "Bladet har två tankekort att klippa isär. Båda heter Så tänker jag mellan raderna och har sex tankesteg med var sin bild och den fråga eleven ställer sig: Stanna (Vad står inte här?), Se det framför dig (Vad ser och hör jag?), Det står (Vilka ord är ledtrådar?), Jag vet (Vad vet jag om sådant?), Alltså tror jag (Vad kan det betyda?) och Stämmer det? (Passar det med resten?)."
+    text: "Ett kort per elev vid bordet i varje pass. Du pekar på steget när du tänker högt i pass 1, och i pass 2 och 3 pekar eleverna själva. Ett blad ger två kort att klippa isär och laminera."
+    alt: "Bladet har två tankekort att klippa isär. Båda heter Så tänker jag mellan raderna och har sex tankesteg med var sin bild och den fråga eleven ställer sig: Stanna (Vad står inte här?), Se det framför dig (Vad ser och hör jag?), Det står (Vilka ord är ledtrådar?), Jag vet (Vad vet jag om sådant?), Alltså tror jag (Vad kan det betyda?) och Stämmer det? (Passar det med resten?)."
     efter: "ram: Tankekortet"
     fluent: [sax, hand, öga, oppen-bok, hjärna, glödlampa, förstoringsglas]
   - nr: 3
     rubrik: "Blad: Samtalskortet"
-    text: "Bladet har två samtalskort att klippa isär. Båda heter Så pratar vi om texten och har sex rader med det eleven säger och det hen frågar sin kamrat: ”Jag tror att” (Vad tror du?), ”för det står” (Hur vet du det?), ”Jag har varit med om” (Kan du säga mer?), ”Jag håller med, och” (Vad vill du lägga till?), ”Jag tänker annorlunda” (Kan det vara något annat?) och ”Tänk om” (Stämmer det med texten?)."
+    text: "Eleven har sitt eget samtalskort bredvid tankekortet i varje pass. I vecka 1 använder ni de två första raderna, och sedan kommer en rad till i veckan. Blir bordet fullt, skriv ut samtalskortet med tankekortet på baksidan."
+    alt: "Bladet har två samtalskort att klippa isär. Båda heter Så pratar vi om texten och har sex rader med det eleven säger och det hen frågar sin kamrat: ”Jag tror att” (Vad tror du?), ”för det står” (Hur vet du det?), ”Jag har varit med om” (Kan du säga mer?), ”Jag håller med, och” (Vad vill du lägga till?), ”Jag tänker annorlunda” (Kan det vara något annat?) och ”Tänk om” (Stämmer det med texten?)."
     efter: "ram: Samtalskortet"
     fluent: [sax, säga, frågetecken]
 inledning:

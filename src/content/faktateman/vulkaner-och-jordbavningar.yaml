@@ -870,7 +870,8 @@ pabordet:
     efter: "ram: Medel, text 6: Under dina fötter"
   - nr: 133
     rubrik: "Blad: Tankekartan för Under dina fötter"
-    text: Tankekartan, blad 2, för Under dina fötter, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Tankekartan, blad 2, för Under dina fötter, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Medel, text 6, Under dina fötter"
   - nr: 134
     rubrik: Dygnet i Pompeji
@@ -882,7 +883,8 @@ pabordet:
     efter: "ram: Medel, text 7: Pompejis sista dygn"
   - nr: 137
     rubrik: "Blad: Tidslinjen för Pompejis sista dygn"
-    text: Tidslinjen, blad 2, för Pompejis sista dygn, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Tidslinjen, blad 2, för Pompejis sista dygn, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Medel, text 7, Pompejis sista dygn"
   - nr: 138
     rubrik: Bred och brant
@@ -894,7 +896,8 @@ pabordet:
     efter: "ram: Medel, text 8: Lugn eller explosiv"
   - nr: 141
     rubrik: "Blad: Venndiagrammet för Lugn eller explosiv"
-    text: Venndiagrammet, blad 2, för Lugn eller explosiv, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Venndiagrammet, blad 2, för Lugn eller explosiv, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Medel, text 8, Lugn eller explosiv"
   - nr: 142
     rubrik: Från skalv till våg
@@ -906,7 +909,8 @@ pabordet:
     efter: "ram: Medel, text 9: Vågen som kom"
   - nr: 145
     rubrik: "Blad: Kedjan för Vågen som kom"
-    text: Kedjan, blad 1, för Vågen som kom, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Kedjan, blad 1, för Vågen som kom, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Medel, text 9, Vågen som kom"
   - nr: 146
     rubrik: Energin i två skalv
@@ -918,7 +922,8 @@ pabordet:
     efter: "ram: Medel, text 10: Skalvsäkra hus"
   - nr: 149
     rubrik: "Blad: Problem och lösning för Skalvsäkra hus"
-    text: Problem och lösning, blad 2, för Skalvsäkra hus, med en grupps kärnor och textens ord. Era kärnor blir andra.
+    text: Så kan bladet se ut efter modellpasset, med en grupps kärnor på post-it-lappar och textens ord i flikarna. Titta på det ihop med raden Modellen på lärarens sida när du förbereder passet. Din grupp skriver sina egna kärnor.
+    alt: Problem och lösning, blad 2, för Skalvsäkra hus, med en grupps kärnor och textens ord. Era kärnor blir andra.
     efter: "ram: Modellen: Medel, text 10, Skalvsäkra hus"
 tabeller:
   - rubrik: Vulkaner och jordbävningar
