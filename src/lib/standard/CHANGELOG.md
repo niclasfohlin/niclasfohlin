@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.9.0, 2026-10-20
+
+- `BILDTEXT`, `meningarI` och `bildtextFel`: bildtexten under en bild är en till tre meningar och högst 250 tecken och börjar inte med "Bilden", och ett blad har sitt textalternativ i `alt` (sajtens K-486, STIL.md under Bildtexter). Niclas: "Tror du behöver en stringens för bildtext. Dvs vad bildtext har och hur lång den får vara", och om innehållet: "Sådant som bilden eller kortet i sig inte kan berätta, eller som förtydligar bildens roll i metoden väldigt kort". Riggen prövar samma sak före leveransen, och sajten stannar bygget.
+
 ## 0.8.0, 2026-10-19
 
 - `faktaIFastForm`, `gruppensElever`, `tidensVeckotakt` och `periodensLangd`: faktarutans grupp, tid och period i fast form för metodbankens kort, "2–6 elever", "30 min", "3–5 pass/vecka", "6–8 veckor" (sajtens K-465). Niclas: "Skulle vilja ha en bättre standard på dessa för alla ... att det står tydligt och lika". Ett fält som inte går att läsa ger null, och sajten stoppar metoden.

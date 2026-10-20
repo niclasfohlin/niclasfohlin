@@ -32,8 +32,9 @@ Granska sju saker.
 6. Filmerna. Varje metod har en huvudfilm direkt efter faktarutan och kan ha en eller två extrafilmer (fälten film och filmer, METODER.md under Filmerna). Stämmer bildtexterna och filmens beskrivning med metodens text, ord för ord där de säger samma sak? Står varje extrafilm vid momentet den förklarar, på sidan, i utskriften och i Word, eller hade ett annat ställe (ett visst steg, en viss tabell) passat bättre? Står huvudfilmens fyra bilder på sidan 1 i Word och i utskriften? Lathundens PowerPoint börjar med bilden Filmerna, och lathundssidan med en spelare (METODER.md under Filmerna som mp4): säger filmens namn och de fyra bildtexterna under filmen vad filmen visar, också för den som inte har sett den, och är omslagsbilden ett färdigt läge i filmen och inte en tom eller nollställd scen?
 
 7. Metoden i databasen. Säger taggarna det metoden tränar (förmågorna), har den rätt upplägg för sina pass, och stämmer klass eller grupp (fältet format) med de tre frågorna och ett belägg ur passet (ARBETSSATT.md under Innehåll, styckena som börjar "Varje tagg har ett slag")? Saknas en förmåga som ingressen eller passet tränar, eller står en som metoden bara nämner? Står årskurs, grupp, tid och period så att metodbankens kort visar dem rätt och lika med de andra korten? Är varje hänvisning till ett verktyg eller till Niclas böcker skriven så att den blir en länk (STIL.md under Hänvisningar)?
+8. Bildtexterna (STIL.md under Bildtexter). Säger bildtexten under varje bild och blad vad läraren tittar på och vad det används till i metoden, och det bilden inte kan berätta själv: vem som gjort det, i vilket pass det används och hur det skrivs ut, klipps eller viks? Upprepar den något som redan syns eller står i bilden? Står det som syns i bilden i textalternativet (`alt`), så att den som inte ser bilden får det? Längden prövar bygget.
 
-Särskilda frågor och avgränsningen för den här granskningen (läs dem före allt annat ovan; de går före de sju punkterna där de säger något annat):
+Särskilda frågor och avgränsningen för den här granskningen (läs dem före allt annat ovan; de går före de åtta punkterna där de säger något annat):
 
 {{fragor}}
 

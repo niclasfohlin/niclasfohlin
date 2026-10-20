@@ -29,7 +29,7 @@ for (const f of readdirSync(mapp).filter((x) => /\.(js|d\.ts)$/.test(x))) {
   }
 }
 
-const { slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm } = await import(pathToFileURL(join(mapp, 'index.js')).href);
+const { slugAv, UPPTAGNA_LED, innehallstaggar, postensRad, postFel, databasFel, hamtplan, fastaAntal, fohlinHanvisningar, mojligaUpplagg, faktaIFastForm, meningarI, bildtextFel } = await import(pathToFileURL(join(mapp, 'index.js')).href);
 const fall = [
   ['Två lösningar', 'tva-losningar'], ['Lärarens sida', 'lararens-sida'], ['Bas', 'bas'], ['Problem och lösning', 'problem-och-losning'],
   ['Café Über', 'cafe-uber'], ['  –Äpple, år 3–  ', 'apple-ar-3'], ['Venndiagrammet', 'venndiagrammet'], ['Ö', 'o'],
@@ -135,5 +135,19 @@ const faktaFall = [
 ];
 for (const [d, vantat] of faktaFall) { const f = Object.values(faktaIFastForm(d)).join('|'); if (f !== vantat) fel.push(`faktaIFastForm(${JSON.stringify(d)}) ger ${f}, inte ${vantat}`); }
 
+// Bildtexten (K-486): meningarna, med citat och förkortningar, och felen.
+const meningsfall = [['Ett A4 per elev, att klippa isär. Eleverna lägger talet med korten i vecka 2.', 2], ['Läs ”Hej!” högt. Sedan t.ex. ”Vad tror du?” Klart.', 3],
+  ['Siffrorna 1,2 och 0,8 står här, se s. 4.', 1], ['Jag hörde att du …', 1], ['Ett. Två. Tre. Fyra.', 4], ['', 0]];
+for (const [t, n] of meningsfall) if (meningarI(t) !== n) fel.push(`meningarI("${t}") ger ${meningarI(t)}, inte ${n}`);
+const bildfall = [
+  [{ text: 'Ett A4 per elev, att klippa isär.', alt: 'Tjugofyra sifferkort.' }, { blad: true }, 0],
+  [{ text: 'Ett A4 per elev, att klippa isär.' }, { blad: true }, 1],
+  [{ text: 'Bilden visar bordet.' }, {}, 1],
+  [{ text: 'Ett. Två. Tre. Fyra.' }, {}, 1],
+  [{ text: 'x'.repeat(251) }, {}, 1],
+  [{ text: 'x'.repeat(400) }, { visas: false }, 0],
+];
+for (const [b, o, n] of bildfall) { const f = bildtextFel(b, o); if (f.length !== n) fel.push(`bildtextFel(${JSON.stringify(b).slice(0, 60)}) ger ${JSON.stringify(f)}`); }
+
 if (fel.length) { console.error(`standardprov: ${fel.length} fel i src/lib/standard/:\n  ${fel.join('\n  ')}`); process.exit(1); }
-console.log(`standardprov: standarden (src/lib/standard/) importerar inget utanför sig själv, och slugAv, UPPTAGNA_LED, innehållstaggarna, postens rad och fel och hämtplanen, spärren mot fasta antal, hänvisningarna till Fohlin, uppläggen ur faktarutans tid och kortets ruta i fast form svarar rätt.`);
+console.log(`standardprov: standarden (src/lib/standard/) importerar inget utanför sig själv, och slugAv, UPPTAGNA_LED, innehållstaggarna, postens rad och fel och hämtplanen, spärren mot fasta antal, hänvisningarna till Fohlin, uppläggen ur faktarutans tid, kortets ruta i fast form och bildtextens gränser svarar rätt.`);

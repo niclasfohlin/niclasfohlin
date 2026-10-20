@@ -419,3 +419,41 @@ export function faktaIFastForm(d) {
   const period = p ? `${p.hogst ? 'högst ' : ''}${spann(p.min, p.max)}${p.mer ? '+' : ''} ${enhet}${p.perKurs ? ' per kurs' : ''}` : null;
   return { grupp, pass, ofta, period };
 }
+
+/** Bildtextens gränser (sajtens STIL.md under Bildtexter, K-486). */
+export const BILDTEXT = { tecken: 250, meningar: 3 };
+
+/**
+ * Meningarna i en text: en mening slutar med punkt, utropstecken, frågetecken eller tre punkter, också inom citattecken,
+ * före ett ord med stor bokstav eller textens slut. Förkortningar som t.ex. räknas inte, och ett citat som ”Hej!” mitt i
+ * en mening inte heller.
+ * @param {string} text
+ */
+export function meningarI(text) {
+  const t = String(text).trim().replace(/\b(t\.ex|m\.fl|bl\.a|o\.s\.v|s\.k|d\.v\.s|ca|kl|nr|s)\./gi, '$1');
+  if (!t) return 0;
+  return (t.match(/[.!?…]["”»’)]*(?=\s+[A-ZÅÄÖ”"«]|\s*$)/gu) ?? []).length || 1;
+}
+
+/**
+ * Felen i en bilds texter, som en lista (Niclas 2026-10-20: "Tror du behöver en stringens för bildtext"). Bildtexten (text)
+ * står under bilden: en till tre meningar och högst 250 tecken, och den säger det bilden inte kan berätta själv, inte
+ * "Bilden visar". Textalternativet (alt) säger det som syns i bilden, och ett blad har alltid ett. En bild utan egen
+ * bildtext (visas: false), i en faktatext, ett problem eller en struktur, har textalternativet i text och prövas inte här.
+ * Sajten gör felen till byggfel, och riggen prövar samma sak före leveransen.
+ * @param {{ rubrik?: string, text: string, alt?: string }} bild
+ * @param {{ blad?: boolean, visas?: boolean }} [o]
+ * @returns {string[]}
+ */
+export function bildtextFel(bild, { blad = false, visas = true } = {}) {
+  if (!visas) return [];
+  const t = String(bild.text ?? '').trim();
+  const fel = [];
+  if (!t) fel.push('bildtexten saknas');
+  if (t.length > BILDTEXT.tecken) fel.push(`bildtexten har ${t.length} tecken, högst ${BILDTEXT.tecken}`);
+  const n = meningarI(t);
+  if (n > BILDTEXT.meningar) fel.push(`bildtexten har ${n} meningar, högst ${BILDTEXT.meningar}`);
+  if (/^bild(en)?\b/i.test(t)) fel.push('bildtexten börjar med "Bilden"; säg direkt vad läraren tittar på');
+  if (blad && !String(bild.alt ?? '').trim()) fel.push('bladet har inget textalternativ i alt');
+  return fel;
+}

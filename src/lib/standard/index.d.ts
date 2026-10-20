@@ -96,3 +96,9 @@ export declare function tidensVeckotakt(tid: string | undefined): { min: number;
 export declare function periodensLangd(period: string | undefined): { min: number; max?: number; enhet: 'veckor' | 'pass'; mer: boolean; hogst: boolean; perKurs: boolean } | null;
 /** Metodkortets fakta i fast form: grupp, pass, hur ofta och period; null för ett fält som inte går att läsa. */
 export declare function faktaIFastForm(d: { grupp?: string; tid?: string; period?: string }): { grupp: string | null; pass: string | null; ofta: string | null; period: string | null };
+/** Bildtextens gränser: högst 250 tecken och tre meningar (sajtens STIL.md under Bildtexter). */
+export declare const BILDTEXT: { tecken: number; meningar: number };
+/** Meningarna i en text, med citat och förkortningar som inte avslutar en mening. */
+export declare function meningarI(text: string): number;
+/** Felen i en bilds bildtext och textalternativ; tom lista när de följer regeln. */
+export declare function bildtextFel(bild: { rubrik?: string; text: string; alt?: string }, o?: { blad?: boolean; visas?: boolean }): string[];
