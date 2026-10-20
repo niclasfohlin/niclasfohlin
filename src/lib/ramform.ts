@@ -208,7 +208,7 @@ export function textlangd(l: Lista): 'kort' | 'mellan' | 'lang' {
   return tecken <= 100 ? 'kort' : tecken <= 300 ? 'mellan' : 'lang';
 }
 
-// En ram är elevens blad när rubriken eller första stycket säger det ("Ljudkollen, elevens blad", "Elevens blad till
+// En ram är elevens blad när rubriken eller första stycket säger det ("Elevens blad", "Elevens blad till
 // screeningen före insatsen har två sidor") och den har listor som eleven läser, inte bara lärarens protokoll. I Word blir
 // den ett eget blad att lägga på bordet (metoddocx.ts), och sidan säger att bladet finns i planeringsmallarna.
 export function arElevensBlad(ram: { rubrik: string; text: string[]; listor?: Lista[] }): boolean {

@@ -82,7 +82,7 @@ pabordet:
   - nr: 5
     rubrik: "Blad: Ljudkollen"
     text: "Elevens blad till ljudkollen har en rad för namnet överst. Uppgift 4 har de tio första bokstäverna i två rader (m, a, s, e, l, i, r, o, v och n) och fler bokstäver i två rader (k, u, f, ä, b, t, j, å, g, y, d, ö, h och p), var och en i en ruta som är stor nog att ringa in. Uppgift 9 har de påhittade orden fål, rel, nar och mel, vart och ett i en ruta."
-    efter: "ram: Ljudkollen, elevens blad"
+    efter: "ram: Ljudkollen"
   - nr: 6
     rubrik: "Blad: Bokstavskartan"
     text: "Bokstavskartan har alfabetet på ett A4, och varje bokstav utom q, w och x har en bild och ordet under: Aa apa, Bb buss, Cc citron, Dd dörr, Ee ekorre, Ff fisk, Gg gurka, Hh hus, Ii is, Jj jordgubbe, Kk ko, Ll lejon, Mm myra, Nn nyckel, Oo orm, Pp paraply, Qq som k, Rr räv, Ss sol, Tt tiger, Uu uggla, Vv våffla, Ww som v, Xx som ks, Yy yxa, Zz zebra, Åå åsna, Ää äpple, Öö öga."
@@ -512,7 +512,7 @@ ramar:
               text: "Vänd bladet. Eleven läser texten om Noah högt. Fråga sedan: ”Varför tror du att Noah gav bort sin smörgås?” ”Varför ler pojken, tror du?” Gränsen: högst två fel och frågorna rätt."
             - rubrik: "Nivå 8 · Läsa en längre text"
               text: "Eleven läser texten om Stefan högt. Fråga sedan: ”Varför får inte Stefan vara med och spela fotboll?” ”Hur tror du att Stefan känner sig när han ser de andra spela?” Gränsen: högst tre fel och frågorna rätt."
-    - rubrik: "Ljudkollen, elevens blad"
+    - rubrik: Ljudkollen
       text:
         - "Eleven läser uppgift 4 och 9 från bladet och skriver uppgift 7 på ett papper. De andra uppgifterna säger du. Här står det du säger och frågar i varje uppgift."
       delar:
@@ -554,7 +554,7 @@ ramar:
         - rubrik: Till läraren
           falt:
             - rubrik: Kopiera
-              text: "Kopiera protokollets två sidor dubbelsidigt, ett papper per elev. Det du säger och frågar står vid screeningens två versioner och vid ljudkollen."
+              text: "Kopiera protokollet, ett papper per elev. Det du säger och frågar står vid screeningens två versioner och vid ljudkollen."
       listor:
         - rubrik: "Protokollet · Screeningen: antal rätt eller fel, ringa in den högsta nivån eleven klarar"
           kolumner:

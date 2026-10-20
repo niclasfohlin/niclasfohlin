@@ -98,8 +98,10 @@ if (!args.includes('--google') && !args.includes('--igen')) {
       try {
         const r = await luftprov(fil, { ut: UT, wordPdf: wordPdf.get(fil), sidnummer: SIDNUMMER });
         if (r.lage === 'ryms') { rymdes++; console.log(`ryms ${r.namn}: luftprovet, ${r.block} block på ${r.sidor} sidor ryms med uppmätt drift`); continue; }
+        // Utan sidankare har luftprovet inte mätt något (wordparitet 0.3.4), och filen jämförs med Google.
         const t = r.tranga[0];
-        console.log(`  …  ${r.namn}: till Google, ${r.tranga.length} trånga block, först Words sida ${t.fran + t.k} med ${t.luft} pt luft mot ${t.drift} pt ${t.kalla === 'standard' ? 'standarddrift' : 'uppmätt drift'}`);
+        if (r.inga) console.log(`  …  ${r.namn}: till Google, luftprovet hittade inget sidankare och mätte inget`);
+        else console.log(`  …  ${r.namn}: till Google, ${r.tranga.length} trånga block, först Words sida ${t.fran + t.k} med ${t.luft} pt luft mot ${t.drift} pt ${t.kalla === 'standard' ? 'standarddrift' : 'uppmätt drift'}`);
       } catch (e) {
         console.log(`  …  ${basename(fil, '.docx')}: till Google, luftprovet gick inte (${String(e.message).replace(/\s+/g, ' ').slice(0, 120)})`);
       }
