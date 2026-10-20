@@ -1789,6 +1789,19 @@ const BLADSIDA_STAENDE = { ...BLADSIDA, b: 210, h: 297, nederst: 285, upphovMm: 
 type Bladmatt = typeof BLADSIDA;
 /** Bladets sida: stående när bilden är högre än bred (arStaendeBlad i src/lib/pabordet.ts), annars liggande. */
 const bladsida = (b: PaBordet): Bladmatt => (arStaendeBlad(b) ? BLADSIDA_STAENDE : BLADSIDA);
+// Bladets plats på sidan. Ett blad är ritat kant till kant, med upphovets rad under bildens nedersta linje. Metodriggens
+// blad 2026-10-20 är ritade ända ned till 293 mm av ett stående A4 (granskningen samma dag: raden stod i ritningen i 31
+// av 66 pdf:er). Ett blad som når raden (fot, mätt av scripts/bladfot.mjs) krymps därför så att ritningen slutar 2,3 mm
+// över radens nederkant, och står mitt på sidan i bredd; skrivytorna följer med. k är millimeter per punkt i bilden och
+// ox bildens vänsterkant i millimeter.
+function bladform(b: PaBordet): { S: Bladmatt; k: number; ox: number; skala: number } {
+  const S = bladsida(b);
+  const k0 = S.b / b.matt.bredd;
+  const fri = S.upphovMm - 2.3;
+  const botten = (b.fot ?? 0) * k0;
+  const skala = botten > fri ? fri / botten : 1;
+  return { S, k: k0 * skala, ox: (S.b * (1 - skala)) / 2, skala };
+}
 function bladrutnat(ytor: Bladyta[], k: number, S: Bladmatt = BLADSIDA) {
   // Kanterna i bildens punkter. Kanter som ligger nära varandra blir en.
   const kanter = (varden: number[]) => { const ut: number[] = []; for (const v of [...new Set(varden)].sort((a, b) => a - b)) if (!ut.length || v - ut[ut.length - 1] > S.snappMm / k) ut.push(v); return ut; };
@@ -1804,23 +1817,22 @@ const bladytor = (b: PaBordet) => (arIfylltBlad(b) ? [] : b.ytor ?? []);
 // Bladets marginaler: tabellen börjar vid den första ytans kant, och resten av sidan är bildens. Ett blad utan celler
 // har 6,5 mm runt om.
 function bladmarginaler(b: PaBordet): Bladsektion {
-  const S = bladsida(b), k = S.b / b.matt.bredd, { xs, ys } = bladrutnat(bladytor(b), k, S);
+  const { S, k, ox } = bladform(b), { xs, ys } = bladrutnat(bladytor(b), k, S);
   const minst = Math.round(S.marginalMm * MM);
   const staende = S === BLADSIDA_STAENDE || undefined;
   if (!xs.length) return { top: minst, bottom: minst, left: minst, right: minst, staende };
-  const m = { top: Math.round((ys[0] * k - 0.4) * MM), bottom: minst, left: Math.round(xs[0] * k * MM), right: Math.round((S.b - xs[xs.length - 1] * k) * MM) - 30, staende };
+  const m = { top: Math.round((ys[0] * k - 0.4) * MM), bottom: minst, left: Math.round((ox + xs[0] * k) * MM), right: Math.round((S.b - ox - xs[xs.length - 1] * k) * MM) - 30, staende };
   if (Math.min(m.top, m.left, m.right) < minst) throw new Error(`Bladet "${b.bild.rubrik}": en skrivyta ligger närmare papperets kant än ${String(S.marginalMm).replace('.', ',')} mm. Word varnar då för marginaler utanför det utskrivbara området; rita ytorna längre in (riggens docs/bladen.md).`);
   return m;
 }
 // adress: metodens adress, som står i upphovet under bilden.
 function bildblad(b: PaBordet, adress: string): Barn[] {
-  const S = bladsida(b);
+  const { S, k, ox, skala } = bladform(b); // k: millimeter per punkt i bilden
   if (Math.abs(b.matt.hojd / b.matt.bredd - S.h / S.b) > 0.01) throw new Error(`Bladet "${b.bild.rubrik}" är ${b.matt.bredd} × ${b.matt.hojd} punkter. Ett blad är hela sidan, liggande 1485 × 1050 eller stående 1050 × 1485 (src/data/pabordet.json, scripts/pabordetdata.mjs).`);
-  const k = S.b / b.matt.bredd; // millimeter per punkt i bilden
   const emu = (mm: number) => Math.round(mm * 36000);
-  const bakom = bildRun(b.adress, mmPx(S.b), bildensAlt(b), mmPx(b.matt.hojd * k), {
-    horizontalPosition: { relative: HorizontalPositionRelativeFrom.PAGE, offset: 0 },
-    verticalPosition: { relative: VerticalPositionRelativeFrom.PAGE, offset: emu((S.h - b.matt.hojd * k) / 2) },
+  const bakom = bildRun(b.adress, mmPx(S.b * skala), bildensAlt(b), mmPx(b.matt.hojd * k), {
+    horizontalPosition: { relative: HorizontalPositionRelativeFrom.PAGE, offset: emu(ox) },
+    verticalPosition: { relative: VerticalPositionRelativeFrom.PAGE, offset: emu((S.h - (b.matt.hojd * k) / skala) / 2) },
     behindDocument: true, allowOverlap: true, lockAnchor: true, wrap: { type: TextWrappingType.NONE },
   });
   const ankare = new Paragraph({ spacing: { before: 0, after: 0, line: 20 }, run: { size: 2, font: 'Calibri' }, children: [bakom, new TextRun({ text: '', size: 2, font: 'Calibri' })] });

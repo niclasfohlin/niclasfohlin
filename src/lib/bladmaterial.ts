@@ -31,7 +31,9 @@ export interface Bladmaterial { led: string; rader: Bladrad[]; ramar: Set<number
 const slug = slugAv;
 
 // Ledets former, som raden, tabellen i nedladdningsrutan, filerna och ramens sida heter efter: Modellen blir Modellerna,
-// modeller och Modellens sida. Ett nytt led läggs till här.
+// modeller och Modellens sida. Ett nytt led läggs till här. Ramar med ett led som inte står här är vanliga ramar, vars
+// blad får egna filer (egnaBlad), så att metodriggens ramar som "Kartläggning före: Bas" inte blir ett bladmaterial för
+// att ordningen råkar ställa dem i följd (granskningen 2026-10-20).
 const LED: Record<string, { alla: string; flera: string; sida: string }> = { Modellen: { alla: 'Modellerna', flera: 'modeller', sida: 'Modellens sida' } };
 const ledets = (bm: Pick<Bladmaterial, 'led'>) => {
   const former = LED[bm.led];
@@ -156,22 +158,26 @@ export function metodensBladmaterial(d: MetodData, id: string): Bladmaterial | u
 /** Ett blad i en vanlig ram, som affischen i Högläsning i par och metodriggens blad i tolv metoder 2026-10-20 (K-476;
  * granskningen samma dag: "Affischen går inte att skriva ut för sig"): en egen Word-fil med bara bladet (bladDokument i
  * metoddocx.ts), som Word sparar som pdf, och under bladet på sidan en knapp som skriver ut den och en länk till
- * Word-filen, där bladets fält går att skriva i. Bladen i ramar med blad, i banken, i nivåernas material och vid
- * enheterna har sina filer redan. namn är filens namn utan ändelse. */
+ * Word-filen, där bladets fält går att skriva i. Bladen i ramar med blad, i banken och i nivåernas material har sina
+ * filer redan. Bladen vid enheterna (ramar.vidEnheterna, som Kärnorna) har en pdf på enhetens sida och får här också sin
+ * egen, så att knappen står vid bladet på metodens sida (granskningen 2026-10-20). namn är filens namn utan ändelse. */
 export interface EgetBlad { nr: number; namn: string; titel: string; staende: boolean }
 export function egnaBlad(d: MetodData, id: string): EgetBlad[] {
+  const sidor = new Set(bladgrupper(d, id).filter((g) => g.sidor).flatMap((g) => g.blad));
+  return allaEgnaBlad(d, id).filter((x) => !sidor.has(x.nr));
+}
+function allaEgnaBlad(d: MetodData, id: string): EgetBlad[] {
   const ramar = d.ramar?.ramar ?? [];
   if (!ramar.length) return [];
   const bank = bankAv(d);
   const nm = metodensNivamaterial(d);
   const bm = metodensBladmaterial(d, id);
   const iRader = new Set((bm?.rader ?? []).flatMap((r) => r.blad.map((b) => b.bild.nr)));
-  const vidEnheterna = new Set(d.ramar?.vidEnheterna ?? []);
   const namn = new Set<string>();
   return metodensPaBordet(d, id).flatMap((b) => {
     const ram = b.vid && 'ram' in b.vid ? b.vid.ram : undefined;
     const ri = ram === undefined ? -1 : ramar.findIndex((r) => r.rubrik === ram || r.rubrik.split(':')[0].trim() === ram);
-    if (!b.bild.rubrik.startsWith('Blad: ') || ri < 0 || iRader.has(b.bild.nr) || vidEnheterna.has(ramar[ri].rubrik)) return [];
+    if (!b.bild.rubrik.startsWith('Blad: ') || ri < 0 || iRader.has(b.bild.nr)) return [];
     if (bank && (bank.ramar.has(ri) || bank.oversikter.has(ri))) return [];
     if (nm?.ramar.has(ri)) return [];
     let fil = `${id}-blad-${slug(bladNamn(b))}`;
@@ -181,11 +187,34 @@ export function egnaBlad(d: MetodData, id: string): EgetBlad[] {
   });
 }
 
+// En sida av ett blad med flera sidor, som "Screeningen, version A, sida 1".
+const arSida = (namn: string) => /, sida \d+$/.test(namn);
+
+/** En ram med två eller fler egna blad, som screeningens två sidor och läxorna (granskningen 2026-10-20: "Skriv ut bladet
+ * dubbelsidigt", men knappen gav en sida): en fil till med alla ramens blad i ordning, och under det sista bladet en
+ * knapp som skriver ut dem tillsammans, så att dubbelsidigt går att välja i utskriftsrutan. text är knappens ord. Är
+ * bladen sidor av ett blad (sidor), är de ett blad: sidorna har ingen egen fil och knappen är den enda (egnaBlad). */
+export interface Bladgrupp { namn: string; titel: string; blad: number[]; text: string; pdftext: string; liggande: boolean; sidor: boolean }
+const ANTALSORD = ['', '', 'två', 'tre', 'fyra', 'fem', 'sex', 'sju', 'åtta', 'nio', 'tio'];
+export function bladgrupper(d: MetodData, id: string): Bladgrupp[] {
+  const egna = new Map(allaEgnaBlad(d, id).map((x) => [x.nr, x]));
+  const ramar = d.ramar?.ramar ?? [];
+  const bilder = metodensPaBordet(d, id);
+  return ramar.flatMap((ram) => {
+    const blad = bladVid(bilder, ram.rubrik).filter((b) => egna.has(b.bild.nr));
+    if (blad.length < 2) return [];
+    const sidor = blad.every((b) => arSida(bladNamn(b)));
+    const ord = sidor ? 'sidorna' : 'bladen';
+    const antal = blad.length === 2 ? 'båda' : `alla ${ANTALSORD[blad.length] ?? blad.length}`;
+    return [{ namn: `${id}-blad-${slug(ram.rubrik)}-alla`, titel: ram.rubrik, blad: blad.map((b) => b.bild.nr), text: `Skriv ut ${antal} ${ord}`, pdftext: `${antal.replace(/^b/, 'B').replace(/^a/, 'A')} ${ord} som pdf`, liggande: blad.every((b) => b.matt.bredd > b.matt.hojd), sidor }];
+  });
+}
+
 /** utanfor: ramar som redan står på ett annat ställe (bankens enheter, nivåernas material). */
 export function bladmaterial(ramar: Ram[], bilder: PaBordet[], utanfor: (ri: number) => boolean = () => false): Bladmaterial | undefined {
   for (let k = 0; k < ramar.length; k++) {
     const led = utanfor(k) ? undefined : ramar[k].rubrik.match(/^([^:]+): (.+)$/)?.[1];
-    if (!led) continue;
+    if (!led || !(led in LED)) continue;
     let slut = k;
     while (slut < ramar.length && !utanfor(slut) && ramar[slut].rubrik.startsWith(`${led}: `)) slut++;
     const rader = ramar.slice(k, slut).map((ram, i) => {

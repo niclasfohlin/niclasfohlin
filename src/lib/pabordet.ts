@@ -15,11 +15,13 @@
 import type { MetodData } from './metod';
 import { passar, tolkaEfter, type FilmPlats } from './film';
 import BILDDATA from '../data/pabordet.json';
+// Hur långt ned bladet är ritat, i bildens punkter (scripts/bladfot.mjs): bildblad i metoddocx.ts krymper ett blad som når upphovets rad.
+import BLADFOT from '../data/bladfot.json';
 
 export type PaBordetFalt = MetodData['pabordet'][number];
 export interface Bladyta { namn: string; x: number; y: number; b: number; h: number; lage?: 'uppe' | 'mitt' | 'nere'; mitt?: boolean }
 // fil: ett blad i en vanlig ram har en egen fil att skriva ut (egnaBlad i src/lib/bladmaterial.ts), som metodens sida sätter.
-export interface PaBordet { bild: PaBordetFalt; adress: string; vid?: FilmPlats; matt: { bredd: number; hojd: number }; ytor?: Bladyta[]; elev?: boolean; skala?: number; fil?: { namn: string; titel: string; statistik: string } }
+export interface PaBordet { bild: PaBordetFalt; adress: string; vid?: FilmPlats; matt: { bredd: number; hojd: number }; ytor?: Bladyta[]; elev?: boolean; skala?: number; fot?: number; fil?: { namn: string; titel: string; statistik: string }; alla?: { namn: string; titel: string; text: string; pdftext: string; antal: number; liggande: boolean; statistik: string } }
 export const PABORDET_MATT = { bredd: 960, hojd: 540 };
 type Bilddata = { bredd?: number; hojd?: number; ytor?: Bladyta[]; elev?: boolean; skala?: number };
 const bilddata = (id: string, nr: number): Bilddata => (BILDDATA as Record<string, Record<string, Bilddata>>)[id]?.[String(nr)] ?? {};
@@ -28,7 +30,7 @@ const bilddata = (id: string, nr: number): Bilddata => (BILDDATA as Record<strin
 export const metodensPaBordet = (d: MetodData, id: string): PaBordet[] =>
   (d.pabordet ?? []).map((b) => {
     const x = bilddata(id, b.nr);
-    return { bild: b, adress: `/stodundervisning/${id}-pabordet-${b.nr}.svg`, vid: tolkaEfter(b.efter), matt: { bredd: x.bredd ?? PABORDET_MATT.bredd, hojd: x.hojd ?? PABORDET_MATT.hojd }, ...(x.ytor ? { ytor: x.ytor } : {}), ...(x.elev ? { elev: true } : {}), ...(x.skala ? { skala: x.skala } : {}) };
+    return { bild: b, adress: `/stodundervisning/${id}-pabordet-${b.nr}.svg`, vid: tolkaEfter(b.efter), matt: { bredd: x.bredd ?? PABORDET_MATT.bredd, hojd: x.hojd ?? PABORDET_MATT.hojd }, ...(x.ytor ? { ytor: x.ytor } : {}), ...(x.elev ? { elev: true } : {}), ...(x.skala ? { skala: x.skala } : {}), ...((BLADFOT as Record<string, { fot: number }>)[`${id}-${b.nr}`] ? { fot: (BLADFOT as Record<string, { fot: number }>)[`${id}-${b.nr}`].fot } : {}) };
   });
 // Ett blad (Faktatextsamtal i grupp, metodriggens TILL-SAJTEN 2026-10-13, Det nya punkt 4): en bild På bordet vars rubrik
 // börjar med "Blad: ", som "Blad: Tankekartan 1: fyra delar". Den står ensam på ett liggande A4 direkt efter sin ram

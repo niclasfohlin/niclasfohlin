@@ -12,7 +12,11 @@
 // Ett blad med en egen fil (b.fil, egnaBlad i src/lib/bladmaterial.ts, K-476) har direkt under bilden en knapp som
 // skriver ut bladets pdf, ur Word-filen med bara bladet, och filvalet med Word-filen, där bladets fält går att skriva i.
 // Knappen står så nära bladet som möjligt, så att det syns vad den skriver ut (Niclas 2026-10-20), och bara på skärmen:
-// Word-filerna och utskriften har den inte.
+// Word-filerna och utskriften har den inte. Under det sista bladet i en ram med flera står en knapp till, som skriver
+// ut alla ramens blad i en pdf (b.alla, bladgrupper), så att screeningens två sidor går att skriva ut dubbelsidigt; ett
+// blad med två sidor har bara den knappen, under den sista sidan. Länken runt bilden har bladets namn som namn, så att en
+// skärmläsare läser bladets text en gång, i bildtexten (granskningen i telefonbredd 2026-10-20). Knappen för Google
+// Formulär står efter bildtexten (METODER.md under Bladet).
 import { arBlad, arIfylltBlad, arStaendeBlad, bildensAlt, bladNamn, iDel, type PaBordet } from '../lib/pabordet';
 import Filval from './Filval.astro';
 // utanRubrik: bladet står under sin egen rubrik på ramens sida ([id]/[enhet].astro), så namnet och ankaret står där.
@@ -24,15 +28,21 @@ const blad = arBlad(b);
 {blad ? (
   <figure class:list={['m-blad', { ifyllt: arIfylltBlad(b), staende: arStaendeBlad(b) }]} id={utanRubrik ? undefined : `blad-${b.bild.nr}`}>
     {!utanRubrik && <p class="m-blad-rubrik">{bladNamn(b)}</p>}
-    <a href={b.adress} class="bild-lank" title="Öppna bladet i full storlek"><img src={b.adress} alt={bildensAlt(b)} width={b.matt.bredd} height={b.matt.hojd} loading="lazy" decoding="async" data-utskriftsbild /></a>
+    <a href={b.adress} class="bild-lank" title="Öppna bladet i full storlek" aria-label={`Öppna bladet ${bladNamn(b)} i full storlek`}><img src={b.adress} alt={bildensAlt(b)} width={b.matt.bredd} height={b.matt.hojd} loading="lazy" decoding="async" data-utskriftsbild /></a>
     {b.fil && (
       <p class="m-blad-filer">
         <a class="knapp sekundar liten" href={`/stodundervisning/${b.fil.namn}.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande={arStaendeBlad(b) ? undefined : ''} data-sidor-hogst="1" data-goatcounter-click={`utskrift:${b.fil.namn}`} data-goatcounter-title={`${b.fil.statistik}, bladet`}><span data-direkt="Skriv ut bladet">Bladet som pdf</span><span class="visually-hidden">: {b.fil.titel}</span></a>
         <Filval fil={`/stodundervisning/${b.fil.namn}`} namn={b.fil.namn} rubrik={`Bladet ${b.fil.titel}`} statistik={b.fil.statistik} liten />
       </p>
     )}
-    {b.bild.google && <p class="m-blad-google"><a class="knapp sekundar" href={b.bild.google} target="_blank" rel="noopener" data-goatcounter-click={`google:${b.bild.google.slice(1)}`} data-goatcounter-title={`${bladNamn(b)}: kopiera formuläret och sammanställningen i Google`}>Kopiera formuläret och sammanställningen</a></p>}
+    {b.alla && (
+      <p class="m-blad-filer">
+        <a class="knapp sekundar liten" href={`/stodundervisning/${b.alla.namn}.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande={b.alla.liggande ? '' : undefined} data-sidor-hogst={b.alla.antal} data-goatcounter-click={`utskrift:${b.alla.namn}`} data-goatcounter-title={`${b.alla.statistik}, ${b.alla.text.replace('Skriv ut ', '')}`}><span data-direkt={b.alla.text}>{b.alla.pdftext}</span><span class="visually-hidden">: {b.alla.titel}</span></a>
+        <Filval fil={`/stodundervisning/${b.alla.namn}`} namn={b.alla.namn} rubrik={b.alla.titel} statistik={b.alla.statistik} liten />
+      </p>
+    )}
     <figcaption>{b.bild.text}</figcaption>
+    {b.bild.google && <p class="m-blad-google"><a class="knapp sekundar" href={b.bild.google} target="_blank" rel="noopener" data-goatcounter-click={`google:${b.bild.google.slice(1)}`} data-goatcounter-title={`${bladNamn(b)}: kopiera formuläret och sammanställningen i Google`}>Kopiera formuläret och sammanställningen</a></p>}
   </figure>
 ) : (
   <figure class={`m-pabordet${vecka ? ' i-del' : ''}`}>
