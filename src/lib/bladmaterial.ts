@@ -153,6 +153,34 @@ export function metodensBladmaterial(d: MetodData, id: string): Bladmaterial | u
   return bm;
 }
 
+/** Ett blad i en vanlig ram, som affischen i Högläsning i par och metodriggens blad i tolv metoder 2026-10-20 (K-476;
+ * granskningen samma dag: "Affischen går inte att skriva ut för sig"): en egen Word-fil med bara bladet (bladDokument i
+ * metoddocx.ts), som Word sparar som pdf, och under bladet på sidan en knapp som skriver ut den och en länk till
+ * Word-filen, där bladets fält går att skriva i. Bladen i ramar med blad, i banken, i nivåernas material och vid
+ * enheterna har sina filer redan. namn är filens namn utan ändelse. */
+export interface EgetBlad { nr: number; namn: string; titel: string; staende: boolean }
+export function egnaBlad(d: MetodData, id: string): EgetBlad[] {
+  const ramar = d.ramar?.ramar ?? [];
+  if (!ramar.length) return [];
+  const bank = bankAv(d);
+  const nm = metodensNivamaterial(d);
+  const bm = metodensBladmaterial(d, id);
+  const iRader = new Set((bm?.rader ?? []).flatMap((r) => r.blad.map((b) => b.bild.nr)));
+  const vidEnheterna = new Set(d.ramar?.vidEnheterna ?? []);
+  const namn = new Set<string>();
+  return metodensPaBordet(d, id).flatMap((b) => {
+    const ram = b.vid && 'ram' in b.vid ? b.vid.ram : undefined;
+    const ri = ram === undefined ? -1 : ramar.findIndex((r) => r.rubrik === ram || r.rubrik.split(':')[0].trim() === ram);
+    if (!b.bild.rubrik.startsWith('Blad: ') || ri < 0 || iRader.has(b.bild.nr) || vidEnheterna.has(ramar[ri].rubrik)) return [];
+    if (bank && (bank.ramar.has(ri) || bank.oversikter.has(ri))) return [];
+    if (nm?.ramar.has(ri)) return [];
+    let fil = `${id}-blad-${slug(bladNamn(b))}`;
+    if (namn.has(fil)) fil = `${fil}-${b.bild.nr}`;
+    namn.add(fil);
+    return [{ nr: b.bild.nr, namn: fil, titel: bladNamn(b), staende: b.matt.hojd > b.matt.bredd }];
+  });
+}
+
 /** utanfor: ramar som redan står på ett annat ställe (bankens enheter, nivåernas material). */
 export function bladmaterial(ramar: Ram[], bilder: PaBordet[], utanfor: (ri: number) => boolean = () => false): Bladmaterial | undefined {
   for (let k = 0; k < ramar.length; k++) {

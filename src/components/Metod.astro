@@ -46,7 +46,7 @@ import { arBlad, arStaendeBlad, bildensAlt, bladVid, metodensPaBordet, paBordetV
 import { listansNiva } from '../lib/nivaer';
 import { omslagUpphov, ramensNiva } from '../lib/litteraturlista';
 import { metodensNivamaterial } from '../lib/nivamaterial';
-import { metodensBladmaterial, bladKort, bladRubrik, bladsidaAdress, ledSida, type Bladrad } from '../lib/bladmaterial';
+import { metodensBladmaterial, egnaBlad, bladKort, bladRubrik, bladsidaAdress, ledSida, type Bladrad } from '../lib/bladmaterial';
 import { ovrigtfil } from '../lib/ovrigt';
 import { sidlasFor } from '../lib/sidlas';
 import { enhetensUtskrifter, radensUtskrifter, utskriftAdress } from '../lib/utskrift';
@@ -133,6 +133,9 @@ const filmer = metodensFilmer(d, id);
 // De centrala sakerna (src/lib/centrala.ts): överst i menyn och i texten efter meningen som nämner dem (Centralrad.astro).
 const centrala = metodensCentrala(d);
 const bilderPaBordet = metodensPaBordet(d, id);
+// Ett blad i en vanlig ram har en egen fil, och Pabordet.astro ritar knappen som skriver ut den (egnaBlad, K-476).
+const egnaFiler = new Map(egnaBlad(d, id).map((x) => [x.nr, x]));
+for (const b of bilderPaBordet) { const x = egnaFiler.get(b.bild.nr); if (x) b.fil = { namn: x.namn, titel: x.titel, statistik: `${d.titel}: ${x.titel}` }; }
 // Lektionskorten (src/lib/lektionskort.ts): bredvid Öppna lathunden i menyn och vid lektionen i texten, först på platsen,
 // så att knappen står direkt efter det som beskriver lektionen och före en film på samma plats.
 const lektionskort = metodensLektionskort(d, id);

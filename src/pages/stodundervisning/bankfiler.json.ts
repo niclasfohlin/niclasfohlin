@@ -5,7 +5,7 @@ import { arBladsida, bankAv, bankfiler, bankfilensRamar } from '../../lib/bank';
 import { medDatabaserna } from '../../lib/faktateman';
 import { bokhandledningen, bokhandledningensFil, handledningensFil, lararhandledningar } from '../../lib/handledning';
 import { metodensNivamaterial, nivafiler } from '../../lib/nivamaterial';
-import { bladfiler, metodensBladmaterial } from '../../lib/bladmaterial';
+import { bladfiler, egnaBlad, metodensBladmaterial } from '../../lib/bladmaterial';
 import { ovrigtfil } from '../../lib/ovrigt';
 import { harMaterial } from '../../lib/material';
 import { harLathund } from '../../lib/metod';
@@ -60,6 +60,8 @@ export const GET: APIRoute = async () => {
     const bm = metodensBladmaterial(m.data, m.id);
     const ovrigt = ovrigtfil(m.data, m.id);
     nivans.push(...(bm ? bladfiler(m.id, bm).map((f) => ({ metod: m.id, namn: f.namn, rubrik: f.rubrik, slag: f.slag as string, minst: f.minst, hogst: f.hogst, ramar: f.ramar, oversikter: [] as number[] })) : []));
+    // Ett blad i en vanlig ram (egnaBlad): en sida, som Word-filen med bara bladet ska ha.
+    nivans.push(...egnaBlad(m.data, m.id).map((b) => ({ metod: m.id, namn: b.namn, rubrik: `Blad: ${b.titel}`, slag: 'blad', minst: 1, hogst: 1, ramar: [] as number[], oversikter: [] as number[] })));
     if (ovrigt) nivans.push({ metod: m.id, namn: ovrigt.namn, rubrik: ovrigt.rubrik, slag: 'ovrigt', minst: ovrigt.minst, hogst: ovrigt.hogst, ramar: ovrigt.ramar, oversikter: [] });
     const skrivkort = skrivkortAv(m.id);
     if (skrivkort) nivans.push(...skrivkort.nivaer.map((n) => { const antal = skrivkort.kort.filter((k) => k.niva === n.namn).length; return { metod: m.id, namn: nivafilNamn(m.id, n.namn), rubrik: `Skrivkort: ${n.namn}`, slag: 'skrivkort', minst: antal, hogst: antal, ramar: [] as number[], oversikter: [] as number[] }; }));

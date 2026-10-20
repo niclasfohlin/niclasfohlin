@@ -1166,7 +1166,9 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-blad figcaption { font-size: 0.95rem; color: var(--farg-text-svag); margin-top: 0.4rem; }
 /* Bladet som Google Formulär med en sammanställning (fältet google): en knapp under bildtexten. */
 .m-blad-google { margin: 0.6rem 0 0; }
-@media print { .m-blad-google { display: none; } }
+/* Knappen som skriver ut bladets egen pdf och filvalet med Word-filen (Pabordet.astro, K-476), på en rad som bryts. */
+.m-blad-filer { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; margin: 0.6rem 0 0; }
+@media print { .m-blad-google, .m-blad-filer { display: none; } }
 /* Ett stående blad (arStaendeBlad) står smalare på en bred skärm, så att hela bladet ryms i höjd. */
 .m-blad.staende { max-width: 30rem; }
 /* Bilden som eleven ser på (PaBordet.elev): direkt efter det eleven läser, utan rubrik, på vitt som elevens blad. */

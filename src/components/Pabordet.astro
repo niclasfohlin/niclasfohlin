@@ -9,7 +9,10 @@
 // leder till svg-filen, så att bladet går att se stort i telefonen. I utskriften är bladet en egen sida med bara bilden,
 // liggande eller stående som i Word (arStaendeBlad), där bladets namn är ritat i bilden (global.css, .m-blad).
 // Textalternativet är bildens rubrik och text, som i Word, och scripts/paritet.mjs prövar det.
+// Ett blad med en egen fil (b.fil, egnaBlad i src/lib/bladmaterial.ts, K-476) har under bildtexten en knapp som skriver
+// ut bladets pdf, ur Word-filen med bara bladet, och filvalet med Word-filen, där bladets fält går att skriva i.
 import { arBlad, arIfylltBlad, arStaendeBlad, bildensAlt, bladNamn, iDel, type PaBordet } from '../lib/pabordet';
+import Filval from './Filval.astro';
 // utanRubrik: bladet står under sin egen rubrik på ramens sida ([id]/[enhet].astro), så namnet och ankaret står där.
 interface Props { b: PaBordet; utanRubrik?: boolean }
 const { b, utanRubrik = false } = Astro.props;
@@ -21,6 +24,12 @@ const blad = arBlad(b);
     {!utanRubrik && <p class="m-blad-rubrik">{bladNamn(b)}</p>}
     <a href={b.adress} class="bild-lank" title="Öppna bladet i full storlek"><img src={b.adress} alt={bildensAlt(b)} width={b.matt.bredd} height={b.matt.hojd} loading="lazy" decoding="async" data-utskriftsbild /></a>
     <figcaption>{b.bild.text}</figcaption>
+    {b.fil && (
+      <p class="m-blad-filer">
+        <a class="knapp sekundar liten" href={`/stodundervisning/${b.fil.namn}.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande={arStaendeBlad(b) ? undefined : ''} data-sidor-hogst="1" data-goatcounter-click={`utskrift:${b.fil.namn}`} data-goatcounter-title={`${b.fil.statistik}, bladet`}><span data-direkt="Skriv ut bladet">Bladet som pdf</span><span class="visually-hidden">: {b.fil.titel}</span></a>
+        <Filval fil={`/stodundervisning/${b.fil.namn}`} namn={b.fil.namn} rubrik={`Bladet ${b.fil.titel}`} statistik={b.fil.statistik} liten />
+      </p>
+    )}
     {b.bild.google && <p class="m-blad-google"><a class="knapp sekundar" href={b.bild.google} target="_blank" rel="noopener" data-goatcounter-click={`google:${b.bild.google.slice(1)}`} data-goatcounter-title={`${bladNamn(b)}: kopiera formuläret och sammanställningen i Google`}>Kopiera formuläret och sammanställningen</a></p>}
   </figure>
 ) : (

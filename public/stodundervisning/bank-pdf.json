@@ -7698,5 +7698,929 @@
     "sidor": 1,
     "kB": 89,
     "datum": "2026-10-19"
+  },
+  "antalsuppfattning-i-grupp-blad-ak-1-laxa-1-och-2": {
+    "word": "4d272481b522626545f3ec5b535155fe4cc88bf1371b10a86d37020f78cd161c",
+    "pdf": "acb9ed7fbe7aa85999134345a1e1d1014da34227b4ff97309cfb764e1fb35cff",
+    "sidor": 1,
+    "kB": 170,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 1,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "antalsuppfattning-i-grupp-blad-ak-1-laxa-3-och-4": {
+    "word": "4730f694788ceb927ede72336a18e793441bf08a36ee17f67dae210569f55a10",
+    "pdf": "16ba0646ea024d2515882ea44cabc3f676b69e665018c9990204108fd68022c2",
+    "sidor": 1,
+    "kB": 156,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 2,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "antalsuppfattning-i-grupp-blad-ak-1-laxa-5": {
+    "word": "373bb64ae5203538db8cf1461ac5128cf91f678e7a8891856e69ed5805078e53",
+    "pdf": "657fbaa38f49912b23710c5e520601b8ab41ef56d9a0ae3d1feac38c21fcd795",
+    "sidor": 1,
+    "kB": 141,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 3,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "antalsuppfattning-i-grupp-blad-ak-2-laxa-1": {
+    "word": "3f068a634fe505f29d6357ec5f906234641ddf8ec8aaa7b88ad5fd789db08034",
+    "pdf": "2e2573dfbfe8cb48782e50d0a222897523bedcdabb64e1e4ca3c1adff64164b5",
+    "sidor": 1,
+    "kB": 146,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 4,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "antalsuppfattning-i-grupp-blad-ak-2-laxa-2": {
+    "word": "931af02f2909abb3e342b724a69a0ed25873b6b597077f69e452caea2952f4f8",
+    "pdf": "394e53245f8a18c8364d150eaa915d2f6f70a02b067fecd44d1d83bf68d95403",
+    "sidor": 1,
+    "kB": 146,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 5,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "antalsuppfattning-i-grupp-blad-ak-2-laxa-3": {
+    "word": "ccd4e8de03dd739b4fd199371f8f629beaa155f2ecf68083dbd02167d372db8b",
+    "pdf": "1af9fd009f512cb39201542ec69e098ae06859de90ce52025543d74ec3f1d15b",
+    "sidor": 1,
+    "kB": 138,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 6,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "antalsuppfattning-i-grupp-blad-ak-2-laxa-4": {
+    "word": "b2f188a00f42580815d6f7b1cc6b9142f475756e195f369625c0b2187d9264f4",
+    "pdf": "5c48908372e66716ee4861cd0272cd8beb53fb78b20a1d4344a1770ce9711ed7",
+    "sidor": 1,
+    "kB": 137,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 7,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "antalsuppfattning-i-grupp-blad-ak-2-laxa-5": {
+    "word": "086f5aa8fe852bda4b8e7fd1b8cbcfcf6e765bf7750c950d5c2d4712fc6169aa",
+    "pdf": "b0cc39452d3cac66add38a434aa1b5262ce5f506bb6bdb26a6ea34a4da5f626f",
+    "sidor": 1,
+    "kB": 154,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 8,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "antalsuppfattning-i-grupp-blad-ak-3-laxa-1": {
+    "word": "90cd0e7544096cb7dd7e7d909aa249557ac2aa88184b78f65e095b6723bf75d8",
+    "pdf": "898bc7ad2555581dbdaf0ff52d0d27016d4d3091438a25ebc6471f9b73dfbd6d",
+    "sidor": 1,
+    "kB": 145,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 9,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "antalsuppfattning-i-grupp-blad-ak-3-laxa-2": {
+    "word": "2935fd0b03b072b49f1565a7c472e4c63527d07886e75f8f01a87eca623f989b",
+    "pdf": "cbbb03256915d5f33f80713feababc0c81ce95841c66de936a6c1f8b1ec9e503",
+    "sidor": 1,
+    "kB": 145,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 10,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "antalsuppfattning-i-grupp-blad-ak-3-laxa-3": {
+    "word": "ef75f1b19bf226bb99a5cf60070e4868333fd2f01df909b2a87348d0e0af2f33",
+    "pdf": "4a29bee8a834bac218a8b26c3f70c9ae3a2aa44925cefde8668b6c7e15a28225",
+    "sidor": 1,
+    "kB": 141,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 11,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "antalsuppfattning-i-grupp-blad-ak-3-laxa-4": {
+    "word": "5e959d67408ddc623b6e4c6a1b6123144c8204ef935878613ed57c854716e8b7",
+    "pdf": "fc8e689f5cc49ea3894746b6d3e64df2abcabc75ce29f6314518760881b4d9ee",
+    "sidor": 1,
+    "kB": 137,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 12,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "antalsuppfattning-i-grupp-blad-ak-3-laxa-5": {
+    "word": "e73595e1713ce4b93dce4164a576defffdcbcafa8afd9c12562419e6cb334abd",
+    "pdf": "b8b62c840973953e45aa84d2cc2a867ceafc999eb0563e9c039c88f10449fb5f",
+    "sidor": 1,
+    "kB": 150,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 13,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "antalsuppfattning-i-grupp-blad-ak-4-5-laxa-1": {
+    "word": "3f3749b424b00747f77307a8b6035b2c106ed72b1c1af68300b208647fec0091",
+    "pdf": "48f6db7bc92a8315e3f96d305da6f8bc2138927ad89439853e9c53b62c22ca04",
+    "sidor": 1,
+    "kB": 155,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 14,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "antalsuppfattning-i-grupp-blad-ak-4-5-laxa-2": {
+    "word": "881c1eba196810d75f90abe06e44f44aee357dec89e5b1b4417a20e9314ef8b8",
+    "pdf": "570c46f4c73d69ae1afc9b344fb46c1dd350e007f10049e91835dd1f00a5a12f",
+    "sidor": 1,
+    "kB": 150,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 15,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "antalsuppfattning-i-grupp-blad-ak-4-5-laxa-3": {
+    "word": "b4df48ecd87e3ffbe11a133658b1e76269c283502cf1d987dcca2f52ce4420ad",
+    "pdf": "09999ef3a317fb62c89b1339ab1f3005e6c11e91ffb1dd4d1341d35194a9ebca",
+    "sidor": 1,
+    "kB": 147,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 16,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "antalsuppfattning-i-grupp-blad-ak-4-5-laxa-4": {
+    "word": "1eb3f2d47e251e469c0fac241130f31148f4b8b834b7fee7de53f4f8c421d72c",
+    "pdf": "c09312f6aad5320c7bdbec1f89a2574049d3daaff76f5baaca376b47345f309e",
+    "sidor": 1,
+    "kB": 141,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 17,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "antalsuppfattning-i-grupp-blad-ak-4-5-laxa-5": {
+    "word": "a74d286d1197f08e11a766dc56a8ba6230994a167dc23c31a2a03800b7097b69",
+    "pdf": "e3c77f0f328a207d7bcd6ee4be2025a83bec450c76872a066e6b57859a405263",
+    "sidor": 1,
+    "kB": 156,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 18,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "faktatextsamtal-i-grupp-blad-nar-det-skaver": {
+    "word": "669ae97a1b0d101837a553a103c9915b5f831202841e90716406e2428cee046f",
+    "pdf": "cd3487e670770a1f656e603ac507dcb710121fffc7f26c602872f39f86901368",
+    "sidor": 1,
+    "kB": 141,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 94,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "faktatextsamtal-i-grupp-blad-jobbkorten": {
+    "word": "04f47adc9fe1a1f5f1baaa67da4eb171825aa3dab3f79f2a88d06092453ca2f1",
+    "pdf": "6ed2bfd7ac9c7e47e2036e92dda2b1e911496ce614473e43b899d245d074b28c",
+    "sidor": 1,
+    "kB": 142,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 95,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "faktatextsamtal-i-grupp-blad-text-1-baverns-damm": {
+    "word": "e22c696453e019fd8ed2eb082caf8134838af09f3c6bf80f6d76f968ca7e6d27",
+    "pdf": "099cf064308bea7cb9f6848b7f6a8d890b54d5bdb2e9e34b12efd4a0bb95add3",
+    "sidor": 1,
+    "kB": 193,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 96,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "faktatextsamtal-i-grupp-blad-text-2-bjornens-vinter": {
+    "word": "bdc94c41576ef58e0fd919f73d9db8ccc404da7e9f939c4b82e1c1c58d9b3066",
+    "pdf": "f51a2fe4e7ee7221015859f02dc6839a040766353f5784f583d72f2334e5c0bf",
+    "sidor": 1,
+    "kB": 194,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 97,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "gruppstarkande-aktiviteter-blad-lararens-skattning": {
+    "word": "6b1e6cf92ce275a464f1f243ba1883b4da4abae4140d28eed1a4db46c6dfd92a",
+    "pdf": "7969b7c3fc5b23e3d5a72183ccb5f898b3d35ee4dd295b20106173d393bda40a",
+    "sidor": 1,
+    "kB": 179,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 1,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "gruppstarkande-aktiviteter-blad-var-grupp": {
+    "word": "85553830848f54e30246ee99cd73f105475555c4d4ad2c44ca46af179a8074a9",
+    "pdf": "f31de9e7bdd37ab685ad75b274647a726f458b00c3dd709ec4963bb4e80f4085",
+    "sidor": 1,
+    "kB": 161,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 2,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "gruppstarkande-aktiviteter-blad-fragekort": {
+    "word": "ad118ff5404fa636be85e4fd678f8c61fb8e2dd3d4806ebf7fd74f26990b5d66",
+    "pdf": "901dd01868d1f429da05c23ab506f6a0bf3b75ee0293c99d95f55b4e793a1af6",
+    "sidor": 1,
+    "kB": 160,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 3,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "gruppstarkande-aktiviteter-blad-meningar-att-avsluta": {
+    "word": "b11daadfda2fc92e9510facc21360e559d9454d0d9ba4c132bab2ba8d4d21811",
+    "pdf": "dbbfeb6ae6c7b0d128bfeeed3e11b612eef63228bdd06e299254a95ab831f83a",
+    "sidor": 1,
+    "kB": 159,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 4,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "gruppstarkande-aktiviteter-blad-egna-fragekort-och-meningar": {
+    "word": "8fa2120ec4498034e2737b3f0ed32fa89df69541276035d6854f6941bbcb425b",
+    "pdf": "f0c9122f2e2fd08268aebb41ca0b3803758c7f5c62738c26c91177b4e2d54092",
+    "sidor": 1,
+    "kB": 115,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 5,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "hoglasning-i-par-blad-affischen": {
+    "word": "9862d52225e193a6d63f1a53a678e2aa0a8fdf6283cd050b4856e4c3710a778c",
+    "pdf": "fc5538a8a167dd57aa4d9db2843e6fbf09886941214beb00703015b865e60a41",
+    "sidor": 1,
+    "kB": 144,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 3,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "hoglasning-i-par-blad-lasarens-forberedelse": {
+    "word": "d4f9776c8ff99ac56b63ac1f9806eba675beca2c159a8ee498f0826c9f247e5e",
+    "pdf": "73077bbd58a26749dc7df7be3db07a661f076630036f54f5fb1f0054d6ee452a",
+    "sidor": 1,
+    "kB": 170,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 4,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "kompissamtal-blad-vara-samtalsregler": {
+    "word": "402f003724be681cc0a2ec30a1c03a3f515c79407148268fee0ae5c5715218ed",
+    "pdf": "1a4beb4fb768e6f555ce8a502a28944e91c4dc667183d4f8ba50b8fbf85d5eac",
+    "sidor": 1,
+    "kB": 126,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 1,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "kompissamtal-blad-sa-kan-du-saga": {
+    "word": "a461219260d94441340ab00b499ec548fb6862d9d7d14b37fcd2a93bf9994470",
+    "pdf": "27ab759b063bdfffc3cf294cbcdfef39bce37c5ea3e107ba61149d94bb416ad6",
+    "sidor": 1,
+    "kB": 139,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 2,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "kompissamtal-blad-peka-pa-kanslan": {
+    "word": "6d4c6ee7f48ad1f64cd28c652b8bccb20ae361d4c728ebe87fad6b20f2366a1b",
+    "pdf": "46efd531a78448a2cb24e773bfa69f8dabfcf906a7f72e3de49697216a0b9c59",
+    "sidor": 1,
+    "kB": 119,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 3,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "laslistor-i-grupp-blad-laslista-start": {
+    "word": "071efb588bc7c03ab2ad2424f69f31147c5a2d7165b8a3bb537dfb6979b37d9d",
+    "pdf": "2c9e40e871ccaad7db885764be51d9b5b141c596ef49c1c2e6a0a7805ab776b2",
+    "sidor": 1,
+    "kB": 115,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 1,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "laslistor-i-grupp-blad-laslista-1": {
+    "word": "b9a39d17f645bd4235be1bed757069c8051174f74456b329173d121621cd7daf",
+    "pdf": "6a2f8c900a55b653fda80be73ee4cc0db12e1f256249d609329546fc65a7cc57",
+    "sidor": 1,
+    "kB": 114,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 2,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "laslistor-i-grupp-blad-laslista-2": {
+    "word": "06342227a9f24505f18529bfb761143206b2d76406af52e72f89880e5e992e86",
+    "pdf": "7237e0db7683228f320c026da589dc0f53a368f65e89bcc6baf55ae9c8f52961",
+    "sidor": 1,
+    "kB": 117,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 3,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "laslistor-i-grupp-blad-laslista-3": {
+    "word": "3b87c44b6dd2e16fad770091ae63b89890d01136f8b7459e9f94a925701a1385",
+    "pdf": "072d25769758473c21c32a6e5034f4a25b3114c0b7bfe2108a32c29fccf211d9",
+    "sidor": 1,
+    "kB": 127,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 4,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "laslistor-i-grupp-blad-laslista-4": {
+    "word": "9619a5cb908c79b8516be92cbcb02d3cb23cfd262ed3d06ba55e1af66060aab5",
+    "pdf": "ebba959b97dbcfc50094c0b0e9b8583073ed43a9d4e0a1859769848391a2cc4d",
+    "sidor": 1,
+    "kB": 124,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 5,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "laslistor-i-grupp-blad-laslista-5-sida-1": {
+    "word": "64e67405f08965fe27900ae2ac81988ad8e9f2b3ecf8823b22babd2244e6d24c",
+    "pdf": "7d3dc8dc31463755b93da88eb8d155b8e78a716900ee4a3e1b9e720f6e66f327",
+    "sidor": 1,
+    "kB": 131,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 6,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "laslistor-i-grupp-blad-laslista-5-sida-2": {
+    "word": "c5ce928922d6a05a18b9df20f9f6934bc3c5f2e08d2437345883b2b508677f9c",
+    "pdf": "0db6a17a3a0a360f1da92552c660b5a278d84916635512a36bcaded98617e139",
+    "sidor": 1,
+    "kB": 131,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 7,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "laslistor-i-grupp-blad-laslista-6": {
+    "word": "77f02ab6280283a76d7cbeddd51f96a5362da102a7f75719a79c23c5fa05b83b",
+    "pdf": "97415387612983ea3cc14bd431ab60346f0da706c05d1693b0e04b31b0c0a480",
+    "sidor": 1,
+    "kB": 136,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 8,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "ljudlek-i-grupp-blad-screeningen-version-a-sida-1": {
+    "word": "e17bfe817137028973c7f6c55c07a6cefb59b6fa7e03ca37938d2d0e01981883",
+    "pdf": "1aa582ca0c67752c3d311e662931228961db6c90c68dbf729cfeae3c76062c4d",
+    "sidor": 1,
+    "kB": 121,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 1,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "ljudlek-i-grupp-blad-screeningen-version-a-sida-2": {
+    "word": "5d893cc8c14434bf8853096ac1c443961e93f9bf2fe753051ca7cfb9fee5cc93",
+    "pdf": "02c34bc768e7ec010dd7449168c8058de44997971965c55752085601bf29cae5",
+    "sidor": 1,
+    "kB": 169,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 2,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "ljudlek-i-grupp-blad-screeningen-version-b-sida-1": {
+    "word": "8ed9d7421300c2afa62460c68d88dd5ed1b9983314b0fe89ffb73e9693b39bfe",
+    "pdf": "a937deed02827a78007d508bb4bd318923f187b172d627a2dd5e2596e5b9d083",
+    "sidor": 1,
+    "kB": 120,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 3,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "ljudlek-i-grupp-blad-screeningen-version-b-sida-2": {
+    "word": "84a2299b21963d2c7a8885c5963737c1278a1cb11ca0070b112e740977a018dc",
+    "pdf": "9c4ed18685c3ab52eef1e07907681c1dbe83f1c49da6c24e1bbb3b8ae8878fa6",
+    "sidor": 1,
+    "kB": 182,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 4,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "ljudlek-i-grupp-blad-ljudkollen": {
+    "word": "6591beda5f16949817af08e4fd7c95722720906ff5eb30826e61f6a5119515f5",
+    "pdf": "df70c00bd514003f2b56331b6ca5e9dd0aef005fe3ac68f55fc030028de273ab",
+    "sidor": 1,
+    "kB": 120,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 5,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "ljudlek-i-grupp-blad-bokstavskartan": {
+    "word": "0ecad27fdd22cdf2abab4f33e2fbcde914fa3260198d264c5670f2a76ac1b685",
+    "pdf": "2f948d581bdc7e8e3c872866ab75403b3b4612903ce158f4a549a362911a9ee5",
+    "sidor": 1,
+    "kB": 145,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 6,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "ordverkstad-i-grupp-blad-delarna-fore-ordet-och-mellan-delarna": {
+    "word": "8212608dd3f3500fbf16cdb3ab4f94c3e50eb694c1ffd07d7fc6de99e55c5594",
+    "pdf": "899dc8ece6ed84a77545b6830d37056c9c7dfd7ba350708ffebcc88781670fe3",
+    "sidor": 1,
+    "kB": 113,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 1,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "ordverkstad-i-grupp-blad-delarna-efter-ordet-och-andelser-som-bojer-ordet": {
+    "word": "9a6e1a5adbb934e243aa1931d25092350519387202dfe1bae53f42f5aa96e937",
+    "pdf": "a8279025ab6061584b81980621dd17eb8379c1bca6593ab71aea2e7fc41bc188",
+    "sidor": 1,
+    "kB": 115,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 2,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "ordverkstad-i-grupp-blad-ett-langt-ord": {
+    "word": "db09da45af934508f12fc0f025d22ef2ae5b3eccbc1e8bff30e5ffc46806f296",
+    "pdf": "df42ee1c1a8edde11bfc6d63dac22bdd0c1854be0f5c74388051558f8b9e38af",
+    "sidor": 1,
+    "kB": 182,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 4,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "ordverkstad-i-grupp-blad-vi-skriver-i-par": {
+    "word": "8b3a0266a0724e7a52fcecd7bb02d6bb0992faf6405456d5bb6f23843c15bc82",
+    "pdf": "9728776e8fdd41acef32afe3efe7f677e482c4982290dde2e0099ad790ecd1e6",
+    "sidor": 1,
+    "kB": 177,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 5,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "ordverkstad-i-grupp-blad-kartlaggning-ordlistan": {
+    "word": "9cf4fa0bc615c556c10d06c82df1a7c762f2099da16d17f0830b46b6975b75b3",
+    "pdf": "8d2a4818ba323691a241c9fdb1d987449ffc0c4cbbcc2e3d86f864e95a6fc602",
+    "sidor": 1,
+    "kB": 135,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 6,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "ordverkstad-i-grupp-blad-kartlaggning-dela-orden": {
+    "word": "b95abb89412a34ccd2eb3dece2b2700d04cf26aad2b02f74c28a58d6c845175f",
+    "pdf": "6ab0e15a46a6edcbd61f859c11a1051b940f8287eccf0e3e03764a4578f37af4",
+    "sidor": 1,
+    "kB": 130,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 7,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "ordverkstad-i-grupp-blad-kartlaggning-diktamen": {
+    "word": "89050f76cb53002f0e30677449e078c862c6ba47c6ec9e6412b02c056caf0f48",
+    "pdf": "3e0dbd960bcf6f4affd02ce85fb726b5c93a06a7d2874c61983d5dce27bfc9f3",
+    "sidor": 1,
+    "kB": 109,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 8,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "problemlosning-i-grupp-blad-var-losning": {
+    "word": "a3dd96481ad773171caa7a27b04aca52f412a9f2c42a9908588bb74e0287ce0d",
+    "pdf": "53dadbf025943909461d3caf8b85feedf3f531fea0aa8eec21c78b587372384e",
+    "sidor": 1,
+    "kB": 119,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 100,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "problemlosning-i-grupp-blad-kartlaggning-fore-bas": {
+    "word": "63d82500f0fcc63a3c275b4b10b8b9252a9cfca2b226ce543f09f87cd2ea3744",
+    "pdf": "8f444fb8eeba547c7beaa1e6114dcc7d4f192400056f95ba94e67e19910765b8",
+    "sidor": 1,
+    "kB": 148,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 101,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "problemlosning-i-grupp-blad-kartlaggning-efter-bas": {
+    "word": "3e688157f3bed77376645add991aec15794512e0f65429fed1974379948a46e5",
+    "pdf": "5c1a756064029a2cf5629dac62c8a1a639bcb2e391bdc5539d337447198062a6",
+    "sidor": 1,
+    "kB": 151,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 102,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "problemlosning-i-grupp-blad-kartlaggning-fore-medel": {
+    "word": "28ac08d0cb2f8b7eb3d072f81386611d64fe2e06431af22630627cd3b4545109",
+    "pdf": "5094ce0af831aaf0135f905125a51d1ead446abfec528b7327deab78ba3ca8d4",
+    "sidor": 1,
+    "kB": 150,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 103,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "problemlosning-i-grupp-blad-kartlaggning-efter-medel": {
+    "word": "ea438dd539b3370e009ec180e02438484cffce7265446f22aa11611be6bff736",
+    "pdf": "15a4c6e8a6a689d10a3968923a447a80e65af6644fcb414b03ae7acfb430d4d3",
+    "sidor": 1,
+    "kB": 149,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 104,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "problemlosning-i-grupp-blad-kartlaggning-fore-avancerat": {
+    "word": "85457fc22f32b281d2da744c80e49712c4636d102a918df661b10cb9b86f6693",
+    "pdf": "2a17687165872588dcc1ada12eefe3258a5905d17f48242776de1871da13edd1",
+    "sidor": 1,
+    "kB": 154,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 105,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "problemlosning-i-grupp-blad-kartlaggning-efter-avancerat": {
+    "word": "d01107eddd4eee992609d23385a7ef4c31d43cd64c65930ace83f579326d403e",
+    "pdf": "9c00db3a1a90498b2d340347dbffd98c00e8979482cd02c46b32cd587a094c26",
+    "sidor": 1,
+    "kB": 154,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 106,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "seriesamtal-blad-fragor-vi-staller-till-varandra": {
+    "word": "0a0eab203b63323a9e85befe009834555efe68790d4c0d4d27826bc85d72d614",
+    "pdf": "85c1a0f9150b3ea02af7225fd693f3064a795719a73c5a0f531b4e57f2ef5340",
+    "sidor": 1,
+    "kB": 136,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 1,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "seriesamtal-blad-vad-behover-hen": {
+    "word": "c568d6c3ba5789cbf3f6c932e80fcb841a1740cf24030079156211e61bffc0ad",
+    "pdf": "03db1887ba6245f2aa91b4b6677100d1b44e67509d901037d2af1a3be712b801",
+    "sidor": 1,
+    "kB": 118,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 2,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "textsamtal-i-grupp-blad-samtalsreglerna": {
+    "word": "3e5eebe25b47d43e9c6c651377220680ef0ddf4ff92b4619243b393764de6e1d",
+    "pdf": "3b6966ad7947e933afa9426d1216c5d94fb076ed1a2b8cede45af5f4698d043f",
+    "sidor": 1,
+    "kB": 122,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 1,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "textsamtal-i-grupp-blad-tankekortet": {
+    "word": "5f039e5a510395524fb25ed9f335d1a198999047bc2848694601f3aaefce03fc",
+    "pdf": "9d4afd027e5ce5d69f2742a76d83bff5febe39448b3666574abd880dc0562916",
+    "sidor": 1,
+    "kB": 170,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 2,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "textsamtal-i-grupp-blad-samtalskortet": {
+    "word": "d4a12171d50e3fa28b22f6aeb6f76f6d9619bdb550dbb76e08e1c8362a1b1518",
+    "pdf": "70c22b26f71d062141738c84343cfa9858b3ca3f6f0f5ae5f2f0fabd85d264b8",
+    "sidor": 1,
+    "kB": 162,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 3,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "upprepad-lasning-blad-strategikortet": {
+    "word": "efacf69b5e541792566d9ee1aa788e893197a6730ca47910fc5b7902b682d326",
+    "pdf": "2da17ed409acf8883fdfedc06b9b8a2b40ff603897855681cb5f093241dcb756",
+    "sidor": 1,
+    "kB": 173,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 1,
+        "fran": 1,
+        "till": 1
+      }
+    ]
   }
 }

@@ -18,7 +18,8 @@ import BILDDATA from '../data/pabordet.json';
 
 export type PaBordetFalt = MetodData['pabordet'][number];
 export interface Bladyta { namn: string; x: number; y: number; b: number; h: number; lage?: 'uppe' | 'mitt' | 'nere'; mitt?: boolean }
-export interface PaBordet { bild: PaBordetFalt; adress: string; vid?: FilmPlats; matt: { bredd: number; hojd: number }; ytor?: Bladyta[]; elev?: boolean; skala?: number }
+// fil: ett blad i en vanlig ram har en egen fil att skriva ut (egnaBlad i src/lib/bladmaterial.ts), som metodens sida sätter.
+export interface PaBordet { bild: PaBordetFalt; adress: string; vid?: FilmPlats; matt: { bredd: number; hojd: number }; ytor?: Bladyta[]; elev?: boolean; skala?: number; fil?: { namn: string; titel: string; statistik: string } }
 export const PABORDET_MATT = { bredd: 960, hojd: 540 };
 type Bilddata = { bredd?: number; hojd?: number; ytor?: Bladyta[]; elev?: boolean; skala?: number };
 const bilddata = (id: string, nr: number): Bilddata => (BILDDATA as Record<string, Record<string, Bilddata>>)[id]?.[String(nr)] ?? {};

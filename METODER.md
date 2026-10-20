@@ -140,7 +140,7 @@ Bladet (Faktatextsamtal i grupp, 2026-10-13, ur metodriggens TILL-SAJTEN, ett ti
 |---|---|
 | Word (`bildblad` i `metoddocx.ts`) | Bilden ligger bakom texten, förankrad i sidans hörn, och över den ligger en tabell utan linjer med en cell för varje skrivyta, så att bladet går att skriva i på dator, i Word och i Google Dokument. Ett ifyllt blad har inga celler |
 | Utskriften (`Pabordet.astro`, `@page blad` och `@page bladstaende`) | En egen sida, liggande eller stående som bilden, med bara bilden, kant till kant, och upphovet litet i bildens tomma kant nederst |
-| Skärmen | Bladets namn över bilden, som leder till svg-filen, och bildtexten under |
+| Skärmen | Bladets namn över bilden, som leder till svg-filen, och bildtexten under. Ett blad i en vanlig ram, som affischen i Högläsning i par och metodriggens blad i tolv metoder 2026-10-20, har under bildtexten en knapp som skriver ut bladets egen pdf och filvalet med Word-filen, där bladets fält går att skriva i (`egnaBlad` i `src/lib/bladmaterial.ts`, K-476). Blad i ramar med blad, i banken, i nivåernas material och vid enheterna har sina filer redan |
 
 Ett blad kan också finnas som Google Formulär med en sammanställning, som Vår grupp i Gruppstärkande aktiviteter (Niclas 2026-10-16). Fältet `google` på bladet är en kort adress på sajten, som `/vargrupp`, som leder till Googles sida för att kopiera kalkylarket med formuläret (netlify.toml, status 302). På skärmen står knappen Kopiera formuläret och sammanställningen under bildtexten. Bladets text är bildens textalternativ i Word och syns inte där, så adressen nämns i metodens text vid bladet, i Vår grupp raden om bladet i ramen Gruppreflektion, och står då också i Word och i utskriften. `scripts/utskriftsformat.mjs` stannar bygget om adressen inte leder till Google. Formuläret och sammanställningen görs med skripten i `scripts/vargrupp/`, och hur de sköts står i DRIFT.md under Google Formulär.
 
@@ -450,6 +450,7 @@ Ingen knapp skriver ut sidan. Varje knapp som skriver ut är en länk till en pd
 | Knapparna på en texts eller ett problems sida | `<id>-<enhet>.pdf` för alla sidorna, och `<id>-<enhet>-<blad>.pdf` för lärarens sida, texten eller problemet | Sidor ur nivåns filer i banken. De filerna har fristående blad: inget löpande sidnummer i sidfoten, och en text räknar sina egna sidor från 1, så att ett utskrivet blad inte säger Sida 29 av 31 |
 | Knapparna på en rams sida, som en modell | `<id>-<ram>.pdf`, `-sidan`, `-exemplet` och `-blad-1` | Sidor ur ramens två filer (`-sidor` och `-blad`) |
 | Bladet under rubriken Modellen och ramarna som hör till varje enhet, på en texts sida | Bladets pdf, som på ramens sida, och `<id>-<ramens namn>.pdf` | Sidor ur ramens fil och ur filen med det övriga materialet |
+| Knappen under ett blad i en vanlig ram | `<id>-blad-<bladets namn>.pdf` | `<id>-blad-<bladets namn>.docx`, bara bladet (`bladDokument`, `egnaBlad`) |
 | Lathundssidan: hela lathunden | `<id>-lathund.pdf` | Lathunden i A4 ur PowerPoint-koden, sparad av PowerPoint |
 | Lathundssidan: den här sidan (mallen) | `<id>-lathund-mall.pdf` | Sidan 3 ur lathundens pdf |
 | Lathundssidan: passexemplet eller texten till eleverna | `<id>-lathund-text.pdf` | `<id>-lathund-text.docx`, passets text för sig (`passDokument`) |

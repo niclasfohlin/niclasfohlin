@@ -8,7 +8,7 @@ import { bankAv, bankfiler } from '../../lib/bank';
 import { medDatabaserna } from '../../lib/faktateman';
 import { bokhandledningen, bokhandledningensFil, handledningensFil, lararhandledningar } from '../../lib/handledning';
 import { metodensNivamaterial, nivafiler } from '../../lib/nivamaterial';
-import { bladfiler, metodensBladmaterial } from '../../lib/bladmaterial';
+import { bladfiler, egnaBlad, metodensBladmaterial } from '../../lib/bladmaterial';
 import { ovrigtfil } from '../../lib/ovrigt';
 import { harMaterial } from '../../lib/material';
 import { harLathund } from '../../lib/metod';
@@ -70,6 +70,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
       ...(m.data.lektionsbank && korten(m.id).length ? [{ params: { id: allaLektionskortStam(m.id) }, props: { m: { ...m, serie: undefined }, kortlista: korten(m.id), korttitel: `${m.data.titel} · Alla lektionskort` } }] : []),
       ...(nm ? nivafiler(m.id, nm).map((f) => ({ params: { id: f.namn }, props: { m: { ...m, serie: undefined }, nivafil: { ramar: f.ramar, rubrik: f.rubrik, huvud: f.niva ? f.niva.niva.namn : 'Alla nivåer' } } })) : []),
       ...(bm ? bladfiler(m.id, bm).map((f) => ({ params: { id: f.namn }, props: { m: { ...m, serie: undefined }, ...(f.slag === 'blad' ? { bladfil: { bilder: f.bilder, rubrik: f.rubrik, huvud: f.huvud } } : { nivafil: { ramar: f.ramar, rubrik: f.rubrik, huvud: f.huvud, blad: 'ifyllda' as const } }) } })) : []),
+      // Ett blad i en vanlig ram (src/lib/bladmaterial.ts, egnaBlad): en fil med bara bladet, som Word gör pdf av.
+      ...egnaBlad(m.data, m.id).map((b) => ({ params: { id: b.namn }, props: { m: { ...m, serie: undefined }, bladfil: { bilder: [b.nr], rubrik: b.titel, huvud: 'Blad' } } })),
       ...(ovrigt ? [{ params: { id: ovrigt.namn }, props: { m: { ...m, serie: undefined }, nivafil: { ramar: ovrigt.ramar, rubrik: ovrigt.rubrik, huvud: ovrigt.huvud } } }] : []),
       ...(bank ? bankfiler(m.id, bank).map((f) => ({ params: { id: f.namn }, props: { m: { ...m, serie: undefined }, bankfil: { niva: f.niva?.namn, medFoljesidor: f.medFoljesidor, rubrik: f.rubrik } } })) : []),
       ...(databasen?.databas ? bankfiler(m.id, databasen).map((f) => ({ params: { id: f.namn }, props: { m: { ...md, serie: undefined }, bankfil: { niva: f.niva?.namn, medFoljesidor: f.medFoljesidor, rubrik: f.rubrik } } })) : []),
