@@ -65,8 +65,6 @@ if (process.argv.includes('--kontrollera')) {
       if (visar(m.d, c.id) && !ja) fel.push(`${m.id} visar ${c.id} utan att stå bland dess ja i src/data/sadd.json. Bedöm metoden med de tre frågorna och skriv in den.`);
       if (ja && !visar(m.d, c.id)) vantar.push(`${m.id} (${c.id})`);
     }
-    // Saker som såddes före provet (fore) prövas bara åt ena hållet: ingen metod visar dem utan ett ja.
-    if (s.fore) continue;
     for (const k of salla(c.id).filter((x) => x.kandidat && !s.ja?.[x.id] && !s.nej?.[x.id])) fel.push(`${k.id} är en kandidat för ${c.id} som ingen har bedömt (tränar ${k.tranar.join(', ')}, i passet ${k.belagg[0]}). Kör node scripts/saddprov.mjs ${c.id} och skriv ja eller nej med skäl.`);
   }
   for (const m of metoder) {

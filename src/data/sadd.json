@@ -1,5 +1,5 @@
 {
-  "_kommentar": "Såddprovet (Niclas 2026-10-20): ett delat stödmaterial sås bara i de metoder där det stöder en central del av metoden och det eleverna tränar. tranar är förmågornas taggar som saken är gjord för, karna orden (reguljära uttryck) för det eleverna gör i passet, provad datumet för bedömningen, ja metoderna som ska visa saken med platsen och skälet, och nej kandidaterna som inte ska, med skälet. fore: saken såddes före provet och prövas bara åt ena hållet. Kör node scripts/saddprov.mjs <id>; regeln står i METODER.md under De centrala sakerna.",
+  "_kommentar": "Såddprovet (Niclas 2026-10-20): ett delat stödmaterial sås bara i de metoder där det stöder en central del av metoden och det eleverna tränar. tranar är förmågornas taggar som saken är gjord för, karna orden (reguljära uttryck) för det eleverna gör i passet, provad datumet för bedömningen, ja metoderna som ska visa saken med platsen och skälet, och nej kandidaterna som inte ska, med skälet. Kör node scripts/saddprov.mjs <id>; regeln står i METODER.md under De centrala sakerna.",
   "saker": {
     "lasstrategier": {
       "tranar": [
@@ -7,19 +7,22 @@
         "lasflyt"
       ],
       "karna": [
-        "\\bläs(?:er|a)?\\b[^.]{0,30}\\bhögt\\b",
+        "\\bläs(?:er|a)?\\b[^.]{0,40}\\bhögt\\b",
         "\\bljuda",
-        "\\bavkod"
+        "\\bavkod",
+        "\\bljudar\\b"
       ],
-      "provad": "2026-10-14",
-      "fore": "Sådd med riggens leverans 2026-10-14 (K-357), före såddprovet",
+      "provad": "2026-10-20",
       "ja": {
-        "til-i-grupp": "Riggens leverans 2026-10-14",
-        "upprepad-lasning": "Riggens leverans 2026-10-14",
-        "laslistor-i-grupp": "Riggens leverans 2026-10-14",
-        "hoglasning-i-par": "Riggens leverans 2026-10-19: efter tabellen Balansen, när avkodningen tar all kraft"
+        "til-i-grupp": "Efter fastnar. Eleven läser högt med minsta möjliga stöd i varje pass och fastnar på orden; bladet bygger på metoden",
+        "upprepad-lasning": "Efter tabellen Läsfelen och strategierna. Eleverna läser samma text tills den går med flyt, och läsfelen är ordets och meningens; bladet bygger på metoden",
+        "laslistor-i-grupp": "Eleverna läser ord och listor i varje pass, och ordets strategier (ljuda ihop, två bokstäver ett ljud, dela ordet) är det de tränar",
+        "hoglasning-i-par": "Efter tabellen Balansen. Parets rutin har ett svårt ord, där lyssnaren väntar och ljudar det med läsaren, och i åk 2–3 läser många fortfarande ord för ord. Niclas besked i riggen 2026-10-19",
+        "sag-skriv-och-las": "Ny 2026-10-20, platsen väljer riggen, gärna vid delen Min mening. Metoden tränar avkodning, och grannen läser elevens mening högt i varje pass; bladets ord och mening (läs hela ordet, säg ljuden utan paus, stanna vid punkten) är det läraren behöver då"
       },
-      "nej": {}
+      "nej": {
+        "ordverkstad-i-grupp": "Kärnan är ordens delar, och metodens eget material (Delarna, ordkorten) lär ut det som bladets Dela ordet och Hitta ordet i ordet säger. Förlagan läses i kör med läraren"
+      }
     },
     "skrivstrategier": {
       "tranar": [
@@ -32,22 +35,25 @@
       "karna": [
         "\\bskriv(?:er|a)?\\b"
       ],
-      "provad": "2026-10-18",
-      "fore": "Sådd med riggens leverans 2026-10-18 (K-417), före såddprovet",
+      "provad": "2026-10-20",
       "ja": {
-        "kortskrivning-skriv-varje-dag": "Riggens leverans 2026-10-18",
-        "ordverkstad-i-grupp": "Riggens leverans 2026-10-18",
-        "sag-skriv-och-las": "Riggens leverans 2026-10-18",
-        "skrivkurs-berattelseram": "Riggens leverans 2026-10-18",
-        "skrivkurs-sagoboken": "Riggens leverans 2026-10-18",
-        "skrivkurs-vardeskapande": "Riggens leverans 2026-10-18",
-        "texttyp-argumenterande-text": "Riggens leverans 2026-10-18",
-        "texttyp-berattande-text": "Riggens leverans 2026-10-18",
-        "texttyp-beskrivande-text": "Riggens leverans 2026-10-18",
-        "texttyp-instruerande-text": "Riggens leverans 2026-10-18",
-        "texttyper-i-grupp": "Riggens leverans 2026-10-18"
+        "kortskrivning-skriv-varje-dag": "Riggens leverans 2026-10-18, prövad igen 2026-10-20: eleverna skriver texter till en läsare i passet, och bladets andra halva (vem läser, plan, låna ett drag, pröva på en läsare, ändra en sak) är metodens arbetsgång",
+        "ordverkstad-i-grupp": "Riggens leverans 2026-10-18, prövad igen 2026-10-20: eleverna skriver texter till en läsare i passet, och bladets andra halva (vem läser, plan, låna ett drag, pröva på en läsare, ändra en sak) är metodens arbetsgång",
+        "sag-skriv-och-las": "Riggens leverans 2026-10-18, prövad igen 2026-10-20: eleverna säger, skriver och läser en mening i varje pass, och bladets första halva (säg meningen igen, säg ordet långsamt, läs från början) är det läraren behöver",
+        "skrivkurs-berattelseram": "Riggens leverans 2026-10-18, prövad igen 2026-10-20: eleverna skriver texter till en läsare i passet, och bladets andra halva (vem läser, plan, låna ett drag, pröva på en läsare, ändra en sak) är metodens arbetsgång",
+        "skrivkurs-sagoboken": "Riggens leverans 2026-10-18, prövad igen 2026-10-20: eleverna skriver texter till en läsare i passet, och bladets andra halva (vem läser, plan, låna ett drag, pröva på en läsare, ändra en sak) är metodens arbetsgång",
+        "skrivkurs-vardeskapande": "Riggens leverans 2026-10-18, prövad igen 2026-10-20: eleverna skriver texter till en läsare i passet, och bladets andra halva (vem läser, plan, låna ett drag, pröva på en läsare, ändra en sak) är metodens arbetsgång",
+        "texttyp-argumenterande-text": "Riggens leverans 2026-10-18, prövad igen 2026-10-20: eleverna skriver texter till en läsare i passet, och bladets andra halva (vem läser, plan, låna ett drag, pröva på en läsare, ändra en sak) är metodens arbetsgång",
+        "texttyp-berattande-text": "Riggens leverans 2026-10-18, prövad igen 2026-10-20: eleverna skriver texter till en läsare i passet, och bladets andra halva (vem läser, plan, låna ett drag, pröva på en läsare, ändra en sak) är metodens arbetsgång",
+        "texttyp-beskrivande-text": "Riggens leverans 2026-10-18, prövad igen 2026-10-20: eleverna skriver texter till en läsare i passet, och bladets andra halva (vem läser, plan, låna ett drag, pröva på en läsare, ändra en sak) är metodens arbetsgång",
+        "texttyp-instruerande-text": "Riggens leverans 2026-10-18, prövad igen 2026-10-20: eleverna skriver texter till en läsare i passet, och bladets andra halva (vem läser, plan, låna ett drag, pröva på en läsare, ändra en sak) är metodens arbetsgång",
+        "texttyper-i-grupp": "Riggens leverans 2026-10-18, prövad igen 2026-10-20: eleverna skriver texter till en läsare i passet, och bladets andra halva (vem läser, plan, låna ett drag, pröva på en läsare, ändra en sak) är metodens arbetsgång",
+        "ljudlek-fran-ord-till-mening": "Ny 2026-10-20, platsen väljer riggen. Lektionen är Säg, skriv och läs i kort form: eleverna skriver en ny mening i varje pass och läser den med fingret under, och bladets första halva är det läraren behöver"
       },
-      "nej": {}
+      "nej": {
+        "faktatextsamtal-i-grupp": "Eleverna skriver kärnor på lappar och blad, inte texter till en läsare; taggen textstruktur gäller faktatextens struktur när de läser",
+        "ljudlek-skriv-ord-tillsammans": "Gränsfall, tveksamt är nej: eleverna bygger och skriver enstaka ord i en ljudlek, och lektionskortet har det läraren säger. Bladet är gjort för skrivande av meningar och texter"
+      }
     },
     "utveckla-hoglasning": {
       "tranar": [
