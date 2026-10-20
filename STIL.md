@@ -41,6 +41,19 @@ Bygget stannar på en hänvisning till Fohlin som kan gälla flera böcker eller
 
 Två till fyra meningar, minst 40 och högst 320 tecken; schemat stoppar annars. Egen text som säger vad texten hävdar och varför den skrevs. Aldrig originalets ingress i omskriven form. Ingressen ska fungera ensam i ett kort på startsidan och i ett nyhetsbrev.
 
+## Bildtexter
+
+En bild på sajten har två texter med olika läsare (Niclas 2026-10-20: "Tror du behöver en stringens för bildtext. Dvs vad bildtext har och hur lång den får vara"). Bildtexten står under bilden och läses av den som ser bilden. Textalternativet står bakom bilden och läses av den som inte ser den: skärmläsaren, Word och Google.
+
+| Texten | Vad den säger | Längd |
+|---|---|---|
+| Bildtexten | Vad läraren tittar på och vad det används till i metoden, kort. Det som bilden eller kortet inte kan berätta själv: vem som har gjort det och när, i vilket pass det används och hur det skrivs ut, klipps, viks eller lamineras. Den upprepar inte det som syns eller står i bilden | En till tre meningar och högst 250 tecken |
+| Textalternativet | Det som syns och står i bilden, i läsordning och i hela meningar, så att den som inte ser bilden får det som står på bladet | Så långt bilden kräver |
+
+Under sifferkorten står till exempel: ”Ett A4 per elev, att klippa isär. Eleverna lägger talet med korten under det de har byggt på mattan i vecka 2.”
+
+Bildtexten börjar inte med ”Bilden visar” och upprepar inte bildens rubrik. Citat ur bladet står inom citattecken. En bild utan egen bildtext, som en bild i en faktatext eller ett lösningsförslag, har bara textalternativet, eftersom texten runt bilden är dess bildtext. Vilket fält som är vilket står i METODER.md under Bladet.
+
 ## Metodtexter
 
 Genomförandet skrivs som steg en lärare kan följa i morgon utan att fråga. Ange tid, material och gruppstorlek. Progression och uppföljning är konkreta: vad som ökar, vad som mäts, hur ofta.

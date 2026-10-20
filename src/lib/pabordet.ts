@@ -50,8 +50,8 @@ export const arStaendeBlad = (b: PaBordet) => arBlad(b) && b.matt.hojd > b.matt.
 export const bladVid = (bilder: PaBordet[], ramensRubrik: string) => paBordetVid(bilder, { ram: ramensRubrik }).filter(arBlad);
 /** Bilderna som står på platsen. */
 export const paBordetVid = (bilder: PaBordet[], plats: FilmPlats) => bilder.filter((b) => b.vid && passar(b.vid, plats));
-/** Bildens textalternativ när den står utan rubrik och bildtext (strukturens sida): rubriken och texten, med en punkt
+/** Bildens textalternativ: rubriken och alt, eller texten när bilden inte har alt (STIL.md under Bildtexter), med en punkt
  * efter rubriken bara när den inte redan slutar med ett skiljetecken (Berätta mera!). */
-export const bildensAlt = (b: PaBordet) => `På bordet: ${b.bild.rubrik}${/[.!?]$/.test(b.bild.rubrik) ? '' : '.'} ${b.bild.text}`;
+export const bildensAlt = (b: PaBordet) => `På bordet: ${b.bild.rubrik}${/[.!?]$/.test(b.bild.rubrik) ? '' : '.'} ${b.bild.alt ?? b.bild.text}`;
 /** Bilden står efter en del i en ram (en vecka): utan egen rubrik, med "På bordet." först i bildtexten. */
 export const iDel = (b: PaBordet) => !!b.vid && 'del' in b.vid;

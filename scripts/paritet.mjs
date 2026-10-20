@@ -43,6 +43,7 @@ const UNDANTAG = [
   { vag: /^(film|filmer\.\d+)\.(titel|beskrivning)$/, word: false, utskrift: false, skal: 'filmens namn och textalternativ på skärmen; stillbildernas texter prövas' },
   { vag: /^filmer\.\d+\.efter$/, word: false, utskrift: false, skal: 'filmens plats; platsen prövas nedan' },
   { vag: /^pabordet\.\d+\.efter$/, word: false, utskrift: false, skal: 'bildens plats; platsen prövas nedan, som filmernas' },
+  { vag: /^pabordet\.\d+\.alt$/, word: false, utskrift: false, skal: 'bildens textalternativ (STIL.md under Bildtexter); det prövas nedan, i bildens alt på sidan och i Word' },
   { vag: /^centrala\.\d+\.(id|efterText)$/, word: false, utskrift: false, skal: 'den centrala sakens id och plats; sidan och Word-filen sätter knappen och länken på platsen med samma kod (src/lib/centrala.ts)' },
   { vag: /^lektionskort\.\d+\.efter$/, word: false, utskrift: false, skal: 'lektionskortets plats; sidan och Word-filen sätter knappen och länken på platsen med samma kod (src/lib/lektionskort.ts)' },
   { vag: /^lektionskort\.\d+\.text$/, word: false, skal: 'meningen vid lektionskortets knapp i Materialet; Word-filen har kortet självt på sina egna sidor, och meningen före kortets sidbrytning blev ensam på en sida (kortets texter prövas nedan)' },
@@ -407,8 +408,15 @@ for (const fil of filer) {
   for (const nr of problemBilder) {
     const b = d.pabordet.find((x) => x.nr === nr);
     if (!ram(ramAv(b.efter))) continue;
-    const alt = norm(`På bordet: ${b.rubrik}${/[.!?]$/.test(b.rubrik) ? '' : '.'} ${b.text}`);
+    const alt = norm(`På bordet: ${b.rubrik}${/[.!?]$/.test(b.rubrik) ? '' : '.'} ${b.alt ?? b.text}`);
     if (!altWord.has(alt) || !altSida.has(alt)) ut.push(`    bilden På bordet ${nr} (${b.rubrik}): textalternativet med rubriken och bildtexten saknas i ${[!altWord.has(alt) && 'Word-filerna', !altSida.has(alt) && 'sidorna'].filter(Boolean).join(' och ')}`);
+  }
+  // En bild På bordet med bildtext och eget textalternativ (alt, STIL.md under Bildtexter): bildtexten prövas som text
+  // nedan, och textalternativet här, i bildens alt på sidan och i Word.
+  for (const b of (d.pabordet ?? []).filter((x) => x.alt && !problemBilder.has(x.nr) && !strukturBilder.has(x.nr))) {
+    if (!ram(ramAv(b.efter))) continue;
+    const alt = norm(`På bordet: ${b.rubrik}${/[.!?]$/.test(b.rubrik) ? '' : '.'} ${b.alt}`);
+    if (!altWord.has(alt) || !altSida.has(alt)) ut.push(`    bilden På bordet ${b.nr} (${b.rubrik}): textalternativet (alt) saknas i ${[!altWord.has(alt) && 'Word-filerna', !altSida.has(alt) && 'sidorna'].filter(Boolean).join(' och ')}`);
   }
   // Lösningarna i ord på bladet Två lösningar står i bildernas textalternativ, med lösningens namn först.
   const losningsText = new Map([...tvaLosningar].flatMap(([i, r]) => r.listor[0].rader[0].map((t, k) => [`ramar.ramar.${i}.listor.0.rader.0.${k}`, norm(`${r.listor[0].kolumner[k]}: ${t}`)])));
@@ -417,7 +425,7 @@ for (const fil of filer) {
   for (const nr of strukturBilder) {
     const b = d.pabordet.find((x) => x.nr === nr);
     if (!ram(ramAv(b.efter))) continue;
-    const alt = norm(`På bordet: ${b.rubrik} ${b.text}`);
+    const alt = norm(`På bordet: ${b.rubrik} ${b.alt ?? b.text}`);
     if (!altWord.has(alt) || !altSida.has(alt)) ut.push(`    bilden På bordet ${nr} (${b.rubrik}) på strukturens sida: textalternativet med rubriken och bildtexten saknas i ${[!altWord.has(alt) && 'Word-filen', !altSida.has(alt) && 'sidan'].filter(Boolean).join(' och ')}`);
   }
   for (const { vag, text } of texter(kalla, '', [])) {

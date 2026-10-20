@@ -223,7 +223,10 @@ const metodensFalt = z.strictObject({
     pabordet: z.array(z.strictObject({
       nr: z.number().int().min(0).max(999),
       rubrik: text,
+      // text är bildtexten under bilden, och alt textalternativet bakom den (STIL.md under Bildtexter, K-486): utan alt är
+      // text båda. En bild utan egen bildtext, i en faktatext, ett problem eller en struktur, har textalternativet i text.
       text,
+      alt: text.optional(),
       efter: text.refine((v) => tolkaEfter(v) !== undefined, { error: `efter är ${EFTER_FORMER}.` }),
       fluent: z.array(z.string()).optional(),
       // google: en kort adress på sajten som leder till Googles sida för att kopiera bladet som Google Formulär med en
