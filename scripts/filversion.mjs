@@ -48,6 +48,22 @@ export function sattVersioner(dist) {
   return { lankar, filer: [...summor.values()].filter(Boolean).length };
 }
 
+// Filer som har ändrats efter bygget (en ny pdf ur Word, lathundens pdf ur PowerPoint): filen ligger redan i dist, och
+// länkarna till den får dess nya version i stället för den gamla, utan ett nytt bygge (scripts/validera.mjs, bankpdf.mjs).
+export function bytVersioner(dist, adresser) {
+  if (!adresser.length) return 0;
+  const nya = new Map(adresser.map((a) => { const fil = join(dist, decodeURIComponent(a)); return [a, existsSync(fil) ? createHash('sha256').update(readFileSync(fil)).digest('hex').slice(0, 8) : '']; }));
+  const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const monster = new RegExp(`(${[...nya.keys()].map(esc).join('|')})\\?v=[0-9a-f]{8}`, 'g');
+  let antal = 0;
+  for (const fil of htmlFiler(dist)) {
+    const html = readFileSync(fil, 'utf8');
+    const ny = html.replace(monster, (hel, adress) => { const v = nya.get(adress); if (!v) return hel; antal++; return `${adress}?v=${v}`; });
+    if (ny !== html) writeFileSync(fil, ny);
+  }
+  return antal;
+}
+
 export default function filversion() {
   return {
     name: 'filversion',

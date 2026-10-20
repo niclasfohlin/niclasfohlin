@@ -23,6 +23,8 @@
 //   node scripts/lathund-word.mjs                 alla metoder med lathund
 //   node scripts/lathund-word.mjs <id> [<id>…]    bara de angivna
 //   node scripts/lathund-word.mjs --vid-behov     bara de som saknas eller är inaktuella (körs i npm run validera)
+//   node scripts/lathund-word.mjs --behov         skriv metoderna som --vid-behov skulle mäta, som JSON, och sluta
+//   … --utan-bygge                                provfilerna finns redan i dist/utskrift/word (scripts/validera.mjs)
 //   node scripts/lathund-word.mjs --kontrollera   stanna om en mätning saknas, är inaktuell eller överbliven
 //   node scripts/lathund-word.mjs --fro           skriv provfilernas innehåll till mätningar som saknar det, utan Word, så
 //                                                 att nästa ändring i koden jämförs med dem. Bara i en utcheckning där
@@ -46,6 +48,8 @@ const args = process.argv.slice(2);
 const kontrollera = args.includes('--kontrollera');
 const vidBehov = args.includes('--vid-behov');
 const fro = args.includes('--fro');
+const behovet = args.includes('--behov');
+const utanBygge = args.includes('--utan-bygge');
 const valda = args.filter((a) => !a.startsWith('--'));
 
 const katalog = join(rot, 'src', 'content', 'stodundervisning');
@@ -115,16 +119,18 @@ if (fro) {
 }
 const lista = fro
   ? metoder.filter((m) => !manifest[m.id].innehall)
-  : vidBehov
+  : vidBehov || behovet
   ? metoder.filter((m) => manifest[m.id]?.kalla !== kallHash(m) || !giltig(manifest[m.id]))
   : valda.length > 0 ? metoder.filter((m) => valda.includes(m.id)) : metoder;
+// --behov: metoderna som behöver provfiler, som JSON, så att valideringen bygger dem i sitt enda bygge (K-484).
+if (behovet) { console.log(JSON.stringify(lista.map((m) => m.id))); process.exit(0); }
 if (lista.length === 0) {
   if (bortagna) skrivManifest(manifest);
   console.log(`Word-lathundens storlekar är aktuella för ${metoder.length} metoder.`);
   process.exit(0);
 }
-console.log(`Bygger Word-lathundens provfiler för ${lista.map((m) => m.id).join(', ')} …`);
-execSync('npx astro build', { cwd: rot, stdio: 'ignore', env: { ...process.env, LATHUND_WORDPROV: '1', LATHUND_WORDPROV_IDS: lista.map((m) => m.id).join(',') } });
+console.log(`${utanBygge ? 'Läser Word-lathundens provfiler ur bygget' : 'Bygger Word-lathundens provfiler'} för ${lista.map((m) => m.id).join(', ')} …`);
+if (!utanBygge) execSync('npx astro build', { cwd: rot, stdio: 'ignore', env: { ...process.env, LATHUND_WORDPROV: '1', LATHUND_WORDPROV_IDS: lista.map((m) => m.id).join(',') } });
 const provMapp = join(rot, 'dist', 'utskrift', 'word');
 let fel = 0;
 try {

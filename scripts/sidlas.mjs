@@ -35,6 +35,8 @@
 //   node scripts/sidlas.mjs                 alla metoder med faktatexter
 //   node scripts/sidlas.mjs <id> [<id>…]    bara de angivna
 //   node scripts/sidlas.mjs --vid-behov     bara de som saknas eller är inaktuella (körs i npm run validera)
+//   node scripts/sidlas.mjs --behov         skriv metoderna som --vid-behov skulle mäta, som JSON, och sluta
+//   … --utan-bygge                          provfilerna finns redan i dist/utskrift/sidlas (scripts/validera.mjs)
 //   node scripts/sidlas.mjs --kontrollera   stanna om en mätning saknas, är inaktuell eller överbliven (npm run build)
 //   … --server http://localhost:4321        hämta provet från en utvecklingsserver som redan går, i stället för att bygga
 //   … --visa                                skriv ut vad som står överst på varje sida, och behåll pdf:erna
@@ -50,6 +52,7 @@ import { fileURLToPath } from 'node:url';
 import JSZip from 'jszip';
 import { parse as parseYaml } from 'yaml';
 import { wordPdfSync } from 'wordparitet';
+import { wordPdfensSumma } from './wordinnehall.mjs';
 import { lasTeman, medTemana } from '../src/lib/faktatemaihop.js';
 
 const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -57,6 +60,8 @@ const args = process.argv.slice(2);
 const kontrollera = args.includes('--kontrollera');
 const vidBehov = args.includes('--vid-behov');
 const visa = args.includes('--visa');
+const behovet = args.includes('--behov');
+const utanBygge = args.includes('--utan-bygge');
 const serverArg = args.indexOf('--server');
 const server = serverArg >= 0 ? String(args[serverArg + 1] ?? '').replace(/\/$/, '') : '';
 const valda = args.filter((a, i) => !a.startsWith('--') && (serverArg < 0 || i !== serverArg + 1));
@@ -138,9 +143,11 @@ let borttagna = 0;
 for (const id of Object.keys(manifest)) if (!medTexter.has(id)) { delete manifest[id]; borttagna++; }
 const okanda = valda.filter((id) => !medTexter.has(id));
 if (okanda.length) { console.error(`sidlas: ${okanda.join(', ')} är ingen publicerad metod med faktatexter.`); process.exit(1); }
-const lista = vidBehov
+const lista = vidBehov || behovet
   ? metoder.filter((m) => manifest[m.id]?.kalla !== kallHash(m) || !giltig(manifest[m.id]))
   : valda.length > 0 ? metoder.filter((m) => valda.includes(m.id)) : metoder;
+// --behov: metoderna som behöver provfiler, som JSON, så att valideringen bygger dem i sitt enda bygge (K-484).
+if (behovet) { console.log(JSON.stringify(lista.map((m) => m.id))); process.exit(0); }
 if (lista.length === 0) {
   if (borttagna) skrivManifest(manifest);
   console.log(`Sidlåset är aktuellt för ${metoder.length} ${metoder.length === 1 ? 'metod' : 'metoder'} med faktatexter.`);
@@ -245,12 +252,14 @@ const arbetsmapp = join(tmpdir(), 'niclasfohlin-sidlas');
 rmSync(arbetsmapp, { recursive: true, force: true });
 mkdirSync(arbetsmapp, { recursive: true });
 const byggmapp = join(arbetsmapp, 'dist');
-const distProv = join(byggmapp, 'utskrift', 'sidlas');
+// Provfilerna: ur valideringens bygge (--utan-bygge), annars ur ett eget bygge i den tillfälliga mappen.
+let distProv = utanBygge ? join(rot, 'dist', 'utskrift', 'sidlas') : join(byggmapp, 'utskrift', 'sidlas');
 const provnamn = (id, last) => `${id}${last ? '--last' : ''}.docx`;
 // Bygger sajten med provsidan påslagen, för de här metoderna, till den tillfälliga mappen. Provfilerna hamnar i
 // utskrift/sidlas där. Går bygget inte följer slutet av dess utskrift med felet.
 const bygg = (ids) => {
   rmSync(byggmapp, { recursive: true, force: true });
+  distProv = join(byggmapp, 'utskrift', 'sidlas');
   try {
     execSync(`npx astro build --outDir "${byggmapp}"`, { cwd: rot, stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 1 << 27, env: { ...process.env, SIDLAS_PROV: '1', SIDLAS_PROV_IDS: ids.join(',') } });
   } catch (e) {
@@ -285,18 +294,23 @@ console.log(`Mäter sidlåset i Word för ${lista.map((m) => m.id).join(', ')} �
 const fore = JSON.stringify(manifest);
 let fel = 0;
 try {
-  if (!server) bygg(lista.map((m) => m.id));
+  if (!server && !utanBygge) bygg(lista.map((m) => m.id));
   // Mätningen: den olåsta filen, sida för sida.
   const matta = [];
+  const oforandrade = [];
   for (const m of lista) {
     try {
       const docx = await prov(m.id, false);
+      // Samma provfil som vid förra mätningen ger samma sidor i Word: låsen står kvar, och Word behövs inte (som
+      // Word-lathunden, K-462). Förut mättes faktatexterna i Word varje gång koden ändrades (K-484).
+      const innehall = await wordPdfensSumma(docx, rot);
+      if (manifest[m.id]?.innehall === innehall && giltig(manifest[m.id])) { oforandrade.push({ m, innehall }); continue; }
       // En provfil utan texter: ramarna som såg ut som faktatexter är inte det. Metoden har då inga lås, och Word behövs inte.
       const texter = (await provetsTexter(await JSZip.loadAsync(docx))).length ? await matt(docx, tillPdf(m.id, docx), pdftotext) : [];
       const kandidater = new Set((m.data.ramar?.ramar ?? []).filter(kanVaraFaktatext).map((r) => r.rubrik));
       const utanfor = texter.filter((t) => !kandidater.has(t.rubrik)).map((t) => t.rubrik);
       if (utanfor.length) throw new Error(`provfilen har faktatexter som skriptets kännetecken inte ser (${utanfor.join(', ')}): rätta kanVaraFaktatext i scripts/sidlas.mjs efter faktatextAv i src/lib/ramform.ts`);
-      matta.push({ m, texter, las: lasenAv(texter), andrad: !likaLas(lasenAv(texter), manifest[m.id]?.las) });
+      matta.push({ m, texter, las: lasenAv(texter), andrad: !likaLas(lasenAv(texter), manifest[m.id]?.las), innehall });
       if (visa) for (const t of texter) {
         console.log(`  ${t.rubrik}: ${t.sidor.length} sidor`);
         t.sidor.forEach((s, k) => { if (k) console.log(`    sida ${k + 1}  luft ${String(s.luft).padStart(3)}  ${s.del < 0 ? 'mitt i en del, låses inte' : `del ${s.del} (${t.delar[s.del].slice(0, 40)}): ${s.luft >= LUFT ? 'låses' : 'full sida före, låses inte'}`}`); });
@@ -311,7 +325,11 @@ try {
   for (const x of matta) {
     const forra = manifest[x.m.id];
     const kalla = kallHash(x.m);
-    manifest[x.m.id] = { kalla, datum: forra && forra.kalla === kalla && !x.andrad ? forra.datum : new Date().toISOString().slice(0, 10), las: x.las };
+    manifest[x.m.id] = { kalla, datum: forra && forra.kalla === kalla && !x.andrad ? forra.datum : new Date().toISOString().slice(0, 10), las: x.las, innehall: x.innehall };
+  }
+  for (const x of oforandrade) {
+    manifest[x.m.id] = { ...manifest[x.m.id], kalla: kallHash(x.m) };
+    console.log(`  ok   ${x.m.id}: provfilen är densamma som när låsen mättes, och de står kvar utan Word`);
   }
   skrivManifest(manifest);
   // Provet av filen med lås: Word ska bryta sidorna som före låset. Bygget har redan filen när låsen är de som stod i

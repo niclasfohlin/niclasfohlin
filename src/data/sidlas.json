@@ -1,6 +1,6 @@
 {
   "faktatextsamtal-i-grupp": {
-    "kalla": "09ad521d0ce5b232",
+    "kalla": "4862eb16e26bfe10",
     "datum": "2026-10-20",
     "las": {
       "Bas, text 1: Vattenplaneten": [
@@ -115,6 +115,7 @@
       ],
       "Avancerat, text 9: Natten bygger minnet": [],
       "Avancerat, text 10: Klockan i tonåren": []
-    }
+    },
+    "innehall": "bd9aaeb9793d03aabde086c3c11f221d9692119d695966e33000b8d6106b4404"
   }
 }

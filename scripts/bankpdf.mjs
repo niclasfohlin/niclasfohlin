@@ -64,9 +64,17 @@ const sha = (b) => createHash('sha256').update(b).digest('hex');
 const taFramData = () => (existsSync(dist) ? readdirSync(dist, { withFileTypes: true }).filter((x) => x.isDirectory()).flatMap((x) => readdirSync(join(dist, x.name)).filter((f) => f.endsWith('.json')).map((f) => join(dist, x.name, f))) : [])
   .filter((f) => { const t = readFileSync(f, 'utf8'); return t.includes('"poster"') && t.includes('"utskrift"'); });
 const vantande = () => taFramData().filter((f) => /"vantar":\s*true/.test(readFileSync(f, 'utf8')));
-// Bygget görs om när pdf:erna eller kartorna har ändrats och sajten har en Ta fram-sida.
+// Bygget görs om när en Ta fram-sidas datafil läser en pdf eller karta som har ändrats (källorna står i datafilen som
+// "fil": "<namn>", adresserna som /stodundervisning/<namn>.pdf och aktivitetskorten, som bär sin kategorifils version,
+// som /stodundervisning/<namn>-01.pdf), eller väntar på en. Förut byggdes sajten om vid
+// varje ny pdf, också när bara bladen eller filen med allt var nya (K-484). gjorda: namnen på pdf:erna som gjordes nu.
+const gjorda = [];
 const byggOm = () => {
-  if (!taFramData().length) return;
+  const data = taFramData();
+  if (!data.length) return;
+  const texter = data.map((f) => readFileSync(f, 'utf8'));
+  const lases = gjorda.filter((n) => texter.some((t) => new RegExp(`"fil":\\s*"${n}"|/stodundervisning/${n}(-\\d+)?\\.pdf`).test(t)));
+  if (!lases.length && !vantande().length) { if (gjorda.length) console.log(`Ingen Ta fram-sida läser de ${gjorda.length} nya pdf:erna, så sajten byggs inte om.`); return; }
   console.log('Ta fram-sidornas datafiler byggs om med de nya pdf:erna (astro build) …');
   execFileSync('npx', ['astro', 'build'], { cwd: rot, stdio: 'inherit', shell: true, timeout: 1800000 });
   const kvar = vantande();
@@ -167,7 +175,7 @@ for (const f of filer) {
   const karta = manifest[f.namn]?.karta;
   if (karta && led(karta) === led(sidkarta)) continue;
   const ny = karta && kartansLed(karta, sidkarta);
-  if (ny) { manifest[f.namn].karta = ny; omskrivna += 1; } else utanKarta.push(f);
+  if (ny) { manifest[f.namn].karta = ny; omskrivna += 1; gjorda.push(f.namn); } else utanKarta.push(f);
 }
 if (omskrivna) console.log(`Kartans ramar och blad är omskrivna efter Word-filernas sidkarta i ${omskrivna} filer (sidorna är desamma).`);
 if (!att.length && !utanKarta.length) {
@@ -226,6 +234,7 @@ for (const j of jobb) {
     copyFileSync(tmpPdf, `${ut}.tmp`);
     renameSync(`${ut}.tmp`, ut);
     if (existsSync(dist)) copyFileSync(ut, join(dist, `${f.namn}.pdf`));
+    gjorda.push(f.namn);
     manifest[f.namn] = { word: summor.get(f.namn), pdf: sha(readFileSync(ut)), sidor, kB: Math.round(readFileSync(ut).length / 1024), datum: new Date().toISOString().slice(0, 10), ...(karta ? { karta } : {}) };
     console.log(`  ok   ${f.namn}.pdf: ${sidor} sidor, ${manifest[f.namn].kB} kB (${Math.round(readFileSync(wordPdf).length / 1024)} kB ur Word)`);
   } catch (e) {
@@ -236,7 +245,7 @@ for (const j of jobb) {
 writeFileSync(manifestFil, JSON.stringify(manifest, null, 2) + '\n');
 // En ny pdf fanns inte när bygget satte filernas version i länkarna (scripts/filversion.mjs): länkarna till den får sin
 // version nu, i dist. Nästa bygge sätter den av sig själv.
-if (existsSync(dist)) { const { sattVersioner } = await import('./filversion.mjs'); sattVersioner(join(rot, 'dist')); }
+if (existsSync(dist)) { const { sattVersioner, bytVersioner } = await import('./filversion.mjs'); sattVersioner(join(rot, 'dist')); bytVersioner(join(rot, 'dist'), gjorda.map((n) => `/stodundervisning/${n}.pdf`)); }
 if (!fel) byggOm();
 console.log(fel ? `\n${fel} fel.` : '\nAllt ok. Committa pdf-filerna och bank-pdf.json tillsammans med ändringen.');
 process.exit(fel ? 1 : 0);

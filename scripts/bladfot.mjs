@@ -31,7 +31,8 @@ const blad = readdirSync(mapp).filter((f) => f.endsWith('.yaml') && !f.startsWit
   return (d.pabordet ?? []).filter((b) => String(b.rubrik ?? '').startsWith('Blad: ')).map((b) => ({ nyckel: `${id}-${b.nr}`, fil: join(rot, 'public/stodundervisning', `${id}-pabordet-${b.nr}.svg`) }));
 });
 const forr = existsSync(UT) ? JSON.parse(readFileSync(UT, 'utf8')) : {};
-const summa = (fil) => createHash('sha256').update(readFileSync(fil)).digest('hex').slice(0, 16);
+// Summan bortser från radsluten: git skriver svg-filerna med CRLF när en gren checkas ut, fast bladet är detsamma.
+const summa = (fil) => createHash('sha256').update(readFileSync(fil, 'utf8').replace(/\r\n/g, '\n')).digest('hex').slice(0, 16);
 
 function mat(fil) {
   const r = new Resvg(readFileSync(fil), { fitTo: { mode: 'original' }, background: 'rgba(255,255,255,1)' }).render();

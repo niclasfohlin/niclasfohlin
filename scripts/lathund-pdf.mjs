@@ -17,6 +17,7 @@
 //   node scripts/lathund-pdf.mjs --vid-behov     bara de som saknas eller är inaktuella (körs i npm run validera)
 //   node scripts/lathund-pdf.mjs --kontrollera   stanna om en pdf saknas, är inaktuell eller är
 //                                                överbliven (körs i npm run build)
+//   node scripts/lathund-pdf.mjs --behov         skriv metoderna som --vid-behov skulle göra om, som JSON, och sluta
 //   node scripts/lathund-pdf.mjs --utan-bygge    hoppa över astro build (dist har redan A4-filerna ur ett
 //                                                bygge med LATHUND_A4=1)
 //
@@ -35,6 +36,7 @@ const args = process.argv.slice(2);
 const kontrollera = args.includes('--kontrollera');
 const vidBehov = args.includes('--vid-behov');
 const utanBygge = args.includes('--utan-bygge');
+const behovet = args.includes('--behov');
 const valda = args.filter((a) => !a.startsWith('--'));
 
 const katalog = join(rot, 'src', 'content', 'stodundervisning');
@@ -99,6 +101,8 @@ const inaktuella = () => {
     return !existsSync(pdf) || !post || post.kalla !== kallHash(m) || post.pdf !== filHash(pdf);
   });
 };
+// --behov: metoderna vars pdf ska göras om, som JSON, så att valideringen bygger A4-filerna i sitt enda bygge (K-484).
+if (behovet) { console.log(JSON.stringify(inaktuella().map((m) => m.id))); process.exit(0); }
 if (vidBehov) {
   const publicerade = new Set(metoder.map((m) => m.id));
   mkdirSync(pdfMapp, { recursive: true });
