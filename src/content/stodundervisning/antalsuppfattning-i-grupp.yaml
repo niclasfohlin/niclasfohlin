@@ -109,6 +109,11 @@ pabordet:
     rubrik: "Blad: Åk 4–5, Läxa 5"
     text: "Läxa 5 för åk 4–5 på ett A4, Från material till skrift. Överst står en rad för namnet och raden ”Bygg och jämför med bilden. Skriv på baksidan.” Bladet har fyra uppgifter, och bredvid varje uppgift står talet som barnet bygger först, byggt med tiobas och brickor med 1000 på talsortsmattan, och decimaltalen på decimalmattan, där hundraplattan är en hel. Uppgift 1 är ”Bygg 1 250 och 2 785. Skriv talsort för talsort.”, uppgift 2 ”Bygg 3 004. Ta bort 8. Skriv växlingarna.”, uppgift 3 ”Bygg 2,4 och 1,9. Skriv 2 + 1 och 0,4 + 0,9.” och uppgift 4 ”Bygg 2,5. Ta bort 0,7. Skriv växlingen.” I uppgift 1 ligger 2 785 ovanför mattan, och i uppgift 3 visar bilden bara 2,4. Längst ned står Säg så här: ”Visa mig i materialet det du skrev, som 1 250 + 2 785: 3 000 + 900 + 130 + 5 = 4 035.”"
     efter: "ram: Åk 4–5: Läxa 1–5"
+  - nr: 19
+    rubrik: "Blad: Sifferkort"
+    text: "Ett A4 per elev med 24 sifferkort att klippa isär vid de streckade linjerna. Siffrorna 1–⁠9 står två gånger, nollan fyra gånger och decimaltecknet två gånger. Sexan och nian har ett streck under, så att eleven ser vilken som är vilken."
+    efter: "ram: Sifferkort"
+    fluent: [sax]
 inledning:
   - "Metoden är för elever i åk 1–5 som behöver stöd i antalsuppfattning. Eleverna bygger talen framför sig med tiobas, talbrickor och pengar. Talbrickor är runda brickor med ett talvärde. Eleverna lägger till och tar bort, och när en talsort blir full eller inte räcker växlar de själva med materialet. Metoden handlar om att se tal och bygga tal, inte bara räkna dem. Det viktigaste händer vid bordet. Läraren gör först: bygger, lyfter, pekar och säger vad hen gör. Sedan gör gruppen samma sak tillsammans, sedan i par och sist var och en för sig, och passet slutar med att alla gör det gemensamt igen. Efter fem veckor ska eleven kunna bygga tal på egen hand och förstå hur växlingen går till i skriftlig huvudräkning."
   - "Två ord är centrala i metoden: talsort och växla. Talsorterna är ental, tiotal, hundratal och tusental, och i decimaltal även tiondelar och hundradelar. Att växla är att byta tio av en talsort mot en av nästa större, eller en mot tio av nästa mindre. Tio ental blir ett tiotal, och ett tiotal blir tio ental. Värdet är detsamma, det är bara talsorten som byts. Talsortsmattan har en ruta för varje talsort, och allt eleverna bygger ligger på den."
@@ -318,7 +323,7 @@ roll:
 urval:
   rubrik: Var hittar du materialet och talen?
   text:
-    - Tiobas finns i de flesta skolors matematikmaterial. Talbrickor är runda lappar i kartong med 1, 10, 100 eller 1000, gärna en färg per talsort. Lekpengar finns att köpa eller kopiera. Använd bara enkronor, tiokronor, hundralappar och tusenlappar, så att varje valör är en talsort. Talsortsmattan finns på lathundens sida 3, Mallen. Skriv ut den i A3 när ni bygger med talbrickor och pengar. Med tiobas får varje talsort ett eget A4-ark i samma ordning, så att en hundraplatta eller tio tiostavar i rad får plats. Decimalmattan för åk 4–5 och arken per talsort står under Mallar att skriva ut och sist i planeringsmallarna.
+    - Tiobas finns i de flesta skolors matematikmaterial. Talbrickor är runda lappar i kartong med 1, 10, 100 eller 1000, gärna en färg per talsort. Lekpengar finns att köpa eller kopiera. Använd bara enkronor, tiokronor, hundralappar och tusenlappar, så att varje valör är en talsort. Talsortsmattan finns på lathundens sida 3, Mallen. Skriv ut den i A3 när ni bygger med talbrickor och pengar. Med tiobas får varje talsort ett eget A4-ark i samma ordning, så att en hundraplatta eller tio tiostavar i rad får plats. Decimalmattan för åk 4–5 och arken per talsort står under Mallar att skriva ut och sist i planeringsmallarna. Bladet med sifferkort står först under Material per årskurs.
     - Tiobaspaketet som eleven tar hem är av papper. Rita tiostavar och hundraplattor på papper med centimeterrutor och klipp ut dem. Vad påsen ska innehålla står i gruppens paket under Material per årskurs, tillsammans med kartläggningen, veckornas kort och läxorna.
   kravText: "Ett tal som du visar först eller skriver på ett eget kort ska uppfylla tre krav:"
   krav:
@@ -391,11 +396,22 @@ grund:
 ramar:
   rubrik: Material per årskurs
   text:
-    - Lektionskortet gäller alla årskurser. Resten av materialet är ordnat efter årskurs, med ett paket för varje talområde. Använd paketet för gruppens årskurs. Först kommer en ruta Till läraren som för varje vecka beskriver vad du visar först och vad du ska lyssna efter. Sedan kommer kartläggningen och veckornas kort, och sist Läxa 1–5 med en ruta Till vårdnadshavaren.
+    - Lektionskortet och sifferkorten gäller alla årskurser. Resten av materialet är ordnat efter årskurs, med ett paket för varje talområde. Använd paketet för gruppens årskurs. Paketet börjar med en ruta Till läraren som för varje vecka säger vad du visar först och lyssnar efter. Sedan kommer kartläggningen och veckornas kort, och sist Läxa 1–5 med en ruta Till vårdnadshavaren.
     - "Rutan Till läraren beskriver hur du visar med tiobas. Med brickor och pengar gör du samma sak och säger talsorten: en tiokrona är ett tiotal."
     - Korten är elevmaterial. Kopiera veckans lista, en per par, klipp isär korten och lägg dem i en hög hos varje par. Den som läser ett kort läser det högt, och kamraten bygger. Om en elev inte kan läsa kortet läser kamraten eller läraren det. Har kortet två tal bygger eleven det första på mattan och det andra ovanför, talsort över talsort, och skjuter ned det när kortet säger ”slå ihop”. Vid subtraktion bygger eleven bara det första talet.
     - Talen är valda så att de kräver veckans fokus inom årskursens talområde. Egna kort skriver du efter de tre kraven under Var hittar du materialet och talen?
   ramar:
+    # ---------------------------------------------------------------- Sifferkorten
+    - rubrik: Sifferkort
+      text:
+        - "I vecka 2, pass 2, lägger eleverna talet med sifferkort under det de har byggt på mattan, och en plats utan bricka får en nolla. Varje elev har en egen sats."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Satsen
+              text: "En sats har siffrorna 1–⁠9 två gånger, fyra nollor och två decimaltecken, så att eleven kan lägga både 306 och 360, eller 1,2 och 0,8. Decimaltecknen behövs bara i åk 4–⁠5, och eleven lägger dem under kommat på decimalmattan. Sexan och nian har ett streck under, så att eleven ser vilken som är vilken."
+            - rubrik: Utskrift
+              text: "Kopiera bladet, ett per elev, och klipp isär korten. Laminera dem gärna, så kan nästa grupp använda dem."
     # ---------------------------------------------------------------- Åk 1
     - rubrik: "Åk 1: talen 0–30"
       text:
@@ -878,9 +894,9 @@ lathund:
       - Talsortsmatta eller arken, en per elev, i åk 4–5 också decimalmattan
       - Dagens material, en låda per par
       - Veckans kort, klippta
-      - Papper, penna och sifferkort per par
+      - Papper och penna per par, sifferkort per elev
       - Tärning för Klar tidigt
-      - Din egen matta och sats
+      - Din egen matta och låda
 lektionskort:
   - text: "Lektionskortet är passet på ett A4: målet, veckorna med det du visar först och lyssnar efter, passet med det du gör och säger, och stödet när eleven fastnar. Skriv ut det och ha det framför dig under passet."
 film:

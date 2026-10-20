@@ -4873,17 +4873,17 @@
     ]
   },
   "antalsuppfattning-i-grupp": {
-    "word": "f107cdf5e8348077946822a39b02f7297c529d4d1e9bd2a2d357c132738a1c82",
-    "pdf": "64dcb81272c8e674c2711e5096a25a1932e5c490f1440dc78b38005301b18b3c",
-    "sidor": 75,
-    "kB": 1562,
+    "word": "4411611f61ab7addf5607c6d98c56588204c179ee4313d901e1f4ea33dd618fe",
+    "pdf": "a192a2ecf2330c3c74452ffa9c63ec8e4f73fd15dc7eaba1f4ae9cdc44dc6941",
+    "sidor": 76,
+    "kB": 1578,
     "datum": "2026-10-20"
   },
   "antalsuppfattning-i-grupp-metoden": {
-    "word": "81d019cee70afe085aa79b0bea097059e0d0c40c4fe4a45c87b3f67b3949278e",
-    "pdf": "c780fa8f04d4b635ac9f824ad0d3b66ca20ac0a9c423963ac1c9623c67ecf514",
+    "word": "05360462bc68f12d8ed0db9fa8ae449eb0fa6e8e55fa8aaf94a104bcdecac3d9",
+    "pdf": "610ddd06dd6a4453b968be302380ad90f3001027144a16c24f2e745f463b03de",
     "sidor": 10,
-    "kB": 416,
+    "kB": 417,
     "datum": "2026-10-20"
   },
   "boksamtal-i-grupp": {
@@ -4957,15 +4957,15 @@
     "datum": "2026-10-20"
   },
   "laslistor-i-grupp": {
-    "word": "f89e6b9703441075b945d59ceb12ccdf4807135165c09cb4f0a5a56114a394f0",
-    "pdf": "a8f66654c1cb2cd70c182ebc3c186e90f8be0270b1e42c9f54c49d7ae149d71a",
-    "sidor": 31,
-    "kB": 814,
+    "word": "46991667459d0f6c0762abf3d55b8cf7f1df5d9848d0bb770690e3d6fd609c46",
+    "pdf": "2c8f693afb9cebf46252f82ac6ecff34e9294183dd45fcbed55ade1b776ada0d",
+    "sidor": 33,
+    "kB": 833,
     "datum": "2026-10-20"
   },
   "laslistor-i-grupp-metoden": {
-    "word": "0cefeb8c9c0c573c2ec30425e4eb9cc5cce34eb91c12f1c5956ee9cf39dc3338",
-    "pdf": "4376aee89ea82af1d6906283b09afd73ce61b30caa460b3fa8aee212603e48ea",
+    "word": "2ebf36de42526e5887ab6faaa128088b0420aad9db9c1ebea6f08a5dc93f1e55",
+    "pdf": "5dbf5809438bbcdaee498f6135754f8b9a418caf94865f65813bb2f0b299e45d",
     "sidor": 8,
     "kB": 394,
     "datum": "2026-10-20"
@@ -5083,10 +5083,10 @@
     "datum": "2026-10-19"
   },
   "ordverkstad-i-grupp": {
-    "word": "c122d9182088b6b1f74cf2ef9ff5076c6e5e60a11c23a6b7d3a806293760a4ba",
-    "pdf": "e04cb3f56b367a940f9b5f099f80e71b4e7d37121774b89538e79e878df0853b",
+    "word": "25f3919465124e35aaa8676202e6bc76378c729a79f7fe2c6d86fc9d36ee6285",
+    "pdf": "bae10e9336b7b52ca60b9fcc03c86c3661e53d6675377a7596abc8e25dab8912",
     "sidor": 73,
-    "kB": 1200,
+    "kB": 1204,
     "datum": "2026-10-20"
   },
   "ordverkstad-i-grupp-metoden": {
@@ -5125,18 +5125,18 @@
     "datum": "2026-10-20"
   },
   "skrivkurs-berattelseram": {
-    "word": "61bb81b84addea43e1596b87f89c9dbfcfe2f6d1fc1b1fd7281061a06c6d34e8",
-    "pdf": "ce513682c2bbdbc859386f6327e24d4f4ebac50f1461180c032274e5ce71427b",
-    "sidor": 62,
-    "kB": 1132,
+    "word": "9988560a4816747363e3dd5724d90167ea3ee06604dcab434457d0643cc2bab3",
+    "pdf": "aa8c3f031da8f2dbb9afafd74ecf2e7f1af63e4d20a829ab6a9de3471dc1b40f",
+    "sidor": 63,
+    "kB": 1170,
     "datum": "2026-10-20"
   },
   "skrivkurs-berattelseram-metoden": {
-    "word": "c42ef1c2fb9191a421bcd39e1de074c34b5a333a6b13ba5d1182896e8c85c3b2",
-    "pdf": "1c52f1720fd75ceed40357a4756becaf12e91210009e77bb720f969035e46cfa",
+    "word": "5fe182679d366ee165e65f89b6d805b86f6e9951cfbf8ba64dffe47db75a44fa",
+    "pdf": "c31eba9ca6bad153f4da8914fabc55804717252948a52e54a8d185a0193534b5",
     "sidor": 9,
     "kB": 441,
-    "datum": "2026-10-19"
+    "datum": "2026-10-20"
   },
   "skrivkurs-sagoboken": {
     "word": "73fac73d8c1daf1a6694e4d38ec32bb9348aa70a62261238928e4f1f5110d9d6",
@@ -5307,11 +5307,11 @@
     "datum": "2026-10-13"
   },
   "laslistor-i-grupp-lathund-text": {
-    "word": "098aeabd4cd5817cafe5e2e718c4c6638363fa5bb2dc5c74e556e5f9443fd357",
-    "pdf": "48d37d7097d83774a65df7d719ea8733a91eb51f5600b0c5af24004ac888ba5f",
+    "word": "78ca885803942c37c26edd81048824c52e585870a2021928c3a39c196d03131a",
+    "pdf": "1be287ace4bffeeff77c4001be0117c891832c8a002fcce883fcb2abec826fad",
     "sidor": 1,
     "kB": 145,
-    "datum": "2026-10-13"
+    "datum": "2026-10-20"
   },
   "ljudlek-fran-ljud-till-ord": {
     "word": "3423adfa07dc4ad69aebec7c89e091a3e03835ec16785a00df56c78af0cbef7d",
@@ -8776,6 +8776,34 @@
         "bild": 2,
         "fran": 2,
         "till": 2
+      }
+    ]
+  },
+  "antalsuppfattning-i-grupp-blad-sifferkort": {
+    "word": "dcff6699642e7c2c3b461c2c8a911cd78ec67ae88f67a1ab9d266d8c40deea78",
+    "pdf": "4618ee51c32aca12474f0597781c054d0bacdd9a6534fcbdbc017768b67dbf7b",
+    "sidor": 1,
+    "kB": 111,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 19,
+        "fran": 1,
+        "till": 1
+      }
+    ]
+  },
+  "skrivkurs-berattelseram-blad-skylten": {
+    "word": "31cc38e65de577fc6c895927e1370e6a4559b1cee922d566e4909bb3def8679e",
+    "pdf": "d9ef01d8ed2cd9d5d9b932e3d146b893c2832ce97b681af049d7c2856d97e478",
+    "sidor": 1,
+    "kB": 137,
+    "datum": "2026-10-20",
+    "karta": [
+      {
+        "bild": 10,
+        "fran": 1,
+        "till": 1
       }
     ]
   }

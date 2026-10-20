@@ -138,7 +138,7 @@ tidsschema:
       vad: Välj fyra till sex ord ur veckans lista att modellera, inte hela listan, och dagens kolumn. Kopiera listan till varje par och ta fram dagens bok.
     - tid: 0–2 min
       fas: Modellering
-      vad: "Sitt så att alla ser listan. Peka och ljuda långsamt, ljud för ljud, från vänster till höger, och dra ut hållkonsonanterna: sss-ooo-lll. Bind ihop ljuden till ordet och läs det i normal takt. Tänk högt om det som är svårt i ordet: den långa vokalen, konsonantmötet, ändelsen. Eleverna lyssnar och följer med, de läser inte än."
+      vad: "Sitt så att alla ser listan. Peka och ljuda långsamt, ljud för ljud, från vänster till höger, och dra ut hållkonsonanterna: sss-⁠ooo-⁠lll. Bind ihop ljuden till ordet och läs det i normal takt. Tänk högt om det som är svårt i ordet: den långa vokalen, konsonantmötet, ändelsen. Eleverna lyssnar och följer med, de läser inte än."
     - tid: 2–4 min
       fas: Körläsning
       vad: "Börja långsamt så att alla hinner ljuda, och öka tempot när orden känns säkra. Läs kolumnen uppifrån och ned och läs om den en gång till. Håll ihop kören: vänta in eleverna vid svåra ord i stället för att läsa förbi dem. Vid många fel: modellera ordet igen och körläs det sedan på nytt."
@@ -157,7 +157,7 @@ steg:
       fraga: Hur låter ordet?
       gor: Visa hur avkodningen görs innan eleverna ska göra den själva. Upprepa samma ord minst två gånger.
       fraser:
-        - "Lyssna när jag ljudar: sss-t-eee-nnn. Sten."
+        - "Lyssna när jag ljudar: sss-⁠t-⁠eee-⁠nnn. Sten."
         - Här är det lätt att tappa ett ljud. Hör ni vilket?
         - Nu läser jag ordet en gång till, i vanlig takt.
     - namn: Körläsning
@@ -206,8 +206,8 @@ exempel:
     rubrik: Gruppen
     text: fyra elever i årskurs 1 som gissade på orden utifrån första bokstaven när de läste listorna för läraren i starten. Det är onsdag i vecka 5, och veckans lista är Läslista 4 om konsonantmöten.
   text:
-    - "Läraren har valt fem ord ur första kolumnen: sten, stol, spik, snö och slut. Gruppen sitter så att alla ser listan. Läraren pekar på sten och ljudar långsamt: ”sss-t-eee-nnn. Sten.” Sedan tänker läraren högt: ”Här är det lätt att tappa ett ljud. Hör ni vilket? Utan t blir det sen.” Varje ord modelleras två gånger. Eleverna lyssnar, de läser inte än."
-    - "Nu pekar läraren och alla läser kolumnen tillsammans, långsamt först. Vid spik stannar kören, och Leon säger ”pik”. Läraren modellerar ordet igen: ”sss-p-iii-k. Spik.” Sedan läser alla kolumnen en gång till, lite fortare."
+    - "Läraren har valt fem ord ur första kolumnen: sten, stol, spik, snö och slut. Gruppen sitter så att alla ser listan. Läraren pekar på sten och ljudar långsamt: ”sss-⁠t-⁠eee-⁠nnn. Sten.” Sedan tänker läraren högt: ”Här är det lätt att tappa ett ljud. Hör ni vilket? Utan t blir det sen.” Varje ord modelleras två gånger. Eleverna lyssnar, de läser inte än."
+    - "Nu pekar läraren och alla läser kolumnen tillsammans, långsamt först. Vid spik stannar kören, och Leon säger ”pik”. Läraren modellerar ordet igen: ”sss-⁠p-⁠iii-⁠k. Spik.” Sedan läser alla kolumnen en gång till, lite fortare."
     - "Paren tar fram sina kopior. Alva pekar och Omar läser. Hiba pekar och Leon läser. Leon läser ”sen” där det står sten. Hiba ljudar tillsammans med Leon, och läraren kommer fram och säger kort: ”Läs om hela ordet från början.” Leon läser ”sten”. Hos Alva och Omar bekräftar läraren: ”Du ljudade hela vägen fram till sista ljudet.” Efter en genomläsning byter paren roller och läser listan igen."
     - "Läraren samlar gruppen och modellerar det som flera behövde: mötet i början av sten och spik. Alla körläser orden efter läraren. Sedan tar läraren fram en lättläst bok om en hund som gräver i sanden. Eleverna läser det de kan, och läraren läser resten. ”Vad tror ni att hunden letar efter?” frågar läraren. Omar hittar ordet sand på sidan och läser det direkt. Efteråt noterar läraren kort: Leon tappar t i st-orden, repetera i morgon. Alva och Omar läser de två första kolumnerna med flyt."
 urval:
@@ -291,7 +291,7 @@ grund:
 ramar:
   rubrik: Läslistorna
   text:
-    - "Här finns lektionskortet och sju läslistor som tillsammans bildar en insats på sju veckor, en lista per vecka. Varje lista är ett blad till eleven, med orden stora i var sin ruta, och före bladet står hur ni arbetar med listan: vad listan tränar, hur ni gör och vad du lyssnar efter. Kopiera bladet till varje par, och visa det stort för gruppen, på tavlan eller utskrivet i A3, när du modellerar."
+    - "Här finns lektionskortet och sju läslistor som tillsammans bildar en insats på sju veckor, en lista per vecka. Varje lista är ett blad till eleven, med orden stora i var sin ruta, och före bladet står hur ni arbetar med listan: vad listan tränar, hur ni gör och vad du lyssnar efter. Kopiera bladet till varje par, och visa det stort för gruppen, på tavlan eller utskrivet i A3, när du modellerar. Sist står bokstavskorten. Med dem bygger du ord vid bordet."
   ramar:
     - rubrik: Läslista start
       text:
@@ -338,7 +338,7 @@ ramar:
             - rubrik: Fokus
               text: "Tvåstaviga ord med öppna stavelser. Första kolumnen bygger vidare på förra veckans KVK-ord: sol blir sola, tal blir tala, mur blir mura. Eleven ser att kända ord kan växa."
             - rubrik: Så gör ni
-              text: "Dela ordet i stavelser och klappa: so-la, la-ga, re-sa. Ljuda första stavelsen, ljuda andra stavelsen, läs ihop hela ordet. Vokalen i den öppna stavelsen är lång."
+              text: "Dela ordet i stavelser och klappa: so-⁠la, la-⁠ga, re-⁠sa. Ljuda första stavelsen, ljuda andra stavelsen, läs ihop hela ordet. Vokalen i den öppna stavelsen är lång."
             - rubrik: Lyssna efter
               text: "Att eleven tar en stavelse i taget i stället för att ljuda bokstav för bokstav genom hela ordet. Vid fel: täck andra stavelsen med fingret och läs delarna var för sig."
     - rubrik: "Läslista 4: konsonantmöten"
@@ -350,9 +350,9 @@ ramar:
             - rubrik: Fokus
               text: "Två konsonanter i följd, först i början av ordet och sedan i slutet. Konsonantmöten är nästa svårighetsnivå efter de enkla ljudenliga orden. Lägg märke till att vokalen blir kort i orden med möte på slutet: fisk, hand, häst."
             - rubrik: Så gör ni
-              text: "Ljuda mötet som ett par: /s/ /t/ blir st, lägg sedan på resten: st-en, st-ol. I slutmötena: läs början, håll vokalen kort och landa i mötet: fi-sk, ha-nd."
+              text: "Ljuda mötet som ett par: /s/ /t/ blir st, lägg sedan på resten: st-⁠en, st-⁠ol. I slutmötena: läs början, håll vokalen kort och landa i mötet: fi-⁠sk, ha-⁠nd."
             - rubrik: Lyssna efter
-              text: "Att inget ljud tappas eller läggs till i mötet, som sen i stället för sten. Vid fel: bygg ordet med bokstavskort och ta bort första konsonanten, jämför sten och ten, gris och ris."
+              text: "Att inget ljud tappas eller läggs till i mötet, som sen i stället för sten. Vid fel: bygg ordet med bokstavskort, ta bort en bokstav i mötet och läs det som blir kvar: sten blir sen, blad blir bad, gris blir ris."
     - rubrik: "Läslista 5: ordet växer"
       text:
         - Vecka 6 · morfem.
@@ -379,6 +379,30 @@ ramar:
               text: "Läs varje mening två gånger: först med fokus på att alla ord blir rätt, sedan en gång till med flyt och läsmelodi. Stanna vid punkten. Ordbilderna och, är, i, på, en, ett, har, jag, vi, det och de läses som helheter."
             - rubrik: Lyssna efter
               text: "Att eleven läser om meningen med flyt efter första genomläsningen och att rösten går ner vid punkt. Ställ en fråga per mening: var bor musen?"
+    - rubrik: Bokstavskort
+      text:
+        - "Med bokstavskorten bygger du ett ord vid bordet när någon läser fel. Korten har alla bokstäver i läslistornas ord, och de vanligaste finns två eller tre gånger. Bokstäverna q, w, x och z finns inte i listorna och därför inte heller bland korten."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så bygger du
+              text: "Lägg ordet vänt mot eleven, och sitt gärna bredvid. Ligger ett kort upp och ner blir u ett n, b ett q och d ett p."
+            - rubrik: Utskrift
+              text: "Kopiera bladet en gång, gärna på tjockt papper, och klipp isär korten. Det räcker med en sats, eftersom det är du som bygger. Laminerar du dem, håller de hela perioden."
+      listor:
+        - rubrik: "Bokstäver att bygga med"
+          rader:
+            - ["a", "a", "a", "b", "c", "d"]
+            - ["d", "e", "e", "e", "f", "g"]
+            - ["h", "i", "i", "j", "k", "k"]
+            - ["l", "l", "m", "m", "m", "n"]
+            - ["n", "n", "o", "o", "p", "p"]
+            - ["r", "r", "r", "s", "s", "s"]
+            - ["t", "t", "t", "u", "u", "v"]
+            - ["v", "y", "å", "å", "ä", "ö"]
+kort:
+  listor:
+    - "Bokstäver att bygga med"
 lathund:
   innehall: En läslista i veckan
   metoden:
@@ -404,7 +428,7 @@ lathund:
             1 · Modellering
             0–2 min. Ljuda, bind ihop och läs ordet i normal takt.
           - |-
-            ”Lyssna när jag ljudar: sss-t-eee-nnn. Sten.”
+            ”Lyssna när jag ljudar: sss-⁠t-⁠eee-⁠nnn. Sten.”
             ”Här är det lätt att tappa ett ljud. Hör ni vilket?”
         - - |-
             2 · Körläsning
@@ -430,7 +454,7 @@ lathund:
     textRubrik: Gruppen · fyra elever, åk 1, Läslista 4
     utskrift: Skriv ut passexemplet
     text:
-      - "Läraren modellerar fem ord ur första kolumnen: ”sss-t-eee-nnn. Sten. Här är det lätt att tappa ett ljud. Hör ni vilket?” Eleverna lyssnar."
+      - "Läraren modellerar fem ord ur första kolumnen: ”sss-⁠t-⁠eee-⁠nnn. Sten. Här är det lätt att tappa ett ljud. Hör ni vilket?” Eleverna lyssnar."
       - Alla körläser kolumnen i lärarens tempo. Vid spik stannar kören. Läraren modellerar ordet igen, och de läser om kolumnen.
       - "Alva pekar för Omar, Hiba pekar för Leon. Leon läser ”sen”. Hiba ljudar med Leon, och läraren säger: ”Läs om hela ordet från början.” Till Omar: ”Du ljudade hela vägen fram till sista ljudet.” Paren byter roller."
       - "Läraren modellerar mötet i sten och spik. Sedan en lättläst bok om en hund som gräver i sanden: ”Vad tror ni att hunden letar efter?” Notering efteråt: Leon tappar t i st-orden, repetera i morgon."

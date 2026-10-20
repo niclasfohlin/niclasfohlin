@@ -1054,7 +1054,7 @@ ramar:
             - rubrik: "Uppgift 3 · Diktamen"
               text: "Du säger ordet, meningen och ordet igen, och eleven skriver ordet på bladet Diktamen. Orden och meningarna står i listan Uppgift 3 · Diktamen. Ett poäng för varje ord som är rätt stavat och ett för varje del som är rätt stavad, högst 8 för orden och 19 för delarna."
             - rubrik: "Uppgift 4 · Förklara orden"
-              text: "Du läser en fråga i taget, och eleven svarar muntligt. Skriv svaret ordagrant. Två poäng när eleven säger både delarna och betydelsen, och ett när eleven säger det ena, högst 8.\n”Vad kan en molnstövel vara? Hur vet du det?”\n”Vad kan ett bokregn vara? Hur vet du det?”\n”Vad kan osnöig betyda? Hur vet du det?”\n”Vad kan en läxrobot vara? Hur vet du det?”"
+              text: "Du läser en fråga i taget, och eleven svarar muntligt. Skriv svaret ordagrant i lärarens protokoll. Två poäng när eleven säger både delarna och betydelsen, och ett när eleven säger det ena, högst 8.\n”Vad kan en molnstövel vara? Hur vet du det?”\n”Vad kan ett bokregn vara? Hur vet du det?”\n”Vad kan osnöig betyda? Hur vet du det?”\n”Vad kan en läxrobot vara? Hur vet du det?”"
             - rubrik: "Uppgift 5 · Skriva en text"
               text: "Eleven skriver i tio minuter på tidningens sida om en sak som hen önskar fanns: vad den heter, vad som är jobbigt utan den och vad den gör. Räkna de långa orden, alltså ord med två eller fler delar, och skriv vilka som står isär eller saknar fogen. Skriv också vilka av början, mitten och slutet texten har. Eftersom gruppen skriver en sådan text i vecka 1, jämför du efter kursen främst de långa orden."
       listor:
@@ -1111,23 +1111,31 @@ ramar:
               text: Bladet har raderna för namn och datum och åtta numrerade rader, en för varje ord du säger.
     - rubrik: "Kartläggning: lärarens protokoll"
       text:
-        - Skriv poängen för varje uppgift och det eleven sa i uppgift 1 och 4. Efter kursen jämför du poängen och svaren med dem före kursen och skriver vad eleven behöver nu.
+        - Skriv poängen för varje uppgift, och i uppgift 4 också det eleven sa om varje ord. Felen i uppgift 1 skriver du på din kopia av ordlistan, så spara den med protokollet. Efter kursen jämför du poängen och svaren med dem före kursen och skriver vad eleven behöver nu.
       delar:
         - rubrik: Före kursen
           falt:
             - rubrik: Namn och datum
-            - rubrik: "Uppgift 1: rätt av 16, och det eleven sa"
+            - rubrik: "Uppgift 1: rätt av 16"
             - rubrik: "Uppgift 2: rätt av 8"
             - rubrik: "Uppgift 3: rätt stavade ord av 8, och delar av 19"
-            - rubrik: "Uppgift 4: poäng av 8, och det eleven sa"
+            - rubrik: "Uppgift 4: molnstövel"
+            - rubrik: "Uppgift 4: bokregn"
+            - rubrik: "Uppgift 4: osnöig"
+            - rubrik: "Uppgift 4: läxrobot"
+            - rubrik: "Uppgift 4: poäng av 8"
             - rubrik: "Uppgift 5: långa ord, de som står isär eller saknar fog, och början, mitten och slut"
         - rubrik: Efter kursen
           falt:
             - rubrik: Namn och datum
-            - rubrik: "Uppgift 1: rätt av 16, och det eleven sa"
+            - rubrik: "Uppgift 1: rätt av 16"
             - rubrik: "Uppgift 2: rätt av 8"
             - rubrik: "Uppgift 3: rätt stavade ord av 8, och delar av 19"
-            - rubrik: "Uppgift 4: poäng av 8, och det eleven sa"
+            - rubrik: "Uppgift 4: molnstövel"
+            - rubrik: "Uppgift 4: bokregn"
+            - rubrik: "Uppgift 4: osnöig"
+            - rubrik: "Uppgift 4: läxrobot"
+            - rubrik: "Uppgift 4: poäng av 8"
             - rubrik: "Uppgift 5: långa ord, de som står isär eller saknar fog, och början, mitten och slut"
             - rubrik: Vad eleven behöver nu
     # ---------------------------------------------------------------- Protokollet

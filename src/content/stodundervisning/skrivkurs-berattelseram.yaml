@@ -28,7 +28,7 @@ material:
   - blädderblock
   - skylt och diplom
   - häftapparat
-uppdaterad: 2026-10-19
+uppdaterad: 2026-10-20
 relaterade:
   - skrivkurs-vardeskapande
   - skrivkurs-sagoboken
@@ -325,7 +325,7 @@ grund:
 ramar:
   rubrik: Kursens material
   text:
-    - "Först kommer sidan för varje del, och direkt efter den det som hör till delen, som Två texter, strukturen, provläsningen och boksläppet. Sedan kommer det som används i hela kursen: återkopplingen, kortet, elevens blad och bokens sidor, ramens texter till eleverna, den korta berättelsen och brevet till läraren i den yngre klassen. Sist står berättelseramarna."
+    - "Först kommer sidan för varje del, och direkt efter den det som hör till delen, som skylten, Två texter, strukturen, provläsningen och boksläppet. Sedan kommer det som används i hela kursen: återkopplingen, kortet, elevens blad och bokens sidor, ramens texter till eleverna, den korta berättelsen och brevet till läraren i den yngre klassen. Sist står berättelseramarna."
     - "Det du kopierar före pass 1 står i listan Före kursen. Före pass 2 kopierar du sidan i Min bok, sex till varje elev, och några sidor med bara rader. När du häftar boken efter pass 14, lägger du dem efter delens första sida. Ge hellre eleven en sida till än att låta hen skriva trångt. Före pass 8 kopierar du bladet Provläsningen. Före pass 13 kopierar du omslaget på tjockt papper, två till varje elev. Av sidan Om författaren kopierar du ett blad per två elever och klipper det itu. Av Läsarnas sida kopierar du ett eller två blad per författare. Läsarnas sida står sist i båda exemplaren av boken, och barnen ritar i elevens exemplar."
   ramar:
     # ---------------------------------------------------------------- Delarna
@@ -425,6 +425,16 @@ ramar:
             - rubrik: Lägg märke till
               text: "Eleven som läser med inlevelse för barnet.\nEleven som säger vad hen gör nu som hen inte gjorde i pass 1."
     # ---------------------------------------------------------------- Delarnas material
+    - rubrik: "Skylten, start: Skriv en egen bok"
+      text:
+        - "Skylten presenterar kursen för eleverna, och du visar den igen i pass 1."
+      delar:
+        - rubrik: Till läraren
+          falt:
+            - rubrik: Så använder du den
+              text: "Sätt upp skylten i varje klass där du presenterar kursen, och visa diplomet bredvid. Säg: ”En skrivkurs där vi skriver en hel bok var.” Säg sedan att den som vill vara med pratar med dig efteråt, och fråga de elever du har valt i förväg en och en."
+            - rubrik: Skylten
+              text: "Skriv ditt namn och dagen då kursen börjar på skyltens två rader, i Word-filen före utskriften eller för hand efteråt. Skriv ut en skylt i färg till varje klass, gärna på A3."
     - rubrik: "Två texter, del 1: Amir på rasten"
       text:
         - "Läs båda texterna och prata om frågorna under."
@@ -1208,6 +1218,11 @@ pabordet:
     text: "Böckerna ligger öppna, och eleverna går ett varv och läser början på varandras delar. En stjärna i kanten visar var någon har lånat ett sätt."
     efter: "ram: Strukturen, del 1: Galleriet"
     fluent: ["oppen-bok", "stjärna", "pojke", "flicka-2", "flicka", "pojke-2"]
+  - nr: 10
+    rubrik: "Blad: Skylten"
+    text: "Skylten har ordet Skrivkursen överst och rubriken ”Skriv en egen bok”, en bild av en öppen bok och meningen ”En skrivkurs där vi skriver en hel bok var.” Sedan kommer tre rader med var sin bild: ”Boken skriver du till ett yngre barn.”, ”Vi träffas 15 gånger och skriver en del i taget.” och ”Sist läser du boken för barnet. Du får behålla den.” Nederst står ”Vill du vara med?” och två rader att skriva på, Prata med och Vi börjar."
+    efter: "ram: Skylten, start: Skriv en egen bok"
+    fluent: [oppen-bok, barn, skrivhand, present]
 lathund:
   innehall: En bok var, sex delar
   metoden:

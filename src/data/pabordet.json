@@ -17,7 +17,8 @@
     "15": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":190.2,"y":180,"b":409.8,"h":50,"lage":"nere"},{"namn":"Talet, uppgift 2","x":168,"y":813.6,"b":184,"h":62,"lage":"mitt","mitt":true}]},
     "16": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":190.2,"y":180,"b":409.8,"h":50,"lage":"nere"}]},
     "17": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":190.2,"y":180,"b":409.8,"h":50,"lage":"nere"}]},
-    "18": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":190.2,"y":180,"b":409.8,"h":50,"lage":"nere"}]}
+    "18": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":190.2,"y":180,"b":409.8,"h":50,"lage":"nere"}]},
+    "19": {"bredd":1050,"hojd":1485}
   },
   "faktatextsamtal-i-grupp": {
     "10": {"bredd":960,"hojd":236},
@@ -199,6 +200,9 @@
   "seriesamtal": {
     "1": {"bredd":1050,"hojd":1485},
     "2": {"bredd":1050,"hojd":1485}
+  },
+  "skrivkurs-berattelseram": {
+    "10": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Prata med","x":344.4,"y":1244,"b":535.6,"h":48,"lage":"nere"},{"namn":"Vi börjar","x":321.8,"y":1310,"b":558.2,"h":48,"lage":"nere"}]}
   },
   "textsamtal-i-grupp": {
     "1": {"bredd":1050,"hojd":1485},
