@@ -4073,6 +4073,7 @@ type Rakneblad = NonNullable<NonNullable<Ram['listor']>[number]['rakneblad']>;
 // skala (PaBordet.skala, mellan 0,5 och 1) ritar bilden smalare och mitt på raden, när den annars inte ryms på sidan med
 // texten den hör till (Kärnorna efter läspasset, under exemplet). Skalan gäller inte en bild vid en del.
 // utanRubrik: bilden som eleven ser på (PaBordet.elev) står på elevens blad utan rubriken På bordet, med bildtexten under.
+// En bild med eget textalternativ (alt, STIL.md under Bildtexter) har det som beskrivning, som på sidan (Pabordet.astro).
 const VECKOBILD_MINST = 0.85;
 const veckobildensHojd = (matt: PaBordet['matt'] = PABORDET_MATT) => Math.round((BREDD * matt.hojd) / matt.bredd);
 function pabordetBarn(b: PaBordet, maxHojd?: number, o: { utanRubrik?: boolean } = {}): Barn[] {
@@ -4084,7 +4085,7 @@ function pabordetBarn(b: PaBordet, maxHojd?: number, o: { utanRubrik?: boolean }
   const bredd = Math.round((hojd * b.matt.bredd) / b.matt.hojd);
   return [
     ...(vecka || o.utanRubrik ? [] : [stycke(`På bordet · ${b.bild.rubrik}`, { fet: true, farg: FARG.huvud, storlek: 22, fore: 200, efter: 60, hallIhop: true })]),
-    new Paragraph({ keepNext: true, alignment: bredd < rad ? AlignmentType.CENTER : undefined, spacing: { before: vecka ? 140 : o.utanRubrik ? 80 : 0, after: 60 }, children: [bildRun(b.adress, bredd, o.utanRubrik ? bildensAlt(b) : `På bordet: ${b.bild.rubrik}`, hojd)] }),
+    new Paragraph({ keepNext: true, alignment: bredd < rad ? AlignmentType.CENTER : undefined, spacing: { before: vecka ? 140 : o.utanRubrik ? 80 : 0, after: 60 }, children: [bildRun(b.adress, bredd, o.utanRubrik || b.bild.alt ? bildensAlt(b) : `På bordet: ${b.bild.rubrik}`, hojd)] }),
     new Paragraph({ spacing: { before: 0, after: vecka ? 0 : 160 }, children: [...(vecka ? [run('På bordet. ', { fet: true, storlek: 19 })] : []), run(b.bild.text, { storlek: 19 })] }),
   ];
 }

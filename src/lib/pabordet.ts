@@ -14,6 +14,7 @@
 //   skala  mellan 0,5 och 1: bilden ritas smalare och mitt på raden i Word, så att den ryms på sidan med sin text.
 import type { MetodData } from './metod';
 import { passar, tolkaEfter, type FilmPlats } from './film';
+import { bildtextFel as standardensBildtextFel } from './standard/index.js';
 import BILDDATA from '../data/pabordet.json';
 // Hur långt ned bladet är ritat, i bildens punkter (scripts/bladfot.mjs): bildblad i metoddocx.ts krymper ett blad som når upphovets rad.
 import BLADFOT from '../data/bladfot.json';
@@ -53,5 +54,11 @@ export const paBordetVid = (bilder: PaBordet[], plats: FilmPlats) => bilder.filt
 /** Bildens textalternativ: rubriken och alt, eller texten när bilden inte har alt (STIL.md under Bildtexter), med en punkt
  * efter rubriken bara när den inte redan slutar med ett skiljetecken (Berätta mera!). */
 export const bildensAlt = (b: PaBordet) => `På bordet: ${b.bild.rubrik}${/[.!?]$/.test(b.bild.rubrik) ? '' : '.'} ${b.bild.alt ?? b.bild.text}`;
+/** Bildtextens fel (STIL.md under Bildtexter, K-486), med standardens kontroll, som riggen kör före leveransen. Bilden
+ * här visas med bildtext (Pabordet.astro); ett blad har alltid textalternativ i alt. */
+export function bildtextFel(b: PaBordet): string | undefined {
+  const fel = standardensBildtextFel(b.bild, { blad: arBlad(b) });
+  return fel.length ? `Bilden På bordet ${b.bild.nr} ("${b.bild.rubrik}"): ${fel.join('; ')}. En bildtext är en till tre meningar och högst 250 tecken och säger det bilden inte kan berätta själv; det som syns i bilden står i alt (STIL.md under Bildtexter).` : undefined;
+}
 /** Bilden står efter en del i en ram (en vecka): utan egen rubrik, med "På bordet." först i bildtexten. */
 export const iDel = (b: PaBordet) => !!b.vid && 'del' in b.vid;

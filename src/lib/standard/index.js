@@ -453,7 +453,8 @@ export function bildtextFel(bild, { blad = false, visas = true } = {}) {
   if (t.length > BILDTEXT.tecken) fel.push(`bildtexten har ${t.length} tecken, högst ${BILDTEXT.tecken}`);
   const n = meningarI(t);
   if (n > BILDTEXT.meningar) fel.push(`bildtexten har ${n} meningar, högst ${BILDTEXT.meningar}`);
-  if (/^bild(en)?\b/i.test(t)) fel.push('bildtexten börjar med "Bilden"; säg direkt vad läraren tittar på');
+  // "Bilden visar" och "Här ser du" säger inget; "Bild A till Lika och olika" är bildens namn och får stå.
+  if (/^(bilden|här ser (du|vi))\b/i.test(t)) fel.push('bildtexten börjar med "Bilden" eller "Här ser du"; säg direkt vad läraren tittar på');
   if (blad && !String(bild.alt ?? '').trim()) fel.push('bladet har inget textalternativ i alt');
   return fel;
 }

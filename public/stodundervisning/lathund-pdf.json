@@ -1,7 +1,7 @@
 {
   "antalsuppfattning-i-grupp": {
-    "kalla": "7a8dfee7b285c001",
-    "pdf": "243f30fb8097924d",
+    "kalla": "d1cb849ab0f573f8",
+    "pdf": "77d7994c107d31d3",
     "datum": "2026-10-20"
   },
   "boksamtal-i-grupp": {
@@ -15,23 +15,23 @@
     "datum": "2026-10-19"
   },
   "faktatextsamtal-i-grupp": {
-    "kalla": "cff0faa36e84ef08",
-    "pdf": "2e937983179abd5a",
+    "kalla": "250ac061d4e0da98",
+    "pdf": "5745aa10d190caaa",
     "datum": "2026-10-20"
   },
   "laslistor-i-grupp": {
-    "kalla": "21d15f65d2eee225",
-    "pdf": "efb4f2d2d13565fc",
+    "kalla": "3f9d35c597980a95",
+    "pdf": "ed42029a03bc5d4e",
     "datum": "2026-10-20"
   },
   "problemlosning-i-grupp": {
-    "kalla": "b9ce11c0043a546b",
-    "pdf": "98894a38a5fa738c",
+    "kalla": "00e25efe850254dc",
+    "pdf": "bf13d8d0bf298c33",
     "datum": "2026-10-20"
   },
   "skrivkurs-berattelseram": {
-    "kalla": "0fa6c3bd05bb735b",
-    "pdf": "741ed24670edf07d",
+    "kalla": "39f0fde88683e8be",
+    "pdf": "d2840f0074d02f4d",
     "datum": "2026-10-20"
   },
   "skrivkurs-vardeskapande": {
@@ -45,18 +45,18 @@
     "datum": "2026-10-20"
   },
   "upprepad-lasning": {
-    "kalla": "786b4a5045c20f9c",
-    "pdf": "ede3cd7209443254",
+    "kalla": "175cd97ecc06b41f",
+    "pdf": "b3fa470714d54e51",
     "datum": "2026-10-20"
   },
   "ljudlek-i-grupp": {
-    "kalla": "135089cb5d180653",
-    "pdf": "15a26ed64355b174",
+    "kalla": "a64ee08336d36d42",
+    "pdf": "7a7299bf0ea39cfc",
     "datum": "2026-10-20"
   },
   "textsamtal-i-grupp": {
-    "kalla": "3fd3402c8351545c",
-    "pdf": "0475e9df50600dad",
+    "kalla": "a9a55a1344a5b4c3",
+    "pdf": "3b09f2e5d188e45d",
     "datum": "2026-10-20"
   },
   "skrivkurs-sagoboken": {
@@ -65,23 +65,23 @@
     "datum": "2026-10-19"
   },
   "kompissamtal": {
-    "kalla": "8ce0bbc11329bfa1",
-    "pdf": "f05ae83cfd39c9d1",
+    "kalla": "6a60cc86c5eb1433",
+    "pdf": "c7192a2da614b9c5",
     "datum": "2026-10-20"
   },
   "seriesamtal": {
-    "kalla": "c4c0b752b9e28aa8",
-    "pdf": "3b0d2fd26e66ccd0",
+    "kalla": "dbd5ac0e3ff4b1a2",
+    "pdf": "0d08618edfe2a523",
     "datum": "2026-10-20"
   },
   "fyra-raknesatten": {
-    "kalla": "78dd4a41e4061297",
-    "pdf": "06c3fcd427ebd6bc",
-    "datum": "2026-10-19"
+    "kalla": "f7d1fd9d0a6966ad",
+    "pdf": "67270dea1935cc9d",
+    "datum": "2026-10-20"
   },
   "ordverkstad-i-grupp": {
-    "kalla": "8afed5499fe3fffd",
-    "pdf": "5d9a276c71e0db0c",
+    "kalla": "58c27613abb8a047",
+    "pdf": "ffcab4ec06be3b86",
     "datum": "2026-10-20"
   },
   "texttyp-argumenterande-text": {
@@ -115,8 +115,8 @@
     "datum": "2026-10-19"
   },
   "gruppstarkande-aktiviteter": {
-    "kalla": "f6e2cfa3310fa498",
-    "pdf": "ae113f6f294f47b6",
+    "kalla": "fd9df46af1b864b1",
+    "pdf": "4af647f9b46eb9e2",
     "datum": "2026-10-20"
   },
   "sag-skriv-och-las": {
@@ -125,8 +125,8 @@
     "datum": "2026-10-20"
   },
   "hoglasning-i-par": {
-    "kalla": "966def25e19a25d1",
-    "pdf": "a20242744517fc36",
+    "kalla": "9658411a2a0363b9",
+    "pdf": "bc13128e2a8be203",
     "datum": "2026-10-20"
   }
 }

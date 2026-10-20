@@ -143,6 +143,7 @@ const bildfall = [
   [{ text: 'Ett A4 per elev, att klippa isär.', alt: 'Tjugofyra sifferkort.' }, { blad: true }, 0],
   [{ text: 'Ett A4 per elev, att klippa isär.' }, { blad: true }, 1],
   [{ text: 'Bilden visar bordet.' }, {}, 1],
+  [{ text: 'Bild A till Lika och olika. Klipp isär bild A och bild B.' }, {}, 0],
   [{ text: 'Ett. Två. Tre. Fyra.' }, {}, 1],
   [{ text: 'x'.repeat(251) }, {}, 1],
   [{ text: 'x'.repeat(400) }, { visas: false }, 0],

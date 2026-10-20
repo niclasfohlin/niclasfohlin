@@ -52,7 +52,7 @@ En bild på sajten har två texter med olika läsare (Niclas 2026-10-20: "Tror d
 
 Under sifferkorten står till exempel: ”Ett A4 per elev, att klippa isär. Eleverna lägger talet med korten under det de har byggt på mattan i vecka 2.”
 
-Bildtexten börjar inte med ”Bilden visar” och upprepar inte bildens rubrik. Citat ur bladet står inom citattecken. En bild utan egen bildtext, som en bild i en faktatext eller ett lösningsförslag, har bara textalternativet, eftersom texten runt bilden är dess bildtext. Vilket fält som är vilket står i METODER.md under Bladet.
+Bildtexten börjar inte med ”Bilden visar” och upprepar inte bildens rubrik. Citat ur bladet står inom citattecken. En bild utan egen bildtext, som en bild i en faktatext eller ett lösningsförslag, har bara textalternativet, eftersom texten runt bilden är dess bildtext. Vilket fält som är vilket står i METODER.md under Bladet. Bygget stannar på en bildtext som har fler än tre meningar eller fler än 250 tecken eller börjar med ”Bilden”, och på ett blad utan textalternativ, och metodriggen prövar samma sak före leveransen (`bildtextFel` i `src/lib/standard/`). Det bildtexten säger prövas i granskningen.
 
 ## Metodtexter
 

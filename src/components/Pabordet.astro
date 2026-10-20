@@ -16,14 +16,18 @@
 // ut alla ramens blad i en pdf (b.alla, bladgrupper), så att screeningens två sidor går att skriva ut dubbelsidigt; ett
 // blad med två sidor har bara den knappen, under den sista sidan. Länken runt bilden har bladets namn som namn, så att en
 // skärmläsare läser bladets text en gång, i bildtexten (granskningen i telefonbredd 2026-10-20). Knappen för Google
-// Formulär står efter bildtexten (METODER.md under Bladet).
-import { arBlad, arIfylltBlad, arStaendeBlad, bildensAlt, bladNamn, iDel, type PaBordet } from '../lib/pabordet';
+// Formulär står efter bildtexten (METODER.md under Bladet). En bild På bordet med eget textalternativ (alt, STIL.md under
+// Bildtexter) har det som bildens alt, som i Word; utan alt står bildtexten under bilden, och alt är bara rubriken.
+import { arBlad, arIfylltBlad, arStaendeBlad, bildensAlt, bildtextFel, bladNamn, iDel, type PaBordet } from '../lib/pabordet';
 import Filval from './Filval.astro';
 // utanRubrik: bladet står under sin egen rubrik på ramens sida ([id]/[enhet].astro), så namnet och ankaret står där.
 interface Props { b: PaBordet; utanRubrik?: boolean }
 const { b, utanRubrik = false } = Astro.props;
 const vecka = iDel(b);
 const blad = arBlad(b);
+// Bildtexten står här, under bilden, och bygget stannar när den bryter mot regeln (bildtextFel, STIL.md under Bildtexter).
+const bildtextensFel = bildtextFel(b);
+if (bildtextensFel) throw new Error(bildtextensFel);
 ---
 {blad ? (
   <figure class:list={['m-blad', { ifyllt: arIfylltBlad(b), staende: arStaendeBlad(b) }]} id={utanRubrik ? undefined : `blad-${b.bild.nr}`}>
@@ -47,7 +51,7 @@ const blad = arBlad(b);
 ) : (
   <figure class={`m-pabordet${vecka ? ' i-del' : ''}`}>
     {!vecka && <p class="m-pabordet-rubrik">På bordet · {b.bild.rubrik}</p>}
-    <a href={b.adress} class="bild-lank" title="Öppna bilden i full storlek"><img src={b.adress} alt={`På bordet: ${b.bild.rubrik}`} width={b.matt.bredd} height={b.matt.hojd} loading="lazy" decoding="async" data-utskriftsbild /></a>
+    <a href={b.adress} class="bild-lank" title="Öppna bilden i full storlek"><img src={b.adress} alt={b.bild.alt ? bildensAlt(b) : `På bordet: ${b.bild.rubrik}`} width={b.matt.bredd} height={b.matt.hojd} loading="lazy" decoding="async" data-utskriftsbild /></a>
     <figcaption>{vecka ? <><b>På bordet.</b>{' '}{b.bild.text}</> : b.bild.text}</figcaption>
   </figure>
 )}
