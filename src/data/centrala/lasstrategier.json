@@ -1,0 +1,143 @@
+{
+ "design": "strategipapper",
+ "fil": "Lasstrategier",
+ "titel": "Lässtrategier",
+ "undertitel": "Till läraren i den tidiga läsinlärningen",
+ "ruta": {
+  "punkter": [
+   {
+    "rubrik": "En strategi i taget",
+    "text": "Visa den och låt eleverna pröva. Gå vidare när du hör att de använder den själva."
+   },
+   {
+    "rubrik": "I liten grupp och i par",
+    "text": "Den ena läser. Den andra pekar, väntar och säger strategins namn."
+   },
+   {
+    "rubrik": "En text eleven klarar",
+    "text": "Nio ord av tio. Säg själv ord som ”jag” och ”de”, som inte låter som de stavas."
+   }
+  ]
+ },
+ "delar": [
+  {
+   "rubrik": "Ordet, meningen och rösten",
+   "text": "Rösten tar ni upp när eleven läser orden säkert.",
+   "grupper": [
+    6,
+    2,
+    3
+   ],
+   "kolumner": [
+    "Strategin",
+    "Så låter det",
+    "Så säger du"
+   ],
+   "bredder": [
+    25,
+    27,
+    48
+   ],
+   "rader": [
+    [
+     "Läs hela ordet",
+     "Gissar: ”stora” för ”stranden”.",
+     "”Jag täcker bilden och för fingret under ordet. Läs hela ordet.”"
+    ],
+    [
+     "Säg ljuden utan paus",
+     "Pausar: ”t … a … k … ka?”",
+     "”Jag drar ut ljuden: sss-⁠ooo-⁠lll, sol. T och k säger jag kort: taaak, tak.”"
+    ],
+    [
+     "Två bokstäver, ett ljud\nng, sj, ck och tt",
+     "Ljudar n och g var för sig i ”säng”.",
+     "”N och g säger ett ljud: säng. Ringa in dem.”"
+    ],
+    [
+     "Låter det som ett ord?",
+     "Ljudar ihop till ”huuund”.",
+     "”Låter det som ett ord? Pröva ett kort u: hund.” Känner eleven inte ordet, säg vad det betyder."
+    ],
+    [
+     "Dela ordet",
+     "Ljudar sandslott ljud för ljud och tappar ordet.",
+     "”Jag läser en del i taget: sand, slott, sandslott. Nu du.”"
+    ],
+    [
+     "Hitta ordet i ordet\nstam och ändelse",
+     "Tappar ändelsen: ”hund” för ”hundarna”.",
+     "”Vilket ord känner du igen? Läs sedan slutet och sätt ihop.”"
+    ],
+    [
+     "Stämde det?",
+     "Läser vidare fast det blev fel: ”på stanna”.",
+     "Vänta tills meningen är slut. ”Stämde det? Läs igen och titta på varje bokstav.”"
+    ],
+    [
+     "Läs om meningen",
+     "Har ljudat länge och tappat tråden.",
+     "”Nu har du läst ordet. Läs meningen från början. Vad stod det?”"
+    ],
+    [
+     "Stanna vid punkten",
+     "Läser förbi punkten: ”Ola ser solen solen är rund.”",
+     "”Vid punkten stannar jag och andas: Ola ser solen. Solen är rund.”"
+    ],
+    [
+     "Läs som när du pratar",
+     "Läser ord för ord: ”Sam. Sover. På. En. Stol.”",
+     "”Lyssna och härma: Sam sover på en stol. Ord som hör ihop läser vi i ett svep.”"
+    ],
+    [
+     "Läs med inlevelse",
+     "Läser repliker och frågor platt.",
+     "”Hur låter Lisa när hon ropar? Kom hit! Vid ett frågetecken låter rösten som en fråga.”"
+    ]
+   ]
+  },
+  {
+   "rubrik": "Förstår eleven vad texten säger?",
+   "text": "Fråga när sidan är läst, också när du läser högt.",
+   "kolumner": [
+    "Strategin",
+    "Så märker du det",
+    "Så gör och säger du"
+   ],
+   "bredder": [
+    25,
+    27,
+    48
+   ],
+   "rader": [
+    [
+     "Säg vad som hände",
+     "Kan inte berätta med egna ord, eller räknar upp allt och missar det viktiga.",
+     "Låt eleven berätta för kamraten vad som hände först och sedan."
+    ],
+    [
+     "Visa vem som gör vad",
+     "Blandar ihop vem som gör vad, eller vem ”hon” är.",
+     "Låt eleven visa med figurer eller kroppen, sedan rita och sist se det framför sig."
+    ],
+    [
+     "Går det ihop?",
+     "Läser vidare i samma takt förbi något som inte går ihop.",
+     "Läs två meningar som inte går ihop, och låt eleverna säga stopp. ”Gå tillbaka och leta.”"
+    ],
+    [
+     "Vad betyder ordet?",
+     "Säger inget om ord hen inte förstår.",
+     "”Vilka ord är nya?” Säg vad ordet betyder och läs om meningen."
+    ],
+    [
+     "Hur vet du det?",
+     "Svarar ur bilden eller det hen redan vet.",
+     "”Hur vet du det? Visa orden i texten.” Täck ibland bilden tills ni har pratat."
+    ]
+   ],
+   "not": "Förstår eleven inte när du läser högt, sitter svårigheten i språket och orden."
+  }
+ ],
+ "kalla": "© Niclas Fohlin, niclasfohlin.se. Bygger på Upprepad läsning och TIL i grupp, och på bland andra Lärportalen, IES (2010 och 2016) och National Reading Panel (2000)."
+}

@@ -8,7 +8,8 @@ import {
   Paragraph, type Run, ShadingType, Tab, Table, TableCell, TableLayoutType, TableRow, TabStopType, TextRun, TextWrappingType, UnderlineType, VerticalAlign, VerticalPositionRelativeFrom, WidthType,
   type IBorderOptions, type IFloating, type IParagraphOptions, type IRunOptions, type ISectionOptions,
 } from 'docx';
-import { centralaVid, lasbarAdress, type Textplats } from './centrala';
+import { centralaVid, lasbarAdress, metodensCentrala, type Textplats } from './centrala';
+import { centraltPapper } from './centraladata';
 import { lektionskortVid, metodensLektionskort, type Lektionskort } from './lektionskort';
 import { papperFot, papperPunkt, papperSidor, PAPPER_MARGINALER, PAPPER_SIDA, type Papper } from './strategipapper';
 import { delensAdress, hanvisningsdelar, type Del } from './boklankar';
@@ -578,7 +579,7 @@ function gorUndvik(gor: string[], undvik: string[]): Barn[] {
 const BOCK = '□';
 const bockRun = (storlek: number) => run(BOCK, { font: 'Arial', farg: FARG.huvud, storlek });
 function bockRad(text: string, o: StyckeVal = {}): Paragraph {
-  return new Paragraph({ children: [bockRun(o.storlek ?? 22), run(` ${text}`, { storlek: 20, ...o })], spacing: { after: 0 } });
+  return new Paragraph({ children: [bockRun(o.storlek ?? 22), run(` ${text}`, { storlek: 20, ...o })], spacing: { after: 0 }, keepNext: o.hallIhop });
 }
 // Bockar i en eller två kolumner: målen och checklistan.
 function bockar(punkter: string[], kolumner: 1 | 2, o: { hojd?: number } = {}): Barn[] {
@@ -589,7 +590,10 @@ function bockar(punkter: string[], kolumner: 1 | 2, o: { hojd?: number } = {}): 
     const celler = [];
     for (let k = 0; k < kolumner; k++) {
       const p = punkter[i + k];
-      celler.push(cell(p === undefined ? [] : [bockRad(p)], { bredd: bredder[k], fyll: Math.floor(i / kolumner) % 2 === 1 ? FARG.rand : undefined, mitt: true }));
+      // Raderna hålls ihop, utom den sista med det som följer, så att listan inte delas mellan två sidor, som hos riggen
+      // (granskningen av snabbmallen 2026-10-20: checklistan började under bladet och delades i 13 metoder).
+      const sista = i + kolumner >= punkter.length;
+      celler.push(cell(p === undefined ? [stycke('', { efter: 0, hallIhop: !sista })] : [bockRad(p, { hallIhop: !sista })], { bredd: bredder[k], fyll: Math.floor(i / kolumner) % 2 === 1 ? FARG.rand : undefined, mitt: true }));
     }
     rader.push(rad(celler, { hojd: o.hojd }));
   }
@@ -628,7 +632,7 @@ function snabbmallTabell(titel: string, fore: string[], efter: string[], o: { sk
 // överst och en rad per pass med Före, Efter och Nästa gång, den andra de tre sakerna som ska med, med en ruta per pass att
 // kryssa, och den tredje två rutor sist. Allt hålls ihop, så att bladet står på en sida (riggens sidprov, 2026-10-20: 56–82
 // pt luft under sista raden i alla 22 metoder) och flyttar som en helhet till nästa sida när det inte ryms där det står.
-// Rutan att kryssa är □, som i checklistorna.
+// Rutan att kryssa är checklistornas (bockRun, Arial i 13 punkter).
 function snabbvecka(titel: string, sm: Snabbmall): Barn[] {
   const n = sm.pass;
   const b1 = [11, 29, 40].map((x) => Math.round((x / 100) * BREDD));
@@ -657,7 +661,7 @@ function snabbvecka(titel: string, sm: Snabbmall): Barn[] {
   const ska = tabell([
     rad([band(SNABB.ska, n + 1, SNABB.skaHjalp)]),
     rad([cell([fet(SNABB.pass)], { bredd: b2[0], fyll: FARG.rand }), ...Array.from({ length: n }, (_, i) => cell([fet(String(i + 1))], { bredd: bPass, fyll: FARG.rand }))]),
-    ...sm.ska.map((t) => rad([cell([stycke(t, { storlek: 20, efter: 0, hallIhop: true })], { bredd: b2[0] }), ...Array.from({ length: n }, () => cell([stycke('□', { storlek: 22, farg: FARG.huvud, efter: 0, hallIhop: true })], { bredd: bPass }))])),
+    ...sm.ska.map((t) => rad([cell([stycke(t, { storlek: 20, efter: 0, hallIhop: true })], { bredd: b2[0] }), ...Array.from({ length: n }, () => cell([new Paragraph({ keepNext: true, spacing: { after: 0 }, children: [bockRun(26)] })], { bredd: bPass }))])),
   ], b2);
   const halv = Math.round(BREDD / 2);
   const sist = tabell([
@@ -2014,6 +2018,11 @@ const googleklar = (t: Table) => { GOOGLEKLARA.add(t); return t; };
 function lektionskortFlod(k: Lektionskort): Flod {
   const papper = RESURSER.lektionskort?.get(k.stam);
   if (!papper) throw new Error(`Word-filen saknar lektionskortet ${k.stam} (src/data/lektionskort/${k.stam}.json), som src/lib/metodresurser.ts läser vid bygget och sidan hämtar ur metoder.json.`);
+  return papperFlod(papper);
+}
+// Ett papper ur metodriggen, ett lektionskort eller ett stödmaterial: varje sida i en egen sektion med papperets
+// marginaler och sidfot (K-488).
+function papperFlod(papper: Papper): Flod {
   const ut: Flod = [];
   for (const sida of papperSidor(papper)) {
     for (const x of sida) if (x instanceof Table) googleklar(x);
@@ -3526,7 +3535,7 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
   ];
   if (d.snabbmall && !o.bank) {
     sidor.push([
-      ...under('Snabbmall'),
+      ...under(d.snabbmall.rubrik),
       ...(d.snabbmall.text ? [stycke(d.snabbmall.text, { hallIhop: true })] : []),
       ...snabbvecka(d.titel, d.snabbmall),
     ]);
@@ -4992,6 +5001,14 @@ export function metodDokument(poster: MetodPostISerie[], o: { bas: string; medMa
     if (o.medMallar) {
       for (const sida of mallBarn(post, o.bas, { baraTommaRamar: true })) sektioner.push(...delaSektioner(sida.barn, `Mall · ${post.data.titel} · ${SAJT}`, adress, { liggande: sida.liggande, smal: sida.liggande }));
       for (const sida of medBredd(BREDD_LATHUND, () => lathundBarn(post))) sektioner.push(sektion(sida, `Lathund · ${post.data.titel} · ${SAJT}`, `${adress}/lathund`, { lathund: true }));
+      // Stödmaterialen sist (K-488; Niclas 2026-10-20: "De tre (och kommande sådda) stödmaterial läggs på slutet"): varje
+      // central sak som är en pdf och som metoden har (sådden, src/data/sadd.json och fältet centrala), ritad ur riggens
+      // papper.json, som materialets egen fil. Saknas innehållet stannar bygget.
+      for (const c of metodensCentrala(post.data).filter((x) => x.slag === 'pdf')) {
+        const papper = centraltPapper(c.id);
+        if (!papper) throw new Error(`${post.data.titel}: stödmaterialet ${c.namn} saknar sitt innehåll, src/data/centrala/${c.id}.json. Lägg in riggens papper.json med node scripts/centraladata.mjs (METODER.md under De centrala sakerna).`);
+        sektioner.push(...delaSektioner(papperFlod(papper), '', ''));
+      }
     }
   }
   return dokument(poster.length === 1 ? poster[0].data.titel : 'Metoder för stödundervisning', sektioner, typsnittFor(poster));
@@ -5148,6 +5165,15 @@ export function hemsidaDokument(post: MetodPost, vad: 'kontrakt' | 'schema', o: 
 // Lektionskorten för sig (src/lib/lektionskort.ts): ett kort, <stam>.docx, vars pdf är det knappen öppnar, eller alla
 // korten i en serie i lektionsbankens ordning (<serie>-alla-lektionskort.docx). Sidorna är kortets egna, som i Materialet,
 // och dokumentets titel är kortets ("Ljudlek: Rim · Lektionskort"), så att pdf:en bär den.
+// Ett stödmaterial ensamt (K-488): materialets egen fil, ur samma papper som sidan sist i filen med allt.
+export function stodmaterialDokument(id: string): Document {
+  instans = 0;
+  FRISTAENDE_BLAD = false;
+  RESURSER = { bilder: new Map() };
+  const papper = centraltPapper(id);
+  if (!papper) throw new Error(`Stödmaterialet ${id} saknar sitt innehåll, src/data/centrala/${id}.json.`);
+  return dokument(papper.titel ?? id, delaSektioner(papperFlod(papper), '', ''));
+}
 export function lektionskortDokument(kort: Lektionskort[], o: { titel?: string; resurser?: MetodResurser }): Document {
   instans = 0;
   FRISTAENDE_BLAD = false;
@@ -5167,9 +5193,11 @@ export function snabbmallDokument(post: MetodPost, o: { bas: string; resurser?: 
   RESURSER = o.resurser ?? { bilder: new Map() };
   if (!post.data.snabbmall) throw new Error(`${post.data.titel} har ingen snabbmall.`);
   const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
-  const sida = mallBarn(post, o.bas)[0];
+  // Raden om figurernas upphov bara där det finns figurer, och inga inbäddade typsnitt: bladet har Calibri och Arial
+  // (granskningen 2026-10-20: 240 kB och en upphovsrad om figurer som bladet inte har).
+  const sida = mallBarn(post, o.bas, { figurradVidFigur: true })[0];
   const sektioner = delaSektioner(sida.barn, `Mall · ${post.data.titel} · ${SAJT}`, adress, {});
-  return dokument(`Snabbmall · ${post.data.titel}`, sektioner, typsnittFor([post]));
+  return dokument(`${post.data.snabbmall.rubrik} · ${post.data.titel}`, sektioner);
 }
 export function mallDokument(post: MetodPost, o: { bas: string; resurser?: MetodResurser }): Document {
   instans = 0;

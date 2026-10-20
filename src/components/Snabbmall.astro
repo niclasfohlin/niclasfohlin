@@ -24,7 +24,7 @@ const veckor = sm.period === 'veckan' ? [] : [sm.period === 'två veckor' ? 'och
   </div>
   <p class="m-snabb-avsnitt">{SNABB.passen}</p>
   <ul class="m-snabb-kol">
-    <li><span><span class="rubrik">{SNABB.pass}</span> <span class="tal">{spann} <span class="m-snabb-hjalp">{SNABB.datum}</span></span></span><span class="rad" aria-hidden="true">{spann} <span class="m-snabb-hjalp">{SNABB.datum}</span></span></li>
+    <li><span><span class="rubrik">{SNABB.pass}</span> <span class="tal">{spann} <span class="m-snabb-hjalp">{SNABB.datum}</span></span></span><span class="rad">{spann} <span class="m-snabb-hjalp">{SNABB.datum}</span></span></li>
     <li><span><span class="rubrik">Före: {sm.fore}</span>{sm.foreHjalp && <> <span class="m-snabb-hjalp fore-hjalp">{sm.foreHjalp}</span></>}</span><span class="rad" aria-hidden="true"></span></li>
     <li><span><span class="rubrik">Efter: {sm.efter}</span></span><span class="rad" aria-hidden="true"></span></li>
     <li><span><span class="rubrik">{SNABB.nasta}</span></span><span class="rad" aria-hidden="true"></span></li>
@@ -41,6 +41,6 @@ const veckor = sm.period === 'veckan' ? [] : [sm.period === 'två veckor' ? 'och
 </div>
 {sm.not && <p class="m-snabb-not">{sm.not}</p>}
 <p class="m-blad-filer">
-  <a class="knapp sekundar liten" href={`/stodundervisning/${namn}.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="1" data-goatcounter-click={`utskrift:${namn}`} data-goatcounter-title={`${titel}: Snabbmall, bladet`}><span data-direkt="Skriv ut bladet">Bladet som pdf</span><span class="visually-hidden">: Snabbmall</span></a>
-  <Filval fil={`/stodundervisning/${namn}`} namn={namn} rubrik="Snabbmallen" statistik={`${titel}: Snabbmall`} liten />
+  <a class="knapp sekundar liten" href={`/stodundervisning/${namn}.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="1" data-goatcounter-click={`utskrift:${namn}`} data-goatcounter-title={`${titel}: ${sm.rubrik}, bladet`}><span data-direkt="Skriv ut bladet">Bladet som pdf</span><span class="visually-hidden">: {sm.rubrik}</span></a>
+  <Filval fil={`/stodundervisning/${namn}`} namn={namn} rubrik={sm.rubrik} statistik={`${titel}: ${sm.rubrik}`} liten />
 </p>

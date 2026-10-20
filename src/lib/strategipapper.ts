@@ -98,7 +98,8 @@ function runs(text: string, base: RunVal, lankar = true): (TextRun | ExternalHyp
   });
 }
 type PO = { before?: number; after?: number; line?: number; keepNext?: boolean; size?: number; color?: string; italics?: boolean; bold?: boolean };
-const p = (text: string, o: PO = {}) => new Paragraph({ spacing: { before: o.before ?? 0, after: o.after ?? 0, line: o.line ?? 240 }, keepNext: o.keepNext, run: MARKE, children: runs(text, { font: FONT, size: o.size ?? 19, color: o.color ?? INK, italics: o.italics, bold: o.bold }) });
+// lankar: false för papperets egen titel, som annars blev en länk till sig själv när den är ett stödmaterials namn (K-488).
+const p = (text: string, o: PO & { lankar?: boolean } = {}) => new Paragraph({ spacing: { before: o.before ?? 0, after: o.after ?? 0, line: o.line ?? 240 }, keepNext: o.keepNext, run: MARKE, children: runs(text, { font: FONT, size: o.size ?? 19, color: o.color ?? INK, italics: o.italics, bold: o.bold }, o.lankar !== false) });
 
 const kant = (color = LINE, size = 4): IBorderOptions => ({ style: BorderStyle.SINGLE, size, color });
 const INGEN: IBorderOptions = { style: BorderStyle.NONE, size: 0, color: VIT };
@@ -193,8 +194,8 @@ function huvud(s: PapperSida): Table {
 
 const sida = (s: PapperSida): Barn[] => [
   ...(s.info || s.knapp ? [huvud(s), luft(80)] : [
-    ...(s.titel ? [p(s.titel, { bold: true, color: NAVY, size: 44, after: 0 })] : []),
-    ...(s.undertitel ? [p(s.undertitel, { color: GREY, size: 19, after: s.ingress ? 50 : 110 })] : []),
+    ...(s.titel ? [p(s.titel, { bold: true, color: NAVY, size: 44, after: 0, lankar: false })] : []),
+    ...(s.undertitel ? [p(s.undertitel, { color: GREY, size: 19, after: s.ingress ? 50 : 110, lankar: false })] : []),
   ]),
   ...(s.ingress ? [p(s.ingress, { size: 21, after: 110 })] : []),
   ...(s.ruta ? [kort(s.ruta.punkter, s.ruta.storlek)] : []),

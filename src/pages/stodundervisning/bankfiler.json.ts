@@ -1,6 +1,8 @@
 import type { APIRoute } from 'astro';
 import { matteproblemenPaSidan, publicerade } from '../../lib/innehall';
 import { DATABAS, matteproblemfiler } from '../../lib/matteproblem';
+import { centralaMedPapper } from '../../lib/centraladata';
+import { centralAv } from '../../lib/centrala';
 import { arBladsida, bankAv, bankfiler, bankfilensRamar } from '../../lib/bank';
 import { medDatabaserna } from '../../lib/faktateman';
 import { bokhandledningen, bokhandledningensFil, handledningensFil, lararhandledningar } from '../../lib/handledning';
@@ -64,7 +66,7 @@ export const GET: APIRoute = async () => {
     nivans.push(...egnaBlad(m.data, m.id).map((b) => ({ metod: m.id, namn: b.namn, rubrik: `Blad: ${b.titel}`, slag: 'blad', minst: 1, hogst: 1, ramar: [] as number[], oversikter: [] as number[] })));
     nivans.push(...bladgrupper(m.data, m.id).map((g) => ({ metod: m.id, namn: g.namn, rubrik: `Bladen: ${g.titel}`, slag: 'blad', minst: g.blad.length, hogst: g.blad.length, ramar: [] as number[], oversikter: [] as number[] })));
     // Snabbmallen ensam, en sida (K-487, snabbmallDokument).
-    if (m.data.snabbmall) nivans.push({ metod: m.id, namn: `${m.id}-snabbmall`, rubrik: 'Snabbmall', slag: 'blad', minst: 1, hogst: 1, ramar: [] as number[], oversikter: [] as number[] });
+    if (m.data.snabbmall) nivans.push({ metod: m.id, namn: `${m.id}-snabbmall`, rubrik: m.data.snabbmall.rubrik, slag: 'blad', minst: 1, hogst: 1, ramar: [] as number[], oversikter: [] as number[] });
     if (ovrigt) nivans.push({ metod: m.id, namn: ovrigt.namn, rubrik: ovrigt.rubrik, slag: 'ovrigt', minst: ovrigt.minst, hogst: ovrigt.hogst, ramar: ovrigt.ramar, oversikter: [] });
     const skrivkort = skrivkortAv(m.id);
     if (skrivkort) nivans.push(...skrivkort.nivaer.map((n) => { const antal = skrivkort.kort.filter((k) => k.niva === n.namn).length; return { metod: m.id, namn: nivafilNamn(m.id, n.namn), rubrik: `Skrivkort: ${n.namn}`, slag: 'skrivkort', minst: antal, hogst: antal, ramar: [] as number[], oversikter: [] as number[] }; }));
@@ -100,5 +102,7 @@ export const GET: APIRoute = async () => {
       return { metod: m.id, namn: f.namn, rubrik: f.rubrik, minst: ramar.reduce((s, ri) => s + sidor(ri)[0], 0), hogst: ramar.reduce((s, ri) => s + sidor(ri)[1], 0), ramar, oversikter: ramar.filter((ri) => b.oversikter.has(ri)), ...(b.databas ? { databas: true } : {}) };
     })];
   });
-  return new Response(JSON.stringify([...filer, ...matteproblemens], null, 1), { headers: { 'Content-Type': 'application/json; charset=utf-8' } });
+  // Stödmaterialen (K-488): ett A4 var, ur riggens papper.json.
+  const stodmaterialen = centralaMedPapper().map((id) => ({ metod: id, namn: id, rubrik: centralAv(id)?.namn ?? id, slag: 'stodmaterial', minst: 1, hogst: 1, ramar: [] as number[], oversikter: [] as number[] }));
+  return new Response(JSON.stringify([...filer, ...matteproblemens, ...stodmaterialen], null, 1), { headers: { 'Content-Type': 'application/json; charset=utf-8' } });
 };

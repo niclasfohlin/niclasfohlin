@@ -723,16 +723,28 @@ function ritaLathund(m: CollectionEntry<'stodundervisning'>, bas: string, format
     else { rect(s, 0, 0.66, W, 0.02, INK); top = 0.68; }
     rect(s, 6.94, top, 0.02, BOTTEN - top, INK);
     label(s, b.kallorRubrik, 0.46, top + 0.16, 6.3);
-    let y = top + 0.45;
-    const kh = b.kallor.map((k) => Math.max(0.42, estH(k, 6.2, 12.25, 0.08)));
-    b.kallor.forEach((k, i) => { txt(s, rich(k), 0.46, y, 6.2, kh[i], { size: 12.25 }); y += kh[i] + 0.06; });
-    if (b.kallorEfter) { const eh = estH(b.kallorEfter, 6.2, 11.5, 0.08); txt(s, b.kallorEfter, 0.46, y, 6.2, eh, { size: 11.5, color: GREY }); y += eh + 0.06; }
     const rowsN = Math.ceil(b.bord.length / 2);
-    const bordY = Math.max(y + 0.15, BOTTEN - (0.5 + rowsN * 0.55)), bordH = BOTTEN - bordY, rh = Math.min(0.55, (bordH - 0.5) / rowsN);
-    if (y + 0.15 > bordY + 0.01) varna('bild 4: källorna är många eller långa, rutan "På bordet" trängs');
     // Raderna i rutan (korta saker, en rad var) får inte stå tätare än 0,9 gånger teckengraden, bokstävernas egen
-    // höjd, annars skriver de över varandra och rutans kant. Räknat på sidan, i graden som används.
-    const radEm = (rh * sy * 72) / (12 * grad);
+    // höjd, annars skriver de över varandra och rutans kant. Räknat på sidan, i graden som används. Trängs rutan av
+    // texten ovanför krymps den texten ett steg i taget, tills raderna ryms (Bråkkurs i grupp: raderna skrev över
+    // varandra, granskningen 2026-10-20, K-487); först när inget steg räcker kommer varningen.
+    const lagg = (ks: number, es: number) => {
+      let yy = top + 0.45;
+      const kh = b.kallor.map((k) => Math.max(0.42, estH(k, 6.2, ks, 0.08)));
+      yy += kh.reduce((a, h) => a + h + 0.06, 0);
+      const eh = b.kallorEfter ? estH(b.kallorEfter, 6.2, es, 0.08) : 0;
+      if (b.kallorEfter) yy += eh + 0.06;
+      const bordY = Math.max(yy + 0.15, BOTTEN - (0.5 + rowsN * 0.55));
+      const rh = Math.min(0.55, (BOTTEN - bordY - 0.5) / rowsN);
+      return { ks, es, kh, eh, yy, bordY, rh, radEm: (rh * sy * 72) / (12 * grad) };
+    };
+    const forslag = [[12.25, 11.5], [11.75, 11], [11.25, 10.5], [10.75, 10]].map(([ks, es]) => lagg(ks, es));
+    const val = forslag.find((f) => f.radEm >= 0.9) ?? forslag[forslag.length - 1];
+    let y = top + 0.45;
+    b.kallor.forEach((k, i) => { txt(s, rich(k), 0.46, y, 6.2, val.kh[i], { size: val.ks }); y += val.kh[i] + 0.06; });
+    if (b.kallorEfter) { txt(s, b.kallorEfter, 0.46, y, 6.2, val.eh, { size: val.es, color: GREY }); y += val.eh + 0.06; }
+    const bordY = val.bordY, bordH = BOTTEN - bordY, rh = val.rh, radEm = val.radEm;
+    if (y + 0.15 > bordY + 0.01) varna('bild 4: källorna är många eller långa, rutan "På bordet" trängs');
     if (radEm < 0.9) varna(`bild 4: raderna i rutan "På bordet" står för tätt (${radEm.toFixed(2)} gånger teckengraden, minst 0,9): färre eller kortare källor eller rader på bordet`);
     darkBox(s, 'PÅ BORDET NÄR PASSET BÖRJAR', 0.46, bordY, 6.17, bordH);
     b.bord.forEach((t, i) => txt(s, t, 0.61 + (i % 2) * 3.03, bordY + 0.46 + Math.floor(i / 2) * rh, 2.95, rh, { size: 12 }));

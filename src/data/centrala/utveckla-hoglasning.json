@@ -1,0 +1,123 @@
+{
+ "design": "strategipapper",
+ "fil": "Utveckla hoglasning",
+ "titel": "Utveckla högläsning",
+ "undertitel": "Till läraren när eleverna läser högt, F–9",
+ "ruta": {
+  "punkter": [
+   {
+    "rubrik": "Innehållet först",
+    "text": "Ställ en fråga om texten, och arbeta sedan med rösten. Rösten ska föra fram det texten säger."
+   },
+   {
+    "rubrik": "En strategi i taget",
+    "text": "Läs utan och med den, och tänk högt om varför. Eleverna läser efter dig."
+   },
+   {
+    "rubrik": "En lyssnare som svarar",
+    "text": "Alla läser i lugn takt för en kamrat, utan klocka och turläsning."
+   }
+  ]
+ },
+ "delar": [
+  {
+   "rubrik": "De fem strategierna",
+   "text": "Ta dem i ordning, i en text som eleven läser säkert. För ordet och meningen finns Lässtrategier.",
+   "kolumner": [
+    "Strategin och tecknet",
+    "Så låter det utan",
+    "Så visar och säger du"
+   ],
+   "bredder": [
+    27,
+    27,
+    46
+   ],
+   "namnrad": 19,
+   "rader": [
+    [
+     "1 · Tankepausen\n/ kort, där en ny tanke börjar\n// lång, vid punkten och före det spännande",
+     "Ord för ord, en paus inne i en fras eller vid radslutet i en berättelse, eller en lång paus vid varje komma.",
+     "Läs ”Hunden med pinnen i munnen satt på trappan” först med en paus efter pinnen och sedan efter munnen. ”Var börjar en ny tanke? Där pausar jag och andas, så att du hinner tänka.”"
+    ],
+    [
+     "2 · Frågan och utropet\nen ring runt ? och !",
+     "Alla meningar låter likadant, eller rösten går upp i slutet av varje fråga.",
+     "Läs ”Mamma kommer.” ”Kommer mamma?” ”Mamma kommer!” och fråga vad som skiljer. ”Titta på tecknet i slutet innan du läser.”"
+    ],
+    [
+     "3 · Repliken\nen ruta runt det som sägs",
+     "Repliken och ”sa hon” i samma ton.",
+     "Läs en replik med två känslor. ”Vilken passar texten? Var pratar hon, och var berättar jag?”"
+    ],
+    [
+     "4 · Det viktiga ordet\nett streck under",
+     "Alla ord lika starka, eller betoning som inte passar det eleven vill säga.",
+     "Första gången: betona olika ord i ”Det var inte min cykel” och fråga hur betydelsen ändras. Fråga sedan i texten: ”Vilket ord är viktigast här?”"
+    ],
+    [
+     "5 · Lyssnarens takt\n~ långsamt vid det viktiga",
+     "Fort och med tappade ord, för tyst, eller med blicken bara i texten.",
+     "Läs för fort och sedan i lyssnarens takt. ”Hänger du med? Jag tittar upp vid en lång paus.”"
+    ]
+   ],
+   "not": "En svensk fråga börjar ofta på en lite högre ton och faller mot slutet, så säg ”läs så att det låter som en fråga”. I en dikt pausar du kort vid radslutet och längre vid en tom rad."
+  },
+  {
+   "rubrik": "Innehållet och lyssnaren",
+   "text": "Välj en strategi och en fråga till varje pass. Lyssnaren svarar på båda.",
+   "grupper": [
+    4,
+    3
+   ],
+   "kolumner": [
+    "Det du gör",
+    "Så märker du att det behövs",
+    "Så säger du"
+   ],
+   "bredder": [
+    27,
+    27,
+    46
+   ],
+   "rader": [
+    [
+     "En fråga om förståelsen",
+     "Eleven läser rätt men kan inte säga vad texten handlar om.",
+     "”Vad händer här? Hur känns det för honom nu?” Paren pratar en halv minut innan någon svarar högt."
+    ],
+    [
+     "En fråga om texten och jag",
+     "Texten berör inte eleven, och läsningen blir platt.",
+     "”Har du varit med om något liknande? Vad hade du gjort?”"
+    ],
+    [
+     "En fråga om texten och världen",
+     "Eleven ser inte vad texten har med världen att göra.",
+     "Om en berättelse: ”Kan det här hända på riktigt?” Om en nyhet: ”Varför tror du att det står i tidningen?”"
+    ],
+    [
+     "Ett ord i marginalen",
+     "Tecknen kommer före innehållet.",
+     "”Skriv ett ord om vad som händer eller hur det känns. Sedan sätter du tecknet på två eller tre ställen.”"
+    ],
+    [
+     "Lyssnarens två meningar",
+     "Lyssnaren säger bara ”Bra!”",
+     "Be om ”Jag förstod att …” och ”Jag hörde att du …”, med ett ställe: ”Jag hörde att du pausade före ’plötsligt’.”"
+    ],
+    [
+     "Din återkoppling",
+     "Rösten blir en uppvisning eller en tävling i fart.",
+     "Sätt ihop innehållet och rösten: ”Jag förstod att hon var rädd, för att du viskade.”"
+    ],
+    [
+     "Utan tecken",
+     "Tecknen blir en regel som eleven följer.",
+     "”Läs nästa del utan tecken. Gör rösten det ändå?”"
+    ]
+   ]
+  }
+ ],
+ "kalla": "© Niclas Fohlin, niclasfohlin.se. Bygger på Högläsning i par och Fohlin och Wilson, Läs! (2025), och på bland andra Godde m.fl. (2020), Wolters m.fl. (2022), Miller och Schwanenflugel (2008), Kuhn och Stahl (2003), Rasinski (2004), Horne och Roll (2021) och Skolverkets Lärportalen."
+}

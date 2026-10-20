@@ -1,0 +1,138 @@
+{
+ "design": "strategipapper",
+ "fil": "Skrivstrategier",
+ "titel": "Skrivstrategier",
+ "undertitel": "Till läraren som undervisar i skrivande, F–9",
+ "ruta": {
+  "punkter": [
+   {
+    "rubrik": "En strategi i taget",
+    "text": "Visa den när du skriver och tänker högt. Gå vidare när eleven använder den själv."
+   },
+   {
+    "rubrik": "Säg det först",
+    "text": "Eleven säger meningen eller berättar texten innan hen skriver."
+   },
+   {
+    "rubrik": "En läsare som svarar",
+    "text": "Någon läser texten och säger vad hen förstod och vad hen undrar."
+   }
+  ]
+ },
+ "delar": [
+  {
+   "rubrik": "Ordet och meningen",
+   "text": "För den som fastnar på orden, i alla årskurser. Säg först det som stämmer.",
+   "kolumner": [
+    "Strategin",
+    "Så märker du det",
+    "Så gör och säger du"
+   ],
+   "bredder": [
+    25,
+    27,
+    48
+   ],
+   "rader": [
+    [
+     "Säg meningen igen",
+     "Tappar meningen medan hen skriver, eller har bara ett ord: ”Hunden.”",
+     "”Vad gjorde hunden? Säg hela meningen och säg den igen. Hur många ord?” Ett finger på pappret efter varje ord blir mellanrummet."
+    ],
+    [
+     "Säg ordet långsamt",
+     "Hoppar över ljud: ”mr” för ”mor”, ”tol” för ”stol”.",
+     "”Säg det långsamt. Vad hör du först? Och sedan? Sist?”"
+    ],
+    [
+     "Skriv det du hör",
+     "Vågar inte skriva: ”Hur stavas det?”",
+     "”Skriv det du hör. Sedan tittar vi på hur det stavas.”"
+    ],
+    [
+     "Ord som inte låter som de står",
+     "Skriver ”åk” för ”och”, ”ja” för ”jag”.",
+     "Visa ordet. ”Vad låter inte som det står? Täck över, skriv och jämför.”"
+    ],
+    [
+     "Dela ordet\nlånga ord",
+     "Skriver ”cykel hjälm”, eller tappar en del.",
+     "”Säg ordet. Hur många delar? Skriv en del i taget. Står ordet ihop?”"
+    ],
+    [
+     "Läs från början",
+     "Skriver orden ihop: ”Olaler”, eller läser det hen ville skriva.",
+     "”Läs med fingret under. Hur många ord? Står allt med? Var slutar meningen?” Säg inte själv vad som fattas."
+    ]
+   ],
+   "not": "Tar bokstäverna all kraft i en längre text, får eleven diktera för dig eller använda tal till text, utom när ni övar ljudandet."
+  },
+  {
+   "rubrik": "Texten och läsaren",
+   "text": "Före, under och efter skrivandet, själv eller med dig. Stavningen tar ni när texten är klar.",
+   "grupper": [
+    4,
+    2,
+    3
+   ],
+   "kolumner": [
+    "Strategin",
+    "Så märker du det",
+    "Så gör och säger du"
+   ],
+   "bredder": [
+    25,
+    27,
+    48
+   ],
+   "rader": [
+    [
+     "Vem läser?",
+     "Frågar hur långt det ska vara, eller vad du vill ha.",
+     "”Vem läser? Vad behöver hen veta?” Texten blir så lång som läsaren behöver."
+    ],
+    [
+     "Berätta först",
+     "Har pennan i handen men ingen tanke.",
+     "Låt eleven berätta för en kamrat. ”Bra. Skriv det du just sa.”"
+    ],
+    [
+     "Gör en plan",
+     "Börjar direkt och skriver ned det hen kommer på.",
+     "Låt eleven skriva fler lappar än hen behöver och lägga en åt sidan. ”Behöver läsaren det här?”"
+    ],
+    [
+     "Låna ett drag",
+     "Skriver likadant varje gång, eller lånar kamratens händelse.",
+     "”Vad gör författaren här? Vad kallar vi det? Samma sätt, ditt eget innehåll.”"
+    ],
+    [
+     "Skriv vidare",
+     "Skriver en rad och blir sittande.",
+     "”Läs din sista mening. Vad kommer sedan?” Lär eleven att ställa frågan själv."
+    ],
+    [
+     "Markera och skriv vidare",
+     "Stannar vid varje svårt ord och tappar tråden.",
+     "”Dra en prickad linje under ordet och skriv vidare. Vi tar det när texten är klar.”"
+    ],
+    [
+     "Pröva på en läsare",
+     "Märker inte vad som saknas, eller får bara ”Bra!”",
+     "Låt kamraten läsa eller göra det som står och säga: ”Här var jag med. Nu undrar jag …”"
+    ],
+    [
+     "Ändra en sak",
+     "Rättar bara stavningen när texten ska bearbetas.",
+     "”Var undrade läsaren? Lägg till eller ändra där, och säg varför.”"
+    ],
+    [
+     "Vad tar jag med mig?",
+     "Glömmer läsarens svar till nästa text.",
+     "Låt eleven skriva en rad om vad hen tar med sig och läsa den som sitt mål före nästa text."
+    ]
+   ]
+  }
+ ],
+ "kalla": "© Niclas Fohlin, niclasfohlin.se. Bygger på Niclas Fohlins skrivmetoder och Fohlin och Wilson, Skriv! (utkommer 2027), och på bland andra Lärportalen, Skolforskningsinstitutet (2024), IES (2012 och 2016) och Graham och Perin (2007)."
+}

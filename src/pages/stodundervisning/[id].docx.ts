@@ -2,7 +2,8 @@ import type { APIRoute, GetStaticPaths } from 'astro';
 import { packaWord } from '../../lib/wordpaket';
 import { matteproblemenPaSidan, publicerade } from '../../lib/innehall';
 import { matteproblemfiler, type Matteproblemfil } from '../../lib/matteproblem';
-import { bankDokument, bladDokument, hemsidaDokument, lektionskortDokument, matteproblemDokument, metodDokument, passDokument, ramarDokument, DOCX_TYP } from '../../lib/metoddocx';
+import { centralaMedPapper } from '../../lib/centraladata';
+import { bankDokument, bladDokument, hemsidaDokument, lektionskortDokument, matteproblemDokument, metodDokument, passDokument, ramarDokument, stodmaterialDokument, DOCX_TYP } from '../../lib/metoddocx';
 import { byggSerier, serieKoppling } from '../../lib/serie';
 import { bankAv, bankfiler } from '../../lib/bank';
 import { medDatabaserna } from '../../lib/faktateman';
@@ -53,7 +54,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const serier = byggSerier(metoder);
   // Lektionernas kort i lektionsbankens ordning, per serie.
   const korten = (serie: string): Lektionskort[] => (serier.get(serie)?.lektioner ?? []).flatMap((l) => { const lektion = metoder.find((x) => x.id === l.id); return lektion ? metodensLektionskort(lektion.data, lektion.id) : []; });
-  return [...matteproblemens, ...metoder.flatMap((m) => {
+  // Stödmaterialen (K-488): /stodundervisning/<id>.docx för varje central sak som är en pdf, som lasstrategier.
+  const stodmaterialen = centralaMedPapper().map((id) => ({ params: { id }, props: { stodmaterial: id } }));
+  return [...stodmaterialen, ...matteproblemens, ...metoder.flatMap((m) => {
     const md = medDatabasen.get(m.id)!;
     const bank = bankAv(m.data);
     const databasen = md === m ? null : bankAv(md.data);
@@ -84,6 +87,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const GET: APIRoute = async ({ props }) => {
+  if (props.stodmaterial) {
+    const fil = await packaWord(await medReservbilder(() => stodmaterialDokument(props.stodmaterial as string)), 'nodebuffer');
+    return new Response(new Uint8Array(fil), { headers: { 'Content-Type': DOCX_TYP } });
+  }
   const resurser = lasResurser([props.m]);
   const bankfil = props.bankfil as { niva?: string; medFoljesidor: boolean | 'bara'; rubrik: string } | undefined;
   const bank = bankfil ? bankAv(props.m.data) : null;
