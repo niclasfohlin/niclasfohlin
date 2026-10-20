@@ -24,7 +24,7 @@ material:
   - elevens skrivbok
   - miniwhiteboard
   - skrivkort Bas
-uppdaterad: "2026-10-18"
+uppdaterad: 2026-10-20
 publicerad: "2026-10-17"
 relaterade:
   - "ljudlek-i-grupp"
@@ -110,7 +110,7 @@ exempel:
     - "Efteråt noterar läraren: Hugo tappar t i konsonantmöten, och Ella glömmer mellanrummet före ”och”. Nästa pass stannar gruppen i samma steg, och i Startorden bygger alla två ord med konsonantmöte."
 fastnar:
   rubrik: "När eleven fastnar"
-  text: "Vänta tre sekunder och ge minsta möjliga stöd först. Fastnar flera på samma ljud, säg ordet i kör och ta ord med det ljudet i Startorden nästa pass."
+  text: "Vänta tre sekunder och ge minsta möjliga stöd först. Fastnar flera på samma ljud, säg ordet i kör och ta ord med det ljudet i Startorden nästa pass. Lässtrategier är ett A4 på metodens sida med strategierna för ordet och meningen, som du har nytta av i Min mening, när grannen läser elevens mening högt."
   fragaForst:
     - "Vad hör du?"
   trappaText: "Gå uppför stödtrappan i stunden. Ge inte nästa stöd förrän eleven har prövat det förra:"
@@ -587,6 +587,8 @@ centrala:
     efterText: urval
   - id: skrivstrategier
     efterText: "tabell: Lyssna efter"
+  - id: lasstrategier
+    efterText: fastnar
 lektionskort:
   - efter: tidsschema
     text: "Lektionskortet är passet på ett A4 med två sidor: målet, orden, passet med det du gör och säger, det du gör när eleven fastnar och på baksidan meningarna att säga. Ha det framför dig under passet."

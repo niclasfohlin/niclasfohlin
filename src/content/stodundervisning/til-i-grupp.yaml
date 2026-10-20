@@ -22,7 +22,7 @@ material:
   - lässchema
   - böcker på rätt nivå
   - snabbmall och kontrakt
-uppdaterad: 2026-10-18
+uppdaterad: 2026-10-20
 relaterade:
   - laslistor-i-grupp
   - upprepad-lasning
@@ -32,6 +32,8 @@ utkast: false
 centrala:
   - id: lasstrategier
     efterText: fastnar
+  - id: utveckla-hoglasning
+    efterText: hem
 inledning:
   - Det här är ett körschema för en lärarledd insats i liten grupp för elever som behöver stöd i avkodning och läsflyt. Insatsen är tidsbegränsad, riktad och har tät uppföljning. Varje pass är 20 minuter i skolan och följer samma rutin. Samma dag läser eleven boken en gång till hemma tillsammans med en vuxen och skriver tre favoritmeningar. Det är den dubbla läsningen, i skolan och hemma, som gör metoden intensiv. Börja med rutinen och tidsschemat nedan. Forskningsgrunden finns kort sammanfattad sist.
 upplagg:
@@ -183,7 +185,7 @@ urval:
       text: Meningar som eleven kan vilja skriva av och läsa upp
 hem:
   text:
-    - "Insatsen bygger på att boken läses en gång till hemma. Boka därför ett kort möte med vårdnadshavarna innan ni börjar. Visa mappen, lässchemat och skrivboken, förklara varför boken ska läsas två gånger och visa hur den vuxne bekräftar läsningen med sina initialer. Säg också hur den vuxne kan hjälpa till vid svåra ord: vänta, ljuda tillsammans, läs meningen om. Kontraktet sammanfattar vad var och en ansvarar för, och lässchemat följer med i mappen. Båda står i Materialet, på varsitt A4 att skriva ut till varje elev. Om läsningen hemma uteblir flera dagar i rad: ring hem tidigt, innan rutinen hunnit brytas."
+    - "Insatsen bygger på att boken läses en gång till hemma. Boka därför ett kort möte med vårdnadshavarna innan ni börjar. Visa mappen, lässchemat och skrivboken, förklara varför boken ska läsas två gånger och visa hur den vuxne bekräftar läsningen med sina initialer. Säg också hur den vuxne kan hjälpa till vid svåra ord: vänta, ljuda tillsammans, läs meningen om. Kontraktet sammanfattar vad var och en ansvarar för, och lässchemat följer med i mappen. Båda står i Materialet, på varsitt A4 att skriva ut till varje elev. Om läsningen hemma uteblir flera dagar i rad: ring hem tidigt, innan rutinen hunnit brytas. Eleven läser för andra varje dag, favoritmeningarna för gruppen och boken för en vuxen hemma. Utveckla högläsning är ett A4 på metodens sida med fem strategier för att läsa högt så att den som lyssnar förstår, och du kan visa en av dem på mötet med vårdnadshavarna."
   kontrakt:
     rubrik: Kontrakt för TIL (Tidig Intensiv Läsning)
     inledning: "TIL är en insats som stärker elevens läsning genom att samma bok läses två gånger samma dag: i skolan med läraren och hemma med en vuxen. Insatsen pågår vanligtvis fyra dagar i veckan i sex till tio veckor. I elevens plastmapp finns skrivbok, lässchema och dagens text, och mappen följer med hem varje dag."

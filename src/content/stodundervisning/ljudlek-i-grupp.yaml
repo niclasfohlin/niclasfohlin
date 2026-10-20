@@ -23,7 +23,7 @@ material:
   - lektionens material
   - snabbmallen
   - kartläggningen
-uppdaterad: 2026-10-17
+uppdaterad: 2026-10-20
 relaterade:
   - laslistor-i-grupp
   - til-i-grupp
@@ -62,6 +62,32 @@ lektionsbank:
       namn: "Läsa och skriva meningar"
       skal: "Sist i banken. Eleven läser och skriver ord i korta meningar, också ord som ingen har sagt högt först, och med meningarna tar hen steget till att läsa och skriva själv."
   not: "Att sätta ihop och dela upp tränar ni redan i varje ljudstart. I åk 1–⁠2 börjar gruppen oftast i förmåga 3 eller senare och lägger mer tid på förmåga 7 och 8. Varje lektion säger när gruppen går vidare, och då tar gruppen nästa förmåga där fler än hälften inte klarar uppgiften. Har förmågan flera lektioner kan gruppen ta dem efter varandra. Ljudkollen var tredje vecka visar samma sak, uppgift för uppgift. Säger den något annat än lektionens regel, går du efter ljudkollen. Den som redan är säker blir den säkrare i paret och får ord ur nästa ordgrupp. Den som inte klarar uppgifter före gruppens förmåga får ord ur en lättare ordgrupp, blir dagens elev oftare och sitter med en säker kamrat."
+pabordet:
+  - nr: 1
+    rubrik: "Blad: Screeningen, version A, sida 1"
+    text: "Sidan 1 av elevens blad till screeningen före insatsen ligger på bordet framför eleven. Nivå 3 har bokstäverna o, n, s, r, m, e, l och de stora L, N, O, S, E, M, R, var och en i en ruta. Nivå 4 har orden sol, mor, sal, ram och ser, vart och ett i en ruta. Nivå 5 har meningarna ”Jag ser en sol”, ”En man ser en ros” och ”Rosen är röd”, och nivå 6 har texten ”Eva har en fin penna. Pennan är röd. Eva ritar en hund.”"
+    efter: "ram: Screeningen, version A"
+  - nr: 2
+    rubrik: "Blad: Screeningen, version A, sida 2"
+    text: "Sidan 2 av elevens blad till screeningen före insatsen har texterna i nivå 7 och 8. Nivå 7 har texten: Lina ser en flicka. Hon sitter ensam. Flickan ser ner i sanden. Hon ritar med sin fot. Lina går fram och ler. ”Hej”, säger Lina. Hon frågar vad flickan heter. ”Sara”, säger flickan. Sara blir glad och ler. När klockan ringer går de in tillsammans. Nivå 8 har texten: Ola står på skolgården. Han vet att bästa vännen Max är sjuk i dag. ”Vem ska jag leka med på rasten nu?” tänker Ola, och ser sig om. Vid gungan står två tjejer och viskar. De har ett nytt spel. Ola går långsamt fram. Han känner hur det pirrar i magen, men säger ändå: ”Får jag vara med och spela?” Tjejerna ser på varandra och svarar: ”Självklart, kom och lek med oss!”"
+    efter: "ram: Screeningen, version A"
+  - nr: 3
+    rubrik: "Blad: Screeningen, version B, sida 1"
+    text: "Sidan 1 av elevens blad till screeningen efter insatsen ligger på bordet framför eleven. Nivå 3 har bokstäverna m, e, r, l, o, s, n och de stora R, O, M, N, L, S, E, var och en i en ruta. Nivå 4 har orden nos, ris, ren, val och fil, vart och ett i en ruta. Nivå 5 har meningarna ”Hon har en bok”, ”Vi ser en bil” och ”Valen har en nos”, och nivå 6 har texten ”Alma har en gul bok. Boken är om en myra. Alma läser i boken.”"
+    efter: "ram: Screeningen, version B"
+  - nr: 4
+    rubrik: "Blad: Screeningen, version B, sida 2"
+    text: "Sidan 2 av elevens blad till screeningen efter insatsen har texterna i nivå 7 och 8. Nivå 7 har texten: Noah sitter i matsalen. Han äter sin mat. Mitt emot sitter en pojke. Han har en bricka utan mat. Noah ger pojken sin smörgås. ”Jag är mätt”, säger Noah. ”Tack”, säger pojken. Han ler lite. Pojken tar smörgåsen och börjar äta. Ingen vuxen såg något. Nu delar de på maten. Nivå 8 har texten: Stefan står vid kanten av fotbollsplanen på skolgården. Han har fotbollsförbud i dag. I går hade han skrikit och spelat för hårt. Han sparkar i gruset så att små stenar skjuter iväg. Han tittar argt på de andra som spelar och har kul. När en kille tappar bollen ropar Stefan: ”Dålig passning!” fast han vet att han inte ska skrika så. Killen på planen vänder sig om, men säger inget. Stefan suckar djupt. Han känner hur det sticker i magen."
+    efter: "ram: Screeningen, version B"
+  - nr: 5
+    rubrik: "Blad: Ljudkollen"
+    text: "Elevens blad till ljudkollen har en rad för namnet överst. Uppgift 4 har de tio första bokstäverna i två rader (m, a, s, e, l, i, r, o, v och n) och fler bokstäver i två rader (k, u, f, ä, b, t, j, å, g, y, d, ö, h och p), var och en i en ruta som är stor nog att ringa in. Uppgift 9 har de påhittade orden fål, rel, nar och mel, vart och ett i en ruta."
+    efter: "ram: Ljudkollen, elevens blad"
+  - nr: 6
+    rubrik: "Blad: Bokstavskartan"
+    text: "Bokstavskartan har alfabetet på ett A4, och varje bokstav utom q, w och x har en bild och ordet under: Aa apa, Bb buss, Cc citron, Dd dörr, Ee ekorre, Ff fisk, Gg gurka, Hh hus, Ii is, Jj jordgubbe, Kk ko, Ll lejon, Mm myra, Nn nyckel, Oo orm, Pp paraply, Qq som k, Rr räv, Ss sol, Tt tiger, Uu uggla, Vv våffla, Ww som v, Xx som ks, Yy yxa, Zz zebra, Åå åsna, Ää äpple, Öö öga."
+    efter: "ram: Bokstavskartan"
+    fluent: [apa, buss, citron, dörr, ekorre, fisk, gurka, hus, is, jordgubbe, ko, lejon, myra, nyckel, orm, paraply, räv, sol, tiger, uggla, våffla, yxa, zebra, åsna, äpple, öga]
 inledning:
   - "Ljudlek i grupp är för elever i förskoleklass till årskurs 2 som behöver stöd i att höra ljuden i orden och koppla dem till bokstäverna. Det märks när eleven säger ess om första ljudet i sol, gissar ett ord efter första bokstaven eller tvekar om sol och sko börjar med samma ljud."
   - "Så här lär sig eleven läsa och skriva. Att läsa är att se bokstäverna i ordning, säga ljudet för varje bokstav och sätta ihop ljuden till ett ord: sss-⁠ooo-⁠lll, sol. Att skriva är samma sak åt andra hållet: eleven säger ordet långsamt, hör ljuden ett i taget och skriver en bokstav för varje ljud. Eleven behöver alltså tre saker: höra ljuden i orden, kunna bokstävernas ljud, och kunna sätta ihop ljud och dela upp ord. Har eleven ljudat ett ord några gånger känner hen igen det direkt, och då går läsningen fort."
@@ -420,183 +446,117 @@ ramar:
             - [ä, ö, j]
     - rubrik: Bokstavskartan
       text:
-        - "Här är alfabetet med en bild för varje bokstav, och ordet till bilden börjar på bokstavens ljud. Kartan är till den som behöver stöd att minnas bokstävernas ljud, och i en del lektioner till alla."
+        - "Här är alfabetet med en bild för varje bokstav utom q, w och x, och ordet till bilden börjar på bokstavens ljud. Kartan är till den som behöver stöd att minnas bokstävernas ljud, och i en del lektioner till alla."
       delar:
         - rubrik: Till läraren
           falt:
             - rubrik: Så gör du
               text: "Skriv ut kartan i färg och laminera den. Lägg den framför den elev som behöver den, eller sätt upp den där gruppen sitter, och säg vad bilderna heter i kör första gången. Peka på bokstaven och bilden och säg ljudet: ”a, som i apa. Aaa.” Q, w och x har ingen bild, eftersom inga vanliga ord börjar på dem. Bilderna ger samma första ljud också om eleven säger kossa eller isbit, och åsnan kallar ni åsna, varje gång. Säg vokalens långa ljud när ni pekar, ooo och uuu, också när ordet på bilden har kort vokal, som orm, uggla, yxa och äpple."
-      listor:
-        - rubrik: Bokstavskarta
-          rader:
-            - [a apa, b buss, c citron, d dörr, e ekorre]
-            - [f fisk, g gurka, h hus, i is, j jordgubbe]
-            - [k ko, l lejon, m myra, n nyckel, o orm]
-            - [p paraply, q som k, r räv, s sol, t tiger]
-            - [u uggla, v våffla, w som v, x som ks, y yxa]
-            - [z zebra, å åsna, ä äpple, ö öga, ""]
     - rubrik: "Screeningen, version A"
       text:
-        - "Elevens blad till screeningen före insatsen har två sidor. Eleven läser nivå 3–⁠8 från bladet, och nivå 1 och 2 säger du. Frågorna i nivå 6–⁠8 läser du upp."
+        - "Elevens blad till screeningen före insatsen har två sidor. Nivå 1 och 2 säger du, och nivå 3–⁠8 läser eleven från bladet. Här står det du säger och frågar på varje nivå, och gränsen för att gå vidare."
       delar:
         - rubrik: Till läraren
           falt:
             - rubrik: Så gör du
-              text: "Sitt med en elev i taget, utanför passen. Börja på nivå 1 och fortsätt så länge eleven klarar nivån. Skriv resultatet för varje nivå i protokollet, antal rätt eller antal fel som gränsen säger, och ringa in den högsta nivån eleven klarar. Klarar eleven inte nivå 1, skriv 0. Från nivå 5 räknar du läsfel: ett ord som eleven läser fel, hoppar över, lägger till eller får hjälp med. Ett ord som eleven rättar själv är inget fel. Säger eleven bokstavens namn eller lägger till ett ö, fråga: ”Hur låter det?” Räkna svaret som rätt om eleven då säger ljudet, och kryssa felet under Fel att lyssna efter."
-            - rubrik: Nivå 1
-              text: "Säg: ”sol, skola, sten, sko”. Fråga: ”Vilket ljud börjar orden på?” Svaret är /s/. Säg sedan ”lek, lada, lera, lamm”. Svaret är /l/. Eleven ska säga ljudet, inte bokstavens namn."
-            - rubrik: Nivå 2
-              text: "Säg ljuden i ett ord i taget, med en kort paus mellan ljuden: /s/ /o/ /l/ (sol), /m/ /o/ /s/ (mos), /s/ /a/ /l/ (sal). Fråga: ”Vilket ord blir det?” Säg ljuden, inte bokstävernas namn. Pausen hör till screeningen: den prövar om eleven får ihop ljud som kommer ett i taget."
-            - rubrik: "Nivå 6–⁠8"
-              text: "Eleven läser högt, och sedan läser du frågorna. Texten ligger kvar framför eleven. Skriv antal läsfel och antal rätta svar, till exempel 1 och 2 av 2. Ett svar är rätt när det stämmer med texten. När frågan säger ”tror du”, räcker ett rimligt svar ur texten."
-      listor:
-        - rubrik: "Nivå 3: Säg hur bokstaven låter"
-          rader:
-            - - o
-              - n
-              - s
-              - r
-              - m
-              - e
-              - l
-        - rubrik: "Nivå 3: Säg hur den stora bokstaven låter"
-          rader:
-            - - L
-              - N
-              - O
-              - S
-              - E
-              - M
-              - R
-        - rubrik: "Nivå 4: Läs orden"
-          rader:
-            - - sol
-              - mor
-              - sal
-              - ram
-              - ser
-        - rubrik: "Nivå 5: Läs meningarna"
-          rader:
-            - - Jag ser en sol.
-            - - En man ser en ros.
-            - - Rosen är röd.
-        - rubrik: "Nivå 6: Läs meningarna och svara på frågorna"
-          rader:
-            - ["Eva har en fin penna.", "Vad har Eva?"]
-            - ["Pennan är röd.", "Vad ritade Eva?"]
-            - ["Eva ritar en hund.", ""]
-        - rubrik: "Nivå 7: Läs meningarna och svara på frågorna"
-          rader:
-            - ["Lina ser en flicka. Hon sitter ensam.", "Var är de någonstans?"]
-            - ["Flickan ser ner i sanden. Hon ritar med sin fot.", "Varför tror du att Lina gick fram till flickan?"]
-            - ["Lina går fram och ler. ”Hej”, säger Lina. Hon frågar vad flickan heter.", "Varför går de in tillsammans, tror du?"]
-            - ["”Sara”, säger flickan. Sara blir glad och ler.", ""]
-            - ["När klockan ringer går de in tillsammans.", ""]
-        - rubrik: "Nivå 8: Läs meningarna och svara på frågorna"
-          rader:
-            - ["Ola står på skolgården. Han vet att bästa vännen Max är sjuk i dag.", "Varför hade Ola ingen att leka med?"]
-            - ["”Vem ska jag leka med på rasten nu?” tänker Ola, och ser sig om.", "Varför pirrade det i Olas mage, tror du?"]
-            - ["Vid gungan står två tjejer och viskar. De har ett nytt spel.", ""]
-            - ["Ola går långsamt fram. Han känner hur det pirrar i magen, men säger ändå: ”Får jag vara med och spela?”", ""]
-            - ["Tjejerna ser på varandra och svarar: ”Självklart, kom och lek med oss!”", ""]
+              text: "Sitt med en elev i taget, utanför passen. Börja på nivå 1 och fortsätt så länge eleven klarar gränsen. Skriv resultatet för varje nivå i protokollets kolumn Före, antal rätt eller antal fel som gränsen säger, och ringa in den högsta nivån eleven klarar. Klarar eleven inte nivå 1, skriver du antal rätt på raden och ringar inte in någon nivå. Säger eleven bokstavens namn eller lägger till ett ö, fråga: ”Hur låter det?” Räkna svaret som rätt om eleven då säger ljudet. Kryssa felet, och de andra felen du hör, under Fel att lyssna efter."
+            - rubrik: Läsfel och frågor
+              text: "Från nivå 5 räknar du läsfel: ett ord som eleven läser fel, hoppar över, lägger till eller får hjälp med. Ett ord som eleven rättar själv är inget fel. I nivå 6–⁠8 läser eleven högt, och sedan läser du frågorna medan texten ligger kvar. Skriv antal läsfel och antal rätta svar, till exempel 1 fel och 2 av 2 rätt. Ett svar är rätt när det stämmer med texten, och när frågan säger ”tror du” räcker ett rimligt svar ur texten."
+            - rubrik: Bladet
+              text: "Skriv ut bladet dubbelsidigt, med nivå 3–⁠6 på framsidan och nivå 7–⁠8 på baksidan, och laminera det. Lägg bladet framför eleven och peka på en nivå i taget. Täck gärna nivåerna längre ned med ett papper."
+        - rubrik: Nivå för nivå
+          falt:
+            - rubrik: "Nivå 1 · Första ljudet"
+              text: "Säg: ”sol, skola, sten, sko”. Fråga: ”Vilket ljud börjar orden på?” Svaret är /s/. Säg sedan ”lek, lada, lera, lamm”. Svaret är /l/. Eleven säger ljudet, inte bokstavens namn. Gränsen: 2 av 2."
+            - rubrik: "Nivå 2 · Sätta ihop"
+              text: "Säg ljuden i ett ord i taget, med en kort paus mellan ljuden: /s/ /o/ /l/ (sol), /m/ /o/ /s/ (mos), /s/ /a/ /l/ (sal). Fråga efter varje ord: ”Vilket ord blir det?” Säg ljuden, inte bokstävernas namn. Pausen hör till screeningen: den prövar om eleven får ihop ljud som kommer ett i taget. Gränsen: 2 av 3."
+            - rubrik: "Nivå 3 · Bokstavens ljud"
+              text: "Peka på en bokstav i taget, först de sju små och sedan de sju stora. Eleven säger ljudet. Gränsen: 12 av 14."
+            - rubrik: "Nivå 4 · Läsa ord"
+              text: "Eleven läser orden sol, mor, sal, ram och ser. Gränsen: 4 av 5."
+            - rubrik: "Nivå 5 · Läsa meningar"
+              text: "Eleven läser de tre meningarna högt. Gränsen: högst ett fel sammanlagt."
+            - rubrik: "Nivå 6 · Läsa och svara"
+              text: "Eleven läser texten om Eva högt. Fråga sedan: ”Vad har Eva?” ”Vad ritade Eva?” Gränsen: högst ett fel och frågorna rätt."
+            - rubrik: "Nivå 7 · Läsa en kort text"
+              text: "Vänd bladet. Eleven läser texten om Lina högt. Fråga sedan: ”Varför tror du att Lina gick fram till flickan?” ”Varför går de in tillsammans, tror du?” Gränsen: högst två fel och frågorna rätt."
+            - rubrik: "Nivå 8 · Läsa en längre text"
+              text: "Eleven läser texten om Ola högt. Fråga sedan: ”Varför hade Ola ingen att leka med?” ”Varför pirrade det i Olas mage, tror du?” Gränsen: högst tre fel och frågorna rätt."
     - rubrik: "Screeningen, version B"
       text:
-        - "Elevens blad till screeningen efter insatsen har samma uppställning som version A men andra ord och texter, och bokstäverna står i en annan ordning, så att du kan jämföra före och efter."
+        - "Elevens blad till screeningen efter insatsen har samma uppställning som version A, så att du kan jämföra, men andra ord och texter, så att eleven inte känner igen dem. Här står det du säger och frågar på varje nivå, och gränsen för att gå vidare."
       delar:
         - rubrik: Till läraren
           falt:
             - rubrik: Så gör du
-              text: "Gör som med version A: sitt med en elev i taget, börja på nivå 1 och fortsätt så länge eleven klarar nivån, skriv resultatet för varje nivå och ringa in den högsta nivån i protokollet. Nivå 6–⁠8 räknar du som i version A."
-            - rubrik: Nivå 1
-              text: "Säg: ”ros, rita, ring, resa”. Svaret är /r/. Säg sedan ”sax, skog, stövel, spade”. Svaret är /s/."
-            - rubrik: Nivå 2
-              text: "Säg ljuden med en kort paus: /r/ /a/ /m/ (ram), /f/ /a/ /r/ (far), /n/ /e/ /r/ (ner). Fråga: ”Vilket ord blir det?”"
-      listor:
-        - rubrik: "Nivå 3: Säg hur bokstaven låter"
-          rader:
-            - - m
-              - e
-              - r
-              - l
-              - o
-              - s
-              - n
-        - rubrik: "Nivå 3: Säg hur den stora bokstaven låter"
-          rader:
-            - - R
-              - O
-              - M
-              - N
-              - L
-              - S
-              - E
-        - rubrik: "Nivå 4: Läs orden"
-          rader:
-            - - nos
-              - ris
-              - ren
-              - val
-              - fil
-        - rubrik: "Nivå 5: Läs meningarna"
-          rader:
-            - - Hon har en bok.
-            - - Vi ser en bil.
-            - - Valen har en nos.
-        - rubrik: "Nivå 6: Läs meningarna och svara på frågorna"
-          rader:
-            - ["Alma har en gul bok.", "Vad har Alma?"]
-            - ["Boken är om en myra.", "Vad handlar boken om?"]
-            - ["Alma läser i boken.", ""]
-        - rubrik: "Nivå 7: Läs meningarna och svara på frågorna"
-          rader:
-            - ["Noah sitter i matsalen. Han äter sin mat.", "Varför tror du att Noah gav bort sin smörgås?"]
-            - ["Mitt emot sitter en pojke. Han har en bricka utan mat.", "Varför tror du pojken inte hade någon mat på sin bricka?"]
-            - ["Noah ger pojken sin smörgås. ”Jag är mätt”, säger Noah.", ""]
-            - ["”Tack”, säger pojken. Han ler lite. Pojken tar smörgåsen och börjar äta.", ""]
-            - ["Ingen vuxen såg något. Nu delar de på maten.", ""]
-        - rubrik: "Nivå 8: Läs meningarna och svara på frågorna"
-          rader:
-            - ["Stefan står vid kanten av fotbollsplanen på skolgården. Han har fotbollsförbud i dag. Igår hade han skrikit och spelat för hårt.", "Varför får inte Stefan vara med och spela fotboll?"]
-            - ["Han sparkar i gruset så att små stenar skjuter iväg. Han tittar argt på de andra som spelar och har kul.", "Hur tror du att Stefan känner sig när han ser de andra spela?"]
-            - ["När en kille tappar bollen ropar Stefan: ”Dålig passning!” fast han vet att han inte ska skrika så.", ""]
-            - ["Killen på planen vänder sig om, men säger inget. Stefan suckar djupt. Han känner hur det sticker i magen.", ""]
+              text: "Sitt med en elev i taget, utanför passen, som före insatsen. Börja på nivå 1 och fortsätt så länge eleven klarar gränsen. Skriv resultatet för varje nivå i protokollets kolumn Efter, antal rätt eller antal fel som gränsen säger, och ringa in den högsta nivån eleven klarar. Klarar eleven inte nivå 1, skriver du antal rätt på raden och ringar inte in någon nivå. Säger eleven bokstavens namn eller lägger till ett ö, fråga: ”Hur låter det?” Räkna svaret som rätt om eleven då säger ljudet. Kryssa felet, och de andra felen du hör, under Fel att lyssna efter."
+            - rubrik: Läsfel och frågor
+              text: "Från nivå 5 räknar du läsfel: ett ord som eleven läser fel, hoppar över, lägger till eller får hjälp med. Ett ord som eleven rättar själv är inget fel. I nivå 6–⁠8 läser eleven högt, och sedan läser du frågorna medan texten ligger kvar. Skriv antal läsfel och antal rätta svar, till exempel 1 fel och 2 av 2 rätt. Ett svar är rätt när det stämmer med texten, och när frågan säger ”tror du” räcker ett rimligt svar ur texten."
+            - rubrik: Bladet
+              text: "Skriv ut och laminera bladet som version A, dubbelsidigt. Lägg det framför eleven och peka på en nivå i taget."
+        - rubrik: Nivå för nivå
+          falt:
+            - rubrik: "Nivå 1 · Första ljudet"
+              text: "Säg: ”ros, rita, ring, resa”. Fråga: ”Vilket ljud börjar orden på?” Svaret är /r/. Säg sedan ”sax, skog, stövel, spade”. Svaret är /s/. Eleven säger ljudet, inte bokstavens namn. Gränsen: 2 av 2."
+            - rubrik: "Nivå 2 · Sätta ihop"
+              text: "Säg ljuden i ett ord i taget, med en kort paus mellan ljuden: /r/ /a/ /m/ (ram), /f/ /a/ /r/ (far), /n/ /e/ /r/ (ner). Fråga efter varje ord: ”Vilket ord blir det?” Säg ljuden, inte bokstävernas namn. Pausen hör till screeningen: den prövar om eleven får ihop ljud som kommer ett i taget. Gränsen: 2 av 3."
+            - rubrik: "Nivå 3 · Bokstavens ljud"
+              text: "Peka på en bokstav i taget, först de sju små och sedan de sju stora. Eleven säger ljudet. Gränsen: 12 av 14."
+            - rubrik: "Nivå 4 · Läsa ord"
+              text: "Eleven läser orden nos, ris, ren, val och fil. Gränsen: 4 av 5."
+            - rubrik: "Nivå 5 · Läsa meningar"
+              text: "Eleven läser de tre meningarna högt. Gränsen: högst ett fel sammanlagt."
+            - rubrik: "Nivå 6 · Läsa och svara"
+              text: "Eleven läser texten om Alma högt. Fråga sedan: ”Vad har Alma?” ”Vad handlar boken om?” Gränsen: högst ett fel och frågorna rätt."
+            - rubrik: "Nivå 7 · Läsa en kort text"
+              text: "Vänd bladet. Eleven läser texten om Noah högt. Fråga sedan: ”Varför tror du att Noah gav bort sin smörgås?” ”Varför ler pojken, tror du?” Gränsen: högst två fel och frågorna rätt."
+            - rubrik: "Nivå 8 · Läsa en längre text"
+              text: "Eleven läser texten om Stefan högt. Fråga sedan: ”Varför får inte Stefan vara med och spela fotboll?” ”Hur tror du att Stefan känner sig när han ser de andra spela?” Gränsen: högst tre fel och frågorna rätt."
     - rubrik: "Ljudkollen, elevens blad"
       text:
-        - "Eleven läser uppgift 4 och 9 från bladet och skriver uppgift 7 på ett papper. De andra uppgifterna säger du, och frågorna står i protokollet."
-      huvud:
-        - rubrik: Elevens namn
+        - "Eleven läser uppgift 4 och 9 från bladet och skriver uppgift 7 på ett papper. De andra uppgifterna säger du. Här står det du säger och frågar i varje uppgift."
       delar:
         - rubrik: Till läraren
           falt:
             - rubrik: Så gör du
-              text: "Gör ljudkollen med en elev i taget, utanför passen. Peka på en bokstav i taget i uppgift 4. Bokstäverna står blandade, så att eleven inte kan säga dem i den ordning ni lär in dem. Ringa in de bokstäver som eleven inte kan på en kopia av bladet, en kopia per elev. Spara kopian med protokollet. Den första bokstaven i ordningen s, o, l, a, r, m, e, n, i, v som fler än hälften av eleverna har inringad blir dagens ljud. Stryk ringen när eleven kan bokstaven. Säger eleven bokstavens namn, fråga: ”Hur låter den?” och räkna svaret som rätt om eleven då säger ljudet, som i screeningen. I uppgift 9 läser eleven fyra påhittade ord."
-      listor:
-        - rubrik: "Uppgift 4: De tio första bokstäverna"
-          rader:
-            - [m, a, s, e, l]
-            - [i, r, o, v, n]
-        - rubrik: "Uppgift 4: Fler bokstäver"
-          rader:
-            - [k, u, f, ä, b, t, j]
-            - [å, g, y, d, ö, h, p]
-        - rubrik: "Uppgift 9: Läs de nya orden"
-          rader:
-            - [fål, rel, nar, mel]
+              text: "Gör ljudkollen med en elev i taget, utanför passen. Före och efter insatsen gör du alla nio uppgifterna, och var tredje vecka uppgiften för gruppens förmåga, uppgiften för nästa förmåga och uppgift 4. Varje uppgift utom uppgift 4 har fyra delar, och du skriver antal rätt av 4 i protokollet. Eleven klarar en uppgift med minst tre rätt av fyra, och uppgift 4 med minst åtta av de tio första bokstäverna, och det för du in i gruppens översikt. Säger eleven bokstavens namn eller lägger till ett ö, fråga: ”Hur låter den?” och räkna svaret som rätt om eleven då säger ljudet, som i screeningen."
+            - rubrik: Bokstäverna
+              text: "Bokstäverna i uppgift 4 står blandade, så att eleven inte kan säga dem i den ordning ni lär in dem. Ringa in på elevens kopia de bokstäver som eleven inte kan, när hen har läst klart, och spara kopian med protokollet. Stryk ringen när eleven kan bokstaven. Den första bokstaven i ordningen s, o, l, a, r, m, e, n, i, v som fler än hälften av eleverna har inringad blir dagens ljud."
+            - rubrik: Bladet
+              text: "Kopiera bladet, ett per elev, och skriv elevens namn överst. Ha några markörer till uppgift 6 och papper och penna till uppgift 7 framme."
+        - rubrik: Uppgift för uppgift
+          falt:
+            - rubrik: "1 · Rim"
+              text: "”Rimmar katt och hatt?” (ja) ”Rimmar gris och glass?” (nej) ”Säg ett ord som rimmar på boll.” (till exempel troll) ”Säg ett ord som rimmar på gå.” (till exempel två) Ett påhittat ord som rimmar räknas."
+            - rubrik: "2 · Ord och stavelser"
+              text: "”Klappa ordet. Hur många klappar?” sked (1), lampa (2), banan (2), krokodil (3)"
+            - rubrik: "3 · Första ljudet"
+              text: "”Vilket ljud hör du först i måne?” (/m/) Och i såg (/s/), fot (/f/) och tå (/t/)."
+            - rubrik: "4 · Bokstävernas ljud"
+              text: "Peka på en bokstav i taget på bladet. Eleven säger ljudet. Skriv hur många bokstäver eleven kan av de tio första och av alla 24, till exempel 8 och 19."
+            - rubrik: "5 · Sist och i mitten"
+              text: "”Vilket ljud hör du sist i lås?” (/s/) Och sist i får (/r/). ”Vilket ljud hör du i mitten av mur?” (/u/) Och i mitten av löv (/ö/)."
+            - rubrik: "6 · Dela upp"
+              text: "”Säg ljuden i få och lägg en markör för varje ljud.” (2) Och hål (3), näsa (4), häst (4)."
+            - rubrik: "7 · Skriva ord"
+              text: "Säg: ”Skriv ordet på, som i: Mössan ligger på bordet.” Sedan fin, sur och lama, ett ord i taget. Svaret är rätt när eleven skriver en bokstav för varje ljud, i rätt ordning."
+            - rubrik: "8 · Sätta ihop och byta"
+              text: "Säg ljuden med en kort paus: ”/v/ /å/ /r/. Vilket ord blir det?” (vår) Och /r/ /ö/ /r/ /a/ (röra). ”Säg lek. Ta bort /l/.” (ek) ”Säg sal. Byt /s/ mot /h/.” (hal) Pausen hör till kollen: den prövar om eleven får ihop ljud som kommer ett i taget."
+            - rubrik: "9 · Påhittade ord"
+              text: "Eleven läser fål, rel, nar och mel från bladet."
     - rubrik: Protokollet för screeningen och ljudkollen
       text:
-        - "Det här är lärarens protokoll. Kopiera sidan med tabellerna, en per elev, och använd den före insatsen, var tredje vecka och efter. Sidan med frågorna räcker i ett exemplar."
+        - "Det här är lärarens protokoll, och du använder det före insatsen, var tredje vecka och efter."
       huvud:
         - rubrik: Elevens namn
         - rubrik: Startdatum
       delar:
         - rubrik: Till läraren
           falt:
-            - rubrik: Ljudkollen, uppgift 1–4
-              text: "1 · Rim. ”Rimmar katt och hatt?” (ja) ”Rimmar gris och glass?” (nej) ”Säg ett ord som rimmar på boll.” (till exempel troll) ”Säg ett ord som rimmar på gå.” (till exempel två) Ett påhittat ord som rimmar räknas.\n2 · Ord och stavelser. ”Klappa ordet. Hur många klappar?” sked (1), lampa (2), banan (2), krokodil (3)\n3 · Första ljudet. ”Vilket ljud hör du först i måne?” (/m/) Och i såg (/s/), fot (/f/) och tå (/t/).\n4 · Bokstävernas ljud. Eleven säger ljudet för bokstäverna på bladet. Skriv hur många av de tio första och hur många av alla 24, till exempel 8 och 19."
-            - rubrik: Ljudkollen, uppgift 5–9
-              text: "5 · Sist och i mitten. ”Vilket ljud hör du sist i lås?” (/s/) Och sist i får (/r/). ”Vilket ljud hör du i mitten av mur?” (/u/) Och i mitten av löv (/ö/).\n6 · Dela upp. ”Säg ljuden i få och lägg en markör för varje ljud.” (2) Och hål (3), näsa (4), häst (4).\n7 · Skriva ord. ”Skriv ordet på.” Sedan fin, sur och lama på samma sätt. Svaret är rätt när eleven skriver en bokstav för varje ljud, i rätt ordning.\n8 · Sätta ihop och byta. Säg ljuden med en kort paus: ”/v/ /å/ /r/. Vilket ord blir det?” (vår) Och /r/ /ö/ /r/ /a/ (röra). ”Säg lek. Ta bort /l/.” (ek) ”Säg sal. Byt /s/ mot /h/.” (hal) Pausen hör till kollen: den prövar om eleven får ihop ljud som kommer ett i taget.\n9 · Påhittade ord. Eleven läser fål, rel, nar och mel från bladet."
+            - rubrik: Kopiera
+              text: "Kopiera protokollets två sidor dubbelsidigt, ett papper per elev. Det du säger och frågar står vid screeningens två versioner och vid ljudkollen."
       listor:
-        - rubrik: "Protokollet · Screeningen: antal rätt eller fel, ring runt högsta nivån"
+        - rubrik: "Protokollet · Screeningen: antal rätt eller fel, ringa in den högsta nivån eleven klarar"
           kolumner:
             - Nivå och gräns
             - Före

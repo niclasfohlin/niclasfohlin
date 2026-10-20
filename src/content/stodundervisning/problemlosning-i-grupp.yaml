@@ -31,7 +31,7 @@ material:
   - bladen Vår lösning och Två lösningar
   - konkret material
   - kortet Våra sätt
-uppdaterad: 2026-10-19
+uppdaterad: 2026-10-20
 relaterade:
   - fyra-raknesatten
   - antalsuppfattning-i-grupp
@@ -346,7 +346,7 @@ progression:
       fokus: Var och en börjar själv i två minuter innan paret arbetar vidare, gärna med problem ur klassens läromedel.
       roll: Läraren ger klassläraren en kopia av kortet med gruppens sätt och följer upp dem i klassens matematik.
 uppfoljning:
-  text: Du behöver veta om passen ger effekt, och det räcker inte att de har blivit av. Kartläggningen har två blad per nivå, ett före och ett efter, med två sidor per elev. Båda bladen har samma fem uppgifter, och problemen är byggda på samma sätt. Kartläggningen före gör du innan det första passet, omkring tio minuter per elev eller par. Spara parens blad Vår lösning, eftersom bladen visar hur paren tänker.
+  text: Du behöver veta om passen ger effekt, och det räcker inte att de har blivit av. Kartläggningen har två blad per nivå, ett A4 före och ett efter. Båda bladen har samma fem uppgifter, och problemen är byggda på samma sätt. Kartläggningen före gör du innan det första passet, omkring tio minuter per elev eller par. Spara parens blad Vår lösning, eftersom bladen visar hur paren tänker.
   rader:
     - nar: Före insatsen
       vad: Eleven löser bladet Kartläggning före, och du skriver i protokollet vad hen säger och gör i varje uppgift och vilken hjälp hen behöver.
@@ -749,6 +749,34 @@ pabordet:
     rubrik: Avancerat, problem 10 · Lösning B
     text: "Lösning B, klossar på rad. 4 är fyra klossar med tre luckor. Varje lucka får en avdelare eller inte, och 1 | 3 är 1 + 3. Tre luckor med två val var ger 2 · 2 · 2 = 8 sätt. 10 klossar har 9 luckor: 2 · 2 · 2 · 2 · 2 · 2 · 2 · 2 · 2 = 512. Kontroll: 3 har två luckor och 2 · 2 = 4 sätt."
     efter: "ram: Två lösningar: Avancerat, problem 10, Alla summor"
+  - nr: 100
+    rubrik: "Blad: Vår lösning"
+    text: "Parets blad i varje pass har raderna för namnen och problemet och fem rutor i den ordning paret arbetar: Vi vet, Vi ska ta reda på, Så visar vi problemet, Vårt svar och Så kontrollerade vi. Den tredje rutan är störst, och där visar paret problemet med en bild, en tabell eller en tallinje."
+    efter: "ram: Vår lösning"
+  - nr: 101
+    rubrik: "Blad: Kartläggning före, Bas"
+    text: "Överst på elevens blad står problemet: ”I en klass är det 26 elever. Det är 4 fler flickor än pojkar. Hur många pojkar är det i klassen?” Under det står de fem uppgifterna med var sin yta: en rad att berätta med egna ord, två rutor bredvid varandra att visa och lösa problemet, två rader att pröva en annan elevs lösning och en rad om vad eleven gör när hen inte vet hur hen ska börja."
+    efter: "ram: Kartläggning före: Bas"
+  - nr: 102
+    rubrik: "Blad: Kartläggning efter, Bas"
+    text: "Överst på elevens blad står problemet: ”Två lag har tillsammans 34 spelare. Det ena laget har 6 fler spelare än det andra. Hur många spelare har det mindre laget?” Under det står de fem uppgifterna med var sin yta: en rad att berätta med egna ord, två rutor bredvid varandra att visa och lösa problemet, två rader att pröva en annan elevs lösning och en rad om vad eleven gör när hen inte vet hur hen ska börja."
+    efter: "ram: Kartläggning efter: Bas"
+  - nr: 103
+    rubrik: "Blad: Kartläggning före, Medel"
+    text: "Överst på elevens blad står problemet: ”En tröja kostar 20 % mer än en mössa. Tillsammans kostar de 330 kr. Vad kostar mössan?” Under det står de fem uppgifterna med var sin yta: en rad att berätta med egna ord, två rutor bredvid varandra att visa och lösa problemet, två rader att pröva en annan elevs lösning och en rad om vad eleven gör när hen inte vet hur hen ska börja."
+    efter: "ram: Kartläggning före: Medel"
+  - nr: 104
+    rubrik: "Blad: Kartläggning efter, Medel"
+    text: "Överst på elevens blad står problemet: ”En hjälm kostar 25 % mer än ett lås. Tillsammans kostar de 360 kr. Vad kostar låset?” Under det står de fem uppgifterna med var sin yta: en rad att berätta med egna ord, två rutor bredvid varandra att visa och lösa problemet, två rader att pröva en annan elevs lösning och en rad om vad eleven gör när hen inte vet hur hen ska börja."
+    efter: "ram: Kartläggning efter: Medel"
+  - nr: 105
+    rubrik: "Blad: Kartläggning före, Avancerat"
+    text: "Överst på elevens blad står problemet: ”En rektangel har omkretsen 34 cm. Den ena sidan är 5 cm längre än den andra. Vilken area har rektangeln?” Under det står de fem uppgifterna med var sin yta: en rad att berätta med egna ord, två rutor bredvid varandra att visa och lösa problemet, två rader att pröva en annan elevs lösning och en rad om vad eleven gör när hen inte vet hur hen ska börja."
+    efter: "ram: Kartläggning före: Avancerat"
+  - nr: 106
+    rubrik: "Blad: Kartläggning efter, Avancerat"
+    text: "Överst på elevens blad står problemet: ”En rektangel har omkretsen 46 cm. Den ena sidan är 7 cm längre än den andra. Vilken area har rektangeln?” Under det står de fem uppgifterna med var sin yta: en rad att berätta med egna ord, två rutor bredvid varandra att visa och lösa problemet, två rader att pröva en annan elevs lösning och en rad om vad eleven gör när hen inte vet hur hen ska börja."
+    efter: "ram: Kartläggning efter: Avancerat"
 ramar:
   rubrik: Problemen
   text:
@@ -3892,18 +3920,12 @@ ramar:
                 Fråga: ”Hur visar problemet att ordningen räknas?”
     - rubrik: Vår lösning
       text:
-        - Skriv det ni vet och det ni ska ta reda på. Visa problemet i den stora rutan, och skriv ert svar och hur ni kontrollerade det.
-      huvud:
-        - rubrik: Namn
-        - rubrik: Problemet
+        - I varje pass visar och löser paret problemet på bladet.
       delar:
-        - rubrik: Vår lösning
+        - rubrik: Till läraren
           falt:
-            - rubrik: Vi vet
-            - rubrik: Vi ska ta reda på
-            - rubrik: Så visar vi problemet
-            - rubrik: Vårt svar
-            - rubrik: Så kontrollerade vi
+            - rubrik: Bladet
+              text: Kopiera bladet till varje par inför passet. Paret fyller i rutorna uppifrån och ned, och den stora rutan är till bilden, tabellen eller tallinjen som visar problemet.
     - rubrik: Våra sätt
       sagoform:
         form: kort
@@ -3932,166 +3954,52 @@ ramar:
             - - Hur kan vi kontrollera svaret?
     - rubrik: "Kartläggning före: Bas"
       text:
-        - Läs problemet med din lärare. Gör sedan uppgifterna en i taget.
-      huvud:
-        - rubrik: Namn
-        - rubrik: Datum
-      listor:
-        - rubrik: Problemet
-          rader:
-            - - I en klass är det 26 elever. Det är 4 fler flickor än pojkar. Hur många pojkar är det i klassen?
-        - rubrik: Uppgifterna
-          rader:
-            - - 1. Berätta med egna ord vad problemet handlar om och vad du ska ta reda på.
-            - - 2. Visa problemet. Rita eller gör något som hjälper dig.
-            - - 3. Lös problemet. Skriv svaret och hur du tänkte.
-            - - 4. En elev skrev 26 / 2 = 13 pojkar. Stämmer det? Hur vet du det?
-            - - 5. Vad gör du när du inte vet hur du ska börja?
+        - Elevens blad är ett A4 med problemet och de fem uppgifterna.
       delar:
-        - rubrik: "Mina svar · Kartläggning före: Bas"
+        - rubrik: Till läraren
           falt:
-            - rubrik: Namn
-              text: ""
-            - rubrik: 1. Med egna ord
-            - rubrik: 2. Visa problemet
-            - rubrik: 3. Lös och förklara
-            - rubrik: 4. Stämmer det?
-            - rubrik: 5. Svårt att börja
+            - rubrik: Bladet
+              text: "Skriv ut bladet till varje elev. Lägg ett papper över uppgift 4, som visar en annan elevs lösning, tills eleven har löst uppgift 3. Eleven får svara muntligt på uppgift 1 och 5. Hur du gör kartläggningen står under Kartläggning: lärarens protokoll."
     - rubrik: "Kartläggning efter: Bas"
       text:
-        - Läs problemet med din lärare. Gör sedan uppgifterna en i taget.
-      huvud:
-        - rubrik: Namn
-        - rubrik: Datum
-      listor:
-        - rubrik: Problemet
-          rader:
-            - - Två lag har tillsammans 34 spelare. Det ena laget har 6 fler spelare än det andra. Hur många spelare har det mindre laget?
-        - rubrik: Uppgifterna
-          rader:
-            - - 1. Berätta med egna ord vad problemet handlar om och vad du ska ta reda på.
-            - - 2. Visa problemet. Rita eller gör något som hjälper dig.
-            - - 3. Lös problemet. Skriv svaret och hur du tänkte.
-            - - 4. En elev skrev 34 / 2 = 17 spelare. Stämmer det? Hur vet du det?
-            - - 5. Vad gör du när du inte vet hur du ska börja?
+        - Elevens blad är ett A4 med problemet och de fem uppgifterna.
       delar:
-        - rubrik: "Mina svar · Kartläggning efter: Bas"
+        - rubrik: Till läraren
           falt:
-            - rubrik: Namn
-              text: ""
-            - rubrik: 1. Med egna ord
-            - rubrik: 2. Visa problemet
-            - rubrik: 3. Lös och förklara
-            - rubrik: 4. Stämmer det?
-            - rubrik: 5. Svårt att börja
+            - rubrik: Bladet
+              text: "Skriv ut bladet till varje elev. Lägg ett papper över uppgift 4, som visar en annan elevs lösning, tills eleven har löst uppgift 3. Eleven får svara muntligt på uppgift 1 och 5. Hur du gör kartläggningen står under Kartläggning: lärarens protokoll."
     - rubrik: "Kartläggning före: Medel"
       text:
-        - Läs problemet med din lärare. Gör sedan uppgifterna en i taget.
-      huvud:
-        - rubrik: Namn
-        - rubrik: Datum
-      listor:
-        - rubrik: Problemet
-          rader:
-            - - En tröja kostar 20 % mer än en mössa. Tillsammans kostar de 330 kr. Vad kostar mössan?
-        - rubrik: Uppgifterna
-          rader:
-            - - 1. Berätta med egna ord vad problemet handlar om och vad du ska ta reda på.
-            - - 2. Visa problemet. Rita eller gör något som hjälper dig.
-            - - 3. Lös problemet. Skriv svaret och hur du tänkte.
-            - - 4. En elev skrev 330 / 2 = 165 kr. Stämmer det? Hur vet du det?
-            - - 5. Vad gör du när du inte vet hur du ska börja?
+        - Elevens blad är ett A4 med problemet och de fem uppgifterna.
       delar:
-        - rubrik: "Mina svar · Kartläggning före: Medel"
+        - rubrik: Till läraren
           falt:
-            - rubrik: Namn
-              text: ""
-            - rubrik: 1. Med egna ord
-            - rubrik: 2. Visa problemet
-            - rubrik: 3. Lös och förklara
-            - rubrik: 4. Stämmer det?
-            - rubrik: 5. Svårt att börja
+            - rubrik: Bladet
+              text: "Skriv ut bladet till varje elev. Lägg ett papper över uppgift 4, som visar en annan elevs lösning, tills eleven har löst uppgift 3. Eleven får svara muntligt på uppgift 1 och 5. Hur du gör kartläggningen står under Kartläggning: lärarens protokoll."
     - rubrik: "Kartläggning efter: Medel"
       text:
-        - Läs problemet med din lärare. Gör sedan uppgifterna en i taget.
-      huvud:
-        - rubrik: Namn
-        - rubrik: Datum
-      listor:
-        - rubrik: Problemet
-          rader:
-            - - En hjälm kostar 25 % mer än ett lås. Tillsammans kostar de 360 kr. Vad kostar låset?
-        - rubrik: Uppgifterna
-          rader:
-            - - 1. Berätta med egna ord vad problemet handlar om och vad du ska ta reda på.
-            - - 2. Visa problemet. Rita eller gör något som hjälper dig.
-            - - 3. Lös problemet. Skriv svaret och hur du tänkte.
-            - - 4. En elev skrev 360 / 2 = 180 kr. Stämmer det? Hur vet du det?
-            - - 5. Vad gör du när du inte vet hur du ska börja?
+        - Elevens blad är ett A4 med problemet och de fem uppgifterna.
       delar:
-        - rubrik: "Mina svar · Kartläggning efter: Medel"
+        - rubrik: Till läraren
           falt:
-            - rubrik: Namn
-              text: ""
-            - rubrik: 1. Med egna ord
-            - rubrik: 2. Visa problemet
-            - rubrik: 3. Lös och förklara
-            - rubrik: 4. Stämmer det?
-            - rubrik: 5. Svårt att börja
+            - rubrik: Bladet
+              text: "Skriv ut bladet till varje elev. Lägg ett papper över uppgift 4, som visar en annan elevs lösning, tills eleven har löst uppgift 3. Eleven får svara muntligt på uppgift 1 och 5. Hur du gör kartläggningen står under Kartläggning: lärarens protokoll."
     - rubrik: "Kartläggning före: Avancerat"
       text:
-        - Läs problemet med din lärare. Gör sedan uppgifterna en i taget.
-      huvud:
-        - rubrik: Namn
-        - rubrik: Datum
-      listor:
-        - rubrik: Problemet
-          rader:
-            - - En rektangel har omkretsen 34 cm. Den ena sidan är 5 cm längre än den andra. Vilken area har rektangeln?
-        - rubrik: Uppgifterna
-          rader:
-            - - 1. Berätta med egna ord vad problemet handlar om och vad du ska ta reda på.
-            - - 2. Visa problemet. Rita eller gör något som hjälper dig.
-            - - 3. Lös problemet. Skriv svaret och hur du tänkte.
-            - - 4. En elev skrev 34 / 4 = 8,5 cm och arean 8,5 · 8,5. Stämmer det? Hur vet du det?
-            - - 5. Vad gör du när du inte vet hur du ska börja?
+        - Elevens blad är ett A4 med problemet och de fem uppgifterna.
       delar:
-        - rubrik: "Mina svar · Kartläggning före: Avancerat"
+        - rubrik: Till läraren
           falt:
-            - rubrik: Namn
-              text: ""
-            - rubrik: 1. Med egna ord
-            - rubrik: 2. Visa problemet
-            - rubrik: 3. Lös och förklara
-            - rubrik: 4. Stämmer det?
-            - rubrik: 5. Svårt att börja
+            - rubrik: Bladet
+              text: "Skriv ut bladet till varje elev. Lägg ett papper över uppgift 4, som visar en annan elevs lösning, tills eleven har löst uppgift 3. Eleven får svara muntligt på uppgift 1 och 5. Hur du gör kartläggningen står under Kartläggning: lärarens protokoll."
     - rubrik: "Kartläggning efter: Avancerat"
       text:
-        - Läs problemet med din lärare. Gör sedan uppgifterna en i taget.
-      huvud:
-        - rubrik: Namn
-        - rubrik: Datum
-      listor:
-        - rubrik: Problemet
-          rader:
-            - - En rektangel har omkretsen 46 cm. Den ena sidan är 7 cm längre än den andra. Vilken area har rektangeln?
-        - rubrik: Uppgifterna
-          rader:
-            - - 1. Berätta med egna ord vad problemet handlar om och vad du ska ta reda på.
-            - - 2. Visa problemet. Rita eller gör något som hjälper dig.
-            - - 3. Lös problemet. Skriv svaret och hur du tänkte.
-            - - 4. En elev skrev 46 / 4 = 11,5 cm och arean 11,5 · 11,5. Stämmer det? Hur vet du det?
-            - - 5. Vad gör du när du inte vet hur du ska börja?
+        - Elevens blad är ett A4 med problemet och de fem uppgifterna.
       delar:
-        - rubrik: "Mina svar · Kartläggning efter: Avancerat"
+        - rubrik: Till läraren
           falt:
-            - rubrik: Namn
-              text: ""
-            - rubrik: 1. Med egna ord
-            - rubrik: 2. Visa problemet
-            - rubrik: 3. Lös och förklara
-            - rubrik: 4. Stämmer det?
-            - rubrik: 5. Svårt att börja
+            - rubrik: Bladet
+              text: "Skriv ut bladet till varje elev. Lägg ett papper över uppgift 4, som visar en annan elevs lösning, tills eleven har löst uppgift 3. Eleven får svara muntligt på uppgift 1 och 5. Hur du gör kartläggningen står under Kartläggning: lärarens protokoll."
     - rubrik: "Kartläggning: lärarens protokoll"
       text:
         - Du fyller i ett protokoll per grupp före insatsen och ett efter. Skriv med dina ord vad eleven säger och gör i varje uppgift, och vilken hjälp hen behövde. Svaren på uppgift 3 är 11 pojkar och 14 spelare i Bas, 150 kr och 160 kr i Medel, och 66 cm² och 120 cm² i Avancerat. Uppgift 4 visar ett vanligt fel, att dela summan eller omkretsen lika fast delarna är olika stora, och uppgift 5 visar vilka sätt eleven har att börja. Lägg sedan protokollen från före och efter bredvid varandra.
@@ -4172,49 +4080,6 @@ ramar:
               - ""
               - ""
               - ""
-elevblad:
-  Vår lösning:
-    Vi vet: 2.4
-    Vi ska ta reda på: 2
-    Så visar vi problemet: 6.6
-    Vårt svar: 1.8
-    Så kontrollerade vi: 2.2
-  "Kartläggning före: Bas":
-    1. Med egna ord: 2
-    2. Visa problemet: 4.8
-    3. Lös och förklara: 4
-    4. Stämmer det?: 2.4
-    5. Svårt att börja: 1.8
-  "Kartläggning efter: Bas":
-    1. Med egna ord: 2
-    2. Visa problemet: 4.8
-    3. Lös och förklara: 4
-    4. Stämmer det?: 2.4
-    5. Svårt att börja: 1.8
-  "Kartläggning före: Medel":
-    1. Med egna ord: 2
-    2. Visa problemet: 4.8
-    3. Lös och förklara: 4
-    4. Stämmer det?: 2.4
-    5. Svårt att börja: 1.8
-  "Kartläggning efter: Medel":
-    1. Med egna ord: 2
-    2. Visa problemet: 4.8
-    3. Lös och förklara: 4
-    4. Stämmer det?: 2.4
-    5. Svårt att börja: 1.8
-  "Kartläggning före: Avancerat":
-    1. Med egna ord: 2
-    2. Visa problemet: 4.8
-    3. Lös och förklara: 4
-    4. Stämmer det?: 2.4
-    5. Svårt att börja: 1.8
-  "Kartläggning efter: Avancerat":
-    1. Med egna ord: 2
-    2. Visa problemet: 4.8
-    3. Lös och förklara: 4
-    4. Stämmer det?: 2.4
-    5. Svårt att börja: 1.8
 # Tabellmallen som står på bordet, på liggande A4 i planeringsmallarna (K-013). Rubrikerna är tomma, eftersom
 # eleverna väljer dem själva ("Vad kan rubrikerna vara?"). Tomma tallinjer är mallen som kön väntade på
 # (intake/UPPDRAG-mallar-2026-09-28.md, problemlösningens rad).

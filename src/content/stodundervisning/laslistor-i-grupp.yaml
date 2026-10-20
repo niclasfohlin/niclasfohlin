@@ -22,7 +22,7 @@ material:
   - bokstavskort
   - en lättläst bok
   - snabbmallen
-uppdaterad: 2026-10-19
+uppdaterad: 2026-10-20
 relaterade:
   - til-i-grupp
   - upprepad-lasning
@@ -33,6 +33,39 @@ utkast: false
 centrala:
   - id: lasstrategier
     efterText: "tabell: Bekräfta, korrigera, ge stöd"
+pabordet:
+  - nr: 1
+    rubrik: "Blad: Läslista start"
+    text: "Elevens läslista har bokstäverna i två listor bredvid varandra, varje bokstav i en ruta: den första i den ordning gruppen lär sig dem och den andra blandad, med några stora bokstäver. Gruppen läser uppifrån och ned, kolumn för kolumn."
+    efter: "ram: Läslista start"
+  - nr: 2
+    rubrik: "Blad: Läslista 1"
+    text: "Elevens läslista har ord med två ljud i tre kolumner, varje ord i en ruta, och kolumnernas namn små ovanför: Konsonant + vokal över de två första och Vokal + konsonant över den tredje. Gruppen läser uppifrån och ned, kolumn för kolumn."
+    efter: "ram: Läslista 1: KV och VK"
+  - nr: 3
+    rubrik: "Blad: Läslista 2"
+    text: "Elevens läslista har ord med tre ljud i ordfamiljer i tre kolumner, varje ord i en ruta, och kolumnernas namn små ovanför: -ol · -al · -il, -at · -os · -us, -en · -ur · -ål. Gruppen läser uppifrån och ned, familj för familj."
+    efter: "ram: Läslista 2: KVK i ordfamiljer"
+  - nr: 4
+    rubrik: "Blad: Läslista 3"
+    text: "Elevens läslista har ord med två stavelser i tre kolumner, varje ord i en ruta, och kolumnernas namn små ovanför: ”Från KVK till KVKV”, ”Nya ord” och ”Ord med e, o och y”. Gruppen läser uppifrån och ned, kolumn för kolumn."
+    efter: "ram: Läslista 3: KVKV, två stavelser"
+  - nr: 5
+    rubrik: "Blad: Läslista 4"
+    text: "Elevens läslista har ord med två konsonanter i följd i tre kolumner, varje ord i en ruta, och kolumnernas namn små ovanför: ”Möte först” över de två första och ”Möte sist, kort vokal” över den tredje. Gruppen läser uppifrån och ned, kolumn för kolumn."
+    efter: "ram: Läslista 4: konsonantmöten"
+  - nr: 6
+    rubrik: "Blad: Läslista 5, sida 1"
+    text: "Elevens läslista, sidan 1: substantiven i kolumnerna ”Grundord”, ”Med -en eller -an” och ”Med -ar eller -or”, sist sex sammansatta ord. Gruppen läser rad för rad, så att ordet växer."
+    efter: "ram: Läslista 5: ordet växer"
+  - nr: 7
+    rubrik: "Blad: Läslista 5, sida 2"
+    text: "Elevens läslista, sidan 2: verben i kolumnerna ”Grundform”, ”Nu: -ar eller -er” och ”Då: -ade eller -te”, sist de fyra första meningarna, en per rad."
+    efter: "ram: Läslista 5: ordet växer"
+  - nr: 8
+    rubrik: "Blad: Läslista 6"
+    text: "Elevens läslista: tolv meningar, en per rad, från de kortaste till de längsta, och under dem en ruta med texten om Sara och hunden, en mening per rad: Sara har en hund. Hunden är stor och glad. Sara och hunden leker i sanden. Nu vilar de i solen. Det är en fin dag."
+    efter: "ram: Läslista 6: meningar"
 inledning:
   - "Läslistor utvecklar elevernas avkodningsförmåga genom strukturerad och upprepad läsning. Arbetet med en lista följer alltid samma rörelse: läraren modellerar, gruppen körläser och eleverna läser i par. Rörelsen går från mest till minst stöd, och det är rörelsen som är metoden. Listan i sig utvecklar ingen avkodning."
   - "Ni arbetar med en läslista i veckan, enligt de sju listorna i avsnittet Läslistorna. Rörelsen kan rymmas i ett enda arbetspass på 15 minuter och göras varje dag, eller fördelas över veckan: läraren modellerar och gruppen körläser i början av veckan, paren läser och läser om under resten. Ordningen är alltid densamma, oavsett om rörelsen tar 15 minuter eller en hel vecka."
@@ -258,7 +291,7 @@ grund:
 ramar:
   rubrik: Läslistorna
   text:
-    - "Här finns lektionskortet och sju läslistor som tillsammans bildar en insats på sju veckor, en lista per vecka. Varje lista har orden att läsa och en not om hur ni arbetar med den: vad listan tränar, så gör ni och vad du lyssnar efter. Listorna finns också som egna sidor bland planeringsmallarna, att kopiera till varje par och visa stort för gruppen."
+    - "Här finns lektionskortet och sju läslistor som tillsammans bildar en insats på sju veckor, en lista per vecka. Varje lista är ett blad till eleven, med orden stora i var sin ruta, och före bladet står hur ni arbetar med listan: vad listan tränar, hur ni gör och vad du lyssnar efter. Kopiera bladet till varje par, och visa det stort för gruppen, på tavlan eller utskrivet i A3, när du modellerar."
   ramar:
     - rubrik: Läslista start
       text:
@@ -272,59 +305,6 @@ ramar:
               text: "Peka och läs uppifrån och ned, kolumn för kolumn. Modellera först, läs sedan i kör och till sist i par. Dra ut hållkonsonanterna: sss, lll, mmm."
             - rubrik: Lyssna efter
               text: "Att eleven säger ljudet /m/ och inte namnet äm. Ge artikulationsstöd: känn läpparna vid /m/, tungan bakom tänderna vid /l/."
-      listor:
-        - rubrik: Bokstäver i inlärningsordning
-          rader:
-            - - s
-              - i
-              - u
-            - - o
-              - v
-              - b
-            - - l
-              - t
-              - g
-            - - a
-              - f
-              - h
-            - - r
-              - å
-              - y
-            - - m
-              - p
-              - ä
-            - - e
-              - k
-              - ö
-            - - n
-              - d
-              - j
-        - rubrik: "Blandade bokstäver: säg ljudet snabbt"
-          rader:
-            - - m
-              - t
-              - S
-            - - a
-              - n
-              - A
-            - - s
-              - å
-              - L
-            - - i
-              - r
-              - O
-            - - o
-              - p
-              - R
-            - - l
-              - f
-              - M
-            - - e
-              - d
-              - E
-            - - v
-              - k
-              - N
     - rubrik: "Läslista 1: KV och VK"
       text:
         - Vecka 2 · två ljud.
@@ -337,49 +317,6 @@ ramar:
               text: "För fingret från vänster till höger, ljuda och bind ihop: /s/ /e/ blir se. Jämför gärna spegelparen så och ås, la och al, så att eleven hör att ordningen avgör ordet."
             - rubrik: Lyssna efter
               text: "Att ljuden binds ihop till ett ord och inte stannar som två separata ljud. Vid fel: backa, ljuda långsamt tillsammans och låt eleven pröva igen."
-      listor:
-        - rubrik: Läs orden, kolumn för kolumn
-          kolumner:
-            - Konsonant + vokal
-            - Konsonant + vokal
-            - Vokal + konsonant
-          rader:
-            - - se
-              - by
-              - is
-            - - så
-              - du
-              - os
-            - - sy
-              - ha
-              - ur
-            - - le
-              - vi
-              - ål
-            - - la
-              - gå
-              - ås
-            - - lo
-              - ta
-              - ek
-            - - ro
-              - tå
-              - el
-            - - ny
-              - te
-              - al
-            - - nu
-              - ko
-              - il
-            - - ni
-              - må
-              - ut
-            - - bo
-              - få
-              - in
-            - - bi
-              - ju
-              - av
     - rubrik: "Läslista 2: KVK i ordfamiljer"
       text:
         - Vecka 3 · KVK-ord.
@@ -392,49 +329,6 @@ ramar:
               text: "Läs en familj i taget. Ljuda första ordet helt, läs sedan de följande genom att byta ansatsen: /s/ plus al, /d/ plus al, /m/ plus al. Det är ansats och rim i praktiken."
             - rubrik: Lyssna efter
               text: "Att vokalen blir lång: sool, saal, biil. Att eleven inte gissar på sista ljudet utan läser hela vägen till slutet."
-      listor:
-        - rubrik: Läs orden, familj för familj
-          kolumner:
-            - -ol · -al · -il
-            - -at · -os · -us
-            - -en · -ur · -ål
-          rader:
-            - - sol
-              - mat
-              - ren
-            - - pol
-              - fat
-              - sen
-            - - sal
-              - lat
-              - ben
-            - - dal
-              - sat
-              - len
-            - - mal
-              - ros
-              - mur
-            - - tal
-              - nos
-              - sur
-            - - val
-              - mos
-              - tur
-            - - hal
-              - dos
-              - bur
-            - - bil
-              - mus
-              - mål
-            - - fil
-              - hus
-              - hål
-            - - mil
-              - lus
-              - nål
-            - - sil
-              - sus
-              - tål
     - rubrik: "Läslista 3: KVKV, två stavelser"
       text:
         - Vecka 4 · KVKV-ord.
@@ -447,49 +341,6 @@ ramar:
               text: "Dela ordet i stavelser och klappa: so-la, la-ga, re-sa. Ljuda första stavelsen, ljuda andra stavelsen, läs ihop hela ordet. Vokalen i den öppna stavelsen är lång."
             - rubrik: Lyssna efter
               text: "Att eleven tar en stavelse i taget i stället för att ljuda bokstav för bokstav genom hela ordet. Vid fel: täck andra stavelsen med fingret och läs delarna var för sig."
-      listor:
-        - rubrik: Läs orden, kolumn för kolumn
-          kolumner:
-            - Från KVK till KVKV
-            - Nya ord med a
-            - Ord med e, o och y
-          rader:
-            - - sola
-              - laga
-              - resa
-            - - tala
-              - baka
-              - leka
-            - - mala
-              - kaka
-              - leta
-            - - sila
-              - saga
-              - dela
-            - - mata
-              - våga
-              - meta
-            - - måla
-              - gata
-              - sopa
-            - - nosa
-              - lada
-              - ropa
-            - - mosa
-              - bada
-              - koka
-            - - mura
-              - rita
-              - sota
-            - - sura
-              - sida
-              - byta
-            - - håla
-              - lina
-              - dyka
-            - - tåla
-              - vila
-              - myra
     - rubrik: "Läslista 4: konsonantmöten"
       text:
         - Vecka 5 · konsonantmöten.
@@ -502,49 +353,6 @@ ramar:
               text: "Ljuda mötet som ett par: /s/ /t/ blir st, lägg sedan på resten: st-en, st-ol. I slutmötena: läs början, håll vokalen kort och landa i mötet: fi-sk, ha-nd."
             - rubrik: Lyssna efter
               text: "Att inget ljud tappas eller läggs till i mötet, som sen i stället för sten. Vid fel: bygg ordet med bokstavskort och ta bort första konsonanten, jämför sten och ten, gris och ris."
-      listor:
-        - rubrik: Läs orden, kolumn för kolumn
-          kolumner:
-            - Möte först
-            - Möte först
-            - Möte sist, kort vokal
-          rader:
-            - - sten
-              - klar
-              - ost
-            - - stol
-              - klok
-              - häst
-            - - spik
-              - kniv
-              - rast
-            - - snö
-              - knä
-              - fisk
-            - - slut
-              - trä
-              - mask
-            - - fri
-              - tre
-              - salt
-            - - frö
-              - plan
-              - hals
-            - - gris
-              - prat
-              - hand
-            - - gran
-              - brev
-              - land
-            - - blå
-              - bror
-              - sand
-            - - blad
-              - glad
-              - hund
-            - - tro
-              - grön
-              - vind
     - rubrik: "Läslista 5: ordet växer"
       text:
         - Vecka 6 · morfem.
@@ -557,75 +365,8 @@ ramar:
               text: "Läs radvis, från vänster till höger. Ringa in ändelsen och fråga vad som hände med ordet: en sol, solen, flera solar. I de sammansatta orden: dela ordet i två kända ord, sol och ros blir solros."
             - rubrik: Lyssna efter
               text: "Att eleven läser ändelsen som en helhet och inte ljudar om hela ordet från början. Beröm strategin: du såg ordet sol inuti solen."
-      listor:
-        - rubrik: "Substantiv: läs radvis"
-          kolumner:
-            - Grundord
-            - Med -en eller -an
-            - Med -ar eller -or
-          rader:
-            - - sol
-              - solen
-              - solar
-            - - bil
-              - bilen
-              - bilar
-            - - häst
-              - hästen
-              - hästar
-            - - fisk
-              - fisken
-              - fiskar
-            - - hund
-              - hunden
-              - hundar
-            - - båt
-              - båten
-              - båtar
-            - - kaka
-              - kakan
-              - kakor
-            - - saga
-              - sagan
-              - sagor
-        - rubrik: "Verb: läs radvis"
-          kolumner:
-            - Grundform
-            - "Nu: -ar eller -er"
-            - "Då: -ade eller -de"
-          rader:
-            - - laga
-              - lagar
-              - lagade
-            - - bada
-              - badar
-              - badade
-            - - måla
-              - målar
-              - målade
-            - - leka
-              - leker
-              - lekte
-            - - läsa
-              - läser
-              - läste
-            - - resa
-              - reser
-              - reste
-        - rubrik: Sammansatta ord
-          rader:
-            - - solros
-              - husbil
-              - matsal
-            - - solstol
-              - badhus
-              - sagobok
-        - rubrik: Första meningarna
-          rader:
-            - - Vi badar och solar.
-              - Jag läser en saga.
-            - - Musen bor i huset.
-              - Solen lyser på huset.
+            - rubrik: Bladet
+              text: Listan har två sidor. Kopiera båda till varje par, gärna dubbelsidigt.
     - rubrik: "Läslista 6: meningar"
       text:
         - Vecka 7 · meningar och text.
@@ -638,24 +379,6 @@ ramar:
               text: "Läs varje mening två gånger: först med fokus på att alla ord blir rätt, sedan en gång till med flyt och läsmelodi. Stanna vid punkten. Ordbilderna och, är, i, på, en, ett, har, jag, vi, det och de läses som helheter."
             - rubrik: Lyssna efter
               text: "Att eleven läser om meningen med flyt efter första genomläsningen och att rösten går ner vid punkt. Ställ en fråga per mening: var bor musen?"
-      listor:
-        - rubrik: Läs meningarna, en i taget
-          rader:
-            - - Mus i bur.
-            - - Solen lyser.
-            - - Hunden är glad.
-            - - Vi har en båt.
-            - - Jag målar ett hus.
-            - - Musen bor i muren.
-            - - Hästen står i hagen.
-            - - Vi leker i sanden.
-            - - I skogen står en gran.
-            - - Vi ser en gris och en ko.
-            - - Solen och månen lyser.
-            - - Mamma och pappa lagar mat.
-        - rubrik: Läs texten
-          rader:
-            - - Sara har en hund. Hunden är stor och glad. Sara och hunden leker i sanden. Sen vilar de i solen. Det är en fin dag.
 lathund:
   innehall: En läslista i veckan
   metoden:

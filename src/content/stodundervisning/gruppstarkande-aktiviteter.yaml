@@ -26,7 +26,7 @@ material:
   - Lärarens skattning
   - bladet Vår grupp
   - frågekort och meningar att avsluta
-uppdaterad: 2026-10-19
+uppdaterad: 2026-10-20
 publicerad: 2026-10-16
 centrala:
   - id: aktiviteter
@@ -47,6 +47,21 @@ pabordet:
     text: Elevens blad att skriva ut. Eleven ringar in ett svar från 1 till 5 på sex påståenden, tre om gruppen och tre om sig själv, och skriver på raderna det hen vill säga om gruppen.
     efter: "ram: Gruppreflektion"
     google: /vargrupp
+  - nr: 3
+    rubrik: "Blad: Frågekort"
+    text: "Tolv frågekort att klippa isär, med bandet Frågekort och en bild till varje fråga: Vad gillar du att göra på fritiden? Vilken mat gillar du? Vilket djur skulle du vilja vara för en dag? Vad är du bra på? Vad tycker du om att göra på loven? Vilken bok, film eller serie tycker du om? Vad skulle du vilja lära dig? Var tycker du om att vara? Vad gör dig glad? Vilken superkraft skulle du välja? Vad gör du helst på helgen? Vad skulle du göra om du fick bestämma allt en hel dag?"
+    efter: "ram: Frågekort och meningar att avsluta"
+    fluent: [sax, boll, mat, lejon, bli stark, ö, böcker, glödlampa, karta, nöjd, trollstav, ha roligt, krona]
+  - nr: 4
+    rubrik: "Blad: Meningar att avsluta"
+    text: "Tolv meningar att klippa isär, med bandet Avsluta meningen och en bild till varje mening: ”Jag blir glad när …”, ”Jag är bra på …”, ”En sak jag vill lära mig är …”, ”Min favoritplats är …”, ”Om jag fick bestämma allt en hel dag skulle jag …”, ”Jag skrattar när …”, ”En bra kompis är någon som …”, ”Något jag är stolt över är …”, ”Om jag kunde resa vart som helst skulle jag åka till …”, ”Det bästa med vår grupp är …”, ”Jag tycker om när någon …” och ”På helgen tycker jag om att …”."
+    efter: "ram: Frågekort och meningar att avsluta"
+    fluent: [sax, nöjd, bli stark, glödlampa, karta, krona, glad, vän, stolt, jordklot, vara med, känna, ha roligt]
+  - nr: 5
+    rubrik: "Blad: Egna frågekort och meningar"
+    text: "Tomma kort för egna frågor och meningar, att klippa isär: sex med bandet Frågekort och sex med bandet Avsluta meningen."
+    efter: "ram: Frågekort och meningar att avsluta"
+    fluent: [sax]
 
 inledning:
   - Gruppstärkande aktiviteter är lekar, utmaningar, samtal och byggen där gruppen bara kan lyckas tillsammans. Metoden passar en hel klass och en särskild undervisningsgrupp med minst fyra elever. Den behövs mest när gruppen är ny, när några står utanför eller när samarbetet går trögt.
@@ -389,41 +404,14 @@ ramar:
               text: Skriv det gruppen ska bli bättre på i raden nederst i Lärarens skattning. Välj kort där gruppen kan öva det. Säg högt när någon gör det, också på lektionerna och rasten.
     - rubrik: Frågekort och meningar att avsluta
       text:
-        - "Här är frågekort och meningar att klippa ut till aktiviteterna i Lära känna varandra. Frågekorten passar till Berätta mera, Inre och yttre cirkel, Speed-dejting med tärning, ”Vilka är vi?” och ”Fråga, fråga, byt!”, och meningarna hör till Oavslutade meningar. Skriv gärna egna frågor och meningar som passar gruppen."
+        - "Meningarna att avsluta hör till Oavslutade meningar, och frågekorten passar till Berätta mera, Inre och yttre cirkel, Speed-dejting med tärning, ”Vilka är vi?” och ”Fråga, fråga, byt!”"
       delar:
         - rubrik: Till läraren
           falt:
             - rubrik: Klipp
-              text: Skriv ut en omgång meningar till varje grupp, och så många frågekort att varje elev får ett i ”Fråga, fråga, byt!” Klipp längs linjerna, så att varje rad blir ett kort. I de andra aktiviteterna väljer du frågor ur listan.
-      listor:
-        - rubrik: Frågekort
-          rader:
-            - ["Vad gillar du att göra på fritiden?"]
-            - ["Vilken mat gillar du?"]
-            - ["Vilket djur skulle du vilja vara för en dag?"]
-            - ["Vad är du bra på?"]
-            - ["Vad tycker du om att göra på loven?"]
-            - ["Vilken bok, film eller serie tycker du om?"]
-            - ["Vad skulle du vilja lära dig?"]
-            - ["Var tycker du om att vara?"]
-            - ["Vad gör dig glad?"]
-            - ["Vilken superkraft skulle du välja?"]
-            - ["Vad gör du helst på helgen?"]
-            - ["Vad skulle du göra om du fick bestämma allt en hel dag?"]
-        - rubrik: Meningar att avsluta
-          rader:
-            - ["Jag blir glad när …"]
-            - ["Jag är bra på …"]
-            - ["En sak jag vill lära mig är …"]
-            - ["Min favoritplats är …"]
-            - ["Om jag fick bestämma allt en hel dag skulle jag …"]
-            - ["Jag skrattar när …"]
-            - ["En bra kompis är någon som …"]
-            - ["Något jag är stolt över är …"]
-            - ["Om jag kunde resa vart som helst skulle jag åka till …"]
-            - ["Det bästa med vår grupp är …"]
-            - ["Jag tycker om när någon …"]
-            - ["På helgen tycker jag om att …"]
+              text: Skriv ut bladet Frågekort så många gånger att varje elev får ett kort i ”Fråga, fråga, byt!”, och bladet Meningar att avsluta till varje grupp. Klipp längs de streckade linjerna, och laminera gärna korten, så kan ni använda dem många gånger. Lägg två meningar per elev i gruppens hög. I de andra aktiviteterna väljer du frågor bland korten.
+            - rubrik: Egna kort
+              text: Bladet Egna frågekort och meningar har tomma kort. Skriv gärna egna frågor och meningar som passar gruppen, i Word-filen eller för hand på utskriften.
 
 lathund:
   innehall: En aktivitet i fem delar

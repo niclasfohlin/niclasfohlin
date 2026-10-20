@@ -24,7 +24,7 @@ material:
   - fem modeller med blad
   - post-it-lappar
   - pennor
-uppdaterad: 2026-10-19
+uppdaterad: 2026-10-20
 relaterade:
   - boksamtal-i-grupp
   - problemlosning-i-grupp
@@ -49,9 +49,6 @@ nivaer:
 centrala:
   - id: faktatexter
     efterText: urval
-elevblad:
-  "Text 1: Bäverns damm": {}
-  "Text 2: Björnens vinter": {}
 inledning:
   - "Faktatextsamtal i grupp är en lärarledd insats där två till åtta elever i åk 4–9 läser en faktatext i veckan och samtalar om den. Den är för elever som läser orden men behöver stöd i att få ihop texten: de läser vidare fast de har slutat förstå, tar det roligaste för det viktigaste och läser varje avsnitt för sig. Eleven lär sig att stanna när det skaver, att säga det viktigaste i ett avsnitt med egna ord och att se hur en faktatext är byggd."
   - "Varje elev har en egen kopia av veckans text och en penna. Texten ser ut som ett kapitel i en faktabok, med fyra avsnitt, en fördjupning och bilder. På bordet ligger post-it-lappar och gruppens blad Kärnorna, där lapparna sitter mellan passen. Varje par har kortet När det skaver. I modellpasset ligger en tom modell i A3 mitt på bordet: en tankekarta, en tidslinje eller en annan av metodens fem modeller. Du har lärarens sida till texten, som säger var det brukar skava och vad du lyssnar efter."
@@ -593,7 +590,7 @@ lathund:
             3 · Avsluta
             Lapparna i följd
           - ”Vet vi mer nu?”
-    not: "När det skaver: läs om meningen, leta ledtrådar, dela ordet och fråga en kamrat. Sist förklarar du kort."
+    not: "När det skaver: läs om, leta efter en ledtråd, dela ordet och fråga en kamrat. Sist förklarar du kort."
   pass:
     rubrik: Läspasset med Vattenplaneten
     textRubrik: Gruppen · fyra elever i åk 5 · nivån Bas · vecka 1
@@ -1056,15 +1053,27 @@ pabordet:
     rubrik: Kärnorna efter läspasset
     text: Bladet Kärnorna för Vattenplaneten efter läspasset. Läraren har skrivit textens fråga och gruppens fyra gissningar före läsningen, och post-it-lapparna för de fyra avsnitten sitter på sina platser. Platsen för fördjupningen är tom.
     efter: exempel
-  - nr: 92
-    rubrik: Bäverns damm och hydda
-    text: Bäverns damm och hydda, sedda från sidan.
+  - nr: 94
+    rubrik: "Blad: När det skaver"
+    text: "Två likadana kort att klippa isär, ett till varje par. Kortet När det skaver har raden Pröva ett sätt i taget. Sedan kommer fyra sätt med en pil emellan, i den ordning paret prövar dem: Läs om (meningen, den före och efter), Leta efter en ledtråd (marginalen, bilden, ett exempel), Dela ordet (vatten + torn) och Fråga en kamrat (”Vad tror du?”)."
+    efter: "ram: När det skaver"
+    fluent:
+      - sax
+  - nr: 95
+    rubrik: "Blad: Jobbkorten"
+    text: "Bladet har de två jobbkorten att klippa isär. På det första, Du håller kortet När det skaver, står ”Stryk under det som skaver” vid steget Läs. Vid steget Red ut står ”Var skavde det?”, ”Vad har vi prövat?” och ”Läs nästa sätt på kortet”. På det andra, Du leder gruppen till kärnan, står fem rader vid steget Kärnan: ”Vem eller vad handlar det om?”, ”Vad är det viktigaste om det?”, ”Säg kärnan till den bredvid”, ”Vilken gäller hela avsnittet?” och ”Har den högst tio ord? Räkna”. Vid steget Lappen står ”Hur hänger lapparna ihop?”"
+    efter: "ram: Jobbkorten"
+    fluent:
+      - sax
+  - nr: 96
+    rubrik: "Blad: Text 1: Bäverns damm"
+    text: "Eleven läser bladet Text 1, Bäverns damm, i kartläggningen före perioden. Bladet har en rad för namnet, och under rubriken står två rader till eleven: ”Läs meningarna först” och ”Läs sedan texten med en penna i handen, ett avsnitt i taget”. Under dem står de fyra meningarna om Samir, i en ruta med frågan om något är konstigt. Sedan kommer texten i två avsnitt, En damm i bäcken och Ingången under vattnet. Sist står bilden av bäverns damm och hydda, sedda från sidan, med orden Damm, Hydda och Ingång."
     efter: "ram: Text 1: Bäverns damm"
     fluent:
       - bäver
-  - nr: 93
-    rubrik: Björnens höst och vinter
-    text: Björnen på hösten och på vintern.
+  - nr: 97
+    rubrik: "Blad: Text 2: Björnens vinter"
+    text: "Eleven läser bladet Text 2, Björnens vinter, i kartläggningen efter åtta veckor. Bladet har en rad för namnet, och under rubriken står två rader till eleven: ”Läs meningarna först” och ”Läs sedan texten med en penna i handen, ett avsnitt i taget”. Under dem står de fyra meningarna om Elsa, i en ruta med frågan om något är konstigt. Sedan kommer texten i två avsnitt, Bär hela hösten och Vintern i idet. Sist står bilden av björnen på hösten och på vintern, med orden Bär, Myrstack och Ide."
     efter: "ram: Text 2: Björnens vinter"
     fluent:
       - björn
@@ -3949,7 +3958,7 @@ ramar:
               text: Skriv ut bladet på A3, så att lapparna ryms. Är ni bara ett par räcker A4, och då skriver ni kärnorna direkt på bladet.
     - rubrik: När det skaver
       text:
-        - Kortet är elevernas, och varje par har ett. Det är till för den som läser ut orden rätt men inte förstår ett ord eller en mening. Paret prövar fyra sätt att reda ut det som skaver, uppifrån och ett i taget.
+        - Kortet är elevernas och till för den som läser ut orden rätt men inte förstår ett ord eller en mening.
       delar:
         - rubrik: Till läraren
           falt:
@@ -3958,26 +3967,10 @@ ramar:
             - rubrik: Du förklarar sist
               text: Fråga ”Vad har ni prövat?” innan du säger något om ordet. När paret har prövat de fyra sätten förklarar du kort och kopplar till något eleverna redan vet, och en elev säger det med egna ord.
             - rubrik: Utskrift
-              text: Skriv ut ett kort per par och plasta gärna in det.
-      listor:
-        - rubrik: "När det skaver: pröva ett sätt i taget"
-          rader:
-            - - Läs om
-              - |-
-                meningen
-                den före och efter
-            - - Leta efter en ledtråd
-              - |-
-                marginalen
-                bilden
-                ett exempel
-            - - Dela ordet
-              - vatten + torn
-            - - Fråga en kamrat
-              - ”Vad tror du?”
+              text: Bladet har två likadana kort, så ett blad räcker till två par. Klipp isär korten längs den streckade linjen och plasta gärna in dem.
     - rubrik: Jobbkorten
       text:
-        - Jobbkorten är två kort, ett för varje jobb. Med dem tar eleverna över dina frågor i avsnittets fyra steg. Eleven har jobbkortet i handen och läser upp en rad i taget.
+        - Med jobbkorten tar eleverna över dina frågor i avsnittets fyra steg, och den som har ett jobb läser upp en rad i taget.
       delar:
         - rubrik: Till läraren
           falt:
@@ -3990,22 +3983,7 @@ ramar:
             - rubrik: Det du gör
               text: "I vecka 3–4 lyssnar du, frågar och håller tiden. Stannar samtalet pekar du på nästa rad på jobbkortet. Saknar kärnan det viktiga frågar du: ”Var står det?” När de två leder hela avsnittet går du in först när något saknas. Håller kärnan säger du vad den som ledde gjorde."
             - rubrik: Utskrift
-              text: Skriv ut en uppsättning, eller två om ni är sju eller åtta.
-      listor:
-        - rubrik: Du håller kortet När det skaver
-          rader:
-            - - Stryk under det som skaver.
-            - - Var skavde det?
-            - - Vad har vi prövat?
-            - - Läs nästa sätt på kortet.
-        - rubrik: Du leder gruppen till kärnan
-          rader:
-            - - Vem eller vad handlar det om?
-            - - Vad är det viktigaste om det?
-            - - Säg kärnan till den bredvid.
-            - - Vilken gäller hela avsnittet?
-            - - Har den högst tio ord? Räkna.
-            - - Hur hänger lapparna ihop?
+              text: Bladet har båda jobbkorten. Skriv ut ett blad, eller två om ni är sju eller åtta. Klipp isär korten längs den streckade linjen och plasta gärna in dem.
     - rubrik: Egen text
       text:
         - Med bladet Egen text förbereder du en text som klassen läser i SO eller NO. Ifyllt är bladet lärarens sida till texten, och det följer samma två pass som metodens texter. Räkna med omkring tjugo minuter.
@@ -4145,50 +4123,24 @@ ramar:
               text: Hela gruppen läser texter på samma nivå. Välj den som passar de flesta. Den som stannar vid många ord läser i par med en kamrat som läser högt.
     - rubrik: "Text 1: Bäverns damm"
       text:
-        - Läs meningarna först. Läs sedan texten med en penna i handen, ett avsnitt i taget.
+        - På bladet har eleven fyra meningar, texten och bilden.
       delar:
         - rubrik: Till läraren
           falt:
             - rubrik: Hör till
               text: Kartläggningen före perioden. Det du säger står under Kartläggningen.
-      listor:
-        - rubrik: "Fyra meningar: är något konstigt?"
-          rader:
-            - - Samir har ingen cykel.
-            - - Han bor nära skolan.
-            - - Varje morgon tar han sin cykel dit.
-            - - Han kommer i tid varje dag.
-        - rubrik: 1 En damm i bäcken
-          rader:
-            - - Vid bäcken ligger ett fällt träd. Bävern har gnagt av det med sina framtänder, som växer hela tiden. Bävern är Sveriges största gnagare, och den äter bark och blad.
-            - - Bävern bygger också dammar. En damm stoppar vattnet i bäcken, och bakom dammen stiger vattnet.
-        - rubrik: 2 Ingången under vattnet
-          rader:
-            - - Bävern bor ofta i en hydda vid vattnet. När vattnet står högt ligger hyddans ingång under ytan. Det är därför bävern bygger dammar.
-            - - En ingång under vattnet skyddar bävern mot rovdjur och mot kylan. Sjunker vattnet på vintern, kommer kall luft in i hyddan.
+            - rubrik: Utskrift
+              text: Skriv ut ett blad per elev, enkelsidigt, så att baksidan är tom när du vänder bladet i uppgift 4.
     - rubrik: "Text 2: Björnens vinter"
       text:
-        - Läs meningarna först. Läs sedan texten med en penna i handen, ett avsnitt i taget.
+        - På bladet har eleven fyra meningar, texten och bilden.
       delar:
         - rubrik: Till läraren
           falt:
             - rubrik: Hör till
               text: Kartläggningen efter åtta veckor. Det du säger står under Kartläggningen.
-      listor:
-        - rubrik: "Fyra meningar: är något konstigt?"
-          rader:
-            - - Elsa har aldrig åkt buss.
-            - - Hon bor långt från skolan.
-            - - Varje morgon tar hon bussen dit.
-            - - Hon kommer i tid varje dag.
-        - rubrik: 1 Bär hela hösten
-          rader:
-            - - I skogen står en björn och äter bär. Björnen är en allätare. Den äter nästan allt, från myror till älgkalvar, men mest bär och växter. En björn kan väga upp mot 300 kilo.
-            - - På hösten äter björnen mycket bär, och då bygger kroppen upp ett fettlager.
-        - rubrik: 2 Vintern i idet
-          rader:
-            - - Sent på hösten går björnen i ide. Idet är ofta en håla under en gammal myrstack. Där sover björnen hela vintern, och den varken äter eller dricker.
-            - - Den lever på fettet från hösten. Det är därför björnen klarar vintern. I april börjar björnarna vakna.
+            - rubrik: Utskrift
+              text: Skriv ut ett blad per elev, enkelsidigt, så att baksidan är tom när du vänder bladet i uppgift 4.
     - rubrik: "Kartläggningen: protokollet"
       text:
         - Du har ett protokoll per elev, för båda gångerna. Skriv det eleven säger, med elevens egna ord, och det hen gör. Det du säger och lyssnar efter i varje uppgift står under Kartläggningen. Efter åtta veckor läser du raderna före och efter i följd, uppgift för uppgift, och skriver vad som har ändrats.

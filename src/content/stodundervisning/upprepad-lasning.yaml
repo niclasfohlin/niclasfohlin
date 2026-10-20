@@ -23,7 +23,7 @@ material:
   - läsrör
   - lappen hem
   - snabbmallen
-uppdaterad: 2026-10-17
+uppdaterad: 2026-10-20
 relaterade:
   - til-i-grupp
   - laslistor-i-grupp
@@ -33,6 +33,14 @@ utkast: false
 centrala:
   - id: lasstrategier
     efterText: "tabell: Läsfelen och strategierna"
+  - id: utveckla-hoglasning
+    efterText: "tabell: Lästrappan"
+pabordet:
+  - nr: 1
+    rubrik: "Blad: Strategikortet"
+    text: "Två likadana strategikort att klippa isär, ett till bordet och ett att ta med hem. Kortet heter Mina lässtrategier och har en rad för namnet och sju strategier med var sin bild och hur man gör: Läs hela ordet (Peka under ordet), Säg ljuden utan paus (sss-ooo-lll → sol), Låter det som ett ord? (huuund? → hund), Dela ordet (ba-nan och last-bil), Hitta ordet i ordet (hund-ar-na och sol-en), Stämde det? (Läs meningen igen) och Läs som när du pratar (Stanna vid punkten)."
+    efter: "ram: Strategikortet"
+    fluent: [sax, pekfinger, orm, öra, pusselbit, förstoringsglas, frågetecken, säga]
 inledning:
   - "Upprepad läsning betyder att eleverna läser samma text flera gånger, tills orden går lätt och läsningen får flyt. Här arbetar ni utan tidtagning och diagram. I stället följer varje pass samma ordning: eleverna läser, läraren modellerar utifrån det hen har hört, och eleverna läser igen, till exempel i kör och i par. Texten är densamma genom hela passet."
   - "Syftet är att eleven ska läsa med flyt och förstå det hen läser. Då går orden lätt och läsningen låter som när man pratar, och när det tar stopp använder eleven en strategi på egen hand. Ditt uppdrag består av fyra saker. Eleverna läser samma text flera gånger, och du visar dem strategier i texten de läser. Eleverna sätter ord på strategierna vid bordet, och du följer läsflytet på lästrappan. Lästrappan har fem steg, från att gissa till att läsa med flyt, och målet är att eleven går upp några steg."
@@ -49,6 +57,7 @@ principer:
 tabeller:
   - rubrik: "Lästrappan: från att gissa till att läsa med flyt"
     plats: efter-inledning
+    text: "Utveckla högläsning är ett A4 på metodens sida med strategier för att läsa högt för en lyssnare."
     kolumner:
       - Trappsteg
       - Så läser eleven
@@ -96,7 +105,7 @@ tabeller:
       - - |-
           Parläsning
           Två elever läser samma text för varandra och byter roller.
-        - "En elev läser, den andra följer med i texten, pekar och peppar. Den som pekar ger stöd vid svåra ord: ljuda tillsammans, dela ordet i delar, läs meningen om från början. Efter en genomläsning byter de roller och läser samma text igen. Byt par mellan veckorna."
+        - "En elev läser, och den andra följer med, pekar och ger stöd vid svåra ord: ljuda tillsammans, dela ordet, läs meningen om. Sedan byter de roller och läser samma text igen. Byt par mellan veckorna."
         - "eleverna står på steg 3–⁠5 och läser texten nästan själva, eller texten är bekant och kamraten kan rätta"
       - - |-
           Varannan mening
@@ -111,7 +120,7 @@ tabeller:
       - - |-
           Med stöd, sedan utan
           Eleven läser lästräningstexten med stöd och sedan samma text utan.
-        - "Eleven drar fingret längs bågarna och läser orden under samma båge i ett svep. Bindestrecken visar delar som eleven känner igen i långa ord. När texten med stöd går lätt läser eleven samma text utan stöd. Läskorten finns under Materialet."
+        - "Eleven drar fingret längs bågarna och läser orden under en båge i ett svep. Bindestrecken visar delar i långa ord. När det går lätt läser eleven samma text utan stöd. Läskorten finns under Materialet."
         - "eleven står på steg 2–⁠4 och läser ord för ord eller fastnar i långa ord"
       - - |-
           Lästeater
@@ -401,31 +410,14 @@ ramar:
   ramar:
     - rubrik: Strategikortet
       text:
-        - Varje elev har ett kort vid bordet och ett att ta med hem. Skriv ut kortet från lathundens tredje sida, och laminera gärna det som ligger i skolan.
+        - Varje elev har ett kort vid bordet och ett att ta med hem.
       delar:
         - rubrik: Till läraren
           falt:
             - rubrik: Så använder ni kortet
-              text: "Visa en strategi i taget när du modellerar, och peka ut den på kortet. Elever på steg 1–⁠2 i lästrappan kan inte läsa kortet själva i början, så läs raden tillsammans med eleven och peka. Den som stöttar pekar på kortet innan någon säger ordet, och eleven säger vilken strategi som hjälpte."
-      huvud:
-        - rubrik: Namn
-      listor:
-        - rubrik: Mina lässtrategier
-          rader:
-            - - Läs hela ordet
-              - Peka under ordet.
-            - - Säg ljuden utan paus
-              - sss-⁠ooo-⁠lll → sol
-            - - Låter det som ett ord?
-              - huuund? → hund
-            - - Dela ordet
-              - ba-⁠nan och last-⁠bil
-            - - Hitta ordet i ordet
-              - hund-⁠ar-⁠na och sol-⁠en
-            - - Stämde det?
-              - Läs meningen igen.
-            - - Läs som när du pratar
-              - Stanna vid punkten.
+              text: "Visa en strategi i taget när du modellerar, och peka ut den på kortet. Elever på steg 1–⁠2 i lästrappan kan inte läsa kortet själva i början, så läs raden tillsammans med eleven och peka. Bilden vid varje strategi hjälper eleven att hitta den. Den som stöttar pekar på kortet innan någon säger ordet, och eleven säger vilken strategi som hjälpte."
+            - rubrik: Kortet
+              text: "Ett blad räcker till en elev. Skriv elevens namn på båda raderna, för hand eller i Word-filen innan du skriver ut, och klipp isär korten längs den streckade linjen. Laminera gärna kortet som ligger i skolan. Lathundens tredje sida har samma kort."
     - rubrik: Lästräningstexterna
       text:
         - "Det finns en sida för varje vecka, med två läskort som du klipper isär längs den streckade linjen. Eleven läser först texten med stöd och sedan samma text utan stöd."

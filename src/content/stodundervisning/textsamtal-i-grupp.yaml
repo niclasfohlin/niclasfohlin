@@ -30,7 +30,7 @@ material:
   - ledtrådsbladet
   - lyssningsbladet
   - kartläggningen
-uppdaterad: 2026-10-19
+uppdaterad: 2026-10-20
 relaterade:
   - boksamtal-i-grupp
   - faktatextsamtal-i-grupp
@@ -42,6 +42,22 @@ utkast: false
 centrala:
   - id: lastexter
     efterText: urval
+pabordet:
+  - nr: 1
+    rubrik: "Blad: Samtalsreglerna"
+    text: "Affischen Samtalsreglerna har raden Så samtalar vi och de fem reglerna med var sin bild: Vi säger vad vi tror. Vi visar var det står. Vi bygger vidare på varandra. Vi får tänka olika. Vi får ändra oss."
+    efter: "ram: Samtalsreglerna"
+    fluent: [säga, oppen-bok, pekfinger, tegelsten, tänka]
+  - nr: 2
+    rubrik: "Blad: Tankekortet"
+    text: "Bladet har två tankekort att klippa isär. Båda heter Så tänker jag mellan raderna och har sex tankesteg med var sin bild och den fråga eleven ställer sig: Stanna (Vad står inte här?), Se det framför dig (Vad ser och hör jag?), Det står (Vilka ord är ledtrådar?), Jag vet (Vad vet jag om sådant?), Alltså tror jag (Vad kan det betyda?) och Stämmer det? (Passar det med resten?)."
+    efter: "ram: Tankekortet"
+    fluent: [sax, hand, öga, oppen-bok, hjärna, glödlampa, förstoringsglas]
+  - nr: 3
+    rubrik: "Blad: Samtalskortet"
+    text: "Bladet har två samtalskort att klippa isär. Båda heter Så pratar vi om texten och har sex rader med det eleven säger och det hen frågar sin kamrat: ”Jag tror att” (Vad tror du?), ”för det står” (Hur vet du det?), ”Jag har varit med om” (Kan du säga mer?), ”Jag håller med, och” (Vad vill du lägga till?), ”Jag tänker annorlunda” (Kan det vara något annat?) och ”Tänk om” (Stämmer det med texten?)."
+    efter: "ram: Samtalskortet"
+    fluent: [sax, säga, frågetecken]
 inledning:
   - Textsamtal i grupp lär eleverna att läsa mellan raderna genom att samtala om texter. När människor samtalar blir tänkandet synligt. När en elev säger ”Jag tror att hon vill att de ska stanna, för det står att hon vinkade lite till”, hör de andra hur en läsare tänker, och de kan pröva tanken, bygga vidare på den eller vända den åt ett nytt håll. Eleverna tänker högt, prövar idéer också utanför frågorna och tänker i nya riktningar.
   - Det som samtalet handlar om står ofta inte utskrivet, som hur någon känner sig, varför hen gör som hen gör, var de är eller vad någon egentligen menar. Den som läser mellan raderna märker att något inte står, letar ledtrådar i texten och lägger till det hen redan vet. Det kallas att göra en inferens, och det är det metoden tränar.
@@ -672,72 +688,34 @@ ramar:
   ramar:
     - rubrik: Tankekortet
       text:
-        - Varje elev har kortet vid bordet i varje pass. Skriv ut det till varje elev och laminera det gärna. Det står i elevens typsnitt, och samma rader står på lathundens tredje sida.
+        - Varje elev har kortet vid bordet i varje pass.
       delar:
         - rubrik: Till läraren
           falt:
             - rubrik: Så använder ni kortet
               text: Kortet hjälper eleven med det inre samtalet. Peka på steget när du tänker högt i pass 1. I pass 2 och 3 pekar eleverna själva på steget de använder, och frågan bredvid är den de ställer sig själva. På nivån Lättläst börjar ni med Det står, Jag vet och Alltså tror jag.
-      listor:
-        - rubrik: Så tänker jag mellan raderna
-          kolumner:
-            - Tankesteget
-            - Jag frågar mig
-          rader:
-            - - Stanna
-              - Vad står inte här?
-            - - Se det framför dig
-              - Vad ser och hör jag?
-            - - Det står
-              - Vilka ord är ledtrådar?
-            - - Jag vet
-              - Vad vet jag om sådant?
-            - - Alltså tror jag
-              - Vad kan det betyda?
-            - - Stämmer det?
-              - Passar det med resten?
+            - rubrik: Kortet
+              text: Bladet har två likadana kort, så ett blad räcker till två elever. Skriv ut det, klipp isär korten och laminera dem gärna. Samma rader står på lathundens tredje sida.
     - rubrik: Samtalskortet
       text:
-        - Varje elev har kortet vid bordet i varje pass, bredvid tankekortet. Skriv ut det till varje elev och laminera det gärna. Det står i elevens typsnitt, och samma rader står på lathundens tredje sida.
+        - Varje elev har kortet vid bordet i varje pass, bredvid tankekortet.
       delar:
         - rubrik: Till läraren
           falt:
             - rubrik: Så använder ni kortet
               text: Kortet hjälper eleverna att samtala med varandra. Under Jag säger står det man säger, och under Jag frågar det man frågar sin kamrat. Raderna är samtalsdragen. I vecka 1 börjar alla med de två första raderna, och sedan kommer en rad till i veckan, som tabellen Progression över insatsperioden visar. Visa raden med en elev, och låt paren använda den vid stoppet. Tankekortet hjälper eleven till en tanke, och samtalskortet hjälper hen att säga den.
-      listor:
-        - rubrik: Så pratar vi om texten
-          kolumner:
-            - Jag säger
-            - Jag frågar
-          rader:
-            - - Jag tror att
-              - Vad tror du?
-            - - för det står
-              - Hur vet du det?
-            - - Jag har varit med om
-              - Kan du säga mer?
-            - - Jag håller med, och
-              - Vad vill du lägga till?
-            - - Jag tänker annorlunda
-              - Kan det vara något annat?
-            - - Tänk om
-              - Stämmer det med texten?
+            - rubrik: Kortet
+              text: Bladet har två kort, som tankekortets. Klipp isär dem och laminera dem gärna. Blir bordet fullt, skriv ut tankekortet och samtalskortet dubbelsidigt, så att eleven får ett kort med två sidor. Samma rader står på lathundens tredje sida.
     - rubrik: Samtalsreglerna
       text:
-        - Gruppen har reglerna framför sig i varje pass, på ett kort till varje elev eller på tavlan hela veckan. Det står i elevens typsnitt, och samma rader står på lathundens tredje sida.
+        - Gruppen ser reglerna i varje pass, på väggen eller på ett kort till varje elev.
       delar:
         - rubrik: Till läraren
           falt:
             - rubrik: Så använder ni reglerna
               text: Säg reglerna tillsammans i Starten i vecka 1, och fråga vad de betyder. Välj gärna en regel före samtalet, och titta tillbaka på den i Avsluta med frågan ”Hur gick det att följa samtalsreglerna i dag?”
-      listor:
-        - rubrik: Så samtalar vi
-          rader:
-            - - Vi säger vad vi tror.
-            - - Vi visar var det står.
-            - - Vi bygger vidare på varandra.
-            - - Vi får tänka olika.
-            - - Vi får ändra oss.
+            - rubrik: Affischen
+              text: Skriv ut bladet på A3, eller förstora det till 141 procent i kopiatorn, och sätt upp det där gruppen ser det. Till ett kort för varje elev förminskar du bladet till 71 procent och klipper ut det i A5. Reglerna står också på lathundens tredje sida.
     # >>> texterna: node build/texter.mjs textsamtal-i-grupp --yaml skriver allt härifrån
     - rubrik: Startmeningarna
       text:

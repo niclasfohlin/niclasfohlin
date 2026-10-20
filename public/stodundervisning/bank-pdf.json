@@ -2016,11 +2016,11 @@
     ]
   },
   "textsamtal-i-grupp-texter-alla-med-lararens-sida": {
-    "word": "e3dcfe060b4caf1ad76a1795b7c06925fa734e5a92dd70ce11b73a7d7dbc234e",
-    "pdf": "fb54320f5fc2a781080a9cac9f769e3ee73e8c748e1b23c4a18c3c31efafb173",
+    "word": "7b5c1432d3edd774efac623f2cd05eeae375d5257e228c306743f827fa409b2c",
+    "pdf": "c8e08b767950aaddf32e0243fdbfab8891902b42fb518525651da582c4c30aef",
     "sidor": 173,
-    "kB": 1474,
-    "datum": "2026-10-19",
+    "kB": 1468,
+    "datum": "2026-10-20",
     "karta": [
       {
         "ram": 4,
@@ -2999,11 +2999,11 @@
     ]
   },
   "textsamtal-i-grupp-texter-lattlast-med-lararens-sida": {
-    "word": "902de03320b12a25d975af3cf6fdb36aaadad652cd5a9a2a736d068291ad3717",
-    "pdf": "1e16e086ae636b5dabdacf6adca35b9028a53355b23068b79052f8115942d036",
+    "word": "8cb284072f9bd35b9f63afb20db344a30d92aa7c455446a5a929866539de4a51",
+    "pdf": "54dbfd995178e309e2d1e82faba6279f2f4c3f44021dcaa0e67202649b574f74",
     "sidor": 57,
-    "kB": 661,
-    "datum": "2026-10-19",
+    "kB": 662,
+    "datum": "2026-10-20",
     "karta": [
       {
         "ram": 5,
@@ -3427,11 +3427,11 @@
     ]
   },
   "textsamtal-i-grupp-texter-mellan-med-lararens-sida": {
-    "word": "db06ff9d5191ac0a17aa58dc69d517964b6f704bfcd4fafa7efcb73ea1cf02d2",
-    "pdf": "ef593d17b0e59de6ed191217e2ce4419f6ee2d51266b35fa27dfdaa9b0c30710",
+    "word": "6a9980855d2b8903199d8903aec1a14197deb6249de0ec4faf0f9dcbda379bf7",
+    "pdf": "4090442c5eb225073eecb9c0c98e31cad22e019ca3505dfdf04f9b06f083910f",
     "sidor": 57,
-    "kB": 702,
-    "datum": "2026-10-19",
+    "kB": 704,
+    "datum": "2026-10-20",
     "karta": [
       {
         "ram": 60,
@@ -3855,11 +3855,11 @@
     ]
   },
   "textsamtal-i-grupp-texter-avancerad-med-lararens-sida": {
-    "word": "d1e5d380bca8438acb9608a8397338633941d4965d089e38372124f9f59f5ddc",
-    "pdf": "a3ffac271bc1428b9682537742b2365c4c07ef67bcdb09959d2dbc91d15400ca",
+    "word": "9d83dd5c5f8b721e18eaa2111907ff1dae3df9d988d6590d31542a65a7270bdd",
+    "pdf": "50ec690a67f116c71d8a78b4ff63ccd9a54fc6e568b90303286d11d24153b0c9",
     "sidor": 57,
     "kB": 732,
-    "datum": "2026-10-19",
+    "datum": "2026-10-20",
     "karta": [
       {
         "ram": 115,
@@ -4603,11 +4603,11 @@
     ]
   },
   "faktatextsamtal-i-grupp-bladen-och-korten": {
-    "word": "00672e20e8811bcbb31ef6ba8efc6ad5401a7983c8c6eefc0cb9b8742dcc2b6a",
-    "pdf": "73e3b0312f6bef75489d36d90b39d288e72520a7d6095442c68fa8ccab821b11",
-    "sidor": 14,
-    "kB": 401,
-    "datum": "2026-10-18",
+    "word": "250baabb1de107bb23521d50ab781d84322490ad093f50588363cd64cade011e",
+    "pdf": "d249c44a497f1c79f4a48043d6eb262f42c35662b7d7de9cc7f38107689960eb",
+    "sidor": 17,
+    "kB": 647,
+    "datum": "2026-10-20",
     "karta": [
       {
         "ram": 54,
@@ -4626,39 +4626,63 @@
         "till": 3
       },
       {
-        "ram": 56,
+        "ram": 55,
+        "bild": 94,
         "fran": 4,
+        "till": 4
+      },
+      {
+        "ram": 56,
+        "fran": 5,
         "till": 5
       },
       {
-        "ram": 57,
+        "ram": 56,
+        "bild": 95,
         "fran": 6,
         "till": 6
       },
       {
-        "ram": 58,
+        "ram": 57,
         "fran": 7,
-        "till": 8
+        "till": 7
+      },
+      {
+        "ram": 58,
+        "fran": 8,
+        "till": 9
       },
       {
         "ram": 59,
-        "fran": 9,
-        "till": 10
-      },
-      {
-        "ram": 60,
-        "fran": 11,
+        "fran": 10,
         "till": 11
       },
       {
-        "ram": 61,
+        "ram": 60,
         "fran": 12,
         "till": 12
       },
       {
-        "ram": 62,
+        "ram": 60,
+        "bild": 96,
         "fran": 13,
+        "till": 13
+      },
+      {
+        "ram": 61,
+        "fran": 14,
         "till": 14
+      },
+      {
+        "ram": 61,
+        "bild": 97,
+        "fran": 15,
+        "till": 15
+      },
+      {
+        "ram": 62,
+        "fran": 16,
+        "till": 17
       }
     ]
   },
@@ -4849,18 +4873,18 @@
     ]
   },
   "antalsuppfattning-i-grupp": {
-    "word": "bc62d7ed0128cabd6bc4d426a144cd34e753734785838080f8b5a2144a055f09",
-    "pdf": "89cc7afd55b1817d0948c552f167f507394644762339bef44f3b276235eab0b2",
-    "sidor": 61,
-    "kB": 708,
-    "datum": "2026-10-19"
+    "word": "e139aff2409947d44596a8f3c644fca2133f0bf58224608645db1612ce23c9cd",
+    "pdf": "93fdc2f6538e00a28d65cb26a02110fd5eb957f6617e95620928e44f3325e41f",
+    "sidor": 75,
+    "kB": 1555,
+    "datum": "2026-10-20"
   },
   "antalsuppfattning-i-grupp-metoden": {
-    "word": "86b6b748d58d6a01d702828b09c6ae5876d3b44b249b536909cf983a11a1853a",
-    "pdf": "70fa100cc408e96339466835bae8ed837e590451f77554b1b2b75305c6774f61",
+    "word": "81d019cee70afe085aa79b0bea097059e0d0c40c4fe4a45c87b3f67b3949278e",
+    "pdf": "c780fa8f04d4b635ac9f824ad0d3b66ca20ac0a9c423963ac1c9623c67ecf514",
     "sidor": 10,
     "kB": 416,
-    "datum": "2026-10-19"
+    "datum": "2026-10-20"
   },
   "boksamtal-i-grupp": {
     "word": "c2f9f8102ab6bb3caefaef1b2629f4aa7ab28ae7546fa0399d252b187cbc5248",
@@ -4891,18 +4915,18 @@
     "datum": "2026-10-19"
   },
   "faktatextsamtal-i-grupp": {
-    "word": "103c2f1cda5a1b04957b3454b8a201fb3078d2ca6726a03f3372499cf65faa99",
-    "pdf": "0500abe7e92c74566554c06b7f0ddd1bc8e4f7367b86b64202f6359cf632c1ae",
-    "sidor": 171,
-    "kB": 3171,
-    "datum": "2026-10-19"
+    "word": "5208ac8c0d50d3b4d3486de6a720b7a6e47872ed222cc5a9ac91fed1b0a24199",
+    "pdf": "d9c4fb19dfd0f0b5f75a2eadf7de9139f36227de1a8b333547d0276192ee9d08",
+    "sidor": 174,
+    "kB": 3429,
+    "datum": "2026-10-20"
   },
   "faktatextsamtal-i-grupp-metoden": {
-    "word": "11eac033a2f4a47f3277035284067d3a2e9c71553e3c9dc06d453409b94a4ce7",
-    "pdf": "5098dbe267685d0983a844d26c50b82cc2d8628067f440b3d0f392fc8370abd9",
+    "word": "ae3f028d82c78d22bb6b3e02646d3dbd21234488aba38a64a6fd065d13871acc",
+    "pdf": "b4f4602808b63f2cda399593b286dcac655bffcd5fccd6f683239abdd1c5bb12",
     "sidor": 15,
     "kB": 581,
-    "datum": "2026-10-19"
+    "datum": "2026-10-20"
   },
   "fyra-raknesatten": {
     "word": "fb91d0414d88bc2ef983edb07a9be99296f41626e365ca186a703d484b46176b",
@@ -4919,32 +4943,32 @@
     "datum": "2026-10-19"
   },
   "kompissamtal": {
-    "word": "fd36d2c4adcc73a1f5b6b1c0601fecc6cae08932abe7b22932929a4c063a0363",
-    "pdf": "626eeae5368d57ca99931b4a062702774857a2d81bb74161a50fb4a6c350eb5c",
-    "sidor": 27,
-    "kB": 677,
-    "datum": "2026-10-17"
+    "word": "bdb3255b8d089bdb2c18959e062e505c58c3709a31f50669c100ed9392bafc7f",
+    "pdf": "40921226280167decba4e4458cd8cf3897b4506a71df469831c7d412544992ae",
+    "sidor": 30,
+    "kB": 766,
+    "datum": "2026-10-20"
   },
   "kompissamtal-metoden": {
-    "word": "710153fae4d6ce43eb595d5f9c2fafe301d775e69e8a53e2178a657b2c23a4f5",
-    "pdf": "335ba95c2f28953ce9a2dce2ddf6c8f2727c72b8c52b22ae6c6ca2562c25c131",
+    "word": "b99f55296d50b2290b61247994ac6c523f112591790e68789aedb29ce0bdc2d2",
+    "pdf": "4f481cf8d30d6ac1dcccb2e2b2f6a2a7bb73ba2e8a38c52b9e60025b7254b193",
     "sidor": 13,
     "kB": 491,
-    "datum": "2026-10-19"
+    "datum": "2026-10-20"
   },
   "laslistor-i-grupp": {
-    "word": "47f4ac80b459fe9e2bb922a78cb7ca69f613331d5c79f8e538ffb8e4b5e430f1",
-    "pdf": "b530a7bbb58823a148f41f96cc7220cc718537186ca372adc82db827ea96567f",
-    "sidor": 24,
-    "kB": 604,
-    "datum": "2026-10-19"
+    "word": "5ee25476fa51dbaef0bab240903c8a95a6dc333c1a7e6b9c2f468a12ad8a61d0",
+    "pdf": "4cf69ee78386d981a09ba8258bbf458dd0307ab2cdf2b87abfe88fd66b2174c1",
+    "sidor": 31,
+    "kB": 814,
+    "datum": "2026-10-20"
   },
   "laslistor-i-grupp-metoden": {
-    "word": "80cf4e7906bc48e2fcdc58aee2ab4bc19ed30694c9e01c3bc1cf132ce42b4705",
-    "pdf": "96eba8f30330d2809fdd8b316ef519f375467df3a1f9912c12dc51b05ada3cbc",
+    "word": "c28bca5e537deffaf94168fc0740a8629e4cc339d79d176004e1a2bc6f805637",
+    "pdf": "232fd0e025e8db1fae07db58e07af60a4069c10a049d21c8eedf6ccf9847275d",
     "sidor": 8,
     "kB": 395,
-    "datum": "2026-10-19"
+    "datum": "2026-10-20"
   },
   "ljudlek-bokstavsgympa": {
     "word": "bda4c46207364c9f5d4953157afeb8b9d490e0eee121d5c9a7ab4304c4ac8bc2",
@@ -4975,18 +4999,18 @@
     "datum": "2026-10-19"
   },
   "ljudlek-i-grupp": {
-    "word": "7bceeba99868eb861de9e42e7cb67a2fbd49116b1650d48fb0e2928b940dc478",
-    "pdf": "3a3c9b3dfd0b23a1e1295ad6a4046651705cb8bc4845057c8191edca0cc950e4",
-    "sidor": 38,
-    "kB": 658,
-    "datum": "2026-10-17"
+    "word": "94e6fda05904db971f2c371cbebd0c6ad44729b6dcd5572c95e6dc1177d79540",
+    "pdf": "4eb0ac0214f4f6bf80b3563465c2e678a9323386922a48229e65c3dbc3da5c46",
+    "sidor": 37,
+    "kB": 899,
+    "datum": "2026-10-20"
   },
   "ljudlek-i-grupp-metoden": {
-    "word": "40132f4b405d8b0ce25de96426e8a352b93f815a184586bd108d31ef9f3f0983",
-    "pdf": "b534a15ca3bc0c15b875075db75a004e438022e737fd85cdce2bc48754dfb885",
+    "word": "fa48230ae64355d7509f5ca3822452e67ef9270c80e621e28f156e9c01c0435d",
+    "pdf": "8b1512d4cbbb88c75793d90475f8bbf34207ed96a22fb9c3ebb4c90d30e5a444",
     "sidor": 13,
     "kB": 438,
-    "datum": "2026-10-19"
+    "datum": "2026-10-20"
   },
   "ljudlek-ord-och-stavelser": {
     "word": "d8a66797316dfd2ca52c67fd6770892a1bef5cca488f5f71b225f08511230ef8",
@@ -5059,46 +5083,46 @@
     "datum": "2026-10-19"
   },
   "ordverkstad-i-grupp": {
-    "word": "f9aae9f829abaf489469051306d6f118ca0c7cc51b3b688d556b1bd2c398abd1",
-    "pdf": "f8de01982d67bd89b9506d7d1dd5c5d9b1d935d0a9d962ae8799131715865152",
-    "sidor": 66,
-    "kB": 936,
-    "datum": "2026-10-19"
+    "word": "9c740666cd4d33827a651ebd2b905d5c26c46923113a49245bc018779593528f",
+    "pdf": "a00b0235e17de5f0594d18f2937b2133db70a17d53347bfdbfc58f3b66413ef3",
+    "sidor": 73,
+    "kB": 1194,
+    "datum": "2026-10-20"
   },
   "ordverkstad-i-grupp-metoden": {
-    "word": "25c5f9a63c39bae403995b2a86c43660533b327d3dbde9ac7cf543a00514cee6",
-    "pdf": "4f3c97a38ce031242a28896485bbf621111f155a9f9dad3c43b5ac1a529e03f6",
+    "word": "c3f0abee12b636fefa2402410e1e0001c825bfe65fc0983a263f2730763278c1",
+    "pdf": "2402ffef6d0bb2fb0b0972554948ac7d778ba572e47bd0501e32cda035ef0d31",
     "sidor": 16,
     "kB": 532,
-    "datum": "2026-10-19"
+    "datum": "2026-10-20"
   },
   "problemlosning-i-grupp": {
-    "word": "8b791236be3c8690a99011ef29c5b7ad63229258566461b931cff151f3cd6647",
-    "pdf": "5bef8c6964779ad161fa574fa77e3d22769f7d608a49e56d06b4bf40efe26008",
+    "word": "590d6668b59f8a3a30b1eadbdea23dcd6922b97e43f11751a4d6c0f51c5830a4",
+    "pdf": "0640000b852f27a4e8f173ed350fa791947a3de4ad7751ab07f065c56624a58a",
     "sidor": 160,
-    "kB": 3724,
-    "datum": "2026-10-19"
+    "kB": 4017,
+    "datum": "2026-10-20"
   },
   "problemlosning-i-grupp-metoden": {
-    "word": "82572ec66c7eaf1ac4b56d5eed78d7293fee83cef1b4180cea8666feea596560",
-    "pdf": "2beec7d3a544162f15acdf9b05dc974763315e872a3e23c8bdc78c41eaf4c6be",
+    "word": "4516e417f7508cbb6b3001d1276eeae5282268e0057b8b74856dd6fb8b8406d0",
+    "pdf": "bb578a627d540ba788ecd45c29b10ecbe330ddc82ef6158c73a33789d24fdbb6",
     "sidor": 11,
     "kB": 559,
-    "datum": "2026-10-19"
+    "datum": "2026-10-20"
   },
   "seriesamtal": {
-    "word": "c81e2bef754aea6a5a6f65de8a3e08f3d025a46e2da459b052b79c8aea2c78a7",
-    "pdf": "8436b70c01bb88a6ab59359243656d35c04280efef39b5a25cba9d75995fdf2b",
-    "sidor": 50,
-    "kB": 1170,
-    "datum": "2026-10-17"
+    "word": "e3293ec8ae98a68c6a7fc3394b9f8d3f9501944e3d07e6156b6c990f0eaac75c",
+    "pdf": "5f091daea140725156576fc961821dede68674a348a63b27ce3872333a925880",
+    "sidor": 53,
+    "kB": 1233,
+    "datum": "2026-10-20"
   },
   "seriesamtal-metoden": {
-    "word": "953b881dac9fa577bf7bae20c26b3fe654ac4780c0f062d634c92cea86475d54",
-    "pdf": "3325cfb9d8cc885d8086a356746984eae11b4774be39379b8d3801a82e0103c1",
+    "word": "e83d897ae5d5e9b6d56c9f2640f981b948b98f7976daf92c58c78f4f31bcf229",
+    "pdf": "378eb424152948d2c319dc9ae40b2e3798bdd404da1cd3cf6c91706a52289b37",
     "sidor": 18,
     "kB": 632,
-    "datum": "2026-10-19"
+    "datum": "2026-10-20"
   },
   "skrivkurs-berattelseram": {
     "word": "375700813451f06b8e0b8d8178a6f99fe7d31823d303222240fc2fc0ed19b203",
@@ -5143,18 +5167,18 @@
     "datum": "2026-10-19"
   },
   "textsamtal-i-grupp": {
-    "word": "8abcb4a313ad9e77a91ebb25ecf71a76b22fd738dbdaddc87da7ffe531902d1b",
-    "pdf": "a7835d496343465c25090d55ec206844f38492ce7d91f01a281a219dd80f9ece",
-    "sidor": 216,
-    "kB": 2034,
-    "datum": "2026-10-19"
+    "word": "0807baf563b02b51c8e4c6c0c3a1fdc4970af6dbefec7b8d383552e0ad92e117",
+    "pdf": "ae80cedcfb0fe72356342c6c7c92db596fe12aec596afc31467f2cb100f6ad40",
+    "sidor": 219,
+    "kB": 2201,
+    "datum": "2026-10-20"
   },
   "textsamtal-i-grupp-metoden": {
-    "word": "d45f29b2a61d9a387d380e26151d1f16cc9ac8189d584e9f6b6192d0c5a078c0",
-    "pdf": "d4129e4e313453e978de12cfb3a2a948d4c8227a0417c3ded19ccc7ca4afc4fb",
+    "word": "034070feac67482fb1ccb401a044d4707b4835c51c8be199294dd4dfe00a6d6e",
+    "pdf": "873d6aa01bb191dfd17ac7192ba6052a02e25d0c70513846625ad9fcd331a635",
     "sidor": 21,
-    "kB": 748,
-    "datum": "2026-10-19"
+    "kB": 747,
+    "datum": "2026-10-20"
   },
   "texttyp-argumenterande-text": {
     "word": "ace1b20a17004172bb631ce28cc51a23abe0ec6896879394e21032eb5062302b",
@@ -5220,25 +5244,25 @@
     "datum": "2026-10-19"
   },
   "til-i-grupp": {
-    "word": "632d9ac462f8cbef74ef80cb56b1e653cd9c6be3b8bfbb0afde18713a3391977",
-    "pdf": "c2a84e42e964ab7907d3b453b13ba3b1b4bdb1b7088158d49cbff7c7833295dc",
+    "word": "62aaec7410987fc2dff5f3c7a2c203f2571ea9fab9545a627bef323393e87f70",
+    "pdf": "80a3e35c16e62d4917a7e433206e80db1dad6aa333fdbace5fe1aa8ee9145e7d",
     "sidor": 19,
     "kB": 597,
-    "datum": "2026-10-19"
+    "datum": "2026-10-20"
   },
   "upprepad-lasning": {
-    "word": "07bd839aa35628de0e7d5019eee5faf35eeb7c7f87b191a4726c8882aa4b8631",
-    "pdf": "90d5a8edf7c96c34ca5074f86d42a43ee4c6359607ce54355607b86956262da9",
-    "sidor": 32,
-    "kB": 859,
-    "datum": "2026-10-19"
+    "word": "af0eecb95dc9a9ed2012204f0b1ca40c50e4bb8f8552e6a5cb190bbd25be4c3b",
+    "pdf": "90d30111ee60ce815b3f87e4b8ed85e882ce425bcb0d6baccaeb5af3833f5ba6",
+    "sidor": 33,
+    "kB": 933,
+    "datum": "2026-10-20"
   },
   "upprepad-lasning-metoden": {
-    "word": "f1a368c19ccd92ab1fbeee53ef19134a1d78be1aaef8afb721f7429edb795075",
-    "pdf": "9be4902d636330d6d9742b56204cf6559671f649ab8e60465abd0a75562dbf4b",
+    "word": "4c7f9160443940010ff47ee5d0ef338633a29622a4a824a3992fef73c0409745",
+    "pdf": "c9ae0c6bed37251fa36d35d5f097487d6a12ea77cd64b1ec114473e51da656fa",
     "sidor": 12,
-    "kB": 519,
-    "datum": "2026-10-19"
+    "kB": 520,
+    "datum": "2026-10-20"
   },
   "antalsuppfattning-i-grupp-lathund-text": {
     "word": "fc205f996a780b056de33173834af786edcf4f7e8fe25ed212f4f3c4aea44d84",
@@ -5451,18 +5475,18 @@
     "datum": "2026-10-14"
   },
   "gruppstarkande-aktiviteter": {
-    "word": "9eb1c4e220a17418e878caeb34e97b0d6a18e2465e6db026f42fda85a3a68fd6",
-    "pdf": "9a0dcb5ccf111a698e43636af8507542a2077cbdaf19c51df2b6c26f6f5c7b9e",
-    "sidor": 22,
-    "kB": 693,
-    "datum": "2026-10-19"
+    "word": "9a9529d01aa81eaf1337f25a582475e50c9a260a723d74be4aacd5f51e29ace6",
+    "pdf": "8b5d88249c886f83a0cc79f17d5d08040c037877609ea443d9dd1f3b705d5f16",
+    "sidor": 24,
+    "kB": 831,
+    "datum": "2026-10-20"
   },
   "gruppstarkande-aktiviteter-metoden": {
-    "word": "02fe0c569c072f1d6da0a30e2b4e9d48fa56ceb61e2c110d0d44d8ebe7e88e82",
-    "pdf": "8f9829f8245e3642a24c43c0133bf901aac786cff6101927a4ea10e4b1b8a536",
+    "word": "462999eeacda6ec825ef80fd4c32be188a81747f4782620dd2de49fb3f10b494",
+    "pdf": "8c604dbe3d7aea07cc58c29515136a7b19a1636678ac261ff819cde8453c90f3",
     "sidor": 10,
     "kB": 428,
-    "datum": "2026-10-19"
+    "datum": "2026-10-20"
   },
   "gruppstarkande-aktiviteter-lathund-text": {
     "word": "03fe0d62c62e0c548c9f31fdfc80e67f4adf7ab7b2486b603f157fd9d5088261",
@@ -5507,32 +5531,32 @@
     "datum": "2026-10-16"
   },
   "ljudlek-fran-ord-till-mening": {
-    "word": "5f7f46c2f674cf079ee8ae6b722af8b06eae9adcb7ebb3d9299b80fbe1e3e118",
-    "pdf": "063c9579c1ca03444066f2615cb12f43dddf65251e4ed4d00c7bef361f39f610",
+    "word": "5ed6848fd7e2b9a4fedd2ba6993e0ba61286aafc0ee1daccc646a79cd916cdd5",
+    "pdf": "9e36a604eaef0f0677ae23ca8216b87dddc76a9de13f46ced33765891776bf83",
     "sidor": 16,
-    "kB": 498,
-    "datum": "2026-10-19"
+    "kB": 499,
+    "datum": "2026-10-20"
   },
   "ljudlek-fran-ord-till-mening-metoden": {
-    "word": "bba1a4fe2eabc7215c6aa23e5f5b726036cbbe6cae2430a68eec0e0e1c0d21c5",
-    "pdf": "f9214285b89ac6e75095619255ac34076de8509d84f0cdaa4ec5cdc00f73120e",
-    "sidor": 8,
-    "kB": 400,
-    "datum": "2026-10-19"
+    "word": "f92e6c8cc6e3f3b97e2da1f81fe513c9b3e4a6af28e89857ab17f23989889cef",
+    "pdf": "b2be981792649c0574877be44e02f87aae732a41d73fafbc4ce93c50ac90da40",
+    "sidor": 9,
+    "kB": 402,
+    "datum": "2026-10-20"
   },
   "sag-skriv-och-las": {
-    "word": "679e0189643ba8344e0e11220de823ef85a117d0aeac32f72c2d23ef5906c548",
-    "pdf": "c9eccda1a77db8490c223537001d5e3029f0e9de4c3478dfe57e0460c5aee1aa",
+    "word": "dbf32ad7f33080703e28f3421c0dbedcb6bea76d854b7144ee0ff26889bb3c83",
+    "pdf": "a925257859bf86ca4f0192d8c6d61b702bceaa0f01fb72b1b46312264fbcb9c9",
     "sidor": 26,
-    "kB": 650,
-    "datum": "2026-10-19"
+    "kB": 651,
+    "datum": "2026-10-20"
   },
   "sag-skriv-och-las-metoden": {
-    "word": "c9fb6a05460dee683ed429364b3222c461af8dc016e30ba646614b45226acd6d",
-    "pdf": "1e3803a96b5a0b803e676982e6e388fe432c3df7f666dc1c55c52304895d2ec4",
+    "word": "cc6433cc808a78e506eeb06ee04d044eddc6424f831d726030a71e82a4bbe290",
+    "pdf": "d91e86d843ff0f2a7488242303cad4819c675f06f4e9bc2675bd940e716d2a13",
     "sidor": 11,
     "kB": 463,
-    "datum": "2026-10-19"
+    "datum": "2026-10-20"
   },
   "sag-skriv-och-las-lathund-text": {
     "word": "a38972cb76bc09f768cda8deee1e6008ee7e0dd07ca9bf953218ea68059263d3",
@@ -5661,11 +5685,11 @@
     "datum": "2026-10-17"
   },
   "til-i-grupp-metoden": {
-    "word": "4146c48d240b39f65ae8238decb58a6f73eff858bc92667efeca383623f6f096",
-    "pdf": "32e9322a9cc27828e161bf8ccf79c3b97cc9902f1954ead9265b2429886cfcd0",
+    "word": "b0cdc6687472c79f7cdbb01c36102a5c443187ca4928cd22a5123fcd8eabcdba",
+    "pdf": "27e6dd484dadbc16aa2f60191d600e116723079f56f1a4eded194499de6fd93e",
     "sidor": 8,
-    "kB": 429,
-    "datum": "2026-10-19"
+    "kB": 430,
+    "datum": "2026-10-20"
   },
   "til-i-grupp-kontrakt": {
     "word": "d9fb8fec64ead6bbe80b8fb43c09fc34a3a140d753ba823a78ee933290a1a0e0",
@@ -7648,11 +7672,11 @@
     ]
   },
   "hoglasning-i-par": {
-    "word": "9ab8cd285acb8a11e7c0a4867fcee0839b493bdb44a8b69ae0c06ae8430908e4",
-    "pdf": "2519119855a41141a3bccc367b2d9607a581da6926688a1f7e15a2865ed14801",
-    "sidor": 26,
-    "kB": 754,
-    "datum": "2026-10-19"
+    "word": "46da7d214ddb12750beb2d78c97403088429bb93f7a97962f49c93a095e07a2a",
+    "pdf": "be2b638569eda63b82834508d05793d7cb7bdf70cd8a19dea5d3b6fee23fae98",
+    "sidor": 27,
+    "kB": 823,
+    "datum": "2026-10-20"
   },
   "hoglasning-i-par-metoden": {
     "word": "a776e6f47c890c86ee2792c94663298a73484ffcfa296c62c97b269be8d69b85",

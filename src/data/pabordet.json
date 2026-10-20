@@ -1,4 +1,24 @@
 {
+  "antalsuppfattning-i-grupp": {
+    "1": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn, Läxa 1","x":125.6,"y":100.4,"b":421.4,"h":50,"lage":"nere"},{"namn":"Namn, Läxa 2","x":125.6,"y":842.9,"b":421.4,"h":50,"lage":"nere"},{"namn":"Talet, Läxa 2, uppgift 4","x":589.7,"y":1275.9,"b":170.1,"h":54,"lage":"mitt","mitt":true}]},
+    "2": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn, Läxa 3","x":125.6,"y":100.4,"b":421.4,"h":50,"lage":"nere"},{"namn":"Namn, Läxa 4","x":125.6,"y":842.9,"b":421.4,"h":50,"lage":"nere"}]},
+    "3": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":190.2,"y":180,"b":409.8,"h":50,"lage":"nere"}]},
+    "4": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":190.2,"y":180,"b":409.8,"h":50,"lage":"nere"}]},
+    "5": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":190.2,"y":180,"b":409.8,"h":50,"lage":"nere"},{"namn":"Talet, uppgift 2","x":168,"y":744.1,"b":184,"h":62,"lage":"mitt","mitt":true}]},
+    "6": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":190.2,"y":180,"b":409.8,"h":50,"lage":"nere"}]},
+    "7": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":190.2,"y":180,"b":409.8,"h":50,"lage":"nere"}]},
+    "8": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":190.2,"y":180,"b":409.8,"h":50,"lage":"nere"}]},
+    "9": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":190.2,"y":180,"b":409.8,"h":50,"lage":"nere"}]},
+    "10": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":190.2,"y":180,"b":409.8,"h":50,"lage":"nere"},{"namn":"Talet, uppgift 2","x":168,"y":631.2,"b":184,"h":62,"lage":"mitt","mitt":true},{"namn":"Talet, uppgift 4","x":168,"y":1192.4,"b":184,"h":62,"lage":"mitt","mitt":true}]},
+    "11": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":190.2,"y":180,"b":409.8,"h":50,"lage":"nere"}]},
+    "12": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":190.2,"y":180,"b":409.8,"h":50,"lage":"nere"}]},
+    "13": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":190.2,"y":180,"b":409.8,"h":50,"lage":"nere"}]},
+    "14": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":190.2,"y":180,"b":409.8,"h":50,"lage":"nere"}]},
+    "15": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":190.2,"y":180,"b":409.8,"h":50,"lage":"nere"},{"namn":"Talet, uppgift 2","x":168,"y":813.6,"b":184,"h":62,"lage":"mitt","mitt":true}]},
+    "16": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":190.2,"y":180,"b":409.8,"h":50,"lage":"nere"}]},
+    "17": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":190.2,"y":180,"b":409.8,"h":50,"lage":"nere"}]},
+    "18": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":190.2,"y":180,"b":409.8,"h":50,"lage":"nere"}]}
+  },
   "faktatextsamtal-i-grupp": {
     "10": {"bredd":960,"hojd":236},
     "11": {"bredd":960,"hojd":384},
@@ -74,8 +94,10 @@
     "89": {"bredd":1485,"hojd":1050,"ytor":[{"namn":"Raden för textens namn","x":1044,"y":42,"b":379,"h":44,"lage":"nere"},{"namn":"Fältet under platsens namn","x":64,"y":240,"b":417,"h":280,"lage":"uppe"},{"namn":"Fältet under platsens namn","x":534,"y":240,"b":417,"h":280,"lage":"uppe"},{"namn":"Fältet under platsens namn","x":1004,"y":240,"b":417,"h":280,"lage":"uppe"},{"namn":"Halva fältet under Lösningarna","x":456,"y":696,"b":286,"h":280,"lage":"uppe"},{"namn":"Halva fältet under Lösningarna","x":742,"y":696,"b":286,"h":280,"lage":"uppe"},{"namn":"Platsen för en lapp till","x":1111,"y":696,"b":312,"h":280,"lage":"uppe"},{"namn":"Ordet på pilen","x":370.5,"y":111,"b":274,"h":70,"lage":"mitt","mitt":true},{"namn":"Ordet på pilen","x":840.5,"y":111,"b":274,"h":70,"lage":"mitt","mitt":true},{"namn":"Ordet på pilen","x":836.5,"y":549,"b":284,"h":70,"lage":"mitt","mitt":true}]},
     "90": {"bredd":1485,"hojd":1050,"ytor":[{"namn":"Raden för textens namn","x":929,"y":54,"b":502,"h":44,"lage":"nere"},{"namn":"Raderna för textens fråga 1","x":198,"y":120,"b":1233,"h":44,"lage":"nere"},{"namn":"Raderna för textens fråga 2","x":54,"y":164,"b":1377,"h":44,"lage":"nere"},{"namn":"Första raden för en gissning","x":130.6,"y":242,"b":296.4,"h":46,"lage":"nere"},{"namn":"En rad för en gissning","x":54,"y":288,"b":373,"h":40,"lage":"nere"},{"namn":"En rad för en gissning","x":54,"y":328,"b":373,"h":40,"lage":"nere"},{"namn":"En rad för en gissning","x":54,"y":368,"b":373,"h":40,"lage":"nere"},{"namn":"En rad för en gissning","x":54,"y":408,"b":373,"h":40,"lage":"nere"},{"namn":"En rad för en gissning","x":54,"y":448,"b":373,"h":40,"lage":"nere"},{"namn":"En rad för en gissning","x":54,"y":488,"b":373,"h":40,"lage":"nere"},{"namn":"En rad för en gissning","x":54,"y":528,"b":373,"h":40,"lage":"nere"},{"namn":"Platsen för en lapp","x":556,"y":288,"b":373,"h":289,"lage":"uppe"},{"namn":"Platsen för en lapp","x":1058,"y":288,"b":373,"h":289,"lage":"uppe"},{"namn":"Platsen för en lapp","x":54,"y":697,"b":373,"h":289,"lage":"uppe"},{"namn":"Platsen för en lapp","x":556,"y":697,"b":373,"h":289,"lage":"uppe"},{"namn":"Platsen för en lapp","x":1058,"y":697,"b":373,"h":289,"lage":"uppe"}]},
     "91": {"bredd":960,"hojd":650,"skala":0.8},
-    "92": {"bredd":960,"hojd":300,"elev":true},
-    "93": {"bredd":960,"hojd":300,"elev":true},
+    "94": {"bredd":1050,"hojd":1485},
+    "95": {"bredd":1050,"hojd":1485},
+    "96": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":650.2,"y":54,"b":289.8,"h":48,"lage":"nere"}]},
+    "97": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":650.2,"y":54,"b":289.8,"h":48,"lage":"nere"}]},
     "110": {"bredd":960,"hojd":236},
     "111": {"bredd":960,"hojd":300},
     "113": {"bredd":1485,"hojd":1050},
@@ -124,9 +146,66 @@
   },
   "gruppstarkande-aktiviteter": {
     "1": {"bredd":1485,"hojd":1050,"ytor":[{"namn":"Grupp","x":1128.4,"y":62,"b":316.6,"h":42,"lage":"nere"},{"namn":"Termin","x":1137.1,"y":124,"b":307.9,"h":42,"lage":"nere"},{"namn":"Bli bättre på, vecka 2","x":44,"y":884,"b":220.2,"h":102,"lage":"uppe"},{"namn":"Bli bättre på, vecka 4","x":284.2,"y":884,"b":214.2,"h":102,"lage":"uppe"},{"namn":"Bli bättre på, vecka 6","x":518.3,"y":884,"b":214.2,"h":102,"lage":"uppe"},{"namn":"Bli bättre på, vecka 8","x":752.5,"y":884,"b":214.2,"h":102,"lage":"uppe"},{"namn":"Bli bättre på, vecka 10","x":986.7,"y":884,"b":214.2,"h":102,"lage":"uppe"},{"namn":"Bli bättre på, vecka 12","x":1220.8,"y":884,"b":220.2,"h":102,"lage":"uppe"}]},
-    "2": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Vecka","x":127.9,"y":256,"b":172.1,"h":44,"lage":"nere"},{"namn":"Namn, om du vill","x":246.6,"y":316,"b":313.4,"h":44,"lage":"nere"},{"namn":"Det jag vill säga 1","x":40,"y":1218,"b":970,"h":50,"lage":"nere"},{"namn":"Det jag vill säga 2","x":40,"y":1278,"b":970,"h":50,"lage":"nere"},{"namn":"Det jag vill säga 3","x":40,"y":1338,"b":970,"h":50,"lage":"nere"}]}
+    "2": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Vecka","x":127.9,"y":256,"b":172.1,"h":44,"lage":"nere"},{"namn":"Namn, om du vill","x":246.6,"y":316,"b":313.4,"h":44,"lage":"nere"},{"namn":"Det jag vill säga 1","x":40,"y":1218,"b":970,"h":50,"lage":"nere"},{"namn":"Det jag vill säga 2","x":40,"y":1278,"b":970,"h":50,"lage":"nere"},{"namn":"Det jag vill säga 3","x":40,"y":1338,"b":970,"h":50,"lage":"nere"}]},
+    "3": {"bredd":1050,"hojd":1485},
+    "4": {"bredd":1050,"hojd":1485},
+    "5": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Kort 1","x":72,"y":120,"b":431,"h":153.5,"lage":"mitt","mitt":true},{"namn":"Kort 2","x":547,"y":120,"b":431,"h":153.5,"lage":"mitt","mitt":true},{"namn":"Kort 3","x":72,"y":347.5,"b":431,"h":153.5,"lage":"mitt","mitt":true},{"namn":"Kort 4","x":547,"y":347.5,"b":431,"h":153.5,"lage":"mitt","mitt":true},{"namn":"Kort 5","x":72,"y":575,"b":431,"h":153.5,"lage":"mitt","mitt":true},{"namn":"Kort 6","x":547,"y":575,"b":431,"h":153.5,"lage":"mitt","mitt":true},{"namn":"Kort 7","x":72,"y":802.5,"b":431,"h":153.5,"lage":"mitt","mitt":true},{"namn":"Kort 8","x":547,"y":802.5,"b":431,"h":153.5,"lage":"mitt","mitt":true},{"namn":"Kort 9","x":72,"y":1030,"b":431,"h":153.5,"lage":"mitt","mitt":true},{"namn":"Kort 10","x":547,"y":1030,"b":431,"h":153.5,"lage":"mitt","mitt":true},{"namn":"Kort 11","x":72,"y":1257.5,"b":431,"h":153.5,"lage":"mitt","mitt":true},{"namn":"Kort 12","x":547,"y":1257.5,"b":431,"h":153.5,"lage":"mitt","mitt":true}]}
   },
   "hoglasning-i-par": {
+    "3": {"bredd":1050,"hojd":1485},
+    "4": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":192.2,"y":266,"b":312.8,"h":46,"lage":"nere"},{"namn":"Boken","x":640,"y":266,"b":310,"h":46,"lage":"nere"},{"namn":"Min lyssnare 1","x":118,"y":418,"b":814,"h":47,"lage":"nere"},{"namn":"Min lyssnare 2","x":118,"y":471,"b":814,"h":47,"lage":"nere"},{"namn":"Min fråga 1","x":164,"y":965.5,"b":768,"h":47,"lage":"nere"},{"namn":"Min fråga 2","x":164,"y":1018.5,"b":768,"h":47,"lage":"nere"},{"namn":"Svaret på min fråga 1","x":164,"y":1238.2,"b":768,"h":64,"lage":"nere"},{"namn":"Svaret på min fråga 2","x":164,"y":1308.2,"b":768,"h":64,"lage":"nere"}]}
+  },
+  "kompissamtal": {
+    "1": {"bredd":1050,"hojd":1485},
+    "2": {"bredd":1050,"hojd":1485},
     "3": {"bredd":1050,"hojd":1485}
+  },
+  "laslistor-i-grupp": {
+    "1": {"bredd":1050,"hojd":1485},
+    "2": {"bredd":1050,"hojd":1485},
+    "3": {"bredd":1050,"hojd":1485},
+    "4": {"bredd":1050,"hojd":1485},
+    "5": {"bredd":1050,"hojd":1485},
+    "6": {"bredd":1050,"hojd":1485},
+    "7": {"bredd":1050,"hojd":1485},
+    "8": {"bredd":1050,"hojd":1485}
+  },
+  "ljudlek-i-grupp": {
+    "1": {"bredd":1050,"hojd":1485},
+    "2": {"bredd":1050,"hojd":1485},
+    "3": {"bredd":1050,"hojd":1485},
+    "4": {"bredd":1050,"hojd":1485},
+    "5": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":158.2,"y":112,"b":461.8,"h":56,"lage":"nere"}]},
+    "6": {"bredd":1050,"hojd":1485}
+  },
+  "ordverkstad-i-grupp": {
+    "1": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Före ordet, delen 1","x":110,"y":285,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Före ordet, vad den gör 1 1","x":430,"y":288,"b":520,"h":44,"lage":"nere"},{"namn":"Före ordet, delen 2","x":110,"y":353,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Före ordet, vad den gör 2 1","x":430,"y":356,"b":520,"h":44,"lage":"nere"},{"namn":"Före ordet, delen 3","x":110,"y":421,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Före ordet, vad den gör 3 1","x":430,"y":424,"b":520,"h":44,"lage":"nere"},{"namn":"Före ordet, delen 4","x":110,"y":489,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Före ordet, vad den gör 4 1","x":430,"y":492,"b":520,"h":44,"lage":"nere"},{"namn":"Före ordet, delen 5","x":110,"y":557,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Före ordet, vad den gör 5 1","x":430,"y":560,"b":520,"h":44,"lage":"nere"},{"namn":"Före ordet, delen 6","x":110,"y":625,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Före ordet, vad den gör 6 1","x":430,"y":628,"b":520,"h":44,"lage":"nere"},{"namn":"Före ordet, delen 7","x":110,"y":693,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Före ordet, vad den gör 7 1","x":430,"y":696,"b":520,"h":44,"lage":"nere"},{"namn":"Före ordet, delen 8","x":110,"y":761,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Före ordet, vad den gör 8 1","x":430,"y":764,"b":520,"h":44,"lage":"nere"},{"namn":"Mellan delarna, delen 1","x":110,"y":917,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Mellan delarna, vad den gör 1 1","x":430,"y":920,"b":520,"h":44,"lage":"nere"},{"namn":"Mellan delarna, delen 2","x":110,"y":985,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Mellan delarna, vad den gör 2 1","x":430,"y":988,"b":520,"h":44,"lage":"nere"},{"namn":"Mellan delarna, delen 3","x":110,"y":1053,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Mellan delarna, vad den gör 3 1","x":430,"y":1056,"b":520,"h":44,"lage":"nere"},{"namn":"Mellan delarna, delen 4","x":110,"y":1121,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Mellan delarna, vad den gör 4 1","x":430,"y":1124,"b":520,"h":44,"lage":"nere"},{"namn":"Mellan delarna, delen 5","x":110,"y":1189,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Mellan delarna, vad den gör 5 1","x":430,"y":1192,"b":520,"h":44,"lage":"nere"}]},
+    "2": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Efter ordet, delen 1","x":110,"y":285,"b":280,"h":74,"lage":"mitt","mitt":true},{"namn":"Efter ordet, vad den gör 1 1","x":430,"y":284,"b":520,"h":36,"lage":"nere"},{"namn":"Efter ordet, vad den gör 1 2","x":430,"y":326,"b":520,"h":36,"lage":"nere"},{"namn":"Efter ordet, delen 2","x":110,"y":385,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Efter ordet, vad den gör 2 1","x":430,"y":388,"b":520,"h":44,"lage":"nere"},{"namn":"Efter ordet, delen 3","x":110,"y":453,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Efter ordet, vad den gör 3 1","x":430,"y":456,"b":520,"h":44,"lage":"nere"},{"namn":"Efter ordet, delen 4","x":110,"y":521,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Efter ordet, vad den gör 4 1","x":430,"y":524,"b":520,"h":44,"lage":"nere"},{"namn":"Efter ordet, delen 5","x":110,"y":589,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Efter ordet, vad den gör 5 1","x":430,"y":592,"b":520,"h":44,"lage":"nere"},{"namn":"Efter ordet, delen 6","x":110,"y":657,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Efter ordet, vad den gör 6 1","x":430,"y":660,"b":520,"h":44,"lage":"nere"},{"namn":"Efter ordet, delen 7","x":110,"y":725,"b":280,"h":74,"lage":"mitt","mitt":true},{"namn":"Efter ordet, vad den gör 7 1","x":430,"y":724,"b":520,"h":36,"lage":"nere"},{"namn":"Efter ordet, vad den gör 7 2","x":430,"y":766,"b":520,"h":36,"lage":"nere"},{"namn":"Efter ordet, delen 8","x":110,"y":825,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Efter ordet, vad den gör 8 1","x":430,"y":828,"b":520,"h":44,"lage":"nere"},{"namn":"Ändelser som böjer ordet, delen 1","x":110,"y":981,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Ändelser som böjer ordet, vad den gör 1 1","x":430,"y":984,"b":520,"h":44,"lage":"nere"},{"namn":"Ändelser som böjer ordet, delen 2","x":110,"y":1049,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Ändelser som böjer ordet, vad den gör 2 1","x":430,"y":1052,"b":520,"h":44,"lage":"nere"},{"namn":"Ändelser som böjer ordet, delen 3","x":110,"y":1117,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Ändelser som böjer ordet, vad den gör 3 1","x":430,"y":1120,"b":520,"h":44,"lage":"nere"},{"namn":"Ändelser som böjer ordet, delen 4","x":110,"y":1185,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Ändelser som böjer ordet, vad den gör 4 1","x":430,"y":1188,"b":520,"h":44,"lage":"nere"},{"namn":"Ändelser som böjer ordet, delen 5","x":110,"y":1253,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Ändelser som böjer ordet, vad den gör 5 1","x":430,"y":1256,"b":520,"h":44,"lage":"nere"},{"namn":"Ändelser som böjer ordet, delen 6","x":110,"y":1321,"b":280,"h":46,"lage":"mitt","mitt":true},{"namn":"Ändelser som böjer ordet, vad den gör 6 1","x":430,"y":1324,"b":520,"h":44,"lage":"nere"}]},
+    "4": {"bredd":1485,"hojd":1050,"ytor":[{"namn":"Namn","x":924.7,"y":888,"b":467.8,"h":48,"lage":"nere"}]},
+    "5": {"bredd":1485,"hojd":1050},
+    "6": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":192.2,"y":272,"b":410,"h":46,"lage":"nere"},{"namn":"Datum","x":744.2,"y":272,"b":205.8,"h":46,"lage":"nere"}]},
+    "7": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":192.2,"y":272,"b":410,"h":46,"lage":"nere"},{"namn":"Datum","x":744.2,"y":272,"b":205.8,"h":46,"lage":"nere"}]},
+    "8": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":192.2,"y":216,"b":410,"h":46,"lage":"nere"},{"namn":"Datum","x":744.2,"y":216,"b":205.8,"h":46,"lage":"nere"},{"namn":"Ord 1","x":170,"y":349.6,"b":780,"h":78,"lage":"nere"},{"namn":"Ord 2","x":170,"y":475.3,"b":780,"h":78,"lage":"nere"},{"namn":"Ord 3","x":170,"y":600.9,"b":780,"h":78,"lage":"nere"},{"namn":"Ord 4","x":170,"y":726.5,"b":780,"h":78,"lage":"nere"},{"namn":"Ord 5","x":170,"y":852.1,"b":780,"h":78,"lage":"nere"},{"namn":"Ord 6","x":170,"y":977.8,"b":780,"h":78,"lage":"nere"},{"namn":"Ord 7","x":170,"y":1103.4,"b":780,"h":78,"lage":"nere"},{"namn":"Ord 8","x":170,"y":1229,"b":780,"h":78,"lage":"nere"}]}
+  },
+  "problemlosning-i-grupp": {
+    "100": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":192.2,"y":216,"b":757.8,"h":46,"lage":"nere"},{"namn":"Problemet","x":244.8,"y":272,"b":705.2,"h":46,"lage":"nere"},{"namn":"Vi vet 1","x":118,"y":424,"b":814,"h":36,"lage":"nere"},{"namn":"Vi vet 2","x":118,"y":466,"b":814,"h":36,"lage":"nere"},{"namn":"Vi ska ta reda på 1","x":118,"y":586,"b":814,"h":36,"lage":"nere"},{"namn":"Vi ska ta reda på 2","x":118,"y":628,"b":814,"h":36,"lage":"nere"},{"namn":"Så visar vi problemet","x":110,"y":744,"b":830,"h":305,"lage":"uppe"},{"namn":"Vårt svar 1","x":118,"y":1133,"b":814,"h":36,"lage":"nere"},{"namn":"Vårt svar 2","x":118,"y":1175,"b":814,"h":36,"lage":"nere"},{"namn":"Så kontrollerade vi 1","x":118,"y":1295,"b":814,"h":36,"lage":"nere"},{"namn":"Så kontrollerade vi 2","x":118,"y":1337,"b":814,"h":36,"lage":"nere"}]},
+    "101": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":192.2,"y":216,"b":410,"h":46,"lage":"nere"},{"namn":"Datum","x":744.2,"y":216,"b":205.8,"h":46,"lage":"nere"},{"namn":"Uppgift 1 1","x":164,"y":596.7,"b":768,"h":46,"lage":"nere"},{"namn":"Uppgift 2","x":156,"y":760.7,"b":344,"h":274,"lage":"uppe"},{"namn":"Uppgift 3","x":596,"y":760.7,"b":344,"h":274,"lage":"uppe"},{"namn":"Uppgift 4 1","x":164,"y":1122.7,"b":768,"h":37,"lage":"nere"},{"namn":"Uppgift 4 2","x":164,"y":1165.7,"b":768,"h":37,"lage":"nere"},{"namn":"Uppgift 5 1","x":164,"y":1290.7,"b":768,"h":46,"lage":"nere"}]},
+    "102": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":192.2,"y":216,"b":410,"h":46,"lage":"nere"},{"namn":"Datum","x":744.2,"y":216,"b":205.8,"h":46,"lage":"nere"},{"namn":"Uppgift 1 1","x":164,"y":596.7,"b":768,"h":46,"lage":"nere"},{"namn":"Uppgift 2","x":156,"y":760.7,"b":344,"h":274,"lage":"uppe"},{"namn":"Uppgift 3","x":596,"y":760.7,"b":344,"h":274,"lage":"uppe"},{"namn":"Uppgift 4 1","x":164,"y":1122.7,"b":768,"h":37,"lage":"nere"},{"namn":"Uppgift 4 2","x":164,"y":1165.7,"b":768,"h":37,"lage":"nere"},{"namn":"Uppgift 5 1","x":164,"y":1290.7,"b":768,"h":46,"lage":"nere"}]},
+    "103": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":192.2,"y":216,"b":410,"h":46,"lage":"nere"},{"namn":"Datum","x":744.2,"y":216,"b":205.8,"h":46,"lage":"nere"},{"namn":"Uppgift 1 1","x":164,"y":596.7,"b":768,"h":46,"lage":"nere"},{"namn":"Uppgift 2","x":156,"y":760.7,"b":344,"h":240,"lage":"uppe"},{"namn":"Uppgift 3","x":596,"y":760.7,"b":344,"h":240,"lage":"uppe"},{"namn":"Uppgift 4 1","x":164,"y":1122.7,"b":768,"h":37,"lage":"nere"},{"namn":"Uppgift 4 2","x":164,"y":1165.7,"b":768,"h":37,"lage":"nere"},{"namn":"Uppgift 5 1","x":164,"y":1290.7,"b":768,"h":46,"lage":"nere"}]},
+    "104": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":192.2,"y":216,"b":410,"h":46,"lage":"nere"},{"namn":"Datum","x":744.2,"y":216,"b":205.8,"h":46,"lage":"nere"},{"namn":"Uppgift 1 1","x":164,"y":596.7,"b":768,"h":46,"lage":"nere"},{"namn":"Uppgift 2","x":156,"y":760.7,"b":344,"h":240,"lage":"uppe"},{"namn":"Uppgift 3","x":596,"y":760.7,"b":344,"h":240,"lage":"uppe"},{"namn":"Uppgift 4 1","x":164,"y":1122.7,"b":768,"h":37,"lage":"nere"},{"namn":"Uppgift 4 2","x":164,"y":1165.7,"b":768,"h":37,"lage":"nere"},{"namn":"Uppgift 5 1","x":164,"y":1290.7,"b":768,"h":46,"lage":"nere"}]},
+    "105": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":192.2,"y":216,"b":410,"h":46,"lage":"nere"},{"namn":"Datum","x":744.2,"y":216,"b":205.8,"h":46,"lage":"nere"},{"namn":"Uppgift 1 1","x":164,"y":596.7,"b":768,"h":46,"lage":"nere"},{"namn":"Uppgift 2","x":156,"y":760.7,"b":344,"h":240,"lage":"uppe"},{"namn":"Uppgift 3","x":596,"y":760.7,"b":344,"h":240,"lage":"uppe"},{"namn":"Uppgift 4 1","x":164,"y":1122.7,"b":768,"h":37,"lage":"nere"},{"namn":"Uppgift 4 2","x":164,"y":1165.7,"b":768,"h":37,"lage":"nere"},{"namn":"Uppgift 5 1","x":164,"y":1290.7,"b":768,"h":46,"lage":"nere"}]},
+    "106": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn","x":192.2,"y":216,"b":410,"h":46,"lage":"nere"},{"namn":"Datum","x":744.2,"y":216,"b":205.8,"h":46,"lage":"nere"},{"namn":"Uppgift 1 1","x":164,"y":596.7,"b":768,"h":46,"lage":"nere"},{"namn":"Uppgift 2","x":156,"y":760.7,"b":344,"h":240,"lage":"uppe"},{"namn":"Uppgift 3","x":596,"y":760.7,"b":344,"h":240,"lage":"uppe"},{"namn":"Uppgift 4 1","x":164,"y":1122.7,"b":768,"h":37,"lage":"nere"},{"namn":"Uppgift 4 2","x":164,"y":1165.7,"b":768,"h":37,"lage":"nere"},{"namn":"Uppgift 5 1","x":164,"y":1290.7,"b":768,"h":46,"lage":"nere"}]}
+  },
+  "seriesamtal": {
+    "1": {"bredd":1050,"hojd":1485},
+    "2": {"bredd":1050,"hojd":1485}
+  },
+  "textsamtal-i-grupp": {
+    "1": {"bredd":1050,"hojd":1485},
+    "2": {"bredd":1050,"hojd":1485},
+    "3": {"bredd":1050,"hojd":1485}
+  },
+  "upprepad-lasning": {
+    "1": {"bredd":1050,"hojd":1485,"ytor":[{"namn":"Namn, kort 1","x":678.2,"y":74,"b":279.8,"h":48,"lage":"nere"},{"namn":"Namn, kort 2","x":678.2,"y":816,"b":279.8,"h":48,"lage":"nere"}]}
   }
 }

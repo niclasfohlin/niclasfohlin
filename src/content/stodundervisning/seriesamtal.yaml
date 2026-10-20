@@ -31,10 +31,21 @@ material:
   - pärmar
   - whiteboardpennor
   - pinnar och tejp
-uppdaterad: 2026-10-17
+uppdaterad: 2026-10-20
 publicerad: 2026-10-04
 relaterade: [kompissamtal]
 utkast: false
+pabordet:
+  - nr: 1
+    rubrik: "Blad: Frågor vi ställer till varandra"
+    text: "Bladet har två likadana kort att klippa isär, ett till varje sida av bordet. Kortet Frågor vi ställer till varandra har sex frågor i var sin pratbubbla: Vad får dig att tro det? Kan hen ha tänkt något annat? Vad ville hen? Vad behöver hen? Hur kändes det för hen? Tänker du som jag?"
+    efter: "ram: Frågor vi ställer till varandra"
+    fluent: [sax]
+  - nr: 2
+    rubrik: "Blad: Vad behöver hen?"
+    text: "Kortet ”Vad behöver hen?” har frågan i en tankebubbla och nio behov i var sin ruta, med en bild över varje: vara med, få vara i fred, få bestämma, hinna klart, ha roligt, få det rättvist, bli hörd, göra rätt och må bra."
+    efter: "ram: Vad behöver hen?"
+    fluent: ["vara med", "få vara i fred", "få bestämma", "hinna klart", "ha roligt", "få det rättvist", "bli hörd", "göra rätt", "må bra"]
 inledning:
   - I ett seriesamtal tar du och eleverna upp en konflikt och ritar den som en serie. Ni spolar tillbaka till när det var lugnt, innan konflikten. Det är ruta 1. Sedan går ni framåt en ruta i taget till konflikten i den sista rutan, och på vägen frågar du vad som händer i nästa ruta. I samtalet efteråt får båda personerna en tankebubbla, och ni ser hela serien ovanifrån. Ni funderar på varför det blev så och i vilken ruta någon hade behövt tänka och göra annorlunda, så att konflikten inte hade uppstått. Sist ritar ni hur det kan bli i stället.
   - Konflikter hör till att vara människa och är inget att vara rädd för. I en konflikt kan vi utvecklas socialt när vi förstår att människor har olika behov och vill olika saker. Därför är syftet att eleven lär sig av konflikter. Hen ska kunna se en social situation lite ovanifrån, förstå varför det blir som det blir och tänka innan det svåra kommer. Det kommer att bli konflikter också efter perioden, och det är inget misslyckande.
@@ -647,8 +658,8 @@ grund:
 ramar:
   rubrik: Material att skriva ut
   text:
-    - Före pass 1 skriver du ut lärarens sidor, bildserierna på A3, bubblorna, kortet ”Vad behöver hen?”, kortet Frågor vi ställer till varandra i två exemplar, provbilden och kortet Till de vuxna runt eleven. Till varje pass skriver du ut snabbmallen och ett spanarblad till varje elev. Till pass 2–⁠6 skriver du också ut bladet Nästa gång till varje elev, och till varje egen serie ett blad. Från pass 7 skriver du ut mallarna med fyra och sex rutor, och från pass 8 bladet Min plan och lektionskortet för passet med en egen serie. Mer än så behöver du inte.
-    - Bildserierna, bubblorna, de två korten på bordet och bladen är elevernas. Laminera serierna, bubblorna och korten, så att eleverna kan skriva och rita på dem med whiteboardpenna och sudda ut det efteråt. Efter passet tar du ett foto av serien innan du suddar. Vill du att eleverna ska ha serien i sin pärm, skriver du ut en papperskopia till var och en. En egen serie ritar ni på papper, så att den finns kvar. Lärarens sidor, provbildens protokoll och kortet Till de vuxna runt eleven är dina. Klipp bort rutan Till läraren innan du lägger ett kort på bordet. De bildserier ni har gjort och gruppens blad sitter på väggen under perioden, och elevens egna serier ligger i pärmen.
+    - Före pass 1 skriver du ut lärarens sidor, bildserierna på A3, bubblorna, kortet ”Vad behöver hen?”, bladet med de två korten Frågor vi ställer till varandra, provbilden och kortet Till de vuxna runt eleven. Till varje pass skriver du ut snabbmallen och ett spanarblad till varje elev. Till pass 2–⁠6 skriver du också ut bladet Nästa gång till varje elev, och till varje egen serie ett blad. Från pass 7 skriver du ut mallarna med fyra och sex rutor, och från pass 8 bladet Min plan och lektionskortet för passet med en egen serie. Mer än så behöver du inte.
+    - Bildserierna, bubblorna, korten på bordet och bladen är elevernas. Laminera serierna och bubblorna, så att eleverna kan skriva och rita på dem med whiteboardpenna och sudda ut det efteråt. Efter passet tar du ett foto av serien innan du suddar. Vill du att eleverna ska ha serien i sin pärm, skriver du ut en papperskopia till var och en. En egen serie ritar ni på papper, så att den finns kvar. Lärarens sidor, provbildens protokoll och kortet Till de vuxna runt eleven är dina. De bildserier ni har gjort och gruppens blad sitter på väggen under perioden, och elevens egna serier ligger i pärmen.
   ramar:
     - rubrik: "Bildserie 1: Fönsterplatsen"
       serie: fonsterplatsen
@@ -870,41 +881,23 @@ ramar:
     - rubrik: Vad behöver hen?
       text:
         - I delen Tankarna använder ni kortet när gruppen ska säga vad en person vill eller behöver.
-      listor:
-        - rubrik: Vad behöver hen?
-          bilder: true
-          rader:
-            - - vara med
-              - få vara i fred
-              - få bestämma
-            - - hinna klart
-              - ha roligt
-              - få det rättvist
-            - - bli hörd
-              - göra rätt
-              - må bra
       delar:
         - rubrik: Till läraren
           falt:
             - rubrik: Så använder du kortet
               text: Eleven pekar på en bild, och ni säger tillsammans en mening om personen, till exempel ”Leo vill vara med.” Två personer i en serie kan behöva samma sak, och en person kan behöva två saker.
+            - rubrik: Kortet
+              text: Skriv ut kortet på A4 och laminera det. Det ligger bredvid bildserien hela passet.
     - rubrik: Frågor vi ställer till varandra
       text:
         - Kortet är elevernas, och det ligger på bordet från pass 4.
-      listor:
-        - rubrik: Frågor vi ställer till varandra
-          rader:
-            - - Vad får dig att tro det?
-            - - Kan hen ha tänkt något annat?
-            - - Vad ville hen?
-            - - Vad behöver hen?
-            - - Hur kändes det för hen?
-            - - Tänker du som jag?
       delar:
         - rubrik: Till läraren
           falt:
             - rubrik: Så använder du kortet
               text: En elev läser en fråga, till exempel ”Vad får dig att tro det?”, och ställer den till en kamrat. Lägg ett kort på varje sida av bordet. I F–⁠2 läser du frågan, och eleven ställer den.
+            - rubrik: Korten
+              text: Bladet har två likadana kort. Skriv ut det, klipp isär korten och laminera dem.
     - rubrik: Spanarbladet
       text:
         - Skriv det nya spanaruppdraget på bladet före passet, och ge eleven bladet sist i passet. Eleven har det i bänken eller hos sin assistent och tar med det till nästa pass. Ägarens uppdrag skriver du efter passet, när ni fyller i bladet Min plan.

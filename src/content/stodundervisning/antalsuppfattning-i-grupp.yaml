@@ -28,12 +28,87 @@ material:
   - talsortsmatta
   - veckans kort
   - sifferkort och tärning
-uppdaterad: 2026-10-19
+uppdaterad: 2026-10-20
 relaterade:
   - problemlosning-i-grupp
   - brakkurs-i-grupp
   - fyra-raknesatten
 utkast: false
+pabordet:
+  - nr: 1
+    rubrik: "Blad: Åk 1, Läxa 1 och 2"
+    text: "Två läxkort för åk 1 på ett A4, två liggande A5 att klippa isär vid den streckade linjen. Varje kort har överst en rad för namnet och en rad till den vuxne, sedan fyra uppgifter med talet som barnet bygger först, byggt med tiobas på mattan med Tiotal och Ental, och längst ned Säg så här. Läxa 1 heter Bygga och säga tal, och raden till den vuxne är ”Täck bilden tills barnet har byggt. Jämför sedan.” Uppgift 1 är ”Bygg 16. Hur många tiotal och ental?”, uppgift 2 ”Bygg 23. Peka på entalen.”, uppgift 3 ”Bygg 28. Ta bort 8.” och uppgift 4 ”Bygg 19. Lägg till 1. Byt tio ental mot ett tiotal.” Säg så här är ”Hur många tiotal? Hur många ental? Peka.” Läxa 2 heter Siffrans plats och nollan och har samma rad till den vuxne. Uppgift 1 är ”Bygg 2 och 20. Vilket är störst?”, uppgift 2 ”Bygg 20. Vilken plats är tom?”, uppgift 3 ”Bygg ett tiotal och sju ental. Vilket tal?” och uppgift 4 ”Bygg tre tiotal. Skriv talet.” I uppgift 1 ligger 20 ovanför mattan. Under uppgift 4 finns en ruta att skriva talet i. Säg så här är ”Vilken plats är tom? Vad visar nollan?”"
+    efter: "ram: Åk 1: Läxa 1–5"
+    fluent: [sax]
+  - nr: 2
+    rubrik: "Blad: Åk 1, Läxa 3 och 4"
+    text: "Två läxkort för åk 1 på ett A4, två liggande A5 att klippa isär vid den streckade linjen. Varje kort har överst en rad för namnet och en rad till den vuxne, sedan fyra uppgifter med talet som barnet bygger först, byggt med tiobas på mattan med Tiotal och Ental, och längst ned Säg så här. Läxa 3 heter Lägga till och växla upp, och raden till den vuxne är ”Bygg först. Jämför sedan med bilden.” Uppgift 1 är ”Bygg 7. Lägg till 6.”, uppgift 2 ”Bygg 18. Lägg till 3.”, uppgift 3 ”Bygg 29. Lägg till 1.” och uppgift 4 ”Bygg 16. Lägg till 8.” Säg så här är ”Blev det tio ental? Byt dem mot en tiostav.” Läxa 4 heter Ta bort och växla ned och har samma rad till den vuxne. Uppgift 1 är ”Bygg 13. Ta bort 4.”, uppgift 2 ”Bygg 20. Ta bort 3.”, uppgift 3 ”Bygg 24. Ta bort 7.” och uppgift 4 ”Bygg 30. Ta bort 1.” Säg så här är ”Räcker entalen? Byt en tiostav mot tio ental.”"
+    efter: "ram: Åk 1: Läxa 1–5"
+    fluent: [sax]
+  - nr: 3
+    rubrik: "Blad: Åk 1, Läxa 5"
+    text: "Läxa 5 för åk 1 på ett A4, Från material till skrift. Överst står en rad för namnet och raden ”Bygg och jämför med bilden. Skriv på baksidan.” Bladet har fyra uppgifter, och bredvid varje uppgift står talet som barnet bygger först, byggt med tiobas på mattan med Tiotal och Ental. Uppgift 1 är ”Bygg 13 och 6. Skriv 13 + 6.”, uppgift 2 ”Bygg 17 och 5. Växla och skriv.”, uppgift 3 ”Bygg 20. Ta bort 6. Skriv 20 − 6.” och uppgift 4 ”Bygg 11 och 12. Slå ihop tiotalen och entalen. Skriv.” I uppgift 1, 2 och 4 ligger det andra talet ovanför mattan. Längst ned står Säg så här: ”Visa mig i materialet det du skrev, som 13 + 6: 3 + 6 = 9 och 10 + 9 = 19.”"
+    efter: "ram: Åk 1: Läxa 1–5"
+  - nr: 4
+    rubrik: "Blad: Åk 2, Läxa 1"
+    text: "Läxa 1 för åk 2 på ett A4, Bygga och säga tal. Överst står en rad för namnet och raden ”Täck bilden tills barnet har byggt. Jämför sedan.” Bladet har fyra uppgifter, och bredvid varje uppgift står talet som barnet bygger först, byggt med tiobas på talsortsmattan. Uppgift 1 är ”Bygg 64. Hur många tiotal och ental?”, uppgift 2 ”Bygg 47. Ta bort 23.”, uppgift 3 ”Bygg 80. Hur många ental är det i allt?” och uppgift 4 ”Bygg 2 tiotal och 15 ental. Byt tio ental. Vilket tal?” Längst ned står Säg så här: ”Hur många tiotal? Hur många ental? Peka.”"
+    efter: "ram: Åk 2: Läxa 1–5"
+  - nr: 5
+    rubrik: "Blad: Åk 2, Läxa 2"
+    text: "Läxa 2 för åk 2 på ett A4, Siffrans plats och nollan. Överst står en rad för namnet och raden ”Täck bilden tills barnet har byggt. Jämför sedan.” Bladet har fyra uppgifter, och bredvid varje uppgift står talet som barnet bygger först, byggt med tiobas på talsortsmattan. Uppgift 1 är ”Bygg 35 och 53. Vilket är störst?”, uppgift 2 ”Bygg 90 + 4. Skriv talet.”, uppgift 3 ”Bygg 70. Vilken plats är tom?” och uppgift 4 ”Bygg 61 med bara fem tiotal. Hur många ental?” I uppgift 1 ligger 53 ovanför mattan. Under uppgift 2 finns en ruta att skriva talet i. Längst ned står Säg så här: ”Vilken plats är tom? Vad visar nollan?”"
+    efter: "ram: Åk 2: Läxa 1–5"
+  - nr: 6
+    rubrik: "Blad: Åk 2, Läxa 3"
+    text: "Läxa 3 för åk 2 på ett A4, Lägga till och växla upp. Överst står en rad för namnet och raden ”Bygg först. Jämför sedan med bilden.” Bladet har fyra uppgifter, och bredvid varje uppgift står talet som barnet bygger först, byggt med tiobas på talsortsmattan. Uppgift 1 är ”Bygg 27. Lägg till 5.”, uppgift 2 ”Bygg 49. Lägg till 1.”, uppgift 3 ”Bygg 35. Lägg till 28.” och uppgift 4 ”Bygg 95. Lägg till 5.” Längst ned står Säg så här: ”Blev det tio? Byt dem mot en av nästa större talsort.”"
+    efter: "ram: Åk 2: Läxa 1–5"
+  - nr: 7
+    rubrik: "Blad: Åk 2, Läxa 4"
+    text: "Läxa 4 för åk 2 på ett A4, Ta bort och växla ned. Överst står en rad för namnet och raden ”Bygg först. Jämför sedan med bilden.” Bladet har fyra uppgifter, och bredvid varje uppgift står talet som barnet bygger först, byggt med tiobas på talsortsmattan. Uppgift 1 är ”Bygg 34. Ta bort 8.”, uppgift 2 ”Bygg 60. Ta bort 5.”, uppgift 3 ”Bygg 82. Ta bort 45.” och uppgift 4 ”Bygg 100. Ta bort 10.” Längst ned står Säg så här: ”Räcker det? Byt en av nästa större talsort mot tio.”"
+    efter: "ram: Åk 2: Läxa 1–5"
+  - nr: 8
+    rubrik: "Blad: Åk 2, Läxa 5"
+    text: "Läxa 5 för åk 2 på ett A4, Från material till skrift. Överst står en rad för namnet och raden ”Bygg och jämför med bilden. Skriv på baksidan.” Bladet har fyra uppgifter, och bredvid varje uppgift står talet som barnet bygger först, byggt med tiobas på talsortsmattan. Uppgift 1 är ”Bygg 26 och 43. Skriv talsort för talsort.”, uppgift 2 ”Bygg 58 och 24. Skriv talsort för talsort.”, uppgift 3 ”Bygg 47. Lägg till 15: 3 upp till 50, sedan 12. Skriv varje steg.” och uppgift 4 ”Bygg 71. Ta bort 36. Skriv växlingen.” I uppgift 1 och 2 ligger det andra talet ovanför mattan. Längst ned står Säg så här: ”Visa mig i materialet det du skrev, som 58 + 24: 50 + 20 = 70, 8 + 4 = 12 och 70 + 12 = 82.”"
+    efter: "ram: Åk 2: Läxa 1–5"
+  - nr: 9
+    rubrik: "Blad: Åk 3, Läxa 1"
+    text: "Läxa 1 för åk 3 på ett A4, Bygga och säga tal. Överst står en rad för namnet och raden ”Täck bilden tills barnet har byggt. Jämför sedan.” Bladet har fyra uppgifter, och bredvid varje uppgift står talet som barnet bygger först, byggt med tiobas på talsortsmattan. Uppgift 1 är ”Bygg 318. Hur många hundratal, tiotal och ental?”, uppgift 2 ”Bygg 507. Vilken talsort är tom?”, uppgift 3 ”Bygg 460. Ta bort 2 tiotal.” och uppgift 4 ”Bygg 240. Hur många tiotal är det i allt?” Längst ned står Säg så här: ”Hur många hundratal, tiotal och ental? Peka.”"
+    efter: "ram: Åk 3: Läxa 1–5"
+  - nr: 10
+    rubrik: "Blad: Åk 3, Läxa 2"
+    text: "Läxa 2 för åk 3 på ett A4, Siffrans plats och nollan. Överst står en rad för namnet och raden ”Täck bilden tills barnet har byggt. Jämför sedan.” Bladet har fyra uppgifter, och bredvid varje uppgift står talet som barnet bygger först, byggt med tiobas på talsortsmattan. Uppgift 1 är ”Bygg 309 och 390. Vilket är störst?”, uppgift 2 ”Bygg 700 + 5. Skriv talet.”, uppgift 3 ”Bygg 150 utan hundratal. Hur många tiotal?” och uppgift 4 ”Skriv trehundrasex. Bygg talet.” I uppgift 1 visar bilden bara 309. Under uppgift 2 och 4 finns en ruta att skriva talet i. Längst ned står Säg så här: ”Vilken plats är tom? Vad visar nollan?”"
+    efter: "ram: Åk 3: Läxa 1–5"
+  - nr: 11
+    rubrik: "Blad: Åk 3, Läxa 3"
+    text: "Läxa 3 för åk 3 på ett A4, Lägga till och växla upp. Överst står en rad för namnet och raden ”Bygg först. Jämför sedan med bilden.” Bladet har fyra uppgifter, och bredvid varje uppgift står talet som barnet bygger först, byggt med tiobas på talsortsmattan. Uppgift 1 är ”Bygg 128. Lägg till 5.”, uppgift 2 ”Bygg 290. Lägg till 20.”, uppgift 3 ”Bygg 499. Lägg till 1.” och uppgift 4 ”Bygg 365. Lägg till 47.” Längst ned står Säg så här: ”Blev det tio? Byt dem mot en av nästa större talsort.”"
+    efter: "ram: Åk 3: Läxa 1–5"
+  - nr: 12
+    rubrik: "Blad: Åk 3, Läxa 4"
+    text: "Läxa 4 för åk 3 på ett A4, Ta bort och växla ned. Överst står en rad för namnet och raden ”Bygg först. Jämför sedan med bilden.” Bladet har fyra uppgifter, och bredvid varje uppgift står talet som barnet bygger först, byggt med tiobas på talsortsmattan. Uppgift 1 är ”Bygg 243. Ta bort 8.”, uppgift 2 ”Bygg 500. Ta bort 1.”, uppgift 3 ”Bygg 710. Ta bort 40.” och uppgift 4 ”Bygg 604. Ta bort 27.” Längst ned står Säg så här: ”Räcker det? Byt en av nästa större talsort mot tio.”"
+    efter: "ram: Åk 3: Läxa 1–5"
+  - nr: 13
+    rubrik: "Blad: Åk 3, Läxa 5"
+    text: "Läxa 5 för åk 3 på ett A4, Från material till skrift. Överst står en rad för namnet och raden ”Bygg och jämför med bilden. Skriv på baksidan.” Bladet har fyra uppgifter, och bredvid varje uppgift står talet som barnet bygger först, byggt med tiobas på talsortsmattan. Uppgift 1 är ”Bygg 325 och 248. Skriv talsort för talsort.”, uppgift 2 ”Bygg 297. Lägg till 18 via 300. Skriv varje steg.”, uppgift 3 ”Bygg 402. Ta bort 65. Skriv växlingarna.” och uppgift 4 ”Bygg 150 och 350. Skriv.” I uppgift 1 ligger 248 ovanför mattan, och i uppgift 4 visar bilden bara 150. Längst ned står Säg så här: ”Visa mig i materialet det du skrev, som 325 + 248: 500 + 60 + 13 = 573.”"
+    efter: "ram: Åk 3: Läxa 1–5"
+  - nr: 14
+    rubrik: "Blad: Åk 4–5, Läxa 1"
+    text: "Läxa 1 för åk 4–5 på ett A4, Bygga och säga tal. Överst står en rad för namnet och raden ”Täck bilden tills barnet har byggt. Jämför sedan.” Bladet har fyra uppgifter, och bredvid varje uppgift står talet som barnet bygger först, byggt med tiobas och brickor med 1000 på talsortsmattan. Uppgift 1 är ”Bygg 1 604. Vilken talsort är tom?”, uppgift 2 ”Bygg 5 280. Lägg till 2 tusental.”, uppgift 3 ”Bygg 3 400. Hur många hundratal är det i allt?” och uppgift 4 ”Bygg 1 tusental och 12 tiotal. Byt tio tiotal. Vilket tal?” Längst ned står Säg så här: ”Hur många tusental, hundratal, tiotal och ental? Peka.”"
+    efter: "ram: Åk 4–5: Läxa 1–5"
+  - nr: 15
+    rubrik: "Blad: Åk 4–5, Läxa 2"
+    text: "Läxa 2 för åk 4–5 på ett A4, Siffrans plats och nollan. Överst står en rad för namnet och raden ”Täck bilden tills barnet har byggt. Jämför sedan.” Bladet har fyra uppgifter, och bredvid varje uppgift står talet som barnet bygger först, byggt med tiobas och brickor med 1000 på talsortsmattan, och decimaltalen på decimalmattan, där hundraplattan är en hel. Uppgift 1 är ”Bygg 2 070 och 2 700. Vilket är störst?”, uppgift 2 ”Bygg 5 000 + 40 + 3. Skriv talet.”, uppgift 3 ”Bygg 0,8 och 1. Vilket är störst?” och uppgift 4 ”Bygg 0,4 och 4. Vilket är störst?” I uppgift 1 ligger 2 700 ovanför mattan, och i uppgift 3 och 4 visar bilden bara 0,8 och 0,4. Under uppgift 2 finns en ruta att skriva talet i. Längst ned står Säg så här: ”Vilken plats är tom? Vad visar nollan?”"
+    efter: "ram: Åk 4–5: Läxa 1–5"
+  - nr: 16
+    rubrik: "Blad: Åk 4–5, Läxa 3"
+    text: "Läxa 3 för åk 4–5 på ett A4, Lägga till och växla upp. Överst står en rad för namnet och raden ”Bygg först. Jämför sedan med bilden.” Bladet har fyra uppgifter, och bredvid varje uppgift står talet som barnet bygger först, byggt med tiobas och brickor med 1000 på talsortsmattan, och decimaltalen på decimalmattan, där hundraplattan är en hel. Uppgift 1 är ”Bygg 1 990. Lägg till 10.”, uppgift 2 ”Bygg 3 760. Lägg till 250.”, uppgift 3 ”Bygg 0,6. Lägg till 0,7.” och uppgift 4 ”Bygg 1,99. Lägg till 0,01.” Längst ned står Säg så här: ”Blev det tio? Byt dem mot en av nästa större talsort.”"
+    efter: "ram: Åk 4–5: Läxa 1–5"
+  - nr: 17
+    rubrik: "Blad: Åk 4–5, Läxa 4"
+    text: "Läxa 4 för åk 4–5 på ett A4, Ta bort och växla ned. Överst står en rad för namnet och raden ”Bygg först. Jämför sedan med bilden.” Bladet har fyra uppgifter, och bredvid varje uppgift står talet som barnet bygger först, byggt med tiobas och brickor med 1000 på talsortsmattan, och decimaltalen på decimalmattan, där hundraplattan är en hel. Uppgift 1 är ”Bygg 2 000. Ta bort 1.”, uppgift 2 ”Bygg 4 105. Ta bort 17.”, uppgift 3 ”Bygg 1,4. Ta bort 0,6.” och uppgift 4 ”Bygg 3. Ta bort 0,25.” Längst ned står Säg så här: ”Räcker det? Byt en av nästa större talsort mot tio.”"
+    efter: "ram: Åk 4–5: Läxa 1–5"
+  - nr: 18
+    rubrik: "Blad: Åk 4–5, Läxa 5"
+    text: "Läxa 5 för åk 4–5 på ett A4, Från material till skrift. Överst står en rad för namnet och raden ”Bygg och jämför med bilden. Skriv på baksidan.” Bladet har fyra uppgifter, och bredvid varje uppgift står talet som barnet bygger först, byggt med tiobas och brickor med 1000 på talsortsmattan, och decimaltalen på decimalmattan, där hundraplattan är en hel. Uppgift 1 är ”Bygg 1 250 och 2 785. Skriv talsort för talsort.”, uppgift 2 ”Bygg 3 004. Ta bort 8. Skriv växlingarna.”, uppgift 3 ”Bygg 2,4 och 1,9. Skriv 2 + 1 och 0,4 + 0,9.” och uppgift 4 ”Bygg 2,5. Ta bort 0,7. Skriv växlingen.” I uppgift 1 ligger 2 785 ovanför mattan, och i uppgift 3 visar bilden bara 2,4. Längst ned står Säg så här: ”Visa mig i materialet det du skrev, som 1 250 + 2 785: 3 000 + 900 + 130 + 5 = 4 035.”"
+    efter: "ram: Åk 4–5: Läxa 1–5"
 inledning:
   - "Metoden är för elever i åk 1–5 som behöver stöd i antalsuppfattning. Eleverna bygger talen framför sig med tiobas, talbrickor och pengar. Talbrickor är runda brickor med ett talvärde. Eleverna lägger till och tar bort, och när en talsort blir full eller inte räcker växlar de själva med materialet. Metoden handlar om att se tal och bygga tal, inte bara räkna dem. Det viktigaste händer vid bordet. Läraren gör först: bygger, lyfter, pekar och säger vad hen gör. Sedan gör gruppen samma sak tillsammans, sedan i par och sist var och en för sig, och passet slutar med att alla gör det gemensamt igen. Efter fem veckor ska eleven kunna bygga tal på egen hand och förstå hur växlingen går till i skriftlig huvudräkning."
   - "Två ord är centrala i metoden: talsort och växla. Talsorterna är ental, tiotal, hundratal och tusental, och i decimaltal även tiondelar och hundradelar. Att växla är att byta tio av en talsort mot en av nästa större, eller en mot tio av nästa mindre. Tio ental blir ett tiotal, och ett tiotal blir tio ental. Värdet är detsamma, det är bara talsorten som byts. Talsortsmattan har en ruta för varje talsort, och allt eleverna bygger ligger på den."
@@ -256,8 +331,8 @@ urval:
 hem:
   rubrik: Hem och skola
   text:
-    - Eleven får ett tiobaspaket och en talsortsmatta i A3 att ha hemma, och en läxa i veckan. Läxorna, Läxa 1–5, finns i gruppens paket under Material per årskurs. Läxan delas ut efter veckans första pass och innehåller samma sorts uppgifter som i skolan. En vårdnadshavare läser veckans kort, och eleven bygger och berättar vad hen gör. Det blir en repetition, och eleven får höra samma sak med andra ord och i ett annat sammanhang. Tio minuter några gånger under veckan räcker. Fråga i början av veckans första pass hur läxan gick, och låt eleven visa ett kort.
-    - "Berätta för vårdnadshavarna att barnet får intensivt stöd och extra träning under fem veckor, och visa hur man gör med ett kort: läs kortet högt, låt barnet bygga och berätta vad det gör, och visa själv först om det blir svårt. Går det inte att göra läxan hemma kan eleven göra den i skolan eller på fritids tillsammans med en annan vuxen."
+    - Eleven får ett tiobaspaket och en talsortsmatta i A3 att ha hemma, och en läxa i veckan. Läxorna, Läxa 1–5, finns i gruppens paket under Material per årskurs. Läxan delas ut efter veckans första pass och innehåller samma sorts uppgifter som i skolan. En vårdnadshavare läser veckans uppgifter högt, och eleven bygger, berättar vad hen gör och jämför med bilden bredvid uppgiften. Det blir en repetition, och eleven får höra samma sak med andra ord och i ett annat sammanhang. Tio minuter några gånger under veckan räcker. Fråga i början av veckans första pass hur förra veckans läxa gick, och låt eleven visa en uppgift. Läxa 5 visar eleven i början av sista passet, med det hen skrev på baksidan.
+    - "Berätta för vårdnadshavarna att barnet får intensivt stöd och extra träning under fem veckor, och visa hur man gör med en uppgift: läs den högt, låt barnet bygga och berätta vad det gör, jämför med bilden, och visa själv först om det blir svårt. Går det inte att göra läxan hemma kan eleven göra den i skolan eller på fritids tillsammans med en annan vuxen."
 progression:
   rubrik: "Kursplan: fem veckor, ett fokus i veckan"
   rader:
@@ -395,49 +470,18 @@ ramar:
             - - Skriv först 17 + 8 utan att bygga. Bygg sedan och kontrollera.
     - rubrik: "Åk 1: Läxa 1–5"
       text:
-        - "Samma uppgifter som i skolan, en gång till hemma, med barnets eget tiobaspaket. Paketet är av papper: tre tiostavar, 15 ental och en matta med Tiotal och Ental. Skicka hem rutan Till vårdnadshavaren med Läxa 1, och sedan veckans läxa efter veckans första pass. Klipp isär listorna, så att bara veckans läxa går hem."
+        - "Hemma gör barnet samma uppgifter som i skolan, med sitt eget tiobaspaket. Paketet är av papper: tre tiostavar, 15 ental och en matta med Tiotal och Ental. Läxa 1 och 2 står på ett A4, som två läxkort att klippa isär, och likaså läxa 3 och 4. Läxa 5 har ett eget A4. Skicka hem veckans läxa efter veckans första pass, och första veckan också rutan Till vårdnadshavaren."
       delar:
         - rubrik: Till vårdnadshavaren
           falt:
             - rubrik: Varför
               text: Ditt barn får intensivt stöd och extra träning i matematik under fem veckor. Hemma övar ni på samma sak som i skolan, och det hjälper barnet att höra det en gång till, från någon annan.
             - rubrik: Så gör ni
-              text: Läs ett kort högt. Barnet bygger med tiobaspaketet på mattan och berättar vad det gör. Har kortet två tal bygger barnet det andra ovanför mattan. När kortet säger ”Ta bort” bygger barnet bara det första talet. Tio minuter några gånger i veckan räcker.
+              text: Läs en uppgift högt. Barnet bygger med tiobaspaketet på mattan och berättar vad det gör. Står det ”och” mellan två tal, som i ”Bygg 2 och 20”, bygger barnet det andra ovanför mattan. När uppgiften säger ”Ta bort” bygger barnet bara det första talet. Sedan jämför ni med bilden bredvid uppgiften. Den visar talet som barnet bygger först, och i läxa 1 och 2 är det ofta svaret, så täck den tills barnet har byggt. Att växla är att byta tio ental mot ett tiotal. I läxa 5 skriver barnet uträkningarna på baksidan. Tio minuter några gånger i veckan räcker.
             - rubrik: Säg så här
               text: "Läxa 1: Hur många tiotal? Hur många ental? Peka.\nLäxa 2: Vilken plats är tom? Vad visar nollan?\nLäxa 3: Blev det tio ental? Byt dem mot en tiostav.\nLäxa 4: Räcker entalen? Byt en tiostav mot tio ental.\nLäxa 5: Visa mig i materialet det du skrev, som 13 + 6: 3 + 6 = 9 och 10 + 9 = 19."
             - rubrik: Om det blir svårt
               text: Visa först själv och säg vad du gör, och låt sedan barnet göra likadant. Sluta medan det fortfarande är roligt, och skriv gärna en rad till läraren.
-      listor:
-        - rubrik: Läxa 1 · Åk 1 · Bygga och säga tal
-          rader:
-            - - Bygg 16. Hur många tiotal och ental?
-            - - Bygg 23. Peka på entalen.
-            - - Bygg 28. Ta bort 8.
-            - - Bygg 19. Lägg till 1. Byt tio ental mot ett tiotal.
-        - rubrik: Läxa 2 · Åk 1 · Siffrans plats och nollan
-          rader:
-            - - Bygg 2 och 20. Vilket är störst?
-            - - Bygg 20. Vilken plats är tom?
-            - - Bygg ett tiotal och sju ental. Vilket tal?
-            - - Bygg tre tiotal. Skriv talet.
-        - rubrik: Läxa 3 · Åk 1 · Lägga till och växla upp
-          rader:
-            - - Bygg 7. Lägg till 6.
-            - - Bygg 18. Lägg till 3.
-            - - Bygg 29. Lägg till 1.
-            - - Bygg 16. Lägg till 8.
-        - rubrik: Läxa 4 · Åk 1 · Ta bort och växla ned
-          rader:
-            - - Bygg 13. Ta bort 4.
-            - - Bygg 20. Ta bort 3.
-            - - Bygg 24. Ta bort 7.
-            - - Bygg 30. Ta bort 1.
-        - rubrik: Läxa 5 · Åk 1 · Från material till skrift
-          rader:
-            - - Bygg 13 och 6. Skriv 13 + 6.
-            - - Bygg 17 och 5. Växla och skriv.
-            - - Bygg 20. Ta bort 6. Skriv 20 − 6.
-            - - Bygg 11 och 12. Slå ihop tiotalen och entalen. Skriv.
     # ---------------------------------------------------------------- Åk 2
     - rubrik: "Åk 2: talen 0–100"
       text:
@@ -512,49 +556,18 @@ ramar:
             - - Skriv först 56 + 29 utan att bygga. Bygg sedan och kontrollera.
     - rubrik: "Åk 2: Läxa 1–5"
       text:
-        - "Samma uppgifter som i skolan, en gång till hemma, med barnets eget tiobaspaket. Paketet är av papper: en hundraplatta, tio tiostavar, 15 ental och talsortsmattan i A3. Skicka hem rutan Till vårdnadshavaren med Läxa 1, och sedan veckans läxa efter veckans första pass. Klipp isär listorna, så att bara veckans läxa går hem."
+        - "Hemma gör barnet samma uppgifter som i skolan, med sitt eget tiobaspaket. Paketet är av papper: en hundraplatta, tio tiostavar, 15 ental och talsortsmattan i A3. Skriv ut ett A4 per läxa och elev. Skicka hem veckans läxa efter veckans första pass, och första veckan också rutan Till vårdnadshavaren."
       delar:
         - rubrik: Till vårdnadshavaren
           falt:
             - rubrik: Varför
               text: Ditt barn får intensivt stöd och extra träning i matematik under fem veckor. Hemma övar ni på samma sak som i skolan, och det hjälper barnet att höra det en gång till, från någon annan.
             - rubrik: Så gör ni
-              text: Läs ett kort högt. Barnet bygger med tiobaspaketet på mattan och berättar vad det gör. Har kortet två tal bygger barnet det andra ovanför mattan. När kortet säger ”Ta bort” bygger barnet bara det första talet. Tio minuter några gånger i veckan räcker.
+              text: Läs en uppgift högt. Barnet bygger med tiobaspaketet på mattan och berättar vad det gör. Står det ”och” mellan två tal, som i ”Bygg 35 och 53”, bygger barnet det andra ovanför mattan. När uppgiften säger ”Ta bort” bygger barnet bara det första talet. Sedan jämför ni med bilden bredvid uppgiften. Den visar talet som barnet bygger först, och i läxa 1 och 2 är det ofta svaret, så täck den tills barnet har byggt. En talsort är ental, tiotal eller hundratal, och att växla är att byta tio av en talsort mot en av nästa större. I läxa 5 skriver barnet uträkningarna på baksidan. Tio minuter några gånger i veckan räcker.
             - rubrik: Säg så här
               text: "Läxa 1: Hur många tiotal? Hur många ental? Peka.\nLäxa 2: Vilken plats är tom? Vad visar nollan?\nLäxa 3: Blev det tio? Byt dem mot en av nästa större talsort.\nLäxa 4: Räcker det? Byt en av nästa större talsort mot tio.\nLäxa 5: Visa mig i materialet det du skrev, som 58 + 24: 50 + 20 = 70, 8 + 4 = 12 och 70 + 12 = 82."
             - rubrik: Om det blir svårt
               text: Visa först själv och säg vad du gör, och låt sedan barnet göra likadant. Sluta medan det fortfarande är roligt, och skriv gärna en rad till läraren.
-      listor:
-        - rubrik: Läxa 1 · Åk 2 · Bygga och säga tal
-          rader:
-            - - Bygg 64. Hur många tiotal och ental?
-            - - Bygg 47. Ta bort 23.
-            - - Bygg 80. Hur många ental är det i allt?
-            - - Bygg 2 tiotal och 15 ental. Byt tio ental. Vilket tal?
-        - rubrik: Läxa 2 · Åk 2 · Siffrans plats och nollan
-          rader:
-            - - Bygg 35 och 53. Vilket är störst?
-            - - Bygg 90 + 4. Skriv talet.
-            - - Bygg 70. Vilken plats är tom?
-            - - Bygg 61 med bara fem tiotal. Hur många ental?
-        - rubrik: Läxa 3 · Åk 2 · Lägga till och växla upp
-          rader:
-            - - Bygg 27. Lägg till 5.
-            - - Bygg 49. Lägg till 1.
-            - - Bygg 35. Lägg till 28.
-            - - Bygg 95. Lägg till 5.
-        - rubrik: Läxa 4 · Åk 2 · Ta bort och växla ned
-          rader:
-            - - Bygg 34. Ta bort 8.
-            - - Bygg 60. Ta bort 5.
-            - - Bygg 82. Ta bort 45.
-            - - Bygg 100. Ta bort 10.
-        - rubrik: Läxa 5 · Åk 2 · Från material till skrift
-          rader:
-            - - Bygg 26 och 43. Skriv talsort för talsort.
-            - - Bygg 58 och 24. Skriv talsort för talsort.
-            - - "Bygg 47. Lägg till 15: först 3 till 50, sedan 12. Skriv varje steg."
-            - - Bygg 71. Ta bort 36. Skriv växlingen.
     # ---------------------------------------------------------------- Åk 3
     - rubrik: "Åk 3: talen 0–1 000"
       text:
@@ -629,49 +642,18 @@ ramar:
             - - Skriv först 347 + 185 utan att bygga. Bygg sedan och kontrollera.
     - rubrik: "Åk 3: Läxa 1–5"
       text:
-        - "Samma uppgifter som i skolan, en gång till hemma, med barnets eget tiobaspaket. Paketet är av papper: sju hundraplattor, 15 tiostavar, 15 ental och talsortsmattan i A3. Skicka hem rutan Till vårdnadshavaren med Läxa 1, och sedan veckans läxa efter veckans första pass. Klipp isär listorna, så att bara veckans läxa går hem."
+        - "Hemma gör barnet samma uppgifter som i skolan, med sitt eget tiobaspaket. Paketet är av papper: sju hundraplattor, 15 tiostavar, 15 ental och talsortsmattan i A3. Skriv ut ett A4 per läxa och elev. Skicka hem veckans läxa efter veckans första pass, och första veckan också rutan Till vårdnadshavaren."
       delar:
         - rubrik: Till vårdnadshavaren
           falt:
             - rubrik: Varför
               text: Ditt barn får intensivt stöd och extra träning i matematik under fem veckor. Hemma övar ni på samma sak som i skolan, och det hjälper barnet att höra det en gång till, från någon annan.
             - rubrik: Så gör ni
-              text: Läs ett kort högt. Barnet bygger med tiobaspaketet på mattan och berättar vad det gör. En talsort är ental, tiotal, hundratal eller tusental. Har kortet två tal bygger barnet det andra ovanför mattan. När kortet säger ”Ta bort” bygger barnet bara det första talet. Tio minuter några gånger i veckan räcker.
+              text: Läs en uppgift högt. Barnet bygger med tiobaspaketet på mattan och berättar vad det gör. Står det ”och” mellan två tal, som i ”Bygg 309 och 390”, bygger barnet det andra ovanför mattan. När uppgiften säger ”Ta bort” bygger barnet bara det första talet. Sedan jämför ni med bilden bredvid uppgiften. Den visar talet som barnet bygger först, och i läxa 1 och 2 är det ofta svaret, så täck den tills barnet har byggt. En talsort är ental, tiotal, hundratal eller tusental, och att växla är att byta tio av en talsort mot en av nästa större. I läxa 5 skriver barnet uträkningarna på baksidan. Tio minuter några gånger i veckan räcker.
             - rubrik: Säg så här
               text: "Läxa 1: Hur många hundratal, tiotal och ental? Peka.\nLäxa 2: Vilken plats är tom? Vad visar nollan?\nLäxa 3: Blev det tio? Byt dem mot en av nästa större talsort.\nLäxa 4: Räcker det? Byt en av nästa större talsort mot tio.\nLäxa 5: Visa mig i materialet det du skrev, som 325 + 248: 500 + 60 + 13 = 573."
             - rubrik: Om det blir svårt
               text: Visa först själv och säg vad du gör, och låt sedan barnet göra likadant. Sluta medan det fortfarande är roligt, och skriv gärna en rad till läraren.
-      listor:
-        - rubrik: Läxa 1 · Åk 3 · Bygga och säga tal
-          rader:
-            - - Bygg 318. Hur många hundratal, tiotal och ental?
-            - - Bygg 507. Vilken talsort är tom?
-            - - Bygg 460. Ta bort 2 tiotal.
-            - - Bygg 240. Hur många tiotal är det i allt?
-        - rubrik: Läxa 2 · Åk 3 · Siffrans plats och nollan
-          rader:
-            - - Bygg 309 och 390. Vilket är störst?
-            - - Bygg 700 + 5. Skriv talet.
-            - - Bygg 150 utan hundratal. Hur många tiotal?
-            - - Skriv trehundrasex. Bygg talet.
-        - rubrik: Läxa 3 · Åk 3 · Lägga till och växla upp
-          rader:
-            - - Bygg 128. Lägg till 5.
-            - - Bygg 290. Lägg till 20.
-            - - Bygg 499. Lägg till 1.
-            - - Bygg 365. Lägg till 47.
-        - rubrik: Läxa 4 · Åk 3 · Ta bort och växla ned
-          rader:
-            - - Bygg 243. Ta bort 8.
-            - - Bygg 500. Ta bort 1.
-            - - Bygg 710. Ta bort 40.
-            - - Bygg 604. Ta bort 27.
-        - rubrik: Läxa 5 · Åk 3 · Från material till skrift
-          rader:
-            - - Bygg 325 och 248. Skriv talsort för talsort.
-            - - Bygg 297. Lägg till 18 via 300. Skriv varje steg.
-            - - Bygg 402. Ta bort 65. Skriv växlingarna.
-            - - Bygg 150 och 350. Skriv.
     # ---------------------------------------------------------------- Åk 4–5
     - rubrik: "Åk 4–5: tal till 10 000, decimaltal och negativa tal"
       text:
@@ -755,49 +737,18 @@ ramar:
             - - Du är skyldig 40 kr och får 100 kr. Hur mycket har du nu?
     - rubrik: "Åk 4–5: Läxa 1–5"
       text:
-        - "Samma uppgifter som i skolan, en gång till hemma, med barnets eget tiobaspaket. Paketet är av papper: sju brickor med 1000, tio hundraplattor, 15 tiostavar, 15 ental och talsortsmattan och decimalmattan i A3. Skicka hem rutan Till vårdnadshavaren med Läxa 1, och sedan veckans läxa efter veckans första pass. Klipp isär listorna, så att bara veckans läxa går hem."
+        - "Hemma gör barnet samma uppgifter som i skolan, med sitt eget tiobaspaket. Paketet är av papper: sju brickor med 1000, tio hundraplattor, 15 tiostavar, 15 ental och talsortsmattan och decimalmattan i A3. Skriv ut ett A4 per läxa och elev. Skicka hem veckans läxa efter veckans första pass, och första veckan också rutan Till vårdnadshavaren."
       delar:
         - rubrik: Till vårdnadshavaren
           falt:
             - rubrik: Varför
               text: Ditt barn får intensivt stöd och extra träning i matematik under fem veckor. Hemma övar ni på samma sak som i skolan, och det hjälper barnet att höra det en gång till, från någon annan.
             - rubrik: Så gör ni
-              text: Läs ett kort högt. Barnet bygger med tiobaspaketet på mattan och berättar vad det gör. En talsort är ental, tiotal, hundratal eller tusental, och i decimaltal tiondelar och hundradelar. Har kortet två tal bygger barnet det andra ovanför mattan. När kortet säger ”Ta bort” bygger barnet bara det första talet. Tio minuter några gånger i veckan räcker.
+              text: Läs en uppgift högt. Barnet bygger med tiobaspaketet på mattan och berättar vad det gör. Står det ”och” mellan två tal, som i ”Bygg 2 070 och 2 700”, bygger barnet det andra ovanför mattan. När uppgiften säger ”Ta bort” bygger barnet bara det första talet. Decimaltalen bygger barnet på decimalmattan, där hundraplattan är en hel. Sedan jämför ni med bilden bredvid uppgiften. Den visar talet som barnet bygger först, och i läxa 1 och 2 är det ofta svaret, så täck den tills barnet har byggt. En talsort är ental, tiotal, hundratal eller tusental, i decimaltal också tiondelar och hundradelar, och att växla är att byta tio av en talsort mot en av nästa större. I läxa 5 skriver barnet uträkningarna på baksidan. Tio minuter några gånger i veckan räcker.
             - rubrik: Säg så här
-              text: "Läxa 1: Hur många tusental, hundratal, tiotal och ental? Peka.\nLäxa 2: Vilken plats är tom? Decimaltalen byggs på decimalmattan, där hundraplattan är en hel.\nLäxa 3: Blev det tio? Byt dem mot en av nästa större talsort.\nLäxa 4: Räcker det? Byt en av nästa större talsort mot tio.\nLäxa 5: Visa mig i materialet det du skrev, som 1 250 + 2 785: 3 000 + 900 + 130 + 5 = 4 035."
+              text: "Läxa 1: Hur många tusental, hundratal, tiotal och ental? Peka.\nLäxa 2: Vilken plats är tom? Vad visar nollan?\nLäxa 3: Blev det tio? Byt dem mot en av nästa större talsort.\nLäxa 4: Räcker det? Byt en av nästa större talsort mot tio.\nLäxa 5: Visa mig i materialet det du skrev, som 1 250 + 2 785: 3 000 + 900 + 130 + 5 = 4 035."
             - rubrik: Om det blir svårt
               text: Visa först själv och säg vad du gör, och låt sedan barnet göra likadant. Sluta medan det fortfarande är roligt, och skriv gärna en rad till läraren.
-      listor:
-        - rubrik: Läxa 1 · Åk 4–5 · Bygga och säga tal
-          rader:
-            - - Bygg 1 604. Vilken talsort är tom?
-            - - Bygg 5 280. Lägg till 2 tusental.
-            - - Bygg 3 400. Hur många hundratal är det i allt?
-            - - Bygg 1 tusental och 12 tiotal. Byt tio tiotal. Vilket tal?
-        - rubrik: Läxa 2 · Åk 4–5 · Siffrans plats och nollan
-          rader:
-            - - Bygg 2 070 och 2 700. Vilket är störst?
-            - - Bygg 5 000 + 40 + 3. Skriv talet.
-            - - Bygg 0,8 och 1. Vilket är störst?
-            - - Bygg 0,4 och 4. Vilket är störst?
-        - rubrik: Läxa 3 · Åk 4–5 · Lägga till och växla upp
-          rader:
-            - - Bygg 1 990. Lägg till 10.
-            - - Bygg 3 760. Lägg till 250.
-            - - Bygg 0,6. Lägg till 0,7.
-            - - Bygg 1,99. Lägg till 0,01.
-        - rubrik: Läxa 4 · Åk 4–5 · Ta bort och växla ned
-          rader:
-            - - Bygg 2 000. Ta bort 1.
-            - - Bygg 4 105. Ta bort 17.
-            - - Bygg 1,4. Ta bort 0,6.
-            - - Bygg 3. Ta bort 0,25.
-        - rubrik: Läxa 5 · Åk 4–5 · Från material till skrift
-          rader:
-            - - Bygg 1 250 och 2 785. Skriv talsort för talsort.
-            - - Bygg 3 004. Ta bort 8. Skriv växlingarna.
-            - - Bygg 2,4 och 1,9. Skriv 2 + 1 och 0,4 + 0,9.
-            - - Bygg 2,5. Ta bort 0,7. Skriv växlingen.
 # Veckans kort ("Vecka 1 · Åk 1 · Läs kortet …") klipps isär: på sidan, i utskriften och i planeringsmallarna står
 # varje kort med streckad kant och vecka och årskurs i hörnet, och i Word börjar varje vecka på ny sida (K-032).
 kort:

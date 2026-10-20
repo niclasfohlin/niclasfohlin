@@ -27,7 +27,7 @@ material:
   - "klossar"
   - "whiteboardtavlor och lappar"
   - "snabbmallen"
-uppdaterad: "2026-10-17"
+uppdaterad: 2026-10-20
 publicerad: "2026-10-17"
 relaterade:
   - "ljudlek-i-grupp"
@@ -37,6 +37,9 @@ utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 9
 tranar: "säga korta meningar, bygga och skriva dem med mellanrum, stor bokstav och punkt, och läsa dem"
+centrala:
+  - id: skrivstrategier
+    efterText: "tabell: Lyssna efter"
 inledning:
   - "I Från ord till mening säger eleverna en mening efter dig, lägger en kloss för varje ord och bygger meningen ord för ord med lösa bokstäver ur en hög mitt på bänken. Lektionen hjälper eleven med det som gör en mening svår att skriva och läsa: eleven glömmer meningen medan hen bygger, orden flyter ihop utan mellanrum, stor bokstav och punkt faller bort, och eleven läser det hen tänkte i stället för det som står."
   - "Syftet är att eleverna ska kunna säga en kort mening, bygga den med mellanrum, stor bokstav och punkt, och läsa den, så att de kan skriva och läsa sina första meningar själva. Ditt uppdrag är att visa hur du säger, bygger och läser meningen, att låta eleverna säga den igen innan de bygger, och att låta dem läsa det som ligger, också kamratens nya ord."
@@ -81,7 +84,7 @@ tabeller:
     not: "Säg ljudet och inte bokstavens namn, och b, d, g, k, p och t korta och utan ö. Orden tar du ur Ordbanken, och i Dela upp blandar du in ord ur de lättare ordgrupperna, så att orden har olika många ljud. Dagens ljud, dina fraser och ordgrupperna står i Ljudlek i grupp. Gruppen behåller sin ordgrupp från lektion till lektion."
   - rubrik: "Lyssna efter"
     plats: "efter-steg"
-    text: "Bekräfta först det som eleven gjorde rätt, och försök sedan igen tillsammans."
+    text: "Bekräfta först det som eleven gjorde rätt, och försök sedan igen tillsammans. Skrivstrategier är ett A4 på metodens sida med strategierna för ordet och meningen, som att säga meningen igen och säga ordet långsamt, när eleverna skriver den nya meningen."
     kolumner:
       - "Det eleven gör"
       - "Det som händer"
