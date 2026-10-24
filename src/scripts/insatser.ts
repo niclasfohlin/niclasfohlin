@@ -30,7 +30,7 @@ if (lista && planer.length) {
   // Den som har nästa pass först. En plan som är slut står hopfälld sist, så att listan inte växer med gamla grupper.
   const rad = (p: SparadPlan) => {
     const lage = lageAv(p, idag);
-    const gjorda = p.folj ? (p.foljd?.gjorda ?? []).length : 0;
+    const gjorda = p.folj ? p.bockade ?? 0 : 0;
     const om = [lage.text, gjorda ? `${gjorda} pass bockade` : ''].filter(Boolean).join(' · ');
     return `<li style="--omr:${FARG[p.omrade ?? ''] ?? 'var(--farg-accent)'}"><a href="${esc(adress(p, lage.vecka))}" data-goatcounter-click="insatser:metodbanken" data-goatcounter-title="Metodbanken: en plan under Dina insatser"><span class="pl-metod">${esc(p.titel)} · ${esc(planensNamn(p))}</span><span class="pl-om">${esc(om)}</span><span class="pl-pil" aria-hidden="true">${nastaPassAv(p, idag) === '9999' ? 'Efter ›' : 'Veckan ›'}</span></a></li>`;
   };

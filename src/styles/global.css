@@ -2976,12 +2976,36 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 .pl-fraga { font-weight: 600; margin: 0 0 0.4rem; }
 .pl-skalnamn { list-style: none; display: flex; flex-wrap: wrap; gap: 0.15rem 0.9rem; padding: 0; margin: 0 0 0.6rem; font-size: 0.85rem; color: var(--farg-text-svag); }
 .pl-skalnamn b { color: var(--farg-text); }
-.pl-skattning { list-style: none; padding: 0; margin: 0 0 0.6rem; }
-.pl-skattning li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.4rem 0.8rem; padding: 0.45rem 0; border-bottom: 1px solid var(--farg-kant); }
+/* Skattningen: namnet i en kolumn och siffrorna som en sammanhängande rad med fem jämna delar, så att namn som
+   Alexandra och Sebastian med efternamnets första bokstäver ryms på samma rad i telefonen (Niclas 2026-10-24). Är rutan
+   smalare än 19 rem, i en liten telefon eller med förstorad text, står alla namn ovanför sina siffror, så att ingen rad
+   bryter för sig. */
+.pl-skattning { list-style: none; padding: 0; margin: 0 0 0.6rem; container-type: inline-size; }
+.pl-skattning li { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 0.4rem 0.75rem; padding: 0.45rem 0; border-bottom: 1px solid var(--farg-kant); }
 .pl-elevnamn { font-weight: 700; }
-.pl-skala { display: flex; gap: 0.3rem; }
-.pl-skalsteg { width: 2.75rem; height: 2.75rem; border: 1.5px solid var(--farg-accent); border-radius: 6px; background: var(--farg-yta); color: var(--farg-accent); font: 700 1rem var(--typsnitt-ui); cursor: pointer; }
+.pl-skattning .pl-elevnamn { min-width: 0; overflow-wrap: anywhere; line-height: 1.25; }
+.pl-skala { display: grid; grid-template-columns: repeat(5, 2.4rem); border: 1.5px solid var(--farg-accent); border-radius: 8px; overflow: hidden; }
+.pl-skalsteg { width: 100%; height: 2.75rem; border: 0; border-left: 1px solid var(--farg-kant); border-radius: 0; background: var(--farg-yta); color: var(--farg-accent); font: 700 1rem var(--typsnitt-ui); cursor: pointer; padding: 0; }
+.pl-skalsteg:first-child { border-left: 0; }
 .pl-skalsteg[aria-pressed="true"] { background: var(--farg-accent); color: #fff; }
+.pl-skalsteg:focus-visible { outline: 3px solid var(--farg-accent); outline-offset: -3px; }
+@container (max-width: 19rem) {
+  .pl-skattning li { grid-template-columns: 1fr; }
+  .pl-skattning .pl-skala { grid-template-columns: repeat(5, 1fr); }
+}
+/* Namnet går att trycka på och fäller ut elevens utveckling under raden, i skattningen, avstämningen och utvärderingen
+   (Niclas 2026-10-24: "trycka på ett namn och se dennes utveckling"). Det ser ut som namnet, med samma vinkel som de andra
+   rutorna som fälls ut, och är lika högt som siffrorna, så att det är lätt att träffa. */
+.pl-namnknapp { display: flex; align-items: center; gap: 0.45rem; min-height: 2.75rem; padding: 0; border: 0; background: none; color: inherit; font: inherit; font-weight: 700; text-align: left; cursor: pointer; }
+.pl-namnknapp::after { content: ''; flex: none; width: 0.42rem; height: 0.42rem; border-right: 2px solid var(--farg-accent); border-bottom: 2px solid var(--farg-accent); transform: translateY(-0.12rem) rotate(45deg); }
+.pl-namnknapp[aria-expanded="true"]::after { transform: translateY(0.1rem) rotate(-135deg); }
+.pl-namnknapp:hover { text-decoration: underline; text-decoration-color: var(--farg-accent); text-underline-offset: 0.2em; }
+.pl-namnknapp:focus-visible { outline: 3px solid var(--farg-accent); outline-offset: 2px; border-radius: 4px; }
+.pl-riktningar .pl-namnknapp { min-height: 2.4rem; }
+.pl-utveckling { grid-column: 1 / -1; flex-basis: 100%; margin: 0 0 0.4rem; padding: 0.1rem 0 0.1rem 0.8rem; border-left: 3px solid var(--farg-kant); }
+.pl-utveckling > p { margin: 0 0 0.4rem; }
+.pl-utveckling .pl-riktning { text-align: left; }
+.pl-utv-tips { margin: 0 0 0.6rem; }
 /* Veckans gång för gruppen är en annan fråga än skattningen, och ser därför annorlunda ut: runda och grå. */
 .pl-gang { margin: 0.6rem 0 0; }
 .pl-gang > summary { font-weight: 600; color: var(--farg-accent); cursor: pointer; min-height: 2.5rem; display: flex; align-items: center; gap: 0.75rem; }

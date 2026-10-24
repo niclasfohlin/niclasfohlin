@@ -137,6 +137,7 @@ const json = JSON.stringify(data).replace(/</g, '\\u003c');
                 <label class="pl-etikett" for="pl-elever">Eleverna, en per rad, om du vill</label>
                 <textarea class="pl-falt pl-textfalt" id="pl-elever" rows="4" maxlength="400" autocomplete="off" spellcheck="false"></textarea>
                 <p class="pl-hjalp">Förnamn eller initialer, högst tolv. Namnen finns bara i den här webbläsaren och i kopian du sparar. Utan elevlista skattar du gruppen.</p>
+                <p class="pl-hjalp pl-varning" id="pl-elever-not" role="status" hidden></p>
                 <label class="pl-kryss pl-narvaroval"><input type="checkbox" id="pl-narvaro" /> <span>Notera närvaro i passen</span></label>
                 <p><button type="button" class="pl-textknapp" id="pl-elever-bort" hidden>Ta bort elevernas namn och det som förts in om dem</button></p>
               </div>

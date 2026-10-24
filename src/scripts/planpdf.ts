@@ -4,7 +4,7 @@
 // kopieras till dokumentationen har inga namn. Typsnittet är pdf:ens eget (Helvetica). Ett tecken som det inte har skrivs
 // utan sina accenter, så att utskriften aldrig går sönder (Niclas: "Ł, Ş och č är så ovanliga att du kan hoppa över dem").
 import type { PDFFont, PDFPage } from 'pdf-lib';
-import { datumText, GRUPPEN, isoVecka, SKALAN, uppfoljningensTillfallen, uppraknat, type Plan, type Sammanstallning, type SammanstallningElev } from '../lib/standard/index.js';
+import { datumText, elevensResultat, GRUPPEN, isoVecka, SKALAN, uppraknat, type Plan, type Sammanstallning, type SammanstallningElev } from '../lib/standard/index.js';
 
 const A4: [number, number] = [595.28, 841.89];
 const KANT = 50;
@@ -130,7 +130,7 @@ export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, id
   for (const e of s.elever) {
     p.text(e.namn, { fet: true, storlek: 11.5 });
     p.staplar(s.veckor.map((v) => e.skattningar.find((x) => x.nr === v.nr)?.varde), veckoetiketter(s), { hojd: 40, mitt: s.mitt });
-    p.text([riktningsord(e), e.id !== GRUPPEN && e.narvaro !== null && s.gjorda ? `Var med i ${e.narvaro} av ${s.gjorda} bockade pass.` : '', ...uppfoljningensTillfallen(plan).filter((t) => e.resultat[t.nyckel]).map((t) => `${info.uppfoljning[t.rad]?.nar}, vecka ${isoVecka(t.datum).vecka}: ${e.resultat[t.nyckel]}.`)].filter(Boolean).join(' '), { luft: 8 });
+    p.text([riktningsord(e), e.id !== GRUPPEN && e.narvaro !== null && s.gjorda ? `Var med i ${e.narvaro} av ${s.gjorda} bockade pass.` : '', ...elevensResultat(plan, e.resultat).map((t) => `${info.uppfoljning[t.rad]?.nar}, vecka ${isoVecka(t.datum).vecka}: ${t.varde}.`)].filter(Boolean).join(' '), { luft: 8 });
   }
   const veckorna = s.veckor.filter((v) => v.skattning);
   if (veckorna.length || s.veckor.some((v) => v.not)) {
@@ -162,7 +162,7 @@ export async function elevPdf(plan: Plan, s: Sammanstallning, id: string, info: 
   p.rubrik('Utvecklingen');
   p.text(riktningsord(e));
   if (narvaro) p.text(`Var med i ${e.narvaro} av ${s.gjorda} bockade pass.`);
-  for (const t of uppfoljningensTillfallen(plan).filter((x) => e.resultat[x.nyckel])) p.text(`${info.uppfoljning[t.rad]?.nar}, vecka ${isoVecka(t.datum).vecka}: ${e.resultat[t.nyckel]}.`);
+  for (const t of elevensResultat(plan, e.resultat)) p.text(`${info.uppfoljning[t.rad]?.nar}, vecka ${isoVecka(t.datum).vecka}: ${t.varde}.`);
   if (s.avstamning?.beslut) p.text(`Gruppens avstämning mitt i insatsen: ${info.beslut[s.avstamning.beslut]}.`);
   if (s.utvardering?.beslut) p.text(`Utvärdering efter insatsen: ${info.beslut[s.utvardering.beslut]}.`);
   return p.avsluta(`${e.namn} · ${info.metod} · Planera insatsen på niclasfohlin.se · lärarens egen plan`);

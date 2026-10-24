@@ -3,7 +3,7 @@
 // datum, så att metodbanken och metodens sida kan visa Dina insatser utan att räkna om planen. Inget av det skickas
 // någonstans. Lagringen kan vara avstängd eller rensas (privat läge, en skola som rensar webbläsaren); då säger sidan det,
 // och länken till planen är kopian som håller.
-import { lasVal, passetsTid, plusDagar, tidText, veckodag, VECKODAGAR, type Foljd, type Plan, type Val } from '../lib/standard/index.js';
+import { arDatum, lasVal, passetsTid, plusDagar, rensaFoljd, tidText, veckodag, VECKODAGAR, type Foljd, type Plan, type Val } from '../lib/standard/index.js';
 
 export interface SparadPlan {
   id: string;
@@ -26,15 +26,40 @@ export interface SparadPlan {
   uppdaterad?: string;
   /** Passen (dag, vecka, nummer och tiden när läraren har satt en) och veckorna (nummer, metodens vecka, upprepad, första och sista dagen). */
   schema: { pass: ([string, number, number] | [string, number, number, string])[]; veckor: [number, number, number, string, string][] };
+  /** Hur många av planens pass som är bockade, till Dina insatser (Codex 2026-10-24: bockar på dagar som inte längre har pass räknades med). */
+  bockade?: number;
 }
 
 const NYCKEL = 'insatser';
 
-/** Planerna i webbläsaren, och om lagringen gick att läsa. */
+const text = (x: unknown, max: number) => (typeof x === 'string' ? x.replace(/[\u0000-\u001f\u007f]/g, ' ').trim().slice(0, max) : '');
+const tidpunkt = (x: unknown) => (typeof x === 'string' && /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2})?)?$/.test(x) ? x : undefined);
+const heltal = (x: unknown) => Number.isInteger(x) && (x as number) >= 0;
+/**
+ * En plan ur lagringen eller ur en kopia som fil, rensad till det sidorna kan visa, så att ett fält som har ändrats för hand
+ * aldrig får sidorna att stanna (Codex 2026-10-24). En plan utan id eller metod är ingen plan.
+ */
+export function rensaPlan(x: unknown): SparadPlan | null {
+  const p = (x && typeof x === 'object' ? x : {}) as Record<string, any>;
+  if (typeof p.id !== 'string' || !/^[a-z0-9]{4,12}$/.test(p.id) || typeof p.metod !== 'string' || !/^[a-z0-9-]{1,80}$/.test(p.metod)) return null;
+  const schema = p.schema && typeof p.schema === 'object' ? p.schema : {};
+  const rader = (y: unknown) => (Array.isArray(y) ? y.filter((r) => Array.isArray(r)) : []) as unknown[][];
+  const pass = rader(schema.pass).filter((r) => arDatum(r[0]) && heltal(r[1]) && heltal(r[2]) && (r[3] === undefined || (typeof r[3] === 'string' && /^\d{2}:\d{2}$/.test(r[3])))) as SparadPlan['schema']['pass'];
+  const veckor = rader(schema.veckor).filter((r) => heltal(r[0]) && heltal(r[1]) && (r[2] === 0 || r[2] === 1) && arDatum(r[3]) && arDatum(r[4])) as SparadPlan['schema']['veckor'];
+  const kopia = tidpunkt(p.kopia), uppdaterad = tidpunkt(p.uppdaterad);
+  return {
+    id: p.id, metod: p.metod, titel: text(p.titel, 160), ...(typeof p.omrade === 'string' ? { omrade: text(p.omrade, 40) } : {}),
+    namn: text(p.namn, 40), val: typeof p.val === 'string' ? p.val.slice(0, 4000) : '', folj: p.folj === true, foljd: rensaFoljd(p.foljd),
+    ...(kopia ? { kopia } : {}), andrad: tidpunkt(p.andrad) ?? '', ...(uppdaterad ? { uppdaterad } : {}), schema: { pass, veckor },
+    ...(heltal(p.bockade) ? { bockade: p.bockade } : {}),
+  };
+}
+
+/** Planerna i webbläsaren, rensade, och om lagringen gick att läsa. */
 export function lasPlaner(): { planer: SparadPlan[]; ok: boolean } {
   try {
     const varde = JSON.parse(localStorage.getItem(NYCKEL) ?? '{"v":1,"planer":[]}');
-    return { planer: Array.isArray(varde?.planer) ? varde.planer.filter((p: SparadPlan) => p && typeof p.id === 'string' && typeof p.metod === 'string') : [], ok: true };
+    return { planer: Array.isArray(varde?.planer) ? varde.planer.map(rensaPlan).filter((p: SparadPlan | null): p is SparadPlan => !!p) : [], ok: true };
   } catch {
     return { planer: [], ok: false };
   }

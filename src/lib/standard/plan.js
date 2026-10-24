@@ -117,9 +117,11 @@ export function tolkaTid(text) {
   if (t === 'villkor') return { typ: 'villkor' };
   m = t.match(new RegExp(String.raw`^(vecka|pass) ${TAL}${STRECK}${TAL}$`, 'u'));
   if (m) {
+    // Ett spann är alla veckor eller pass i det, som METODER.md säger (Codex 2026-10-24: pass 6–8 gav bara pass 6).
     const [fran, till] = [tal(m[2]), tal(m[3])];
     if (!(till > fran)) return null;
-    return m[1] === 'vecka' ? { typ: 'vecka', veckor: Array.from({ length: till - fran + 1 }, (_, i) => fran + i) } : { typ: 'pass', pass: [fran], till };
+    const alla = Array.from({ length: till - fran + 1 }, (_, i) => fran + i);
+    return m[1] === 'vecka' ? { typ: 'vecka', veckor: alla } : { typ: 'pass', pass: alla };
   }
   m = t.match(/^(vecka|pass) ([\d\s,]+(?:och \d+)?)$/);
   if (m) {
@@ -271,25 +273,29 @@ export function planera(mp, val) {
     if (iPass && !v.pass.length && !v.bortfall.length) continue;
     veckor.push(v);
   }
-  const forstaPass = pass[0]?.datum;
-  const sistaPass = pass[pass.length - 1]?.datum;
+  // Första och sista passet efter datum: ett flyttat pass kan hamna före ett pass med lägre nummer (Codex 2026-10-24: det
+  // sista passet flyttat till tisdagen avslutade insatsen före onsdagens pass).
+  const iOrdning = [...pass].sort((a, b) => (a.datum < b.datum ? -1 : a.datum > b.datum ? 1 : a.nr - b.nr));
+  const forsta = iOrdning[0], sista = iOrdning[iOrdning.length - 1];
+  const forstaPass = forsta?.datum;
+  const sistaPass = sista?.datum;
   // Efter insatsen: första veckan efter den sista som inte är lov.
   const efter = nastaMandag();
   // Varje pass hör till ett steg i progressionen: efter veckans plats i metoden, eller passets nummer.
   const stegFor = (nr) => mp.steg.find((s) => nr >= s.fran && (s.till === undefined || nr <= s.till));
   for (const v of veckor) v.steg = mp.stegEnhet === 'veckor' ? stegFor(v.innehall)?.rad ?? null : null;
   for (const p of pass) p.steg = mp.stegEnhet === 'pass' ? stegFor(p.nr)?.rad ?? null : veckor[p.vecka - 1].steg;
-  const sistaIVeckan = (v) => (v.pass.length ? pass[v.pass[v.pass.length - 1] - 1].datum : plusDagar(v.mandag, 4));
+  const sistaIVeckan = (v) => (v.pass.length ? v.pass.map((n) => pass[n - 1].datum).sort()[v.pass.length - 1] : plusDagar(v.mandag, 4));
   const uppfoljning = mp.uppfoljning.map(({ rad, tid }) => {
     /** @type {{ datum: string, vecka: number | null }[]} */
     let tillfallen = [];
-    if (tid.typ === 'fore' && forstaPass) tillfallen = [{ datum: forstaPass, vecka: 1 }];
+    if (tid.typ === 'fore' && forsta) tillfallen = [{ datum: forsta.datum, vecka: forsta.vecka }];
     else if (tid.typ === 'efter') tillfallen = [{ datum: plusDagar(efter, tid.veckor * 7), vecka: null }];
     else if (tid.typ === 'intervall') tillfallen = veckor.filter((v) => v.nr % tid.var === 0).map((v) => ({ datum: sistaIVeckan(v), vecka: v.nr }));
     else if (tid.typ === 'vecka') tillfallen = tid.veckor.flatMap((n) => { const v = [...veckor].reverse().find((x) => x.innehall === n); return v ? [{ datum: sistaIVeckan(v), vecka: v.nr }] : []; });
     else if (tid.typ === 'sista-veckan' && veckor.length) { const v = veckor[veckor.length - 1]; tillfallen = [{ datum: sistaIVeckan(v), vecka: v.nr }]; }
     else if (tid.typ === 'pass') tillfallen = tid.pass.flatMap((n) => (pass[n - 1] ? [{ datum: pass[n - 1].datum, vecka: pass[n - 1].vecka }] : []));
-    else if (tid.typ === 'sista-passet' && sistaPass) tillfallen = [{ datum: sistaPass, vecka: pass[pass.length - 1].vecka }];
+    else if (tid.typ === 'sista-passet' && sista) tillfallen = [{ datum: sista.datum, vecka: sista.vecka }];
     return { rad, typ: tid.typ, tillfallen };
   });
   return { start: val.start, enhet: iPass ? 'pass' : 'veckor', forstaPass, sistaPass, efter, pass, veckor, lovveckor, uppfoljning };
@@ -306,6 +312,12 @@ export function veckanFor(plan, datum) {
 export const nastaPass = (plan, datum) => [...plan.pass].sort((a, b) => (a.datum < b.datum ? -1 : 1)).find((p) => p.datum >= datum) ?? null;
 
 // ---------- Länken ----------
+
+/**
+ * Planens största längd, i veckor eller pass, både i länken och när läraren förlänger, så att en förlängd plan alltid går
+ * att läsa (Codex 2026-10-24: en plan som förlängdes förbi gränsen i länken föll tillbaka till förvalen).
+ */
+export const LANGSTA = 200;
 
 /**
  * Valen som länk: allt som avgör planen, lärarens eget mål när det finns och planens id, men aldrig gruppens eller
@@ -341,7 +353,7 @@ export function lasVal(hash) {
   const start = p.get('s');
   const dagar = [...new Set((p.get('d') ?? '').split('').map(Number).filter((x) => x >= 1 && x <= 5))].sort();
   const langd = Number(p.get('l'));
-  if (!arDatum(start) || !dagar.length || !Number.isInteger(langd) || langd < 1 || langd > 60) return null;
+  if (!arDatum(start) || !dagar.length || !Number.isInteger(langd) || langd < 1 || langd > LANGSTA) return null;
   const punkter = (k) => (p.get(k) ?? '').split('.').filter(Boolean);
   const niva = p.get('n') ?? '';
   const minuter = Number(p.get('m'));
@@ -361,7 +373,7 @@ export function lasVal(hash) {
     ...(Object.keys(tider).length ? { tider } : {}),
     ...(mal ? { mal } : {}),
   };
-  return { val, ...(/^[a-z0-9]{4,12}$/.test(id) ? { id } : {}), ...(Number.isInteger(visa) && visa >= 1 && visa <= 80 ? { visa } : {}) };
+  return { val, ...(/^[a-z0-9]{4,12}$/.test(id) ? { id } : {}), ...(Number.isInteger(visa) && visa >= 1 && visa <= 2 * LANGSTA ? { visa } : {}) };
 }
 
 /**
@@ -400,6 +412,21 @@ export function dagarText(val) {
   if (samma || !par.some(Boolean)) return `${uppraknat(dagar.map((d) => VECKODAGAR[d - 1]))}${samma ? ` kl. ${tidsspann(par[0])}` : ''}`;
   return uppraknat(dagar.map((d, i) => `${VECKODAGAR[d - 1]}${par[i] ? ` kl. ${tidsspann(par[i])}` : ''}`));
 }
+
+/**
+ * Passens längd i minuter: varje dags klockslag när läraren har satt dem, och annars passets längd (Codex 2026-10-24:
+ * 9.20–10.00 gav "pass om 30 minuter"). Olika längder står var för sig, i storleksordning.
+ * @param {Val} val
+ * @param {number} standard passets längd utan klockslag
+ * @returns {number[]}
+ */
+export function passensMinuter(val, standard) {
+  const tider = rentaTider(val.tider);
+  const minut = (s) => Number(s.slice(0, 2)) * 60 + Number(s.slice(3, 5));
+  return [...new Set([...new Set(val.dagar)].map((d) => { const t = tider[String(d)]; return t ? minut(t[1]) - minut(t[0]) : standard; }))].sort((a, b) => a - b);
+}
+/** "30", eller "30 eller 40" när dagarna har olika långa pass. @param {number[]} minuter */
+export const minuterText = (minuter) => (minuter.length <= 1 ? minuter.join('') : `${minuter.slice(0, -1).join(', ')} eller ${minuter[minuter.length - 1]}`);
 
 /** Ett mål som läraren har skrivit: en rad, högst 200 tecken, utan styrtecken. @param {unknown} s */
 export const rentMal = (s) => String(s ?? '').replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 200);
@@ -466,7 +493,8 @@ export function veckansDagar(plan, v) {
  * målet, omfattningen med dagar, tider och datum, vad eleven arbetar med vecka för vecka, uppföljningen och metodens
  * adress. Den säger det planerade, och hur många pass som är bockade när läraren har bockat dem. Målet är lärarens eget
  * (val.mal) eller metodens (info.mal), och innehållet är metodens steg i korta rubriker (info.steg, en per rad i
- * progressionen). Texten har inga namn.
+ * progressionen). Texten har inga namn. o.minuter är passets längd utan klockslag; har läraren satt tider räknas längden
+ * ur dem (passensMinuter).
  * @param {{ titel: string, undertitel?: string, adress: string, mal?: string, steg?: string[], uppfoljning: { nar: string }[], nivaNamn?: string }} info
  * @param {Plan} plan
  * @param {Val} val
@@ -484,7 +512,7 @@ export function dokumentationstext(info, plan, val, o) {
   const v1 = plan.veckor[0]?.vecka.vecka, v2 = plan.veckor[plan.veckor.length - 1]?.vecka.vecka;
   // Samma år står en gång: "2 november till 11 december 2026".
   const fran = plan.forstaPass && plan.sistaPass && plan.forstaPass.slice(0, 4) === plan.sistaPass.slice(0, 4) ? dagOchManad(plan.forstaPass) : plan.forstaPass && datumText(plan.forstaPass);
-  if (plan.forstaPass && plan.sistaPass) rader.push(`Omfattning: ${plan.pass.length} pass om ${o.minuter} minuter, ${dagar}, ${fran} till ${datumText(plan.sistaPass)} (vecka ${v1}${v2 !== v1 ? ` till ${v2}` : ''})${info.nivaNamn ? `, på nivån ${info.nivaNamn}` : ''}.`);
+  if (plan.forstaPass && plan.sistaPass) rader.push(`Omfattning: ${plan.pass.length} pass om ${minuterText(passensMinuter(val, o.minuter))} minuter, ${dagar}, ${fran} till ${datumText(plan.sistaPass)} (vecka ${v1}${v2 !== v1 ? ` till ${v2}` : ''})${info.nivaNamn ? `, på nivån ${info.nivaNamn}` : ''}.`);
   // Det eleven arbetar med: metodens steg i planens ordning, med kalenderveckorna. Pass i följd med samma steg står ihop.
   /** @type {{ steg: number | null, fran: string, till: string }[]} */
   const grupper = [];
@@ -533,6 +561,45 @@ export const SKALAN = Object.freeze(['Inte än', 'Med mycket stöd', 'Med visst 
 export const skattningsfragan = (grupp = false) => `Hur väl klarar ${grupp ? 'gruppen' : 'eleven'} målet på egen hand?`;
 /** Gruppens nyckel i skattningen, när läraren följer insatsen utan elevlista. */
 export const GRUPPEN = 'grupp';
+
+/**
+ * Det läraren har fört in, rensat till det sidan kan visa: rätt slag av värde i varje fält, datum som är datum, skattningar
+ * 1 till 5 och texter med sin längd. Det som inte går att läsa tas bort, så att en kopia som har ändrats för hand aldrig får
+ * sidan att stanna (Codex 2026-10-24: en kopia med gjorda: null gjorde sidan obrukbar, också efter omladdning).
+ * @param {unknown} f
+ * @returns {Foljd}
+ */
+export function rensaFoljd(f) {
+  const obj = (x) => (x && typeof x === 'object' && !Array.isArray(x) ? x : {});
+  const lista = (x) => (Array.isArray(x) ? x : []);
+  const text = (x, max) => (typeof x === 'string' ? x.replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max) : '');
+  const id = (x) => typeof x === 'string' && /^[a-z0-9]{1,12}$/i.test(x);
+  const steg = (x) => Number.isInteger(x) && x >= 1 && x <= 5;
+  const per = (x, fn) => Object.fromEntries(Object.entries(obj(x)).flatMap(([k, v]) => { const ut = fn(k, v); return ut === undefined ? [] : [[k, ut]]; }));
+  const g = obj(f);
+  const elever = lista(g.elever).flatMap((e) => (id(e?.id) && text(e?.namn, 30) ? [{ id: e.id, namn: text(e.namn, 30) }] : []))
+    .filter((e, i, alla) => alla.findIndex((x) => x.id === e.id) === i).slice(0, 12);
+  const beslut = (x, tillatna) => {
+    const b = obj(x), not = text(b.not, 200);
+    return tillatna.includes(b.beslut) || not ? { ...(tillatna.includes(b.beslut) ? { beslut: b.beslut } : {}), ...(not ? { not } : {}) } : undefined;
+  };
+  const avstamning = beslut(g.avstamning, ['fortsatt', 'justera']), utvardering = beslut(g.utvardering, ['avsluta', 'forlang', 'byt']);
+  return {
+    gjorda: [...new Set(lista(g.gjorda).filter(arDatum))].sort(),
+    elever,
+    ...(g.narvaro === true ? { narvaro: true } : {}),
+    franvaro: per(g.franvaro, (d, v) => (arDatum(d) && Array.isArray(v) ? [...new Set(v.filter(id))] : undefined)),
+    vecka: per(g.vecka, (d, v) => {
+      if (!arDatum(d)) return undefined;
+      const not = text(obj(v).not, 200);
+      return { ...(steg(obj(v).varde) ? { varde: obj(v).varde } : {}), ...(not ? { not } : {}) };
+    }),
+    skattning: per(g.skattning, (d, v) => (arDatum(d) ? per(v, (k, x) => (id(k) && steg(x) ? x : undefined)) : undefined)),
+    resultat: per(g.resultat, (k, v) => (/^\d+-\d{4}-\d{2}-\d{2}$/.test(k) ? per(v, (e, x) => (id(e) && text(x, 40) ? text(x, 40) : undefined)) : undefined)),
+    ...(avstamning ? { avstamning } : {}),
+    ...(utvardering ? { utvardering } : {}),
+  };
+}
 
 /**
  * Veckan mitt i insatsen, då läraren stämmer av om eleverna rör sig i rätt riktning (Niclas 2026-10-24: "en mitt i
@@ -598,8 +665,26 @@ export function sammanstallning(plan, f, idag) {
 /** Riktningen från första till senaste skattningen: upp, samma eller ned, och null med färre än två. @param {{ forsta: { varde: number } | null, senaste: { varde: number } | null, skattningar: unknown[] }} e */
 export const riktning = (e) => (e.skattningar.length < 2 ? null : e.senaste.varde > e.forsta.varde ? 'upp' : e.senaste.varde < e.forsta.varde ? 'ned' : 'samma');
 export const BESLUT = Object.freeze({ fortsatt: 'Fortsätt som planerat', justera: 'Justera insatsen', avsluta: 'Avsluta insatsen', forlang: 'Förläng insatsen', byt: 'Byt insats' });
-/** Uppföljningens tillfällen med datum, med sin nyckel för elevernas resultat ("0-0": radens nummer och tillfällets). @param {Plan} plan */
-export const uppfoljningensTillfallen = (plan) => plan.uppfoljning.flatMap((u) => u.tillfallen.map((t, i) => ({ nyckel: `${u.rad}-${i}`, rad: u.rad, datum: t.datum, vecka: t.vecka })));
+/**
+ * Uppföljningens tillfällen med datum, med sin nyckel för elevernas resultat: radens nummer och tillfällets datum, som
+ * "2-2026-12-14". Ett resultat hör till dagen det gällde, så att det står kvar på den dagen när planen ändras efteråt
+ * (Codex 2026-10-24: efter en förlängning visades resultatet efter insatsen som nästa mätning).
+ * @param {Plan} plan
+ */
+export const uppfoljningensTillfallen = (plan) => plan.uppfoljning.flatMap((u) => u.tillfallen.map((t) => ({ nyckel: `${u.rad}-${t.datum}`, rad: u.rad, datum: t.datum, vecka: t.vecka })));
+/**
+ * En elevs resultat i metodens uppföljning, i datumordning: också de som gäller ett tillfälle som inte står i planen längre,
+ * som resultatet efter insatsen före en förlängning. typ säger om raden är uppföljningen före eller efter.
+ * @param {Plan} plan
+ * @param {Record<string, string>} resultat elevens, nyckel som i uppfoljningensTillfallen
+ */
+export function elevensResultat(plan, resultat) {
+  return Object.entries(resultat ?? {}).flatMap(([nyckel, varde]) => {
+    const m = /^(\d+)-(\d{4}-\d{2}-\d{2})$/.exec(nyckel);
+    const u = m && plan.uppfoljning.find((x) => x.rad === Number(m[1]));
+    return m && u && typeof varde === 'string' && varde.trim() ? [{ nyckel, rad: u.rad, typ: u.typ, datum: m[2], varde: varde.trim() }] : [];
+  }).sort((a, b) => (a.datum < b.datum ? -1 : a.datum > b.datum ? 1 : a.rad - b.rad));
+}
 const decimal = (n) => String(n).replace('.', ',');
 const stor = (s) => s.charAt(0).toLocaleUpperCase('sv') + s.slice(1);
 const medel = (x) => (x.length ? Math.round((x.reduce((a, b) => a + b, 0) / x.length) * 10) / 10 : null);
@@ -641,8 +726,10 @@ export function sammanstallningstext(info, plan, s) {
   if (veckorna.length) rader.push(`Hur veckorna gick, 1 till 5: ${veckorna.map((v) => `vecka ${v.vecka}: ${v.skattning}`).join(', ')}. Medel ${decimal(s.veckomedel)}.`);
   const noter = s.veckor.filter((v) => v.not);
   if (noter.length) rader.push(`Anteckningar: ${noter.map((v) => `vecka ${v.vecka}: ${v.not.replace(/[.\s]+$/, '')}`).join('. ')}.`);
-  if (s.avstamning?.beslut) rader.push(`Avstämning mitt i insatsen${s.mitt ? `, vecka ${plan.veckor[s.mitt - 1].vecka.vecka}` : ''}: ${BESLUT[s.avstamning.beslut] ?? s.avstamning.beslut}.${s.avstamning.not ? ` ${s.avstamning.not.replace(/[.\s]+$/, '')}.` : ''}`);
-  if (s.utvardering?.beslut) rader.push(`Utvärdering efter insatsen: ${BESLUT[s.utvardering.beslut] ?? s.utvardering.beslut}.${s.utvardering.not ? ` ${s.utvardering.not.replace(/[.\s]+$/, '')}.` : ''}`);
+  // Beslutet och meningen, var för sig: en mening utan beslut kommer med (Codex 2026-10-24).
+  const beslutet = (b) => [b.beslut ? BESLUT[b.beslut] ?? b.beslut : '', b.not ?? ''].map((x) => x.replace(/[.\s]+$/, '')).filter(Boolean).map((x) => `${x}.`).join(' ');
+  if (s.avstamning?.beslut || s.avstamning?.not) rader.push(`Avstämning mitt i insatsen${s.mitt ? `, vecka ${plan.veckor[s.mitt - 1].vecka.vecka}` : ''}: ${beslutet(s.avstamning)}`);
+  if (s.utvardering?.beslut || s.utvardering?.not) rader.push(`Utvärdering efter insatsen: ${beslutet(s.utvardering)}`);
   const tider = plan.uppfoljning.filter((u) => u.tillfallen.length).map((u) => `${info.uppfoljning[u.rad]?.nar ?? ''}, ${uppraknat(u.tillfallen.map((t) => `vecka ${isoVecka(t.datum).vecka}`))}`);
   if (tider.length) rader.push(`Uppföljning: ${tider.join('. ')}.`);
   return utanNamn(rader.join('\n'), elever);
@@ -663,7 +750,7 @@ export function elevtext(info, plan, s, id) {
   if (info.mal) delar.push(`Mål: ${malText(info.mal)}`);
   if (e.narvaro !== null && s.gjorda) delar.push(`Var med i ${e.narvaro} av ${s.gjorda} bockade pass.`);
   if (e.skattningar.length) delar.push(`Skattning, 1 till 5, av hur väl eleven klarar målet på egen hand: ${e.skattningar.map((x) => `vecka ${x.vecka}: ${x.varde}`).join(', ')}.`);
-  for (const t of uppfoljningensTillfallen(plan)) if (e.resultat[t.nyckel]) delar.push(`${info.uppfoljning[t.rad]?.nar ?? ''}, vecka ${isoVecka(t.datum).vecka}: ${e.resultat[t.nyckel].replace(/[.\s]+$/, '')}.`);
+  for (const t of elevensResultat(plan, e.resultat)) delar.push(`${info.uppfoljning[t.rad]?.nar ?? ''}, vecka ${isoVecka(t.datum).vecka}: ${t.varde.replace(/[.\s]+$/, '')}.`);
   return utanNamn(delar.join(' '), s.elever.filter((x) => x.id !== GRUPPEN));
 }
 
@@ -687,11 +774,11 @@ function vik(rad) {
 const kalDatum = (s) => s.replace(/-/g, '');
 
 /**
- * Kalenderfilen: en heldagshändelse för varje vecka i planen, på veckans första pass, och en för varje tillfälle i
- * uppföljningen som har ett datum. Har läraren satt tider för passen blir varje pass en egen händelse med klockslaget, i
- * lärarens egen tid (en tid utan tidszon, RFC 5545 3.3.5), och ett pass på en dag utan tid en heldagshändelse. Varje
- * händelse länkar till sin vecka i planen. Samma plan ger samma id (UID), så att en kalender som läser filen igen kan känna
- * igen händelserna; SEQUENCE växer med tiden, så att den senaste filen gäller.
+ * Kalenderfilen: en händelse för varje pass, med klockslaget när läraren har satt tider, i lärarens egen tid (en tid utan
+ * tidszon, RFC 5545 3.3.5), och annars som heldagshändelse på passets dag (buggjakten 2026-10-24: en händelse per vecka
+ * visade bara veckans första pass i kalendern). Dessutom en heldagshändelse för varje tillfälle i uppföljningen som har ett
+ * datum. Varje händelse länkar till sin vecka i planen. Samma plan ger samma id (UID), så att en kalender som läser filen
+ * igen kan känna igen händelserna; SEQUENCE växer med tiden, så att den senaste filen gäller.
  * @param {{ titel: string, uppfoljning: { nar: string }[], fokus: (string | null)[] }} info
  * @param {Plan} plan
  * @param {{ id: string, lank: (vecka?: number) => string, namn?: string, nu: Date, tider?: Val['tider'] }} o
@@ -707,17 +794,11 @@ export function kalenderfil(info, plan, o) {
       `SUMMARY:${kalText(titel)}`, `DESCRIPTION:${kalText(text)}`, `URL:${lank}`, `TRANSP:${tid ? 'OPAQUE' : 'TRANSPARENT'}`, 'END:VEVENT');
   };
   const tider = rentaTider(o.tider);
-  if (Object.keys(tider).length) {
-    for (const p of plan.pass) {
-      const v = plan.veckor[p.vecka - 1];
-      const fokus = v.steg !== null && v.steg !== undefined && info.fokus[v.steg] ? `\n${postensRad(info.fokus[v.steg], 160)}` : '';
-      handelse(`${o.id}-p${p.nr}`, p.datum, `${info.titel}, pass ${p.nr} av ${plan.pass.length}${vem}`, `Vecka ${v.innehall} i planen${v.igen ? ' igen' : ''}.${fokus}\nVeckan i planen: ${o.lank(v.nr)}`, o.lank(v.nr), tider[String(veckodag(passetsDag(p)))]);
-    }
-  } else for (const v of plan.veckor) {
-    const { fran } = veckansDagar(plan, v);
-    const passen = v.pass.length ? `Pass ${uppraknat(v.pass.map(String))}: ${uppraknat(v.pass.map((n) => dagText(plan.pass[n - 1].datum)))}.` : 'Inga pass den här veckan.';
-    const fokus = v.steg !== null && v.steg !== undefined && info.fokus[v.steg] ? `\n${postensRad(info.fokus[v.steg], 160)}` : '';
-    handelse(`${o.id}-v${v.nr}`, fran, `${info.titel}, vecka ${v.innehall} i planen${v.igen ? ' igen' : ''}${vem}`, `${passen}${fokus}\nVeckan i planen: ${o.lank(v.nr)}`, o.lank(v.nr));
+  for (const p of plan.pass) {
+    const v = plan.veckor[p.vecka - 1];
+    const steg = p.steg ?? v.steg;
+    const fokus = steg !== null && steg !== undefined && info.fokus[steg] ? `\n${postensRad(info.fokus[steg], 160)}` : '';
+    handelse(`${o.id}-p${p.nr}`, p.datum, `${info.titel}, pass ${p.nr} av ${plan.pass.length}${vem}`, `Vecka ${v.innehall} i planen${v.igen ? ' igen' : ''}.${fokus}\nVeckan i planen: ${o.lank(v.nr)}`, o.lank(v.nr), tider[String(veckodag(passetsDag(p)))]);
   }
   for (const u of plan.uppfoljning) u.tillfallen.forEach((t, i) => {
     handelse(`${o.id}-u${u.rad}-${i + 1}`, t.datum, `${info.titel}: uppföljning, ${(info.uppfoljning[u.rad]?.nar ?? '').toLocaleLowerCase('sv')}${vem}`, `Uppföljningen i planen: ${o.lank(t.vecka ?? undefined)}`, o.lank(t.vecka ?? undefined));

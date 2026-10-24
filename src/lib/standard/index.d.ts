@@ -104,7 +104,7 @@ export declare function meningarI(text: string): number;
 export declare function bildtextFel(bild: { rubrik?: string; text: string; alt?: string }, o?: { blad?: boolean; visas?: boolean }): string[];
 
 /** Planera insatsen (sajtens K-489, plan.js): när en rad i uppföljningen görs, ur fältet tid. */
-export type Tid = { typ: 'fore' } | { typ: 'efter'; veckor: number; till?: number } | { typ: 'lopande'; enhet: 'pass' | 'vecka' } | { typ: 'intervall'; var: number } | { typ: 'vecka'; veckor: number[] } | { typ: 'sista-veckan' } | { typ: 'pass'; pass: number[]; till?: number } | { typ: 'sista-passet' } | { typ: 'villkor' };
+export type Tid = { typ: 'fore' } | { typ: 'efter'; veckor: number; till?: number } | { typ: 'lopande'; enhet: 'pass' | 'vecka' } | { typ: 'intervall'; var: number } | { typ: 'vecka'; veckor: number[] } | { typ: 'sista-veckan' } | { typ: 'pass'; pass: number[] } | { typ: 'sista-passet' } | { typ: 'villkor' };
 /** En rad i progressionen: veckorna eller passen den gäller; till saknas när den gäller till slutet. */
 export interface Steg { rad: number; fran: number; till?: number; vidBehov: boolean }
 /** Metodens plan: hur ofta, passets längd, perioden, progressionens steg och uppföljningens tider. */
@@ -136,6 +136,8 @@ export declare function veckanFor(plan: Plan, datum: string): PlanVecka | null;
 export declare function nastaPass(plan: Plan, datum: string): Pass | null;
 export declare function kodaVal(val: Val, extra?: { id?: string; visa?: number }): string;
 export declare function lasVal(hash: string): { val: Val; id?: string; visa?: number } | null;
+/** Planens största längd i veckor eller pass, i länken och vid en förlängning. */
+export declare const LANGSTA: number;
 export declare const VECKODAGAR: string[];
 export declare const datumText: (s: string) => string;
 export declare const dagOchManad: (s: string) => string;
@@ -145,6 +147,10 @@ export declare const uppraknat: (ord: string[]) => string;
 export declare const talText: (n: number, en?: boolean) => string;
 export declare function veckansDagar(plan: Plan, v: PlanVecka): { fran: string; till: string };
 export declare function dokumentationstext(info: { titel: string; undertitel?: string; adress: string; mal?: string; steg?: string[]; uppfoljning: { nar: string }[]; nivaNamn?: string }, plan: Plan, val: Val, o: { minuter: number; genomforda?: number; folj?: boolean }): string;
+/** Passens längd i minuter efter dagarnas klockslag, och passets längd för en dag utan klockslag; olika längder var för sig, i storleksordning. */
+export declare function passensMinuter(val: Val, standard: number): number[];
+/** "30", eller "30 eller 40". */
+export declare const minuterText: (minuter: number[]) => string;
 /** Ett mål som läraren har skrivit, rensat: en rad, högst 200 tecken. */
 export declare const rentMal: (s: unknown) => string;
 /** Målet som en mening med stor bokstav och punkt. */
@@ -169,6 +175,8 @@ export declare const passetsDag: (p: Pass) => string;
 export declare const SKALAN: readonly string[];
 export declare const skattningsfragan: (grupp?: boolean) => string;
 export declare const GRUPPEN: 'grupp';
+/** Det läraren har fört in, rensat till det sidan kan visa; det som inte går att läsa tas bort. */
+export declare function rensaFoljd(f: unknown): Required<Pick<Foljd, 'gjorda' | 'elever' | 'franvaro' | 'vecka' | 'skattning' | 'resultat'>> & Pick<Foljd, 'narvaro' | 'avstamning' | 'utvardering'>;
 export declare function mittVeckan(plan: Plan): number | null;
 export interface SammanstallningVecka { nr: number; mandag: string; vecka: number; innehall: number; igen: boolean; pass: { nr: number; dag: string; datum: string; gjort: boolean }[]; gjorda: number; planerade: number; varit: number; installda: number; helgdagar: number; skattning?: number; not?: string }
 export interface SammanstallningElev { id: string; namn: string; skattningar: { nr: number; vecka: number; varde: number }[]; forsta: { nr: number; vecka: number; varde: number } | null; senaste: { nr: number; vecka: number; varde: number } | null; narvaro: number | null; resultat: Record<string, string> }
@@ -176,6 +184,9 @@ export interface Sammanstallning { veckor: SammanstallningVecka[]; elever: Samma
 export declare function sammanstallning(plan: Plan, f: Foljd, idag: string): Sammanstallning;
 export declare const riktning: (e: SammanstallningElev) => 'upp' | 'samma' | 'ned' | null;
 export declare const BESLUT: Readonly<Record<'fortsatt' | 'justera' | 'avsluta' | 'forlang' | 'byt', string>>;
+/** Uppföljningens tillfällen med datum, med nyckeln för elevernas resultat: radens nummer och tillfällets datum, "2-2026-12-14". */
 export declare const uppfoljningensTillfallen: (plan: Plan) => { nyckel: string; rad: number; datum: string; vecka: number | null }[];
+/** En elevs resultat i datumordning, också för ett tillfälle som inte står i planen längre. */
+export declare function elevensResultat(plan: Plan, resultat: Record<string, string>): { nyckel: string; rad: number; typ: Tid['typ']; datum: string; varde: string }[];
 export declare function sammanstallningstext(info: { titel: string; mal?: string; uppfoljning: { nar: string }[] }, plan: Plan, s: Sammanstallning): string;
 export declare function elevtext(info: { mal?: string; uppfoljning: { nar: string }[] }, plan: Plan, s: Sammanstallning, id: string): string;
