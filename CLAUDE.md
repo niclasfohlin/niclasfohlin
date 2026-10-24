@@ -17,6 +17,7 @@ Den här filen säger vad sajten är, vad du får göra och var allt annat står
 | DRIFT.md | Plattformarna: vad som finns hos GitHub, Netlify, Brevo och Loopia, var inloggningarna ligger, kommandon som fungerar, vad man gör när något är rött; krediterna och trafiken; besöksstatistiken i GoatCounter; delningskorten, delningsraden och bildernas mått; kommentarerna; krokarna; sessionerna och meddelandena till metodriggen |
 | METODER.md | Hur en metod tas emot och görs om: modellen, mappningen från kompendium till YAML, antalen och databaserna, lathunden, textreglerna, kontrollerna, Codex-granskningen, metodriggen utanför repot, serier och lektionsbanker (Ljudlek i grupp), kurser i veckor och veckans material (Ordverkstad i grupp), Planera insatsen, filmerna, Word och Google Dokument |
 | wordparitet (`C:/wordparitet`, `node_modules/wordparitet/REGLER.md`) | Word och Google Dokument: reglerna med skäl och mätningar, regelprovet, mätbänken och jämförelserna, i en modul som sajten och metodriggen delar och båda bygger ut (K-158). Hur en ny regel läggs dit står i METODER.md under Word och Google Dokument |
+| PLANERA.md | Hur en metod får Planera insatsen och hur modulen byggs ut: vad metoden behöver, proven i ordning med agenternas uppdrag (mallarna i `scripts/planera/`), hur fynden lagas och när planen är klar att publiceras. Skrivs om efter varje omgång |
 | UPPSTART.md | Hur drift, konton och behörigheter sattes upp från början |
 | KO.md | Kön. `node scripts/ko.mjs lista` visar den, `/natt` arbetar igenom den |
 | NATTEN.md | Rapporten till Niclas: vad som gjordes och besluten han ska känna till |
@@ -67,7 +68,7 @@ Stödundervisning är en metodbank, inte en blogg. Varje metod är en YAML-fil e
 | Word-filen med allt: beskrivning, planeringsmallar och lathund | `/stodundervisning/<id>.docx` |
 | Word-filen med bara metoden, utan materialet | `/stodundervisning/<id>-metoden.docx` |
 | Delarna var för sig | `<id>-mallar.docx` och `<id>-lathund.docx` |
-| I en metod som kan planeras: varje sak som planen leder till för sig, en ram, en vecka, ett räkneblad eller en mall, med en knapp under saken på metodens sida (METODER.md under Utskriften, och under Så får en metod planen) | `/stodundervisning/<id>-blad-<namn>.pdf` och `.docx`, `<id>-vecka-<n>` och `<id>-mall-<namn>` |
+| I en metod som kan planeras: varje sak som planen leder till för sig, en ram, en vecka, ett räkneblad eller en mall, med en knapp under saken på metodens sida (METODER.md under Utskriften, och PLANERA.md under Vad metoden behöver) | `/stodundervisning/<id>-blad-<namn>.pdf` och `.docx`, `<id>-vecka-<n>` och `<id>-mall-<namn>` |
 | Flera valda metoder i en Word-fil | sätts ihop av det läraren väljer i metodbanken, `/stodundervisning/` |
 | Lathundens PowerPoint, med filmerna på en bild först och sedan lathundens fyra bilder kant till kant | `/stodundervisning/<id>-lathund.pptx` |
 | Filmerna som mp4 i en zip-fil | `/stodundervisning/<id>-filmer.zip` |

@@ -338,7 +338,7 @@ const ks = s.metodplan(medTider('kortskrivning-skriv-varje-dag', ['sista veckan'
 ska('Kortskrivnings moment stoppas med besked', ks.fel.some((x) => x.includes('Progressionens första kolumn heter "När"')), ks.fel);
 ska('en metod utan tid stoppas med besked', s.metodplan(metod('upprepad-lasning')).fel.some((x) => x.includes('har ingen tid')));
 // Modulens version har sin rad i tabellen under Versionerna, så att en ny förmåga aldrig går ut utan att stå där (METODER.md
-// under Planera insatsen, Så får en metod planen).
+// under Planera insatsen och PLANERA.md under Vad metoden behöver).
 ska(`versionen ${s.PLANERA.version} står i METODER.md under Versionerna`, readFileSync(join(rot, 'METODER.md'), 'utf8').includes(`\n| ${s.PLANERA.version} | `), s.PLANERA.version);
 
 if (fel.length) { console.error(`planprov: ${fel.length} fel:\n  ${fel.join('\n  ')}`); process.exit(1); }

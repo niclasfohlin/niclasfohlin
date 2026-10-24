@@ -12,8 +12,9 @@
 // fortfarande på två ställen, och provet ser det inte.
 //
 // Hemmen: CLAUDE.md säger vad sajten är, mandatet och vad bara Niclas gör. ARBETSSATT.md säger hur arbetet går till.
-// STIL.md hur text skrivs. METODER.md allt om metoderna. DRIFT.md tjänsterna, krediternas tal och mekaniken. Ett
-// kommando i .claude/commands/ är ett flöde: stegen i ordning, med hänvisning till reglerna.
+// STIL.md hur text skrivs. METODER.md allt om metoderna. PLANERA.md hur en metod får planen och hur modulen prövas.
+// DRIFT.md tjänsterna, krediternas tal och mekaniken. Ett kommando i .claude/commands/ är ett flöde: stegen i ordning,
+// med hänvisning till reglerna.
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -23,7 +24,7 @@ const rot = join(dirname(fileURLToPath(import.meta.url)), '..');
 const NARA = process.argv.includes('--nara');
 const ORD = NARA ? 8 : 12;
 const mapp = (m) => (existsSync(join(rot, m)) ? readdirSync(join(rot, m)).filter((f) => f.endsWith('.md')).sort().map((f) => `${m}/${f}`) : []);
-const filer = ['CLAUDE.md', 'ARBETSSATT.md', 'STIL.md', 'AGENTS.md', 'METODER.md', 'DRIFT.md', 'UPPSTART.md', 'KONCEPT.md', 'README.md', ...mapp('.claude/commands'), ...mapp('.claude/agents')]
+const filer = ['CLAUDE.md', 'ARBETSSATT.md', 'STIL.md', 'AGENTS.md', 'METODER.md', 'PLANERA.md', 'DRIFT.md', 'UPPSTART.md', 'KONCEPT.md', 'README.md', ...mapp('.claude/commands'), ...mapp('.claude/agents')]
   .filter((f) => existsSync(join(rot, f)));
 
 // Ordföljder som får stå i två filer, med skälet. Listan ska vara kort: en hänvisning är nästan alltid rätt svar.

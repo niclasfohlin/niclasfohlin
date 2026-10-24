@@ -343,22 +343,9 @@ Fälten står inte på metodens sida, i Word eller i lathunden. De ger därför 
 | `pass 6, 8 och 10`, `pass 13–23`, `sista passet` | de passen |
 | `villkor` | inget datum; står under Håll koll på, för det läraren bedömer när det händer |
 
-### Så får en metod planen
+### Arbetsgången
 
-Det här är det en metod behöver för att få Planera insatsen, och det som sker av sig självt (Niclas 2026-10-25: "Någon slags info om vad metoden behöver för att få modulen som inte glöms bort mellan sessioner"). Varje rad hänvisar till regeln där den står och säger vad som stannar när något saknas, så att nästa session vet det utan att fråga. Metodriggen skriver fälten i sin leverans (K-491), och i en metod som redan ligger ute skriver sajten in dem.
-
-| Steg | Vad metoden behöver | Var regeln står | Det som stannar |
-|---|---|---|---|
-| Uppföljningen | En `tid` på varje rad, med orden i tabellen ovan, och `perElev` på en rad som görs med en elev i taget. Med en tid på varje rad kan metoden planeras (`planbar` i `src/lib/planbar.ts`), och sidan, knappen Planera insatsen och sakernas filer kommer då av sig själva | Fälten i metodens fil | `insatsplanFel` på en tid som standarden inte läser |
-| Progressionen | Kolumnen Vecka eller Pass med standardens ord, `rubrik` när fokus är långt, och `taggar` när veckan ska visa bankens poster | Fälten i metodens fil | `insatsplanFel` på en vecka eller en tagg som inte går att läsa |
-| Målet | `plan.mal`, eller ett lektionskort med ett mål | Fälten i metodens fil | `insatsplanFel` på en metod utan båda |
-| Passet | Tidsschemat med delar och minuter, och `plan.passen` när passen i veckan skiljer sig åt, med `tabell` för ett pass som går till på ett eget sätt | Stycket som börjar "Passet står i rutan", och fälten | `insatsplanFel` på en tabell som metoden inte har och på en `nar` som standarden inte läser |
-| Före, justera, upprepa och stegen | `plan.fore`, `plan.justera`, `plan.upprepa` och `plan.stege` när metoden har sådant | Fälten i metodens fil | `insatsplanFel` på en stege i en progression som inte är i veckor |
-| Namnen | Planens texter nämner bladen, korten, mallarna, testen, texterna och lektionerna med namnen som de står i metoden, så att de blir länkar | STIL.md under Hänvisningar | `insatsplanFel` (`olankadeSaker`) på ett namn som metoden inte har |
-| Sakernas filer | Inget. Varje ram, vecka, räkneblad och mall som planen kan leda till får en egen Word-fil och pdf, och en knapp under sig på metodens sida | Utskriften, raden om knappen under en sak som planen kan leda till | `scripts/bankpdf.mjs` på en fil med fler sidor än regeln tillåter, och `scripts/planprov.mjs` på en sak som planen leder till utan knapp och på en fil utan knapp. En ny sorts sak, som kort att klippa, får sin regel i `src/lib/sakfiler.ts` och sin knapp i `Metod.astro`, för alla metoder på en gång |
-| Word i Google Dokument | De nya Word-filerna prövas i Google | ARBETSSATT.md under Kontroll före uppladdning | `node scripts/googleprov.mjs --andrade --mapp` |
-| Provningen | `npm run validera`, som kör planprovet på alla metoder som kan planeras, och planen läst i telefonbredd som en lärare läser den. En ny förmåga i modulen prövas också av kalla testare och buggjägare | Proven | `scripts/planprov.mjs` |
-| Versionen | En ny förmåga i modulen höjer versionen, och raden skrivs i tabellen i samma commit | Versionerna | `scripts/planprov.mjs` på en version som tabellen inte har |
+Arbetsgången, från planens fält i en metod till publiceringen, med proven och uppdragen till agenterna, står i PLANERA.md.
 
 ### Lagringen
 
@@ -368,9 +355,7 @@ Planen och allt läraren för in sparas bara i den webbläsare där läraren skr
 
 `scripts/planprov.mjs` körs i `npm run validera`: planmotorn (veckor, röda dagar, påsken, vecka 53, upprepade veckor, lov, flyttade och inställda pass, tiderna, målet, länken, texterna utan namn och kalenderfilen enligt RFC 5545, med och utan klockslag), varje metod som har planens fält, fem former av metoder med fälten som riggen ska skriva dem, och sidan i Chrome med fasta datum, mitt i insatsen och efter den, i 320, 360 och 390 punkter och på dator. Sidans prov går igenom det läraren gör: målet med pennan, tiderna, texten till åtgärdsprogrammet när planen ändras, bockar, närvaro, skattning, elevens utveckling under namnet, avstämning, utvärdering och förlängning, Ångra, elevlistan med en paus, tretton namn och samma namn två gånger, kopian och en kopia som har ändrats för hand, länken, två flikar, två planer, söndagen före en ny vecka och en webbläsare som inte sparar. Felen som provet fångar kommer ur Codex granskning av koden och två buggjägare, agenter som försökte få sidan att gå sönder (2026-10-24). `--bilder <mapp>` tar bilder av lägena till granskningen. Provet stannar också när en sak som planen leder till på metodens sida saknar en knapp under sig som skriver ut den, när en saks fil saknar sin knapp, och när modulens version saknar sin rad i tabellen under Versionerna.
 
-En ny förmåga i modulen, eller en ny form av metod, prövas också som en lärare prövar den (Niclas 2026-10-24 och 2026-10-25: användbarhet, kalla läsare och härjning, innan något laddas upp). En testversion läggs ut med `node scripts/utkast.mjs --namn <namn>`, som ett utkast hos Netlify utan byggkrediter, och agenter använder den med `scripts/lasare.mjs`, en Chrome i telefonbredd som styrs med korta kommandon och kan låtsas att det är en annan dag, utan att läsa koden: en granskare av användbarheten, kalla testare i roller (en som bara planerar, en som följer en grupp i tiden, en med två grupper och bråttom), en testare per metod som först får bara planen och sedan hela metoden, och buggjägare på olika modeller som försöker få sidan att gå sönder. Uppdraget skrivs i `underlag/prov/<sak>/` med roll, regler och svarets form, P1 till P3 med förslag. Verktyget visar inte webbläsarens utskrift och följer inte en ny flik, så ett fynd om en utskriftsknapp eller en länk prövas i en vanlig webbläsare innan det räknas. Fynden vägs mot Codex granskning av koden, P1 lagas före uppladdningen, och en ny testversion får ett nytt namn medan en jägare arbetar.
-
-En länkgranskning prövar det som namnges i planen (Niclas 2026-10-25: "Finns det något som namnges som bör länkas till i metoden som inte gör det?"). `node scripts/plantext.mjs` skriver planens text för varje metod som kan planeras, i varje läge vid fyra datum och med varje pass i rutan, med länkarna utmärkta och vart de leder, och metodens platser med ankare, till `underlag/prov/plantext/`. En granskare per metod läser texten mot platserna med definitionen i STIL.md under Hänvisningar och säger vad som borde vara en länk, vad som leder fel och vad som är en länk men inte borde vara det.
+En ny förmåga i modulen prövas också av agenter som använder en testversion som lärare, och det planen namnger prövas i en länkgranskning: stegen, verktygen och uppdragen står i PLANERA.md.
 
 Planen byggs i steg: en metod som standard (Textsamtal i grupp, K-489), en beta på fem metoder som också prövar att modulen klarar olika former (K-490) och alla metoder, med fälten skrivna av metodriggen (K-491).
 

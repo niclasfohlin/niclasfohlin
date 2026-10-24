@@ -18,6 +18,7 @@ Läs raden för det du ska göra. Avsnitten står i den här filen, ett per steg
 | tagga en post, skapa en tagg eller lägga in en bild | Innehåll |
 | skriva en ingress, en beskrivning eller en rapport till Niclas | STIL.md |
 | ändra kod eller design | Design och kod, och KONCEPT.md |
+| ge en metod Planera insatsen, eller ändra planens modul | PLANERA.md, och METODER.md under Planera insatsen |
 | sköta en tjänst, logga in eller röra en hemlighet | Drift, och DRIFT.md |
 | arbeta igenom kön på natten | flödet `/natt` (`.claude/commands/natt.md`) och Nattkörning |
 | skriva ett längre nyhetsbrev | flödet `/utskick` (`.claude/commands/utskick.md`) och CLAUDE.md under Prenumeration och utskick |
