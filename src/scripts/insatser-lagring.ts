@@ -101,11 +101,13 @@ export const iTurOrdning = (idag: string) => (a: SparadPlan, b: SparadPlan) => (
 
 const MANAD_KORT = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
 /** Planens namn: gruppens, eller dagarna och första passet, som "Mån, ons, fre från 2 nov" (granskningen 2026-10-24: två planer utan namn såg likadana ut). */
-export function planensNamn(p: { namn?: string; val: string }): string {
+export function planensNamn(p: { namn?: string; val: string; schema?: SparadPlan['schema'] }): string {
   if (p.namn) return p.namn;
   const v = lasVal(p.val)?.val;
   if (!v) return 'Plan utan namn';
   const dagar = [...v.dagar].sort().map((d) => VECKODAGAR[d - 1].slice(0, 3)).join(', ');
-  const [, m, d] = v.start.split('-').map(Number);
+  // Efter första passet, som efter ett lov i första veckan inte är planens startdag (de kalla läsarna 2026-10-24).
+  const forsta = p.schema?.pass.map((x) => x[0]).sort()[0] ?? v.start;
+  const [, m, d] = forsta.split('-').map(Number);
   return `${dagar.charAt(0).toLocaleUpperCase('sv')}${dagar.slice(1)} från ${d} ${MANAD_KORT[m - 1]}`;
 }

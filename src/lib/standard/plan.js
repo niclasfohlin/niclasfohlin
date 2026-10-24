@@ -408,6 +408,7 @@ export const rentMal = (s) => String(s ?? '').replace(/[\u0000-\u001f\u007f]/g, 
 
 const MANADER = ['januari', 'februari', 'mars', 'april', 'maj', 'juni', 'juli', 'augusti', 'september', 'oktober', 'november', 'december'];
 const MANAD_KORT = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
+const MAND_KORT_ETT = (m) => MANAD_KORT[m - 1];
 export const VECKODAGAR = ['måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lördag', 'söndag'];
 const delar = (s) => s.split('-').map(Number);
 /** Målet som en mening: stor bokstav först och punkt sist, som "Kunna läsa mellan raderna." @param {string} [mal] */
@@ -445,6 +446,7 @@ export const dagText = (s) => `${VECKODAGAR[veckodag(s) - 1]} ${dagOchManad(s)}`
 /** "2–6 nov" eller "30 nov–4 dec". @param {string} fran @param {string} till */
 export function spannKort(fran, till) {
   const [, m1, d1] = delar(fran), [, m2, d2] = delar(till);
+  if (fran === till) return `${d1} ${MAND_KORT_ETT(m1)}`;
   return m1 === m2 ? `${d1}–${d2} ${MANAD_KORT[m1 - 1]}` : `${d1} ${MANAD_KORT[m1 - 1]}–${d2} ${MANAD_KORT[m2 - 1]}`;
 }
 /** "måndag, onsdag och fredag". @param {string[]} ord */

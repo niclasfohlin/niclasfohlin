@@ -2845,7 +2845,11 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
 .pl-tidval { display: grid; gap: 0.15rem; font-size: 0.85rem; color: var(--farg-text-svag); }
 .pl-tid { width: 7.2rem; padding-right: 0.4rem; }
 .pl-tid:disabled { color: var(--farg-text-svag); background: var(--farg-ton-svag); }
-.pl-tiddag { width: 2.6rem; font-weight: 700; align-self: center; padding-top: 1.1rem; }
+/* Olika tider olika dagar: dagen och de två listorna i jämna kolumner, med rubrikerna en gång överst. */
+.pl-tiddagar { display: grid; grid-template-columns: 2.8rem minmax(0, 7.6rem) minmax(0, 7.6rem); align-items: center; gap: 0.4rem 0.6rem; margin: 0 0 0.5rem; }
+.pl-tiddagar .pl-tid { width: 100%; }
+.pl-tidrubrik { font-size: 0.85rem; color: var(--farg-text-svag); }
+.pl-tiddag { font-weight: 700; }
 .pl-tider p { margin: 0; }
 .pl-langd { flex-wrap: wrap; }
 .pl-nivaer { display: grid; grid-template-columns: repeat(auto-fit, minmax(5.4rem, 1fr)); max-width: 24rem; }
@@ -2874,6 +2878,13 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
 .pl-knappar .knapp[hidden] { display: none; }
 .pl-sparad { font-size: 0.88rem; color: var(--farg-text-svag); margin: 0.6rem 0 0; }
 .pl-ap[hidden] { display: none; }
+.pl-kvitto { background: var(--farg-lasning) !important; border-color: var(--farg-lasning) !important; color: #fff !important; }
+.pl-forra { margin: 0 0 0.6rem; }
+.pl-nivaval { margin: 0.8rem 0 0; }
+.pl-nivaval .pl-not { margin-top: 0; }
+.pl-gangval { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.3rem 0 0.6rem; }
+.pl-underlag { margin: 0.6rem 0; }
+.pl-underlag p { margin: 0.3rem 0 0; }
 .pl-ap { font-family: var(--typsnitt-ui); border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0.9rem 1.1rem; margin: 0 0 1rem; }
 .pl-ap h3 { font-size: 1.05rem; margin: 0; }
 .pl-ap .pl-hjalp { margin: 0.2rem 0 0.6rem; }
@@ -2903,6 +2914,16 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 .pl-veckan[hidden] { display: none; }
 .pl-veckohuvud h2 { font-size: clamp(1.6rem, 6vw, 2.1rem); margin: 0 0 0.2rem; }
 .pl-veckohuvud h2:focus { outline: none; }
+/* Veckorna överst: veckan gruppen är i har en prick, och veckan som visas är vald. */
+.pl-remsa { margin: 0.8rem 0 0; }
+.pl-remsa .pl-etikett { margin-bottom: 0.3rem; }
+.pl-remsa-knappar { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.pl-remsa-vecka { position: relative; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; min-width: 2.75rem; min-height: 2.75rem; padding: 0.15rem 0.5rem; border: 1.5px solid var(--farg-kant); border-radius: 8px; background: var(--farg-yta); color: var(--farg-text); font: 700 1rem/1.1 var(--typsnitt-ui); cursor: pointer; }
+.pl-remsa-vecka small { font-size: 0.68rem; font-weight: 600; }
+.pl-remsa-vecka.nu { border-color: var(--farg-accent); }
+.pl-remsa-vecka.nu::after { content: ''; position: absolute; bottom: 0.2rem; width: 0.35rem; height: 0.35rem; border-radius: 50%; background: currentColor; }
+.pl-remsa-vecka[aria-pressed="true"] { background: var(--farg-accent); border-color: var(--farg-accent); color: #fff; }
+.pl-remsa-vecka:focus-visible { outline: 3px solid var(--farg-accent); outline-offset: 2px; }
 .pl-nasta { background: var(--farg-accent-ljus); border-left: 4px solid var(--farg-accent); border-radius: 6px; padding: 0.85rem 1rem; margin: 1rem 0 1.25rem; }
 .pl-nasta .pl-etikett { color: var(--farg-accent); margin-bottom: 0.2rem; }
 .pl-nar { font-size: 1.15rem; font-weight: 700; margin: 0 0 0.6rem; }
@@ -2964,9 +2985,6 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 /* Veckans gång för gruppen är en annan fråga än skattningen, och ser därför annorlunda ut: runda och grå. */
 .pl-gang { margin: 0.6rem 0 0; }
 .pl-gang > summary { font-weight: 600; color: var(--farg-accent); cursor: pointer; min-height: 2.5rem; display: flex; align-items: center; gap: 0.75rem; }
-.pl-gang .pl-skala { margin: 0.3rem 0; }
-.pl-gang .pl-skalsteg { border-radius: 50%; border-color: #9aa5b1; color: var(--farg-text); }
-.pl-gang .pl-skalsteg[aria-pressed="true"] { background: var(--farg-text-svag); border-color: var(--farg-text-svag); color: #fff; }
 .pl-stam { background: var(--farg-skrivning-ljus); border-left: 4px solid var(--farg-skrivning); border-radius: 6px; padding: 0.85rem 1rem; margin: 1.25rem 0; }
 .pl-stam h3 { font-size: 1.05rem; margin: 0 0 0.4rem; }
 .pl-stam p { margin: 0 0 0.5rem; }

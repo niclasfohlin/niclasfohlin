@@ -106,6 +106,7 @@ if (tsMp) {
   ska('trasiga delar tas bort', halv && halv.val.lov.join() === '' && halv.val.upprepa.join() === '3' && Object.keys(halv.val.flytta).length === 0 && halv.val.stryk.length === 0 && halv.val.niva === undefined && halv.id === undefined && halv.val.tider === undefined && halv.val.mal === undefined, halv);
   ska('tiderna i länken', JSON.stringify(s.lasVal('#s=2026-11-02&d=135&l=6&t=1-0920-1000.3-1300-1340')?.val.tider) === '{"1":["09:20","10:00"],"3":["13:00","13:40"]}');
   ska('tiderna som text', s.tidText('09:20') === '9.20' && s.tidsspann(['09:20', '10:00']) === '9.20–10.00');
+  ska('ett spann på en dag', s.spannKort('2026-12-21', '2026-12-21') === '21 dec' && s.spannKort('2026-11-30', '2026-12-04') === '30 nov–4 dec');
   ska('dagarna med samma tid', s.dagarText({ ...val, tider: { 1: ['09:20', '10:00'], 3: ['09:20', '10:00'], 5: ['09:20', '10:00'] } }) === 'måndag, onsdag och fredag kl. 9.20–10.00');
   ska('dagarna med olika tider', s.dagarText({ ...val, tider: { 1: ['09:20', '10:00'], 3: ['13:00', '13:40'] } }) === 'måndag kl. 9.20–10.00, onsdag kl. 13.00–13.40 och fredag');
   ska('målet som mening', s.malText('kunna läsa mellan raderna') === 'Kunna läsa mellan raderna.' && s.malText('  Läsa!  ') === 'Läsa!' && s.malText('') === '');
@@ -370,6 +371,7 @@ try {
   sant('Följ insatsen är inte förvalt', !(await f.kor(`document.getElementById('pl-folj').checked`)) && (await f.kor(`document.getElementById('pl-elevruta').hidden`)));
   await f.kor(`(() => { const i = document.getElementById('pl-start'); i.value = '2026-11-02'; i.dispatchEvent(new Event('change')); return true; })()`);
   sant('förslaget: 18 pass om 30 minuter', (await f.text('#pl-summa-text'))?.includes('18 pass om 30 minuter'), await f.text('#pl-summa-text'));
+  sant('valen säger första passet under datumet', (await f.text('#pl-forsta-pass')) === 'Första passet: måndag 2 november.', await f.text('#pl-forsta-pass'));
   sant('förslaget: sex veckor och Efter insatsen med uppföljningen', (await f.kor(`document.querySelectorAll('#pl-veckor > li:not(.efter):not(.pl-lovvecka) .pl-veckoknapp').length`)) === 6 && (await f.text('#pl-veckor li.efter'))?.includes('Efter insatsen') && (await f.text('#pl-veckor li.efter'))?.includes('Efter sex till åtta veckor'), await f.text('#pl-veckor li.efter'));
   sant('veckorna i ett förslag är en lista, inte knappar', !(await f.kor(`!!document.querySelector('#pl-veckor button.pl-veckoknapp')`)));
   // Målet med pennan (Niclas 2026-10-24).
@@ -389,6 +391,9 @@ try {
   sant('tiden: bara klockslag var femte minut, och slutet efter början', await f.kor(`(() => { const a = [...document.getElementById('pl-tid-fran').options].map((o) => o.value).filter(Boolean); const b = [...document.getElementById('pl-tid-till').options].map((o) => o.value); return a[0] === '07:00' && a.every((x) => /^\\d{2}:[0-5][05]$/.test(x)) && b.every((x) => x > '09:20'); })()`));
   await valjTid('#pl-tid-till', '10:00');
   await f.tryck('#pl-tid-olika');
+  await f.bredd(320); await vanta(150);
+  sant('olika tider står i jämna kolumner i 320 punkter', await f.kor(`(() => { const r = [...document.querySelectorAll('#pl-tid-dagar [data-tiddag="3"]')].map((x) => Math.round(x.getBoundingClientRect().top)); return r.length === 2 && r[0] === r[1] && document.documentElement.scrollWidth <= innerWidth + 1; })()`));
+  await f.dator();
   await valjTid('#pl-tid-dagar [data-tiddag="3"][data-del="0"]', '13:00');
   sant('olika tider olika dagar', (await f.text('#pl-summa-text'))?.includes('Måndag kl. 9.20–10.00, onsdag kl. 13.00–13.40 och fredag kl. 9.20–10.00'), await f.text('#pl-summa-text'));
   await f.tryck('#pl-tid-olika');
@@ -425,6 +430,7 @@ try {
   await f.bredd(390); await vanta(150); await f.bild('2b-sparad-besked-telefon', true); await f.dator();
   sant('Dina planer med Ny plan så snart en plan är sparad', await f.kor(`!document.getElementById('pl-grupper').hidden && !!document.querySelector('#pl-grupper [data-plan="ny"]')`));
   sant('veckans rubrik', (await f.text('#pl-veckan-rubrik')) === 'Vecka 3 i planen', await f.text('#pl-veckan-rubrik'));
+  sant('veckorna överst, med den här veckan vald och märkt', (await f.kor(`document.querySelectorAll('#pl-veckan .pl-remsa [data-vy]').length`)) === 7 && (await f.kor(`(() => { const b = document.querySelector('#pl-veckan .pl-remsa [data-vy="3"]'); return b.classList.contains('nu') && b.getAttribute('aria-pressed') === 'true'; })()`)));
   sant('nästa pass i dag', (await f.text('.pl-nar')) === 'I dag, onsdag 18 november, pass 8 av 18', await f.text('.pl-nar'));
   sant('veckans fokus ur progressionen', (await f.text('.pl-fokusruta'))?.includes('slå ihop flera ledtrådar med slaget Före och efter'));
   const texter = await f.kor(`[...document.querySelectorAll('.pl-poster li > a:first-child')].map((a) => a.textContent)`);
@@ -446,8 +452,9 @@ try {
   await andraVeckan();
   await f.tryck('[data-gor="ta-bort-upprepning"]');
   sant('upprepningen tas bort', (await f.text('#pl-summa-text'))?.includes('18 pass'));
-  // Lov i vecka 4, som inte har börjat.
-  await f.tryck('button[data-vy="4"]');
+  // Lov i vecka 4, som inte har börjat; dit med veckorna överst.
+  await f.tryck('#pl-veckan .pl-remsa [data-vy="4"]');
+  sant('veckorna överst visar vecka 4', (await f.text('#pl-veckan-rubrik')) === 'Vecka 4 i planen' && (await f.kor(`document.querySelector('#pl-veckan .pl-remsa [data-vy="4"]').getAttribute('aria-pressed')`)) === 'true', await f.text('#pl-veckan-rubrik'));
   await andraVeckan();
   await f.tryck('[data-gor="lov"]');
   sant('lov flyttar slutet en vecka', (await f.text('#pl-summa-text'))?.includes('till 18 december'), await f.text('#pl-summa-text'));
@@ -499,6 +506,7 @@ try {
   sant('skattningen per elev', (await f.kor(`document.querySelectorAll('#pl-veckan .pl-skattning li').length`)) === 2 && (await f.text('#pl-veckan .pl-fraga')) === 'Hur väl klarar eleven målet på egen hand?');
   // Närvaron är ett val (granskningen 2026-10-24: en bock räknades annars som närvaro för alla).
   await f.kor(`(() => { const c = document.getElementById('pl-narvaro'); c.checked = true; c.dispatchEvent(new Event('change')); return true; })()`);
+  sant('förra veckan utan bockar och skattning säger till', (await f.text('#pl-veckan .pl-forra'))?.includes('Förra veckan har 3 pass som inte är bockade och ingen skattning'), await f.text('#pl-veckan .pl-forra'));
   // Bocka pass 7 (måndag), med närvaron: Bea var inte med.
   await f.tryck('[data-bock="2026-11-16"]');
   sant('bocken sparas på passets dag', (await f.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.gjorda.join()`)) === '2026-11-16');
@@ -512,7 +520,8 @@ try {
   await skatta('Bea', 2);
   await f.tryck('button[data-vy="2"]');
   // Alla pass som har varit blev av: ett tryck, och Ångra.
-  sant('knappen för alla pass som har varit', (await f.text('#pl-passen [data-gor="alla"]')) === 'Alla pass som har varit blev av');
+  sant('knappen för alla pass till och med i dag', (await f.text('#pl-passen [data-gor="alla"]')) === 'Bocka alla pass till och med i dag');
+  sant('förra veckan utan bockar säger till i den här veckan', true);
   await f.tryck('#pl-passen [data-gor="alla"]');
   sant('alla pass som har varit är bockade', (await f.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.gjorda.length`)) === 4);
   await f.tryck('#pl-toast [data-toast-gor]');
@@ -534,7 +543,8 @@ try {
   sant('avstämningens beslut sparas', (await f.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.avstamning.beslut`)) === 'fortsatt');
   // Veckans gång för gruppen, frivillig.
   await f.kor(`document.querySelector('.pl-gang').open = true`);
-  await f.kor(`(() => { document.querySelectorAll('.pl-gang .pl-skalsteg')[3].click(); return true; })()`);
+  await f.kor(`(() => { document.querySelector('.pl-gang [data-varde="4"]').click(); return true; })()`);
+  sant('veckans gång har ord, inte siffror', (await f.text('.pl-gang [data-varde="4"]')) === 'Bra');
   await f.bredd(390); await vanta(150); await f.bild('3-folj-veckan-telefon'); await f.dator(); await vanta(150); await f.bild('3-folj-veckan-dator');
   sant('veckans gång sparas', (await f.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.vecka['2026-11-16'].varde`)) === 4);
   // Sammanställningen hittills.

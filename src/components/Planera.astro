@@ -45,7 +45,7 @@ const json = JSON.stringify(data).replace(/</g, '\\u003c');
       <section class="pl-veckan" id="pl-veckan" aria-labelledby="pl-veckan-rubrik" hidden></section>
 
       <section class="pl-planen" id="pl-planen" aria-labelledby="pl-planen-rubrik">
-        <div class="pl-summa">
+        <div class="pl-summa" id="pl-summa">
           <h2 id="pl-planen-rubrik" tabindex="-1">Planen</h2>
           <div id="pl-summa-text"></div>
           <div class="pl-knappar">
@@ -64,15 +64,24 @@ const json = JSON.stringify(data).replace(/</g, '\\u003c');
           <p class="pl-andra-knappar"><button type="button" class="knapp" id="pl-dokumentation" data-goatcounter-click={`planera:${data.id}:dokumentation`} data-goatcounter-title={`${data.titel}: texten till åtgärdsprogrammet kopierad`}>Kopiera texten</button></p>
         </section>
 
+
+        <ol class="pl-veckor" id="pl-veckor"></ol>
+
         <details class="pl-andra" id="pl-andra" open>
           <summary>Ändra planen</summary>
           <form class="pl-val" id="pl-val" aria-labelledby="pl-val-rubrik">
             <h2 id="pl-val-rubrik">När ni träffas</h2>
-            <p class="pl-hjalp pl-varning" id="pl-bockvarning" hidden>Du har bockat pass. Ändras första passet eller dagarna faller bockar på dagar utan pass bort. Du kan ångra direkt efteråt.</p>
+            <p class="pl-hjalp pl-varning" id="pl-bockvarning" hidden>Du har bockat pass. Ändras datumet eller dagarna faller bockar på dagar utan pass bort. Du kan ångra direkt efteråt.</p>
             <div class="pl-rad">
-              <label class="pl-etikett" for="pl-start">Första passet</label>
+              <label class="pl-etikett" for="pl-start">Från och med</label>
               <input class="pl-falt" type="date" id="pl-start" required />
+              <p class="pl-hjalp" id="pl-forsta-pass"></p>
             </div>
+            <fieldset class="pl-rad">
+              <legend class="pl-etikett">Lov</legend>
+              <div class="pl-lovveckor" id="pl-lovveckor"></div>
+              <p class="pl-hjalp">Tryck på veckorna som är lov, så hoppar planen över dem.</p>
+            </fieldset>
             <fieldset class="pl-rad">
               <legend class="pl-etikett">Dagar</legend>
               <div class="pl-dagar" id="pl-dagar">
@@ -120,15 +129,10 @@ const json = JSON.stringify(data).replace(/</g, '\\u003c');
               <input class="pl-falt" type="text" id="pl-namn" maxlength="40" autocomplete="off" />
               <p class="pl-hjalp">Skriv inte elevernas namn. Gruppens namn står i planen, i kalendern och i dina utskrifter, men aldrig i länken.</p>
             </div>
-            <fieldset class="pl-rad">
-              <legend class="pl-etikett">Lov</legend>
-              <div class="pl-lovveckor" id="pl-lovveckor"></div>
-              <p class="pl-hjalp">Tryck på veckorna som är lov, så hoppar planen över dem.</p>
-            </fieldset>
             <fieldset class="pl-rad pl-foljval">
               <legend class="pl-etikett">Följ insatsen</legend>
               <label class="pl-kryss"><input type="checkbox" id="pl-folj" data-goatcounter-click={`planera:${data.id}:folj`} data-goatcounter-title={`${data.titel}: Följ insatsen valt`} /> <span>Följ insatsen vecka för vecka</span></label>
-              <p class="pl-hjalp">Bocka passen och skatta eleverna mot målet en gång i veckan. Inget måste fyllas i.</p>
+              <p class="pl-hjalp">Bocka passen och skatta eleverna mot målet en gång i veckan. Inget måste fyllas i. Det du för in sparas bara i den här webbläsaren, och en kopia som fil tar det till en annan dator.</p>
               <div class="pl-elevruta" id="pl-elevruta" hidden>
                 <label class="pl-etikett" for="pl-elever">Eleverna, en per rad, om du vill</label>
                 <textarea class="pl-falt pl-textfalt" id="pl-elever" rows="4" maxlength="400" autocomplete="off" spellcheck="false"></textarea>
@@ -137,10 +141,9 @@ const json = JSON.stringify(data).replace(/</g, '\\u003c');
                 <p><button type="button" class="pl-textknapp" id="pl-elever-bort" hidden>Ta bort elevernas namn och det som förts in om dem</button></p>
               </div>
             </fieldset>
+            <p class="pl-andra-knappar"><button type="button" class="knapp" id="pl-spara-nere" hidden>Spara planen</button></p>
           </form>
         </details>
-
-        <ol class="pl-veckor" id="pl-veckor"></ol>
       </section>
 
       <section class="pl-samman" id="pl-samman" aria-labelledby="pl-samman-rubrik" hidden></section>
