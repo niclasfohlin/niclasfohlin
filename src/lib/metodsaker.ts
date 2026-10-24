@@ -18,7 +18,7 @@ import { arSaksord, slugAv } from './standard/index.js';
  * En sak med sin adress. nivaer: adressen på varje nivå, när saken finns på bankens nivåer (kartläggningens text före).
  * veckor: adressen för metodens veckor, när saken finns en gång för några veckor (Mina lärdomar: vecka 1–2).
  */
-export interface MetodSak { namn: string; former?: string[]; versal?: boolean; adress: string; nivaer?: Record<string, string>; veckor?: Record<string, string> }
+export interface MetodSak { namn: string; former?: string[]; versal?: boolean; adress: string; nivaer?: Record<string, string>; veckor?: Record<string, string>; slag?: 'avsnitt' | 'tabell' }
 
 // Veckorna som ett led i en rubrik säger: "vecka 3" och "vecka 1–2".
 const veckornaI = (led?: string): number[] | undefined => {
@@ -63,27 +63,44 @@ export function metodensSaker(d: MetodData, id: string): MetodSak[] {
   // Materialets ramar leder till ramen på metodens sida, där bladet står med sin knapp Skriv ut. Namnet är rubrikens första
   // led ("Lärarhandledningen: Läs mellan raderna tillsammans" heter Lärarhandledningen). Bankens texter och deras sidor
   // står på egna sidor och kommer nedan; bankens lärarhandledning har sin egen sida.
-  const { ramAnkare, blad, bladAnkare } = metodensAnkare(d, metodensAvsnitt(d, { pass: !!passOversikt(d), stegen: passOrd(d).stegen }));
+  const avsnitt = metodensAvsnitt(d, { pass: !!passOversikt(d), stegen: passOrd(d).stegen });
+  const { ramAnkare, tabellAnkare, blad, bladAnkare } = metodensAnkare(d, avsnitt);
   const nivaNamn = new Map((bank?.nivaer ?? []).map((n) => [n.namn, n.slug]));
-  const perNamn = new Map<string, { adress: string; niva?: string; veckor?: number[] }[]>();
+  const perNamn = new Map<string, { adress: string; niva?: string; veckor?: number[]; oversikt?: boolean }[]>();
   ramar.forEach((r, ri) => {
-    // Nivåernas översikter heter som nivåerna, och en nivå är ett urval, ingen sak.
-    if ((bank?.ramar.has(ri) || bank?.oversikter.has(ri)) && bank.handledning !== ri) return;
+    // Nivåernas översikter heter som nivåerna, och en nivå är ett urval, ingen sak. En översikt med ett namn och nivån efter
+    // kolon, som "Lärarens sidor: Mellan", är en sak på varje nivå (länkgranskningen 2026-10-25: "sidan om den under
+    // Lärarens sidor" stod i varje pass utan länk).
     const [namn, efter] = r.rubrik.split(':').map((x) => x.trim());
+    const oversikt = !!bank?.oversikter.has(ri) && !!efter && nivaNamn.has(efter) && !nivaNamn.has(namn);
+    if ((bank?.ramar.has(ri) || bank?.oversikter.has(ri)) && bank.handledning !== ri && !oversikt) return;
     if (!namn) return;
     const adress = bank?.handledning === ri ? `${sida}/texter/lararhandledning` : `${sida}#${ramAnkare[ri]}`;
     const veckor = veckornaI(efter);
-    perNamn.set(namn, [...(perNamn.get(namn) ?? []), { adress, ...(efter && nivaNamn.has(efter) ? { niva: nivaNamn.get(efter)! } : {}), ...(veckor ? { veckor } : {}) }]);
+    perNamn.set(namn, [...(perNamn.get(namn) ?? []), { adress, ...(efter && nivaNamn.has(efter) ? { niva: nivaNamn.get(efter)! } : {}), ...(veckor ? { veckor } : {}), ...(oversikt ? { oversikt } : {}) }]);
   });
   for (const [namn, platser] of perNamn) {
     if (platser.length === 1) saker.push(sak(namn, platser[0].adress));
     // Samma namn på varje nivå ("Lärarens sidor: Lättläst") leder till nivåns, och samma namn för olika veckor ("Mina
     // lärdomar: vecka 1–2") till veckans; utan nivå eller vecka till den första. Annars leder namnet till den första ramen,
     // som i en serie av blad ("Övningsblad: Addition" och de andra) där den första är början.
-    else if (platser.every((p) => p.niva)) saker.push(sak(namn, platser[0].adress, { nivaer: Object.fromEntries(platser.map((p) => [p.niva!, p.adress])) }));
+    // Nivåernas översikter leder utan nivå till materialet, som kartläggningens texter.
+    else if (platser.every((p) => p.niva)) saker.push(sak(namn, platser.every((p) => p.oversikt) ? `${sida}#ramar` : platser[0].adress, { nivaer: Object.fromEntries(platser.map((p) => [p.niva!, p.adress])) }));
     else if (platser.every((p) => p.veckor)) saker.push(sak(namn, platser[0].adress, { veckor: Object.fromEntries(platser.flatMap((p) => p.veckor!.map((v) => [String(v), p.adress]))) }));
     else saker.push(sak(namn, platser[0].adress));
   }
+  // En rams titel efter kolon, som "Åt båda hållen" i "Läxa: Åt båda hållen" och "Fönsterplatsen" i "Bildserie 1:
+  // Fönsterplatsen", är också ett namn på ramen, när titeln börjar med stor bokstav och ingen annan ram har den
+  // (länkgranskningen 2026-10-25: "bladet Åt båda hållen" och "Lägg Fönsterplatsen på A3" blev ingen länk).
+  const titlar = new Map<string, string[]>();
+  ramar.forEach((r, ri) => {
+    if (bank && (bank.ramar.has(ri) || bank.oversikter.has(ri))) return;
+    const titel = r.rubrik.split(':').slice(1).join(':').trim();
+    if (titel && /^\p{Lu}/u.test(titel) && !nivaNamn.has(titel) && !veckornaI(titel)) titlar.set(titel, [...(titlar.get(titel) ?? []), `${sida}#${ramAnkare[ri]}`]);
+  });
+  // Titeln länkas bara som titel, med stor bokstav mitt i en mening, så att "multiplikation" inte leder till Övningsblad:
+  // Multiplikation.
+  for (const [titel, adresser] of titlar) if (adresser.length === 1 && !perNamn.has(titel)) saker.push({ ...sak(titel, adresser[0]), versal: true });
   // Materialets avsnitt, som "Kursens material", och kursens veckor och blad: "vecka 3" leder till veckans lektion i en kurs
   // med veckor, och "Addition 1" till bladet (src/lib/karta.ts).
   if (d.ramar?.rubrik) saker.push(sak(d.ramar.rubrik, `${sida}#ramar`));
@@ -116,6 +133,25 @@ export function metodensSaker(d: MetodData, id: string): MetodSak[] {
     for (const e of bank.enheter) if (e.nr === undefined) utanNummer.set(e.l.vad, { ...(utanNummer.get(e.l.vad) ?? {}), [slugAv(e.l.niva)]: enhetAdress(id, e) });
     for (const [vad, nivaer] of utanNummer) saker.push({ namn: vad, former: ledensFormer(vad), adress: `${sida}#ramar`, nivaer });
   }
+  // Metodens avsnitt och tabeller med sina rubriker, som "Talen och bladen i veckorna" och "Var hittar du bildserierna och
+  // händelserna?": en text som säger rubriken leder dit (länkgranskningen 2026-10-25; STIL.md under Hänvisningar: en
+  // hänvisning till en sida som sajten har är en länk dit). Namnet är rubrikens första led, eller hela rubriken när det
+  // första ledet är ett pass eller en vecka i ordningen ("Pass 1: syftet …"), som inte länkas för sig. Ett namn som en sak
+  // redan har blir inget nytt. Avsnitten och tabellerna är metodens text, som skrivs ut med metoden, så planprovet kräver
+  // ingen knapp under dem (slag); kursintyget är ett blad, med sin egen fil (src/lib/sakfiler.ts).
+  const tagna = new Set(saker.map((s) => s.namn.toLowerCase()));
+  const rubrikensNamn = (rubrik: string) => { const forsta = rubrik.split(':')[0].trim(); return /^(pass|vecka|veckorna|nivå)\b/i.test(forsta) ? rubrik.trim() : forsta; };
+  const avsnittet = (rubrik: string | undefined, adress: string, slag?: MetodSak['slag']) => {
+    const namn = rubrik ? rubrikensNamn(rubrik) : '';
+    if (!namn || tagna.has(namn.toLowerCase())) return;
+    tagna.add(namn.toLowerCase());
+    saker.push(sak(namn, adress, slag ? { slag } : {}));
+  };
+  const rutor = d as unknown as Record<string, { rubrik?: string } | undefined>;
+  for (const a of avsnitt) if (a.id !== 'ramar' && a.id !== 'mallar') avsnittet(rutor[a.id]?.rubrik, `${sida}#${a.id}`, a.id === 'diplom' ? undefined : 'avsnitt');
+  avsnittet(d.gruppen?.rubrik, `${sida}#gruppen`, 'avsnitt');
+  avsnittet(d.principer?.rubrik, `${sida}#principer`, 'avsnitt');
+  for (const t of d.tabeller) { const a = tabellAnkare.get(t); if (a) avsnittet(t.rubrik, `${sida}#${a}`, 'tabell'); }
   // Verktygen och stödmaterialen på sajten, som texten nämner med namnet i registret (STIL.md under Hänvisningar).
   for (const c of CENTRALA) if (c.slag !== 'formular') saker.push({ namn: c.namn, former: [c.namn], versal: true, adress: lasbarAdress(c) });
   return saker;

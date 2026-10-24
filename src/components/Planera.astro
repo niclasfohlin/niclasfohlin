@@ -185,7 +185,7 @@ const stegen = data.stege ? (data.progression?.rader ?? []).flatMap((r) => { con
     </footer>
 
     <div class="pl-filer" id="pl-filer" hidden>
-      {snabbmall && <a class="knapp sekundar" data-fil="snabbmall" href={`/stodundervisning/${data.id}-snabbmall.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="1" data-goatcounter-click={`utskrift:${data.id}-snabbmall`} data-goatcounter-title={`${data.titel}: ${snabbmall.rubrik}, bladet`}><span data-direkt="Skriv ut snabbmallen">Snabbmallen som pdf</span></a>}
+      {snabbmall && <a class="knapp sekundar" data-fil="snabbmall" href={`/stodundervisning/${data.id}-snabbmall.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="1" data-goatcounter-click={`utskrift:${data.id}-snabbmall`} data-goatcounter-title={`${data.titel}: ${snabbmall.rubrik}, bladet`}><span data-direkt={`Skriv ut ${/^snabbmall(en)?$/i.test(snabbmall.rubrik) ? "snabbmallen" : snabbmall.rubrik}`}>{/^snabbmall(en)?$/i.test(snabbmall.rubrik) ? "Snabbmallen" : snabbmall.rubrik} som pdf</span></a>}
       {lektionskort.map((k, i) => <span class="pl-fil" data-fil={`lektionskort-${i + 1}`}><Lektionskortknapp k={k} titel={data.titel} klass="knapp sekundar" /></span>)}
       {data.harLathund && <a class="knapp sekundar" data-fil="lathund" href={`${data.sida}/lathund`}>Öppna lathunden</a>}
     </div>

@@ -78,7 +78,7 @@ const DUMPA = `(rot, mal) => {
       const href = n.getAttribute('href').split('?')[0];
       const ankare = href.includes('#') ? href.split('#')[1] : '';
       const vart = ankare && mal[ankare] ? href.replace(/^\\/stodundervisning\\//, '') + ' (' + mal[ankare] + ')' : href.replace(/^\\/stodundervisning\\//, '');
-      rad += ' ⟦' + n.textContent.replace(/\\s+/g, ' ').trim() + ' → ' + vart + '⟧ ';
+      rad += '⟦' + n.textContent.replace(/\\s+/g, ' ').trim() + ' → ' + vart + '⟧';
       return;
     }
     if (n.tagName === 'BUTTON') { rad += ' [knapp: ' + n.textContent.replace(/\\s+/g, ' ').trim() + '] '; return; }

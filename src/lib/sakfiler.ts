@@ -8,7 +8,7 @@
 //   ramarna med blad och lärarhandledningarna har sina filer, och en ram vars blad har egna filer skrivs ut med bladen;
 //   en vecka i en ram med lektioner (veckorna i De fyra räknesätten), veckans sida för sig;
 //   ett räkneblad med namn (Addition 1) på sitt A4, och en ram med flera sådana alla bladen i en fil, under det sista;
-//   en mall under Mallar att skriva ut.
+//   en mall under Mallar att skriva ut, och diplomet eller kursintyget.
 // Regeln har inga egna fält: en metod som får sin plan får filerna av sig själv, och planprovet stannar på en sak som
 // planen leder till utan knapp och på en fil utan knapp (scripts/planprov.mjs). Inga Node-beroenden.
 import type { MetodData } from './metod';
@@ -21,7 +21,7 @@ import { bladNamn, forstaLed } from './karta';
 import { faktatexter, lastexter, strukturAv, textparAv } from './ramform';
 import { slugAv } from './standard/index.js';
 
-export type Sakslag = 'ram' | 'vecka' | 'rakneblad' | 'mall';
+export type Sakslag = 'ram' | 'vecka' | 'rakneblad' | 'mall' | 'diplom';
 /** En saks fil: namnet utan ändelse, sakens namn (dokumentets titel och skärmläsarens), var saken står i metodens fil, hur
  * många sidor filen ska ha (scripts/bankpdf.mjs prövar det), knappens ord när utskriften görs direkt och annars, och om
  * alla sidorna ligger. */
@@ -88,6 +88,8 @@ export function sakfiler(d: MetodData, id: string): Sakfil[] {
     const namn = knappnamn(ram.rubrik);
     ut.push({ namn: `${id}-blad-${slugAv(ram.rubrik)}`, titel: ram.rubrik, slag: 'ram', ri, minst: 1, hogst, text: `Skriv ut ${namn}`, pdftext: `${namn} som pdf`, liggande: false });
   });
+  // Diplomet eller kursintyget, ett blad.
+  if (d.diplom) ut.push({ namn: `${id}-blad-${slugAv(d.diplom.rubrik)}`, titel: d.diplom.rubrik, slag: 'diplom', minst: 1, hogst: 1, text: 'Skriv ut bladet', pdftext: 'Bladet som pdf', liggande: false });
   // Mallarna, var och en för sig: ett ark per talsort för en matta med enPerSida, annars ett liggande blad.
   d.mallar.forEach((m, mi) => {
     const ark = m.typ === 'matta' && m.enPerSida ? (m.kolumner ?? []).length : 0;
@@ -110,5 +112,6 @@ export function sakernasPlatser(filer: Sakfil[]) {
     blad: new Map(filer.filter((f) => f.slag === 'rakneblad' && f.listor!.length === 1).map((f) => [`${f.ri}-${f.listor![0]}`, f])),
     alla: new Map(filer.filter((f) => f.slag === 'rakneblad' && f.listor!.length > 1).map((f) => [`${f.ri}-${f.listor!.at(-1)}`, f])),
     mall: new Map(filer.filter((f) => f.slag === 'mall').map((f) => [f.mi!, f])),
+    diplom: filer.find((f) => f.slag === 'diplom'),
   };
 }

@@ -559,8 +559,10 @@ function renderaSumma() {
   const samma = plan.forstaPass && plan.sistaPass && plan.forstaPass.slice(0, 4) === plan.sistaPass.slice(0, 4);
   // Pass mellan jul och trettondagen: loven skiljer sig mellan skolor, så planen föreslår inget, men säger till.
   const iJulen = (datum: string) => { const [, m, d] = datum.split('-').map(Number); return (m === 12 && d >= 21) || (m === 1 && d <= 6); };
-  const julveckor = [...new Set(plan.pass.map((p) => p.datum).filter(iJulen).map((d) => `v. ${isoVecka(d).vecka}`))];
-  const julUppfoljning = [...new Set(efterUppfoljning().flatMap((u) => u.tillfallen.map((x) => x.datum)).filter(iJulen).map((d) => `v. ${isoVecka(d).vecka}`))];
+  // Bara det som kommer (verifieringen 2026-10-25: varningen stod kvar efter insatsen).
+  const kommer = (datum: string) => iJulen(datum) && datum >= idag;
+  const julveckor = [...new Set(plan.pass.map((p) => p.datum).filter(kommer).map((d) => `v. ${isoVecka(d).vecka}`))];
+  const julUppfoljning = [...new Set(efterUppfoljning().flatMap((u) => u.tillfallen.map((x) => x.datum)).filter(kommer).map((d) => `v. ${isoVecka(d).vecka}`))];
   // Klockslag som ger andra längder än metodens säger till, som dagarna, så att ett felval syns (Codex 2026-10-24).
   const langd = passensLangd();
   const metodensLangd = mp.minuter.min === mp.minuter.max ? `${mp.minuter.max}` : `${mp.minuter.min} till ${mp.minuter.max}`;
@@ -582,7 +584,7 @@ function renderaSumma() {
   // Rutan står när planen är klar, alltså sparad eller ur en länk (Niclas 2026-10-24: "när man gjort klart planeringen").
   const ap = $<HTMLTextAreaElement>('pl-aptext');
   $('pl-ap').hidden = !n || (!aktiv.sparad && !aktiv.franLank);
-  ap.value = n ? atgardstext() : '';
+  ap.value = n ? vanligText(atgardstext()) : '';
   $('pl-spara').hidden = aktiv.sparad;
   $('pl-kalender').hidden = !aktiv.sparad && !aktiv.franLank;
   $('pl-ta-bort').hidden = !aktiv.sparad;
@@ -876,7 +878,7 @@ function veckansDelar(v: PlanVecka, oppna: Set<string>): string[] {
   const harVarit = plusDagar(v.mandag, 6) < idag;
   const delar: string[] = [`<header class="pl-veckohuvud"><h2 id="pl-veckan-rubrik" tabindex="-1">${esc(rubrikVecka(v))} i planen</h2><p class="meta">${meta.map(esc).join(' · ')}</p></header>`, remsa(v.nr)];
   // Före första passet står under Före, och vecka 1 säger det tills första passet har varit (Opus 2026-10-24).
-  if (harFore() && plan.forstaPass && idag <= plan.forstaPass) delar.push(`<p class="pl-paminn">Kartläggningen och det andra före första passet står under Före. <button type="button" class="pl-textknapp" data-vy="fore">Till Före</button></p>`);
+  if (harFore() && plan.forstaPass && idag <= plan.forstaPass) delar.push(`<p class="pl-paminn">Det som görs före första passet står under Före. <button type="button" class="pl-textknapp" data-vy="fore">Till Före</button></p>`);
 
   // Nästa pass med passet och materialet, eller vad veckan är när läraren har bläddrat till en annan vecka (granskningen
   // 2026-10-24: nästa pass och den bläddrade veckan kunde gälla olika veckor).
@@ -1467,7 +1469,11 @@ $('pl-grupper').addEventListener('click', (e) => {
 });
 
 // ---------- Knapparna ----------
+// Text som kopieras eller laddas ned är vanlig text: utan ordfogarna som håller ihop F–5 och 2–6 på sidan (verifieringen
+// 2026-10-25: ett osynligt tecken mellan tankstrecket och siffran i texten till åtgärdsprogrammet och i kalenderfilen).
+function vanligText(s: string): string { return s.replace(/\u2060/g, ''); }
 async function kopiera(text: string): Promise<boolean> {
+  text = vanligText(text);
   try { await navigator.clipboard.writeText(text); return true; } catch {
     const t = document.createElement('textarea');
     t.value = text; t.setAttribute('readonly', ''); t.style.cssText = 'position:fixed;top:0;opacity:0';
@@ -1492,7 +1498,7 @@ function visaBesked(text: string, atgard?: { text: string; gor: () => void; kvar
   t.innerHTML = `<p>${esc(text)}</p>${atgard ? `<button type="button" class="pl-toast-knapp" data-toast-gor>${esc(atgard.text)}</button>` : ''}<button type="button" class="pl-toast-stang" data-toast-stang aria-label="Stäng beskedet">×</button>`;
   t.hidden = false;
   toastVid = performance.now();
-  toastTid = window.setTimeout(() => { t.hidden = true; toastGor = null; }, atgard?.kvar ? 30000 : atgard ? 15000 : 8000);
+  toastTid = window.setTimeout(() => { t.hidden = true; toastGor = null; }, atgard ? 30000 : 8000);
 }
 // Ett besked går bort vid nästa tryck någon annanstans, så att det inte täcker det läraren gör (de kalla läsarna
 // 2026-10-24). Trycket som ger ett nytt besked tar först bort det gamla.
@@ -1585,7 +1591,7 @@ async function kopieraLanken() {
 $('pl-lank').addEventListener('click', () => void kopieraLanken());
 $('pl-kalender').addEventListener('click', () => {
   const text = kalenderfil({ titel: data.titel, uppfoljning: data.uppfoljning.rader, fokus: (data.progression?.rader ?? []).map((r) => r.fokus), passet: passetIKalendern }, plan, { id: aktiv.id, lank, namn: aktiv.namn || undefined, nu: new Date(), tider: aktiv.val.tider });
-  const url = URL.createObjectURL(new Blob([text], { type: 'text/calendar;charset=utf-8' }));
+  const url = URL.createObjectURL(new Blob([vanligText(text)], { type: 'text/calendar;charset=utf-8' }));
   const a = document.createElement('a');
   a.href = url; a.download = `${data.id}-plan.ics`;
   document.body.append(a); a.click(); a.remove();

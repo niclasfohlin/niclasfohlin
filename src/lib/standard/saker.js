@@ -20,6 +20,9 @@ const HUVUDORD = {
   diplom: ['diplom', 'diplomet', 'diplomen', 'diplomets'],
   lathund: ['lathund', 'lathunden', 'lathundar', 'lathundarna', 'lathundens'],
   bild: ['bild', 'bilden', 'bilder', 'bilderna', 'bildens', 'bildernas'],
+  // Räknemattan och kursintyget (länkgranskningen 2026-10-25: "räknemattans ark" och "kursintyget" blev ingen länk).
+  matta: ['matta', 'mattan', 'mattor', 'mattorna', 'mattans', 'mattornas'],
+  intyg: ['intyg', 'intyget', 'intygen', 'intygets'],
 };
 // De bestämda formerna, som spärren letar efter; en grundform som "kort" är också ett vanligt ord.
 const BESTAMDA = Object.values(HUVUDORD).flatMap((f) => f.slice(1)).filter((f) => !['mallar', 'scheman', 'listor', 'lathundar', 'bilder'].includes(f)).sort((a, b) => b.length - a.length);
@@ -55,6 +58,14 @@ export function sakensFormer(namn) {
   const n = String(namn ?? '').trim();
   if (!n) return [];
   const former = new Set([n, `${n}s`]);
+  // Ett namn i flera ord som börjar med ett huvudord, som "Mallen med fyra rutor", får det första ordets andra former: en
+  // mall med fyra rutor (länkgranskningen 2026-10-25).
+  const [forsta, ...resten] = n.split(/\s+/);
+  const forstasHuvud = resten.length ? huvudordet(forsta) : undefined;
+  if (forstasHuvud) {
+    const stam = forsta.slice(0, forsta.length - forstasHuvud.form.length);
+    for (const f of forstasHuvud.former) former.add(`${stam}${f} ${resten.join(' ')}`);
+  }
   const huvud = /\s/.test(n) ? undefined : huvudordet(n);
   if (huvud) {
     const stam = n.slice(0, n.length - huvud.form.length);

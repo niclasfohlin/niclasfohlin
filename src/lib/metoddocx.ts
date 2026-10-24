@@ -5140,7 +5140,9 @@ export function sakDokument(post: MetodPost, fil: Sakfil, o: { bas: string; resu
   RESURSER = o.resurser ?? { bilder: new Map() };
   const d = post.data;
   const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
-  const sektioner = fil.slag === 'mall'
+  const sektioner = fil.slag === 'diplom' && d.diplom
+    ? delaSektioner([...medElevtypsnitt(harElevtypsnitt(d), () => diplomBarn(d.diplom!))], `${d.titel} · ${SAJT}`, adress)
+    : fil.slag === 'mall'
     ? mallensSidor(d.mallar[fil.mi!], post.id, harElevtypsnitt(d)).flatMap((sida) => delaSektioner(sida.barn, `Mall · ${d.titel} · ${SAJT}`, adress, { liggande: sida.liggande, smal: sida.liggande }))
     : mallBarn(post, o.bas, { bank: fil.slag === 'ram' ? [fil.ri!] : [], figurradVidFigur: true, ...(fil.slag === 'vecka' ? { vecka: { ri: fil.ri!, di: fil.di! } } : fil.slag === 'rakneblad' ? { listor: { ri: fil.ri!, li: fil.listor! } } : {}) })
       .flatMap((sida) => delaSektioner(sida.barn, `${d.titel} · ${SAJT}`, adress, sida.liggande ? { liggande: true, smal: true } : {}));

@@ -417,7 +417,7 @@ plan:
       text: "Eleverna bygger med materialet. Allt nytt kommer i veckans två första pass."
     - nar: veckans andra
       kort: "Rita och skriva"
-      text: "Eleverna ritar och skriver. Visa först det som står under Pass 2 på veckans sida."
+      text: "Eleverna ritar och skriver. Har veckans sida en rad Pass 2, visar du först det som står där."
     - nar: veckans tredje
       kort: "Befästa"
       text: "Eleverna skriver med materialet i asken och tar upp det som ännu inte sitter, och den som tvekar tar fram materialet igen."

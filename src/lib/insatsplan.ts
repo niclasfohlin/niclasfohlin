@@ -141,6 +141,9 @@ const planensTexter = (d: Metod['data']): [string, string][] => [
 const visadeTexter = (d: Metod['data']): string[] => [
   ...planensTexter(d).map(([, t]) => t),
   ...(d.tidsschema?.rader ?? []).map((r) => r.vad),
+  // Tidsschemats inledning står först bland passets delar, och gruppen under Före (länkgranskningen 2026-10-25: Lektionskortet
+  // och Ljudlek i grupp blev ingen länk där).
+  d.tidsschema?.text ?? '', d.gruppen?.text ?? '',
   d.tidsschema?.efter ?? '', d.passrutin?.efterPasset ?? '', d.principer?.text ?? '', d.hem?.text[0] ?? '',
   // Tabellerna för pass med egen ordning, och en tabell med veckorna och nivåerna, som bladen i De fyra räknesätten.
   ...d.tabeller.filter((t) => (d.plan?.passen ?? []).some((p) => p.tabell === t.rubrik) || (d.nivaer.length >= 2 && t.kolumner.slice(1).every((k, i) => k.toLowerCase() === d.nivaer[i]?.namn.toLowerCase()))).flatMap((t) => (t.rader ?? []).flatMap((r) => r.slice(1).map(String))),

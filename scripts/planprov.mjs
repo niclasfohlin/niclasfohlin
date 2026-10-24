@@ -404,7 +404,7 @@ const trad = (html) => {
     const [, slut, tagg, attr] = m;
     const t = tagg.toLowerCase();
     if (slut) { let n = nu; while (n !== topp && n.tag !== t) n = n.far; if (n !== topp) nu = n.far; continue; }
-    const el = { tag: t, id: attr.match(/\sid="([^"]*)"/)?.[1], klass: attr.match(/\sclass="([^"]*)"/)?.[1] ?? '', knapp: t === 'a' && /\sdata-skriv-ut-pdf\b/.test(attr) ? attr.match(/\shref="([^"?]*)/)?.[1] : undefined, barn: [], far: nu };
+    const el = { tag: t, id: attr.match(/\sid="([^"]*)"/)?.[1], klass: attr.match(/\sclass="([^"]*)"/)?.[1] ?? '', knapp: t === 'a' && (/\sdata-skriv-ut-pdf\b/.test(attr) || /\sdownload="[^"]*\.(pdf|docx)"/.test(attr)) ? attr.match(/\shref="([^"?]*)/)?.[1] : undefined, barn: [], far: nu };
     nu.barn.push(el);
     if (el.id && !id.has(el.id)) id.set(el.id, el);
     if (!TOMMA.has(t) && !/\/\s*$/.test(attr)) nu = el;
@@ -435,7 +435,8 @@ for (const m of planbara) {
   const html = readFileSync(sida, 'utf8');
   const { id } = trad(html);
   const d = JSON.parse(plan);
-  const mal = [...(d.saker ?? []).flatMap((x) => [x.adress, ...Object.values(x.nivaer ?? {}), ...Object.values(x.veckor ?? {})]), ...Object.values(d.kursveckor ?? {})];
+  // Metodens avsnitt och tabeller (slag avsnitt och tabell) är text som skrivs ut med metoden, och prövas inte här.
+  const mal = [...(d.saker ?? []).filter((x) => !x.slag).flatMap((x) => [x.adress, ...Object.values(x.nivaer ?? {}), ...Object.values(x.veckor ?? {})]), ...Object.values(d.kursveckor ?? {})];
   const namnFor = new Map();
   const nyttNamn = (adress, namn) => { const a = adress.split('#')[1]; if (a) namnFor.set(a, [...(namnFor.get(a) ?? []), namn]); };
   for (const x of d.saker ?? []) for (const a of [x.adress, ...Object.values(x.nivaer ?? {}), ...Object.values(x.veckor ?? {})]) nyttNamn(a, x.namn);
@@ -554,7 +555,9 @@ const rullar = (f) => f.kor('document.documentElement.scrollWidth > innerWidth +
 // Planens länkar till det metoden namnger (K-493): varje länk leder till en sida i dist, och ett ankare till ett id på sidan.
 const sakLankar = (f) => f.kor(`[...document.querySelectorAll('a[data-goatcounter-click$=":sak"]')].map((a) => a.getAttribute('href'))`);
 const lankFel = (lankar) => (lankar ?? []).filter((h) => {
-  const [vag, ankare] = h.split('#');
+  const [vag, ankare] = h.split('?')[0].split('#');
+  // En länk till en fil, som lektionskortets pdf, prövas som fil.
+  if (/\.[a-z0-9]{2,4}$/i.test(vag)) return !existsSync(join(dist, vag));
   const fil = join(dist, vag, 'index.html');
   if (!existsSync(fil)) return true;
   return ankare ? !readFileSync(fil, 'utf8').includes(`id="${ankare}"`) : false;
