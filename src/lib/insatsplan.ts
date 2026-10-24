@@ -3,13 +3,14 @@
 // vid bygget. Planen räknas fram i webbläsaren av standardens planmotor (src/lib/standard/plan.js) ur samma fält, så att
 // sidan, riggen och provet räknar lika. Hur fälten skrivs står i METODER.md under Planera insatsen.
 import type { CollectionEntry } from 'astro:content';
-import { metodplan, postensRad, slugAv } from './standard/index.js';
+import { metodplan, olankadeSaker, postensRad, sakdelar, slugAv } from './standard/index.js';
 import { bankAv, nivaFarger } from './bank';
 import { harTaFram, taFramAv } from './tafram';
 import { formateraDatum } from './innehall';
 import { harLathund } from './metod';
 import { metodensLektionskort } from './lektionskort';
 import { lektionskortetsPapper } from './lektionskortdata';
+import { metodensSaker, type MetodSak } from './metodsaker';
 import { site } from '../data/site';
 
 type Metod = CollectionEntry<'stodundervisning'>;
@@ -69,6 +70,21 @@ export interface PlanData {
   checklista: string[];
   bank?: PlanBank;
   harLathund: boolean;
+  /** Det metoden namnger i planens texter, med adresserna (src/lib/metodsaker.ts): bara de saker som texterna nämner. */
+  saker: MetodSak[];
+}
+
+// Planens texter ur metoden, som sidan visar med länkar till det de namnger, med var de står till spärren.
+const planensTexter = (d: Metod['data']): [string, string][] => [
+  ...(d.uppfoljning?.rader ?? []).map((r): [string, string] => [`Uppföljningens rad "${r.nar}"`, r.vad]),
+  ...(d.progression?.rader ?? []).flatMap((r): [string, string][] => [[`Progressionens rad "${r.vecka}"`, r.fokus], [`Progressionens rad "${r.vecka}"`, r.roll], ...(r.led ? [[`Progressionens rad "${r.vecka}"`, r.led] as [string, string]] : [])]),
+  ...(d.checklista?.punkter ?? []).map((p): [string, string] => ['Checklistan', p]),
+];
+/** Sakerna som planens texter nämner (K-493), så att sidan bara bär dem. */
+export function planensSaker(m: Metod): MetodSak[] {
+  const alla = metodensSaker(m.data, m.id);
+  const anvanda = new Set(planensTexter(m.data).flatMap(([, t]) => sakdelar(t, alla).flatMap((x) => (x.sak === undefined ? [] : [x.sak]))));
+  return alla.filter((_, i) => anvanda.has(i));
 }
 
 /** Planens data ur metodens fil. */
@@ -92,6 +108,7 @@ export async function planensData(m: Metod): Promise<PlanData> {
     checklista: d.checklista?.punkter ?? [],
     ...(bank ? { bank } : {}),
     harLathund: harLathund(d),
+    saker: planensSaker(m),
   };
 }
 
@@ -128,5 +145,8 @@ export async function insatsplanFel(m: Metod): Promise<string[]> {
     if (!bank) fel.push(`Progressionen har taggar (${taggar.join(', ')}), men metoden har ingen bank med taggar att visa dem i.`);
     else for (const t of new Set(taggar)) if (!bank.taggar[t]) fel.push(`Progressionens tagg "${t}" finns inte i bankens taggar (${Object.keys(bank.taggar).join(', ')}).`);
   }
+  // Ett namn som ser ut som en sak i metoden men inte är någon av dem blir ingen länk i planen (K-493).
+  const saker = metodensSaker(m.data, m.id);
+  for (const [plats, text] of planensTexter(m.data)) for (const namn of olankadeSaker(text, saker)) fel.push(`${plats} nämner "${namn}", men metoden har ingen sak som heter så, och då blir det ingen länk i planen. Skriv namnet som bladet, kortet eller mallen heter i metoden, eller lägg saken i metoden (STIL.md under Hänvisningar).`);
   return fel.map((f) => `${m.id}: ${f}`);
 }

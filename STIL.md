@@ -34,8 +34,11 @@ En hänvisning till en sida som sajten har är en länk dit (Niclas 2026-10-19: 
 | En artikel där Niclas är medförfattare | Med förste författaren och året: "(Klang m.fl., 2020)". Artikeln står i listan i `src/lib/boklankar.ts` | Artikelns sida hos tidskriften |
 | En bok som inte är utgiven | Med "utkommer" före året: "(Fohlin och Wilson, utkommer 2027)" | Sidan med alla böcker, niclasfohlin.se/bocker |
 | En adress på sajten | Med sökvägen: "niclasfohlin.se/lastexter" | Adressen |
+| En sak i metoden: ett blad, ett kort, en mall, ett test, en text i banken eller ett lektionskort | Med namnet som det står i metoden, i vilken form som helst: "Du läser lyssningsbladet", "samtalskortets två första rader", "kartläggningens text före", "tar du Kvart i åtta" | Saken: bladet eller mallen på metodens sida, textens eller testets sida på planens nivå, kortets fil. Än så länge i Planera insatsen |
 
-Bygget stannar på en hänvisning till Fohlin som kan gälla flera böcker eller en bok som inte finns på sajten, och på "sidan Ta fram …" när ingen sådan sida finns.
+En sak i metoden länkas när tre saker stämmer (Niclas 2026-10-24: "Om något är specifikt namngivet från metoden. Ett test. Ett papper. En text. En specifik lektion. Då ska det vara hyperlänkat", och "Du får försöka skapa en definition vad namngivet och specifikt är"). Sajten har en egen sida, fil eller plats på metodens sida för just den saken. Texten säger sakens namn som det står i metoden. Och texten pekar på saken, inte på det saken lär ut: "Lägg fram samtalskortet" länkas, men inte "samtalsdragen" som kortet visar. Inte länkat är begrepp och steg som metodens text förklarar (Det står, Stanna, Starten), ett pass i veckans ordning (pass 3), elevens egna saker (bänkboken), en nivå eller ett slag för sig och allmänna ord (texten, frågorna). Namnen och adresserna läses ur metodens fil vid varje bygge (`src/lib/metodsaker.ts`), så att inget skrivs för hand och inget glider isär: byter metoden namn på ett blad följer länken med.
+
+Bygget stannar på en hänvisning till Fohlin som kan gälla flera böcker eller en bok som inte finns på sajten, på "sidan Ta fram …" när ingen sådan sida finns, och på ett blad, ett kort eller en mall i planens text som metoden inte har (`olankadeSaker` i standarden).
 
 ## Ingresser
 

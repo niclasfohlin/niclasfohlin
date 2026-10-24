@@ -57,6 +57,7 @@ import Pabordet from './Pabordet.astro';
 import { bladNamn, delensRad, kartan, metodensBlad, radensDel } from '../lib/karta';
 import { veckanRyms } from '../lib/veckosida';
 import { veckansLista, veckomaterial } from '../lib/veckomaterial';
+import { mallarnasAnkare, metodensAnkare, metodensAvsnitt } from '../lib/metodankare';
 import { borjaHar } from '../lib/skrivkort';
 import Centralknapp from './Centralknapp.astro';
 import Centralrad from './Centralrad.astro';
@@ -157,47 +158,11 @@ const helaCm = d.mallar.find((m) => m.typ === 'brakplank')?.langdCm ?? 26;
 const lathundBlad = d.lathund && d.lathund.mall.block.filter((b) => b.typ !== 'not').length === 1 && d.lathund.mall.block.some((b) => b.typ === 'tabell' && b.rader.every((r) => r.every((c) => !c.trim()))) ? d.lathund.mall.rubrik : undefined;
 // Bråk i elevmaterialet staplas i matematik (src/lib/brak.ts); i andra ämnen står ett snedstreck kvar, som i ett datum.
 const brak = d.omrade === 'Matematik';
-// Sidnavigationen: de avsnitt som finns, i modellens ordning, med korta namn.
-// Urvalsavsnittets rubrik är en fråga ("Var hittar du materialet och talen?"); menyn tar dess kärna ("Materialet och
-// talen"), så att posten säger vad avsnittet gäller och inte krockar med ramarnas "Material per årskurs" (K-034).
-const urvalNamn = (rubrik: string) => {
-  const karna = (rubrik.match(/^Var hittar du (.+?)\??$/i) ?? rubrik.match(/^Var (.+?) finns\??$/i))?.[1] ?? rubrik;
-  return karna.charAt(0).toLocaleUpperCase('sv') + karna.slice(1);
-};
-const avsnitt = [
-  d.passrutin && { id: 'passrutin', namn: pass ? 'Passet' : 'Passrutin' },
-  d.tidsschema && !pass && { id: 'tidsschema', namn: 'Tidsschema' },
-  d.steg && { id: 'steg', namn: ord.stegen },
-  d.arbetsform && { id: 'arbetsform', namn: 'Arbetsform' },
-  d.exempel && { id: 'exempel', namn: 'Exempel' },
-  d.fastnar && { id: 'fastnar', namn: 'När det fastnar' },
-  d.roll && { id: 'roll', namn: 'Lärarens roll' },
-  // Heter urvalets kärna som ramarna ("Var hittar du problemen?" och Problemen) står det som en handling, Hitta problemen,
-  // så att menyn inte har två poster med samma namn (Problemlösning i grupp, 2026-10-10).
-  d.urval && { id: 'urval', namn: d.ramar && urvalNamn(d.urval.rubrik) === d.ramar.rubrik ? `Hitta ${d.ramar.rubrik.toLowerCase()}` : urvalNamn(d.urval.rubrik) },
-  bank && { id: 'lektionsbank', namn: bank.ord.meny },
-  d.hem && { id: 'hem', namn: 'Hem och skola' },
-  d.progression && { id: 'progression', namn: 'Progression' },
-  d.uppfoljning && { id: 'uppfoljning', namn: 'Uppföljning' },
-  d.mal && { id: 'mal', namn: 'Mål' },
-  d.snabbmall && { id: 'snabbmall', namn: 'Snabbmall' },
-  d.checklista && { id: 'checklista', namn: 'Checklista' },
-  d.grund && { id: 'grund', namn: 'Grunden' },
-  d.ramar && { id: 'ramar', namn: d.ramar.rubrik },
-  d.diplom && { id: 'diplom', namn: d.diplom.rubrik },
-  d.mallar.length > 0 && { id: 'mallar', namn: 'Mallar' },
-].filter((a): a is { id: string; namn: string } => Boolean(a));
-// Stabila ankare för rutorna, de fria tabellerna och ramarna, så att en lektion kan länka till avsnittet i den generella
-// metoden (Ljudlek i grupp, Seriefot och skriptet i [id].astro): rubrikens första led i gemener, som "Ordbanken" #ordbanken
-// och "Dagens ljud: bokstävernas ordning" #dagens-ljud. Ett ankare som redan finns får en siffra efter sig.
-const ankarnamn = (s: string) => s.split(':')[0].toLowerCase().replace(/[åä]/g, 'a').replace(/ö/g, 'o').replace(/é/g, 'e').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-const upptagna = new Set([...avsnitt.map((a) => a.id), 'upplagg', 'gruppen', 'principer', 'lektionsbank', 'ramar', ...(d.ramar?.ramar ?? []).map((_, i) => `ram-${i + 1}`)]);
-const ankare = (s: string) => { let id = ankarnamn(s) || 'avsnitt'; for (let n = 2; upptagna.has(id); n++) id = `${ankarnamn(s)}-${n}`; upptagna.add(id); return id; };
-const tabellAnkare = new Map(d.tabeller.map((t) => [t, ankare(t.rubrik)]));
-const ramAnkare = (d.ramar?.ramar ?? []).map((r) => ankare(r.rubrik));
-// Veckorna som lektioner (en ram med lektioner, De fyra räknesätten, Niclas 2026-10-04): varje del har ett eget ankare, som
-// korten överst i ramen leder till, och ramen står i menyn med namnet efter kolon ("Till läraren: veckorna" blir Veckorna).
-const delAnkare = (d.ramar?.ramar ?? []).map((r) => (r.lektioner ? r.delar.map((del) => ankare(del.rubrik)) : []));
+// Sidnavigationen och ankarna (src/lib/metodankare.ts), som planen också läser, så att planens länkar leder till samma
+// ankare som sidan har (K-493).
+const avsnitt = metodensAvsnitt(d, { pass: !!pass, stegen: ord.stegen, lektionsbank: bank?.ord.meny });
+const { ankare, tabellAnkare, ramAnkare, delAnkare } = metodensAnkare(d, avsnitt);
+const mallAnkare = mallarnasAnkare(d);
 const versalt = (s: string) => (s ? s.charAt(0).toLocaleUpperCase('sv') + s.slice(1) : s);
 const menyLektioner = (d.ramar?.ramar ?? []).flatMap((r, ri) => (r.lektioner ? [{ id: `ram-${ri + 1}`, namn: versalt((r.rubrik.split(':')[1] ?? r.rubrik).trim()) }] : []));
 // Kartan (src/lib/karta.ts): tabellen med karta leder till veckorna och räknebladen, och varje vecka visar sin rad.
@@ -1128,8 +1093,8 @@ const meny = [
         ? <p>Mallarna finns i rätt storlek på liggande A4 sist i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a>. Det hela är {helaCm} cm i bråkplanket och på tallinjen från 0 till 1, så att bitarna kan läggas mot linjen. Skrivs mallarna ut på A3 blir allt lika mycket större.{lathundBlad && ` ${lathundBlad} finns på lathundens tredje sida och står också sist i planeringsmallarna.`}</p>
         : <p>Mallarna finns i rätt storlek sist i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a>.{lathundBlad && ` ${lathundBlad} finns på lathundens tredje sida och står också där.`}</p>}
       {d.mallar.some((m) => !arSerieMall(m)) && <p class="m-mall-svep">Bilderna är bredare än skärmen. Svep i sidled för att se hela mallen.</p>}
-      {d.mallar.map((m) => (
-        <figure class="m-mall">
+      {d.mallar.map((m, mi) => (
+        <figure class="m-mall" id={mallAnkare[mi]}>
           <figcaption>
             <h3>{m.rubrik}</h3>
             {m.text && <p>{m.text}</p>}

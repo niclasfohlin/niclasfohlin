@@ -189,6 +189,12 @@ if (tsMp) {
   const forlangd = s.planera(tsMp, { ...val, langd: 8 });
   const res = s.elevensResultat(forlangd, { '0-2026-11-02': '3 av 8', '2-2026-12-14': '6 av 8', '2-2026-12-28': '7 av 8', '9-2026-11-02': 'x' });
   ska('ett resultat står kvar på sin dag när planen förlängs', res.map((x) => `${x.typ}:${x.datum}:${x.varde}`).join() === 'fore:2026-11-02:3 av 8,efter:2026-12-14:6 av 8,efter:2026-12-28:7 av 8' && s.uppfoljningensTillfallen(forlangd).some((t) => t.nyckel === '2-2026-12-28'), res);
+  // Metodens saker i planens texter (K-493): namnen i sina former, titlar bara mitt i en mening, och spärren.
+  const saker = [{ namn: 'Lyssningsbladet' }, { namn: 'Samtalskortet' }, { namn: 'Startmeningarna' }, { namn: 'Kvart i åtta', former: ['Kvart i åtta'], versal: true }];
+  ska('en saks former', ['Samtalskortet', 'Samtalskortets', 'Samtalskorten'].every((x) => s.sakensFormer('Samtalskortet').includes(x)) && s.sakensFormer('Startmeningarna').includes('Startmeningen'), s.sakensFormer('Samtalskortet'));
+  const sakDelar = s.sakdelar('Du läser lyssningsbladen och samtalskortets rader, och skriver startmeningen. Kvart i åtta står först. Ta Kvart i åtta.', saker);
+  ska('namnen i en text', sakDelar.filter((x) => x.sak !== undefined).map((x) => x.text).join('|') === 'lyssningsbladen|samtalskortets|startmeningen|Kvart i åtta', sakDelar);
+  ska('ett namn som ingen sak har', s.olankadeSaker('Lägg fram elevbladet, lyssningsbladet och korten.', saker).join() === 'elevbladet', s.olankadeSaker('Lägg fram elevbladet, lyssningsbladet och korten.', saker));
   ska('en mening utan beslut kommer med i texten', s.sammanstallningstext(info, p, s.sammanstallning(p, { utvardering: { not: 'Gruppen läser mer på egen hand' } }, '2026-12-14')).includes('Utvärdering efter insatsen: Gruppen läser mer på egen hand.'));
 }
 
@@ -350,6 +356,14 @@ async function flik(blockera = false, fast) {
   };
 }
 const rullar = (f) => f.kor('document.documentElement.scrollWidth > innerWidth + 1');
+// Planens länkar till det metoden namnger (K-493): varje länk leder till en sida i dist, och ett ankare till ett id på sidan.
+const sakLankar = (f) => f.kor(`[...document.querySelectorAll('a[data-goatcounter-click$=":sak"]')].map((a) => a.getAttribute('href'))`);
+const lankFel = (lankar) => (lankar ?? []).filter((h) => {
+  const [vag, ankare] = h.split('#');
+  const fil = join(dist, vag, 'index.html');
+  if (!existsSync(fil)) return true;
+  return ankare ? !readFileSync(fil, 'utf8').includes(`id="${ankare}"`) : false;
+});
 // Planen efter insatsen: sex veckor som läraren har följt, med tre elever, sexton av arton pass, skattning varje vecka,
 // lite frånvaro, veckans gång några veckor, metodens uppföljning före och efter och avstämningen mitt i. Utvärderingen
 // är inte gjord än.
@@ -455,6 +469,12 @@ try {
   sant('veckorna överst, med den här veckan vald och märkt', (await f.kor(`document.querySelectorAll('#pl-veckan .pl-remsa [data-vy]').length`)) === 7 && (await f.kor(`(() => { const b = document.querySelector('#pl-veckan .pl-remsa [data-vy="3"]'); return b.classList.contains('nu') && b.getAttribute('aria-pressed') === 'true'; })()`)));
   sant('nästa pass i dag', (await f.text('.pl-nar')) === 'I dag, onsdag 18 november, pass 8 av 18', await f.text('.pl-nar'));
   sant('veckans fokus ur progressionen', (await f.text('.pl-fokusruta'))?.includes('slå ihop flera ledtrådar med slaget Före och efter'));
+  // Det metoden namnger är länkat (Niclas 2026-10-24: "Ett test. Ett papper. En text. En specifik lektion").
+  const fokusLankar = await f.kor(`[...document.querySelectorAll('#pl-veckan .pl-fokusruta a')].map((a) => a.textContent + ' ' + a.getAttribute('href'))`);
+  sant('texterna som veckans fokus namnger är länkade', fokusLankar?.includes('Samma sak /stodundervisning/textsamtal-i-grupp/avancerad-8') && fokusLankar.includes('Kvart i åtta /stodundervisning/textsamtal-i-grupp/avancerad-4'), fokusLankar);
+  await f.kor(`document.querySelector('#pl-veckan [data-ruta="fore"]').open = true`);
+  sant('checklistans blad och mallar är länkade', (await f.kor(`[...document.querySelectorAll('#pl-veckan .pl-checklista a')].map((a) => a.getAttribute('href')).join()`))?.includes('#mall-ledtradsbladet'), await f.kor(`document.querySelector('#pl-veckan .pl-checklista')?.innerHTML`));
+  sant('planens länkar leder till sidor och ankare som finns', !lankFel(await sakLankar(f)).length && (await sakLankar(f)).length >= 3, [await sakLankar(f), lankFel(await sakLankar(f))]);
   const texter = await f.kor(`[...document.querySelectorAll('.pl-poster li > a:first-child')].map((a) => a.textContent)`);
   sant('veckans texter på Mellan med slaget Före och efter', texter?.length === 8 && texter.includes('7 Kartongen') && texter.includes('9 Hinken i hallen'), texter);
   sant('Ta fram öppnas på nivån', (await f.kor(`document.querySelector('.pl-nasta a.knapp')?.getAttribute('href')`)) === '/stodundervisning/textsamtal-i-grupp/texter#mellan');
@@ -679,6 +699,7 @@ try {
   await h.oppna(PLAN);
   sant('efter insatsen: sidan visar Efter insatsen', (await h.text('#pl-veckan-rubrik')) === 'Efter insatsen', await h.text('#pl-veckan-rubrik'));
   sant('efter insatsen: insatsen är slut', (await h.text('#pl-veckan .pl-nasta .pl-etikett')) === 'Insatsen är slut' && (await h.text('.pl-nar')) === 'Sista passet var fredag 11 december.' && !(await h.kor(`!!document.querySelector('#pl-veckan [data-fil="lathund"]')`)), await h.text('.pl-nar'));
+  sant('efter insatsen: kartläggningens text efter leder till planens nivå', (await h.kor(`[...document.querySelectorAll('#pl-veckan .pl-uppf a')].map((a) => a.getAttribute('href')).join()`))?.includes('/stodundervisning/textsamtal-i-grupp/mellan-kartlaggning-efter') && !lankFel(await sakLankar(h)).length, await h.kor(`[...document.querySelectorAll('#pl-veckan .pl-uppf a')].map((a) => a.getAttribute('href')).join()`));
   sant('efter insatsen: metodens uppföljning efter, ett fält per elev', (await h.kor(`document.querySelectorAll('#pl-veckan [data-resultat^="2-2026-12-14|"]').length`)) === 3);
   sant('efter insatsen: utvärderingen med målet, varje elevs riktning och resultaten före och efter', (await h.text('.pl-stam h3')) === 'Utvärdering efter insatsen' && (await h.text('.pl-stam .pl-maltext'))?.includes('Kunna läsa mellan raderna') && (await h.text('.pl-stam .pl-riktningar'))?.includes('1 till 3, framåt') && (await h.text('.pl-stam .pl-riktningar'))?.includes('Före 2 av 8, efter 4 av 8'), await h.text('.pl-stam'));
   sant('efter insatsen: sammanställningen', (await h.text('#pl-samman-rubrik')) === 'Sammanställningen' && (await h.text('#pl-samman'))?.includes('16 av 18 pass är bockade som genomförda.') && (await h.text('#pl-samman'))?.includes('Var med i'), await h.text('#pl-samman'));
@@ -707,7 +728,7 @@ try {
   // Skattningens rader med ett längre namn (Niclas 2026-10-24: "Alexandra och Sebastian +2 bokstäver"): i 360 punkter står
   // namnet och siffrorna på samma rad, och i 320 står alla namn ovanför sina siffror, så att ingen rad bryter för sig.
   await h.tryck('#pl-veckan .pl-remsa [data-vy="6"]');
-  const rader = (b) => h.kor(`(() => [...document.querySelectorAll('#pl-skatta .pl-skattning li')].map((li) => { const el = li.querySelector('.pl-elevnamn'), n = el.getBoundingClientRect(), s = li.querySelector('.pl-skala').getBoundingClientRect(); const r = document.createRange(); r.selectNodeContents(el); return { samma: Math.abs((n.top + n.bottom) / 2 - (s.top + s.bottom) / 2) < 14, under: s.top >= n.bottom - 2, enRad: r.getClientRects().length === 1, inne: s.right <= innerWidth }; }))()`);
+  const rader = () => h.kor(`(() => [...document.querySelectorAll('#pl-skatta .pl-skattning li')].map((li) => { const el = li.querySelector('.pl-elevnamn'), n = el.getBoundingClientRect(), s = li.querySelector('.pl-skala').getBoundingClientRect(); const r = document.createRange(); r.selectNodeContents(el); return { samma: Math.abs((n.top + n.bottom) / 2 - (s.top + s.bottom) / 2) < 14, under: s.top >= n.bottom - 2, enRad: r.getClientRects().length === 1, inne: s.right <= innerWidth }; }))()`);
   await h.bredd(360); await vanta(150);
   const r360 = await rader();
   sant('skattningen i 360 punkter: namn och siffror på samma rad, också Sebastian Ek', r360.length === 3 && r360.every((x) => x.samma && x.enRad && x.inne), r360);

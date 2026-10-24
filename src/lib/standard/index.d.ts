@@ -190,3 +190,12 @@ export declare const uppfoljningensTillfallen: (plan: Plan) => { nyckel: string;
 export declare function elevensResultat(plan: Plan, resultat: Record<string, string>): { nyckel: string; rad: number; typ: Tid['typ']; datum: string; varde: string }[];
 export declare function sammanstallningstext(info: { titel: string; mal?: string; uppfoljning: { nar: string }[] }, plan: Plan, s: Sammanstallning): string;
 export declare function elevtext(info: { mal?: string; uppfoljning: { nar: string }[] }, plan: Plan, s: Sammanstallning, id: string): string;
+
+/** Metodens saker i en text (sajtens K-493): en sak är något som metoden har ett namn på och sajten en egen adress för. */
+export interface Sak { namn: string; former?: string[]; versal?: boolean }
+/** Formerna av en saks namn i bestämd form: samtalskortet, samtalskortets, samtalskorten. */
+export declare function sakensFormer(namn: string): string[];
+/** Texten i delar, där en del med sak är ett namn på en av sakerna. */
+export declare function sakdelar(text: string, saker: Sak[]): { text: string; sak?: number }[];
+/** Namn som ser ut som en sak (ett sammansatt ord på blad, kort, mall …) men inte är någon av sakerna. */
+export declare function olankadeSaker(text: string, saker: Sak[]): string[];

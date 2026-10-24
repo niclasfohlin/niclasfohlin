@@ -461,3 +461,6 @@ export function bildtextFel(bild, { blad = false, visas = true } = {}) {
 
 // Planera insatsen (sajtens K-489): planmotorn, med datum, röda dagar, länken, dokumentationens text och kalenderfilen.
 export * from './plan.js';
+// Metodens saker i en text (sajtens K-493): namnen på bladen, korten, mallarna, testen, texterna och lektionerna, och spärren
+// mot ett namn som ingen sak har.
+export * from './saker.js';
