@@ -200,6 +200,11 @@ if (tsMp) {
   const sakDelar = s.sakdelar('Du läser lyssningsbladen och samtalskortets rader, och skriver startmeningen. Kvart i åtta står först. Ta Kvart i åtta.', saker);
   ska('namnen i en text', sakDelar.filter((x) => x.sak !== undefined).map((x) => x.text).join('|') === 'lyssningsbladen|samtalskortets|startmeningen|Kvart i åtta', sakDelar);
   ska('ett namn som ingen sak har', s.olankadeSaker('Lägg fram elevbladet, lyssningsbladet och korten.', saker).join() === 'elevbladet', s.olankadeSaker('Lägg fram elevbladet, lyssningsbladet och korten.', saker));
+  // Codex granskning 2 (2026-10-24): ett namn i grundform, ett namn som också är en vanlig fras, och datumets gränser.
+  ska('ett namn i grundform hittas i bestämd form', s.sakdelar('Ta fram sifferkorten.', [{ namn: 'Sifferkort' }]).some((x) => x.sak === 0 && x.text === 'sifferkorten') && !s.olankadeSaker('Ta fram sifferkorten.', [{ namn: 'Sifferkort' }]).length);
+  const fras = s.sakdelar('Hittat på min huvudperson. Fyll i Min huvudperson i pass 2.', [{ namn: 'Min huvudperson', versal: !s.arSaksord('Min huvudperson') }]);
+  ska('ett namn som också är en vanlig fras länkas bara som titel', fras.filter((x) => x.sak !== undefined).length === 1 && fras.find((x) => x.sak !== undefined)?.text === 'Min huvudperson' && s.arSaksord('Samtalsreglerna') && s.arSaksord('Lathunden'), fras);
+  ska('ett datum utanför åren går inte att läsa ur en länk', s.lasVal('#s=9999-12-31&d=135&l=6') === null && s.lasVal('#s=1999-12-31&d=135&l=6') === null && s.lasVal('#s=2099-12-28&d=135&l=6') !== null);
   ska('en mening utan beslut kommer med i texten', s.sammanstallningstext(info, p, s.sammanstallning(p, { utvardering: { not: 'Gruppen läser mer på egen hand' } }, '2026-12-14')).includes('Utvärdering efter insatsen: Gruppen läser mer på egen hand.'));
 }
 
@@ -595,6 +600,17 @@ try {
   sant('en paus med raden tom behåller eleven', await f.kor(`(() => { const p = JSON.parse(localStorage.getItem('insatser')).planer[0]; return p.foljd.elever[0].namn === 'Ali S' && p.foljd.elever[0].id === ${JSON.stringify(idFore)} && p.foljd.skattning['2026-11-16'][${JSON.stringify(idFore)}] === 3; })()`));
   await f.kor(`(() => { const t = document.getElementById('pl-elever'); t.focus(); t.value = 'Ali Test\\nBea'; t.dispatchEvent(new Event('input')); t.blur(); return true; })()`);
   await vanta(300);
+  // En borttagen rad ger inte nästa elev den borttagnas id, och Ångra lägger tillbaka listan (Codex granskning 2).
+  const beaId = await f.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.elever[1].id`);
+  await f.kor(`(() => { const t = document.getElementById('pl-elever'); t.focus(); t.value = 'Bea'; t.dispatchEvent(new Event('input')); return true; })()`);
+  await vanta(800);
+  await f.kor(`(() => { const t = document.getElementById('pl-elever'); t.value = 'Bea S'; t.dispatchEvent(new Event('input')); return true; })()`);
+  await vanta(800);
+  sant('en borttagen rad ger inte nästa elev dess id', await f.kor(`(() => { const e = JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.elever; return e.length === 1 && e[0].namn === 'Bea S' && e[0].id === ${JSON.stringify(beaId)}; })()`), await f.kor(`JSON.stringify(JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.elever)`));
+  await f.kor(`document.getElementById('pl-elever').blur()`);
+  await vanta(200);
+  await f.tryck('#pl-toast [data-toast-gor]');
+  sant('Ångra lägger tillbaka elevlistan', await f.kor(`(() => { const e = JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.elever; return e.map((x) => x.namn).join() === 'Ali Test,Bea' && e[0].id === ${JSON.stringify(idFore)} && e[1].id === ${JSON.stringify(beaId)}; })()`), await f.kor(`JSON.stringify(JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.elever)`));
   // Avstämningen mitt i, vecka 3 av 6.
   sant('avstämningen mitt i står i vecka 3', (await f.text('.pl-stam h3')) === 'Avstämning mitt i insatsen' && (await f.text('.pl-stam .pl-riktningar'))?.includes('2 till 3, framåt'), await f.text('.pl-stam'));
   await f.tryck('[data-beslut="avstamning|fortsatt"]');

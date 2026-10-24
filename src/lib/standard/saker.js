@@ -5,20 +5,42 @@
 // fil och ger dem adresserna; här hittas namnen i en text, i de former svenskan ger dem, och här finns spärren mot ett
 // namn som ingen sak har, så att sajten och riggen prövar lika. Reglerna står i sajtens STIL.md under Hänvisningar.
 
-// Huvudord som gör ett sammansatt ord till ett namn på en sak, med sina bestämda former och deras genitiv:
-// lyssningsbladet, ledtrådsbladen, samtalskortets, planeringsmallarna.
+// Huvudord som gör ett ord till ett namn på en sak, med grundformen först och sedan de bestämda formerna och deras
+// genitiv: lyssningsbladet, ledtrådsbladen, samtalskortets, planeringsmallarna. Ett namn i grundform, som Sifferkort,
+// får formerna av sitt huvudord (Codex 2026-10-24).
 const HUVUDORD = {
-  blad: ['bladet', 'bladen', 'bladets', 'bladens'],
-  kort: ['kortet', 'korten', 'kortets', 'kortens'],
-  mall: ['mallen', 'mallarna', 'mallens', 'mallarnas'],
-  protokoll: ['protokollet', 'protokollen', 'protokollets', 'protokollens'],
-  schema: ['schemat', 'schemats', 'schemana'],
-  kontrakt: ['kontraktet', 'kontraktets'],
-  lista: ['listan', 'listorna', 'listans', 'listornas'],
-  test: ['testet', 'testets'],
-  diplom: ['diplomet', 'diplomets'],
+  blad: ['blad', 'bladet', 'bladen', 'bladets', 'bladens'],
+  kort: ['kort', 'kortet', 'korten', 'kortets', 'kortens'],
+  mall: ['mall', 'mallen', 'mallar', 'mallarna', 'mallens', 'mallarnas'],
+  protokoll: ['protokoll', 'protokollet', 'protokollen', 'protokollets', 'protokollens'],
+  schema: ['schema', 'schemat', 'scheman', 'schemats', 'schemana'],
+  kontrakt: ['kontrakt', 'kontraktet', 'kontrakten', 'kontraktets'],
+  lista: ['lista', 'listan', 'listor', 'listorna', 'listans', 'listornas'],
+  test: ['test', 'testet', 'testen', 'testets'],
+  diplom: ['diplom', 'diplomet', 'diplomen', 'diplomets'],
+  lathund: ['lathund', 'lathunden', 'lathundar', 'lathundarna', 'lathundens'],
 };
-const BESTAMDA = Object.values(HUVUDORD).flat().sort((a, b) => b.length - a.length);
+// De bestämda formerna, som spärren letar efter; en grundform som "kort" är också ett vanligt ord.
+const BESTAMDA = Object.values(HUVUDORD).flatMap((f) => f.slice(1)).filter((f) => !['mallar', 'scheman', 'listor', 'lathundar'].includes(f)).sort((a, b) => b.length - a.length);
+// Huvudordet som ett ord slutar på, med den längsta formen först, så att "kortet" inte läses som "kort" och "et".
+const huvudordet = (ord) => {
+  const sma = ord.toLowerCase();
+  let bast;
+  for (const former of Object.values(HUVUDORD)) for (const f of former) if (sma.endsWith(f) && (!bast || f.length > bast.form.length)) bast = { former, form: f };
+  return bast;
+};
+
+/**
+ * Är namnet ett ord för en sak: ett ord som slutar på ett av huvudorden (Lyssningsbladet, Sifferkort, Lathunden) eller ett
+ * långt sammansatt ord (Samtalsreglerna)? Ett sådant namn hittas också med liten bokstav; ett annat namn, som "Min
+ * huvudperson", bara som en titel, med stor bokstav mitt i en mening (Codex 2026-10-24: "min huvudperson" i en mening om
+ * lärarens figur blev en länk till bladet).
+ * @param {string} namn
+ */
+export function arSaksord(namn) {
+  const n = String(namn ?? '').trim();
+  return !/\s/.test(n) && (!!huvudordet(n) || n.length >= 12);
+}
 
 /**
  * Formerna av en saks namn, som metodens rubriker skriver det i bestämd form: "Samtalskortet" ger samtalskortet,
@@ -30,11 +52,10 @@ export function sakensFormer(namn) {
   const n = String(namn ?? '').trim();
   if (!n) return [];
   const former = new Set([n, `${n}s`]);
-  const huvud = Object.values(HUVUDORD).find((alla) => alla.some((f) => n.toLowerCase().endsWith(f)));
+  const huvud = /\s/.test(n) ? undefined : huvudordet(n);
   if (huvud) {
-    const slut = huvud.find((f) => n.toLowerCase().endsWith(f));
-    const stam = n.slice(0, n.length - slut.length);
-    for (const f of huvud) former.add(`${stam}${f}`);
+    const stam = n.slice(0, n.length - huvud.form.length);
+    for (const f of huvud.former) former.add(`${stam}${f}`);
   } else if (/arna$/.test(n)) {
     const stam = n.slice(0, -4);
     for (const f of ['en', 'ens', 'arnas']) former.add(`${stam}${f}`);

@@ -11,7 +11,7 @@ import { bankAv, enhetAdress } from './bank';
 import { mallarnasAnkare, metodensAnkare, metodensAvsnitt } from './metodankare';
 import { metodensLektionskort } from './lektionskort';
 import { CENTRALA, lasbarAdress } from './centrala';
-import { slugAv } from './standard/index.js';
+import { arSaksord, slugAv } from './standard/index.js';
 
 /** En sak med sin adress. nivaer: adressen på varje nivå, när saken finns på bankens nivåer (kartläggningens text före). */
 export interface MetodSak { namn: string; former?: string[]; versal?: boolean; adress: string; nivaer?: Record<string, string> }
@@ -23,6 +23,10 @@ const ledensFormer = (vad: string) => {
   const r = resten.length ? ` ${resten.join(' ')}` : '';
   return [`${forsta}${r}`, `${forsta}en${r}`, `${forsta}ens text${r}`, `${forsta}ens texter${r}`];
 };
+
+// Ett namn som är ett ord för en sak (Lyssningsbladet, Samtalsreglerna) hittas också med liten bokstav; ett annat namn,
+// som "Min huvudperson", bara som en titel, med stor bokstav mitt i en mening (arSaksord i standarden).
+const sak = (namn: string, adress: string, extra: Partial<MetodSak> = {}): MetodSak => ({ namn, adress, ...(arSaksord(namn) ? {} : { versal: true }), ...extra });
 
 /** Metodens saker: materialets ramar, mallarna, snabbmallen, lektionskorten, lathunden, bankens texter och verktygen. */
 export function metodensSaker(d: MetodData, id: string): MetodSak[] {
@@ -45,23 +49,27 @@ export function metodensSaker(d: MetodData, id: string): MetodSak[] {
     perNamn.set(namn, [...(perNamn.get(namn) ?? []), { adress, ...(efter && nivaNamn.has(efter) ? { niva: nivaNamn.get(efter)! } : {}) }]);
   });
   for (const [namn, platser] of perNamn) {
-    if (platser.length === 1) saker.push({ namn, adress: platser[0].adress });
+    if (platser.length === 1) saker.push(sak(namn, platser[0].adress));
     // Samma namn på varje nivå ("Lärarens sidor: Lättläst") leder till nivåns; utan nivå till den första.
-    else if (platser.every((p) => p.niva)) saker.push({ namn, adress: platser[0].adress, nivaer: Object.fromEntries(platser.map((p) => [p.niva!, p.adress])) });
+    else if (platser.every((p) => p.niva)) saker.push(sak(namn, platser[0].adress, { nivaer: Object.fromEntries(platser.map((p) => [p.niva!, p.adress])) }));
   }
+  // Kontraktet och schemat under Hem och skola (TIL i grupp) står i materialet med egna ankare; namnet är rubrikens första
+  // ord, som Lässchema i "Lässchema TIL" (Codex 2026-10-24).
+  if (d.hem?.kontrakt) saker.push(sak(d.hem.kontrakt.rubrik.split(/\s+/)[0], `${sida}#kontraktet`));
+  if (d.hem?.schema) saker.push(sak(d.hem.schema.rubrik.split(/\s+/)[0], `${sida}#schemat`));
   // Mallarna, var och en med sitt ankare under Mallar att skriva ut, och alla tillsammans.
   const mallAnkare = mallarnasAnkare(d);
-  d.mallar.forEach((m, i) => saker.push({ namn: m.rubrik, adress: `${sida}#${mallAnkare[i]}` }));
-  if (d.mallar.length) saker.push({ namn: 'Planeringsmallarna', adress: `${sida}#mallar` });
+  d.mallar.forEach((m, i) => saker.push(sak(m.rubrik, `${sida}#${mallAnkare[i]}`)));
+  if (d.mallar.length) saker.push(sak('Planeringsmallarna', `${sida}#mallar`));
   if (d.snabbmall) {
-    saker.push({ namn: 'Snabbmallen', adress: `${sida}#snabbmall` });
-    if (d.snabbmall.rubrik) saker.push({ namn: d.snabbmall.rubrik, adress: `${sida}#snabbmall` });
+    saker.push(sak('Snabbmallen', `${sida}#snabbmall`));
+    if (d.snabbmall.rubrik) saker.push(sak(d.snabbmall.rubrik, `${sida}#snabbmall`));
   }
   // Lektionskorten: kortets namn, och "lektionskortet" när metoden har ett enda.
   const kort = metodensLektionskort(d, id);
-  for (const k of kort) if (k.namn) saker.push({ namn: k.namn, adress: k.adress });
-  if (kort.length === 1) saker.push({ namn: 'Lektionskortet', adress: kort[0].adress });
-  if (harLathund(d)) saker.push({ namn: 'Lathunden', adress: `${sida}/lathund` });
+  for (const k of kort) if (k.namn) saker.push(sak(k.namn, k.adress));
+  if (kort.length === 1) saker.push(sak('Lektionskortet', kort[0].adress));
+  if (harLathund(d)) saker.push(sak('Lathunden', `${sida}/lathund`));
   // Bankens texter och problem: titeln, som den står och inte först i en mening, och en text utan nummer, som
   // kartläggningens text före, på planens nivå.
   if (bank) {

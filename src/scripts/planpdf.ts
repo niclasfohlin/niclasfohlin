@@ -113,7 +113,8 @@ const riktningsord = (e: SammanstallningElev) => {
 };
 const periodText = (plan: Plan) => (plan.forstaPass && plan.sistaPass ? `${datumText(plan.forstaPass)} till ${datumText(plan.sistaPass)}` : '');
 // Passen som läraren har bockat: ett pass som inte är bockat är inte bockat (granskningarna 2026-10-24).
-const passText = (s: Sammanstallning) => (!s.gjorda ? 'Inga pass är bockade.' : s.slut ? `${s.gjorda} av ${s.planerade} pass är bockade som genomförda.` : `${s.gjorda} av de ${s.varit} pass som har varit är bockade. Planen har ${s.planerade} pass.`);
+// De bockade bland passen som har varit, som på sidan, så att ett pass som är bockat i förväg inte räknas (Codex 2026-10-24).
+const passText = (s: Sammanstallning) => (!s.gjorda ? 'Inga pass är bockade.' : s.slut ? `${s.gjorda} av ${s.planerade} pass är bockade som genomförda.` : !s.varit ? `Inget pass har varit än. Planen har ${s.planerade} pass.` : `${s.gjordaVarit} av de ${s.varit} pass som har varit är bockade. Planen har ${s.planerade} pass.`);
 
 /** Gruppens sammanställning som pdf. */
 export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, idag: string): Promise<Uint8Array> {

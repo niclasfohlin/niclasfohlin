@@ -365,7 +365,8 @@ export function lasVal(hash) {
   const start = p.get('s');
   const dagar = [...new Set((p.get('d') ?? '').split('').map(Number).filter((x) => x >= 1 && x <= 5))].sort();
   const langd = Number(p.get('l'));
-  if (!arDatum(start) || !dagar.length || !Number.isInteger(langd) || langd < 1 || langd > LANGSTA) return null;
+  // Datumet inom åren som sidans fält tar emot, så att en länk aldrig ger en plan som inte går att räkna (Codex 2026-10-24).
+  if (!arDatum(start) || start < '2000-01-01' || start > '2099-12-31' || !dagar.length || !Number.isInteger(langd) || langd < 1 || langd > LANGSTA) return null;
   const punkter = (k) => (p.get(k) ?? '').split('.').filter(Boolean);
   const niva = p.get('n') ?? '';
   const minuter = Number(p.get('m'));
