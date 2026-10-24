@@ -395,7 +395,12 @@ const trad = (html) => {
   const topp = { tag: 'rot', barn: [], far: null };
   const id = new Map();
   let nu = topp;
-  for (const m of html.replace(/<script\b[\s\S]*?<\/script>|<style\b[\s\S]*?<\/style>|<!--[\s\S]*?-->/g, '').matchAll(/<(\/?)([a-zA-Z][a-zA-Z0-9-]*)((?:[^>"']|"[^"]*"|'[^']*')*)>/g)) {
+  const ren = html.replace(/<script\b[\s\S]*?<\/script>|<style\b[\s\S]*?<\/style>|<!--[\s\S]*?-->/g, '');
+  let pos = 0;
+  for (const m of ren.matchAll(/<(\/?)([a-zA-Z][a-zA-Z0-9-]*)((?:[^>"']|"[^"]*"|'[^']*')*)>/g)) {
+    const text = ren.slice(pos, m.index);
+    if (text.trim()) nu.barn.push({ tag: '#text', text, klass: '', barn: [], far: nu });
+    pos = m.index + m[0].length;
     const [, slut, tagg, attr] = m;
     const t = tagg.toLowerCase();
     if (slut) { let n = nu; while (n !== topp && n.tag !== t) n = n.far; if (n !== topp) nu = n.far; continue; }
@@ -406,7 +411,9 @@ const trad = (html) => {
   }
   return { rot: topp, id };
 };
-const knapparI = (el) => [...(el.knapp ? [el.knapp] : []), ...el.barn.flatMap(knapparI)];
+const knapparI = (el) => [...(el.knapp ? [el] : []), ...el.barn.flatMap(knapparI)];
+const tecken = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ' };
+const textI = (el) => (el.tag === '#text' ? el.text : el.barn.map(textI).join('')).replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (h, k) => (k[0] === '#' ? String.fromCodePoint(k[1] === 'x' || k[1] === 'X' ? parseInt(k.slice(2), 16) : Number(k.slice(1))) : tecken[k.toLowerCase()] ?? h));
 // Ett syskon som börjar nästa sak: ett element med id, en ram eller en vecka. Bilderna På bordet efter en ram (blad-12) hör
 // till ramen, men ett räkneblad (blad-addition-2) är nästa sak.
 const nastaSak = (x) => (x.id && !/^blad-\d+$/.test(x.id)) || /(^|\s)(m-ram|m-vecka)(\s|$)/.test(x.klass);
@@ -429,18 +436,29 @@ for (const m of planbara) {
   const { id } = trad(html);
   const d = JSON.parse(plan);
   const mal = [...(d.saker ?? []).flatMap((x) => [x.adress, ...Object.values(x.nivaer ?? {}), ...Object.values(x.veckor ?? {})]), ...Object.values(d.kursveckor ?? {})];
+  const namnFor = new Map();
+  const nyttNamn = (adress, namn) => { const a = adress.split('#')[1]; if (a) namnFor.set(a, [...(namnFor.get(a) ?? []), namn]); };
+  for (const x of d.saker ?? []) for (const a of [x.adress, ...Object.values(x.nivaer ?? {}), ...Object.values(x.veckor ?? {})]) nyttNamn(a, x.namn);
+  for (const [v, a] of Object.entries(d.kursveckor ?? {})) nyttNamn(a, `Vecka ${v}`);
+  const sakfilerna = new Set(bankfilerna.filter((x) => x.metod === m.id && x.slag === 'sak').map((x) => `/stodundervisning/${x.namn}.pdf`));
   for (const ankare of new Set(mal.filter((a) => a.startsWith(`/stodundervisning/${m.id}#`)).map((a) => a.split('#')[1]))) {
     if (ankare === 'ramar' || ankare === 'mallar') continue;
     const el = id.get(ankare);
     provade += 1;
-    if (el && !sakensKnappar(el).length) knappfel.push(`${m.id}#${ankare}: planen leder hit, men saken har ingen knapp under sig som skriver ut den (src/lib/sakfiler.ts, Sakknapp.astro)`);
+    const knappar = el ? sakensKnappar(el) : [];
+    if (el && !knappar.length) knappfel.push(`${m.id}#${ankare}: planen leder hit, men saken har ingen knapp under sig som skriver ut den (src/lib/sakfiler.ts, Sakknapp.astro)`);
+    const egna = knappar.filter((k) => sakfilerna.has(k.knapp));
+    // Namnen jämförs med vanliga mellanslag och utan ordfogar och mjuka bindestreck, som knappens text kan ha.
+    const platt = (s) => s.replace(/[\u00ad\u2060]/g, '').replace(/[\s\u00a0]+/g, ' ').trim().toLowerCase();
+    const namnen = (namnFor.get(ankare) ?? []).map(platt);
+    if (egna.length && namnen.length && !egna.some((k) => namnen.some((n) => platt(textI(k)).includes(n)))) knappfel.push(`${m.id}#${ankare}: knappen under ${namnFor.get(ankare)[0]} skriver ut ${egna.map((k) => `"${textI(k).replace(/\s+/g, ' ').trim()}"`).join(' och ')}, inte saken`);
   }
   for (const f of bankfilerna.filter((x) => x.metod === m.id && x.slag === 'sak')) {
     if (!html.includes(`href="/stodundervisning/${f.namn}.pdf`)) knappfel.push(`${m.id}: filen ${f.namn} (${f.rubrik}) har ingen knapp på metodens sida (Sakknapp.astro i Metod.astro)`);
   }
 }
 if (knappfel.length) { console.error(`planprov: ${knappfel.length} fel i knapparna under det planen leder till:\n  ${knappfel.join('\n  ')}`); process.exit(1); }
-console.log(`planprov: de ${provade} saker som planen leder till på metodernas sidor har en knapp under sig, och varje saks fil har sin knapp.`);
+console.log(`planprov: de ${provade} saker som planen leder till på metodernas sidor har en knapp under sig som skriver ut just den, och varje saks fil har sin knapp.`);
 
 const cacheFil = join(rot, 'node_modules/.cache/planprov.json');
 const nyckel = createHash('sha1').update([readFileSync(fileURLToPath(import.meta.url), 'utf8'), ...sidor.map((x) => readFileSync(join(dist, x, 'index.html'), 'utf8').replace(/\?v=[0-9a-f]+/g, ''))].join('\n')).digest('hex');
@@ -755,8 +773,9 @@ try {
   // Närvaron är ett val (granskningen 2026-10-24: en bock räknades annars som närvaro för alla).
   await f.kor(`(() => { const c = document.getElementById('pl-narvaro'); c.checked = true; c.dispatchEvent(new Event('change')); return true; })()`);
   sant('förra veckan utan bockar och skattning säger till', (await f.text('#pl-veckan .pl-forra'))?.includes('Förra veckan har 3 pass som inte är bockade och ingen skattning'), await f.text('#pl-veckan .pl-forra'));
-  // Ett pass som inte har varit går inte att bocka (buggjakten 2026-10-24: "2 av de 0 pass").
-  sant('ett pass som inte har varit går inte att bocka', await f.kor(`!document.querySelector('[data-bock="2026-11-20"]') && !document.querySelector('[data-bock="2026-11-18"]') && !!document.querySelector('[data-bock="2026-11-16"]')`));
+  // Veckans pass går att bocka från veckans måndag, också ett pass senare i veckan som blev av en annan dag (Niclas
+  // 2026-10-25: "Alltså från måndag 00.01 kan man bocka den veckas pass"); en vecka som inte har börjat prövas nedan.
+  sant('veckans pass går att bocka från veckans måndag', await f.kor(`!!document.querySelector('[data-bock="2026-11-20"]') && !!document.querySelector('[data-bock="2026-11-18"]') && !!document.querySelector('[data-bock="2026-11-16"]')`));
   // Bocka pass 7 (måndag), med närvaron: Bea var inte med.
   await f.tryck('[data-bock="2026-11-16"]');
   sant('bocken sparas på passets dag', (await f.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.gjorda.join()`)) === '2026-11-16');
@@ -778,6 +797,10 @@ try {
   sant('Ångra tar bort bockarna igen', (await f.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.gjorda.join()`)) === '2026-11-16');
   await skatta('Ali Test', 2);
   await skatta('Bea', 2);
+  // En vecka som inte har börjat: streckade ringar på bockarnas plats, inga bockar, och raden säger när de går att bocka
+  // (buggjakten 2026-10-24: "2 av de 0 pass").
+  await f.tryck('button[data-vy="4"]');
+  sant('en vecka som inte har börjat har streckade ringar och inga bockar', (await f.kor(`!!document.querySelector('#pl-veckan .pl-bock.senare') && !document.querySelector('#pl-veckan [data-bock]')`)) && (await f.text('#pl-passen .pl-not'))?.includes('går att bocka när veckan har börjat'), await f.text('#pl-passen .pl-not'));
   await f.tryck('button[data-vy="3"]');
   sant('skattningen sparas per vecka och elev', (await f.kor(`(() => { const s = JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.skattning; return Object.keys(s).length === 2 && Object.values(s['2026-11-16']).sort().join() === '2,3'; })()`)));
   // Ett rättat namn behåller eleven och det som förts in (granskningarna 2026-10-24).

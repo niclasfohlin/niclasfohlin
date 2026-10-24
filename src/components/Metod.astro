@@ -952,7 +952,7 @@ const meny = [
                         <Filmruta filmer={bilder} titel={d.titel} />
                       </div>
                     </div>
-                    {!lage && !undersida && saker.vecka.get(`${ri}-${di}`) && <Sakknapp fil={saker.vecka.get(`${ri}-${di}`)!} metod={d.titel} />}
+                    {(!lage || lage === 'vecka') && !undersida && saker.vecka.get(`${ri}-${di}`) && <Sakknapp fil={saker.vecka.get(`${ri}-${di}`)!} metod={d.titel} />}
                   </>);
                 })}
               </div>
@@ -968,7 +968,7 @@ const meny = [
             <p class="m-ark"><img src={arkAdress(id, ram.ark)} alt={`${ram.rubrik}: tankebubblor, pratbubblor och en bubbla för det någon ropar, att klippa ut`} width={svgMatt(seriefiler.get(arkAdress(id, ram.ark))!).bredd} height={svgMatt(seriefiler.get(arkAdress(id, ram.ark))!).hojd} loading="lazy" decoding="async" data-utskriftsbild /></p>
             <p class="m-efter m-serie-efter">Arket finns i rätt storlek, på ett A4 med 1 cm marginal, i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>
           </>)}
-          {!lage && !undersida && saker.ram.get(ri) && <Sakknapp fil={saker.ram.get(ri)!} metod={d.titel} />}
+          {(!lage || lage === 'material') && !undersida && saker.ram.get(ri) && <Sakknapp fil={saker.ram.get(ri)!} metod={d.titel} />}
           {/* Länkarna mellan veckans kort och ramen de kommer ur (bara på skärmen): under veckans kort en länk till
               ramens ruta Till läraren, med rutans första fält som ord ("Så gör du: Ordkorten"), och i ramen en länk
               till varje veckas kort. */}

@@ -357,8 +357,14 @@ export function planera(mp, val) {
   const forsta = iOrdning[0], sista = iOrdning[iOrdning.length - 1];
   const forstaPass = forsta?.datum;
   const sistaPass = sista?.datum;
-  // Efter insatsen: första veckan efter den sista som inte är lov.
-  const efter = nastaMandag();
+  // Efter insatsen: första veckan efter den sista som inte är lov. Är passen i planens sista veckor inställda räknas den
+  // från veckan med det sista passet (Codex 2026-10-25: uppföljningen efter hamnade en vecka för sent).
+  let efter = nastaMandag();
+  if (sista) {
+    let e = plusDagar(mandagen(sista.datum), 7);
+    while (lov.has(veckonyckel(e))) e = plusDagar(e, 7);
+    if (e < efter) efter = e;
+  }
   // Före första passet: skolveckan före planens första vecka, förbi lovveckor (de kalla testarna 2026-10-24: kartläggningen
   // och mötet med hemmen stod på första passets dag). overLov säger att veckan före var lov.
   let foreMandag = plusDagar(veckor[0]?.mandag ?? forstaMandagen(val), -7);

@@ -12,7 +12,7 @@
 //   telefon | dator           skärmen som en iPhone (390 × 844) eller en dator (1280 × 900)
 //   datum <ÅÅÅÅ-MM-DD> | datum av   låtsas att det är den dagen (sidan laddas om), eller tillbaka till i dag
 //   text [del]                sidans synliga text, eller bara den del vars rubrik eller etikett innehåller orden
-//   knappar                   det som går att trycka på, skriva i eller välja, synligt på sidan, numrerat
+//   knappar                   det som går att trycka på, skriva i eller välja, synligt på sidan, numrerat, länkarna med adress
 //   tryck <nr | text>         trycker på det numrerade eller det vars text innehåller orden
 //   skriv <nr | etikett> <text>    skriver i ett fält (ersätter det som står där)
 //   valj <nr | etikett> <alternativ>   väljer i en lista, efter värde eller synlig text
@@ -97,7 +97,9 @@ async function serve(port, bildmapp) {
       const text = (el.innerText || el.value || '').replace(/\\s+/g, ' ').trim();
       const slag = el.tagName === 'A' ? 'länk' : el.tagName === 'SELECT' ? 'lista' : el.tagName === 'TEXTAREA' ? 'textruta' : el.tagName === 'SUMMARY' ? 'fäller ut' : el.tagName === 'INPUT' ? (el.type === 'checkbox' ? 'kryssruta' : el.type === 'file' ? 'fil' : el.type === 'date' ? 'datum' : 'fält') : 'knapp';
       const lage = el.tagName === 'SELECT' ? ' = ' + (el.selectedOptions[0]?.text ?? '') : el.type === 'checkbox' ? (el.checked ? ' (ikryssad)' : ' (tom)') : el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' ? ' = "' + (el.value || '').slice(0, 60) + '"' : el.getAttribute('aria-pressed') === 'true' ? ' (vald)' : el.tagName === 'SUMMARY' ? (el.parentElement.open ? ' (utfälld)' : ' (hopfälld)') : '';
-      return '[' + (i + 1) + '] ' + slag + ' ' + JSON.stringify((text || etikett).slice(0, 90)) + (etikett && text && etikett !== text ? ' (' + etikett.slice(0, 60) + ')' : '') + lage;
+      // En länk säger vart den leder, utan sajtens adress och filens version, så att länkarna går att granska.
+      const vart = el.tagName === 'A' ? ' → ' + (el.getAttribute('href') || '').split('?')[0].replace(location.origin, '') : '';
+      return '[' + (i + 1) + '] ' + slag + ' ' + JSON.stringify((text || etikett).slice(0, 90)) + (etikett && text && etikett !== text ? ' (' + etikett.slice(0, 60) + ')' : '') + lage + vart;
     }).join('\\n');
   })()`;
   const hitta = (vad) => `(() => {

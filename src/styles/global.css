@@ -2960,11 +2960,15 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 .pl-bock svg { width: 1.3rem; height: 1.3rem; fill: none; stroke: transparent; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 .pl-bock:hover svg { stroke: #c9d1da; }
 .pl-bock.ja { border-color: var(--farg-lasning); background: var(--farg-lasning-ljus); }
+/* Ett pass som inte har varit: en streckad ring på bockens plats, utan tryck. */
+.pl-bock.senare { border-style: dashed; background: none; cursor: default; opacity: 0.7; }
 .pl-bock.ja svg { stroke: var(--farg-lasning); }
 .pl-andra-knappar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
 .pl-flytta { border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0.8rem 1rem; margin: 0.5rem 0; }
 .pl-flytta[hidden] { display: none; }
 .pl-flytta .pl-falt { margin-bottom: 0.7rem; }
+/* Checklistans rubrik i Före passet, efter tidsschemats förberedelse. */
+.pl-checkrubrik { margin: 0.6rem 0 0.2rem; font-family: var(--typsnitt-ui); font-size: 0.85rem; font-weight: 600; color: var(--farg-text-svag); }
 .pl-fallut, .pl-gang { border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0.6rem 1rem; margin: 1.25rem 0; }
 .pl-fallut > summary { font-weight: 600; cursor: pointer; min-height: 2.75rem; display: flex; align-items: center; gap: 0.75rem; }
 .pl-veckans > summary { line-height: 1.35; }

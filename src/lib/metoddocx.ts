@@ -3781,7 +3781,9 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
     // A4, det första utan sidbrytning före. Båda fyller sina sidor, och sidfoten bär upphovet.
     if (o.vecka) {
       const ram = ramarna[o.vecka.ri];
-      const sida: Flod = ramBarn(ram, { ...ramVal(ram, false), veckor: o.vecka.di, paNySida: true });
+      // Bladens namn i veckans rad står utan länk: deras bokmärken finns bara i filen med allt (Codex 2026-10-25).
+      const val = ramVal(ram, false);
+      const sida: Flod = ramBarn(ram, { ...val, veckor: o.vecka.di, paNySida: true, karta: val.karta && { ...val.karta, lankar: { ...val.karta.lankar, blad: () => undefined } } });
       bladsidor.add(sida);
       SIDANS_VAD.set(sida, { ram: o.vecka.ri });
       sidor.push(sida);
