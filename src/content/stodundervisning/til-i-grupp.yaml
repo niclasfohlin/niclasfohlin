@@ -22,7 +22,7 @@ material:
   - lässchema
   - böcker på rätt nivå
   - snabbmall och kontrakt
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-24
 relaterade:
   - laslistor-i-grupp
   - upprepad-lasning
@@ -210,8 +210,8 @@ progression:
   text: Ansvaret flyttas gradvis till eleven. Då blir passen en sammanhängande insats och rutinen hemma blir en vana.
   rader:
     - vecka: 1–2
-      rubrik: "Rutinen och kontraktet"
-      fokus: Rutinen sätter sig i skolan och hemma. Möte med vårdnadshavare, kontraktet skrivs på.
+      rubrik: "Rutinen i skolan och hemma"
+      fokus: Rutinen sätter sig i skolan och hemma, med kontraktet som ni skrev på mötet före start.
       roll: Läraren leder bildvandringen, modellerar ljudning och omläsning och kontrollerar lässchemat varje dag.
     - vecka: 3–5
       rubrik: "Läsa om själv och böcker uppåt"
@@ -234,6 +234,17 @@ uppfoljning:
     - nar: Efter 6–10 veckor
       tid: "efter"
       vad: "Låt eleven läsa en liknande text och jämför med startläget. Räkna också böckerna i lässchemat: hur många har lästs två gånger?"
+plan:
+  passen:
+    - nar: första passet
+      kort: "Utan favoritmeningar"
+      text: "Det första passet börjar utan favoritmeningar, eftersom eleverna inte har läst hemma än."
+  fore:
+    - "Ha ett kort möte med vårdnadshavarna innan ni börjar. Visa mappen, lässchemat och skrivboken, förklara varför boken ska läsas två gånger och skriv kontraktet."
+  justera:
+    - "Byt till en lättare bok när eleven gör fler än ett fel av tio ord."
+    - "Ring hem tidigt när läsningen hemma uteblir flera dagar i rad."
+
 mal:
   punkter:
     - Läsa en bok på sin nivå med flyt

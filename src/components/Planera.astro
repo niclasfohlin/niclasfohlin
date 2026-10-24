@@ -10,7 +10,7 @@
 import Base from '../layouts/Base.astro';
 import SkrivUtPdf from './SkrivUtPdf.astro';
 import Lektionskortknapp from './Lektionskortknapp.astro';
-import { periodensLangd, PLANERA, tidensMatt } from '../lib/standard/index.js';
+import { periodensLangd, PLANERA, tidensMatt, tolkaSteg } from '../lib/standard/index.js';
 import { site } from '../data/site';
 import type { PlanData } from '../lib/insatsplan';
 import type { Lektionskort } from '../lib/lektionskort';
@@ -31,6 +31,10 @@ const DAGAR = ['Mån', 'Tis', 'Ons', 'Tor', 'Fre'];
 const DAGNAMN = ['måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag'];
 const liten = (s?: string) => (s ? s.charAt(0).toLocaleLowerCase('sv') + s.slice(1) : '');
 const json = JSON.stringify(data).replace(/</g, '\\u003c');
+// Nivåerna: bankens, eller metodens egna i en kurs i nivåer (De fyra räknesätten).
+const nivaer = data.bank?.nivaer ?? data.nivaer ?? [];
+// En stege, som läslistorna, kan börja högre upp: progressionens steg utom det som kommer efter insatsen.
+const stegen = data.stege ? (data.progression?.rader ?? []).flatMap((r) => { const s = tolkaSteg(r.vecka); return s && !s.efter ? [{ fran: s.fran, namn: r.kort }] : []; }) : [];
 ---
 
 <Base title={`Planera insatsen: ${data.titel}`} description={`Planera ${data.titel}: välj när ni träffas, så räknar planen fram passen, veckornas fokus och uppföljningen ur metoden.`}>
@@ -104,6 +108,15 @@ const json = JSON.stringify(data).replace(/</g, '\\u003c');
               <p><button type="button" class="pl-textknapp" id="pl-tid-olika" aria-expanded="false" aria-controls="pl-tid-dagar">Olika tider olika dagar</button></p>
               <p class="pl-hjalp">Klockslagen går var femte minut. Med tid blir varje pass en egen händelse i kalendern.</p>
             </fieldset>
+            {stegen.length > 1 && (
+              <div class="pl-rad">
+                <label class="pl-etikett" for="pl-borja">Börja på</label>
+                <select class="pl-falt" id="pl-borja">
+                  {stegen.map((s) => <option value={s.fran}>{s.namn}</option>)}
+                </select>
+                <p class="pl-hjalp">Börja där gruppen är, efter läsningen före. Planen tar sedan ett steg i veckan.</p>
+              </div>
+            )}
             <fieldset class="pl-rad">
               <legend class="pl-etikett">Antal {period.enhet === 'pass' ? 'pass' : 'veckor'}</legend>
               <div class="sk-segment pl-langd" id="pl-langd">
@@ -119,13 +132,13 @@ const json = JSON.stringify(data).replace(/</g, '\\u003c');
                 </div>
               </fieldset>
             )}
-            {data.bank && (
+            {nivaer.length > 0 && (
               <fieldset class="pl-rad">
                 <legend class="pl-etikett">Nivå</legend>
                 <div class="sk-nivaknappar pl-nivaer" id="pl-nivaer">
-                  {data.bank.nivaer.map((n) => <button type="button" class="sk-niva" data-niva={n.slug} style={`--niva:${n.farg}`} aria-pressed="false">{n.namn}</button>)}
+                  {nivaer.map((n) => <button type="button" class="sk-niva" data-niva={n.slug} style={`--niva:${n.farg}`} aria-pressed="false">{n.namn}</button>)}
                 </div>
-                <p class="pl-hjalp">Nivån styr vilka {data.bank.flera} veckan visar. Tryck en gång till för att ta bort den.</p>
+                <p class="pl-hjalp">{data.bank ? `Nivån styr vilka ${data.bank.flera} veckan visar.` : data.nivaTabell ? 'Nivån styr veckans tal och blad.' : 'Nivån står i planen.'} Tryck en gång till för att ta bort den.</p>
               </fieldset>
             )}
             <div class="pl-rad">
@@ -140,7 +153,8 @@ const json = JSON.stringify(data).replace(/</g, '\\u003c');
               <div class="pl-elevruta" id="pl-elevruta" hidden>
                 <label class="pl-etikett" for="pl-elever">Eleverna, en per rad, om du vill</label>
                 <textarea class="pl-falt pl-textfalt" id="pl-elever" rows="4" maxlength="400" autocomplete="off" spellcheck="false"></textarea>
-                <p class="pl-hjalp">Förnamn eller initialer, högst tolv. Namnen finns bara i den här webbläsaren och i kopian du sparar. Utan elevlista skattar du gruppen.</p>
+                <p class="pl-hjalp">Förnamn eller initialer, högst tolv elever. Namnen finns bara i den här webbläsaren och i kopian du sparar. Utan elevlista skattar du gruppen.</p>
+                {data.gruppen && <p class="pl-hjalp">Metoden: {liten(data.grupp?.text ?? '')}{data.grupp ? '. ' : ''}<a href={data.gruppen.adress} data-goatcounter-click={`planera:${data.id}:gruppen`} data-goatcounter-title={`${data.titel}: gruppen från planen`}>{data.gruppen.rubrik}</a></p>}
                 <p class="pl-hjalp pl-varning" id="pl-elever-not" role="status" hidden></p>
                 <label class="pl-kryss pl-narvaroval"><input type="checkbox" id="pl-narvaro" /> <span>Notera närvaro i passen</span></label>
                 <p><button type="button" class="pl-textknapp" id="pl-elever-bort" hidden>Ta bort elevernas namn och det som förts in om dem</button></p>

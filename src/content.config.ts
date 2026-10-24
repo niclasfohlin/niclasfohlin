@@ -409,13 +409,30 @@ const metodensFalt = z.strictObject({
       rubrik: z.string().default('Följ upp effekten'),
       text: z.string().optional(),
       // tid: när raden görs, med standardens ord (före, varje vecka, vecka 4, efter, villkor …; tolkaTid i
-      // src/lib/standard/plan.js), så att planen kan sätta ett datum. nar står kvar som radens text.
-      rader: z.array(z.strictObject({ nar: z.string(), vad: z.string(), tid: z.string().optional() })).min(1),
+      // src/lib/standard/plan.js), så att planen kan sätta ett datum. nar står kvar som radens text. perElev: minuterna
+      // per elev när raden görs med en elev i taget, som 5 eller [5, 8], så att planen kan säga tiden för gruppen.
+      rader: z.array(z.strictObject({
+        nar: z.string(), vad: z.string(), tid: z.string().optional(),
+        perElev: z.union([z.number().int().min(1).max(60), z.tuple([z.number().int().min(1).max(60), z.number().int().min(1).max(60)])]).optional(),
+      })).min(1),
     }).optional(),
-    // Planera insatsen (K-489, METODER.md under Planera insatsen): insatsens mål, som läraren skattar eleverna mot varje
-    // vecka och kan skriva om, i lektionskortens form "kunna …". Utan det gäller målet på metodens lektionskort. Står inte
-    // på sidan eller i Word.
-    plan: z.strictObject({ mal: z.string().min(10).max(200).optional() }).optional(),
+    // Planera insatsen (K-489, METODER.md under Planera insatsen). Står inte på sidan eller i Word.
+    // mal: insatsens mål, som läraren skattar eleverna mot varje vecka och kan skriva om, i lektionskortens form "kunna …".
+    //   Utan det gäller målet på metodens lektionskort.
+    // passen: vad som skiljer passen åt, efter platsen i veckan (veckans första, veckans sista, veckans övriga) eller numret
+    //   i insatsen (första passet, pass 7, pass 8 till det sista, sista passet), med metodens tabell för ett pass som går
+    //   till på ett eget sätt (tolkaPassen i src/lib/standard/plan.js), och ett kort namn till raderna under Veckans pass.
+    // fore: det som görs före första passet utöver uppföljningen före och en checklista inför första passet, som mötet med
+    //   hemmen. justera: metodens egna sätt att justera insatsen vid avstämningen. upprepa: när veckan tas en gång till.
+    // stege: progressionen är en stege som gruppen kan börja högre upp på, som läslistorna.
+    plan: z.strictObject({
+      mal: z.string().min(10).max(200).optional(),
+      passen: z.array(z.strictObject({ nar: text, text, kort: z.string().trim().min(1).max(30).optional(), tabell: text.optional() })).min(1).optional(),
+      fore: z.array(text).min(1).max(4).optional(),
+      justera: z.array(text).min(1).max(4).optional(),
+      upprepa: text.optional(),
+      stege: z.boolean().optional(),
+    }).optional(),
     mal: z.strictObject({
       rubrik: z.string().default('Mål: vad eleven ska kunna göra efter insatsen'),
       text: z.string().default('Efter perioden ska eleven oftare kunna:'),

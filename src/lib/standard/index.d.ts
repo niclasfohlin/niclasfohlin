@@ -106,14 +106,16 @@ export declare function bildtextFel(bild: { rubrik?: string; text: string; alt?:
 /** Planera insatsen (sajtens K-489, plan.js): när en rad i uppföljningen görs, ur fältet tid. */
 export type Tid = { typ: 'fore' } | { typ: 'efter'; veckor: number; till?: number } | { typ: 'lopande'; enhet: 'pass' | 'vecka' } | { typ: 'intervall'; var: number } | { typ: 'vecka'; veckor: number[] } | { typ: 'sista-veckan' } | { typ: 'pass'; pass: number[] } | { typ: 'sista-passet' } | { typ: 'villkor' };
 /** En rad i progressionen: veckorna eller passen den gäller; till saknas när den gäller till slutet. */
-export interface Steg { rad: number; fran: number; till?: number; vidBehov: boolean }
+export interface Steg { rad: number; fran: number; till?: number; vidBehov: boolean; efter?: true }
+/** Vilka pass en rad i planens passen gäller: platsen i veckan, eller numret i insatsen. */
+export type PassensNar = { typ: 'vecka'; plats: number | 'sista' | 'ovriga' } | { typ: 'pass'; fran: number; till?: number } | { typ: 'sista' };
 /** Metodens plan: hur ofta, passets längd, perioden, progressionens steg och uppföljningens tider. */
-export interface Metodplan { takt: { min: number; max: number }; minuter: { min: number; max: number }; period: { min: number; max?: number; enhet: 'veckor' | 'pass'; mer: boolean; hogst: boolean; perKurs: boolean }; stegEnhet: 'veckor' | 'pass'; steg: Steg[]; uppfoljning: { rad: number; tid: Tid }[] }
+export interface Metodplan { takt: { min: number; max: number }; minuter: { min: number; max: number }; period: { min: number; max?: number; enhet: 'veckor' | 'pass'; mer: boolean; hogst: boolean; perKurs: boolean }; stegEnhet: 'veckor' | 'pass'; steg: Steg[]; uppfoljning: { rad: number; tid: Tid }[]; passen: { rad: number; nar: PassensNar }[] }
 /** Lärarens val: första passet, dagarna (1 för måndag), antalet veckor eller pass, nivån, minuterna, lovveckorna (2026-52), veckorna som tas om, flyttade och inställda pass. */
-export interface Val { start: string; dagar: number[]; langd: number; niva?: string; minuter?: number; lov?: string[]; upprepa?: number[]; flytta?: Record<string, string>; stryk?: string[]; tider?: Record<string, [string, string]>; mal?: string }
+export interface Val { start: string; dagar: number[]; langd: number; niva?: string; borja?: number; minuter?: number; lov?: string[]; upprepa?: number[]; flytta?: Record<string, string>; stryk?: string[]; tider?: Record<string, [string, string]>; mal?: string }
 export interface Pass { nr: number; datum: string; vecka: number; steg?: number | null; flyttatFran?: string }
 export interface PlanVecka { nr: number; innehall: number; igen: boolean; mandag: string; vecka: { ar: number; vecka: number }; pass: number[]; bortfall: { datum: string; varfor: 'helgdag' | 'installt'; namn?: string }[]; steg?: number | null }
-export interface Plan { start: string; enhet: 'veckor' | 'pass'; forstaPass?: string; sistaPass?: string; efter: string; pass: Pass[]; veckor: PlanVecka[]; lovveckor: string[]; uppfoljning: { rad: number; typ: Tid['typ']; tillfallen: { datum: string; vecka: number | null }[] }[] }
+export interface Plan { start: string; enhet: 'veckor' | 'pass'; borja: number; forstaPass?: string; sistaPass?: string; sistaNr?: number; efter: string; pass: Pass[]; veckor: PlanVecka[]; lovveckor: string[]; uppfoljning: { rad: number; typ: Tid['typ']; tillfallen: { datum: string; vecka: number | null }[] }[]; fore: { mandag: string; overLov: boolean }; efterSteg?: number }
 export declare const plusDagar: (s: string, n: number) => string;
 export declare const veckodag: (s: string) => number;
 export declare const mandagen: (s: string) => string;
@@ -125,17 +127,26 @@ export declare function paskdagen(ar: number): string;
 export declare function rodaDagar(ar: number): Map<string, string>;
 export declare function helgdag(s: string): string | undefined;
 export declare function tolkaTid(text: unknown): Tid | null;
-export declare function tolkaSteg(text: unknown): { fran: number; till?: number; vidBehov: boolean } | null;
-export declare function metodplan(d: { tid?: string; period?: string; progression?: { enhet?: string; rader: { vecka: string; taggar?: string[] }[] }; uppfoljning?: { rader: { nar: string; tid?: string }[] } }): { fel: string[]; plan?: Metodplan };
+export declare function tolkaSteg(text: unknown): { fran: number; till?: number; vidBehov: boolean; efter?: true } | null;
+export declare function tolkaPassen(text: unknown): PassensNar | null;
+export declare function metodplan(d: { tid?: string; period?: string; progression?: { enhet?: string; rader: { vecka: string; taggar?: string[] }[] }; uppfoljning?: { rader: { nar: string; tid?: string }[] }; plan?: { passen?: { nar: string }[] } }): { fel: string[]; plan?: Metodplan };
 export declare function planFel(d: Parameters<typeof metodplan>[0]): string[];
 /** Metodens fil utan planens fält (`plan`, uppföljningens `tid`, progressionens `taggar` och `rubrik`), som bara planens sida läser. */
 export declare function utanPlanensFalt<T extends Record<string, any>>(d: T): T;
 export declare function forval(mp: Metodplan, idag: string): Val;
+/** Planens längd som förval: så många veckor att gruppen når progressionens sista steg, när det ryms i perioden. */
+export declare function forvaldLangd(mp: Metodplan, borja?: number): number;
 /** Planens första måndag: startveckan, eller nästa vecka när ingen vald dag är kvar i den. */
 export declare function forstaMandagen(val: Val): string;
 /** Planera insatsens modul: namnet, versionen och om den är en beta (sajtens METODER.md under Planera insatsen). */
 export declare const PLANERA: Readonly<{ namn: string; version: string; beta: boolean }>;
 export declare function planera(mp: Metodplan, val: Val): Plan;
+/** Veckans nummer i planen, räknat från veckan planen börjar på. */
+export declare const planvecka: (plan: Plan, v: PlanVecka) => number;
+/** Raderna i planens passen som gäller passet, den mest bestämda först. */
+export declare function passetsRoller(plan: Plan, p: Pass, passen: Metodplan['passen']): number[];
+/** Progressionens steg som planen inte når. */
+export declare function stegUtanfor(mp: Metodplan, plan: Plan): { rad: number; fran: number; vidBehov: boolean }[];
 export declare function veckanFor(plan: Plan, datum: string): PlanVecka | null;
 export declare function nastaPass(plan: Plan, datum: string): Pass | null;
 export declare function kodaVal(val: Val, extra?: { id?: string; visa?: number }): string;
@@ -161,7 +172,7 @@ export declare const rentMal: (s: unknown) => string;
 export declare const malText: (mal?: string) => string;
 /** En text där elevlistans namn och förnamn har blivit "en elev". */
 export declare function utanNamn(text: string, elever: { namn: string }[]): string;
-export declare function kalenderfil(info: { titel: string; uppfoljning: { nar: string }[]; fokus: (string | null)[] }, plan: Plan, o: { id: string; lank: (vecka?: number) => string; namn?: string; nu: Date; tider?: Val['tider'] }): string;
+export declare function kalenderfil(info: { titel: string; uppfoljning: { nar: string }[]; fokus: (string | null)[]; passet?: (p: Pass) => string }, plan: Plan, o: { id: string; lank: (vecka?: number) => string; namn?: string; nu: Date; tider?: Val['tider'] }): string;
 /** Passens tider, rensade: veckodag till början och slut, som "09:20" och "10:00". */
 export declare function rentaTider(tider: unknown): Record<string, [string, string]>;
 /** Passets tid efter veckodagen det låg på innan det flyttades. */

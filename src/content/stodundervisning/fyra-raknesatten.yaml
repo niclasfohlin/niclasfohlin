@@ -28,7 +28,7 @@ material:
   - multilink
   - räknemattan och talrutan
   - övningsblad
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-24
 publicerad: 2026-10-04
 relaterade:
   - antalsuppfattning-i-grupp
@@ -388,7 +388,7 @@ progression:
       roll: Du visar delningen vid tiotalet, och en elev tänker högt i resten av uträkningen
     - vecka: "7"
       fokus: Kort multiplikation och kort division. På nivån Bas fortsätter ni med rektangeln
-      roll: Du visar kort multiplikation i pass 1 och kort division i pass 2, och en elev tänker högt med rektangeln
+      roll: Du visar kort multiplikation i veckans första pass och kort division i det andra, och en elev tänker högt med rektangeln
     - vecka: "8"
       fokus: Nollan i kvoten och resten i textuppgifter. I uppvärmningen räknar ni en addition och en subtraktion, och du delar ut kursintyget i sista passet. Kartläggningen efter görs veckan efter kursen
       roll: Eleverna leder uträkningen åt andra hållet och väljer sätt
@@ -411,6 +411,17 @@ uppfoljning:
 
 plan:
   mal: "kunna räkna med de fyra räknesätten på sin nivå och visa och förklara vad som händer i uträkningen."
+  passen:
+    - nar: veckans första
+      kort: "Bygga"
+      text: "Eleverna bygger med materialet. Allt nytt kommer i veckans två första pass."
+    - nar: veckans andra
+      kort: "Rita och skriva"
+      text: "Eleverna ritar och skriver. Visa först det som står under Pass 2 på veckans sida."
+    - nar: veckans tredje
+      kort: "Befästa"
+      text: "Eleverna skriver med materialet i asken och tar upp det som ännu inte sitter, och den som tvekar tar fram materialet igen."
+  upprepa: "Kan flera i gruppen inte visa veckans grepp i slutet av veckan, gör ni veckan en gång till med nya tal. Är det en elev, övar hen greppet i uppvärmningen och gruppen går vidare."
 mal:
   punkter:
     - visa med material och på talraden vad som händer i addition och subtraktion, och räkna med uppställning och växling på sin nivå

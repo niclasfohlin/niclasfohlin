@@ -652,6 +652,7 @@ uppfoljning:
   text: Följ effekten varje vecka med lyssningsbladet, och gör kartläggningen före och efter med två lika svåra texter. Kartläggningen är inget samtal. Den mäter om eleven på egen hand drar en slutsats som texten stöder och visar ledtråden, och i passen ger du inga poäng.
   rader:
     - nar: Före insatsen
+      perElev: [5, 8]
       vad: Varje elev gör kartläggningens text före, enskilt med dig, på fem till åtta minuter. Läs texten högt först på Lättläst och för den som avkodar mödosamt.
       tid: före
     - nar: Varje vecka
@@ -662,6 +663,16 @@ uppfoljning:
       tid: efter
 plan:
   mal: kunna läsa mellan raderna, säga vad man tror och visa ledtråden i texten.
+  passen:
+    - nar: veckans första
+      kort: "Du tänker högt"
+      text: "Du tänker högt: du läser högt, stannar vid stoppet och visar veckans tankesteg noga, också det du undrar. Eleverna stryker under med dig och säger till sin kamrat om de tänker likadant eller annorlunda."
+    - nar: veckans andra
+      kort: "Paren samtalar"
+      text: "Ni tänker tillsammans: du läser högt och stannar vid stoppet, paren samtalar, och sedan leder du gruppens samtal med följdfrågor som ”Hur vet du det?” och ”Vem tänker annorlunda?”"
+    - nar: veckans tredje
+      kort: "Eleverna läser själva"
+      text: "Eleverna tänker: ni läser ledtrådsbladets fråga, och sedan läser eleverna själva eller i par. Du frågar, lyssnar, ger respons och skriver på lyssningsbladet."
 mal:
   punkter:
     - Skilja på svar som står i texten och svar man måste lista ut

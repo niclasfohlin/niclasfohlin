@@ -273,10 +273,25 @@ uppfoljning:
   rader:
     - nar: Före insatsen
       tid: "före"
+      perElev: 5
       vad: Eleven läser Läslista start till Läslista 4 för dig, en minut per lista. Skriv upp rätt lästa ord och om eleven gissar, ljudar utan att binda ihop eller läser direkt.
     - nar: Efter sex till åtta veckor
       tid: "efter"
       vad: "Samma listor igen, en minut per lista. Jämför med starten. Läs också en kort text och fråga om innehållet: bär avkodningen fram till det texten handlar om?"
+plan:
+  stege: true
+  passen:
+    - nar: veckans första
+      kort: "Hela listan"
+      text: "Du modellerar och gruppen körläser hela listan. Förklara nya ord."
+    - nar: veckans övriga
+      kort: "Dagens kolumn"
+      text: "Kort modellering, körläsning av dagens kolumn och parläsning med omläsning."
+    - nar: veckans sista
+      kort: "Eleven läser för dig"
+      text: "Eleven läser listan för dig eller för sin kompis, och ni sätter ord på vad som blivit lättare."
+  upprepa: "Byt lista först när paren läser orden direkt, utan att ljuda. Annars tar ni samma lista en vecka till."
+
 mal:
   punkter:
     - Säga ljudet direkt när eleven ser bokstaven

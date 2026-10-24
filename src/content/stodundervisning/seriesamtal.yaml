@@ -622,6 +622,7 @@ uppfoljning:
   rader:
     - nar: Före pass 1
       tid: "före"
+      perElev: 15
       vad: Visa provbilden för en elev i taget, och skriv poängen och båda siffrorna i protokollet.
     - nar: I varje pass
       tid: "i passet"
@@ -632,6 +633,40 @@ uppfoljning:
     - nar: Fyra veckor efter sista passet
       tid: "efter 4 veckor"
       vad: Håll ett påfyllningspass på 30 minuter där ni läser planerna, och fråga de vuxna runt eleven hur planen går.
+plan:
+  passen:
+    - nar: första passet
+      kort: "Egen ordning"
+      text: "Pass 1 har en egen ordning: du säger varför ni ses och vad som gäller i gruppen, ni gör övningen med tankebubblan och tar sedan Bildserie 1, Fönsterplatsen."
+      tabell: "Pass 1: syftet, reglerna och tankebubblan"
+    - nar: pass 2
+      kort: "Spelet"
+      text: "Bildserie 2, Spelet."
+    - nar: pass 3
+      kort: "Teckningen"
+      text: "Bildserie 3, Teckningen."
+    - nar: pass 4
+      kort: "Vinsten"
+      text: "Bildserie 4, Vinsten. Från i dag berättar en elev serien utan dina frågor, och kortet Frågor vi ställer till varandra ligger på bordet."
+    - nar: pass 5
+      kort: "Chatten"
+      text: "Bildserie 5, Chatten."
+    - nar: pass 6
+      kort: "Lunchen"
+      text: "Bildserie 6, Lunchen."
+    - nar: pass 7
+      kort: "Nästan bråk"
+      text: "Var och en ritar en serie om en gång när det nästan blev bråk, men det blev inget. Bestäm i vilken ordning eleverna ritar sina egna händelser från pass 8."
+      tabell: "Pass 7: en gång när det nästan blev bråk"
+    - nar: pass 8 till det sista
+      kort: "Egen händelse"
+      text: "En elev äger serien. Prata fem minuter med ägaren dagen före, och fyll i bladet Min plan med ägaren direkt efter passet, cirka tio minuter."
+      tabell: "Ett pass med en egen serie"
+    - nar: sista passet
+      kort: "Tillbaka på perioden"
+      text: "Ni ser tillbaka på perioden med pärmarna och gruppens blad, och var och en väljer en tumregel att ta med sig."
+      tabell: "Det sista passet"
+
 mal:
   punkter:
     - Berätta i ordning vad som hände, och säga vad som kan hända innan det händer
