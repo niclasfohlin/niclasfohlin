@@ -110,7 +110,7 @@ export interface Steg { rad: number; fran: number; till?: number; vidBehov: bool
 /** Metodens plan: hur ofta, passets längd, perioden, progressionens steg och uppföljningens tider. */
 export interface Metodplan { takt: { min: number; max: number }; minuter: { min: number; max: number }; period: { min: number; max?: number; enhet: 'veckor' | 'pass'; mer: boolean; hogst: boolean; perKurs: boolean }; stegEnhet: 'veckor' | 'pass'; steg: Steg[]; uppfoljning: { rad: number; tid: Tid }[] }
 /** Lärarens val: första passet, dagarna (1 för måndag), antalet veckor eller pass, nivån, minuterna, lovveckorna (2026-52), veckorna som tas om, flyttade och inställda pass. */
-export interface Val { start: string; dagar: number[]; langd: number; niva?: string; minuter?: number; lov?: string[]; upprepa?: number[]; flytta?: Record<string, string>; stryk?: string[] }
+export interface Val { start: string; dagar: number[]; langd: number; niva?: string; minuter?: number; lov?: string[]; upprepa?: number[]; flytta?: Record<string, string>; stryk?: string[]; tider?: Record<string, [string, string]>; mal?: string }
 export interface Pass { nr: number; datum: string; vecka: number; steg?: number | null; flyttatFran?: string }
 export interface PlanVecka { nr: number; innehall: number; igen: boolean; mandag: string; vecka: { ar: number; vecka: number }; pass: number[]; bortfall: { datum: string; varfor: 'helgdag' | 'installt'; namn?: string }[]; steg?: number | null }
 export interface Plan { start: string; enhet: 'veckor' | 'pass'; forstaPass?: string; sistaPass?: string; efter: string; pass: Pass[]; veckor: PlanVecka[]; lovveckor: string[]; uppfoljning: { rad: number; typ: Tid['typ']; tillfallen: { datum: string; vecka: number | null }[] }[] }
@@ -144,22 +144,38 @@ export declare function spannKort(fran: string, till: string): string;
 export declare const uppraknat: (ord: string[]) => string;
 export declare const talText: (n: number, en?: boolean) => string;
 export declare function veckansDagar(plan: Plan, v: PlanVecka): { fran: string; till: string };
-export declare function dokumentationstext(info: { titel: string; undertitel?: string; adress: string; mal?: { punkter: string[] }; uppfoljning: { nar: string }[]; nivaNamn?: string }, plan: Plan, val: Val, o: { minuter: number; genomforda?: number }): string;
-export declare function kalenderfil(info: { titel: string; uppfoljning: { nar: string }[]; fokus: (string | null)[] }, plan: Plan, o: { id: string; lank: (vecka?: number) => string; namn?: string; nu: Date }): string;
+export declare function dokumentationstext(info: { titel: string; undertitel?: string; adress: string; mal?: string; steg?: string[]; uppfoljning: { nar: string }[]; nivaNamn?: string }, plan: Plan, val: Val, o: { minuter: number; genomforda?: number; folj?: boolean }): string;
+/** Ett mål som läraren har skrivit, rensat: en rad, högst 200 tecken. */
+export declare const rentMal: (s: unknown) => string;
+/** Målet som en mening med stor bokstav och punkt. */
+export declare const malText: (mal?: string) => string;
+/** En text där elevlistans namn och förnamn har blivit "en elev". */
+export declare function utanNamn(text: string, elever: { namn: string }[]): string;
+export declare function kalenderfil(info: { titel: string; uppfoljning: { nar: string }[]; fokus: (string | null)[] }, plan: Plan, o: { id: string; lank: (vecka?: number) => string; namn?: string; nu: Date; tider?: Val['tider'] }): string;
+/** Passens tider, rensade: veckodag till början och slut, som "09:20" och "10:00". */
+export declare function rentaTider(tider: unknown): Record<string, [string, string]>;
+/** Passets tid efter veckodagen det låg på innan det flyttades. */
+export declare const passetsTid: (val: Val, p: Pass) => [string, string] | undefined;
+/** "9.20" ur "09:20". */
+export declare const tidText: (s: string) => string;
+/** "9.20–10.00". */
+export declare const tidsspann: (par: [string, string]) => string;
+/** Dagarna med sina tider, "måndag, onsdag och fredag kl. 9.20–10.00". */
+export declare function dagarText(val: Val): string;
 
 /** Det läraren för in när hen följer insatsen, allt valfritt: passen som blev av (passens dagar), skattningen vecka för vecka (veckans måndag, sedan elevens id eller grupp), elevlistan, resultaten i metodens uppföljning och besluten mitt i och efter. */
-export interface Foljd { gjorda?: string[]; elever?: { id: string; namn: string }[]; franvaro?: Record<string, string[]>; vecka?: Record<string, { varde?: number; not?: string }>; skattning?: Record<string, Record<string, number>>; resultat?: Record<string, Record<string, string>>; avstamning?: { beslut?: string; not?: string }; utvardering?: { beslut?: string; not?: string } }
+export interface Foljd { gjorda?: string[]; elever?: { id: string; namn: string }[]; narvaro?: boolean; franvaro?: Record<string, string[]>; vecka?: Record<string, { varde?: number; not?: string }>; skattning?: Record<string, Record<string, number>>; resultat?: Record<string, Record<string, string>>; avstamning?: { beslut?: string; not?: string }; utvardering?: { beslut?: string; not?: string } }
 export declare const passetsDag: (p: Pass) => string;
 export declare const SKALAN: readonly string[];
-export declare const skattningsfragan: (formaga?: string, grupp?: boolean) => string;
+export declare const skattningsfragan: (grupp?: boolean) => string;
 export declare const GRUPPEN: 'grupp';
 export declare function mittVeckan(plan: Plan): number | null;
 export interface SammanstallningVecka { nr: number; mandag: string; vecka: number; innehall: number; igen: boolean; pass: { nr: number; dag: string; datum: string; gjort: boolean }[]; gjorda: number; planerade: number; varit: number; installda: number; helgdagar: number; skattning?: number; not?: string }
-export interface SammanstallningElev { id: string; namn: string; skattningar: { nr: number; vecka: number; varde: number }[]; forsta: { nr: number; vecka: number; varde: number } | null; senaste: { nr: number; vecka: number; varde: number } | null; narvaro: number; resultat: Record<string, string> }
-export interface Sammanstallning { veckor: SammanstallningVecka[]; elever: SammanstallningElev[]; grupp: boolean; planerade: number; gjorda: number; veckomedel: number | null; varit: number; installda: number; helgdagar: number; slut: boolean; mitt: number | null; avstamning: { beslut?: string; not?: string } | null; utvardering: { beslut?: string; not?: string } | null }
+export interface SammanstallningElev { id: string; namn: string; skattningar: { nr: number; vecka: number; varde: number }[]; forsta: { nr: number; vecka: number; varde: number } | null; senaste: { nr: number; vecka: number; varde: number } | null; narvaro: number | null; resultat: Record<string, string> }
+export interface Sammanstallning { veckor: SammanstallningVecka[]; elever: SammanstallningElev[]; grupp: boolean; narvaro: boolean; planerade: number; gjorda: number; veckomedel: number | null; varit: number; installda: number; helgdagar: number; slut: boolean; mitt: number | null; avstamning: { beslut?: string; not?: string } | null; utvardering: { beslut?: string; not?: string } | null }
 export declare function sammanstallning(plan: Plan, f: Foljd, idag: string): Sammanstallning;
 export declare const riktning: (e: SammanstallningElev) => 'upp' | 'samma' | 'ned' | null;
 export declare const BESLUT: Readonly<Record<'fortsatt' | 'justera' | 'avsluta' | 'forlang' | 'byt', string>>;
 export declare const uppfoljningensTillfallen: (plan: Plan) => { nyckel: string; rad: number; datum: string; vecka: number | null }[];
-export declare function sammanstallningstext(info: { titel: string; formaga?: string; uppfoljning: { nar: string }[] }, plan: Plan, s: Sammanstallning): string;
-export declare function elevtext(info: { formaga?: string; uppfoljning: { nar: string }[] }, plan: Plan, s: Sammanstallning, id: string): string;
+export declare function sammanstallningstext(info: { titel: string; mal?: string; uppfoljning: { nar: string }[] }, plan: Plan, s: Sammanstallning): string;
+export declare function elevtext(info: { mal?: string; uppfoljning: { nar: string }[] }, plan: Plan, s: Sammanstallning, id: string): string;

@@ -8,6 +8,8 @@ import { bankAv, nivaFarger } from './bank';
 import { harTaFram, taFramAv } from './tafram';
 import { formateraDatum } from './innehall';
 import { harLathund } from './metod';
+import { metodensLektionskort } from './lektionskort';
+import { lektionskortetsPapper } from './lektionskortdata';
 import { site } from '../data/site';
 
 type Metod = CollectionEntry<'stodundervisning'>;
@@ -20,6 +22,18 @@ export const planbar = (d: Metod['data']) => !!d.uppfoljning?.rader.length && d.
 
 /** Planens adress under metoden. */
 export const planensAdress = (id: string) => `/stodundervisning/${id}/planera`;
+
+/**
+ * Insatsens mål, som läraren skattar eleverna mot varje vecka och kan skriva om med pennan (Niclas 2026-10-24: "Den kan få
+ * en färdig, vi har ju dessa i lektionskorten väl? Men ska kunna trycka och redigera det målet"): plan.mal i metodens fil,
+ * och annars målet på metodens lektionskort ("**Mål:** kunna …") när metoden har ett kort.
+ */
+export function planensMal(m: Metod): string | undefined {
+  if (m.data.plan?.mal) return m.data.plan.mal;
+  const kort = metodensLektionskort(m.data, m.id);
+  if (kort.length !== 1) return undefined;
+  return lektionskortetsPapper(kort[0]).ingress?.match(/\*\*Mål:\*\*\s*([^\n]+)/)?.[1]?.trim() || undefined;
+}
 
 export interface PlanBank {
   /** Ta fram-sidans led och adress. */
@@ -46,13 +60,12 @@ export interface PlanData {
   sida: string;
   uppdaterad?: string;
   uppdateradText?: string;
-  /** Metodens centrala förmåga som en fras efter "klarar att" (fältet plan.formaga), till skattningen. */
-  formaga?: string;
+  /** Insatsens mål (planensMal), som läraren kan skriva om. */
+  mal: string;
   tid?: string;
   period?: string;
   progression?: { enhet: string; rader: { vecka: string; led?: string; fokus: string; roll: string; taggar?: string[]; rubrik?: string; kort: string }[] };
   uppfoljning: { rader: { nar: string; vad: string; tid?: string }[] };
-  mal?: { text: string; punkter: string[] };
   checklista: string[];
   bank?: PlanBank;
   harLathund: boolean;
@@ -71,12 +84,11 @@ export async function planensData(m: Metod): Promise<PlanData> {
     adress: `${site.url.replace(/^https?:\/\//, '')}/stodundervisning/${m.id}`,
     sida: `/stodundervisning/${m.id}`,
     ...(uppdaterad ? { uppdaterad, uppdateradText: formateraDatum(d.uppdaterad!) } : {}),
-    ...(d.plan?.formaga ? { formaga: d.plan.formaga } : {}),
+    mal: planensMal(m) ?? '',
     tid: d.tid,
     period: d.period,
     ...(d.progression ? { progression: { enhet: d.progression.enhet, rader: d.progression.rader.map((r) => ({ ...r, kort: r.rubrik ?? postensRad(r.fokus, 80) })) } } : {}),
     uppfoljning: { rader: d.uppfoljning?.rader ?? [] },
-    ...(d.mal ? { mal: { text: d.mal.text, punkter: d.mal.punkter } } : {}),
     checklista: d.checklista?.punkter ?? [],
     ...(bank ? { bank } : {}),
     harLathund: harLathund(d),
@@ -105,10 +117,11 @@ async function planensBank(m: Metod): Promise<PlanBank | undefined> {
 
 /**
  * Felen som stoppar bygget för en metod som ska kunna planeras: standardens fel (tiden i varje rad i uppföljningen,
- * progressionens veckor, faktarutans tid och period), och en tagg i progressionen som banken inte har.
+ * progressionens veckor, faktarutans tid och period), en metod utan mål och en tagg i progressionen som banken inte har.
  */
 export async function insatsplanFel(m: Metod): Promise<string[]> {
   const fel = metodplan(m.data).fel;
+  if (!planensMal(m)) fel.push('Metoden har inget mål för planen: skriv plan.mal i metodens fil, eller ge metoden ett lektionskort med ett mål.');
   const taggar = (m.data.progression?.rader ?? []).flatMap((r) => r.taggar ?? []);
   if (taggar.length) {
     const bank = harTaFram(m, 'texter') || harTaFram(m, 'problem') ? await planensBank(m) : undefined;

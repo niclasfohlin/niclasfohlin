@@ -4,7 +4,7 @@
 // kopieras till dokumentationen har inga namn. Typsnittet är pdf:ens eget (Helvetica). Ett tecken som det inte har skrivs
 // utan sina accenter, så att utskriften aldrig går sönder (Niclas: "Ł, Ş och č är så ovanliga att du kan hoppa över dem").
 import type { PDFFont, PDFPage } from 'pdf-lib';
-import { datumText, isoVecka, SKALAN, uppfoljningensTillfallen, uppraknat, type Plan, type Sammanstallning, type SammanstallningElev } from '../lib/standard/index.js';
+import { datumText, GRUPPEN, isoVecka, SKALAN, uppfoljningensTillfallen, uppraknat, type Plan, type Sammanstallning, type SammanstallningElev } from '../lib/standard/index.js';
 
 const A4: [number, number] = [595.28, 841.89];
 const KANT = 50;
@@ -17,6 +17,8 @@ export interface PdfInfo {
   metod: string;
   grupp?: string;
   niva?: string;
+  /** Insatsens mål som mening, det som eleverna skattas mot. */
+  mal: string;
   fragan: string;
   uppfoljning: { nar: string }[];
   beslut: Record<string, string>;
@@ -57,8 +59,8 @@ async function dokument(titel: string) {
   };
   // En rubrik står aldrig ensam sist på en sida: den får plats med det som följer, behov punkter.
   const rubrik = (s: string, behov = 40) => { plats(behov + 30); y -= 10; text(s, { storlek: 13, fet: true, luft: 4 }); };
-  // Staplar vecka för vecka (1 till 5), med veckans nummer under, en markering vid avstämningen och, för en elev,
-  // närvaron i veckans pass som prickar: fylld var med, ring var inte med, streck passet blev inte av.
+  // Staplar vecka för vecka (1 till 5), med veckans nummer under, en markering vid avstämningen och, för en elev när
+  // läraren noterar närvaron, veckans pass som prickar: fylld var med, ring var inte med, streck inte bockat.
   const staplar = (varden: (number | undefined)[], etiketter: string[], o: { hojd?: number; mitt?: number | null; pass?: ('med' | 'borta' | 'inte')[][] } = {}) => {
     const h = o.hojd ?? 70, n = varden.length, bredd = A4[0] - 2 * KANT - 24;
     const steg = Math.min(46, bredd / Math.max(n, 1)), b = steg * 0.62;
@@ -110,6 +112,8 @@ const riktningsord = (e: SammanstallningElev) => {
   return `Från ${e.forsta!.varde} till ${e.senaste!.varde}, ${r}.`;
 };
 const periodText = (plan: Plan) => (plan.forstaPass && plan.sistaPass ? `${datumText(plan.forstaPass)} till ${datumText(plan.sistaPass)}` : '');
+// Passen som läraren har bockat: ett pass som inte är bockat är inte bockat (granskningarna 2026-10-24).
+const passText = (s: Sammanstallning) => (!s.gjorda ? 'Inga pass är bockade.' : s.slut ? `${s.gjorda} av ${s.planerade} pass är bockade som genomförda.` : `${s.gjorda} av de ${s.varit} pass som har varit är bockade. Planen har ${s.planerade} pass.`);
 
 /** Gruppens sammanställning som pdf. */
 export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, idag: string): Promise<Uint8Array> {
@@ -117,15 +121,16 @@ export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, id
   p.text('Sammanställning', { storlek: 20, fet: true, luft: 2 });
   p.text([info.metod, info.grupp, info.niva ? `nivån ${info.niva}` : ''].filter(Boolean).join(', '), { storlek: 13, fet: true, luft: 2 });
   p.text(`${periodText(plan)}. Utskriven ${datumText(idag)}.`, { farg: p.farg.svag, luft: 6 });
+  if (info.mal) { p.rubrik('Målet', 30); p.text(info.mal, { luft: 2 }); }
   p.rubrik('Passen');
-  p.text(s.slut ? `${s.gjorda} av ${s.planerade} pass blev av.` : `${s.gjorda} av de ${s.varit} pass som har varit blev av. Planen har ${s.planerade} pass.`, { luft: 2 });
-  p.text(s.veckor.map((v) => `Vecka ${v.innehall}${v.igen ? ' igen' : ''} (v. ${v.vecka}): ${v.gjorda} av ${v.planerade}`).join('. ') + '.', { farg: p.farg.svag, storlek: 9.5 });
+  p.text(passText(s), { luft: 2 });
+  if (s.gjorda) p.text(s.veckor.map((v) => `Vecka ${v.innehall}${v.igen ? ' igen' : ''} (v. ${v.vecka}): ${v.gjorda} av ${v.planerade}`).join('. ') + '.', { farg: p.farg.svag, storlek: 9.5 });
   p.rubrik(s.grupp ? 'Gruppen' : 'Eleverna', 110);
   p.text(`${info.fragan} 1 till 5: ${SKALAN.map((x, i) => `${i + 1} ${x.toLocaleLowerCase('sv')}`).join(', ')}.`, { farg: p.farg.svag, storlek: 9.5, luft: 4 });
   for (const e of s.elever) {
     p.text(e.namn, { fet: true, storlek: 11.5 });
     p.staplar(s.veckor.map((v) => e.skattningar.find((x) => x.nr === v.nr)?.varde), veckoetiketter(s), { hojd: 40, mitt: s.mitt });
-    p.text([riktningsord(e), !s.grupp && s.gjorda ? `Var med i ${e.narvaro} av ${s.gjorda} pass som blev av.` : '', ...uppfoljningensTillfallen(plan).filter((t) => e.resultat[t.nyckel]).map((t) => `${info.uppfoljning[t.rad]?.nar}, vecka ${isoVecka(t.datum).vecka}: ${e.resultat[t.nyckel]}.`)].filter(Boolean).join(' '), { luft: 8 });
+    p.text([riktningsord(e), e.id !== GRUPPEN && e.narvaro !== null && s.gjorda ? `Var med i ${e.narvaro} av ${s.gjorda} bockade pass.` : '', ...uppfoljningensTillfallen(plan).filter((t) => e.resultat[t.nyckel]).map((t) => `${info.uppfoljning[t.rad]?.nar}, vecka ${isoVecka(t.datum).vecka}: ${e.resultat[t.nyckel]}.`)].filter(Boolean).join(' '), { luft: 8 });
   }
   const veckorna = s.veckor.filter((v) => v.skattning);
   if (veckorna.length || s.veckor.some((v) => v.not)) {
@@ -147,14 +152,16 @@ export async function elevPdf(plan: Plan, s: Sammanstallning, id: string, info: 
   p.text(e.namn, { storlek: 20, fet: true, luft: 2 });
   p.text([info.metod, info.grupp, info.niva ? `nivån ${info.niva}` : ''].filter(Boolean).join(', '), { storlek: 13, fet: true, luft: 2 });
   p.text(`${periodText(plan)}. Utskriven ${datumText(idag)}.`, { farg: p.farg.svag, luft: 6 });
+  if (info.mal) { p.rubrik('Målet', 30); p.text(info.mal, { luft: 2 }); }
   p.rubrik('Vecka för vecka', 180);
   p.text(`${info.fragan} 1 till 5: ${SKALAN.map((x, i) => `${i + 1} ${x.toLocaleLowerCase('sv')}`).join(', ')}.`, { farg: p.farg.svag, storlek: 9.5, luft: 6 });
-  const pass = s.veckor.map((v) => v.pass.map((x) => (!x.gjort ? 'inte' : (franvaro[x.dag] ?? []).includes(id) ? 'borta' : 'med') as 'med' | 'borta' | 'inte'));
+  const narvaro = s.narvaro && e.narvaro !== null && s.gjorda > 0;
+  const pass = narvaro ? s.veckor.map((v) => v.pass.map((x) => (!x.gjort ? 'inte' : (franvaro[x.dag] ?? []).includes(id) ? 'borta' : 'med') as 'med' | 'borta' | 'inte')) : undefined;
   p.staplar(s.veckor.map((v) => e.skattningar.find((x) => x.nr === v.nr)?.varde), veckoetiketter(s), { hojd: 110, mitt: s.mitt, pass });
-  p.text('Prickarna under veckan är passen: fylld var med, ring var inte med, streck passet blev inte av eller är inte bockat.', { farg: p.farg.svag, storlek: 8.5, luft: 6 });
+  if (narvaro) p.text('Prickarna under veckan är passen: fylld var med, ring var inte med, streck inte bockat.', { farg: p.farg.svag, storlek: 8.5, luft: 6 });
   p.rubrik('Utvecklingen');
   p.text(riktningsord(e));
-  if (s.gjorda) p.text(`Var med i ${e.narvaro} av ${s.gjorda} pass som blev av.`);
+  if (narvaro) p.text(`Var med i ${e.narvaro} av ${s.gjorda} bockade pass.`);
   for (const t of uppfoljningensTillfallen(plan).filter((x) => e.resultat[x.nyckel])) p.text(`${info.uppfoljning[t.rad]?.nar}, vecka ${isoVecka(t.datum).vecka}: ${e.resultat[t.nyckel]}.`);
   if (s.avstamning?.beslut) p.text(`Gruppens avstämning mitt i insatsen: ${info.beslut[s.avstamning.beslut]}.`);
   if (s.utvardering?.beslut) p.text(`Utvärdering efter insatsen: ${info.beslut[s.utvardering.beslut]}.`);

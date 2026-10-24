@@ -2787,9 +2787,11 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
 
 /* ---------- Planera insatsen (K-489) ----------
    Sidan /stodundervisning/<id>/planera (Planera.astro, src/scripts/planera.ts), raden Din insats på metodens sida och
-   Dina insatser i metodbanken (src/scripts/insatser.ts). Telefonen först: veckan överst, sedan planen och valen; från
-   64 rem står valen bredvid planen. Etiketterna är små versaler som i faktarutan, och nivåerna har sina färger. */
+   Dina insatser i metodbanken (src/scripts/insatser.ts). Telefonen först: veckan överst, sedan planen med målet och
+   valen, sammanställningen och planen på en annan dator; från 64 rem står planen i en spalt till höger om veckan.
+   Etiketterna är små versaler som i faktarutan, nivåerna har sina färger, och rutor som fälls ut har sajtens vinkel. */
 .pl-huvud .ingress { max-width: var(--matt-text); }
+.pl-har-plan .pl-huvud .ingress { display: none; }
 .pl-etikett { display: block; font: 700 0.78rem/1.3 var(--typsnitt-ui); letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); margin: 0 0 0.35rem; }
 .pl-hjalp { font: 0.88rem/1.45 var(--typsnitt-ui); color: var(--farg-text-svag); margin: 0.35rem 0 0; }
 .pl-varning { color: #7a5200; }
@@ -2803,41 +2805,85 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
 .pl-grupper { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1rem 0; }
 .pl-grupper[hidden] { display: none; }
 .pl-grupper .pl-etikett { width: 100%; margin: 0; }
+.pl-ny { border-style: dashed; color: var(--farg-accent); }
 .pl-fil { display: contents; }
+/* Rutorna som fälls ut har sajtens vinkel till höger, nedåt när rutan är hopfälld och uppåt när den är utfälld. */
+.pl-fallut > summary, .pl-gang > summary, .pl-andra > summary, .pl-avslutade summary { list-style: none; }
+.pl-fallut > summary::-webkit-details-marker, .pl-gang > summary::-webkit-details-marker, .pl-andra > summary::-webkit-details-marker, .pl-avslutade summary::-webkit-details-marker { display: none; }
+.pl-fallut > summary::after, .pl-gang > summary::after, .pl-andra > summary::after, .pl-avslutade summary::after { content: ''; flex: none; margin-left: auto; width: 0.5rem; height: 0.5rem; border-right: 2px solid var(--farg-accent); border-bottom: 2px solid var(--farg-accent); transform: translateY(-0.15rem) rotate(45deg); }
+.pl-fallut[open] > summary::after, .pl-gang[open] > summary::after, .pl-andra[open] > summary::after, .pl-avslutade details[open] summary::after { transform: translateY(0.1rem) rotate(-135deg); }
+
+/* Målet med pennan (Niclas 2026-10-24: "en liten penna symbol") */
+.pl-mal { display: flex; align-items: flex-start; gap: 0.4rem; margin: 0.7rem 0; padding: 0.6rem 0.4rem 0.6rem 0.8rem; background: var(--farg-yta); border: 1px solid var(--farg-kant); border-radius: 6px; }
+.pl-maltext { flex: 1; min-width: 0; margin: 0; font-weight: 600; line-height: 1.4; }
+.pl-maltext .pl-etikett { margin-bottom: 0.15rem; }
+.pl-penna { flex: none; width: 2.75rem; height: 2.75rem; margin: -0.35rem 0; border: 0; border-radius: 50%; background: none; color: var(--farg-accent); display: inline-grid; place-items: center; cursor: pointer; padding: 0; }
+.pl-penna:hover { background: var(--farg-accent-ljus); }
+.pl-penna:focus-visible { outline: 3px solid var(--farg-accent); outline-offset: 1px; }
+.pl-penna svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.pl-mal.andras { display: block; padding: 0.7rem 0.8rem; }
+.pl-malfalt { max-width: none; }
+.pl-samman .pl-mal { background: var(--farg-ton-svag); }
 
 /* Valen */
 .pl-andra { margin: 1.25rem 0; }
-.pl-andra > summary { font: 600 1rem var(--typsnitt-ui); color: var(--farg-accent); cursor: pointer; min-height: 2.75rem; display: flex; align-items: center; }
+.pl-andra > summary { font: 600 1rem var(--typsnitt-ui); color: var(--farg-accent); cursor: pointer; min-height: 2.75rem; display: flex; align-items: center; gap: 0.6rem; }
 .plan:not(.pl-har-plan) .pl-andra > summary { display: none; }
 .pl-val { font-family: var(--typsnitt-ui); background: var(--farg-yta); border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 1rem 1.1rem 1.1rem; }
 .pl-val h2 { font-size: 1.05rem; margin: 0 0 0.9rem; }
+.pl-val > .pl-varning { margin: -0.4rem 0 0.9rem; }
+.pl-val > .pl-varning[hidden] { display: none; }
 .pl-rad { border: 0; padding: 0; margin: 0 0 1.1rem; min-width: 0; }
 .pl-rad:last-child { margin-bottom: 0; }
 .pl-dagar { display: flex; max-width: 24rem; border: 1.5px solid var(--farg-accent); border-radius: 6px; overflow: hidden; }
 .pl-dagar button { flex: 1; min-width: 0; min-height: 2.75rem; border: 0; border-left: 1px solid var(--farg-kant); background: var(--farg-yta); color: var(--farg-accent); font: 600 0.95rem var(--typsnitt-ui); cursor: pointer; }
 .pl-dagar button:first-child { border-left: 0; }
 .pl-dagar button[aria-pressed="true"] { background: var(--farg-accent); color: #fff; }
+/* Tiden: listor med klockslag (Niclas 2026-10-24: "en väljare som bara klarar korrekta tider"). */
+.pl-tidrad { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0.5rem 0.8rem; margin: 0 0 0.5rem; }
+.pl-tidrad[hidden], .pl-tiddagar[hidden] { display: none; }
+.pl-tidval { display: grid; gap: 0.15rem; font-size: 0.85rem; color: var(--farg-text-svag); }
+.pl-tid { width: 7.2rem; padding-right: 0.4rem; }
+.pl-tid:disabled { color: var(--farg-text-svag); background: var(--farg-ton-svag); }
+.pl-tiddag { width: 2.6rem; font-weight: 700; align-self: center; padding-top: 1.1rem; }
+.pl-tider p { margin: 0; }
 .pl-langd { flex-wrap: wrap; }
 .pl-nivaer { display: grid; grid-template-columns: repeat(auto-fit, minmax(5.4rem, 1fr)); max-width: 24rem; }
 .pl-nivaer .sk-niva { min-width: 0; font-size: 1rem; padding-right: 0.5rem; }
 .pl-nivaer .sk-niva[aria-pressed="true"] { background: color-mix(in srgb, var(--niva) 78%, #000); border-color: color-mix(in srgb, var(--niva) 78%, #000); color: #fff; }
-.pl-lov { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0; }
+.pl-lovveckor { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.pl-lovchip { flex-direction: column; justify-content: center; gap: 0; min-height: 2.9rem; padding: 0.2rem 0.65rem; font-size: 0.88rem; line-height: 1.15; border-radius: 8px; }
+.pl-lovchip small { font-size: 0.72rem; font-weight: 400; color: var(--farg-text-svag); }
+.pl-lovchip[aria-pressed="true"] { background: var(--farg-ton); border-color: var(--farg-text-svag); color: var(--farg-text); text-decoration: line-through; }
+.pl-kryss { display: flex; align-items: center; gap: 0.6rem; min-height: 2.75rem; font-weight: 600; cursor: pointer; }
+.pl-kryss input { width: 1.35rem; height: 1.35rem; accent-color: var(--farg-accent); }
+.pl-elevruta { margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px solid var(--farg-kant); }
+.pl-elevruta[hidden] { display: none; }
+.pl-narvaroval { margin-top: 0.4rem; font-weight: 500; }
+.pl-textfalt { min-height: 6rem; padding: 0.6rem 0.8rem; line-height: 1.4; resize: vertical; }
+.pl-brett { max-width: none; }
 
 /* Planen */
 .pl-summa { font-family: var(--typsnitt-ui); background: var(--farg-ton); border-radius: var(--radie); padding: 1rem 1.1rem; margin: 0 0 1rem; }
 .pl-summa h2 { font-size: 1.05rem; margin: 0 0 0.4rem; }
+.pl-summa h2:focus { outline: none; }
 .pl-summa p { margin: 0 0 0.3rem; }
 .pl-summa .pl-tal { font-size: 1.15rem; font-weight: 700; }
-.pl-gruppnamn { color: var(--farg-text-svag); }
 .pl-knappar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.9rem 0 0; }
 .pl-knappar .knapp { flex: 1 1 14rem; justify-content: center; }
 .pl-knappar .knapp[hidden] { display: none; }
 .pl-sparad { font-size: 0.88rem; color: var(--farg-text-svag); margin: 0.6rem 0 0; }
+.pl-ap[hidden] { display: none; }
+.pl-ap { font-family: var(--typsnitt-ui); border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0.9rem 1.1rem; margin: 0 0 1rem; }
+.pl-ap h3 { font-size: 1.05rem; margin: 0; }
+.pl-ap .pl-hjalp { margin: 0.2rem 0 0.6rem; }
+.pl-aptext { max-width: none; height: 10.5rem; overflow-y: auto; font-size: 0.92rem; line-height: 1.45; background: var(--farg-ton-svag); resize: vertical; }
 .pl-veckor { list-style: none; padding: 0; margin: 0 0 1rem; font-family: var(--typsnitt-ui); border-top: 1px solid var(--farg-kant); }
 .pl-veckor > li { border-bottom: 1px solid var(--farg-kant); border-left: 4px solid transparent; }
-.pl-veckoknapp, .pl-veckor > li.pl-lovvecka, .pl-veckor > li.efter { display: grid; grid-template-columns: 5.4rem minmax(0, 1fr); gap: 0.15rem 0.9rem; width: 100%; padding: 0.7rem 0.4rem 0.7rem 0.6rem; box-sizing: border-box; text-align: left; }
-.pl-veckoknapp { border: 0; background: none; color: inherit; font: inherit; cursor: pointer; }
-.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
+.pl-veckoknapp, .pl-veckor > li.pl-lovvecka { display: grid; grid-template-columns: 5.4rem minmax(0, 1fr); gap: 0.15rem 0.9rem; width: 100%; padding: 0.7rem 0.4rem 0.7rem 0.6rem; box-sizing: border-box; text-align: left; }
+.pl-veckoknapp { border: 0; background: none; color: inherit; font: inherit; }
+button.pl-veckoknapp { cursor: pointer; }
+button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 .pl-veckor .pl-v { font-weight: 700; }
 .pl-veckor .pl-d { grid-column: 1; font-size: 0.85rem; color: var(--farg-text-svag); }
 .pl-veckor .pl-innehall { grid-column: 2; grid-row: 1 / span 2; min-width: 0; }
@@ -2847,8 +2893,9 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
 .pl-markering { display: inline-block; font-size: 0.78rem; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 999px; background: #fff3d6; color: #6b4800; }
 .pl-markering.bort { background: var(--farg-ton); color: var(--farg-text-svag); }
 .pl-markering.nu { background: var(--farg-accent); color: #fff; }
+.pl-markering.stam { background: var(--farg-skrivning-ljus); color: var(--farg-skrivning); }
 .pl-veckor > li.nu { border-left-color: var(--farg-accent); background: var(--farg-accent-ljus); }
-.pl-veckor > li.pl-lovvecka, .pl-veckor > li.efter { background: var(--farg-ton-svag); }
+.pl-veckor > li.pl-lovvecka, .pl-veckor > li.efter:not(.nu) { background: var(--farg-ton-svag); }
 .pl-veckor > li.pl-lovvecka .pl-fokus { font-weight: 400; color: var(--farg-text-svag); }
 
 /* Veckan */
@@ -2859,8 +2906,10 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
 .pl-nasta { background: var(--farg-accent-ljus); border-left: 4px solid var(--farg-accent); border-radius: 6px; padding: 0.85rem 1rem; margin: 1rem 0 1.25rem; }
 .pl-nasta .pl-etikett { color: var(--farg-accent); margin-bottom: 0.2rem; }
 .pl-nar { font-size: 1.15rem; font-weight: 700; margin: 0 0 0.6rem; }
+.pl-nasta p { margin: 0 0 0.5rem; }
 .pl-nasta .metod-centrala { margin: 0; }
-.pl-fokusruta { background: var(--farg-lasning-ljus); border-left: 4px solid var(--farg-lasning); border-radius: 6px; padding: 0.85rem 1rem; margin: 0 0 1.25rem; }
+.pl-nasta .pl-fallut { margin: 0.8rem 0 0; background: var(--farg-yta); }
+.pl-fokusruta { background: var(--farg-lasning-ljus); border-left: 4px solid var(--farg-lasning); border-radius: 6px; padding: 0.85rem 1rem; margin: 1.25rem 0; }
 .pl-fokusruta p { margin: 0 0 0.7rem; }
 .pl-fokusruta p:last-child { margin-bottom: 0; }
 .pl-led { font-weight: 700; }
@@ -2891,11 +2940,108 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
 .pl-flytta[hidden] { display: none; }
 .pl-flytta .pl-falt { margin-bottom: 0.7rem; }
 .pl-fallut { border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0.6rem 1rem; margin: 1.25rem 0; }
-.pl-fallut summary { font-weight: 600; cursor: pointer; min-height: 2.2rem; display: flex; align-items: center; }
+.pl-fallut > summary { font-weight: 600; cursor: pointer; min-height: 2.2rem; display: flex; align-items: center; gap: 0.75rem; }
+.pl-veckans > summary { line-height: 1.35; }
 .pl-checklista { margin: 0.3rem 0 0.2rem; padding-left: 1.2rem; }
 .pl-checklista li { margin: 0.25rem 0; }
 .pl-bladdra { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; margin: 1.5rem 0 0; }
-.pl-ta-bort { margin: 0.5rem 0 0; }
+.pl-foljtips { margin-top: 1.25rem; }
+
+/* Veckan när läraren följer insatsen */
+.pl-passlista .pl-narvaro { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 0.35rem; padding: 0 0 0.2rem; }
+.pl-elev { min-height: 2.4rem; }
+.pl-elev[aria-pressed="false"] { text-decoration: line-through; color: var(--farg-text-svag); background: var(--farg-ton); }
+.pl-elev[aria-pressed="true"] { background: var(--farg-lasning-ljus); border-color: var(--farg-lasning); color: var(--farg-text); }
+.pl-fraga { font-weight: 600; margin: 0 0 0.4rem; }
+.pl-skalnamn { list-style: none; display: flex; flex-wrap: wrap; gap: 0.15rem 0.9rem; padding: 0; margin: 0 0 0.6rem; font-size: 0.85rem; color: var(--farg-text-svag); }
+.pl-skalnamn b { color: var(--farg-text); }
+.pl-skattning { list-style: none; padding: 0; margin: 0 0 0.6rem; }
+.pl-skattning li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.4rem 0.8rem; padding: 0.45rem 0; border-bottom: 1px solid var(--farg-kant); }
+.pl-elevnamn { font-weight: 700; }
+.pl-skala { display: flex; gap: 0.3rem; }
+.pl-skalsteg { width: 2.75rem; height: 2.75rem; border: 1.5px solid var(--farg-accent); border-radius: 6px; background: var(--farg-yta); color: var(--farg-accent); font: 700 1rem var(--typsnitt-ui); cursor: pointer; }
+.pl-skalsteg[aria-pressed="true"] { background: var(--farg-accent); color: #fff; }
+/* Veckans gång för gruppen är en annan fråga än skattningen, och ser därför annorlunda ut: runda och grå. */
+.pl-gang { margin: 0.6rem 0 0; }
+.pl-gang > summary { font-weight: 600; color: var(--farg-accent); cursor: pointer; min-height: 2.5rem; display: flex; align-items: center; gap: 0.75rem; }
+.pl-gang .pl-skala { margin: 0.3rem 0; }
+.pl-gang .pl-skalsteg { border-radius: 50%; border-color: #9aa5b1; color: var(--farg-text); }
+.pl-gang .pl-skalsteg[aria-pressed="true"] { background: var(--farg-text-svag); border-color: var(--farg-text-svag); color: #fff; }
+.pl-stam { background: var(--farg-skrivning-ljus); border-left: 4px solid var(--farg-skrivning); border-radius: 6px; padding: 0.85rem 1rem; margin: 1.25rem 0; }
+.pl-stam h3 { font-size: 1.05rem; margin: 0 0 0.4rem; }
+.pl-stam p { margin: 0 0 0.5rem; }
+.pl-stam .pl-mal { background: rgba(255, 255, 255, 0.7); }
+.pl-riktningar { list-style: none; padding: 0; margin: 0 0 0.7rem; }
+.pl-riktningar li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.2rem 0.8rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(0, 0, 0, 0.06); }
+.pl-riktning { color: var(--farg-text-svag); text-align: right; }
+.pl-riktning.upp { color: var(--farg-lasning); font-weight: 600; }
+.pl-riktning.ned { color: #b42318; font-weight: 600; }
+.pl-res-kort { display: block; font-weight: 400; font-size: 0.85rem; color: var(--farg-text-svag); }
+.pl-beslut { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 0.6rem; }
+.pl-beslut .knapp[aria-pressed="true"] { background: var(--farg-accent); color: #fff; }
+.pl-forlang { margin: 0 0 0.8rem; }
+.pl-forlang .sk-segment { flex-wrap: wrap; }
+.pl-resultat { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: 0.4rem 0.8rem; margin: 0.5rem 0 0; }
+.pl-resultat .pl-hjalp { grid-column: 1 / -1; margin: 0; }
+.pl-resultat label { display: grid; gap: 0.15rem; font-size: 0.88rem; font-weight: 600; }
+.pl-resultat .pl-falt { min-height: 2.4rem; }
+
+/* Sammanställningen */
+.pl-samman { font-family: var(--typsnitt-ui); border-top: 2px solid var(--farg-kant); margin: 1.5rem 0 0; padding: 1rem 0 0; }
+.pl-samman[hidden] { display: none; }
+.pl-samman h2 { font-size: 1.3rem; margin: 0 0 0.5rem; }
+.pl-samman h2:focus { outline: none; }
+.pl-rutor { display: inline-flex; gap: 3px; vertical-align: middle; margin-left: 0.4rem; }
+.pl-ruta { width: 0.8rem; height: 0.8rem; border-radius: 2px; border: 1.5px solid #c9d1da; background: var(--farg-yta); }
+.pl-ruta.varit { border-color: var(--farg-text-svag); }
+.pl-ruta.gjord { border-color: var(--farg-lasning); background: var(--farg-lasning); }
+.pl-elevlista { display: grid; gap: 0.5rem; }
+.pl-elevdetalj { border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0 0.9rem; }
+.pl-elevdetalj > summary { display: grid; grid-template-columns: minmax(5rem, 1fr) auto 1rem; grid-template-areas: "namn graf vinkel" "riktning riktning riktning"; align-items: center; gap: 0.15rem 0.8rem; padding: 0.6rem 0; cursor: pointer; list-style: none; }
+.pl-elevdetalj > summary::-webkit-details-marker { display: none; }
+.pl-elevdetalj > summary::after { content: ''; grid-area: vinkel; justify-self: end; width: 0.5rem; height: 0.5rem; border-right: 2px solid var(--farg-accent); border-bottom: 2px solid var(--farg-accent); transform: translateY(-0.15rem) rotate(45deg); }
+.pl-elevdetalj[open] > summary::after { transform: translateY(0.1rem) rotate(-135deg); }
+.pl-elevdetalj > summary .pl-elevnamn { grid-area: namn; }
+.pl-elevdetalj > summary .pl-graf { grid-area: graf; }
+.pl-elevdetalj > summary .pl-riktning { grid-area: riktning; font-size: 0.88rem; text-align: left; }
+.pl-elevdetalj > :not(summary) { margin: 0 0 0.6rem; }
+.pl-grafruta { overflow-x: auto; padding: 0.3rem 0; }
+.pl-graf { display: block; }
+.pl-graf .pl-stapel { fill: var(--farg-accent); }
+.pl-graf .pl-stapel-tom { fill: #c9d1da; }
+.pl-graf .pl-linje { stroke: var(--farg-kant); stroke-width: 1; }
+.pl-graf .pl-axel, .pl-graf .pl-stapeletikett { font: 10px var(--typsnitt-ui); fill: var(--farg-text-svag); }
+.pl-graf .pl-stapeletikett, .pl-graf .pl-stapelvarde { text-anchor: middle; }
+.pl-graf .pl-stapelvarde { font: 700 11px var(--typsnitt-ui); fill: var(--farg-text); }
+.pl-graf .pl-prick { fill: var(--farg-lasning); }
+.pl-graf .pl-prick.borta { fill: none; stroke: var(--farg-lasning); stroke-width: 1.2; }
+.pl-graf .pl-mittfalt { fill: var(--farg-skrivning-ljus); }
+.pl-graf .pl-mitttext { text-anchor: middle; fill: var(--farg-skrivning); font-weight: 600; }
+.pl-noter { list-style: none; padding: 0; margin: 0.4rem 0 0; }
+.pl-noter li { margin: 0 0 0.6rem; }
+.pl-res { margin: 0.3rem 0 0.6rem; padding-left: 1.1rem; }
+.pl-samman .pl-knappar .knapp { flex: 0 1 auto; }
+
+/* Planen på en annan dator, och Ta bort planen */
+.pl-kopia { font-family: var(--typsnitt-ui); border-top: 2px solid var(--farg-kant); margin: 1.5rem 0 0; padding: 1rem 0 0; }
+.pl-kopia h2 { font-size: 1.05rem; margin: 0 0 0.4rem; }
+.pl-kopia .pl-hjalp { margin: 0; }
+.pl-paminn { color: #6b4800; background: #fff3d6; border-radius: 6px; padding: 0.5rem 0.7rem; }
+.pl-filknapp { position: relative; cursor: pointer; }
+.pl-filknapp:focus-within { outline: 3px solid var(--farg-accent); outline-offset: 2px; }
+.pl-ta-bort { margin: 0.75rem 0 0; }
+.pl-fraga-forst { border: 1.5px solid #b42318; border-radius: var(--radie); padding: 0.7rem 0.9rem; margin: 0.5rem 0; background: #fff5f4; font-family: var(--typsnitt-ui); }
+.pl-fraga-forst p { margin: 0 0 0.4rem; }
+.knapp.pl-farlig { background: #b42318; }
+.knapp.pl-farlig:hover { background: #8f1c13; }
+
+/* Beskedet efter ett tryck, längst ned på skärmen där läraren ser det, med Ångra när något går att ångra. */
+.pl-toast { position: fixed; left: 50%; bottom: max(1rem, env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 20; display: flex; align-items: center; gap: 0.4rem 0.8rem; width: min(36rem, calc(100% - 2rem)); box-sizing: border-box; padding: 0.7rem 0.6rem 0.7rem 1rem; border-radius: 8px; background: #1d2731; color: #fff; font: 0.95rem/1.4 var(--typsnitt-ui); box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25); }
+.pl-toast[hidden] { display: none; }
+.pl-toast p { flex: 1; min-width: 0; margin: 0; }
+.pl-toast-knapp { flex: none; min-height: 2.5rem; padding: 0 0.8rem; border: 1.5px solid #fff; border-radius: 6px; background: none; color: #fff; font: 700 0.92rem var(--typsnitt-ui); cursor: pointer; }
+.pl-toast-stang { flex: none; width: 2.5rem; height: 2.5rem; border: 0; border-radius: 50%; background: none; color: #fff; font-size: 1.4rem; line-height: 1; cursor: pointer; }
+.pl-toast button:focus-visible { outline: 3px solid #9cc7ff; outline-offset: 1px; }
 
 /* Din insats på metodens sida och Dina insatser i metodbanken */
 .pl-din { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.4rem 0.9rem; margin: 1rem 0 0; padding: 0.7rem 1rem; background: var(--farg-accent-ljus); border-left: 4px solid var(--farg-accent); border-radius: 6px; font-family: var(--typsnitt-ui); }
@@ -2913,109 +3059,23 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
 .pl-insatser .pl-metod { font-weight: 700; }
 .pl-insatser .pl-om { grid-column: 1; font-size: 0.88rem; color: var(--farg-text-svag); }
 .pl-insatser .pl-pil { grid-column: 2; grid-row: 1 / span 2; align-self: center; color: var(--farg-accent); font-weight: 600; }
-
-/* Planera insatsen: lovet, Följ insatsen, skattningen, avstämningen, sammanställningen och kopian (K-489). */
-.pl-lovveckor { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-.pl-lovchip { min-height: 2.4rem; padding: 0.2rem 0.7rem; font-size: 0.88rem; }
-.pl-lovchip[aria-pressed="true"] { background: var(--farg-ton); border-color: var(--farg-text-svag); color: var(--farg-text); text-decoration: line-through; }
-.pl-kryss { display: flex; align-items: center; gap: 0.6rem; min-height: 2.75rem; font-weight: 600; cursor: pointer; }
-.pl-kryss input { width: 1.35rem; height: 1.35rem; accent-color: var(--farg-accent); }
-.pl-elevruta { margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px solid var(--farg-kant); }
-.pl-elevruta[hidden] { display: none; }
-.pl-textfalt { min-height: 6rem; padding: 0.6rem 0.8rem; line-height: 1.4; resize: vertical; }
-.pl-brett { max-width: none; }
-.pl-fraga-forst { border: 1.5px solid #b42318; border-radius: var(--radie); padding: 0.7rem 0.9rem; margin: 0.5rem 0; background: #fff5f4; font-family: var(--typsnitt-ui); }
-.pl-fraga-forst p { margin: 0 0 0.4rem; }
-.knapp.pl-farlig { background: #b42318; }
-.knapp.pl-farlig:hover { background: #8f1c13; }
-.pl-kopia { margin: 1rem 0 0; font-family: var(--typsnitt-ui); }
-.pl-kopia .pl-hjalp { margin: 0; }
-.pl-paminn { color: #6b4800; background: #fff3d6; border-radius: 6px; padding: 0.5rem 0.7rem; }
-.pl-filknapp { position: relative; cursor: pointer; }
-.pl-filknapp:focus-within { outline: 3px solid var(--farg-accent); outline-offset: 2px; }
-.pl-markering.stam { background: var(--farg-skrivning-ljus); color: var(--farg-skrivning); }
-
-/* Veckan när läraren följer insatsen */
-.pl-passlista .pl-narvaro { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 0.35rem; padding: 0 0 0.2rem; }
-.pl-elev { min-height: 2.4rem; }
-.pl-elev[aria-pressed="false"] { text-decoration: line-through; color: var(--farg-text-svag); background: var(--farg-ton); }
-.pl-elev[aria-pressed="true"] { background: var(--farg-lasning-ljus); border-color: var(--farg-lasning); color: var(--farg-text); }
-.pl-fraga { font-weight: 600; margin: 0 0 0.4rem; }
-.pl-skalnamn { list-style: none; display: flex; flex-wrap: wrap; gap: 0.15rem 0.9rem; padding: 0; margin: 0 0 0.6rem; font-size: 0.85rem; color: var(--farg-text-svag); }
-.pl-skalnamn b { color: var(--farg-text); }
-.pl-skattning { list-style: none; padding: 0; margin: 0 0 0.6rem; }
-.pl-skattning li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.4rem 0.8rem; padding: 0.45rem 0; border-bottom: 1px solid var(--farg-kant); }
-.pl-elevnamn { font-weight: 700; }
-.pl-skala { display: flex; gap: 0.3rem; }
-.pl-skalsteg { width: 2.75rem; height: 2.75rem; border: 1.5px solid var(--farg-accent); border-radius: 6px; background: var(--farg-yta); color: var(--farg-accent); font: 700 1rem var(--typsnitt-ui); cursor: pointer; }
-.pl-skalsteg[aria-pressed="true"] { background: var(--farg-accent); color: #fff; }
-.pl-gang { margin: 0.6rem 0 0; }
-.pl-gang summary { font-weight: 600; color: var(--farg-accent); cursor: pointer; min-height: 2.5rem; display: flex; align-items: center; }
-.pl-gang .pl-skala { margin: 0.3rem 0; }
-.pl-stam { background: var(--farg-skrivning-ljus); border-left: 4px solid var(--farg-skrivning); border-radius: 6px; padding: 0.85rem 1rem; margin: 1.25rem 0; }
-.pl-stam h3 { font-size: 1.05rem; margin: 0 0 0.4rem; }
-.pl-stam p { margin: 0 0 0.5rem; }
-.pl-riktningar { list-style: none; padding: 0; margin: 0 0 0.7rem; }
-.pl-riktningar li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.2rem 0.8rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(0, 0, 0, 0.06); }
-.pl-riktning { color: var(--farg-text-svag); }
-.pl-riktning.upp { color: var(--farg-lasning); font-weight: 600; }
-.pl-riktning.ned { color: #b42318; font-weight: 600; }
-.pl-beslut { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 0.6rem; }
-.pl-beslut .knapp[aria-pressed="true"] { background: var(--farg-accent); color: #fff; }
-.pl-resultat { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: 0.4rem 0.8rem; margin: 0.5rem 0 0; }
-.pl-resultat label { display: grid; gap: 0.15rem; font-size: 0.88rem; font-weight: 600; }
-.pl-resultat .pl-falt { min-height: 2.4rem; }
-.pl-foljtips { margin-top: 1.25rem; }
-
-/* Sammanställningen */
-.pl-samman { font-family: var(--typsnitt-ui); border-top: 2px solid var(--farg-kant); margin: 1.5rem 0 0; padding: 1rem 0 0; }
-.pl-samman[hidden] { display: none; }
-.pl-samman h2 { font-size: 1.3rem; margin: 0 0 0.5rem; }
-.pl-veckorader { list-style: none; padding: 0; margin: 0.4rem 0 0; display: grid; gap: 0.25rem; }
-.pl-veckorader li { display: grid; grid-template-columns: 6.5rem auto 1fr; align-items: center; gap: 0.6rem; font-size: 0.9rem; }
-.pl-veckorader .pl-d { color: var(--farg-text-svag); }
-.pl-rutor { display: inline-flex; gap: 3px; vertical-align: middle; margin-left: 0.4rem; }
-.pl-veckorader .pl-rutor { margin-left: 0; }
-.pl-ruta { width: 0.8rem; height: 0.8rem; border-radius: 2px; border: 1.5px solid #c9d1da; background: var(--farg-yta); }
-.pl-ruta.varit { border-color: var(--farg-text-svag); }
-.pl-ruta.gjord { border-color: var(--farg-lasning); background: var(--farg-lasning); }
-.pl-elevlista { display: grid; gap: 0.5rem; }
-.pl-elevdetalj { border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0 0.9rem; }
-.pl-elevdetalj > summary { display: grid; grid-template-columns: minmax(5rem, 1fr) auto; grid-template-areas: "namn graf" "riktning riktning"; align-items: center; gap: 0.15rem 0.8rem; padding: 0.6rem 0; cursor: pointer; list-style: none; }
-.pl-elevdetalj > summary::-webkit-details-marker { display: none; }
-.pl-elevdetalj > summary .pl-elevnamn { grid-area: namn; }
-.pl-elevdetalj > summary .pl-graf { grid-area: graf; }
-.pl-elevdetalj > summary .pl-riktning { grid-area: riktning; font-size: 0.88rem; }
-.pl-elevdetalj > summary .pl-elevnamn::after { content: ' ›'; color: var(--farg-accent); }
-.pl-elevdetalj[open] > summary .pl-elevnamn::after { content: ' ⌄'; }
-.pl-elevdetalj > :not(summary) { margin: 0 0 0.6rem; }
-.pl-grafruta { overflow-x: auto; padding: 0.3rem 0; }
-.pl-graf { display: block; }
-.pl-graf .pl-stapel { fill: var(--farg-accent); }
-.pl-graf .pl-stapel-tom { fill: #c9d1da; }
-.pl-graf .pl-linje { stroke: var(--farg-kant); stroke-width: 1; }
-.pl-graf .pl-axel, .pl-graf .pl-stapeletikett { font: 10px var(--typsnitt-ui); fill: var(--farg-text-svag); }
-.pl-graf .pl-stapeletikett, .pl-graf .pl-stapelvarde { text-anchor: middle; }
-.pl-graf .pl-stapelvarde { font: 700 11px var(--typsnitt-ui); fill: var(--farg-text); }
-.pl-graf .pl-prick { fill: var(--farg-lasning); }
-.pl-graf .pl-prick.borta { fill: none; stroke: var(--farg-lasning); stroke-width: 1.2; }
-.pl-graf .pl-mittfalt { fill: var(--farg-skrivning-ljus); }
-.pl-graf .pl-mitttext { text-anchor: middle; fill: var(--farg-skrivning); font-weight: 600; }
-.pl-veckans summary { line-height: 1.35; }
-.pl-noter { list-style: none; padding: 0; margin: 0.4rem 0 0; }
-.pl-noter li { margin: 0 0 0.6rem; }
-.pl-res { margin: 0.3rem 0 0.6rem; padding-left: 1.1rem; }
-.pl-samman .pl-knappar .knapp { flex: 0 1 auto; }
+.pl-avslutade[hidden] { display: none; }
+.pl-avslutade summary { display: flex; align-items: center; gap: 0.75rem; min-height: 2.75rem; padding: 0 1rem; border-top: 1px solid var(--farg-kant); font-weight: 600; color: var(--farg-text-svag); cursor: pointer; }
 
 @media (min-width: 64rem) {
-  .pl-tva { display: grid; grid-template-columns: 22rem minmax(0, 1fr); gap: 2rem; align-items: start; }
-  .pl-tva .pl-andra { margin-top: 0; }
-  .plan:not(.pl-har-plan) .pl-tva .pl-val { position: sticky; top: 1rem; }
-  .pl-veckoknapp, .pl-veckor > li.pl-lovvecka, .pl-veckor > li.efter { grid-template-columns: 7.5rem minmax(0, 1fr); }
-  .pl-veckan { max-width: 46rem; }
+  /* En sparad plan: veckan och sammanställningen till vänster, planen i en spalt till höger (granskningen 2026-10-24). */
+  .pl-har-plan .pl-yta { display: grid; grid-template-columns: minmax(0, 1fr) 22rem; grid-template-rows: auto auto 1fr; column-gap: 2.5rem; align-items: start; }
+  .pl-har-plan .pl-veckan { grid-column: 1; grid-row: 1; margin-top: 0; }
+  .pl-har-plan .pl-samman { grid-column: 1; grid-row: 2; }
+  .pl-har-plan .pl-kopia { grid-column: 1; grid-row: 3; }
+  .pl-har-plan .pl-planen { grid-column: 2; grid-row: 1 / -1; }
+  .plan:not(.pl-har-plan) .pl-yta { max-width: 46rem; }
+  .pl-veckoknapp, .pl-veckor > li.pl-lovvecka { grid-template-columns: 7.5rem minmax(0, 1fr); }
+  .pl-har-plan .pl-veckoknapp, .pl-har-plan .pl-veckor > li.pl-lovvecka { grid-template-columns: 5.4rem minmax(0, 1fr); }
   .pl-knappar .knapp { flex: 0 1 auto; }
+  .pl-har-plan .pl-summa .pl-knappar .knapp { flex: 1 1 100%; }
 }
-@media print { .pl-din, .pl-insatser { display: none; } }
+@media print { .pl-din, .pl-insatser, .pl-toast { display: none; } }
 
 /* Skrivkorten och sidan som slumpar dem (Kortskrivning: skriv varje dag, src/pages/stodundervisning/[id]/skrivkort.astro;
    Niclas 2026-10-14). Kortet har skrivkortens form ur metodriggen (build/skrivkortform.js), som Word-filen har den

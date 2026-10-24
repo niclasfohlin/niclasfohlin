@@ -647,7 +647,7 @@ progression:
       fokus: Ni övar slaget Ordet i metodens texter med det slaget och på en sida ur elevens egen bänkbok. Eleverna leder parsamtalet själva, väljer samtalsdrag ur kortet och ställer egna frågor om texten
       roll: En elev tänker högt vid stoppet i pass 2, och eleverna leder gruppens samtal efter paren. Du följer upp om eleverna stannar själva
       taggar: [ordet]
-      rubrik: Ordet, och eleverna leder samtalet
+      rubrik: Slaget Ordet, eleverna leder samtalet
 uppfoljning:
   text: Följ effekten varje vecka med lyssningsbladet, och gör kartläggningen före och efter med två lika svåra texter. Kartläggningen är inget samtal. Den mäter om eleven på egen hand drar en slutsats som texten stöder och visar ledtråden, och i passen ger du inga poäng.
   rader:
@@ -661,7 +661,7 @@ uppfoljning:
       vad: Varje elev gör kartläggningens text efter, som är lika svår. Jämför poängen med kartläggningen före, och lyssningsbladen med vecka 1 och 2. Se också om eleven sätter frågetecken i sin bänkbok.
       tid: efter
 plan:
-  formaga: läsa mellan raderna
+  mal: kunna läsa mellan raderna, säga vad man tror och visa ledtråden i texten.
 mal:
   punkter:
     - Skilja på svar som står i texten och svar man måste lista ut

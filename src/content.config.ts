@@ -412,9 +412,10 @@ const metodensFalt = z.strictObject({
       // src/lib/standard/plan.js), så att planen kan sätta ett datum. nar står kvar som radens text.
       rader: z.array(z.strictObject({ nar: z.string(), vad: z.string(), tid: z.string().optional() })).min(1),
     }).optional(),
-    // Planera insatsen (K-489, METODER.md under Planera insatsen): metodens centrala förmåga som en fras efter "klarar
-    // att", som "läsa mellan raderna", till skattningen när läraren följer insatsen. Står inte på sidan eller i Word.
-    plan: z.strictObject({ formaga: z.string().min(3).max(60).optional() }).optional(),
+    // Planera insatsen (K-489, METODER.md under Planera insatsen): insatsens mål, som läraren skattar eleverna mot varje
+    // vecka och kan skriva om, i lektionskortens form "kunna …". Utan det gäller målet på metodens lektionskort. Står inte
+    // på sidan eller i Word.
+    plan: z.strictObject({ mal: z.string().min(10).max(200).optional() }).optional(),
     mal: z.strictObject({
       rubrik: z.string().default('Mål: vad eleven ska kunna göra efter insatsen'),
       text: z.string().default('Efter perioden ska eleven oftare kunna:'),
