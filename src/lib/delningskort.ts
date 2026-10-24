@@ -57,6 +57,9 @@ const PNG: Kort['typ'][] = ['metodbank', 'tafram'];
 // skrivkortens färger, så deras kort räknar in båda avsnitten; skrivkortens kort bara sitt eget.
 const SKRIVKORTSSTIL = '/* Skrivkorten och sidan som slumpar dem';
 const KORTBANKSSTIL = '/* Aktivitetskorten och brainbreakkorten';
+// Där stilarna som korten räknar in slutar. Ett avsnitt efter den raden ritar inte om dem (2026-10-24: Planera insatsens
+// stilar sist i filen gav två kort nya adresser fast inget på dem hade ändrats).
+const KORTENS_SLUT = '/* Slut på stilarna som delningskorten på de egna mallarna räknar in';
 // Höjs när något som påverkar korten ändras utanför filerna som räknas in nedan.
 const VERSION = 1;
 
@@ -208,9 +211,11 @@ export function allaKort(): Promise<Kort[]> {
     // Aktivitetskorten och brainbreakkorten ritas med sidornas kod och form (src/scripts/kortbanken.ts och avsnitten om
     // skrivkorten och korten i global.css), med korten och deras bilder. Kortens pdf-adresser ritas inte och räknas inte
     // in, så att en ny pdf inte ritar om kortet (K-411).
+    // Avsnitten slutar vid KORTENS_SLUT, med ett radslut som när de var sist i filen, så att korten behöll sina adresser.
+    const kortbanksStil = css.slice(css.indexOf(SKRIVKORTSSTIL), css.includes(KORTENS_SLUT) ? css.indexOf(KORTENS_SLUT) : undefined).replace(/\n+$/, '\n');
     const kortbankSumma = (s: NonNullable<Kort['kortbank']>) => {
       const data = s.slag === 'aktiviteter' ? aktiviteterData(s.metod, aktiviteterAv(s.metod)!, s.kort) : brainbreaksData(s.metod, brainbreaksAv(s.metod)!, s.kort);
-      return [las(KORTBANKSMALL[s.slag]).toString('utf8').replace(/\r\n/g, '\n'), las('src/scripts/kortbanken.ts').toString('utf8').replace(/\r\n/g, '\n'), css.slice(css.indexOf(SKRIVKORTSSTIL)), JSON.stringify(data, (nyckel, varde) => (nyckel === 'pdf' ? undefined : varde)),
+      return [las(KORTBANKSMALL[s.slag]).toString('utf8').replace(/\r\n/g, '\n'), las('src/scripts/kortbanken.ts').toString('utf8').replace(/\r\n/g, '\n'), kortbanksStil, JSON.stringify(data, (nyckel, varde) => (nyckel === 'pdf' ? undefined : varde)),
         ...data.kort.map((k) => bildSumma(k.bild.replace(/^\//, '')))].join('|');
     };
     // Metodbankens kort ritas med bankens eget metodkort (src/components/Metodkort.astro) och dess stilar i global.css:

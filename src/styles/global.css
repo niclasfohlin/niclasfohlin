@@ -3432,3 +3432,6 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
   .kortbanksida .ak-kortplats .aktivitetskort .kb-band { padding-right: 1em; }
   .kortbanksida .ak-yta { display: block; }
 }
+
+/* Slut på stilarna som delningskorten på de egna mallarna räknar in (src/lib/delningskort.ts). Ett nytt avsnitt står
+   efter den här raden, så att korten inte ritas om. */
