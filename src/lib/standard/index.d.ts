@@ -108,7 +108,7 @@ export type Tid = { typ: 'fore' } | { typ: 'efter'; veckor: number; till?: numbe
 /** En rad i progressionen: veckorna eller passen den gäller; till saknas när den gäller till slutet. */
 export interface Steg { rad: number; fran: number; till?: number; vidBehov: boolean; efter?: true }
 /** Vilka pass en rad i planens passen gäller: platsen i veckan, eller numret i insatsen. */
-export type PassensNar = { typ: 'vecka'; plats: number | 'sista' | 'ovriga' } | { typ: 'pass'; fran: number; till?: number } | { typ: 'sista' };
+export type PassensNar = { typ: 'vecka'; plats: number | 'sista' | 'ovriga' } | { typ: 'pass'; fran: number; till?: number } | { typ: 'sista' } | { typ: 'veckor'; fran: number; till: number };
 /** Metodens plan: hur ofta, passets längd, perioden, progressionens steg och uppföljningens tider. */
 export interface Metodplan { takt: { min: number; max: number }; minuter: { min: number; max: number }; period: { min: number; max?: number; enhet: 'veckor' | 'pass'; mer: boolean; hogst: boolean; perKurs: boolean }; stegEnhet: 'veckor' | 'pass'; steg: Steg[]; uppfoljning: { rad: number; tid: Tid }[]; passen: { rad: number; nar: PassensNar }[] }
 /** Lärarens val: första passet, dagarna (1 för måndag), antalet veckor eller pass, nivån, minuterna, lovveckorna (2026-52), veckorna som tas om, flyttade och inställda pass. */
@@ -149,8 +149,8 @@ export declare function passetsRoller(plan: Plan, p: Pass, passen: Metodplan['pa
 export declare function stegUtanfor(mp: Metodplan, plan: Plan): { rad: number; fran: number; vidBehov: boolean }[];
 export declare function veckanFor(plan: Plan, datum: string): PlanVecka | null;
 export declare function nastaPass(plan: Plan, datum: string): Pass | null;
-export declare function kodaVal(val: Val, extra?: { id?: string; visa?: number }): string;
-export declare function lasVal(hash: string): { val: Val; id?: string; visa?: number } | null;
+export declare function kodaVal(val: Val, extra?: { id?: string; visa?: number | 'fore' }): string;
+export declare function lasVal(hash: string): { val: Val; id?: string; visa?: number | 'fore' } | null;
 /** Planens största längd i veckor eller pass, i länken och vid en förlängning. */
 export declare const LANGSTA: number;
 export declare const VECKODAGAR: string[];
@@ -172,7 +172,7 @@ export declare const rentMal: (s: unknown) => string;
 export declare const malText: (mal?: string) => string;
 /** En text där elevlistans namn och förnamn har blivit "en elev". */
 export declare function utanNamn(text: string, elever: { namn: string }[]): string;
-export declare function kalenderfil(info: { titel: string; uppfoljning: { nar: string }[]; fokus: (string | null)[]; passet?: (p: Pass) => string }, plan: Plan, o: { id: string; lank: (vecka?: number) => string; namn?: string; nu: Date; tider?: Val['tider'] }): string;
+export declare function kalenderfil(info: { titel: string; uppfoljning: { nar: string }[]; fokus: (string | null)[]; passet?: (p: Pass) => string }, plan: Plan, o: { id: string; lank: (vecka?: number | 'fore') => string; namn?: string; nu: Date; tider?: Val['tider'] }): string;
 /** Passens tider, rensade: veckodag till början och slut, som "09:20" och "10:00". */
 export declare function rentaTider(tider: unknown): Record<string, [string, string]>;
 /** Passets tid efter veckodagen det låg på innan det flyttades. */

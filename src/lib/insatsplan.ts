@@ -229,7 +229,8 @@ function nivaTabellen(d: Metod['data'], id: string): PlanData['nivaTabell'] {
   if (!t) return undefined;
   const veckor: Record<string, Record<string, string>> = {};
   for (const r of t.rader ?? []) {
-    const v = String(r[0]).match(/^vecka (\d+)/i)![1];
+    const v = String(r[0]).trim().match(/^vecka (\d+)/i)?.[1];
+    if (!v) continue;
     veckor[v] = Object.fromEntries(d.nivaer.map((n, i) => [slugAv(n.namn), String(r[i + 1] ?? '').trim()]));
   }
   return { rubrik: t.rubrik, adress: tabellensAdress(d, id, t.rubrik) ?? `/stodundervisning/${id}`, veckor, ...(t.not ? { not: t.not } : {}) };

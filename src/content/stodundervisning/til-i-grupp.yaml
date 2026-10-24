@@ -238,7 +238,7 @@ plan:
   passen:
     - nar: första passet
       kort: "Utan favoritmeningar"
-      text: "Det första passet börjar utan favoritmeningar, eftersom eleverna inte har läst hemma än."
+      text: "Det första passet börjar utan favoritmeningar, eftersom eleverna inte har läst hemma än. Börja med bild- och rubrikvandringen."
   fore:
     - "Ha ett kort möte med vårdnadshavarna innan ni börjar. Visa mappen, lässchemat och skrivboken, förklara varför boken ska läsas två gånger och skriv kontraktet."
   justera:

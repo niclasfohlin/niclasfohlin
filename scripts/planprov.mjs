@@ -234,11 +234,14 @@ if (tsMp) {
   const ll = metod('laslistor-i-grupp');
   const mpLl = s.metodplan(ll).plan;
   const pLl = s.planera(mpLl, { ...tom, start: '2026-11-02', dagar: [1, 2, 4, 5], langd: 7 });
-  const llRoll = (nr) => ll.plan.passen[s.passetsRoller(pLl, pLl.pass[nr - 1], mpLl.passen)[0]]?.nar;
+  const llRader = (pl, nr) => s.passetsRoller(pl, pl.pass[nr - 1], mpLl.passen).map((r) => ll.plan.passen[r].nar);
+  const llRoll = (nr) => llRader(pLl, nr).find((n) => n.startsWith('veckans'));
   ska('Läslistor: veckans första, övriga och sista', [1, 2, 3, 4].map(llRoll).join() === 'veckans första,veckans övriga,veckans övriga,veckans sista', [1, 2, 3, 4].map(llRoll));
   // En vecka med ett enda pass, som efter en röd dag, har veckans första roll och ingen sista.
   const enda = s.planera(mpLl, { ...tom, start: '2026-12-21', dagar: [1, 4, 5], langd: 1 });
-  ska('en vecka med ett pass har bara veckans första roll', enda.pass.length === 1 && s.passetsRoller(enda, enda.pass[0], mpLl.passen).length === 1, enda.pass);
+  ska('en vecka med ett pass har bara veckans första roll', enda.pass.length === 1 && llRader(enda, 1).filter((n) => n.startsWith('veckans')).join() === 'veckans första', llRader(enda, 1));
+  // Metodens veckor: vecka 1–3 är passet bara listan, och raden går före platsen i veckan (Codex 2026-10-25).
+  ska('vecka 1–3 gäller metodens tre första veckor, först', llRader(pLl, 9).join() === 'vecka 1–3,veckans första' && !llRader(pLl, 13).includes('vecka 1–3'), [llRader(pLl, 9), llRader(pLl, 13)]);
   // Förvalet och stegen: sju listor på sju veckor, och en plan som börjar på Läslista 2 har fem veckor kvar.
   ska('förvalet når progressionens sista steg', s.forvaldLangd(mpLl) === 7 && s.forvaldLangd(mpTs) === 6 && s.forvaldLangd(s.metodplan(metod('til-i-grupp')).plan) === 6 && s.forvaldLangd(s.metodplan(metod('fyra-raknesatten')).plan) === 8 && s.forvaldLangd(mpLl, 3) === 5, [s.forvaldLangd(mpLl), s.forvaldLangd(mpTs), s.forvaldLangd(mpLl, 3)]);
   const stege = s.planera(mpLl, { ...tom, start: '2026-11-02', dagar: [1, 2, 4, 5], langd: 5, borja: 3, upprepa: [4] });
@@ -255,6 +258,15 @@ if (tsMp) {
   ska('veckan före är lov: före första passet veckan före lovet', lovFore.fore.mandag === '2026-10-19' && lovFore.fore.overLov && lovFore.uppfoljning[0].tillfallen[0].datum === '2026-10-19', lovFore.fore);
   const kal = s.kalenderfil({ titel: 'Textsamtal i grupp', uppfoljning: ts.uppfoljning.rader, fokus: ts.progression.rader.map((r) => r.fokus), passet: () => 'Passet: Starten 0–3.' }, pTs, { id: 'abc', lank: () => 'https://niclasfohlin.se/x', nu: new Date('2026-10-24T12:00:00Z') });
   ska('kalendern: före första passet över hela veckan före, och passet i beskrivningen', kal.includes('DTSTART;VALUE=DATE:20261026\r\nDTEND;VALUE=DATE:20261031') && kal.includes('före första passet') && kal.replace(/\r\n /g, '').includes('Passet: Starten 0–3.'), kal.slice(0, 1500));
+  // Codex granskning av 0.2 (2026-10-25): ett långt lov före starten, Före i länken och kalendern, och planens veckonummer
+  // i sammanställningen när planen börjar på ett senare steg.
+  const sommar = s.planera(mpTs, { ...tom, start: '2026-08-24', dagar: [1, 3, 5], langd: 6, lov: Array.from({ length: 9 }, (_, i) => `2026-${26 + i}`) });
+  ska('nio lovveckor före starten: Före veckan före lovet', sommar.fore.mandag === '2026-06-15' && sommar.fore.overLov, sommar.fore);
+  ska('länken kan visa Före', s.lasVal('#s=2026-11-02&d=135&l=6&v=fore')?.visa === 'fore' && s.kodaVal({ ...tom, start: '2026-11-02', dagar: [1, 3, 5], langd: 6 }, { visa: 'fore' }).includes('v=fore'));
+  const kalFore = s.kalenderfil({ titel: 'Textsamtal i grupp', uppfoljning: ts.uppfoljning.rader, fokus: [] }, pTs, { id: 'abc', lank: (v) => `https://x/#v=${v ?? ''}`, nu: new Date('2026-10-24T12:00:00Z') });
+  ska('kalenderns händelse före första passet leder till Före', kalFore.replace(/\r\n /g, '').includes('URL:https://x/#v=fore'), kalFore.slice(0, 800));
+  const sammanStege = s.sammanstallning(stege, { vecka: { [stege.veckor[0].mandag]: { not: 'Bra start' } } }, '2026-12-20');
+  ska('sammanställningen har planens veckonummer', sammanStege.veckor[0].innehall === 1 && sammanStege.veckor[2].innehall === 2, sammanStege.veckor.map((v) => v.innehall));
   // Undertitelns årskurser följer inte med till åtgärdsprogrammet, också "för F–6".
   const til = metod('til-i-grupp');
   const mpTil = s.metodplan(til).plan;
@@ -336,6 +348,38 @@ const sidor = ['/stodundervisning/textsamtal-i-grupp/planera', '/stodundervisnin
 const chrome = process.env.CHROME ?? ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', '/usr/bin/google-chrome'].find((p) => existsSync(p));
 if (!chrome) { console.log('planprov: obs, Chrome saknas, sidan är inte prövad'); process.exit(0); }
 if (!sidor.every((x) => existsSync(join(dist, x, 'index.html')))) { console.error('planprov: dist saknar planens sidor. Kör npm run validera, som bygger först.'); process.exit(1); }
+// Varje adress i planens data, för varje metod med planen, leder till en sida, en fil eller en kort adress som finns, och
+// till ett ankare som sidan har (Planera 0.2: passet, stödet i stunden, principerna, tabellerna och verktygen leder till
+// metodens sida). Korta adresser, som /lasstrategier, läses ur netlify.toml.
+const adressfel = [];
+const omdirigeringar = Object.fromEntries([...readFileSync(join(rot, 'netlify.toml'), 'utf8').matchAll(/from\s*=\s*"([^"]+)"\s*\n\s*to\s*=\s*"([^"]+)"/g)].map((m) => [m[1], m[2]]));
+const adressFel = (adress) => {
+  const [hel, ankare] = adress.split('#');
+  const vag = omdirigeringar[hel] ?? hel;
+  if (/\.[a-z0-9]{2,4}$/i.test(vag)) return existsSync(join(dist, vag)) ? '' : `${adress}: filen finns inte`;
+  const fil = join(dist, vag, 'index.html');
+  if (!existsSync(fil)) return `${adress}: sidan finns inte`;
+  return ankare && !readFileSync(fil, 'utf8').includes(`id="${ankare}"`) ? `${adress}: ankaret finns inte` : '';
+};
+const planensAdresser = (d) => [
+  ...(d.saker ?? []).flatMap((x) => [x.adress, ...Object.values(x.nivaer ?? {}), ...Object.values(x.veckor ?? {})]),
+  ...Object.values(d.kursveckor ?? {}), d.bank?.adress, d.passet?.adress, d.passet?.steg?.adress,
+  ...(d.passen ?? []).map((x) => x.tabell?.adress), d.principer?.adress, d.gruppen?.adress, d.hem?.adress, d.malAdress,
+  ...(d.fastnar ?? []).map((x) => x.adress), ...(d.centrala ?? []).map((x) => x.adress), d.nivaTabell?.adress,
+].filter(Boolean);
+for (const m of planbara) {
+  const sidan = join(dist, 'stodundervisning', m.id, 'planera', 'index.html');
+  if (!existsSync(sidan)) { adressfel.push(`${m.id}: planens sida finns inte`); continue; }
+  const json = readFileSync(sidan, 'utf8').match(/<script type="application\/json" id="pl-data">([\s\S]*?)<\/script>/)?.[1];
+  const d = json ? JSON.parse(json) : null;
+  const felen = d ? [...new Set(planensAdresser(d))].map(adressFel).filter(Boolean) : ['ingen data'];
+  if (felen.length) adressfel.push(`${m.id}: planens adresser leder inte till sidor och ankare som finns: ${felen.join(', ')}`);
+  const utanDelar = (d?.passen ?? []).filter((x) => x.tabell && !x.tabell.delar?.length).map((x) => x.tabell.namn);
+  if (utanDelar.length) adressfel.push(`${m.id}: passens tabeller utan delar: ${utanDelar.join(', ')}`);
+}
+if (adressfel.length) { console.error(`planprov: ${adressfel.length} fel i planens adresser:\n  ${adressfel.join('\n  ')}`); process.exit(1); }
+console.log(`planprov: planens adresser i ${planbara.length} metoder leder till sidor och ankare som finns.`);
+
 const cacheFil = join(rot, 'node_modules/.cache/planprov.json');
 const nyckel = createHash('sha1').update([readFileSync(fileURLToPath(import.meta.url), 'utf8'), ...sidor.map((x) => readFileSync(join(dist, x, 'index.html'), 'utf8').replace(/\?v=[0-9a-f]+/g, ''))].join('\n')).digest('hex');
 const cache = existsSync(cacheFil) ? JSON.parse(readFileSync(cacheFil, 'utf8')) : {};
@@ -538,7 +582,7 @@ try {
   sant('Dina planer med Ny plan så snart en plan är sparad', await f.kor(`!document.getElementById('pl-grupper').hidden && !!document.querySelector('#pl-grupper [data-plan="ny"]')`));
   sant('veckans rubrik', (await f.text('#pl-veckan-rubrik')) === 'Vecka 3 i planen', await f.text('#pl-veckan-rubrik'));
   sant('veckorna överst, med den här veckan vald och märkt', (await f.kor(`document.querySelectorAll('#pl-veckan .pl-remsa [data-vy]').length`)) === 8 && (await f.kor(`(() => { const b = document.querySelector('#pl-veckan .pl-remsa [data-vy="3"]'); return b.classList.contains('nu') && b.getAttribute('aria-pressed') === 'true'; })()`)));
-  sant('nästa pass i dag', (await f.text('.pl-nar')) === 'I dag, onsdag 18 november, pass 8 av 18', await f.text('.pl-nar'));
+  sant('nästa pass i dag', (await f.text('.pl-nar')) === 'I dag, onsdag 18 november', await f.text('.pl-nar'));
   sant('veckans fokus ur progressionen', (await f.text('.pl-fokusruta'))?.includes('slå ihop flera ledtrådar med slaget Före och efter'));
   // Det metoden namnger är länkat (Niclas 2026-10-24: "Ett test. Ett papper. En text. En specifik lektion").
   const fokusLankar = await f.kor(`[...document.querySelectorAll('#pl-veckan .pl-fokusruta a')].map((a) => a.textContent + ' ' + a.getAttribute('href'))`);
@@ -551,7 +595,7 @@ try {
   sant('Ta fram öppnas på nivån', (await f.kor(`document.querySelector('.pl-nasta a.knapp')?.getAttribute('href')`)) === '/stodundervisning/textsamtal-i-grupp/texter#mellan');
   // Planera 0.2 (de kalla testarna 2026-10-24): passet i rutan med rollen och delarna, ett annat pass med ett tryck på
   // rollen, fliken Före och tryckytorna.
-  sant('rutan har passets namn med rollen', (await f.text('#pl-veckan .pl-passnamn')) === 'Pass 8 · Paren samtalar', await f.text('#pl-veckan .pl-passnamn'));
+  sant('rutan har passets namn med rollen', (await f.text('#pl-veckan .pl-passnamn')) === 'Pass 8 av 18 · Paren samtalar', await f.text('#pl-veckan .pl-passnamn'));
   const delarna = () => f.kor(`[...document.querySelectorAll('#pl-veckan .pl-delar .pl-del > summary')].map((s) => s.textContent.trim()).join('|')`);
   sant('passets delar med minuter, med Före passet först och Efter passet sist', (await delarna()) === 'Före passet|0–3Starten|3–5Möt texten|5–13Läs och tänk|13–26Samtala om texten|26–30Avsluta|Efter passet|Mer om passet', await delarna());
   sant('rollens text', (await f.text('#pl-veckan .pl-roll'))?.startsWith('Ni tänker tillsammans: du läser högt och stannar vid stoppet, paren samtalar'), await f.text('#pl-veckan .pl-roll'));
@@ -559,9 +603,9 @@ try {
   sant('en del fälls ut till det läraren gör och säger', (await f.text('#pl-veckan .pl-del[data-ruta="del-0"] .pl-deltext'))?.includes('Skriv meningen på tavlan') && !!(await f.kor(`document.querySelector('#pl-veckan .pl-del[data-ruta="del-0"] .pl-fraser li')`)), await f.text('#pl-veckan .pl-del[data-ruta="del-0"] .pl-deltext'));
   sant('veckans pass med rollerna', (await f.kor(`[...document.querySelectorAll('#pl-passen .pl-passroll')].map((x) => x.textContent).join('|')`)) === 'Du tänker högt|Paren samtalar|Eleverna läser själva');
   await f.tryck('#pl-passen [data-visa-pass="9"]');
-  sant('ett tryck på rollen visar passet i rutan', (await f.text('#pl-veckan .pl-passnamn')) === 'Pass 9 · Eleverna läser själva' && (await f.text('#pl-veckan .pl-nasta .pl-etikett')) === 'Ett pass i veckan' && !!(await f.kor(`document.querySelector('#pl-veckan .pl-nasta [data-visa-pass=""]')`)), await f.text('#pl-veckan .pl-nasta'));
+  sant('ett tryck på rollen visar passet i rutan', (await f.text('#pl-veckan .pl-passnamn')) === 'Pass 9 av 18 · Eleverna läser själva' && (await f.text('#pl-veckan .pl-nasta .pl-etikett')) === 'Ett pass i veckan' && !!(await f.kor(`document.querySelector('#pl-veckan .pl-nasta [data-visa-pass=""]')`)), await f.text('#pl-veckan .pl-nasta'));
   await f.tryck('#pl-veckan .pl-nasta [data-visa-pass=""]');
-  sant('och tillbaka till nästa pass', (await f.text('#pl-veckan .pl-passnamn')) === 'Pass 8 · Paren samtalar');
+  sant('och tillbaka till nästa pass', (await f.text('#pl-veckan .pl-passnamn')) === 'Pass 8 av 18 · Paren samtalar');
   sant('länkarna till passet i metoden och stödet när eleven fastnar', (await f.kor(`[...document.querySelectorAll('#pl-veckan .pl-lankar a')].map((a) => a.getAttribute('href')).join()`)) === '/stodundervisning/textsamtal-i-grupp#passrutin,/stodundervisning/textsamtal-i-grupp#fastnar', await f.kor(`[...document.querySelectorAll('#pl-veckan .pl-lankar a')].map((a) => a.getAttribute('href')).join()`));
   await f.tryck('#pl-veckan .pl-remsa [data-vy="fore"]');
   sant('fliken Före med kartläggningen och minuterna per elev', (await f.text('#pl-veckan-rubrik')) === 'Före första passet' && (await f.text('#pl-veckan'))?.includes('Före insatsen') && (await f.text('#pl-veckan'))?.includes('5–8 minuter per elev') && (await f.text('#pl-veckan'))?.includes('Tre saker att hålla fast vid'), await f.text('#pl-veckan'));
@@ -922,7 +966,7 @@ try {
   await helg.oppna(PLAN);
   await helg.kor(`localStorage.setItem('insatser', ${JSON.stringify(JSON.stringify(slutlagrat))})`);
   await helg.oppna(PLAN);
-  sant('på söndagen gäller rutan nästa pass och dess vecka', (await helg.text('.pl-nar')) === 'I morgon, måndag 9 november, pass 4 av 18, vecka 2 i planen' && (await helg.text('#pl-veckan .pl-nasta [data-vy="2"]')) === 'Till vecka 2' && (await helg.text('#pl-veckan .pl-veckans summary'))?.startsWith('Texter till vecka 2'), [await helg.text('.pl-nar'), await helg.text('#pl-veckan .pl-veckans summary')]);
+  sant('på söndagen gäller rutan nästa pass och dess vecka', (await helg.text('.pl-nar')) === 'I morgon, måndag 9 november, vecka 2 i planen' && (await helg.text('#pl-veckan .pl-nasta [data-vy="2"]')) === 'Till vecka 2' && (await helg.text('#pl-veckan .pl-veckans summary'))?.startsWith('Texter till vecka 2'), [await helg.text('.pl-nar'), await helg.text('#pl-veckan .pl-veckans summary')]);
   sant('inga fel på söndagen', !helg.undantag.length, helg.undantag);
   helg.stang();
 

@@ -3096,6 +3096,9 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
    egen bärnstensfärg. */
 .beta { display: inline-block; vertical-align: 0.15em; font-family: var(--typsnitt-ui); font-size: 0.72rem; font-weight: 700; line-height: 1.2; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.2rem 0.45rem; border-radius: 6px; background: #fbe3b2; color: #6b3a00; border: 1px solid #e9b65a; }
 h1 .beta { font-size: 0.85rem; vertical-align: 0.35em; }
+/* En knapp är flex, där mellanrummet före märket faller bort; märket får luft från texten (Niclas 2026-10-24: "Beta lite
+   mer åt höger från Planera insatsen ... ser ut att växa ihop med texten"). */
+.knapp .beta { margin-left: 0.6rem; }
 /* Raden om modulen längst ned i planen: namnet och versionen, och mejlet om något inte fungerar. */
 .pl-version { margin: 2rem 0 0; padding: 0.9rem 0 0; border-top: 1px solid var(--farg-kant); font-size: 0.9rem; color: var(--farg-text-svag); }
 .pl-version p { margin: 0 0 0.4rem; }

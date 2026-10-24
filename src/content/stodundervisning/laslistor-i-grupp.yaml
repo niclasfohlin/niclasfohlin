@@ -281,6 +281,8 @@ uppfoljning:
 plan:
   stege: true
   passen:
+    - nar: vecka 1–3
+      text: "Vecka 1–3 är passet bara listan: modelleringen tar 0–3 minuter, körläsningen 3–6, parläsningen 6–14 och avslutningen den sista minuten."
     - nar: veckans första
       kort: "Hela listan"
       text: "Du modellerar och gruppen körläser hela listan. Förklara nya ord."

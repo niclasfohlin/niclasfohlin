@@ -3,7 +3,7 @@
 // datum, så att metodbanken och metodens sida kan visa Dina insatser utan att räkna om planen. Inget av det skickas
 // någonstans. Lagringen kan vara avstängd eller rensas (privat läge, en skola som rensar webbläsaren); då säger sidan det,
 // och länken till planen är kopian som håller.
-import { arDatum, lasVal, passetsTid, plusDagar, rensaFoljd, tidText, veckodag, VECKODAGAR, type Foljd, type Plan, type Val } from '../lib/standard/index.js';
+import { arDatum, lasVal, passetsTid, planvecka, plusDagar, rensaFoljd, tidText, veckodag, VECKODAGAR, type Foljd, type Plan, type Val } from '../lib/standard/index.js';
 
 export interface SparadPlan {
   id: string;
@@ -93,7 +93,7 @@ export const schemaAv = (plan: Plan, val?: Val): SparadPlan['schema'] => ({
   pass: plan.pass.map((p) => { const tid = val ? passetsTid(val, p) : undefined; return tid ? [p.datum, p.vecka, p.nr, `${tid[0]}`] : [p.datum, p.vecka, p.nr]; }),
   veckor: plan.veckor.map((v) => {
     const datum = v.pass.map((n) => plan.pass[n - 1].datum).sort();
-    return [v.nr, v.innehall, v.igen ? 1 : 0, datum[0] ?? v.mandag, datum[datum.length - 1] ?? plusDagar(v.mandag, 4)];
+    return [v.nr, planvecka(plan, v), v.igen ? 1 : 0, datum[0] ?? v.mandag, datum[datum.length - 1] ?? plusDagar(v.mandag, 4)];
   }),
 });
 
