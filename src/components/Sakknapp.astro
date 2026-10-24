@@ -1,0 +1,14 @@
+---
+// Knappen under en sak i materialet (src/lib/sakfiler.ts, K-499): den skriver ut sakens egen fil, som Word har sparat som
+// pdf, och filvalet ger Word-filen, som under bladen (Pabordet.astro, K-476). Knappens ord säger vad den skriver ut: bladet,
+// veckan, alla bladen eller ramens namn. Bara på skärmen (global.css, .m-blad-filer). metod är metodens titel, till
+// besöksstatistiken.
+import type { Sakfil } from '../lib/sakfiler';
+import Filval from './Filval.astro';
+interface Props { fil: Sakfil; metod: string }
+const { fil, metod } = Astro.props;
+---
+<p class="m-blad-filer m-sak-filer">
+  <a class="knapp sekundar liten" href={`/stodundervisning/${fil.namn}.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-liggande={fil.liggande ? '' : undefined} data-sidor-hogst={fil.hogst} data-goatcounter-click={`utskrift:${fil.namn}`} data-goatcounter-title={`${metod}: ${fil.titel}, ${fil.text.replace(/^Skriv ut /, '')}`}><span data-direkt={fil.text}>{fil.pdftext}</span><span class="visually-hidden">: {fil.titel}</span></a>
+  <Filval fil={`/stodundervisning/${fil.namn}`} namn={fil.namn} rubrik={fil.titel} statistik={`${metod}: ${fil.titel}`} liten />
+</p>

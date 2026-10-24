@@ -19,11 +19,8 @@ import { site } from '../data/site';
 
 type Metod = CollectionEntry<'stodundervisning'>;
 
-/**
- * Kan metoden planeras? Varje rad i uppföljningen har sin tid (fältet tid). Under steg 1 och 2 gäller det de metoder som
- * har fått fälten; i steg 3 får alla metoder dem, och då stannar bygget på en metod utan.
- */
-export const planbar = (d: Metod['data']) => !!d.uppfoljning?.rader.length && d.uppfoljning.rader.every((r) => r.tid !== undefined);
+// Kan metoden planeras? Regeln står i src/lib/planbar.ts.
+export { planbar } from './planbar';
 
 /** Planens adress under metoden. */
 export const planensAdress = (id: string) => `/stodundervisning/${id}/planera`;

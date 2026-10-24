@@ -1,6 +1,6 @@
 {
   "antalsuppfattning-i-grupp": {
-    "kalla": "b94c763cc245ad33",
+    "kalla": "7fb8724fde6c9478",
     "innehall": "dc34489b77ec5b21",
     "skalor": [
       1.25,
@@ -11,7 +11,7 @@
     "datum": "2026-10-20"
   },
   "boksamtal-i-grupp": {
-    "kalla": "08598678a012561f",
+    "kalla": "d51acfa44c14bf25",
     "skalor": [
       1.35,
       1.35,
@@ -22,7 +22,7 @@
     "innehall": "b8d8e9ed60a3700e"
   },
   "brakkurs-i-grupp": {
-    "kalla": "8c745c56b9b93972",
+    "kalla": "fb425dcbbd64d700",
     "innehall": "a43170d3f1f80cd7",
     "skalor": [
       1.15,
@@ -33,7 +33,7 @@
     "datum": "2026-10-19"
   },
   "faktatextsamtal-i-grupp": {
-    "kalla": "a5e29c1eab0158aa",
+    "kalla": "fd4f4492d399f46a",
     "innehall": "23f512db6a119701",
     "skalor": [
       1.35,
@@ -44,7 +44,7 @@
     "datum": "2026-10-20"
   },
   "fyra-raknesatten": {
-    "kalla": "f477aaff691d6993",
+    "kalla": "08f00c0ba1056a5e",
     "skalor": [
       1.2,
       1.35,
@@ -55,7 +55,7 @@
     "innehall": "d4686712b2bbbd2b"
   },
   "gruppstarkande-aktiviteter": {
-    "kalla": "e85155ac190b53e3",
+    "kalla": "839c8ff30098bbcf",
     "innehall": "7d398f76ab8d6b75",
     "skalor": [
       1.05,
@@ -66,7 +66,7 @@
     "datum": "2026-10-19"
   },
   "hoglasning-i-par": {
-    "kalla": "1a1cd2a3c65044bb",
+    "kalla": "db23b76d55309760",
     "innehall": "23337cd93b7bb490",
     "skalor": [
       1.3,
@@ -77,7 +77,7 @@
     "datum": "2026-10-19"
   },
   "kompissamtal": {
-    "kalla": "f8de478290bbbfeb",
+    "kalla": "6f3f35e4512c13d9",
     "skalor": [
       1.25,
       1.2,
@@ -88,7 +88,7 @@
     "innehall": "498927e26f1d9b36"
   },
   "kortskrivning-skriv-varje-dag": {
-    "kalla": "d00d8c4acade6361",
+    "kalla": "85e8ffd3abbaeaea",
     "innehall": "1c4b0c0f83a402ad",
     "skalor": [
       1.1,
@@ -99,7 +99,7 @@
     "datum": "2026-10-19"
   },
   "laslistor-i-grupp": {
-    "kalla": "a42bfc156917f8ca",
+    "kalla": "a57433fa2c6f46cc",
     "innehall": "9f0151a675df48f3",
     "skalor": [
       1.2,
@@ -110,7 +110,7 @@
     "datum": "2026-10-20"
   },
   "ljudlek-i-grupp": {
-    "kalla": "fab0e2ceb75bf310",
+    "kalla": "01425b155abddd1a",
     "innehall": "0e42a4fd0d792886",
     "skalor": [
       1.25,
@@ -121,7 +121,7 @@
     "datum": "2026-10-20"
   },
   "ordverkstad-i-grupp": {
-    "kalla": "551d182cf5603c14",
+    "kalla": "d4d8354537f457c6",
     "innehall": "fc57b7b03a8589c4",
     "skalor": [
       1.3,
@@ -132,7 +132,7 @@
     "datum": "2026-10-20"
   },
   "problemlosning-i-grupp": {
-    "kalla": "35f118c25e2f83d2",
+    "kalla": "55314a13fa8736d7",
     "innehall": "1f2b80610c87ceb3",
     "skalor": [
       1.25,
@@ -143,7 +143,7 @@
     "datum": "2026-10-20"
   },
   "sag-skriv-och-las": {
-    "kalla": "9a232d9c9072f3de",
+    "kalla": "69b1ec1417ae5e5d",
     "innehall": "43f36ae6c163ead5",
     "skalor": [
       1.35,
@@ -154,7 +154,7 @@
     "datum": "2026-10-19"
   },
   "seriesamtal": {
-    "kalla": "6824236472819b6f",
+    "kalla": "607a6d384786cc65",
     "innehall": "e2497e588eb2586a",
     "skalor": [
       1.25,
@@ -165,7 +165,7 @@
     "datum": "2026-10-20"
   },
   "skrivkurs-berattelseram": {
-    "kalla": "38f1107cd0df8dd2",
+    "kalla": "3f8c307f0f85f1b3",
     "skalor": [
       1.35,
       1.35,
@@ -176,7 +176,7 @@
     "innehall": "2d92747a4aa32a33"
   },
   "skrivkurs-sagoboken": {
-    "kalla": "e6fa68f41c138827",
+    "kalla": "eba3587621f0e6ff",
     "skalor": [
       1.25,
       1.35,
@@ -187,7 +187,7 @@
     "innehall": "0e5b165675b93f2c"
   },
   "skrivkurs-vardeskapande": {
-    "kalla": "c0cad65a0f29d70c",
+    "kalla": "f8d61df7b52da7b1",
     "skalor": [
       1.35,
       1.35,
@@ -198,7 +198,7 @@
     "innehall": "f62a6bb4ed5070e0"
   },
   "textsamtal-i-grupp": {
-    "kalla": "5647b73c047b647c",
+    "kalla": "4906b0abebed0d0a",
     "innehall": "dc8cd29a80cc26ff",
     "skalor": [
       1.25,
@@ -209,7 +209,7 @@
     "datum": "2026-10-20"
   },
   "texttyp-argumenterande-text": {
-    "kalla": "e60cfd8daa223a8a",
+    "kalla": "5aad6a7592659b34",
     "skalor": [
       1.3,
       1.35,
@@ -220,7 +220,7 @@
     "innehall": "d57f7502ee6b816c"
   },
   "texttyp-berattande-text": {
-    "kalla": "8a4b1b24321d90d7",
+    "kalla": "321b2a3e80ede691",
     "skalor": [
       1.3,
       1.35,
@@ -231,7 +231,7 @@
     "innehall": "1e979e431d502f38"
   },
   "texttyp-beskrivande-text": {
-    "kalla": "b66181de21377c73",
+    "kalla": "a2511b7f048ecaf1",
     "skalor": [
       1.35,
       1.35,
@@ -242,7 +242,7 @@
     "innehall": "12ab9f6971a496fd"
   },
   "texttyp-instruerande-text": {
-    "kalla": "b8c59ff321ee5b91",
+    "kalla": "6cdf755ce118ccd6",
     "skalor": [
       1.3,
       1.35,
@@ -253,7 +253,7 @@
     "innehall": "61c53f54966a5a24"
   },
   "texttyper-i-grupp": {
-    "kalla": "40656cced325a1e8",
+    "kalla": "842c9767015ad49c",
     "skalor": [
       1.35,
       1.35,
@@ -264,7 +264,7 @@
     "innehall": "f530ef27f2fc7cd2"
   },
   "til-i-grupp": {
-    "kalla": "271cac508b47ebf3",
+    "kalla": "0f16a81ffade2970",
     "innehall": "4a7a94a80a9515fa",
     "skalor": [
       1.2,
@@ -275,7 +275,7 @@
     "datum": "2026-10-20"
   },
   "upprepad-lasning": {
-    "kalla": "4972e89a36419ce0",
+    "kalla": "7cd38d730b4471ef",
     "innehall": "558bde47adfde1e1",
     "skalor": [
       1.3,

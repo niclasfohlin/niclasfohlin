@@ -40,6 +40,7 @@ import { harMaterial, hemsidansNamn, MATERIAL } from './material';
 import { losningarnasNiva, losningarnasNot, problemformer, type Losningsforslag } from './problemform';
 import { bokhandledningen, lararhandledningar, nivansEtikett, texternasEtikett, type Bokhandledning, type HandledningFalt, type Lararhandledning } from './handledning';
 import type { Matteproblemfil } from './matteproblem';
+import type { Sakfil } from './sakfiler';
 import { bildMatt, inline, kolumnandelar, omslagAdress, omslagUpphov, OMSLAG_KORT, radensNamn, ramensNiva, talcell } from './litteraturlista';
 
 // Färgerna ur sajtens designsystem (src/styles/global.css) så att filen känns igen från sidan.
@@ -2576,7 +2577,7 @@ function ramBarn(ram: Ram, o: { skrivrum?: boolean; stor?: boolean; kort?: Metod
   // En lästräningstext blir två läskort på en egen sida (K-063), och en ensam kort lista ett kort i 20 pt (K-062).
   const listor = () => (ram.listor ?? []).flatMap((l, i, alla): Barn[] => {
     // Ett räkneblad (rakneblad) står på en egen sida med rutnät att räkna i.
-    if (l.rakneblad) { const namn = bladNamn(l.rubrik); return raknebladBarn(l, o.nivaer ?? [], namn && o.karta ? o.karta.blad(namn) : undefined); }
+    if (l.rakneblad) { const namn = bladNamn(l.rubrik); return raknebladBarn(l, o.nivaer ?? [], namn && o.karta ? o.karta.blad(namn) : undefined, !!o.paNySida && i === 0); }
     // En lista efter ett räkneblad (lärarens lista i kartläggningen) börjar på en ny sida, så att den inte följer med när
     // läraren kopierar elevens blad (Google-provet 2026-10-04: rubriken Visa och förklara stod ensam längst ned på bladet).
     const efterBlad = i > 0 && alla[i - 1].rakneblad ? [luft(LUFT_RAD, true, { nySida: true })] : [];
@@ -3526,7 +3527,9 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
 // blad: vilka av ramarnas blad (bildblad()) som står efter sin ram: alla (förval), bara de ifyllda (exemplet som läraren
 // visar) eller inga. Så går modellens sida med sitt exempel att lägga i en fil (ramarDokument) och de tomma bladen i en
 // annan (bladDokument).
-function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; bank?: number[]; figurradVidFigur?: boolean; blad?: Bladurval } = {}): { barn: Flod; liggande?: boolean; vad?: Sidvad }[] {
+// vecka och listor: en vecka ur en ram med lektioner, eller räkneblad ur en ram, för sig (src/lib/sakfiler.ts), med bank: [] så
+// att inget annat ur mallarna kommer med.
+function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; bank?: number[]; figurradVidFigur?: boolean; blad?: Bladurval; vecka?: { ri: number; di: number }; listor?: { ri: number; li: number[] } } = {}): { barn: Flod; liggande?: boolean; vad?: Sidvad }[] {
   const d = post.data;
   const sidor: Flod[] = [];
   const under = (namn: string) => [
@@ -3774,6 +3777,22 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
     // efter veckans sida, som i beskrivningen, så att en vecka är sidor i följd. Allt annat står kvar i filens ordning:
     // en ram vars listor står vid veckorna ritas utan dem. I filen med allt har bara de tomma ramarna en sida här.
     const vm = o.baraTommaRamar || o.bank ? undefined : veckomaterial(d);
+    // En vecka för sig: veckans sida som i mallarna, utan ramens rubrik och text före. Räknebladen för sig: vart och ett på sitt
+    // A4, det första utan sidbrytning före. Båda fyller sina sidor, och sidfoten bär upphovet.
+    if (o.vecka) {
+      const ram = ramarna[o.vecka.ri];
+      const sida: Flod = ramBarn(ram, { ...ramVal(ram, false), veckor: o.vecka.di, paNySida: true });
+      bladsidor.add(sida);
+      SIDANS_VAD.set(sida, { ram: o.vecka.ri });
+      sidor.push(sida);
+    }
+    if (o.listor) {
+      const ram = ramarna[o.listor.ri];
+      const sida: Flod = o.listor.li.flatMap((li, k) => ramBarn(veckansLista(ram, li), { ...ramVal(ram, false), paNySida: k === 0 }));
+      bladsidor.add(sida);
+      SIDANS_VAD.set(sida, { ram: o.listor.ri });
+      sidor.push(sida);
+    }
     if (o.bank) for (const i of o.bank) sidor.push(...ramensSidor(i, ramarna[i]));
     else if (bank) for (const i of bankfilensRamar(bank, { medFoljesidor: true })) sidor.push(...ramensSidor(i, ramarna[i]));
     if (!o.bank) for (const [i, ram] of ramarna.entries()) {
@@ -3822,10 +3841,16 @@ function mallBarn(post: MetodPost, bas: string, o: { baraTommaRamar?: boolean; b
   const elev = harElevtypsnitt(d);
   const blad = !o.bank && d.lathund && arMatta(d.lathund.mall) ? medBredd(BREDD_MALL, () => [medElevtypsnitt(elev, () => mattaSida(d.lathund!.mall))]) : [];
   // Ett ark per talsort (en matta med enPerSida) står på stående A4, en sida per kolumn; övriga mallar liggande.
-  const mallsidor = o.bank ? [] : d.mallar.flatMap((m) => (m.typ === 'matta' && m.enPerSida
-    ? (m.kolumner ?? []).map((k) => ({ barn: medBredd(BREDD_STAENDE, () => medElevtypsnitt(elev, () => talsortSida(m, k))), liggande: false }))
-    : [{ barn: medBredd(BREDD_MALL, () => medElevtypsnitt(elev, () => (m.typ === 'serie' ? serieMallSida(m, post.id) : m.typ === 'talruta' ? talrutaSida(m) : mallSida(m)))), liggande: true }]));
+  const mallsidor = o.bank ? [] : d.mallar.flatMap((m) => mallensSidor(m, post.id, elev));
   return [...sidor.map((barn) => ({ barn, vad: SIDANS_VAD.get(barn) })), ...blad.map((barn) => ({ barn, liggande: true })), ...mallsidor];
+}
+
+// En malls sidor, som de står sist i planeringsmallarna och i mallens egen fil (src/lib/sakfiler.ts): ett ark per talsort på
+// stående A4 för en matta med enPerSida, annars en liggande sida.
+function mallensSidor(m: MetodData['mallar'][number], id: string, elev: boolean): { barn: Flod; liggande: boolean }[] {
+  return m.typ === 'matta' && m.enPerSida
+    ? (m.kolumner ?? []).map((k) => ({ barn: medBredd(BREDD_STAENDE, () => medElevtypsnitt(elev, () => talsortSida(m, k))), liggande: false }))
+    : [{ barn: medBredd(BREDD_MALL, () => medElevtypsnitt(elev, () => (m.typ === 'serie' ? serieMallSida(m, id) : m.typ === 'talruta' ? talrutaSida(m) : mallSida(m)))), liggande: true }];
 }
 
 // Nivåerna som står på elevens blad fast läraren säger dem: fälten i rutan Till läraren som heter Nivå eller Uppgift med
@@ -4183,7 +4208,9 @@ function rutnatBild(kol: number, rader: number, rutaTw: number, o: { tjock?: num
 // Den tomma talraden: en linje med en pil, och luft ovanför där eleven ritar hoppen. Höjden i bildpunkter.
 const TALRAD_H = 110;
 const talradSvg = (px: number) => `<svg xmlns="http://www.w3.org/2000/svg" width="${px}" height="${TALRAD_H}" viewBox="0 0 ${px} ${TALRAD_H}"><line x1="6" y1="${TALRAD_H - 16}" x2="${px - 14}" y2="${TALRAD_H - 16}" stroke="#1b1b1b" stroke-width="2.5"/><path d="M${px - 24} ${TALRAD_H - 24}L${px - 10} ${TALRAD_H - 16}L${px - 24} ${TALRAD_H - 8}" fill="none" stroke="#1b1b1b" stroke-width="2.5" stroke-linejoin="round"/></svg>`;
-function raknebladBarn(l: { rubrik?: string; rader: string[][]; rakneblad?: Rakneblad }, nivaer: Niva[], bokmarke?: string): Barn[] {
+// utanBrytning: bladet står först i ett avsnitt som redan börjar på en ny sida, som i bladets egen fil (src/lib/sakfiler.ts),
+// och får då ingen sidbrytning före sig.
+function raknebladBarn(l: { rubrik?: string; rader: string[][]; rakneblad?: Rakneblad }, nivaer: Niva[], bokmarke?: string, utanBrytning = false): Barn[] {
   const r = l.rakneblad!;
   const { niva, rubrik } = listansNiva(nivaer, l.rubrik);
   const per = r.perRad ?? 2;
@@ -4220,7 +4247,7 @@ function raknebladBarn(l: { rubrik?: string; rader: string[][]; rakneblad?: Rakn
   for (let i = 0; i < uppgifter.length; i += per) rows.push(new TableRow({ cantSplit: true, children: Array.from({ length: per }, (_, k) => (uppgifter[i + k] !== undefined ? ruta(uppgifter[i + k], kolB, rutor[0], rutor[1]) : tom())) }));
   for (const u of uppmaningar) rows.push(new TableRow({ cantSplit: true, children: [ruta(u, kolB * per, 16, Math.min(4, rutor[1]), per)] }));
   return [
-    new Paragraph({ keepNext: true, pageBreakBefore: true, spacing: { before: 0, after: 80 }, children: [...(niva ? nivaSkylt(niva) : []), ...(bokmarke ? [new Bookmark({ id: bokmarke, children: [textRun({ text: rubrik ?? '', bold: true, size: 26, color: FARG.text, font: HUSETS })] })] : [textRun({ text: rubrik ?? '', bold: true, size: 26, color: FARG.text, font: HUSETS })])] }),
+    new Paragraph({ keepNext: true, pageBreakBefore: !utanBrytning, spacing: { before: 0, after: 80 }, children: [...(niva ? nivaSkylt(niva) : []), ...(bokmarke ? [new Bookmark({ id: bokmarke, children: [textRun({ text: rubrik ?? '', bold: true, size: 26, color: FARG.text, font: HUSETS })] })] : [textRun({ text: rubrik ?? '', bold: true, size: 26, color: FARG.text, font: HUSETS })])] }),
     new Paragraph({ keepNext: true, spacing: { before: 0, after: 160, ...radHojd(400, 24, ELEVTYPSNITT) }, children: [textRun({ text: 'Namn: ______________________________', size: 24, color: FARG.text, font: ELEVTYPSNITT })] }),
     new Table({ width: { size: kolB * per, type: WidthType.DXA }, columnWidths: Array(per).fill(kolB), layout: TableLayoutType.FIXED, rows }),
   ];
@@ -5099,6 +5126,23 @@ export function ramarDokument(post: MetodPost, fil: { ramar: number[]; rubrik: s
   const karta: Sidpost[] = [];
   const sektioner = sidor.flatMap((sida) => { const s = delaSektioner(sida.barn, `${fil.huvud} · ${post.data.titel} · ${SAJT}`, adress); karta.push({ ...sida.vad, s: s.length }); return s; });
   return dokument(`${post.data.titel}: ${fil.rubrik}`, sektioner, typsnittFor([post]), undefined, karta);
+}
+
+// En sak ur materialet för sig (src/lib/sakfiler.ts, K-499): en ram med sina sidor, en vecka ur en ram med lektioner,
+// räkneblad ur en ram eller en mall, i en egen fil som knappen under saken på metodens sida skriver ut som pdf. Sidorna ritas
+// av samma kod som i planeringsmallarna, så att bladet är detsamma där, och sidfoten bär upphovet och adressen utan
+// sidnummer, som ett fristående blad. Titeln, som står i fliken när pdf:en öppnas, börjar med sakens namn.
+export function sakDokument(post: MetodPost, fil: Sakfil, o: { bas: string; resurser?: MetodResurser }): Document {
+  instans = 0;
+  FRISTAENDE_BLAD = true;
+  RESURSER = o.resurser ?? { bilder: new Map() };
+  const d = post.data;
+  const adress = metodAdress(o.bas, post.id).replace(/^https?:\/\//, '');
+  const sektioner = fil.slag === 'mall'
+    ? mallensSidor(d.mallar[fil.mi!], post.id, harElevtypsnitt(d)).flatMap((sida) => delaSektioner(sida.barn, `Mall · ${d.titel} · ${SAJT}`, adress, { liggande: sida.liggande, smal: sida.liggande }))
+    : mallBarn(post, o.bas, { bank: fil.slag === 'ram' ? [fil.ri!] : [], figurradVidFigur: true, ...(fil.slag === 'vecka' ? { vecka: { ri: fil.ri!, di: fil.di! } } : fil.slag === 'rakneblad' ? { listor: { ri: fil.ri!, li: fil.listor! } } : {}) })
+      .flatMap((sida) => delaSektioner(sida.barn, `${d.titel} · ${SAJT}`, adress, sida.liggande ? { liggande: true, smal: true } : {}));
+  return dokument(`${fil.titel} · ${d.titel}`, sektioner, typsnittFor([post]));
 }
 
 // En fil med bara blad (bildblad()): bladen med de här numren (pabordet[].nr), i den här ordningen, ett per liggande sida

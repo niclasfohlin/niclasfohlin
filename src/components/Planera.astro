@@ -79,7 +79,7 @@ const stegen = data.stege ? (data.progression?.rader ?? []).flatMap((r) => { con
           <summary>Ändra planen</summary>
           <form class="pl-val" id="pl-val" aria-labelledby="pl-val-rubrik">
             <h2 id="pl-val-rubrik">När ni träffas</h2>
-            <p class="pl-hjalp pl-varning" id="pl-bockvarning" hidden>Du har bockat pass. Ändras datumet eller dagarna faller bockar på dagar utan pass bort. Du kan ångra direkt efteråt.</p>
+            <p class="pl-hjalp pl-varning" id="pl-bockvarning" hidden>Du har bockat pass eller skattat. Ändras datumet eller dagarna står det kvar på sina datum, och det som hamnar utanför planen syns igen när du ändrar tillbaka. Du kan ångra direkt efteråt.</p>
             <div class="pl-rad">
               <label class="pl-etikett" for="pl-start">Från och med</label>
               <input class="pl-falt" type="date" id="pl-start" required />
@@ -145,7 +145,7 @@ const stegen = data.stege ? (data.progression?.rader ?? []).flatMap((r) => { con
             <div class="pl-rad">
               <label class="pl-etikett" for="pl-namn">Gruppens namn, om du vill</label>
               <input class="pl-falt" type="text" id="pl-namn" maxlength="40" autocomplete="off" />
-              <p class="pl-hjalp">Skriv inte elevernas namn. Gruppens namn står i planen, i kalendern och i dina utskrifter, men aldrig i länken.</p>
+              <p class="pl-hjalp">Skriv inte elevernas namn här. Gruppens namn står i planen, i kalendern och i dina utskrifter, men aldrig i länken.</p>
             </div>
             <fieldset class="pl-rad pl-foljval">
               <legend class="pl-etikett">Följ insatsen</legend>
@@ -161,7 +161,6 @@ const stegen = data.stege ? (data.progression?.rader ?? []).flatMap((r) => { con
                 <p><button type="button" class="pl-textknapp" id="pl-elever-bort" hidden>Ta bort elevernas namn och det som förts in om dem</button></p>
               </div>
             </fieldset>
-            <p class="pl-andra-knappar"><button type="button" class="knapp" id="pl-spara-nere" hidden>Spara planen</button></p>
           </form>
         </details>
       </section>

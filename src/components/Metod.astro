@@ -47,12 +47,14 @@ import { listansNiva } from '../lib/nivaer';
 import { omslagUpphov, ramensNiva } from '../lib/litteraturlista';
 import { metodensNivamaterial } from '../lib/nivamaterial';
 import { metodensBladmaterial, egnaBlad, bladgrupper, bladKort, bladRubrik, bladsidaAdress, ledSida, type Bladrad } from '../lib/bladmaterial';
+import { sakernasPlatser, sakfiler } from '../lib/sakfiler';
 import { ovrigtfil } from '../lib/ovrigt';
 import { sidlasFor } from '../lib/sidlas';
 import { enhetensUtskrifter, radensUtskrifter, utskriftAdress } from '../lib/utskrift';
 import Bladgrupp from './Bladgrupp.astro';
 import Snabbmall from './Snabbmall.astro';
 import Filval from './Filval.astro';
+import Sakknapp from './Sakknapp.astro';
 import Pabordet from './Pabordet.astro';
 import { bladNamn, delensRad, kartan, radensDel } from '../lib/karta';
 import { veckanRyms } from '../lib/veckosida';
@@ -140,6 +142,9 @@ const egnaFiler = new Map(egnaBlad(d, id).map((x) => [x.nr, x]));
 for (const b of bilderPaBordet) { const x = egnaFiler.get(b.bild.nr); if (x) b.fil = { namn: x.namn, titel: x.titel, statistik: `${d.titel}: ${x.titel}` }; }
 // En ram med flera blad har under det sista en knapp som skriver ut alla (bladgrupper).
 for (const g of bladgrupper(d, id)) { const b = bilderPaBordet.find((x) => x.bild.nr === g.blad[g.blad.length - 1]); if (b) b.alla = { namn: g.namn, titel: g.titel, text: g.text, pdftext: g.pdftext, antal: g.blad.length, liggande: g.liggande, statistik: `${d.titel}: ${g.titel}` }; }
+// I en metod med plan har varje sak som planen kan leda till en egen fil, och knappen står under saken: sist i ramen, under
+// veckan, under räknebladet och under mallen (src/lib/sakfiler.ts, Sakknapp.astro, K-499).
+const saker = sakernasPlatser(sakfiler(d, id));
 // Lektionskorten (src/lib/lektionskort.ts): bredvid Öppna lathunden i menyn och vid lektionen i texten, först på platsen,
 // så att knappen står direkt efter det som beskriver lektionen och före en film på samma plats.
 const lektionskort = metodensLektionskort(d, id);
@@ -828,9 +833,13 @@ const meny = [
                 // Alla tärningar står i samma form, tre ord i bredd, också när ett ord är längre än tio tecken (en
                 // astronaut): annars stod tärningarna i en ram i två storlekar (Texttyp: Berättande text, 2026-10-09).
                 if (info && arTarning(d, l)) return <div class="m-ej-utskrift"><Kortlista rubrik={l.rubrik} info={{ ...info, korta: false, medel: true }} nyGrupp={info.grupp !== forra} brak={brak} /></div>;
+                // Ett räkneblad med en egen fil har knappen under sig, och under det sista bladet i en ram med flera står knappen
+                // som skriver ut alla (src/lib/sakfiler.ts).
+                const bladfil = undersida ? undefined : saker.blad.get(`${ri}-${li}`);
+                const allafil = undersida ? undefined : saker.alla.get(`${ri}-${li}`);
                 return info
                   ? <Kortlista rubrik={l.rubrik} info={info} nyGrupp={lage === 'material' || info.grupp !== forra} brak={brak} />
-                  : <Elevlista {...(l.rakneblad ? listansNiva(d.nivaer, l.rubrik) : { rubrik: l.rubrik })} id={bladAnkare.get(`${ri}-${li}`)} kolumner={l.kolumner} rader={l.rader} brak={brak} huvud={plats === 0 ? ram.huvud : undefined} klass={arEttKort(alla, l) ? 'kort' : ''} elev={elevtypsnitt && !l.larare} larare={!!l.larare} numrerad={ram.sagoform?.form === 'kort' && !ram.sagoform.kortbilder?.[l.rubrik ?? '']} />;
+                  : <><Elevlista {...(l.rakneblad ? listansNiva(d.nivaer, l.rubrik) : { rubrik: l.rubrik })} id={bladAnkare.get(`${ri}-${li}`)} kolumner={l.kolumner} rader={l.rader} brak={brak} huvud={plats === 0 ? ram.huvud : undefined} klass={arEttKort(alla, l) ? 'kort' : ''} elev={elevtypsnitt && !l.larare} larare={!!l.larare} numrerad={ram.sagoform?.form === 'kort' && !ram.sagoform.kortbilder?.[l.rubrik ?? '']} />{bladfil && <Sakknapp fil={bladfil} metod={d.titel} />}{allafil && <Sakknapp fil={allafil} metod={d.titel} />}</>;
               })}
               {/* Eleven ser på en bild (PaBordet.elev): bilden direkt efter det eleven läser, och rutan Till läraren sist i
                   lärarens form. */}
@@ -929,7 +938,7 @@ const meny = [
                   // och bladen står med bilden (Niclas 2026-10-04).
                   const kartrad = karta ? delensRad(karta, del.rubrik) : undefined;
                   const ryms = veckanRyms(del.falt, kartrad?.slice(1), bilder.map((b) => ('bild' in b ? b.bild.text : '')).join(' '));
-                  return (
+                  return (<>
                     <div class={`m-vecka${ryms ? '' : ' tva-sidor'}`}>
                       {rutan}
                       <div class="m-vecka-bild">
@@ -943,7 +952,8 @@ const meny = [
                         <Filmruta filmer={bilder} titel={d.titel} />
                       </div>
                     </div>
-                  );
+                    {!lage && !undersida && saker.vecka.get(`${ri}-${di}`) && <Sakknapp fil={saker.vecka.get(`${ri}-${di}`)!} metod={d.titel} />}
+                  </>);
                 })}
               </div>
             )}
@@ -958,6 +968,7 @@ const meny = [
             <p class="m-ark"><img src={arkAdress(id, ram.ark)} alt={`${ram.rubrik}: tankebubblor, pratbubblor och en bubbla för det någon ropar, att klippa ut`} width={svgMatt(seriefiler.get(arkAdress(id, ram.ark))!).bredd} height={svgMatt(seriefiler.get(arkAdress(id, ram.ark))!).hojd} loading="lazy" decoding="async" data-utskriftsbild /></p>
             <p class="m-efter m-serie-efter">Arket finns i rätt storlek, på ett A4 med 1 cm marginal, i <a href={`/stodundervisning/${id}-mallar.docx`} data-goatcounter-click={`fil:${id}-mallar.docx`} data-goatcounter-title={`${d.titel}: planeringsmallarna som Word`}>planeringsmallarna</a> (Word).</p>
           </>)}
+          {!lage && !undersida && saker.ram.get(ri) && <Sakknapp fil={saker.ram.get(ri)!} metod={d.titel} />}
           {/* Länkarna mellan veckans kort och ramen de kommer ur (bara på skärmen): under veckans kort en länk till
               ramens ruta Till läraren, med rutans första fält som ord ("Så gör du: Ordkorten"), och i ramen en länk
               till varje veckas kort. */}
@@ -1107,6 +1118,7 @@ const meny = [
           {m.fot && <div class="m-ruta m-mall-fot"><p>{m.fot}</p></div>}
           {/* Arken per talsort ryms inte i rätt storlek i utskriften från sidan: där står en hänvisning i stället för bilden. */}
           {m.typ === 'matta' && m.enPerSida && <p class="m-mall-utskrift">Arken, ett stående A4 per talsort, finns i rätt storlek sist i planeringsmallarna.</p>}
+          {saker.mall.get(mi) && <Sakknapp fil={saker.mall.get(mi)!} metod={d.titel} />}
         </figure>
       ))}
     </section>

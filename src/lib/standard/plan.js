@@ -375,7 +375,9 @@ export function planera(mp, val) {
     let tillfallen = [];
     // Före insatsen står i veckan före, med vecka 0: före planens första vecka.
     if (tid.typ === 'fore' && forsta) tillfallen = [{ datum: foreMandag, vecka: 0 }];
-    else if (tid.typ === 'efter') tillfallen = [{ datum: plusDagar(efter, tid.veckor * 7), vecka: null }];
+    // Efter: veckan efter sista passet; efter N veckor: veckan med dagen N veckor efter sista passet (buggjägarna
+    // 2026-10-25: fyra veckor efter räknades från veckan efter och blev fem).
+    else if (tid.typ === 'efter') tillfallen = [{ datum: tid.veckor && sista ? mandagen(plusDagar(sista.datum, tid.veckor * 7)) : plusDagar(efter, tid.veckor * 7), vecka: null }];
     else if (tid.typ === 'intervall') tillfallen = veckor.filter((v) => v.nr % tid.var === 0).map((v) => ({ datum: sistaIVeckan(v), vecka: v.nr }));
     else if (tid.typ === 'vecka') tillfallen = tid.veckor.flatMap((n) => { const v = [...veckor].reverse().find((x) => x.innehall === n); return v ? [{ datum: sistaIVeckan(v), vecka: v.nr }] : []; });
     else if (tid.typ === 'sista-veckan' && veckor.length) { const v = veckor[veckor.length - 1]; tillfallen = [{ datum: sistaIVeckan(v), vecka: v.nr }]; }
@@ -676,8 +678,11 @@ export function dokumentationstext(info, plan, val, o) {
     return `${String(info.steg?.[/** @type {number} */ (g.steg)]).replace(/[.;]\s*$/, '')} (vecka ${veckorna(a, b)})`;
   });
   if (innehall.length) rader.push(`Eleven arbetar med: ${innehall.join('; ')}.`);
+  // Uppföljningen efter heter Efter insatsen, så att texten inte säger metodens "Efter sex till åtta veckor" om en kortare
+  // plan (buggjägarna 2026-10-25).
+  const forstaEfter = plan.uppfoljning.find((u) => u.typ === 'efter')?.rad;
   const tider = plan.uppfoljning.flatMap((u) => {
-    const nar = narIText(info.uppfoljning[u.rad]?.nar ?? '');
+    const nar = u.rad === forstaEfter ? 'Efter insatsen' : narIText(info.uppfoljning[u.rad]?.nar ?? '');
     if (!u.tillfallen.length) return u.typ === 'villkor' ? [] : [nar];
     return [`${nar}, ${uppraknat(u.tillfallen.map((t) => `vecka ${isoVecka(t.datum).vecka}`))}`];
   });
@@ -884,7 +889,8 @@ export function sammanstallningstext(info, plan, s) {
   const beslutet = (b) => [b.beslut ? BESLUT[b.beslut] ?? b.beslut : '', b.not ?? ''].map((x) => x.replace(/[.\s]+$/, '')).filter(Boolean).map((x) => `${x}.`).join(' ');
   if (s.avstamning?.beslut || s.avstamning?.not) rader.push(`Avstämning mitt i insatsen${s.mitt ? `, vecka ${plan.veckor[s.mitt - 1].vecka.vecka}` : ''}: ${beslutet(s.avstamning)}`);
   if (s.utvardering?.beslut || s.utvardering?.not) rader.push(`Utvärdering efter insatsen: ${beslutet(s.utvardering)}`);
-  const tider = plan.uppfoljning.filter((u) => u.tillfallen.length).map((u) => `${narIText(info.uppfoljning[u.rad]?.nar ?? '')}, ${uppraknat(u.tillfallen.map((t) => `vecka ${isoVecka(t.datum).vecka}`))}`);
+  const efterRad = plan.uppfoljning.find((u) => u.typ === 'efter')?.rad;
+  const tider = plan.uppfoljning.filter((u) => u.tillfallen.length).map((u) => `${u.rad === efterRad ? 'Efter insatsen' : narIText(info.uppfoljning[u.rad]?.nar ?? '')}, ${uppraknat(u.tillfallen.map((t) => `vecka ${isoVecka(t.datum).vecka}`))}`);
   if (tider.length) rader.push(`Uppföljning: ${tider.join('. ')}.`);
   return utanNamn(rader.join('\n'), elever);
 }

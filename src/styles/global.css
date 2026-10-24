@@ -2827,6 +2827,11 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
 
 /* Valen */
 .pl-andra { margin: 1.25rem 0; }
+/* Ett förslag börjar med valen, och Spara planen står i rutan Planen direkt efter dem (användbarhetsprovet 2026-10-25:
+   sparknappen och kalendern stod före valen). En sparad plan har valen hopfällda sist. */
+.pl-planen { display: flex; flex-direction: column; }
+.plan:not(.pl-har-plan) .pl-andra { order: -1; margin-top: 0; }
+.plan:not(.pl-har-plan) .pl-andra > summary { display: none; }
 .pl-andra > summary { font: 600 1rem var(--typsnitt-ui); color: var(--farg-accent); cursor: pointer; min-height: 2.75rem; display: flex; align-items: center; gap: 0.6rem; }
 .plan:not(.pl-har-plan) .pl-andra > summary { display: none; }
 .pl-val { font-family: var(--typsnitt-ui); background: var(--farg-yta); border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 1rem 1.1rem 1.1rem; }
@@ -2960,7 +2965,7 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 .pl-flytta { border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0.8rem 1rem; margin: 0.5rem 0; }
 .pl-flytta[hidden] { display: none; }
 .pl-flytta .pl-falt { margin-bottom: 0.7rem; }
-.pl-fallut { border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0.6rem 1rem; margin: 1.25rem 0; }
+.pl-fallut, .pl-gang { border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0.6rem 1rem; margin: 1.25rem 0; }
 .pl-fallut > summary { font-weight: 600; cursor: pointer; min-height: 2.75rem; display: flex; align-items: center; gap: 0.75rem; }
 .pl-veckans > summary { line-height: 1.35; }
 .pl-checklista { margin: 0.3rem 0 0.2rem; padding-left: 1.2rem; }

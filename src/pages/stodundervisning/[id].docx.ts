@@ -3,7 +3,7 @@ import { packaWord } from '../../lib/wordpaket';
 import { matteproblemenPaSidan, publicerade } from '../../lib/innehall';
 import { matteproblemfiler, type Matteproblemfil } from '../../lib/matteproblem';
 import { centralaMedPapper } from '../../lib/centraladata';
-import { bankDokument, bladDokument, hemsidaDokument, lektionskortDokument, matteproblemDokument, metodDokument, passDokument, ramarDokument, stodmaterialDokument, DOCX_TYP } from '../../lib/metoddocx';
+import { bankDokument, bladDokument, hemsidaDokument, lektionskortDokument, matteproblemDokument, metodDokument, passDokument, ramarDokument, sakDokument, stodmaterialDokument, DOCX_TYP } from '../../lib/metoddocx';
 import { byggSerier, serieKoppling } from '../../lib/serie';
 import { bankAv, bankfiler } from '../../lib/bank';
 import { medDatabaserna } from '../../lib/faktateman';
@@ -11,6 +11,7 @@ import { bokhandledningen, bokhandledningensFil, handledningensFil, lararhandled
 import { metodensNivamaterial, nivafiler } from '../../lib/nivamaterial';
 import { bladfiler, bladgrupper, egnaBlad, metodensBladmaterial } from '../../lib/bladmaterial';
 import { ovrigtfil } from '../../lib/ovrigt';
+import { sakfiler, type Sakfil } from '../../lib/sakfiler';
 import { harMaterial } from '../../lib/material';
 import { harLathund } from '../../lib/metod';
 import { lasResurser, medBilder, medReservbilder } from '../../lib/metodresurser';
@@ -46,6 +47,9 @@ import { site } from '../../data/site';
 // Med databasens teman (src/lib/faktateman.ts) får banken också databasens egna filer, en per nivå, som tar med varje nytt
 // tema av sig själva (faktatexter-bas, bankfiler i src/lib/bank.ts), och temanas handledningar läser temana. Metodens
 // egna filer, bankens filer på metodens sida, filen med allt och den med bara metoden, läser metoden utan dem.
+// En metod med plan har en fil för varje sak som planen kan leda till (src/lib/sakfiler.ts): /stodundervisning/<id>-blad-<ramen
+// eller räknebladet>.docx, <id>-vecka-<n>.docx och <id>-mall-<mallen>.docx (sakDokument). Två filer med samma namn stoppar
+// bygget, så att ingen skriver över en annan.
 export const getStaticPaths: GetStaticPaths = async () => {
   const metoder = await publicerade('stodundervisning');
   const medDatabasen = new Map((await medDatabaserna(metoder)).map((x) => [x.id, x]));
@@ -56,7 +60,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const korten = (serie: string): Lektionskort[] => (serier.get(serie)?.lektioner ?? []).flatMap((l) => { const lektion = metoder.find((x) => x.id === l.id); return lektion ? metodensLektionskort(lektion.data, lektion.id) : []; });
   // Stödmaterialen (K-488): /stodundervisning/<id>.docx för varje central sak som är en pdf, som lasstrategier.
   const stodmaterialen = centralaMedPapper().map((id) => ({ params: { id }, props: { stodmaterial: id } }));
-  return [...stodmaterialen, ...matteproblemens, ...metoder.flatMap((m) => {
+  const alla = [...stodmaterialen, ...matteproblemens, ...metoder.flatMap((m) => {
     const md = medDatabasen.get(m.id)!;
     const bank = bankAv(m.data);
     const databasen = md === m ? null : bankAv(md.data);
@@ -82,8 +86,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
       ...[...lararhandledningar(md.data.ramar?.ramar ?? []).values()].map((h) => ({ params: { id: handledningensFil(m.id, h) }, props: { m: { ...md, serie: undefined }, nivafil: { ramar: [h.ri], rubrik: `Lärarhandledning: ${h.tema}`, huvud: h.niva } } })),
       // Lästexternas lärarhandledning (src/lib/handledning.ts, bokhandledningen), två A4 i en egen fil.
       ...(() => { const h = bokhandledningen(m.data.ramar?.ramar ?? []); return h ? [{ params: { id: bokhandledningensFil(m.id) }, props: { m: { ...m, serie: undefined }, nivafil: { ramar: [h.ri], rubrik: `Lärarhandledning: ${h.titel}`, huvud: 'Lärarhandledning' } } }] : []; })(),
+      // Sakernas egna filer i en metod med plan (src/lib/sakfiler.ts).
+      ...sakfiler(m.data, m.id).map((f) => ({ params: { id: f.namn }, props: { m: { ...m, serie: undefined }, sakfil: f } })),
     ];
   })];
+  const sedda = new Set<string>();
+  for (const x of alla) {
+    if (sedda.has(x.params.id)) throw new Error(`Två Word-filer heter /stodundervisning/${x.params.id}.docx (src/pages/stodundervisning/[id].docx.ts). Ge den ena ett annat namn.`);
+    sedda.add(x.params.id);
+  }
+  return alla;
 };
 
 export const GET: APIRoute = async ({ props }) => {
@@ -96,6 +108,7 @@ export const GET: APIRoute = async ({ props }) => {
   const bank = bankfil ? bankAv(props.m.data) : null;
   const nivafil = props.nivafil as { ramar: number[]; rubrik: string; huvud: string; blad?: 'alla' | 'ifyllda' | 'inga' } | undefined;
   const bladfil = props.bladfil as { bilder: number[]; rubrik: string; huvud: string } | undefined;
+  const sakfil = props.sakfil as Sakfil | undefined;
   const kortlista = props.kortlista as Lektionskort[] | undefined;
   const matteproblemfil = props.matteproblemfil as Matteproblemfil | undefined;
   if (matteproblemfil) medBilder(resurser, matteproblemfil.poster.flatMap((p) => [p.bild.adress, ...p.lf.losningar.map((l) => l.bild.adress)]));
@@ -107,6 +120,8 @@ export const GET: APIRoute = async ({ props }) => {
     ? hemsidaDokument(props.m, props.hemsida as 'kontrakt' | 'schema', { bas: site.url })
     : kortlista
     ? lektionskortDokument(kortlista, { titel: props.korttitel as string | undefined, resurser: { bilder: new Map(), lektionskort: lasLektionskort(kortlista), png } })
+    : sakfil
+    ? sakDokument(props.m, sakfil, { bas: site.url, resurser: { ...resurser, png } })
     : bladfil
     ? bladDokument(props.m, bladfil, { bas: site.url, resurser: { ...resurser, png } })
     : nivafil

@@ -4929,18 +4929,18 @@
     "datum": "2026-10-20"
   },
   "fyra-raknesatten": {
-    "word": "d46ab96723231f9eadd078c7a4f290cfaf4087d6fe2a04116808543caf824657",
-    "pdf": "c6da6c8a689dbb170f50d3e5398afe910ba24b126d94b337cef6e9b86e06df85",
+    "word": "49eee676de078c7403203abd07b20c65151e6dac81a4e8af1303123e3ea22d1f",
+    "pdf": "16ca11d0829543f6e811f50a06d1c4b3fd5962cd687d7899f046ee84e89c0c87",
     "sidor": 75,
-    "kB": 969,
-    "datum": "2026-10-20"
+    "kB": 972,
+    "datum": "2026-10-24"
   },
   "fyra-raknesatten-metoden": {
-    "word": "0f08a8a9f094cf7b980d0f41581d76968c1eab5b29f38017296c8d81d7812a01",
-    "pdf": "eaa739f5d52fc3b6f0bd0339c3f65ce52f9741032fd9f912cc9056b81630f624",
+    "word": "b7d0249d42f75df0fe5a61bfd03e262d6a5803eab180e8aee2cc0f1581736654",
+    "pdf": "a23c3b3af180b0a17392fdc36e61d79e213aa7bd8a8010d3bbf28121de849ba6",
     "sidor": 17,
-    "kB": 542,
-    "datum": "2026-10-20"
+    "kB": 541,
+    "datum": "2026-10-24"
   },
   "kompissamtal": {
     "word": "d4e709b6998f69ba8c01808f536323a9817f99e9d011239186b61290a79a4f4d",
@@ -5244,11 +5244,11 @@
     "datum": "2026-10-20"
   },
   "til-i-grupp": {
-    "word": "c7bd3b10c9c829d7bb8afaee51609549d37c368f1e0620f1150ac44c5c49e36c",
-    "pdf": "06a724af64a5766fc4d3d73752edd5b22f218eb7bb7b2c2f1151bf7fb2a7c238",
+    "word": "55275b1cc450dff5474ad28d35c993874b67995974b924245a948f0892f2604e",
+    "pdf": "52c0a86a203b59e2bf57ea9e64556472a296444d7fdf5bffb8acfc824207e8ec",
     "sidor": 21,
     "kB": 635,
-    "datum": "2026-10-20"
+    "datum": "2026-10-24"
   },
   "upprepad-lasning": {
     "word": "c17b470604b3a949465afc2e593db6691df655486728a51497e138bd126417cd",
@@ -5685,11 +5685,11 @@
     "datum": "2026-10-17"
   },
   "til-i-grupp-metoden": {
-    "word": "846a4e92482f06c89d7cc3a860e9302a4ed957a4fbdac9da2bd2bced3a94560a",
-    "pdf": "da0f8c3cd8a8b253146ef115cec056e05149bef18146ce60f480f94893b99771",
+    "word": "47aa1b6947824d60c17d5f89f75d37c48ddf156e637fae98d5b9a93aa39e00cb",
+    "pdf": "aa053ab625679d0bab76aae58349525f1983b7cd34ad79d500bf17c2935d6864",
     "sidor": 9,
     "kB": 435,
-    "datum": "2026-10-20"
+    "datum": "2026-10-24"
   },
   "til-i-grupp-kontrakt": {
     "word": "d9fb8fec64ead6bbe80b8fb43c09fc34a3a140d753ba823a78ee933290a1a0e0",
@@ -8981,5 +8981,439 @@
     "sidor": 1,
     "kB": 88,
     "datum": "2026-10-20"
+  },
+  "fyra-raknesatten-vecka-1": {
+    "word": "b333925a01738fc1db96d5a8b2c827927157c2a22b113fdda66f87ac98ce0fcf",
+    "pdf": "70ab790f946bc751d7e6cb2c8c39295139c94e576de69918791f27aff0194fd5",
+    "sidor": 1,
+    "kB": 281,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-vecka-2": {
+    "word": "0337ee403d94c6ce7129fa847572a7c8610d950b924e8dfc257ea7fd9a0a7ec6",
+    "pdf": "a31e4a52649633196dd8e56dbdb421d9d710637524297d0828c9e2cffb7aef5c",
+    "sidor": 1,
+    "kB": 272,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-vecka-3": {
+    "word": "4e3a340d66205a3103048a30184892ee339bfe0b80f951cf5c1502f930335dd4",
+    "pdf": "ad4ba29bc178bc0cfc2bb9ea335528d8e20ab07455b6d12846fa8d0668083441",
+    "sidor": 1,
+    "kB": 283,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-vecka-4": {
+    "word": "48fc6d634c331532a37a89c91713411ecdbfba3cada94c00b4ec0474227a0b61",
+    "pdf": "2ee97e8b6f5fb7a425ea62b289f1621403e4d29aa1cc11dbd4aa13658eea2914",
+    "sidor": 1,
+    "kB": 284,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-vecka-5": {
+    "word": "aedff71bd7002bf87ebb5bce1f6bc6522c77921272a3f15cbbae671ee5f0e258",
+    "pdf": "380ee0c5876dbf79c73ae5f03637bcce8703791f162aff7ca4eb7d3ff4a1d2db",
+    "sidor": 1,
+    "kB": 268,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-vecka-6": {
+    "word": "8e655d37fa99b6130845288b757dc79c143944bbfe96ce695ec7e206f1e91957",
+    "pdf": "246c47d2b547bb0127cb9cba4af7fd502b8464ac25db9851dc9981d7741388ca",
+    "sidor": 1,
+    "kB": 284,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-vecka-7": {
+    "word": "958a58cf5e7ee84102a1aea7c1510ddf0626b122caf815cd6e1e0b284d21866e",
+    "pdf": "4df4bdea483d6f1404e0b912c0bbd918bc1fb56dd88bfa354702779cec8661de",
+    "sidor": 1,
+    "kB": 282,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-vecka-8": {
+    "word": "98eda1b376cd0ed63769746d8b3d29a468dc312711269a68e82913ce771733c0",
+    "pdf": "836afe95edde977eb5c3d53d370f2119d42c3b272be2829b69228d90552b0c72",
+    "sidor": 1,
+    "kB": 295,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-kartlaggning-fore-och-efter-kursen": {
+    "word": "67c9754f4a3e8e8e5131b4d819d98f898164cfc11081b2c8d6b110d174cb4b24",
+    "pdf": "d842430f5b44f769dd7b6833e4739d7ce6938a930bef59954029a0715ad41c72",
+    "sidor": 5,
+    "kB": 267,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-kartlaggning-lararens-protokoll": {
+    "word": "4952582e2dc4ee8f3c9e3c4b51277b16dbdab3c23fce298a8ea2cd07742a1445",
+    "pdf": "bd0608d58b5dd9f8dbc2b4b33bcf2961bf61777ac35f8f43d08d38a7e1d7f1e5",
+    "sidor": 2,
+    "kB": 225,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-addition-1": {
+    "word": "2d14369280db38df89cf2f786e719559a4aa838ecc968e46223bb20f4960c5c7",
+    "pdf": "84f93a62537908f02e03584b437e515016fbeaac2e8dd3421cb4000f831dbd17",
+    "sidor": 1,
+    "kB": 165,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-addition-2": {
+    "word": "e61f7938b0a54136b601032439939b0c1162978f2fe8f96c85aaf5d08fb09aae",
+    "pdf": "1b5bb9afa64e7a3e95f0f16703c4d540934016f5346e19ec554d070325b3ac35",
+    "sidor": 1,
+    "kB": 167,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-addition-3": {
+    "word": "29a501a819b728f38cdb4a50a47134dbda8bf62b5878f1c330e8203bbece0508",
+    "pdf": "0524543b624fd3304f5d2cca6c4b405529879f97fa6e63e9bbea20b56c1f2f41",
+    "sidor": 1,
+    "kB": 168,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-addition-4": {
+    "word": "7b1d1b3fb69f4ad0aba117ad73b62f8014cc8901e782813e55c2512d37e2875a",
+    "pdf": "59a525d37aab1eb7342b2996ab291cb6a1c39db74cfac0f1a140cd97b96f9917",
+    "sidor": 1,
+    "kB": 168,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-addition-5": {
+    "word": "b16eb783427ce0154d57332aa539573d3d8858998cb8142b90d2c99bfe76f013",
+    "pdf": "34b36664ba8f29733e1a4e5a5ed311416a5ee3e7aa94afad4c551241adaa5068",
+    "sidor": 1,
+    "kB": 170,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-ovningsblad-addition-alla": {
+    "word": "4d9e8072f770420cfab75d52c8ebc39f42eda065973035c920b12d8b2bba935e",
+    "pdf": "3b3051867bad56150099ad024ac3cc18642d1e8eda0392bb39d14de8d40d4299",
+    "sidor": 5,
+    "kB": 191,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-subtraktion-1": {
+    "word": "9f56fff17e2a1109fa2017aa3551155c10a2003c8b7671cd751c8b6b8f47a945",
+    "pdf": "522b3c8e08d6320953be6129d7046e068c93bbb4665387ec4a21fc9fecd16ff7",
+    "sidor": 1,
+    "kB": 168,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-subtraktion-2": {
+    "word": "63bace89fb8f9b7ef8c7d45bd320451155ce5106537d1a180f5bd824b7be9092",
+    "pdf": "cd918a2ad75634a84a69cb765b2318fd173f7c0e1c18b2733c153e40f8185bdc",
+    "sidor": 1,
+    "kB": 170,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-subtraktion-3": {
+    "word": "a9a6b379a7501276357b8a798a6d393dde19c74cc6628f02127b35acbfa0551b",
+    "pdf": "ea7458146d711cfdd9b5d185ecbd290b789c2bc7279b4cf9f6927e6d9c19f195",
+    "sidor": 1,
+    "kB": 171,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-subtraktion-4": {
+    "word": "d34a2c9b3db1c15980564f865ff1054a5e3bfa66409dd694fe47b504234024a2",
+    "pdf": "079ae7947798852e387a30c71a7023cefa6dcce54ee1ae52ea5e9f77a5ca6501",
+    "sidor": 1,
+    "kB": 167,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-subtraktion-5": {
+    "word": "7ca191a99eb8c13b4c833f6fee7428c84e9ec18fac1b40b4048d89974fd5e91c",
+    "pdf": "72e8f474d61bfa49d2ff1521e0a9ca34d124040eee6e2c2a646299fa4ee27731",
+    "sidor": 1,
+    "kB": 172,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-ovningsblad-subtraktion-alla": {
+    "word": "aa8239f6d4b257c106376935da2aff4efd6c1bf84a9245a07251c0c4a8a6acc1",
+    "pdf": "e08aad1527697bee35b4b1fb7914d2d5ef24b6474dcd89097eb7e313428d1794",
+    "sidor": 5,
+    "kB": 194,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-multiplikation-1": {
+    "word": "2fbf92538c71fa16871c9fc05fe1874b4d2d3e29a3d2cd32cd3fa2b8490f0604",
+    "pdf": "b421bd96b94ac57693abc84aba2642a4101b276ccfbbfd41494fab0f8f79cf3f",
+    "sidor": 1,
+    "kB": 166,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-multiplikation-2": {
+    "word": "8e1d8468a3313ef4a94a4477d8f4efa64325a2a33eb279619c1a39385d21f16a",
+    "pdf": "2df88840fc0965ce17b2985dbf245d82bbb4226dd9928a8960275189c754a1b4",
+    "sidor": 1,
+    "kB": 167,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-multiplikation-3": {
+    "word": "ab3e118d190cbb95f1bf0e22eeddf2994953b71f11a62abe61e142b7c852e63c",
+    "pdf": "3ffa08c66ff734fddc38b141a9299d1e96c1af3398d8a09663667a971053fec2",
+    "sidor": 1,
+    "kB": 165,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-multiplikation-4": {
+    "word": "4f7b5d180e54dae486f11ba8b13ba98aed76c3684068bf6c2d9df275526aa77b",
+    "pdf": "39d31615f7ef55abd7acd208facc17557bbd273446e37888f31057fa8ad9f3ea",
+    "sidor": 1,
+    "kB": 170,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-multiplikation-5": {
+    "word": "c1e88351bc5667c8917909895df35c9035fbd7455080c1bc8e83ac2202ebeb21",
+    "pdf": "970253b7acc4b6e2403f1316992d87e5473e4ea4e510b0091ca037227c29a8ea",
+    "sidor": 1,
+    "kB": 170,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-ovningsblad-multiplikation-alla": {
+    "word": "2318203b26425434486abc8ddac1e1926b9543b97a335efc671400a40b5ee658",
+    "pdf": "b227997fe1c8dda6680060ef0fa20eb2967b3d35fa7a1f2168e2eeef168530a3",
+    "sidor": 5,
+    "kB": 192,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-division-1": {
+    "word": "6233a35964712a1b6f65fa7ba5297abed03ec331e60a0e92b549466a694d55fa",
+    "pdf": "4a5dbad3e55c15146cfe4b8510768b714a0a3c596351c006c56b0ac719f1d047",
+    "sidor": 1,
+    "kB": 169,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-division-2": {
+    "word": "ae903235dd1dc7a7205878341f0ab013e0c951dfad99b2e11fcf4a73eefcf047",
+    "pdf": "f1927fee5356eb7599fc2c176098048bfd305d017be122a36523706237833dc3",
+    "sidor": 1,
+    "kB": 169,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-division-3": {
+    "word": "a9ddd5abbf0a927fc8cbfe09b4c767f438c67520b7b25d1aced146173edef386",
+    "pdf": "23258625d449a4928bc1daaed89f7fa33a021fb1374705aebf10b103127f7cad",
+    "sidor": 1,
+    "kB": 166,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-division-4": {
+    "word": "d3dc0d12c4e860191ca97b4273afa402ee7eee04d11b8a9b5d90c34c410f092e",
+    "pdf": "af17ff4b07f4ef39bcbad74b6863499bde480a43f228188d1fe2cc8282e887ff",
+    "sidor": 1,
+    "kB": 169,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-division-5": {
+    "word": "29d1792ce57a670874d4e7fd9eff4206b54e751dfe5519e5a214bd518e8f3675",
+    "pdf": "68b52e21a0cebd5e6659c4b8c4e43dd66639959648800fa7d4718937a7fd3aa2",
+    "sidor": 1,
+    "kB": 167,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-ovningsblad-division-alla": {
+    "word": "40f42492741e8d3bf760c404393581e615cf3148a030ecb060c991e7a6635b4a",
+    "pdf": "7184573f7288c0e81f2061a721752dedb536f2dc606ac11b6c9b7c4dba55460e",
+    "sidor": 5,
+    "kB": 193,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-mina-lardomar-vecka-1-2": {
+    "word": "046cdd4844027816d716b474e58089c7252f212c2275f389c0957544373165a9",
+    "pdf": "7e92d71d0a033e426e00f98f26d9d2c8ab390d679531164758a919402c6e30a4",
+    "sidor": 1,
+    "kB": 217,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-mina-lardomar-vecka-3-4": {
+    "word": "72213f82a6412bbe944d668090a3e7ca65f70387676841e153b3a36046482e3d",
+    "pdf": "fa1a27fd5ff36831882094140275b875fe4f71c2ff7b0db765555d966b96ba58",
+    "sidor": 1,
+    "kB": 217,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-mina-lardomar-vecka-5-6": {
+    "word": "3f7e8e853db0959ffee3aee36f671150b7ebb28e7e7d111f46b4e65c33524642",
+    "pdf": "fa784167f725649c2ce4da43d666bf74b2b3b193c4b3d88de4bab970b6013aba",
+    "sidor": 1,
+    "kB": 217,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-mina-lardomar-vecka-7-8": {
+    "word": "241804531b5df02418f600ebb5696df2bc5f939f274f805cab654817b3962919",
+    "pdf": "a5a2e938c90a026ddc7907becc2f3914519cdef17f46e6fa9fe026589262cb58",
+    "sidor": 1,
+    "kB": 217,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-blad-laxa-at-bada-hallen": {
+    "word": "c9b708fc580fe1e8f2ca5b6ccd0484d80ff17baf29427c571f235055fe175305",
+    "pdf": "8c750a1c869d5ebc6babfe966d9b472358d1c5bc54fdbd1fdee3fc997aaeb98e",
+    "sidor": 2,
+    "kB": 242,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-mall-raknemattan": {
+    "word": "0095cf8254eed99a4efe0fe1f3ab65a8b8a5a7d701dd9c817017472ca4b055ef",
+    "pdf": "371d238678f679219d3aea15687c260da6053cda072dabfd43845b98a9b546c3",
+    "sidor": 3,
+    "kB": 159,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-mall-tomma-talrader": {
+    "word": "fec205c1110aefdd2021aef91fce42919bf9411e4139c5d05d5033ebaca169e8",
+    "pdf": "7f1cb465989be90828243de70560e1f3719438201e6bad6ddf29b44e4fed4560",
+    "sidor": 1,
+    "kB": 161,
+    "datum": "2026-10-24"
+  },
+  "fyra-raknesatten-mall-talrutan": {
+    "word": "64f39774d88248a535986e814e60196fbf6088bf134703156dc2772ee2ed4264",
+    "pdf": "e7122f1fa41c0f802d98e7f3af5d76dffba3c0b3e3f2e924353348536b68bcf8",
+    "sidor": 1,
+    "kB": 157,
+    "datum": "2026-10-24"
+  },
+  "laslistor-i-grupp-blad-laslista-5-ordet-vaxer": {
+    "word": "56ead57581f30df458547edb6e289b95f3f7491199fd7800cf82ee36c934690e",
+    "pdf": "86b554117ae0f8fbdc2380cb88e8078753c579361c62e022600e1aa8b63357ca",
+    "sidor": 3,
+    "kB": 317,
+    "datum": "2026-10-24"
+  },
+  "laslistor-i-grupp-blad-bokstavskort": {
+    "word": "ddc7182f2ad2843bfae2cc510ee264b976d92680e61e546eb89e391367604bf1",
+    "pdf": "7611af062162ac54ed2f9cd3c18b060f0be0050ff29418f4aecc0cf218610334",
+    "sidor": 2,
+    "kB": 227,
+    "datum": "2026-10-24"
+  },
+  "seriesamtal-blad-bildserie-1-fonsterplatsen": {
+    "word": "956d6a1765a793c11d3dcb9b83f82d1e2d1c27576a9434aa47547480b292d4e0",
+    "pdf": "ad5550f1bf6373ef7316f6ce730ed6547a2eaf05ace1cf11fe17bcb9a1a2092c",
+    "sidor": 2,
+    "kB": 286,
+    "datum": "2026-10-24"
+  },
+  "seriesamtal-blad-bildserie-2-spelet": {
+    "word": "abd7713529efa712095fe14c16da2b4211f4f27b6d59303eb086b9faff2965f4",
+    "pdf": "d1c2029488ae8aca57ab47209d0176c7002f2de55db061c6b496eb1de7454bb7",
+    "sidor": 2,
+    "kB": 294,
+    "datum": "2026-10-24"
+  },
+  "seriesamtal-blad-bildserie-3-teckningen": {
+    "word": "dd81cb7603cbd88e431a3c7d7ed65c374a4f98e4766469b62b1e5927763b3127",
+    "pdf": "239f97b934ac6704529fa3fffa5e99769813f24d75a08492327ec0df9b8eade5",
+    "sidor": 2,
+    "kB": 279,
+    "datum": "2026-10-24"
+  },
+  "seriesamtal-blad-bildserie-4-vinsten": {
+    "word": "b7b9d6821343ad8d90fdd90d823008cd070edcc78ba3dc27e36f4ddde1d1b4db",
+    "pdf": "c40a9d02b60c6c17389db86d93adde5ba2b3a3b0252b9b3a02b49c737cc1b459",
+    "sidor": 2,
+    "kB": 288,
+    "datum": "2026-10-24"
+  },
+  "seriesamtal-blad-bildserie-5-chatten": {
+    "word": "a20a1aeed3482c3c6930837938d7658ee677b7e2a4aef390d0e0160a63dd4ed8",
+    "pdf": "ee68f448e9fcf87a3b8fdb1d28a676445b427500b28406cff0c368d930befee2",
+    "sidor": 2,
+    "kB": 273,
+    "datum": "2026-10-24"
+  },
+  "seriesamtal-blad-bildserie-6-lunchen": {
+    "word": "cd69fc55204b43b2af9190315269cc0207723934d3e58eb03c288d498ea82382",
+    "pdf": "2943daa0cfb2823b5f37284599312548b32954adfea7aa8e2db29a4bcc52bf83",
+    "sidor": 2,
+    "kB": 283,
+    "datum": "2026-10-24"
+  },
+  "seriesamtal-blad-bubblor-att-klippa-ut": {
+    "word": "b24f08d0101e92f8678e66f314291c1bfad7c57652ffe3681d6a81f4be71ba1b",
+    "pdf": "9d8d082bbdf982937a96d9ca39dab091cb330fa4a892b52cabbe4942e7ca199a",
+    "sidor": 2,
+    "kB": 215,
+    "datum": "2026-10-24"
+  },
+  "seriesamtal-blad-spanarbladet": {
+    "word": "af5bb8d363822d8074c4d6481aeeb252dce04c5447947a7b926b83454128cdf9",
+    "pdf": "d1f6b533764f1a931a3c00ad40632f80d634cda40c3874d67ad4ee96040026e4",
+    "sidor": 1,
+    "kB": 207,
+    "datum": "2026-10-24"
+  },
+  "seriesamtal-blad-min-plan": {
+    "word": "a6a2ec9cd61743e14f808195ae0d43a62c021ed50d039f302ca782a038e8d868",
+    "pdf": "a3341c7b8f32f524f110359cf12338e0d6c7ce96d1f2fdfad094d536ec7d626e",
+    "sidor": 1,
+    "kB": 215,
+    "datum": "2026-10-24"
+  },
+  "seriesamtal-blad-provbilden": {
+    "word": "095869e42610f90e8c55b959ebb44ae13b609803aa1745a16646c945d5429e65",
+    "pdf": "4f4d8d8d14499aa73f68210fb1a07edb3282e54c32c9b72dee4e7ca700eea6e9",
+    "sidor": 2,
+    "kB": 247,
+    "datum": "2026-10-24"
+  },
+  "seriesamtal-blad-till-de-vuxna-runt-eleven": {
+    "word": "11f9eb50ce5632eb8d751843f4b38fc05b3ec0225776d877569c6babe9cabe07",
+    "pdf": "68ce12f645c031247e7f1d52dc879326cbb05fc320de9cdefadd12b0eeaf41e9",
+    "sidor": 1,
+    "kB": 222,
+    "datum": "2026-10-24"
+  },
+  "seriesamtal-mall-nasta-gang": {
+    "word": "842a0b3be63ebab8d82c29d5566509043aa2619ca45861c6d5d276730bc0eafe",
+    "pdf": "bea37ee17ec84220fd8a44e689a8ca956fd6a4f40988b6f785a2aba0863093fa",
+    "sidor": 1,
+    "kB": 160,
+    "datum": "2026-10-24"
+  },
+  "seriesamtal-mall-mallen-med-fyra-rutor": {
+    "word": "7780c22e770f3738cda2c7351906fb7152be89111d49e53d91c87c859f9497f9",
+    "pdf": "34b29b00a8320418c8667ee66e7ca9f4361732a417800b4d300632d41ac8c2b8",
+    "sidor": 1,
+    "kB": 168,
+    "datum": "2026-10-24"
+  },
+  "seriesamtal-mall-mallen-med-sex-rutor": {
+    "word": "2c38e4cb80d3ed550857a6e86feb11288a5b006bf81fc958af6069ebbae2190a",
+    "pdf": "77b314c807f1b84057d550bbe8de1ff50de33529b28c19521385fb4b17eb60a3",
+    "sidor": 1,
+    "kB": 172,
+    "datum": "2026-10-24"
+  },
+  "textsamtal-i-grupp-blad-startmeningarna": {
+    "word": "8428568cd4603f466405d1f5ad9e7e7300bb483b3f7a2796cd4997787d5ca937",
+    "pdf": "e89375c9d820b2e28d07ad4c0eabb6fe5bdad9026542ef0bbc037592aadc02e6",
+    "sidor": 9,
+    "kB": 281,
+    "datum": "2026-10-24"
+  },
+  "textsamtal-i-grupp-mall-ledtradsbladet": {
+    "word": "3b4cc465748e58ba617dd07960abffa9bab0d4461b2447dd3878132cb9ec900f",
+    "pdf": "295d4735052f0a9493aa76697370770a72860525e11ae501ffaae24792ff106f",
+    "sidor": 1,
+    "kB": 158,
+    "datum": "2026-10-24"
+  },
+  "textsamtal-i-grupp-mall-lyssningsbladet": {
+    "word": "24203571f040edce9a9b7a9fadee58cad61ff8ae33628ba451d51856ec1ffaa3",
+    "pdf": "a5fbe12444eb8a5c7485b8c8fb5cf2acb9d6e727ad02485f9a611cf92acc03ce",
+    "sidor": 1,
+    "kB": 163,
+    "datum": "2026-10-24"
+  },
+  "textsamtal-i-grupp-mall-kartlaggningens-protokoll": {
+    "word": "8b0c866084e04d7c2378590d4bffff40abbaa5c61a246d08262af70a38f4e8eb",
+    "pdf": "e8784b3fb34a40647c3addbd3b5096a181161e35df22dc8d22d2277edeff0e3c",
+    "sidor": 1,
+    "kB": 164,
+    "datum": "2026-10-24"
   }
 }

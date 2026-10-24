@@ -160,8 +160,9 @@ export function metodensBladmaterial(d: MetodData, id: string): Bladmaterial | u
  * metoddocx.ts), som Word sparar som pdf, och under bladet på sidan en knapp som skriver ut den och en länk till
  * Word-filen, där bladets fält går att skriva i. Bladen i ramar med blad, i banken och i nivåernas material har sina
  * filer redan. Bladen vid enheterna (ramar.vidEnheterna, som Kärnorna) har en pdf på enhetens sida och får här också sin
- * egen, så att knappen står vid bladet på metodens sida (granskningen 2026-10-20). namn är filens namn utan ändelse. */
-export interface EgetBlad { nr: number; namn: string; titel: string; staende: boolean }
+ * egen, så att knappen står vid bladet på metodens sida (granskningen 2026-10-20). namn är filens namn utan ändelse och ri
+ * ramens plats. */
+export interface EgetBlad { nr: number; namn: string; titel: string; staende: boolean; ri: number }
 export function egnaBlad(d: MetodData, id: string): EgetBlad[] {
   const sidor = new Set(bladgrupper(d, id).filter((g) => g.sidor).flatMap((g) => g.blad));
   return allaEgnaBlad(d, id).filter((x) => !sidor.has(x.nr));
@@ -183,7 +184,7 @@ function allaEgnaBlad(d: MetodData, id: string): EgetBlad[] {
     let fil = `${id}-blad-${slug(bladNamn(b))}`;
     if (namn.has(fil)) fil = `${fil}-${b.bild.nr}`;
     namn.add(fil);
-    return [{ nr: b.bild.nr, namn: fil, titel: bladNamn(b), staende: b.matt.hojd > b.matt.bredd }];
+    return [{ nr: b.bild.nr, namn: fil, titel: bladNamn(b), staende: b.matt.hojd > b.matt.bredd, ri }];
   });
 }
 

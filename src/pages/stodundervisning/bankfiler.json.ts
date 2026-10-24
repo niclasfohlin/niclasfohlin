@@ -9,6 +9,7 @@ import { bokhandledningen, bokhandledningensFil, handledningensFil, lararhandled
 import { metodensNivamaterial, nivafiler } from '../../lib/nivamaterial';
 import { bladfiler, bladgrupper, egnaBlad, metodensBladmaterial } from '../../lib/bladmaterial';
 import { ovrigtfil } from '../../lib/ovrigt';
+import { sakfiler } from '../../lib/sakfiler';
 import { harMaterial } from '../../lib/material';
 import { harLathund } from '../../lib/metod';
 import { nivafilNamn, skrivkortAv } from '../../lib/skrivkort';
@@ -45,6 +46,8 @@ import { lektionskortetsSidor } from '../../lib/lektionskortdata';
 // Ett temas lärarhandledning (src/lib/handledning.ts) är två sidor, i bankens filer med följesidorna och i en egen fil per
 // tema (slag: 'handledning'), vars pdf temats sida skriver ut.
 // Bankens filer och temanas handledningar står med databasens teman (src/lib/faktateman.ts), som Word-filerna.
+// Sakernas egna filer i en metod med plan (src/lib/sakfiler.ts, slag: 'sak'), en ram, en vecka, räkneblad eller en mall,
+// med gränserna som regeln ger dem: ett räkneblad och en mall är en sida, en vecka en eller två.
 export const GET: APIRoute = async () => {
   const metoder = await publicerade('stodundervisning');
   const medDatabasen = new Map((await medDatabaserna(metoder)).map((x) => [x.id, x]));
@@ -65,6 +68,8 @@ export const GET: APIRoute = async () => {
     // Ett blad i en vanlig ram (egnaBlad): en sida, som Word-filen med bara bladet ska ha.
     nivans.push(...egnaBlad(m.data, m.id).map((b) => ({ metod: m.id, namn: b.namn, rubrik: `Blad: ${b.titel}`, slag: 'blad', minst: 1, hogst: 1, ramar: [] as number[], oversikter: [] as number[] })));
     nivans.push(...bladgrupper(m.data, m.id).map((g) => ({ metod: m.id, namn: g.namn, rubrik: `Bladen: ${g.titel}`, slag: 'blad', minst: g.blad.length, hogst: g.blad.length, ramar: [] as number[], oversikter: [] as number[] })));
+    // Sakernas egna filer (src/lib/sakfiler.ts).
+    nivans.push(...sakfiler(m.data, m.id).map((f) => ({ metod: m.id, namn: f.namn, rubrik: f.titel, slag: 'sak', minst: f.minst, hogst: f.hogst, ramar: [] as number[], oversikter: [] as number[] })));
     // Snabbmallen ensam, en sida (K-487, snabbmallDokument).
     if (m.data.snabbmall) nivans.push({ metod: m.id, namn: `${m.id}-snabbmall`, rubrik: m.data.snabbmall.rubrik, slag: 'blad', minst: 1, hogst: 1, ramar: [] as number[], oversikter: [] as number[] });
     if (ovrigt) nivans.push({ metod: m.id, namn: ovrigt.namn, rubrik: ovrigt.rubrik, slag: 'ovrigt', minst: ovrigt.minst, hogst: ovrigt.hogst, ramar: ovrigt.ramar, oversikter: [] });

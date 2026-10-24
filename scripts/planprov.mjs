@@ -127,7 +127,7 @@ if (tsMp) {
   ska('åtgärdsprogrammet: åtgärden utan årskurserna och målet', dok.startsWith('Åtgärd: Textsamtal i grupp, lärarledd insats i liten grupp där eleverna samtalar om korta texter och lär sig läsa mellan raderna.\nMål: Kunna läsa mellan raderna, säga vad man tror och visa ledtråden i texten.'), dok);
   ska('åtgärdsprogrammet: omfattningen', dok.includes('Omfattning: 18 pass om 30 minuter, måndag, onsdag och fredag, 2 november till 11 december 2026 (vecka 45 till 50), på nivån Mellan.'), dok);
   ska('åtgärdsprogrammet: vad eleven arbetar med vecka för vecka', dok.includes('Eleven arbetar med: Det står, Jag vet och Alltså tror jag (vecka 45); Stanna och Se det framför dig (vecka 46); Slå ihop flera ledtrådar (vecka 47); Stämmer det? och Det som menas (vecka 48–49); Slaget Ordet, eleverna leder samtalet (vecka 50).'), dok);
-  ska('åtgärdsprogrammet: uppföljningen och de bockade passen', dok.includes('Före insatsen, vecka 44') && dok.includes('Efter sex till åtta veckor, vecka 51') && dok.includes('Bockade som genomförda: 7 av 18 pass.') && !dok.includes('Skattning'), dok);
+  ska('åtgärdsprogrammet: uppföljningen och de bockade passen', dok.includes('Före insatsen, vecka 44') && dok.includes('Efter insatsen, vecka 51') && dok.includes('Bockade som genomförda: 7 av 18 pass.') && !dok.includes('Skattning'), dok);
   ska('åtgärdsprogrammet har inga tankstreck som skiljetecken', !/ [–-] /.test(dok), dok);
   const dokFolj = s.dokumentationstext(info, plan, { ...val, mal: 'läsa faktatexter och visa ledtråden', tider: { 1: ['09:20', '10:00'], 3: ['09:20', '10:00'], 5: ['09:20', '10:00'] } }, { minuter: 30, folj: true });
   ska('åtgärdsprogrammet: eget mål, tiderna och skattningen', dokFolj.includes('Mål: Läsa faktatexter och visa ledtråden.') && dokFolj.includes('måndag, onsdag och fredag kl. 9.20–10.00, 2 november') && dokFolj.includes('Skattning varje vecka, 1 till 5, av hur väl eleven klarar målet på egen hand, med avstämning mitt i insatsen vecka 47 och utvärdering efter insatsen.'), dokFolj);
@@ -329,7 +329,7 @@ for (const f of former) {
   }
   if (f.id === 'seriesamtal') {
     ska('progression i pass: pass 1, 2–6 och resten', p.pass[0].steg === 0 && p.pass[1].steg === 1 && p.pass[5].steg === 1 && p.pass[6].steg === 2 && p.pass[p.pass.length - 1].steg === 2, p.pass.map((x) => x.steg));
-    ska('efter fyra veckor', p.uppfoljning[3].tillfallen[0].datum === s.plusDagar(p.efter, 28));
+    ska('fyra veckor efter sista passet', p.uppfoljning[3].tillfallen[0].datum === s.mandagen(s.plusDagar(p.sistaPass, 28)), [p.sistaPass, p.uppfoljning[3].tillfallen[0].datum]);
   }
   if (f.id === 'til-i-grupp') ska('vid behov: sex veckor ger raderna 1–2, 3–5 och 6–8', p.veckor.map((v) => v.steg).join() === '0,0,1,1,1,2', p.veckor.map((v) => v.steg));
 }
@@ -337,6 +337,9 @@ for (const f of former) {
 const ks = s.metodplan(medTider('kortskrivning-skriv-varje-dag', ['sista veckan', 'i passet', 'i passet', 'varje pass', 'vecka 6']));
 ska('Kortskrivnings moment stoppas med besked', ks.fel.some((x) => x.includes('Progressionens första kolumn heter "När"')), ks.fel);
 ska('en metod utan tid stoppas med besked', s.metodplan(metod('upprepad-lasning')).fel.some((x) => x.includes('har ingen tid')));
+// Modulens version har sin rad i tabellen under Versionerna, så att en ny förmåga aldrig går ut utan att stå där (METODER.md
+// under Planera insatsen, Så får en metod planen).
+ska(`versionen ${s.PLANERA.version} står i METODER.md under Versionerna`, readFileSync(join(rot, 'METODER.md'), 'utf8').includes(`\n| ${s.PLANERA.version} | `), s.PLANERA.version);
 
 if (fel.length) { console.error(`planprov: ${fel.length} fel:\n  ${fel.join('\n  ')}`); process.exit(1); }
 console.log(`planprov: motorn, ${planbara.length} av ${alla.length} metoder med planens fält och ${former.length} former av metoder räknar rätt.`);
@@ -379,6 +382,65 @@ for (const m of planbara) {
 }
 if (adressfel.length) { console.error(`planprov: ${adressfel.length} fel i planens adresser:\n  ${adressfel.join('\n  ')}`); process.exit(1); }
 console.log(`planprov: planens adresser i ${planbara.length} metoder leder till sidor och ankare som finns.`);
+
+// Det som planen leder till på metodens sida har en knapp under sig som skriver ut det (K-499; Niclas 2026-10-25: "Det som
+// något i planen länkar till bör ha sådan knapp under sig"), och varje saks egen fil (src/lib/sakfiler.ts, slag sak i
+// bankfiler.json) har sin knapp på metodens sida. Knappen står i saken, efter den (räknebladet, veckan) eller sist i ramen.
+// Planen leder också till metodens text, som passens tabeller, principerna och stödet i stunden, och till materialet och
+// mallarna som helhet (#ramar, #mallar): det läser läraren och skriver ut med metoden, så det prövas inte här.
+const TOMMA = new Set(['br', 'img', 'input', 'meta', 'link', 'hr', 'source', 'col', 'wbr', 'area', 'base', 'embed', 'param', 'track']);
+// Ett enkelt träd ur sidans html, utan skript och stilar: varje element med tagg, id, klass, om det är en utskriftsknapp och
+// barnen.
+const trad = (html) => {
+  const topp = { tag: 'rot', barn: [], far: null };
+  const id = new Map();
+  let nu = topp;
+  for (const m of html.replace(/<script\b[\s\S]*?<\/script>|<style\b[\s\S]*?<\/style>|<!--[\s\S]*?-->/g, '').matchAll(/<(\/?)([a-zA-Z][a-zA-Z0-9-]*)((?:[^>"']|"[^"]*"|'[^']*')*)>/g)) {
+    const [, slut, tagg, attr] = m;
+    const t = tagg.toLowerCase();
+    if (slut) { let n = nu; while (n !== topp && n.tag !== t) n = n.far; if (n !== topp) nu = n.far; continue; }
+    const el = { tag: t, id: attr.match(/\sid="([^"]*)"/)?.[1], klass: attr.match(/\sclass="([^"]*)"/)?.[1] ?? '', knapp: t === 'a' && /\sdata-skriv-ut-pdf\b/.test(attr) ? attr.match(/\shref="([^"?]*)/)?.[1] : undefined, barn: [], far: nu };
+    nu.barn.push(el);
+    if (el.id && !id.has(el.id)) id.set(el.id, el);
+    if (!TOMMA.has(t) && !/\/\s*$/.test(attr)) nu = el;
+  }
+  return { rot: topp, id };
+};
+const knapparI = (el) => [...(el.knapp ? [el.knapp] : []), ...el.barn.flatMap(knapparI)];
+// Ett syskon som börjar nästa sak: ett element med id, en ram eller en vecka. Bilderna På bordet efter en ram (blad-12) hör
+// till ramen, men ett räkneblad (blad-addition-2) är nästa sak.
+const nastaSak = (x) => (x.id && !/^blad-\d+$/.test(x.id)) || /(^|\s)(m-ram|m-vecka)(\s|$)/.test(x.klass);
+const efter = (el) => { const s = el.far?.barn ?? []; const i = s.indexOf(el); const ut = []; for (const x of s.slice(i + 1)) { if (nastaSak(x)) break; ut.push(x); } return ut; };
+// Knapparna som hör till saken: i den (eller i blocket runt dess rubrik), i syskonen efter den fram till nästa sak, och ett
+// steg upp när saken står i ett block (rutan i veckan, vars knapp står efter veckan).
+const sakensKnappar = (el) => {
+  const bas = /^h[2-4]$/.test(el.tag) && el.far ? el.far : el;
+  const ut = [...knapparI(bas), ...efter(bas).flatMap(knapparI)];
+  return ut.length || !bas.far || bas.far.tag === 'rot' || bas.far.id ? ut : efter(bas.far).flatMap(knapparI);
+};
+const knappfel = [];
+const bankfilerna = JSON.parse(readFileSync(join(dist, 'stodundervisning', 'bankfiler.json'), 'utf8'));
+let provade = 0;
+for (const m of planbara) {
+  const sida = join(dist, 'stodundervisning', m.id, 'index.html');
+  const plan = readFileSync(join(dist, 'stodundervisning', m.id, 'planera', 'index.html'), 'utf8').match(/<script type="application\/json" id="pl-data">([\s\S]*?)<\/script>/)?.[1];
+  if (!existsSync(sida) || !plan) continue;
+  const html = readFileSync(sida, 'utf8');
+  const { id } = trad(html);
+  const d = JSON.parse(plan);
+  const mal = [...(d.saker ?? []).flatMap((x) => [x.adress, ...Object.values(x.nivaer ?? {}), ...Object.values(x.veckor ?? {})]), ...Object.values(d.kursveckor ?? {})];
+  for (const ankare of new Set(mal.filter((a) => a.startsWith(`/stodundervisning/${m.id}#`)).map((a) => a.split('#')[1]))) {
+    if (ankare === 'ramar' || ankare === 'mallar') continue;
+    const el = id.get(ankare);
+    provade += 1;
+    if (el && !sakensKnappar(el).length) knappfel.push(`${m.id}#${ankare}: planen leder hit, men saken har ingen knapp under sig som skriver ut den (src/lib/sakfiler.ts, Sakknapp.astro)`);
+  }
+  for (const f of bankfilerna.filter((x) => x.metod === m.id && x.slag === 'sak')) {
+    if (!html.includes(`href="/stodundervisning/${f.namn}.pdf`)) knappfel.push(`${m.id}: filen ${f.namn} (${f.rubrik}) har ingen knapp på metodens sida (Sakknapp.astro i Metod.astro)`);
+  }
+}
+if (knappfel.length) { console.error(`planprov: ${knappfel.length} fel i knapparna under det planen leder till:\n  ${knappfel.join('\n  ')}`); process.exit(1); }
+console.log(`planprov: de ${provade} saker som planen leder till på metodernas sidor har en knapp under sig, och varje saks fil har sin knapp.`);
 
 const cacheFil = join(rot, 'node_modules/.cache/planprov.json');
 const nyckel = createHash('sha1').update([readFileSync(fileURLToPath(import.meta.url), 'utf8'), ...sidor.map((x) => readFileSync(join(dist, x, 'index.html'), 'utf8').replace(/\?v=[0-9a-f]+/g, ''))].join('\n')).digest('hex');
@@ -549,8 +611,11 @@ try {
   sant('olika tider olika dagar', (await f.text('#pl-summa-text'))?.includes('Måndag kl. 9.20–10.00, onsdag kl. 13.00–13.40 och fredag kl. 9.20–10.00'), await f.text('#pl-summa-text'));
   await f.tryck('#pl-tid-olika');
   sant('samma tid alla dagar igen', (await f.text('#pl-summa-text'))?.includes('Måndag, onsdag och fredag kl. 9.20–10.00'), await f.text('#pl-summa-text'));
+  // Lägg i kalendern syns först när planen är sparad (användbarhetsprovet 2026-10-25: kalendern fick annars dagar som
+  // läraren inte hade valt). Kalenderfilen med tider prövas här ändå, med knappen som den sparade planen visar.
+  sant('Lägg i kalendern syns inte i ett förslag', await f.kor("document.getElementById('pl-kalender').hidden"));
   await f.kor('window.__fil = null');
-  await f.tryck('#pl-kalender');
+  await f.kor("(() => { const k = document.getElementById('pl-kalender'); k.hidden = false; k.click(); k.hidden = true; return true; })()");
   await vanta(300);
   const tidIcs = await f.kor('window.__fil');
   sant('kalenderfilen med tider har ett pass per händelse med klockslaget', (tidIcs?.match(/BEGIN:VEVENT/g) ?? []).length === 20 && tidIcs.includes('DTSTART:20261102T092000') && tidIcs.includes('DTEND:20261102T100000'), tidIcs?.slice(0, 200));
@@ -677,7 +742,8 @@ try {
   sant('raden om att följa insatsen står i veckan', (await f.text('.pl-foljtips'))?.includes('Följ insatsen'));
   await f.tryck('.pl-foljtips [data-gor="folj"]');
   sant('Följ insatsen ger bockar och skattning för gruppen', (await f.kor(`!!document.querySelector('#pl-veckan [data-bock]') && document.querySelectorAll('#pl-veckan .pl-skattning li').length === 1`)) && (await f.text('#pl-veckan .pl-fraga')) === 'Hur väl klarar gruppen målet på egen hand?', await f.text('#pl-veckan .pl-fraga'));
-  sant('målet står ovanför skattningen', (await f.text('#pl-skatta .pl-maltext'))?.includes('Kunna läsa mellan raderna') && (await f.kor(`!!document.querySelector('#pl-skatta [data-mal-andra]')`)));
+  // Målet står ovanför skattningen, utan penna: pennan står en gång, i planen (användbarhetsprovet 2026-10-25).
+  sant('målet står ovanför skattningen, utan penna', (await f.text('#pl-skatta .pl-maltext'))?.includes('Kunna läsa mellan raderna') && (await f.kor(`!document.querySelector('#pl-skatta [data-mal-andra]')`)));
   sant('Följ insatsen öppnar elevlistan', await f.kor(`document.getElementById('pl-andra').open && document.activeElement?.id === 'pl-elever'`));
   // Eleverna, under Ändra planen.
   await f.kor(`document.getElementById('pl-andra').open = true`);
@@ -988,7 +1054,7 @@ try {
     sant(`${m.id}: planens länkar leder till sidor och ankare som finns`, !lankFel(await sakLankar(b)).length, [await sakLankar(b), lankFel(await sakLankar(b))]);
     if (m.id === 'fyra-raknesatten') {
       const lektion = await b.kor(`document.querySelector('#pl-veckan a[data-goatcounter-click$=":kursvecka"]')?.getAttribute('href')`);
-      sant('kurs i veckor: veckan leder till veckans lektion i metoden', !!lektion && !lankFel([lektion]).length && (await b.text('#pl-veckan a[data-goatcounter-click$=":kursvecka"]')) === 'Vecka 3 i metoden', lektion);
+      sant('kurs i veckor: veckan leder till veckans lektion i metoden', !!lektion && !lankFel([lektion]).length && (await b.text('#pl-veckan a[data-goatcounter-click$=":kursvecka"]')) === 'Vecka 3 i metoden, med veckans manus', lektion);
       sant('kurs i veckor: Mina lärdomar leder till veckans blad', (await b.kor(`[...document.querySelectorAll('#pl-veckan a')].find((a) => a.textContent === 'Mina lärdomar')?.getAttribute('href')`))?.endsWith('#mina-lardomar-2'), await b.kor(`[...document.querySelectorAll('#pl-veckan a')].map((a) => a.textContent + ' ' + a.getAttribute('href')).join(' | ')`));
     }
     if (m.id === 'seriesamtal') sant('progression i pass: passens fokus med passen och stegets namn', (await b.text('#pl-veckan .pl-fokusruta .pl-led'))?.startsWith('Pass ') && (await b.text('#pl-veckan .pl-fokusruta .pl-etikett')) === 'Passens fokus', await b.text('#pl-veckan .pl-fokusruta'));

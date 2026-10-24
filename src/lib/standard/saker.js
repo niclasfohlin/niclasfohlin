@@ -65,6 +65,8 @@ export function sakensFormer(namn) {
   } else if (/et$/.test(n)) {
     const stam = n.slice(0, -2);
     for (const f of ['en', 'ens', 'ets']) former.add(`${stam}${f}`);
+  } else if (/ning$/.test(n)) {
+    for (const f of ['en', 'ens', 'ar', 'arna']) former.add(`${n}${f}`);
   }
   return [...former];
 }
