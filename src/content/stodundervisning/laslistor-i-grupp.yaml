@@ -237,35 +237,45 @@ progression:
   enhet: Vecka
   rader:
     - vecka: "1"
+      rubrik: "Läslista start: bokstäver och ljud"
       fokus: "Läslista start: bokstäver och ljud, först i inlärningsordning och sedan blandade."
       roll: Lyssna efter att eleven säger ljudet och inte bokstavsnamnet. Ge artikulationsstöd.
     - vecka: "2"
+      rubrik: "Läslista 1: två ljud"
       fokus: "Läslista 1: två ljud, KV och VK, som se, os och ål."
       roll: "Lyssna efter att ljuden binds ihop till ett ord. Vid fel: backa och ljuda långsamt tillsammans."
     - vecka: "3"
+      rubrik: "Läslista 2: KVK i ordfamiljer"
       fokus: "Läslista 2: KVK i ordfamiljer, som sol, sal och sil."
       roll: Lyssna efter att vokalen blir lång och att eleven läser hela vägen till slutet.
     - vecka: "4"
+      rubrik: "Läslista 3: två stavelser"
       fokus: "Läslista 3: KVKV, två stavelser, som sola, laga och resa. Boken växer in i avslutningen."
       roll: Lyssna efter att eleven tar en stavelse i taget. Läs cirka tre minuter i boken.
     - vecka: "5"
+      rubrik: "Läslista 4: konsonantmöten"
       fokus: "Läslista 4: konsonantmöten, som sten, gris och häst."
       roll: Lyssna efter att inget ljud tappas eller läggs till i mötet. Cirka fyra minuter i boken.
     - vecka: "6"
+      rubrik: "Läslista 5: ändelser och sammansatta ord"
       fokus: "Läslista 5: ordet växer, med ändelser och sammansatta ord, som sol, solen och solar."
       roll: Lyssna efter att eleven läser ändelsen som en helhet. Cirka fem minuter i boken.
     - vecka: "7"
+      rubrik: "Läslista 6: meningar och en kort text"
       fokus: "Läslista 6: meningar och en kort text."
       roll: Lyssna efter läsmelodin och prata om vad meningarna betyder. Cirka fem minuter i boken.
     - vecka: Efter vecka 7
+      rubrik: "Nästa period"
       fokus: "Nästa period: dubbelteckning med kort vokal, ng-ljudet, mjuka k och g samt sj- och tj-ljuden."
       roll: Fortsätt med upprepad läsning i riktiga böcker, till exempel med TIL i grupp, så att flytet förs över till texter som betyder något.
 uppfoljning:
   text: Du behöver veta om passen ger effekt, inte bara att de har genomförts. Gör samma läsning av listorna före och efter perioden.
   rader:
     - nar: Före insatsen
+      tid: "före"
       vad: Eleven läser Läslista start till Läslista 4 för dig, en minut per lista. Skriv upp rätt lästa ord och om eleven gissar, ljudar utan att binda ihop eller läser direkt.
     - nar: Efter sex till åtta veckor
+      tid: "efter"
       vad: "Samma listor igen, en minut per lista. Jämför med starten. Läs också en kort text och fråga om innehållet: bär avkodningen fram till det texten handlar om?"
 mal:
   punkter:

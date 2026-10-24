@@ -133,6 +133,8 @@ export declare function utanPlanensFalt<T extends Record<string, any>>(d: T): T;
 export declare function forval(mp: Metodplan, idag: string): Val;
 /** Planens första måndag: startveckan, eller nästa vecka när ingen vald dag är kvar i den. */
 export declare function forstaMandagen(val: Val): string;
+/** Planera insatsens modul: namnet, versionen och om den är en beta (sajtens METODER.md under Planera insatsen). */
+export declare const PLANERA: Readonly<{ namn: string; version: string; beta: boolean }>;
 export declare function planera(mp: Metodplan, val: Val): Plan;
 export declare function veckanFor(plan: Plan, datum: string): PlanVecka | null;
 export declare function nastaPass(plan: Plan, datum: string): Pass | null;

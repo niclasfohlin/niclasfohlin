@@ -603,14 +603,17 @@ progression:
   enhet: Pass
   rader:
     - vecka: "1"
+      rubrik: "Bildserie 1, Fönsterplatsen"
       led: Jag gör
       fokus: Bildserie 1, Fönsterplatsen, med syftet, reglerna och tankebubblan.
       roll: Du säger syftet och reglerna, visar tankebubblan, stannar i berättelsen innan Alva svarar Sam och säger själv vad en av personerna kan tänka.
     - vecka: 2–6
+      rubrik: "Bildserie 2–6"
       led: Vi gör
       fokus: Bildserie 2–⁠6.
       roll: Du läser och stannar, och eleverna säger vad som kan hända och svarar som personerna. Från pass 4 berättar en elev serien utan dina frågor, och eleverna ställer frågorna på kortet till varandra. Du ber om en tanke till.
     - vecka: 7 till det sista
+      rubrik: "Egna händelser"
       led: Ni gör
       fokus: Pass 7 om en gång när det nästan blev bråk, egna händelser och det sista passet.
       roll: Du ritar åt den som vill. Från pass 8 spolar du tillbaka till när det var lugnt och ritar elevens version, eller låter eleven rita. Efter det sista passet visar du provbilden för var och en.
@@ -618,12 +621,16 @@ uppfoljning:
   text: Du behöver veta om eleven ser mer i en social situation än förut, och om det märks utanför rummet. Provbilden och protokollet står under Material att skriva ut.
   rader:
     - nar: Före pass 1
+      tid: "före"
       vad: Visa provbilden för en elev i taget, och skriv poängen och båda siffrorna i protokollet.
     - nar: I varje pass
+      tid: "i passet"
       vad: Skriv i snabbmallen vem som sa vad som kunde hända och vem som hittade rutan där någon hade behövt göra annorlunda.
     - nar: Efter sista passet
+      tid: "efter"
       vad: Visa provbilden och be om siffrorna igen. Visa eleven svaren före och efter.
     - nar: Fyra veckor efter sista passet
+      tid: "efter 4 veckor"
       vad: Håll ett påfyllningspass på 30 minuter där ni läser planerna, och fråga de vuxna runt eleven hur planen går.
 mal:
   punkter:

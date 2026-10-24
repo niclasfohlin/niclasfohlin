@@ -54,7 +54,7 @@ import Bladgrupp from './Bladgrupp.astro';
 import Snabbmall from './Snabbmall.astro';
 import Filval from './Filval.astro';
 import Pabordet from './Pabordet.astro';
-import { bladNamn, delensRad, kartan, metodensBlad, radensDel } from '../lib/karta';
+import { bladNamn, delensRad, kartan, radensDel } from '../lib/karta';
 import { veckanRyms } from '../lib/veckosida';
 import { veckansLista, veckomaterial } from '../lib/veckomaterial';
 import { mallarnasAnkare, metodensAnkare, metodensAvsnitt } from '../lib/metodankare';
@@ -161,15 +161,13 @@ const brak = d.omrade === 'Matematik';
 // Sidnavigationen och ankarna (src/lib/metodankare.ts), som planen också läser, så att planens länkar leder till samma
 // ankare som sidan har (K-493).
 const avsnitt = metodensAvsnitt(d, { pass: !!pass, stegen: ord.stegen, lektionsbank: bank?.ord.meny });
-const { ankare, tabellAnkare, ramAnkare, delAnkare } = metodensAnkare(d, avsnitt);
+const { ankare, tabellAnkare, ramAnkare, delAnkare, blad, bladAnkare } = metodensAnkare(d, avsnitt);
 const mallAnkare = mallarnasAnkare(d);
 const versalt = (s: string) => (s ? s.charAt(0).toLocaleUpperCase('sv') + s.slice(1) : s);
 const menyLektioner = (d.ramar?.ramar ?? []).flatMap((r, ri) => (r.lektioner ? [{ id: `ram-${ri + 1}`, namn: versalt((r.rubrik.split(':')[1] ?? r.rubrik).trim()) }] : []));
 // Kartan (src/lib/karta.ts): tabellen med karta leder till veckorna och räknebladen, och varje vecka visar sin rad.
 // Räknebladen får ett ankare var, som bladens namn i kartan leder till.
 const karta = kartan(d);
-const blad = metodensBlad(d);
-const bladAnkare = new Map([...blad].map(([namn, plats]) => [`${plats.ri}-${plats.li}`, ankare(`blad ${namn}`)]));
 const kartLankar = { vecka: (rad: string[]) => { const p = radensDel(d, rad); return p ? `#${delAnkare[p.ri][p.di]}` : undefined; }, blad: (namn: string) => { const p = blad.get(namn); return p ? `#${bladAnkare.get(`${p.ri}-${p.li}`)}` : undefined; }, namn: new Set(blad.keys()), nivaer: d.nivaer };
 const radLankar = { ...kartLankar, vecka: undefined };
 // Veckans material (src/lib/veckomaterial.ts, Niclas 2026-10-06: "Man måste leta omkring för att hitta vecka 2 på 3

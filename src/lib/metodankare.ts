@@ -2,6 +2,7 @@
 // mallarna, i den ordning metodens sida ger dem. Metodens sida (Metod.astro) och planen (src/lib/metodsaker.ts) läser samma
 // funktioner, så att en länk från planen alltid leder till det ankare som sidan har (K-493).
 import type { MetodData } from './metod';
+import { metodensBlad } from './karta';
 
 // Urvalsavsnittets rubrik är en fråga ("Var hittar du materialet och talen?"); menyn tar dess kärna ("Materialet och
 // talen"), så att posten säger vad avsnittet gäller och inte krockar med ramarnas "Material per årskurs" (K-034).
@@ -46,8 +47,8 @@ export function metodensAvsnitt(d: MetodData, o: { pass: boolean; stegen: string
 export const ankarnamn = (s: string) => s.split(':')[0].toLowerCase().replace(/[åä]/g, 'a').replace(/ö/g, 'o').replace(/é/g, 'e').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 /**
- * Ankarna i sidans ordning: tabellerna, ramarna och lektionernas delar. ankare ger fler ankare i samma följd (bladen och
- * listorna i Metod.astro), så att ett namn aldrig får två ankare.
+ * Ankarna i sidans ordning: tabellerna, ramarna, lektionernas delar och kursens blad (räknebladen, som "Addition 1").
+ * ankare ger fler ankare i samma följd (listorna i Metod.astro), så att ett namn aldrig får två ankare.
  */
 export function metodensAnkare(d: MetodData, avsnitt: { id: string }[]) {
   const ramar = d.ramar?.ramar ?? [];
@@ -58,7 +59,10 @@ export function metodensAnkare(d: MetodData, avsnitt: { id: string }[]) {
   // Veckorna som lektioner (en ram med lektioner, De fyra räknesätten, Niclas 2026-10-04): varje del har ett eget ankare, som
   // korten överst i ramen leder till, och ramen står i menyn med namnet efter kolon ("Till läraren: veckorna" blir Veckorna).
   const delAnkare = ramar.map((r) => (r.lektioner ? r.delar.map((del) => ankare(del.rubrik)) : []));
-  return { ankare, tabellAnkare, ramAnkare, delAnkare };
+  // Kursens blad (src/lib/karta.ts): ett ankare för varje blad, som kartan och planen leder till.
+  const blad = metodensBlad(d);
+  const bladAnkare = new Map([...blad].map(([namn, plats]) => [`${plats.ri}-${plats.li}`, ankare(`blad ${namn}`)]));
+  return { ankare, tabellAnkare, ramAnkare, delAnkare, blad, bladAnkare };
 }
 
 /**

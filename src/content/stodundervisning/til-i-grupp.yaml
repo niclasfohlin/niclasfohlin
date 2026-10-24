@@ -210,23 +210,29 @@ progression:
   text: Ansvaret flyttas gradvis till eleven. Då blir passen en sammanhängande insats och rutinen hemma blir en vana.
   rader:
     - vecka: 1–2
+      rubrik: "Rutinen och kontraktet"
       fokus: Rutinen sätter sig i skolan och hemma. Möte med vårdnadshavare, kontraktet skrivs på.
       roll: Läraren leder bildvandringen, modellerar ljudning och omläsning och kontrollerar lässchemat varje dag.
     - vecka: 3–5
+      rubrik: "Läsa om själv och böcker uppåt"
       fokus: Eleven börjar läsa om meningar själv. Böckerna byts uppåt när flytet kommer.
       roll: Läraren väntar längre, frågar i stället för att säga och ger kortare stöd.
     - vecka: 6–8
+      rubrik: "Bildvandringen med kortare stöd"
       fokus: Eleven gör bildvandringen med kortare stöd och väljer favoritmeningar utan hjälp hemma.
       roll: Läraren lyssnar, ger återkoppling på flyt och läsmelodi och följer upp nivån.
     - vecka: 9–10 vid behov
+      rubrik: "Längre texter ur klassens läsning"
       fokus: Eleven läser längre texter och böcker ur klassens ordinarie läsning.
       roll: Läraren följer upp om läsningen överförs till klassrummet och planerar avslutet med hemmet.
 uppfoljning:
   text: Du behöver veta om passen ger effekt, inte bara att de har genomförts. Gör en enkel före- och efterkoll.
   rader:
     - nar: Före insatsen
+      tid: "före"
       vad: Eleven läser en kort text på sin nivå högt i en minut. Notera antal rätt lästa ord, vilka ord som fastnar och om eleven läser om när det blir fel. Spara texten.
     - nar: Efter 6–10 veckor
+      tid: "efter"
       vad: "Låt eleven läsa en liknande text och jämför med startläget. Räkna också böckerna i lässchemat: hur många har lästs två gånger?"
 mal:
   punkter:

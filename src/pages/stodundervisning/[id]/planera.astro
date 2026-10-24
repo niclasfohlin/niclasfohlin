@@ -10,12 +10,12 @@ export async function getStaticPaths() {
   const metoder = (await publicerade('stodundervisning')).filter((m) => planbar(m.data));
   const fel = (await Promise.all(metoder.map(insatsplanFel))).flat();
   if (fel.length) throw new Error(`Planera insatsen: ${fel.length} fel i metodernas plan (METODER.md under Planera insatsen):\n  ${fel.join('\n  ')}`);
-  return metoder.map((m) => ({ params: { id: m.id }, props: { m } }));
+  return metoder.map((m) => ({ params: { id: m.id }, props: { m, antal: metoder.length } }));
 }
 
-const { m } = Astro.props;
+const { m, antal } = Astro.props;
 const data = await planensData(m);
 const lektionskort = metodensLektionskort(m.data, m.id);
 ---
 
-<Planera data={data} lektionskort={lektionskort} snabbmall={m.data.snabbmall ? { rubrik: m.data.snabbmall.rubrik, period: m.data.snabbmall.period } : undefined} />
+<Planera data={data} lektionskort={lektionskort} antal={antal} snabbmall={m.data.snabbmall ? { rubrik: m.data.snabbmall.rubrik, period: m.data.snabbmall.period } : undefined} />

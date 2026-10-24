@@ -19,9 +19,10 @@ const HUVUDORD = {
   test: ['test', 'testet', 'testen', 'testets'],
   diplom: ['diplom', 'diplomet', 'diplomen', 'diplomets'],
   lathund: ['lathund', 'lathunden', 'lathundar', 'lathundarna', 'lathundens'],
+  bild: ['bild', 'bilden', 'bilder', 'bilderna', 'bildens', 'bildernas'],
 };
 // De bestämda formerna, som spärren letar efter; en grundform som "kort" är också ett vanligt ord.
-const BESTAMDA = Object.values(HUVUDORD).flatMap((f) => f.slice(1)).filter((f) => !['mallar', 'scheman', 'listor', 'lathundar'].includes(f)).sort((a, b) => b.length - a.length);
+const BESTAMDA = Object.values(HUVUDORD).flatMap((f) => f.slice(1)).filter((f) => !['mallar', 'scheman', 'listor', 'lathundar', 'bilder'].includes(f)).sort((a, b) => b.length - a.length);
 // Huvudordet som ett ord slutar på, med den längsta formen först, så att "kortet" inte läses som "kort" och "et".
 const huvudordet = (ord) => {
   const sma = ord.toLowerCase();
@@ -39,7 +40,9 @@ const huvudordet = (ord) => {
  */
 export function arSaksord(namn) {
   const n = String(namn ?? '').trim();
-  return !/\s/.test(n) && (!!huvudordet(n) || n.length >= 12);
+  const ord = n.split(/\s+/);
+  // Ett av orden är ett ord för en sak (Läslista 1, Kartläggningens protokoll), eller namnet är ett långt sammansatt ord.
+  return ord.some((o) => !!huvudordet(o)) || (ord.length === 1 && n.length >= 12);
 }
 
 /**
@@ -87,7 +90,10 @@ export function sakdelar(text, saker) {
       if (!f) continue;
       for (const m of text.matchAll(new RegExp(`(^|[^\\p{L}\\p{N}])(${formMonster(f, s.versal)})(?![\\p{L}\\p{N}])`, 'gu'))) {
         const start = m.index + m[1].length;
-        if (s.versal && forstIMening(text.slice(0, start))) continue;
+        // En titel med en siffra, som Addition 1, är en titel också först i en mening.
+        if (s.versal && !/\d/.test(f) && forstIMening(text.slice(0, start))) continue;
+        // Ett namn med en siffra som börjar ett spann, som "Bildserie 2–6", är spannet och inte saken (betan 2026-10-24).
+        if (/\d$/.test(f) && /^\s*[–-]⁠?\s*\d/.test(text.slice(start + m[2].length))) continue;
         traffar.push({ start, slut: start + m[2].length, sak: i });
       }
     }

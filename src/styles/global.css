@@ -3091,6 +3091,16 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 .pl-din p { margin: 0; line-height: 1.35; }
 .pl-din-etikett { display: block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-accent); }
 .pl-din-namn { text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; }
+/* Beta: Planera är en beta så länge den prövas på några metoder, märkt där läraren går in och planerar (Niclas 2026-10-24:
+   "en BETA tagg (likt lösning och skrivning) men sådan som man känner igen som BETA"). Formen är områdenas etikett, i en
+   egen bärnstensfärg. */
+.beta { display: inline-block; vertical-align: 0.15em; font-family: var(--typsnitt-ui); font-size: 0.72rem; font-weight: 700; line-height: 1.2; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.2rem 0.45rem; border-radius: 6px; background: #fbe3b2; color: #6b3a00; border: 1px solid #e9b65a; }
+h1 .beta { font-size: 0.85rem; vertical-align: 0.35em; }
+/* Raden om modulen längst ned i planen: namnet och versionen, och mejlet om något inte fungerar. */
+.pl-version { margin: 2rem 0 0; padding: 0.9rem 0 0; border-top: 1px solid var(--farg-kant); font-size: 0.9rem; color: var(--farg-text-svag); }
+.pl-version p { margin: 0 0 0.4rem; }
+.pl-version-namn { font-weight: 700; color: var(--farg-text); }
+.pl-version a { overflow-wrap: anywhere; }
 /* Ett långt ord utan mellanslag, som ett namn eller ett mål, bryts i sin ruta i stället för att göra sidan bredare än
    skärmen (buggjakten 2026-10-24). */
 .plan .pl-maltext, .plan .pl-chip, .plan .meta, .pl-summa p, .pl-noter li, .pl-insatser .pl-metod, .pl-elevnamn { overflow-wrap: anywhere; }

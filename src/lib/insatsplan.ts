@@ -10,7 +10,8 @@ import { formateraDatum } from './innehall';
 import { harLathund } from './metod';
 import { metodensLektionskort } from './lektionskort';
 import { lektionskortetsPapper } from './lektionskortdata';
-import { metodensSaker, type MetodSak } from './metodsaker';
+import { kursensVeckor, metodensSaker, type MetodSak } from './metodsaker';
+import { publicerade } from './innehall';
 import { site } from '../data/site';
 
 type Metod = CollectionEntry<'stodundervisning'>;
@@ -72,6 +73,8 @@ export interface PlanData {
   harLathund: boolean;
   /** Det metoden namnger i planens texter, med adresserna (src/lib/metodsaker.ts): bara de saker som texterna nämner. */
   saker: MetodSak[];
+  /** Veckans lektion i metoden för varje vecka i en kurs med veckor (De fyra räknesätten), som veckan i planen leder till. */
+  kursveckor?: Record<string, string>;
 }
 
 // Planens texter ur metoden, som sidan visar med länkar till det de namnger, med var de står till spärren.
@@ -80,9 +83,22 @@ const planensTexter = (d: Metod['data']): [string, string][] => [
   ...(d.progression?.rader ?? []).flatMap((r): [string, string][] => [[`Progressionens rad "${r.vecka}"`, r.fokus], [`Progressionens rad "${r.vecka}"`, r.roll], ...(r.led ? [[`Progressionens rad "${r.vecka}"`, r.led] as [string, string]] : [])]),
   ...(d.checklista?.punkter ?? []).map((p): [string, string] => ['Checklistan', p]),
 ];
+// De andra metoderna, som en text kan nämna ("till exempel med TIL i grupp"): titeln före kolon när bara en metod har den,
+// annars hela titeln.
+async function andraMetoder(id: string): Promise<MetodSak[]> {
+  const andra = (await publicerade('stodundervisning')).filter((x) => x.id !== id);
+  const forsta = (t: string) => t.split(':')[0].trim();
+  const antal = new Map<string, number>();
+  for (const x of andra) antal.set(forsta(x.data.titel), (antal.get(forsta(x.data.titel)) ?? 0) + 1);
+  return andra.map((x) => {
+    const kort = forsta(x.data.titel);
+    return { namn: x.data.titel, former: [...new Set([x.data.titel, ...(antal.get(kort) === 1 ? [kort] : [])])], versal: true, adress: `/stodundervisning/${x.id}` };
+  });
+}
+
 /** Sakerna som planens texter nämner (K-493), så att sidan bara bär dem. */
-export function planensSaker(m: Metod): MetodSak[] {
-  const alla = metodensSaker(m.data, m.id);
+export async function planensSaker(m: Metod): Promise<MetodSak[]> {
+  const alla = [...metodensSaker(m.data, m.id), ...(await andraMetoder(m.id))];
   const anvanda = new Set(planensTexter(m.data).flatMap(([, t]) => sakdelar(t, alla).flatMap((x) => (x.sak === undefined ? [] : [x.sak]))));
   return alla.filter((_, i) => anvanda.has(i));
 }
@@ -90,6 +106,8 @@ export function planensSaker(m: Metod): MetodSak[] {
 /** Planens data ur metodens fil. */
 export async function planensData(m: Metod): Promise<PlanData> {
   const d = m.data;
+  // En kurs med veckor har veckans titel i metoden, och den är veckans rubrik i planen när progressionen inte har en egen.
+  const kurs = kursensVeckor(d, m.id);
   const bank = harTaFram(m, 'texter') || harTaFram(m, 'problem') ? await planensBank(m) : undefined;
   const uppdaterad = d.uppdaterad ? (d.uppdaterad instanceof Date ? d.uppdaterad.toISOString().slice(0, 10) : String(d.uppdaterad).slice(0, 10)) : undefined;
   return {
@@ -103,12 +121,13 @@ export async function planensData(m: Metod): Promise<PlanData> {
     mal: planensMal(m) ?? '',
     tid: d.tid,
     period: d.period,
-    ...(d.progression ? { progression: { enhet: d.progression.enhet, rader: d.progression.rader.map((r) => ({ ...r, kort: r.rubrik ?? postensRad(r.fokus, 80) })) } } : {}),
+    ...(d.progression ? { progression: { enhet: d.progression.enhet, rader: d.progression.rader.map((r) => ({ ...r, kort: r.rubrik ?? (kurs[r.vecka]?.titel || postensRad(r.fokus, 80)) })) } } : {}),
     uppfoljning: { rader: d.uppfoljning?.rader ?? [] },
     checklista: d.checklista?.punkter ?? [],
     ...(bank ? { bank } : {}),
     harLathund: harLathund(d),
-    saker: planensSaker(m),
+    saker: await planensSaker(m),
+    ...(Object.keys(kurs).length ? { kursveckor: Object.fromEntries(Object.entries(kurs).map(([v, k]) => [v, k.adress])) } : {}),
   };
 }
 

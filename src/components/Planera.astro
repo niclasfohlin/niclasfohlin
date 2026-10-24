@@ -10,12 +10,16 @@
 import Base from '../layouts/Base.astro';
 import SkrivUtPdf from './SkrivUtPdf.astro';
 import Lektionskortknapp from './Lektionskortknapp.astro';
-import { periodensLangd, tidensMatt } from '../lib/standard/index.js';
+import { periodensLangd, PLANERA, tidensMatt } from '../lib/standard/index.js';
+import { site } from '../data/site';
 import type { PlanData } from '../lib/insatsplan';
 import type { Lektionskort } from '../lib/lektionskort';
 
-interface Props { data: PlanData; lektionskort: Lektionskort[]; snabbmall?: { rubrik: string; period: string } }
-const { data, lektionskort, snabbmall } = Astro.props;
+interface Props { data: PlanData; lektionskort: Lektionskort[]; antal: number; snabbmall?: { rubrik: string; period: string } }
+const { data, lektionskort, antal, snabbmall } = Astro.props;
+// Raden om modulen längst ned: namnet och versionen, att den är en beta, och mejlet till Niclas med metoden och versionen i
+// ämnet (Niclas 2026-10-24: "skicka mail till mig om något inte funkar").
+const mejl = `mailto:${site.epost}?subject=${encodeURIComponent(`${PLANERA.namn} ${PLANERA.version}: ${data.titel}`)}`;
 const period = periodensLangd(data.period)!;
 const matt = tidensMatt(data.tid ?? '');
 // Längderna att välja: metodens spann (högst tio knappar), eller för en period utan slut den kortaste och två längre.
@@ -33,7 +37,7 @@ const json = JSON.stringify(data).replace(/</g, '\\u003c');
   <article class="plan" id="plan" data-metod={data.id}>
     <header class="pl-huvud">
       <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={data.sida}>{data.titel}</a> · Planera</p>
-      <h1>Planera insatsen</h1>
+      <h1>Planera insatsen{PLANERA.beta && <>{' '}<span class="beta">Beta</span></>}</h1>
       <p class="ingress">Välj när ni träffas. Planen räknar fram passen och uppföljningen ur metoden, och varje vecka visar vad ni gör och var materialet finns.</p>
       <noscript><p class="pl-utan-js">Planen räknas fram i webbläsaren och behöver JavaScript. Metoden står på <a href={data.sida}>metodens sida</a>.</p></noscript>
     </header>
@@ -160,6 +164,11 @@ const json = JSON.stringify(data).replace(/</g, '\\u003c');
         <p class="pl-ta-bort"><button type="button" class="pl-textknapp" id="pl-ta-bort" hidden>Ta bort planen</button></p>
       </section>
     </div>
+
+    <footer class="pl-version">
+      <p class="pl-version-namn">{PLANERA.beta && <span class="beta">Beta</span>}{' '}{PLANERA.namn} {PLANERA.version}</p>
+      <p>{PLANERA.namn} är modulen som räknar fram planen ur metoden och följer insatsen. {PLANERA.beta ? `Den är ny och prövas på ${antal === 1 ? 'en metod' : `${antal} metoder`}, så allt är inte prövat i skolan än. ` : ''}Fungerar något inte, mejla mig, så rättar jag det: <a href={mejl} data-goatcounter-click={`planera:${data.id}:mejl`} data-goatcounter-title={`${data.titel}: mejl om Planera`}>{site.epost}</a>.</p>
+    </footer>
 
     <div class="pl-filer" id="pl-filer" hidden>
       {snabbmall && <a class="knapp sekundar" data-fil="snabbmall" href={`/stodundervisning/${data.id}-snabbmall.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="1" data-goatcounter-click={`utskrift:${data.id}-snabbmall`} data-goatcounter-title={`${data.titel}: ${snabbmall.rubrik}, bladet`}><span data-direkt="Skriv ut snabbmallen">Snabbmallen som pdf</span></a>}

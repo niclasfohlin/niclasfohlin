@@ -10,11 +10,37 @@ import { harLathund, passOrd, passOversikt } from './metod';
 import { bankAv, enhetAdress } from './bank';
 import { mallarnasAnkare, metodensAnkare, metodensAvsnitt } from './metodankare';
 import { metodensLektionskort } from './lektionskort';
+import { forstaLed } from './karta';
 import { CENTRALA, lasbarAdress } from './centrala';
 import { arSaksord, slugAv } from './standard/index.js';
 
-/** En sak med sin adress. nivaer: adressen på varje nivå, när saken finns på bankens nivåer (kartläggningens text före). */
-export interface MetodSak { namn: string; former?: string[]; versal?: boolean; adress: string; nivaer?: Record<string, string> }
+/**
+ * En sak med sin adress. nivaer: adressen på varje nivå, när saken finns på bankens nivåer (kartläggningens text före).
+ * veckor: adressen för metodens veckor, när saken finns en gång för några veckor (Mina lärdomar: vecka 1–2).
+ */
+export interface MetodSak { namn: string; former?: string[]; versal?: boolean; adress: string; nivaer?: Record<string, string>; veckor?: Record<string, string> }
+
+// Veckorna som ett led i en rubrik säger: "vecka 3" och "vecka 1–2".
+const veckornaI = (led?: string): number[] | undefined => {
+  const m = led?.match(/^vecka (\d+)(?:\s*[–-]\s*(\d+))?$/i);
+  if (!m) return undefined;
+  const fran = Number(m[1]), till = Number(m[2] ?? m[1]);
+  return till >= fran ? Array.from({ length: till - fran + 1 }, (_, i) => fran + i) : undefined;
+};
+
+/**
+ * Kursens veckor i metoden (en ram med lektioner, som De fyra räknesätten): ankaret för varje veckas lektion, och veckans
+ * titel ("Vecka 3 · Hundratal och två växlingar" har titeln Hundratal och två växlingar).
+ */
+export function kursensVeckor(d: MetodData, id: string): Record<string, { adress: string; titel: string }> {
+  const { delAnkare } = metodensAnkare(d, metodensAvsnitt(d, { pass: !!passOversikt(d), stegen: passOrd(d).stegen }));
+  const ut: Record<string, { adress: string; titel: string }> = {};
+  (d.ramar?.ramar ?? []).forEach((r, ri) => {
+    if (!r.lektioner) return;
+    r.delar.forEach((del, di) => { const v = veckornaI(forstaLed(del.rubrik)); if (v?.length === 1 && !ut[v[0]]) ut[v[0]] = { adress: `/stodundervisning/${id}#${delAnkare[ri][di]}`, titel: del.rubrik.split(' · ').slice(1).join(' · ').trim() }; });
+  });
+  return ut;
+}
 
 // Formerna av en sak som heter med två led eller fler, som "kartläggning före": kartläggningen före, kartläggningens text
 // före och kartläggningens texter före.
@@ -37,22 +63,32 @@ export function metodensSaker(d: MetodData, id: string): MetodSak[] {
   // Materialets ramar leder till ramen på metodens sida, där bladet står med sin knapp Skriv ut. Namnet är rubrikens första
   // led ("Lärarhandledningen: Läs mellan raderna tillsammans" heter Lärarhandledningen). Bankens texter och deras sidor
   // står på egna sidor och kommer nedan; bankens lärarhandledning har sin egen sida.
-  const { ramAnkare } = metodensAnkare(d, metodensAvsnitt(d, { pass: !!passOversikt(d), stegen: passOrd(d).stegen }));
+  const { ramAnkare, blad, bladAnkare } = metodensAnkare(d, metodensAvsnitt(d, { pass: !!passOversikt(d), stegen: passOrd(d).stegen }));
   const nivaNamn = new Map((bank?.nivaer ?? []).map((n) => [n.namn, n.slug]));
-  const perNamn = new Map<string, { adress: string; niva?: string }[]>();
+  const perNamn = new Map<string, { adress: string; niva?: string; veckor?: number[] }[]>();
   ramar.forEach((r, ri) => {
     // Nivåernas översikter heter som nivåerna, och en nivå är ett urval, ingen sak.
     if ((bank?.ramar.has(ri) || bank?.oversikter.has(ri)) && bank.handledning !== ri) return;
     const [namn, efter] = r.rubrik.split(':').map((x) => x.trim());
     if (!namn) return;
     const adress = bank?.handledning === ri ? `${sida}/texter/lararhandledning` : `${sida}#${ramAnkare[ri]}`;
-    perNamn.set(namn, [...(perNamn.get(namn) ?? []), { adress, ...(efter && nivaNamn.has(efter) ? { niva: nivaNamn.get(efter)! } : {}) }]);
+    const veckor = veckornaI(efter);
+    perNamn.set(namn, [...(perNamn.get(namn) ?? []), { adress, ...(efter && nivaNamn.has(efter) ? { niva: nivaNamn.get(efter)! } : {}), ...(veckor ? { veckor } : {}) }]);
   });
   for (const [namn, platser] of perNamn) {
     if (platser.length === 1) saker.push(sak(namn, platser[0].adress));
-    // Samma namn på varje nivå ("Lärarens sidor: Lättläst") leder till nivåns; utan nivå till den första.
+    // Samma namn på varje nivå ("Lärarens sidor: Lättläst") leder till nivåns, och samma namn för olika veckor ("Mina
+    // lärdomar: vecka 1–2") till veckans; utan nivå eller vecka till den första. Annars leder namnet till den första ramen,
+    // som i en serie av blad ("Övningsblad: Addition" och de andra) där den första är början.
     else if (platser.every((p) => p.niva)) saker.push(sak(namn, platser[0].adress, { nivaer: Object.fromEntries(platser.map((p) => [p.niva!, p.adress])) }));
+    else if (platser.every((p) => p.veckor)) saker.push(sak(namn, platser[0].adress, { veckor: Object.fromEntries(platser.flatMap((p) => p.veckor!.map((v) => [String(v), p.adress]))) }));
+    else saker.push(sak(namn, platser[0].adress));
   }
+  // Materialets avsnitt, som "Kursens material", och kursens veckor och blad: "vecka 3" leder till veckans lektion i en kurs
+  // med veckor, och "Addition 1" till bladet (src/lib/karta.ts).
+  if (d.ramar?.rubrik) saker.push(sak(d.ramar.rubrik, `${sida}#ramar`));
+  for (const [v, { adress }] of Object.entries(kursensVeckor(d, id))) saker.push({ namn: `Vecka ${v}`, former: [`Vecka ${v}`, `vecka ${v}`], adress });
+  for (const [namn, plats] of blad) { const a = bladAnkare.get(`${plats.ri}-${plats.li}`); if (a) saker.push({ namn, former: [namn], versal: true, adress: `${sida}#${a}` }); }
   // Kontraktet och schemat under Hem och skola (TIL i grupp) står i materialet med egna ankare; namnet är rubrikens första
   // ord, som Lässchema i "Lässchema TIL" (Codex 2026-10-24).
   if (d.hem?.kontrakt) saker.push(sak(d.hem.kontrakt.rubrik.split(/\s+/)[0], `${sida}#kontraktet`));

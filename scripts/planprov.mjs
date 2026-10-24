@@ -57,7 +57,9 @@ ska('vecka 1–4 är fyra veckor', s.tolkaTid('vecka 1–4').veckor.join() === '
 ska('pass 6, 8 och 10', s.tolkaTid('pass 6, 8 och 10').pass.join() === '6,8,10');
 const steg = [['1', 1, 1], ['4–5', 4, 5], ['6–8', 6, 8], ['9–10 vid behov', 9, 10], ['Vecka 3', 3, 3], ['Pass 2–6', 2, 6], ['7 till det sista', 7, undefined], ['Från pass 11', 11, undefined]];
 for (const [t, a, b] of steg) { const x = s.tolkaSteg(t); ska(`tolkaSteg("${t}")`, x && x.fran === a && x.till === b, x); }
-for (const t of ['När ni är varma i kläderna', 'Efter vecka 6', '5–3', '']) ska(`tolkaSteg("${t}") ska vara null`, s.tolkaSteg(t) === null, s.tolkaSteg(t));
+for (const t of ['När ni är varma i kläderna', 'Efter kursen', '5–3', '']) ska(`tolkaSteg("${t}") ska vara null`, s.tolkaSteg(t) === null, s.tolkaSteg(t));
+// Raden efter den sista veckan, som Läslistor i grupps nästa period (Planera 0.1).
+ska('tolkaSteg("Efter vecka 7") är veckorna från 8', JSON.stringify(s.tolkaSteg('Efter vecka 7')) === '{"fran":8,"vidBehov":false}', s.tolkaSteg('Efter vecka 7'));
 
 // Textsamtal i grupp, som metodens fil står.
 const ts = metod('textsamtal-i-grupp');
@@ -204,6 +206,7 @@ if (tsMp) {
   ska('ett namn i grundform hittas i bestämd form', s.sakdelar('Ta fram sifferkorten.', [{ namn: 'Sifferkort' }]).some((x) => x.sak === 0 && x.text === 'sifferkorten') && !s.olankadeSaker('Ta fram sifferkorten.', [{ namn: 'Sifferkort' }]).length);
   const fras = s.sakdelar('Hittat på min huvudperson. Fyll i Min huvudperson i pass 2.', [{ namn: 'Min huvudperson', versal: !s.arSaksord('Min huvudperson') }]);
   ska('ett namn som också är en vanlig fras länkas bara som titel', fras.filter((x) => x.sak !== undefined).length === 1 && fras.find((x) => x.sak !== undefined)?.text === 'Min huvudperson' && s.arSaksord('Samtalsreglerna') && s.arSaksord('Lathunden'), fras);
+  ska('ett spann som Bildserie 2–6 länkas inte, men Bildserie 1 gör', s.sakdelar('Bildserie 2–⁠6. Sedan Bildserie 1.', [{ namn: 'Bildserie 2', former: ['Bildserie 2'], versal: true }, { namn: 'Bildserie 1', former: ['Bildserie 1'], versal: true }]).filter((x) => x.sak !== undefined).map((x) => x.text).join() === 'Bildserie 1');
   ska('ett datum utanför åren går inte att läsa ur en länk', s.lasVal('#s=9999-12-31&d=135&l=6') === null && s.lasVal('#s=1999-12-31&d=135&l=6') === null && s.lasVal('#s=2099-12-28&d=135&l=6') !== null);
   ska('en mening utan beslut kommer med i texten', s.sammanstallningstext(info, p, s.sammanstallning(p, { utvardering: { not: 'Gruppen läser mer på egen hand' } }, '2026-12-14')).includes('Utvärdering efter insatsen: Gruppen läser mer på egen hand.'));
 }
@@ -669,14 +672,14 @@ try {
   sant('planen står kvar efter omladdning', (await f.text('#pl-veckan .meta'))?.includes('Prov 2B') && (await f.text('#pl-veckan-rubrik')) === 'Vecka 3 i planen');
   // Metodens sida: knappen och Din insats; en metod utan plan har ingen knapp.
   await f.oppna(`${bas}/stodundervisning/textsamtal-i-grupp`);
-  sant('metodens sida har knappen Planera insatsen', (await f.kor(`[...document.querySelectorAll('.metod-centrala a')].some((a) => a.textContent === 'Planera insatsen' && a.getAttribute('href') === '/stodundervisning/textsamtal-i-grupp/planera')`)));
+  sant('metodens sida har knappen Planera insatsen med Beta', (await f.kor(`[...document.querySelectorAll('.metod-centrala a')].some((a) => a.textContent.replace(/\\s+/g, ' ').trim() === 'Planera insatsen Beta' && !!a.querySelector('.beta') && a.getAttribute('href') === '/stodundervisning/textsamtal-i-grupp/planera')`)));
   await f.bredd(390); await vanta(150); await f.bild('7-metodens-sida-telefon'); await f.dator();
   sant('Din insats på metodens sida', (await f.text('#pl-din'))?.includes('Din insats · Prov 2B') && (await f.text('#pl-din'))?.includes('pass 8 i morgon') && (await f.kor(`document.querySelector('#pl-din a').getAttribute('href').includes('&p=')`)), await f.text('#pl-din'));
   await f.bredd(320); await vanta(150);
   sant('metodens sida rullar inte i sidled i 320 punkter med Din insats', !(await rullar(f)));
   await f.dator();
   await f.oppna(`${bas}/stodundervisning/upprepad-lasning`);
-  sant('en metod utan plan har ingen knapp och ingen rad', !(await f.kor(`[...document.querySelectorAll('a')].some((a) => a.textContent === 'Planera insatsen')`)) && !(await f.kor(`!!document.getElementById('pl-din')`)));
+  sant('en metod utan plan har ingen knapp och ingen rad', !(await f.kor(`[...document.querySelectorAll('a')].some((a) => a.textContent.startsWith('Planera insatsen'))`)) && !(await f.kor(`!!document.getElementById('pl-din')`)));
   await f.oppna(`${bas}/stodundervisning`);
   await f.bredd(390); await vanta(150); await f.bild('6-metodbanken-telefon'); await f.dator();
   sant('Dina insatser i metodbanken', (await f.kor(`!document.getElementById('pl-insatser').hidden`)) && (await f.text('#pl-insatser'))?.includes('Textsamtal i grupp') && (await f.text('#pl-insatser'))?.includes('Prov 2B') && (await f.text('#pl-insatser'))?.includes('1 pass bockade'), await f.text('#pl-insatser'));
@@ -839,6 +842,33 @@ try {
   sant('på söndagen gäller rutan nästa pass och dess vecka', (await helg.text('.pl-nar')) === 'I morgon, måndag 9 november, pass 4 av 18, vecka 2 i planen' && (await helg.text('#pl-veckan .pl-nasta [data-vy="2"]')) === 'Till vecka 2' && (await helg.text('#pl-veckan .pl-veckans summary'))?.startsWith('Texter till vecka 2'), [await helg.text('.pl-nar'), await helg.text('#pl-veckan .pl-veckans summary')]);
   sant('inga fel på söndagen', !helg.undantag.length, helg.undantag);
   helg.stang();
+
+  // ---- Betans andra metoder (Planera 0.1) ----
+  // Varje metod med planens fält: förslaget, en sparad plan med veckan, veckans fokus, länkar som leder till något som
+  // finns, Beta och versionen, och inga fel. Formerna prövas så: en kurs i veckor med veckans lektion (De fyra räknesätten),
+  // en progression i pass (Seriesamtal), Hem och skola (TIL i grupp) och veckor efter den sista raden (Läslistor i grupp).
+  const b = await flik(false, Date.UTC(2026, 10, 18, 9, 0, 0));
+  for (const m of planbara.filter((x) => x.id !== 'textsamtal-i-grupp')) {
+    const adress = `${bas}/stodundervisning/${m.id}/planera`;
+    await b.oppna(adress);
+    await b.kor(`localStorage.clear()`);
+    await b.oppna(adress);
+    sant(`${m.id}: förslaget har pass, Beta och versionen`, (await b.text('#pl-summa-text'))?.includes('pass om') && (await b.kor(`!!document.querySelector('h1 .beta') && document.querySelector('.pl-version')?.textContent.includes('Planera 0.1')`)), await b.text('#pl-summa-text'));
+    await b.kor(`(() => { const i = document.getElementById('pl-start'); i.value = '2026-11-02'; i.dispatchEvent(new Event('change')); return true; })()`);
+    await b.tryck('#pl-spara');
+    await vanta(200);
+    sant(`${m.id}: den sparade planen visar veckan med fokus`, await b.kor(`!document.getElementById('pl-veckan').hidden && !!document.querySelector('#pl-veckan .pl-fokusruta')`), await b.text('#pl-veckan'));
+    sant(`${m.id}: planens länkar leder till sidor och ankare som finns`, !lankFel(await sakLankar(b)).length, [await sakLankar(b), lankFel(await sakLankar(b))]);
+    if (m.id === 'fyra-raknesatten') {
+      const lektion = await b.kor(`document.querySelector('#pl-veckan a[data-goatcounter-click$=":kursvecka"]')?.getAttribute('href')`);
+      sant('kurs i veckor: veckan leder till veckans lektion i metoden', !!lektion && !lankFel([lektion]).length && (await b.text('#pl-veckan a[data-goatcounter-click$=":kursvecka"]')) === 'Vecka 3 i metoden', lektion);
+      sant('kurs i veckor: Mina lärdomar leder till veckans blad', (await b.kor(`[...document.querySelectorAll('#pl-veckan a')].find((a) => a.textContent === 'Mina lärdomar')?.getAttribute('href')`))?.endsWith('#mina-lardomar-2'), await b.kor(`[...document.querySelectorAll('#pl-veckan a')].map((a) => a.textContent + ' ' + a.getAttribute('href')).join(' | ')`));
+    }
+    if (m.id === 'seriesamtal') sant('progression i pass: passens fokus med passen och stegets namn', (await b.text('#pl-veckan .pl-fokusruta .pl-led'))?.startsWith('Pass ') && (await b.text('#pl-veckan .pl-fokusruta .pl-etikett')) === 'Passens fokus', await b.text('#pl-veckan .pl-fokusruta'));
+    sant(`${m.id}: inga fel`, !b.undantag.length && !(await b.kor('window.__fel.length')), b.undantag);
+    await b.bredd(390); await vanta(150); await b.bild(`12-beta-${m.id}-telefon`); await b.dator();
+  }
+  b.stang();
 } catch (e) {
   sidfel.push(`provet av sidan avbröts: ${e.message}`);
 } finally {

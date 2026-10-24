@@ -397,14 +397,20 @@ uppfoljning:
   text: Kartläggningen visar vad eleven kan räkna och förklara, före och efter. Mina lärdomar visar elevens ord pass för pass.
   rader:
     - nar: Före kursen
+      tid: "före"
       vad: Kartläggningen. Eleven räknar åtta uppgifter på sin nivå och visar och förklarar sex uppgifter. Du skriver vad eleven gör och säger.
     - nar: Efter varje pass
+      tid: "varje pass"
       vad: Din notering och elevens lärdom i Mina lärdomar.
     - nar: Vecka 4
+      tid: "vecka 4"
       vad: Den blandade repetitionen visar om addition och subtraktion sitter.
     - nar: Efter kursen
+      tid: "efter"
       vad: Samma kartläggning veckan efter. Visa skillnaden och skriv nästa steg.
 
+plan:
+  mal: "kunna räkna med de fyra räknesätten på sin nivå och visa och förklara vad som händer i uträkningen."
 mal:
   punkter:
     - visa med material och på talraden vad som händer i addition och subtraktion, och räkna med uppställning och växling på sin nivå

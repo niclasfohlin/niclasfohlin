@@ -316,8 +316,8 @@ Planen är en modul (Niclas 2026-10-24: "När du sedan skalar detta till fler m�
 | Fält | Vad det är |
 |---|---|
 | `uppfoljning.rader[].tid` | När raden görs, med standardens ord nedan. En metod kan planeras när varje rad i uppföljningen har sin tid; radens `nar` står kvar som dess text |
-| `progression.rader[].vecka` | Veckorna eller passen raden gäller: `1`, `4–5`, `6–8`, `9–10 vid behov`, `6 till det sista`, `Pass 2–6`, `Från pass 11`. Kolumnen heter Vecka eller Pass |
-| `progression.rader[].rubrik` | Veckans fokus i några ord, till planens översikt. Utan den står fokus första mening |
+| `progression.rader[].vecka` | Veckorna eller passen raden gäller: `1`, `4–5`, `6–8`, `9–10 vid behov`, `6 till det sista`, `Pass 2–6`, `Från pass 11` och `Efter vecka 7`, som är veckorna efter den sista. Kolumnen heter Vecka eller Pass, och med Pass visar veckan stegen för veckans pass |
+| `progression.rader[].rubrik` | Veckans fokus i några ord, till planens översikt. Utan den står kursveckans titel i en kurs med veckor ("Vecka 3 · Hundratal och två växlingar"), och annars fokus första mening. I en kurs med veckor leder veckan i planen också till veckans lektion i metoden |
 | `progression.rader[].taggar` | Bankens taggar som veckans poster har, som lästexternas slag, så att veckan visar nivåns texter med dem |
 | `plan.mal` | Insatsens mål i lektionskortens form, "kunna …", som läraren skattar eleverna mot och kan skriva om. Utan det gäller målet på metodens lektionskort, när metoden har ett (`planensMal` i `src/lib/insatsplan.ts`). Bygget stannar på en metod som kan planeras men saknar båda |
 
@@ -341,7 +341,15 @@ Planen och allt läraren för in sparas bara i den webbläsare där läraren skr
 
 `scripts/planprov.mjs` körs i `npm run validera`: planmotorn (veckor, röda dagar, påsken, vecka 53, upprepade veckor, lov, flyttade och inställda pass, tiderna, målet, länken, texterna utan namn och kalenderfilen enligt RFC 5545, med och utan klockslag), varje metod som har planens fält, fem former av metoder med fälten som riggen ska skriva dem, och sidan i Chrome med fasta datum, mitt i insatsen och efter den, i 320, 360 och 390 punkter och på dator. Sidans prov går igenom det läraren gör: målet med pennan, tiderna, texten till åtgärdsprogrammet när planen ändras, bockar, närvaro, skattning, elevens utveckling under namnet, avstämning, utvärdering och förlängning, Ångra, elevlistan med en paus, tretton namn och samma namn två gånger, kopian och en kopia som har ändrats för hand, länken, två flikar, två planer, söndagen före en ny vecka och en webbläsare som inte sparar. Felen som provet fångar kommer ur Codex granskning av koden och två buggjägare, agenter som försökte få sidan att gå sönder (2026-10-24). `--bilder <mapp>` tar bilder av lägena till granskningen.
 
-Planen byggs i steg: en metod som standard (Textsamtal i grupp, K-489), en metod av varje form (K-490) och alla metoder, med fälten skrivna av metodriggen (K-491). Knappen kommer ut på sajten först när alla metoder har planen.
+Planen byggs i steg: en metod som standard (Textsamtal i grupp, K-489), en beta på fem metoder som också prövar att modulen klarar olika former (K-490) och alla metoder, med fälten skrivna av metodriggen (K-491).
+
+### Versionerna
+
+Modulen heter Planera och har ett eget versionsnummer, som står på ett ställe, `PLANERA` i `src/lib/standard/plan.js`, och längst ned i varje plan med ett mejl till Niclas om något inte fungerar (Niclas 2026-10-24: "en kort disclaimer att modulen heter Planera och modulens versionsnr (skapa en struktur för modellnr). Kalla den 0.1"). Första siffran är 0 så länge Planera är en beta: prövad på några metoder och märkt Beta på knappen Planera insatsen och vid planens rubrik. Andra siffran ökar när modulen får en ny förmåga, som en ny form av metod eller en ny del i planen, och en tredje siffra när ett fel lagas: 0.1, 0.1.1, 0.2. Planera blir 1.0 när alla metoder har planen och märkningen tas bort. En ny version skrivs in i tabellen i samma commit som ändringen.
+
+| Version | Datum | Vad |
+|---|---|---|
+| 0.1 | 2026-10-24 | Betan på fem metoder: Textsamtal i grupp, TIL i grupp, Läslistor i grupp, De fyra räknesätten i grupp och Seriesamtal. Planen, tiderna, målet, texten till åtgärdsprogrammet, kalenderfilen, Följ insatsen med skattning, avstämning, utvärdering och sammanställning, elevens utveckling, och länkar till det metoden namnger |
 
 ## Lathunden
 

@@ -134,7 +134,8 @@ export function tolkaTid(text) {
 
 /**
  * Vilka veckor eller pass en rad i metodens progression gäller, ur radens första kolumn (`vecka`): "1", "4–5", "6–8",
- * "9–10 vid behov", "6 till det sista", "Vecka 3", "Pass 2–6", "Från pass 11". till saknas när raden gäller till slutet.
+ * "9–10 vid behov", "6 till det sista", "Vecka 3", "Pass 2–6", "Från pass 11" och "Efter vecka 7", som är veckorna efter
+ * vecka 7 (Läslistor i grupp, betan 2026-10-24). till saknas när raden gäller till slutet.
  * @param {unknown} text
  * @returns {{ fran: number, till?: number, vidBehov: boolean } | null}
  */
@@ -149,6 +150,8 @@ export function tolkaSteg(text) {
   if (m) return Number(m[2]) > Number(m[1]) ? { fran: Number(m[1]), till: Number(m[2]), vidBehov } : null;
   m = k.match(/^(\d+) till det sista$/) ?? k.match(/^från (?:vecka |pass )?(\d+)$/) ?? k.match(/^(\d+) och framåt$/);
   if (m) return { fran: Number(m[1]), vidBehov };
+  m = k.match(/^efter (?:vecka |pass )?(\d+)$/);
+  if (m) return { fran: Number(m[1]) + 1, vidBehov };
   return null;
 }
 
@@ -203,6 +206,16 @@ export function metodplan(d) {
 
 /** Felen som stoppar en metod som ska kunna planeras. @param {Parameters<typeof metodplan>[0]} d */
 export const planFel = (d) => metodplan(d).fel;
+
+// ---------- Modulen ----------
+
+/**
+ * Modulens namn och version, på ett ställe (Niclas 2026-10-24: "en kort disclaimer att modulen heter Planera och modulens
+ * versionsnr (skapa en struktur för modellnr). Kalla den 0.1"). Första siffran är 0 så länge Planera är en beta, märkt där
+ * läraren går in och planerar; den andra ökar med en ny förmåga, en tredje när ett fel lagas. Versionerna står i sajtens
+ * METODER.md under Planera insatsen.
+ */
+export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.1', beta: true });
 
 // ---------- Planen ----------
 
