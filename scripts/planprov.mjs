@@ -86,6 +86,9 @@ if (tsMp) {
   p = s.planera(tsMp, { ...val, stryk: ['2026-11-20'], flytta: { '2026-11-16': '2026-11-17' } });
   ska('inställt pass faller bort', p.pass.length === 17 && p.veckor[2].bortfall.some((b) => b.datum === '2026-11-20' && b.varfor === 'installt'));
   ska('flyttat pass behåller sitt nummer', p.pass[6].nr === 7 && p.pass[6].datum === '2026-11-17' && p.pass[6].flyttatFran === '2026-11-16');
+  // Start på en lördag: planen börjar veckan efter, med metodens vecka 1 (buggjakten 2026-10-24).
+  p = s.planera(tsMp, { ...val, start: '2026-10-24' });
+  ska('start på en lördag börjar nästa vecka med metodens vecka 1', p.pass.length === 18 && p.veckor[0].mandag === '2026-10-26' && p.veckor[0].pass.length === 3 && p.veckor[0].steg === 0 && p.uppfoljning[0].tillfallen[0].datum === '2026-10-26', [p.pass.length, p.veckor[0]]);
   // Start mitt i veckan: veckan har bara passen från start.
   p = s.planera(tsMp, { ...val, start: '2026-11-04' });
   ska('start en onsdag ger 17 pass', p.pass.length === 17 && p.forstaPass === '2026-11-04');
@@ -95,6 +98,8 @@ if (tsMp) {
   // Över nyår med jullov i vecka 52 och 53.
   p = s.planera(tsMp, { ...val, start: '2026-12-14', langd: 3, lov: ['2026-52', '2026-53'] });
   ska('över nyåret med vecka 53 som lov', p.veckor.map((v) => `${v.vecka.ar}-${v.vecka.vecka}`).join() === '2026-51,2027-1,2027-2', p.veckor.map((v) => v.vecka));
+  const nyarsText = s.dokumentationstext({ titel: 'X', adress: 'x', uppfoljning: ts.uppfoljning.rader }, p, { ...val, start: '2026-12-14', langd: 3 }, { minuter: 30 });
+  ska('veckorna över nyåret som text', nyarsText.includes('(vecka 51 till vecka 2)'), nyarsText);
   // Länken: valen åt båda hållen, och en trasig länk.
   const fullt = { ...val, niva: 'mellan', minuter: 30, lov: ['2026-47'], upprepa: [3, 3], flytta: { '2026-11-16': '2026-11-17' }, stryk: ['2026-11-20'], tider: { 1: ['09:20', '10:00'], 3: ['13:00', '13:40'] }, mal: 'läsa mellan raderna & visa ledtråden, också i faktatexter' };
   const lank = s.kodaVal(fullt, { id: 'ab12cd', visa: 3 });
@@ -108,7 +113,7 @@ if (tsMp) {
   ska('tiderna som text', s.tidText('09:20') === '9.20' && s.tidsspann(['09:20', '10:00']) === '9.20–10.00');
   ska('ett spann på en dag', s.spannKort('2026-12-21', '2026-12-21') === '21 dec' && s.spannKort('2026-11-30', '2026-12-04') === '30 nov–4 dec');
   ska('dagarna med samma tid', s.dagarText({ ...val, tider: { 1: ['09:20', '10:00'], 3: ['09:20', '10:00'], 5: ['09:20', '10:00'] } }) === 'måndag, onsdag och fredag kl. 9.20–10.00');
-  ska('dagarna med olika tider', s.dagarText({ ...val, tider: { 1: ['09:20', '10:00'], 3: ['13:00', '13:40'] } }) === 'måndag kl. 9.20–10.00, onsdag kl. 13.00–13.40 och fredag');
+  ska('dagarna med olika tider', s.dagarText({ ...val, tider: { 1: ['09:20', '10:00'], 3: ['13:00', '13:40'] } }) === 'måndag kl. 9.20–10.00, onsdag kl. 13.00–13.40 och fredag utan tid');
   ska('målet som mening', s.malText('kunna läsa mellan raderna') === 'Kunna läsa mellan raderna.' && s.malText('  Läsa!  ') === 'Läsa!' && s.malText('') === '');
   ska('namnen ur en text', s.utanNamn('Bea behöver mer stöd. Alis par läste med bea, inte Alibaba.', [{ namn: 'Bea' }, { namn: 'Ali Test' }]) === 'En elev behöver mer stöd. En elevs par läste med en elev, inte Alibaba.', s.utanNamn('Bea behöver mer stöd. Alis par läste med bea, inte Alibaba.', [{ namn: 'Bea' }, { namn: 'Ali Test' }]));
   // Texten till åtgärdsprogrammet.
@@ -550,6 +555,8 @@ try {
   // Närvaron är ett val (granskningen 2026-10-24: en bock räknades annars som närvaro för alla).
   await f.kor(`(() => { const c = document.getElementById('pl-narvaro'); c.checked = true; c.dispatchEvent(new Event('change')); return true; })()`);
   sant('förra veckan utan bockar och skattning säger till', (await f.text('#pl-veckan .pl-forra'))?.includes('Förra veckan har 3 pass som inte är bockade och ingen skattning'), await f.text('#pl-veckan .pl-forra'));
+  // Ett pass som inte har varit går inte att bocka (buggjakten 2026-10-24: "2 av de 0 pass").
+  sant('ett pass som inte har varit går inte att bocka', await f.kor(`!document.querySelector('[data-bock="2026-11-20"]') && !document.querySelector('[data-bock="2026-11-18"]') && !!document.querySelector('[data-bock="2026-11-16"]')`));
   // Bocka pass 7 (måndag), med närvaron: Bea var inte med.
   await f.tryck('[data-bock="2026-11-16"]');
   sant('bocken sparas på passets dag', (await f.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.gjorda.join()`)) === '2026-11-16');
@@ -563,7 +570,7 @@ try {
   await skatta('Bea', 2);
   await f.tryck('button[data-vy="2"]');
   // Alla pass som har varit blev av: ett tryck, och Ångra.
-  sant('knappen för alla pass till och med i dag', (await f.text('#pl-passen [data-gor="alla"]')) === 'Bocka alla pass till och med i dag');
+  sant('knappen för veckans pass till och med i dag', (await f.text('#pl-passen [data-gor="alla"]')) === 'Bocka veckans pass till och med i dag');
   sant('förra veckan utan bockar säger till i den här veckan', true);
   await f.tryck('#pl-passen [data-gor="alla"]');
   sant('alla pass som har varit är bockade', (await f.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.gjorda.length`)) === 4);
@@ -780,6 +787,10 @@ try {
   await h.kor(`(() => { const t = document.getElementById('pl-elever'); t.focus(); t.value = ${JSON.stringify(tretton.join('\n'))}; t.dispatchEvent(new Event('input')); t.blur(); return true; })()`);
   await vanta(200);
   sant('en trettonde elev och samma namn två gånger sägs under listan', (await h.text('#pl-elever-not')) === 'Kim kom inte med: elevlistan rymmer tolv elever. Bea står två gånger. Skriv två olika namn, som Bea A och Bea B.' && (await h.kor(`document.getElementById('pl-elever').value.split('\\n').length`)) === 12, await h.text('#pl-elever-not'));
+  // Ett långt namn kortas vid ett ord och ett namn med en bokstav sägs (buggjakten 2026-10-24).
+  await h.kor(`(() => { const t = document.getElementById('pl-elever'); t.focus(); t.value = ${JSON.stringify(['Ali', 'B', 'Ett mycket långt namn som aldrig tar slut'].join('\n'))}; t.dispatchEvent(new Event('input')); t.blur(); return true; })()`);
+  await vanta(200);
+  sant('ett långt namn och en bokstav sägs under listan', (await h.text('#pl-elever-not'))?.includes('"Ett mycket långt namn som" är kortat') && (await h.text('#pl-elever-not'))?.includes('B har en bokstav'), await h.text('#pl-elever-not'));
   // Två flikar med samma plan: en bock i den ena står kvar när den andra sparar (Codex 2026-10-24).
   const h2 = await flik(false, Date.UTC(2026, 11, 14, 9, 0, 0));
   await h2.oppna(`${PLAN}#${s.kodaVal(slutVal, { id: 'slut01' })}`);

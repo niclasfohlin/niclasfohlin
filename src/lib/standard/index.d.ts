@@ -131,6 +131,8 @@ export declare function planFel(d: Parameters<typeof metodplan>[0]): string[];
 /** Metodens fil utan planens fält (`plan`, uppföljningens `tid`, progressionens `taggar` och `rubrik`), som bara planens sida läser. */
 export declare function utanPlanensFalt<T extends Record<string, any>>(d: T): T;
 export declare function forval(mp: Metodplan, idag: string): Val;
+/** Planens första måndag: startveckan, eller nästa vecka när ingen vald dag är kvar i den. */
+export declare function forstaMandagen(val: Val): string;
 export declare function planera(mp: Metodplan, val: Val): Plan;
 export declare function veckanFor(plan: Plan, datum: string): PlanVecka | null;
 export declare function nastaPass(plan: Plan, datum: string): Pass | null;
@@ -180,7 +182,7 @@ export declare function rensaFoljd(f: unknown): Required<Pick<Foljd, 'gjorda' | 
 export declare function mittVeckan(plan: Plan): number | null;
 export interface SammanstallningVecka { nr: number; mandag: string; vecka: number; innehall: number; igen: boolean; pass: { nr: number; dag: string; datum: string; gjort: boolean }[]; gjorda: number; planerade: number; varit: number; installda: number; helgdagar: number; skattning?: number; not?: string }
 export interface SammanstallningElev { id: string; namn: string; skattningar: { nr: number; vecka: number; varde: number }[]; forsta: { nr: number; vecka: number; varde: number } | null; senaste: { nr: number; vecka: number; varde: number } | null; narvaro: number | null; resultat: Record<string, string> }
-export interface Sammanstallning { veckor: SammanstallningVecka[]; elever: SammanstallningElev[]; grupp: boolean; narvaro: boolean; planerade: number; gjorda: number; veckomedel: number | null; varit: number; installda: number; helgdagar: number; slut: boolean; mitt: number | null; avstamning: { beslut?: string; not?: string } | null; utvardering: { beslut?: string; not?: string } | null }
+export interface Sammanstallning { veckor: SammanstallningVecka[]; elever: SammanstallningElev[]; grupp: boolean; narvaro: boolean; planerade: number; gjorda: number; veckomedel: number | null; varit: number; gjordaVarit: number; installda: number; helgdagar: number; slut: boolean; mitt: number | null; avstamning: { beslut?: string; not?: string } | null; utvardering: { beslut?: string; not?: string } | null }
 export declare function sammanstallning(plan: Plan, f: Foljd, idag: string): Sammanstallning;
 export declare const riktning: (e: SammanstallningElev) => 'upp' | 'samma' | 'ned' | null;
 export declare const BESLUT: Readonly<Record<'fortsatt' | 'justera' | 'avsluta' | 'forlang' | 'byt', string>>;

@@ -124,6 +124,12 @@ export const nastaPassAv = (p: SparadPlan, idag: string) => p.schema.pass.map((x
 /** Planerna med nästa pass först, och en plan som är slut sist. */
 export const iTurOrdning = (idag: string) => (a: SparadPlan, b: SparadPlan) => (nastaPassAv(a, idag) < nastaPassAv(b, idag) ? -1 : nastaPassAv(a, idag) > nastaPassAv(b, idag) ? 1 : a.andrad < b.andrad ? 1 : -1);
 
+/** Namnen på flera planer, där två likadana skiljs åt med ett nummer: "Mån, ons, fre från 26 okt" och "… · 2" (buggjakten 2026-10-24). */
+export function skiljNamnen(namn: string[]): string[] {
+  const sedda = new Map<string, number>();
+  return namn.map((n) => { const i = (sedda.get(n) ?? 0) + 1; sedda.set(n, i); return i > 1 ? `${n} · ${i}` : n; });
+}
+
 const MANAD_KORT = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
 /** Planens namn: gruppens, eller dagarna och första passet, som "Mån, ons, fre från 2 nov" (granskningen 2026-10-24: två planer utan namn såg likadana ut). */
 export function planensNamn(p: { namn?: string; val: string; schema?: SparadPlan['schema'] }): string {

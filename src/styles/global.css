@@ -3090,6 +3090,11 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 .pl-din[hidden] { display: none; }
 .pl-din p { margin: 0; line-height: 1.35; }
 .pl-din-etikett { display: block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-accent); }
+.pl-din-namn { text-transform: none; letter-spacing: 0; overflow-wrap: anywhere; }
+/* Ett långt ord utan mellanslag, som ett namn eller ett mål, bryts i sin ruta i stället för att göra sidan bredare än
+   skärmen (buggjakten 2026-10-24). */
+.plan .pl-maltext, .plan .pl-chip, .plan .meta, .pl-summa p, .pl-noter li, .pl-insatser .pl-metod, .pl-elevnamn { overflow-wrap: anywhere; }
+.plan .pl-chip { max-width: 100%; }
 .pl-din a { font-weight: 600; }
 .pl-insatser { font-family: var(--typsnitt-ui); border: 1px solid var(--farg-kant); border-radius: var(--radie); margin: 1.25rem 0; overflow: hidden; max-width: 42rem; }
 .pl-insatser[hidden] { display: none; }

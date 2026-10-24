@@ -221,6 +221,18 @@ export function forval(mp, idag) {
 }
 
 /**
+ * Planens första måndag: veckan som startdatumet ligger i, eller nästa vecka när ingen av de valda dagarna är kvar den
+ * veckan, som när planen börjar på en lördag (buggjakten 2026-10-24: en start på lördag gav en tom första vecka som tog
+ * metodens vecka 1).
+ * @param {Val} val
+ */
+export function forstaMandagen(val) {
+  const dagar = [...new Set(val.dagar)].filter((x) => x >= 1 && x <= 5).sort();
+  const m = mandagen(val.start);
+  return dagar.length && plusDagar(m, dagar[dagar.length - 1] - 1) < val.start ? plusDagar(m, 7) : m;
+}
+
+/**
  * Passen, veckorna och uppföljningen med datum. Veckorna i planen är metodens veckor i den ordning gruppen tar dem: en
  * vecka som upprepas kommer en gång till direkt efter sig själv, och en lovvecka hoppas över. Ett pass på en dag då
  * skolan är stängd eller som läraren har ställt in faller bort och står kvar som bortfall i sin vecka. Ett flyttat pass
@@ -252,7 +264,7 @@ export function planera(mp, val) {
   const pass = [];
   /** @type {string[]} */
   const lovveckor = [];
-  let mandag = mandagen(val.start);
+  let mandag = forstaMandagen(val);
   const nastaMandag = () => { while (lov.has(veckonyckel(mandag))) { lovveckor.push(mandag); mandag = plusDagar(mandag, 7); } const m = mandag; mandag = plusDagar(mandag, 7); return m; };
   // Spärren mot en plan utan slut: en period i pass där inga dagar ger pass.
   for (let i = 0; iPass ? pass.length < langd && i < 104 : i < ordning.length; i++) {
@@ -410,7 +422,8 @@ export function dagarText(val) {
   const par = dagar.map((d) => tider[String(d)]);
   const samma = par[0] && par.every((x) => x && x[0] === par[0][0] && x[1] === par[0][1]);
   if (samma || !par.some(Boolean)) return `${uppraknat(dagar.map((d) => VECKODAGAR[d - 1]))}${samma ? ` kl. ${tidsspann(par[0])}` : ''}`;
-  return uppraknat(dagar.map((d, i) => `${VECKODAGAR[d - 1]}${par[i] ? ` kl. ${tidsspann(par[i])}` : ''}`));
+  // En dag utan tid säger det, så att den inte läses som att den har nästa dags tid (buggjakten 2026-10-24).
+  return uppraknat(dagar.map((d, i) => `${VECKODAGAR[d - 1]}${par[i] ? ` kl. ${tidsspann(par[i])}` : ' utan tid'}`));
 }
 
 /**
@@ -487,6 +500,10 @@ export function veckansDagar(plan, v) {
   return { fran: datum[0] ?? v.mandag, till: datum[datum.length - 1] ?? plusDagar(v.mandag, 4) };
 }
 
+// Veckorna som text: "45", "45–46" och över nyår "52 till vecka 1", så att ett spann bakåt inte ser ut som ett fel
+// (buggjakten 2026-10-24: "vecka 44 till 1").
+const veckorna = (a, b, streck = '–') => (b === a ? `${a}` : b < a ? `${a} till vecka ${b}` : `${a}${streck}${b}`);
+
 /**
  * Texten till åtgärdsprogrammet (Niclas 2026-10-24: "kopiera text till ÅP ... mål, varaktighet, tider och dagar och vad
  * eleven ska arbeta med, alltså metodens innehåll kort och koncist"), i den ordning den står under Åtgärder: åtgärden,
@@ -512,7 +529,7 @@ export function dokumentationstext(info, plan, val, o) {
   const v1 = plan.veckor[0]?.vecka.vecka, v2 = plan.veckor[plan.veckor.length - 1]?.vecka.vecka;
   // Samma år står en gång: "2 november till 11 december 2026".
   const fran = plan.forstaPass && plan.sistaPass && plan.forstaPass.slice(0, 4) === plan.sistaPass.slice(0, 4) ? dagOchManad(plan.forstaPass) : plan.forstaPass && datumText(plan.forstaPass);
-  if (plan.forstaPass && plan.sistaPass) rader.push(`Omfattning: ${plan.pass.length} pass om ${minuterText(passensMinuter(val, o.minuter))} minuter, ${dagar}, ${fran} till ${datumText(plan.sistaPass)} (vecka ${v1}${v2 !== v1 ? ` till ${v2}` : ''})${info.nivaNamn ? `, på nivån ${info.nivaNamn}` : ''}.`);
+  if (plan.forstaPass && plan.sistaPass) rader.push(`Omfattning: ${plan.pass.length} pass om ${minuterText(passensMinuter(val, o.minuter))} minuter, ${dagar}, ${fran} till ${datumText(plan.sistaPass)} (vecka ${veckorna(v1, v2, ' till ')})${info.nivaNamn ? `, på nivån ${info.nivaNamn}` : ''}.`);
   // Det eleven arbetar med: metodens steg i planens ordning, med kalenderveckorna. Pass i följd med samma steg står ihop.
   /** @type {{ steg: number | null, fran: string, till: string }[]} */
   const grupper = [];
@@ -524,7 +541,7 @@ export function dokumentationstext(info, plan, val, o) {
   }
   const innehall = grupper.filter((g) => g.steg !== null && info.steg?.[g.steg]).map((g) => {
     const a = isoVecka(g.fran).vecka, b = isoVecka(g.till).vecka;
-    return `${String(info.steg?.[/** @type {number} */ (g.steg)]).replace(/[.;]\s*$/, '')} (vecka ${a}${b !== a ? `–${b}` : ''})`;
+    return `${String(info.steg?.[/** @type {number} */ (g.steg)]).replace(/[.;]\s*$/, '')} (vecka ${veckorna(a, b)})`;
   });
   if (innehall.length) rader.push(`Eleven arbetar med: ${innehall.join('; ')}.`);
   const tider = plan.uppfoljning.flatMap((u) => {
@@ -655,6 +672,8 @@ export function sammanstallning(plan, f, idag) {
   return {
     veckor, elever, grupp: !lista.length, narvaro,
     planerade: plan.pass.length, gjorda: passGjorda.length, varit: plan.pass.filter((p) => p.datum <= idag).length,
+    // De bockade bland passen som har varit, så att ett pass som är bockat i förväg inte ger ett minustal (buggjakten).
+    gjordaVarit: passGjorda.filter((p) => p.datum <= idag).length,
     veckomedel: medel(veckor.filter((v) => v.skattning).map((v) => v.skattning)),
     installda: veckor.reduce((a, v) => a + v.installda, 0), helgdagar: veckor.reduce((a, v) => a + v.helgdagar, 0),
     slut: !!plan.sistaPass && idag > plan.sistaPass, mitt: mittVeckan(plan),
@@ -702,7 +721,7 @@ export function sammanstallningstext(info, plan, s) {
   if (plan.forstaPass && plan.sistaPass) rader.push(`Sammanställning: ${info.titel}, ${samma ? dagOchManad(plan.forstaPass) : datumText(plan.forstaPass)} till ${datumText(plan.sistaPass)}.`);
   if (info.mal) rader.push(`Mål: ${malText(info.mal)}`);
   const bort = [s.installda ? `${s.installda} pass ställdes in` : '', s.helgdagar ? `${s.helgdagar} föll på ${s.helgdagar === 1 ? 'en helgdag' : 'helgdagar'}` : ''].filter(Boolean);
-  const pass = !s.gjorda ? `${s.planerade} i planen.` : s.slut ? `${s.gjorda} av ${s.planerade} är bockade som genomförda.` : `${s.gjorda} av de ${s.varit} som har varit är bockade som genomförda, av ${s.planerade} i planen.`;
+  const pass = !s.gjorda ? `${s.planerade} i planen.` : s.slut ? `${s.gjorda} av ${s.planerade} är bockade som genomförda.` : !s.varit ? `${s.planerade} i planen. Inget pass har varit än.` :`${s.gjordaVarit} av de ${s.varit} som har varit är bockade som genomförda, av ${s.planerade} i planen.`;
   rader.push(`Pass: ${pass}${bort.length ? ` ${stor(uppraknat(bort))}.` : ''}`);
   const elever = s.elever.filter((e) => e.id !== GRUPPEN);
   const skattade = (s.grupp ? s.elever : elever).filter((e) => e.skattningar.length);
