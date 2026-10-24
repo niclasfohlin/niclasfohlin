@@ -25,6 +25,7 @@ import { harMaterial, hemsidansNamn } from '../../lib/material';
 import Centralknapp from '../../components/Centralknapp.astro';
 import { metodensCentrala, provaCentrala } from '../../lib/centrala';
 import { metodensLektionskort } from '../../lib/lektionskort';
+import { planbar, planensAdress } from '../../lib/insatsplan';
 
 export async function getStaticPaths() {
   const metoder = await publicerade('stodundervisning');
@@ -42,6 +43,8 @@ const d = m.data;
 const filmer = metodensFilmer(d, m.id);
 const huvud = huvudfilm(filmer);
 const centrala = metodensCentrala(d);
+// Planera insatsen (K-489): knappen och raden Din insats, för en metod som kan planeras (src/lib/insatsplan.ts).
+const kanPlaneras = planbar(d);
 // En lektion har sin serie i menyn och sist på sidan, så att Hör ihop med bara visar metoder utanför serien.
 const iSerien = (x: (typeof alla)[number]) => Boolean(koppling) && (x.id === koppling!.serie.id || x.data.serie === koppling!.serie.id);
 const relaterade = alla.filter((x) => d.relaterade.includes(x.id) && !iSerien(x));
@@ -70,9 +73,12 @@ const materialLank = d.ramar ? '#ramar' : d.lektionsbank ? '#lektionsbank' : har
           : <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · {d.omrade} · {arskursText(d)}</p>}
         <h1>{d.titel}</h1>
         {d.undertitel && <p class="undertitel">{ejBryt(d.undertitel)}</p>}
+        {/* Din insats: lärarens plan för metoden, om den finns i webbläsaren (src/scripts/insatser.ts). */}
+        {kanPlaneras && <div class="pl-din" id="pl-din" data-metod={m.id} data-titel={d.titel} hidden></div>}
         <p class="ingress">{ejBryt(d.ingress)}</p>
-        {/* De centrala sakerna (src/lib/centrala.ts), överst så att de syns när metoden öppnas (Niclas 2026-10-14). */}
-        {centrala.length > 0 && <p class="metod-centrala">{centrala.map((c) => <Centralknapp c={c} metod={m.id} titel={d.titel} />)}</p>}
+        {/* De centrala sakerna (src/lib/centrala.ts), överst så att de syns när metoden öppnas (Niclas 2026-10-14), och
+            Planera insatsen, på samma plats i varje metod som kan planeras. */}
+        {(centrala.length > 0 || kanPlaneras) && <p class="metod-centrala">{centrala.map((c) => <Centralknapp c={c} metod={m.id} titel={d.titel} />)}{kanPlaneras && <a class="knapp sekundar" href={planensAdress(m.id)} data-goatcounter-click={`planera:${m.id}:metoden`} data-goatcounter-title={`${d.titel}: Planera insatsen från metodens sida`}>Planera insatsen</a>}</p>}
       </header>
       <div class="faktaruta">
         <p class="faktaruta-etikett">I korthet</p>
@@ -119,6 +125,10 @@ const materialLank = d.ramar ? '#ramar' : d.lektionsbank ? '#lektionsbank' : har
   </article>
   <div class="tryck-fot" aria-hidden="true">{UPPHOV} · {adress}</div>
 </Base>
+
+<script>
+  import '../../scripts/insatser.ts';
+</script>
 
 <script>
   // En lektions hänvisningar till den generella metoden blir länkar till avsnittet där (Ljudlek i grupp, riggens

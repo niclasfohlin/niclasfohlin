@@ -626,27 +626,42 @@ progression:
     - vecka: "1"
       fokus: Eleverna lär sig vad det är att läsa mellan raderna och övar Det står, Jag vet och Alltså tror jag med slagen Känsla och Vem. Samtalsdraget är samtalskortets två första rader, att säga ”Jag tror att” och en ledtråd och att fråga ”Vad tror du?” och ”Hur vet du det?”
       roll: Ni säger samtalsreglerna i Starten i pass 1, och du förklarar frågornas tre grupper vid den första frågan. I pass 2 visar du parsamtalet med en elev vid stoppet. Du tänker högt länge i pass 1
+      taggar: [kansla, vem]
+      rubrik: Det står, Jag vet och Alltså tror jag
     - vecka: "2"
       fokus: Ni övar Stanna och Se det framför dig med slagen Var och när och Varför. Samtalsdraget är att ta med det man har varit med om och att fråga ”Kan du säga mer?”
       roll: Du visar var och varför du stannar. I pass 2 säger du vad paren ska samtala om vid stoppet
+      taggar: [var-och-nar, varfor]
+      rubrik: Stanna och Se det framför dig
     - vecka: "3"
       fokus: Ni övar att slå ihop flera ledtrådar med slaget Före och efter. Samtalsdraget är att bygga vidare med ”Jag håller med, och”. På nivån Avancerad tar du Samma sak en annan vecka än Kvart i åtta
       roll: Du visar två ledtrådar som bara tillsammans ger svaret
+      taggar: [fore-och-efter]
+      rubrik: Slå ihop flera ledtrådar
     - vecka: 4–5
       fokus: Ni övar Stämmer det? och slaget Det som menas i metodens texter med det slaget. Samtalsdragen är att tänka annorlunda och att pröva en ny riktning med ”Tänk om”
       roll: Du tänker högt kortare. I pass 2 säger en elev varför ni stannar, innan paren samtalar
+      taggar: [det-som-menas]
+      rubrik: "Stämmer det? och Det som menas"
     - vecka: 6–8
       fokus: Ni övar slaget Ordet i metodens texter med det slaget och på en sida ur elevens egen bänkbok. Eleverna leder parsamtalet själva, väljer samtalsdrag ur kortet och ställer egna frågor om texten
       roll: En elev tänker högt vid stoppet i pass 2, och eleverna leder gruppens samtal efter paren. Du följer upp om eleverna stannar själva
+      taggar: [ordet]
+      rubrik: Ordet, och eleverna leder samtalet
 uppfoljning:
   text: Följ effekten varje vecka med lyssningsbladet, och gör kartläggningen före och efter med två lika svåra texter. Kartläggningen är inget samtal. Den mäter om eleven på egen hand drar en slutsats som texten stöder och visar ledtråden, och i passen ger du inga poäng.
   rader:
     - nar: Före insatsen
       vad: Varje elev gör kartläggningens text före, enskilt med dig, på fem till åtta minuter. Läs texten högt först på Lättläst och för den som avkodar mödosamt.
+      tid: före
     - nar: Varje vecka
       vad: Du läser lyssningsbladet och frågetecknen i pass 3, också vem som byggde vidare. Nästa vecka visar du ett tankesteg efter det du hörde. Gissar eleverna utan ledtråd, visar du Det står. Letar de bara efter ord, visar du Jag vet. Läser de förbi stoppet, visar du Stanna.
+      tid: varje vecka
     - nar: Efter sex till åtta veckor
       vad: Varje elev gör kartläggningens text efter, som är lika svår. Jämför poängen med kartläggningen före, och lyssningsbladen med vecka 1 och 2. Se också om eleven sätter frågetecken i sin bänkbok.
+      tid: efter
+plan:
+  formaga: läsa mellan raderna
 mal:
   punkter:
     - Skilja på svar som står i texten och svar man måste lista ut

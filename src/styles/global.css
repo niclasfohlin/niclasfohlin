@@ -2785,6 +2785,238 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
   .tafram .tf-post { break-inside: avoid; }
 }
 
+/* ---------- Planera insatsen (K-489) ----------
+   Sidan /stodundervisning/<id>/planera (Planera.astro, src/scripts/planera.ts), raden Din insats på metodens sida och
+   Dina insatser i metodbanken (src/scripts/insatser.ts). Telefonen först: veckan överst, sedan planen och valen; från
+   64 rem står valen bredvid planen. Etiketterna är små versaler som i faktarutan, och nivåerna har sina färger. */
+.pl-huvud .ingress { max-width: var(--matt-text); }
+.pl-etikett { display: block; font: 700 0.78rem/1.3 var(--typsnitt-ui); letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-text-svag); margin: 0 0 0.35rem; }
+.pl-hjalp { font: 0.88rem/1.45 var(--typsnitt-ui); color: var(--farg-text-svag); margin: 0.35rem 0 0; }
+.pl-varning { color: #7a5200; }
+.pl-falt { box-sizing: border-box; width: 100%; max-width: 22rem; min-height: 2.75rem; padding: 0 0.8rem; border: 1.5px solid var(--farg-kant); border-radius: 6px; background: var(--farg-yta); color: var(--farg-text); font: 1rem var(--typsnitt-ui); }
+.pl-falt:focus-visible { outline: 3px solid var(--farg-accent); outline-offset: 1px; }
+.pl-besked { font-family: var(--typsnitt-ui); background: var(--farg-accent-ljus); border-radius: 6px; padding: 0.65rem 0.9rem; margin: 1rem 0; }
+.pl-besked[hidden] { display: none; }
+.pl-textknapp { border: 0; background: none; padding: 0.3rem 0; color: var(--farg-accent); font: 600 0.92rem var(--typsnitt-ui); text-decoration: underline; cursor: pointer; }
+.pl-chip { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.5rem; padding: 0.25rem 0.85rem; border: 1.5px solid var(--farg-kant); border-radius: 999px; background: var(--farg-yta); color: var(--farg-text); font: 600 0.92rem var(--typsnitt-ui); cursor: pointer; }
+.pl-chip[aria-pressed="true"] { border-color: var(--farg-accent); background: var(--farg-accent); color: #fff; }
+.pl-grupper { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin: 1rem 0; }
+.pl-grupper[hidden] { display: none; }
+.pl-grupper .pl-etikett { width: 100%; margin: 0; }
+.pl-fil { display: contents; }
+
+/* Valen */
+.pl-andra { margin: 1.25rem 0; }
+.pl-andra > summary { font: 600 1rem var(--typsnitt-ui); color: var(--farg-accent); cursor: pointer; min-height: 2.75rem; display: flex; align-items: center; }
+.plan:not(.pl-har-plan) .pl-andra > summary { display: none; }
+.pl-val { font-family: var(--typsnitt-ui); background: var(--farg-yta); border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 1rem 1.1rem 1.1rem; }
+.pl-val h2 { font-size: 1.05rem; margin: 0 0 0.9rem; }
+.pl-rad { border: 0; padding: 0; margin: 0 0 1.1rem; min-width: 0; }
+.pl-rad:last-child { margin-bottom: 0; }
+.pl-dagar { display: flex; max-width: 24rem; border: 1.5px solid var(--farg-accent); border-radius: 6px; overflow: hidden; }
+.pl-dagar button { flex: 1; min-width: 0; min-height: 2.75rem; border: 0; border-left: 1px solid var(--farg-kant); background: var(--farg-yta); color: var(--farg-accent); font: 600 0.95rem var(--typsnitt-ui); cursor: pointer; }
+.pl-dagar button:first-child { border-left: 0; }
+.pl-dagar button[aria-pressed="true"] { background: var(--farg-accent); color: #fff; }
+.pl-langd { flex-wrap: wrap; }
+.pl-nivaer { display: grid; grid-template-columns: repeat(auto-fit, minmax(5.4rem, 1fr)); max-width: 24rem; }
+.pl-nivaer .sk-niva { min-width: 0; font-size: 1rem; padding-right: 0.5rem; }
+.pl-nivaer .sk-niva[aria-pressed="true"] { background: color-mix(in srgb, var(--niva) 78%, #000); border-color: color-mix(in srgb, var(--niva) 78%, #000); color: #fff; }
+.pl-lov { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0; }
+
+/* Planen */
+.pl-summa { font-family: var(--typsnitt-ui); background: var(--farg-ton); border-radius: var(--radie); padding: 1rem 1.1rem; margin: 0 0 1rem; }
+.pl-summa h2 { font-size: 1.05rem; margin: 0 0 0.4rem; }
+.pl-summa p { margin: 0 0 0.3rem; }
+.pl-summa .pl-tal { font-size: 1.15rem; font-weight: 700; }
+.pl-gruppnamn { color: var(--farg-text-svag); }
+.pl-knappar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.9rem 0 0; }
+.pl-knappar .knapp { flex: 1 1 14rem; justify-content: center; }
+.pl-knappar .knapp[hidden] { display: none; }
+.pl-sparad { font-size: 0.88rem; color: var(--farg-text-svag); margin: 0.6rem 0 0; }
+.pl-veckor { list-style: none; padding: 0; margin: 0 0 1rem; font-family: var(--typsnitt-ui); border-top: 1px solid var(--farg-kant); }
+.pl-veckor > li { border-bottom: 1px solid var(--farg-kant); border-left: 4px solid transparent; }
+.pl-veckoknapp, .pl-veckor > li.pl-lovvecka, .pl-veckor > li.efter { display: grid; grid-template-columns: 5.4rem minmax(0, 1fr); gap: 0.15rem 0.9rem; width: 100%; padding: 0.7rem 0.4rem 0.7rem 0.6rem; box-sizing: border-box; text-align: left; }
+.pl-veckoknapp { border: 0; background: none; color: inherit; font: inherit; cursor: pointer; }
+.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
+.pl-veckor .pl-v { font-weight: 700; }
+.pl-veckor .pl-d { grid-column: 1; font-size: 0.85rem; color: var(--farg-text-svag); }
+.pl-veckor .pl-innehall { grid-column: 2; grid-row: 1 / span 2; min-width: 0; }
+.pl-veckor .pl-pass { display: block; font-size: 0.85rem; color: var(--farg-text-svag); }
+.pl-veckor .pl-fokus { display: block; font-weight: 600; }
+.pl-veckor .pl-marken { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.3rem; }
+.pl-markering { display: inline-block; font-size: 0.78rem; font-weight: 600; padding: 0.1rem 0.5rem; border-radius: 999px; background: #fff3d6; color: #6b4800; }
+.pl-markering.bort { background: var(--farg-ton); color: var(--farg-text-svag); }
+.pl-markering.nu { background: var(--farg-accent); color: #fff; }
+.pl-veckor > li.nu { border-left-color: var(--farg-accent); background: var(--farg-accent-ljus); }
+.pl-veckor > li.pl-lovvecka, .pl-veckor > li.efter { background: var(--farg-ton-svag); }
+.pl-veckor > li.pl-lovvecka .pl-fokus { font-weight: 400; color: var(--farg-text-svag); }
+
+/* Veckan */
+.pl-veckan { font-family: var(--typsnitt-ui); margin: 1.25rem 0 2rem; }
+.pl-veckan[hidden] { display: none; }
+.pl-veckohuvud h2 { font-size: clamp(1.6rem, 6vw, 2.1rem); margin: 0 0 0.2rem; }
+.pl-veckohuvud h2:focus { outline: none; }
+.pl-nasta { background: var(--farg-accent-ljus); border-left: 4px solid var(--farg-accent); border-radius: 6px; padding: 0.85rem 1rem; margin: 1rem 0 1.25rem; }
+.pl-nasta .pl-etikett { color: var(--farg-accent); margin-bottom: 0.2rem; }
+.pl-nar { font-size: 1.15rem; font-weight: 700; margin: 0 0 0.6rem; }
+.pl-nasta .metod-centrala { margin: 0; }
+.pl-fokusruta { background: var(--farg-lasning-ljus); border-left: 4px solid var(--farg-lasning); border-radius: 6px; padding: 0.85rem 1rem; margin: 0 0 1.25rem; }
+.pl-fokusruta p { margin: 0 0 0.7rem; }
+.pl-fokusruta p:last-child { margin-bottom: 0; }
+.pl-led { font-weight: 700; }
+.pl-block { margin: 1.25rem 0; }
+.pl-block h3 { font-size: 1.05rem; margin: 0 0 0.5rem; }
+.pl-not { font-size: 0.9rem; color: var(--farg-text-svag); margin: 0.5rem 0; }
+.pl-uppf, .pl-poster { list-style: none; padding: 0; margin: 0; }
+.pl-uppf li { border-left: 3px solid #e3b341; padding: 0.15rem 0 0.15rem 0.75rem; margin: 0 0 0.8rem; }
+.pl-uppf p { margin: 0; }
+.pl-poster li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.75rem; padding: 0.45rem 0; border-bottom: 1px solid var(--farg-kant); }
+.pl-poster li > a:first-child { font-weight: 600; }
+.pl-taggar { font-size: 0.85rem; color: var(--farg-text-svag); }
+.pl-visa { margin-left: auto; font-size: 0.9rem; }
+.pl-passlista { list-style: none; padding: 0; margin: 0 0 0.75rem; border-top: 1px solid var(--farg-kant); }
+.pl-passlista li { display: grid; grid-template-columns: 6.6rem minmax(0, 1fr) auto; align-items: center; gap: 0.6rem; padding: 0.55rem 0.3rem; border-bottom: 1px solid var(--farg-kant); }
+.pl-passlista li.idag { background: var(--farg-accent-ljus); }
+.pl-passlista li.bort { color: var(--farg-text-svag); }
+.pl-dag { font-weight: 700; }
+.pl-dag small { display: block; font-weight: 400; font-size: 0.82rem; color: var(--farg-text-svag); }
+.pl-passinfo { font-size: 0.88rem; color: var(--farg-text-svag); }
+.pl-bock { width: 2.75rem; height: 2.75rem; border: 1.5px solid #c9d1da; border-radius: 50%; background: var(--farg-yta); display: inline-grid; place-items: center; cursor: pointer; padding: 0; }
+.pl-bock svg { width: 1.3rem; height: 1.3rem; fill: none; stroke: transparent; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.pl-bock:hover svg { stroke: #c9d1da; }
+.pl-bock.ja { border-color: var(--farg-lasning); background: var(--farg-lasning-ljus); }
+.pl-bock.ja svg { stroke: var(--farg-lasning); }
+.pl-andra-knappar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
+.pl-flytta { border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0.8rem 1rem; margin: 0.5rem 0; }
+.pl-flytta[hidden] { display: none; }
+.pl-flytta .pl-falt { margin-bottom: 0.7rem; }
+.pl-fallut { border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0.6rem 1rem; margin: 1.25rem 0; }
+.pl-fallut summary { font-weight: 600; cursor: pointer; min-height: 2.2rem; display: flex; align-items: center; }
+.pl-checklista { margin: 0.3rem 0 0.2rem; padding-left: 1.2rem; }
+.pl-checklista li { margin: 0.25rem 0; }
+.pl-bladdra { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; margin: 1.5rem 0 0; }
+.pl-ta-bort { margin: 0.5rem 0 0; }
+
+/* Din insats på metodens sida och Dina insatser i metodbanken */
+.pl-din { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.4rem 0.9rem; margin: 1rem 0 0; padding: 0.7rem 1rem; background: var(--farg-accent-ljus); border-left: 4px solid var(--farg-accent); border-radius: 6px; font-family: var(--typsnitt-ui); }
+.pl-din[hidden] { display: none; }
+.pl-din p { margin: 0; line-height: 1.35; }
+.pl-din-etikett { display: block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--farg-accent); }
+.pl-din a { font-weight: 600; }
+.pl-insatser { font-family: var(--typsnitt-ui); border: 1px solid var(--farg-kant); border-radius: var(--radie); margin: 1.25rem 0; overflow: hidden; max-width: 42rem; }
+.pl-insatser[hidden] { display: none; }
+.pl-insatser h2 { font-size: 1.05rem; margin: 0; padding: 0.8rem 1rem 0.5rem; }
+.pl-insatser ul { list-style: none; margin: 0; padding: 0; }
+.pl-insatser li { border-top: 1px solid var(--farg-kant); border-left: 5px solid var(--omr, var(--farg-accent)); }
+.pl-insatser a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.1rem 0.75rem; padding: 0.7rem 1rem; text-decoration: none; color: var(--farg-text); }
+.pl-insatser a:hover { background: var(--farg-ton-svag); }
+.pl-insatser .pl-metod { font-weight: 700; }
+.pl-insatser .pl-om { grid-column: 1; font-size: 0.88rem; color: var(--farg-text-svag); }
+.pl-insatser .pl-pil { grid-column: 2; grid-row: 1 / span 2; align-self: center; color: var(--farg-accent); font-weight: 600; }
+
+/* Planera insatsen: lovet, Följ insatsen, skattningen, avstämningen, sammanställningen och kopian (K-489). */
+.pl-lovveckor { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.pl-lovchip { min-height: 2.4rem; padding: 0.2rem 0.7rem; font-size: 0.88rem; }
+.pl-lovchip[aria-pressed="true"] { background: var(--farg-ton); border-color: var(--farg-text-svag); color: var(--farg-text); text-decoration: line-through; }
+.pl-kryss { display: flex; align-items: center; gap: 0.6rem; min-height: 2.75rem; font-weight: 600; cursor: pointer; }
+.pl-kryss input { width: 1.35rem; height: 1.35rem; accent-color: var(--farg-accent); }
+.pl-elevruta { margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px solid var(--farg-kant); }
+.pl-elevruta[hidden] { display: none; }
+.pl-textfalt { min-height: 6rem; padding: 0.6rem 0.8rem; line-height: 1.4; resize: vertical; }
+.pl-brett { max-width: none; }
+.pl-fraga-forst { border: 1.5px solid #b42318; border-radius: var(--radie); padding: 0.7rem 0.9rem; margin: 0.5rem 0; background: #fff5f4; font-family: var(--typsnitt-ui); }
+.pl-fraga-forst p { margin: 0 0 0.4rem; }
+.knapp.pl-farlig { background: #b42318; }
+.knapp.pl-farlig:hover { background: #8f1c13; }
+.pl-kopia { margin: 1rem 0 0; font-family: var(--typsnitt-ui); }
+.pl-kopia .pl-hjalp { margin: 0; }
+.pl-paminn { color: #6b4800; background: #fff3d6; border-radius: 6px; padding: 0.5rem 0.7rem; }
+.pl-filknapp { position: relative; cursor: pointer; }
+.pl-filknapp:focus-within { outline: 3px solid var(--farg-accent); outline-offset: 2px; }
+.pl-markering.stam { background: var(--farg-skrivning-ljus); color: var(--farg-skrivning); }
+
+/* Veckan när läraren följer insatsen */
+.pl-passlista .pl-narvaro { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 0.35rem; padding: 0 0 0.2rem; }
+.pl-elev { min-height: 2.4rem; }
+.pl-elev[aria-pressed="false"] { text-decoration: line-through; color: var(--farg-text-svag); background: var(--farg-ton); }
+.pl-elev[aria-pressed="true"] { background: var(--farg-lasning-ljus); border-color: var(--farg-lasning); color: var(--farg-text); }
+.pl-fraga { font-weight: 600; margin: 0 0 0.4rem; }
+.pl-skalnamn { list-style: none; display: flex; flex-wrap: wrap; gap: 0.15rem 0.9rem; padding: 0; margin: 0 0 0.6rem; font-size: 0.85rem; color: var(--farg-text-svag); }
+.pl-skalnamn b { color: var(--farg-text); }
+.pl-skattning { list-style: none; padding: 0; margin: 0 0 0.6rem; }
+.pl-skattning li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.4rem 0.8rem; padding: 0.45rem 0; border-bottom: 1px solid var(--farg-kant); }
+.pl-elevnamn { font-weight: 700; }
+.pl-skala { display: flex; gap: 0.3rem; }
+.pl-skalsteg { width: 2.75rem; height: 2.75rem; border: 1.5px solid var(--farg-accent); border-radius: 6px; background: var(--farg-yta); color: var(--farg-accent); font: 700 1rem var(--typsnitt-ui); cursor: pointer; }
+.pl-skalsteg[aria-pressed="true"] { background: var(--farg-accent); color: #fff; }
+.pl-gang { margin: 0.6rem 0 0; }
+.pl-gang summary { font-weight: 600; color: var(--farg-accent); cursor: pointer; min-height: 2.5rem; display: flex; align-items: center; }
+.pl-gang .pl-skala { margin: 0.3rem 0; }
+.pl-stam { background: var(--farg-skrivning-ljus); border-left: 4px solid var(--farg-skrivning); border-radius: 6px; padding: 0.85rem 1rem; margin: 1.25rem 0; }
+.pl-stam h3 { font-size: 1.05rem; margin: 0 0 0.4rem; }
+.pl-stam p { margin: 0 0 0.5rem; }
+.pl-riktningar { list-style: none; padding: 0; margin: 0 0 0.7rem; }
+.pl-riktningar li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.2rem 0.8rem; padding: 0.3rem 0; border-bottom: 1px solid rgba(0, 0, 0, 0.06); }
+.pl-riktning { color: var(--farg-text-svag); }
+.pl-riktning.upp { color: var(--farg-lasning); font-weight: 600; }
+.pl-riktning.ned { color: #b42318; font-weight: 600; }
+.pl-beslut { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 0.6rem; }
+.pl-beslut .knapp[aria-pressed="true"] { background: var(--farg-accent); color: #fff; }
+.pl-resultat { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: 0.4rem 0.8rem; margin: 0.5rem 0 0; }
+.pl-resultat label { display: grid; gap: 0.15rem; font-size: 0.88rem; font-weight: 600; }
+.pl-resultat .pl-falt { min-height: 2.4rem; }
+.pl-foljtips { margin-top: 1.25rem; }
+
+/* Sammanställningen */
+.pl-samman { font-family: var(--typsnitt-ui); border-top: 2px solid var(--farg-kant); margin: 1.5rem 0 0; padding: 1rem 0 0; }
+.pl-samman[hidden] { display: none; }
+.pl-samman h2 { font-size: 1.3rem; margin: 0 0 0.5rem; }
+.pl-veckorader { list-style: none; padding: 0; margin: 0.4rem 0 0; display: grid; gap: 0.25rem; }
+.pl-veckorader li { display: grid; grid-template-columns: 6.5rem auto 1fr; align-items: center; gap: 0.6rem; font-size: 0.9rem; }
+.pl-veckorader .pl-d { color: var(--farg-text-svag); }
+.pl-rutor { display: inline-flex; gap: 3px; vertical-align: middle; margin-left: 0.4rem; }
+.pl-veckorader .pl-rutor { margin-left: 0; }
+.pl-ruta { width: 0.8rem; height: 0.8rem; border-radius: 2px; border: 1.5px solid #c9d1da; background: var(--farg-yta); }
+.pl-ruta.varit { border-color: var(--farg-text-svag); }
+.pl-ruta.gjord { border-color: var(--farg-lasning); background: var(--farg-lasning); }
+.pl-elevlista { display: grid; gap: 0.5rem; }
+.pl-elevdetalj { border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0 0.9rem; }
+.pl-elevdetalj > summary { display: grid; grid-template-columns: minmax(5rem, 1fr) auto; grid-template-areas: "namn graf" "riktning riktning"; align-items: center; gap: 0.15rem 0.8rem; padding: 0.6rem 0; cursor: pointer; list-style: none; }
+.pl-elevdetalj > summary::-webkit-details-marker { display: none; }
+.pl-elevdetalj > summary .pl-elevnamn { grid-area: namn; }
+.pl-elevdetalj > summary .pl-graf { grid-area: graf; }
+.pl-elevdetalj > summary .pl-riktning { grid-area: riktning; font-size: 0.88rem; }
+.pl-elevdetalj > summary .pl-elevnamn::after { content: ' ›'; color: var(--farg-accent); }
+.pl-elevdetalj[open] > summary .pl-elevnamn::after { content: ' ⌄'; }
+.pl-elevdetalj > :not(summary) { margin: 0 0 0.6rem; }
+.pl-grafruta { overflow-x: auto; padding: 0.3rem 0; }
+.pl-graf { display: block; }
+.pl-graf .pl-stapel { fill: var(--farg-accent); }
+.pl-graf .pl-stapel-tom { fill: #c9d1da; }
+.pl-graf .pl-linje { stroke: var(--farg-kant); stroke-width: 1; }
+.pl-graf .pl-axel, .pl-graf .pl-stapeletikett { font: 10px var(--typsnitt-ui); fill: var(--farg-text-svag); }
+.pl-graf .pl-stapeletikett, .pl-graf .pl-stapelvarde { text-anchor: middle; }
+.pl-graf .pl-stapelvarde { font: 700 11px var(--typsnitt-ui); fill: var(--farg-text); }
+.pl-graf .pl-prick { fill: var(--farg-lasning); }
+.pl-graf .pl-prick.borta { fill: none; stroke: var(--farg-lasning); stroke-width: 1.2; }
+.pl-graf .pl-mittfalt { fill: var(--farg-skrivning-ljus); }
+.pl-graf .pl-mitttext { text-anchor: middle; fill: var(--farg-skrivning); font-weight: 600; }
+.pl-veckans summary { line-height: 1.35; }
+.pl-noter { list-style: none; padding: 0; margin: 0.4rem 0 0; }
+.pl-noter li { margin: 0 0 0.6rem; }
+.pl-res { margin: 0.3rem 0 0.6rem; padding-left: 1.1rem; }
+.pl-samman .pl-knappar .knapp { flex: 0 1 auto; }
+
+@media (min-width: 64rem) {
+  .pl-tva { display: grid; grid-template-columns: 22rem minmax(0, 1fr); gap: 2rem; align-items: start; }
+  .pl-tva .pl-andra { margin-top: 0; }
+  .plan:not(.pl-har-plan) .pl-tva .pl-val { position: sticky; top: 1rem; }
+  .pl-veckoknapp, .pl-veckor > li.pl-lovvecka, .pl-veckor > li.efter { grid-template-columns: 7.5rem minmax(0, 1fr); }
+  .pl-veckan { max-width: 46rem; }
+  .pl-knappar .knapp { flex: 0 1 auto; }
+}
+@media print { .pl-din, .pl-insatser { display: none; } }
+
 /* Skrivkorten och sidan som slumpar dem (Kortskrivning: skriv varje dag, src/pages/stodundervisning/[id]/skrivkort.astro;
    Niclas 2026-10-14). Kortet har skrivkortens form ur metodriggen (build/skrivkortform.js), som Word-filen har den
    (src/lib/skrivkortform.ts): en ram i nivåns färg, fotot i 3:2 överst, texten i elevens typsnitt, årtalet och

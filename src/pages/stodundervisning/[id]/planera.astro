@@ -1,0 +1,21 @@
+---
+// /stodundervisning/<id>/planera: Planera insatsen (K-489), för varje metod som kan planeras (src/lib/insatsplan.ts).
+// Bygget stannar på en metod vars plan inte går att läsa, så att en metod aldrig får en plan som räknar fel.
+import Planera from '../../../components/Planera.astro';
+import { publicerade } from '../../../lib/innehall';
+import { insatsplanFel, planbar, planensData } from '../../../lib/insatsplan';
+import { metodensLektionskort } from '../../../lib/lektionskort';
+
+export async function getStaticPaths() {
+  const metoder = (await publicerade('stodundervisning')).filter((m) => planbar(m.data));
+  const fel = (await Promise.all(metoder.map(insatsplanFel))).flat();
+  if (fel.length) throw new Error(`Planera insatsen: ${fel.length} fel i metodernas plan (METODER.md under Planera insatsen):\n  ${fel.join('\n  ')}`);
+  return metoder.map((m) => ({ params: { id: m.id }, props: { m } }));
+}
+
+const { m } = Astro.props;
+const data = await planensData(m);
+const lektionskort = metodensLektionskort(m.data, m.id);
+---
+
+<Planera data={data} lektionskort={lektionskort} snabbmall={m.data.snabbmall ? { rubrik: m.data.snabbmall.rubrik, period: m.data.snabbmall.period } : undefined} />

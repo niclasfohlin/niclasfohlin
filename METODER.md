@@ -28,8 +28,8 @@ Schemat i `src/content.config.ts` är strikt: ett okänt fält, en tabellrad med
 | Lärarens roll: gör och undvik | `roll` (gor, undvik) | två kolumner, `#roll` |
 | Var man hittar texter eller uppgifter, krav | `urval` (text, krav) | `#urval` |
 | Hem och skola: möte med vårdnadshavare, kontrakt, schema att fylla i | `hem` (text, kontrakt med inledning och ansvar, schema med kolumner och antal rader) | `#hem` för texten. Kontraktet och schemat är material (Niclas 2026-10-17, om TIL i grupp: "kontraktet och lässchemat i sitt material och möjlighet att skriva ut de två på varsin snygg A4a"): de står i Materialet, var och en med en utskriftsknapp till sitt A4 där och en i Hem och skola (`Hemsidaknapp.astro`, prövad i `scripts/paritet.mjs`), en egen Word-fil och pdf (`<id>-kontrakt`, `<id>-schema`, `hemsidaDokument` i `metoddocx.ts`), som egna sidor i Materialet i filen med allt och i planeringsmallarna, och som rader i nedladdningsrutan. Kontraktet har formen av ett vanligt avtal (Niclas 2026-10-17: "Ser lite rörigt ut mot ett normalt kontrakt"; `kontraktSida`). Metoden behöver då ramar, och Materialet får stå utan andra ramar |
-| Progression | `progression` (enhet Vecka eller Pass; rader: vecka, `led` som Jag gör och Vi gör, fokus, roll) | tabell, `#progression` |
-| Uppföljning | `uppfoljning` (rader: nar, vad) | tabell, `#uppfoljning` |
+| Progression | `progression` (enhet Vecka eller Pass; rader: vecka, `led` som Jag gör och Vi gör, fokus, roll, och planens `rubrik` och `taggar`, se Planera insatsen) | tabell, `#progression` |
+| Uppföljning | `uppfoljning` (rader: nar, vad, och planens `tid`, se Planera insatsen) | tabell, `#uppfoljning` |
 | Mål | `mal` (punkter) | kryssbar lista, `#mal`, målkollen i mallarna |
 | Snabbmall | `snabbmall`: ramverket ur metodriggen (Niclas 2026-10-20 om förlagan i TIL i grupp: "Jag tycker denna är bättre än originalet"), med `text`, `pass` (3–6), `period` (veckan, två, tre eller fyra veckor), `overst` (högst två rader), `fore` och `foreHjalp`, `efter`, `ska` (tre saker att kryssa), `sist` (två rutor) och `not` (`src/lib/snabbmall.ts`, riggens docs/snabbmall.md) | `#snabbmall`; bladet på en egen sida i filen med allt och i Mallarna (`snabbvecka` i `metoddocx.ts`, ett till ett med riggens `B.snabbvecka`); lathundens block snabbmall visar Före och Efter med kolumnernas namn och Nästa gång (`snabbFalt`) |
 | Checklista | `checklista` (punkter) | kryssbar lista, `#checklista`, mallen i docx |
@@ -302,6 +302,44 @@ Niclas 2026-10-19: "Hela tanken är att databaserna ska kunna växa och allt då
 | Nya poster | Läggs i databasen: matteproblemen en fil per problem och faktatexterna en fil per tema (Databasens matteproblem och Databasens faktatexter ovan). Då står metoden och dess filer still när databasen växer. Lästexterna står i dag i metodens fil; nya lästexter blir databasens poster i riggens föreslagna form, en fil per text med raden till nivåns översikt som fält (kön K-457). Hur posterna kommer från riggen står i raden Intaget under Ta fram ur en bank |
 | En ny metod med en databas | Ta fram-sidan och dess kort kommer ur registret (`src/data/centrala.json`, De centrala sakerna ovan) och bankens form. Metodens text och lathund skrivs utan antal från början och säger var posterna finns. Spärren prövar det |
 | Metodriggen | Skriver på samma sätt och kör samma spärr ur standarden. Avtalet står i riggens `out/FRAN-SAJTEN.md` (Nytt 2026-10-19) |
+
+## Planera insatsen: planen och uppföljningen
+
+Varje metod som kan planeras har sidan `/stodundervisning/<id>/planera` och knappen Planera insatsen bredvid verktygets knapp på metodens sida (Niclas 2026-10-24: "Planera insatsen gillar jag", och "bygg EN som du testar på flera olika sätt att den funkar. dvs en standard"). Läraren väljer första passet, dagarna, antalet veckor, nivån och gruppens namn, och planen räknar fram passen, veckornas fokus och metodens uppföljning med datum. Veckan i planen följer gruppen: Upprepa veckan tar samma vecka en gång till, och lov, flyttade och inställda pass flyttar resten fram. Röda dagar räknas bort av sig själva. Planen är först bara en plan, med kalenderfil, text till dokumentationen och länk. Med valet Följ insatsen bockar läraren passen som blev av och skattar en gång i veckan, 1 till 5, hur väl eleverna (eller gruppen) klarar metodens förmåga på egen hand. Mitt i insatsen kommer en avstämning och efter den en utvärdering, och sammanställningen går att kopiera och skriva ut för gruppen och för varje elev (Niclas samma dag: "Tänker valbart sånt så denna inte bara skapar en massa busy work som inte behövs om det inte önskas"). Närvaron och veckans gång är frivilliga.
+
+Planmotorn står i standarden (`src/lib/standard/plan.js`), så att sajten, provet och metodriggen räknar lika. Sajtens del är `src/lib/insatsplan.ts` (datan och spärren), `src/components/Planera.astro`, `src/scripts/planera.ts`, `src/scripts/planpdf.ts` och `src/scripts/insatser.ts` (Din insats på metodens sida och Dina insatser i metodbanken).
+
+### Fälten i metodens fil
+
+| Fält | Vad det är |
+|---|---|
+| `uppfoljning.rader[].tid` | När raden görs, med standardens ord nedan. En metod kan planeras när varje rad i uppföljningen har sin tid; radens `nar` står kvar som dess text |
+| `progression.rader[].vecka` | Veckorna eller passen raden gäller: `1`, `4–5`, `6–8`, `9–10 vid behov`, `6 till det sista`, `Pass 2–6`, `Från pass 11`. Kolumnen heter Vecka eller Pass |
+| `progression.rader[].rubrik` | Veckans fokus i några ord, till planens översikt. Utan den står fokus första mening |
+| `progression.rader[].taggar` | Bankens taggar som veckans poster har, som lästexternas slag, så att veckan visar nivåns texter med dem |
+| `plan.formaga` | Metodens förmåga som en fras efter "klarar att", som "läsa mellan raderna", till skattningen |
+
+Fälten står inte på metodens sida, i Word eller i lathunden. De ger därför inget nytt datum, gör inte om lathunden och prövas inte mot Word och utskriften. Vilka fälten är står på ett ställe, i `utanPlanensFalt` i standarden, som `scripts/datumkoll.mjs`, lathundarnas skript och `scripts/paritet.mjs` läser. Bygget stannar på en metod som kan planeras men har en tid, en vecka eller en tagg som inte går att läsa (`insatsplanFel`).
+
+| Ord i `tid` | Datum i planen |
+|---|---|
+| `före` | första passet |
+| `efter`, `efter 4 veckor`, `efter 4–6 veckor` | veckan efter sista passet, eller så många veckor efter den |
+| `varje pass`, `i passet`, `varje vecka` | inget datum; står i varje vecka |
+| `varannan vecka`, `var 3:e vecka` | sista passet i var andra eller tredje vecka |
+| `vecka 4`, `vecka 2 och 6`, `vecka 1–4`, `första veckan`, `sista veckan` | sista passet i de veckorna; en upprepad vecka räknas där den slutar |
+| `pass 6, 8 och 10`, `pass 13–23`, `sista passet` | de passen |
+| `villkor` | inget datum; står under Håll koll på, för det läraren bedömer när det händer |
+
+### Lagringen
+
+Planen och allt läraren för in sparas bara i webbläsaren. Länken till planen bär valen efter `#`, så att de aldrig når servern eller statistiken, men inte gruppens namn och inget som förts in. En kopia som fil bär allt och öppnas på en annan dator, och sidan påminner om den när det finns uppföljning och ingen kopia på två veckor (Niclas 2026-10-24 om risken att "saker försvinner"; Safari raderar det en webbplats har sparat efter sju dagars användning utan besök på den). Elevernas namn står bara i webbläsaren, i kopian och i lärarens egna pdf:er; texterna som kopieras till dokumentationen, länken, kalenderfilen och statistiken har inga namn. Ett tryck som tar bort en plan eller elevlistan frågar först i sidan och går att ångra.
+
+### Proven
+
+`scripts/planprov.mjs` körs i `npm run validera`: planmotorn (veckor, röda dagar, påsken, vecka 53, upprepade veckor, lov, flyttade och inställda pass, länken, texterna och kalenderfilen enligt RFC 5545), varje metod som har planens fält, fem former av metoder med fälten som riggen ska skriva dem, och sidan i Chrome med fasta datum, mitt i insatsen och efter den, i 320, 360 och 390 punkter och på dator. `--bilder <mapp>` tar bilder av lägena till granskningen.
+
+Planen byggs i steg: en metod som standard (Textsamtal i grupp, K-489), en metod av varje form (K-490) och alla metoder, med fälten skrivna av metodriggen (K-491). Knappen kommer ut på sajten först när alla metoder har planen.
 
 ## Lathunden
 

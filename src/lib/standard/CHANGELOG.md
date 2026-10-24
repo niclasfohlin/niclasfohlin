@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.10.0, 2026-10-24
+
+- `plan.js`, Planera insatsen (sajtens K-489): planmotorn, med ordlistan för uppföljningens `tid`, progressionens veckor och pass, röda dagar, ISO-veckor, upprepade veckor, lov, flyttade och inställda pass, länken, texten till dokumentationen, kalenderfilen och sammanställningen när läraren följer insatsen. Niclas: "Planera insatsen gillar jag", och "bygg EN som du testar på flera olika sätt att den funkar. dvs en standard". Riggen kan pröva att en metod går att planera med `planFel`. `utanPlanensFalt` ger metodens fil utan planens fält, så att de inte ger ett nytt datum, gör om lathunden eller prövas mot Word.
+
 ## 0.9.0, 2026-10-20
 
 - `BILDTEXT`, `meningarI` och `bildtextFel`: bildtexten under en bild är en till tre meningar och högst 250 tecken och börjar inte med "Bilden", och ett blad har sitt textalternativ i `alt` (sajtens K-486, STIL.md under Bildtexter). Niclas: "Tror du behöver en stringens för bildtext. Dvs vad bildtext har och hur lång den får vara", och om innehållet: "Sådant som bilden eller kortet i sig inte kan berätta, eller som förtydligar bildens roll i metoden väldigt kort". Riggen prövar samma sak före leveransen, och sajten stannar bygget.

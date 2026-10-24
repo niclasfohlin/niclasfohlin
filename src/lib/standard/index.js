@@ -458,3 +458,6 @@ export function bildtextFel(bild, { blad = false, visas = true } = {}) {
   if (blad && !String(bild.alt ?? '').trim()) fel.push('bladet har inget textalternativ i alt');
   return fel;
 }
+
+// Planera insatsen (sajtens K-489): planmotorn, med datum, röda dagar, länken, dokumentationens text och kalenderfilen.
+export * from './plan.js';

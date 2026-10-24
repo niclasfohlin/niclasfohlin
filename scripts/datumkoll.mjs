@@ -18,11 +18,14 @@ import { execFileSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse as parseYaml } from 'yaml';
+import { utanPlanensFalt } from '../src/lib/standard/index.js';
 
 const rot = join(dirname(fileURLToPath(import.meta.url)), '..');
 const MAPP = 'src/content/stodundervisning';
 // Fält som inte är metodens innehåll: sajtens fält i scripts/metoddiff.mjs, och taggarna, som sorterar metoden i
 // metodbanken och inte är något läraren läser i den (K-463: 22 metoder fick nya taggar utan att något i dem ändrades).
+// Planens fält (Planera insatsen, K-489) är inte heller något läraren läser i metoden, och utanPlanensFalt i standarden
+// tar bort dem.
 const INTE_INNEHALL = new Set(['uppdaterad', 'publicerad', 'relaterade', 'utkast', 'taggar']);
 const kontrollera = process.argv.includes('--kontrollera');
 
@@ -42,8 +45,8 @@ for (const fil of readdirSync(join(rot, MAPP)).filter((f) => f.endsWith('.yaml')
   const vag = `${MAPP}/${fil}`;
   if (!ute.has(vag)) continue;
   const text = readFileSync(join(rot, vag), 'utf8');
-  const nu = parseYaml(text);
-  const fore = parseYaml(git(['show', `origin/main:${vag}`]));
+  const nu = utanPlanensFalt(parseYaml(text));
+  const fore = utanPlanensFalt(parseYaml(git(['show', `origin/main:${vag}`])));
   const falt = [...new Set([...Object.keys(nu), ...Object.keys(fore)])].filter((k) => !INTE_INNEHALL.has(k));
   const andrade = falt.filter((k) => utan(nu[k]) !== utan(fore[k]));
   if (!andrade.length || datum(nu.uppdaterad) !== datum(fore.uppdaterad)) continue;

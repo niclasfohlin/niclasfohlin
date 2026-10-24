@@ -102,3 +102,64 @@ export declare const BILDTEXT: { tecken: number; meningar: number };
 export declare function meningarI(text: string): number;
 /** Felen i en bilds bildtext och textalternativ; tom lista när de följer regeln. */
 export declare function bildtextFel(bild: { rubrik?: string; text: string; alt?: string }, o?: { blad?: boolean; visas?: boolean }): string[];
+
+/** Planera insatsen (sajtens K-489, plan.js): när en rad i uppföljningen görs, ur fältet tid. */
+export type Tid = { typ: 'fore' } | { typ: 'efter'; veckor: number; till?: number } | { typ: 'lopande'; enhet: 'pass' | 'vecka' } | { typ: 'intervall'; var: number } | { typ: 'vecka'; veckor: number[] } | { typ: 'sista-veckan' } | { typ: 'pass'; pass: number[]; till?: number } | { typ: 'sista-passet' } | { typ: 'villkor' };
+/** En rad i progressionen: veckorna eller passen den gäller; till saknas när den gäller till slutet. */
+export interface Steg { rad: number; fran: number; till?: number; vidBehov: boolean }
+/** Metodens plan: hur ofta, passets längd, perioden, progressionens steg och uppföljningens tider. */
+export interface Metodplan { takt: { min: number; max: number }; minuter: { min: number; max: number }; period: { min: number; max?: number; enhet: 'veckor' | 'pass'; mer: boolean; hogst: boolean; perKurs: boolean }; stegEnhet: 'veckor' | 'pass'; steg: Steg[]; uppfoljning: { rad: number; tid: Tid }[] }
+/** Lärarens val: första passet, dagarna (1 för måndag), antalet veckor eller pass, nivån, minuterna, lovveckorna (2026-52), veckorna som tas om, flyttade och inställda pass. */
+export interface Val { start: string; dagar: number[]; langd: number; niva?: string; minuter?: number; lov?: string[]; upprepa?: number[]; flytta?: Record<string, string>; stryk?: string[] }
+export interface Pass { nr: number; datum: string; vecka: number; steg?: number | null; flyttatFran?: string }
+export interface PlanVecka { nr: number; innehall: number; igen: boolean; mandag: string; vecka: { ar: number; vecka: number }; pass: number[]; bortfall: { datum: string; varfor: 'helgdag' | 'installt'; namn?: string }[]; steg?: number | null }
+export interface Plan { start: string; enhet: 'veckor' | 'pass'; forstaPass?: string; sistaPass?: string; efter: string; pass: Pass[]; veckor: PlanVecka[]; lovveckor: string[]; uppfoljning: { rad: number; typ: Tid['typ']; tillfallen: { datum: string; vecka: number | null }[] }[] }
+export declare const plusDagar: (s: string, n: number) => string;
+export declare const veckodag: (s: string) => number;
+export declare const mandagen: (s: string) => string;
+export declare const arDatum: (s: unknown) => boolean;
+export declare function isoVecka(s: string): { ar: number; vecka: number };
+export declare const veckonyckel: (s: string) => string;
+export declare function paskdagen(ar: number): string;
+/** Dagarna då skolan är stängd i hela landet: helgdagarna och jul-, nyårs- och midsommarafton. */
+export declare function rodaDagar(ar: number): Map<string, string>;
+export declare function helgdag(s: string): string | undefined;
+export declare function tolkaTid(text: unknown): Tid | null;
+export declare function tolkaSteg(text: unknown): { fran: number; till?: number; vidBehov: boolean } | null;
+export declare function metodplan(d: { tid?: string; period?: string; progression?: { enhet?: string; rader: { vecka: string; taggar?: string[] }[] }; uppfoljning?: { rader: { nar: string; tid?: string }[] } }): { fel: string[]; plan?: Metodplan };
+export declare function planFel(d: Parameters<typeof metodplan>[0]): string[];
+/** Metodens fil utan planens fält (`plan`, uppföljningens `tid`, progressionens `taggar` och `rubrik`), som bara planens sida läser. */
+export declare function utanPlanensFalt<T extends Record<string, any>>(d: T): T;
+export declare function forval(mp: Metodplan, idag: string): Val;
+export declare function planera(mp: Metodplan, val: Val): Plan;
+export declare function veckanFor(plan: Plan, datum: string): PlanVecka | null;
+export declare function nastaPass(plan: Plan, datum: string): Pass | null;
+export declare function kodaVal(val: Val, extra?: { id?: string; visa?: number }): string;
+export declare function lasVal(hash: string): { val: Val; id?: string; visa?: number } | null;
+export declare const VECKODAGAR: string[];
+export declare const datumText: (s: string) => string;
+export declare const dagOchManad: (s: string) => string;
+export declare const dagText: (s: string) => string;
+export declare function spannKort(fran: string, till: string): string;
+export declare const uppraknat: (ord: string[]) => string;
+export declare const talText: (n: number, en?: boolean) => string;
+export declare function veckansDagar(plan: Plan, v: PlanVecka): { fran: string; till: string };
+export declare function dokumentationstext(info: { titel: string; undertitel?: string; adress: string; mal?: { punkter: string[] }; uppfoljning: { nar: string }[]; nivaNamn?: string }, plan: Plan, val: Val, o: { minuter: number; genomforda?: number }): string;
+export declare function kalenderfil(info: { titel: string; uppfoljning: { nar: string }[]; fokus: (string | null)[] }, plan: Plan, o: { id: string; lank: (vecka?: number) => string; namn?: string; nu: Date }): string;
+
+/** Det läraren för in när hen följer insatsen, allt valfritt: passen som blev av (passens dagar), skattningen vecka för vecka (veckans måndag, sedan elevens id eller grupp), elevlistan, resultaten i metodens uppföljning och besluten mitt i och efter. */
+export interface Foljd { gjorda?: string[]; elever?: { id: string; namn: string }[]; franvaro?: Record<string, string[]>; vecka?: Record<string, { varde?: number; not?: string }>; skattning?: Record<string, Record<string, number>>; resultat?: Record<string, Record<string, string>>; avstamning?: { beslut?: string; not?: string }; utvardering?: { beslut?: string; not?: string } }
+export declare const passetsDag: (p: Pass) => string;
+export declare const SKALAN: readonly string[];
+export declare const skattningsfragan: (formaga?: string, grupp?: boolean) => string;
+export declare const GRUPPEN: 'grupp';
+export declare function mittVeckan(plan: Plan): number | null;
+export interface SammanstallningVecka { nr: number; mandag: string; vecka: number; innehall: number; igen: boolean; pass: { nr: number; dag: string; datum: string; gjort: boolean }[]; gjorda: number; planerade: number; varit: number; installda: number; helgdagar: number; skattning?: number; not?: string }
+export interface SammanstallningElev { id: string; namn: string; skattningar: { nr: number; vecka: number; varde: number }[]; forsta: { nr: number; vecka: number; varde: number } | null; senaste: { nr: number; vecka: number; varde: number } | null; narvaro: number; resultat: Record<string, string> }
+export interface Sammanstallning { veckor: SammanstallningVecka[]; elever: SammanstallningElev[]; grupp: boolean; planerade: number; gjorda: number; veckomedel: number | null; varit: number; installda: number; helgdagar: number; slut: boolean; mitt: number | null; avstamning: { beslut?: string; not?: string } | null; utvardering: { beslut?: string; not?: string } | null }
+export declare function sammanstallning(plan: Plan, f: Foljd, idag: string): Sammanstallning;
+export declare const riktning: (e: SammanstallningElev) => 'upp' | 'samma' | 'ned' | null;
+export declare const BESLUT: Readonly<Record<'fortsatt' | 'justera' | 'avsluta' | 'forlang' | 'byt', string>>;
+export declare const uppfoljningensTillfallen: (plan: Plan) => { nyckel: string; rad: number; datum: string; vecka: number | null }[];
+export declare function sammanstallningstext(info: { titel: string; formaga?: string; uppfoljning: { nar: string }[] }, plan: Plan, s: Sammanstallning): string;
+export declare function elevtext(info: { formaga?: string; uppfoljning: { nar: string }[] }, plan: Plan, s: Sammanstallning, id: string): string;

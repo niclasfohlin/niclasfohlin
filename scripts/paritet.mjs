@@ -25,6 +25,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse as parseYaml } from 'yaml';
+import { utanPlanensFalt } from '../src/lib/standard/index.js';
 import JSZip from 'jszip';
 import { lasTeman, medTemana } from '../src/lib/faktatemaihop.js';
 
@@ -236,8 +237,9 @@ for (const fil of filer) {
   const id = fil.slice(0, -5);
   // Metoden med databasens teman (src/lib/faktatemaihop.js), som databasens filer och enheternas sidor har dem: temanas
   // texter prövas där. Metodens sida och filen med allt har dem inte och prövas mot metodens egen fil (egen). Temanas
-  // ramar och bilder står efter metodens, så ramarnas och bildernas nummer är desamma i båda.
-  const egen = parseYaml(readFileSync(join(mapp, fil), 'utf8'));
+  // ramar och bilder står efter metodens, så ramarnas och bildernas nummer är desamma i båda. Planens fält läser bara
+  // planens sida (utanPlanensFalt i standarden), och de prövas inte.
+  const egen = utanPlanensFalt(parseYaml(readFileSync(join(mapp, fil), 'utf8')));
   const d = medTemana(egen, teman.filter((t) => t.data.metod === id));
   if (d.utkast) continue;
   const sida = join(rot, 'dist/stodundervisning', id, 'index.html');

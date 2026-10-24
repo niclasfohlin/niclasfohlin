@@ -1,0 +1,144 @@
+---
+// Planera insatsen (K-489): sidan /stodundervisning/<id>/planera. Valen och planens ram står i sidan; planen, veckan och
+// knapparnas verkan räknas och ritas av src/scripts/planera.ts med standardens planmotor (src/lib/standard/plan.js) ur
+// metodens fält (src/lib/insatsplan.ts). Filernas knappar (snabbmallen, lektionskorten, lathunden) står gömda i sidan, så
+// att bygget sätter filernas version på dem och utskriftsknapparnas skript binder dem; veckan flyttar in dem.
+import Base from '../layouts/Base.astro';
+import SkrivUtPdf from './SkrivUtPdf.astro';
+import Lektionskortknapp from './Lektionskortknapp.astro';
+import { periodensLangd, tidensMatt } from '../lib/standard/index.js';
+import type { PlanData } from '../lib/insatsplan';
+import type { Lektionskort } from '../lib/lektionskort';
+
+interface Props { data: PlanData; lektionskort: Lektionskort[]; snabbmall?: { rubrik: string; period: string } }
+const { data, lektionskort, snabbmall } = Astro.props;
+const period = periodensLangd(data.period)!;
+const matt = tidensMatt(data.tid ?? '');
+// Längderna att välja: metodens spann (högst tio knappar), eller för en period utan slut den kortaste och två längre.
+const langder = period.max
+  ? Array.from({ length: Math.min(period.max, period.min + 9) - period.min + 1 }, (_, i) => period.min + i)
+  : period.mer ? [period.min, period.min + 4, period.min + 8] : [period.min];
+const minuter = matt.minst !== undefined && matt.minuter !== undefined && matt.minst !== matt.minuter ? [matt.minst, matt.minuter] : [];
+const DAGAR = ['Mån', 'Tis', 'Ons', 'Tor', 'Fre'];
+const DAGNAMN = ['måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag'];
+const liten = (s?: string) => (s ? s.charAt(0).toLocaleLowerCase('sv') + s.slice(1) : '');
+const json = JSON.stringify(data).replace(/</g, '\\u003c');
+---
+
+<Base title={`Planera insatsen: ${data.titel}`} description={`Planera ${data.titel}: välj när ni träffas, så räknar planen fram passen, veckornas fokus och uppföljningen ur metoden.`}>
+  <article class="plan" id="plan" data-metod={data.id}>
+    <header class="pl-huvud">
+      <p class="meta brodsmula"><a href="/stodundervisning">Stödundervisning</a> · <a href={data.sida}>{data.titel}</a> · Planera</p>
+      <h1>Planera insatsen</h1>
+      <p class="ingress">Välj när ni träffas. Planen räknar fram passen och uppföljningen ur metoden, och varje vecka visar vad ni gör och var materialet finns.</p>
+      <noscript><p class="pl-utan-js">Planen räknas fram i webbläsaren och behöver JavaScript. Metoden står på <a href={data.sida}>metodens sida</a>.</p></noscript>
+    </header>
+
+    <nav class="pl-grupper" id="pl-grupper" aria-label="Dina planer för metoden" hidden></nav>
+    <p class="pl-besked" id="pl-besked" role="status" hidden></p>
+
+    <section class="pl-veckan" id="pl-veckan" aria-labelledby="pl-veckan-rubrik" hidden></section>
+
+    <div class="pl-tva">
+      <details class="pl-andra" id="pl-andra" open>
+        <summary>Ändra planen</summary>
+        <form class="pl-val" id="pl-val" aria-labelledby="pl-val-rubrik">
+          <h2 id="pl-val-rubrik">När ni träffas</h2>
+          <div class="pl-rad">
+            <label class="pl-etikett" for="pl-start">Första passet</label>
+            <input class="pl-falt" type="date" id="pl-start" required />
+          </div>
+          <fieldset class="pl-rad">
+            <legend class="pl-etikett">Dagar</legend>
+            <div class="pl-dagar" id="pl-dagar">
+              {DAGAR.map((d, i) => <button type="button" data-dag={i + 1} aria-pressed="false" aria-label={DAGNAMN[i]}>{d}</button>)}
+            </div>
+            {data.tid && <p class="pl-hjalp">Metoden: {liten(data.tid)}.</p>}
+            <p class="pl-hjalp pl-varning" id="pl-dagar-varning" hidden></p>
+          </fieldset>
+          <fieldset class="pl-rad">
+            <legend class="pl-etikett">Antal {period.enhet === 'pass' ? 'pass' : 'veckor'}</legend>
+            <div class="sk-segment pl-langd" id="pl-langd">
+              {langder.map((n) => <button type="button" class="sk-antal" data-langd={n} aria-pressed="false">{n}</button>)}
+            </div>
+            {data.period && <p class="pl-hjalp">Metoden: {liten(data.period)}.{period.enhet === 'veckor' && ' Lov och röda dagar räknas inte.'}</p>}
+          </fieldset>
+          {minuter.length > 0 && (
+            <fieldset class="pl-rad">
+              <legend class="pl-etikett">Passets längd</legend>
+              <div class="sk-segment" id="pl-minuter">
+                {minuter.map((n) => <button type="button" class="sk-antal" data-minuter={n} aria-pressed="false">{n} min</button>)}
+              </div>
+            </fieldset>
+          )}
+          {data.bank && (
+            <fieldset class="pl-rad">
+              <legend class="pl-etikett">Nivå</legend>
+              <div class="sk-nivaknappar pl-nivaer" id="pl-nivaer">
+                {data.bank.nivaer.map((n) => <button type="button" class="sk-niva" data-niva={n.slug} style={`--niva:${n.farg}`} aria-pressed="false">{n.namn}</button>)}
+              </div>
+              <p class="pl-hjalp">Nivån styr vilka {data.bank.flera} veckan visar. Tryck en gång till för att ta bort den.</p>
+            </fieldset>
+          )}
+          <div class="pl-rad">
+            <label class="pl-etikett" for="pl-namn">Gruppens namn, om du vill</label>
+            <input class="pl-falt" type="text" id="pl-namn" maxlength="40" autocomplete="off" />
+            <p class="pl-hjalp">Skriv inte elevernas namn. Namnet stannar på den här enheten och följer inte med länken.</p>
+          </div>
+          <fieldset class="pl-rad">
+            <legend class="pl-etikett">Lov</legend>
+            <div class="pl-lovveckor" id="pl-lovveckor"></div>
+            <p class="pl-hjalp">Tryck på veckorna som är lov, så hoppar planen över dem. Röda dagar räknar planen bort själv.</p>
+          </fieldset>
+          <fieldset class="pl-rad pl-foljval">
+            <legend class="pl-etikett">Följ insatsen</legend>
+            <label class="pl-kryss"><input type="checkbox" id="pl-folj" data-goatcounter-click={`planera:${data.id}:folj`} data-goatcounter-title={`${data.titel}: Följ insatsen valt`} /> <span>Följ insatsen vecka för vecka</span></label>
+            <p class="pl-hjalp">Bocka passen som blev av, skatta en gång i veckan hur väl eleverna klarar {data.formaga ? `att ${data.formaga}` : 'det ni tränar'} på egen hand, och stäm av mitt i och efter. Inget måste fyllas i.</p>
+            <div class="pl-elevruta" id="pl-elevruta" hidden>
+              <label class="pl-etikett" for="pl-elever">Eleverna, en per rad, om du vill</label>
+              <textarea class="pl-falt pl-textfalt" id="pl-elever" rows="4" maxlength="400" autocomplete="off" spellcheck="false"></textarea>
+              <p class="pl-hjalp">Skriv förnamn eller initialer. Namnen sparas bara i den här webbläsaren och i kopian du sparar. De följer aldrig med länken, kalenderfilen eller statistiken. Följ skolans regler för elevuppgifter. Utan elevlista skattar du gruppen.</p>
+              <p><button type="button" class="pl-textknapp" id="pl-elever-bort" hidden>Ta bort elevernas namn och det som förts in om dem</button></p>
+            </div>
+          </fieldset>
+        </form>
+      </details>
+
+      <section class="pl-planen" id="pl-planen" aria-labelledby="pl-planen-rubrik">
+        <div class="pl-summa">
+          <h2 id="pl-planen-rubrik">Planen</h2>
+          <div id="pl-summa-text"></div>
+          <div class="pl-knappar">
+            <button type="button" class="knapp" id="pl-spara" data-goatcounter-click={`planera:${data.id}:spara`} data-goatcounter-title={`${data.titel}: planen sparad`}>Spara planen</button>
+            <button type="button" class="knapp sekundar" id="pl-dokumentation" data-goatcounter-click={`planera:${data.id}:dokumentation`} data-goatcounter-title={`${data.titel}: planen kopierad till dokumentationen`}>Kopiera till dokumentationen</button>
+            <button type="button" class="knapp sekundar" id="pl-lank" data-goatcounter-click={`planera:${data.id}:lank`} data-goatcounter-title={`${data.titel}: länken till planen kopierad`}>Kopiera länk till planen</button>
+            <button type="button" class="knapp sekundar" id="pl-kalender" data-goatcounter-click={`planera:${data.id}:kalender`} data-goatcounter-title={`${data.titel}: kalenderfilen hämtad`}>Hämta kalenderfil</button>
+          </div>
+          <p class="pl-sparad" id="pl-sparad"></p>
+        </div>
+        <ol class="pl-veckor" id="pl-veckor"></ol>
+        <section class="pl-samman" id="pl-samman" aria-labelledby="pl-samman-rubrik" hidden></section>
+        <div class="pl-kopia" id="pl-kopia">
+          <p class="pl-hjalp" id="pl-kopia-text"></p>
+          <p class="pl-andra-knappar">
+            <button type="button" class="knapp sekundar liten" id="pl-kopia-spara" data-goatcounter-click={`planera:${data.id}:kopia`} data-goatcounter-title={`${data.titel}: en kopia av planen sparad`}>Spara en kopia</button>
+            <label class="knapp sekundar liten pl-filknapp" data-goatcounter-click={`planera:${data.id}:oppna-kopia`} data-goatcounter-title={`${data.titel}: en kopia av planen öppnad`}>Öppna en kopia<input type="file" id="pl-kopia-fil" accept=".json,application/json" class="visually-hidden" /></label>
+          </p>
+        </div>
+        <p class="pl-ta-bort"><button type="button" class="pl-textknapp" id="pl-ta-bort" hidden>Ta bort planen från den här enheten</button></p>
+      </section>
+    </div>
+
+    <div class="pl-filer" id="pl-filer" hidden>
+      {snabbmall && <a class="knapp sekundar" data-fil="snabbmall" href={`/stodundervisning/${data.id}-snabbmall.pdf`} target="_blank" rel="noopener" data-skriv-ut-pdf data-sidor-hogst="1" data-goatcounter-click={`utskrift:${data.id}-snabbmall`} data-goatcounter-title={`${data.titel}: ${snabbmall.rubrik}, bladet`}><span data-direkt="Skriv ut snabbmallen">Snabbmallen som pdf</span></a>}
+      {lektionskort.map((k, i) => <span class="pl-fil" data-fil={`lektionskort-${i + 1}`}><Lektionskortknapp k={k} titel={data.titel} klass="knapp sekundar" /></span>)}
+      {data.harLathund && <a class="knapp sekundar" data-fil="lathund" href={`${data.sida}/lathund`}>Öppna lathunden</a>}
+    </div>
+    <script type="application/json" id="pl-data" is:inline set:html={json} />
+  </article>
+  <SkrivUtPdf />
+</Base>
+
+<script>
+  import '../scripts/planera.ts';
+</script>

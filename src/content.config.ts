@@ -400,13 +400,21 @@ const metodensFalt = z.strictObject({
       // Första kolumnens rubrik: Vecka för en insats över veckor, Pass för en som räknas i pass.
       enhet: z.string().default('Vecka'),
       // led: överlämnandets led under veckan, t.ex. Jag gör, Vi gör, Ni gör tillsammans, Du gör själv.
-      rader: z.array(z.strictObject({ vecka: z.string(), led: z.string().optional(), fokus: z.string(), roll: z.string() })).min(1),
+      // taggar: bankens taggar som veckans poster har, som lästexternas slag, så att planens vecka öppnar Ta fram med dem
+      // (Planera insatsen, K-489, METODER.md under Planera insatsen). Planen läser veckorna ur vecka.
+      // rubrik: veckans fokus i några ord, till planens översikt (Planera insatsen); utan den står fokus första mening.
+      rader: z.array(z.strictObject({ vecka: z.string(), led: z.string().optional(), fokus: z.string(), roll: z.string(), taggar: z.array(z.string()).min(1).optional(), rubrik: z.string().max(60).optional() })).min(1),
     }).optional(),
     uppfoljning: z.strictObject({
       rubrik: z.string().default('Följ upp effekten'),
       text: z.string().optional(),
-      rader: z.array(z.strictObject({ nar: z.string(), vad: z.string() })).min(1),
+      // tid: när raden görs, med standardens ord (före, varje vecka, vecka 4, efter, villkor …; tolkaTid i
+      // src/lib/standard/plan.js), så att planen kan sätta ett datum. nar står kvar som radens text.
+      rader: z.array(z.strictObject({ nar: z.string(), vad: z.string(), tid: z.string().optional() })).min(1),
     }).optional(),
+    // Planera insatsen (K-489, METODER.md under Planera insatsen): metodens centrala förmåga som en fras efter "klarar
+    // att", som "läsa mellan raderna", till skattningen när läraren följer insatsen. Står inte på sidan eller i Word.
+    plan: z.strictObject({ formaga: z.string().min(3).max(60).optional() }).optional(),
     mal: z.strictObject({
       rubrik: z.string().default('Mål: vad eleven ska kunna göra efter insatsen'),
       text: z.string().default('Efter perioden ska eleven oftare kunna:'),

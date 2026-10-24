@@ -15,7 +15,7 @@ Den här filen säger vad sajten är, vad du får göra och var allt annat står
 | STIL.md | Hur text skrivs på sajten, i kod-kommentarer och i rapporter till Niclas |
 | KONCEPT.md | Vad sajten ska bli och varför |
 | DRIFT.md | Plattformarna: vad som finns hos GitHub, Netlify, Brevo och Loopia, var inloggningarna ligger, kommandon som fungerar, vad man gör när något är rött; krediterna och trafiken; besöksstatistiken i GoatCounter; delningskorten, delningsraden och bildernas mått; kommentarerna; krokarna; sessionerna och meddelandena till metodriggen |
-| METODER.md | Hur en metod tas emot och görs om: modellen, mappningen från kompendium till YAML, antalen och databaserna, lathunden, textreglerna, kontrollerna, Codex-granskningen, metodriggen utanför repot, serier och lektionsbanker (Ljudlek i grupp), kurser i veckor och veckans material (Ordverkstad i grupp), filmerna, Word och Google Dokument |
+| METODER.md | Hur en metod tas emot och görs om: modellen, mappningen från kompendium till YAML, antalen och databaserna, lathunden, textreglerna, kontrollerna, Codex-granskningen, metodriggen utanför repot, serier och lektionsbanker (Ljudlek i grupp), kurser i veckor och veckans material (Ordverkstad i grupp), Planera insatsen, filmerna, Word och Google Dokument |
 | wordparitet (`C:/wordparitet`, `node_modules/wordparitet/REGLER.md`) | Word och Google Dokument: reglerna med skäl och mätningar, regelprovet, mätbänken och jämförelserna, i en modul som sajten och metodriggen delar och båda bygger ut (K-158). Hur en ny regel läggs dit står i METODER.md under Word och Google Dokument |
 | UPPSTART.md | Hur drift, konton och behörigheter sattes upp från början |
 | KO.md | Kön. `node scripts/ko.mjs lista` visar den, `/natt` arbetar igenom den |
@@ -63,6 +63,7 @@ Stödundervisning är en metodbank, inte en blogg. Varje metod är en YAML-fil e
 | Sidan | `/stodundervisning/<id>` |
 | Utskriften, som pdf av Word-filerna: allt, eller metoden utan materialet (METODER.md under Utskriften) | `/stodundervisning/<id>.pdf` och `<id>-metoden.pdf` |
 | Lathunden, fyra sidor ur snabbguiden, med metodens filmer i en spelare överst | `/stodundervisning/<id>/lathund` |
+| Planera insatsen: veckorna med datum, nästa pass och veckans material, kalenderfil, text till dokumentationen och länk; med Följ insatsen bockar, skattning vecka för vecka, avstämning mitt i, utvärdering efter och sammanställning som pdf, sparat bara i webbläsaren och i lärarens kopia (METODER.md under Planera insatsen) | `/stodundervisning/<id>/planera` |
 | Word-filen med allt: beskrivning, planeringsmallar och lathund | `/stodundervisning/<id>.docx` |
 | Word-filen med bara metoden, utan materialet | `/stodundervisning/<id>-metoden.docx` |
 | Delarna var för sig | `<id>-mallar.docx` och `<id>-lathund.docx` |
