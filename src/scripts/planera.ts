@@ -16,13 +16,13 @@
 // kalenderfilen, statistiken eller texterna som kopieras.
 import {
   arDatum, AVSLUTANDE, AVSLUTAS_EFTER, BESLUT, BESLUTEN, forlangdaVal, insatsenAvslutad, insatsenSlut, beslutText, dagarText, dagKort, dagText, datumspann, datumText, decimal, delensTid, dokumentationstext, efterDatum, elevensResultat, elevensVarden, elevtext, esc, filnamnet, forstaMandagen, forval, forvaldLangd, gangen, GRUPPEN, iDatumordning, klockslag, liten, mening, metodveckan, minuterAv, minuterISpann, narvaronText, passensRad, passetsBeskrivning, plusMinuter, prickarna, resultatText, riktningText, sakspann, skattadeVeckor, skattningenText, stapelnsKant, stor, talText, sammaElev, skattningenMittI, uppfoljningensNamn, uppfoljningensRader, veckansPass, veckodagKort, veckorI, veckornaIPlanen, helgdag, isoVecka, kalenderfil, kalendervecka, kalenderveckaUtskriven, kodaVal,
-  LANGSTA, lasVal, malText, metodplan, minuterText, mittVeckan, nastaObockade, passensMinuter, passetsDag, passetsRoller, passetsTid, planera, PLANKNAPPAR, planvecka, planveckanKort, planveckansNamn, plusDagar,
+  LANGSTA, lasVal, malText, PLANERA, metodplan, minuterText, mittVeckan, nastaObockade, passensMinuter, passetsDag, passetsRoller, passetsTid, planera, PLANKNAPPAR, planvecka, planveckanKort, planveckansNamn, plusDagar,
   mandagen, rensaFoljd, rentaTider, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
   uppfoljningensTillfallen, uppraknat, utanNamn, utvarderingenText, avslutetText, kalenderveckornaFor, veckansDagar, veckansNamn, veckanFor, veckodag, veckonyckel, VECKODAGAR, type Veckonamn,
   type Foljd, type Pass, type Plan, type PlanVecka, type Sammanstallning, type SammanstallningElev, type Val,
 } from '../lib/standard/index.js';
 import type { PlanData } from '../lib/insatsplan';
-import { idagLokalt, iTurOrdning, lasPlaner, narText, nuTid, nyttId, planensAdress, planensNamn, raknaPagaende, rensaPlan, schemaAv, skiljNamnen, skrivPlaner, STATUSNAMN, statusAv, type SparadPlan } from './insatser-lagring';
+import { idagLokalt, iTurOrdning, lasPlaner, lasPlanfil, narText, nuTid, nyttId, planensAdress, planensNamn, planfilen, raknaPagaende, schemaAv, skiljNamnen, skrivPlaner, STATUSNAMN, statusAv, type SparadPlan } from './insatser-lagring';
 import { kanSkrivaUtPdf, skrivUt } from './pdfutskrift';
 import { elevPdf, gruppPdf } from './planpdf';
 import { iAppen, vagenUt, vagenUtText, webblasaren } from './webblasaren';
@@ -850,6 +850,9 @@ const struketText = (p: Plan) => {
   const vText = veckorna.length > 2 ? `vecka ${namn(veckorna[0]).plan} till ${namn(veckorna[veckorna.length - 1]).plan} (${kalenderveckornaFor(veckorna.map((x) => x.mandag))})` : uppraknat(veckorna.map((x) => namn(x).text));
   return uppraknat([iVeckan.length ? `${uppraknat(iVeckan.map((x) => `pass ${x.nr}`))} i veckan` : '', vText].filter(Boolean));
 };
+// Passen i en vecka som kan bli insatsens sista: de före planens sista pass, efter datum, lika i formuläret och för knappen
+// under utvärderingen (Codex 2026-10-25: knappen ledde till en vecka utan formuläret).
+const slutpassI = (v: PlanVecka) => iDatumordning(veckansPass(plan, v)).filter((p) => !!plan.sistaPass && p.datum < plan.sistaPass);
 // Sista passet i en mening, i dåtid när det har varit: "Sista passet var onsdag 21 oktober." eller "Sista passet är i dag, …".
 const sistaPassetText = () => (plan.sistaPass ? `Sista passet ${plan.sistaPass < idag ? 'var' : 'är'} ${plan.sistaPass === idag ? 'i dag, ' : ''}${dagText(plan.sistaPass)}.` : '');
 // Vad ett avslut med ett visst sista pass gör med planen, i formuläret innan läraren avslutar (K-542).
@@ -868,15 +871,16 @@ let nyssAvslutad = false;
 const hurAvslutad = () => (plan.slut ? utvarderingenText(plan, aktiv.foljd.utvardering, !slutNu())
   : AVSLUTANDE.includes(aktiv.foljd.utvardering?.beslut ?? '') ? sistaPassetText()
   : `Planen avslutades av sig själv ${dagText(avslutasSjalv())}, två veckor efter sista passet.`);
+const avslutsrutansText = () => [hurAvslutad(), aktiv.foljd.utvardering?.beslut === 'byt' ? 'Gruppen byter insats.' : '', aktiv.folj ? 'Sammanställningen, utskrifterna och elevernas utveckling finns kvar i planen.' : ''].filter(Boolean).join(' ');
 function avslutsruta(plats: 'veckan' | 'efter'): string {
   const byt = aktiv.foljd.utvardering?.beslut === 'byt';
-  const text = [hurAvslutad(), byt ? 'Gruppen byter insats.' : '', aktiv.folj ? 'Sammanställningen, utskrifterna och elevernas utveckling finns kvar i planen.' : ''].filter(Boolean).join(' ');
+  const text = avslutsrutansText();
   const knappar = [
     plats === 'veckan' && aktiv.folj ? '<button type="button" class="knapp liten" data-vy="efter">Till utvärderingen</button>' : '',
     plats === 'efter' && aktiv.folj ? '<button type="button" class="knapp liten" data-till="pl-samman">Till sammanställningen</button>' : '',
     byt ? '<a class="knapp sekundar liten" href="/stodundervisning">Välj nästa insats</a>' : '',
   ].filter(Boolean);
-  return `<div class="pl-avslutad${nyssAvslutad ? ' ny' : ''}"${nyssAvslutad ? ' role="status"' : ''}><svg class="pl-avslutad-bock" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21"/><path d="M14 24.5l7 7 13-14"/></svg><div><p class="pl-avslutad-rubrik">Insatsen är avslutad</p><p>${esc(text)}</p>${knappar.length ? `<p class="pl-andra-knappar">${knappar.join('')}</p>` : ''}</div></div>`;
+  return `<div class="pl-avslutad${nyssAvslutad ? ' ny' : ''}"${nyssAvslutad ? ' role="status"' : ''}><svg class="pl-avslutad-bock" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21"/><path d="M14 24.5l7 7 13-14"/></svg><div><p class="pl-avslutad-rubrik">Insatsen är avslutad</p><p class="pl-avslutad-text">${esc(text)}</p>${knappar.length ? `<p class="pl-andra-knappar">${knappar.join('')}</p>` : ''}</div></div>`;
 }
 // Planens sista vecka: rutan Insatsen är avslutad när den är det, och annars hur insatsen slutar, med Ångra avslutet när den
 // avslutas tidigare och vägen till utvärderingen (Niclas 2026-10-25: "det var lite svårt att hitta avsluta som finns i
@@ -888,8 +892,13 @@ function sistaVeckan(v: PlanVecka, nu: Vy): string {
   if (!aktiv.folj || nu !== v.nr || !plan.sistaPass) return '';
   return `<p class="pl-paminn">${esc(plan.sistaPass === idag ? 'Sista passet är i dag. Efter passet utvärderar du insatsen och avslutar den.' : `Det här är insatsens sista vecka. Efter sista passet, ${dagText(plan.sistaPass)}, utvärderar du insatsen och avslutar den.`)}${tillUtv}</p>`;
 }
-const forlangSteg = (n: number) => (mp.period.enhet === 'pass' ? n * aktiv.val.dagar.length : n);
-const forlangText = (n: number) => (mp.period.enhet === 'pass' ? `${n * aktiv.val.dagar.length} pass` : `${n} ${n === 1 ? 'vecka' : 'veckor'}`);
+// Det en förlängning ger, i pass eller veckor, ur planen den ger.
+const forlangText = (n: number) => {
+  const ny = planera(mp, forlangdaVal(mp, aktiv.val, n));
+  if (mp.period.enhet === 'pass') return `${ny.pass.length - plan.pass.length} pass`;
+  const x = ny.veckor.length - plan.veckor.length;
+  return `${x} ${x === 1 ? 'vecka' : 'veckor'}`;
+};
 
 // Veckorna överst i veckan, så att läraren ser var gruppen är och kan titta i förväg med ett tryck (Niclas 2026-10-24:
 // "Lite svårt att hitta till vecka 2 ... Man kan ske vill titta lite i förväg"). Veckan gruppen är i har en prick, och
@@ -1258,7 +1267,7 @@ function veckansDelar(v: PlanVecka, oppna: Set<string>): string[] {
   // Läraren väljer vilket av veckans pass som blir det sista, och formuläret säger vad som stryks och tar anledningen, som
   // blir utvärderingens mening. Ångra avslutet står överst i planen och i sista veckan (formen valdes ur en Sonnets och en
   // Opus förslag samma dag).
-  const slutpass = iDatumordning(passen).filter((p) => p.nr < plan.pass.length);
+  const slutpass = slutpassI(v);
   const kanAvsluta = slutpass.length > 0;
   const knappar = [
     upprepaHar ? upprepaKnapp : '',
@@ -1311,7 +1320,7 @@ function efterDelar(): string[] {
   const delar = [`<header class="pl-veckohuvud"><h2 id="pl-veckan-rubrik" tabindex="-1">Efter insatsen</h2><p class="meta">${meta.map(esc).join(' · ')}</p></header>`, remsa('efter')];
   // Efter sista passet säger rutan när planen avslutas av sig själv, om läraren inte avslutar den före (Niclas 2026-10-25:
   // "planen blir automatiskt avslutad 2 veckor efter sista datum").
-  const sjalv = slut && !avslutad ? ` Planen avslutas av sig själv ${dagText(avslutasSjalv())}, om du inte avslutar den före.` : '';
+  const sjalv = !slut || avslutad ? '' : aktiv.foljd.oppen === plan.sistaPass ? ' Insatsen pågår tills du avslutar den.' : ` Planen avslutas av sig själv ${dagText(avslutasSjalv())}, om du inte avslutar den före.`;
   const sista = plan.sistaPass ? (avslutad ? hurAvslutad() : `${sistaPassetText()}${plan.slut ? ` ${avslutetText(plan, !slut)}` : ''}${sjalv}`) : '';
   delar.push(`<div class="pl-nasta"><span class="pl-etikett">${avslutad ? 'Insatsen är avslutad' : 'Efter sista passet'}</span><p class="pl-nar">${esc(sista)}</p>${nuVy() !== 'efter' ? '<p><button type="button" class="pl-textknapp" data-vy="nu">Till den här veckan</button></p>' : ''}${aktiv.folj && slut ? '<p><button type="button" class="pl-textknapp" data-till="pl-samman">Till sammanställningen</button></p>' : ''}</div>`);
   // Det som kommer efter insatsen i metodens progression, som nästa period i Läslistor i grupp (de kalla testarna
@@ -1325,13 +1334,15 @@ function efterDelar(): string[] {
   // samma kväll: avsluta hittades "lite avigt vid utvärderingen"). Från sista passets dag står utvärderingen här.
   // En utvärdering som redan är ifylld står kvar att ändra (Codex 2026-10-25: den syntes inte men följde med utskrifterna).
   if (aktiv.folj && plan.sistaPass && idag < plan.sistaPass && !plan.slut && !aktiv.foljd.utvardering?.beslut && !aktiv.foljd.utvardering?.not) {
-    const kan = harBorjat() && typeof nuVy() === 'number';
+    const nu = nuVy();
+    const kan = harBorjat() && typeof nu === 'number' && slutpassI(plan.veckor[nu - 1]).length > 0;
     delar.push(`<section class="pl-stam"><h3>Utvärdering efter insatsen</h3><p>${esc(`Utvärderingen görs efter sista passet, ${dagText(plan.sistaPass)}.${kan ? ' Ska insatsen sluta tidigare väljer du vilket pass som blir det sista.' : ''}`)}</p>${kan ? '<p class="pl-andra-knappar"><button type="button" class="knapp sekundar liten" data-gor="till-avsluta">Avsluta insatsen tidigare</button></p>' : ''}</section>`);
   } else if (aktiv.folj) {
     const valt = aktiv.foljd.utvardering?.beslut;
     // Förläng insatsen förlänger planen med det läraren väljer här (granskningen: beslutet lät som en ändring men gjorde ingen).
     // Planen förlängs högst till sin största längd, så att länken alltid går att läsa (Codex 2026-10-24).
-    const kan = [1, 2, 3, 4].filter((n) => aktiv.val.langd + forlangSteg(n) <= LANGSTA);
+    // Förlängningen prövas och sägs med det den faktiskt ger, också när strukna veckor kommer tillbaka först (Codex 2026-10-25).
+    const kan = [1, 2, 3, 4].filter((n) => forlangdaVal(mp, aktiv.val, n).langd <= LANGSTA);
     const forlang = valt !== 'forlang' ? '' : kan.length ? `<div class="pl-forlang"><span class="pl-etikett">Förläng planen med</span><div class="sk-segment">${kan.map((n) => `<button type="button" class="sk-antal" data-forlang="${n}">${esc(forlangText(n))}</button>`).join('')}</div></div>` : '<p class="pl-not">Planen kan inte bli längre. Gör en ny plan för fortsättningen.</p>';
     delar.push(`<section class="pl-stam"><h3>Utvärdering efter insatsen</h3>${malRad('efter')}<p>Når ${harElever() ? 'eleverna' : 'gruppen'} målet? Jämför skattningarna och metodens uppföljning före och efter.</p>${riktningar(s, 'efter', true)}<span class="pl-etikett">Beslut</span>${beslutsknappar('utvardering')}${AVSLUTANDE.includes(valt ?? '') && avslutad ? avslutsruta('efter') : ''}${forlang}${meningsfalt('pl-utv-not', 'En mening om utvärderingen, om du vill', 'data-beslutsnot="utvardering"', aktiv.foljd.utvardering?.not ?? '')}</section>`);
   }
@@ -1401,9 +1412,9 @@ $('pl-veckan').addEventListener('click', (e) => {
   if (d.beslut) {
     const [slag, beslut] = d.beslut.split('|') as ['avstamning' | 'utvardering', string];
     const tidigare = aktiv.foljd[slag]?.beslut;
-    // Avsluta insatsen en gång till efter ett avslut tidigare är Ångra avslutet, så att planen inte står kvar avkortad utan
-    // beslut.
-    if (slag === 'utvardering' && tidigare === 'avsluta' && beslut === 'avsluta' && plan.slut) { angraAvslutet(); fokus(`[data-beslut="${slag}|${beslut}"]`); return; }
+    // Ett beslut som avslutar och trycks en gång till är Ångra avslutet: planen får tillbaka det som ströks och öppnas igen,
+    // också en plan som annars vore avslutad av sig själv (Codex 2026-10-25).
+    if (slag === 'utvardering' && tidigare === beslut && AVSLUTANDE.includes(beslut)) { angraAvslutet(); fokus(`[data-beslut="${slag}|${beslut}"]`); return; }
     // Anledningen till ett avslut är meningen till beslutet Avsluta insatsen, så ett annat beslut efter ett avslut börjar med
     // en tom mening, och Ångra tar tillbaka den (buggjakten 2026-10-25: "Förläng insatsen. Skolans andra arbete tar över.").
     const avslutetsMening = slag === 'utvardering' && !!plan.slut && tidigare === 'avsluta' && beslut !== 'avsluta';
@@ -1411,16 +1422,13 @@ $('pl-veckan').addEventListener('click', (e) => {
     // med Ångra (Niclas 2026-10-25: "Avsluta onsdagen 'gör' inget synligt ... Vill ju ha någon fanfar nästan").
     const avslutar = slag === 'utvardering' && AVSLUTANDE.includes(beslut) && !AVSLUTANDE.includes(tidigare ?? '') && insatsenAvslutad(plan.sistaPass, beslut, idag, aktiv.foljd.oppen);
     if (avslutar) nyssAvslutad = true;
-    // Ett beslut som avslutade insatsen och tas bort öppnar den igen, och det säger beskedet.
-    const oppnar = slag === 'utvardering' && tidigare === beslut && AVSLUTANDE.includes(beslut) && avslutadNu();
-    const besked = avslutar ? 'Insatsen är avslutad.' : avslutetsMening ? 'Anledningen till avslutet gällde beslutet att avsluta, så meningen är tom för det nya beslutet.' : oppnar ? () => (avslutadNu() ? undefined : 'Avslutet är ångrat. Insatsen pågår tills du avslutar den.') : undefined;
-    andra(() => { const fore = aktiv.foljd[slag]; aktiv.foljd = { ...aktiv.foljd, [slag]: { ...(fore ?? {}), beslut: fore?.beslut === beslut ? undefined : beslut, ...(avslutetsMening ? { not: '' } : {}) } }; }, besked, avslutar || avslutetsMening || oppnar);
+    andra(() => { const fore = aktiv.foljd[slag]; aktiv.foljd = { ...aktiv.foljd, [slag]: { ...(fore ?? {}), beslut: fore?.beslut === beslut ? undefined : beslut, ...(avslutetsMening ? { not: '' } : {}) } }; }, avslutar ? 'Insatsen är avslutad.' : avslutetsMening ? 'Anledningen till avslutet gällde beslutet att avsluta, så meningen är tom för det nya beslutet.' : undefined, avslutar || avslutetsMening);
     fokus(`[data-beslut="${slag}|${beslut}"]`);
     return;
   }
   if (d.forlang) {
     const n = Number(d.forlang);
-    if (aktiv.val.langd + forlangSteg(n) > LANGSTA) return;
+    if (forlangdaVal(mp, aktiv.val, n).langd > LANGSTA) return;
     // Avstämningen står kvar i sin vecka när insatsen förlängs (mittVeckan i standarden). En insats som avslutades tidigare
     // förlängs genom planens egna veckor, med upprepningarna, så att de strukna veckorna kommer tillbaka i sin ordning först
     // och planen blir längre först när de är slut (K-542; Codex 2026-10-25: en vecka gav två med en upprepning).
@@ -1521,8 +1529,13 @@ $('pl-veckan').addEventListener('input', (e) => {
   } else if (falt.dataset.beslutsnot) {
     const slag = falt.dataset.beslutsnot as 'avstamning' | 'utvardering';
     aktiv.foljd = { ...aktiv.foljd, [slag]: { ...(aktiv.foljd[slag] ?? {}), not: text.slice(0, 200) } };
-    // Anledningen till ett avslut står i texten till åtgärdsprogrammet, som följer med direkt (Codex 2026-10-25).
-    if (slag === 'utvardering' && plan.slut) $<HTMLTextAreaElement>('pl-aptext').value = vanligText(atgardstext());
+    // Anledningen till ett avslut står i läget överst, i planens ruta, i rutan med bocken och i texten till
+    // åtgärdsprogrammet, som följer med medan läraren skriver, utan att fältet ritas om (Codex 2026-10-25, två gånger).
+    if (slag === 'utvardering') {
+      renderaLage();
+      renderaSumma();
+      document.querySelectorAll<HTMLElement>('#pl-veckan .pl-avslutad-text').forEach((el) => { el.textContent = avslutsrutansText(); });
+    }
   } else return;
   window.clearTimeout(faltTimer);
   faltTimer = window.setTimeout(() => { faltTimer = 0; sparaTyst(); }, 400);
@@ -1678,7 +1691,6 @@ $('pl-samman').addEventListener('click', (e) => { const knapp = (e.target as Ele
 // saker försvinner"; Safari raderar det en webbplats har sparat efter sju dagars användning utan besök på den, WebKit
 // 2020). Filen har elevernas namn; den skickas ingenstans. Kopian görs av det sidan har nu, inte av det som är sparat,
 // så att den håller också när webbläsaren inte sparar (granskningen 2026-10-24).
-const KOPIANS_TYP = 'planera-insatsen';
 const kopiansAlder = () => (aktiv.kopia ? Math.round((Date.parse(idag) - Date.parse(aktiv.kopia.slice(0, 10))) / 86400000) : null);
 function renderaKopia() {
   const text = $('pl-kopia-text');
@@ -1700,7 +1712,8 @@ function sparaKopia() {
   aktiv.kopia = idag;
   const egen = sparadAv();
   if (aktiv.sparad) skrivPlaner([egen, ...lasPlaner().planer.filter((p) => p.id !== aktiv.id)]);
-  const fil = JSON.stringify({ typ: KOPIANS_TYP, v: 1, sparad: egen.andrad, plan: egen }, null, 1);
+  // Filen i planens format, med modulens version (planfilen i src/scripts/insatser-lagring.ts).
+  const fil = planfilen(egen, PLANERA.version);
   laddaNer(new Blob([fil], { type: 'application/json' }), filnamnet('plan', { vem: aktiv.namn, metod: data.id, datum: idag }));
   renderaKopia();
   visaBesked('Planen är nedladdad. Lägg filen bland skolans filer. Den har elevernas namn, så dela den inte.');
@@ -1712,11 +1725,13 @@ $<HTMLInputElement>('pl-kopia-fil').addEventListener('change', async (e) => {
   const fil = input.files?.[0];
   input.value = '';
   if (!fil) return;
-  let innehall: { typ?: string; v?: number; plan?: unknown };
+  let innehall: unknown;
   try { innehall = JSON.parse(await fil.text()); } catch { visaBesked('Filen är inte en nedladdad plan.'); return; }
-  // Kopian rensas innan den ersätter något: fälten som sidan kan visa, och för metoden på den här sidan räknas datumen om
-  // ur valen (Codex 2026-10-24: en kopia som hade ändrats för hand gjorde sidan obrukbar).
-  const p = innehall?.typ === KOPIANS_TYP ? rensaPlan(innehall.plan) : null;
+  // Kopian konverteras från formatets version och rensas innan den ersätter något: fälten som sidan kan visa, och för metoden
+  // på den här sidan räknas datumen om ur valen (Codex 2026-10-24: en kopia som hade ändrats för hand gjorde sidan obrukbar).
+  // En fil från 0.2.7 och framåt öppnas alltid, och beskedet säger det som saknades när läraren behöver veta det (lasPlanfil).
+  const last = lasPlanfil(innehall);
+  const p = last?.plan ?? null;
   const valen = p ? lasVal(p.val) : null;
   if (!p || !valen) { visaBesked('Filen är inte en nedladdad plan.'); return; }
   p.val = kodaVal(valen.val);
@@ -1738,7 +1753,7 @@ $<HTMLInputElement>('pl-kopia-fil').addEventListener('change', async (e) => {
     uppdateraAdressen();
     rendera();
     ($('pl-andra') as HTMLDetailsElement).open = false;
-    visaBesked('Planen är öppnad ur filen, med allt som förts in.', finns ? { text: 'Ångra', kvar: true, gor: () => { skrivPlaner([finns, ...lasPlaner().planer.filter((x) => x.id !== finns.id)]); aktiv = franSparad(finns); plan = planera(mp, aktiv.val); uppdateraAdressen(); rendera(); visaBesked('Planen är som före kopian.'); } } : undefined);
+    visaBesked(['Planen är öppnad ur filen, med allt som förts in.', ...(last?.varningar ?? [])].join(' '), finns ? { text: 'Ångra', kvar: true, gor: () => { skrivPlaner([finns, ...lasPlaner().planer.filter((x) => x.id !== finns.id)]); aktiv = franSparad(finns); plan = planera(mp, aktiv.val); uppdateraAdressen(); rendera(); visaBesked('Planen är som före kopian.'); } } : undefined);
   };
   // En kopia som skulle ersätta något som har ändrats efter den frågar först, också samma dag (granskningen 2026-10-24).
   if (finns && innehallAv(finns) !== innehallAv(p) && (finns.andrad ?? '') >= (p.andrad ?? '')) {
@@ -2022,18 +2037,19 @@ $('pl-lage').addEventListener('click', (e) => { if ((e.target as Element).closes
 // den aktiveras igen och kan läggas till veckor mm").
 function angraAvslutet() {
   const tillbaka = plan.struket ? struketText(plan) : '';
-  const tidigare = !!plan.slut;
+  const mening = !!aktiv.foljd.utvardering?.not;
   andra(() => {
     delete aktiv.val.slut;
     const u = aktiv.foljd.utvardering;
-    // Anledningen till ett avslut tidigare hör till beslutet (buggjakten 2026-10-25), så den går med det.
-    if (u && AVSLUTANDE.includes(u.beslut ?? '')) aktiv.foljd = { ...aktiv.foljd, utvardering: tidigare && u.beslut === 'avsluta' ? {} : { ...u, beslut: undefined } };
+    // Beslutet tas bort, och lärarens mening står kvar under utvärderingen, där den går att ändra (Codex 2026-10-25: Ångra
+    // avslutet tog bort meningen som läraren hade skrivit).
+    if (u && AVSLUTANDE.includes(u.beslut ?? '')) aktiv.foljd = { ...aktiv.foljd, utvardering: { ...u, beslut: undefined } };
     // Ett avslut av sig själv ångras för planens sista pass: förlängs planen avslutas den två veckor efter det nya sista
     // passet (Niclas 2026-10-25: "Man kan ångra det som vanligt").
     const ny = planera(mp, aktiv.val);
     if (ny.sistaPass && insatsenAvslutad(ny.sistaPass, aktiv.foljd.utvardering?.beslut, idag, aktiv.foljd.oppen)) aktiv.foljd = { ...aktiv.foljd, oppen: ny.sistaPass };
     if (visa === 'efter') visa = undefined;
-  }, () => (slutNu() ? 'Avslutet är ångrat, och insatsen pågår tills du avslutar den. Förläng insatsen under utvärderingen lägger till veckor.' : `Insatsen pågår igen.${tillbaka ? ` ${stor(tillbaka)} är tillbaka i planen.` : ''}`), true);
+  }, () => `${slutNu() ? 'Avslutet är ångrat, och insatsen pågår tills du avslutar den. Förläng insatsen under utvärderingen lägger till veckor.' : `Insatsen pågår igen.${tillbaka ? ` ${stor(tillbaka)} är tillbaka i planen.` : ''}`}${mening ? ' Meningen under utvärderingen står kvar.' : ''}`, true);
 }
 
 // Från utvärderingen till formuläret Avsluta insatsen i veckan gruppen är i (Niclas 2026-10-25: avsluta hittades "lite avigt

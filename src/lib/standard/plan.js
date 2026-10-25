@@ -478,25 +478,32 @@ export function planera(mp, val) {
   const lovveckor = [];
   let mandag = forstaMandagen(val);
   const nastaMandag = () => { while (lov.has(veckonyckel(mandag))) { lovveckor.push(mandag); mandag = plusDagar(mandag, 7); } const m = mandag; mandag = plusDagar(mandag, 7); return m; };
-  // En insats som avslutas tidigare slutar med passet med numret val.slut: passen efter det, i veckan och i veckorna efter,
-  // finns inte i planen (Niclas 2026-10-25: "Avsluta insatsen denna vecka ... då skrivs alla sammaställningar om med den
-  // vecka man avslutar den som sista", och samma kväll: "Avsluta onsdagen"). Slutet är ett pass och inte ett datum, så att
-  // det följer med när en ny start, ett lov eller ett flyttat pass flyttar passen (buggjakten samma kväll: en ny start
-  // flyttade slutet, och planen krympte).
+  // En insats som avslutas tidigare slutar med passet med numret val.slut: passen efter dess dag, i veckan och i veckorna
+  // efter, finns inte i planen (Niclas 2026-10-25: "Avsluta insatsen denna vecka ... då skrivs alla sammaställningar om med
+  // den vecka man avslutar den som sista", och samma kväll: "Avsluta onsdagen"). Slutet är ett pass och inte ett datum, så
+  // att det följer med när en ny start eller ett lov flyttar passen (buggjakten samma kväll: en ny start flyttade slutet,
+  // och planen krympte). Passets dag i planen utan slut är insatsens sista dag, så att ett flyttat pass står kvar eller
+  // stryks efter sitt datum (Codex samma kväll: ett pass som flyttats till fredagen stod kvar efter onsdagens slut).
   const slut = Number.isInteger(val.slut) && /** @type {number} */ (val.slut) >= 1 ? /** @type {number} */ (val.slut) : null;
+  const hel = slut ? planera(mp, { ...val, slut: undefined }) : null;
+  const slutDag = hel?.pass.find((p) => p.nr === slut)?.datum;
+  if (hel && !slutDag) return hel;
+  // Nästa vecka som inte är lov, utan att gå vidare.
+  const kommande = () => { let m = mandag; while (lov.has(veckonyckel(m))) m = plusDagar(m, 7); return m; };
   // Spärren mot en plan utan slut: en period i pass där inga dagar ger pass.
   for (let i = 0; iPass ? pass.length < langd && i < 104 : i < ordning.length; i++) {
-    if (slut && pass.length >= slut) break;
+    if (slutDag && veckor.length && kommande() > slutDag) break;
     const m = nastaMandag();
     const v = { nr: veckor.length + 1, innehall: iPass ? veckor.length + 1 : ordning[i].innehall, igen: iPass ? false : ordning[i].igen, mandag: m, vecka: isoVecka(m), pass: [], bortfall: [] };
     for (const dag of dagar) {
-      if ((iPass && pass.length >= langd) || (slut && pass.length >= slut)) break;
+      if (iPass && pass.length >= langd) break;
       const datum = plusDagar(m, dag - 1);
       if (datum < val.start) continue;
+      const nytt = arDatum(flytta[datum]) ? flytta[datum] : undefined;
+      if (slutDag && (nytt ?? datum) > slutDag) continue;
       const namn = helgdag(datum);
       if (namn) { v.bortfall.push({ datum, varfor: 'helgdag', namn }); continue; }
       if (stryk.has(datum)) { v.bortfall.push({ datum, varfor: 'installt' }); continue; }
-      const nytt = arDatum(flytta[datum]) ? flytta[datum] : undefined;
       const p = { nr: pass.length + 1, datum: nytt ?? datum, vecka: v.nr, ...(nytt ? { flyttatFran: datum } : {}) };
       pass.push(p);
       v.pass.push(p.nr);
@@ -510,10 +517,10 @@ export function planera(mp, val) {
   let struket;
   /** @type {number | undefined} */
   let planerade;
-  if (slut) {
-    const hel = planera(mp, { ...val, slut: undefined });
+  if (hel && slutDag) {
     if (!pass.length || hel.pass.length <= pass.length) return hel;
-    struket = { pass: hel.pass.filter((p) => p.nr > slut), veckor: hel.veckor.slice(veckor.length) };
+    while (veckor.length > 1 && !veckor[veckor.length - 1].pass.length) veckor.pop();
+    struket = { pass: hel.pass.filter((p) => p.datum > slutDag), veckor: hel.veckor.slice(veckor.length) };
     planerade = hel.pass.length;
   }
   // Första och sista passet efter datum: ett flyttat pass kan hamna före ett pass med lägre nummer (Codex 2026-10-24: det
@@ -584,7 +591,7 @@ export function forlangdaVal(mp, val, n) {
   const hel = planera(mp, { ...val, slut: undefined });
   const mal = plan.veckor.length + n;
   // Planen slutar då med hela veckan, också passen efter avslutet i den vecka där insatsen slutade.
-  const sista = Math.max(0, ...hel.veckor.slice(0, mal).flatMap((v) => v.pass));
+  const sista = iDatumordning(hel.pass.filter((p) => p.vecka <= mal)).pop()?.nr;
   if (mal < hel.veckor.length && sista) return { ...ut, slut: sista };
   const { slut, ...utanSlut } = ut;
   return { ...utanSlut, langd: val.langd + steg(mal - hel.veckor.length) };

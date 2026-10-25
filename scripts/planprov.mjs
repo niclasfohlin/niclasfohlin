@@ -192,6 +192,9 @@ if (tsMp) {
   ska('en insats som avslutas tidigare slutar med sitt sista pass', kort.veckor.length === 3 && kort.pass.length === 9 && kort.sistaPass === '2026-11-20' && kort.planerade === 18 && kort.struket?.pass.length === 9 && kort.struket.veckor.length === 3 && kort.uppfoljning.find((u) => u.typ === 'efter')?.tillfallen[0]?.datum === '2026-11-23', [kort.veckor.length, kort.sistaPass, kort.planerade, kort.uppfoljning.find((u) => u.typ === 'efter')?.tillfallen]);
   const onsdag = s.planera(tsMp, { ...val, slut: 8 });
   ska('avsluta onsdagen: fredagens pass i veckan är struket', onsdag.veckor.length === 3 && onsdag.sistaPass === '2026-11-18' && onsdag.struket?.pass[0]?.nr === 9 && onsdag.struket.pass[0].vecka === 3 && onsdag.struket.veckor.length === 3, [onsdag.sistaPass, onsdag.struket?.pass[0]]);
+  // Ett flyttat pass står kvar eller stryks efter sitt datum, mot dagen för det valda passet (Codex 2026-10-25).
+  const flyttatEfter = s.planera(tsMp, { ...val, flytta: { '2026-11-16': '2026-11-20' }, slut: 8 }), flyttatFore = s.planera(tsMp, { ...val, flytta: { '2026-11-20': '2026-11-17' }, slut: 8 });
+  ska('avslutet följer dagen för det valda passet, också med ett flyttat pass', flyttatEfter.sistaPass === '2026-11-18' && flyttatEfter.pass.length === 7 && flyttatEfter.struket?.pass.some((x) => x.flyttatFran === '2026-11-16') && flyttatFore.sistaPass === '2026-11-18' && flyttatFore.pass.length === 9, [flyttatEfter.sistaPass, flyttatEfter.pass.length, flyttatFore.sistaPass, flyttatFore.pass.length]);
   ska('slutet följer med när starten flyttas', s.planera(tsMp, { ...val, start: '2026-11-16', slut: 9 }).pass.length === 9 && s.planera(tsMp, { ...val, start: '2026-11-16', slut: 9 }).sistaPass === '2026-12-04');
   ska('ett slut som inte stryker något gäller inte', s.planera(tsMp, { ...val, slut: 18 }).slut === undefined && s.planera(tsMp, { ...val, slut: 40 }).pass.length === 18);
   ska('avslutet i en mening', s.avslutetText(kort) === 'Insatsen avslutades i vecka 3 (v. 47), efter 9 av 18 planerade pass.' && s.avslutetText(kort, true) === 'Insatsen avslutas i vecka 3 (v. 47), efter 9 av 18 planerade pass.' && s.avslutetText(s.planera(tsMp, val)) === '', s.avslutetText(kort));
@@ -676,6 +679,28 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
   // veckor efter sista passet, och inom läget efter datum, de avslutade med den senast avslutade först.
   const lp = Object.fromEntries(lagesplaner.map((x) => [x.namn, x]));
   ska('insatsens läge: kommande, pågående och avslutad', lagring.statusAv(lp.Kommer, '2026-11-18') === 'kommande' && lagring.statusAv(lp.Pagar, '2026-11-18') === 'pagaende' && lagring.statusAv(lp.Avslutad, '2026-11-18') === 'avslutad' && lagring.statusAv(lp.Kvar, '2026-11-18') === 'pagaende' && lagring.statusAv(lp.Sjalv, '2026-11-18') === 'avslutad' && lagring.statusAv(lp.Oppnad, '2026-11-18') === 'pagaende' && lagring.STATUSNAMN.avslutad === 'Avslutad' && s.AVSLUTANDE.join() === 'avsluta,byt');
+  // Planens format (PLANERA.md under Planens fil och lagringen): varje provfil i scripts/planera/filer/, en plan som fil och
+  // lagringen i webbläsaren som en utlagd version skrev dem, öppnas med allt den har och utan varningar, och skrivs tillbaka i
+  // den här versionens format. Den äldsta som ska gå att öppna är 0.2.7 (Niclas 2026-10-25: "från och med den som är uppe nu
+  // ska det bara bakåtkompatibilitet från den och framåt").
+  const filmapp = join(rot, 'scripts', 'planera', 'filer');
+  const filerna = readdirSync(filmapp).filter((x) => x.endsWith('.json'));
+  const lasProvfil = (namn) => JSON.parse(readFileSync(join(filmapp, namn), 'utf8'));
+  const somForut = (a, b) => a && b && a.val === b.val && a.namn === b.namn && JSON.stringify(a.foljd) === JSON.stringify(s.rensaFoljd(b.foljd)) && a.folj === b.folj;
+  ska('planens format: provfilerna från 0.2.7 finns', filerna.includes('plan-0.2.7.json') && filerna.includes('lagring-0.2.7.json'), filerna);
+  for (const namn of filerna.filter((x) => x.startsWith('plan-'))) {
+    const fil = lasProvfil(namn);
+    const last = lagring.lasPlanfil(fil);
+    const igen = last ? lagring.lasPlanfil(JSON.parse(lagring.planfilen(last.plan, s.PLANERA.version))) : null;
+    ska(`planens format: ${namn} öppnas med allt och skrivs i den här versionens format`, !!last && !last.varningar.length && somForut(last.plan, fil.plan) && last.plan.foljd.elever.length === fil.plan.foljd.elever.length && JSON.parse(lagring.planfilen(last.plan, s.PLANERA.version)).v === lagring.PLANFORMAT && JSON.parse(lagring.planfilen(last.plan, s.PLANERA.version)).modul === s.PLANERA.version && !!igen && somForut(igen.plan, last.plan), last?.varningar);
+  }
+  for (const namn of filerna.filter((x) => x.startsWith('lagring-'))) {
+    const lagrat = lasProvfil(namn);
+    const planer = lagrat.planer.map((x) => lagring.rensaPlan(lagring.konverteraPlan(x, lagrat.v).plan));
+    ska(`planens format: ${namn} öppnas med alla planer och allt som förts in`, planer.length === lagrat.planer.length && planer.every((x, i) => somForut(x, lagrat.planer[i])), planer.map((x) => x?.id));
+  }
+  const plan027 = lasProvfil('plan-0.2.7.json');
+  ska('planens format: en fil ur en nyare version öppnas och säger det, och en annan fil är ingen plan', lagring.lasPlanfil({ ...plan027, v: lagring.PLANFORMAT + 1 })?.varningar.some((x) => x.includes('nyare version')) && lagring.lasPlanfil({ typ: 'annat', plan: plan027.plan }) === null && lagring.lasPlanfil(null) === null && Object.keys(lagring.KONVERTERINGAR).every((x) => Number(x) >= 1 && Number(x) < lagring.PLANFORMAT));
   ska('insatsens läge: ordningen', [...lagesplaner].sort(lagring.iTurOrdning('2026-11-18')).map((x) => x.namn).join() === 'Pagar,Kvar,Oppnad,Kommer,Avslutad,Sjalv', [...lagesplaner].sort(lagring.iTurOrdning('2026-11-18')).map((x) => x.namn).join());
 }
 // Pågående insatser i statistiken (K-504, src/scripts/insatser-lagring.ts): en plan som är inne i sina veckor ger händelsen
@@ -1484,7 +1509,7 @@ try {
   sant('avsluta i utvärderingen: rutan med bocken, läget överst och planen grå', !!(await h.kor(`!!document.querySelector('.pl-stam .pl-avslutad.ny .pl-avslutad-bock')`)) && (await h.text('#pl-lage'))?.startsWith('Avslutad Insatsen är avslutad. Sista passet var fredag 11 december.') && (await h.kor(`document.getElementById('plan').classList.contains('pl-avslutad-plan')`)) && (await h.text('#pl-toast'))?.startsWith('Insatsen är avslutad.') && (await h.text('#pl-veckan .pl-nasta .pl-etikett')) === 'Insatsen är avslutad', [await h.text('#pl-lage'), await h.text('#pl-toast')]);
   await h.bredd(390); await vanta(1200); await h.bild('8b-avslutad-telefon'); await h.dator();
   await h.tryck('[data-beslut="utvardering|avsluta"]');
-  sant('avsluta i utvärderingen: en gång till öppnar insatsen igen', !(await h.kor(`document.getElementById('plan').classList.contains('pl-avslutad-plan')`)) && (await h.kor(`document.getElementById('pl-lage').hidden`)) && (await h.text('#pl-toast'))?.startsWith('Avslutet är ångrat.'), await h.text('#pl-toast'));
+  sant('avsluta i utvärderingen: en gång till öppnar insatsen igen', !(await h.kor(`document.getElementById('plan').classList.contains('pl-avslutad-plan')`)) && (await h.kor(`document.getElementById('pl-lage').hidden`)) && (await h.text('#pl-toast'))?.startsWith('Avslutet är ångrat'), await h.text('#pl-toast'));
   await h.tryck('[data-beslut="utvardering|forlang"]');
   sant('utvärderingens beslut sparas och frågar hur länge', (await h.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.utvardering?.beslut`)) === 'forlang' && !!(await h.kor(`!!document.querySelector('.pl-forlang [data-forlang="2"]')`)), await h.text('.pl-stam'));
   sant('utvärderingen står under Besluten', (await h.text('#pl-samman'))?.includes('Förläng insatsen'));
@@ -1645,7 +1670,7 @@ try {
   sant('två veckor efter sista passet är planen avslutad av sig själv', (await sj.text('#pl-lage'))?.startsWith('Avslutad Planen avslutades av sig själv fredag 25 december, två veckor efter sista passet.') && (await sj.kor(`document.getElementById('plan').classList.contains('pl-avslutad-plan')`)) && (await sj.text('#pl-veckan .pl-nasta .pl-etikett')) === 'Insatsen är avslutad', await sj.text('#pl-lage'));
   await sj.tryck('#pl-lage [data-gor="angra-avslut"]');
   await vanta(300);
-  sant('Ångra avslutet öppnar planen igen för det sista passet', (await sj.kor(`document.getElementById('pl-lage').hidden`)) && (await sj.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.oppen`)) === '2026-12-11' && (await sj.text('#pl-toast'))?.startsWith('Avslutet är ångrat, och insatsen pågår tills du avslutar den.'), [await sj.text('#pl-toast'), await sj.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.oppen`)]);
+  sant('Ångra avslutet öppnar planen igen för det sista passet', (await sj.kor(`document.getElementById('pl-lage').hidden`)) && (await sj.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.oppen`)) === '2026-12-11' && (await sj.text('#pl-toast'))?.startsWith('Avslutet är ångrat, och insatsen pågår tills du avslutar den.') && (await sj.text('.pl-nar')) === 'Sista passet var fredag 11 december. Insatsen pågår tills du avslutar den.', [await sj.text('#pl-toast'), await sj.text('.pl-nar'), await sj.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.oppen`)]);
   sant('avslutad av sig själv: inga fel', !sj.undantag.length && !(await sj.kor('window.__fel.length')), sj.undantag);
   sj.stang();
 
@@ -1726,6 +1751,28 @@ try {
   sant('avsluta: planen öppnas ur filen avslutad', (await av.text('#pl-lage'))?.startsWith('Avslutad Insatsen avslutades i vecka 3 (v. 47), efter 8 av 18 planerade pass.') && (await av.kor(`document.querySelectorAll('#pl-veckan .pl-remsa .struken').length`)) === 3, await av.text('#pl-lage'));
   sant('avsluta: inga fel', !av.undantag.length && !(await av.kor('window.__fel.length')), av.undantag);
   av.stang();
+
+  // ---- Planens format: lagringen och filen från 0.2.7 ----
+  // Planerna som lärarna har sparat med 0.2.7 öppnas i den här versionen utan att något försvinner, och laddas ner i den här
+  // versionens format; en fil från 0.2.7 öppnas på en annan dator med allt (Niclas 2026-10-25: "Nuvarande planer borde ju få
+  // nya modulen utan att försvinna och därmed kunna ladda ner nyaste igen").
+  const fo = await flik(false, Date.UTC(2026, 10, 18, 9, 0, 0));
+  await fo.oppna(PLAN);
+  await fo.kor(`localStorage.setItem('insatser', ${JSON.stringify(readFileSync(join(rot, 'scripts', 'planera', 'filer', 'lagring-0.2.7.json'), 'utf8'))})`);
+  await fo.oppna(PLAN);
+  sant('planens format: planen ur lagringen från 0.2.7 öppnas med allt', (await fo.text('#pl-grupper'))?.includes('Läsgrupp 3A') && (await fo.kor(`!!document.querySelector('#pl-veckan [data-bock]')`)) && (await fo.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.elever.length`)) === 2, await fo.text('#pl-grupper'));
+  await fo.kor('window.__fil = null');
+  await fo.tryck('#pl-kopia-spara');
+  await vanta(300);
+  const foFil = JSON.parse((await fo.kor('window.__fil')) ?? '{}');
+  sant('planens format: planen ur 0.2.7 laddas ner i den här versionens format', foFil.v === 1 && foFil.modul === s.PLANERA.version && foFil.plan?.foljd?.elever?.length === 2 && foFil.plan?.foljd?.utvardering?.beslut === 'avsluta', JSON.stringify(foFil).slice(0, 200));
+  await fo.kor('localStorage.clear()');
+  await fo.oppna(PLAN);
+  await fo.filTill('#pl-kopia-fil', join(rot, 'scripts', 'planera', 'filer', 'plan-0.2.7.json'));
+  await vanta(600);
+  sant('planens format: filen från 0.2.7 öppnas på en annan dator med allt', (await fo.text('#pl-toast'))?.startsWith('Planen är öppnad ur filen, med allt som förts in.') && (await fo.kor(`JSON.parse(localStorage.getItem('insatser') ?? '{"planer":[]}').planer[0]?.foljd?.elever?.length`)) === 2, await fo.text('#pl-toast'));
+  sant('planens format: inga fel', !fo.undantag.length && !(await fo.kor('window.__fel.length')), fo.undantag);
+  fo.stang();
 
   // ---- En plan som börjar högre upp i en stege (K-515) ----
   // Läslistor med Börja på Läslista 2: planens vecka 1 är metodens vecka 3. Metodens texter säger planens veckor, passet i

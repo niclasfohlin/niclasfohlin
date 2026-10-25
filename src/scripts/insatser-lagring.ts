@@ -55,20 +55,60 @@ export function rensaPlan(x: unknown): SparadPlan | null {
   };
 }
 
-/** Planerna i webbläsaren, rensade, och om lagringen gick att läsa. */
+/**
+ * Planens format, lika i lagringen och i planen som fil. Det som har sparats eller laddats ner från Planera 0.2.7 och framåt
+ * öppnas alltid i en senare version, med allt det har (Niclas 2026-10-25: "bakåtkompatibilitet med äldre json filer. Så nya
+ * itterationer funkar med den och lägger in data som finns och varnar bara när data inte finns i den gamla om det behövs",
+ * och "från och med den som är uppe nu ska det bara bakåtkompatibilitet från den och framåt"). Ett fält som läggs till får
+ * sitt standardvärde när det saknas. Ett fält som byter betydelse eller tas bort höjer formatets version och får en
+ * konvertering från versionen före i KONVERTERINGAR. Provfilerna i scripts/planera/filer/ är formatet som varje version skrev
+ * det, och planprovet öppnar dem (PLANERA.md under Planens fil och lagringen).
+ */
+export const PLANFORMAT = 1;
+export const PLANFILENS_TYP = 'planera-insatsen';
+/**
+ * Konverteringarna från en version av formatet till nästa: KONVERTERINGAR[1] gör en plan i version 1 till version 2 och
+ * säger vad som saknades, när läraren behöver veta det. Inga än: version 1 har gällt sedan 0.2.7, och det som har lagts till
+ * sedan dess har ett standardvärde.
+ */
+export const KONVERTERINGAR: Record<number, (plan: Record<string, unknown>) => { plan: Record<string, unknown>; varningar: string[] }> = {};
+/** En plan i en äldre version av formatet, konverterad till den här, med varningarna, och en varning för en plan ur en nyare version. */
+export function konverteraPlan(plan: unknown, v: unknown): { plan: unknown; varningar: string[] } {
+  const fran = Number.isInteger(v) && (v as number) >= 1 ? (v as number) : 1;
+  const varningar: string[] = [];
+  let ut = plan;
+  for (let x = fran; x < PLANFORMAT; x++) {
+    const k = KONVERTERINGAR[x];
+    if (k && ut && typeof ut === 'object') { const r = k(ut as Record<string, unknown>); ut = r.plan; varningar.push(...r.varningar); }
+  }
+  if (fran > PLANFORMAT) varningar.push('Planen är sparad i en nyare version av Planera insatsen. Ladda om sidan, så kommer allt med.');
+  return { plan: ut, varningar };
+}
+/** Planen som fil: typen, formatets version, modulens version och planen. */
+export const planfilen = (plan: SparadPlan, modul: string) => JSON.stringify({ typ: PLANFILENS_TYP, v: PLANFORMAT, modul, sparad: plan.andrad, plan }, null, 1);
+/** En nedladdad plan, konverterad och rensad, med varningarna, eller null när filen inte är en plan. */
+export function lasPlanfil(innehall: unknown): { plan: SparadPlan; varningar: string[] } | null {
+  const f = innehall && typeof innehall === 'object' ? (innehall as Record<string, unknown>) : null;
+  if (!f || f.typ !== PLANFILENS_TYP) return null;
+  const { plan, varningar } = konverteraPlan(f.plan, f.v);
+  const p = rensaPlan(plan);
+  return p ? { plan: p, varningar } : null;
+}
+
+/** Planerna i webbläsaren, konverterade från lagringens version och rensade, och om lagringen gick att läsa. */
 export function lasPlaner(): { planer: SparadPlan[]; ok: boolean } {
   try {
-    const varde = JSON.parse(localStorage.getItem(NYCKEL) ?? '{"v":1,"planer":[]}');
-    return { planer: Array.isArray(varde?.planer) ? varde.planer.map(rensaPlan).filter((p: SparadPlan | null): p is SparadPlan => !!p) : [], ok: true };
+    const varde = JSON.parse(localStorage.getItem(NYCKEL) ?? `{"v":${PLANFORMAT},"planer":[]}`);
+    return { planer: Array.isArray(varde?.planer) ? varde.planer.map((x: unknown) => rensaPlan(konverteraPlan(x, varde.v).plan)).filter((p: SparadPlan | null): p is SparadPlan => !!p) : [], ok: true };
   } catch {
     return { planer: [], ok: false };
   }
 }
 
-/** Skriver planerna; false när lagringen är avstängd eller full. */
+/** Skriver planerna i formatets version; false när lagringen är avstängd eller full. */
 export function skrivPlaner(planer: SparadPlan[]): boolean {
   try {
-    localStorage.setItem(NYCKEL, JSON.stringify({ v: 1, planer }));
+    localStorage.setItem(NYCKEL, JSON.stringify({ v: PLANFORMAT, planer }));
     return true;
   } catch {
     return false;
