@@ -3066,6 +3066,8 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 .pl-graf .pl-linje { stroke: var(--farg-kant); stroke-width: 1; }
 .pl-graf .pl-axel, .pl-graf .pl-stapeletikett { font: 10px var(--typsnitt-ui); fill: var(--farg-text-svag); }
 .pl-graf .pl-stapeletikett, .pl-graf .pl-stapelvarde { text-anchor: middle; }
+/* Veckan i planen över kalenderveckan under stapeln, som i planens lista (K-508). */
+.pl-graf .pl-planveckan { font-weight: 700; fill: var(--farg-text); }
 .pl-graf .pl-stapelvarde { font: 700 11px var(--typsnitt-ui); fill: var(--farg-text); }
 .pl-graf .pl-prick { fill: var(--farg-lasning); }
 .pl-graf .pl-prick.borta { fill: none; stroke: var(--farg-lasning); stroke-width: 1.2; }

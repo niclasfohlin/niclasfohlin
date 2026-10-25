@@ -4,7 +4,7 @@
 // kopieras till dokumentationen har inga namn. Typsnittet är pdf:ens eget (Helvetica). Ett tecken som det inte har skrivs
 // utan sina accenter, så att utskriften aldrig går sönder (Niclas: "Ł, Ş och č är så ovanliga att du kan hoppa över dem").
 import type { PDFFont, PDFPage } from 'pdf-lib';
-import { datumText, elevensResultat, GRUPPEN, isoVecka, SKALAN, uppraknat, type Plan, type Sammanstallning, type SammanstallningElev } from '../lib/standard/index.js';
+import { datumText, elevensResultat, GRUPPEN, isoVecka, kalendervecka, SKALAN, uppraknat, veckansNamn, type Plan, type Sammanstallning, type SammanstallningElev, type Veckonamn } from '../lib/standard/index.js';
 
 const A4: [number, number] = [595.28, 841.89];
 const KANT = 50;
@@ -59,12 +59,13 @@ async function dokument(titel: string) {
   };
   // En rubrik står aldrig ensam sist på en sida: den får plats med det som följer, behov punkter.
   const rubrik = (s: string, behov = 40) => { plats(behov + 30); y -= 10; text(s, { storlek: 13, fet: true, luft: 4 }); };
-  // Staplar vecka för vecka (1 till 5), med veckans nummer under, en markering vid avstämningen och, för en elev när
-  // läraren noterar närvaron, veckans pass som prickar: fylld var med, ring var inte med, streck inte bockat.
-  const staplar = (varden: (number | undefined)[], etiketter: string[], o: { hojd?: number; mitt?: number | null; pass?: ('med' | 'borta' | 'inte')[][] } = {}) => {
+  // Staplar vecka för vecka (1 till 5), med veckan i planen och kalenderveckan under, som på sidan (veckansNamn i standarden),
+  // en markering vid avstämningen och, för en elev när läraren noterar närvaron, veckans pass som prickar: fylld var med, ring
+  // var inte med, streck inte bockat.
+  const staplar = (varden: (number | undefined)[], etiketter: Veckonamn[], o: { hojd?: number; mitt?: number | null; pass?: ('med' | 'borta' | 'inte')[][] } = {}) => {
     const h = o.hojd ?? 70, n = varden.length, bredd = A4[0] - 2 * KANT - 24;
     const steg = Math.min(46, bredd / Math.max(n, 1)), b = steg * 0.62;
-    const total = h + 34 + (o.pass ? 14 : 0) + (o.mitt ? 12 : 0);
+    const total = h + 43 + (o.pass ? 14 : 0) + (o.mitt ? 12 : 0);
     plats(total);
     if (o.mitt) y -= 12;
     const botten = y - h - 6, x0 = KANT + 24;
@@ -80,10 +81,11 @@ async function dokument(titel: string) {
         sida.drawRectangle({ x: bx, y: botten, width: b, height: (x / 5) * h, color: farg.accent });
         sida.drawText(String(x), { x: bx + b / 2 - 2.5, y: botten + (x / 5) * h + 3, size: 8, font: fet, color: farg.text });
       } else sida.drawRectangle({ x: bx, y: botten, width: b, height: 1.2, color: farg.kant });
-      const e = ren(etiketter[i]);
-      sida.drawText(e, { x: bx + b / 2 - font.widthOfTextAtSize(e, 7.5) / 2, y: botten - 12, size: 7.5, font, color: farg.svag });
+      const iPlanen = ren(etiketter[i].kort), kalender = ren(etiketter[i].kalender);
+      sida.drawText(iPlanen, { x: bx + b / 2 - fet.widthOfTextAtSize(iPlanen, 7.5) / 2, y: botten - 12, size: 7.5, font: fet, color: farg.text });
+      sida.drawText(kalender, { x: bx + b / 2 - font.widthOfTextAtSize(kalender, 7) / 2, y: botten - 21, size: 7, font, color: farg.svag });
       (o.pass?.[i] ?? []).forEach((p, j, alla) => {
-        const px = bx + b / 2 + (j - (alla.length - 1) / 2) * 7, py = botten - 22;
+        const px = bx + b / 2 + (j - (alla.length - 1) / 2) * 7, py = botten - 31;
         if (p === 'med') sida.drawCircle({ x: px, y: py, size: 2.4, color: farg.gron });
         else if (p === 'borta') sida.drawCircle({ x: px, y: py, size: 2.4, borderColor: farg.gron, borderWidth: 0.8 });
         else sida.drawLine({ start: { x: px - 2, y: py }, end: { x: px + 2, y: py }, thickness: 0.8, color: farg.kant });
@@ -103,7 +105,7 @@ async function dokument(titel: string) {
   return { text, rubrik, staplar, avsluta, farg };
 }
 
-const veckoetiketter = (s: Sammanstallning) => s.veckor.map((v) => `v. ${v.vecka}`);
+const veckoetiketter = (s: Sammanstallning) => s.veckor.map(veckansNamn);
 // En mening slutar med punkt, också lärarens egen anteckning.
 const medPunkt = (s: string) => (/[.!?]$/.test(s.trim()) ? s.trim() : `${s.trim()}.`);
 const riktningsord = (e: SammanstallningElev) => {
@@ -125,23 +127,23 @@ export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, id
   if (info.mal) { p.rubrik('Målet', 30); p.text(info.mal, { luft: 2 }); }
   p.rubrik('Passen');
   p.text(passText(s), { luft: 2 });
-  if (s.gjorda) p.text(s.veckor.map((v) => `Vecka ${v.innehall}${v.igen ? ' igen' : ''} (v. ${v.vecka}): ${v.gjorda} av ${v.planerade}`).join('. ') + '.', { farg: p.farg.svag, storlek: 9.5 });
+  if (s.gjorda) p.text(s.veckor.map((v) => `${veckansNamn(v).Text}: ${v.gjorda} av ${v.planerade}`).join('. ') + '.', { farg: p.farg.svag, storlek: 9.5 });
   p.rubrik(s.grupp ? 'Gruppen' : 'Eleverna', 110);
   p.text(`${info.fragan} 1 till 5: ${SKALAN.map((x, i) => `${i + 1} ${x.toLocaleLowerCase('sv')}`).join(', ')}.`, { farg: p.farg.svag, storlek: 9.5, luft: 4 });
   for (const e of s.elever) {
     p.text(e.namn, { fet: true, storlek: 11.5 });
     p.staplar(s.veckor.map((v) => e.skattningar.find((x) => x.nr === v.nr)?.varde), veckoetiketter(s), { hojd: 40, mitt: s.mitt });
-    p.text([riktningsord(e), e.id !== GRUPPEN && e.narvaro !== null && s.gjorda ? `Var med i ${e.narvaro} av ${s.gjorda} bockade pass.` : '', ...elevensResultat(plan, e.resultat).map((t) => `${info.uppfoljning[t.rad]?.nar}, vecka ${isoVecka(t.datum).vecka}: ${t.varde}.`)].filter(Boolean).join(' '), { luft: 8 });
+    p.text([riktningsord(e), e.id !== GRUPPEN && e.narvaro !== null && s.gjorda ? `Var med i ${e.narvaro} av ${s.gjorda} bockade pass.` : '', ...elevensResultat(plan, e.resultat).map((t) => `${info.uppfoljning[t.rad]?.nar}, ${kalendervecka(isoVecka(t.datum).vecka)}: ${t.varde}.`)].filter(Boolean).join(' '), { luft: 8 });
   }
   const veckorna = s.veckor.filter((v) => v.skattning);
   if (veckorna.length || s.veckor.some((v) => v.not)) {
     p.rubrik('Hur veckorna gick', veckorna.length ? 120 : 30);
     if (veckorna.length) { p.staplar(s.veckor.map((v) => v.skattning), veckoetiketter(s), { hojd: 60, mitt: s.mitt }); p.text(`Medel ${String(s.veckomedel).replace('.', ',')} av 5.`, { luft: 4 }); }
-    for (const v of s.veckor.filter((x) => x.not)) p.text(`Vecka ${v.innehall}${v.igen ? ' igen' : ''} (v. ${v.vecka}): ${medPunkt(v.not!)}`, { storlek: 10 });
+    for (const v of s.veckor.filter((x) => x.not)) p.text(`${veckansNamn(v).Text}: ${medPunkt(v.not!)}`, { storlek: 10 });
   }
   if (s.avstamning?.beslut || s.avstamning?.not) { p.rubrik('Avstämning mitt i insatsen'); p.text(medPunkt([s.avstamning.beslut ? info.beslut[s.avstamning.beslut] : '', s.avstamning.not ?? ''].filter(Boolean).map((x) => x.replace(/[.\s]+$/, '')).join('. '))); }
   if (s.utvardering?.beslut || s.utvardering?.not) { p.rubrik('Utvärdering efter insatsen'); p.text(medPunkt([s.utvardering.beslut ? info.beslut[s.utvardering.beslut] : '', s.utvardering.not ?? ''].filter(Boolean).map((x) => x.replace(/[.\s]+$/, '')).join('. '))); }
-  const tider = plan.uppfoljning.filter((u) => u.tillfallen.length).map((u) => `${info.uppfoljning[u.rad]?.nar}, ${uppraknat(u.tillfallen.map((t) => `vecka ${isoVecka(t.datum).vecka}`))}`);
+  const tider = plan.uppfoljning.filter((u) => u.tillfallen.length).map((u) => `${info.uppfoljning[u.rad]?.nar}, ${uppraknat(u.tillfallen.map((t) => kalendervecka(isoVecka(t.datum).vecka)))}`);
   if (tider.length) { p.rubrik('Metodens uppföljning'); p.text(`${tider.join('. ')}.`); }
   return p.avsluta(`${info.metod} · Planera insatsen på niclasfohlin.se · lärarens egen plan, sparas inte på sajten`);
 }
@@ -163,7 +165,7 @@ export async function elevPdf(plan: Plan, s: Sammanstallning, id: string, info: 
   p.rubrik('Utvecklingen');
   p.text(riktningsord(e));
   if (narvaro) p.text(`Var med i ${e.narvaro} av ${s.gjorda} bockade pass.`);
-  for (const t of elevensResultat(plan, e.resultat)) p.text(`${info.uppfoljning[t.rad]?.nar}, vecka ${isoVecka(t.datum).vecka}: ${t.varde}.`);
+  for (const t of elevensResultat(plan, e.resultat)) p.text(`${info.uppfoljning[t.rad]?.nar}, ${kalendervecka(isoVecka(t.datum).vecka)}: ${t.varde}.`);
   if (s.avstamning?.beslut) p.text(`Gruppens avstämning mitt i insatsen: ${info.beslut[s.avstamning.beslut]}.`);
   if (s.utvardering?.beslut) p.text(`Utvärdering efter insatsen: ${info.beslut[s.utvardering.beslut]}.`);
   return p.avsluta(`${e.namn} · ${info.metod} · Planera insatsen på niclasfohlin.se · lärarens egen plan`);

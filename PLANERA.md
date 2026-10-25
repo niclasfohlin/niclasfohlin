@@ -105,6 +105,20 @@ Planen för en metod, eller en ny version av modulen, är klar att ladda upp nä
 
 Efter uppladdningen: `node scripts/deploykoll.mjs`, öppna planen för varje ny metod på den riktiga adressen, och skriv i NATTEN.md vad som är ute och vad som är oprövat. Ett brev om en ny del av planen skrivs med `/utskick` och går ut när Niclas säger det.
 
+## Spärren mot drift
+
+Ett värde som visas på flera ställen, som en vecka eller ett datum, har en funktion i standarden, och sidan, pdf:erna, texterna som kopieras och texten till åtgärdsprogrammet hämtar det därifrån (Niclas 2026-10-25: "Standardisera och försök alltid härleda en sak som ex v. nr eller datum till EN funktion. Skapa inte drift i modulen. Skapa standarder och placeholders till EN rot. Varje gång det går"). Planprovet prövar funktionerna i roten, också över nyår och för en vecka som tas om, och stannar på en fil i modulen som skriver ut en vecka eller ett datum själv, med fil, rad och funktionen som ska användas (`DRIFT` och `MODULENS_FILER` i `scripts/planprov.mjs`). Sidans prov följer en vecka genom planens lista och elevens diagram.
+
+| Sak | Funktionen i standarden |
+|---|---|
+| Kalenderveckan | `kalendervecka`, `kalenderveckor` och, för skärmläsare, `kalenderveckaUtskriven` |
+| Veckan i planen | `planveckan`, `planveckanKort`, `gangen`, `veckansNamn` och `planveckansNamn` |
+| Metodens vecka, när en stege börjar högre upp | `metodveckan` |
+| Ett datum | `datumText`, `dagOchManad`, `dagText` och `spannKort` |
+| Dagens datum | `idagLokalt` i `src/scripts/insatser-lagring.ts` |
+
+En ny sak som visas på flera ställen får sin funktion här och sitt mönster i spärren i samma commit, och en ny fil i modulen står i `MODULENS_FILER`.
+
 ## Lärdomar
 
 | Lärdom | Varför |

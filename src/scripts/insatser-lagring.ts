@@ -4,7 +4,7 @@
 // någonstans, utom att en plan som pågår säger det till besöksstatistiken med bara metodens namn (pagaende nedan).
 // Lagringen kan vara avstängd eller rensas (privat läge, en skola som rensar webbläsaren); då säger sidan det, och
 // länken till planen är kopian som håller.
-import { arDatum, lasVal, mandagen, passetsTid, planvecka, plusDagar, rensaFoljd, tidText, veckodag, veckonyckel, VECKODAGAR, type Foljd, type Plan, type Val } from '../lib/standard/index.js';
+import { arDatum, dagText, lasVal, mandagen, passetsTid, planvecka, planveckan, plusDagar, rensaFoljd, spannKort, tidText, veckonyckel, VECKODAGAR, type Foljd, type Plan, type Val } from '../lib/standard/index.js';
 
 export interface SparadPlan {
   id: string;
@@ -102,9 +102,8 @@ export const schemaAv = (plan: Plan, val?: Val): SparadPlan['schema'] => ({
 export function narText(datum: string, idag: string) {
   if (datum === idag) return 'i dag';
   if (datum === plusDagar(idag, 1)) return 'i morgon';
-  const [, m, d] = datum.split('-').map(Number);
-  const manader = ['januari', 'februari', 'mars', 'april', 'maj', 'juni', 'juli', 'augusti', 'september', 'oktober', 'november', 'december'];
-  return `${VECKODAGAR[veckodag(datum) - 1]} ${d} ${manader[m - 1]}`;
+  // Datumet ur standarden, som överallt i modulen (K-508).
+  return dagText(datum);
 }
 
 /** Var planen står i dag, ur kopian: veckan i planen och nästa pass, eller att den inte har börjat eller är slut. */
@@ -117,7 +116,7 @@ export function lageAv(p: SparadPlan, idag: string): { text: string; vecka?: num
   const v = p.schema.veckor.find((x) => x[0] === nasta[1]);
   const kl = nasta[3] ? ` kl. ${tidText(nasta[3])}` : '';
   if (nasta === pass[0] && nasta[0] > idag) return { text: `Första passet ${narText(nasta[0], idag)}${kl}`, vecka: v?.[0] };
-  return { text: `Vecka ${v?.[1] ?? '?'}${v?.[2] ? ' igen' : ''} i planen, pass ${nasta[2]} ${narText(nasta[0], idag)}${kl}`, vecka: v?.[0] };
+  return { text: `Vecka ${v ? planveckan(v[1], v[2] ? p.schema.veckor.filter((x) => x[1] === v[1] && x[0] <= v[0]).length - 1 : 0) : '?'} i planen, pass ${nasta[2]} ${narText(nasta[0], idag)}${kl}`, vecka: v?.[0] };
 }
 
 /** Dagen för planens nästa pass från och med i dag, eller 9999 när planen är slut: planerna ordnas efter den. */
@@ -131,7 +130,6 @@ export function skiljNamnen(namn: string[]): string[] {
   return namn.map((n) => { const i = (sedda.get(n) ?? 0) + 1; sedda.set(n, i); return i > 1 ? `${n} · ${i}` : n; });
 }
 
-const MANAD_KORT = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
 /** Planens namn: gruppens, eller dagarna och första passet, som "Mån, ons, fre från 2 nov" (granskningen 2026-10-24: två planer utan namn såg likadana ut). */
 export function planensNamn(p: { namn?: string; val: string; schema?: SparadPlan['schema'] }): string {
   if (p.namn) return p.namn;
@@ -140,8 +138,7 @@ export function planensNamn(p: { namn?: string; val: string; schema?: SparadPlan
   const dagar = [...v.dagar].sort().map((d) => VECKODAGAR[d - 1].slice(0, 3)).join(', ');
   // Efter första passet, som efter ett lov i första veckan inte är planens startdag (de kalla läsarna 2026-10-24).
   const forsta = p.schema?.pass.map((x) => x[0]).sort()[0] ?? v.start;
-  const [, m, d] = forsta.split('-').map(Number);
-  return `${dagar.charAt(0).toLocaleUpperCase('sv')}${dagar.slice(1)} från ${d} ${MANAD_KORT[m - 1]}`;
+  return `${dagar.charAt(0).toLocaleUpperCase('sv')}${dagar.slice(1)} från ${spannKort(forsta, forsta)}`;
 }
 
 // Pågående insatser i statistiken (K-504, Niclas 2026-10-25: "en lista på pågående Planerade insatser just nu i antal för

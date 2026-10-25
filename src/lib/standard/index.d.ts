@@ -143,6 +143,16 @@ export declare const PLANERA: Readonly<{ namn: string; version: string; beta: bo
 export declare function planera(mp: Metodplan, val: Val): Plan;
 /** Veckans nummer i planen, räknat från veckan planen börjar på. */
 export declare const planvecka: (plan: Plan, v: PlanVecka) => number;
+export declare const kalendervecka: (n: number) => string;
+export declare const kalenderveckaUtskriven: (n: number) => string;
+export declare const kalenderveckor: (a: number, b: number, streck?: string) => string;
+export declare const gangen: (plan: Plan, v: PlanVecka) => number;
+export declare const metodveckan: (innehall: number) => string;
+export declare const planveckan: (innehall: number, gang?: number) => string;
+export declare const planveckanKort: (innehall: number, gang?: number) => { tal: string; om: string };
+export type Veckonamn = { plan: string; kort: string; kalender: string; text: string; Text: string };
+export declare const veckansNamn: (v: { innehall: number; gang?: number; vecka: number }) => Veckonamn;
+export declare const planveckansNamn: (plan: Plan, v: PlanVecka) => Veckonamn;
 /** Raderna i planens passen som gäller passet, den mest bestämda först. */
 export declare function passetsRoller(plan: Plan, p: Pass, passen: Metodplan['passen']): number[];
 /** Progressionens steg som planen inte når. */

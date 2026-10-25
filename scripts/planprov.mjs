@@ -102,7 +102,7 @@ if (tsMp) {
   p = s.planera(tsMp, { ...val, start: '2026-12-14', langd: 3, lov: ['2026-52', '2026-53'] });
   ska('över nyåret med vecka 53 som lov', p.veckor.map((v) => `${v.vecka.ar}-${v.vecka.vecka}`).join() === '2026-51,2027-1,2027-2', p.veckor.map((v) => v.vecka));
   const nyarsText = s.dokumentationstext({ titel: 'X', adress: 'x', uppfoljning: ts.uppfoljning.rader }, p, { ...val, start: '2026-12-14', langd: 3 }, { minuter: 30 });
-  ska('veckorna över nyåret som text', nyarsText.includes('(vecka 51 till vecka 2)'), nyarsText);
+  ska('veckorna över nyåret som text', nyarsText.includes('(v. 51 till v. 2)'), nyarsText);
   // Länken: valen åt båda hållen, och en trasig länk.
   const fullt = { ...val, niva: 'mellan', minuter: 30, lov: ['2026-47'], upprepa: [3, 3], flytta: { '2026-11-16': '2026-11-17' }, stryk: ['2026-11-20'], tider: { 1: ['09:20', '10:00'], 3: ['13:00', '13:40'] }, mal: 'läsa mellan raderna & visa ledtråden, också i faktatexter' };
   const lank = s.kodaVal(fullt, { id: 'ab12cd', visa: 3 });
@@ -125,12 +125,12 @@ if (tsMp) {
   const info = { titel: ts.titel, undertitel: ts.undertitel, adress: 'niclasfohlin.se/stodundervisning/textsamtal-i-grupp', mal: ts.plan.mal, steg, uppfoljning: ts.uppfoljning.rader, nivaNamn: 'Mellan' };
   const dok = s.dokumentationstext(info, plan, val, { minuter: 30, genomforda: 7 });
   ska('åtgärdsprogrammet: åtgärden utan årskurserna och målet', dok.startsWith('Åtgärd: Textsamtal i grupp, lärarledd insats i liten grupp där eleverna samtalar om korta texter och lär sig läsa mellan raderna.\nMål: Kunna läsa mellan raderna, säga vad man tror och visa ledtråden i texten.'), dok);
-  ska('åtgärdsprogrammet: omfattningen', dok.includes('Omfattning: 18 pass om 30 minuter, måndag, onsdag och fredag, 2 november till 11 december 2026 (vecka 45 till 50), på nivån Mellan.'), dok);
-  ska('åtgärdsprogrammet: vad eleven arbetar med vecka för vecka', dok.includes('Eleven arbetar med: Det står, Jag vet och Alltså tror jag (vecka 45); Stanna och Se det framför dig (vecka 46); Slå ihop flera ledtrådar (vecka 47); Stämmer det? och Det som menas (vecka 48–49); Slaget Ordet, eleverna leder samtalet (vecka 50).'), dok);
-  ska('åtgärdsprogrammet: uppföljningen och de bockade passen', dok.includes('Före insatsen, vecka 44') && dok.includes('Efter insatsen, vecka 51') && dok.includes('Bockade som genomförda: 7 av 18 pass.') && !dok.includes('Skattning'), dok);
+  ska('åtgärdsprogrammet: omfattningen', dok.includes('Omfattning: 18 pass om 30 minuter, måndag, onsdag och fredag, 2 november till 11 december 2026 (v. 45 till v. 50), på nivån Mellan.'), dok);
+  ska('åtgärdsprogrammet: vad eleven arbetar med vecka för vecka', dok.includes('Eleven arbetar med: Det står, Jag vet och Alltså tror jag (v. 45); Stanna och Se det framför dig (v. 46); Slå ihop flera ledtrådar (v. 47); Stämmer det? och Det som menas (v. 48–49); Slaget Ordet, eleverna leder samtalet (v. 50).'), dok);
+  ska('åtgärdsprogrammet: uppföljningen och de bockade passen', dok.includes('Före insatsen, v. 44') && dok.includes('Efter insatsen, v. 51') && dok.includes('Bockade som genomförda: 7 av 18 pass.') && !dok.includes('Skattning'), dok);
   ska('åtgärdsprogrammet har inga tankstreck som skiljetecken', !/ [–-] /.test(dok), dok);
   const dokFolj = s.dokumentationstext(info, plan, { ...val, mal: 'läsa faktatexter och visa ledtråden', tider: { 1: ['09:20', '10:00'], 3: ['09:20', '10:00'], 5: ['09:20', '10:00'] } }, { minuter: 30, folj: true });
-  ska('åtgärdsprogrammet: eget mål, tiderna och skattningen', dokFolj.includes('Mål: Läsa faktatexter och visa ledtråden.') && dokFolj.includes('måndag, onsdag och fredag kl. 9.20–10.00, 2 november') && dokFolj.includes('Skattning varje vecka, 1 till 5, av hur väl eleven klarar målet på egen hand, med avstämning mitt i insatsen vecka 47 och utvärdering efter insatsen.'), dokFolj);
+  ska('åtgärdsprogrammet: eget mål, tiderna och skattningen', dokFolj.includes('Mål: Läsa faktatexter och visa ledtråden.') && dokFolj.includes('måndag, onsdag och fredag kl. 9.20–10.00, 2 november') && dokFolj.includes('Skattning varje vecka, 1 till 5, av hur väl eleven klarar målet på egen hand, med avstämning mitt i insatsen vecka 3 (v. 47) och utvärdering efter insatsen.'), dokFolj);
   // Kalenderfilen.
   const ics = s.kalenderfil({ titel: ts.titel, uppfoljning: ts.uppfoljning.rader, fokus: ts.progression.rader.map((r) => r.fokus) }, plan, { id: 'ab12cd', lank: (v) => `https://niclasfohlin.se/stodundervisning/textsamtal-i-grupp/planera#${s.kodaVal(val, { id: 'ab12cd', ...(v ? { visa: v } : {}) })}`, namn: 'Läsgrupp 2B, fredag; plats', nu: new Date(Date.UTC(2026, 9, 24, 12)) });
   ska('kalenderfilen har bara CRLF', !/[^\r]\n/.test(ics) && ics.endsWith('\r\n'));
@@ -176,17 +176,17 @@ if (tsMp) {
   ska('veckans gång', sm.veckor[0].skattning === 3 && sm.veckor[0].not === 'Gruppen kom igång' && sm.veckomedel === 3);
   const info = { titel: ts.titel, mal: ts.plan.mal, uppfoljning: ts.uppfoljning.rader };
   const text = s.sammanstallningstext(info, p, smN);
-  ska('sammanställningens text', text.includes('Mål: Kunna läsa mellan raderna, säga vad man tror och visa ledtråden i texten.') && text.includes('Pass: 3 av de 8 som har varit är bockade som genomförda, av 18 i planen.') && text.includes('Närvaro i de bockade passen: 1 av 2 elever var med i alla; en elev missade 1 pass.') && text.includes('av hur väl eleverna klarar målet på egen hand: medel 2,5 vid första skattningen och 3 vid den senaste. 1 av 2 elever har gått framåt.') && text.includes('Avstämning mitt i insatsen, vecka 47: Fortsätt som planerat.'), text);
+  ska('sammanställningens text', text.includes('Mål: Kunna läsa mellan raderna, säga vad man tror och visa ledtråden i texten.') && text.includes('Pass: 3 av de 8 som har varit är bockade som genomförda, av 18 i planen.') && text.includes('Närvaro i de bockade passen: 1 av 2 elever var med i alla; en elev missade 1 pass.') && text.includes('av hur väl eleverna klarar målet på egen hand: medel 2,5 vid första skattningen och 3 vid den senaste. 1 av 2 elever har gått framåt.') && text.includes('Avstämning mitt i insatsen, vecka 3 (v. 47): Fortsätt som planerat.'), text);
   ska('sammanställningens text har inga namn', !/Ali|Bea/.test(text));
   ska('utan närvaro säger texten inget om den', !s.sammanstallningstext(info, p, sm).includes('Närvaro'));
   const medNamn = s.sammanstallningstext(info, p, s.sammanstallning(p, { ...f, vecka: { '2026-11-02': { varde: 3, not: 'Alis och Beas par byggde vidare' } }, avstamning: { beslut: 'fortsatt', not: 'Bea behöver mer stöd vid stoppet' } }, '2026-11-18'));
-  ska('namnen i lärarens meningar blir en elev', !/Ali|Bea/.test(medNamn) && medNamn.includes('vecka 45: En elevs och en elevs par byggde vidare') && medNamn.includes('Fortsätt som planerat. En elev behöver mer stöd vid stoppet.'), medNamn);
+  ska('namnen i lärarens meningar blir en elev', !/Ali|Bea/.test(medNamn) && medNamn.includes('vecka 1 (v. 45): En elevs och en elevs par byggde vidare') && medNamn.includes('Fortsätt som planerat. En elev behöver mer stöd vid stoppet.'), medNamn);
   const rad = s.elevtext(info, p, smN, 'a1');
-  ska('elevens rad', rad === 'Mål: Kunna läsa mellan raderna, säga vad man tror och visa ledtråden i texten. Var med i 3 av 3 bockade pass. Skattning, 1 till 5, av hur väl eleven klarar målet på egen hand: vecka 45: 2, vecka 46: 3. Före insatsen, vecka 45: 4 av 8.', rad);
+  ska('elevens rad', rad === 'Mål: Kunna läsa mellan raderna, säga vad man tror och visa ledtråden i texten. Var med i 3 av 3 bockade pass. Skattning, 1 till 5, av hur väl eleven klarar målet på egen hand: vecka 1 (v. 45): 2, vecka 2 (v. 46): 3. Före insatsen, v. 45: 4 av 8.', rad);
   const grupp = s.sammanstallning(p, { skattning: { '2026-11-02': { grupp: 2 }, '2026-11-09': { grupp: 4 } } }, '2026-11-18');
-  ska('gruppen utan elevlista', grupp.grupp && grupp.elever.length === 1 && s.riktning(grupp.elever[0]) === 'upp' && s.sammanstallningstext(info, p, grupp).includes('hur väl gruppen klarar målet på egen hand: vecka 45: 2, vecka 46: 4.'));
+  ska('gruppen utan elevlista', grupp.grupp && grupp.elever.length === 1 && s.riktning(grupp.elever[0]) === 'upp' && s.sammanstallningstext(info, p, grupp).includes('hur väl gruppen klarar målet på egen hand: vecka 1 (v. 45): 2, vecka 2 (v. 46): 4.'));
   const sen = s.sammanstallning(p, { elever: [{ id: 'a1', namn: 'Ali' }], skattning: { '2026-11-02': { grupp: 2 }, '2026-11-09': { a1: 3 } } }, '2026-11-18');
-  ska('gruppens skattningar står kvar när eleverna kommer efteråt', !sen.grupp && sen.elever.some((e) => e.id === 'grupp') && s.sammanstallningstext(info, p, sen).includes('Gruppen skattades också: vecka 45: 2.'));
+  ska('gruppens skattningar står kvar när eleverna kommer efteråt', !sen.grupp && sen.elever.some((e) => e.id === 'grupp') && s.sammanstallningstext(info, p, sen).includes('Gruppen skattades också: vecka 1 (v. 45): 2.'));
   ska('skattningsfrågan', s.skattningsfragan() === 'Hur väl klarar eleven målet på egen hand?' && s.skattningsfragan(true) === 'Hur väl klarar gruppen målet på egen hand?');
   const tomt = s.sammanstallning(p, {}, '2026-11-18');
   ska('en tom uppföljning går att sammanställa', tomt.gjorda === 0 && tomt.elever.length === 1 && tomt.elever[0].skattningar.length === 0 && s.sammanstallningstext(info, p, tomt).includes('Pass: 18 i planen.'));
@@ -277,7 +277,7 @@ if (tsMp) {
   const mpFyra = s.metodplan(fyra).plan;
   const pFyra = s.planera(mpFyra, { ...tom, start: '2026-11-03', dagar: [2, 4], langd: 8 });
   const fyraDok = s.dokumentationstext({ titel: fyra.titel, adress: 'x', uppfoljning: fyra.uppfoljning.rader }, pFyra, { ...tom, start: '2026-11-03', dagar: [2, 4], langd: 8 }, { minuter: 60 });
-  ska('åtgärdsprogrammet: insatsens vecka 4 är inte kalenderveckan', fyraDok.includes('Vecka 4 i insatsen, vecka') && !fyraDok.includes('Vecka 4, vecka'), fyraDok);
+  ska('åtgärdsprogrammet: insatsens vecka 4 är inte kalenderveckan', fyraDok.includes('Vecka 4 i insatsen, v.') && !fyraDok.includes('Vecka 4, v.'), fyraDok);
 }
 
 // ---------- 2. Metodernas data ----------
@@ -340,6 +340,48 @@ ska('en metod utan tid stoppas med besked', s.metodplan(metod('upprepad-lasning'
 // Modulens version har sin rad i tabellen under Versionerna, så att en ny förmåga aldrig går ut utan att stå där (METODER.md
 // under Planera insatsen och PLANERA.md under Vad metoden behöver).
 ska(`versionen ${s.PLANERA.version} står i METODER.md under Versionerna`, readFileSync(join(rot, 'METODER.md'), 'utf8').includes(`\n| ${s.PLANERA.version} | `), s.PLANERA.version);
+// Veckornas namn har en rot i standarden (K-508; Niclas 2026-10-25: "försök alltid härleda en sak som ex v. nr eller datum
+// till EN funktion ... och att denna funktion måste fungera korrekt"): funktionerna räknar rätt, också över nyår och för en
+// vecka som tas om, och sammanställningen och planen namnger varje vecka lika.
+ska('kalenderveckan', s.kalendervecka(50) === 'v. 50' && s.kalenderveckaUtskriven(50) === 'kalendervecka 50');
+ska('kalenderveckornas spann, också över nyår', s.kalenderveckor(45, 45) === 'v. 45' && s.kalenderveckor(45, 46) === 'v. 45–46' && s.kalenderveckor(52, 1) === 'v. 52 till v. 1' && s.kalenderveckor(45, 50, ' till ') === 'v. 45 till v. 50', [s.kalenderveckor(45, 46), s.kalenderveckor(52, 1), s.kalenderveckor(45, 50, ' till ')]);
+ska('veckan i planen, och en vecka som tas om', s.planveckan(6) === '6' && s.planveckan(3, 1) === '3 igen' && s.planveckan(3, 2) === '3 en tredje gång' && s.planveckan(3, 5) === '3 för 6:e gången' && s.planveckanKort(3, 2).om === '3:e' && s.planveckanKort(3, 1).om === 'igen' && s.planveckanKort(3).om === '');
+ska('veckans namn i en text och i diagrammet', JSON.stringify(s.veckansNamn({ innehall: 6, vecka: 50 })) === JSON.stringify({ plan: '6', kort: '6', kalender: 'v. 50', text: 'vecka 6 (v. 50)', Text: 'Vecka 6 (v. 50)' }) && s.veckansNamn({ innehall: 3, gang: 1, vecka: 48 }).text === 'vecka 3 igen (v. 48)', s.veckansNamn({ innehall: 6, vecka: 50 }));
+{
+  // En plan med vecka 3 tre gånger, lov över nyår och en stege som börjar högre upp: sammanställningen och planen namnger varje
+  // vecka lika, och den tredje gången heter så i båda.
+  const tsPlan = s.planera(tsMp, { ...s.forval(tsMp, '2026-10-26', 3), start: '2026-11-30', langd: 6, upprepa: [3, 3], lov: ['2026-52', '2026-53'] });
+  const sam = s.sammanstallning(tsPlan, s.rensaFoljd({}), '2026-12-01');
+  const lika = tsPlan.veckor.every((v, i) => JSON.stringify(s.planveckansNamn(tsPlan, v)) === JSON.stringify(s.veckansNamn(sam.veckor[i])));
+  const tredje = tsPlan.veckor.filter((v) => v.innehall === 3).map((v) => s.planveckansNamn(tsPlan, v).plan);
+  ska('sammanställningen och planen namnger varje vecka lika, också den tredje gången och över nyår', lika && tredje.join() === '3,3 igen,3 en tredje gång' && tsPlan.veckor.some((v) => s.planveckansNamn(tsPlan, v).kalender === 'v. 1'), [tredje, tsPlan.veckor.map((v) => s.planveckansNamn(tsPlan, v).text)]);
+}
+// Spärren mot drift (K-508; Niclas samma dag: "Skapa inte drift i modulen. Skapa standarder och placeholders till EN rot. Varje
+// gång det går"): modulens filer skriver aldrig ut en vecka eller ett datum på egen hand. Veckorna kommer ur blocket
+// Veckornas namn i standarden och datumen ur datumText, dagOchManad, dagText och spannKort. Ett fynd säger fil, rad och
+// vilken funktion som ska användas (PLANERA.md under Spärren mot drift).
+const MODULENS_FILER = ['src/lib/standard/plan.js', 'src/lib/insatsplan.ts', 'src/scripts/planera.ts', 'src/scripts/planpdf.ts', 'src/scripts/insatser-lagring.ts', 'src/scripts/insatser.ts', 'src/scripts/appen.ts', 'src/components/Planera.astro', 'src/components/AppRad.astro'];
+const DRIFT = [
+  [/v\. \$\{/, 'en kalendervecka skrivs med kalendervecka() eller kalenderveckor()'],
+  [/[Vv]ecka \$\{[^}`]*\.vecka\b/, 'en kalendervecka skrivs med kalendervecka(), inte som "vecka"'],
+  [/[Vv]ecka \$\{[^}`]*\.innehall\b|\? ' igen' : ''|'en tredje gång'/, 'veckan i planen skrivs med planveckan(), planveckanKort() eller veckansNamn()'],
+  [/'januari'|'jan', 'feb'|toLocaleDateString\(|month: '(long|short)'/, 'ett datum skrivs med datumText(), dagOchManad(), dagText() eller spannKort()'],
+];
+const drift = (fil, text) => {
+  const rader = text.split(/\r?\n/);
+  // Roten i standarden: blocket Veckornas namn och månadernas namn till datumfunktionerna.
+  let iRoten = false;
+  const fynd = [];
+  rader.forEach((r, i) => {
+    if (fil.endsWith('plan.js') && /^\/\/ -{10} /.test(r)) iRoten = r.includes('Veckornas namn');
+    if (iRoten || (fil.endsWith('plan.js') && /^const (MANADER|MANAD_KORT) = /.test(r))) return;
+    for (const [monster, varfor] of DRIFT) if (monster.test(r)) fynd.push(`${fil}:${i + 1}: ${varfor}`);
+  });
+  return fynd;
+};
+ska('spärren mot drift hittar en vecka eller ett datum som skrivs ut för sig', drift('x.ts', 'const a = `v. ${n}`;').length === 1 && drift('x.ts', 'const b = `Vecka ${v.innehall}`;').length === 1 && drift('x.ts', "const m = ['januari', 'februari'];").length === 1 && drift('x.ts', 'const c = kalendervecka(n);').length === 0);
+const driftfynd = MODULENS_FILER.flatMap((f) => drift(f, readFileSync(join(rot, f), 'utf8')));
+ska('modulen skriver veckor och datum bara ur standardens funktioner', !driftfynd.length, driftfynd);
 // Pågående insatser i statistiken (K-504, src/scripts/insatser-lagring.ts): en plan som är inne i sina veckor ger händelsen
 // planera:<metod>:pagar, en andra plan för samma metod :2, och en plan som är slut eller inte har börjat ingen. Händelsen
 // bär bara metoden.
@@ -651,7 +693,7 @@ try {
   await vanta(300);
   const tidIcs = await f.kor('window.__fil');
   sant('kalenderfilen med tider har ett pass per händelse med klockslaget', (tidIcs?.match(/BEGIN:VEVENT/g) ?? []).length === 20 && tidIcs.includes('DTSTART:20261102T092000') && tidIcs.includes('DTEND:20261102T100000'), tidIcs?.slice(0, 200));
-  sant('texten till åtgärdsprogrammet', (await f.kor(`document.getElementById('pl-aptext').value`))?.startsWith('Åtgärd: Textsamtal i grupp') && (await f.kor(`document.getElementById('pl-aptext').value`))?.includes('måndag, onsdag och fredag kl. 9.20–10.00') && (await f.kor(`document.getElementById('pl-aptext').value`))?.includes('Eleven arbetar med: Det står, Jag vet och Alltså tror jag (vecka 45)') && (await f.kor(`document.getElementById('pl-aptext').value`))?.includes('Omfattning: 18 pass om 40 minuter'), await f.kor(`document.getElementById('pl-aptext').value`));
+  sant('texten till åtgärdsprogrammet', (await f.kor(`document.getElementById('pl-aptext').value`))?.startsWith('Åtgärd: Textsamtal i grupp') && (await f.kor(`document.getElementById('pl-aptext').value`))?.includes('måndag, onsdag och fredag kl. 9.20–10.00') && (await f.kor(`document.getElementById('pl-aptext').value`))?.includes('Eleven arbetar med: Det står, Jag vet och Alltså tror jag (v. 45)') && (await f.kor(`document.getElementById('pl-aptext').value`))?.includes('Omfattning: 18 pass om 40 minuter'), await f.kor(`document.getElementById('pl-aptext').value`));
   await valjTid('#pl-tid-fran', '');
   sant('utan tid står bara dagarna', (await f.text('#pl-summa-text'))?.includes('Måndag, onsdag och fredag, 2 november') && (await f.kor(`document.getElementById('pl-tid-till').disabled`)), await f.text('#pl-summa-text'));
   sant('lovets veckor står som knappar', (await f.kor(`document.querySelectorAll('#pl-lovveckor [data-lovvecka]').length`)) >= 7);
@@ -738,7 +780,7 @@ try {
   await f.tryck('[data-gor="upprepa"]');
   sant('upprepad vecka ger 21 pass', (await f.text('#pl-summa-text'))?.includes('21 pass') && (await f.text('#pl-veckan-rubrik')) === 'Vecka 3 igen i planen', [await f.text('#pl-summa-text'), await f.text('#pl-veckan-rubrik')]);
   sant('upprepningen kan ångras från beskedet', (await f.text('#pl-toast'))?.includes('Ångra'));
-  sant('texten till åtgärdsprogrammet följer den upprepade veckan', (await apText())?.includes('Omfattning: 21 pass om 30 minuter') && (await apText())?.includes('Slå ihop flera ledtrådar (vecka 47–48); Stämmer det? och Det som menas (vecka 49–50)') && (await apText())?.includes('till 18 december 2026'), await apText());
+  sant('texten till åtgärdsprogrammet följer den upprepade veckan', (await apText())?.includes('Omfattning: 21 pass om 30 minuter') && (await apText())?.includes('Slå ihop flera ledtrådar (v. 47–48); Stämmer det? och Det som menas (v. 49–50)') && (await apText())?.includes('till 18 december 2026'), await apText());
   await andraVeckan();
   await f.tryck('[data-gor="ta-bort-upprepning"]');
   sant('upprepningen tas bort', (await f.text('#pl-summa-text'))?.includes('18 pass'));
@@ -748,7 +790,7 @@ try {
   await andraVeckan();
   await f.tryck('[data-gor="lov"]');
   sant('lov flyttar slutet en vecka', (await f.text('#pl-summa-text'))?.includes('till 18 december'), await f.text('#pl-summa-text'));
-  sant('texten till åtgärdsprogrammet följer lovet', (await apText())?.includes('18 pass om 30 minuter, måndag, onsdag och fredag, 2 november till 18 december 2026 (vecka 45 till 51)') && (await apText())?.includes('Stämmer det? och Det som menas (vecka 49–50)'), await apText());
+  sant('texten till åtgärdsprogrammet följer lovet', (await apText())?.includes('18 pass om 30 minuter, måndag, onsdag och fredag, 2 november till 18 december 2026 (v. 45 till v. 51)') && (await apText())?.includes('Stämmer det? och Det som menas (v. 49–50)'), await apText());
   sant('lovets rad står i planen', (await f.text('#pl-veckor .pl-lovvecka'))?.includes('v. 48'), await f.text('#pl-veckor .pl-lovvecka'));
   await f.tryck('#pl-veckor [data-lov-bort]');
   sant('lovet tas bort', (await f.text('#pl-summa-text'))?.includes('till 11 december'));
@@ -870,6 +912,11 @@ try {
   await f.kor(`document.querySelector('#pl-samman details[data-elev]').open = true`);
   await f.bredd(390); await vanta(150); await f.kor(`document.getElementById('pl-samman').scrollIntoView()`); await f.bild('4-sammanstallning-telefon'); await f.dator(); await vanta(150); await f.bild('4-sammanstallning-dator');
   sant('en elev fälls ut med graf och riktning', (await f.kor(`!!document.querySelector('#pl-samman details[data-elev][open] svg.pl-graf.stor rect.pl-stapel')`)) && (await f.text('#pl-samman details[data-elev]'))?.includes('2 till 3, framåt'));
+  // En vecka genom alla vyer (K-508; Niclas 2026-10-25: "Sammanställning ska ju matcha veckor i planen"): varje stapel i elevens
+  // diagram har samma vecka i planen och kalendervecka som planens rad för veckan.
+  const planRader = await f.kor(`[...document.querySelectorAll('#pl-veckor li:not(.fore):not(.efter):not(.pl-lovvecka)')].map((li) => [(li.querySelector('.pl-v')?.textContent.match(/\\d+/) ?? [''])[0], (li.querySelector('.pl-pass')?.textContent.match(/v\\. \\d+/) ?? [''])[0]])`);
+  const grafVeckor = await f.kor(`(() => { const g = document.querySelector('#pl-samman details[data-elev][open] svg.pl-graf.stor'); const k = [...g.querySelectorAll('.pl-stapeletikett:not(.pl-planveckan)')].map((x) => x.textContent); return [...g.querySelectorAll('.pl-planveckan')].map((x, i) => [(x.textContent.match(/\\d+/) ?? [''])[0], k[i]]); })()`);
+  sant('en vecka genom alla vyer: diagrammets veckor är planens veckor', planRader?.length > 0 && JSON.stringify(planRader) === JSON.stringify(grafVeckor), [planRader, grafVeckor]);
   await f.tryck('#pl-samman [data-samman]');
   await vanta(100);
   const samman = await f.kor('window.__kopierat');
@@ -877,7 +924,7 @@ try {
   await f.tryck('#pl-samman [data-elevtext]');
   await vanta(100);
   const elevrad = await f.kor('window.__kopierat');
-  sant('elevens rad kopieras utan namn', elevrad?.includes('vecka 46: 2, vecka 47: 3') && !/Ali|Bea/.test(elevrad), elevrad);
+  sant('elevens rad kopieras utan namn', elevrad?.includes('vecka 2 (v. 46): 2, vecka 3 (v. 47): 3') && !/Ali|Bea/.test(elevrad), elevrad);
   await f.kor('window.__fil = null');
   await f.tryck('#pl-samman [data-gruppdf]');
   await vanta(1500);
@@ -1014,7 +1061,7 @@ try {
   await h.bild('11-elevens-utveckling-telefon', true);
   await h.tryck('#pl-skatta .pl-utveckling [data-elevtext="e1"]');
   await vanta(100);
-  sant('elevens rad kopieras från veckan, utan namnet', (await h.kor('window.__kopierat'))?.includes('vecka 45: 2') && !/Ali/.test((await h.kor('window.__kopierat')) ?? ''), await h.kor('window.__kopierat'));
+  sant('elevens rad kopieras från veckan, utan namnet', (await h.kor('window.__kopierat'))?.includes('vecka 1 (v. 45): 2') && !/Ali/.test((await h.kor('window.__kopierat')) ?? ''), await h.kor('window.__kopierat'));
   await h.kor(`(() => { document.querySelector('#pl-skatta [data-skatta="${slutVeckor[5]}|e1"][aria-label^="5,"]').click(); return true; })()`);
   sant('utvecklingen står kvar och följer skattningen', (await h.text('#pl-skatta .pl-utveckling'))?.includes('2 till 5, framåt'), await h.text('#pl-skatta .pl-utveckling'));
   await h.kor(`(() => { document.querySelector('#pl-skatta [data-skatta="${slutVeckor[5]}|e1"][aria-label^="4,"]').click(); return true; })()`);
