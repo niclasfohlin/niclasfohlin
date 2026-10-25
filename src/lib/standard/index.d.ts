@@ -112,7 +112,7 @@ export type PassensNar = { typ: 'vecka'; plats: number | 'sista' | 'ovriga' } | 
 /** Metodens plan: hur ofta, passets längd, perioden, progressionens steg och uppföljningens tider. */
 export interface Metodplan { takt: { min: number; max: number }; minuter: { min: number; max: number }; period: { min: number; max?: number; enhet: 'veckor' | 'pass'; mer: boolean; hogst: boolean; perKurs: boolean }; stegEnhet: 'veckor' | 'pass'; steg: Steg[]; uppfoljning: { rad: number; tid: Tid }[]; passen: { rad: number; nar: PassensNar }[] }
 /** Lärarens val: första passet, dagarna (1 för måndag), antalet veckor eller pass, nivån, minuterna, lovveckorna (2026-52), veckorna som tas om, flyttade och inställda pass. */
-export interface Val { start: string; dagar: number[]; langd: number; niva?: string; borja?: number; minuter?: number; lov?: string[]; upprepa?: number[]; flytta?: Record<string, string>; stryk?: string[]; tider?: Record<string, [string, string]>; mal?: string; mitt?: number; slut?: number }
+export interface Val { start: string; dagar: number[]; langd: number; niva?: string; borja?: number; minuter?: number; lov?: string[]; upprepa?: number[]; flytta?: Record<string, string>; stryk?: string[]; tider?: Record<string, [string, string]>; mal?: string; mitt?: number; slut?: number; fore?: { till: string; dagar: number[]; fasta?: Record<string, number> }[] }
 export interface Pass { nr: number; datum: string; vecka: number; steg?: number | null; flyttatFran?: string }
 export interface PlanVecka { nr: number; innehall: number; igen: boolean; mandag: string; vecka: { ar: number; vecka: number }; pass: number[]; bortfall: { datum: string; varfor: 'helgdag' | 'installt'; namn?: string }[]; steg?: number | null }
 export interface Plan { start: string; enhet: 'veckor' | 'pass'; borja: number; forstaPass?: string; sistaPass?: string; sistaNr?: number; efter: string; pass: Pass[]; veckor: PlanVecka[]; lovveckor: string[]; uppfoljning: { rad: number; typ: Tid['typ']; tillfallen: { datum: string; vecka: number | null }[] }[]; fore: { mandag: string; overLov: boolean }; efterSteg?: number; mitt?: number; slut?: number; planerade?: number; struket?: { pass: Pass[]; veckor: PlanVecka[] } }
@@ -237,7 +237,7 @@ export declare const passnummerText: (nr: number[]) => string;
 export declare function veckansDagar(plan: { pass: Pass[] }, v: PlanVecka): { fran: string; till: string };
 export declare function dokumentationstext(info: { titel: string; undertitel?: string; adress: string; mal?: string; steg?: string[]; uppfoljning: { nar: string }[]; nivaNamn?: string }, plan: Plan, val: Val, o: { minuter: number; genomforda?: number; folj?: boolean; utvardering?: { beslut?: string; not?: string }; elever?: { namn: string }[]; pagar?: boolean }): string;
 /** Passens längd i minuter efter dagarnas klockslag, och passets längd för en dag utan klockslag; olika längder var för sig, i storleksordning. */
-export declare function passensMinuter(val: Val, standard: number): number[];
+export declare function passensMinuter(val: Val, standard: number, plan?: { pass: Pass[] }): number[];
 /** "30", eller "30 eller 40". */
 export declare const minuterText: (minuter: number[]) => string;
 /** Ett mål som läraren har skrivit, rensat: en rad, högst 200 tecken. */
@@ -265,9 +265,15 @@ export declare const plusMinuter: (s: string, m: number) => string;
 export declare const minuterISpann: (tid: string) => { fran: number; till: number } | null;
 /** Dagarna med sina tider, "måndag, onsdag och fredag kl. 9.20–10.00". */
 export declare function dagarText(val: Val): string;
+/** Dagarna som gällde före ett byte av dagar mitt i insatsen, i datumordning. */
+export declare function rentaFore(fore: unknown): { till: string; dagar: number[]; fasta?: Record<string, number> }[];
+/** Om en veckodag är en passdag ett visst datum, med ett byte av dagar mitt i insatsen. */
+export declare function passdagar(val: Val): (datum: string, dag: number) => boolean;
+/** Nya dagar för planen; med ett datum gäller de från det datumet och dagarna före står kvar. */
+export declare function bytDagar(val: Val, dagar: number[], fran?: string, plan?: { pass: Pass[] }): Val;
 
 /** Det läraren för in när hen följer insatsen, allt valfritt: passen som blev av (passens dagar), skattningen vecka för vecka (veckans måndag, sedan elevens id eller grupp), elevlistan, resultaten i metodens uppföljning och besluten mitt i och efter. */
-export interface Foljd { gjorda?: string[]; elever?: { id: string; namn: string }[]; narvaro?: boolean; franvaro?: Record<string, string[]>; vecka?: Record<string, { varde?: number; not?: string }>; skattning?: Record<string, Record<string, number>>; resultat?: Record<string, Record<string, string>>; avstamning?: { beslut?: string; not?: string }; utvardering?: { beslut?: string; not?: string }; oppen?: string }
+export interface Foljd { gjorda?: string[]; elever?: { id: string; namn: string; utkast?: true }[]; narvaro?: boolean; franvaro?: Record<string, string[]>; vecka?: Record<string, { varde?: number; not?: string }>; skattning?: Record<string, Record<string, number>>; resultat?: Record<string, Record<string, string>>; avstamning?: { beslut?: string; not?: string }; utvardering?: { beslut?: string; not?: string }; oppen?: string; borttagna?: string[] }
 export declare const passetsDag: (p: Pass) => string;
 export declare const SKALAN: readonly string[];
 export declare const skattningsfragan: (grupp?: boolean) => string;
@@ -277,7 +283,9 @@ export declare function rensaFoljd(f: unknown): Required<Pick<Foljd, 'gjorda' | 
 export declare function mittVeckan(plan: Plan): number | null;
 export interface SammanstallningVecka { nr: number; mandag: string; vecka: number; innehall: number; igen: boolean; pass: { nr: number; dag: string; datum: string; gjort: boolean }[]; gjorda: number; planerade: number; varit: number; installda: number; helgdagar: number; skattning?: number; not?: string }
 export interface SammanstallningElev { id: string; namn: string; skattningar: { nr: number; vecka: number; varde: number }[]; forsta: { nr: number; vecka: number; varde: number } | null; senaste: { nr: number; vecka: number; varde: number } | null; narvaro: number | null; resultat: Record<string, string> }
-export interface Sammanstallning { veckor: SammanstallningVecka[]; elever: SammanstallningElev[]; grupp: boolean; narvaro: boolean; planerade: number; gjorda: number; veckomedel: number | null; varit: number; gjordaVarit: number; installda: number; helgdagar: number; slut: boolean; mitt: number | null; avstamning: { beslut?: string; not?: string } | null; utvardering: { beslut?: string; not?: string } | null }
+export interface Sammanstallning { veckor: SammanstallningVecka[]; elever: SammanstallningElev[]; grupp: boolean; narvaro: boolean; planerade: number; gjorda: number; veckomedel: number | null; varit: number; gjordaVarit: number; installda: number; helgdagar: number; slut: boolean; mitt: number | null; avstamning: { beslut?: string; not?: string } | null; utvardering: { beslut?: string; not?: string } | null; namnen: { namn: string }[] }
+/** Namnen som texterna som lämnar webbläsaren tvättar bort: eleverna i listan och de som har stått i den. */
+export declare const elevernasNamn: (f: Foljd | undefined) => { namn: string }[];
 export declare function sammanstallning(plan: Plan, f: Foljd, idag: string): Sammanstallning;
 export declare const riktning: (e: SammanstallningElev) => 'upp' | 'samma' | 'ned' | null;
 /** Riktningen i ord, lika på sidan och i pdf:en: "2 till 3, framåt", "3, en skattning" eller "Inte skattad än". */
@@ -355,6 +363,8 @@ export declare const tvasiffrigt: (n: number) => string;
 export declare const esc: (s: string) => string;
 export declare const skyddaRegex: (s: string) => string;
 export declare const rentText: (x: unknown, max: number) => string;
+/** En text som är längre än gränsen, kapad vid ett ord och med tre punkter sist. */
+export declare const kapaVidOrd: (t: string, max: number) => string;
 export declare const forstaLedet: (s: string) => string;
 /** Alla texter i ett värde, också i listor och objekt. */
 export declare const allaTexter: (x: unknown) => string[];

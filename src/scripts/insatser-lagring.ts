@@ -49,7 +49,7 @@ export function rensaPlan(x: unknown): SparadPlan | null {
   const kopia = tidpunkt(p.kopia), uppdaterad = tidpunkt(p.uppdaterad);
   return {
     id: p.id, metod: p.metod, titel: rentText(p.titel, 160), ...(typeof p.omrade === 'string' ? { omrade: rentText(p.omrade, 40) } : {}),
-    namn: rentText(p.namn, 40), val: typeof p.val === 'string' ? p.val.slice(0, 4000) : '', folj: p.folj === true, foljd: rensaFoljd(p.foljd),
+    namn: rentText(p.namn, 40), val: typeof p.val === 'string' ? p.val.slice(0, 20000) : '', folj: p.folj === true, foljd: rensaFoljd(p.foljd),
     ...(kopia ? { kopia } : {}), andrad: tidpunkt(p.andrad) ?? '', ...(uppdaterad ? { uppdaterad } : {}), schema: { pass, veckor, ...(arDatum(schema.sista) ? { sista: schema.sista } : {}) },
     ...(heltal(p.bockade) ? { bockade: p.bockade } : {}),
   };

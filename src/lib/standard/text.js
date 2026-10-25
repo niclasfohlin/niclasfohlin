@@ -20,12 +20,25 @@ export const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '
 /** Text som ska sökas ordagrant i ett reguljärt uttryck. @param {string} s */
 export const skyddaRegex = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 /**
- * Text som läraren har skrivit, på en rad: utan styrtecken, med ett blanksteg mellan orden och högst max tecken. Annat än
- * text blir tom text.
+ * En text som är längre än gränsen, kapad vid ett ord och med tre punkter sist, så att den aldrig slutar mitt i ett ord
+ * som läses som en förkortning (sajtens K-543; buggjakten 2026-10-25: "Mycket lång anl." i sammanställningen). Ett ord som
+ * är längre än halva gränsen kapas där gränsen går.
+ * @param {string} t
+ * @param {number} max
+ */
+export const kapaVidOrd = (t, max) => {
+  if (t.length <= max) return t;
+  const kapad = t.slice(0, max - 1);
+  const vid = kapad.lastIndexOf(' ');
+  return `${(vid >= max / 2 ? kapad.slice(0, vid) : kapad).replace(/[\s,.;:!?–-]+$/u, '')}…`;
+};
+/**
+ * Text som läraren har skrivit, på en rad: utan styrtecken, med ett blanksteg mellan orden och högst max tecken, kapad vid
+ * ett ord (kapaVidOrd). Annat än text blir tom text.
  * @param {unknown} x
  * @param {number} max
  */
-export const rentText = (x, max) => (typeof x === 'string' ? x.replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max) : '');
+export const rentText = (x, max) => (typeof x === 'string' ? kapaVidOrd(x.replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim(), max) : '');
 /** Namnets första led, före kolon: "Lärarhandledningen" ur "Lärarhandledningen: Läs mellan raderna". @param {string} s */
 export const forstaLedet = (s) => s.split(':')[0].trim();
 /** Alla texter i ett värde, också i listor och objekt, som lathunden eller ett lektionskorts innehåll. @param {unknown} x @returns {string[]} */

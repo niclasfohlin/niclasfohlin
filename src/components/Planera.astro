@@ -82,7 +82,7 @@ const snabbmallensNamn = snabbmall ? (/^snabbmall(en)?$/i.test(snabbmall.rubrik)
           <summary>Ändra planen</summary>
           <form class="pl-val" id="pl-val" aria-labelledby="pl-val-rubrik">
             <h2 id="pl-val-rubrik">När ni träffas</h2>
-            <p class="pl-hjalp pl-varning" id="pl-bockvarning" hidden>Du har bockat pass eller skattat. Ändras datumet eller dagarna står det kvar på sina datum, och det som hamnar utanför planen syns igen när du ändrar tillbaka. Du kan ångra direkt efteråt.</p>
+            <p class="pl-hjalp pl-varning" id="pl-bockvarning" hidden>Du har bockat pass eller skattat. Ändras datumet står det kvar på sina datum, och det som hamnar utanför planen syns igen när du ändrar tillbaka. Nya dagar gäller från i dag. Du kan ångra direkt efteråt.</p>
             <div class="pl-rad">
               <label class="pl-etikett" for="pl-start">Från och med</label>
               <input class="pl-falt" type="date" id="pl-start" required />
@@ -100,6 +100,7 @@ const snabbmallensNamn = snabbmall ? (/^snabbmall(en)?$/i.test(snabbmall.rubrik)
               </div>
               {data.tid && <p class="pl-hjalp">Metoden: {liten(data.tid)}.</p>}
               <p class="pl-hjalp pl-varning" id="pl-dagar-varning" hidden></p>
+              <p class="pl-hjalp" id="pl-dagar-byte" hidden></p>
             </fieldset>
             <fieldset class="pl-rad pl-tider" id="pl-tider">
               <legend class="pl-etikett">Tid, om du vill</legend>
