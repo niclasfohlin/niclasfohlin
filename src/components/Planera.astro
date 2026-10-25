@@ -49,6 +49,7 @@ const snabbmallensNamn = snabbmall ? (/^snabbmall(en)?$/i.test(snabbmall.rubrik)
     </header>
 
     <nav class="pl-grupper" id="pl-grupper" aria-label="Dina planer för metoden" hidden></nav>
+    <div class="pl-lage" id="pl-lage" hidden></div>
     <div class="pl-besked" id="pl-besked" hidden><p id="pl-besked-text" role="status"></p><p class="pl-andra-knappar" id="pl-besked-knappar" hidden></p></div>
 
     <div class="pl-yta">
@@ -189,6 +190,9 @@ const snabbmallensNamn = snabbmall ? (/^snabbmall(en)?$/i.test(snabbmall.rubrik)
     <footer class="pl-version">
       <p class="pl-version-namn">{PLANERA.beta && <span class="beta">Beta</span>}{' '}{PLANERA.namn} {PLANERA.version}</p>
       <p>{PLANERA.namn} är modulen som räknar fram planen ur metoden och följer insatsen. {PLANERA.beta ? `Den är ny och prövas på ${antal === 1 ? 'en metod' : `${antal} metoder`}, så allt är inte prövat i skolan än. ` : ''}Fungerar något inte, mejla mig, så rättar jag det: <a href={mejl} data-goatcounter-click={`planera:${data.id}:mejl`} data-goatcounter-title={`${data.titel}: mejl om Planera`}>{site.epost}</a>.</p>
+      {/* Det sidan ser av webbläsaren, för felsökning, som i en apps egen webbläsare (Niclas 2026-10-25: "Du borde kunna
+          ... sniffa till dig vad som behövs för att veta att den används"). Det står bara här och skickas inte. */}
+      <details class="pl-teknik"><summary>Webbläsaren, för felsökning</summary><p id="pl-teknik"></p></details>
     </footer>
 
     <div class="pl-filer" id="pl-filer" hidden>

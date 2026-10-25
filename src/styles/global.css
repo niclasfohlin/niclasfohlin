@@ -3131,6 +3131,8 @@ h1 .beta { font-size: 0.85rem; vertical-align: 0.35em; }
 .pl-version p { margin: 0 0 0.4rem; }
 .pl-version-namn { font-weight: 700; color: var(--farg-text); }
 .pl-version a { overflow-wrap: anywhere; }
+.pl-teknik summary { cursor: pointer; }
+.pl-teknik p { margin: 0.4rem 0 0; overflow-wrap: anywhere; }
 /* Ett långt ord utan mellanslag, som ett namn eller ett mål, bryts i sin ruta i stället för att göra sidan bredare än
    skärmen (buggjakten 2026-10-24). */
 .plan .pl-maltext, .plan .pl-chip, .plan .meta, .pl-summa p, .pl-noter li, .pl-insatser .pl-metod, .pl-elevnamn { overflow-wrap: anywhere; }
@@ -3147,6 +3149,54 @@ h1 .beta { font-size: 0.85rem; vertical-align: 0.35em; }
 .pl-insatser .pl-om { grid-column: 1; font-size: 0.88rem; color: var(--farg-text-svag); }
 .pl-insatser .pl-pil { grid-column: 2; grid-row: 1 / span 2; align-self: center; color: var(--farg-accent); font-weight: 600; }
 .pl-avslutade[hidden] { display: none; }
+/* Insatsens läge i översikten, i Betas form (Niclas 2026-10-25: "KOMMANDE PÅGÅENDE, AVSLUTAD. Likt knappar för läsning och
+   Beta"). */
+.pl-status { display: inline-block; vertical-align: 0.1em; margin-right: 0.4rem; font-family: var(--typsnitt-ui); font-size: 0.68rem; font-weight: 700; line-height: 1.2; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.15rem 0.4rem; border-radius: 6px; border: 1px solid; }
+.pl-status.pagaende { background: #e1f3e8; color: #1d5e3b; border-color: #9fd0b4; }
+.pl-status.kommande { background: #e4edf9; color: #1b4a85; border-color: #a9c3e8; }
+.pl-status.avslutad { background: #eef0f3; color: #48525c; border-color: #cfd5dc; }
+/* En avslutad insats (K-542): läget överst med Ångra avslutet, rutan med bocken som ritas fram när läraren just har avslutat,
+   det som ströks överstruket och planens rutor grå och streckade medan läraren scrollar. Knapparna och länkarna har kvar sin
+   färg, eftersom allt går att använda som förut (Niclas 2026-10-25: "Så mer någon form av visuellt stöd"). */
+.pl-lage { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 1rem; margin: 1rem 0; padding: 0.75rem 1rem; border: 1px solid #cfd5dc; border-left: 4px solid #8a949e; border-radius: 6px; background: repeating-linear-gradient(135deg, #f5f6f8 0 10px, #eceff2 10px 12px); font-family: var(--typsnitt-ui); }
+.pl-lage[hidden] { display: none; }
+.pl-lage p { margin: 0; }
+.pl-lage .pl-status { font-size: 0.75rem; }
+.pl-lage.ny { animation: pl-lage-in 0.6s ease-out both; }
+@keyframes pl-lage-in { from { opacity: 0; transform: translateY(-0.4rem); } to { opacity: 1; transform: none; } }
+.pl-avslutad { display: flex; align-items: flex-start; gap: 0.85rem; margin: 1rem 0 1.25rem; padding: 0.9rem 1rem; border: 1.5px solid var(--farg-accent); border-radius: 8px; background: var(--farg-yta); font-family: var(--typsnitt-ui); }
+.pl-avslutad p { margin: 0 0 0.45rem; }
+.pl-avslutad p:last-child { margin-bottom: 0; }
+.pl-avslutad > div { min-width: 0; }
+.pl-avslutad-rubrik { font-size: 1.1rem; font-weight: 700; }
+.pl-avslutad-bock { flex: none; width: 2.75rem; height: 2.75rem; }
+.pl-avslutad-bock circle { fill: var(--farg-accent); transform-box: fill-box; transform-origin: center; }
+.pl-avslutad-bock path { fill: none; stroke: #fff; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.pl-avslutad.ny { animation: pl-avslutad-puls 0.9s 0.5s ease-out both; }
+.pl-avslutad.ny .pl-avslutad-bock circle { animation: pl-bock-ring 0.45s cubic-bezier(0.2, 0.8, 0.3, 1.25) both; }
+.pl-avslutad.ny .pl-avslutad-bock path { stroke-dasharray: 30; stroke-dashoffset: 30; animation: pl-bock-drag 0.4s 0.35s ease-out forwards; }
+@keyframes pl-bock-ring { from { opacity: 0; transform: scale(0.2); } to { opacity: 1; transform: scale(1); } }
+@keyframes pl-bock-drag { to { stroke-dashoffset: 0; } }
+@keyframes pl-avslutad-puls { from { box-shadow: 0 0 0 0 rgb(29 79 145 / 0.35); } to { box-shadow: 0 0 0 12px rgb(29 79 145 / 0); } }
+@media (prefers-reduced-motion: reduce) { .pl-lage.ny, .pl-avslutad.ny, .pl-avslutad.ny .pl-avslutad-bock circle, .pl-avslutad.ny .pl-avslutad-bock path { animation: none; stroke-dashoffset: 0; } }
+.pl-passlista li.struket { color: var(--farg-text-svag); background: repeating-linear-gradient(135deg, transparent 0 8px, #eef0f3 8px 10px); }
+.pl-passlista li.struket .pl-dag { text-decoration: line-through; }
+.pl-remsa-vecka.struken { cursor: default; border-style: dashed; color: var(--farg-text-svag); background: repeating-linear-gradient(135deg, #f5f6f8 0 5px, #e6e9ed 5px 7px); text-decoration: line-through; }
+.pl-veckor > li.pl-struken { color: var(--farg-text-svag); background: repeating-linear-gradient(135deg, #f7f8fa 0 10px, #eef0f3 10px 12px); }
+.pl-veckor > li.pl-struken .pl-v, .pl-veckor > li.pl-struken .pl-d, .pl-veckor > li.pl-struken .pl-pass { text-decoration: line-through; }
+.pl-veckor > li.pl-struken .pl-fokus { font-weight: 400; }
+.pl-markering.struken { background: #eef0f3; color: #48525c; }
+/* Dina planer för metoden: de äldre avslutade planerna hopfällda på en egen rad med en nerpil (K-542). */
+.pl-aldre { flex-basis: 100%; }
+.pl-aldre > summary { display: inline-flex; align-items: center; gap: 0.6rem; min-height: 2.5rem; list-style: none; color: var(--farg-text-svag); font: 600 0.92rem var(--typsnitt-ui); cursor: pointer; }
+.pl-aldre > summary::-webkit-details-marker { display: none; }
+.pl-aldre > summary::after { content: ''; width: 0.5rem; height: 0.5rem; border-right: 2px solid var(--farg-accent); border-bottom: 2px solid var(--farg-accent); transform: translateY(-0.15rem) rotate(45deg); }
+.pl-aldre[open] > summary::after { transform: translateY(0.1rem) rotate(-135deg); }
+.pl-aldre-lista { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.25rem; }
+.pl-avslutad-plan .pl-nasta, .pl-avslutad-plan .pl-fokusruta, .pl-avslutad-plan .pl-summa { border-left-color: #8a949e; background: repeating-linear-gradient(135deg, #f5f6f8 0 10px, #edf0f3 10px 12px); }
+.pl-avslutad-plan .pl-summa { border-left: 4px solid #8a949e; }
+.pl-avslutad-plan .pl-nasta .pl-etikett { color: var(--farg-text-svag); }
+.pl-avslutad-plan .pl-remsa-vecka:not([aria-pressed="true"]):not(.struken), .pl-avslutad-plan .pl-veckor > li:not(.nu):not(.pl-struken) { background: #f3f5f7; }
 .pl-avslutade summary { display: flex; align-items: center; gap: 0.75rem; min-height: 2.75rem; padding: 0 1rem; border-top: 1px solid var(--farg-kant); font-weight: 600; color: var(--farg-text-svag); cursor: pointer; }
 
 @media (min-width: 64rem) {

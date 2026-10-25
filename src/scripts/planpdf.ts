@@ -174,7 +174,7 @@ export async function elevPdf(plan: Plan, s: Sammanstallning, id: string, info: 
   // Utvärderingen med lärarens mening, och avslutet med anledningen när insatsen avslutades tidigare (K-542; Niclas
   // 2026-10-25: "kommer med på totala sammaställningen och för varje elev"). Meningen gäller gruppen, så de andra elevernas
   // namn står inte i den här elevens utskrift.
-  const utvarderingen = utanNamn(utvarderingenText(plan, s.utvardering, !s.slut), s.elever.filter((x) => x.id !== id && x.id !== GRUPPEN));
+  const utvarderingen = utanNamn(utvarderingenText(plan, s.utvardering, !s.slut), s.elever.filter((x) => x.id !== id && x.id !== GRUPPEN), [e]);
   if (utvarderingen) p.text(`Utvärdering efter insatsen: ${utvarderingen}`);
   return p.avsluta(`${e.namn} · ${info.metod} · Planera insatsen på niclasfohlin.se · lärarens egen plan`);
 }

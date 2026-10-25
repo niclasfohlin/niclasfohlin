@@ -4,7 +4,7 @@
 // någonstans, utom att en plan som pågår säger det till besöksstatistiken med bara metodens namn (pagaende nedan).
 // Lagringen kan vara avstängd eller rensas (privat läge, en skola som rensar webbläsaren); då säger sidan det, och
 // länken till planen är kopian som håller.
-import { arDatum, dagText, gangen, lasVal, mandagen, passetsTid, planvecka, planveckan, plusDagar, rensaFoljd, rentText, spannKort, stor, tidText, tvasiffrigt, veckansDagar, veckodagKort, veckonyckel, type Foljd, type Plan, type Val } from '../lib/standard/index.js';
+import { arDatum, dagText, gangen, insatsenAvslutad, lasVal, mandagen, passetsTid, planvecka, planveckan, plusDagar, rensaFoljd, rentText, spannKort, stor, tidText, tvasiffrigt, veckansDagar, veckodagKort, veckonyckel, type Foljd, type Plan, type Val } from '../lib/standard/index.js';
 
 export interface SparadPlan {
   id: string;
@@ -106,8 +106,11 @@ export function lageAv(p: SparadPlan, idag: string): { text: string; vecka?: num
   const pass = [...p.schema.pass].sort((a, b) => (a[0] < b[0] ? -1 : 1));
   const nasta = pass.find((x) => x[0] >= idag);
   if (!pass.length) return { text: 'Planen har inga pass' };
-  // En plan som är slut öppnas på Efter insatsen, utan vecka i länken.
-  if (!nasta) return { text: `Insatsen är slut. Sista passet var ${narText(pass[pass.length - 1][0], idag)}` };
+  // En avslutad plan öppnas på Efter insatsen, utan vecka i länken. Märket Avslutad står före texten (statusAv).
+  const sista = pass[pass.length - 1][0];
+  if (statusAv(p, idag) === 'avslutad') return { text: `Sista passet ${sista < idag ? 'var' : 'är'} ${narText(sista, idag)}` };
+  // Efter sista passet pågår insatsen tills läraren avslutar den, eller två veckor har gått (insatsenAvslutad).
+  if (!nasta) return { text: `Utvärderingen återstår. Sista passet var ${narText(sista, idag)}` };
   const v = p.schema.veckor.find((x) => x[0] === nasta[1]);
   const kl = nasta[3] ? ` kl. ${tidText(nasta[3])}` : '';
   if (nasta === pass[0] && nasta[0] > idag) return { text: `Första passet ${narText(nasta[0], idag)}${kl}`, vecka: v?.[0] };
@@ -118,8 +121,35 @@ export function lageAv(p: SparadPlan, idag: string): { text: string; vecka?: num
 
 /** Dagen för planens nästa pass från och med i dag, eller 9999 när planen är slut: planerna ordnas efter den. */
 export const nastaPassAv = (p: SparadPlan, idag: string) => p.schema.pass.map((x) => x[0]).filter((d) => d >= idag).sort()[0] ?? '9999';
-/** Planerna med nästa pass först, och en plan som är slut sist. */
-export const iTurOrdning = (idag: string) => (a: SparadPlan, b: SparadPlan) => (nastaPassAv(a, idag) < nastaPassAv(b, idag) ? -1 : nastaPassAv(a, idag) > nastaPassAv(b, idag) ? 1 : a.andrad < b.andrad ? 1 : -1);
+/**
+ * Insatsens läge ur planens pass och utvärderingens beslut, lika i metodbanken, på metodens sida och i planen (Niclas
+ * 2026-10-25: "tre knappar: KOMMANDE PÅGÅENDE, AVSLUTAD"): kommande före första passet, avslutad när läraren har avslutat
+ * insatsen eller två veckor efter sista passet (insatsenAvslutad i standarden), och pågående däremellan.
+ */
+export type Status = 'pagaende' | 'kommande' | 'avslutad';
+export const STATUSNAMN: Record<Status, string> = { pagaende: 'Pågående', kommande: 'Kommande', avslutad: 'Avslutad' };
+export function statusAv(p: SparadPlan, idag: string): Status {
+  const datum = p.schema.pass.map((x) => x[0]).sort();
+  if (!datum.length || insatsenAvslutad(datum[datum.length - 1], p.foljd?.utvardering?.beslut, idag, p.foljd?.oppen)) return 'avslutad';
+  return datum[0] > idag ? 'kommande' : 'pagaende';
+}
+const STATUSORDNING: Record<Status, number> = { pagaende: 0, kommande: 1, avslutad: 2 };
+/**
+ * Planerna i tur och ordning: först efter läget, pågående, kommande och avslutade, inom läget efter datum, med nästa pass,
+ * första passet och den senast avslutade först, och sedan efter område och metod (Niclas 2026-10-25: "Först dessa tre med
+ * datumsortering, sedan efter insatstyp och metod"), och sist den senast ändrade.
+ */
+export const iTurOrdning = (idag: string) => (a: SparadPlan, b: SparadPlan) => {
+  const sa = statusAv(a, idag), sb = statusAv(b, idag);
+  if (sa !== sb) return STATUSORDNING[sa] - STATUSORDNING[sb];
+  const datum = (p: SparadPlan) => {
+    const d = p.schema.pass.map((x) => x[0]).sort();
+    return sa === 'avslutad' ? d[d.length - 1] ?? '' : sa === 'kommande' ? d[0] ?? '' : nastaPassAv(p, idag);
+  };
+  const da = datum(a), db = datum(b);
+  if (da !== db) return (da < db ? -1 : 1) * (sa === 'avslutad' ? -1 : 1);
+  return (a.omrade ?? '').localeCompare(b.omrade ?? '', 'sv') || a.titel.localeCompare(b.titel, 'sv') || (a.andrad < b.andrad ? 1 : a.andrad > b.andrad ? -1 : 0);
+};
 
 /** Namnen på flera planer, där två likadana skiljs åt med ett nummer: "Mån, ons, fre från 26 okt" och "… · 2" (buggjakten 2026-10-24). */
 export function skiljNamnen(namn: string[]): string[] {
