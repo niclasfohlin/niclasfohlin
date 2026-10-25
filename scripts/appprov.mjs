@@ -142,6 +142,11 @@ try {
   await f.kor(`document.querySelector('[data-app-knapp]').click()`);
   await vanta(200);
   ska('Android: knappen visar telefonens fråga, och ett ja gömmer raden', (await f.kor('window.__fragat')) === 1 && (await f.rad())?.syns === false, [await f.kor('window.__fragat'), await f.rad()]);
+  // Tas appen bort kommer raden tillbaka nästa gång Chrome erbjuder installation (Niclas 2026-10-25).
+  await f.kor(`window.dispatchEvent(new Event('appinstalled'))`);
+  await f.oppna(metodbankAdress);
+  await f.kor('window.__erbjud()');
+  ska('Android: efter en installation kommer raden tillbaka när Chrome erbjuder installation igen', (await f.rad())?.syns === true, await f.rad());
   // Planera insatsen: raden först när planen är sparad.
   if (planAdress) {
     await f.oppna(planAdress);

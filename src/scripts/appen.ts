@@ -5,13 +5,16 @@
 // |---|---|
 // | Android och andra Chromium-webbläsare | När webbläsaren säger att appen går att installera (beforeinstallprompt); knappen visar telefonens egen fråga. På Planera insatsen först när planen är sparad, eftersom appen delar minne med Chrome och planen då finns i appen |
 // | iPhone och iPad | Alltid, med tre steg, eftersom Safari inte kan installera med en knapp. Appen har sitt eget minne, skilt från Safari, så på Planera insatsen säger raden före sparandet att planen görs i appen, och efter hur en sparad plan flyttas dit med en kopia |
-// | Aldrig | I appen själv, på en dator, i Facebooks och Instagrams egna webbläsare, efter att appen installerats, och i 30 dagar efter krysset |
+// | Aldrig | I appen själv, på en dator, i Facebooks och Instagrams egna webbläsare, och i 30 dagar efter krysset. När appen är installerad erbjuder Chrome ingen installation, så raden syns inte heller då |
 //
 // Inget av det läraren har skrivit skickas någonstans. Statistiken får bara trycken på knappen, installationen och att
 // appen används, en gång om dagen (app:i-appen), utan namn eller värden.
 import { idagLokalt, lasPlaner } from './insatser-lagring';
 
-const STANGD = 'app-stangd';
+// Bara krysset gömmer raden i 30 dagar. Att appen installerades sparas inte: tas appen bort märker sidan det inte, och
+// raden ska då komma tillbaka (Niclas 2026-10-25: "Jag avinstallerade appen men nu dyker inte upp igen att installera
+// den"). Namnet byttes samma dag, så att den gamla markeringen inte gäller.
+const STANGD = 'app-kryss';
 const ANVAND = 'app-anvand';
 const las = (k: string) => { try { return localStorage.getItem(k) ?? ''; } catch { return ''; } };
 const skriv = (k: string, v: string) => { try { localStorage.setItem(k, v); } catch { /* bara den här sidvisningen */ } };
@@ -92,7 +95,7 @@ if (rad && !iAppen && pekskarm && !egenWebblasare && !stangdNyss()) {
   rad.querySelector('[data-app-stang]')!.addEventListener('click', () => { skriv(STANGD, new Date().toISOString()); doljOchFlytta(); });
   // iPhone och iPad installerar med stegen; frågan finns bara i Chrome och andra Chromium-webbläsare.
   if (!ios) addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); fraga = e as typeof fraga; visa(); });
-  addEventListener('appinstalled', () => { rakna('app:installerad', 'Appen Stöd: installerad'); skriv(STANGD, new Date().toISOString()); dolj(); });
+  addEventListener('appinstalled', () => { rakna('app:installerad', 'Appen Stöd: installerad'); dolj(); });
   // Planera insatsen säger till när planen sparas (src/scripts/planera.ts).
   document.addEventListener('planera:sparad', visa);
   if (ios) visa();
