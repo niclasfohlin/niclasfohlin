@@ -7,7 +7,8 @@ Den här filen är arbetsgången för Planera insatsen: stegen i ordning, proven
 | Arbete | Exempel | Stegen |
 |---|---|---|
 | En metod får planen | En metod som ligger ute får planens fält, eller en ny metod kommer från riggen med dem | 1 till 6, 10 och 12 |
-| Modulen ändras | En ny form av metod, en ny del i planen eller en rättning i koden, som alla metoder får | 1 till 12 |
+| Många metoder i omgångar | Riggen skriver planens fält i en omgång metoder efter en arbetsorder från sajten, och omgången går upp i en push när den är prövad (Niclas 2026-10-26: "Kör på din plan: Läsning, Ljudlek... En push i taget") | 1 till 6, 10 och 12 för varje metod i omgången. Kräver omgången en ny form i modulen, görs den först, som en ändring i modulen |
+| Modulen ändras | En ny form av metod, en ny del i planen eller en rättning i koden, som alla metoder får | 1 till 12, och 0 när läraren får se något nytt |
 
 Innehållet i en metod prövas på den metoden. En ändring i modulen prövas på alla metoder som kan planeras, eftersom den gäller dem alla.
 
@@ -17,6 +18,7 @@ Planen syns på metodens sida, med knappen Planera insatsen och märket Beta, s�
 
 | Steg | Vad du gör | Så här | Klart när |
 |---|---|---|---|
+| 0. Formen | När läraren får se något nytt i planen: två eller tre former från en Sonnet och en Opus, sedan väljer du och visar Niclas bilder innan något byggs (ARBETSSATT.md under Design och kod). Formen bygger på rötter i standarden och på metodens egna fält, och den räknar tryck för läraren i telefonen | Uppdraget `ide` | Niclas har sett bilderna och fått veta vad formen byter bort |
 | 1. Metoden som rot och fälten | Metodens premisser, efter Metoden är roten nedan, och sedan planens fält efter tabellen Vad metoden behöver | Riggen skriver dem i leveransen (K-491); i en metod som ligger ute standardiserar du metoden och skriver in fälten | `npm run validera` stannar inte på `tidsschematsFel`, `varianternasFel`, `planensRamFel` eller `insatsplanFel` |
 | 2. Valideringen | Hela valideringen, med planprovet | `npm run validera` | Grön, och raderna med ! är lästa |
 | 3. Läs själv | Planen i telefonbredd som läraren läser den: förslaget, Före, en vecka med varje pass och Efter insatsen | `node scripts/skarmbild.mjs <adress> <bild> --mobil`, och hela texten med `node scripts/plantext.mjs <id>` | Inget ser fel ut och inget står två gånger |
@@ -27,7 +29,7 @@ Planen syns på metodens sida, med knappen Planera insatsen och märket Beta, s�
 | 8. Buggjakten | Två jägare som ändrar allt och prövar att det som står stämmer | Uppdraget `buggjakt`, en Sonnet och en Haiku | Ingen P1 |
 | 8b. Samma sak överallt | En provare som följer en vecka, ett datum, en skattning, ett pass och målet genom alla vyer: planen, veckan, diagrammen, sammanställningen, pdf:erna, texterna, åtgärdsprogrammet och kalendern, före och efter en ändring | Uppdraget `konsistens`, Opus. Först kontrollerar planprovet samma sak i koden (Spärren mot drift nedan) | Ingen P1 eller P2: samma sak heter och visar likadant överallt |
 | 9. Codex | Granskning av koden i ändringen | Uppdraget `kodgranskning`, Codex med `gpt-6-astra` och xhigh i läsläge (METODER.md under Codex-granskningen) | Ingen P1 |
-| 10. Laga | Fynden, efter Så lagas fynden nedan | | P1 lagade, P2 lagade eller i kön, P3 och innehållsfrågor till Niclas |
+| 10. Laga | Fynden, efter Så lagas fynden nedan | | Inget känt fel kvar i det som ska upp (ARBETSSATT.md under Kön), och innehållsfrågorna till Niclas |
 | 11. Verifieringen | En ny provare, som inte har sett sidan, prövar det som lagades på en ny testversion | Uppdraget `verifiering` | Ingen P1, och läraren kan använda planen med en grupp nästa vecka |
 | 12. Uppladdningen | Kontroll före uppladdning, Google-provet för nya Word-filer, sammanslagning, push och deploykontroll | `node scripts/googleprov.mjs --andrade --mapp`, sedan ARBETSSATT.md under Uppladdning | Klart för publicering, nedan |
 
@@ -145,7 +147,8 @@ Rollerna som gav mest, ur kvällarna 2026-10-24 och 2026-10-25:
 |---|---|
 | Pröva påståendet | Ett fynd är ett påstående tills det är prövat. Återskapa det i en vanlig webbläsare eller i koden, och läs agentens bild. Verktyget visar inte webbläsarens utskrift och följer inte en ny flik, så ett fynd om en utskriftsknapp, ett lektionskort eller en länk prövas i en vanlig webbläsare innan det räknas |
 | P1 | Lagas före uppladdningen |
-| P2 | Lagas samma omgång när det är litet, annars i kön med `node scripts/ko.mjs lagg … --ur <post>` |
+| P2 | Lagas före uppladdningen när det rör det som laddas upp, också när det fanns före omgången. I kön bara det som rör något annat (ARBETSSATT.md under Kön) |
+| Samma del ger nya fynd i varje granskning | Laga inte fall för fall. Leta efter principen som gör hörnfallen möjliga och byt den, och be sedan om en smal granskning av just bytet: högst två eller tre fynd, bara P1 som går att återskapa (Lärdomar nedan) |
 | P3 och innehållet | Det metoden säger, som en text, en vecka eller ett pass, ändras inte på egen hand. Frågan går till Niclas i NATTEN.md eller i svaret, med testarens ord och ett förslag |
 | Lagningen görs i modulen | En lagning görs i modulen och gäller alla metoder, aldrig `if (metod === …)`. En metods eget innehåll ändras i dess fält |
 | En spärr | Ett fel som kan komma tillbaka får en spärr i planprovet, som knappen under varje sak och versionen i tabellen. Spärren prövas åt andra hållet: lägg in felet och se att provet stannar |
@@ -161,12 +164,12 @@ Planen för en metod, eller en ny version av modulen, är klar att ladda upp nä
 |---|---|
 | `npm run validera` är grön, och raderna med ! är lästa | Valideringen |
 | Planprovet: motorn, adresserna, knappen under varje sak, scenarierna och sidan i Chrome | `scripts/planprov.mjs` i valideringen |
-| Ingen P1 kvar från länkgranskningen, testarna, användbarheten, jägarna, Codex eller verifieringen i det som omgången ändrade. En P1 i något som redan ligger ute och som omgången inte rörde stoppar inte en uppladdning som gör planen bättre: den går först i kön med prio 1, sägs i svaret till Niclas och är det första nästa omgång gör (K-515 och K-516 2026-10-25) | Svaren i `underlag/prov/<sak>/` |
+| Inget känt fel kvar från länkgranskningen, testarna, användbarheten, jägarna, Codex eller verifieringen i det som laddas upp, också ett fel som fanns före omgången. Ett fel i något annat än modulen och omgångens metoder går i kön och sägs i svaret till Niclas (ARBETSSATT.md under Kön) | Svaren i `underlag/prov/<sak>/` |
 | Word-filerna ryms i Google Dokument | `node scripts/googleprov.mjs --andrade --mapp` |
 | Versionen står i tabellen under Versionerna i METODER.md | Planprovet |
 | Planerna i webbläsaren och filerna från 0.2.7 och framåt öppnas med allt (Planens fil och lagringen ovan) | Planprovet med provfilerna i `scripts/planera/filer/` |
 | Det som bara går att pröva på en riktig telefon, som kalenderfilen, kopian och utskriften, är sagt som oprövat till Niclas, en gång | Svaret till Niclas |
-| Niclas har sagt ladda upp. För betan på fem metoder sa han det 2026-10-24: "När du är fullt nöjd, ladda upp detta på sajten" | Hans ord |
+| Niclas har sagt ladda upp. För betan på fem metoder sa han det 2026-10-24: "När du är fullt nöjd, ladda upp detta på sajten", och för omgångarna till alla metoder 2026-10-26: "En push i taget" | Hans ord |
 
 Efter uppladdningen: `node scripts/deploykoll.mjs`, öppna planen för varje ny metod på den riktiga adressen, och skriv i NATTEN.md vad som är ute och vad som är oprövat. Ett brev om en ny del av planen skrivs med `/utskick` och går ut när Niclas säger det.
 
@@ -257,12 +260,16 @@ En ny sak som visas på flera ställen får sin rot och sitt prov i samma commit
 | Ett värde som visas på flera ställen har en funktion, också en fils namn | K-519: alla sammanställningar hette lika |
 | Provverktyget lämnar inte ett fält och följer inte fokus som en webbläsare gör. Ett fynd som bara verktyget framkallar lagas där det går ut, som texten som kopieras, aldrig genom att skriva om det läraren har skrivit medan hen skriver | 2026-10-25: namnen tvättades ur lärarens meningar medan hen skrev, efter ett fynd där verktyget kopierade utan att lämna elevlistan, och en rad som tömdes en stund tappade namnet i meningen för gott |
 | En regel om ett pass gäller också ett pass som har flyttats eller bockats i förväg: pröva regeln med provets flyttade pass | Rutan med nästa pass hoppade först bara över dagens bockade pass, och provet hade flyttat pass 8 till dagen efter |
+| Det som inget senare får skriva om sparas när det händer, och räknas inte fram ur nuläget | K-546 2026-10-25: så länge passens nummer räknades om ur planen som den var nu, hittade Codex ett nytt hörnfall i bytet av dagar i var och en av nio granskningar, för att en senare flytt eller ett senare byte skrev om historiken. När bytet sparade numren när det gjordes tog felen slut |
+| Det som sparas medan läraren skriver är ett utkast tills hen är klar, och en annan flik läser det som utkast | K-537: ett halvt namn, "Be", som en flik sparade medan läraren skrev, blev ett tidigare namn i en annan flik och tvättade bort ordet "be" ur texterna |
+| En granskning av en lagning är smal: det som ändrades, högst två eller tre fynd, bara P1 som går att återskapa | En bred granskning efter varje lagning gav nya hörnfall längre bort, och arbetet tog aldrig slut |
 
 ## Ändringar
 
 | Datum | Vad |
 |---|---|
 | 2026-10-25 | Första versionen, ur provningen av Planera 0.1 och 0.2 på fem metoder: länkgranskningen, testarna i två steg, användbarheten, buggjakten, Codex och verifieringen, med mallarna i `scripts/planera/` |
+| 2026-10-26 | Genomgången inför utrullningen till alla metoder (K-555): steg 0, formen, med designfrågans regel i ARBETSSATT.md; arbetet i omgångar med riggen; lagningen och villkoren för publicering efter regeln om kända fel; och lärdomarna från 0.2.9 |
 | 2026-10-25 | Länkgranskningen letar också efter allmänna ord för en bestämd sak, efter Niclas regel samma dag: det som behövs namnges och länkas, eller har en knapp för att ladda ner |
 | 2026-10-25 | Arbetssättet efter K-515, K-516 och K-519 (K-518; Niclas samma dag: "Lös roten och hur dessa löses även på kommande metoder och hur det görs in i arbetssättet för modulen också"): Metoden är roten, med steg 1 som går igenom metodens premisser och standardiserar metoden; Från fynd till rot; Scenarierna, prövade av planprovet och givna till jägarna; och en P1 i något som redan ligger ute |
 | 2026-10-25 | Efter provningen av 0.2.6: en rot räknas som prövad när proven kör den, inte när namnet står i provet; spärren läser också en funktion med return och texter som tecken, och inte listor i kommentarer (Codex); pdf:ernas text prövas i planprovet; läsarens webbläsare ser ut som en mobil i telefonläget, så att pdf:erna hämtas och steg 8b kan läsa dem |
