@@ -378,16 +378,21 @@ export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.2.7', beta: 
 
 // Filnamnen på det som laddas ner ur planen, lika för alla metoder (sajtens K-519; Niclas 2026-10-25: "Kan du standardisera
 // dess namn? Alltså elevens namn, metod och datum som placeholders för den. Annars heter alla sammanställningar samma"):
-// vad filen är, vem den gäller, metoden och dagens datum. Filens slag ger ändelsen, och kopian heter som knapparna Spara en
-// kopia och Öppna en kopia (buggjakten och användbarhetsprovet 2026-10-25: "planera-…json" kändes inte igen bland filerna).
-const FILERNA = Object.freeze({ sammanstallning: 'pdf', kopia: 'json', kalender: 'ics' });
+// vad filen är, vem den gäller, metoden och dagens datum. Filens slag ger ändelsen, och planen som fil heter plan, som
+// knappen Ladda ner planen (buggjakten och användbarhetsprovet 2026-10-25: "planera-…json" kändes inte igen bland filerna).
+const FILERNA = Object.freeze({ sammanstallning: 'pdf', plan: 'json', kalender: 'ics' });
+// Knapparna för att spara planen och ta den till en annan dator, lika på planens sida och i raden om appen Stöd (Niclas
+// 2026-10-25: "om det ska heta 'Ladda ner planen' och 'Ladda upp planen' eller om det finns bättre ord"). Filen läses i
+// webbläsaren och skickas aldrig någonstans, så knappen som läser den heter Öppna och inte Ladda upp: elevernas namn lämnar
+// aldrig telefonen eller datorn.
+export const PLANKNAPPAR = Object.freeze({ spara: 'Spara planen', laddaNer: 'Ladda ner planen', oppna: 'Öppna en nedladdad plan' });
 // En del av ett filnamn: bokstäverna, också å, ä och ö, och siffrorna som de är skrivna, och bindestreck i stället för
 // allt annat, så att Åsa och Asa får olika namn (Codex 2026-10-25).
 const filnamnsdel = (s) => String(s ?? '').normalize('NFC').replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-+|-+$/g, '');
 /**
  * Ett filnamn för det som laddas ner ur planen: "sammanstallning-Ali-textsamtal-i-grupp-2026-10-25.pdf" för en elev,
- * "sammanstallning-gruppen-Läsgrupp-2B-textsamtal-i-grupp-2026-10-25.pdf" för gruppen, "kopia-Läsgrupp-2B-…-2026-10-25.json"
- * för kopian och "kalender-Läsgrupp-2B-…-2026-10-25.ics". Namnen står som de är skrivna, med bindestreck mellan orden,
+ * "sammanstallning-gruppen-Läsgrupp-2B-textsamtal-i-grupp-2026-10-25.pdf" för gruppen, "plan-Läsgrupp-2B-…-2026-10-25.json"
+ * för planen som fil och "kalender-Läsgrupp-2B-…-2026-10-25.ics". Namnen står som de är skrivna, med bindestreck mellan orden,
  * och det som saknas, som gruppens namn, hoppas över.
  * @param {keyof typeof FILERNA} slag
  * @param {{ vem?: string, grupp?: boolean, metod: string, datum: string }} o grupp: gruppens sammanställning, med ordet gruppen
@@ -535,7 +540,7 @@ export function planera(mp, val) {
   const efterSteg = mp.steg.find((s) => s.efter)?.rad;
   return {
     start: val.start, enhet: iPass ? 'pass' : 'veckor', borja, forstaPass, sistaPass, sistaNr: sista?.nr, efter, pass, veckor, lovveckor, uppfoljning,
-    fore: { mandag: foreMandag, overLov }, ...(efterSteg !== undefined ? { efterSteg } : {}),
+    fore: { mandag: foreMandag, overLov }, ...(efterSteg !== undefined ? { efterSteg } : {}), ...(val.mitt ? { mitt: val.mitt } : {}),
   };
 }
 
@@ -844,6 +849,7 @@ export function kodaVal(val, extra = {}) {
   const tider = Object.entries(rentaTider(val.tider)).sort();
   if (tider.length) delar.push(`t=${tider.map(([d, [a, b]]) => `${d}-${a.replace(':', '')}-${b.replace(':', '')}`).join('.')}`);
   if (val.mal) delar.push(`mal=${encodeURIComponent(val.mal)}`);
+  if (val.mitt) delar.push(`a=${val.mitt}`);
   if (extra.id) delar.push(`p=${extra.id}`);
   if (extra.visa) delar.push(`v=${extra.visa}`);
   return delar.join('&');
@@ -869,6 +875,7 @@ export function lasVal(hash) {
   const id = p.get('p') ?? '';
   const visa = p.get('v') === 'fore' ? 'fore' : Number(p.get('v'));
   const mal = rentMal(p.get('mal'));
+  const mitt = Number(p.get('a'));
   const tider = rentaTider(Object.fromEntries(punkter('t').map((x) => x.match(/^([1-5])-(\d{2})(\d{2})-(\d{2})(\d{2})$/)).filter(Boolean).map((m) => [m[1], [`${m[2]}:${m[3]}`, `${m[4]}:${m[5]}`]])));
   /** @type {Val} */
   const val = {
@@ -883,6 +890,7 @@ export function lasVal(hash) {
     ...(Number.isInteger(minuter) && minuter >= 5 && minuter <= 240 ? { minuter } : {}),
     ...(Object.keys(tider).length ? { tider } : {}),
     ...(mal ? { mal } : {}),
+    ...(Number.isInteger(mitt) && mitt >= 1 && mitt <= LANGSTA ? { mitt } : {}),
   };
   return { val, ...(/^[a-z0-9]{4,12}$/.test(id) ? { id } : {}), ...(visa === 'fore' || (Number.isInteger(visa) && visa >= 1 && visa <= 2 * LANGSTA) ? { visa } : {}) };
 }
@@ -976,25 +984,35 @@ export const malensMening = (mal) => `Det övergripande målet är att eleven sk
  */
 export function kortetsMalFel(d, texter, plats) {
   const malet = utanPunkt(rentMal(d.mal?.overgripande ?? ''));
-  return texter.flatMap((t) => [...t.matchAll(/\*\*Mål:\*\*\s*([^\n]+)/g)].map((m) => utanPunkt(rentMal(m[1])))).filter((x) => x !== malet).map((x) => `${plats} har målet "${x}", men metodens övergripande mål är "${malet}". Kortet säger metodens mål ordagrant (METODER.md under Lektionskortet).`);
+  const malen = texter.flatMap((t) => [...t.matchAll(/\*\*Mål:\*\*\s*([^\n]+)/g)].map((m) => utanPunkt(rentMal(m[1]))));
+  // Ett kort utan mål stannar också (Codex 2026-10-25: spärren släppte ett kort där målet var borttaget).
+  if (!malen.length) return [`${plats} saknar målet. Kortet säger metodens övergripande mål ordagrant efter "Mål:" (METODER.md under Lektionskortet).`];
+  return malen.filter((x) => x !== malet).map((x) => `${plats} har målet "${x}", men metodens övergripande mål är "${malet}". Kortet säger metodens mål ordagrant (METODER.md under Lektionskortet).`);
 }
 
 /**
  * En text utan elevernas namn: varje namn i elevlistan och dess förnamn blir "en elev", och med genitivets s "en elevs",
  * också i lärarens egna meningar (granskningen 2026-10-24: "Bea behöver mer stöd vid stoppet" följde med texten som skulle
- * sakna namn). Texterna som kopieras till dokumentationen går genom den.
+ * sakna namn). Texterna som kopieras till dokumentationen går genom den. De elever som står kvar när några tas bort skyddas
+ * med hela sina namn, så att ett borttaget förnamn inte tvättas ur en annan elevs namn (Codex 2026-10-25: "Ali S klarade
+ * uppgiften" blev "En elev S klarade uppgiften" när Ali togs bort).
  * @param {string} text
  * @param {{ namn: string }[]} elever
+ * @param {{ namn: string }[]} [kvar] eleverna som står kvar
  */
-export function utanNamn(text, elever) {
+export function utanNamn(text, elever, kvar = []) {
   const namn = [...new Set((elever ?? []).flatMap((e) => { const n = String(e.namn ?? '').trim(); return [n, forstaOrdet(n)]; }).filter((n) => n.length >= 2))].sort((a, b) => b.length - a.length);
+  const skyddade = [...new Set((kvar ?? []).map((e) => String(e.namn ?? '').trim()).filter((n) => n.length >= 2))].sort((a, b) => b.length - a.length);
+  /** @type {string[]} */
+  const gomda = [];
   let ut = String(text ?? '');
+  // Utan lookbehind, som Safari före 16.4 inte kan: tecknet före namnet fångas och står kvar.
+  for (const n of skyddade) ut = ut.replace(new RegExp(`(^|[^\\p{L}\\p{N}])${skyddaRegex(n)}(?![\\p{L}\\p{N}])`, 'giu'), (hel, fore) => { gomda.push(hel.slice(fore.length)); return `${fore}\u0000${gomda.length - 1}\u0000`; });
   for (const n of namn) {
-    // Utan lookbehind, som Safari före 16.4 inte kan: tecknet före namnet fångas och står kvar.
     const monster = new RegExp(`(^|[^\\p{L}\\p{N}])${skyddaRegex(n)}(s?)(?![\\p{L}\\p{N}])`, 'giu');
     ut = ut.replace(monster, (_, fore, s) => `${fore}${s ? 'en elevs' : 'en elev'}`);
   }
-  return ut.replace(/(^|[.!?:]\s+)en elev/g, (_, fore) => `${fore}En elev`);
+  return ut.replace(/(^|[.!?:]\s+)en elev/g, (_, fore) => `${fore}En elev`).replace(/\u0000(\d+)\u0000/g, (_, i) => gomda[Number(i)]);
 }
 
 /** "2 november 2026". @param {string} s */
@@ -1168,6 +1186,9 @@ export function rensaFoljd(f) {
  */
 export function mittVeckan(plan) {
   if (!plan.veckor.length) return null;
+  // En förlängd insats har kvar sin avstämning i veckan den hade (verifieringen 2026-10-25: förlängningen flyttade
+  // avstämningen till en vecka som redan hade varit). Veckan står i valen sedan förlängningen.
+  if (plan.mitt && plan.veckor.some((v) => v.nr === plan.mitt)) return plan.mitt;
   if (plan.enhet === 'pass') return plan.pass[Math.ceil(plan.pass.length / 2) - 1]?.vecka ?? null;
   // Metodens veckor i planen, utan upprepningarna, så att en plan som börjar på ett senare steg har sin egen mitt.
   const unika = [...new Set(plan.veckor.map((v) => v.innehall))];
@@ -1437,9 +1458,9 @@ export function kalenderfil(info, plan, o) {
  * @typedef {{ takt: { min: number, max: number }, minuter: { min: number, max: number }, period: { min: number, max?: number, enhet: 'veckor' | 'pass', mer: boolean, perKurs: boolean }, stegEnhet: 'veckor' | 'pass', steg: Steg[], uppfoljning: { rad: number, tid: Tid }[], passen: { rad: number, nar: PassensNar }[] }} Metodplan
  * @typedef {{ uppfoljning?: { rader: { nar: string, vad: string }[] }, progression?: { rader: { vecka: string, fokus?: string, roll?: string, led?: string }[] }, checklista?: { punkter: string[] }, plan?: { passen?: { nar: string, text?: string, ur?: { tabell: string, rad: string, kolumner?: string[] }, kort?: string, tabell?: string }[], fore?: string[], justera?: string[], upprepa?: string, utan?: string[], stege?: boolean }, tidsschema?: { text?: string, efter?: string, rader: { tid: string, fas: string, vad: string }[], varianter?: Variant[] }, gruppen?: { text: string }, passrutin?: { efterPasset?: string }, principer?: { text: string }, hem?: { text: string[] }, tabeller?: { rubrik: string, kolumner: string[], rader?: unknown[][] }[], nivaer?: { namn: string }[] }} MetodensTexter
  * @typedef {{ nar: string, text: string, delar: { fas: string, tid: string }[] }} Variant
- * @typedef {{ start: string, dagar: number[], langd: number, niva?: string, borja?: number, minuter?: number, lov?: string[], upprepa?: number[], flytta?: Record<string, string>, stryk?: string[], tider?: Record<string, [string, string]>, mal?: string }} Val
+ * @typedef {{ start: string, dagar: number[], langd: number, niva?: string, borja?: number, minuter?: number, lov?: string[], upprepa?: number[], flytta?: Record<string, string>, stryk?: string[], tider?: Record<string, [string, string]>, mal?: string, mitt?: number }} Val
  * @typedef {{ nr: number, datum: string, vecka: number, steg?: number | null, flyttatFran?: string }} Pass
  * @typedef {{ nr: number, innehall: number, igen: boolean, mandag: string, vecka: { ar: number, vecka: number }, pass: number[], bortfall: { datum: string, varfor: 'helgdag' | 'installt', namn?: string }[], steg?: number | null }} PlanVecka
- * @typedef {{ start: string, enhet: 'veckor' | 'pass', borja: number, forstaPass?: string, sistaPass?: string, sistaNr?: number, efter: string, pass: Pass[], veckor: PlanVecka[], lovveckor: string[], uppfoljning: { rad: number, typ: Tid['typ'], tillfallen: { datum: string, vecka: number | null }[] }[], fore: { mandag: string, overLov: boolean }, efterSteg?: number }} Plan
+ * @typedef {{ start: string, enhet: 'veckor' | 'pass', borja: number, forstaPass?: string, sistaPass?: string, sistaNr?: number, efter: string, pass: Pass[], veckor: PlanVecka[], lovveckor: string[], uppfoljning: { rad: number, typ: Tid['typ'], tillfallen: { datum: string, vecka: number | null }[] }[], fore: { mandag: string, overLov: boolean }, efterSteg?: number, mitt?: number }} Plan
  * @typedef {{ gjorda?: string[], elever?: { id: string, namn: string }[], narvaro?: boolean, franvaro?: Record<string, string[]>, vecka?: Record<string, { varde?: number, not?: string }>, skattning?: Record<string, Record<string, number>>, resultat?: Record<string, Record<string, string>>, avstamning?: { beslut?: string, not?: string }, utvardering?: { beslut?: string, not?: string } }} Foljd
  */

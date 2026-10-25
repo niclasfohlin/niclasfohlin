@@ -16,7 +16,7 @@
 // kalenderfilen, statistiken eller texterna som kopieras.
 import {
   arDatum, BESLUT, BESLUTEN, beslutText, dagarText, dagKort, dagText, datumspann, datumText, decimal, delensTid, dokumentationstext, efterDatum, elevensResultat, elevensVarden, elevtext, esc, filnamnet, forstaMandagen, forval, forvaldLangd, gangen, GRUPPEN, iDatumordning, klockslag, liten, mening, metodveckan, minuterAv, minuterISpann, narvaronText, passensRad, passetsBeskrivning, plusMinuter, prickarna, resultatText, riktningText, sakspann, skattadeVeckor, skattningenText, stapelnsKant, stor, talText, sammaElev, skattningenMittI, uppfoljningensNamn, uppfoljningensRader, veckansPass, veckodagKort, veckorI, veckornaIPlanen, helgdag, isoVecka, kalenderfil, kalendervecka, kalenderveckaUtskriven, kodaVal,
-  LANGSTA, lasVal, malText, metodplan, minuterText, mittVeckan, nastaObockade, passensMinuter, passetsDag, passetsRoller, passetsTid, planera, planvecka, planveckanKort, planveckansNamn, plusDagar,
+  LANGSTA, lasVal, malText, metodplan, minuterText, mittVeckan, nastaObockade, passensMinuter, passetsDag, passetsRoller, passetsTid, planera, PLANKNAPPAR, planvecka, planveckanKort, planveckansNamn, plusDagar,
   mandagen, rensaFoljd, rentaTider, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
   uppfoljningensTillfallen, uppraknat, utanNamn, veckansDagar, veckansNamn, veckanFor, veckodag, veckonyckel, VECKODAGAR, type Veckonamn,
   type Foljd, type Pass, type Plan, type PlanVecka, type Sammanstallning, type SammanstallningElev, type Val,
@@ -102,7 +102,7 @@ function uppdateraAdressen() {
 const harInfort = () => aktiv.foljd.gjorda.length > 0 || Object.keys(aktiv.foljd.skattning).length > 0 || aktiv.foljd.elever.length > 0 || Object.keys(aktiv.foljd.resultat).length > 0 || !!aktiv.foljd.avstamning?.beslut || !!aktiv.foljd.utvardering?.beslut;
 // Gick det inte att spara, säger beskedet vad som håller: kopian när läraren har fört in något, annars länken.
 function sparfel() {
-  if (aktiv.folj && harInfort()) visaBesked('Det gick inte att spara i den här webbläsaren. Spara en kopia som fil, så finns det du har fört in kvar.', { text: 'Spara en kopia', gor: sparaKopia, kvar: true });
+  if (aktiv.folj && harInfort()) visaBesked('Det gick inte att spara i den här webbläsaren. Ladda ner planen som fil, så finns det du har fört in kvar.', { text: PLANKNAPPAR.laddaNer, gor: sparaKopia, kvar: true });
   else visaBesked('Planen gick inte att spara i den här webbläsaren. Kopiera länken, så finns planen kvar.', { text: 'Kopiera länken', gor: () => void kopieraLanken(), kvar: true });
 }
 
@@ -150,9 +150,7 @@ function renderaVal() {
   for (const b of nivaknappar) b.setAttribute('aria-pressed', String(b.dataset.niva === aktiv.val.niva));
   if (borjaval) {
     borjaval.value = String(aktiv.val.borja ?? 1);
-    const last = borjaLast();
-    borjaval.disabled = last;
-    $('pl-borja-not').hidden = !last;
+    lasBorja();
   }
   if (document.activeElement !== namnfalt) namnfalt.value = aktiv.namn;
   const antal = aktiv.val.dagar.length;
@@ -249,8 +247,11 @@ $('pl-tid-olika').addEventListener('click', () => {
 });
 
 // Varje ändring räknar om planen, sparar en sparad plan och ritar om. En ändring som flyttar passen kan ångras.
-const ogonblick = () => ({ val: structuredClone(aktiv.val), foljd: structuredClone(aktiv.foljd), namn: aktiv.namn, folj: aktiv.folj });
+const ogonblick = () => ({ plan: aktiv.id, val: structuredClone(aktiv.val), foljd: structuredClone(aktiv.foljd), namn: aktiv.namn, folj: aktiv.folj });
 function aterstall(o: ReturnType<typeof ogonblick>, meddelande: string) {
+  // Ångra gäller planen som ändrades, aldrig en annan plan som har öppnats sedan (Codex 2026-10-25: Ångra efter ett byte av
+  // plan skrev den förra planen över den nya).
+  if (o.plan !== aktiv.id) { visaBesked('Ändringen gällde en annan plan och går inte att ångra här.'); return; }
   aktiv.val = o.val; aktiv.foljd = o.foljd; aktiv.namn = o.namn; aktiv.folj = o.folj;
   plan = planera(mp, aktiv.val);
   const ok = spara();
@@ -280,13 +281,27 @@ function sparaTyst() {
   renderaSamman();
 }
 // En ändring som flyttar passen i en plan med bockar säger vad som hände och kan ångras.
-function harFortIn(): boolean { return aktiv.foljd.gjorda.length > 0 || Object.keys(aktiv.foljd.skattning).length > 0 || Object.keys(aktiv.foljd.vecka).length > 0 || Object.keys(aktiv.foljd.resultat).length > 0; }
+// Det som har förts in räknas på värdena, så att en skattning, en mening eller ett resultat som har tömts inte räknas (Codex
+// 2026-10-25). Ett resultat räknas från ett datum: dess nyckel är uppföljningens rad och tillfällets datum.
+const harSkattning = () => Object.values(aktiv.foljd.skattning).some((v) => Object.keys(v ?? {}).length > 0);
+const harVeckans = () => Object.values(aktiv.foljd.vecka).some((v) => !!v?.varde || !!v?.not);
+const harResultat = (fran = '') => Object.entries(aktiv.foljd.resultat).some(([k, v]) => k.slice(k.indexOf('-') + 1) >= fran && Object.values(v ?? {}).some(Boolean));
+function harFortIn(): boolean { return aktiv.foljd.gjorda.length > 0 || harSkattning() || harVeckans() || harResultat(); }
 // Börja på ändrar vad varje vecka i planen är, så den låses av det som hör till planens veckor: bockar, skattningar, veckans
-// gång och resultaten efter start (Codex 2026-10-25, två gånger: det som förts in hamnade under ett annat steg). Läsningen
-// före låser inte, eftersom den görs för att välja steget (användbarhetsprovet samma dag).
+// gång och resultaten från första passet (Codex 2026-10-25, två gånger: det som förts in hamnade under ett annat steg).
+// Läsningen före låser inte, eftersom den görs för att välja steget (användbarhetsprovet samma dag), också när starten
+// flyttas och läsningens datum inte längre är veckan före (Codex samma dag).
 function borjaLast(): boolean {
-  const fore = new Set(uppfoljningensTillfallen(plan).filter((x) => x.vecka === 0).map((x) => x.nyckel));
-  return aktiv.foljd.gjorda.length > 0 || Object.keys(aktiv.foljd.skattning).length > 0 || Object.keys(aktiv.foljd.vecka).length > 0 || Object.entries(aktiv.foljd.resultat).some(([k, v]) => !fore.has(k) && Object.values(v ?? {}).some(Boolean));
+  return aktiv.foljd.gjorda.length > 0 || harSkattning() || harVeckans() || harResultat(plan.forstaPass ?? '9999');
+}
+// Låset på båda ställena där steget väljs, i formuläret och under Före, så snart något förs in.
+function lasBorja() {
+  if (!borjaval) return;
+  const last = borjaLast();
+  borjaval.disabled = last;
+  $('pl-borja-not').hidden = !last;
+  const fore = document.getElementById('pl-borja-fore') as HTMLSelectElement | null;
+  if (fore) fore.disabled = last;
 }
 const flyttar = () => aktiv.sparad && harFortIn();
 // Det som har förts in men står utanför planen efter en ändring: bockar på dagar utan pass och skattningar i veckor som
@@ -337,6 +352,8 @@ for (const b of nivaknappar) b.addEventListener('click', () => andra(() => { akt
 // 2026-10-24: alla började på Läslista start).
 // Valet står i formuläret och under Före, och båda går hit.
 function valjBorja(falt: HTMLSelectElement) {
+  // Ett val som har hunnit låsas, som när ett resultat skrevs efter att valet ritades, går inte igenom (Codex 2026-10-25).
+  if (borjaLast()) { rendera(); visaBesked($('pl-borja-not').textContent ?? ''); return; }
   const n = Number(falt.value);
   andra(() => { aktiv.val.borja = n > 1 ? n : undefined; aktiv.val.langd = forvaldLangd(mp, n); }, nyPlan(`Planen börjar på ${falt.selectedOptions[0]?.textContent ?? ''}.`), flyttar());
 }
@@ -376,6 +393,9 @@ const borttagna = new Map<string, Elev[]>();
 // Frågan under listan när en ny elev kom till i samma ändring som en annan elev togs bort (K-516): en fråga per ny elev, med
 // de borttagna eleverna att välja bland. Den står kvar tills läraren svarar, också när listan ändras igen (Codex 2026-10-25).
 let elevFraga: { plan: string; par: { ny: Elev; kandidater: Elev[] }[] } = { plan: '', par: [] };
+// De nya elever som läraren har svarat Ny elev för, per plan, så att frågan inte kommer igen medan läraren skriver vidare
+// (verifieringen 2026-10-25: frågan om Dan kom tillbaka efter varje ändring i listan).
+const nyaBesvarade = new Map<string, Set<string>>();
 function lasElevlistan(text: string, r: NonNullable<typeof redigering>) {
   const sett = new Set<string>();
   const dubbletter: string[] = [], utanfor: string[] = [], kortade: string[] = [], enBokstav: string[] = [];
@@ -423,19 +443,20 @@ function lasElevlistan(text: string, r: NonNullable<typeof redigering>) {
 }
 // Ett namn som lämnar listan blir "en elev" i lärarens meningar, så att det inte följer med texten som kopieras när listan
 // inte längre känner det (Codex 2026-10-24).
-function utanGamlaNamn(namn: Elev[]) {
+// kvar: eleverna som står kvar, vars hela namn skyddas (utanNamn i standarden).
+function utanGamlaNamn(namn: Elev[], kvar: Elev[]) {
   if (!namn.length) return;
   const f = aktiv.foljd;
-  const tvatta = <T extends { not?: string }>(x: T): T => (x.not ? { ...x, not: utanNamn(x.not, namn) } : x);
+  const tvatta = <T extends { not?: string }>(x: T): T => (x.not ? { ...x, not: utanNamn(x.not, namn, kvar) } : x);
   f.vecka = Object.fromEntries(Object.entries(f.vecka).map(([k, v]) => [k, tvatta(v)]));
   if (f.avstamning) f.avstamning = tvatta(f.avstamning);
   if (f.utvardering) f.utvardering = tvatta(f.utvardering);
 }
 // Ångra efter en borttagen elev: namnen tillbaka i de meningar som fick "en elev", men inget annat, så att det som har
 // förts in sedan står kvar (Codex 2026-10-24: Ångra lade tillbaka allt som stod när läraren började skriva).
-function medNamnIgen(fore: HelFoljd, namn: Elev[]) {
+function medNamnIgen(fore: HelFoljd, namn: Elev[], kvar: Elev[]) {
   const f = aktiv.foljd;
-  const igen = <T extends { not?: string }>(nu: T | undefined, da: T | undefined): T | undefined => (nu?.not && da?.not && nu.not === utanNamn(da.not, namn) ? { ...nu, not: da.not } : nu);
+  const igen = <T extends { not?: string }>(nu: T | undefined, da: T | undefined): T | undefined => (nu?.not && da?.not && nu.not === utanNamn(da.not, namn, kvar) ? { ...nu, not: da.not } : nu);
   f.vecka = Object.fromEntries(Object.entries(f.vecka).map(([k, v]) => [k, igen(v, fore.vecka[k]) ?? v]));
   f.avstamning = igen(f.avstamning, fore.avstamning);
   f.utvardering = igen(f.utvardering, fore.utvardering);
@@ -465,7 +486,7 @@ function uppdateraElevlistan(lage: 'skriver' | 'tyst' | 'klar' | 'slut') {
     // Ett namn som har lämnat listan blir "en elev" i lärarens meningar när läraren lämnar fältet, inte medan hen skriver, så
     // att ett namn som skrivs om, eller en rad som töms en stund, inte tvättar bort namnet ur meningen. Texten som kopieras
     // räknar listan klar först (samman), så att namnet inte följer med den (steget Samma sak överallt 2026-10-25).
-    utanGamlaNamn(gamla);
+    utanGamlaNamn(gamla, elever);
     if (borta.length) borttagna.set(r.plan, [...(borttagna.get(r.plan) ?? []).filter((x) => !borta.some((b) => b.id === x.id)), ...borta]);
     redigering = null;
   }
@@ -477,7 +498,7 @@ function uppdateraElevlistan(lage: 'skriver' | 'tyst' | 'klar' | 'slut') {
   // eleven står i listan och någon av de borttagna inte gör det.
   const finns = (id: string) => elever.some((e) => e.id === id);
   const kvar = elevFraga.plan === r.plan ? elevFraga.par.map((p) => ({ ...p, kandidater: p.kandidater.filter((k) => !finns(k.id)) })).filter((p) => finns(p.ny.id) && p.kandidater.length) : [];
-  const nyaFragor = borta.length ? nyaElever.filter((e) => !kvar.some((p) => p.ny.id === e.id)).map((ny) => ({ ny, kandidater: borta })) : [];
+  const nyaFragor = borta.length ? nyaElever.filter((e) => !kvar.some((p) => p.ny.id === e.id) && !nyaBesvarade.get(r.plan)?.has(e.id)).map((ny) => ({ ny, kandidater: borta })) : [];
   elevFraga = { plan: r.plan, par: [...kvar, ...nyaFragor] };
   visaElevFraga();
   sparaTyst();
@@ -488,7 +509,7 @@ function uppdateraElevlistan(lage: 'skriver' | 'tyst' | 'klar' | 'slut') {
   const angra = { text: 'Ångra', kvar: true, gor: () => {
     if (aktiv.id !== r.plan) return;
     aktiv.foljd.elever = r.fore;
-    medNamnIgen(r.foljd, gamla);
+    medNamnIgen(r.foljd, gamla, elever);
     elevNot = { plan: '', text: '' };
     elevFraga = { plan: '', par: [] };
     sparaTyst();
@@ -541,16 +562,25 @@ $('pl-elever-fraga').addEventListener('click', (e) => {
   const [nyId, forutId] = (b?.dataset.sammaElev ?? b?.dataset.nyElev ?? '').split('|');
   const x = elevFraga.par.find((p) => p.ny.id === nyId);
   if (!b || !x || elevFraga.plan !== aktiv.id) return;
+  const fragorFore = { plan: elevFraga.plan, par: elevFraga.par.map((p) => ({ ny: p.ny, kandidater: [...p.kandidater] })) };
   elevFraga.par = elevFraga.par.filter((p) => p !== x);
   const forut = x.kandidater.find((k) => k.id === forutId);
   const ny = aktiv.foljd.elever.find((el) => el.id === x.ny.id);
-  if (!b.dataset.sammaElev || !forut || !ny) { visaElevFraga(); return; }
+  if (!b.dataset.sammaElev || !forut || !ny) {
+    if (b.dataset.nyElev) nyaBesvarade.set(aktiv.id, new Set([...(nyaBesvarade.get(aktiv.id) ?? []), x.ny.id]));
+    visaElevFraga();
+    return;
+  }
+  // En borttagen elev kan bara vara en av de nya: den som redan står i listan går inte att välja igen, och de andra frågorna
+  // erbjuder den inte längre (Codex 2026-10-25: två nya elever kunde få samma elevs id).
+  if (aktiv.foljd.elever.some((e) => e.id === forut.id)) { visaElevFraga(); return; }
   const fore = ogonblick();
   sammaElevSom(ny, forut);
+  elevFraga.par = elevFraga.par.map((p) => ({ ...p, kandidater: p.kandidater.filter((k) => k.id !== forut.id) })).filter((p) => p.kandidater.length);
   sparaTyst();
   rendera();
-  // Ångra tar tillbaka listan och frågan, så att läraren kan svara igen.
-  visaBesked(`${ny.namn} är samma elev som ${forut.namn}, med det som förts in.`, { text: 'Ångra', kvar: true, gor: () => { elevFraga.par = [...elevFraga.par, x]; aterstall(fore, 'Elevlistan är som före.'); visaElevFraga(); } });
+  // Ångra tar tillbaka listan och frågorna, så att läraren kan svara igen.
+  visaBesked(`${ny.namn} är samma elev som ${forut.namn}, med det som förts in.`, { text: 'Ångra', kvar: true, gor: () => { elevFraga = fragorFore; aterstall(fore, 'Elevlistan är som före.'); visaElevFraga(); } });
 });
 elevfalt.addEventListener('focus', startaRedigering);
 elevfalt.addEventListener('input', () => {
@@ -563,7 +593,7 @@ $('pl-elever-bort').addEventListener('click', (e) => fragaForst(e.currentTarget 
   const fore = ogonblick();
   andra(() => {
     const kvar = (r: Record<string, Record<string, number>>): Record<string, Record<string, number>> => Object.fromEntries(Object.entries(r).map(([k, v]): [string, Record<string, number>] => [k, v[GRUPPEN] ? { [GRUPPEN]: v[GRUPPEN] } : {}]));
-    utanGamlaNamn(aktiv.foljd.elever);
+    utanGamlaNamn(aktiv.foljd.elever, []);
     aktiv.foljd = { ...aktiv.foljd, elever: [], franvaro: {}, resultat: {}, skattning: kvar(aktiv.foljd.skattning) };
     elevNot = { plan: '', text: '' };
     elevFraga = { plan: '', par: [] };
@@ -1276,7 +1306,8 @@ $('pl-veckan').addEventListener('click', (e) => {
   if (d.forlang) {
     const n = Number(d.forlang);
     if (aktiv.val.langd + forlangSteg(n) > LANGSTA) return;
-    andra(() => { aktiv.val.langd += forlangSteg(n); visa = undefined; }, `Planen är ${forlangText(n)} längre.`, true);
+    // Avstämningen står kvar i sin vecka när insatsen förlängs (mittVeckan i standarden).
+    andra(() => { aktiv.val.mitt ??= mittVeckan(plan) ?? undefined; aktiv.val.langd += forlangSteg(n); visa = undefined; }, `Planen är ${forlangText(n)} längre.`, true);
     $('pl-veckan').scrollIntoView({ block: 'start' });
     return;
   }
@@ -1335,6 +1366,7 @@ $('pl-veckan').addEventListener('input', (e) => {
   if (falt.dataset.resultat) {
     const [nyckel, id] = falt.dataset.resultat.split('|');
     aktiv.foljd.resultat = { ...aktiv.foljd.resultat, [nyckel]: { ...(aktiv.foljd.resultat[nyckel] ?? {}), [id]: text.slice(0, 40) } };
+    lasBorja();
   } else if (falt.dataset.veckonot) {
     const m = falt.dataset.veckonot;
     aktiv.foljd.vecka = { ...aktiv.foljd.vecka, [m]: { ...(aktiv.foljd.vecka[m] ?? {}), not: text.slice(0, 200) } };
@@ -1502,25 +1534,26 @@ function renderaKopia() {
   const text = $('pl-kopia-text');
   const harFoljd = aktiv.folj && harInfort();
   $('pl-kopia-spara').hidden = !aktiv.sparad;
+  $('pl-spara-nere').hidden = aktiv.sparad;
   $('pl-lank').hidden = !aktiv.sparad && !aktiv.franLank;
   const alder = kopiansAlder();
   // Påminnelsen efter en vecka, som Safaris sju dagar (granskningen 2026-10-24).
   text.classList.toggle('pl-paminn', harFoljd && (alder === null || alder > 7));
   text.textContent = !aktiv.sparad && !aktiv.franLank
-    ? 'Har du en kopia av en plan, till exempel från en annan dator? Öppna den här.'
+    ? 'Spara planen, så finns den i den här webbläsaren och går att ladda ner som fil. Har du laddat ner en plan på en annan dator? Öppna den här.'
     : harFoljd
-      ? alder === null ? 'Det du för in finns bara i den här webbläsaren. Spara en kopia som fil där du har skolans filer, så finns den kvar och går att öppna på en annan dator. Länken visar bara planen.'
-        : alder > 7 ? `Senaste kopian är från ${datumText(aktiv.kopia!.slice(0, 10))}. Spara en ny, så kommer det senaste med.` : `Senaste kopian sparades ${datumText(aktiv.kopia!.slice(0, 10))}. Länken visar bara planen; kopian har allt.`
-      : 'Länken visar planen på en annan dator eller telefon. En kopia som fil har allt, också gruppens namn.';
+      ? alder === null ? 'Det du för in finns bara i den här webbläsaren. Ladda ner planen och lägg filen där du har skolans filer, så finns den kvar och går att öppna på en annan dator. Länken visar bara planen.'
+        : alder > 7 ? `Planen laddades senast ner ${datumText(aktiv.kopia!.slice(0, 10))}. Ladda ner den igen, så kommer det senaste med.` : `Planen laddades senast ner ${datumText(aktiv.kopia!.slice(0, 10))}. Länken visar bara planen; filen har allt.`
+      : 'Länken visar planen på en annan dator eller telefon. Planen som fil har allt, också gruppens namn.';
 }
 function sparaKopia() {
   aktiv.kopia = idag;
   const egen = sparadAv();
   if (aktiv.sparad) skrivPlaner([egen, ...lasPlaner().planer.filter((p) => p.id !== aktiv.id)]);
   const fil = JSON.stringify({ typ: KOPIANS_TYP, v: 1, sparad: egen.andrad, plan: egen }, null, 1);
-  laddaNer(new Blob([fil], { type: 'application/json' }), filnamnet('kopia', { vem: aktiv.namn, metod: data.id, datum: idag }));
+  laddaNer(new Blob([fil], { type: 'application/json' }), filnamnet('plan', { vem: aktiv.namn, metod: data.id, datum: idag }));
   renderaKopia();
-  visaBesked('Kopian har hämtats. Lägg filen bland skolans filer. Den har elevernas namn, så dela den inte.');
+  visaBesked('Planen är nedladdad. Lägg filen bland skolans filer. Den har elevernas namn, så dela den inte.');
 }
 $('pl-kopia-spara').addEventListener('click', sparaKopia);
 const tidOrd = (andrad?: string) => (!andrad ? 'tidigare' : andrad.includes('T') ? `${datumText(andrad.slice(0, 10))} kl. ${tidText(andrad.slice(11, 16))}` : datumText(andrad.slice(0, 10)));
@@ -1530,12 +1563,12 @@ $<HTMLInputElement>('pl-kopia-fil').addEventListener('change', async (e) => {
   input.value = '';
   if (!fil) return;
   let innehall: { typ?: string; v?: number; plan?: unknown };
-  try { innehall = JSON.parse(await fil.text()); } catch { visaBesked('Filen är inte en kopia av en plan.'); return; }
+  try { innehall = JSON.parse(await fil.text()); } catch { visaBesked('Filen är inte en nedladdad plan.'); return; }
   // Kopian rensas innan den ersätter något: fälten som sidan kan visa, och för metoden på den här sidan räknas datumen om
   // ur valen (Codex 2026-10-24: en kopia som hade ändrats för hand gjorde sidan obrukbar).
   const p = innehall?.typ === KOPIANS_TYP ? rensaPlan(innehall.plan) : null;
   const valen = p ? lasVal(p.val) : null;
-  if (!p || !valen) { visaBesked('Filen är inte en kopia av en plan.'); return; }
+  if (!p || !valen) { visaBesked('Filen är inte en nedladdad plan.'); return; }
   p.val = kodaVal(valen.val);
   if (p.metod === data.id) {
     const pl = planera(mp, valen.val);
@@ -1545,7 +1578,7 @@ $<HTMLInputElement>('pl-kopia-fil').addEventListener('change', async (e) => {
   skrivVantande(true);
   const finns = lasPlaner().planer.find((x) => x.id === p.id);
   const oppna = () => {
-    if (!skrivPlaner([p, ...lasPlaner().planer.filter((x) => x.id !== p.id)])) { visaBesked('Kopian gick inte att spara i den här webbläsaren.'); return; }
+    if (!skrivPlaner([p, ...lasPlaner().planer.filter((x) => x.id !== p.id)])) { visaBesked('Planen i filen gick inte att spara i den här webbläsaren.'); return; }
     // En kopia av en annan metods plan öppnas på den metodens sida.
     if (p.metod !== data.id) { location.href = planensAdress(p); return; }
     aktiv = franSparad(p);
@@ -1555,11 +1588,11 @@ $<HTMLInputElement>('pl-kopia-fil').addEventListener('change', async (e) => {
     uppdateraAdressen();
     rendera();
     ($('pl-andra') as HTMLDetailsElement).open = false;
-    visaBesked('Kopian är öppnad, med allt som förts in.', finns ? { text: 'Ångra', kvar: true, gor: () => { skrivPlaner([finns, ...lasPlaner().planer.filter((x) => x.id !== finns.id)]); aktiv = franSparad(finns); plan = planera(mp, aktiv.val); uppdateraAdressen(); rendera(); visaBesked('Planen är som före kopian.'); } } : undefined);
+    visaBesked('Planen är öppnad ur filen, med allt som förts in.', finns ? { text: 'Ångra', kvar: true, gor: () => { skrivPlaner([finns, ...lasPlaner().planer.filter((x) => x.id !== finns.id)]); aktiv = franSparad(finns); plan = planera(mp, aktiv.val); uppdateraAdressen(); rendera(); visaBesked('Planen är som före kopian.'); } } : undefined);
   };
   // En kopia som skulle ersätta något som har ändrats efter den frågar först, också samma dag (granskningen 2026-10-24).
   if (finns && innehallAv(finns) !== innehallAv(p) && (finns.andrad ?? '') >= (p.andrad ?? '')) {
-    fragaForst(input.closest('label') as HTMLElement, `Planen i den här webbläsaren ändrades ${tidOrd(finns.andrad)}, efter kopian från ${tidOrd(p.andrad)}. Ersätta den med kopian?`, 'Ersätt med kopian', oppna);
+    fragaForst(input.closest('label') as HTMLElement, `Planen i den här webbläsaren ändrades ${tidOrd(finns.andrad)}, och planen i filen ${tidOrd(p.andrad)}. Ersätta den med planen i filen?`, 'Ersätt med filen', oppna);
     return;
   }
   oppna();
@@ -1636,6 +1669,12 @@ document.addEventListener('click', (e) => {
   if (e.detail > 0 && toastVid > tryckVid) return;
   if (!t.hidden && !t.contains(e.target as Node)) { t.hidden = true; toastGor = null; }
 }, true);
+// Ett besked går också bort när läraren skriver något utanför det, så att Ångra aldrig tar bort det som skrevs efter
+// beskedet (Codex 2026-10-25: ögonblicksbilden bakom Ångra hade inte det som förts in sedan).
+document.addEventListener('input', (e) => {
+  const t = $('pl-toast');
+  if (!t.hidden && !t.contains(e.target as Node)) { t.hidden = true; toastGor = null; }
+}, true);
 $('pl-toast').addEventListener('click', (e) => {
   const b = (e.target as Element).closest('button');
   if (!b) return;
@@ -1697,7 +1736,8 @@ function fragaForst(knapp: HTMLElement, fraga: string, ja: string, gor: () => vo
   });
 }
 
-$('pl-spara').addEventListener('click', () => {
+// Spara planen, överst och längst ned före sparandet.
+function sparaPlanen() {
   aktiv.sparad = true;
   aktiv.franLank = false;
   if (!spara()) { aktiv.sparad = false; sparfel(); return; }
@@ -1715,7 +1755,9 @@ $('pl-spara').addEventListener('click', () => {
   // åtgärdsprogrammet under planen (användbarhetsprovet 2026-10-25: efter Spara stod sidan kvar utan besked).
   tillVy(undefined);
   visaBesked(nuVy() === 'fore' ? 'Planen är sparad. Börja med det du gör före första passet.' : 'Planen är sparad i den här webbläsaren.', { text: 'Kalendern och åtgärdsprogrammet', gor: () => { $('pl-planen').scrollIntoView({ block: 'start' }); $('pl-planen-rubrik').focus({ preventScroll: true }); } });
-});
+}
+$('pl-spara').addEventListener('click', sparaPlanen);
+$('pl-spara-nere').addEventListener('click', sparaPlanen);
 // Texten till åtgärdsprogrammet: åtgärden, målet, omfattningen, vad eleven arbetar med och uppföljningen.
 function atgardstext() {
   const genomforda = aktiv.folj && aktiv.foljd.gjorda.length ? { genomforda: plan.pass.filter((p) => gjort(passetsDag(p))).length } : {};
@@ -1753,7 +1795,7 @@ $('pl-kalender').addEventListener('click', () => {
 });
 $('pl-ta-bort').addEventListener('click', (e) => {
   // Frågan säger det som gäller: med det som förts in, och om det finns en kopia (granskningen 2026-10-24).
-  const fraga = !(aktiv.folj && harInfort()) ? 'Ta bort planen?' : aktiv.kopia ? `Ta bort planen med allt du har fört in? Din senaste kopia är från ${datumText(aktiv.kopia.slice(0, 10))}.` : 'Ta bort planen med allt du har fört in? Du har ingen kopia av den.';
+  const fraga = !(aktiv.folj && harInfort()) ? 'Ta bort planen?' : aktiv.kopia ? `Ta bort planen med allt du har fört in? Du laddade senast ner planen ${datumText(aktiv.kopia.slice(0, 10))}.` : 'Ta bort planen med allt du har fört in? Du har inte laddat ner den.';
   fragaForst(e.currentTarget as HTMLElement, fraga, 'Ta bort planen', () => {
     skrivVantande(true);
     const borttagen = lasPlaner().planer.find((p) => p.id === aktiv.id) ?? sparadAv();
@@ -1804,10 +1846,12 @@ function rendera() {
 addEventListener('storage', (e) => {
   if (e.key !== null && e.key !== 'insatser') return;
   const p = aktiv.sparad ? lasPlaner().planer.find((x) => x.id === aktiv.id) : undefined;
+  // Ett besked med Ångra gäller det som stod före, så det går bort när en annan flik har ändrat planen (Codex 2026-10-25).
   if (aktiv.sparad && !p) {
     const egna = mina();
     aktiv = egna.length ? franSparad(egna[0]) : nyAktiv();
     visa = undefined; olikaTider = false; redigering = null;
+    visaBesked('');
     plan = planera(mp, aktiv.val);
     history.replaceState(null, '', aktiv.sparad ? `#${kodaVal(aktiv.val, { id: aktiv.id })}` : location.pathname);
     rendera();
@@ -1820,6 +1864,7 @@ addEventListener('storage', (e) => {
     const vy = visa;
     aktiv = franSparad(p);
     visa = vy; redigering = null;
+    visaBesked('');
     plan = planera(mp, aktiv.val);
     uppdateraAdressen();
     rendera();

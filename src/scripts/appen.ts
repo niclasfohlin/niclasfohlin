@@ -4,13 +4,14 @@
 // | Var | När raden visas |
 // |---|---|
 // | Android och andra Chromium-webbläsare | När webbläsaren säger att appen går att installera (beforeinstallprompt); knappen visar telefonens egen fråga. På Planera insatsen först när planen är sparad, eftersom appen delar minne med Chrome och planen då finns i appen |
-// | iPhone och iPad | Alltid, med tre steg, eftersom Safari inte kan installera med en knapp. Appen har sitt eget minne, skilt från Safari, så på Planera insatsen säger raden före sparandet att planen görs i appen, och efter hur en sparad plan flyttas dit med en kopia |
+// | iPhone och iPad | Alltid, med tre steg, eftersom Safari inte kan installera med en knapp. Appen har sitt eget minne, skilt från Safari, så på Planera insatsen säger raden före sparandet att planen görs i appen, och efter hur en sparad plan flyttas dit som fil |
 // | Aldrig | I appen själv, på en dator, i Facebooks och Instagrams egna webbläsare, och i 30 dagar efter krysset. När appen är installerad erbjuder Chrome ingen installation, så raden syns inte heller då |
 //
 // Inget av det läraren har skrivit skickas någonstans. Statistiken får bara trycken på knappen, installationen och att
 // appen används, en gång om dagen (app:i-appen), utan namn eller värden.
 import { goatcounter, idagLokalt, lasPlaner } from './insatser-lagring';
 import { iAppen as iAppenNu, webblasaren } from './webblasaren';
+import { PLANKNAPPAR } from '../lib/standard/index.js';
 
 // Bara krysset gömmer raden i 30 dagar. Att appen installerades sparas inte: tas appen bort märker sidan det inte, och
 // raden ska då komma tillbaka (Niclas 2026-10-25: "Jag avinstallerade appen men nu dyker inte upp igen att installera
@@ -61,13 +62,13 @@ if (rad && !iAppen && pekskarm && !egenWebblasare && !stangdNyss()) {
       knapp.setAttribute('aria-expanded', String(!steg.hidden));
       if (planera && harPlan()) {
         om.textContent = 'Ha planen på hemskärmen, ett tryck bort.';
-        not.textContent = 'Appen har sitt eget minne, skilt från Safari. Tryck på Spara en kopia här, och öppna kopian i appen med Öppna en kopia.';
+        not.textContent = `Appen har sitt eget minne, skilt från Safari. Tryck på ${PLANKNAPPAR.laddaNer} här, och öppna filen i appen med ${PLANKNAPPAR.oppna}.`;
       } else if (planera) {
         om.textContent = 'Planerar du i telefonen? Lägg appen på hemskärmen först och gör planen där.';
         not.textContent = 'Appen har sitt eget minne, skilt från Safari, så en plan som görs i appen finns i appen.';
       } else {
         om.textContent = 'Metodbanken och Planera insatsen på hemskärmen.';
-        not.textContent = lasPlaner().planer.length ? 'Appen har sitt eget minne, skilt från Safari. En plan du har sparat här flyttar du dit med Spara en kopia och Öppna en kopia.' : '';
+        not.textContent = lasPlaner().planer.length ? `Appen har sitt eget minne, skilt från Safari. En plan du har sparat här flyttar du dit med ${PLANKNAPPAR.laddaNer} och ${PLANKNAPPAR.oppna}.` : '';
       }
       not.hidden = !not.textContent;
     } else {

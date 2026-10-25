@@ -178,7 +178,7 @@ try {
     await f.kor(`document.getElementById('pl-spara').click()`);
     await vanta(300);
     const efter = await f.rad();
-    ska('iPhone, Planera insatsen: efter sparandet hur planen flyttas med en kopia', efter?.syns && efter.om.startsWith('Ha planen på hemskärmen') && efter.not.includes('Spara en kopia'), efter);
+    ska('iPhone, Planera insatsen: efter sparandet hur planen flyttas som fil', efter?.syns && efter.om.startsWith('Ha planen på hemskärmen') && efter.not.includes('Ladda ner planen') && efter.not.includes('Öppna en nedladdad plan'), efter);
   }
   await f.oppna(metodbankAdress);
   await f.kor(`document.querySelector('[data-app-stang]').click()`);

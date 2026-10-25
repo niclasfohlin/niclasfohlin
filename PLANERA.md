@@ -88,12 +88,12 @@ Det som händer en lärare med en grupp under en insats, på ett ställe. Planpr
 | S3 | Planen går över nyår | `över nyåret med vecka 53 som lov`; `kalenderveckornas spann, också över nyår` |
 | S4 | En vecka tas om | `upprepad vecka ger 21 pass`; `texten till åtgärdsprogrammet följer den upprepade veckan` |
 | S5 | Ett pass flyttas eller ställs in, och Ångra | `flyttat pass`; `inställt pass ger 17 pass`; `ångrat inställt pass`; `sista passet efter datum när det sista passet flyttas före ett annat` |
-| S6 | Gruppen börjar högre upp i en stege | `en stege som börjar på vecka 3`; `metodens veckor som planens`; `stegen: rutan med veckans fokus säger inte metodens vecka`; `stegen: variantens mening och metodens texter med planens vecka`; `kalendern skriver metodens veckor som planens`; `Börja på står under Före med formulärets steg`; `läsningen före låser inte Börja på`; `en bock låser Börja på, under Före och i formuläret` |
+| S6 | Gruppen börjar högre upp i en stege | `en stege som börjar på vecka 3`; `metodens veckor som planens`; `stegen: rutan med veckans fokus säger inte metodens vecka`; `stegen: variantens mening och metodens texter med planens vecka`; `kalendern skriver metodens veckor som planens`; `Börja på står under Före med formulärets steg`; `läsningen före låser inte Börja på`; `en bock låser Börja på, under Före och i formuläret`; `läsningen före låser inte Börja på när starten flyttas`; `ett resultat efter start låser Börja på direkt`; `ett låst Börja på ändrar inte planen` |
 | S7 | Passet ser annorlunda ut vissa veckor | `stegen: passet i vecka 1 har variantens tider`; `stegen: kalendern visar passet som sidan, med ett tidsschema`; `metodens sida säger varianten med standardens mening` |
 | S8 | Läraren sätter tider, olika för olika dagar | `olika tider olika dagar`; `kalenderfilen med tider har ett pass per händelse med klockslaget` |
 | S9 | Ett namn rättas, också efter en paus | `ett rättat namn behåller elevens skattningar`; `en paus med raden tom behåller eleven`; `en paus mitt i ett namn byter inte elev`; `ett rättat namn sägs i beskedet, med Ångra`; `en rad som töms en stund behåller namnet i lärarens mening` |
-| S10 | En elev slutar och en ny kommer på samma rad | `en ny elev på en annan elevs rad är en ny elev`; `sidan frågar om det är samma elev`; `en obesvarad fråga står kvar`; `Samma elev ger Nora Beas skattningar`; `Ångra tar tillbaka listan och frågan`; `en borttagen rad och ett nytt namn: läraren väljer bland de borttagna` |
-| S11 | En elev tas bort och kommer tillbaka | `en borttagen rad ger inte nästa elev dess id`; `Ångra lägger tillbaka elevlistan`; `Bea får tillbaka det som förts in när namnet skrivs igen`; `en elev som togs bort tidigare känns igen och är ingen fråga` |
+| S10 | En elev slutar och en ny kommer på samma rad | `en ny elev på en annan elevs rad är en ny elev`; `sidan frågar om det är samma elev`; `en obesvarad fråga står kvar`; `Samma elev ger Nora Beas skattningar`; `Ångra tar tillbaka listan och frågan`; `en borttagen rad och ett nytt namn: läraren väljer bland de borttagna`; `en borttagen elev kan bara vara en av de nya`; `Ångra tar tillbaka båda frågorna`; `frågan kommer inte igen efter svaret Ny elev` |
+| S11 | En elev tas bort och kommer tillbaka | `en borttagen rad ger inte nästa elev dess id`; `Ångra lägger tillbaka elevlistan`; `Bea får tillbaka det som förts in när namnet skrivs igen`; `en elev som togs bort tidigare känns igen och är ingen fråga`; `namnen ur en text skyddar de elever som står kvar` |
 | S12 | För många elever och samma namn två gånger | `en trettonde elev och samma namn två gånger sägs under listan, och gruppens storlek` |
 | S13 | Två grupper i samma metod | `två planer för metoden`; `pågående insatser: planerna i sina veckor, och :2 för en andra plan för samma metod` |
 | S14 | Samma plan i två flikar | `en bock i en annan flik syns i den här` |
@@ -101,8 +101,8 @@ Det som händer en lärare med en grupp under en insats, på ett ställe. Planpr
 | S16 | Planen på en annan dator, med länken eller kopian | `planen ur länken visas utan namn och utan uppföljning`; `kopian öppnas med allt`; `en kopia som har ändrats för hand öppnas utan fel` |
 | S17 | Sidan öppnas i en apps egen webbläsare | `vägen ut på iPhone: Safari, med planen` |
 | S18 | Helgen före en ny vecka | `på söndagen gäller rutan nästa pass och dess vecka` |
-| S19 | Insatsen är slut: utvärdering och förlängning | `efter insatsen: sidan visar Efter insatsen`; `förläng med två veckor`; `förlängningen flyttar inte resultatet efter` |
-| S20 | Filerna som laddas ner, var och en med eget namn | `filnamnen på det som laddas ner`; `kalenderfilens namn säger vad, metoden och datumet`; `kopians namn säger kopia, gruppen, metoden och datumet` |
+| S19 | Insatsen är slut: utvärdering och förlängning | `efter insatsen: sidan visar Efter insatsen`; `förläng med två veckor`; `förlängningen flyttar inte resultatet efter`; `förlängningen flyttar inte avstämningen`; `en förlängd insats har kvar avstämningens vecka` |
+| S20 | Filerna som laddas ner, var och en med eget namn | `filnamnen på det som laddas ner`; `kalenderfilens namn säger vad, metoden och datumet`; `planens fil heter plan, gruppen, metoden och datumet`; `förslaget har Spara planen också längst ned` |
 | S21 | Elevernas namn lämnar aldrig webbläsaren | `ett namn som lämnar listan följer inte med texten som kopieras medan läraren skriver`; `sammanställningen kopieras utan namn`; `inga namn i statistikens händelser`; `länken till planen utan namnet` |
 | S22 | Dagens pass är gjort, och en vecka längre fram | `nästa pass som inte är bockat, med de bockade före det`; `ett bockat pass ger nästa pass i rutan, och rutan säger det`; `utan bocken gäller rutan passet igen`; `en vecka som inte har börjat har streckade ringar och inga bockar`; `en vecka som inte har börjat säger när den går att skatta, utan skalan` |
 
@@ -192,6 +192,7 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | Passet på sidan och i kalendern, med tidsschemats varianter | `passetsBeskrivning`, `delensTid`, `variantensMening`, `variantenFor`, `tidsschematsFel` och `varianternasFel` |
 | Metodens texter i planen | `planensInledning`, `planensTexter`, `visadeTexter`, `planensRamFel`, `rollensRad` och `planensCitatFel` |
 | Filnamnen på det som laddas ner | `filnamnet` |
+| Knapparnas namn för planen som fil | `PLANKNAPPAR` |
 | Uppföljningen | `uppfoljningensNamn`, `uppfoljningensRad`, `uppfoljningensRader` och `resultatText` |
 | Skattningen | `skattningenText`, `elevensVarden`, `skattadeVeckor`, `skattningenMittI` och `riktningText` |
 | Nästa pass | `nastaPass`, och `nastaObockade` för rutan med nästa pass, som hoppar över det som är bockat |
@@ -226,6 +227,8 @@ En ny sak som visas på flera ställen får sin rot och sitt prov i samma commit
 | En mening i metoden som säger passets tider, veckor eller delar är data, inte text. Den får ett fält i metoden, som sidan och planen läser, och spärren stoppar meningen | K-515: Läslistors vecka 1–3 stod i en mening i tidsschemat, i lathunden och på lektionskortet med var sina ord, och planen hade en egen kopia. Sidan och kalendern valde delarna var för sig |
 | Det som sparas om en elev, ett pass eller en vecka behöver en nyckel som håller när det runt den ändras. Pröva vad som händer när det nyckeln bygger på byts: raden får ett annat namn, passet en annan dag, veckan ett lov före sig | K-516: elevlistan visste vem en rad var bara genom raden, så en ny elev fick den gamlas skattningar. Nu avgör förnamnet, och läraren får frågan när det inte räcker |
 | Ett värde som visas på flera ställen har en funktion, också en fils namn | K-519: alla sammanställningar hette lika |
+| Provverktyget lämnar inte ett fält och följer inte fokus som en webbläsare gör. Ett fynd som bara verktyget framkallar lagas där det går ut, som texten som kopieras, aldrig genom att skriva om det läraren har skrivit medan hen skriver | 2026-10-25: namnen tvättades ur lärarens meningar medan hen skrev, efter ett fynd där verktyget kopierade utan att lämna elevlistan, och en rad som tömdes en stund tappade namnet i meningen för gott |
+| En regel om ett pass gäller också ett pass som har flyttats eller bockats i förväg: pröva regeln med provets flyttade pass | Rutan med nästa pass hoppade först bara över dagens bockade pass, och provet hade flyttat pass 8 till dagen efter |
 
 ## Ändringar
 

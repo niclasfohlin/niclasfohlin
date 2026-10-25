@@ -3300,8 +3300,10 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
   }
   if (d.mal) {
     ut.push(h2(d.mal.rubrik));
-    // Metodens övergripande mål, som på sidan (K-522).
-    ut.push(stycke(malensMening(d.mal.overgripande), { hallIhop: true }));
+    // Metodens övergripande mål, som på sidan (K-522). Det hålls inte ihop med listan under, så att avsnittet kan delas efter
+    // målet där det inte ryms: Google ritade metodens text längre än Word och flyttade hela avsnittet till nästa sida, och
+    // blocket tog en sida mer i Ljudlek i grupp (googleprov 2026-10-25). Texten före listan och listan hålls ihop.
+    ut.push(stycke(malensMening(d.mal.overgripande)));
     ut.push(stycke(d.mal.text, { hallIhop: true }));
     ut.push(...bockar(d.mal.punkter, 2));
     filmVid({ avsnitt: 'mal' });

@@ -38,7 +38,12 @@ export function webblasaren(ua = navigator.userAgent, o: { iAppen?: boolean; mac
     : /GSA\//.test(ua) ? 'Google-appens'
     // På iPhone har Safari och, sedan iOS 16.4, Chrome, Edge och Firefox Safari i sitt namn, men inte en apps egen
     // webbläsare (granskningen 2026-10-25).
-    : ios && !/Safari\//.test(ua) ? 'en apps' : '';
+    : ios && !/Safari\//.test(ua) ? 'en apps'
+    // På Android har en apps egen webbläsare (WebView) märket wv, som Google säger att sajter kan leta efter om inte appen
+    // har bytt ut namnet (Android Developers Blog, "User-Agent Reduction on Android WebView", december 2024). LinkedIns
+    // webbläsare på Android saknar LinkedInApp i namnet (Niclas 2026-10-25: "knappen om webbläsare kom ej fram trots
+    // linkedin browser").
+    : android && /;\s*wv\)/.test(ua) ? 'en apps' : '';
   return { app, ios, android };
 }
 

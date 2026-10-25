@@ -123,6 +123,7 @@ if (tsMp) {
   ska('dagarna med samma tid', s.dagarText({ ...val, tider: { 1: ['09:20', '10:00'], 3: ['09:20', '10:00'], 5: ['09:20', '10:00'] } }) === 'måndag, onsdag och fredag kl. 9.20–10.00');
   ska('dagarna med olika tider', s.dagarText({ ...val, tider: { 1: ['09:20', '10:00'], 3: ['13:00', '13:40'] } }) === 'måndag kl. 9.20–10.00, onsdag kl. 13.00–13.40 och fredag utan tid');
   ska('målet som mening', s.malText('kunna läsa mellan raderna') === 'Kunna läsa mellan raderna.' && s.malText('  Läsa!  ') === 'Läsa!' && s.malText('') === '');
+  ska('namnen ur en text skyddar de elever som står kvar', s.utanNamn('Ali S klarade uppgiften. Ali var borta, och Alis par läste.', [{ namn: 'Ali' }], [{ namn: 'Ali S' }]) === 'Ali S klarade uppgiften. En elev var borta, och en elevs par läste.', s.utanNamn('Ali S klarade uppgiften. Ali var borta, och Alis par läste.', [{ namn: 'Ali' }], [{ namn: 'Ali S' }]));
   ska('namnen ur en text', s.utanNamn('Bea behöver mer stöd. Alis par läste med bea, inte Alibaba.', [{ namn: 'Bea' }, { namn: 'Ali Test' }]) === 'En elev behöver mer stöd. En elevs par läste med en elev, inte Alibaba.', s.utanNamn('Bea behöver mer stöd. Alis par läste med bea, inte Alibaba.', [{ namn: 'Bea' }, { namn: 'Ali Test' }]));
   // Texten till åtgärdsprogrammet.
   const plan = s.planera(tsMp, val);
@@ -174,6 +175,8 @@ if (tsMp) {
   const p = s.planera(tsMp, val);
   ska('mitten av sex veckor är vecka 3', s.mittVeckan(p) === 3);
   ska('mitten av åtta veckor är vecka 4', s.mittVeckan(s.planera(tsMp, { ...val, langd: 8 })) === 4);
+  // En förlängd insats har kvar avstämningen i sin vecka, och länken bär den (verifieringen 2026-10-25).
+  ska('en förlängd insats har kvar avstämningens vecka', s.mittVeckan(s.planera(tsMp, { ...val, langd: 8, mitt: 3 })) === 3 && s.lasVal(`#${s.kodaVal({ ...val, langd: 8, mitt: 3 })}`).val.mitt === 3);
   const f = { gjorda: ['2026-11-02', '2026-11-04', '2026-11-06'], elever: [{ id: 'a1', namn: 'Ali' }, { id: 'b2', namn: 'Bea' }], franvaro: { '2026-11-04': ['b2'] }, vecka: { '2026-11-02': { varde: 3, not: 'Gruppen kom igång' } }, skattning: { '2026-11-02': { a1: 2, b2: 3 }, '2026-11-09': { a1: 3, b2: 3 } }, resultat: { '0-2026-11-02': { a1: '4 av 8' } }, avstamning: { beslut: 'fortsatt' } };
   const sm = s.sammanstallning(p, f, '2026-11-18');
   ska('sammanställningen räknar passen', sm.gjorda === 3 && sm.varit === 8 && sm.planerade === 18 && !sm.slut);
@@ -623,11 +626,13 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
   }
   // Målet (K-522): metodens övergripande mål i en mening, och lektionskortets mål som metodens, åt båda hållen.
   const llMal = metod('laslistor-i-grupp');
-  ska('målet: meningen och lektionskortets mål', s.malensMening(llMal.mal.overgripande) === 'Det övergripande målet är att eleven ska kunna binda ihop ljuden till ett ord och läsa det med flyt.' && s.kortetsMalFel(llMal, ['**Mål:** kunna binda ihop ljuden till ett ord och läsa det med flyt.'], 'Kortet').length === 0 && s.kortetsMalFel(llMal, ['**Mål:** kunna läsa ord.'], 'Kortet').length === 1 && s.malText(llMal.mal.overgripande) === 'Kunna binda ihop ljuden till ett ord och läsa det med flyt.', s.malensMening(llMal.mal.overgripande));
+  ska('målet: meningen och lektionskortets mål', s.malensMening(llMal.mal.overgripande) === 'Det övergripande målet är att eleven ska kunna binda ihop ljuden till ett ord och läsa det med flyt.' && s.kortetsMalFel(llMal, ['**Mål:** kunna binda ihop ljuden till ett ord och läsa det med flyt.'], 'Kortet').length === 0 && s.kortetsMalFel(llMal, ['**Mål:** kunna läsa ord.'], 'Kortet').length === 1 && s.kortetsMalFel(llMal, ['Ett kort utan mål.'], 'Kortet').length === 1 && s.malText(llMal.mal.overgripande) === 'Kunna binda ihop ljuden till ett ord och läsa det med flyt.', s.malensMening(llMal.mal.overgripande));
   // Eleverna (K-516): samma förnamn är samma elev, och ett annat förnamn en ny, också ett som skiljer på en bokstav.
   ska('eleven: förnamnet och samma elev', s.forstaOrdet(' Ali  S. ') === 'Ali' && s.forstaOrdet('Lässchema TIL') === 'Lässchema' && s.sammaElev('Ali', 'Ali S.') && s.sammaElev('bea', 'Bea S') && !s.sammaElev('Anna', 'Nova') && !s.sammaElev('Alva', 'Alma') && !s.sammaElev('Ana', 'Anna') && !s.sammaElev('', 'Ali'));
   // Filnamnen (K-519): vad, vem, metoden och datumet, utan å, ä och ö, och det som saknas hoppas över.
-  ska('filnamnen på det som laddas ner', s.filnamnet('sammanstallning', { vem: 'Ali Öberg', metod: 'textsamtal-i-grupp', datum: '2026-10-25' }) === 'sammanstallning-Ali-Öberg-textsamtal-i-grupp-2026-10-25.pdf' && s.filnamnet('sammanstallning', { vem: 'Åsa', metod: 'x', datum: '2026-10-25' }) !== s.filnamnet('sammanstallning', { vem: 'Asa', metod: 'x', datum: '2026-10-25' }) && s.filnamnet('sammanstallning', { grupp: true, vem: '', metod: 'til-i-grupp', datum: '2026-10-25' }) === 'sammanstallning-gruppen-til-i-grupp-2026-10-25.pdf' && s.filnamnet('sammanstallning', { grupp: true, vem: 'Ali', metod: 'x', datum: '2026-10-25' }) !== s.filnamnet('sammanstallning', { vem: 'Ali', metod: 'x', datum: '2026-10-25' }) && s.filnamnet('kopia', { vem: 'Läsgrupp 2B: tisdag/torsdag', metod: 'laslistor-i-grupp', datum: '2026-10-25' }) === 'kopia-Läsgrupp-2B-tisdag-torsdag-laslistor-i-grupp-2026-10-25.json' && s.filnamnet('kalender', { metod: 'seriesamtal', datum: '2026-10-25' }) === 'kalender-seriesamtal-2026-10-25.ics');
+  // Planen som fil heter som knapparna, och knappen som läser filen heter inte Ladda upp: filen lämnar aldrig datorn (Niclas 2026-10-25).
+  ska('knapparnas namn för planen som fil', s.PLANKNAPPAR.spara === 'Spara planen' && s.PLANKNAPPAR.laddaNer === 'Ladda ner planen' && s.PLANKNAPPAR.oppna === 'Öppna en nedladdad plan' && !/ladda upp/i.test(Object.values(s.PLANKNAPPAR).join()));
+  ska('filnamnen på det som laddas ner', s.filnamnet('sammanstallning', { vem: 'Ali Öberg', metod: 'textsamtal-i-grupp', datum: '2026-10-25' }) === 'sammanstallning-Ali-Öberg-textsamtal-i-grupp-2026-10-25.pdf' && s.filnamnet('sammanstallning', { vem: 'Åsa', metod: 'x', datum: '2026-10-25' }) !== s.filnamnet('sammanstallning', { vem: 'Asa', metod: 'x', datum: '2026-10-25' }) && s.filnamnet('sammanstallning', { grupp: true, vem: '', metod: 'til-i-grupp', datum: '2026-10-25' }) === 'sammanstallning-gruppen-til-i-grupp-2026-10-25.pdf' && s.filnamnet('sammanstallning', { grupp: true, vem: 'Ali', metod: 'x', datum: '2026-10-25' }) !== s.filnamnet('sammanstallning', { vem: 'Ali', metod: 'x', datum: '2026-10-25' }) && s.filnamnet('plan', { vem: 'Läsgrupp 2B: tisdag/torsdag', metod: 'laslistor-i-grupp', datum: '2026-10-25' }) === 'plan-Läsgrupp-2B-tisdag-torsdag-laslistor-i-grupp-2026-10-25.json' && s.filnamnet('kalender', { metod: 'seriesamtal', datum: '2026-10-25' }) === 'kalender-seriesamtal-2026-10-25.ics');
   ska('meningarna i en text, med förkortningar och citat', JSON.stringify(s.meningarna('Läs t.ex. boken. Sedan v. 45 och kl. 9. ”Hej!” sa hon. Slut')) === JSON.stringify(['Läs t.ex. boken.', 'Sedan v. 45 och kl. 9.', '”Hej!” sa hon.', 'Slut']) && s.meningarna('').length === 0 && s.meningarI('Två ord. Tre ord här.') === 2 && s.meningarI('Fisken i sjön är mås. Och gräs.') === 2 && s.slutarMedPunkt('Klart.') && !s.slutarMedPunkt('Inte klart'), s.meningarna('Läs t.ex. boken. Sedan v. 45 och kl. 9. ”Hej!” sa hon. Slut'));
   const lagring = foljd(await import('../src/scripts/insatser-lagring.ts'));
   ska('planens adress och dagens datum', lagring.planensAdress({ metod: 'til-i-grupp', val: 's=2026-11-02&d=135&l=6', id: 'abc123' }, 3) === '/stodundervisning/til-i-grupp/planera#s=2026-11-02&d=135&l=6&p=abc123&v=3' && /^\d{4}-\d{2}-\d{2}$/.test(lagring.idagLokalt()));
@@ -653,6 +658,8 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
     [`${IOS} [FBAN/FBIOS;FBAV/485.0.0.43.70;FBLC/sv_SE]`, 'Facebooks', true], [`${ANDROID} [FB_IAB/FB4A;FBAV/485.0.0.43.70;]`, 'Facebooks', false],
     [`${IOS} [FBAN/MessengerForiOS;FBAV/485.0]`, 'Messengers', true], [`${IOS} Instagram 350.0.0.0 (iPhone15,2; iOS 18_0; sv_SE)`, 'Instagrams', true],
     [`${IOS} [LinkedInApp]/9.30`, 'LinkedIns', true], [`${IOS} GSA/340.0.0 Safari/604.1`, 'Google-appens', true], [`${IOS} TikTok 37.0`, 'en apps', true],
+    // En apps webbläsare på Android utan appens namn, som LinkedIns (Niclas 2026-10-25), känns igen på märket wv.
+    [ANDROID, 'en apps', false], [`${ANDROID} [LinkedInApp]/4.1`, 'LinkedIns', false],
     // Vanliga webbläsare får inget besked (Niclas samma dag: "Se till att dessa knappar bara dyker upp i sådana speciella
     // webbläsare som Facebook egen inbyggda"): Safari, Chrome, Firefox, Edge och DuckDuckGo på iPhone, och Chrome, Samsung
     // Internet och Firefox på Android.
@@ -986,6 +993,8 @@ try {
   for (const b of [320, 360, 390]) { await f.bredd(b); await vanta(150); sant(`förslaget rullar inte i sidled i ${b} punkter`, !(await rullar(f))); }
   await f.dator();
   await f.bredd(390); await vanta(150); await f.bild('1-forslag-telefon'); await f.dator(); await vanta(150); await f.bild('1-forslag-dator');
+  // Spara planen står också längst ned före sparandet, med knapparnas namn ur roten (Niclas 2026-10-25).
+  sant('förslaget har Spara planen också längst ned', (await f.kor(`!document.getElementById('pl-spara-nere').hidden && document.getElementById('pl-spara-nere').textContent === 'Spara planen' && document.getElementById('pl-kopia-spara').hidden`)) && (await f.text('.pl-filknapp'))?.startsWith('Öppna en nedladdad plan'), await f.text('#pl-kopia'));
   sant('förslaget har valen öppna och ingen vecka', await f.kor(`document.getElementById('pl-andra').open && document.getElementById('pl-veckan').hidden`));
   sant('förslaget har inte texten till åtgärdsprogrammet', await f.kor(`document.getElementById('pl-ap').hidden`));
   sant('Följ insatsen är inte förvalt', !(await f.kor(`document.getElementById('pl-folj').checked`)) && (await f.kor(`document.getElementById('pl-elevruta').hidden`)));
@@ -1339,7 +1348,7 @@ try {
   writeFileSync(kopiefil, kopian ?? '');
   await f.filTill('#pl-kopia-fil', kopiefil);
   await vanta(600);
-  sant('kopian öppnas med allt', (await f.kor(`JSON.parse(localStorage.getItem('insatser') ?? '{"planer":[]}').planer[0]?.foljd?.elever?.length`)) === 2 && (await f.text('#pl-toast'))?.includes('Kopian är öppnad') && (await f.kor(`!!document.querySelector('#pl-veckan [data-bock]')`)), await f.text('#pl-toast'));
+  sant('kopian öppnas med allt', (await f.kor(`JSON.parse(localStorage.getItem('insatser') ?? '{"planer":[]}').planer[0]?.foljd?.elever?.length`)) === 2 && (await f.text('#pl-toast'))?.includes('Planen är öppnad ur filen') && (await f.kor(`!!document.querySelector('#pl-veckan [data-bock]')`)), await f.text('#pl-toast'));
   // En kopia som har ändrats för hand öppnas utan att sidan stannar, också efter omladdning (Codex 2026-10-24).
   const trasigKopia = JSON.parse(kopian ?? '{"plan":{"foljd":{}}}');
   Object.assign(trasigKopia.plan, { id: 'trasig1', schema: 5 });
@@ -1406,6 +1415,7 @@ try {
   sant('utvärderingen står under Besluten', (await h.text('#pl-samman'))?.includes('Förläng insatsen'));
   await h.tryck('[data-forlang="2"]');
   sant('förläng med två veckor', (await h.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].val`))?.includes('l=8') && (await h.text('#pl-toast'))?.includes('2 veckor längre'), await h.text('#pl-toast'));
+  sant('förlängningen flyttar inte avstämningen', (await h.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].val`))?.includes(`a=${s.mittVeckan(slutPlan)}`), await h.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].val`));
   // Resultatet efter insatsen står kvar på sin dag, och den nya mätningen efter är tom (Codex 2026-10-24). Raden heter Efter
   // insatsen, som i uppföljningens rad (uppfoljningensNamn, K-509).
   sant('förlängningen flyttar inte resultatet efter', (await h.text('#pl-samman'))?.includes('Efter insatsen, v. 51: 6 av 8') && (await h.kor(`(() => { const r = JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.resultat; return !r['2-2026-12-28'] && r['2-2026-12-14'].e1 === '6 av 8'; })()`)), await h.text('#pl-samman'));
@@ -1560,7 +1570,8 @@ try {
   await st.oppna(stAdress);
   await st.kor('localStorage.clear()');
   await st.oppna(`${stAdress}#s=2026-11-02&d=1245&l=5&b=3`);
-  await st.tryck('#pl-spara');
+  // Planen sparas med knappen längst ned, som sparar som den överst.
+  await st.tryck('#pl-spara-nere');
   await vanta(200);
   const stLank = await st.kor('location.href');
   const stegDelar =() => st.kor(`[...document.querySelectorAll('#pl-veckan .pl-nasta .pl-del summary')].map((x) => (x.querySelector('.pl-deltid').textContent + ' ' + x.querySelector('.pl-delnamn').textContent).trim())`);
@@ -1610,6 +1621,23 @@ try {
   await vanta(600);
   await omIgen();
   sant('läsningen före låser inte Börja på', (await foreVal())?.last === false && (await st.kor(`Object.keys(JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.resultat).length`)) === 1, await foreVal());
+  // Läsningen före låser inte heller när starten flyttas och läsningens datum inte längre är veckan före (Codex 2026-10-25).
+  const flyttaStart = (d) => st.kor(`(() => { document.getElementById('pl-andra').open = true; const i = document.getElementById('pl-start'); i.value = '${d}'; i.dispatchEvent(new Event('change')); return true; })()`);
+  await flyttaStart('2026-11-09');
+  await vanta(200);
+  sant('läsningen före låser inte Börja på när starten flyttas', !(await st.kor(`document.getElementById('pl-borja').disabled`)), await st.kor('location.hash'));
+  await flyttaStart('2026-11-02');
+  await vanta(200);
+  // Ett resultat efter insatsen låser valet i formuläret direkt, utan att sidan ritas om, och valet stannar (Codex samma dag).
+  await st.tryck('#pl-veckan .pl-remsa [data-vy="efter"]');
+  await vanta(150);
+  await st.kor(`(() => { const i = document.querySelector('#pl-veckan [data-resultat]'); i.value = '9 av 10'; i.dispatchEvent(new Event('input', { bubbles: true })); return true; })()`);
+  sant('ett resultat efter start låser Börja på direkt', await st.kor(`document.getElementById('pl-borja').disabled`));
+  await st.kor(`(() => { const s = document.getElementById('pl-borja'); s.disabled = false; s.value = '1'; s.dispatchEvent(new Event('change')); return true; })()`);
+  await vanta(200);
+  sant('ett låst Börja på ändrar inte planen', (await st.kor('location.hash')).includes('b=3'), await st.kor('location.hash'));
+  await st.kor(`(() => { const i = document.querySelector('#pl-veckan [data-resultat]'); i.value = ''; i.dispatchEvent(new Event('input', { bubbles: true })); return true; })()`);
+  await vanta(600);
   await medFoljd({ gjorda: ['2026-11-02'] });
   await omIgen();
   sant('en bock låser Börja på, under Före och i formuläret', (await foreVal())?.last === true && (await st.kor(`document.getElementById('pl-borja').disabled`)) && (await foreVal())?.not.startsWith('Du har bockat pass'), await foreVal());
@@ -1650,6 +1678,16 @@ try {
   await skriv('Ali\nBea\nSebastian Ek');
   await lamna();
   sant('Bea får tillbaka det som förts in när namnet skrivs igen', (await elever())[1]?.id === 'e2' && (await el.kor(`document.getElementById('pl-elever-fraga').hidden`)), await elever());
+  // Svaret gäller: frågan kommer inte igen när läraren skriver vidare i samma redigering (verifieringen 2026-10-25: frågan
+  // om Dan kom tillbaka efter varje ändring i listan).
+  await skriv('Ali\nVera\nSebastian Ek');
+  const fragadVera = (await el.text('#pl-elever-fraga p'))?.startsWith('Bea är borttagen och Vera är ny');
+  await el.tryck('#pl-elever-fraga [data-ny-elev]');
+  await skriv('Ali\nVera\nSebastian Ek', 800);
+  sant('frågan kommer inte igen efter svaret Ny elev', fragadVera && (await el.kor(`document.getElementById('pl-elever-fraga').hidden`)), await el.text('#pl-elever-fraga'));
+  await lamna();
+  await skriv('Ali\nBea\nSebastian Ek');
+  await lamna();
   await skriv('Ali\nNova\nSebastian Ek');
   await lamna();
   sant('en elev som togs bort tidigare känns igen och är ingen fråga', (await elever())[1]?.id === nova.id && (await el.kor(`document.getElementById('pl-elever-fraga').hidden`)), await elever());
@@ -1685,10 +1723,22 @@ try {
   await skriv('Ali\nNora\nSebastian E', 300);
   await lamna();
   sant('en paus mitt i ett namn byter inte elev', (await elever())[2]?.id === 'e3' && (await skattningarna('e3')) === 6 && (await el.kor(`document.getElementById('pl-elever-fraga').hidden`)), await elever());
+  // Två nya elever i samma ändring: en borttagen elev kan bara vara en av dem, och Ångra tar tillbaka båda frågorna (Codex
+  // 2026-10-25: båda kunde få Alis id).
+  await skriv('Pia\nOlle\nSebastian E');
+  await lamna();
+  const piaId = (await elever())[0]?.id;
+  await el.kor(`(() => { const b = document.querySelector('#pl-elever-fraga [data-samma-elev="${piaId}|e1"]'); if (!b) return false; b.click(); return true; })()`);
+  await vanta(150);
+  const kvarVal = await el.kor(`[...document.querySelectorAll('#pl-elever-fraga [data-samma-elev]')].map((b) => b.dataset.sammaElev)`);
+  sant('en borttagen elev kan bara vara en av de nya', (await elever())[0]?.id === 'e1' && kvarVal?.length >= 1 && kvarVal.every((v) => !v.endsWith('|e1')), [await elever(), kvarVal]);
+  await el.tryck('#pl-toast [data-toast-gor]');
+  await vanta(150);
+  sant('Ångra tar tillbaka båda frågorna', (await el.kor(`[...document.querySelectorAll('#pl-elever-fraga [data-samma-elev]')].filter((b) => b.dataset.sammaElev.endsWith('|e1')).length`)) === 2 && (await elever())[0]?.id === piaId, [await el.text('#pl-elever-fraga'), await elever()]);
   await el.kor('window.__filnamn = null');
   await el.tryck('#pl-kopia-spara');
   await vanta(200);
-  sant('kopians namn säger kopia, gruppen, metoden och datumet', (await el.kor('window.__filnamn')) === 'kopia-Läsgrupp-2B-textsamtal-i-grupp-2026-11-25.json', await el.kor('window.__filnamn'));
+  sant('planens fil heter plan, gruppen, metoden och datumet', (await el.kor('window.__filnamn')) === 'plan-Läsgrupp-2B-textsamtal-i-grupp-2026-11-25.json', await el.kor('window.__filnamn'));
   sant('elevlistan: inga fel', !el.undantag.length && !(await el.kor('window.__fel.length')), el.undantag);
   el.stang();
 } catch (e) {

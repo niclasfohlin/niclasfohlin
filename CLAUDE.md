@@ -65,7 +65,7 @@ Stödundervisning är en metodbank, inte en blogg. Varje metod är en YAML-fil e
 | Utskriften, som pdf av Word-filerna: allt, eller metoden utan materialet (METODER.md under Utskriften) | `/stodundervisning/<id>.pdf` och `<id>-metoden.pdf` |
 | Lathunden, fyra sidor ur snabbguiden, med metodens filmer i en spelare överst | `/stodundervisning/<id>/lathund` |
 | Appen Stöd: metodbanken, metoderna och Planera insatsen som app på telefonens hemskärm, erbjuden på metodbanken och Planera insatsen i telefon och surfplatta (DRIFT.md under Appen Stöd) | `/stodundervisning/manifest.webmanifest` |
-| Planera insatsen: veckorna med datum och tider, insatsens mål, nästa pass och veckans material, kalenderfil, länk och text till åtgärdsprogrammet; med Följ insatsen bockar, skattning mot målet vecka för vecka, avstämning mitt i, utvärdering efter och sammanställning som pdf, sparat bara i webbläsaren och i lärarens kopia (METODER.md under Planera insatsen) | `/stodundervisning/<id>/planera` |
+| Planera insatsen: veckorna med datum och tider, insatsens mål, nästa pass och veckans material, kalenderfil, länk och text till åtgärdsprogrammet; med Följ insatsen bockar, skattning mot målet vecka för vecka, avstämning mitt i, utvärdering efter och sammanställning som pdf, sparat bara i webbläsaren och i planen som läraren laddar ner (METODER.md under Planera insatsen) | `/stodundervisning/<id>/planera` |
 | Word-filen med allt: beskrivning, planeringsmallar och lathund | `/stodundervisning/<id>.docx` |
 | Word-filen med bara metoden, utan materialet | `/stodundervisning/<id>-metoden.docx` |
 | Delarna var för sig | `<id>-mallar.docx` och `<id>-lathund.docx` |
