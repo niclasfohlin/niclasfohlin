@@ -666,13 +666,13 @@ plan:
   passen:
     - nar: veckans första
       kort: "Du tänker högt"
-      text: "Du tänker högt: du läser högt, stannar vid stoppet och visar veckans tankesteg noga, också det du undrar. Eleverna stryker under med dig och säger till sin kamrat om de tänker likadant eller annorlunda."
+      ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 1, kolumner: [Så läser ni, Du, Eleverna] }
     - nar: veckans andra
       kort: "Paren samtalar"
-      text: "Ni tänker tillsammans: du läser högt och stannar vid stoppet, paren samtalar, och sedan leder du gruppens samtal med följdfrågor som ”Hur vet du det?” och ”Vem tänker annorlunda?”"
+      ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 2, kolumner: [Så läser ni, Du, Eleverna] }
     - nar: veckans tredje
       kort: "Eleverna läser själva"
-      text: "Eleverna tänker: ni läser ledtrådsbladets fråga, och sedan läser eleverna själva eller i par. Du frågar, lyssnar, ger respons och skriver på lyssningsbladet."
+      ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 3, kolumner: [Så läser ni, Du, Eleverna] }
 mal:
   punkter:
     - Skilja på svar som står i texten och svar man måste lista ut

@@ -143,6 +143,13 @@ tidsschema:
   rader:
     - { tid: Före passet, fas: Förberedelse, vad: Vad du gör innan. }
     - { tid: 0–5 min, fas: Fasens namn, vad: Vad som händer. }
+  # varianter: passets form vissa veckor, med veckorna, en mening om passet och delarna med faserna som raderna ovan
+  # (METODER.md under Tidsschemats varianter). Metodens sida, Word, lathunden och planen skriver varianten ur fältet.
+  # varianter:
+  #   - nar: vecka 1–3
+  #     text: Passet är bara listan.
+  #     delar:
+  #       - { fas: Fasens namn, tid: 0–5 min }
   efter: Vad ni gör om gruppen blir klar tidigt.
 steg:
   text: De fyra stegen är den didaktiska modellen bakom rutinen.

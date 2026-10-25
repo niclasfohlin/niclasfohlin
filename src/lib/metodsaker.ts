@@ -12,7 +12,7 @@ import { mallarnasAnkare, metodensAnkare, metodensAvsnitt } from './metodankare'
 import { metodensLektionskort } from './lektionskort';
 import { forstaLed } from './karta';
 import { CENTRALA, lasbarAdress } from './centrala';
-import { arSaksord, forstaLedet, slugAv, veckorI } from './standard/index.js';
+import { arSaksord, forstaLedet, forstaOrdet, slugAv, veckorI } from './standard/index.js';
 
 /**
  * En sak med sin adress. nivaer: adressen på varje nivå, när saken finns på bankens nivåer (kartläggningens text före).
@@ -108,8 +108,8 @@ export function metodensSaker(d: MetodData, id: string): MetodSak[] {
   for (const [namn, plats] of blad) { const a = bladAnkare.get(`${plats.ri}-${plats.li}`); if (a) saker.push({ namn, former: [namn], versal: true, adress: `${sida}#${a}` }); }
   // Kontraktet och schemat under Hem och skola (TIL i grupp) står i materialet med egna ankare; namnet är rubrikens första
   // ord, som Lässchema i "Lässchema TIL" (Codex 2026-10-24).
-  if (d.hem?.kontrakt) saker.push(sak(d.hem.kontrakt.rubrik.split(/\s+/)[0], `${sida}#kontraktet`));
-  if (d.hem?.schema) saker.push(sak(d.hem.schema.rubrik.split(/\s+/)[0], `${sida}#schemat`));
+  if (d.hem?.kontrakt) saker.push(sak(forstaOrdet(d.hem.kontrakt.rubrik), `${sida}#kontraktet`));
+  if (d.hem?.schema) saker.push(sak(forstaOrdet(d.hem.schema.rubrik), `${sida}#schemat`));
   // Mallarna, var och en med sitt ankare under Mallar att skriva ut, och alla tillsammans.
   const mallAnkare = mallarnasAnkare(d);
   d.mallar.forEach((m, i) => saker.push(sak(m.rubrik, `${sida}#${mallAnkare[i]}`)));

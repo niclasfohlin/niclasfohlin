@@ -4,7 +4,7 @@
 // riggen kör samma kod. scripts/standardprov.mjs stoppar en import av astro:, node: eller sajtens data här och prövar
 // funktionerna. Reglerna står i REGLER.md och ändringarna i CHANGELOG.md.
 
-import { ORDNINGSTAL, skyddaRegex, talAv, talIRegex } from './text.js';
+import { meningarna, ORDNINGSTAL, skyddaRegex, slutarMedPunkt, talAv, talIRegex } from './text.js';
 
 /**
  * Adressens led ur ett namn: små bokstäver, tecknen över bokstäverna bort (å och ä blir a, ö blir o, é blir e, ü blir u),
@@ -415,15 +415,13 @@ export function faktaIFastForm(d) {
 export const BILDTEXT = { tecken: 250, meningar: 3 };
 
 /**
- * Meningarna i en text: en mening slutar med punkt, utropstecken, frågetecken eller tre punkter, också inom citattecken,
- * före ett ord med stor bokstav eller textens slut. Förkortningar som t.ex. räknas inte, och ett citat som ”Hej!” mitt i
- * en mening inte heller.
+ * Antalet meningar i en text, ur standardens meningarna (text.js): de som slutar med ett skiljetecken, och en när ingen gör
+ * det.
  * @param {string} text
  */
 export function meningarI(text) {
-  const t = String(text).trim().replace(/\b(t\.ex|m\.fl|bl\.a|o\.s\.v|s\.k|d\.v\.s|ca|kl|nr|s)\./gi, '$1');
-  if (!t) return 0;
-  return (t.match(/[.!?…]["”»’)]*(?=\s+[A-ZÅÄÖ”"«]|\s*$)/gu) ?? []).length || 1;
+  const m = meningarna(text);
+  return m.length ? m.filter(slutarMedPunkt).length || 1 : 0;
 }
 
 /**

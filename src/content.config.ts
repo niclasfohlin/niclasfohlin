@@ -14,7 +14,7 @@ import { veckofel } from './lib/veckomaterial';
 import { arskursFel } from './lib/tackning';
 import { metodensTaggfel } from './lib/upplagg';
 import { faktaFel } from './lib/kortfakta';
-import { INNEHALLSTAGGAR } from './lib/standard/index.js';
+import { allaTexter, INNEHALLSTAGGAR, tidsschematsFel, varianternasFel } from './lib/standard/index.js';
 
 // Registren är den enda sanningen om vilka taggar och publikationer som finns.
 // Ett okänt värde stoppar bygget med ett tydligt besked om vad som ska göras.
@@ -305,6 +305,10 @@ const metodensFalt = z.strictObject({
       rubrik: z.string(),
       text: z.string().optional(),
       rader: z.array(z.strictObject({ tid: z.string(), fas: z.string(), vad: z.string() })).min(1),
+      // Passets form vissa veckor (K-515, METODER.md under Tidsschemats varianter): veckorna, en mening om passet och
+      // delarna med sina tider, med faserna som tidsschemats rader. Metodens sida och Word skriver varianten som en mening
+      // (variantensMening i standarden), och planen och kalendern visar passet de veckorna med variantens delar.
+      varianter: z.array(z.strictObject({ nar: z.string(), text: z.string(), delar: z.array(z.strictObject({ fas: z.string(), tid: z.string() })).min(2) })).min(1).optional(),
       efter: z.string().optional(),
     }).optional(),
     steg: z.strictObject({
@@ -420,14 +424,23 @@ const metodensFalt = z.strictObject({
     // mal: insatsens mål, som läraren skattar eleverna mot varje vecka och kan skriva om, i lektionskortens form "kunna …".
     //   Utan det gäller målet på metodens lektionskort.
     // passen: vad som skiljer passen åt, efter platsen i veckan (veckans första, veckans sista, veckans övriga) eller numret
-    //   i insatsen (första passet, pass 7, pass 8 till det sista, sista passet), med metodens tabell för ett pass som går
-    //   till på ett eget sätt (tolkaPassen i src/lib/standard/plan.js), och ett kort namn till raderna under Veckans pass.
+    //   i insatsen (första passet, pass 7, pass 8 till det sista, sista passet) eller metodens veckor (vecka 1–3), med
+    //   metodens tabell för ett pass som går till på ett eget sätt (tolkaPassen i src/lib/standard/plan.js), och ett kort
+    //   namn till raderna under Veckans pass. Rollens text är ett ordagrant citat ur metoden (text) eller en rad ur metodens
+    //   tabell (ur: tabellens rubrik, radens första ord och kolumnerna som visas), K-520 och K-521. Passets tider står i
+    //   tidsschemat, också vissa veckors (tidsschema.varianter).
+    // utan: meningar ur tidsschemats text som planen inte visar, eftersom de gäller metodens sida, som remsan och tabellerna
+    //   (planensInledning i standarden).
     // fore: det som görs före första passet utöver uppföljningen före och en checklista inför första passet, som mötet med
     //   hemmen. justera: metodens egna sätt att justera insatsen vid avstämningen. upprepa: när veckan tas en gång till.
     // stege: progressionen är en stege som gruppen kan börja högre upp på, som läslistorna.
     plan: z.strictObject({
       mal: z.string().min(10).max(200).optional(),
-      passen: z.array(z.strictObject({ nar: text, text, kort: z.string().trim().min(1).max(30).optional(), tabell: text.optional() })).min(1).optional(),
+      passen: z.array(z.strictObject({
+        nar: text, text: text.optional(), kort: z.string().trim().min(1).max(30).optional(), tabell: text.optional(),
+        ur: z.strictObject({ tabell: text, rad: text, kolumner: z.array(text).min(1).optional() }).optional(),
+      }).refine((p) => !!(p.text || p.ur), { message: 'En rad i plan.passen har en text, ett citat ur metoden, eller en rad ur metodens tabell (ur), eller båda.' })).min(1).optional(),
+      utan: z.array(text).min(1).optional(),
       fore: z.array(text).min(1).max(4).optional(),
       justera: z.array(text).min(1).max(4).optional(),
       upprepa: text.optional(),
@@ -807,6 +820,10 @@ const stodundervisning = defineCollection({
     for (const s of medFas) if (!faser.has(s.fas.toLowerCase())) ctx.addIssue({ code: 'custom', path: ['passrutin', 'steg'], message: `Fasen "${s.fas}" finns inte som rad i tidsschemat.` });
     if (medFas.length && medFas.length !== d.passrutin!.steg.length) ctx.addIssue({ code: 'custom', path: ['passrutin', 'steg'], message: 'Antingen har alla steg en fas eller inget.' });
     for (const del of d.arbetsform?.delar ?? []) for (const f of del.faser ?? []) if (!faser.has(f.toLowerCase())) ctx.addIssue({ code: 'custom', path: ['arbetsform', 'delar'], message: `Fasen "${f}" finns inte som rad i tidsschemat.` });
+    // Tidsschemats varianter och passets tider i tidsschemats text, och lathunden som säger varianten med standardens mening
+    // (K-515, tidsschematsFel och varianternasFel i standarden), så att metoden är roten för planen och riggen prövar samma.
+    for (const f of tidsschematsFel(d)) ctx.addIssue({ code: 'custom', path: ['tidsschema'], message: f });
+    if (d.lathund) for (const f of varianternasFel(d, allaTexter(d.lathund), { lathund: !!d.tidsschema?.varianter?.length, var: 'Lathunden' })) ctx.addIssue({ code: 'custom', path: ['lathund'], message: f });
     // Lathundens pass är tidsschemat minut för minut: samma faser i samma ordning och samma tider (utan "min",
     // Före passet som Före), med stegnumret "N · " framför de faser som är steg och numren i följd från 1. Så säger
     // lathunden aldrig emot sidan, och ett fel i riggens intag stoppar bygget i stället för att hittas i bilderna.

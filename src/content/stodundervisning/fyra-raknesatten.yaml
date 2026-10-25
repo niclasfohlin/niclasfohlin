@@ -410,18 +410,20 @@ uppfoljning:
       vad: Samma kartläggning veckan efter. Visa skillnaden och skriv nästa steg.
 
 plan:
+  utan:
+    - "Remsan visar när du leder, när alla arbetar tillsammans och när eleven provar själv."
   mal: "kunna räkna med de fyra räknesätten på sin nivå och visa och förklara vad som händer i uträkningen."
   passen:
     - nar: veckans första
       kort: "Bygga"
-      text: "Eleverna bygger med materialet. Allt nytt kommer i veckans två första pass."
+      text: "I veckans första pass bygger eleverna med materialet, och i det andra ritar och skriver de. Allt nytt kommer i de två passen."
     - nar: veckans andra
       kort: "Rita och skriva"
-      text: "Eleverna ritar och skriver. Har veckans sida en rad Pass 2, visar du först det som står där."
+      text: "I veckans första pass bygger eleverna med materialet, och i det andra ritar och skriver de. I pass 2 visar du först det som står under Pass 2 på veckans sida, oftast förra passets uppgift ritad, och sedan passets uppgift ur tabellen."
     - nar: veckans tredje
       kort: "Befästa"
-      text: "Eleverna skriver med materialet i asken och tar upp det som ännu inte sitter, och den som tvekar tar fram materialet igen."
-  upprepa: "Kan flera i gruppen inte visa veckans grepp i slutet av veckan, gör ni veckan en gång till med nya tal. Är det en elev, övar hen greppet i uppvärmningen och gruppen går vidare."
+      text: "I ett tredje pass skriver eleverna med materialet i asken och tar upp det som ännu inte sitter, och den som tvekar tar fram materialet igen."
+  upprepa: "Kan flera i gruppen inte visa veckans grepp i slutet av veckan, gör ni veckan en gång till med nya tal, och kursen blir en vecka längre. Är det en elev, övar hen greppet i uppvärmningen och i ett tredje pass, om gruppen har ett, och gruppen går vidare."
 mal:
   punkter:
     - visa med material och på talraden vad som händer i addition och subtraktion, och räkna med uppställning och växling på sin nivå

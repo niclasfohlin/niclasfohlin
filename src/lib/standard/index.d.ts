@@ -132,7 +132,20 @@ export declare function tolkaPassen(text: unknown): PassensNar | null;
 /** Veckorna i "vecka 3" och "vecka 1–2" som ett spann. */
 export declare function veckorI(text: unknown): { fran: number; till: number } | null;
 export declare function metodplan(d: { tid?: string; period?: string; progression?: { enhet?: string; rader: { vecka: string; taggar?: string[] }[] }; uppfoljning?: { rader: { nar: string; tid?: string }[] }; plan?: { passen?: { nar: string }[] } }): { fel: string[]; plan?: Metodplan };
-export declare function planFel(d: Parameters<typeof metodplan>[0]): string[];
+export type MetodensTexter = { uppfoljning?: { rader: { nar: string; vad: string }[] }; progression?: { rader: { vecka: string; fokus?: string; roll?: string; led?: string }[] }; checklista?: { punkter: string[] }; plan?: { passen?: { nar: string; text?: string; ur?: { tabell: string; rad: string; kolumner?: string[] }; kort?: string; tabell?: string }[]; fore?: string[]; justera?: string[]; upprepa?: string; utan?: string[]; stege?: boolean }; tidsschema?: { text?: string; efter?: string; rader: { tid: string; fas: string; vad: string }[]; varianter?: Variant[] }; gruppen?: { text: string }; passrutin?: { efterPasset?: string }; principer?: { text: string }; hem?: { text: string[] }; tabeller?: { rubrik: string; kolumner: string[]; rader?: unknown[][] }[]; nivaer?: { namn: string }[] };
+/** Tidsschemats text som planen visar den, utan meningarna i plan.utan. */
+export declare const planensInledning: (text: string | undefined, utan?: string[]) => string;
+/** Planens egna fält och texterna som bara planen läser, med var de står. */
+export declare const planensTexter: (d: MetodensTexter) => [string, string][];
+/** Alla texter ur metoden som planen visar. */
+export declare const visadeTexter: (d: MetodensTexter) => string[];
+/** Felen i metodens texter som planen visar: tider i löptext, delar, meningar om metodens sida och veckor i ord i en stege. */
+export declare function planensRamFel(d: MetodensTexter & { tid?: string }): string[];
+/** En rad i metodens tabell som en roll i planen hämtar sin text ur, eller null när den inte finns. */
+export declare function rollensRad(d: MetodensTexter, ur: { tabell: string; rad: string; kolumner?: string[] }): { kolumn: string; text: string }[] | null;
+/** Planens egna texter citerar metoden ordagrant. */
+export declare function planensCitatFel(d: MetodensTexter & Record<string, unknown>): string[];
+export declare function planFel(d: Parameters<typeof metodplan>[0] & MetodensTexter): string[];
 /** Metodens fil utan planens fält (`plan`, uppföljningens `tid`, progressionens `taggar` och `rubrik`), som bara planens sida läser. */
 export declare function utanPlanensFalt<T extends Record<string, any>>(d: T): T;
 export declare function forval(mp: Metodplan, idag: string): Val;
@@ -142,6 +155,8 @@ export declare function forvaldLangd(mp: Metodplan, borja?: number): number;
 export declare function forstaMandagen(val: Val): string;
 /** Planera insatsens modul: namnet, versionen och om den är en beta (sajtens METODER.md under Planera insatsen). */
 export declare const PLANERA: Readonly<{ namn: string; version: string; beta: boolean }>;
+/** Ett filnamn för det som laddas ner ur planen: vad filen är, vem den gäller, metoden och datumet. */
+export declare const filnamnet: (slag: 'sammanstallning' | 'planera' | 'kalender', o: { vem?: string; metod: string; datum: string }) => string;
 export declare function planera(mp: Metodplan, val: Val): Plan;
 /** Veckans nummer i planen, räknat från veckan planen börjar på. */
 export declare const planvecka: (plan: Plan, v: PlanVecka) => number;
@@ -156,6 +171,8 @@ export declare const kalenderveckaUtskriven: (n: number) => string;
 export declare const kalenderveckor: (a: number, b: number, streck?: string) => string;
 export declare const gangen: (plan: { veckor: { nr: number; innehall: number }[] }, v: { nr: number; innehall: number; igen: boolean }) => number;
 export declare const metodveckan: (innehall: number) => string;
+/** Metodens veckor i en text ur metoden, skrivna som planens veckor när planen börjar högre upp i en stege. */
+export declare function veckornaIPlanen(text: string, borja?: number): string;
 export declare const planveckan: (innehall: number, gang?: number) => string;
 export declare const planveckanKort: (innehall: number, gang?: number) => { tal: string; om: string };
 export type Veckonamn = { plan: string; kort: string; kalender: string; text: string; Text: string };
@@ -163,6 +180,20 @@ export declare const veckansNamn: (v: { innehall: number; gang?: number; vecka: 
 export declare const planveckansNamn: (plan: Plan, v: PlanVecka) => Veckonamn;
 /** Raderna i planens passen som gäller passet, den mest bestämda först. */
 export declare function passetsRoller(plan: Plan, p: Pass, passen: Metodplan['passen']): number[];
+/** Ett pass som sidan och kalendern visar det: namnet, rollernas texter, delarna och förberedelsen, med tidsschemats variant för metodens vecka. */
+export declare function passetsBeskrivning<D extends { tid: string; fas: string; vad: string }>(roller: { text?: string; rad?: { kolumn: string; text: string }[]; kort?: string; tabell?: { namn: string; adress: string; delar?: D[]; fore?: { namn: string; nar: string; vad: string }[] } }[], passet: { delar: D[]; fore?: string; varianter?: (Variant & { delar: D[] })[] } | undefined, vecka?: number): { namn: string; texter: { etikett: string; text: string }[]; delar: D[]; egenOrdning: boolean; fore?: string; foreRader: { namn: string; nar: string; vad: string }[]; tabell?: { namn: string; adress: string; delar?: D[]; fore?: { namn: string; nar: string; vad: string }[] } };
+/** En dels tid utan "min": "0–3". */
+export declare const delensTid: (tid: string) => string;
+/** Passets form vissa veckor, en variant i metodens tidsschema. */
+export type Variant = { nar: string; text: string; delar: { fas: string; tid: string }[] };
+/** En variant som metodens sida, Word, lathunden och lektionskortet skriver den. */
+export declare const variantensMening: (v: Variant) => string;
+/** Varianten som gäller metodens vecka, eller ingen. */
+export declare const variantenFor: <V extends { nar: string }>(varianter: V[] | undefined, vecka: number | undefined) => V | undefined;
+/** Felen i metodens tidsschema: varianterna och passets tider i tidsschemats text. */
+export declare function tidsschematsFel(d: { tid?: string; tidsschema?: { text?: string; rader: { tid: string; fas: string }[]; varianter?: Variant[] } }): string[];
+/** Felen i lathundens och lektionskortens texter för en metod med varianter. */
+export declare function varianternasFel(d: { tidsschema?: { varianter?: Variant[] } }, texter: string[], o: { lathund?: boolean; var: string }): string[];
 /** Progressionens steg som planen inte når. */
 export declare function stegUtanfor(mp: Metodplan, plan: Plan): { rad: number; fran: number; vidBehov: boolean }[];
 export declare function veckanFor(plan: Plan, datum: string): PlanVecka | null;
@@ -291,6 +322,16 @@ export declare const esc: (s: string) => string;
 export declare const skyddaRegex: (s: string) => string;
 export declare const rentText: (x: unknown, max: number) => string;
 export declare const forstaLedet: (s: string) => string;
+/** Alla texter i ett värde, också i listor och objekt. */
+export declare const allaTexter: (x: unknown) => string[];
+/** Det första ordet: en elevs förnamn eller rubrikens första ord. */
+export declare const forstaOrdet: (s: unknown) => string;
+/** Om ett namn på en elevs rad är samma elev: samma förnamn. */
+export declare const sammaElev: (forut: string, nu: string) => boolean;
+/** Meningarna i en text. */
+export declare function meningarna(text: unknown): string[];
+/** Om en mening slutar med punkt, utropstecken, frågetecken eller tre punkter. */
+export declare const slutarMedPunkt: (m: string) => boolean;
 /** Ett namn kort, med bara första ledet, när inget annat namn i listan har samma första led. */
 export declare const kortnamn: (namn: string, alla: string[]) => string;
 export declare const ORDNINGSTAL: readonly string[];
@@ -301,4 +342,4 @@ export declare const allaAntal: (n: number) => string;
 /** Ett tal ur siffror eller ord, också sammansatta; NaN när texten inte är ett tal. */
 export declare function talAv(s: string): number;
 /** Talen från fran till till som led i ett reguljärt uttryck. */
-export declare const talIRegex: (fran: number, till: number) => string;
+export declare const talIRegex: (fran: number, till: number, siffror?: boolean) => string;

@@ -15,7 +15,10 @@ Niclas, som äger sajten, vill att du går in och ut på sidan, trycker och änd
 | Gå in och ut: ladda om (`ladda`), gå till metodens sida och tillbaka, öppna metodbanken (Stödundervisning i menyn) och gå tillbaka till planen, och använd `tillbaka`. Står allt kvar som det var? | Det som sparas ska finnas kvar |
 | Pröva också det konstiga: tomma fält, mycket långa texter, tecken som `<b>`, `&`, `'` och `"`, mer än tolv elever, samma namn två gånger, ett datum långt fram eller bakåt, en start på en lördag, alla dagar av, alla dagar på, lov alla veckor, samma vecka upprepad flera gånger, ett pass flyttat till en lördag, alla pass i en vecka inställda, ett annat datum med `datum` mitt i arbetet, och Ångra efter flera ändringar | Fel gömmer sig i kanterna |
 | Ta en bild (`bild`) av varje fel du hittar, och läs bilden med Read | Felet ska gå att se |
+| Pröva fallen i tabellen nedan, så många du hinner, och ett eget fall som tabellen inte har | Fallen är det som händer en lärare med en grupp, och ett nytt fall är det mest värdefulla du kan hitta |
 | Högst omkring {{tak}} kommandon | Uppdraget ska bli klart |
+
+{{scenarier}}
 
 {{verktyget}}
 

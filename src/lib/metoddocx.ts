@@ -10,6 +10,7 @@ import {
 } from 'docx';
 import { centralaVid, lasbarAdress, metodensCentrala, type Textplats } from './centrala';
 import { centraltPapper } from './centraladata';
+import { variantensMening } from './standard/index.js';
 import { lektionskortVid, metodensLektionskort, type Lektionskort } from './lektionskort';
 import { papperFot, papperPunkt, papperSidor, PAPPER_MARGINALER, PAPPER_SIDA, type Papper } from './strategipapper';
 import { delensAdress, hanvisningsdelar, type Del } from './boklankar';
@@ -3195,6 +3196,8 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
     ut.push(h2(pass.rubrik));
     if (d.passrutin.text) ut.push(stycke(d.passrutin.text, { hallIhop: true }));
     if (pass.text) ut.push(stycke(pass.text, { hallIhop: true }));
+    // Tidsschemats varianter, med standardens mening som på sidan och i planen (K-515).
+    for (const v of d.tidsschema?.varianter ?? []) ut.push(stycke(variantensMening(v), { hallIhop: true }));
     ut.push(...passRemsa(pass));
     ut.push(...passTabell(pass, stegTexter(d).length, passOrd(d)));
     if (pass.efterTabell) ut.push(stycke(pass.efterTabell, { farg: FARG.svag }));
@@ -3209,6 +3212,7 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
   if (d.tidsschema && !pass) {
     ut.push(h2(d.tidsschema.rubrik));
     if (d.tidsschema.text) ut.push(stycke(d.tidsschema.text, { hallIhop: true }));
+    for (const v of d.tidsschema.varianter ?? []) ut.push(stycke(variantensMening(v), { hallIhop: true }));
     ut.push(...rubrikTabell(['Tid', 'Fas', 'Vad händer'], d.tidsschema.rader.map((r) => [r.tid, r.fas, r.vad]), [1700, 2200, BREDD - 3900], { fetAndra: true }));
     if (d.tidsschema.efter) ut.push(stycke(d.tidsschema.efter, { farg: FARG.svag }));
     filmVid({ avsnitt: 'tidsschema' });

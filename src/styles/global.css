@@ -2805,6 +2805,11 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
 .pl-besked p { margin: 0; }
 .pl-besked .pl-andra-knappar { margin-top: 0.6rem; }
 .pl-besked .pl-andra-knappar[hidden] { display: none; }
+/* Frågan om samma elev under elevlistan, i beskedets form (K-516). */
+.pl-elevfraga { font-family: var(--typsnitt-ui); background: var(--farg-accent-ljus); border-radius: 6px; padding: 0.65rem 0.9rem; margin: 0.6rem 0 0; max-width: 22rem; }
+.pl-elevfraga[hidden] { display: none; }
+.pl-elevfraga p { margin: 0; font-size: 0.95rem; }
+.pl-elevfraga .pl-andra-knappar { margin: 0.5rem 0 0; }
 .pl-textknapp { border: 0; background: none; padding: 0.3rem 0; color: var(--farg-accent); font: 600 0.92rem var(--typsnitt-ui); text-decoration: underline; cursor: pointer; }
 .pl-chip { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.5rem; padding: 0.25rem 0.85rem; border: 1.5px solid var(--farg-kant); border-radius: 999px; background: var(--farg-yta); color: var(--farg-text); font: 600 0.92rem var(--typsnitt-ui); cursor: pointer; }
 .pl-chip[aria-pressed="true"] { border-color: var(--farg-accent); background: var(--farg-accent); color: #fff; }

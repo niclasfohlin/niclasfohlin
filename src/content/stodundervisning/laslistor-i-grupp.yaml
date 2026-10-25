@@ -139,11 +139,11 @@ passrutin:
   efterPasset: Efter passet skriver du kort i snabbmallen det du hörde och vilka ord och orddelar ni repeterar nästa gång. Sist i veckan läser du snabbmallen och avgör om ni byter lista.
 tidsschema:
   rubrik: Ett pass på 15 minuter
-  text: "Förbered dig genom att välja orden du ska modellera. Remsan visar passet från vecka 4, när boken har vuxit in i avslutningen. Vecka 1–3 är passet bara listan: modelleringen tar 0–3 minuter, körläsningen 3–6, parläsningen 6–14 och avslutningen den sista minuten. Passet och listorna står också på Lektionskortet, ett A4 att ha framför dig."
+  text: "Förbered dig genom att välja orden du ska modellera. Remsan visar passet från vecka 4, när boken har vuxit in i avslutningen. Passet och listorna står också på Lektionskortet, ett A4 att ha framför dig."
   rader:
     - tid: Före passet
       fas: Förberedelse
-      vad: Välj fyra till sex ord ur veckans lista att modellera, inte hela listan, och dagens kolumn. Kopiera listan till varje par och ta fram dagens bok.
+      vad: Välj fyra till sex ord ur veckans lista att modellera, inte hela listan, och dagens kolumn. Kopiera listan till varje par, och från vecka 4 tar du fram dagens bok.
     - tid: 0–2 min
       fas: Modellering
       vad: "Sitt så att alla ser listan. Peka och ljuda långsamt, ljud för ljud, från vänster till höger, och dra ut hållkonsonanterna: sss-⁠ooo-⁠lll. Bind ihop ljuden till ordet och läs det i normal takt. Tänk högt om det som är svårt i ordet: den långa vokalen, konsonantmötet, ändelsen. Eleverna lyssnar och följer med, de läser inte än."
@@ -155,7 +155,19 @@ tidsschema:
       vad: "Paren sitter med listan mellan sig. Den som pekar följer ordet med fingret i läsriktningen, håller tempot och hjälper vid svårighet: ljuda tillsammans, dela ordet i delar och läs det sedan från början igen. Läs listan flera gånger. Det är omläsningen av samma ord som ger flytet."
     - tid: 10–15 min
       fas: Avslutning
-      vad: "Välj det som flera behövde stöd i: ett ljud, en lång vokal som blev kort, en ändelse. Visa det en gång, låt gruppen körläsa ordet efter dig och säg vad de ska tänka på nästa gång. Läs sedan i boken tillsammans: eleverna läser det de kan, du läser resten, och ni pratar om vad som händer."
+      vad: "Välj det som flera behövde stöd i: ett ljud, en lång vokal som blev kort, en ändelse. Visa det en gång, låt gruppen körläsa ordet efter dig och säg vad de ska tänka på nästa gång. Från vecka 4 läser ni sedan i boken tillsammans: eleverna läser det de kan, du läser resten, och ni pratar om vad som händer."
+  varianter:
+    - nar: vecka 1–3
+      text: Passet är bara listan.
+      delar:
+        - fas: Modellering
+          tid: 0–3 min
+        - fas: Körläsning
+          tid: 3–6 min
+        - fas: Parläsning
+          tid: 6–14 min
+        - fas: Avslutning
+          tid: 14–15 min
   efter: "En lista i veckan. Blir ett par klart tidigt: läs listan en gång till och byt roller."
 steg:
   text: Passet har fyra delar, rörelsens tre steg och avslutningen. Använd exempelfraserna för att visa, leda kören och ge kort återkoppling.
@@ -280,19 +292,19 @@ uppfoljning:
       vad: "Läslista start till Läslista 4 igen, en minut per lista. Jämför med starten. Läs också en kort text och fråga om innehållet: bär avkodningen fram till det texten handlar om?"
 plan:
   stege: true
+  utan:
+    - "Remsan visar passet från vecka 4, när boken har vuxit in i avslutningen."
   passen:
-    - nar: vecka 1–3
-      text: "Vecka 1–3 är passet bara listan: modelleringen tar 0–3 minuter, körläsningen 3–6, parläsningen 6–14 och avslutningen den sista minuten."
     - nar: veckans första
       kort: "Hela listan"
-      text: "Du modellerar och gruppen körläser hela listan. Förklara nya ord."
+      ur: { tabell: En lista i veckan, rad: Måndag }
     - nar: veckans övriga
       kort: "Dagens kolumn"
-      text: "Kort modellering, körläsning av dagens kolumn och parläsning med omläsning."
+      ur: { tabell: En lista i veckan, rad: Tisdag till torsdag }
     - nar: veckans sista
       kort: "Eleven läser för dig"
-      text: "Eleven läser listan för dig eller för sin kompis, och ni sätter ord på vad som blivit lättare."
-  upprepa: "Byt lista först när paren läser orden direkt, utan att ljuda. Annars tar ni samma lista en vecka till."
+      ur: { tabell: En lista i veckan, rad: Fredag }
+  upprepa: "Byt lista först när paren läser orden direkt, utan att ljuda."
 
 mal:
   punkter:
@@ -451,7 +463,7 @@ lathund:
   metoden:
     text:
       - "Läslistor utvecklar avkodningen genom strukturerad och upprepad läsning, för elever i F–3 som gissar sig fram eller har svårt att ljuda ihop ord. Arbetet följer alltid samma rörelse: läraren modellerar, gruppen körläser och eleverna läser i par. Det är rörelsen som är metoden."
-      - "En lista i veckan, 15 minuter per pass. Tiderna i tabellen gäller från vecka 4, när passet avslutas med några minuter i en riktig bok som ni läser och pratar om. Vecka 1–3 är passet bara listan: modellering 0–3 minuter, körläsning 3–6, parläsning 6–14 och avslutning den sista minuten."
+      - "En lista i veckan, 15 minuter per pass. Tiderna i tabellen gäller från vecka 4, när passet avslutas med några minuter i en riktig bok som ni läser och pratar om. Vecka 1–3: passet är bara listan, med modellering 0–3 minuter, körläsning 3–6, parläsning 6–14 och avslutning 14–15."
     ruta:
       rubrik: Tre saker att hålla fast vid
       punkter:

@@ -238,12 +238,12 @@ plan:
   passen:
     - nar: första passet
       kort: "Utan favoritmeningar"
-      text: "Det första passet börjar utan favoritmeningar, eftersom eleverna inte har läst hemma än. Börja med bild- och rubrikvandringen."
+      text: "Vecka 1 börjar utan favoritmeningar."
   fore:
-    - "Ha ett kort möte med vårdnadshavarna innan ni börjar. Visa mappen, lässchemat och skrivboken, förklara varför boken ska läsas två gånger och skriv kontraktet."
+    - "Insatsen bygger på att boken läses en gång till hemma. Boka därför ett kort möte med vårdnadshavarna innan ni börjar. Visa mappen, lässchemat och skrivboken, förklara varför boken ska läsas två gånger och visa hur den vuxne bekräftar läsningen med sina initialer. Kontraktet sammanfattar vad var och en ansvarar för, och lässchemat följer med i mappen."
   justera:
-    - "Byt till en lättare bok när eleven gör fler än ett fel av tio ord."
-    - "Ring hem tidigt när läsningen hemma uteblir flera dagar i rad."
+    - "Byt till en lättare bok när det blir många fel."
+    - "Uteblir läsningen hemma flera dagar i rad, ring hem tidigt."
 
 mal:
   punkter:

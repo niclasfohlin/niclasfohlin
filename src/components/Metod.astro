@@ -37,6 +37,7 @@ import type { SerieKoppling } from '../lib/serie';
 import type { MetodData } from '../lib/metod';
 import { ejBryt, metodAdress, ramArTom, passGrupper, passOrd, passOversikt, stegTexter, laskortKolumn, arEttKort } from '../lib/metod';
 import { site } from '../data/site';
+import { variantensMening } from '../lib/standard/index.js';
 import { materialAttribut } from '../lib/material';
 import { kortInfo } from '../lib/brak';
 import { arTarning, sagoUpphov } from '../lib/sagoblad';
@@ -356,6 +357,7 @@ const meny = [
       <h2>{pass.rubrik}</h2>
       {d.passrutin.text && <p>{d.passrutin.text}</p>}
       {pass.text && <p>{pass.text}</p>}
+      {(d.tidsschema?.varianter ?? []).map((v) => <p>{variantensMening(v)}</p>)}
       </div>
       <div class={`m-remsa${pass.delar.length ? ' har-delar' : ''}`} style={`--kolumner:${pass.faser.map((f) => `minmax(7rem, ${f.minuter}fr)`).join(' ')};--rader:${pass.faser.map((f) => `minmax(auto, ${Math.sqrt(f.minuter).toFixed(2)}fr)`).join(' ')}`} role="img" aria-label={`Passets faser: ${pass.faser.map((f) => `${f.fas} ${f.tid}`).join(', ')}${pass.delar.length ? `. Arbetsform: ${pass.delar.map((x) => `${x.rubrik} ${x.tid}`).join(', ')}` : ''}`}>
         {passGrupper(pass).flatMap((g) => {
@@ -399,6 +401,7 @@ const meny = [
     <section id="tidsschema">
       <h2>{d.tidsschema.rubrik}</h2>
       {d.tidsschema.text && <p>{d.tidsschema.text}</p>}
+      {(d.tidsschema.varianter ?? []).map((v) => <p>{variantensMening(v)}</p>)}
       <MetodTabell kolumner={['Tid', 'Fas', 'Vad händer']} rader={d.tidsschema.rader.map((r) => [r.tid, r.fas, r.vad])} bredder={['18%', '22%', '60%']} klass="tidsschema" />
       {d.tidsschema.efter && <p class="m-efter">{d.tidsschema.efter}</p>}
       <Filmruta filmer={vid({ avsnitt: 'tidsschema' })} titel={d.titel} />

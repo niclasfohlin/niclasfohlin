@@ -1,5 +1,12 @@
 # Ändringar i standarden
 
+## 0.14.0, 2026-10-25
+
+- `plan.js`, metoden är roten (sajtens K-515; Niclas: "Metoder måste ha en rot för alla dessa premisser", och "Kan det inte hämtas får du skapa en standard och en rot ... som sedan används av metoden som rot och för modulen som rot"): tidsschemats varianter, passets form vissa veckor, med `variantensMening` (meningen som metodens sida, Word, lathunden och lektionskortet skriver), `variantenFor`, `tidsschematsFel` (varianterna, och passets tider i en mening i tidsschemats text) och `varianternasFel` (lathunden och lektionskortet säger varianten med standardens mening). `passetsBeskrivning` är passet som sidan och kalendern visar det, med varianten för passets vecka, och `delensTid`. `veckornaIPlanen` skriver metodens veckor som planens när planen börjar högre upp i en stege, i sidans texter, kalendern, texten till åtgärdsprogrammet och uppföljningens namn. `planensInledning`, `planensTexter`, `visadeTexter` och `planensRamFel` säger vilka texter ur metoden planen visar och stoppar tider i planens text och meningar om metodens sida (`plan.utan`); `planFel` kör båda.
+- `text.js`: `meningarna` (och `meningarI` räknar ur den, så att "mås." inte längre räknas som förkortningen "s."), `slutarMedPunkt`, `allaTexter`, `forstaOrdet` och `sammaElev` (sajtens K-516: ett annat förnamn på en elevs rad är en ny elev); `talIRegex` kan ge bara orden.
+- `plan.js`: `filnamnet`, namnen på det som laddas ner ur planen, med vad, vem, metoden och datumet (sajtens K-519).
+- `plan.js`, rollerna och planens texter ur metoden (sajtens K-520 och K-521): `rollensRad`, en rad ur metodens tabell som en roll hämtar sin text ur (`plan.passen` med `ur`), och `planensCitatFel`, som stoppar en mening i planens fält som inte står ordagrant i metodens egna texter. `passetsBeskrivning` ger texterna med kolumnens namn som etikett.
+
 ## 0.13.0, 2026-10-25
 
 - `text.js`, ny: små textverktyg och talen, en rot för varje (sajtens K-509; Niclas: "Centralisera och till en rot ... Inte ha kopierade koder på olika ställen"): `stor`, `liten`, `mening`, `utanPunkt`, `decimal`, `tvasiffrigt`, `esc`, `skyddaRegex`, `rentText`, `forstaLedet`, `kortnamn`, och talen `talAv` (också "en" och "tjugofem"), `talText`, `talIRegex`, `allaAntal` och `ORDNINGSTAL`. Talen i ord stod förut i sex tabeller i standarden och sajten; `index.js` läser tiden, perioden och gruppen med dem, och `talText` flyttade hit från `plan.js`.

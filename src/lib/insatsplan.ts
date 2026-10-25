@@ -3,7 +3,7 @@
 // vid bygget. Planen räknas fram i webbläsaren av standardens planmotor (src/lib/standard/plan.js) ur samma fält, så att
 // sidan, riggen och provet räknar lika. Hur fälten skrivs står i METODER.md under Planera insatsen.
 import type { CollectionEntry } from 'astro:content';
-import { gruppensElever, kortnamn, metodplan, minuterISpann, olankadeSaker, postensRad, sakdelar, sakspann, slugAv } from './standard/index.js';
+import { gruppensElever, kortnamn, metodplan, minuterISpann, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, rollensRad, sakdelar, sakspann, slugAv, visadeTexter } from './standard/index.js';
 import { bankAv, nivaFarger } from './bank';
 import { harTaFram, taFramAv } from './tafram';
 import { formateraDatum } from './innehall';
@@ -82,9 +82,10 @@ export interface PlanData {
    * delarna med tid och vad läraren gör, förberedelsen (raden Före passet), andra rader som Hemma, och det läraren gör efter
    * passet (passrutinens efterPasset), med adresserna till passet och stegen på metodens sida. */
   passet?: PlanPasset;
-  /** Vad som skiljer passen åt (plan.passen), med adressen till metodens tabell för ett pass som går till på ett eget sätt
-   * och tabellens delar, när den har en rad per del med tiden under delens namn (Seriesamtals pass 1). */
-  passen?: { nar: string; text: string; kort?: string; tabell?: { namn: string; adress: string; delar?: { tid: string; fas: string; vad: string }[]; fore?: { namn: string; nar: string; vad: string }[] } }[];
+  /** Vad som skiljer passen åt (plan.passen): rollens citat ur metoden och raden ur metodens tabell som den hämtar sin text
+   * ur (K-520), och adressen till metodens tabell för ett pass som går till på ett eget sätt med tabellens delar, när den
+   * har en rad per del med tiden under delens namn (Seriesamtals pass 1). */
+  passen?: { nar: string; text?: string; rad?: { kolumn: string; text: string }[]; kort?: string; tabell?: { namn: string; adress: string; delar?: { tid: string; fas: string; vad: string }[]; fore?: { namn: string; nar: string; vad: string }[] } }[];
   /** Metodens rutor överst, som planen visar eller leder till: principerna, gruppen och Hem och skola. */
   principer?: { rubrik: string; text: string; adress: string };
   gruppen?: { rubrik: string; text: string; adress: string };
@@ -112,9 +113,11 @@ export interface PlanData {
 
 export interface PlanPasset {
   rubrik: string;
-  /** Tidsschemats inledning, som står vid förberedelsen. */
+  /** Tidsschemats inledning som planen visar den, utan meningarna i plan.utan (planensInledning i standarden). */
   text?: string;
   delar: { tid: string; fas: string; vad: string; minuter?: number }[];
+  /** Tidsschemats varianter: passet de veckor då delarna har andra tider, som Läslistors vecka 1–3 (K-515). */
+  varianter?: { nar: string; text: string; delar: { tid: string; fas: string; vad: string; minuter?: number }[] }[];
   /** Rader utan minuter i passet, som Hemma, cirka 20 min. */
   andra: { tid: string; fas: string; vad: string }[];
   fore?: string;
@@ -125,28 +128,9 @@ export interface PlanPasset {
   steg?: { rubrik: string; adress: string; rader: { namn: string; fraser: string[] }[] };
 }
 
-// Planens texter ur metoden, som sidan visar med länkar till det de namnger, med var de står till spärren.
-const planensTexter = (d: Metod['data']): [string, string][] => [
-  ...(d.uppfoljning?.rader ?? []).map((r): [string, string] => [`Uppföljningens rad "${r.nar}"`, r.vad]),
-  ...(d.progression?.rader ?? []).flatMap((r): [string, string][] => [[`Progressionens rad "${r.vecka}"`, r.fokus], [`Progressionens rad "${r.vecka}"`, r.roll], ...(r.led ? [[`Progressionens rad "${r.vecka}"`, r.led] as [string, string]] : [])]),
-  ...(d.checklista?.punkter ?? []).map((p): [string, string] => ['Checklistan', p]),
-  ...(d.plan?.passen ?? []).map((p): [string, string] => [`Planens pass "${p.nar}"`, p.text]),
-  ...(d.plan?.fore ?? []).map((t): [string, string] => ['Planens fore', t]),
-  ...(d.plan?.justera ?? []).map((t): [string, string] => ['Planens justera', t]),
-  ...(d.plan?.upprepa ? [['Planens upprepa', d.plan.upprepa] as [string, string]] : []),
-];
-// Metodens egna texter som planen också visar: passets delar, förberedelsen, efter passet, principerna och Hem och skola.
-// Det de namnger blir länkar, men spärren gäller bara planens texter ovan, eftersom metodens sida redan prövar sina.
-const visadeTexter = (d: Metod['data']): string[] => [
-  ...planensTexter(d).map(([, t]) => t),
-  ...(d.tidsschema?.rader ?? []).map((r) => r.vad),
-  // Tidsschemats inledning står först bland passets delar, och gruppen under Före (länkgranskningen 2026-10-25: Lektionskortet
-  // och Ljudlek i grupp blev ingen länk där).
-  d.tidsschema?.text ?? '', d.gruppen?.text ?? '',
-  d.tidsschema?.efter ?? '', d.passrutin?.efterPasset ?? '', d.principer?.text ?? '', d.hem?.text[0] ?? '',
-  // Tabellerna för pass med egen ordning, och en tabell med veckorna och nivåerna, som bladen i De fyra räknesätten.
-  ...d.tabeller.filter((t) => (d.plan?.passen ?? []).some((p) => p.tabell === t.rubrik) || (d.nivaer.length >= 2 && t.kolumner.slice(1).every((k, i) => k.toLowerCase() === d.nivaer[i]?.namn.toLowerCase()))).flatMap((t) => (t.rader ?? []).flatMap((r) => r.slice(1).map(String))),
-].filter(Boolean);
+// Planens texter ur metoden står i standarden (planensTexter och visadeTexter i src/lib/standard/plan.js), så att riggen
+// prövar samma texter. Det de namnger blir länkar, men spärren mot namn utan sak gäller bara planens egna texter, eftersom
+// metodens sida redan prövar sina.
 // De andra metoderna, som en text kan nämna ("till exempel med TIL i grupp"): titeln före kolon när bara en metod har den,
 // annars hela titeln.
 async function andraMetoder(id: string): Promise<MetodSak[]> {
@@ -173,20 +157,23 @@ const tabellensAdress = (d: Metod['data'], id: string, namn: string) => {
 };
 
 // Passet ur tidsschemat: raderna med minuter är passets delar, raden Före passet är förberedelsen, och en rad som Hemma,
-// cirka 20 min står efter delarna.
+// cirka 20 min står efter delarna. Tidsschemats varianter är passet de veckor då delarna har andra tider, med vad läraren
+// gör ur raden med samma fas, så att texten står på ett ställe i metoden (K-515).
 function planensPass(d: Metod['data'], id: string): PlanPasset | undefined {
   if (!d.tidsschema) return undefined;
   const sida = `/stodundervisning/${id}`;
   const medTid = (r: { tid: string }) => /^\d/.test(r.tid.trim());
   const fore = (r: { tid: string }) => /^före/i.test(r.tid.trim());
-  const delar = d.tidsschema.rader.filter(medTid).map((r) => {
+  const del = (r: { tid: string; fas: string; vad: string }) => {
     const t = minuterISpann(r.tid);
     return { tid: r.tid, fas: r.fas, vad: r.vad, ...(t ? { minuter: Math.max(1, t.till - t.fran) } : {}) };
-  });
+  };
+  const vadFor = (fas: string) => d.tidsschema!.rader.find((r) => r.fas.toLowerCase() === fas.toLowerCase())?.vad ?? '';
   return {
     rubrik: d.tidsschema.rubrik,
-    ...(d.tidsschema.text ? { text: d.tidsschema.text } : {}),
-    delar,
+    ...(planensInledning(d.tidsschema.text, d.plan?.utan) ? { text: planensInledning(d.tidsschema.text, d.plan?.utan) } : {}),
+    delar: d.tidsschema.rader.filter(medTid).map(del),
+    ...(d.tidsschema.varianter ? { varianter: d.tidsschema.varianter.map((v) => ({ nar: v.nar, text: v.text, delar: v.delar.map((x) => del({ ...x, vad: vadFor(x.fas) })) })) } : {}),
     andra: d.tidsschema.rader.filter((r) => !medTid(r) && !fore(r)).map((r) => ({ tid: r.tid, fas: r.fas, vad: r.vad })),
     ...(d.tidsschema.rader.find(fore) ? { fore: d.tidsschema.rader.find(fore)!.vad } : {}),
     ...(d.passrutin?.efterPasset ? { efter: d.passrutin.efterPasset } : {}),
@@ -274,7 +261,7 @@ export async function planensData(m: Metod): Promise<PlanData> {
     saker: await planensSaker(m),
     ...(Object.keys(kurs).length ? { kursveckor: Object.fromEntries(Object.entries(kurs).map(([v, k]) => [v, k.adress])) } : {}),
     ...(passet ? { passet } : {}),
-    ...(d.plan?.passen ? { passen: d.plan.passen.map((p) => ({ nar: p.nar, text: p.text, ...(p.kort ? { kort: p.kort } : {}), ...(p.tabell ? { tabell: passetsTabell(d, m.id, p.tabell) } : {}) })) } : {}),
+    ...(d.plan?.passen ? { passen: d.plan.passen.map((p) => ({ nar: p.nar, ...(p.text ? { text: p.text } : {}), ...(p.ur ? { rad: rollensRad(d, p.ur) ?? [] } : {}), ...(p.kort ? { kort: p.kort } : {}), ...(p.tabell ? { tabell: passetsTabell(d, m.id, p.tabell) } : {}) })) } : {}),
     ...(d.principer ? { principer: { rubrik: d.principer.rubrik, text: d.principer.text, adress: `${sida}#principer` } } : {}),
     ...(d.gruppen ? { gruppen: { rubrik: d.gruppen.rubrik, text: d.gruppen.text, adress: `${sida}#gruppen` } } : {}),
     ...(grupp ? { grupp } : {}),
@@ -316,7 +303,7 @@ async function planensBank(m: Metod): Promise<PlanBank | undefined> {
  * progressionens veckor, faktarutans tid och period), en metod utan mål och en tagg i progressionen som banken inte har.
  */
 export async function insatsplanFel(m: Metod): Promise<string[]> {
-  const fel = metodplan(m.data).fel;
+  const fel = planFel(m.data);
   if (!planensMal(m)) fel.push('Metoden har inget mål för planen: skriv plan.mal i metodens fil, eller ge metoden ett lektionskort med ett mål.');
   const taggar = (m.data.progression?.rader ?? []).flatMap((r) => r.taggar ?? []);
   if (taggar.length) {

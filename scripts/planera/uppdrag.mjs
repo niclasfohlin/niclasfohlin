@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Ett uppdrag till en agent ur en mall i scripts/planera/ (PLANERA.md under Agenterna och uppdragen). Fyller {{verktyget}} med
-// verktygets del (verktyget.md), {{skript}} med läsarens webbläsare (scripts/lasare.mjs) och varje annat {{namn}} med värdet
-// som ges, och stannar när något står kvar utan värde, så att en agent aldrig får ett uppdrag med en lucka.
+// verktygets del (verktyget.md), {{scenarier}} med fallen under Scenarierna i PLANERA.md, {{skript}} med läsarens
+// webbläsare (scripts/lasare.mjs) och varje annat {{namn}} med värdet som ges, och stannar när något står kvar utan värde,
+// så att en agent aldrig får ett uppdrag med en lucka.
 //
 //   node scripts/planera/uppdrag.mjs <mall> <ut.md> namn=värde …     ett värde som börjar med @ läses ur den filen
 //
@@ -21,6 +22,10 @@ const varden = Object.fromEntries(par.map((p) => {
   return [p.slice(0, i), v.startsWith('@') ? readFileSync(v.slice(1), 'utf8').trim() : v];
 }));
 varden.skript ??= resolve(mapp, '..', 'lasare.mjs').replace(/\\/g, '/');
+// Fallen ur Scenarierna i PLANERA.md, så att jägarna prövar samma fall som planprovet (K-518).
+const planera = readFileSync(resolve(mapp, '..', '..', 'PLANERA.md'), 'utf8').replace(/\r\n/g, '\n');
+const fallen = (planera.split('\n## Scenarierna\n')[1] ?? '').split('\n## ')[0].split('\n').filter((r) => /^\| S\d+ \|/.test(r)).map((r) => r.split('|').map((c) => c.trim()));
+varden.scenarier ??= ['| Fall | Pröva |', '|---|---|', ...fallen.map((c) => `| ${c[1]} | ${c[2]} |`)].join('\n');
 const text = readFileSync(fil, 'utf8')
   .replace('{{verktyget}}', readFileSync(join(mapp, 'verktyget.md'), 'utf8').trim())
   .replace(/\{\{(\w+)\}\}/g, (hel, namn) => varden[namn] ?? hel);

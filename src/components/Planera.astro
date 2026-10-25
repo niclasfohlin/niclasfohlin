@@ -156,6 +156,7 @@ const stegen = data.stege ? (data.progression?.rader ?? []).flatMap((r) => { con
                 <p class="pl-hjalp">Förnamn eller initialer, högst tolv elever. Namnen finns bara i den här webbläsaren och i kopian du sparar. Utan elevlista skattar du gruppen.</p>
                 {data.gruppen && <p class="pl-hjalp">Metoden: {liten(data.grupp?.text ?? '')}{data.grupp ? '. ' : ''}<a href={data.gruppen.adress} data-goatcounter-click={`planera:${data.id}:gruppen`} data-goatcounter-title={`${data.titel}: gruppen från planen`}>{data.gruppen.rubrik}</a></p>}
                 <p class="pl-hjalp pl-varning" id="pl-elever-not" role="status" hidden></p>
+                <div class="pl-elevfraga" id="pl-elever-fraga" role="group" aria-label="Samma elev eller en ny elev" hidden></div>
                 <label class="pl-kryss pl-narvaroval"><input type="checkbox" id="pl-narvaro" /> <span>Notera närvaro i passen</span></label>
                 <p><button type="button" class="pl-textknapp" id="pl-elever-bort" hidden>Ta bort elevernas namn och det som förts in om dem</button></p>
               </div>

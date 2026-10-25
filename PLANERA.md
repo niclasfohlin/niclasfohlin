@@ -17,7 +17,7 @@ Planen syns på metodens sida, med knappen Planera insatsen och märket Beta, s�
 
 | Steg | Vad du gör | Så här | Klart när |
 |---|---|---|---|
-| 1. Fälten | Metodens fält för planen, efter tabellen Vad metoden behöver nedan | Riggen skriver dem i leveransen (K-491); i en metod som ligger ute skriver du in dem | `npm run validera` stannar inte på `insatsplanFel` |
+| 1. Metoden som rot och fälten | Metodens premisser, efter Metoden är roten nedan, och sedan planens fält efter tabellen Vad metoden behöver | Riggen skriver dem i leveransen (K-491); i en metod som ligger ute standardiserar du metoden och skriver in fälten | `npm run validera` stannar inte på `tidsschematsFel`, `varianternasFel`, `planensRamFel` eller `insatsplanFel` |
 | 2. Valideringen | Hela valideringen, med planprovet | `npm run validera` | Grön, och raderna med ! är lästa |
 | 3. Läs själv | Planen i telefonbredd som läraren läser den: förslaget, Före, en vecka med varje pass och Efter insatsen | `node scripts/skarmbild.mjs <adress> <bild> --mobil`, och hela texten med `node scripts/plantext.mjs <id>` | Inget ser fel ut och inget står två gånger |
 | 4. Länkgranskningen | Det planen namnger men inte länkar, länkar som leder fel, begrepp som är länkade, och allmänna ord för en bestämd sak som läraren behöver, som kortet eller bubblorna, som ska bytas mot sakens namn (STIL.md under Hänvisningar) | `node scripts/plantext.mjs <id>`, sedan en agent per metod med uppdraget `lankgranskning` | Inga P1 kvar |
@@ -42,13 +42,68 @@ Det här är det en metod behöver för att få planen, och det som sker av sig 
 | Uppföljningen | En `tid` på varje rad, med orden i tabellen i METODER.md under Fälten i metodens fil, och `perElev` på en rad som görs med en elev i taget. Med en tid på varje rad kan metoden planeras (`planbar` i `src/lib/planbar.ts`), och sidan, knappen Planera insatsen och sakernas filer kommer då av sig själva | METODER.md under Fälten i metodens fil | `insatsplanFel` på en tid som standarden inte läser |
 | Progressionen | Kolumnen Vecka eller Pass med standardens ord, `rubrik` när fokus är långt, och `taggar` när veckan ska visa bankens poster | METODER.md under Fälten i metodens fil | `insatsplanFel` på en vecka eller en tagg som inte går att läsa |
 | Målet | `plan.mal`, eller ett lektionskort med ett mål | METODER.md under Fälten i metodens fil | `insatsplanFel` på en metod utan båda |
-| Passet | Tidsschemat med delar och minuter, och `plan.passen` när passen i veckan skiljer sig åt, med `tabell` för ett pass som går till på ett eget sätt | METODER.md under Planera insatsen, stycket som börjar "Passet står i rutan", och fälten | `insatsplanFel` på en tabell som metoden inte har och på en `nar` som standarden inte läser |
-| Före, justera, upprepa och stegen | `plan.fore`, `plan.justera`, `plan.upprepa` och `plan.stege` när metoden har sådant | METODER.md under Fälten i metodens fil | `insatsplanFel` på en stege i en progression som inte är i veckor |
+| Passet | Tidsschemat med delar och minuter, `tidsschema.varianter` när passet har andra delar eller tider vissa veckor, `plan.passen` när passen i veckan skiljer sig åt, med rollens text som en rad ur metodens tabell (`ur`) eller ett ordagrant citat och `tabell` för ett pass som går till på ett eget sätt, och `plan.utan` för meningar i tidsschemats text om metodens sida | METODER.md under Tidsschemats varianter, under Planera insatsen, stycket som börjar "Passet står i rutan", och fälten | `tidsschematsFel` på passets tider i en mening, `varianternasFel` på en lathund eller ett lektionskort som säger varianten på eget sätt, `planensRamFel` på tider i planens text och en mening om metodens sida, och `insatsplanFel` på en tabell som metoden inte har och en `nar` som standarden inte läser |
+| Före, justera, upprepa och stegen | `plan.fore`, `plan.justera`, `plan.upprepa` och `plan.stege` när metoden har sådant, med texterna som ordagranna citat ur metoden | METODER.md under Fälten i metodens fil | `planensCitatFel` på en mening som inte står så i metoden, och `insatsplanFel` på en stege i en progression som inte är i veckor |
 | Namnen | Planens texter nämner bladen, korten, mallarna, testen, texterna och lektionerna med namnen som de står i metoden, så att de blir länkar | STIL.md under Hänvisningar | `insatsplanFel` (`olankadeSaker`) på ett namn som metoden inte har |
 | Sakernas filer | Inget. Varje ram, vecka, räkneblad och mall som planen kan leda till får en egen Word-fil och pdf, och en knapp under sig på metodens sida | METODER.md under Utskriften, raden om knappen under en sak som planen kan leda till | `scripts/bankpdf.mjs` på en fil med fler sidor än regeln tillåter, och `scripts/planprov.mjs` på en sak som planen leder till utan knapp och på en fil utan knapp. En ny sorts sak, som kort att klippa, får sin regel i `src/lib/sakfiler.ts` och sin knapp i `Metod.astro`, för alla metoder på en gång |
 | Word i Google Dokument | De nya Word-filerna prövas i Google | ARBETSSATT.md under Kontroll före uppladdning | `node scripts/googleprov.mjs --andrade --mapp` |
 | Provningen | `npm run validera`, som kör planprovet på alla metoder som kan planeras, och planen läst i telefonbredd som en lärare läser den. En ny förmåga i modulen prövas också av kalla testare och buggjägare | Stegen ovan, och METODER.md under Proven | `scripts/planprov.mjs` |
 | Versionen | En ny förmåga i modulen höjer versionen, och raden skrivs i tabellen i samma commit | METODER.md under Versionerna | `scripts/planprov.mjs` på en version som tabellen inte har |
+
+## Metoden är roten
+
+Planen tar varje premiss ur metodens egna fält, och metodens sida, Word-filerna, lathunden, lektionskortet, planen och kalendern läser samma rot (Niclas 2026-10-25: "Så att införa denna modul kräver ibland att metoden standardiseras och såddas samt fixad med", och "Det blir som en standard och delad rot mellan metod och modul"). Vad det betyder för metodens fil står i METODER.md under Fälten i metodens fil och Tidsschemats varianter. Steg 1 går igenom metoden så här, och en ny form i modulen gör det för alla metoder med formen:
+
+| Steg | Vad du gör | Så här |
+|---|---|---|
+| Lista premisserna | Det planen säger om metoden: passets delar och tider, också vissa veckors, veckorna och stegen, uppföljningens tider, gruppens storlek, målet och materialets namn | Metodens fil och `node scripts/plantext.mjs <id>` |
+| Hitta roten | Var premissen står i metoden. Ett fält som metodens sida visar är roten. Står den bara i en mening, eller med egna ord i lathunden eller på lektionskortet, har den ingen rot än | Metodens fil och `src/data/lektionskort/` |
+| Avgör | Säger två ställen olika, avgör vilket som gäller, med metodens egna ord som belägg, och rätta det andra. Läslistor 2026-10-25: tidsschemats förberedelse och avslutning tog fram boken varje vecka, men passrutinen, lathunden och lektionskortet sa från vecka 4, så raderna fick "från vecka 4" | Beslutet står i svaret till Niclas |
+| Standardisera | Saknas ett fält får metoden ett i standarden och modellen, som sidan, Word, lathunden och planen läser, för alla metoder med samma form (METODER.md under När modellen växer). Ett eget fält i `plan` för något som metoden säger är en andra rot, och används inte | Som tidsschemats varianter |
+| Så | Pröva det nya fältet mot alla metoder: vilka har samma premiss i löptext? Skriv in fältet där det stöder metoden, med Såddprovets tre frågor (METODER.md under De centrala sakerna) | En genomgång av alla metoders texter med ett skript, som `tidsschematsFel` gjorde för passets tider |
+| Spärra | Fältets spärr i standarden stoppar en metod som säger premissen på eget sätt, så att riggen och sajten prövar samma | `npm run validera` |
+| Berätta | Det som ändrades i metodens text står i svaret till Niclas, och regeln går till metodriggen | Meddelandet till Metodrigg-sessionen |
+
+## Från fynd till rot
+
+Ett fynd lagas där det kommer ifrån, inte där det syns (Niclas 2026-10-25: "Men se till att du inte bara gör handgrepp på dem. Lös roten och hur dessa löses även på kommande metoder"). Varje fynd får svar på frågorna här innan något lagas, och svaren står i commit-meddelandet eller i svaret till Niclas.
+
+| Fråga | Det som söks |
+|---|---|
+| Vilket slags fel är det? | Samma sak på två ställen som säger olika (drift), en premiss utan rot i metoden, en nyckel som byter betydelse när något ändras (en elev på en rad, ett pass på en dag), eller ett fall som ingen hade tänkt på |
+| Varför kunde det hända? | Leta tills svaret är en regel som saknas, inte ett ställe som var fel: två funktioner som räknar samma sak, en text som modulen läser som data, en identitet som bara bygger på platsen. K-515: Läslistors vecka 1–3 stod i en mening, så sidan och kalendern valde delarna var för sig. K-516: elevlistan visste vem en rad var bara genom raden |
+| Var är roten? | En funktion i standarden, ett fält i metoden eller en regel för en nyckel. Lagningen görs där och gäller alla metoder |
+| Hur stannar det nästa gång? | En spärr som stoppar bygget när felet kommer tillbaka, prövad åt andra hållet: lägg in felet och se provet stanna |
+| Vilket fall saknades? | Fallet står i Scenarierna nedan med provet som prövar det |
+| Vad behöver riggen veta? | En regel för metodens fil går till metodriggen samma kväll |
+
+## Scenarierna
+
+Det som händer en lärare med en grupp under en insats, på ett ställe. Planprovet stannar när ett prov i tabellen saknas, så att varje fall prövas vid varje validering, och mallarna för jägarna, steget Samma sak överallt och verifieringen får tabellen av sig själva (`{{scenarier}}` i `scripts/planera/uppdrag.mjs`). Ett nytt fall ur ett fynd står här med sitt prov i samma commit som lagningen.
+
+| Fall | Det som händer | Provet |
+|---|---|---|
+| S1 | Planen börjar mitt i en vecka eller en lördag | `start på en lördag börjar nästa vecka med metodens vecka 1`; `start en onsdag ger 17 pass` |
+| S2 | Röda dagar och lov, också före starten och efter att planen är gjord | `påskens dagar faller bort`; `lov i valen flyttar planen`; `veckan före är lov: före första passet veckan före lovet` |
+| S3 | Planen går över nyår | `över nyåret med vecka 53 som lov`; `kalenderveckornas spann, också över nyår` |
+| S4 | En vecka tas om | `upprepad vecka ger 21 pass`; `texten till åtgärdsprogrammet följer den upprepade veckan` |
+| S5 | Ett pass flyttas eller ställs in, och Ångra | `flyttat pass`; `inställt pass ger 17 pass`; `ångrat inställt pass`; `sista passet efter datum när det sista passet flyttas före ett annat` |
+| S6 | Gruppen börjar högre upp i en stege | `en stege som börjar på vecka 3`; `metodens veckor som planens`; `stegen: variantens mening och metodens texter med planens vecka`; `kalendern skriver metodens veckor som planens` |
+| S7 | Passet ser annorlunda ut vissa veckor | `stegen: passet i vecka 1 har variantens tider`; `stegen: kalendern visar passet som sidan, med ett tidsschema`; `metodens sida säger varianten med standardens mening` |
+| S8 | Läraren sätter tider, olika för olika dagar | `olika tider olika dagar`; `kalenderfilen med tider har ett pass per händelse med klockslaget` |
+| S9 | Ett namn rättas, också efter en paus | `ett rättat namn behåller elevens skattningar`; `en paus med raden tom behåller eleven`; `en paus mitt i ett namn byter inte elev` |
+| S10 | En elev slutar och en ny kommer på samma rad | `en ny elev på en annan elevs rad är en ny elev`; `sidan frågar om det är samma elev`; `Samma elev ger Nora Beas skattningar` |
+| S11 | En elev tas bort och kommer tillbaka | `en borttagen rad ger inte nästa elev dess id`; `Ångra lägger tillbaka elevlistan`; `Bea får tillbaka det som förts in när namnet skrivs igen`; `en elev som togs bort tidigare känns igen och är ingen fråga` |
+| S12 | För många elever och samma namn två gånger | `en trettonde elev och samma namn två gånger sägs under listan, och gruppens storlek` |
+| S13 | Två grupper i samma metod | `två planer för metoden`; `pågående insatser: planerna i sina veckor, och :2 för en andra plan för samma metod` |
+| S14 | Samma plan i två flikar | `en bock i en annan flik syns i den här` |
+| S15 | En webbläsare som inte sparar | `utan lagring visas förslaget och beskedet` |
+| S16 | Planen på en annan dator, med länken eller kopian | `planen ur länken visas utan namn och utan uppföljning`; `kopian öppnas med allt`; `en kopia som har ändrats för hand öppnas utan fel` |
+| S17 | Sidan öppnas i en apps egen webbläsare | `vägen ut på iPhone: Safari, med planen` |
+| S18 | Helgen före en ny vecka | `på söndagen gäller rutan nästa pass och dess vecka` |
+| S19 | Insatsen är slut: utvärdering och förlängning | `efter insatsen: sidan visar Efter insatsen`; `förläng med två veckor`; `förlängningen flyttar inte resultatet efter` |
+| S20 | Filerna som laddas ner, var och en med eget namn | `filnamnen på det som laddas ner`; `kalenderfilens namn säger vad, metoden och datumet`; `kopians namn säger gruppen, metoden och datumet` |
+| S21 | Elevernas namn lämnar aldrig webbläsaren | `sammanställningen kopieras utan namn`; `inga namn i statistikens händelser`; `länken till planen utan namnet` |
 
 ## Agenterna och uppdragen
 
@@ -98,8 +153,8 @@ Planen för en metod, eller en ny version av modulen, är klar att ladda upp nä
 | Villkor | Prövat av |
 |---|---|
 | `npm run validera` är grön, och raderna med ! är lästa | Valideringen |
-| Planprovet: motorn, adresserna, knappen under varje sak och sidan i Chrome | `scripts/planprov.mjs` i valideringen |
-| Ingen P1 kvar från länkgranskningen, testarna, användbarheten, jägarna, Codex eller verifieringen | Svaren i `underlag/prov/<sak>/` |
+| Planprovet: motorn, adresserna, knappen under varje sak, scenarierna och sidan i Chrome | `scripts/planprov.mjs` i valideringen |
+| Ingen P1 kvar från länkgranskningen, testarna, användbarheten, jägarna, Codex eller verifieringen i det som omgången ändrade. En P1 i något som redan ligger ute och som omgången inte rörde stoppar inte en uppladdning som gör planen bättre: den går först i kön med prio 1, sägs i svaret till Niclas och är det första nästa omgång gör (K-515 och K-516 2026-10-25) | Svaren i `underlag/prov/<sak>/` |
 | Word-filerna ryms i Google Dokument | `node scripts/googleprov.mjs --andrade --mapp` |
 | Versionen står i tabellen under Versionerna i METODER.md | Planprovet |
 | Det som bara går att pröva på en riktig telefon, som kalenderfilen, kopian och utskriften, är sagt som oprövat till Niclas, en gång | Svaret till Niclas |
@@ -123,7 +178,7 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 |---|---|
 | Kalenderveckan | `kalendervecka`, `kalenderveckor` och, för skärmläsare, `kalenderveckaUtskriven` |
 | Veckan i planen | `planveckan`, `planveckanKort`, `gangen`, `veckansNamn` och `planveckansNamn` |
-| Metodens vecka, när en stege börjar högre upp | `metodveckan` |
+| Metodens vecka, när en stege börjar högre upp | `metodveckan`, och i metodens texter `veckornaIPlanen` |
 | Veckorna i en rubrik, "vecka 1–2" | `veckorI` |
 | Veckans pass och datumordningen | `veckansPass`, `veckansDagar`, `efterDatum` och `iDatumordning` |
 | Ett datum | `datumText`, `dagOchManad`, `dagText`, `dagKort`, `spannKort`, `datumspann` och `arDatum` |
@@ -131,7 +186,11 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | Veckodagarna | `VECKODAGAR` och `veckodagKort` |
 | Ett klockslag | `minuterAv`, `klockslag`, `plusMinuter`, `minuterISpann`, `tidText` och `tidsspann` |
 | Talen | `talAv`, `talText`, `talIRegex`, `allaAntal` och `ORDNINGSTAL` |
-| Texten | `stor`, `liten`, `mening`, `utanPunkt`, `decimal`, `tvasiffrigt`, `esc`, `skyddaRegex`, `rentText`, `forstaLedet` och `kortnamn` |
+| Texten | `stor`, `liten`, `mening`, `utanPunkt`, `decimal`, `tvasiffrigt`, `esc`, `skyddaRegex`, `rentText`, `forstaLedet`, `kortnamn`, `meningarna`, `slutarMedPunkt`, `allaTexter` och `forstaOrdet` |
+| Eleverna i elevlistan | `sammaElev` |
+| Passet på sidan och i kalendern, med tidsschemats varianter | `passetsBeskrivning`, `delensTid`, `variantensMening`, `variantenFor`, `tidsschematsFel` och `varianternasFel` |
+| Metodens texter i planen | `planensInledning`, `planensTexter`, `visadeTexter`, `planensRamFel`, `rollensRad` och `planensCitatFel` |
+| Filnamnen på det som laddas ner | `filnamnet` |
 | Uppföljningen | `uppfoljningensNamn`, `uppfoljningensRad`, `uppfoljningensRader` och `resultatText` |
 | Skattningen | `skattningenText`, `elevensVarden`, `skattadeVeckor` och `riktningText` |
 | Passen och besluten | `passensRad`, `passensLage`, `narvaronText`, `beslutText` och `BESLUTEN` |
@@ -161,6 +220,9 @@ En ny sak som visas på flera ställen får sin rot och sitt prov i samma commit
 | Leta efter kopior med en maskin, inte med ögonen: samma kod, samma lilla funktion och samma lista på två ställen i modulen | 2026-10-25: en skanning utan kunskap om koden hittade 62 kopior, som beslutens text och raden om bockade pass på sidan och i pdf:en, talen i ord i sex tabeller och gruppens storlek läst på två sätt. Ingen av dem hade hittats av proven som prövar en vy i taget. Nu är det spärren Dubbletterna, och varje rot i tabellen under Spärren mot drift har ett prov |
 | Pröva en sak genom alla vyer, inte varje vy för sig: samma vecka, samma datum och samma skattning ska heta och visa likadant överallt. Ett värde som visas på flera ställen får en funktion i standarden innan något använder det | 2026-10-25: elevens diagram skrev v. 45 till v. 50 där planen sa vecka 1 till 6. Användbarheten, de kalla testarna och buggjakten prövade varje vy för sig och såg det inte, och tre sätt att skriva en vecka hade vuxit fram i koden. Nu finns Spärren mot drift, steg 8b och kodgranskningens punkt 6 |
 | Ett namn som är ett vanligt ord länkas bara som titel, med stor bokstav mitt i en mening | "multiplikation" blev annars en länk till Övningsblad: Multiplikation |
+| En mening i metoden som säger passets tider, veckor eller delar är data, inte text. Den får ett fält i metoden, som sidan och planen läser, och spärren stoppar meningen | K-515: Läslistors vecka 1–3 stod i en mening i tidsschemat, i lathunden och på lektionskortet med var sina ord, och planen hade en egen kopia. Sidan och kalendern valde delarna var för sig |
+| Det som sparas om en elev, ett pass eller en vecka behöver en nyckel som håller när det runt den ändras. Pröva vad som händer när det nyckeln bygger på byts: raden får ett annat namn, passet en annan dag, veckan ett lov före sig | K-516: elevlistan visste vem en rad var bara genom raden, så en ny elev fick den gamlas skattningar. Nu avgör förnamnet, och läraren får frågan när det inte räcker |
+| Ett värde som visas på flera ställen har en funktion, också en fils namn | K-519: alla sammanställningar hette lika |
 
 ## Ändringar
 
@@ -168,6 +230,7 @@ En ny sak som visas på flera ställen får sin rot och sitt prov i samma commit
 |---|---|
 | 2026-10-25 | Första versionen, ur provningen av Planera 0.1 och 0.2 på fem metoder: länkgranskningen, testarna i två steg, användbarheten, buggjakten, Codex och verifieringen, med mallarna i `scripts/planera/` |
 | 2026-10-25 | Länkgranskningen letar också efter allmänna ord för en bestämd sak, efter Niclas regel samma dag: det som behövs namnges och länkas, eller har en knapp för att ladda ner |
+| 2026-10-25 | Arbetssättet efter K-515, K-516 och K-519 (K-518; Niclas samma dag: "Lös roten och hur dessa löses även på kommande metoder och hur det görs in i arbetssättet för modulen också"): Metoden är roten, med steg 1 som går igenom metodens premisser och standardiserar metoden; Från fynd till rot; Scenarierna, prövade av planprovet och givna till jägarna; och en P1 i något som redan ligger ute |
 | 2026-10-25 | Efter provningen av 0.2.6: en rot räknas som prövad när proven kör den, inte när namnet står i provet; spärren läser också en funktion med return och texter som tecken, och inte listor i kommentarer (Codex); pdf:ernas text prövas i planprovet; läsarens webbläsare ser ut som en mobil i telefonläget, så att pdf:erna hämtas och steg 8b kan läsa dem |
 | 2026-10-25 | Spärren mot drift läser också dubbletterna och att rötterna har prov, och tabellen under den har alla rötter (K-509) |
 | 2026-10-25 | Spärren mot drift i planprovet, steget 8b Samma sak överallt med uppdraget `konsistens`, och kodgranskningens punkt om drift, efter att elevens diagram och planen namngav veckorna olika (Niclas: "fundera på arbetssättet ... och hur detta eller liknande saker hade kunnat hittas") |

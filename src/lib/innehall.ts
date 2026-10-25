@@ -8,6 +8,7 @@ import { metodensFastaAntal } from './antal';
 import { hanvisningsFel } from './boklankar';
 import { metodensLektionskort } from './lektionskort';
 import { lasLektionskort } from './lektionskortdata';
+import { allaTexter, varianternasFel } from './standard/index.js';
 
 // Utkast visas i utvecklingsläge men aldrig i produktionsbygget. Databasens matteproblem har inget utkastläge.
 // En metods text, som också står i dess Word-filer och lathund, säger inte hur många poster en databas har: ett fast
@@ -25,8 +26,13 @@ export async function publicerade<K extends CollectionKey>(samling: K): Promise<
 const provade = new WeakSet<object>();
 function provaAntal(m: CollectionEntry<'stodundervisning'>) {
   if (provade.has(m.data)) return;
-  const lankar = [...hanvisningarnasFel(m.data), ...[...lasLektionskort(metodensLektionskort(m.data, m.id))].flatMap(([stam, papper]) => hanvisningarnasFel(papper, `src/data/lektionskort/${stam}.json`))];
+  const kort = [...lasLektionskort(metodensLektionskort(m.data, m.id))];
+  const lankar = [...hanvisningarnasFel(m.data), ...kort.flatMap(([stam, papper]) => hanvisningarnasFel(papper, `src/data/lektionskort/${stam}.json`))];
   if (lankar.length) throw new Error(`${m.data.titel}: ${lankar.length} hänvisningar kan inte bli länkar:\n  ${lankar.join('\n  ')}\nReglerna står i STIL.md under Hänvisningar.`);
+  // Ett lektionskort säger passets tider för vissa veckor med tidsschemats variant och standardens mening, så att kortet
+  // är 1–1 med metoden (K-515, varianternasFel i standarden).
+  const varianter = kort.flatMap(([stam, papper]) => varianternasFel(m.data, allaTexter(papper), { var: `Lektionskortet src/data/lektionskort/${stam}.json` }));
+  if (varianter.length) throw new Error(`${m.data.titel}:\n  ${varianter.join('\n  ')}\nReglerna står i METODER.md under Tidsschemats varianter.`);
   const fel = metodensFastaAntal(m);
   if (fel.length) throw new Error(`${m.data.titel}: ${fel.length} fasta antal av databasens poster, som slutar stämma när databasen växer och skulle göra om Word-filerna, pdf:erna och lathunden varje gång:\n  ${fel.join('\n  ')}\nSkriv utan antal och säg var posterna finns (METODER.md under Antalen och databaserna). Är talet en del av metoden och inte databasens storlek, skriv frasen med sitt skäl i src/data/fasta-antal.json.`);
   provade.add(m.data);

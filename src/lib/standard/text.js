@@ -28,6 +28,44 @@ export const skyddaRegex = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 export const rentText = (x, max) => (typeof x === 'string' ? x.replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max) : '');
 /** Namnets första led, före kolon: "Lärarhandledningen" ur "Lärarhandledningen: Läs mellan raderna". @param {string} s */
 export const forstaLedet = (s) => s.split(':')[0].trim();
+/** Alla texter i ett värde, också i listor och objekt, som lathunden eller ett lektionskorts innehåll. @param {unknown} x @returns {string[]} */
+export const allaTexter = (x) => (typeof x === 'string' ? [x] : Array.isArray(x) ? x.flatMap(allaTexter) : x && typeof x === 'object' && !(x instanceof Date) ? Object.values(x).flatMap(allaTexter) : []);
+/** Det första ordet: en elevs förnamn, "Ali" ur "Ali S.", och rubrikens första ord, "Lässchema" ur "Lässchema TIL". @param {unknown} s */
+export const forstaOrdet = (s) => String(s ?? '').trim().split(/\s+/)[0];
+/**
+ * Om ett namn som skrivs på en elevs rad i elevlistan är samma elev, med samma förnamn, som "Ali" och "Ali S." (sajtens
+ * K-516; buggjakten 2026-10-25: Nova skrevs på Annas rad och fick Annas skattningar och resultat). Ett annat förnamn är en
+ * ny elev, också ett förnamn som bara skiljer på en bokstav, eftersom många namn gör det (Alva och Alma, Nora och Nova).
+ * Läraren kan säga att det är samma elev med rättat namn.
+ * @param {string} forut namnet när läraren började skriva
+ * @param {string} nu
+ */
+export const sammaElev = (forut, nu) => !!forstaOrdet(forut) && forstaOrdet(forut).toLocaleLowerCase('sv') === forstaOrdet(nu).toLocaleLowerCase('sv');
+// Förkortningar som slutar med punkt utan att meningen slutar.
+const FORKORTNING = /(?:^|[^\p{L}])(?:t\.ex|m\.fl|bl\.a|o\.s\.v|s\.k|d\.v\.s|ca|kl|nr|s)\.$/iu;
+/** Om en mening slutar med punkt, utropstecken, frågetecken eller tre punkter, också inom citattecken. @param {string} m */
+export const slutarMedPunkt = (m) => /[.!?…]["”»’)]*$/u.test(m);
+/**
+ * Meningarna i en text: en mening slutar med punkt, utropstecken, frågetecken eller tre punkter, också inom citattecken,
+ * före ett ord med stor bokstav eller textens slut. Förkortningar som t.ex. delar inte, och ett citat som ”Hej!” mitt i en
+ * mening inte heller.
+ * @param {unknown} text
+ * @returns {string[]}
+ */
+export function meningarna(text) {
+  const t = String(text ?? '').trim();
+  if (!t) return [];
+  const ut = [];
+  let fran = 0;
+  for (const m of t.matchAll(/[.!?…]["”»’)]*(?=\s+[A-ZÅÄÖ”"«])/gu)) {
+    const slut = /** @type {number} */ (m.index) + m[0].length;
+    if (FORKORTNING.test(t.slice(fran, /** @type {number} */ (m.index) + 1))) continue;
+    ut.push(t.slice(fran, slut).trim());
+    fran = slut;
+  }
+  ut.push(t.slice(fran).trim());
+  return ut.filter(Boolean);
+}
 /**
  * Ett namn kort, med bara första ledet, när inget annat namn i listan har samma första led, och annars helt: "Bildserie 1"
  * och "Mina lärdomar: vecka 1–2".
@@ -64,11 +102,12 @@ export function talAv(s) {
 }
 /**
  * Talen från fran till till som led i ett reguljärt uttryck, med siffrorna först: "\d+|en|ett|två|tre". "en" står med när
- * ett ingår, och från tjugo de sammansatta tiotalen, som "tjugofem".
+ * ett ingår, och från tjugo de sammansatta tiotalen, som "tjugofem". Utan siffror bara orden.
  * @param {number} fran
  * @param {number} till
+ * @param {boolean} [siffror]
  */
-export const talIRegex = (fran, till) => {
+export const talIRegex = (fran, till, siffror = true) => {
   const tiotal = till >= 20 ? [`(?:${TIOTAL.slice(2, Math.min(9, Math.floor(till / 10)) + 1).join('|')})(?:en|${ENTAL.slice(1, 10).join('|')})?`] : [];
-  return ['\\d+', ...(fran <= 1 && till >= 1 ? ['en'] : []), ...ENTAL.slice(Math.max(0, fran), Math.min(19, till) + 1), ...tiotal].join('|');
+  return [...(siffror ? ['\\d+'] : []), ...(fran <= 1 && till >= 1 ? ['en'] : []), ...ENTAL.slice(Math.max(0, fran), Math.min(19, till) + 1), ...tiotal].join('|');
 };

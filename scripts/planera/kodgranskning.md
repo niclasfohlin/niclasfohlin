@@ -22,6 +22,8 @@ Och alltid:
 4. Data som saknas: en metod utan tidsschema, utan stegen, utan planens valfria fält, eller med en form som de fem metoderna i betan inte har.
 5. En ändring i den delade koden som ändrar en fil eller sida som fanns före, utan att det var meningen.
 6. Drift: ny kod som skriver ut en vecka, ett datum eller ett annat värde på egen hand, fast standarden har en funktion för det, eller ett nytt värde som visas på flera ställen utan en funktion i standarden (`PLANERA.md` under Spärren mot drift). Samma sak ska heta och visa likadant på sidan, i pdf:erna, i texterna som kopieras, i texten till åtgärdsprogrammet och i kalenderfilen.
+7. Nycklar: det som sparas om en elev, ett pass eller en vecka, och vad som händer när det nyckeln bygger på ändras, som en ny elev på en annan elevs rad, ett pass som flyttas eller ett lov som läggs in efteråt.
+8. Metoden som rot: en premiss om metoden, som passets tider, veckorna eller uppföljningen, som planen tar någon annanstans ifrån än metodens egna fält, eller som står på två ställen i metoden (`PLANERA.md` under Metoden är roten).
 
 ## Svaret
 

@@ -16,6 +16,7 @@ Niclas, som äger sajten, vill att samma sak heter och visar likadant överallt 
 | Följ varje sak i tabellen nedan genom alla ställen där den står, och skriv upp hur den heter och vilket värde den har på varje ställe | Ett fel är att samma sak heter eller visar olika på två ställen |
 | Ändra något, som ett lov, en upprepad vecka eller ett flyttat pass, och följ sakerna igen | Namnen ska följa med en ändring överallt |
 | Ta en bild (`bild`) av varje ställe där något skiljer sig, och läs bilden med Read | Felet ska gå att se |
+| Gör ändringarna med fallen i tabellen nedan: ett lov, en vecka som tas om, en elev som byter namn eller slutar, en start högre upp i en stege | Namnen ska följa med en ändring överallt |
 | Högst omkring {{tak}} kommandon | Uppdraget ska bli klart |
 
 | Sak | Ställen att jämföra |
@@ -25,6 +26,8 @@ Niclas, som äger sajten, vill att samma sak heter och visar likadant överallt 
 | En skattning | Veckan där du skattade, elevens diagram, avstämningen mitt i, sammanställningen, pdf:erna och texterna som kopieras |
 | Ett pass | Veckans lista över pass, rutan med nästa pass, kalenderfilen och bockarna i planens lista |
 | Målet | Rutan Mål, skattningens fråga, sammanställningen, pdf:erna och texten till åtgärdsprogrammet |
+
+{{scenarier}}
 
 {{verktyget}}
 
