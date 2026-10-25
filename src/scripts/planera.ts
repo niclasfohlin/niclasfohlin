@@ -15,7 +15,7 @@
 // fyller i den"). Elevernas namn och allt läraren för in stannar i webbläsaren och följer aldrig med länken,
 // kalenderfilen, statistiken eller texterna som kopieras.
 import {
-  arDatum, BESLUT, BESLUTEN, beslutText, slugAv, dagarText, dagKort, dagText, datumspann, datumText, decimal, dokumentationstext, efterDatum, elevensResultat, elevensVarden, elevtext, esc, forstaLedet, forstaMandagen, forval, forvaldLangd, gangen, GRUPPEN, iDatumordning, klockslag, liten, mening, metodveckan, minuterAv, minuterISpann, narvaronText, passensRad, plusMinuter, prickarna, resultatText, riktningText, sakspann, skattadeVeckor, skattningenText, stapelnsKant, stor, talText, uppfoljningensRader, veckansPass, veckodagKort, helgdag, isoVecka, kalenderfil, kalendervecka, kalenderveckaUtskriven, kodaVal,
+  arDatum, BESLUT, BESLUTEN, beslutText, slugAv, dagarText, dagKort, dagText, datumspann, datumText, decimal, dokumentationstext, efterDatum, elevensResultat, elevensVarden, elevtext, esc, forstaLedet, forstaMandagen, forval, forvaldLangd, gangen, GRUPPEN, iDatumordning, klockslag, liten, mening, metodveckan, minuterAv, minuterISpann, narvaronText, passensRad, plusMinuter, prickarna, resultatText, riktningText, sakspann, skattadeVeckor, skattningenText, stapelnsKant, stor, talText, uppfoljningensNamn, uppfoljningensRader, veckansPass, veckodagKort, helgdag, isoVecka, kalenderfil, kalendervecka, kalenderveckaUtskriven, kodaVal,
   LANGSTA, lasVal, malText, metodplan, minuterText, mittVeckan, nastaPass, passensMinuter, passetsDag, passetsRoller, passetsTid, planera, planvecka, planveckanKort, planveckansNamn, plusDagar,
   mandagen, rensaFoljd, rentaTider, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
   uppfoljningensTillfallen, uppraknat, utanNamn, veckansDagar, veckansNamn, veckanFor, veckodag, veckonyckel, VECKODAGAR, type Veckonamn,
@@ -697,7 +697,9 @@ const riktningar = (s: Sammanstallning, plats: string, medResultat = false) => `
   return `<li>${namnknapp(plats, e)}<span class="pl-riktning${r ? ` ${r}` : ''}">${r ? `<span aria-hidden="true">${PIL[r]} </span>` : ''}${esc(riktningText(e))}${res ? `<span class="pl-res-kort">${esc(stor(res))}</span>` : ''}</span>${utvecklingsruta(plats, e, s)}</li>`;
 }).join('')}</ul>`;
 const resultatfalt = (nyckel: string) => (harElever() ? `<div class="pl-resultat"><span class="pl-hjalp">Resultat för varje elev, om du vill, som poäng eller antal rätt</span>${aktiv.foljd.elever.map((e) => `<label><span>${esc(e.namn)}</span><input class="pl-falt" type="text" maxlength="40" data-resultat="${esc(nyckel)}|${esc(e.id)}" value="${esc(aktiv.foljd.resultat[nyckel]?.[e.id] ?? '')}" /></label>`).join('')}</div>` : '');
-const uppfRad = (x: { nyckel: string; rad: number; datum: string; vecka: number | null }) => `<li><span class="pl-etikett">${esc(nar(x.rad))} · ${x.vecka === null ? kalendervecka(isoVecka(x.datum).vecka) : esc(dagText(x.datum))}</span><p>${lankad(data.uppfoljning.rader[x.rad].vad)}</p>${resultatfalt(x.nyckel)}</li>`;
+// Uppföljningens namn ur standarden, som i raden och texterna: Efter insatsen för den första efter insatsen (buggjakten
+// 2026-10-25: Efter-sidan sa "Efter sex till åtta veckor" om en plan på fyra veckor).
+const uppfRad = (x: { nyckel: string; rad: number; datum: string; vecka: number | null }) => `<li><span class="pl-etikett">${esc(uppfoljningensNamn(plan, info(), x.rad))} · ${x.vecka === null ? kalendervecka(isoVecka(x.datum).vecka) : esc(dagText(x.datum))}</span><p>${lankad(data.uppfoljning.rader[x.rad].vad)}</p>${resultatfalt(x.nyckel)}</li>`;
 const meningsfalt = (id: string, etikett: string, attr: string, varde: string) => `<label class="pl-etikett" for="${id}">${esc(etikett)}</label><input class="pl-falt pl-brett" type="text" id="${id}" maxlength="200" ${attr} value="${esc(varde)}" /><p class="pl-hjalp">Meningen står i sammanställningen och i texten som kopieras, utan elevernas namn.</p>`;
 const forlangSteg = (n: number) => (mp.period.enhet === 'pass' ? n * aktiv.val.dagar.length : n);
 const forlangText = (n: number) => (mp.period.enhet === 'pass' ? `${n * aktiv.val.dagar.length} pass` : `${n} ${n === 1 ? 'vecka' : 'veckor'}`);
@@ -924,7 +926,10 @@ function veckansDelar(v: PlanVecka, oppna: Set<string>): string[] {
     const obockat = veckansPass(plan, forraVeckan).filter((p) => p.datum < idag && !gjort(passetsDag(p))).length;
     const oskattad = !Object.keys(aktiv.foljd.skattning[forraVeckan.mandag] ?? {}).length;
     const delarna = [obockat ? `${obockat === 1 ? 'ett pass' : `${obockat} pass`} som inte är ${obockat === 1 ? 'bockat' : 'bockade'}` : '', oskattad ? 'ingen skattning' : ''].filter(Boolean);
-    if (delarna.length) paminn = `<p class="pl-paminn pl-forra">Förra veckan har ${esc(uppraknat(delarna))}. <button type="button" class="pl-textknapp" data-vy="${forraVeckan.nr}">Till förra veckan</button></p>`;
+    // Med ett lov emellan heter veckan med sitt namn, så att "förra veckan" aldrig är en vecka långt tillbaka (buggjakten
+    // 2026-10-25).
+    const intill = forraVeckan.mandag === plusDagar(v.mandag, -7);
+    if (delarna.length) paminn = `<p class="pl-paminn pl-forra">${esc(intill ? 'Förra veckan' : planveckansNamn(plan, forraVeckan).Text)} har ${esc(uppraknat(delarna))}. <button type="button" class="pl-textknapp" data-vy="${forraVeckan.nr}">Till ${esc(intill ? 'förra veckan' : rubrikVecka(forraVeckan).toLocaleLowerCase('sv'))}</button></p>`;
   }
   const kursvecka = data.kursveckor?.[String(rutansVecka.innehall)];
   const material = [
@@ -1261,7 +1266,7 @@ const narvaroFor = (e: SammanstallningElev, s: Sammanstallning) => s.veckor.map(
 // Skattningarna vecka för vecka som staplar, små på raden och stora när eleven fälls ut, med en markering vid
 // avstämningen och, när läraren noterar närvaron, närvaron som prickar under veckan.
 function graf(varden: (number | undefined)[], etiketter: Veckonamn[], o: { stor?: boolean; mitt?: number | null; pass?: string[][]; namn: string }) {
-  const stor = o.stor ?? false, steg = stor ? 36 : 9, b = stor ? 22 : 6, h = stor ? 110 : 22, x0 = stor ? 22 : 0, topp = stor ? 22 : 2;
+  const stor = o.stor ?? false, steg = stor ? 36 : 9, b = stor ? 22 : 6, h = stor ? 110 : 22, x0 = stor ? 22 : 0, topp = stor ? 34 : 2;
   // Under stapeln står veckan i planen och kalenderveckan på var sin rad, som i planens lista (veckansNamn i standarden).
   const under = stor ? (o.pass ? 54 : 38) : 2, bredd = x0 + varden.length * steg;
   const linjer = stor ? [1, 2, 3, 4, 5].map((n) => `<line x1="${x0 - 4}" x2="${bredd}" y1="${topp + h - (n / 5) * h}" y2="${topp + h - (n / 5) * h}" class="pl-linje"/><text x="8" y="${topp + h - (n / 5) * h + 4}" class="pl-axel">${n}</text>`).join('') : '';
@@ -1273,7 +1278,7 @@ function graf(varden: (number | undefined)[], etiketter: Veckonamn[], o: { stor?
     return `${yta}${etikett}${prickar}`;
   }).join('');
   // Veckan mitt i insatsen, då läraren stämmer av, står i ett ljust fält bakom stapeln.
-  const mitt = stor && o.mitt ? `<rect x="${x0 + (o.mitt - 1) * steg + 1}" y="${topp - 12}" width="${steg - 2}" height="${h + 12}" rx="3" class="pl-mittfalt"/><text x="${x0 + (o.mitt - 1) * steg + steg / 2}" y="${topp - 3}" class="pl-axel pl-mitttext">Mitt i</text>` : '';
+  const mitt = stor && o.mitt ? `<rect x="${x0 + (o.mitt - 1) * steg + 1}" y="${topp - 26}" width="${steg - 2}" height="${h + 26}" rx="3" class="pl-mittfalt"/><text x="${x0 + (o.mitt - 1) * steg + steg / 2}" y="${topp - 16}" class="pl-axel pl-mitttext">Mitt i</text>` : '';
   const text = varden.map((x, i) => (x ? `${etiketter[i].text}: ${x}` : '')).filter(Boolean).join(', ');
   return `<svg class="pl-graf${stor ? ' stor' : ''}" viewBox="0 0 ${bredd} ${topp + h + under}" width="${bredd}" height="${topp + h + under}" role="img" aria-label="${esc(`${o.namn}: ${text || 'inte skattad än'}`)}">${mitt}${linjer}${staplarna}</svg>`;
 }

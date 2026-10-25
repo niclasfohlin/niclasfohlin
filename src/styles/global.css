@@ -2931,6 +2931,8 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 .pl-remsa-knappar { display: flex; flex-wrap: wrap; gap: 0.35rem; }
 .pl-remsa-vecka { position: relative; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; min-width: 2.75rem; min-height: 2.75rem; padding: 0.15rem 0.5rem; border: 1.5px solid var(--farg-kant); border-radius: 8px; background: var(--farg-yta); color: var(--farg-text); font: 700 1rem/1.1 var(--typsnitt-ui); cursor: pointer; }
 .pl-remsa-vecka small { font-size: 0.68rem; font-weight: 600; }
+/* En flik med två rader, som "4 igen", har plats för pricken under ordet (buggjakten 2026-10-25). */
+.pl-remsa-vecka:has(small) { padding-bottom: 0.6rem; }
 .pl-remsa-vecka.nu { border-color: var(--farg-accent); }
 .pl-remsa-vecka.nu::after { content: ''; position: absolute; bottom: 0.2rem; width: 0.35rem; height: 0.35rem; border-radius: 50%; background: currentColor; }
 .pl-remsa-vecka[aria-pressed="true"] { background: var(--farg-accent); border-color: var(--farg-accent); color: #fff; }

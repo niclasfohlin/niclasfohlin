@@ -64,11 +64,12 @@ async function dokument(titel: string) {
   const staplar = (varden: (number | undefined)[], etiketter: Veckonamn[], o: { hojd?: number; mitt?: number | null; pass?: ('med' | 'borta' | 'inte')[][] } = {}) => {
     const h = o.hojd ?? 70, n = varden.length, bredd = A4[0] - 2 * KANT - 24;
     const steg = Math.min(46, bredd / Math.max(n, 1)), b = steg * 0.62;
-    const total = h + 43 + (o.pass ? 14 : 0) + (o.mitt ? 12 : 0);
+    // Fältet för Mitt i står ovanför stapelns värde, så att värdet 5 inte täcker det (buggjakten 2026-10-25).
+    const total = h + 43 + (o.pass ? 14 : 0) + (o.mitt ? 22 : 0);
     plats(total);
-    if (o.mitt) y -= 12;
+    if (o.mitt) y -= 22;
     const botten = y - h - 6, x0 = KANT + 24;
-    if (o.mitt) sida.drawRectangle({ x: x0 + (o.mitt - 1) * steg + 1, y: botten - 2, width: steg - 2, height: h + 14, color: farg.mitt });
+    if (o.mitt) sida.drawRectangle({ x: x0 + (o.mitt - 1) * steg + 1, y: botten - 2, width: steg - 2, height: h + 24, color: farg.mitt });
     for (let v = 1; v <= 5; v++) {
       const ly = botten + (v / 5) * h;
       sida.drawLine({ start: { x: x0 - 4, y: ly }, end: { x: x0 + n * steg, y: ly }, thickness: 0.5, color: farg.kant });
@@ -93,9 +94,9 @@ async function dokument(titel: string) {
     // Veckan mitt i insatsen i ett ljust fält, som på sidan; fältet ritas först, så att staplarna står ovanpå.
     if (o.mitt) {
       const mx = x0 + (o.mitt - 1) * steg;
-      sida.drawText('Mitt i', { x: mx + steg / 2 - font.widthOfTextAtSize('Mitt i', 7) / 2, y: botten + h + 6, size: 7, font, color: farg.svag });
+      sida.drawText('Mitt i', { x: mx + steg / 2 - font.widthOfTextAtSize('Mitt i', 7) / 2, y: botten + h + 15, size: 7, font, color: farg.svag });
     }
-    y -= total - (o.mitt ? 12 : 0);
+    y -= total - (o.mitt ? 22 : 0);
   };
   const avsluta = async (fot: string) => {
     sidor.forEach((s, i) => s.drawText(ren(`${fot} · sida ${i + 1} av ${sidor.length}`), { x: KANT, y: 28, size: 8, font, color: farg.svag }));
