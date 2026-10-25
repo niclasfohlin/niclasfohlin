@@ -28,7 +28,7 @@ material:
   - multilink
   - räknemattan och talrutan
   - övningsblad
-uppdaterad: 2026-10-24
+uppdaterad: 2026-10-25
 publicerad: 2026-10-04
 relaterade:
   - antalsuppfattning-i-grupp
@@ -398,7 +398,7 @@ uppfoljning:
   rader:
     - nar: Före kursen
       tid: "före"
-      vad: Kartläggningen. Eleven räknar åtta uppgifter på sin nivå och visar och förklarar sex uppgifter. Du skriver vad eleven gör och säger.
+      vad: Kartläggningen. Eleven räknar åtta uppgifter på sin nivå och visar och förklarar sex uppgifter. Du skriver vad eleven gör och säger i lärarens protokoll.
     - nar: Efter varje pass
       tid: "varje pass"
       vad: Din notering och elevens lärdom i Mina lärdomar.
@@ -433,7 +433,7 @@ checklista:
   rubrik: Före första passet
   punkter:
     - Gör kartläggningen veckan före kursen och bestäm gruppens nivå.
-    - "Skriv ut per elev: räknemattans ark, talraderna, Addition 1, Subtraktion 1, Mina lärdomar och kortet."
+    - "Skriv ut per elev: räknemattans ark, Tomma talrader, Addition 1, Subtraktion 1, Mina lärdomar och kortet Säg varje gång."
     - Läs vecka 1 under Kursens material i metoden, och räkna första talet åt båda hållen.
     - Sätt upp en väggplansch för lärdomarna.
     - Prata med varje elev i åk 7 om ett eget mål.

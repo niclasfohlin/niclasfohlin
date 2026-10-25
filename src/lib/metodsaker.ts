@@ -96,11 +96,12 @@ export function metodensSaker(d: MetodData, id: string): MetodSak[] {
   ramar.forEach((r, ri) => {
     if (bank && (bank.ramar.has(ri) || bank.oversikter.has(ri))) return;
     const titel = r.rubrik.split(':').slice(1).join(':').trim();
-    if (titel && /^\p{Lu}/u.test(titel) && !nivaNamn.has(titel) && !veckornaI(titel)) titlar.set(titel, [...(titlar.get(titel) ?? []), `${sida}#${ramAnkare[ri]}`]);
+    // En titel med liten bokstav räknas när den är ett ord för en sak, som "lärarens protokoll".
+    if (titel && (/^\p{Lu}/u.test(titel) || arSaksord(titel)) && !nivaNamn.has(titel) && !veckornaI(titel)) titlar.set(titel, [...(titlar.get(titel) ?? []), `${sida}#${ramAnkare[ri]}`]);
   });
   // Titeln länkas bara som titel, med stor bokstav mitt i en mening, så att "multiplikation" inte leder till Övningsblad:
   // Multiplikation.
-  for (const [titel, adresser] of titlar) if (adresser.length === 1 && !perNamn.has(titel)) saker.push({ ...sak(titel, adresser[0]), versal: true });
+  for (const [titel, adresser] of titlar) if (adresser.length === 1 && !perNamn.has(titel)) saker.push(/^\p{Lu}/u.test(titel) ? { ...sak(titel, adresser[0]), versal: true } : sak(titel, adresser[0]));
   // Materialets avsnitt, som "Kursens material", och kursens veckor och blad: "vecka 3" leder till veckans lektion i en kurs
   // med veckor, och "Addition 1" till bladet (src/lib/karta.ts).
   if (d.ramar?.rubrik) saker.push(sak(d.ramar.rubrik, `${sida}#ramar`));
@@ -123,6 +124,12 @@ export function metodensSaker(d: MetodData, id: string): MetodSak[] {
   for (const k of kort) if (k.namn) saker.push(sak(k.namn, k.adress));
   if (kort.length === 1) saker.push(sak('Lektionskortet', kort[0].adress));
   if (harLathund(d)) saker.push(sak('Lathunden', `${sida}/lathund`));
+  // Lathundens tredje sida, som kortet Säg varje gång i De fyra räknesätten, har sin egen knapp som skriver ut den, och
+  // metodens filmer står i spelaren överst på lathundssidan, med en knapp som laddar ner dem (Niclas 2026-10-25: det som
+  // behövs ska namnges och länkas, "annars ha knapp för ladda ner").
+  const mallensNamn = d.lathund?.mall?.rubrik?.trim();
+  if (harLathund(d) && mallensNamn && !saker.some((s) => s.namn.toLowerCase() === mallensNamn.toLowerCase())) saker.push(sak(mallensNamn, `${sida}/lathund#lh-3`));
+  if (harLathund(d) && d.film) saker.push({ namn: 'filmerna', former: ['filmerna', 'Filmerna', 'metodens filmer', 'metodens film', 'Metodens filmer', 'Metodens film'], adress: `${sida}/lathund#lathund-film` });
   // Bankens texter och problem: titeln, som den står och inte först i en mening, och en text utan nummer, som
   // kartläggningens text före, på planens nivå.
   if (bank) {

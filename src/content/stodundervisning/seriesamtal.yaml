@@ -31,7 +31,7 @@ material:
   - pärmar
   - whiteboardpennor
   - pinnar och tejp
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-25
 publicerad: 2026-10-04
 relaterade: [kompissamtal]
 utkast: false
@@ -241,7 +241,7 @@ tabeller:
       - - |-
           Förberedelse
           Dagen före
-        - Prata i fem minuter med den som äger serien, och fråga ”Vill du rita något som har hänt dig, eller något som brukar bli svårt? Är det över nu? Får de andra höra det?” Pröva händelsen mot de tre kraven under ”Var hittar du bildserierna och händelserna?”, och säg att du inte bestämmer vem som hade rätt. Skriv ut mallen med fyra rutor på A3, eller den med sex om händelsen är lång. Före passet lägger du fram mallen, pennorna och bladet Nästa gång.
+        - Prata i fem minuter med den som äger serien, och fråga ”Vill du rita något som har hänt dig, eller något som brukar bli svårt? Är det över nu? Får de andra höra det?” Pröva händelsen mot de tre kraven under ”Var hittar du bildserierna och händelserna?”, och säg att du inte bestämmer vem som hade rätt. Skriv ut mallen med fyra rutor på A3, eller mallen med sex rutor om händelsen är lång. Före passet lägger du fram mallen, pennorna och bladet Nästa gång.
       - - |-
           Spaningen
           0–⁠4 min
@@ -431,10 +431,10 @@ passrutin:
       fas: Nästa gång
     - text: Vad tar du med dig?
       fas: Med mig
-  efterPasset: Du fyller i snabbmallen och lägger elevernas blad i pärmarna. Efter ett pass med en egen serie frågar du ägaren vilken vuxen hen vill visa planen för. Visar en egen serie att något runt eleven behöver ändras, tar du det vidare till klassläraren eller elevhälsan, om eleven säger ja.
+  efterPasset: Du fyller i snabbmallen och lägger elevernas blad i pärmarna. Efter ett pass med en egen serie frågar du ägaren vilken vuxen hen vill visa Min plan för. Visar en egen serie att något runt eleven behöver ändras, tar du det vidare till klassläraren eller elevhälsan, om eleven säger ja.
 tidsschema:
   rubrik: Ett pass på 30 minuter
-  text: Tabellen gäller ett pass med en bildserie, pass 2–⁠6. Läs förra passets rad i snabbmallen och lärarens sida för dagens serie, och skriv vad eleverna ska få syn på i dag under Före. Lärarens sida har berättelsen och säger var ni stannar. Det du kan säga står under Passets sex delar. De andra passen har egna tabeller, som står efter Samtalsteknikerna.
+  text: Tabellen gäller ett pass med en bildserie, pass 2–⁠6. Läs förra passets rad i snabbmallen och lärarens sida för dagens serie, och skriv vad eleverna ska få syn på i dag under Före i snabbmallen. Lärarens sida har berättelsen och säger var ni stannar. Det du kan säga står under Passets sex delar. De andra passen har egna tabeller, som står efter Samtalsteknikerna.
   rader:
     - tid: Före passet
       fas: Förberedelse
@@ -697,9 +697,9 @@ checklista:
   rubrik: Checklista inför pass 1
   punkter:
     - Läst metoden, sett filmerna och gjort ett seriesamtal om något eget med en kollega.
-    - Haft samtalet med varje elev före pass 1 och berättat om gruppen för vårdnadshavarna.
+    - Haft samtalet med varje elev före pass 1, gjort elevens pärm med målet på framsidan och berättat om gruppen för vårdnadshavarna.
     - Bokat rummet, två tider i veckan och handledning om jag behöver den.
-    - Laminerat bildserierna, bubblorna och korten, och gjort en pärm per elev med elevens mål på framsidan.
+    - Laminerat bildserierna, Bubblor att klippa ut och korten Vad behöver hen? och Frågor vi ställer till varandra.
     - Skrivit reglerna överst på gruppens blad, ett stort papper på väggen, och lämnat kortet Till de vuxna runt eleven.
 grund:
   text: "I Carol Grays seriesamtal (1994) ritar den vuxna och eleven streckgubbar, pratbubblor och tankebubblor medan de pratar, så att båda ser vad någon säger och vad hen tänker, både efter en händelse och före något som ska hända (Hutchins och Prelock, 2008). Få studier har prövat Grays metod, och 2006 hade ingen av dem prövat om den hjälper barn att förstå andras tankar (Hutchins och Prelock, 2006). Barn med autism lärde sig på några korta pass att använda tankebubblor och att förutsäga vad någon gör utifrån det hen tror (Wellman m.fl., 2002). Samtal i grupp om vad andra tänker har hjälpt barn från sju år att förstå andras tankar bättre (Bianco och Castelli, 2023). Pojkar i åk 3–⁠6 som hade tolv pass på sex veckor tolkade färre handlingar som fientliga och blev mindre arga (Hudley m.fl., 2007). När elever i åk 5 vid ett enda tillfälle tänkte på en egen händelse som om de såg den på avstånd, blev de mindre upprörda (Kross m.fl., 2011). De vuxna runt eleven tar med sig passens frågor ut på rasten, eftersom det eleverna övar under särskilda lektioner annars tycks gälla bara där (Skolverket, 2011)."

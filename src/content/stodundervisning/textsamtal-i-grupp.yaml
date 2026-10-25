@@ -30,7 +30,7 @@ material:
   - ledtrådsbladet
   - lyssningsbladet
   - kartläggningen
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-25
 relaterade:
   - boksamtal-i-grupp
   - faktatextsamtal-i-grupp
@@ -471,7 +471,7 @@ passrutin:
   efterPasset: Efter varje pass skriver du på passets rad i Veckans cykel det eleverna sa och vad som händer nästa gång. I pass 3 fyller du i lyssningsbladet, och efter pass 3 skriver du vad du visar nästa vecka.
 tidsschema:
   rubrik: 30 minuter, del för del
-  text: Läs förra passets rad i Veckans cykel innan du förbereder passet, och före pass 1 förra veckans blad. Sedan följer du tidsschemat.
+  text: Läs förra passets rad i Veckans cykel innan du förbereder passet, och före pass 1 det du skrev där förra veckan. Sedan följer du tidsschemat.
   rader:
     - tid: Före passet
       fas: Förberedelse
@@ -659,7 +659,7 @@ uppfoljning:
       vad: Du läser lyssningsbladet och frågetecknen i pass 3, också vem som byggde vidare. Nästa vecka visar du ett tankesteg efter det du hörde. Gissar eleverna utan ledtråd, visar du Det står. Letar de bara efter ord, visar du Jag vet. Läser de förbi stoppet, visar du Stanna.
       tid: varje vecka
     - nar: Efter sex till åtta veckor
-      vad: Varje elev gör kartläggningens text efter, som är lika svår. Jämför poängen med kartläggningen före, och lyssningsbladen med vecka 1 och 2. Se också om eleven sätter frågetecken i sin bänkbok.
+      vad: Varje elev gör kartläggningens text efter, som är lika svår. Jämför poängen i Kartläggningens protokoll, och lyssningsbladen med vecka 1 och 2. Se också om eleven sätter frågetecken i sin bänkbok.
       tid: efter
 plan:
   mal: kunna läsa mellan raderna, säga vad man tror och visa ledtråden i texten.
@@ -709,7 +709,7 @@ checklista:
     - Läst texten och sidan om den, och övat på att tänka högt.
     - Bestämt paren och vem som är A och B.
     - Skrivit startmeningen och kopierat texten.
-    - Lagt fram korten och ledtrådsbladen, med frågans nummer.
+    - Lagt fram tankekortet, samtalskortet och ledtrådsbladen.
 grund:
   text: "Att göra en inferens är att föra samman två eller fler uppgifter i en text, eller texten och det man vet, till något som inte står utskrivet, och frågan ”Hur vet du det?” får eleven att peka på ledtråden (Kispal, 2008). Elever som avkodar hyfsat men behöver stöd i att förstå det de läser vinner på undervisning i inferenser (Cain och Oakhill, 1999; Elleman, 2017), tydligast när de ser vad som kommer från texten och vad som kommer från läsaren själv (Elbro och Buch-Iversen, 2013). I flera modeller för samtal om texter pratar eleverna mer och förstår bättre, fast beläggen för att samtalet ensamt ger bättre inferenser är svagare (Murphy m.fl., 2009), och elever som behöver stöd läser mer som erfarna läsare när kamraternas tänkande blir synligt för dem (Langer och Close, 2001). Samtalet växer med autentiska frågor och en lärare som bygger vidare på elevens svar (Nystrand, 2006; Soter m.fl., 2008), utforskande samtal går att lära ut (Wegerif, Mercer och Dawes, 1999), och i en läsande gemenskap pratar eleverna om texter med varandra, där flera tolkningar kan hålla när texten stöder dem (Cremin m.fl., 2009; Rosenblatt, 1988). Metoden bygger därför på att läraren tänker högt och lämnar över tänkandet till samtalet steg för steg (Pearson och Gallagher, 1983; Fohlin och Wilson, 2025)."
   kallor: Bygger på Cain och Oakhill (1999), Chambers (1993), Cremin m.fl. (2009), Elbro och Buch-Iversen (2013), Elleman (2017), Fohlin och Wilson (2025), Hempel-Jorgensen m.fl. (2018), Kispal (2008), Langer och Close (2001), Murphy m.fl. (2009), Nystrand (2006), Pearson och Gallagher (1983), Rosenblatt (1988), Soter m.fl. (2008) och Wegerif, Mercer och Dawes (1999), samt Skolverkets Lärportalen om textsamtal och litteratursamtal och guiden UTFORSK från Karlstads universitet.

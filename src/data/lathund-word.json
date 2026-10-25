@@ -44,15 +44,15 @@
     "datum": "2026-10-20"
   },
   "fyra-raknesatten": {
-    "kalla": "0875321388b69c28",
+    "kalla": "d5a6f0c2c39e6537",
+    "innehall": "c7c212292e7b7bc6",
     "skalor": [
       1.2,
       1.35,
       1.35,
       1.3
     ],
-    "datum": "2026-10-19",
-    "innehall": "d4686712b2bbbd2b"
+    "datum": "2026-10-25"
   },
   "gruppstarkande-aktiviteter": {
     "kalla": "301886483d83adae",
@@ -99,15 +99,15 @@
     "datum": "2026-10-19"
   },
   "laslistor-i-grupp": {
-    "kalla": "69372e34e541f618",
-    "innehall": "9f0151a675df48f3",
+    "kalla": "6c8fa46de78791a9",
+    "innehall": "b60774d9104c8268",
     "skalor": [
       1.2,
       1.35,
       1.35,
       1.35
     ],
-    "datum": "2026-10-20"
+    "datum": "2026-10-25"
   },
   "ljudlek-i-grupp": {
     "kalla": "186f801149774b7a",
@@ -154,15 +154,15 @@
     "datum": "2026-10-19"
   },
   "seriesamtal": {
-    "kalla": "704a04e4d3fdb99f",
-    "innehall": "e2497e588eb2586a",
+    "kalla": "3a1dc0fcc88216aa",
+    "innehall": "5915a2143d048b2c",
     "skalor": [
       1.25,
       1.3,
       1.35,
       1.25
     ],
-    "datum": "2026-10-20"
+    "datum": "2026-10-25"
   },
   "skrivkurs-berattelseram": {
     "kalla": "b63f632dc57a6710",
@@ -198,15 +198,15 @@
     "innehall": "f62a6bb4ed5070e0"
   },
   "textsamtal-i-grupp": {
-    "kalla": "ae365ac1ea7316d1",
-    "innehall": "dc8cd29a80cc26ff",
+    "kalla": "0c06d125fe050a4a",
+    "innehall": "bb34e2bb8679a9fd",
     "skalor": [
       1.25,
       1.3,
       1.35,
       1.2
     ],
-    "datum": "2026-10-20"
+    "datum": "2026-10-25"
   },
   "texttyp-argumenterande-text": {
     "kalla": "f1b60468dbd652c6",

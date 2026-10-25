@@ -26,6 +26,7 @@ Saker som länkas: ett blad, ett kort, en mall, ett test, en text i banken, ett 
 1. Gå igenom raderna i `{{id}}.md`. Leta efter varje namn på något i metoden som har en plats bland platserna eller en egen sida, och som inte står inom ⟦ ⟧. Pröva det mot regelns tre villkor.
 2. Gå igenom varje länk. Leder den till rätt sak, med en rubrik som stämmer med namnet? Är det en sak, eller ett begrepp eller ett steg som inte borde vara länkat?
 3. Se efter om samma namn är länkat på ett ställe men inte på ett annat, och om ett namn leder till olika ställen i olika rader.
+4. Leta efter allmänna ord som pekar på en bestämd sak som läraren behöver eller använder, som "kortet", "korten", "bladet", "bubblorna" eller "filmerna". Då ska texten säga sakens namn, så att den blir en länk (STIL.md under Hänvisningar: "Om det är saker som behövs eller ska användas och är specifika saker ska de namnges och länkas"). Ett sådant fynd är P1 när läraren behöver saken i passet, och svaret säger vilket namn som ska stå där.
 
 ## Svaret
 

@@ -20,7 +20,7 @@ Planen syns på metodens sida, med knappen Planera insatsen och märket Beta, s�
 | 1. Fälten | Metodens fält för planen, efter tabellen Vad metoden behöver nedan | Riggen skriver dem i leveransen (K-491); i en metod som ligger ute skriver du in dem | `npm run validera` stannar inte på `insatsplanFel` |
 | 2. Valideringen | Hela valideringen, med planprovet | `npm run validera` | Grön, och raderna med ! är lästa |
 | 3. Läs själv | Planen i telefonbredd som läraren läser den: förslaget, Före, en vecka med varje pass och Efter insatsen | `node scripts/skarmbild.mjs <adress> <bild> --mobil`, och hela texten med `node scripts/plantext.mjs <id>` | Inget ser fel ut och inget står två gånger |
-| 4. Länkgranskningen | Det planen namnger men inte länkar, länkar som leder fel och begrepp som är länkade | `node scripts/plantext.mjs <id>`, sedan en agent per metod med uppdraget `lankgranskning` | Inga P1 kvar |
+| 4. Länkgranskningen | Det planen namnger men inte länkar, länkar som leder fel, begrepp som är länkade, och allmänna ord för en bestämd sak som läraren behöver, som kortet eller bubblorna, som ska bytas mot sakens namn (STIL.md under Hänvisningar) | `node scripts/plantext.mjs <id>`, sedan en agent per metod med uppdraget `lankgranskning` | Inga P1 kvar |
 | 5. Testversionen | Ett utkast hos Netlify, utan bygge och byggkrediter | `node scripts/utkast.mjs --namn <namn>`, med ett nytt namn varje omgång | Adressen svarar |
 | 6. Kalla testare | En lärare per metod som först får bara planen och sedan hela metoden | Uppdraget `kall-testare`, med en roll per metod | Testaren kan hålla pass 1 efter planen, och ingen P1 |
 | 7. Användbarheten | En granskare som följer läraren från första besöket till efter insatsen, i telefon och på dator | Uppdraget `anvandbarhet` | Ingen P1 |
@@ -119,6 +119,7 @@ Efter uppladdningen: `node scripts/deploykoll.mjs`, öppna planen för varje ny 
 | Fråga Codex om det som ändrats, med en stängd lista över det nya och det att leta efter | En öppen fråga ger en stor granskning som tar längre tid |
 | Saknar ett namn länk fast saken finns: se att texten står bland de texter planen letar namn i (`visadeTexter` i `src/lib/insatsplan.ts`), och att namnets form finns (`sakensFormer` i standarden) | Länkgranskningen 2026-10-25: tidsschemats inledning och gruppens text låg utanför listan, och räknemattans och kursintyget saknade sina former |
 | En länk till en fil prövas som fil, en länk till en sida som sida | Planprovet läste lektionskortets pdf som en sida och stannade |
+| Ett namn som gör checklistan eller uppföljningen längre kan tippa lathundens fjärde sida, där båda står i en spalt som i flera metoder redan är full. Mät spalten före valideringen: hämta `/stodundervisning/<id>-lathund.pptx` ur förhandsservern och läs raderna med ! i dess logg. Flytta hellre en del av en punkt till en annan punkt än att göra en punkt en rad längre | K-502: Seriesamtals spalt hade 0,007 tum till godo, och namnen sköt ut upphovsraden i Textsamtals pdf |
 | Ett namn som är ett vanligt ord länkas bara som titel, med stor bokstav mitt i en mening | "multiplikation" blev annars en länk till Övningsblad: Multiplikation |
 
 ## Ändringar
@@ -126,3 +127,4 @@ Efter uppladdningen: `node scripts/deploykoll.mjs`, öppna planen för varje ny 
 | Datum | Vad |
 |---|---|
 | 2026-10-25 | Första versionen, ur provningen av Planera 0.1 och 0.2 på fem metoder: länkgranskningen, testarna i två steg, användbarheten, buggjakten, Codex och verifieringen, med mallarna i `scripts/planera/` |
+| 2026-10-25 | Länkgranskningen letar också efter allmänna ord för en bestämd sak, efter Niclas regel samma dag: det som behövs namnges och länkas, eller har en knapp för att ladda ner |
