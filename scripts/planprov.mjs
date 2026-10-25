@@ -393,6 +393,34 @@ ska('modulen skriver veckor och datum bara ur standardens funktioner', !driftfyn
   ska('pågående insatser: planerna i sina veckor, och :2 för en andra plan för samma metod', vagar('2026-10-28') === 'planera:textsamtal-i-grupp:pagar planera:textsamtal-i-grupp:pagar:2 planera:laslistor-i-grupp:pagar' && vagar('2026-11-03') === 'planera:textsamtal-i-grupp:pagar planera:textsamtal-i-grupp:pagar:2 planera:til-i-grupp:pagar', [vagar('2026-10-28'), vagar('2026-11-03')]);
   ska('pågående insatser: händelsen bär bara metoden', lagring.pagaendeHandelser(planer, '2026-10-28').every((h) => /^planera:[a-z0-9-]+:pagar(:\d)?$/.test(h.path)));
 }
+// En apps egen webbläsare (K-510, src/scripts/webblasaren.ts): en funktion känner igen den för Planera insatsen och raden om
+// appen Stöd, och vägen ut är en intent-länk utan bestämd app på Android och x-safari-https på iPhone, med planen efter #.
+{
+  const w = await import('../src/scripts/webblasaren.ts');
+  const IOS = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148';
+  const ANDROID = 'Mozilla/5.0 (Linux; Android 14; SM-S911B Build/UP1A.231005.007; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/130.0.6723.58 Mobile Safari/537.36';
+  const fall = [
+    [`${IOS} [FBAN/FBIOS;FBAV/485.0.0.43.70;FBLC/sv_SE]`, 'Facebooks', true], [`${ANDROID} [FB_IAB/FB4A;FBAV/485.0.0.43.70;]`, 'Facebooks', false],
+    [`${IOS} [FBAN/MessengerForiOS;FBAV/485.0]`, 'Messengers', true], [`${IOS} Instagram 350.0.0.0 (iPhone15,2; iOS 18_0; sv_SE)`, 'Instagrams', true],
+    [`${IOS} [LinkedInApp]/9.30`, 'LinkedIns', true], [`${IOS} GSA/340.0.0 Safari/604.1`, 'Google-appens', true], [`${IOS} TikTok 37.0`, 'en apps', true],
+    // Vanliga webbläsare får inget besked (Niclas samma dag: "Se till att dessa knappar bara dyker upp i sådana speciella
+    // webbläsare som Facebook egen inbyggda"): Safari, Chrome, Firefox, Edge och DuckDuckGo på iPhone, och Chrome, Samsung
+    // Internet och Firefox på Android.
+    [`${IOS} Version/18.0 Safari/604.1`, '', true], [`${IOS} CriOS/130.0.6723.90 Safari/604.1`, '', true], [`${IOS} FxiOS/131.0 Safari/605.1.15`, '', true],
+    [`${IOS} EdgiOS/130.0.2849.80 Safari/605.1.15`, '', true], [`${IOS} Version/18.0 DuckDuckGo/7 Safari/605.1.15`, '', true],
+    [ANDROID.replace('; wv', '').replace('Version/4.0 ', ''), '', false], [ANDROID.replace('; wv', '').replace('Version/4.0 ', 'SamsungBrowser/26.0 '), '', false],
+    ['Mozilla/5.0 (Android 14; Mobile; rv:131.0) Gecko/131.0 Firefox/131.0', '', false],
+  ];
+  for (const [ua, app, ios] of fall) { const x = w.webblasaren(ua, {}); ska(`webbläsaren: ${app || 'en vanlig webbläsare'} (${ua.slice(-40)})`, x.app === app && x.ios === ios && x.android === !ios, x); }
+  ska('webbläsaren: appen Stöd från hemskärmen är ingen apps webbläsare', w.webblasaren(IOS, { iAppen: true }).app === '');
+  const adress = 'https://niclasfohlin.se/stodundervisning/til-i-grupp/planera#s=2026-11-02&d=124&l=6&p=abc123';
+  const android = w.vagenUt(adress, w.webblasaren(`${ANDROID} [FB_IAB/FB4A;FBAV/485.0]`, {}))?.href ?? '';
+  ska('vägen ut på Android: en intent-länk utan bestämd app, med planen före intentens del, som Android läser från det sista #',
+    android.startsWith('intent://niclasfohlin.se/stodundervisning/til-i-grupp/planera#s=2026-11-02&d=124&l=6&p=abc123#Intent;scheme=https;') && !android.includes('package=')
+    && android.slice(android.lastIndexOf('#')).startsWith('#Intent;') && android.includes(`S.browser_fallback_url=${encodeURIComponent(adress)}`) && android.endsWith(';end'), android);
+  ska('vägen ut på iPhone: Safari, med planen', w.vagenUt(adress, w.webblasaren(`${IOS} [FBAN/FBIOS]`, {}))?.href === 'x-safari-https://niclasfohlin.se/stodundervisning/til-i-grupp/planera#s=2026-11-02&d=124&l=6&p=abc123');
+  ska('sidans adress utan det appen har lagt till', w.sidansAdress({ origin: 'https://niclasfohlin.se', pathname: '/stodundervisning/x/planera', hash: '#s=1' }) === 'https://niclasfohlin.se/stodundervisning/x/planera#s=1');
+}
 
 if (fel.length) { console.error(`planprov: ${fel.length} fel:\n  ${fel.join('\n  ')}`); process.exit(1); }
 console.log(`planprov: motorn, ${planbara.length} av ${alla.length} metoder med planens fält och ${former.length} former av metoder räknar rätt.`);
@@ -581,6 +609,8 @@ async function flik(blockera = false, fast) {
     tryck: async (valjare, text = '') => kor(`(() => { const el = [...document.querySelectorAll(${JSON.stringify(valjare)})].find((x) => x.checkVisibility() && x.textContent.includes(${JSON.stringify(text)})); if (!el) return false; el.click(); return true; })()`),
     text: async (valjare) => kor(`document.querySelector(${JSON.stringify(valjare)})?.textContent.replace(/\\s+/g, ' ').trim() ?? null`),
     bredd: (b) => skicka('Emulation.setDeviceMetricsOverride', { width: b, height: 800, deviceScaleFactor: 2, mobile: true }),
+    // Webbläsarens namn, som en apps egen webbläsare.
+    ua: (userAgent) => skicka('Emulation.setUserAgentOverride', { userAgent }),
     dator: () => skicka('Emulation.setDeviceMetricsOverride', { width: 1280, height: 900, deviceScaleFactor: 1, mobile: false }),
     // En bild av hela sidan, när provet tar bilder (--bilder).
     // Beskedet längst ned på skärmen står fast i fönstret och skulle hamna mitt i en bild av hela sidan, så det göms då;
@@ -1003,6 +1033,26 @@ try {
   sant('metodbanken utan lagring visar ingen ruta', await g.kor(`document.getElementById('pl-insatser').hidden`));
   sant('inga fel i konsolen utan lagring', !g.undantag.length, g.undantag);
   g.stang();
+  // En apps egen webbläsare (K-510): beskedet har vägen ut först, på Android till telefonens webbläsare eller appen Stöd och på
+  // iPhone till Safari, och Kopiera länken efter. Kopiera länken kopierar sidans adress, och beskedet ryms i 320 punkter.
+  for (const [namn, ua] of [['Android', 'Mozilla/5.0 (Linux; Android 14; SM-S911B Build/UP1A.231005.007; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/130.0.6723.58 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/485.0.0.43.70;]'], ['iPhone', 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 [FBAN/FBIOS;FBAV/485.0.0.43.70;FBLC/sv_SE]']]) {
+    const fb = await flik();
+    await fb.ua(ua);
+    await fb.bredd(320);
+    await fb.oppna(PLAN);
+    const besked = await fb.text('#pl-besked');
+    const ut = (await fb.kor(`document.getElementById('pl-ut')?.getAttribute('href') ?? ''`)) ?? '';
+    const forst = await fb.kor(`document.querySelector('#pl-besked-knappar > *')?.id`);
+    sant(`i Facebooks webbläsare på ${namn}: beskedet och vägen ut`, besked?.includes('Facebooks egen webbläsare')
+      && forst === 'pl-ut' && (namn === 'Android' ? besked.includes('appen Stöd om du har den') && ut.startsWith('intent://') : besked.includes('Öppna sidan i Safari') && ut.startsWith('x-safari-https://')), [besked, ut, forst]);
+    sant(`i Facebooks webbläsare på ${namn}: beskedet rullar inte i sidled i 320 punkter`, await fb.kor('document.documentElement.scrollWidth <= innerWidth'));
+    await fb.bild(`facebook-${namn.toLowerCase()}`, true);
+    await fb.tryck('#pl-ut-kopiera');
+    await vanta(200);
+    sant(`i Facebooks webbläsare på ${namn}: Kopiera länken kopierar sidans adress`, (await fb.kor('window.__kopierat')) === (await fb.kor('location.origin + location.pathname + location.hash')), await fb.kor('window.__kopierat'));
+    sant(`i Facebooks webbläsare på ${namn}: inga fel i konsolen`, !fb.undantag.length, fb.undantag);
+    fb.stang();
+  }
 
   // ---- Efter insatsen ----
   // Måndag 14 december, efter planens sista pass. Sista veckan har metodens uppföljning efter och utvärderingen, och

@@ -49,7 +49,7 @@ const stegen = data.stege ? (data.progression?.rader ?? []).flatMap((r) => { con
     </header>
 
     <nav class="pl-grupper" id="pl-grupper" aria-label="Dina planer för metoden" hidden></nav>
-    <p class="pl-besked" id="pl-besked" role="status" hidden></p>
+    <div class="pl-besked" id="pl-besked" hidden><p id="pl-besked-text" role="status"></p><p class="pl-andra-knappar" id="pl-besked-knappar" hidden></p></div>
 
     <div class="pl-yta">
       <section class="pl-veckan" id="pl-veckan" aria-labelledby="pl-veckan-rubrik" hidden></section>

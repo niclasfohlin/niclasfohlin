@@ -10,6 +10,7 @@
 // Inget av det läraren har skrivit skickas någonstans. Statistiken får bara trycken på knappen, installationen och att
 // appen används, en gång om dagen (app:i-appen), utan namn eller värden.
 import { idagLokalt, lasPlaner } from './insatser-lagring';
+import { iAppen as iAppenNu, webblasaren } from './webblasaren';
 
 // Bara krysset gömmer raden i 30 dagar. Att appen installerades sparas inte: tas appen bort märker sidan det inte, och
 // raden ska då komma tillbaka (Niclas 2026-10-25: "Jag avinstallerade appen men nu dyker inte upp igen att installera
@@ -20,7 +21,7 @@ const las = (k: string) => { try { return localStorage.getItem(k) ?? ''; } catch
 const skriv = (k: string, v: string) => { try { localStorage.setItem(k, v); } catch { /* bara den här sidvisningen */ } };
 const rakna = (path: string, title: string) => (window as { goatcounter?: { count?: (v: object) => void } }).goatcounter?.count?.({ path, title, event: true });
 
-const iAppen = matchMedia('(display-mode: standalone)').matches || (navigator as { standalone?: boolean }).standalone === true;
+const iAppen = iAppenNu();
 
 // Service workern bara på https, så att förhandsvisningen på datorn inte får en.
 if ('serviceWorker' in navigator && location.protocol === 'https:') navigator.serviceWorker.register('/sw-stod.js', { scope: '/stodundervisning' }).catch(() => { /* sidan fungerar utan */ });
@@ -32,12 +33,11 @@ if (iAppen && las(ANVAND) !== idagLokalt()) {
 }
 
 const rad = document.querySelector<HTMLElement>('[data-app]');
-const ua = navigator.userAgent;
-const ios = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const webb = webblasaren();
+const ios = webb.ios;
 const pekskarm = matchMedia('(pointer: coarse)').matches;
-// Appars egna webbläsare kan inte lägga sidan på hemskärmen. På iPhone kan Safari och, sedan iOS 16.4, Chrome, Edge och
-// Firefox, som alla har Safari i sitt namn; Facebook, Instagram och LinkedIn har det inte (granskningen 2026-10-25).
-const egenWebblasare = /FBAN|FBAV|Instagram|LinkedInApp|GSA\//.test(ua) || (ios && !/Safari\//.test(ua));
+// Appars egna webbläsare kan inte lägga sidan på hemskärmen (src/scripts/webblasaren.ts).
+const egenWebblasare = !!webb.app;
 const stangdNyss = () => { const d = las(STANGD); return !!d && Date.now() - new Date(d).getTime() < 30 * 86400000; };
 
 if (rad && !iAppen && pekskarm && !egenWebblasare && !stangdNyss()) {

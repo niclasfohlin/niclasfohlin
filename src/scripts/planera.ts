@@ -25,6 +25,7 @@ import type { PlanData } from '../lib/insatsplan';
 import { idagLokalt, iTurOrdning, lasPlaner, narText, nuTid, nyttId, planensNamn, raknaPagaende, rensaPlan, schemaAv, skiljNamnen, skrivPlaner, type SparadPlan } from './insatser-lagring';
 import { kanSkrivaUtPdf, skrivUt } from './pdfutskrift';
 import { elevPdf, gruppPdf } from './planpdf';
+import { sidansAdress, vagenUt, vagenUtText, webblasaren } from './webblasaren';
 
 const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
 const sida = $('plan');
@@ -98,6 +99,10 @@ function friskaUpp() {
 // Adressen bär valen, men inte veckan läraren har bläddrat till, så att sidan öppnar veckan gruppen är i nästa gång.
 function uppdateraAdressen() {
   if (aktiv.sparad || aktiv.franLank) history.replaceState(null, '', `#${kodaVal(aktiv.val, { id: aktiv.id })}`);
+  // Vägen ut ur en apps egen webbläsare följer adressen, så att en sparad plan följer med (K-510).
+  const ut = document.getElementById('pl-ut') as HTMLAnchorElement | null;
+  const dit = ut && vagenUt(sidansAdress(location), webblasaren());
+  if (ut && dit) ut.href = dit.href;
 }
 const harInfort = () => aktiv.foljd.gjorda.length > 0 || Object.keys(aktiv.foljd.skattning).length > 0 || aktiv.foljd.elever.length > 0 || Object.keys(aktiv.foljd.resultat).length > 0 || !!aktiv.foljd.avstamning?.beslut || !!aktiv.foljd.utvardering?.beslut;
 // Gick det inte att spara, säger beskedet vad som håller: kopian när läraren har fört in något, annars länken.
@@ -1527,11 +1532,32 @@ $('pl-toast').addEventListener('click', (e) => {
   g?.();
 });
 // Det som gäller hela sidan står överst: en plan ur en länk, en metod som har ändrats och en webbläsare som inte sparar.
-function visaNotis(text: string) {
-  const b = $('pl-besked');
-  b.textContent = text;
-  b.hidden = !text;
+function visaNotis(text: string, knappar = '') {
+  $('pl-besked-text').textContent = text;
+  const k = $('pl-besked-knappar');
+  k.innerHTML = knappar;
+  k.hidden = !knappar;
+  $('pl-besked').hidden = !text;
 }
+// En app med egen webbläsare, som Facebook och Instagram, har sin egen lagring: en plan som sparas där finns inte i Safari
+// eller Chrome på samma telefon (granskningen 2026-10-24; många kommer till sajten från Facebook). Beskedet står också efter
+// att planen har sparats, med vägen ut och en knapp som kopierar länken, som håller där vägen ut inte öppnas (K-510,
+// src/scripts/webblasaren.ts).
+function appensBesked(): [string, string] {
+  const w = webblasaren();
+  if (!w.app || !lagringOk) return ['', ''];
+  const ut = vagenUt(sidansAdress(location), w);
+  const utKnapp = ut ? `<a class="knapp liten" id="pl-ut" href="${esc(ut.href)}" ${goat('ut-ur-appen', `${ut.text} från ${w.app} webbläsare`)}>${esc(ut.text)}</a>` : '';
+  return [vagenUtText(w), `${utKnapp}<button type="button" class="knapp liten${ut ? ' sekundar' : ''}" id="pl-ut-kopiera" ${goat('lank-ur-appen', `länken kopierad i ${w.app} webbläsare`)}>Kopiera länken</button>`];
+}
+// Kopiera länken i beskedet om en apps egen webbläsare: sidans adress, med planen när den är sparad (K-510).
+$('pl-besked').addEventListener('click', async (e) => {
+  const knapp = (e.target as Element).closest<HTMLButtonElement>('#pl-ut-kopiera');
+  if (!knapp) return;
+  const ok = await kopiera(sidansAdress(location));
+  if (ok) kvittera(knapp, 'Kopierad');
+  visaBesked(ok ? `Länken är kopierad. Klistra in den i ${webblasaren().ios ? 'Safari' : 'webbläsaren'}.` : 'Länken gick inte att kopiera i den här webbläsaren.');
+});
 // Ett tryck som tar bort något frågar först i sidan, med Avbryt förvalt (Niclas 2026-10-24: "med någon spärr för
 // misstryck"), och det borttagna går att ångra efteråt.
 function fragaForst(knapp: HTMLElement, fraga: string, ja: string, gor: () => void) {
@@ -1562,8 +1588,9 @@ $('pl-spara').addEventListener('click', () => {
   // Raden om appen Stöd följer om planen är sparad (src/scripts/appen.ts).
   document.dispatchEvent(new Event('planera:sparad'));
   uppdateraAdressen();
-  notis = '';
-  visaNotis('');
+  const [appText, appKnappar] = appensBesked();
+  notis = appText;
+  visaNotis(appText, appKnappar);
   rendera();
   ($('pl-andra') as HTMLDetailsElement).open = false;
   // Läraren kommer till veckan överst, och beskedet säger nästa steg och leder till kalendern och texten till
@@ -1703,11 +1730,9 @@ friskaUpp();
 raknaPagaende(lasPlaner().planer);
 ($('pl-andra') as HTMLDetailsElement).open = !aktiv.sparad;
 if (aktiv.uppdaterad && data.uppdaterad && aktiv.uppdaterad < data.uppdaterad && !notis) notis = `Metoden har uppdaterats ${data.uppdateradText ?? data.uppdaterad}, efter att planen gjordes. Planen följer metoden som den är nu.`;
-// En app med egen webbläsare, som Facebook och Instagram, har sin egen lagring: en plan som sparas där finns inte i Safari
-// eller Chrome på samma telefon (granskningen 2026-10-24; många kommer till sajten från Facebook).
-const app = /FBAN|FBAV|FB_IAB/.test(navigator.userAgent) ? 'Facebooks' : /Instagram/.test(navigator.userAgent) ? 'Instagrams' : '';
-if (app) notis = `Du har öppnat sidan i ${app} egen webbläsare. En plan som sparas här finns bara här. Öppna sidan i Safari eller Chrome, så hittar du planen igen.`;
+const [appText, appKnappar] = appensBesked();
+if (appText) notis = appText;
 if (!lagringOk) notis = 'Webbläsaren sparar inget här, till exempel i privat läge. Kopiera länken till planen, så finns den kvar.';
-visaNotis(notis);
+visaNotis(notis, notis === appText ? appKnappar : '');
 uppdateraAdressen();
 sida.classList.add('pl-klar');
