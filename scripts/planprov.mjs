@@ -652,6 +652,18 @@ try {
   sant('lov i valen flyttar planen', (await f.text('#pl-summa-text'))?.includes('till 18 december') && (await f.kor(`document.querySelector('[data-lovvecka="2026-46"]').getAttribute('aria-pressed')`)) === 'true', await f.text('#pl-summa-text'));
   await f.tryck('#pl-lovveckor [data-lovvecka="2026-46"]');
   sant('lovet i valen tas bort', (await f.text('#pl-summa-text'))?.includes('till 11 december'));
+  // Lov i raden sista eller första vecka ger en vecka till efter eller före den, så att ett lov på flera veckor går att
+  // trycka in (Niclas 2026-10-25: vecka 52 sist i raden gav ingen vecka 53).
+  const lovRad = () => f.kor(`[...document.querySelectorAll('#pl-lovveckor [data-lovvecka]')].map((b) => b.dataset.lovvecka).join(' ')`);
+  const fore52 = await lovRad();
+  await f.tryck('#pl-lovveckor [data-lovvecka="2026-52"]');
+  const med52 = await lovRad();
+  await f.tryck('#pl-lovveckor [data-lovvecka="2026-43"]');
+  const med43 = await lovRad();
+  sant('lov sist och först i raden ger en vecka till efter och före', fore52.endsWith('2026-52') && fore52.startsWith('2026-43') && med52.endsWith('2026-52 2026-53') && med43.startsWith('2026-42 2026-43') && (await f.text('#pl-summa-text'))?.includes('till 11 december'), [fore52, med52, med43]);
+  await f.tryck('#pl-lovveckor [data-lovvecka="2026-52"]');
+  await f.tryck('#pl-lovveckor [data-lovvecka="2026-43"]');
+  sant('utan lov i kanterna står raden som förut', (await lovRad()) === fore52, await lovRad());
   await f.tryck('#pl-nivaer [data-niva="mellan"]');
   await f.kor(`(() => { const i = document.getElementById('pl-namn'); i.value = 'Prov 2B'; i.dispatchEvent(new Event('input')); return true; })()`);
   await vanta(600);

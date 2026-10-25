@@ -251,7 +251,7 @@ export const planFel = (d) => metodplan(d).fel;
  * läraren går in och planerar; den andra ökar med en ny förmåga, en tredje när ett fel lagas. Versionerna står i sajtens
  * METODER.md under Planera insatsen.
  */
-export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.2', beta: true });
+export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.2.1', beta: true });
 
 // ---------- Planen ----------
 

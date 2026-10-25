@@ -167,10 +167,15 @@ function renderaVal() {
   // (de kalla läsarna 2026-10-24: fältet sa 26 oktober när planen började 27 oktober eller 2 november).
   $('pl-forsta-pass').textContent = plan.forstaPass ? `Första passet: ${dagText(plan.forstaPass)}.` : '';
   renderaTider();
-  // Lovet: planens veckor och två till, som knappar med veckans datum. En lovvecka flyttar planen fram.
+  // Lovet: planens veckor och två till, som knappar med veckans datum. En lovvecka flyttar planen fram. Är veckan först
+  // eller sist i raden lov kommer en vecka till, så att ett lov på flera veckor går att trycka in (Niclas 2026-10-25:
+  // "markera 52 som lov ... så finns ingen till vecka som knapp efter").
   const lov = new Set(aktiv.val.lov ?? []);
+  let forstaLov = plusDagar(forstaMandagen(aktiv.val), -14), sistaLov = plusDagar(plan.efter, 7);
+  for (let i = 0; i < 10 && lov.has(veckonyckel(forstaLov)); i++) forstaLov = plusDagar(forstaLov, -7);
+  for (let i = 0; i < 10 && lov.has(veckonyckel(sistaLov)); i++) sistaLov = plusDagar(sistaLov, 7);
   const veckor: string[] = [];
-  for (let m = plusDagar(forstaMandagen(aktiv.val), -14); m <= plusDagar(plan.efter, 7) && veckor.length < 42; m = plusDagar(m, 7)) veckor.push(m);
+  for (let m = forstaLov; m <= sistaLov && veckor.length < 42; m = plusDagar(m, 7)) veckor.push(m);
   $('pl-lovveckor').innerHTML = veckor.map((m) => { const k = veckonyckel(m); const pa = lov.has(k); return `<button type="button" class="pl-chip pl-lovchip" data-lovvecka="${k}" aria-pressed="${pa}" aria-label="Vecka ${isoVecka(m).vecka}, ${esc(spannKort(m, plusDagar(m, 4)))}${pa ? ', lov' : ''}"><span>v. ${isoVecka(m).vecka}</span><small>${esc(spannKort(m, plusDagar(m, 4)))}</small></button>`; }).join('');
   foljruta.checked = aktiv.folj;
   $('pl-elevruta').hidden = !aktiv.folj;
