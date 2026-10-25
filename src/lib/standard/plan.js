@@ -374,7 +374,7 @@ export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...plan
  * läraren går in och planerar; den andra ökar med en ny förmåga, en tredje när ett fel lagas. Versionerna står i sajtens
  * METODER.md under Planera insatsen.
  */
-export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.2.7', beta: true });
+export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.2.8', beta: true });
 
 // Filnamnen på det som laddas ner ur planen, lika för alla metoder (sajtens K-519; Niclas 2026-10-25: "Kan du standardisera
 // dess namn? Alltså elevens namn, metod och datum som placeholders för den. Annars heter alla sammanställningar samma"):
@@ -478,8 +478,14 @@ export function planera(mp, val) {
   const lovveckor = [];
   let mandag = forstaMandagen(val);
   const nastaMandag = () => { while (lov.has(veckonyckel(mandag))) { lovveckor.push(mandag); mandag = plusDagar(mandag, 7); } const m = mandag; mandag = plusDagar(mandag, 7); return m; };
+  // Nästa vecka som inte är lov, utan att gå vidare.
+  const kommande = () => { let m = mandag; while (lov.has(veckonyckel(m))) m = plusDagar(m, 7); return m; };
+  // En insats som avslutas tidigare slutar efter veckan med måndagen val.slut, och veckorna efter finns inte i planen (Niclas
+  // 2026-10-25: "Avsluta insatsen denna vecka ... då skrivs alla sammaställningar om med den vecka man avslutar den som sista").
+  const slut = arDatum(val.slut) ? /** @type {string} */ (val.slut) : null;
   // Spärren mot en plan utan slut: en period i pass där inga dagar ger pass.
   for (let i = 0; iPass ? pass.length < langd && i < 104 : i < ordning.length; i++) {
+    if (slut && veckor.length && kommande() > slut) break;
     const m = nastaMandag();
     const v = { nr: veckor.length + 1, innehall: iPass ? veckor.length + 1 : ordning[i].innehall, igen: iPass ? false : ordning[i].igen, mandag: m, vecka: isoVecka(m), pass: [], bortfall: [] };
     for (const dag of dagar) {
@@ -541,7 +547,39 @@ export function planera(mp, val) {
   return {
     start: val.start, enhet: iPass ? 'pass' : 'veckor', borja, forstaPass, sistaPass, sistaNr: sista?.nr, efter, pass, veckor, lovveckor, uppfoljning,
     fore: { mandag: foreMandag, overLov }, ...(efterSteg !== undefined ? { efterSteg } : {}), ...(val.mitt ? { mitt: val.mitt } : {}),
+    // Det planen hade före avslutet, i veckor eller i pass, så att texterna kan säga hur mycket tidigare insatsen slutade.
+    ...(slut ? { slut, planerade: iPass ? langd : ordning.length } : {}),
   };
+}
+
+/**
+ * En insats som avslutades före planens slut, i en mening, lika i sammanställningen, pdf:erna, elevens rad och texten till
+ * åtgärdsprogrammet (Niclas 2026-10-25: "Insatsen avslutades v. Anledning var att ..."): veckan i planen med
+ * kalenderveckan, och hur mycket tidigare än planerat. I nutid medan sista veckan pågår, "avslutas", och sedan i dåtid. Tom
+ * när planen går till sitt slut.
+ * @param {Plan} plan
+ * @param {boolean} [pagar] insatsen pågår, sista passet har inte varit
+ */
+export function avslutetText(plan, pagar = false) {
+  if (!plan.slut || !plan.veckor.length) return '';
+  const v = plan.veckor[plan.veckor.length - 1];
+  const kvar = (plan.planerade ?? 0) - (plan.enhet === 'pass' ? plan.pass.length : plan.veckor.length);
+  const enhet = plan.enhet === 'pass' ? 'pass' : kvar === 1 ? 'vecka' : 'veckor';
+  return `Insatsen ${pagar ? 'avslutas' : 'avslutades'} i ${planveckansNamn(plan, v).text}${kvar > 0 ? `, ${talText(kvar)} ${enhet} tidigare än planerat` : ''}.`;
+}
+/**
+ * Utvärderingen efter insatsen, lika på sidan, i pdf:erna och i texterna som kopieras: när insatsen avslutades tidigare
+ * avslutet med lärarens anledning, som är utvärderingens mening med beslutet Avsluta insatsen, och annars beslutet och
+ * meningen. Tom när inget är valt eller skrivet.
+ * @param {Plan} plan
+ * @param {{ beslut?: string, not?: string } | null | undefined} u
+ * @param {boolean} [pagar] insatsen pågår, sista passet har inte varit
+ */
+export function utvarderingenText(plan, u, pagar = false) {
+  const beslutet = u?.beslut || u?.not ? beslutText(u) : '';
+  const avslut = avslutetText(plan, pagar);
+  if (!avslut) return beslutet;
+  return [avslut, u?.beslut === 'avsluta' ? (u.not ? `Anledning: ${mening(stor(utanPunkt(u.not)))}` : '') : beslutet].filter(Boolean).join(' ');
 }
 
 /**
@@ -850,6 +888,7 @@ export function kodaVal(val, extra = {}) {
   if (tider.length) delar.push(`t=${tider.map(([d, [a, b]]) => `${d}-${a.replace(':', '')}-${b.replace(':', '')}`).join('.')}`);
   if (val.mal) delar.push(`mal=${encodeURIComponent(val.mal)}`);
   if (val.mitt) delar.push(`a=${val.mitt}`);
+  if (val.slut) delar.push(`e=${val.slut}`);
   if (extra.id) delar.push(`p=${extra.id}`);
   if (extra.visa) delar.push(`v=${extra.visa}`);
   return delar.join('&');
@@ -876,6 +915,7 @@ export function lasVal(hash) {
   const visa = p.get('v') === 'fore' ? 'fore' : Number(p.get('v'));
   const mal = rentMal(p.get('mal'));
   const mitt = Number(p.get('a'));
+  const slut = p.get('e');
   const tider = rentaTider(Object.fromEntries(punkter('t').map((x) => x.match(/^([1-5])-(\d{2})(\d{2})-(\d{2})(\d{2})$/)).filter(Boolean).map((m) => [m[1], [`${m[2]}:${m[3]}`, `${m[4]}:${m[5]}`]])));
   /** @type {Val} */
   const val = {
@@ -891,6 +931,7 @@ export function lasVal(hash) {
     ...(Object.keys(tider).length ? { tider } : {}),
     ...(mal ? { mal } : {}),
     ...(Number.isInteger(mitt) && mitt >= 1 && mitt <= LANGSTA ? { mitt } : {}),
+    ...(arDatum(slut) && /** @type {string} */ (slut) >= start ? { slut: /** @type {string} */ (slut) } : {}),
   };
   return { val, ...(/^[a-z0-9]{4,12}$/.test(id) ? { id } : {}), ...(visa === 'fore' || (Number.isInteger(visa) && visa >= 1 && visa <= 2 * LANGSTA) ? { visa } : {}) };
 }
@@ -1083,7 +1124,7 @@ export const skattningenText = (vem, varjeVecka = true) => `skattning${varjeVeck
  * @param {{ titel: string, undertitel?: string, adress: string, mal?: string, steg?: string[], uppfoljning: { nar: string }[], nivaNamn?: string }} info
  * @param {Plan} plan
  * @param {Val} val
- * @param {{ minuter: number, genomforda?: number, folj?: boolean }} o
+ * @param {{ minuter: number, genomforda?: number, folj?: boolean, utvardering?: { beslut?: string, not?: string }, elever?: { namn: string }[], pagar?: boolean }} o utvärderingen och eleverna: anledningen när insatsen avslutades tidigare, utan elevernas namn
  */
 export function dokumentationstext(info, plan, val, o) {
   const rader = [];
@@ -1095,6 +1136,8 @@ export function dokumentationstext(info, plan, val, o) {
   const dagar = dagarText(val);
   const v1 = plan.veckor[0]?.vecka.vecka, v2 = plan.veckor[plan.veckor.length - 1]?.vecka.vecka;
   if (plan.forstaPass && plan.sistaPass) rader.push(`Omfattning: ${plan.pass.length} pass om ${minuterText(passensMinuter(val, o.minuter))} minuter, ${dagar}, ${datumspann(plan.forstaPass, plan.sistaPass)} (${kalenderveckor(v1, v2, ' till ')})${info.nivaNamn ? `, på nivån ${info.nivaNamn}` : ''}.`);
+  // En insats som avslutades tidigare säger det, med lärarens anledning utan elevernas namn (K-542).
+  if (avslutetText(plan)) rader.push(utanNamn(utvarderingenText(plan, o.utvardering?.beslut === 'avsluta' ? o.utvardering : undefined, o.pagar), o.elever ?? []));
   // Det eleven arbetar med: metodens steg i planens ordning, med kalenderveckorna. Pass i följd med samma steg står ihop, och
   // ett lov mitt i står inte med i veckorna (kalenderveckornaFor).
   /** @type {{ steg: number | null, datum: string[] }[]} */
@@ -1189,6 +1232,8 @@ export function mittVeckan(plan) {
   // En förlängd insats har kvar sin avstämning i veckan den hade (verifieringen 2026-10-25: förlängningen flyttade
   // avstämningen till en vecka som redan hade varit). Veckan står i valen sedan förlängningen.
   if (plan.mitt && plan.veckor.some((v) => v.nr === plan.mitt)) return plan.mitt;
+  // En insats som avslutades före sin avstämning har ingen.
+  if (plan.slut && plan.mitt) return null;
   if (plan.enhet === 'pass') return plan.pass[Math.ceil(plan.pass.length / 2) - 1]?.vecka ?? null;
   // Metodens veckor i planen, utan upprepningarna, så att en plan som börjar på ett senare steg har sin egen mitt.
   const unika = [...new Set(plan.veckor.map((v) => v.innehall))];
@@ -1364,7 +1409,8 @@ export function sammanstallningstext(info, plan, s) {
   const noter = s.veckor.filter((v) => v.not);
   if (noter.length) rader.push(`Anteckningar: ${noter.map((v) => mening(`${veckansNamn(v).text}: ${v.not}`)).join(' ')}`);
   if (s.avstamning?.beslut || s.avstamning?.not) rader.push(`Avstämning mitt i insatsen${s.mitt ? `, ${veckansNamn(s.veckor[s.mitt - 1]).text}` : ''}: ${beslutText(s.avstamning)}`);
-  if (s.utvardering?.beslut || s.utvardering?.not) rader.push(`Utvärdering efter insatsen: ${beslutText(s.utvardering)}`);
+  const utvarderingen = utvarderingenText(plan, s.utvardering, !s.slut);
+  if (utvarderingen) rader.push(`Utvärdering efter insatsen: ${utvarderingen}`);
   const tider = uppfoljningensRader(plan, info);
   if (tider.length) rader.push(`Uppföljning: ${tider.join('. ')}.`);
   return utanNamn(rader.join('\n'), elever);
@@ -1386,6 +1432,10 @@ export function elevtext(info, plan, s, id) {
   if (e.narvaro !== null && s.gjorda) delar.push(narvaronText(e, s));
   if (e.skattningar.length) delar.push(`${stor(skattningenText('eleven', false))}: ${skattningarna(s, e)}.`);
   for (const t of elevensResultat(plan, e.resultat)) delar.push(mening(resultatText(plan, info, t)));
+  // Utvärderingen, med avslutet och anledningen när insatsen avslutades tidigare, står också i elevens rad (K-542; Niclas
+  // 2026-10-25: "kommer med på totala sammaställningen och för varje elev").
+  const utvarderingen = utvarderingenText(plan, s.utvardering, !s.slut);
+  if (utvarderingen) delar.push(`Utvärdering efter insatsen: ${utvarderingen}`);
   return utanNamn(delar.join(' '), s.elever.filter((x) => x.id !== GRUPPEN));
 }
 
@@ -1458,9 +1508,9 @@ export function kalenderfil(info, plan, o) {
  * @typedef {{ takt: { min: number, max: number }, minuter: { min: number, max: number }, period: { min: number, max?: number, enhet: 'veckor' | 'pass', mer: boolean, perKurs: boolean }, stegEnhet: 'veckor' | 'pass', steg: Steg[], uppfoljning: { rad: number, tid: Tid }[], passen: { rad: number, nar: PassensNar }[] }} Metodplan
  * @typedef {{ uppfoljning?: { rader: { nar: string, vad: string }[] }, progression?: { rader: { vecka: string, fokus?: string, roll?: string, led?: string }[] }, checklista?: { punkter: string[] }, plan?: { passen?: { nar: string, text?: string, ur?: { tabell: string, rad: string, kolumner?: string[] }, kort?: string, tabell?: string }[], fore?: string[], justera?: string[], upprepa?: string, utan?: string[], stege?: boolean }, tidsschema?: { text?: string, efter?: string, rader: { tid: string, fas: string, vad: string }[], varianter?: Variant[] }, gruppen?: { text: string }, passrutin?: { efterPasset?: string }, principer?: { text: string }, hem?: { text: string[] }, tabeller?: { rubrik: string, kolumner: string[], rader?: unknown[][] }[], nivaer?: { namn: string }[] }} MetodensTexter
  * @typedef {{ nar: string, text: string, delar: { fas: string, tid: string }[] }} Variant
- * @typedef {{ start: string, dagar: number[], langd: number, niva?: string, borja?: number, minuter?: number, lov?: string[], upprepa?: number[], flytta?: Record<string, string>, stryk?: string[], tider?: Record<string, [string, string]>, mal?: string, mitt?: number }} Val
+ * @typedef {{ start: string, dagar: number[], langd: number, niva?: string, borja?: number, minuter?: number, lov?: string[], upprepa?: number[], flytta?: Record<string, string>, stryk?: string[], tider?: Record<string, [string, string]>, mal?: string, mitt?: number, slut?: string }} Val
  * @typedef {{ nr: number, datum: string, vecka: number, steg?: number | null, flyttatFran?: string }} Pass
  * @typedef {{ nr: number, innehall: number, igen: boolean, mandag: string, vecka: { ar: number, vecka: number }, pass: number[], bortfall: { datum: string, varfor: 'helgdag' | 'installt', namn?: string }[], steg?: number | null }} PlanVecka
- * @typedef {{ start: string, enhet: 'veckor' | 'pass', borja: number, forstaPass?: string, sistaPass?: string, sistaNr?: number, efter: string, pass: Pass[], veckor: PlanVecka[], lovveckor: string[], uppfoljning: { rad: number, typ: Tid['typ'], tillfallen: { datum: string, vecka: number | null }[] }[], fore: { mandag: string, overLov: boolean }, efterSteg?: number, mitt?: number }} Plan
+ * @typedef {{ start: string, enhet: 'veckor' | 'pass', borja: number, forstaPass?: string, sistaPass?: string, sistaNr?: number, efter: string, pass: Pass[], veckor: PlanVecka[], lovveckor: string[], uppfoljning: { rad: number, typ: Tid['typ'], tillfallen: { datum: string, vecka: number | null }[] }[], fore: { mandag: string, overLov: boolean }, efterSteg?: number, mitt?: number, slut?: string, planerade?: number }} Plan
  * @typedef {{ gjorda?: string[], elever?: { id: string, namn: string }[], narvaro?: boolean, franvaro?: Record<string, string[]>, vecka?: Record<string, { varde?: number, not?: string }>, skattning?: Record<string, Record<string, number>>, resultat?: Record<string, Record<string, string>>, avstamning?: { beslut?: string, not?: string }, utvardering?: { beslut?: string, not?: string } }} Foljd
  */

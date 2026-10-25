@@ -105,6 +105,7 @@ Det som händer en lärare med en grupp under en insats, på ett ställe. Planpr
 | S20 | Filerna som laddas ner, var och en med eget namn | `filnamnen på det som laddas ner`; `kalenderfilens namn säger vad, metoden och datumet`; `planens fil heter plan, gruppen, metoden och datumet`; `förslaget har Spara planen också längst ned` |
 | S21 | Elevernas namn lämnar aldrig webbläsaren | `ett namn som lämnar listan följer inte med texten som kopieras medan läraren skriver`; `sammanställningen kopieras utan namn`; `inga namn i statistikens händelser`; `länken till planen utan namnet` |
 | S22 | Dagens pass är gjort, och en vecka längre fram | `nästa pass som inte är bockat, med de bockade före det`; `ett bockat pass ger nästa pass i rutan, och rutan säger det`; `utan bocken gäller rutan passet igen`; `en vecka som inte har börjat har streckade ringar och inga bockar`; `en vecka som inte har börjat säger när den går att skatta, utan skalan` |
+| S23 | Insatsen avslutas en eller två veckor tidigare | `en insats som avslutas tidigare slutar efter veckan`; `avslutet i en mening`; `utvärderingen med avslutet och anledningen`; `avstämningen i en insats som avslutades före den finns inte`; `länken bär slutet`; `avsluta: formuläret säger var planen slutar och vad som stryks`; `avsluta: planen slutar efter veckan, och anledningen är utvärderingens mening`; `avsluta: veckan, planens ruta och texten till åtgärdsprogrammet säger avslutet`; `avsluta: Fortsätt insatsen enligt planen tar tillbaka planen` |
 
 ## Agenterna och uppdragen
 
@@ -196,6 +197,7 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | Uppföljningen | `uppfoljningensNamn`, `uppfoljningensRad`, `uppfoljningensRader` och `resultatText` |
 | Skattningen | `skattningenText`, `elevensVarden`, `skattadeVeckor`, `skattningenMittI` och `riktningText` |
 | Nästa pass | `nastaPass`, och `nastaObockade` för rutan med nästa pass, som hoppar över det som är bockat |
+| Avslutet och utvärderingen | `avslutetText` och `utvarderingenText` |
 | Passen och besluten | `passensRad`, `passensLage`, `narvaronText`, `beslutText` och `BESLUTEN` |
 | Diagrammet | `stapelnsKant` och `prickarna` |
 | Målet | `malText`, `malensMening` och `kortetsMalFel` |

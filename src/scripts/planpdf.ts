@@ -4,7 +4,7 @@
 // kopieras till dokumentationen har inga namn. Typsnittet är pdf:ens eget (Helvetica). Ett tecken som det inte har skrivs
 // utan sina accenter, så att utskriften aldrig går sönder (Niclas: "Ł, Ş och č är så ovanliga att du kan hoppa över dem").
 import type { PDFFont, PDFPage } from 'pdf-lib';
-import { BESLUT, beslutText, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronText, passensRad, prickarna, resultatText, riktningText, skattadeVeckor, SKALAN, stapelnsKant, uppfoljningensRader, veckansNamn, type Plan, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
+import { BESLUT, beslutText, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronText, passensRad, prickarna, resultatText, riktningText, skattadeVeckor, SKALAN, stapelnsKant, uppfoljningensRader, utanNamn, utvarderingenText, veckansNamn, type Plan, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
 
 const A4: [number, number] = [595.28, 841.89];
 const KANT = 50;
@@ -147,7 +147,9 @@ export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, id
     for (const v of s.veckor.filter((x) => x.not)) p.text(`${veckansNamn(v).Text}: ${mening(v.not!)}`, { storlek: 10 });
   }
   if (s.avstamning?.beslut || s.avstamning?.not) { p.rubrik('Avstämning mitt i insatsen'); p.text(beslutText(s.avstamning)); }
-  if (s.utvardering?.beslut || s.utvardering?.not) { p.rubrik('Utvärdering efter insatsen'); p.text(beslutText(s.utvardering)); }
+  // Utvärderingen, med avslutet och anledningen när insatsen avslutades tidigare (utvarderingenText i standarden, K-542).
+  const utvarderingen = utvarderingenText(plan, s.utvardering, !s.slut);
+  if (utvarderingen) { p.rubrik('Utvärdering efter insatsen'); p.text(utvarderingen); }
   const tider = uppfoljningensRader(plan, info);
   if (tider.length) { p.rubrik('Metodens uppföljning'); p.text(`${tider.join('. ')}.`); }
   return p.avsluta(`${info.metod} · Planera insatsen på niclasfohlin.se · lärarens egen plan, sparas inte på sajten`);
@@ -169,6 +171,10 @@ export async function elevPdf(plan: Plan, s: Sammanstallning, id: string, info: 
   if (narvaro) p.text(narvaronText(e, s));
   for (const t of elevensResultat(plan, e.resultat)) p.text(mening(resultatText(plan, info, t)));
   if (s.avstamning?.beslut) p.text(`Gruppens avstämning mitt i insatsen: ${BESLUT[s.avstamning.beslut as keyof typeof BESLUT] ?? s.avstamning.beslut}.`);
-  if (s.utvardering?.beslut) p.text(`Utvärdering efter insatsen: ${BESLUT[s.utvardering.beslut as keyof typeof BESLUT] ?? s.utvardering.beslut}.`);
+  // Utvärderingen med lärarens mening, och avslutet med anledningen när insatsen avslutades tidigare (K-542; Niclas
+  // 2026-10-25: "kommer med på totala sammaställningen och för varje elev"). Meningen gäller gruppen, så de andra elevernas
+  // namn står inte i den här elevens utskrift.
+  const utvarderingen = utanNamn(utvarderingenText(plan, s.utvardering, !s.slut), s.elever.filter((x) => x.id !== id && x.id !== GRUPPEN));
+  if (utvarderingen) p.text(`Utvärdering efter insatsen: ${utvarderingen}`);
   return p.avsluta(`${e.namn} · ${info.metod} · Planera insatsen på niclasfohlin.se · lärarens egen plan`);
 }

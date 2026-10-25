@@ -176,6 +176,14 @@ if (tsMp) {
   ska('mitten av sex veckor är vecka 3', s.mittVeckan(p) === 3);
   ska('mitten av åtta veckor är vecka 4', s.mittVeckan(s.planera(tsMp, { ...val, langd: 8 })) === 4);
   // En förlängd insats har kvar avstämningen i sin vecka, och länken bär den (verifieringen 2026-10-25).
+  // En insats som avslutas tidigare (K-542; Niclas 2026-10-25): planen slutar efter veckan med måndagen val.slut, uppföljningen
+  // efter räknas från det nya sista passet, och meningen säger hur mycket tidigare än planerat.
+  const kort = s.planera(tsMp, { ...val, slut: '2026-11-16', mitt: 3 });
+  ska('en insats som avslutas tidigare slutar efter veckan', kort.veckor.length === 3 && kort.pass.length === 9 && kort.sistaPass === '2026-11-20' && kort.planerade === 6 && kort.uppfoljning.find((u) => u.typ === 'efter')?.tillfallen[0]?.datum === '2026-11-23', [kort.veckor.length, kort.sistaPass, kort.planerade, kort.uppfoljning.find((u) => u.typ === 'efter')?.tillfallen]);
+  ska('avslutet i en mening', s.avslutetText(kort) === 'Insatsen avslutades i vecka 3 (v. 47), tre veckor tidigare än planerat.' && s.avslutetText(s.planera(tsMp, val)) === '', s.avslutetText(kort));
+  ska('utvärderingen med avslutet och anledningen', s.utvarderingenText(kort, { beslut: 'avsluta', not: 'eleverna har nått målet' }) === 'Insatsen avslutades i vecka 3 (v. 47), tre veckor tidigare än planerat. Anledning: Eleverna har nått målet.' && s.utvarderingenText(s.planera(tsMp, val), { beslut: 'fortsatt' }) === 'Fortsätt som planerat.' && s.utvarderingenText(kort, undefined) === s.avslutetText(kort), s.utvarderingenText(kort, { beslut: 'avsluta', not: 'eleverna har nått målet' }));
+  ska('avstämningen i en insats som avslutades före den finns inte', s.mittVeckan(s.planera(tsMp, { ...val, slut: '2026-11-09', mitt: 3 })) === null && s.mittVeckan(kort) === 3);
+  ska('länken bär slutet', s.lasVal(`#${s.kodaVal({ ...val, slut: '2026-11-16' })}`).val.slut === '2026-11-16' && s.lasVal('#s=2026-11-02&d=135&l=6&e=2026-10-01').val.slut === undefined);
   ska('en förlängd insats har kvar avstämningens vecka', s.mittVeckan(s.planera(tsMp, { ...val, langd: 8, mitt: 3 })) === 3 && s.lasVal(`#${s.kodaVal({ ...val, langd: 8, mitt: 3 })}`).val.mitt === 3);
   const f = { gjorda: ['2026-11-02', '2026-11-04', '2026-11-06'], elever: [{ id: 'a1', namn: 'Ali' }, { id: 'b2', namn: 'Bea' }], franvaro: { '2026-11-04': ['b2'] }, vecka: { '2026-11-02': { varde: 3, not: 'Gruppen kom igång' } }, skattning: { '2026-11-02': { a1: 2, b2: 3 }, '2026-11-09': { a1: 3, b2: 3 } }, resultat: { '0-2026-11-02': { a1: '4 av 8' } }, avstamning: { beslut: 'fortsatt' } };
   const sm = s.sammanstallning(p, f, '2026-11-18');
@@ -1560,6 +1568,34 @@ try {
     await b.bredd(390); await vanta(150); await b.bild(`12-beta-${m.id}-telefon`); await b.dator();
   }
   b.stang();
+
+  // ---- Avsluta insatsen tidigare (K-542) ----
+  // Niclas 2026-10-25: "Avsluta insatsen denna vecka ... då skrivs alla sammaställningar om med den vecka man avslutar den som
+  // sista". Planen slutar efter veckan, veckorna efter är borta i remsan, rutan och texten till åtgärdsprogrammet, anledningen
+  // är utvärderingens mening, och Fortsätt insatsen enligt planen tar tillbaka planen.
+  const av = await flik(false, Date.UTC(2026, 10, 18, 9, 0, 0));
+  await av.oppna(PLAN);
+  await av.kor('localStorage.clear()');
+  await av.oppna(`${PLAN}#s=2026-11-02&d=135&l=6`);
+  await av.tryck('#pl-spara');
+  await vanta(200);
+  await av.kor(`(() => { document.querySelector('#pl-veckan [data-ruta="andra-veckan"]').open = true; return true; })()`);
+  await av.tryck('#pl-veckan [data-gor="avsluta"]');
+  sant('avsluta: formuläret säger var planen slutar och vad som stryks', (await av.text('#pl-avsluta p'))?.startsWith('Planen slutar efter vecka 3 (v. 47), fredag 20 november. Passen som är kvar i veckan står kvar.') && (await av.text('#pl-avsluta'))?.includes('Vecka 4 till 6 (v. 48–50) stryks ur planen.'), await av.text('#pl-avsluta'));
+  await av.tryck('#pl-avsluta [data-anledning]', 'Gruppen har nått målet');
+  await av.tryck('#pl-avsluta [data-gor="avsluta-klar"]');
+  await vanta(300);
+  const avPlan = await av.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0]`);
+  sant('avsluta: planen slutar efter veckan, och anledningen är utvärderingens mening', avPlan?.val.includes('e=2026-11-16') && avPlan.foljd.utvardering?.beslut === 'avsluta' && avPlan.foljd.utvardering?.not === 'Gruppen har nått målet' && (await av.kor(`[...document.querySelectorAll('#pl-veckan .pl-remsa [data-vy]')].map((b) => b.dataset.vy).join()`)) === 'fore,1,2,3,efter', avPlan);
+  const avslutet = 'Insatsen avslutas i vecka 3 (v. 47), tre veckor tidigare än planerat.';
+  sant('avsluta: veckan, planens ruta och texten till åtgärdsprogrammet säger avslutet', (await av.text('#pl-veckan'))?.includes(avslutet) && (await av.text('#pl-summa-text'))?.includes(`9 pass om 30 minuter`) && (await av.text('#pl-summa-text'))?.includes(avslutet) && (await av.kor(`document.getElementById('pl-aptext').value`))?.includes(`${avslutet} Anledning: Gruppen har nått målet.`), [await av.text('#pl-summa-text'), await av.kor(`document.getElementById('pl-aptext').value`)]);
+  sant('avsluta: i sista veckan står Fortsätt insatsen enligt planen i stället', (await av.kor(`!document.querySelector('#pl-veckan [data-gor="avsluta"]') && !!document.querySelector('#pl-veckan [data-gor="fortsatt"]')`)));
+  await av.tryck('#pl-veckan [data-gor="fortsatt"]');
+  await vanta(300);
+  const avIgen = await av.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0]`);
+  sant('avsluta: Fortsätt insatsen enligt planen tar tillbaka planen', !avIgen?.val.includes('e=') && !avIgen.foljd.utvardering?.beslut && (await av.kor(`document.querySelectorAll('#pl-veckan .pl-remsa [data-vy]').length`)) === 8, avIgen);
+  sant('avsluta: inga fel', !av.undantag.length && !(await av.kor('window.__fel.length')), av.undantag);
+  av.stang();
 
   // ---- En plan som börjar högre upp i en stege (K-515) ----
   // Läslistor med Börja på Läslista 2: planens vecka 1 är metodens vecka 3. Metodens texter säger planens veckor, passet i
