@@ -263,6 +263,19 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
 
+# Appen Stöd (K-505, DRIFT.md under Appen Stöd): manifestet en dag, som filerna under metoderna, och service workern utan
+# cache, så att en ny version når telefonerna nästa gång appen öppnas. Appens ikoner har regeln för /stodundervisning/*.png.
+[[headers]]
+  for = "/stodundervisning/manifest.webmanifest"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+    Content-Type = "application/manifest+json"
+
+[[headers]]
+  for = "/sw-stod.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
 # iPhone och iPad frågar efter ikonens varianter under egna namn; de får samma ikon.
 [[redirects]]
   from = "/apple-touch-icon-precomposed.png"

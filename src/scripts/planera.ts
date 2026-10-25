@@ -1559,6 +1559,8 @@ $('pl-spara').addEventListener('click', () => {
   if (!spara()) { aktiv.sparad = false; sparfel(); return; }
   bedOmVaraktig();
   raknaPagaende(lasPlaner().planer);
+  // Raden om appen Stöd följer om planen är sparad (src/scripts/appen.ts).
+  document.dispatchEvent(new Event('planera:sparad'));
   uppdateraAdressen();
   notis = '';
   visaNotis('');

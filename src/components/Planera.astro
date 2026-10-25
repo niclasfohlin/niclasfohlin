@@ -10,6 +10,7 @@
 import Base from '../layouts/Base.astro';
 import SkrivUtPdf from './SkrivUtPdf.astro';
 import Lektionskortknapp from './Lektionskortknapp.astro';
+import AppRad from './AppRad.astro';
 import { periodensLangd, PLANERA, tidensMatt, tolkaSteg } from '../lib/standard/index.js';
 import { site } from '../data/site';
 import type { PlanData } from '../lib/insatsplan';
@@ -44,6 +45,7 @@ const stegen = data.stege ? (data.progression?.rader ?? []).flatMap((r) => { con
       <h1>Planera insatsen{PLANERA.beta && <>{' '}<span class="beta">Beta</span></>}</h1>
       <p class="ingress">Välj när ni träffas. Planen räknar fram passen och uppföljningen ur metoden, och varje vecka visar vad ni gör och var materialet finns.</p>
       <noscript><p class="pl-utan-js">Planen räknas fram i webbläsaren och behöver JavaScript. Metoden står på <a href={data.sida}>metodens sida</a>.</p></noscript>
+      <AppRad plats="planera" metod={data.id} />
     </header>
 
     <nav class="pl-grupper" id="pl-grupper" aria-label="Dina planer för metoden" hidden></nav>

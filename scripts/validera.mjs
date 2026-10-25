@@ -109,6 +109,7 @@ steg('pdfdelar', 'node scripts/pdfdelar.mjs');
 steg('paritet', 'node scripts/paritet.mjs');
 steg('utskriftsformat', 'node scripts/utskriftsformat.mjs');
 steg('planprov', 'node scripts/planprov.mjs');
+steg('appprov', 'node scripts/appprov.mjs');
 steg('lathundprov', 'node scripts/lathundprov.mjs');
 steg('wordregler', 'node scripts/wordregler.mjs');
 steg('delningskort', 'node scripts/delningskort.mjs');

@@ -1,0 +1,33 @@
+---
+// Raden som erbjuder appen Stöd (K-505, Niclas 2026-10-25): metodbanken som app på hemskärmen, i telefon och surfplatta,
+// på metodbanken och på Planera insatsen ("Ska den finnas när man går in på Planera insatsen med mobil/surfplatta
+// också?"). Raden är gömd tills src/scripts/appen.ts har sett att den passar: aldrig i appen själv, på en dator eller i
+// Facebooks och Instagrams egna webbläsare. På Android visar knappen telefonens egen fråga, på iPhone tre steg, eftersom
+// Safari inte kan installera med en knapp. Texten under rubriken byts av skriptet efter telefon och plats.
+import { appikonSvg } from '../lib/appikon';
+
+interface Props { plats: 'metodbanken' | 'planera'; metod?: string }
+const { plats, metod } = Astro.props;
+---
+
+<section class="app-rad" data-app data-plats={plats} data-metod={metod} aria-label="Appen Stöd" hidden>
+  <span class="app-ikon" aria-hidden="true" set:html={appikonSvg()} />
+  <div class="app-text">
+    <p class="app-rubrik">Appen Stöd</p>
+    <p class="app-om" data-app-om>Metodbanken och Planera insatsen på hemskärmen.</p>
+  </div>
+  <button type="button" class="knapp liten app-knapp" data-app-knapp data-goatcounter-click={`app:${plats}`} data-goatcounter-title={`Appen Stöd: knappen på ${plats === 'planera' ? 'Planera insatsen' : 'metodbanken'}`}>Installera</button>
+  <button type="button" class="app-stang" data-app-stang aria-label="Stäng raden om appen">×</button>
+  <div class="app-steg" data-app-steg hidden>
+    <ol>
+      <li>Tryck på Dela <svg class="app-dela" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5M6 11H5v10h14V11h-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>, fyrkanten med en pil uppåt. I nyare iPhone ligger den under knappen med tre prickar.</li>
+      <li>Välj Lägg till på hemskärmen. Syns det inte, rulla ned i listan.</li>
+      <li>Tryck på Lägg till.</li>
+    </ol>
+    <p class="app-not" data-app-not hidden></p>
+  </div>
+</section>
+
+<script>
+  import '../scripts/appen';
+</script>

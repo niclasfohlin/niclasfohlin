@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { site } from '../data/site';
 import { kortFor } from '../lib/delningskort';
+import { appikonAdress } from '../lib/appikon';
 
 interface Props {
   title?: string;
@@ -26,6 +27,9 @@ const kort = await kortFor(Astro.url.pathname);
 const bildUrl = new URL(bild ?? kort.fil, Astro.site).href;
 const bildAlt = kort.undertitel ? `${kort.titel}. ${kort.undertitel}` : kort.titel;
 const nuvarande = Astro.url.pathname;
+// Sidorna under /stodundervisning hör till appen Stöd (K-505, DRIFT.md under Appen Stöd): manifestet, appens ikon för
+// iPhones hemskärm och namnet under ikonen. Resten av sajten har sajtens ikon.
+const iAppen = nuvarande === '/stodundervisning' || nuvarande.startsWith('/stodundervisning/');
 function aktiv(href: string) {
   return nuvarande === href || nuvarande.startsWith(href + '/') ? 'page' : undefined;
 }
@@ -71,7 +75,9 @@ function aktiv(href: string) {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical.href} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" href={iAppen ? appikonAdress('ikon-180') : '/apple-touch-icon.png'} />
+    {iAppen && <link rel="manifest" href="/stodundervisning/manifest.webmanifest" />}
+    {iAppen && <meta name="apple-mobile-web-app-title" content="Stöd" />}
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="alternate" type="application/rss+xml" title={`${site.namn}: allt nytt`} href="/rss.xml" />
     <link rel="alternate" type="application/rss+xml" title={`${site.namn}: artiklar`} href="/artiklar/rss.xml" />

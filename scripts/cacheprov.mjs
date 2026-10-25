@@ -35,6 +35,8 @@ const UTAN_REGEL = new Map([
   ['/nytt.json', 'läses av utskicket i bygget, inte av läsarna'],
   ['/robots.txt', 'liten och sällan hämtad'],
   ['/delning/kort.json', 'förteckningen som scripts/delningskort.mjs läser i bygget'],
+  // Appen Stöd (K-505, DRIFT.md under Appen Stöd): regeln i netlify.toml är no-cache, så att en ny version når telefonerna.
+  ['/sw-stod.js', 'service workern ska frågas efter varje gång, så att en ny version når telefonerna'],
 ]);
 const SIDKARTA = /^\/sitemap[-\w]*\.xml$/;
 const HOGST_SIDA = 64 * 1024;
