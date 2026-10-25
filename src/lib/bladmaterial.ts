@@ -17,7 +17,7 @@
 // sidan och exemplet läser och visar läraren en gång. Inga Node-beroenden.
 import { arIfylltBlad, bladNamn, bladVid, metodensPaBordet, type PaBordet } from './pabordet';
 import type { MetodData } from './metod';
-import { bankAv } from './bank';
+import { bankAv, iBanken } from './bank';
 import { metodensNivamaterial } from './nivamaterial';
 import { slugAv, UPPTAGNA_LED } from './standard/index.js';
 
@@ -145,7 +145,7 @@ export function metodensBladmaterial(d: MetodData, id: string): Bladmaterial | u
   if (!d.ramar) return undefined;
   const bank = bankAv(d);
   const nm = metodensNivamaterial(d);
-  const bm = bladmaterial(d.ramar.ramar, metodensPaBordet(d, id), (ri) => (!!bank && (bank.ramar.has(ri) || bank.oversikter.has(ri))) || !!nm?.ramar.has(ri));
+  const bm = bladmaterial(d.ramar.ramar, metodensPaBordet(d, id), (ri) => iBanken(bank, ri) || !!nm?.ramar.has(ri));
   // Ramens sida har ramens namn som adress, och den får inte krocka med en enhets sida i banken eller metodens andra sidor.
   const upptagna = new Set([...UPPTAGNA_LED, ...(bank?.enheter.map((e) => e.slug) ?? [])]);
   for (const r of bm?.rader ?? []) {
@@ -179,7 +179,7 @@ function allaEgnaBlad(d: MetodData, id: string): EgetBlad[] {
     const ram = b.vid && 'ram' in b.vid ? b.vid.ram : undefined;
     const ri = ram === undefined ? -1 : ramar.findIndex((r) => r.rubrik === ram || r.rubrik.split(':')[0].trim() === ram);
     if (!b.bild.rubrik.startsWith('Blad: ') || ri < 0 || iRader.has(b.bild.nr)) return [];
-    if (bank && (bank.ramar.has(ri) || bank.oversikter.has(ri))) return [];
+    if (iBanken(bank, ri)) return [];
     if (nm?.ramar.has(ri)) return [];
     let fil = `${id}-blad-${slug(bladNamn(b))}`;
     if (namn.has(fil)) fil = `${fil}-${b.bild.nr}`;

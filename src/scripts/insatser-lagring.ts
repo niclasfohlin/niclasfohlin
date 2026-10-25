@@ -4,7 +4,7 @@
 // någonstans, utom att en plan som pågår säger det till besöksstatistiken med bara metodens namn (pagaende nedan).
 // Lagringen kan vara avstängd eller rensas (privat läge, en skola som rensar webbläsaren); då säger sidan det, och
 // länken till planen är kopian som håller.
-import { arDatum, dagText, lasVal, mandagen, passetsTid, planvecka, planveckan, plusDagar, rensaFoljd, spannKort, tidText, veckonyckel, VECKODAGAR, type Foljd, type Plan, type Val } from '../lib/standard/index.js';
+import { arDatum, dagText, gangen, lasVal, mandagen, passetsTid, planvecka, planveckan, plusDagar, rensaFoljd, rentText, spannKort, stor, tidText, tvasiffrigt, veckansDagar, veckodagKort, veckonyckel, type Foljd, type Plan, type Val } from '../lib/standard/index.js';
 
 export interface SparadPlan {
   id: string;
@@ -33,7 +33,6 @@ export interface SparadPlan {
 
 const NYCKEL = 'insatser';
 
-const text = (x: unknown, max: number) => (typeof x === 'string' ? x.replace(/[\u0000-\u001f\u007f]/g, ' ').trim().slice(0, max) : '');
 const tidpunkt = (x: unknown) => (typeof x === 'string' && /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2})?)?$/.test(x) ? x : undefined);
 const heltal = (x: unknown) => Number.isInteger(x) && (x as number) >= 0;
 /**
@@ -49,8 +48,8 @@ export function rensaPlan(x: unknown): SparadPlan | null {
   const veckor = rader(schema.veckor).filter((r) => heltal(r[0]) && heltal(r[1]) && (r[2] === 0 || r[2] === 1) && arDatum(r[3]) && arDatum(r[4])) as SparadPlan['schema']['veckor'];
   const kopia = tidpunkt(p.kopia), uppdaterad = tidpunkt(p.uppdaterad);
   return {
-    id: p.id, metod: p.metod, titel: text(p.titel, 160), ...(typeof p.omrade === 'string' ? { omrade: text(p.omrade, 40) } : {}),
-    namn: text(p.namn, 40), val: typeof p.val === 'string' ? p.val.slice(0, 4000) : '', folj: p.folj === true, foljd: rensaFoljd(p.foljd),
+    id: p.id, metod: p.metod, titel: rentText(p.titel, 160), ...(typeof p.omrade === 'string' ? { omrade: rentText(p.omrade, 40) } : {}),
+    namn: rentText(p.namn, 40), val: typeof p.val === 'string' ? p.val.slice(0, 4000) : '', folj: p.folj === true, foljd: rensaFoljd(p.foljd),
     ...(kopia ? { kopia } : {}), andrad: tidpunkt(p.andrad) ?? '', ...(uppdaterad ? { uppdaterad } : {}), schema: { pass, veckor },
     ...(heltal(p.bockade) ? { bockade: p.bockade } : {}),
   };
@@ -85,17 +84,13 @@ export const idagLokalt = () => new Intl.DateTimeFormat('sv-SE', { year: 'numeri
 /** Klockslaget nu, ÅÅÅÅ-MM-DDTHH:MM:SS i läsarens tid. */
 export const nuTid = () => {
   const d = new Date();
-  const t = (n: number) => String(n).padStart(2, '0');
-  return `${d.getFullYear()}-${t(d.getMonth() + 1)}-${t(d.getDate())}T${t(d.getHours())}:${t(d.getMinutes())}:${t(d.getSeconds())}`;
+  return `${d.getFullYear()}-${tvasiffrigt(d.getMonth() + 1)}-${tvasiffrigt(d.getDate())}T${tvasiffrigt(d.getHours())}:${tvasiffrigt(d.getMinutes())}:${tvasiffrigt(d.getSeconds())}`;
 };
 
 /** Kopian av planens datum som sparas med planen, med passets tid när läraren har satt en. */
 export const schemaAv = (plan: Plan, val?: Val): SparadPlan['schema'] => ({
   pass: plan.pass.map((p) => { const tid = val ? passetsTid(val, p) : undefined; return tid ? [p.datum, p.vecka, p.nr, `${tid[0]}`] : [p.datum, p.vecka, p.nr]; }),
-  veckor: plan.veckor.map((v) => {
-    const datum = v.pass.map((n) => plan.pass[n - 1].datum).sort();
-    return [v.nr, planvecka(plan, v), v.igen ? 1 : 0, datum[0] ?? v.mandag, datum[datum.length - 1] ?? plusDagar(v.mandag, 4)];
-  }),
+  veckor: plan.veckor.map((v) => { const d = veckansDagar(plan, v); return [v.nr, planvecka(plan, v), v.igen ? 1 : 0, d.fran, d.till]; }),
 });
 
 /** "i dag", "i morgon" eller "onsdag 18 november". */
@@ -116,7 +111,9 @@ export function lageAv(p: SparadPlan, idag: string): { text: string; vecka?: num
   const v = p.schema.veckor.find((x) => x[0] === nasta[1]);
   const kl = nasta[3] ? ` kl. ${tidText(nasta[3])}` : '';
   if (nasta === pass[0] && nasta[0] > idag) return { text: `Första passet ${narText(nasta[0], idag)}${kl}`, vecka: v?.[0] };
-  return { text: `Vecka ${v ? planveckan(v[1], v[2] ? p.schema.veckor.filter((x) => x[1] === v[1] && x[0] <= v[0]).length - 1 : 0) : '?'} i planen, pass ${nasta[2]} ${narText(nasta[0], idag)}${kl}`, vecka: v?.[0] };
+  // Vilken gång veckan tas räknas av standardens gangen, som i planen, ur kopians veckor.
+  const gang = v ? gangen({ veckor: p.schema.veckor.map(([nr, innehall]) => ({ nr, innehall })) }, { nr: v[0], innehall: v[1], igen: v[2] === 1 }) : 0;
+  return { text: `Vecka ${v ? planveckan(v[1], gang) : '?'} i planen, pass ${nasta[2]} ${narText(nasta[0], idag)}${kl}`, vecka: v?.[0] };
 }
 
 /** Dagen för planens nästa pass från och med i dag, eller 9999 när planen är slut: planerna ordnas efter den. */
@@ -135,11 +132,17 @@ export function planensNamn(p: { namn?: string; val: string; schema?: SparadPlan
   if (p.namn) return p.namn;
   const v = lasVal(p.val)?.val;
   if (!v) return 'Plan utan namn';
-  const dagar = [...v.dagar].sort().map((d) => VECKODAGAR[d - 1].slice(0, 3)).join(', ');
+  const dagar = [...v.dagar].sort().map((d) => veckodagKort(d)).join(', ');
   // Efter första passet, som efter ett lov i första veckan inte är planens startdag (de kalla läsarna 2026-10-24).
   const forsta = p.schema?.pass.map((x) => x[0]).sort()[0] ?? v.start;
-  return `${dagar.charAt(0).toLocaleUpperCase('sv')}${dagar.slice(1)} från ${spannKort(forsta, forsta)}`;
+  return `${stor(dagar)} från ${spannKort(forsta, forsta)}`;
 }
+
+/** Adressen till en sparad plan, och till en vecka i den. */
+export const planensAdress = (p: { metod: string; val: string; id: string }, vecka?: number) => `/stodundervisning/${encodeURIComponent(p.metod)}/planera#${p.val}&p=${encodeURIComponent(p.id)}${vecka ? `&v=${vecka}` : ''}`;
+
+/** GoatCounter, när count.js har laddats; det laddas bara på sajtens egen adress (Base.astro) och kan vara stoppat. */
+export const goatcounter = () => (window as { goatcounter?: { count?: (v: object) => void } }).goatcounter;
 
 // Pågående insatser i statistiken (K-504, Niclas 2026-10-25: "en lista på pågående Planerade insatser just nu i antal för
 // sin metod"). En sparad plan som är inne i sina veckor, från veckan med första passet till veckan med det sista, säger
@@ -169,7 +172,7 @@ export function pagaendeHandelser(planer: SparadPlan[], idag: string): { id: str
  */
 export function raknaPagaende(planer: SparadPlan[], idag = idagLokalt()) {
   const skicka = () => {
-    const gc = (window as { goatcounter?: { count?: (v: object) => void } }).goatcounter;
+    const gc = goatcounter();
     if (!gc?.count) return;
     let skickade: Record<string, string>;
     try { skickade = JSON.parse(localStorage.getItem(PAGAR) ?? '{}') ?? {}; } catch { return; }

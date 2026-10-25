@@ -8,6 +8,8 @@
 // Huvudord som gör ett ord till ett namn på en sak, med grundformen först och sedan de bestämda formerna och deras
 // genitiv: lyssningsbladet, ledtrådsbladen, samtalskortets, planeringsmallarna. Ett namn i grundform, som Sifferkort,
 // får formerna av sitt huvudord (Codex 2026-10-24).
+import { skyddaRegex as skydda } from './text.js';
+
 const HUVUDORD = {
   blad: ['blad', 'bladet', 'bladen', 'bladets', 'bladens'],
   kort: ['kort', 'kortet', 'korten', 'kortets', 'kortens'],
@@ -82,7 +84,6 @@ export function sakensFormer(namn) {
   return [...former];
 }
 
-const skydda = (t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 // En form som söks: hela ord, och första bokstaven stor eller liten om inte saken är en titel, som bara står som den är.
 const formMonster = (f, versal) => (versal ? skydda(f) : `[${skydda(f.charAt(0).toLocaleLowerCase('sv'))}${skydda(f.charAt(0).toLocaleUpperCase('sv'))}]${skydda(f.slice(1))}`);
 // Först i en mening, där varje ord har stor bokstav, är en titel inte säkert en titel ("Inte än har eleverna …").
@@ -140,4 +141,19 @@ export function olankadeSaker(text, saker) {
   // Utan lookbehind, som Safari före 16.4 inte kan: tecknet före ordet fångas.
   const ord = [...fritt.matchAll(new RegExp(`(^|[^\\p{L}])(\\p{L}{3,}(?:${BESTAMDA.join('|')}))(?![\\p{L}])`, 'giu'))].map((m) => m[2]);
   return [...new Set(ord)];
+}
+
+/**
+ * Spannen av saker med nummer i en text, som "Bildserie 2–6": namnen som spannet kan gälla, första och sista numret och var
+ * spannet står. Namnet är ett eller två ord; står ett ord med stor bokstav före ett namn på ett ord, som i "Laminerat
+ * Bildserie 1–6", kan namnet vara det sista ordet (de kalla testarna 2026-10-24). Ett spann har högst åtta saker. Planens
+ * sida länkar varje sak i spannet, och bygget bär sakerna till sidan (sajtens src/scripts/planera.ts och src/lib/insatsplan.ts).
+ * @param {string} text
+ * @returns {{ index: number, langd: number, text: string, namn: string[], fran: number, till: number, nummer: number[] }[]}
+ */
+export function sakspann(text) {
+  return [...String(text ?? '').matchAll(/(\p{Lu}\p{L}+(?: \p{L}+)?) (\d+)\s*[–-]\u2060?\s*(\d+)/gu)].flatMap((m) => {
+    const fran = Number(m[2]), till = Number(m[3]);
+    return till > fran && till - fran <= 7 ? [{ index: /** @type {number} */ (m.index), langd: m[0].length, text: m[1], namn: [...new Set([m[1], /** @type {string} */ (m[1].split(' ').pop())])], fran, till, nummer: Array.from({ length: till - fran + 1 }, (_, i) => fran + i) }] : [];
+  });
 }

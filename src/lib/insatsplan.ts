@@ -3,16 +3,15 @@
 // vid bygget. Planen räknas fram i webbläsaren av standardens planmotor (src/lib/standard/plan.js) ur samma fält, så att
 // sidan, riggen och provet räknar lika. Hur fälten skrivs står i METODER.md under Planera insatsen.
 import type { CollectionEntry } from 'astro:content';
-import { metodplan, olankadeSaker, postensRad, sakdelar, slugAv } from './standard/index.js';
+import { gruppensElever, kortnamn, metodplan, minuterISpann, olankadeSaker, postensRad, sakdelar, sakspann, slugAv } from './standard/index.js';
 import { bankAv, nivaFarger } from './bank';
 import { harTaFram, taFramAv } from './tafram';
 import { formateraDatum } from './innehall';
 import { harLathund } from './metod';
 import { metodensLektionskort } from './lektionskort';
 import { lektionskortetsPapper } from './lektionskortdata';
-import { kursensVeckor, metodensSaker, type MetodSak } from './metodsaker';
-import { metodensAnkare, metodensAvsnitt } from './metodankare';
-import { passOrd, passOversikt } from './metod';
+import { kursensVeckor, metodensSaker, sidansAnkare, type MetodSak } from './metodsaker';
+import { passOversikt } from './metod';
 import { CENTRALA, lasbarAdress } from './centrala';
 import { publicerade } from './innehall';
 import { site } from '../data/site';
@@ -152,13 +151,8 @@ const visadeTexter = (d: Metod['data']): string[] => [
 // annars hela titeln.
 async function andraMetoder(id: string): Promise<MetodSak[]> {
   const andra = (await publicerade('stodundervisning')).filter((x) => x.id !== id);
-  const forsta = (t: string) => t.split(':')[0].trim();
-  const antal = new Map<string, number>();
-  for (const x of andra) antal.set(forsta(x.data.titel), (antal.get(forsta(x.data.titel)) ?? 0) + 1);
-  return andra.map((x) => {
-    const kort = forsta(x.data.titel);
-    return { namn: x.data.titel, former: [...new Set([x.data.titel, ...(antal.get(kort) === 1 ? [kort] : [])])], versal: true, adress: `/stodundervisning/${x.id}` };
-  });
+  const titlar = andra.map((x) => x.data.titel);
+  return andra.map((x) => ({ namn: x.data.titel, former: [...new Set([x.data.titel, kortnamn(x.data.titel, titlar)])], versal: true, adress: `/stodundervisning/${x.id}` }));
 }
 
 /** Sakerna som planens texter nämner (K-493), så att sidan bara bär dem. */
@@ -167,16 +161,14 @@ export async function planensSaker(m: Metod): Promise<MetodSak[]> {
   const anvanda = new Set(visadeTexter(m.data).flatMap((t) => sakdelar(t, alla).flatMap((x) => (x.sak === undefined ? [] : [x.sak]))));
   // Ett spann, som "Bildserie 2–6", bär varje sak i spannet, så att planen kan länka dem var för sig. Namnet är ett eller
   // två ord, eller det sista ordet när ett ord med stor bokstav står före, som i "Laminerat Bildserie 1–6".
-  const spann = new Set(visadeTexter(m.data).flatMap((t) => [...t.matchAll(/(\p{Lu}\p{L}+(?: \p{L}+)?) (\d+)\s*[–-]\u2060?\s*(\d+)/gu)].flatMap((x) => { const a = Number(x[2]), b = Number(x[3]); return b > a && b - a <= 7 ? [x[1], x[1].split(' ').pop()].flatMap((n) => Array.from({ length: b - a + 1 }, (_, i) => `${n} ${a + i}`)) : []; })));
+  const spann = new Set(visadeTexter(m.data).flatMap((t) => sakspann(t).flatMap((x) => x.namn.flatMap((n) => x.nummer.map((nr) => `${n} ${nr}`)))));
   alla.forEach((s, i) => { if (spann.has(s.namn)) anvanda.add(i); });
   return alla.filter((_, i) => anvanda.has(i));
 }
 
-// Metodens avsnitt och tabellernas ankare, som metodens sida ger dem (src/lib/metodankare.ts).
-const ankarna = (d: Metod['data']) => metodensAnkare(d, metodensAvsnitt(d, { pass: !!passOversikt(d), stegen: passOrd(d).stegen }));
 const tabellensAdress = (d: Metod['data'], id: string, namn: string) => {
   const t = d.tabeller.find((x) => x.rubrik === namn);
-  const a = t && ankarna(d).tabellAnkare.get(t);
+  const a = t && sidansAnkare(d).tabellAnkare.get(t);
   return a ? `/stodundervisning/${id}#${a}` : undefined;
 };
 
@@ -188,8 +180,8 @@ function planensPass(d: Metod['data'], id: string): PlanPasset | undefined {
   const medTid = (r: { tid: string }) => /^\d/.test(r.tid.trim());
   const fore = (r: { tid: string }) => /^före/i.test(r.tid.trim());
   const delar = d.tidsschema.rader.filter(medTid).map((r) => {
-    const t = r.tid.match(/(\d+)\s*[–-]\u2060?\s*(\d+)/);
-    return { tid: r.tid, fas: r.fas, vad: r.vad, ...(t ? { minuter: Math.max(1, Number(t[2]) - Number(t[1])) } : {}) };
+    const t = minuterISpann(r.tid);
+    return { tid: r.tid, fas: r.fas, vad: r.vad, ...(t ? { minuter: Math.max(1, t.till - t.fran) } : {}) };
   });
   return {
     rubrik: d.tidsschema.rubrik,
@@ -237,15 +229,6 @@ function nivaTabellen(d: Metod['data'], id: string): PlanData['nivaTabell'] {
   return { rubrik: t.rubrik, adress: tabellensAdress(d, id, t.rubrik) ?? `/stodundervisning/${id}`, veckor, ...(t.not ? { not: t.not } : {}) };
 }
 
-/** Faktarutans grupp som tal: "En till fyra elever" ger 1 och 4. */
-export function gruppensStorlek(text?: string): { min?: number; max?: number } {
-  const TAL: Record<string, number> = { en: 1, ett: 1, två: 2, tre: 3, fyra: 4, fem: 5, sex: 6, sju: 7, åtta: 8, nio: 9, tio: 10, elva: 11, tolv: 12 };
-  const tal = (x: string) => (/^\d+$/.test(x) ? Number(x) : TAL[x.toLowerCase()]);
-  const m = (text ?? '').trim().match(/^(\S+)\s+(?:till|[–-])\s+(\S+)\s+elever/i);
-  if (m && tal(m[1]) && tal(m[2])) return { min: tal(m[1]), max: tal(m[2]) };
-  const h = (text ?? '').trim().match(/^högst (\S+) elever/i);
-  return h && tal(h[1]) ? { max: tal(h[1]) } : {};
-}
 
 /** Planens data ur metodens fil. */
 export async function planensData(m: Metod): Promise<PlanData> {
@@ -265,7 +248,9 @@ export async function planensData(m: Metod): Promise<PlanData> {
     if (!x || x.slag === 'formular' || (bank && (x.adress === bank.adress || lasbarAdress(x) === bank.adress))) return [];
     return [{ namn: x.namn, adress: lasbarAdress(x), pdf: x.slag === 'pdf' }];
   });
-  const grupp = d.grupp ? { text: d.grupp, ...gruppensStorlek(d.grupp) } : undefined;
+  // Gruppens storlek läses av standardens gruppensElever, som metodkortets ruta (K-509).
+  const g = gruppensElever(d.grupp);
+  const grupp = d.grupp ? { text: d.grupp, ...(g ? { min: g.min, ...(g.max !== undefined ? { max: g.max } : {}) } : {}) } : undefined;
   const nivaTabell = bank ? undefined : nivaTabellen(d, m.id);
   const forstaChecklista = !!d.checklista && /första|pass 1\b/i.test(d.checklista.rubrik);
   return {

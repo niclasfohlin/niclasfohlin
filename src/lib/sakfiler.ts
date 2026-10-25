@@ -13,13 +13,13 @@
 // planen leder till utan knapp och på en fil utan knapp (scripts/planprov.mjs). Inga Node-beroenden.
 import type { MetodData } from './metod';
 import { planbar } from './planbar';
-import { bankAv } from './bank';
+import { bankAv, iBanken } from './bank';
 import { metodensNivamaterial } from './nivamaterial';
 import { bladgrupper, egnaBlad, metodensBladmaterial } from './bladmaterial';
 import { bokhandledningen, lararhandledningar } from './handledning';
 import { bladNamn, forstaLed } from './karta';
 import { faktatexter, lastexter, strukturAv, textparAv } from './ramform';
-import { slugAv } from './standard/index.js';
+import { allaAntal, kortnamn, slugAv, stor } from './standard/index.js';
 
 export type Sakslag = 'ram' | 'vecka' | 'rakneblad' | 'mall' | 'diplom';
 /** En saks fil: namnet utan ändelse, sakens namn (dokumentets titel och skärmläsarens), var saken står i metodens fil, hur
@@ -40,8 +40,6 @@ export interface Sakfil {
   liggande: boolean;
 }
 
-const ANTAL = ['', 'ett', 'båda', 'alla tre', 'alla fyra', 'alla fem', 'alla sex', 'alla sju', 'alla åtta', 'alla nio', 'alla tio'];
-const versal = (s: string) => s.charAt(0).toLocaleUpperCase('sv') + s.slice(1);
 
 export function sakfiler(d: MetodData, id: string): Sakfil[] {
   if (!planbar(d)) return [];
@@ -57,11 +55,10 @@ export function sakfiler(d: MetodData, id: string): Sakfil[] {
   const texter = lastexter(ramar);
   const fakta = faktatexter(ramar);
   // Ramens namn på knappen: rubrikens första led när ingen annan ram har det ("Bildserie 1"), annars hela rubriken ("Mina
-  // lärdomar: vecka 1–2").
-  const forsta = (rubrik: string) => rubrik.split(':')[0].trim();
-  const knappnamn = (rubrik: string) => (ramar.filter((r) => forsta(r.rubrik) === forsta(rubrik)).length === 1 ? forsta(rubrik) : rubrik);
+  // lärdomar: vecka 1–2"), med standardens kortnamn.
+  const rubriker = ramar.map((r) => r.rubrik);
   ramar.forEach((ram, ri) => {
-    if (bank && (bank.ramar.has(ri) || bank.oversikter.has(ri))) return;
+    if (iBanken(bank, ri)) return;
     if (nm?.ramar.has(ri) || bm?.ramar.has(ri) || handledningar.has(ri) || bokhl?.ri === ri || medBlad.has(ri)) return;
     if (texter.has(ram) || fakta.has(ram) || textparAv(ram) || strukturAv(ram)) return;
     // Veckorna i en ram med lektioner, var och en för sig: en del vars första led är en vecka ("Vecka 1 · Hopp på talraden").
@@ -78,14 +75,14 @@ export function sakfiler(d: MetodData, id: string): Sakfil[] {
     for (const b of namngivna) ut.push({ namn: `${id}-blad-${slugAv(b.namn)}`, titel: b.namn, slag: 'rakneblad', ri, listor: [b.li], minst: 1, hogst: 1, text: 'Skriv ut bladet', pdftext: 'Bladet som pdf', liggande: false });
     if (namngivna.length && namngivna.length === listor.length) {
       if (namngivna.length >= 2) {
-        const antal = ANTAL[namngivna.length] ?? `alla ${namngivna.length}`;
-        ut.push({ namn: `${id}-blad-${slugAv(ram.rubrik)}-alla`, titel: ram.rubrik, slag: 'rakneblad', ri, listor: namngivna.map((b) => b.li), minst: namngivna.length, hogst: namngivna.length, text: `Skriv ut ${antal} bladen`, pdftext: `${versal(antal)} bladen som pdf`, liggande: false });
+        const antal = allaAntal(namngivna.length);
+        ut.push({ namn: `${id}-blad-${slugAv(ram.rubrik)}-alla`, titel: ram.rubrik, slag: 'rakneblad', ri, listor: namngivna.map((b) => b.li), minst: namngivna.length, hogst: namngivna.length, text: `Skriv ut ${antal} bladen`, pdftext: `${stor(antal)} bladen som pdf`, liggande: false });
       }
       return;
     }
     // Ramen med sina sidor: minst en, och en text till läraren, listorna, elevens blad med bildserien och arket var för sig.
     const hogst = 3 + listor.length + (ram.serie ? 2 : 0) + (ram.ark ? 1 : 0);
-    const namn = knappnamn(ram.rubrik);
+    const namn = kortnamn(ram.rubrik, rubriker);
     ut.push({ namn: `${id}-blad-${slugAv(ram.rubrik)}`, titel: ram.rubrik, slag: 'ram', ri, minst: 1, hogst, text: `Skriv ut ${namn}`, pdftext: `${namn} som pdf`, liggande: false });
   });
   // Diplomet eller kursintyget, ett blad.

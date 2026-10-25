@@ -4,6 +4,8 @@
 // riggen kör samma kod. scripts/standardprov.mjs stoppar en import av astro:, node: eller sajtens data här och prövar
 // funktionerna. Reglerna står i REGLER.md och ändringarna i CHANGELOG.md.
 
+import { ORDNINGSTAL, talAv, talIRegex } from './text.js';
+
 /**
  * Adressens led ur ett namn: små bokstäver, tecknen över bokstäverna bort (å och ä blir a, ö blir o, é blir e, ü blir u),
  * och allt annat än a–z och siffror blir ett bindestreck, utan bindestreck först och sist. Samma funktion för alla
@@ -182,19 +184,8 @@ export function hamtplan(lista, filer) {
 // fastaAntal hittar sådana antal, så att den som har databasen kan stanna på dem; texten säger i stället var posterna
 // finns, och sidorna som räknar dem visar talen.
 
-const ENTAL = ['noll', 'ett', 'två', 'tre', 'fyra', 'fem', 'sex', 'sju', 'åtta', 'nio', 'tio', 'elva', 'tolv', 'tretton', 'fjorton', 'femton', 'sexton', 'sjutton', 'arton', 'nitton'];
-const TIOTAL = ['', '', 'tjugo', 'trettio', 'fyrtio', 'femtio', 'sextio', 'sjuttio', 'åttio', 'nittio'];
-
-const TALET = '(?:\\d+|två|tre|fyra|fem|sex|sju|åtta|nio|tio|elva|tolv|tretton|fjorton|femton|sexton|sjutton|arton|nitton|(?:tjugo|trettio|fyrtio|femtio|sextio|sjuttio|åttio|nittio)(?:en|ett|två|tre|fyra|fem|sex|sju|åtta|nio)?)';
-
-/** Ett tal ur texten, med siffror eller i ord ("tjugofem"). */
-function talAv(s) {
-  if (/^\d+$/.test(s)) return Number(s);
-  const t = s.toLowerCase();
-  const tio = TIOTAL.findIndex((x) => x && t.startsWith(x));
-  if (tio > 0) return tio * 10 + Math.max(0, ENTAL.indexOf(t.slice(TIOTAL[tio].length)), ['en', 'ett'].includes(t.slice(TIOTAL[tio].length)) ? 1 : 0);
-  return ENTAL.indexOf(t);
-}
+// Talen läses med standardens talAv och talIRegex (text.js), också sammansatta som "tjugofem".
+const TALET = `(?:${talIRegex(2, 99)})`;
 
 /**
  * De fasta antalen av en databas poster i en text, som "tjugofem texter", "trettio nya problem" eller "fem på varje
@@ -299,10 +290,8 @@ export const LEKTION_MINUTER = 40;
 export const ATERKOMMANDE_MINUTER = 40;
 export const ATERKOMMANDE_DAGAR = 2;
 
-const TIDTAL = { en: 1, ett: 1, två: 2, tre: 3, fyra: 4, fem: 5, sex: 6, sju: 7 };
-const tidtal = (x) => (/^\d+$/.test(x) ? Number(x) : TIDTAL[x]);
 // Gränserna är Unicode, eftersom \b inte ser å som en bokstav ("två" lästes förbi och "tre" blev talet).
-const TIDORD = String.raw`(\d+|en|ett|två|tre|fyra|fem|sex|sju)`;
+const TIDORD = `(${talIRegex(1, 7)})`;
 const TIDFORE = String.raw`(?<![\p{L}\d])`;
 const TIDEFTER = String.raw`(?![\p{L}\d])`;
 const MINUTER = new RegExp(String.raw`${TIDFORE}(\d+)(?:\s*(?:[–—−-]|till)\s*(\d+))?\s*(?:minuter|min)${TIDEFTER}`, 'u');
@@ -327,7 +316,7 @@ export function tidensMatt(tid) {
   const ganger = [];
   if (/varje (?:dag|vardag|skoldag)|dagligen/.test(t)) ganger.push(5);
   if (/varannan dag/.test(t)) ganger.push(2);
-  for (const m of t.matchAll(GANGER)) ganger.push(tidtal(m[1]));
+  for (const m of t.matchAll(GANGER)) ganger.push(talAv(m[1]));
   return { minst, minuter, perVecka: ganger.length ? Math.min(...ganger) : undefined };
 }
 
@@ -363,10 +352,7 @@ export function mojligaUpplagg(tid) {
  * för alla metoder: "2–6 elever", "30 min", "3–5 pass/vecka", "6–8 veckor". Ett fält som inte går att läsa ger null, och
  * sajten stoppar då metoden.
  */
-const FAKTATAL = { en: 1, ett: 1, två: 2, tre: 3, fyra: 4, fem: 5, sex: 6, sju: 7, åtta: 8, nio: 9, tio: 10, elva: 11, tolv: 12, tretton: 13, fjorton: 14, femton: 15, sexton: 16, tjugo: 20 };
-const faktatal = (x) => (/^\d+$/.test(x) ? Number(x) : FAKTATAL[x]);
-const FAKTAORD = String.raw`(\d+|${Object.keys(FAKTATAL).join('|')})`;
-const ORDNINGSTAL = { andra: 2, tredje: 3, fjärde: 4, femte: 5 };
+const FAKTAORD = `(${talIRegex(1, 20)})`;
 const spann = (a, b) => (b !== undefined && b !== a ? `${a}–${b}` : `${a}`);
 
 /** Gruppens storlek: det minsta och största antalet elever, och om gruppen kan vara en hel klass. @param {string} grupp @returns {{ min: number, max?: number, klass: boolean } | null} */
@@ -374,8 +360,8 @@ export function gruppensElever(grupp) {
   const t = String(grupp ?? '').toLowerCase();
   const m = t.match(new RegExp(String.raw`(?<![\p{L}\d])${FAKTAORD}(?:\s*(?:till|–|-)\s*${FAKTAORD})?\s+elever`, 'u'));
   if (!m) return null;
-  const min = faktatal(m[1]);
-  const max = m[2] !== undefined ? faktatal(m[2]) : undefined;
+  const min = talAv(m[1]);
+  const max = m[2] !== undefined ? talAv(m[2]) : undefined;
   return { min, ...(max !== undefined ? { max } : {}), klass: /hel klass|helklass/.test(t) };
 }
 
@@ -385,9 +371,9 @@ export function tidensVeckotakt(tid) {
   const lag = [], hog = [];
   if (/varje (?:dag|vardag|skoldag)|dagligen/.test(t)) { lag.push(5); hog.push(5); }
   if (/varannan dag/.test(t)) { lag.push(2); hog.push(3); }
-  for (const m of t.matchAll(GANGER)) { lag.push(tidtal(m[1])); hog.push(tidtal(m[2] ?? m[1])); }
+  for (const m of t.matchAll(GANGER)) { lag.push(talAv(m[1])); hog.push(talAv(m[2] ?? m[1])); }
   const extra = t.match(/och (?:ett|en) (andra|tredje|fjärde|femte) när det går/);
-  if (extra) hog.push(ORDNINGSTAL[extra[1]]);
+  if (extra) hog.push(ORDNINGSTAL.indexOf(extra[1]));
   return lag.length ? { min: Math.min(...lag), max: Math.max(...hog) } : null;
 }
 
@@ -396,8 +382,8 @@ export function periodensLangd(period) {
   const t = String(period ?? '').toLowerCase();
   const m = t.match(new RegExp(String.raw`(?<![\p{L}\d])${FAKTAORD}(?:\s*(?:till|–|-)\s*${FAKTAORD})?\s+(veckor|vecka|pass)`, 'u'));
   if (!m) return null;
-  const max = m[2] !== undefined ? faktatal(m[2]) : undefined;
-  return { min: faktatal(m[1]), ...(max !== undefined ? { max } : {}), enhet: m[3] === 'pass' ? 'pass' : 'veckor', mer: /eller mer|så länge/.test(t), hogst: /högst/.test(t.slice(0, m.index + m[0].length)), perKurs: /varje kurs|per kurs/.test(t) };
+  const max = m[2] !== undefined ? talAv(m[2]) : undefined;
+  return { min: talAv(m[1]), ...(max !== undefined ? { max } : {}), enhet: m[3] === 'pass' ? 'pass' : 'veckor', mer: /eller mer|så länge/.test(t), hogst: /högst/.test(t.slice(0, m.index + m[0].length)), perKurs: /varje kurs|per kurs/.test(t) };
 }
 
 /**
@@ -464,3 +450,6 @@ export * from './plan.js';
 // Metodens saker i en text (sajtens K-493): namnen på bladen, korten, mallarna, testen, texterna och lektionerna, och spärren
 // mot ett namn som ingen sak har.
 export * from './saker.js';
+// Små textverktyg och talen, en rot för varje (sajtens K-509): stor bokstav, mening, HTML-skyddet, namnets första led och
+// talen i ord.
+export * from './text.js';

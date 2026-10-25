@@ -7,12 +7,12 @@
 // Hänvisningar.
 import type { MetodData } from './metod';
 import { harLathund, passOrd, passOversikt } from './metod';
-import { bankAv, enhetAdress } from './bank';
+import { bankAv, enhetAdress, iBanken } from './bank';
 import { mallarnasAnkare, metodensAnkare, metodensAvsnitt } from './metodankare';
 import { metodensLektionskort } from './lektionskort';
 import { forstaLed } from './karta';
 import { CENTRALA, lasbarAdress } from './centrala';
-import { arSaksord, slugAv } from './standard/index.js';
+import { arSaksord, forstaLedet, slugAv, veckorI } from './standard/index.js';
 
 /**
  * En sak med sin adress. nivaer: adressen på varje nivå, när saken finns på bankens nivåer (kartläggningens text före).
@@ -21,19 +21,18 @@ import { arSaksord, slugAv } from './standard/index.js';
 export interface MetodSak { namn: string; former?: string[]; versal?: boolean; adress: string; nivaer?: Record<string, string>; veckor?: Record<string, string>; slag?: 'avsnitt' | 'tabell' }
 
 // Veckorna som ett led i en rubrik säger: "vecka 3" och "vecka 1–2".
-const veckornaI = (led?: string): number[] | undefined => {
-  const m = led?.match(/^vecka (\d+)(?:\s*[–-]\s*(\d+))?$/i);
-  if (!m) return undefined;
-  const fran = Number(m[1]), till = Number(m[2] ?? m[1]);
-  return till >= fran ? Array.from({ length: till - fran + 1 }, (_, i) => fran + i) : undefined;
-};
+const veckornaI = (led?: string): number[] | undefined => { const v = veckorI(led); return v ? Array.from({ length: v.till - v.fran + 1 }, (_, i) => v.fran + i) : undefined; };
+
+/** Metodens avsnitt, och deras och tabellernas ankare, som metodens sida ger dem (src/lib/metodankare.ts). */
+export const sidansAvsnitt = (d: MetodData) => metodensAvsnitt(d, { pass: !!passOversikt(d), stegen: passOrd(d).stegen });
+export const sidansAnkare = (d: MetodData) => metodensAnkare(d, sidansAvsnitt(d));
 
 /**
  * Kursens veckor i metoden (en ram med lektioner, som De fyra räknesätten): ankaret för varje veckas lektion, och veckans
  * titel ("Vecka 3 · Hundratal och två växlingar" har titeln Hundratal och två växlingar).
  */
 export function kursensVeckor(d: MetodData, id: string): Record<string, { adress: string; titel: string }> {
-  const { delAnkare } = metodensAnkare(d, metodensAvsnitt(d, { pass: !!passOversikt(d), stegen: passOrd(d).stegen }));
+  const { delAnkare } = sidansAnkare(d);
   const ut: Record<string, { adress: string; titel: string }> = {};
   (d.ramar?.ramar ?? []).forEach((r, ri) => {
     if (!r.lektioner) return;
@@ -63,7 +62,7 @@ export function metodensSaker(d: MetodData, id: string): MetodSak[] {
   // Materialets ramar leder till ramen på metodens sida, där bladet står med sin knapp Skriv ut. Namnet är rubrikens första
   // led ("Lärarhandledningen: Läs mellan raderna tillsammans" heter Lärarhandledningen). Bankens texter och deras sidor
   // står på egna sidor och kommer nedan; bankens lärarhandledning har sin egen sida.
-  const avsnitt = metodensAvsnitt(d, { pass: !!passOversikt(d), stegen: passOrd(d).stegen });
+  const avsnitt = sidansAvsnitt(d);
   const { ramAnkare, tabellAnkare, blad, bladAnkare } = metodensAnkare(d, avsnitt);
   const nivaNamn = new Map((bank?.nivaer ?? []).map((n) => [n.namn, n.slug]));
   const perNamn = new Map<string, { adress: string; niva?: string; veckor?: number[]; oversikt?: boolean }[]>();
@@ -73,7 +72,7 @@ export function metodensSaker(d: MetodData, id: string): MetodSak[] {
     // Lärarens sidor" stod i varje pass utan länk).
     const [namn, efter] = r.rubrik.split(':').map((x) => x.trim());
     const oversikt = !!bank?.oversikter.has(ri) && !!efter && nivaNamn.has(efter) && !nivaNamn.has(namn);
-    if ((bank?.ramar.has(ri) || bank?.oversikter.has(ri)) && bank.handledning !== ri && !oversikt) return;
+    if (iBanken(bank, ri) && bank.handledning !== ri && !oversikt) return;
     if (!namn) return;
     const adress = bank?.handledning === ri ? `${sida}/texter/lararhandledning` : `${sida}#${ramAnkare[ri]}`;
     const veckor = veckornaI(efter);
@@ -94,7 +93,7 @@ export function metodensSaker(d: MetodData, id: string): MetodSak[] {
   // (länkgranskningen 2026-10-25: "bladet Åt båda hållen" och "Lägg Fönsterplatsen på A3" blev ingen länk).
   const titlar = new Map<string, string[]>();
   ramar.forEach((r, ri) => {
-    if (bank && (bank.ramar.has(ri) || bank.oversikter.has(ri))) return;
+    if (iBanken(bank, ri)) return;
     const titel = r.rubrik.split(':').slice(1).join(':').trim();
     // En titel med liten bokstav räknas när den är ett ord för en sak, som "lärarens protokoll".
     if (titel && (/^\p{Lu}/u.test(titel) || arSaksord(titel)) && !nivaNamn.has(titel) && !veckornaI(titel)) titlar.set(titel, [...(titlar.get(titel) ?? []), `${sida}#${ramAnkare[ri]}`]);
@@ -147,7 +146,7 @@ export function metodensSaker(d: MetodData, id: string): MetodSak[] {
   // redan har blir inget nytt. Avsnitten och tabellerna är metodens text, som skrivs ut med metoden, så planprovet kräver
   // ingen knapp under dem (slag); kursintyget är ett blad, med sin egen fil (src/lib/sakfiler.ts).
   const tagna = new Set(saker.map((s) => s.namn.toLowerCase()));
-  const rubrikensNamn = (rubrik: string) => { const forsta = rubrik.split(':')[0].trim(); return /^(pass|vecka|veckorna|nivå)\b/i.test(forsta) ? rubrik.trim() : forsta; };
+  const rubrikensNamn = (rubrik: string) => { const forsta = forstaLedet(rubrik); return /^(pass|vecka|veckorna|nivå)\b/i.test(forsta) ? rubrik.trim() : forsta; };
   const avsnittet = (rubrik: string | undefined, adress: string, slag?: MetodSak['slag']) => {
     const namn = rubrik ? rubrikensNamn(rubrik) : '';
     if (!namn || tagna.has(namn.toLowerCase())) return;

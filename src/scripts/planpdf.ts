@@ -4,7 +4,7 @@
 // kopieras till dokumentationen har inga namn. Typsnittet är pdf:ens eget (Helvetica). Ett tecken som det inte har skrivs
 // utan sina accenter, så att utskriften aldrig går sönder (Niclas: "Ł, Ş och č är så ovanliga att du kan hoppa över dem").
 import type { PDFFont, PDFPage } from 'pdf-lib';
-import { datumText, elevensResultat, GRUPPEN, isoVecka, kalendervecka, SKALAN, uppraknat, veckansNamn, type Plan, type Sammanstallning, type SammanstallningElev, type Veckonamn } from '../lib/standard/index.js';
+import { BESLUT, beslutText, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronText, passensLage, prickarna, resultatText, riktningText, skattadeVeckor, SKALAN, stapelnsKant, uppfoljningensRader, veckansNamn, type Plan, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
 
 const A4: [number, number] = [595.28, 841.89];
 const KANT = 50;
@@ -21,7 +21,6 @@ export interface PdfInfo {
   mal: string;
   fragan: string;
   uppfoljning: { nar: string }[];
-  beslut: Record<string, string>;
 }
 
 async function dokument(titel: string) {
@@ -76,7 +75,7 @@ async function dokument(titel: string) {
       sida.drawText(String(v), { x: KANT + 6, y: ly - 3, size: 7.5, font, color: farg.svag });
     }
     varden.forEach((x, i) => {
-      const bx = x0 + i * steg + (steg - b) / 2;
+      const bx = stapelnsKant(x0, i, steg, b);
       if (x) {
         sida.drawRectangle({ x: bx, y: botten, width: b, height: (x / 5) * h, color: farg.accent });
         sida.drawText(String(x), { x: bx + b / 2 - 2.5, y: botten + (x / 5) * h + 3, size: 8, font: fet, color: farg.text });
@@ -84,8 +83,8 @@ async function dokument(titel: string) {
       const iPlanen = ren(etiketter[i].kort), kalender = ren(etiketter[i].kalender);
       sida.drawText(iPlanen, { x: bx + b / 2 - fet.widthOfTextAtSize(iPlanen, 7.5) / 2, y: botten - 12, size: 7.5, font: fet, color: farg.text });
       sida.drawText(kalender, { x: bx + b / 2 - font.widthOfTextAtSize(kalender, 7) / 2, y: botten - 21, size: 7, font, color: farg.svag });
-      (o.pass?.[i] ?? []).forEach((p, j, alla) => {
-        const px = bx + b / 2 + (j - (alla.length - 1) / 2) * 7, py = botten - 31;
+      prickarna(bx, b, o.pass?.[i] ?? []).forEach(({ x: px, slag: p }) => {
+        const py = botten - 31;
         if (p === 'med') sida.drawCircle({ x: px, y: py, size: 2.4, color: farg.gron });
         else if (p === 'borta') sida.drawCircle({ x: px, y: py, size: 2.4, borderColor: farg.gron, borderWidth: 0.8 });
         else sida.drawLine({ start: { x: px - 2, y: py }, end: { x: px + 2, y: py }, thickness: 0.8, color: farg.kant });
@@ -106,44 +105,41 @@ async function dokument(titel: string) {
 }
 
 const veckoetiketter = (s: Sammanstallning) => s.veckor.map(veckansNamn);
-// En mening slutar med punkt, också lärarens egen anteckning.
-const medPunkt = (s: string) => (/[.!?]$/.test(s.trim()) ? s.trim() : `${s.trim()}.`);
-const riktningsord = (e: SammanstallningElev) => {
-  if (e.skattningar.length < 2) return e.senaste ? `En skattning: ${e.senaste.varde}.` : 'Inte skattad.';
-  const r = e.senaste!.varde > e.forsta!.varde ? 'framåt' : e.senaste!.varde < e.forsta!.varde ? 'bakåt' : 'samma som förut';
-  return `Från ${e.forsta!.varde} till ${e.senaste!.varde}, ${r}.`;
+// Sidans huvud, lika för gruppen och eleven: rubriken, metoden med gruppen och nivån, perioden och dagen för utskriften, och
+// målet. Perioden, passens läge, riktningen och besluten står med standardens ord, som på sidan och i texterna (K-509).
+type Pdf = Awaited<ReturnType<typeof dokument>>;
+const huvud = (p: Pdf, rubrik: string, plan: Plan, info: PdfInfo, idag: string) => {
+  p.text(rubrik, { storlek: 20, fet: true, luft: 2 });
+  p.text([info.metod, info.grupp, info.niva ? `nivån ${info.niva}` : ''].filter(Boolean).join(', '), { storlek: 13, fet: true, luft: 2 });
+  p.text(`${plan.forstaPass && plan.sistaPass ? datumspann(plan.forstaPass, plan.sistaPass) : ''}. Utskriven ${datumText(idag)}.`, { farg: p.farg.svag, luft: 6 });
+  if (info.mal) { p.rubrik('Målet', 30); p.text(info.mal, { luft: 2 }); }
 };
-const periodText = (plan: Plan) => (plan.forstaPass && plan.sistaPass ? `${datumText(plan.forstaPass)} till ${datumText(plan.sistaPass)}` : '');
-// Passen som läraren har bockat: ett pass som inte är bockat är inte bockat (granskningarna 2026-10-24).
-// De bockade bland passen som har varit, som på sidan, så att ett pass som är bockat i förväg inte räknas (Codex 2026-10-24).
-const passText = (s: Sammanstallning) => (!s.gjorda ? 'Inga pass är bockade.' : s.slut ? `${s.gjorda} av ${s.planerade} pass är bockade som genomförda.` : !s.varit ? `Inget pass har varit än. Planen har ${s.planerade} pass.` : `${s.gjordaVarit} av de ${s.varit} pass som har varit är bockade. Planen har ${s.planerade} pass.`);
+// Skalan med frågan, före staplarna.
+const skalan = (p: Pdf, info: PdfInfo, luft: number) => p.text(`${info.fragan} 1 till 5: ${SKALAN.map((x, i) => `${i + 1} ${x.toLocaleLowerCase('sv')}`).join(', ')}.`, { farg: p.farg.svag, storlek: 9.5, luft });
 
 /** Gruppens sammanställning som pdf. */
 export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, idag: string): Promise<Uint8Array> {
   const p = await dokument(`Sammanställning: ${info.metod}`);
-  p.text('Sammanställning', { storlek: 20, fet: true, luft: 2 });
-  p.text([info.metod, info.grupp, info.niva ? `nivån ${info.niva}` : ''].filter(Boolean).join(', '), { storlek: 13, fet: true, luft: 2 });
-  p.text(`${periodText(plan)}. Utskriven ${datumText(idag)}.`, { farg: p.farg.svag, luft: 6 });
-  if (info.mal) { p.rubrik('Målet', 30); p.text(info.mal, { luft: 2 }); }
+  huvud(p, 'Sammanställning', plan, info, idag);
   p.rubrik('Passen');
-  p.text(passText(s), { luft: 2 });
+  p.text(passensLage(s), { luft: 2 });
   if (s.gjorda) p.text(s.veckor.map((v) => `${veckansNamn(v).Text}: ${v.gjorda} av ${v.planerade}`).join('. ') + '.', { farg: p.farg.svag, storlek: 9.5 });
   p.rubrik(s.grupp ? 'Gruppen' : 'Eleverna', 110);
-  p.text(`${info.fragan} 1 till 5: ${SKALAN.map((x, i) => `${i + 1} ${x.toLocaleLowerCase('sv')}`).join(', ')}.`, { farg: p.farg.svag, storlek: 9.5, luft: 4 });
+  skalan(p, info, 4);
   for (const e of s.elever) {
     p.text(e.namn, { fet: true, storlek: 11.5 });
-    p.staplar(s.veckor.map((v) => e.skattningar.find((x) => x.nr === v.nr)?.varde), veckoetiketter(s), { hojd: 40, mitt: s.mitt });
-    p.text([riktningsord(e), e.id !== GRUPPEN && e.narvaro !== null && s.gjorda ? `Var med i ${e.narvaro} av ${s.gjorda} bockade pass.` : '', ...elevensResultat(plan, e.resultat).map((t) => `${info.uppfoljning[t.rad]?.nar}, ${kalendervecka(isoVecka(t.datum).vecka)}: ${t.varde}.`)].filter(Boolean).join(' '), { luft: 8 });
+    p.staplar(elevensVarden(s, e), veckoetiketter(s), { hojd: 40, mitt: s.mitt });
+    p.text([`${riktningText(e)}.`, e.id !== GRUPPEN && e.narvaro !== null && s.gjorda ? narvaronText(e, s) : '', ...elevensResultat(plan, e.resultat).map((t) => `${resultatText(info, t)}.`)].filter(Boolean).join(' '), { luft: 8 });
   }
-  const veckorna = s.veckor.filter((v) => v.skattning);
+  const veckorna = skattadeVeckor(s);
   if (veckorna.length || s.veckor.some((v) => v.not)) {
     p.rubrik('Hur veckorna gick', veckorna.length ? 120 : 30);
-    if (veckorna.length) { p.staplar(s.veckor.map((v) => v.skattning), veckoetiketter(s), { hojd: 60, mitt: s.mitt }); p.text(`Medel ${String(s.veckomedel).replace('.', ',')} av 5.`, { luft: 4 }); }
-    for (const v of s.veckor.filter((x) => x.not)) p.text(`${veckansNamn(v).Text}: ${medPunkt(v.not!)}`, { storlek: 10 });
+    if (veckorna.length) { p.staplar(s.veckor.map((v) => v.skattning), veckoetiketter(s), { hojd: 60, mitt: s.mitt }); p.text(`Medel ${decimal(s.veckomedel)} av 5.`, { luft: 4 }); }
+    for (const v of s.veckor.filter((x) => x.not)) p.text(`${veckansNamn(v).Text}: ${mening(v.not!)}`, { storlek: 10 });
   }
-  if (s.avstamning?.beslut || s.avstamning?.not) { p.rubrik('Avstämning mitt i insatsen'); p.text(medPunkt([s.avstamning.beslut ? info.beslut[s.avstamning.beslut] : '', s.avstamning.not ?? ''].filter(Boolean).map((x) => x.replace(/[.\s]+$/, '')).join('. '))); }
-  if (s.utvardering?.beslut || s.utvardering?.not) { p.rubrik('Utvärdering efter insatsen'); p.text(medPunkt([s.utvardering.beslut ? info.beslut[s.utvardering.beslut] : '', s.utvardering.not ?? ''].filter(Boolean).map((x) => x.replace(/[.\s]+$/, '')).join('. '))); }
-  const tider = plan.uppfoljning.filter((u) => u.tillfallen.length).map((u) => `${info.uppfoljning[u.rad]?.nar}, ${uppraknat(u.tillfallen.map((t) => kalendervecka(isoVecka(t.datum).vecka)))}`);
+  if (s.avstamning?.beslut || s.avstamning?.not) { p.rubrik('Avstämning mitt i insatsen'); p.text(beslutText(s.avstamning)); }
+  if (s.utvardering?.beslut || s.utvardering?.not) { p.rubrik('Utvärdering efter insatsen'); p.text(beslutText(s.utvardering)); }
+  const tider = uppfoljningensRader(plan, info);
   if (tider.length) { p.rubrik('Metodens uppföljning'); p.text(`${tider.join('. ')}.`); }
   return p.avsluta(`${info.metod} · Planera insatsen på niclasfohlin.se · lärarens egen plan, sparas inte på sajten`);
 }
@@ -152,21 +148,18 @@ export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, id
 export async function elevPdf(plan: Plan, s: Sammanstallning, id: string, info: PdfInfo, idag: string, franvaro: Record<string, string[]>): Promise<Uint8Array> {
   const e = s.elever.find((x) => x.id === id)!;
   const p = await dokument(`${e.namn}: ${info.metod}`);
-  p.text(e.namn, { storlek: 20, fet: true, luft: 2 });
-  p.text([info.metod, info.grupp, info.niva ? `nivån ${info.niva}` : ''].filter(Boolean).join(', '), { storlek: 13, fet: true, luft: 2 });
-  p.text(`${periodText(plan)}. Utskriven ${datumText(idag)}.`, { farg: p.farg.svag, luft: 6 });
-  if (info.mal) { p.rubrik('Målet', 30); p.text(info.mal, { luft: 2 }); }
+  huvud(p, e.namn, plan, info, idag);
   p.rubrik('Vecka för vecka', 180);
-  p.text(`${info.fragan} 1 till 5: ${SKALAN.map((x, i) => `${i + 1} ${x.toLocaleLowerCase('sv')}`).join(', ')}.`, { farg: p.farg.svag, storlek: 9.5, luft: 6 });
+  skalan(p, info, 6);
   const narvaro = s.narvaro && e.narvaro !== null && s.gjorda > 0;
   const pass = narvaro ? s.veckor.map((v) => v.pass.map((x) => (!x.gjort ? 'inte' : (franvaro[x.dag] ?? []).includes(id) ? 'borta' : 'med') as 'med' | 'borta' | 'inte')) : undefined;
-  p.staplar(s.veckor.map((v) => e.skattningar.find((x) => x.nr === v.nr)?.varde), veckoetiketter(s), { hojd: 110, mitt: s.mitt, pass });
+  p.staplar(elevensVarden(s, e), veckoetiketter(s), { hojd: 110, mitt: s.mitt, pass });
   if (narvaro) p.text('Prickarna under veckan är passen: fylld var med, ring var inte med, streck inte bockat.', { farg: p.farg.svag, storlek: 8.5, luft: 6 });
   p.rubrik('Utvecklingen');
-  p.text(riktningsord(e));
-  if (narvaro) p.text(`Var med i ${e.narvaro} av ${s.gjorda} bockade pass.`);
-  for (const t of elevensResultat(plan, e.resultat)) p.text(`${info.uppfoljning[t.rad]?.nar}, ${kalendervecka(isoVecka(t.datum).vecka)}: ${t.varde}.`);
-  if (s.avstamning?.beslut) p.text(`Gruppens avstämning mitt i insatsen: ${info.beslut[s.avstamning.beslut]}.`);
-  if (s.utvardering?.beslut) p.text(`Utvärdering efter insatsen: ${info.beslut[s.utvardering.beslut]}.`);
+  p.text(`${riktningText(e)}.`);
+  if (narvaro) p.text(narvaronText(e, s));
+  for (const t of elevensResultat(plan, e.resultat)) p.text(`${resultatText(info, t)}.`);
+  if (s.avstamning?.beslut) p.text(`Gruppens avstämning mitt i insatsen: ${BESLUT[s.avstamning.beslut as keyof typeof BESLUT] ?? s.avstamning.beslut}.`);
+  if (s.utvardering?.beslut) p.text(`Utvärdering efter insatsen: ${BESLUT[s.utvardering.beslut as keyof typeof BESLUT] ?? s.utvardering.beslut}.`);
   return p.avsluta(`${e.namn} · ${info.metod} · Planera insatsen på niclasfohlin.se · lärarens egen plan`);
 }

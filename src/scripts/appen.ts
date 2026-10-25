@@ -9,7 +9,7 @@
 //
 // Inget av det läraren har skrivit skickas någonstans. Statistiken får bara trycken på knappen, installationen och att
 // appen används, en gång om dagen (app:i-appen), utan namn eller värden.
-import { idagLokalt, lasPlaner } from './insatser-lagring';
+import { goatcounter, idagLokalt, lasPlaner } from './insatser-lagring';
 import { iAppen as iAppenNu, webblasaren } from './webblasaren';
 
 // Bara krysset gömmer raden i 30 dagar. Att appen installerades sparas inte: tas appen bort märker sidan det inte, och
@@ -19,7 +19,7 @@ const STANGD = 'app-kryss';
 const ANVAND = 'app-anvand';
 const las = (k: string) => { try { return localStorage.getItem(k) ?? ''; } catch { return ''; } };
 const skriv = (k: string, v: string) => { try { localStorage.setItem(k, v); } catch { /* bara den här sidvisningen */ } };
-const rakna = (path: string, title: string) => (window as { goatcounter?: { count?: (v: object) => void } }).goatcounter?.count?.({ path, title, event: true });
+const rakna = (path: string, title: string) => goatcounter()?.count?.({ path, title, event: true });
 
 const iAppen = iAppenNu();
 

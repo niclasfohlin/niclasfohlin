@@ -122,6 +122,9 @@ export { slugAv };
 // Adressens sista led får inte krocka med metodens andra sidor under /stodundervisning/<id>/.
 const UPPTAGNA = new Set(UPPTAGNA_LED);
 
+/** Är ramen bankens egen eller en av dess översikter? En rot för allt som hoppar över bankens ramar (K-509). */
+export const iBanken = (bank: Bank | null | undefined, ri: number): bank is Bank => !!bank && (bank.ramar.has(ri) || bank.oversikter.has(ri));
+
 export function bankAv(d: Metod): Bank | null {
   const ramar = d.ramar?.ramar ?? [];
   const texter = enhetstexter(ramar);

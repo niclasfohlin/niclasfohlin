@@ -7,7 +7,7 @@
 // metodens eget ord. Filen har ramarna i filens ordning, ett blad per sida som i planeringsmallarna (ramarDokument i
 // metoddocx.ts), i Word och pdf (scripts/bankpdf.mjs). Inga Node-beroenden.
 import type { MetodData } from './metod';
-import { bankAv } from './bank';
+import { bankAv, iBanken } from './bank';
 import { metodensBladmaterial } from './bladmaterial';
 import { metodensNivamaterial } from './nivamaterial';
 import { bladVid, metodensPaBordet } from './pabordet';
@@ -27,9 +27,8 @@ export function ovrigtfil(d: MetodData, id: string): Ovrigtfil | undefined {
   const bilder = metodensPaBordet(d, id);
   const bank = bankAv(d);
   const nm = metodensNivamaterial(d);
-  const iBanken = (ri: number) => !!bank && (bank.ramar.has(ri) || bank.oversikter.has(ri));
   const bm = metodensBladmaterial(d, id);
-  const ramar = ramarna.map((_, ri) => ri).filter((ri) => !iBanken(ri) && !nm?.ramar.has(ri) && !bm?.ramar.has(ri));
+  const ramar = ramarna.map((_, ri) => ri).filter((ri) => !iBanken(bank, ri) && !nm?.ramar.has(ri) && !bm?.ramar.has(ri));
   if (!ramar.length) throw new Error(`${d.titel}: ramar.ovrigt är "${namn}", men alla ramarna står redan i banken, i nivåernas rader eller bland ramarna med blad. Ta bort fältet.`);
   // Varje ram är minst en sida och får ta tre (en text till läraren och ett blad på två sidor), och varje blad vid ramen
   // är en sida till.

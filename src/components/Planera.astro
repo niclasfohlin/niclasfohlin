@@ -11,7 +11,7 @@ import Base from '../layouts/Base.astro';
 import SkrivUtPdf from './SkrivUtPdf.astro';
 import Lektionskortknapp from './Lektionskortknapp.astro';
 import AppRad from './AppRad.astro';
-import { periodensLangd, PLANERA, tidensMatt, tolkaSteg } from '../lib/standard/index.js';
+import { liten, periodensLangd, PLANERA, stor, tidensMatt, tolkaSteg, VECKODAGAR, veckodagKort } from '../lib/standard/index.js';
 import { site } from '../data/site';
 import type { PlanData } from '../lib/insatsplan';
 import type { Lektionskort } from '../lib/lektionskort';
@@ -28,9 +28,6 @@ const langder = period.max
   ? Array.from({ length: Math.min(period.max, period.min + 9) - period.min + 1 }, (_, i) => period.min + i)
   : period.mer ? [period.min, period.min + 4, period.min + 8] : [period.min];
 const minuter = matt.minst !== undefined && matt.minuter !== undefined && matt.minst !== matt.minuter ? [matt.minst, matt.minuter] : [];
-const DAGAR = ['Mån', 'Tis', 'Ons', 'Tor', 'Fre'];
-const DAGNAMN = ['måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag'];
-const liten = (s?: string) => (s ? s.charAt(0).toLocaleLowerCase('sv') + s.slice(1) : '');
 const json = JSON.stringify(data).replace(/</g, '\\u003c');
 // Nivåerna: bankens, eller metodens egna i en kurs i nivåer (De fyra räknesätten).
 const nivaer = data.bank?.nivaer ?? data.nivaer ?? [];
@@ -95,7 +92,7 @@ const stegen = data.stege ? (data.progression?.rader ?? []).flatMap((r) => { con
             <fieldset class="pl-rad">
               <legend class="pl-etikett">Dagar</legend>
               <div class="pl-dagar" id="pl-dagar">
-                {DAGAR.map((d, i) => <button type="button" data-dag={i + 1} aria-pressed="false" aria-label={DAGNAMN[i]}>{d}</button>)}
+                {[1, 2, 3, 4, 5].map((d) => <button type="button" data-dag={d} aria-pressed="false" aria-label={VECKODAGAR[d - 1]}>{stor(veckodagKort(d))}</button>)}
               </div>
               {data.tid && <p class="pl-hjalp">Metoden: {liten(data.tid)}.</p>}
               <p class="pl-hjalp pl-varning" id="pl-dagar-varning" hidden></p>

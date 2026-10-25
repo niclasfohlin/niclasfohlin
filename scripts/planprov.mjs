@@ -176,7 +176,7 @@ if (tsMp) {
   ska('veckans gång', sm.veckor[0].skattning === 3 && sm.veckor[0].not === 'Gruppen kom igång' && sm.veckomedel === 3);
   const info = { titel: ts.titel, mal: ts.plan.mal, uppfoljning: ts.uppfoljning.rader };
   const text = s.sammanstallningstext(info, p, smN);
-  ska('sammanställningens text', text.includes('Mål: Kunna läsa mellan raderna, säga vad man tror och visa ledtråden i texten.') && text.includes('Pass: 3 av de 8 som har varit är bockade som genomförda, av 18 i planen.') && text.includes('Närvaro i de bockade passen: 1 av 2 elever var med i alla; en elev missade 1 pass.') && text.includes('av hur väl eleverna klarar målet på egen hand: medel 2,5 vid första skattningen och 3 vid den senaste. 1 av 2 elever har gått framåt.') && text.includes('Avstämning mitt i insatsen, vecka 3 (v. 47): Fortsätt som planerat.'), text);
+  ska('sammanställningens text', text.includes('Mål: Kunna läsa mellan raderna, säga vad man tror och visa ledtråden i texten.') && text.includes('Pass: 3 av de 8 pass som har varit är bockade. Planen har 18 pass.') && text.includes('Närvaro i de bockade passen: 1 av 2 elever var med i alla; en elev missade 1 pass.') && text.includes('av hur väl eleverna klarar målet på egen hand: medel 2,5 vid första skattningen och 3 vid den senaste. 1 av 2 elever har gått framåt.') && text.includes('Avstämning mitt i insatsen, vecka 3 (v. 47): Fortsätt som planerat.'), text);
   ska('sammanställningens text har inga namn', !/Ali|Bea/.test(text));
   ska('utan närvaro säger texten inget om den', !s.sammanstallningstext(info, p, sm).includes('Närvaro'));
   const medNamn = s.sammanstallningstext(info, p, s.sammanstallning(p, { ...f, vecka: { '2026-11-02': { varde: 3, not: 'Alis och Beas par byggde vidare' } }, avstamning: { beslut: 'fortsatt', not: 'Bea behöver mer stöd vid stoppet' } }, '2026-11-18'));
@@ -189,7 +189,7 @@ if (tsMp) {
   ska('gruppens skattningar står kvar när eleverna kommer efteråt', !sen.grupp && sen.elever.some((e) => e.id === 'grupp') && s.sammanstallningstext(info, p, sen).includes('Gruppen skattades också: vecka 1 (v. 45): 2.'));
   ska('skattningsfrågan', s.skattningsfragan() === 'Hur väl klarar eleven målet på egen hand?' && s.skattningsfragan(true) === 'Hur väl klarar gruppen målet på egen hand?');
   const tomt = s.sammanstallning(p, {}, '2026-11-18');
-  ska('en tom uppföljning går att sammanställa', tomt.gjorda === 0 && tomt.elever.length === 1 && tomt.elever[0].skattningar.length === 0 && s.sammanstallningstext(info, p, tomt).includes('Pass: 18 i planen.'));
+  ska('en tom uppföljning går att sammanställa', tomt.gjorda === 0 && tomt.elever.length === 1 && tomt.elever[0].skattningar.length === 0 && s.sammanstallningstext(info, p, tomt).includes('Pass: Inga pass är bockade än. Planen har 18 pass.'));
   // Codex-granskningen av koden 2026-10-24: en kopia som har ändrats för hand, resultat som står kvar på sin dag och en
   // mening utan beslut.
   const trasig = s.rensaFoljd({ gjorda: null, elever: [{ id: 'a1', namn: ' Ali ' }, { id: '<b>', namn: 'X' }, 'nej'], franvaro: { x: ['a1'], '2026-11-04': 'a1' }, vecka: { '2026-11-02': { varde: 9, not: 5 } }, skattning: { '2026-11-02': { a1: 3, b2: '4' }, nej: { a1: 2 } }, resultat: { '0-0': { a1: 'gammal' }, '0-2026-11-02': { a1: '4 av 8' } }, avstamning: { beslut: 'kanske' }, utvardering: { not: 'Bra' } });
@@ -345,7 +345,7 @@ ska(`versionen ${s.PLANERA.version} står i METODER.md under Versionerna`, readF
 // vecka som tas om, och sammanställningen och planen namnger varje vecka lika.
 ska('kalenderveckan', s.kalendervecka(50) === 'v. 50' && s.kalenderveckaUtskriven(50) === 'kalendervecka 50');
 ska('kalenderveckornas spann, också över nyår', s.kalenderveckor(45, 45) === 'v. 45' && s.kalenderveckor(45, 46) === 'v. 45–46' && s.kalenderveckor(52, 1) === 'v. 52 till v. 1' && s.kalenderveckor(45, 50, ' till ') === 'v. 45 till v. 50', [s.kalenderveckor(45, 46), s.kalenderveckor(52, 1), s.kalenderveckor(45, 50, ' till ')]);
-ska('veckan i planen, och en vecka som tas om', s.planveckan(6) === '6' && s.planveckan(3, 1) === '3 igen' && s.planveckan(3, 2) === '3 en tredje gång' && s.planveckan(3, 5) === '3 för 6:e gången' && s.planveckanKort(3, 2).om === '3:e' && s.planveckanKort(3, 1).om === 'igen' && s.planveckanKort(3).om === '');
+ska('veckan i planen, och en vecka som tas om', s.planveckan(6) === '6' && s.planveckan(3, 1) === '3 igen' && s.planveckan(3, 2) === '3 en tredje gång' && s.planveckan(3, 5) === '3 en sjätte gång' && s.planveckan(3, 11) === '3 för 12:e gången' && s.planveckanKort(3, 2).om === '3:e' && s.planveckanKort(3, 1).om === 'igen' && s.planveckanKort(3).om === '');
 ska('veckans namn i en text och i diagrammet', JSON.stringify(s.veckansNamn({ innehall: 6, vecka: 50 })) === JSON.stringify({ plan: '6', kort: '6', kalender: 'v. 50', text: 'vecka 6 (v. 50)', Text: 'Vecka 6 (v. 50)' }) && s.veckansNamn({ innehall: 3, gang: 1, vecka: 48 }).text === 'vecka 3 igen (v. 48)', s.veckansNamn({ innehall: 6, vecka: 50 }));
 {
   // En plan med vecka 3 tre gånger, lov över nyår och en stege som börjar högre upp: sammanställningen och planen namnger varje
@@ -360,28 +360,168 @@ ska('veckans namn i en text och i diagrammet', JSON.stringify(s.veckansNamn({ in
 // gång det går"): modulens filer skriver aldrig ut en vecka eller ett datum på egen hand. Veckorna kommer ur blocket
 // Veckornas namn i standarden och datumen ur datumText, dagOchManad, dagText och spannKort. Ett fynd säger fil, rad och
 // vilken funktion som ska användas (PLANERA.md under Spärren mot drift).
-const MODULENS_FILER = ['src/lib/standard/plan.js', 'src/lib/insatsplan.ts', 'src/scripts/planera.ts', 'src/scripts/planpdf.ts', 'src/scripts/insatser-lagring.ts', 'src/scripts/insatser.ts', 'src/scripts/appen.ts', 'src/components/Planera.astro', 'src/components/AppRad.astro'];
+const MODULENS_FILER = ['src/lib/standard/plan.js', 'src/lib/standard/saker.js', 'src/lib/standard/text.js', 'src/scripts/webblasaren.ts', 'src/lib/insatsplan.ts', 'src/lib/metodsaker.ts', 'src/lib/sakfiler.ts', 'src/lib/planbar.ts', 'src/scripts/planera.ts', 'src/scripts/planpdf.ts', 'src/scripts/insatser-lagring.ts', 'src/scripts/insatser.ts', 'src/scripts/appen.ts', 'src/components/Planera.astro', 'src/components/AppRad.astro'];
 const DRIFT = [
   [/v\. \$\{/, 'en kalendervecka skrivs med kalendervecka() eller kalenderveckor()'],
   [/[Vv]ecka \$\{[^}`]*\.vecka\b/, 'en kalendervecka skrivs med kalendervecka(), inte som "vecka"'],
   [/[Vv]ecka \$\{[^}`]*\.innehall\b|\? ' igen' : ''|'en tredje gång'/, 'veckan i planen skrivs med planveckan(), planveckanKort() eller veckansNamn()'],
-  [/'januari'|'jan', 'feb'|toLocaleDateString\(|month: '(long|short)'/, 'ett datum skrivs med datumText(), dagOchManad(), dagText() eller spannKort()'],
+  [/'januari'|'jan', 'feb'|toLocaleDateString\(|month: '(long|short)'/, 'ett datum skrivs med datumText(), dagOchManad(), dagText(), dagKort(), spannKort() eller datumspann()'],
+  [/\/\^\\d\{4\}-\\d\{2\}-\\d\{2\}\$\//, 'ett datum prövas med arDatum()'],
+  [/['"](?:(?:mån|tis|ons|tors|fre|lör|sön)dag|[Mm]ån|[Tt]is|[Oo]ns|[Tt]or|[Ff]re)['"]/, 'veckodagarna står i VECKODAGAR och veckodagKort()'],
+  [/\.sort\(\(a, b\) => \(a\.datum < b\.datum/, 'datumordningen tas med iDatumordning() eller efterDatum()'],
+  [/v\.pass\.map\(\(n\) => plan\.pass\[n - 1\]\)/, 'veckans pass tas med veckansPass()'],
+  [/\* 60 \+ Number\(|padStart\(2, '0'\)/, 'ett klockslag räknas med minuterAv() och klockslag(), och två siffror skrivs med tvasiffrigt()'],
+  [/\.charAt\(0\)\.toLocale(?:Upper|Lower)Case\('sv'\)(?: \+ |\}\$\{)/, 'stor bokstav först skrivs med stor() och liten med liten()'],
+  [/replace\(\/\[&<>"\]\/g/, 'text i HTML skyddas med esc()'],
+  [/\.split\(':'\)\[0\]/, 'namnets första led tas med forstaLedet()'],
+  [/\{ en: 1, ett: 1|'noll', 'ett', 'två'/, 'talen i ord läses med talAv() och skrivs med talText()'],
 ];
+// Raderna som är rötterna själva, i standardens plan.js; text.js är roten för texten och talen.
+const ROTRAD = /^(?:export )?const (?:MANADER|MANAD_KORT|VECKODAGAR|veckodagKort|arDatum|minuterAv|klockslag|plusMinuter|minuterISpann|efterDatum|iDatumordning|veckansPass) = /;
 const drift = (fil, text) => {
   const rader = text.split(/\r?\n/);
-  // Roten i standarden: blocket Veckornas namn och månadernas namn till datumfunktionerna.
+  // Roten i standarden: text.js, blocket Veckornas namn och raderna som är rötterna.
+  if (fil.endsWith('standard/text.js')) return [];
   let iRoten = false;
   const fynd = [];
   rader.forEach((r, i) => {
     if (fil.endsWith('plan.js') && /^\/\/ -{10} /.test(r)) iRoten = r.includes('Veckornas namn');
-    if (iRoten || (fil.endsWith('plan.js') && /^const (MANADER|MANAD_KORT) = /.test(r))) return;
+    if (iRoten || (fil.endsWith('plan.js') && ROTRAD.test(r))) return;
+    // En kommentar får beskriva en form, som "mån" i veckodagKort.
+    if (/^\s*(?:\/\/|\/\*|\*)/.test(r)) return;
     for (const [monster, varfor] of DRIFT) if (monster.test(r)) fynd.push(`${fil}:${i + 1}: ${varfor}`);
   });
   return fynd;
 };
-ska('spärren mot drift hittar en vecka eller ett datum som skrivs ut för sig', drift('x.ts', 'const a = `v. ${n}`;').length === 1 && drift('x.ts', 'const b = `Vecka ${v.innehall}`;').length === 1 && drift('x.ts', "const m = ['januari', 'februari'];").length === 1 && drift('x.ts', 'const c = kalendervecka(n);').length === 0);
+ska('spärren mot drift hittar en vecka, ett datum, en veckodag, ett klockslag, stor bokstav och HTML-skyddet som skrivs ut för sig', drift('x.ts', 'const a = `v. ${n}`;').length === 1 && drift('x.ts', 'const b = `Vecka ${v.innehall}`;').length === 1 && drift('x.ts', "const m = ['januari', 'februari'];").length === 1 && drift('x.ts', 'const c = kalendervecka(n);').length === 0
+  && drift('x.ts', "const d = ['Mån', 'Tis'];").length === 1 && drift('x.ts', "const t = String(m).padStart(2, '0');").length === 1 && drift('x.ts', "const s = x.charAt(0).toLocaleUpperCase('sv') + x.slice(1);").length === 1 && drift('x.ts', 'const e = s.replace(/[&<>"]/g, f);').length === 1 && drift('x.ts', "const k = r.split(':')[0];").length === 1 && drift('x.ts', 'const o = [...p].sort((a, b) => (a.datum < b.datum ? -1 : 1));').length === 1 && drift('src/lib/standard/text.js', "const s = x.charAt(0).toLocaleUpperCase('sv') + x.slice(1);").length === 0);
 const driftfynd = MODULENS_FILER.flatMap((f) => drift(f, readFileSync(join(rot, f), 'utf8')));
 ska('modulen skriver veckor och datum bara ur standardens funktioner', !driftfynd.length, driftfynd);
+// Spärren mot dubbletter (K-509; Niclas 2026-10-25: "Mer orolig för att du bygger kod med nya funktioner som har drift i
+// sig"): samma kod på två ställen i modulen är två rötter som kan glida isär, som veckorna i elevens diagram. Provet letar
+// utan att veta vad koden gör: samma följd av kod mellan två filer, minst 25 tecken (ett namn, ett tal, en text eller ett
+// skiljetecken är ett tecken), och 50 i samma fil; samma lilla funktion med andra namn; och samma lista av ord, också när
+// den ena listan har ordens början ("Mån" och "måndag"). Ett fynd säger var båda står. Lägg koden i en funktion, i
+// standarden när fler än en fil behöver den, och använd den på båda ställena (PLANERA.md under Spärren mot drift).
+const KOD = /\/\/[^\n]*|\/\*[\s\S]*?\*\/|'(?:\\.|[^'\\\n])*'|"(?:\\.|[^"\\\n])*"|`|\$\{|[\p{L}_$][\p{L}\p{N}_$]*|\d+(?:\.\d+)?|=>|===|!==|\?\?|\?\.|&&|\|\||\.\.\.|\S/gu;
+const radraknare = (text) => {
+  const borjan = [0];
+  for (let i = 0; i < text.length; i++) if (text[i] === '\n') borjan.push(i + 1);
+  return (i) => { let lo = 0, hi = borjan.length - 1; while (lo < hi) { const m = (lo + hi + 1) >> 1; if (borjan[m] <= i) lo = m; else hi = m - 1; } return lo + 1; };
+};
+function dubbletter(filer, mellan = 25, inom = 50) {
+  const alla = filer.map(({ fil, text }) => ({ fil, text, rad: radraknare(text), t: [...text.matchAll(KOD)].filter((m) => !/^\/[/*]/.test(m[0])).map((m) => [m[0], m.index]) }));
+  const sett = new Map(), par = [];
+  alla.forEach((f, fi) => {
+    for (let k = 0; k + mellan <= f.t.length; k++) {
+      const nyckel = f.t.slice(k, k + mellan).map((x) => x[0]).join('\u0001');
+      const forra = sett.get(nyckel);
+      if (!forra) { sett.set(nyckel, [fi, k]); continue; }
+      const [gi, j] = forra;
+      let n = mellan;
+      while (j + n < alla[gi].t.length && k + n < f.t.length && alla[gi].t[j + n][0] === f.t[k + n][0]) n++;
+      if (gi === fi && (k - j < inom || n < inom)) continue;
+      par.push({ gi, j, fi, k, n });
+    }
+  });
+  // Ett spann ger ett fynd: ett par som fortsätter paret före räknas inte igen.
+  const nycklar = new Set(par.map((p) => `${p.gi}:${p.j}:${p.fi}:${p.k}`));
+  return par.filter((p) => !nycklar.has(`${p.gi}:${p.j - 1}:${p.fi}:${p.k - 1}`)).map((p) => {
+    const a = alla[p.gi], b = alla[p.fi];
+    const kod = a.text.slice(a.t[p.j][1], a.t[p.j + Math.min(p.n, 40) - 1][1] + 1).replace(/\s+/g, ' ');
+    return `${a.fil}:${a.rad(a.t[p.j][1])} och ${b.fil}:${b.rad(b.t[p.k][1])}: samma kod (${p.n} tecken): ${kod.slice(0, 120)}`;
+  });
+}
+// Samma lilla funktion med andra namn: en funktion på en rad vars kropp är densamma när parametrarna har bytt namn.
+function sammaFunktion(filer) {
+  const per = new Map();
+  for (const { fil, text } of filer) text.split(/\r?\n/).forEach((r, i) => {
+    const m = r.match(/^\s*(?:export\s+)?const\s+([\p{L}_$][\p{L}\p{N}_$]*)\s*=\s*\(([^)]*)\)\s*(?::[^=]*)?=>\s*(.+?);?\s*$/u);
+    if (!m) return;
+    let kropp = m[3];
+    const parametrar = m[2].split(',').map((p) => p.trim().replace(/[?]?\s*[:=][\s\S]*$/, '')).filter(Boolean);
+    if (parametrar.some((p) => !/^[\p{L}_$][\p{L}\p{N}_$]*$/u.test(p))) return;
+    parametrar.forEach((p, j) => { kropp = kropp.replace(new RegExp(`(?<![\\p{L}\\p{N}_$.])${p.replace(/\$/g, '\\$')}(?![\\p{L}\\p{N}_$])`, 'gu'), `§${j}`); });
+    kropp = kropp.replace(/\s+as\s+[\p{L}_$][\p{L}\p{N}_$<>[\]]*/gu, '').replace(/([)\]\p{L}\p{N}_$])!(?!=)/gu, '$1').replace(/\s+/g, '');
+    if (kropp.length < 16) return;
+    if (!per.has(kropp)) per.set(kropp, []);
+    per.get(kropp).push(`${fil}:${i + 1} ${m[1]}`);
+  });
+  return [...per.values()].filter((x) => x.length > 1).map((x) => `${x.join(' och ')}: samma funktion`);
+}
+// Samma lista av ord: tre ord eller fler på samma plats i båda, där det ena är det andras början.
+function sammaLista(filer) {
+  const listor = [];
+  for (const { fil, text } of filer) text.split(/\r?\n/).forEach((r, i) => {
+    for (const m of r.matchAll(/\[\s*(['"])[^'"\n]*\1(?:\s*,\s*(['"])[^'"\n]*\2){2,}\s*\]/g)) listor.push({ var: `${fil}:${i + 1}`, ord: [...m[0].matchAll(/['"]([^'"\n]*)['"]/g)].map((x) => x[1].toLocaleLowerCase('sv')) });
+  });
+  // Ett ord är ett annat ords början när det har minst tre bokstäver ("mån" och "måndag"), så att ändelser som "ar" och
+  // "arnas" inte räknas.
+  const lika = (a, b) => { const n = Math.min(a.length, b.length); let t = 0; for (let i = 0; i < n; i++) { const [k, l] = a[i].length <= b[i].length ? [a[i], b[i]] : [b[i], a[i]]; if (k && (k === l || (k.length >= 3 && l.startsWith(k)))) t++; } return t >= 3 && t >= n - 1; };
+  const ut = [];
+  listor.forEach((a, i) => listor.slice(i + 1).forEach((b) => { if (lika(a.ord, b.ord)) ut.push(`${a.var} och ${b.var}: samma lista av ord`); }));
+  return ut;
+}
+{
+  const prov = (text) => [{ fil: 'a.ts', text }, { fil: 'b.ts', text: `const x = 1;\n${text}` }];
+  const lang = 'const veckor = plan.veckor.filter((v) => v.pass.length > 0).map((v) => `${v.nr}: ${v.pass.join(", ")}`).join("; ");';
+  ska('spärren mot dubbletter hittar samma kod i två filer, och inte kod som bara liknar',
+    dubbletter(prov(lang)).length === 1 && dubbletter(prov('const veckor = plan.veckor.filter((v) => v.pass.length > 0);')).length === 0, dubbletter(prov(lang)));
+  ska('spärren mot dubbletter hittar samma lilla funktion med andra namn',
+    sammaFunktion([{ fil: 'a.ts', text: "const stor = (s) => s.charAt(0).toLocaleUpperCase('sv') + s.slice(1);" }, { fil: 'b.ts', text: "const versal = (t: string) => t.charAt(0).toLocaleUpperCase('sv') + t.slice(1);" }]).length === 1);
+  ska('spärren mot dubbletter hittar samma lista av ord, också förkortad',
+    sammaLista([{ fil: 'a.ts', text: "const A = ['måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag'];" }, { fil: 'b.ts', text: "const B = ['Mån', 'Tis', 'Ons', 'Tor', 'Fre'];" }]).length === 1
+    && sammaLista([{ fil: 'a.ts', text: "const A = ['fore', 'efter', 'mitt'];" }, { fil: 'b.ts', text: "const B = ['röd', 'grön', 'blå'];" }]).length === 0
+    && sammaLista([{ fil: 'a.ts', text: "const A = ['en', 'ens', 'arnas'];" }, { fil: 'b.ts', text: "const B = ['en', 'ens', 'ar', 'arna'];" }]).length === 0);
+}
+const modulen = MODULENS_FILER.map((fil) => ({ fil, text: readFileSync(join(rot, fil), 'utf8') }));
+const dubblettfynd = [...dubbletter(modulen), ...sammaFunktion(modulen), ...sammaLista(modulen)];
+ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista står två gånger', !dubblettfynd.length, `${dubblettfynd.length} fynd:\n    ${dubblettfynd.join('\n    ')}`);
+// Rötterna (K-509; Niclas 2026-10-25: "Centralisera och till en rot ... Och saker ska härledas ur en beräkning eller ett
+// ställe som är samma sak"): varje rot i tabellen under Spärren mot drift i PLANERA.md prövas här, också i kanterna.
+{
+  ska('texten: stor och liten bokstav, mening och punkt', s.stor('måndag') === 'Måndag' && s.liten('Två till sex elever') === 'två till sex elever' && s.mening(' Läs högt ') === 'Läs högt.' && s.mening('Vad säger texten?') === 'Vad säger texten?' && s.utanPunkt('Bra. ') === 'Bra' && s.decimal(2.5) === '2,5' && s.tvasiffrigt(7) === '07');
+  ska('texten: HTML-skyddet, sökning, lärarens text och namnets första led', s.esc('<b>"&"</b>') === '&lt;b&gt;&quot;&amp;&quot;&lt;/b&gt;' && new RegExp(s.skyddaRegex('a.b (c)')).test('a.b (c)') && !new RegExp(s.skyddaRegex('a.b')).test('axb') && s.rentText(' två\u0007  ord ', 40) === 'två ord' && s.rentText(5, 40) === '' && s.forstaLedet('Lärarhandledningen: Läs mellan raderna') === 'Lärarhandledningen');
+  ska('texten: kortnamnet när bara en har det', s.kortnamn('Bildserie 1: Fönsterplatsen', ['Bildserie 1: Fönsterplatsen', 'Bildserie 2: Hunden']) === 'Bildserie 1' && s.kortnamn('Mina lärdomar: vecka 1–2', ['Mina lärdomar: vecka 1–2', 'Mina lärdomar: vecka 3–4']) === 'Mina lärdomar: vecka 1–2');
+  ska('talen: i ord och ur ord, också sammansatta', s.talText(3) === 'tre' && s.talText(1, true) === 'en' && s.talText(13) === '13' && s.allaAntal(2) === 'båda' && s.allaAntal(4) === 'alla fyra' && s.talAv('fyra') === 4 && s.talAv('en') === 1 && s.talAv('tjugofem') === 25 && s.talAv('tjugo') === 20 && s.talAv('12') === 12 && Number.isNaN(s.talAv('många')) && s.ORDNINGSTAL[3] === 'tredje');
+  ska('talen: i ett reguljärt uttryck', new RegExp(`^(${s.talIRegex(1, 7)})$`).test('sju') && !new RegExp(`^(${s.talIRegex(1, 7)})$`).test('åtta') && new RegExp(`^(${s.talIRegex(2, 99)})$`).test('trettiotvå') && new RegExp(`^(${s.talIRegex(1, 7)})$`).test('en'));
+  ska('veckorna i en rubrik', JSON.stringify(s.veckorI('Vecka 1–2')) === '{"fran":1,"till":2}' && s.veckorI('vecka 3').till === 3 && s.veckorI('vecka 4–2') === null && s.veckorI('Veckorna') === null);
+  ska('datumen', s.datumText('2026-11-02') === '2 november 2026' && s.dagOchManad('2026-11-02') === '2 november' && s.dagText('2026-11-02') === 'måndag 2 november' && s.dagKort('2026-11-04') === 'Ons 4/11' && s.datumspann('2026-11-02', '2026-12-11') === '2 november till 11 december 2026' && s.datumspann('2026-11-30', '2027-01-15') === '30 november 2026 till 15 januari 2027' && s.spannKort('2026-11-30', '2026-12-04') === '30 nov–4 dec');
+  ska('veckodagarna', s.VECKODAGAR[0] === 'måndag' && s.veckodagKort(1) === 'mån' && s.stor(s.veckodagKort(5)) === 'Fre');
+  ska('klockslagen', s.minuterAv('09:20') === 560 && s.klockslag(560) === '09:20' && s.plusMinuter('09:20', 40) === '10:00' && s.plusMinuter('23:40', 40) === '23:59' && JSON.stringify(s.minuterISpann('0–4 min')) === '{"fran":0,"till":4}' && s.minuterISpann('Före passet') === null);
+  ska('datumordningen, också med ett flyttat pass och samma dag', JSON.stringify(s.iDatumordning([{ datum: '2026-11-04', nr: 2 }, { datum: '2026-11-03', nr: 3 }, { datum: '2026-11-04', nr: 1 }]).map((x) => x.nr)) === '[3,1,2]' && s.efterDatum({ datum: 'a' }, { datum: 'b' }) < 0);
+  const p = s.planera(tsMp, { ...s.forval(tsMp, '2026-10-26'), start: '2026-11-30', langd: 4, upprepa: [3], lov: ['2026-52'], flytta: { '2026-12-04': '2026-12-03' }, stryk: [] });
+  const v1 = p.veckor[0];
+  ska('veckans pass och dagar, med ett flyttat pass', s.veckansPass(p, v1).map((x) => x.nr).join() === v1.pass.join() && s.veckansDagar(p, v1).fran === '2026-11-30' && s.veckansDagar(p, v1).till === '2026-12-03' && s.gangen(p, p.veckor[3]) === 1 && s.metodveckan(3) === 'vecka 3 i metoden', [s.veckansDagar(p, v1), p.veckor.map((v) => v.innehall)]);
+  const info = { titel: ts.titel, mal: ts.plan.mal, uppfoljning: ts.uppfoljning.rader };
+  const rader = s.uppfoljningensRader(p, info);
+  ska('uppföljningens rader: Efter insatsen och kalenderveckorna, en gång per vecka', rader.length === p.uppfoljning.filter((u) => u.tillfallen.length).length && rader.some((r) => /^Efter insatsen, v\. \d+$/.test(r)) && rader.every((r) => !/(v\. \d+).*\1/.test(r)) && s.uppfoljningensRad(p, info, p.uppfoljning[0]) === rader[0], rader);
+  const f = s.rensaFoljd({ gjorda: ['2026-11-30', '2026-12-02'], elever: [{ id: 'a1', namn: 'Ali' }], skattning: { '2026-11-30': { a1: 2 }, '2026-12-07': { a1: 3 } }, vecka: { '2026-11-30': { varde: 4 } }, resultat: { '0-2026-11-23': { a1: '4 av 8.' } }, avstamning: { beslut: 'fortsatt', not: 'Mer tid.' } });
+  const sm = s.sammanstallning(p, f, '2026-12-09');
+  const e = sm.elever[0];
+  ska('skattningen: värdena vecka för vecka, veckorna med skattning och riktningen', JSON.stringify(s.elevensVarden(sm, e).slice(0, 3)) === '[2,3,null]'.replace('null', 'undefined') || (s.elevensVarden(sm, e)[0] === 2 && s.elevensVarden(sm, e)[1] === 3 && s.elevensVarden(sm, e)[2] === undefined), s.elevensVarden(sm, e));
+  ska('skattningen: texterna', s.skattadeVeckor(sm).length === 1 && s.riktningText(e) === '2 till 3, framåt' && s.skattningenText('eleven', false) === 'skattning, 1 till 5, av hur väl eleven klarar målet på egen hand' && s.riktningText({ skattningar: [], forsta: null, senaste: null }) === 'Inte skattad än');
+  ska('passen och besluten i en mening', s.passensLage(sm) === `${sm.gjordaVarit} av de ${sm.varit} pass som har varit är bockade. Planen har ${sm.planerade} pass.` && s.passensLage({ ...sm, varit: 0 }).startsWith('Inget pass har varit än') && s.passensLage({ ...sm, gjorda: 0 }).startsWith('Inga pass är bockade än') && s.passensLage({ ...sm, slut: true }) === `${sm.gjorda} av ${sm.planerade} pass är bockade som genomförda.` && s.narvaronText({ narvaro: 2 }, { gjorda: 3 }) === 'Var med i 2 av 3 bockade pass.' && s.beslutText(f.avstamning) === 'Fortsätt som planerat. Mer tid.' && s.beslutText({ not: 'Bara en mening' }) === 'Bara en mening.' && s.BESLUTEN.utvardering.join() === 'avsluta,forlang,byt', s.passensLage(sm));
+  ska('resultatet i en text', s.resultatText(info, { rad: 0, datum: '2026-11-23', varde: '4 av 8.' }) === `${ts.uppfoljning.rader[0].nar}, v. 48: 4 av 8`);
+  ska('diagrammet: stapeln mitt i facket och prickarna under den', s.stapelnsKant(10, 2, 36, 22) === 89 && JSON.stringify(s.prickarna(89, 22, ['med', 'borta']).map((x) => x.x)) === '[96.5,103.5]' && s.prickarna(0, 10, ['med'])[0].slag === 'med');
+  ska('saker med nummer i en text', JSON.stringify(s.sakspann('Laminerat Bildserie 1–3, och Bildserie 2–1.').map((x) => [x.namn, x.nummer])) === '[[["Laminerat Bildserie","Bildserie"],[1,2,3]]]');
+  const lagring = await import('../src/scripts/insatser-lagring.ts');
+  ska('planens adress och dagens datum', lagring.planensAdress({ metod: 'til-i-grupp', val: 's=2026-11-02&d=135&l=6', id: 'abc123' }, 3) === '/stodundervisning/til-i-grupp/planera#s=2026-11-02&d=135&l=6&p=abc123&v=3' && /^\d{4}-\d{2}-\d{2}$/.test(lagring.idagLokalt()));
+}
+// Rötterna har prov: varje funktion i tabellen under Spärren mot drift i PLANERA.md finns i standarden, i lagringen eller i
+// webbläsarens rot, och planprovet prövar den, så att en rot som alla vyer hämtar ur alltid räknar rätt (Niclas 2026-10-25:
+// "och att denna funktion måste fungera korrekt").
+{
+  const lagring = await import('../src/scripts/insatser-lagring.ts');
+  const webb = await import('../src/scripts/webblasaren.ts');
+  const sparren = (readFileSync(join(rot, 'PLANERA.md'), 'utf8').replace(/\r\n/g, '\n').split('\n## Spärren mot drift\n')[1] ?? '').split('\n## ')[0];
+  const rotter = [...new Set(sparren.split('\n').filter((r) => /^\| [^|]+ \| .*`/.test(r)).flatMap((r) => [...r.split('|')[2].matchAll(/`([\p{L}_$][\p{L}\p{N}_$]*)`/gu)].map((m) => m[1])))];
+  const egen = readFileSync(fileURLToPath(import.meta.url), 'utf8');
+  const saknas = rotter.filter((n) => !(n in s) && !(n in lagring) && !(n in webb));
+  const utanProv = rotter.filter((n) => !new RegExp(`(?:\\bs|\\blagring|\\bw)\\.${n}\\b`).test(egen));
+  ska(`rötterna i PLANERA.md finns (${rotter.length} st)`, rotter.length >= 40 && !saknas.length, saknas);
+  ska('rötterna i PLANERA.md prövas i planprovet', !utanProv.length, utanProv);
+}
 // Pågående insatser i statistiken (K-504, src/scripts/insatser-lagring.ts): en plan som är inne i sina veckor ger händelsen
 // planera:<metod>:pagar, en andra plan för samma metod :2, och en plan som är slut eller inte har börjat ingen. Händelsen
 // bär bara metoden.

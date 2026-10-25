@@ -5,11 +5,11 @@
 // (ÅÅÅÅ-MM-DD) i UTC, så att sommartiden aldrig flyttar en dag. Sajtens METODER.md under Planera insatsen säger hur
 // metodens fält skrivs.
 import { periodensLangd, postensRad, tidensMatt, tidensVeckotakt } from './index.js';
+import { decimal, liten, mening, ORDNINGSTAL, rentText, skyddaRegex, stor, talAv, talIRegex, tvasiffrigt, utanPunkt } from './text.js';
 
 const DAG = 86400000;
 const tillTid = (s) => { const [a, m, d] = s.split('-').map(Number); return Date.UTC(a, m - 1, d); };
 const tillText = (t) => new Date(t).toISOString().slice(0, 10);
-const tvasiffrigt = (n) => String(n).padStart(2, '0');
 
 /** Datumet n dagar efter (eller före) s. @param {string} s @param {number} n */
 export const plusDagar = (s, n) => tillText(tillTid(s) + n * DAG);
@@ -85,11 +85,9 @@ export function utanPlanensFalt(d) {
   return ut;
 }
 
-const TALORD = { en: 1, ett: 1, två: 2, tre: 3, fyra: 4, fem: 5, sex: 6, sju: 7, åtta: 8, nio: 9, tio: 10, elva: 11, tolv: 12 };
-const tal = (x) => (/^\d+$/.test(x) ? Number(x) : TALORD[x]);
-const TAL = String.raw`(\d+|${Object.keys(TALORD).join('|')})`;
+const TAL = `(${talIRegex(1, 12)})`;
 const STRECK = String.raw`\s*[–—-]\s*`;
-const lista = (s) => s.split(/\s*(?:,|\boch\b)\s*/).filter(Boolean).map(tal);
+const lista = (s) => s.split(/\s*(?:,|\boch\b)\s*/).filter(Boolean).map((x) => talAv(x));
 
 /**
  * När en rad i metodens uppföljning görs, som ord i fältet `tid` bredvid radens egen text (`nar`). Orden är få och fasta,
@@ -106,7 +104,7 @@ export function tolkaTid(text) {
   if (t === 'före') return { typ: 'fore' };
   if (t === 'efter') return { typ: 'efter', veckor: 0 };
   let m = t.match(new RegExp(String.raw`^efter ${TAL}(?:${STRECK}${TAL})? veckor?$`, 'u'));
-  if (m) return { typ: 'efter', veckor: tal(m[1]), ...(m[2] ? { till: tal(m[2]) } : {}) };
+  if (m) return { typ: 'efter', veckor: talAv(m[1]), ...(m[2] ? { till: talAv(m[2]) } : {}) };
   if (t === 'varje pass' || t === 'i passet') return { typ: 'lopande', enhet: 'pass' };
   if (t === 'varje vecka') return { typ: 'lopande', enhet: 'vecka' };
   if (t === 'varannan vecka') return { typ: 'intervall', var: 2 };
@@ -119,7 +117,7 @@ export function tolkaTid(text) {
   m = t.match(new RegExp(String.raw`^(vecka|pass) ${TAL}${STRECK}${TAL}$`, 'u'));
   if (m) {
     // Ett spann är alla veckor eller pass i det, som METODER.md säger (Codex 2026-10-24: pass 6–8 gav bara pass 6).
-    const [fran, till] = [tal(m[2]), tal(m[3])];
+    const [fran, till] = [talAv(m[2]), talAv(m[3])];
     if (!(till > fran)) return null;
     const alla = Array.from({ length: till - fran + 1 }, (_, i) => fran + i);
     return m[1] === 'vecka' ? { typ: 'vecka', veckor: alla } : { typ: 'pass', pass: alla };
@@ -158,6 +156,19 @@ export function tolkaSteg(text) {
 }
 
 /**
+ * Veckorna i "vecka 3" och "vecka 1–2" som ett spann, { fran: 1, till: 2 }, eller null. Planens pass och metodens saker
+ * läser dem lika (sajtens src/lib/metodsaker.ts).
+ * @param {unknown} text
+ */
+export function veckorI(text) {
+  if (typeof text !== 'string') return null;
+  const m = text.trim().toLowerCase().match(new RegExp(String.raw`^vecka (\d+)(?:${STRECK}(\d+))?$`, 'u'));
+  if (!m) return null;
+  const fran = Number(m[1]), till = Number(m[2] ?? m[1]);
+  return till >= fran ? { fran, till } : null;
+}
+
+/**
  * Vilka pass en rad i planens `passen` gäller, ur dess `nar` (betan 2026-10-24: de kalla testarna saknade vad som skiljer
  * passen åt). Ett pass räknas på tre sätt: efter platsen i veckan, "veckans första", "veckans andra", "veckans tredje",
  * "veckans sista" och "veckans övriga" (de mellan första och sista), efter numret i insatsen, "första passet", "pass
@@ -169,9 +180,8 @@ export function tolkaSteg(text) {
 export function tolkaPassen(text) {
   if (typeof text !== 'string') return null;
   const t = text.trim().toLowerCase().replace(/\s+/g, ' ');
-  const PLATS = { första: 1, andra: 2, tredje: 3, fjärde: 4, femte: 5 };
   let m = t.match(/^veckans (första|andra|tredje|fjärde|femte|sista|övriga)(?: pass)?$/);
-  if (m) return { typ: 'vecka', plats: m[1] === 'sista' ? 'sista' : m[1] === 'övriga' ? 'ovriga' : PLATS[m[1]] };
+  if (m) return { typ: 'vecka', plats: m[1] === 'sista' ? 'sista' : m[1] === 'övriga' ? 'ovriga' : ORDNINGSTAL.indexOf(m[1]) };
   if (t === 'första passet') return { typ: 'pass', fran: 1, till: 1 };
   if (t === 'sista passet' || t === 'det sista passet') return { typ: 'sista' };
   m = t.match(/^pass (\d+)$/);
@@ -180,9 +190,8 @@ export function tolkaPassen(text) {
   if (m) return Number(m[2]) > Number(m[1]) ? { typ: 'pass', fran: Number(m[1]), till: Number(m[2]) } : null;
   m = t.match(/^pass (\d+) till det sista$/);
   if (m) return { typ: 'pass', fran: Number(m[1]) };
-  m = t.match(new RegExp(String.raw`^vecka (\d+)(?:${STRECK}(\d+))?$`, 'u'));
-  if (m) { const fran = Number(m[1]), till = Number(m[2] ?? m[1]); return till >= fran ? { typ: 'veckor', fran, till } : null; }
-  return null;
+  const v = veckorI(t);
+  return v ? { typ: 'veckor', ...v } : null;
 }
 
 /**
@@ -251,7 +260,7 @@ export const planFel = (d) => metodplan(d).fel;
  * läraren går in och planerar; den andra ökar med en ny förmåga, en tredje när ett fel lagas. Versionerna står i sajtens
  * METODER.md under Planera insatsen.
  */
-export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.2.5', beta: true });
+export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.2.6', beta: true });
 
 // ---------- Planen ----------
 
@@ -353,7 +362,7 @@ export function planera(mp, val) {
   }
   // Första och sista passet efter datum: ett flyttat pass kan hamna före ett pass med lägre nummer (Codex 2026-10-24: det
   // sista passet flyttat till tisdagen avslutade insatsen före onsdagens pass).
-  const iOrdning = [...pass].sort((a, b) => (a.datum < b.datum ? -1 : a.datum > b.datum ? 1 : a.nr - b.nr));
+  const iOrdning = iDatumordning(pass);
   const forsta = iOrdning[0], sista = iOrdning[iOrdning.length - 1];
   const forstaPass = forsta?.datum;
   const sistaPass = sista?.datum;
@@ -375,7 +384,7 @@ export function planera(mp, val) {
   const stegFor = (nr) => mp.steg.find((s) => !s.efter && nr >= s.fran && (s.till === undefined || nr <= s.till));
   for (const v of veckor) v.steg = mp.stegEnhet === 'veckor' ? stegFor(v.innehall)?.rad ?? null : null;
   for (const p of pass) p.steg = mp.stegEnhet === 'pass' ? stegFor(p.nr)?.rad ?? null : veckor[p.vecka - 1].steg;
-  const sistaIVeckan = (v) => (v.pass.length ? v.pass.map((n) => pass[n - 1].datum).sort()[v.pass.length - 1] : plusDagar(v.mandag, 4));
+  const sistaIVeckan = (v) => veckansDagar({ pass }, v).till;
   const uppfoljning = mp.uppfoljning.map(({ rad, tid }) => {
     /** @type {{ datum: string, vecka: number | null }[]} */
     let tillfallen = [];
@@ -405,6 +414,16 @@ export function planera(mp, val) {
  * @param {PlanVecka} v
  */
 export const planvecka = (plan, v) => v.innehall - ((plan.borja ?? 1) - 1);
+/**
+ * Ordningen efter datum, och efter numret när två har samma datum, som passen efter att ett har flyttats.
+ * @param {{ datum: string, nr?: number }} a
+ * @param {{ datum: string, nr?: number }} b
+ */
+export const efterDatum = (a, b) => (a.datum < b.datum ? -1 : a.datum > b.datum ? 1 : (a.nr ?? 0) - (b.nr ?? 0));
+/** En kopia i datumordning. @template {{ datum: string, nr?: number }} T @param {T[]} lista @returns {T[]} */
+export const iDatumordning = (lista) => [...lista].sort(efterDatum);
+/** Veckans pass, i veckans ordning. @param {{ pass: Pass[] }} plan @param {PlanVecka} v */
+export const veckansPass = (plan, v) => v.pass.map((n) => plan.pass[n - 1]);
 
 // ---------- Veckornas namn ----------
 // Veckornas namn står här och bara här (sajtens K-508; Niclas 2026-10-25: "Sammanställning ska ju matcha veckor i planen
@@ -418,7 +437,8 @@ export const kalendervecka = (n) => `v. ${n}`;
 export const kalenderveckaUtskriven = (n) => `kalendervecka ${n}`;
 /** Ett spann av kalenderveckor: "v. 45", "v. 45–46" och över nyår "v. 52 till v. 1", så att ett spann bakåt inte ser ut som ett fel. */
 export const kalenderveckor = (a, b, streck = '–') => (b === a ? kalendervecka(a) : b < a || streck !== '–' ? `${kalendervecka(a)} till ${kalendervecka(b)}` : `${kalendervecka(a)}–${b}`);
-const GANGEN = ['', 'igen', 'en tredje gång', 'en fjärde gång', 'en femte gång'];
+// Vilken gång i ord: "igen" och "en tredje gång", ur standardens ordningstal (text.js).
+const gangenText = (gang) => (gang === 1 ? 'igen' : ORDNINGSTAL[gang + 1] ? `en ${ORDNINGSTAL[gang + 1]} gång` : `för ${gang + 1}:e gången`);
 /**
  * Vilken gång veckan tas: 0 första gången, 1 igen och 2 en tredje gång.
  * @param {Plan} plan
@@ -426,7 +446,7 @@ const GANGEN = ['', 'igen', 'en tredje gång', 'en fjärde gång', 'en femte gå
  */
 export const gangen = (plan, v) => (v.igen ? plan.veckor.filter((x) => x.innehall === v.innehall && x.nr <= v.nr).length - 1 : 0);
 /** Veckan i planen: "6", "3 igen" och "3 en tredje gång". */
-export const planveckan = (innehall, gang = 0) => `${innehall}${gang ? ` ${GANGEN[gang] ?? `för ${gang + 1}:e gången`}` : ''}`;
+export const planveckan = (innehall, gang = 0) => `${innehall}${gang ? ` ${gangenText(gang)}` : ''}`;
 /** Metodens vecka, som skiljer sig från veckan i planen när en stege börjar högre upp: "vecka 3 i metoden". */
 export const metodveckan = (innehall) => `vecka ${innehall} i metoden`;
 /** Veckan i planen kort, till veckoremsan och diagrammen: talet, och "igen" eller "3:e" när veckan tas om. */
@@ -458,7 +478,7 @@ export const planveckansNamn = (plan, v) => veckansNamn({ innehall: planvecka(pl
  */
 export function passetsRoller(plan, p, passen) {
   const v = plan.veckor[p.vecka - 1];
-  const iVeckan = v ? v.pass.map((n) => plan.pass[n - 1]).sort((a, b) => (a.datum < b.datum ? -1 : a.datum > b.datum ? 1 : a.nr - b.nr)) : [p];
+  const iVeckan = v ? iDatumordning(veckansPass(plan, v)) : [p];
   const plats = iVeckan.findIndex((x) => x.nr === p.nr) + 1;
   const sistIVeckan = iVeckan.length > 1 && plats === iVeckan.length;
   const traffar = (t) => {
@@ -494,7 +514,7 @@ export function veckanFor(plan, datum) {
   return datum < plan.veckor[0].mandag ? plan.veckor[0] : plan.veckor.find((x) => x.mandag > datum) ?? plan.veckor[plan.veckor.length - 1];
 }
 /** Nästa pass från och med ett datum, eller inget när planen är slut. @param {Plan} plan @param {string} datum */
-export const nastaPass = (plan, datum) => [...plan.pass].sort((a, b) => (a.datum < b.datum ? -1 : 1)).find((p) => p.datum >= datum) ?? null;
+export const nastaPass = (plan, datum) => iDatumordning(plan.pass).find((p) => p.datum >= datum) ?? null;
 
 // ---------- Länken ----------
 
@@ -589,6 +609,14 @@ export const passetsTid = (val, p) => rentaTider(val.tider)[String(veckodag(pass
 export const tidText = (s) => `${Number(s.slice(0, 2))}.${s.slice(3, 5)}`;
 /** "9.20–10.00". @param {[string, string]} par */
 export const tidsspann = (par) => `${tidText(par[0])}–${tidText(par[1])}`;
+/** Minuterna från midnatt: 560 ur "09:20". @param {string} s */
+export const minuterAv = (s) => Number(s.slice(0, 2)) * 60 + Number(s.slice(3, 5));
+/** Klockslaget ur minuterna från midnatt: "09:20" ur 560. @param {number} t */
+export const klockslag = (t) => `${tvasiffrigt(Math.floor(t / 60))}:${tvasiffrigt(t % 60)}`;
+/** Klockslaget m minuter efter, högst 23:59: "10:00" ur "09:20" och 40. @param {string} s @param {number} m */
+export const plusMinuter = (s, m) => { const t = minuterAv(s) + m; return t >= 24 * 60 ? '23:59' : klockslag(t); };
+/** Minuterna i ett spann i tidsschemat: "0–4 min" ger 0 och 4. @param {string} tid */
+export const minuterISpann = (tid) => { const m = tid.match(/(\d+)\s*[–-]\u2060?\s*(\d+)/); return m ? { fran: Number(m[1]), till: Number(m[2]) } : null; };
 /**
  * Dagarna med sina tider: "måndag, onsdag och fredag kl. 9.20–10.00" när dagarna har samma tid, och annars tiden vid
  * varje dag, "måndag kl. 9.20–10.00 och onsdag kl. 13.00–13.40".
@@ -613,29 +641,24 @@ export function dagarText(val) {
  */
 export function passensMinuter(val, standard) {
   const tider = rentaTider(val.tider);
-  const minut = (s) => Number(s.slice(0, 2)) * 60 + Number(s.slice(3, 5));
-  return [...new Set([...new Set(val.dagar)].map((d) => { const t = tider[String(d)]; return t ? minut(t[1]) - minut(t[0]) : standard; }))].sort((a, b) => a - b);
+  return [...new Set([...new Set(val.dagar)].map((d) => { const t = tider[String(d)]; return t ? minuterAv(t[1]) - minuterAv(t[0]) : standard; }))].sort((a, b) => a - b);
 }
 /** "30", eller "30 eller 40" när dagarna har olika långa pass. @param {number[]} minuter */
 export const minuterText = (minuter) => (minuter.length <= 1 ? minuter.join('') : `${minuter.slice(0, -1).join(', ')} eller ${minuter[minuter.length - 1]}`);
 
 /** Ett mål som läraren har skrivit: en rad, högst 200 tecken, utan styrtecken. @param {unknown} s */
-export const rentMal = (s) => String(s ?? '').replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 200);
+export const rentMal = (s) => rentText(String(s ?? ''), 200);
 
 // ---------- Texterna ----------
 
 const MANADER = ['januari', 'februari', 'mars', 'april', 'maj', 'juni', 'juli', 'augusti', 'september', 'oktober', 'november', 'december'];
-const MANAD_KORT = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'];
-const MAND_KORT_ETT = (m) => MANAD_KORT[m - 1];
+const MANAD_KORT = MANADER.map((m) => m.slice(0, 3));
 export const VECKODAGAR = ['måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lördag', 'söndag'];
+/** Veckodagen kort, "mån" för 1; stor() ger "Mån". @param {number} d */
+export const veckodagKort = (d) => VECKODAGAR[d - 1].slice(0, 3);
 const delar = (s) => s.split('-').map(Number);
 /** Målet som en mening: stor bokstav först och punkt sist, som "Kunna läsa mellan raderna." @param {string} [mal] */
-export const malText = (mal) => {
-  const t = rentMal(mal);
-  if (!t) return '';
-  const s = t.charAt(0).toLocaleUpperCase('sv') + t.slice(1);
-  return /[.!?]$/.test(s) ? s : `${s}.`;
-};
+export const malText = (mal) => { const t = rentMal(mal); return t ? mening(stor(t)) : ''; };
 
 /**
  * En text utan elevernas namn: varje namn i elevlistan och dess förnamn blir "en elev", och med genitivets s "en elevs",
@@ -649,7 +672,7 @@ export function utanNamn(text, elever) {
   let ut = String(text ?? '');
   for (const n of namn) {
     // Utan lookbehind, som Safari före 16.4 inte kan: tecknet före namnet fångas och står kvar.
-    const monster = new RegExp(`(^|[^\\p{L}\\p{N}])${n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(s?)(?![\\p{L}\\p{N}])`, 'giu');
+    const monster = new RegExp(`(^|[^\\p{L}\\p{N}])${skyddaRegex(n)}(s?)(?![\\p{L}\\p{N}])`, 'giu');
     ut = ut.replace(monster, (_, fore, s) => `${fore}${s ? 'en elevs' : 'en elev'}`);
   }
   return ut.replace(/(^|[.!?:]\s+)en elev/g, (_, fore) => `${fore}En elev`);
@@ -661,26 +684,43 @@ export const datumText = (s) => { const [a, m, d] = delar(s); return `${d} ${MAN
 export const dagOchManad = (s) => { const [, m, d] = delar(s); return `${d} ${MANADER[m - 1]}`; };
 /** "måndag 2 november". @param {string} s */
 export const dagText = (s) => `${VECKODAGAR[veckodag(s) - 1]} ${dagOchManad(s)}`;
+/** "Mån 2/11", i veckans lista över pass. @param {string} s */
+export const dagKort = (s) => { const [, m, d] = delar(s); return `${stor(veckodagKort(veckodag(s)))} ${d}/${m}`; };
 /** "2–6 nov" eller "30 nov–4 dec". @param {string} fran @param {string} till */
 export function spannKort(fran, till) {
   const [, m1, d1] = delar(fran), [, m2, d2] = delar(till);
-  if (fran === till) return `${d1} ${MAND_KORT_ETT(m1)}`;
+  if (fran === till) return `${d1} ${MANAD_KORT[m1 - 1]}`;
   return m1 === m2 ? `${d1}–${d2} ${MANAD_KORT[m1 - 1]}` : `${d1} ${MANAD_KORT[m1 - 1]}–${d2} ${MANAD_KORT[m2 - 1]}`;
 }
+/** "2 november till 11 december 2026", med båda åren när spannet går över nyår. @param {string} fran @param {string} till */
+export const datumspann = (fran, till) => `${fran.slice(0, 4) === till.slice(0, 4) ? dagOchManad(fran) : datumText(fran)} till ${datumText(till)}`;
 /** "måndag, onsdag och fredag". @param {string[]} ord */
 export const uppraknat = (ord) => (ord.length <= 1 ? ord.join('') : `${ord.slice(0, -1).join(', ')} och ${ord[ord.length - 1]}`);
-const TALTEXT = ['noll', 'ett', 'två', 'tre', 'fyra', 'fem', 'sex', 'sju', 'åtta', 'nio', 'tio', 'elva', 'tolv'];
-/** Ett tal i ord upp till tolv, som i löptext. @param {number} n @param {boolean} [en] "en" i stället för "ett" */
-export const talText = (n, en = false) => (n === 1 && en ? 'en' : TALTEXT[n] ?? String(n));
-/** Veckans första och sista dag i planen: passens, eller måndag till fredag. @param {Plan} plan @param {PlanVecka} v */
+/** Veckans första och sista dag i planen: passens, eller måndag till fredag. @param {{ pass: Pass[] }} plan @param {PlanVecka} v */
 export function veckansDagar(plan, v) {
-  const datum = v.pass.map((n) => plan.pass[n - 1].datum).sort();
+  const datum = veckansPass(plan, v).map((p) => p.datum).sort();
   return { fran: datum[0] ?? v.mandag, till: datum[datum.length - 1] ?? plusDagar(v.mandag, 4) };
 }
 
 // En rad i uppföljningen som heter efter insatsens vecka, som "Vecka 4", säger att det är insatsens vecka, så att den inte
 // läses som kalenderveckan bredvid (de kalla testarna 2026-10-24: "Vecka 4, vecka 48").
 const narIText = (nar) => (/^vecka \d+$/i.test(nar.trim()) ? `${nar.trim()} i insatsen` : nar);
+/**
+ * Uppföljningens rad i en text, på sidan och i pdf:en: namnet och kalenderveckorna, "Kartläggning, v. 44" och "Efter insatsen,
+ * v. 51". Den första raden efter insatsen heter Efter insatsen, så att planen inte säger metodens "Efter sex till åtta
+ * veckor" om en kortare plan (buggjägarna 2026-10-25). En rad utan datum står med bara namnet.
+ * @param {Plan} plan
+ * @param {{ uppfoljning: { nar: string }[] }} info
+ * @param {Plan['uppfoljning'][number]} u
+ */
+export function uppfoljningensRad(plan, info, u) {
+  const namn = u.rad === plan.uppfoljning.find((x) => x.typ === 'efter')?.rad ? 'Efter insatsen' : narIText(info.uppfoljning[u.rad]?.nar ?? '');
+  return u.tillfallen.length ? `${namn}, ${uppraknat([...new Set(u.tillfallen.map((t) => kalendervecka(isoVecka(t.datum).vecka)))])}` : namn;
+}
+/** Uppföljningens rader med datum, som sammanställningen, sidan och pdf:en visar dem. @param {Plan} plan @param {{ uppfoljning: { nar: string }[] }} info */
+export const uppfoljningensRader = (plan, info) => plan.uppfoljning.filter((u) => u.tillfallen.length).map((u) => uppfoljningensRad(plan, info, u));
+/** Vad skattningen är, i en text: "skattning varje vecka, 1 till 5, av hur väl eleven klarar målet på egen hand". @param {string} vem eleven, eleverna eller gruppen @param {boolean} [varjeVecka] */
+export const skattningenText = (vem, varjeVecka = true) => `skattning${varjeVecka ? ' varje vecka' : ''}, 1 till 5, av hur väl ${vem} klarar målet på egen hand`;
 
 /**
  * Texten till åtgärdsprogrammet (Niclas 2026-10-24: "kopiera text till ÅP ... mål, varaktighet, tider och dagar och vad
@@ -697,17 +737,14 @@ const narIText = (nar) => (/^vecka \d+$/i.test(nar.trim()) ? `${nar.trim()} i in
  */
 export function dokumentationstext(info, plan, val, o) {
   const rader = [];
-  const forsta = (s) => s.charAt(0).toLocaleLowerCase('sv') + s.slice(1);
   // Undertitelns årskurser gäller metoden, inte eleven: "för åk 3–7" och "för F–6" (de kalla testarna 2026-10-24).
-  const under = info.undertitel ? forsta(info.undertitel.replace(/\.$/, '').replace(/,?\s*för (?:åk\s*)?[F\d][\d–-]*(?:\s*(?:och|till)\s*\d+)?$/i, '')) : '';
+  const under = info.undertitel ? liten(info.undertitel.replace(/\.$/, '').replace(/,?\s*för (?:åk\s*)?[F\d][\d–-]*(?:\s*(?:och|till)\s*\d+)?$/i, '')) : '';
   rader.push(`Åtgärd: ${info.titel}${under ? `, ${under}` : ''}.`);
   const mal = val.mal || info.mal;
   if (mal) rader.push(`Mål: ${malText(mal)}`);
   const dagar = dagarText(val);
   const v1 = plan.veckor[0]?.vecka.vecka, v2 = plan.veckor[plan.veckor.length - 1]?.vecka.vecka;
-  // Samma år står en gång: "2 november till 11 december 2026".
-  const fran = plan.forstaPass && plan.sistaPass && plan.forstaPass.slice(0, 4) === plan.sistaPass.slice(0, 4) ? dagOchManad(plan.forstaPass) : plan.forstaPass && datumText(plan.forstaPass);
-  if (plan.forstaPass && plan.sistaPass) rader.push(`Omfattning: ${plan.pass.length} pass om ${minuterText(passensMinuter(val, o.minuter))} minuter, ${dagar}, ${fran} till ${datumText(plan.sistaPass)} (${kalenderveckor(v1, v2, ' till ')})${info.nivaNamn ? `, på nivån ${info.nivaNamn}` : ''}.`);
+  if (plan.forstaPass && plan.sistaPass) rader.push(`Omfattning: ${plan.pass.length} pass om ${minuterText(passensMinuter(val, o.minuter))} minuter, ${dagar}, ${datumspann(plan.forstaPass, plan.sistaPass)} (${kalenderveckor(v1, v2, ' till ')})${info.nivaNamn ? `, på nivån ${info.nivaNamn}` : ''}.`);
   // Det eleven arbetar med: metodens steg i planens ordning, med kalenderveckorna. Pass i följd med samma steg står ihop.
   /** @type {{ steg: number | null, fran: string, till: string }[]} */
   const grupper = [];
@@ -722,18 +759,12 @@ export function dokumentationstext(info, plan, val, o) {
     return `${String(info.steg?.[/** @type {number} */ (g.steg)]).replace(/[.;]\s*$/, '')} (${kalenderveckor(a, b)})`;
   });
   if (innehall.length) rader.push(`Eleven arbetar med: ${innehall.join('; ')}.`);
-  // Uppföljningen efter heter Efter insatsen, så att texten inte säger metodens "Efter sex till åtta veckor" om en kortare
-  // plan (buggjägarna 2026-10-25).
-  const forstaEfter = plan.uppfoljning.find((u) => u.typ === 'efter')?.rad;
-  const tider = plan.uppfoljning.flatMap((u) => {
-    const nar = u.rad === forstaEfter ? 'Efter insatsen' : narIText(info.uppfoljning[u.rad]?.nar ?? '');
-    if (!u.tillfallen.length) return u.typ === 'villkor' ? [] : [nar];
-    return [`${nar}, ${uppraknat(u.tillfallen.map((t) => kalendervecka(isoVecka(t.datum).vecka)))}`];
-  });
+  // Uppföljningens rader, utom villkoren utan datum, som läraren bedömer när det händer.
+  const tider = plan.uppfoljning.filter((u) => u.tillfallen.length || u.typ !== 'villkor').map((u) => uppfoljningensRad(plan, info, u));
   if (tider.length) rader.push(`Uppföljning: ${tider.join('. ')}.`);
   if (o.folj) {
     const m = mittVeckan(plan);
-    rader.push(`Skattning varje vecka, 1 till 5, av hur väl eleven klarar målet på egen hand${m ? `, med avstämning mitt i insatsen ${planveckansNamn(plan, plan.veckor[m - 1]).text}` : ''} och utvärdering efter insatsen.`);
+    rader.push(`${stor(skattningenText('eleven'))}${m ? `, med avstämning mitt i insatsen ${planveckansNamn(plan, plan.veckor[m - 1]).text}` : ''} och utvärdering efter insatsen.`);
   }
   if (o.genomforda !== undefined) rader.push(`Bockade som genomförda: ${o.genomforda} av ${plan.pass.length} pass.`);
   rader.push(`Metoden: ${info.adress}`);
@@ -770,7 +801,7 @@ export const GRUPPEN = 'grupp';
 export function rensaFoljd(f) {
   const obj = (x) => (x && typeof x === 'object' && !Array.isArray(x) ? x : {});
   const lista = (x) => (Array.isArray(x) ? x : []);
-  const text = (x, max) => (typeof x === 'string' ? x.replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max) : '');
+  const text = rentText;
   const id = (x) => typeof x === 'string' && /^[a-z0-9]{1,12}$/i.test(x);
   const steg = (x) => Number.isInteger(x) && x >= 1 && x <= 5;
   const per = (x, fn) => Object.fromEntries(Object.entries(obj(x)).flatMap(([k, v]) => { const ut = fn(k, v); return ut === undefined ? [] : [[k, ut]]; }));
@@ -781,7 +812,7 @@ export function rensaFoljd(f) {
     const b = obj(x), not = text(b.not, 200);
     return tillatna.includes(b.beslut) || not ? { ...(tillatna.includes(b.beslut) ? { beslut: b.beslut } : {}), ...(not ? { not } : {}) } : undefined;
   };
-  const avstamning = beslut(g.avstamning, ['fortsatt', 'justera']), utvardering = beslut(g.utvardering, ['avsluta', 'forlang', 'byt']);
+  const avstamning = beslut(g.avstamning, BESLUTEN.avstamning), utvardering = beslut(g.utvardering, BESLUTEN.utvardering);
   return {
     gjorda: [...new Set(lista(g.gjorda).filter(arDatum))].sort(),
     elever,
@@ -832,7 +863,7 @@ export function sammanstallning(plan, f, idag) {
   const vem = lista.length ? [...lista, ...(gruppSkattad ? [{ id: GRUPPEN, namn: 'Gruppen' }] : [])] : [{ id: GRUPPEN, namn: 'Gruppen' }];
   const narvaro = !!f.narvaro && lista.length > 0;
   const veckor = plan.veckor.map((v) => {
-    const pass = v.pass.map((n) => plan.pass[n - 1]);
+    const pass = veckansPass(plan, v);
     return {
       // innehall är veckans nummer i planen, som veckans rubrik (planvecka), också när planen börjar på ett senare steg.
       nr: v.nr, mandag: v.mandag, vecka: v.vecka.vecka, innehall: planvecka(plan, v), igen: v.igen, gang: gangen(plan, v), pass: pass.map((p) => ({ nr: p.nr, dag: passetsDag(p), datum: p.datum, gjort: gjort(p) })),
@@ -867,7 +898,33 @@ export function sammanstallning(plan, f, idag) {
 
 /** Riktningen från första till senaste skattningen: upp, samma eller ned, och null med färre än två. @param {{ forsta: { varde: number } | null, senaste: { varde: number } | null, skattningar: unknown[] }} e */
 export const riktning = (e) => (e.skattningar.length < 2 ? null : e.senaste.varde > e.forsta.varde ? 'upp' : e.senaste.varde < e.forsta.varde ? 'ned' : 'samma');
+const RIKTNING = { upp: 'framåt', samma: 'som förut', ned: 'bakåt' };
+/** Riktningen i ord, lika på sidan och i pdf:en: "2 till 3, framåt", "3, en skattning" eller "Inte skattad än". @param {Parameters<typeof riktning>[0]} e */
+export const riktningText = (e) => { const r = riktning(e); return r ? `${e.forsta?.varde} till ${e.senaste?.varde}, ${RIKTNING[r]}` : e.senaste ? `${e.senaste.varde}, en skattning` : 'Inte skattad än'; };
 export const BESLUT = Object.freeze({ fortsatt: 'Fortsätt som planerat', justera: 'Justera insatsen', avsluta: 'Avsluta insatsen', forlang: 'Förläng insatsen', byt: 'Byt insats' });
+/** Besluten att välja mellan, mitt i insatsen och efter den. */
+export const BESLUTEN = Object.freeze({ avstamning: Object.freeze(['fortsatt', 'justera']), utvardering: Object.freeze(['avsluta', 'forlang', 'byt']) });
+/** Beslutet och lärarens mening, var för sig och med punkt: "Fortsätt som planerat. Gruppen behöver mer tid." En mening utan beslut kommer med (Codex 2026-10-24). @param {{ beslut?: string, not?: string }} b */
+export const beslutText = (b) => [b.beslut ? BESLUT[b.beslut] ?? b.beslut : '', b.not ?? ''].map(utanPunkt).filter(Boolean).map((x) => `${x}.`).join(' ');
+/**
+ * Passen som läraren har bockat, i en mening, lika på sidan, i pdf:en och i texten som kopieras: de bockade bland passen som
+ * har varit, så att ett pass som är bockat i förväg inte räknas (buggjakten 2026-10-24), och efter insatsen alla.
+ * @param {{ planerade: number, gjorda: number, varit: number, gjordaVarit: number, slut: boolean }} s
+ */
+export function passensLage(s) {
+  if (!s.varit) return `Inget pass har varit än. Planen har ${s.planerade} pass.`;
+  if (!s.gjorda) return `Inga pass är bockade än. Planen har ${s.planerade} pass.`;
+  if (s.slut) return `${s.gjorda} av ${s.planerade} pass är bockade som genomförda.`;
+  return `${s.gjordaVarit} av de ${s.varit} pass som har varit är bockade. Planen har ${s.planerade} pass.`;
+}
+/** Elevens närvaro i en mening: "Var med i 5 av 6 bockade pass." @param {{ narvaro: number | null }} e @param {{ gjorda: number }} s */
+export const narvaronText = (e, s) => `Var med i ${e.narvaro} av ${s.gjorda} bockade pass.`;
+/** Ett resultat i metodens uppföljning: "Före insatsen, v. 45: 4 av 8". @param {{ uppfoljning: { nar: string }[] }} info @param {{ rad: number, datum: string, varde: string }} t */
+export const resultatText = (info, t) => `${info.uppfoljning[t.rad]?.nar ?? ''}, ${kalendervecka(isoVecka(t.datum).vecka)}: ${utanPunkt(t.varde)}`;
+/** Veckorna där läraren har skattat hur veckan gick. @template {{ skattning?: number }} T @param {{ veckor: T[] }} s @returns {T[]} */
+export const skattadeVeckor = (s) => s.veckor.filter((v) => v.skattning);
+/** En elevs skattningar vecka för vecka, med ett tomt värde för en vecka utan, till diagrammen. @param {{ veckor: { nr: number }[] }} s @param {{ skattningar: { nr: number, varde: number }[] }} e */
+export const elevensVarden = (s, e) => s.veckor.map((v) => e.skattningar.find((x) => x.nr === v.nr)?.varde);
 /**
  * Uppföljningens tillfällen med datum, med sin nyckel för elevernas resultat: radens nummer och tillfällets datum, som
  * "2-2026-12-14". Ett resultat hör till dagen det gällde, så att det står kvar på den dagen när planen ändras efteråt
@@ -886,11 +943,20 @@ export function elevensResultat(plan, resultat) {
     const m = /^(\d+)-(\d{4}-\d{2}-\d{2})$/.exec(nyckel);
     const u = m && plan.uppfoljning.find((x) => x.rad === Number(m[1]));
     return m && u && typeof varde === 'string' && varde.trim() ? [{ nyckel, rad: u.rad, typ: u.typ, datum: m[2], varde: varde.trim() }] : [];
-  }).sort((a, b) => (a.datum < b.datum ? -1 : a.datum > b.datum ? 1 : a.rad - b.rad));
+  }).sort((a, b) => efterDatum(a, b) || a.rad - b.rad);
 }
-const decimal = (n) => String(n).replace('.', ',');
-const stor = (s) => s.charAt(0).toLocaleUpperCase('sv') + s.slice(1);
 const medel = (x) => (x.length ? Math.round((x.reduce((a, b) => a + b, 0) / x.length) * 10) / 10 : null);
+// Skattningarna vecka för vecka i en text, "vecka 1 (v. 45): 2, vecka 2 (v. 46): 3", med veckornas namn ur roten.
+const skattningarna = (s, e) => e.skattningar.map((x) => `${veckansNamn(s.veckor[x.nr - 1]).text}: ${x.varde}`).join(', ');
+
+// ---------- Diagrammet ----------
+// Staplarna vecka för vecka ritas lika på sidan och i pdf:en: stapeln mitt i veckans fack, och passens prickar under den
+// med sju punkter mellan.
+
+/** Stapelns vänsterkant i veckans fack. @param {number} x0 diagrammets vänsterkant @param {number} i veckans plats @param {number} steg fackets bredd @param {number} b stapelns bredd */
+export const stapelnsKant = (x0, i, steg, b) => x0 + i * steg + (steg - b) / 2;
+/** Veckans pass som prickar under stapeln: mitten för varje pass, och hur det gick. @template T @param {number} bx stapelns vänsterkant @param {number} b stapelns bredd @param {T[]} pass veckans pass @returns {{ x: number, slag: T }[]} */
+export const prickarna = (bx, b, pass) => pass.map((slag, j) => ({ x: bx + b / 2 + (j - (pass.length - 1) / 2) * 7, slag }));
 
 /**
  * Sammanställningen som text till dokumentationen, utan elevernas namn: målet, passen som är bockade, skattningarna som
@@ -901,40 +967,35 @@ const medel = (x) => (x.length ? Math.round((x.reduce((a, b) => a + b, 0) / x.le
  */
 export function sammanstallningstext(info, plan, s) {
   const rader = [];
-  const samma = plan.forstaPass && plan.sistaPass && plan.forstaPass.slice(0, 4) === plan.sistaPass.slice(0, 4);
-  if (plan.forstaPass && plan.sistaPass) rader.push(`Sammanställning: ${info.titel}, ${samma ? dagOchManad(plan.forstaPass) : datumText(plan.forstaPass)} till ${datumText(plan.sistaPass)}.`);
+  if (plan.forstaPass && plan.sistaPass) rader.push(`Sammanställning: ${info.titel}, ${datumspann(plan.forstaPass, plan.sistaPass)}.`);
   if (info.mal) rader.push(`Mål: ${malText(info.mal)}`);
   const bort = [s.installda ? `${s.installda} pass ställdes in` : '', s.helgdagar ? `${s.helgdagar} föll på ${s.helgdagar === 1 ? 'en helgdag' : 'helgdagar'}` : ''].filter(Boolean);
-  const pass = !s.gjorda ? `${s.planerade} i planen.` : s.slut ? `${s.gjorda} av ${s.planerade} är bockade som genomförda.` : !s.varit ? `${s.planerade} i planen. Inget pass har varit än.` :`${s.gjordaVarit} av de ${s.varit} som har varit är bockade som genomförda, av ${s.planerade} i planen.`;
-  rader.push(`Pass: ${pass}${bort.length ? ` ${stor(uppraknat(bort))}.` : ''}`);
+  rader.push(`Pass: ${passensLage(s)}${bort.length ? ` ${stor(uppraknat(bort))}.` : ''}`);
   const elever = s.elever.filter((e) => e.id !== GRUPPEN);
   const skattade = (s.grupp ? s.elever : elever).filter((e) => e.skattningar.length);
   if (skattade.length) {
     if (s.grupp) {
       const e = skattade[0];
-      rader.push(`Skattning varje vecka, 1 till 5, av hur väl gruppen klarar målet på egen hand: ${e.skattningar.map((x) => `${veckansNamn(s.veckor[x.nr - 1]).text}: ${x.varde}`).join(', ')}.`);
+      rader.push(`${stor(skattningenText('gruppen'))}: ${skattningarna(s, e)}.`);
     } else {
       const fore = medel(skattade.map((e) => e.forsta.varde)), sedan = medel(skattade.map((e) => e.senaste.varde));
       const upp = skattade.filter((e) => riktning(e) === 'upp').length;
-      rader.push(`Skattning varje vecka, 1 till 5, av hur väl eleverna klarar målet på egen hand: medel ${decimal(fore)} vid första skattningen och ${decimal(sedan)} vid den senaste. ${upp} av ${skattade.length} elever har gått framåt.`);
+      rader.push(`${stor(skattningenText('eleverna'))}: medel ${decimal(fore)} vid första skattningen och ${decimal(sedan)} vid den senaste. ${upp} av ${skattade.length} elever har gått framåt.`);
     }
   }
   const gruppen = s.grupp ? null : s.elever.find((e) => e.id === GRUPPEN && e.skattningar.length);
-  if (gruppen) rader.push(`Gruppen skattades också: ${gruppen.skattningar.map((x) => `${veckansNamn(s.veckor[x.nr - 1]).text}: ${x.varde}`).join(', ')}.`);
+  if (gruppen) rader.push(`Gruppen skattades också: ${skattningarna(s, gruppen)}.`);
   if (s.narvaro && s.gjorda) {
     const borta = elever.filter((e) => e.narvaro < s.gjorda);
     rader.push(borta.length ? `Närvaro i de bockade passen: ${elever.length - borta.length} av ${elever.length} elever var med i alla; ${borta.length === 1 ? 'en elev' : `${borta.length} elever`} missade ${uppraknat(borta.map((e) => String(s.gjorda - e.narvaro)))} pass.` : `Närvaro i de bockade passen: alla elever var med i alla.`);
   }
-  const veckorna = s.veckor.filter((v) => v.skattning);
+  const veckorna = skattadeVeckor(s);
   if (veckorna.length) rader.push(`Hur veckorna gick, 1 till 5: ${veckorna.map((v) => `${veckansNamn(v).text}: ${v.skattning}`).join(', ')}. Medel ${decimal(s.veckomedel)}.`);
   const noter = s.veckor.filter((v) => v.not);
-  if (noter.length) rader.push(`Anteckningar: ${noter.map((v) => `${veckansNamn(v).text}: ${v.not.replace(/[.\s]+$/, '')}`).join('. ')}.`);
-  // Beslutet och meningen, var för sig: en mening utan beslut kommer med (Codex 2026-10-24).
-  const beslutet = (b) => [b.beslut ? BESLUT[b.beslut] ?? b.beslut : '', b.not ?? ''].map((x) => x.replace(/[.\s]+$/, '')).filter(Boolean).map((x) => `${x}.`).join(' ');
-  if (s.avstamning?.beslut || s.avstamning?.not) rader.push(`Avstämning mitt i insatsen${s.mitt ? `, ${veckansNamn(s.veckor[s.mitt - 1]).text}` : ''}: ${beslutet(s.avstamning)}`);
-  if (s.utvardering?.beslut || s.utvardering?.not) rader.push(`Utvärdering efter insatsen: ${beslutet(s.utvardering)}`);
-  const efterRad = plan.uppfoljning.find((u) => u.typ === 'efter')?.rad;
-  const tider = plan.uppfoljning.filter((u) => u.tillfallen.length).map((u) => `${u.rad === efterRad ? 'Efter insatsen' : narIText(info.uppfoljning[u.rad]?.nar ?? '')}, ${uppraknat(u.tillfallen.map((t) => kalendervecka(isoVecka(t.datum).vecka)))}`);
+  if (noter.length) rader.push(`Anteckningar: ${noter.map((v) => `${veckansNamn(v).text}: ${utanPunkt(v.not)}`).join('. ')}.`);
+  if (s.avstamning?.beslut || s.avstamning?.not) rader.push(`Avstämning mitt i insatsen${s.mitt ? `, ${veckansNamn(s.veckor[s.mitt - 1]).text}` : ''}: ${beslutText(s.avstamning)}`);
+  if (s.utvardering?.beslut || s.utvardering?.not) rader.push(`Utvärdering efter insatsen: ${beslutText(s.utvardering)}`);
+  const tider = uppfoljningensRader(plan, info);
   if (tider.length) rader.push(`Uppföljning: ${tider.join('. ')}.`);
   return utanNamn(rader.join('\n'), elever);
 }
@@ -952,9 +1013,9 @@ export function elevtext(info, plan, s, id) {
   if (!e) return '';
   const delar = [];
   if (info.mal) delar.push(`Mål: ${malText(info.mal)}`);
-  if (e.narvaro !== null && s.gjorda) delar.push(`Var med i ${e.narvaro} av ${s.gjorda} bockade pass.`);
-  if (e.skattningar.length) delar.push(`Skattning, 1 till 5, av hur väl eleven klarar målet på egen hand: ${e.skattningar.map((x) => `${veckansNamn(s.veckor[x.nr - 1]).text}: ${x.varde}`).join(', ')}.`);
-  for (const t of elevensResultat(plan, e.resultat)) delar.push(`${info.uppfoljning[t.rad]?.nar ?? ''}, ${kalendervecka(isoVecka(t.datum).vecka)}: ${t.varde.replace(/[.\s]+$/, '')}.`);
+  if (e.narvaro !== null && s.gjorda) delar.push(narvaronText(e, s));
+  if (e.skattningar.length) delar.push(`${stor(skattningenText('eleven', false))}: ${skattningarna(s, e)}.`);
+  for (const t of elevensResultat(plan, e.resultat)) delar.push(`${resultatText(info, t)}.`);
   return utanNamn(delar.join(' '), s.elever.filter((x) => x.id !== GRUPPEN));
 }
 

@@ -1,5 +1,11 @@
 # Ändringar i standarden
 
+## 0.13.0, 2026-10-25
+
+- `text.js`, ny: små textverktyg och talen, en rot för varje (sajtens K-509; Niclas: "Centralisera och till en rot ... Inte ha kopierade koder på olika ställen"): `stor`, `liten`, `mening`, `utanPunkt`, `decimal`, `tvasiffrigt`, `esc`, `skyddaRegex`, `rentText`, `forstaLedet`, `kortnamn`, och talen `talAv` (också "en" och "tjugofem"), `talText`, `talIRegex`, `allaAntal` och `ORDNINGSTAL`. Talen i ord stod förut i sex tabeller i standarden och sajten; `index.js` läser tiden, perioden och gruppen med dem, och `talText` flyttade hit från `plan.js`.
+- `plan.js`, rötterna för det som planens sida, pdf:erna och texterna visar: `veckorI`, `efterDatum`, `iDatumordning`, `veckansPass`, `minuterAv`, `klockslag`, `plusMinuter`, `minuterISpann`, `veckodagKort`, `dagKort`, `datumspann`, `uppfoljningensRad`, `uppfoljningensRader`, `skattningenText`, `BESLUTEN`, `beslutText`, `passensLage`, `narvaronText`, `resultatText`, `elevensVarden`, `skattadeVeckor`, `riktningText`, `stapelnsKant` och `prickarna`. `veckansDagar` tar allt som har passen. Gången i ord ("en tredje gång") kommer ur ordningstalen, så att den sjätte gången heter "en sjätte gång". Sammanställningens text säger passen som sidan och pdf:en ("3 av de 8 pass som har varit är bockade. Planen har 18 pass."). `PLANERA` är 0.2.6.
+- `saker.js`: `sakspann`, spannen av saker med nummer ("Bildserie 2–6"), som planens sida och bygget läser lika.
+
 ## 0.12.0, 2026-10-25
 
 - `plan.js`, veckornas namn på ett ställe (sajtens K-508; Niclas: "försök alltid härleda en sak som ex v. nr eller datum till EN funktion"): `kalendervecka` ("v. 50"), `kalenderveckor` ("v. 45–46", "v. 52 till v. 1"), `kalenderveckaUtskriven` ("kalendervecka 50", för skärmläsare), `planveckan` ("6", "3 igen", "3 en tredje gång"), `planveckanKort` (talet och "igen" eller "3:e"), `gangen` (vilken gång veckan tas), `metodveckan` ("vecka 3 i metoden"), `veckansNamn` och `planveckansNamn` (namnen och texten "vecka 6 (v. 50)"). Sammanställningens veckor har `gang`. Sammanställningens text, elevens rad, texten till åtgärdsprogrammet och kalenderfilen skriver vecka 6 (v. 50) för veckan i planen och v. 50 för en kalendervecka. `PLANERA` är 0.2.4.

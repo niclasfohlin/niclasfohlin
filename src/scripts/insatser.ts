@@ -3,14 +3,13 @@
 // (src/scripts/insatser-lagring.ts): på metodens sida raden under undertiteln med veckan i planen och nästa pass, och i
 // metodbanken en rad per plan, den som har nästa pass först, och planerna som är slut hopfällda sist. Utan sparade planer
 // syns ingenting.
-import { idagLokalt, iTurOrdning, lageAv, lasPlaner, nastaPassAv, planensNamn, raknaPagaende, skiljNamnen, type SparadPlan } from './insatser-lagring';
+import { esc, liten } from '../lib/standard/index.js';
+import { idagLokalt, iTurOrdning, lageAv, lasPlaner, nastaPassAv, planensAdress, planensNamn, raknaPagaende, skiljNamnen, type SparadPlan } from './insatser-lagring';
 
 const idag = idagLokalt();
 const { planer } = lasPlaner();
 // En plan som pågår säger det till statistiken, en gång i veckan (K-504).
 raknaPagaende(planer, idag);
-const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
-const adress = (p: SparadPlan, vecka?: number) => `/stodundervisning/${encodeURIComponent(p.metod)}/planera#${p.val}&p=${encodeURIComponent(p.id)}${vecka ? `&v=${vecka}` : ''}`;
 const FARG: Record<string, string> = { Läsning: 'var(--farg-lasning)', Skrivning: 'var(--farg-skrivning)', Socialt: 'var(--farg-socialt)', Matematik: 'var(--farg-accent)' };
 
 const din = document.getElementById('pl-din');
@@ -23,7 +22,7 @@ if (din) {
     const lage = lageAv(p, idag);
     // Etiketten står med versaler, och gruppens namn efter den som läraren skrev det (buggjakten 2026-10-24).
     const etikett = egna.length > 1 ? `Dina insatser · ${egna.length} grupper` : 'Din insats';
-    din.innerHTML = `<p><span class="pl-din-etikett">${esc(etikett)}${egna.length > 1 ? '' : ` · <span class="pl-din-namn">${esc(planensNamn(p))}</span>`}</span>${esc(egna.length > 1 ? `${planensNamn(p)}: ${lage.text.charAt(0).toLocaleLowerCase('sv')}${lage.text.slice(1)}` : lage.text)}</p><a href="${esc(adress(p, lage.vecka))}" data-goatcounter-click="planera:${esc(p.metod)}:din-insats" data-goatcounter-title="${esc(din.dataset.titel ?? p.titel)}: Din insats på metodens sida">${egna.length > 1 ? 'Planerna' : 'Veckan i planen'}</a>`;
+    din.innerHTML = `<p><span class="pl-din-etikett">${esc(etikett)}${egna.length > 1 ? '' : ` · <span class="pl-din-namn">${esc(planensNamn(p))}</span>`}</span>${esc(egna.length > 1 ? `${planensNamn(p)}: ${liten(lage.text)}` : lage.text)}</p><a href="${esc(planensAdress(p, lage.vecka))}" data-goatcounter-click="planera:${esc(p.metod)}:din-insats" data-goatcounter-title="${esc(din.dataset.titel ?? p.titel)}: Din insats på metodens sida">${egna.length > 1 ? 'Planerna' : 'Veckan i planen'}</a>`;
     din.hidden = false;
   }
 }
@@ -35,7 +34,7 @@ if (lista && planer.length) {
     const lage = lageAv(p, idag);
     const gjorda = p.folj ? p.bockade ?? 0 : 0;
     const om = [lage.text, gjorda ? `${gjorda} pass bockade` : ''].filter(Boolean).join(' · ');
-    return `<li style="--omr:${FARG[p.omrade ?? ''] ?? 'var(--farg-accent)'}"><a href="${esc(adress(p, lage.vecka))}" data-goatcounter-click="insatser:metodbanken" data-goatcounter-title="Metodbanken: en plan under Dina insatser"><span class="pl-metod">${esc(p.titel)} · ${esc(namnen.get(p.id) ?? planensNamn(p))}</span><span class="pl-om">${esc(om)}</span><span class="pl-pil" aria-hidden="true">${nastaPassAv(p, idag) === '9999' ? 'Efter ›' : 'Veckan ›'}</span></a></li>`;
+    return `<li style="--omr:${FARG[p.omrade ?? ''] ?? 'var(--farg-accent)'}"><a href="${esc(planensAdress(p, lage.vecka))}" data-goatcounter-click="insatser:metodbanken" data-goatcounter-title="Metodbanken: en plan under Dina insatser"><span class="pl-metod">${esc(p.titel)} · ${esc(namnen.get(p.id) ?? planensNamn(p))}</span><span class="pl-om">${esc(om)}</span><span class="pl-pil" aria-hidden="true">${nastaPassAv(p, idag) === '9999' ? 'Efter ›' : 'Veckan ›'}</span></a></li>`;
   };
   const ordnade = [...planer].sort(iTurOrdning(idag));
   // Två planer med samma namn för samma metod skiljs åt med ett nummer.
