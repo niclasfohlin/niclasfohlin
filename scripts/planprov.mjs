@@ -1199,22 +1199,21 @@ try {
   for (const b of [320, 360, 390]) { await f.bredd(b); await vanta(150); sant(`veckan rullar inte i sidled i ${b} punkter`, !(await rullar(f))); }
   await f.bild('2-bara-planen-telefon');
   await f.dator();
-  // Upprepa veckan och ta bort upprepningen; lov i veckan och tillbaka. Allt står under Ändra veckan.
-  const andraVeckan = () => f.kor(`(() => { const d = document.querySelector('#pl-veckan [data-ruta="andra-veckan"]'); if (d) d.open = true; return !!d; })()`);
-  await andraVeckan();
-  sant('ingen lovknapp i en vecka som har börjat', !(await f.kor(`!!document.querySelector('#pl-veckan [data-gor="lov"]')`)));
+  // Upprepa veckan och ta bort upprepningen under Efter veckan, Flytta eller ställ in ett pass under Veckans pass, och lov
+  // under Ändra planen: inget står bakom en rad som fälls ut, och Avsluta insatsen står i lägesraden överst (Niclas
+  // 2026-10-25: knappen låg "bakom en rubrik som var bakom en pil").
+  sant('veckans knappar står synliga, och Avsluta insatsen i lägesraden överst', !(await f.kor(`!!document.querySelector('#pl-veckan [data-ruta="andra-veckan"], #pl-veckan [data-gor="lov"], #pl-veckan [data-gor="avsluta"]')`)) && !!(await f.kor(`!!document.querySelector('#pl-passen [data-gor="flytta"]') && !!document.querySelector('#pl-veckan .pl-block [data-gor="upprepa"]')`)) && (await f.kor(`document.querySelector('#pl-lage .pl-status')?.textContent`)) === 'Pågående' && !!(await f.kor(`!!document.querySelector('#pl-lage [data-gor="avsluta"]')`)), await f.text('#pl-lage'));
   await f.tryck('[data-gor="upprepa"]');
   sant('upprepad vecka ger 21 pass', (await f.text('#pl-summa-text'))?.includes('21 pass') && (await f.text('#pl-veckan-rubrik')) === 'Vecka 3 igen i planen', [await f.text('#pl-summa-text'), await f.text('#pl-veckan-rubrik')]);
   sant('upprepningen kan ångras från beskedet', (await f.text('#pl-toast'))?.includes('Ångra'));
   sant('texten till åtgärdsprogrammet följer den upprepade veckan', (await apText())?.includes('Omfattning: 21 pass om 30 minuter') && (await apText())?.includes('Slå ihop flera ledtrådar (v. 47–48); Stämmer det? och Det som menas (v. 49–50)') && (await apText())?.includes('till 18 december 2026'), await apText());
-  await andraVeckan();
   await f.tryck('[data-gor="ta-bort-upprepning"]');
   sant('upprepningen tas bort', (await f.text('#pl-summa-text'))?.includes('18 pass'));
   // Lov i vecka 4, som inte har börjat; dit med veckorna överst.
   await f.tryck('#pl-veckan .pl-remsa [data-vy="4"]');
   sant('veckorna överst visar vecka 4', (await f.text('#pl-veckan-rubrik')) === 'Vecka 4 i planen' && (await f.kor(`document.querySelector('#pl-veckan .pl-remsa [data-vy="4"]').getAttribute('aria-pressed')`)) === 'true', await f.text('#pl-veckan-rubrik'));
-  await andraVeckan();
-  await f.tryck('[data-gor="lov"]');
+  await f.kor(`(() => { document.getElementById('pl-andra').open = true; document.querySelector('#pl-lovveckor [data-lovvecka="2026-48"]').click(); return true; })()`);
+  await vanta(300);
   sant('lov flyttar slutet en vecka', (await f.text('#pl-summa-text'))?.includes('till 18 december'), await f.text('#pl-summa-text'));
   sant('texten till åtgärdsprogrammet följer lovet', (await apText())?.includes('18 pass om 30 minuter, måndag, onsdag och fredag, 2 november till 18 december 2026 (v. 45 till v. 51)') && (await apText())?.includes('Stämmer det? och Det som menas (v. 49–50)'), await apText());
   sant('lovets rad står i planen', (await f.text('#pl-veckor .pl-lovvecka'))?.includes('v. 48'), await f.text('#pl-veckor .pl-lovvecka'));
@@ -1224,7 +1223,6 @@ try {
   await f.tryck('#pl-veckan [data-vy="nu"]');
   sant('tillbaka till den här veckan', (await f.text('#pl-veckan-rubrik')) === 'Vecka 3 i planen', await f.text('#pl-veckan-rubrik'));
   // Flytta pass 8 till torsdag och ställ in pass 9.
-  await andraVeckan();
   await f.tryck('[data-gor="flytta"]');
   await f.kor(`(() => { document.getElementById('pl-flytta-pass').value = '2026-11-18'; document.getElementById('pl-flytta-dag').value = '2026-11-19'; return true; })()`);
   await f.tryck('[data-gor="flytta-klar"]');
@@ -1495,7 +1493,7 @@ try {
   await h.kor(`localStorage.setItem('insatser', ${JSON.stringify(JSON.stringify(slutlagrat))})`);
   await h.oppna(PLAN);
   sant('efter insatsen: sidan visar Efter insatsen', (await h.text('#pl-veckan-rubrik')) === 'Efter insatsen', await h.text('#pl-veckan-rubrik'));
-  sant('efter insatsen: passen är slut, och planen säger när den avslutas av sig själv', (await h.text('#pl-veckan .pl-nasta .pl-etikett')) === 'Efter sista passet' && (await h.text('.pl-nar')) === 'Sista passet var fredag 11 december. Planen avslutas av sig själv måndag 28 december, om du inte avslutar den före.' && !(await h.kor(`!!document.querySelector('#pl-veckan [data-fil="lathund"]')`)) && (await h.kor(`document.getElementById('pl-lage').hidden`)), await h.text('.pl-nar'));
+  sant('efter insatsen: passen är slut, och planen säger när den avslutas av sig själv', (await h.text('#pl-veckan .pl-nasta .pl-etikett')) === 'Efter sista passet' && (await h.text('.pl-nar')) === 'Sista passet var fredag 11 december. Planen avslutas av sig själv måndag 28 december, om du inte avslutar den före.' && !(await h.kor(`!!document.querySelector('#pl-veckan [data-fil="lathund"]')`)) && (await h.kor(`document.querySelector('#pl-lage .pl-status')?.textContent`)) === 'Pågående' && (await h.text('#pl-lage'))?.includes('Planen avslutas av sig själv måndag 28 december') && !!(await h.kor(`!!document.querySelector('#pl-lage [data-vy="efter"]')`)), [await h.text('.pl-nar'), await h.text('#pl-lage')]);
   sant('efter insatsen: kartläggningens text efter leder till planens nivå', (await h.kor(`[...document.querySelectorAll('#pl-veckan .pl-uppf a')].map((a) => a.getAttribute('href')).join()`))?.includes('/stodundervisning/textsamtal-i-grupp/mellan-kartlaggning-efter') && !lankFel(await sakLankar(h)).length, await h.kor(`[...document.querySelectorAll('#pl-veckan .pl-uppf a')].map((a) => a.getAttribute('href')).join()`));
   sant('efter insatsen: metodens uppföljning efter, ett fält per elev', (await h.kor(`document.querySelectorAll('#pl-veckan [data-resultat^="2-2026-12-14|"]').length`)) === 3);
   sant('efter insatsen: utvärderingen med målet, varje elevs riktning och resultaten före och efter', (await h.text('.pl-stam h3')) === 'Utvärdering efter insatsen' && (await h.text('.pl-stam .pl-maltext'))?.includes('Kunna läsa mellan raderna') && (await h.text('.pl-stam .pl-riktningar'))?.includes('1 till 3, framåt') && (await h.text('.pl-stam .pl-riktningar'))?.includes('Före 2 av 8, efter 4 av 8'), await h.text('.pl-stam'));
@@ -1509,10 +1507,10 @@ try {
   // knapp en gång till öppnar insatsen igen (Niclas 2026-10-25: "Avsluta ... gör inget synligt ... Vill ju ha någon fanfar
   // nästan").
   await h.tryck('[data-beslut="utvardering|avsluta"]');
-  sant('avsluta i utvärderingen: rutan med bocken, läget överst och planen grå', !!(await h.kor(`!!document.querySelector('.pl-stam .pl-avslutad.ny .pl-avslutad-bock')`)) && (await h.text('#pl-lage'))?.startsWith('Avslutad Insatsen är avslutad. Sista passet var fredag 11 december.') && (await h.kor(`document.getElementById('plan').classList.contains('pl-avslutad-plan')`)) && (await h.text('#pl-toast'))?.startsWith('Insatsen är avslutad.') && (await h.text('#pl-veckan .pl-nasta .pl-etikett')) === 'Insatsen är avslutad', [await h.text('#pl-lage'), await h.text('#pl-toast')]);
+  sant('avsluta i utvärderingen: rutan med bocken, läget överst och planen grå', !!(await h.kor(`!!document.querySelector('.pl-stam .pl-avslutad.ny .pl-avslutad-bock') && !!document.querySelector('#pl-lage.ny .pl-avslutad-bock')`)) && (await h.text('#pl-lage'))?.startsWith('Avslutad Insatsen är avslutad. Sista passet var fredag 11 december.') && (await h.kor(`document.getElementById('plan').classList.contains('pl-avslutad-plan')`)) && (await h.text('#pl-toast'))?.startsWith('Insatsen är avslutad.') && (await h.text('#pl-veckan .pl-nasta .pl-etikett')) === 'Insatsen är avslutad', [await h.text('#pl-lage'), await h.text('#pl-toast')]);
   await h.bredd(390); await vanta(1200); await h.bild('8b-avslutad-telefon'); await h.dator();
   await h.tryck('[data-beslut="utvardering|avsluta"]');
-  sant('avsluta i utvärderingen: en gång till öppnar insatsen igen', !(await h.kor(`document.getElementById('plan').classList.contains('pl-avslutad-plan')`)) && (await h.kor(`document.getElementById('pl-lage').hidden`)) && (await h.text('#pl-toast'))?.startsWith('Avslutet är ångrat'), await h.text('#pl-toast'));
+  sant('avsluta i utvärderingen: en gång till öppnar insatsen igen', !(await h.kor(`document.getElementById('plan').classList.contains('pl-avslutad-plan')`)) && (await h.kor(`document.querySelector('#pl-lage .pl-status')?.textContent`)) === 'Pågående' && (await h.text('#pl-toast'))?.startsWith('Avslutet är ångrat'), await h.text('#pl-toast'));
   await h.tryck('[data-beslut="utvardering|forlang"]');
   sant('utvärderingens beslut sparas och frågar hur länge', (await h.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.utvardering?.beslut`)) === 'forlang' && !!(await h.kor(`!!document.querySelector('.pl-forlang [data-forlang="2"]')`)), await h.text('.pl-stam'));
   sant('utvärderingen står under Besluten', (await h.text('#pl-samman'))?.includes('Förläng insatsen'));
@@ -1676,10 +1674,10 @@ try {
   // 2026-10-25).
   await sj.tryck('[data-beslut="utvardering|avsluta"]');
   await sj.tryck('[data-beslut="utvardering|avsluta"]');
-  sant('ett beslut som tas bort lämnar planen avslutad av sig själv', (await sj.text('#pl-toast'))?.startsWith('Beslutet är borttaget. Planen är avslutad av sig själv') && !(await sj.kor(`document.getElementById('pl-lage').hidden`)) && !(await sj.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.oppen`)), await sj.text('#pl-toast'));
+  sant('ett beslut som tas bort lämnar planen avslutad av sig själv', (await sj.text('#pl-toast'))?.startsWith('Beslutet är borttaget. Planen är avslutad av sig själv') && (await sj.kor(`document.querySelector('#pl-lage .pl-status')?.textContent`)) === 'Avslutad' && !(await sj.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.oppen`)), await sj.text('#pl-toast'));
   await sj.tryck('#pl-lage [data-gor="angra-avslut"]');
   await vanta(300);
-  sant('Ångra avslutet öppnar planen igen för det sista passet', (await sj.kor(`document.getElementById('pl-lage').hidden`)) && (await sj.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.oppen`)) === '2026-12-11' && (await sj.text('#pl-toast'))?.startsWith('Avslutet är ångrat, och insatsen pågår tills du avslutar den.') && (await sj.text('.pl-nar')) === 'Sista passet var fredag 11 december. Insatsen pågår tills du avslutar den.', [await sj.text('#pl-toast'), await sj.text('.pl-nar'), await sj.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.oppen`)]);
+  sant('Ångra avslutet öppnar planen igen för det sista passet', (await sj.kor(`document.querySelector('#pl-lage .pl-status')?.textContent`)) === 'Pågående' && (await sj.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.oppen`)) === '2026-12-11' && (await sj.text('#pl-toast'))?.startsWith('Avslutet är ångrat, och insatsen pågår tills du avslutar den.') && (await sj.text('.pl-nar')) === 'Sista passet var fredag 11 december. Insatsen pågår tills du avslutar den.', [await sj.text('#pl-toast'), await sj.text('.pl-nar'), await sj.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.oppen`)]);
   sant('avslutad av sig själv: inga fel', !sj.undantag.length && !(await sj.kor('window.__fel.length')), sj.undantag);
   sj.stang();
 
@@ -1694,12 +1692,11 @@ try {
   await av.oppna(`${PLAN}#s=2026-11-02&d=135&l=6`);
   await av.tryck('#pl-spara');
   await vanta(200);
-  await av.kor(`(() => { document.querySelector('#pl-veckan [data-ruta="andra-veckan"]').open = true; return true; })()`);
-  await av.tryck('#pl-veckan [data-gor="avsluta"]');
-  sant('avsluta: formuläret väljer dagens pass och säger vad som stryks', (await av.kor(`document.getElementById('pl-avsluta-pass').value`)) === '8' && (await av.text('#pl-avsluta-text')) === 'Insatsen slutar med pass 8, onsdag 18 november. Pass 9 i veckan och vecka 4 till 6 (v. 48–50) stryks ur planen.' && (await av.kor(`[...document.getElementById('pl-avsluta-pass').options].map((o) => o.textContent).join('|')`)) === 'Pass 7, måndag 16 november|Pass 8, onsdag 18 november|Pass 9, fredag 20 november', await av.text('#pl-avsluta'));
+  await av.tryck('#pl-lage [data-gor="avsluta"]');
+  sant('avsluta: formuläret under lägesraden väljer dagens pass och säger vad som stryks', (await av.kor(`document.getElementById('pl-avsluta-pass').value`)) === '8' && (await av.text('#pl-avsluta-text')) === 'Insatsen slutar med pass 8, onsdag 18 november. Pass 9 i veckan och vecka 4 till 6 (v. 48–50) stryks ur planen.' && (await av.kor(`document.querySelectorAll('#pl-avsluta-pass optgroup').length`)) === 6 && (await av.kor(`[...document.querySelectorAll('#pl-avsluta-pass optgroup')][2].label`)) === 'Vecka 3, 16–20 nov' && (await av.text('#pl-lage [data-gor="avsluta-klar"]')) === 'Avsluta efter onsdag 18 november', await av.text('#pl-avsluta'));
   const valjSista = (nr) => av.kor(`(() => { const s = document.getElementById('pl-avsluta-pass'); s.value = '${nr}'; s.dispatchEvent(new Event('change', { bubbles: true })); return true; })()`);
   await valjSista(9);
-  sant('avsluta: texten följer det valda passet', (await av.text('#pl-avsluta-text')) === 'Insatsen slutar med pass 9, fredag 20 november. Vecka 4 till 6 (v. 48–50) stryks ur planen.', await av.text('#pl-avsluta-text'));
+  sant('avsluta: texten följer det valda passet', (await av.text('#pl-avsluta-text')) === 'Insatsen slutar med pass 9, fredag 20 november. Vecka 4 till 6 (v. 48–50) stryks ur planen.' && (await av.text('#pl-lage [data-gor="avsluta-klar"]')) === 'Avsluta efter fredag 20 november', await av.text('#pl-avsluta-text'));
   await valjSista(8);
   await av.tryck('#pl-avsluta [data-anledning]', 'Gruppen har nått målet');
   await av.tryck('#pl-avsluta [data-gor="avsluta-klar"]');
@@ -1707,7 +1704,7 @@ try {
   const avPlan = await av.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0]`);
   sant('avsluta: planen slutar med det valda passet, och anledningen är utvärderingens mening', avPlan?.val.includes('e=8') && avPlan.foljd.utvardering?.beslut === 'avsluta' && avPlan.foljd.utvardering?.not === 'Gruppen har nått målet' && (await av.kor(`[...document.querySelectorAll('#pl-veckan .pl-remsa [data-vy]')].map((b) => b.dataset.vy).join()`)) === 'fore,1,2,3,efter', avPlan);
   sant('avsluta: det strukna står överstruket i veckan, remsan och veckolistan', (await av.kor(`[...document.querySelectorAll('#pl-veckan .pl-passlista li.struket')].map((x) => x.textContent).join('|')`))?.includes('Pass 9 · struket') && (await av.kor(`document.querySelectorAll('#pl-veckan .pl-remsa .struken').length`)) === 3 && (await av.text('#pl-veckor .pl-struken'))?.includes('Vecka 4–6'), await av.text('#pl-veckor .pl-struken'));
-  sant('avsluta: rutan med bocken, läget överst med Ångra avslutet och planen grå', !!(await av.kor(`!!document.querySelector('#pl-veckan .pl-avslutad.ny')`)) && (await av.text('#pl-lage'))?.startsWith('Avslutad Insatsen avslutades i vecka 3 (v. 47), efter 8 av 18 planerade pass. Anledning: Gruppen har nått målet.') && !!(await av.kor(`!!document.querySelector('#pl-lage [data-gor="angra-avslut"]')`)) && (await av.kor(`document.getElementById('plan').classList.contains('pl-avslutad-plan')`)) && (await av.text('#pl-grupper'))?.includes('Avslutad'), [await av.text('#pl-lage'), await av.text('#pl-grupper')]);
+  sant('avsluta: rutan med bocken, läget överst med Ångra avslutet och planen grå', !!(await av.kor(`!!document.querySelector('#pl-lage.ny .pl-avslutad-bock') && !document.querySelector('#pl-veckan .pl-avslutad')`)) && (await av.text('#pl-lage'))?.startsWith('Avslutad Insatsen avslutades i vecka 3 (v. 47), efter 8 av 18 planerade pass. Anledning: Gruppen har nått målet.') && !!(await av.kor(`!!document.querySelector('#pl-lage [data-gor="angra-avslut"]')`)) && (await av.kor(`document.getElementById('plan').classList.contains('pl-avslutad-plan')`)) && (await av.text('#pl-grupper'))?.includes('Avslutad'), [await av.text('#pl-lage'), await av.text('#pl-grupper')]);
   await av.bredd(390); await vanta(1200); await av.bild('13-avslutad-veckan-telefon'); await av.dator();
   const avslutet = 'Insatsen avslutades i vecka 3 (v. 47), efter 8 av 18 planerade pass.';
   const avslutas = 'Insatsen avslutas i vecka 3 (v. 47), efter 8 av 18 planerade pass.';
@@ -1721,7 +1718,7 @@ try {
   await vanta(300);
   const avIcs = (await av.kor('window.__fil'))?.replace(/\r\n /g, '') ?? '';
   sant('avsluta: kalenderfilen har bara passen till och med det sista', /-p8@/.test(avIcs) && !/-p9@/.test(avIcs) && !/-p18@/.test(avIcs), avIcs.slice(0, 400));
-  sant('avsluta: veckan, planens ruta och texten till åtgärdsprogrammet säger avslutet', (await av.text('#pl-veckan'))?.includes(avslutet) && (await av.text('#pl-summa-text'))?.includes(`8 pass om 30 minuter`) && (await av.text('#pl-summa-text'))?.includes(avslutas) && (await av.kor(`document.getElementById('pl-aptext').value`))?.includes(`${avslutas} Anledning: Gruppen har nått målet.`), [await av.text('#pl-summa-text'), await av.kor(`document.getElementById('pl-aptext').value`)]);
+  sant('avsluta: veckan, planens ruta och texten till åtgärdsprogrammet säger avslutet', (await av.text('#pl-lage'))?.includes(avslutet) && (await av.text('#pl-summa-text'))?.includes(`8 pass om 30 minuter`) && (await av.text('#pl-summa-text'))?.includes(avslutas) && (await av.kor(`document.getElementById('pl-aptext').value`))?.includes(`${avslutas} Anledning: Gruppen har nått målet.`), [await av.text('#pl-summa-text'), await av.kor(`document.getElementById('pl-aptext').value`)]);
   // Anledningen ändras under Efter insatsen, och texten till åtgärdsprogrammet följer med direkt (Codex 2026-10-25).
   // Utvärderingen står när läraren följer insatsen.
   await av.kor(`(() => { const c = document.getElementById('pl-folj'); c.checked = true; c.dispatchEvent(new Event('change')); return true; })()`);
@@ -1734,16 +1731,15 @@ try {
   await av.kor(`(() => { document.getElementById('pl-andra').open = true; document.querySelector('#pl-lovveckor [data-lovvecka="2026-47"]').click(); return true; })()`);
   await vanta(300);
   await av.tryck('#pl-veckan .pl-remsa [data-vy="3"]');
-  sant('avsluta: ett lov före slutet flyttar slutet med passen', (await av.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].val`))?.includes('e=8') && (await av.text('#pl-veckan .pl-paminn'))?.startsWith('Insatsen avslutas i vecka 3 (v. 48), efter 8 av 18 planerade pass.') && !!(await av.kor(`!!document.querySelector('#pl-veckan .pl-paminn [data-gor="angra-avslut"]')`)) && (await av.kor(`document.getElementById('pl-lage').hidden`)), await av.text('#pl-veckan .pl-paminn'));
+  sant('avsluta: ett lov före slutet flyttar slutet med passen', (await av.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].val`))?.includes('e=8') && (await av.text('#pl-veckan .pl-paminn'))?.startsWith('Insatsen avslutas i vecka 3 (v. 48), efter 8 av 18 planerade pass.') && !!(await av.kor(`!!document.querySelector('#pl-lage [data-gor="angra-avslut"]')`)) && (await av.kor(`document.querySelector('#pl-lage .pl-status')?.textContent`)) === 'Pågående', await av.text('#pl-veckan .pl-paminn'));
   await av.kor(`(() => { document.querySelector('#pl-lovveckor [data-lovvecka="2026-47"]').click(); return true; })()`);
   await vanta(300);
   await av.tryck('#pl-lage [data-gor="angra-avslut"]');
   await vanta(300);
   const avIgen = await av.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0]`);
-  sant('avsluta: Ångra avslutet tar tillbaka planen', !avIgen?.val.includes('e=') && !avIgen.foljd.utvardering?.beslut && (await av.kor(`document.querySelectorAll('#pl-veckan .pl-remsa [data-vy]').length`)) === 8 && (await av.kor(`document.getElementById('pl-lage').hidden`)) && !(await av.kor(`document.getElementById('plan').classList.contains('pl-avslutad-plan')`)) && (await av.text('#pl-toast'))?.startsWith('Insatsen pågår igen. Pass 9 i veckan och vecka 4 till 6 (v. 48–50) är tillbaka i planen.'), [avIgen, await av.text('#pl-toast')]);
+  sant('avsluta: Ångra avslutet tar tillbaka planen', !avIgen?.val.includes('e=') && !avIgen.foljd.utvardering?.beslut && (await av.kor(`document.querySelectorAll('#pl-veckan .pl-remsa [data-vy]').length`)) === 8 && (await av.kor(`document.querySelector('#pl-lage .pl-status')?.textContent`)) === 'Pågående' && !(await av.kor(`document.getElementById('plan').classList.contains('pl-avslutad-plan')`)) && (await av.text('#pl-toast'))?.startsWith('Insatsen pågår igen. Pass 9 i veckan och vecka 4 till 6 (v. 48–50) är tillbaka i planen.'), [avIgen, await av.text('#pl-toast')]);
   // Ett tömt fält ger ingen anledning, också när en gammal mening fanns (Codex samma dag).
-  await av.kor(`(() => { document.querySelector('#pl-veckan [data-ruta="andra-veckan"]').open = true; return true; })()`);
-  await av.tryck('#pl-veckan [data-gor="avsluta"]');
+  await av.tryck('#pl-lage [data-gor="avsluta"]');
   await av.kor(`(() => { const f = document.getElementById('pl-avsluta-not'); f.value = ''; return true; })()`);
   await av.tryck('#pl-avsluta [data-gor="avsluta-klar"]');
   await vanta(300);
@@ -1805,6 +1801,7 @@ try {
   await st.tryck('#pl-veckor [data-vy="1"]');
   await vanta(150);
   const d1 = await stegDelar();
+  sant('lägesraden: en plan som inte har börjat är kommande, med första passet och utan knapp', (await st.kor(`document.querySelector('#pl-lage .pl-status')?.textContent`)) === 'Kommande' && (await st.text('#pl-lage'))?.includes('Första passet måndag 2 november') && !(await st.kor(`!!document.querySelector('#pl-lage button')`)), await st.text('#pl-lage'));
   sant('stegen: passet i vecka 1 har variantens tider', ['0–3 Modellering', '3–6 Körläsning', '6–14 Parläsning', '14–15 Avslutning'].every((x) => d1?.includes(x)) && !d1?.includes('0–2 Modellering'), d1);
   const roll1 = await rutan('.pl-roll'), fore1 = await rutan('[data-ruta="del-fore"] .pl-deltext'), avsl1 = await rutan('[data-ruta="del-3"] .pl-deltext'), inl1 = await rutan('.pl-delinledning');
   sant('stegen: variantens mening och metodens texter med planens vecka', roll1.startsWith('Passet är bara listan.') && !roll1.includes('vecka 4') && fore1.includes('Kopiera listan till varje par, och från vecka 2 tar du fram dagens bok.') && fore1.includes('från vecka 2.') && avsl1.includes('Från vecka 2 läser ni sedan i boken tillsammans') && !inl1.includes('Remsan') && inl1.includes('Lektionskortet'), [roll1, fore1, avsl1, inl1]);

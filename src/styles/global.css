@@ -3158,9 +3158,14 @@ h1 .beta { font-size: 0.85rem; vertical-align: 0.35em; }
 /* En avslutad insats (K-542): läget överst med Ångra avslutet, rutan med bocken som ritas fram när läraren just har avslutat,
    det som ströks överstruket och planens rutor grå och streckade medan läraren scrollar. Knapparna och länkarna har kvar sin
    färg, eftersom allt går att använda som förut (Niclas 2026-10-25: "Så mer någon form av visuellt stöd"). */
-.pl-lage { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 1rem; margin: 1rem 0; padding: 0.75rem 1rem; border: 1px solid #cfd5dc; border-left: 4px solid #8a949e; border-radius: 6px; background: repeating-linear-gradient(135deg, #f5f6f8 0 10px, #eceff2 10px 12px); font-family: var(--typsnitt-ui); }
+/* Lägesraden överst i en sparad plan, i lägets färg som märkena: pågående grön, kommande blå och avslutad grå och streckad. */
+.pl-lage { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 1rem; margin: 1rem 0; padding: 0.75rem 1rem; border: 1px solid var(--farg-kant); border-left: 4px solid #1d5e3b; border-radius: 6px; background: var(--farg-yta); font-family: var(--typsnitt-ui); }
+.pl-lage.kommande { border-left-color: #1b4a85; }
+.pl-lage.avslutad { border-color: #cfd5dc; border-left-color: #8a949e; background: repeating-linear-gradient(135deg, #f5f6f8 0 10px, #eceff2 10px 12px); }
+.pl-lage > .pl-avsluta { flex-basis: 100%; margin: 0.25rem 0 0; }
+.pl-lage .pl-avslutad-bock { width: 1.6rem; height: 1.6rem; margin-right: 0.45rem; vertical-align: -0.45rem; }
 .pl-lage[hidden] { display: none; }
-.pl-lage p { margin: 0; }
+.pl-lage > p { margin: 0; }
 .pl-lage .pl-status { font-size: 0.75rem; }
 .pl-lage.ny { animation: pl-lage-in 0.6s ease-out both; }
 @keyframes pl-lage-in { from { opacity: 0; transform: translateY(-0.4rem); } to { opacity: 1; transform: none; } }
@@ -3173,12 +3178,12 @@ h1 .beta { font-size: 0.85rem; vertical-align: 0.35em; }
 .pl-avslutad-bock circle { fill: var(--farg-accent); transform-box: fill-box; transform-origin: center; }
 .pl-avslutad-bock path { fill: none; stroke: #fff; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
 .pl-avslutad.ny { animation: pl-avslutad-puls 0.9s 0.5s ease-out both; }
-.pl-avslutad.ny .pl-avslutad-bock circle { animation: pl-bock-ring 0.45s cubic-bezier(0.2, 0.8, 0.3, 1.25) both; }
-.pl-avslutad.ny .pl-avslutad-bock path { stroke-dasharray: 30; stroke-dashoffset: 30; animation: pl-bock-drag 0.4s 0.35s ease-out forwards; }
+.pl-avslutad.ny .pl-avslutad-bock circle, .pl-lage.ny .pl-avslutad-bock circle { animation: pl-bock-ring 0.45s cubic-bezier(0.2, 0.8, 0.3, 1.25) both; }
+.pl-avslutad.ny .pl-avslutad-bock path, .pl-lage.ny .pl-avslutad-bock path { stroke-dasharray: 30; stroke-dashoffset: 30; animation: pl-bock-drag 0.4s 0.35s ease-out forwards; }
 @keyframes pl-bock-ring { from { opacity: 0; transform: scale(0.2); } to { opacity: 1; transform: scale(1); } }
 @keyframes pl-bock-drag { to { stroke-dashoffset: 0; } }
 @keyframes pl-avslutad-puls { from { box-shadow: 0 0 0 0 rgb(29 79 145 / 0.35); } to { box-shadow: 0 0 0 12px rgb(29 79 145 / 0); } }
-@media (prefers-reduced-motion: reduce) { .pl-lage.ny, .pl-avslutad.ny, .pl-avslutad.ny .pl-avslutad-bock circle, .pl-avslutad.ny .pl-avslutad-bock path { animation: none; stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .pl-lage.ny, .pl-avslutad.ny, .pl-avslutad.ny .pl-avslutad-bock circle, .pl-avslutad.ny .pl-avslutad-bock path, .pl-lage.ny .pl-avslutad-bock circle, .pl-lage.ny .pl-avslutad-bock path { animation: none; stroke-dashoffset: 0; } }
 .pl-passlista li.struket { color: var(--farg-text-svag); background: repeating-linear-gradient(135deg, transparent 0 8px, #eef0f3 8px 10px); }
 .pl-passlista li.struket .pl-dag { text-decoration: line-through; }
 .pl-remsa-vecka.struken { cursor: default; border-style: dashed; color: var(--farg-text-svag); background: repeating-linear-gradient(135deg, #f5f6f8 0 5px, #e6e9ed 5px 7px); text-decoration: line-through; }
