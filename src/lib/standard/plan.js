@@ -490,21 +490,26 @@ export function planera(mp, val) {
   if (hel && !slutDag) return hel;
   // Nästa vecka som inte är lov, utan att gå vidare.
   const kommande = () => { let m = mandag; while (lov.has(veckonyckel(m))) m = plusDagar(m, 7); return m; };
+  // Passens nummer räknas som i planen utan slut, också för ett pass som stryks, så att ett pass behåller sitt nummer och sitt
+  // innehåll när ett flyttat pass före det stryks (Codex 2026-10-25: onsdagens pass 5, Chatten, blev pass 4, Vinsten). Då
+  // kan numren ha en lucka, och ett pass slås upp på sitt nummer, aldrig på sin plats i listan (passetMedNr).
+  let nummer = 0;
   // Spärren mot en plan utan slut: en period i pass där inga dagar ger pass.
-  for (let i = 0; iPass ? pass.length < langd && i < 104 : i < ordning.length; i++) {
+  for (let i = 0; iPass ? nummer < langd && i < 104 : i < ordning.length; i++) {
     if (slutDag && veckor.length && kommande() > slutDag) break;
     const m = nastaMandag();
     const v = { nr: veckor.length + 1, innehall: iPass ? veckor.length + 1 : ordning[i].innehall, igen: iPass ? false : ordning[i].igen, mandag: m, vecka: isoVecka(m), pass: [], bortfall: [] };
     for (const dag of dagar) {
-      if (iPass && pass.length >= langd) break;
+      if (iPass && nummer >= langd) break;
       const datum = plusDagar(m, dag - 1);
       if (datum < val.start) continue;
       const nytt = arDatum(flytta[datum]) ? flytta[datum] : undefined;
-      if (slutDag && (nytt ?? datum) > slutDag) continue;
       const namn = helgdag(datum);
-      if (namn) { v.bortfall.push({ datum, varfor: 'helgdag', namn }); continue; }
-      if (stryk.has(datum)) { v.bortfall.push({ datum, varfor: 'installt' }); continue; }
-      const p = { nr: pass.length + 1, datum: nytt ?? datum, vecka: v.nr, ...(nytt ? { flyttatFran: datum } : {}) };
+      if (namn) { if (!slutDag || datum <= slutDag) v.bortfall.push({ datum, varfor: 'helgdag', namn }); continue; }
+      if (stryk.has(datum)) { if (!slutDag || datum <= slutDag) v.bortfall.push({ datum, varfor: 'installt' }); continue; }
+      nummer += 1;
+      if (slutDag && (nytt ?? datum) > slutDag) continue;
+      const p = { nr: nummer, datum: nytt ?? datum, vecka: v.nr, ...(nytt ? { flyttatFran: datum } : {}) };
       pass.push(p);
       v.pass.push(p.nr);
     }
@@ -559,7 +564,7 @@ export function planera(mp, val) {
     else if (tid.typ === 'intervall') tillfallen = veckor.filter((v) => v.nr % tid.var === 0).map((v) => ({ datum: sistaIVeckan(v), vecka: v.nr }));
     else if (tid.typ === 'vecka') tillfallen = tid.veckor.flatMap((n) => { const v = [...veckor].reverse().find((x) => x.innehall === n); return v ? [{ datum: sistaIVeckan(v), vecka: v.nr }] : []; });
     else if (tid.typ === 'sista-veckan' && veckor.length) { const v = veckor[veckor.length - 1]; tillfallen = [{ datum: sistaIVeckan(v), vecka: v.nr }]; }
-    else if (tid.typ === 'pass') tillfallen = tid.pass.flatMap((n) => (pass[n - 1] ? [{ datum: pass[n - 1].datum, vecka: pass[n - 1].vecka }] : []));
+    else if (tid.typ === 'pass') tillfallen = tid.pass.flatMap((n) => { const p = pass.find((x) => x.nr === n); return p ? [{ datum: p.datum, vecka: p.vecka }] : []; });
     else if (tid.typ === 'sista-passet' && sista) tillfallen = [{ datum: sista.datum, vecka: sista.vecka }];
     return { rad, typ: tid.typ, tillfallen };
   });
@@ -641,7 +646,16 @@ export const efterDatum = (a, b) => (a.datum < b.datum ? -1 : a.datum > b.datum 
 /** En kopia i datumordning. @template {{ datum: string, nr?: number }} T @param {T[]} lista @returns {T[]} */
 export const iDatumordning = (lista) => [...lista].sort(efterDatum);
 /** Veckans pass, i veckans ordning. @param {{ pass: Pass[] }} plan @param {PlanVecka} v */
-export const veckansPass = (plan, v) => v.pass.map((n) => plan.pass[n - 1]);
+export const veckansPass = (plan, v) => v.pass.map((n) => passetMedNr(plan, n)).filter(Boolean);
+/**
+ * Passet med ett nummer, eller inget. Numren kan ha en lucka i en plan som avslutas tidigare, så ett pass slås aldrig upp på
+ * sin plats i listan (Codex 2026-10-25).
+ * @param {{ pass: Pass[] }} plan
+ * @param {number} nr
+ */
+export const passetMedNr = (plan, nr) => plan.pass.find((p) => p.nr === nr);
+/** Det högsta passnumret, till "pass 6 av 8", som är antalet pass när numren inte har någon lucka. @param {{ pass: Pass[] }} plan */
+export const hogstaPassnr = (plan) => Math.max(0, ...plan.pass.map((p) => p.nr));
 
 // ---------- Veckornas namn ----------
 // Veckornas namn står här och bara här (sajtens K-508; Niclas 2026-10-25: "Sammanställning ska ju matcha veckor i planen
@@ -877,7 +891,7 @@ export function passetsBeskrivning(roller, passet, vecka) {
  * @returns {{ rad: number, fran: number, vidBehov: boolean }[]}
  */
 export function stegUtanfor(mp, plan) {
-  const sista = mp.stegEnhet === 'pass' ? plan.pass.length : Math.max(0, ...plan.veckor.map((v) => v.innehall));
+  const sista = mp.stegEnhet === 'pass' ? hogstaPassnr(plan) : Math.max(0, ...plan.veckor.map((v) => v.innehall));
   return mp.steg.filter((s) => !s.efter && s.fran > sista).map((s) => ({ rad: s.rad, fran: s.fran, vidBehov: s.vidBehov }));
 }
 
@@ -1120,6 +1134,21 @@ export function spannKort(fran, till) {
 export const datumspann = (fran, till) => `${fran.slice(0, 4) === till.slice(0, 4) ? dagOchManad(fran) : datumText(fran)} till ${datumText(till)}`;
 /** "måndag, onsdag och fredag". @param {string[]} ord */
 export const uppraknat = (ord) => (ord.length <= 1 ? ord.join('') : `${ord.slice(0, -1).join(', ')} och ${ord[ord.length - 1]}`);
+/**
+ * Passens nummer i en text, "Pass 4–6", och med luckan när ett pass är struket före ett pass som står kvar: "Pass 4 och 6".
+ * Passen behåller sina nummer när insatsen avslutas tidigare (Codex 2026-10-25), så numren läses aldrig som ett spann.
+ * @param {number[]} nr
+ */
+export const passnummerText = (nr) => {
+  /** @type {[number, number][]} */
+  const delar = [];
+  for (const n of [...nr].sort((a, b) => a - b)) {
+    const sist = delar[delar.length - 1];
+    if (sist && n === sist[1] + 1) sist[1] = n;
+    else delar.push([n, n]);
+  }
+  return delar.length ? `Pass ${uppraknat(delar.map(([a, b]) => (a === b ? `${a}` : `${a}–${b}`)))}` : '';
+};
 /** Veckans första och sista dag i planen: passens, eller måndag till fredag. @param {{ pass: Pass[] }} plan @param {PlanVecka} v */
 export function veckansDagar(plan, v) {
   const datum = veckansPass(plan, v).map((p) => p.datum).sort();
@@ -1371,7 +1400,7 @@ export const insatsenSlut = (sistaPass, idag) => !!sistaPass && idag > sistaPass
  * @param {Plan} plan
  * @returns {string | undefined}
  */
-export const planensSistaDag = (plan) => [plan.sistaPass, ...plan.uppfoljning.filter((u) => u.typ === 'efter').flatMap((u) => u.tillfallen.map((t) => t.datum))].filter(Boolean).sort().pop();
+export const planensSistaDag = (plan) => [plan.sistaPass, ...plan.uppfoljning.filter((u) => u.typ === 'efter').flatMap((u) => u.tillfallen.map((t) => plusDagar(t.datum, 4)))].filter(Boolean).sort().pop();
 /**
  * Är insatsen avslutad, lika i planen, i metodbanken och på metodens sida (Niclas 2026-10-25: "avslutet måste märkas när det
  * är tryckt ... när man går in på den (förutom att den då läggs som Avslutad)"): läraren har avslutat den eller bytt insats,
@@ -1576,7 +1605,7 @@ export function kalenderfil(info, plan, o) {
     // Metodens texter med planens veckor, som på sidan (veckornaIPlanen).
     const fokus = steg !== null && steg !== undefined && info.fokus[steg] ? `\n${hel(veckornaIPlanen(/** @type {string} */ (info.fokus[steg]), plan.borja))}` : '';
     const passet = info.passet ? veckornaIPlanen(info.passet(p), plan.borja) : '';
-    handelse(`${o.id}-p${p.nr}`, p.datum, `${info.titel}, pass ${p.nr} av ${plan.pass.length}${vem}`, `Vecka ${planveckansNamn(plan, v).plan} i planen.${fokus}${passet ? `\n${passet}` : ''}\nVeckan i planen: ${o.lank(v.nr)}`, o.lank(v.nr), tider[String(veckodag(passetsDag(p)))]);
+    handelse(`${o.id}-p${p.nr}`, p.datum, `${info.titel}, pass ${p.nr} av ${hogstaPassnr(plan)}${vem}`, `Vecka ${planveckansNamn(plan, v).plan} i planen.${fokus}${passet ? `\n${passet}` : ''}\nVeckan i planen: ${o.lank(v.nr)}`, o.lank(v.nr), tider[String(veckodag(passetsDag(p)))]);
   }
   for (const u of plan.uppfoljning) u.tillfallen.forEach((t, i) => {
     const fore = t.vecka === 0;

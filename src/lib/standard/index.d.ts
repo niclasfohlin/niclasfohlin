@@ -232,6 +232,8 @@ export declare const dagOchManad: (s: string) => string;
 export declare const dagText: (s: string) => string;
 export declare function spannKort(fran: string, till: string): string;
 export declare const uppraknat: (ord: string[]) => string;
+/** Passens nummer i en text, "Pass 4–6" eller "Pass 4 och 6" när ett pass är struket däremellan. */
+export declare const passnummerText: (nr: number[]) => string;
 export declare function veckansDagar(plan: { pass: Pass[] }, v: PlanVecka): { fran: string; till: string };
 export declare function dokumentationstext(info: { titel: string; undertitel?: string; adress: string; mal?: string; steg?: string[]; uppfoljning: { nar: string }[]; nivaNamn?: string }, plan: Plan, val: Val, o: { minuter: number; genomforda?: number; folj?: boolean; utvardering?: { beslut?: string; not?: string }; elever?: { namn: string }[]; pagar?: boolean }): string;
 /** Passens längd i minuter efter dagarnas klockslag, och passets längd för en dag utan klockslag; olika längder var för sig, i storleksordning. */
@@ -305,6 +307,10 @@ export declare const AVSLUTANDE: readonly string[];
 export declare const AVSLUTAS_EFTER: number;
 /** Är insatsens pass slut: sista passets dag har varit. */
 export declare const insatsenSlut: (sistaPass: string | undefined, idag: string) => boolean;
+/** Passet med ett nummer; numren kan ha en lucka i en plan som avslutas tidigare. */
+export declare const passetMedNr: (plan: { pass: Pass[] }, nr: number) => Pass | undefined;
+/** Det högsta passnumret, till "pass 6 av 8". */
+export declare const hogstaPassnr: (plan: { pass: Pass[] }) => number;
 /** Planens sista dag: sista passet, eller uppföljningen efter insatsen när den kommer senare. */
 export declare const planensSistaDag: (plan: Plan) => string | undefined;
 /** Är insatsen avslutad: beslutet avslutar den från sista passets dag, eller två veckor har gått sedan planens sista dag och läraren har inte öppnat den igen för sista passet. */

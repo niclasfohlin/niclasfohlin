@@ -65,6 +65,8 @@ export function rensaPlan(x: unknown): SparadPlan | null {
  * det, och planprovet öppnar dem (PLANERA.md under Planens fil och lagringen).
  */
 export const PLANFORMAT = 1;
+/** Meningen när en nyare version av Planera insatsen har sparat planen eller planerna i webbläsaren. */
+export const NYARE_VERSION = 'Planen är sparad i en nyare version av Planera insatsen. Ladda om sidan, så kommer allt med.';
 export const PLANFILENS_TYP = 'planera-insatsen';
 /**
  * Konverteringarna från en version av formatet till nästa: KONVERTERINGAR[1] gör en plan i version 1 till version 2 och
@@ -81,7 +83,7 @@ export function konverteraPlan(plan: unknown, v: unknown): { plan: unknown; varn
     const k = KONVERTERINGAR[x];
     if (k && ut && typeof ut === 'object') { const r = k(ut as Record<string, unknown>); ut = r.plan; varningar.push(...r.varningar); }
   }
-  if (fran > PLANFORMAT) varningar.push('Planen är sparad i en nyare version av Planera insatsen. Ladda om sidan, så kommer allt med.');
+  if (fran > PLANFORMAT) varningar.push(NYARE_VERSION);
   return { plan: ut, varningar };
 }
 /** Planen som fil: typen, formatets version, modulens version och planen. */
@@ -95,18 +97,32 @@ export function lasPlanfil(innehall: unknown): { plan: SparadPlan; varningar: st
   return p ? { plan: p, varningar } : null;
 }
 
-/** Planerna i webbläsaren, konverterade från lagringens version och rensade, och om lagringen gick att läsa. */
-export function lasPlaner(): { planer: SparadPlan[]; ok: boolean } {
+/** Planerna i webbläsaren, konverterade från lagringens version och rensade, om lagringen gick att läsa, och varningarna, som när en nyare version har sparat dem (Codex 2026-10-25). */
+export function lasPlaner(): { planer: SparadPlan[]; ok: boolean; varningar: string[] } {
   try {
     const varde = JSON.parse(localStorage.getItem(NYCKEL) ?? `{"v":${PLANFORMAT},"planer":[]}`);
-    return { planer: Array.isArray(varde?.planer) ? varde.planer.map((x: unknown) => rensaPlan(konverteraPlan(x, varde.v).plan)).filter((p: SparadPlan | null): p is SparadPlan => !!p) : [], ok: true };
+    const varningar = new Set<string>();
+    const planer = Array.isArray(varde?.planer) ? varde.planer.map((x: unknown) => { const k = konverteraPlan(x, varde.v); k.varningar.forEach((w) => varningar.add(w)); return rensaPlan(k.plan); }).filter((p: SparadPlan | null): p is SparadPlan => !!p) : [];
+    return { planer, ok: true, varningar: [...varningar] };
   } catch {
-    return { planer: [], ok: false };
+    return { planer: [], ok: false, varningar: [] };
   }
 }
 
 /** Skriver planerna i formatets version; false när lagringen är avstängd eller full. */
+/**
+ * Om planerna i webbläsaren är sparade av en nyare version. Då skriver den här versionen inget, så att det som den nyare
+ * versionen sparade och den här inte känner till inte går förlorat (Codex 2026-10-25).
+ */
+export function lagringenArNyare(): boolean {
+  try {
+    return Number(JSON.parse(localStorage.getItem(NYCKEL) ?? '{}')?.v) > PLANFORMAT;
+  } catch {
+    return false;
+  }
+}
 export function skrivPlaner(planer: SparadPlan[]): boolean {
+  if (lagringenArNyare()) return false;
   try {
     localStorage.setItem(NYCKEL, JSON.stringify({ v: PLANFORMAT, planer }));
     return true;
