@@ -20,7 +20,7 @@
 //   rulla ned | upp | topp | botten | <nr>   rullar en skärm, till toppen, till botten eller till det numrerade
 //   bild <namn> [hel]         bild av skärmen, eller av hela sidan i delar; svaret säger var filerna ligger
 //   kopierat                  texten som sidan senast kopierade
-//   filer                     filerna som sidan har hämtat, med början av textfilerna
+//   filer                     filerna som sidan har hämtat, med var de ligger och början av textfilerna
 //   besked                    beskedet längst ned och notisen överst
 import { spawn } from 'node:child_process';
 import { createServer } from 'node:http';
@@ -187,7 +187,7 @@ ${await efter()}`; }
       case 'kopierat': return (await kor('window.__kopierat ?? sessionStorage.getItem("__kopierat")')) ?? 'Inget har kopierats.';
       case 'filer': {
         const filer = readdirSync(nedladdat).filter((f) => !f.endsWith('.crdownload'));
-        return filer.length ? filer.map((f) => { const p = join(nedladdat, f); const s = statSync(p).size; return `${f} (${s} byte)${/\.(ics|json|txt)$/.test(f) ? `\n${readFileSync(p, 'utf8').slice(0, 1500)}` : ''}`; }).join('\n\n') : 'Inga hämtade filer.';
+        return filer.length ? filer.map((f) => { const p = join(nedladdat, f); const s = statSync(p).size; return `${f} (${s} byte), i ${p.replace(/\\/g, '/')}${/\.(ics|json|txt)$/.test(f) ? `\n${readFileSync(p, 'utf8').slice(0, 1500)}` : ''}`; }).join('\n\n') : 'Inga hämtade filer.';
       }
       case 'besked': return efter();
       default: return `Okänt kommando: ${kommando}. Kommandona: oppna, ladda, tillbaka, adress, telefon, dator, datum, text, knappar, tryck, skriv, valj, kryss, rulla, bild, kopierat, filer, besked.`;

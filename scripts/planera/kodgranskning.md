@@ -21,6 +21,7 @@ Och alltid:
 3. Det som sätts in i sidan som HTML: allt som kommer från läraren eller metoden ska skyddas.
 4. Data som saknas: en metod utan tidsschema, utan stegen, utan planens valfria fält, eller med en form som de fem metoderna i betan inte har.
 5. En ändring i den delade koden som ändrar en fil eller sida som fanns före, utan att det var meningen.
+6. Drift: ny kod som skriver ut en vecka, ett datum eller ett annat värde på egen hand, fast standarden har en funktion för det, eller ett nytt värde som visas på flera ställen utan en funktion i standarden (`PLANERA.md` under Spärren mot drift). Samma sak ska heta och visa likadant på sidan, i pdf:erna, i texterna som kopieras, i texten till åtgärdsprogrammet och i kalenderfilen.
 
 ## Svaret
 

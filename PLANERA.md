@@ -25,6 +25,7 @@ Planen syns på metodens sida, med knappen Planera insatsen och märket Beta, s�
 | 6. Kalla testare | En lärare per metod som först får bara planen och sedan hela metoden | Uppdraget `kall-testare`, med en roll per metod | Testaren kan hålla pass 1 efter planen, och ingen P1 |
 | 7. Användbarheten | En granskare som följer läraren från första besöket till efter insatsen, i telefon och på dator | Uppdraget `anvandbarhet` | Ingen P1 |
 | 8. Buggjakten | Två jägare som ändrar allt och prövar att det som står stämmer | Uppdraget `buggjakt`, en Sonnet och en Haiku | Ingen P1 |
+| 8b. Samma sak överallt | En provare som följer en vecka, ett datum, en skattning, ett pass och målet genom alla vyer: planen, veckan, diagrammen, sammanställningen, pdf:erna, texterna, åtgärdsprogrammet och kalendern, före och efter en ändring | Uppdraget `konsistens`, Opus. Först kontrollerar planprovet samma sak i koden (Spärren mot drift nedan) | Ingen P1 eller P2: samma sak heter och visar likadant överallt |
 | 9. Codex | Granskning av koden i ändringen | Uppdraget `kodgranskning`, Codex med `gpt-6-astra` och xhigh i läsläge (METODER.md under Codex-granskningen) | Ingen P1 |
 | 10. Laga | Fynden, efter Så lagas fynden nedan | | P1 lagade, P2 lagade eller i kön, P3 och innehållsfrågor till Niclas |
 | 11. Verifieringen | En ny provare, som inte har sett sidan, prövar det som lagades på en ny testversion | Uppdraget `verifiering` | Ingen P1, och läraren kan använda planen med en grupp nästa vecka |
@@ -59,6 +60,7 @@ Mallarna står i `scripts/planera/`, med verktygets kommandon i `verktyget.md`, 
 | `kall-testare.md` | En lärare per metod, i två steg: först bara planen, sedan hela metoden | Opus eller Sonnet, omkring 120 kommandon | metod, id, adress, port, roll, tak, svar |
 | `anvandbarhet.md` | En granskare för alla metoderna, djupast i två | Opus, omkring 130 kommandon | nytt, metoder, djupast, adress, port, tak, svar |
 | `buggjakt.md` | Två jägare på olika modeller | Sonnet och Haiku, omkring 110 kommandon | nytt, forsta, andra, adress, port, tak, svar |
+| `konsistens.md` | En provare som följer samma sak genom alla vyer | Opus, omkring 130 kommandon | nytt, forsta, andra, adress, port, tak, svar |
 | `kodgranskning.md` | Codex i läsläge | `gpt-6-astra`, xhigh | version, bakgrund, bas, nytt, leta |
 | `verifiering.md` | En lärare som inte har sett sidan, efter lagningarna | Opus, omkring 150 kommandon | idag, forsta, andra, metoder, adress, port, tak, svar |
 | `ide.md` | En Sonnet och en Opus när en ny form ska väljas, innan något byggs | Sonnet och Opus | fraga_kort, fraga, varfor, niclas, innehall, bilder, metoder, adress, svar |
@@ -135,6 +137,7 @@ En ny sak som visas på flera ställen får sin funktion här och sitt mönster 
 | En länk till en fil prövas som fil, en länk till en sida som sida | Planprovet läste lektionskortets pdf som en sida och stannade |
 | Ett namn som gör checklistan eller uppföljningen längre kan tippa lathundens fjärde sida, där båda står i en spalt som i flera metoder redan är full. Mät spalten före valideringen: hämta `/stodundervisning/<id>-lathund.pptx` ur förhandsservern och läs raderna med ! i dess logg. Flytta hellre en del av en punkt till en annan punkt än att göra en punkt en rad längre | K-502: Seriesamtals spalt hade 0,007 tum till godo, och namnen sköt ut upphovsraden i Textsamtals pdf |
 | GoatCounter räknar besökare och inte händelser: samma händelse två gånger från samma webbläsare räknas en gång. Det som ska räknas flera gånger i samma webbläsare får egna namn | Pågående insatser 2026-10-25: en lärare med två grupper i samma metod räknades som en, så den andra planen heter `pagar:2` |
+| Pröva en sak genom alla vyer, inte varje vy för sig: samma vecka, samma datum och samma skattning ska heta och visa likadant överallt. Ett värde som visas på flera ställen får en funktion i standarden innan något använder det | 2026-10-25: elevens diagram skrev v. 45 till v. 50 där planen sa vecka 1 till 6. Användbarheten, de kalla testarna och buggjakten prövade varje vy för sig och såg det inte, och tre sätt att skriva en vecka hade vuxit fram i koden. Nu finns Spärren mot drift, steg 8b och kodgranskningens punkt 6 |
 | Ett namn som är ett vanligt ord länkas bara som titel, med stor bokstav mitt i en mening | "multiplikation" blev annars en länk till Övningsblad: Multiplikation |
 
 ## Ändringar
@@ -143,3 +146,4 @@ En ny sak som visas på flera ställen får sin funktion här och sitt mönster 
 |---|---|
 | 2026-10-25 | Första versionen, ur provningen av Planera 0.1 och 0.2 på fem metoder: länkgranskningen, testarna i två steg, användbarheten, buggjakten, Codex och verifieringen, med mallarna i `scripts/planera/` |
 | 2026-10-25 | Länkgranskningen letar också efter allmänna ord för en bestämd sak, efter Niclas regel samma dag: det som behövs namnges och länkas, eller har en knapp för att ladda ner |
+| 2026-10-25 | Spärren mot drift i planprovet, steget 8b Samma sak överallt med uppdraget `konsistens`, och kodgranskningens punkt om drift, efter att elevens diagram och planen namngav veckorna olika (Niclas: "fundera på arbetssättet ... och hur detta eller liknande saker hade kunnat hittas") |

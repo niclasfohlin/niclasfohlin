@@ -21,7 +21,7 @@ node "{{skript}}" {{port}} <kommando> [argument]
 | `rulla ned`, `rulla upp`, `rulla topp`, `rulla botten`, `rulla <nr>` | rullar |
 | `bild <namn>`, `bild <namn> hel` | bild av skärmen eller av hela sidan |
 | `kopierat` | texten som sidan senast kopierade |
-| `filer` | filerna som sidan har hämtat, med början av textfilerna |
+| `filer` | filerna som sidan har hämtat, med var de ligger och början av textfilerna; en pdf läser du med Read |
 | `besked` | beskedet längst ned på skärmen och notisen överst |
 
 Numren i `knappar` gäller tills sidan ändras; ta `knappar` igen efter ett tryck som ändrar sidan. Sidans text visar etiketter med versaler, så "Din insats" kan stå som DIN INSATS. En knapp som skriver ut öppnar en pdf, och ett lektionskort öppnas i en ny flik; verktyget visar inte det, så räkna inte det som ett fel, men skriv om knappen saknas eller leder till fel adress.
