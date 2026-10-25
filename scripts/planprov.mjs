@@ -17,7 +17,7 @@
 //   node scripts/planprov.mjs               allt (körs i npm run validera, efter bygget)
 //   node scripts/planprov.mjs --utan-sida   bara motorn, datan och formerna
 //   node scripts/planprov.mjs --alla        sidan också när inget har ändrats
-import { spawn } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { createServer } from 'node:http';
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
@@ -30,7 +30,11 @@ const rot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 // --bilder <mapp>: provet tar bilder av sidans lägen där, i telefonbredd och på dator, för granskningen.
 const bildmapp = args.includes('--bilder') ? args[args.indexOf('--bilder') + 1] : null;
-const s = await import(pathToFileURL(join(rot, 'src/lib/standard/index.js')).href);
+// Rötterna som proven har använt, så att kontrollen av rötterna i PLANERA.md vet att varje rot har körts och inte bara står
+// i en kommentar (Codex 2026-10-25).
+const anvanda = new Set();
+const foljd = (m) => new Proxy(m, { get: (t, k) => { anvanda.add(k); return Reflect.get(t, k); } });
+const s = foljd(await import(pathToFileURL(join(rot, 'src/lib/standard/index.js')).href));
 const fel = [];
 const ska = (namn, villkor, info) => { if (!villkor) fel.push(`${namn}${info !== undefined ? `: ${typeof info === 'string' ? info : JSON.stringify(info)}` : ''}`); };
 const metod = (id) => parseYaml(readFileSync(join(rot, 'src/content/stodundervisning', `${id}.yaml`), 'utf8'));
@@ -176,7 +180,7 @@ if (tsMp) {
   ska('veckans gång', sm.veckor[0].skattning === 3 && sm.veckor[0].not === 'Gruppen kom igång' && sm.veckomedel === 3);
   const info = { titel: ts.titel, mal: ts.plan.mal, uppfoljning: ts.uppfoljning.rader };
   const text = s.sammanstallningstext(info, p, smN);
-  ska('sammanställningens text', text.includes('Mål: Kunna läsa mellan raderna, säga vad man tror och visa ledtråden i texten.') && text.includes('Pass: 3 av de 8 pass som har varit är bockade. Planen har 18 pass.') && text.includes('Närvaro i de bockade passen: 1 av 2 elever var med i alla; en elev missade 1 pass.') && text.includes('av hur väl eleverna klarar målet på egen hand: medel 2,5 vid första skattningen och 3 vid den senaste. 1 av 2 elever har gått framåt.') && text.includes('Avstämning mitt i insatsen, vecka 3 (v. 47): Fortsätt som planerat.'), text);
+  ska('sammanställningens text', text.includes('Mål: Kunna läsa mellan raderna, säga vad man tror och visa ledtråden i texten.') && text.includes('Pass: 3 av de 8 pass som har varit är bockade. Planen har 18 pass.') && text.includes('Närvaro i de bockade passen: 1 av 2 elever var med i alla; en elev missade 1 pass.') && text.includes('av hur väl eleverna klarar målet på egen hand: medel 2,5 vid första skattningen och 3 vid den senaste. 1 av 2 elever med två skattningar eller fler har gått framåt.') && text.includes('Avstämning mitt i insatsen, vecka 3 (v. 47): Fortsätt som planerat.'), text);
   ska('sammanställningens text har inga namn', !/Ali|Bea/.test(text));
   ska('utan närvaro säger texten inget om den', !s.sammanstallningstext(info, p, sm).includes('Närvaro'));
   const medNamn = s.sammanstallningstext(info, p, s.sammanstallning(p, { ...f, vecka: { '2026-11-02': { varde: 3, not: 'Alis och Beas par byggde vidare' } }, avstamning: { beslut: 'fortsatt', not: 'Bea behöver mer stöd vid stoppet' } }, '2026-11-18'));
@@ -360,7 +364,7 @@ ska('veckans namn i en text och i diagrammet', JSON.stringify(s.veckansNamn({ in
 // gång det går"): modulens filer skriver aldrig ut en vecka eller ett datum på egen hand. Veckorna kommer ur blocket
 // Veckornas namn i standarden och datumen ur datumText, dagOchManad, dagText och spannKort. Ett fynd säger fil, rad och
 // vilken funktion som ska användas (PLANERA.md under Spärren mot drift).
-const MODULENS_FILER = ['src/lib/standard/plan.js', 'src/lib/standard/saker.js', 'src/lib/standard/text.js', 'src/scripts/webblasaren.ts', 'src/lib/insatsplan.ts', 'src/lib/metodsaker.ts', 'src/lib/sakfiler.ts', 'src/lib/planbar.ts', 'src/scripts/planera.ts', 'src/scripts/planpdf.ts', 'src/scripts/insatser-lagring.ts', 'src/scripts/insatser.ts', 'src/scripts/appen.ts', 'src/components/Planera.astro', 'src/components/AppRad.astro'];
+const MODULENS_FILER = ['src/lib/standard/index.js', 'src/lib/standard/plan.js', 'src/lib/standard/saker.js', 'src/lib/standard/text.js', 'src/scripts/webblasaren.ts', 'src/lib/insatsplan.ts', 'src/lib/metodsaker.ts', 'src/lib/sakfiler.ts', 'src/lib/planbar.ts', 'src/scripts/planera.ts', 'src/scripts/planpdf.ts', 'src/scripts/insatser-lagring.ts', 'src/scripts/insatser.ts', 'src/scripts/appen.ts', 'src/components/Planera.astro', 'src/components/AppRad.astro'];
 const DRIFT = [
   [/v\. \$\{/, 'en kalendervecka skrivs med kalendervecka() eller kalenderveckor()'],
   [/[Vv]ecka \$\{[^}`]*\.vecka\b/, 'en kalendervecka skrivs med kalendervecka(), inte som "vecka"'],
@@ -375,6 +379,8 @@ const DRIFT = [
   [/replace\(\/\[&<>"\]\/g/, 'text i HTML skyddas med esc()'],
   [/\.split\(':'\)\[0\]/, 'namnets första led tas med forstaLedet()'],
   [/\{ en: 1, ett: 1|'noll', 'ett', 'två'/, 'talen i ord läses med talAv() och skrivs med talText()'],
+  [/\.replace\(\/\[\.\\s\]\+\$\/, ''\)/, 'punkten sist tas bort med utanPunkt(), och en mening får sin punkt med mening()'],
+  [/\.replace\(\/\[\.\*\+\?\^/, 'text som ska sökas ordagrant skyddas med skyddaRegex()'],
 ];
 // Raderna som är rötterna själva, i standardens plan.js; text.js är roten för texten och talen.
 const ROTRAD = /^(?:export )?const (?:MANADER|MANAD_KORT|VECKODAGAR|veckodagKort|arDatum|minuterAv|klockslag|plusMinuter|minuterISpann|efterDatum|iDatumordning|veckansPass) = /;
@@ -432,20 +438,37 @@ function dubbletter(filer, mellan = 25, inom = 50) {
     return `${a.fil}:${a.rad(a.t[p.j][1])} och ${b.fil}:${b.rad(b.t[p.k][1])}: samma kod (${p.n} tecken): ${kod.slice(0, 120)}`;
   });
 }
-// Samma lilla funktion med andra namn: en funktion på en rad vars kropp är densamma när parametrarna har bytt namn.
+// Samma lilla funktion med andra namn: en pilfunktion på en rad, eller en funktion på en rad som bara ger tillbaka ett värde
+// (Codex 2026-10-25), vars kropp är densamma när parametrarna har bytt namn. Kroppen läses som tecken, så att en parameter
+// byts mot sin plats bara i koden: inte i en text, ett reguljärt uttryck eller efter en punkt (Codex samma dag: 'x' i en
+// etikett gav en falsk dubblett). TypeScripts typer och icke-null räknas inte.
+const REGEXLITERAL = /(?<=(?:^|[(,=:[!&|?{};])\s*)\/(?![*/])(?:\\.|\[(?:\\.|[^\]\\\n])*\]|[^/\\\n[])+\/[dgimsuy]*/g;
+const kodensTecken = (kod) => {
+  const ut = [];
+  let fran = 0;
+  const tecken = (bit) => [...bit.matchAll(KOD)].map((x) => x[0]).filter((x) => !/^\/[/*]/.test(x));
+  for (const m of kod.matchAll(REGEXLITERAL)) { ut.push(...tecken(kod.slice(fran, m.index)), m[0]); fran = m.index + m[0].length; }
+  return [...ut, ...tecken(kod.slice(fran))];
+};
 function sammaFunktion(filer) {
   const per = new Map();
   for (const { fil, text } of filer) text.split(/\r?\n/).forEach((r, i) => {
-    const m = r.match(/^\s*(?:export\s+)?const\s+([\p{L}_$][\p{L}\p{N}_$]*)\s*=\s*\(([^)]*)\)\s*(?::[^=]*)?=>\s*(.+?);?\s*$/u);
+    const m = r.match(/^\s*(?:export\s+)?const\s+([\p{L}_$][\p{L}\p{N}_$]*)\s*=\s*\(([^)]*)\)\s*(?::[^=]*)?=>\s*(.+?);?\s*$/u)
+      ?? r.match(/^\s*(?:export\s+)?function\s+([\p{L}_$][\p{L}\p{N}_$]*)\s*\(([^)]*)\)\s*(?::[^{]*)?\{\s*return\s+(.+?);?\s*\}\s*$/u);
     if (!m) return;
-    let kropp = m[3];
     const parametrar = m[2].split(',').map((p) => p.trim().replace(/[?]?\s*[:=][\s\S]*$/, '')).filter(Boolean);
     if (parametrar.some((p) => !/^[\p{L}_$][\p{L}\p{N}_$]*$/u.test(p))) return;
-    parametrar.forEach((p, j) => { kropp = kropp.replace(new RegExp(`(?<![\\p{L}\\p{N}_$.])${p.replace(/\$/g, '\\$')}(?![\\p{L}\\p{N}_$])`, 'gu'), `§${j}`); });
-    kropp = kropp.replace(/\s+as\s+[\p{L}_$][\p{L}\p{N}_$<>[\]]*/gu, '').replace(/([)\]\p{L}\p{N}_$])!(?!=)/gu, '$1').replace(/\s+/g, '');
-    if (kropp.length < 16) return;
-    if (!per.has(kropp)) per.set(kropp, []);
-    per.get(kropp).push(`${fil}:${i + 1} ${m[1]}`);
+    const t = kodensTecken(m[3]), kropp = [];
+    for (let j = 0; j < t.length; j++) {
+      const x = t[j], fore = t[j - 1] ?? '';
+      if (x === 'as' && /^[\p{L}_$]/u.test(t[j + 1] ?? '')) { j++; continue; }
+      if (x === '!' && /^[)\]\p{L}\p{N}_$]/u.test(fore)) continue;
+      kropp.push(parametrar.includes(x) && fore !== '.' && fore !== '?.' ? `§${parametrar.indexOf(x)}` : x);
+    }
+    if (kropp.length < 6) return;
+    const nyckel = kropp.join('\u0001');
+    if (!per.has(nyckel)) per.set(nyckel, []);
+    per.get(nyckel).push(`${fil}:${i + 1} ${m[1]}`);
   });
   return [...per.values()].filter((x) => x.length > 1).map((x) => `${x.join(' och ')}: samma funktion`);
 }
@@ -453,6 +476,8 @@ function sammaFunktion(filer) {
 function sammaLista(filer) {
   const listor = [];
   for (const { fil, text } of filer) text.split(/\r?\n/).forEach((r, i) => {
+    // En kommentar är ingen lista (Codex 2026-10-25).
+    if (/^\s*(?:\/\/|\/\*|\*)/.test(r)) return;
     for (const m of r.matchAll(/\[\s*(['"])[^'"\n]*\1(?:\s*,\s*(['"])[^'"\n]*\2){2,}\s*\]/g)) listor.push({ var: `${fil}:${i + 1}`, ord: [...m[0].matchAll(/['"]([^'"\n]*)['"]/g)].map((x) => x[1].toLocaleLowerCase('sv')) });
   });
   // Ett ord är ett annat ords början när det har minst tre bokstäver ("mån" och "måndag"), så att ändelser som "ar" och
@@ -467,12 +492,15 @@ function sammaLista(filer) {
   const lang = 'const veckor = plan.veckor.filter((v) => v.pass.length > 0).map((v) => `${v.nr}: ${v.pass.join(", ")}`).join("; ");';
   ska('spärren mot dubbletter hittar samma kod i två filer, och inte kod som bara liknar',
     dubbletter(prov(lang)).length === 1 && dubbletter(prov('const veckor = plan.veckor.filter((v) => v.pass.length > 0);')).length === 0, dubbletter(prov(lang)));
-  ska('spärren mot dubbletter hittar samma lilla funktion med andra namn',
-    sammaFunktion([{ fil: 'a.ts', text: "const stor = (s) => s.charAt(0).toLocaleUpperCase('sv') + s.slice(1);" }, { fil: 'b.ts', text: "const versal = (t: string) => t.charAt(0).toLocaleUpperCase('sv') + t.slice(1);" }]).length === 1);
+  ska('spärren mot dubbletter hittar samma lilla funktion med andra namn, också som funktion med return, och inte en som bara har samma form',
+    sammaFunktion([{ fil: 'a.ts', text: "const stor = (s) => s.charAt(0).toLocaleUpperCase('sv') + s.slice(1);" }, { fil: 'b.ts', text: "const versal = (t: string) => t.charAt(0).toLocaleUpperCase('sv') + t.slice(1);" }]).length === 1
+    && sammaFunktion([{ fil: 'a.js', text: "export const utanPunkt = (s) => s.replace(/[.\\s]+$/, '');" }, { fil: 'b.ts', text: "function utanSlutpunkt(text: string) { return text.replace(/[.\\s]+$/, ''); }" }]).length === 1
+    && sammaFunktion([{ fil: 'a.ts', text: "const a = (x) => ({ value: x, label: 'x' });" }, { fil: 'b.ts', text: "const b = (y) => ({ value: y, label: 'y' });" }]).length === 0);
   ska('spärren mot dubbletter hittar samma lista av ord, också förkortad',
     sammaLista([{ fil: 'a.ts', text: "const A = ['måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag'];" }, { fil: 'b.ts', text: "const B = ['Mån', 'Tis', 'Ons', 'Tor', 'Fre'];" }]).length === 1
     && sammaLista([{ fil: 'a.ts', text: "const A = ['fore', 'efter', 'mitt'];" }, { fil: 'b.ts', text: "const B = ['röd', 'grön', 'blå'];" }]).length === 0
-    && sammaLista([{ fil: 'a.ts', text: "const A = ['en', 'ens', 'arnas'];" }, { fil: 'b.ts', text: "const B = ['en', 'ens', 'ar', 'arna'];" }]).length === 0);
+    && sammaLista([{ fil: 'a.ts', text: "const A = ['en', 'ens', 'arnas'];" }, { fil: 'b.ts', text: "const B = ['en', 'ens', 'ar', 'arna'];" }]).length === 0
+    && sammaLista([{ fil: 'a.js', text: "export const B = ['avsluta', 'forlang', 'byt'];" }, { fil: 'b.ts', text: "// Exempel: ['avsluta', 'forlang', 'byt']" }]).length === 0);
 }
 const modulen = MODULENS_FILER.map((fil) => ({ fil, text: readFileSync(join(rot, fil), 'utf8') }));
 const dubblettfynd = [...dubbletter(modulen), ...sammaFunktion(modulen), ...sammaLista(modulen)];
@@ -502,25 +530,16 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
   ska('skattningen: värdena vecka för vecka, veckorna med skattning och riktningen', JSON.stringify(s.elevensVarden(sm, e).slice(0, 3)) === '[2,3,null]'.replace('null', 'undefined') || (s.elevensVarden(sm, e)[0] === 2 && s.elevensVarden(sm, e)[1] === 3 && s.elevensVarden(sm, e)[2] === undefined), s.elevensVarden(sm, e));
   ska('skattningen: texterna', s.skattadeVeckor(sm).length === 1 && s.riktningText(e) === '2 till 3, framåt' && s.skattningenText('eleven', false) === 'skattning, 1 till 5, av hur väl eleven klarar målet på egen hand' && s.riktningText({ skattningar: [], forsta: null, senaste: null }) === 'Inte skattad än');
   ska('passen och besluten i en mening', s.passensLage(sm) === `${sm.gjordaVarit} av de ${sm.varit} pass som har varit är bockade. Planen har ${sm.planerade} pass.` && s.passensLage({ ...sm, varit: 0 }).startsWith('Inget pass har varit än') && s.passensLage({ ...sm, gjorda: 0 }).startsWith('Inga pass är bockade än') && s.passensLage({ ...sm, slut: true }) === `${sm.gjorda} av ${sm.planerade} pass är bockade som genomförda.` && s.narvaronText({ narvaro: 2 }, { gjorda: 3 }) === 'Var med i 2 av 3 bockade pass.' && s.beslutText(f.avstamning) === 'Fortsätt som planerat. Mer tid.' && s.beslutText({ not: 'Bara en mening' }) === 'Bara en mening.' && s.BESLUTEN.utvardering.join() === 'avsluta,forlang,byt', s.passensLage(sm));
-  ska('resultatet i en text', s.resultatText(info, { rad: 0, datum: '2026-11-23', varde: '4 av 8.' }) === `${ts.uppfoljning.rader[0].nar}, v. 48: 4 av 8`);
+  const efter = p.uppfoljning.find((u) => u.typ === 'efter');
+  ska('resultatet i en text, med radens namn som i uppföljningens rad', s.resultatText(p, info, { rad: 0, datum: '2026-11-23', varde: '4 av 8.' }) === `${s.uppfoljningensNamn(p, info, 0)}, v. 48: 4 av 8` && (!efter || s.resultatText(p, info, { rad: efter.rad, datum: '2027-01-18', varde: '6 av 8' }) === 'Efter insatsen, v. 3: 6 av 8'), efter && s.resultatText(p, info, { rad: efter.rad, datum: '2027-01-18', varde: '6 av 8' }));
+  ska('passens rad lika överallt: läget, de utan bock och de som inte blev av', s.passensRad({ ...sm, installda: 1, helgdagar: 2 }).startsWith(s.passensLage(sm)) && s.passensRad({ ...sm, installda: 1, helgdagar: 2 }).endsWith(' Ett pass ställdes in och två föll på helgdagar.') && s.passensRad({ planerade: 18, gjorda: 3, varit: 5, gjordaVarit: 3, slut: false, installda: 0, helgdagar: 0 }) === '3 av de 5 pass som har varit är bockade. Planen har 18 pass. Två pass som har varit är inte bockade.', s.passensRad({ ...sm, installda: 1, helgdagar: 2 }));
+  ska('kalenderfilen kallar uppföljningen efter insatsen som sidan', !efter || s.kalenderfil({ titel: 'T', uppfoljning: ts.uppfoljning.rader, fokus: [] }, p, { id: 'x', lank: () => 'l', nu: new Date(Date.UTC(2026, 10, 1)) }).includes('SUMMARY:T: uppföljning\\, efter insatsen'));
+  ska('besluten och meningarna behåller sitt frågetecken', s.beslutText({ beslut: 'fortsatt', not: 'Ska stödet fortsätta?' }) === 'Fortsätt som planerat. Ska stödet fortsätta?' && s.mening('Hur gick det?') === 'Hur gick det?');
+  ska('gruppens storlek, också högst', JSON.stringify(s.gruppensElever('Högst fyra elever')) === '{"min":1,"max":4,"klass":false}' && JSON.stringify(s.gruppensElever('Två till sex elever')) === '{"min":2,"max":6,"klass":false}' && s.gruppensElever('En hel klass') === null, s.gruppensElever('Högst fyra elever'));
   ska('diagrammet: stapeln mitt i facket och prickarna under den', s.stapelnsKant(10, 2, 36, 22) === 89 && JSON.stringify(s.prickarna(89, 22, ['med', 'borta']).map((x) => x.x)) === '[96.5,103.5]' && s.prickarna(0, 10, ['med'])[0].slag === 'med');
   ska('saker med nummer i en text', JSON.stringify(s.sakspann('Laminerat Bildserie 1–3, och Bildserie 2–1.').map((x) => [x.namn, x.nummer])) === '[[["Laminerat Bildserie","Bildserie"],[1,2,3]]]');
-  const lagring = await import('../src/scripts/insatser-lagring.ts');
+  const lagring = foljd(await import('../src/scripts/insatser-lagring.ts'));
   ska('planens adress och dagens datum', lagring.planensAdress({ metod: 'til-i-grupp', val: 's=2026-11-02&d=135&l=6', id: 'abc123' }, 3) === '/stodundervisning/til-i-grupp/planera#s=2026-11-02&d=135&l=6&p=abc123&v=3' && /^\d{4}-\d{2}-\d{2}$/.test(lagring.idagLokalt()));
-}
-// Rötterna har prov: varje funktion i tabellen under Spärren mot drift i PLANERA.md finns i standarden, i lagringen eller i
-// webbläsarens rot, och planprovet prövar den, så att en rot som alla vyer hämtar ur alltid räknar rätt (Niclas 2026-10-25:
-// "och att denna funktion måste fungera korrekt").
-{
-  const lagring = await import('../src/scripts/insatser-lagring.ts');
-  const webb = await import('../src/scripts/webblasaren.ts');
-  const sparren = (readFileSync(join(rot, 'PLANERA.md'), 'utf8').replace(/\r\n/g, '\n').split('\n## Spärren mot drift\n')[1] ?? '').split('\n## ')[0];
-  const rotter = [...new Set(sparren.split('\n').filter((r) => /^\| [^|]+ \| .*`/.test(r)).flatMap((r) => [...r.split('|')[2].matchAll(/`([\p{L}_$][\p{L}\p{N}_$]*)`/gu)].map((m) => m[1])))];
-  const egen = readFileSync(fileURLToPath(import.meta.url), 'utf8');
-  const saknas = rotter.filter((n) => !(n in s) && !(n in lagring) && !(n in webb));
-  const utanProv = rotter.filter((n) => !new RegExp(`(?:\\bs|\\blagring|\\bw)\\.${n}\\b`).test(egen));
-  ska(`rötterna i PLANERA.md finns (${rotter.length} st)`, rotter.length >= 40 && !saknas.length, saknas);
-  ska('rötterna i PLANERA.md prövas i planprovet', !utanProv.length, utanProv);
 }
 // Pågående insatser i statistiken (K-504, src/scripts/insatser-lagring.ts): en plan som är inne i sina veckor ger händelsen
 // planera:<metod>:pagar, en andra plan för samma metod :2, och en plan som är slut eller inte har börjat ingen. Händelsen
@@ -536,7 +555,7 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
 // En apps egen webbläsare (K-510, src/scripts/webblasaren.ts): en funktion känner igen den för Planera insatsen och raden om
 // appen Stöd, och vägen ut är en intent-länk utan bestämd app på Android och x-safari-https på iPhone, med planen efter #.
 {
-  const w = await import('../src/scripts/webblasaren.ts');
+  const w = foljd(await import('../src/scripts/webblasaren.ts'));
   const IOS = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148';
   const ANDROID = 'Mozilla/5.0 (Linux; Android 14; SM-S911B Build/UP1A.231005.007; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/130.0.6723.58 Mobile Safari/537.36';
   const fall = [
@@ -559,7 +578,52 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
     android.startsWith('intent://niclasfohlin.se/stodundervisning/til-i-grupp/planera#s=2026-11-02&d=124&l=6&p=abc123#Intent;scheme=https;') && !android.includes('package=')
     && android.slice(android.lastIndexOf('#')).startsWith('#Intent;') && android.includes(`S.browser_fallback_url=${encodeURIComponent(adress)}`) && android.endsWith(';end'), android);
   ska('vägen ut på iPhone: Safari, med planen', w.vagenUt(adress, w.webblasaren(`${IOS} [FBAN/FBIOS]`, {}))?.href === 'x-safari-https://niclasfohlin.se/stodundervisning/til-i-grupp/planera#s=2026-11-02&d=124&l=6&p=abc123');
-  ska('sidans adress utan det appen har lagt till', w.sidansAdress({ origin: 'https://niclasfohlin.se', pathname: '/stodundervisning/x/planera', hash: '#s=1' }) === 'https://niclasfohlin.se/stodundervisning/x/planera#s=1');
+}
+// Pdf:erna säger samma sak som sidan och texterna (K-509): gruppens och elevens sammanställning görs ur en plan med
+// skattningar, bockar, närvaro, resultat och beslut, och texten i dem läses med pdftotext och jämförs med standardens rötter.
+// Provarna i webbläsaren kan inte fånga pdf:en (steget Samma sak överallt 2026-10-25), så den prövas här.
+{
+  const pdf = await import('../src/scripts/planpdf.ts');
+  const p = s.planera(tsMp, { ...s.forval(tsMp, '2026-10-26'), start: '2026-11-02', langd: 6, dagar: [1, 3, 5] });
+  const efter = p.uppfoljning.find((u) => u.typ === 'efter');
+  const f = s.rensaFoljd({
+    gjorda: p.pass.slice(0, 15).map((x) => x.datum), narvaro: true, elever: [{ id: 'a1', namn: 'Ali' }, { id: 'b2', namn: 'Bea' }],
+    franvaro: { [p.pass[2].datum]: ['b2'] },
+    skattning: Object.fromEntries(p.veckor.slice(0, 5).map((v, i) => [v.mandag, { a1: Math.min(5, 2 + Math.floor(i / 2)), b2: 2 }])),
+    vecka: { [p.veckor[0].mandag]: { varde: 3, not: 'Går det bättre nästa vecka?' } },
+    resultat: { [`0-${p.uppfoljning[0].tillfallen[0].datum}`]: { a1: '3 av 8' }, ...(efter ? { [`${efter.rad}-${efter.tillfallen[0].datum}`]: { a1: '6 av 8.' } } : {}) },
+    avstamning: { beslut: 'fortsatt', not: 'Ska Bea få mer tid?' }, utvardering: { beslut: 'avsluta' },
+  });
+  const idag = '2026-12-21';
+  const sm = s.sammanstallning(p, f, idag);
+  const pinfo = { metod: ts.titel, grupp: 'Grupp 4B', niva: 'Mellan', mal: s.malText(ts.plan.mal), fragan: s.skattningsfragan(), uppfoljning: ts.uppfoljning.rader };
+  const text = (bytes) => {
+    const fil = join(tmpdir(), `planprov-${process.pid}-${Math.random().toString(36).slice(2)}.pdf`);
+    writeFileSync(fil, bytes);
+    try { return execFileSync('pdftotext', ['-enc', 'UTF-8', fil, '-'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).replace(/\s+/g, ' '); } catch { return null; } finally { rmSync(fil, { force: true }); }
+  };
+  const grupp = text(await pdf.gruppPdf(p, sm, pinfo, idag)), elev = text(await pdf.elevPdf(p, sm, 'a1', pinfo, idag, f.franvaro));
+  ska('pdf:erna går att läsa (pdftotext behövs)', grupp !== null && elev !== null);
+  if (grupp !== null && elev !== null) {
+    ska('gruppens pdf: perioden, passens rad, riktningen och närvaron som på sidan', grupp.includes(s.datumspann(p.forstaPass, p.sistaPass)) && grupp.includes(s.passensRad(sm)) && grupp.includes(`${s.riktningText(sm.elever[0])}.`) && grupp.includes(s.narvaronText(sm.elever[0], sm)), grupp.slice(0, 600));
+    ska('gruppens pdf: uppföljningens rader, Efter insatsen, besluten och anteckningen som i texten', s.uppfoljningensRader(p, pinfo).every((r) => grupp.includes(r)) && (!efter || grupp.includes('Efter insatsen, v.')) && grupp.includes('Fortsätt som planerat. Ska Bea få mer tid?') && grupp.includes('Går det bättre nästa vecka?') && !grupp.includes('?.'), grupp.slice(0, 600));
+    ska('gruppens pdf: veckornas namn i diagrammet och i texten', grupp.includes(s.kalendervecka(p.veckor[0].vecka.vecka)) && grupp.includes(s.planveckansNamn(p, p.veckor[0]).Text), grupp.slice(0, 600));
+    ska('elevens pdf: perioden, närvaron, resultatet och gruppens beslut', elev.includes(s.datumspann(p.forstaPass, p.sistaPass)) && elev.includes(s.narvaronText(sm.elever[0], sm)) && (!efter || elev.includes('Efter insatsen, v.')) && elev.includes('Gruppens avstämning mitt i insatsen: Fortsätt som planerat.') && elev.includes('Utvärdering efter insatsen: Avsluta insatsen.'), elev.slice(0, 600));
+  }
+}
+// Rötterna har prov: varje funktion i tabellen under Spärren mot drift i PLANERA.md finns i standarden, i lagringen eller i
+// webbläsarens rot, och planprovet har kört den, så att en rot som alla vyer hämtar ur alltid räknar rätt (Niclas 2026-10-25:
+// "och att denna funktion måste fungera korrekt"). Det som har körts räknas genom importerna, så att ett namn i en
+// kommentar inte räknas som ett prov (Codex samma dag). Kontrollen står sist bland motorns prov.
+{
+  const lagring = await import('../src/scripts/insatser-lagring.ts');
+  const webb = await import('../src/scripts/webblasaren.ts');
+  const sparren = (readFileSync(join(rot, 'PLANERA.md'), 'utf8').replace(/\r\n/g, '\n').split('\n## Spärren mot drift\n')[1] ?? '').split('\n## ')[0];
+  const rotter = [...new Set(sparren.split('\n').filter((r) => /^\| [^|]+ \| .*`/.test(r)).flatMap((r) => [...r.split('|')[2].matchAll(/`([\p{L}_$][\p{L}\p{N}_$]*)`/gu)].map((m) => m[1])))];
+  const saknas = rotter.filter((n) => !(n in s) && !(n in lagring) && !(n in webb));
+  const utanProv = rotter.filter((n) => !anvanda.has(n));
+  ska(`rötterna i PLANERA.md finns (${rotter.length} st)`, rotter.length >= 40 && !saknas.length, saknas);
+  ska('rötterna i PLANERA.md har körts av planprovet', !utanProv.length, utanProv);
 }
 
 if (fel.length) { console.error(`planprov: ${fel.length} fel:\n  ${fel.join('\n  ')}`); process.exit(1); }
@@ -1189,7 +1253,7 @@ try {
     await fb.bild(`facebook-${namn.toLowerCase()}`, true);
     await fb.tryck('#pl-ut-kopiera');
     await vanta(200);
-    sant(`i Facebooks webbläsare på ${namn}: Kopiera länken kopierar sidans adress`, (await fb.kor('window.__kopierat')) === (await fb.kor('location.origin + location.pathname + location.hash')), await fb.kor('window.__kopierat'));
+    sant(`i Facebooks webbläsare på ${namn}: Kopiera länken kopierar planens länk med valen`, (await fb.kor('window.__kopierat'))?.startsWith(`${PLAN}#s=`), await fb.kor('window.__kopierat'));
     sant(`i Facebooks webbläsare på ${namn}: inga fel i konsolen`, !fb.undantag.length, fb.undantag);
     fb.stang();
   }
@@ -1217,8 +1281,9 @@ try {
   sant('utvärderingen står under Besluten', (await h.text('#pl-samman'))?.includes('Förläng insatsen'));
   await h.tryck('[data-forlang="2"]');
   sant('förläng med två veckor', (await h.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].val`))?.includes('l=8') && (await h.text('#pl-toast'))?.includes('2 veckor längre'), await h.text('#pl-toast'));
-  // Resultatet efter insatsen står kvar på sin dag, och den nya mätningen efter är tom (Codex 2026-10-24).
-  sant('förlängningen flyttar inte resultatet efter', (await h.text('#pl-samman'))?.includes('Efter sex till åtta veckor, v. 51: 6 av 8') && (await h.kor(`(() => { const r = JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.resultat; return !r['2-2026-12-28'] && r['2-2026-12-14'].e1 === '6 av 8'; })()`)), await h.text('#pl-samman'));
+  // Resultatet efter insatsen står kvar på sin dag, och den nya mätningen efter är tom (Codex 2026-10-24). Raden heter Efter
+  // insatsen, som i uppföljningens rad (uppfoljningensNamn, K-509).
+  sant('förlängningen flyttar inte resultatet efter', (await h.text('#pl-samman'))?.includes('Efter insatsen, v. 51: 6 av 8') && (await h.kor(`(() => { const r = JSON.parse(localStorage.getItem('insatser')).planer[0].foljd.resultat; return !r['2-2026-12-28'] && r['2-2026-12-14'].e1 === '6 av 8'; })()`)), await h.text('#pl-samman'));
   await h.tryck('#pl-toast [data-toast-gor]');
   sant('förlängningen kan ångras', (await h.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].val`))?.includes('l=6') && (await h.text('#pl-veckan-rubrik')) === 'Efter insatsen', await h.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0].val`));
   await h.tryck('#pl-samman [data-samman]');

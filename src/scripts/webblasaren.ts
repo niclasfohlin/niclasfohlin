@@ -42,9 +42,6 @@ export function webblasaren(ua = navigator.userAgent, o: { iAppen?: boolean; mac
   return { app, ios, android };
 }
 
-/** Sidans adress utan det som appen har lagt till, som Facebooks fbclid: sidan och det som står efter #. */
-export const sidansAdress = (l: { origin: string; pathname: string; hash: string }) => `${l.origin}${l.pathname}${l.hash}`;
-
 /**
  * Vägen ut ur appens webbläsare, med knappens text, eller null där det inte finns någon. På Android står planen efter #
  * före intentens del, som Android läser från det sista #.

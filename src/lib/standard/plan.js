@@ -5,7 +5,7 @@
 // (ÅÅÅÅ-MM-DD) i UTC, så att sommartiden aldrig flyttar en dag. Sajtens METODER.md under Planera insatsen säger hur
 // metodens fält skrivs.
 import { periodensLangd, postensRad, tidensMatt, tidensVeckotakt } from './index.js';
-import { decimal, liten, mening, ORDNINGSTAL, rentText, skyddaRegex, stor, talAv, talIRegex, tvasiffrigt, utanPunkt } from './text.js';
+import { decimal, liten, mening, ORDNINGSTAL, rentText, skyddaRegex, stor, talAv, talIRegex, talText, tvasiffrigt, utanPunkt } from './text.js';
 
 const DAG = 86400000;
 const tillTid = (s) => { const [a, m, d] = s.split('-').map(Number); return Date.UTC(a, m - 1, d); };
@@ -714,9 +714,17 @@ const narIText = (nar) => (/^vecka \d+$/i.test(nar.trim()) ? `${nar.trim()} i in
  * @param {Plan['uppfoljning'][number]} u
  */
 export function uppfoljningensRad(plan, info, u) {
-  const namn = u.rad === plan.uppfoljning.find((x) => x.typ === 'efter')?.rad ? 'Efter insatsen' : narIText(info.uppfoljning[u.rad]?.nar ?? '');
+  const namn = uppfoljningensNamn(plan, info, u.rad);
   return u.tillfallen.length ? `${namn}, ${uppraknat([...new Set(u.tillfallen.map((t) => kalendervecka(isoVecka(t.datum).vecka)))])}` : namn;
 }
+/**
+ * Uppföljningens rad med sitt namn, i raden och vid elevens resultat: den första raden efter insatsen heter Efter insatsen,
+ * och en rad som heter efter insatsens vecka säger det (narIText).
+ * @param {Plan} plan
+ * @param {{ uppfoljning: { nar: string }[] }} info
+ * @param {number} rad
+ */
+export const uppfoljningensNamn = (plan, info, rad) => (rad === plan.uppfoljning.find((x) => x.typ === 'efter')?.rad ? 'Efter insatsen' : narIText(info.uppfoljning[rad]?.nar ?? ''));
 /** Uppföljningens rader med datum, som sammanställningen, sidan och pdf:en visar dem. @param {Plan} plan @param {{ uppfoljning: { nar: string }[] }} info */
 export const uppfoljningensRader = (plan, info) => plan.uppfoljning.filter((u) => u.tillfallen.length).map((u) => uppfoljningensRad(plan, info, u));
 /** Vad skattningen är, i en text: "skattning varje vecka, 1 till 5, av hur väl eleven klarar målet på egen hand". @param {string} vem eleven, eleverna eller gruppen @param {boolean} [varjeVecka] */
@@ -905,12 +913,22 @@ export const BESLUT = Object.freeze({ fortsatt: 'Fortsätt som planerat', juster
 /** Besluten att välja mellan, mitt i insatsen och efter den. */
 export const BESLUTEN = Object.freeze({ avstamning: Object.freeze(['fortsatt', 'justera']), utvardering: Object.freeze(['avsluta', 'forlang', 'byt']) });
 /** Beslutet och lärarens mening, var för sig och med punkt: "Fortsätt som planerat. Gruppen behöver mer tid." En mening utan beslut kommer med (Codex 2026-10-24). @param {{ beslut?: string, not?: string }} b */
-export const beslutText = (b) => [b.beslut ? BESLUT[b.beslut] ?? b.beslut : '', b.not ?? ''].map(utanPunkt).filter(Boolean).map((x) => `${x}.`).join(' ');
+export const beslutText = (b) => [b.beslut ? BESLUT[b.beslut] ?? b.beslut : '', b.not ?? ''].map(utanPunkt).filter(Boolean).map((x) => mening(x)).join(' ');
 /**
  * Passen som läraren har bockat, i en mening, lika på sidan, i pdf:en och i texten som kopieras: de bockade bland passen som
  * har varit, så att ett pass som är bockat i förväg inte räknas (buggjakten 2026-10-24), och efter insatsen alla.
  * @param {{ planerade: number, gjorda: number, varit: number, gjordaVarit: number, slut: boolean }} s
  */
+/**
+ * Passens rad, lika på sidan, i pdf:en och i texten som kopieras (steget Samma sak överallt 2026-10-25: sidan och texten
+ * hade var sitt tillägg): passens läge, de som har varit utan bock, och de som ställdes in eller föll på en helgdag.
+ * @param {{ planerade: number, gjorda: number, varit: number, gjordaVarit: number, slut: boolean, installda: number, helgdagar: number }} s
+ */
+export function passensRad(s) {
+  const obockade = s.gjorda && s.varit ? Math.max(0, s.slut ? s.planerade - s.gjorda : s.varit - s.gjordaVarit) : 0;
+  const bort = [s.installda ? `${talText(s.installda)} pass ställdes in` : '', s.helgdagar ? `${talText(s.helgdagar)} föll på ${s.helgdagar === 1 ? 'en helgdag' : 'helgdagar'}` : ''].filter(Boolean);
+  return [passensLage(s), obockade ? `${stor(talText(obockade))} ${obockade === 1 ? 'pass som har varit är inte bockat' : 'pass som har varit är inte bockade'}.` : '', bort.length ? `${stor(uppraknat(bort))}.` : ''].filter(Boolean).join(' ');
+}
 export function passensLage(s) {
   if (!s.varit) return `Inget pass har varit än. Planen har ${s.planerade} pass.`;
   if (!s.gjorda) return `Inga pass är bockade än. Planen har ${s.planerade} pass.`;
@@ -919,8 +937,8 @@ export function passensLage(s) {
 }
 /** Elevens närvaro i en mening: "Var med i 5 av 6 bockade pass." @param {{ narvaro: number | null }} e @param {{ gjorda: number }} s */
 export const narvaronText = (e, s) => `Var med i ${e.narvaro} av ${s.gjorda} bockade pass.`;
-/** Ett resultat i metodens uppföljning: "Före insatsen, v. 45: 4 av 8". @param {{ uppfoljning: { nar: string }[] }} info @param {{ rad: number, datum: string, varde: string }} t */
-export const resultatText = (info, t) => `${info.uppfoljning[t.rad]?.nar ?? ''}, ${kalendervecka(isoVecka(t.datum).vecka)}: ${utanPunkt(t.varde)}`;
+/** Ett resultat i metodens uppföljning, med radens namn som i uppföljningens rad: "Efter insatsen, v. 51: 6 av 8". @param {Plan} plan @param {{ uppfoljning: { nar: string }[] }} info @param {{ rad: number, datum: string, varde: string }} t */
+export const resultatText = (plan, info, t) => `${uppfoljningensNamn(plan, info, t.rad)}, ${kalendervecka(isoVecka(t.datum).vecka)}: ${utanPunkt(t.varde)}`;
 /** Veckorna där läraren har skattat hur veckan gick. @template {{ skattning?: number }} T @param {{ veckor: T[] }} s @returns {T[]} */
 export const skattadeVeckor = (s) => s.veckor.filter((v) => v.skattning);
 /** En elevs skattningar vecka för vecka, med ett tomt värde för en vecka utan, till diagrammen. @param {{ veckor: { nr: number }[] }} s @param {{ skattningar: { nr: number, varde: number }[] }} e */
@@ -969,8 +987,7 @@ export function sammanstallningstext(info, plan, s) {
   const rader = [];
   if (plan.forstaPass && plan.sistaPass) rader.push(`Sammanställning: ${info.titel}, ${datumspann(plan.forstaPass, plan.sistaPass)}.`);
   if (info.mal) rader.push(`Mål: ${malText(info.mal)}`);
-  const bort = [s.installda ? `${s.installda} pass ställdes in` : '', s.helgdagar ? `${s.helgdagar} föll på ${s.helgdagar === 1 ? 'en helgdag' : 'helgdagar'}` : ''].filter(Boolean);
-  rader.push(`Pass: ${passensLage(s)}${bort.length ? ` ${stor(uppraknat(bort))}.` : ''}`);
+  rader.push(`Pass: ${passensRad(s)}`);
   const elever = s.elever.filter((e) => e.id !== GRUPPEN);
   const skattade = (s.grupp ? s.elever : elever).filter((e) => e.skattningar.length);
   if (skattade.length) {
@@ -979,8 +996,11 @@ export function sammanstallningstext(info, plan, s) {
       rader.push(`${stor(skattningenText('gruppen'))}: ${skattningarna(s, e)}.`);
     } else {
       const fore = medel(skattade.map((e) => e.forsta.varde)), sedan = medel(skattade.map((e) => e.senaste.varde));
-      const upp = skattade.filter((e) => riktning(e) === 'upp').length;
-      rader.push(`${stor(skattningenText('eleverna'))}: medel ${decimal(fore)} vid första skattningen och ${decimal(sedan)} vid den senaste. ${upp} av ${skattade.length} elever har gått framåt.`);
+      // Framåt räknas bland eleverna med två skattningar eller fler, så att en elev som har skattats en gång inte räknas som
+      // en som står still (buggjakten 2026-10-25: "0 av 1 elever" med fyra elever i listan).
+      const jamforda = skattade.filter((e) => riktning(e) !== null);
+      const upp = jamforda.filter((e) => riktning(e) === 'upp').length;
+      rader.push(`${stor(skattningenText('eleverna'))}: medel ${decimal(fore)} vid första skattningen och ${decimal(sedan)} vid den senaste.${jamforda.length ? ` ${upp} av ${jamforda.length} ${jamforda.length === 1 ? 'elev' : 'elever'} med två skattningar eller fler har gått framåt.` : ''}`);
     }
   }
   const gruppen = s.grupp ? null : s.elever.find((e) => e.id === GRUPPEN && e.skattningar.length);
@@ -992,7 +1012,7 @@ export function sammanstallningstext(info, plan, s) {
   const veckorna = skattadeVeckor(s);
   if (veckorna.length) rader.push(`Hur veckorna gick, 1 till 5: ${veckorna.map((v) => `${veckansNamn(v).text}: ${v.skattning}`).join(', ')}. Medel ${decimal(s.veckomedel)}.`);
   const noter = s.veckor.filter((v) => v.not);
-  if (noter.length) rader.push(`Anteckningar: ${noter.map((v) => `${veckansNamn(v).text}: ${utanPunkt(v.not)}`).join('. ')}.`);
+  if (noter.length) rader.push(`Anteckningar: ${noter.map((v) => mening(`${veckansNamn(v).text}: ${v.not}`)).join(' ')}`);
   if (s.avstamning?.beslut || s.avstamning?.not) rader.push(`Avstämning mitt i insatsen${s.mitt ? `, ${veckansNamn(s.veckor[s.mitt - 1]).text}` : ''}: ${beslutText(s.avstamning)}`);
   if (s.utvardering?.beslut || s.utvardering?.not) rader.push(`Utvärdering efter insatsen: ${beslutText(s.utvardering)}`);
   const tider = uppfoljningensRader(plan, info);
@@ -1015,7 +1035,7 @@ export function elevtext(info, plan, s, id) {
   if (info.mal) delar.push(`Mål: ${malText(info.mal)}`);
   if (e.narvaro !== null && s.gjorda) delar.push(narvaronText(e, s));
   if (e.skattningar.length) delar.push(`${stor(skattningenText('eleven', false))}: ${skattningarna(s, e)}.`);
-  for (const t of elevensResultat(plan, e.resultat)) delar.push(`${resultatText(info, t)}.`);
+  for (const t of elevensResultat(plan, e.resultat)) delar.push(mening(resultatText(plan, info, t)));
   return utanNamn(delar.join(' '), s.elever.filter((x) => x.id !== GRUPPEN));
 }
 
@@ -1071,8 +1091,10 @@ export function kalenderfil(info, plan, o) {
   }
   for (const u of plan.uppfoljning) u.tillfallen.forEach((t, i) => {
     const fore = t.vecka === 0;
-    const nar = (info.uppfoljning[u.rad]?.nar ?? '').toLocaleLowerCase('sv');
-    handelse(`${o.id}-u${u.rad}-${i + 1}`, t.datum, `${info.titel}: ${fore ? `före första passet, ${nar}` : `uppföljning, ${nar}`}${vem}`, `${fore ? 'Före första passet' : 'Uppföljningen'} i planen: ${o.lank(fore ? 'fore' : t.vecka ?? undefined)}`, o.lank(fore ? 'fore' : t.vecka ?? undefined), undefined, fore ? 5 : 1);
+    // Raden heter som på sidan, Efter insatsen för den första efter insatsen (buggjakten 2026-10-25: kalendern sa "efter sista
+    // passet" där sidan sa Efter insatsen).
+    const nar = uppfoljningensNamn(plan, info, u.rad).toLocaleLowerCase('sv');
+    handelse(`${o.id}-u${u.rad}-${i + 1}`, t.datum, `${info.titel}: ${fore ? `före första passet, ${nar}` : `uppföljning, ${nar}`}${vem}`, `${fore ? 'Före första passet' : 'Uppföljningen'} i planen: ${o.lank(fore ? 'fore' : t.vecka ?? undefined)}`, o.lank(fore ? 'fore' : t.vecka ?? undefined), undefined, fore || u.typ === 'efter' ? 5 : 1);
   });
   rader.push('END:VCALENDAR');
   return rader.map(vik).join('\r\n') + '\r\n';

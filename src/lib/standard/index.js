@@ -4,7 +4,7 @@
 // riggen kör samma kod. scripts/standardprov.mjs stoppar en import av astro:, node: eller sajtens data här och prövar
 // funktionerna. Reglerna står i REGLER.md och ändringarna i CHANGELOG.md.
 
-import { ORDNINGSTAL, talAv, talIRegex } from './text.js';
+import { ORDNINGSTAL, skyddaRegex, talAv, talIRegex } from './text.js';
 
 /**
  * Adressens led ur ett namn: små bokstäver, tecknen över bokstäverna bort (å och ä blir a, ö blir o, é blir e, ü blir u),
@@ -200,7 +200,7 @@ const TALET = `(?:${talIRegex(2, 99)})`;
  */
 export function fastaAntal(text, ord, grupper = []) {
   const fore = '(?<![\\p{L}\\d–-])', efter = '(?![\\p{L}\\d])';
-  const lista = (o) => o.map((x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+  const lista = (o) => o.map(skyddaRegex).join('|');
   // "fem på varje nivå" står utan substantiv och gäller posterna, så den formen prövas bara med dem.
   const traff = (subst, minst, perGrupp) => {
     if (!subst.length) return [];
@@ -355,14 +355,20 @@ export function mojligaUpplagg(tid) {
 const FAKTAORD = `(${talIRegex(1, 20)})`;
 const spann = (a, b) => (b !== undefined && b !== a ? `${a}–${b}` : `${a}`);
 
-/** Gruppens storlek: det minsta och största antalet elever, och om gruppen kan vara en hel klass. @param {string} grupp @returns {{ min: number, max?: number, klass: boolean } | null} */
+// Ett spann av tal före ett ord i faktarutan, som "två till sex elever" och "6–8 veckor": talen, ordet och var spannet slutar.
+const spannFore = (t, ord) => {
+  const m = t.match(new RegExp(String.raw`(?<![\p{L}\d])${FAKTAORD}(?:\s*(?:till|–|-)\s*${FAKTAORD})?\s+(${ord})`, 'u'));
+  return m ? { min: talAv(m[1]), ...(m[2] !== undefined ? { max: talAv(m[2]) } : {}), ord: m[3], slut: /** @type {number} */ (m.index) + m[0].length } : null;
+};
+
+/** Gruppens storlek: det minsta och största antalet elever, och om gruppen kan vara en hel klass. "Högst fyra elever" är en till fyra (Codex 2026-10-25). @param {string} grupp @returns {{ min: number, max?: number, klass: boolean } | null} */
 export function gruppensElever(grupp) {
   const t = String(grupp ?? '').toLowerCase();
-  const m = t.match(new RegExp(String.raw`(?<![\p{L}\d])${FAKTAORD}(?:\s*(?:till|–|-)\s*${FAKTAORD})?\s+elever`, 'u'));
-  if (!m) return null;
-  const min = talAv(m[1]);
-  const max = m[2] !== undefined ? talAv(m[2]) : undefined;
-  return { min, ...(max !== undefined ? { max } : {}), klass: /hel klass|helklass/.test(t) };
+  const klass = /hel klass|helklass/.test(t);
+  const hogst = t.match(new RegExp(String.raw`(?<![\p{L}\d])högst\s+${FAKTAORD}\s+elever`, 'u'));
+  if (hogst) return { min: 1, max: talAv(hogst[1]), klass };
+  const s = spannFore(t, 'elever');
+  return s ? { min: s.min, ...(s.max !== undefined ? { max: s.max } : {}), klass } : null;
 }
 
 /** Hur ofta, som ett spann: det minsta och största antalet pass i veckan. @param {string} tid @returns {{ min: number, max: number } | null} */
@@ -380,10 +386,9 @@ export function tidensVeckotakt(tid) {
 /** Perioden i veckor, eller i pass för en lektion i en serie, och om den kan bli längre. @param {string} period @returns {{ min: number, max?: number, enhet: 'veckor' | 'pass', mer: boolean, perKurs: boolean } | null} */
 export function periodensLangd(period) {
   const t = String(period ?? '').toLowerCase();
-  const m = t.match(new RegExp(String.raw`(?<![\p{L}\d])${FAKTAORD}(?:\s*(?:till|–|-)\s*${FAKTAORD})?\s+(veckor|vecka|pass)`, 'u'));
-  if (!m) return null;
-  const max = m[2] !== undefined ? talAv(m[2]) : undefined;
-  return { min: talAv(m[1]), ...(max !== undefined ? { max } : {}), enhet: m[3] === 'pass' ? 'pass' : 'veckor', mer: /eller mer|så länge/.test(t), hogst: /högst/.test(t.slice(0, m.index + m[0].length)), perKurs: /varje kurs|per kurs/.test(t) };
+  const s = spannFore(t, 'veckor|vecka|pass');
+  if (!s) return null;
+  return { min: s.min, ...(s.max !== undefined ? { max: s.max } : {}), enhet: s.ord === 'pass' ? 'pass' : 'veckor', mer: /eller mer|så länge/.test(t), hogst: /högst/.test(t.slice(0, s.slut)), perKurs: /varje kurs|per kurs/.test(t) };
 }
 
 /**

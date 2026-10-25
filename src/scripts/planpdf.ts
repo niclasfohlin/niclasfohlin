@@ -4,7 +4,7 @@
 // kopieras till dokumentationen har inga namn. Typsnittet är pdf:ens eget (Helvetica). Ett tecken som det inte har skrivs
 // utan sina accenter, så att utskriften aldrig går sönder (Niclas: "Ł, Ş och č är så ovanliga att du kan hoppa över dem").
 import type { PDFFont, PDFPage } from 'pdf-lib';
-import { BESLUT, beslutText, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronText, passensLage, prickarna, resultatText, riktningText, skattadeVeckor, SKALAN, stapelnsKant, uppfoljningensRader, veckansNamn, type Plan, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
+import { BESLUT, beslutText, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronText, passensRad, prickarna, resultatText, riktningText, skattadeVeckor, SKALAN, stapelnsKant, uppfoljningensRader, veckansNamn, type Plan, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
 
 const A4: [number, number] = [595.28, 841.89];
 const KANT = 50;
@@ -122,14 +122,14 @@ export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, id
   const p = await dokument(`Sammanställning: ${info.metod}`);
   huvud(p, 'Sammanställning', plan, info, idag);
   p.rubrik('Passen');
-  p.text(passensLage(s), { luft: 2 });
+  p.text(passensRad(s), { luft: 2 });
   if (s.gjorda) p.text(s.veckor.map((v) => `${veckansNamn(v).Text}: ${v.gjorda} av ${v.planerade}`).join('. ') + '.', { farg: p.farg.svag, storlek: 9.5 });
   p.rubrik(s.grupp ? 'Gruppen' : 'Eleverna', 110);
   skalan(p, info, 4);
   for (const e of s.elever) {
     p.text(e.namn, { fet: true, storlek: 11.5 });
     p.staplar(elevensVarden(s, e), veckoetiketter(s), { hojd: 40, mitt: s.mitt });
-    p.text([`${riktningText(e)}.`, e.id !== GRUPPEN && e.narvaro !== null && s.gjorda ? narvaronText(e, s) : '', ...elevensResultat(plan, e.resultat).map((t) => `${resultatText(info, t)}.`)].filter(Boolean).join(' '), { luft: 8 });
+    p.text([`${riktningText(e)}.`, e.id !== GRUPPEN && e.narvaro !== null && s.gjorda ? narvaronText(e, s) : '', ...elevensResultat(plan, e.resultat).map((t) => mening(resultatText(plan, info, t)))].filter(Boolean).join(' '), { luft: 8 });
   }
   const veckorna = skattadeVeckor(s);
   if (veckorna.length || s.veckor.some((v) => v.not)) {
@@ -158,7 +158,7 @@ export async function elevPdf(plan: Plan, s: Sammanstallning, id: string, info: 
   p.rubrik('Utvecklingen');
   p.text(`${riktningText(e)}.`);
   if (narvaro) p.text(narvaronText(e, s));
-  for (const t of elevensResultat(plan, e.resultat)) p.text(`${resultatText(info, t)}.`);
+  for (const t of elevensResultat(plan, e.resultat)) p.text(mening(resultatText(plan, info, t)));
   if (s.avstamning?.beslut) p.text(`Gruppens avstämning mitt i insatsen: ${BESLUT[s.avstamning.beslut as keyof typeof BESLUT] ?? s.avstamning.beslut}.`);
   if (s.utvardering?.beslut) p.text(`Utvärdering efter insatsen: ${BESLUT[s.utvardering.beslut as keyof typeof BESLUT] ?? s.utvardering.beslut}.`);
   return p.avsluta(`${e.namn} · ${info.metod} · Planera insatsen på niclasfohlin.se · lärarens egen plan`);

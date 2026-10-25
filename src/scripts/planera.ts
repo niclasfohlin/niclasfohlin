@@ -15,7 +15,7 @@
 // fyller i den"). Elevernas namn och allt läraren för in stannar i webbläsaren och följer aldrig med länken,
 // kalenderfilen, statistiken eller texterna som kopieras.
 import {
-  arDatum, BESLUT, BESLUTEN, beslutText, dagarText, dagKort, dagText, datumspann, datumText, decimal, dokumentationstext, efterDatum, elevensResultat, elevensVarden, elevtext, esc, forstaLedet, forstaMandagen, forval, forvaldLangd, gangen, GRUPPEN, iDatumordning, klockslag, liten, mening, metodveckan, minuterAv, minuterISpann, narvaronText, passensLage, plusMinuter, prickarna, resultatText, riktningText, sakspann, skattadeVeckor, skattningenText, stapelnsKant, stor, talText, uppfoljningensRader, veckansPass, veckodagKort, helgdag, isoVecka, kalenderfil, kalendervecka, kalenderveckaUtskriven, kodaVal,
+  arDatum, BESLUT, BESLUTEN, beslutText, slugAv, dagarText, dagKort, dagText, datumspann, datumText, decimal, dokumentationstext, efterDatum, elevensResultat, elevensVarden, elevtext, esc, forstaLedet, forstaMandagen, forval, forvaldLangd, gangen, GRUPPEN, iDatumordning, klockslag, liten, mening, metodveckan, minuterAv, minuterISpann, narvaronText, passensRad, plusMinuter, prickarna, resultatText, riktningText, sakspann, skattadeVeckor, skattningenText, stapelnsKant, stor, talText, uppfoljningensRader, veckansPass, veckodagKort, helgdag, isoVecka, kalenderfil, kalendervecka, kalenderveckaUtskriven, kodaVal,
   LANGSTA, lasVal, malText, metodplan, minuterText, mittVeckan, nastaPass, passensMinuter, passetsDag, passetsRoller, passetsTid, planera, planvecka, planveckanKort, planveckansNamn, plusDagar,
   mandagen, rensaFoljd, rentaTider, rentMal, riktning, sakdelar, sammanstallning, sammanstallningstext, SKALAN, skattningsfragan, spannKort, stegUtanfor, tidsspann, tidText,
   uppfoljningensTillfallen, uppraknat, utanNamn, veckansDagar, veckansNamn, veckanFor, veckodag, veckonyckel, VECKODAGAR, type Veckonamn,
@@ -25,7 +25,7 @@ import type { PlanData } from '../lib/insatsplan';
 import { idagLokalt, iTurOrdning, lasPlaner, narText, nuTid, nyttId, planensAdress, planensNamn, raknaPagaende, rensaPlan, schemaAv, skiljNamnen, skrivPlaner, type SparadPlan } from './insatser-lagring';
 import { kanSkrivaUtPdf, skrivUt } from './pdfutskrift';
 import { elevPdf, gruppPdf } from './planpdf';
-import { sidansAdress, vagenUt, vagenUtText, webblasaren } from './webblasaren';
+import { vagenUt, vagenUtText, webblasaren } from './webblasaren';
 
 const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
 const sida = $('plan');
@@ -97,10 +97,6 @@ function friskaUpp() {
 // Adressen bär valen, men inte veckan läraren har bläddrat till, så att sidan öppnar veckan gruppen är i nästa gång.
 function uppdateraAdressen() {
   if (aktiv.sparad || aktiv.franLank) history.replaceState(null, '', `#${kodaVal(aktiv.val, { id: aktiv.id })}`);
-  // Vägen ut ur en apps egen webbläsare följer adressen, så att en sparad plan följer med (K-510).
-  const ut = document.getElementById('pl-ut') as HTMLAnchorElement | null;
-  const dit = ut && vagenUt(sidansAdress(location), webblasaren());
-  if (ut && dit) ut.href = dit.href;
 }
 const harInfort = () => aktiv.foljd.gjorda.length > 0 || Object.keys(aktiv.foljd.skattning).length > 0 || aktiv.foljd.elever.length > 0 || Object.keys(aktiv.foljd.resultat).length > 0 || !!aktiv.foljd.avstamning?.beslut || !!aktiv.foljd.utvardering?.beslut;
 // Gick det inte att spara, säger beskedet vad som håller: kopian när läraren har fört in något, annars länken.
@@ -141,8 +137,10 @@ function renderaVal() {
     const b = langdknappar[langdknappar.length - 1].cloneNode() as HTMLButtonElement;
     b.dataset.langd = String(aktiv.val.langd);
     b.textContent = String(aktiv.val.langd);
-    langdknappar[langdknappar.length - 1].after(b);
-    langdknappar.push(b);
+    // Knappen står i ordning bland de andra (steget Samma sak överallt 2026-10-25: "6, 7, 8, 5").
+    const efter = langdknappar.find((x) => Number(x.dataset.langd) > aktiv.val.langd);
+    if (efter) efter.before(b); else langdknappar[langdknappar.length - 1].after(b);
+    langdknappar.splice(efter ? langdknappar.indexOf(efter) : langdknappar.length, 0, b);
     b.addEventListener('click', () => valjLangd(b));
   }
   for (const b of langdknappar) b.setAttribute('aria-pressed', String(Number(b.dataset.langd) === aktiv.val.langd));
@@ -192,7 +190,7 @@ function renderaVal() {
 const KLOCKSLAG = Array.from({ length: 11 * 12 + 1 }, (_, i) => klockslag(7 * 60 + i * 5));
 const tidval = (valt: string | undefined, efter?: string) => {
   const lista = [...new Set([...KLOCKSLAG, ...(valt ? [valt] : [])])].sort().filter((k) => (efter ? k > efter : k < KLOCKSLAG[KLOCKSLAG.length - 1]));
-  return `${efter ? '' : '<option value="">Ingen tid</option>'}${lista.map((k) => `<option value="${k}"${k === valt ? ' selected' : ''}>${k.replace(':', '.')}</option>`).join('')}`;
+  return `${efter ? '' : '<option value="">Ingen tid</option>'}${lista.map((k) => `<option value="${k}"${k === valt ? ' selected' : ''}>${tidText(k)}</option>`).join('')}`;
 };
 const slutval = (fran: string | undefined, till: string | undefined) => (fran ? tidval(till, fran) : '<option value="">–</option>');
 
@@ -1291,7 +1289,7 @@ const harSamman = (s: Sammanstallning) => (aktiv.sparad || aktiv.franLank) && ak
 function utveckling(e: SammanstallningElev, s: Sammanstallning, medRiktning = false) {
   const elev = !s.grupp && e.id !== GRUPPEN;
   const varden = elevensVarden(s, e);
-  const res = elevensResultat(plan, e.resultat).map((t) => `<li>${esc(resultatText(info(), t))}</li>`).join('');
+  const res = elevensResultat(plan, e.resultat).map((t) => `<li>${esc(resultatText(plan, info(), t))}</li>`).join('');
   const narvaro = elev && e.narvaro !== null && s.gjorda ? `<p>${esc(narvaronText(e, s))}</p>` : '';
   if (!e.skattningar.length && !res && !narvaro) return `<p class="pl-not">${elev ? 'Eleven' : 'Gruppen'} är inte skattad än. Grafen kommer med första skattningen.</p>`;
   const mittvarde = s.mitt ? e.skattningar.filter((x) => x.nr <= s.mitt!).pop() : undefined;
@@ -1310,10 +1308,8 @@ function renderaSamman() {
   const etiketter = s.veckor.map(veckansNamn);
   const delar: string[] = [`<h2 id="pl-samman-rubrik" tabindex="-1">Sammanställningen${s.slut ? '' : ' hittills'}</h2>`, malRad('samman', false)];
   // Ett pass som inte är bockat är inte bockat: sammanställningen säger det läraren har fört in (granskningarna 2026-10-24).
-  // Passens läge med standardens mening, som i pdf:en och texten, och här också de som har varit utan bock.
-  const obockade = s.gjorda && s.varit ? Math.max(0, s.slut ? s.planerade - s.gjorda : s.varit - s.gjordaVarit) : 0;
-  const passText = `${passensLage(s)}${obockade ? ` ${stor(talText(obockade))} ${obockade === 1 ? 'pass som har varit är inte bockat' : 'pass som har varit är inte bockade'}.` : ''}`;
-  delar.push(`<p>${esc(passText)}</p>`);
+  // Passens rad ur standarden, som i pdf:en och texten som kopieras.
+  delar.push(`<p>${esc(passensRad(s))}</p>`);
   const vad = s.grupp ? 'gruppen' : 'eleverna';
   delar.push(`<section class="pl-block"><h3>${s.grupp ? 'Gruppen' : 'Eleverna'}</h3><p class="pl-not">${esc(stor(skattningenText(vad)))}.${s.grupp ? '' : ' Tryck på en elev för grafen och elevens utskrift.'}</p><div class="pl-elevlista">${s.elever.map((e) => {
     const elev = !s.grupp && e.id !== GRUPPEN;
@@ -1344,7 +1340,7 @@ async function visaPdf(bytes: Uint8Array, filnamn: string) {
   else { const a = document.createElement('a'); a.href = url; a.download = filnamn; document.body.append(a); a.click(); a.remove(); }
   window.setTimeout(() => URL.revokeObjectURL(url), 60000);
 }
-const filnamnAv = (...delar: string[]) => `${delar.map((d) => d.toLocaleLowerCase('sv').normalize('NFD').replace(/\p{M}/gu, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')).filter(Boolean).join('-')}.pdf`;
+const filnamnAv = (...delar: string[]) => `${delar.map(slugAv).filter(Boolean).join('-')}.pdf`;
 // Sammanställningens knappar, och elevens när eleven är utfälld i veckan. Sammanställningen räknas när läraren trycker, så att
 // det senast ifyllda kommer med.
 async function samman(knapp: HTMLButtonElement) {
@@ -1536,15 +1532,20 @@ function visaNotis(text: string, knappar = '') {
 function appensBesked(): [string, string] {
   const w = webblasaren();
   if (!w.app || !lagringOk) return ['', ''];
-  const ut = vagenUt(sidansAdress(location), w);
+  // Adressen är planens länk med valen, också de som inte är sparade (Codex 2026-10-25), och den görs om vid trycket.
+  const ut = vagenUt(lank(), w);
   const utKnapp = ut ? `<a class="knapp liten" id="pl-ut" href="${esc(ut.href)}" ${goat('ut-ur-appen', `${ut.text} från ${w.app} webbläsare`)}>${esc(ut.text)}</a>` : '';
   return [vagenUtText(w), `${utKnapp}<button type="button" class="knapp liten${ut ? ' sekundar' : ''}" id="pl-ut-kopiera" ${goat('lank-ur-appen', `länken kopierad i ${w.app} webbläsare`)}>Kopiera länken</button>`];
 }
-// Kopiera länken i beskedet om en apps egen webbläsare: sidans adress, med planen när den är sparad (K-510).
+// Vägen ut och Kopiera länken i beskedet om en apps egen webbläsare bär planens länk med valen som de är vid trycket, också
+// efter ett byte av plan (K-510; Codex 2026-10-25).
 $('pl-besked').addEventListener('click', async (e) => {
+  const ut = (e.target as Element).closest<HTMLAnchorElement>('#pl-ut');
+  const dit = ut && vagenUt(lank(), webblasaren());
+  if (ut && dit) { ut.href = dit.href; return; }
   const knapp = (e.target as Element).closest<HTMLButtonElement>('#pl-ut-kopiera');
   if (!knapp) return;
-  const ok = await kopiera(sidansAdress(location));
+  const ok = await kopiera(lank());
   if (ok) kvittera(knapp, 'Kopierad');
   visaBesked(ok ? `Länken är kopierad. Klistra in den i ${webblasaren().ios ? 'Safari' : 'webbläsaren'}.` : 'Länken gick inte att kopiera i den här webbläsaren.');
 });

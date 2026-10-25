@@ -9,7 +9,8 @@
 // Kommandona:
 //   oppna <adress>            öppnar sidan
 //   ladda | tillbaka | adress laddar om sidan, går tillbaka i historiken, eller skriver adressen
-//   telefon | dator           skärmen som en iPhone (390 × 844) eller en dator (1280 × 900)
+//   telefon | dator           skärmen som en iPhone (390 × 844), som sidan också ser som en mobil, så att en pdf hämtas och
+//                             inte skrivs ut, eller en dator (1280 × 900)
 //   datum <ÅÅÅÅ-MM-DD> | datum av   låtsas att det är den dagen (sidan laddas om), eller tillbaka till i dag
 //   text [del]                sidans synliga text, eller bara den del vars rubrik eller etikett innehåller orden
 //   knappar                   det som går att trycka på, skriva i eller välja, synligt på sidan, numrerat, länkarna med adress
@@ -82,7 +83,7 @@ async function serve(port, bildmapp) {
   await sattSkript();
   const IPHONE = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1';
   let skarm = 'telefon';
-  const telefon = async () => { skarm = 'telefon'; await skicka('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true }); await skicka('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 }); await skicka('Network.setUserAgentOverride', { userAgent: IPHONE }); };
+  const telefon = async () => { skarm = 'telefon'; await skicka('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true }); await skicka('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 }); await skicka('Network.setUserAgentOverride', { userAgent: IPHONE, userAgentMetadata: { brands: [], platform: 'iOS', platformVersion: '18.0', architecture: '', model: 'iPhone', mobile: true } }); };
   const dator = async () => { skarm = 'dator'; await skicka('Emulation.setDeviceMetricsOverride', { width: 1280, height: 900, deviceScaleFactor: 1, mobile: false }); await skicka('Emulation.setTouchEmulationEnabled', { enabled: false }); await skicka('Network.setUserAgentOverride', { userAgent: '' }); };
   await telefon();
   const oppna = async (url) => { const klar = new Promise((r) => { laddad = r; }); await skicka('Page.navigate', { url }); await Promise.race([klar, vanta(20000)]); await vanta(500); };

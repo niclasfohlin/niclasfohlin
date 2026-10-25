@@ -117,7 +117,7 @@ Ett värde eller en text som visas på flera ställen har en funktion, en rot, o
 | Mönstren | En vecka, ett datum, en veckodag, ett klockslag, stor bokstav, HTML-skyddet, namnets första led, talen i ord eller datumordningen som en fil skriver på egen hand | `DRIFT` i `scripts/planprov.mjs`, med funktionen som ska användas |
 | Dubbletterna | Samma kod på två ställen, minst 25 tecken mellan två filer och 50 i samma fil; samma lilla funktion med andra namn; och samma lista av ord, också förkortad ("Mån" och "måndag") | Det jämför koden utan att veta vad den gör, så det hittar också det ingen har tänkt på |
 
-Proven gäller filerna i `MODULENS_FILER`. Sidans prov följer en vecka genom planens lista och elevens diagram, och steg 8b följer samma sak genom alla vyer som läraren ser dem.
+Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans prov följer en vecka genom planens lista och elevens diagram, pdf:ernas text prövas mot rötterna, och steg 8b följer samma sak genom alla vyer som läraren ser dem.
 
 | Sak | Roten |
 |---|---|
@@ -132,13 +132,13 @@ Proven gäller filerna i `MODULENS_FILER`. Sidans prov följer en vecka genom pl
 | Ett klockslag | `minuterAv`, `klockslag`, `plusMinuter`, `minuterISpann`, `tidText` och `tidsspann` |
 | Talen | `talAv`, `talText`, `talIRegex`, `allaAntal` och `ORDNINGSTAL` |
 | Texten | `stor`, `liten`, `mening`, `utanPunkt`, `decimal`, `tvasiffrigt`, `esc`, `skyddaRegex`, `rentText`, `forstaLedet` och `kortnamn` |
-| Uppföljningen | `uppfoljningensRad`, `uppfoljningensRader` och `resultatText` |
+| Uppföljningen | `uppfoljningensNamn`, `uppfoljningensRad`, `uppfoljningensRader` och `resultatText` |
 | Skattningen | `skattningenText`, `elevensVarden`, `skattadeVeckor` och `riktningText` |
-| Passen och besluten | `passensLage`, `narvaronText`, `beslutText` och `BESLUTEN` |
+| Passen och besluten | `passensRad`, `passensLage`, `narvaronText`, `beslutText` och `BESLUTEN` |
 | Diagrammet | `stapelnsKant` och `prickarna` |
 | Saker med nummer, "Bildserie 2–6" | `sakspann` |
 | Planens adress | `planensAdress` i `src/scripts/insatser-lagring.ts` |
-| En apps egen webbläsare | `webblasaren`, `vagenUt` och `sidansAdress` i `src/scripts/webblasaren.ts` |
+| En apps egen webbläsare | `webblasaren` och `vagenUt` i `src/scripts/webblasaren.ts` |
 
 En ny sak som visas på flera ställen får sin rot och sitt prov i samma commit, och står i tabellen här; skrivs den på ett känt sätt får den också sitt mönster i `DRIFT`. En ny fil i modulen står i `MODULENS_FILER`. Säger spärren att samma kod står två gånger: lägg koden i en funktion, i standarden när fler än en fil behöver den, och använd den på båda ställena.
 
@@ -168,5 +168,6 @@ En ny sak som visas på flera ställen får sin rot och sitt prov i samma commit
 |---|---|
 | 2026-10-25 | Första versionen, ur provningen av Planera 0.1 och 0.2 på fem metoder: länkgranskningen, testarna i två steg, användbarheten, buggjakten, Codex och verifieringen, med mallarna i `scripts/planera/` |
 | 2026-10-25 | Länkgranskningen letar också efter allmänna ord för en bestämd sak, efter Niclas regel samma dag: det som behövs namnges och länkas, eller har en knapp för att ladda ner |
+| 2026-10-25 | Efter provningen av 0.2.6: en rot räknas som prövad när proven kör den, inte när namnet står i provet; spärren läser också en funktion med return och texter som tecken, och inte listor i kommentarer (Codex); pdf:ernas text prövas i planprovet; läsarens webbläsare ser ut som en mobil i telefonläget, så att pdf:erna hämtas och steg 8b kan läsa dem |
 | 2026-10-25 | Spärren mot drift läser också dubbletterna och att rötterna har prov, och tabellen under den har alla rötter (K-509) |
 | 2026-10-25 | Spärren mot drift i planprovet, steget 8b Samma sak överallt med uppdraget `konsistens`, och kodgranskningens punkt om drift, efter att elevens diagram och planen namngav veckorna olika (Niclas: "fundera på arbetssättet ... och hur detta eller liknande saker hade kunnat hittas") |

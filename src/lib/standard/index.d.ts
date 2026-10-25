@@ -240,6 +240,8 @@ export declare function sammanstallningstext(info: { titel: string; mal?: string
 export declare function elevtext(info: { mal?: string; uppfoljning: { nar: string }[] }, plan: Plan, s: Sammanstallning, id: string): string;
 /** Uppföljningens rad: namnet och kalenderveckorna, "Efter insatsen, v. 51". */
 export declare function uppfoljningensRad(plan: Plan, info: { uppfoljning: { nar: string }[] }, u: Plan['uppfoljning'][number]): string;
+/** Uppföljningens rad med sitt namn: Efter insatsen, eller radens namn i metoden. */
+export declare const uppfoljningensNamn: (plan: Plan, info: { uppfoljning: { nar: string }[] }, rad: number) => string;
 /** Uppföljningens rader med datum. */
 export declare const uppfoljningensRader: (plan: Plan, info: { uppfoljning: { nar: string }[] }) => string[];
 /** Veckorna där läraren har skattat hur veckan gick. */
@@ -250,12 +252,14 @@ export declare const skattningenText: (vem: string, varjeVecka?: boolean) => str
 export declare const BESLUTEN: Readonly<{ avstamning: readonly ('fortsatt' | 'justera')[]; utvardering: readonly ('avsluta' | 'forlang' | 'byt')[] }>;
 /** Beslutet och lärarens mening, med punkt. */
 export declare const beslutText: (b: { beslut?: string; not?: string }) => string;
+/** Passens rad: läget, de som har varit utan bock, och de inställda och helgdagarna. */
+export declare function passensRad(s: { planerade: number; gjorda: number; varit: number; gjordaVarit: number; slut: boolean; installda: number; helgdagar: number }): string;
 /** Passen som läraren har bockat, i en mening. */
 export declare function passensLage(s: { planerade: number; gjorda: number; varit: number; gjordaVarit: number; slut: boolean }): string;
 /** Elevens närvaro i en mening. */
 export declare const narvaronText: (e: { narvaro: number | null }, s: { gjorda: number }) => string;
 /** Ett resultat i metodens uppföljning: "Före insatsen, v. 45: 4 av 8". */
-export declare const resultatText: (info: { uppfoljning: { nar: string }[] }, t: { rad: number; datum: string; varde: string }) => string;
+export declare const resultatText: (plan: Plan, info: { uppfoljning: { nar: string }[] }, t: { rad: number; datum: string; varde: string }) => string;
 /** En elevs skattningar vecka för vecka, till diagrammen. */
 export declare const elevensVarden: (s: { veckor: { nr: number }[] }, e: { skattningar: { nr: number; varde: number }[] }) => (number | undefined)[];
 /** Stapelns vänsterkant i veckans fack. */
