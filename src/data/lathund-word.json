@@ -132,15 +132,15 @@
     "datum": "2026-10-20"
   },
   "problemlosning-i-grupp": {
-    "kalla": "a3632569c9ff4a4e",
-    "innehall": "1f2b80610c87ceb3",
+    "kalla": "4c1dbd3dcf7fd60f",
+    "innehall": "0b313017eacd024f",
     "skalor": [
       1.25,
       1.35,
       1.35,
       1.35
     ],
-    "datum": "2026-10-20"
+    "datum": "2026-10-25"
   },
   "sag-skriv-och-las": {
     "kalla": "cf0948d1eaa443c5",
@@ -154,8 +154,8 @@
     "datum": "2026-10-19"
   },
   "seriesamtal": {
-    "kalla": "072c85c2a0edf377",
-    "innehall": "90b3d4ba4ac16652",
+    "kalla": "6989bd8af7f7963f",
+    "innehall": "f71a88b26858d1b1",
     "skalor": [
       1.25,
       1.3,

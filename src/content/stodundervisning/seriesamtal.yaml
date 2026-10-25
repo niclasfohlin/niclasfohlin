@@ -611,7 +611,7 @@ progression:
       rubrik: "Bildserie 2–6"
       led: Vi gör
       fokus: Bildserie 2–⁠6.
-      roll: Du läser och stannar, och eleverna säger vad som kan hända och svarar som personerna. Från pass 4 berättar en elev serien utan dina frågor, och eleverna ställer frågorna på kortet till varandra. Du ber om en tanke till.
+      roll: Du läser och stannar, och eleverna säger vad som kan hända och svarar som personerna. Från pass 4 berättar en elev serien utan dina frågor, och eleverna ställer frågorna på kortet Frågor vi ställer till varandra. Du ber om en tanke till.
     - vecka: 7 till det sista
       rubrik: "Egna händelser"
       led: Ni gör
@@ -623,7 +623,7 @@ uppfoljning:
     - nar: Före pass 1
       tid: "före"
       perElev: 15
-      vad: Visa provbilden för en elev i taget, och skriv poängen och båda siffrorna i protokollet.
+      vad: Visa provbilden för en elev i taget, och skriv poängen och båda siffrorna i provbildens protokoll.
     - nar: I varje pass
       tid: "i passet"
       vad: Skriv i snabbmallen vem som sa vad som kunde hända och vem som hittade rutan där någon hade behövt göra annorlunda.
@@ -640,7 +640,7 @@ plan:
     - "De andra passen har egna tabeller, som står efter Samtalsteknikerna."
   passen:
     - nar: första passet
-      kort: "Egen ordning"
+      kort: "Fönsterplatsen"
       text: "Pass 1 börjar med att du säger varför ni ses och vad som gäller i gruppen, och sedan gör ni en övning som visar att tankar inte syns. Till sist tar ni bildserien Fönsterplatsen, med kortare tid för de flesta delarna än i ett vanligt pass."
       tabell: "Pass 1: syftet, reglerna och tankebubblan"
     - nar: pass 2
