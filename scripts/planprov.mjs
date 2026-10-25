@@ -1084,6 +1084,16 @@ try {
       sant('kurs i veckor: Mina lärdomar leder till veckans blad', (await b.kor(`[...document.querySelectorAll('#pl-veckan a')].find((a) => a.textContent === 'Mina lärdomar')?.getAttribute('href')`))?.endsWith('#mina-lardomar-2'), await b.kor(`[...document.querySelectorAll('#pl-veckan a')].map((a) => a.textContent + ' ' + a.getAttribute('href')).join(' | ')`));
     }
     if (m.id === 'seriesamtal') sant('progression i pass: passens fokus med passen och stegets namn', (await b.text('#pl-veckan .pl-fokusruta .pl-led'))?.startsWith('Pass ') && (await b.text('#pl-veckan .pl-fokusruta .pl-etikett')) === 'Passens fokus', await b.text('#pl-veckan .pl-fokusruta'));
+    if (m.id === 'seriesamtal') {
+      // Ett spann efter ett ord med stor bokstav, som "Laminerat Bildserie 1–6" i checklistan under Före, länkas sak för sak
+      // (K-502: mönstret tog "Laminerat Bildserie" som namnet, och spannet blev ingen länk).
+      await b.tryck('#pl-veckor [data-vy="fore"]');
+      await vanta(150);
+      const lam = await b.kor(`(() => { const li = [...document.querySelectorAll('#pl-veckan li')].find((x) => x.textContent.includes('Laminerat Bildserie')); return li ? [...li.querySelectorAll('a')].map((a) => a.textContent).join('|') : null; })()`);
+      sant('ett spann efter ett ord med stor bokstav länkas sak för sak: Laminerat Bildserie 1–6', !!lam?.startsWith('Bildserie 1|2|3|4|5|6|'), lam);
+      await b.tryck('#pl-veckor [data-vy="3"]');
+      await vanta(150);
+    }
     sant(`${m.id}: inga fel`, !b.undantag.length && !(await b.kor('window.__fel.length')), b.undantag);
     await b.bredd(390); await vanta(150); await b.bild(`12-beta-${m.id}-telefon`); await b.dator();
   }

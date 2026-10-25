@@ -655,15 +655,18 @@ const sakLank = (s: PlanData['saker'][number], text: string) => {
   return `<a href="${esc(adress)}" data-goatcounter-click="planera:${esc(data.id)}:sak" data-goatcounter-title="${esc(data.titel)}: ${esc(s.namn)} från planen">${esc(text)}</a>`;
 };
 // Ett spann av saker med nummer, som "Bildserie 2–6", är en länk till varje sak när alla finns: Bildserie 2, 3, 4, 5 och 6
-// (de kalla testarna 2026-10-24: spannet var ingen länk). Annars står spannet som text.
+// (de kalla testarna 2026-10-24: spannet var ingen länk). Annars står spannet som text. Namnet är ett eller två ord, och
+// står ett ord med stor bokstav före ett namn på ett ord, som i "Laminerat Bildserie 1–6", är namnet det sista ordet.
 const SPANN = /(\p{Lu}\p{L}+(?: \p{L}+)?) (\d+)\s*[–-]\u2060?\s*(\d+)/gu;
 const medSpann = (text: string) => {
   let ut = '', fran = 0;
   for (const m of text.matchAll(SPANN)) {
     const a = Number(m[2]), b = Number(m[3]);
-    const saker = b > a && b - a <= 7 ? Array.from({ length: b - a + 1 }, (_, i) => data.saker.find((s) => s.namn === `${m[1]} ${a + i}`)) : [];
-    if (!saker.length || saker.some((s) => !s)) continue;
-    ut += esc(text.slice(fran, m.index)) + saker.map((s, i) => `${i === 0 ? '' : i === saker.length - 1 ? ' och ' : ', '}${sakLank(s!, i === 0 ? `${m[1]} ${a}` : String(a + i))}`).join('');
+    const spannet = (namn: string) => (b > a && b - a <= 7 ? Array.from({ length: b - a + 1 }, (_, i) => data.saker.find((s) => s.namn === `${namn} ${a + i}`)) : []);
+    const namn = [m[1], m[1].split(' ').pop()!].find((n) => { const s = spannet(n); return s.length && s.every(Boolean); });
+    if (!namn) continue;
+    const start = m.index! + m[1].length - namn.length;
+    ut += esc(text.slice(fran, start)) + spannet(namn).map((s, i, alla) => `${i === 0 ? '' : i === alla.length - 1 ? ' och ' : ', '}${sakLank(s!, i === 0 ? `${namn} ${a}` : String(a + i))}`).join('');
     fran = m.index! + m[0].length;
   }
   return ut + esc(text.slice(fran));

@@ -165,8 +165,9 @@ async function andraMetoder(id: string): Promise<MetodSak[]> {
 export async function planensSaker(m: Metod): Promise<MetodSak[]> {
   const alla = [...metodensSaker(m.data, m.id), ...(await andraMetoder(m.id))];
   const anvanda = new Set(visadeTexter(m.data).flatMap((t) => sakdelar(t, alla).flatMap((x) => (x.sak === undefined ? [] : [x.sak]))));
-  // Ett spann, som "Bildserie 2–6", bär varje sak i spannet, så att planen kan länka dem var för sig.
-  const spann = new Set(visadeTexter(m.data).flatMap((t) => [...t.matchAll(/(\p{Lu}\p{L}+(?: \p{L}+)?) (\d+)\s*[–-]\u2060?\s*(\d+)/gu)].flatMap((x) => { const a = Number(x[2]), b = Number(x[3]); return b > a && b - a <= 7 ? Array.from({ length: b - a + 1 }, (_, i) => `${x[1]} ${a + i}`) : []; })));
+  // Ett spann, som "Bildserie 2–6", bär varje sak i spannet, så att planen kan länka dem var för sig. Namnet är ett eller
+  // två ord, eller det sista ordet när ett ord med stor bokstav står före, som i "Laminerat Bildserie 1–6".
+  const spann = new Set(visadeTexter(m.data).flatMap((t) => [...t.matchAll(/(\p{Lu}\p{L}+(?: \p{L}+)?) (\d+)\s*[–-]\u2060?\s*(\d+)/gu)].flatMap((x) => { const a = Number(x[2]), b = Number(x[3]); return b > a && b - a <= 7 ? [x[1], x[1].split(' ').pop()].flatMap((n) => Array.from({ length: b - a + 1 }, (_, i) => `${n} ${a + i}`)) : []; })));
   alla.forEach((s, i) => { if (spann.has(s.namn)) anvanda.add(i); });
   return alla.filter((_, i) => anvanda.has(i));
 }
