@@ -28,7 +28,7 @@ material:
   - talsortsmatta
   - veckans kort
   - sifferkort och tärning
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-25
 relaterade:
   - problemlosning-i-grupp
   - brakkurs-i-grupp
@@ -384,6 +384,7 @@ uppfoljning:
     - nar: Efter fem veckor
       vad: Samma kartläggning med samma uppgifter. Jämför uppgift för uppgift, och berätta för klassläraren vilket talområde eleven bygger säkert i och vilka växlingar som behöver mer träning.
 mal:
+  overgripande: "kunna bygga ett tal, säga talsorterna och växla tio mot en."
   rubrik: "Mål: det eleven kan efter fem veckor"
   text: "Kryssa för det eleven kan, före och efter perioden:"
   punkter:

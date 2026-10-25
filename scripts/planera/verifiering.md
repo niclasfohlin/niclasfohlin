@@ -13,6 +13,7 @@ Sidan har prövats av andra före dig, och det de hittade är lagat. Din uppgift
 | Följa gruppen | Välj Följ insatsen, skriv in några elever, bocka pass och skatta. Byt sedan dag och datum för planen. Vad säger sidan om det du har fört in, och kan du ångra? |
 | Tiden | Hoppa fram med `datum` till mitten av insatsen, till efter sista passet och några veckor efter. Stämmer det sidan visar med vad som borde göras då? |
 | Telefon och dator | Det mesta i telefon. Titta också på en sida på dator. |
+| Det som lagades i den här omgången | {{lagat}} |
 
 ## Reglerna
 
@@ -23,6 +24,10 @@ Sidan har prövats av andra före dig, och det de hittade är lagat. Din uppgift
 | Gå in och ut: ladda om (`ladda`), gå till metodens sida och tillbaka. Står allt kvar? | Det som sparas ska finnas kvar |
 | Ta en bild (`bild`) av varje fel du hittar, och läs bilden med Read | Felet ska gå att se |
 | Högst omkring {{tak}} kommandon | Uppdraget ska bli klart |
+
+Fallen som en lärare råkar ut för under en insats, att pröva när det som lagades håller:
+
+{{scenarier}}
 
 {{verktyget}}
 

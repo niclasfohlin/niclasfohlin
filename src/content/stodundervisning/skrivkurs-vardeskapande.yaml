@@ -29,7 +29,7 @@ material:
   - Mina drag och Kortet till skribenten
   - fotona eller kartan
   - diplom
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-25
 relaterade:
   - skrivkurs-berattelseram
   - texttyper-i-grupp
@@ -329,6 +329,7 @@ uppfoljning:
     - nar: Efter mötet
       vad: "Eleven läser en ny mentortext. Vad gör den, och med vilket drag? Visa elevens klasslärare Mina drag."
 mal:
+  overgripande: "kunna skriva så att mottagaren förstår och vill läsa."
   rubrik: "Mål: det eleven kan efter kursen"
   punkter:
     - Skriva så att mottagaren förstår och vill läsa

@@ -26,7 +26,7 @@ material:
   - klocka som alla ser
   - lösa papper
   - blad på väggen
-uppdaterad: 2026-10-19
+uppdaterad: 2026-10-25
 publicerad: 2026-10-14
 relaterade:
   - texttyper-i-grupp
@@ -222,6 +222,7 @@ uppfoljning:
     - nar: Vecka 6
       vad: "Ett pass är Skriv igen, utan kort: eleven läser en stjärnmärkt text och skriver nytt om samma sak. I Dela säger eleven vad som är nytt."
 mal:
+  overgripande: "kunna börja skriva direkt och skriva utan att stanna."
   punkter:
     - börja skriva inom en minut
     - skriva hela skrivtiden utan att sudda

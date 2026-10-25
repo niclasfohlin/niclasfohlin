@@ -33,7 +33,7 @@ material:
   - diagrammet Mina texter
   - en mapp per elev
 
-uppdaterad: 2026-10-19
+uppdaterad: 2026-10-25
 publicerad: 2026-10-09
 relaterade: []
 utkast: false
@@ -317,6 +317,7 @@ uppfoljning:
       vad: "Efter fyra till sex veckor skriver eleven Uppgift 1, och du svarar. Fråga klassläraren om eleven säger vem som läser."
 
 mal:
+  overgripande: "kunna övertyga en läsare med skäl som läsaren bryr sig om."
   rubrik: "Mål: det eleven gör efter kursen"
   text: "Efter kursen gör eleven oftare det här:"
   punkter:

@@ -32,7 +32,7 @@ material:
   - ett exemplar av boken per elev
   - bokens tavla
   - post-it och ett frågekort
-uppdaterad: 2026-10-19
+uppdaterad: 2026-10-25
 relaterade:
   - textsamtal-i-grupp
   - faktatextsamtal-i-grupp
@@ -540,6 +540,7 @@ uppfoljning:
     - nar: Efter slutet
       vad: Gör läsintervjun igen, omkring tio minuter. Eleven återberättar hela boken. Ni väljer hens nästa bok, och du skriver vilket stöd hen behöver i den.
 mal:
+  overgripande: "kunna hålla ihop berättelsen och visa var i boken tanken kommer ifrån."
   punkter:
     - Berätta vad som har hänt hittills
     - Säga vem som är vem i boken och hur personerna hör ihop

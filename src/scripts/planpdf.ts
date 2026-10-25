@@ -61,11 +61,13 @@ async function dokument(titel: string) {
   // Staplar vecka för vecka (1 till 5), med veckan i planen och kalenderveckan under, som på sidan (veckansNamn i standarden),
   // en markering vid avstämningen och, för en elev när läraren noterar närvaron, veckans pass som prickar: fylld var med, ring
   // var inte med, streck inte bockat.
-  const staplar = (varden: (number | undefined)[], etiketter: Veckonamn[], o: { hojd?: number; mitt?: number | null; pass?: ('med' | 'borta' | 'inte')[][] } = {}) => {
+  type Stapelval = { hojd?: number; mitt?: number | null; pass?: ('med' | 'borta' | 'inte')[][] };
+  // Fältet för Mitt i står ovanför stapelns värde, så att värdet 5 inte täcker det (buggjakten 2026-10-25).
+  const staplarnasHojd = (o: Stapelval) => (o.hojd ?? 70) + 43 + (o.pass ? 14 : 0) + (o.mitt ? 22 : 0);
+  const staplar = (varden: (number | undefined)[], etiketter: Veckonamn[], o: Stapelval = {}) => {
     const h = o.hojd ?? 70, n = varden.length, bredd = A4[0] - 2 * KANT - 24;
     const steg = Math.min(46, bredd / Math.max(n, 1)), b = steg * 0.62;
-    // Fältet för Mitt i står ovanför stapelns värde, så att värdet 5 inte täcker det (buggjakten 2026-10-25).
-    const total = h + 43 + (o.pass ? 14 : 0) + (o.mitt ? 22 : 0);
+    const total = staplarnasHojd(o);
     plats(total);
     if (o.mitt) y -= 22;
     const botten = y - h - 6, x0 = KANT + 24;
@@ -98,11 +100,18 @@ async function dokument(titel: string) {
     }
     y -= total - (o.mitt ? 22 : 0);
   };
+  // Ett namn står aldrig ensamt sist på en sida: det får plats med staplarna under (buggjakten och användbarhetsprovet
+  // 2026-10-25: elevens namn stod sist på sidan 1 och staplarna på sidan 2).
+  const namnMedStaplar = (namn: string, varden: (number | undefined)[], etiketter: Veckonamn[], o: Stapelval = {}) => {
+    plats(11.5 * 1.4 + staplarnasHojd(o));
+    text(namn, { fet: true, storlek: 11.5 });
+    staplar(varden, etiketter, o);
+  };
   const avsluta = async (fot: string) => {
     sidor.forEach((s, i) => s.drawText(ren(`${fot} · sida ${i + 1} av ${sidor.length}`), { x: KANT, y: 28, size: 8, font, color: farg.svag }));
     return doc.save();
   };
-  return { text, rubrik, staplar, avsluta, farg };
+  return { text, rubrik, staplar, namnMedStaplar, avsluta, farg };
 }
 
 const veckoetiketter = (s: Sammanstallning) => s.veckor.map(veckansNamn);
@@ -128,8 +137,7 @@ export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, id
   p.rubrik(s.grupp ? 'Gruppen' : 'Eleverna', 110);
   skalan(p, info, 4);
   for (const e of s.elever) {
-    p.text(e.namn, { fet: true, storlek: 11.5 });
-    p.staplar(elevensVarden(s, e), veckoetiketter(s), { hojd: 40, mitt: s.mitt });
+    p.namnMedStaplar(e.namn, elevensVarden(s, e), veckoetiketter(s), { hojd: 40, mitt: s.mitt });
     p.text([`${riktningText(e)}.`, e.id !== GRUPPEN && e.narvaro !== null && s.gjorda ? narvaronText(e, s) : '', ...elevensResultat(plan, e.resultat).map((t) => mening(resultatText(plan, info, t)))].filter(Boolean).join(' '), { luft: 8 });
   }
   const veckorna = skattadeVeckor(s);

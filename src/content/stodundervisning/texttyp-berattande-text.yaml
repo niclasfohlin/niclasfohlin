@@ -34,7 +34,7 @@ material:
   - "veckans texter"
   - "ett lakan och två ficklampor"
 
-uppdaterad: 2026-10-19
+uppdaterad: 2026-10-25
 publicerad: 2026-10-09
 relaterade: []
 utkast: false
@@ -329,6 +329,7 @@ uppfoljning:
       vad: "Eleven skriver Uppgift 1 efter fyra till sex veckor, och du svarar. Fråga klassläraren om eleven säger vem som läser."
 
 mal:
+  overgripande: "kunna berätta så att läsaren är med i det som händer."
   rubrik: "Mål: det eleven gör efter kursen"
   text: "Efter kursen gör eleven oftare det här:"
   punkter:

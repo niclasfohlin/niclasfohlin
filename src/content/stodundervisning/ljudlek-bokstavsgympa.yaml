@@ -24,7 +24,7 @@ material:
   - speglar
   - bokstavskartan
   - snabbmallen
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-25
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 4
@@ -296,6 +296,7 @@ uppfoljning:
     - nar: "Var tredje vecka"
       vad: "Du gör ljudkollens uppgift 4 om bokstävernas ljud och uppgift 5 om sist och i mitten."
 mal:
+  overgripande: "kunna säga bokstävernas ljud utan paus, så att de blir ett ord."
   rubrik: "Mål: vad eleven ska kunna efter lektionen"
   text: "Efter lektionen ska eleven kunna:"
   punkter:

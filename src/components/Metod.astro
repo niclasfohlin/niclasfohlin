@@ -37,7 +37,7 @@ import type { SerieKoppling } from '../lib/serie';
 import type { MetodData } from '../lib/metod';
 import { ejBryt, metodAdress, ramArTom, passGrupper, passOrd, passOversikt, stegTexter, laskortKolumn, arEttKort } from '../lib/metod';
 import { site } from '../data/site';
-import { variantensMening } from '../lib/standard/index.js';
+import { malensMening, variantensMening } from '../lib/standard/index.js';
 import { materialAttribut } from '../lib/material';
 import { kortInfo } from '../lib/brak';
 import { arTarning, sagoUpphov } from '../lib/sagoblad';
@@ -615,6 +615,7 @@ const meny = [
   {d.mal && (
     <section id="mal">
       <h2>{d.mal.rubrik}</h2>
+      <p>{malensMening(d.mal.overgripande)}</p>
       <p>{d.mal.text}</p>
       <ul class="m-bockar tva" data-bockar>{d.mal.punkter.map((p) => <li><label><input type="checkbox" /> <span>{p}</span></label></li>)}</ul>
       <p class="bara-js m-rensa"><button type="button" class="lank" data-rensa-bockar>Rensa kryssen</button></p>

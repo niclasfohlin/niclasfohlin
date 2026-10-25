@@ -3104,7 +3104,10 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 /* Beskedet efter ett tryck, längst ned på skärmen där läraren ser det, med Ångra när något går att ångra. */
 .pl-toast { position: fixed; left: 50%; bottom: max(1rem, env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 20; display: flex; align-items: center; gap: 0.4rem 0.8rem; width: min(36rem, calc(100% - 2rem)); box-sizing: border-box; padding: 0.7rem 0.6rem 0.7rem 1rem; border-radius: 8px; background: #1d2731; color: #fff; font: 0.95rem/1.4 var(--typsnitt-ui); box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25); }
 .pl-toast[hidden] { display: none; }
-.pl-toast p { flex: 1; min-width: 0; margin: 0; }
+/* Texten får en hel rad när knappen har en lång text, och knappen går under (K-523: "Kalendern och åtgärdsprogrammet"
+   tryckte texten till ett ord per rad i telefonen). */
+.pl-toast { flex-wrap: wrap; }
+.pl-toast p { flex: 1 1 12rem; min-width: 0; margin: 0; }
 .pl-toast-knapp { flex: none; min-height: 2.5rem; padding: 0 0.8rem; border: 1.5px solid #fff; border-radius: 6px; background: none; color: #fff; font: 700 0.92rem var(--typsnitt-ui); cursor: pointer; }
 .pl-toast-stang { flex: none; width: 2.5rem; height: 2.5rem; border: 0; border-radius: 50%; background: none; color: #fff; font-size: 1.4rem; line-height: 1; cursor: pointer; }
 .pl-toast button:focus-visible { outline: 3px solid #9cc7ff; outline-offset: 1px; }

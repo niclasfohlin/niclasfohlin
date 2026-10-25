@@ -27,7 +27,7 @@ material:
   - mallar och blad
   - veckans kort
   - knappar och tärning
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-25
 relaterade:
   - antalsuppfattning-i-grupp
   - problemlosning-i-grupp
@@ -309,6 +309,7 @@ uppfoljning:
     - nar: Efter fem veckor
       vad: Gör samma kartläggning igen och anteckna i kolumnen Efter på samma kopia. Jämför uppgift för uppgift och berätta för klassläraren vad som behöver mer träning.
 mal:
+  overgripande: "kunna förstå bråk som tal, jämföra dem och räkna med dem."
   rubrik: "Mål: det eleven kan efter fem veckor"
   text: "Det här ska eleven kunna efter fem veckor. Kartläggningen visar det, före och efter:"
   punkter:

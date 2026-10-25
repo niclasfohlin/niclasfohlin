@@ -34,7 +34,7 @@ material:
   - veckans texter
   - brevpapper och kuvert
 
-uppdaterad: 2026-10-19
+uppdaterad: 2026-10-25
 publicerad: 2026-10-09
 relaterade: []
 utkast: false
@@ -334,6 +334,7 @@ uppfoljning:
       vad: "Eleven skriver Uppgift 1 efter fyra till sex veckor. Fråga klassläraren om eleven säger vem som läser."
 
 mal:
+  overgripande: "kunna beskriva så att läsaren ser det framför sig."
   rubrik: "Mål: det eleven gör efter kursen"
   text: "Efter kursen gör eleven oftare det här:"
   punkter:

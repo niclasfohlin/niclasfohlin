@@ -15,7 +15,7 @@ material:
   - post-it-lappar
   - affischen med strategierna
   - bilderböcker till de yngre
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-25
 publicerad: 2026-10-20
 relaterade: [upprepad-lasning, til-i-grupp, textsamtal-i-grupp]
 utkast: false
@@ -255,6 +255,7 @@ uppfoljning:
     - { nar: Varje pass, vad: "Lyssna på dagens par, och skriv på klasslistan vad du hörde och vad varje elev ska pröva. Nästa gång du hör paret börjar du där, och det som många behöver tar du upp i nästa pass." }
     - { nar: Vecka 8, vad: "Eleven läser samma provtext, och du spelar in och fyller i protokollet för vecka 8. Spela sedan upp 20 sekunder från vecka 1, och låt eleven säga vad hen hör nu." }
 mal:
+  overgripande: "kunna läsa högt så att lyssnaren förstår det texten säger."
   text: "Efter de åtta veckorna ska eleven oftare än förut:"
   punkter:
     - Säga vad en text handlar om och hur den ska låta, så att lyssnaren förstår

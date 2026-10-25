@@ -27,7 +27,7 @@ material:
   - "klossar"
   - "whiteboardtavlor och lappar"
   - "snabbmallen"
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-25
 publicerad: "2026-10-17"
 relaterade:
   - "ljudlek-i-grupp"
@@ -298,6 +298,7 @@ uppfoljning:
     - nar: "Var tredje vecka"
       vad: "Du gör ljudkollens uppgift 9 om påhittade ord, uppgift 7 om att skriva ord och uppgift 4 om bokstävernas ljud."
 mal:
+  overgripande: "kunna skriva och läsa en kort mening."
   rubrik: "Mål: vad eleven ska kunna efter lektionen"
   text: "Efter lektionen ska eleven kunna:"
   punkter:

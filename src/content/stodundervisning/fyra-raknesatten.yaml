@@ -412,7 +412,6 @@ uppfoljning:
 plan:
   utan:
     - "Remsan visar när du leder, när alla arbetar tillsammans och när eleven provar själv."
-  mal: "kunna räkna med de fyra räknesätten på sin nivå och visa och förklara vad som händer i uträkningen."
   passen:
     - nar: veckans första
       kort: "Bygga"
@@ -425,6 +424,7 @@ plan:
       text: "I ett tredje pass skriver eleverna med materialet i asken och tar upp det som ännu inte sitter, och den som tvekar tar fram materialet igen."
   upprepa: "Kan flera i gruppen inte visa veckans grepp i slutet av veckan, gör ni veckan en gång till med nya tal, och kursen blir en vecka längre. Är det en elev, övar hen greppet i uppvärmningen och i ett tredje pass, om gruppen har ett, och gruppen går vidare."
 mal:
+  overgripande: "kunna räkna med de fyra räknesätten på sin nivå och visa och förklara vad som händer i uträkningen."
   punkter:
     - visa med material och på talraden vad som händer i addition och subtraktion, och räkna med uppställning och växling på sin nivå
     - visa en multiplikation och två divisioner i samma rektangel med en händelse till varje, och räkna med kort multiplikation och kort division på sin nivå, på nivån Bas med rektangeln

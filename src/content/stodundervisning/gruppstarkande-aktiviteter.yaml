@@ -26,7 +26,7 @@ material:
   - Lärarens skattning
   - bladet Vår grupp
   - frågekort och meningar att avsluta
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-25
 publicerad: 2026-10-16
 centrala:
   - id: aktiviteter
@@ -329,6 +329,7 @@ uppfoljning:
     - nar: Linjen på 7 eller mer i fyra veckor
       vad: Gör en aktivitet i veckan och en gruppreflektion i månaden, om de flesta också ringar in 4 eller 5 på varje påstående i Vår grupp.
 mal:
+  overgripande: "kunna samarbeta mot ett mål som gruppen bara når tillsammans, och pröva igen när något går fel."
   punkter:
     - samarbeta mot ett mål som gruppen bara når tillsammans
     - lyssna, turas om och heja på varandra

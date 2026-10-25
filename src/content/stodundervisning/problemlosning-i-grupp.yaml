@@ -31,7 +31,7 @@ material:
   - bladen Vår lösning och Två lösningar
   - konkret material
   - kortet Våra sätt
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-25
 relaterade:
   - fyra-raknesatten
   - antalsuppfattning-i-grupp
@@ -355,6 +355,7 @@ uppfoljning:
     - nar: Efter sex till åtta veckor
       vad: Eleven löser bladet Kartläggning efter, och du jämför de två protokollen.
 mal:
+  overgripande: "kunna förstå ett problem i text, visa det och kontrollera att svaret är rimligt."
   punkter:
     - Återberätta ett problem med egna ord
     - Peka ut vad problemet frågar efter

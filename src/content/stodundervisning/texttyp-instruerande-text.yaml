@@ -37,7 +37,7 @@ material:
   - pappersremsor och gem
   - veckans texter
 
-uppdaterad: 2026-10-19
+uppdaterad: 2026-10-25
 publicerad: 2026-10-09
 relaterade: []
 utkast: false
@@ -341,6 +341,7 @@ uppfoljning:
       vad: "Eleven skriver Uppgift 1 efter fyra till sex veckor. Fråga klassläraren om eleven säger vem som läser."
 
 mal:
+  overgripande: "kunna skriva en instruktion så att läsaren kan göra det själv."
   rubrik: "Mål: det eleven gör efter kursen"
   text: "Efter kursen gör eleven oftare det här:"
   punkter:

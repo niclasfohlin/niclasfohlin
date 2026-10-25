@@ -155,8 +155,14 @@ export declare function forvaldLangd(mp: Metodplan, borja?: number): number;
 export declare function forstaMandagen(val: Val): string;
 /** Planera insatsens modul: namnet, versionen och om den är en beta (sajtens METODER.md under Planera insatsen). */
 export declare const PLANERA: Readonly<{ namn: string; version: string; beta: boolean }>;
+/** Metodens övergripande mål i en mening, som sidan och Word skriver det. */
+export declare const malensMening: (mal: string) => string;
+/** Elevens skattning i avstämningens vecka, eller ingen. */
+export declare const skattningenMittI: (s: Sammanstallning, e: SammanstallningElev) => { nr: number; varde: number } | undefined;
+/** Felen i ett lektionskorts mål: kortet säger metodens övergripande mål ordagrant. */
+export declare function kortetsMalFel(d: { mal?: { overgripande?: string } }, texter: string[], plats: string): string[];
 /** Ett filnamn för det som laddas ner ur planen: vad filen är, vem den gäller, metoden och datumet. */
-export declare const filnamnet: (slag: 'sammanstallning' | 'planera' | 'kalender', o: { vem?: string; metod: string; datum: string }) => string;
+export declare const filnamnet: (slag: 'sammanstallning' | 'kopia' | 'kalender', o: { vem?: string; grupp?: boolean; metod: string; datum: string }) => string;
 export declare function planera(mp: Metodplan, val: Val): Plan;
 /** Veckans nummer i planen, räknat från veckan planen börjar på. */
 export declare const planvecka: (plan: Plan, v: PlanVecka) => number;
@@ -169,6 +175,8 @@ export declare const veckansPass: (plan: { pass: Pass[] }, v: PlanVecka) => Pass
 export declare const kalendervecka: (n: number) => string;
 export declare const kalenderveckaUtskriven: (n: number) => string;
 export declare const kalenderveckor: (a: number, b: number, streck?: string) => string;
+/** Kalenderveckorna för några datum, med veckor i följd ihop och ett lov som bryter följden: "v. 45 och v. 47". */
+export declare function kalenderveckornaFor(datum: string[]): string;
 export declare const gangen: (plan: { veckor: { nr: number; innehall: number }[] }, v: { nr: number; innehall: number; igen: boolean }) => number;
 export declare const metodveckan: (innehall: number) => string;
 /** Metodens veckor i en text ur metoden, skrivna som planens veckor när planen börjar högre upp i en stege. */
@@ -198,6 +206,8 @@ export declare function varianternasFel(d: { tidsschema?: { varianter?: Variant[
 export declare function stegUtanfor(mp: Metodplan, plan: Plan): { rad: number; fran: number; vidBehov: boolean }[];
 export declare function veckanFor(plan: Plan, datum: string): PlanVecka | null;
 export declare function nastaPass(plan: Plan, datum: string): Pass | null;
+/** Nästa pass som inte är bockat, från och med datumet, och de bockade före det. */
+export declare function nastaObockade(plan: Plan, datum: string, gjort: (p: Pass) => boolean): { pass: Pass | null; bockade: Pass[] };
 export declare function kodaVal(val: Val, extra?: { id?: string; visa?: number | 'fore' }): string;
 export declare function lasVal(hash: string): { val: Val; id?: string; visa?: number | 'fore' } | null;
 /** Planens största längd i veckor eller pass, i länken och vid en förlängning. */

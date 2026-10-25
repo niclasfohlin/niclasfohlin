@@ -23,7 +23,7 @@ material:
   - magneter
   - bokstavskorten
   - speglar
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-25
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 6
@@ -277,6 +277,7 @@ uppfoljning:
     - nar: "Var tredje vecka"
       vad: "Du gör ljudkollens uppgift 6 om att dela upp, uppgift 7 om att skriva ord och uppgift 4 om bokstävernas ljud."
 mal:
+  overgripande: "kunna dela upp ett ord i alla sina ljud."
   rubrik: "Mål: vad eleven ska kunna efter lektionen"
   text: "Efter lektionen ska eleven kunna:"
   punkter:

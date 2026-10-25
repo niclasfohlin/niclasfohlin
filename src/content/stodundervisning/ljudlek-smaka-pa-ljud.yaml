@@ -24,7 +24,7 @@ material:
   - magneter
   - bokstavskorten
   - bokstavskartan
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-25
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 5
@@ -289,6 +289,7 @@ uppfoljning:
     - nar: "Var tredje vecka"
       vad: "Du gör ljudkollens uppgift 5 om sist och i mitten, uppgift 6 om att dela upp och uppgift 4 om bokstävernas ljud."
 mal:
+  overgripande: "kunna höra det sista ljudet och ljudet i mitten av ett ord."
   rubrik: "Mål: vad eleven ska kunna efter lektionen"
   text: "Efter lektionen ska eleven kunna:"
   punkter:

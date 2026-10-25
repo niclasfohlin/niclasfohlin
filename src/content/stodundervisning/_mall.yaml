@@ -244,7 +244,10 @@ uppfoljning:
   rader:
     - { nar: Före insatsen, vad: Vad som mäts. }
     - { nar: Efter sex till åtta veckor, vad: Vad som jämförs. }
+# mal: overgripande är metodens övergripande mål för elevens lärande, i lektionskortens form "kunna …", som lektionskortet
+# säger ordagrant och planen skattar mot (K-522). punkter är det eleven ska kunna efter perioden.
 mal:
+  overgripande: "kunna läsa mellan raderna och visa ledtråden i texten."
   punkter:
     - Vad eleven ska kunna göra efter insatsen.
 # Snabbmallen som ramverk (K-487, src/lib/snabbmall.ts, riggens docs/snabbmall.md): ett blad för veckans pass.

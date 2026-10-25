@@ -421,8 +421,7 @@ const metodensFalt = z.strictObject({
       })).min(1),
     }).optional(),
     // Planera insatsen (K-489, METODER.md under Planera insatsen). Står inte på sidan eller i Word.
-    // mal: insatsens mål, som läraren skattar eleverna mot varje vecka och kan skriva om, i lektionskortens form "kunna …".
-    //   Utan det gäller målet på metodens lektionskort.
+    // Insatsens mål är metodens övergripande mål (mal.overgripande, K-522), som läraren kan skriva om i planen.
     // passen: vad som skiljer passen åt, efter platsen i veckan (veckans första, veckans sista, veckans övriga) eller numret
     //   i insatsen (första passet, pass 7, pass 8 till det sista, sista passet) eller metodens veckor (vecka 1–3), med
     //   metodens tabell för ett pass som går till på ett eget sätt (tolkaPassen i src/lib/standard/plan.js), och ett kort
@@ -435,7 +434,6 @@ const metodensFalt = z.strictObject({
     //   hemmen. justera: metodens egna sätt att justera insatsen vid avstämningen. upprepa: när veckan tas en gång till.
     // stege: progressionen är en stege som gruppen kan börja högre upp på, som läslistorna.
     plan: z.strictObject({
-      mal: z.string().min(10).max(200).optional(),
       passen: z.array(z.strictObject({
         nar: text, text: text.optional(), kort: z.string().trim().min(1).max(30).optional(), tabell: text.optional(),
         ur: z.strictObject({ tabell: text, rad: text, kolumner: z.array(text).min(1).optional() }).optional(),
@@ -446,11 +444,16 @@ const metodensFalt = z.strictObject({
       upprepa: text.optional(),
       stege: z.boolean().optional(),
     }).optional(),
+    // Målet (K-522; Niclas 2026-10-25: "en metod bör alltid ha ett tydligt generellt mål för elevens lärande och
+    // utveckling"): overgripande är metodens övergripande mål i lektionskortens form, "kunna …", som metodens sida och Word
+    // skriver i en mening, lektionskortet säger och planen skattar mot (METODER.md under Fälten i metodens fil). punkter är
+    // det eleven ska kunna efter perioden, som läraren kryssar för.
     mal: z.strictObject({
       rubrik: z.string().default('Mål: vad eleven ska kunna göra efter insatsen'),
       text: z.string().default('Efter perioden ska eleven oftare kunna:'),
+      overgripande: z.string().trim().min(10).max(160).regex(/^kunna /, 'Det övergripande målet börjar med "kunna", som på lektionskortet: "kunna läsa mellan raderna och visa ledtråden i texten."'),
       punkter: z.array(z.string()).min(1),
-    }).optional(),
+    }),
     // Snabbmallen som ramverk (metodriggen 2026-10-20, K-487, src/lib/snabbmall.ts): ett blad för veckans pass, eller två
     // till fyra veckors, med en rad per pass (fore och efter är kolumnernas namn), tre saker som ska med i varje pass att
     // kryssa (ska) och två rutor sist (sist). overst är högst två rader att fylla i en gång per blad. Den gamla formen,

@@ -28,7 +28,7 @@ material:
   - blädderblock
   - skylt och diplom
   - häftapparat
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-25
 relaterade:
   - skrivkurs-vardeskapande
   - skrivkurs-sagoboken
@@ -295,6 +295,7 @@ uppfoljning:
     - nar: Efter kursen
       vad: Berätta för klassläraren vilka grepp eleven lärt sig, så att hen frågar efter dem i klassen. Skicka hem boken med diplomet.
 mal:
+  overgripande: "kunna bygga en berättelse del för del inom en ram."
   rubrik: "Mål: vad eleven ska kunna göra efter kursen"
   punkter:
     - Bygga en berättelse del för del inom en ram

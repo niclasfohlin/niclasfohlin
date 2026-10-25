@@ -29,7 +29,7 @@ material:
   - modellsagor
   - låda och lappar
   - blädderblock
-uppdaterad: 2026-10-19
+uppdaterad: 2026-10-25
 relaterade:
   - skrivkurs-berattelseram
   - texttyper-i-grupp
@@ -512,6 +512,7 @@ uppfoljning:
     - nar: Pass 25 och 27 i fyra steg, pass 26 i sex steg
       vad: "Samma uppgift med en ny bild."
 mal:
+  overgripande: "kunna skriva en saga efter sagans väg, där hjälten själv löser problemet."
   rubrik: "Mål: vad eleven ska kunna göra efter kursen"
   text: "Eleven ska göra det här oftare än före kursen:"
   punkter:

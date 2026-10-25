@@ -307,6 +307,7 @@ plan:
   upprepa: "Byt lista först när paren läser orden direkt, utan att ljuda."
 
 mal:
+  overgripande: "kunna binda ihop ljuden till ett ord och läsa det med flyt."
   punkter:
     - Säga ljudet direkt när eleven ser bokstaven
     - Ljuda ihop två och tre ljud till ett ord

@@ -10,7 +10,7 @@ import {
 } from 'docx';
 import { centralaVid, lasbarAdress, metodensCentrala, type Textplats } from './centrala';
 import { centraltPapper } from './centraladata';
-import { variantensMening } from './standard/index.js';
+import { malensMening, variantensMening } from './standard/index.js';
 import { lektionskortVid, metodensLektionskort, type Lektionskort } from './lektionskort';
 import { papperFot, papperPunkt, papperSidor, PAPPER_MARGINALER, PAPPER_SIDA, type Papper } from './strategipapper';
 import { delensAdress, hanvisningsdelar, type Del } from './boklankar';
@@ -3300,6 +3300,8 @@ function metodBarn(post: MetodPostISerie, bas: string, o: { material: boolean } 
   }
   if (d.mal) {
     ut.push(h2(d.mal.rubrik));
+    // Metodens övergripande mål, som på sidan (K-522).
+    ut.push(stycke(malensMening(d.mal.overgripande), { hallIhop: true }));
     ut.push(stycke(d.mal.text, { hallIhop: true }));
     ut.push(...bockar(d.mal.punkter, 2));
     filmVid({ avsnitt: 'mal' });

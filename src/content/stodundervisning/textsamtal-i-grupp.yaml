@@ -662,7 +662,6 @@ uppfoljning:
       vad: Varje elev gör kartläggningens text efter, som är lika svår. Jämför poängen i Kartläggningens protokoll, och lyssningsbladen med vecka 1 och 2. Se också om eleven sätter frågetecken i sin bänkbok.
       tid: efter
 plan:
-  mal: kunna läsa mellan raderna, säga vad man tror och visa ledtråden i texten.
   passen:
     - nar: veckans första
       kort: "Du tänker högt"
@@ -674,6 +673,7 @@ plan:
       kort: "Eleverna läser själva"
       ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 3, kolumner: [Så läser ni, Du, Eleverna] }
 mal:
+  overgripande: "kunna läsa mellan raderna, säga vad man tror och visa ledtråden i texten."
   punkter:
     - Skilja på svar som står i texten och svar man måste lista ut
     - Stanna när något inte står

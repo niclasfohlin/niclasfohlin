@@ -23,7 +23,7 @@ material:
   - lektionens material
   - snabbmallen
   - kartläggningen
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-25
 relaterade:
   - laslistor-i-grupp
   - til-i-grupp
@@ -399,6 +399,7 @@ uppfoljning:
     - nar: Efter 10–12 veckor
       vad: "Gör hela ljudkollen och screeningen, version B. Den som klarar nivå 5 eller högre och läser de påhittade orden går vidare till Läslistor i grupp eller TIL i grupp. Den som inte har gått framåt får mer intensivt stöd och en bedömning."
 mal:
+  overgripande: "kunna höra, dela upp och sätta ihop ljuden i ord och koppla dem till bokstäver."
   text: "Efter insatsen ska eleven kunna:"
   punkter:
     - "höra det första och det sista ljudet och ljudet i mitten i korta ord"

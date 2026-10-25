@@ -26,7 +26,7 @@ material:
   - bladet Vår överenskommelse
   - penna och papper
   - lappar hem
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-25
 publicerad: 2026-10-03
 relaterade: [seriesamtal]
 utkast: false
@@ -406,6 +406,7 @@ uppfoljning:
     - nar: Fyra veckor efter sista samtalet
       vad: Fråga gruppen om överenskommelsen håller och om de använder startorden. Har det blivit sämre, påminn gruppen om den.
 mal:
+  overgripande: "kunna säga hur man känner utan att anklaga, och komma överens."
   punkter:
     - Lyssna på den som talar utan att avbryta
     - Säga vad hen tänker och känner med ett jag-⁠budskap

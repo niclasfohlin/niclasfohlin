@@ -25,7 +25,7 @@ material:
   - speglar
   - whiteboardtavlor
   - snabbmallen
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-25
 utkast: false
 serie: "ljudlek-i-grupp"
 formaga: 8
@@ -303,6 +303,7 @@ uppfoljning:
     - nar: "Var tredje vecka"
       vad: "Du gör ljudkollens uppgift 8 om att sätta ihop och byta, uppgift 9 om nya ord och uppgift 4 om bokstävernas ljud."
 mal:
+  overgripande: "kunna dra ihop ljud till ett ord och byta ett ljud."
   rubrik: "Mål: vad eleven ska kunna efter lektionen"
   text: "Efter lektionen ska eleven kunna:"
   punkter:

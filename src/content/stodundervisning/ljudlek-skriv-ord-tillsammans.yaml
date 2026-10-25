@@ -26,7 +26,7 @@ material:
   - whiteboardtavlor
   - magneter
   - snabbmallen
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-25
 relaterade:
   - sag-skriv-och-las
 utkast: false
@@ -311,6 +311,7 @@ uppfoljning:
     - nar: "Var tredje vecka"
       vad: "Du gör ljudkollens uppgift 7 om att skriva ord, uppgift 8 om att sätta ihop och byta och uppgift 4 om bokstävernas ljud."
 mal:
+  overgripande: "kunna skriva en bokstav för varje ljud och läsa det som står."
   rubrik: "Mål: vad eleven ska kunna efter lektionen"
   text: "Efter lektionen ska eleven kunna:"
   punkter:

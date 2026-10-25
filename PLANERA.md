@@ -41,7 +41,7 @@ Det här är det en metod behöver för att få planen, och det som sker av sig 
 |---|---|---|---|
 | Uppföljningen | En `tid` på varje rad, med orden i tabellen i METODER.md under Fälten i metodens fil, och `perElev` på en rad som görs med en elev i taget. Med en tid på varje rad kan metoden planeras (`planbar` i `src/lib/planbar.ts`), och sidan, knappen Planera insatsen och sakernas filer kommer då av sig själva | METODER.md under Fälten i metodens fil | `insatsplanFel` på en tid som standarden inte läser |
 | Progressionen | Kolumnen Vecka eller Pass med standardens ord, `rubrik` när fokus är långt, och `taggar` när veckan ska visa bankens poster | METODER.md under Fälten i metodens fil | `insatsplanFel` på en vecka eller en tagg som inte går att läsa |
-| Målet | `plan.mal`, eller ett lektionskort med ett mål | METODER.md under Fälten i metodens fil | `insatsplanFel` på en metod utan båda |
+| Målet | Metodens övergripande mål, `mal.overgripande`, som varje metod har | METODER.md, tabellen under Modellen, raden Mål | Schemat på en metod utan mål, och `kortetsMalFel` på ett lektionskort med ett annat mål |
 | Passet | Tidsschemat med delar och minuter, `tidsschema.varianter` när passet har andra delar eller tider vissa veckor, `plan.passen` när passen i veckan skiljer sig åt, med rollens text som en rad ur metodens tabell (`ur`) eller ett ordagrant citat och `tabell` för ett pass som går till på ett eget sätt, och `plan.utan` för meningar i tidsschemats text om metodens sida | METODER.md under Tidsschemats varianter, under Planera insatsen, stycket som börjar "Passet står i rutan", och fälten | `tidsschematsFel` på passets tider i en mening, `varianternasFel` på en lathund eller ett lektionskort som säger varianten på eget sätt, `planensRamFel` på tider i planens text och en mening om metodens sida, och `insatsplanFel` på en tabell som metoden inte har och en `nar` som standarden inte läser |
 | Före, justera, upprepa och stegen | `plan.fore`, `plan.justera`, `plan.upprepa` och `plan.stege` när metoden har sådant, med texterna som ordagranna citat ur metoden | METODER.md under Fälten i metodens fil | `planensCitatFel` på en mening som inte står så i metoden, och `insatsplanFel` på en stege i en progression som inte är i veckor |
 | Namnen | Planens texter nämner bladen, korten, mallarna, testen, texterna och lektionerna med namnen som de står i metoden, så att de blir länkar | STIL.md under Hänvisningar | `insatsplanFel` (`olankadeSaker`) på ett namn som metoden inte har |
@@ -84,15 +84,15 @@ Det som händer en lärare med en grupp under en insats, på ett ställe. Planpr
 | Fall | Det som händer | Provet |
 |---|---|---|
 | S1 | Planen börjar mitt i en vecka eller en lördag | `start på en lördag börjar nästa vecka med metodens vecka 1`; `start en onsdag ger 17 pass` |
-| S2 | Röda dagar och lov, också före starten och efter att planen är gjord | `påskens dagar faller bort`; `lov i valen flyttar planen`; `veckan före är lov: före första passet veckan före lovet` |
+| S2 | Röda dagar och lov, också före starten och efter att planen är gjord | `påskens dagar faller bort`; `lov i valen flyttar planen`; `veckan före är lov: före första passet veckan före lovet`; `kalenderveckorna: veckor i följd ihop, och ett lov bryter följden`; `åtgärdsprogrammet: ett lov mitt i ett steg står inte med i stegets veckor` |
 | S3 | Planen går över nyår | `över nyåret med vecka 53 som lov`; `kalenderveckornas spann, också över nyår` |
 | S4 | En vecka tas om | `upprepad vecka ger 21 pass`; `texten till åtgärdsprogrammet följer den upprepade veckan` |
 | S5 | Ett pass flyttas eller ställs in, och Ångra | `flyttat pass`; `inställt pass ger 17 pass`; `ångrat inställt pass`; `sista passet efter datum när det sista passet flyttas före ett annat` |
-| S6 | Gruppen börjar högre upp i en stege | `en stege som börjar på vecka 3`; `metodens veckor som planens`; `stegen: variantens mening och metodens texter med planens vecka`; `kalendern skriver metodens veckor som planens` |
+| S6 | Gruppen börjar högre upp i en stege | `en stege som börjar på vecka 3`; `metodens veckor som planens`; `stegen: rutan med veckans fokus säger inte metodens vecka`; `stegen: variantens mening och metodens texter med planens vecka`; `kalendern skriver metodens veckor som planens`; `Börja på står under Före med formulärets steg`; `läsningen före låser inte Börja på`; `en bock låser Börja på, under Före och i formuläret` |
 | S7 | Passet ser annorlunda ut vissa veckor | `stegen: passet i vecka 1 har variantens tider`; `stegen: kalendern visar passet som sidan, med ett tidsschema`; `metodens sida säger varianten med standardens mening` |
 | S8 | Läraren sätter tider, olika för olika dagar | `olika tider olika dagar`; `kalenderfilen med tider har ett pass per händelse med klockslaget` |
-| S9 | Ett namn rättas, också efter en paus | `ett rättat namn behåller elevens skattningar`; `en paus med raden tom behåller eleven`; `en paus mitt i ett namn byter inte elev` |
-| S10 | En elev slutar och en ny kommer på samma rad | `en ny elev på en annan elevs rad är en ny elev`; `sidan frågar om det är samma elev`; `Samma elev ger Nora Beas skattningar` |
+| S9 | Ett namn rättas, också efter en paus | `ett rättat namn behåller elevens skattningar`; `en paus med raden tom behåller eleven`; `en paus mitt i ett namn byter inte elev`; `ett rättat namn sägs i beskedet, med Ångra`; `en rad som töms en stund behåller namnet i lärarens mening` |
+| S10 | En elev slutar och en ny kommer på samma rad | `en ny elev på en annan elevs rad är en ny elev`; `sidan frågar om det är samma elev`; `en obesvarad fråga står kvar`; `Samma elev ger Nora Beas skattningar`; `Ångra tar tillbaka listan och frågan`; `en borttagen rad och ett nytt namn: läraren väljer bland de borttagna` |
 | S11 | En elev tas bort och kommer tillbaka | `en borttagen rad ger inte nästa elev dess id`; `Ångra lägger tillbaka elevlistan`; `Bea får tillbaka det som förts in när namnet skrivs igen`; `en elev som togs bort tidigare känns igen och är ingen fråga` |
 | S12 | För många elever och samma namn två gånger | `en trettonde elev och samma namn två gånger sägs under listan, och gruppens storlek` |
 | S13 | Två grupper i samma metod | `två planer för metoden`; `pågående insatser: planerna i sina veckor, och :2 för en andra plan för samma metod` |
@@ -102,8 +102,9 @@ Det som händer en lärare med en grupp under en insats, på ett ställe. Planpr
 | S17 | Sidan öppnas i en apps egen webbläsare | `vägen ut på iPhone: Safari, med planen` |
 | S18 | Helgen före en ny vecka | `på söndagen gäller rutan nästa pass och dess vecka` |
 | S19 | Insatsen är slut: utvärdering och förlängning | `efter insatsen: sidan visar Efter insatsen`; `förläng med två veckor`; `förlängningen flyttar inte resultatet efter` |
-| S20 | Filerna som laddas ner, var och en med eget namn | `filnamnen på det som laddas ner`; `kalenderfilens namn säger vad, metoden och datumet`; `kopians namn säger gruppen, metoden och datumet` |
-| S21 | Elevernas namn lämnar aldrig webbläsaren | `sammanställningen kopieras utan namn`; `inga namn i statistikens händelser`; `länken till planen utan namnet` |
+| S20 | Filerna som laddas ner, var och en med eget namn | `filnamnen på det som laddas ner`; `kalenderfilens namn säger vad, metoden och datumet`; `kopians namn säger kopia, gruppen, metoden och datumet` |
+| S21 | Elevernas namn lämnar aldrig webbläsaren | `ett namn som lämnar listan följer inte med texten som kopieras medan läraren skriver`; `sammanställningen kopieras utan namn`; `inga namn i statistikens händelser`; `länken till planen utan namnet` |
+| S22 | Dagens pass är gjort, och en vecka längre fram | `nästa pass som inte är bockat, med de bockade före det`; `ett bockat pass ger nästa pass i rutan, och rutan säger det`; `utan bocken gäller rutan passet igen`; `en vecka som inte har börjat har streckade ringar och inga bockar`; `en vecka som inte har börjat säger när den går att skatta, utan skalan` |
 
 ## Agenterna och uppdragen
 
@@ -117,7 +118,7 @@ Mallarna står i `scripts/planera/`, med verktygets kommandon i `verktyget.md`, 
 | `buggjakt.md` | Två jägare på olika modeller | Sonnet och Haiku, omkring 110 kommandon | nytt, forsta, andra, adress, port, tak, svar |
 | `konsistens.md` | En provare som följer samma sak genom alla vyer | Opus, omkring 130 kommandon | nytt, forsta, andra, adress, port, tak, svar |
 | `kodgranskning.md` | Codex i läsläge | `gpt-6-astra`, xhigh | version, bakgrund, bas, nytt, leta |
-| `verifiering.md` | En lärare som inte har sett sidan, efter lagningarna | Opus, omkring 150 kommandon | idag, forsta, andra, metoder, adress, port, tak, svar |
+| `verifiering.md` | En lärare som inte har sett sidan, efter lagningarna | Opus, omkring 150 kommandon | idag, forsta, andra, metoder, adress, port, tak, svar, och lagat: det som lagades, sagt som läraren märker det |
 | `ide.md` | En Sonnet och en Opus när en ny form ska väljas, innan något byggs | Sonnet och Opus | fraga_kort, fraga, varfor, niclas, innehall, bilder, metoder, adress, svar |
 
 En agent som använder sidan får en egen webbläsare. Starta `node scripts/lasare.mjs serve <port> --bilder <mapp>` i bakgrunden, en port per agent från 9641, och vänta tills `node scripts/lasare.mjs <port> adress` svarar. Agenten (general-purpose) får bara en kort uppmaning: läs uppdraget och gör exakt det, styr webbläsaren med kommandona i uppdraget, läs inga andra filer, och skriv svaret dit uppdraget säger. Stoppa webbläsaren när agenten är klar. Codex startas med prompten på stdin: `codex exec -m gpt-6-astra -c model_reasoning_effort=xhigh --sandbox read-only --skip-git-repo-check -o <svar.md> - < <prompt.md>`, och loggen läses direkt efter starten, eftersom kvoten tar slut ibland.
@@ -192,9 +193,11 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | Metodens texter i planen | `planensInledning`, `planensTexter`, `visadeTexter`, `planensRamFel`, `rollensRad` och `planensCitatFel` |
 | Filnamnen på det som laddas ner | `filnamnet` |
 | Uppföljningen | `uppfoljningensNamn`, `uppfoljningensRad`, `uppfoljningensRader` och `resultatText` |
-| Skattningen | `skattningenText`, `elevensVarden`, `skattadeVeckor` och `riktningText` |
+| Skattningen | `skattningenText`, `elevensVarden`, `skattadeVeckor`, `skattningenMittI` och `riktningText` |
+| Nästa pass | `nastaPass`, och `nastaObockade` för rutan med nästa pass, som hoppar över det som är bockat |
 | Passen och besluten | `passensRad`, `passensLage`, `narvaronText`, `beslutText` och `BESLUTEN` |
 | Diagrammet | `stapelnsKant` och `prickarna` |
+| Målet | `malText`, `malensMening` och `kortetsMalFel` |
 | Saker med nummer, "Bildserie 2–6" | `sakspann` |
 | Planens adress | `planensAdress` i `src/scripts/insatser-lagring.ts` |
 | En apps egen webbläsare | `webblasaren` och `vagenUt` i `src/scripts/webblasaren.ts` |

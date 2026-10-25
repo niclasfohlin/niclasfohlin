@@ -22,7 +22,7 @@ material:
   - lässchema
   - böcker på rätt nivå
   - snabbmall och kontrakt
-uppdaterad: 2026-10-24
+uppdaterad: 2026-10-25
 relaterade:
   - laslistor-i-grupp
   - upprepad-lasning
@@ -246,6 +246,7 @@ plan:
     - "Uteblir läsningen hemma flera dagar i rad, ring hem tidigt."
 
 mal:
+  overgripande: "kunna läsa en bok på sin nivå med flyt och läsa om meningen vid fel."
   punkter:
     - Läsa en bok på sin nivå med flyt
     - Ljuda ett okänt ord och läsa det som helhet

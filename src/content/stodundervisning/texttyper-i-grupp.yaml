@@ -30,7 +30,7 @@ material:
   - lappar
   - en mapp per elev
 
-uppdaterad: 2026-10-19
+uppdaterad: 2026-10-25
 publicerad: 2026-10-09
 relaterade:
   - skrivkurs-vardeskapande
@@ -416,6 +416,7 @@ uppfoljning:
       vad: Samla gruppen ett pass med en ny text. Fråga klassläraren om eleven säger vem som läser.
 
 mal:
+  overgripande: "kunna planera en text för en läsare och skriva den efter planen."
   rubrik: "Mål: det eleven gör efter en kurs"
   text: "Efter en kurs gör eleven oftare det här:"
   punkter:

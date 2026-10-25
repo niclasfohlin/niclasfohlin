@@ -23,7 +23,7 @@ material:
   - läsrör
   - lappen hem
   - snabbmallen
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-25
 relaterade:
   - til-i-grupp
   - laslistor-i-grupp
@@ -378,6 +378,7 @@ uppfoljning:
     - nar: Efter sex till åtta veckor
       vad: "Eleven läser en ny text som är lika lång och på samma nivå. Fyll i protokollet igen och jämför med starten. Berätta för eleven vad du har hört."
 mal:
+  overgripande: "kunna läsa en text med flyt och lösa ett svårt ord med en strategi."
   text: "Efter perioden ska eleven ha gått upp några steg på lästrappan och oftare än förut:"
   punkter:
     - Säga ljuden utan paus och höra ordet

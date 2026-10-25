@@ -24,7 +24,7 @@ material:
   - elevens skrivbok
   - miniwhiteboard
   - skrivkort Bas
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-25
 publicerad: "2026-10-17"
 relaterade:
   - "ljudlek-i-grupp"
@@ -301,6 +301,7 @@ uppfoljning:
     - nar: "Två veckor efter"
       vad: "Du och klassläraren läser skrivboken: skriver eleven en mening om dagen?"
 mal:
+  overgripande: "kunna skriva det man säger, ord för ord, och läsa det."
   rubrik: "Mål: vad eleven ska kunna efter insatsen"
   text: "Efter insatsen ska eleven kunna:"
   punkter:

@@ -29,7 +29,7 @@ material:
   - skrivplanen
   - tidningens sida
 
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-25
 publicerad: 2026-10-06
 relaterade:
   - laslistor-i-grupp
@@ -520,6 +520,7 @@ uppfoljning:
       vad: Gör kartläggningen igen. Ge klassläraren resultatet och vad eleven behöver nu.
 
 mal:
+  overgripande: "kunna läsa och stava långa ord genom att dela dem i sina delar."
   punkter:
     - läsa långa ord som har kursens delar genom att dela dem, också ord som eleven inte har övat på
     - stava långa ord en del i taget, skriva sammansatta ord ihop och få med fogen

@@ -24,7 +24,7 @@ material:
   - fem modeller med blad
   - post-it-lappar
   - pennor
-uppdaterad: 2026-10-20
+uppdaterad: 2026-10-25
 relaterade:
   - boksamtal-i-grupp
   - problemlosning-i-grupp
@@ -532,6 +532,7 @@ uppfoljning:
     - nar: Efter åtta veckor
       vad: Gör kartläggningen igen med Björnens vinter och jämför före och efter i protokollet. Klarar eleven klassens texter med mindre stöd, och vad fortsätter läraren i ämnet med?
 mal:
+  overgripande: "kunna reda ut det som skaver i en faktatext och säga kärnan med egna ord."
   punkter:
     - Stanna och säga var det skaver
     - Reda ut ett ord eller en mening med hjälp av texten

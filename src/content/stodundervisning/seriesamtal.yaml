@@ -678,6 +678,7 @@ plan:
       tabell: "Det sista passet"
 
 mal:
+  overgripande: "kunna se en händelse ovanifrån och göra en plan för nästa gång."
   punkter:
     - Berätta i ordning vad som hände, och säga vad som kan hända innan det händer
     - Skilja på det någon säger och det någon tänker

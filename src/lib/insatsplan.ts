@@ -8,8 +8,6 @@ import { bankAv, nivaFarger } from './bank';
 import { harTaFram, taFramAv } from './tafram';
 import { formateraDatum } from './innehall';
 import { harLathund } from './metod';
-import { metodensLektionskort } from './lektionskort';
-import { lektionskortetsPapper } from './lektionskortdata';
 import { kursensVeckor, metodensSaker, sidansAnkare, type MetodSak } from './metodsaker';
 import { passOversikt } from './metod';
 import { CENTRALA, lasbarAdress } from './centrala';
@@ -26,15 +24,10 @@ export const planensAdress = (id: string) => `/stodundervisning/${id}/planera`;
 
 /**
  * Insatsens mål, som läraren skattar eleverna mot varje vecka och kan skriva om med pennan (Niclas 2026-10-24: "Den kan få
- * en färdig, vi har ju dessa i lektionskorten väl? Men ska kunna trycka och redigera det målet"): plan.mal i metodens fil,
- * och annars målet på metodens lektionskort ("**Mål:** kunna …") när metoden har ett kort.
+ * en färdig, vi har ju dessa i lektionskorten väl? Men ska kunna trycka och redigera det målet"): metodens övergripande
+ * mål, mal.overgripande, som lektionskortet också säger (K-522).
  */
-export function planensMal(m: Metod): string | undefined {
-  if (m.data.plan?.mal) return m.data.plan.mal;
-  const kort = metodensLektionskort(m.data, m.id);
-  if (kort.length !== 1) return undefined;
-  return lektionskortetsPapper(kort[0]).ingress?.match(/\*\*Mål:\*\*\s*([^\n]+)/)?.[1]?.trim() || undefined;
-}
+export const planensMal = (m: Metod): string => m.data.mal.overgripande;
 
 export interface PlanBank {
   /** Ta fram-sidans led och adress. */
@@ -248,7 +241,7 @@ export async function planensData(m: Metod): Promise<PlanData> {
     adress: `${site.url.replace(/^https?:\/\//, '')}/stodundervisning/${m.id}`,
     sida: `/stodundervisning/${m.id}`,
     ...(uppdaterad ? { uppdaterad, uppdateradText: formateraDatum(d.uppdaterad!) } : {}),
-    mal: planensMal(m) ?? '',
+    mal: planensMal(m),
     tid: d.tid,
     period: d.period,
     ...(d.progression ? { progression: { enhet: d.progression.enhet, rader: d.progression.rader.map((r) => ({ ...r, kort: r.rubrik ?? (kurs[r.vecka]?.titel || postensRad(r.fokus, 80)) })) } } : {}),
@@ -304,7 +297,6 @@ async function planensBank(m: Metod): Promise<PlanBank | undefined> {
  */
 export async function insatsplanFel(m: Metod): Promise<string[]> {
   const fel = planFel(m.data);
-  if (!planensMal(m)) fel.push('Metoden har inget mål för planen: skriv plan.mal i metodens fil, eller ge metoden ett lektionskort med ett mål.');
   const taggar = (m.data.progression?.rader ?? []).flatMap((r) => r.taggar ?? []);
   if (taggar.length) {
     const bank = harTaFram(m, 'texter') || harTaFram(m, 'problem') ? await planensBank(m) : undefined;
