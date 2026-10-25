@@ -303,10 +303,12 @@ export declare const BESLUTEN: Readonly<{ avstamning: readonly ('fortsatt' | 'ju
 export declare const AVSLUTANDE: readonly string[];
 /** Dagarna efter sista passet då en insats avslutas av sig själv. */
 export declare const AVSLUTAS_EFTER: number;
-/** Är insatsens pass slut: sista passet har varit, eller det är sista passets dag och beslutet avslutar insatsen. */
-export declare const insatsenSlut: (sistaPass: string | undefined, beslut: string | undefined, idag: string) => boolean;
-/** Är insatsen avslutad: beslutet avslutar den från sista passets dag, eller två veckor har gått sedan sista passet och läraren har inte öppnat den igen för det. */
-export declare const insatsenAvslutad: (sistaPass: string | undefined, beslut: string | undefined, idag: string, oppen?: string) => boolean;
+/** Är insatsens pass slut: sista passets dag har varit. */
+export declare const insatsenSlut: (sistaPass: string | undefined, idag: string) => boolean;
+/** Planens sista dag: sista passet, eller uppföljningen efter insatsen när den kommer senare. */
+export declare const planensSistaDag: (plan: Plan) => string | undefined;
+/** Är insatsen avslutad: beslutet avslutar den från sista passets dag, eller två veckor har gått sedan planens sista dag och läraren har inte öppnat den igen för sista passet. */
+export declare const insatsenAvslutad: (sistaPass: string | undefined, beslut: string | undefined, idag: string, oppen?: string, sistaDag?: string) => boolean;
 /** Beslutet och lärarens mening, med punkt. */
 export declare const beslutText: (b: { beslut?: string; not?: string }) => string;
 /** Passens rad: läget, de som har varit utan bock, och de inställda och helgdagarna. */

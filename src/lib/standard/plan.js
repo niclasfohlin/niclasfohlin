@@ -1336,7 +1336,7 @@ export function sammanstallning(plan, f, idag) {
     gjordaVarit: passGjorda.filter((p) => p.datum <= idag).length,
     veckomedel: medel(veckor.filter((v) => v.skattning).map((v) => v.skattning)),
     installda: veckor.reduce((a, v) => a + v.installda, 0), helgdagar: veckor.reduce((a, v) => a + v.helgdagar, 0),
-    slut: insatsenSlut(plan.sistaPass, f.utvardering?.beslut, idag), mitt: mittVeckan(plan),
+    slut: insatsenSlut(plan.sistaPass, idag), mitt: mittVeckan(plan),
     // Avstämningen hör till veckan mitt i: en insats som avslutades i den veckan eller före har ingen, så den står inte i
     // texterna och pdf:erna, men lärarens beslut ligger kvar och kommer tillbaka med Ångra avslutet (buggjakten
     // 2026-10-25: avstämningen var borta i veckan men stod kvar i texten till åtgärdsprogrammet).
@@ -1357,25 +1357,34 @@ export const AVSLUTANDE = Object.freeze(['avsluta', 'byt']);
 /** Dagarna efter sista passet då en insats avslutas av sig själv (Niclas 2026-10-25: "planen blir automatiskt avslutad 2 veckor efter sista datum"). */
 export const AVSLUTAS_EFTER = 14;
 /**
- * Är insatsens pass slut: sista passet har varit, eller det är sista passets dag och läraren har avslutat insatsen. Då visar
- * planen Efter insatsen, och texterna säger avslutet i dåtid.
+ * Är insatsens pass slut: sista passets dag har varit. Då visar planen Efter insatsen, och texterna säger avslutet i dåtid.
+ * På sista passets dag är passet kvar att hålla, också när läraren redan har avslutat insatsen (verifieringen 2026-10-25:
+ * planen visade Efter insatsen och måndagens pass när onsdagens pass var det sista).
  * @param {string | undefined} sistaPass planens sista pass
- * @param {string | undefined} beslut utvärderingens beslut
  * @param {string} idag
  */
-export const insatsenSlut = (sistaPass, beslut, idag) => !!sistaPass && (idag > sistaPass || (idag === sistaPass && AVSLUTANDE.includes(beslut ?? '')));
+export const insatsenSlut = (sistaPass, idag) => !!sistaPass && idag > sistaPass;
+/**
+ * Planens sista dag: sista passet, eller metodens uppföljning efter insatsen när den kommer senare, som Seriesamtals fyra
+ * veckor efter sista passet. En plan avslutas av sig själv två veckor efter den (Niclas 2026-10-25: "2 veckor efter sista
+ * datum"; verifieringen samma kväll: Seriesamtal avslutades före sin uppföljning).
+ * @param {Plan} plan
+ * @returns {string | undefined}
+ */
+export const planensSistaDag = (plan) => [plan.sistaPass, ...plan.uppfoljning.filter((u) => u.typ === 'efter').flatMap((u) => u.tillfallen.map((t) => t.datum))].filter(Boolean).sort().pop();
 /**
  * Är insatsen avslutad, lika i planen, i metodbanken och på metodens sida (Niclas 2026-10-25: "avslutet måste märkas när det
  * är tryckt ... när man går in på den (förutom att den då läggs som Avslutad)"): läraren har avslutat den eller bytt insats,
- * från sista passets dag, eller två veckor har gått sedan sista passet, också efter en förlängning, och läraren har inte
- * öppnat den igen för det sista passet (oppen; samma kväll: "blir de två veckor efter sista datum så blir den avslutad
- * oavsett. Man kan ångra det som vanligt").
+ * från sista passets dag, eller två veckor har gått sedan planens sista dag (planensSistaDag), också efter en förlängning,
+ * och läraren har inte öppnat den igen för det sista passet (oppen; samma kväll: "blir de två veckor efter sista datum så
+ * blir den avslutad oavsett. Man kan ångra det som vanligt").
  * @param {string | undefined} sistaPass planens sista pass
  * @param {string | undefined} beslut utvärderingens beslut
  * @param {string} idag
  * @param {string} [oppen] sista passet då läraren ångrade avslutet
+ * @param {string} [sistaDag] planens sista dag, när uppföljningen efter kommer efter sista passet
  */
-export const insatsenAvslutad = (sistaPass, beslut, idag, oppen) => !!sistaPass && ((idag >= sistaPass && AVSLUTANDE.includes(beslut ?? '')) || (idag >= plusDagar(sistaPass, AVSLUTAS_EFTER) && oppen !== sistaPass));
+export const insatsenAvslutad = (sistaPass, beslut, idag, oppen, sistaDag) => !!sistaPass && ((idag >= sistaPass && AVSLUTANDE.includes(beslut ?? '')) || (idag >= plusDagar(sistaDag && sistaDag > sistaPass ? sistaDag : sistaPass, AVSLUTAS_EFTER) && oppen !== sistaPass));
 /** Beslutet och lärarens mening, var för sig och med punkt: "Fortsätt som planerat. Gruppen behöver mer tid." En mening utan beslut kommer med (Codex 2026-10-24). @param {{ beslut?: string, not?: string }} b */
 export const beslutText = (b) => [b.beslut ? BESLUT[b.beslut] ?? b.beslut : '', b.not ?? ''].map(utanPunkt).filter(Boolean).map((x) => mening(x)).join(' ');
 /**

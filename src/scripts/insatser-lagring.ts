@@ -4,7 +4,7 @@
 // någonstans, utom att en plan som pågår säger det till besöksstatistiken med bara metodens namn (pagaende nedan).
 // Lagringen kan vara avstängd eller rensas (privat läge, en skola som rensar webbläsaren); då säger sidan det, och
 // länken till planen är kopian som håller.
-import { arDatum, dagText, gangen, insatsenAvslutad, lasVal, mandagen, passetsTid, planvecka, planveckan, plusDagar, rensaFoljd, rentText, spannKort, stor, tidText, tvasiffrigt, veckansDagar, veckodagKort, veckonyckel, type Foljd, type Plan, type Val } from '../lib/standard/index.js';
+import { arDatum, dagText, gangen, insatsenAvslutad, lasVal, planensSistaDag, mandagen, passetsTid, planvecka, planveckan, plusDagar, rensaFoljd, rentText, spannKort, stor, tidText, tvasiffrigt, veckansDagar, veckodagKort, veckonyckel, type Foljd, type Plan, type Val } from '../lib/standard/index.js';
 
 export interface SparadPlan {
   id: string;
@@ -25,8 +25,8 @@ export interface SparadPlan {
   andrad: string;
   /** Metodens datum när planen gjordes, så att planen kan säga till när metoden har ändrats efteråt. */
   uppdaterad?: string;
-  /** Passen (dag, vecka, nummer och tiden när läraren har satt en) och veckorna (nummer, metodens vecka, upprepad, första och sista dagen). */
-  schema: { pass: ([string, number, number] | [string, number, number, string])[]; veckor: [number, number, number, string, string][] };
+  /** Passen (dag, vecka, nummer och tiden när läraren har satt en), veckorna (nummer, metodens vecka, upprepad, första och sista dagen) och planens sista dag, när uppföljningen efter kommer efter sista passet. */
+  schema: { pass: ([string, number, number] | [string, number, number, string])[]; veckor: [number, number, number, string, string][]; sista?: string };
   /** Hur många av planens pass som är bockade, till Dina insatser (Codex 2026-10-24: bockar på dagar som inte längre har pass räknades med). */
   bockade?: number;
 }
@@ -50,7 +50,7 @@ export function rensaPlan(x: unknown): SparadPlan | null {
   return {
     id: p.id, metod: p.metod, titel: rentText(p.titel, 160), ...(typeof p.omrade === 'string' ? { omrade: rentText(p.omrade, 40) } : {}),
     namn: rentText(p.namn, 40), val: typeof p.val === 'string' ? p.val.slice(0, 4000) : '', folj: p.folj === true, foljd: rensaFoljd(p.foljd),
-    ...(kopia ? { kopia } : {}), andrad: tidpunkt(p.andrad) ?? '', ...(uppdaterad ? { uppdaterad } : {}), schema: { pass, veckor },
+    ...(kopia ? { kopia } : {}), andrad: tidpunkt(p.andrad) ?? '', ...(uppdaterad ? { uppdaterad } : {}), schema: { pass, veckor, ...(arDatum(schema.sista) ? { sista: schema.sista } : {}) },
     ...(heltal(p.bockade) ? { bockade: p.bockade } : {}),
   };
 }
@@ -131,6 +131,7 @@ export const nuTid = () => {
 export const schemaAv = (plan: Plan, val?: Val): SparadPlan['schema'] => ({
   pass: plan.pass.map((p) => { const tid = val ? passetsTid(val, p) : undefined; return tid ? [p.datum, p.vecka, p.nr, `${tid[0]}`] : [p.datum, p.vecka, p.nr]; }),
   veckor: plan.veckor.map((v) => { const d = veckansDagar(plan, v); return [v.nr, planvecka(plan, v), v.igen ? 1 : 0, d.fran, d.till]; }),
+  ...(planensSistaDag(plan) && planensSistaDag(plan) !== plan.sistaPass ? { sista: planensSistaDag(plan) } : {}),
 });
 
 /** "i dag", "i morgon" eller "onsdag 18 november". */
@@ -170,7 +171,7 @@ export type Status = 'pagaende' | 'kommande' | 'avslutad';
 export const STATUSNAMN: Record<Status, string> = { pagaende: 'Pågående', kommande: 'Kommande', avslutad: 'Avslutad' };
 export function statusAv(p: SparadPlan, idag: string): Status {
   const datum = p.schema.pass.map((x) => x[0]).sort();
-  if (!datum.length || insatsenAvslutad(datum[datum.length - 1], p.foljd?.utvardering?.beslut, idag, p.foljd?.oppen)) return 'avslutad';
+  if (!datum.length || insatsenAvslutad(datum[datum.length - 1], p.foljd?.utvardering?.beslut, idag, p.foljd?.oppen, p.schema.sista)) return 'avslutad';
   return datum[0] > idag ? 'kommande' : 'pagaende';
 }
 const STATUSORDNING: Record<Status, number> = { pagaende: 0, kommande: 1, avslutad: 2 };

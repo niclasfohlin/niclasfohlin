@@ -3193,9 +3193,10 @@ h1 .beta { font-size: 0.85rem; vertical-align: 0.35em; }
 .pl-aldre > summary::after { content: ''; width: 0.5rem; height: 0.5rem; border-right: 2px solid var(--farg-accent); border-bottom: 2px solid var(--farg-accent); transform: translateY(-0.15rem) rotate(45deg); }
 .pl-aldre[open] > summary::after { transform: translateY(0.1rem) rotate(-135deg); }
 .pl-aldre-lista { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.25rem; }
-.pl-avslutad-plan .pl-nasta, .pl-avslutad-plan .pl-fokusruta, .pl-avslutad-plan .pl-summa { border-left-color: #8a949e; background: repeating-linear-gradient(135deg, #f5f6f8 0 10px, #edf0f3 10px 12px); }
+/* Rutan med dagens eller ett kommande pass står kvar i sin färg, eftersom passet ska hållas (verifieringen 2026-10-25). */
+.pl-avslutad-plan .pl-nasta:not(.pl-kommer), .pl-avslutad-plan .pl-fokusruta, .pl-avslutad-plan .pl-summa { border-left-color: #8a949e; background: repeating-linear-gradient(135deg, #f5f6f8 0 10px, #edf0f3 10px 12px); }
 .pl-avslutad-plan .pl-summa { border-left: 4px solid #8a949e; }
-.pl-avslutad-plan .pl-nasta .pl-etikett { color: var(--farg-text-svag); }
+.pl-avslutad-plan .pl-nasta:not(.pl-kommer) .pl-etikett { color: var(--farg-text-svag); }
 .pl-avslutad-plan .pl-remsa-vecka:not([aria-pressed="true"]):not(.struken), .pl-avslutad-plan .pl-veckor > li:not(.nu):not(.pl-struken) { background: #f3f5f7; }
 .pl-avslutade summary { display: flex; align-items: center; gap: 0.75rem; min-height: 2.75rem; padding: 0 1rem; border-top: 1px solid var(--farg-kant); font-weight: 600; color: var(--farg-text-svag); cursor: pointer; }
 
