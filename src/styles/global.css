@@ -3624,3 +3624,8 @@ button.pl-passroll { min-height: 2.75rem; }
 .app-dela { width: 1.15em; height: 1.15em; vertical-align: -0.2em; }
 .app-not { margin: 0.5rem 0 0; font-size: 0.9rem; color: var(--farg-text-svag); }
 @media print { .app-rad { display: none !important; } }
+/* I appen själv är appen bara Stödundervisning (Niclas 2026-10-25: "över menyraden inte skulle visas i appen och den bara
+   hade sidan stödundervisning som app"): sajtens menyrad, metodbankens ingress och sidfotens länkar ut ur appen göms, och
+   namnet, mejlet och upphovet står kvar. Varje sida i appen utom metodbanken har länkraden tillbaka dit (brodsmula), och Android har sin
+   bakåtknapp. I webbläsaren ser sajten ut som förut. */
+@media (display-mode: standalone) { .sidhuvud, .metodbank-ingress, .sidfot .lankrad-lista { display: none; } }

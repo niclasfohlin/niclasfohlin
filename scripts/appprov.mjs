@@ -188,6 +188,20 @@ try {
   await f.kor('localStorage.clear()');
   await f.oppna(metodbankAdress);
   ska('i appen syns raden inte', (await f.rad())?.syns === false, await f.rad());
+  // I appen är appen bara Stödundervisning (Niclas 2026-10-25): regeln för appen i stilmallen gömmer sajtens menyrad,
+  // metodbankens ingress och sidfotens länkar, och de finns på sidan, så att en klass som byter namn märks. Chrome kan inte
+  // härma att sidan körs som app för stilmallen (Emulation.setEmulatedMedia tar inte emot display-mode), så regeln läses
+  // ur stilmallen. En metod har länkraden tillbaka till metodbanken.
+  const appregler = await f.kor(`(() => { const ut = []; for (const ss of document.styleSheets) { let regler; try { regler = ss.cssRules; } catch { continue; } for (const r of regler) if (r.media && /display-mode/.test(r.media.mediaText) && /standalone/.test(r.media.mediaText)) for (const x of r.cssRules) ut.push([x.selectorText, x.style.display]); } return ut; })()`);
+  const gomda = appregler.filter(([, d]) => d === 'none').flatMap(([s]) => s.split(',').map((x) => x.trim()));
+  const delar = ['.sidhuvud', '.metodbank-ingress', '.sidfot .lankrad-lista'];
+  ska('i appen göms menyraden, metodbankens ingress och sidfotens länkar', delar.every((d) => gomda.includes(d)), appregler);
+  ska('delarna som göms i appen finns på metodbanken', (await f.kor(`${JSON.stringify(delar)}.every((d) => !!document.querySelector(d))`)) === true);
+  ska('i webbläsaren syns menyraden och metodbankens ingress', (await f.kor(`['.sidhuvud', '.metodbank-ingress'].every((d) => getComputedStyle(document.querySelector(d)).display !== 'none')`)) === true);
+  if (planbara.length) {
+    await f.oppna(`${bas}/stodundervisning/${planbara[0]}`);
+    ska('en metod har länkraden tillbaka till metodbanken', (await f.kor(`!!document.querySelector('.brodsmula a[href="/stodundervisning"]')`)) === true);
+  }
   f.stang();
   // Service workern: metodbanken sparas när den installeras och planen när den öppnas, och när servern har stängts, som
   // när telefonen är utan nät, öppnas planen ur kopian och en sida som aldrig öppnats ger sidan Utan nät. Det görs sist,
