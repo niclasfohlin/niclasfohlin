@@ -1,9 +1,10 @@
 // Lärarens planer (Planera insatsen, K-489) sparas bara i webbläsaren, under nyckeln insatser: valen som länkens form
 // (kodaVal i src/lib/standard/plan.js), gruppens namn, bockarna för genomförda pass och en kopia av passens och veckornas
 // datum, så att metodbanken och metodens sida kan visa Dina insatser utan att räkna om planen. Inget av det skickas
-// någonstans. Lagringen kan vara avstängd eller rensas (privat läge, en skola som rensar webbläsaren); då säger sidan det,
-// och länken till planen är kopian som håller.
-import { arDatum, lasVal, passetsTid, planvecka, plusDagar, rensaFoljd, tidText, veckodag, VECKODAGAR, type Foljd, type Plan, type Val } from '../lib/standard/index.js';
+// någonstans, utom att en plan som pågår säger det till besöksstatistiken med bara metodens namn (pagaende nedan).
+// Lagringen kan vara avstängd eller rensas (privat läge, en skola som rensar webbläsaren); då säger sidan det, och
+// länken till planen är kopian som håller.
+import { arDatum, lasVal, mandagen, passetsTid, planvecka, plusDagar, rensaFoljd, tidText, veckodag, veckonyckel, VECKODAGAR, type Foljd, type Plan, type Val } from '../lib/standard/index.js';
 
 export interface SparadPlan {
   id: string;
@@ -141,4 +142,50 @@ export function planensNamn(p: { namn?: string; val: string; schema?: SparadPlan
   const forsta = p.schema?.pass.map((x) => x[0]).sort()[0] ?? v.start;
   const [, m, d] = forsta.split('-').map(Number);
   return `${dagar.charAt(0).toLocaleUpperCase('sv')}${dagar.slice(1)} från ${d} ${MANAD_KORT[m - 1]}`;
+}
+
+// Pågående insatser i statistiken (K-504, Niclas 2026-10-25: "en lista på pågående Planerade insatser just nu i antal för
+// sin metod"). En sparad plan som är inne i sina veckor, från veckan med första passet till veckan med det sista, säger
+// det till GoatCounter en gång i veckan, måndag till söndag, när en sida som läser planerna öppnas: händelsen
+// planera:<metod>:pagar, och :2 och :3 för en andra och tredje plan för samma metod i samma webbläsare, eftersom
+// GoatCounter räknar besökare och inte händelser. Händelsen bär bara metoden, aldrig planens namn, gruppen eller
+// eleverna. Statistiksidan räknar dem under Pågående insatser (src/pages/statistik.astro, DRIFT.md under
+// Besöksstatistik).
+const PAGAR = 'insatser-pagar';
+export const PAGAR_HOGST = 3;
+/** Händelserna för planerna som pågår den här veckan, med planens id, i en fast ordning så att numret står kvar veckan ut. */
+export function pagaendeHandelser(planer: SparadPlan[], idag: string): { id: string; path: string; title: string }[] {
+  const perMetod = new Map<string, number>();
+  const ut: { id: string; path: string; title: string }[] = [];
+  for (const p of [...planer].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))) {
+    const dagar = p.schema.pass.map((x) => x[0]).sort();
+    if (!dagar.length || idag < mandagen(dagar[0]) || idag > plusDagar(mandagen(dagar[dagar.length - 1]), 6)) continue;
+    const n = (perMetod.get(p.metod) ?? 0) + 1;
+    perMetod.set(p.metod, n);
+    if (n <= PAGAR_HOGST) ut.push({ id: p.id, path: `planera:${p.metod}:pagar${n > 1 ? `:${n}` : ''}`, title: `${p.titel}: en insats pågår` });
+  }
+  return ut;
+}
+/**
+ * Säger GoatCounter vilka planer som pågår, en gång per plan och vecka. count.js laddas bara på sajtens egen adress
+ * (Base.astro) och kan vara stoppad av en annonsblockerare; då räknas inget, och veckan prövas igen nästa gång.
+ */
+export function raknaPagaende(planer: SparadPlan[], idag = idagLokalt()) {
+  const skicka = () => {
+    const gc = (window as { goatcounter?: { count?: (v: object) => void } }).goatcounter;
+    if (!gc?.count) return;
+    let skickade: Record<string, string>;
+    try { skickade = JSON.parse(localStorage.getItem(PAGAR) ?? '{}') ?? {}; } catch { return; }
+    const vecka = veckonyckel(mandagen(idag));
+    const handelser = pagaendeHandelser(planer, idag);
+    const nya: Record<string, string> = {};
+    for (const h of handelser) {
+      if (skickade[h.id] !== vecka) gc.count({ path: h.path, title: h.title, event: true });
+      nya[h.id] = vecka;
+    }
+    try { localStorage.setItem(PAGAR, JSON.stringify(nya)); } catch { /* räknas igen nästa gång */ }
+  };
+  // count.js laddas asynkront; sidans load-händelse väntar in det.
+  if (document.readyState === 'complete') skicka();
+  else addEventListener('load', skicka, { once: true });
 }

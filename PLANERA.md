@@ -120,6 +120,7 @@ Efter uppladdningen: `node scripts/deploykoll.mjs`, öppna planen för varje ny 
 | Saknar ett namn länk fast saken finns: se att texten står bland de texter planen letar namn i (`visadeTexter` i `src/lib/insatsplan.ts`), och att namnets form finns (`sakensFormer` i standarden) | Länkgranskningen 2026-10-25: tidsschemats inledning och gruppens text låg utanför listan, och räknemattans och kursintyget saknade sina former |
 | En länk till en fil prövas som fil, en länk till en sida som sida | Planprovet läste lektionskortets pdf som en sida och stannade |
 | Ett namn som gör checklistan eller uppföljningen längre kan tippa lathundens fjärde sida, där båda står i en spalt som i flera metoder redan är full. Mät spalten före valideringen: hämta `/stodundervisning/<id>-lathund.pptx` ur förhandsservern och läs raderna med ! i dess logg. Flytta hellre en del av en punkt till en annan punkt än att göra en punkt en rad längre | K-502: Seriesamtals spalt hade 0,007 tum till godo, och namnen sköt ut upphovsraden i Textsamtals pdf |
+| GoatCounter räknar besökare och inte händelser: samma händelse två gånger från samma webbläsare räknas en gång. Det som ska räknas flera gånger i samma webbläsare får egna namn | Pågående insatser 2026-10-25: en lärare med två grupper i samma metod räknades som en, så den andra planen heter `pagar:2` |
 | Ett namn som är ett vanligt ord länkas bara som titel, med stor bokstav mitt i en mening | "multiplikation" blev annars en länk till Övningsblad: Multiplikation |
 
 ## Ändringar

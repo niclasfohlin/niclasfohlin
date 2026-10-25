@@ -22,7 +22,7 @@ import {
   type Foljd, type Pass, type Plan, type PlanVecka, type Sammanstallning, type SammanstallningElev, type Val,
 } from '../lib/standard/index.js';
 import type { PlanData } from '../lib/insatsplan';
-import { idagLokalt, iTurOrdning, lasPlaner, narText, nuTid, nyttId, planensNamn, rensaPlan, schemaAv, skiljNamnen, skrivPlaner, type SparadPlan } from './insatser-lagring';
+import { idagLokalt, iTurOrdning, lasPlaner, narText, nuTid, nyttId, planensNamn, raknaPagaende, rensaPlan, schemaAv, skiljNamnen, skrivPlaner, type SparadPlan } from './insatser-lagring';
 import { kanSkrivaUtPdf, skrivUt } from './pdfutskrift';
 import { elevPdf, gruppPdf } from './planpdf';
 
@@ -1558,6 +1558,7 @@ $('pl-spara').addEventListener('click', () => {
   aktiv.franLank = false;
   if (!spara()) { aktiv.sparad = false; sparfel(); return; }
   bedOmVaraktig();
+  raknaPagaende(lasPlaner().planer);
   uppdateraAdressen();
   notis = '';
   visaNotis('');
@@ -1696,6 +1697,8 @@ addEventListener('hashchange', () => {
 // Start: en sparad plan visar veckan och har valen ihopfällda; ett förslag har valen öppna.
 rendera();
 friskaUpp();
+// En plan som pågår säger det till statistiken, en gång i veckan (K-504).
+raknaPagaende(lasPlaner().planer);
 ($('pl-andra') as HTMLDetailsElement).open = !aktiv.sparad;
 if (aktiv.uppdaterad && data.uppdaterad && aktiv.uppdaterad < data.uppdaterad && !notis) notis = `Metoden har uppdaterats ${data.uppdateradText ?? data.uppdaterad}, efter att planen gjordes. Planen följer metoden som den är nu.`;
 // En app med egen webbläsare, som Facebook och Instagram, har sin egen lagring: en plan som sparas där finns inte i Safari

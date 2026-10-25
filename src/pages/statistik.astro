@@ -8,14 +8,18 @@
 import Base from '../layouts/Base.astro';
 import { site } from '../data/site';
 import { publicerade } from '../lib/innehall';
+import { planbar } from '../lib/planbar';
 const bas = (site.statistik ?? '').replace(/\/count$/, '');
 // Metodernas namn, så att en metod heter rätt också när bara dess undersidor eller verktyg har besök i perioden
 // (granskningen av statistiken 2026-10-19: temats sida heter "Vatten: Ta fram en faktatext", utan metodens namn).
-const metodnamn = Object.fromEntries((await publicerade('stodundervisning')).map((m) => [m.id, m.data.titel]));
+const metoderna = await publicerade('stodundervisning');
+const metodnamn = Object.fromEntries(metoderna.map((m) => [m.id, m.data.titel]));
+// Metoderna som kan planeras, vars pågående insatser sidan hämtar med namn (Pågående insatser nedan).
+const planbara = metoderna.filter((m) => planbar(m.data)).map((m) => m.id);
 ---
 
 <Base title="Statistik" description="Besök, nedladdningar och delningar på niclasfohlin.se." dold>
-  <article class="statistik" id="statistik" data-bas={bas} data-metoder={JSON.stringify(metodnamn)}>
+  <article class="statistik" id="statistik" data-bas={bas} data-metoder={JSON.stringify(metodnamn)} data-planbara={JSON.stringify(planbara)}>
     <h1>Statistik</h1>
     <p class="ingress">Besökare, nedladdningar och delningar ur GoatCounter, ordnade som sajten: metoderna, filerna, delningarna, artiklarna och böckerna. Nedladdningarna räknar också utskrifterna, och en delning räknas när någon trycker på en knapp i raden Dela, också om hen sedan avbryter.</p>
 
@@ -29,6 +33,15 @@ const metodnamn = Object.fromEntries((await publicerade('stodundervisning')).map
     </form>
 
     <div data-vy hidden>
+      {/* Pågående insatser (K-504, Niclas 2026-10-25) står ovanför perioderna: talet gäller den här veckan, vilken period
+          som än är vald. */}
+      {planbara.length > 0 && (
+        <section class="stat-kategori" data-pagar>
+          <h2>Pågående insatser</h2>
+          <p class="meta stat-forklaring">Sparade planer i Planera insatsen som är inne i sina veckor och har öppnats den här veckan. Talet är detsamma i alla perioder och räknas sedan 25 oktober 2026.</p>
+          <div data-pagar-innehall><p class="meta">Hämtar …</p></div>
+        </section>
+      )}
       <div class="stat-perioder" role="group" aria-label="Period">
         <button type="button" data-period="dag" aria-pressed="true">I dag</button>
         <button type="button" data-period="vecka" aria-pressed="false">7 dagar</button>
@@ -47,6 +60,10 @@ const metodnamn = Object.fromEntries((await publicerade('stodundervisning')).map
 
       <section class="stat-kategori" data-kategori="metoder" data-topp="3">
         <h2>Metoderna</h2>
+      </section>
+      <section class="stat-kategori" data-kategori="planera" data-topp="5">
+        <h2>Planera insatsen</h2>
+        <p class="meta stat-forklaring" data-fast>Besökare på planens sida. Under namnet står hur många som sparade en plan.</p>
       </section>
       <section class="stat-kategori" data-kategori="filer" data-topp="5">
         <h2>Filerna</h2>
@@ -97,6 +114,7 @@ const metodnamn = Object.fromEntries((await publicerade('stodundervisning')).map
     const rot = document.getElementById('statistik') as HTMLElement;
     const bas = rot.dataset.bas ?? '';
     const METODNAMN: Record<string, string> = JSON.parse(rot.dataset.metoder ?? '{}');
+    const PLANBARA: string[] = JSON.parse(rot.dataset.planbara ?? '[]');
     const form = rot.querySelector('[data-nyckel]') as HTMLFormElement;
     const vy = rot.querySelector('[data-vy]') as HTMLElement;
     const status = rot.querySelector('[data-status]') as HTMLElement;
@@ -232,6 +250,14 @@ const metodnamn = Object.fromEntries((await publicerade('stodundervisning')).map
       const metoder = new Map<string, { namn: string; sida: number; lathund: number; enheter: number; centrala: Map<string, number> }>();
       const filer = new Map<string, Rad>();
       const delningar = new Map<string, { namn: string; antal: number; kanaler: Map<string, number> }>();
+      // Planera insatsen (K-504): besökarna på planens sida, och de som sparade en plan, valde Följ insatsen och hämtade
+      // kalenderfilen. Händelsen pagar räknas bara under Pågående insatser.
+      const planera = new Map<string, { oppnade: number; sparade: number; folj: number; kalender: number }>();
+      const plan = (id: string) => {
+        let x = planera.get(id);
+        if (!x) { x = { oppnade: 0, sparade: 0, folj: 0, kalender: 0 }; planera.set(id, x); }
+        return x;
+      };
       let delade = 0;
       const k: Record<string, Rad[]> = { artiklar: [], bocker: [], utskrifter: [], verktyg: [], filter: [], ovriga: [] };
       // Nedladdningarna: filerna och utskrifterna, inte knapparna i verktygen (granskningen av statistiken 2026-10-19).
@@ -253,6 +279,13 @@ const metodnamn = Object.fromEntries((await publicerade('stodundervisning')).map
             if (DELAD.test(titel)) x.namn = titel.replace(DELAD, '');
             delningar.set(d[2], x);
             delade += h.count;
+            continue;
+          }
+          const pl = h.path.match(/^planera:([^:]+):(spara|folj|kalender|pagar)(?::\d+)?$/);
+          if (pl) {
+            if (pl[2] === 'spara') plan(pl[1]).sparade += h.count;
+            else if (pl[2] === 'folj') plan(pl[1]).folj += h.count;
+            else if (pl[2] === 'kalender') plan(pl[1]).kalender += h.count;
             continue;
           }
           if (/^utskrift/.test(h.path)) { k.utskrifter.push({ namn: titel || h.path, antal: h.count }); nedladdade += h.count; continue; }
@@ -277,6 +310,8 @@ const metodnamn = Object.fromEntries((await publicerade('stodundervisning')).map
         if (m) { const x = metod(m[1]); x.sida += h.count; if (titel) x.namn = titel; continue; }
         m = h.path.match(/^\/stodundervisning\/([^/]+)\/lathund$/);
         if (m) { const x = metod(m[1]); x.lathund += h.count; if (x.namn === m[1] && titel) x.namn = titel.replace(/^Lathund:\s*/, ''); continue; }
+        m = h.path.match(/^\/stodundervisning\/([^/]+)\/planera$/);
+        if (m) { plan(m[1]).oppnade += h.count; continue; }
         const central = CENTRALA_SIDOR.get(h.path);
         if (central) { const x = metod(central.metod!); x.centrala.set(central.namn, (x.centrala.get(central.namn) ?? 0) + h.count); continue; }
         // Ett problems eller en texts egen sida i en bank (src/lib/bank.ts), "Äpplena · Bas, problem 1 · Problemlösning i
@@ -302,7 +337,15 @@ const metodnamn = Object.fromEntries((await publicerade('stodundervisning')).map
       const perKanal = new Map<string, number>();
       for (const x of delningar.values()) for (const [kanal, n] of x.kanaler) perKanal.set(kanal, (perKanal.get(kanal) ?? 0) + n);
       const kanalRader: Rad[] = [...perKanal].map(([kanal, n]) => ({ namn: KANAL[kanal] ?? kanal, antal: n }));
-      return { rader: { metoder: metodRader, filer: [...filer.values()], delningar: delRader, kanaler: kanalRader, ...k }, delade, nedladdade };
+      // En metod rankas efter besökarna på planens sida. De sparade står alltid under namnet, också när de är noll, så
+      // att en plan som många öppnar men ingen sparar syns (Sonnets förslag 2026-10-25).
+      const planeraRader: Rad[] = [...planera].map(([id, x]) => ({
+        namn: METODNAMN[id] ?? id,
+        under: [`${x.sparade} ${x.sparade === 1 ? 'sparad' : 'sparade'}`, x.folj ? `${x.folj} valde Följ insatsen` : '', x.kalender ? `${x.kalender} hämtade kalenderfilen` : ''].filter(Boolean).join(' · '),
+        antal: x.oppnade,
+        syns: x.sparade > 0 || x.folj > 0 || x.kalender > 0,
+      }));
+      return { rader: { metoder: metodRader, planera: planeraRader, filer: [...filer.values()], delningar: delRader, kanaler: kanalRader, ...k }, delade, nedladdade };
     }
 
     function lista(rader: Rad[], klass: string) {
@@ -337,7 +380,7 @@ const metodnamn = Object.fromEntries((await publicerade('stodundervisning')).map
     function visaKategori(namn: string, rader: Rad[]) {
       const sektion = rot.querySelector(`[data-kategori="${namn}"]`) as HTMLElement;
       const topp = Number(sektion.dataset.topp) || 3;
-      for (const el of [...sektion.children]) if (el.tagName !== 'H2') el.remove();
+      for (const el of [...sektion.children]) if (el.tagName !== 'H2' && !el.hasAttribute('data-fast')) el.remove();
       const sorterade = rader.filter((r) => r.antal > 0 || r.syns).sort((a, b) => b.antal - a.antal || a.namn.localeCompare(b.namn, 'sv'));
       if (!sorterade.length) {
         const p = document.createElement('p');
@@ -527,6 +570,79 @@ const metodnamn = Object.fromEntries((await publicerade('stodundervisning')).map
       }
     }
 
+    // Pågående insatser (K-504): planerna som är inne i sina veckor säger det till GoatCounter en gång i veckan, måndag
+    // till söndag, med händelsen planera:<metod>:pagar, och :2 och :3 för fler planer för samma metod i samma webbläsare
+    // (src/scripts/insatser-lagring.ts). Sidan hämtar bara de namnen, i ett anrop från förra veckans måndag
+    // (include_paths med path_by_name, api.json), och summerar dagarna i den här veckan och i förra. Talet gäller den här
+    // veckan vilken period som än är vald, och förra veckan står under namnet, så att raden inte är tom på måndag morgon.
+    const PAGAR_HOGST = 3;
+    const pagarRuta = rot.querySelector('[data-pagar]') as HTMLElement | null;
+    const mandagen = (d: Date) => { const m = new Date(d.getFullYear(), d.getMonth(), d.getDate()); m.setDate(m.getDate() - ((m.getDay() + 6) % 7)); return m; };
+    async function visaPagaende() {
+      const innehall = pagarRuta?.querySelector('[data-pagar-innehall]') as HTMLElement | null;
+      if (!pagarRuta || !innehall) return;
+      const denna = mandagen(new Date());
+      const forra = new Date(denna);
+      forra.setDate(forra.getDate() - 7);
+      const slut = new Date();
+      slut.setMinutes(0, 0, 0);
+      slut.setHours(slut.getHours() + 1);
+      const namn = PLANBARA.flatMap((id) => Array.from({ length: PAGAR_HOGST }, (_, i) => `planera:${id}:pagar${i ? `:${i + 1}` : ''}`));
+      try {
+        const svar = await hamta('/api/v0/stats/hits', { start: iso(forra), end: iso(slut), limit: 100, path_by_name: 'true', include_paths: namn.join(',') });
+        const fran = lokalDag(forra), nu = lokalDag(denna);
+        const per = new Map<string, { nu: number; forra: number }>();
+        for (const h of (svar.hits ?? []) as (Hit & { stats?: Dag[] })[]) {
+          const m = h.path.match(/^planera:([^:]+):pagar(?::\d+)?$/);
+          if (!m) continue;
+          const x = per.get(m[1]) ?? { nu: 0, forra: 0 };
+          for (const d of h.stats ?? []) { if (d.day >= nu) x.nu += d.daily ?? 0; else if (d.day >= fran) x.forra += d.daily ?? 0; }
+          per.set(m[1], x);
+        }
+        const rader: Rad[] = [...per].map(([id, x]) => ({ namn: METODNAMN[id] ?? id, antal: x.nu, under: x.forra ? `${x.forra} förra veckan` : undefined, syns: x.forra > 0 }));
+        const summa = (f: 'nu' | 'forra') => [...per.values()].reduce((a, x) => a + x[f], 0);
+        const metoder = [...per.values()].filter((x) => x.nu > 0).length;
+        innehall.replaceChildren();
+        if (!summa('nu') && !summa('forra')) {
+          const p = document.createElement('p');
+          p.className = 'meta';
+          p.textContent = 'Ingen pågående insats har öppnats den här veckan eller förra veckan.';
+          innehall.append(p);
+          return;
+        }
+        // Det stora talet i samma form som Populäraste dagen.
+        const dl = document.createElement('dl');
+        dl.className = 'stat-popular stat-pagar';
+        const div = document.createElement('div');
+        const dt = document.createElement('dt');
+        dt.textContent = 'Den här veckan';
+        const dd = document.createElement('dd');
+        const del = document.createElement('span');
+        const n = summa('nu'), f = summa('forra');
+        del.textContent = [n ? `i ${metoder} ${metoder === 1 ? 'metod' : 'metoder'}` : '', f ? `${f} förra veckan` : ''].filter(Boolean).join(', ');
+        dd.append(`${n} ${n === 1 ? 'insats' : 'insatser'}`, del);
+        div.append(dt, dd);
+        dl.append(div);
+        innehall.append(dl);
+        const sorterade = rader.filter((r) => r.antal > 0 || r.syns).sort((a, b) => b.antal - a.antal || a.namn.localeCompare(b.namn, 'sv'));
+        innehall.append(lista(sorterade.slice(0, 3), 'stat-topp'));
+        if (sorterade.length > 3) {
+          const detaljer = document.createElement('details');
+          const rubrik = document.createElement('summary');
+          rubrik.textContent = `Visa alla ${sorterade.length}`;
+          detaljer.append(rubrik, lista(sorterade, ''));
+          innehall.append(detaljer);
+        }
+      } catch (e) {
+        // Ett fel här ska inte läsas som noll. En nyckel som inte fungerar säger resten av sidan till om.
+        innehall.replaceChildren();
+        const p = document.createElement('p');
+        p.className = 'meta';
+        p.textContent = e instanceof Grans ? 'Kunde inte hämtas just nu, eftersom GoatCounters gräns för timmen är nådd.' : 'Kunde inte hämtas. Ladda om sidan och försök igen.';
+        if (!(e instanceof NyckelFel)) innehall.append(p);
+      }
+    }
+
     function visaForm(text = '') {
       vy.hidden = true;
       form.hidden = false;
@@ -544,12 +660,13 @@ const metodnamn = Object.fromEntries((await publicerade('stodundervisning')).map
       form.hidden = true;
       vy.hidden = false;
       visa(las(PERIOD) || 'dag');
+      void visaPagaende();
     });
     for (const b of rot.querySelectorAll<HTMLButtonElement>('[data-period]')) b.addEventListener('click', () => visa(b.dataset.period ?? 'dag'));
     (rot.querySelector('[data-glom]') as HTMLButtonElement).addEventListener('click', () => { nyckel = ''; skriv(NYCKEL, ''); visaForm(); });
 
     if (!bas) status.textContent = 'Besöksstatistiken är avstängd (site.statistik är tom).';
-    else if (nyckel) { vy.hidden = false; visa(las(PERIOD) || 'dag'); }
+    else if (nyckel) { vy.hidden = false; visa(las(PERIOD) || 'dag'); void visaPagaende(); }
     else visaForm();
   </script>
 </Base>

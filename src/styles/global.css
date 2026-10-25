@@ -317,6 +317,9 @@ form.prenumerera button:hover { background: var(--farg-accent-mork); }
 .stat-popular dd { margin: 0.15rem 0 0; font-size: 1.2rem; font-weight: 700; }
 .stat-popular dd span { display: block; font-size: 0.85rem; font-weight: 400; color: var(--farg-text-svag); }
 .stat-fot { margin-top: 1.25rem; }
+/* En förklaring under rutans rubrik, som i Pågående insatser och Planera insatsen (K-504). */
+.stat-kategori .stat-forklaring { margin: -0.2rem 0 0.5rem; }
+.stat-popular.stat-pagar { margin: 0 0 0.5rem; }
 .stat-lank { font: inherit; color: var(--farg-accent); background: none; border: 0; padding: 0; text-decoration: underline; cursor: pointer; }
 .honung { position: absolute; left: -9999px; }
 

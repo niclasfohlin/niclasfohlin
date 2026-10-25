@@ -340,6 +340,17 @@ ska('en metod utan tid stoppas med besked', s.metodplan(metod('upprepad-lasning'
 // Modulens version har sin rad i tabellen under Versionerna, så att en ny förmåga aldrig går ut utan att stå där (METODER.md
 // under Planera insatsen och PLANERA.md under Vad metoden behöver).
 ska(`versionen ${s.PLANERA.version} står i METODER.md under Versionerna`, readFileSync(join(rot, 'METODER.md'), 'utf8').includes(`\n| ${s.PLANERA.version} | `), s.PLANERA.version);
+// Pågående insatser i statistiken (K-504, src/scripts/insatser-lagring.ts): en plan som är inne i sina veckor ger händelsen
+// planera:<metod>:pagar, en andra plan för samma metod :2, och en plan som är slut eller inte har börjat ingen. Händelsen
+// bär bara metoden.
+{
+  const lagring = await import('../src/scripts/insatser-lagring.ts');
+  const sparad = (id, metod, dagar) => ({ id, metod, titel: metod, namn: '', val: '', andrad: '', schema: { pass: dagar.map((d, i) => [d, 1, i + 1]), veckor: [] } });
+  const planer = [sparad('aaaa01', 'textsamtal-i-grupp', ['2026-10-19', '2026-11-20']), sparad('aaaa02', 'textsamtal-i-grupp', ['2026-10-26', '2026-12-04']), sparad('aaaa03', 'seriesamtal', ['2026-09-07', '2026-10-16']), sparad('aaaa04', 'til-i-grupp', ['2026-11-02', '2026-12-11']), sparad('aaaa05', 'laslistor-i-grupp', ['2026-10-01', '2026-10-30'])];
+  const vagar = (idag) => lagring.pagaendeHandelser(planer, idag).map((h) => h.path).join(' ');
+  ska('pågående insatser: planerna i sina veckor, och :2 för en andra plan för samma metod', vagar('2026-10-28') === 'planera:textsamtal-i-grupp:pagar planera:textsamtal-i-grupp:pagar:2 planera:laslistor-i-grupp:pagar' && vagar('2026-11-03') === 'planera:textsamtal-i-grupp:pagar planera:textsamtal-i-grupp:pagar:2 planera:til-i-grupp:pagar', [vagar('2026-10-28'), vagar('2026-11-03')]);
+  ska('pågående insatser: händelsen bär bara metoden', lagring.pagaendeHandelser(planer, '2026-10-28').every((h) => /^planera:[a-z0-9-]+:pagar(:\d)?$/.test(h.path)));
+}
 
 if (fel.length) { console.error(`planprov: ${fel.length} fel:\n  ${fel.join('\n  ')}`); process.exit(1); }
 console.log(`planprov: motorn, ${planbara.length} av ${alla.length} metoder med planens fält och ${former.length} former av metoder räknar rätt.`);

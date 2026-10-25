@@ -3,10 +3,12 @@
 // (src/scripts/insatser-lagring.ts): på metodens sida raden under undertiteln med veckan i planen och nästa pass, och i
 // metodbanken en rad per plan, den som har nästa pass först, och planerna som är slut hopfällda sist. Utan sparade planer
 // syns ingenting.
-import { idagLokalt, iTurOrdning, lageAv, lasPlaner, nastaPassAv, planensNamn, skiljNamnen, type SparadPlan } from './insatser-lagring';
+import { idagLokalt, iTurOrdning, lageAv, lasPlaner, nastaPassAv, planensNamn, raknaPagaende, skiljNamnen, type SparadPlan } from './insatser-lagring';
 
 const idag = idagLokalt();
 const { planer } = lasPlaner();
+// En plan som pågår säger det till statistiken, en gång i veckan (K-504).
+raknaPagaende(planer, idag);
 const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
 const adress = (p: SparadPlan, vecka?: number) => `/stodundervisning/${encodeURIComponent(p.metod)}/planera#${p.val}&p=${encodeURIComponent(p.id)}${vecka ? `&v=${vecka}` : ''}`;
 const FARG: Record<string, string> = { Läsning: 'var(--farg-lasning)', Skrivning: 'var(--farg-skrivning)', Socialt: 'var(--farg-socialt)', Matematik: 'var(--farg-accent)' };

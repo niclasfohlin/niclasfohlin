@@ -38,19 +38,34 @@ const SIDOR = [
   ...CENTRALA_METODER.map((metod, i) => ({ path: `/stodundervisning/${metod}`, title: `Metodprov ${i + 1} · Niclas Fohlin`, event: false, count: 20 })),
   ...CENTRALA.map((c, i) => ({ path: c.adress, title: `${c.namn}: Metodprov ${CENTRALA_METODER.indexOf(c.metod) + 1} · Niclas Fohlin`, event: false, count: 4 + i })),
 ];
-const PROV = Array.from({ length: 125 }, (_, i) => {
+// Planera insatsen (K-504): besökare på planens sida och sparade planer för två metoder, och pågående insatser den här
+// veckan och förra, med talen per dag som GoatCounter ger dem för varje sökväg (stats i /stats/hits, api.json).
+const lokalDag = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+const MANDAG = (() => { const n = new Date(); const m = new Date(n.getFullYear(), n.getMonth(), n.getDate()); m.setDate(m.getDate() - ((m.getDay() + 6) % 7)); return m; })();
+const FORRA_ONSDAG = new Date(MANDAG.getFullYear(), MANDAG.getMonth(), MANDAG.getDate() - 5);
+const PLANERA = [
+  { path: '/stodundervisning/textsamtal-i-grupp/planera', title: 'Planera insatsen: Textsamtal i grupp · Niclas Fohlin', event: false, count: 7 },
+  { path: '/stodundervisning/seriesamtal/planera', title: 'Planera insatsen: Seriesamtal · Niclas Fohlin', event: false, count: 3 },
+  { path: 'planera:textsamtal-i-grupp:spara', title: 'Textsamtal i grupp: planen sparad', event: true, count: 2 },
+  { path: 'planera:textsamtal-i-grupp:pagar', title: 'Textsamtal i grupp: en insats pågår', event: true, count: 2, stats: [{ day: lokalDag(MANDAG), daily: 2 }] },
+  { path: 'planera:textsamtal-i-grupp:pagar:2', title: 'Textsamtal i grupp: en insats pågår', event: true, count: 1, stats: [{ day: lokalDag(MANDAG), daily: 1 }] },
+  { path: 'planera:seriesamtal:pagar', title: 'Seriesamtal: en insats pågår', event: true, count: 1, stats: [{ day: lokalDag(FORRA_ONSDAG), daily: 1 }] },
+];
+const PROV = [...Array.from({ length: 125 }, (_, i) => {
   const id = i + 1;
   if (id <= 6) return { path: `dela:facebook:stodundervisning/metod-${id}`, path_id: id, title: `Metod ${id}: delad på Facebook`, event: true, count: 1 };
   if (id === 7) return { ...ZIP, path_id: id, event: true, count: 9 };
   if (id > 60 && id <= 60 + SIDOR.length) return { ...SIDOR[id - 61], path_id: id };
   if (id <= 60) return { path: `fil:metod-${id}.docx`, path_id: id, title: `Metod ${id}: allt om metoden som Word`, event: true, count: 2 };
   return { path: `/stodundervisning/metod-${id}`, path_id: id, title: `Metod ${id} · Niclas Fohlin`, event: false, count: 5 };
-});
+}), ...PLANERA.map((h, i) => ({ ...h, path_id: 126 + i }))];
 const summa = (lista) => {
   const handelser = lista.filter((h) => h.event).reduce((a, h) => a + h.count, 0);
   const alla = lista.reduce((a, h) => a + h.count, 0);
   const dela = lista.filter((h) => h.path.startsWith('dela:')).reduce((a, h) => a + h.count, 0);
-  return [alla - handelser, handelser - dela, dela];
+  // Nedladdningarna är filerna och utskrifterna, som sidan räknar dem; Planeras händelser är inga (K-504).
+  const ned = lista.filter((h) => h.event && (/^(utskrift|fil:)/.test(h.path) || /\.(pdf|docx|pptx)$/i.test(h.path))).reduce((a, h) => a + h.count, 0);
+  return [alla - handelser, ned, dela];
 };
 
 // Det GoatCounter själv räknar, för varje period med samma början som statistiksidan (periodStart i
@@ -104,6 +119,9 @@ const forberedelse = `
   const PROV = ${JSON.stringify(PROV)};
   const svaraSom = (adress) => {
     if (adress.pathname.endsWith('/stats/hits')) {
+      // Namngivna sökvägar (include_paths med path_by_name): bara de, som GoatCounter, och ett namn som inte finns ger inget.
+      const namn = (adress.searchParams.get('include_paths') || '').split(',').filter(Boolean);
+      if (namn.length && adress.searchParams.get('path_by_name') === 'true') return { hits: PROV.filter((h) => namn.includes(h.path)), more: false };
       // Som GoatCounter: limit högst 100, och exclude_paths är bara det första värdet, delat vid komma och mellanslag.
       const limit = Math.min(Number(adress.searchParams.get('limit')) || 20, 100);
       const uteslutna = new Set((adress.searchParams.get('exclude_paths') || '').split(/[, ]/).filter(Boolean).map(Number));
@@ -198,7 +216,21 @@ try {
       if (!ratt) fel++;
       console.log(`${ratt ? 'GRÖNT' : 'RÖTT '}  ${c.namn} står under metoden${ratt ? '' : `: ${rad.slice(0, 200) || (rader ?? []).join(' | ').slice(0, 200)}`}`);
     });
+    // Planera insatsen: besökarna på planens sida, och de sparade under namnet, också när de är noll.
+    const plan = await utvardera(`[...document.querySelectorAll('[data-kategori="planera"] .stat-topp li')].map((li) => li.textContent)`);
+    const planRatt = plan?.[0]?.includes('Textsamtal i grupp7') && plan[0].includes('2 sparade') && plan?.[1]?.includes('Seriesamtal3') && plan[1].includes('0 sparade');
+    if (!planRatt) fel++;
+    console.log(`${planRatt ? 'GRÖNT' : 'RÖTT '}  Planera insatsen: planens sida per metod med de sparade${planRatt ? '' : `: ${(plan ?? []).join(' | ')}`}`);
   }
+  // Pågående insatser: den här veckan och förra, ur ett eget anrop med namnen. Med riktiga siffror räcker det att rutan
+  // har hämtats.
+  let pagar = '';
+  for (let i = 0; i < 40; i++) { pagar = (await utvardera(`document.querySelector('[data-pagar]')?.textContent ?? ''`)) ?? ''; if (!pagar.includes('Hämtar')) break; await vanta(250); }
+  const pagarRatt = riktig
+    ? pagar.includes('Pågående insatser') && !pagar.includes('Kunde inte') && !pagar.includes('Hämtar')
+    : pagar.includes('3 insatser') && pagar.includes('i 1 metod, 1 förra veckan') && pagar.includes('Textsamtal i grupp3') && pagar.includes('Seriesamtal01 förra veckan');
+  if (!pagarRatt) fel++;
+  console.log(`${pagarRatt ? 'GRÖNT' : 'RÖTT '}  Pågående insatser den här veckan och förra${pagarRatt ? '' : `: ${pagar.replace(/\s+/g, ' ').slice(0, 300)}`}`);
   await prova('7 dagar', klick('vecka'), mal0.vecka);
   await prova('30 dagar', klick('manad'), mal0.manad);
   await prova('1 år', klick('ar'), mal0.ar);
