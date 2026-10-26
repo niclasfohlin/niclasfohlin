@@ -11,7 +11,8 @@ import Base from '../layouts/Base.astro';
 import SkrivUtPdf from './SkrivUtPdf.astro';
 import Lektionskortknapp from './Lektionskortknapp.astro';
 import AppRad from './AppRad.astro';
-import { ELEVLISTANS_LANGD, liten, periodensLangd, PLANERA, PLANKNAPPAR, stor, talText, tidensMatt, tolkaSteg, VECKODAGAR, veckodagKort } from '../lib/standard/index.js';
+import StodForValet from './StodForValet.astro';
+import { ELEVLISTANS_LANGD, liten, passetsLangder, periodensLangd, PLANERA, PLANKNAPPAR, stor, talText, tidensMatt, tolkaSteg, VECKODAGAR, veckodagKort } from '../lib/standard/index.js';
 import { site } from '../data/site';
 import type { PlanData } from '../lib/insatsplan';
 import type { Lektionskort } from '../lib/lektionskort';
@@ -27,7 +28,8 @@ const matt = tidensMatt(data.tid ?? '');
 const langder = period.max
   ? Array.from({ length: Math.min(period.max, period.min + 9) - period.min + 1 }, (_, i) => period.min + i)
   : period.mer ? [period.min, period.min + 4, period.min + 8] : [period.min];
-const minuter = matt.minst !== undefined && matt.minuter !== undefined && matt.minst !== matt.minuter ? [matt.minst, matt.minuter] : [];
+// Passets längder att välja: faktarutans spann, ändarna eller steg om tio minuter (passetsLangder, K-564).
+const minuter = matt.minst !== undefined && matt.minuter !== undefined ? passetsLangder({ min: matt.minst, max: matt.minuter }).langder : [];
 const json = JSON.stringify(data).replace(/</g, '\\u003c');
 // Nivåerna: bankens, eller metodens egna i en kurs i nivåer (De fyra räknesätten).
 const nivaer = data.bank?.nivaer ?? data.nivaer ?? [];
@@ -132,10 +134,12 @@ const snabbmallensNamn = snabbmall ? (/^snabbmall(en)?$/i.test(snabbmall.rubrik)
             </fieldset>
             {minuter.length > 0 && (
               <fieldset class="pl-rad">
-                <legend class="pl-etikett">Passets längd</legend>
+                {/* Talen bara, som Antal veckor, så att fyra längder ryms på en rad i telefonen (K-564). */}
+                <legend class="pl-etikett">Passets längd i minuter</legend>
                 <div class="sk-segment" id="pl-minuter">
-                  {minuter.map((n) => <button type="button" class="sk-antal" data-minuter={n} aria-pressed="false">{n} min</button>)}
+                  {minuter.map((n) => <button type="button" class="sk-antal" data-minuter={n} aria-pressed="false">{n}</button>)}
                 </div>
+                {data.langdval && <StodForValet id="pl-langdstod" stod={data.langdval} metod={data} slag="langdstod" vad="passets längd" />}
               </fieldset>
             )}
             {nivaer.length > 0 && (
@@ -145,15 +149,7 @@ const snabbmallensNamn = snabbmall ? (/^snabbmall(en)?$/i.test(snabbmall.rubrik)
                   {nivaer.map((n) => <button type="button" class="sk-niva" data-niva={n.slug} style={`--niva:${n.farg}`} aria-pressed="false">{n.namn}</button>)}
                 </div>
                 <p class="pl-hjalp">{data.bank?.enPerPass ? `Nivån styr vilket ${data.bank.en} varje pass har.` : data.bank ? `Nivån styr vilka ${data.bank.flera} veckan visar.` : data.nivaTabell ? 'Nivån styr veckans tal och blad.' : 'Nivån står i planen.'} Tryck en gång till för att ta bort den.</p>
-                {/* Stödet för valet (K-557; Niclas 2026-10-26: "en nerpil man kan öppna där OCH som har länk till mer info om valet"):
-                    metodens text om nivåerna och länken till tabellen med mer. Planens veckor visar en kopia vid sina nivåval. */}
-                {data.nivaval && (
-                  <details class="pl-stod" id="pl-nivastod">
-                    <summary data-goatcounter-click={`planera:${data.id}:nivastod`} data-goatcounter-title={`${data.titel}: stödet för nivåvalet`}>Stöd för valet</summary>
-                    <p>{data.nivaval.text}</p>
-                    <p class="pl-hjalp">Mer i metoden: <a href={data.nivaval.mer.adress} data-goatcounter-click={`planera:${data.id}:nivastod-mer`} data-goatcounter-title={`${data.titel}: ${data.nivaval.mer.namn} från stödet för nivåvalet`}>{data.nivaval.mer.namn}</a></p>
-                  </details>
-                )}
+                {data.nivaval && <StodForValet id="pl-nivastod" stod={data.nivaval} metod={data} slag="nivastod" vad="nivåvalet" />}
               </fieldset>
             )}
             <div class="pl-rad">

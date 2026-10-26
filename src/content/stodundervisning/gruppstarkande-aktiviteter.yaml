@@ -336,6 +336,11 @@ uppfoljning:
       tid: "villkor"
       vad: Gör en aktivitet i veckan och en gruppreflektion i månaden, om de flesta också ringar in 4 eller 5 på varje påstående i Vår grupp.
 plan:
+  # Stödet för passets längd (K-564): faktarutans 10–40 minuter rymmer både en aktivitet och gruppreflektionen efter en kort
+  # aktivitet.
+  langdval:
+    text: "En eller två gånger i veckan gör ni en aktivitet på 10–30 minuter i fem delar: Förklara, Modellera, Genomför, Återkoppla och Tacka. Varannan vecka leder du en gruppreflektion på 20–30 minuter efter en aktivitet på omkring tio minuter."
+    mer: Gruppreflektion
   # Metodens egna skattningar (K-559): Lärarens skattning från 1 till 10 vid Skatta gruppen, med linjen och reglerna i
   # Gruppen över tid, och bladet Vår grupp som eleverna fyller i, med formuläret, i gruppreflektionens vecka.
   skattningar:

@@ -1,0 +1,14 @@
+---
+// Stödet för ett val i planen (STIL.md under Stöd för ett val; Niclas 2026-10-26: "en nerpil man kan öppna där OCH som har
+// länk till mer info om valet"): metodens text om valet under en nerpil, och länken till metodens rubrik med mer. Nivåvalet
+// (K-557) och passets längd (K-564) har det, och planens veckor kopierar nivåvalets stöd till sina nivåval (planera.ts).
+import type { PlanStod } from '../lib/insatsplan';
+
+interface Props { id: string; stod: PlanStod; metod: { id: string; titel: string }; slag: string; vad: string }
+const { id, stod, metod, slag, vad } = Astro.props;
+---
+<details class="pl-stod" id={id}>
+  <summary data-goatcounter-click={`planera:${metod.id}:${slag}`} data-goatcounter-title={`${metod.titel}: stödet för ${vad}`}>Stöd för valet</summary>
+  <p>{stod.text}</p>
+  <p class="pl-hjalp">Mer i metoden: <a href={stod.mer.adress} data-goatcounter-click={`planera:${metod.id}:${slag}-mer`} data-goatcounter-title={`${metod.titel}: ${stod.mer.namn} från stödet för ${vad}`}>{stod.mer.namn}</a></p>
+</details>

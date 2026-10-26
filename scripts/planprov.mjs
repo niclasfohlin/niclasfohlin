@@ -451,6 +451,25 @@ if (tsMp) {
     const med = (nivaval) => ({ ...pl, plan: { ...pl.plan, nivaval } });
     ska('stödet för nivåvalet', !s.nivavaletsFel(pl).length && !s.planensCitatFel(pl).length && s.nivavaletsFel(med(undefined)).length === 1 && !s.nivavaletsFel(med(undefined), false).length && s.nivavaletsFel(med({ text: 'Ord '.repeat(70).trim() + '.', mer: 'Så skiljer sig nivåerna' })).some((x) => x.includes(`högst ${s.NIVAVALETS_LANGD}`)) && s.nivavaletsFel(med({ text: 'Ett. Två. Tre. Fyra.', mer: 'Så skiljer sig nivåerna' })).some((x) => x.includes('fyra meningar') || x.includes('4 meningar')) && s.planensCitatFel(med({ text: 'Välj den nivå som känns bäst.', mer: 'Så skiljer sig nivåerna' })).some((x) => x.startsWith('Planens nivåval')), [s.nivavaletsFel(pl), s.planensCitatFel(pl)]);
   }
+  // Passets längd (K-564; Niclas 2026-10-26: "Lite konstigt att man fick välja på 10 eller 40 min"): ett spann på högst tio
+  // minuter ger ändarna med det hela passet som förval, ett bredare steg om tio minuter med steget i mitten, och en metod
+  // med ett spann har stödet för valet, ordagrant ur metoden eller ur variantens mening som metodens sida skriver den.
+  {
+    const lika = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+    ska('passets längder: ändarna med det hela passet som förval, och i ett bredare spann steg om tio minuter med steget i mitten', lika(s.passetsLangder({ min: 10, max: 15 }), { langder: [10, 15], forval: 15 }) && lika(s.passetsLangder({ min: 10, max: 40 }), { langder: [10, 20, 30, 40], forval: 20 }) && lika(s.passetsLangder({ min: 15, max: 40 }), { langder: [15, 20, 30, 40], forval: 20 }) && lika(s.passetsLangder({ min: 30, max: 30 }), { langder: [], forval: 30 }), [s.passetsLangder({ min: 10, max: 40 }), s.passetsLangder({ min: 15, max: 40 })]);
+    const ga = metod('gruppstarkande-aktiviteter'), ul = metod('upprepad-lasning'), ts = metod('textsamtal-i-grupp');
+    const utan = (d) => ({ ...d, plan: { ...d.plan, langdval: undefined } });
+    ska('stödet för passets längd', !s.langdvaletsFel(ga).length && !s.langdvaletsFel(ul).length && !s.planensCitatFel(ga).length && !s.planensCitatFel(ul).length && s.langdvaletsFel(utan(ga)).length === 1 && s.langdvaletsFel(utan(ul)).length === 1 && !s.langdvaletsFel(utan(ts)).length && s.planensCitatFel({ ...ga, plan: { ...ga.plan, langdval: { text: 'Ett pass tar så lång tid som gruppen behöver.', mer: 'Gruppreflektion' } } }).some((x) => x.startsWith('Planens längdval')), [s.langdvaletsFel(ga), s.langdvaletsFel(ul), s.planensCitatFel(ga), s.planensCitatFel(ul)]);
+  }
+  // Det eleverna fyller i under ett pass, som gruppreflektionen, görs i veckans längsta pass efter lärarens tider, och i
+  // veckans sista när passen är lika långa (K-562; verifieringen av K-559 2026-10-26).
+  {
+    const gmp = s.metodplan(metod('gruppstarkande-aktiviteter')).plan;
+    const rad = gmp.skattningar.find((x) => x.vem === 'eleverna').rad;
+    const dagarna = (tider) => s.planera(gmp, { start: '2027-02-01', dagar: [1, 3], langd: 12, lov: [], upprepa: [], flytta: {}, stryk: [], tider }).uppfoljning.find((u) => u.rad === rad).tillfallen.map((t) => s.veckodag(t.datum));
+    const langre = dagarna({ 1: ['08:30', '09:10'], 3: ['13:00', '13:30'] }), lika = dagarna({}), kortare = dagarna({ 1: ['08:30', '09:00'], 3: ['13:00', '13:40'] });
+    ska('det eleverna fyller i under ett pass görs i veckans längsta pass, och i veckans sista när passen är lika långa', langre.length === 6 && langre.every((d) => d === 1) && lika.every((d) => d === 3) && kortare.every((d) => d === 3), { langre, lika, kortare });
+  }
   ska('elevlistan rymmer en hel klass', s.ELEVLISTANS_LANGD >= 30 && s.rensaFoljd({ elever: Array.from({ length: 40 }, (_, i) => ({ id: `e${i}`, namn: `Elev ${i}` })) }).elever.length === s.ELEVLISTANS_LANGD);
   ska('en tabellrad säger sina veckor', JSON.stringify(s.radensVeckor('3 Venndiagrammet')) === '{"fran":3,"till":3}' && JSON.stringify(s.radensVeckor('7–8 Gruppen väljer modell')) === '{"fran":7,"till":8}' && s.radensVeckor('Vecka 2 · Lästräning')?.fran === 2 && s.radensVeckor('Hemma') === null && s.radensVeckor('12a') === null);
   ska('lärarens egna saker är inga namn på saker', s.EGNA_SAKER.includes('klasslista') && !s.olankadeSaker('Skriv på klasslistan vad du hörde, och på klasslistans baksida.', saker).length && s.olankadeSaker('Skriv på elevlistan.', saker).join() === 'elevlistan', s.olankadeSaker('Skriv på klasslistan. Skriv på elevlistan.', saker));
@@ -640,7 +659,7 @@ ska('veckans namn i en text och i diagrammet', JSON.stringify(s.veckansNamn({ in
 // gång det går"): modulens filer skriver aldrig ut en vecka eller ett datum på egen hand. Veckorna kommer ur blocket
 // Veckornas namn i standarden och datumen ur datumText, dagOchManad, dagText och spannKort. Ett fynd säger fil, rad och
 // vilken funktion som ska användas (PLANERA.md under Spärren mot drift).
-const MODULENS_FILER = ['src/lib/standard/index.js', 'src/lib/standard/plan.js', 'src/lib/standard/saker.js', 'src/lib/standard/text.js', 'src/scripts/webblasaren.ts', 'src/lib/insatsplan.ts', 'src/lib/metodsaker.ts', 'src/lib/sakfiler.ts', 'src/lib/planbar.ts', 'src/scripts/planera.ts', 'src/scripts/planpdf.ts', 'src/scripts/insatser-lagring.ts', 'src/scripts/insatser.ts', 'src/scripts/appen.ts', 'src/components/Planera.astro', 'src/components/AppRad.astro'];
+const MODULENS_FILER = ['src/lib/standard/index.js', 'src/lib/standard/plan.js', 'src/lib/standard/saker.js', 'src/lib/standard/text.js', 'src/scripts/webblasaren.ts', 'src/lib/insatsplan.ts', 'src/lib/metodsaker.ts', 'src/lib/sakfiler.ts', 'src/lib/planbar.ts', 'src/scripts/planera.ts', 'src/scripts/planpdf.ts', 'src/scripts/insatser-lagring.ts', 'src/scripts/insatser.ts', 'src/scripts/appen.ts', 'src/components/Planera.astro', 'src/components/AppRad.astro', 'src/components/StodForValet.astro'];
 const DRIFT = [
   [/v\. \$\{/, 'en kalendervecka skrivs med kalendervecka() eller kalenderveckor()'],
   [/(?<!veckornaIPlanen\(`)[Vv]ecka \$\{[^}`]*\.vecka\b/, 'en kalendervecka skrivs med kalendervecka(), inte som "vecka"'],
@@ -1099,7 +1118,9 @@ console.log(`planprov: motorn, ${planbara.length} av ${alla.length} metoder med 
 // ---------- 4. Sidan i Chrome ----------
 if (args.includes('--utan-sida')) process.exit(0);
 const dist = join(rot, 'dist');
-const sidor = ['/stodundervisning/textsamtal-i-grupp/planera', '/stodundervisning/textsamtal-i-grupp', '/stodundervisning', '/stodundervisning/upprepad-lasning'];
+// Sidorna som proven nedan öppnar, också varje metods plan, så att en ändring i en annan metods plan gör om proven (K-564:
+// nyckeln läste bara Textsamtals plan, och Gruppstärkande aktiviteters nya knappar prövades inte i Chrome).
+const sidor = [...new Set(['/stodundervisning/textsamtal-i-grupp/planera', '/stodundervisning/textsamtal-i-grupp', '/stodundervisning', '/stodundervisning/upprepad-lasning', ...planbara.map((m) => `/stodundervisning/${m.id}/planera`)])];
 const chrome = process.env.CHROME ?? ['C:/Program Files/Google/Chrome/Application/chrome.exe', 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe', '/usr/bin/google-chrome'].find((p) => existsSync(p));
 if (!chrome) { console.log('planprov: obs, Chrome saknas, sidan är inte prövad'); process.exit(0); }
 if (!sidor.every((x) => existsSync(join(dist, x, 'index.html')))) { console.error('planprov: dist saknar planens sidor. Kör npm run validera, som bygger först.'); process.exit(1); }
@@ -2003,13 +2024,21 @@ try {
   // finns, Beta och versionen, och inga fel. Formerna prövas så: en kurs i veckor med veckans lektion (De fyra räknesätten),
   // en progression i pass (Seriesamtal), Hem och skola (TIL i grupp) och veckor efter den sista raden (Läslistor i grupp).
   const b = await flik(false, Date.UTC(2026, 10, 18, 9, 0, 0));
-  const stodMetoder = [], stodFel = [];
+  const stodMetoder = [], stodFel = [], langdMetoder = [], langdFel = [];
   for (const m of planbara.filter((x) => x.id !== 'textsamtal-i-grupp')) {
     const adress = `${bas}/stodundervisning/${m.id}/planera`;
     await b.oppna(adress);
     await b.kor(`localStorage.clear()`);
     await b.oppna(adress);
     sant(`${m.id}: förslaget har pass, Beta och versionen`, (await b.text('#pl-summa-text'))?.includes('pass om') && (await b.kor(`!!document.querySelector('h1 .beta') && document.querySelector('.pl-version')?.textContent.includes('Planera ${s.PLANERA.version}')`)), await b.text('#pl-summa-text'));
+    // Passets längd (K-564): knapparna ur faktarutans spann, förvalet tryckt och i förslagets mening, och stödet för valet
+    // under knapparna, med metodens text och en länk som finns.
+    const tidM = s.tidensMatt(metod(m.id).tid ?? ''), vantad = tidM.minst === undefined ? { langder: [] } : s.passetsLangder({ min: tidM.minst, max: tidM.minuter });
+    if (vantad.langder.length) {
+      langdMetoder.push(m.id);
+      const langd = await b.kor(`(() => { const k = [...document.querySelectorAll('#pl-minuter [data-minuter]')]; return { knappar: k.map((x) => Number(x.dataset.minuter)), tryckt: k.filter((x) => x.getAttribute('aria-pressed') === 'true').map((x) => Number(x.dataset.minuter)), summa: document.getElementById('pl-summa-text')?.textContent ?? '', stod: document.querySelector('#pl-minuter ~ #pl-langdstod > p')?.textContent ?? '', lank: document.querySelector('#pl-langdstod a')?.getAttribute('href') ?? '' }; })()`);
+      if (!(JSON.stringify(langd.knappar) === JSON.stringify(vantad.langder) && langd.tryckt.join() === String(vantad.forval) && langd.summa.includes(`pass om ${vantad.forval} minuter`) && langd.stod.length > 20 && langd.stod.length <= s.NIVAVALETS_LANGD && !!langd.lank && !lankFel([langd.lank]).length)) langdFel.push({ metod: m.id, vantad, ...langd });
+    }
     await b.kor(`(() => { const i = document.getElementById('pl-start'); i.value = '2026-11-02'; i.dispatchEvent(new Event('change')); return true; })()`);
     await b.tryck('#pl-spara');
     await vanta(200);
@@ -2090,6 +2119,7 @@ try {
     await b.bredd(390); await vanta(150); await b.bild(`12-beta-${m.id}-telefon`); await b.dator();
   }
   sant('varje nivåval i metoderna har Stöd för valet med metodens text och en länk', stodMetoder.length >= 4 && !stodFel.length, { stodMetoder, stodFel });
+  sant('passets längd: knapparna ur faktarutans spann, förvalet i förslaget och Stöd för valet med metodens text och en länk', langdMetoder.includes('gruppstarkande-aktiviteter') && langdMetoder.includes('upprepad-lasning') && !langdFel.length, { langdMetoder, langdFel });
   b.stang();
 
   // Två veckor efter sista passet avslutas planen av sig själv, och Ångra avslutet öppnar den igen för det sista passet

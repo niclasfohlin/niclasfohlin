@@ -112,11 +112,16 @@ export interface PlanData {
   nivaTabell?: { rubrik: string; adress: string; veckor: Record<string, Record<string, string>>; not?: string };
   /** Stödet för nivåvalet (plan.nivaval, K-557): metodens text om nivåerna och tabellen eller avsnittet med mer, som planen
    * visar under en nerpil vid varje nivåval. */
-  nivaval?: { text: string; mer: { namn: string; adress: string } };
+  nivaval?: PlanStod;
+  /** Stödet för passets längd (plan.langdval, K-564), när faktarutans tid är ett spann: under Passets längd. */
+  langdval?: PlanStod;
   /** Metodens egna skattningar (plan.skattningar, K-559): skalan med stegens namn och reglerna ur standarden, adressen till
    * instrumentet på metodens sida, och för det eleverna fyller i bladets pdf och adressen som kopierar formuläret. */
   skattningar?: PlanSkattning[];
 }
+
+/** Ett stöd för ett val i planen (STIL.md under Stöd för ett val): metodens text och metodens rubrik med mer, med adressen. */
+export interface PlanStod { text: string; mer: { namn: string; adress: string } }
 
 export interface PlanSkattning extends Skattning {
   adress?: string;
@@ -193,7 +198,7 @@ function planensPass(d: Metod['data'], id: string): PlanPasset | undefined {
     ...(d.tidsschema.rader.find(fore) ? { fore: d.tidsschema.rader.find(fore)!.vad } : {}),
     ...(d.passrutin?.efterPasset ? { efter: d.passrutin.efterPasset } : {}),
     ...(d.tidsschema.efter ? { not: d.tidsschema.efter } : {}),
-    adress: `${sida}#${passOversikt(d) ? 'passrutin' : 'tidsschema'}`,
+    adress: `${sida}#${passetsAnkare(d)}`,
     ...(d.steg ? { steg: { rubrik: d.steg.rubrik, fraserRubrik: forstaLedet(d.steg.fraserRubrik), adress: `${sida}#steg`, rader: d.steg.rader.map((r) => ({ namn: r.namn, fraser: r.fraser.slice(0, 3) })) } } : {}),
   };
 }
@@ -254,7 +259,8 @@ export async function planensData(m: Metod): Promise<PlanData> {
   // En checklista inför första passet, som "Checklista inför samtal 1" i Kompissamtal, står under Före (länkgranskningen av
   // omgång 5 2026-10-26: den stod i varje vecka).
   const forstaChecklista = !!d.checklista && /första|\b(?:pass|samtal|lektion)\s+1\b/iu.test(d.checklista.rubrik);
-  const nivaval = nivavalet(d, m.id);
+  const nivaval = stodet(d.plan?.nivaval, d, m.id);
+  const langdval = stodet(d.plan?.langdval, d, m.id);
   const skattningar = planensSkattningar(d, m.id);
   return {
     id: m.id,
@@ -293,6 +299,7 @@ export async function planensData(m: Metod): Promise<PlanData> {
     ...(!bank && d.nivaer.length >= 2 ? { nivaer: d.nivaer.map((n) => ({ namn: n.namn, slug: slugAv(n.namn), farg: `#${n.farg.toLowerCase()}` })) } : {}),
     ...(nivaTabell ? { nivaTabell } : {}),
     ...(nivaval ? { nivaval } : {}),
+    ...(langdval ? { langdval } : {}),
     ...(skattningar.length ? { skattningar } : {}),
   };
 }
@@ -323,16 +330,22 @@ function planensSkattningar(d: Metod['data'], id: string): PlanSkattning[] {
   });
 }
 
-/** Stödet för nivåvalet med adressen till metodens tabell, avsnitt eller ram med mer, med hela rubriken som den står i
- * metoden (Codex 2026-10-26: sakernas register har verktygen och rubrikernas första led), eller inget när den inte finns. */
-function nivavalet(d: Metod['data'], id: string): PlanData['nivaval'] {
-  const n = d.plan?.nivaval;
+/** Avsnittet på metodens sida där passet står: passrutinen när metoden har en passöversikt, och annars tidsschemat. */
+const passetsAnkare = (d: Metod['data']) => (passOversikt(d) ? 'passrutin' : 'tidsschema');
+
+/** Ett stöd för ett val, nivåvalet eller passets längd, med adressen till metodens tabell, avsnitt eller ram med mer, med
+ * hela rubriken som den står i metoden (Codex 2026-10-26: sakernas register har verktygen och rubrikernas första led), eller
+ * inget när den inte finns. */
+function stodet(n: { text: string; mer: string } | undefined, d: Metod['data'], id: string): PlanStod | undefined {
   if (!n) return undefined;
   const { ramAnkare, tabellAnkare } = sidansAnkare(d);
   const rutor = d as unknown as Record<string, { rubrik?: string } | undefined>;
   const rubriker: [string | undefined, string | undefined][] = [
     ...d.tabeller.map((t): [string, string | undefined] => [t.rubrik, tabellAnkare.get(t)]),
     ...sidansAvsnitt(d).map((a): [string | undefined, string] => [rutor[a.id]?.rubrik, a.id]),
+    // Tidsschemats rubrik står över passet, också när passet har en översikt och avsnittet heter passrutin (K-564: Upprepad
+    // läsnings Ett pass på 15 minuter).
+    [d.tidsschema?.rubrik, passetsAnkare(d)],
     [d.gruppen?.rubrik, 'gruppen'], [d.principer?.rubrik, 'principer'],
     ...(d.ramar?.ramar ?? []).map((r, i): [string, string] => [r.rubrik, ramAnkare[i]]),
   ];
@@ -384,7 +397,10 @@ export async function insatsplanFel(m: Metod): Promise<string[]> {
     if (!x.adress) fel.push(`plan.skattningar: "${x.namn}" är inget blad i metoden. Skriv bladets namn som det står efter "Blad: ", som Lärarens skattning.`);
     if (x.vem === 'eleverna' && !x.formular) fel.push(`plan.skattningar: bladet "${x.namn}" fylls i av eleverna och har inget formulär (fältet google på bladet), så planen kan inte leda till det.`);
   }
-  if (m.data.plan?.nivaval && !nivavalet(m.data, m.id)) fel.push(`plan.nivaval.mer säger "${m.data.plan.nivaval.mer}", som inte är en tabell, ett avsnitt eller en ram i metoden. Skriv rubriken som den står i metoden, som Så skiljer sig nivåerna.`);
+  for (const falt of ['nivaval', 'langdval'] as const) {
+    const n = m.data.plan?.[falt];
+    if (n && !stodet(n, m.data, m.id)) fel.push(`plan.${falt}.mer säger "${n.mer}", som inte är en tabell, ett avsnitt eller en ram i metoden. Skriv rubriken som den står i metoden, som Så skiljer sig nivåerna.`);
+  }
   if (m.data.plan?.enPerPass && !(harTaFram(m, 'texter') || harTaFram(m, 'problem'))) fel.push('plan.enPerPass gäller en metod med en bank, där planen visar passets post.');
   // Ett namn som ser ut som en sak i metoden men inte är någon av dem blir ingen länk i planen (K-493).
   const saker = metodensSaker(m.data, m.id);

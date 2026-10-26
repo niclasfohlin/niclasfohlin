@@ -389,6 +389,10 @@ uppfoljning:
       tid: "efter"
       vad: "Eleven läser en ny text som är lika lång och på samma nivå. Fyll i protokollet Lästrappan före och efter igen och jämför med starten. Berätta för eleven vad du har hört."
 plan:
+  # Stödet för passets längd (K-564): varianten för ett pass på tio minuter, som metodens sida skriver den.
+  langdval:
+    text: "Ett pass på tio minuter: första läsningen 0–2 minuter, modellering 2–4, läs igen 4–9 och avslutning 9–10. Då hinner du lyssna på varje elev om gruppen har högst fyra elever."
+    mer: Ett pass på 15 minuter
   passen:
     - nar: första passet
       kort: "Varför samma text"
