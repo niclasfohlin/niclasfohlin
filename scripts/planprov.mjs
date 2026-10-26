@@ -1889,6 +1889,7 @@ try {
   // finns, Beta och versionen, och inga fel. Formerna prövas så: en kurs i veckor med veckans lektion (De fyra räknesätten),
   // en progression i pass (Seriesamtal), Hem och skola (TIL i grupp) och veckor efter den sista raden (Läslistor i grupp).
   const b = await flik(false, Date.UTC(2026, 10, 18, 9, 0, 0));
+  const stodMetoder = [], stodFel = [];
   for (const m of planbara.filter((x) => x.id !== 'textsamtal-i-grupp')) {
     const adress = `${bas}/stodundervisning/${m.id}/planera`;
     await b.oppna(adress);
@@ -1905,7 +1906,7 @@ try {
     // Stödet för nivåvalet vid varje nivåval (K-557): nerpilen under formulärets nivåer och under varje nivåval i veckan,
     // med metodens text och en länk som finns.
     const stod = await b.kor(`(() => { const nivaer = [...document.querySelectorAll('.pl-nivaer')]; return { antal: nivaer.length, utan: nivaer.filter((n) => !n.parentElement.querySelector(':scope > .pl-stod')).length, text: document.querySelector('#pl-nivastod > p')?.textContent ?? '', lank: document.querySelector('#pl-nivastod a')?.getAttribute('href') ?? '' }; })()`);
-    if (stod.antal) sant(`${m.id}: varje nivåval har Stöd för valet med metodens text och en länk`, !stod.utan && stod.text.length > 20 && stod.text.length <= s.NIVAVALETS_LANGD && !!stod.lank && !lankFel([stod.lank]).length, stod);
+    if (stod.antal) { stodMetoder.push(m.id); if (!(!stod.utan && stod.text.length > 20 && stod.text.length <= s.NIVAVALETS_LANGD && !!stod.lank && !lankFel([stod.lank]).length)) stodFel.push({ metod: m.id, ...stod }); }
     if (m.id === 'brakkurs-i-grupp') {
       const veckansRam = async (v) => { await b.tryck(`#pl-veckan .pl-remsa [data-vy="${v}"]`); await vanta(150); return b.kor(`[...document.querySelectorAll('#pl-veckan a')].find((a) => a.textContent === 'veckans ram')?.getAttribute('href') ?? ''`); };
       const r1 = await veckansRam(1), r2 = await veckansRam(2);
@@ -1940,6 +1941,7 @@ try {
     sant(`${m.id}: inga fel`, !b.undantag.length && !(await b.kor('window.__fel.length')), b.undantag);
     await b.bredd(390); await vanta(150); await b.bild(`12-beta-${m.id}-telefon`); await b.dator();
   }
+  sant('varje nivåval i metoderna har Stöd för valet med metodens text och en länk', stodMetoder.length >= 4 && !stodFel.length, { stodMetoder, stodFel });
   b.stang();
 
   // Två veckor efter sista passet avslutas planen av sig själv, och Ångra avslutet öppnar den igen för det sista passet

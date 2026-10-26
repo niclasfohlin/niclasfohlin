@@ -2,7 +2,7 @@
 
 Du läser repot för niclasfohlin.se i en sandlåda där du bara får läsa. Ändra inga filer. Svara på svenska.
 
-Planera insatsen är en modul som räknar fram en plan för en insats i stödundervisning ur en metods fil. {{bakgrund}} Ändringarna står i commits efter `{{bas}}` (`git diff {{bas}} -- src scripts METODER.md PLANERA.md`). Granska dem för fel, inte för användbarhet: leta efter det som räknar fel, tappar eller blandar ihop det läraren har fört in, leder till fel ställe, skriver ut fel sak, visar något som inte stämmer med metoden, eller kraschar.
+Planera insatsen är en modul som räknar fram en plan för en insats i stödundervisning ur en metods fil. {{bakgrund}} Ändringarna står efter `{{bas}}`, i commits och i arbetsträdet, som kan ha det som inte är committat än (`git diff {{bas}} -- src scripts METODER.md PLANERA.md STIL.md`). Granska dem för fel, inte för användbarhet: leta efter det som räknar fel, tappar eller blandar ihop det läraren har fört in, leder till fel ställe, skriver ut fel sak, visar något som inte stämmer med metoden, eller kraschar.
 
 ## Det nya
 
