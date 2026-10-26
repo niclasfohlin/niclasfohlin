@@ -167,6 +167,8 @@ export declare function passetsLangder(m: { min: number; max: number }): { langd
 export declare function langdvaletsFel(d: MetodensTexter): string[];
 /** Stödet för antalet veckor (plan.veckoval), med ett förval inom metodens period. */
 export declare function veckovaletsFel(d: MetodensTexter & { period?: string }): string[];
+/** Metodens regel för beslutet efter insatsen, som varje metod som kan planeras har i plan.utvardering. */
+export declare const utvarderingensFel: (d: { plan?: { utvardering?: string[] } }) => string[];
 export declare function planFel(d: Parameters<typeof metodplan>[0] & MetodensTexter): string[];
 /** Metodens fil utan planens fält (`plan`, uppföljningens `tid`, progressionens `taggar` och `rubrik`), som bara planens sida läser. */
 export declare function utanPlanensFalt<T extends Record<string, any>>(d: T): T;

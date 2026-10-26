@@ -522,8 +522,19 @@ export function veckovaletsFel(d) {
   const v = d.plan?.veckoval;
   const p = periodensLangd(d.period ?? '');
   const utanfor = v?.forval !== undefined && p && p.enhet === 'veckor' && (v.forval < p.min || (p.max !== undefined && v.forval > p.max));
-  return [...stodetsFel('veckoval', v, ''), ...(utanfor ? [`plan.veckoval.forval är ${v.forval} veckor, utanför metodens period, "${d.period}".`] : [])];
+  // En metod som kan planeras och vars period är ett spann eller öppen säger vad som avgör längden (passgenomgången
+  // 2026-10-26: åtta av fjorton metoder sa inte vad som avgör sex, sju eller åtta veckor).
+  const spann = !!d.plan && !!p && p.enhet === 'veckor' && ((p.max !== undefined && p.min < p.max) || p.mer);
+  return [...stodetsFel('veckoval', v, spann ? `Metodens period, "${d.period}", är ett spann, och planen har då ett stöd för valet av antalet veckor i plan.veckoval: ett citat ur metoden om vad som avgör längden, och förvalet i forval.` : ''), ...(utanfor ? [`plan.veckoval.forval är ${v.forval} veckor, utanför metodens period, "${d.period}".`] : [])];
 }
+/**
+ * Metodens regel för beslutet efter insatsen (passgenomgången 2026-10-26: ingen av de fjorton metoderna sa vad läraren
+ * beslutar efter mätningen, eller efter vilken regel): en metod som kan planeras har plan.utvardering, som planen visar vid
+ * utvärderingen.
+ * @param {{ plan?: { utvardering?: string[] } }} d
+ * @returns {string[]}
+ */
+export const utvarderingensFel = (d) => (d.plan && !d.plan.utvardering?.length ? ['En metod som kan planeras har metodens regel för beslutet efter insatsen i plan.utvardering: vad läraren beslutar efter vilket resultat, ordagrant ur metoden.'] : []);
 
 // ---------- Metodens egna skattningar ----------
 // En metod med ett eget instrument, som Gruppstärkande aktiviteters Lärarens skattning från 1 till 10 och bladet Vår grupp,
@@ -698,7 +709,7 @@ export function skattningensText(s, sk, info) {
 }
 
 /** Felen som stoppar en metod som ska kunna planeras: planmotorns, texternas i planen, citatens och nivåvalets. @param {Parameters<typeof metodplan>[0] & MetodensTexter} d */
-export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...planensCitatFel(d), ...nivavaletsFel(d), ...langdvaletsFel(d), ...veckovaletsFel(d)];
+export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...planensCitatFel(d), ...nivavaletsFel(d), ...langdvaletsFel(d), ...veckovaletsFel(d), ...utvarderingensFel(d)];
 
 // ---------- Modulen ----------
 

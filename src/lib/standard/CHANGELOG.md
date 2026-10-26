@@ -1,5 +1,9 @@
 # Ändringar i standarden
 
+## 0.24.0, 2026-10-26
+
+- `plan.js`, efter passgenomgången i de fjorton metoderna samma kväll (sajtens K-572; ingen metod sa vad läraren beslutar efter mätningen, och åtta sa inte vad som avgör periodens längd): `utvarderingensFel` kräver `plan.utvardering` i en metod som kan planeras, och `veckovaletsFel` kräver `plan.veckoval` när perioden är ett spann eller öppen. `planFel` kör båda, så riggen prövar samma sak före leveransen.
+
 ## 0.23.0, 2026-10-26
 
 - `plan.js`, efter den stängda frågan om det som ändrats i planerna samma kväll (sajtens K-565 och K-567: veckans rad stod överst i passet, och delen under sa emot den, som Bråkkursens sista bråk och Läslistors rader i vecka 6): en rad i `plan.passen` med `del` står i passets del, eller i förberedelsen när delen är `FORE_PASSET`, Före passet, först i delen (`forst`, `foreForst`) eller med `istallet` i stället för delens text, tabellens andra kolumner och fraserna (`passetsBeskrivning`), och `utanDel` är raderna vars del passet inte har. `planensRamFel` stoppar en del som passet inte har, `istallet` utan `del` och `del` i ett pass med `utanTidsschema`. `passetsVisadeRoller` är raderna som passet visar: av raderna om passets plats i insatsen den mest bestämda och raderna med samma när, som Boksamtalets sista läspass med rader i olika delar, och sedan raderna om veckorna.

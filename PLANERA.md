@@ -246,6 +246,7 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | Metodens saker i en text, och lärarens och elevernas egna saker som inte länkas | `sakdelar`, `olankadeSaker` och `EGNA_SAKER` |
 | Metodens texter i planen | `planensInledning`, `planensTexter`, `visadeTexter`, `planensRamFel`, `rollensRad`, `rollensVeckor`, `VECKANS_RAD` och `planensCitatFel` |
 | Stödet för ett val, nivån, passets längd och antalet veckor | `nivavaletsFel`, `langdvaletsFel`, `veckovaletsFel` och `NIVAVALETS_LANGD` |
+| Metodens regel för beslutet efter insatsen | `utvarderingensFel` |
 | Passets längder att välja och förvalet, ur faktarutans spann | `passetsLangder` |
 | Metodens egna skattningar: fältet, reglerna, skalan, linjen, texten och lärarens länkar | `metodensSkattningar`, `SKATTNINGARNAS_VEM`, `tolkaRegel`, `regelnGaller`, `skalansSteg`, `stegetsNamn`, `stegetsSpann`, `skattningensGranser`, `linjen`, `skattningensText` och `rensadLank` |
 | Filnamnen på det som laddas ner | `filnamnet` |
