@@ -2,6 +2,9 @@
 
 ## 0.19.0, 2026-10-26
 
+- `plan.js`, stödet för nivåvalet (sajtens K-557; Niclas samma dag: "Bör alltid finnas vid ett sådant val i Planeras modul", och "Någon slags maxlängd för den texten och vad den ska innehålla samt länka till"): `plan.nivaval`, ett citat ur metoden om vad nivåerna skiljer sig i och vad som avgör valet, och `mer`, metodens tabell eller avsnitt med resten. `nivavaletsFel` stoppar en metod med nivåer utan stöd och en text med fler än tre meningar eller fler än `NIVAVALETS_LANGD` tecken, `planFel` kör den, och `planensTexter` har texten, så att `planensCitatFel` prövar citatet. Sajten ger `harNivaer` när nivåerna bara finns i banken.
+- `plan.js`, efter länkgranskningen och de kalla testarna av omgång 3 samma natt: `variantensNar` läser sista passet i vissa veckor, `sista passet i vecka 5`, för Antalsuppfattningens Läxa 5, och `rollensVeckor` ger cellerna utan kolumnens namn när rollen hämtar en enda kolumn, eftersom kolumnen är passets och passet redan har sitt namn.
+- `plan.js`, efter Codex granskning av omgång 3 samma natt: `rollensVeckor` ger null när en vecka står på två rader, och `planensRamFel` stoppar en roll med veckans rad när tabellen saknar en rad för en vecka i progressionen.
 - `plan.js`, veckans rad i en tabell med en rad per vecka och en kolumn per pass (riggens omgång 3, Matematik): en roll med `ur.rad` som är `VECKANS_RAD`, "veckans", hämtar sin text ur raden för passets vecka och sin kolumn (`rollensVeckor`), och `passetsBeskrivning` visar passets veckas celler. Raden säger sina veckor med `radensVeckor`. `planensRamFel` stoppar en sådan roll när tabellen, en kolumn eller en rads vecka inte finns, och ordet översikten är en mening om metodens sida, som remsan.
 
 ## 0.18.0, 2026-10-26

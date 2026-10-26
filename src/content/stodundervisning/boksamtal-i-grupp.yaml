@@ -545,6 +545,9 @@ uppfoljning:
       perElev: 10
       vad: Gör läsintervjun igen, omkring tio minuter. Eleven återberättar hela boken. Ni väljer hens nästa bok, och du skriver vilket stöd hen behöver i den.
 plan:
+  nivaval:
+    text: "Nivåerna bygger mer på temat och innehållet än på hur svår boken är att läsa, eftersom du läser högt och eleven följer med. Välj nivå efter gruppens ålder och efter vad gruppen är redo för."
+    mer: Så skiljer sig nivåerna
   fore:
     - "Du gör läsintervjun, fem minuter per elev, läser de två böckerna och reserverar exemplar. Räkna med en till tre veckor."
     - "På varje nivå, Bas, Medel och Avancerat, har metoden tio böcker: fem från 2012 eller senare och fem klassiker. I nivåns lista ser du ungefär hur många läspass varje bok tar, var ljudboken och talboken finns, var du lånar och köper boken och om det finns en lärarhandledning."

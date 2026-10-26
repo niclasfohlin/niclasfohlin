@@ -330,6 +330,7 @@ tabeller:
     not: Orden är ledtrådar. Det som avgör är vad texten gör. Varje modell har en egen sida bland materialet, med ett exempel om skolan och tre blad att skriva ut eller skriva i på dator.
   - rubrik: Så skiljer sig nivåerna
     plats: efter-urval
+    text: Nivåerna skiljer sig i området och i hur långa texterna och avsnitten är.
     kolumner:
       - Det som skiljer
       - Bas
@@ -543,6 +544,9 @@ uppfoljning:
       perElev: 15
       vad: Gör kartläggningen igen med Björnens vinter och jämför före och efter i protokollet. Klarar eleven klassens texter med mindre stöd, och vad fortsätter läraren i ämnet med?
 plan:
+  nivaval:
+    text: "Nivåerna skiljer sig i området och i hur långa texterna och avsnitten är. Välj nivå efter elevernas läsning: kartläggningen före perioden visar vilken som passar."
+    mer: Så skiljer sig nivåerna
   passen:
     - nar: veckans första
       kort: "Läspasset"

@@ -30,7 +30,7 @@ material:
   - ledtrådsbladet
   - lyssningsbladet
   - kartläggningen
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-26
 relaterade:
   - boksamtal-i-grupp
   - faktatextsamtal-i-grupp
@@ -266,7 +266,7 @@ tabeller:
     not: Visa ett tankesteg eller ett samtalsdrag i taget, och visa samma i flera veckor om det behövs.
   - rubrik: Så skiljer sig nivåerna
     plats: efter-urval
-    text: Passen, samtalet och cykeln är desamma på alla tre nivåer, och samtalsdragen kommer i samma ordning, vecka för vecka, på alla nivåer. Välj nivå efter gruppen, och blanda gärna. Det här skiljer nivåerna åt.
+    text: Passen, samtalet och cykeln är desamma på alla tre nivåer, och samtalsdragen kommer i samma ordning, vecka för vecka, på alla nivåer. Nivåerna skiljer sig i hur långa texterna är, hur många frågor som går mellan raderna och hur mycket eleverna läser själva. Välj nivå efter gruppen, och blanda gärna.
     kolumner:
       - Vad
       - Lättläst
@@ -662,6 +662,9 @@ uppfoljning:
       vad: Varje elev gör kartläggningens text efter, som är lika svår. Jämför poängen i Kartläggningens protokoll, och lyssningsbladen med vecka 1 och 2. Se också om eleven sätter frågetecken i sin bänkbok.
       tid: efter
 plan:
+  nivaval:
+    text: "Nivåerna skiljer sig i hur långa texterna är, hur många frågor som går mellan raderna och hur mycket eleverna läser själva. Välj nivån, Lättläst, Mellan eller Avancerad, efter hur eleverna läser, oavsett årskurs."
+    mer: Så skiljer sig nivåerna
   passen:
     - nar: veckans första
       kort: "Du tänker högt"

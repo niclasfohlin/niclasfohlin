@@ -31,7 +31,7 @@ material:
   - bladen Vår lösning och Två lösningar
   - konkret material
   - kortet Våra sätt
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-26
 relaterade:
   - fyra-raknesatten
   - antalsuppfattning-i-grupp
@@ -201,19 +201,19 @@ tidsschema:
       vad: Ta nästa problem på gruppens nivå, läs lärarens sida och lös problemet på båda sätten. Kopiera problemets sida, Vår lösning och Två lösningar till varje par. Till ett eget problem ritar du A och B på ett papper, som du visar i Jämföra med B täckt.
     - tid: 0–5 min
       fas: Förstå
-      vad: "Gemensamt. Lärarens sida: Ringa in · Lyft ut · Ord och tal."
+      vad: "Gemensamt. Läs problemet högt. Paren berättar det för varandra och en elev för gruppen. Red ut orden, ringa in frågan och skriv på tavlan vad ni vet och vad ni ska ta reda på. Lärarens sida: Ringa in · Lyft ut · Ord och tal."
     - tid: 5–7 min
       fas: Planera
-      vad: "Gemensamt, med kortet Våra sätt. Lärarens sida: Förutse."
+      vad: "Gemensamt, med kortet Våra sätt. Gruppen föreslår sätt från kortet, och paren väljer olika sätt. Skriv parens gissningar under Vi tror. Ingen räknar än. Lärarens sida: Förutse."
     - tid: 7–21 min
       fas: Lösa
-      vad: "I par. Lärarens sida: Kör de fast · Säg inte · Mindre och större."
+      vad: "I par, på bladet Vår lösning. Fråga först och lämna paren i gång. Halvvägs säger du två sätt du har sett, utan namn och svar, och väljer lösningar till Jämföra. Lärarens sida: Kör de fast · Säg inte · Mindre och större."
     - tid: 21–28 min
       fas: Jämföra
-      vad: "Gemensamt igen, med bladet Två lösningar. Lärarens sida: Jämför · Fel eller osäker."
+      vad: "Gemensamt igen, med bladet Två lösningar. Dela ut bladet med B täckt och fråga vad A gör. Visa B och ställ fråga 3. De valda paren visar sina lösningar, och sist säger ni felet och idén i en mening. Lärarens sida: Jämför · Fel eller osäker."
     - tid: 28–30 min
       fas: Avsluta
-      vad: Gemensamt igen, med kortet Våra sätt.
+      vad: Gemensamt igen, med kortet Våra sätt. Sätt ord på sättet som fungerade, och gruppen bockar för det på kortet.
   efter: "Gruppen tar ett problem per pass. Blir ett par klart tidigt, ställer du frågan under Större på lärarens sida eller ber paret lösa problemet på ett annat sätt."
 steg:
   rubrik: Vad du gör och säger i varje del
@@ -327,32 +327,32 @@ urval:
     - rubrik: Två sätt
       text: Går att lösa på två sätt, med bild, tabell, tallinje eller material
 progression:
-  text: Ansvaret flyttas gradvis till eleverna, i de fyra leden Jag gör, Vi gör, Ni gör tillsammans och Du gör själv. Byt led när noteringarna visar att gruppen klarar ledet med lite stöd. Låt insatsen gå sida vid sida med färdighetsträning, och berätta för klassläraren vilka sätt gruppen arbetar med.
+  text: Ansvaret flyttas gradvis till eleverna, i de fyra leden Jag gör, Vi gör, Ni gör tillsammans och Du gör själv. Byt led när noteringarna visar att gruppen klarar ledet med lite stöd. I första passet visar du kortet Våra sätt och bladen Vår lösning och Två lösningar, och Planera tar längre tid. Låt insatsen gå sida vid sida med färdighetsträning, och berätta för klassläraren vilka sätt gruppen arbetar med.
   rader:
     - vecka: 1–2
       led: Jag gör
-      fokus: "De första problemen. I första passet visar du kortet och bladen, och Planera tar längre tid."
-      roll: Läraren tänker högt med kortets frågor, som ”Jag frågar mig vad vi ska ta reda på.”
+      fokus: "De första problemen."
+      roll: Läraren tänker högt med frågorna på kortet Våra sätt, som ”Jag frågar mig vad vi ska ta reda på.”
     - vecka: 3–4
       led: Vi gör
-      fokus: "Fler av metodens problem. Paren ställer kortets frågor till varandra, och du lyssnar. En elev läser problemet högt och leder Förstå."
+      fokus: "Fler av metodens problem. Paren ställer frågorna på kortet Våra sätt till varandra, och du lyssnar. En elev läser problemet högt och leder Förstå."
       roll: Läraren ger kortare stöd och frågar mer.
     - vecka: 5–6
       led: Ni gör tillsammans
-      fokus: De sista av de tio, och problem ur källorna som liknar dem. Paren skriver Vi vet själva.
+      fokus: De sista av metodens problem på nivån, och liknande problem ur källorna. Paren skriver Vi vet själva.
       roll: Läraren läser parens Vi vet först och följer upp sätt, lösning och rimlighet.
     - vecka: 7–8
       rubrik: "Var och en börjar själv"
       led: Du gör själv
       fokus: Var och en börjar själv i två minuter innan paret arbetar vidare, gärna med problem ur klassens läromedel.
-      roll: Läraren ger klassläraren en kopia av kortet med gruppens sätt och följer upp dem i klassens matematik.
+      roll: Läraren ger klassläraren en kopia av kortet Våra sätt, med gruppens bockar, och följer upp sätten i klassens matematik.
 uppfoljning:
   text: Du behöver veta om passen ger effekt, och det räcker inte att de har blivit av. Kartläggningen har två blad per nivå, ett A4 före och ett efter. Båda bladen har samma fem uppgifter, och problemen är byggda på samma sätt. Kartläggningen före gör du innan det första passet, omkring tio minuter per elev eller par. Spara parens blad Vår lösning, eftersom bladen visar hur paren tänker.
   rader:
     - nar: Före insatsen
       tid: "före"
       perElev: 10
-      vad: Eleven löser bladet Kartläggning före, och du skriver i protokollet vad hen säger och gör i varje uppgift och vilken hjälp hen behöver.
+      vad: Eleven löser bladet Kartläggning före, och du skriver i lärarens protokoll vad hen säger och gör i varje uppgift och vilken hjälp hen behöver.
     - nar: Varje pass
       tid: "varje pass"
       vad: Vad kunde varje elev återberätta, visa, jämföra och kontrollera, och med vilket stöd? Vad tas upp nästa gång?
@@ -363,10 +363,14 @@ uppfoljning:
 plan:
   utan:
     - "Remsan visar hur de 30 minuterna fördelas mellan passets delar och när gruppen arbetar gemensamt och i par."
+  enPerPass: true
+  nivaval:
+    text: "Metoden har problem på tre nivåer, Bas nära åk 4–5, Medel nära åk 6–7 och Avancerat nära åk 8–9. Gör kartläggningen före på den nivå som ligger närmast elevernas årskurs, och välj sedan nivå efter vad kartläggningen visar."
+    mer: Så skiljer sig nivåerna
   passen:
     - nar: första passet
       kort: "Första passet"
-      text: "I första passet visar du kortet och bladen, och Planera tar längre tid."
+      text: "I första passet visar du kortet Våra sätt och bladen Vår lösning och Två lösningar, och Planera tar längre tid."
 mal:
   overgripande: "kunna förstå ett problem i text, visa det och kontrollera att svaret är rimligt."
   punkter:

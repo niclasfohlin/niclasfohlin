@@ -246,7 +246,7 @@ export function metodplan(d) {
   // plats i vissa veckor, som Faktatextsamtalets förberedelse med bladet Egen text i vecka 6–8.
   const passen = (d.plan?.passen ?? []).map((p, rad) => {
     const nar = variantensNar(p.nar);
-    if (!nar || nar.typ === 'minuter') fel.push(`Planens pass "${p.nar}" går inte att läsa. Skriv det som veckans första, veckans sista, veckans övriga, första passet, pass 7, pass 2–6, pass 8 till det sista, näst sista passet, sista passet, vecka 1–3 eller veckans första pass i vecka 2–5.`);
+    if (!nar || nar.typ === 'minuter') fel.push(`Planens pass "${p.nar}" går inte att läsa. Skriv det som veckans första, veckans sista, veckans övriga, första passet, pass 7, pass 2–6, pass 8 till det sista, näst sista passet, sista passet, vecka 1–3, veckans första pass i vecka 2–5 eller sista passet i vecka 5.`);
     return { rad, nar };
   });
   if (fel.length) return { fel };
@@ -295,6 +295,7 @@ export const planensTexter = (d) => [
   ...(d.plan?.fore ?? []).map((t) => /** @type {[string, string]} */ (['Planens fore', t])),
   ...(d.plan?.justera ?? []).map((t) => /** @type {[string, string]} */ (['Planens justera', t])),
   ...(d.plan?.upprepa ? [/** @type {[string, string]} */ (['Planens upprepa', d.plan.upprepa])] : []),
+  ...(d.plan?.nivaval ? [/** @type {[string, string]} */ (['Planens nivåval', d.plan.nivaval.text])] : []),
 ];
 
 /**
@@ -331,6 +332,13 @@ const VECKOR_I_ORD = new RegExp(String.raw`(?<![\p{L}\p{N}])(?:(?:vecka|veckorna
 export function planensRamFel(d) {
   const fel = [];
   for (const p of d.plan?.passen ?? []) if (p.ur && !(p.ur.rad === VECKANS_RAD ? rollensVeckor(d, p.ur) : rollensRad(d, p.ur))) fel.push(`Planens pass "${p.nar}" hämtar sin text ur tabellen "${p.ur.tabell}", raden "${p.ur.rad}"${p.ur.kolumner ? ` och kolumnerna ${p.ur.kolumner.join(', ')}` : ''}, som metoden inte har. Skriv tabellens rubrik, radens första ord och kolumnerna som de står i metoden.`);
+  // Veckans tabell har en rad för varje vecka i progressionen, så att inget pass står utan sin cell (Codex 2026-10-26).
+  for (const p of d.plan?.passen ?? []) {
+    const veckor = p.ur?.rad === VECKANS_RAD ? rollensVeckor(d, p.ur) : null;
+    const mp = veckor ? metodplan(d).plan : undefined;
+    const saknas = mp?.stegEnhet === 'veckor' ? mp.steg.filter((x) => !x.efter).flatMap((x) => Array.from({ length: (x.till ?? x.fran) - x.fran + 1 }, (_, i) => x.fran + i)).filter((v) => !veckor?.[String(v)]) : [];
+    if (saknas.length) fel.push(`Planens pass "${p.nar}" hämtar veckans rad ur tabellen "${p.ur.tabell}", som saknar en rad för vecka ${[...new Set(saknas)].join(', ')}. Ge varje vecka i progressionen sin rad.`);
+  }
   for (const p of d.plan?.passen ?? []) if (p.text && tiderILoptext(p.text)) fel.push(`Planens pass "${p.nar}" säger passets tider. Tiderna står i metodens tidsschema, och tider som gäller vissa veckor som en variant (tidsschema.varianter), så att metodens sida, Word och planen läser samma rot (METODER.md under Tidsschemats varianter).`);
   const meningar = meningarna(d.tidsschema?.text);
   for (const u of d.plan?.utan ?? []) if (!meningar.includes(u.trim())) fel.push(`plan.utan nämner "${u}", som inte är en mening i tidsschemats text. Skriv meningen som den står där, eller ta bort den ur plan.utan.`);
@@ -370,10 +378,12 @@ export const VECKANS_RAD = 'veckans';
  * Veckans rad i en tabell med en rad per vecka och en kolumn per pass, som Antalsuppfattningens Veckan: ett fokus i tre
  * material, där en roll hämtar sin text ur veckans rad (`ur.rad` är "veckans") och sitt pass kolumn (riggens omgång 3
  * 2026-10-26: planen kunde bara ta en hel rad, och en rad är en vecka). Raden säger sina veckor med radensVeckor, "1 · Bygga
- * och säga tal", och en rad kan gälla flera veckor. Cellerna står som i rollensRad.
+ * och säga tal", och en rad kan gälla flera veckor. Cellerna står som i rollensRad, men utan kolumnens namn när rollen
+ * hämtar en enda kolumn: kolumnen är passets, som "Pass 1: med material", och passet har redan sitt namn i planen (de kalla
+ * testarna 2026-10-26: "Pass 6 av 10" och "PASS 1: MED MATERIAL" stod över varandra).
  * @param {MetodensTexter} d
  * @param {{ tabell: string, rad: string, kolumner?: string[] }} ur
- * @returns {Record<string, { kolumn: string, text: string }[]> | null} null när tabellen, en kolumn eller en rads vecka inte finns
+ * @returns {Record<string, { kolumn: string, text: string }[]> | null} null när tabellen, en kolumn eller en rads vecka inte finns, eller en vecka står på två rader
  */
 export function rollensVeckor(d, ur) {
   const tk = tabellOchKolumner(d, ur);
@@ -383,7 +393,9 @@ export function rollensVeckor(d, ur) {
   for (const r of tk.t.rader ?? []) {
     const s = radensVeckor(String(r[0]).split('\n')[0]);
     if (!s) return null;
-    for (let v = s.fran; v <= s.till; v++) ut[String(v)] = radensCeller(tk.t, r, tk.valda);
+    const celler = radensCeller(tk.t, r, tk.valda).map((c) => (tk.valda.length === 1 ? { ...c, kolumn: '' } : c));
+    // En vecka på två rader är inte en rad per vecka (Codex 2026-10-26: den andra raden skrev tyst över den första).
+    for (let v = s.fran; v <= s.till; v++) { if (ut[String(v)]) return null; ut[String(v)] = celler; }
   }
   return ut;
 }
@@ -406,8 +418,30 @@ export function planensCitatFel(d) {
     .flatMap(([plats, t]) => meningarna(t).filter((m) => !kalla.has(ordagrant(utanPunkt(m)))).map((m) => `${plats} säger "${m}", som inte står så i metoden. Planen citerar metoden ordagrant, så att den är 1–1 med metodens sida: skriv meningen som den står i metoden, eller hämta rollens text ur en tabellrad med ur (METODER.md under Fälten i metodens fil).`));
 }
 
-/** Felen som stoppar en metod som ska kunna planeras: planmotorns, texternas i planen och citatens. @param {Parameters<typeof metodplan>[0] & MetodensTexter} d */
-export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...planensCitatFel(d)];
+/** Hur långt stödet för nivåvalet får vara, i tecken (STIL.md under Stöd för ett val). */
+export const NIVAVALETS_LANGD = 250;
+/**
+ * Stödet för nivåvalet (sajtens K-557; Niclas 2026-10-26: "Bör alltid finnas vid ett sådant val i Planeras modul", och
+ * "Någon slags maxlängd för den texten och vad den ska innehålla samt länka till"): en metod med nivåer har plan.nivaval,
+ * ett citat ur metoden på högst tre meningar och NIVAVALETS_LANGD tecken om vad nivåerna skiljer sig i och vad som avgör
+ * valet, och metodens tabell eller avsnitt med mer (mer), som planen visar under en nerpil vid varje nivåval. Citatet prövas
+ * med planens andra texter (planensCitatFel). Sajten vet också om en bank har nivåer och ger då harNivaer.
+ * @param {MetodensTexter & { nivaer?: unknown[] }} d
+ * @param {boolean} [harNivaer] metoden har minst två nivåer att välja mellan
+ * @returns {string[]}
+ */
+export function nivavaletsFel(d, harNivaer = (d.nivaer ?? []).length >= 2) {
+  const n = d.plan?.nivaval;
+  if (!n) return harNivaer ? ['Metoden har nivåer, och planen har då ett stöd för nivåvalet i plan.nivaval: ett citat ur metoden om vad nivåerna skiljer sig i och vad som avgör valet, och i mer metodens tabell eller avsnitt med resten (STIL.md under Stöd för ett val).'] : [];
+  const t = String(n.text ?? '').trim();
+  const fel = [];
+  if (t.length > NIVAVALETS_LANGD) fel.push(`plan.nivaval har ${t.length} tecken. Stödet för nivåvalet har högst ${NIVAVALETS_LANGD}, och resten står i metoden, dit länken leder (STIL.md under Stöd för ett val).`);
+  if (meningarna(t).length > 3) fel.push(`plan.nivaval har ${meningarna(t).length} meningar. Stödet för nivåvalet har högst tre (STIL.md under Stöd för ett val).`);
+  return fel;
+}
+
+/** Felen som stoppar en metod som ska kunna planeras: planmotorns, texternas i planen, citatens och nivåvalets. @param {Parameters<typeof metodplan>[0] & MetodensTexter} d */
+export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...planensCitatFel(d), ...nivavaletsFel(d)];
 
 // ---------- Modulen ----------
 
@@ -417,7 +451,7 @@ export const planFel = (d) => [...metodplan(d).fel, ...planensRamFel(d), ...plan
  * läraren går in och planerar; den andra ökar med en ny förmåga, en tredje när ett fel lagas. Versionerna står i sajtens
  * METODER.md under Planera insatsen.
  */
-export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.2.10', beta: true });
+export const PLANERA = Object.freeze({ namn: 'Planera', version: '0.2.11', beta: true });
 
 // Filnamnen på det som laddas ner ur planen, lika för alla metoder (sajtens K-519; Niclas 2026-10-25: "Kan du standardisera
 // dess namn? Alltså elevens namn, metod och datum som placeholders för den. Annars heter alla sammanställningar samma"):
@@ -919,7 +953,7 @@ export function passetsLage(plan, p, minuter) {
 /**
  * Gäller en rad i planens `passen` eller en variant av passet för ett pass? Raden och varianten läses med samma ord
  * (tolkaPassen och variantensNar), och en variant kan också gälla passets längd ("ett pass på tio minuter") eller en plats
- * i vissa veckor ("veckans första pass i vecka 2–5").
+ * i vissa veckor ("veckans första pass i vecka 2–5", "sista passet i vecka 5").
  * @param {PassensNar | VariantensNar} nar
  * @param {PassetsLage} lage
  */
@@ -982,7 +1016,7 @@ export const variantensMening = (v) => {
  * När en variant av passet gäller, ur variantens `nar` (riggens omgång 1 2026-10-26: Upprepad läsnings pass på tio
  * minuter och Högläsning i pars visning i veckans första pass hade sina tider i en mening): metodens veckor, "vecka 1–3",
  * passets längd, "ett pass på tio minuter", och planens ord för passen (tolkaPassen), som "pass 2" och "veckans första
- * pass", också i vissa veckor, "veckans första pass i vecka 2–5".
+ * pass", också i vissa veckor, "veckans första pass i vecka 2–5" och "sista passet i vecka 5".
  * @param {unknown} text
  * @returns {VariantensNar | null}
  */
@@ -994,7 +1028,7 @@ export function variantensNar(text) {
   m = t.match(/^(.+?) i (vecka .+)$/);
   if (m) {
     const p = tolkaPassen(m[1]), veckor = veckorI(m[2]);
-    return p && veckor && p.typ === 'vecka' ? { ...p, veckor } : null;
+    return p && veckor && (p.typ === 'vecka' || p.typ === 'sista') ? { ...p, veckor } : null;
   }
   return tolkaPassen(t);
 }
@@ -1931,11 +1965,11 @@ export function kalenderfil(info, plan, o) {
  * @typedef {{ rad: number, fran: number, till?: number, vidBehov: boolean, efter?: true }} Steg
  * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista' } | { typ: 'veckor', fran: number, till: number }} PassensNar
  * @typedef {{ takt: { min: number, max: number }, minuter: { min: number, max: number }, period: { min: number, max?: number, enhet: 'veckor' | 'pass', mer: boolean, perKurs: boolean }, stegEnhet: 'veckor' | 'pass', steg: Steg[], uppfoljning: { rad: number, tid: Tid }[], passen: { rad: number, nar: PassensNar }[] }} Metodplan
- * @typedef {{ uppfoljning?: { rader: { nar: string, vad: string }[] }, progression?: { rader: { vecka: string, fokus?: string, roll?: string, led?: string }[] }, checklista?: { punkter: string[] }, plan?: { passen?: { nar: string, text?: string, ur?: { tabell: string, rad: string, kolumner?: string[] }, kort?: string, tabell?: string }[], fore?: string[], justera?: string[], upprepa?: string, utan?: string[], stege?: boolean }, tidsschema?: { text?: string, efter?: string, rader: { tid: string, fas: string, vad: string }[], varianter?: Variant[] }, gruppen?: { text: string }, passrutin?: { efterPasset?: string }, principer?: { text: string }, hem?: { text: string[] }, tabeller?: { rubrik: string, kolumner: string[], rader?: unknown[][] }[], nivaer?: { namn: string }[] }} MetodensTexter
+ * @typedef {{ uppfoljning?: { rader: { nar: string, vad: string }[] }, progression?: { rader: { vecka: string, fokus?: string, roll?: string, led?: string }[] }, checklista?: { punkter: string[] }, plan?: { passen?: { nar: string, text?: string, ur?: { tabell: string, rad: string, kolumner?: string[] }, kort?: string, tabell?: string }[], fore?: string[], justera?: string[], upprepa?: string, utan?: string[], stege?: boolean, nivaval?: { text: string, mer: string } }, tidsschema?: { text?: string, efter?: string, rader: { tid: string, fas: string, vad: string }[], varianter?: Variant[] }, gruppen?: { text: string }, passrutin?: { efterPasset?: string }, principer?: { text: string }, hem?: { text: string[] }, tabeller?: { rubrik: string, kolumner: string[], rader?: unknown[][] }[], nivaer?: { namn: string }[] }} MetodensTexter
  * @typedef {{ nar: string, text?: string, delar: { fas: string, tid: string }[] }} Variant
  * @typedef {{ tid: string, fas: string, vad: string, mer: { etikett: string, text: string }[] }} TabellDel
  * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista' } | { typ: 'nastSista' } | { typ: 'veckor', fran: number, till: number }} PassensNar
- * @typedef {PassensNar | { typ: 'minuter', minuter: number } | { typ: 'vecka', plats: number | 'sista' | 'ovriga', veckor: { fran: number, till: number } }} VariantensNar
+ * @typedef {PassensNar | { typ: 'minuter', minuter: number } | { typ: 'vecka', plats: number | 'sista' | 'ovriga', veckor: { fran: number, till: number } } | { typ: 'sista', veckor: { fran: number, till: number } }} VariantensNar
  * @typedef {{ nr?: number, sista?: boolean, nastSista?: boolean, vecka?: number, plats?: number, sistIVeckan?: boolean, minuter?: number }} PassetsLage
  * @typedef {{ start: string, dagar: number[], langd: number, niva?: string, borja?: number, minuter?: number, lov?: string[], upprepa?: number[], flytta?: Record<string, string>, stryk?: string[], tider?: Record<string, [string, string]>, mal?: string, mitt?: number, slut?: number, fore?: { till: string, dagar: number[], fasta?: Record<string, number> }[] }} Val
  * @typedef {{ nr: number, datum: string, vecka: number, steg?: number | null, flyttatFran?: string }} Pass

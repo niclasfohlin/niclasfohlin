@@ -1,14 +1,14 @@
 {
   "antalsuppfattning-i-grupp": {
-    "kalla": "77cdc69d4a6b6302",
-    "innehall": "dc34489b77ec5b21",
+    "kalla": "6d9f5e67de0a83e1",
+    "innehall": "fa77fe8958a2570d",
     "skalor": [
       1.25,
       1.35,
       1.35,
       1.3
     ],
-    "datum": "2026-10-20"
+    "datum": "2026-10-26"
   },
   "boksamtal-i-grupp": {
     "kalla": "6e956acf5c130b49",
@@ -22,18 +22,18 @@
     "innehall": "b8d8e9ed60a3700e"
   },
   "brakkurs-i-grupp": {
-    "kalla": "181d76afe983bff7",
-    "innehall": "a43170d3f1f80cd7",
+    "kalla": "27cf091642536b04",
+    "innehall": "cdb7d120b28b8d44",
     "skalor": [
       1.15,
       1.35,
       1.35,
       1.2
     ],
-    "datum": "2026-10-19"
+    "datum": "2026-10-26"
   },
   "faktatextsamtal-i-grupp": {
-    "kalla": "1267248914e280c4",
+    "kalla": "c7545a9db90489cd",
     "innehall": "23f512db6a119701",
     "skalor": [
       1.35,
@@ -132,15 +132,15 @@
     "datum": "2026-10-20"
   },
   "problemlosning-i-grupp": {
-    "kalla": "4c1dbd3dcf7fd60f",
-    "innehall": "0b313017eacd024f",
+    "kalla": "6d24119ff886c07b",
+    "innehall": "50725d2fc6934ff3",
     "skalor": [
       1.25,
       1.35,
       1.35,
       1.35
     ],
-    "datum": "2026-10-25"
+    "datum": "2026-10-26"
   },
   "sag-skriv-och-las": {
     "kalla": "cf0948d1eaa443c5",
@@ -198,7 +198,7 @@
     "innehall": "f62a6bb4ed5070e0"
   },
   "textsamtal-i-grupp": {
-    "kalla": "54dabdcd0f976a8a",
+    "kalla": "fbd877cb98df1029",
     "innehall": "bb34e2bb8679a9fd",
     "skalor": [
       1.25,

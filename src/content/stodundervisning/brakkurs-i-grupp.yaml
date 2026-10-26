@@ -27,7 +27,7 @@ material:
   - mallar och blad
   - veckans kort
   - knappar och tärning
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-26
 relaterade:
   - antalsuppfattning-i-grupp
   - problemlosning-i-grupp
@@ -85,11 +85,11 @@ tabeller:
       - "Pass 3, när det går: spel och problem"
     rader:
       - - 1 · Lika delar
-        - Vik remsor i halvor och fjärdedelar, och jämför stavarna.
+        - Vik remsor i halvor och fjärdedelar, och jämför bråkstavarna.
         - Skriv bråk i Bråkplanket att fylla i, rita staplar och dela dem, och ordna bråk med täljaren 1.
         - Spelet Fyll det hela. Problemet om tre barn som delar två chokladkakor.
       - - 2 · Bråk på tallinjen
-        - Lägg stavarna mot tallinjen från 0. Staven blir ett mått.
+        - Lägg bråkstavarna mot tallinjen från 0. Staven blir ett mått.
         - Dela tallinjen, sätt ut bråk och räkna i fjärdedelar förbi 1.
         - Spelet Högst vinner. Problemet om snigeln som kryper en fjärdedels meter i timmen.
       - - 3 · Likvärdiga bråk
@@ -102,7 +102,7 @@ tabeller:
         - Spelet Närmast en hel. Problemet om Majas bok.
       - - 5 · Bråk av antal
         - Dela knappar i lika stora högar och ta så många högar som täljaren säger.
-        - Rita stapeln, hitta en del och sedan det hela.
+        - Rita stapeln på bladet Stapelrutan, hitta en del och sedan det hela.
         - Spelet Ta din del av 24. Problemet om klassen på utflykt.
     not: Du gör kartläggningen före vecka 1 och efter vecka 5. Hinner gruppen inte pass 3 en vecka spelar paren veckans spel när de blir klara tidigt i pass 1 och 2.
   - rubrik: "Pass 3, när det går: spel och problem"
@@ -142,7 +142,7 @@ tidsschema:
   rader:
     - tid: Före passet
       fas: Förberedelse
-      vad: Ta fram dagens material och ett blad Bråket på fyra sätt per elev. Från vecka 2 tejpar du en tallinje per elev längs bordskanten. Kopiera korten till dagens pass, en kopia per par, och klipp dem. Det första bråket är det du visar under Visa först och säg i veckans ruta Till läraren under Kursens material, och det sista står under Veckans mening. Gör båda och säg orden högt.
+      vad: Ta fram materialet som står under Material i veckans ram och ett blad Bråket på fyra sätt per elev. Från vecka 2 tejpar du en tallinje per elev längs bordskanten. Kopiera korten till dagens pass i veckans ram, en kopia per par, och klipp dem. Det första bråket är det du visar under Visa först och säg i rutan Till läraren i veckans ram, och det sista står under Veckans mening. Gör båda och säg orden högt.
     - tid: 0–8 min
       fas: Första bråket
       vad: Visa bråket långsamt och tänk högt. Säg vad det hela är, hur du delar det, vad du pekar på och vad bråket heter, och skriv bråket samtidigt som du säger det.
@@ -151,14 +151,14 @@ tidsschema:
       vad: "Säg varje handgrepp, och eleverna gör och säger likadant med sin egen sats. Har ni en köpt sats per par gör paret bråket tillsammans. Räkna delarna i kör: ”En fjärdedel, två fjärdedelar, tre fjärdedelar.” Fråga: ”Vad är det hela? Hur vet du att delarna är lika stora?”"
     - tid: 18–38 min
       fas: Korten
-      vad: Läs det första kortet högt. I paret gör den ena kortet och berättar vad hen gör, och den andra kontrollerar med materialet eller tallinjen. De byter roller efter varje kort. Gå mellan paren och lyssna efter veckans vanliga fel. De står under Lyssna efter i veckans ruta Till läraren under Kursens material.
+      vad: Läs det första kortet högt. I paret gör den ena kortet och berättar vad hen gör, och den andra kontrollerar med materialet eller tallinjen. De byter roller efter varje kort. Gå mellan paren och lyssna efter veckans vanliga fel. De står under Lyssna efter i rutan Till läraren i veckans ram.
     - tid: 38–50 min
       fas: Fyra sätt
-      vad: Ge varje elev ett kort med ett bråk, gärna ett som hen läste för kamraten men inte gjorde själv. I pass 1 gör eleven bråket på bordet och ritar det i rutan Med material. Sedan ritar eleven bråket som bild, på en egen liten tallinje och med siffror. Lyssna på en elev i taget. Har gruppen fler än sex elever lyssnar du på halva gruppen i pass 1 och på resten i pass 2. Den som är klar får ett kort till.
+      vad: Ge varje elev ett kort med ett bråk, gärna ett som hen läste för kamraten men inte gjorde själv. I pass 1 gör eleven bråket på bordet och ritar det i rutan Med material. Sedan ritar eleven bråket som bild, från vecka 2 på en egen liten tallinje, och med siffror. Lyssna på en elev i taget. Har gruppen fler än sex elever lyssnar du på halva gruppen i pass 1 och på resten i pass 2. Den som är klar får ett kort till.
     - tid: 50–60 min
       fas: Veckans mening
-      vad: Gör det sista bråket på din tallinje, med bitar från flera satser. Låt eleverna visa och berätta. Första passet i veckan skriver du meningen på affischen.
-  efter: Blir ett par klart tidigt spelar de veckans spel. Reglerna står i veckans ram under Kursens material, i rutan Till läraren om pass 3.
+      vad: Gör det sista bråket med bitar från flera satser, och från vecka 2 på din tallinje. Låt eleverna visa och berätta. Första passet i veckan skriver du meningen på affischen.
+  efter: Blir ett par klart tidigt spelar de veckans spel. Reglerna står i rutan Till läraren om pass 3 i veckans ram.
 steg:
   rubrik: "Pass 1 och 2: vad du gör och säger i varje del"
   rader:
@@ -304,7 +304,7 @@ uppfoljning:
   rader:
     - nar: Före insatsen
       tid: "före"
-      vad: Gör kartläggningen med hela gruppen, cirka 30 minuter, utanför passen. Anteckna R för rätt svar och R+ när eleven också förklarar med rätt ord, med en bild eller på tallinjen, i kolumnen Före.
+      vad: Gör kartläggningen med hela gruppen, cirka 30 minuter, utanför passen. Uppgifterna står under Kartläggning före och efter kursen. Anteckna R för rätt svar och R+ när eleven också förklarar med rätt ord, med en bild eller på tallinjen, i kolumnen Före.
     - nar: Varje pass
       tid: "varje pass"
       vad: Vem kunde säga vad nämnaren och täljaren betyder, och vem gjorde veckans vanliga fel?
@@ -314,11 +314,12 @@ uppfoljning:
 plan:
   utan:
     - "Översikten visar hur de 60 minuterna fördelas och vem som arbetar i varje del."
+  fore:
+    - "Mallen Bråkstavar att klippa är två sidor i planeringsmallarna. Skriv ut båda på tjockt papper, en av varje per elev, färglägg varje rad i en egen färg och klipp isär raderna och bitarna."
   passen:
     - nar: veckans första
       kort: "Med material"
       ur: { tabell: "Veckan: från material till siffror", rad: veckans, kolumner: ["Pass 1: med material"] }
-      text: "Första passet i veckan skriver du meningen på affischen."
     - nar: veckans andra
       kort: "Bild, tallinje och räkning"
       ur: { tabell: "Veckan: från material till siffror", rad: veckans, kolumner: ["Pass 2: bild, tallinje och räkning"] }
@@ -356,9 +357,9 @@ snabbmall:
   not: Det du visar först, veckans mening och felet du lyssnar efter står i veckans ruta Till läraren under Kursens material, där kartläggningen står först.
 checklista:
   punkter:
-    - Tagit fram dagens material och bladet Bråket på fyra sätt, som finns i planeringsmallarna.
+    - Tagit fram materialet i veckans ram och bladet Bråket på fyra sätt.
     - Tejpat tallinjerna från vecka 2, en stavlängd mellan 0, 1 och 2.
-    - Kopierat korten till dagens pass, en kopia per par, och klippt dem.
+    - Kopierat korten till dagens pass i veckans ram, en kopia per par, och klippt dem.
     - Gjort det första och det sista bråket och sagt orden högt.
     - Bestämt paren.
     - Hängt upp affischen.

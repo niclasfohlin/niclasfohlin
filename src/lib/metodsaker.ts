@@ -101,6 +101,16 @@ export function metodensSaker(d: MetodData, id: string): MetodSak[] {
   // Titeln länkas bara som titel, med stor bokstav mitt i en mening, så att "multiplikation" inte leder till Övningsblad:
   // Multiplikation.
   for (const [titel, adresser] of titlar) if (adresser.length === 1 && !perNamn.has(titel)) saker.push(/^\p{Lu}/u.test(titel) ? { ...sak(titel, adresser[0]), versal: true } : sak(titel, adresser[0]));
+  // Veckans ram, i en kurs med en ram per vecka som Bråkkursens "Vecka 1: Lika delar": "veckans ram" leder i planen till
+  // ramen för veckan som visas, med veckans ruta Till läraren, korten och materialet (länkgranskningen av omgång 3
+  // 2026-10-26: "veckans ruta Till läraren under Kursens material" ledde till början av materialet).
+  const veckansRamar: Record<string, string> = {};
+  ramar.forEach((r, ri) => {
+    if (iBanken(bank, ri)) return;
+    const m = forstaLedet(r.rubrik).match(/^Vecka\s+(\d+(?:\s*[–-]\s*\d+)?)$/u);
+    for (const v of (m ? veckornaI(`vecka ${m[1]}`) : undefined) ?? []) veckansRamar[String(v)] ??= `${sida}#${ramAnkare[ri]}`;
+  });
+  if (Object.keys(veckansRamar).length >= 2) saker.push({ namn: 'veckans ram', former: ['veckans ram', 'Veckans ram'], adress: Object.values(veckansRamar)[0], veckor: veckansRamar });
   // Materialets avsnitt, som "Kursens material", och kursens veckor och blad: "vecka 3" leder till veckans lektion i en kurs
   // med veckor, och "Addition 1" till bladet (src/lib/karta.ts).
   if (d.ramar?.rubrik) saker.push(sak(d.ramar.rubrik, `${sida}#ramar`));
@@ -118,6 +128,10 @@ export function metodensSaker(d: MetodData, id: string): MetodSak[] {
   // Mallarna, var och en med sitt ankare under Mallar att skriva ut, och alla tillsammans.
   const mallAnkare = mallarnasAnkare(d);
   d.mallar.forEach((m, i) => saker.push(sak(m.rubrik, `${sida}#${mallAnkare[i]}`)));
+  // En mall med en titel efter kolon heter också det första ledet, och flera mallar med samma led, som de två sidorna
+  // Bråkstavar att klippa, leder dit den första står (länkgranskningen av omgång 3 2026-10-26: "Mallen Bråkstavar att
+  // klippa" blev ingen länk).
+  d.mallar.forEach((m, i) => { const led = forstaLedet(m.rubrik); if (led && led !== m.rubrik.trim() && !saker.some((s) => s.namn.toLowerCase() === led.toLowerCase())) saker.push(sak(led, `${sida}#${mallAnkare[i]}`)); });
   if (d.mallar.length) saker.push(sak('Planeringsmallarna', `${sida}#mallar`));
   if (d.snabbmall) {
     saker.push(sak('Snabbmallen', `${sida}#snabbmall`));
@@ -149,9 +163,11 @@ export function metodensSaker(d: MetodData, id: string): MetodSak[] {
   // hänvisning till en sida som sajten har är en länk dit). Namnet är rubrikens första led, eller hela rubriken när det
   // första ledet är ett pass eller en vecka i ordningen ("Pass 1: syftet …"), som inte länkas för sig. Ett namn som en sak
   // redan har blir inget nytt. Avsnitten och tabellerna är metodens text, som skrivs ut med metoden, så planprovet kräver
-  // ingen knapp under dem (slag); kursintyget är ett blad, med sin egen fil (src/lib/sakfiler.ts).
+  // ingen knapp under dem (slag); kursintyget är ett blad, med sin egen fil (src/lib/sakfiler.ts). En rubrik som börjar med
+  // passet, veckan eller nivån, som "Veckan: från material till siffror", heter hela rubriken, så att "Veckans mening" inte
+  // blir en länk dit (länkgranskningen av omgång 3 2026-10-26).
   const tagna = new Set(saker.map((s) => s.namn.toLowerCase()));
-  const rubrikensNamn = (rubrik: string) => { const forsta = forstaLedet(rubrik); return /^(pass|vecka|veckorna|nivå)\b/i.test(forsta) ? rubrik.trim() : forsta; };
+  const rubrikensNamn = (rubrik: string) => { const forsta = forstaLedet(rubrik); return /^(?:pass|passet|vecka|veckan|veckorna|nivå|nivån)(?![\p{L}\p{N}])/iu.test(forsta) ? rubrik.trim() : forsta; };
   const avsnittet = (rubrik: string | undefined, adress: string, slag?: MetodSak['slag']) => {
     const namn = rubrik ? rubrikensNamn(rubrik) : '';
     if (!namn || tagna.has(namn.toLowerCase())) return;

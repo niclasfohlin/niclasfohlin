@@ -737,7 +737,9 @@ const harBorjatVecka = (mandag: string) => mandag <= idag;
 // förslag och en plan utan något infört har ingen sådan vecka.
 const sistaInforda = (): string | undefined => {
   const f = aktiv.foljd;
-  const datum = [...f.gjorda, ...Object.keys(f.franvaro ?? {}), ...Object.keys(f.skattning ?? {}), ...Object.keys(f.vecka ?? {}), ...Object.keys(f.resultat ?? {}).map((k) => k.split('-').slice(1).join('-'))].filter(arDatum);
+  // Bara det som har ett värde räknas, så att ett resultat som skrevs och raderades inte låser något (Codex 2026-10-26).
+  const med = <T>(o: Record<string, T> | undefined, har: (x: T) => boolean) => Object.entries(o ?? {}).filter(([, x]) => har(x)).map(([k]) => k);
+  const datum = [...f.gjorda, ...med(f.franvaro, (x) => !!x?.length), ...med(f.skattning, (x) => Object.keys(x ?? {}).length > 0), ...med(f.vecka, (x) => !!x?.varde || !!x?.not), ...med(f.resultat, (x) => Object.values(x ?? {}).some(Boolean)).map((k) => k.split('-').slice(1).join('-'))].filter(arDatum);
   return datum.length ? datum.sort().at(-1) : undefined;
 };
 const lovetLast = (mandag: string) => { const s = sistaInforda(); return !!s && mandag <= mandagen(s); };
@@ -889,7 +891,19 @@ const skala = (attr: string, valt: number | undefined, namn: string) => `<div cl
 const GANG = ['Svår', 'Ganska svår', 'Okej', 'Bra', 'Mycket bra'];
 const PIL: Record<string, string> = { upp: '↑', samma: '→', ned: '↓' };
 // Nivåernas knappar, när veckan behöver gruppens nivå (nivåns rad i en tabell, och bankens poster).
-const nivaval = (nivaer: { slug: string; farg: string; namn: string }[]) => `<div class="sk-nivaknappar pl-nivaer">${nivaer.map((n) => `<button type="button" class="sk-niva" data-valj-niva="${esc(n.slug)}" style="--niva:${esc(n.farg)}" aria-pressed="false">${esc(n.namn)}</button>`).join('')}</div>`;
+// Stödet för nivåvalet under knapparna, samma nerpil som under formulärets nivåer (K-557; Niclas 2026-10-26: "Bör alltid
+// finnas vid ett sådant val i Planeras modul"): en kopia av formulärets, så att texten och länken står på ett ställe.
+// Kopian har sin plats som ruta, så att den står öppen kvar när veckan ritas om (Codex 2026-10-26).
+const nivastod = (plats: string, oppna?: Set<string>) => {
+  const el = document.getElementById('pl-nivastod');
+  if (!el) return '';
+  const kopia = el.cloneNode(true) as HTMLElement;
+  kopia.removeAttribute('id');
+  kopia.dataset.ruta = `nivastod-${plats}`;
+  kopia.toggleAttribute('open', !!oppna?.has(`nivastod-${plats}`));
+  return kopia.outerHTML;
+};
+const nivaval = (nivaer: { slug: string; farg: string; namn: string }[], plats: string, oppna?: Set<string>) => `<div class="sk-nivaknappar pl-nivaer">${nivaer.map((n) => `<button type="button" class="sk-niva" data-valj-niva="${esc(n.slug)}" style="--niva:${esc(n.farg)}" aria-pressed="false">${esc(n.namn)}</button>`).join('')}</div>${nivastod(plats, oppna)}`;
 const beslutsknappar = (slag: 'avstamning' | 'utvardering') => `<div class="pl-beslut" role="group" aria-label="${slag === 'avstamning' ? 'Avstämningens beslut' : 'Utvärderingens beslut'}">${BESLUTEN[slag].map((b) => `<button type="button" class="knapp sekundar liten" data-beslut="${slag}|${b}" aria-pressed="${aktiv.foljd[slag]?.beslut === b}">${esc(BESLUT[b as keyof typeof BESLUT])}</button>`).join('')}</div>`;
 // Resultaten i metodens uppföljning före och efter för en elev, till utvärderingen: det första resultatet före och det
 // senaste efter, efter datum.
@@ -1043,7 +1057,8 @@ function passetsRuta(p: Pass | undefined, oppna: Set<string>, mitt = ''): string
   const b = p ? passetFor(p) : passetsBeskrivning([], data.passet);
   const egna = b.egenOrdning;
   const delar = b.delar;
-  if (!delar.length && !roller.length) return '';
+  const postRad = p ? passetsPostRad(p, oppna) : '';
+  if (!delar.length && !roller.length && !postRad) return '';
   const tid = p ? passetsTid(aktiv.val, p) : undefined;
   const slut = Math.max(0, ...delar.map((d) => fasTill(d.tid) ?? 0));
   const klockslag = !!tid && slut > 0 && minuterAv(tid[1]) - minuterAv(tid[0]) === slut;
@@ -1076,16 +1091,37 @@ function passetsRuta(p: Pass | undefined, oppna: Set<string>, mitt = ''): string
   const rubrik = egna ? 'Passets delar' : b.rubrik ?? data.passet?.rubrik ?? 'Passets delar';
   if (!egna && data.passet?.not) rader.push(rad('mer', '', 'Mer om passet', `<p>${lankad(mening(data.passet.not))}</p>`));
   const inledning = [...(b.rubrik && b.variantText ? [b.variantText] : []), ...(!egna && data.passet?.text ? [data.passet.text] : [])].map((t) => `<p class="pl-not pl-delinledning">${lankad(mening(t))}</p>`).join('');
-  return `${namn}${roll}${tabellRad}${mitt}${rader.length ? `<div class="pl-delar"><p class="pl-delrubrik">${esc(stor(rubrik))}${klockslag ? ', med passets klockslag' : ''}</p>${inledning}${rader.join('')}</div>` : ''}`;
+  return `${namn}${roll}${postRad}${tabellRad}${mitt}${rader.length ? `<div class="pl-delar"><p class="pl-delrubrik">${esc(stor(rubrik))}${klockslag ? ', med passets klockslag' : ''}</p>${inledning}${rader.join('')}</div>` : ''}`;
+}
+
+// Passets post i banken, när metoden tar bankens poster i tur och ordning, en per pass (plan.enPerPass; Problemlösning:
+// "Börja med metodens problem på nivån, i ordning, ett per pass"): metodens poster på planens nivå efter nummer, och passet
+// har posten på samma plats som passets nummer (de kalla testarna 2026-10-26: "nästa problem" hade inget namn).
+type PassetsPost = { namn: string; adress: string } | { slut: string; namn: string; adress: string };
+function passetsPost(p: Pass): PassetsPost | undefined {
+  const b = data.bank, niva = b?.nivaer.find((n) => n.slug === aktiv.val.niva);
+  if (!b?.enPerPass || !niva) return undefined;
+  const poster = niva.poster.filter((x) => x.sida).sort((x, y) => x.nr - y.nr);
+  const post = poster[p.nr - 1];
+  return post ? { namn: `${post.titel} (${niva.namn}, ${b.en} ${post.nr})`, adress: post.sida! } : { slut: `Metodens ${b.flera} på nivån ${niva.namn} räcker till pass ${poster.length}. Ta nästa ur ${b.namn}.`, namn: b.namn, adress: `${b.adress}#${niva.slug}` };
+}
+function passetsPostRad(p: Pass, oppna?: Set<string>): string {
+  const b = data.bank;
+  if (!b?.enPerPass) return '';
+  if (!aktiv.val.niva) return `<div class="pl-nivaval"><p class="pl-not">Välj gruppens nivå, så visar passet sitt ${esc(b.en)}.</p>${nivaval(b.nivaer, 'pass', oppna)}</div>`;
+  const x = passetsPost(p);
+  if (!x) return '';
+  if ('slut' in x) return `<p class="pl-not">${esc(x.slut.slice(0, -x.namn.length - 1))}<a href="${esc(x.adress)}" ${goat('material', 'Ta fram från planen')}>${esc(x.namn)}</a>.</p>`;
+  return `<p class="pl-roll"><span class="pl-etikett">Passets ${esc(b.en)}</span> <a href="${esc(x.adress)}" ${goat('passets-post', `passets ${b.en} från planen`)}>${esc(x.namn)}</a></p>`;
 }
 
 // Nivåns rad i en tabell med veckorna och nivåerna, som Talen och bladen i veckorna i De fyra räknesätten (de kalla
 // testarna 2026-10-24: passets tal och veckans blad saknades i planen).
-function nivansRad(v: PlanVecka): string {
+function nivansRad(v: PlanVecka, oppna?: Set<string>): string {
   const t = data.nivaTabell, nivaer = data.nivaer ?? [];
   if (!t || !nivaer.length) return '';
   const niva = nivaer.find((n) => n.slug === aktiv.val.niva);
-  if (!niva) return `<div class="pl-nivaval"><p class="pl-not">Välj gruppens nivå, så visar veckan nivåns rad i ${esc(t.rubrik)}.</p>${nivaval(nivaer)}</div>`;
+  if (!niva) return `<div class="pl-nivaval"><p class="pl-not">Välj gruppens nivå, så visar veckan nivåns rad i ${esc(t.rubrik)}.</p>${nivaval(nivaer, 'vecka', oppna)}</div>`;
   const cell = t.veckor[String(v.innehall)]?.[niva.slug];
   if (!cell) return '';
   return `<div class="pl-nivans" style="--niva:${esc(niva.farg)}"><p class="pl-etikett"><a href="${esc(t.adress)}" ${goat('nivans-rad', 'nivåns tal från planen')}>${esc(t.rubrik)}</a> · ${esc(niva.namn)}</p>${cell.split('\n').map((x) => `<p>${lankad(mening(x))}</p>`).join('')}</div>`;
@@ -1106,7 +1142,10 @@ function metodensLankar(): string {
 // kalendern hade bara första meningen ur veckans fokus). Kalenderfilen skriver metodens veckor som planens.
 const passetIKalendern = (p: Pass) => {
   const b = passetFor(p);
-  return [[b.namn, ...b.texter.map((t) => (t.etikett ? `${t.etikett}: ${t.text}` : t.text))].filter(Boolean).map((t) => mening(t)).join(' '), b.delar.length ? `Passet: ${b.delar.map((d) => `${d.fas} ${delensTid(d.tid)}`).join(', ')}.` : ''].filter(Boolean).join('\n');
+  // Passets problem med adressen på en egen rad, så att ingen punkt hamnar i länken.
+  const x = passetsPost(p);
+  const post = x ? ['slut' in x ? x.slut : `${stor(data.bank!.en)}: ${x.namn}.`, `${location.origin}${x.adress}`] : [];
+  return [[b.namn, ...b.texter.map((t) => (t.etikett ? `${t.etikett}: ${t.text}` : t.text))].filter(Boolean).map((t) => mening(t)).join(' '), ...post, b.delar.length ? `Passet: ${b.delar.map((d) => `${d.fas} ${delensTid(d.tid)}`).join(', ')}.` : ''].filter(Boolean).join('\n');
 };
 
 // Före första passet: kartläggningen eller förtestet, det andra metoden gör före start och checklistan inför första passet,
@@ -1241,10 +1280,10 @@ function veckansDelar(v: PlanVecka, oppna: Set<string>): string[] {
   // Hemmets del varje vecka, som läxan i De fyra räknesätten, när passets tidsschema inte redan har den (TIL:s Hemma).
   const hemma = data.hem && !data.passet?.andra.length ? `<p class="pl-hemma"><span class="pl-etikett">Hemma</span> <a href="${esc(data.hem.adress)}" ${goat('hemma', 'hemmet från planen')}>${esc(data.hem.rubrik)}</a></p><p>${lankad(mening(data.hem.text))}</p>` : '';
   lankVecka = rutansVecka.innehall;
-  const ruta = passetsRuta(rutansPass, oppna, nivansRad(rutansVecka));
+  const ruta = passetsRuta(rutansPass, oppna, nivansRad(rutansVecka, oppna));
   if (!ruta && rutansPass && !harVarit) text += `, pass ${rutansPass.nr} av ${hogstaPassnr(plan)}`;
   const veckansSida = kursvecka ? `<p class="metod-centrala"><a class="knapp" href="${esc(kursvecka)}" ${goat('kursvecka', 'veckans lektion från planen')}>${esc(stor(metodveckan(rutansVecka.innehall)))}, med veckans manus</a></p>` : '';
-  delar.push(`<div class="pl-nasta${rutansPass && rutansPass.datum >= idag ? ' pl-kommer' : ''}"><span class="pl-etikett">${etikett}</span><p class="pl-nar">${esc(text)}</p>${bockatNot ? `<p class="pl-not">${esc(bockatNot)}</p>` : ''}${tillbaka}${paminn}${veckansSida}${ruta || nivansRad(rutansVecka)}${material.length ? `<p class="metod-centrala">${material.join('')}</p>` : ''}${veckansTexter(rutansRad, oppna, rutansVecka.nr !== v.nr ? rutansVecka : undefined)}${hemma}${metodensLankar()}</div>`);
+  delar.push(`<div class="pl-nasta${rutansPass && rutansPass.datum >= idag ? ' pl-kommer' : ''}"><span class="pl-etikett">${etikett}</span><p class="pl-nar">${esc(text)}</p>${bockatNot ? `<p class="pl-not">${esc(bockatNot)}</p>` : ''}${tillbaka}${paminn}${veckansSida}${ruta || nivansRad(rutansVecka, oppna)}${material.length ? `<p class="metod-centrala">${material.join('')}</p>` : ''}${veckansTexter(rutansRad, oppna, rutansVecka.nr !== v.nr ? rutansVecka : undefined)}${hemma}${metodensLankar()}</div>`);
 
   lankVecka = v.innehall;
   // Veckans pass, med passets roll, bockarna när läraren följer insatsen och, med närvaron, eleverna under ett bockat pass.
@@ -1340,9 +1379,12 @@ function veckansDelar(v: PlanVecka, oppna: Set<string>): string[] {
   // (de kalla testarna 2026-10-24: Läslistor byter lista först när paren läser orden direkt). Upprepa veckan står här i
   // alla metoder, så att knappen finns på ett ställe och inte bakom en rad som fälls ut (Niclas 2026-10-25). Lov läggs in
   // under Ändra planen, där lovveckorna väljs, och Avsluta insatsen står i raden överst.
-  const kanUpprepa = !harVarit;
+  // En vecka tas inte om när något är infört i en vecka efter den, eftersom upprepningen flyttar fram veckorna efter och
+  // det som står i dem skulle hamna under en annan vecka i metoden (Codex 2026-10-26, samma regel som lovet: lovetLast).
+  const kanUpprepa = !harVarit && !lovetLast(plusDagar(v.mandag, 7));
   const upprepaKnapp = `<button type="button" class="knapp sekundar liten" data-gor="upprepa" ${goat('upprepa', 'veckan upprepad')}>Upprepa veckan</button>`;
-  const taBort = v.igen && kanUpprepa ? '<button type="button" class="knapp sekundar liten" data-gor="ta-bort-upprepning">Ta bort upprepningen</button>' : '';
+  // Att ta bort en upprepning flyttar också den upprepade veckan, så det går inte när något är infört i den (Codex 2026-10-26).
+  const taBort = v.igen && kanUpprepa && !lovetLast(v.mandag) ? '<button type="button" class="knapp sekundar liten" data-gor="ta-bort-upprepning">Ta bort upprepningen</button>' : '';
   const efterVeckan = [
     kanUpprepa ? `<p>${data.upprepa ? lankad(mening(data.upprepa)) : 'Behöver gruppen mer tid tar ni samma vecka en gång till, och resten av planen flyttas fram.'}</p><p class="pl-andra-knappar">${upprepaKnapp}${taBort}</p>` : '',
     plats('snabbmall') && !aktiv.folj ? `<p>Skriv i ${esc(filer.querySelector<HTMLElement>('[data-fil="snabbmall"]')?.dataset.namn ?? 'snabbmallen')} vad du såg och vad ni gör nästa vecka.</p><p class="metod-centrala">${plats('snabbmall')}</p>` : '',
@@ -1361,7 +1403,7 @@ function veckansTexter(rad: ReturnType<typeof radFor>, oppna: Set<string>, annan
   const namn = rad.taggar.map((x) => data.bank!.taggar[x] ?? x);
   const niva = data.bank.nivaer.find((n) => n.slug === aktiv.val.niva);
   const rubrik = annan ? `${esc(stor(data.bank.flera))} till ${esc(rubrikVecka(annan).toLocaleLowerCase('sv'))}` : `Veckans ${esc(data.bank.flera)}`;
-  if (!niva) return `<div class="pl-nivaval"><p class="pl-not">Välj nivå, så visar veckan nivåns ${esc(data.bank.flera)} med ${namn.length > 1 ? 'slagen' : 'slaget'} ${esc(namn.join(', '))}.</p>${nivaval(data.bank.nivaer)}</div>`;
+  if (!niva) return `<div class="pl-nivaval"><p class="pl-not">Välj nivå, så visar veckan nivåns ${esc(data.bank.flera)} med ${namn.length > 1 ? 'slagen' : 'slaget'} ${esc(namn.join(', '))}.</p>${nivaval(data.bank.nivaer, 'texter', oppna)}</div>`;
   const poster = niva.poster.filter((p) => p.taggar.some((x) => rad.taggar!.includes(x)));
   if (!poster.length) return `<p class="pl-not">${rubrik}: nivån ${esc(niva.namn)} har inga ${esc(data.bank.flera)} med ${esc(namn.join(', '))}.</p>`;
   const lista = poster.map((p) => `<li><a href="${esc(data.sida)}/${esc(p.id)}">${p.nr} ${esc(p.titel)}</a><span class="pl-taggar">${esc(p.taggar.map((x) => data.bank!.taggar[x] ?? x).join(', '))}</span><a class="pl-visa" href="${esc(data.bank!.adress)}#${esc(p.id)}" data-goatcounter-click="planera:${esc(data.id)}:post" data-goatcounter-title="${esc(data.titel)}: en post från planen i Ta fram">Visa stort</a></li>`);

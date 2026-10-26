@@ -59,6 +59,17 @@ Under sifferkorten står till exempel: ”Ett A4 per elev, att klippa isär. Ele
 
 Bildtexten börjar inte med ”Bilden visar” och upprepar inte bildens rubrik. Citat ur bladet står inom citattecken. En bild utan egen bildtext, som en bild i en faktatext eller ett lösningsförslag, har bara textalternativet, eftersom texten runt bilden är dess bildtext. Vilket fält som är vilket står i METODER.md under Bladet. Bygget stannar på en bildtext som har fler än tre meningar eller fler än 250 tecken eller börjar med ”Bilden”, och på ett blad utan textalternativ, och metodriggen prövar samma sak före leveransen (`bildtextFel` i `src/lib/standard/`). Det bildtexten säger prövas i granskningen.
 
+## Stöd för ett val
+
+Där läraren väljer i planen, som gruppens nivå, står ett stöd för valet under en nerpil som går att öppna, med en länk till mer i metoden (Niclas 2026-10-26: "Bör alltid finnas vid ett sådant val i Planeras modul", och "Enkelhet och att man förstår utan långa utlägg och länk för mer info"). Saknar metoden en ordentlig förklaring av valet skrivs den först i metoden, så att stödet citerar metoden.
+
+| Delen | Vad den säger | Längd |
+|---|---|---|
+| Texten | Vad alternativen skiljer sig i och vad som avgör valet, ordagrant ur metoden: "Nivåerna skiljer sig i talen och i om eleven går vidare till kort multiplikation och kort division. Välj nivå efter kartläggningen och inte efter årskurs." | Högst tre meningar och 250 tecken |
+| Länken | Metodens tabell eller avsnitt där alternativen står i sin helhet, med sin rubrik, som Så skiljer sig nivåerna | En rubrik |
+
+Fältet är `plan.nivaval` (METODER.md under Fälten i metodens fil). Bygget stannar på en metod med nivåer utan stöd, på en text som är för lång eller inte står så i metoden och på en länk till en rubrik som metoden inte har (`nivavaletsFel` i standarden och `insatsplanFel`).
+
 ## Metodtexter
 
 Genomförandet skrivs som steg en lärare kan följa i morgon utan att fråga. Ange tid, material och gruppstorlek. Progression och uppföljning är konkreta: vad som ökar, vad som mäts, hur ofta.

@@ -2819,10 +2819,10 @@ html:not(.tf-js) .tf-titellank { text-decoration: underline; text-decoration-col
 .pl-ny { border-style: dashed; color: var(--farg-accent); }
 .pl-fil { display: contents; }
 /* Rutorna som fälls ut har sajtens vinkel till höger, nedåt när rutan är hopfälld och uppåt när den är utfälld. */
-.pl-fallut > summary, .pl-gang > summary, .pl-andra > summary, .pl-avslutade summary { list-style: none; }
-.pl-fallut > summary::-webkit-details-marker, .pl-gang > summary::-webkit-details-marker, .pl-andra > summary::-webkit-details-marker, .pl-avslutade summary::-webkit-details-marker { display: none; }
-.pl-fallut > summary::after, .pl-gang > summary::after, .pl-andra > summary::after, .pl-avslutade summary::after { content: ''; flex: none; margin-left: auto; width: 0.5rem; height: 0.5rem; border-right: 2px solid var(--farg-accent); border-bottom: 2px solid var(--farg-accent); transform: translateY(-0.15rem) rotate(45deg); }
-.pl-fallut[open] > summary::after, .pl-gang[open] > summary::after, .pl-andra[open] > summary::after, .pl-avslutade details[open] summary::after { transform: translateY(0.1rem) rotate(-135deg); }
+.pl-fallut > summary, .pl-gang > summary, .pl-andra > summary, .pl-avslutade summary, .pl-stod > summary { list-style: none; }
+.pl-fallut > summary::-webkit-details-marker, .pl-gang > summary::-webkit-details-marker, .pl-andra > summary::-webkit-details-marker, .pl-avslutade summary::-webkit-details-marker, .pl-stod > summary::-webkit-details-marker { display: none; }
+.pl-fallut > summary::after, .pl-gang > summary::after, .pl-andra > summary::after, .pl-avslutade summary::after, .pl-stod > summary::after { content: ''; flex: none; margin-left: auto; width: 0.5rem; height: 0.5rem; border-right: 2px solid var(--farg-accent); border-bottom: 2px solid var(--farg-accent); transform: translateY(-0.15rem) rotate(45deg); }
+.pl-fallut[open] > summary::after, .pl-gang[open] > summary::after, .pl-andra[open] > summary::after, .pl-avslutade details[open] summary::after, .pl-stod[open] > summary::after { transform: translateY(0.1rem) rotate(-135deg); }
 
 /* Målet med pennan (Niclas 2026-10-24: "en liten penna symbol") */
 .pl-mal { display: flex; align-items: flex-start; gap: 0.4rem; margin: 0.7rem 0; padding: 0.6rem 0.4rem 0.6rem 0.8rem; background: var(--farg-yta); border: 1px solid var(--farg-kant); border-radius: 6px; }
@@ -2983,6 +2983,10 @@ button.pl-veckoknapp:hover { background: var(--farg-ton-svag); }
 /* Checklistans rubrik i Före passet, efter tidsschemats förberedelse. */
 .pl-checkrubrik { margin: 0.6rem 0 0.2rem; font-family: var(--typsnitt-ui); font-size: 0.85rem; font-weight: 600; color: var(--farg-text-svag); }
 .pl-fallut, .pl-gang { border: 1px solid var(--farg-kant); border-radius: var(--radie); padding: 0.6rem 1rem; margin: 1.25rem 0; }
+/* Stöd för valet under nivåknapparna: en liten nerpil i texten, utan ram, som fäller ut metodens text och länken (K-557). */
+.pl-stod { margin: 0.35rem 0 0; }
+.pl-stod > summary { display: inline-flex; align-items: center; gap: 0.6rem; min-height: 2.75rem; cursor: pointer; font-family: var(--typsnitt-ui); font-size: 0.95rem; font-weight: 600; color: var(--farg-accent); }
+.pl-stod > p { margin: 0.2rem 0 0.6rem; max-width: 40rem; }
 .pl-fallut > summary { font-weight: 600; cursor: pointer; min-height: 2.75rem; display: flex; align-items: center; gap: 0.75rem; }
 .pl-veckans > summary { line-height: 1.35; }
 .pl-checklista { margin: 0.3rem 0 0.2rem; padding-left: 1.2rem; }

@@ -3,12 +3,12 @@
 // vid bygget. Planen räknas fram i webbläsaren av standardens planmotor (src/lib/standard/plan.js) ur samma fält, så att
 // sidan, riggen och provet räknar lika. Hur fälten skrivs står i METODER.md under Planera insatsen.
 import type { CollectionEntry } from 'astro:content';
-import { forstaLedet, gruppensElever, kortnamn, metodplan, minuterISpann, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, sakdelar, sakspann, slugAv, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
+import { forstaLedet, gruppensElever, kortnamn, metodplan, minuterISpann, nivavaletsFel, olankadeSaker, planensInledning, planensTexter, planFel, postensRad, radensVeckor, rollensRad, rollensVeckor, sakdelar, sakspann, slugAv, tabellensDelar, VECKANS_RAD, visadeTexter } from './standard/index.js';
 import { bankAv, nivaFarger } from './bank';
 import { harTaFram, taFramAv } from './tafram';
 import { formateraDatum } from './innehall';
 import { harLathund } from './metod';
-import { kursensVeckor, metodensSaker, sidansAnkare, type MetodSak } from './metodsaker';
+import { kursensVeckor, metodensSaker, sidansAnkare, sidansAvsnitt, type MetodSak } from './metodsaker';
 import { passOversikt } from './metod';
 import { CENTRALA, lasbarAdress } from './centrala';
 import { publicerade } from './innehall';
@@ -38,9 +38,12 @@ export interface PlanBank {
   /** Postens namn: text, problem. */
   en: string;
   flera: string;
-  nivaer: { namn: string; slug: string; farg: string; poster: { id: string; nr: number; titel: string; taggar: string[] }[] }[];
+  /** Nivåns poster, med postens sida i metoden när posten är metodens egen (databasens poster har ingen). */
+  nivaer: { namn: string; slug: string; farg: string; poster: { id: string; nr: number; titel: string; taggar: string[]; sida?: string }[] }[];
   /** Taggarnas namn efter adressens form: fore-och-efter → Före och efter. */
   taggar: Record<string, string>;
+  /** Metodens poster på nivån tas i tur och ordning, en per pass (plan.enPerPass), och passet visar sin. */
+  enPerPass?: true;
 }
 
 /** Det plansidan visar och räknar med, som JSON i sidan. */
@@ -104,6 +107,9 @@ export interface PlanData {
   /** En tabell med en rad för varje vecka och en kolumn för varje nivå, som Talen och bladen i veckorna: veckans cell för
    * nivån står i planens vecka. */
   nivaTabell?: { rubrik: string; adress: string; veckor: Record<string, Record<string, string>>; not?: string };
+  /** Stödet för nivåvalet (plan.nivaval, K-557): metodens text om nivåerna och tabellen eller avsnittet med mer, som planen
+   * visar under en nerpil vid varje nivåval. */
+  nivaval?: { text: string; mer: { namn: string; adress: string } };
 }
 
 export interface PlanPasset {
@@ -232,6 +238,7 @@ export async function planensData(m: Metod): Promise<PlanData> {
   // veckor och nivåer, som i Faktatextsamtal i grupp (verifieringen av omgång 1 2026-10-26).
   const nivaTabell = bank && (d.progression?.rader ?? []).some((r) => r.taggar?.length) ? undefined : nivaTabellen(d, m.id);
   const forstaChecklista = !!d.checklista && /första|pass 1\b/i.test(d.checklista.rubrik);
+  const nivaval = nivavalet(d, m.id);
   return {
     id: m.id,
     titel: d.titel,
@@ -243,7 +250,7 @@ export async function planensData(m: Metod): Promise<PlanData> {
     mal: planensMal(m),
     tid: d.tid,
     period: d.period,
-    ...(d.progression ? { progression: { enhet: d.progression.enhet, rader: d.progression.rader.map((r) => ({ ...r, kort: r.rubrik ?? (kurs[r.vecka]?.titel || postensRad(r.fokus, 80)) })) } } : {}),
+    ...(d.progression ? { progression: { enhet: d.progression.enhet, rader: d.progression.rader.map((r) => ({ ...r, kort: veckansKort(r, kurs[r.vecka]?.titel) })) } } : {}),
     uppfoljning: { rader: d.uppfoljning?.rader ?? [] },
     checklista: d.checklista?.punkter ?? [],
     ...(d.checklista ? { checklistaRubrik: d.checklista.rubrik } : {}),
@@ -268,7 +275,30 @@ export async function planensData(m: Metod): Promise<PlanData> {
     ...(d.plan?.stege ? { stege: true } : {}),
     ...(!bank && d.nivaer.length >= 2 ? { nivaer: d.nivaer.map((n) => ({ namn: n.namn, slug: slugAv(n.namn), farg: `#${n.farg.toLowerCase()}` })) } : {}),
     ...(nivaTabell ? { nivaTabell } : {}),
+    ...(nivaval ? { nivaval } : {}),
   };
+}
+
+// Veckans namn i planens lista, i Hela planen och i texten till åtgärdsprogrammet: progressionens rubrik, kursens titel för
+// veckan, titeln före kolon i fokus ("Lika delar: eleverna delar …") eller hela första meningen, utan tre punkter (de kalla
+// testarna 2026-10-26: veckans fokus var kapat i texten som klistras in i åtgärdsprogrammet).
+const veckansKort = (r: { rubrik?: string; fokus: string }, titel?: string) => r.rubrik ?? (titel || r.fokus.match(/^([^:.!?]{3,40}):\s/u)?.[1] || postensRad(r.fokus, Infinity));
+
+/** Stödet för nivåvalet med adressen till metodens tabell, avsnitt eller ram med mer, med hela rubriken som den står i
+ * metoden (Codex 2026-10-26: sakernas register har verktygen och rubrikernas första led), eller inget när den inte finns. */
+function nivavalet(d: Metod['data'], id: string): PlanData['nivaval'] {
+  const n = d.plan?.nivaval;
+  if (!n) return undefined;
+  const { ramAnkare, tabellAnkare } = sidansAnkare(d);
+  const rutor = d as unknown as Record<string, { rubrik?: string } | undefined>;
+  const rubriker: [string | undefined, string | undefined][] = [
+    ...d.tabeller.map((t): [string, string | undefined] => [t.rubrik, tabellAnkare.get(t)]),
+    ...sidansAvsnitt(d).map((a): [string | undefined, string] => [rutor[a.id]?.rubrik, a.id]),
+    [d.gruppen?.rubrik, 'gruppen'], [d.principer?.rubrik, 'principer'],
+    ...(d.ramar?.ramar ?? []).map((r, i): [string, string] => [r.rubrik, ramAnkare[i]]),
+  ];
+  const traff = rubriker.find(([r, a]) => !!a && r?.trim() === n.mer.trim());
+  return traff ? { text: n.text.trim(), mer: { namn: n.mer.trim(), adress: `/stodundervisning/${id}#${traff[1]}` } } : undefined;
 }
 
 async function planensBank(m: Metod): Promise<PlanBank | undefined> {
@@ -285,9 +315,10 @@ async function planensBank(m: Metod): Promise<PlanBank | undefined> {
     flera: t.ord.flera,
     nivaer: t.nivaer.map((n) => ({
       namn: n.namn, slug: n.slug, farg: farger[n.namn] ?? n.farg,
-      poster: n.poster.map((p) => ({ id: p.id, nr: p.nr, titel: p.titel, taggar: (p.taggar ?? []).map(slugAv) })),
+      poster: n.poster.map((p) => ({ id: p.id, nr: p.nr, titel: p.titel, taggar: (p.taggar ?? []).map(slugAv), ...(p.sida ? { sida: p.sida } : {}) })),
     })),
     taggar,
+    ...(m.data.plan?.enPerPass ? { enPerPass: true as const } : {}),
   };
 }
 
@@ -306,6 +337,12 @@ export async function insatsplanFel(m: Metod): Promise<string[]> {
   // En tabell som planens pass hänvisar till finns i metoden, så att länken leder dit (betan 2026-10-24).
   for (const p of m.data.plan?.passen ?? []) if (p.tabell && !tabellensAdress(m.data, m.id, p.tabell)) fel.push(`Planens pass "${p.nar}" hänvisar till tabellen "${p.tabell}", som metoden inte har. Skriv tabellens rubrik som den står i metoden.`);
   if (m.data.plan?.stege && metodplan(m.data).plan?.stegEnhet !== 'veckor') fel.push('plan.stege gäller en progression i veckor, där gruppen kan börja på en senare vecka.');
+  // Stödet för nivåvalet (K-557): också en metod vars nivåer bara finns i banken, som Textsamtal i grupp, har det, och mer
+  // är en tabell, ett avsnitt eller en ram i metoden, så att länken leder dit. Standarden prövar text och längd (planFel).
+  const bankensNivaer = harTaFram(m, 'texter') || harTaFram(m, 'problem') ? (await planensBank(m))?.nivaer.length ?? 0 : 0;
+  if (bankensNivaer >= 2 && m.data.nivaer.length < 2) fel.push(...nivavaletsFel(m.data, true));
+  if (m.data.plan?.nivaval && !nivavalet(m.data, m.id)) fel.push(`plan.nivaval.mer säger "${m.data.plan.nivaval.mer}", som inte är en tabell, ett avsnitt eller en ram i metoden. Skriv rubriken som den står i metoden, som Så skiljer sig nivåerna.`);
+  if (m.data.plan?.enPerPass && !(harTaFram(m, 'texter') || harTaFram(m, 'problem'))) fel.push('plan.enPerPass gäller en metod med en bank, där planen visar passets post.');
   // Ett namn som ser ut som en sak i metoden men inte är någon av dem blir ingen länk i planen (K-493).
   const saker = metodensSaker(m.data, m.id);
   for (const [plats, text] of planensTexter(m.data)) for (const namn of olankadeSaker(text, saker)) fel.push(`${plats} nämner "${namn}", men metoden har ingen sak som heter så, och då blir det ingen länk i planen. Skriv namnet som bladet, kortet eller mallen heter i metoden, eller lägg saken i metoden (STIL.md under Hänvisningar).`);

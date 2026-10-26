@@ -28,7 +28,7 @@ material:
   - talsortsmatta
   - veckans kort
   - sifferkort och tärning
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-26
 relaterade:
   - problemlosning-i-grupp
   - brakkurs-i-grupp
@@ -219,7 +219,7 @@ tidsschema:
   rader:
     - tid: Före passet
       fas: Förberedelse
-      vad: Ta fram dagens material, en matta per elev och en till dig, och veckans kort ur gruppens paket. Välj två tal som kräver veckans fokus. Det första talet visar du och bygger sedan tillsammans med eleverna, och det andra talet bygger hela gruppen sist. Bygg båda och säg orden högt för dig själv.
+      vad: Ta fram dagens material, en talsortsmatta per elev och en till dig, och veckans kort ur gruppens paket under Material per årskurs. Välj två tal som kräver veckans fokus. Det första talet visar du och bygger sedan tillsammans med eleverna, och det andra talet bygger hela gruppen sist. Bygg båda och säg orden högt för dig själv.
     - tid: 0–6 min
       fas: Första talet
       vad: Bygg det första talet långsamt framför eleverna och tänk högt. Säg vad du tar, var du lägger det, vad du lyfter och vad du pekar på. Eleverna tittar.
@@ -228,7 +228,7 @@ tidsschema:
       vad: "Alla bygger talet du just visade, ett handgrepp i taget. Säg varje handgrepp, och eleverna gör och säger likadant. Fråga: ”Hur vet du att det är 36 och inte 63?” Gör sedan en kedja med sex till tio korta ändringar på samma tal. Efter varje ändring säger alla vilket tal det blev."
     - tid: 12–21 min
       fas: Korten
-      vad: Läs ett kort, till exempel ”Bygg 36. Ta bort 12.” I paret bygger den ena och berättar vad hen gör, och den andra kontrollerar. De kommer överens om vad som blev kvar och byter roller efter varje kort. Sedan läser paren korten för varandra. Gå runt och lyssna efter veckans vanliga fel, som står under Lyssna efter i rutan Till läraren.
+      vad: Läs ett kort, till exempel ”Bygg 36. Ta bort 12.” I paret bygger den ena och berättar vad hen gör, och den andra kontrollerar. De kommer överens om vad som blev kvar och byter roller efter varje kort. Sedan läser paren korten för varandra. Gå runt och lyssna efter veckans vanliga fel, som står under Lyssna efter i rutan Till läraren i gruppens paket.
     - tid: 21–26 min
       fas: Två kort
       vad: Varje elev får två kort. Eleverna bygger det första medan du går runt. När de bygger det andra lyssnar du på en elev i taget. Saknar någon orden gör ni handgreppet tillsammans igen.
@@ -380,7 +380,7 @@ uppfoljning:
     - nar: Före insatsen
       tid: "före"
       perElev: 10
-      vad: "Gör kartläggningen i gruppens paket utanför passen, med en elev i taget, cirka tio minuter per elev. Läs uppgiften högt och hjälp inte till. Eleven bygger, berättar och skriver. Anteckna för varje uppgift på en kopia av listan: B om eleven byggde rätt, V om eleven växlade själv i materialet och S om eleven använde talsortsord."
+      vad: "Gör kartläggningen i gruppens paket under Material per årskurs utanför passen, med en elev i taget, cirka tio minuter per elev. Läs uppgiften högt och hjälp inte till. Eleven bygger, berättar och skriver. Anteckna för varje uppgift på en kopia av listan: B om eleven byggde rätt, V om eleven växlade själv i materialet och S om eleven använde talsortsord."
     - nar: Varje pass
       tid: "varje pass"
       vad: Anteckna kort vem som växlade själv och kunde säga vad som hände.
@@ -395,7 +395,10 @@ plan:
     - nar: veckans första
       kort: "Tiobas"
       ur: { tabell: "Veckan: ett fokus i tre material", rad: veckans, kolumner: ["Pass 1: tiobas"] }
-      text: "Fråga i början av veckans första pass hur förra veckans läxa gick, och låt eleven visa en uppgift. Läxan delas ut efter veckans första pass och innehåller samma sorts uppgifter som i skolan."
+    - nar: veckans första pass i vecka 2–5
+      text: "Fråga i början av veckans första pass hur förra veckans läxa gick, och låt eleven visa en uppgift."
+    - nar: veckans första
+      text: "Läxan delas ut efter veckans första pass och innehåller samma sorts uppgifter som i skolan."
     - nar: veckans andra
       kort: "Talbrickor"
       ur: { tabell: "Veckan: ett fokus i tre material", rad: veckans, kolumner: ["Pass 2: talbrickor"] }
@@ -404,7 +407,7 @@ plan:
       kort: "Pengar och skrift"
       ur: { tabell: "Veckan: ett fokus i tre material", rad: veckans, kolumner: ["Pass 3: pengar och skrift"] }
       text: "Använd bara enkronor, tiokronor, hundralappar och tusenlappar. Femkronan är större än tiokronan och säger inget om talsorterna."
-    - nar: sista passet
+    - nar: sista passet i vecka 5
       text: "Läxa 5 visar eleven i början av sista passet, med det hen skrev på baksidan."
 mal:
   overgripande: "kunna bygga ett tal, säga talsorterna och växla tio mot en."

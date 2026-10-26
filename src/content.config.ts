@@ -446,6 +446,13 @@ const metodensFalt = z.strictObject({
       justera: z.array(text).min(1).max(4).optional(),
       upprepa: text.optional(),
       stege: z.boolean().optional(),
+      // Stödet för nivåvalet (K-557; Niclas 2026-10-26: "Bör alltid finnas vid ett sådant val i Planeras modul"): ett citat
+      // ur metoden om vad nivåerna skiljer sig i och vad som avgör valet, högst tre meningar och 250 tecken, och mer, namnet
+      // på metodens tabell eller avsnitt med resten, som Så skiljer sig nivåerna (STIL.md under Stöd för ett val).
+      nivaval: z.strictObject({ text, mer: text }).optional(),
+      // Bankens poster på planens nivå i tur och ordning, en per pass, som Problemlösnings problem ("Börja med metodens
+      // problem på nivån, i ordning, ett per pass"): planen visar passets problem (de kalla testarna 2026-10-26).
+      enPerPass: z.literal(true).optional(),
     }).optional(),
     // Målet (K-522; Niclas 2026-10-25: "en metod bör alltid ha ett tydligt generellt mål för elevens lärande och
     // utveckling"): overgripande är metodens övergripande mål i lektionskortens form, "kunna …", som metodens sida och Word

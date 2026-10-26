@@ -144,7 +144,16 @@ const snabbmallensNamn = snabbmall ? (/^snabbmall(en)?$/i.test(snabbmall.rubrik)
                 <div class="sk-nivaknappar pl-nivaer" id="pl-nivaer">
                   {nivaer.map((n) => <button type="button" class="sk-niva" data-niva={n.slug} style={`--niva:${n.farg}`} aria-pressed="false">{n.namn}</button>)}
                 </div>
-                <p class="pl-hjalp">{data.bank ? `Nivån styr vilka ${data.bank.flera} veckan visar.` : data.nivaTabell ? 'Nivån styr veckans tal och blad.' : 'Nivån står i planen.'} Tryck en gång till för att ta bort den.</p>
+                <p class="pl-hjalp">{data.bank?.enPerPass ? `Nivån styr vilket ${data.bank.en} varje pass har.` : data.bank ? `Nivån styr vilka ${data.bank.flera} veckan visar.` : data.nivaTabell ? 'Nivån styr veckans tal och blad.' : 'Nivån står i planen.'} Tryck en gång till för att ta bort den.</p>
+                {/* Stödet för valet (K-557; Niclas 2026-10-26: "en nerpil man kan öppna där OCH som har länk till mer info om valet"):
+                    metodens text om nivåerna och länken till tabellen med mer. Planens veckor visar en kopia vid sina nivåval. */}
+                {data.nivaval && (
+                  <details class="pl-stod" id="pl-nivastod">
+                    <summary data-goatcounter-click={`planera:${data.id}:nivastod`} data-goatcounter-title={`${data.titel}: stödet för nivåvalet`}>Stöd för valet</summary>
+                    <p>{data.nivaval.text}</p>
+                    <p class="pl-hjalp">Mer i metoden: <a href={data.nivaval.mer.adress} data-goatcounter-click={`planera:${data.id}:nivastod-mer`} data-goatcounter-title={`${data.titel}: ${data.nivaval.mer.namn} från stödet för nivåvalet`}>{data.nivaval.mer.namn}</a></p>
+                  </details>
+                )}
               </fieldset>
             )}
             <div class="pl-rad">

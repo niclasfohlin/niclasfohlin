@@ -335,8 +335,24 @@ if (tsMp) {
     const v2andra = s.iDatumordning(s.veckansPass(apl, apl.veckor[1]))[1];
     const rad = { kort: roll?.kort, veckor: veckor ?? {} };
     const b = s.passetsBeskrivning([rad], { delar: [] }, s.passetsLage(apl, v2andra));
-    ska('veckans rad och passets kolumn', !!veckor && Object.keys(veckor).join() === '1,2,3,4,5' && b.texter[0]?.etikett === 'Pass 2: talbrickor' && b.texter[0]?.text.startsWith('Bygg med brickor') && s.rollensVeckor(au, { ...roll.ur, kolumner: ['Pass 9'] }) === null && s.planensRamFel({ ...au, plan: { ...au.plan, passen: [{ nar: 'veckans första', ur: { tabell: 'Finns inte', rad: s.VECKANS_RAD } }] } }).some((x) => x.includes('som metoden inte har')), [b.texter, veckor && Object.keys(veckor)]);
+    ska('veckans rad och passets kolumn', !!veckor && Object.keys(veckor).join() === '1,2,3,4,5' && b.texter[0]?.etikett === '' && b.texter[0]?.text.startsWith('Bygg med brickor') && s.rollensVeckor(au, { ...roll.ur, kolumner: ['Pass 9'] }) === null && s.planensRamFel({ ...au, plan: { ...au.plan, passen: [{ nar: 'veckans första', ur: { tabell: 'Finns inte', rad: s.VECKANS_RAD } }] } }).some((x) => x.includes('som metoden inte har')), [b.texter, veckor && Object.keys(veckor)]);
+    const medTabell = (rader) => ({ ...au, tabeller: au.tabeller.map((t) => (t.rubrik === roll.ur.tabell ? { ...t, rader } : t)) });
+    const tab = au.tabeller.find((t) => t.rubrik === roll.ur.tabell);
+    ska('veckans tabell: en vecka på två rader och en vecka som saknas stoppar', s.rollensVeckor(medTabell([[`1–2${tab.rader[0][0].slice(1)}`, ...tab.rader[0].slice(1)], ...tab.rader.slice(1)]), roll.ur) === null && s.planensRamFel(medTabell(tab.rader.filter((_, i) => i !== 2))).some((x) => x.includes('saknar en rad för vecka 3')) && !s.planensRamFel(au).length, s.planensRamFel(medTabell(tab.rader.filter((_, i) => i !== 2))));
     ska('översikten är en mening om metodens sida', s.planensRamFel({ ...metod('brakkurs-i-grupp'), plan: { ...metod('brakkurs-i-grupp').plan, utan: undefined } }).some((x) => x.includes('Översikten visar')));
+    // Länkgranskningen och de kalla testarna av omgång 3: frågan om förra veckans läxa från vecka 2, och Läxa 5 bara när
+    // sista passet är i vecka 5, så att en insats som avslutas tidigare inte nämner den.
+    const texterFor = (p) => s.passetsRoller(apl, p, amp.passen).map((x) => au.plan.passen[x].text ?? '');
+    const forsta = (v) => s.iDatumordning(s.veckansPass(apl, apl.veckor[v - 1]))[0];
+    const sista5 = s.variantensNar('sista passet i vecka 5');
+    ska('läxan från vecka 2, och Läxa 5 när sista passet är i vecka 5', !texterFor(forsta(1)).some((x) => x.includes('förra veckans läxa')) && texterFor(forsta(2)).some((x) => x.includes('förra veckans läxa')) && texterFor(forsta(1)).some((x) => x.startsWith('Läxan delas ut')) && texterFor(apl.pass.at(-1)).some((x) => x.startsWith('Läxa 5')) && JSON.stringify(sista5) === '{"typ":"sista","veckor":{"fran":5,"till":5}}' && s.passetTraffas(sista5, { sista: true, vecka: 5 }) && !s.passetTraffas(sista5, { sista: true, vecka: 4 }) && !s.passetTraffas(sista5, { sista: false, vecka: 5 }), [texterFor(forsta(1)), texterFor(forsta(2)), sista5]);
+  }
+  // Stödet för nivåvalet (K-557; Niclas 2026-10-26: "Bör alltid finnas vid ett sådant val i Planeras modul"): en metod med
+  // nivåer har det, högst tre meningar och NIVAVALETS_LANGD tecken, och texten står ordagrant i metoden.
+  {
+    const pl = metod('problemlosning-i-grupp');
+    const med = (nivaval) => ({ ...pl, plan: { ...pl.plan, nivaval } });
+    ska('stödet för nivåvalet', !s.nivavaletsFel(pl).length && !s.planensCitatFel(pl).length && s.nivavaletsFel(med(undefined)).length === 1 && !s.nivavaletsFel(med(undefined), false).length && s.nivavaletsFel(med({ text: 'Ord '.repeat(70).trim() + '.', mer: 'Så skiljer sig nivåerna' })).some((x) => x.includes(`högst ${s.NIVAVALETS_LANGD}`)) && s.nivavaletsFel(med({ text: 'Ett. Två. Tre. Fyra.', mer: 'Så skiljer sig nivåerna' })).some((x) => x.includes('fyra meningar') || x.includes('4 meningar')) && s.planensCitatFel(med({ text: 'Välj den nivå som känns bäst.', mer: 'Så skiljer sig nivåerna' })).some((x) => x.startsWith('Planens nivåval')), [s.nivavaletsFel(pl), s.planensCitatFel(pl)]);
   }
   ska('elevlistan rymmer en hel klass', s.ELEVLISTANS_LANGD >= 30 && s.rensaFoljd({ elever: Array.from({ length: 40 }, (_, i) => ({ id: `e${i}`, namn: `Elev ${i}` })) }).elever.length === s.ELEVLISTANS_LANGD);
   ska('en tabellrad säger sina veckor', JSON.stringify(s.radensVeckor('3 Venndiagrammet')) === '{"fran":3,"till":3}' && JSON.stringify(s.radensVeckor('7–8 Gruppen väljer modell')) === '{"fran":7,"till":8}' && s.radensVeckor('Vecka 2 · Lästräning')?.fran === 2 && s.radensVeckor('Hemma') === null && s.radensVeckor('12a') === null);
@@ -1064,6 +1080,8 @@ for (const m of planbara) {
   const namnFor = new Map();
   const nyttNamn = (adress, namn) => { const a = adress.split('#')[1]; if (a) namnFor.set(a, [...(namnFor.get(a) ?? []), namn]); };
   for (const x of d.saker ?? []) for (const a of [x.adress, ...Object.values(x.nivaer ?? {}), ...Object.values(x.veckor ?? {})]) nyttNamn(a, x.namn);
+  // En sak med en adress per vecka, som veckans ram, leder till veckans egen sak, och knappen där heter efter veckan.
+  for (const x of d.saker ?? []) for (const [v, a] of Object.entries(x.veckor ?? {})) nyttNamn(a, `Vecka ${v}`);
   for (const [v, a] of Object.entries(d.kursveckor ?? {})) nyttNamn(a, `Vecka ${v}`);
   const sakfilerna = new Set(bankfilerna.filter((x) => x.metod === m.id && x.slag === 'sak').map((x) => `/stodundervisning/${x.namn}.pdf`));
   for (const ankare of new Set(mal.filter((a) => a.startsWith(`/stodundervisning/${m.id}#`)).map((a) => a.split('#')[1]))) {
@@ -1845,6 +1863,20 @@ try {
   await helg.kor(`localStorage.setItem('insatser', ${JSON.stringify(JSON.stringify(lovLagrat))})`);
   await helg.oppna(PLAN);
   sant('ett lov går bara att lägga efter det som har förts in', await helg.kor(`document.querySelector('[data-lovvecka="2026-45"]')?.disabled === true && document.querySelector('[data-lovvecka="2026-46"]')?.disabled === false && !document.getElementById('pl-lov-not').hidden`), await helg.kor(`[...document.querySelectorAll('[data-lovvecka]')].map((b) => b.dataset.lovvecka + (b.disabled ? '!' : '')).join(' ')`));
+  // En vecka tas inte om när något är infört i en vecka efter den (Codex 2026-10-26): med en skattning i vecka 2 har
+  // vecka 1 ingen Upprepa veckan, men vecka 2 har den.
+  const upprepaLagrat = { ...lovLagrat, planer: lovLagrat.planer.map((p) => ({ ...p, foljd: { ...p.foljd, skattning: { '2026-11-09': { grupp: 3 } } } })) };
+  await helg.kor(`localStorage.setItem('insatser', ${JSON.stringify(JSON.stringify(upprepaLagrat))})`);
+  await helg.oppna(PLAN);
+  const upprepaI = async (v) => { await helg.tryck(`#pl-veckan .pl-remsa [data-vy="${v}"]`); await vanta(150); return helg.kor(`!!document.querySelector('#pl-veckan [data-gor="upprepa"]')`); };
+  const u1 = await upprepaI(1), u2 = await upprepaI(2);
+  sant('en vecka tas inte om när något är infört i en senare vecka', !u1 && u2, { u1, u2 });
+  // Ta bort upprepningen flyttar den upprepade veckan: med en skattning i den går det inte, och ett tomt värde låser inget
+  // (Codex 2026-10-26).
+  const medUpprepning = (skattning) => ({ ...lovLagrat, planer: lovLagrat.planer.map((p) => ({ ...p, val: s.kodaVal({ ...s.lasVal(`#${p.val}`).val, upprepa: [1] }), foljd: { ...p.foljd, skattning } })) });
+  const taBortI = async (skattning) => { await helg.kor(`localStorage.setItem('insatser', ${JSON.stringify(JSON.stringify(medUpprepning(skattning)))})`); await helg.oppna(PLAN); await helg.tryck('#pl-veckan .pl-remsa [data-vy="2"]'); await vanta(150); return helg.kor(`!!document.querySelector('#pl-veckan [data-gor="ta-bort-upprepning"]')`); };
+  const tb = { skattad: await taBortI({ '2026-11-09': { grupp: 3 } }), tom: await taBortI({ '2026-11-09': {} }) };
+  sant('Ta bort upprepningen går inte när något är infört i den upprepade veckan, och ett tomt värde låser inget', !tb.skattad && tb.tom, tb);
   sant('inga fel på söndagen', !helg.undantag.length, helg.undantag);
   helg.stang();
 
@@ -1866,6 +1898,25 @@ try {
     // Boksamtalets tabell Perioden och Upprepad läsnings text i veckan (omgång 1 2026-10-26).
     sant(`${m.id}: den sparade planen visar veckan med fokus eller passets roll`, await b.kor(`!document.getElementById('pl-veckan').hidden && !!document.querySelector('#pl-veckan .pl-fokusruta, #pl-veckan .pl-roll')`), await b.text('#pl-veckan'));
     sant(`${m.id}: planens länkar leder till sidor och ankare som finns`, !lankFel(await sakLankar(b)).length, [await sakLankar(b), lankFel(await sakLankar(b))]);
+    // Stödet för nivåvalet vid varje nivåval (K-557): nerpilen under formulärets nivåer och under varje nivåval i veckan,
+    // med metodens text och en länk som finns.
+    const stod = await b.kor(`(() => { const nivaer = [...document.querySelectorAll('.pl-nivaer')]; return { antal: nivaer.length, utan: nivaer.filter((n) => !n.parentElement.querySelector(':scope > .pl-stod')).length, text: document.querySelector('#pl-nivastod > p')?.textContent ?? '', lank: document.querySelector('#pl-nivastod a')?.getAttribute('href') ?? '' }; })()`);
+    if (stod.antal) sant(`${m.id}: varje nivåval har Stöd för valet med metodens text och en länk`, !stod.utan && stod.text.length > 20 && stod.text.length <= s.NIVAVALETS_LANGD && !!stod.lank && !lankFel([stod.lank]).length, stod);
+    if (m.id === 'brakkurs-i-grupp') {
+      const veckansRam = async (v) => { await b.tryck(`#pl-veckan .pl-remsa [data-vy="${v}"]`); await vanta(150); return b.kor(`[...document.querySelectorAll('#pl-veckan a')].find((a) => a.textContent === 'veckans ram')?.getAttribute('href') ?? ''`); };
+      const r1 = await veckansRam(1), r2 = await veckansRam(2);
+      sant('kurs med en ram per vecka: veckans ram leder till veckans egen ram', !!r1 && !!r2 && r1 !== r2 && !lankFel([r1, r2]).length, [r1, r2]);
+      await b.tryck('#pl-veckan .pl-remsa [data-vy="3"]');
+      await vanta(150);
+    }
+    if (m.id === 'problemlosning-i-grupp') {
+      const utanNiva = await b.text('#pl-veckan .pl-nasta');
+      const stodIVeckan = await b.kor(`!!document.querySelector('#pl-veckan .pl-nasta .pl-nivaval .pl-stod a')`);
+      await b.tryck('#pl-veckan .pl-nasta [data-valj-niva="bas"]');
+      await vanta(200);
+      const post = await b.kor(`(() => { const p = [...document.querySelectorAll('#pl-veckan .pl-nasta .pl-roll')].find((x) => x.textContent.startsWith('Passets problem')); const a = p?.querySelector('a'); return a ? [a.textContent, a.getAttribute('href')] : null; })()`);
+      sant('bankens poster en per pass: passet visar sitt problem på gruppens nivå, med länk', !!utanNiva?.includes('Välj gruppens nivå, så visar passet sitt problem') && stodIVeckan && !!post && /\(Bas, problem \d+\)$/.test(post[0]) && !lankFel([post[1]]).length, [post, stodIVeckan, utanNiva?.slice(0, 160)]);
+    }
     if (m.id === 'fyra-raknesatten') {
       const lektion = await b.kor(`document.querySelector('#pl-veckan a[data-goatcounter-click$=":kursvecka"]')?.getAttribute('href')`);
       sant('kurs i veckor: veckan leder till veckans lektion i metoden', !!lektion && !lankFel([lektion]).length && (await b.text('#pl-veckan a[data-goatcounter-click$=":kursvecka"]')) === 'Vecka 3 i metoden, med veckans manus', lektion);

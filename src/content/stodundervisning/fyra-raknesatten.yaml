@@ -412,6 +412,9 @@ uppfoljning:
 plan:
   utan:
     - "Remsan visar när du leder, när alla arbetar tillsammans och när eleven provar själv."
+  nivaval:
+    text: "Nivåerna skiljer sig i talen och i om eleven går vidare till kort multiplikation och kort division. Välj nivå efter kartläggningen och inte efter årskurs. Gruppens nivå är den där eleverna räknar en del rätt men inte kan förklara växlingen."
+    mer: Så skiljer sig nivåerna
   passen:
     - nar: veckans första
       kort: "Bygga"

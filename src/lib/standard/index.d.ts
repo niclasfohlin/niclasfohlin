@@ -110,7 +110,7 @@ export interface Steg { rad: number; fran: number; till?: number; vidBehov: bool
 /** Vilka pass en rad i planens passen gäller: platsen i veckan, eller numret i insatsen. */
 export type PassensNar = { typ: 'vecka'; plats: number | 'sista' | 'ovriga' } | { typ: 'pass'; fran: number; till?: number } | { typ: 'sista' } | { typ: 'nastSista' } | { typ: 'veckor'; fran: number; till: number };
 /** När en variant av passet gäller: planens ord för passen, passets längd, eller en plats i vissa veckor. */
-export type VariantensNar = PassensNar | { typ: 'minuter'; minuter: number } | { typ: 'vecka'; plats: number | 'sista' | 'ovriga'; veckor: { fran: number; till: number } };
+export type VariantensNar = PassensNar | { typ: 'minuter'; minuter: number } | { typ: 'vecka'; plats: number | 'sista' | 'ovriga'; veckor: { fran: number; till: number } } | { typ: 'sista'; veckor: { fran: number; till: number } };
 /** Var ett pass står i planen, som en rad i planens passen och en variant läser det. */
 export type PassetsLage = { nr?: number; sista?: boolean; nastSista?: boolean; vecka?: number; plats?: number; sistIVeckan?: boolean; minuter?: number };
 /** Metodens plan: hur ofta, passets längd, perioden, progressionens steg och uppföljningens tider. */
@@ -138,7 +138,7 @@ export declare function radensVeckor(text: unknown): { fran: number; till: numbe
 /** Veckorna i "vecka 3" och "vecka 1–2" som ett spann. */
 export declare function veckorI(text: unknown): { fran: number; till: number } | null;
 export declare function metodplan(d: { tid?: string; period?: string; progression?: { enhet?: string; rader: { vecka: string; taggar?: string[] }[] }; uppfoljning?: { rader: { nar: string; tid?: string }[] }; plan?: { passen?: { nar: string }[] } }): { fel: string[]; plan?: Metodplan };
-export type MetodensTexter = { uppfoljning?: { rader: { nar: string; vad: string }[] }; progression?: { rader: { vecka: string; fokus?: string; roll?: string; led?: string }[] }; checklista?: { punkter: string[] }; plan?: { passen?: { nar: string; text?: string; ur?: { tabell: string; rad: string; kolumner?: string[] }; kort?: string; tabell?: string }[]; fore?: string[]; justera?: string[]; upprepa?: string; utan?: string[]; stege?: boolean }; tidsschema?: { text?: string; efter?: string; rader: { tid: string; fas: string; vad: string }[]; varianter?: Variant[] }; gruppen?: { text: string }; passrutin?: { efterPasset?: string }; principer?: { text: string }; hem?: { text: string[] }; tabeller?: { rubrik: string; kolumner: string[]; rader?: unknown[][] }[]; nivaer?: { namn: string }[] };
+export type MetodensTexter = { uppfoljning?: { rader: { nar: string; vad: string }[] }; progression?: { rader: { vecka: string; fokus?: string; roll?: string; led?: string }[] }; checklista?: { punkter: string[] }; plan?: { passen?: { nar: string; text?: string; ur?: { tabell: string; rad: string; kolumner?: string[] }; kort?: string; tabell?: string }[]; fore?: string[]; justera?: string[]; upprepa?: string; utan?: string[]; stege?: boolean; nivaval?: { text: string; mer: string } }; tidsschema?: { text?: string; efter?: string; rader: { tid: string; fas: string; vad: string }[]; varianter?: Variant[] }; gruppen?: { text: string }; passrutin?: { efterPasset?: string }; principer?: { text: string }; hem?: { text: string[] }; tabeller?: { rubrik: string; kolumner: string[]; rader?: unknown[][] }[]; nivaer?: { namn: string }[] };
 /** Tidsschemats text som planen visar den, utan meningarna i plan.utan. */
 export declare const planensInledning: (text: string | undefined, utan?: string[]) => string;
 /** Planens egna fält och texterna som bara planen läser, med var de står. */
@@ -155,6 +155,10 @@ export declare const VECKANS_RAD: string;
 export declare function rollensVeckor(d: MetodensTexter, ur: { tabell: string; rad: string; kolumner?: string[] }): Record<string, { kolumn: string; text: string }[]> | null;
 /** Planens egna texter citerar metoden ordagrant. */
 export declare function planensCitatFel(d: MetodensTexter & Record<string, unknown>): string[];
+/** Hur långt stödet för nivåvalet får vara, i tecken (STIL.md under Stöd för ett val). */
+export declare const NIVAVALETS_LANGD: number;
+/** Stödet för nivåvalet: en metod med nivåer har plan.nivaval, ett citat på högst tre meningar och NIVAVALETS_LANGD tecken. */
+export declare function nivavaletsFel(d: MetodensTexter & { nivaer?: unknown[] }, harNivaer?: boolean): string[];
 export declare function planFel(d: Parameters<typeof metodplan>[0] & MetodensTexter): string[];
 /** Metodens fil utan planens fält (`plan`, uppföljningens `tid`, progressionens `taggar` och `rubrik`), som bara planens sida läser. */
 export declare function utanPlanensFalt<T extends Record<string, any>>(d: T): T;
