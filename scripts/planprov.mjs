@@ -459,7 +459,8 @@ const planbara = alla.filter((m) => m.d.uppfoljning?.rader?.length && m.d.uppfol
 // längd, och är den enda metoden med planen som gör det.
 {
   const langder = planbara.filter((m) => !s.delarIFoljd((m.d.tidsschema?.rader ?? []).filter((r) => /^\d/.test(r.tid.trim())))).map((m) => m.id);
-  ska('passets delar som platser eller som längder', s.delarIFoljd([{ tid: '0–8 min' }, { tid: '8–18 min' }]) && !s.delarIFoljd([{ tid: '1–3 min' }, { tid: '1–2 min' }]) && !s.delarIFoljd([{ tid: '0–5 min' }, { tid: '6–9 min' }]) && !s.delarIFoljd([]) && langder.join() === 'gruppstarkande-aktiviteter', langder);
+  const gruppstarkande = (alla.find((m) => m.id === 'gruppstarkande-aktiviteter')?.d.tidsschema?.rader ?? []).filter((r) => /^\d/.test(r.tid.trim()));
+  ska('passets delar som platser eller som längder', s.delarIFoljd([{ tid: '0–8 min' }, { tid: '8–18 min' }]) && !s.delarIFoljd([{ tid: '1–3 min' }, { tid: '1–2 min' }]) && !s.delarIFoljd([{ tid: '0–5 min' }, { tid: '6–9 min' }]) && !s.delarIFoljd([]) && gruppstarkande.length > 0 && !s.delarIFoljd(gruppstarkande) && !langder.length, langder);
 }
 for (const m of planbara) {
   const { fel: f, plan: mp } = s.metodplan(m.d);
@@ -1213,7 +1214,9 @@ const rullar = (f) => f.kor('document.documentElement.scrollWidth > innerWidth +
 // Planens länkar till det metoden namnger (K-493): varje länk leder till en sida i dist, och ett ankare till ett id på sidan.
 const sakLankar = (f) => f.kor(`[...document.querySelectorAll('a[data-goatcounter-click$=":sak"]')].map((a) => a.getAttribute('href'))`);
 const lankFel = (lankar) => (lankar ?? []).filter((h) => {
-  const [vag, ankare] = h.split('?')[0].split('#');
+  const [kort, ankare] = h.split('?')[0].split('#');
+  // Korta adresser som Netlify leder vidare, som /gruppstarkande, prövas där de landar (omdirigeringar ovan).
+  const vag = omdirigeringar[kort] ?? kort;
   // En länk till en fil, som lektionskortets pdf, prövas som fil.
   if (/\.[a-z0-9]{2,4}$/i.test(vag)) return !existsSync(join(dist, vag));
   const fil = join(dist, vag, 'index.html');
@@ -1690,7 +1693,7 @@ try {
   sant('efter insatsen: passen är slut, och planen säger när den avslutas av sig själv', (await h.text('#pl-veckan .pl-nasta .pl-etikett')) === 'Den här veckan' && (await h.text('.pl-nar')) === 'Efter insatsen, v. 51, 14–18 dec' && !(await h.kor(`!!document.querySelector('#pl-veckan [data-fil="lathund"]')`)) && (await h.kor(`document.querySelector('#pl-lage .pl-status')?.textContent`)) === 'Pågående' && (await h.text('#pl-lage'))?.includes('Sista passet var fredag 11 december. Planen avslutas av sig själv fredag 1 januari, om du inte avslutar den före.') && !!(await h.kor(`!!document.querySelector('#pl-lage [data-vy="efter"]')`)), [await h.text('.pl-nar'), await h.text('#pl-lage')]);
   sant('efter insatsen: kartläggningens text efter leder till planens nivå', (await h.kor(`[...document.querySelectorAll('#pl-veckan .pl-uppf a')].map((a) => a.getAttribute('href')).join()`))?.includes('/stodundervisning/textsamtal-i-grupp/mellan-kartlaggning-efter') && !lankFel(await sakLankar(h)).length, await h.kor(`[...document.querySelectorAll('#pl-veckan .pl-uppf a')].map((a) => a.getAttribute('href')).join()`));
   sant('efter insatsen: metodens uppföljning efter, ett fält per elev', (await h.kor(`document.querySelectorAll('#pl-veckan [data-resultat^="2-2026-12-14|"]').length`)) === 3);
-  sant('efter insatsen: utvärderingen med målet, varje elevs riktning och resultaten före och efter', (await h.text('.pl-stam h3')) === 'Utvärdering efter insatsen' && (await h.text('.pl-stam .pl-maltext'))?.includes('Kunna läsa mellan raderna') && (await h.text('.pl-stam .pl-riktningar'))?.includes('1 till 3, framåt') && (await h.text('.pl-stam .pl-riktningar'))?.includes('Före 2 av 8, efter 4 av 8'), await h.text('.pl-stam'));
+  sant('efter insatsen: utvärderingen med målet, varje elevs riktning och resultaten före och efter', (await h.text('.pl-stam h3')) === 'Utvärdering efter insatsen' && (await h.text('.pl-stam .pl-maltext'))?.includes('Kunna läsa mellan raderna') && (await h.text('.pl-stam .pl-riktningar'))?.includes('1 till 3, framåt') && (await h.text('.pl-stam .pl-riktningar'))?.includes('Före insatsen: 2 av 8, Efter insatsen: 4 av 8'), await h.text('.pl-stam'));
   sant('efter insatsen: sammanställningen', (await h.text('#pl-samman-rubrik')) === 'Sammanställningen' && (await h.text('#pl-samman'))?.includes('16 av 18 pass är bockade som genomförda.') && (await h.text('#pl-samman'))?.includes('Var med i'), await h.text('#pl-samman'));
   sant('efter insatsen: de tre eleverna i sammanställningen', (await h.kor(`document.querySelectorAll('#pl-samman details[data-elev]').length`)) === 3);
   for (const b of [320, 360, 390]) { await h.bredd(b); await vanta(150); sant(`efter insatsen rullar inte i sidled i ${b} punkter`, !(await rullar(h))); }
@@ -1923,6 +1926,12 @@ try {
     // med metodens text och en länk som finns.
     const stod = await b.kor(`(() => { const nivaer = [...document.querySelectorAll('.pl-nivaer')]; return { antal: nivaer.length, utan: nivaer.filter((n) => !n.parentElement.querySelector(':scope > .pl-stod')).length, text: document.querySelector('#pl-nivastod > p')?.textContent ?? '', lank: document.querySelector('#pl-nivastod a')?.getAttribute('href') ?? '' }; })()`);
     if (stod.antal) { stodMetoder.push(m.id); if (!(!stod.utan && stod.text.length > 20 && stod.text.length <= s.NIVAVALETS_LANGD && !!stod.lank && !lankFel([stod.lank]).length)) stodFel.push({ metod: m.id, ...stod }); }
+    // Uppföljningen i ett visst pass står i rutan med passet: Kompissamtals uppföljning efter samtal 3 (den kalla testaren av
+    // omgång 5 2026-10-26).
+    if (m.id === 'kompissamtal') {
+      const pass3 = await b.kor(`(() => { const r = [...document.querySelectorAll('#pl-veckan .pl-nasta .pl-roll .pl-etikett')].map((x) => x.textContent); return { rubrik: document.querySelector('#pl-veckan .pl-nasta .pl-passnamn')?.textContent ?? '', etiketter: r }; })()`);
+      sant('uppföljningen i ett visst pass står i rutan med passet', !/^Pass 3 /.test(pass3.rubrik) || pass3.etiketter.some((x) => /samtal.3/.test(x)), pass3);
+    }
     if (m.id === 'brakkurs-i-grupp') {
       const veckansRam = async (v) => { await b.tryck(`#pl-veckan .pl-remsa [data-vy="${v}"]`); await vanta(150); return b.kor(`[...document.querySelectorAll('#pl-veckan a')].find((a) => a.textContent === 'veckans ram')?.getAttribute('href') ?? ''`); };
       const r1 = await veckansRam(1), r2 = await veckansRam(2);

@@ -915,7 +915,8 @@ const foreOchEfter = (e: SammanstallningElev) => {
   const alla = elevensResultat(plan, e.resultat);
   const fore = alla.find((x) => x.typ === 'fore');
   const efter = [...alla].reverse().find((x) => x.typ === 'efter');
-  return [fore ? `före ${fore.varde}` : '', efter ? `efter ${efter.varde}` : ''].filter(Boolean).join(', ');
+  // Med uppföljningens namn, "Före samtal 1: 5", så att resultatet inte läses som skattningen (den kalla testaren 2026-10-26).
+  return [fore ? `${uppfNamn(fore.rad)}: ${fore.varde}` : '', efter ? `${uppfNamn(efter.rad)}: ${efter.varde}` : ''].filter(Boolean).join(', ');
 };
 // Ett namn går att trycka på var det står, och fäller ut elevens utveckling under raden: i skattningen, avstämningen och
 // utvärderingen (Niclas 2026-10-24: "trycka på ett namn och se dennes utveckling", "både sammanställning av alla elever i
@@ -932,7 +933,11 @@ const riktningar = (s: Sammanstallning, plats: string, medResultat = false) => `
 const resultatfalt = (nyckel: string) => (harElever() ? `<div class="pl-resultat"><span class="pl-hjalp">Resultat för varje elev, om du vill</span>${aktiv.foljd.elever.map((e) => `<label><span>${esc(e.namn)}</span><input class="pl-falt" type="text" maxlength="40" data-resultat="${esc(nyckel)}|${esc(e.id)}" value="${esc(aktiv.foljd.resultat[nyckel]?.[e.id] ?? '')}" /></label>`).join('')}</div>` : '');
 // Uppföljningens namn ur standarden, som i raden och texterna: Efter insatsen för den första efter insatsen (buggjakten
 // 2026-10-25: Efter-sidan sa "Efter sex till åtta veckor" om en plan på fyra veckor).
-const uppfRad = (x: { nyckel: string; rad: number; datum: string; vecka: number | null }) => `<li><span class="pl-etikett">${esc(uppfNamn(x.rad))} · ${x.vecka === null ? kalendervecka(isoVecka(x.datum).vecka) : esc(dagText(x.datum))}</span><p>${lankad(data.uppfoljning.rader[x.rad].vad)}</p>${resultatfalt(x.nyckel)}</li>`;
+// Resultat per elev hör till uppföljningens mätningar, före, efter och vid ett visst pass eller en viss vecka, och inte till
+// det som görs varje pass, varje vecka eller varannan vecka (den kalla testaren av Gruppstärkande aktiviteter 2026-10-26: läraren
+// skattade på tre ställen).
+const medResultat = (rad: number, nyckel: string) => (['lopande', 'intervall', 'villkor'].includes(plan.uppfoljning.find((u) => u.rad === rad)?.typ ?? '') ? '' : resultatfalt(nyckel));
+const uppfRad = (x: { nyckel: string; rad: number; datum: string; vecka: number | null }) => `<li><span class="pl-etikett">${esc(uppfNamn(x.rad))} · ${x.vecka === null ? kalendervecka(isoVecka(x.datum).vecka) : esc(dagText(x.datum))}</span><p>${lankad(data.uppfoljning.rader[x.rad].vad)}</p>${medResultat(x.rad, x.nyckel)}</li>`;
 const meningsfalt = (id: string, etikett: string, attr: string, varde: string) => `<label class="pl-etikett" for="${id}">${esc(etikett)}</label><input class="pl-falt pl-brett" type="text" id="${id}" maxlength="200" ${attr} value="${esc(varde)}" /><p class="pl-hjalp">Meningen står i sammanställningen och i texten som kopieras, utan elevernas namn.</p>`;
 // Det ett avslut stryker, ur planens struket: passen efter sista passet i veckan och veckorna efter, en eller två veckor med
 // namn och fler som ett spann (K-542): "pass 14 och 15 i veckan och vecka 6 till 8 (v. 45–47)". Veckorna heter som i
@@ -1096,12 +1101,16 @@ function passetsRuta(p: Pass | undefined, oppna: Set<string>, mitt = ''): string
   const rubrik = egna ? 'Passets delar' : b.rubrik ?? data.passet?.rubrik ?? 'Passets delar';
   if (!egna && data.passet?.not) rader.push(rad('mer', '', 'Mer om passet', `<p>${lankad(mening(data.passet.not))}</p>`));
   const inledning = [...(b.rubrik && b.variantText ? [b.variantText] : []), ...(!egna && data.passet?.text ? [data.passet.text] : [])].map((t) => `<p class="pl-not pl-delinledning">${lankad(mening(t))}</p>`).join('');
-  return `${namn}${roll}${postRad}${tabellRad}${mitt}${rader.length ? `<div class="pl-delar"><p class="pl-delrubrik">${esc(stor(rubrik))}${klockslag ? ', med passets klockslag' : ''}</p>${inledning}${rader.join('')}</div>` : ''}`;
+  return `${namn}${roll}${postRad}${p ? uppfoljningIPasset(p) : ''}${tabellRad}${mitt}${rader.length ? `<div class="pl-delar"><p class="pl-delrubrik">${esc(stor(rubrik))}${klockslag ? ', med passets klockslag' : ''}</p>${inledning}${rader.join('')}</div>` : ''}`;
 }
 
 // Passets post i banken, när metoden tar bankens poster i tur och ordning, en per pass (plan.enPerPass; Problemlösning:
 // "Börja med metodens problem på nivån, i ordning, ett per pass"): metodens poster på planens nivå efter nummer, och passet
 // har posten på samma plats som passets nummer (de kalla testarna 2026-10-26: "nästa problem" hade inget namn).
+// Det metodens uppföljning gör i just det här passet, som Gruppstärkande aktiviteters gruppreflektion varannan vecka och
+// Kompissamtals uppföljning efter samtal 3, står också i rutan med passet (den kalla testaren 2026-10-26: gruppreflektionen
+// syntes bara under veckans uppföljning). Det som görs i varje pass står redan i passets delar.
+const uppfoljningIPasset = (p: Pass) => plan.uppfoljning.filter((u) => ['intervall', 'pass', 'sista-passet'].includes(u.typ) && u.tillfallen.some((t) => t.datum === p.datum)).map((u) => `<p class="pl-roll"><span class="pl-etikett">${esc(uppfNamn(u.rad))}</span> ${lankad(mening(data.uppfoljning.rader[u.rad].vad))}</p>`).join('');
 type PassetsPost = { namn: string; adress: string } | { slut: string; namn: string; adress: string };
 function passetsPost(p: Pass): PassetsPost | undefined {
   const b = data.bank, niva = b?.nivaer.find((n) => n.slug === aktiv.val.niva);
@@ -1177,7 +1186,7 @@ function foreDelar(oppna: Set<string>): string[] {
   const material = [...filnamn().filter((n) => n.startsWith('lektionskort')).map(plats), plats('lathund')].filter(Boolean);
   delar.push(`<div class="pl-nasta pl-forerutan"><span class="pl-etikett">Före start</span><p class="pl-nar">${esc(nartid)}</p>${material.length ? `<p class="metod-centrala">${material.join('')}</p>` : ''}${metodensLankar()}</div>`);
   const saker = [
-    ...uppfoljningensTillfallen(plan).filter((x) => x.vecka === 0).map((x) => `<li><span class="pl-etikett">${esc(uppfNamn(x.rad))}</span><p>${lankad(data.uppfoljning.rader[x.rad].vad)}</p>${tidForGruppen(x.rad) ? `<p class="pl-not">${esc(tidForGruppen(x.rad))}</p>` : ''}${resultatfalt(x.nyckel)}</li>`),
+    ...uppfoljningensTillfallen(plan).filter((x) => x.vecka === 0).map((x) => `<li><span class="pl-etikett">${esc(uppfNamn(x.rad))}</span><p>${lankad(data.uppfoljning.rader[x.rad].vad)}</p>${tidForGruppen(x.rad) ? `<p class="pl-not">${esc(tidForGruppen(x.rad))}</p>` : ''}${medResultat(x.rad, x.nyckel)}</li>`),
     ...(data.fore ?? []).map((t) => `<li><p>${lankad(mening(t))}</p></li>`),
   ];
   if (saker.length) delar.push(`<section class="pl-block"><h3>Det du gör före första passet</h3><ul class="pl-uppf">${saker.join('')}</ul></section>`);

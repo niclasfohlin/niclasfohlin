@@ -2,6 +2,7 @@
 
 ## 0.20.0, 2026-10-26
 
+- `saker.js`, `sakensFormer`: ett namn på -ion har sina former, gruppreflektionen och gruppreflektionerna (länkgranskningen av sajtens omgång 5 samma dag).
 - `plan.js`, `delarIFoljd`: följer passets delar på varandra från minut 0, så att tiderna är platser i passet? Planen skriver klockslag bara då, och en metod som säger delarnas längd, som Gruppstärkande aktiviteter, behåller dem (Codex samma dag: klockslagen gick bakåt).
 - `plan.js`, `tidsschematsFel` prövar också raden efter tidsschemat, `tidsschema.efter`, så att passets tider i en mening där också stannar och blir en variant (riggens omgång 5 samma dag: Kompissamtals tider för samtal 1 stod i raden efter).
 

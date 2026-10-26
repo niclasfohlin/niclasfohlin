@@ -72,7 +72,7 @@ tabeller:
           1
           Ramarna
         - |-
-          Du visar talpinnen, läser reglerna och visar skillnaden mellan ett du-⁠budskap och ett jag-⁠budskap. Säg varför gruppen är här, utan att peka ut någon. Gruppen kommer överens om en första liten sak, och du säger vilken kamrat var och en ska lägga märke till.
+          Du visar talpinnen, läser reglerna på kortet Våra samtalsregler och visar skillnaden mellan ett du-⁠budskap och ett jag-⁠budskap. Säg varför gruppen är här, utan att peka ut någon. Gruppen kommer överens om en första liten sak, och du säger vilken kamrat var och en ska lägga märke till.
           Rundans mening är ”Jag känner mig glad när vi ___.”
       - - |-
           2
@@ -255,29 +255,29 @@ passrutin:
       fas: Komma överens
     - text: Talpinnen går ett sista varv, och var och en säger vad hen själv ska göra till nästa gång och tackar någon.
       fas: Avsluta
-  efterPasset: Du skriver i snabbmallen det eleverna sa och vad som händer nästa gång, kryssar det som ska med och fyller i lapparna hem. Sedan berättar du för klassläraren och för de vuxna på rasten och på fritids vad gruppen har kommit överens om.
+  efterPasset: Du skriver i snabbmallen det eleverna sa och vad som händer nästa gång, kryssar det som ska med och fyller i Lappen hem efter samtalet till varje elev. Sedan berättar du för klassläraren och för de vuxna på rasten och på fritids vad gruppen har kommit överens om.
 tidsschema:
   rubrik: Ett samtal på 20 minuter
-  text: Läs förra överenskommelsen och rundans mening i tabellen Tre samtal, och skriv i snabbmallen vad eleverna ska öva. Schemat har tiderna från och med samtal 2, och tiderna för samtal 1 står direkt under det. Samtalet står också på Lektionskortet, ett A4 att ha framför dig.
+  text: Läs förra överenskommelsen på bladet Vår överenskommelse och rundans mening i tabellen Tre samtal, och skriv i snabbmallen vad eleverna ska öva. Schemat har tiderna från och med samtal 2, och tiderna för samtal 1 står direkt under det. Samtalet står också på Lektionskortet, ett A4 att ha framför dig.
   rader:
     - tid: Före passet
       fas: Förberedelse
-      vad: Ställ stolarna runt bordet och bestäm var eleverna ska sitta. Lägg talpinnen mitt på bordet, och ha korten, bladet Vår överenskommelse, en penna och papper för förslagen till hands. Hämta gruppen, eller se till att en vuxen följer den till rummet.
+      vad: Ställ stolarna runt bordet och bestäm var eleverna ska sitta. Lägg talpinnen mitt på bordet, och ha korten Våra samtalsregler, Så kan du säga och Peka på känslan, bladet Vår överenskommelse, en penna och papper för förslagen till hands. Hämta gruppen, eller se till att en vuxen följer den till rummet.
     - tid: 0–4 min
       fas: Starta
-      vad: I samtal 1 visar du talpinnen, läser reglerna och säger ett du-⁠budskap och ett jag-⁠budskap, så att eleverna hör skillnaden. Sedan säger gruppen reglerna själv. Säg varje gång att det ni berättar stannar i rummet.
+      vad: Hälsa välkommen, och gruppen säger de fyra samtalsreglerna. I samtal 1 visar du först talpinnen, läser reglerna på kortet Våra samtalsregler och säger ett du-⁠budskap och ett jag-⁠budskap, så att eleverna hör skillnaden. Säg varje gång att det ni berättar stannar i rummet, men att du inte kan lova att hålla tyst om någon far illa.
     - tid: 4–7 min
       fas: Rundan
-      vad: Säg rundans mening och gör den färdig själv först. Håll ditt svar kort. Den som står över får frågan igen när varvet är klart.
+      vad: Säg rundans mening, som står i tabellen Tre samtal, och gör den färdig själv först. I samtal 1 läser du också startorden på kortet Så kan du säga högt. Håll ditt svar kort. Den som står över får frågan igen när varvet är klart.
     - tid: 7–13 min
       fas: Reda ut
       vad: Lägg talpinnen mitt på bordet. Nicka åt den som har sagt minst av dem som räcker upp handen. I samtal 2 börjar du med vad som har blivit bättre, och i samtal 3 med det som ska fortsätta.
     - tid: 13–17 min
       fas: Komma överens
-      vad: Gruppen föreslår vad den vill pröva och väljer ett förslag, och en elev skriver det på bladet. Pröva förslagen mot de tre kraven (tabellen Överenskommelsen). Är gruppen inte redo att komma överens, argumentera inte (se Om något händer i gruppen).
+      vad: Gruppen föreslår vad den vill pröva och väljer ett förslag, och en elev skriver det på bladet Vår överenskommelse. Pröva förslagen mot de tre kraven (tabellen Överenskommelsen). Är gruppen inte redo att komma överens, argumentera inte (se Om något händer i gruppen).
     - tid: 17–20 min
       fas: Avsluta
-      vad: Var och en säger vad hen själv ska göra till nästa gång och tackar någon, och du skriver det på bladet tillsammans med tiden för nästa samtal. Se till att alla får ett tack. I samtal 1 säger du vilken kamrat var och en ska lägga märke till fram till nästa samtal, så att alla har någon som lägger märke till dem.
+      vad: Var och en säger vad hen själv ska göra till nästa gång och tackar någon, och du skriver det på bladet Vår överenskommelse tillsammans med tiden för nästa samtal. Se till att alla får ett tack. I samtal 1 säger du vilken kamrat var och en ska lägga märke till fram till nästa samtal, så att alla har någon som lägger märke till dem.
   efter: Med fem eller sex elever tar också det sista varvet längre tid i samtal 1, eftersom var och en får en kamrat att lägga märke till, så Avsluta tar en minut från Komma överens. Blir gruppen klar tidigt, låt talpinnen gå ett varv till med frågan ”Vad var bra i dag?”
   # Samtal 1 är första passet: delen Starta tar längre tid (riggens omgång 5 2026-10-26; tiderna stod förut i raden efter).
   varianter:
@@ -306,10 +306,10 @@ steg:
       fraga: Vem talar nu?
       gor: Säg rundans mening och gör den färdig själv först. Låt talpinnen gå ett varv. Den som står över får frågan igen när varvet är klart. En runda kan också gälla hur var och en känner sig i dag, med kortet Peka på känslan som stöd.
       fraser:
-        - Jag börjar. Jag känner mig glad när vi spelar kort på rasten.
         - Du får stå över, så kommer talpinnen tillbaka till dig sedan.
-        - Hur känner du dig i dag? Du kan peka på kortet om du vill.
+        - Hur känner du dig i dag? Du kan visa på kortet Peka på känslan om du vill.
         - Vad såg du hen göra? Säg det till hen.
+        - Jag börjar. Jag känner mig glad när vi spelar kort på rasten.
     - namn: Reda ut
       fraga: Vad hände, och hur kändes det?
       gor: Fråga vad som hände och hur det kändes. Säg med egna ord det eleven sa, och fråga om det stämmer. Börjar eleverna anklaga varandra, säg vad var och en vill. Hjälp eleverna att prata direkt med varandra, och modellera hur det kan låta. Sammanfatta till sist vad var och en har sagt, och fråga om du har missat något.
@@ -403,7 +403,7 @@ roll:
 hem:
   rubrik: Hem och skola
   text:
-    - Vårdnadshavarna får två slags lappar. Före samtal 1 skickar du hem en lapp om vad kompissamtal är och att eleven är med. Efter varje samtal fyller du i en lapp till varje elev med det gruppen har kommit överens om och det eleven själv ska göra, och ger lappen till eleven samma dag. Då kan vårdnadshavarna fråga hur det går och lägga märke till det som fungerar. Det kamraterna har sagt stannar i rummet. Båda lapparna finns i planeringsmallarna.
+    - Vårdnadshavarna får två lappar, Lappen hem före samtal 1 och Lappen hem efter samtalet. Före samtal 1 skickar du hem en lapp om vad kompissamtal är och att eleven är med. Efter varje samtal fyller du i en lapp till varje elev med det gruppen har kommit överens om och det eleven själv ska göra, och ger lappen till eleven samma dag. Då kan vårdnadshavarna fråga hur det går och lägga märke till det som fungerar. Det kamraterna har sagt stannar i rummet. Båda lapparna finns i planeringsmallarna.
 uppfoljning:
   text: Du behöver veta om samtalen gör skillnad utanför rummet. Titta på gruppen under en rast och fråga varje elev hur bra det fungerar, både före samtal 1 och efter samtal 3, och skriv det överst i snabbmallen.
   rader:
@@ -473,7 +473,7 @@ checklista:
     - Räknat bråken, sänkningarna och hur ofta någon hamnar utanför under en rast.
     - Skickat lappen hem före samtal 1.
     - Bokat rummet och tre tider, ungefär en i veckan.
-    - Berättat om samtalen för de vuxna runt gruppen, och skrivit ut korten och bladet.
+    - Berättat om samtalen för de vuxna runt gruppen, och skrivit ut korten Våra samtalsregler, Så kan du säga och Peka på känslan och bladet Vår överenskommelse.
 grund:
   text: "I Bergmans kompissamtal sitter hela klassen i ring en gång i veckan, och en i taget berättar om veckans konflikter medan de andra lyssnar (Bergman, 2004). I den här metoden samtalar en liten grupp på samma sätt. Undervisning i socialt och emotionellt lärande stärker elevernas färdigheter och minskar beteendeproblemen, mest när eleverna övar själva, steg för steg (Durlak m.fl., 2011). Metoden hämtar tre strategier ur program som har stöd i forskning: att sätta ord på känslor, säga jag-⁠budskap och lösa problem tillsammans. Strategierna har prövats som delar av programmen, men inte var för sig i undervisningen (EEF, 2021). Jag-⁠budskap väcker mindre fientlighet än du-⁠budskap (Kubany m.fl., 1992), särskilt när den som talar också visar att hen förstår den andra (Rogers m.fl., 2018). Du håller samtalen när eleverna är lugna, eftersom det går bäst att lösa problem då (EEF, 2021). Du följer också upp samtalen i vardagen, eftersom det eleverna övar på särskilda lektioner annars tycks gälla bara där (Skolverket, 2011)."
   kallor: Bygger på Bergman (2004), Durlak m.fl. (2011), EEF (2021), Kubany m.fl. (1992), Rogers m.fl. (2018) och Skolverket (2011).

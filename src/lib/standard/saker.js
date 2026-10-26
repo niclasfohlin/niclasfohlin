@@ -90,6 +90,9 @@ export function sakensFormer(namn) {
     for (const f of ['en', 'ens', 'ets']) former.add(`${stam}${f}`);
   } else if (/ning$/.test(n)) {
     for (const f of ['en', 'ens', 'ar', 'arna']) former.add(`${n}${f}`);
+  } else if (/ion$/.test(n)) {
+    // Gruppreflektionen och gruppreflektionerna (länkgranskningen av omgång 5 2026-10-26).
+    for (const f of ['en', 'ens', 'er', 'erna']) former.add(`${n}${f}`);
   }
   return [...former];
 }

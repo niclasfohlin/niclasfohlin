@@ -55,7 +55,7 @@
     "datum": "2026-10-25"
   },
   "gruppstarkande-aktiviteter": {
-    "kalla": "6d49f4652b634073",
+    "kalla": "5d5bb0357ab16371",
     "innehall": "7d398f76ab8d6b75",
     "skalor": [
       1.05,
@@ -77,15 +77,15 @@
     "datum": "2026-10-26"
   },
   "kompissamtal": {
-    "kalla": "ef76189609ff8b8f",
+    "kalla": "e429caa0007d9880",
+    "innehall": "842495eacb351707",
     "skalor": [
       1.25,
       1.2,
       1.35,
-      1.2
+      1.15
     ],
-    "datum": "2026-10-19",
-    "innehall": "498927e26f1d9b36"
+    "datum": "2026-10-26"
   },
   "kortskrivning-skriv-varje-dag": {
     "kalla": "a870899543f51bcb",

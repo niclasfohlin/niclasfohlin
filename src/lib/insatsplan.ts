@@ -237,7 +237,9 @@ export async function planensData(m: Metod): Promise<PlanData> {
   // Veckans texter ur banken genom progressionens taggar, som i Textsamtal i grupp, eller annars nivåns rad i tabellen med
   // veckor och nivåer, som i Faktatextsamtal i grupp (verifieringen av omgång 1 2026-10-26).
   const nivaTabell = bank && (d.progression?.rader ?? []).some((r) => r.taggar?.length) ? undefined : nivaTabellen(d, m.id);
-  const forstaChecklista = !!d.checklista && /första|pass 1\b/i.test(d.checklista.rubrik);
+  // En checklista inför första passet, som "Checklista inför samtal 1" i Kompissamtal, står under Före (länkgranskningen av
+  // omgång 5 2026-10-26: den stod i varje vecka).
+  const forstaChecklista = !!d.checklista && /första|\b(?:pass|samtal|lektion)\s+1\b/iu.test(d.checklista.rubrik);
   const nivaval = nivavalet(d, m.id);
   return {
     id: m.id,

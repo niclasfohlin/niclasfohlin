@@ -7,7 +7,8 @@
 // Hänvisningar.
 import type { MetodData } from './metod';
 import { harLathund, passOrd, passOversikt } from './metod';
-import { bankAv, enhetAdress, iBanken } from './bank';
+import { arBladsida, bankAv, enhetAdress, iBanken } from './bank';
+import { arBlad, bladNamn, metodensPaBordet } from './pabordet';
 import { mallarnasAnkare, metodensAnkare, metodensAvsnitt } from './metodankare';
 import { metodensLektionskort } from './lektionskort';
 import { forstaLed } from './karta';
@@ -111,6 +112,16 @@ export function metodensSaker(d: MetodData, id: string): MetodSak[] {
     for (const v of (m ? veckornaI(`vecka ${m[1]}`) : undefined) ?? []) veckansRamar[String(v)] ??= `${sida}#${ramAnkare[ri]}`;
   });
   if (Object.keys(veckansRamar).length >= 2) saker.push({ namn: 'veckans ram', former: ['veckans ram', 'Veckans ram'], adress: Object.values(veckansRamar)[0], veckor: veckansRamar });
+  // Bladen På bordet, som Vår grupp i Gruppstärkande aktiviteter: ett blad med "Blad: " i rubriken står efter sin ram på
+  // metodens sida med ankaret blad-<nr> och sin egen knapp (Pabordet.astro). Blad i banken och på en bladsida står på sina
+  // egna sidor (länkgranskningen av omgång 5 2026-10-26: "bladet Vår grupp" blev ingen länk).
+  for (const b of metodensPaBordet(d, id).filter(arBlad)) {
+    const ramen = b.vid && 'ram' in b.vid ? b.vid.ram : undefined;
+    const ri = ramen ? ramar.findIndex((r) => r.rubrik === ramen) : -1;
+    const namn = bladNamn(b);
+    if (ri < 0 || iBanken(bank, ri) || arBladsida(ramar[ri]) || saker.some((s) => s.namn.toLowerCase() === namn.toLowerCase())) continue;
+    saker.push(sak(namn, `${sida}#blad-${b.bild.nr}`));
+  }
   // Materialets avsnitt, som "Kursens material", och kursens veckor och blad: "vecka 3" leder till veckans lektion i en kurs
   // med veckor, och "Addition 1" till bladet (src/lib/karta.ts).
   if (d.ramar?.rubrik) saker.push(sak(d.ramar.rubrik, `${sida}#ramar`));
@@ -172,7 +183,9 @@ export function metodensSaker(d: MetodData, id: string): MetodSak[] {
     const namn = rubrik ? rubrikensNamn(rubrik) : '';
     if (!namn || tagna.has(namn.toLowerCase())) return;
     tagna.add(namn.toLowerCase());
-    saker.push(sak(namn, adress, slag ? { slag } : {}));
+    // Ett avsnitt eller en tabell länkas som titel, med stor bokstav mitt i en mening, så att "överenskommelsen" i en mening
+    // inte leder till tabellen Överenskommelsen (länkgranskningen av omgång 5 2026-10-26).
+    saker.push({ ...sak(namn, adress, slag ? { slag } : {}), ...(slag ? { versal: true } : {}) });
   };
   const rutor = d as unknown as Record<string, { rubrik?: string } | undefined>;
   for (const a of avsnitt) if (a.id !== 'ramar' && a.id !== 'mallar') avsnittet(rutor[a.id]?.rubrik, `${sida}#${a.id}`, a.id === 'diplom' ? undefined : 'avsnitt');

@@ -26,7 +26,7 @@ material:
   - Lärarens skattning
   - bladet Vår grupp
   - frågekort och meningar att avsluta
-uppdaterad: 2026-10-25
+uppdaterad: 2026-10-26
 publicerad: 2026-10-16
 centrala:
   - id: aktiviteter
@@ -244,7 +244,7 @@ tabeller:
         - "Säg högt vad någon gjorde och varför det hjälpte: ”Jag såg att Ali och Sara tittade på varandra så att de kunde skicka rockringen på bästa sätt. Det gjorde att ni lyckades bättre.” Gör det också på lektionerna."
     not: Raderna bygger på Gruppstärkande ledarskap (Fohlin och Wilson, 2023).
   - rubrik: När det inte går som tänkt
-    plats: efter-grund
+    plats: efter-fastnar
     meny: true
     kolumner:
       - Det du ser eller hör
@@ -314,26 +314,19 @@ uppfoljning:
   rubrik: Gruppen över tid
   text: Gör en eller två aktiviteter i veckan så länge gruppen behöver det, och gärna två de första sex veckorna. Byter du grupperna i en klass, börjar de nya grupperna med ett kort ur Lära känna varandra. När gruppen ska skiljas, gör ni en avslutande aktivitet ur Gemensamma mål, som Uppskattningsnätet. Då läser du upp raden nederst i Lärarens skattning och säger vad ni har blivit bättre på. Lärarens skattning, Gruppreflektion och bladet Vår grupp står under Materialet. Gäller två rader samtidigt, gör du det som står först.
   rader:
-    - nar: Varje vecka
-      tid: "varje vecka"
+    - nar: Lärarens skattning varje vecka
       vad: Skatta gruppen i Lärarens skattning.
-    - nar: Varannan vecka
-      tid: "varannan vecka"
+    - nar: Gruppreflektion varannan vecka
       vad: Från vecka 2 fyller eleverna i Vår grupp, och du leder en gruppreflektion efter en kort aktivitet i ett av veckans pass. I de två veckorna efter modellerar du det gruppen ska bli bättre på.
-    - nar: Vecka 1–4
-      tid: "vecka 1–4"
-      vad: Välj kort utan beröring ur Lära känna varandra och Trygghet och gemenskap. Sedan väljer du fler kort ur Samarbetsutmaningar, Gemensamma mål och Skapa och bygga.
+    - nar: Kort utan beröring vecka 1–4
+      vad: Välj kort utan beröring ur Lära känna varandra och Trygghet och gemenskap på sidan Ta fram en aktivitet. Sedan väljer du fler kort ur Samarbetsutmaningar, Gemensamma mål och Skapa och bygga.
     - nar: Kort med beröring
-      tid: "villkor"
-      vad: Välj dem från vecka 5, när de flesta ringar in 4 eller 5 på ”Jag känner mig trygg i gruppen”.
-    - nar: Linjen nedåt två veckor i rad
-      tid: "villkor"
+      vad: Välj dem från vecka 5, när de flesta ringar in 4 eller 5 på ”Jag känner mig trygg i gruppen” i Vår grupp.
+    - nar: Linjen i Lärarens skattning nedåt två veckor i rad
       vad: Gör två aktiviteter i veckan ur Trygghet och gemenskap. Välj kort utan beröring, gärna sådana som gruppen redan kan, och ta upp det du har sett i nästa gruppreflektion.
-    - nar: Linjen under 7 i fyra veckor, utan att stiga
-      tid: "villkor"
+    - nar: Linjen i Lärarens skattning under 7 i fyra veckor, utan att stiga
       vad: Välj kort ur en kategori som ni inte har använt på länge, och fråga i gruppreflektionen vad ni kan bli lite bättre på.
-    - nar: Linjen på 7 eller mer i fyra veckor
-      tid: "villkor"
+    - nar: Linjen i Lärarens skattning på 7 eller mer i fyra veckor
       vad: Gör en aktivitet i veckan och en gruppreflektion i månaden, om de flesta också ringar in 4 eller 5 på varje påstående i Vår grupp.
 mal:
   overgripande: "kunna samarbeta mot ett mål som gruppen bara når tillsammans, och pröva igen när något går fel."
@@ -388,6 +381,7 @@ ramar:
     - rubrik: Gruppreflektion
       text:
         - "Ni gör gruppreflektionen varannan vecka, från vecka 2, direkt efter en aktivitet som gruppen redan kan och som tar omkring tio minuter. Gruppreflektionen tar 20–30 minuter och slutar i två meningar: ”Detta gör vi bra. Detta ska vi bli bättre på.” Är eleverna fler än sex, pratar de i grupper om två till fyra medan du går runt och lyssnar, och när du lyfter det gruppen gör bra, berättar två eller tre grupper först vad de har pratat om. I en klass säger du till eleverna, innan de fyller i bladet, att gruppen på bladet är hela klassen."
+        - "Bladet Vår grupp finns också som Google Formulär. Knappen Kopiera formuläret och sammanställningen under bladet gör en kopia i din Google Drive, med formuläret och ett kalkylark som hör ihop. Publicera din kopia av formuläret och skicka den till eleverna, till exempel i Classroom, så svarar de i telefonen eller på datorn. Kalkylarket räknar själv gruppens snitt vid varje tillfälle, andelen som svarar 4 eller 5 och det svagaste påståendet. Svaren hamnar bara i din kopia."
       delar:
         - rubrik: Så leder du gruppreflektionen
           falt:
