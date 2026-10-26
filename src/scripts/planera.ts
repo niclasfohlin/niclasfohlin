@@ -32,9 +32,10 @@ const sida = $('plan');
 const data: PlanData = JSON.parse($('pl-data').textContent ?? '{}');
 // Metodens egna skattningar läses på sajten, där metodens tabeller finns, och följer med sidans data (K-559).
 // Metodens plan ur planens data, med metodens egna skattningar, förvalet i veckor (plan.veckoval) och veckorna före start
-// (plan.foreVeckor), så att sidan har samma plan som motorn (Rimligheten 2026-10-26: Chambers boksamtal visade fem veckor
-// fast metoden säger åtta, och Före en vecka fast metoden säger tre). Planprovet stoppar ett fält som inte följer med.
-const mp = { ...metodplan({ tid: data.tid, period: data.period, progression: data.progression, uppfoljning: data.uppfoljning, plan: { passen: data.passen, ...(data.veckoval?.forval ? { veckoval: { text: data.veckoval.text, mer: data.veckoval.mer.namn, forval: data.veckoval.forval } } : {}), ...(data.foreVeckor ? { foreVeckor: data.foreVeckor } : {}) } }).plan!, skattningar: data.skattningar ?? [] };
+// (plan.foreVeckor) och den sista radens vecka (plan.sistaRaden), så att sidan har samma plan som motorn (Rimligheten
+// 2026-10-26: Chambers boksamtal visade fem veckor fast metoden säger åtta, och Före en vecka fast metoden säger tre).
+// Planprovet stoppar ett fält som inte följer med.
+const mp = { ...metodplan({ tid: data.tid, period: data.period, progression: data.progression, uppfoljning: data.uppfoljning, plan: { passen: data.passen, ...(data.veckoval?.forval ? { veckoval: { text: data.veckoval.text, mer: data.veckoval.mer.namn, forval: data.veckoval.forval } } : {}), ...(data.foreVeckor ? { foreVeckor: data.foreVeckor } : {}), ...(data.sistaRaden ? { sistaRaden: true } : {}) } }).plan!, skattningar: data.skattningar ?? [] };
 const idag = idagLokalt();
 // Uppföljningens rad med sitt namn ur standarden, som i raden, texterna och pdf:en: Efter insatsen, och en vecka som i planen.
 const uppfNamn = (rad: number) => uppfoljningensNamn(plan, info(), rad);

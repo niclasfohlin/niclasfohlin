@@ -30,7 +30,7 @@ material:
   - bladen Vår lösning och Två lösningar
   - konkret material
   - kortet Våra sätt
-uppdaterad: 2026-10-26
+uppdaterad: 2026-10-27
 relaterade:
   - fyra-raknesatten
   - antalsuppfattning-i-grupp
@@ -395,6 +395,9 @@ plan:
     text: "Med tre pass i veckan räcker sex veckor, och med två pass i veckan tar du åtta, så att gruppen får ungefär lika många pass. Blir perioden kortare än åtta veckor, tar ni ledet Du gör själv i den sista veckan."
     mer: Progression över insatsperioden
     forval: 8
+  # Den sista veckan tar ledet Du gör själv när perioden är kortare än åtta veckor, som veckovalets andra mening säger
+  # (Codex 2026-10-27, K-572: planens vecka 6 av sex visade Ni gör tillsammans).
+  sistaRaden: true
   passen:
     # Första passet: det som tar Planeras extra minuter, och bladet Två lösningar först i Jämföra (passgenomgången
     # 2026-10-26: i Planera hade paren sett A och B innan de prövade).

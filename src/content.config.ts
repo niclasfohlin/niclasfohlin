@@ -460,6 +460,9 @@ const metodensFalt = z.strictObject({
       utvardering: z.array(text).min(1).max(4).optional(),
       upprepa: text.optional(),
       stege: z.boolean().optional(),
+      // sistaRaden: progressionens sista rad tar planens sista vecka när perioden slutar före den, när metoden säger det, som
+      // Problemlösnings "Blir perioden kortare än åtta veckor, tar ni ledet Du gör själv i den sista veckan" (K-572).
+      sistaRaden: z.literal(true).optional(),
       // Stödet för nivåvalet (K-557; Niclas 2026-10-26: "Bör alltid finnas vid ett sådant val i Planeras modul"): ett citat
       // ur metoden om vad nivåerna skiljer sig i och vad som avgör valet, högst tre meningar och 250 tecken, och mer, namnet
       // på metodens tabell eller avsnitt med resten, som Så skiljer sig nivåerna (STIL.md under Stöd för ett val).

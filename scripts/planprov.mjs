@@ -929,7 +929,23 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
       && s.elevernasFel(elevrad({ vidare: 'alla gör det' })).some((f) => f.includes('sista och har inget vidare'))
       && s.elevernasCell({ eleverna: 'Att a.', vidare: 'b' }) === 'Att a.\nGå vidare när b.' && s.elevernasCell({ eleverna: 'Att a.' }) === 'Att a.'
       && s.harElevernasKolumn(elevrad({})) && !s.harElevernasKolumn({ progression: { rader: [{ vecka: '1' }] } })
+      && s.harElevernasKolumn({ progression: { rader: [{ vecka: '1', vidare: 'de flesta gör det' }, { vecka: '2' }] } })
+      && s.elevernasFel(elevrad({ eleverna: 'Att ' })).some((f) => f.includes('börjar med "Att"'))
       && s.planensTexter(elevrad({})).some(([, t]) => t === 'Gå vidare när de flesta gör det i två pass i rad.'), s.elevernasFel(elevrad({ vidare: 'alla gör det' })));
+    // plan.sistaRaden (Codex 2026-10-27, K-572): Problemlösnings sista vecka tar ledet Du gör själv när perioden är kortare
+    // än åtta veckor, också en upprepning av den, och i åtta veckor följer veckorna raderna som förut. Spärren åt andra hållet.
+    {
+      const pl = metod('problemlosning-i-grupp');
+      const mpl = s.metodplan(pl).plan;
+      const led = (langd, upprepa) => s.planera(mpl, { start: '2026-11-02', dagar: [1, 3], langd, ...(upprepa ? { upprepa } : {}) }).veckor.map((v) => pl.progression.rader[v.steg]?.led).join('|');
+      ska('den sista veckan tar det sista ledet när perioden är kortare', mpl.sistaRaden === true
+        && led(6) === 'Jag gör|Jag gör|Vi gör|Vi gör|Ni gör tillsammans|Du gör själv'
+        && led(6, [6]) === 'Jag gör|Jag gör|Vi gör|Vi gör|Ni gör tillsammans|Du gör själv|Du gör själv'
+        && led(7).endsWith('Ni gör tillsammans|Ni gör tillsammans|Du gör själv')
+        && led(8) === 'Jag gör|Jag gör|Vi gör|Vi gör|Ni gör tillsammans|Ni gör tillsammans|Du gör själv|Du gör själv'
+        && s.metodplan({ ...pl, plan: { ...pl.plan, sistaRaden: undefined } }).plan.sistaRaden === undefined
+        && s.metodplan({ ...pl, progression: { ...pl.progression, enhet: 'Pass' } }).fel.some((f) => f.includes('plan.sistaRaden')), [led(6), led(6, [6]), led(7), led(8)]);
+    }
     ska('tidsschemats inledning i planen, utan meningarna om metodens sida', s.planensInledning(ll.tidsschema.text, ll.plan.utan) === 'Förbered dig genom att välja orden du ska modellera. Passet och listorna står också på Lektionskortet, ett A4 att ha framför dig.' && s.planensInledning('En. Två.', ['Två.']) === 'En.', s.planensInledning(ll.tidsschema.text, ll.plan.utan));
     const texter = s.planensTexter(ll), visade = s.visadeTexter(ll);
     ska('planens texter: planens egna fält, och metodens texter som planen visar med varianten och tabellraderna', texter.some(([plats]) => plats === 'Planens upprepa') && visade.includes('Passet är bara listan.') && visade.includes('Läraren modellerar fyra till sex ord, och gruppen körläser hela listan i stället för dagens kolumn. Förklara nya ord.') && visade.includes(s.planensInledning(ll.tidsschema.text, ll.plan.utan)) && !visade.some((t) => t.includes('Remsan')), texter.map(([p]) => p));

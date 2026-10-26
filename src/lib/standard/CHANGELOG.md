@@ -3,6 +3,7 @@
 ## 0.25.0, 2026-10-26
 
 - `plan.js`, den smala formen (sajtens K-572; Niclas samma kväll: "Gillar egentligen fokus och lärarens roll. Men behöver samtidigt en tydlig riktning för eleverna lärande och utveckling", och "Kör på det"): progressionens rader har `eleverna`, vad eleverna ska bli bättre på, och `vidare`, när gruppen går vidare. `elevernasFel` prövar formen och kräver `eleverna` i varje rad i en metod som kan planeras, och `planFel` kör den. `elevernasCell`, `vidareMening`, `harElevernasKolumn` och `ELEVERNAS_KOLUMN` ger den fjärde kolumnen och meningen "Gå vidare när …" till metodens sida, Word och planen ur en rot, och `planensTexter` har fälten med.
+- `plan.js`, efter Codex granskning av formen 2026-10-27: `plan.sistaRaden` ger planens sista vecka progressionens sista rad när perioden slutar före den, som Problemlösnings "Blir perioden kortare än åtta veckor, tar ni ledet Du gör själv i den sista veckan" (vecka 6 av sex visade Ni gör tillsammans). `metodplan` bär fältet och stoppar det i en progression i pass. `harElevernasKolumn` visar kolumnen också när bara `vidare` står, och `elevernasFel` kräver text efter "Att".
 
 ## 0.24.0, 2026-10-26
 

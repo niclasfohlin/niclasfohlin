@@ -122,6 +122,8 @@ export interface PlanData {
   veckoval?: PlanStod & { forval?: number };
   /** Skolveckorna före första passet när det metoden gör före start tar mer än en vecka (plan.foreVeckor). */
   foreVeckor?: number;
+  /** Progressionens sista rad tar planens sista vecka när perioden slutar före den (plan.sistaRaden, K-572). */
+  sistaRaden?: true;
   /** Metodens egna skattningar (plan.skattningar, K-559): skalan med stegens namn och reglerna ur standarden, adressen till
    * instrumentet på metodens sida, och för det eleverna fyller i bladets pdf och adressen som kopierar formuläret. */
   skattningar?: PlanSkattning[];
@@ -312,6 +314,7 @@ export async function planensData(m: Metod): Promise<PlanData> {
     ...(langdval ? { langdval } : {}),
     ...(veckoval ? { veckoval } : {}),
     ...(d.plan?.foreVeckor ? { foreVeckor: d.plan.foreVeckor } : {}),
+    ...(d.plan?.sistaRaden && { sistaRaden: d.plan.sistaRaden }),
     ...(skattningar.length ? { skattningar } : {}),
   };
 }
