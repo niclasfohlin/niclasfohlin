@@ -395,6 +395,23 @@ tabeller:
       - - Reflektera och ge återkoppling
         - "I Avsluta frågar du: ”Vad sa din kamrat som fick dig att tänka nytt?” och ”Hur gick det att följa samtalsreglerna i dag?” Säg sedan vad du hörde, till exempel ”Mustafa byggde vidare på Livs tanke om garaget, och då förstod ni varför Pricken kom hem i dag.”"
     not: Beröm det eleverna gör i samtalet, med deras egna ord, och säg vad det gav, till paret eller till hela gruppen.
+  - rubrik: "Eleverna leder samtalet: pass 2 i vecka 6–8"
+    plats: efter-arbetsform
+    text: "I vecka 6–8 leder eleverna gruppens samtal i pass 2. Passet har samma delar och tider som förut, och du läser fortfarande texten högt. Eleverna turas om att leda samtalet, så att en ny elev leder varje fråga. Den som leder har frågorna på samtalskortet som stöd, och du lyssnar. Bestäm före passet vem som tänker högt vid stoppet och vem som leder vilken fråga, och skriv namnen vid frågornas nummer på tavlan."
+    kolumner:
+      - Delen
+      - Eleverna
+      - Du
+    rader:
+      - - Möt texten
+        - Väljer var sitt samtalsdrag ur samtalskortet att pröva i dag
+        - Säger vilket tankesteg ni ska öva och visar på tavlan vem som leder vilken fråga
+      - - Läs och tänk
+        - En elev tänker högt vid stoppet med tankekortet innan paren samtalar. I parsamtalet prövar var och en sitt samtalsdrag
+        - Pekar på nästa steg på tankekortet om eleven fastnar
+      - - Samtala om texten
+        - "Den som leder läser frågan högt och frågar ”Vad tror du?” och ”Hur vet du det?” Hen ser till att alla har pratat en gång innan någon pratar en tredje gång"
+        - Lutar dig tillbaka och skriver det du hör på lyssningsbladet. Frågar den som leder vilken fråga på kortet som kan hjälpa när samtalet stannar. Ställer sist en av textens öppna frågor
   - rubrik: Samtalet i olika former
     plats: efter-arbetsform
     text: Parsamtalet och gruppens samtal är grunden. Ibland behöver samtalet en annan form, när samma elever alltid pratar, när gruppen är ny eller när ni behöver röra på er. En form ersätter rundan och en av frågorna i Samtala om texten.
@@ -596,7 +613,7 @@ fastnar:
   motto: Låt eleven hitta ledtråden själv, också när det tar tid.
 roll:
   rubrik: "Lärarens roll: tänka högt, leda samtalet, tona ut"
-  text: Din roll ändras under veckan. I pass 1 gör du tänkandet synligt. I pass 2 leder du samtalet och låter eleverna prata med varandra. I pass 3 håller du dig tillbaka, frågar, lyssnar och ger respons på hur eleverna tänkte. Du är samtalsledaren som hjälper eleverna att utforska texten, och du ger dem inga färdiga svar. Fyll inte tystnaden med svaret.
+  text: Din roll ändras under veckan. I pass 1 gör du tänkandet synligt. I pass 2 leder du samtalet och låter eleverna prata med varandra, och i vecka 6–8 leder eleverna det. I pass 3 håller du dig tillbaka, frågar, lyssnar och ger respons på hur eleverna tänkte. Du är samtalsledaren som hjälper eleverna att utforska texten, och du ger dem inga färdiga svar. Fyll inte tystnaden med svaret.
   gor:
     - Tänk högt och visa hela vägen, också när du tvekar eller undrar.
     - Ge gott om tanketid.
@@ -686,13 +703,32 @@ plan:
     - nar: veckans första
       text: "Varje vecka börjar i pass 1 med att du visar, och det du hörde i pass 3 bestämmer vad du visar. Veckornas fokus är ett förslag på ordning när du inte har hört något annat."
     # Pass 2: från vecka 6 leder eleverna gruppens samtal, så kolumnen Du gäller vecka 1–5. Raden utan veckor har namnet och
-    # Eleverna, så att pass 2 har en roll också i en förlängd plan.
+    # Eleverna, så att pass 2 har en roll också i en förlängd plan. I vecka 6–8 står tabellen Eleverna leder samtalet i
+    # förberedelsen och i stället för Möt texten, Läs och tänk och Samtala om texten, med delens övriga meningar ur
+    # tidsschemat (sajtens fråga 2026-10-26: delarna visade läraren som leder).
     - nar: veckans andra pass i vecka 1–5
       ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 2, kolumner: [Så läser ni, Du] }
     - nar: veckans andra pass i vecka 6–8
       kort: "Eleverna leder samtalet"
-      text: "En elev tänker högt vid stoppet i pass 2, och eleverna leder gruppens samtal efter paren."
-      ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 2, kolumner: [Så läser ni] }
+      text: "En elev tänker högt vid stoppet i pass 2, och eleverna leder gruppens samtal efter paren. Eleverna turas om att leda samtalet, så att en ny elev leder varje fråga. Den som leder har frågorna på samtalskortet som stöd, och du lyssnar."
+    - nar: veckans andra pass i vecka 6–8
+      del: Före passet
+      text: "Bestäm före passet vem som tänker högt vid stoppet och vem som leder vilken fråga, och skriv namnen vid frågornas nummer på tavlan."
+    - nar: veckans andra pass i vecka 6–8
+      del: Möt texten
+      istallet: true
+      text: "Knyt an till förra passet. Säg titeln och ställ frågan Före läsningen, som får eleverna att tänka på det de behöver veta. Förklara ett eller två ord som texten kräver, men aldrig ett ord som avslöjar svaret."
+      ur: { tabell: "Eleverna leder samtalet: pass 2 i vecka 6–8", rad: Möt texten }
+    - nar: veckans andra pass i vecka 6–8
+      del: Läs och tänk
+      istallet: true
+      text: "I pass 2 läser du högt, eleverna sätter frågetecknet vid stoppet och lägger ett papper över texten nedanför, och paren samtalar vid stoppet innan gruppen tar det."
+      ur: { tabell: "Eleverna leder samtalet: pass 2 i vecka 6–8", rad: Läs och tänk }
+    - nar: veckans andra pass i vecka 6–8
+      del: Samtala om texten
+      istallet: true
+      text: "Börja med en runda där var och en säger en tanke om texten, gärna något som frågorna inte frågar om. Den som inte är redo säger ”Pass” och får ordet sist. Är ni fler än fyra samtalar paren först om mellan raderna-frågorna."
+      ur: { tabell: "Eleverna leder samtalet: pass 2 i vecka 6–8", rad: Samtala om texten }
     - nar: veckans andra
       kort: "Paren samtalar"
       ur: { tabell: "Veckans tre pass: vem som tänker", rad: Pass 2, kolumner: [Eleverna] }

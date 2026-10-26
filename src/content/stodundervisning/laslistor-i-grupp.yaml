@@ -106,12 +106,12 @@ tabeller:
       - Så arbetar ni med listan
     rader:
       - - Måndag
-        - Läraren modellerar fyra till sex ord, och gruppen körläser hela listan i stället för dagens kolumn. Förklara nya ord. Parläsningen blir kortare.
+        - Läraren modellerar fyra till sex ord, och gruppen körläser hela listan i stället för dagens kolumn. Förklara nya ord.
       - - Tisdag till torsdag
         - Kort modellering, körläsning av dagens kolumn och parläsning med omläsning.
       - - Fredag
         - Under parläsningen läser varje elev listan för sin kompis eller för läraren. I avslutningen sätter ni ord på vad som blivit lättare.
-    not: Med fyra pass i veckan stryker du en av dagarna tisdag till torsdag. Från vecka 4 avslutas varje pass, också måndag och fredag, med några minuter i boken. I vecka 6 körläser ni några rader i stället för en kolumn, och i vecka 7 några meningar.
+    not: "Med fyra pass i veckan stryker du en av dagarna tisdag till torsdag. Från vecka 4 avslutas varje pass, också måndag och fredag, med några minuter i boken. I vecka 6 körläser ni några rader i stället för en kolumn: på tisdag substantiven, på onsdag verben och på torsdag de sammansatta orden och meningarna. I vecka 7 körläser ni några meningar: på tisdag de sex första, på onsdag de sex sista och på torsdag texten om Sara och hunden. På måndag läser ni alla meningar och texten två gånger och pratar kort om några av dem."
   - rubrik: Bekräfta, korrigera, ge stöd
     plats: efter-steg
     text: Läraren cirkulerar mellan paren under hela parläsningen. Din uppgift är att bekräfta, korrigera och ge stöd, direkt när det händer. Det är den snabba återkopplingen som utvecklar avkodningen, inte listan. Lässtrategier är ett A4 på metodens sida att ha i handen när du cirkulerar. Där står strategierna eleven kan lära sig, och från vecka 4, när ni läser i boken, strategierna för förståelsen. I listan rättar du direkt, och i boken väntar du tills meningen är slut.
@@ -143,13 +143,13 @@ tidsschema:
   rader:
     - tid: Före passet
       fas: Förberedelse
-      vad: Välj fyra till sex ord ur veckans lista att modellera, inte hela listan, och dagens kolumn. Kopiera listan till varje par, och från vecka 4 tar du fram dagens bok.
+      vad: Välj fyra till sex ord ur veckans lista att modellera, inte hela listan, och dagens kolumn. I vecka 6 väljer du dagens rader och i vecka 7 dagens meningar. Kopiera listan till varje par, och från vecka 4 tar du fram dagens bok.
     - tid: 0–2 min
       fas: Modellering
       vad: "Sitt så att alla ser listan. Peka och ljuda långsamt, ljud för ljud, från vänster till höger, och dra ut hållkonsonanterna: sss-⁠ooo-⁠lll. Bind ihop ljuden till ordet och läs det i normal takt. Tänk högt om det som är svårt i ordet: den långa vokalen, konsonantmötet, ändelsen. Eleverna lyssnar och följer med, de läser inte än."
     - tid: 2–4 min
       fas: Körläsning
-      vad: "Börja långsamt så att alla hinner ljuda, och öka tempot när orden känns säkra. Läs kolumnen uppifrån och ned och läs om den en gång till. Håll ihop kören: vänta in eleverna vid svåra ord i stället för att läsa förbi dem. Vid många fel: modellera ordet igen och körläs det sedan på nytt."
+      vad: "Börja långsamt så att alla hinner ljuda, och öka tempot när orden känns säkra. Läs kolumnen uppifrån och ned och läs om den en gång till. På måndag läser ni hela listan en gång och förklarar nya ord. Håll ihop kören: vänta in eleverna vid svåra ord i stället för att läsa förbi dem. Vid många fel: modellera ordet igen och körläs det sedan på nytt."
     - tid: 4–10 min
       fas: Parläsning
       vad: "Paren sitter med listan mellan sig. Den som pekar följer ordet med fingret i läsriktningen, håller tempot och hjälper vid svårighet: ljuda tillsammans, dela ordet i delar och läs det sedan från början igen. Läs listan flera gånger. Det är omläsningen av samma ord som ger flytet. Cirkulera mellan paren hela tiden och bekräfta, korrigera och ge stöd direkt."
@@ -168,6 +168,17 @@ tidsschema:
           tid: 6–14 min
         - fas: Avslutning
           tid: 14–15 min
+    - nar: veckans första pass i vecka 4–7
+      text: Gruppen körläser hela listan.
+      delar:
+        - fas: Modellering
+          tid: 0–2 min
+        - fas: Körläsning
+          tid: 2–6 min
+        - fas: Parläsning
+          tid: 6–10 min
+        - fas: Avslutning
+          tid: 10–15 min
   efter: "En lista i veckan. Blir ett par klart tidigt: läs listan en gång till och byt roller."
 steg:
   text: Passet har fyra delar, rörelsens tre steg och avslutningen. Använd exempelfraserna för att visa, leda kören och ge kort återkoppling.
@@ -307,20 +318,21 @@ plan:
     - nar: vecka 1
       text: "Modellera fyra till sex bokstäver först, läs sedan i kör och till sist i par. Dra ut hållkonsonanterna: sss, lll, mmm."
     # Körläsningen i vecka 6 och 7 läser rader och meningar i stället för kolumnen (den stängda frågan 2026-10-26).
+    # Måndagens körläsning och listan delad på tisdag till torsdag i vecka 6 och 7 (sajtens fråga 2026-10-26, out/planera-r/laslistor-i-grupp-2.md).
     - nar: vecka 6
       del: Körläsning
       istallet: true
-      text: "Börja långsamt så att alla hinner ljuda, och öka tempot när orden känns säkra. Läs radvis, från vänster till höger. Håll ihop kören: vänta in eleverna vid svåra ord i stället för att läsa förbi dem. Vid många fel: modellera ordet igen och körläs det sedan på nytt."
+      text: "Börja långsamt så att alla hinner ljuda, och öka tempot när orden känns säkra. Läs radvis, från vänster till höger. På måndag läser ni hela listan en gång och förklarar nya ord. Håll ihop kören: vänta in eleverna vid svåra ord i stället för att läsa förbi dem. Vid många fel: modellera ordet igen och körläs det sedan på nytt."
     - nar: veckans övriga pass i vecka 6
       kort: "Dagens rader"
-      text: "I vecka 6 körläser ni några rader i stället för en kolumn, och i vecka 7 några meningar."
+      text: "I vecka 6 körläser ni några rader i stället för en kolumn: på tisdag substantiven, på onsdag verben och på torsdag de sammansatta orden och meningarna."
     - nar: vecka 7
       del: Körläsning
       istallet: true
-      text: "Börja långsamt så att alla hinner ljuda, och öka tempot när orden känns säkra. Gruppen läser varje mening två gånger och pratar om vad den betyder. Håll ihop kören: vänta in eleverna vid svåra ord i stället för att läsa förbi dem. Vid många fel: modellera ordet igen och körläs det sedan på nytt."
+      text: "Börja långsamt så att alla hinner ljuda, och öka tempot när orden känns säkra. Gruppen läser varje mening två gånger och pratar om vad den betyder. På måndag läser ni alla meningar och texten två gånger och pratar kort om några av dem. Håll ihop kören: vänta in eleverna vid svåra ord i stället för att läsa förbi dem. Vid många fel: modellera ordet igen och körläs det sedan på nytt."
     - nar: veckans övriga pass i vecka 7
       kort: "Dagens meningar"
-      text: "I vecka 6 körläser ni några rader i stället för en kolumn, och i vecka 7 några meningar."
+      text: "I vecka 7 körläser ni några meningar: på tisdag de sex första, på onsdag de sex sista och på torsdag texten om Sara och hunden."
   upprepa: "Byt lista först när paren läser orden direkt, utan att ljuda."
 
 mal:
@@ -352,7 +364,7 @@ snabbmall:
 checklista:
   punkter:
     - Valt veckans lista och läst den högt själv.
-    - Valt fyra till sex ord att modellera och dagens kolumn.
+    - Valt fyra till sex ord att modellera och dagens kolumn, rader eller meningar.
     - Kopierat listan till varje par.
     - Bestämt paren, och en trio vid udda antal.
     - Läst vad jag ska lyssna efter i veckans lista.

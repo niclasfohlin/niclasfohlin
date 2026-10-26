@@ -260,7 +260,7 @@ tabeller:
           Förberedelse
           Före passet
         - Den tomma modellen, utskriven på A3, ligger mitt på bordet bredvid bladet Kärnorna med lapparna. Eleverna har sina texter framme.
-        - Läs modellens sida och raderna under Modellpasset på lärarens sida. Lägg också fram exemplet om skolan i vecka 1–5, den sparade modell som lärarens sida säger i vecka 2–5 och gruppens fem modeller i vecka 6–8.
+        - Läs modellens sida och raderna under Modellpasset på lärarens sida. Lägg också fram exemplet om skolan i vecka 1–5 och den sparade modell som lärarens sida säger i vecka 2–5. I vecka 6–8 ligger bladet Kärnorna med lapparna och gruppens fem modeller framme. Den tomma modellen har du då hos dig, så att den inte avslöjar valet.
       - - |-
           Fördjupningen
           0–⁠6 min
@@ -413,7 +413,7 @@ tabeller:
       - - Vilken modell?
         - Den som rymmer flest av lapparna. Ditt val står på bladet Egen text. Väljer gruppen en annan, ritar ni den på ett A3.
       - - Hur väljer gruppen?
-        - "I vecka 6 visar du hur du väljer. I vecka 7 och 8 prövar paren med modellernas frågor: de pekar på en modell och visar ett ställe i texten som talar för den."
+        - "I vecka 6 visar du hur du väljer. I vecka 7 och 8 prövar paren med modellernas frågor: de pekar på en modell och visar ett ställe i texten som talar för den. När modellen är vald lägger du fram den tomma modellen."
       - - Vad blir annorlunda?
         - Klassens text har ingen fördjupning och ingen ruta Visste du att. Gruppen väljer därför själv en detalj och prövar om den är viktig eller intressant. I läspasset tänker du högt i avsnitt 1 i vecka 6, och två elever har jobbkorten från avsnitt 2.
     not: När klassen läser texten har gruppen redan läst den. Det ger eleverna ett försprång i lektionen. Läraren i ämnet får ett foto av gruppens modell efter veckan och är välkommen till ett modellpass.
@@ -567,6 +567,11 @@ plan:
     # Modellpasset med klassens text: raderna ur tabellen Vecka 6–8 står i delarna de gäller, och Orden och Svaret är som
     # vanligt (Rimligheten 2026-10-26: vecka 6–8 visade fördjupningen och Visste du att, som klassens text inte har, och
     # utan delarna i andra rundan stod inte att gruppen återger texten och skriver svaret).
+    # Före passet i vecka 6–8: den tomma modellen ligger inte framme förrän modellen är vald (sajtens fråga 2026-10-26).
+    - nar: veckans andra pass i vecka 6–8
+      del: Före passet
+      istallet: true
+      text: "Läs modellens sida och raderna under Modellpasset på lärarens sida. I vecka 6–8 ligger bladet Kärnorna med lapparna och gruppens fem modeller framme. Den tomma modellen har du då hos dig, så att den inte avslöjar valet. Eleverna har sina texter framme."
     - nar: veckans andra pass i vecka 6–8
       del: Fördjupningen
       istallet: true

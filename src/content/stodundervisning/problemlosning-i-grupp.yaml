@@ -199,15 +199,17 @@ tidsschema:
     - tid: Före passet
       fas: Förberedelse
       vad: Ta nästa problem på gruppens nivå, läs lärarens sida och lös problemet på båda sätten. Kopiera problemets sida, Vår lösning och Två lösningar till varje par. Till ett eget problem ritar du A och B på ett papper, som du visar i Jämföra med B täckt.
+    # Förstå och Lösa säger ledet och inte veckan, som progressionen, eftersom gruppen byter led när den klarar ledet med
+    # lite stöd (sajtens fråga i PLANERA-R-ATERKOPPLING.md 2026-10-26).
     - tid: 0–5 min
       fas: Förstå
-      vad: "Gemensamt. Läs problemet högt. Paren berättar det för varandra och en elev för gruppen. Red ut orden, ringa in frågan och skriv på tavlan vad ni vet och vad ni ska ta reda på. Från vecka 3 läser en elev problemet högt och leder Förstå, och från vecka 5 skriver paren Vi vet själva. Lärarens sida: Ringa in · Lyft ut · Ord och tal."
+      vad: "Gemensamt. Läs problemet högt. Paren berättar det för varandra och en elev för gruppen. Red ut orden, ringa in frågan och skriv på tavlan vad ni vet och vad ni ska ta reda på. Från ledet Vi gör läser en elev problemet högt och leder Förstå, och från ledet Ni gör tillsammans skriver paren Vi vet själva. Lärarens sida: Ringa in · Lyft ut · Ord och tal."
     - tid: 5–7 min
       fas: Planera
       vad: "Gemensamt, med kortet Våra sätt. Gruppen föreslår sätt från kortet, och paren väljer olika sätt. Skriv parens gissningar under Vi tror. Ingen räknar än. Lärarens sida: Förutse."
     - tid: 7–21 min
       fas: Lösa
-      vad: "I par, på bladet Vår lösning. Från vecka 7 börjar var och en själv i två minuter innan paret arbetar vidare. Fråga först och lämna paren i gång. Halvvägs säger du två sätt du har sett, utan namn och svar, och väljer lösningar till Jämföra. Lärarens sida: Kör de fast · Säg inte · Mindre och större."
+      vad: "I par, på bladet Vår lösning. I ledet Du gör själv börjar var och en själv i två minuter innan paret arbetar vidare. Fråga först och lämna paren i gång. Halvvägs säger du två sätt du har sett, utan namn och svar, och väljer lösningar till Jämföra. Lärarens sida: Kör de fast · Säg inte · Mindre och större."
     - tid: 21–28 min
       fas: Jämföra
       vad: "Gemensamt igen, med bladet Två lösningar. Dela ut bladet med B täckt och fråga vad A gör. Visa B och ställ fråga 3. De valda paren visar sina lösningar, och sist säger ni felet och idén i en mening. Lärarens sida: Jämför · Fel eller osäker."

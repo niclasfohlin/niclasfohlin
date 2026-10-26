@@ -382,7 +382,7 @@ urval:
 hem:
   rubrik: Hem och skola
   text:
-    - Eleven får ett tiobaspaket och en talsortsmatta i A3 att ha hemma, och en läxa i veckan. Läxorna, Läxa 1–5, finns i gruppens paket under Material per årskurs. Läxan delas ut efter veckans första pass och innehåller samma sorts uppgifter som i skolan. En vårdnadshavare läser veckans uppgifter högt, och eleven bygger, berättar vad hen gör och jämför med bilden bredvid uppgiften. Det blir en repetition, och eleven får höra samma sak med andra ord och i ett annat sammanhang. Tio minuter några gånger under veckan räcker. Fråga i början av veckans första pass hur förra veckans läxa gick, och låt eleven visa en uppgift. Läxa 5 visar eleven i början av sista passet, med det hen skrev på baksidan.
+    - Eleven får ett tiobaspaket och en talsortsmatta i A3 att ha hemma, och en läxa i veckan. Läxorna, Läxa 1–5, finns i gruppens paket under Material per årskurs. Läxan delas ut efter veckans första pass och innehåller samma sorts uppgifter som i skolan. En vårdnadshavare läser veckans uppgifter högt, och eleven bygger, berättar vad hen gör och jämför med bilden bredvid uppgiften. Det blir en repetition, och eleven får höra samma sak med andra ord och i ett annat sammanhang. Tio minuter några gånger under veckan räcker. Fråga i början av veckans första pass hur förra veckans läxa gick. Läs en uppgift ur läxan, och alla bygger den samtidigt på sin matta. Då ser du allas mattor. Låt en eller två elever säga vad de gjorde. Så tar läxan två minuter, också med sex elever. Läxa 5 visar eleven i början av sista passet, med det hen skrev på baksidan.
     - "Berätta för vårdnadshavarna att barnet får intensivt stöd och extra träning under fem veckor, och visa hur man gör med en uppgift: läs den högt, låt barnet bygga och berätta vad det gör, jämför med bilden, och visa själv först om det blir svårt. Går det inte att göra läxan hemma kan eleven göra den i skolan eller på fritids tillsammans med en annan vuxen."
 progression:
   rubrik: "Kursplan: fem veckor, ett fokus i veckan"
@@ -422,10 +422,11 @@ plan:
     - nar: veckans första
       kort: "Tiobas"
       ur: { tabell: "Veckan: ett fokus i tre material", rad: veckans, kolumner: ["Pass 1: tiobas"] }
-    # Läxan görs i början av Första talet, som har två minuter till de passen (den stängda frågan 2026-10-26).
+    # Läxan görs i början av Första talet, som har två minuter till de passen (den stängda frågan 2026-10-26). Alla bygger
+    # samma uppgift samtidigt, så att läxan ryms på två minuter med sex elever (sajtens fråga samma kväll).
     - nar: veckans första pass i vecka 2–5
       del: Första talet
-      text: "Fråga i början av veckans första pass hur förra veckans läxa gick, och låt eleven visa en uppgift."
+      text: "Fråga i början av veckans första pass hur förra veckans läxa gick. Läs en uppgift ur läxan, och alla bygger den samtidigt på sin matta. Då ser du allas mattor. Låt en eller två elever säga vad de gjorde. Så tar läxan två minuter, också med sex elever."
     - nar: veckans första
       text: "Läxan delas ut efter veckans första pass och innehåller samma sorts uppgifter som i skolan."
     - nar: veckans första
@@ -440,7 +441,7 @@ plan:
       text: "Använd bara enkronor, tiokronor, hundralappar och tusenlappar. Femkronan är större än tiokronan och säger inget om talsorterna."
     - nar: sista passet i vecka 5
       del: Första talet
-      text: "Läxa 5 visar eleven i början av sista passet, med det hen skrev på baksidan."
+      text: "Läxa 5 visar eleven i början av sista passet, med det hen skrev på baksidan. Läs en uppgift ur läxan, och alla bygger den samtidigt på sin matta. Då ser du allas mattor. Låt en eller två elever säga vad de gjorde. Så tar läxan två minuter, också med sex elever."
   fore:
     - "Talbrickor är runda lappar i kartong med 1, 10, 100 eller 1000, gärna en färg per talsort. Lekpengar finns att köpa eller kopiera. Använd bara enkronor, tiokronor, hundralappar och tusenlappar, så att varje valör är en talsort. Per elev: 20 brickor och 20 mynt eller sedlar av varje talsort."
     - "Eleven får ett tiobaspaket och en talsortsmatta i A3 att ha hemma, och en läxa i veckan. Tiobaspaketet som eleven tar hem är av papper. Rita tiostavar och hundraplattor på papper med centimeterrutor och klipp ut dem. Vad påsen ska innehålla står i gruppens paket under Material per årskurs, tillsammans med kartläggningen, veckornas kort och läxorna."
