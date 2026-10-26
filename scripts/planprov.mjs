@@ -2458,12 +2458,9 @@ try {
   await lamna();
   sant('Ångra efter en återkomst, och beskedet om den som togs bort och den som kom tillbaka', efterAngra[1]?.id === 'e2' && (bada ?? '').startsWith('Ali är borttagen ur elevlistan. Bea är tillbaka i listan, med det som förts in.'), [efterAngra, bada]);
   // Verifieringen av K-559: också när läraren inte lämnar fältet innan sidan laddas om, eftersom listan sparas medan hen skriver.
-  await skriv('Ali
-Sebastian Ek', 900);
+  await skriv('Ali\nSebastian Ek', 900);
   await el.oppna(`${PLAN}#${s.kodaVal(slutVal, { id: 'slut01' })}`);
-  await skriv('Ali
-Bea
-Sebastian Ek');
+  await skriv('Ali\nBea\nSebastian Ek');
   await lamna();
   const utanLamna = await elever();
   sant('en elev som tas bort utan att fältet lämnas och skrivs in igen efter en omladdning får tillbaka det som förts in', utanLamna[1]?.id === 'e2' && (await skattningarna('e2')) === 6, utanLamna);
