@@ -179,7 +179,7 @@ function renderaVal() {
   const byte = $('pl-dagar-byte');
   const harByte = rentaFore(aktiv.val.fore).length > 0;
   byte.hidden = !harByte && !dagarFranIdag();
-  byte.textContent = harByte ? `${stor(dagarText(aktiv.val))}.` : byte.hidden ? '' : 'Ändrar du dagarna gäller de från i dag, och passen som har varit och dagens pass står kvar.';
+  byte.textContent = harByte ? `${stor(dagarText(aktiv.val, plan))}.` : byte.hidden ? '' : 'Ändrar du dagarna gäller de från i dag, och passen som har varit och dagens pass står kvar.';
   const antal = aktiv.val.dagar.length;
   const varning = $('pl-dagar-varning');
   const utanfor = antal < mp.takt.min || antal > mp.takt.max;
@@ -195,10 +195,15 @@ function renderaVal() {
   // "markera 52 som lov ... så finns ingen till vecka som knapp efter").
   const lov = new Set(aktiv.val.lov ?? []);
   let forstaLov = plusDagar(forstaMandagen(aktiv.val), -14), sistaLov = plusDagar(plan.efter, 7);
+  // Uppföljningen efter insatsen kan ligga senare, som fyra veckor efter sista passet, och dess vecka går också att trycka
+  // som lov (verifieringen 2026-10-26: uppföljningen i jullovet, när listan slutade två veckor efter planen).
+  const sistaUppf = plan.uppfoljning.flatMap((u) => u.tillfallen.map((t) => mandagen(t.datum))).reduce((a, b) => (b > a ? b : a), '');
+  if (sistaUppf > sistaLov) sistaLov = sistaUppf;
   for (let i = 0; i < 10 && lov.has(veckonyckel(forstaLov)); i++) forstaLov = plusDagar(forstaLov, -7);
   for (let i = 0; i < 10 && lov.has(veckonyckel(sistaLov)); i++) sistaLov = plusDagar(sistaLov, 7);
   const veckor: string[] = [];
-  for (let m = forstaLov; m <= sistaLov && veckor.length < 42; m = plusDagar(m, 7)) veckor.push(m);
+  // Taket räcker till planens längsta längd och uppföljningen efter den (Codex 2026-10-26: 42 veckor räckte inte).
+  for (let m = forstaLov; m <= sistaLov && veckor.length < 70; m = plusDagar(m, 7)) veckor.push(m);
   $('pl-lovveckor').innerHTML = veckor.map((m) => { const k = veckonyckel(m); const pa = lov.has(k); return `<button type="button" class="pl-chip pl-lovchip" data-lovvecka="${k}" aria-pressed="${pa}"${lovetLast(m) ? ' disabled' : ''} aria-label="${stor(kalenderveckaUtskriven(isoVecka(m).vecka))}, ${esc(spannKort(m, plusDagar(m, 4)))}${pa ? ', lov' : ''}"><span>${kalendervecka(isoVecka(m).vecka)}</span><small>${esc(spannKort(m, plusDagar(m, 4)))}</small></button>`; }).join('');
   $('pl-lov-not').hidden = !veckor.some(lovetLast);
   foljruta.checked = aktiv.folj;
@@ -757,7 +762,7 @@ const rutor = (v: PlanVecka) => {
 
 function renderaSumma() {
   const n = plan.pass.length;
-  const dagar = stor(dagarText(aktiv.val));
+  const dagar = stor(dagarText(aktiv.val, plan));
   // Uppföljningen efter heter Efter insatsen i planen; metodens egen rubrik står i Efter insatsen (de kalla läsarna:
   // "Efter sex till åtta veckor" i en plan på sex veckor).
   // Uppföljningens rader med standardens ord, som i texterna och pdf:en; en rad efter insatsen som görs några veckor efter
@@ -770,7 +775,8 @@ function renderaSumma() {
   // Bara det som kommer (verifieringen 2026-10-25: varningen stod kvar efter insatsen).
   const kommer = (datum: string) => iJulen(datum) && datum >= idag;
   const julveckor = [...new Set(plan.pass.map((p) => p.datum).filter(kommer).map((d) => kalendervecka(isoVecka(d).vecka)))];
-  const julUppfoljning = [...new Set(efterUppfoljning().flatMap((u) => u.tillfallen.map((x) => x.datum)).filter(kommer).map((d) => kalendervecka(isoVecka(d).vecka)))];
+  // Uppföljningen görs under en vecka: bara en skolvecka som är helt i julen säger till.
+  const julUppfoljning = [...new Set(efterUppfoljning().flatMap((u) => u.tillfallen.map((x) => x.datum)).filter((d) => kommer(d) && iJulen(plusDagar(mandagen(d), 4))).map((d) => kalendervecka(isoVecka(d).vecka)))];
   // Klockslag som ger andra längder än metodens säger till, som dagarna, så att ett felval syns (Codex 2026-10-24).
   const langd = passensLangd();
   const metodensLangd = mp.minuter.min === mp.minuter.max ? `${mp.minuter.max}` : `${mp.minuter.min} till ${mp.minuter.max}`;
@@ -786,7 +792,7 @@ function renderaSumma() {
   const tomma = data.progression && mp.stegEnhet === 'veckor' ? plan.veckor.filter((v) => v.steg === null).length : 0;
   const langre = tomma ? `Planen är längre än metodens progression, så ${tomma === 1 ? 'en vecka' : `${tomma} veckor`} har inget eget fokus i metoden.` : '';
   $('pl-summa-text').innerHTML = n
-    ? `<p class="pl-tal">${n} pass om ${esc(minuterText(langd))} minuter</p><p>${esc(dagar)}, ${esc(datumspann(plan.forstaPass!, plan.sistaPass!))}.</p>${plan.slut ? `<p>${esc(utvarderingenText(plan, aktiv.foljd.utvardering, !slutNu()))}</p>` : ''}${uppf.length ? `<p>${esc(uppf.join('. '))}.</p>` : ''}${[redanVarit, farre, annanLangd, kortare, langre].filter(Boolean).map((x) => `<p class="pl-varning">${esc(x)}</p>`).join('')}${julveckor.length ? `<p class="pl-varning">Planen har pass i ${esc(uppraknat(julveckor))}, vid jul och nyår. Är det lov hos er, tryck på ${julveckor.length > 1 ? 'veckorna' : 'veckan'} under Lov${aktiv.sparad ? ' i Ändra planen' : ''}.</p>` : ''}${julUppfoljning.length ? `<p class="pl-varning">Uppföljningen efter insatsen hamnar i ${esc(uppraknat(julUppfoljning))}, vid jul och nyår. Är det lov hos er, gör den första veckan efter lovet.</p>` : ''}${malRad('planen')}`
+    ? `<p class="pl-tal">${n} pass om ${esc(minuterText(langd))} minuter</p><p>${esc(dagar)}, ${esc(datumspann(plan.forstaPass!, plan.sistaPass!))}.</p>${plan.slut ? `<p>${esc(utvarderingenText(plan, aktiv.foljd.utvardering, !slutNu()))}</p>` : ''}${uppf.length ? `<p>${esc(uppf.join('. '))}.</p>` : ''}${[redanVarit, farre, annanLangd, kortare, langre].filter(Boolean).map((x) => `<p class="pl-varning">${esc(x)}</p>`).join('')}${julveckor.length ? `<p class="pl-varning">Planen har pass i ${esc(uppraknat(julveckor))}, vid jul och nyår. Är det lov hos er, tryck på ${julveckor.length > 1 ? 'veckorna' : 'veckan'} under Lov${aktiv.sparad ? ' i Ändra planen' : ''}.</p>` : ''}${julUppfoljning.length ? `<p class="pl-varning">Uppföljningen efter insatsen hamnar i ${esc(uppraknat(julUppfoljning))}, vid jul och nyår. Är det lov hos er, tryck på ${julUppfoljning.length > 1 ? 'veckorna' : 'veckan'} under Lov${aktiv.sparad ? ' i Ändra planen' : ''}, så flyttar uppföljningen till veckan efter lovet.</p>` : ''}${malRad('planen')}`
     : '<p>Planen har inga pass. Välj dagar och första passet.</p>';
   // Texten till åtgärdsprogrammet följer planen, och rutan är så hög som texten.
   // Rutan står när planen är klar, alltså sparad eller ur en länk (Niclas 2026-10-24: "när man gjort klart planeringen").

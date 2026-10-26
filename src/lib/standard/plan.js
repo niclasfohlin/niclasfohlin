@@ -93,8 +93,8 @@ const lista = (s) => s.split(/\s*(?:,|\boch\b)\s*/).filter(Boolean).map((x) => t
  * När en rad i metodens uppföljning görs, som ord i fältet `tid` bredvid radens egen text (`nar`). Orden är få och fasta,
  * så att planen kan sätta ett datum och bygget kan stanna på ett ord den inte känner:
  * före, efter, efter N veckor (och N–M veckor), varje pass, i passet, varje vecka, varannan vecka, var N:e vecka,
- * vecka N (och N, M och O eller N–M), första veckan, sista veckan, pass N (och N, M och O eller N–M), sista passet och
- * villkor, det som läraren bedömer när det händer.
+ * vecka N (och N, M och O eller N–M), första veckan, sista veckan, pass N (och N, M och O eller N–M), sista passet, sista
+ * passet efter pass N, när serien är längre än N pass, och villkor, det som läraren bedömer när det händer.
  * @param {unknown} text
  * @returns {Tid | null}
  */
@@ -113,6 +113,10 @@ export function tolkaTid(text) {
   if (t === 'första veckan') return { typ: 'vecka', veckor: [1] };
   if (t === 'sista veckan') return { typ: 'sista-veckan' };
   if (t === 'sista passet') return { typ: 'sista-passet' };
+  // Bara när serien blir längre, som Kompissamtals mätning efter det sista samtalet när det är fler än tre (verifieringen
+  // 2026-10-26: en plan med fyra samtal saknade den).
+  m = t.match(new RegExp(String.raw`^sista passet efter pass ${TAL}$`, 'u'));
+  if (m) return { typ: 'sista-passet', efter: talAv(m[1]) };
   if (t === 'villkor') return { typ: 'villkor' };
   m = t.match(new RegExp(String.raw`^(vecka|pass) ${TAL}${STRECK}${TAL}$`, 'u'));
   if (m) {
@@ -197,6 +201,10 @@ export function tolkaPassen(text) {
   if (t === 'första passet') return { typ: 'pass', fran: 1, till: 1 };
   if (t === 'sista passet' || t === 'det sista passet') return { typ: 'sista' };
   if (t === 'näst sista passet' || t === 'det näst sista passet') return { typ: 'nastSista' };
+  // Bara i en serie som är längre än N pass, som Kompissamtals samtal 4 och 5 (Codex 2026-10-26: en serie som avslutades
+  // efter samtal 1 visade samtal 1 som det avslutande samtalet).
+  m = t.match(/^(?:det )?(näst sista|sista) passet efter pass (\d+)$/);
+  if (m) return { typ: m[1] === 'sista' ? 'sista' : 'nastSista', efter: Number(m[2]) };
   m = t.match(/^pass (\d+)$/);
   if (m) return { typ: 'pass', fran: Number(m[1]), till: Number(m[1]) };
   m = t.match(new RegExp(String.raw`^pass (\d+)${STRECK}(\d+)$`, 'u'));
@@ -743,12 +751,20 @@ export function planera(mp, val) {
     if (tid.typ === 'fore' && forsta) tillfallen = [{ datum: foreMandag, vecka: 0 }];
     // Efter: veckan efter sista passet; efter N veckor: veckan med dagen N veckor efter sista passet (buggjägarna
     // 2026-10-25: fyra veckor efter räknades från veckan efter och blev fem).
-    else if (tid.typ === 'efter') tillfallen = [{ datum: tid.veckor && sista ? mandagen(plusDagar(sista.datum, tid.veckor * 7)) : plusDagar(efter, tid.veckor * 7), vecka: null }];
+    else if (tid.typ === 'efter') {
+      let datum = tid.veckor && sista ? mandagen(plusDagar(sista.datum, tid.veckor * 7)) : plusDagar(efter, tid.veckor * 7);
+      // En lovvecka flyttar uppföljningen till veckan efter lovet (verifieringen 2026-10-26: uppföljningen fyra veckor efter
+      // hamnade i jullovet, och veckan gick inte att trycka som lov).
+      for (let i = 0; i < 53 && lov.has(veckonyckel(datum)); i++) datum = plusDagar(datum, 7);
+      tillfallen = [{ datum, vecka: null }];
+    }
     else if (tid.typ === 'intervall') tillfallen = veckor.filter((v) => v.nr % tid.var === 0).map((v) => ({ datum: sistaIVeckan(v), vecka: v.nr }));
     else if (tid.typ === 'vecka') tillfallen = tid.veckor.flatMap((n) => { const v = [...veckor].reverse().find((x) => x.innehall === n); return v ? [{ datum: sistaIVeckan(v), vecka: v.nr }] : []; });
     else if (tid.typ === 'sista-veckan' && veckor.length) { const v = veckor[veckor.length - 1]; tillfallen = [{ datum: sistaIVeckan(v), vecka: v.nr }]; }
     else if (tid.typ === 'pass') tillfallen = tid.pass.flatMap((n) => { const p = pass.find((x) => x.nr === n); return p ? [{ datum: p.datum, vecka: p.vecka }] : []; });
-    else if (tid.typ === 'sista-passet' && sista) tillfallen = [{ datum: sista.datum, vecka: sista.vecka }];
+    // Med "efter pass N" bara när det sista passet har ett nummer efter N, så att samma mätning inte står två gånger på
+    // pass N och så att en serie som slutar tidigare inte får den (Codex 2026-10-26).
+    else if (tid.typ === 'sista-passet' && sista && !(tid.efter && !(sista.nr > tid.efter))) tillfallen = [{ datum: sista.datum, vecka: sista.vecka }];
     return { rad, typ: tid.typ, tillfallen };
   });
   const efterSteg = mp.steg.find((s) => s.efter)?.rad;
@@ -961,8 +977,10 @@ export function passetTraffas(nar, lage) {
   if (nar.typ === 'minuter') return lage.minuter === nar.minuter;
   const iVeckorna = (s) => lage.vecka !== undefined && lage.vecka >= s.fran && lage.vecka <= s.till;
   if ('veckor' in nar && nar.veckor && !iVeckorna(nar.veckor)) return false;
-  if (nar.typ === 'sista') return !!lage.sista;
-  if (nar.typ === 'nastSista') return !!lage.nastSista;
+  // "efter pass N": bara ett pass med ett nummer efter N.
+  const efterN = !('efter' in nar) || !nar.efter || (lage.nr !== undefined && lage.nr > nar.efter);
+  if (nar.typ === 'sista') return !!lage.sista && efterN;
+  if (nar.typ === 'nastSista') return !!lage.nastSista && efterN;
   if (nar.typ === 'pass') return lage.nr !== undefined && lage.nr >= nar.fran && (nar.till === undefined || lage.nr <= nar.till);
   if (nar.typ === 'veckor') return iVeckorna(nar);
   if (nar.plats === 'sista') return !!lage.sistIVeckan;
@@ -1366,20 +1384,50 @@ export function delarIFoljd(delar) {
  * Dagarna med sina tider: "måndag, onsdag och fredag kl. 9.20–10.00" när dagarna har samma tid, och annars tiden vid
  * varje dag, "måndag kl. 9.20–10.00 och onsdag kl. 13.00–13.40".
  * @param {Val} val
+ * @param {{ pass: Pass[] }} [plan] planen, så att ett byte av dagar säger passens egna datum
  */
-export function dagarText(val) {
+export function dagarText(val, plan) {
   const tider = rentaTider(val.tider);
+  const namn = (d) => uppraknat(d.map((x) => VECKODAGAR[x - 1]));
+  // Dagarnas gemensamma tid, "" när ingen dag har en tid och null när de har olika.
+  const tidFor = (d) => { const par = d.map((x) => tider[String(x)]); return !par.some(Boolean) ? '' : par.every((x) => x && x[0] === par[0]?.[0] && x[1] === par[0]?.[1]) ? tidsspann(par[0]) : null; };
+  // En dag utan tid säger det, så att den inte läses som att den har nästa dags tid (buggjakten 2026-10-24).
+  const medTid = (d) => { const t = tidFor(d); return t !== null ? `${namn(d)}${t ? ` kl. ${t}` : ''}` : uppraknat(d.map((x) => `${VECKODAGAR[x - 1]}${tider[String(x)] ? ` kl. ${tidsspann(tider[String(x)])}` : ' utan tid'}`)); };
   const dagar = [...new Set(val.dagar)].sort();
-  const par = dagar.map((d) => tider[String(d)]);
-  const samma = par[0] && par.every((x) => x && x[0] === par[0][0] && x[1] === par[0][1]);
-  const nu = samma || !par.some(Boolean) ? `${uppraknat(dagar.map((d) => VECKODAGAR[d - 1]))}${samma ? ` kl. ${tidsspann(par[0])}` : ''}`
-    // En dag utan tid säger det, så att den inte läses som att den har nästa dags tid (buggjakten 2026-10-24).
-    : uppraknat(dagar.map((d, i) => `${VECKODAGAR[d - 1]}${par[i] ? ` kl. ${tidsspann(par[i])}` : ' utan tid'}`));
+  const nu = medTid(dagar);
   // Ett byte av dagar mitt i insatsen: dagarna före och dagarna från bytets dag, "tisdag och torsdag, och från 26 november
   // onsdag och torsdag kl. 9.00–9.30" (sajtens K-546).
   const fore = rentaFore(val.fore);
   if (!fore.length) return nu;
-  const namn = (d) => uppraknat(d.map((x) => VECKODAGAR[x - 1]));
+  // Med planen säger meningen passens egna datum, "torsdag 5 november, sedan onsdag från 11 november, kl. 9.15–9.35"
+  // (verifieringen 2026-10-26: "från 5 november onsdag" när den 5 november var en torsdag, också i texten till
+  // åtgärdsprogrammet). Ett pass hör till dagarna före till och med bytets dag, när dess dag gällde före.
+  if (plan?.pass.length) {
+    const avsnitt = [...fore.map((f) => f.dagar), dagar];
+    // Passen på sina vanliga dagar, med sina datum: ett pass som har flyttats till en annan dag är ett undantag, som i en
+    // plan utan byte (Codex 2026-10-26: ett flyttat pass gav sitt ursprungliga datum, och ett fast pass en dag som meningen
+    // inte sa).
+    const datum = avsnitt.map(() => /** @type {string[]} */ ([]));
+    for (const p of iDatumordning(plan.pass)) {
+      const dag = passetsDag(p), i = fore.findIndex((f) => dag < f.till || (dag === f.till && f.dagar.includes(veckodag(dag))));
+      const a = i < 0 ? fore.length : i;
+      if (avsnitt[a].includes(veckodag(p.datum))) datum[a].push(p.datum);
+    }
+    // Dagarna före ett byte är dagarna som hade pass, så att ett avsnitt med ett pass inte säger två dagar (Codex samma dag).
+    const dagarI = (i) => (i === fore.length ? dagar : [...new Set(datum[i].map(veckodag))].sort());
+    const delar = avsnitt.map((_, i) => i).filter((i) => datum[i].length);
+    if (delar.length === 1) return medTid(dagarI(delar[0]));
+    if (delar.length) {
+      const gemensam = tidFor([...new Set(delar.flatMap(dagarI))]);
+      const datumdel = (i, j) => {
+        const ds = datum[i], forsta = dagOchManad(ds[0]), sista = dagOchManad(ds[ds.length - 1]);
+        return ds.length === 1 ? forsta : j === 0 ? `till ${sista}` : i === fore.length ? `från ${forsta}` : `från ${forsta} till ${sista}`;
+      };
+      // Har dagarna olika tider står tiderna vid sitt avsnitt.
+      const delen = (i, j) => { const d = dagarI(i), t = tidFor(d); return `${namn(d)} ${datumdel(i, j)}${gemensam !== null ? '' : t ? ` kl. ${t}` : t === '' ? '' : ` (${medTid(d)})`}`; };
+      return `${delar.map(delen).join(', sedan ')}${gemensam ? `, kl. ${gemensam}` : ''}`;
+    }
+  }
   return [...fore.map((f, i) => (i ? `från ${dagOchManad(fore[i - 1].till)} ${namn(f.dagar)}` : namn(f.dagar))), `och från ${dagOchManad(fore[fore.length - 1].till)} ${nu}`].join(', ');
 }
 
@@ -1551,7 +1599,7 @@ export function dokumentationstext(info, plan, val, o) {
   rader.push(`Åtgärd: ${info.titel}${under ? `, ${under}` : ''}.`);
   const mal = val.mal || info.mal;
   if (mal) rader.push(`Mål: ${malText(mal)}`);
-  const dagar = dagarText(val);
+  const dagar = dagarText(val, plan);
   const v1 = plan.veckor[0]?.vecka.vecka, v2 = plan.veckor[plan.veckor.length - 1]?.vecka.vecka;
   if (plan.forstaPass && plan.sistaPass) rader.push(`Omfattning: ${plan.pass.length} pass om ${minuterText(passensMinuter(val, o.minuter, plan))} minuter, ${dagar}, ${datumspann(plan.forstaPass, plan.sistaPass)} (${kalenderveckor(v1, v2, ' till ')})${info.nivaNamn ? `, på nivån ${info.nivaNamn}` : ''}.`);
   // En insats som avslutades tidigare säger det, med lärarens anledning utan elevernas namn (K-542).
@@ -1977,14 +2025,14 @@ export function kalenderfil(info, plan, o) {
 }
 
 /**
- * @typedef {{ typ: 'fore' } | { typ: 'efter', veckor: number, till?: number } | { typ: 'lopande', enhet: 'pass' | 'vecka' } | { typ: 'intervall', var: number } | { typ: 'vecka', veckor: number[] } | { typ: 'sista-veckan' } | { typ: 'pass', pass: number[], till?: number } | { typ: 'sista-passet' } | { typ: 'villkor' }} Tid
+ * @typedef {{ typ: 'fore' } | { typ: 'efter', veckor: number, till?: number } | { typ: 'lopande', enhet: 'pass' | 'vecka' } | { typ: 'intervall', var: number } | { typ: 'vecka', veckor: number[] } | { typ: 'sista-veckan' } | { typ: 'pass', pass: number[], till?: number } | { typ: 'sista-passet', efter?: number } | { typ: 'villkor' }} Tid
  * @typedef {{ rad: number, fran: number, till?: number, vidBehov: boolean, efter?: true }} Steg
- * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista' } | { typ: 'veckor', fran: number, till: number }} PassensNar
+ * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista', efter?: number } | { typ: 'veckor', fran: number, till: number }} PassensNar
  * @typedef {{ takt: { min: number, max: number }, minuter: { min: number, max: number }, period: { min: number, max?: number, enhet: 'veckor' | 'pass', mer: boolean, perKurs: boolean }, stegEnhet: 'veckor' | 'pass', steg: Steg[], uppfoljning: { rad: number, tid: Tid }[], passen: { rad: number, nar: PassensNar }[] }} Metodplan
  * @typedef {{ uppfoljning?: { rader: { nar: string, vad: string }[] }, progression?: { rader: { vecka: string, fokus?: string, roll?: string, led?: string }[] }, checklista?: { punkter: string[] }, plan?: { passen?: { nar: string, text?: string, ur?: { tabell: string, rad: string, kolumner?: string[] }, kort?: string, tabell?: string }[], fore?: string[], justera?: string[], upprepa?: string, utan?: string[], stege?: boolean, nivaval?: { text: string, mer: string } }, tidsschema?: { text?: string, efter?: string, rader: { tid: string, fas: string, vad: string }[], varianter?: Variant[] }, gruppen?: { text: string }, passrutin?: { efterPasset?: string }, principer?: { text: string }, hem?: { text: string[] }, tabeller?: { rubrik: string, kolumner: string[], rader?: unknown[][] }[], nivaer?: { namn: string }[] }} MetodensTexter
  * @typedef {{ nar: string, text?: string, delar: { fas: string, tid: string }[] }} Variant
  * @typedef {{ tid: string, fas: string, vad: string, mer: { etikett: string, text: string }[] }} TabellDel
- * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista' } | { typ: 'nastSista' } | { typ: 'veckor', fran: number, till: number }} PassensNar
+ * @typedef {{ typ: 'vecka', plats: number | 'sista' | 'ovriga' } | { typ: 'pass', fran: number, till?: number } | { typ: 'sista', efter?: number } | { typ: 'nastSista', efter?: number } | { typ: 'veckor', fran: number, till: number }} PassensNar
  * @typedef {PassensNar | { typ: 'minuter', minuter: number } | { typ: 'vecka', plats: number | 'sista' | 'ovriga', veckor: { fran: number, till: number } } | { typ: 'sista', veckor: { fran: number, till: number } }} VariantensNar
  * @typedef {{ nr?: number, sista?: boolean, nastSista?: boolean, vecka?: number, plats?: number, sistIVeckan?: boolean, minuter?: number }} PassetsLage
  * @typedef {{ start: string, dagar: number[], langd: number, niva?: string, borja?: number, minuter?: number, lov?: string[], upprepa?: number[], flytta?: Record<string, string>, stryk?: string[], tider?: Record<string, [string, string]>, mal?: string, mitt?: number, slut?: number, fore?: { till: string, dagar: number[], fasta?: Record<string, number> }[] }} Val

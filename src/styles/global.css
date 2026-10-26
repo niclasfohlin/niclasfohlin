@@ -1213,8 +1213,10 @@ math.m-brak { font-family: var(--typsnitt-ui); font-size: 1.15em; math-style: no
 .m-blad-rubrik { font-family: var(--typsnitt-ui); font-weight: 700; margin: 0 0 0.4rem; }
 .m-blad img { display: block; width: 100%; height: auto; background: #fff; border: 1px solid var(--farg-kant); border-radius: 4px; }
 .m-blad figcaption { font-size: 0.95rem; color: var(--farg-text-svag); margin-top: 0.4rem; }
-/* Bladet som Google Formulär med en sammanställning (fältet google): en knapp under bildtexten. */
+/* Bladet som Google Formulär med en sammanställning (fältet google): vad formuläret är och en knapp under bildtexten. */
 .m-blad-google { margin: 0.6rem 0 0; }
+.m-blad-google p { margin: 0 0 0.5rem; }
+.m-blad-google p:first-child { font-size: 0.95rem; color: var(--farg-text-svag); }
 /* Knappen som skriver ut bladets egen pdf och filvalet med Word-filen, direkt under bladet (Pabordet.astro, K-476). */
 .m-blad-filer { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; margin: 0.5rem 0 0.3rem; }
 @media print { .m-blad-google, .m-blad-filer { display: none; } }

@@ -300,7 +300,7 @@ steg:
       fraser:
         - Den som håller i talpinnen pratar, och vi andra lyssnar.
         - Jag får prata utan talpinnen när jag behöver föra samtalet vidare.
-        - Det vi berättar här stannar här. Men det vi kommer överens om får de vuxna i skolan och era familjer veta.
+        - Det vi berättar här stannar här, men om jag får veta att någon far illa, måste jag berätta det för någon som kan hjälpa. Det vi kommer överens om får de vuxna i skolan och era familjer veta.
         - Ni ses ofta i skolan. Här letar vi inte efter vem som har gjort fel. Vi pratar om hur ni vill ha det.
     - namn: Rundan
       fraga: Vem talar nu?
@@ -364,7 +364,7 @@ exempel:
     text: Elsa, Omar, Liam och Noor i åk 4 spelar fotboll på rasterna, och det slutar ofta i bråk om reglerna. Liam hamnar ibland utanför. Exemplet är samtal 1.
   text:
     - Läraren har bokat tre tisdagar och pratat kort med var och en. Alla ville vara med. Liam sa att han ibland inte får bollen, men att ingen är elak mot honom. Han ville att de skulle prata om det tillsammans. Läraren frågade också hur bra det fungerar i gruppen, från 0 till 10, och eleverna svarade 2, 3, 4 och 5. Talpinnen ligger mitt på det runda bordet, korten och bladet Vår överenskommelse finns till hands, och läraren har bestämt att Omar och Elsa inte sitter bredvid varandra.
-    - "Läraren håller upp talpinnen: ”Den som håller i talpinnen pratar, och vi andra lyssnar.” Läraren läser de fyra samtalsreglerna och frågar hur det ser ut och låter när man följer varje regel. Om regeln Vi lyssnar på varandra säger Noor: ”Man tittar mot den som pratar.” Läraren tar fram kortet Så kan du säga och läser startorden. Hen säger ”Du är dum” och sedan ”När du säger så, känner jag mig ledsen”, och frågar vilket som är lättast att lyssna på. Läraren fortsätter: ”Det ni berättar här stannar här, men det vi kommer överens om får de vuxna i skolan och era familjer veta. Ni spelar fotboll ihop, och ibland blir det bråk. Vi letar inte efter vem som har gjort fel. I dag pratar vi om hur ni vill ha det.”"
+    - "Läraren håller upp talpinnen: ”Den som håller i talpinnen pratar, och vi andra lyssnar.” Läraren läser de fyra samtalsreglerna och frågar hur det ser ut och låter när man följer varje regel. Om regeln Vi lyssnar på varandra säger Noor: ”Man tittar mot den som pratar.” Läraren tar fram kortet Så kan du säga och läser startorden. Hen säger ”Du är dum” och sedan ”När du säger så, känner jag mig ledsen”, och frågar vilket som är lättast att lyssna på. Läraren fortsätter: ”Det ni berättar här stannar här, men om jag får veta att någon far illa, måste jag berätta det för någon som kan hjälpa. Det vi kommer överens om får de vuxna i skolan och era familjer veta. Ni spelar fotboll ihop, och ibland blir det bråk. Vi letar inte efter vem som har gjort fel. I dag pratar vi om hur ni vill ha det.”"
     - "Rundans mening är ”Jag känner mig glad när vi ___.” Läraren gör den färdig först: ”Jag känner mig glad när vi leker.” Sedan säger Elsa ”Jag känner mig glad när vi vinner.” Liam står över. När varvet är klart frågar läraren igen, och Liam säger ”Jag känner mig glad när alla får passa.”"
     - "Läraren lägger talpinnen mitt på bordet. Omar räcker upp handen, får en nick och tar talpinnen: ”Elsa skriker alltid fusk!” Läraren säger: ”Du blev arg när Elsa ropade fusk. Stämmer det?” Omar nickar. Läraren tar fram kortet igen, och Omar säger till Elsa: ”När du ropar fusk, känner jag mig arg.” Elsa tar talpinnen: ”Jag tänker att vi inte hade bestämt var linjen gick.” Noor tar talpinnen: ”Jag undrar hur det är för dig, Liam.” Liam tar talpinnen och svarar: ”Jag känner mig ensam när ingen passar.”"
     - "Läraren frågar: ”Vad kan ni göra annorlunda till nästa gång?” Gruppen kommer med tre förslag, och läraren skriver upp dem. De väljer: ”Innan matchen bestämmer vi var linjerna går.” Läraren frågar hur det ser ut när de gör det, och Noor säger: ”Vi går runt planen och pekar.” Läraren frågar: ”Kan alla göra det här?” Alla visar tummen upp, och Elsa skriver överenskommelsen på bladet."
@@ -416,6 +416,9 @@ uppfoljning:
     - nar: Efter samtal 3
       tid: "pass 3"
       vad: Räkna samma saker under en rast, och fråga varje elev igen. Jämför med det du fick före samtal 1, och bestäm om gruppen behöver ett eller två samtal till.
+    - nar: Efter det sista samtalet
+      tid: "sista passet efter pass 3"
+      vad: Blir serien längre än tre samtal, räknar du samma saker under en rast efter det sista samtalet och frågar varje elev igen. Jämför med det du fick före samtal 1 och efter samtal 3.
     - nar: Fyra veckor efter sista samtalet
       tid: "efter 4 veckor"
       vad: Fråga gruppen om överenskommelsen håller och om de använder startorden. Har det blivit sämre, påminn gruppen om den.
@@ -430,6 +433,14 @@ plan:
       kort: "Det vi har sett"
       ur: { tabell: "Tre samtal: ramarna, det vi har sett och det som håller", rad: "2" }
     - nar: pass 3
+      kort: "Det som håller"
+      ur: { tabell: "Tre samtal: ramarna, det vi har sett och det som håller", rad: "3" }
+    # Blir serien längre avslutar det sista samtalet den som samtal 3, och i en serie på fem följer samtal 4 upp som samtal 2
+    # (tabellens rad 4–5; verifieringen 2026-10-26: pass 4 gav båda vägarna).
+    - nar: näst sista passet efter pass 3
+      kort: "Det vi har sett"
+      ur: { tabell: "Tre samtal: ramarna, det vi har sett och det som håller", rad: "2" }
+    - nar: sista passet efter pass 3
       kort: "Det som håller"
       ur: { tabell: "Tre samtal: ramarna, det vi har sett och det som håller", rad: "3" }
     - nar: pass 4 till det sista
@@ -472,7 +483,7 @@ checklista:
     - Frågat varje elev om hen vill vara med, vad som skulle göra det lättare och hur bra det fungerar i gruppen, från 0 till 10.
     - Räknat bråken, sänkningarna och hur ofta någon hamnar utanför under en rast.
     - Skickat lappen hem före samtal 1.
-    - Bokat rummet och tre tider, ungefär en i veckan.
+    - Bokat rummet och tiderna, ungefär en i veckan.
     - Berättat om samtalen för de vuxna runt gruppen, och skrivit ut korten Våra samtalsregler, Så kan du säga och Peka på känslan och bladet Vår överenskommelse.
 grund:
   text: "I Bergmans kompissamtal sitter hela klassen i ring en gång i veckan, och en i taget berättar om veckans konflikter medan de andra lyssnar (Bergman, 2004). I den här metoden samtalar en liten grupp på samma sätt. Undervisning i socialt och emotionellt lärande stärker elevernas färdigheter och minskar beteendeproblemen, mest när eleverna övar själva, steg för steg (Durlak m.fl., 2011). Metoden hämtar tre strategier ur program som har stöd i forskning: att sätta ord på känslor, säga jag-⁠budskap och lösa problem tillsammans. Strategierna har prövats som delar av programmen, men inte var för sig i undervisningen (EEF, 2021). Jag-⁠budskap väcker mindre fientlighet än du-⁠budskap (Kubany m.fl., 1992), särskilt när den som talar också visar att hen förstår den andra (Rogers m.fl., 2018). Du håller samtalen när eleverna är lugna, eftersom det går bäst att lösa problem då (EEF, 2021). Du följer också upp samtalen i vardagen, eftersom det eleverna övar på särskilda lektioner annars tycks gälla bara där (Skolverket, 2011)."
@@ -756,6 +767,15 @@ lathund:
       - Papper för förslagen
       - Förra bladet, från och med samtal 2
     varjePass: Samma dag fyller du i snabbmallen och lapparna hem och berättar för de vuxna.
+    uppfoljning:
+      - nar: "Före samtal 1"
+        vad: "Titta på gruppen under en rast, och räkna bråken, sänkningarna och hur ofta någon hamnar utanför. Fråga varje elev för sig: ”Hur bra fungerar det i gruppen, från 0 till 10?”"
+      - nar: I varje samtal
+        vad: "Skriv vilka jag-⁠budskap och du-⁠budskap du hörde, vem som avbröt och vem som stod över. Fråga de vuxna runt gruppen vad de har sett."
+      - nar: "Efter samtal 3"
+        vad: "Räkna och fråga igen, och bestäm om gruppen behöver ett eller två samtal till. Blir serien längre, gör du det också efter det sista."
+      - nar: Fyra veckor efter sista samtalet
+        vad: "Fråga gruppen om överenskommelsen håller och om de använder startorden. Har det blivit sämre, påminn gruppen om den."
 lektionskort:
   - text: "Lektionskortet är samtalet på ett A4: målet, de tre samtalen, delarna med det du gör och säger, och det du gör om något händer. Skriv ut det och ha det framför dig under samtalet."
 film:

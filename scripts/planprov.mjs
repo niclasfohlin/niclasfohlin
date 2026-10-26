@@ -54,7 +54,7 @@ ska('ett vanligt datum är ingen röd dag', s.helgdag('2026-11-18') === undefine
 ska('plusDagar över sommartiden', s.plusDagar('2026-10-24', 2) === '2026-10-26' && s.plusDagar('2027-03-27', 2) === '2027-03-29');
 ska('arDatum stoppar 30 februari', !s.arDatum('2026-02-30') && s.arDatum('2028-02-29') && !s.arDatum('2027-02-29'));
 
-const tider = [['före', 'fore'], ['efter', 'efter'], ['efter 4 veckor', 'efter'], ['Efter fyra veckor', 'efter'], ['efter 4–6 veckor', 'efter'], ['varje pass', 'lopande'], ['i passet', 'lopande'], ['varje vecka', 'lopande'], ['varannan vecka', 'intervall'], ['var 3:e vecka', 'intervall'], ['vecka 4', 'vecka'], ['vecka 1–4', 'vecka'], ['vecka 2 och 6', 'vecka'], ['första veckan', 'vecka'], ['sista veckan', 'sista-veckan'], ['pass 6, 8 och 10', 'pass'], ['pass 13–23', 'pass'], ['sista passet', 'sista-passet'], ['villkor', 'villkor']];
+const tider = [['före', 'fore'], ['efter', 'efter'], ['efter 4 veckor', 'efter'], ['Efter fyra veckor', 'efter'], ['efter 4–6 veckor', 'efter'], ['varje pass', 'lopande'], ['i passet', 'lopande'], ['varje vecka', 'lopande'], ['varannan vecka', 'intervall'], ['var 3:e vecka', 'intervall'], ['vecka 4', 'vecka'], ['vecka 1–4', 'vecka'], ['vecka 2 och 6', 'vecka'], ['första veckan', 'vecka'], ['sista veckan', 'sista-veckan'], ['pass 6, 8 och 10', 'pass'], ['pass 13–23', 'pass'], ['sista passet', 'sista-passet'], ['sista passet efter pass 3', 'sista-passet'], ['villkor', 'villkor']];
 for (const [t, typ] of tider) ska(`tolkaTid("${t}")`, s.tolkaTid(t)?.typ === typ, s.tolkaTid(t));
 for (const t of ['Före insatsen', 'efter kursen', 'var 1:e vecka', 'vecka 4–2', 'ibland', '', undefined]) ska(`tolkaTid("${t}") ska vara null`, s.tolkaTid(t) === null, s.tolkaTid(t));
 ska('vecka 1–4 är fyra veckor', s.tolkaTid('vecka 1–4').veckor.join() === '1,2,3,4');
@@ -250,6 +250,17 @@ if (tsMp) {
   const langre = { ...val, start: '2026-11-16', dagar: [2], langd: 6, tider: { 2: ['09:00', '09:30'], 4: ['10:00', '11:00'] }, fore: [{ till: '2026-11-26', dagar: [2, 4] }] };
   ska('passens längd räknas med dagarna före ett byte', s.passensMinuter(langre, 30, s.planera(tsMp, langre)).join() === '30,60' && s.passensMinuter(langre, 30).join() === '30', s.passensMinuter(langre, 30, s.planera(tsMp, langre)));
   ska('länken bär bytet av dagar, och dagarna i en mening säger det', s.kodaVal(byte).includes('d=34') && s.kodaVal(byte).includes('db=2026-11-26~24') && JSON.stringify(s.lasVal(s.kodaVal(byte))?.val.fore) === '[{"till":"2026-11-26","dagar":[2,4]}]' && s.dagarText({ ...byte, tider: { 2: ['09:00', '09:30'], 3: ['09:00', '09:30'], 4: ['09:00', '09:30'] } }) === 'tisdag och torsdag, och från 26 november onsdag och torsdag kl. 9.00–9.30' && s.forstaMandagen(byte) === '2026-11-23', [s.kodaVal(byte), s.dagarText(byte)]);
+  // Efter ett byte säger meningen passens egna datum, också i texten till åtgärdsprogrammet (verifieringen 2026-10-26: "från
+  // 5 november onsdag" när den 5 november var en torsdag).
+  const tors = { ...val, start: '2026-11-02', dagar: [4], langd: 4, tider: { 3: ['09:15', '09:35'], 4: ['09:15', '09:35'] } };
+  const ons = byt(tsMp, tors, [3], '2026-11-05'), onsPlan = s.planera(tsMp, ons);
+  const onsSen = byt(tsMp, { ...tors, tider: { 3: ['10:00', '10:20'], 4: ['09:15', '09:35'] } }, [3], '2026-11-05');
+  ska('dagarna efter ett byte säger passens egna datum', s.dagarText(ons, onsPlan) === 'torsdag 5 november, sedan onsdag från 11 november, kl. 9.15–9.35' && s.dagarText(onsSen, s.planera(tsMp, onsSen)) === 'torsdag 5 november kl. 9.15–9.35, sedan onsdag från 11 november kl. 10.00–10.20' && s.dokumentationstext({ titel: ts.titel, mal: ts.mal.overgripande, uppfoljning: ts.uppfoljning.rader }, onsPlan, ons, { minuter: 20 }).includes('torsdag 5 november, sedan onsdag från 11 november, kl. 9.15–9.35, 5 november till 25 november'), [s.dagarText(ons, onsPlan), s.dagarText(onsSen, s.planera(tsMp, onsSen)), onsPlan.pass.map((x) => x.datum)]);
+  // Codex 2026-10-26: ett flyttat pass och ett fast pass är undantag, och ett avsnitt säger bara dagarna som hade pass.
+  const flyttatOns = byt(tsMp, { ...tors, flytta: { '2026-11-05': '2026-11-04' } }, [3], '2026-11-05');
+  const fastTis = byt(tsMp, { ...tors, flytta: { '2026-11-05': '2026-11-03' } }, [3], '2026-11-04');
+  const tisTors = byt(tsMp, { ...tors, start: '2026-11-05', dagar: [2, 4] }, [3], '2026-11-05');
+  ska('dagarna efter ett byte: flyttade pass är undantag, och avsnittet säger dagarna som hade pass', s.dagarText(flyttatOns, s.planera(tsMp, flyttatOns)) === 'onsdag kl. 9.15–9.35' && s.dagarText(fastTis, s.planera(tsMp, fastTis)) === 'onsdag kl. 9.15–9.35' && s.dagarText(tisTors, s.planera(tsMp, tisTors)) === 'torsdag 5 november, sedan onsdag från 11 november, kl. 9.15–9.35', [s.dagarText(flyttatOns, s.planera(tsMp, flyttatOns)), s.dagarText(fastTis, s.planera(tsMp, fastTis)), s.dagarText(tisTors, s.planera(tsMp, tisTors))]);
   const bytt = s.bytDagar({ ...val, start: '2026-11-23', dagar: [2, 4], tider: { 2: ['09:00', '09:30'], 4: ['09:00', '09:30'] } }, [4], '2026-11-26');
   const bytt2 = s.bytDagar(bytt, [3, 4], '2026-11-26');
   ska('bytet av dagar: från ett datum står dagarna före kvar, samma dag ändras bytet, och tillbaka utan en annan dag tar bort det', JSON.stringify(bytt2.fore) === '[{"till":"2026-11-26","dagar":[2,4]}]' && bytt2.dagar.join() === '3,4' && !!bytt2.tider?.['2'] && s.bytDagar(bytt, [2, 4], '2026-11-26').fore === undefined && !s.bytDagar(bytt2, [2, 4], '2026-11-26').tider?.['3'] && s.bytDagar({ ...val, dagar: [2, 4], tider: { 2: ['09:00', '09:30'] } }, [3]).tider === undefined && s.bytDagar({ ...val, dagar: [2, 4] }, [3]).fore === undefined, [bytt2, s.bytDagar(bytt2, [2, 4], '2026-11-26')]);
@@ -354,6 +365,25 @@ if (tsMp) {
     const kmp = s.metodplan(ks).plan, kpl = s.planera(kmp, s.forval(kmp, '2026-10-26'));
     const forstaDel = (p) => s.passetsBeskrivning([], ks.tidsschema, s.passetsLage(kpl, p)).delar[0]?.tid;
     ska('raden efter tidsschemat: passets tider stannar, och samtal 1 är en variant', s.tidsschematsFel({ ...ks, tidsschema: { ...ks.tidsschema, efter: 'Då har Starta 0–6 min och Rundan 6–9 min.' } }).some((x) => x.startsWith('Raden efter tidsschemat säger passets tider')) && !s.tidsschematsFel(ks).length && forstaDel(kpl.pass[0]) === '0–6 min' && forstaDel(kpl.pass[1]) !== '0–6 min', [forstaDel(kpl.pass[0]), forstaDel(kpl.pass[1]), s.tidsschematsFel(ks)]);
+    // En serie med fler än tre samtal följer metoden (verifieringen 2026-10-26): det sista samtalet avslutar som samtal 3, i
+    // en serie på fem följer samtal 4 upp som samtal 2, och mätningen efter det sista kommer bara när serien är längre.
+    const serie = (langd) => { const pl = s.planera(kmp, { ...s.forval(kmp, '2026-10-26'), langd }); return { pl, kort: pl.pass.map((p) => ks.plan.passen[s.passetsRoller(pl, p, kmp.passen)[0]]?.kort), sista: pl.uppfoljning.find((u) => ks.uppfoljning.rader[u.rad].nar === 'Efter det sista samtalet')?.tillfallen ?? [] }; };
+    const [tre, fyra, fem] = [3, 4, 5].map(serie);
+    ska('en serie med fler än tre samtal: det sista avslutar, och mätningen efter det sista', tre.kort.join() === 'Ramarna,Det vi har sett,Det som håller' && !tre.sista.length && fyra.kort.join() === 'Ramarna,Det vi har sett,Det som håller,Det som håller' && fyra.sista[0]?.datum === fyra.pl.pass[3].datum && fem.kort.join() === 'Ramarna,Det vi har sett,Det som håller,Det vi har sett,Det som håller' && fem.sista[0]?.datum === fem.pl.pass[4].datum, [tre.kort, fyra.kort, fem.kort, fyra.sista, tre.sista]);
+    // Codex 2026-10-26: en serie som avslutas efter samtal 1 har kvar Ramarna, och ett pass 3 som flyttas efter pass 4 ger
+    // en mätning, inte två.
+    const tva = { ...s.forval(kmp, '2026-10-26'), start: '2026-11-02', dagar: [1, 3], langd: 2 };
+    const sistaRad = (pl) => pl.uppfoljning.find((u) => ks.uppfoljning.rader[u.rad].nar === 'Efter det sista samtalet')?.tillfallen ?? [];
+    const tredjeRad = (pl) => pl.uppfoljning.find((u) => ks.uppfoljning.rader[u.rad].tid === 'pass 3')?.tillfallen ?? [];
+    const fyraPass = s.planera(kmp, tva), flyttat3 = s.planera(kmp, { ...tva, flytta: { '2026-11-09': '2026-11-13' } });
+    const ettPass = s.planera(kmp, { ...s.forval(kmp, '2026-10-26'), langd: 3, slut: 1 });
+    const kortet = (pl, p) => ks.plan.passen[s.passetsRoller(pl, p, kmp.passen)[0]]?.kort;
+    ska('sista passet efter pass 3: bara i en längre serie, och en mätning när pass 3 flyttas sist', JSON.stringify(s.tolkaPassen('sista passet efter pass 3')) === '{"typ":"sista","efter":3}' && s.tolkaPassen('näst sista passet efter pass 3')?.typ === 'nastSista' && kortet(ettPass, ettPass.pass[0]) === 'Ramarna' && sistaRad(fyraPass)[0]?.datum === '2026-11-11' && tredjeRad(fyraPass)[0]?.datum === '2026-11-09' && !sistaRad(flyttat3).length && tredjeRad(flyttat3)[0]?.datum === '2026-11-13', [kortet(ettPass, ettPass.pass[0]), sistaRad(fyraPass), sistaRad(flyttat3), tredjeRad(flyttat3)]);
+    // En lovvecka flyttar uppföljningen efter insatsen till veckan efter lovet (verifieringen 2026-10-26: fyra veckor efter
+    // hamnade i jullovet).
+    const jul = { ...s.forval(kmp, '2026-10-26'), start: '2026-10-31', dagar: [4], langd: 4 };
+    const julEfter = (lov) => s.planera(kmp, { ...jul, lov }).uppfoljning.find((u) => u.typ === 'efter')?.tillfallen[0]?.datum;
+    ska('en lovvecka flyttar uppföljningen efter insatsen till veckan efter lovet', julEfter([]) === '2026-12-21' && julEfter(['2026-52']) === '2026-12-28' && julEfter(['2026-52', '2026-53']) === '2027-01-04', [julEfter([]), julEfter(['2026-52']), julEfter(['2026-52', '2026-53'])]);
   }
   // Stödet för nivåvalet (K-557; Niclas 2026-10-26: "Bör alltid finnas vid ett sådant val i Planeras modul"): en metod med
   // nivåer har det, högst tre meningar och NIVAVALETS_LANGD tecken, och texten står ordagrant i metoden.
@@ -2136,8 +2166,8 @@ try {
   await db.tryck('#pl-dagar [data-dag="3"]');
   await vanta(200);
   const dbPlan = await db.kor(`JSON.parse(localStorage.getItem('insatser')).planer[0]`);
-  sant('byte av dagar: det hållna passet står kvar med bocken, och de nya dagarna gäller från i dag', dbPlan?.val.includes('d=34') && dbPlan.val.includes('db=2026-11-26~24') && dbPlan.foljd.gjorda.includes('2026-11-24') && (await db.kor(`document.querySelector('[data-bock="2026-11-24"]')?.getAttribute('aria-pressed')`)) === 'true' && !(await db.kor(`!!document.querySelector('[data-bock="2026-11-25"]')`)) && (await db.text('#pl-toast'))?.startsWith('Dagarna gäller från i dag, och passen som har varit och dagens pass står kvar.') && (await db.text('#pl-dagar-byte')) === 'Tisdag och torsdag, och från 26 november onsdag och torsdag.', [dbPlan?.val, await db.text('#pl-toast'), await db.text('#pl-dagar-byte')]);
-  sant('byte av dagar: veckan efter har de nya dagarna, och texten till åtgärdsprogrammet säger bytet', (await db.kor(`document.getElementById('pl-aptext')?.value`))?.includes('tisdag och torsdag, och från 26 november onsdag och torsdag') && (await db.text('#pl-summa-text'))?.includes('Tisdag och torsdag, och från 26 november onsdag och torsdag'), [await db.text('#pl-summa-text')]);
+  sant('byte av dagar: det hållna passet står kvar med bocken, och de nya dagarna gäller från i dag', dbPlan?.val.includes('d=34') && dbPlan.val.includes('db=2026-11-26~24') && dbPlan.foljd.gjorda.includes('2026-11-24') && (await db.kor(`document.querySelector('[data-bock="2026-11-24"]')?.getAttribute('aria-pressed')`)) === 'true' && !(await db.kor(`!!document.querySelector('[data-bock="2026-11-25"]')`)) && (await db.text('#pl-toast'))?.startsWith('Dagarna gäller från i dag, och passen som har varit och dagens pass står kvar.') && (await db.text('#pl-dagar-byte')) === 'Tisdag och torsdag till 26 november, sedan onsdag och torsdag från 2 december.', [dbPlan?.val, await db.text('#pl-toast'), await db.text('#pl-dagar-byte')]);
+  sant('byte av dagar: veckan efter har de nya dagarna, och texten till åtgärdsprogrammet säger bytet', (await db.kor(`document.getElementById('pl-aptext')?.value`))?.includes('tisdag och torsdag till 26 november, sedan onsdag och torsdag från 2 december') && (await db.text('#pl-summa-text'))?.includes('Tisdag och torsdag till 26 november, sedan onsdag och torsdag från 2 december'), [await db.text('#pl-summa-text')]);
   await db.tryck('#pl-dagar [data-dag="3"]');
   await vanta(150);
   await db.tryck('#pl-dagar [data-dag="2"]');

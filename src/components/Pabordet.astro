@@ -46,7 +46,13 @@ if (bildtextensFel) throw new Error(bildtextensFel);
       </p>
     )}
     <figcaption>{b.bild.text}</figcaption>
-    {b.bild.google && <p class="m-blad-google"><a class="knapp sekundar" href={b.bild.google} target="_blank" rel="noopener" data-goatcounter-click={`google:${b.bild.google.slice(1)}`} data-goatcounter-title={`${bladNamn(b)}: kopiera formuläret och sammanställningen i Google`}>Kopiera formuläret och sammanställningen</a></p>}
+    {/* Vad formuläret är, före knappen (verifieringen 2026-10-26: ordet formuläret stod först på knappen). */}
+    {b.bild.google && (
+      <div class="m-blad-google">
+        <p>Formuläret är bladet {bladNamn(b)} på skärmen, som eleverna fyller i på telefonen eller datorn. Knappen gör en kopia i din Google Drive, med ett kalkylark som sammanställer svaren, och svaren hamnar bara i din kopia.</p>
+        <p><a class="knapp sekundar" href={b.bild.google} target="_blank" rel="noopener" data-goatcounter-click={`google:${b.bild.google.slice(1)}`} data-goatcounter-title={`${bladNamn(b)}: kopiera formuläret och sammanställningen i Google`}>Kopiera formuläret och sammanställningen</a></p>
+      </div>
+    )}
   </figure>
 ) : (
   <figure class={`m-pabordet${vecka ? ' i-del' : ''}`}>

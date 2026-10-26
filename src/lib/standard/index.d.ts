@@ -104,11 +104,11 @@ export declare function meningarI(text: string): number;
 export declare function bildtextFel(bild: { rubrik?: string; text: string; alt?: string }, o?: { blad?: boolean; visas?: boolean }): string[];
 
 /** Planera insatsen (sajtens K-489, plan.js): när en rad i uppföljningen görs, ur fältet tid. */
-export type Tid = { typ: 'fore' } | { typ: 'efter'; veckor: number; till?: number } | { typ: 'lopande'; enhet: 'pass' | 'vecka' } | { typ: 'intervall'; var: number } | { typ: 'vecka'; veckor: number[] } | { typ: 'sista-veckan' } | { typ: 'pass'; pass: number[] } | { typ: 'sista-passet' } | { typ: 'villkor' };
+export type Tid = { typ: 'fore' } | { typ: 'efter'; veckor: number; till?: number } | { typ: 'lopande'; enhet: 'pass' | 'vecka' } | { typ: 'intervall'; var: number } | { typ: 'vecka'; veckor: number[] } | { typ: 'sista-veckan' } | { typ: 'pass'; pass: number[] } | { typ: 'sista-passet'; efter?: number } | { typ: 'villkor' };
 /** En rad i progressionen: veckorna eller passen den gäller; till saknas när den gäller till slutet. */
 export interface Steg { rad: number; fran: number; till?: number; vidBehov: boolean; efter?: true }
 /** Vilka pass en rad i planens passen gäller: platsen i veckan, eller numret i insatsen. */
-export type PassensNar = { typ: 'vecka'; plats: number | 'sista' | 'ovriga' } | { typ: 'pass'; fran: number; till?: number } | { typ: 'sista' } | { typ: 'nastSista' } | { typ: 'veckor'; fran: number; till: number };
+export type PassensNar = { typ: 'vecka'; plats: number | 'sista' | 'ovriga' } | { typ: 'pass'; fran: number; till?: number } | { typ: 'sista'; efter?: number } | { typ: 'nastSista'; efter?: number } | { typ: 'veckor'; fran: number; till: number };
 /** När en variant av passet gäller: planens ord för passen, passets längd, eller en plats i vissa veckor. */
 export type VariantensNar = PassensNar | { typ: 'minuter'; minuter: number } | { typ: 'vecka'; plats: number | 'sista' | 'ovriga'; veckor: { fran: number; till: number } } | { typ: 'sista'; veckor: { fran: number; till: number } };
 /** Var ett pass står i planen, som en rad i planens passen och en variant läser det. */
@@ -294,7 +294,7 @@ export declare const plusMinuter: (s: string, m: number) => string;
 /** Minuterna i ett spann i tidsschemat: "0–4 min" ger 0 och 4. */
 export declare const minuterISpann: (tid: string) => { fran: number; till: number } | null;
 /** Dagarna med sina tider, "måndag, onsdag och fredag kl. 9.20–10.00". */
-export declare function dagarText(val: Val): string;
+export declare function dagarText(val: Val, plan?: { pass: Pass[] }): string;
 /** Dagarna som gällde före ett byte av dagar mitt i insatsen, i datumordning. */
 export declare function rentaFore(fore: unknown): { till: string; dagar: number[]; fasta?: Record<string, number> }[];
 /** Om en veckodag är en passdag ett visst datum, med ett byte av dagar mitt i insatsen. */
