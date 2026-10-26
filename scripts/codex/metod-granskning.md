@@ -17,7 +17,7 @@ Filer:
 - Koden som bygger allt: src/content.config.ts (schemat), src/components/Metod.astro, src/components/MetodTabell.astro, src/components/Lathund.astro, src/components/Nedladdning.astro, src/lib/metoddocx.ts, src/lib/metod.ts, src/styles/global.css (skärm under .m-* och .lh-*, utskrift under @media print).
 - Förebilderna: src/content/stodundervisning/problemlosning-i-grupp.yaml (passöversikt, tavla, tabeller efter fastnar och grund), boksamtal-i-grupp.yaml, faktatextsamtal-i-grupp.yaml, til-i-grupp.yaml (hem, kontrakt, schema), skrivkurs-berattelseram.yaml (ramar, diplom, arskursText), och deras byggda sidor i dist/stodundervisning/.
 
-Granska sju saker.
+Granska nio saker.
 
 1. Paritet i innehåll. Finns varje del i underlaget med i YAML-filen (rubriker, stycken, tabellrader, exempelfraser, listor, siffror)? Finns varje del i YAML-filen på sidan, i Word-filen med allt, i mallarna och i lathunden? Är tabellerna kompletta, cell för cell? Stämmer elevantal, passlängd, frekvens och period överallt: faktarutan, texten, lathundens faktarutor, Word-filens framsida? Har något ändrats i Niclas text utöver de avsiktliga ändringarna? Citera det som saknas eller avviker, med fil och plats.
 
@@ -34,7 +34,9 @@ Granska sju saker.
 7. Metoden i databasen. Säger taggarna det metoden tränar (förmågorna), har den rätt upplägg för sina pass, och stämmer klass eller grupp (fältet format) med de tre frågorna och ett belägg ur passet (ARBETSSATT.md under Innehåll, styckena som börjar "Varje tagg har ett slag")? Saknas en förmåga som ingressen eller passet tränar, eller står en som metoden bara nämner? Står årskurs, grupp, tid och period så att metodbankens kort visar dem rätt och lika med de andra korten? Är varje hänvisning till ett verktyg eller till Niclas böcker skriven så att den blir en länk (STIL.md under Hänvisningar)?
 8. Bildtexterna (STIL.md under Bildtexter). Säger bildtexten under varje bild och blad vad läraren tittar på och vad det används till i metoden, och det bilden inte kan berätta själv: vem som gjort det, i vilket pass det används och hur det skrivs ut, klipps eller viks? Upprepar den något som redan syns eller står i bilden? Står det som syns i bilden i textalternativet (`alt`), så att den som inte ser bilden får det? Längden prövar bygget.
 
-Särskilda frågor och avgränsningen för den här granskningen (läs dem före allt annat ovan; de går före de åtta punkterna där de säger något annat):
+9. Passen vecka för vecka mot målet. Läs metoden som en lärare som planerar terminen: varje vecka i progressionen och varje slags pass, med delarna och tiderna, det eleverna gör och lämnar, den del av målet som veckan tränar och uppföljningen. Går varje pass att hålla ur metodens text, del för del inom sin tid, också de veckor och pass som metoden säger är annorlunda, som det första passet eller de sista veckorna? Säger metoden då vilka delar som ändras och hur länge de tar? Får kärnan tid? Bygger veckorna mot målet, och finns ett steg mot målet som metoden nämner men inte beskriver, som när eleverna ska leda själva? Står det när varje mätning görs, vem som gör den och vad läraren beslutar efter den? Räcker perioden och tiden före start till det metoden ska hinna? Är varje val som metoden ger läraren något som metoden beskriver? Ett fel här är det som ändrar vad läraren gör eller vad eleven får på vägen mot målet.
+
+Särskilda frågor och avgränsningen för den här granskningen (läs dem före allt annat ovan; de går före de nio punkterna där de säger något annat):
 
 {{fragor}}
 
