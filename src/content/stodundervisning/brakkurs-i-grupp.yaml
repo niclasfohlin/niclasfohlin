@@ -327,6 +327,16 @@ plan:
       kort: "Bild, tallinje och räkning"
       ur: { tabell: "Veckan: från material till siffror", rad: veckans, kolumner: ["Pass 2: bild, tallinje och räkning"] }
       text: "Materialet ligger kvar på bordet i pass 2, så att eleven kan gå tillbaka till det."
+    # Samma bråk är bråket du just visade, och tidsschemats exempel ur vecka 1 står inte i veckornas pass (den stängda
+    # frågan om lagningarna 2026-10-26: fjärdedelarna sa emot veckans första bråk).
+    - nar: veckans första
+      del: Samma bråk
+      istallet: true
+      text: "Gör bråket du just visade en gång till, nu samtidigt som eleverna och ett handgrepp i taget. Säg vad ni gör och räkna delarna i kör. Vänta tills alla är klara innan nästa handgrepp. Har ni en köpt sats per par gör paret bråket tillsammans."
+    - nar: veckans andra
+      del: Samma bråk
+      istallet: true
+      text: "Gör bråket du just visade en gång till, nu samtidigt som eleverna och ett handgrepp i taget. Säg vad ni gör och räkna delarna i kör. Vänta tills alla är klara innan nästa handgrepp."
     - nar: veckans tredje
       kort: "Spel och problem"
       ur: { tabell: "Veckan: från material till siffror", rad: veckans, kolumner: ["Pass 3, när det går: spel och problem"] }

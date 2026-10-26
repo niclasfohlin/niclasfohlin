@@ -119,6 +119,8 @@ export interface PlanData {
   langdval?: PlanStod;
   /** Stödet för antalet veckor (plan.veckoval), när längden beror på något metoden säger, som boken, med förvalet. */
   veckoval?: PlanStod & { forval?: number };
+  /** Skolveckorna före första passet när det metoden gör före start tar mer än en vecka (plan.foreVeckor). */
+  foreVeckor?: number;
   /** Metodens egna skattningar (plan.skattningar, K-559): skalan med stegens namn och reglerna ur standarden, adressen till
    * instrumentet på metodens sida, och för det eleverna fyller i bladets pdf och adressen som kopierar formuläret. */
   skattningar?: PlanSkattning[];
@@ -308,6 +310,7 @@ export async function planensData(m: Metod): Promise<PlanData> {
     ...(nivaval ? { nivaval } : {}),
     ...(langdval ? { langdval } : {}),
     ...(veckoval ? { veckoval } : {}),
+    ...(d.plan?.foreVeckor ? { foreVeckor: d.plan.foreVeckor } : {}),
     ...(skattningar.length ? { skattningar } : {}),
   };
 }

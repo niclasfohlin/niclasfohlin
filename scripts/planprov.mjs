@@ -1122,6 +1122,15 @@ ska('modulen har varje sak på ett ställe: ingen kod, funktion eller lista stå
   const kortText = s.sammanstallningstext({ titel: ts.titel, mal: ts.mal.overgripande, uppfoljning: ts.uppfoljning.rader }, kortP, kortS);
   ska('pdf:erna och texten efter ett avslut: avslutet med anledningen, perioden till sista passet och ingen avstämning', !!kortG?.includes(avslutetPdf) && !!kortE?.includes(`Utvärdering efter insatsen: ${avslutetPdf}`) && kortG.includes(s.datumspann('2026-11-02', '2026-11-18')) && !kortG.includes('Ska Bea få mer tid?') && !kortE.includes('Gruppens avstämning mitt i insatsen') && kortText.includes(avslutetPdf) && !kortText.includes('Avstämning mitt i insatsen'), [kortG?.slice(0, 500), kortE?.slice(0, 500)]);
 }
+// Metodens plan på sidan byggs ur planens data med samma fält i plan som motorn läser (metodplan), så att ett nytt fält
+// inte stannar i motorn (den stängda frågan 2026-10-26: plan.foreVeckor, och förut plan.veckoval.forval).
+{
+  const kropp = readFileSync(join(rot, 'src/lib/standard/plan.js'), 'utf8').split('export function metodplan(d)')[1]?.split(/\r?\n\}\r?\n/)[0] ?? '';
+  const falt = [...new Set([...kropp.matchAll(/d\.plan\??\.(\w+)/g)].map((x) => x[1]))];
+  const sidansMp = readFileSync(join(rot, 'src/scripts/planera.ts'), 'utf8').match(/^const mp = .*$/m)?.[0] ?? '';
+  const saknas = falt.filter((f) => !new RegExp(`\\b${f}\\b`).test(sidansMp));
+  ska('metodens plan på sidan läser samma fält i plan som motorn', falt.length >= 3 && !saknas.length, { falt, saknas });
+}
 // Rötterna har prov: varje funktion i tabellen under Spärren mot drift i PLANERA.md finns i standarden, i lagringen eller i
 // webbläsarens rot, och planprovet har kört den, så att en rot som alla vyer hämtar ur alltid räknar rätt (Niclas 2026-10-25:
 // "och att denna funktion måste fungera korrekt"). Det som har körts räknas genom importerna, så att ett namn i en
@@ -2071,7 +2080,7 @@ try {
   // finns, Beta och versionen, och inga fel. Formerna prövas så: en kurs i veckor med veckans lektion (De fyra räknesätten),
   // en progression i pass (Seriesamtal), Hem och skola (TIL i grupp) och veckor efter den sista raden (Läslistor i grupp).
   const b = await flik(false, Date.UTC(2026, 10, 18, 9, 0, 0));
-  const stodMetoder = [], stodFel = [], langdMetoder = [], langdFel = [], veckoFel = [];
+  const stodMetoder = [], stodFel = [], langdMetoder = [], langdFel = [], veckoFel = [], foreFel = [], foreProvade = [];
   for (const m of planbara.filter((x) => x.id !== 'textsamtal-i-grupp')) {
     const adress = `${bas}/stodundervisning/${m.id}/planera`;
     await b.oppna(adress);
@@ -2083,6 +2092,16 @@ try {
     const vantadLangd = s.forvaldLangd(s.metodplan(metod(m.id)).plan);
     const sidansLangd = await b.kor(`(() => { const k = document.querySelector('#pl-langd [aria-pressed="true"]'); return k ? Number(k.dataset.langd) : null; })()`);
     if (sidansLangd !== vantadLangd) veckoFel.push({ metod: m.id, motorn: vantadLangd, sidan: sidansLangd });
+    // Före på sidan börjar på motorns vecka, också när metoden behöver flera skolveckor före (plan.foreVeckor; den stängda
+    // frågan om lagningarna 2026-10-26: fältet fanns i motorn men inte på sidan).
+    const sidansFore = await b.kor(`document.querySelector('li.fore .pl-pass')?.textContent ?? null`);
+    if (sidansFore !== null) {
+      const start = await b.kor(`document.getElementById('pl-start').value`);
+      const mpF = s.metodplan(metod(m.id)).plan;
+      const vantadFore = s.kalendervecka(s.isoVecka(s.planera(mpF, { ...s.forval(mpF, start), start }).fore.mandag).vecka);
+      foreProvade.push(m.id);
+      if (sidansFore !== vantadFore) foreFel.push({ metod: m.id, motorn: vantadFore, sidan: sidansFore });
+    }
     // Passets längd (K-564): knapparna ur faktarutans spann, förvalet tryckt och i förslagets mening, och stödet för valet
     // under knapparna, med metodens text och en länk som finns.
     const tidM = s.tidensMatt(metod(m.id).tid ?? ''), vantad = tidM.minst === undefined ? { langder: [] } : s.passetsLangder({ min: tidM.minst, max: tidM.minuter });
@@ -2173,6 +2192,7 @@ try {
   sant('varje nivåval i metoderna har Stöd för valet med metodens text och en länk', stodMetoder.length >= 4 && !stodFel.length, { stodMetoder, stodFel });
   sant('passets längd: knapparna ur faktarutans spann, förvalet i förslaget och Stöd för valet med metodens text och en länk', langdMetoder.includes('gruppstarkande-aktiviteter') && langdMetoder.includes('upprepad-lasning') && !langdFel.length, { langdMetoder, langdFel });
   sant('förvalet för antalet veckor på sidan är motorns, i varje metod', !veckoFel.length, veckoFel);
+  sant('Före på sidan börjar på motorns vecka, i varje metod, och tre skolveckor före i Chambers boksamtal', foreProvade.includes('boksamtal-i-grupp') && !foreFel.length, { foreFel, foreProvade });
   b.stang();
 
   // Två veckor efter sista passet avslutas planen av sig själv, och Ångra avslutet öppnar den igen för det sista passet
