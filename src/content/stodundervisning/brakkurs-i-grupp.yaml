@@ -142,7 +142,7 @@ tidsschema:
   rader:
     - tid: Före passet
       fas: Förberedelse
-      vad: Ta fram materialet som står under Material i veckans ram och ett blad Bråket på fyra sätt per elev. Från vecka 2 tejpar du en tallinje per elev längs bordskanten. Kopiera korten till dagens pass i veckans ram, en kopia per par, och klipp dem. Det första bråket är det du visar under Visa först och säg i rutan Till läraren i veckans ram, och det sista står under Veckans mening. Gör båda och säg orden högt.
+      vad: Ta fram materialet som står under Material i veckans ram och ett blad Bråket på fyra sätt per elev. Från vecka 2 tejpar du en tallinje per elev längs bordskanten. Kopiera korten till dagens pass i veckans ram, en kopia per par, och klipp dem. Det första bråket är det du visar under Visa först och säg i rutan Till läraren, och det sista står under Veckans mening. Gör båda och säg orden högt.
     - tid: 0–8 min
       fas: Första bråket
       vad: Visa bråket långsamt och tänk högt. Säg vad det hela är, hur du delar det, vad du pekar på och vad bråket heter, och skriv bråket samtidigt som du säger det.
@@ -183,8 +183,8 @@ steg:
       fraser:
         - Hur många lika stora delar är det hela delat i? Hur många delar tar du?
         - Är det mer eller mindre än en halv?
-        - Var sitter talet på tallinjen? Visa med staven.
         - Hur vet du?
+        - Var sitter talet på tallinjen? Visa med staven.
     - namn: Fyra sätt
       fraga: Kan du visa det på flera sätt?
       gor: Ge varje elev ett kort med ett bråk. Eleven gör bråket med materialet, ritar det i rutan Med material och visar det sedan som bild, på tallinjen och med siffror. Lyssna på en elev i taget. Har gruppen fler än sex elever lyssnar du på halva gruppen i pass 1 och på resten i pass 2. Saknar eleven orden gör ni det tillsammans igen, med materialet.

@@ -302,7 +302,7 @@ function andra(fn: () => void, meddelande?: string | (() => string | undefined),
 // syntes inte där läraren stod).
 const iVyn = (el: Element) => { const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; };
 const sammanfattning = () => (plan.forstaPass && plan.sistaPass ? `${plan.pass.length} pass, ${dagText(plan.forstaPass)} till ${dagText(plan.sistaPass)}` : 'inga pass');
-const nyPlan = (forst?: string) => () => [forst, utanforPlanen(), iVyn($('pl-summa')) ? '' : `Planen: ${sammanfattning()}.`].filter(Boolean).join(' ') || undefined;
+const nyPlan = (forst?: string | (() => string | undefined)) => () => [typeof forst === 'function' ? forst() : forst, utanforPlanen(), iVyn($('pl-summa')) ? '' : `Planen: ${sammanfattning()}.`].filter(Boolean).join(' ') || undefined;
 // Det läraren skriver i ett fält sparas utan att sidan ritas om, så att fältet behåller markören.
 function sparaTyst() {
   if (!spara()) sparfel();
@@ -381,6 +381,10 @@ for (const b of dagknappar) b.addEventListener('click', () => {
   const har = aktiv.val.dagar.includes(dag);
   if (har && aktiv.val.dagar.length === 1) { visaBesked('Planen behöver minst en dag.'); return; }
   const franIdag = dagarFranIdag();
+  const forst = franIdag ? 'Dagarna gäller från i dag, och passen som har varit och dagens pass står kvar.' : flyttar() ? 'Passen har flyttats.' : undefined;
+  // En ny dag utan tid, när de andra dagarna har olika tider, sägs i beskedet, så att klockslagen inte försvinner tyst
+  // (verifieringen 2026-10-26: efter ett byte till måndag och onsdag stod passen utan tid).
+  const utanTid = () => (!har && Object.keys(rentaTider(aktiv.val.tider)).length > 0 && !rentaTider(aktiv.val.tider)[String(dag)] ? `${stor(VECKODAGAR[dag - 1])} har ingen tid än. Välj den under Tid, om du vill.` : '');
   andra(() => {
     // Tiden som dagarna har, när de har samma (en tid för en dag före ett byte räknas inte).
     const tider = rentaTider(aktiv.val.tider);
@@ -389,7 +393,7 @@ for (const b of dagknappar) b.addEventListener('click', () => {
     // En ny dag får samma tid som de andra, när de har samma. En dag som har en tid sedan förut, före ett byte, behåller
     // den, så att passen som har varit behåller sina klockslag (Codex 2026-10-25).
     if (!har && forsta && !olikaTider && !rentaTider(aktiv.val.tider)[String(dag)]) aktiv.val.tider = { ...rentaTider(aktiv.val.tider), [String(dag)]: forsta };
-  }, nyPlan(franIdag ? 'Dagarna gäller från i dag, och passen som har varit och dagens pass står kvar.' : flyttar() ? 'Passen har flyttats.' : undefined), franIdag || flyttar());
+  }, nyPlan(() => [forst, utanTid()].filter(Boolean).join(' ') || undefined), franIdag || flyttar());
 });
 const valjLangd = (b: HTMLButtonElement) => andra(() => { aktiv.val.langd = Number(b.dataset.langd); }, nyPlan(flyttar() ? 'Antalet veckor är ändrat.' : undefined), flyttar());
 for (const b of langdknappar) b.addEventListener('click', () => valjLangd(b));
@@ -1387,6 +1391,8 @@ function veckansDelar(v: PlanVecka, oppna: Set<string>): string[] {
   const taBort = v.igen && kanUpprepa && !lovetLast(v.mandag) ? '<button type="button" class="knapp sekundar liten" data-gor="ta-bort-upprepning">Ta bort upprepningen</button>' : '';
   const efterVeckan = [
     kanUpprepa ? `<p>${data.upprepa ? lankad(mening(data.upprepa)) : 'Behöver gruppen mer tid tar ni samma vecka en gång till, och resten av planen flyttas fram.'}</p><p class="pl-andra-knappar">${upprepaKnapp}${taBort}</p>` : '',
+    // Varför knappen saknas, när något är infört senare (verifieringen 2026-10-26: knappen försvann utan förklaring).
+    !kanUpprepa && !harVarit ? '<p class="pl-hjalp">Veckan går inte att ta en gång till när du har bockat, skattat eller skrivit något i en vecka efter den, så att det står kvar under sin vecka.</p>' : '',
     plats('snabbmall') && !aktiv.folj ? `<p>Skriv i ${esc(filer.querySelector<HTMLElement>('[data-fil="snabbmall"]')?.dataset.namn ?? 'snabbmallen')} vad du såg och vad ni gör nästa vecka.</p><p class="metod-centrala">${plats('snabbmall')}</p>` : '',
   ].filter(Boolean);
   if (efterVeckan.length) delar.push(`<section class="pl-block"><h3>Efter veckan</h3>${efterVeckan.join('')}</section>`);

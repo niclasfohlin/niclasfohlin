@@ -1276,6 +1276,10 @@ try {
   await f.dator();
   await valjTid('#pl-tid-dagar [data-tiddag="3"][data-del="0"]', '13:00');
   sant('olika tider olika dagar', (await f.text('#pl-summa-text'))?.includes('Måndag kl. 9.20–10.00, onsdag kl. 13.00–13.40 och fredag kl. 9.20–10.00'), await f.text('#pl-summa-text'));
+  // En ny dag utan tid, när dagarna har olika tider, sägs i beskedet (verifieringen 2026-10-26).
+  await f.tryck('#pl-dagar [data-dag="2"]');
+  sant('en ny dag utan tid sägs i beskedet', (await f.text('#pl-toast'))?.includes('Tisdag har ingen tid än.'), await f.text('#pl-toast'));
+  await f.tryck('#pl-dagar [data-dag="2"]');
   await f.tryck('#pl-tid-olika');
   sant('samma tid alla dagar igen', (await f.text('#pl-summa-text'))?.includes('Måndag, onsdag och fredag kl. 9.20–10.00'), await f.text('#pl-summa-text'));
   // Lägg i kalendern syns först när planen är sparad (användbarhetsprovet 2026-10-25: kalendern fick annars dagar som
