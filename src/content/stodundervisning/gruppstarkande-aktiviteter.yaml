@@ -355,6 +355,8 @@ plan:
         - { om: minst 7 i 4 veckor, rad: Linjen i Lärarens skattning på 7 eller mer i fyra veckor }
     - namn: Vår grupp
       vem: eleverna
+      # En aktivitet på omkring tio minuter och gruppreflektionen på 20–30 minuter (andra rundan av Rimligheten 2026-10-26).
+      minuter: 30
       rad: Gruppreflektion varannan vecka
       text: "Ni gör gruppreflektionen varannan vecka, från vecka 2, direkt efter en aktivitet som gruppen redan kan och som tar omkring tio minuter. Gruppreflektionen tar 20–30 minuter och slutar i två meningar: ”Detta gör vi bra. Detta ska vi bli bättre på.” Är eleverna fler än sex, pratar de i grupper om två till fyra medan du går runt och lyssnar, och när du lyfter det gruppen gör bra, berättar två eller tre grupper först vad de har pratat om. I en klass säger du till eleverna, innan de fyller i bladet, att gruppen på bladet är hela klassen."
       ram: Gruppreflektion

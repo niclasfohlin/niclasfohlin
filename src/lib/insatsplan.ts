@@ -117,8 +117,8 @@ export interface PlanData {
   nivaval?: PlanStod;
   /** Stödet för passets längd (plan.langdval, K-564), när faktarutans tid är ett spann: under Passets längd. */
   langdval?: PlanStod;
-  /** Stödet för antalet veckor (plan.veckoval), när längden beror på något metoden säger, som boken. */
-  veckoval?: PlanStod;
+  /** Stödet för antalet veckor (plan.veckoval), när längden beror på något metoden säger, som boken, med förvalet. */
+  veckoval?: PlanStod & { forval?: number };
   /** Metodens egna skattningar (plan.skattningar, K-559): skalan med stegens namn och reglerna ur standarden, adressen till
    * instrumentet på metodens sida, och för det eleverna fyller i bladets pdf och adressen som kopierar formuläret. */
   skattningar?: PlanSkattning[];
@@ -265,7 +265,8 @@ export async function planensData(m: Metod): Promise<PlanData> {
   const forstaChecklista = !!d.checklista && /första|\b(?:pass|samtal|lektion)\s+1\b/iu.test(d.checklista.rubrik);
   const nivaval = stodet(d.plan?.nivaval, d, m.id);
   const langdval = stodet(d.plan?.langdval, d, m.id);
-  const veckoval = stodet(d.plan?.veckoval, d, m.id);
+  const veckostod = stodet(d.plan?.veckoval, d, m.id);
+  const veckoval = veckostod && d.plan?.veckoval?.forval ? { ...veckostod, forval: d.plan.veckoval.forval } : veckostod;
   const skattningar = planensSkattningar(d, m.id);
   return {
     id: m.id,

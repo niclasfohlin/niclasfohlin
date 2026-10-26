@@ -288,13 +288,24 @@ plan:
       ur: { tabell: "Läsningen för de yngre: vecka 6–8", rad: "Vecka 8" }
     # Veckorna då parets bok vilar och eleverna förbereder bilderboken (Rimligheten 2026-10-26: vecka 6 och 7 visade det
     # vanliga passet, där paren läser vidare i sin bok).
-    - nar: vecka 6–7
+    - nar: veckans övriga pass i vecka 6
       kort: "Bilderboken"
+      utanTidsschema: true
+      text: "Resten av vecka 6 och 7 vilar parets bok. I delen Texten berättar eleverna för sin kamrat om sin lyssnare och sin bok, och i vecka 7 prövar de sin fråga till lyssnaren på kamraten. I Visa visar du hur du förbereder ett uppslag ur en egen bilderbok: du skriver på en post-it-lapp vad som händer och hur du läser där, och läser sedan uppslaget som för ett yngre barn. I vecka 7 säger klassen var lappen ska sitta."
+    - nar: veckans sista pass i vecka 6
+      kort: "Bilderboken"
+      utanTidsschema: true
       text: "Resten av vecka 6 och 7 vilar parets bok. I delen Texten berättar eleverna för sin kamrat om sin lyssnare och sin bok, och i vecka 7 prövar de sin fråga till lyssnaren på kamraten. I Visa visar du hur du förbereder ett uppslag ur en egen bilderbok: du skriver på en post-it-lapp vad som händer och hur du läser där, och läser sedan uppslaget som för ett yngre barn. I vecka 7 säger klassen var lappen ska sitta."
     - nar: vecka 7
-      kort: "Lappar i bilderboken"
+      kort: "Bilderboken"
+      utanTidsschema: true
+      text: "Resten av vecka 6 och 7 vilar parets bok. I delen Texten berättar eleverna för sin kamrat om sin lyssnare och sin bok, och i vecka 7 prövar de sin fråga till lyssnaren på kamraten. I Visa visar du hur du förbereder ett uppslag ur en egen bilderbok: du skriver på en post-it-lapp vad som händer och hur du läser där, och läser sedan uppslaget som för ett yngre barn. I vecka 7 säger klassen var lappen ska sitta."
+    - nar: vecka 7
       ur: { tabell: "Läsningen för de yngre: vecka 6–8", rad: "Vecka 7" }
-    - nar: vecka 8
+    - nar: veckans övriga pass i vecka 8
+      kort: "Parets bok igen"
+      text: "Resten av vecka 8 läser paret vidare i sin bok, och i Visa tar du den strategi som många behöver."
+    - nar: veckans sista pass i vecka 8
       kort: "Parets bok igen"
       text: "Resten av vecka 8 läser paret vidare i sin bok, och i Visa tar du den strategi som många behöver."
 mal:

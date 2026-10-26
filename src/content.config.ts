@@ -473,6 +473,8 @@ const metodensFalt = z.strictObject({
         namn: text, vem: z.enum(['gruppen', 'eleverna']), rad: text, text: text.optional(), ram: text.optional(),
         skala: z.strictObject({ fran: z.number().int().min(0).max(100), till: z.number().int().min(1).max(100), tabell: text }).optional(),
         regler: z.array(z.strictObject({ om: text, rad: text })).min(1).max(6).optional(),
+        // Passets längd när eleverna fyller i bladet under ett pass, som gruppreflektionen efter en kort aktivitet.
+        minuter: z.number().int().min(5).max(240).optional(),
       })).min(1).max(3).optional(),
     }).optional(),
     // Målet (K-522; Niclas 2026-10-25: "en metod bör alltid ha ett tydligt generellt mål för elevens lärande och
