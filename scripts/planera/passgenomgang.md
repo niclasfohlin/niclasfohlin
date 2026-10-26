@@ -18,6 +18,7 @@ Skriv först, för dig själv, metodens veckor som en tabell: varje vecka i prog
 |---|---|
 | Passen | Går varje pass att hålla ur metodens text, del för del och inom sin tid? Säger metoden att något är annorlunda en viss vecka eller i ett visst pass, som det första passet, veckans första pass eller de sista veckorna: står det då vilka delar som ändras, vad som görs i dem och hur lång tid de tar? |
 | Kärnan | Får det eleverna tränar mest den tid det behöver? Ryms allt som metoden lägger i ett pass på passets tid? |
+| Veckornas process | Säger metoden för varje vecka vad läraren gör, vad innehållet lär ut och vad eleverna ska bli bättre på, och hur läraren ser att de har blivit det? En regel för att gå vidare, som att byta lista, led eller text, är veckans mål för eleverna: säger metoden vad den betyder? |
 | Veckorna mot målet | Tränar varje vecka något av målet, och bygger den på veckan före? Finns en del av målet som ingen vecka tränar, eller ett steg mot målet som metoden nämner men inte beskriver, som när eleverna ska leda själva? |
 | Uppföljningen | Står det när varje mätning görs, vem som gör den, hur lång tid den tar och vad den jämförs med? Står det vad läraren beslutar efter mätningen, och efter vilken regel? |
 | Före och perioden | Hinner läraren det som ska göras före första passet på den tid metoden ger? Räcker perioden till det metoden ska hinna, som en hel bok? |
