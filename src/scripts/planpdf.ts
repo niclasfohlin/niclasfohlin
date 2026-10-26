@@ -4,7 +4,7 @@
 // kopieras till dokumentationen har inga namn. Typsnittet är pdf:ens eget (Helvetica). Ett tecken som det inte har skrivs
 // utan sina accenter, så att utskriften aldrig går sönder (Niclas: "Ł, Ş och č är så ovanliga att du kan hoppa över dem").
 import type { PDFFont, PDFPage } from 'pdf-lib';
-import { BESLUT, beslutText, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronText, passensRad, prickarna, resultatText, riktningText, skattadeVeckor, skattningensGranser, skattningensText, SKALAN, stegetsSpann, stapelnsKant, uppfoljningensRader, utanNamn, utvarderingenText, veckansNamn, type Plan, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
+import { BESLUT, beslutText, datumspann, datumText, decimal, elevensResultat, elevensVarden, GRUPPEN, mening, narvaronText, passensRad, prickarna, resultatText, elevenHarNagot, passensNarvaro, riktningText, skattadeVeckor, skattningensGranser, skattningensText, SKALAN, stegetsSpann, stapelnsKant, uppfoljningensRader, utanNamn, utvarderingenText, veckansNamn, type Plan, type Sammanstallning, type Veckonamn } from '../lib/standard/index.js';
 
 const A4: [number, number] = [595.28, 841.89];
 const KANT = 50;
@@ -131,7 +131,8 @@ async function dokument(titel: string) {
       sida.drawText(String(v), { x: KANT + 6, y: ly - 3, size: 7.5, font, color: farg.svag });
     }
     const punkter = varden.flatMap((v, i) => (v === undefined ? [] : [{ x: x0 + i * steg + steg / 2, y: yv(v), v }]));
-    punkter.forEach((q, i) => { if (i) sida.drawLine({ start: { x: punkter[i - 1].x, y: punkter[i - 1].y }, end: { x: q.x, y: q.y }, thickness: 1.6, color: farg.accent }); });
+    // Linjen bryts vid en vecka utan kryss, som på sidan.
+    varden.forEach((v, i) => { const a = varden[i - 1]; if (i && v !== undefined && a !== undefined) sida.drawLine({ start: { x: x0 + (i - 1) * steg + steg / 2, y: yv(a) }, end: { x: x0 + i * steg + steg / 2, y: yv(v) }, thickness: 1.6, color: farg.accent }); });
     for (const q of punkter) {
       sida.drawCircle({ x: q.x, y: q.y, size: 3, color: farg.accent });
       sida.drawText(String(q.v), { x: q.x - fet.widthOfTextAtSize(String(q.v), 8) / 2, y: q.y + 5, size: 8, font: fet, color: farg.text });
@@ -178,7 +179,7 @@ export async function gruppPdf(plan: Plan, s: Sammanstallning, info: PdfInfo, id
   }
   // Eleverna med något infört står med diagram och de andra i en mening, så att en klass inte ger sidor med tomma diagram, och
   // med metodens egen skala för gruppen står eleverna bara när någon har något (den kalla testaren av K-559 2026-10-26).
-  const medData = (e: (typeof s.elever)[number]) => e.skattningar.length > 0 || Object.values(e.resultat).some(Boolean) || (e.id !== GRUPPEN && e.narvaro !== null && s.gjorda > 0);
+  const medData = (e: (typeof s.elever)[number]) => elevenHarNagot(s, e);
   const visas = s.elever.filter(medData), utan = s.elever.filter((e) => !medData(e));
   const planens = !s.skattningar.length || visas.length > 0;
   if (planens) p.rubrik(s.grupp ? 'Gruppen' : 'Eleverna', 110);
@@ -211,7 +212,7 @@ export async function elevPdf(plan: Plan, s: Sammanstallning, id: string, info: 
   p.rubrik('Vecka för vecka', 180);
   skalan(p, info, 6);
   const narvaro = s.narvaro && e.narvaro !== null && s.gjorda > 0;
-  const pass = narvaro ? s.veckor.map((v) => v.pass.map((x) => (!x.gjort ? 'inte' : (franvaro[x.dag] ?? []).includes(id) ? 'borta' : 'med') as 'med' | 'borta' | 'inte')) : undefined;
+  const pass = narvaro ? passensNarvaro(s, e, franvaro) : undefined;
   p.staplar(elevensVarden(s, e), veckoetiketter(s), { hojd: 110, mitt: s.mitt, pass });
   if (narvaro) p.text('Prickarna under veckan är passen: fylld var med, ring var inte med, streck inte bockat.', { farg: p.farg.svag, storlek: 8.5, luft: 6 });
   p.rubrik('Utvecklingen');

@@ -419,6 +419,23 @@ if (tsMp) {
     const reflektion = onsdagar.uppfoljning.find((u) => u.typ === 'intervall')?.tillfallen ?? [];
     const utanPass = onsdagar.veckor.filter((v) => !v.pass.length).map((v) => v.nr);
     ska('metodens skattningar: tillfällen i veckor med pass, stegens beskrivning, en gång i åtgärdsprogrammet och formulärets text', utanPass.length > 0 && reflektion.length > 0 && reflektion.every((t) => onsdagar.veckor[t.vecka - 1].pass.length > 0) && g.skala.steg[4].text === 'Alla är med och tar hand om varandra. Gruppen löser det mesta själv.' && ap.split('Lärarens skattning varje vecka').length === 2 && s.formularetText('Vår grupp').startsWith('Formuläret är bladet Vår grupp på skärmen') && felen([{ ...vargrupp, ram: 'Finns inte' }]).some((x) => x.includes('som metoden inte har')) && gmp.skattningar.find((x) => x.vem === 'eleverna')?.ram === 'Gruppreflektion', [utanPass, reflektion, ap]);
+    // Verifieringen av K-559: varannan vecka räknas bland veckorna med pass, och en följd av veckor är en period, som inte står i
+    // kalendern eller bland uppföljningen i texten till åtgärdsprogrammet.
+    const perioden = onsdagar.uppfoljning.find((u) => u.period);
+    const okal = s.kalenderfil({ titel: ga.titel, uppfoljning: ga.uppfoljning.rader, fokus: [] }, onsdagar, { id: 'gs1', lank: () => 'https://niclasfohlin.se/x', nu: new Date(Date.UTC(2026, 9, 24, 12)) });
+    ska('varannan vecka bland veckorna med pass, och perioden står inte i kalendern eller i åtgärdsprogrammet', reflektion.every((t, j) => j === 0 || t.vecka - reflektion[j - 1].vecka >= 2) && ga.uppfoljning.rader[perioden?.rad ?? -1]?.nar === 'Kort utan beröring vecka 1–4' && !okal.includes('Kort utan beröring') && !ap.includes('Kort utan beröring'), [reflektion.map((t) => t.vecka), perioden]);
+    // Codex 2026-10-26: närvaron är något eleven har, så att eleven står med i sammanställningen och pdf:en.
+    ska('en elev har något: en skattning, ett resultat eller närvaron', s.elevenHarNagot({ gjorda: 2 }, { id: 'a1', skattningar: [], resultat: {}, narvaro: 1 }) && s.elevenHarNagot({ gjorda: 0 }, { id: 'a1', skattningar: [], resultat: { x: '0' }, narvaro: null }) && !s.elevenHarNagot({ gjorda: 0 }, { id: 'a1', skattningar: [], resultat: { x: '' }, narvaro: null }) && !s.elevenHarNagot({ gjorda: 2 }, { id: s.GRUPPEN, skattningar: [], resultat: {}, narvaro: 2 }));
+    // Verifieringen av K-559: eleverna som lämnar listan sparas med id, och en elev som kom till senare har närvaro från den
+    // dagen, i texterna, i prickarna och i texten som kopieras.
+    const lagrad = s.rensaFoljd({ elever: [{ id: 'a1', namn: 'Ali' }, { id: 'f1', namn: 'Filip', fran: '2026-11-18' }, { id: 'x1', namn: 'Fel', fran: 'igår' }], lamnade: [{ id: 'e1', namn: 'Ebba' }, { id: 'a1', namn: 'Ali' }, { id: 'e1', namn: 'Ebba' }] });
+    const npl = s.planera(gmp, { ...gval, dagar: [1, 3], langd: 4 });
+    const bockade = npl.pass.slice(0, 6).map((x) => x.datum), sen = npl.pass[4].datum;
+    const nsam = s.sammanstallning(npl, s.rensaFoljd({ gjorda: bockade, narvaro: true, elever: [{ id: 'a1', namn: 'Ali' }, { id: 'f1', namn: 'Filip', fran: sen }], franvaro: { [bockade[1]]: ['a1'] } }), '2026-12-01');
+    const [ali, filip] = nsam.elever;
+    const prickar = s.passensNarvaro(nsam, filip, {}).flat().filter((x) => x !== 'inte').length;
+    const ntext = s.sammanstallningstext({ titel: ga.titel, uppfoljning: ga.uppfoljning.rader }, npl, nsam);
+    ska('eleverna som lämnar listan sparas med id, och närvaron räknas från dagen eleven kom till', lagrad.elever[1]?.fran === '2026-11-18' && !('fran' in (lagrad.elever[2] ?? {})) && JSON.stringify(lagrad.lamnade) === '[{"id":"e1","namn":"Ebba"}]' && ali.narvaro === 5 && ali.passen === undefined && filip.narvaro === 2 && filip.passen === 2 && s.narvaronText(filip, nsam) === 'Var med i 2 av 2 bockade pass.' && s.narvaronKort(ali, nsam) === 'med i 5 av 6 pass' && prickar === 2 && ntext.includes('en elev missade 1 pass'), [ali, filip, prickar, ntext]);
   }
   // Stödet för nivåvalet (K-557; Niclas 2026-10-26: "Bör alltid finnas vid ett sådant val i Planeras modul"): en metod med
   // nivåer har det, högst tre meningar och NIVAVALETS_LANGD tecken, och texten står ordagrant i metoden.
@@ -2409,6 +2426,14 @@ try {
   await skriv('Ali\nBea\nSebastian Ek');
   await lamna();
   sant('Bea får tillbaka det som förts in när namnet skrivs igen', (await elever())[1]?.id === 'e2' && (await el.kor(`document.getElementById('pl-elever-fraga').hidden`)), await elever());
+  // Verifieringen av K-559: också efter en omladdning, med ett besked.
+  await skriv('Ali\nSebastian Ek');
+  await lamna();
+  await el.oppna(`${PLAN}#${s.kodaVal(slutVal, { id: 'slut01' })}`);
+  await skriv('Ali\nBea\nSebastian Ek');
+  await lamna();
+  const tillbaka = { lista: await elever(), besked: await el.text('#pl-toast') };
+  sant('en elev som skrivs in igen efter en omladdning får tillbaka det som förts in', tillbaka.lista[1]?.id === 'e2' && (await skattningarna('e2')) === 6 && (tillbaka.besked ?? '').startsWith('Bea är tillbaka i listan, med det som förts in.'), tillbaka);
   // Svaret gäller: frågan kommer inte igen när läraren skriver vidare i samma redigering (verifieringen 2026-10-25: frågan
   // om Dan kom tillbaka efter varje ändring i listan).
   await skriv('Ali\nVera\nSebastian Ek');

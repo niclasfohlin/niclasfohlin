@@ -229,7 +229,7 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | Filnamnen på det som laddas ner | `filnamnet` |
 | Knapparnas namn för planen som fil | `PLANKNAPPAR` |
 | Uppföljningen | `uppfoljningensNamn`, `uppfoljningensRad`, `uppfoljningensRader` och `resultatText` |
-| Skattningen | `skattningenText`, `elevensVarden`, `skattadeVeckor`, `skattningenMittI` och `riktningText` |
+| Skattningen | `skattningenText`, `elevensVarden`, `skattadeVeckor`, `skattningenMittI`, `riktningText` och, om eleven har något infört, `elevenHarNagot` |
 | Nästa pass | `nastaPass`, och `nastaObockade` för rutan med nästa pass, som hoppar över det som är bockat |
 | Avslutet och utvärderingen | `avslutetText`, `utvarderingenText` och `forlangdaVal` |
 | Insatsen slut och avslutad, av läraren eller av sig själv två veckor efter planens sista dag | `insatsenSlut`, `insatsenAvslutad`, `planensSistaDag`, `AVSLUTANDE` och `AVSLUTAS_EFTER` |
@@ -240,7 +240,7 @@ Proven gäller filerna i `MODULENS_FILER`, också standardens `index.js`. Sidans
 | En text som läraren skriver eller klistrar in, med en gräns | `rentText` och `kapaVidOrd` |
 | Insatsens läge och ordning i Dina insatser | `statusAv`, `STATUSNAMN` och `iTurOrdning` i `src/scripts/insatser-lagring.ts` |
 | Planens format, lagringen och filen | `PLANFORMAT`, `KONVERTERINGAR`, `konverteraPlan`, `lasPlanfil` och `planfilen` i `src/scripts/insatser-lagring.ts` |
-| Passen och besluten | `passensRad`, `passensLage`, `narvaronText`, `beslutText` och `BESLUTEN` |
+| Passen och besluten | `passensRad`, `passensLage`, `narvaronText`, `narvaronKort`, `passensNarvaro`, `beslutText` och `BESLUTEN` |
 | Diagrammet | `stapelnsKant` och `prickarna` |
 | Målet | `malText`, `malensMening` och `kortetsMalFel` |
 | Saker med nummer, "Bildserie 2–6" | `sakspann` |
